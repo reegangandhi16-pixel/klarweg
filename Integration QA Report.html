@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Klarweg — Curriculum Integration QA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--canvas:#FAFAF7;--surface:#FFFFFF;--elevated:#F4F3EE;--warm:#FFF8EC;--ink-primary:#0E0E10;--ink-secondary:#5A5A60;--ink-tertiary:#9A9AA0;--accent:#1F4E4A;--coral:#E55A3F;--font-display:'Fraunces',Georgia,serif;--font-ui:'Inter',system-ui,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;--line:rgba(14,14,16,.09);--fast:150ms;--base:240ms;--ease:cubic-bezier(0.16,1,0.3,1)}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink-primary);font-family:var(--font-ui);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(31,78,74,.3)}a:hover{color:#163a37;border-bottom-color:#163a37}
+.wrap{max-width:1080px;margin:0 auto;padding:96px 36px 120px}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-tertiary);margin:0 0 16px}
+h1{font-family:var(--font-display);font-weight:400;font-size:44px;line-height:1.15;letter-spacing:-.015em;margin:0 0 16px;max-width:20ch}
+.lede{font-size:18px;color:var(--ink-secondary);max-width:680px;margin:0 0 48px;text-wrap:pretty}
+h2{font-family:var(--font-display);font-weight:400;font-size:27px;letter-spacing:-.01em;margin:0 0 8px}
+h3{font-family:var(--font-ui);font-weight:600;font-size:16px;margin:0 0 8px}
+p{margin:0 0 12px;max-width:680px;text-wrap:pretty}
+section{padding-top:64px;border-top:1px solid var(--line);margin-top:64px}
+section>.eyebrow{margin-bottom:8px}
+.sub{color:var(--ink-secondary);max-width:680px;margin:0 0 32px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 48px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 20px 16px}
+.stat b{display:block;font-family:var(--font-display);font-size:34px;font-weight:400;line-height:1;letter-spacing:-.02em}
+.stat span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-tertiary);margin-top:10px}
+.items{display:flex;flex-direction:column;gap:12px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 24px;transition:transform var(--base) var(--ease),box-shadow var(--base) var(--ease)}
+.item:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(14,14,16,.06)}
+.item.warm{background:var(--warm)}
+.hd{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;padding:3px 8px;border-radius:5px;background:var(--elevated);color:var(--ink-secondary);white-space:nowrap}
+.tag.fix{background:rgba(31,78,74,.1);color:var(--accent)}
+.tag.open{background:rgba(229,90,63,.1);color:#b8482f}
+.item p{margin:0;color:var(--ink-secondary);font-size:15px}
+.item p+p{margin-top:8px}
+code{font-family:var(--font-mono);font-size:.88em;background:var(--elevated);padding:2px 5px;border-radius:4px}
+ul{margin:8px 0 0;padding-left:20px;color:var(--ink-secondary);font-size:15px;max-width:680px}li{margin-bottom:4px}
+table{border-collapse:collapse;width:100%;max-width:1080px;margin-top:16px;font-size:14px}
+th{text-align:left;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-tertiary);font-weight:400;padding:0 16px 10px 0;border-bottom:1px solid var(--line)}
+td{padding:12px 16px 12px 0;border-bottom:1px solid var(--line);color:var(--ink-secondary);vertical-align:top}
+td.k{font-family:var(--font-mono);font-size:13px;color:var(--ink-primary);white-space:nowrap}
+.de{font-family:var(--font-display);font-style:italic;font-weight:500;color:var(--ink-primary)}
+.ck{color:var(--accent);font-family:var(--font-mono);font-size:13px}
+@media(max-width:640px){.wrap{padding:64px 24px 80px}h1{font-size:34px}section{padding-top:48px;margin-top:48px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div class="wrap">
+<p class="eyebrow">Integration QA · Full curriculum</p>
+<h1>Cross-chapter integration audit</h1>
+<p class="lede">A pass over all 258 chapter data files as a single connected system, rather than chapter by chapter: does every file load, does every pointer resolve, does every answer key land in range, and does the same rule get taught the same way twice.</p>
+
+<div class="stats">
+<div class="stat"><b>258</b><span>chapters parsed</span></div>
+<div class="stat"><b>39</b><span>files repaired</span></div>
+<div class="stat"><b>256</b><span>nav pointers verified</span></div>
+<div class="stat"><b>0</b><span>remaining desyncs</span></div>
+</div>
+
+<section>
+<p class="eyebrow">Repaired</p>
+<h2>What I fixed</h2>
+<p class="sub">All 258 files parse, and every fix below is verified against a fresh re-parse of the written files.</p>
+<div class="items">
+
+<div class="item warm">
+<div class="hd"><span class="tag fix">Blocking</span><h3>C2 Chapter 4 could not load at all</h3></div>
+<p><code>chapter-c2-04-nomen-verb-verbindungen-data.js</code> had an unclosed array in a grammar block — one missing <code>]</code> after the last <code>hinglish</code> string. The file threw a syntax error, so <span class="de">Nomen-Verb-Verbindungen</span> rendered nothing at all. This was the only chapter in the curriculum that failed to parse.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag fix">37 chapters</span><h3>Next-chapter pointers disagreed with their destinations</h3></div>
+<p>37 chapters carried a <code>nextChapter.title</code> or <code>titleEn</code> that no longer matched the chapter actually linked by <code>href</code> — so the "up next" card promised one title and the destination page showed another. Each pointer is now resolved from its target file and rewritten to match.</p>
+<p>The worst case was a factual one: B1 Ch12 announced <span class="de">Goethe Mini 2</span> while pointing at <span class="de">Goethe Mini 3</span>. The rest were stale short forms, mostly at level boundaries and across C2.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag fix">C1 Ch15</span><h3>A vocab example was silently overwritten</h3></div>
+<p>In <span class="de">die Quelle</span>, the key <code>ex2</code> was defined twice on one line — the Hinglish gloss shadowed the German sentence, so <span class="de">Nach Angaben mehrerer Quellen …</span> never reached the UI. The second key is now <code>ex2Hi</code>, matching the <code>exHi</code> convention. No other entry in the curriculum has this shadowing.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag fix">A1 Ch29</span><h3>An unanswerable quiz question</h3></div>
+<p>Q2 ("What is the Partizip II of <span class="de">lesen</span>?") listed <code>gelest</code> twice among four options. The duplicate is now <code>las</code>, which works as a Präteritum distractor. Answer index unchanged.</p>
+</div>
+</div>
+</section>
+
+<section>
+<p class="eyebrow">Verified clean</p>
+<h2>What holds across all 258</h2>
+<table>
+<thead><tr><th>Check</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td class="k">File integrity</td><td><span class="ck">258 / 258</span> parse without error</td></tr>
+<tr><td class="k">Chapter identity</td><td>No duplicate ids, no duplicate <code>number</code> within a level, no gaps in any level's sequence</td></tr>
+<tr><td class="k">Navigation</td><td>256 pointers resolve to a real file; 0 broken <code>href</code>; the 5 level-boundary links (A1→A2 … C1→C2) are intact and C2 correctly ends the chain</td></tr>
+<tr><td class="k">Answer keys</td><td>Every quiz, listening and exercise <code>answer</code> index falls inside its options array</td></tr>
+<tr><td class="k">Sentence builders</td><td>In every chapter, the token set reassembles exactly into the stated answer</td></tr>
+<tr><td class="k">Section wiring</td><td>Every declared section has backing data, with 4 exceptions listed below</td></tr>
+<tr><td class="k">Dialogue completeness</td><td>Every story line carries speaker, German, EN and HI; <code>femaleSpeakers</code> names a speaker who actually appears</td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<p class="eyebrow">Needs your call</p>
+<h2>Open items I did not change</h2>
+<p class="sub">Each of these is a content or policy decision rather than a defect with one correct repair.</p>
+<div class="items">
+
+<div class="item">
+<div class="hd"><span class="tag open">12 chapters</span><h3>C2 uses metaphors where every other level uses translations</h3></div>
+<p>Across the other 229 chapters, <code>titleEn</code> is a plain English rendering of the German title. In C2, twelve chapters put the story metaphor there instead — Ch12 "Where should I point the camera?", Ch13 "A network of roads, not one highway", Ch14 "Base camp before the summit", Ch15 "A backpack instead of a suitcase", Ch17 "A solar system of orbiting modifiers", Ch18 "The exact shade of blue", Ch19 "Every adjective is a magnet", Ch20 "Conduct the whole orchestra", Ch24 "Design the whole city", Ch26 "A video versus a photograph…", Ch29 "Climb the whole mountain…", and Ch10 "Discourse markers as train couplings".</p>
+<p>These read well as headlines but behave badly as titles: they appear in nav cards, level maps and next-chapter links, where the learner needs to know the topic. Five of them already duplicate the chapter's own <code>story.headline</code> verbatim. My recommendation is to move the metaphor into <code>headline</code> and give <code>titleEn</code> a plain translation, as C2 Ch11, 16, 21–23, 25, 27–28 already do. Say the word and I'll draft the twelve.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag open">B2 · 4 checkpoints</span><h3>A vocabulary section with nothing behind it</h3></div>
+<p>B2 checkpoints 14, 26, 36 and 43 declare a <code>vocabulary</code> section, but their <code>vocab</code> array is empty — the words live in <code>vocabularyReview</code> instead. Unless the renderer maps that key for checkpoints, the section and its nav tick render blank. Two ways out: point those sections at <code>vocabularyReview</code>, or drop the section from the checkpoint layout. I'd need to know which the app expects before touching it.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag open">A1 Ch35 / Ch47</span><h3>Two checkpoints share the same rule text</h3></div>
+<p><span class="de">Goethe Mini 4</span> and <span class="de">Goethe A1 Final</span> carry an identical golden rule <em>and</em> an identical memory trick for connectors, word for word. A learner meeting the final exam should get the rule restated from a different angle, not replayed.</p>
+<p>Related gap in the same two chapters: several grammar blocks have empty <code>goldenRule</code> and <code>memoryTrick</code> — A1 Ch47 blocks 2, 4 and 5, and A1 Ch35 block 4.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag open">22 chapters</span><h3>A story speaker who is never introduced</h3></div>
+<p>From A1 Ch15 through A2 Ch20, one dialogue partner is named in the transcript but never in the scene text or intro, so they arrive unannounced. <span class="de">Timo</span> accounts for eleven of them, and A1 Ch15 and Ch41 both use the generic <span class="de">Kellner</span>. A one-clause addition to each scene line fixes it; I held off because it is authored prose.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag open">Brand rule</span><h3>Emoji in the resources list, curriculum-wide</h3></div>
+<p>Every chapter's <code>resources</code> entries use emoji icons (📚 📝 📖). The project rule is no cheerful emoji in the UI, so either these are a deliberate exception or all 258 files want a swap to the icon set. Separately, 13 chapters use ⚠️ ✓ ✗ inside grammar notes and tables — those carry real meaning, and I would keep them if you agree.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag open">Low priority</span><h3>110 repeated quiz stems</h3></div>
+<p>Question wordings recur across chapters — "Which sentence is correct?", "Where does the participle go?", "Which closing is FORMAL?" — sometimes only a chapter or two apart (A1 Ch29 → Ch31, Ch34 → Ch35, Ch40 → Ch43). The options differ, so nothing is broken; it just reads as boilerplate. Worth a rewrite pass only if you want it.</p>
+</div>
+</div>
+</section>
+
+<section>
+<p class="eyebrow">Method note</p>
+<h2>On the prerequisite scan</h2>
+<p>I also ran every story dialogue against the teaching order for sixteen grammar features, looking for constructions used before they are taught. It produced 42 hits, and triage found almost all of them to be detector artefacts: <span class="de">, das ist</span> reading as a relative clause when it is a demonstrative, polite <span class="de">Ihr</span> counted as dative, <span class="de">mich geweckt</span> counted as reflexive.</p>
+<p>Two patterns are real but defensible. Accusative pronouns appear in A1 Ch4–Ch7 (<span class="de">Verstehst du mich?</span>) before Akkusativ is taught in Ch12, and attributive adjectives appear as fixed chunks in A1 Ch10 and Ch47 (<span class="de">eine gute Methode</span>, <span class="de">ein gutes Ergebnis</span>) long before declension in A2 Ch26. Both are standard practice as memorised phrases. Flagging rather than fixing, in case you want them swapped for chunks that are fully in-scope.</p>
+</section>
+</div></body></html>

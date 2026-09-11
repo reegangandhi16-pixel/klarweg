@@ -1,0 +1,105 @@
+{
+ "chapter-b2-24-einerseits-andererseits-data.js": {
+  "female": "Britta",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-25-verbindungsadverbien-data.js": {
+  "female": "Vera",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-26-goethe-mini-test-2-data.js": "CHECKPOINT_NO_STORY",
+ "chapter-b2-27-perfekt-vs-praeteritum-data.js": {
+  "female": "Ines",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-28-tempuswechsel-im-text-data.js": {
+  "female": "Doris",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-29-futur1-vermutungen-data.js": {
+  "female": "Ronja",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-30-alternativen-zum-futur-data.js": {
+  "female": "Wiebke",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-31-konjunktiv2-vergangenheit-data.js": {
+  "female": "Lea",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-32-konjunktiv2-vermutungen-data.js": {
+  "female": "Nele",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-33-irreale-vergleiche-als-ob-data.js": {
+  "female": "Frauke",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js": {
+  "female": "Marlen",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js": {
+  "female": "Anke",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-36-goethe-halbzeit-test-data.js": "CHECKPOINT_NO_STORY",
+ "chapter-b2-37-relativsaetze-genitiv-data.js": {
+  "female": "Petra",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-38-verschachtelte-relativsaetze-data.js": {
+  "female": "Frauke",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-39-relativsaetze-wer-der-data.js": {
+  "female": "Katrin",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-40-verben-mit-praepositionen-data.js": {
+  "female": "Doreen",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-41-nomen-mit-praepositionen-data.js": {
+  "female": "Merit",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-42-adjektive-mit-praepositionen-data.js": {
+  "female": "Kerstin",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-43-goethe-mini-3-data.js": "CHECKPOINT_NO_STORY",
+ "chapter-b2-44-zustandspassiv-data.js": {
+  "female": "Merle",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-45-passiversatz-sich-lassen-data.js": {
+  "female": "Frau Behrens",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-46-unpersoenliches-passiv-data.js": {
+  "female": "Frauke",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ }
+}

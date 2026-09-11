@@ -1,0 +1,23 @@
+CHAPTER 32 — Konjunktiv II: Wünsche & Höflichkeit   ·   Grammar: Konjunktiv II (Wünsche)   ·   Theme: Wünsche & Zeit   ·   20 words
+
+German (lemma)	Article	Part of Speech	English	NW Source	Status	Tier	Goethe	Activated in	Reinforced in
+backen		Verb	to bake	NW K11	Active Core	B	Low	32	33, 34, 35
+besitzen		Verb	to own	NW K11	Active Core	B	Low	32	33, 34, 35
+brechen		Verb	to break	NW K11	Active Core	B	Low	32	33, 34, 35
+die Ehe	die	Noun	marriage	NW K11	Active Core	B	Low	32	33, 34, 35
+füllen		Verb	to fill	NW K11	Active Core	B	Low	32	33, 34, 35
+das Gas	das	Noun	gas	NW K11	Active Core	B	Low	32	33, 34, 35
+heilen		Verb	to heal	NW K11	Active Core	B	Low	32	33, 34, 35
+der Helfer	der	Noun	helper	NW K11	Active Core	B	Low	32	33, 34, 35
+herein|kommen		Verb	to come in	NW K11	Active Core	B	Low	32	33, 34, 35
+die Kajaktour	die	Noun	kayak tour	NW K11	Active Core	B	Low	32	33, 34, 35
+die Lücke	die	Noun	gap	NW K11	Active Core	B	Low	32	33, 34, 35
+der Papa	der	Noun	daddy	NW K11	Active Core	B	Low	32	33, 34, 35
+reich		Adverb/Other	rich	NW K11	Active Core	B	Low	32	33, 34, 35
+schimpfen		Verb	to scold	NW K11	Active Core	B	Low	32	33, 34, 35
+der Sprecher	der	Noun	speaker	NW K11	Active Core	B	Low	32	33, 34, 35
+die Stelle	die	Noun	stead	NW K11	Active Core	A	High	32	33, 34, 35
+vergehen		Verb	to pass by	NW K11	Active Core	B	Low	32	33, 34, 35
+die Weile	die	Noun	while	NW K11	Active Core	B	Low	32	33, 34, 35
+der Werktag	der	Noun	working day	NW K11	Active Core	B	Low	32	33, 34, 35
+der Gegenvorschlag	der	Grammar term	counterproposal	NW K11	Reference/System	Sys	—	—	—

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P35 colorWordsIn interactivity</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:16px;max-width:820px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:pre-wrap;max-height:56vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P35 — are <code>colorWordsIn</code> spans interactive?</h1>
+<div class="sub">Injects a probe before <code>chapter-app.js?v=9</code> that records every <code>addEventListener('click')</code> target, then clicks a real <code>colorWordsIn</code> span and a real <code>wrapWordsIn</code> span and observes what actually happens (popup opened? option selected? both? neither?). Read-only; production untouched.<br><code>KWP35.run(file, wordRegex)</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+const PROBE=`<script>
+(function(){
+  var L=[]; window.__P35LISTEN=L;
+  var orig=EventTarget.prototype.addEventListener;
+  EventTarget.prototype.addEventListener=function(type,fn,opts){
+    if(type==='click'){
+      try{
+        var t=this, cls=(t&&t.nodeType===1)?String(t.className):(t===document?'#document':(t===window?'#window':String(t)));
+        var tag=(t&&t.tagName)?t.tagName.toLowerCase():(t===document?'document':(t===window?'window':'?'));
+        var st=(new Error().stack||'').split('\\n').slice(2,6).map(function(s){return s.trim().replace(/^at\\s+/,'');});
+        L.push({tag:tag,cls:cls,isDeLink:cls.indexOf('de-link')>=0,stack:st});
+      }catch(e){}
+    }
+    return orig.call(this,type,fn,opts);
+  };
+})();
+<\/script>`;
+window.KWP35={
+ async run(FILE,wordRe){
+  $('#status').textContent='fetch '+FILE;
+  const html=await (await fetch(FILE+'?p35='+Date.now())).text();
+  const marker='<script src="chapter-app.js?v=9"><\/script>';
+  if(html.indexOf(marker)<0) return {error:'marker missing'};
+  const base=location.href.replace(/[^/]*$/,'');
+  const injected=html.replace('<head>','<head><base href="'+base+'">').replace(marker,PROBE+'\n'+marker);
+  const f=$('#frame');
+  await new Promise(res=>{f.onload=()=>res();f.srcdoc=injected;});
+  await new Promise(r=>setTimeout(r,6000));
+  const w=f.contentWindow,d=f.contentDocument;
+  const listeners=(w.__P35LISTEN)||[];
+
+  // pick one colorWordsIn span (inside mcq/reading option) and one wrapWordsIn span (normal prose)
+  const re=new RegExp(wordRe);
+  const inOpt=[].slice.call(d.querySelectorAll('.mcq-options .de-link, .mcq-option .de-link'))
+    .filter(n=>re.test(n.textContent.trim()));
+  const prose=[].slice.call(d.querySelectorAll('.de-link'))
+    .filter(n=>!n.closest('.mcq-option')&&!n.closest('.word-pop'));
+
+  function describe(n){
+    if(!n)return null;
+    const btn=n.closest('button');
+    return {text:n.textContent.trim(),className:n.className,
+      hasWpInlineLink:/wp-inline-link/.test(n.className),
+      datasets:Object.assign({},n.dataset),
+      parentButton:btn?btn.className:null,
+      computedCursor:getComputedStyle(n).cursor,
+      pointerEvents:getComputedStyle(n).pointerEvents};
+  }
+  function closeAny(){const c=d.querySelector('.wp-close');if(c)c.click();}
+
+  // --- test 1: click a colorWordsIn span inside an option ---
+  closeAny();
+  const before1={pops:d.querySelectorAll('.word-pop').length,
+    popHead:(d.querySelector('.word-pop .word-pop-de')||{}).textContent||null,
+    optionSelected:d.querySelectorAll('.mcq-option.is-correct, .mcq-option.is-wrong').length,
+    disabled:d.querySelectorAll('.mcq-option[disabled]').length,
+    feedback:(d.querySelector('.exercise-feedback')||{}).textContent||''};
+  const target=inOpt[0];
+  let clickPath=null;
+  if(target){
+    // record the actual dispatch path
+    const path=[];
+    const h=(ev)=>{try{(ev.composedPath?ev.composedPath():[]).slice(0,6).forEach(x=>{if(x&&x.tagName)path.push(x.tagName.toLowerCase()+(x.className?'.'+String(x.className).trim().replace(/\s+/g,'.'):''));});}catch(e){}};
+    d.addEventListener('click',h,true);
+    target.click();
+    d.removeEventListener('click',h,true);
+    clickPath=path;
+  }
+  await new Promise(r=>setTimeout(r,700));
+  const after1={pops:d.querySelectorAll('.word-pop').length,
+    popHead:(d.querySelector('.word-pop .word-pop-de')||{}).textContent||null,
+    popVisible:(function(){const p=d.querySelector('.word-pop');if(!p)return false;const cs=getComputedStyle(p);
+      return /is-open/.test(p.className)||(cs.display!=='none'&&cs.visibility!=='hidden'&&parseFloat(cs.opacity||'1')>0.05);})(),
+    optionSelected:d.querySelectorAll('.mcq-option.is-correct, .mcq-option.is-wrong').length,
+    disabled:d.querySelectorAll('.mcq-option[disabled]').length,
+    feedback:(d.querySelector('.exercise-feedback')||{}).textContent||''};
+
+  // --- test 2: click a normal wrapWordsIn prose span for contrast ---
+  closeAny();
+  const before2={popHead:(d.querySelector('.word-pop .word-pop-de')||{}).textContent||null};
+  const proseTarget=prose.find(n=>n.textContent.trim().length>2)||prose[0];
+  if(proseTarget)proseTarget.click();
+  await new Promise(r=>setTimeout(r,700));
+  const after2={popHead:(d.querySelector('.word-pop .word-pop-de')||{}).textContent||null,
+    popVisible:(function(){const p=d.querySelector('.word-pop');if(!p)return false;const cs=getComputedStyle(p);
+      return /is-open/.test(p.className)||(cs.display!=='none'&&cs.visibility!=='hidden'&&parseFloat(cs.opacity||'1')>0.05);})()};
+
+  const res={file:FILE,
+    listenerSummary:{totalClickListeners:listeners.length,
+      onDeLinkElements:listeners.filter(l=>l.isDeLink).length,
+      onDocumentOrWindow:listeners.filter(l=>l.tag==='document'||l.tag==='window').length,
+      byTag:listeners.reduce((a,l)=>{a[l.tag]=(a[l.tag]||0)+1;return a;},{}),
+      deLinkListenerStacks:listeners.filter(l=>l.isDeLink).slice(0,3).map(l=>l.stack)},
+    colorWordsInSpan:describe(target),wrapWordsInSpan:describe(proseTarget),
+    optionSpansFound:inOpt.length,proseSpansFound:prose.length,
+    test1_clickColorWordsInSpan:{before:before1,after:after1,dispatchPath:clickPath,
+      popupOpened:after1.popVisible&&after1.popHead!==before1.popHead,
+      popupHeadword:after1.popHead,
+      optionSelectionFired:(after1.optionSelected>before1.optionSelected)||(after1.disabled>before1.disabled)||(after1.feedback!==before1.feedback)},
+    test2_clickWrapWordsInSpan:{before:before2,after:after2,
+      popupOpened:after2.popVisible&&!!after2.popHead,popupHeadword:after2.popHead}};
+  window.__P35=res;$('#status').textContent='done';$('#out').textContent=JSON.stringify(res,null,1);
+  return {optionSpanPopup:res.test1_clickColorWordsInSpan.popupOpened,
+    optionSelectionFired:res.test1_clickColorWordsInSpan.optionSelectionFired,
+    proseSpanPopup:res.test2_clickWrapWordsInSpan.popupOpened,
+    deLinkListeners:res.listenerSummary.onDeLinkElements};
+ }};
+$('#out').textContent='ready';
+</script>
+</body></html>

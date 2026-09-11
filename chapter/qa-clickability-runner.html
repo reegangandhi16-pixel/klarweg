@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · Clickability corpus scan</title>
+<style>
+:root{--canvas:#FAFAF7;--surface:#FFF;--ink:#0E0E10;--ink2:#5A5A60;--ink3:#9A9AA0;--accent:#1F4E4A;--line:#E6E4DC}
+body{margin:0;background:var(--canvas);color:var(--ink);font:15px/1.6 Inter,system-ui,sans-serif;padding:24px}
+h1{font:500 24px/1.2 Fraunces,Georgia,serif;margin:0 0 8px}
+.sub{color:var(--ink2);font-size:13px;margin-bottom:24px}
+.bar{display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+button{font:inherit;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+input{font:inherit;padding:8px 10px;border-radius:8px;border:1px solid var(--line);width:80px}
+#status{font:12px/1.5 'JetBrains Mono',monospace;color:var(--ink3)}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;font:12px/1.6 'JetBrains Mono',monospace;max-height:50vh;overflow:auto;white-space:pre-wrap}
+iframe{width:1100px;height:700px;border:1px solid var(--line);border-radius:10px;opacity:.35}
+</style></head><body>
+<h1>Clickability corpus scan</h1>
+<div class="sub">Loads each chapter, waits for the Global Lexicon and its re-sweep, then reports every word inside German-text containers that the app did <b>not</b> make clickable. Accumulates into <code>window.ACC</code>.</div>
+<div class="bar">
+  <span id="status">idle</span>
+  <input id="from" value="0"><input id="to" value="20">
+  <button class="primary" id="run">Run range</button>
+  <button id="dl">Download JSON</button>
+</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+var FILES=[],SCANSRC='',ACC={files:0,clickable:0,scanned:0,popupsChecked:0,popupDefects:[],buckets:{},words:{}};
+window.ACC=ACC;
+function $(s){return document.querySelector(s)}
+fetch('qa-chapters.json').then(function(r){return r.json()}).then(function(list){
+  FILES=list;
+  $('#status').textContent=FILES.length+' chapters in manifest';
+});
+fetch('qa-clickability-scan2.js').then(function(r){return r.text()}).then(function(t){SCANSRC=t});
+function loadOne(file){
+  return new Promise(function(resolve){
+    var f=$('#frame'),done=false;
+    var to=setTimeout(function(){if(!done){done=true;resolve({file:file,error:'timeout'})}},120000);
+    f.onload=function(){
+      var w=f.contentWindow,d=f.contentDocument,t0=Date.now(),last=-1,stable=0;
+      // READINESS BY STABILITY, NOT BY CLOCK. Chapters linkify in two passes:
+      // an initial one, then a re-sweep once the Global Lexicon resolves. The
+      // old code waited a fixed 600ms after KW_GLOBAL_LEXICON appeared, which
+      // was fine at 2.3MB and is NOT at 2.7MB — the scan then samples a
+      // half-linkified page and reports a collapse in clickable spans that is
+      // pure measurement error. Instead poll the actual span count and only
+      // scan once it has stopped changing.
+      // TIMEOUTS: outer 120s, internal 90s. At 2.80MB (index 31,606 keys) five
+      // consecutive A2 chapters blew the previous 60s/40s budget and were
+      // recorded as timeouts, which understated A1+A2 by ~5,700 spans. The
+      // budget has to track the data size, not stay at its original value.
+      (function poll(){
+        if(done)return;
+        if(Date.now()-t0>90000)return fire();
+        if(!w.KW_GLOBAL_LEXICON)return setTimeout(poll,250);
+        var n=d.querySelectorAll('.rw,.de-link').length;
+        if(n>0&&n===last){if(++stable>=3)return fire();}
+        else stable=0;
+        last=n;
+        setTimeout(poll,250);
+      })();
+      function fire(){
+        if(done)return;
+        var s=d.createElement('script');
+        s.textContent=SCANSRC;
+        d.head.appendChild(s);
+        clearTimeout(to);done=true;
+        try{resolve(w.KWCLICK2({popupSample:(window.KW_POPUPS===0?0:40)}))}catch(e){resolve({file:file,error:String(e)})}
+      }
+    };
+    f.src=file+'?scan='+Date.now();
+  });
+}
+async function run(from,to){
+  var auditFrom=from,auditTo=to;
+  for(var i=from;i<Math.min(to,FILES.length);i++){
+    $('#status').textContent='['+(i+1)+'/'+FILES.length+'] '+FILES[i];
+    // DUPLICATE GUARD. Buckets accumulate occurrence counts by surface, so
+    // merging the same chapter twice would silently double its numbers. ACC.seen
+    // records every chapter whose data is already merged; a re-run of a chapter
+    // that previously TIMED OUT is safe (it contributed nothing) and is exactly
+    // what this guard has to allow, so timed-out chapters are never added to seen.
+    if(ACC.seen&&ACC.seen.indexOf(FILES[i])>=0){
+      $('#status').textContent='['+(i+1)+'/'+FILES.length+'] SKIP already merged: '+FILES[i];
+      continue;
+    }
+    var r=await loadOne(FILES[i]);
+    ACC.files++;
+    if(r.error){ACC.words['__ERR__'+FILES[i]]={n:1,surface:r.error,sections:[],sample:''};continue}
+    if(ACC.seen)ACC.seen.push(FILES[i]);
+    delete ACC.words['__ERR__'+FILES[i]];
+    ACC.clickable+=r.clickable||0;
+    ACC.scanned+=r.scannedOccurrences||0;
+    ACC.popupsChecked+=r.popupsChecked||0;
+    (r.popupDefects||[]).forEach(function(d){d.file=FILES[i];ACC.popupDefects.push(d)});
+    for(var b in r.buckets){
+      if(!ACC.buckets[b])ACC.buckets[b]={};
+      for(var k in r.buckets[b]){
+        var v=r.buckets[b][k];
+        if(!ACC.buckets[b][k])ACC.buckets[b][k]={surface:v.surface,n:0,why:v.why,lemma:v.lemma,en:v.en,type:v.type,chapters:[]};
+        var tgt=ACC.buckets[b][k];
+        if(!tgt.chapters)tgt.chapters=[];   // rehydrated entries carry no chapters array
+        tgt.n+=v.n;
+        if(tgt.chapters.length<3)tgt.chapters.push(FILES[i]);
+      }
+    }
+  }
+  try{
+    // ACC IS THE SINGLE SOURCE OF TRUTH. It is rehydrated from this key on load,
+    // so persisting must OVERWRITE, not add: the previous += form double-counted
+    // every rehydrated total (clickable 60,577 would become 122,365 on the next
+    // save). ACC.seen makes the write idempotent per chapter.
+    var snap={b:{},c:ACC.clickable,p:ACC.popupsChecked,d:ACC.popupDefects.length,
+              f:ACC.files,s:ACC.scanned,seen:ACC.seen||[]};
+    for(var bb in ACC.buckets){snap.b[bb]={};
+      for(var kk in ACC.buckets[bb]){var v2=ACC.buckets[bb][kk];
+        snap.b[bb][kk]={s:v2.surface,n:v2.n,ch:(v2.chapters||v2.ch||[]).slice(0,3)};
+      }}
+    localStorage.setItem('kw_scan_acc',JSON.stringify(snap));
+  }catch(e){}
+  var sum={};for(var b in ACC.buckets){var d=0,o=0;for(var k in ACC.buckets[b]){d++;o+=ACC.buckets[b][k].n}sum[b]={distinct:d,occurrences:o}}
+  ACC.summary=sum;
+  // MANDATORY PER-BATCH COMPLETION AUDIT. A batch is NOT complete unless these
+  // reconcile. This exists because a chaining guard once returned early and the
+  // next call advanced to the following range, so 35 chapters (B1) were never
+  // scanned while the run still reported "done" — the shortfall was only visible
+  // by hand-checking the file arithmetic. Never trust "done" alone again.
+  var expectedIds=FILES.slice(auditFrom,Math.min(auditTo,FILES.length));
+  var timedOut=Object.keys(ACC.words||{}).filter(function(k){return k.indexOf('__ERR__')===0})
+                     .map(function(k){return k.replace('__ERR__','')});
+  var completed=expectedIds.filter(function(f){return (ACC.seen||[]).indexOf(f)>=0});
+  var missing=expectedIds.filter(function(f){return (ACC.seen||[]).indexOf(f)<0&&timedOut.indexOf(f)<0});
+  var dupMerges=(ACC.seen||[]).length-new Set(ACC.seen||[]).size;
+  var audit={
+    batchRange:auditFrom+'..'+(Math.min(auditTo,FILES.length)-1),
+    expectedChapters:expectedIds.length,
+    completedChapters:completed.length,
+    timedOutChapters:timedOut,
+    missingChapterIds:missing,
+    duplicateChapterMerges:dupMerges,
+    accumulatorChapterCount:(ACC.seen||[]).length,
+    reconciles:(completed.length+timedOut.filter(function(f){return expectedIds.indexOf(f)>=0}).length===expectedIds.length)
+               &&missing.length===0&&dupMerges===0
+  };
+  ACC.lastAudit=audit;
+  $('#status').textContent=(audit.reconciles?'done':'INCOMPLETE — audit failed')
+    +' — '+ACC.files+' merges, '+ACC.clickable+' spans, '+ACC.popupsChecked+' popups, '
+    +ACC.popupDefects.length+' defects | batch '+audit.batchRange+': '
+    +audit.completedChapters+'/'+audit.expectedChapters+' complete, '
+    +audit.timedOutChapters.length+' timed out, '+audit.missingChapterIds.length+' MISSING';
+  $('#out').textContent=JSON.stringify({completionAudit:audit,categories:sum},null,1);
+}
+// REHYDRATE ON LOAD. The snapshot is written on every batch completion but was
+// never read back, so a page reload silently reset ACC to empty and the next
+// batch would have discarded every earlier batch's totals. ACC.seen comes back
+// with it, which is what makes resuming mid-corpus safe: already-merged chapters
+// are skipped, timed-out ones are retried.
+// Deferred: rehydration reads a multi-megabyte snapshot (the `excluded` bucket
+// alone holds tens of thousands of keys), and doing that synchronously during
+// parse left the page unresponsive to any query. setTimeout(0) lets the document
+// finish and become interactive first; window.KW_REHYDRATED flips when it lands.
+window.KW_REHYDRATED=false;
+setTimeout(function rehydrate(){
+  try{
+    var raw=localStorage.getItem('kw_scan_acc');if(!raw)return;
+    var s=JSON.parse(raw);if(!s||!s.b)return;
+    ACC.clickable=s.c||0;ACC.popupsChecked=s.p||0;ACC.files=s.f||0;ACC.scanned=s.s||0;
+    ACC.popupDefects=[];for(var i=0;i<(s.d||0);i++)ACC.popupDefects.push({rehydrated:true});
+    ACC.seen=s.seen||[];ACC.buckets={};
+    for(var b in s.b){ACC.buckets[b]={};
+      for(var k in s.b[b]){var v=s.b[b][k];
+        ACC.buckets[b][k]={surface:v.s,n:v.n,chapters:(v.ch||[]).slice()};}}
+    window.KW_REHYDRATED=true;
+    $('#status').textContent='rehydrated — '+ACC.files+' chapters, '+ACC.clickable+
+      ' spans, '+ACC.seen.length+' merged, '+ACC.popupDefects.length+' defects';
+  }catch(e){$('#status').textContent='rehydrate failed: '+e}
+},0);
+$('#run').onclick=function(){run(+$('#from').value,+$('#to').value)};
+$('#dl').onclick=function(){
+  var b=new Blob([JSON.stringify(ACC)],{type:'application/json'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='clickability-scan.json';a.click();
+};
+window.runRange=run;
+window.runList=async function(list){FILES=list;await run(0,list.length)};
+</script>
+</body></html>

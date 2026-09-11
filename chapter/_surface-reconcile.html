@@ -1,0 +1,116 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Klarweg · surface reconciliation</title>
+<style>
+:root{--canvas:#FAFAF7;--surface:#fff;--elevated:#F4F3EE;--ink:#0E0E10;--ink2:#5A5A60;--accent:#1F4E4A}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;padding:24px}
+h1{font:600 20px/1.3 Inter,sans-serif;margin:0 0 4px}p.sub{color:var(--ink2);margin:0 0 18px;font-size:13.5px;max-width:860px}
+button{font:500 13px Inter,sans-serif;padding:9px 14px;border:1px solid #E3E1DA;border-radius:8px;background:var(--surface);cursor:pointer}
+#msg{color:var(--ink2);font-size:13px;margin-left:12px}
+pre{background:var(--surface);border:1px solid #EDEBE4;border-radius:10px;padding:14px;font:12px/1.5 "JetBrains Mono",ui-monospace,monospace;max-height:56vh;overflow:auto;white-space:pre-wrap;margin-top:16px}
+.rack{display:flex;gap:8px;margin-top:14px}iframe{width:340px;height:220px;border:1px solid #EDEBE4;border-radius:8px;background:#fff;opacity:.25}
+</style></head><body>
+<h1>Clickable-surface reconciliation</h1>
+<p class="sub">Loads all 259 chapter pages (4 at a time, no popup probing) and records every clickable German span with the page that introduced it. Then resolves each surface to its inventory asset text using the same rules as the builder, and reports exactly which surfaces are NOT represented in <code>audio-inventory-words.json</code>. Results in <code>window.__KWS</code>.</p>
+<div><button id="go">Run reconciliation</button><span id="msg">idle</span></div>
+<div class="rack"><iframe id="f0"></iframe><iframe id="f1"></iframe><iframe id="f2"></iframe><iframe id="f3"></iframe></div>
+<pre id="log">—</pre>
+<script src="_scan-files.js"></script>
+<script>
+const FILES = window.__KWS_FILES || window.__KWA_FILES || [];
+const S = window.__KWS = { surfaces: {}, pages: {}, errors: [], done: 0, report: null };
+const logEl = document.getElementById('log'), msg = document.getElementById('msg');
+const say = t => { msg.textContent = t; };
+const show = o => { logEl.textContent = JSON.stringify(o, null, 1); };
+
+function loadIn(frame, file) {
+  return new Promise(resolve => {
+    let settled = false;
+    const fin = v => { if (!settled) { settled = true; resolve(v); } };
+    frame.onload = () => {
+      const d = frame.contentDocument; let n = 0;
+      const poll = () => {
+        if (!d) return fin(null);
+        // wait for the dashboard to have rendered its clickable spans
+        const ready = d.querySelector('#sec-story, #sec-vocabulary') && d.querySelectorAll('.rw, .de-link').length;
+        if (ready || ++n > 60) return fin(d);
+        setTimeout(poll, 100);
+      };
+      poll();
+    };
+    frame.onerror = () => fin(null);
+    frame.src = file;
+    setTimeout(() => fin(frame.contentDocument), 14000);
+  });
+}
+
+function collect(d, file) {
+  const spans = d.querySelectorAll('.rw, .de-link');
+  let added = 0;
+  spans.forEach(sp => {
+    const w = (sp.textContent || '').trim();
+    if (!w) return;
+    const rec = S.surfaces[w];
+    if (rec) { rec.n++; if (rec.files.indexOf(file) === -1 && rec.files.length < 4) rec.files.push(file); }
+    else { S.surfaces[w] = { n: 1, first: file, files: [file] }; added++; }
+  });
+  S.pages[file] = { spans: spans.length, newSurfaces: added };
+  return added;
+}
+
+async function worker(frameId, queue) {
+  const frame = document.getElementById(frameId);
+  while (queue.length) {
+    const file = queue.shift();
+    const d = await loadIn(frame, file);
+    if (!d) { S.errors.push(file); }
+    else { try { collect(d, file); } catch (e) { S.errors.push(file + ': ' + e.message); } }
+    S.done++;
+    say(S.done + ' / ' + FILES.length + ' pages · ' + Object.keys(S.surfaces).length + ' unique surfaces');
+  }
+}
+
+async function reconcile() {
+  say('loading lexicon + inventory…');
+  if (!window.KW_GLOBAL_LEXICON) new Function(await (await fetch('global-lexicon.js')).text())();
+  if (!window.KW_WORD_LAYER) new Function(await (await fetch('../scripts/audio-word-layer.js')).text())();
+  const W = window.KW_WORD_LAYER, L = window.KW_GLOBAL_LEXICON, I = window.KW_INFLECTIONS;
+  const inv = await (await fetch('../audio-inventory-words.json', { cache: 'no-cache' })).json();
+  const invText = new Set(inv.assets.map(a => a.text));
+  const excluded = new Set((inv.excludedFromGeneration && inv.excludedFromGeneration.items) || []);
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  const missing = [], represented = { direct: 0, viaLexeme: 0, excluded: 0 };
+  for (const surf of Object.keys(S.surfaces)) {
+    // same resolution the builder used: lexeme → inflection → displayed form
+    const k = W.normWord(surf);
+    const isLex = !!L[k];
+    const lex = isLex ? L[k] : (L[W.normWord(I[k] || '')] || null);
+    const type = lex ? (lex.type || '') : '';
+    const assetText = isLex ? lex.w : (lex && /noun/i.test(type) ? cap(k) : surf);
+    if (invText.has(assetText)) { isLex || lex ? represented.viaLexeme++ : represented.direct++; continue; }
+    if (invText.has(surf)) { represented.direct++; continue; }
+    if (excluded.has(surf)) { represented.excluded++; continue; }
+    missing.push({ surface: surf, assetText, inDictionary: !!lex, type: type || null, occurrences: S.surfaces[surf].n, firstPage: S.surfaces[surf].first, pages: S.surfaces[surf].files });
+  }
+  S.report = {
+    pagesScanned: S.done, loadErrors: S.errors.length,
+    uniqueSurfaces: Object.keys(S.surfaces).length,
+    spanOccurrences: Object.values(S.pages).reduce((a, p) => a + p.spans, 0),
+    inventoryAssets: inv.assets.length, inventoryTexts: invText.size,
+    represented, missingCount: missing.length, missing
+  };
+  say('DONE · ' + missing.length + ' surfaces not represented in the inventory');
+  show(S.report);
+  return S.report;
+}
+
+async function run() {
+  const queue = FILES.slice();
+  await Promise.all(['f0', 'f1', 'f2', 'f3'].map(id => worker(id, queue)));
+  say('pages done, reconciling…');
+  await reconcile();
+}
+document.getElementById('go').onclick = run;
+window.__KWS_run = run; window.__KWS_reconcile = reconcile;
+say(FILES.length + ' pages queued');
+</script>
+</body></html>

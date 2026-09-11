@@ -1,0 +1,18 @@
+{
+ "pagesScanned": 259,
+ "dataSets": 259,
+ "dataSetNote": "259, not 258 — the legacy chapter/chapter-data.js was missed by the chapter-<id>-data.js glob in the first pass and is now included.",
+ "totalUniqueRequired": 40022,
+ "derivation": "40,095 (previous) + 9 (259th chapter: 2 grammar, 1 reading, 4 listening, 2 speaking) − 82 (parenthetical vocabulary cards now sharing their bare-head asset) = 40,022",
+ "A_alreadyResolving": 11018,
+ "B_recoveredWithoutSynthesis": 6275,
+ "C_newSynthesisRequired": 22083,
+ "D_humanReviewRemaining": 646,
+ "checksum": {
+  "A+B+C+D": 40022,
+  "equalsRequired": true
+ },
+ "E_notRequired": 2016,
+ "E_note": "1,963 unreachable data rows + 53 non-German clickable spans. E sits OUTSIDE the required total by definition.",
+ "totalInventoryIncludingE": 42038
+}

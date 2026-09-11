@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P24 re-entrancy reproduction</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:18px;max-width:790px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:54vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P24 — deliberate re-entrancy reproduction</h1>
+<div class="sub">Investigation-only driver. Measurement semantics and stability thresholds are byte-identical to the P14/P15/P21/P23 path; the only additions are a <code>runInProgress</code> flag, run tokens, per-render tokens stamped on the iframe, and an overlap log. <b>observe</b> mode records corruption without suppressing it; <b>guard</b> mode rejects any result whose render token was stolen. Production files untouched.<br>
+<code>KWP24.clean(runId)</code> · <code>KWP24.overlap(runId)</code> · <code>KWP24.lifecycle(kind)</code> · <code>KWP24.compare()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script src="qa-finding-serializer.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const GOLD={'chapter-a1-11-negation.html':{occ:412,find:3,hcm:1,fp:'8be4f29a'},
+ 'chapter-a1-21-uhrzeit.html':{occ:707,find:17,hcm:1,fp:'5ec20d8'},
+ 'chapter-b2-07-verbergaenzungen-erkennen.html':{occ:655,find:0,hcm:0,fp:'2312e86a'},
+ 'chapter-b2-68-redemittel-fuer-diskussionen.html':{occ:463,find:5,hcm:0,fp:null}};
+const CONTROL={occurrences:156299,findings:1405,hcm:37,clean:71};
+function K(r){return 'kw_p24_'+r;}
+function store(r){try{return JSON.parse(localStorage.getItem(K(r))||'{}');}catch(e){return{};}}
+function commit(r,file,rec){const s=store(r);const list=s[file]=s[file]||[];list.push(rec);localStorage.setItem(K(r),JSON.stringify(s));}
+function fnv(str){let h=0x811c9dc5;for(let i=0;i<str.length;i++)h=((h^str.charCodeAt(i))*0x01000193)>>>0;return h.toString(16);}
+
+// ---- lifecycle bookkeeping (diagnostics only) -----------------------------
+const LIFE={runInProgress:false,activeRunToken:null,runSeq:0,renderSeq:0,overlapLog:[],runs:[]};
+window.__P24LIFE=LIFE;
+function log(ev,data){LIFE.overlapLog.push(Object.assign({t:Date.now(),ev:ev},data||{}));}
+
+// UNCHANGED gate. Also reports whether the iframe still carries OUR render token.
+function ready(f,token,cb){
+  const S=180,N=3,HARD=30000,t0=Date.now();let last=null,same=0,samples=0,stolenDuringGate=false;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const nodes=d.querySelectorAll('.rw, .de-link');if(!nodes.length)return null;
+    const roles={};let n=0;for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;return n+'|'+d.querySelectorAll('[id^="sec-"]').length+'|'+d.querySelectorAll('.wp-badge').length+'|'+
+      Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{
+    if(f.__p24token!==token&&!stolenDuringGate){stolenDuringGate=true;
+      log('render-token-stolen-during-gate',{expected:token,found:f.__p24token});}
+    if(Date.now()-t0>HARD)return cb('hard-timeout',{msToStable:null,samples:samples,stolenDuringGate:stolenDuringGate});
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,S);}
+    const s=sig();samples++;
+    if(s===null){last=null;same=0;return setTimeout(poll,S);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=N)return cb('stable',{msToStable:Date.now()-t0,samples:samples,settleSig:s,stolenDuringGate:stolenDuringGate});
+    setTimeout(poll,S);};
+  poll();
+}
+/* One measurement. mode:'observe' records token theft; mode:'guard' rejects it. */
+function measure(file,runToken,mode,pos){
+  return new Promise(resolve=>{
+    const f=$('#frame');const token=++LIFE.renderSeq;let done=false;const t0=Date.now();
+    const fin=r=>{if(done)return;done=true;
+      r.runToken=runToken;r.renderToken=token;r.manifestPosition=pos;
+      r.tokenAtFinish=f.__p24token;r.tokenValid=(f.__p24token===token);
+      r.completedAt=Date.now();resolve(r);};
+    const timer=setTimeout(()=>fin({file,error:'timeout',errorKind:'hard-timeout'}),90000);
+    if(f.__p24token!==undefined&&f.__p24busy){
+      log('iframe-busy-on-navigate',{file:file,newToken:token,previousToken:f.__p24token,previousFile:f.__p24file});}
+    f.__p24token=token;f.__p24file=file;f.__p24busy=true;
+    f.onload=()=>{
+      if(f.__p24token!==token){log('onload-for-foreign-token',{expected:token,found:f.__p24token,file:file});
+        if(mode==='guard'){clearTimeout(timer);return fin({file,rejected:'render-token-stolen-before-gate'});}}
+      ready(f,token,(state,gate)=>{
+        const stolen=f.__p24token!==token;
+        if(stolen)log('render-token-stolen',{expected:token,found:f.__p24token,file:file,phase:'post-gate'});
+        if(mode==='guard'&&(stolen||gate.stolenDuringGate)){clearTimeout(timer);
+          return fin({file,readyState:state,gate:gate,rejected:'render-token-stolen',stolen:true});}
+        if(state!=='stable'){clearTimeout(timer);return fin({file,readyState:state,gate:gate,discarded:true});}
+        const d=f.contentDocument,w=f.contentWindow;
+        if(!w||!d||!d.head){clearTimeout(timer);return fin({file,error:'iframe doc unavailable',errorKind:'injection-error'});}
+        // which chapter is ACTUALLY in the frame right now?
+        const actual=(function(){try{return (d.location&&d.location.pathname||'').split('/').pop();}catch(e){return null;}})();
+        const s=d.createElement('script');s.src='qa-engine.js?v='+Date.now();
+        s.onerror=()=>{clearTimeout(timer);fin({file,error:'engine load failed',errorKind:'injection-error'});};
+        s.onload=()=>{try{
+          const nodes=[].slice.call(d.querySelectorAll('.rw, .de-link')).filter(n=>!n.querySelector('.rw, .de-link'))
+            .filter(n=>!n.closest('.word-pop')).filter(n=>!!(n.offsetParent||n.getClientRects().length));
+          const qa=w.KWQA.run();
+          const ser=(qa.findings||[]).map(window.KWFSER.serialize);
+          f.__p24busy=false;
+          clearTimeout(timer);
+          fin({file,documentInFrame:actual,documentMatchesRequest:actual===file,
+            readyState:state,gate:gate,stolen:stolen,elapsedMs:Date.now()-t0,
+            occurrences:qa.occurrences,checked:qa.checked,findings:ser.length,clean:!!qa.clean,counts:qa.counts,
+            hcm:(qa.findings||[]).filter(x=>x.code==='HEADWORD_COLOUR_MISMATCH').length,
+            surfaceFingerprint:fnv(nodes.map(n=>n.textContent.trim()).join('\u0001')),
+            findingFingerprint:fnv(ser.map(x=>JSON.stringify([x.code,x.section,x.index,x.surface,x.detail])).join('\n')),
+            hcmDetail:(qa.findings||[]).filter(x=>x.code==='HEADWORD_COLOUR_MISMATCH')
+              .map(x=>({section:x.section,index:x.index,surface:x.surface,span:x.detail.span,head:x.detail.head}))});
+        }catch(e){clearTimeout(timer);fin({file,error:String(e&&e.stack||e),errorKind:'measurement-error'});}};
+        d.head.appendChild(s);
+      });
+    };
+    f.src=file+'?p24='+Date.now()+'_'+Math.random();
+  });
+}
+async function sweep(runId,mode,list){
+  const runToken=++LIFE.runSeq;
+  if(LIFE.runInProgress){log('RUN-STARTED-WHILE-ACTIVE',{newRunToken:runToken,activeRunToken:LIFE.activeRunToken});}
+  const wasInProgress=LIFE.runInProgress;
+  LIFE.runInProgress=true;const prevOwner=LIFE.activeRunToken;LIFE.activeRunToken=runToken;
+  LIFE.runs.push({runToken:runToken,startedAt:Date.now(),startedWhileActive:wasInProgress,previousOwner:prevOwner,mode:mode});
+  const CH=list||window.__chapters||await (await fetch('qa-chapters.json?v='+Date.now())).json();
+  window.__chapters=window.__chapters||CH;
+  for(let i=0;i<CH.length;i++){
+    $('#status').textContent='['+runId+'/r'+runToken+'] '+(i+1)+'/'+CH.length+' '+CH[i].slice(8,36);
+    let r=null;
+    for(let a=1;a<=3;a++){r=await measure(CH[i],runToken,mode,i);r.attempts=a;
+      if(!r.error&&!r.discarded&&!r.rejected)break;
+      await new Promise(x=>setTimeout(x,700));}
+    commit(runId,CH[i],r);
+  }
+  const me=LIFE.runs.find(x=>x.runToken===runToken);me.finishedAt=Date.now();
+  if(LIFE.activeRunToken===runToken){LIFE.runInProgress=false;LIFE.activeRunToken=null;}
+  return summary(runId);
+}
+function summary(runId){
+  const s=store(runId);const files=Object.keys(s);
+  // one accepted reading per chapter: the LAST non-error record (mirrors driver behaviour)
+  let occ=0,find=0,hcm=0,clean=0,stolen=0,rejected=0,errors=0,nonStable=0,dup=0,mismatch=0;
+  files.forEach(f=>{const list=s[f];if(list.length>1)dup++;
+    const v=list[list.length-1];
+    if(v.error){errors++;return;}
+    if(v.rejected){rejected++;return;}
+    if(v.readyState!=='stable'){nonStable++;}
+    if(v.stolen||(v.gate&&v.gate.stolenDuringGate))stolen++;
+    if(v.documentMatchesRequest===false)mismatch++;
+    occ+=v.occurrences||0;find+=v.findings||0;hcm+=v.hcm||0;if(v.clean)clean++;});
+  return {runId:runId,chapters:files.length,occurrences:occ,findings:find,hcm:hcm,clean:clean,
+    tokenStolen:stolen,rejected:rejected,errors:errors,nonStable:nonStable,chaptersMeasuredTwice:dup,
+    documentMismatch:mismatch,
+    vsControl:{occ:occ-CONTROL.occurrences,findings:find-CONTROL.findings,hcm:hcm-CONTROL.hcm,clean:clean-CONTROL.clean},
+    golden:Object.keys(GOLD).filter(f=>s[f]).map(f=>{const v=s[f][s[f].length-1];
+      return {file:f.slice(8,34),occ:v.occurrences,find:v.findings,hcm:v.hcm,fp:v.surfaceFingerprint,
+        gold:GOLD[f],matches:v.occurrences===GOLD[f].occ&&v.findings===GOLD[f].find,
+        stolen:!!v.stolen,docMatch:v.documentMatchesRequest,readyState:v.readyState};})};
+}
+window.KWP24={
+  GOLD,CONTROL,store,summary,life(){return {runInProgress:LIFE.runInProgress,activeRunToken:LIFE.activeRunToken,
+    runs:LIFE.runs,overlapEvents:LIFE.overlapLog.length,overlapLog:LIFE.overlapLog.slice(-60)};},
+  clean(runId,list){return sweep(runId||'control','observe',list);},
+  guard(runId,list){return sweep(runId||'guarded','guard',list);},
+  // Part 3: two run() calls started without awaiting the first.
+  overlap(runId,list){
+    const a=sweep(runId||'overlap','observe',list);
+    const b=sweep(runId||'overlap','observe',list);
+    return Promise.all([a,b]).then(()=>summary(runId||'overlap'));
+  },
+  overlapGuarded(runId,list){
+    const a=sweep(runId||'overlapGuarded','guard',list);
+    const b=sweep(runId||'overlapGuarded','guard',list);
+    return Promise.all([a,b]).then(()=>summary(runId||'overlapGuarded'));
+  }
+};
+$('#out').textContent='ready';
+</script>
+</body></html>

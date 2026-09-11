@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Klarweg · word-popup audio probe</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:15px/1.5 Inter,system-ui,sans-serif;padding:24px}
+h1{font:600 20px/1.3 Inter,sans-serif;margin:0 0 4px}p.sub{color:#5A5A60;margin:0 0 20px;font-size:13.5px}
+button{font:500 13px Inter,sans-serif;padding:9px 14px;border:1px solid #E3E1DA;border-radius:8px;background:#fff;cursor:pointer}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font:12px/1.5 "JetBrains Mono",ui-monospace,monospace;max-height:40vh;overflow:auto;white-space:pre-wrap}
+iframe{width:1000px;height:620px;border:1px solid #EDEBE4;border-radius:10px;background:#fff;opacity:.3}
+#msg{color:#5A5A60;font-size:13px;margin-left:12px}
+</style></head><body>
+<h1>Word-popup audio probe</h1>
+<p class="sub">Clicks real clickable words on real chapter pages and records the audio controls the popup renders: the headword target (<code>.wp-audio[data-audio-text]</code>) and every paradigm form (<code>.wp-mini-audio</code>). Results in <code>window.__KWP</code>.</p>
+<div><button id="go">Start probe</button><button id="stop">Stop</button><span id="msg">idle</span></div>
+<pre id="log">—</pre>
+<iframe id="fr" title="chapter under probe"></iframe>
+<script src="_probe-files.js"></script>
+<script>
+const FILES = window.__KWP_FILES || [];
+const PER_PAGE = window.__KWP_PER_PAGE || 400;
+const S = window.__KWP = { popups: {}, pages: {}, errors: [], clicks: 0 };
+const fr = document.getElementById('fr'), logEl = document.getElementById('log'), msg = document.getElementById('msg');
+let stopped = false;
+const put = t => { logEl.textContent = t + '\n' + logEl.textContent.split('\n').slice(0, 30).join('\n'); };
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+function load(file) {
+  return new Promise(resolve => {
+    let settled = false; const fin = v => { if (!settled) { settled = true; resolve(v); } };
+    fr.onload = () => { const d = fr.contentDocument; let n = 0;
+      const poll = () => { if (!d) return fin(null);
+        if ((d.querySelector('#sec-story, #sec-vocabulary') && d.querySelectorAll('.rw, .de-link').length) || ++n > 40) return fin(d);
+        setTimeout(poll, 100); };
+      poll(); };
+    fr.onerror = () => fin(null);
+    fr.src = file;
+    setTimeout(() => fin(fr.contentDocument), 12000);
+  });
+}
+
+async function probe(d, file) {
+  const spans = [...d.querySelectorAll('.rw, .de-link')];
+  const seen = new Set(); let n = 0;
+  for (const sp of spans) {
+    if (stopped || n >= PER_PAGE) break;
+    const w = (sp.textContent || '').trim();
+    if (!w || seen.has(w)) continue;
+    seen.add(w);
+    if (S.popups[w]) continue;
+    try { sp.click(); } catch (e) { continue; }
+    await wait(20);
+    S.clicks++;
+    const pop = d.querySelector('.word-pop.is-open') || d.querySelector('.word-pop');
+    if (!pop || !pop.classList.contains('is-open')) continue;
+    const main = pop.querySelector('.wp-audio');
+    const cells = [...pop.querySelectorAll('.wp-compare-cell')].map(c => ({
+      label: (c.querySelector('.wp-compare-label') || {}).textContent || '',
+      form: ((c.querySelector('.wp-compare-form') || {}).textContent || '').trim()
+    }));
+    S.popups[w] = {
+      w, file,
+      head: main ? main.getAttribute('data-audio-text') : null,
+      gated: main ? main.classList.contains('audio-missing') : null,
+      forms: [...pop.querySelectorAll('.wp-mini-audio')].map(b => (b.getAttribute('aria-label') || '').replace(/^Hear\s+/, '')),
+      cells,
+      paradigms: [...pop.querySelectorAll('.wp-section-title')].map(e => e.textContent.trim()).filter(t => /comparison|conjugation|number|declension/i.test(t)),
+      type: (pop.querySelector('.wp-badge.role') || {}).textContent || null,
+      hasMeaning: !!pop.querySelector('.wp-meaning'),
+      noData: !!pop.querySelector('.wp-nodata')
+    };
+    n++;
+    const close = pop.querySelector('.wp-close'); if (close) close.click();
+    await wait(5);
+  }
+  return n;
+}
+
+async function run() {
+  stopped = false;
+  for (let i = 0; i < FILES.length; i++) {
+    if (stopped) { msg.textContent = 'stopped'; return; }
+    const f = FILES[i];
+    if (S.pages[f] != null) continue;
+    const d = await load(f);
+    if (!d) { S.errors.push(f); put('ERR ' + f); continue; }
+    const n = await probe(d, f);
+    S.pages[f] = n;
+    put('ok  ' + f + '  +' + n + ' popups');
+    msg.textContent = (i + 1) + ' / ' + FILES.length + ' · ' + Object.keys(S.popups).length + ' popups probed';
+  }
+  msg.textContent = 'DONE · ' + Object.keys(S.popups).length + ' popups · ' + S.clicks + ' clicks';
+}
+document.getElementById('go').onclick = run;
+document.getElementById('stop').onclick = () => { stopped = true; };
+window.__KWP_run = run;
+msg.textContent = FILES.length + ' pages queued';
+</script>
+</body></html>

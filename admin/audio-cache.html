@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audio Cache Dashboard — Klarweg</title>
+<style>
+  :root{ --bg:#FAFAF7; --surface:#fff; --ink:#0E0E10; --ink2:#5A5A60; --ink3:#9A9AA0;
+    --line:rgba(14,14,16,.09); --green:#2E7D32; --red:#C0392B; --accent:#1F4E4A;
+    --r:14px; --font:'Inter',-apple-system,system-ui,sans-serif; --mono:ui-monospace,Menlo,monospace; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:var(--font); background:var(--bg); color:var(--ink); padding:40px 24px; line-height:1.5; }
+  .wrap{ max-width:760px; margin:0 auto; }
+  h1{ font-size:28px; letter-spacing:-.02em; margin-bottom:4px; }
+  .sub{ color:var(--ink3); font-size:14px; margin-bottom:28px; }
+  .cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+  @media(max-width:640px){ .cards{ grid-template-columns:repeat(2,1fr);} }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:18px; }
+  .card .n{ font-size:28px; font-weight:600; letter-spacing:-.02em; }
+  .card .l{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink3); margin-top:4px; }
+  .row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; }
+  button{ font-family:var(--font); font-size:14px; font-weight:500; border:1px solid var(--line);
+    background:var(--surface); color:var(--ink); padding:10px 16px; border-radius:99px; cursor:pointer; }
+  button.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  button:hover{ transform:translateY(-1px); }
+  .probe{ display:flex; gap:8px; margin-bottom:20px; }
+  .probe input{ flex:1; border:1px solid var(--line); border-radius:99px; padding:10px 16px; font-size:15px; font-family:var(--font); outline:none; }
+  .log{ background:#0E0E10; color:#E8E6E0; font-family:var(--mono); font-size:12px; line-height:1.7;
+    border-radius:var(--r); padding:16px; height:260px; overflow:auto; }
+  .log .ev{ color:#7FD1B9; } .log .t{ color:#888; }
+  .status{ display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; padding:6px 13px; border-radius:99px; margin-bottom:20px; }
+  .status.on{ background:#EAF3DE; color:var(--green); } .status.off{ background:#FBEAE7; color:var(--red); }
+  code{ font-family:var(--mono); font-size:12px; background:#F0EFEA; padding:2px 6px; border-radius:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Audio Cache Dashboard</h1>
+  <div class="sub">Live view of the IndexedDB clip cache + the on-demand TTS chain (Approach C).</div>
+
+  <div id="ttsStatus" class="status off">Hosted TTS: checking…</div>
+
+  <div class="cards">
+    <div class="card"><div class="n" id="cItems">—</div><div class="l">Cached items</div></div>
+    <div class="card"><div class="n" id="cSize">—</div><div class="l">Cache size</div></div>
+    <div class="card"><div class="n" id="cHit">—</div><div class="l">Hit rate</div></div>
+    <div class="card"><div class="n" id="cMani">—</div><div class="l">Manifest entries</div></div>
+  </div>
+
+  <div class="probe">
+    <input id="probeText" placeholder="Type German text to generate + cache…" value="Der Hund schläft.">
+    <button class="primary" id="probeBtn">Play / Generate</button>
+  </div>
+  <div class="row">
+    <button id="refreshBtn">Refresh stats</button>
+    <button id="clearBtn">Clear cache</button>
+  </div>
+
+  <div class="log" id="log"></div>
+</div>
+
+<script src="../public/audio/kw-audio-engine.js"></script>
+<script src="../public/audio/kw-tts-config.js"></script>
+<script>
+const $ = (s) => document.querySelector(s);
+function fmtBytes(b){ if(!b) return '0 KB'; const k=b/1024; return k<1024 ? k.toFixed(0)+' KB' : (k/1024).toFixed(1)+' MB'; }
+function logEv(ev){
+  const el = $('#log');
+  const time = new Date(ev.t).toLocaleTimeString();
+  el.insertAdjacentHTML('afterbegin', '<div><span class="t">'+time+'</span> <span class="ev">'+ev.type+'</span> '+(ev.text||ev.source||ev.url||ev.provider||'')+'</div>');
+}
+async function refresh(){
+  const cs = await window.KW_cacheStats();
+  $('#cItems').textContent = cs.items;
+  $('#cSize').textContent = fmtBytes(cs.bytes);
+  $('#cHit').textContent = cs.hitRate + '%';
+  const dbg = await window.KW_audioDebug();
+  $('#cMani').textContent = dbg.manifestEntries;
+  const on = window.KW_TTS && window.KW_TTS.enabled;
+  const s = $('#ttsStatus');
+  s.className = 'status ' + (on ? 'on' : 'off');
+  s.textContent = on ? ('Hosted TTS: ON ('+window.KW_TTS.provider+')') : 'Hosted TTS: OFF — set endpoint in kw-tts-config.js (browser-TTS fallback active)';
+}
+window.KW_onAudioEvent(logEv);
+$('#probeBtn').addEventListener('click', async () => {
+  const t = $('#probeText').value.trim(); if(!t) return;
+  const src = await window.KW_speak(t);
+  logEv({ type:'resolved-via', source: src, t: Date.now() });
+  setTimeout(refresh, 400);
+});
+$('#refreshBtn').addEventListener('click', refresh);
+$('#clearBtn').addEventListener('click', async () => { await window.KW_cacheClear(); logEv({type:'cache-cleared', t:Date.now()}); refresh(); });
+setTimeout(refresh, 600);
+</script>
+</body>
+</html>

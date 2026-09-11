@@ -1,0 +1,2150 @@
+{
+ "slashResolved": [],
+ "slashKeep": [
+  {
+   "t": "der/die/das",
+   "parts": [
+    "der",
+    "die",
+    "das"
+   ],
+   "covered": false
+  },
+  {
+   "t": "ein/eine",
+   "parts": [
+    "ein",
+    "eine"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kranke",
+   "parts": [
+    "der",
+    "die Kranke"
+   ],
+   "covered": false
+  },
+  {
+   "t": "eigene/eigener",
+   "parts": [
+    "eigene",
+    "eigener"
+   ],
+   "covered": false
+  },
+  {
+   "t": "kein/keine",
+   "parts": [
+    "kein",
+    "keine"
+   ],
+   "covered": false
+  },
+  {
+   "t": "viel/viele",
+   "parts": [
+    "viel",
+    "viele"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/das Sandwich",
+   "parts": [
+    "der",
+    "das Sandwich"
+   ],
+   "covered": false
+  },
+  {
+   "t": "jede/jeder",
+   "parts": [
+    "jede",
+    "jeder"
+   ],
+   "covered": false
+  },
+  {
+   "t": "nächste/nächster",
+   "parts": [
+    "nächste",
+    "nächster"
+   ],
+   "covered": false
+  },
+  {
+   "t": "euer/eure",
+   "parts": [
+    "euer",
+    "eure"
+   ],
+   "covered": false
+  },
+  {
+   "t": "Ihr/Ihre",
+   "parts": [
+    "Ihr",
+    "Ihre"
+   ],
+   "covered": false
+  },
+  {
+   "t": "ihr/ihre",
+   "parts": [
+    "ihr",
+    "ihre"
+   ],
+   "covered": false
+  },
+  {
+   "t": "sein/seine",
+   "parts": [
+    "sein",
+    "seine"
+   ],
+   "covered": false
+  },
+  {
+   "t": "unser/unsere",
+   "parts": [
+    "unser",
+    "unsere"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bekannte",
+   "parts": [
+    "der",
+    "die Bekannte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Jugendliche",
+   "parts": [
+    "der",
+    "die Jugendliche"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Erwachsene",
+   "parts": [
+    "der",
+    "die Erwachsene"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Verwandte",
+   "parts": [
+    "der",
+    "die Verwandte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Erste",
+   "parts": [
+    "der",
+    "die Erste"
+   ],
+   "covered": false
+  },
+  {
+   "t": "erste/erster",
+   "parts": [
+    "erste",
+    "erster"
+   ],
+   "covered": false
+  },
+  {
+   "t": "diese/dieser",
+   "parts": [
+    "diese",
+    "dieser"
+   ],
+   "covered": false
+  },
+  {
+   "t": "welche/welcher",
+   "parts": [
+    "welche",
+    "welcher"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Verletzte",
+   "parts": [
+    "der",
+    "die Verletzte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "letzte/letzter",
+   "parts": [
+    "letzte",
+    "letzter"
+   ],
+   "covered": false
+  },
+  {
+   "t": "mein/meine",
+   "parts": [
+    "mein",
+    "meine"
+   ],
+   "covered": false
+  },
+  {
+   "t": "dein/deine",
+   "parts": [
+    "dein",
+    "deine"
+   ],
+   "covered": false
+  },
+  {
+   "t": "wie viel/viele",
+   "parts": [
+    "wie viel",
+    "viele"
+   ],
+   "covered": false
+  },
+  {
+   "t": "die Ja-/Nein-Frage",
+   "parts": [
+    "die Ja-",
+    "die Nein-Frage"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Deutsche",
+   "parts": [
+    "der",
+    "die Deutsche"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Nächste",
+   "parts": [
+    "der",
+    "die Nächste"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Angestellte",
+   "parts": [
+    "der",
+    "die Angestellte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Gehörlose",
+   "parts": [
+    "der",
+    "die Gehörlose"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Lernende",
+   "parts": [
+    "der",
+    "die Lernende"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Freiwillige",
+   "parts": [
+    "der",
+    "die Freiwillige"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Angehörige",
+   "parts": [
+    "der",
+    "die Angehörige"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Prominente",
+   "parts": [
+    "der",
+    "die Prominente"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Auszubildende",
+   "parts": [
+    "der",
+    "die Auszubildende"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Studierende",
+   "parts": [
+    "der",
+    "die Studierende"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Lehrende",
+   "parts": [
+    "der",
+    "die Lehrende"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Prüfende",
+   "parts": [
+    "der",
+    "die Prüfende"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Arme",
+   "parts": [
+    "der",
+    "die Arme"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Letzte",
+   "parts": [
+    "der",
+    "die Letzte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "großer/große/großes",
+   "parts": [
+    "großer",
+    "große",
+    "großes"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Teilnehmende",
+   "parts": [
+    "der",
+    "die Teilnehmende"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/das Ketchup",
+   "parts": [
+    "der",
+    "das Ketchup"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Abgeordnete",
+   "parts": [
+    "der",
+    "die Abgeordnete"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Blinde",
+   "parts": [
+    "der",
+    "die Blinde"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Alte",
+   "parts": [
+    "der",
+    "die Alte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Büroangestellte",
+   "parts": [
+    "der",
+    "die Büroangestellte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Begleiter",
+   "parts": [
+    "der",
+    "die Begleiter"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Grafiker/in",
+   "parts": [
+    "der",
+    "die Grafiker",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Gründer/in",
+   "parts": [
+    "der",
+    "die Gründer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Muslim/in",
+   "parts": [
+    "der",
+    "die Muslim",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Nachmieter/in",
+   "parts": [
+    "der",
+    "die Nachmieter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Pate/Patin",
+   "parts": [
+    "der",
+    "die Pate",
+    "Patin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Produzent/in",
+   "parts": [
+    "der",
+    "die Produzent",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Regisseur/in",
+   "parts": [
+    "der",
+    "die Regisseur",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Senior/in",
+   "parts": [
+    "der",
+    "die Senior",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Zugewanderte",
+   "parts": [
+    "der",
+    "die Zugewanderte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Amateur-Boxer/in",
+   "parts": [
+    "der",
+    "die Amateur-Boxer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Drehbuchautor/in",
+   "parts": [
+    "der",
+    "die Drehbuchautor",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Einwanderer/in",
+   "parts": [
+    "der",
+    "die Einwanderer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Filmregisseur/in",
+   "parts": [
+    "der",
+    "die Filmregisseur",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Sprachwissenschaftler/in",
+   "parts": [
+    "der",
+    "die Sprachwissenschaftler",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Wissenschaftler/in",
+   "parts": [
+    "der",
+    "die Wissenschaftler",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kneipenbesitzer/in",
+   "parts": [
+    "der",
+    "die Kneipenbesitzer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kommilitone/Kommilitonin",
+   "parts": [
+    "der",
+    "die Kommilitone",
+    "Kommilitonin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Nichtschwimmer/in",
+   "parts": [
+    "der",
+    "die Nichtschwimmer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Wanderarbeiter/in",
+   "parts": [
+    "der",
+    "die Wanderarbeiter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Autor/in",
+   "parts": [
+    "der",
+    "die Autor",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Gegner/in",
+   "parts": [
+    "der",
+    "die Gegner",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kabarettist/in",
+   "parts": [
+    "der",
+    "die Kabarettist",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Komponist/in",
+   "parts": [
+    "der",
+    "die Komponist",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Telefonist/in",
+   "parts": [
+    "der",
+    "die Telefonist",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Therapeut/in",
+   "parts": [
+    "der",
+    "die Therapeut",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bibliothekar/in",
+   "parts": [
+    "der",
+    "die Bibliothekar",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Gepäckermittler/in",
+   "parts": [
+    "der",
+    "die Gepäckermittler",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Psychologe/Psychologin",
+   "parts": [
+    "der",
+    "die Psychologe",
+    "Psychologin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Stellvertreter/in",
+   "parts": [
+    "der",
+    "die Stellvertreter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Trendforscher/in",
+   "parts": [
+    "der",
+    "die Trendforscher",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Arbeitslose/r",
+   "parts": [
+    "der",
+    "die Arbeitslose",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bauzeichner/in",
+   "parts": [
+    "der",
+    "die Bauzeichner",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Befragte/r",
+   "parts": [
+    "der",
+    "die Befragte",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bewerber/in",
+   "parts": [
+    "der",
+    "die Bewerber",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Blogger/in",
+   "parts": [
+    "der",
+    "die Blogger",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Jurist/in",
+   "parts": [
+    "der",
+    "die Jurist",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Konzertpianist/in",
+   "parts": [
+    "der",
+    "die Konzertpianist",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Manager/in",
+   "parts": [
+    "der",
+    "die Manager",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Näher/in",
+   "parts": [
+    "der",
+    "die Näher",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Parfümeur/in",
+   "parts": [
+    "der",
+    "die Parfümeur",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Schneider/in",
+   "parts": [
+    "der",
+    "die Schneider",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Unternehmer/in",
+   "parts": [
+    "der",
+    "die Unternehmer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Vorgesetzte/r",
+   "parts": [
+    "der",
+    "die Vorgesetzte",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bewerbungstrainer/in",
+   "parts": [
+    "der",
+    "die Bewerbungstrainer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Eventmanager/in",
+   "parts": [
+    "der",
+    "die Eventmanager",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Geschäftsführer/in",
+   "parts": [
+    "der",
+    "die Geschäftsführer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Grillmeister/in",
+   "parts": [
+    "der",
+    "die Grillmeister",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Informatiker/in",
+   "parts": [
+    "der",
+    "die Informatiker",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Klavierbauer/in",
+   "parts": [
+    "der",
+    "die Klavierbauer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Langzeitarbeitslose/r",
+   "parts": [
+    "der",
+    "die Langzeitarbeitslose",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Maskenbildner/in",
+   "parts": [
+    "der",
+    "die Maskenbildner",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Stuntman/Stuntfrau",
+   "parts": [
+    "der",
+    "die Stuntman",
+    "Stuntfrau"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Textilunternehmer/in",
+   "parts": [
+    "der",
+    "die Textilunternehmer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Verkaufsassistent/in",
+   "parts": [
+    "der",
+    "die Verkaufsassistent",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Werbepartner/in",
+   "parts": [
+    "der",
+    "die Werbepartner",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bedürftige/r",
+   "parts": [
+    "der",
+    "die Bedürftige",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Betreiber/in",
+   "parts": [
+    "der",
+    "die Betreiber",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Gebildete/r",
+   "parts": [
+    "der",
+    "die Gebildete",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Helfer/in",
+   "parts": [
+    "der",
+    "die Helfer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Sponsor/in",
+   "parts": [
+    "der",
+    "die Sponsor",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Alleinernährer/in",
+   "parts": [
+    "der",
+    "die Alleinernährer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Asylberechtigte/r",
+   "parts": [
+    "der",
+    "die Asylberechtigte",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Geringverdiener/in",
+   "parts": [
+    "der",
+    "die Geringverdiener",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Sicherheitsleiter/in",
+   "parts": [
+    "der",
+    "die Sicherheitsleiter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Sozialhilfeempfänger/in",
+   "parts": [
+    "der",
+    "die Sozialhilfeempfänger",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Amtsinhaber/in",
+   "parts": [
+    "der",
+    "die Amtsinhaber",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bauarbeiter/in",
+   "parts": [
+    "der",
+    "die Bauarbeiter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Grenzsoldat/in",
+   "parts": [
+    "der",
+    "die Grenzsoldat",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kanzler/in",
+   "parts": [
+    "der",
+    "die Kanzler",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Klassenbeste/r",
+   "parts": [
+    "der",
+    "die Klassenbeste",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Krieger/in",
+   "parts": [
+    "der",
+    "die Krieger",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Lokführer/in",
+   "parts": [
+    "der",
+    "die Lokführer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Regierungschef/in",
+   "parts": [
+    "der",
+    "die Regierungschef",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Rentner/in",
+   "parts": [
+    "der",
+    "die Rentner",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Schiedsrichter/in",
+   "parts": [
+    "der",
+    "die Schiedsrichter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Waise",
+   "parts": [
+    "der",
+    "die Waise"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Zeitzeuge/-zeugin",
+   "parts": [
+    "der",
+    "die Zeitzeuge",
+    "-zeugin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Besitzer/in",
+   "parts": [
+    "der",
+    "die Besitzer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bundeskanzler/in",
+   "parts": [
+    "der",
+    "die Bundeskanzler",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bundesminister/in",
+   "parts": [
+    "der",
+    "die Bundesminister",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kanzlerkandidat/in",
+   "parts": [
+    "der",
+    "die Kanzlerkandidat",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Parteivorsitzende/r",
+   "parts": [
+    "der",
+    "die Parteivorsitzende",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Pressesprecher/in",
+   "parts": [
+    "der",
+    "die Pressesprecher",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Regierungssprecher/in",
+   "parts": [
+    "der",
+    "die Regierungssprecher",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Staatsführer/in",
+   "parts": [
+    "der",
+    "die Staatsführer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Betroffene/r",
+   "parts": [
+    "der",
+    "die Betroffene",
+    "r"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Außenseiter/in",
+   "parts": [
+    "der",
+    "die Außenseiter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Bewunderer/Bewunderin",
+   "parts": [
+    "der",
+    "die Bewunderer",
+    "Bewunderin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Dichter/in",
+   "parts": [
+    "der",
+    "die Dichter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Essayist/in",
+   "parts": [
+    "der",
+    "die Essayist",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Musiktherapeut/in",
+   "parts": [
+    "der",
+    "die Musiktherapeut",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Philosoph/in",
+   "parts": [
+    "der",
+    "die Philosoph",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Romantiker/in",
+   "parts": [
+    "der",
+    "die Romantiker",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Satiriker/in",
+   "parts": [
+    "der",
+    "die Satiriker",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Schriftsteller/in",
+   "parts": [
+    "der",
+    "die Schriftsteller",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Witwer/Witwe",
+   "parts": [
+    "der",
+    "die Witwer",
+    "Witwe"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Detektiv/in",
+   "parts": [
+    "der",
+    "die Detektiv",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Idiot/in",
+   "parts": [
+    "der",
+    "die Idiot",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Informant/in",
+   "parts": [
+    "der",
+    "die Informant",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kaiser/in",
+   "parts": [
+    "der",
+    "die Kaiser",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kiefer",
+   "parts": [
+    "der",
+    "die Kiefer"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kommissar/in",
+   "parts": [
+    "der",
+    "die Kommissar",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Mandant/in",
+   "parts": [
+    "der",
+    "die Mandant",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Reporter/in",
+   "parts": [
+    "der",
+    "die Reporter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Verdächtige",
+   "parts": [
+    "der",
+    "die Verdächtige"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Betrachter/in",
+   "parts": [
+    "der",
+    "die Betrachter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Entdecker/in",
+   "parts": [
+    "der",
+    "die Entdecker",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Galerist/in",
+   "parts": [
+    "der",
+    "die Galerist",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Gehilfe/Gehilfin",
+   "parts": [
+    "der",
+    "die Gehilfe",
+    "Gehilfin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Ich-Erzähler/in",
+   "parts": [
+    "der",
+    "die Ich-Erzähler",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Komplize/Komplizin",
+   "parts": [
+    "der",
+    "die Komplize",
+    "Komplizin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Malereiprofessor/in",
+   "parts": [
+    "der",
+    "die Malereiprofessor",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Meisterschüler/in",
+   "parts": [
+    "der",
+    "die Meisterschüler",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Muttersprachler/in",
+   "parts": [
+    "der",
+    "die Muttersprachler",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Schlossbesucher/in",
+   "parts": [
+    "der",
+    "die Schlossbesucher",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Sprachforscher/in",
+   "parts": [
+    "der",
+    "die Sprachforscher",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Vertreter/in",
+   "parts": [
+    "der",
+    "die Vertreter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Astronom/in",
+   "parts": [
+    "der",
+    "die Astronom",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Aussteller/in",
+   "parts": [
+    "der",
+    "die Aussteller",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Autofahrer/in",
+   "parts": [
+    "der",
+    "die Autofahrer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Berater/in",
+   "parts": [
+    "der",
+    "die Berater",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Fischer/in",
+   "parts": [
+    "der",
+    "die Fischer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Mitinhaber/in",
+   "parts": [
+    "der",
+    "die Mitinhaber",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Mitschüler/in",
+   "parts": [
+    "der",
+    "die Mitschüler",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Moderator/in",
+   "parts": [
+    "der",
+    "die Moderator",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Optiker/in",
+   "parts": [
+    "der",
+    "die Optiker",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Schwimmer/in",
+   "parts": [
+    "der",
+    "die Schwimmer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Berufsanfänger/in",
+   "parts": [
+    "der",
+    "die Berufsanfänger",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Veranstalter/in",
+   "parts": [
+    "der",
+    "die Veranstalter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Wissensmanager/in",
+   "parts": [
+    "der",
+    "die Wissensmanager",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Beschäftigte",
+   "parts": [
+    "der",
+    "die Beschäftigte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Erfinder/in",
+   "parts": [
+    "der",
+    "die Erfinder",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Feind/in",
+   "parts": [
+    "der",
+    "die Feind",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Forscher/in",
+   "parts": [
+    "der",
+    "die Forscher",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Gealterte",
+   "parts": [
+    "der",
+    "die Gealterte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Gewinner/in",
+   "parts": [
+    "der",
+    "die Gewinner",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Intellektuelle",
+   "parts": [
+    "der",
+    "die Intellektuelle"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kämpfer/in",
+   "parts": [
+    "der",
+    "die Kämpfer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kandidat/in",
+   "parts": [
+    "der",
+    "die Kandidat",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Leiter/in",
+   "parts": [
+    "der",
+    "die Leiter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Mediziner/in",
+   "parts": [
+    "der",
+    "die Mediziner",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Mitbewohner/in",
+   "parts": [
+    "der",
+    "die Mitbewohner",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Physiker/in",
+   "parts": [
+    "der",
+    "die Physiker",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Präsident/in",
+   "parts": [
+    "der",
+    "die Präsident",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Proband/in",
+   "parts": [
+    "der",
+    "die Proband",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Pubertierende",
+   "parts": [
+    "der",
+    "die Pubertierende"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Techniker/in",
+   "parts": [
+    "der",
+    "die Techniker",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Verlierer/in",
+   "parts": [
+    "der",
+    "die Verlierer",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Vermieter/in",
+   "parts": [
+    "der",
+    "die Vermieter",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Allesfresser/in",
+   "parts": [
+    "der",
+    "die Allesfresser",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Artgenosse/Artgenossin",
+   "parts": [
+    "der",
+    "die Artgenosse",
+    "Artgenossin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Feuilletonist/in",
+   "parts": [
+    "der",
+    "die Feuilletonist",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Ministerpräsident/in",
+   "parts": [
+    "der",
+    "die Ministerpräsident",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Nationalsozialist/in",
+   "parts": [
+    "der",
+    "die Nationalsozialist",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Nobelpreisträger/in",
+   "parts": [
+    "der",
+    "die Nobelpreisträger",
+    "in"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Ökologe/Ökologin",
+   "parts": [
+    "der",
+    "die Ökologe",
+    "Ökologin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Pädagoge/Pädagogin",
+   "parts": [
+    "der",
+    "die Pädagoge",
+    "Pädagogin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Schlafexperte/Schlafexpertin",
+   "parts": [
+    "der",
+    "die Schlafexperte",
+    "Schlafexpertin"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Anrufer",
+   "parts": [
+    "der",
+    "die Anrufer"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Coach",
+   "parts": [
+    "der",
+    "die Coach"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Konsument",
+   "parts": [
+    "der",
+    "die Konsument"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kritisierte",
+   "parts": [
+    "der",
+    "die Kritisierte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Kunstturner",
+   "parts": [
+    "der",
+    "die Kunstturner"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Prüfer",
+   "parts": [
+    "der",
+    "die Prüfer"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Tennisprofi",
+   "parts": [
+    "der",
+    "die Tennisprofi"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Monoskibobfahrer",
+   "parts": [
+    "der",
+    "die Monoskibobfahrer"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Polizeimeister",
+   "parts": [
+    "der",
+    "die Polizeimeister"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Schwager",
+   "parts": [
+    "der",
+    "die Schwager"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Verantwortliche",
+   "parts": [
+    "der",
+    "die Verantwortliche"
+   ],
+   "covered": false
+  },
+  {
+   "t": "das Wort / die Wörter / die Worte",
+   "parts": [
+    "das Wort",
+    "das die Wörter",
+    "das die Worte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Berechtigte",
+   "parts": [
+    "der",
+    "die Berechtigte"
+   ],
+   "covered": false
+  },
+  {
+   "t": "der/die Verpflichtete",
+   "parts": [
+    "der",
+    "die Verpflichtete"
+   ],
+   "covered": false
+  }
+ ],
+ "parenResolved": [
+  {
+   "t": "geben (Unterricht)",
+   "bare": "geben"
+  },
+  {
+   "t": "frei (Termin)",
+   "bare": "frei"
+  },
+  {
+   "t": "gut (Schon gut)",
+   "bare": "gut"
+  },
+  {
+   "t": "haben (Termin)",
+   "bare": "haben"
+  },
+  {
+   "t": "machen (Macht nichts)",
+   "bare": "machen"
+  },
+  {
+   "t": "zu (spät)",
+   "bare": "zu"
+  },
+  {
+   "t": "um (+A)",
+   "bare": "um"
+  },
+  {
+   "t": "haben (Perfekt)",
+   "bare": "haben"
+  },
+  {
+   "t": "durch (Portal)",
+   "bare": "durch"
+  },
+  {
+   "t": "zu (Kunden)",
+   "bare": "zu"
+  },
+  {
+   "t": "aus (Holz)",
+   "bare": "aus"
+  },
+  {
+   "t": "der Platz (Quadrat)",
+   "bare": "der Platz"
+  },
+  {
+   "t": "die Bank (Sitz)",
+   "bare": "die Bank"
+  },
+  {
+   "t": "stellen (put)",
+   "bare": "stellen"
+  },
+  {
+   "t": "die Bank (Geld)",
+   "bare": "die Bank"
+  },
+  {
+   "t": "der Reiseführer (Buch)",
+   "bare": "der Reiseführer"
+  },
+  {
+   "t": "die Karte (map)",
+   "bare": "die Karte"
+  },
+  {
+   "t": "die Karte (pay)",
+   "bare": "die Karte"
+  },
+  {
+   "t": "etwas (a bit)",
+   "bare": "etwas"
+  },
+  {
+   "t": "nehmen (Bus)",
+   "bare": "nehmen"
+  },
+  {
+   "t": "weit (far)",
+   "bare": "weit"
+  },
+  {
+   "t": "passen (match)",
+   "bare": "passen"
+  },
+  {
+   "t": "stehen (suit)",
+   "bare": "stehen"
+  },
+  {
+   "t": "echt (wirklich)",
+   "bare": "echt"
+  },
+  {
+   "t": "geben (Anweisung)",
+   "bare": "geben"
+  },
+  {
+   "t": "melden (sich)",
+   "bare": "melden"
+  },
+  {
+   "t": "verbinden (mit)",
+   "bare": "verbinden"
+  },
+  {
+   "t": "ab (off)",
+   "bare": "ab"
+  },
+  {
+   "t": "alle (every)",
+   "bare": "alle"
+  },
+  {
+   "t": "an (+D)",
+   "bare": "an"
+  },
+  {
+   "t": "sie (Pl.)",
+   "bare": "sie"
+  },
+  {
+   "t": "anhören (sich etw.)",
+   "bare": "anhören"
+  },
+  {
+   "t": "beschweren (sich)",
+   "bare": "beschweren"
+  },
+  {
+   "t": "benehmen (sich)",
+   "bare": "benehmen"
+  },
+  {
+   "t": "hängen (an)",
+   "bare": "hängen"
+  },
+  {
+   "t": "verzichten (auf)",
+   "bare": "verzichten"
+  },
+  {
+   "t": "zu (+ Infinitiv)",
+   "bare": "zu"
+  },
+  {
+   "t": "nicht (Adjektivnegation)",
+   "bare": "nicht"
+  },
+  {
+   "t": "nicht … sondern (Fokusverneinung)",
+   "bare": "nicht … sondern"
+  },
+  {
+   "t": "auf (Ohren auf!)",
+   "bare": "auf"
+  },
+  {
+   "t": "zurückkommen (auf)",
+   "bare": "zurückkommen"
+  }
+ ],
+ "parenKeep": [
+  {
+   "t": "orientieren (sich)",
+   "bare": "orientieren"
+  },
+  {
+   "t": "qm (Quadratmeter)",
+   "bare": "qm"
+  },
+  {
+   "t": "freuen (sich)",
+   "bare": "freuen"
+  },
+  {
+   "t": "konzentrieren (sich)",
+   "bare": "konzentrieren"
+  },
+  {
+   "t": "bewerben (sich)",
+   "bare": "bewerben"
+  },
+  {
+   "t": "kümmern (sich)",
+   "bare": "kümmern"
+  },
+  {
+   "t": "sorgen (für)",
+   "bare": "sorgen"
+  },
+  {
+   "t": "beeilen (sich)",
+   "bare": "beeilen"
+  },
+  {
+   "t": "entspannen (sich)",
+   "bare": "entspannen"
+  },
+  {
+   "t": "gemacht sein (für)",
+   "bare": "gemacht sein"
+  },
+  {
+   "t": "herumschlagen (sich)",
+   "bare": "herumschlagen"
+  },
+  {
+   "t": "sehr geehrte(r)",
+   "bare": "sehr geehrte"
+  }
+ ]
+}

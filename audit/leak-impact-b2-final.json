@@ -1,0 +1,1597 @@
+{
+ "phase": "7",
+ "scope": "authoritative 30-entry B2 leak inventory",
+ "method": "chapter rendered in situ; AUTHORED_GERMAN() harvest reproduced with per-source attribution; qa-engine.js run for findings; attribution = sole-source AND outside .de AND actually linkified",
+ "harness": "chapter/qa-leak-impact.html",
+ "totals": {
+  "sourceEntries": 30,
+  "chapters": 22,
+  "injectedSurfaceSlots": 193,
+  "distinctInjectedSurfacesPerChapterSummed": 189,
+  "soleSourceSurfaceSlots": 167,
+  "learnerVisibleOccurrences": 21,
+  "silentOccurrences": 17,
+  "qaFindingOccurrences": 4,
+  "harmful": 4,
+  "latent": 25,
+  "noConsequence": 1,
+  "ambiguous": 0,
+  "reconciliation": {
+   "silentPlusQa": 21,
+   "equalsLearnerVisible": true
+  }
+ },
+ "distinctInjectedSurfacesByChapter": {
+  "b2-03-informationsstruktur-thema-rhema": 13,
+  "b2-07-verbergaenzungen-erkennen": 7,
+  "b2-20-anstatt-zu": 8,
+  "b2-21-sowohl-als-auch": 6,
+  "b2-22-weder-noch": 5,
+  "b2-23-nicht-nur-sondern-auch": 11,
+  "b2-34-temporalsaetze-waehrend-seitdem": 6,
+  "b2-35-temporalsaetze-bevor-nachdem": 4,
+  "b2-38-verschachtelte-relativsaetze": 18,
+  "b2-39-relativsaetze-wer-der": 6,
+  "b2-40-verben-mit-praepositionen": 5,
+  "b2-41-nomen-mit-praepositionen": 5,
+  "b2-45-passiversatz-sich-lassen": 7,
+  "b2-46-unpersoenliches-passiv": 12,
+  "b2-47-bekommen-kriegen-passiv": 7,
+  "b2-48-modalitaetsersatz-haben-sein-zu": 7,
+  "b2-50-nominalisierung": 14,
+  "b2-51-erweiterte-partizipialattribute": 16,
+  "b2-52-komplexe-nominalgruppen": 10,
+  "b2-54-funktionsverbgefuege": 9,
+  "b2-58-textkohaerenz-absatzlogik": 9,
+  "b2-61-indirekte-rede-zeitverschiebung": 4
+ },
+ "rows": [
+  {
+   "slug": "b2-03-informationsstruktur-thema-rhema",
+   "line": 42,
+   "field": "ex",
+   "value": "Thema-Rhema: known info (Thema) first, new info (Rhema) later in the sentence (this chapter).",
+   "injected": [
+    "themarhema",
+    "known",
+    "info",
+    "thema",
+    "first",
+    "new",
+    "rhema",
+    "later",
+    "in",
+    "the",
+    "sentence",
+    "this",
+    "chapter"
+   ],
+   "soleSource": [
+    "themarhema",
+    "known",
+    "info",
+    "first",
+    "new",
+    "later",
+    "the",
+    "sentence",
+    "this",
+    "chapter"
+   ],
+   "injectedCount": 13,
+   "soleSourceCount": 10,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "10 sole-source surfaces present in rendered text (the ×50, new ×29, sentence ×28) but none linkified; `thema`/`in` linkified only via legitimate German sources"
+  },
+  {
+   "slug": "b2-07-verbergaenzungen-erkennen",
+   "line": 181,
+   "field": "de",
+   "value": "Remove it — does the sentence still work?",
+   "injected": [
+    "remove",
+    "it",
+    "does",
+    "the",
+    "sentence",
+    "still",
+    "work"
+   ],
+   "soleSource": [
+    "remove",
+    "it",
+    "does",
+    "the",
+    "sentence",
+    "still",
+    "work"
+   ],
+   "injectedCount": 7,
+   "soleSourceCount": 7,
+   "learnerVisible": 5,
+   "silent": 5,
+   "qaFindings": 0,
+   "classification": "HARMFUL",
+   "note": "`still` clickable ×5 outside .de (sec-overview, sec-grammar ×3, sec-summary), badge Adjective / role adjective — English \"still\" resolving to German adjective still (=quiet). Zero QA codes"
+  },
+  {
+   "slug": "b2-20-anstatt-zu",
+   "line": 196,
+   "field": "de",
+   "value": "ohne...zu (without) vs. (an)statt...zu (instead of)",
+   "injected": [
+    "zu",
+    "statt",
+    "ohne",
+    "without",
+    "vs",
+    "an",
+    "instead",
+    "of"
+   ],
+   "soleSource": [
+    "without",
+    "instead",
+    "of"
+   ],
+   "injectedCount": 8,
+   "soleSourceCount": 3,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "sole-source without/instead/of occur in text (9/31/36) but are not linkified; zu/an/ohne linkified from legitimate German"
+  },
+  {
+   "slug": "b2-21-sowohl-als-auch",
+   "line": 179,
+   "field": "de",
+   "value": "People, nouns, verbs, adjectives, prepositional phrases",
+   "injected": [
+    "people",
+    "nouns",
+    "verbs",
+    "adjectives",
+    "prepositional",
+    "phrases"
+   ],
+   "soleSource": [
+    "people",
+    "nouns",
+    "verbs",
+    "adjectives",
+    "prepositional",
+    "phrases"
+   ],
+   "injectedCount": 6,
+   "soleSourceCount": 6,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": null
+  },
+  {
+   "slug": "b2-22-weder-noch",
+   "line": 191,
+   "field": "de",
+   "value": "Formal reports, presentations, academic writing",
+   "injected": [
+    "formal",
+    "reports",
+    "presentations",
+    "academic",
+    "writing"
+   ],
+   "soleSource": [
+    "formal",
+    "reports",
+    "presentations",
+    "academic",
+    "writing"
+   ],
+   "injectedCount": 5,
+   "soleSourceCount": 5,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": null
+  },
+  {
+   "slug": "b2-23-nicht-nur-sondern-auch",
+   "line": 193,
+   "field": "de",
+   "value": "Nouns, verbs, adjectives, adverbs, prepositional phrases",
+   "injected": [
+    "nouns",
+    "verbs",
+    "adjectives",
+    "adverbs",
+    "prepositional",
+    "phrases"
+   ],
+   "soleSource": [
+    "nouns",
+    "verbs",
+    "adjectives",
+    "adverbs",
+    "prepositional",
+    "phrases"
+   ],
+   "injectedCount": 6,
+   "soleSourceCount": 6,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": null
+  },
+  {
+   "slug": "b2-23-nicht-nur-sondern-auch",
+   "line": 194,
+   "field": "de",
+   "value": "Formal newspapers, reports, persuasive writing",
+   "injected": [
+    "formal",
+    "newspapers",
+    "reports",
+    "persuasive",
+    "writing"
+   ],
+   "soleSource": [
+    "formal",
+    "newspapers",
+    "reports",
+    "persuasive",
+    "writing"
+   ],
+   "injectedCount": 5,
+   "soleSourceCount": 5,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": null
+  },
+  {
+   "slug": "b2-34-temporalsaetze-waehrend-seitdem",
+   "line": 187,
+   "field": "de",
+   "value": "Both connectors: verb at the end",
+   "injected": [
+    "both",
+    "connectors",
+    "verb",
+    "at",
+    "the",
+    "end"
+   ],
+   "soleSource": [
+    "both",
+    "connectors",
+    "verb",
+    "at",
+    "the",
+    "end"
+   ],
+   "injectedCount": 6,
+   "soleSourceCount": 6,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "chapter has 26 QA findings but none on these surfaces; verb ×13 / the ×41 in text, none linkified"
+  },
+  {
+   "slug": "b2-35-temporalsaetze-bevor-nachdem",
+   "line": 177,
+   "field": "de",
+   "value": "Which action happened first?",
+   "injected": [
+    "which",
+    "action",
+    "happened",
+    "first"
+   ],
+   "soleSource": [
+    "which",
+    "action",
+    "happened",
+    "first"
+   ],
+   "injectedCount": 4,
+   "soleSourceCount": 4,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": null
+  },
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 174,
+   "field": "de",
+   "value": "Every relative pronoun belongs to ONE noun",
+   "injected": [
+    "every",
+    "relative",
+    "pronoun",
+    "belongs",
+    "to",
+    "one",
+    "noun"
+   ],
+   "soleSource": [
+    "every",
+    "relative",
+    "pronoun",
+    "belongs",
+    "to",
+    "one",
+    "noun"
+   ],
+   "injectedCount": 7,
+   "soleSourceCount": 7,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": null
+  },
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 175,
+   "field": "de",
+   "value": "Main clause → clause 1 → nested clause 2 → main clause resumes",
+   "injected": [
+    "main",
+    "clause",
+    "nested",
+    "resumes"
+   ],
+   "soleSource": [
+    "resumes"
+   ],
+   "injectedCount": 4,
+   "soleSourceCount": 1,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "main/clause/nested also authored by sibling leaked entries L176/L177 — not sole-source to this row"
+  },
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 176,
+   "field": "de",
+   "value": "Find the main clause first",
+   "injected": [
+    "main",
+    "clause",
+    "find",
+    "the",
+    "first"
+   ],
+   "soleSource": [
+    "find",
+    "the",
+    "first"
+   ],
+   "injectedCount": 5,
+   "soleSourceCount": 3,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": null
+  },
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 177,
+   "field": "de",
+   "value": "1–2 nested clauses = natural; 3–4 = too much",
+   "injected": [
+    "nested",
+    "clauses",
+    "natural",
+    "too",
+    "much"
+   ],
+   "soleSource": [
+    "clauses",
+    "natural",
+    "too",
+    "much"
+   ],
+   "injectedCount": 5,
+   "soleSourceCount": 4,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": null
+  },
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 466,
+   "field": "sentence",
+   "value": "The professor whose university’s library is modern is internationally known.",
+   "injected": [],
+   "soleSource": [],
+   "injectedCount": 0,
+   "soleSourceCount": 0,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "NO CONSEQUENCE",
+   "note": "Mechanism established: the lint regex matched `sentence: \"…\"` INSIDE the value of `target:` (builder prompt). The authored field is `target`, which is not German-typed, so nothing is harvested into AUTHORED_GERMAN(). Zero injection — inventory row is a lint artifact of a second class (field name inside a string value)"
+  },
+  {
+   "slug": "b2-39-relativsaetze-wer-der",
+   "line": 191,
+   "field": "de",
+   "value": "Common in proverbs and formal writing",
+   "injected": [
+    "common",
+    "in",
+    "proverbs",
+    "and",
+    "formal",
+    "writing"
+   ],
+   "soleSource": [
+    "common",
+    "proverbs",
+    "and",
+    "formal",
+    "writing"
+   ],
+   "injectedCount": 6,
+   "soleSourceCount": 5,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 7 (1 inDe / 6 outside) but shared with legitimate German `in`"
+  },
+  {
+   "slug": "b2-40-verben-mit-praepositionen",
+   "line": 190,
+   "field": "de",
+   "value": "Never learn the verb alone",
+   "injected": [
+    "never",
+    "learn",
+    "the",
+    "verb",
+    "alone"
+   ],
+   "soleSource": [
+    "never",
+    "learn",
+    "the",
+    "verb",
+    "alone"
+   ],
+   "injectedCount": 5,
+   "soleSourceCount": 5,
+   "learnerVisible": 2,
+   "silent": 2,
+   "qaFindings": 0,
+   "classification": "HARMFUL",
+   "note": "`verb` clickable ×2 outside .de, badge Noun / role object — English \"verb\" resolving to German das Verb. Zero QA codes"
+  },
+  {
+   "slug": "b2-41-nomen-mit-praepositionen",
+   "line": 189,
+   "field": "de",
+   "value": "Never learn the noun alone",
+   "injected": [
+    "never",
+    "learn",
+    "the",
+    "noun",
+    "alone"
+   ],
+   "soleSource": [
+    "never",
+    "learn",
+    "the",
+    "noun",
+    "alone"
+   ],
+   "injectedCount": 5,
+   "soleSourceCount": 5,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "identical string shape to b2-40 L190 but `noun` (×55 in text) is not linkified here — no German homograph"
+  },
+  {
+   "slug": "b2-45-passiversatz-sich-lassen",
+   "line": 187,
+   "field": "de",
+   "value": "Common in manuals, reports, and formal German",
+   "injected": [
+    "common",
+    "in",
+    "manuals",
+    "reports",
+    "and",
+    "formal",
+    "german"
+   ],
+   "soleSource": [
+    "common",
+    "manuals",
+    "reports",
+    "and",
+    "formal",
+    "german"
+   ],
+   "injectedCount": 7,
+   "soleSourceCount": 6,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 5 (2/3) shared"
+  },
+  {
+   "slug": "b2-46-unpersoenliches-passiv",
+   "line": 171,
+   "field": "de",
+   "value": "Talking about WHO? vs THE ACTION?",
+   "injected": [
+    "talking",
+    "about",
+    "who",
+    "vs",
+    "the",
+    "action"
+   ],
+   "soleSource": [
+    "talking",
+    "about",
+    "who",
+    "vs",
+    "the",
+    "action"
+   ],
+   "injectedCount": 6,
+   "soleSourceCount": 6,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": null
+  },
+  {
+   "slug": "b2-46-unpersoenliches-passiv",
+   "line": 172,
+   "field": "de",
+   "value": "Common in signs, notices, and announcements",
+   "injected": [
+    "common",
+    "in",
+    "signs",
+    "notices",
+    "and",
+    "announcements"
+   ],
+   "soleSource": [
+    "common",
+    "signs",
+    "notices",
+    "and",
+    "announcements"
+   ],
+   "injectedCount": 6,
+   "soleSourceCount": 5,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 15 (2/13) shared"
+  },
+  {
+   "slug": "b2-47-bekommen-kriegen-passiv",
+   "line": 178,
+   "field": "de",
+   "value": "Common in service, healthcare, and administrative German",
+   "injected": [
+    "common",
+    "in",
+    "service",
+    "healthcare",
+    "and",
+    "administrative",
+    "german"
+   ],
+   "soleSource": [
+    "common",
+    "service",
+    "healthcare",
+    "and",
+    "administrative",
+    "german"
+   ],
+   "injectedCount": 7,
+   "soleSourceCount": 6,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 7 (1/6) shared"
+  },
+  {
+   "slug": "b2-48-modalitaetsersatz-haben-sein-zu",
+   "line": 178,
+   "field": "de",
+   "value": "Common in contracts, regulations, and official notices",
+   "injected": [
+    "common",
+    "in",
+    "contracts",
+    "regulations",
+    "and",
+    "official",
+    "notices"
+   ],
+   "soleSource": [
+    "common",
+    "contracts",
+    "regulations",
+    "and",
+    "official",
+    "notices"
+   ],
+   "injectedCount": 7,
+   "soleSourceCount": 6,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 11 (3/8) shared"
+  },
+  {
+   "slug": "b2-50-nominalisierung",
+   "line": 186,
+   "field": "de",
+   "value": "Genitiv/von-construction for the acted-upon object",
+   "injected": [
+    "genitiv",
+    "vonconstruction",
+    "for",
+    "the",
+    "actedupon",
+    "object"
+   ],
+   "soleSource": [
+    "genitiv",
+    "vonconstruction",
+    "for",
+    "the",
+    "actedupon",
+    "object"
+   ],
+   "injectedCount": 6,
+   "soleSourceCount": 6,
+   "learnerVisible": 1,
+   "silent": 1,
+   "qaFindings": 0,
+   "classification": "HARMFUL",
+   "note": "`Genitiv` clickable ×1 outside .de, badge Noun / role object. Sole-source: no other German-typed field in this chapter authors it. Zero QA codes. The linkified surface is itself German, so the popup content is correct — the defect is an unintended link admitted by an English string"
+  },
+  {
+   "slug": "b2-50-nominalisierung",
+   "line": 187,
+   "field": "de",
+   "value": "Common in reports, theses, and Goethe B2 Writing",
+   "injected": [
+    "common",
+    "in",
+    "reports",
+    "theses",
+    "and",
+    "goethe",
+    "b",
+    "writing"
+   ],
+   "soleSource": [
+    "common",
+    "reports",
+    "theses",
+    "and",
+    "goethe",
+    "b",
+    "writing"
+   ],
+   "injectedCount": 8,
+   "soleSourceCount": 7,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 12 (3/9) shared"
+  },
+  {
+   "slug": "b2-51-erweiterte-partizipialattribute",
+   "line": 177,
+   "field": "de",
+   "value": "Adjective endings agree with gender, case, and number",
+   "injected": [
+    "adjective",
+    "endings",
+    "agree",
+    "with",
+    "gender",
+    "case",
+    "and",
+    "number"
+   ],
+   "soleSource": [
+    "adjective",
+    "endings",
+    "agree",
+    "with",
+    "gender",
+    "case",
+    "number"
+   ],
+   "injectedCount": 8,
+   "soleSourceCount": 7,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`and` also authored by sibling leaked entry L178"
+  },
+  {
+   "slug": "b2-51-erweiterte-partizipialattribute",
+   "line": 178,
+   "field": "de",
+   "value": "Common in newspapers, academic papers, and Goethe B2 Reading",
+   "injected": [
+    "and",
+    "common",
+    "in",
+    "newspapers",
+    "academic",
+    "papers",
+    "goethe",
+    "b",
+    "reading"
+   ],
+   "soleSource": [
+    "common",
+    "newspapers",
+    "academic",
+    "papers",
+    "goethe",
+    "b",
+    "reading"
+   ],
+   "injectedCount": 9,
+   "soleSourceCount": 7,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 11 (2/9) shared; `and` shared with sibling leak L177"
+  },
+  {
+   "slug": "b2-52-komplexe-nominalgruppen",
+   "line": 174,
+   "field": "de",
+   "value": "Common in scientific articles, reports, contracts, and Goethe B2 Reading",
+   "injected": [
+    "common",
+    "in",
+    "scientific",
+    "articles",
+    "reports",
+    "contracts",
+    "and",
+    "goethe",
+    "b",
+    "reading"
+   ],
+   "soleSource": [
+    "common",
+    "scientific",
+    "articles",
+    "reports",
+    "contracts",
+    "and",
+    "goethe",
+    "b",
+    "reading"
+   ],
+   "injectedCount": 10,
+   "soleSourceCount": 9,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 8 (4/4) shared"
+  },
+  {
+   "slug": "b2-54-funktionsverbgefuege",
+   "line": 179,
+   "field": "de",
+   "value": "Common in reports, contracts, and Goethe B2 formal writing",
+   "injected": [
+    "in",
+    "common",
+    "reports",
+    "contracts",
+    "and",
+    "goethe",
+    "b",
+    "formal",
+    "writing"
+   ],
+   "soleSource": [
+    "common",
+    "reports",
+    "contracts",
+    "and",
+    "goethe",
+    "b",
+    "formal",
+    "writing"
+   ],
+   "injectedCount": 9,
+   "soleSourceCount": 8,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 9 (4/5) shared"
+  },
+  {
+   "slug": "b2-58-textkohaerenz-absatzlogik",
+   "line": 172,
+   "field": "de",
+   "value": "Common in Goethe B2 Writing, reports, and university assignments",
+   "injected": [
+    "common",
+    "in",
+    "goethe",
+    "b",
+    "writing",
+    "reports",
+    "and",
+    "university",
+    "assignments"
+   ],
+   "soleSource": [
+    "common",
+    "goethe",
+    "b",
+    "writing",
+    "reports",
+    "and",
+    "university",
+    "assignments"
+   ],
+   "injectedCount": 9,
+   "soleSourceCount": 8,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 12 (2/10) shared"
+  },
+  {
+   "slug": "b2-61-indirekte-rede-zeitverschiebung",
+   "line": 179,
+   "field": "de",
+   "value": "Original event time ≠ reporting time",
+   "injected": [
+    "original",
+    "event",
+    "time",
+    "reporting"
+   ],
+   "soleSource": [
+    "original",
+    "event",
+    "time",
+    "reporting"
+   ],
+   "injectedCount": 4,
+   "soleSourceCount": 4,
+   "learnerVisible": 13,
+   "silent": 9,
+   "qaFindings": 4,
+   "classification": "HARMFUL",
+   "note": "`original` linkified ×12 outside .de (badge Adjective / role adjective) + `Event` ×1 (badge Noun / role object) = 13; 4 carry CASE_COLLISION_CAPITALISED, 9 emit no code"
+  }
+ ],
+ "phase10": {
+  "date": "2026-08-13",
+  "addendum": "b2-61 L180 measured with the identical method; NOT part of the authoritative 29",
+  "b2_61_L180": {
+   "slug": "b2-61-indirekte-rede-zeitverschiebung",
+   "line": 180,
+   "field": "de",
+   "value": "Newspapers, radio news, business reports",
+   "germanTyped": true,
+   "entersAuthoredGerman": true,
+   "injected": [
+    "newspapers",
+    "radio",
+    "news",
+    "business",
+    "reports"
+   ],
+   "soleSource": [
+    "newspapers",
+    "radio",
+    "news",
+    "business",
+    "reports"
+   ],
+   "textOccurrences": {
+    "newspapers": 2,
+    "radio": 0,
+    "news": 3,
+    "business": 2,
+    "reports": 7
+   },
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT"
+  },
+  "b2_61_L179_restability": {
+   "learnerVisible": 13,
+   "silent": 9,
+   "qaFindings": 4,
+   "note": "re-measured identically to phase 8 — stable"
+  },
+  "b2_38_L466_recheck": {
+   "field": "target",
+   "path": "exercises.builder.target",
+   "evidence": "lint matched `sentence: \"…\"` inside the value of target: 'Build a nested sentence: \"The professor whose university\\'s library is modern is internationally known.\"'; the file's only real `sentence:` property is gap.sentence at L453 (array of German fragments)",
+   "entersAuthoredGerman": false,
+   "classification": "NO CONSEQUENCE",
+   "editRequired": false
+  },
+  "revisedProposals": {
+   "b2-07 L181": "Weglassprobe: „heute\" kann weg, „Hilfe\" nicht.",
+   "b2-40 L190": "warten auf + Akkusativ — immer als Einheit lernen",
+   "b2-41 L189": "Interesse an + Dativ — immer als Einheit lernen",
+   "b2-50 L186": "Genitiv oder von + Dativ: die Analyse der Daten / die Analyse von Daten",
+   "b2-61 L179": "Wann geschah die Handlung? ≠ Wann wird berichtet?"
+  },
+  "note": "no chapter data, QA code, production code, CSS or lint was modified in phase 10"
+ },
+ "phase11": {
+  "date": "2026-08-13",
+  "scope": "6 approved data corrections applied; targeted re-measurement only (no full sweep)",
+  "filesEdited": [
+   "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "chapter-b2-50-nominalisierung-data.js",
+   "chapter-b2-61-indirekte-rede-zeitverschiebung-data.js"
+  ],
+  "notEdited": [
+   "chapter-app.js",
+   "qa-engine.js",
+   "qa-assert.js",
+   "qa-data-lint.js",
+   "chapter.css",
+   "qa baselines"
+  ],
+  "harnessChange": "qa-leak-impact.html value reader now accepts a double quote inside a single-quoted literal (investigation tool only)",
+  "after": [
+   {
+    "entry": "b2-07 L181",
+    "value": "Weglassprobe: „heute\" kann weg, „Hilfe\" nicht.",
+    "injected": [
+     "heute",
+     "hilfe",
+     "weglassprobe",
+     "kann",
+     "weg",
+     "nicht"
+    ],
+    "soleSource": [
+     "weglassprobe",
+     "kann",
+     "weg",
+     "nicht"
+    ],
+    "learnerVisible": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 0,
+    "classification": "LATENT",
+    "before": {
+     "learnerVisible": 5,
+     "silent": 5,
+     "qaFindings": 0,
+     "class": "HARMFUL"
+    }
+   },
+   {
+    "entry": "b2-40 L190",
+    "value": "warten auf + Akkusativ — immer als Einheit lernen",
+    "injected": [
+     "auf",
+     "akkusativ",
+     "warten",
+     "immer",
+     "als",
+     "einheit",
+     "lernen"
+    ],
+    "soleSource": [
+     "immer",
+     "als",
+     "einheit",
+     "lernen"
+    ],
+    "learnerVisible": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 2,
+    "classification": "LATENT",
+    "before": {
+     "learnerVisible": 2,
+     "silent": 2,
+     "qaFindings": 0,
+     "class": "HARMFUL"
+    }
+   },
+   {
+    "entry": "b2-41 L189",
+    "value": "Interesse an + Dativ — immer als Einheit lernen",
+    "injected": [
+     "interesse",
+     "an",
+     "dativ",
+     "immer",
+     "als",
+     "einheit",
+     "lernen"
+    ],
+    "soleSource": [
+     "als",
+     "einheit",
+     "lernen"
+    ],
+    "learnerVisible": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 0,
+    "classification": "LATENT",
+    "before": {
+     "learnerVisible": 0,
+     "silent": 0,
+     "qaFindings": 0,
+     "class": "LATENT"
+    }
+   },
+   {
+    "entry": "b2-50 L186",
+    "value": "Genitiv oder von + Dativ: die Analyse der Daten / die Analyse von Daten",
+    "injected": [
+     "die",
+     "der",
+     "analyse",
+     "daten",
+     "genitiv",
+     "oder",
+     "von",
+     "dativ"
+    ],
+    "soleSource": [
+     "genitiv",
+     "oder",
+     "dativ"
+    ],
+    "learnerVisible": 1,
+    "silent": 1,
+    "qaFindings": 0,
+    "chapterQaTotal": 6,
+    "classification": "HARMFUL-by-rule / correct German link",
+    "note": "the single attributed occurrence is `Genitiv` (badge Noun, role object) — now admitted by authored German, as predicted in phase 9",
+    "before": {
+     "learnerVisible": 1,
+     "silent": 1,
+     "qaFindings": 0,
+     "class": "HARMFUL"
+    }
+   },
+   {
+    "entry": "b2-61 L179",
+    "value": "Wann geschah die Handlung? ≠ Wann wird berichtet?",
+    "injected": [
+     "die",
+     "wird",
+     "wann",
+     "geschah",
+     "handlung",
+     "berichtet"
+    ],
+    "soleSource": [],
+    "learnerVisible": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 14,
+    "classification": "no unique injection (classifier reports AMBIGUOUS: zero sole-source surfaces)",
+    "before": {
+     "learnerVisible": 13,
+     "silent": 9,
+     "qaFindings": 4,
+     "class": "HARMFUL"
+    }
+   },
+   {
+    "entry": "b2-61 L180",
+    "value": "Zeitungen, Nachrichten, Unternehmensberichte",
+    "injected": [
+     "zeitungen",
+     "nachrichten",
+     "unternehmensberichte"
+    ],
+    "soleSource": [
+     "zeitungen",
+     "unternehmensberichte"
+    ],
+    "learnerVisible": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 14,
+    "classification": "LATENT",
+    "before": {
+     "learnerVisible": 0,
+     "silent": 0,
+     "qaFindings": 0,
+     "class": "LATENT"
+    }
+   }
+  ],
+  "englishSourceStringsRemaining": "none in any chapter data file (remaining hits are PRODUCTION-AUDIT-HANDOFF.md prose and qa-data-lint.js self-test literals — both intentionally untouched)",
+  "newlyObserved": "b2-60 L185 de: \"Newspapers, radio news, business reports, Goethe B2 Reading\" — same defect class, out of scope, not modified",
+  "chapterQaTotals": {
+   "b2-07": {
+    "before": 0,
+    "after": 0
+   },
+   "b2-40": {
+    "before": 2,
+    "after": 2
+   },
+   "b2-41": {
+    "before": 0,
+    "after": 0
+   },
+   "b2-50": {
+    "before": 6,
+    "after": 6
+   },
+   "b2-61": {
+    "before": 18,
+    "after": 14
+   }
+  }
+ },
+ "phase12": {
+  "date": "2026-08-13",
+  "harnessChangesOnly": [
+   "attribution rule: harmful requires the injecting source string itself to be English (occurrence-level split into harmfulVisible vs legitimateVisible)",
+   "independent sourceIsEnglishText() replaces the lint-based source test (lint verdict retained as informational lintFlagged)",
+   "value reader accepts double quotes inside single-quoted literals (phase 11)",
+   "inventory rows added for b2-61 L180 and b2-60 L185"
+  ],
+  "noProductionChanges": true,
+  "A_correctedSix": [
+   {
+    "entry": "b2-07 L181",
+    "soleBefore": 7,
+    "visibleBefore": 5,
+    "soleAfter": 4,
+    "harmfulAfter": 0,
+    "legitimateAfter": 0,
+    "cls": "LEGITIMATE (German source)"
+   },
+   {
+    "entry": "b2-40 L190",
+    "soleBefore": 5,
+    "visibleBefore": 2,
+    "soleAfter": 4,
+    "harmfulAfter": 0,
+    "legitimateAfter": 0,
+    "cls": "LEGITIMATE (German source)"
+   },
+   {
+    "entry": "b2-41 L189",
+    "soleBefore": 5,
+    "visibleBefore": 0,
+    "soleAfter": 3,
+    "harmfulAfter": 0,
+    "legitimateAfter": 0,
+    "cls": "LEGITIMATE (German source)"
+   },
+   {
+    "entry": "b2-50 L186",
+    "soleBefore": 6,
+    "visibleBefore": 1,
+    "soleAfter": 3,
+    "harmfulAfter": 0,
+    "legitimateAfter": 1,
+    "cls": "LEGITIMATE (German source)",
+    "note": "Genitiv ×1, badge Noun/object, no QA code; sole-source from the corrected German string, not independently authored elsewhere"
+   },
+   {
+    "entry": "b2-61 L179",
+    "soleBefore": 4,
+    "visibleBefore": 13,
+    "soleAfter": 0,
+    "harmfulAfter": 0,
+    "legitimateAfter": 0,
+    "cls": "LEGITIMATE (German source, no unique injection)"
+   },
+   {
+    "entry": "b2-61 L180",
+    "soleBefore": 5,
+    "visibleBefore": 0,
+    "soleAfter": 2,
+    "harmfulAfter": 0,
+    "legitimateAfter": 0,
+    "cls": "LEGITIMATE (German source)"
+   }
+  ],
+  "B_b2_60_L185": {
+   "field": "de",
+   "path": ".outcomes[4].de",
+   "germanTyped": true,
+   "entersAuthoredGerman": true,
+   "injected": [
+    "newspapers",
+    "radio",
+    "news",
+    "business",
+    "reports",
+    "goethe",
+    "b",
+    "reading"
+   ],
+   "soleSourceAll": true,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "chapterQaTotal": 1,
+   "classification": "LATENT",
+   "lintDetects": false,
+   "note": "lint Signal B misses it (only `reports` is in its lexical list); independent test flags it"
+  },
+  "C_newInventoryCount": {
+   "newlyDiscovered": 11,
+   "alreadyAudited": 20,
+   "knownFalsePositives": 5
+  },
+  "stopCondition": "met: corrected six have clean attribution, b2-60 measured, targeted B2 scan complete; full sweep NOT run"
+ },
+ "phase13": {
+  "date": "2026-08-13",
+  "scope": "13 high-confidence candidates rendered; exclusions honoured (9 bilingual glosses, b2-44, corrected six, IT-* FPs, b2-38 L466)",
+  "totals": {
+   "entries": 13,
+   "injected": 64,
+   "soleSource": 64,
+   "learnerVisibleHarmful": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "harmful": 0,
+   "latent": 13,
+   "noConsequence": 0,
+   "ambiguous": 0
+  },
+  "rows": [
+   {
+    "chapter": "b2-15",
+    "line": 178,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Formal report / newspaper / business German",
+    "injected": [
+     "formal",
+     "report",
+     "newspaper",
+     "business",
+     "german"
+    ],
+    "injectedCount": 5,
+    "soleSourceCount": 5,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 3,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-16",
+    "line": 186,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Formal reports, newspapers, business German",
+    "injected": [
+     "formal",
+     "reports",
+     "newspapers",
+     "business",
+     "german"
+    ],
+    "injectedCount": 5,
+    "soleSourceCount": 5,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 8,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-17",
+    "line": 177,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Formal reports, presentations, business German",
+    "injected": [
+     "formal",
+     "reports",
+     "presentations",
+     "business",
+     "german"
+    ],
+    "injectedCount": 5,
+    "soleSourceCount": 5,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 2,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-18",
+    "line": 174,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Formal reports, business communication, scientific texts",
+    "injected": [
+     "formal",
+     "reports",
+     "business",
+     "communication",
+     "scientific",
+     "texts"
+    ],
+    "injectedCount": 6,
+    "soleSourceCount": 6,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 5,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-19",
+    "line": 193,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Same subject required",
+    "injected": [
+     "same",
+     "subject",
+     "required"
+    ],
+    "injectedCount": 3,
+    "soleSourceCount": 3,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 0,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-19",
+    "line": 195,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Formal reports, newspapers, presentations",
+    "injected": [
+     "formal",
+     "reports",
+     "newspapers",
+     "presentations"
+    ],
+    "injectedCount": 4,
+    "soleSourceCount": 4,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 0,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-20",
+    "line": 195,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Same subject required",
+    "injected": [
+     "same",
+     "subject",
+     "required"
+    ],
+    "injectedCount": 3,
+    "soleSourceCount": 3,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 2,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-21",
+    "line": 180,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Formal reports, presentations, newspapers",
+    "injected": [
+     "formal",
+     "reports",
+     "presentations",
+     "newspapers"
+    ],
+    "injectedCount": 4,
+    "soleSourceCount": 4,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 1,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-24",
+    "line": 193,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Discussion essays, presentations, academic writing",
+    "injected": [
+     "discussion",
+     "essays",
+     "presentations",
+     "academic",
+     "writing"
+    ],
+    "injectedCount": 5,
+    "soleSourceCount": 5,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 0,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-28",
+    "line": 182,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Now → Yesterday → Background → Direct speech",
+    "injected": [
+     "now",
+     "yesterday",
+     "background",
+     "direct",
+     "speech"
+    ],
+    "injectedCount": 5,
+    "soleSourceCount": 5,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 9,
+    "classification": "LATENT",
+    "inDeLinkified": {
+     "now": 2,
+     "yesterday": 1,
+     "background": 1,
+     "note": "4 English surfaces clickable INSIDE the .de outcome row itself; zero outside .de, so not attributed prose leakage"
+    }
+   },
+   {
+    "chapter": "b2-33",
+    "line": 179,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Reality: unknown. Impression: strong comparison.",
+    "injected": [
+     "reality",
+     "unknown",
+     "impression",
+     "strong",
+     "comparison"
+    ],
+    "injectedCount": 5,
+    "soleSourceCount": 5,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 2,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-59",
+    "line": 178,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Newspaper articles, radio news, business reports",
+    "injected": [
+     "newspaper",
+     "articles",
+     "radio",
+     "news",
+     "business",
+     "reports"
+    ],
+    "injectedCount": 6,
+    "soleSourceCount": 6,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 0,
+    "classification": "LATENT"
+   },
+   {
+    "chapter": "b2-60",
+    "line": 185,
+    "field": "de",
+    "path": ".outcomes[].de",
+    "value": "Newspapers, radio news, business reports, Goethe B2 Reading",
+    "injected": [
+     "newspapers",
+     "radio",
+     "news",
+     "business",
+     "reports",
+     "goethe",
+     "b",
+     "reading"
+    ],
+    "injectedCount": 8,
+    "soleSourceCount": 8,
+    "allSoleSource": true,
+    "learnerVisibleHarmful": 0,
+    "silent": 0,
+    "qaFindings": 0,
+    "chapterQaTotal": 1,
+    "classification": "LATENT"
+   }
+  ],
+  "noEdits": true
+ }
+}

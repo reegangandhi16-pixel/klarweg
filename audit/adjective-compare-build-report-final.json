@@ -1,0 +1,10 @@
+{
+ "generatorVersion": "v1",
+ "totalAdjectives": 1016,
+ "authored": 0,
+ "generated": 880,
+ "manualReview": 50,
+ "nonGradable": 86,
+ "generationFailures": [],
+ "skippedNoPolicy": []
+}

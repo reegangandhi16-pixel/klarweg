@@ -1,0 +1,264 @@
+{
+ "phase": "7",
+ "batch": 3,
+ "chapters": 4,
+ "entries": 8,
+ "results": [
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 174,
+   "field": "de",
+   "value": "Every relative pronoun belongs to ONE noun",
+   "totalNodes": 559,
+   "totalQaFindings": 0,
+   "injected": [
+    "every",
+    "relative",
+    "pronoun",
+    "belongs",
+    "to",
+    "one",
+    "noun"
+   ],
+   "soleSourceCount": 7,
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "shared": 0,
+   "classification": "LATENT",
+   "textOcc": {
+    "every": 11,
+    "relative": 50,
+    "pronoun": 18,
+    "belongs": 5,
+    "to": 43,
+    "one": 25,
+    "noun": 39
+   },
+   "linkifiedOutsideDe": 0
+  },
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 175,
+   "field": "de",
+   "value": "Main clause → clause 1 → nested clause 2 → main clause resumes",
+   "totalNodes": 559,
+   "totalQaFindings": 0,
+   "injected": [
+    "main",
+    "clause",
+    "nested",
+    "resumes"
+   ],
+   "soleSourceCount": 1,
+   "soleSource": [
+    "resumes"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "shared": 0,
+   "classification": "LATENT",
+   "textOcc": {
+    "main": 18,
+    "clause": 41,
+    "nested": 41,
+    "resumes": 0
+   },
+   "linkifiedOutsideDe": 0
+  },
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 176,
+   "field": "de",
+   "value": "Find the main clause first",
+   "totalNodes": 559,
+   "totalQaFindings": 0,
+   "injected": [
+    "main",
+    "clause",
+    "find",
+    "the",
+    "first"
+   ],
+   "soleSourceCount": 3,
+   "soleSource": [
+    "find",
+    "the",
+    "first"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "shared": 0,
+   "classification": "LATENT",
+   "textOcc": {
+    "main": 18,
+    "clause": 41,
+    "find": 8,
+    "the": 72,
+    "first": 6
+   },
+   "linkifiedOutsideDe": 0
+  },
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 177,
+   "field": "de",
+   "value": "1–2 nested clauses = natural; 3–4 = too much",
+   "totalNodes": 559,
+   "totalQaFindings": 0,
+   "injected": [
+    "nested",
+    "clauses",
+    "natural",
+    "too",
+    "much"
+   ],
+   "soleSourceCount": 4,
+   "soleSource": [
+    "clauses",
+    "natural",
+    "too",
+    "much"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "shared": 0,
+   "classification": "LATENT",
+   "textOcc": {
+    "nested": 41,
+    "clauses": 26,
+    "natural": 2,
+    "too": 3,
+    "much": 0
+   },
+   "linkifiedOutsideDe": 0
+  },
+  {
+   "slug": "b2-38-verschachtelte-relativsaetze",
+   "line": 466,
+   "field": "sentence",
+   "value": "The professor whose university's library is modern is internationally known.",
+   "injected": [],
+   "soleSourceCount": 0,
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "PENDING",
+   "note": "exact value not present in harvested contribution map — harvest reachability under investigation"
+  },
+  {
+   "slug": "b2-39-relativsaetze-wer-der",
+   "line": 191,
+   "field": "de",
+   "value": "Common in proverbs and formal writing",
+   "totalNodes": 641,
+   "totalQaFindings": 0,
+   "injected": [
+    "common",
+    "in",
+    "proverbs",
+    "and",
+    "formal",
+    "writing"
+   ],
+   "soleSourceCount": 5,
+   "soleSource": [
+    "common",
+    "proverbs",
+    "and",
+    "formal",
+    "writing"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "shared": 6,
+   "classification": "LATENT",
+   "textOcc": {
+    "common": 5,
+    "in": 16,
+    "proverbs": 14,
+    "and": 28,
+    "formal": 4,
+    "writing": 6
+   },
+   "linkifiedOutsideDe": 0,
+   "note": "`in` linkified 7 (1 inDe, 6 outside) but shared with legitimate German `in` — not attributed"
+  },
+  {
+   "slug": "b2-40-verben-mit-praepositionen",
+   "line": 190,
+   "field": "de",
+   "value": "Never learn the verb alone",
+   "totalNodes": 747,
+   "totalQaFindings": 2,
+   "injected": [
+    "never",
+    "learn",
+    "the",
+    "verb",
+    "alone"
+   ],
+   "soleSourceCount": 5,
+   "attributed": 2,
+   "silent": 2,
+   "qaFindings": 0,
+   "shared": 0,
+   "classification": "HARMFUL",
+   "textOcc": {
+    "never": 5,
+    "learn": 5,
+    "the": 50,
+    "verb": 33,
+    "alone": 3
+   },
+   "linkifiedOutsideDe": 2,
+   "samples": [
+    {
+     "surface": "verb",
+     "badge": "Noun",
+     "role": "object",
+     "qa": []
+    },
+    {
+     "surface": "verb",
+     "badge": "Noun",
+     "role": "object",
+     "qa": []
+    }
+   ]
+  },
+  {
+   "slug": "b2-41-nomen-mit-praepositionen",
+   "line": 189,
+   "field": "de",
+   "value": "Never learn the noun alone",
+   "totalNodes": 699,
+   "totalQaFindings": 0,
+   "injected": [
+    "never",
+    "learn",
+    "the",
+    "noun",
+    "alone"
+   ],
+   "soleSourceCount": 5,
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "shared": 0,
+   "classification": "LATENT",
+   "textOcc": {
+    "never": 5,
+    "learn": 4,
+    "the": 46,
+    "noun": 55,
+    "alone": 1
+   },
+   "linkifiedOutsideDe": 0
+  }
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "canonicalFiles": 36274,
+ "aliases": 3033,
+ "crossSchemeAvoided": 3021,
+ "rateVariantsAvoided": 12,
+ "duplicateManifestKeysWithinVoice": 0,
+ "textsNeedingVariantEntry": 7541,
+ "outputPathCollisions": 0,
+ "byFamily": {
+  "story": 1770,
+  "clickable-word": 12725,
+  "listening": 1352,
+  "reading": 259,
+  "speaking": 1231,
+  "grammar": 116,
+  "vocabulary": 15038,
+  "word-form": 3783
+ }
+}

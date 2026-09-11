@@ -1,0 +1,176 @@
+{
+ "chapter-a2-26-adjektiv-bestimmter-artikel-data.js": {
+  "storySpeakers": [
+   "Ida",
+   "Timo"
+  ],
+  "female": "Ida",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-27-adjektiv-unbestimmter-artikel-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Greta"
+  ],
+  "female": "Greta",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-28-als-wenn-data.js": {
+  "storySpeakers": [
+   "Insa",
+   "Timo"
+  ],
+  "female": "Insa",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-29-indefinitpronomen-data.js": {
+  "storySpeakers": [
+   "Nadja",
+   "Timo"
+  ],
+  "female": "Nadja",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-3-artikel-review-data.js": {
+  "storySpeakers": [
+   "Merle",
+   "Timo"
+  ],
+  "female": "Merle",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Merle",
+   "Timo"
+  ]
+ },
+ "chapter-a2-30-verben-praepositionen-data.js": {
+  "storySpeakers": [
+   "Wibke",
+   "Timo"
+  ],
+  "female": "Wibke",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-31-w-fragen-praepositionen-data.js": {
+  "storySpeakers": [
+   "Alina",
+   "Timo"
+  ],
+  "female": "Alina",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-32-konjunktiv2-wuensche-hoeflichkeit-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Frau Reimers"
+  ],
+  "female": "Frau Reimers",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-33-relativsatz-nominativ-data.js": {
+  "storySpeakers": [
+   "Merit",
+   "Timo"
+  ],
+  "female": "Merit",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-34-relativsatz-akkusativ-data.js": {
+  "storySpeakers": [
+   "Wenke",
+   "Timo"
+  ],
+  "female": "Wenke",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-35-goethe-mini-4-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Silke"
+  ],
+  "female": "Silke",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-4-weil-data.js": {
+  "storySpeakers": [
+   "Rieke",
+   "Kilian"
+  ],
+  "female": "Rieke",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Rieke",
+   "Kilian"
+  ]
+ },
+ "chapter-a2-5-dass-data.js": {
+  "storySpeakers": [
+   "Frauke",
+   "Marek"
+  ],
+  "female": "Frauke",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Marek",
+   "Frauke"
+  ]
+ },
+ "chapter-a2-6-modalverben-praeteritum-data.js": {
+  "storySpeakers": [
+   "Anke",
+   "Timo"
+  ],
+  "female": "Anke",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Timo",
+   "Anke"
+  ]
+ },
+ "chapter-a2-7-possessivartikel-dativ-data.js": {
+  "storySpeakers": [
+   "Silke",
+   "Nils"
+  ],
+  "female": "Silke",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Silke",
+   "Nils"
+  ]
+ },
+ "chapter-a2-8-komparativ-superlativ-data.js": {
+  "storySpeakers": [
+   "Sina",
+   "Timo"
+  ],
+  "female": "Sina",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Sina",
+   "Timo"
+  ]
+ },
+ "chapter-a2-9-vergleiche-als-wie-data.js": {
+  "storySpeakers": [
+   "Jara",
+   "Timo"
+  ],
+  "female": "Jara",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Jara",
+   "Timo"
+  ]
+ }
+}

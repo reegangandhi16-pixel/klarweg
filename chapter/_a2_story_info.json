@@ -1,0 +1,247 @@
+{
+ "chapter-a2-1-genitiv-data.js": {
+  "num": "1",
+  "female": "Petra",
+  "male": "Malte",
+  "scene": "Erster Tag im A2-Kurs \\u2014 Berlin",
+  "intro": "Season 2 begins. The Goethe A1 certificates have just been handed out, and the same classroom feels new: today is the first day of the A2 course. On the table lie books, bags, phones and photos \\u2014 and the group discovers how naturally Germans say whose things they are: Annas Buch, Petra\\u2019 Handy, Rohans Tasche."
+ },
+ "chapter-a2-10-goethe-mini-1-data.js": {
+  "num": "10",
+  "female": "Runa",
+  "male": "Nick",
+  "scene": "Aufw\\u00e4rmen vor dem Goethe-Mini-Test \\u2014 Sprachschule Berlin",
+  "intro": "One week before the mock exam, the class runs a warm-up. Runa fires questions; she and Nick answer with everything they\\'ve built this phase — a Genitiv here, a weil-clause there, a modal in the Präteritum, a comparison with als. Nothing new is taught."
+ },
+ "chapter-a2-11-wenn-data.js": {
+  "num": "11",
+  "female": "Wiebke",
+  "male": "Timo",
+  "scene": "Abschiedsplanung vor den Ferien \\u2014 Sprachschule Berlin",
+  "intro": "It\\u2019s the last week before a long break \\u2014 Wiebke is leaving for a sailing regatta in Argentina, and the class is planning a small farewell party. Every plan hangs on a condition: if the weather holds, if everyone\\u2019s free, whenever Wiebke checks his phone. That makes it the perfect stage for wenn, the word that carries \"if\", \"whenever\" and \"when\" all at once. Wiebke keeps the verb at the end."
+ },
+ "chapter-a2-12-reflexive-verben-data.js": {
+  "num": "12",
+  "female": "Enya",
+  "male": "Timo",
+  "scene": "Der Morgen vor der Hochzeit \\u2014 Sprachschule Berlin",
+  "intro": "Enya\\u2019s sister is getting married on Saturday, and the whole class is caught up in the preparation \\u2014 the dress, the cards, the nerves. Everyone is getting ready, hurrying, calming down, looking forward to it. Which makes it the perfect morning for reflexive verbs: sich beeilen, sich freuen, sich anziehen, sich entspannen. Enya keeps the little pronoun \\u2014 mich, dich, sich \\u2014 in exactly the right place."
+ },
+ "chapter-a2-13-praepositionen-dativ-data.js": {
+  "num": "13",
+  "female": "Frau Nissen",
+  "male": "Timo",
+  "scene": "Ein Vormittag in der Stadt \\u2014 Sprachschule Berlin",
+  "intro": "Timo\\'s bicycle has vanished somewhere between the bus stop and the museum, so the morning turns into a small city adventure: a trip to the police, a report filed with Frau Nissen, a coffee across from the station. Every step is a preposition of place and motion — mit dem Bus, zur Polizei, gegenüber dem Bahnhof."
+ },
+ "chapter-a2-14-wechselpraepositionen-data.js": {
+  "num": "14",
+  "female": "Frieda",
+  "male": "Timo",
+  "scene": "Umzugstag in Annas neuer Wohnung \\u2014 Berlin",
+  "intro": "Frieda has a new flat and everyone shows up to help move furniture \\u2014 which means a whole morning of \"put it there / no, it\\u2019s already here\". The sofa goes against the wall, the lamp between the windows, the boxes into the cellar. Every sentence forces the choice: moving something (wohin? \\u2192 Akkusativ) or saying where it now sits (wo? \\u2192 Dativ). Frieda turns the chaos into one clean rule."
+ },
+ "chapter-a2-15-positions-richtungsverben-data.js": {
+  "num": "15",
+  "female": "Meret",
+  "male": "Timo",
+  "scene": "Projektplanung im B\\u00fcro \\u2014 \\u201eeine autofreie Woche\\u201c",
+  "intro": "The class is planning a car-free week for the city, and the office is chaos: plans on the table, maps on the wall, keys stuck in bags, everyone finding a seat. It\\u2019s the ideal stage for the position/direction pairs \\u2014 stellen vs stehen, legen vs liegen, h\\u00e4ngen both ways. Meret keeps asking the one question that picks the verb: Wo, or wohin?"
+ },
+ "chapter-a2-16-goethe-mini-2-data.js": {
+  "num": "16",
+  "female": "Frau Wolter",
+  "male": "Timo",
+  "scene": "Aufw\\u00e4rmen vor dem Goethe-Mini-Test 2 \\u2014 Sprachschule Berlin",
+  "intro": "Two weeks before the real exam, the class runs its second big warm-up — and life is providing the material: Timo needs an ID card from the Behörde, has a job interview coming up, and is planning a car-free city day. Every answer recycles a whole phase of grammar. Frau Wolter, behind the counter, just listens for the click."
+ },
+ "chapter-a2-17-werden-data.js": {
+  "num": "17",
+  "female": "Neele",
+  "male": "Timo",
+  "scene": "Ein regnerischer Nachmittag \\u2014 Sprachschule Berlin",
+  "intro": "A rainy afternoon, a bandaged finger, and a class full of plans for next year \\u2014 the perfect stage for werden. Neele asks what everyone will do, what they\\u2019ll become, and what the weather is turning into, and the little verb does all three jobs at once: future, prediction, change of state."
+ },
+ "chapter-a2-18-ortsangaben-data.js": {
+  "num": "18",
+  "female": "Frauke",
+  "male": "Timo",
+  "scene": "Vor der Sprachschule \\u2014 eine Touristin fragt nach dem Weg",
+  "intro": "A tourist stops the class outside the school, lost and looking for the Dom. Everyone jumps in with directions \\u2014 links, rechts, geradeaus, an der Ampel \\u2014 and by the time she finds it, the whole class has drilled every location phrase in real conversation."
+ },
+ "chapter-a2-19-indirekte-fragen-data.js": {
+  "num": "19",
+  "female": "Franka",
+  "male": "Timo",
+  "scene": "Ein voller Terminkalender — Sprachschule Berlin",
+  "intro": "Between a delayed train, a doctor’s appointment and a mountain of admin, everyone in the group needs information — and nobody wants to sound rude asking for it. Franka shows them the trick: wrap any question in Kannst du mir sagen, …? or Ich weiß nicht, … and it turns polite and indirect, with the verb sliding to the end."
+ },
+ "chapter-a2-2-perfekt-review-data.js": {
+  "num": "2",
+  "female": "Insa",
+  "male": "Fynn",
+  "scene": "Montagmorgen im A2-Kurs \\u2014 Berlin",
+  "intro": "Monday morning, week two of the A2 course. Everyone comes in full of weekend stories \\u2014 a flea market, a rented bicycle, a horse \\u2014 and Insa turns it into the perfect Perfekt workout: haben or sein in position 2, Partizip II at the end. You know every rule already. Today it becomes reflex."
+ },
+ "chapter-a2-20-was-fuer-ein-data.js": {
+  "num": "20",
+  "female": "Solveig",
+  "male": "Timo",
+  "scene": "In der Bücherei — Nachmittag",
+  "intro": "Solveig is helping at the Bücherei this week — sorting books, running the driving-school desk, and translating for a Gebärdendolmetscher session. Every second conversation starts with was für ein(e): what kind of book, what kind of course, what kind of advice."
+ },
+ "chapter-a2-21-verben-dativ-akkusativ-data.js": {
+  "num": "21",
+  "female": "Karla",
+  "male": "Timo",
+  "scene": "Max\\",
+  "intro": "It\\'s Karla\\'s birthday, and Timo is showing her the photo album he made — giving her the pictures, explaining the songs, promising the headphones next. Every two-object sentence puts Dativ before Akkusativ: Ich zeige dir das Album, ich schenke dir das Album."
+ },
+ "chapter-a2-22-konjunktiv2-koennte-data.js": {
+  "num": "22",
+  "female": "Ronja",
+  "male": "Timo",
+  "scene": "Bewerbung schreiben — Sprachschule Berlin",
+  "intro": "Ronja is putting together a job application while Timo\\'s cable breaks nearby — and every fix becomes a chance to soften a request: not \"Kannst du?\" but \"Könntest du?\", the same offer of help, asked more politely."
+ },
+ "chapter-a2-23-konjunktiv2-sollte-data.js": {
+  "num": "23",
+  "female": "Petra",
+  "male": "Timo",
+  "scene": "Vor der Abschlussprüfung — Sprachschule Berlin",
+  "intro": "The Abschlussprüfung is close, and Timo is nervous — so Petra keeps turning bare commands into gentler advice: not \"Du sollst mehr üben\" but \"Du solltest mehr üben\", the same idea offered as a recommendation rather than an order."
+ },
+ "chapter-a2-24-deshalb-trotzdem-data.js": {
+  "num": "24",
+  "female": "Merle",
+  "male": "Timo",
+  "scene": "Ein nebliger Samstagmorgen — Sprachschule Berlin",
+  "intro": "A grim forecast splits the class in two: some give in to the rain and stay home, Timo rides anyway. Merle uses the moment to drill the difference — deshalb for the outcome you\\'d expect, trotzdem for the one that defies it — both triggering inversion."
+ },
+ "chapter-a2-25-goethe-mini-3-data.js": {
+  "num": "25",
+  "female": "Frau Sander",
+  "male": "Timo",
+  "scene": "Ein voller Nachmittag — Sprachschule Berlin",
+  "intro": "A full afternoon before the final exam: Timo is nervous and looking for advice, and Frau Sander answers with everything from Chapters 19–24 at once — an indirect question, a sollte, a deshalb, a was für ein — all inside one reassuring conversation."
+ },
+ "chapter-a2-26-adjektiv-bestimmter-artikel-data.js": {
+  "num": "26",
+  "female": "Ida",
+  "male": "Timo",
+  "scene": "Einkaufen vor dem Bergwochenende — Sprachschule Berlin",
+  "intro": "A shopping trip before a mountain weekend turns into an adjective drill: Ida checks off the warm jacket, the big backpack, the small tent, while Timo makes sure nothing important — the good map — gets left behind. Der/die/das already show gender and case, so almost every adjective just needs -e or -en."
+ },
+ "chapter-a2-27-adjektiv-unbestimmter-artikel-data.js": {
+  "num": "27",
+  "female": "Greta",
+  "male": "Timo",
+  "scene": "Ein Ausflug zum Nationalpark — Sprachschule Berlin",
+  "intro": "A weekend at the national park turns into an adjective drill: Timo needs a small kayak and a warm suit, and Greta hands him a light paddle for a cold day. Unlike der/die/das, ein doesn\\'t always show gender itself — so the adjective has to work harder."
+ },
+ "chapter-a2-28-als-wenn-data.js": {
+  "num": "28",
+  "female": "Insa",
+  "male": "Timo",
+  "scene": "Rohans neue Wohnung — Sprachschule Berlin",
+  "intro": "Insa just moved into a new flat with a flatmate, a cat, and a mountain view — the perfect excuse to swap childhood memories (als, her cat Mausi) and daily habits (wenn, whenever her cousin visited with his dog) with Timo. One test decides which word fits: did it happen once, in the past? als. Everything else? wenn."
+ },
+ "chapter-a2-29-indefinitpronomen-data.js": {
+  "num": "29",
+  "female": "Nadja",
+  "male": "Timo",
+  "scene": "Vor dem Aushang — Rohans Wohnhaus",
+  "intro": "Nadja checks in on an empty house while Timo waters the flowers and feeds the waiting cat — and every answer reaches for an indefinite pronoun: niemand is home, nobody has given anything yet, but someone should know where the food is."
+ },
+ "chapter-a2-3-artikel-review-data.js": {
+  "num": "3",
+  "female": "Merle",
+  "male": "Timo",
+  "scene": "Berufsmesse in der Cafeteria \\u2014 Sprachschule Berlin",
+  "intro": "Week three, and the language school is buzzing: today there\\'s a small Berufsmesse — a careers fair — in the cafeteria. Merle and Timo wander from table to table meeting a gardener, a bank clerk, a geriatric nurse, weighing whether Merle should switch to something with children. Every job, every place, every subject needs its article — der, die, das."
+ },
+ "chapter-a2-30-verben-praepositionen-data.js": {
+  "num": "30",
+  "female": "Wibke",
+  "male": "Timo",
+  "scene": "Bahnhofshalle — Sprachschule Berlin",
+  "intro": "Wibke is waiting for a call in the station hall, dreaming about a career change, while Timo waits with her. Every fixed verb-preposition pair does the talking: warten auf, sich freuen auf, sich interessieren für, glauben an."
+ },
+ "chapter-a2-31-w-fragen-praepositionen-data.js": {
+  "num": "31",
+  "female": "Alina",
+  "male": "Timo",
+  "scene": "Am Bahnsteig — Sprachschule Berlin",
+  "intro": "A radio interview with a musician gives Alina and Timo plenty to ask about — without ever repeating the noun. Worüber spricht sie? Über ihren Karrierewechsel. Womit hat sie angefangen? Mit einem kleinen Konzert."
+ },
+ "chapter-a2-32-konjunktiv2-wuensche-hoeflichkeit-data.js": {
+  "num": "32",
+  "female": "Frau Reimers",
+  "male": "Timo",
+  "scene": "Im Café — Sprachschule Berlin",
+  "intro": "A café table becomes a crash course in polite German — Timo would like a bread and a coffee, and Frau Reimers takes his order with hätte, wäre, würde, könnte and sollte, all in one relaxed exchange."
+ },
+ "chapter-a2-33-relativsatz-nominativ-data.js": {
+  "num": "33",
+  "female": "Merit",
+  "male": "Timo",
+  "scene": "Beim Radiohören — Wohnzimmer",
+  "intro": "A radio show about music and culture gives Merit and Timo the perfect excuse to describe people in one flowing sentence: der Mann, der die Nachrichten liest; die Frau, die beim Festival singt; das Kind, das immer tanzt."
+ },
+ "chapter-a2-34-relativsatz-akkusativ-data.js": {
+  "num": "34",
+  "female": "Wenke",
+  "male": "Timo",
+  "scene": "Am Wochenende — Unterhaltung & Medien",
+  "intro": "Wenke is reading a new novel and Timo wants to know everything about it — the author she likes, the chapter she loves most — every description now needing the Akkusativ relative pronoun: der Autor, den ich mag; das Kapitel, das ich liebe."
+ },
+ "chapter-a2-35-goethe-mini-4-data.js": {
+  "num": "35",
+  "female": "Silke",
+  "male": "Timo",
+  "scene": "Der letzte Nachmittag vor der Prüfung — Sprachschule Berlin",
+  "intro": "The last afternoon before the real exam: Timo hasn\\'t revised everything, and Silke admits she keeps drifting into the subjunctive — wishing for more time, and looking forward to a stress-free week once it\\'s over. Nothing new — just Chapters 25 through 34, all at once."
+ },
+ "chapter-a2-4-weil-data.js": {
+  "num": "4",
+  "female": "Rieke",
+  "male": "Kilian",
+  "scene": "Der Morgen nach der Berufsmesse \\u2014 Sprachschule Berlin",
+  "intro": "The morning after the careers fair, the classroom is full of questions — and every one of them starts with warum? Kilian explains why he studies so much chemistry (he\\'s training as a medical assistant); Rieke explains why she\\'d rather learn English and a little Latin. The word weil answers them all, sliding the verb to the end."
+ },
+ "chapter-a2-5-dass-data.js": {
+  "num": "5",
+  "female": "Frauke",
+  "male": "Marek",
+  "scene": "Medienwoche im A2-Kurs \\u2014 Sprachschule Berlin",
+  "intro": "It\\'s film-and-media week, and Marek has started a blog about German films that Frauke isn\\'t sure she trusts. Every \"I think…\", \"I hope…\", \"I know…\" hides the same engine: the word dass, with the verb sliding to the end — just like weil last week."
+ },
+ "chapter-a2-6-modalverben-praeteritum-data.js": {
+  "num": "6",
+  "female": "Anke",
+  "male": "Timo",
+  "scene": "Montagmorgen \\u2014 Geschichten vom Wochenende, Sprachschule Berlin",
+  "intro": "A quiet Monday, and Anke wants to know why Timo missed the wedding — work, his boss said no — swapping stories about what everyone could, had to, and wanted to do. The modal past — konnte, musste, wollte — is how Germans actually narrate it."
+ },
+ "chapter-a2-7-possessivartikel-dativ-data.js": {
+  "num": "7",
+  "female": "Silke",
+  "male": "Nils",
+  "scene": "Haustiergeschichten vor dem Kursfest \\u2014 Sprachschule Berlin",
+  "intro": "Silke checks in on her dog, and Nils reports back — how he\\'s doing, whether he barks at the neighbour, whether he\\'s playing with his ball. Every story about someone and their animal needs a dative possessive: mit meinem Hund, bei ihren Eltern."
+ },
+ "chapter-a2-8-komparativ-superlativ-data.js": {
+  "num": "8",
+  "female": "Sina",
+  "male": "Timo",
+  "scene": "Die gro\\u00dfe Klassenumfrage \\u2014 Sprachschule Berlin",
+  "intro": "Sina and Timo argue over which school suits their son better — bigger, with a shorter walk, or the one with the best gym — and every argument reaches for a comparison: größer als, am schönsten, der beste."
+ },
+ "chapter-a2-9-vergleiche-als-wie-data.js": {
+  "num": "9",
+  "female": "Jara",
+  "male": "Timo",
+  "scene": "Filmabend-Planung im Kurs \\u2014 Sprachschule Berlin",
+  "intro": "Film night is being planned, and Jara and Timo can\\'t agree — is this trailer better than the last one, or just as exciting? The evening becomes a live drill in als for a difference and wie for an equality."
+ }
+}

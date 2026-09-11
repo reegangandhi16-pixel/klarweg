@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources · Klarweg — German learning tools for Hindi speakers</title>
+<meta name="description" content="Free Klarweg resources: the colour-coded grammar key, a Hindi-friendly pronunciation guide, downloadable PDFs, and your saved-words vocabulary review.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .grammar-key { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .gk { display:flex; align-items:center; gap:10px; padding:12px 14px; background:var(--bg-surface); border:1px solid var(--hairline); border-radius:var(--r-md); font-size:14px; }
+  .gk i { width:12px; height:12px; border-radius:3px; flex:0 0 auto; }
+  .gk b { font-weight:600; }
+  .gk span { color:var(--ink-tertiary); font-size:12.5px; }
+  .pron-pair { display:flex; gap:10px; margin:14px 0 4px; }
+  .pron-cell { flex:1; text-align:center; padding:16px 10px; background:var(--bg-canvas); border:1px solid var(--hairline-light); border-radius:var(--r-md); }
+  .pron-cell .w { font-family:var(--font-german); font-size:24px; font-weight:500; }
+  .pron-cell .ipa { font-family:var(--font-mono); font-size:12px; color:var(--ink-tertiary); margin-top:4px; }
+  .pron-cell .hi { font-size:13px; color:var(--ink-secondary); margin-top:2px; }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Klarweg home">Klarweg</a>
+    <div class="nav-links">
+      <a href="courses.html">Courses</a>
+      <a href="goethe-exam.html">Goethe Exam</a>
+      <a href="ausbildung.html">Ausbildung</a>
+      <a href="resources.html" class="active">Resources</a>
+      <a href="about.html">About</a>
+    </div>
+    <a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Begin free</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow-row"><span class="eyebrow">Resources</span></div>
+    <h1 class="display-xl">Tools to learn <span class="accent">faster.</span></h1>
+    <p class="lede">The reference material behind the method — free to use. The colour key that runs through every page, a pronunciation guide built for Hindi speakers, downloadable PDFs, and your personal vocabulary review.</p>
+  </div>
+</section>
+
+<!-- GRAMMAR COLOUR KEY -->
+<section class="section-warm">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Reference</span>
+      <h2 class="display-md">The grammar colour key.</h2>
+      <p class="lede">Every colour in Klarweg means one grammatical role. Learn the five core roles and the rest follows. This key is the same on every page, A1 to C2.</p>
+    </div>
+    <div class="grammar-key">
+      <div class="gk"><i style="background:var(--g-subject)"></i><b>Subject</b><span>blue</span></div>
+      <div class="gk"><i style="background:var(--g-verb)"></i><b>Verb</b><span>red</span></div>
+      <div class="gk"><i style="background:var(--g-object)"></i><b>Object</b><span>green</span></div>
+      <div class="gk"><i style="background:var(--g-time)"></i><b>Time</b><span>purple</span></div>
+      <div class="gk"><i style="background:var(--g-place)"></i><b>Place</b><span>orange</span></div>
+      <div class="gk"><i style="background:var(--g-akkusativ)"></i><b>Akkusativ</b><span>emerald</span></div>
+      <div class="gk"><i style="background:var(--g-dativ)"></i><b>Dativ</b><span>olive</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRONUNCIATION GUIDE -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">For Hindi speakers</span>
+      <h2 class="display-md">The sounds that trip Hindi speakers up.</h2>
+      <p class="lede">Hindi has no clean v/w split and no German <span class="de-italic">ch</span>. These pairs are the ones worth drilling first.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="card-num">Pair 01 · v vs w</div>
+        <div class="pron-pair">
+          <div class="pron-cell"><div class="w"><span style="color:var(--coral)">V</span>ater</div><div class="ipa">/ˈfaːtɐ/</div><div class="hi">faatar · father</div></div>
+          <div class="pron-cell"><div class="w"><span style="color:var(--coral)">W</span>asser</div><div class="ipa">/ˈvasɐ/</div><div class="hi">vaasar · water</div></div>
+        </div>
+        <p style="margin-top:12px">German <b>v</b> sounds like English <i>f</i>; German <b>w</b> sounds like English <i>v</i>.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-num">Pair 02 · ich vs Buch</div>
+        <div class="pron-pair">
+          <div class="pron-cell"><div class="w">i<span style="color:var(--coral)">ch</span></div><div class="ipa">/ɪç/</div><div class="hi">ish · soft hiss</div></div>
+          <div class="pron-cell"><div class="w">Bu<span style="color:var(--coral)">ch</span></div><div class="ipa">/buːx/</div><div class="hi">bookh · throat</div></div>
+        </div>
+        <p style="margin-top:12px">After i/e → soft <i>ç</i>. After a/o/u → hard <i>x</i> (like Hindi <span class="de-italic">kh</span>).</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-num">Pair 03 · ö &amp; ü</div>
+        <div class="pron-pair">
+          <div class="pron-cell"><div class="w">sch<span style="color:var(--coral)">ö</span>n</div><div class="ipa">/ʃøːn/</div><div class="hi">round lips, say e</div></div>
+          <div class="pron-cell"><div class="w">m<span style="color:var(--coral)">ü</span>de</div><div class="ipa">/ˈmyːdə/</div><div class="hi">round lips, say ee</div></div>
+        </div>
+        <p style="margin-top:12px">No Hindi equivalent — shape lips for o/u, but say e/ee inside.</p>
+      </div>
+    </div>
+    <p class="form-note" style="margin-top:20px">Full, tappable audio drills live inside every chapter. <a href="chapter/chapter-a1-1-alphabet.html" style="color:var(--accent);font-weight:600">Try Chapter 1 →</a></p>
+  </div>
+</section>
+
+<!-- DOWNLOADS -->
+<section class="section-elevated">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Downloads</span>
+      <h2 class="display-md">Take it offline.</h2>
+      <p class="lede">Every chapter ships with downloadable PDFs for revision and offline study. Here's what's inside each one.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card card-hover reveal"><div class="card-num">PDF</div><h3>Vocabulary</h3><p>The full chapter vocabulary — translations, genders, plurals and example sentences — in one printable sheet.</p><span class="card-link">Inside every chapter</span></div>
+      <div class="card card-hover reveal"><div class="card-num">PDF</div><h3>Grammar rules</h3><p>Explanations, structures, examples, exceptions and revision tables for the chapter's grammar.</p><span class="card-link">Inside every chapter</span></div>
+      <div class="card card-hover reveal"><div class="card-num">PDF</div><h3>Homework</h3><p>Extra exercises, writing tasks and speaking practice to consolidate the chapter on your own time.</p><span class="card-link">Inside every chapter</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SAVED WORDS -->
+<section>
+  <div class="container">
+    <div class="grid grid-2" style="gap:48px;align-items:center">
+      <div>
+        <span class="eyebrow" style="display:block;margin-bottom:16px">Your vocabulary</span>
+        <h2 class="display-md" style="margin:0 0 18px">Saved Words.</h2>
+        <p class="lede" style="margin-bottom:24px">Tap the star on any word, anywhere in Klarweg, and it lands in your personal Saved Words list — organised by level, searchable, and ready for review.</p>
+        <a href="account/saved-words.html" class="btn btn-primary">Open Saved Words
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <ul class="flist">
+        <li><span class="tick"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Organised by level — A1, A2, B1, B2</li>
+        <li><span class="tick"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Search and filter by word type</li>
+        <li><span class="tick"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>German, English and Hindi for every word</li>
+        <li><span class="tick"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Built for review and spaced repetition</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container">
+    <div class="inner">
+      <h2 class="display-md">See the method in action.</h2>
+      <p class="lede">The best resource is a real chapter. Chapter 1 is free — no signup, no card.</p>
+      <div class="hero-ctas">
+        <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary">Begin Chapter 1
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="courses.html" class="btn btn-secondary">Browse courses</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Klarweg</a>
+        <p>The visual, Hindi-first way to learn German — from A1 to C2, aligned to the Goethe-Zertifikat.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Levels</h4>
+        <a href="a1.html">A1 · Foundations</a>
+        <a href="a2.html">A2 · Elementary</a>
+        <a href="b1.html">B1 · Intermediate</a>
+        <a href="b2.html">B2 · Upper-int.</a>
+        <a href="c1.html">C1 · Advanced</a>
+        <a href="c2.html">C2 · Mastery</a>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">Courses</a>
+        <a href="goethe-exam.html">Goethe Exam</a>
+        <a href="ausbildung.html">Ausbildung</a>
+        <a href="resources.html">Resources</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="account/saved-words.html">Saved words</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-meta">© <span data-year>2026</span> Klarweg · German for Hindi-speaking learners</div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="resources.html">Resources</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

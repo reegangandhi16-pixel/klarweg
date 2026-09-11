@@ -1,0 +1,169 @@
+{
+ "$schema": "klarweg-audio-audit/live-resolution/v1",
+ "generatedAt": "2026-09-09",
+ "method": "every one of the 40,095 inventory rows was resolved through the real kw-audio-engine.js with the real published manifests loaded (audit/_audio-resolution-check.html → KW_resolveInfo). Nothing was played, nothing generated.",
+ "engine": {
+  "totalMergedWords": 12036,
+  "sentenceManifestEntries": 126,
+  "canonicalKeys": 123,
+  "canonicalCollisionsRefused": 3,
+  "sentenceOfLineKeys": 122,
+  "vocabSources": [
+   {
+    "id": "vocab-cdn",
+    "entries": 9403,
+    "added": 9403,
+    "alreadyCovered": 0,
+    "ok": true
+   },
+   {
+    "id": "a1-words",
+    "entries": 1902,
+    "added": 1586,
+    "alreadyCovered": 316,
+    "ok": true
+   },
+   {
+    "id": "a2-words",
+    "entries": 1444,
+    "added": 1047,
+    "alreadyCovered": 397,
+    "ok": true
+   },
+   {
+    "id": "b1-words",
+    "entries": 108,
+    "added": 0,
+    "alreadyCovered": 108,
+    "ok": true
+   }
+  ]
+ },
+ "totals": {
+  "rows": 40095,
+  "resolving": 17293,
+  "notResolving": 22802
+ },
+ "byFamily": {
+  "story": {
+   "total": 1773,
+   "resolved": 0
+  },
+  "listening": {
+   "total": 1358,
+   "resolved": 10,
+   "byMatch": {
+    "exact": 1,
+    "case": 9,
+    "none": 1348
+   }
+  },
+  "reading": {
+   "total": 258,
+   "resolved": 0
+  },
+  "speaking": {
+   "total": 1229,
+   "resolved": 0
+  },
+  "grammar": {
+   "total": 114,
+   "resolved": 0
+  },
+  "vocabulary": {
+   "total": 15590,
+   "resolved": 13858,
+   "byMatch": {
+    "exact": 13820,
+    "case": 6,
+    "canonical": 32,
+    "none": 1732
+   }
+  },
+  "clickable-word": {
+   "total": 15903,
+   "resolved": 3425,
+   "byMatch": {
+    "exact": 3033,
+    "case": 367,
+    "canonical": 25,
+    "none": 12478
+   },
+   "bySource": {
+    "vocab-manifest": 3392,
+    "manifest": 33,
+    "none": 12478
+   }
+  },
+  "word-form": {
+   "total": 3870,
+   "resolved": 0
+  }
+ },
+ "beforeRepairBaseline": {
+  "source": "audit/audio-scan/_ab-split.json — the same resolution run with only the vocab-cdn manifest wired, i.e. the engine as it was",
+  "vocabularyTermsResolving": 4425,
+  "vocabularyAssetsResolving": 8850,
+  "clickableWordResolving": 2125,
+  "textManifestRows": 33,
+  "listening": 10,
+  "total": 11018
+ },
+ "recoveredByRepair": {
+  "vocabularyTerms": 2504,
+  "vocabularyAssets": 5008,
+  "clickableWord": 1267,
+  "total": 6275,
+  "note": "recovered = resolves now, did not resolve before. Zero files were generated to achieve this."
+ },
+ "needsHumanReview": {
+  "vocabularyTermsFlagged": 276,
+  "vocabularyAssetsFlagged": 552,
+  "wordLayerAssetsFlagged": 245,
+  "rule": "text that cannot be synthesized as-is: slash alternations (der/die/das), ampersands (& Co), parenthetical qualifiers (geben (Unterricht)), bare numerals, single letters, spelled-out strings and pronunciation hints",
+  "unresolvedListeningSpeakerCases": 15
+ },
+ "criticalDistinction": "story / reading / speaking / grammar resolve at 0 because those MP3s do not exist anywhere — not because of a lookup defect. The canonical-key repair was verified separately against the frozen ID manifests (audit/audio-scan/_canon-resolvability.json): 1,761 of 1,773 story rows and 148 of 258 reading rows now match their manifest text, so when those files are generated they will be found. Publishing them into the text-keyed manifest.json is the remaining gate.",
+ "flaggedVocabSample": [
+  "der/die/das",
+  "ein/eine",
+  "der/die Kranke",
+  "eigene/eigener",
+  "kein/keine",
+  "viel/viele",
+  "& Co",
+  "der/das Sandwich",
+  "jede/jeder",
+  "nächste/nächster",
+  "geben (Unterricht)",
+  "euer/eure",
+  "Ihr/Ihre",
+  "ihr/ihre",
+  "sein/seine",
+  "unser/unsere",
+  "der/die Bekannte",
+  "der/die Jugendliche",
+  "der/die Erwachsene",
+  "der/die Verwandte",
+  "der/die Erste",
+  "erste/erster",
+  "frei (Termin)",
+  "gut (Schon gut)",
+  "haben (Termin)",
+  "machen (Macht nichts)",
+  "zu (spät)",
+  "um (+A)",
+  "haben (Perfekt)",
+  "durch (Portal)",
+  "zu (Kunden)",
+  "aus (Holz)",
+  "der Platz (Quadrat)",
+  "die Bank (Sitz)",
+  "stellen (put)",
+  "die Bank (Geld)",
+  "der Reiseführer (Buch)",
+  "die Karte (map)",
+  "die Karte (pay)",
+  "etwas (a bit)"
+ ]
+}

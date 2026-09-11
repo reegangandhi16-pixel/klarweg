@@ -1,0 +1,395 @@
+{
+ "phase": "21 — minimal production fix + namespace-collision guard",
+ "generatedAt": "2026-08-13T11:41:50.102Z",
+ "edits": {
+  "count": 5,
+  "files": [
+   "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "chapter-c1-05-zweiteilige-satzverbindungen.html",
+   "chapter-c1-07-praepositionen-mit-genitiv.html",
+   "chapter-c1-17-goethe-halbzeit-test.html"
+  ],
+  "detail": [
+   {
+    "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+    "line": 15,
+    "role": ".r-verb",
+    "before": ".r-praesens, .r-praeteritum, .r-perfekt, .r-plusquam, .r-futur1, .r-futur2, .r-verb { color: #1F4E4A; font-weight: 600; }",
+    "after": ".r-praesens, .r-praeteritum, .r-perfekt, .r-plusquam, .r-futur1, .r-futur2 { color: #1F4E4A; font-weight: 600; }",
+    "charsRemoved": 9,
+    "hcmResolved": 48,
+    "roleSpansRestored": 50,
+    "restoredColour": "rgb(220, 38, 38)"
+   },
+   {
+    "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+    "line": 15,
+    "role": ".r-time",
+    "before": ".r-time, .r-simul, .r-duration, .r-space, .r-continuation { color: #1F4E4A; font-weight: 600; }",
+    "after": ".r-simul, .r-duration, .r-space, .r-continuation { color: #1F4E4A; font-weight: 600; }",
+    "charsRemoved": 9,
+    "hcmResolved": 12,
+    "roleSpansRestored": 12,
+    "restoredColour": "rgb(124, 58, 237)"
+   },
+   {
+    "chapter": "chapter-c1-05-zweiteilige-satzverbindungen.html",
+    "line": 15,
+    "role": ".r-negation",
+    "before": ".r-addition, .r-alternative, .r-negation, .r-contrast, .r-comparison, .r-degree { color: #1F4E4A; font-weight: 600; }",
+    "after": ".r-addition, .r-alternative, .r-contrast, .r-comparison, .r-degree { color: #1F4E4A; font-weight: 600; }",
+    "charsRemoved": 13,
+    "hcmResolved": 8,
+    "roleSpansRestored": 8,
+    "restoredColour": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-c1-07-praepositionen-mit-genitiv.html",
+    "line": 15,
+    "role": ".r-genitiv",
+    "before": "  .r-genitiv { color: #1F4E4A; font-weight: 600; }",
+    "after": "(rule removed)",
+    "charsRemoved": 51,
+    "hcmResolved": 4,
+    "roleSpansRestored": 4,
+    "restoredColour": "rgb(160, 107, 44)",
+    "note": "the canonical name was the ONLY selector, so removing it empties the rule — the whole line goes; no other declaration existed"
+   },
+   {
+    "chapter": "chapter-c1-17-goethe-halbzeit-test.html",
+    "line": 15,
+    "role": ".r-modalverb",
+    "before": ".r-modalverb, .r-konjunktiv2, .r-konjunktiv1, .r-empfehlung, .r-bitte { color: #1F4E4A; font-weight: 600; }",
+    "after": ".r-konjunktiv2, .r-konjunktiv1, .r-empfehlung, .r-bitte { color: #1F4E4A; font-weight: 600; }",
+    "charsRemoved": 14,
+    "hcmResolved": 1,
+    "roleSpansRestored": 1,
+    "restoredColour": "rgb(159, 18, 57)"
+   }
+  ],
+  "constraintsHonoured": [
+   "no chapter-specific pedagogical class renamed",
+   "chapter.css untouched",
+   "no specificity raised",
+   "no token data touched",
+   "no unrelated local selector touched"
+  ]
+ },
+ "guard": {
+  "file": "chapter/qa-style-lint.js",
+  "api": "window.KWSTYLELINT { parseCanonicalRoles, scanChapter, selfTest }",
+  "placement": "new sibling module beside qa-data-lint.js, mirroring its severity vocabulary (violation | review) and selfTest() shape; qa-data-lint.js itself untouched",
+  "vocabularySource": "parsed at scan time from chapter-app.js CANONICAL_ROLES (34 roles) — never a duplicated list; the guard reports an error rather than guessing if the literal cannot be parsed",
+  "severityModel": {
+   "violation": "local rule paints a colour different from the canonical token (real override)",
+   "review": "namespace collision with no colour change — canonical restatement or non-colour declaration (font-weight)"
+  },
+  "buildBreaking": false,
+  "rationale": "the existing lint has no build hook and historical collisions are deliberate; review severity lets them be handled one at a time",
+  "selfTest": {
+   "pass": true,
+   "checks": 20,
+   "covers": [
+    "5 formerly harmful collisions",
+    "6 latent collisions",
+    "chapter-specific classes stay silent",
+    "German near-misses .r-adjektiv/.r-nomen stay silent",
+    "longer names .r-verb-focus/.r-timeline stay silent",
+    "compound/descendant selectors stay silent",
+    "restatement → review",
+    "font-weight-only → review",
+    "multiple rules per block",
+    "whitespace/case variants",
+    "!important recorded",
+    "linked stylesheets out of scope"
+   ]
+  },
+  "corpusRun": {
+   "chaptersScanned": 259,
+   "findings": 68,
+   "bySeverity": {
+    "violation": 7,
+    "review": 61
+   },
+   "byKind": {
+    "namespace-collision:restatement": 35,
+    "namespace-collision:no-colour": 26,
+    "canonical-colour-override": 7
+   },
+   "violations": [
+    "b2-08 .r-negation #C026D3",
+    "b2-34 .r-temporal #1F4E4A",
+    "b2-64 .r-time #1F4E4A",
+    "b2-64 .r-place #1F4E4A",
+    "b2-65 .r-genitiv #1F4E4A",
+    "c1-08 .r-purpose #1F4E4A",
+    "c1-11 .r-genitiv #1F4E4A"
+   ],
+   "noteOnB2_08": "b2-08 .r-negation paints #C026D3, which IS the canonical negation token written as a hex literal. The guard only treats var(--g-*) as a restatement, so it lands in violation. Chromatically it changes nothing — a 12th collision by name, not a defect. P19 classified it benign for exactly this reason.",
+   "fiveFixedChaptersAbsent": true
+  },
+  "latentCollisionsUnchanged": {
+   "count": 6,
+   "list": [
+    "b2-34 .r-temporal",
+    "b2-64 .r-time",
+    "b2-64 .r-place",
+    "b2-65 .r-genitiv",
+    "c1-08 .r-purpose",
+    "c1-11 .r-genitiv"
+   ],
+   "stillFlaggedByGuard": true,
+   "edited": false
+  }
+ },
+ "targetedRegression": {
+  "chapters": 5,
+  "allStable": true,
+  "results": [
+   {
+    "chapter": "c1-01",
+    "role": "verb",
+    "spans": 50,
+    "histogram": {
+     "rgb(220, 38, 38)": 50
+    },
+    "allCanonical": true,
+    "popup": {
+     "surface": "habe",
+     "span": "rgb(220, 38, 38)",
+     "head": "rgb(220, 38, 38)"
+    },
+    "pedagogicalIntact": {
+     "praesens": "rgb(31, 78, 74)/600",
+     "plusquam": "rgb(31, 78, 74)/600"
+    },
+    "qa": {
+     "occurrences": 294,
+     "findings": 6,
+     "counts": {
+      "CASE_COLLISION_CAPITALISED": 6
+     }
+    },
+    "hcmNow": 0
+   },
+   {
+    "chapter": "c1-02",
+    "role": "time",
+    "spans": 12,
+    "histogram": {
+     "rgb(124, 58, 237)": 12
+    },
+    "allCanonical": true,
+    "popup": {
+     "surface": "morgen",
+     "span": "rgb(124, 58, 237)",
+     "head": "rgb(124, 58, 237)"
+    },
+    "pedagogicalIntact": {
+     "space": "rgb(31, 78, 74)/600"
+    },
+    "qa": {
+     "occurrences": 415,
+     "findings": 22,
+     "counts": {
+      "ROLE_CONTRADICTS_BADGE": 22
+     }
+    },
+    "hcmNow": 0
+   },
+   {
+    "chapter": "c1-05",
+    "role": "negation",
+    "spans": 8,
+    "histogram": {
+     "rgb(192, 38, 211)": 8
+    },
+    "allCanonical": true,
+    "popup": {
+     "surface": "nicht",
+     "span": "rgb(192, 38, 211)",
+     "head": "rgb(192, 38, 211)"
+    },
+    "pedagogicalIntact": {
+     "addition": "rgb(31, 78, 74)/600",
+     "alternative": "rgb(31, 78, 74)/600"
+    },
+    "qa": {
+     "occurrences": 348,
+     "findings": 2,
+     "counts": {
+      "NO_POPUP": 1,
+      "ROLE_CONTRADICTS_BADGE": 1
+     }
+    },
+    "hcmNow": 0
+   },
+   {
+    "chapter": "c1-07",
+    "role": "genitiv",
+    "spans": 4,
+    "histogram": {
+     "rgb(160, 107, 44)": 4
+    },
+    "allCanonical": true,
+    "popup": {
+     "surface": "Aufgrund",
+     "span": "rgb(160, 107, 44)",
+     "head": "rgb(160, 107, 44)"
+    },
+    "pedagogicalIntact": "n/a — chapter had no other pedagogical class",
+    "qa": {
+     "occurrences": 337,
+     "findings": 0,
+     "clean": true
+    },
+    "hcmNow": 0
+   },
+   {
+    "chapter": "c1-17",
+    "role": "modalverb",
+    "spans": 1,
+    "histogram": {
+     "rgb(159, 18, 57)": 1
+    },
+    "allCanonical": true,
+    "popup": {
+     "surface": "sollte",
+     "span": "rgb(159, 18, 57)",
+     "head": "rgb(159, 18, 57)"
+    },
+    "pedagogicalIntact": {
+     "konjunktiv2": "rgb(31, 78, 74)/600",
+     "konjunktiv1": "rgb(31, 78, 74)/600",
+     "empfehlung": "rgb(31, 78, 74)/600"
+    },
+    "qa": {
+     "occurrences": 229,
+     "findings": 0,
+     "clean": true
+    },
+    "hcmNow": 0
+   }
+  ],
+  "verdict": "every affected role regained its canonical colour with a single-value histogram; popup headword colour equals span colour in all five; pedagogical highlight classes still render teal/600; no code other than HEADWORD_COLOUR_MISMATCH changed in these chapters"
+ },
+ "fullSweep": {
+  "driver": "resumable diagnostic driver, one run at a time, separate storage key",
+  "chapters": 259,
+  "measured": 259,
+  "readyState": {
+   "stable": 259
+  },
+  "errors": 0,
+  "hardTimeouts": 0,
+  "occurrences": 156291,
+  "findings": 1406,
+  "clean": 71,
+  "baseline": "audit/qa-baseline-p21-diagnostic.json",
+  "checksum": {
+   "fnv1a": "1a3f1544",
+   "djb2": "c1844cc7",
+   "chars": 266390,
+   "computedInBrowser": {
+    "fnv1a": "1a3f1544",
+    "djb2": "c1844cc7",
+    "chars": 266390
+   },
+   "match": true
+  },
+  "p15Preserved": true,
+  "p14Preserved": true
+ },
+ "deltaVsP15": {
+  "occurrences": {
+   "p15": 156299,
+   "p21": 156291,
+   "delta": -8
+  },
+  "findings": {
+   "p15": 1478,
+   "p21": 1406,
+   "delta": -72
+  },
+  "clean": {
+   "p15": 69,
+   "p21": 71,
+   "delta": 2
+  },
+  "byCode": {
+   "ROLE_CONTRADICTS_BADGE": {
+    "p15": 1020,
+    "p21": 1020,
+    "delta": 0
+   },
+   "HEADWORD_COLOUR_MISMATCH": {
+    "p15": 110,
+    "p21": 38,
+    "delta": -72
+   },
+   "CASE_COLLISION_LOWERCASE": {
+    "p15": 14,
+    "p21": 14,
+    "delta": 0
+   },
+   "PARADIGM_CLASS_MISMATCH": {
+    "p15": 76,
+    "p21": 76,
+    "delta": 0
+   },
+   "CASE_COLLISION_CAPITALISED": {
+    "p15": 236,
+    "p21": 236,
+    "delta": 0
+   },
+   "NO_POPUP": {
+    "p15": 22,
+    "p21": 22,
+    "delta": 0
+   }
+  },
+  "hcmDelta": {
+   "p15": 110,
+   "p21": 38,
+   "delta": -72,
+   "expectedFromFix": -73,
+   "reconciliation": "73 HCM removed in the five corrected chapters (48+12+8+4+1) and 1 new HCM appeared in a1-11-negation — net -72"
+  }
+ },
+ "unexpectedChanges": [
+  {
+   "chapter": "chapter-a1-11-negation.html",
+   "what": "+1 HEADWORD_COLOUR_MISMATCH (speaking, index 311, \"Nein\", span rgb(6,182,212) → head rgb(192,38,211)); occurrences 412 → 407; the two ROLE_CONTRADICTS_BADGE indices moved 273/293 → 270/290",
+   "attribution": "NOT caused by the fix — a1-11 was not edited and carries no local .r-* rule. Its occurrence count changed, which shifts every index and can expose or hide a popup-dependent check. Same class as the run-to-run variance measured in phase 14 (two identical runs differed by 3 findings / 48 occurrences).",
+   "status": "explained as measurement variance, NOT proven; would need repeated renders of a1-11 to confirm"
+  },
+  {
+   "chapter": "chapter-a1-21-uhrzeit.html",
+   "what": "occurrences 707 → 703; same 17 findings but three ROLE_CONTRADICTS_BADGE indices shifted (469/472/491 → 467/470/489, 629/642 → 625/638, 675/684 → 671/680, 704 → 700)",
+   "attribution": "index drift from the occurrence-count change; no finding added or removed",
+   "status": "variance, no defect"
+  },
+  {
+   "chapter": "chapter-b2-07-verbergaenzungen-erkennen.html",
+   "what": "occurrences 655 → 656, findings unchanged (0)",
+   "attribution": "variance",
+   "status": "no defect"
+  }
+ ],
+ "netAssessment": "the fix resolved exactly the 73 targeted HEADWORD_COLOUR_MISMATCH findings and changed nothing else in the five corrected chapters. The three remaining differences are in unedited chapters, are occurrence-count/index drift of the kind already measured before any fix existed, and account for the -8 occurrences and the single +1 HCM.",
+ "safety": {
+  "chapterAppJs": "untouched",
+  "chapterCss": "untouched",
+  "canonicalTokens": "untouched",
+  "specificity": "unchanged",
+  "namespaceRename": "not attempted in this phase",
+  "sixLatentCollisions": "untouched",
+  "sixtyTwoHarmlessSelectors": "untouched",
+  "chapterData": "untouched",
+  "qaEngine": "untouched",
+  "qaAssert": "untouched",
+  "qaDataLint": "untouched",
+  "p14AndP15Baselines": "untouched"
+ }
+}

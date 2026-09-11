@@ -1,0 +1,49 @@
+{
+ "counts": {
+  "gradable": 761,
+  "non_gradable": 99,
+  "manual_review": 40
+ },
+ "missedParticiples": [
+  "zufrieden",
+  "aufgeregt",
+  "aufgenommen",
+  "vorgekommen",
+  "abstrakt",
+  "ausgezeichnet",
+  "überrascht",
+  "ausgeruht",
+  "vorbereitet",
+  "abgesehen",
+  "angemessen",
+  "angestellt",
+  "abgeschlossen",
+  "ausgesprochen",
+  "überlastet",
+  "anerkannt",
+  "übertrieben",
+  "vorhanden",
+  "angelehnt",
+  "ausgewogen",
+  "vorangegangen",
+  "umstritten",
+  "ausgewechselt",
+  "ausverkauft"
+ ],
+ "ER_CONSONANT_KEEP": [
+  "sauber",
+  "schwer",
+  "sicher",
+  "lecker",
+  "bitter",
+  "finster",
+  "clever",
+  "locker",
+  "inhaltsleer",
+  "selbstsicher",
+  "heiter",
+  "siegessicher",
+  "zukunftssicher"
+ ],
+ "safeGenerateFinalCount": 689
+}

@@ -1,0 +1,488 @@
+{
+ "phase": "39 — safety regression for the 7 remaining actionable HCM (DIAGNOSTIC ONLY)",
+ "generatedAt": "2026-08-15T08:03:38.927Z",
+ "partA_baseline": {
+  "count": 22,
+  "byDisposition": {
+   "BY-DESIGN": 15,
+   "ACTIONABLE": 7
+  },
+  "source": "audit/qa-baseline-p37-diagnostic.json (full HCM population as measured by the P37 sweep)",
+  "records": [
+   {
+    "chapter": "chapter-a1-4-hallo.html",
+    "section": "vocabulary",
+    "index": 171,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-7-jaodernein.html",
+    "section": "grammar",
+    "index": 243,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-7-jaodernein.html",
+    "section": "writing",
+    "index": 328,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-7-jaodernein.html",
+    "section": "resources",
+    "index": 386,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "section": "vocabulary",
+    "index": 133,
+    "surface": "deutsch",
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)",
+    "disposition": "ACTIONABLE"
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "section": "grammar",
+    "index": 542,
+    "surface": "deutsch",
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)",
+    "disposition": "ACTIONABLE"
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "section": "grammar",
+    "index": 581,
+    "surface": "deutsch",
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)",
+    "disposition": "ACTIONABLE"
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "section": "grammar",
+    "index": 585,
+    "surface": "deutsch",
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)",
+    "disposition": "ACTIONABLE"
+   },
+   {
+    "chapter": "chapter-a1-11-negation.html",
+    "section": "(none)",
+    "index": 1,
+    "surface": "Nicht",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-14-essen.html",
+    "section": "resources",
+    "index": 878,
+    "surface": "möchte",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(159, 18, 57)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-15-cafe.html",
+    "section": "vocabulary",
+    "index": 168,
+    "surface": "Zahlen",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(46, 125, 50)",
+    "disposition": "ACTIONABLE"
+   },
+   {
+    "chapter": "chapter-a1-15-cafe.html",
+    "section": "grammar",
+    "index": 581,
+    "surface": "Zahlen",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(46, 125, 50)",
+    "disposition": "ACTIONABLE"
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "section": "grammar",
+    "index": 335,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "section": "grammar",
+    "index": 340,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "section": "grammar",
+    "index": 345,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "section": "summary",
+    "index": 522,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-21-uhrzeit.html",
+    "section": "vocabulary",
+    "index": 321,
+    "surface": "Wann",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(236, 72, 153)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-25-trennbar.html",
+    "section": "grammar",
+    "index": 285,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a1-39-ortsangaben.html",
+    "section": "vocabulary",
+    "index": 570,
+    "surface": "a",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(90, 90, 96)",
+    "disposition": "ACTIONABLE"
+   },
+   {
+    "chapter": "chapter-a2-2-perfekt-review.html",
+    "section": "grammar",
+    "index": 394,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-a2-2-perfekt-review.html",
+    "section": "grammar",
+    "index": 410,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)",
+    "disposition": "BY-DESIGN"
+   },
+   {
+    "chapter": "chapter-c2-08-modalverben.html",
+    "section": "summary",
+    "index": 413,
+    "surface": "muss",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(159, 18, 57)",
+    "disposition": "BY-DESIGN"
+   }
+  ],
+  "byDesignNotReinterpreted": true
+ },
+ "partB_deutsch": {
+  "authoredEntries": [
+   "{ de: 'Deutsch', pos: 'language', en: 'German (language)', ex: 'Ich spreche ein bisschen Deutsch.' } — a1-8 data line 231",
+   "{ de: 'deutsch', pos: 'adjective', en: 'German (adj.)', ex: 'Das ist ein deutsches Wort.' } — a1-8 data line 233"
+  ],
+  "collisionMechanism": "lookupWord (chapter-app.js:2717) keys via normWord(surface); normWord (:2430) lowercases. Both authored headwords therefore occupy WORDIDX[\"deutsch\"] — one slot, two entries.",
+  "cases": [
+   {
+    "n": 1,
+    "surface": "deutsch",
+    "intendedLexeme": "adjective (line 233)",
+    "currentResolverResult": "language noun — WRONG",
+    "expectedClassAvailable": "YES in principle — the occurrence carries r-adjective",
+    "resultIfExpectedClassSupplied": "the existing guard at :2735-2738 would reject the language entry as class-incompatible, leaving the adjective",
+    "changesResolution": "YES, to the correct entry",
+    "regressionRisk": "none identified for this surface"
+   },
+   {
+    "n": 2,
+    "surface": "Deutsch",
+    "intendedLexeme": "language noun (line 231)",
+    "currentResolverResult": "whichever entry won the slot",
+    "expectedClassAvailable": "YES — a capitalised occurrence resolves r-object/noun",
+    "resultIfExpectedClassSupplied": "language entry retained (noun-compatible)",
+    "changesResolution": "NO for correct cases",
+    "regressionRisk": "none identified"
+   },
+   {
+    "n": 3,
+    "surface": "ordinary uses of deutsch elsewhere",
+    "status": "NOT SURVEYED corpus-wide in this phase — only a1-8 authors the pair",
+    "gap": true
+   },
+   {
+    "n": 4,
+    "surface": "sentence-initial capitalised deutsch",
+    "status": "NOT OBSERVED in a1-8; the four HCM occurrences are all lower-case",
+    "gap": true
+   },
+   {
+    "n": 5,
+    "surface": "other entries sharing the key",
+    "status": "the global lexicon was not enumerated for a \"deutsch\" key in this phase",
+    "gap": true
+   }
+  ],
+  "verdict": "Candidate 2 (supply expectedClass) is SAFER than Candidate 1 (case-sensitive index) for deutsch: it uses machinery that already exists and already ships a homograph guard, it changes nothing for correctly-resolving surfaces, and it does not alter the index that every other word in the corpus depends on.",
+  "confidence": "STRONGLY SUPPORTED — reasoned from source, NOT executed. No harness ran a live resolver comparison in this phase.",
+  "honestGap": "PART B was NOT fully executed as specified. A live A/B harness calling lookupWord with and without expectedClass was not built. The conclusion rests on reading the guard and the index, not on measured output."
+ },
+ "partC_zahlen": {
+  "totalOccurrencesFound": 13,
+  "verbCount": 4,
+  "nounCount": 8,
+  "ambiguousCount": 1,
+  "unsafeUnresolved": 0,
+  "breakdown": [
+   {
+    "chapter": "a1-3-zahlen",
+    "kind": "VOCAB ENTRY",
+    "surface": "Zahl",
+    "authored": "{ de: 'Zahl', art: 'die', plural: 'Zahlen', pos: 'noun' } line 285",
+    "classification": "B (noun) — and the CRITICAL one: this authored plural is what puts \"zahlen\" into the inflection index pointing at the NOUN lemma"
+   },
+   {
+    "chapter": "a1-15-cafe",
+    "kind": "VOCAB ENTRY",
+    "surface": "zahlen",
+    "authored": "{ de: 'zahlen', pos: 'verb', ex: 'Zahlen, bitte!' } line 259",
+    "classification": "A (verb)"
+   },
+   {
+    "chapter": "a1-15-cafe",
+    "kind": "RENDERED HCM ×2",
+    "surface": "Zahlen",
+    "context": "\"Zahlen, bitte.\" (vocabulary idx 168, grammar/phrase table idx 581)",
+    "authoredRole": "none for these occurrences (phrase-table cell)",
+    "spanRole": "r-verb (guessRole -en)",
+    "resolved": "die Zahlen (noun)",
+    "classification": "A (verb) — currently mis-resolved"
+   },
+   {
+    "chapter": "a1-42-welcher-dieser",
+    "kind": "TOKEN",
+    "surface": "zahlen",
+    "authored": "{ w: 'zahlen', role: 'r-verb', type: 'Verb · zahlen (Sie)' } line 430",
+    "classification": "A (verb)",
+    "note": "authored role present — resolves correctly"
+   },
+   {
+    "chapter": "c2-19-adjektive-mit-ergaenzungen",
+    "kind": "TOKEN",
+    "surface": "zahlen",
+    "authored": "{ w: 'zahlen', role: 'r-ergaenzungs-magnet', type: 'Verb (Infinitiv, Satzende)' } line 209",
+    "classification": "A (verb)"
+   },
+   {
+    "chapter": "c1-35-konzession-und-abwaegen",
+    "kind": "TOKEN",
+    "surface": "Zahlen",
+    "authored": "{ w: 'Zahlen', role: 'r-dativ', type: 'Noun · plural genitive' } line 57",
+    "classification": "B (noun)"
+   },
+   {
+    "chapter": "c1-19-steigerung",
+    "kind": "TOKEN",
+    "surface": "Zahlen",
+    "authored": "{ w: 'Zahlen', role: 'plain', type: 'Noun · plural (Satzende)' } line 317",
+    "classification": "B (noun)"
+   },
+   {
+    "chapter": "c1-32-kohaerenz",
+    "kind": "TOKEN",
+    "surface": "Zahlen",
+    "authored": "{ w: 'Zahlen', role: 'plain', type: 'Noun · plural (Satzende)' } line 195",
+    "classification": "B (noun)"
+   },
+   {
+    "chapter": "b2-10-haeufige-b2-verben",
+    "kind": "TOKEN",
+    "surface": "Zahlen",
+    "authored": "{ w: 'Zahlen', role: 'plain', type: 'Noun · plural' } line 366",
+    "classification": "B (noun)"
+   },
+   {
+    "chapter": "c1-21-partizipialattribute",
+    "kind": "TOKEN",
+    "surface": "Zahlen",
+    "authored": "{ w: 'Zahlen', role: 'r-subject', type: 'Noun · plural' } line 30",
+    "classification": "B (noun)"
+   },
+   {
+    "chapter": "c2-09-goethe-mini-2",
+    "kind": "TOKEN",
+    "surface": "Zahlen",
+    "authored": "{ w: 'Zahlen', role: 'r-dativ', type: 'Noun · plural dat.' } line 54",
+    "classification": "B (noun)"
+   },
+   {
+    "chapter": "c1-04-hauptsaetze",
+    "kind": "TOKEN",
+    "surface": "Zahlen",
+    "authored": "{ w: 'Zahlen', role: 'plain', type: 'Noun · plural' } line 292",
+    "classification": "B (noun)"
+   },
+   {
+    "chapter": "conj-migration-inventory.json",
+    "kind": "KNOWN CONFLICT RECORD",
+    "surface": "zahlen",
+    "authored": "{ lemma: \"zahlen\", reason: \"KW_INFLECTIONS has conflicting Präsens-shaped form(s): zahlte\" }",
+    "classification": "C (ambiguous) — the project ALREADY recorded zahlen as an inflection-index conflict"
+   }
+  ],
+  "decisiveFinding": "THE ZAHLEN COLLISION IS NOT PRIMARILY A CASE PROBLEM. a1-3 authors { de: \"Zahl\", plural: \"Zahlen\" } (line 285), so the inflection index maps the LOWERCASE key \"zahlen\" to the NOUN lemma Zahl. KW_INFLECTIONS is inherently lowercase-keyed, so making WORDIDX case-sensitive would NOT stop \"Zahlen, bitte!\" resolving to the noun — the lemma path would still reach die Zahl.",
+  "consequence": "Candidate 1 is INSUFFICIENT for Zahlen, and possibly for any noun whose authored plural collides with a verb infinitive. This is a class of defect, not one word.",
+  "corroboration": "chapter/conj-migration-inventory.json already records lemma \"zahlen\" as a known KW_INFLECTIONS conflict (\"conflicting Präsens-shaped form(s): zahlte\") — the project had independently flagged this word.",
+  "nounUsesThatMustNotRegress": "8 authored noun occurrences across c1-35, c1-19, c1-32, b2-10, c1-21, c2-09, c1-04 — every one carries an explicit authored role/type, so they resolve through the token path and are NOT exposed to the surface-guess path that produces the a1-15 defect. That is the key safety result: the 8 noun uses are insulated by their authoring.",
+  "verbUsesThatMustResolveAsVerb": "a1-15 vocab entry (line 259), a1-42 token (line 430, authored r-verb), c2-19 token (line 209, authored), and the 2 rendered a1-15 occurrences that are currently WRONG",
+  "verdict": "a case-aware index alone does not fix Zahlen. expectedClass (Candidate 2) would: the a1-15 occurrences carry r-verb, which is class-incompatible with the Noun entry, so the existing guard would reject it.",
+  "confidence": "PROVEN for the inflection-index mechanism and the authored-token insulation (both read from source). The live resolver behaviour was NOT executed."
+ },
+ "partD_letterA": {
+  "chapter": "a1-39-ortsangaben",
+  "section": "vocabulary",
+  "index": 570,
+  "surface": "a",
+  "spanRoleSource": "guessRole (chapter-app.js:735-754) rule 6, the catch-all: a lower-case surface matching no ending pattern returns r-adverb",
+  "popupColourSource": "ROLE_COLOR_VAR (chapter-app.js:2022) maps entry classes letter|name|conjunction to --ink-secondary, mirroring chapter.css:231 — PROVEN intentional",
+  "isItIntentionallyALetter": "the popup treats it as one; NO letter token is authored in a1-39 data (grep found none), so the entity status comes from the resolved entry, not from chapter authoring",
+  "existingSingleLetterCategory": "YES — the letter|name|conjunction class exists in ROLE_COLOR_VAR and in chapter.css. The renderer has the category; guessRole simply never consults it.",
+  "narrowGuardTechnicallyPossible": "YES — a length check before rule 6 would be a two-line, strictly narrowing change. It cannot promote any word to a new role; it can only withhold r-adverb from 1-character surfaces.",
+  "comparisonNotPerformed": [
+   "other single-letter entries corpus-wide were NOT enumerated",
+   "letters inside normal words are unaffected by construction (guessRole operates on whole matched words)"
+  ],
+  "safestOption": "NOT DECIDED — a narrow single-letter guard and explicit token metadata are both defensible. Leaving it alone is also defensible: it is 1 finding, cosmetic, and the popup is already correct.",
+  "confidence": "PROVEN for both colour sources; the corpus-wide single-letter census is a GAP"
+ },
+ "partE_byDesignControl": {
+  "count": 15,
+  "wouldCandidate2ChangeThem": "NO — and the reason is structural: expectedClass only REJECTS entries whose word class contradicts the occurrence. The 15 by-design pairs are family refinements (adverb→negation, adverb→question, verb→modalverb), which classesCompatible treats as compatible, so no entry would be rejected and no resolution would change.",
+  "wouldCandidate1ChangeThem": "NO for Nein/Nicht/möchte/muss (no case-pair authored). Wann is capitalised and sentence-initial in its occurrence — a case-sensitive index COULD alter its resolution. NOT TESTED.",
+  "wouldCandidate3ChangeThem": "POSSIBLY — sentence-position resolution is exactly the signal that would affect capitalised sentence-initial Nein and Wann. This is the strongest argument against Candidate 3 without a full regression.",
+  "verificationMethod": "reasoned from the compatibility rule and the authored data, NOT executed against a live resolver",
+  "confidence": "STRONGLY SUPPORTED for Candidate 2; UNVERIFIED for Candidates 1 and 3"
+ },
+ "partF_candidateComparison": [
+  {
+   "id": 1,
+   "name": "Make WORDIDX case-sensitive",
+   "scope": "every word in all 259 chapters",
+   "advantages": [
+    "directly addresses the deutsch/Deutsch collision"
+   ],
+   "risks": [
+    "does NOT fix Zahlen — the inflection index is lowercase-keyed and still routes to die Zahl",
+    "could alter Wann and every other capitalised sentence-initial word",
+    "largest possible blast radius for a 6-finding problem"
+   ],
+   "corpusEvidence": "the Zahlen survey disproves sufficiency",
+   "regressionTested": false,
+   "confidence": "REJECTED on evidence"
+  },
+  {
+   "id": 2,
+   "name": "Supply expectedClass to the popup resolver",
+   "scope": "the popup resolution path only",
+   "advantages": [
+    "uses a guard that already exists and already ships (:2735-2738)",
+    "fixes deutsch AND Zahlen, because both occurrences carry a class-incompatible span role",
+    "structurally cannot change the 15 by-design cases",
+    "leaves WORDIDX, KW_INFLECTIONS and guessRole untouched"
+   ],
+   "risks": [
+    "the span role is itself a guess in auto-linkified prose; supplying a WRONG expectedClass would suppress a CORRECT entry",
+    "unmeasured on the ~1,009 RCB population, where span role and badge already disagree by definition"
+   ],
+   "corpusEvidence": "reasoned from source; not executed",
+   "regressionTested": false,
+   "confidence": "PREFERRED CANDIDATE, but unproven"
+  },
+  {
+   "id": 3,
+   "name": "Contextual/sentence-position resolution",
+   "scope": "all ambiguous surfaces corpus-wide",
+   "advantages": [
+    "the only candidate that could disambiguate a genuinely position-driven case"
+   ],
+   "risks": [
+    "directly threatens the by-design Nein/Wann population",
+    "the signal already exists for ROLE assignment but has never been used for RESOLUTION — a new coupling"
+   ],
+   "corpusEvidence": "none gathered",
+   "regressionTested": false,
+   "confidence": "NOT RECOMMENDED without a full sweep"
+  },
+  {
+   "id": 4,
+   "name": "Narrow single-letter guard",
+   "scope": "1-character surfaces only",
+   "advantages": [
+    "strictly narrowing — can only withhold a role, never assign one",
+    "isolated from every other candidate"
+   ],
+   "risks": [
+    "single-letter census not performed; other letters may currently rely on the r-adverb fallback for visibility"
+   ],
+   "corpusEvidence": "1 known finding",
+   "regressionTested": false,
+   "confidence": "LOW RISK, LOW VALUE — safe to defer"
+  }
+ ],
+ "unresolvedQuestions": [
+  "PART B’s live A/B resolver harness was not built — the expectedClass conclusion is reasoned, not measured",
+  "no corpus census of other single-letter surfaces, other case-pair homographs, or other noun-plural/verb-infinitive collisions like Zahl/zahlen",
+  "whether supplying expectedClass would suppress correct entries anywhere in the 1,009 RCB population, where span role and badge disagree by construction",
+  "whether Wann’s resolution is sensitive to Candidate 1 or 3"
+ ],
+ "recommendationForNextPhase": "Before any implementation, build the live A/B resolver harness that PART B specified: call lookupWord for each of the 7 actionable surfaces with and without expectedClass, and additionally for a sample of the 15 by-design surfaces and a sample of RCB-affected surfaces, then compare resolved lexeme and headword colour. Candidate 2 is the preferred direction on current evidence, but it must not be implemented on reasoning alone — the same standard applied to every prior phase.",
+ "productionSafety": {
+  "productionModified": false,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "chapterAppModified": false,
+  "qaEngineModified": false,
+  "qaAssertModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "audit/hcm-fix-safety-p39.json"
+ ],
+ "filesModified": "none"
+}

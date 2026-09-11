@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klarweg · B2 Chapter 9 — Trennbar vs. untrennbar</title>
+<meta name="description" content="The logic behind German prefixes — how ankommen, bekommen, and entkommen all grow from kommen but mean something different. Klarweg B2 · Chapter 9." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="chapter.css?v=9">
+<style>
+  .r-trenn { color: #1F4E4A; font-weight: 600; }
+  .r-untrenn { color: #A06B2C; font-weight: 600; }
+  #vocab-grid .vword-tag.gender-m,
+  #vocab-grid .vword-tag.gender-f,
+  #vocab-grid .vword-tag.gender-n {
+    background: color-mix(in srgb, #1F4E4A 12%, #FFFFFF) !important;
+    color: #163a37 !important;
+  }
+  .vword-de .art,
+  .vp-de .vp-article { color: #163a37 !important; }
+  .btn-primary { background: #1F4E4A !important; }
+  .btn-primary:hover { background: #163a37 !important; }
+  .mic-btn:not(.is-recording) { background: #1F4E4A !important; }
+  .audio-play-btn { background: #1F4E4A !important; }
+  .audio-track-fill { background: #1F4E4A !important; }
+</style>
+</head>
+<body>
+
+<header class="chapter-topbar" id="topbar">
+  <a class="topbar-brand" href="../index.html">
+    Klarweg
+  </a>
+  <div class="topbar-actions">
+    <span class="topbar-xp"><span class="xp-dot"></span><span id="topbar-xp-val">0 XP</span></span>
+    <div class="acct" id="acct">
+      <button class="acct-btn" id="acct-btn" aria-haspopup="true" aria-expanded="false">
+        <span class="acct-avatar" id="acct-avatar">L</span>
+        <svg class="acct-caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <div class="acct-menu" id="acct-menu" role="menu">
+        <div class="acct-head">
+          <div class="nm" id="acct-menu-name">Learner</div>
+          <div class="em" id="acct-menu-email">on this device</div>
+        </div>
+        <a class="acct-item" role="menuitem" href="#">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="6.5" r="3.2"/><path d="M3.5 17c.8-3.3 3.4-5 6.5-5s5.7 1.7 6.5 5"/></svg>
+          Profile</a>
+        <a class="acct-item active" role="menuitem" href="#dashboard">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 16V9M8 16V4M13 16v-5M18 16V7"/></svg>
+          Progress</a>
+        <a class="acct-item" role="menuitem" href="../account/saved-words.html">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3h10v14l-5-3.5L5 17z"/></svg>
+          Saved Words <span class="badge" id="acct-saved-count">0</span></a>
+        <a class="acct-item" role="menuitem" href="#">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="2.6"/><path d="M10 2.5v2M10 15.5v2M17.5 10h-2M4.5 10h-2M15.3 4.7l-1.4 1.4M6.1 13.9l-1.4 1.4M15.3 15.3l-1.4-1.4M6.1 6.1L4.7 4.7"/></svg>
+          Settings</a>
+      </div>
+    </div>
+    <a class="btn btn-soft btn-small" href="../index.html">Exit chapter</a>
+  </div>
+</header>
+
+<div id="story-stage" class="single">
+  <section class="flow-section" data-slide="1">
+    <div class="flow-art">
+      <span class="fa-blob" style="width:520px;height:520px;background:#1F4E4A;top:-120px;left:-120px;opacity:0.14"></span>
+      <span class="fa-blob" style="width:440px;height:440px;background:var(--coral);bottom:-140px;right:-100px"></span>
+      <span class="fa-chip" style="font-size:16px;bottom:16%;left:2%;color:var(--ink-secondary);opacity:0.14">steh … auf</span>
+      <span class="fa-chip" style="font-size:16px;bottom:9%;left:2%;color:var(--ink-secondary);opacity:0.14">verstehe</span>
+      <span class="fa-chip" style="font-size:15px;bottom:2%;left:2%;color:var(--ink-secondary);opacity:0.14">an-, be-, ver-</span>
+    </div>
+    <div class="flow-inner">
+      <div class="chapter-num" data-fade>B2 · PHASE 1 · CHAPTER 9</div>
+      <h1 class="display display-xl" data-fade>Trennbar vs. untrennbar</h1>
+      <p class="lede" data-fade style="max-width:640px;margin:24px auto 0"><span class="de" style="font-style:italic">kommen → ankommen, bekommen, entkommen.</span> One base verb, many different meanings.</p>
+    </div>
+    <div class="flow-inner">
+      <div class="slide-meta" id="slide-meta" data-fade></div>
+    </div>
+  </section>
+</div>
+
+<main id="dashboard">
+  <div class="dash-header">
+    <div class="container dash-header-inner">
+      <div class="dash-title-row">
+        <div>
+          <div class="dash-actions">
+            <button class="btn btn-primary btn-small" id="act-continue">Continue <span class="arrow">→</span></button>
+            <button class="btn btn-soft btn-small" id="act-complete">Mark chapter complete</button>
+            <button class="btn btn-ghost btn-small" id="act-restart">Restart</button>
+          </div>
+        </div>
+        <div class="dash-stats">
+          <div class="progress-ring-wrap">
+            <div class="progress-ring">
+              <svg width="76" height="76" viewBox="0 0 76 76">
+                <circle class="progress-ring-bg" cx="38" cy="38" r="33"></circle>
+                <circle class="progress-ring-fg" id="progress-ring-fg" cx="38" cy="38" r="33"></circle>
+              </svg>
+              <div class="progress-ring-num" id="progress-ring-num">0%</div>
+            </div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val" id="stat-xp">0 / 380</div>
+            <div class="dash-stat-label">XP earned</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val" id="stat-done">0 / 9</div>
+            <div class="dash-stat-label">Sections</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val" id="stat-status">In progress</div>
+            <div class="dash-stat-label">Status</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="dash-nav">
+    <div class="container">
+      <div class="dash-nav-inner" id="dash-nav-inner"></div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div id="dash-sections"></div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="../public/audio/kw-audio-engine.js"></script>
+<script src="../public/audio/kw-tts-config.js"></script>
+<script src="../account/kw-account.js"></script>
+<script src="chapter-b2-09-trennbar-vs-untrennbar-data.js?v=7"></script>
+<script src="story-lexicon.js"></script>
+<script src="tokenizer.js"></script>
+<script src="chapter-app.js?v=9"></script>
+<script src="chapter-story.js?v=7"></script>
+<script src="chapter-tutor.js?v=7"></script>
+
+</body>
+</html>

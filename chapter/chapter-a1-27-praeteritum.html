@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klarweg · A1 Chapter 27 — Präteritum haben/sein</title>
+<meta name="description" content="Your first German past tense: the Präteritum of sein (war) and haben (hatte). Say where you were, what you had, and what there was (es gab) when talking about yesterday. Clickable reading, listening, speaking, and a quiz. Klarweg A1 · Chapter 27.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="chapter.css?v=9">
+<style>
+  /* Cache-proof article-color override — articles are always #B45309,
+     never the gender/subject colors, regardless of a stale chapter.css?v=9. */
+  #vocab-grid .vword-tag.gender-m,
+  #vocab-grid .vword-tag.gender-f,
+  #vocab-grid .vword-tag.gender-n {
+    background: color-mix(in srgb, #B45309 12%, #FFFFFF) !important;
+    color: #B45309 !important;
+  }
+  .vword-de .art,
+  .vp-de .vp-article { color: #B45309 !important; }
+  /* Unify all primary buttons to #c44e26 (cache-proof). */
+  .btn-primary { background: #c44e26 !important; }
+  .btn-primary:hover { background: #a8401f !important; }
+  .mic-btn:not(.is-recording) { background: #c44e26 !important; }
+  .audio-play-btn { background: #c44e26 !important; }
+  .audio-track-fill { background: #c44e26 !important; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     CHAPTER TOPBAR (chrome)
+============================================================ -->
+<header class="chapter-topbar" id="topbar">
+  <a class="topbar-brand" href="../index.html">
+    Klarweg
+  </a>
+  <div class="topbar-actions">
+    <span class="topbar-xp"><span class="xp-dot"></span><span id="topbar-xp-val">0 XP</span></span>
+    <div class="acct" id="acct">
+      <button class="acct-btn" id="acct-btn" aria-haspopup="true" aria-expanded="false">
+        <span class="acct-avatar" id="acct-avatar">L</span>
+        <svg class="acct-caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <div class="acct-menu" id="acct-menu" role="menu">
+        <div class="acct-head">
+          <div class="nm" id="acct-menu-name">Learner</div>
+          <div class="em" id="acct-menu-email">on this device</div>
+        </div>
+        <a class="acct-item" role="menuitem" href="#">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="6.5" r="3.2"/><path d="M3.5 17c.8-3.3 3.4-5 6.5-5s5.7 1.7 6.5 5"/></svg>
+          Profile</a>
+        <a class="acct-item active" role="menuitem" href="#dashboard">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 16V9M8 16V4M13 16v-5M18 16V7"/></svg>
+          Progress</a>
+        <a class="acct-item" role="menuitem" href="../account/saved-words.html">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3h10v14l-5-3.5L5 17z"/></svg>
+          Saved Words <span class="badge" id="acct-saved-count">0</span></a>
+        <a class="acct-item" role="menuitem" href="#">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="2.6"/><path d="M10 2.5v2M10 15.5v2M17.5 10h-2M4.5 10h-2M15.3 4.7l-1.4 1.4M6.1 13.9l-1.4 1.4M15.3 15.3l-1.4-1.4M6.1 6.1L4.7 4.7"/></svg>
+          Settings</a>
+      </div>
+    </div>
+    <a class="btn btn-soft btn-small" href="../index.html">Exit chapter</a>
+  </div>
+</header>
+
+<!-- ============================================================
+     PART 1 — HERO  (static intro that flows into the dashboard)
+============================================================ -->
+<div id="story-stage" class="single">
+
+  <!-- HERO -->
+  <section class="flow-section" data-slide="1">
+    <div class="flow-art">
+      <span class="fa-blob" style="width:520px;height:520px;background:var(--g-subject);top:-120px;left:-120px"></span>
+      <span class="fa-blob" style="width:440px;height:440px;background:var(--coral);bottom:-140px;right:-100px"></span>
+      <span class="fa-chip" style="font-size:64px;top:6%;right:4%;color:var(--g-verb)">war</span>
+      <span class="fa-chip" style="font-size:60px;bottom:8%;left:4%;color:var(--g-verb)">hatte</span>
+      <span class="fa-chip" style="font-size:56px;bottom:4%;right:6%;color:var(--g-time)">gestern</span>
+    </div>
+    <div class="flow-inner">
+      <div class="chapter-num" data-fade>A1 · PHASE 3 · CHAPTER 27</div>
+      <h1 class="display display-xl" data-fade><span class="de">Präteritum</span> <span class="de-em">haben/sein</span></h1>
+      <p class="lede" data-fade style="max-width:620px;margin:24px auto 0">Your first step into the past. Two verbs do almost all the work when you talk about yesterday — <span class="de" style="font-style:italic">haben</span> becomes <span class="de" style="font-style:italic">hatte</span> and <span class="de" style="font-style:italic">sein</span> becomes <span class="de" style="font-style:italic">war.</span></p>
+      <div class="slide-meta" id="slide-meta" data-fade></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================
+     PART 2 — LEARNING DASHBOARD
+     Fast, dense, study-focused. ~95% of study time.
+============================================================ -->
+<main id="dashboard">
+
+  <!-- HEADER -->
+  <div class="dash-header">
+    <div class="container dash-header-inner">
+      <div class="dash-title-row">
+        <div>
+          <div class="dash-actions">
+            <button class="btn btn-primary btn-small" id="act-continue">Continue <span class="arrow">→</span></button>
+            <button class="btn btn-soft btn-small" id="act-complete">Mark chapter complete</button>
+            <button class="btn btn-ghost btn-small" id="act-restart">Restart</button>
+          </div>
+        </div>
+        <div class="dash-stats">
+          <div class="progress-ring-wrap">
+            <div class="progress-ring">
+              <svg width="76" height="76" viewBox="0 0 76 76">
+                <circle class="progress-ring-bg" cx="38" cy="38" r="33"></circle>
+                <circle class="progress-ring-fg" id="progress-ring-fg" cx="38" cy="38" r="33"></circle>
+              </svg>
+              <div class="progress-ring-num" id="progress-ring-num">0%</div>
+            </div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val" id="stat-xp">0 / 160</div>
+            <div class="dash-stat-label">XP earned</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val" id="stat-done">0 / 8</div>
+            <div class="dash-stat-label">Sections</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val" id="stat-status">In progress</div>
+            <div class="dash-stat-label">Status</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY SECTION NAV (generated from data) -->
+  <nav class="dash-nav">
+    <div class="container">
+      <div class="dash-nav-inner" id="dash-nav-inner"></div>
+    </div>
+  </nav>
+
+  <!-- SECTIONS (rendered by chapter-app.js?v=9) -->
+  <div class="container">
+    <div id="dash-sections"></div>
+  </div>
+
+</main>
+
+<!-- ============================================================
+     SCRIPTS — vanilla, no build step. GSAP via CDN.
+     Order: GSAP → data → app (renders DOM) → story (binds GSAP)
+============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="../public/audio/kw-audio-engine.js"></script>
+<script src="../public/audio/kw-tts-config.js"></script>
+<script src="../account/kw-account.js"></script>
+<script src="chapter-a1-27-praeteritum-data.js?v=7"></script>
+<script src="story-lexicon.js"></script>
+<script src="tokenizer.js"></script>
+<script src="chapter-app.js?v=9"></script>
+<script src="chapter-story.js?v=7"></script>
+<script src="chapter-tutor.js?v=7"></script>
+
+</body>
+</html>

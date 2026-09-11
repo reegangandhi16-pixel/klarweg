@@ -1,0 +1,59 @@
+CHAPTER 31 — W-Fragen mit Präpositionen   ·   Grammar: wo(r)+Präposition   ·   Theme: Kommunikation & Fragen   ·   56 words
+
+German (lemma)	Article	Part of Speech	English	NW Source	Status	Tier	Goethe	Activated in	Reinforced in
+anschließend		Adjective	subsequent	NW K12	Active Core	B	Low	31	32, 33, 35
+die Arztkleidung	die	Noun	doctor's uniforms	NW K6	Active Core	A	High	31	32, 33, 35
+auflfallen		Verb	to stand out	NW K12	Active Core	B	Low	31	32, 33, 35
+auslrichten		Verb	to pass on sth to sb	NW K6	Active Core	B	Medium	31	32, 33, 35
+die Bedeutung	die	Noun	meaning	NW K12	Active Core	B	Low	31	32, 33, 35
+befristet		Adverb/Other	temporary	NW K6	Active Core	B	Medium	31	32, 33, 35
+der Busfahrer	der	Noun	bus driver	NW K6	Active Core	B	Medium	31	32, 33, 35
+die Hauptrolle		Adverb/Other	lead	NW K12	Active Core	B	Low	31	32, 33, 35
+die Zugverbindung		Adverb/Other	train connection	NW K6	Active Core	B	Medium	31	32, 33, 35
+die Durchsage	die	Noun	announcement	NW K6	Active Core	B	Medium	31	32, 33, 35
+erfolgreich		Adverb/Other	successful	NW K6	Active Core	B	Medium	31	32, 33, 35
+erhalten		Verb	to receive	NW K12	Active Core	B	Low	31	32, 33, 35
+die Fabrik	die	Noun	factory	NW K6	Active Core	B	Medium	31	32, 33, 35
+der Feiertag	der	Noun	holiday	NW K6	Active Core	B	Medium	31	32, 33, 35
+die Führung	die	Noun	guided tour	NW K12	Active Core	B	Low	31	32, 33, 35
+das Gehalt	das	Noun	salary	NW K6	Active Core	A	High	31	32, 33, 35
+gelaunt		Verb	to be in a	NW K12	Active Core	B	Low	31	32, 33, 35
+die Geschäftsreise	die	Noun	business trip	NW K6	Active Core	A	High	31	32, 33, 35
+der Hardrock	der	Noun	hard rock	NW K12	Active Core	B	Low	31	32, 33, 35
+hektisch		Adjective	hectic	NW K6	Active Core	B	Medium	31	32, 33, 35
+insbesondere		Adverb/Other	especially	NW K12	Active Core	B	Low	31	32, 33, 35
+der Kauf	der	Noun	purchase	NW K12	Active Core	B	Low	31	32, 33, 35
+die Kompetenz	die	Noun	expertise	NW K6	Active Core	B	Medium	31	32, 33, 35
+komplett		Adverb/Other	complete	NW K6	Active Core	B	Medium	31	32, 33, 35
+die Kulisse	die	Noun	crime	NW K12	Active Core	B	Low	31	32, 33, 35
+der Kurspartner	der	Noun	course partner	NW K6	Active Core	A	High	31	32, 33, 35
+die Königin	die	Noun	queen	NW K12	Active Core	B	Low	31	32, 33, 35
+der Mediziner	der	Noun	doctor	NW K6	Active Core	B	Medium	31	32, 33, 35
+mit|helfen		Verb	to assist	NW K6	Active Core	B	Medium	31	32, 33, 35
+die Musikerin	die	Noun	musician	NW K6	Active Core	B	Medium	31	32, 33, 35
+nun		Adverb/Other	now	NW K6	Active Core	B	Medium	31	32, 33, 35
+das Plastik	das	Noun	plastic	NW K6	Active Core	B	Medium	31	32, 33, 35
+professionell		Adverb/Other	professional	NW K6	Active Core	B	Medium	31	32, 33, 35
+der Rap	der	Noun	rap	NW K12	Active Core	B	Low	31	32, 33, 35
+der Roboter	der	Noun	robot	NW K6	Active Core	B	Medium	31	32, 33, 35
+der Rock	der	Noun	rock	NW K12	Active Core	B	Low	31	32, 33, 35
+der Rucksack	der	Noun	backpack	NW K12	Active Core	B	Low	31	32, 33, 35
+die Rückfahrt	die	Noun	return	NW K6	Active Core	B	Medium	31	32, 33, 35
+der Sammler	der	Noun	collector	NW K12	Active Core	B	Low	31	32, 33, 35
+das Schloss	das	Noun	castle	NW K12	Active Core	B	Low	31	32, 33, 35
+die Sofort-Überweisung	die	Noun	instant bank transfer	NW K12	Active Core	A	High	31	32, 33, 35
+die Stimmung	die	Noun	mood	NW K12	Active Core	B	Low	31	32, 33, 35
+der Trainer	der	Noun	trainer	NW K6	Active Core	B	Medium	31	32, 33, 35
+die Umwelt	die	Noun	environment	NW K6	Active Core	A	High	31	32, 33, 35
+der Versand	der	Noun	shipping	NW K12	Active Core	B	Low	31	32, 33, 35
+virtuell		Adverb/Other	virtual	NW K6	Active Core	B	Medium	31	32, 33, 35
+zurück|rufen		Verb	to call sb back	NW K6	Active Core	B	Medium	31	32, 33, 35
+das Abend-Programm	das	Noun	evening programme	NW K6	Active Support	C	Low	32	35
+die Bildbeschreibung	die	Noun	description of a picture	NW K12	Active Support	C	Low	32	35
+die Kunstexpertin	die	Noun	art expert	NW K12	Active Support	C	Low	32	35
+der Privatkunde	der	Noun	private client	NW K12	Active Support	C	Low	32	35
+der Tiertrainer	der	Noun	animal trainer	NW K6	Active Support	C	Low	32	35
+die Verfilmung	die	Noun	film adaptation	NW K12	Active Support	C	Low	32	35
+die Verwendung	die	Noun	usage	NW K6	Active Support	C	Low	32	35
+das Wildschwein	das	Noun	wild boar	NW K12	Active Support	C	Low	32	35
+die Zahlungsart	die	Noun	payment method	NW K12	Active Support	C	Low	32	35

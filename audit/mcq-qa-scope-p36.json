@@ -1,0 +1,268 @@
+{
+ "phase": "36 — proof that a selector-level QA scope fix is safe (MEASUREMENT ONLY, nothing modified)",
+ "generatedAt": "2026-08-15T07:07:30.720Z",
+ "harness": "chapter/qa-p36-scope.html — runs the UNMODIFIED qa-engine, rebuilds its exact node list, then partitions the real findings by whether the finding’s node is a colorWordsIn decorative span. qa-engine.js was never edited; the selector change is applied only as a post-hoc partition of genuine engine output.",
+ "step1_distinction": {
+  "chosen": "ancestor test — n.closest('button.mcq-option')",
+  "whyReliable": "colorWordsIn has EXACTLY two call sites in the entire codebase (chapter-app.js:3050 exercise mcq, :3349 reading-question mcq). Both are colorWordsIn(b.querySelector('.de')) where b is el('button', { class: 'mcq-option' }). Therefore every decorative span has a button.mcq-option ancestor by construction, and no wrapWordsIn span can have one (wrapWordsIn’s own TreeWalker rejects text inside LINK_EXCLUDE, whose first entry is \"button\").",
+  "censusEvidence": "grep for colorWordsIn returns 3 hits: the definition at :2928 and the two call sites. No third caller exists.",
+  "rejectedAlternatives": [
+   {
+    "signal": "colour value",
+    "why": "explicitly excluded by the brief and not stable"
+   },
+   {
+    "signal": "presence of a click listener",
+    "why": "not expressible as a DOM selector; listeners are invisible to querySelectorAll"
+   },
+   {
+    "signal": "absence of wp-inline-link",
+    "why": "that marker distinguishes in-popup links, not decorative ones — normal prose links also lack it"
+   }
+  ],
+  "confidence": "PROVEN — the distinction follows from an exhaustive call-site census, not from sampling"
+ },
+ "step2_step3_step4_measurement": {
+  "chaptersTested": 12,
+  "decorativeNodesSeen": 242,
+  "findingsDropped": 25,
+  "droppedByCode": {
+   "HEADWORD_COLOUR_MISMATCH": 14,
+   "ROLE_CONTRADICTS_BADGE": 11
+  },
+  "beforeByCode": {
+   "HEADWORD_COLOUR_MISMATCH": 24,
+   "ROLE_CONTRADICTS_BADGE": 30,
+   "PARADIGM_CLASS_MISMATCH": 5,
+   "CASE_COLLISION_CAPITALISED": 4,
+   "NO_POPUP": 1,
+   "CASE_COLLISION_LOWERCASE": 1
+  },
+  "afterByCode": {
+   "HEADWORD_COLOUR_MISMATCH": 10,
+   "ROLE_CONTRADICTS_BADGE": 19,
+   "PARADIGM_CLASS_MISMATCH": 5,
+   "CASE_COLLISION_CAPITALISED": 4,
+   "NO_POPUP": 1,
+   "CASE_COLLISION_LOWERCASE": 1
+  },
+  "exactMatchToPrediction": "the 14 HCM dropped are exactly the 14 G-A occurrences named in P30/P31, and the 11 RCB dropped are exactly their co-located records. No other code lost a single finding.",
+  "perChapter": [
+   {
+    "file": "chapter-b2-15-konzessivsaetze-obgleich.html",
+    "role": "affected (Obgleich ×3)",
+    "deco": 30,
+    "before": 3,
+    "after": 0,
+    "drop": 3,
+    "dropped": [
+     "HCM@782 \"Obgleich\"",
+     "HCM@790 \"Obgleich\"",
+     "HCM@798 \"Obgleich\""
+    ],
+    "keptHcm": []
+   },
+   {
+    "file": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+    "role": "affected (Infolgedessen ×3)",
+    "deco": 30,
+    "before": 8,
+    "after": 2,
+    "drop": 6,
+    "dropped": [
+     "RCB@794",
+     "HCM@794",
+     "RCB@801",
+     "HCM@801",
+     "RCB@806",
+     "HCM@806"
+    ],
+    "keptHcm": [],
+    "keptOther": "NO_POPUP ×1 and CASE_COLLISION_CAPITALISED ×1 retained"
+   },
+   {
+    "file": "chapter-c1-26-passiv-und-passiversatzformen.html",
+    "role": "affected (dokumentiert ×3)",
+    "deco": 20,
+    "before": 6,
+    "after": 0,
+    "drop": 6,
+    "dropped": [
+     "RCB@241",
+     "HCM@241",
+     "RCB@245",
+     "HCM@245",
+     "RCB@247",
+     "HCM@247"
+    ],
+    "keptHcm": []
+   },
+   {
+    "file": "chapter-b2-45-passiversatz-sich-lassen.html",
+    "role": "affected (sich ×2)",
+    "deco": 13,
+    "before": 4,
+    "after": 0,
+    "drop": 4,
+    "dropped": [
+     "RCB@813",
+     "HCM@813",
+     "RCB@818",
+     "HCM@818"
+    ],
+    "keptHcm": []
+   },
+   {
+    "file": "chapter-b1-17-nebensatz-damit-um-zu.html",
+    "role": "affected (um ×1)",
+    "deco": 19,
+    "before": 9,
+    "after": 7,
+    "drop": 2,
+    "dropped": [
+     "RCB@925 \"um\"",
+     "HCM@925 \"um\""
+    ],
+    "keptHcm": [],
+    "keptOther": "7 genuine ROLE_CONTRADICTS_BADGE retained"
+   },
+   {
+    "file": "chapter-a1-34-schreiben.html",
+    "role": "affected (Liebe ×1)",
+    "deco": 21,
+    "before": 9,
+    "after": 7,
+    "drop": 2,
+    "dropped": [
+     "RCB@448 \"Liebe\"",
+     "HCM@448 \"Liebe\""
+    ],
+    "keptHcm": [],
+    "keptOther": "5 RCB + 2 CCC retained"
+   },
+   {
+    "file": "chapter-a1-37-praep-dativ.html",
+    "role": "affected (Fuß ×1)",
+    "deco": 18,
+    "before": 2,
+    "after": 0,
+    "drop": 2,
+    "dropped": [
+     "RCB@527 \"Fuß\"",
+     "HCM@527 \"Fuß\""
+    ],
+    "keptHcm": []
+   },
+   {
+    "file": "chapter-a1-8-goethemini1.html",
+    "role": "control G-B (deutsch ×4)",
+    "deco": 22,
+    "before": 5,
+    "after": 5,
+    "drop": 0,
+    "dropped": [],
+    "keptHcm": [
+     "133 \"deutsch\"",
+     "542 \"deutsch\"",
+     "581 \"deutsch\"",
+     "585 \"deutsch\""
+    ]
+   },
+   {
+    "file": "chapter-a1-15-cafe.html",
+    "role": "control G-B (Zahlen ×2)",
+    "deco": 18,
+    "before": 11,
+    "after": 11,
+    "drop": 0,
+    "dropped": [],
+    "keptHcm": [
+     "168 \"Zahlen\"",
+     "581 \"Zahlen\""
+    ]
+   },
+   {
+    "file": "chapter-a1-39-ortsangaben.html",
+    "role": "control G-C (letter a)",
+    "deco": 26,
+    "before": 2,
+    "after": 2,
+    "drop": 0,
+    "dropped": [],
+    "keptHcm": [
+     "570 \"a\""
+    ]
+   },
+   {
+    "file": "chapter-a1-7-jaodernein.html",
+    "role": "control G1 by-design (Nein)",
+    "deco": 21,
+    "before": 6,
+    "after": 6,
+    "drop": 0,
+    "dropped": [],
+    "keptHcm": [
+     "243 \"Nein\"",
+     "328 \"Nein\"",
+     "386 \"Nein\""
+    ]
+   },
+   {
+    "file": "chapter-a1-1-alphabet.html",
+    "role": "pure control",
+    "deco": 4,
+    "before": 0,
+    "after": 0,
+    "drop": 0,
+    "dropped": [],
+    "keptHcm": []
+   }
+  ]
+ },
+ "step5_genuineCasesRetained": {
+  "allRetained": true,
+  "G-B deutsch ×4 (a1-8)": "retained — 5 findings before, 5 after, 0 dropped",
+  "G-B Zahlen ×2 (a1-15)": "retained — 11 before, 11 after, 0 dropped",
+  "G-C letter a (a1-39)": "retained — 2 before, 2 after, 0 dropped",
+  "G1 by-design Nein ×3 (a1-7)": "retained — 6 before, 6 after, 0 dropped",
+  "pureControl": "a1-1-alphabet 0 before, 0 after — no false drops in a clean chapter",
+  "nonHcmCodesUntouched": "PARADIGM_CLASS_MISMATCH 5→5, CASE_COLLISION_CAPITALISED 4→4, NO_POPUP 1→1, CASE_COLLISION_LOWERCASE 1→1 — identical before and after",
+  "noGenuineWrapWordsInFindingLost": "PROVEN across all 12 chapters: every dropped finding sits on a node with a button.mcq-option ancestor, and 242 decorative nodes were present while only 25 findings existed on them"
+ },
+ "step6_decision": {
+  "verdict": "SAFE QA SCOPE FIX",
+  "basis": [
+   "the distinction is exhaustive by construction (2 call sites, both inside button.mcq-option), not statistical",
+   "measured, not assumed: 25 findings dropped, and they are precisely the predicted 14 HCM + 11 RCB",
+   "four control chapters covering all three genuine HCM groups lost nothing",
+   "no non-HCM/RCB code changed anywhere"
+  ],
+  "caveats": [
+   "b2-16 retains a NO_POPUP finding. That finding is NOT on a decorative node, so it survives correctly — but it is worth noting that if a future change made the engine skip decorative nodes at SELECTION time rather than filtering findings afterwards, occurrence indices would shift corpus-wide, exactly as seen in P22/P23. A post-selection filter avoids that; a pre-selection skip does not.",
+   "this phase measured 12 chapters, not 259. The corpus-wide effect is expected to be −14 HCM / −11 RCB because those are the only known decorative findings, but a full sweep would be required to confirm no other chapter has decorative findings."
+  ],
+  "recommendedShape": "exclude nodes with a button.mcq-option ancestor from the QA node list, or equivalently suppress findings on them. NOT IMPLEMENTED."
+ },
+ "impactRestatement": {
+  "previous": "−14 HCM / −11 RCB",
+  "confirmed": true,
+  "measuredExactly": "14 HCM and 11 RCB dropped across the 7 affected chapters",
+  "interpretation": "these were QA artefacts on decorative spans, not learner-facing defects (P35). Removing them reduces the corpus HCM population from 37 to 23 and RCB from 1020 to 1009, subject to full-sweep confirmation."
+ },
+ "productionSafety": {
+  "productionModified": false,
+  "dataModified": false,
+  "cssModified": false,
+  "qaEngineModified": false,
+  "assertionsModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "fullSweep": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "chapter/qa-p36-scope.html",
+  "audit/mcq-qa-scope-p36.json"
+ ],
+ "filesModified": "none"
+}

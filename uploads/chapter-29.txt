@@ -1,0 +1,33 @@
+CHAPTER 29 — Indefinitpronomen   ·   Grammar: Indefinitpronomen   ·   Theme: Wohnen & Nachbarn   ·   30 words
+
+German (lemma)	Article	Part of Speech	English	NW Source	Status	Tier	Goethe	Activated in	Reinforced in
+der Aushang	der	Noun	announcement	NW K10	Active Core	B	Medium	29	30, 31, 35
+der Bauernhof	der	Noun	farm	NW K10	Active Core	B	Medium	29	30, 31, 35
+blitzschnell		Adverb/Other	lightning-fast	NW K10	Active Core	B	Medium	29	30, 31, 35
+das Bärchen	das	Noun	little bear	NW K10	Active Core	B	Medium	29	30, 31, 35
+die Bäuerin	die	Noun	farmer	NW K10	Active Core	B	Medium	29	30, 31, 35
+die Dekoration		Adverb/Other	decoration	NW K10	Active Core	B	Medium	29	30, 31, 35
+dünn		Adverb/Other	thin	NW K10	Active Core	B	Medium	29	30, 31, 35
+einmalig		Adverb/Other	unique	NW K10	Active Core	B	Medium	29	30, 31, 35
+die Fläche	die	Noun	area	NW K10	Active Core	B	Medium	29	30, 31, 35
+gespannt		Adverb/Other	curious	NW K10	Active Core	B	Medium	29	30, 31, 35
+gießen		Verb	to water	NW K10	Active Core	B	Medium	29	30, 31, 35
+die Katze	die	Noun	cat	NW K10	Active Core	B	Medium	29	30, 31, 35
+die Kerze	die	Noun	candle	NW K10	Active Core	B	Medium	29	30, 31, 35
+der Mieter	der	Noun	tenant	NW K10	Active Core	A	High	29	30, 31, 33, 35
+die Mitbewohnerin	die	Noun	flatmate	NW K10	Active Core	A	High	29	30, 31, 33, 35
+mitten		Adverb/Other	in the middle of	NW K10	Active Core	B	Medium	29	30, 31, 35
+der Roller	der	Noun	Scooter	NW K10	Active Core	B	Medium	29	30, 31, 35
+das Schaf	das	Noun	sheep	NW K10	Active Core	B	Medium	29	30, 31, 35
+spiegeln		Verb	to reflect	NW K10	Active Core	B	Medium	29	30, 31, 35
+das Stockwerk	das	Noun	floor	NW K10	Active Core	B	Medium	29	30, 31, 35
+der Tiername	der	Noun	animal name	NW K10	Active Core	B	Medium	29	30, 31, 35
+verbessern		Verb	to improve	NW K10	Active Core	B	Medium	29	30, 31, 35
+voll		Adjective	complete	NW K10	Active Core	B	Medium	29	30, 31, 35
+vorgekommen		Adverb/Other	again.)	NW K10	Active Core	B	Medium	29	30, 31, 35
+zum Teil		Adverb/Other	in part	NW K10	Active Core	B	Medium	29	30, 31, 35
+zurückllaufen		Verb	to run back	NW K10	Active Core	B	Medium	29	30, 31, 35
+der Blumentopf	der	Noun	flower pot	NW K10	Active Support	C	Low	30	35
+die Lebenssituation	die	Noun	situation in life	NW K10	Active Support	C	Low	30	35
+die Tierärztin	die	Noun	vet	NW K10	Active Support	C	Low	30	35
+intensiv		Grammar term	intense	NW K10	Reference/System	Sys	—	—	—

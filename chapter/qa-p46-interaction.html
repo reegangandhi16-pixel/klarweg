@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P46 interaction probe</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:16px;max-width:820px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:pre-wrap;max-height:56vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P46 — interaction &amp; runtime probe</h1>
+<div class="sub">Read-only. Captures console/runtime errors, counts interactive controls and how many carry a click listener, then exercises one MCQ option and one audio button per chapter and observes the response. Nothing is modified.<br><code>KWP46.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+const SAMPLE=['chapter-a1-1-alphabet.html','chapter-a1-3-nominativ.html','chapter-a1-15-cafe.html',
+ 'chapter-a2-16-goethe-mini-2.html','chapter-b1-7-praeteritum.html','chapter-b2-14-goethe-mini-test-1.html',
+ 'chapter-b2-36-goethe-halbzeit-test.html','chapter-c1-04-hauptsaetze-elegant-verbinden.html',
+ 'chapter-c1-42-goethe-zertifikat-c1-probepruefung.html','chapter-c2-29-goethe-c2-final.html'];
+const PROBE=`<script>
+window.__ERRS=[];
+window.addEventListener('error',function(e){window.__ERRS.push({t:'error',m:String(e.message),src:(e.filename||'').split('/').pop()+':'+e.lineno});});
+window.addEventListener('unhandledrejection',function(e){window.__ERRS.push({t:'reject',m:String((e.reason&&e.reason.message)||e.reason)});});
+(function(){var ce=console.error;console.error=function(){window.__ERRS.push({t:'console',m:[].slice.call(arguments).map(String).join(' ').slice(0,160)});return ce.apply(console,arguments);};})();
+window.__LISTEN=new WeakSet();
+(function(){var o=EventTarget.prototype.addEventListener;
+ EventTarget.prototype.addEventListener=function(ty,fn,op){if(ty==='click'&&this&&this.nodeType===1)window.__LISTEN.add(this);return o.call(this,ty,fn,op);};})();
+<\/script>`;
+async function boot(file){
+  const html=await (await fetch(file+'?p46='+Date.now())).text();
+  const base=location.href.replace(/[^/]*$/,'');
+  const out=html.replace('<head>','<head><base href="'+base+'">'+PROBE);
+  const f=$('#frame');
+  await new Promise(res=>{f.onload=()=>res();f.srcdoc=out;});
+  await new Promise(r=>setTimeout(r,7000));
+  return {w:f.contentWindow,d:f.contentDocument};
+}
+window.KWP46={async run(){
+ const out=[];
+ for(let i=0;i<SAMPLE.length;i++){
+  const file=SAMPLE[i];$('#status').textContent='['+(i+1)+'/'+SAMPLE.length+'] '+file.slice(8,36);
+  try{
+   const {w,d}=await boot(file);
+   const L=w.__LISTEN;
+   const btns=[].slice.call(d.querySelectorAll('button')).filter(b=>!!(b.offsetParent||b.getClientRects().length));
+   const dead=btns.filter(b=>{try{return !L.has(b)&&!b.closest('form')&&!b.hasAttribute('data-no-link');}catch(e){return false;}});
+   const deadKinds={};dead.forEach(b=>{const k=(String(b.className).split(/\s+/)[0]||b.type||'(bare)');deadKinds[k]=(deadKinds[k]||0)+1;});
+   // sections present
+   const secs=[].slice.call(d.querySelectorAll('[id^="sec-"]')).map(s=>s.id);
+   const empties=secs.filter(id=>{const e=d.getElementById(id);return (e.textContent||'').trim().length<40;});
+   // MCQ response test
+   const opt=d.querySelector('.mcq-option:not([disabled])');
+   let mcq=null;
+   if(opt){const before=d.querySelectorAll('.mcq-option.is-correct,.mcq-option.is-wrong').length;
+     opt.click();await new Promise(r=>setTimeout(r,400));
+     const after=d.querySelectorAll('.mcq-option.is-correct,.mcq-option.is-wrong').length;
+     mcq={responded:after>before,before,after};}
+   // audio button test
+   const ab=d.querySelector('.audio-play-btn, .vword-audio, [class*="audio"][class*="btn"]');
+   let audio=null;
+   if(ab){const st0=ab.className;ab.click();await new Promise(r=>setTimeout(r,600));
+     audio={found:true,classBefore:st0,classAfter:ab.className,changed:st0!==ab.className,
+       hasListener:(function(){try{return L.has(ab);}catch(e){return null;}})()};}
+   out.push({file:file.slice(8,44),errors:(w.__ERRS||[]).slice(0,5),errorCount:(w.__ERRS||[]).length,
+     buttons:btns.length,noListener:dead.length,noListenerKinds:deadKinds,
+     sections:secs.length,emptySections:empties,
+     clickable:d.querySelectorAll('.rw, .de-link').length,mcq,audio});
+  }catch(e){out.push({file:file.slice(8,44),fatal:String(e&&e.message||e)});}
+  window.__P46=out;$('#out').textContent=JSON.stringify(out,null,1);
+ }
+ $('#status').textContent='done';return out.length;
+}};
+$('#out').textContent='ready';
+</script>
+</body></html>

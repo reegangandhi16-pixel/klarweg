@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Klarweg — Learner-Flow QA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--canvas:#FAFAF7;--surface:#FFFFFF;--elevated:#F4F3EE;--warm:#FFF8EC;--ink-primary:#0E0E10;--ink-secondary:#5A5A60;--ink-tertiary:#9A9AA0;--accent:#1F4E4A;--coral:#E55A3F;--line:rgba(14,14,16,.09);--base:240ms;--ease:cubic-bezier(0.16,1,0.3,1)}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink-primary);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(31,78,74,.3)}a:hover{color:#163a37}
+.wrap{max-width:1100px;margin:0 auto;padding:96px 36px 120px}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-tertiary);margin:0 0 16px}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:46px;line-height:1.12;letter-spacing:-.015em;margin:0 0 16px;max-width:22ch}
+.lede{font-size:18px;color:var(--ink-secondary);max-width:680px;margin:0 0 24px;text-wrap:pretty}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:28px;letter-spacing:-.01em;margin:0 0 8px}
+h3{font-weight:600;font-size:16px;margin:0 0 8px}
+p{margin:0 0 12px;max-width:680px;text-wrap:pretty}
+section{padding-top:64px;border-top:1px solid var(--line);margin-top:64px}
+.sub{color:var(--ink-secondary);max-width:680px;margin:0 0 32px}
+.verdict{background:var(--warm);border:1px solid rgba(229,90,63,.2);border-radius:12px;padding:28px 32px;margin:0 0 48px}
+.verdict .v{font-family:'Fraunces',Georgia,serif;font-size:30px;margin:0 0 8px}
+.verdict p{margin:0;color:var(--ink-secondary);max-width:100%}
+ol.pts{margin:16px 0 0;padding-left:22px;max-width:760px}ol.pts li{margin-bottom:10px;color:var(--ink-secondary)}
+ol.pts b{color:var(--ink-primary);font-weight:600}
+.items{display:flex;flex-direction:column;gap:12px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 24px;transition:transform var(--base) var(--ease),box-shadow var(--base) var(--ease)}
+.item:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(14,14,16,.06)}
+.hd{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;padding:3px 8px;border-radius:5px;background:var(--elevated);color:var(--ink-secondary);white-space:nowrap}
+.p1{background:rgba(229,90,63,.12);color:#b8482f}.p2{background:rgba(31,78,74,.1);color:var(--accent)}.p3{background:var(--elevated);color:var(--ink-tertiary)}
+.item p{margin:0;color:var(--ink-secondary);font-size:15px}.item p+p{margin-top:8px}
+.ev{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--ink-primary);background:var(--elevated);border-radius:6px;padding:10px 12px;margin-top:10px;display:block;overflow-x:auto}
+code{font-family:'JetBrains Mono',monospace;font-size:.88em;background:var(--elevated);padding:2px 5px;border-radius:4px}
+.de{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;color:var(--ink-primary)}
+table{border-collapse:collapse;width:100%;margin-top:16px;font-size:14px}
+th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-tertiary);font-weight:400;padding:0 14px 10px 0;border-bottom:1px solid var(--line)}
+td{padding:12px 14px 12px 0;border-bottom:1px solid var(--line);color:var(--ink-secondary);vertical-align:top}
+td.k{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-primary);white-space:nowrap}
+.score{display:grid;grid-template-columns:1fr auto;gap:0 16px;align-items:center;max-width:760px}
+.score>div{padding:11px 0;border-bottom:1px solid var(--line)}
+.score .n{font-family:'JetBrains Mono',monospace;font-size:14px;text-align:right;color:var(--ink-primary)}
+.bar{height:4px;background:var(--elevated);border-radius:2px;overflow:hidden;margin-top:6px;max-width:280px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:2px}
+.note{font-size:13.5px;color:var(--ink-tertiary);margin-top:3px}
+@media(max-width:640px){.wrap{padding:64px 24px 80px}h1{font-size:34px}section{padding-top:48px;margin-top:48px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div class="wrap">
+<p class="eyebrow">Learner-flow QA · A1 Ch1 → C2 Ch29</p>
+<h1>Does Klarweg work as a learning experience?</h1>
+<p class="lede">The previous passes established that the 258 chapters are structurally correct and render. This one asks a different question: whether a real learner can walk the whole path and understand it. Evidence comes from the curriculum data itself — sequence, load, dialogue, register — not from assumptions about it.</p>
+
+<div class="verdict">
+<p class="eyebrow" style="margin-bottom:10px">A · Verdict</p>
+<p class="v">Ready — curriculum frozen</p>
+<p>The spine is sound and unusually well sequenced. The load observations below are recorded as watchlist items against a frozen vocabulary curriculum, not as defects. No functional bug remains open.</p>
+<ol class="pts">
+<li><b>Grammar sequencing is genuinely careful.</b> Every level opens with a deliberate small step: A2 begins with Genitiv <span class="de">Name + s</span> ("your first step into A2 — and it's a small one"), then two explicit review chapters before cases start pulling weight. That is real curriculum design, not a topic list.</li>
+<li><b>Level transitions extend rather than repeat.</b> B2 revisits B1 topics only to advance them — Konjunktiv II der Vergangenheit after B1's polite requests, Relativsätze im Genitiv after B1's Dativ, <span class="de">während/seitdem</span> after B1's general temporal clauses. No B2 chapter reteaches a B1 chapter.</li>
+<li><b>The Hinglish teacher voice is the strongest single component.</b> Across ~80,000 words of explanation the register holds: <span class="de">tum</span> throughout, zero Sanskritised textbook vocabulary, and explanations that argue rather than translate.</li>
+<li><b>The chapter loop is coherent.</b> In every chapter sampled, story, grammar, exercises, quiz, listening, speaking and writing all target the same objective, and the writing prompt names the structures the chapter taught.</li>
+<li><b>A1 vocabulary load is uneven.</b> Individual chapters carry 104–135 entries while their neighbours carry 2–8. Recorded as an observation against the frozen vocabulary curriculum — no change proposed.</li>
+<li><b>C1 carries 5 entries per chapter, 231 for the level.</b> The entries themselves are the strongest vocabulary work in the product. Observation only; frozen.</li>
+<li><b>The story has a recurring character but no continuity.</b> Timo appears in 208 of 258 chapters, opposite 154 different partners. Each chapter is a scene with a stranger.</li>
+<li><b>Difficulty ramps honestly at the top.</b> Writing goes 20 → 35 → 40 → 60 → 150 words per level, and C2 advances on nuance and register rather than on manufactured difficulty.</li>
+<li><b>Listening is the weakest skill strand throughout.</b> Transcripts stay at 34–47 words from A1 to C2 — a C1 listening text is barely longer than an A1 one.</li>
+</ol>
+</div>
+
+<section>
+<p class="eyebrow">B · Observations — recorded, not actioned</p>
+<h2>Load findings against a frozen curriculum</h2>
+<p class="sub">The vocabulary architecture is intentionally frozen. The two vocabulary findings below are recorded as observations only: no A1 or C1 vocabulary is to be moved, added, removed, or rebalanced, and nothing downstream (dialogues, stories, exercises, quizzes, audio) changes on account of a word count. The listening finding is report-only by the same instruction. Nothing here is a P0, and nothing blocks a learner.</p>
+<div class="items">
+
+<div class="item">
+<div class="hd"><span class="tag p3">Frozen · observation</span><h3>A1 · Ch16, 22, 38, 39, 43, 44 · Vocabulary — uneven load</h3></div>
+<p>Six A1 chapters introduce more than 100 new words each, inside a stated 30–40 minute session. Their immediate neighbours introduce single digits, so the learner's daily load swings by a factor of fifty with no signal that it has.</p>
+<span class="ev">a1-22 Berufe 135 · a1-38 Wechselpräpositionen 131 · a1-16 Hobbies 115 · a1-39 Ortsangaben 115 · a1-43 Small Talk 105 · a1-44 Imperativ 104   —vs—   a1-41 Dativpronomen 2 · a1-36 Dativ 3 · a1-28 Perfekt 4</span>
+<p><b>Impact:</b> A learner meeting 135 words in <span class="de">Berufe &amp; Arbeit</span> will retain a fraction and conclude they are failing, when the chapter's actual grammar objective — <span class="de">Ich bin …</span> / <span class="de">Ich arbeite als …</span> — is small and achievable. The spikes are also where a beginner is most likely to abandon the course.</p>
+<p><b>Action: none.</b> Recorded as an observation. If the distribution is ever revisited, the least invasive option would be presentational — distinguishing a taught set from a reference word bank without moving any entry between chapters — but the vocabulary curriculum is frozen and no change is proposed.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag p3">Frozen · observation</span><h3>C1 · all 43 chapters · Vocabulary — 231 words for an entire level</h3></div>
+<p>Every C1 chapter carries exactly 5–10 vocabulary entries. The entries themselves are excellent — collocations with register, nuance notes, two worked examples each, e.g. <span class="de">eine Entscheidung treffen</span> taught explicitly against the wrong <span class="de">machen</span> — and the section objective honestly says "key collocations and near-synonyms" rather than promising a word list.</p>
+<span class="ev">C1 total 231 (median 5/chapter)   ·   B1 2,128 (median 44)   ·   B2 2,569 (median 49)   ·   C2 712 (median 16)</span>
+<p><b>Impact:</b> C1 is defined by lexical range and precision. A learner arriving with a solid B2 lexicon gets depth on ~230 items and no systematic expansion, which is the one thing the Goethe C1 reading and listening modules test hardest. The design intent — precision over volume — is defensible; the volume is not.</p>
+<p><b>Action: none.</b> Recorded as an observation. The existing entries are the strongest vocabulary work in the curriculum and are left exactly as authored.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag p2">Report-only</span><h3>All levels · Listening — difficulty does not progress</h3></div>
+<p>Listening transcript length is essentially flat across the whole curriculum, and the C1/C2 texts are shorter than the B1 ones.</p>
+<span class="ev">median transcript words — A1 34 · A2 34 · B1 46 · B2 44 · C1 47 · C2 45   (max anywhere: 65)</span>
+<p><b>Impact:</b> Goethe listening at B2 and above tests sustained comprehension of connected speech — a lecture excerpt, an interview, a discussion. A 45-word exchange cannot rehearse that at any level, so listening is the one skill where the curriculum stops advancing after B1 while reading, writing and speaking keep climbing. The comprehension questions are well built; there is simply not enough audio to work with.</p>
+<p><b>Action: none.</b> Report-only. Any change here would mean new authored transcripts, which is curriculum content rather than a repair. Noted for a future authoring cycle if you choose to open one.</p>
+</div>
+</div>
+</section>
+
+<section>
+<p class="eyebrow">C · Pedagogical findings</p>
+<h2>P2 — genuine issues</h2>
+<div class="items">
+
+<div class="item">
+<div class="hd"><span class="tag p2">P2</span><h3>Story integration — a recurring character without a story</h3></div>
+<p>Timo is in 208 of 258 chapters; the second speaker is drawn from 154 different names, most appearing once. So the anchor exists but the relationship never does: Timo has one scene with a stranger, 208 times. The scenes themselves are well matched to their chapter topics — that part works.</p>
+<p><b>Why it matters:</b> Story-based learning earns its cost through accumulation. A learner who followed Rohan and Frau Weber from A1 Ch1 would arrive at the A1 final — which deliberately "ends where it began, in Frau Weber's classroom" — with a payoff. As authored, that closing line refers to a classroom the learner last saw 46 chapters earlier. <span class="note">Partly subjective: the scene-per-chapter model is a legitimate choice, and fixing it means rewriting scene-setting across ~200 chapters. Not recommended as a retrofit.</span></p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag p2">P2</span><h3>B2 Ch68 · Dialogue — the phrase parade</h3></div>
+<p>The <span class="de">Redemittel für Diskussionen</span> dialogue demonstrates its phrases instead of using them. Timo asks <span class="de">Darf ich kurz nachfragen?</span>, is granted the floor, asks his question — and Katrin answers <span class="de">Genau.</span> then immediately asks <span class="de">darf ich dich kurz unterbrechen?</span> when nothing is underway to interrupt, followed by <span class="de">Ich möchte kurz zusammenfassen</span> of a discussion that has not happened.</p>
+<p>This is the clearest failure of the "would they still have this conversation if nobody were learning German?" test that I found. It is one chapter, and the chapter's own teaching point — that Redemittel are memorised chunks — is sound; only the dialogue undercuts it by showing the chunks with no conversation to attach them to.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag p2">P2</span><h3>C1 · Grammar density (11–12 blocks per session)</h3></div>
+<p>Ten C1 chapters carry 11–12 grammar blocks in a 95–105 minute session, against a C1 median of 10 and a median of 5 at A1/A2 — <span class="de">Raum &amp; Zeit präzise ausdrücken</span> runs twelve blocks including two reference tables.</p>
+<p>Each individual block is well written and the chapter framing is genuinely C1 ("B2 asks which tense is correct; C1 asks which tense sounds best"). The concern is the volume in one sitting, not the material.</p>
+</div>
+
+<div class="item">
+<div class="hd"><span class="tag p3">Frozen · observation</span><h3>A1 → A2 → B1 · Total vocabulary well above CEFR expectation</h3></div>
+<p>A1 introduces 1,984 words and A2 a further 1,607 — about 3,600 by the end of A2, against a Goethe A2 expectation nearer 1,300. The words are real and well glossed, so this is exposure rather than error. Recorded as an observation; no change proposed.</p>
+</div>
+
+</div>
+</section>
+
+<section>
+<p class="eyebrow">D · Level transitions</p>
+<h2>Where the seams are</h2>
+<table>
+<thead><tr><th>Transition</th><th>What works</th><th>Biggest risk</th><th>Recommended action</th></tr></thead>
+<tbody>
+<tr><td class="k">A1 → A2</td><td>Best-designed seam in the curriculum. A2 opens on Genitiv <span class="de">Name + s</span> (25 min, 17 words, no new endings), then Perfekt and Artikel review chapters that explicitly add nothing new.</td><td>The learner arrives carrying ~2,000 A1 words.</td><td>None. The sequence itself is exemplary.</td></tr>
+<tr><td class="k">A2 → B1</td><td>A2 closes with relative clauses and Konjunktiv II already in play, so B1's <span class="de">Infinitiv mit zu</span> opening is a step, not a jump. Grammar blocks rise 5 → 8 gradually.</td><td>Writing doubles (35 → 40–80 words) and chapter time jumps 32 → 52 min without a bridge chapter.</td><td>Acceptable as authored. Worth a sentence in the B1 opening about the new session length.</td></tr>
+<tr><td class="k">B1 → B2</td><td>Extension, verified: no B2 chapter reteaches a B1 one. B2 Ch1 <span class="de">Erweiterte Satzklammer</span> assumes exactly the bracket B1 built.</td><td>B2 Ch1 opens with 11 grammar blocks and a dialogue about <span class="de">Chancengleichheit</span> and <span class="de">Migrationshintergrund</span> — an abstract-register jump on page one of the level.</td><td>Subjective, defensible for B2. No change.</td></tr>
+<tr><td class="k">B2 → C1</td><td>The framing shift is explicit and correct: from "which form is right" to "which form is best". C1 Ch1 on stylistic tense choice is the right opening move.</td><td>Vocabulary is 5 entries per chapter at this boundary, and session time rises to 95 min with 11 grammar blocks.</td><td>Sequence is right. Vocabulary is frozen; no action.</td></tr>
+<tr><td class="k">C1 → C2</td><td>Genuinely more advanced on the right axes — nominal style, register control, semantic precision, stylistic variation — not on artificial difficulty. C2 vocabulary recovers to 16–24 per chapter.</td><td>Writing minimums are identical (150 words at both levels), so the step up is not visible in the production tasks.</td><td>Consider raising C2 writing expectations, or state what distinguishes a C2 answer from a C1 one at the same length.</td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<p class="eyebrow">E · Scorecard</p>
+<h2>Learner experience</h2>
+<div class="score">
+<div>Progression<div class="bar"><i style="width:90%"></i></div></div><div class="n">9</div>
+<div>Clarity<div class="bar"><i style="width:90%"></i></div></div><div class="n">9</div>
+<div>Grammar sequencing<div class="bar"><i style="width:90%"></i></div></div><div class="n">9</div>
+<div>Vocabulary sequencing<div class="bar"><i style="width:50%"></i></div></div><div class="n">5</div>
+<div>Dialogue realism<div class="bar"><i style="width:70%"></i></div></div><div class="n">7</div>
+<div>Story integration<div class="bar"><i style="width:60%"></i></div></div><div class="n">6</div>
+<div>Exercise quality<div class="bar"><i style="width:80%"></i></div></div><div class="n">8</div>
+<div>Quiz quality<div class="bar"><i style="width:80%"></i></div></div><div class="n">8</div>
+<div>Listening<div class="bar"><i style="width:50%"></i></div></div><div class="n">5</div>
+<div>Speaking<div class="bar"><i style="width:90%"></i></div></div><div class="n">9</div>
+<div>Writing<div class="bar"><i style="width:80%"></i></div></div><div class="n">8</div>
+<div>Checkpoint quality<div class="bar"><i style="width:80%"></i></div></div><div class="n">8</div>
+<div>Hinglish teacher voice<div class="bar"><i style="width:100%"></i></div></div><div class="n">10</div>
+<div>UX<div class="bar"><i style="width:70%"></i></div></div><div class="n">7</div>
+<div>Overall coherence<div class="bar"><i style="width:80%"></i></div></div><div class="n">8</div>
+</div>
+<h3 style="margin-top:36px">Why the scores below 8</h3>
+<p><b>Vocabulary sequencing — 5.</b> Reflects distribution only: A1 chapters of 104–135 entries beside neighbours of 2–8, and a C1 level totalling 231. The individual entries are consistently strong. Recorded as an observation — the curriculum is frozen and the score is not a call to change it.</p>
+<p><b>Listening — 5.</b> Transcripts never exceed 65 words anywhere in 258 chapters, and the C1 median (47) sits level with B1 (46). The skill stops progressing after B1. Report-only.</p>
+<p><b>Story integration — 6.</b> Scenes match their topics and the Hinglish framing is strong, but 154 one-appearance partners mean no accumulated narrative, so the story layer does not repay its cost.</p>
+<p><b>Dialogue realism — 7.</b> Most dialogues pass the "would they still talk?" test with a clear purpose and a natural close, and there are no formulaic endings (no closing exchange repeats across three or more chapters; <span class="de">Wir schaffen das</span> appears in 7, all pre-exam checkpoints, which is apt). B2 Ch68 is the clear failure, and upper-level dialogues run short at 5–6 lines.</p>
+<p><b>UX — 7.</b> The previously reported hero overlap is <b>not present at desktop width</b>: A1 Ch1 renders eyebrow, title, lede and the three Reward / Time / Level pills on clean separate rows with no collision, and the story layer has a failsafe when GSAP is unavailable. An earlier note in this report claimed a duplicated <code>.dash-title-row</code> rule broke the desktop row layout — that was wrong, and it has been removed: there is one top-level rule and the <code>max-width:720px</code> column override is correctly scoped. The score stays at 7 only because narrow-width rendering was verified by reading the breakpoints rather than by live measurement.</p>
+</section>
+
+<section>
+<p class="eyebrow">F · Changes made</p>
+<h2>None</h2>
+<p>No curriculum, vocabulary, or renderer file was modified in this pass. No A1 or C1 vocabulary was moved, added, or removed; no dialogue, story, exercise, quiz, or audio data was touched. All findings are documented only.</p>
+<p>Files written: this report, plus analysis artefacts under <code>audit/int/</code> (<code>overview.json</code> and three sampling dumps).</p>
+</section>
+
+<section>
+<p class="eyebrow">G · Watchlist</p>
+<h2>Unresolved</h2>
+<table>
+<thead><tr><th>Item</th><th>Priority</th><th>Blocked on</th></tr></thead>
+<tbody>
+<tr><td>A1 vocabulary load in Ch16/22/38/39/43/44</td><td class="k">frozen</td><td>Observation only — no change proposed</td></tr>
+<tr><td>C1 lexicon: 231 words across 43 chapters</td><td class="k">frozen</td><td>Observation only — no change proposed</td></tr>
+<tr><td>Listening transcripts flat from A1 to C2</td><td class="k">report-only</td><td>Would require new authored transcripts</td></tr>
+<tr><td>Hero eyebrow / XP / time badge overlap</td><td class="k">cleared</td><td>Verified clean at desktop; narrow width read from breakpoints</td></tr>
+<tr><td>B2 Ch68 dialogue is a phrase parade</td><td class="k">P2</td><td>Approval to rewrite one dialogue</td></tr>
+<tr><td>C1 grammar density (11–12 blocks/session)</td><td class="k">P2</td><td>Decision: split chapters or accept</td></tr>
+<tr><td>C2 writing minimum identical to C1 (150 words)</td><td class="k">P2</td><td>Decision on C2 production expectations</td></tr>
+<tr><td>Unrendered <code>exercises.errorCorrection</code> in 167 chapters (B1 26, B2 69, C1 43, C2 29; none in A1/A2)</td><td class="k">P2</td><td>Re-verified live and still unrendered — <code>bodyExercises</code> reads only <code>mcq/gap/match/builder</code> plus <code>C.errorCorrectionSet</code></td></tr>
+<tr><td>21 further single-chapter exercise keys with no renderer path (all B1: <code>transformActiveToPassive</code>, <code>genitivFill</code>, <code>timelineOrdering</code>, …)</td><td class="k">P2</td><td>Found during this check — same renderer gap, reported not fixed</td></tr>
+</tbody>
+</table>
+</section>
+</div></body></html>

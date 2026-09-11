@@ -1,0 +1,847 @@
+{
+ "phase": "22 — P15/P21 variance reconciliation (measurement only)",
+ "generatedAt": "2026-08-13T12:12:55.114Z",
+ "method": "each chapter rendered N independent times in isolation through the P14/P15/P21 stability gate; unstable renders discarded and retried, never counted; one series at a time, no overlapping run(); every stable run persisted to localStorage kw_p22_runs. Occurrence IDENTITY compared via an ordered-surface fingerprint, not indices.",
+ "harness": "chapter/qa-p22-variance.html (investigation only)",
+ "totalStableRuns": 24,
+ "discardedUnstable": "retried until the requested count of stable runs was reached",
+ "table": [
+  {
+   "chapter": "a1-11-negation",
+   "isolationRuns": 6,
+   "allStable": true,
+   "isolation": {
+    "occurrences": 412,
+    "findings": 3,
+    "hcm": 1,
+    "hcmIdentity": [
+     {
+      "section": "(none)",
+      "index": 1,
+      "surface": "Nicht",
+      "span": "rgb(6, 182, 212)",
+      "head": "rgb(192, 38, 211)"
+     }
+    ],
+    "surfaceFingerprint": "8be4f29a",
+    "identicalAcrossRuns": true
+   },
+   "p15": {
+    "occurrences": 412,
+    "findings": 3,
+    "hcm": 1,
+    "hcmIdentity": [
+     {
+      "section": "(none)",
+      "index": 1,
+      "surface": "Nicht",
+      "span": "rgb(6, 182, 212)",
+      "head": "rgb(192, 38, 211)"
+     }
+    ]
+   },
+   "p21": {
+    "occurrences": 407,
+    "findings": 4,
+    "hcm": 2,
+    "hcmIdentity": [
+     {
+      "section": "(none)",
+      "index": 1,
+      "surface": "Nicht",
+      "span": "rgb(6, 182, 212)",
+      "head": "rgb(192, 38, 211)"
+     },
+     {
+      "section": "speaking",
+      "index": 311,
+      "surface": "Nein",
+      "span": "rgb(6, 182, 212)",
+      "head": "rgb(192, 38, 211)"
+     }
+    ]
+   },
+   "isolationMatchesP15": true,
+   "isolationMatchesP21": false,
+   "classification": "NONDETERMINISTIC / SWEEP-CONTEXT ARTEFACT",
+   "evidence": "isolation reproduces P15 exactly 6/6 runs and never reproduces the P21 reading — the P21 value only occurred inside the full sweep"
+  },
+  {
+   "chapter": "a1-21-uhrzeit",
+   "isolationRuns": 4,
+   "allStable": true,
+   "isolation": {
+    "occurrences": 707,
+    "findings": 17,
+    "hcm": 1,
+    "hcmIdentity": [
+     {
+      "section": "vocabulary",
+      "index": 321,
+      "surface": "Wann",
+      "span": "rgb(6, 182, 212)",
+      "head": "rgb(236, 72, 153)"
+     }
+    ],
+    "surfaceFingerprint": "5ec20d8",
+    "identicalAcrossRuns": true
+   },
+   "p15": {
+    "occurrences": 707,
+    "findings": 17,
+    "hcm": 1,
+    "hcmIdentity": [
+     {
+      "section": "vocabulary",
+      "index": 321,
+      "surface": "Wann",
+      "span": "rgb(6, 182, 212)",
+      "head": "rgb(236, 72, 153)"
+     }
+    ]
+   },
+   "p21": {
+    "occurrences": 703,
+    "findings": 17,
+    "hcm": 1,
+    "hcmIdentity": [
+     {
+      "section": "vocabulary",
+      "index": 321,
+      "surface": "Wann",
+      "span": "rgb(6, 182, 212)",
+      "head": "rgb(236, 72, 153)"
+     }
+    ]
+   },
+   "isolationMatchesP15": true,
+   "isolationMatchesP21": false,
+   "classification": "NONDETERMINISTIC / SWEEP-CONTEXT ARTEFACT",
+   "evidence": "isolation reproduces P15 exactly 4/4 runs and never reproduces the P21 reading — the P21 value only occurred inside the full sweep"
+  },
+  {
+   "chapter": "b2-07-verbergaenzungen-erkennen",
+   "isolationRuns": 4,
+   "allStable": true,
+   "isolation": {
+    "occurrences": 655,
+    "findings": 0,
+    "hcm": 0,
+    "hcmIdentity": [],
+    "surfaceFingerprint": "2312e86a",
+    "identicalAcrossRuns": true
+   },
+   "p15": {
+    "occurrences": 655,
+    "findings": 0,
+    "hcm": 0,
+    "hcmIdentity": []
+   },
+   "p21": {
+    "occurrences": 656,
+    "findings": 0,
+    "hcm": 0,
+    "hcmIdentity": []
+   },
+   "isolationMatchesP15": true,
+   "isolationMatchesP21": false,
+   "classification": "NONDETERMINISTIC / SWEEP-CONTEXT ARTEFACT",
+   "evidence": "isolation reproduces P15 exactly 4/4 runs and never reproduces the P21 reading — the P21 value only occurred inside the full sweep"
+  },
+  {
+   "chapter": "c1-01-tempusgebrauch-stilistische-tempuswahl",
+   "isolationRuns": 2,
+   "allStable": true,
+   "isolation": {
+    "occurrences": 294,
+    "findings": 6,
+    "hcm": 0,
+    "hcmIdentity": [],
+    "surfaceFingerprint": "4257b608",
+    "identicalAcrossRuns": true
+   },
+   "p15": {
+    "occurrences": 294,
+    "findings": 54,
+    "hcm": 48,
+    "hcmIdentity": [
+     {
+      "section": "story",
+      "index": 4,
+      "surface": "habe",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 11,
+      "surface": "genutzt",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 13,
+      "surface": "ist",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 20,
+      "surface": "erzeugt",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 22,
+      "surface": "wechsle",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 29,
+      "surface": "Ist",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 38,
+      "surface": "ist",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 45,
+      "surface": "erkennen",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 48,
+      "surface": "ist",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 54,
+      "surface": "ist",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "story",
+      "index": 58,
+      "surface": "hilft",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "grammar",
+      "index": 80,
+      "surface": "werden",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "grammar",
+      "index": 84,
+      "surface": "ausgewertet",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "grammar",
+      "index": 85,
+      "surface": "haben",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 117,
+      "surface": "präsentiert",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 130,
+      "surface": "hatten",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 137,
+      "surface": "gearbeitet",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 141,
+      "surface": "gelang",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 145,
+      "surface": "habe",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 152,
+      "surface": "gerechnet",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 155,
+      "surface": "reagiert",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 159,
+      "surface": "wollen",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 167,
+      "surface": "überprüfen",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 171,
+      "surface": "vermuten",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 173,
+      "surface": "werden",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "reading",
+      "index": 180,
+      "surface": "haben",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "speaking",
+      "index": 190,
+      "surface": "Erzähle",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "speaking",
+      "index": 203,
+      "surface": "tun",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "speaking",
+      "index": 204,
+      "surface": "würde",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "speaking",
+      "index": 205,
+      "surface": "Erzähle",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "speaking",
+      "index": 210,
+      "surface": "wäre",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "speaking",
+      "index": 214,
+      "surface": "Formuliere",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "speaking",
+      "index": 222,
+      "surface": "Formuliere",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "speaking",
+      "index": 231,
+      "surface": "Präsentiert",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "speaking",
+      "index": 234,
+      "surface": "wechselt",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "writing",
+      "index": 247,
+      "surface": "beginnt",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "writing",
+      "index": 254,
+      "surface": "stattgefunden",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "writing",
+      "index": 255,
+      "surface": "hatte",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "writing",
+      "index": 258,
+      "surface": "werden",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "writing",
+      "index": 262,
+      "surface": "veröffentlicht",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "writing",
+      "index": 263,
+      "surface": "haben",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "exercises",
+      "index": 270,
+      "surface": "haben",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "summary",
+      "index": 279,
+      "surface": "werden",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "summary",
+      "index": 280,
+      "surface": "ausgewertet",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "summary",
+      "index": 281,
+      "surface": "haben",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "summary",
+      "index": 289,
+      "surface": "werden",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "summary",
+      "index": 290,
+      "surface": "haben",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     },
+     {
+      "section": "(none)",
+      "index": 293,
+      "surface": "ausdrücken",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(220, 38, 38)"
+     }
+    ]
+   },
+   "p21": {
+    "occurrences": 294,
+    "findings": 6,
+    "hcm": 0,
+    "hcmIdentity": []
+   },
+   "isolationMatchesP15": false,
+   "isolationMatchesP21": true,
+   "classification": "DETERMINISTIC — P21 value confirmed",
+   "evidence": "isolation reproduces P21 exactly 2/2 runs; the P15 value is the pre-fix state"
+  },
+  {
+   "chapter": "c1-02-raum-und-zeit-praezise-ausdruecken",
+   "isolationRuns": 2,
+   "allStable": true,
+   "isolation": {
+    "occurrences": 415,
+    "findings": 22,
+    "hcm": 0,
+    "hcmIdentity": [],
+    "surfaceFingerprint": "47f4ae7c",
+    "identicalAcrossRuns": true
+   },
+   "p15": {
+    "occurrences": 415,
+    "findings": 34,
+    "hcm": 12,
+    "hcmIdentity": [
+     {
+      "section": "story",
+      "index": 55,
+      "surface": "morgen",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "grammar",
+      "index": 134,
+      "surface": "später",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "grammar",
+      "index": 138,
+      "surface": "Später",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "reading",
+      "index": 198,
+      "surface": "Bis",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "reading",
+      "index": 199,
+      "surface": "in",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "reading",
+      "index": 203,
+      "surface": "hinein",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "reading",
+      "index": 213,
+      "surface": "Im",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "reading",
+      "index": 214,
+      "surface": "Laufe",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "reading",
+      "index": 243,
+      "surface": "Zwischen",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "reading",
+      "index": 245,
+      "surface": "und",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "reading",
+      "index": 258,
+      "surface": "Heute",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     },
+     {
+      "section": "reading",
+      "index": 262,
+      "surface": "später",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(124, 58, 237)"
+     }
+    ]
+   },
+   "p21": {
+    "occurrences": 415,
+    "findings": 22,
+    "hcm": 0,
+    "hcmIdentity": []
+   },
+   "isolationMatchesP15": false,
+   "isolationMatchesP21": true,
+   "classification": "DETERMINISTIC — P21 value confirmed",
+   "evidence": "isolation reproduces P21 exactly 2/2 runs; the P15 value is the pre-fix state"
+  },
+  {
+   "chapter": "c1-05-zweiteilige-satzverbindungen",
+   "isolationRuns": 2,
+   "allStable": true,
+   "isolation": {
+    "occurrences": 348,
+    "findings": 2,
+    "hcm": 0,
+    "hcmIdentity": [],
+    "surfaceFingerprint": "af74f7fc",
+    "identicalAcrossRuns": true
+   },
+   "p15": {
+    "occurrences": 348,
+    "findings": 10,
+    "hcm": 8,
+    "hcmIdentity": [
+     {
+      "section": "grammar",
+      "index": 69,
+      "surface": "nicht",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(192, 38, 211)"
+     },
+     {
+      "section": "grammar",
+      "index": 87,
+      "surface": "nicht",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(192, 38, 211)"
+     },
+     {
+      "section": "grammar",
+      "index": 99,
+      "surface": "nicht",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(192, 38, 211)"
+     },
+     {
+      "section": "grammar",
+      "index": 107,
+      "surface": "nicht",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(192, 38, 211)"
+     },
+     {
+      "section": "grammar",
+      "index": 151,
+      "surface": "nicht",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(192, 38, 211)"
+     },
+     {
+      "section": "grammar",
+      "index": 154,
+      "surface": "nicht",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(192, 38, 211)"
+     },
+     {
+      "section": "grammar",
+      "index": 158,
+      "surface": "Nicht",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(192, 38, 211)"
+     },
+     {
+      "section": "summary",
+      "index": 335,
+      "surface": "nicht",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(192, 38, 211)"
+     }
+    ]
+   },
+   "p21": {
+    "occurrences": 348,
+    "findings": 2,
+    "hcm": 0,
+    "hcmIdentity": []
+   },
+   "isolationMatchesP15": false,
+   "isolationMatchesP21": true,
+   "classification": "DETERMINISTIC — P21 value confirmed",
+   "evidence": "isolation reproduces P21 exactly 2/2 runs; the P15 value is the pre-fix state"
+  },
+  {
+   "chapter": "c1-07-praepositionen-mit-genitiv",
+   "isolationRuns": 2,
+   "allStable": true,
+   "isolation": {
+    "occurrences": 337,
+    "findings": 0,
+    "hcm": 0,
+    "hcmIdentity": [],
+    "surfaceFingerprint": "84787668",
+    "identicalAcrossRuns": true
+   },
+   "p15": {
+    "occurrences": 337,
+    "findings": 4,
+    "hcm": 4,
+    "hcmIdentity": [
+     {
+      "section": "reading",
+      "index": 202,
+      "surface": "Aufgrund",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(160, 107, 44)"
+     },
+     {
+      "section": "reading",
+      "index": 213,
+      "surface": "Hinsichtlich",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(160, 107, 44)"
+     },
+     {
+      "section": "reading",
+      "index": 222,
+      "surface": "Trotz",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(160, 107, 44)"
+     },
+     {
+      "section": "reading",
+      "index": 232,
+      "surface": "Innerhalb",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(160, 107, 44)"
+     }
+    ]
+   },
+   "p21": {
+    "occurrences": 337,
+    "findings": 0,
+    "hcm": 0,
+    "hcmIdentity": []
+   },
+   "isolationMatchesP15": false,
+   "isolationMatchesP21": true,
+   "classification": "DETERMINISTIC — P21 value confirmed",
+   "evidence": "isolation reproduces P21 exactly 2/2 runs; the P15 value is the pre-fix state"
+  },
+  {
+   "chapter": "c1-17-goethe-halbzeit-test",
+   "isolationRuns": 2,
+   "allStable": true,
+   "isolation": {
+    "occurrences": 229,
+    "findings": 0,
+    "hcm": 0,
+    "hcmIdentity": [],
+    "surfaceFingerprint": "58af7582",
+    "identicalAcrossRuns": true
+   },
+   "p15": {
+    "occurrences": 229,
+    "findings": 1,
+    "hcm": 1,
+    "hcmIdentity": [
+     {
+      "section": "story",
+      "index": 28,
+      "surface": "sollte",
+      "span": "rgb(31, 78, 74)",
+      "head": "rgb(159, 18, 57)"
+     }
+    ]
+   },
+   "p21": {
+    "occurrences": 229,
+    "findings": 0,
+    "hcm": 0,
+    "hcmIdentity": []
+   },
+   "isolationMatchesP15": false,
+   "isolationMatchesP21": true,
+   "classification": "DETERMINISTIC — P21 value confirmed",
+   "evidence": "isolation reproduces P21 exactly 2/2 runs; the P15 value is the pre-fix state"
+  }
+ ],
+ "partOne_a1_11": {
+  "question": "is the +1 HCM at a1-11 real?",
+  "result": "6/6 stable isolated runs give 412 occurrences, 3 findings, exactly ONE HCM (\"Nicht\", section (none), index 1, span rgb(6,182,212) → head rgb(192,38,211)), identical surface fingerprint 8be4f29a and identical ROLE_CONTRADICTS_BADGE indices 273/293 every time",
+  "verdict": "a1-11 is DETERMINISTIC in isolation and reproduces P15 exactly. The P21 reading (407 occ, 4 findings, second HCM \"Nein\" at speaking/311) was NOT reproduced in any of 6 runs.",
+  "attribution": "the extra finding is a FULL-SWEEP CONTEXT artefact, not a chapter-level defect and not chapter-level nondeterminism. It is not caused by the five CSS fixes: a1-11 has no local .r-* rule and was not edited.",
+  "caveat": "the sweep-context mechanism itself (why a shared long-running driver produces 407 rather than 412) is NOT identified by this phase. The claim proven here is narrow: the value is not reproducible in isolation."
+ },
+ "partTwo": {
+  "a1_21": "4/4 stable runs: 707 occurrences, 17 findings, 1 HCM (\"Wann\"/321) — identical fingerprint 5ec20d8. Matches P15 (707) and NOT P21 (703). Same artefact class as a1-11.",
+  "b2_07": "4/4 stable runs: 655 occurrences, 0 findings — identical fingerprint 2312e86a. Matches P15 (655) and NOT P21 (656)."
+ },
+ "partThree_controls": {
+  "verdict": "all five corrected chapters reproduce their P21 state exactly, twice each, with identical fingerprints: c1-01 294/6/0 HCM, c1-02 415/22/0, c1-05 348/2/0, c1-07 337/0/0 clean, c1-17 229/0/0 clean",
+  "hcmReturned": false,
+  "note": "the 73 removed HCM findings did not return in any control run"
+ },
+ "partFour_attribution": {
+  "a1_11_hcm": "the ONE HCM that exists in isolation is the same record P15 already had (\"Nicht\"). The P21 extra (\"Nein\", speaking, 311) could not be observed again; no span/popup evidence for it could be gathered because the state does not reproduce.",
+  "identityBasis": "a1-21 and b2-07 were compared by ordered-surface fingerprint, not index: the fingerprints are byte-identical across runs, so the occurrence LISTS are identical, not merely the counts."
+ },
+ "partSix_verdict": {
+  "q1_73_removals_proven": "YES — five controls, two stable runs each, all HCM-free with the canonical colours restored",
+  "q2_a1_11_plus_one_proven_run_variance": "NO — it is proven NOT reproducible in isolation (0/6), which disproves \"chapter-level run variance\" as the explanation and reclassifies it as a full-sweep context artefact of unidentified mechanism",
+  "q3_minus_8_occurrences_proven_variance": "NO — same reclassification. a1-11 (412), a1-21 (707) and b2-07 (655) are each deterministic in isolation and all three match P15, so the P21 occurrence figures are the anomalous ones",
+  "q4_p21_1406_38_reproducible": "NO, not exactly. The corrected chapters reproduce perfectly, but three unedited chapters do not reproduce their P21 values in isolation. A repeat full sweep would most likely land on 1,405 findings / 37 HCM / 156,299 occurrences.",
+  "q5_evidence_fixes_caused_unrelated_regressions": "NONE. The three drifting chapters carry no local .r-* rule, were not edited, and their isolated values equal their PRE-fix P15 values — the drift cannot have been caused by the CSS edits.",
+  "q6_accept_p21_as_baseline": "QUALIFIED. Accept it for the HCM fix it documents (110 → 38 is real and control-verified). Do NOT treat its a1-11 / a1-21 / b2-07 rows as ground truth — isolation contradicts them. Recommend keeping P21 as the fix record and generating a clean successor sweep before using it as the comparison baseline for future phases."
+ },
+ "recommendedNextPhase": "Investigate the sweep-context mechanism itself: run the same three chapters INSIDE a full sweep twice and compare with the isolated values. Candidates worth testing — cumulative iframe/lexicon state across 259 sequential renders, memory pressure changing linkification timing, or the stability gate settling earlier under load. Until that is understood, every sweep total carries an unquantified per-chapter error bar.",
+ "constraints": [
+  "no production file, chapter data, CSS, QA engine, lint rule, assertion or baseline modified",
+  "no new production baseline created",
+  "P14, P15 and P21 all untouched"
+ ]
+}

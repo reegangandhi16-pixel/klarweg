@@ -1,0 +1,128 @@
+{
+ "phase": "34 — proof of the mcq .de-link producer (DIAGNOSIS ONLY, no fix)",
+ "generatedAt": "2026-08-15T06:42:40.105Z",
+ "verdict": "PROVEN PRODUCER",
+ "harness": "chapter/qa-mcq-link-producer-p34.html — fetched the chapter HTML as text, injected a probe <script> IMMEDIATELY BEFORE <script src=\"chapter-app.js\">, ran it via srcdoc + <base href> so relative paths resolve. Probe wrapped innerHTML/outerHTML setters, insertAdjacentHTML, appendChild/insertBefore/replaceChild/append/prepend/replaceChildren/replaceWith/after/before, cloneNode and the className setter. Behaviour unchanged; production files never edited.",
+ "A_producerStatus": "PROVEN — colorWordsIn, called synchronously from mcqBlock",
+ "B_firstCreationEvidence": {
+  "totalEventsCaptured": 2116,
+  "classNameAssignmentsCarryingDeLink": 718,
+  "mcqLinksInFinalDom": 30,
+  "htmlMaterialisationEvents": 0,
+  "firstMcqEvent": {
+   "n": 64,
+   "op": "replaceChild",
+   "targetAncestry": [
+    "span.de",
+    "span",
+    "button.mcq-option"
+   ],
+   "targetConnected": false,
+   "text": "Sie hat andere Erfahrungsberichte gelesen.",
+   "stack": [
+    "chapter-app.js:2951 (node.parentNode.replaceChild(frag, node))",
+    "Array.forEach",
+    "colorWordsIn (chapter-app.js:2935)",
+    "chapter-app.js:3050",
+    "Array.forEach",
+    "mcqBlock (chapter-app.js:3046)"
+   ]
+  },
+  "interpretation": "the .de-link nodes are CREATED (not moved, not cloned, not materialised from an HTML string) inside colorWordsIn, then committed to the detached mcq subtree via replaceChild. Zero innerHTML/insertAdjacentHTML/outerHTML events carried a de-link, so the P33 \"HTML materialisation\" hypothesis is disproven."
+ },
+ "C_exactFunctionAndCallSite": {
+  "producer": "colorWordsIn — chapter-app.js:2928-2953; the class is assigned at :2945 (span.className = ('de-link ' + roleFor(...)).trim()) and committed at :2951",
+  "callSite": "chapter-app.js:3050 — colorWordsIn(b.querySelector('.de')) inside mcqBlock (:3046), invoked once per option button immediately after the button is built by el() and BEFORE opts.appendChild(b) at :3057",
+  "secondCallSite": "chapter-app.js:3346-3350 — the reading-question mcq path uses the same shape, which is where the a1-37 \"Fuß\" occurrence comes from"
+ },
+ "D_provenanceForWatchedSurfaces": {
+  "method": "stack captured at the moment of creation for each mcq option subtree",
+  "Obgleich": {
+   "event": 95,
+   "op": "replaceChild",
+   "ancestry": [
+    "span.de",
+    "span",
+    "button.mcq-option"
+   ],
+   "connected": false,
+   "text": "Obgleich er krank ist, geht er zur Arbeit.",
+   "producer": "colorWordsIn via mcqBlock:3050",
+   "alsoEvent": 113,
+   "note": "second Obgleich option \"Obgleich er ist krank, …\" captured identically at n=113"
+  },
+  "otherOptions": "events 64/65 (Erfahrungsberichte option), 72/73 (\"genauer nachfragen\"), 95/96, 113/114 — every mcq option in the chapter follows the identical pair: replaceChild by colorWordsIn, then appendChild into div.mcq-options by mcqBlock:3057",
+  "sharedProducer": "PROVEN for the b2-15 options. Infolgedessen / dokumentiert / sich / um sit in the same mcqBlock path in their own chapters; identical call shape, not re-captured per chapter in this phase.",
+  "createdNotMovedNotCloned": "created as .de-link by colorWordsIn; no cloneNode event carried a de-link"
+ },
+ "E_firstStage": "T1 — immediately after mcq option DOM creation, while the button is still DETACHED (targetConnected:false). The links exist before the option is ever attached to .mcq-options, so no later linkification, gated sweep or re-render is involved.",
+ "F_isWrapWordsInResponsible": {
+  "answer": "NO — ruled out for the mcq nodes",
+  "evidence": "wrapWordsIn does fire in this chapter (718 className assignments; the first five all trace to wrapWordsIn via chapter-app.js:3008), but every mcq-region event traces to colorWordsIn instead. The two are distinct functions with distinct guards.",
+  "correctionToP33": "P33 named wrapWordsIn the strongest candidate and stated it has no LINK_EXCLUDE guard. Both points are now corrected: (a) wrapWordsIn DOES guard — its TreeWalker rejects text whose parentElement.closest(LINK_EXCLUDE) matches (chapter-app.js:2843-2844); (b) it is not the mcq producer."
+ },
+ "G_whichOfTheFourCallPaths": {
+  "answer": "NONE of them",
+  ":64": "gated re-sweep — not implicated",
+  ":73": "lexicon re-sweep wrapWordsIn — not implicated",
+  ":3008": "sentence-inline-unit wrapWordsIn — fires (it produced the first 5 captured events) but never touches mcq content",
+  ":3830": "sentence-unit-text wrapWordsIn — not implicated",
+  "actual": "a fifth, previously unexamined path: mcqBlock:3050 → colorWordsIn:2928"
+ },
+ "H_whyLinkExcludeIsBypassed": {
+  "rootCause": "colorWordsIn HAS NO EXCLUSION TEST AT ALL. Its TreeWalker acceptNode (chapter-app.js:2930-2932) filters only on \"does this text contain a letter\" — unlike wrapWordsIn (:2843-2844) and gatedWrapWordsIn (:2916), neither of which would have touched this text.",
+  "secondaryFactor": "even if colorWordsIn had wrapWordsIn’s guard, it is called at :3050 while the button is DETACHED but its .de is already inside button.mcq-option, so closest(LINK_EXCLUDE) WOULD still match — the guard would work. The bypass is purely the missing check, not a timing/attachment problem.",
+  "intentNote": "colorWordsIn appears purpose-built to COLOUR words in a region that is deliberately not interactive — it creates spans with a role class but binds NO click handler (contrast wrapWordsIn:2866, which does). The clickability that produces the QA findings therefore does not come from colorWordsIn’s own handler.",
+  "openQuestion": "if colorWordsIn attaches no click listener, what makes these spans behave as clickable words for the QA engine? qa-engine.js selects .rw/.de-link by CLASS, so they are counted and popup-probed purely because they carry .de-link. Whether a learner can actually open a popup on them was NOT re-verified in this phase."
+ },
+ "I_oneMechanismForAll14": "STRONGLY SUPPORTED, not fully proven. All 14 sit in mcq/reading-question options, and the b2-15 subset is proven to come from mcqBlock:3050 → colorWordsIn. The other chapters were not individually stack-captured.",
+ "J_affectsNonMcqContent": {
+  "answer": "YES — colorWordsIn is not mcq-specific",
+  "otherCallSites": "chapter-app.js:3050 (exercise mcq) and :3350 (reading-question mcq) were seen in this trace; a full call-site census of colorWordsIn was not performed in this phase",
+  "implication": "any region coloured via colorWordsIn receives .de-link spans with no LINK_EXCLUDE consideration"
+ },
+ "K_smallestLikelyFixShape": {
+  "recommendationOnly": true,
+  "notApplied": true,
+  "options": [
+   {
+    "shape": "give colorWordsIn the same acceptNode guard wrapWordsIn already has (one added line in the TreeWalker filter at :2930-2932)",
+    "pro": "structural, matches the sibling function, fixes every colorWordsIn call site at once",
+    "con": "changes colouring behaviour anywhere colorWordsIn is deliberately used inside an excluded region — needs a call-site census first"
+   },
+   {
+    "shape": "stop emitting the .de-link class from colorWordsIn and use a non-interactive class (e.g. de-word) that carries the same colour",
+    "pro": "preserves the intended colouring, removes the QA/interactivity signal entirely, arguably the truest fix given colorWordsIn binds no handler",
+    "con": "requires a CSS rule for the new class and touches the QA node-selection surface indirectly"
+   },
+   {
+    "shape": "guard only the mcq call sites (:3050, :3350)",
+    "pro": "smallest blast radius",
+    "con": "leaves the same hazard for every other colorWordsIn caller"
+   }
+  ],
+  "preferred": "no preference recorded — the choice depends on whether the colour in mcq options is intended. That is a product decision, not a QA one."
+ },
+ "L_expectedImpact": "ESTIMATE ONLY: −14 HCM and −11 RCB if mcq/reading-question option words stop carrying .de-link. Unchanged from P31/P32/P33 since the target set has not moved.",
+ "M_remainingUncertainty": [
+  "the other 11 findings (outside b2-15) were not individually stack-captured — same call shape, not same-run proof",
+  "a full census of colorWordsIn call sites was not performed, so the non-mcq blast radius is unquantified",
+  "whether these spans are actually clickable for a learner (colorWordsIn binds no handler) was not re-verified — if they are NOT clickable, the QA findings are counting decorative spans and the correct fix may be on the QA selector side instead"
+ ],
+ "productionSafety": {
+  "productionCodeModified": false,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "qaEngineModified": false,
+  "qaAssertModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "chapter/qa-mcq-link-producer-p34.html",
+  "audit/mcq-link-producer-p34.json"
+ ],
+ "filesModified": "none"
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P34 producer proof</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:16px;max-width:830px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:pre-wrap;max-height:56vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P34 — first-creation proof for mcq <code>.de-link</code></h1>
+<div class="sub">Fetches the chapter HTML as text, injects a probe <code>&lt;script&gt;</code> <b>immediately before</b> <code>chapter-app.js?v=9</code>, and runs it via <code>srcdoc</code> + <code>&lt;base&gt;</code> so every relative path still resolves. The probe wraps <code>innerHTML</code>, <code>insertAdjacentHTML</code>, <code>outerHTML</code>, <code>replaceWith</code>, <code>append</code>, <code>appendChild</code>, <code>insertBefore</code>, <code>replaceChildren</code>, <code>cloneNode</code> and <code>createElement</code>-class assignment, recording a stack for the FIRST materialisation of any <code>.de-link</code>. Production files are never edited.<br><code>KWP34.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+const FILE='chapter-b2-15-konzessivsaetze-obgleich.html';
+const PROBE=`<script>
+(function(){
+  var LOG=[]; window.__P34LOG=LOG; var seq=0;
+  function st(){ try{ return (new Error().stack||'').split('\\n').slice(3,10).map(function(s){return s.trim().replace(/^at\\s+/,'');}); }catch(e){ return []; } }
+  function hasLink(x){
+    try{
+      if(x==null) return false;
+      if(typeof x==='string') return x.indexOf('de-link')>=0;
+      if(x.nodeType===1) return String(x.className).indexOf('de-link')>=0 || !!x.querySelector('.de-link');
+      if(x.nodeType===11) return !!x.querySelector && !!x.querySelector('.de-link');
+    }catch(e){}
+    return false;
+  }
+  function anc(el){ var a=[],k=0; try{ while(el&&k<7){ a.push((el.tagName||'?').toLowerCase()+(el.className?'.'+String(el.className).trim().replace(/\\s+/g,'.'):'')); el=el.parentElement; k++; } }catch(e){} return a; }
+  function rec(op,target,payload,extra){
+    var e={ n:++seq, t:Math.round(performance.now()), op:op,
+      targetAncestry:anc(target),
+      targetConnected:(function(){try{return !!(target&&target.isConnected);}catch(e){return null;}})(),
+      inMcq:(function(){try{return !!(target&&target.closest&&target.closest('.mcq-options,.mcq-option'));}catch(e){return false;}})(),
+      text:(function(){ try{ if(typeof payload==='string') return payload.replace(/\\s+/g,' ').slice(0,90);
+        return (payload&&payload.textContent||'').replace(/\\s+/g,' ').trim().slice(0,90);}catch(e){return '';} })(),
+      stack:st() };
+    if(extra) for(var k in extra) e[k]=extra[k];
+    LOG.push(e);
+  }
+  // --- innerHTML / outerHTML string materialisation ---
+  ['innerHTML','outerHTML'].forEach(function(prop){
+    var d=Object.getOwnPropertyDescriptor(Element.prototype,prop);
+    if(!d||!d.set) return;
+    Object.defineProperty(Element.prototype,prop,{
+      configurable:true, enumerable:d.enumerable, get:d.get,
+      set:function(v){ if(hasLink(v)) rec(prop,this,v,{stringLen:String(v).length}); return d.set.call(this,v); }
+    });
+  });
+  var iah=Element.prototype.insertAdjacentHTML;
+  Element.prototype.insertAdjacentHTML=function(pos,html){ if(hasLink(html)) rec('insertAdjacentHTML',this,html,{position:pos}); return iah.call(this,pos,html); };
+  // --- node insertion / movement ---
+  [['appendChild',Node.prototype],['insertBefore',Node.prototype],['replaceChild',Node.prototype],
+   ['append',Element.prototype],['prepend',Element.prototype],['replaceChildren',Element.prototype],
+   ['replaceWith',Element.prototype],['after',Element.prototype],['before',Element.prototype]].forEach(function(p){
+    var name=p[0], proto=p[1], orig=proto[name]; if(!orig) return;
+    proto[name]=function(){
+      try{ for(var i=0;i<arguments.length;i++){ if(hasLink(arguments[i])){ rec(name,this,arguments[i]); break; } } }catch(e){}
+      return orig.apply(this,arguments);
+    };
+  });
+  var cn=Node.prototype.cloneNode;
+  Node.prototype.cloneNode=function(deep){ var r=cn.call(this,deep); if(hasLink(this)) rec('cloneNode',this,this,{deep:!!deep}); return r; };
+  // --- the moment a de-link class is first assigned to a fresh element ---
+  var cd=Object.getOwnPropertyDescriptor(Element.prototype,'className');
+  if(cd&&cd.set){
+    Object.defineProperty(Element.prototype,'className',{
+      configurable:true, enumerable:cd.enumerable, get:cd.get,
+      set:function(v){
+        if(String(v).indexOf('de-link')>=0){
+          rec('className=',this,this,{assigned:String(v),
+            parentChain:anc(this.parentElement),
+            parentConnected:(function(){try{return !!(this.parentElement&&this.parentElement.isConnected);}catch(e){return null;}}).call(this)});
+        }
+        return cd.set.call(this,v);
+      }
+    });
+  }
+})();
+<\/script>`;
+window.KWP34={
+ async run(){
+  $('#status').textContent='fetching chapter html';
+  const html=await (await fetch(FILE+'?p34='+Date.now())).text();
+  const marker='<script src="chapter-app.js?v=9"><\/script>';
+  if(html.indexOf(marker)<0) return {error:'chapter-app.js?v=9 script tag not found verbatim'};
+  const base=location.href.replace(/[^/]*$/,'');
+  const injected=html
+    .replace('<head>','<head><base href="'+base+'">')
+    .replace(marker,PROBE+'\n'+marker);
+  $('#status').textContent='rendering with probe installed before chapter-app.js?v=9';
+  const f=$('#frame');
+  await new Promise(res=>{ f.onload=()=>res(); f.srcdoc=injected; });
+  // let the app render and settle
+  await new Promise(r=>setTimeout(r,6000));
+  const w=f.contentWindow,d=f.contentDocument;
+  const LOG=(w&&w.__P34LOG)||[];
+  const mcqLinks=d.querySelectorAll('.mcq-options .de-link').length;
+  const classAssign=LOG.filter(e=>e.op==='className=');
+  const firstMcq=LOG.find(e=>e.inMcq)||null;
+  const htmlOps=LOG.filter(e=>e.op==='innerHTML'||e.op==='outerHTML'||e.op==='insertAdjacentHTML');
+  const res={file:FILE,probeInstalled:LOG.length>0||classAssign.length>0,
+    totalEvents:LOG.length,mcqLinksFinal:mcqLinks,
+    byOp:LOG.reduce((a,e)=>{a[e.op]=(a[e.op]||0)+1;return a;},{}),
+    classAssignments:classAssign.length,
+    firstFiveClassAssignments:classAssign.slice(0,5).map(e=>({n:e.n,t:e.t,assigned:e.assigned,parentChain:e.parentChain.slice(0,4),parentConnected:e.parentConnected,stack:e.stack.slice(0,5)})),
+    mcqRelatedEvents:LOG.filter(e=>e.inMcq).slice(0,8).map(e=>({n:e.n,t:e.t,op:e.op,anc:e.targetAncestry.slice(0,4),conn:e.targetConnected,text:e.text,stack:e.stack.slice(0,5)})),
+    firstMcqEvent:firstMcq?{n:firstMcq.n,op:firstMcq.op,anc:firstMcq.targetAncestry,text:firstMcq.text,stack:firstMcq.stack}:null,
+    htmlMaterialisation:htmlOps.slice(0,6).map(e=>({n:e.n,op:e.op,anc:e.targetAncestry.slice(0,4),len:e.stringLen,text:e.text,stack:e.stack.slice(0,5)})),
+    // provenance for the five watched surfaces
+    watched:['Obgleich','Infolgedessen','dokumentiert','sich','um'].map(word=>{
+      const hits=LOG.filter(e=>(e.text||'').indexOf(word)>=0||(e.assigned&&false));
+      return {word:word,events:hits.length,first:hits[0]?{n:hits[0].n,op:hits[0].op,anc:hits[0].targetAncestry.slice(0,4),stack:hits[0].stack.slice(0,4)}:null};
+    })};
+  window.__P34=res;$('#status').textContent='done';$('#out').textContent=JSON.stringify(res,null,1);
+  return {events:LOG.length,classAssignments:classAssign.length,mcqLinksFinal:mcqLinks,firstMcqOp:firstMcq?firstMcq.op:null};
+ }};
+$('#out').textContent='ready';
+</script>
+</body></html>

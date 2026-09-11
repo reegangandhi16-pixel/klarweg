@@ -1,0 +1,48 @@
+die Ansicht - prospect
+abhängig - dependent
+anfallen - to arise
+angeben (Bitte geben Sie Ihren Namen an.) - to state
+aufnehmen (einen Kredit aufnehmen) - to take out
+die Fotoüberweisung - picture transfer
+die Kontoeröffnung - account opening
+die Zahlung - payment
+eintragen - to register
+einzahlen - to deposit
+fällig - due
+gering - small
+gutschreiben (einen Betrag gutschreiben) - to credit
+monatlich - monthly
+regieren - to rule
+sich einloggen - to log in
+umgehend - immediate
+versäumen - to miss
+zudem - in addition
+überziehen - to overdraw
+das Bankgeschäft - banking
+das Bargeld (Sg.) - cash
+das Menü - menu
+das Online-Banking (Sg.) - online banking
+der Beleg - receipt
+der Benutzername - user name
+der Dauerauftrag - recurring payment / standing order
+der Kleiderschrank - wardrobe
+der Kontoauszug - bank statement
+der Log-in - log-in
+der Schein - bill
+der Verlust - loss
+der Zins - interest
+der/die Bankangestellte - bank teller
+die Ausgabe - expense
+die BIC - SWIFT-BIC
+die Einnahme - revenue
+die IBAN - IBAN
+die Kontodaten (Pl.) - account information
+die Kontoführungsgebühr - account maintenance charge
+die Kontoübersicht - account overview
+die Kopie - copy
+die Münze - coin
+die Rate - rate
+die Schulden (Pl.) - debt
+die Standardübersicht - standard overview
+fristgerecht - on time
+die Grundform - basic form

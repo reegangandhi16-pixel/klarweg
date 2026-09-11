@@ -1,0 +1,159 @@
+{
+ "chapter-a1-1-data.js": {
+  "scene": "Deutschkurs, Tag 1 — Berlin",
+  "intro": "Frau Weber\\'s very first German lesson in Berlin. She welcomes new student Rohan — and the first thing he learns is how to spell his own name, letter by letter, and where those two little dots come from.",
+  "listening": [
+   "Frau Weber: Wiederholen Sie bitte: A wie Apfel.",
+   "Rohan: A wie Apfel.",
+   "Frau Weber: Gut. Und B wie Buch.",
+   "Rohan: B wie Buch. Das ist leicht!"
+  ]
+ },
+ "chapter-a1-2-data.js": {
+  "scene": "Ausspracheübung — Deutschkurs",
+  "intro": "Second lesson, pure sound. Frau Bauer coaches Jonas through the five German vowels and the umlauts that Hindi does not have — and Jonas finds his inner German.",
+  "listening": [
+   "Frau Bauer: Jonas, sprich bitte langsam nach: Der Mann liest ein Buch.",
+   "Jonas: Der Mann liest ein Buch.",
+   "Frau Bauer: Sehr gut. Sag das noch einmal.",
+   "Jonas: Der Mann liest ein Buch."
+  ]
+ },
+ "chapter-a1-3-zahlen-data.js": {
+  "scene": "Zahlen üben — Deutschkurs",
+  "intro": "Third lesson, and two classmates finally get properly acquainted — names, ages, and the all-important phone-number swap. Emma reels off her digits; Tim needs them a little slower.",
+  "listening": [
+   "Tim: Wie alt bist du, Emma?",
+   "Emma: Ich bin einundzwanzig Jahre alt.",
+   "Tim: Und was kostet dein neues Buch?",
+   "Emma: Das Buch kostet fünfzehn Euro."
+  ]
+ },
+ "chapter-a1-4-hallo-data.js": {
+  "scene": "Anmeldung an der Sprachschule — Berlin",
+  "intro": "David arrives at his Berlin language school and meets the receptionist, Frau Klein. A first, formal conversation — Sie, Herr and Frau — and he learns exactly when Germans switch to the friendly du.",
+  "listening": [
+   "Frau Klein: Guten Tag! Ich heiße Frau Klein. Wie heißt du?",
+   "David: Hallo, ich bin David. Ich komme aus Indien und ich bin einundzwanzig Jahre alt."
+  ]
+ },
+ "chapter-a1-5-werbistdu-data.js": {
+  "scene": "Vorstellungsrunde — Deutschkurs",
+  "intro": "A partner exercise. Two classmates, Lena and Paul, introduce themselves properly — names, where they are from, where they live, their age — and discover they are both new in Berlin.",
+  "listening": [
+   "Paul: Wer bist du?",
+   "Lena: Ich bin Lena. Mein Nachname ist Klein. Ich komme aus Indien und ich bin einundzwanzig Jahre alt."
+  ]
+ },
+ "chapter-a1-6-wfragen-data.js": {
+  "scene": "In der Pause — Deutschkurs",
+  "intro": "Break time turns into a two-person mini-interview. Sofia fires off the W-questions — where, when, why — and Felix answers, as two classmates turn small talk into real practice.",
+  "listening": [
+   "Sofia: Wie heißt du?",
+   "Felix: Ich heiße Felix.",
+   "Sofia: Woher kommst du?",
+   "Felix: Ich komme aus Indien.",
+   "Sofia: Wie alt bist du?",
+   "Felix: Ich bin einundzwanzig Jahre alt.",
+   "Sofia: Warum lernst du Deutsch?",
+   "Felix: Für die Arbeit."
+  ]
+ },
+ "chapter-a1-7-jaodernein-data.js": {
+  "scene": "Nach dem Kurs — Deutschkurs",
+  "intro": "After class, Ben checks if Mia has time, then finds out how well they actually understand each other — quick-fire yes/no questions, honest answers, and one classic \"say that again?\" moment.",
+  "listening": [
+   "Mia: Sprichst du Deutsch, Ben?",
+   "Ben: Ja, ein bisschen.",
+   "Mia: Kommst du aus Indien?",
+   "Ben: Ja, ich komme aus Delhi.",
+   "Mia: Verstehst du alles?",
+   "Ben: Nein, ich verstehe nicht alles."
+  ]
+ },
+ "chapter-a1-8-goethemini1-data.js": {
+  "scene": "Mini-Test — Deutschkurs",
+  "intro": "A quick partner checkpoint. Nina interviews Daniel using everything from Chapters 1–7 — name, age, origin — and discovers he comes from a country whose language surprises her.",
+  "listening": [
+   "Nina: Erzähl mir etwas über dich, Daniel.",
+   "Daniel: Guten Tag! Ich heiße Daniel. Ich komme aus Indien, aber ich wohne in Wien, in Österreich. Ich spreche Hindi, Englisch und ein bisschen Deutsch. Ich bin einundzwanzig Jahre alt."
+  ]
+ },
+ "chapter-a1-9-verben-data.js": {
+  "scene": "Mein Tag — Deutschkurs",
+  "intro": "Phase 2 begins. Noah asks Clara what she does every day, and the two swap everyday routines — working, learning, cooking, playing — putting the new verb endings straight to work.",
+  "listening": [
+   "Noah: Was machst du jeden Tag, Clara?",
+   "Clara: Ich lerne jeden Tag Deutsch. Morgen arbeite ich, aber am Wochenende koche und spiele ich. Ich brauche wirklich mehr Lernkarten!"
+  ]
+ },
+ "chapter-a1-10-artikel-data.js": {
+  "scene": "Im Klassenzimmer — Deutschkurs",
+  "intro": "Kai points around the classroom and Julia names each object — but every noun comes with a colour: der, die or das. A quick trick turns the hardest habit in German into a game.",
+  "listening": [
+   "Kai: Was ist das?",
+   "Julia: Das ist der Tisch.",
+   "Kai: Und das?",
+   "Julia: Das ist die Karte. Auf dem Tisch sind ein Buch, ein Stift und eine Flasche.",
+   "Kai: Die Sachen gehören zusammen."
+  ]
+ },
+ "chapter-a1-11-negation-data.js": {
+  "scene": "Mittagspause — Deutschkurs",
+  "intro": "Lunchtime talk. Ben has no time, Anna has no more money, and the two learn the two ways to say no in German — kein for things, nicht for everything else.",
+  "listening": [
+   "Ben: Hast du heute Zeit, Anna?",
+   "Anna: Nein, ich habe keine Zeit. Ich bin nicht müde, aber ich habe kein Geld mehr.",
+   "Ben: Kein Problem, vielleicht morgen!"
+  ]
+ },
+ "chapter-a1-12-akkusativ-data.js": {
+  "scene": "Im Geschäft — Berlin",
+  "intro": "Tom and Lisa go shopping after class. Tom is looking for a few things — and every object he wants becomes a direct object in the accusative.",
+  "listening": [
+   "Tom: Was suchst du, Lisa?",
+   "Lisa: Ich suche den Schlüssel und einen Stift. Ich kaufe auch ein Buch und eine Karte.",
+   "Tom: Hast du alles?",
+   "Lisa: Ja, ich finde alles im Geschäft."
+  ]
+ },
+ "chapter-a1-13-adjektive-data.js": {
+  "scene": "Beschreibungen — Deutschkurs",
+  "intro": "Marie asks Leon to describe his city and his friends. With sein and an adjective, Leon paints a picture of his new life in Berlin.",
+  "listening": [
+   "Leon: Wie ist deine Stadt, Marie?",
+   "Marie: Meine Stadt ist groß und sehr schön. Mein Freund ist nett und fleißig. Heute bin ich müde, aber das Wetter ist wunderbar."
+  ]
+ },
+ "chapter-a1-14-essen-data.js": {
+  "scene": "Im Café — Berlin",
+  "intro": "Hanna is working at a café in Berlin when Simon comes in for breakfast — and the food words arrive before any rule does.",
+  "listening": [
+   "Simon: Was möchtest du, Hanna?",
+   "Hanna: Ich möchte einen Kaffee und ein Brötchen mit Käse. Ich esse kein Fleisch. Und du?",
+   "Simon: Ich nehme einen Orangensaft und einen Salat. Das schmeckt super!"
+  ]
+ },
+ "chapter-a1-15-cafe-data.js": {
+  "scene": "Im Café — Kreuzberg, Berlin",
+  "intro": "After class, Ida drops into a café in Kreuzberg. The waiter takes her order, the prices come up, and she settles the bill — every café phrase you need, in one real scene.",
+  "listening": [
+   "Kellner: Guten Tag! Was möchten Sie?",
+   "Ida: Ich hätte gern einen Kaffee und ein Stück Kuchen. Was kostet das?",
+   "Kellner: Das macht zusammen fünf Euro fünfzig.",
+   "Ida: Hier sind sechs Euro. Stimmt so!",
+   "Kellner: Vielen Dank, schönen Tag!"
+  ]
+ },
+ "chapter-a1-16-hobbies-data.js": {
+  "scene": "Nach dem Unterricht — Sprachschule, Berlin",
+  "intro": "It is Friday after class. Elias asks Sara about the weekend, and their hobbies come out — Sara\\u2019s tennis, Elias\\u2019s photography, and one firm preference for the sofa.",
+  "listening": [
+   "Elias: Was machst du am Wochenende, Sara?",
+   "Sara: Am Samstag spiele ich Tennis und am Sonntag gehe ich schwimmen. Und du?",
+   "Elias: Ich höre gern Musik, aber am liebsten fotografiere ich.",
+   "Sara: Macht das Spaß?",
+   "Elias: Ja, das macht großen Spaß!"
+  ]
+ }
+}

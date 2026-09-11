@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · Targeted Regression</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:20px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:70vh;overflow:auto}
+iframe{position:absolute;width:1280px;height:960px;left:-9999px;top:0;border:0}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60}
+</style></head><body>
+<h1>Targeted Regression</h1>
+<div class="sub">Runs <code>KWASSERT</code> + <code>KWQA</code> per named chapter using the sweep runner's render-stability gate (no fixed delays). Investigation only — writes nothing to production.</div>
+<div class="st" id="status">idle · KWREG.run()</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script src="qa-data-lint.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const LIST=['chapter-b2-07-verbergaenzungen-erkennen.html','chapter-b2-40-verben-mit-praepositionen.html',
+ 'chapter-b2-41-nomen-mit-praepositionen.html','chapter-b2-50-nominalisierung.html',
+ 'chapter-b2-61-indirekte-rede-zeitverschiebung.html','chapter-a1-1-alphabet.html','chapter-a1-2-vokale.html',
+ 'chapter-a1-9-verben.html','chapter-a2-8-komparativ-superlativ.html','chapter-a2-9-vergleiche-als-wie.html',
+ 'chapter-c2-22-wortbildung-der-nomen.html','chapter-c1-30-nomen-mit-numerusbesonderheiten.html'];
+function freshFrame(){const o=$('#frame');const n=document.createElement('iframe');n.id='frame';o.parentNode.replaceChild(n,o);}
+// Render-stability gate copied from qa-runner.html — fixed delays are known to
+// produce phantom findings under load.
+function ready(f,cb){
+  const SAMPLE_MS=180,STABLE=3,HARD=30000,t0=Date.now();let last=null,same=0;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const nodes=d.querySelectorAll('.rw, .de-link');
+    if(!nodes.length)return null;const roles={};let n=0;
+    for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;
+    return n+'|'+d.querySelectorAll('[id^="sec-"]').length+'|'+d.querySelectorAll('.wp-badge').length+'|'+
+      Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{
+    if(Date.now()-t0>HARD){cb('hard-timeout');return;}
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,SAMPLE_MS);}
+    const s=sig();
+    if(s===null){last=null;same=0;return setTimeout(poll,SAMPLE_MS);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=STABLE)return cb('stable');
+    setTimeout(poll,SAMPLE_MS);};
+  poll();
+}
+function inject(d,src){return new Promise((res,rej)=>{const s=d.createElement('script');s.src=src+'?v='+Date.now();s.onload=res;s.onerror=()=>rej(new Error('load failed: '+src));d.head.appendChild(s);});}
+function runOne(file){
+  return new Promise(resolve=>{
+    const f=$('#frame');let done=false;
+    const fin=r=>{if(done)return;done=true;resolve(r);};
+    const timer=setTimeout(()=>fin({file,error:'timeout'}),120000);
+    f.onload=()=>ready(f,async(state)=>{
+      try{
+        const w=f.contentWindow,d=f.contentDocument;
+        if(!w||!d||!d.head){clearTimeout(timer);return fin({file,error:'injection-error',readyState:state});}
+        await inject(d,'qa-engine.js');
+        await inject(d,'qa-assert.js');
+        const qa=w.KWQA.run();
+        const as=w.KWASSERT.run();
+        const st=w.KWASSERT.selfTest();
+        clearTimeout(timer);
+        fin({file,readyState:state,occurrences:qa.occurrences,checked:qa.checked,findings:(qa.findings||[]).length,
+          clean:!!qa.clean,codes:(qa.findings||[]).reduce((a,x)=>{a[x.code]=(a[x.code]||0)+1;return a;},{}),
+          assert:{pass:as.pass,error:as.error||null,failed:as.failed||[],occurrences:as.occurrences||null,
+            rows:(as.rows||[]).map(r=>({test:r.test,expected:r.expected!==undefined?r.expected:(r.expectedBadge||r.expectedRole),
+              actual:r.actual!==undefined?r.actual:(r.actualBadge||'')+'/'+(r.actualRole||''),pass:r.pass}))},
+          assertSelfTest:{pass:st.pass,failed:st.failed}});
+      }catch(e){clearTimeout(timer);fin({file,error:String(e&&e.stack||e),readyState:state});}
+    });
+    f.src=file+'?rg='+Date.now();
+  });
+}
+window.KWREG={LIST,
+ // Direct DOM check: for each surface, count linkified occurrences and split by
+ // whether they sit inside an authored German container (.de).
+ async surfaceCheck(files,surfaces){
+  const out=[];
+  for(const file of files){
+   const r=await new Promise(resolve=>{
+    const f=$('#frame');let done=false;const fin=x=>{if(done)return;done=true;resolve(x);};
+    const timer=setTimeout(()=>fin({file,error:'timeout'}),120000);
+    f.onload=()=>ready(f,(state)=>{
+     try{
+      const d=f.contentDocument;
+      const nodes=[].slice.call(d.querySelectorAll('.rw, .de-link'))
+        .filter(n=>!n.querySelector('.rw, .de-link')).filter(n=>!n.closest('.word-pop'))
+        .filter(n=>!!(n.offsetParent||n.getClientRects().length));
+      const norm=s=>String(s||'').toLowerCase().replace(/[^a-z\u00e4\u00f6\u00fc\u00df]/g,'');
+      const res={};
+      surfaces.forEach(s=>{
+       const hits=nodes.filter(n=>norm(n.textContent)===norm(s));
+       const outside=hits.filter(n=>!n.closest('.de'));
+       if(hits.length) res[s]={linkified:hits.length,inDe:hits.length-outside.length,outsideDe:outside.length};
+      });
+      clearTimeout(timer);fin({file,readyState:state,totalNodes:nodes.length,found:res});
+     }catch(e){clearTimeout(timer);fin({file,error:String(e)});}
+    });
+    f.src=file+'?sc='+Date.now();
+   });
+   out.push(r);window.__surf=out;
+  }
+  return out;
+ },
+ async run(list){
+  const l=list&&list.length?list:LIST;
+  const s=window.__reg={status:'running',done:false,results:[],lintSelfTest:window.KWLINT?window.KWLINT.selfTest():null};
+  for(let i=0;i<l.length;i++){
+    s.status='['+(i+1)+'/'+l.length+'] '+l[i];$('#status').textContent=s.status;
+    let r=await runOne(l[i]);
+    if(r.error){freshFrame();await new Promise(x=>setTimeout(x,1200));r=await runOne(l[i]);}
+    s.results.push(r);$('#out').textContent=JSON.stringify(s.results,null,1);
+  }
+  s.status='done';s.done=true;$('#status').textContent='done';return s;
+ }};
+</script>
+</body></html>

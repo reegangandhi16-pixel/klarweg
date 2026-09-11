@@ -1,0 +1,261 @@
+{
+  "$schema": "klarweg-audio/approved-renders/v1",
+  "purpose": "The APPROVAL BOUNDARY between the audit layer and production audio. A rendered/spoken form reaches the TTS provider ONLY if it is authorised here. The existence of a renderText in the audit layer authorises nothing.",
+  "invariant": {
+    "identity": "de / headword — manifest key, contentHash, assetId, globalId. NEVER changed by an approval.",
+    "synthesis": "renderDe || de — the only thing an approval can change.",
+    "failClosed": "scripts/promote-renders.js promotes nothing that is not matched by an enabled rule or listed in rows[]."
+  },
+  "provenanceClasses": {
+    "A": "authoritative recovery — the spoken text already exists verbatim in an authoritative source (the manifest's own `de`, or an authored chapter-data field). No linguistic inference.",
+    "B": "deterministic transformation, explicitly approved rule by rule.",
+    "C": "audit inference — NOT approved. Includes the 230-row gender-suffix-family CSV, which is labelled PROPOSED / AWAITING HUMAN SIGN-OFF and has never been native-speaker verified.",
+    "D": "editorial review — a human decision is outstanding.",
+    "E": "not audio — must never be synthesized."
+  },
+  "categoryApprovals": [
+    {
+      "id": "A-manifest-punctuation-recovery",
+      "class": "A",
+      "enabled": true,
+      "approvedBy": "product owner (chat approval 2026-09-10)",
+      "approvedOn": "2026-09-10",
+      "appliesTo": "story, listening, reading rows whose audit renderTextSource is 'authored manifest (punctuated)'",
+      "rule": "renderDe := the manifest entry's own `de`, when the UI lookup text differs from it only by dropped punctuation.",
+      "whySafe": "This restores text the manifest ALREADY holds. The UI strips punctuation tokens when building its lookup key; nothing is invented, and the promoted string is byte-identical to the authoritative source.",
+      "guard": "canonical-equivalence: promoted renderDe must reduce to the same letters/digits as the row's lookup text. A mismatch is refused."
+    },
+    {
+      "id": "A-authored-chapter-field",
+      "class": "A",
+      "enabled": true,
+      "approvedBy": "product owner (chat approval 2026-09-10)",
+      "approvedOn": "2026-09-10",
+      "appliesTo": "rows whose audit renderTextSource is 'A · authored chapter-data field'",
+      "rule": "renderDe := the authored chapter-data field (reading.tokens reconstruction incl. punctuation).",
+      "whySafe": "The spoken form is read from authored chapter data, not derived.",
+      "guard": "same canonical-equivalence guard."
+    },
+    {
+      "id": "B-token-stream-reconstruction",
+      "class": "B",
+      "enabled": false,
+      "approvedBy": null,
+      "approvedOn": null,
+      "appliesTo": "the 7 rows whose renderTextSource is 'B · token stream reconstruction'",
+      "note": "Deterministic, but reconstructs rather than recovers. Left disabled pending sign-off."
+    },
+    {
+      "id": "C-gender-suffix-family",
+      "class": "C",
+      "enabled": false,
+      "approvedBy": null,
+      "approvedOn": null,
+      "appliesTo": "audit/audio-inventory/gender-suffix-family.csv (230 rows)",
+      "note": "HARD BLOCKED. Rests on unverified morphological judgement."
+    }
+  ],
+  "rows": [
+    {
+      "assetId": "c7a36da467d935ff",
+      "displayText": "A",
+      "renderDe": "Ah",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "letter-name",
+      "chapter": "a1-1-alphabet",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "7ff0aba637d5e175",
+      "displayText": "O",
+      "renderDe": "Oh",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "letter-name",
+      "chapter": "a1-1-alphabet",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "9b3fd65c05b3227a",
+      "displayText": "U",
+      "renderDe": "Uh",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "letter-name",
+      "chapter": "a1-1-alphabet",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "bf6a6e0512f6cfb9",
+      "displayText": "E",
+      "renderDe": "Eh",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "letter-name",
+      "chapter": "a1-1-alphabet",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "dcbe1b928b40930c",
+      "displayText": "F",
+      "renderDe": "Eff",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "letter-name",
+      "chapter": "a1-1-alphabet",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "ab7d48e75812e93f",
+      "displayText": "H",
+      "renderDe": "Ha",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "letter-name",
+      "chapter": "a1-1-alphabet",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "43194b3b1f708d87",
+      "displayText": "N",
+      "renderDe": "En",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "letter-name",
+      "chapter": "a1-1-alphabet",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "d4b2eeb5593c39a9",
+      "displayText": "V",
+      "renderDe": "Vau",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "letter-name",
+      "chapter": "a1-1-alphabet",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "8d45cb646458499e",
+      "displayText": "Z",
+      "renderDe": "Zett",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "letter-name",
+      "chapter": "a1-1-alphabet",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "53a067ce2dd5bc6b",
+      "displayText": "a",
+      "renderDe": "Apfel",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "vowel-exemplar",
+      "chapter": "a1-2-vokale",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "b95a090fd333511e",
+      "displayText": "ä",
+      "renderDe": "Käse",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "vowel-exemplar",
+      "chapter": "a1-1-alphabet, a1-2-vokale",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "679cd6047a7d7227",
+      "displayText": "ö",
+      "renderDe": "schön",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "vowel-exemplar",
+      "chapter": "a1-1-alphabet, a1-2-vokale",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    },
+    {
+      "assetId": "4136229551637532",
+      "displayText": "ü",
+      "renderDe": "über",
+      "provenance": "B",
+      "renderSource": "token spokenDe (authored)",
+      "kind": "vowel-exemplar",
+      "chapter": "a1-1-alphabet, a1-2-vokale",
+      "voiceRole": "popup-female",
+      "scope": "word-popup only — sentence playback is unaffected",
+      "approvedBy": "product owner (chat approval 2026-09-11)",
+      "approvedOn": "2026-09-11"
+    }
+  ],
+  "rowSchema": {
+    "assetId": "stable asset identity (manifest id for sentence rows, globalId for vocabulary)",
+    "displayText": "REQUIRED for token/word rows. The learner-facing surface, and the MANIFEST KEY the runtime looks up. The engine's resolveInfo() keys on nothing else, so an asset published for the token \"Z\" must be keyed \"Z\" — keying it on its spoken form would make the popup unable to find its own audio.",
+    "renderDe": "exact text to synthesize. For token rows this legitimately DIFFERS from displayText (\"Z\" is spoken \"Zett\"); the filename hash is taken over this value, so identical spoken content is content-addressed to one shared file.",
+    "provenance": "A | B",
+    "approvedBy": "who approved this specific row",
+    "approvedOn": "ISO date — a null value means NOT approved; scripts/generate-token-audio.ts refuses the row"
+  },
+  "rowSchemaNotes": {
+    "identityVsSynthesis": "displayText is identity; renderDe is synthesis input. Never the reverse.",
+    "neverTtsInput": "a token's `pron` field is a learner-facing respelling (\"tset\", \"vay\") written to be READ, never validated as TTS input. It must never be promoted to renderDe.",
+    "tokenRowsPending": "the 13 authored token spokenDe values (a1-1/a1-2 Letter+Vowel targets) are NOT listed in rows[] and therefore cannot be synthesized. The 12 REVIEW targets (R C B T W e i o u Ä ts Üüü) have no authored spoken form at all."
+  },
+  "hardBlocked": {
+    "classes": [
+      "C",
+      "D",
+      "E"
+    ],
+    "namedRows": [
+      "gemacht sein (für) — editorial review",
+      "sehr geehrte(r) — editorial review",
+      "& Co — editorial review",
+      "der/die Näher/in — editorial review",
+      "Näher/innen — editorial review"
+    ],
+    "kinds": [
+      "task-prompt"
+    ],
+    "kindsNote": "the 1,277 speaking task-prompt rows have no learner-facing audio control and must never be promoted or synthesized."
+  },
+  "rowsNote": "13 authored token renders, approved for TTS generation. displayText is the manifest identity; renderDe is the synthesis input. The 12 remaining Letter/Vowel/Sound targets (R C B T W e i o u Ä ts Üüü) have no authored spoken form and are NOT approved."
+}

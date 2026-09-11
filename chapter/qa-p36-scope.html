@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P36 QA scope selector proof</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:16px;max-width:820px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:pre-wrap;max-height:56vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P36 — is a selector-level QA scope fix safe?</h1>
+<div class="sub">Runs the UNMODIFIED qa-engine, rebuilds its exact node list, then classifies every finding by whether its node is a <code>colorWordsIn</code> decorative span (inside <code>button.mcq-option</code>) or a genuine <code>wrapWordsIn</code> link. Reports before → after per chapter and names every finding that would disappear. qa-engine.js is never edited.<br><code>KWP36.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script src="qa-finding-serializer.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+// Affected chapters (all 14 G-A occurrences) + controls with genuine HCM (G-B, G-C) + pure controls.
+const CH=[
+ {file:'chapter-b2-15-konzessivsaetze-obgleich.html',role:'affected (Obgleich ×3)'},
+ {file:'chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html',role:'affected (Infolgedessen ×3)'},
+ {file:'chapter-c1-26-passiv-und-passiversatzformen.html',role:'affected (dokumentiert ×3)'},
+ {file:'chapter-b2-45-passiversatz-sich-lassen.html',role:'affected (sich ×2)'},
+ {file:'chapter-b1-17-nebensatz-damit-um-zu.html',role:'affected (um ×1)'},
+ {file:'chapter-a1-34-schreiben.html',role:'affected (Liebe ×1)'},
+ {file:'chapter-a1-37-praep-dativ.html',role:'affected (Fuß ×1)'},
+ {file:'chapter-a1-8-goethemini1.html',role:'control G-B (deutsch ×4 genuine)'},
+ {file:'chapter-a1-15-cafe.html',role:'control G-B (Zahlen ×2 genuine)'},
+ {file:'chapter-a1-39-ortsangaben.html',role:'control G-C (letter a, genuine)'},
+ {file:'chapter-a1-7-jaodernein.html',role:'control G1 by-design (Nein, genuine)'},
+ {file:'chapter-a1-1-alphabet.html',role:'pure control (0 findings expected)'}];
+// The proposed distinction. colorWordsIn is called at exactly 2 sites (:3050, :3349),
+// both on b.querySelector('.de') where b is <button class="mcq-option">. So every
+// decorative span has a button.mcq-option ancestor; no wrapWordsIn span does.
+function isDecorative(n){ try{ return !!n.closest('button.mcq-option'); }catch(e){ return false; } }
+function ready(f,cb){
+  const S=180,N=3,HARD=30000,t0=Date.now();let last=null,same=0;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const nodes=d.querySelectorAll('.rw, .de-link');if(!nodes.length)return null;
+    const roles={};let n=0;for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;return n+'|'+Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{if(Date.now()-t0>HARD)return cb('hard-timeout');
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,S);}
+    const s=sig();if(s===null){last=null;same=0;return setTimeout(poll,S);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=N)return cb('stable');setTimeout(poll,S);};
+  poll();
+}
+function runOne(c){
+  return new Promise((resolve,reject)=>{
+    const f=$('#frame');const t=setTimeout(()=>reject(new Error('timeout '+c.file)),120000);
+    f.onload=()=>ready(f,(state)=>{
+      if(state!=='stable'){clearTimeout(t);return reject(new Error('unstable '+c.file));}
+      const d=f.contentDocument,w=f.contentWindow;
+      const s=d.createElement('script');s.src='qa-engine.js?v='+Date.now();
+      s.onerror=()=>{clearTimeout(t);reject(new Error('engine load failed'));};
+      s.onload=()=>{try{
+        // identical node list to qa-engine
+        const nodes=[].slice.call(d.querySelectorAll('.rw, .de-link'))
+          .filter(n=>!n.querySelector('.rw, .de-link')).filter(n=>!n.closest('.word-pop'))
+          .filter(n=>!!(n.offsetParent||n.getClientRects().length));
+        const decorativeIdx=new Set();
+        nodes.forEach((n,i)=>{if(isDecorative(n))decorativeIdx.add(i);});
+        const qa=w.KWQA.run();
+        const fs=(qa.findings||[]);
+        const kept=[],dropped=[];
+        fs.forEach(x=>{
+          const rec={code:x.code,section:x.section,index:x.index,surface:x.surface,
+            detail:x.detail?{span:x.detail.span,head:x.detail.head,badge:x.detail.badge,role:x.detail.role}:null};
+          if(decorativeIdx.has(x.index))dropped.push(rec);else kept.push(rec);
+        });
+        const cnt=a=>a.reduce((m,x)=>{m[x.code]=(m[x.code]||0)+1;return m;},{});
+        clearTimeout(t);
+        resolve({file:c.file,role:c.role,readyState:state,
+          totalNodes:nodes.length,decorativeNodes:decorativeIdx.size,
+          before:{findings:fs.length,byCode:cnt(fs.map(x=>({code:x.code})))},
+          after:{findings:kept.length,byCode:cnt(kept)},
+          droppedCount:dropped.length,dropped:dropped,
+          keptHcm:kept.filter(x=>x.code==='HEADWORD_COLOUR_MISMATCH'),
+          droppedNonMcqCheck:dropped.filter(x=>false).length});
+      }catch(e){clearTimeout(t);reject(e);}};
+      d.head.appendChild(s);
+    });
+    f.src=c.file+'?p36='+Date.now()+'_'+Math.random();
+  });
+}
+window.KWP36={async run(){
+  const out=[];
+  for(let i=0;i<CH.length;i++){
+    $('#status').textContent='['+(i+1)+'/'+CH.length+'] '+CH[i].file.slice(8,36);
+    try{out.push(await runOne(CH[i]));}catch(e){out.push({file:CH[i].file,role:CH[i].role,error:String(e.message||e)});}
+    window.__P36=out;
+    $('#out').textContent=JSON.stringify(out.map(o=>({f:(o.file||'').slice(8,28),b:o.before&&o.before.findings,a:o.after&&o.after.findings,drop:o.droppedCount,deco:o.decorativeNodes,err:o.error||null})),null,1);
+  }
+  $('#status').textContent='done';
+  const tot=(k)=>out.reduce((a,o)=>a+((o[k]||0)),0);
+  const sumCode=(which)=>out.reduce((a,o)=>{const b=(o[which]&&o[which].byCode)||{};Object.keys(b).forEach(k=>a[k]=(a[k]||0)+b[k]);return a;},{});
+  return {chapters:out.length,decorativeNodes:tot('decorativeNodes'),dropped:tot('droppedCount'),
+    beforeByCode:sumCode('before'),afterByCode:sumCode('after'),
+    droppedByCode:out.reduce((a,o)=>{(o.dropped||[]).forEach(x=>a[x.code]=(a[x.code]||0)+1);return a;},{})};
+}};
+$('#out').textContent='ready';
+</script>
+</body></html>

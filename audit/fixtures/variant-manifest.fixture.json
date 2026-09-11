@@ -1,0 +1,15 @@
+{
+  "_comment": "TEST FIXTURE ONLY — never published to the CDN, never referenced by a chapter page. Proves the speaker-aware entry shape is consumable by the UNCHANGED resolver. The mp3 paths point at ALREADY-PUBLISHED files so the fixture can prove selection + reachability + decode without generating anything.",
+  "_shape": "text -> { female: <path>, male: <path> } — the same shape the vocabulary manifest already uses and resolveInfo(text, gender) already reads",
+  "Ja bitte": {
+    "female": "audio/female/jedoch.mp3",
+    "male": "audio/male/jedoch.mp3"
+  },
+  "Und danach": {
+    "female": "audio/female/machen.mp3",
+    "male": "audio/male/machen.mp3"
+  },
+  "das Experiment": {
+    "female": "audio/female/das_Experiment.mp3"
+  }
+}

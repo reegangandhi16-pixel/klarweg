@@ -1,0 +1,580 @@
+{
+ "level": "c1",
+ "chapters": [
+  {
+   "num": 1,
+   "id": "c1-01-tempusgebrauch-stilistische-tempuswahl",
+   "title": "Advanced tense usage & stylistic choice",
+   "vocab": [
+    "das historische Präsens",
+    "die Tempuswahl",
+    "die Zeitschichtung",
+    "die Vermutung",
+    "die Schlussfolgerung"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 2,
+   "id": "c1-02-raum-und-zeit-praezise-ausdruecken",
+   "title": "Expressing space & time precisely",
+   "vocab": [
+    "unmittelbar",
+    "gleichzeitig",
+    "im Laufe",
+    "in unmittelbarer Nähe",
+    "im Rahmen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 3,
+   "id": "c1-03-nebensaetze-sicher-beherrschen",
+   "title": "Mastering complex subordinate clauses",
+   "vocab": [
+    "die Satzarchitektur",
+    "die Nebensatzhierarchie",
+    "verschachteln",
+    "die Satzreduktion",
+    "die Informationsstruktur"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 4,
+   "id": "c1-04-hauptsaetze-elegant-verbinden",
+   "title": "Connecting main clauses elegantly",
+   "vocab": [
+    "zudem",
+    "darüber hinaus",
+    "dennoch",
+    "folglich",
+    "gleichzeitig"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 5,
+   "id": "c1-05-zweiteilige-satzverbindungen",
+   "title": "Correlative & paired sentence connectors",
+   "vocab": [
+    "sowohl ... als auch",
+    "entweder ... oder",
+    "weder ... noch",
+    "zwar ... aber",
+    "je ... desto"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 6,
+   "id": "c1-06-goethe-mini-1",
+   "title": "Checkpoint: Chapters 1–5",
+   "vocab": [
+    "die Prüfungsvorbereitung",
+    "die Argumentation",
+    "der Rhythmus",
+    "die Struktur",
+    "überzeugend"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 7,
+   "id": "c1-07-praepositionen-mit-genitiv",
+   "title": "Genitive prepositions in formal German",
+   "vocab": [
+    "aufgrund",
+    "hinsichtlich",
+    "mittels",
+    "zugunsten",
+    "ungeachtet",
+    "anlässlich",
+    "kraft",
+    "die Einschränkung"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 8,
+   "id": "c1-08-anspruchsvolle-praepositionen",
+   "title": "Advanced prepositional expressions",
+   "vocab": [
+    "hinsichtlich",
+    "angesichts",
+    "mithilfe",
+    "im Rahmen",
+    "dank",
+    "in Bezug auf",
+    "zufolge",
+    "mangels"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 9,
+   "id": "c1-09-adjektive-mit-praepositionalergaenzungen",
+   "title": "Adjectives with fixed prepositional complements",
+   "vocab": [
+    "interessiert an",
+    "überzeugt von",
+    "geeignet für",
+    "verantwortlich für",
+    "abhängig von",
+    "stolz auf",
+    "vertraut mit",
+    "fähig zu",
+    "bereit zu",
+    "begeistert von"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 10,
+   "id": "c1-10-nomen-mit-praepositionalobjekt",
+   "title": "Nouns with fixed prepositional objects",
+   "vocab": [
+    "Interesse an",
+    "Einfluss auf",
+    "Verantwortung für",
+    "Kenntnis von",
+    "Angst vor",
+    "Suche nach",
+    "Unterschied zwischen",
+    "Umgang mit",
+    "Einladung zu",
+    "Fähigkeit zu"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 11,
+   "id": "c1-11-goethe-mini-2",
+   "title": "Checkpoint: Chapters 7–10",
+   "vocab": [
+    "die Überarbeitung",
+    "die Zusammenarbeit",
+    "die Aufgabenteilung",
+    "die Zeitknappheit",
+    "zuversichtlich"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 12,
+   "id": "c1-12-modalverben-praezise-verwenden",
+   "title": "Using modal verbs precisely",
+   "vocab": [
+    "die Gewissheit",
+    "die Vermutung",
+    "die Zurückhaltung",
+    "übergeneralisieren",
+    "die Einschränkung"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 13,
+   "id": "c1-13-vermutungen-mit-modalverben-ausdruecken",
+   "title": "Expressing assumptions with modal verbs",
+   "vocab": [
+    "die Vermutung",
+    "die Schlussfolgerung",
+    "der Hinweis",
+    "davon ausgehen",
+    "ausschließen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 14,
+   "id": "c1-14-konjunktiv-ii-fuer-irreales-und-hypothesen",
+   "title": "Konjunktiv II for the unreal and hypothetical",
+   "vocab": [
+    "denkbar",
+    "annehmen",
+    "der Lebensweg",
+    "wünschenswert",
+    "die Zufriedenheit"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 15,
+   "id": "c1-15-konjunktiv-i-und-indirekte-rede",
+   "title": "Konjunktiv I and reported speech",
+   "vocab": [
+    "berichten",
+    "behaupten",
+    "die Quelle",
+    "die Neutralität",
+    "feststellen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 16,
+   "id": "c1-16-aufforderung-empfehlung-und-handlungssteuerung",
+   "title": "Directives, recommendations & guiding action",
+   "vocab": [
+    "empfehlen",
+    "ratsam",
+    "sicherstellen",
+    "die Gefahr",
+    "nahelegen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 17,
+   "id": "c1-17-goethe-halbzeit-test",
+   "title": "Halfway Checkpoint: Chapters 12–16",
+   "vocab": [
+    "die Zusammenfassung",
+    "vielversprechend",
+    "die Anmerkung",
+    "überarbeiten",
+    "neu analysieren"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 18,
+   "id": "c1-18-adjektivdeklination-sicher-anwenden",
+   "title": "Applying adjective declension with confidence",
+   "vocab": [
+    "umfangreich",
+    "der Lösungsansatz",
+    "durchführen",
+    "anerkannt",
+    "interdisziplinär"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 19,
+   "id": "c1-19-steigerung-und-sprachliche-abstufung",
+   "title": "Gradation and linguistic nuance",
+   "vocab": [
+    "renommiert",
+    "erheblich",
+    "ausgesprochen",
+    "vergleichsweise",
+    "die Karrierechance"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 20,
+   "id": "c1-20-relativsaetze-erweitern-und-variieren",
+   "title": "Expanding and varying relative clauses",
+   "vocab": [
+    "sich beziehen auf",
+    "erheben",
+    "die Spezifizierung",
+    "archivieren",
+    "aussagekräftig"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 21,
+   "id": "c1-21-partizipialattribute-verstehen-und-nutzen",
+   "title": "Understanding and using participial attributes",
+   "vocab": [
+    "falten",
+    "die Kürzung",
+    "stetig",
+    "aussagekräftig",
+    "zurücktreten"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 22,
+   "id": "c1-22-komplexe-attribute-und-nominalgruppen",
+   "title": "Complex attributes and noun groups",
+   "vocab": [
+    "verdichten",
+    "die Nominalgruppe",
+    "basieren auf",
+    "die Präzision",
+    "die Auswirkung"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 23,
+   "id": "c1-23-goethe-mini-3",
+   "title": "Checkpoint: Chapters 18–22",
+   "vocab": [
+    "überzeugend",
+    "eleganter",
+    "loben",
+    "die Präzision",
+    "verdichten"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 24,
+   "id": "c1-24-nominalisierung-im-formellen-stil",
+   "title": "Nominalization in formal style",
+   "vocab": [
+    "die Analyse",
+    "die Notwendigkeit",
+    "das Abwägen",
+    "die Durchführung",
+    "objektiv"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 25,
+   "id": "c1-25-partizipien-und-adjektive-als-nomen",
+   "title": "Participles and adjectives as nouns",
+   "vocab": [
+    "der/die Studierende",
+    "der/die Teilnehmende",
+    "der/die Verletzte",
+    "der/die Verantwortliche",
+    "das Wesentliche"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 26,
+   "id": "c1-26-passiv-und-passiversatzformen",
+   "title": "Passive and passive alternatives",
+   "vocab": [
+    "auswerten",
+    "sich lassen",
+    "einhalten",
+    "nachvollziehbar",
+    "dokumentieren"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 27,
+   "id": "c1-27-funktionsverbgefuege-im-akademischen-deutsch",
+   "title": "Light verb constructions in academic German",
+   "vocab": [
+    "eine Entscheidung treffen",
+    "eine Rolle spielen",
+    "in Betracht ziehen",
+    "einen Beitrag leisten",
+    "Verantwortung übernehmen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 28,
+   "id": "c1-28-goethe-mini-4",
+   "title": "Checkpoint: Chapters 24–27",
+   "vocab": [
+    "überprüfen",
+    "verschieben",
+    "die Einreichung",
+    "vollständig",
+    "endgültig"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 29,
+   "id": "c1-29-verben-mit-praefixen-sicher-unterscheiden",
+   "title": "Confidently distinguishing prefix verb families",
+   "vocab": [
+    "beschreiben",
+    "darstellen",
+    "feststellen",
+    "vorziehen",
+    "beitragen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 30,
+   "id": "c1-30-nomen-mit-numerusbesonderheiten",
+   "title": "Nouns with special number behavior",
+   "vocab": [
+    "die Forschung",
+    "die Kosten",
+    "das Wort / die Wörter / die Worte",
+    "das Personal",
+    "die Unterlagen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 31,
+   "id": "c1-31-adversativangaben-und-gegensaetze-ausdruecken",
+   "title": "Expressing contrast and opposition precisely",
+   "vocab": [
+    "allerdings",
+    "wenngleich",
+    "demgegenüber",
+    "nichtsdestotrotz",
+    "einerseits ... andererseits"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 32,
+   "id": "c1-32-kohaerenz-und-textverknuepfung",
+   "title": "Text coherence and cohesion",
+   "vocab": [
+    "die Kohärenz",
+    "sich beziehen auf",
+    "im Folgenden",
+    "darüber hinaus",
+    "der Befund"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 33,
+   "id": "c1-33-goethe-mini-5",
+   "title": "Checkpoint: Chapters 29–32",
+   "vocab": [
+    "überprüfen",
+    "vielversprechend",
+    "zusagen",
+    "der Beitrag",
+    "zurückkommen (auf)"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 34,
+   "id": "c1-34-argumentieren-auf-c1-niveau",
+   "title": "Arguing at C1 level",
+   "vocab": [
+    "meines Erachtens",
+    "die Evidenz",
+    "einwenden",
+    "entgegenhalten",
+    "abschließend"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 35,
+   "id": "c1-35-konzession-und-abwaegen",
+   "title": "Concession and weighing arguments",
+   "vocab": [
+    "grundsätzlich",
+    "weitgehend",
+    "die Aussagekraft",
+    "einräumen",
+    "insgesamt"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 36,
+   "id": "c1-36-register-und-stilebenen-beherrschen",
+   "title": "Mastering register and style levels",
+   "vocab": [
+    "reden",
+    "benötigen",
+    "der Kleidungscode",
+    "sehr geehrte(r)",
+    "sich beobachten lassen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 37,
+   "id": "c1-37-kollokationen-und-bedeutungsnuancen",
+   "title": "Collocations and shades of meaning",
+   "vocab": [
+    "eine Entscheidung treffen",
+    "Maßnahmen ergreifen",
+    "betrachten",
+    "fundierte Kenntnisse",
+    "die Herausforderung"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 38,
+   "id": "c1-38-zusammenfassung-schreiben",
+   "title": "Writing a summary",
+   "vocab": [
+    "die Hauptidee",
+    "weglassen",
+    "paraphrasieren",
+    "der Autor beschreibt",
+    "zusammenfassend lässt sich feststellen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 39,
+   "id": "c1-39-stellungnahme-schreiben",
+   "title": "Writing a statement of opinion",
+   "vocab": [
+    "die Auffassung",
+    "dafür sprechen mehrere Gründe",
+    "bestreiten",
+    "die Abwägung",
+    "festhalten"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 40,
+   "id": "c1-40-forumsbeitrag-schreiben",
+   "title": "Writing a forum post",
+   "vocab": [
+    "hallo zusammen",
+    "nachvollziehen",
+    "ein weiterer Aspekt",
+    "die Diskussion",
+    "nachvollziehbar"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 41,
+   "id": "c1-41-grafikbeschreibung-und-grafikauswertung",
+   "title": "Describing and evaluating graphics",
+   "vocab": [
+    "die vorliegende Grafik",
+    "sich belaufen auf",
+    "kontinuierlich",
+    "eine mögliche Erklärung wäre",
+    "abschließend lässt sich feststellen"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 42,
+   "id": "c1-42-goethe-zertifikat-c1-probepruefung",
+   "title": "Goethe-Zertifikat C1 mock examination",
+   "vocab": [
+    "die Vorbereitung",
+    "die Bewertung",
+    "nachvollziehen",
+    "abschließend",
+    "die Prüfungsangst"
+   ],
+   "hasStory": true
+  },
+  {
+   "num": 43,
+   "id": "c1-43-goethe-zertifikat-c1-final",
+   "title": "Complete C1 mastery & certification readiness",
+   "vocab": [
+    "die Mastery",
+    "die Zertifizierung",
+    "akademischer Deutschsprecher",
+    "der Übergang",
+    "lebenslanges Lernen"
+   ],
+   "hasStory": true
+  }
+ ]
+}

@@ -1,0 +1,91 @@
+{
+ "chapter-a1-41-dativpronomen-data.js": {
+  "scene": "Kurz vor dem Unterricht \\u2014 im Kursraum, Berlin",
+  "intro": "Five minutes before class and nobody has what they need. Frau Sommer is the one asking now — for the soup, for water, for a favour — and the waiter obliges every time: Ich bringe es Ihnen, ich bringe Ihnen das Wasser sofort. Every favour swaps a name for a dative pronoun.",
+  "listening": [
+   "Kellner: Kannst du mir helfen, Frau Sommer?",
+   "Frau Sommer: Klar, ich helfe dir. Was fehlt dir?",
+   "Kellner: Mir fehlt ein Buch.",
+   "Frau Sommer: Ich gebe dir mein Buch.",
+   "Kellner: Danke! Und gehört der Stift dir?",
+   "Frau Sommer: Nein, er gehört ihr, also Julia. Wie geht es dir heute?",
+   "Kellner: Mir geht es gut!"
+  ]
+ },
+ "chapter-a1-42-welcher-dieser-data.js": {
+  "scene": "Im Kaufhaus \\u2014 vor der Pr\\u00fcfung, Berlin",
+  "intro": "Vreni and Jonas hit a department store before the exam, debating which jacket looks best, which size fits, and which shop might actually have it in stock — every choice a \"which one?\" and a \"this one\": welche Jacke, diese Größe, dieses Geschäft.",
+  "listening": [
+   "Vreni: Welche Tasche kaufst du?",
+   "Jonas: Diese Tasche hier gefällt mir, aber welche Farbe ist besser?",
+   "Vreni: Diese rote Tasche ist schön. Und welches Buch nimmst du?",
+   "Jonas: Ich nehme dieses Buch.",
+   "Vreni: Mit welchem Bus fahren wir nach Hause?",
+   "Jonas: Mit diesem Bus, der ist gleich da."
+  ]
+ },
+ "chapter-a1-43-smalltalk-man-data.js": {
+  "scene": "Im Caf\\u00e9 \\u2014 ein verregneter Nachmittag, Berlin",
+  "intro": "A rainy afternoon in the café. While they wait out the weather, the gang drifts into easy small talk \\u2014 how\\u2019s it going, what\\u2019s the weekend look like, what\\u2019s Berlin like \\u2014 and Yvonne keeps slipping in sentences with man to explain how things are done in Germany.",
+  "listening": [
+   "Georg: Hallo Yvonne, wie geht\\'s?",
+   "Yvonne: Mir geht\\'s gut, danke! Schönes Wetter heute, oder?",
+   "Georg: Ja, zum Glück scheint die Sonne. Gestern hat es nur geregnet.",
+   "Yvonne: Was machst du am Wochenende?",
+   "Georg: Wenn es sonnig ist, fährt man hier oft Fahrrad. Vielleicht mache ich das auch.",
+   "Yvonne: Das klingt gut! Viel Spaß!"
+  ]
+ },
+ "chapter-a1-44-imperativ-modal2-data.js": {
+  "scene": "Beim Arzt \\u2014 einen Tag vor der Pr\\u00fcfung, Berlin",
+  "intro": "Marco wakes up sick the day before the exam, so he drags himself to Frau Dr. Berg. She examines him and fires off instructions — commands, what he may and may not do, and what he should take — while Marco, predictably, protests taking the medicine.",
+  "listening": [
+   "Frau Dr. Berg: Guten Tag! Was fehlt Ihnen?",
+   "Marco: Mein Hals tut weh und ich huste.",
+   "Frau Dr. Berg: Öffnen Sie bitte den Mund. … Sie sind erkältet. Trinken Sie viel Tee und nehmen Sie diese Tabletten.",
+   "Marco: Darf ich Sport machen?",
+   "Frau Dr. Berg: Nein, das dürfen Sie nicht. Sie sollen sich ausruhen. Gute Besserung!"
+  ]
+ },
+ "chapter-a1-45-telefonieren-data.js": {
+  "scene": "Ein Anruf \\u2014 Max ruft Anna an, Berlin",
+  "intro": "Still sick, Ben misses class and phones Solveig to get the homework. The line is bad, she talks too fast, and half the call is him asking her to repeat, spell and slow down — exactly the phrases you need on a real German phone call.",
+  "listening": [
+   "Solveig: Sprachschule Berlin, guten Tag!",
+   "Ben: Guten Tag, hier ist Ben Meyer. Spreche ich mit dem Sekretariat?",
+   "Solveig: Ja. Wie kann ich Ihnen helfen?",
+   "Ben: Wann beginnt der Kurs am Montag?",
+   "Solveig: Um neun Uhr.",
+   "Ben: Wie bitte? Können Sie das wiederholen?",
+   "Solveig: Der Kurs beginnt um neun Uhr.",
+   "Ben: Vielen Dank! Auf Wiederhören!"
+  ]
+ },
+ "chapter-a1-46-zeitangaben-data.js": {
+  "scene": "Pr\\u00fcfungswoche \\u2014 der Plan, Berlin",
+  "intro": "Exam week is almost here. Wiebke lays out the schedule, and the group plans their last days \\u2014 when they study, when they meet, when the test starts and what happens afterwards. Every plan hangs on a dative time phrase: am Freitag, seit Wochen, nach der Prüfung.",
+  "listening": [
+   "Timo: Wann ist die Prüfung, Wiebke?",
+   "Wiebke: Am Freitag, dem zehnten Juli.",
+   "Timo: Und wann beginnt sie?",
+   "Wiebke: Um neun Uhr. Kommt bitte vorher!",
+   "Timo: Wie lange dauert sie?",
+   "Wiebke: Etwa drei Stunden. Danach ist alles vorbei.",
+   "Timo: Und feiern wir?",
+   "Wiebke: Ja, aber erst nach der Prüfung, im Sommer!"
+  ]
+ },
+ "chapter-a1-47-goethe-final-data.js": {
+  "scene": "Pr\\u00fcfungstag \\u2014 vor dem Pr\\u00fcfungsraum, Berlin",
+  "intro": "Exam day. Henrike and Timo wait nervously outside the Prüfungsraum, quizzing each other one last time. Then they go in — and a week later, both have news: Goethe A1 certificates. The end of the beginning.",
+  "listening": [
+   "Henrike: Herzlichen Glückwunsch! Du hast die Prüfung bestanden.",
+   "Timo: Wirklich? Wie viele Punkte habe ich?",
+   "Henrike: Du hast 85 Punkte von 100. Das ist sehr gut!",
+   "Timo: Und was war mein bestes Ergebnis?",
+   "Henrike: Das Hören. Beim Sprechen warst du auch sehr gut.",
+   "Timo: Vielen Dank für Ihre Hilfe, Henrike!",
+   "Henrike: Gern! Und jetzt kommt A2."
+  ]
+ }
+}

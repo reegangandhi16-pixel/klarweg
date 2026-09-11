@@ -1,0 +1,479 @@
+{
+ "phase": "29 — HCM detector popup-ownership investigation v2 (diagnosis only)",
+ "generatedAt": "2026-08-14T09:16:42.980Z",
+ "harness": "chapter/qa-hcm-detector-p29.html — full-pass diagnostic: same node list, same order, same synchronous click-then-read and same running prevHead as qa-engine.js run(). Production files untouched.",
+ "headline": "NO RELIABLE POPUP OWNERSHIP SIGNAL WAS FOUND IN THE EXISTING ARCHITECTURE. In addition, the full pass OVERTURNS the Phase-27 false-positive verdict.",
+ "step1_inventory": {
+  "remainingRecords": 34,
+  "surfaceEqualsHeadword": "not determinable from the baseline",
+  "surfaceNotEqualsHeadword": "not determinable from the baseline",
+  "unknown": 34,
+  "reason": "qa-engine.js:286 emits HEADWORD_COLOUR_MISMATCH with detail {span, head} only. The baseline stores no headword text, so surface/headword identity cannot be read from it for any record — it is only observable at runtime.",
+  "runtimeObservation": "across 4,237 nodes in six full passes, only 2 rendered popups had a headword differing from the clicked surface (both in b2-15, case-only differences). Case-insensitively, ZERO genuine lemma/inflection cases were observed. The loose fallback headText !== prevHead therefore protects a case that may not exist in this corpus.",
+  "records": [
+   {
+    "chapter": "chapter-a1-4-hallo.html",
+    "section": "vocabulary",
+    "index": 171,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-7-jaodernein.html",
+    "section": "grammar",
+    "index": 243,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-7-jaodernein.html",
+    "section": "writing",
+    "index": 328,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-7-jaodernein.html",
+    "section": "resources",
+    "index": 386,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "section": "vocabulary",
+    "index": 133,
+    "surface": "deutsch",
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)"
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "section": "grammar",
+    "index": 542,
+    "surface": "deutsch",
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)"
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "section": "grammar",
+    "index": 581,
+    "surface": "deutsch",
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)"
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "section": "grammar",
+    "index": 585,
+    "surface": "deutsch",
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)"
+   },
+   {
+    "chapter": "chapter-a1-11-negation.html",
+    "section": "(none)",
+    "index": 1,
+    "surface": "Nicht",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-14-essen.html",
+    "section": "resources",
+    "index": 878,
+    "surface": "möchte",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(159, 18, 57)"
+   },
+   {
+    "chapter": "chapter-a1-15-cafe.html",
+    "section": "vocabulary",
+    "index": 168,
+    "surface": "Zahlen",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(46, 125, 50)"
+   },
+   {
+    "chapter": "chapter-a1-15-cafe.html",
+    "section": "grammar",
+    "index": 581,
+    "surface": "Zahlen",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(46, 125, 50)"
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "section": "grammar",
+    "index": 335,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "section": "grammar",
+    "index": 340,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "section": "grammar",
+    "index": 345,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "section": "summary",
+    "index": 522,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-21-uhrzeit.html",
+    "section": "vocabulary",
+    "index": 321,
+    "surface": "Wann",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(236, 72, 153)"
+   },
+   {
+    "chapter": "chapter-a1-25-trennbar.html",
+    "section": "grammar",
+    "index": 285,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a1-34-schreiben.html",
+    "section": "exercises",
+    "index": 448,
+    "surface": "Liebe",
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)"
+   },
+   {
+    "chapter": "chapter-a1-37-praep-dativ.html",
+    "section": "listening",
+    "index": 527,
+    "surface": "Fuß",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(234, 88, 12)"
+   },
+   {
+    "chapter": "chapter-a1-39-ortsangaben.html",
+    "section": "vocabulary",
+    "index": 570,
+    "surface": "a",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(90, 90, 96)"
+   },
+   {
+    "chapter": "chapter-a2-2-perfekt-review.html",
+    "section": "grammar",
+    "index": 394,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-a2-2-perfekt-review.html",
+    "section": "grammar",
+    "index": 410,
+    "surface": "Nein",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   },
+   {
+    "chapter": "chapter-b1-17-nebensatz-damit-um-zu.html",
+    "section": "exercises",
+    "index": 925,
+    "surface": "um",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(202, 138, 4)"
+   },
+   {
+    "chapter": "chapter-b1-22-brauchen-zu-infinitiv.html",
+    "section": "listening",
+    "index": 681,
+    "surface": "machen",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(190, 24, 93)"
+   },
+   {
+    "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+    "section": "exercises",
+    "index": 794,
+    "surface": "Infolgedessen",
+    "span": "rgb(46, 125, 50)",
+    "head": "rgb(6, 182, 212)"
+   },
+   {
+    "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+    "section": "exercises",
+    "index": 801,
+    "surface": "infolgedessen",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(6, 182, 212)"
+   },
+   {
+    "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+    "section": "exercises",
+    "index": 806,
+    "surface": "Infolgedessen",
+    "span": "rgb(46, 125, 50)",
+    "head": "rgb(6, 182, 212)"
+   },
+   {
+    "chapter": "chapter-b2-45-passiversatz-sich-lassen.html",
+    "section": "exercises",
+    "index": 813,
+    "surface": "sich",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(24, 95, 165)"
+   },
+   {
+    "chapter": "chapter-b2-45-passiversatz-sich-lassen.html",
+    "section": "exercises",
+    "index": 818,
+    "surface": "sich",
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(24, 95, 165)"
+   },
+   {
+    "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+    "section": "exercises",
+    "index": 241,
+    "surface": "dokumentiert",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(245, 158, 11)"
+   },
+   {
+    "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+    "section": "exercises",
+    "index": 245,
+    "surface": "dokumentiert",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(245, 158, 11)"
+   },
+   {
+    "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+    "section": "exercises",
+    "index": 247,
+    "surface": "dokumentiert",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(245, 158, 11)"
+   },
+   {
+    "chapter": "chapter-c2-08-modalverben.html",
+    "section": "summary",
+    "index": 413,
+    "surface": "muss",
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(159, 18, 57)"
+   }
+  ]
+ },
+ "step2_ownershipMechanism": {
+  "sourceRead": [
+   "chapter-app.js:1385 — let wordPop, wordPopBackdrop, wpHistory = [], wpIndex = -1 (module-level singletons)",
+   "chapter-app.js:2010-2017 renderWordPop creates wordPop ONCE, then reuses it",
+   "chapter-app.js:2061 wordPop.innerHTML = '' — content is destroyed and rebuilt per render",
+   "chapter-app.js:2099 const headwordEl = el('div', { class: 'word-pop-de', style: 'color:' + color }) — a NEW element per render",
+   "chapter-app.js:2100 headwordEl.appendChild(germanWordSpans(t.w)) — the headword text is ALWAYS the clicked token’s own word",
+   "chapter-app.js:2414-2417 is-open is added inside requestAnimationFrame — NOT observable synchronously, so unusable by a synchronous detector",
+   "chapter-app.js:976/1037/1190/1352/2878/2999 — every clickable span binds openWordPop(e, t, siblingTokens); the token object is passed by closure and never written to the DOM"
+  ],
+  "existingIdentityMarkers": "NONE. No data-* attribute, no lexeme id, and no popup→span backreference is written to the DOM. The token object exists only in the click closure.",
+  "signalsEvaluated": [
+   {
+    "signal": "popup exists",
+    "verdict": "REJECTED — the singleton persists (per brief)"
+   },
+   {
+    "signal": "headText === surface",
+    "verdict": "REJECTED by brief; also would not have helped, see step5"
+   },
+   {
+    "signal": "headText !== prevHead (current)",
+    "verdict": "the proven weak fallback"
+   },
+   {
+    "signal": "container freshness",
+    "verdict": "REJECTED in P28 — container is reused"
+   },
+   {
+    "signal": ".word-pop-de ELEMENT identity (new node per render)",
+    "verdict": "TESTED AND REJECTED — see step4/step5. The element is indeed recreated on every render, but a render does NOT happen on every click, so a surviving node does not prove foreign ownership."
+   },
+   {
+    "signal": "is-open class",
+    "verdict": "UNUSABLE synchronously (requestAnimationFrame)"
+   }
+  ]
+ },
+ "step3_fullPass": {
+  "fidelity": "reproduced the current detector exactly on 4 of 6 chapters (b2-15 3/3, a1-7 3/3, c1-26 3/3, b1-22 1/1). Two chapters differ from the P26 baseline: a1-8 measured 3 vs 4, a1-39 measured 0 vs 1 — index drift of the kind already characterised in P22/P23, not a harness defect.",
+  "perChapter": [
+   {
+    "file": "b2-15-konzessivsaetze-obgleich",
+    "label": "ex-\"false positives\" (Obgleich ×3)",
+    "nodes": 831,
+    "expect": 3,
+    "current": 3,
+    "candidate": 0,
+    "headElReused": 30,
+    "lemmaRendered": 2
+   },
+   {
+    "file": "a1-7-jaodernein",
+    "label": "G1 BY-DESIGN (Nein)",
+    "nodes": 388,
+    "expect": 3,
+    "current": 3,
+    "candidate": 3,
+    "headElReused": 21,
+    "lemmaRendered": 0
+   },
+   {
+    "file": "c1-26-passiv-und-passiversatzformen",
+    "label": "G2 DATA (dokumentiert)",
+    "nodes": 282,
+    "expect": 3,
+    "current": 3,
+    "candidate": 0,
+    "headElReused": 20,
+    "lemmaRendered": 0
+   },
+   {
+    "file": "a1-8-goethemini1",
+    "label": "G3 homograph (deutsch)",
+    "nodes": 707,
+    "expect": 4,
+    "current": 3,
+    "candidate": 3,
+    "headElReused": 22,
+    "lemmaRendered": 0
+   },
+   {
+    "file": "a1-39-ortsangaben",
+    "label": "G5 letter (a)",
+    "nodes": 1231,
+    "expect": 1,
+    "current": 0,
+    "candidate": 0,
+    "headElReused": 26,
+    "lemmaRendered": 0
+   },
+   {
+    "file": "b1-22-brauchen-zu-infinitiv",
+    "label": "lemma candidate (machen)",
+    "nodes": 798,
+    "expect": 1,
+    "current": 1,
+    "candidate": 0,
+    "headElReused": 16,
+    "lemmaRendered": 0
+   }
+  ],
+  "totalNodesIterated": 4237
+ },
+ "step4_elementIdentity": {
+  "observed": "the .word-pop-de node was REUSED (not replaced) on 135 of the clicks across the six chapters, including on genuine findings",
+  "mechanism": "a click on a node whose surface matches the popup already on screen does not trigger a re-render, so headEl survives. Element identity therefore distinguishes \"a render happened\" from \"no render happened\" — NOT \"this popup is mine\" from \"this popup is someone else’s\".",
+  "verdict": "REJECTED as an ownership signal"
+ },
+ "step5_candidateRule": {
+  "rule": "opened := (.word-pop-de element was replaced by this click)",
+  "perChapterResult": [
+   {
+    "chapter": "b2-15-konzessivsaetze-obgleich",
+    "expected": 3,
+    "current": 3,
+    "candidate": 0,
+    "changed": true
+   },
+   {
+    "chapter": "a1-7-jaodernein",
+    "expected": 3,
+    "current": 3,
+    "candidate": 3,
+    "changed": false
+   },
+   {
+    "chapter": "c1-26-passiv-und-passiversatzformen",
+    "expected": 3,
+    "current": 3,
+    "candidate": 0,
+    "changed": true
+   },
+   {
+    "chapter": "a1-8-goethemini1",
+    "expected": 4,
+    "current": 3,
+    "candidate": 3,
+    "changed": false
+   },
+   {
+    "chapter": "a1-39-ortsangaben",
+    "expected": 1,
+    "current": 0,
+    "candidate": 0,
+    "changed": false
+   },
+   {
+    "chapter": "b1-22-brauchen-zu-infinitiv",
+    "expected": 1,
+    "current": 1,
+    "candidate": 0,
+    "changed": true
+   }
+  ],
+  "successCriteria": {
+   "1_obgleichFalsePositivesDisappear": "the 3 did disappear — but this is no longer desirable, see revision below",
+   "2_G1_findingsRemain": "PASS (a1-7 3 → 3)",
+   "3_G2_findingsRemain": "FAIL (c1-26 3 → 0)",
+   "4_G3_findingsRemain": "PASS (a1-8 3 → 3)",
+   "5_lemmaCaseRemains": "NOT APPLICABLE — no case-insensitive lemma case exists in 4,237 observed nodes",
+   "6_noUnrelatedFindingAppears": "PASS (candidate never adds a finding)",
+   "7_ownershipProven": "FAIL — element identity proves render, not ownership"
+  },
+  "verdict": "REJECTED — it destroys 4 genuine findings (c1-26 ×3, b1-22 ×1)"
+ },
+ "phase27Revision": {
+  "claim": "the three b2-15 Obgleich findings are NOT detector false positives",
+  "p27Evidence": "clicking each node in isolation never produced a popup whose headword read \"Obgleich\" (5.1s polling), so the comparison looked cross-word",
+  "p29Evidence": "in the FAITHFUL full pass the popup headword for all three is \"obgleich\" — the same lexeme, differing only in case (prevHead \"obgleich\", headText \"obgleich\", case-insensitive match true). The popup belongs to the clicked word.",
+  "whyP27WasWrong": "selective-index probing clicked .wp-close and waited between nodes, which left the popup in a state the engine never reaches. The isolation probe perturbed the very state it was measuring.",
+  "correctedClassification": "the 3 records are the SAME class as G2/G3 — an occurrence-role vs lexeme-class colour difference (span object green vs headword adjective amber for a concessive conjunction). They belong with DATA/AUTHORING, and the P26/P27 note that the exercise chips render r-object while the chapter authors r-konz remains the actual defect.",
+  "confidence": "PROVEN by the faithful full pass; supersedes audit/obgleich-live-p27.json on this point (that file is NOT modified)",
+  "consequence": "there is currently NO known HCM detector false positive, so no detector fix is warranted at all. The disposition returns to 16 BY-DESIGN + 21 DATA/AUTHORING = 37."
+ },
+ "step7_noSafeSignal": {
+  "conclusion": "No reliable popup ownership signal was found in the existing architecture.",
+  "smallestInstrumentationThatWouldExposeOwnership": "in renderWordPop (chapter-app.js:2010), stamp the popup with the word it was rendered for and a monotonic render counter — e.g. wordPop.dataset.wpWord = t.w; wordPop.dataset.wpRender = String(++renderSeq). A detector then proves ownership by reading dataset.wpWord against the clicked surface and dataset.wpRender against the value captured before the click. Two lines, no behavioural change, no learner-visible effect.",
+  "notImplemented": true,
+  "butAlsoNotNeeded": "given the Phase-27 revision there is no false positive to fix, so this instrumentation is only worth adding if a genuine cross-word case is ever demonstrated."
+ },
+ "recommendation": [
+  "do NOT change qa-engine.js — no false positive is established",
+  "treat the 3 b2-15 records as DATA/AUTHORING alongside D1/D2 in audit/hcm-data-correction-plan-p28.json (that plan is unchanged and does not yet include them)",
+  "if a future phase wants ownership certainty, add the two-line dataset stamp above before touching the detector"
+ ],
+ "filesCreated": [
+  "chapter/qa-hcm-detector-p29.html",
+  "audit/hcm-detector-ownership-p29.json"
+ ],
+ "filesModified": "none"
+}

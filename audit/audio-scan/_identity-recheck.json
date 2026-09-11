@@ -1,0 +1,244 @@
+{
+ "canonicalRows": 36274,
+ "duplicateAssetIds": 0,
+ "duplicateManifestKeysWithinVoice": 0,
+ "accidentalSplits": 13,
+ "accidentalMerges": 0,
+ "blockedForAuthorDecision": 1,
+ "splitDetail": [
+  {
+   "renderText": "Ich bin einundzwanzig Jahre alt.",
+   "voice": "de-DE-Neural2-F",
+   "assets": [
+    {
+     "assetId": "ea4778aed3e6e072",
+     "family": "story",
+     "lookupText": "Ich bin einundzwanzig Jahre alt",
+     "rate": 0.85
+    },
+    {
+     "assetId": "281700399eed87d6",
+     "family": "speaking",
+     "lookupText": "Ich bin einundzwanzig Jahre alt.",
+     "rate": 0.85
+    }
+   ]
+  },
+  {
+   "renderText": "Gute Besserung!",
+   "voice": "de-DE-Neural2-F",
+   "assets": [
+    {
+     "assetId": "c3d2fd237f72704d",
+     "family": "story",
+     "lookupText": "Gute Besserung",
+     "rate": 0.85
+    },
+    {
+     "assetId": "2a4ce134a453d457",
+     "family": "listening",
+     "lookupText": "Gute Besserung!",
+     "rate": 0.85
+    }
+   ]
+  },
+  {
+   "renderText": "Und dann?",
+   "voice": "de-DE-Neural2-D",
+   "assets": [
+    {
+     "assetId": "9b85567ab5910550",
+     "family": "story",
+     "lookupText": "Und dann",
+     "rate": 0.85
+    },
+    {
+     "assetId": "7a53a4df8e075e2b",
+     "family": "listening",
+     "lookupText": "Und dann?",
+     "rate": 0.85
+    }
+   ]
+  },
+  {
+   "renderText": "Vielen Dank!",
+   "voice": "de-DE-Neural2-D",
+   "assets": [
+    {
+     "assetId": "008408eca427bebf",
+     "family": "story",
+     "lookupText": "Vielen Dank",
+     "rate": 0.85
+    },
+    {
+     "assetId": "042c66766106da93",
+     "family": "listening",
+     "lookupText": "Vielen Dank!",
+     "rate": 0.85
+    }
+   ]
+  },
+  {
+   "renderText": "Und morgen früh?",
+   "voice": "de-DE-Neural2-D",
+   "assets": [
+    {
+     "assetId": "486758b00cc6eeb2",
+     "family": "story",
+     "lookupText": "Und morgen früh",
+     "rate": 0.85
+    },
+    {
+     "assetId": "81cf8fd943aa1738",
+     "family": "listening",
+     "lookupText": "Und morgen früh?",
+     "rate": 0.85
+    }
+   ]
+  },
+  {
+   "renderText": "Und danach?",
+   "voice": "de-DE-Neural2-D",
+   "assets": [
+    {
+     "assetId": "c135a263c6c747a5",
+     "family": "story",
+     "lookupText": "Und danach",
+     "rate": 0.95
+    },
+    {
+     "assetId": "f8ca952ba53f5949",
+     "family": "listening",
+     "lookupText": "Und danach?",
+     "rate": 0.85
+    }
+   ]
+  },
+  {
+   "renderText": "Du hast das Teamevent geplant, ohne mich zu fragen.",
+   "voice": "de-DE-Neural2-F",
+   "assets": [
+    {
+     "assetId": "c72fdc78b572c063",
+     "family": "story",
+     "lookupText": "Du hast das Teamevent geplant ohne mich zu fragen",
+     "rate": 0.95
+    },
+    {
+     "assetId": "475f27962f4b8233",
+     "family": "speaking",
+     "lookupText": "Du hast das Teamevent geplant, ohne mich zu fragen.",
+     "rate": 0.95
+    }
+   ]
+  },
+  {
+   "renderText": "Und danach?",
+   "voice": "de-DE-Neural2-F",
+   "assets": [
+    {
+     "assetId": "f968e3900426c59b",
+     "family": "story",
+     "lookupText": "Und danach",
+     "rate": 0.95
+    },
+    {
+     "assetId": "acb42a0067e4d0b5",
+     "family": "listening",
+     "lookupText": "Und danach?",
+     "rate": 0.95
+    }
+   ]
+  },
+  {
+   "renderText": "Das dürfte stimmen.",
+   "voice": "de-DE-Neural2-F",
+   "assets": [
+    {
+     "assetId": "0ff132c88539decc",
+     "family": "story",
+     "lookupText": "Das dürfte stimmen",
+     "rate": 1
+    },
+    {
+     "assetId": "cf24f9a6a6e3350d_F",
+     "family": "vocabulary",
+     "lookupText": "Das dürfte stimmen.",
+     "rate": 1
+    }
+   ]
+  },
+  {
+   "renderText": "Gern.",
+   "voice": "de-DE-Neural2-F",
+   "assets": [
+    {
+     "assetId": "0b54ef09a046146d",
+     "family": "listening",
+     "lookupText": "Gern.",
+     "rate": 0.85
+    },
+    {
+     "assetId": "a2aaae9d93de1d51",
+     "family": "listening",
+     "lookupText": "Gern!",
+     "rate": 0.85
+    }
+   ]
+  },
+  {
+   "renderText": "München.",
+   "voice": "de-DE-Neural2-D",
+   "assets": [
+    {
+     "assetId": "ca9733d255c28932",
+     "family": "listening",
+     "lookupText": "München.",
+     "rate": 0.85
+    },
+    {
+     "assetId": "e238d436d5767964",
+     "family": "listening",
+     "lookupText": "München!",
+     "rate": 0.85
+    }
+   ]
+  },
+  {
+   "renderText": "Der lachende Verkäufer hat gesagt, das nennt man Kintsugi-Kunst!",
+   "voice": "de-DE-Neural2-F",
+   "assets": [
+    {
+     "assetId": "9f790c99cc294ae1",
+     "family": "listening",
+     "lookupText": "Der lachende Verkäufer hat gesagt, das nennt man Kintsugi-Kunst!",
+     "rate": 0.95
+    },
+    {
+     "assetId": "8e72ca56a2ca345a",
+     "family": "speaking",
+     "lookupText": "Der lachende Verkäufer hat gesagt, das nennt man Kintsugi-Kunst.",
+     "rate": 0.95
+    }
+   ]
+  },
+  {
+   "renderText": "Für den Studienteil eher \"signifikant\", für den juristischen Abschnitt \"erheblich\".",
+   "voice": "de-DE-Neural2-F",
+   "assets": [
+    {
+     "assetId": "9c8252adc239f9b1",
+     "family": "listening",
+     "lookupText": "Für den Studienteil eher \"signifikant\", für den juristischen Abschnitt \"erheblich\".",
+     "rate": 1
+    },
+    {
+     "assetId": "378f10b9ad528051",
+     "family": "speaking",
+     "lookupText": "Für den Studienteil eher signifikant, für den juristischen Abschnitt erheblich.",
+     "rate": 1
+    }
+   ]
+  }
+ ]
+}

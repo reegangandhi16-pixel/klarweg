@@ -1,0 +1,106 @@
+{
+ "runId": "sweep-p14-2026-08-13",
+ "generatedAt": "2026-08-13T06:09:37.812Z",
+ "method": "chapter/qa-sweep14.html — resumable driver, same measurement path as qa-runner.html (render-stability gate: lexicon present + non-empty signature + 3 consecutive identical samples; injection liveness check; bounded retry ×3; errors never counted as zero). Each chapter committed to localStorage as it completed.",
+ "corpus": {
+  "chapters": 259,
+  "measured": 259,
+  "occurrences": 156299,
+  "findings": 1478,
+  "clean": 69,
+  "errors": 0,
+  "readiness": {
+   "stable": 259
+  },
+  "retriesUsed": 0
+ },
+ "byCode": {
+  "ROLE_CONTRADICTS_BADGE": 1020,
+  "CASE_COLLISION_CAPITALISED": 236,
+  "HEADWORD_COLOUR_MISMATCH": 110,
+  "PARADIGM_CLASS_MISMATCH": 76,
+  "NO_POPUP": 22,
+  "CASE_COLLISION_LOWERCASE": 14,
+  "BLACK_FALLBACK": 0
+ },
+ "baseline": {
+  "chapters": 259,
+  "occurrences": 156309,
+  "findings": 1479,
+  "clean": 69,
+  "CASE_COLLISION_CAPITALISED": 240,
+  "note": "only these figures were frozen in PRODUCTION-AUDIT-HANDOFF.md; no per-finding artifact exists for the 1,479 sweep (persistRun postdates it), so finding-identity diffing against it is impossible"
+ },
+ "delta": {
+  "occurrences": -10,
+  "findings": -1,
+  "clean": 0,
+  "CASE_COLLISION_CAPITALISED": -4,
+  "otherCodesNet": 3
+ },
+ "attribution": {
+  "proven": "b2-61 CASE_COLLISION_CAPITALISED 18 → 14 (−4): the four ORIGINAL spans measured at occurrence level in phase 8, removed by the L179 correction",
+  "unattributable": "+3 across other codes in unedited chapters — no per-finding predecessor to diff against",
+  "runToRunVariance": "measured this phase: two identical post-edit runs over the same 226-chapter prefix differed by 3 findings and 48 occurrences (143,749/1,076/62 vs 143,797/1,079/61)"
+ },
+ "c1_36": {
+  "note": "first pass returned readyState=hard-timeout with 167 occ / 0 findings; re-measured stable at 221 occ / 1 finding and that reading is the one counted"
+ },
+ "editedChapters": {
+  "b2-07": {
+   "occ": 655,
+   "findings": 0,
+   "clean": true
+  },
+  "b2-40": {
+   "occ": 745,
+   "findings": 2
+  },
+  "b2-41": {
+   "occ": 699,
+   "findings": 0,
+   "clean": true
+  },
+  "b2-50": {
+   "occ": 701,
+   "findings": 6
+  },
+  "b2-60": {
+   "occ": 523,
+   "findings": 1
+  },
+  "b2-61": {
+   "occ": 503,
+   "findings": 14
+  }
+ },
+ "golden": {
+  "a1-1-alphabet": "242/0",
+  "a1-2-vokale": "278/2",
+  "a1-9-verben": "354/2",
+  "a2-8-komparativ-superlativ": "1135/4",
+  "a2-9-vergleiche-als-wie": "1436/1",
+  "allMatchFrozenBaseline": true
+ },
+ "englishSurfaceCheck": {
+  "surfaces": [
+   "still",
+   "verb",
+   "noun",
+   "original",
+   "event",
+   "time",
+   "reporting",
+   "newspapers",
+   "radio",
+   "news",
+   "business",
+   "reports"
+  ],
+  "result": "zero linkified outside .de in b2-07/40/41/50/60/61, except Verb ×3 in b2-07 — capitalised German das Verb, admitted by the chapter's own German vocab example, pre-existing and unrelated to the corrections"
+ },
+ "b2_28": {
+  "note": "English words clickable ONLY inside the .de outcome container (now ×2, yesterday ×1, background ×1); zero outside-container prose linkification; separate class from the corrected production defect"
+ },
+ "fullFindingsRetainedIn": "localStorage key 'kw_sweep_p14' in the preview origin (per-chapter, per-finding: code, section, index, surface, badge, role, headword)"
+}

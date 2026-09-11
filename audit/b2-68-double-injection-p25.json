@@ -1,0 +1,198 @@
+{
+ "phase": "25 — b2-68 double-injection test (closing experiment)",
+ "generatedAt": "2026-08-14T07:17:37.998Z",
+ "harness": "chapter/qa-p25-double-injection.html (new investigation file). qa-engine.js loaded unmodified via <script src> and never patched. Same stability gate and measurement path as P14/P15/P21/P23/P24.",
+ "chapter": "chapter-b2-68-redemittel-fuer-diskussionen.html",
+ "controlExpectation": {
+  "occurrences": 463,
+  "findings": 5
+ },
+ "phase15Anomaly": {
+  "occurrences": 486,
+  "findings": 966
+ },
+ "configurations": {
+  "A": {
+   "what": "clean control — one qa-engine.js injection",
+   "result": {
+    "occurrences": 463,
+    "checked": 451,
+    "findings": 5,
+    "clean": false,
+    "counts": {
+     "ROLE_CONTRADICTS_BADGE": 5
+    },
+    "findingFingerprint": "4e807f60",
+    "duplicateFindingIdentities": 0,
+    "readyState": "stable",
+    "msToStable": 364
+   },
+   "probe": {
+    "engineScripts": 1,
+    "allWrapped": 493,
+    "leafWrapped": 493,
+    "visibleLeaf": 463,
+    "nestedWrappers": 0,
+    "doubleWrapped": 0,
+    "domNodes": 1751,
+    "scripts": 15,
+    "lexiconEntries": 7802,
+    "surfaceFingerprint": "f84af12c",
+    "engineKeys": "OK,SEC_WANT,badgeClass,roleAllowed,run,selfTest"
+   }
+  },
+  "B": {
+   "what": "SECOND injection into the SAME live document, then measured",
+   "result": {
+    "occurrences": 463,
+    "checked": 451,
+    "findings": 5,
+    "clean": false,
+    "counts": {
+     "ROLE_CONTRADICTS_BADGE": 5
+    },
+    "findingFingerprint": "4e807f60",
+    "duplicateFindingIdentities": 0,
+    "readyState": "stable"
+   },
+   "probe": {
+    "engineScripts": 2,
+    "allWrapped": 493,
+    "leafWrapped": 493,
+    "visibleLeaf": 463,
+    "nestedWrappers": 0,
+    "doubleWrapped": 0,
+    "domNodes": 1752,
+    "scripts": 16,
+    "lexiconEntries": 7802,
+    "surfaceFingerprint": "f84af12c",
+    "engineKeys": "OK,SEC_WANT,badgeClass,roleAllowed,run,selfTest"
+   },
+   "engineIdentityChanged": false,
+   "linkificationDuplicated": false
+  },
+  "B2": {
+   "what": "THIRD injection into the same document (scaling check)",
+   "result": {
+    "occurrences": 463,
+    "checked": 451,
+    "findings": 5,
+    "clean": false,
+    "counts": {
+     "ROLE_CONTRADICTS_BADGE": 5
+    },
+    "findingFingerprint": "4e807f60",
+    "duplicateFindingIdentities": 0,
+    "readyState": "stable"
+   },
+   "probe": {
+    "engineScripts": 3,
+    "allWrapped": 493,
+    "leafWrapped": 493,
+    "visibleLeaf": 463,
+    "nestedWrappers": 0,
+    "doubleWrapped": 0,
+    "domNodes": 1753,
+    "scripts": 17,
+    "lexiconEntries": 7802,
+    "surfaceFingerprint": "f84af12c",
+    "engineKeys": "OK,SEC_WANT,badgeClass,roleAllowed,run,selfTest"
+   }
+  },
+  "C": {
+   "what": "FRESH document, two sequential injections before measuring",
+   "result": {
+    "occurrences": 463,
+    "checked": 451,
+    "findings": 5,
+    "clean": false,
+    "counts": {
+     "ROLE_CONTRADICTS_BADGE": 5
+    },
+    "findingFingerprint": "4e807f60",
+    "duplicateFindingIdentities": 0,
+    "readyState": "stable",
+    "msToStable": 364
+   },
+   "probe": {
+    "engineScripts": 2,
+    "allWrapped": 493,
+    "leafWrapped": 493,
+    "visibleLeaf": 463,
+    "nestedWrappers": 0,
+    "doubleWrapped": 0,
+    "domNodes": 1752,
+    "scripts": 16,
+    "lexiconEntries": 7802,
+    "surfaceFingerprint": "f84af12c",
+    "engineKeys": "OK,SEC_WANT,badgeClass,roleAllowed,run,selfTest"
+   }
+  },
+  "C2": {
+   "what": "FRESH document, two injections fired concurrently",
+   "result": {
+    "occurrences": 463,
+    "checked": 451,
+    "findings": 5,
+    "clean": false,
+    "counts": {
+     "ROLE_CONTRADICTS_BADGE": 5
+    },
+    "findingFingerprint": "4e807f60",
+    "duplicateFindingIdentities": 0,
+    "readyState": "stable"
+   },
+   "probe": {
+    "engineScripts": 2,
+    "allWrapped": 493,
+    "leafWrapped": 493,
+    "visibleLeaf": 463,
+    "nestedWrappers": 0,
+    "doubleWrapped": 0,
+    "domNodes": 1752,
+    "scripts": 16,
+    "lexiconEntries": 7802,
+    "surfaceFingerprint": "f84af12c",
+    "engineKeys": "OK,SEC_WANT,badgeClass,roleAllowed,run,selfTest"
+   }
+  }
+ },
+ "comparison": {
+  "allFiveIdentical": true,
+  "occurrences": "463 in every configuration",
+  "checked": "451 in every configuration",
+  "findings": "5 in every configuration",
+  "perCode": "ROLE_CONTRADICTS_BADGE 5 — same code, same 5 records",
+  "findingFingerprint": "4e807f60 identical across A, B, B2, C, C2",
+  "surfaceFingerprint": "f84af12c identical across all five",
+  "duplicateFindingIdentities": 0,
+  "phase15SignatureReproduced": false,
+  "anyDuplicateProcessingSignature": false
+ },
+ "mechanismEvidence": {
+  "engineIsIdempotent": "qa-engine.js is an IIFE that assigns window.KWQA. Re-injecting replaces the object with an identical API surface (keys OK,SEC_WANT,badgeClass,roleAllowed,run,selfTest unchanged) and installs no observer, listener or timer — so N injections behave exactly like one.",
+  "noDomDuplication": "allWrapped 493, leafWrapped 493, nestedWrappers 0, doubleWrapped 0 in every configuration. The engine does not linkify — it only reads. Only the <script> count grows (1 → 2 → 3), which is the injection itself.",
+  "noStateAccumulation": "lexiconEntries 7802 and wordPops 1 constant; domNodes grew by exactly 1 per injected script tag.",
+  "conclusion": "duplicate engine installation cannot produce duplicate findings; the engine holds no mutable per-run state that a second install could corrupt."
+ },
+ "incidentalLead": {
+  "observation": "the stability gate's node count for this chapter is 486, while KWQA reports 463 occurrences. 486 is the number of .rw/.de-link wrapper nodes present at gate time, before the popup scaffolding adds its 7 nodes (493 total afterwards). The Phase-15 anomaly reported EXACTLY 486 occurrences.",
+  "interpretation": "this makes the Phase-15 reading look like a different QUANTITY being recorded — a gate-time wrapper-node count rather than KWQA's filtered occurrence count — rather than the same quantity measured wrongly. 966 findings is ~2 per node over 486 nodes, consistent with an engine run against a document in an inconsistent mid-initialisation state where nearly every node mismatched.",
+  "status": "UNPROVEN LEAD, explicitly not a conclusion. The Phase-15 record was overwritten when that reading was discarded, the value is not reproducible, and no configuration in this phase produced it. Recorded only so the coincidence is not lost.",
+  "notActedOn": true
+ },
+ "verdict": "2. NOT REPRODUCED",
+ "closure": {
+  "phase15b2_68": "remains UNEXPLAINED. Double injection — same-document, triple, fresh-document sequential, and fresh-document concurrent — all return 463 / 5 with byte-identical finding fingerprints.",
+  "reentrancy": "already shown in Phase 24 to cause starvation, delay and (under an external reload) lost records — never altered values.",
+  "authoritativeMeasurements": "the P23 run1, P23 run2 and P24 control full sweeps remain authoritative: 156,299 occurrences / 1,405 findings / 37 HCM / 71 clean.",
+  "productionChangeJustified": false,
+  "rationale": "no production defect has been demonstrated by this historical anomaly. The engine is idempotent under re-injection; the driver's only characterised defect is starvation under overlap, which loses records rather than corrupting them and is cheap to guard if ever wanted.",
+  "investigationLineClosed": true
+ },
+ "filesCreated": [
+  "chapter/qa-p25-double-injection.html",
+  "audit/b2-68-double-injection-p25.json"
+ ],
+ "filesModified": "none — no production code, chapter data, CSS, qa-engine.js, qa-assert.js, lint, assertions or baselines were touched; no storage keys or prior audit artifacts were deleted"
+}

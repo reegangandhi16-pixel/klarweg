@@ -1,0 +1,182 @@
+##### a1-46 — Zeitangaben mit Dativ | Time Expressions | 30min | vocab 25 | grammar 5
+DESC: Pin events to the calendar. German uses dative prepositions for most time phrases: am Montag, am Abend, im Mai, im Sommer, seit zwei Monaten, ab morgen, nach dem Kurs, vor der Prüfung, vom 1. bis 5. August. One small set of words schedules your whole week.
+GRAMMAR TITLES: am & im — days, months, seasons · seit & ab — duration and starting point · nach, vor & vom … bis … · Word order with a fronted time phrase · Mistakes Hindi & English speakers make
+DIALOGUE:
+  Wiebke: Wann ist der Anfang vom letzten Tag?
+  Timo: Ab neun Uhr. Und er endet um fünf.
+  Wiebke: Das dauert also acht Stunden!
+  Timo: Ja, aber am Anfang feiern wir nur.
+  Wiebke: Wann beginnt die Prüfung dann?
+  Timo: Später. Erst um elf.
+  Wiebke: Gut. Und danach ist alles vorbei?
+  Timo: Fast. Zum Schluss essen wir noch Kuchen.
+  Wiebke: Perfekt! Dann bleibe ich bis zum Schluss.
+FIRST GRAMMAR BODY: Two contractions cover most of the calendar. am (= an dem) for days and parts of the day; im (= in dem) for months and seasons.
+HINGLISH SAMPLE: am = din aur din ke hisse (am Freitag, am Abend) — sirf in der Nacht alag. im = mahina aur mausam (im Mai, im Sommer). Dono dative contractions hain (an dem → am, in dem → im).
+SPEAKING: Dein Partner fragt: Wann hast du Deutschkurs? | Deine Freundin fragt: Wie lange dauert der Kurs? | Dein Freund fragt: Wann hast du Zeit?
+WRITING: Write your week and a plan in five sentences using dative time expressions. Use am (a day or part of the day), im (a month or season), seit (how long you’ve studied), and nach or vor (an event). Front at least one time phrase and keep the verb in position 2. [22 words]
+LISTENING: Wiebke, wann ist der Umzug? Am Montag, dem ersten August. Und wann kommt der Möbelwagen? Um neun Uhr. Kommt bitte vorher! Wie lange dauert der Umzug? Etwa vier Stunden. Danach ist alles fertig. Und feiern wir dann? Ja, aber erst nach dem Umzug, am Abend!
+
+##### a1-47 — Goethe A1 Final | The A1 Finale | 50min | vocab 32 | grammar 5
+DESC: The last chapter. Everything from Chapters 1–46 comes together for the real Goethe-Zertifikat A1 — the exam structure, study strategies, a full grammar and vocabulary checklist, and a final mock. Then the story ends where it began: in Frau Weber’s classroom.
+GRAMMAR TITLES: Cases: Nominativ · Akkusativ · Dativ · The past: Perfekt & Präteritum · Word order & connectors · Prepositions & pronouns · Final exam tips
+DIALOGUE:
+  Henrike: Morgen ist der Test. Hast du einen Tipp für mich?
+  Timo: Ja! Mach eine Liste. Lerne die Wörter auswendig.
+  Henrike: Das mache ich schon. Aber ich mache immer Fehler bei der Grammatik.
+  Timo: Kein Problem! Übe jeden Tag eine Übung.
+  Henrike: Gute Idee! Was ist dein Ziel?
+  Timo: Mein Ziel ist ein gutes Ergebnis.
+  Henrike: Meins auch! Wir schaffen das!
+  Timo: Klar! Wir haben viel gelernt.
+  Henrike: Ja, von Anfang bis Ende! Viel Glück morgen!
+  Timo: Dir auch! Bis morgen!
+FIRST GRAMMAR BODY: The backbone of A1. Three cases, and the article changes show which job a noun is doing.
+HINGLISH SAMPLE: Teen case, aur teen sawaal: Wer? → Nominativ (subject), Wen?/Was? → Akkusativ (direct object), Wem? → Dativ (paane waala). (Wohin?/Wo? alag sawaal hai — woh sirf two-way preposition ke baad case tay karta hai, chauthe card mein.) Masculine sabse zyada badalta hai: der → den → dem. Dative plural mein -n.
+SPEAKING: Prüfung, Teil 1: Stell dich vor — Name, Land, Wohnort, Sprachen. | Prüfung, Teil 2: Frag deinen Partner nach seinem Beruf und antworte auch. | Prüfung, Teil 3: Plant zusammen einen Ausflug am Samstag.
+WRITING: Goethe A1 writing task (about 30–40 words). A friend has invited you to a birthday party. Write a reply that covers THREE points: (1) thank them for the invitation, (2) say you’re coming and when you’ll arrive, (3) ask what you can bring. Use an informal salutation and closing. [30 words]
+LISTENING: Herzlichen Glückwunsch! Du hast die Prüfung bestanden. Wirklich? Wie viele Punkte habe ich? Du hast 85 Punkte von 100. Das ist sehr gut! Und was war mein bestes Ergebnis? Das Hören. Beim Sprechen warst du auch sehr gut. Vielen Dank für Ihre Hilfe, Henrike! Gern! Und jetzt kommt A2.
+
+##### a2-1 — Genitiv: Name + s | Possession with Names | 25min | vocab 17 | grammar 6
+DESC: Your first step into A2 — and it’s a small one. Germans show possession with names by adding a simple -s: Annas Buch, Rohans Tasche, Frau Webers Büro. No new endings to memorise, no article changes. Names ending in s, ß, x or z just take an apostrophe: Max’ Handy, Felix’ Fahrrad.
+GRAMMAR TITLES: Name + s — the everyday Genitiv · Names ending in s, ß, x, z — apostrophe only · Annas Auto vs. das Auto von Anna · The owned noun keeps its own case · Asking "whose?" — wessen · Mistakes Hindi & English speakers make
+DIALOGUE:
+  Petra: Schau! Ist das Kais Handy?
+  Malte: Nein, das ist nicht Kais Handy. Kais Handy ist schwarz.
+  Petra: Dann ist es vielleicht Julias?
+  Malte: Julias Handy ist rot. Das hier ist grau.
+  Petra: Hmm. Das ist bestimmt Robins. Er hat immer ein graues Handy.
+  Malte: Genau! Das ist Robins Handy. Ruf ihn an!
+  Petra: Ja, gute Idee! Ich rufe ihn sofort an.
+FIRST GRAMMAR BODY: To say something belongs to a person, put the name first and add -s — written together, no apostrophe. The owned thing follows, with no article before the name.
+HINGLISH SAMPLE: Hindi ke "Anna ki kitaab" jaisa hi hai — bas order ulta: naam pehle, phir -s, phir cheez: Annas Buch. English jaisa apostrophe nahi lagta: "Anna’s Buch" galat. Naam se pehle article bhi nahi: "die Annas Buch" galat.
+SPEAKING: Auf dem Tisch liegt ein Handy. Dein Freund fragt: Wessen Handy ist das? | Deine Lehrerin fragt nach den Noten. Sag, wessen Note gut ist. | Deine Freundin will sich beim Verein anmelden. Erklär, wem das Formular gehört.
+WRITING: Write five sentences about your family’s and friends’ belongings using Name + s — for example your dad’s car, your sister’s phone, a friend’s bicycle. Use at least one name ending in s, x or z (apostrophe only!), and try words from this chapter: das Handy, die Note, der Verein, gemeinsam, ganz. [20 words]
+LISTENING: Malte, ist das deine Jacke hier auf dem Stuhl? Nein, das ist Ninas Jacke. Meine Jacke hängt im Schrank. Und wessen Schlüssel sind das? Das sind Annas Schlüssel. Sie kommt gleich zurück.
+
+##### a2-2 — Perfekt (Wiederholung) | The Spoken Past — Review | 30min | vocab 19 | grammar 6
+DESC: Nothing new today — and that’s the point. You learned the Perfekt in A1; now we make it automatic. haben or sein in position 2, Partizip II at the end: Ich habe ein Fahrrad gemietet. Ich bin zum Flohmarkt gegangen. One relaxed chapter of retelling your weekend until the two-part frame runs by itself.
+GRAMMAR TITLES: The frame: haben/sein in position 2, Partizip II at the end · haben or sein? Movement and change take sein · Partizip II shapes — regular, irregular, separable · Time expressions that call the Perfekt · Questions and nicht in the Perfekt · Mistakes Hindi & English speakers make
+DIALOGUE:
+  Insa: Was hast du am Wochenende gemacht?
+  Fynn: Ich bin zum Flohmarkt gegangen. Und ich habe ein Fahrrad gekauft.
+  Insa: Wirklich? Was hat es gekostet?
+  Fynn: Nur dreißig Euro. Ich habe lange verhandelt.
+  Insa: Gute Arbeit! Ich bin zu Hause geblieben und habe Musik gehört.
+  Fynn: Klingt ruhig. Bist du gar nicht rausgegangen?
+  Insa: Doch, am Abend bin ich spazieren gegangen.
+  Fynn: Schön! Nächstes Wochenende kommst du mit zum Flohmarkt?
+  Insa: Ja, gern!
+FIRST GRAMMAR BODY: Every Perfekt sentence is a bracket: the helper verb (haben or sein) sits in position 2, and the Partizip II waits at the very end. Everything else lives inside the bracket.
+HINGLISH SAMPLE: Perfekt ek bracket hai: helper verb (haben/sein) position 2 par, Partizip II sabse aakhir mein. "Gestern habe ich ein Buch gekauft" — time word aage aaye toh bhi helper position 2 par hi rehta hai.
+SPEAKING: Am Montag fragt eine Kollegin: Was hast du am Wochenende gemacht? | Dein Freund fragt: Wie war der Aufenthalt im Stadtzentrum? | Deine Lehrerin fragt: Wo bist du geboren und was hast du dort gemacht?
+WRITING: Write six sentences about your last weekend in the Perfekt. Use at least two sein-verbs (gegangen, gefahren, geritten, gefolgt, geboren) and two haben-verbs, one time expression per sentence (gestern, am Wochenende, letzte Woche, heute Morgen), and one sentence with schon or noch nicht. Try this chapter’s verbs: mieten, auswählen, teilnehmen, zuhören, beenden. [30 words]
+LISTENING: Fynn, was hast du am Wochenende gemacht? Ich bin gewandert und habe ein Foto von einem Fuchs gemacht! Wow! Ich habe einen Kochkurs besucht und viel gelernt. Hast du auch etwas Neues gekocht? Ja, ich habe eine Suppe gemacht. Sie ist gut geworden!
+
+##### a2-3 — Artikel (Wiederholung) | Articles — Review | 30min | vocab 48 | grammar 6
+DESC: One more confidence chapter before the cases start pulling their weight. You already know der, die, das and ein, eine, einen, einem from A1 — here we make the choice automatic. Gender patterns you can trust, definite vs indefinite, the plural (always die), and the small changes across Nominativ, Akkusativ and Dativ. No new grammar — just the article, until it runs by itself.
+GRAMMAR TITLES: der / die / das — the definite article, at a glance · ein / eine — the indefinite article · Across the cases — only the masculine really changes · Gender patterns you can trust · definite vs indefinite — which one, when? · Mistakes Hindi & English speakers make
+DIALOGUE:
+  Merle: Ich suche eine neue Arbeit. Was meinst du?
+  Timo: Der Arzthelfer hat interessante Arbeit. Und du magst Medizin.
+  Merle: Hmm, das stimmt. Aber eine Bankkauffrau verdient auch gut.
+  Timo: Ja, aber das ist oft langweilig. Was willst du wirklich machen?
+  Merle: Ich will etwas mit Kindern machen. Vielleicht in einer Schule.
+  Timo: Das passt gut zu dir. Du bist geduldig und kreativ.
+  Merle: Danke! Ich schaue mir die Schule morgen an.
+  Timo: Ja, mach das! Ich drücke dir die Daumen.
+FIRST GRAMMAR BODY: Every German noun carries a gender — masculine, feminine or neuter — and the definite article (English the) shows it. In the plural, all three collapse into one: always die.
+HINGLISH SAMPLE: Har German noun ka ek gender hota hai: der (m), die (f), das (n). Plural mein hamesha die. Noun hamesha article ke saath yaad karo — "Platz" nahi, "der Platz". Hindi mein gender natural aata hai; German mein yaad karna padta hai.
+SPEAKING: Eine Bekannte fragt: Was machen deine Geschwister? | Dein Freund fragt: Wo arbeitest du und wie ist es dort? | Deine Nachbarin fragt: Wie war dein Schulabschluss?
+WRITING: Write six sentences about jobs or school. Name at least four different people or places WITH the correct article (der/die/das or ein/eine), use one accusative masculine (den/einen) and one dative (dem/der/einem/einer), and try this chapter’s nouns: der Rentner, die Gärtnerin, das Fach, die Cafeteria, der Unterschied, die Meinung. [30 words]
+LISTENING: Timo, wen hast du beim Tag der offenen Tür getroffen? Einen Zahnarzt und eine Köchin. Der Zahnarzt war sehr nett. Ich habe mit einer Lehrerin gesprochen. Die Schule sieht toll aus. Möchtest du dort arbeiten? Vielleicht! Der Beruf passt gut zu mir.
+
+##### a2-34 — Relativsätze im Akkusativ | Relative clauses in the accusative | 30min | vocab 25 | grammar 5
+DESC: Das ist der Film, den ich gesehen habe. Das ist die Sendung, die ich höre. This chapter extends relative clauses to the Akkusativ — when the relative pronoun is the direct OBJECT of its clause, only the masculine form changes: der → den.
+GRAMMAR TITLES: From Nominativ to Akkusativ: only der changes · Subject or object? A quick test · Examples across genders · Common learner mistakes · Quick decision guide
+DIALOGUE:
+  Wenke: Kennst du das Buch, das ich gerade lese?
+  Timo: Nein, noch nicht. Wie heißt es?
+  Wenke: Es heißt "Der Weg". Der Autor, den ich sehr mag, lebt in Berlin.
+  Timo: Klingt gut! Und die Geschichte, die du am meisten magst, welche ist das?
+  Wenke: Das ist das Kapitel, das ich am meisten liebe.
+  Timo: Leihst du mir das Buch?
+  Wenke: Ja, gern!
+FIRST GRAMMAR BODY: When the relative pronoun is the direct OBJECT of its clause (not the subject), use the Akkusativ form. Only the masculine changes — feminine, neuter, and plural stay identical to Nominativ.
+HINGLISH SAMPLE: Jab relative pronoun us clause ka direct object hota hai, subject nahi, to Akkusativ form aati hai. Achhi baat yeh hai ki sirf masculine badalta hai — der se den. Feminine, neuter aur plural Nominativ jaise hi rehte hain.
+SPEAKING: Deine Freundin fragt: Welchen Film soll ich sehen? | Dein Freund fragt nach einem Buch. Empfehle eines. | Deine Kollegin fragt: Wer ist die Frau auf dem Foto? | Dein Partner fragt: Welches Lied meinst du? | Deine Freundin fragt nach der Serie. Beschreibe sie. | Dein Freund fragt: Wen hast du auf dem
+WRITING: Write a short description (six sentences) of your favorite films, books, and songs, using at least four Akkusativ relative clauses (den/die/das/die). Try this chapter's words: das Quiz, die Wanderin, der Wert, die Steuer. [35 words]
+LISTENING: Wenke, wie heißt der Autor, den du so magst? Das ist der Autor, den ich seit Jahren lese. Und welches Kapitel ist das, das du liebst? Das Kapitel, das ich liebe, ist das letzte.
+
+##### a2-35 — Goethe A2 Final | Goethe Checkpoint 4 — Final A2 Readiness | 50min | vocab 36 | grammar 7
+DESC: Your fourth and final A2 checkpoint — no new grammar. A complete Goethe-A2-style mock that puts Chapters 25–34 to work at once: adjective endings, als/wenn, indefinite pronouns, fixed-preposition verbs, W-Fragen mit Präpositionen, polite Konjunktiv II, and Nominativ/Akkusativ relative clauses — ending with a full A2 readiness check.
+GRAMMAR TITLES: Adjektivendungen — bestimmter & unbestimmter Artikel · als vs. wenn · Indefinitpronomen · Verben mit Präpositionen & W-Fragen · Konjunktiv II — hätte, wäre, würde · Relativsätze — Nominativ vs. Akkusativ · Quick decision guide — all nine together
+DIALOGUE:
+  Timo: Nächste Woche ist die Prüfung. Hat jemand schon alles wiederholt?
+  Silke: Ich habe manche Themen wiederholt, aber nicht alle.
+  Timo: Woran denkst du am meisten?
+  Silke: Ich denke an den Konjunktiv. Wenn ich mehr Zeit hätte, würde ich mehr üben.
+  Timo: Das verstehe ich. Worauf freust du dich nach der Prüfung?
+  Silke: Ich freue mich auf freie Zeit. Niemand wird mich mehr stressen.
+  Timo: Genau! Wir schaffen das zusammen!
+  Silke: Ja, das schaffen wir!
+FIRST GRAMMAR BODY: After der/die/das, adjectives take -e in the Nominativ singular and -en almost everywhere else. After ein-words (ein, mein, dein…), the article itself sometimes carries no ending, so the adjective steps in: masculine Nom. sg. -er, neuter Nom./Akk. sg. -es.
+HINGLISH SAMPLE: der/die/das ke baad adjective -e leta hai (Nominativ singular mein) ya -en. Aur ein-word ke baad masculine Nominativ mein -er aata hai aur neuter mein -es.
+SPEAKING: Prüfung, Teil 1: Stell dich vor und beschreibe dein Zuhause. | Prüfung, Teil 1: Der Prüfer fragt, worauf du dich freust. | Prüfung, Teil 2: Beschreibe ein Bild — ein Wartezimmer. | Prüfung, Teil 2: Der Prüfer fragt, wem die Sachen gehören. | Prüfung, Teil 3: Plant zusammen ein Treffen. | Prüfung, Te
+WRITING: Goethe A2 writing. Choose ONE task and write ~40 words, using at least three grammar points from Chapters 25–34 (adjective ending, als/wenn, Indefinitpronomen, fixed-preposition verb, Konjunktiv II, or a relative clause). (1) FORMAL EMAIL: ask the language school whether you can reschedule the exam, and describe your reason politely. (2) INVITATION: invite a friend to celebrate after the exam. (3) APOLOGY: apologize for missing a class and explain what you would do differently. [40 words]
+LISTENING: Silke, ich hätte gern mehr Zeit für die Prüfung gehabt. Ich weiß, was du meinst. Ich rutsche auch ständig in den Konjunktiv. Freust du dich schon auf die Woche danach? Sehr! Eine Woche ganz ohne Stress, das wäre schön.
+
+##### b1-1 — Infinitiv mit zu | Infinitive with zu | 40min | vocab 31 | grammar 7
+DESC: Ich hoffe, Deutsch zu lernen. Es ist wichtig, genug zu schlafen. Ich habe Lust, ins Kino zu gehen. This chapter links two verbs cleanly with zu + Infinitiv — after verbs like hoffen and versuchen, after adjectives like wichtig, and after nouns like Lust — including separable verbs, where zu slips between the prefix and the verb: anzurufen.
+GRAMMAR TITLES: Grundstruktur: Verb + zu + Infinitiv · Die wichtigsten Verben mit zu · Adjektiv-Konstruktionen: Es ist … , zu + Infinitiv · Nomen-Konstruktionen: Ich habe … , zu + Infinitiv · Trennbare Verben: zu geht zwischen Präfix und Verb · Typische Fehler (common learner mistakes) · Wortstellung & Entscheidungshilfe
+DIALOGUE:
+  Renke: Ich habe vor, im Urlaub zu zelten.
+  Timo: Das klingt entspannend. Hast du auch vor, zu faulenzen?
+  Renke: Ja! Ich habe vor, viel Zeit zu haben im Freien.
+  Timo: Und hast du vor, dich zu erholen?
+  Renke: Ja, genau. Es ist ein herrliches Erlebnis.
+  Timo: Wieso fährst du genau dorthin?
+  Renke: Die Aussicht dort ist einfach herrlich.
+  Timo: Dann habe ich vor, mitzukommen!
+FIRST GRAMMAR BODY: When a first (conjugated) verb needs a second verb to complete its meaning, the second verb goes to the end as an Infinitiv, introduced by zu.
+HINGLISH SAMPLE: Jab pehla verb apne aap mein poora nahi hota aur usko doosre verb ki zaroorat hoti hai, to doosra verb Infinitiv (dictionary form) mein end mein jaata hai, aur uske pehle zu lagta hai. Aksar comma dono hisson ko alag karta hai — khaas kar jab zu-phrase ke saath aur bhi words hon.
+SPEAKING: Deine Freundin fragt, was du im Urlaub vorhast. | Ein Freund findet Zelten schrecklich. Sag, was daran schön ist. | Deine Kollegin fragt, warum du selten in den Urlaub fährst. | Renke fragt, ob du bei der Urlaubsplanung dabei bist. | Deine Freundin hat Angst vor Insekten. Beruhige sie. | Ein Freund 
+WRITING: Write a short email to a friend (six to eight sentences) about your future plans — mention a study plan, a travel plan, and one goal for your career or a job application. Use at least five different zu + Infinitiv constructions (after a verb, after an adjective, after a noun, and inside a separable verb). [40 words]
+LISTENING: Renke, ehrlich — drei Wochen zelten? Ich glaube, ich würde das keinen Tag aushalten. Genau deshalb mache ich es! Ich habe einfach vergessen, wie schön es ist, nichts vorzuhaben. Und wenn es regnet? Dann höre ich auf zu jammern und lese ein Buch im Zelt. Klingt das nicht wunderbar? Ehrlich gesagt — ein bisschen schon.
+
+##### b1-2 — Nebensätze: weil / da & obwohl | Subordinate clauses: weil / da & obwohl | 40min | vocab 35 | grammar 7
+DESC: Ich lerne Deutsch, weil ich in Deutschland arbeiten möchte. Da ich krank bin, bleibe ich zu Hause. Obwohl es regnet, gehen wir spazieren. This chapter sharpens the reason-clause you already know (weil), adds its more formal cousin (da), and introduces the connector for unexpected contrast (obwohl) — in every case, the finite verb goes to the very end.
+GRAMMAR TITLES: Grundstruktur: Nebensatz mit Verb am Ende · weil — der neutrale, alltägliche Grund · da — der formelle, bereits bekannte Grund · obwohl — der unerwartete Gegensatz · Vergleich: weil vs. da vs. obwohl · Typische Fehler (common learner mistakes) · Wortstellung & Entscheidungshilfe
+DIALOGUE:
+  Frauke: Ich habe keinen Bock mehr zu zelten.
+  Timo: Wieso nicht?
+  Frauke: Weil es draußen so kalt ist.
+  Timo: Da es kalt ist, bleiben wir lieber drinnen.
+  Frauke: Obwohl es kalt ist, will ich an den Strand.
+  Timo: Wirklich? Obwohl der Himmel so grau ist?
+  Frauke: Ja. Da wir sowieso hier sind, sollten wir wenigstens spazieren gehen.
+  Timo: Also gut, obwohl ich lieber im Auto bleibe, komme ich mit.
+FIRST GRAMMAR BODY: weil, da, and obwohl are all subordinating conjunctions: they introduce a subordinate clause in which the finite (conjugated) verb moves to the very end.
+HINGLISH SAMPLE: weil, da, aur obwohl teeno hi subordinating conjunctions hain — inke clause mein finite verb hamesha sabse end mein jaata hai. Agar clause pehle aata hai, to comma ke baad seedha Hauptsatz ka verb aata hai (subject se pehle).
+SPEAKING: Deine Freundin fragt, ob du morgen an den Strand mitkommst. Es hat zwölf Grad. | Dein Freund fragt, warum du keine Lust mehr hast. | Ein Freund fragt, warum du das Boot nicht mitnimmst. | Deine Kollegin fragt, warum du enttäuscht bist. | Deine Freundin fragt, warum du trotzdem spazieren gehst. | Ein
+WRITING: Write a short email to a friend (six to eight sentences) about a recent trip or decision — mention one reason with weil, one reason with da, and one contrast with obwohl. Explain what happened and how you felt. [40 words]
+LISTENING: Kommst du morgen wirklich mit an den Strand, obwohl es nur zwölf Grad hat? Ehrlich? Ich weiß noch nicht. Da es so kalt ist, habe ich eigentlich keine Lust mehr. Schade. Ich gehe trotzdem, weil ich diese Woche einfach mal raus muss. Na gut — wenn du mir versprichst, dass wir danach etwas Warmes trinken, komme ich doch m
+
+##### b1-3 — Konjunktiv II: Höfliche Bitten | Subjunctive II: Polite requests | 40min | vocab 26 | grammar 7
+DESC: Könnten Sie mir helfen? Würden Sie bitte langsamer sprechen? Ich hätte gern einen Kaffee. This chapter teaches the four polite-request words — könnte, würde, hätte, wäre — as fixed patterns you can use immediately in restaurants, hotels, offices, doctors' surgeries, courses, and customer service, without any grammar theory beyond the pattern itself.
+GRAMMAR TITLES: Direkte Bitte vs. höfliche Bitte · Die vier Formen: könnte, würde, hätte, wäre · könnte vs. würde · hätte gern vs. möchte · Situationen: Cheat-Sheets · Typische Fehler (common learner mistakes) · Entscheidungshilfe
+DIALOGUE:
+  Timo: Entschuldigung! Könnten Sie mir bitte helfen?
+  Frau Lorenzen: Natürlich. Was ist passiert?
+  Timo: Mein Handy ist kaputtgegangen.
+  Frau Lorenzen: Hätten Sie vielleicht die Anleitung dabei?
+  Timo: Nein, leider nicht. Würden Sie es bitte anschließen?
+  Frau Lorenzen: Ja, sofort. Könnten Sie es bitte einstecken?
+  Timo: Ja, gern. Ich würde gern wissen, ob es jetzt funktioniert.
+  Frau Lorenzen: Es würde mich nicht wundern, wenn es schon funktioniert.
+  Timo: Wow, es funktioniert! Danke für Ihre Hilfe!
+FIRST GRAMMAR BODY: A direct request in German can sound abrupt — almost like a command. Konjunktiv II softens it instantly, using the same four helper verbs every time: könnte, würde, hätte, wäre.
+HINGLISH SAMPLE: Direct request German mein command jaisa lag sakta hai. Konjunktiv II usko turant polite bana deta hai — hamesha yehi chaar helper verbs istemal karke: könnte, würde, hätte, wäre.
+SPEAKING: Dein Display ist schwarz. Bitte im Handyladen höflich um Hilfe. | Du willst wissen, was die Reparatur kostet. Frag vorsichtig. | Du brauchst die Anleitung für den Staubsauger. Bitte darum. | Im Restaurant möchtest du bestellen. Sei höflich. | Du rufst im Hotel an und möchtest ein Zimmer. | Dein Nach
+WRITING: Write a short, formal email (six to eight sentences) — choose ONE: requesting an appointment, reserving a hotel room, making a polite complaint, or asking for information. Use at least four different polite Konjunktiv II patterns (könnte, würde, hätte, wäre). [40 words]
+LISTENING: Entschuldigung, mein Display ist komplett schwarz — könnten Sie mal draufschauen? Klar, zeigen Sie mal her. Höppla, das sieht nach einem Wackelkontakt aus. Oh nein. Wäre das teuer zu reparieren? Nein, gar nicht — würden Sie es fünf Minuten hier lassen? Dann schaffe ich das schnell. Das wäre super, vielen Dank!

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P27 Obgleich live probe</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:18px;max-width:780px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:56vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P27 — b2-15 <code>Obgleich</code> live probe</h1>
+<div class="sub">Renders b2-15 once through the proven stability gate, runs qa-engine.js unmodified, and inspects the three exact HCM nodes (exercises, index 782 / 790 / 798): class list, matched CSS rules, computed colour, popup badge + headword colour, and every co-located finding. Read-only. <code>KWP27.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+const FILE='chapter-b2-15-konzessivsaetze-obgleich.html';
+const TARGETS=[782,790,798];
+function ready(f,cb){
+  const S=180,N=3,HARD=30000,t0=Date.now();let last=null,same=0;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const nodes=d.querySelectorAll('.rw, .de-link');if(!nodes.length)return null;
+    const roles={};let n=0;for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;return n+'|'+d.querySelectorAll('[id^="sec-"]').length+'|'+Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{if(Date.now()-t0>HARD)return cb('hard-timeout',null);
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,S);}
+    const s=sig();if(s===null){last=null;same=0;return setTimeout(poll,S);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=N)return cb('stable',{msToStable:Date.now()-t0});setTimeout(poll,S);};
+  poll();
+}
+function matchedColorRules(d,n){
+  const hits=[];
+  for(const sh of d.styleSheets){let rr;try{rr=sh.cssRules;}catch(e){continue;}
+    for(const r of rr){if(!r.selectorText||!r.style||!r.style.color)continue;
+      try{if(n.matches(r.selectorText))hits.push({selector:r.selectorText,color:r.style.color,
+        sheet:sh.href?sh.href.split('/').pop():'INLINE <style>'});}catch(e){}}}
+  return hits;
+}
+window.KWP27={async run(){
+  const f=$('#frame');
+  const ctx=await new Promise((res,rej)=>{
+    const t=setTimeout(()=>rej(new Error('load timeout')),90000);
+    f.onload=()=>ready(f,(state,g)=>{clearTimeout(t);
+      if(state!=='stable')return rej(new Error('not stable: '+state));res({d:f.contentDocument,w:f.contentWindow,gate:g});});
+    f.src=FILE+'?p27='+Date.now();
+  });
+  const {d,w,gate}=ctx;
+  $('#status').textContent='injecting engine';
+  await new Promise((res,rej)=>{const s=d.createElement('script');s.src='qa-engine.js?v='+Date.now();
+    s.onload=res;s.onerror=()=>rej(new Error('engine load failed'));d.head.appendChild(s);});
+  const qa=w.KWQA.run();
+  const findings=qa.findings||[];
+  const nodes=[].slice.call(d.querySelectorAll('.rw, .de-link')).filter(n=>!n.querySelector('.rw, .de-link'))
+    .filter(n=>!n.closest('.word-pop')).filter(n=>!!(n.offsetParent||n.getClientRects().length));
+  const rows=[];
+  for(const i of TARGETS){
+    const n=nodes[i];
+    if(!n){rows.push({index:i,error:'node not found'});continue;}
+    const cs=getComputedStyle(n);
+    const co=findings.filter(x=>x.index===i).map(x=>({code:x.code,detail:x.detail}));
+    // open the popup for THIS occurrence
+    const cl=d.querySelector('.wp-close');if(cl)cl.click();
+    await new Promise(r=>setTimeout(r,250));
+    n.click();
+    // The popup is a singleton and renders asynchronously. Poll until its headword
+    // actually matches the clicked surface, otherwise we would read a STALE popup.
+    const want=n.textContent.trim().toLowerCase();
+    let p=null,head=null,verified=false,waited=0;
+    while(waited<5000){
+      await new Promise(r=>setTimeout(r,150));waited+=150;
+      p=d.querySelector('.word-pop');
+      head=p&&p.querySelector('.word-pop-de');
+      if(head&&head.textContent.trim().toLowerCase()===want){verified=true;break;}
+    }
+    const badge=p&&p.querySelector('.wp-badge');
+    const rec={index:i,surface:n.textContent.trim(),
+      classList:n.className,
+      roleClass:(String(n.className).match(/\br-[a-z0-9-]+/g)||[]),
+      computedColour:cs.color,fontWeight:cs.fontWeight,
+      matchedColorRules:matchedColorRules(d,n),
+      section:(n.closest('[id^="sec-"]')||{}).id||'?',
+      enclosingBlockClass:n.parentElement?n.parentElement.className:null,
+      exerciseContext:(function(){const b=n.closest('.ex-card, .exercise, [class*="ex-"]');return b?(b.className+' :: '+b.textContent.trim().slice(0,90)):null;})(),
+      popupHeadwordVerifiedAgainstSurface:verified,popupWaitMs:waited,
+      popup:p?{headword:head?head.textContent.trim():null,
+        headwordColour:head?getComputedStyle(head).color:null,
+        headwordInlineStyle:head?head.getAttribute('style'):null,
+        badge:badge?badge.textContent.trim():null,
+        badgeClass:badge?badge.className:null,
+        typeLine:(function(){const t=p.querySelector('.wp-type,.wp-meta,.wp-role');return t?t.textContent.trim():null;})(),
+        allText:p.textContent.replace(/\s+/g,' ').trim().slice(0,220)}:null,
+      coLocatedFindings:co};
+    rows.push(rec);
+    const c2=d.querySelector('.wp-close');if(c2)c2.click();
+  }
+  const res={file:FILE,readyState:'stable',gate:gate,totalNodes:nodes.length,
+    chapterFindings:findings.map(x=>({code:x.code,section:x.section,index:x.index,surface:x.surface,detail:x.detail})),
+    occurrences:qa.occurrences,checked:qa.checked,counts:qa.counts,rows:rows,
+    konzRuleExists:(function(){for(const sh of d.styleSheets){let rr;try{rr=sh.cssRules;}catch(e){continue;}
+      for(const r of rr){if(r.selectorText&&/\.r-konz\b/.test(r.selectorText))return {selector:r.selectorText,color:r.style.color,sheet:sh.href?sh.href.split('/').pop():'INLINE <style>'};}}return null;})(),
+    konzNodesInChapter:d.querySelectorAll('.r-konz').length,
+    konnectorNodes:d.querySelectorAll('.r-connector').length,
+    conjunctionNodes:d.querySelectorAll('.r-conjunction').length};
+  window.__P27=res;$('#status').textContent='done';$('#out').textContent=JSON.stringify(res.rows,null,1);
+  return {ok:true,rows:rows.length};
+}};
+$('#out').textContent='ready';
+</script>
+</body></html>

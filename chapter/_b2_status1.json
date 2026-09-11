@@ -1,0 +1,113 @@
+{
+ "chapter-b2-01-erweiterte-satzklammer-data.js": {
+  "female": "Franzi",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-02-verbalkomplex-data.js": {
+  "female": "Wibke",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-03-informationsstruktur-thema-rhema-data.js": {
+  "female": "Meret",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-04-formales-es-data.js": {
+  "female": "Karla",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-05-korrelat-es-data.js": {
+  "female": "Merle",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-06-es-in-festen-ausdruecken-data.js": {
+  "female": "Doreen",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-07-verbergaenzungen-erkennen-data.js": {
+  "female": "Petra",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-08-valenz-von-verben-data.js": {
+  "female": "Runa",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-09-trennbar-vs-untrennbar-data.js": {
+  "female": "Insa",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-10-haeufige-b2-verben-data.js": {
+  "female": "Britta",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-11-stellung-von-nicht-data.js": {
+  "female": "Nadine",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-12-doppelte-verneinung-litotes-data.js": {
+  "female": "Meike",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-13-nuancierte-negation-data.js": {
+  "female": "Frauke",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-14-goethe-mini-test-1-data.js": "CHECKPOINT_NO_STORY",
+ "chapter-b2-15-konzessivsaetze-obgleich-data.js": {
+  "female": "Ronja",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen-data.js": {
+  "female": "Frauke",
+  "male": "Timo",
+  "hasCorrectDialogue": true
+ },
+ "chapter-b2-17-modalsaetze-indem-data.js": {
+  "female": "Nele",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-18-modalsaetze-dadurch-dass-data.js": {
+  "female": "Wibke",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-19-ohne-zu-data.js": {
+  "female": "Steffi",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-20-anstatt-zu-data.js": {
+  "female": "Katja",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-21-sowohl-als-auch-data.js": {
+  "female": "Svenja",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-22-weder-noch-data.js": {
+  "female": "Doris",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ },
+ "chapter-b2-23-nicht-nur-sondern-auch-data.js": {
+  "female": "Miriam",
+  "male": "Timo",
+  "hasCorrectDialogue": false
+ }
+}

@@ -1,0 +1,173 @@
+{
+ "chapter-a2-1-genitiv-data.js": {
+  "storySpeakers": [
+   "Petra",
+   "Malte"
+  ],
+  "female": "Petra",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Petra",
+   "Malte"
+  ]
+ },
+ "chapter-a2-10-goethe-mini-1-data.js": {
+  "storySpeakers": [
+   "Runa",
+   "Nick"
+  ],
+  "female": "Runa",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Runa",
+   "Nick"
+  ]
+ },
+ "chapter-a2-11-wenn-data.js": {
+  "storySpeakers": [
+   "Wiebke",
+   "Timo"
+  ],
+  "female": "Wiebke",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-12-reflexive-verben-data.js": {
+  "storySpeakers": [
+   "Enya",
+   "Timo"
+  ],
+  "female": "Enya",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-13-praepositionen-dativ-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Frau Nissen"
+  ],
+  "female": "Frau Nissen",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-14-wechselpraepositionen-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Frieda"
+  ],
+  "female": "Frieda",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-15-positions-richtungsverben-data.js": {
+  "storySpeakers": [
+   "Meret",
+   "Timo"
+  ],
+  "female": "Meret",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-16-goethe-mini-2-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Frau Wolter"
+  ],
+  "female": "Frau Wolter",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-17-werden-data.js": {
+  "storySpeakers": [
+   "Neele",
+   "Timo"
+  ],
+  "female": "Neele",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-18-ortsangaben-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Frauke"
+  ],
+  "female": "Frauke",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-19-indirekte-fragen-data.js": {
+  "storySpeakers": [
+   "Franka",
+   "Timo"
+  ],
+  "female": "Franka",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-2-perfekt-review-data.js": {
+  "storySpeakers": [
+   "Insa",
+   "Fynn"
+  ],
+  "female": "Insa",
+  "hasNewSchema": true,
+  "lSpeakers": [
+   "Insa",
+   "Fynn"
+  ]
+ },
+ "chapter-a2-20-was-fuer-ein-data.js": {
+  "storySpeakers": [
+   "Solveig",
+   "Timo"
+  ],
+  "female": "Solveig",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-21-verben-dativ-akkusativ-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Karla"
+  ],
+  "female": "Karla",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-22-konjunktiv2-koennte-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Ronja"
+  ],
+  "female": "Ronja",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-23-konjunktiv2-sollte-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Petra"
+  ],
+  "female": "Petra",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-24-deshalb-trotzdem-data.js": {
+  "storySpeakers": [
+   "Merle",
+   "Timo"
+  ],
+  "female": "Merle",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ },
+ "chapter-a2-25-goethe-mini-3-data.js": {
+  "storySpeakers": [
+   "Timo",
+   "Frau Sander"
+  ],
+  "female": "Frau Sander",
+  "hasNewSchema": false,
+  "lSpeakers": []
+ }
+}

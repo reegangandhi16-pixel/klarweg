@@ -1,0 +1,4194 @@
+{
+ "leer": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "groß": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "klein": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "interessant": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "schön": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "alt": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "billig": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "freundlich": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "hoch": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "jung": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "kalt": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "lang": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "schnell": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "teuer": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "warm": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "langsam": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "laut": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "gleich": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "doppelt": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "betont": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "formell": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "informell": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "bekannt": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "passend": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "ähnlich": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "kurz": {
+  "status": "gradable",
+  "reason": "authored_already"
+ },
+ "rot": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "schwarz": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "gut": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "gesund": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "krank": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "hart": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "klug": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "stark": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "scharf": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "dumm": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "nass": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "nah": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "glatt": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "arm": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "schwach": {
+  "status": "manual_review",
+  "reason": "irregular_umlaut"
+ },
+ "perfekt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "ideal": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "männlich": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "weiblich": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "ledig": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "verheiratet": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "voll": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "deutsch": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "geschieden": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "schwanger": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "chinesisch": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "tschechisch": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "jährlich": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "tot": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "monatlich": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "amerikanisch": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "blind": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "rund": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "einzig": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "italienisch": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "minimal": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "gesamt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "golden": {
+  "status": "non_gradable",
+  "reason": "absolute_state_or_invariable"
+ },
+ "thematisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "feminin": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "maskulin": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unbestimmt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "falsch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "toll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "anstrengend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "attraktiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "cool": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "doof": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "faul": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fleißig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "froh": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gefährlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "glücklich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "günstig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hungrig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hässlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kaputt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "langweilig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "leicht": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lustig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nett": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "neu": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "normal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "praktisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wichtig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wunderbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wunderschön": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "breit": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eilig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "elegant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fehlend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "individuell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lebendig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "originell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "populär": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "supernett": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "typisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "frisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "süß": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "asiatisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "satt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "persönlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unregelmäßig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "abwechselnd": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wach": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "stressig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "spät": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "inoffiziell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "offiziell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "arbeitslos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kreativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "trennbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fertig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "frei": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "höflich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "pünktlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unhöflich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "herzlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lieb": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "blau": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gelb": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "grau": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "grün": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "weiß": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "braun": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "dunkel": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gemütlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "renoviert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einfach": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "offen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zentral": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "willkommen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bequem": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eng": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "weit": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "topaktuell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sonnig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "anders": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "egal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "heiß": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "negativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "positiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "windig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "aktuell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "neutral": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schrecklich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "aktiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fit": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ruhig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schlecht": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sportlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gegenseitig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "international": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "deutschsprachig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "argentinisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "folgend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "stolz": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "traurig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "emotional": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unangenehm": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fremd": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wahr": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ordentlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unordentlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unwichtig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kostenlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "weltweit": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nerv\\u00f6s": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "\\u00e4rgerlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungl\\u00fccklich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "aufregend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hilfsbereit": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unsympathisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "riesig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schlimm": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "reflexiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "g\\u00fcltig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "\\u00f6ffentlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "telefonisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "spontan": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungeduldig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "modern": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "elektrisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unterschiedlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sch\\u00f6n": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "regelm\\u00e4\\u00dfig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "allgemein": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "n\\u00f6tig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sinnvoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "umweltfreundlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "altmodisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ortskundig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "direkt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "indirekt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mobil": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ewig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "beruflich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "finanziell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "flexibel": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "möglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nervig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unpraktisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erforderlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "pensioniert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "tief": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fantastisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "komisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lebenslang": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fest": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bunt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "dringend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "freiberuflich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gehörlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kompliziert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "notwendig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schriftlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ausländisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einzeln": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "häufig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "neugierig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "realistisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "selbstständig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "stressfrei": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unnötig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "faszinierend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "genial": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "trocken": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unglaublich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nervös": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einverstanden": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kulturell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "treu": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sympathisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "effektiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einsam": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "großartig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "niedrig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ständig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wahnsinnig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "blitzschnell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "dünn": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einmalig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "intensiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unabh\\u00e4ngig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "salzig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "konjugiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "deutlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erreichbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "preiswert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "problemlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wild": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "anschließend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erfolgreich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hektisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "komplett": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "professionell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "virtuell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "reich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "rockig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zuzüglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hübsch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "melodisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "spannend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sozial": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "intelligent": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "peinlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "furchtbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "witzig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "real": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fett": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fl\\u00fcssig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "m\\u00fcndlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "romantisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "k\\u00fchl": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "dick": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schmutzig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "modisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kritisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "logisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "n\\u00fctzlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schwierig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "streng": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "w\\u00fctend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "privat": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "m\\u00f6bliert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bl\\u00f6d": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fr\\u00f6hlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wertvoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vorsichtig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "still": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unendlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "uninteressant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "knapp": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mehrmalig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "angenehm": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "entspannend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "herrlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "giftig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "reif": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "irreal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unfreundlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "feucht": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mild": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "neblig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "regnerisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schwül": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "stürmisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wolkig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "qualifiziert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zukünftig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "relevant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "seriös": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sämtlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "aussagekräftig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "befriedigend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kraftlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zwischenmenschlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "öffentlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zusätzlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "alltäglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "anonym": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "autonom": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eindeutig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "essbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "heutig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "interaktiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lebenswert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "visuell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "barrierearm": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "entsprechend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "familienfreundlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "traumhaft": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "voraussichtlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "exakt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fair": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "dauernd": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eventuell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "konkret": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "smart": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sparsam": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "verständlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gleichzeitig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kitschig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nachhaltig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "effizient": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "elektronisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erhältlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "korrekt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sogenannt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "haltbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "krumm": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "recycelbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gesellschaftlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gesetzlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fern": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "jeweilig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "rechtlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schmal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "städtisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unruhig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "konzentriert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "halbformell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schweizerdeutsch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ehrlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "berufstätig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kräftig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "diplomatisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "undiplomatisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "abhängig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fällig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gering": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "umgehend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fristgerecht": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "grundsätzlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ausreichend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "blass": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "diätisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "prinzipiell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sichtbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unbequem": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zuständig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "blutig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eiskalt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "roh": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schwindelig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "angeblich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "beruhigend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eigen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "geheim": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "klassisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kommerziell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "leidenschaftlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "motiviert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungewöhnlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wundervoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zweiteilig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fantasievoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "feierlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "tragisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "würzig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unmöglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "künstlerisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "talentiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "traditionell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "uncool": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zeitlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nächtlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vergeblich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "brasilianisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nominal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "aufwändig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "digital": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "extrem": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hilflos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ländlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "regional": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schädlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ökologisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "europäisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wirtschaftlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "endgültig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "national": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ehrenamtlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "verantwortlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bedürftig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bundesweit": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "elternfrei": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "qualitativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zuverlässig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "übrig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "körperlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vollständig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "humorvoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "steil": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "weich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "pauschal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "problematisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "überzeugend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "global": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wünschenswert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "chaotisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "dankbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "heimlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "original": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "tierisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wartend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ansprechend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "aufmerksam": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "automatisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gratis": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "interessiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "merkwürdig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "rein": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "seltsam": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungesund": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unmodern": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "frech": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unverständlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "biologisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "damalig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fortschrittlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "katholisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "produziert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "symbolisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "touristisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vegan": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vegetarisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "politisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wesentlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "historisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "jetzig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "literarisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lokal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "medizinisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "monoton": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "radikal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "relativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "tolerant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unverändert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zufällig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zweimonatig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "automatisiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "liebevoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gründlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "rechtzeitig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schick": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kommunikativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "aggressiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "inhaltlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "konservativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "menschlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "optimistisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "speziell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "steif": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zahlreich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zornig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "atypisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erheblich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "exotisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hilfreich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "klimatisiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nützlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sehnsüchtig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vornehm": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "abenteuerlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "alkoholfrei": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "amtlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bürgerlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einheitlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "entscheidend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erstaunlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "farbenfroh": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gelegentlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gläubig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "heimisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "intolerant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "jeglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "komplex": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "missverständlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "multikulturell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nachdenklich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nonverbal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "passioniert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schmerzlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "üblich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unerwartet": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vielsprachig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vollkommen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "geduldig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "obligatorisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bilingual": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "destruktiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "dreckig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einsprachig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fehlerlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hervorragend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hitzig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "instinktiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kinderleicht": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "konstruktiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lexikalisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "monolingual": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nichtssagend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "platt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "poetisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ratsam": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "systematisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unbedingt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungefragt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "verwunderlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zweisprachig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "edel": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mutig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "psychisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unkompliziert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "winzig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "anspruchsvoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "arrogant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fachlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "final": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "genügend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hauptsächlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kooperativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mangelnd": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nahegelegen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "teamfähig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "übersichtlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "umfangreich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungeliebt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "verlässlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vernünftig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wirkungsvoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zielorientiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "auffällig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gebürtig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nutzlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "akut": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bestechend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einwandfrei": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "enorm": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kriminell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "langfristig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mehrheitlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "orientiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "regelmäßig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schutzlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "tatenlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "überregional": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "überschüssig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unbezahlt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unentgeltlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unentschlossen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungebrochen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "verderblich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zeitintensiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zurückhaltend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eifersüchtig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "stellvertretend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "arbeitsfrei": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "friedlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "grafisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "immerwährend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "komfortabel": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unentbehrlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wund": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "abwechslungsreich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "elementar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "heldenhaft": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ironisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "loyal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "markant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "millionenfach": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "pessimistisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "chronisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "depressiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erträglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gemein": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gesundheitsfördernd": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "limitiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "melancholisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schmerzlindernd": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "strukturiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unsterblich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vielfach": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wohltuend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zunehmend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bang": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bankrott": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bedeutend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mythologisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "rettungslos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "satirisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schlummerlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "stetig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "talentlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "talentvoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unbewusst": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unerfüllt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungehört": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "üppig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "geheimnisvoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "generell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "skeptisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unbekannt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unglaubwürdig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vielseitig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "aufsehenerregend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "baumbeschattet": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "durchsichtig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fein": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "filmreif": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fraglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "füllig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fürsorglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "glaubhaft": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gütig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "imposant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kaiserlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "klischeehaft": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lesefreundlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "manikürt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "philosophisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "prominent": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "rücksichtsvoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schlagartig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schützenswert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schwerelos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "übersetzbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "überwiegend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unverschlossen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "weltbekannt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sozialistisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "surreal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vordergründig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "engagiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erneuerbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "garantiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "heftig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kostbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "tierlieb": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "traumatisiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "variabel": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zugänglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "anormal": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eigenständig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einleuchtend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "energiesparend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erkennbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kostengünstig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kursiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mechanisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "rasant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "rosig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sagenhaft": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "simpel": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "naturwissenschaftlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unangebracht": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "glaubwürdig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "überlebenswichtig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "akustisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "analytisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "außergewöhnlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bestmöglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "dauerhaft": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "deprimierend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "dramatisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "durchführbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eigensinnig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "eingerechnet": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erfolglos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "intakt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "intellektuell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kahl": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kontinuierlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kurzfristig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "längerfristig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "langlebig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "langwierig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "maßgeblich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mathematisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mittelalterlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "müdegearbeitet": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "physikalisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "radioaktiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "rastlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sanft": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "schlaflos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unpassend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vehement": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vorbildlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wacklig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "konstant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "anerkennend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "freundschaftlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kurios": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "umgangssprachlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unangemessen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "undenkbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungeschlagen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unleserlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wohlwollend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zuversichtlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "denkbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "objektiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vielversprechend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "sauber": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "schwer": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "sicher": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "lecker": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "bitter": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "finster": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "clever": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "locker": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "inhaltsleer": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "selbstsicher": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "heiter": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "siegessicher": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "zukunftssicher": {
+  "status": "gradable",
+  "reason": "regular_consonant_er"
+ },
+ "sauer": {
+  "status": "gradable",
+  "reason": "regular_vowel_er_edrop"
+ },
+ "böse": {
+  "status": "gradable",
+  "reason": "regular_e_ending"
+ },
+ "müde": {
+  "status": "gradable",
+  "reason": "regular_e_ending"
+ },
+ "leise": {
+  "status": "gradable",
+  "reason": "regular_e_ending"
+ },
+ "solide": {
+  "status": "gradable",
+  "reason": "regular_e_ending"
+ },
+ "bestimmt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "beliebt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "berühmt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "verschieden": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "erfahren": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "besorgt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "gespannt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "erwachsen": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "verrückt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "betrunken": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "begeistert": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "erschöpft": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "entspannt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "vertraut": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "betroffen": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "verzweifelt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "bemerkenswert": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "ernsthaft": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "gepflegt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "verstärkt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "gestresst": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "genervt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "gelaunt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "gerecht": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "vermehrt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "gehoben": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "verbunden": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "geehrt": {
+  "status": "gradable",
+  "reason": "regular_participle_gradable"
+ },
+ "eigene/eigener": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "nächste/nächster": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "letzte/letzter": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "besser": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "voller": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "weitere": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "besondere": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "andere": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "frühere": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "größte": {
+  "status": "non_gradable",
+  "reason": "already_inflected_form_as_headword"
+ },
+ "großer/große/großes": {
+  "status": "non_gradable",
+  "reason": "data_artifact_not_a_clean_lemma"
+ },
+ "bio-": {
+  "status": "non_gradable",
+  "reason": "data_artifact_not_a_clean_lemma"
+ },
+ "super": {
+  "status": "non_gradable",
+  "reason": "invariable_loanword"
+ },
+ "lila": {
+  "status": "non_gradable",
+  "reason": "invariable_loanword"
+ },
+ "prima": {
+  "status": "non_gradable",
+  "reason": "invariable_loanword"
+ },
+ "bio": {
+  "status": "non_gradable",
+  "reason": "invariable_loanword"
+ },
+ "top": {
+  "status": "non_gradable",
+  "reason": "invariable_colloquial"
+ },
+ "meistabonniert": {
+  "status": "non_gradable",
+  "reason": "already_superlative_compound"
+ },
+ "sondern": {
+  "status": "non_gradable",
+  "reason": "misclassified_part_of_speech"
+ },
+ "samt": {
+  "status": "non_gradable",
+  "reason": "misclassified_part_of_speech"
+ },
+ "eineinhalb": {
+  "status": "non_gradable",
+  "reason": "misclassified_part_of_speech"
+ },
+ "schade": {
+  "status": "non_gradable",
+  "reason": "not_gradable_in_standard_usage"
+ },
+ "offline": {
+  "status": "non_gradable",
+  "reason": "not_gradable_in_standard_usage"
+ },
+ "live": {
+  "status": "non_gradable",
+  "reason": "not_gradable_in_standard_usage"
+ },
+ "indie": {
+  "status": "non_gradable",
+  "reason": "not_gradable_in_standard_usage"
+ },
+ "selbe": {
+  "status": "non_gradable",
+  "reason": "not_gradable_in_standard_usage"
+ },
+ "obere": {
+  "status": "non_gradable",
+  "reason": "not_gradable_in_standard_usage"
+ },
+ "äußere": {
+  "status": "non_gradable",
+  "reason": "not_gradable_in_standard_usage"
+ },
+ "orange": {
+  "status": "non_gradable",
+  "reason": "not_gradable_in_standard_usage"
+ },
+ "getrennt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "geschlossen": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "geöffnet": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "bewölkt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "erkältet": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "erlaubt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "verletzt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "verboten": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "besetzt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "verspätet": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "versichert": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "geboren": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "gebraucht": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "geeignet": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "entfernt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "befristet": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "befreundet": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "geregelt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "beschädigt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "gedruckt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "beschildert": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "geschützt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "begrenzt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "bewusst": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "erholt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "gelähmt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "gewohnt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "gesucht": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "begehrt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "geteilt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "gekommen": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "geprägt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "zerrissen": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "verschuldet": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "gedacht": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "erneut": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "vergangen": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "verdeckt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "verzwickt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "beseelt": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "gelungen": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "verwahrlost": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "bedroht": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "benommen": {
+  "status": "non_gradable",
+  "reason": "absolute_state_participle"
+ },
+ "durcheinander": {
+  "status": "manual_review",
+  "reason": "semantic_gradability"
+ },
+ "zufrieden": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "aufgeregt": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "aufgenommen": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "vorgekommen": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "abstrakt": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "ausgezeichnet": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "überrascht": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "ausgeruht": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "vorbereitet": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "abgesehen": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "angemessen": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "angestellt": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "abgeschlossen": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "ausgesprochen": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "überlastet": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "anerkannt": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "übertrieben": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "vorhanden": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "angelehnt": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "ausgewogen": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "vorangegangen": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "umstritten": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "ausgewechselt": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "ausverkauft": {
+  "status": "manual_review",
+  "reason": "unclassified_participle_prefix"
+ },
+ "eleganter": {
+  "status": "non_gradable",
+  "reason": "data_artifact_not_a_clean_lemma"
+ },
+ "obgleich": {
+  "status": "non_gradable",
+  "reason": "misclassified_part_of_speech"
+ },
+ "zumal": {
+  "status": "non_gradable",
+  "reason": "misclassified_part_of_speech"
+ },
+ "evidenzbasiert": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "cloudbasiert": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "faktenbasiert": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "technologiebasiert": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "plattformübergreifend": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "generationenübergreifend": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "ressourcenschonend": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "klimaschonend": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "identitätsstiftend": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "diskursprägend": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "zukunftsprägend": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "gegenwartsbezogen": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "validiert": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "personalisiert": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "marginalisiert": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "verschlüsselt": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "dokumentiert": {
+  "status": "manual_review",
+  "reason": "technical_compound_coinage"
+ },
+ "unverzichtbar": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "unbestreitbar": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "zweifelsfrei": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "gleichberechtigt": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "expressionistisch": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "gegenständlich": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "interdisziplinär": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "restlich": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "bisherig": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "handwerklich": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "hauptberuflich": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "geistig": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "gesundheitlich": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "ordnungsgemäß": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "rechtskräftig": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "verhandlungssicher": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "beispiellos": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "großformatig": {
+  "status": "manual_review",
+  "reason": "absolute_or_categorical_uncertain"
+ },
+ "ärgerlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unglücklich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gültig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nötig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unabhängig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "flüssig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mündlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kühl": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wütend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "möbliert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "blöd": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fröhlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "enttäuscht": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "stumm": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "technisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wohltätig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "budgetverantwortlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mitverantwortlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lästig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "frustriert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "informativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "konkurrenzfähig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "lukrativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "respektvoll": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "selbstbewusst": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "benachteiligt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erschreckend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "erstrebenswert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gefährdet": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kinderfeindlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kinderreich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "machtlos": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ehrgeizig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "charakteristisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "umweltverträglich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zukunftsweisend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "verbreitet": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "kritikfähig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "renommiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nachvollziehbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "plausibel": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "evident": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hypothetisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "spekulativ": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gewiss": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "naheliegend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ungewiss": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unklar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unsicher": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vage": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zweifelhaft": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "belastbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "skalierbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "haftbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "messbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "quantifizierbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "realisierbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "reproduzierbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "strafbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unumkehrbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vergleichbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "überprüfbar": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "differenziert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "richtungsweisend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "wegweisend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bahnbrechend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "reflektiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "fundiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ausschlaggebend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "antiquiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bewegend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "diskriminierend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "irritierend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "nuanciert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "pointiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "prägend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "umfassend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "weitreichend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "alarmierend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "belastend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "bindend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "detailliert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "einschneidend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gewinnbringend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "grundlegend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "hochentwickelt": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "inspirierend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "irreführend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "polarisiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "privilegiert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "tiefgreifend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "transzendierend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unzureichend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "verpflichtend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "vorherrschend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "zutreffend": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "überliefert": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "gewaltig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "beträchtlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "massiv": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "niedergeschlagen": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "empirisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "signifikant": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "methodisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "konsistent": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "experimentell": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "verbindlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "unzulässig": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "mutmaßlich": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "drastisch": {
+  "status": "gradable",
+  "reason": "regular"
+ },
+ "ko": {
+  "status": "non_gradable",
+  "reason": "data_artifact_not_a_clean_lemma"
+ },
+ "frei termin": {
+  "status": "non_gradable",
+  "reason": "data_artifact_not_a_clean_lemma"
+ },
+ "weit far": {
+  "status": "non_gradable",
+  "reason": "data_artifact_not_a_clean_lemma"
+ }
+}

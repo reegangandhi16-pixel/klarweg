@@ -1,0 +1,457 @@
+{
+ "$schema": "klarweg-audio-inventory/v1",
+ "generatedAt": "2026-09-09",
+ "status": "INVENTORY + AUDIT ONLY — no audio generated, no chapter data modified",
+ "scope": "A1–C2 · 259 learner-facing chapter pages · 258 chapter data sets",
+ "sourceOfTruth": "the current project: chapter/chapter-*-data.js rendered by chapter/chapter-app.js, verified against the live rendered DOM of all 259 pages",
+ "files": {
+  "chapterAudioAssets": {
+   "story": "audit/audio-inventory/story.json",
+   "listening": "audit/audio-inventory/listening.json",
+   "reading": "audit/audio-inventory/reading.json",
+   "speaking": "audit/audio-inventory/speaking.json",
+   "grammar": "audit/audio-inventory/grammar.json",
+   "vocabulary": "audit/audio-inventory/vocabulary.json"
+  },
+  "wordPopupAssets": "audio-inventory-words.json",
+  "notReachableFromAnyControl": "audit/audio-inventory/unreachable.json",
+  "controlOccurrences": [
+   "audit/audio-scan/occ-A1.json",
+   "audit/audio-scan/occ-A2.json",
+   "audit/audio-scan/occ-B1.json",
+   "audit/audio-scan/occ-B2.json",
+   "audit/audio-scan/occ-C1.json",
+   "audit/audio-scan/occ-C2.json"
+  ],
+  "generationInputs": "audio-inputs.json",
+  "perChapterExtract": "audit/audio-scan/ch/*.json",
+  "scanHarnesses": [
+   "chapter/_audio-scan-harness.html",
+   "chapter/_popup-probe-harness.html"
+  ],
+  "extractors": [
+   "scripts/audio-inventory-extract.js",
+   "scripts/audio-word-layer.js",
+   "scripts/build-audio-inventory.js"
+  ]
+ },
+ "method": {
+  "runtimeScan": {
+   "pagesLoaded": 259,
+   "loadErrors": 0,
+   "clickableSpansObserved": 195661,
+   "uniqueClickableSurfaces": 16131,
+   "popupsOpenedAndRead": 2801,
+   "popupFormControlsRead": 6286,
+   "verifiedZeroAudioControlsIn": [
+    "exercises",
+    "quiz",
+    "writing",
+    "overview",
+    "summary",
+    "resources"
+   ]
+  },
+  "controlSites": [
+   {
+    "section": "story",
+    "control": "button.story-play-line",
+    "requestText": "line.tokens.filter(!plain).map(w).join(\" \") — punctuation tokens are DROPPED",
+    "voice": "line.voice || story.femaleSpeakers.includes(speaker) ? female : male"
+   },
+   {
+    "section": "story",
+    "control": "button.story-play-all",
+    "requestText": "replays the per-line assets — no asset of its own"
+   },
+   {
+    "section": "vocabulary",
+    "control": ".vword-voice[data-g=female] · [data-g=male] · .vword-btn[title=Listen]",
+    "requestText": "vocabTerm(art, de)",
+    "note": "3 controls per card, 2 assets"
+   },
+   {
+    "section": "grammar",
+    "control": ".example-line (whole line click-to-listen)",
+    "requestText": "line.textContent.split(\"→\")[0]"
+   },
+   {
+    "section": "reading",
+    "control": "button \"Listen to passage\"",
+    "requestText": "reading.tokens.filter(!plain).map(w).join(\" \") — punctuation DROPPED, one request for the whole passage"
+   },
+   {
+    "section": "listening",
+    "control": "button.audio-play-btn",
+    "requestText": "Audio.speakSequence(listening.transcript) — one request per transcript sentence /[^.!?]+[.!?]*/"
+   },
+   {
+    "section": "speaking",
+    "control": "button \"Hear model\"",
+    "requestText": "speaking[].de",
+    "note": "speaking[].task has NO control"
+   },
+   {
+    "section": "word popup",
+    "control": "button.wp-audio",
+    "requestText": "resolveHeadword(displayed surface), female"
+   },
+   {
+    "section": "word popup",
+    "control": "button.wp-mini-audio",
+    "requestText": "each paradigm cell form, leading \"am|ist|hat\" stripped"
+   }
+  ],
+  "identity": {
+   "vocabulary": "assetId = sha256(text)[0:16] + \"_F\"|\"_M\" · contentHash = sha256(text + \"::\" + voice)[0:16] (existing scheme, unchanged)",
+   "everythingElse": "assetId = contentHash = sha256(text + \"::\" + voice + \"::\" + speakingRate)[0:16]",
+   "occurrenceId": "<LEVEL>_<chapter#3>_<KIND><seq3> — A1_001_S001. S story · L listening · R reading · P speaking model · G grammar · VF/VM vocabulary · Q unreachable task prompt · LA unreachable authored listening line",
+   "deterministic": true,
+   "verifiedAgainst": "existing story/listening/reading/speaking + vocabulary manifests reproduce byte-identical hashes under these rules"
+  },
+  "voicePolicy": "audio-manifests/voice-policy.json v2 — female de-DE-Neural2-F · male de-DE-Neural2-D · vocabulary male de-DE-Neural2-B (frozen legacy) · rate A1/A2 0.85 · B1/B2 0.95 · C1/C2 1.0",
+  "policyGaps": [
+   "grammar example lines have no policy entry (inventoried female @ level rate)",
+   "word-popup + paradigm-form audio has no policy entry (inventoried female @ 1.0)",
+   "389 listening transcript sentences could not be matched to an authored dialogue line, so their speaker/voice is UNRESOLVED and defaulted to female"
+  ],
+  "reuseRule": "assets are shared only on exact text + voice + speakingRate. Similar-looking text is never merged."
+ },
+ "totals": {
+  "uniqueAssetsRequired": 40095,
+  "chapterAudio": 20322,
+  "wordPopupLayer": 19773,
+  "controlOccurrencesChapterSections": 32759,
+  "clickableWordControlOccurrences": 195661,
+  "notReachableFromAnyControl": 1963,
+  "byFamily": {
+   "story": 1773,
+   "listening": 1358,
+   "reading": 258,
+   "speaking": 1229,
+   "grammar": 114,
+   "vocabulary": 15590,
+   "clickableWord": 15903,
+   "wordForm": 3870
+  }
+ },
+ "summaryByLevel": [
+  {
+   "level": "A1",
+   "chapters": 47,
+   "vocabHeadwords": 1931,
+   "vocabForms": 0,
+   "vocabExamples": 0,
+   "story": 437,
+   "grammar": 3,
+   "reading": 47,
+   "listening": 327,
+   "speaking": 141,
+   "exercises": 0,
+   "quiz": 0,
+   "uniqueAssets": 4802,
+   "controlOccurrences": 6962
+  },
+  {
+   "level": "A2",
+   "chapters": 35,
+   "vocabHeadwords": 1525,
+   "vocabForms": 0,
+   "vocabExamples": 0,
+   "story": 276,
+   "grammar": 0,
+   "reading": 35,
+   "listening": 180,
+   "speaking": 181,
+   "exercises": 0,
+   "quiz": 0,
+   "uniqueAssets": 3722,
+   "controlOccurrences": 5530
+  },
+  {
+   "level": "B1",
+   "chapters": 35,
+   "vocabHeadwords": 2014,
+   "vocabForms": 0,
+   "vocabExamples": 0,
+   "story": 239,
+   "grammar": 111,
+   "reading": 35,
+   "listening": 211,
+   "speaking": 237,
+   "exercises": 0,
+   "quiz": 0,
+   "uniqueAssets": 4856,
+   "controlOccurrences": 7259
+  },
+  {
+   "level": "B2",
+   "chapters": 69,
+   "vocabHeadwords": 2542,
+   "vocabForms": 0,
+   "vocabExamples": 0,
+   "story": 381,
+   "grammar": 0,
+   "reading": 69,
+   "listening": 326,
+   "speaking": 363,
+   "exercises": 0,
+   "quiz": 0,
+   "uniqueAssets": 6215,
+   "controlOccurrences": 8917
+  },
+  {
+   "level": "C1",
+   "chapters": 43,
+   "vocabHeadwords": 211,
+   "vocabForms": 0,
+   "vocabExamples": 0,
+   "story": 259,
+   "grammar": 0,
+   "reading": 43,
+   "listening": 192,
+   "speaking": 209,
+   "exercises": 0,
+   "quiz": 0,
+   "uniqueAssets": 1125,
+   "controlOccurrences": 1440
+  },
+  {
+   "level": "C2",
+   "chapters": 29,
+   "vocabHeadwords": 671,
+   "vocabForms": 0,
+   "vocabExamples": 0,
+   "story": 181,
+   "grammar": 0,
+   "reading": 29,
+   "listening": 130,
+   "speaking": 146,
+   "exercises": 0,
+   "quiz": 0,
+   "uniqueAssets": 1828,
+   "controlOccurrences": 2651
+  }
+ ],
+ "summaryTotals": {
+  "chapters": 258,
+  "vocabHeadwords": 8894,
+  "vocabForms": 0,
+  "vocabExamples": 0,
+  "story": 1773,
+  "grammar": 114,
+  "reading": 258,
+  "listening": 1366,
+  "speaking": 1277,
+  "exercises": 0,
+  "quiz": 0,
+  "unique": 22548,
+  "controls": 32759
+ },
+ "existingAudioAudit": {
+  "liveInfrastructure": {
+   "capturedAt": "2026-09-09",
+   "method": "live HTTP fetch/HEAD from the running Klarweg runtime (kw-audio-engine.js resolution chain), not from project copies",
+   "runtimeChain": {
+    "loadedOnChapterPages": [
+     "public/audio/kw-audio-engine.js",
+     "public/audio/kw-tts-config.js"
+    ],
+    "notLoadedAnywhere": [
+     "public/audio/kw-audio.js"
+    ],
+    "order": [
+     "1. vocab dual-voice manifest (github.io CDN) — only when a gender is requested",
+     "2. text-keyed manifest.json (KW_AUDIO_BASE = jsDelivr klarweg-audio)",
+     "3. IndexedDB cache (per exact text)",
+     "4. hosted neural TTS endpoint — DISABLED (endpoint: null in kw-tts-config.js)",
+     "5. browser speechSynthesis de-DE"
+    ]
+   },
+   "vocabCdn": {
+    "base": "https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/",
+    "manifest": "manifest.json",
+    "status": 200,
+    "keys": 9403,
+    "entriesWithBothVoices": 9403,
+    "filesAvailable": 18806,
+    "filenameScheme": "audio/{female|male}/<readable_term>.mp3",
+    "spotChecked": [
+     "führen",
+     "machen",
+     "jedoch"
+    ],
+    "missingBasics": [
+     "der Apfel",
+     "das Buch"
+    ],
+    "chapterAudioProbes404": [
+     "audio/story/A1_001_S001.mp3",
+     "audio/listening/A1_001_L001.mp3",
+     "audio/reading/A1_001_R001.mp3",
+     "audio/speaking/A1_001_P001.mp3",
+     "audio/vocab/female/ffb93ae3703c904b_F.mp3"
+    ]
+   },
+   "sentenceCdn": {
+    "base": "https://cdn.jsdelivr.net/gh/reegangandhi16-pixel/klarweg-audio@main/public/audio/",
+    "manifestKeys": 126,
+    "filesAvailable": 126,
+    "orphanedManifests": {
+     "a1-words-manifest.json": {
+      "entries": 1902,
+      "voices": 2,
+      "files": 3804,
+      "loadedByEngine": false
+     },
+     "a2-words-manifest.json": {
+      "entries": 1444,
+      "voices": 2,
+      "files": 2888,
+      "loadedByEngine": false
+     },
+     "b1-words-manifest.json": {
+      "status": 404,
+      "projectCopyEntries": 108
+     }
+    },
+    "note": "A1/A2 dual-voice vocabulary audio is present and serving 200s (e.g. 'der Apfel' → audio/words/female/ffb93ae3703c904b.mp3) but the current engine never fetches these manifests, so the runtime cannot see it."
+   },
+   "localFiles": {
+    "public/audio/words": 60,
+    "public/audio/sentences": 61,
+    "public/audio/dialogues": 8,
+    "resolvedByLocalManifest": 126,
+    "brokenLocalManifests": {
+     "a1-words-manifest.json": "1903 entries → /audio/words/{female,male}/… — those directories do not exist in the project",
+     "a2-words-manifest.json": "1491 entries → same",
+     "b1-words-manifest.json": "108 entries → same"
+    }
+   }
+  },
+  "requiredVsExisting": {
+   "vocabulary": {
+    "requiredTerms": 7795,
+    "inVocabManifest": 7777,
+    "missingFromVocabManifest": 18,
+    "onCDN": 4425,
+    "missingFromCDN": 3370,
+    "cdnNotRequired": 4978,
+    "manifestRowsTotal": 15572,
+    "manifestTermsTotal": 7786,
+    "prodMergedKeys": 12036,
+    "prodMergedNotRequired": 5126,
+    "missingSample": [
+     "der Apfel",
+     "das Buch",
+     "das Eis",
+     "der Hund",
+     "das Jahr",
+     "der Käse",
+     "die Schule",
+     "der Vater",
+     "das Wasser",
+     "die Zeit",
+     "das Mädchen",
+     "die Straße"
+    ]
+   },
+   "story": {
+    "requiredUniqueTexts": 1767,
+    "manifestRows": 1775,
+    "manifestUniqueTexts": 1768,
+    "requiredTextsPresentInManifest": 0,
+    "requiredTextsAbsentFromManifest": 1767,
+    "manifestTextsNotRequired": 1768,
+    "resolvableViaRuntimeSentenceManifest": 0,
+    "absentSample": [
+     "Herzlich willkommen Ich bin Frau Weber",
+     "Guten Tag Ich heiße Rohan",
+     "Schön Wie ist dein Name Buchstabier bitte",
+     "Gern R O H A N"
+    ]
+   },
+   "listening": {
+    "requiredUniqueTexts": 1336,
+    "manifestRows": 1081,
+    "manifestUniqueTexts": 1078,
+    "requiredTextsPresentInManifest": 794,
+    "requiredTextsAbsentFromManifest": 542,
+    "manifestTextsNotRequired": 284,
+    "resolvableViaRuntimeSentenceManifest": 1,
+    "absentSample": [
+     "Rohan, wie schreibst du \"Buch\"?",
+     "Bitte buchstabiere es.",
+     "B-U-C-H.",
+     "Buch."
+    ]
+   },
+   "reading": {
+    "requiredUniqueTexts": 258,
+    "manifestRows": 258,
+    "manifestUniqueTexts": 258,
+    "requiredTextsPresentInManifest": 0,
+    "requiredTextsAbsentFromManifest": 258,
+    "manifestTextsNotRequired": 258,
+    "resolvableViaRuntimeSentenceManifest": 0,
+    "absentSample": [
+     "Rohan ist in der Schule Frau Weber sagt Wie heißt du Ich heiße Rohan sagt er R O H A N Sehr gut sagt Frau Weber Willkommen Die Schule ist schön",
+     "Der Tisch ist nicht leer Da ist ein Buch ein Stift und eine Karte Die Sachen gehören zusammen",
+     "Ben Hallo Anna Bist du müde Anna Nein ich bin nicht müde Aber ich habe heute keine Zeit ich lerne Deutsch Ben Oh kein Problem Und morgen Anna Morgen habe ich Zeit aber ich habe kein Geld mehr Ben Kein Problem ich habe Geld Bis morgen Anna",
+     "Ich suche den Schlüssel Ich kaufe ein Buch und eine Karte Hast du einen Stift Ja ich finde alles"
+    ]
+   },
+   "speaking": {
+    "requiredUniqueTexts": 1229,
+    "manifestRows": 2554,
+    "manifestUniqueTexts": 2549,
+    "requiredTextsPresentInManifest": 1229,
+    "requiredTextsAbsentFromManifest": 0,
+    "manifestTextsNotRequired": 1320,
+    "resolvableViaRuntimeSentenceManifest": 0,
+    "absentSample": []
+   },
+   "runtimeSentenceManifest": {
+    "keys": 126,
+    "keysRequiredBySomeSection": 17
+   },
+   "grammar": {
+    "requiredUniqueTexts": 114,
+    "resolvableToday": 0
+   }
+  },
+  "reconciliation": {
+   "requiredUniqueAssets": 40095,
+   "servedToday": 8867,
+   "servedTodayBreakdown": {
+    "vocabularyFilesOnLiveCdn": 8850,
+    "requiredTermsOnLiveCdn": 4425,
+    "textKeyedPilotClipsMatchingARequiredText": 17
+   },
+   "recoverableWithoutSynthesis": 4970,
+   "recoverableNote": "2,485 required A1/A2 vocabulary terms × 2 voices exist and return 200 on the jsDelivr CDN via a1-words-manifest.json / a2-words-manifest.json, which kw-audio-engine.js no longer fetches",
+   "missing": 26258,
+   "requiredVocabularyTermsWithNoAudioAnywhere": 885,
+   "unreferencedOrObsoleteFiles": 10367,
+   "unreferencedBreakdown": {
+    "liveCdnVocabularyFilesNotInCurrentData": 9956,
+    "pilotTextClipsNeverRequested": 109,
+    "strandedFilesForTermsNotInCurrentData": 302
+   },
+   "duplicateAssets": 0,
+   "sharedAssets": 2697,
+   "keyMismatches": {
+    "story": "0 of 1,767 required runtime texts exist in story-dialogue-manifest.json (UI drops punctuation tokens)",
+    "reading": "0 of 258 required passage texts exist in reading-manifest.json (same cause)",
+    "listening": "794 of 1,336 match; 542 required transcript sentences absent; 284 manifest lines never requested",
+    "speaking": "all 1,229 required model answers present; 1,277 task-prompt rows unreachable",
+    "vocabulary": "7,777 of 7,795 required terms are in vocabulary-manifest.json, but its hash-named CDN paths return 404"
+   },
+   "brokenReferences": [
+    "public/audio/a1|a2|b1-words-manifest.json (3,502 entries) point at /audio/words/{female,male}/ — directories absent from the project and no page loads these manifests",
+    "public/audio/kw-audio.js is loaded by no page (dead code)",
+    "vocabulary-manifest.json audioFilename scheme audio/vocab/{female,male}/<sha16>_F.mp3 does not exist on the live CDN, which serves audio/{female,male}/<readable_term>.mp3"
+   ]
+  }
+ }
+}

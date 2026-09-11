@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-07",
+  "source": "chapter/chapter-*-data.js listening.dialogue (source of truth)",
+  "hash": "sha256(de + \"::\" + voice) truncated to 16 hex",
+  "entriesBefore": 1079,
+  "entriesAfter": 1081,
+  "added": [
+    "B2_023_L005",
+    "B2_027_L005"
+  ],
+  "rehashedForTextDrift": [
+    "A1_041_L001",
+    "A1_041_L002",
+    "A1_041_L003",
+    "A1_041_L004",
+    "A1_041_L005",
+    "A1_041_L006",
+    "A1_041_L007"
+  ],
+  "duplicates": [],
+  "stale": [],
+  "missing": [],
+  "escapeNormalized": [
+    "B2_023_L005",
+    "B2_027_L005"
+  ],
+  "integrity": {
+    "duplicates": 0,
+    "stale": 0,
+    "missing": 0,
+    "malformed": 0
+  }
+}

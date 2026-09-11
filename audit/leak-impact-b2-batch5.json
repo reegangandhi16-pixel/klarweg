@@ -1,0 +1,289 @@
+{
+ "phase": "7",
+ "batch": 5,
+ "chapters": 4,
+ "entries": 6,
+ "results": [
+  {
+   "slug": "b2-50-nominalisierung",
+   "line": 186,
+   "field": "de",
+   "value": "Genitiv/von-construction for the acted-upon object",
+   "totalNodes": 701,
+   "totalQaFindings": 6,
+   "injected": [
+    "genitiv",
+    "vonconstruction",
+    "for",
+    "the",
+    "actedupon",
+    "object"
+   ],
+   "soleSource": [
+    "genitiv",
+    "vonconstruction",
+    "for",
+    "the",
+    "actedupon",
+    "object"
+   ],
+   "attributed": 1,
+   "silent": 1,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 0,
+   "classification": "HARMFUL",
+   "textOccurrencesBySurface": {
+    "genitiv": 1,
+    "for": 7,
+    "the": 71,
+    "object": 2
+   },
+   "note": "attributed occurrence is the surface `Genitiv` (badge Noun / role object, no QA code) — sole-source: no other German-typed field in this chapter authors it",
+   "linkifiedAttributed": 1,
+   "samples": [
+    {
+     "surface": "Genitiv",
+     "badge": "Noun",
+     "role": "object",
+     "qa": []
+    }
+   ]
+  },
+  {
+   "slug": "b2-50-nominalisierung",
+   "line": 187,
+   "field": "de",
+   "value": "Common in reports, theses, and Goethe B2 Writing",
+   "totalNodes": 701,
+   "totalQaFindings": 6,
+   "injected": [
+    "common",
+    "in",
+    "reports",
+    "theses",
+    "and",
+    "goethe",
+    "b",
+    "writing"
+   ],
+   "soleSource": [
+    "common",
+    "reports",
+    "theses",
+    "and",
+    "goethe",
+    "b",
+    "writing"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 9,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "common": 6,
+    "in": 29,
+    "reports": 4,
+    "theses": 1,
+    "and": 38,
+    "goethe": 7,
+    "b": 11,
+    "writing": 15
+   },
+   "note": "`in` linkified 12 (3 inDe / 9 outside), shared — not attributed",
+   "linkifiedAttributed": 0,
+   "samples": null
+  },
+  {
+   "slug": "b2-51-erweiterte-partizipialattribute",
+   "line": 177,
+   "field": "de",
+   "value": "Adjective endings agree with gender, case, and number",
+   "totalNodes": 757,
+   "totalQaFindings": 0,
+   "injected": [
+    "adjective",
+    "endings",
+    "agree",
+    "with",
+    "gender",
+    "case",
+    "and",
+    "number"
+   ],
+   "soleSource": [
+    "adjective",
+    "endings",
+    "agree",
+    "with",
+    "gender",
+    "case",
+    "number"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 0,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "adjective": 16,
+    "endings": 2,
+    "agree": 0,
+    "with": 10,
+    "gender": 1,
+    "case": 2,
+    "and": 26,
+    "number": 0
+   },
+   "note": null,
+   "linkifiedAttributed": 0,
+   "samples": null
+  },
+  {
+   "slug": "b2-51-erweiterte-partizipialattribute",
+   "line": 178,
+   "field": "de",
+   "value": "Common in newspapers, academic papers, and Goethe B2 Reading",
+   "totalNodes": 757,
+   "totalQaFindings": 0,
+   "injected": [
+    "and",
+    "common",
+    "in",
+    "newspapers",
+    "academic",
+    "papers",
+    "goethe",
+    "b",
+    "reading"
+   ],
+   "soleSource": [
+    "common",
+    "newspapers",
+    "academic",
+    "papers",
+    "goethe",
+    "b",
+    "reading"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 9,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "and": 26,
+    "common": 3,
+    "in": 29,
+    "newspapers": 4,
+    "academic": 5,
+    "papers": 2,
+    "goethe": 4,
+    "b": 7,
+    "reading": 6
+   },
+   "note": "`in` linkified 11 (2 inDe / 9 outside), shared — not attributed",
+   "linkifiedAttributed": 0,
+   "samples": null
+  },
+  {
+   "slug": "b2-52-komplexe-nominalgruppen",
+   "line": 174,
+   "field": "de",
+   "value": "Common in scientific articles, reports, contracts, and Goethe B2 Reading",
+   "totalNodes": 610,
+   "totalQaFindings": 1,
+   "injected": [
+    "common",
+    "in",
+    "scientific",
+    "articles",
+    "reports",
+    "contracts",
+    "and",
+    "goethe",
+    "b",
+    "reading"
+   ],
+   "soleSource": [
+    "common",
+    "scientific",
+    "articles",
+    "reports",
+    "contracts",
+    "and",
+    "goethe",
+    "b",
+    "reading"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 4,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "common": 3,
+    "in": 27,
+    "scientific": 8,
+    "articles": 2,
+    "reports": 3,
+    "contracts": 2,
+    "and": 24,
+    "goethe": 5,
+    "b": 7,
+    "reading": 12
+   },
+   "note": "`in` linkified 8 (4 inDe / 4 outside), shared — not attributed",
+   "linkifiedAttributed": 0,
+   "samples": null
+  },
+  {
+   "slug": "b2-54-funktionsverbgefuege",
+   "line": 179,
+   "field": "de",
+   "value": "Common in reports, contracts, and Goethe B2 formal writing",
+   "totalNodes": 512,
+   "totalQaFindings": 10,
+   "injected": [
+    "in",
+    "common",
+    "reports",
+    "contracts",
+    "and",
+    "goethe",
+    "b",
+    "formal",
+    "writing"
+   ],
+   "soleSource": [
+    "common",
+    "reports",
+    "contracts",
+    "and",
+    "goethe",
+    "b",
+    "formal",
+    "writing"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 5,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "in": 29,
+    "common": 7,
+    "reports": 3,
+    "contracts": 2,
+    "and": 29,
+    "goethe": 2,
+    "b": 11,
+    "formal": 16,
+    "writing": 9
+   },
+   "note": "`in` linkified 9 (4 inDe / 5 outside), shared — not attributed",
+   "linkifiedAttributed": 0,
+   "samples": null
+  }
+ ]
+}

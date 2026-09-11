@@ -1,0 +1,378 @@
+[
+ {
+  "num": "1",
+  "file": "chapter-a1-1-data.js",
+  "title": "Anna buchstabiert",
+  "titleEn": "Anna spells it out",
+  "translation": null,
+  "wordCount": 12
+ },
+ {
+  "num": "2",
+  "file": "chapter-a1-2-data.js",
+  "title": "Die erste Stunde",
+  "titleEn": "The first lesson",
+  "translation": "Pronunciation is important. Speak slowly and aloud. Pay attention to the stress. Repeat after me and say it once more.",
+  "wordCount": 19
+ },
+ {
+  "num": "3",
+  "file": "chapter-a1-3-zahlen-data.js",
+  "title": "Im Café",
+  "titleEn": "At the café",
+  "translation": "Anna is twenty-one years old. She buys two books for fifteen euros. The coffee costs three euros. Her mobile number ends with twenty-nine.",
+  "wordCount": 22
+ },
+ {
+  "num": "4",
+  "file": "chapter-a1-4-hallo-data.js",
+  "title": "Der erste Tag",
+  "titleEn": "The first day",
+  "translation": "Good day, I am called Anna. What is your name? — Hello, I am Rohan. I come from India. Very good! Welcome.",
+  "wordCount": 19
+ },
+ {
+  "num": "5",
+  "file": "chapter-a1-5-werbistdu-data.js",
+  "title": "Im Sprachkurs",
+  "titleEn": "In the language course",
+  "translation": "So, who are you? — I am Rohan. My name is Rohan Sharma. I come from India and I live in Delhi.",
+  "wordCount": 20
+ },
+ {
+  "num": "6",
+  "file": "chapter-a1-6-wfragen-data.js",
+  "title": "Das Interview",
+  "titleEn": "The interview",
+  "translation": "What is your name? — I am Anna. Where are you from? — From India. Where do you live? — In Delhi. Why are you learning German?",
+  "wordCount": 20
+ },
+ {
+  "num": "7",
+  "file": "chapter-a1-7-jaodernein-data.js",
+  "title": "Im Kurs",
+  "titleEn": "In the course",
+  "translation": "Do you speak German? — Yes, a little. Do you understand that? — No, I do not understand. Sorry!",
+  "wordCount": 14
+ },
+ {
+  "num": "8",
+  "file": "chapter-a1-8-goethemini1-data.js",
+  "title": "Drei Personen im Kurs",
+  "titleEn": "Three people in the course",
+  "translation": "This is Anna. She comes from India and speaks German. Where are you from? Do you also speak English?",
+  "wordCount": 17
+ },
+ {
+  "num": "9",
+  "file": "chapter-a1-9-verben-data.js",
+  "title": "Mein Tag",
+  "titleEn": "My day",
+  "translation": "I learn German every day. I need the German book and a flashcard. On the weekend I cook and play.",
+  "wordCount": 18
+ },
+ {
+  "num": "10",
+  "file": "chapter-a1-10-artikel-data.js",
+  "title": "Auf dem Tisch",
+  "titleEn": "On the table",
+  "translation": "The table is not empty. There is a book, a pen and a card. The things belong together.",
+  "wordCount": 18
+ },
+ {
+  "num": "11",
+  "file": "chapter-a1-11-negation-data.js",
+  "title": "Im Café",
+  "titleEn": "At the café",
+  "translation": "Do you have time today? — No, I have no time. I am not tired, but I have no more money. No problem!",
+  "wordCount": 21
+ },
+ {
+  "num": "12",
+  "file": "chapter-a1-12-akkusativ-data.js",
+  "title": "Im Geschäft",
+  "titleEn": "In the shop",
+  "translation": "I am looking for the key. I buy a book and a card. Do you have a pen? — Yes, I find everything.",
+  "wordCount": 19
+ },
+ {
+  "num": "13",
+  "file": "chapter-a1-13-adjektive-data.js",
+  "title": "Meine Stadt und mein Freund",
+  "titleEn": "My city and my friend",
+  "translation": "My city is big and beautiful. My friend is young, hardworking and very nice. Today I am tired, but happy.",
+  "wordCount": 20
+ },
+ {
+  "num": "14",
+  "file": "chapter-a1-14-essen-data.js",
+  "title": "Frühstück und Café",
+  "titleEn": "Breakfast and café",
+  "translation": "For breakfast I eat a bread roll with cheese. I like drinking tea. In the café I would like a coffee and cake. That tastes tasty!",
+  "wordCount": 23
+ },
+ {
+  "num": "15",
+  "file": "chapter-a1-15-cafe-data.js",
+  "title": "Im Café",
+  "titleEn": "At the café",
+  "translation": "Rohan goes into the café. The waiter brings the menu. Rohan would like a coffee and a piece of cake. What does that cost? The price is four euros. At the end Rohan says: The bill, please! Keep the change!",
+  "wordCount": 34
+ },
+ {
+  "num": "16",
+  "file": "chapter-a1-16-hobbies-data.js",
+  "title": "Meine Freizeit",
+  "titleEn": "My free time",
+  "translation": "In my free time I like playing football. My friend Anna prefers dancing. At the weekend we go to the cinema. The film is fun. Most of all I love photography. That is my hobby!",
+  "wordCount": 30
+ },
+ {
+  "num": "17",
+  "file": "chapter-a1-17-goethe2-data.js",
+  "title": "Das Anmeldeformular",
+  "titleEn": "The registration form",
+  "translation": "This is Rohan\\u2019s form. The surname is Sharma. The residence is Berlin, the postcode is 10115. His email address is his contact. Rohan is male and a member at the language school. All the details are correct.",
+  "wordCount": 35
+ },
+ {
+  "num": "18",
+  "file": "chapter-a1-18-irregular-data.js",
+  "title": "Rohans Uni-Tag",
+  "titleEn": "Rohan\\u2019s day at uni",
+  "translation": "Rohan goes to uni by bus. There he meets Max. They eat together in the canteen. There is a cake. Max is tired, because he sleeps too little. Afterwards he reads the newspaper.",
+  "wordCount": 33
+ },
+ {
+  "num": "19",
+  "file": "chapter-a1-19-satzposition-data.js",
+  "title": "Mein Alltag",
+  "titleEn": "My daily routine",
+  "translation": "In the mornings I shower early. Then I have breakfast alone. In the late morning I have a German course. At noon I eat in the canteen. In the evenings I study German regularly. At night I sleep well.",
+  "wordCount": 28
+ },
+ {
+  "num": "20",
+  "file": "chapter-a1-20-modalverben1-data.js",
+  "title": "Die Party am Samstag",
+  "titleEn": "The party on Saturday",
+  "translation": "On Saturday Anna and Max want to have a party. Max wants to do the music. Rohan must do his homework first. Afterwards he can come. Everyone would like to eat pizza. Hopefully the party will be great!",
+  "wordCount": 33
+ },
+ {
+  "num": "21",
+  "file": "chapter-a1-21-uhrzeit-data.js",
+  "title": "Mein Montag",
+  "titleEn": "My Monday",
+  "translation": "On Monday my day begins at seven o\\u2019clock. The German course is from half past eight until twelve. At quarter past one I eat in the canteen. In the evening I have an appointment at eight.",
+  "wordCount": 34
+ },
+ {
+  "num": "22",
+  "file": "chapter-a1-22-berufe-data.js",
+  "title": "Annas Arbeitstag",
+  "titleEn": "Anna\\u2019s work day",
+  "translation": "Anna is a doctor. She works in the hospital. Her working hours are from eight to four. At one she takes a lunch break. Her colleagues are nice. She earns well and loves her job.",
+  "wordCount": 31
+ },
+ {
+  "num": "23",
+  "file": "chapter-a1-23-familie-data.js",
+  "title": "Meine Familie",
+  "titleEn": "My family",
+  "translation": "This is my family. My father is a teacher and my mother is a doctor. I have a sister. My sister is married. Is her husband my brother? No, he is my brother-in-law! My grandparents also live here.",
+  "wordCount": 36
+ },
+ {
+  "num": "24",
+  "file": "chapter-a1-24-datum-data.js",
+  "title": "Annas Geburtstag",
+  "titleEn": "Anna\\u2019s birthday",
+  "translation": "Anna has her birthday on the third of May. In spring the flowers bloom. Her friends plan a party. In total about twenty guests come. Everyone gives her presents and wishes \"Happy birthday!\"",
+  "wordCount": 29
+ },
+ {
+  "num": "25",
+  "file": "chapter-a1-25-trennbar-data.js",
+  "title": "Mein Samstag",
+  "titleEn": "My Saturday",
+  "translation": "On Saturday I get up late. First I call Anna. Then we go shopping together. I bring coffee along. We pick Max up, because he always gets up late. In the evening I watch TV.",
+  "wordCount": 35
+ },
+ {
+  "num": "26",
+  "file": "chapter-a1-26-goethe3-data.js",
+  "title": "Eine Verspätung",
+  "titleEn": "A delay",
+  "translation": "Max often comes too late. Today he is delayed again. He says: I\\u2019m sorry. Anna says: It doesn\\u2019t matter! But punctuality is important. Tomorrow Max wants to be on time.",
+  "wordCount": 29
+ },
+ {
+  "num": "27",
+  "file": "chapter-a1-27-praeteritum-data.js",
+  "title": "Gestern",
+  "titleEn": "Yesterday",
+  "translation": "Yesterday I was at home. We had guests. My aunt was there too. There was a cake and tea. The evening was lovely, but I was very tired. In the past I had more energy!",
+  "wordCount": 33
+ },
+ {
+  "num": "28",
+  "file": "chapter-a1-28-perfekt-data.js",
+  "title": "Mein Tag gestern",
+  "titleEn": "My day yesterday",
+  "translation": "Yesterday I did a lot. In the morning I studied German. Then I travelled into town. I drank a coffee and met friends. In the evening I went home tired.",
+  "wordCount": 34
+ },
+ {
+  "num": "29",
+  "file": "chapter-a1-29-perfekt-haben-data.js",
+  "title": "Vor der Prüfung",
+  "titleEn": "Before the exam",
+  "translation": "Last week I studied a lot for the exam. I attended the lessons and did exercises. Anna read a book. We studied together in the café. Only Max just drank coffee!",
+  "wordCount": 34
+ },
+ {
+  "num": "30",
+  "file": "chapter-a1-30-perfekt-sein-data.js",
+  "title": "Annas Reise",
+  "titleEn": "Anna\\u2019s trip",
+  "translation": "On Friday Anna flew abroad. The flight went well. She arrived in the evening and, tired, fell asleep. She stayed two days. Then she drove back. The trip was really lovely!",
+  "wordCount": 35
+ },
+ {
+  "num": "31",
+  "file": "chapter-a1-31-partizip-praefix-data.js",
+  "title": "Ein voller Tag",
+  "titleEn": "A full day",
+  "translation": "Yesterday I experienced a lot. In the morning I got a package. Then I went shopping and called Anna. She recommended a café to me. There I sold my bike. Only the name I forgot!",
+  "wordCount": 37
+ },
+ {
+  "num": "32",
+  "file": "chapter-a1-32-akkusativpronomen-data.js",
+  "title": "Das Fest",
+  "titleEn": "The party",
+  "translation": "We are having a party. Anna brings the cake. She brings it at six. Rohan does the music. He gladly does it. Max invites the guests. He invites them. And Frau Weber? We invite her too!",
+  "wordCount": 38
+ },
+ {
+  "num": "33",
+  "file": "chapter-a1-33-saetze-verbinden-data.js",
+  "title": "Das Wochenende",
+  "titleEn": "The weekend",
+  "translation": "Anna goes out, and Rohan stays home. He studies because he has an exam soon. Max isn\\u2019t coming, because he is tired. It\\u2019s raining, so he gladly stays home.",
+  "wordCount": 31
+ },
+ {
+  "num": "34",
+  "file": "chapter-a1-34-schreiben-data.js",
+  "title": "Eine Einladung",
+  "titleEn": "An invitation",
+  "translation": "Dear friends, I warmly invite you. I\\u2019m having a party, because it\\u2019s my birthday. We meet on Saturday at 6 pm at my place. Please everyone come! Warm regards, Anna.",
+  "wordCount": 31
+ },
+ {
+  "num": "35",
+  "file": "chapter-a1-35-goethe4-data.js",
+  "title": "Mein Urlaub",
+  "titleEn": "My holiday",
+  "translation": "Last week I travelled to Munich. The trip was actually great. I had a lot of time, because I had holiday. On Saturday I met my aunt. We went to the café, and I ate cake. It was a lovely holiday!",
+  "wordCount": 42
+ },
+ {
+  "num": "36",
+  "file": "chapter-a1-36-dativ-data.js",
+  "title": "Geschenke",
+  "titleEn": "Gifts",
+  "translation": "Before the holidays we give gifts. Anna gives the teacher flowers. Rohan helps the student and gives him a book. Max gives only himself cake! To whom do you give something?",
+  "wordCount": 29
+ },
+ {
+  "num": "37",
+  "file": "chapter-a1-37-praep-dativ-data.js",
+  "title": "Die Reise nach München",
+  "titleEn": "The trip to Munich",
+  "translation": "Anna is from Munich. At the weekend she travels by train to Munich. There she stays at her aunt\\u2019s. The aunt has lived there for ten years. Her house is across from the station. From the station Anna goes on foot.",
+  "wordCount": 38
+ },
+ {
+  "num": "38",
+  "file": "chapter-a1-38-wechselpraep-data.js",
+  "title": "Meine neue Wohnung",
+  "titleEn": "My new flat",
+  "translation": "My flat is bright and cosy. In the living room a sofa stands against the wall. Above the sofa hangs a picture. The lamp stands next to the sofa. Today I put a plant on the table. Then I go into the kitchen and make coffee.",
+  "wordCount": 43
+ },
+ {
+  "num": "39",
+  "file": "chapter-a1-39-ortsangaben-data.js",
+  "title": "Der Weg zum Café",
+  "titleEn": "The way to the café",
+  "translation": "Rohan is at the station. He goes straight ahead and then left. At the corner there\\u2019s a pharmacy. The café is right on the right, next to the pharmacy. It\\u2019s nearby, only two minutes on foot. Rohan goes into the café and sees Anna at the window.",
+  "wordCount": 43
+ },
+ {
+  "num": "40",
+  "file": "chapter-a1-40-verben-dativ-data.js",
+  "title": "Im Kleidergesch\\u00e4ft",
+  "titleEn": "At the clothes shop",
+  "translation": "Anna needs a dress. She likes the blue dress very much. She tries it on. It fits her and it suits her well. Rohan helps her and she thanks him. Only Max says: \"My feet hurt.\"",
+  "wordCount": 37
+ },
+ {
+  "num": "41",
+  "file": "chapter-a1-41-dativpronomen-data.js",
+  "title": "Vor dem Unterricht",
+  "titleEn": "Before class",
+  "translation": "Rohan is missing a pen. Anna helps him and gives him a pen. Rohan thanks her. Then he explains the task to her. Frau Weber helps them all. They like that very much!",
+  "wordCount": 30
+ },
+ {
+  "num": "42",
+  "file": "chapter-a1-42-welcher-dieser-data.js",
+  "title": "Im Kaufhaus",
+  "titleEn": "At the department store",
+  "translation": "Vreni and Timo go to the department store. Rohan asks: \"Which book do I buy?\" Anna says: \"This book is good.\" Then he asks about a pencil. Anna says: \"Take this pencil!\" At the checkout the salesperson asks: \"With which card do you pay?\"",
+  "wordCount": 40
+ },
+ {
+  "num": "43",
+  "file": "chapter-a1-43-smalltalk-man-data.js",
+  "title": "Im Café",
+  "titleEn": "In the café",
+  "translation": "Today it\\u2019s raining in Berlin. Rohan and Anna sit in the café and talk about the weather. \"In Germany people often talk about the weather,\" says Anna. Rohan says: \"Really? In India people often talk about cricket.\" Luckily the sun shines again in the afternoon. Then one can go for a walk again.",
+  "wordCount": 50
+ },
+ {
+  "num": "44",
+  "file": "chapter-a1-44-imperativ-modal2-data.js",
+  "title": "Beim Arzt",
+  "titleEn": "At the doctor\\u2019s",
+  "translation": "Max is ill. He has a fever and a headache. The doctor examines him and says: \"Take the medicine and stay in bed!\" Max asks: \"May I drink coffee?\" The doctor says: \"No, you should drink tea!\" Get well soon!",
+  "wordCount": 42
+ },
+ {
+  "num": "45",
+  "file": "chapter-a1-45-telefonieren-data.js",
+  "title": "Der Anruf",
+  "titleEn": "The phone call",
+  "translation": "Max is ill and calls Anna. He says: \"This is Max. What\\u2019s the homework?\" But the reception is bad. Max asks: \"Pardon? Can you repeat that?\" Anna repeats everything slowly: page twelve. Then she sends him a voice message.",
+  "wordCount": 42
+ },
+ {
+  "num": "46",
+  "file": "chapter-a1-46-zeitangaben-data.js",
+  "title": "Meine Pr\\u00fcfungswoche",
+  "titleEn": "My exam week",
+  "translation": "I\\u2019ve been studying German for two months. On Monday the exam week begins. From tomorrow on I study vocabulary every evening. Before the exam I\\u2019m nervous, but soon I\\u2019ll be ready. The exam lasts three hours. After the exam we celebrate in summer.",
+  "wordCount": 39
+ },
+ {
+  "num": "47",
+  "file": "chapter-a1-47-goethe-final-data.js",
+  "title": "Tipps für die Pr\\u00fcfung",
+  "titleEn": "Tips for the exam",
+  "translation": "The exam has four parts. While reading, read the heading first. A long word is often a compound: break it into parts. While listening, just keep going. And while writing, make bullet points first. Then you\\u2019ll make fewer mistakes!",
+  "wordCount": 38
+ }
+]

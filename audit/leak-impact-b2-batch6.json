@@ -1,0 +1,67 @@
+{
+ "phase": "7",
+ "batch": 6,
+ "chapters": 2,
+ "entries": 2,
+ "results": [
+  {
+   "slug": "b2-58-textkohaerenz-absatzlogik",
+   "line": 172,
+   "field": "de",
+   "value": "Common in Goethe B2 Writing, reports, and university assignments",
+   "injected": [
+    "common",
+    "in",
+    "goethe",
+    "b",
+    "writing",
+    "reports",
+    "and",
+    "university",
+    "assignments"
+   ],
+   "soleSource": [
+    "common",
+    "goethe",
+    "b",
+    "writing",
+    "reports",
+    "and",
+    "university",
+    "assignments"
+   ],
+   "injectedCount": 9,
+   "soleSourceCount": 8,
+   "learnerVisible": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "classification": "LATENT",
+   "note": "`in` linkified 12 (2/10) shared"
+  },
+  {
+   "slug": "b2-61-indirekte-rede-zeitverschiebung",
+   "line": 179,
+   "field": "de",
+   "value": "Original event time ≠ reporting time",
+   "injected": [
+    "original",
+    "event",
+    "time",
+    "reporting"
+   ],
+   "soleSource": [
+    "original",
+    "event",
+    "time",
+    "reporting"
+   ],
+   "injectedCount": 4,
+   "soleSourceCount": 4,
+   "learnerVisible": 13,
+   "silent": 9,
+   "qaFindings": 4,
+   "classification": "HARMFUL",
+   "note": "`original` linkified ×12 outside .de (badge Adjective / role adjective) + `Event` ×1 (badge Noun / role object) = 13; 4 carry CASE_COLLISION_CAPITALISED, 9 emit no code"
+  }
+ ]
+}

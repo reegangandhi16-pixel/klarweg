@@ -1,0 +1,422 @@
+{
+ "chapter-b1-1-infinitiv-mit-zu-data.js": {
+  "title": "Infinitiv mit zu",
+  "female": "Renke",
+  "male": "Timo",
+  "all": [
+   "Renke",
+   "Timo"
+  ],
+  "scene": "Vor den Sommerferien — Pläne machen",
+  "intro": "Renke is planning to spend the summer camping and lazing around outdoors, and Timo wants to know why — every plan expressed with zu + Infinitiv: Ich plane, zu campen. Ich habe vor, mich zu entspannen.",
+  "hasDlg": true
+ },
+ "chapter-b1-10-passiv-praesens-data.js": {
+  "title": "Passiv (Präsens)",
+  "female": "Frau Bruns",
+  "male": "Timo",
+  "all": [
+   "Timo",
+   "Frau Bruns"
+  ],
+  "scene": "Ein Besuch im Museum und beim Friseur",
+  "intro": "At the hairdresser\\'s, Timo asks what\\'s being done to his hair today, and Frau Bruns answers step by step — washed, then cut, coloured only on request. The present passive puts the process front and centre, not who\\'s doing it.",
+  "hasDlg": false
+ },
+ "chapter-b1-11-relativsaetze-dativ-data.js": {
+  "title": "Relativsätze im Dativ",
+  "female": "Marret",
+  "male": "Timo",
+  "all": [
+   "Marret",
+   "Timo"
+  ],
+  "scene": "Ein stürmischer Nachmittag im Büro",
+  "intro": "A stormy forecast has Marret and Timo comparing who they trust — the weather forecast, the dark clouds, the storm neither of them quite believes — every description built on a Dativ relative clause: der Mann, dem ich vertraue; die Prognose, der ich g",
+  "hasDlg": false
+ },
+ "chapter-b1-12-adjektivdeklination-wiederholung-data.js": {
+  "title": "Adjektivdeklination (Wiederholung & Vertiefung)",
+  "female": "Antje",
+  "male": "Timo",
+  "all": [
+   "Antje",
+   "Timo"
+  ],
+  "scene": "Ein Café am Nachmittag — Anna zeigt Rohan ihre Bewerbung",
+  "intro": "Antje has written a new job application — cover letter, CV, a photo Timo calls compelling — and every document needs one more certificate, one more adjective ending, weak, mixed or strong, all doing the same job: showing gender, number and case exact",
+  "hasDlg": false
+ },
+ "chapter-b1-13-goethe-mini-2-data.js": {
+  "title": "Goethe Mini 2",
+  "female": "Grit",
+  "male": "Timo",
+  "all": [
+   "Timo",
+   "Grit"
+  ],
+  "scene": "Ein Samstag voller Termine",
+  "intro": "Timo and Grit spend a Saturday running errands — an apartment viewing with high extra costs, an excited decision to call the landlord today — recycling obwohl, wegen, and a polite Konjunktiv II offer all at once.",
+  "hasDlg": false
+ },
+ "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js": {
+  "title": "Komparativ & Superlativ vor Nomen",
+  "female": "Wiebke",
+  "male": "Timo",
+  "all": [
+   "Wiebke",
+   "Timo"
+  ],
+  "scene": "Im Café — Wiebke und Timo vergleichen Wohnungen und Städte",
+  "intro": "Wiebke and Timo compare neighbourhoods — a bigger park here, a better traffic situation there, the highest quality of life somewhere else — every comparison landing directly in front of a noun, with the declension ending riding along: der schnellere ",
+  "hasDlg": false
+ },
+ "chapter-b1-15-n-deklination-data.js": {
+  "title": "N-Deklination",
+  "female": "Silje",
+  "male": "Timo",
+  "all": [
+   "Silje",
+   "Timo"
+  ],
+  "scene": "Ein Tag voller Begegnungen",
+  "intro": "Silje and Timo run through the people they know — a lawyer, a judge, a chemist, maybe a reporter — every one of them an N-Deklination noun that quietly grows an -n or -en in every case but the first.",
+  "hasDlg": false
+ },
+ "chapter-b1-16-futur1-data.js": {
+  "title": "Futur I",
+  "female": "Emke",
+  "male": "Timo",
+  "all": [
+   "Emke",
+   "Timo"
+  ],
+  "scene": "Silvesterabend — Emke und Timo planen das neue Jahr",
+  "intro": "On Silvesterabend, Emke and Timo plan their year ahead — a smart home, blinds and lights controlled from a phone, a budget kept modest — using Futur I for plans, predictions, promises and assumptions about what\\'s coming.",
+  "hasDlg": false
+ },
+ "chapter-b1-17-nebensatz-damit-um-zu-data.js": {
+  "title": "Nebensätze mit damit & um ... zu",
+  "female": "Antke",
+  "male": "Timo",
+  "all": [
+   "Antke",
+   "Timo"
+  ],
+  "scene": "Samstagvormittag — Antke und Timo sortieren den Müll",
+  "intro": "Antke returns bottles for the deposit while Timo sorts the trash so the environment gets cleaner — every action justified with a purpose clause, some with um…zu, some with damit, depending on who\\'s doing what.",
+  "hasDlg": false
+ },
+ "chapter-b1-18-relativsaetze-mit-praepositionen-data.js": {
+  "title": "Relativsätze mit Präpositionen",
+  "female": "Marlen",
+  "male": "Timo",
+  "all": [
+   "Marlen",
+   "Timo"
+  ],
+  "scene": "Ein Spaziergang durch die Stadt",
+  "intro": "A walk through the city gives Marlen and Timo landmarks, monuments, and narrow alleys to describe — every one needing a relative clause where the preposition stays glued to the pronoun: der Turm, mit dem wir beginnen; die Gasse, in der wir stehen.",
+  "hasDlg": false
+ },
+ "chapter-b1-19-goethe-halbzeit-test-data.js": {
+  "title": "Goethe Halbzeit-Test",
+  "female": "Uta",
+  "male": "Timo",
+  "all": [
+   "Uta",
+   "Timo"
+  ],
+  "scene": "Ein langer Samstag in der Stadt",
+  "intro": "A long Saturday: Uta wants to apply for an apartment fast because the price is good, and Timo — despite his nerves — offers her honest feedback on the application letter, recycling everything from the first half of B1 in one continuous story.",
+  "hasDlg": false
+ },
+ "chapter-b1-2-nebensaetze-weil-da-obwohl-data.js": {
+  "title": "Nebensätze: weil / da & obwohl",
+  "female": "Frauke",
+  "male": "Timo",
+  "all": [
+   "Frauke",
+   "Timo"
+  ],
+  "scene": "Im Café nach der Arbeit",
+  "intro": "Frauke has lost her appetite for camping — it\\'s too cold outside — while Timo wants to go to the beach anyway. Every reason and every unexpected contrast reaches for weil, da, or obwohl, all sending the verb to the very end.",
+  "hasDlg": true
+ },
+ "chapter-b1-20-plusquamperfekt-data.js": {
+  "title": "Plusquamperfekt",
+  "female": "Wenke",
+  "male": "Timo",
+  "all": [
+   "Wenke",
+   "Timo"
+  ],
+  "scene": "Ein Abend voller Erinnerungen",
+  "intro": "Wenke and Timo catch up on old friends they lost touch with — she had already moved before they stopped seeing each other, he had finished his studies before he moved away too — every memory built on two layers of the past: what had already happened,",
+  "hasDlg": false
+ },
+ "chapter-b1-21-temporale-nebensaetze-data.js": {
+  "title": "Temporale Nebensätze",
+  "female": "Runa",
+  "male": "Timo",
+  "all": [
+   "Runa",
+   "Timo"
+  ],
+  "scene": "Nach einem kleinen Streit",
+  "intro": "Runa and Timo work through a small disagreement about noise and headphones — since she moved in, before he speaks, while she sleeps — using all five ways German answers \"when?\": als, wenn, bevor, nachdem, während.",
+  "hasDlg": false
+ },
+ "chapter-b1-22-brauchen-zu-infinitiv-data.js": {
+  "title": "brauchen + zu + Infinitiv",
+  "female": "Katrin",
+  "male": "Timo",
+  "all": [
+   "Katrin",
+   "Timo"
+  ],
+  "scene": "Anna eröffnet ein Online-Konto",
+  "intro": "Katrin sets up online banking while Timo reassures her it\\'s easier than she thinks — she doesn\\'t need to visit the bank, doesn\\'t need to check her balance daily. müssen says what you have to do; brauchen nicht … zu says what you don\\'t.",
+  "hasDlg": false
+ },
+ "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js": {
+  "title": "Reflexivpronomen: Akkusativ & Dativ",
+  "female": "Frauke",
+  "male": "Timo",
+  "all": [
+   "Timo",
+   "Frauke"
+  ],
+  "scene": "Im Krankenzimmer",
+  "intro": "Timo is recovering in hospital after a small accident, and Frauke helps him through his morning routine — brushing his teeth, getting his medication, feeding himself — every reflexive verb revealing whether it needs mich/dich or mir/dir.",
+  "hasDlg": false
+ },
+ "chapter-b1-24-zweiteilige-konnektoren-data.js": {
+  "title": "Zweiteilige Konnektoren",
+  "female": "Nike",
+  "male": "Timo",
+  "all": [
+   "Nike",
+   "Timo"
+  ],
+  "scene": "Musikgeschmäcker im Vergleich",
+  "intro": "Nike and Timo compare music tastes and plan a concert trip — she likes both jazz and metal, he likes neither; she listens to not only music but also podcasts — every opinion built on a two-part connector.",
+  "hasDlg": false
+ },
+ "chapter-b1-25-stellung-von-nicht-data.js": {
+  "title": "Stellung von „nicht\" im Satz",
+  "female": "Sinje",
+  "male": "Timo",
+  "all": [
+   "Sinje",
+   "Timo"
+  ],
+  "scene": "Der Zeitungskasten",
+  "intro": "Sinje and Timo pass an honesty-box newspaper stand — she won\\'t take the change, because that isn\\'t right, and won\\'t keep the wallet either — a small moral test of exactly what \"nicht\" is negating each time.",
+  "hasDlg": false
+ },
+ "chapter-b1-26-adjektiv-ohne-artikel-data.js": {
+  "title": "Adjektivdeklination ohne Artikel",
+  "female": "Yara",
+  "male": "Timo",
+  "all": [
+   "Yara",
+   "Timo"
+  ],
+  "scene": "Das Theaterabenteuer",
+  "intro": "Yara needs talented actors and colourful costumes for the school play, and Timo offers musical friends from choir and old costumes from home — every noun phrase here has no article at all, so the adjective alone must carry gender, case and number.",
+  "hasDlg": false
+ },
+ "chapter-b1-27-goethe-mini-3-data.js": {
+  "title": "Goethe Mini 3",
+  "female": "Marte",
+  "male": "Timo",
+  "all": [
+   "Marte",
+   "Timo"
+  ],
+  "scene": "Eine anstrengende Woche",
+  "intro": "Marte and Timo compare a demanding week — a job interview that exhausted her, a delayed connection, a doctor\\'s visit — recycling Plusquamperfekt, temporal clauses, and two-part connectors from every B1 chapter so far.",
+  "hasDlg": false
+ },
+ "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js": {
+  "title": "Passiv: Präsens, Präteritum & Perfekt",
+  "female": "Insa",
+  "male": "Timo",
+  "all": [
+   "Insa",
+   "Timo"
+  ],
+  "scene": "Die Umweltaktion",
+  "intro": "At an environmental-action fair, Insa and Timo read reports on recycling improvements, planted trees, and monitored drinking water — the same action phrased in three tenses: wird verbessert, wurde verbessert, ist verbessert worden.",
+  "hasDlg": false
+ },
+ "chapter-b1-29-passiv-modalverben-data.js": {
+  "title": "Passiv mit Modalverben",
+  "female": "Solveig",
+  "male": "Timo",
+  "all": [
+   "Solveig",
+   "Timo"
+  ],
+  "scene": "Der Vortrag über die EU",
+  "intro": "A lecture on the European Union has Solveig and Timo working through contracts that must be signed, decisions that must be made, member states that must be informed — the passive combined with every modal verb, werden always last.",
+  "hasDlg": false
+ },
+ "chapter-b1-3-konjunktiv2-hoefliche-bitten-data.js": {
+  "title": "Konjunktiv II: Höfliche Bitten",
+  "female": "Frau Lorenzen",
+  "male": "Timo",
+  "all": [
+   "Timo",
+   "Frau Lorenzen"
+  ],
+  "scene": "Ein langer Samstag in der Stadt",
+  "intro": "Timo\\'s phone has broken, and Frau Lorenzen at the shop helps him fix it — every request softened into a polite Konjunktiv II: Könnten Sie mir helfen? Würden Sie es bitte anschließen?",
+  "hasDlg": true
+ },
+ "chapter-b1-30-artikelwoerter-als-pronomen-data.js": {
+  "title": "Artikelwörter als Pronomen",
+  "female": "Frauke",
+  "male": "Timo",
+  "all": [
+   "Frauke",
+   "Timo"
+  ],
+  "scene": "Beim Bäcker und bei der Bürgerversammlung",
+  "intro": "Frauke and Timo run errands at the bakery and sign up to help at a neighbourhood event — every repeated noun replaced by an article word standing in for it: Welches meinst du? Das von letztem Jahr. Welche schmecken am besten? Die mit Schokolade.",
+  "hasDlg": false
+ },
+ "chapter-b1-31-adjektive-als-nomen-data.js": {
+  "title": "Adjektive als Nomen",
+  "female": "Meike",
+  "male": "Timo",
+  "all": [
+   "Meike",
+   "Timo"
+  ],
+  "scene": "Die Bundestagswahl im Fernsehen",
+  "intro": "Meike and Timo watch election coverage and talk about their community — every adjective turning into a person: der Abgeordnete speaks about justice, die Deutsche fights for free speech, der Fremde runs for parliament.",
+  "hasDlg": false
+ },
+ "chapter-b1-32-relativsaetze-was-wo-data.js": {
+  "title": "Relativsätze mit was & wo",
+  "female": "Renke",
+  "male": "Timo",
+  "all": [
+   "Renke",
+   "Timo"
+  ],
+  "scene": "Der Stadtteil voller Kunst",
+  "intro": "Renke and Timo wander through a street-art district, impressed by everything they see and the places they found it — was refers back to a whole idea, wo to a place: alles, was mir gefällt; die Wand, wo das Kunstwerk hängt.",
+  "hasDlg": false
+ },
+ "chapter-b1-33-je-desto-umso-data.js": {
+  "title": "je … desto / umso",
+  "female": "Britta",
+  "male": "Timo",
+  "all": [
+   "Britta",
+   "Timo"
+  ],
+  "scene": "Eine Diskussion in der Uni-Mensa",
+  "intro": "Over lunch, Britta and Timo debate globalization — the more we buy, the more trash accumulates; the cheaper a product, the more people buy it — every argument a proportional comparison with je…desto or umso.",
+  "hasDlg": false
+ },
+ "chapter-b1-34-partizipien-als-adjektive-data.js": {
+  "title": "Partizipien als Adjektive",
+  "female": "Kirsten",
+  "male": "Timo",
+  "all": [
+   "Kirsten",
+   "Timo"
+  ],
+  "scene": "Das Missverständnis im Kunstsupermarkt",
+  "intro": "Kirsten and Timo stumble into a mix-up at an art-supermarket auction — a found mirror, a laughing seller, a damaged pot nobody can explain — every object described with a participle adjective: der gefundene Spiegel, der beschädigte Topf.",
+  "hasDlg": false
+ },
+ "chapter-b1-35-goethe-zertifikat-b1-final-data.js": {
+  "title": "Goethe-Zertifikat B1 Final",
+  "female": "Silke",
+  "male": "Timo",
+  "all": [
+   "Silke",
+   "Timo"
+  ],
+  "scene": "Ein letzter Tag vor der Prüfung",
+  "intro": "Silke and Timo spend one last day together — an apartment viewing, a hospital visit, a job interview, a delayed train — recycling every major B1 structure in one continuous story before the real exam.",
+  "hasDlg": false
+ },
+ "chapter-b1-4-folgen-deshalb-so-dass-data.js": {
+  "title": "Folgen: deshalb & so … dass",
+  "female": "Franzi",
+  "male": "Timo",
+  "all": [
+   "Franzi",
+   "Timo"
+  ],
+  "scene": "Nach der Prüfung",
+  "intro": "Franzi wants to return a broken charging cable, and Timo checks the receipt — the cable is so broken it won\\'t charge, and she\\'s so surprised it broke this fast. Every result gets a deshalb, every extreme a so … dass.",
+  "hasDlg": true
+ },
+ "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js": {
+  "title": "Genitiv & Präpositionen mit Genitiv",
+  "female": "Kerstin",
+  "male": "Timo",
+  "all": [
+   "Timo",
+   "Kerstin"
+  ],
+  "scene": "Ein regnerischer Nachmittag",
+  "intro": "Timo explains his diet to Kerstin — no meat because of it, cheese despite it, vegan cooking during the week for his fitness — every reason, contrast, and stretch of time carried by a Genitiv preposition: wegen, trotz, während.",
+  "hasDlg": true
+ },
+ "chapter-b1-6-goethe-mini-1-data.js": {
+  "title": "Goethe Mini 1",
+  "female": "Meike",
+  "male": "Timo",
+  "all": [
+   "Meike",
+   "Timo"
+  ],
+  "scene": "Der Abend vor der Probeprüfung — Sprachschule Berlin",
+  "intro": "The evening before the mock exam, Meike is nervous and Timo reassures her — since she\\'s practised so much, she\\'ll surely succeed — recycling zu + Infinitiv, weil/da/obwohl, polite requests, and the Genitiv all at once.",
+  "hasDlg": true
+ },
+ "chapter-b1-7-praeteritum-data.js": {
+  "title": "Präteritum",
+  "female": "Almut",
+  "male": "Timo",
+  "all": [
+   "Almut",
+   "Timo"
+  ],
+  "scene": "Erinnerungen an früher",
+  "intro": "Almut tells Timo about the summer she worked at a mountain hut — calm, beautiful, arriving in June — and every memory reaches for the Präteritum, the tense of stories and biographies.",
+  "hasDlg": false
+ },
+ "chapter-b1-8-zeitangaben-dativ-genitiv-data.js": {
+  "title": "Zeitangaben: Dativ & Genitiv",
+  "female": "Frau Petersen",
+  "male": "Timo",
+  "all": [
+   "Timo",
+   "Frau Petersen"
+  ],
+  "scene": "Im Reisebüro",
+  "intro": "At the travel agency, Timo books a winter holiday and Frau Petersen answers with deadlines and travel times — a week for confirmation, a day\\'s journey by train — mixing everyday Dativ time phrases with the more literary Genitiv ones.",
+  "hasDlg": false
+ },
+ "chapter-b1-9-goethe-mini-2-data.js": {
+  "title": "Goethe Mini 2",
+  "female": "Nele",
+  "male": "Timo",
+  "all": [
+   "Nele",
+   "Timo"
+  ],
+  "scene": "Vorbereitung auf das Bewerbungsgespräch",
+  "intro": "Nele has an interview tomorrow with an entrepreneur, and Timo helps her prepare — her outfit, her posture, whether she comes across as too stiff — recycling Präteritum and Zeitangaben across the whole conversation.",
+  "hasDlg": false
+ }
+}

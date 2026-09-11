@@ -1,0 +1,677 @@
+{
+ "chapter-a1-1-data.js": {
+  "n": 2,
+  "en": [
+   "What word does Rohan spell first?",
+   "Why is Rohan spelling words for Frau Weber?"
+  ],
+  "all": [
+   "What word does Rohan spell first?",
+   "Why is Rohan spelling words for Frau Weber?"
+  ]
+ },
+ "chapter-a1-10-artikel-data.js": {
+  "n": 2,
+  "en": [
+   "Where is the pen?",
+   "Who is Kai looking for his things with?"
+  ],
+  "all": [
+   "Where is the pen?",
+   "Who is Kai looking for his things with?"
+  ]
+ },
+ "chapter-a1-11-negation-data.js": {
+  "n": 2,
+  "en": [
+   "Why does Anna say no to the coffee?",
+   "Is Anna tired?"
+  ],
+  "all": [
+   "Why does Anna say no to the coffee?",
+   "Is Anna tired?"
+  ]
+ },
+ "chapter-a1-12-akkusativ-data.js": {
+  "n": 2,
+  "en": [
+   "What is Lisa looking for?",
+   "Where does Lisa find everything?"
+  ],
+  "all": [
+   "What is Lisa looking for?",
+   "Where does Lisa find everything?"
+  ]
+ },
+ "chapter-a1-13-adjektive-data.js": {
+  "n": 2,
+  "en": [
+   "How is the new café described?",
+   "How is the waitress?"
+  ],
+  "all": [
+   "How is the new café described?",
+   "How is the waitress?"
+  ]
+ },
+ "chapter-a1-14-essen-data.js": {
+  "n": 2,
+  "en": [
+   "What does Hanna NOT eat?",
+   "What does Simon order?"
+  ],
+  "all": [
+   "What does Hanna NOT eat?",
+   "What does Simon order?"
+  ]
+ },
+ "chapter-a1-15-cafe-data.js": {
+  "n": 2,
+  "en": [
+   "What mistake does the waiter make?",
+   "What did Ida actually order?"
+  ],
+  "all": [
+   "What mistake does the waiter make?",
+   "What did Ida actually order?"
+  ]
+ },
+ "chapter-a1-16-hobbies-data.js": {
+  "n": 2,
+  "en": [
+   "What does Sara prefer to do instead of painting?",
+   "What does Sara do on Sunday?"
+  ],
+  "all": [
+   "What does Sara prefer to do instead of painting?",
+   "What does Sara do on Sunday?"
+  ]
+ },
+ "chapter-a1-17-goethe2-data.js": {
+  "n": 2,
+  "en": [
+   "Why does Jan call Frau Roth?",
+   "What does Frau Roth confirm?"
+  ],
+  "all": [
+   "Why does Jan call Frau Roth?",
+   "What does Frau Roth confirm?"
+  ]
+ },
+ "chapter-a1-18-irregular-data.js": {
+  "n": 2,
+  "en": [
+   "What is Timo eating tonight?",
+   "Where is Timo going tomorrow morning?"
+  ],
+  "all": [
+   "What is Timo eating tonight?",
+   "Where is Timo going tomorrow morning?"
+  ]
+ },
+ "chapter-a1-19-satzposition-data.js": {
+  "n": 3,
+  "en": [
+   "What does Pia do on weekend mornings?",
+   "How often does she meet friends in the afternoon?",
+   "What does she study on Sundays?"
+  ],
+  "all": [
+   "What does Pia do on weekend mornings?",
+   "How often does she meet friends in the afternoon?",
+   "What does she study on Sundays?"
+  ]
+ },
+ "chapter-a1-2-data.js": {
+  "n": 2,
+  "en": [
+   "What is Jonas practicing for?",
+   "Which sound does Frau Bauer correct?"
+  ],
+  "all": [
+   "What is Jonas practicing for?",
+   "Which sound does Frau Bauer correct?"
+  ]
+ },
+ "chapter-a1-20-modalverben1-data.js": {
+  "n": 2,
+  "en": [
+   "What must Finn do before he can join?",
+   "What must Max bring?"
+  ],
+  "all": [
+   "What must Finn do before he can join?",
+   "What must Max bring?"
+  ]
+ },
+ "chapter-a1-21-uhrzeit-data.js": {
+  "n": 3,
+  "en": [
+   "What time is it at the start?",
+   "When is Jonas meeting Max?",
+   "How long does the film last?"
+  ],
+  "all": [
+   "What time is it at the start?",
+   "When is Jonas meeting Max?",
+   "How long does the film last?"
+  ]
+ },
+ "chapter-a1-22-berufe-data.js": {
+  "n": 2,
+  "en": [
+   "What does Lea want to do?",
+   "Why is Lea unhappy with her job?"
+  ],
+  "all": [
+   "What does Lea want to do?",
+   "Why is Lea unhappy with her job?"
+  ]
+ },
+ "chapter-a1-23-familie-data.js": {
+  "n": 2,
+  "en": [
+   "Who is celebrating a birthday?",
+   "What does the sister like?"
+  ],
+  "all": [
+   "Who is celebrating a birthday?",
+   "What does the sister like?"
+  ]
+ },
+ "chapter-a1-24-datum-data.js": {
+  "n": 2,
+  "en": [
+   "When is the next exam?",
+   "How many people are going on the trip?"
+  ],
+  "all": [
+   "When is the next exam?",
+   "How many people are going on the trip?"
+  ]
+ },
+ "chapter-a1-25-trennbar-data.js": {
+  "n": 2,
+  "en": [
+   "Who does Svenja call?",
+   "What will they do together?"
+  ],
+  "all": [
+   "Who does Svenja call?",
+   "What will they do together?"
+  ]
+ },
+ "chapter-a1-26-goethe3-data.js": {
+  "n": 3,
+  "en": [
+   "What does Ralf want to do?",
+   "Why is Monday not possible?",
+   "When is the appointment?"
+  ],
+  "all": [
+   "What does Ralf want to do?",
+   "Why is Monday not possible?",
+   "When is the appointment?"
+  ]
+ },
+ "chapter-a1-27-praeteritum-data.js": {
+  "n": 2,
+  "en": [
+   "Where was Doris last week?",
+   "How long were they there?"
+  ],
+  "all": [
+   "Where was Doris last week?",
+   "How long were they there?"
+  ]
+ },
+ "chapter-a1-28-perfekt-data.js": {
+  "n": 2,
+  "en": [
+   "What did Vera do yesterday?",
+   "What did they do together in the evening?"
+  ],
+  "all": [
+   "What did Vera do yesterday?",
+   "What did they do together in the evening?"
+  ]
+ },
+ "chapter-a1-29-perfekt-haben-data.js": {
+  "n": 2,
+  "en": [
+   "What did Robert prepare?",
+   "What did Miriam do to prepare?"
+  ],
+  "all": [
+   "What did Robert prepare?",
+   "What did Miriam do to prepare?"
+  ]
+ },
+ "chapter-a1-3-zahlen-data.js": {
+  "n": 2,
+  "en": [
+   "How much does the coffee cost?",
+   "How much does the newspaper cost?"
+  ],
+  "all": [
+   "How much does the coffee cost?",
+   "How much does the newspaper cost?"
+  ]
+ },
+ "chapter-a1-30-perfekt-sein-data.js": {
+  "n": 2,
+  "en": [
+   "Where did Steffi travel to?",
+   "How long did she stay?"
+  ],
+  "all": [
+   "Where did Steffi travel to?",
+   "How long did she stay?"
+  ]
+ },
+ "chapter-a1-31-partizip-praefix-data.js": {
+  "n": 2,
+  "en": [
+   "What did Wanda tidy?",
+   "What did Max do?"
+  ],
+  "all": [
+   "What did Wanda tidy?",
+   "What did Max do?"
+  ]
+ },
+ "chapter-a1-32-akkusativpronomen-data.js": {
+  "n": 3,
+  "en": [
+   "Which pronoun replaces \"den neuen Studenten\"?",
+   "Which pronoun replaces \"das Buch\"?",
+   "How does Fabian answer \"Rufst du Anna an?\""
+  ],
+  "all": [
+   "Which pronoun replaces \"den neuen Studenten\"?",
+   "Which pronoun replaces \"das Buch\"?",
+   "How does Fabian answer \"Rufst du Anna an?\""
+  ]
+ },
+ "chapter-a1-33-saetze-verbinden-data.js": {
+  "n": 2,
+  "en": [
+   "Why won\\'t Carla stay long?",
+   "Why is Max staying in bed?"
+  ],
+  "all": [
+   "Why won\\'t Carla stay long?",
+   "Why is Max staying in bed?"
+  ]
+ },
+ "chapter-a1-34-schreiben-data.js": {
+  "n": 2,
+  "en": [
+   "What are Petra and friends doing on Saturday?",
+   "What should Timo bring?"
+  ],
+  "all": [
+   "What are Petra and friends doing on Saturday?",
+   "What should Timo bring?"
+  ]
+ },
+ "chapter-a1-35-goethe4-data.js": {
+  "n": 2,
+  "en": [
+   "Why was the course great?",
+   "What did Runa send Nick?"
+  ],
+  "all": [
+   "Why was the course great?",
+   "What did Runa send Nick?"
+  ]
+ },
+ "chapter-a1-36-dativ-data.js": {
+  "n": 2,
+  "en": [
+   "Who does Alina send the card to?",
+   "What does Timo give himself?"
+  ],
+  "all": [
+   "Who does Alina send the card to?",
+   "What does Timo give himself?"
+  ]
+ },
+ "chapter-a1-37-praep-dativ-data.js": {
+  "n": 2,
+  "en": [
+   "How does Nico travel to Hamburg?",
+   "Where does Nico stay?"
+  ],
+  "all": [
+   "How does Nico travel to Hamburg?",
+   "Where does Nico stay?"
+  ]
+ },
+ "chapter-a1-38-wechselpraep-data.js": {
+  "n": 2,
+  "en": [
+   "Where should the table go?",
+   "Where are the napkins already?"
+  ],
+  "all": [
+   "Where should the table go?",
+   "Where are the napkins already?"
+  ]
+ },
+ "chapter-a1-39-ortsangaben-data.js": {
+  "n": 3,
+  "en": [
+   "Which way first?",
+   "How far is the station?",
+   "Where is the supermarket?"
+  ],
+  "all": [
+   "Which way first?",
+   "How far is the station?",
+   "Where is the supermarket?"
+  ]
+ },
+ "chapter-a1-4-hallo-data.js": {
+  "n": 2,
+  "en": [
+   "What is Frau Klein making for David?",
+   "How old is David?"
+  ],
+  "all": [
+   "What is Frau Klein making for David?",
+   "How old is David?"
+  ]
+ },
+ "chapter-a1-40-verben-dativ-data.js": {
+  "n": 2,
+  "en": [
+   "What is Nele shopping for?",
+   "Whose bag is it?"
+  ],
+  "all": [
+   "What is Nele shopping for?",
+   "Whose bag is it?"
+  ]
+ },
+ "chapter-a1-41-dativpronomen-data.js": {
+  "n": 3,
+  "en": [
+   "What is the speaker missing?",
+   "Whom does the pen belong to?",
+   "How does he answer \"Wie geht es dir?\""
+  ],
+  "all": [
+   "What is the speaker missing?",
+   "Whom does the pen belong to?",
+   "How does he answer \"Wie geht es dir?\""
+  ]
+ },
+ "chapter-a1-42-welcher-dieser-data.js": {
+  "n": 2,
+  "en": [
+   "What is Jonas buying?",
+   "Which pen does Jonas choose?"
+  ],
+  "all": [
+   "What is Jonas buying?",
+   "Which pen does Jonas choose?"
+  ]
+ },
+ "chapter-a1-43-smalltalk-man-data.js": {
+  "n": 2,
+  "en": [
+   "Where are Yvonne and Georg?",
+   "What is Yvonne doing today?"
+  ],
+  "all": [
+   "Where are Yvonne and Georg?",
+   "What is Yvonne doing today?"
+  ]
+ },
+ "chapter-a1-44-imperativ-modal2-data.js": {
+  "n": 2,
+  "en": [
+   "What is wrong with Marco this time?"
+  ],
+  "all": [
+   "What is wrong with Marco this time?",
+   "May Marco do sport?"
+  ]
+ },
+ "chapter-a1-45-telefonieren-data.js": {
+  "n": 3,
+  "en": [
+   "How does Ben introduce himself?",
+   "Which phrase does he use to ask for a repeat?",
+   "When does the course begin?"
+  ],
+  "all": [
+   "How does Ben introduce himself?",
+   "Which phrase does he use to ask for a repeat?",
+   "When does the course begin?"
+  ]
+ },
+ "chapter-a1-46-zeitangaben-data.js": {
+  "n": 2,
+  "en": [
+   "When is the move?",
+   "How long does the move take?"
+  ],
+  "all": [
+   "When is the move?",
+   "How long does the move take?"
+  ]
+ },
+ "chapter-a1-47-goethe-final-data.js": {
+  "n": 3,
+  "en": [
+   "How many points did Timo get?",
+   "Which part was Timo\\'s best result?",
+   "What comes next?"
+  ],
+  "all": [
+   "How many points did Timo get?",
+   "Which part was Timo\\'s best result?",
+   "What comes next?"
+  ]
+ },
+ "chapter-a1-5-werbistdu-data.js": {
+  "n": 2,
+  "en": [
+   "What is Paul looking for?",
+   "What do Lena and Paul decide to do?"
+  ],
+  "all": [
+   "What is Paul looking for?",
+   "What do Lena and Paul decide to do?"
+  ]
+ },
+ "chapter-a1-6-wfragen-data.js": {
+  "n": 2,
+  "en": [
+   "Where does Felix like to study best?",
+   "Why does Felix study in the evenings?"
+  ],
+  "all": [
+   "Where does Felix like to study best?",
+   "Why does Felix study in the evenings?"
+  ]
+ },
+ "chapter-a1-7-jaodernein-data.js": {
+  "n": 2,
+  "en": [
+   "When does Mia have time to come?",
+   "Does Mia understand the homework?"
+  ],
+  "all": [
+   "When does Mia have time to come?",
+   "Does Mia understand the homework?"
+  ]
+ },
+ "chapter-a1-8-goethemini1-data.js": {
+  "n": 2,
+  "en": [
+   "What is Nina checking?",
+   "Where does Daniel live now?"
+  ],
+  "all": [
+   "What is Nina checking?",
+   "Where does Daniel live now?"
+  ]
+ },
+ "chapter-a1-9-verben-data.js": {
+  "n": 2,
+  "en": [
+   "What does Clara do today?",
+   "What does Clara do tomorrow?"
+  ],
+  "all": [
+   "What does Clara do today?",
+   "What does Clara do tomorrow?"
+  ]
+ },
+ "chapter-a2-1-genitiv-data.js": {
+  "n": 2,
+  "en": [
+   "Whose jacket is on the chair?",
+   "Whose keys are they?"
+  ],
+  "all": [
+   "Whose jacket is on the chair?",
+   "Whose keys are they?"
+  ]
+ },
+ "chapter-a2-10-goethe-mini-1-data.js": {
+  "n": 2,
+  "en": [
+   "Why couldn\\'t Nick study much?",
+   "Whose book did Runa use?"
+  ],
+  "all": [
+   "Why couldn\\'t Nick study much?",
+   "Whose book did Runa use?"
+  ]
+ },
+ "chapter-a2-11-wenn-data.js": {
+  "n": 2,
+  "en": [
+   "What does Wiebke do when she has free time?",
+   "What do they do if it rains?"
+  ],
+  "all": [
+   "What does Wiebke do when she has free time?",
+   "What do they do if it rains?"
+  ]
+ },
+ "chapter-a2-12-reflexive-verben-data.js": {
+  "n": 2,
+  "en": [
+   "How does Enya feel?",
+   "What is Enya doing right now?"
+  ],
+  "all": [
+   "How does Enya feel?",
+   "What is Enya doing right now?"
+  ]
+ },
+ "chapter-a2-13-praepositionen-dativ-data.js": {
+  "n": 2,
+  "en": [
+   "Where did Timo just come from?",
+   "How does he get to his course?"
+  ],
+  "all": [
+   "Where did Timo just come from?",
+   "How does he get to his course?"
+  ]
+ },
+ "chapter-a2-14-wechselpraepositionen-data.js": {
+  "n": 2,
+  "en": [
+   "Where is Frieda putting the lamp?",
+   "Where does the picture hang?"
+  ],
+  "all": [
+   "Where is Frieda putting the lamp?",
+   "Where does the picture hang?"
+  ]
+ },
+ "chapter-a2-15-positions-richtungsverben-data.js": {
+  "n": 2,
+  "en": [
+   "Where are the documents lying?",
+   "What does Timo do with the documents?"
+  ],
+  "all": [
+   "Where are the documents lying?",
+   "What does Timo do with the documents?"
+  ]
+ },
+ "chapter-a2-16-goethe-mini-2-data.js": {
+  "n": 2,
+  "en": [
+   "What can Timo do if he fails?",
+   "How does Frau Wolter describe Timo\\'s effort?"
+  ],
+  "all": [
+   "What can Timo do if he fails?",
+   "How does Frau Wolter describe Timo\\'s effort?"
+  ]
+ },
+ "chapter-a2-17-werden-data.js": {
+  "n": 2,
+  "en": [
+   "What will Timo probably do next year?",
+   "What does Timo joke he will become more often?"
+  ],
+  "all": [
+   "What will Timo probably do next year?",
+   "What does Timo joke he will become more often?"
+  ]
+ },
+ "chapter-a2-18-ortsangaben-data.js": {
+  "n": 2,
+  "en": [
+   "Where should Timo turn for the pharmacy?",
+   "Where is the station?"
+  ],
+  "all": [
+   "Where should Timo turn for the pharmacy?",
+   "Where is the station?"
+  ]
+ },
+ "chapter-a2-19-indirekte-fragen-data.js": {
+  "n": 2,
+  "en": [
+   "What does Franka not know?",
+   "What does the app show?"
+  ],
+  "all": [
+   "What does Franka not know?",
+   "What does the app show?"
+  ]
+ },
+ "chapter-a2-2-perfekt-review-data.js": {
+  "n": 2,
+  "en": [
+   "What did Fynn photograph?",
+   "What did Insa make in her cooking class?"
+  ],
+  "all": [
+   "What did Fynn photograph?",
+   "What did Insa make in her cooking class?"
+  ]
+ },
+ "chapter-a2-20-was-fuer-ein-data.js": {
+  "n": 2,
+  "en": [
+   "What kind of book is Solveig looking for?",
+   "What exercises does Solveig like best?"
+  ],
+  "all": [
+   "What kind of book is Solveig looking for?",
+   "What exercises does Solveig like best?"
+  ]
+ }
+}

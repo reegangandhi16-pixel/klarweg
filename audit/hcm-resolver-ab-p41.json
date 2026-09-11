@@ -1,0 +1,304 @@
+{
+ "phase": "41 — completed resolver A/B proof using the REAL lookupWord",
+ "generatedAt": "2026-08-15T10:14:38.501Z",
+ "verdict": "NOT SAFE — Candidate 2 fails the gate, and for a reason that overturns the P38/P39 hypothesis",
+ "exportProof": {
+  "method": "diagnostic copy of chapter-app.js served inline; export appended immediately after the existing `window.KW_roleFor = roleFor;` (chapter-app.js:966), which is provably inside the main IIFE",
+  "verified": "typeof window.__P40_LOOKUPWORD === \"function\" — all 12 chapters booted with the API present, 0 errors",
+  "harnessBugsFoundAndFixed": [
+   "P40 anchored on the file LAST \"})();\" — that closes a nested IIFE, so the export saw no lookupWord",
+   "String.replace interprets $$ in the REPLACEMENT string and chapter-app.js contains $$( ) helpers, so the injected source was being silently corrupted; replaced with a function replacement"
+  ],
+  "productionFileUntouched": true
+ },
+ "headlineFinding": {
+  "claim": "lookupWord ALREADY returns the correct lexeme by default for both homograph groups. The wrong popup colour is produced downstream, not by lookupWord.",
+  "deutsch": "lookupWord(\"deutsch\") with NO expectedClass returns type \"Adjective\" — already correct",
+  "zahlen": "lookupWord(\"Zahlen\") with NO expectedClass returns type \"Verb\" — already correct",
+  "consequence": "the P38/P39 diagnosis (a case-blind WORDIDX slot causing the popup to resolve the wrong lexeme) is DISPROVEN as the cause of the rendered defect. The collision exists in the index, but the resolver own precedence already picks the right entry.",
+  "whereTheDefectMustBe": "somewhere between lookupWord and the rendered popup headword colour — candidates are resolveClickableWord merge step, renderWordPop role derivation (chapter-app.js:2038-2052), or the occurrence-role injection at :2871. NOT IDENTIFIED in this phase.",
+  "confidence": "PROVEN for the resolver outputs (real function, 0 errors); the downstream location is UNIDENTIFIED"
+ },
+ "rawResults": {
+  "deutsch": [
+   {
+    "surface": "deutsch",
+    "expectedClass": "adjective",
+    "current": "deutsch / Adjective",
+    "candidate": "deutsch / Adjective",
+    "changed": false
+   },
+   {
+    "surface": "deutsch",
+    "expectedClass": null,
+    "current": "deutsch / Adjective",
+    "candidate": "deutsch / Adjective",
+    "changed": false,
+    "note": "DEFAULT IS ALREADY CORRECT"
+   },
+   {
+    "surface": "Deutsch",
+    "expectedClass": "noun",
+    "current": "Deutsch / Adjective",
+    "candidate": "Deutsch / Noun language",
+    "changed": true,
+    "note": "expectedClass DOES fix the capitalised language noun"
+   },
+   {
+    "surface": "Deutsch",
+    "expectedClass": null,
+    "current": "Deutsch / Adjective",
+    "candidate": "Deutsch / Adjective",
+    "changed": false,
+    "note": "capitalised noun currently resolves to the ADJECTIVE — the real collision victim"
+   }
+  ],
+  "zahlen": [
+   {
+    "surface": "Zahlen",
+    "expectedClass": "verb",
+    "current": "Zahlen / Verb",
+    "candidate": "Zahlen / Verb",
+    "changed": false
+   },
+   {
+    "surface": "Zahlen",
+    "expectedClass": null,
+    "current": "Zahlen / Verb",
+    "candidate": "Zahlen / Verb",
+    "changed": false,
+    "note": "\"Zahlen, bitte!\" ALREADY resolves as the verb"
+   },
+   {
+    "surface": "Zahlen",
+    "expectedClass": "noun",
+    "current": "Zahlen / Verb",
+    "candidate": "Zahlen / Noun plural",
+    "changed": true,
+    "note": "expectedClass can select the noun when the occurrence is a noun"
+   },
+   {
+    "surface": "zahlen",
+    "expectedClass": "verb",
+    "current": "zahlen / Verb",
+    "candidate": "zahlen / Verb",
+    "changed": false
+   },
+   {
+    "surface": "zahlen",
+    "expectedClass": null,
+    "current": "zahlen / Verb",
+    "candidate": "zahlen / Verb",
+    "changed": false
+   },
+   {
+    "surface": "zahlen",
+    "expectedClass": "noun",
+    "current": "zahlen / Verb",
+    "candidate": "zahlen / Noun plural",
+    "changed": true
+   }
+  ],
+  "letterA": [
+   {
+    "surface": "a",
+    "expectedClass": null,
+    "current": "Adverb",
+    "candidate": "Adverb",
+    "changed": false
+   },
+   {
+    "surface": "a",
+    "expectedClass": "adverb",
+    "current": "Adverb",
+    "candidate": "Adverb",
+    "changed": false
+   },
+   {
+    "surface": "e",
+    "expectedClass": null,
+    "current": "Letter",
+    "candidate": "Letter",
+    "changed": false,
+    "note": "OTHER single letters resolve as type \"Letter\" — only \"a\" resolves as Adverb"
+   },
+   {
+    "surface": "i",
+    "expectedClass": null,
+    "current": "Letter",
+    "candidate": "Letter",
+    "changed": false
+   }
+  ],
+  "byDesign": [
+   {
+    "surface": "Nein",
+    "expectedClass": "adverb",
+    "current": "Particle",
+    "candidate": "Answer no",
+    "changed": true,
+    "candidateRejected": false,
+    "legitimateRefinementPreserved": false,
+    "note": "THE ONLY BY-DESIGN CONTROL THAT MOVED. Supplying adverb changes the resolved entry from Particle to a different entry (\"Answer no\"). Whether that is better or worse is a curriculum question — but it is a CHANGE to a case classified BY-DESIGN and no-fix, which the gate does not permit."
+   },
+   {
+    "surface": "Nein",
+    "expectedClass": null,
+    "current": "Particle",
+    "candidate": "Particle",
+    "changed": false
+   },
+   {
+    "surface": "Nicht",
+    "expectedClass": "adverb",
+    "current": "Adverb (negation)",
+    "candidate": "Adverb (negation)",
+    "changed": false,
+    "legitimateRefinementPreserved": true
+   },
+   {
+    "surface": "moechte",
+    "expectedClass": "verb",
+    "current": "Verb (modal)",
+    "candidate": "Verb (modal)",
+    "changed": false,
+    "legitimateRefinementPreserved": true
+   },
+   {
+    "surface": "Wann",
+    "expectedClass": "adverb",
+    "current": "Adverb",
+    "candidate": "Adverb",
+    "changed": false,
+    "legitimateRefinementPreserved": true
+   },
+   {
+    "surface": "muss",
+    "expectedClass": "verb",
+    "current": "Verb",
+    "candidate": "Verb",
+    "changed": false,
+    "legitimateRefinementPreserved": true
+   }
+  ],
+  "rcbControls": [
+   {
+    "surface": "dokumentiert",
+    "mismatch": "adjective/verb",
+    "expectedClass": "verb",
+    "current": "Adjective (Partizip II)",
+    "candidate": null,
+    "changed": true,
+    "candidateNull": true,
+    "note": "SUPPLYING THE SPAN ROLE RETURNS NULL — the entry is rejected and NOTHING replaces it"
+   },
+   {
+    "surface": "dokumentiert",
+    "expectedClass": "adjective",
+    "current": "Adjective (Partizip II)",
+    "candidate": "Adjective (Partizip II)",
+    "changed": false
+   },
+   {
+    "surface": "infolgedessen",
+    "mismatch": "adverb/verb",
+    "expectedClass": "verb",
+    "current": "Adverb (discourse marker)",
+    "candidate": null,
+    "changed": true,
+    "candidateNull": true
+   },
+   {
+    "surface": "infolgedessen",
+    "expectedClass": "adverb",
+    "current": "Adverb (discourse marker)",
+    "candidate": "Adverb (discourse marker)",
+    "changed": false
+   },
+   {
+    "surface": "um",
+    "mismatch": "preposition/adverb",
+    "expectedClass": "adverb",
+    "current": "Preposition",
+    "candidate": null,
+    "changed": true,
+    "candidateNull": true
+   },
+   {
+    "surface": "um",
+    "expectedClass": "preposition",
+    "current": "Preposition",
+    "candidate": "Preposition",
+    "changed": false
+   },
+   {
+    "surface": "sich",
+    "mismatch": "pronoun/adverb",
+    "expectedClass": "adverb",
+    "current": "Pronoun",
+    "candidate": null,
+    "changed": true,
+    "candidateNull": true
+   },
+   {
+    "surface": "sich",
+    "expectedClass": "pronoun",
+    "current": "Pronoun",
+    "candidate": "Pronoun",
+    "changed": false
+   }
+  ]
+ },
+ "decisiveRcbFinding": {
+  "observation": "in ALL FOUR RCB controls, supplying the OCCURRENCE role as expectedClass caused lookupWord to return null — the correct entry was rejected and nothing took its place",
+  "whyThisMatters": "in auto-linkified prose the occurrence role IS a guess (guessRole). RCB findings are, by definition, occurrences where the guess contradicts the true lexeme class. There are ~1,009 of them. Supplying the guessed class as expectedClass would delete the correct entry for every one, replacing a mis-coloured popup with NO popup.",
+  "severity": "this is strictly worse than the defect being fixed",
+  "confidence": "PROVEN — four of four, real resolver, no errors"
+ },
+ "safetyGate": {
+  "1_realLookupWordUsed": "PASS",
+  "2_deutschAdjectiveResolvesCorrectly": "PASS but MOOT — it already resolved correctly without the candidate",
+  "3_DeutschLanguageNounRemainsCorrect": "FAIL — it is currently WRONG (resolves to Adjective) and only becomes correct WITH expectedClass",
+  "4_ZahlenBitteResolvesAsVerb": "PASS but MOOT — already correct by default",
+  "5_legitimateZahlenNounRemainsNoun": "CONDITIONAL — only correct when a noun expectedClass is supplied",
+  "6_byDesignRemainValid": "FAIL — Nein changes from Particle to \"Answer no\"",
+  "7_rcbControlsDoNotRegress": "FAIL — 4/4 return null",
+  "8_noResolverErrors": "PASS — 0 errors across 12 chapters",
+  "overall": "three conditions FAIL -> NOT SAFE"
+ },
+ "candidate2Verdict": "NOT SAFE. It does not fix what P38/P39 believed was broken (both defaults are already correct), it changes a by-design case, and it would null out the resolved entry for ~1,009 RCB occurrences whose span role is a guess.",
+ "letterAVerdict": {
+  "classification": "requires Candidate 4 — confirmed by new evidence",
+  "newEvidence": "other single letters (\"e\", \"i\") resolve to type \"Letter\"; only \"a\" resolves to type \"Adverb\". So the defect is not the single-letter category (which exists and works) but a specific \"a\" entry that is typed Adverb.",
+  "expectedClassSolvesIt": "NO — supplying adverb changes nothing (Adverb -> Adverb)",
+  "smallestFix": "still open: either the \"a\" lexicon entry type, or a single-letter guard in guessRole. This phase forbids touching guessRole and did not identify which entry supplies the Adverb type."
+ },
+ "whatChangesForTheOverallPlan": [
+  "the 6 homograph HCM (deutsch x4, Zahlen x2) can no longer be attributed to lookupWord — their cause is downstream and unidentified",
+  "P38 group D3/D4 and P39 Part B/C conclusions about the popup resolving the wrong lexeme are superseded on the mechanism, though the WORDIDX collision they document is real",
+  "no fix should be attempted on any of the 7 until the downstream step that produces the popup headword colour is traced"
+ ],
+ "nextPhase": "trace the popup path for one deutsch occurrence end to end: lookupWord output (now known correct) -> resolveClickableWord merge -> renderWordPop role derivation (:2038-2052) -> ROLE_COLOR_VAR (:2022) -> rendered headword colour. The defect is provably in that span.",
+ "unresolvedQuestions": [
+  "which step turns a correctly-resolved Adjective entry into an object-green headword?",
+  "is the capitalised \"Deutsch\" language-noun mis-resolution (Adjective) itself a live learner-facing defect anywhere in the corpus?",
+  "what supplies type \"Adverb\" for the single letter \"a\"?"
+ ],
+ "status": {
+  "productionModified": false,
+  "diagnosticCopyModified": true,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "qaEngineModified": false,
+  "assertionsModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "chapter/qa-hcm-resolver-p41.html",
+  "audit/hcm-resolver-ab-p41.json"
+ ],
+ "filesModified": "none (production)"
+}

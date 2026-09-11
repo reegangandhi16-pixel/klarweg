@@ -1,0 +1,32 @@
+{
+ "count": 39307,
+ "byFamily": {
+  "story": 1773,
+  "listening": 1362,
+  "reading": 259,
+  "speaking": 1231,
+  "grammar": 116,
+  "vocabulary": 15038,
+  "clickable-word": 15682,
+  "word-form": 3846
+ },
+ "validation": {
+  "noText": 0,
+  "noLang": 0,
+  "noVoice": 0,
+  "noRate": 15038,
+  "noId": 0,
+  "noPath": 0,
+  "noKey": 0,
+  "noLookup": 0,
+  "badVoice": 0,
+  "badRate": 0
+ },
+ "manifestKeyCollisions": 35,
+ "outputPathCollisions": 0,
+ "excluded": {
+  "dropD": 715,
+  "dropShared": 82,
+  "dupes": 0
+ }
+}

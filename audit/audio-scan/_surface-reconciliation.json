@@ -1,0 +1,107 @@
+{
+ "$schema": "klarweg-audio-audit/surface-reconciliation/v1",
+ "generatedAt": "2026-09-10",
+ "question": "the +22 unique-surface delta between the pre- and post-repair 259-page scans",
+ "finding": "NOT a page/data-set reuse. No data set in the project is loaded by more than one page (verified across all 259 pages: audit/audio-scan/_page-dataset-map.json). The 259th page is a distinct chapter whose data file is named differently.",
+ "reusedPage": null,
+ "reusedDataSet": null,
+ "actualCause": {
+  "page": "chapter/chapter-a1-3-nominativ.html",
+  "dataSet": "chapter/chapter-data.js",
+  "chapter": "a1-3-nominativ",
+  "level": "A1",
+  "title": "Der Nominativ",
+  "why": "chapter-data.js is the original legacy A1 Ch3 data file and does not match the chapter-<id>-data.js glob the 258-file static extract used. The page renders normally in the UI, so its controls and clickable spans appeared in the runtime scans while its authored rows were absent from the static extract. The pre-repair scan captured the same 259 pages; the +22/+982 delta is scan-order variance in which page first introduces a surface, not new content."
+ },
+ "the22Surfaces": {
+  "status": "FULLY REPRESENTED — no inventory change needed for the word-popup layer",
+  "newClickableWordAssets": 0,
+  "newParadigmFormAssets": 0,
+  "evidence": "every clickable surface on the 259th page resolves through global-lexicon.js to an asset text already present in audio-inventory-words.json (audit/audio-scan/_delta-259th.json → wordLayerDelta). The surfaces are shared A1 nominative vocabulary that other A1 chapters also make clickable.",
+  "duplicateOrIncorrectIdsThatWouldBeGenerated": 0
+ },
+ "missingFromMasterInventory": {
+  "count": 9,
+  "families": {
+   "grammar": 2,
+   "reading": 1,
+   "listening": 4,
+   "speaking": 2
+  },
+  "detail": "grammar 2, reading 1, listening 4, speaking 2 — authored rows of chapter-data.js that the static extract never saw. 24 of the chapter's 33 assets were already present (shared with other chapters by content hash), which is why the gap was small. Added to the C set.",
+  "assets": [
+   {
+    "assetId": "d053b38e09c12dfd",
+    "text": "Der Hund schläft.",
+    "family": "grammar",
+    "voice": "de-DE-Neural2-F",
+    "rate": 0.85
+   },
+   {
+    "assetId": "8bd33ff201a0dbea",
+    "text": "Das Auto fährt schnell.",
+    "family": "grammar",
+    "voice": "de-DE-Neural2-F",
+    "rate": 0.85
+   },
+   {
+    "assetId": "a0f80efcd43f8bd3",
+    "text": "Der Mann liest ein Buch Die Frau trinkt Kaffee Das Kind spielt im Garten Das Haus ist groß",
+    "family": "reading",
+    "voice": "de-DE-Neural2-F",
+    "rate": 0.85
+   },
+   {
+    "assetId": "98cb5f33c54c10c8",
+    "text": "Ich heiße Anna.",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "rate": 0.85
+   },
+   {
+    "assetId": "415db518a4554965",
+    "text": "Der Mann liest ein Buch.",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "rate": 0.85
+   },
+   {
+    "assetId": "623da397678a03ae",
+    "text": "Der Mann trinkt Kaffee.",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "rate": 0.85
+   },
+   {
+    "assetId": "3565247c44bbafeb",
+    "text": "Sie liest dem Kind eine Geschichte.",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "rate": 0.85
+   },
+   {
+    "assetId": "f2f7e1d52ce9b058",
+    "text": "Die Frau trinkt Kaffee.",
+    "family": "speaking",
+    "voice": "de-DE-Neural2-F",
+    "rate": 0.85
+   },
+   {
+    "assetId": "7e5787e7340bc2b9",
+    "text": "Das Kind spielt im Garten.",
+    "family": "speaking",
+    "voice": "de-DE-Neural2-F",
+    "rate": 0.85
+   }
+  ]
+ },
+ "idDefectFound": {
+  "severity": "must fix before generation",
+  "count": 32,
+  "issue": "occurrenceId collision. chapter-data.js declares id \"a1-3-nominativ\" and chapter-a1-3-zahlen-data.js declares \"a1-3-zahlen\" — TWO different A1 chapters both numbered 3. The occurrenceId scheme <LEVEL>_<chapter#3>_<KIND><seq3> therefore mints A1_003_G001, A1_003_L001 … twice for different content.",
+  "assetIdsAffected": 0,
+  "assetIdNote": "assetIds are content hashes of text+voice+rate and do NOT collide — no duplicate or wrong MP3 would be produced. The collision is confined to the occurrence ledger, which would become ambiguous when reconciling a generation run back to the UI.",
+  "fix": "make the occurrenceId carry the chapter slug rather than the bare number: A1_a1-3-nominativ_G001 vs A1_a1-3-zahlen_G001. Deterministic and stable. Inventory-only change; no chapter data is touched."
+ },
+ "chapterContentModified": false
+}

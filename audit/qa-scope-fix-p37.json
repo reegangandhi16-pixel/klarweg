@@ -1,0 +1,297 @@
+{
+ "phase": "37 — apply the proven QA scope fix (QA ENGINE ONLY)",
+ "generatedAt": "2026-08-15T07:52:50.325Z",
+ "exactChange": {
+  "file": "chapter/qa-engine.js",
+  "nothingElseTouched": true,
+  "additions": [
+   {
+    "what": "isDecorativeMcqSpan(n) + decorativeIdx map, built AFTER the node list is finalised",
+    "where": "run(), just before finding generation",
+    "code": "function isDecorativeMcqSpan(n){ return !!(n && n.closest && n.closest('button.mcq-option')); } var decorativeIdx={}; nodes.forEach(function(n,i){ if(isDecorativeMcqSpan(n)) decorativeIdx[i]=true; });",
+    "note": "node SELECTION is untouched — nodes keep their original positions, so every occurrence index is preserved"
+   },
+   {
+    "what": "post-finding filter",
+    "where": "run(), immediately before the return",
+    "code": "var suppressed = findings.filter(function(f){ return f.index>=0 && decorativeIdx[f.index]; }); findings = findings.filter(function(f){ return !(f.index>=0 && decorativeIdx[f.index]); });",
+    "note": "index>=0 guard keeps chapter-level findings (LETTER_ROLE_UNSTABLE, index -1) untouched"
+   },
+   {
+    "what": "three reporting fields",
+    "where": "run() return object",
+    "fields": [
+     "decorativeNodes",
+     "suppressedDecorative",
+     "suppressedDecorativeCounts"
+    ],
+    "note": "additive only; occurrences/checked/findings/counts/clean keep their existing meaning"
+   },
+   {
+    "what": "results.decorativeScope self-test group",
+    "where": "selfTest()",
+    "checks": 6
+   }
+  ],
+  "rationale": "colorWordsIn (chapter-app.js:2928) has exactly two call sites (:3050, :3349), both colorWordsIn(b.querySelector(\".de\")) where b is <button class=\"mcq-option\">. P35 proved those spans bind no click handler and open no popup; P36 proved the ancestor test isolates them exactly.",
+  "notDone": [
+   "no chapter data",
+   "no CSS",
+   "no chapter-app.js",
+   "no production rendering change",
+   "no assertion change",
+   "no lint change",
+   "no baseline overwritten"
+  ]
+ },
+ "selfTests": {
+  "before": 31,
+  "after": 37,
+  "pass": true,
+  "failed": [],
+  "newGroup": "decorativeScope",
+  "checks": {
+   "decorativeSpanExcluded": true,
+   "ordinaryDeLinkRetained": true,
+   "authoredTokenRetained": true,
+   "buttonWithoutMcqOptionRetained": true,
+   "indicesUnchanged": true,
+   "chapterLevelFindingKept": true
+  },
+  "existingGroupsStillPassing": [
+   "badgeClass",
+   "roleCompat",
+   "colourCodes",
+   "position"
+  ]
+ },
+ "targetedRegression": {
+  "chapters": 12,
+  "allStable": true,
+  "result": "PASS — every chapter matched the P36-predicted post-fix state exactly, and the harness re-filter dropped 0 (nothing decorative survived the engine)",
+  "perChapter": [
+   {
+    "file": "b2-15",
+    "occ": 831,
+    "findings": 0,
+    "was": 3,
+    "note": "all 3 Obgleich HCM gone"
+   },
+   {
+    "file": "b2-16",
+    "occ": 832,
+    "findings": 2,
+    "was": 8,
+    "codes": {
+     "NO_POPUP": 1,
+     "CASE_COLLISION_CAPITALISED": 1
+    },
+    "note": "3 HCM + 3 RCB gone; genuine NO_POPUP and CCC retained"
+   },
+   {
+    "file": "c1-26",
+    "occ": 282,
+    "findings": 0,
+    "was": 6
+   },
+   {
+    "file": "b2-45",
+    "occ": 869,
+    "findings": 0,
+    "was": 4
+   },
+   {
+    "file": "b1-17",
+    "occ": 957,
+    "findings": 7,
+    "was": 9,
+    "codes": {
+     "ROLE_CONTRADICTS_BADGE": 7
+    },
+    "note": "7 genuine RCB retained"
+   },
+   {
+    "file": "a1-34",
+    "occ": 496,
+    "findings": 7,
+    "was": 9,
+    "codes": {
+     "ROLE_CONTRADICTS_BADGE": 5,
+     "CASE_COLLISION_CAPITALISED": 2
+    }
+   },
+   {
+    "file": "a1-37",
+    "occ": 657,
+    "findings": 0,
+    "was": 2
+   },
+   {
+    "file": "a1-8 (control)",
+    "occ": 707,
+    "findings": 5,
+    "was": 5,
+    "keptHcm": [
+     "133 deutsch",
+     "542 deutsch",
+     "581 deutsch",
+     "585 deutsch"
+    ]
+   },
+   {
+    "file": "a1-15 (control)",
+    "occ": 797,
+    "findings": 11,
+    "was": 11,
+    "keptHcm": [
+     "168 Zahlen",
+     "581 Zahlen"
+    ]
+   },
+   {
+    "file": "a1-39 (control)",
+    "occ": 1231,
+    "findings": 2,
+    "was": 2,
+    "keptHcm": [
+     "570 a"
+    ]
+   },
+   {
+    "file": "a1-7 (control)",
+    "occ": 388,
+    "findings": 6,
+    "was": 6,
+    "keptHcm": [
+     "243 Nein",
+     "328 Nein",
+     "386 Nein"
+    ]
+   },
+   {
+    "file": "a1-1 (pure control)",
+    "occ": 242,
+    "findings": 0,
+    "was": 0
+   }
+  ],
+  "indicesStable": "occurrence counts identical to the pre-fix run in every chapter (b2-15 831, a1-39 1231, a1-1 242, a1-7 388) — the filter did not renumber anything"
+ },
+ "fullSweep": {
+  "driver": "chapter/qa-sweep-diag.html?key=kw_sweep_p37_diag — one awaited run, no concurrent run(), no downloads during measurement, per-finding identity preserved",
+  "chapters": 259,
+  "measured": 259,
+  "readyState": {
+   "stable": 259
+  },
+  "errors": 0,
+  "injectionErrors": 0,
+  "measurementErrors": 0,
+  "hardTimeouts": {
+   "duringFirstPass": 1,
+   "chapter": "chapter-c2-04-nomen-verb-verbindungen.html",
+   "handling": "first pass returned hard-timeout with 0 occurrences / 0 findings and was wrongly counted clean; discarded and re-measured in isolation to stable. Only the stable reading is counted. Same procedure as P15/P21/P23.",
+   "finalHardTimeouts": 0
+  },
+  "totals": {
+   "occurrences": 156297,
+   "findings": 1379,
+   "hcm": 22,
+   "rcb": 1009,
+   "clean": 75,
+   "byCode": {
+    "ROLE_CONTRADICTS_BADGE": 1009,
+    "CASE_COLLISION_CAPITALISED": 236,
+    "HEADWORD_COLOUR_MISMATCH": 22,
+    "PARADIGM_CLASS_MISMATCH": 76,
+    "NO_POPUP": 22,
+    "CASE_COLLISION_LOWERCASE": 14,
+    "BLACK_FALLBACK": 0
+   }
+  }
+ },
+ "delta": {
+  "vsAuthoritativeP23P24": {
+   "occurrences": {
+    "before": 156299,
+    "after": 156297,
+    "delta": -2
+   },
+   "findings": {
+    "before": 1405,
+    "after": 1379,
+    "delta": -26
+   },
+   "clean": {
+    "before": 71,
+    "after": 75,
+    "delta": 4
+   },
+   "HEADWORD_COLOUR_MISMATCH": {
+    "before": 37,
+    "after": 22,
+    "delta": -15
+   },
+   "ROLE_CONTRADICTS_BADGE": {
+    "before": 1020,
+    "after": 1009,
+    "delta": -11
+   },
+   "CASE_COLLISION_CAPITALISED": {
+    "before": 236,
+    "after": 236,
+    "delta": 0
+   },
+   "PARADIGM_CLASS_MISMATCH": {
+    "before": 76,
+    "after": 76,
+    "delta": 0
+   },
+   "NO_POPUP": {
+    "before": 22,
+    "after": 22,
+    "delta": 0
+   },
+   "CASE_COLLISION_LOWERCASE": {
+    "before": 14,
+    "after": 14,
+    "delta": 0
+   },
+   "BLACK_FALLBACK": {
+    "before": 0,
+    "after": 0,
+    "delta": 0
+   }
+  },
+  "expectedVsMeasured": {
+   "expectedHcm": "37 → ~23",
+   "measuredHcm": "37 → 22",
+   "expectedRcb": "1020 → ~1009",
+   "measuredRcb": "1020 → 1009 (exact)",
+   "hcmDiscrepancy": "one MORE HCM removed than the 14 predicted. 15 removed, not 14.",
+   "explanation": "the 15th is a1-11-negation, which P22/P23 already characterised as carrying a non-reproducible extra HCM (\"Nein\", speaking/311) that appears in some full-sweep runs and never in isolation (0/6 isolated runs). This sweep did not produce it. It is measurement variance already documented, NOT an effect of the scope filter — the filter can only remove findings on nodes inside button.mcq-option, and that node is not one.",
+   "confidence": "STRONGLY SUPPORTED — consistent with the documented a1-11 behaviour; not independently re-proven in this phase"
+  },
+  "occurrenceDelta": "−2 (156,299 → 156,297). Not attributable to the filter, which does not touch node selection. Consistent with the ±small occurrence drift measured repeatedly in P22/P23/P24 across unedited chapters.",
+  "cleanDelta": "+4 (71 → 75) — the four chapters whose only findings were decorative (b2-15, c1-26, b2-45, a1-37) are now clean"
+ },
+ "confirmations": {
+  "indicesRemainedStable": "YES — node selection untouched; occurrence counts unchanged in all 12 targeted chapters and within documented drift corpus-wide",
+  "genuineInteractiveFindingsRemain": "YES — HCM retained in 12 chapters (a1-8 deutsch ×4, a1-19 ×4, a1-7 Nein ×3, a1-15 Zahlen ×2, a2-2 ×2, a1-4, a1-11, a1-14, a1-21, a1-25, a1-39 letter a, c2-08); all G-B and G-C cases intact",
+  "productionRenderingUntouched": "YES — chapter-app.js, chapter.css and all chapter data are byte-unchanged; only qa-engine.js was edited",
+  "nonHcmRcbCodesUnaffected": "YES — CCC 236, PCM 76, NO_POPUP 22, CCL 14, BLACK_FALLBACK 0, all identical"
+ },
+ "remainingHcmPopulation": {
+  "count": 22,
+  "note": "P30 catalogued 21 DATA/AUTHORING + 16 BY-DESIGN = 37. Removing the 14 decorative leaves 7 genuine DATA/AUTHORING (G-B deutsch ×4, Zahlen ×2, G-C letter a) + 16 BY-DESIGN = 23 expected; 22 measured, the difference being the a1-11 variance record above.",
+  "notResolvedInThisPhase": "the remaining 22 are untouched, as instructed"
+ },
+ "filesCreated": [
+  "audit/qa-scope-fix-p37.json",
+  "audit/qa-baseline-p37-diagnostic.json"
+ ],
+ "filesModified": [
+  "chapter/qa-engine.js (scope filter + self-tests only)"
+ ],
+ "baselinesOverwritten": "none — P14/P15/P21/P23/P24 artifacts untouched"
+}

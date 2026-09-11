@@ -1,0 +1,1779 @@
+{
+ "a1_keys": 1902,
+ "a2_keys": 1444,
+ "a2_vocab_terms": 1525,
+ "a2_missing": 216,
+ "a2_add_free": [
+  {
+   "term": "glauben",
+   "entry": {
+    "female": "/audio/words/female/fdfc3d156a1099de.mp3",
+    "male": "/audio/words/male/fdfc3d156a1099de.mp3"
+   }
+  },
+  {
+   "term": "der Blog",
+   "entry": {
+    "female": "/audio/words/female/439806f2b4f63a97.mp3",
+    "male": "/audio/words/male/439806f2b4f63a97.mp3"
+   }
+  },
+  {
+   "term": "die Geschichte",
+   "entry": {
+    "female": "/audio/words/female/c88f49e8002a3cf3.mp3",
+    "male": "/audio/words/male/c88f49e8002a3cf3.mp3"
+   }
+  },
+  {
+   "term": "vergleichen",
+   "entry": {
+    "female": "/audio/words/female/d54681268de37704.mp3",
+    "male": "/audio/words/male/d54681268de37704.mp3"
+   }
+  },
+  {
+   "term": "die Tasche",
+   "entry": {
+    "female": "/audio/words/female/fe8b6a51cd2fd569.mp3",
+    "male": "/audio/words/male/fe8b6a51cd2fd569.mp3"
+   }
+  },
+  {
+   "term": "schon",
+   "entry": {
+    "female": "/audio/words/female/ed719858ee1b140e.mp3",
+    "male": "/audio/words/male/ed719858ee1b140e.mp3"
+   }
+  },
+  {
+   "term": "gestern",
+   "entry": {
+    "female": "/audio/words/female/93cae23fdfb8b75d.mp3",
+    "male": "/audio/words/male/93cae23fdfb8b75d.mp3"
+   }
+  },
+  {
+   "term": "der Kuchen",
+   "entry": {
+    "female": "/audio/words/female/e2c9b75b13ad2ecd.mp3",
+    "male": "/audio/words/male/e2c9b75b13ad2ecd.mp3"
+   }
+  },
+  {
+   "term": "das Restaurant",
+   "entry": {
+    "female": "/audio/words/female/36c43db873bddfdb.mp3",
+    "male": "/audio/words/male/36c43db873bddfdb.mp3"
+   }
+  },
+  {
+   "term": "die Feier",
+   "entry": {
+    "female": "/audio/words/female/b18d50029b7bf88d.mp3",
+    "male": "/audio/words/male/b18d50029b7bf88d.mp3"
+   }
+  },
+  {
+   "term": "der Grund",
+   "entry": {
+    "female": "/audio/words/female/c7baaffeb75df237.mp3",
+    "male": "/audio/words/male/c7baaffeb75df237.mp3"
+   }
+  },
+  {
+   "term": "der Freund",
+   "entry": {
+    "female": "/audio/words/female/4b884bf3a973c02a.mp3",
+    "male": "/audio/words/male/4b884bf3a973c02a.mp3"
+   }
+  },
+  {
+   "term": "helfen",
+   "entry": {
+    "female": "/audio/words/female/7d00e0f8e43792fd.mp3",
+    "male": "/audio/words/male/7d00e0f8e43792fd.mp3"
+   }
+  },
+  {
+   "term": "gehören",
+   "entry": {
+    "female": "/audio/words/female/3e2b47651f9f8806.mp3",
+    "male": "/audio/words/male/3e2b47651f9f8806.mp3"
+   }
+  },
+  {
+   "term": "besser",
+   "entry": {
+    "female": "/audio/words/female/8ba94a583afe889a.mp3",
+    "male": "/audio/words/male/8ba94a583afe889a.mp3"
+   }
+  },
+  {
+   "term": "teuer",
+   "entry": {
+    "female": "/audio/words/female/85955db377cec50a.mp3",
+    "male": "/audio/words/male/85955db377cec50a.mp3"
+   }
+  },
+  {
+   "term": "wichtig",
+   "entry": {
+    "female": "/audio/words/female/51dcbe84957689ab.mp3",
+    "male": "/audio/words/male/51dcbe84957689ab.mp3"
+   }
+  },
+  {
+   "term": "die Prüfung",
+   "entry": {
+    "female": "/audio/words/female/35e3708652a71c9d.mp3",
+    "male": "/audio/words/male/35e3708652a71c9d.mp3"
+   }
+  },
+  {
+   "term": "wiederholen",
+   "entry": {
+    "female": "/audio/words/female/40da704412ee6dfb.mp3",
+    "male": "/audio/words/male/40da704412ee6dfb.mp3"
+   }
+  },
+  {
+   "term": "gegenüber",
+   "entry": {
+    "female": "/audio/words/female/e08b60b2040cd5dd.mp3",
+    "male": "/audio/words/male/e08b60b2040cd5dd.mp3"
+   }
+  },
+  {
+   "term": "regelmäßig",
+   "entry": {
+    "female": "/audio/words/female/15079336179b170f.mp3",
+    "male": "/audio/words/male/15079336179b170f.mp3"
+   }
+  },
+  {
+   "term": "ausfüllen",
+   "entry": {
+    "female": "/audio/words/female/fd1450fbba398049.mp3",
+    "male": "/audio/words/male/fd1450fbba398049.mp3"
+   }
+  },
+  {
+   "term": "links",
+   "entry": {
+    "female": "/audio/words/female/eef8b9fd5d437dd9.mp3",
+    "male": "/audio/words/male/eef8b9fd5d437dd9.mp3"
+   }
+  },
+  {
+   "term": "rechts",
+   "entry": {
+    "female": "/audio/words/female/dd3fbf0d05afcd41.mp3",
+    "male": "/audio/words/male/dd3fbf0d05afcd41.mp3"
+   }
+  },
+  {
+   "term": "geradeaus",
+   "entry": {
+    "female": "/audio/words/female/5e2af129794ea9e5.mp3",
+    "male": "/audio/words/male/5e2af129794ea9e5.mp3"
+   }
+  },
+  {
+   "term": "hier",
+   "entry": {
+    "female": "/audio/words/female/529cbc8f212773f2.mp3",
+    "male": "/audio/words/male/529cbc8f212773f2.mp3"
+   }
+  },
+  {
+   "term": "dort",
+   "entry": {
+    "female": "/audio/words/female/39c21f5b3b359f1e.mp3",
+    "male": "/audio/words/male/39c21f5b3b359f1e.mp3"
+   }
+  },
+  {
+   "term": "da",
+   "entry": {
+    "female": "/audio/words/female/aa58b21b01d6b8a9.mp3",
+    "male": "/audio/words/male/aa58b21b01d6b8a9.mp3"
+   }
+  },
+  {
+   "term": "oben",
+   "entry": {
+    "female": "/audio/words/female/67cb61fee4421509.mp3",
+    "male": "/audio/words/male/67cb61fee4421509.mp3"
+   }
+  },
+  {
+   "term": "unten",
+   "entry": {
+    "female": "/audio/words/female/bf65c1637f933b73.mp3",
+    "male": "/audio/words/male/bf65c1637f933b73.mp3"
+   }
+  },
+  {
+   "term": "vorne",
+   "entry": {
+    "female": "/audio/words/female/907d3a75c94ce758.mp3",
+    "male": "/audio/words/male/907d3a75c94ce758.mp3"
+   }
+  },
+  {
+   "term": "zwischen",
+   "entry": {
+    "female": "/audio/words/female/b07d6029c657fff6.mp3",
+    "male": "/audio/words/male/b07d6029c657fff6.mp3"
+   }
+  },
+  {
+   "term": "vor",
+   "entry": {
+    "female": "/audio/words/female/929f1ca4b2be58d7.mp3",
+    "male": "/audio/words/male/929f1ca4b2be58d7.mp3"
+   }
+  },
+  {
+   "term": "hinter",
+   "entry": {
+    "female": "/audio/words/female/f5b6e6eedd3dfc4c.mp3",
+    "male": "/audio/words/male/f5b6e6eedd3dfc4c.mp3"
+   }
+  },
+  {
+   "term": "ausdrucken",
+   "entry": {
+    "female": "/audio/words/female/a53813a5d73ffc13.mp3",
+    "male": "/audio/words/male/a53813a5d73ffc13.mp3"
+   }
+  },
+  {
+   "term": "erklären",
+   "entry": {
+    "female": "/audio/words/female/eb7d6358193242b3.mp3",
+    "male": "/audio/words/male/eb7d6358193242b3.mp3"
+   }
+  },
+  {
+   "term": "empfehlen",
+   "entry": {
+    "female": "/audio/words/female/5bbf6d05ece38072.mp3",
+    "male": "/audio/words/male/5bbf6d05ece38072.mp3"
+   }
+  },
+  {
+   "term": "schicken",
+   "entry": {
+    "female": "/audio/words/female/afa66261ec952cf7.mp3",
+    "male": "/audio/words/male/afa66261ec952cf7.mp3"
+   }
+  },
+  {
+   "term": "schenken",
+   "entry": {
+    "female": "/audio/words/female/7e5b86b700f5d8af.mp3",
+    "male": "/audio/words/male/7e5b86b700f5d8af.mp3"
+   }
+  },
+  {
+   "term": "dunkel",
+   "entry": {
+    "female": "/audio/words/female/641d015cf8316d9f.mp3",
+    "male": "/audio/words/male/641d015cf8316d9f.mp3"
+   }
+  },
+  {
+   "term": "gemütlich",
+   "entry": {
+    "female": "/audio/words/female/24ad331d9ace20b3.mp3",
+    "male": "/audio/words/male/24ad331d9ace20b3.mp3"
+   }
+  },
+  {
+   "term": "jemand",
+   "entry": {
+    "female": "/audio/words/female/004670a98825ca91.mp3",
+    "male": "/audio/words/male/004670a98825ca91.mp3"
+   }
+  },
+  {
+   "term": "etwas",
+   "entry": {
+    "female": "/audio/words/female/b9373420d1622cd3.mp3",
+    "male": "/audio/words/male/b9373420d1622cd3.mp3"
+   }
+  },
+  {
+   "term": "nichts",
+   "entry": {
+    "female": "/audio/words/female/7f812985703138c5.mp3",
+    "male": "/audio/words/male/7f812985703138c5.mp3"
+   }
+  },
+  {
+   "term": "alles",
+   "entry": {
+    "female": "/audio/words/female/0ef6ec226337643d.mp3",
+    "male": "/audio/words/male/0ef6ec226337643d.mp3"
+   }
+  },
+  {
+   "term": "alle",
+   "entry": {
+    "female": "/audio/words/female/2146a029ad5e62ec.mp3",
+    "male": "/audio/words/male/2146a029ad5e62ec.mp3"
+   }
+  },
+  {
+   "term": "darauf",
+   "entry": {
+    "female": "/audio/words/female/561039868827469f.mp3",
+    "male": "/audio/words/male/561039868827469f.mp3"
+   }
+  }
+ ],
+ "a2_probe": [
+  {
+   "term": "die Biologie",
+   "hash": "167a0a4a8220db40"
+  },
+  {
+   "term": "auswählen",
+   "hash": "404f5e6aed7ae7e9"
+  },
+  {
+   "term": "teilnehmen",
+   "hash": "1ddfff5eed6825fd"
+  },
+  {
+   "term": "zuhören",
+   "hash": "519cd525c6e6e21f"
+  },
+  {
+   "term": "von … nach",
+   "hash": "69727ee4d8b9276c"
+  },
+  {
+   "term": "die WG",
+   "hash": "23b60b311a491758"
+  },
+  {
+   "term": "die Kunsterziehung",
+   "hash": "ee276a3ae917779a"
+  },
+  {
+   "term": "die Medizin",
+   "hash": "d9ec4412ccf7af2c"
+  },
+  {
+   "term": "vorschlagen",
+   "hash": "809b92be04caaa2a"
+  },
+  {
+   "term": "weitersuchen",
+   "hash": "f426c3e5c55b8513"
+  },
+  {
+   "term": "die Mathematik",
+   "hash": "b0bfaf6cad03da13"
+  },
+  {
+   "term": "die Chemie",
+   "hash": "2c2a478f4154cfcc"
+  },
+  {
+   "term": "die Informatik",
+   "hash": "eb730c45b98ca054"
+  },
+  {
+   "term": "die Sozialkunde",
+   "hash": "6c076193e21b2992"
+  },
+  {
+   "term": "das Latein",
+   "hash": "c7a826f9c4961b1a"
+  },
+  {
+   "term": "abschließen",
+   "hash": "24bf27f225d10158"
+  },
+  {
+   "term": "von … zu",
+   "hash": "ae05f7f09f0d0975"
+  },
+  {
+   "term": "zustimmen",
+   "hash": "7286af196c187521"
+  },
+  {
+   "term": "hochladen",
+   "hash": "ada4d5deb907cf47"
+  },
+  {
+   "term": "runterladen",
+   "hash": "b87f6423558880c8"
+  },
+  {
+   "term": "weitergeben",
+   "hash": "5c4d44d26fe98e21"
+  },
+  {
+   "term": "die Mathe",
+   "hash": "dde6c2e854f16001"
+  },
+  {
+   "term": "die Geografie",
+   "hash": "1675e633b7cda951"
+  },
+  {
+   "term": "die Wirtschaft",
+   "hash": "6a9d6a0d21783bf5"
+  },
+  {
+   "term": "das Jura",
+   "hash": "f44568eb1a36e867"
+  },
+  {
+   "term": "der Komparativ",
+   "hash": "60b8f6f43cde24ff"
+  },
+  {
+   "term": "das Repair-Café",
+   "hash": "22892848077c1a69"
+  },
+  {
+   "term": "ansprechen",
+   "hash": "50a4db0d3a5bcdb4"
+  },
+  {
+   "term": "einplanen",
+   "hash": "620ed673056240fc"
+  },
+  {
+   "term": "weiterwissen",
+   "hash": "013b667d9c74b136"
+  },
+  {
+   "term": "gehen um",
+   "hash": "ee90305a4dd7b24f"
+  },
+  {
+   "term": "der Beispielsatz",
+   "hash": "612c16917d99464a"
+  },
+  {
+   "term": "zusagen",
+   "hash": "9fcefb001d474882"
+  },
+  {
+   "term": "zusammenleben",
+   "hash": "3224261c1dcaf219"
+  },
+  {
+   "term": "weiterhelfen",
+   "hash": "7e2c478d26175f12"
+  },
+  {
+   "term": "dazuschreiben",
+   "hash": "348624002fc99970"
+  },
+  {
+   "term": "hergeben",
+   "hash": "b88b6ea53af4f445"
+  },
+  {
+   "term": "auskennen",
+   "hash": "8cb603497b112423"
+  },
+  {
+   "term": "die Physik",
+   "hash": "8903398756aa86e0"
+  },
+  {
+   "term": "anklicken",
+   "hash": "83ab2c0d1bdf06a0"
+  },
+  {
+   "term": "ablehnen",
+   "hash": "81927fe896fc0470"
+  },
+  {
+   "term": "mitteilen",
+   "hash": "e1f7dcf74925fa4a"
+  },
+  {
+   "term": "weiterleiten",
+   "hash": "467931af1da8bbb2"
+  },
+  {
+   "term": "weiterflüstern",
+   "hash": "fb8a55766bab3fd9"
+  },
+  {
+   "term": "ausschlafen",
+   "hash": "2e6162db1cd6e523"
+  },
+  {
+   "term": "abmalen",
+   "hash": "d802c0e2df966aee"
+  },
+  {
+   "term": "herunterladen",
+   "hash": "b4b4bbb587e56440"
+  },
+  {
+   "term": "auspacken",
+   "hash": "5af6038a22790376"
+  },
+  {
+   "term": "ausprobieren",
+   "hash": "32f624b2e5b54cb8"
+  },
+  {
+   "term": "das Häslein",
+   "hash": "56dac7f258225ac7"
+  },
+  {
+   "term": "weglaufen",
+   "hash": "54fe8490e74e7087"
+  },
+  {
+   "term": "gefahren",
+   "hash": "db65cb760640a41f"
+  },
+  {
+   "term": "gemacht",
+   "hash": "6eda4c648e1dcae0"
+  },
+  {
+   "term": "musste",
+   "hash": "7f7623ccd2b87719"
+  },
+  {
+   "term": "konnte",
+   "hash": "a526d65b6fbb4c97"
+  },
+  {
+   "term": "durfte",
+   "hash": "32776d969a5548fe"
+  },
+  {
+   "term": "wollte",
+   "hash": "2300ececf6b5042b"
+  },
+  {
+   "term": "am besten",
+   "hash": "a97ce0cb6d2d6914"
+  },
+  {
+   "term": "das Zertifikat",
+   "hash": "f24bbe2da9b3aa74"
+  },
+  {
+   "term": "der Abschied",
+   "hash": "84f04f44b715df14"
+  },
+  {
+   "term": "wegfahren",
+   "hash": "6d5b707e546e8227"
+  },
+  {
+   "term": "austauschen",
+   "hash": "74d895fdd42895b8"
+  },
+  {
+   "term": "aussprechen",
+   "hash": "4b544a3a3d20daa4"
+  },
+  {
+   "term": "sich freuen",
+   "hash": "fd4b1699e79aa336"
+  },
+  {
+   "term": "sich interessieren",
+   "hash": "e3f30e9a52f17d69"
+  },
+  {
+   "term": "sich treffen",
+   "hash": "8a0c30763921a1ba"
+  },
+  {
+   "term": "sich waschen",
+   "hash": "f2b0c47edff1515c"
+  },
+  {
+   "term": "sich anziehen",
+   "hash": "5f1836350756b41c"
+  },
+  {
+   "term": "sich setzen",
+   "hash": "4f4dd56782ade4df"
+  },
+  {
+   "term": "sich beeilen",
+   "hash": "c9a624c6231805b6"
+  },
+  {
+   "term": "sich entspannen",
+   "hash": "109a6508b0c84f5b"
+  },
+  {
+   "term": "sich erinnern",
+   "hash": "417007905b5c1b86"
+  },
+  {
+   "term": "sich fühlen",
+   "hash": "6b43a8fdf97413be"
+  },
+  {
+   "term": "sich vorstellen",
+   "hash": "f94ebf8524daf78f"
+  },
+  {
+   "term": "sich anmelden",
+   "hash": "bdd90f11f2587bb3"
+  },
+  {
+   "term": "sich entschuldigen",
+   "hash": "d27f4d1f25a4fb51"
+  },
+  {
+   "term": "sich kümmern",
+   "hash": "b3fe4dcbd8611e66"
+  },
+  {
+   "term": "sich rasieren",
+   "hash": "48f7501e4f9b20d0"
+  },
+  {
+   "term": "sich duschen",
+   "hash": "10579f1f8cf4cc80"
+  },
+  {
+   "term": "sich ausruhen",
+   "hash": "69438aacdf141ad5"
+  },
+  {
+   "term": "sich erholen",
+   "hash": "8198fbcb8621b7a9"
+  },
+  {
+   "term": "sich vorbereiten",
+   "hash": "d0a76419a5565cdd"
+  },
+  {
+   "term": "sich bedanken",
+   "hash": "1aba8de712e10641"
+  },
+  {
+   "term": "sich ärgern",
+   "hash": "c087e98e23176ef3"
+  },
+  {
+   "term": "sich wohlfühlen",
+   "hash": "c967079d138213f1"
+  },
+  {
+   "term": "sich unterhalten",
+   "hash": "a858fde4f1c74616"
+  },
+  {
+   "term": "sich streiten",
+   "hash": "209e877fe74c4032"
+  },
+  {
+   "term": "sich beruhigen",
+   "hash": "7e6a4356713a05da"
+  },
+  {
+   "term": "anbieten",
+   "hash": "179c8c08baf8d29e"
+  },
+  {
+   "term": "Norddeutschland",
+   "hash": "2880aeb55b038560"
+  },
+  {
+   "term": "aufräumen",
+   "hash": "8ffb38ee99234e8d"
+  },
+  {
+   "term": "abfliegen",
+   "hash": "db9169a016e4bb5a"
+  },
+  {
+   "term": "weiterfahren",
+   "hash": "cf58ba9cc4115a75"
+  },
+  {
+   "term": "zusammenfassen",
+   "hash": "b85992f11603b7c6"
+  },
+  {
+   "term": "abgeben",
+   "hash": "cfd02dcd5104fd83"
+  },
+  {
+   "term": "vorbeigehen",
+   "hash": "a8983563ccbafff0"
+  },
+  {
+   "term": "weitergehen",
+   "hash": "3bce22fa5bac8d03"
+  },
+  {
+   "term": "an … vorbei",
+   "hash": "468cc4ef49a78d4e"
+  },
+  {
+   "term": "ausschalten",
+   "hash": "13bb7f5500f19e76"
+  },
+  {
+   "term": "innen",
+   "hash": "add77b80e6e7f0be"
+  },
+  {
+   "term": "außen",
+   "hash": "0173e5a87cc0eae9"
+  },
+  {
+   "term": "in der Nähe",
+   "hash": "9566a8ce1801ec9d"
+  },
+  {
+   "term": "am Ende der Straße",
+   "hash": "2249f598ec821427"
+  },
+  {
+   "term": "an der Ecke",
+   "hash": "5386bd68deb6d969"
+  },
+  {
+   "term": "auf der linken Seite",
+   "hash": "6128b383fe0c27f4"
+  },
+  {
+   "term": "auf der rechten Seite",
+   "hash": "dc58078879f1af96"
+  },
+  {
+   "term": "mitten in",
+   "hash": "4b7e9bd19b540432"
+  },
+  {
+   "term": "innerhalb von",
+   "hash": "ccc878513c73d697"
+  },
+  {
+   "term": "abbiegen",
+   "hash": "1773e31937a8dc6c"
+  },
+  {
+   "term": "die die Ampel",
+   "hash": "c638af05ea5d66f0"
+  },
+  {
+   "term": "die die Ecke",
+   "hash": "9cb98a1b930892f6"
+  },
+  {
+   "term": "bis zur Kreuzung",
+   "hash": "148f87c870287d9f"
+  },
+  {
+   "term": "die die Wegbeschreibung",
+   "hash": "61af909519bb98d9"
+  },
+  {
+   "term": "ortskundig",
+   "hash": "480e77a1d01b2f3e"
+  },
+  {
+   "term": "einzeichnen",
+   "hash": "73934157af3415fa"
+  },
+  {
+   "term": "vorhaben",
+   "hash": "fe7c7a02c72e453a"
+  },
+  {
+   "term": "anhören (sich etw.)",
+   "hash": "0cdd25d3940c7f7c"
+  },
+  {
+   "term": "zurechtkommen",
+   "hash": "7db06f35229d69e5"
+  },
+  {
+   "term": "die Beratung",
+   "hash": "57e76d778693c0d9"
+  },
+  {
+   "term": "zusammenbringen",
+   "hash": "4e589d0b270188c5"
+  },
+  {
+   "term": "konzentrieren (sich)",
+   "hash": "1cd7554ba6084d18"
+  },
+  {
+   "term": "zurückkommen",
+   "hash": "17b5ce5978469487"
+  },
+  {
+   "term": "ablesen",
+   "hash": "e3829bdb79f0a307"
+  },
+  {
+   "term": "anstellen",
+   "hash": "b26964d7fae42a61"
+  },
+  {
+   "term": "ausgeben",
+   "hash": "1ab431a4e79b6bd7"
+  },
+  {
+   "term": "der Beamte",
+   "hash": "0ba607ea68e4dc07"
+  },
+  {
+   "term": "bewerben (sich)",
+   "hash": "7413de3c782b1198"
+  },
+  {
+   "term": "durchatmen",
+   "hash": "be4942d8a1ffff66"
+  },
+  {
+   "term": "kümmern (sich)",
+   "hash": "99f9cc7dab8e9035"
+  },
+  {
+   "term": "sorgen (für)",
+   "hash": "72500fac03eb97c0"
+  },
+  {
+   "term": "vortragen",
+   "hash": "f268525947023da5"
+  },
+  {
+   "term": "aufnehmen",
+   "hash": "03df2708096ca32a"
+  },
+  {
+   "term": "beeilen (sich)",
+   "hash": "38c5a7c1e9dbccec"
+  },
+  {
+   "term": "bereitlegen",
+   "hash": "4b24fb29ec6eaa97"
+  },
+  {
+   "term": "beschweren (sich)",
+   "hash": "cee811267d498f3e"
+  },
+  {
+   "term": "dazukommen",
+   "hash": "d3d2798a24749068"
+  },
+  {
+   "term": "dazulernen",
+   "hash": "b0cca48f0640f461"
+  },
+  {
+   "term": "einhalten",
+   "hash": "0b1d78ef51025b59"
+  },
+  {
+   "term": "freimachen",
+   "hash": "6473d3ade4b6e418"
+  },
+  {
+   "term": "wegwerfen",
+   "hash": "df70633b6fcb898e"
+  },
+  {
+   "term": "weiterarbeiten",
+   "hash": "25f6ac1067c6bd28"
+  },
+  {
+   "term": "zunehmen",
+   "hash": "e1e40aec4b0aa1d7"
+  },
+  {
+   "term": "geeignet",
+   "hash": "b6832d4e5114d67a"
+  },
+  {
+   "term": "ausfallen",
+   "hash": "671082ceeb43e1f9"
+  },
+  {
+   "term": "benehmen (sich)",
+   "hash": "1520b17066d66aee"
+  },
+  {
+   "term": "mitspielen",
+   "hash": "b0161b3f35603772"
+  },
+  {
+   "term": "der Volleyball",
+   "hash": "fdf3bfe98cce1184"
+  },
+  {
+   "term": "zurückgeben",
+   "hash": "bae9dff58eac215b"
+  },
+  {
+   "term": "einziehen",
+   "hash": "fd891401c92405c5"
+  },
+  {
+   "term": "entspannen (sich)",
+   "hash": "79bfe87295f19174"
+  },
+  {
+   "term": "hängen (an)",
+   "hash": "949b23d238402a02"
+  },
+  {
+   "term": "verzichten (auf)",
+   "hash": "dcb34c950601fa68"
+  },
+  {
+   "term": "vorkommen",
+   "hash": "0f2fb493c4b7dd12"
+  },
+  {
+   "term": "zurücklaufen",
+   "hash": "97d97f9548d0ca1e"
+  },
+  {
+   "term": "auffallen",
+   "hash": "549f878a059cb170"
+  },
+  {
+   "term": "ausrichten",
+   "hash": "34c6de2f22248a7a"
+  },
+  {
+   "term": "mithelfen",
+   "hash": "5fcab9fdab6d5c33"
+  },
+  {
+   "term": "zurückrufen",
+   "hash": "868e64d0243e3102"
+  },
+  {
+   "term": "hereinkommen",
+   "hash": "2d88ff3b7f0dac19"
+  },
+  {
+   "term": "gestehen",
+   "hash": "2ffa73820688fdd8"
+  },
+  {
+   "term": "jeder",
+   "hash": "dd42d5e1f25787ff"
+  },
+  {
+   "term": "warten auf",
+   "hash": "082ebb721cced205"
+  },
+  {
+   "term": "denken an",
+   "hash": "c31156373973aec9"
+  },
+  {
+   "term": "sich freuen auf",
+   "hash": "be7b38c0f2331303"
+  },
+  {
+   "term": "träumen von",
+   "hash": "909c1a23503b6314"
+  },
+  {
+   "term": "woran",
+   "hash": "f03807058fddbed9"
+  },
+  {
+   "term": "hätte",
+   "hash": "0baf0397e52f0bcf"
+  },
+  {
+   "term": "wäre",
+   "hash": "04a559865092021b"
+  },
+  {
+   "term": "würde",
+   "hash": "9042892288bc0954"
+  }
+ ],
+ "b1_vocab_terms": 1812,
+ "b1_overlap": [
+  {
+   "term": "erfahren",
+   "entry": {
+    "female": "/audio/words/female/9ad3fa096f054c28.mp3",
+    "male": "/audio/words/male/9ad3fa096f054c28.mp3"
+   }
+  },
+  {
+   "term": "dabei sein",
+   "entry": {
+    "female": "/audio/words/female/adf597eb673c496a.mp3",
+    "male": "/audio/words/male/adf597eb673c496a.mp3"
+   }
+  },
+  {
+   "term": "das Netz",
+   "entry": {
+    "female": "/audio/words/female/283c651f3e6ba3fd.mp3",
+    "male": "/audio/words/male/283c651f3e6ba3fd.mp3"
+   }
+  },
+  {
+   "term": "da",
+   "entry": {
+    "female": "/audio/words/female/aa58b21b01d6b8a9.mp3",
+    "male": "/audio/words/male/aa58b21b01d6b8a9.mp3"
+   }
+  },
+  {
+   "term": "liegen",
+   "entry": {
+    "female": "/audio/words/female/e1e2f4cee6d2d584.mp3",
+    "male": "/audio/words/male/e1e2f4cee6d2d584.mp3"
+   }
+  },
+  {
+   "term": "tragen",
+   "entry": {
+    "female": "/audio/words/female/7f24e7f24761a4c5.mp3",
+    "male": "/audio/words/male/7f24e7f24761a4c5.mp3"
+   }
+  },
+  {
+   "term": "weg sein",
+   "entry": {
+    "female": "/audio/words/female/9ce7f7fde74df726.mp3",
+    "male": "/audio/words/male/9ce7f7fde74df726.mp3"
+   }
+  },
+  {
+   "term": "bedienen",
+   "entry": {
+    "female": "/audio/words/female/f0bcace271afa627.mp3",
+    "male": "/audio/words/male/f0bcace271afa627.mp3"
+   }
+  },
+  {
+   "term": "die Frage",
+   "entry": {
+    "female": "/audio/words/female/f76e7daf55a9f1d0.mp3",
+    "male": "/audio/words/male/f76e7daf55a9f1d0.mp3"
+   }
+  },
+  {
+   "term": "die Erinnerung",
+   "entry": {
+    "female": "/audio/words/female/d82f929578bc5a9a.mp3",
+    "male": "/audio/words/male/d82f929578bc5a9a.mp3"
+   }
+  },
+  {
+   "term": "ausziehen",
+   "entry": {
+    "female": "/audio/words/female/e89f70615ff8833b.mp3",
+    "male": "/audio/words/male/e89f70615ff8833b.mp3"
+   }
+  },
+  {
+   "term": "halten",
+   "entry": {
+    "female": "/audio/words/female/764dc7965f79cf4b.mp3",
+    "male": "/audio/words/male/764dc7965f79cf4b.mp3"
+   }
+  },
+  {
+   "term": "die Form",
+   "entry": {
+    "female": "/audio/words/female/2a08ad2ec67e8e48.mp3",
+    "male": "/audio/words/male/2a08ad2ec67e8e48.mp3"
+   }
+  },
+  {
+   "term": "hoffen",
+   "entry": {
+    "female": "/audio/words/female/bc25878ccb35a03b.mp3",
+    "male": "/audio/words/male/bc25878ccb35a03b.mp3"
+   }
+  },
+  {
+   "term": "versuchen",
+   "entry": {
+    "female": "/audio/words/female/5fb93abaf138f952.mp3",
+    "male": "/audio/words/male/5fb93abaf138f952.mp3"
+   }
+  },
+  {
+   "term": "versprechen",
+   "entry": {
+    "female": "/audio/words/female/19870fe086cf78a7.mp3",
+    "male": "/audio/words/male/19870fe086cf78a7.mp3"
+   }
+  },
+  {
+   "term": "weil",
+   "entry": {
+    "female": "/audio/words/female/740fc4991133b152.mp3",
+    "male": "/audio/words/male/740fc4991133b152.mp3"
+   }
+  },
+  {
+   "term": "deshalb",
+   "entry": {
+    "female": "/audio/words/female/e7161771a50251bf.mp3",
+    "male": "/audio/words/male/e7161771a50251bf.mp3"
+   }
+  },
+  {
+   "term": "der Erfolg",
+   "entry": {
+    "female": "/audio/words/female/8e894d1a42a9bb54.mp3",
+    "male": "/audio/words/male/8e894d1a42a9bb54.mp3"
+   }
+  },
+  {
+   "term": "der Grund",
+   "entry": {
+    "female": "/audio/words/female/c7baaffeb75df237.mp3",
+    "male": "/audio/words/male/c7baaffeb75df237.mp3"
+   }
+  },
+  {
+   "term": "nervös",
+   "entry": {
+    "female": "/audio/words/female/b1b3f26e7fff0c0e.mp3",
+    "male": "/audio/words/male/b1b3f26e7fff0c0e.mp3"
+   }
+  },
+  {
+   "term": "gestresst",
+   "entry": {
+    "female": "/audio/words/female/e295f4780bd91a76.mp3",
+    "male": "/audio/words/male/e295f4780bd91a76.mp3"
+   }
+  },
+  {
+   "term": "wiederholen",
+   "entry": {
+    "female": "/audio/words/female/40da704412ee6dfb.mp3",
+    "male": "/audio/words/male/40da704412ee6dfb.mp3"
+   }
+  },
+  {
+   "term": "ruhig",
+   "entry": {
+    "female": "/audio/words/female/d29898d82af92955.mp3",
+    "male": "/audio/words/male/d29898d82af92955.mp3"
+   }
+  },
+  {
+   "term": "sicher",
+   "entry": {
+    "female": "/audio/words/female/bdfccb90bbe91a2b.mp3",
+    "male": "/audio/words/male/bdfccb90bbe91a2b.mp3"
+   }
+  },
+  {
+   "term": "die Übung",
+   "entry": {
+    "female": "/audio/words/female/749d551472c6eea1.mp3",
+    "male": "/audio/words/male/749d551472c6eea1.mp3"
+   }
+  },
+  {
+   "term": "das Thema",
+   "entry": {
+    "female": "/audio/words/female/0fc28caef3470aef.mp3",
+    "male": "/audio/words/male/0fc28caef3470aef.mp3"
+   }
+  },
+  {
+   "term": "feiern",
+   "entry": {
+    "female": "/audio/words/female/0184a6574dd63e9c.mp3",
+    "male": "/audio/words/male/0184a6574dd63e9c.mp3"
+   }
+  },
+  {
+   "term": "die Liste",
+   "entry": {
+    "female": "/audio/words/female/1375efebb5bef118.mp3",
+    "male": "/audio/words/male/1375efebb5bef118.mp3"
+   }
+  },
+  {
+   "term": "außerhalb",
+   "entry": {
+    "female": "/audio/words/female/dca8fdc39f1263a6.mp3",
+    "male": "/audio/words/male/dca8fdc39f1263a6.mp3"
+   }
+  },
+  {
+   "term": "frisch",
+   "entry": {
+    "female": "/audio/words/female/69e86cae43a127b0.mp3",
+    "male": "/audio/words/male/69e86cae43a127b0.mp3"
+   }
+  },
+  {
+   "term": "führen",
+   "entry": {
+    "female": "/audio/words/female/ac904498f2e9f21d.mp3",
+    "male": "/audio/words/male/ac904498f2e9f21d.mp3"
+   }
+  },
+  {
+   "term": "gegen",
+   "entry": {
+    "female": "/audio/words/female/092e1885c9576d20.mp3",
+    "male": "/audio/words/male/092e1885c9576d20.mp3"
+   }
+  },
+  {
+   "term": "sammeln",
+   "entry": {
+    "female": "/audio/words/female/b5f9036d932291cb.mp3",
+    "male": "/audio/words/male/b5f9036d932291cb.mp3"
+   }
+  },
+  {
+   "term": "vorbei sein",
+   "entry": {
+    "female": "/audio/words/female/25b5045e50a90c52.mp3",
+    "male": "/audio/words/male/25b5045e50a90c52.mp3"
+   }
+  },
+  {
+   "term": "das Fach",
+   "entry": {
+    "female": "/audio/words/female/817ca9ddef866222.mp3",
+    "male": "/audio/words/male/817ca9ddef866222.mp3"
+   }
+  },
+  {
+   "term": "offen",
+   "entry": {
+    "female": "/audio/words/female/9a80891df52590c2.mp3",
+    "male": "/audio/words/male/9a80891df52590c2.mp3"
+   }
+  },
+  {
+   "term": "stellen",
+   "entry": {
+    "female": "/audio/words/female/eda5a835fd21f514.mp3",
+    "male": "/audio/words/male/eda5a835fd21f514.mp3"
+   }
+  },
+  {
+   "term": "schrecklich",
+   "entry": {
+    "female": "/audio/words/female/ab8c1573180aa86d.mp3",
+    "male": "/audio/words/male/ab8c1573180aa86d.mp3"
+   }
+  },
+  {
+   "term": "schütten",
+   "entry": {
+    "female": "/audio/words/female/d88f03da0db36546.mp3",
+    "male": "/audio/words/male/d88f03da0db36546.mp3"
+   }
+  },
+  {
+   "term": "ankommen",
+   "entry": {
+    "female": "/audio/words/female/916e3d393d7b03f6.mp3",
+    "male": "/audio/words/male/916e3d393d7b03f6.mp3"
+   }
+  },
+  {
+   "term": "danach",
+   "entry": {
+    "female": "/audio/words/female/e6cebfa7ea082d92.mp3",
+    "male": "/audio/words/male/e6cebfa7ea082d92.mp3"
+   }
+  },
+  {
+   "term": "der Anhang",
+   "entry": {
+    "female": "/audio/words/female/0446538c154671bd.mp3",
+    "male": "/audio/words/male/0446538c154671bd.mp3"
+   }
+  },
+  {
+   "term": "scharf",
+   "entry": {
+    "female": "/audio/words/female/c65b733137d39a4a.mp3",
+    "male": "/audio/words/male/c65b733137d39a4a.mp3"
+   }
+  },
+  {
+   "term": "werden",
+   "entry": {
+    "female": "/audio/words/female/35487809a6ee83cc.mp3",
+    "male": "/audio/words/male/35487809a6ee83cc.mp3"
+   }
+  },
+  {
+   "term": "zeigen",
+   "entry": {
+    "female": "/audio/words/female/46c96d17bab4baad.mp3",
+    "male": "/audio/words/male/46c96d17bab4baad.mp3"
+   }
+  },
+  {
+   "term": "helfen",
+   "entry": {
+    "female": "/audio/words/female/7d00e0f8e43792fd.mp3",
+    "male": "/audio/words/male/7d00e0f8e43792fd.mp3"
+   }
+  },
+  {
+   "term": "gehören",
+   "entry": {
+    "female": "/audio/words/female/3e2b47651f9f8806.mp3",
+    "male": "/audio/words/male/3e2b47651f9f8806.mp3"
+   }
+  },
+  {
+   "term": "öffentlich",
+   "entry": {
+    "female": "/audio/words/female/37f5af416fd24a23.mp3",
+    "male": "/audio/words/male/37f5af416fd24a23.mp3"
+   }
+  },
+  {
+   "term": "verspätet",
+   "entry": {
+    "female": "/audio/words/female/259394a0e65d6914.mp3",
+    "male": "/audio/words/male/259394a0e65d6914.mp3"
+   }
+  },
+  {
+   "term": "praktisch",
+   "entry": {
+    "female": "/audio/words/female/644039d078a71ca9.mp3",
+    "male": "/audio/words/male/644039d078a71ca9.mp3"
+   }
+  },
+  {
+   "term": "einverstanden",
+   "entry": {
+    "female": "/audio/words/female/fe04e9989d5bce16.mp3",
+    "male": "/audio/words/male/fe04e9989d5bce16.mp3"
+   }
+  },
+  {
+   "term": "ausgehen",
+   "entry": {
+    "female": "/audio/words/female/b81278b644ab5390.mp3",
+    "male": "/audio/words/male/b81278b644ab5390.mp3"
+   }
+  },
+  {
+   "term": "spielen",
+   "entry": {
+    "female": "/audio/words/female/b98ccbb62227b538.mp3",
+    "male": "/audio/words/male/b98ccbb62227b538.mp3"
+   }
+  },
+  {
+   "term": "die Rolle",
+   "entry": {
+    "female": "/audio/words/female/efd868997c02bffd.mp3",
+    "male": "/audio/words/male/efd868997c02bffd.mp3"
+   }
+  },
+  {
+   "term": "das Gericht",
+   "entry": {
+    "female": "/audio/words/female/38f62bc12371cff4.mp3",
+    "male": "/audio/words/male/38f62bc12371cff4.mp3"
+   }
+  },
+  {
+   "term": "kommen",
+   "entry": {
+    "female": "/audio/words/female/529f00bc62dff975.mp3",
+    "male": "/audio/words/male/529f00bc62dff975.mp3"
+   }
+  },
+  {
+   "term": "machen",
+   "entry": {
+    "female": "/audio/words/female/8740c3f7ac25c887.mp3",
+    "male": "/audio/words/male/8740c3f7ac25c887.mp3"
+   }
+  },
+  {
+   "term": "der Preis",
+   "entry": {
+    "female": "/audio/words/female/51c30c9268b77c2c.mp3",
+    "male": "/audio/words/male/51c30c9268b77c2c.mp3"
+   }
+  },
+  {
+   "term": "die Sorge",
+   "entry": {
+    "female": "/audio/words/female/6b027aa6cfdbee8d.mp3",
+    "male": "/audio/words/male/6b027aa6cfdbee8d.mp3"
+   }
+  },
+  {
+   "term": "allein",
+   "entry": {
+    "female": "/audio/words/female/a9d5a11ce03dbf99.mp3",
+    "male": "/audio/words/male/a9d5a11ce03dbf99.mp3"
+   }
+  },
+  {
+   "term": "damit",
+   "entry": {
+    "female": "/audio/words/female/e9858a5a7dde8deb.mp3",
+    "male": "/audio/words/male/e9858a5a7dde8deb.mp3"
+   }
+  },
+  {
+   "term": "die Aktion",
+   "entry": {
+    "female": "/audio/words/female/40c84ec22c366a07.mp3",
+    "male": "/audio/words/male/40c84ec22c366a07.mp3"
+   }
+  },
+  {
+   "term": "landen",
+   "entry": {
+    "female": "/audio/words/female/3dc063f80f8b72f0.mp3",
+    "male": "/audio/words/male/3dc063f80f8b72f0.mp3"
+   }
+  },
+  {
+   "term": "treffen",
+   "entry": {
+    "female": "/audio/words/female/008679d18064e9c7.mp3",
+    "male": "/audio/words/male/008679d18064e9c7.mp3"
+   }
+  },
+  {
+   "term": "die Seite",
+   "entry": {
+    "female": "/audio/words/female/514d126d89986a34.mp3",
+    "male": "/audio/words/male/514d126d89986a34.mp3"
+   }
+  },
+  {
+   "term": "schwer",
+   "entry": {
+    "female": "/audio/words/female/c3c27bacd0e0b53f.mp3",
+    "male": "/audio/words/male/c3c27bacd0e0b53f.mp3"
+   }
+  },
+  {
+   "term": "der Vordergrund",
+   "entry": {
+    "female": "/audio/words/female/43340b0eb02aa30e.mp3",
+    "male": "/audio/words/male/43340b0eb02aa30e.mp3"
+   }
+  },
+  {
+   "term": "der Weg",
+   "entry": {
+    "female": "/audio/words/female/119080787e7173b7.mp3",
+    "male": "/audio/words/male/119080787e7173b7.mp3"
+   }
+  },
+  {
+   "term": "der Kollege",
+   "entry": {
+    "female": "/audio/words/female/8d76dec7ecb6691d.mp3",
+    "male": "/audio/words/male/8d76dec7ecb6691d.mp3"
+   }
+  },
+  {
+   "term": "der Student",
+   "entry": {
+    "female": "/audio/words/female/0bc3d512ba27fc05.mp3",
+    "male": "/audio/words/male/0bc3d512ba27fc05.mp3"
+   }
+  },
+  {
+   "term": "die Bewerbung",
+   "entry": {
+    "female": "/audio/words/female/3c2ce9747c073988.mp3",
+    "male": "/audio/words/male/3c2ce9747c073988.mp3"
+   }
+  },
+  {
+   "term": "die Wohnung",
+   "entry": {
+    "female": "/audio/words/female/e1a2b7aa04d084d0.mp3",
+    "male": "/audio/words/male/e1a2b7aa04d084d0.mp3"
+   }
+  },
+  {
+   "term": "der Traum",
+   "entry": {
+    "female": "/audio/words/female/aa1f5abb674490d6.mp3",
+    "male": "/audio/words/male/aa1f5abb674490d6.mp3"
+   }
+  },
+  {
+   "term": "gründen",
+   "entry": {
+    "female": "/audio/words/female/b5ac81046aad3af9.mp3",
+    "male": "/audio/words/male/b5ac81046aad3af9.mp3"
+   }
+  },
+  {
+   "term": "schaffen",
+   "entry": {
+    "female": "/audio/words/female/7a8bbbf5af6cff61.mp3",
+    "male": "/audio/words/male/7a8bbbf5af6cff61.mp3"
+   }
+  },
+  {
+   "term": "ehrlich",
+   "entry": {
+    "female": "/audio/words/female/242ae14bf03a0018.mp3",
+    "male": "/audio/words/male/242ae14bf03a0018.mp3"
+   }
+  },
+  {
+   "term": "das Feedback",
+   "entry": {
+    "female": "/audio/words/female/90c4e8281b00bc3f.mp3",
+    "male": "/audio/words/male/90c4e8281b00bc3f.mp3"
+   }
+  },
+  {
+   "term": "verlieren",
+   "entry": {
+    "female": "/audio/words/female/2bc6abff459e1422.mp3",
+    "male": "/audio/words/male/2bc6abff459e1422.mp3"
+   }
+  },
+  {
+   "term": "das Gespräch",
+   "entry": {
+    "female": "/audio/words/female/4832c567a9bb8c3d.mp3",
+    "male": "/audio/words/male/4832c567a9bb8c3d.mp3"
+   }
+  },
+  {
+   "term": "seit",
+   "entry": {
+    "female": "/audio/words/female/bf49dee46b6bf94b.mp3",
+    "male": "/audio/words/male/bf49dee46b6bf94b.mp3"
+   }
+  },
+  {
+   "term": "das Wort",
+   "entry": {
+    "female": "/audio/words/female/16f0d3892072462e.mp3",
+    "male": "/audio/words/male/16f0d3892072462e.mp3"
+   }
+  },
+  {
+   "term": "wenn",
+   "entry": {
+    "female": "/audio/words/female/4da271bb37e5a8c6.mp3",
+    "male": "/audio/words/male/4da271bb37e5a8c6.mp3"
+   }
+  },
+  {
+   "term": "als",
+   "entry": {
+    "female": "/audio/words/female/ee7637bd419d4a00.mp3",
+    "male": "/audio/words/male/ee7637bd419d4a00.mp3"
+   }
+  },
+  {
+   "term": "brauchen",
+   "entry": {
+    "female": "/audio/words/female/16a104d33063b4f6.mp3",
+    "male": "/audio/words/male/16a104d33063b4f6.mp3"
+   }
+  },
+  {
+   "term": "zu",
+   "entry": {
+    "female": "/audio/words/female/82cefa8283d30fda.mp3",
+    "male": "/audio/words/male/82cefa8283d30fda.mp3"
+   }
+  },
+  {
+   "term": "raten",
+   "entry": {
+    "female": "/audio/words/female/89df3ccba905f3c5.mp3",
+    "male": "/audio/words/male/89df3ccba905f3c5.mp3"
+   }
+  },
+  {
+   "term": "um",
+   "entry": {
+    "female": "/audio/words/female/289c90decf40c8ec.mp3",
+    "male": "/audio/words/male/289c90decf40c8ec.mp3"
+   }
+  },
+  {
+   "term": "das Stück",
+   "entry": {
+    "female": "/audio/words/female/27cd5a12ee3e8cd4.mp3",
+    "male": "/audio/words/male/27cd5a12ee3e8cd4.mp3"
+   }
+  },
+  {
+   "term": "der Kopf",
+   "entry": {
+    "female": "/audio/words/female/0c892ef18b20c5cb.mp3",
+    "male": "/audio/words/male/0c892ef18b20c5cb.mp3"
+   }
+  },
+  {
+   "term": "merken",
+   "entry": {
+    "female": "/audio/words/female/9374ca4cb8941b2e.mp3",
+    "male": "/audio/words/male/9374ca4cb8941b2e.mp3"
+   }
+  },
+  {
+   "term": "bestehen",
+   "entry": {
+    "female": "/audio/words/female/bb78143fca903adb.mp3",
+    "male": "/audio/words/male/bb78143fca903adb.mp3"
+   }
+  },
+  {
+   "term": "bewegen",
+   "entry": {
+    "female": "/audio/words/female/fe3990971026f30b.mp3",
+    "male": "/audio/words/male/fe3990971026f30b.mp3"
+   }
+  },
+  {
+   "term": "schließen",
+   "entry": {
+    "female": "/audio/words/female/e0b9f083fdafd839.mp3",
+    "male": "/audio/words/male/e0b9f083fdafd839.mp3"
+   }
+  },
+  {
+   "term": "der Gedanke",
+   "entry": {
+    "female": "/audio/words/female/1f6044eb9194819e.mp3",
+    "male": "/audio/words/male/1f6044eb9194819e.mp3"
+   }
+  },
+  {
+   "term": "die Mode",
+   "entry": {
+    "female": "/audio/words/female/f121305ea7206b17.mp3",
+    "male": "/audio/words/male/f121305ea7206b17.mp3"
+   }
+  },
+  {
+   "term": "das Vorstellungsgespräch",
+   "entry": {
+    "female": "/audio/words/female/fc40a2817ed7a353.mp3",
+    "male": "/audio/words/male/fc40a2817ed7a353.mp3"
+   }
+  },
+  {
+   "term": "die Erfahrung",
+   "entry": {
+    "female": "/audio/words/female/217e3171d284d94a.mp3",
+    "male": "/audio/words/male/217e3171d284d94a.mp3"
+   }
+  },
+  {
+   "term": "die Entscheidung",
+   "entry": {
+    "female": "/audio/words/female/f295668cf605014c.mp3",
+    "male": "/audio/words/male/f295668cf605014c.mp3"
+   }
+  },
+  {
+   "term": "die Stelle",
+   "entry": {
+    "female": "/audio/words/female/0b47e3e32b5a2a70.mp3",
+    "male": "/audio/words/male/0b47e3e32b5a2a70.mp3"
+   }
+  },
+  {
+   "term": "ähnlich",
+   "entry": {
+    "female": "/audio/words/female/e6a96e3fc0bdf557.mp3",
+    "male": "/audio/words/male/e6a96e3fc0bdf557.mp3"
+   }
+  },
+  {
+   "term": "gesund",
+   "entry": {
+    "female": "/audio/words/female/35c86777491b25c5.mp3",
+    "male": "/audio/words/male/35c86777491b25c5.mp3"
+   }
+  },
+  {
+   "term": "unbedingt",
+   "entry": {
+    "female": "/audio/words/female/ba5e07c6f1263234.mp3",
+    "male": "/audio/words/male/ba5e07c6f1263234.mp3"
+   }
+  },
+  {
+   "term": "trotzdem",
+   "entry": {
+    "female": "/audio/words/female/8df04599592d48c3.mp3",
+    "male": "/audio/words/male/8df04599592d48c3.mp3"
+   }
+  },
+  {
+   "term": "anrufen",
+   "entry": {
+    "female": "/audio/words/female/48b5c857bebb092a.mp3",
+    "male": "/audio/words/male/48b5c857bebb092a.mp3"
+   }
+  },
+  {
+   "term": "die Idee",
+   "entry": {
+    "female": "/audio/words/female/ea2f5b4f5a9bfe72.mp3",
+    "male": "/audio/words/male/ea2f5b4f5a9bfe72.mp3"
+   }
+  },
+  {
+   "term": "der Humor",
+   "entry": {
+    "female": "/audio/words/female/fa9bb7091a5fd8e3.mp3",
+    "male": "/audio/words/male/fa9bb7091a5fd8e3.mp3"
+   }
+  },
+  {
+   "term": "das Ding",
+   "entry": {
+    "female": "/audio/words/female/0eae76ca5fd9e1a8.mp3",
+    "male": "/audio/words/male/0eae76ca5fd9e1a8.mp3"
+   }
+  }
+ ],
+ "b1_unique_count": 1704,
+ "dieKatze": {
+  "hash": "7bbdf7570db744e4",
+  "inA1": false
+ }
+}

@@ -1,0 +1,66 @@
+{
+  "chapter-b1-2-nebensaetze-weil-da-obwohl-data.js": {
+    "total": 58,
+    "click": 53,
+    "pct": 91.4,
+    "gap": [
+      "morgen",
+      "diese",
+      "mal",
+      "Na",
+      "Warmes"
+    ]
+  },
+  "chapter-b1-3-konjunktiv2-hoefliche-bitten-data.js": {
+    "total": 49,
+    "click": 40,
+    "pct": 81.6,
+    "gap": [
+      "Display",
+      "könnten",
+      "mal",
+      "draufschauen",
+      "Höppla",
+      "Wackelkontakt",
+      "Oh",
+      "vielen"
+    ]
+  },
+  "chapter-b1-4-folgen-deshalb-so-dass-data.js": {
+    "total": 54,
+    "click": 50,
+    "pct": 92.6,
+    "gap": [
+      "dieses",
+      "mal",
+      "durchgescheuert",
+      "neues"
+    ]
+  },
+  "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js": {
+    "total": 44,
+    "click": 37,
+    "pct": 84.1,
+    "gap": [
+      "Timo",
+      "diese",
+      "großen",
+      "Camembert",
+      "ganzen",
+      "mal",
+      "Freitagabend"
+    ]
+  },
+  "chapter-b1-6-goethe-mini-1-data.js": {
+    "total": 63,
+    "click": 58,
+    "pct": 92.1,
+    "gap": [
+      "Timo",
+      "morgen",
+      "Musst",
+      "ernst",
+      "letzte"
+    ]
+  }
+}

@@ -1,0 +1,225 @@
+[
+ {
+  "f": "a1-17-goethe2",
+  "path": "story.dialogue[7].tokens[2]",
+  "fields": "ex=null,w=null",
+  "w": "null",
+  "plain": false
+ },
+ {
+  "f": "a2-11-wenn",
+  "path": "vocab[22]",
+  "fields": "en=true",
+  "plain": false
+ },
+ {
+  "f": "b1-12-adjektivdeklination-wiederholung",
+  "path": "reading.tokens[95]",
+  "fields": "en=false",
+  "w": "falschen",
+  "plain": false
+ },
+ {
+  "f": "b1-14-komparativ-superlativ-vor-nomen",
+  "path": "story.dialogue[2].tokens[0]",
+  "fields": "en=true",
+  "w": "Stimmt",
+  "plain": false
+ },
+ {
+  "f": "b1-30-artikelwoerter-als-pronomen",
+  "path": "story.dialogue[2].tokens[1]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b1-31-adjektive-als-nomen",
+  "path": "story.dialogue[3].tokens[4]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b1-33-je-desto-umso",
+  "path": "story.dialogue[1].tokens[0]",
+  "fields": "en=true",
+  "w": "Stimmt",
+  "plain": false
+ },
+ {
+  "f": "b2-03-informationsstruktur-thema-rhema",
+  "path": "story.dialogue[2].tokens[0]",
+  "fields": "en=true",
+  "w": "Stimmt",
+  "plain": false
+ },
+ {
+  "f": "b2-03-informationsstruktur-thema-rhema",
+  "path": "story.dialogue[6].tokens[3]",
+  "fields": "en=true",
+  "w": "stimmt",
+  "plain": false
+ },
+ {
+  "f": "b2-04-formales-es",
+  "path": "story.dialogue[4].tokens[6]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-05-korrelat-es",
+  "path": "reading.tokens[47]",
+  "fields": "en=true",
+  "w": "wahren",
+  "plain": false
+ },
+ {
+  "f": "b2-09-trennbar-vs-untrennbar",
+  "path": "story.dialogue[6].tokens[5]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-11-stellung-von-nicht",
+  "path": "story.dialogue[2].tokens[6]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-12-doppelte-verneinung-litotes",
+  "path": "story.dialogue[1].tokens[0]",
+  "fields": "en=true",
+  "w": "Stimmt",
+  "plain": false
+ },
+ {
+  "f": "b2-12-doppelte-verneinung-litotes",
+  "path": "story.dialogue[2].tokens[5]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-13-nuancierte-negation",
+  "path": "story.dialogue[3].tokens[5]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-19-ohne-zu",
+  "path": "story.dialogue[4].tokens[9]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-22-weder-noch",
+  "path": "story.dialogue[3].tokens[1]",
+  "fields": "en=true",
+  "w": "stimmt",
+  "plain": false
+ },
+ {
+  "f": "b2-24-einerseits-andererseits",
+  "path": "story.dialogue[2].tokens[6]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-29-futur1-vermutungen",
+  "path": "story.dialogue[5].tokens[1]",
+  "fields": "en=true",
+  "w": "stimmt",
+  "plain": false
+ },
+ {
+  "f": "b2-32-konjunktiv2-vermutungen",
+  "path": "story.dialogue[4].tokens[0]",
+  "fields": "en=true",
+  "w": "Stimmt",
+  "plain": false
+ },
+ {
+  "f": "b2-33-irreale-vergleiche-als-ob",
+  "path": "story.dialogue[0].tokens[3]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-33-irreale-vergleiche-als-ob",
+  "path": "story.dialogue[1].tokens[3]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-33-irreale-vergleiche-als-ob",
+  "path": "story.dialogue[2].tokens[6]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "b2-55-modalpartikeln-doch-ja",
+  "path": "reading.tokens[37]",
+  "fields": "en=true",
+  "w": "Stimmt",
+  "plain": false
+ },
+ {
+  "f": "b2-68-redemittel-fuer-diskussionen",
+  "path": "story.dialogue[5].tokens[4]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": ",",
+  "plain": false
+ },
+ {
+  "f": "c1-05-zweiteilige-satzverbindungen",
+  "path": "story.dialogue[1].tokens[0]",
+  "fields": "en=true",
+  "w": "Stimmt",
+  "plain": false
+ },
+ {
+  "f": "c1-10-nomen-mit-praepositionalobjekt",
+  "path": "story.dialogue[6].tokens[1]",
+  "fields": "en=true",
+  "w": "stimmt",
+  "plain": false
+ },
+ {
+  "f": "c1-13-vermutungen-mit-modalverben-ausdruecken",
+  "path": "story.dialogue[3].tokens[1]",
+  "fields": "en=true",
+  "w": "stimmt",
+  "plain": false
+ },
+ {
+  "f": "c1-15-konjunktiv-i-und-indirekte-rede",
+  "path": "story.dialogue[3].tokens[0]",
+  "fields": "en=true",
+  "w": "Stimmt",
+  "plain": false
+ },
+ {
+  "f": "c1-17-goethe-halbzeit-test",
+  "path": "reading.tokens[31]",
+  "fields": "en=false",
+  "w": "falsche",
+  "plain": false
+ },
+ {
+  "f": "c2-01-zeitformen-der-verben",
+  "path": "story.dialogue[2].tokens[3]",
+  "fields": "en=true,hi=undefined,pron=undefined,type=undefined",
+  "w": "1989",
+  "plain": false
+ }
+]

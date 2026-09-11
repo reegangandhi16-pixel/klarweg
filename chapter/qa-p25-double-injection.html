@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P25 b2-68 double-injection test</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:18px;max-width:790px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:56vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P25 — b2-68 double-injection test</h1>
+<div class="sub">Single-page experiment on <code>b2-68-redemittel-fuer-diskussionen</code>. Same stability gate and measurement path as P14/P15/P21/P23/P24; <code>qa-engine.js</code> is loaded unmodified and never patched. A = one injection, B = second injection into the SAME live document, C = fresh document with two injections before measuring. Investigation only.<br><code>KWP25.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script src="qa-finding-serializer.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const FILE='chapter-b2-68-redemittel-fuer-diskussionen.html';
+const CONTROL={occ:463,find:5};
+const PHASE15={occ:486,find:966};
+function fnv(str){let h=0x811c9dc5;for(let i=0;i<str.length;i++)h=((h^str.charCodeAt(i))*0x01000193)>>>0;return h.toString(16);}
+function ready(f,cb){
+  const S=180,N=3,HARD=30000,t0=Date.now();let last=null,same=0,samples=0;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const nodes=d.querySelectorAll('.rw, .de-link');if(!nodes.length)return null;
+    const roles={};let n=0;for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;return n+'|'+d.querySelectorAll('[id^="sec-"]').length+'|'+d.querySelectorAll('.wp-badge').length+'|'+
+      Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{if(Date.now()-t0>HARD)return cb('hard-timeout',{samples:samples});
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,S);}
+    const s=sig();samples++;
+    if(s===null){last=null;same=0;return setTimeout(poll,S);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=N)return cb('stable',{msToStable:Date.now()-t0,samples:samples,settleSig:s});
+    setTimeout(poll,S);};
+  poll();
+}
+function inject(d){return new Promise((res,rej)=>{const s=d.createElement('script');
+  s.src='qa-engine.js?v='+Date.now()+'_'+Math.random();s.onload=()=>res(true);s.onerror=()=>rej(new Error('engine load failed'));
+  d.head.appendChild(s);});}
+// Read-only snapshot of everything that would reveal duplicate processing.
+function probe(d,w){
+  const all=[].slice.call(d.querySelectorAll('.rw, .de-link'));
+  const leaf=all.filter(n=>!n.querySelector('.rw, .de-link'));
+  const visible=leaf.filter(n=>!n.closest('.word-pop')).filter(n=>!!(n.offsetParent||n.getClientRects().length));
+  return {rwTotal:d.querySelectorAll('.rw').length,deLinkTotal:d.querySelectorAll('.de-link').length,
+    allWrapped:all.length,leafWrapped:leaf.length,visibleLeaf:visible.length,
+    nestedWrappers:all.length-leaf.length,
+    doubleWrapped:d.querySelectorAll('.rw .rw, .de-link .de-link, .rw .de-link, .de-link .rw').length,
+    domNodes:d.getElementsByTagName('*').length,htmlChars:d.documentElement.outerHTML.length,
+    styleSheets:d.styleSheets.length,scripts:d.querySelectorAll('script').length,
+    engineScripts:[].slice.call(d.querySelectorAll('script')).filter(s=>/qa-engine\.js/.test(s.src||'')).length,
+    wordPops:d.querySelectorAll('.word-pop').length,
+    engineInstalled:!!w.KWQA,engineKeys:w.KWQA?Object.keys(w.KWQA).sort().join(','):null,
+    lexiconEntries:(function(){try{const L=w.KW_GLOBAL_LEXICON;if(!L)return null;return L.size!==undefined?L.size:Object.keys(L).length;}catch(e){return null;}})(),
+    surfaceFingerprint:fnv(visible.map(n=>n.textContent.trim()).join('\u0001'))};
+}
+function runEngine(w){
+  const qa=w.KWQA.run();
+  const ser=(qa.findings||[]).map(window.KWFSER.serialize);
+  const ids=ser.map(x=>JSON.stringify([x.code,x.section,x.index,x.surface]));
+  const uniq=new Set(ids);
+  return {occurrences:qa.occurrences,checked:qa.checked,findings:ser.length,clean:!!qa.clean,counts:qa.counts,
+    findingFingerprint:fnv(ser.map(x=>JSON.stringify([x.code,x.section,x.index,x.surface,x.detail])).join('\n')),
+    duplicateFindingIdentities:ids.length-uniq.size,
+    sample:ser.slice(0,4).map(x=>[x.code,x.section,x.index,x.surface])};
+}
+function load(){
+  return new Promise((resolve,reject)=>{
+    const f=$('#frame');const timer=setTimeout(()=>reject(new Error('load timeout')),90000);
+    f.onload=()=>ready(f,(state,gate)=>{clearTimeout(timer);
+      if(state!=='stable')return reject(new Error('not stable: '+state));
+      resolve({f:f,d:f.contentDocument,w:f.contentWindow,gate:gate});});
+    f.src=FILE+'?p25='+Date.now()+'_'+Math.random();
+  });
+}
+window.KWP25={CONTROL,PHASE15,
+  async run(){
+    const R={};
+    // ---- A: clean control, single injection ----
+    $('#status').textContent='A · clean control (single injection)';
+    let ctx=await load();
+    R.A_before=probe(ctx.d,ctx.w);
+    await inject(ctx.d);
+    R.A_afterInject=probe(ctx.d,ctx.w);
+    R.A=runEngine(ctx.w);
+    R.A.readyState='stable';R.A.gate=ctx.gate;R.A.probe=probe(ctx.d,ctx.w);
+    $('#out').textContent=JSON.stringify(R,null,1);
+
+    // ---- B: SECOND injection into the SAME live document ----
+    $('#status').textContent='B · second injection, same live document';
+    const engineKeysBefore=R.A.probe.engineKeys;
+    await inject(ctx.d);
+    await new Promise(x=>setTimeout(x,1200));   // let any re-init/observer settle
+    R.B_afterSecondInject=probe(ctx.d,ctx.w);
+    R.B=runEngine(ctx.w);
+    R.B.readyState='stable';R.B.probe=R.B_afterSecondInject;
+    R.B.engineIdentityChanged=engineKeysBefore!==R.B_afterSecondInject.engineKeys;
+    R.B.linkificationDuplicated=R.B_afterSecondInject.doubleWrapped>R.A.probe.doubleWrapped
+      ||R.B_afterSecondInject.allWrapped>R.A.probe.allWrapped;
+    // third injection for good measure — does N injections scale anything?
+    $('#status').textContent='B2 · third injection, same document';
+    await inject(ctx.d);await new Promise(x=>setTimeout(x,1200));
+    R.B2=runEngine(ctx.w);R.B2.probe=probe(ctx.d,ctx.w);
+    $('#out').textContent=JSON.stringify(R,null,1);
+
+    // ---- C: fresh document, two injections BEFORE measuring ----
+    $('#status').textContent='C · fresh document, two injections before measuring';
+    ctx=await load();
+    await inject(ctx.d);
+    await inject(ctx.d);
+    await new Promise(x=>setTimeout(x,1200));
+    R.C=runEngine(ctx.w);
+    R.C.readyState='stable';R.C.gate=ctx.gate;R.C.probe=probe(ctx.d,ctx.w);
+
+    // ---- C2: fresh document, two injections fired CONCURRENTLY ----
+    $('#status').textContent='C2 · fresh document, two concurrent injections';
+    ctx=await load();
+    await Promise.all([inject(ctx.d),inject(ctx.d)]);
+    await new Promise(x=>setTimeout(x,1200));
+    R.C2=runEngine(ctx.w);
+    R.C2.readyState='stable';R.C2.probe=probe(ctx.d,ctx.w);
+
+    const sig=v=>v?(v.occurrences+' / '+v.findings):null;
+    R.verdict={control:sig(R.A),sameDocDouble:sig(R.B),sameDocTriple:sig(R.B2),
+      freshDocDouble:sig(R.C),freshDocConcurrent:sig(R.C2),
+      phase15Signature:PHASE15.occ+' / '+PHASE15.find,
+      anyMatchesPhase15:[R.A,R.B,R.B2,R.C,R.C2].some(v=>v&&v.findings===PHASE15.find),
+      anyDuplicateFindings:[R.A,R.B,R.B2,R.C,R.C2].some(v=>v&&v.duplicateFindingIdentities>0),
+      allEqualControl:[R.A,R.B,R.B2,R.C,R.C2].every(v=>v&&v.occurrences===CONTROL.occ&&v.findings===CONTROL.find)};
+    window.__P25=R;$('#status').textContent='done';$('#out').textContent=JSON.stringify(R.verdict,null,1);
+    return R.verdict;
+  }};
+$('#out').textContent='ready';
+</script>
+</body></html>

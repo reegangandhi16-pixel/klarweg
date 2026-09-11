@@ -1,0 +1,283 @@
+[
+ {
+  "num": 1,
+  "id": "a1-1-alphabet",
+  "plain": "(NOT FOUND)"
+ },
+ {
+  "num": 2,
+  "id": "a1-2-vokale",
+  "title": "Die erste Stunde",
+  "plain": "Die Aussprache ist wichtig. Sprich langsam und laut. Achte auf die Betonung. Sprich nach und sag es noch einmal."
+ },
+ {
+  "num": 3,
+  "id": "a1-3-zahlen",
+  "title": "Im Café",
+  "plain": "Anna ist einundzwanzig Jahre alt. Sie kauft zwei Bücher für fünfzehn Euro. Der Kaffee kostet drei Euro. Ihre Handynummer endet mit neunundzwanzig."
+ },
+ {
+  "num": 4,
+  "id": "a1-4-hallo",
+  "title": "Der erste Tag",
+  "plain": "Guten Tag, ich heiße Anna. Wie heißt du? Hallo, ich bin Rohan. Ich komme aus Indien. Sehr gut! Willkommen."
+ },
+ {
+  "num": 5,
+  "id": "a1-5-werbistdu",
+  "title": "Im Sprachkurs",
+  "plain": "So, wer bist du? Ich bin Rohan. Mein Name ist Rohan Sharma. Ich komme aus Indien und wohne in Delhi."
+ },
+ {
+  "num": 6,
+  "id": "a1-6-wfragen",
+  "title": "Das Interview",
+  "plain": "Wie heißt du? Ich heiße Anna. Woher kommst du? Aus Indien. Wo wohnst du? In Delhi. Warum lernst du Deutsch?"
+ },
+ {
+  "num": 7,
+  "id": "a1-7-jaodernein",
+  "title": "Im Kurs",
+  "plain": "Sprichst du Deutsch? Ja, ein bisschen. Verstehst du das? Nein, ich verstehe nicht. Entschuldigung!"
+ },
+ {
+  "num": 8,
+  "id": "a1-8-goethemini1",
+  "title": "Drei Personen im Kurs",
+  "plain": "Das ist Anna. Sie kommt aus Indien und spricht Deutsch. Woher kommst du? Sprichst du auch Englisch?"
+ },
+ {
+  "num": 9,
+  "id": "a1-9-verben",
+  "title": "Mein Tag",
+  "plain": "Ich lerne jeden Tag Deutsch. Ich brauche das Deutschbuch und eine Lernkarte. Am Wochenende koche ich und spiele."
+ },
+ {
+  "num": 10,
+  "id": "a1-10-artikel",
+  "title": "Auf dem Tisch",
+  "plain": "Der Tisch ist nicht leer. Da ist ein Buch, ein Stift und eine Karte. Die Sachen gehören zusammen."
+ },
+ {
+  "num": 11,
+  "id": "a1-11-negation",
+  "title": "Im Café",
+  "plain": "Hast du heute Zeit? Nein, ich habe keine Zeit. Ich bin nicht müde, aber ich habe kein Geld mehr. Kein Problem!"
+ },
+ {
+  "num": 12,
+  "id": "a1-12-akkusativ",
+  "title": "Im Geschäft",
+  "plain": "Ich suche den Schlüssel. Ich kaufe ein Buch und eine Karte. Hast du einen Stift? Ja, ich finde alles."
+ },
+ {
+  "num": 13,
+  "id": "a1-13-adjektive",
+  "title": "Meine Stadt und mein Freund",
+  "plain": "Meine Stadt ist groß und wunderschön. Mein Freund ist jung, fleißig und sehr nett. Heute bin ich müde, aber glücklich."
+ },
+ {
+  "num": 14,
+  "id": "a1-14-essen",
+  "title": "Frühstück und Café",
+  "plain": "Zum Frühstück esse ich ein Brötchen mit Käse. Ich trinke gern Tee. Im Café möchte ich einen Kaffee und Kuchen. Das schmeckt lecker!"
+ },
+ {
+  "num": 15,
+  "id": "a1-15-cafe",
+  "title": "Im Café",
+  "plain": "Rohan geht ins Café. Der Kellner bringt die Speisekarte. Rohan möchte einen Kaffee und ein Stück Kuchen. Was kostet das? Der Preis ist vier Euro. Am Ende sagt Rohan : Die Rechnung, bitte! Stimmt so!"
+ },
+ {
+  "num": 16,
+  "id": "a1-16-hobbies",
+  "title": "Meine Freizeit",
+  "plain": "In der Freizeit spiele ich gern Fußball. Meine Freundin Anna tanzt lieber. Am Wochenende gehen wir ins Kino. Der Film macht Spaß. Am liebsten fotografiere ich. Das ist mein Hobby!"
+ },
+ {
+  "num": 17,
+  "id": "a1-17-goethe2",
+  "title": "Das Anmeldeformular",
+  "plain": "Das ist das Formular von Rohan. Der Familienname ist Sharma. Der Wohnort ist Berlin, die Postleitzahl ist 10115. Seine E-Mail-Adresse ist sein Kontakt. Rohan ist männlich und Mitglied an der Sprachschule. Alle Angaben sind richtig."
+ },
+ {
+  "num": 18,
+  "id": "a1-18-irregular",
+  "title": "Rohans Uni-Tag",
+  "plain": "Rohan fährt mit dem Bus zur Uni. Dort trifft er Max. Sie essen in der Mensa. Es gibt einen Kuchen. Max ist müde, denn er schläft zu wenig. Danach liest er die Zeitung."
+ },
+ {
+  "num": 19,
+  "id": "a1-19-satzposition",
+  "title": "Mein Alltag",
+  "plain": "Morgens dusche ich früh. Dann frühstücke ich allein. Vormittags habe ich einen Deutschkurs. Mittags esse ich in der Mensa. Abends lerne ich regelmäßig Deutsch. Nachts schlafe ich gut."
+ },
+ {
+  "num": 20,
+  "id": "a1-20-modalverben1",
+  "title": "Die Party am Samstag",
+  "plain": "Am Samstag wollen Anna und Max eine Party machen. Max will die Musik machen. Rohan muss zuerst seine Hausaufgabe machen. Danach kann er kommen. Alle möchten Pizza essen. Hoffentlich wird die Party super!"
+ },
+ {
+  "num": 21,
+  "id": "a1-21-uhrzeit",
+  "title": "Mein Montag",
+  "plain": "Am Montag beginnt mein Tag um sieben Uhr. Der Deutschkurs ist von halb neun bis zwölf Uhr. Um Viertel nach eins esse ich in der Mensa. Am Abend habe ich um acht einen Termin."
+ },
+ {
+  "num": 22,
+  "id": "a1-22-berufe",
+  "title": "Annas Arbeitstag",
+  "plain": "Anna ist Ärztin. Sie arbeitet im Krankenhaus. Ihre Arbeitszeit ist von acht bis vier. Um eins macht sie eine Mittagspause. Ihre Kollegen sind nett. Sie verdient gut und liebt ihren Beruf."
+ },
+ {
+  "num": 23,
+  "id": "a1-23-familie",
+  "title": "Meine Familie",
+  "plain": "Das ist meine Familie. Mein Vater ist Lehrer und meine Mutter ist Ärztin. Ich habe eine Schwester. Meine Schwester ist verheiratet. Ihr Mann ist mein Bruder? Nein, er ist mein Schwager! Meine Großeltern wohnen auch hier."
+ },
+ {
+  "num": 24,
+  "id": "a1-24-datum",
+  "title": "Annas Geburtstag",
+  "plain": "Anna hat am dritten Mai Geburtstag. Im Frühling blühen die Blumen. Ihre Freunde planen eine Feier. Insgesamt kommen ungefähr zwanzig Gäste. Alle schenken ihr Geschenke und wünschen \"Herzlichen Glückwunsch!\"."
+ },
+ {
+  "num": 25,
+  "id": "a1-25-trennbar",
+  "title": "Mein Samstag",
+  "plain": "Am Samstag stehe ich spät auf. Zuerst rufe ich Anna an. Dann kaufen wir zusammen ein. Ich bringe Kaffee mit. Wir holen Max ab, denn er steht immer spät auf. Am Abend sehe ich fern."
+ },
+ {
+  "num": 26,
+  "id": "a1-26-goethe3",
+  "title": "Eine Verspätung",
+  "plain": "Max kommt oft zu spät. Heute hat er wieder Verspätung. Er sagt : Es tut mir leid. Anna sagt : Macht nichts! Aber Pünktlichkeit ist wichtig. Morgen will Max pünktlich sein."
+ },
+ {
+  "num": 27,
+  "id": "a1-27-praeteritum",
+  "title": "Gestern",
+  "plain": "Gestern war ich zu Hause. Wir hatten Besuch. Meine Tante war auch da. Es gab einen Kuchen und Tee. Der Abend war schön, aber ich war sehr müde. Früher hatte ich mehr Energie!"
+ },
+ {
+  "num": 28,
+  "id": "a1-28-perfekt",
+  "title": "Mein Tag gestern",
+  "plain": "Gestern habe ich viel gemacht. Am Morgen habe ich Deutsch gelernt. Dann bin ich in die Stadt gefahren. Ich habe einen Kaffee getrunken und Freunde getroffen. Am Abend bin ich müde nach Hause gegangen."
+ },
+ {
+  "num": 29,
+  "id": "a1-29-perfekt-haben",
+  "title": "Vor der Prüfung",
+  "plain": "Letzte Woche habe ich viel für die Prüfung gelernt. Ich habe den Unterricht besucht und Übungen gemacht. Anna hat ein Buch gelesen. Wir haben zusammen im Café studiert. Nur Max hat nur Kaffee getrunken!"
+ },
+ {
+  "num": 30,
+  "id": "a1-30-perfekt-sein",
+  "title": "Annas Reise",
+  "plain": "Am Freitag ist Anna ins Ausland geflogen. Der Flug ist gut gelaufen. Sie ist am Abend angekommen und ist müde eingeschlafen. Sie ist zwei Tage geblieben. Dann ist sie zurückgefahren. Die Reise war wirklich schön!"
+ },
+ {
+  "num": 31,
+  "id": "a1-31-partizip-praefix",
+  "title": "Ein voller Tag",
+  "plain": "Gestern habe ich viel erlebt. Am Morgen habe ich ein Paket bekommen. Dann habe ich eingekauft und Anna angerufen. Sie hat mir ein Café empfohlen. Dort habe ich mein Rad verkauft. Nur den Namen habe ich vergessen!"
+ },
+ {
+  "num": 32,
+  "id": "a1-32-akkusativpronomen",
+  "title": "Das Fest",
+  "plain": "Wir machen ein Fest. Anna bringt den Kuchen. Sie bringt ihn um sechs. Rohan macht die Musik. Er macht sie gern. Max lädt die Gäste ein. Er lädt sie ein. Und Frau Weber? Wir laden sie auch ein!"
+ },
+ {
+  "num": 33,
+  "id": "a1-33-saetze-verbinden",
+  "title": "Das Wochenende",
+  "plain": "Anna geht aus, und Rohan bleibt zu Hause. Er lernt, weil er bald eine Prüfung hat. Max kommt nicht, denn er ist müde. Es regnet, deshalb bleibt er gern zu Hause."
+ },
+ {
+  "num": 34,
+  "id": "a1-34-schreiben",
+  "title": "Eine Einladung",
+  "plain": "Liebe Freunde, ich lade euch herzlich ein. Ich mache eine Party, denn ich habe Geburtstag. Wir treffen uns am Samstag um achtzehn Uhr bei mir. Bitte kommt alle! Liebe Grüße, Anna."
+ },
+ {
+  "num": 35,
+  "id": "a1-35-goethe4",
+  "title": "Mein Urlaub",
+  "plain": "Letzte Woche bin ich nach M\\u00fcnchen gefahren. Die Reise war tats\\u00e4chlich toll. Ich hatte viel Zeit, weil ich Urlaub hatte. Am Samstag habe ich meine Tante getroffen. Wir sind ins Caf\\u00e9 gegangen und ich habe Kuchen gegessen. Es war ein sch\\u00f6ner Urlaub!"
+ },
+ {
+  "num": 36,
+  "id": "a1-36-dativ",
+  "title": "Geschenke",
+  "plain": "Vor den Ferien geben wir Geschenke. Anna gibt der Lehrerin Blumen. Rohan hilft dem Studenten und gibt ihm ein Buch. Max gibt sich nur Kuchen! Wem gibst du etwas?"
+ },
+ {
+  "num": 37,
+  "id": "a1-37-praep-dativ",
+  "title": "Die Reise nach München",
+  "plain": "Anna kommt aus M\\u00fcnchen. Am Wochenende f\\u00e4hrt sie mit dem Zug nach M\\u00fcnchen. Dort wohnt sie bei ihrer Tante. Die Tante wohnt seit zehn Jahren dort. Ihr Haus ist gegen\\u00fcber dem Bahnhof. Vom Bahnhof geht Anna zu Fu\\u00df."
+ },
+ {
+  "num": 38,
+  "id": "a1-38-wechselpraep",
+  "title": "Meine neue Wohnung",
+  "plain": "Meine Wohnung ist hell und gem\\u00fctlich. Im Wohnzimmer steht ein Sofa an der Wand. \\u00dcber dem Sofa h\\u00e4ngt ein Bild. Die Lampe steht neben dem Sofa. Heute stelle ich eine Pflanze auf den Tisch. Dann gehe ich in die K\\u00fcche und koche Kaffee."
+ },
+ {
+  "num": 39,
+  "id": "a1-39-ortsangaben",
+  "title": "Der Weg zum Café",
+  "plain": "Rohan ist am Bahnhof. Er geht geradeaus und dann links. An der Ecke ist eine Apotheke. Das Caf\\u00e9 ist direkt rechts, neben der Apotheke. Es ist in der N\\u00e4he, nur zwei Minuten zu Fu\\u00df. Rohan geht ins Caf\\u00e9 und sieht Anna am Fenster."
+ },
+ {
+  "num": 40,
+  "id": "a1-40-verben-dativ",
+  "title": "Im Kleidergesch\\u00e4ft",
+  "plain": "Anna braucht ein Kleid. Das blaue Kleid gef\\u00e4llt ihr sehr. Sie probiert es an. Es passt ihr und es steht ihr gut. Rohan hilft ihr und sie dankt ihm. Nur Max sagt : \"Mir tun die F\\u00fc\\u00dfe weh \""
+ },
+ {
+  "num": 41,
+  "id": "a1-41-dativpronomen",
+  "title": "Vor dem Unterricht",
+  "plain": "Rohan fehlt ein Stift. Anna hilft ihm und gibt ihm einen Stift. Rohan dankt ihr. Dann erkl\\u00e4rt er ihr die Aufgabe. Frau Weber hilft ihnen allen. Das gef\\u00e4llt ihnen sehr!"
+ },
+ {
+  "num": 42,
+  "id": "a1-42-welcher-dieser",
+  "title": "Im Kaufhaus",
+  "plain": "Anna und Rohan gehen ins Kaufhaus. Rohan fragt : \"Welches Buch kaufe ich? \" Anna sagt : \"Dieses Buch ist gut. \" Dann fragt er nach einem Bleistift. Anna sagt : \"Nimm diesen Bleistift! \" An der Kasse fragt die Verk\\u00e4uferin : \"Mit welcher Karte zahlen Sie? \""
+ },
+ {
+  "num": 43,
+  "id": "a1-43-smalltalk-man",
+  "title": "Im Café",
+  "plain": "Heute regnet es in Berlin. Rohan und Anna sitzen im Café und reden \\u00fcber das Wetter. \\u201eIn Deutschland redet man oft \\u00fcber das Wetter, \\u201c sagt Anna. Rohan sagt : \\u201eEcht? In Indien redet man oft \\u00fcber Cricket. \\u201c Zum Gl\\u00fcck scheint am Nachmittag wieder. Dann kann man wieder spazieren gehen."
+ },
+ {
+  "num": 44,
+  "id": "a1-44-imperativ-modal2",
+  "title": "Beim Arzt",
+  "plain": "Max ist krank. Er hat Fieber und Kopfschmerzen. Die \\u00c4rztin untersucht ihn und sagt : \\u201eNehmen Sie das Medikament und bleiben Sie im Bett! \\u201c Max fragt : \\u201eDarf ich Kaffee trinken? \\u201c Die \\u00c4rztin sagt : \\u201eNein, du sollst Tee trinken! \\u201c Gute Besserung!"
+ },
+ {
+  "num": 45,
+  "id": "a1-45-telefonieren",
+  "title": "Der Anruf",
+  "plain": "Max ist krank und ruft Anna an. Er sagt : \\u201eHier ist Max. Was ist die Hausaufgabe? \\u201c Aber das Netz ist schlecht. Max fragt : \\u201eWie bitte? Kannst du das wiederholen? \\u201c Anna wiederholt langsam : Seite zw\\u00f6lf. Dann schickt sie ihm eine Sprachnachricht."
+ },
+ {
+  "num": 46,
+  "id": "a1-46-zeitangaben",
+  "title": "Meine Pr\\u00fcfungswoche",
+  "plain": "Seit zwei Monaten lerne ich Deutsch. Am Montag beginnt die Pr\\u00fcfungswoche. Ab morgen lerne ich jeden Abend Vokabeln. Vor der Pr\\u00fcfung bin ich nerv\\u00f6s, aber bald bereit. Die Pr\\u00fcfung dauert drei Stunden. Nach der Pr\\u00fcfung feiern wir im Sommer."
+ },
+ {
+  "num": 47,
+  "id": "a1-47-goethe-final",
+  "title": "Tipps für die Pr\\u00fcfung",
+  "plain": "Die Pr\\u00fcfung hat vier Teile. Beim Lesen lies zuerst die \\u00dcberschrift. Ein langes Wort ist oft ein Kompositum : zerlege es in Teile. Beim H\\u00f6ren h\\u00f6r einfach weiter. Und beim Schreiben mach zuerst Stichpunkte. Dann machst du weniger Fehler!"
+ }
+]

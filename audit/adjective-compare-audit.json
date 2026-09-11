@@ -1,0 +1,4090 @@
+{
+ "totalAdj": 1047,
+ "withCompare": 26,
+ "missingCompare": [
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "eigene/eigener"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "thematisch"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "weitere"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "bestimmt"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "feminin"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "maskulin"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "unbestimmt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "falsch"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "super"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "toll"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "anstrengend"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "attraktiv"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "beliebt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "berühmt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "böse"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "cool"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "doof"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "faul"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "fleißig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "froh"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "gefährlich"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "glücklich"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "günstig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "hungrig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "hässlich"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "kaputt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "langweilig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "leer"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "leicht"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "lustig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "müde"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "nett"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "neu"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "normal"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "perfekt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "praktisch"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "sauber"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "schwer"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "sicher"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "wichtig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "wunderbar"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "wunderschön"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "breit"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "eilig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "elegant"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "fehlend"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "ideal"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "individuell"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "k.o."
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "lebendig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "originell"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "populär"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "supernett"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "top"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "typisch"
+  },
+  {
+   "file": "chapter-a1-14-essen-data.js",
+   "word": "frisch"
+  },
+  {
+   "file": "chapter-a1-14-essen-data.js",
+   "word": "lecker"
+  },
+  {
+   "file": "chapter-a1-14-essen-data.js",
+   "word": "süß"
+  },
+  {
+   "file": "chapter-a1-14-essen-data.js",
+   "word": "asiatisch"
+  },
+  {
+   "file": "chapter-a1-14-essen-data.js",
+   "word": "satt"
+  },
+  {
+   "file": "chapter-a1-15-cafe-data.js",
+   "word": "getrennt"
+  },
+  {
+   "file": "chapter-a1-17-goethe2-data.js",
+   "word": "männlich"
+  },
+  {
+   "file": "chapter-a1-17-goethe2-data.js",
+   "word": "persönlich"
+  },
+  {
+   "file": "chapter-a1-17-goethe2-data.js",
+   "word": "weiblich"
+  },
+  {
+   "file": "chapter-a1-18-irregular-data.js",
+   "word": "unregelmäßig"
+  },
+  {
+   "file": "chapter-a1-19-satzposition-data.js",
+   "word": "abwechselnd"
+  },
+  {
+   "file": "chapter-a1-19-satzposition-data.js",
+   "word": "wach"
+  },
+  {
+   "file": "chapter-a1-20-modalverben1-data.js",
+   "word": "nächste/nächster"
+  },
+  {
+   "file": "chapter-a1-20-modalverben1-data.js",
+   "word": "stressig"
+  },
+  {
+   "file": "chapter-a1-20-modalverben1-data.js",
+   "word": "schade"
+  },
+  {
+   "file": "chapter-a1-20-modalverben1-data.js",
+   "word": "verschieden"
+  },
+  {
+   "file": "chapter-a1-21-uhrzeit-data.js",
+   "word": "spät"
+  },
+  {
+   "file": "chapter-a1-21-uhrzeit-data.js",
+   "word": "inoffiziell"
+  },
+  {
+   "file": "chapter-a1-21-uhrzeit-data.js",
+   "word": "offiziell"
+  },
+  {
+   "file": "chapter-a1-22-berufe-data.js",
+   "word": "arbeitslos"
+  },
+  {
+   "file": "chapter-a1-22-berufe-data.js",
+   "word": "kreativ"
+  },
+  {
+   "file": "chapter-a1-23-familie-data.js",
+   "word": "ledig"
+  },
+  {
+   "file": "chapter-a1-23-familie-data.js",
+   "word": "verheiratet"
+  },
+  {
+   "file": "chapter-a1-25-trennbar-data.js",
+   "word": "trennbar"
+  },
+  {
+   "file": "chapter-a1-26-goethe3-data.js",
+   "word": "fertig"
+  },
+  {
+   "file": "chapter-a1-26-goethe3-data.js",
+   "word": "frei"
+  },
+  {
+   "file": "chapter-a1-26-goethe3-data.js",
+   "word": "frei (Termin)"
+  },
+  {
+   "file": "chapter-a1-26-goethe3-data.js",
+   "word": "höflich"
+  },
+  {
+   "file": "chapter-a1-26-goethe3-data.js",
+   "word": "pünktlich"
+  },
+  {
+   "file": "chapter-a1-26-goethe3-data.js",
+   "word": "unhöflich"
+  },
+  {
+   "file": "chapter-a1-34-schreiben-data.js",
+   "word": "freundlich"
+  },
+  {
+   "file": "chapter-a1-34-schreiben-data.js",
+   "word": "geehrt"
+  },
+  {
+   "file": "chapter-a1-34-schreiben-data.js",
+   "word": "herzlich"
+  },
+  {
+   "file": "chapter-a1-34-schreiben-data.js",
+   "word": "lieb"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "blau"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "gelb"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "grau"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "grün"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "rot"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "schwarz"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "weiß"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "besondere"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "braun"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "dunkel"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "gemütlich"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "hell"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "lila"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "orange"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "voll"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "zufrieden"
+  },
+  {
+   "file": "chapter-a1-38-wechselpraep-data.js",
+   "word": "renoviert"
+  },
+  {
+   "file": "chapter-a1-39-ortsangaben-data.js",
+   "word": "einfach"
+  },
+  {
+   "file": "chapter-a1-39-ortsangaben-data.js",
+   "word": "offen"
+  },
+  {
+   "file": "chapter-a1-39-ortsangaben-data.js",
+   "word": "weit (far)"
+  },
+  {
+   "file": "chapter-a1-39-ortsangaben-data.js",
+   "word": "zentral"
+  },
+  {
+   "file": "chapter-a1-4-hallo-data.js",
+   "word": "willkommen"
+  },
+  {
+   "file": "chapter-a1-4-hallo-data.js",
+   "word": "gut"
+  },
+  {
+   "file": "chapter-a1-40-verben-dativ-data.js",
+   "word": "bequem"
+  },
+  {
+   "file": "chapter-a1-40-verben-dativ-data.js",
+   "word": "eng"
+  },
+  {
+   "file": "chapter-a1-40-verben-dativ-data.js",
+   "word": "weit"
+  },
+  {
+   "file": "chapter-a1-42-welcher-dieser-data.js",
+   "word": "geschlossen"
+  },
+  {
+   "file": "chapter-a1-42-welcher-dieser-data.js",
+   "word": "geöffnet"
+  },
+  {
+   "file": "chapter-a1-42-welcher-dieser-data.js",
+   "word": "topaktuell"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "sonnig"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "anders"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "bewölkt"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "egal"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "heiß"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "negativ"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "positiv"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "windig"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "aktuell"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "neutral"
+  },
+  {
+   "file": "chapter-a1-43-smalltalk-man-data.js",
+   "word": "schrecklich"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "gesund"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "krank"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "aktiv"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "erkältet"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "erlaubt"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "fit"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "leise"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "ruhig"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "schlecht"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "sportlich"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "verletzt"
+  },
+  {
+   "file": "chapter-a1-44-imperativ-modal2-data.js",
+   "word": "verboten"
+  },
+  {
+   "file": "chapter-a1-45-telefonieren-data.js",
+   "word": "besetzt"
+  },
+  {
+   "file": "chapter-a1-45-telefonieren-data.js",
+   "word": "offline"
+  },
+  {
+   "file": "chapter-a1-46-zeitangaben-data.js",
+   "word": "letzte/letzter"
+  },
+  {
+   "file": "chapter-a1-8-goethemini1-data.js",
+   "word": "andere"
+  },
+  {
+   "file": "chapter-a1-8-goethemini1-data.js",
+   "word": "gegenseitig"
+  },
+  {
+   "file": "chapter-a1-8-goethemini1-data.js",
+   "word": "international"
+  },
+  {
+   "file": "chapter-a1-8-goethemini1-data.js",
+   "word": "deutschsprachig"
+  },
+  {
+   "file": "chapter-a1-8-goethemini1-data.js",
+   "word": "deutsch"
+  },
+  {
+   "file": "chapter-a1-8-goethemini1-data.js",
+   "word": "argentinisch"
+  },
+  {
+   "file": "chapter-a2-1-genitiv-data.js",
+   "word": "geschieden"
+  },
+  {
+   "file": "chapter-a2-1-genitiv-data.js",
+   "word": "folgend"
+  },
+  {
+   "file": "chapter-a2-1-genitiv-data.js",
+   "word": "bitter"
+  },
+  {
+   "file": "chapter-a2-10-goethe-mini-1-data.js",
+   "word": "besser"
+  },
+  {
+   "file": "chapter-a2-10-goethe-mini-1-data.js",
+   "word": "teuer"
+  },
+  {
+   "file": "chapter-a2-10-goethe-mini-1-data.js",
+   "word": "wichtig"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "aufgeregt"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "stolz"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "traurig"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "emotional"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "unangenehm"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "fremd"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "wahr"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "ordentlich"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "unordentlich"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "unwichtig"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "kostenlos"
+  },
+  {
+   "file": "chapter-a2-11-wenn-data.js",
+   "word": "weltweit"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "nerv\\u00f6s"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "gestresst"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "genervt"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "\\u00e4rgerlich"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "ungl\\u00fccklich"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "aufregend"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "hilfsbereit"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "unsympathisch"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "riesig"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "schlimm"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "verspätet"
+  },
+  {
+   "file": "chapter-a2-12-reflexive-verben-data.js",
+   "word": "reflexiv"
+  },
+  {
+   "file": "chapter-a2-14-wechselpraepositionen-data.js",
+   "word": "g\\u00fcltig"
+  },
+  {
+   "file": "chapter-a2-14-wechselpraepositionen-data.js",
+   "word": "\\u00f6ffentlich"
+  },
+  {
+   "file": "chapter-a2-14-wechselpraepositionen-data.js",
+   "word": "telefonisch"
+  },
+  {
+   "file": "chapter-a2-14-wechselpraepositionen-data.js",
+   "word": "spontan"
+  },
+  {
+   "file": "chapter-a2-14-wechselpraepositionen-data.js",
+   "word": "ungeduldig"
+  },
+  {
+   "file": "chapter-a2-14-wechselpraepositionen-data.js",
+   "word": "modern"
+  },
+  {
+   "file": "chapter-a2-15-positions-richtungsverben-data.js",
+   "word": "elektrisch"
+  },
+  {
+   "file": "chapter-a2-15-positions-richtungsverben-data.js",
+   "word": "unterschiedlich"
+  },
+  {
+   "file": "chapter-a2-15-positions-richtungsverben-data.js",
+   "word": "sch\\u00f6n"
+  },
+  {
+   "file": "chapter-a2-15-positions-richtungsverben-data.js",
+   "word": "regelm\\u00e4\\u00dfig"
+  },
+  {
+   "file": "chapter-a2-16-goethe-mini-2-data.js",
+   "word": "allgemein"
+  },
+  {
+   "file": "chapter-a2-16-goethe-mini-2-data.js",
+   "word": "n\\u00f6tig"
+  },
+  {
+   "file": "chapter-a2-16-goethe-mini-2-data.js",
+   "word": "sinnvoll"
+  },
+  {
+   "file": "chapter-a2-16-goethe-mini-2-data.js",
+   "word": "umweltfreundlich"
+  },
+  {
+   "file": "chapter-a2-16-goethe-mini-2-data.js",
+   "word": "versichert"
+  },
+  {
+   "file": "chapter-a2-17-werden-data.js",
+   "word": "altmodisch"
+  },
+  {
+   "file": "chapter-a2-18-ortsangaben-data.js",
+   "word": "ortskundig"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "direkt"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "indirekt"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "schwanger"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "mobil"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "ewig"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "beruflich"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "finanziell"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "flexibel"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "möglich"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "nervig"
+  },
+  {
+   "file": "chapter-a2-19-indirekte-fragen-data.js",
+   "word": "unpraktisch"
+  },
+  {
+   "file": "chapter-a2-2-perfekt-review-data.js",
+   "word": "geboren"
+  },
+  {
+   "file": "chapter-a2-20-was-fuer-ein-data.js",
+   "word": "erforderlich"
+  },
+  {
+   "file": "chapter-a2-20-was-fuer-ein-data.js",
+   "word": "pensioniert"
+  },
+  {
+   "file": "chapter-a2-20-was-fuer-ein-data.js",
+   "word": "tief"
+  },
+  {
+   "file": "chapter-a2-21-verben-dativ-akkusativ-data.js",
+   "word": "fantastisch"
+  },
+  {
+   "file": "chapter-a2-21-verben-dativ-akkusativ-data.js",
+   "word": "komisch"
+  },
+  {
+   "file": "chapter-a2-21-verben-dativ-akkusativ-data.js",
+   "word": "lebenslang"
+  },
+  {
+   "file": "chapter-a2-21-verben-dativ-akkusativ-data.js",
+   "word": "fest"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "aufgenommen"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "bunt"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "dringend"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "erfahren"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "freiberuflich"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "gehörlos"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "hart"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "klug"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "kompliziert"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "lang"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "notwendig"
+  },
+  {
+   "file": "chapter-a2-22-konjunktiv2-koennte-data.js",
+   "word": "schriftlich"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "ausländisch"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "chinesisch"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "einzeln"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "gebraucht"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "häufig"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "neugierig"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "realistisch"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "selbstständig"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "stressfrei"
+  },
+  {
+   "file": "chapter-a2-23-konjunktiv2-sollte-data.js",
+   "word": "unnötig"
+  },
+  {
+   "file": "chapter-a2-24-deshalb-trotzdem-data.js",
+   "word": "faszinierend"
+  },
+  {
+   "file": "chapter-a2-24-deshalb-trotzdem-data.js",
+   "word": "genial"
+  },
+  {
+   "file": "chapter-a2-24-deshalb-trotzdem-data.js",
+   "word": "trocken"
+  },
+  {
+   "file": "chapter-a2-24-deshalb-trotzdem-data.js",
+   "word": "unglaublich"
+  },
+  {
+   "file": "chapter-a2-25-goethe-mini-3-data.js",
+   "word": "realistisch"
+  },
+  {
+   "file": "chapter-a2-25-goethe-mini-3-data.js",
+   "word": "erfahren"
+  },
+  {
+   "file": "chapter-a2-25-goethe-mini-3-data.js",
+   "word": "nervös"
+  },
+  {
+   "file": "chapter-a2-25-goethe-mini-3-data.js",
+   "word": "stressfrei"
+  },
+  {
+   "file": "chapter-a2-25-goethe-mini-3-data.js",
+   "word": "unnötig"
+  },
+  {
+   "file": "chapter-a2-25-goethe-mini-3-data.js",
+   "word": "faszinierend"
+  },
+  {
+   "file": "chapter-a2-25-goethe-mini-3-data.js",
+   "word": "unglaublich"
+  },
+  {
+   "file": "chapter-a2-25-goethe-mini-3-data.js",
+   "word": "geeignet"
+  },
+  {
+   "file": "chapter-a2-26-adjektiv-bestimmter-artikel-data.js",
+   "word": "einverstanden"
+  },
+  {
+   "file": "chapter-a2-26-adjektiv-bestimmter-artikel-data.js",
+   "word": "kulturell"
+  },
+  {
+   "file": "chapter-a2-26-adjektiv-bestimmter-artikel-data.js",
+   "word": "treu"
+  },
+  {
+   "file": "chapter-a2-27-adjektiv-unbestimmter-artikel-data.js",
+   "word": "entfernt"
+  },
+  {
+   "file": "chapter-a2-27-adjektiv-unbestimmter-artikel-data.js",
+   "word": "sympathisch"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "besorgt"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "effektiv"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "eineinhalb"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "einsam"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "großartig"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "niedrig"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "stark"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "ständig"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "tschechisch"
+  },
+  {
+   "file": "chapter-a2-28-als-wenn-data.js",
+   "word": "wahnsinnig"
+  },
+  {
+   "file": "chapter-a2-29-indefinitpronomen-data.js",
+   "word": "blitzschnell"
+  },
+  {
+   "file": "chapter-a2-29-indefinitpronomen-data.js",
+   "word": "dünn"
+  },
+  {
+   "file": "chapter-a2-29-indefinitpronomen-data.js",
+   "word": "einmalig"
+  },
+  {
+   "file": "chapter-a2-29-indefinitpronomen-data.js",
+   "word": "gespannt"
+  },
+  {
+   "file": "chapter-a2-29-indefinitpronomen-data.js",
+   "word": "voll"
+  },
+  {
+   "file": "chapter-a2-29-indefinitpronomen-data.js",
+   "word": "vorgekommen"
+  },
+  {
+   "file": "chapter-a2-29-indefinitpronomen-data.js",
+   "word": "intensiv"
+  },
+  {
+   "file": "chapter-a2-3-artikel-review-data.js",
+   "word": "erwachsen"
+  },
+  {
+   "file": "chapter-a2-3-artikel-review-data.js",
+   "word": "unabh\\u00e4ngig"
+  },
+  {
+   "file": "chapter-a2-3-artikel-review-data.js",
+   "word": "salzig"
+  },
+  {
+   "file": "chapter-a2-3-artikel-review-data.js",
+   "word": "konjugiert"
+  },
+  {
+   "file": "chapter-a2-30-verben-praepositionen-data.js",
+   "word": "deutlich"
+  },
+  {
+   "file": "chapter-a2-30-verben-praepositionen-data.js",
+   "word": "erreichbar"
+  },
+  {
+   "file": "chapter-a2-30-verben-praepositionen-data.js",
+   "word": "live"
+  },
+  {
+   "file": "chapter-a2-30-verben-praepositionen-data.js",
+   "word": "preiswert"
+  },
+  {
+   "file": "chapter-a2-30-verben-praepositionen-data.js",
+   "word": "problemlos"
+  },
+  {
+   "file": "chapter-a2-30-verben-praepositionen-data.js",
+   "word": "verrückt"
+  },
+  {
+   "file": "chapter-a2-30-verben-praepositionen-data.js",
+   "word": "wild"
+  },
+  {
+   "file": "chapter-a2-31-w-fragen-praepositionen-data.js",
+   "word": "anschließend"
+  },
+  {
+   "file": "chapter-a2-31-w-fragen-praepositionen-data.js",
+   "word": "befristet"
+  },
+  {
+   "file": "chapter-a2-31-w-fragen-praepositionen-data.js",
+   "word": "erfolgreich"
+  },
+  {
+   "file": "chapter-a2-31-w-fragen-praepositionen-data.js",
+   "word": "gelaunt"
+  },
+  {
+   "file": "chapter-a2-31-w-fragen-praepositionen-data.js",
+   "word": "hektisch"
+  },
+  {
+   "file": "chapter-a2-31-w-fragen-praepositionen-data.js",
+   "word": "komplett"
+  },
+  {
+   "file": "chapter-a2-31-w-fragen-praepositionen-data.js",
+   "word": "professionell"
+  },
+  {
+   "file": "chapter-a2-31-w-fragen-praepositionen-data.js",
+   "word": "virtuell"
+  },
+  {
+   "file": "chapter-a2-32-konjunktiv2-wuensche-hoeflichkeit-data.js",
+   "word": "reich"
+  },
+  {
+   "file": "chapter-a2-33-relativsatz-nominativ-data.js",
+   "word": "abstrakt"
+  },
+  {
+   "file": "chapter-a2-33-relativsatz-nominativ-data.js",
+   "word": "elektrisch"
+  },
+  {
+   "file": "chapter-a2-33-relativsatz-nominativ-data.js",
+   "word": "jährlich"
+  },
+  {
+   "file": "chapter-a2-33-relativsatz-nominativ-data.js",
+   "word": "rockig"
+  },
+  {
+   "file": "chapter-a2-33-relativsatz-nominativ-data.js",
+   "word": "zuzüglich"
+  },
+  {
+   "file": "chapter-a2-34-relativsatz-akkusativ-data.js",
+   "word": "befreundet"
+  },
+  {
+   "file": "chapter-a2-34-relativsatz-akkusativ-data.js",
+   "word": "dunkel"
+  },
+  {
+   "file": "chapter-a2-34-relativsatz-akkusativ-data.js",
+   "word": "hübsch"
+  },
+  {
+   "file": "chapter-a2-34-relativsatz-akkusativ-data.js",
+   "word": "meistabonniert"
+  },
+  {
+   "file": "chapter-a2-34-relativsatz-akkusativ-data.js",
+   "word": "melodisch"
+  },
+  {
+   "file": "chapter-a2-35-goethe-mini-4-data.js",
+   "word": "teuer"
+  },
+  {
+   "file": "chapter-a2-35-goethe-mini-4-data.js",
+   "word": "gemütlich"
+  },
+  {
+   "file": "chapter-a2-35-goethe-mini-4-data.js",
+   "word": "melodisch"
+  },
+  {
+   "file": "chapter-a2-35-goethe-mini-4-data.js",
+   "word": "befreundet"
+  },
+  {
+   "file": "chapter-a2-35-goethe-mini-4-data.js",
+   "word": "reich"
+  },
+  {
+   "file": "chapter-a2-4-weil-data.js",
+   "word": "spannend"
+  },
+  {
+   "file": "chapter-a2-4-weil-data.js",
+   "word": "sozial"
+  },
+  {
+   "file": "chapter-a2-4-weil-data.js",
+   "word": "scharf"
+  },
+  {
+   "file": "chapter-a2-4-weil-data.js",
+   "word": "schlecht"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "dumm"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "intelligent"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "peinlich"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "furchtbar"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "witzig"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "prima"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "real"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "tot"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "fett"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "fl\\u00fcssig"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "m\\u00fcndlich"
+  },
+  {
+   "file": "chapter-a2-5-dass-data.js",
+   "word": "sozial"
+  },
+  {
+   "file": "chapter-a2-6-modalverben-praeteritum-data.js",
+   "word": "romantisch"
+  },
+  {
+   "file": "chapter-a2-6-modalverben-praeteritum-data.js",
+   "word": "betrunken"
+  },
+  {
+   "file": "chapter-a2-6-modalverben-praeteritum-data.js",
+   "word": "k\\u00fchl"
+  },
+  {
+   "file": "chapter-a2-6-modalverben-praeteritum-data.js",
+   "word": "sauer"
+  },
+  {
+   "file": "chapter-a2-7-possessivartikel-dativ-data.js",
+   "word": "dick"
+  },
+  {
+   "file": "chapter-a2-7-possessivartikel-dativ-data.js",
+   "word": "nass"
+  },
+  {
+   "file": "chapter-a2-7-possessivartikel-dativ-data.js",
+   "word": "schmutzig"
+  },
+  {
+   "file": "chapter-a2-7-possessivartikel-dativ-data.js",
+   "word": "modisch"
+  },
+  {
+   "file": "chapter-a2-8-komparativ-superlativ-data.js",
+   "word": "kritisch"
+  },
+  {
+   "file": "chapter-a2-8-komparativ-superlativ-data.js",
+   "word": "logisch"
+  },
+  {
+   "file": "chapter-a2-8-komparativ-superlativ-data.js",
+   "word": "n\\u00fctzlich"
+  },
+  {
+   "file": "chapter-a2-8-komparativ-superlativ-data.js",
+   "word": "schwierig"
+  },
+  {
+   "file": "chapter-a2-8-komparativ-superlativ-data.js",
+   "word": "streng"
+  },
+  {
+   "file": "chapter-a2-8-komparativ-superlativ-data.js",
+   "word": "w\\u00fctend"
+  },
+  {
+   "file": "chapter-a2-8-komparativ-superlativ-data.js",
+   "word": "privat"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "Indie"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "m\\u00f6bliert"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "bl\\u00f6d"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "fr\\u00f6hlich"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "wertvoll"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "vorsichtig"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "still"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "unendlich"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "uninteressant"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "nah"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "knapp"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "leicht"
+  },
+  {
+   "file": "chapter-a2-9-vergleiche-als-wie-data.js",
+   "word": "mehrmalig"
+  },
+  {
+   "file": "chapter-b1-1-infinitiv-mit-zu-data.js",
+   "word": "angenehm"
+  },
+  {
+   "file": "chapter-b1-1-infinitiv-mit-zu-data.js",
+   "word": "entspannend"
+  },
+  {
+   "file": "chapter-b1-1-infinitiv-mit-zu-data.js",
+   "word": "herrlich"
+  },
+  {
+   "file": "chapter-b1-1-infinitiv-mit-zu-data.js",
+   "word": "giftig"
+  },
+  {
+   "file": "chapter-b1-1-infinitiv-mit-zu-data.js",
+   "word": "reif"
+  },
+  {
+   "file": "chapter-b1-10-passiv-praesens-data.js",
+   "word": "irreal"
+  },
+  {
+   "file": "chapter-b1-10-passiv-praesens-data.js",
+   "word": "schrecklich"
+  },
+  {
+   "file": "chapter-b1-10-passiv-praesens-data.js",
+   "word": "unfreundlich"
+  },
+  {
+   "file": "chapter-b1-11-relativsaetze-dativ-data.js",
+   "word": "feucht"
+  },
+  {
+   "file": "chapter-b1-11-relativsaetze-dativ-data.js",
+   "word": "mild"
+  },
+  {
+   "file": "chapter-b1-11-relativsaetze-dativ-data.js",
+   "word": "neblig"
+  },
+  {
+   "file": "chapter-b1-11-relativsaetze-dativ-data.js",
+   "word": "regnerisch"
+  },
+  {
+   "file": "chapter-b1-11-relativsaetze-dativ-data.js",
+   "word": "schwül"
+  },
+  {
+   "file": "chapter-b1-11-relativsaetze-dativ-data.js",
+   "word": "stürmisch"
+  },
+  {
+   "file": "chapter-b1-11-relativsaetze-dativ-data.js",
+   "word": "wolkig"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "qualifiziert"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "zukünftig"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "frühere"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "relevant"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "seriös"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "sämtlich"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "aussagekräftig"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "befriedigend"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "kraftlos"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "scharf"
+  },
+  {
+   "file": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+   "word": "zwischenmenschlich"
+  },
+  {
+   "file": "chapter-b1-13-goethe-mini-2-data.js",
+   "word": "großer/große/großes"
+  },
+  {
+   "file": "chapter-b1-13-goethe-mini-2-data.js",
+   "word": "frisch"
+  },
+  {
+   "file": "chapter-b1-13-goethe-mini-2-data.js",
+   "word": "öffentlich"
+  },
+  {
+   "file": "chapter-b1-13-goethe-mini-2-data.js",
+   "word": "begeistert"
+  },
+  {
+   "file": "chapter-b1-13-goethe-mini-2-data.js",
+   "word": "verspätet"
+  },
+  {
+   "file": "chapter-b1-13-goethe-mini-2-data.js",
+   "word": "zusätzlich"
+  },
+  {
+   "file": "chapter-b1-13-goethe-mini-2-data.js",
+   "word": "praktisch"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "alltäglich"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "anonym"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "autonom"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "eindeutig"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "essbar"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "geeignet"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "heutig"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "interaktiv"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "lebenswert"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "visuell"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "barrierearm"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "entsprechend"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "familienfreundlich"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "traumhaft"
+  },
+  {
+   "file": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+   "word": "voraussichtlich"
+  },
+  {
+   "file": "chapter-b1-15-n-deklination-data.js",
+   "word": "exakt"
+  },
+  {
+   "file": "chapter-b1-15-n-deklination-data.js",
+   "word": "fair"
+  },
+  {
+   "file": "chapter-b1-15-n-deklination-data.js",
+   "word": "gerecht"
+  },
+  {
+   "file": "chapter-b1-15-n-deklination-data.js",
+   "word": "geregelt"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "dauernd"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "eventuell"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "frisch"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "konkret"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "sicher"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "smart"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "sparsam"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "verständlich"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "gleichzeitig"
+  },
+  {
+   "file": "chapter-b1-16-futur1-data.js",
+   "word": "kitschig"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "nachhaltig"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "beschädigt"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "effizient"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "elektronisch"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "erhältlich"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "gedruckt"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "korrekt"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "sogenannt"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "haltbar"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "krumm"
+  },
+  {
+   "file": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+   "word": "recycelbar"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "gesellschaftlich"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "gesetzlich"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "fern"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "jeweilig"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "rechtlich"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "schmal"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "schwer"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "städtisch"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "unruhig"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "konzentriert"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "halbformell"
+  },
+  {
+   "file": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+   "word": "schweizerdeutsch"
+  },
+  {
+   "file": "chapter-b1-19-goethe-halbzeit-test-data.js",
+   "word": "großer/große/großes"
+  },
+  {
+   "file": "chapter-b1-19-goethe-halbzeit-test-data.js",
+   "word": "größte"
+  },
+  {
+   "file": "chapter-b1-19-goethe-halbzeit-test-data.js",
+   "word": "ehrlich"
+  },
+  {
+   "file": "chapter-b1-20-plusquamperfekt-data.js",
+   "word": "berufstätig"
+  },
+  {
+   "file": "chapter-b1-20-plusquamperfekt-data.js",
+   "word": "kräftig"
+  },
+  {
+   "file": "chapter-b1-20-plusquamperfekt-data.js",
+   "word": "selbe"
+  },
+  {
+   "file": "chapter-b1-21-temporale-nebensaetze-data.js",
+   "word": "diplomatisch"
+  },
+  {
+   "file": "chapter-b1-21-temporale-nebensaetze-data.js",
+   "word": "erschöpft"
+  },
+  {
+   "file": "chapter-b1-21-temporale-nebensaetze-data.js",
+   "word": "undiplomatisch"
+  },
+  {
+   "file": "chapter-b1-22-brauchen-zu-infinitiv-data.js",
+   "word": "abhängig"
+  },
+  {
+   "file": "chapter-b1-22-brauchen-zu-infinitiv-data.js",
+   "word": "fällig"
+  },
+  {
+   "file": "chapter-b1-22-brauchen-zu-infinitiv-data.js",
+   "word": "gering"
+  },
+  {
+   "file": "chapter-b1-22-brauchen-zu-infinitiv-data.js",
+   "word": "monatlich"
+  },
+  {
+   "file": "chapter-b1-22-brauchen-zu-infinitiv-data.js",
+   "word": "umgehend"
+  },
+  {
+   "file": "chapter-b1-22-brauchen-zu-infinitiv-data.js",
+   "word": "fristgerecht"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "grundsätzlich"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "ausreichend"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "beschildert"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "blass"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "diätisch"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "glatt"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "obere"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "prinzipiell"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "sichtbar"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "unbequem"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "zuständig"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "blutig"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "eiskalt"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "roh"
+  },
+  {
+   "file": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+   "word": "schwindelig"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "angeblich"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "arm"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "beruhigend"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "eigen"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "geheim"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "klassisch"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "kommerziell"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "leidenschaftlich"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "motiviert"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "ungewöhnlich"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "wundervoll"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "zweiteilig"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "fantasievoll"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "feierlich"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "tragisch"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "würzig"
+  },
+  {
+   "file": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+   "word": "amerikanisch"
+  },
+  {
+   "file": "chapter-b1-25-stellung-von-nicht-data.js",
+   "word": "unmöglich"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "künstlerisch"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "talentiert"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "traditionell"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "uncool"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "zeitlos"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "finster"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "nächtlich"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "vergeblich"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "brasilianisch"
+  },
+  {
+   "file": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+   "word": "nominal"
+  },
+  {
+   "file": "chapter-b1-27-goethe-mini-3-data.js",
+   "word": "ähnlich"
+  },
+  {
+   "file": "chapter-b1-27-goethe-mini-3-data.js",
+   "word": "gesund"
+  },
+  {
+   "file": "chapter-b1-27-goethe-mini-3-data.js",
+   "word": "nervös"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "aufwändig"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "Bio"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "Bio-"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "digital"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "extrem"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "geschützt"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "hilflos"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "ländlich"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "regional"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "schädlich"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "ökologisch"
+  },
+  {
+   "file": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+   "word": "europäisch"
+  },
+  {
+   "file": "chapter-b1-29-passiv-modalverben-data.js",
+   "word": "wirtschaftlich"
+  },
+  {
+   "file": "chapter-b1-29-passiv-modalverben-data.js",
+   "word": "endgültig"
+  },
+  {
+   "file": "chapter-b1-29-passiv-modalverben-data.js",
+   "word": "national"
+  },
+  {
+   "file": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+   "word": "ehrenamtlich"
+  },
+  {
+   "file": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+   "word": "verantwortlich"
+  },
+  {
+   "file": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+   "word": "bedürftig"
+  },
+  {
+   "file": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+   "word": "bundesweit"
+  },
+  {
+   "file": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+   "word": "elternfrei"
+  },
+  {
+   "file": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+   "word": "qualitativ"
+  },
+  {
+   "file": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+   "word": "zuverlässig"
+  },
+  {
+   "file": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+   "word": "übrig"
+  },
+  {
+   "file": "chapter-b1-31-adjektive-als-nomen-data.js",
+   "word": "blind"
+  },
+  {
+   "file": "chapter-b1-31-adjektive-als-nomen-data.js",
+   "word": "körperlich"
+  },
+  {
+   "file": "chapter-b1-31-adjektive-als-nomen-data.js",
+   "word": "vollständig"
+  },
+  {
+   "file": "chapter-b1-31-adjektive-als-nomen-data.js",
+   "word": "humorvoll"
+  },
+  {
+   "file": "chapter-b1-32-relativsaetze-was-wo-data.js",
+   "word": "rund"
+  },
+  {
+   "file": "chapter-b1-32-relativsaetze-was-wo-data.js",
+   "word": "steil"
+  },
+  {
+   "file": "chapter-b1-32-relativsaetze-was-wo-data.js",
+   "word": "weich"
+  },
+  {
+   "file": "chapter-b1-33-je-desto-umso-data.js",
+   "word": "pauschal"
+  },
+  {
+   "file": "chapter-b1-33-je-desto-umso-data.js",
+   "word": "problematisch"
+  },
+  {
+   "file": "chapter-b1-33-je-desto-umso-data.js",
+   "word": "überzeugend"
+  },
+  {
+   "file": "chapter-b1-33-je-desto-umso-data.js",
+   "word": "global"
+  },
+  {
+   "file": "chapter-b1-33-je-desto-umso-data.js",
+   "word": "wünschenswert"
+  },
+  {
+   "file": "chapter-b1-34-partizipien-als-adjektive-data.js",
+   "word": "begrenzt"
+  },
+  {
+   "file": "chapter-b1-34-partizipien-als-adjektive-data.js",
+   "word": "chaotisch"
+  },
+  {
+   "file": "chapter-b1-34-partizipien-als-adjektive-data.js",
+   "word": "clever"
+  },
+  {
+   "file": "chapter-b1-34-partizipien-als-adjektive-data.js",
+   "word": "dankbar"
+  },
+  {
+   "file": "chapter-b1-34-partizipien-als-adjektive-data.js",
+   "word": "einzig"
+  },
+  {
+   "file": "chapter-b1-34-partizipien-als-adjektive-data.js",
+   "word": "heimlich"
+  },
+  {
+   "file": "chapter-b1-34-partizipien-als-adjektive-data.js",
+   "word": "original"
+  },
+  {
+   "file": "chapter-b1-34-partizipien-als-adjektive-data.js",
+   "word": "durcheinander"
+  },
+  {
+   "file": "chapter-b1-34-partizipien-als-adjektive-data.js",
+   "word": "tierisch"
+  },
+  {
+   "file": "chapter-b1-35-goethe-zertifikat-b1-final-data.js",
+   "word": "wartend"
+  },
+  {
+   "file": "chapter-b1-35-goethe-zertifikat-b1-final-data.js",
+   "word": "ehrlich"
+  },
+  {
+   "file": "chapter-b1-35-goethe-zertifikat-b1-final-data.js",
+   "word": "weit"
+  },
+  {
+   "file": "chapter-b1-35-goethe-zertifikat-b1-final-data.js",
+   "word": "nervös"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "ansprechend"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "aufmerksam"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "ausgezeichnet"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "automatisch"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "gratis"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "interessiert"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "merkwürdig"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "rein"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "seltsam"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "ungesund"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "unmodern"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "überrascht"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "frech"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "unverständlich"
+  },
+  {
+   "file": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+   "word": "italienisch"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "bewusst"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "biologisch"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "damalig"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "fortschrittlich"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "katholisch"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "produziert"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "symbolisch"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "touristisch"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "vegan"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "vegetarisch"
+  },
+  {
+   "file": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+   "word": "zusätzlich"
+  },
+  {
+   "file": "chapter-b1-6-goethe-mini-1-data.js",
+   "word": "nervös"
+  },
+  {
+   "file": "chapter-b1-6-goethe-mini-1-data.js",
+   "word": "gestresst"
+  },
+  {
+   "file": "chapter-b1-6-goethe-mini-1-data.js",
+   "word": "ausgeruht"
+  },
+  {
+   "file": "chapter-b1-6-goethe-mini-1-data.js",
+   "word": "vorbereitet"
+  },
+  {
+   "file": "chapter-b1-6-goethe-mini-1-data.js",
+   "word": "ruhig"
+  },
+  {
+   "file": "chapter-b1-6-goethe-mini-1-data.js",
+   "word": "sicher"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "politisch"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "wesentlich"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "begeistert"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "erholt"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "frisch"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "gelähmt"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "gewohnt"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "historisch"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "jetzig"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "literarisch"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "lokal"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "medizinisch"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "minimal"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "monoton"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "radikal"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "relativ"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "schwach"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "tolerant"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "unverändert"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "zufällig"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "zweimonatig"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "automatisiert"
+  },
+  {
+   "file": "chapter-b1-7-praeteritum-data.js",
+   "word": "liebevoll"
+  },
+  {
+   "file": "chapter-b1-8-zeitangaben-dativ-genitiv-data.js",
+   "word": "gründlich"
+  },
+  {
+   "file": "chapter-b1-8-zeitangaben-dativ-genitiv-data.js",
+   "word": "rechtzeitig"
+  },
+  {
+   "file": "chapter-b1-8-zeitangaben-dativ-genitiv-data.js",
+   "word": "schick"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "kommunikativ"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "aggressiv"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "entspannt"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "gesamt"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "gesucht"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "inhaltlich"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "konservativ"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "locker"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "menschlich"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "offen"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "optimistisch"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "ruhig"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "speziell"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "steif"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "zahlreich"
+  },
+  {
+   "file": "chapter-b1-9-goethe-mini-2-data.js",
+   "word": "zornig"
+  },
+  {
+   "file": "chapter-b2-01-erweiterte-satzklammer-data.js",
+   "word": "sämtlich"
+  },
+  {
+   "file": "chapter-b2-01-erweiterte-satzklammer-data.js",
+   "word": "atypisch"
+  },
+  {
+   "file": "chapter-b2-01-erweiterte-satzklammer-data.js",
+   "word": "begehrt"
+  },
+  {
+   "file": "chapter-b2-01-erweiterte-satzklammer-data.js",
+   "word": "einig"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "erheblich"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "exotisch"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "geeignet"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "gestresst"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "geteilt"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "herrlich"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "hilfreich"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "klimatisiert"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "nützlich"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "gekommen"
+  },
+  {
+   "file": "chapter-b2-02-verbalkomplex-data.js",
+   "word": "geprägt"
+  },
+  {
+   "file": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+   "word": "sehnsüchtig"
+  },
+  {
+   "file": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+   "word": "vornehm"
+  },
+  {
+   "file": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+   "word": "zahlreich"
+  },
+  {
+   "file": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+   "word": "zerrissen"
+  },
+  {
+   "file": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+   "word": "abenteuerlich"
+  },
+  {
+   "file": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+   "word": "alkoholfrei"
+  },
+  {
+   "file": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+   "word": "amtlich"
+  },
+  {
+   "file": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+   "word": "aufgeregt"
+  },
+  {
+   "file": "chapter-b2-04-formales-es-data.js",
+   "word": "breit"
+  },
+  {
+   "file": "chapter-b2-04-formales-es-data.js",
+   "word": "bürgerlich"
+  },
+  {
+   "file": "chapter-b2-04-formales-es-data.js",
+   "word": "einheitlich"
+  },
+  {
+   "file": "chapter-b2-04-formales-es-data.js",
+   "word": "entscheidend"
+  },
+  {
+   "file": "chapter-b2-04-formales-es-data.js",
+   "word": "entsprechend"
+  },
+  {
+   "file": "chapter-b2-04-formales-es-data.js",
+   "word": "erstaunlich"
+  },
+  {
+   "file": "chapter-b2-04-formales-es-data.js",
+   "word": "farbenfroh"
+  },
+  {
+   "file": "chapter-b2-04-formales-es-data.js",
+   "word": "gelegentlich"
+  },
+  {
+   "file": "chapter-b2-05-korrelat-es-data.js",
+   "word": "gläubig"
+  },
+  {
+   "file": "chapter-b2-05-korrelat-es-data.js",
+   "word": "heimisch"
+  },
+  {
+   "file": "chapter-b2-05-korrelat-es-data.js",
+   "word": "inhaltsleer"
+  },
+  {
+   "file": "chapter-b2-05-korrelat-es-data.js",
+   "word": "intolerant"
+  },
+  {
+   "file": "chapter-b2-05-korrelat-es-data.js",
+   "word": "irreal"
+  },
+  {
+   "file": "chapter-b2-05-korrelat-es-data.js",
+   "word": "jeglich"
+  },
+  {
+   "file": "chapter-b2-05-korrelat-es-data.js",
+   "word": "katholisch"
+  },
+  {
+   "file": "chapter-b2-05-korrelat-es-data.js",
+   "word": "kommerziell"
+  },
+  {
+   "file": "chapter-b2-05-korrelat-es-data.js",
+   "word": "komplex"
+  },
+  {
+   "file": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+   "word": "missverständlich"
+  },
+  {
+   "file": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+   "word": "multikulturell"
+  },
+  {
+   "file": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+   "word": "nachdenklich"
+  },
+  {
+   "file": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+   "word": "nonverbal"
+  },
+  {
+   "file": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+   "word": "passioniert"
+  },
+  {
+   "file": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+   "word": "peinlich"
+  },
+  {
+   "file": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+   "word": "schmerzlos"
+  },
+  {
+   "file": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+   "word": "sinnvoll"
+  },
+  {
+   "file": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+   "word": "spontan"
+  },
+  {
+   "file": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "word": "ständig"
+  },
+  {
+   "file": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "word": "trennbar"
+  },
+  {
+   "file": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "word": "treu"
+  },
+  {
+   "file": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "word": "üblich"
+  },
+  {
+   "file": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "word": "unerwartet"
+  },
+  {
+   "file": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "word": "vielsprachig"
+  },
+  {
+   "file": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "word": "visuell"
+  },
+  {
+   "file": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "word": "voller"
+  },
+  {
+   "file": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+   "word": "vollkommen"
+  },
+  {
+   "file": "chapter-b2-08-valenz-von-verben-data.js",
+   "word": "bewusst"
+  },
+  {
+   "file": "chapter-b2-08-valenz-von-verben-data.js",
+   "word": "vertraut"
+  },
+  {
+   "file": "chapter-b2-08-valenz-von-verben-data.js",
+   "word": "abgesehen"
+  },
+  {
+   "file": "chapter-b2-09-trennbar-vs-untrennbar-data.js",
+   "word": "betroffen"
+  },
+  {
+   "file": "chapter-b2-09-trennbar-vs-untrennbar-data.js",
+   "word": "geduldig"
+  },
+  {
+   "file": "chapter-b2-09-trennbar-vs-untrennbar-data.js",
+   "word": "obligatorisch"
+  },
+  {
+   "file": "chapter-b2-10-haeufige-b2-verben-data.js",
+   "word": "aggressiv"
+  },
+  {
+   "file": "chapter-b2-10-haeufige-b2-verben-data.js",
+   "word": "angemessen"
+  },
+  {
+   "file": "chapter-b2-10-haeufige-b2-verben-data.js",
+   "word": "bilingual"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "destruktiv"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "dreckig"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "eilig"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "eindeutig"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "einsprachig"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "entspannt"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "fehlerlos"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "gründlich"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "hektisch"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "hervorragend"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "hitzig"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "instinktiv"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "kinderleicht"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "konkret"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "konstruktiv"
+  },
+  {
+   "file": "chapter-b2-11-stellung-von-nicht-data.js",
+   "word": "lexikalisch"
+  },
+  {
+   "file": "chapter-b2-12-doppelte-verneinung-litotes-data.js",
+   "word": "monolingual"
+  },
+  {
+   "file": "chapter-b2-12-doppelte-verneinung-litotes-data.js",
+   "word": "nichtssagend"
+  },
+  {
+   "file": "chapter-b2-12-doppelte-verneinung-litotes-data.js",
+   "word": "platt"
+  },
+  {
+   "file": "chapter-b2-12-doppelte-verneinung-litotes-data.js",
+   "word": "poetisch"
+  },
+  {
+   "file": "chapter-b2-12-doppelte-verneinung-litotes-data.js",
+   "word": "ratsam"
+  },
+  {
+   "file": "chapter-b2-12-doppelte-verneinung-litotes-data.js",
+   "word": "ruhig"
+  },
+  {
+   "file": "chapter-b2-12-doppelte-verneinung-litotes-data.js",
+   "word": "smart"
+  },
+  {
+   "file": "chapter-b2-13-nuancierte-negation-data.js",
+   "word": "systematisch"
+  },
+  {
+   "file": "chapter-b2-13-nuancierte-negation-data.js",
+   "word": "unbedingt"
+  },
+  {
+   "file": "chapter-b2-13-nuancierte-negation-data.js",
+   "word": "ungefragt"
+  },
+  {
+   "file": "chapter-b2-13-nuancierte-negation-data.js",
+   "word": "verschuldet"
+  },
+  {
+   "file": "chapter-b2-13-nuancierte-negation-data.js",
+   "word": "verwunderlich"
+  },
+  {
+   "file": "chapter-b2-13-nuancierte-negation-data.js",
+   "word": "witzig"
+  },
+  {
+   "file": "chapter-b2-13-nuancierte-negation-data.js",
+   "word": "zweisprachig"
+  },
+  {
+   "file": "chapter-b2-15-konzessivsaetze-obgleich-data.js",
+   "word": "angestellt"
+  },
+  {
+   "file": "chapter-b2-15-konzessivsaetze-obgleich-data.js",
+   "word": "aufmerksam"
+  },
+  {
+   "file": "chapter-b2-15-konzessivsaetze-obgleich-data.js",
+   "word": "begrenzt"
+  },
+  {
+   "file": "chapter-b2-15-konzessivsaetze-obgleich-data.js",
+   "word": "edel"
+  },
+  {
+   "file": "chapter-b2-15-konzessivsaetze-obgleich-data.js",
+   "word": "essbar"
+  },
+  {
+   "file": "chapter-b2-15-konzessivsaetze-obgleich-data.js",
+   "word": "rein"
+  },
+  {
+   "file": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen-data.js",
+   "word": "lecker"
+  },
+  {
+   "file": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen-data.js",
+   "word": "mutig"
+  },
+  {
+   "file": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen-data.js",
+   "word": "psychisch"
+  },
+  {
+   "file": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen-data.js",
+   "word": "unkompliziert"
+  },
+  {
+   "file": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen-data.js",
+   "word": "winzig"
+  },
+  {
+   "file": "chapter-b2-17-modalsaetze-indem-data.js",
+   "word": "abgeschlossen"
+  },
+  {
+   "file": "chapter-b2-17-modalsaetze-indem-data.js",
+   "word": "anspruchsvoll"
+  },
+  {
+   "file": "chapter-b2-17-modalsaetze-indem-data.js",
+   "word": "arrogant"
+  },
+  {
+   "file": "chapter-b2-17-modalsaetze-indem-data.js",
+   "word": "ausgesprochen"
+  },
+  {
+   "file": "chapter-b2-17-modalsaetze-indem-data.js",
+   "word": "doof"
+  },
+  {
+   "file": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+   "word": "fachlich"
+  },
+  {
+   "file": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+   "word": "final"
+  },
+  {
+   "file": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+   "word": "genügend"
+  },
+  {
+   "file": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+   "word": "hauptsächlich"
+  },
+  {
+   "file": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+   "word": "jetzig"
+  },
+  {
+   "file": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+   "word": "kooperativ"
+  },
+  {
+   "file": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+   "word": "mangelnd"
+  },
+  {
+   "file": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+   "word": "nahegelegen"
+  },
+  {
+   "file": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+   "word": "relevant"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "seriös"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "sozial"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "teamfähig"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "überlastet"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "übersichtlich"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "umfangreich"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "ungeliebt"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "verlässlich"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "vernünftig"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "verzweifelt"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "voraussichtlich"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "wirkungsvoll"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "wirtschaftlich"
+  },
+  {
+   "file": "chapter-b2-19-ohne-zu-data.js",
+   "word": "zielorientiert"
+  },
+  {
+   "file": "chapter-b2-20-anstatt-zu-data.js",
+   "word": "grundsätzlich"
+  },
+  {
+   "file": "chapter-b2-20-anstatt-zu-data.js",
+   "word": "anerkannt"
+  },
+  {
+   "file": "chapter-b2-20-anstatt-zu-data.js",
+   "word": "auffällig"
+  },
+  {
+   "file": "chapter-b2-21-sowohl-als-auch-data.js",
+   "word": "beliebt"
+  },
+  {
+   "file": "chapter-b2-21-sowohl-als-auch-data.js",
+   "word": "gebürtig"
+  },
+  {
+   "file": "chapter-b2-21-sowohl-als-auch-data.js",
+   "word": "gedacht"
+  },
+  {
+   "file": "chapter-b2-21-sowohl-als-auch-data.js",
+   "word": "ideal"
+  },
+  {
+   "file": "chapter-b2-21-sowohl-als-auch-data.js",
+   "word": "nutzlos"
+  },
+  {
+   "file": "chapter-b2-22-weder-noch-data.js",
+   "word": "sondern"
+  },
+  {
+   "file": "chapter-b2-22-weder-noch-data.js",
+   "word": "akut"
+  },
+  {
+   "file": "chapter-b2-23-nicht-nur-sondern-auch-data.js",
+   "word": "bemerkenswert"
+  },
+  {
+   "file": "chapter-b2-23-nicht-nur-sondern-auch-data.js",
+   "word": "bestechend"
+  },
+  {
+   "file": "chapter-b2-23-nicht-nur-sondern-auch-data.js",
+   "word": "einwandfrei"
+  },
+  {
+   "file": "chapter-b2-23-nicht-nur-sondern-auch-data.js",
+   "word": "enorm"
+  },
+  {
+   "file": "chapter-b2-23-nicht-nur-sondern-auch-data.js",
+   "word": "erneut"
+  },
+  {
+   "file": "chapter-b2-23-nicht-nur-sondern-auch-data.js",
+   "word": "gebraucht"
+  },
+  {
+   "file": "chapter-b2-23-nicht-nur-sondern-auch-data.js",
+   "word": "jeweilig"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "kriminell"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "langfristig"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "mehrheitlich"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "motiviert"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "orientiert"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "prinzipiell"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "problemlos"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "qualitativ"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "regelmäßig"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "samt"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "schutzlos"
+  },
+  {
+   "file": "chapter-b2-24-einerseits-andererseits-data.js",
+   "word": "schwach"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "symbolisch"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "tatenlos"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "überregional"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "überschüssig"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "übertrieben"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "unbezahlt"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "unentgeltlich"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "unentschlossen"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "ungebrochen"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "unverändert"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "verderblich"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "virtuell"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "zeitintensiv"
+  },
+  {
+   "file": "chapter-b2-25-verbindungsadverbien-data.js",
+   "word": "zurückhaltend"
+  },
+  {
+   "file": "chapter-b2-27-perfekt-vs-praeteritum-data.js",
+   "word": "ausgezeichnet"
+  },
+  {
+   "file": "chapter-b2-27-perfekt-vs-praeteritum-data.js",
+   "word": "eifersüchtig"
+  },
+  {
+   "file": "chapter-b2-28-tempuswechsel-im-text-data.js",
+   "word": "stellvertretend"
+  },
+  {
+   "file": "chapter-b2-28-tempuswechsel-im-text-data.js",
+   "word": "vergangen"
+  },
+  {
+   "file": "chapter-b2-28-tempuswechsel-im-text-data.js",
+   "word": "arbeitsfrei"
+  },
+  {
+   "file": "chapter-b2-29-futur1-vermutungen-data.js",
+   "word": "endgültig"
+  },
+  {
+   "file": "chapter-b2-29-futur1-vermutungen-data.js",
+   "word": "friedlich"
+  },
+  {
+   "file": "chapter-b2-29-futur1-vermutungen-data.js",
+   "word": "gesetzlich"
+  },
+  {
+   "file": "chapter-b2-29-futur1-vermutungen-data.js",
+   "word": "grafisch"
+  },
+  {
+   "file": "chapter-b2-29-futur1-vermutungen-data.js",
+   "word": "immerwährend"
+  },
+  {
+   "file": "chapter-b2-29-futur1-vermutungen-data.js",
+   "word": "komfortabel"
+  },
+  {
+   "file": "chapter-b2-30-alternativen-zum-futur-data.js",
+   "word": "unentbehrlich"
+  },
+  {
+   "file": "chapter-b2-30-alternativen-zum-futur-data.js",
+   "word": "wertvoll"
+  },
+  {
+   "file": "chapter-b2-30-alternativen-zum-futur-data.js",
+   "word": "wund"
+  },
+  {
+   "file": "chapter-b2-30-alternativen-zum-futur-data.js",
+   "word": "zweisprachig"
+  },
+  {
+   "file": "chapter-b2-31-konjunktiv2-vergangenheit-data.js",
+   "word": "abwechslungsreich"
+  },
+  {
+   "file": "chapter-b2-31-konjunktiv2-vergangenheit-data.js",
+   "word": "dankbar"
+  },
+  {
+   "file": "chapter-b2-31-konjunktiv2-vergangenheit-data.js",
+   "word": "ehrlich"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "elementar"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "ernsthaft"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "golden"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "heldenhaft"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "humorvoll"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "ironisch"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "loyal"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "markant"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "millionenfach"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "pessimistisch"
+  },
+  {
+   "file": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+   "word": "relativ"
+  },
+  {
+   "file": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+   "word": "stressig"
+  },
+  {
+   "file": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+   "word": "vorhanden"
+  },
+  {
+   "file": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+   "word": "beruhigend"
+  },
+  {
+   "file": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+   "word": "chronisch"
+  },
+  {
+   "file": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+   "word": "depressiv"
+  },
+  {
+   "file": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+   "word": "erträglich"
+  },
+  {
+   "file": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+   "word": "gemein"
+  },
+  {
+   "file": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+   "word": "gesundheitsfördernd"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "limitiert"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "melancholisch"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "schmerzlindernd"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "schwarz"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "selbstsicher"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "strukturiert"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "unsterblich"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "vielfach"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "wohltuend"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "zunehmend"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "bang"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "bankrott"
+  },
+  {
+   "file": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+   "word": "bedeutend"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "mythologisch"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "rettungslos"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "satirisch"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "schlummerlos"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "schrecklich"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "stetig"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "talentlos"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "talentvoll"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "unbewusst"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "unerfüllt"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "ungehört"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "üppig"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "verdeckt"
+  },
+  {
+   "file": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+   "word": "verzwickt"
+  },
+  {
+   "file": "chapter-b2-37-relativsaetze-genitiv-data.js",
+   "word": "aktuell"
+  },
+  {
+   "file": "chapter-b2-37-relativsaetze-genitiv-data.js",
+   "word": "angelehnt"
+  },
+  {
+   "file": "chapter-b2-37-relativsaetze-genitiv-data.js",
+   "word": "beseelt"
+  },
+  {
+   "file": "chapter-b2-37-relativsaetze-genitiv-data.js",
+   "word": "besorgt"
+  },
+  {
+   "file": "chapter-b2-37-relativsaetze-genitiv-data.js",
+   "word": "einsam"
+  },
+  {
+   "file": "chapter-b2-38-verschachtelte-relativsaetze-data.js",
+   "word": "geheimnisvoll"
+  },
+  {
+   "file": "chapter-b2-38-verschachtelte-relativsaetze-data.js",
+   "word": "gelungen"
+  },
+  {
+   "file": "chapter-b2-38-verschachtelte-relativsaetze-data.js",
+   "word": "generell"
+  },
+  {
+   "file": "chapter-b2-38-verschachtelte-relativsaetze-data.js",
+   "word": "klug"
+  },
+  {
+   "file": "chapter-b2-38-verschachtelte-relativsaetze-data.js",
+   "word": "originell"
+  },
+  {
+   "file": "chapter-b2-38-verschachtelte-relativsaetze-data.js",
+   "word": "skeptisch"
+  },
+  {
+   "file": "chapter-b2-38-verschachtelte-relativsaetze-data.js",
+   "word": "unbekannt"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "unglaubwürdig"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "vielseitig"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "aufsehenerregend"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "ausgewogen"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "äußere"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "baumbeschattet"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "durchsichtig"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "fein"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "filmreif"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "fraglich"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "füllig"
+  },
+  {
+   "file": "chapter-b2-39-relativsaetze-wer-der-data.js",
+   "word": "fürsorglich"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "gepflegt"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "glaubhaft"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "gütig"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "heiter"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "imposant"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "kaiserlich"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "klischeehaft"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "lebendig"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "lesefreundlich"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "liebevoll"
+  },
+  {
+   "file": "chapter-b2-40-verben-mit-praepositionen-data.js",
+   "word": "manikürt"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "philosophisch"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "prominent"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "rücksichtsvoll"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "schlagartig"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "schützenswert"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "schwerelos"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "seltsam"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "siegessicher"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "übersetzbar"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "überwiegend"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "unverschlossen"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "verwahrlost"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "vorangegangen"
+  },
+  {
+   "file": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+   "word": "weltbekannt"
+  },
+  {
+   "file": "chapter-b2-42-adjektive-mit-praepositionen-data.js",
+   "word": "wundervoll"
+  },
+  {
+   "file": "chapter-b2-42-adjektive-mit-praepositionen-data.js",
+   "word": "sozialistisch"
+  },
+  {
+   "file": "chapter-b2-42-adjektive-mit-praepositionen-data.js",
+   "word": "surreal"
+  },
+  {
+   "file": "chapter-b2-42-adjektive-mit-praepositionen-data.js",
+   "word": "vordergründig"
+  },
+  {
+   "file": "chapter-b2-44-zustandspassiv-data.js",
+   "word": "einzig"
+  },
+  {
+   "file": "chapter-b2-44-zustandspassiv-data.js",
+   "word": "engagiert"
+  },
+  {
+   "file": "chapter-b2-44-zustandspassiv-data.js",
+   "word": "erneuerbar"
+  },
+  {
+   "file": "chapter-b2-44-zustandspassiv-data.js",
+   "word": "erreichbar"
+  },
+  {
+   "file": "chapter-b2-44-zustandspassiv-data.js",
+   "word": "garantiert"
+  },
+  {
+   "file": "chapter-b2-44-zustandspassiv-data.js",
+   "word": "heftig"
+  },
+  {
+   "file": "chapter-b2-44-zustandspassiv-data.js",
+   "word": "kostbar"
+  },
+  {
+   "file": "chapter-b2-44-zustandspassiv-data.js",
+   "word": "leidenschaftlich"
+  },
+  {
+   "file": "chapter-b2-45-passiversatz-sich-lassen-data.js",
+   "word": "tierlieb"
+  },
+  {
+   "file": "chapter-b2-45-passiversatz-sich-lassen-data.js",
+   "word": "traumatisiert"
+  },
+  {
+   "file": "chapter-b2-45-passiversatz-sich-lassen-data.js",
+   "word": "variabel"
+  },
+  {
+   "file": "chapter-b2-45-passiversatz-sich-lassen-data.js",
+   "word": "zugänglich"
+  },
+  {
+   "file": "chapter-b2-45-passiversatz-sich-lassen-data.js",
+   "word": "anormal"
+  },
+  {
+   "file": "chapter-b2-45-passiversatz-sich-lassen-data.js",
+   "word": "eigenständig"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "einleuchtend"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "energiesparend"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "erkennbar"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "kostengünstig"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "kursiv"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "mechanisch"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "rasant"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "rosig"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "sagenhaft"
+  },
+  {
+   "file": "chapter-b2-46-unpersoenliches-passiv-data.js",
+   "word": "simpel"
+  },
+  {
+   "file": "chapter-b2-47-bekommen-kriegen-passiv-data.js",
+   "word": "naturwissenschaftlich"
+  },
+  {
+   "file": "chapter-b2-47-bekommen-kriegen-passiv-data.js",
+   "word": "umstritten"
+  },
+  {
+   "file": "chapter-b2-47-bekommen-kriegen-passiv-data.js",
+   "word": "unangebracht"
+  },
+  {
+   "file": "chapter-b2-47-bekommen-kriegen-passiv-data.js",
+   "word": "vermehrt"
+  },
+  {
+   "file": "chapter-b2-47-bekommen-kriegen-passiv-data.js",
+   "word": "zukunftssicher"
+  },
+  {
+   "file": "chapter-b2-48-modalitaetsersatz-haben-sein-zu-data.js",
+   "word": "gehoben"
+  },
+  {
+   "file": "chapter-b2-48-modalitaetsersatz-haben-sein-zu-data.js",
+   "word": "glaubwürdig"
+  },
+  {
+   "file": "chapter-b2-48-modalitaetsersatz-haben-sein-zu-data.js",
+   "word": "konzentriert"
+  },
+  {
+   "file": "chapter-b2-48-modalitaetsersatz-haben-sein-zu-data.js",
+   "word": "sichtbar"
+  },
+  {
+   "file": "chapter-b2-48-modalitaetsersatz-haben-sein-zu-data.js",
+   "word": "überlebenswichtig"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "abstrakt"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "akustisch"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "analytisch"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "ausgewechselt"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "ausreichend"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "außergewöhnlich"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "bedroht"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "bestmöglich"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "dauerhaft"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "deprimierend"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "dramatisch"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "durchführbar"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "eigensinnig"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "eingerechnet"
+  },
+  {
+   "file": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+   "word": "erfolglos"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "gesamt"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "geschützt"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "global"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "inhaltlich"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "intakt"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "intellektuell"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "kahl"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "kontinuierlich"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "kurzfristig"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "längerfristig"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "langlebig"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "langwierig"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "maßgeblich"
+  },
+  {
+   "file": "chapter-b2-50-nominalisierung-data.js",
+   "word": "mathematisch"
+  },
+  {
+   "file": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+   "word": "mittelalterlich"
+  },
+  {
+   "file": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+   "word": "müdegearbeitet"
+  },
+  {
+   "file": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+   "word": "physikalisch"
+  },
+  {
+   "file": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+   "word": "radioaktiv"
+  },
+  {
+   "file": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+   "word": "rastlos"
+  },
+  {
+   "file": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+   "word": "romantisch"
+  },
+  {
+   "file": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+   "word": "sanft"
+  },
+  {
+   "file": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+   "word": "schlaflos"
+  },
+  {
+   "file": "chapter-b2-52-komplexe-nominalgruppen-data.js",
+   "word": "solide"
+  },
+  {
+   "file": "chapter-b2-52-komplexe-nominalgruppen-data.js",
+   "word": "unpassend"
+  },
+  {
+   "file": "chapter-b2-52-komplexe-nominalgruppen-data.js",
+   "word": "vehement"
+  },
+  {
+   "file": "chapter-b2-52-komplexe-nominalgruppen-data.js",
+   "word": "verstärkt"
+  },
+  {
+   "file": "chapter-b2-52-komplexe-nominalgruppen-data.js",
+   "word": "vorbildlich"
+  },
+  {
+   "file": "chapter-b2-52-komplexe-nominalgruppen-data.js",
+   "word": "wacklig"
+  },
+  {
+   "file": "chapter-b2-52-komplexe-nominalgruppen-data.js",
+   "word": "wünschenswert"
+  },
+  {
+   "file": "chapter-b2-54-funktionsverbgefuege-data.js",
+   "word": "konstant"
+  },
+  {
+   "file": "chapter-b2-54-funktionsverbgefuege-data.js",
+   "word": "benommen"
+  },
+  {
+   "file": "chapter-b2-57-textkohaerenz-verweiswoerter-data.js",
+   "word": "anerkennend"
+  },
+  {
+   "file": "chapter-b2-57-textkohaerenz-verweiswoerter-data.js",
+   "word": "ausverkauft"
+  },
+  {
+   "file": "chapter-b2-57-textkohaerenz-verweiswoerter-data.js",
+   "word": "verbunden"
+  },
+  {
+   "file": "chapter-b2-58-textkohaerenz-absatzlogik-data.js",
+   "word": "freundschaftlich"
+  },
+  {
+   "file": "chapter-b2-59-konjunktiv-i-formen-data.js",
+   "word": "kurios"
+  },
+  {
+   "file": "chapter-b2-59-konjunktiv-i-formen-data.js",
+   "word": "logisch"
+  },
+  {
+   "file": "chapter-b2-60-indirekte-rede-grundlagen-data.js",
+   "word": "rechtzeitig"
+  },
+  {
+   "file": "chapter-b2-61-indirekte-rede-zeitverschiebung-data.js",
+   "word": "umgangssprachlich"
+  },
+  {
+   "file": "chapter-b2-61-indirekte-rede-zeitverschiebung-data.js",
+   "word": "unangemessen"
+  },
+  {
+   "file": "chapter-b2-61-indirekte-rede-zeitverschiebung-data.js",
+   "word": "undenkbar"
+  },
+  {
+   "file": "chapter-b2-61-indirekte-rede-zeitverschiebung-data.js",
+   "word": "ungeschlagen"
+  },
+  {
+   "file": "chapter-b2-61-indirekte-rede-zeitverschiebung-data.js",
+   "word": "unleserlich"
+  },
+  {
+   "file": "chapter-b2-61-indirekte-rede-zeitverschiebung-data.js",
+   "word": "vollständig"
+  },
+  {
+   "file": "chapter-b2-62-konjunktiv-i-berichtende-sprache-data.js",
+   "word": "wohlwollend"
+  },
+  {
+   "file": "chapter-b2-67-argumentieren-gegenargumente-data.js",
+   "word": "ausgewogen"
+  },
+  {
+   "file": "chapter-b2-69-goethe-zertifikat-b2-final-data.js",
+   "word": "gründlich"
+  },
+  {
+   "file": "chapter-c1-11-goethe-mini-2-data.js",
+   "word": "zuversichtlich"
+  },
+  {
+   "file": "chapter-c1-14-konjunktiv-ii-fuer-irreales-und-hypothesen-data.js",
+   "word": "denkbar"
+  },
+  {
+   "file": "chapter-c1-14-konjunktiv-ii-fuer-irreales-und-hypothesen-data.js",
+   "word": "wünschenswert"
+  },
+  {
+   "file": "chapter-c1-16-aufforderung-empfehlung-und-handlungssteuerung-data.js",
+   "word": "ratsam"
+  },
+  {
+   "file": "chapter-c1-20-relativsaetze-erweitern-und-variieren-data.js",
+   "word": "aussagekräftig"
+  },
+  {
+   "file": "chapter-c1-21-partizipialattribute-verstehen-und-nutzen-data.js",
+   "word": "aussagekräftig"
+  },
+  {
+   "file": "chapter-c1-23-goethe-mini-3-data.js",
+   "word": "überzeugend"
+  },
+  {
+   "file": "chapter-c1-24-nominalisierung-im-formellen-stil-data.js",
+   "word": "objektiv"
+  },
+  {
+   "file": "chapter-c1-33-goethe-mini-5-data.js",
+   "word": "vielversprechend"
+  },
+  {
+   "file": "chapter-c2-18-stilistische-nuancen-und-register-von-adjektiven-data.js",
+   "word": "groß"
+  }
+ ]
+}

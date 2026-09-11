@@ -1,0 +1,3110 @@
+[
+ {
+  "f": "chapter-a1-1-data.js",
+  "i": 0,
+  "q": "What word does Rohan spell first?",
+  "opts": "'Heft', 'Buch', 'Apfel', 'Stift'"
+ },
+ {
+  "f": "chapter-a1-1-data.js",
+  "i": 1,
+  "q": "Why is Rohan spelling words for Frau Weber?",
+  "opts": "'To learn his own name', 'To label his notebook correctly', 'To read a book', 'To answer a phone call'"
+ },
+ {
+  "f": "chapter-a1-10-artikel-data.js",
+  "i": 0,
+  "q": "Where is the pen?",
+  "opts": "'auf dem Tisch', 'in der Tasche', 'bei Julia', 'im Buch'"
+ },
+ {
+  "f": "chapter-a1-10-artikel-data.js",
+  "i": 1,
+  "q": "Who is Kai looking for his things with?",
+  "opts": "'Frau Weber', 'Julia', 'Emma', 'Anna'"
+ },
+ {
+  "f": "chapter-a1-11-negation-data.js",
+  "i": 0,
+  "q": "Why does Anna say no to the coffee?",
+  "opts": "'Sie hat kein Geld.', 'Sie hat keinen Durst.', 'Sie mag keinen Kaffee.', 'Sie hat keine Zeit.'"
+ },
+ {
+  "f": "chapter-a1-11-negation-data.js",
+  "i": 1,
+  "q": "Is Anna tired?",
+  "opts": "'Ja, sehr', 'Nein, nicht müde', 'Ein bisschen', 'Sie weiß es nicht'"
+ },
+ {
+  "f": "chapter-a1-12-akkusativ-data.js",
+  "i": 0,
+  "q": "What is Lisa looking for?",
+  "opts": "'das Buch und die Karte', 'den Schlüssel und einen Stift', 'das Meer', 'die Lösung'"
+ },
+ {
+  "f": "chapter-a1-12-akkusativ-data.js",
+  "i": 1,
+  "q": "Where does Lisa find everything?",
+  "opts": "'zu Hause', 'im Café', 'im Geschäft', 'in der Schule'"
+ },
+ {
+  "f": "chapter-a1-13-adjektive-data.js",
+  "i": 0,
+  "q": "How is the new café described?",
+  "opts": "'groß und laut', 'klein und gemütlich', 'alt und kalt', 'teuer und leer'"
+ },
+ {
+  "f": "chapter-a1-13-adjektive-data.js",
+  "i": 1,
+  "q": "How is the waitress?",
+  "opts": "'langsam und unfreundlich', 'freundlich und schnell', 'müde', 'still'"
+ },
+ {
+  "f": "chapter-a1-14-essen-data.js",
+  "i": 0,
+  "q": "What does Hanna NOT eat?",
+  "opts": "'Käse', 'Fleisch', 'Brötchen', 'Kaffee'"
+ },
+ {
+  "f": "chapter-a1-14-essen-data.js",
+  "i": 1,
+  "q": "What does Simon order?",
+  "opts": "'Kaffee und Kuchen', 'Tee und Brot', 'Orangensaft und Salat', 'Cola und Pizza'"
+ },
+ {
+  "f": "chapter-a1-15-cafe-data.js",
+  "i": 0,
+  "q": "What mistake does the waiter make?",
+  "opts": "'Falscher Preis', 'Falsches Getränk', 'Falscher Tisch', 'Falsche Rechnung'"
+ },
+ {
+  "f": "chapter-a1-15-cafe-data.js",
+  "i": 1,
+  "q": "What did Ida actually order?",
+  "opts": "'Tee', 'Kaffee', 'Wasser', 'Saft'"
+ },
+ {
+  "f": "chapter-a1-16-hobbies-data.js",
+  "i": 0,
+  "q": "What does Sara prefer to do instead of painting?",
+  "opts": "'schwimmen', 'ein Buch lesen', 'fotografieren', 'tanzen'"
+ },
+ {
+  "f": "chapter-a1-16-hobbies-data.js",
+  "i": 1,
+  "q": "What does Sara do on Sunday?",
+  "opts": "'malen', 'Volleyball spielen', 'lesen', 'schlafen'"
+ },
+ {
+  "f": "chapter-a1-17-goethe2-data.js",
+  "i": 0,
+  "q": "Why does Jan call Frau Roth?",
+  "opts": "'To pay a bill', 'To ask about his registration', 'To book a hotel', 'To cancel a course'"
+ },
+ {
+  "f": "chapter-a1-17-goethe2-data.js",
+  "i": 1,
+  "q": "What does Frau Roth confirm?",
+  "opts": "'Die Anmeldung fehlt.', 'Alles ist in Ordnung.', 'Der Kurs ist voll.', 'Jan muss neu anmelden.'"
+ },
+ {
+  "f": "chapter-a1-18-irregular-data.js",
+  "i": 0,
+  "q": "What is Timo eating tonight?",
+  "opts": "'Kuchen', 'eine Suppe', 'Brot', 'nichts'"
+ },
+ {
+  "f": "chapter-a1-18-irregular-data.js",
+  "i": 1,
+  "q": "Where is Timo going tomorrow morning?",
+  "opts": "'zur Uni', 'zur Bibliothek', 'zur Mensa', 'zum Café'"
+ },
+ {
+  "f": "chapter-a1-19-satzposition-data.js",
+  "i": 0,
+  "q": "What does Pia do on weekend mornings?",
+  "opts": "'lange schlafen', 'früh aufstehen', 'lernen', 'arbeiten'"
+ },
+ {
+  "f": "chapter-a1-19-satzposition-data.js",
+  "i": 1,
+  "q": "How often does she meet friends in the afternoon?",
+  "opts": "'nie', 'selten', 'oft', 'täglich'"
+ },
+ {
+  "f": "chapter-a1-19-satzposition-data.js",
+  "i": 2,
+  "q": "What does she study on Sundays?",
+  "opts": "'Deutsch', 'nichts', 'Englisch', 'immer'"
+ },
+ {
+  "f": "chapter-a1-2-data.js",
+  "i": 0,
+  "q": "What is Jonas practicing for?",
+  "opts": "'A phone call', 'A presentation about his city', 'A letter', 'A song'"
+ },
+ {
+  "f": "chapter-a1-2-data.js",
+  "i": 1,
+  "q": "Which sound does Frau Bauer correct?",
+  "opts": "'The consonant ch', 'The umlaut ü', 'The letter B', 'The letter S'"
+ },
+ {
+  "f": "chapter-a1-20-modalverben1-data.js",
+  "i": 0,
+  "q": "What must Finn do before he can join?",
+  "opts": "'lernen', 'arbeiten', 'schlafen', 'einkaufen'"
+ },
+ {
+  "f": "chapter-a1-20-modalverben1-data.js",
+  "i": 1,
+  "q": "What must Max bring?",
+  "opts": "'Essen', 'sein eigenes Buch', 'Musik', 'Geld'"
+ },
+ {
+  "f": "chapter-a1-21-uhrzeit-data.js",
+  "i": 0,
+  "q": "What time is it at the start?",
+  "opts": "'8:45', '9:15', '8:15', '9:45'"
+ },
+ {
+  "f": "chapter-a1-21-uhrzeit-data.js",
+  "i": 1,
+  "q": "When is Jonas meeting Max?",
+  "opts": "'um acht', 'um halb acht (7:30)', 'um halb neun (8:30)', 'um neun'"
+ },
+ {
+  "f": "chapter-a1-21-uhrzeit-data.js",
+  "i": 2,
+  "q": "How long does the film last?",
+  "opts": "'7:30 to 10:00', '8:30 to 10:00', '7:30 to 9:00', '8:00 to 10:00'"
+ },
+ {
+  "f": "chapter-a1-22-berufe-data.js",
+  "i": 0,
+  "q": "What does Lea want to do?",
+  "opts": "'mehr arbeiten', 'ihren Beruf wechseln', 'weniger verdienen', 'Urlaub machen'"
+ },
+ {
+  "f": "chapter-a1-22-berufe-data.js",
+  "i": 1,
+  "q": "Why is Lea unhappy with her job?",
+  "opts": "'Sie arbeitet zu viel und verdient wenig.', 'Sie mag ihre Schüler nicht.', 'Der Weg ist zu weit.', 'Sie hat keine Kollegen.'"
+ },
+ {
+  "f": "chapter-a1-23-familie-data.js",
+  "i": 0,
+  "q": "Who is celebrating a birthday?",
+  "opts": "'Nils', 'seine Schwester', 'seine Oma', 'sein Bruder'"
+ },
+ {
+  "f": "chapter-a1-23-familie-data.js",
+  "i": 1,
+  "q": "What does the sister like?",
+  "opts": "'Kuchen', 'Bücher', 'Musik', 'Blumen'"
+ },
+ {
+  "f": "chapter-a1-24-datum-data.js",
+  "i": 0,
+  "q": "When is the next exam?",
+  "opts": "'am zweiten September', 'am zwölften September', 'am dritten Oktober', 'am ersten Oktober'"
+ },
+ {
+  "f": "chapter-a1-24-datum-data.js",
+  "i": 1,
+  "q": "How many people are going on the trip?",
+  "opts": "'fünf', 'zehn', 'fünfzehn', 'zwanzig'"
+ },
+ {
+  "f": "chapter-a1-25-trennbar-data.js",
+  "i": 0,
+  "q": "Who does Svenja call?",
+  "opts": "'Nina', 'ihre Mutter', 'Malte', 'ihre Schwester'"
+ },
+ {
+  "f": "chapter-a1-25-trennbar-data.js",
+  "i": 1,
+  "q": "What will they do together?",
+  "opts": "'einkaufen', 'einen Film sehen', 'kochen', 'schlafen'"
+ },
+ {
+  "f": "chapter-a1-26-goethe3-data.js",
+  "i": 0,
+  "q": "What does Ralf want to do?",
+  "opts": "'einen Termin vereinbaren', 'etwas kaufen', 'eine Pizza bestellen', 'einen Freund abholen'"
+ },
+ {
+  "f": "chapter-a1-26-goethe3-data.js",
+  "i": 1,
+  "q": "Why is Monday not possible?",
+  "opts": "'Die Praxis ist zu.', 'Er hat keine Zeit.', 'Es ist zu spät.', 'Er ist krank.'"
+ },
+ {
+  "f": "chapter-a1-26-goethe3-data.js",
+  "i": 2,
+  "q": "When is the appointment?",
+  "opts": "'Dienstag um halb elf', 'Montag um zehn', 'Dienstag um elf', 'Montag um halb elf'"
+ },
+ {
+  "f": "chapter-a1-27-praeteritum-data.js",
+  "i": 0,
+  "q": "Where was Doris last week?",
+  "opts": "'zu Hause', 'in München', 'bei Max', 'im Kurs'"
+ },
+ {
+  "f": "chapter-a1-27-praeteritum-data.js",
+  "i": 1,
+  "q": "How long were they there?",
+  "opts": "'ein Tag', 'zwei Tage', 'drei Tage', 'eine Woche'"
+ },
+ {
+  "f": "chapter-a1-28-perfekt-data.js",
+  "i": 0,
+  "q": "What did Vera do yesterday?",
+  "opts": "'gelernt und geschlafen', 'eingekauft und angerufen', 'gearbeitet', 'gereist'"
+ },
+ {
+  "f": "chapter-a1-28-perfekt-data.js",
+  "i": 1,
+  "q": "What did they do together in the evening?",
+  "opts": "'Fußball gesehen', 'gekocht und gegessen', 'geputzt', 'eingekauft'"
+ },
+ {
+  "f": "chapter-a1-29-perfekt-haben-data.js",
+  "i": 0,
+  "q": "What did Robert prepare?",
+  "opts": "'nur seinen Anzug', 'seinen Lebenslauf und Fragen', 'ein Buch', 'nichts'"
+ },
+ {
+  "f": "chapter-a1-29-perfekt-haben-data.js",
+  "i": 1,
+  "q": "What did Miriam do to prepare?",
+  "opts": "'recherchiert und Notizen gemacht', 'einen Anzug gekauft', 'geschlafen', 'gekocht'"
+ },
+ {
+  "f": "chapter-a1-3-zahlen-data.js",
+  "i": 0,
+  "q": "How much does the coffee cost?",
+  "opts": "'zwei Euro', 'drei Euro', 'ein Euro fünfzig', 'fünf Euro'"
+ },
+ {
+  "f": "chapter-a1-3-zahlen-data.js",
+  "i": 1,
+  "q": "How much does the newspaper cost?",
+  "opts": "'ein Euro fünfzig', 'zwei Euro', 'drei Euro', 'vier Euro'"
+ },
+ {
+  "f": "chapter-a1-30-perfekt-sein-data.js",
+  "i": 0,
+  "q": "Where did Steffi travel to?",
+  "opts": "'nach München', 'nach Hamburg', 'nach Berlin', 'nach Wien'"
+ },
+ {
+  "f": "chapter-a1-30-perfekt-sein-data.js",
+  "i": 1,
+  "q": "How long did she stay?",
+  "opts": "'zwei Tage', 'drei Tage', 'vier Tage', 'eine Woche'"
+ },
+ {
+  "f": "chapter-a1-31-partizip-praefix-data.js",
+  "i": 0,
+  "q": "What did Wanda tidy?",
+  "opts": "'ihr Zimmer', 'die Küche', 'das Klassenzimmer', 'die Bibliothek'"
+ },
+ {
+  "f": "chapter-a1-31-partizip-praefix-data.js",
+  "i": 1,
+  "q": "What did Max do?",
+  "opts": "'alles verstanden', 'alles verschoben', 'eingekauft', 'ein Geschenk gebracht'"
+ },
+ {
+  "f": "chapter-a1-32-akkusativpronomen-data.js",
+  "i": 0,
+  "q": "Which pronoun replaces \"den neuen Studenten\"?",
+  "opts": "'es', 'ihn', 'sie', 'uns'"
+ },
+ {
+  "f": "chapter-a1-32-akkusativpronomen-data.js",
+  "i": 1,
+  "q": "Which pronoun replaces \"das Buch\"?",
+  "opts": "'ihn', 'sie', 'es', 'euch'"
+ },
+ {
+  "f": "chapter-a1-32-akkusativpronomen-data.js",
+  "i": 2,
+  "q": "How does Fabian answer \"Rufst du Anna an?\"",
+  "opts": "'Ich rufe ihn an.', 'Ich rufe sie an.', 'Ich rufe es an.', 'Ich rufe uns an.'"
+ },
+ {
+  "f": "chapter-a1-33-saetze-verbinden-data.js",
+  "i": 0,
+  "q": "Why won\\'t Carla stay long?",
+  "opts": "'Sie ist müde.', 'Sie muss früh aufstehen.', 'Sie mag keine Partys.', 'Sie hat kein Geld.'"
+ },
+ {
+  "f": "chapter-a1-33-saetze-verbinden-data.js",
+  "i": 1,
+  "q": "Why is Max staying in bed?",
+  "opts": "'Er lernt.', 'Er hat Fieber.', 'Er arbeitet.', 'Er hat keine Zeit.'"
+ },
+ {
+  "f": "chapter-a1-34-schreiben-data.js",
+  "i": 0,
+  "q": "What are Petra and friends doing on Saturday?",
+  "opts": "'eine Party', 'ein Picknick', 'ein Konzert', 'ein Kurs'"
+ },
+ {
+  "f": "chapter-a1-34-schreiben-data.js",
+  "i": 1,
+  "q": "What should Timo bring?",
+  "opts": "'Kuchen', 'Getränke', 'Musik', 'nichts'"
+ },
+ {
+  "f": "chapter-a1-35-goethe4-data.js",
+  "i": 0,
+  "q": "Why was the course great?",
+  "opts": "'Der Lehrer war lustig.', 'Der Lehrer war geduldig.', 'Es gab Kuchen.', 'Es war kurz.'"
+ },
+ {
+  "f": "chapter-a1-35-goethe4-data.js",
+  "i": 1,
+  "q": "What did Runa send Nick?",
+  "opts": "'ein Foto', 'ihre Notizen', 'ein Buch', 'eine Einladung'"
+ },
+ {
+  "f": "chapter-a1-36-dativ-data.js",
+  "i": 0,
+  "q": "Who does Alina send the card to?",
+  "opts": "'ihrer Mutter', 'ihrem Bruder', 'Timo', 'ihrer Oma'"
+ },
+ {
+  "f": "chapter-a1-36-dativ-data.js",
+  "i": 1,
+  "q": "What does Timo give himself?",
+  "opts": "'ein Buch', 'einen freien Tag', 'eine Karte', 'Geld'"
+ },
+ {
+  "f": "chapter-a1-37-praep-dativ-data.js",
+  "i": 0,
+  "q": "How does Nico travel to Hamburg?",
+  "opts": "'mit dem Zug', 'mit dem Auto', 'mit dem Flugzeug', 'zu Fuß'"
+ },
+ {
+  "f": "chapter-a1-37-praep-dativ-data.js",
+  "i": 1,
+  "q": "Where does Nico stay?",
+  "opts": "'im Hotel', 'bei einem Freund', 'bei Kerstin', 'bei seiner Tante'"
+ },
+ {
+  "f": "chapter-a1-38-wechselpraep-data.js",
+  "i": 0,
+  "q": "Where should the table go?",
+  "opts": "'neben das Fenster', 'unter das Sofa', 'vor die Tür', 'hinter den Stuhl'"
+ },
+ {
+  "f": "chapter-a1-38-wechselpraep-data.js",
+  "i": 1,
+  "q": "Where are the napkins already?",
+  "opts": "'im Schrank', 'auf dem Tisch', 'unter dem Stuhl', 'in der Küche'"
+ },
+ {
+  "f": "chapter-a1-39-ortsangaben-data.js",
+  "i": 0,
+  "q": "Which way first?",
+  "opts": "'links', 'geradeaus', 'rechts', 'zurück'"
+ },
+ {
+  "f": "chapter-a1-39-ortsangaben-data.js",
+  "i": 1,
+  "q": "How far is the station?",
+  "opts": "'sehr weit', 'in der Nähe', 'eine Stunde', 'am Flughafen'"
+ },
+ {
+  "f": "chapter-a1-39-ortsangaben-data.js",
+  "i": 2,
+  "q": "Where is the supermarket?",
+  "opts": "'am Bahnhof', 'an der Bäckerei', 'im Zentrum', 'am Flughafen'"
+ },
+ {
+  "f": "chapter-a1-4-hallo-data.js",
+  "i": 0,
+  "q": "What is Frau Klein making for David?",
+  "opts": "'A coffee', 'A student ID card', 'A phone call', 'A letter'"
+ },
+ {
+  "f": "chapter-a1-4-hallo-data.js",
+  "i": 1,
+  "q": "How old is David?",
+  "opts": "'Zwanzig', 'Einundzwanzig', 'Zweiundzwanzig', 'Neunzehn'"
+ },
+ {
+  "f": "chapter-a1-40-verben-dativ-data.js",
+  "i": 0,
+  "q": "What is Nele shopping for?",
+  "opts": "'eine Party', 'ein Interview', 'einen Urlaub', 'eine Hochzeit'"
+ },
+ {
+  "f": "chapter-a1-40-verben-dativ-data.js",
+  "i": 1,
+  "q": "Whose bag is it?",
+  "opts": "'Neles', 'Kevins', 'seiner Schwester', 'der Verkäuferin'"
+ },
+ {
+  "f": "chapter-a1-41-dativpronomen-data.js",
+  "i": 0,
+  "q": "What is the speaker missing?",
+  "opts": "'ein Stift', 'ein Buch', 'eine Tasche', 'ein Heft'"
+ },
+ {
+  "f": "chapter-a1-41-dativpronomen-data.js",
+  "i": 1,
+  "q": "Whom does the pen belong to?",
+  "opts": "'Frau Sommer', 'dem Sprecher', 'ihr (Julia)', 'einem Kollegen'"
+ },
+ {
+  "f": "chapter-a1-41-dativpronomen-data.js",
+  "i": 2,
+  "q": "How does he answer \"Wie geht es dir?\"",
+  "opts": "'Mir geht es gut.', 'Uns geht es gut.', 'Dir geht es gut.', 'Ihm geht es gut.'"
+ },
+ {
+  "f": "chapter-a1-42-welcher-dieser-data.js",
+  "i": 0,
+  "q": "What is Jonas buying?",
+  "opts": "'ein Geschenk für Nina', 'ein Buch für sich', 'eine Tasche für Vreni', 'einen Stift für die Prüfung'"
+ },
+ {
+  "f": "chapter-a1-42-welcher-dieser-data.js",
+  "i": 1,
+  "q": "Which pen does Jonas choose?",
+  "opts": "'einen blauen', 'einen roten', 'einen schwarzen', 'einen grünen'"
+ },
+ {
+  "f": "chapter-a1-43-smalltalk-man-data.js",
+  "i": 0,
+  "q": "Where are Yvonne and Georg?",
+  "opts": "'im Café', 'an der Bushaltestelle', 'im Kino', 'im Park'"
+ },
+ {
+  "f": "chapter-a1-43-smalltalk-man-data.js",
+  "i": 1,
+  "q": "What is Yvonne doing today?",
+  "opts": "'schlafen', 'einkaufen', 'arbeiten', 'kochen'"
+ },
+ {
+  "f": "chapter-a1-44-imperativ-modal2-data.js",
+  "i": 0,
+  "q": "What is wrong with Marco this time?",
+  "opts": "'Halsschmerzen', 'Rückenschmerzen', 'Zahnschmerzen', 'Fieber'"
+ },
+ {
+  "f": "chapter-a1-44-imperativ-modal2-data.js",
+  "i": 1,
+  "q": "May Marco do sport?",
+  "opts": "'Nein, gar nicht', 'Ja, nur leichten Sport', 'Ja, viel Sport', 'Nur schwimmen'"
+ },
+ {
+  "f": "chapter-a1-45-telefonieren-data.js",
+  "i": 0,
+  "q": "How does Ben introduce himself?",
+  "opts": "'Ich bin Ben.', 'Hier ist Ben Meyer.', 'Mein Name Ben.', 'Ben hier sehen.'"
+ },
+ {
+  "f": "chapter-a1-45-telefonieren-data.js",
+  "i": 1,
+  "q": "Which phrase does he use to ask for a repeat?",
+  "opts": "'Bitte schön?', 'Wie bitte?', 'Wie geht\\'s?', 'Wie viel?'"
+ },
+ {
+  "f": "chapter-a1-45-telefonieren-data.js",
+  "i": 2,
+  "q": "When does the course begin?",
+  "opts": "'um acht', 'um neun', 'um zehn', 'um elf'"
+ },
+ {
+  "f": "chapter-a1-46-zeitangaben-data.js",
+  "i": 0,
+  "q": "When is the move?",
+  "opts": "'am Sonntag', 'am Montag', 'am Dienstag', 'am Freitag'"
+ },
+ {
+  "f": "chapter-a1-46-zeitangaben-data.js",
+  "i": 1,
+  "q": "How long does the move take?",
+  "opts": "'zwei Stunden', 'drei Stunden', 'etwa vier Stunden', 'sechs Stunden'"
+ },
+ {
+  "f": "chapter-a1-47-goethe-final-data.js",
+  "i": 0,
+  "q": "How many points did Timo get?",
+  "opts": "'58', '75', '85', '95'"
+ },
+ {
+  "f": "chapter-a1-47-goethe-final-data.js",
+  "i": 1,
+  "q": "Which part was Timo\\'s best result?",
+  "opts": "'Lesen', 'Hören', 'Schreiben', 'Sprechen'"
+ },
+ {
+  "f": "chapter-a1-47-goethe-final-data.js",
+  "i": 2,
+  "q": "What comes next?",
+  "opts": "'noch eine A1-Prüfung', 'A2', 'B1', 'eine Pause'"
+ },
+ {
+  "f": "chapter-a1-5-werbistdu-data.js",
+  "i": 0,
+  "q": "What is Paul looking for?",
+  "opts": "'A café', 'A study group', 'A job', 'An apartment'"
+ },
+ {
+  "f": "chapter-a1-5-werbistdu-data.js",
+  "i": 1,
+  "q": "What do Lena and Paul decide to do?",
+  "opts": "'Travel together', 'Study together', 'Work together', 'Cook together'"
+ },
+ {
+  "f": "chapter-a1-6-wfragen-data.js",
+  "i": 0,
+  "q": "Where does Felix like to study best?",
+  "opts": "'Im Kurs', 'Zu Hause', 'Im Café', 'In der Bibliothek'"
+ },
+ {
+  "f": "chapter-a1-6-wfragen-data.js",
+  "i": 1,
+  "q": "Why does Felix study in the evenings?",
+  "opts": "'Er hat morgens keine Zeit.', 'Er ist müde.', 'Er arbeitet abends.', 'Er mag den Abend.'"
+ },
+ {
+  "f": "chapter-a1-7-jaodernein-data.js",
+  "i": 0,
+  "q": "When does Mia have time to come?",
+  "opts": "'morgen', 'am Sonntag', 'heute', 'nie'"
+ },
+ {
+  "f": "chapter-a1-7-jaodernein-data.js",
+  "i": 1,
+  "q": "Does Mia understand the homework?",
+  "opts": "'Ja, ganz', 'Nein, nicht ganz', 'Ja, ein bisschen', 'Sie weiß es nicht'"
+ },
+ {
+  "f": "chapter-a1-8-goethemini1-data.js",
+  "i": 0,
+  "q": "What is Nina checking?",
+  "opts": "'Daniel\\'s homework', 'The course sign-up list', 'A menu', 'A train schedule'"
+ },
+ {
+  "f": "chapter-a1-8-goethemini1-data.js",
+  "i": 1,
+  "q": "Where does Daniel live now?",
+  "opts": "'In Indien', 'In Wien, Österreich', 'In Berlin', 'In der Schweiz'"
+ },
+ {
+  "f": "chapter-a1-9-verben-data.js",
+  "i": 0,
+  "q": "What does Clara do today?",
+  "opts": "'arbeiten und kochen', 'schwimmen und lesen', 'putzen und lernen', 'spielen und schreiben'"
+ },
+ {
+  "f": "chapter-a1-9-verben-data.js",
+  "i": 1,
+  "q": "What does Clara do tomorrow?",
+  "opts": "'schwimmen und lesen', 'putzen und kochen', 'arbeiten und lernen', 'nichts'"
+ },
+ {
+  "f": "chapter-a2-1-genitiv-data.js",
+  "i": 0,
+  "q": "Whose jacket is on the chair?",
+  "opts": "'Maltes', 'Ninas', 'Petras', 'Annas'"
+ },
+ {
+  "f": "chapter-a2-1-genitiv-data.js",
+  "i": 1,
+  "q": "Whose keys are they?",
+  "opts": "'Maltes', 'Petras', 'Ninas', 'Annas'"
+ },
+ {
+  "f": "chapter-a2-10-goethe-mini-1-data.js",
+  "i": 0,
+  "q": "Why couldn\\'t Nick study much?",
+  "opts": "'Er war krank.', 'Er hatte Familie zu Besuch.', 'Er hatte keine Zeit.', 'Er war im Urlaub.'"
+ },
+ {
+  "f": "chapter-a2-10-goethe-mini-1-data.js",
+  "i": 1,
+  "q": "Whose book did Runa use?",
+  "opts": "'ihr eigenes', 'Nicks', 'Annas', 'Timos'"
+ },
+ {
+  "f": "chapter-a2-11-wenn-data.js",
+  "i": 0,
+  "q": "What does Wiebke do when she has free time?",
+  "opts": "'sie lernt', 'sie fährt zu ihrer Familie', 'sie arbeitet', 'sie kocht'"
+ },
+ {
+  "f": "chapter-a2-11-wenn-data.js",
+  "i": 1,
+  "q": "What do they do if it rains?",
+  "opts": "'sie fahren', 'sie bleiben zu Hause', 'sie gehen schwimmen', 'sie kaufen ein'"
+ },
+ {
+  "f": "chapter-a2-12-reflexive-verben-data.js",
+  "i": 0,
+  "q": "How does Enya feel?",
+  "opts": "'müde', 'traurig', 'sie freut sich', 'ängstlich'"
+ },
+ {
+  "f": "chapter-a2-12-reflexive-verben-data.js",
+  "i": 1,
+  "q": "What is Enya doing right now?",
+  "opts": "'sie schläft', 'sie zieht sich an', 'sie isst', 'sie liest'"
+ },
+ {
+  "f": "chapter-a2-13-praepositionen-dativ-data.js",
+  "i": 0,
+  "q": "Where did Timo just come from?",
+  "opts": "'von der Schule', 'von der Post', 'vom Café', 'vom Bahnhof'"
+ },
+ {
+  "f": "chapter-a2-13-praepositionen-dativ-data.js",
+  "i": 1,
+  "q": "How does he get to his course?",
+  "opts": "'zu Fuß', 'mit dem Bus', 'mit dem Fahrrad', 'mit dem Auto'"
+ },
+ {
+  "f": "chapter-a2-14-wechselpraepositionen-data.js",
+  "i": 0,
+  "q": "Where is Frieda putting the lamp?",
+  "opts": "'auf den Tisch', 'neben das Bett', 'unter das Fenster', 'vor die Tür'"
+ },
+ {
+  "f": "chapter-a2-14-wechselpraepositionen-data.js",
+  "i": 1,
+  "q": "Where does the picture hang?",
+  "opts": "'neben der Tür', 'über dem Sofa', 'unter dem Fenster', 'hinter dem Bett'"
+ },
+ {
+  "f": "chapter-a2-15-positions-richtungsverben-data.js",
+  "i": 0,
+  "q": "Where are the documents lying?",
+  "opts": "'im Ordner', 'auf dem Schreibtisch', 'im Schrank', 'auf dem Boden'"
+ },
+ {
+  "f": "chapter-a2-15-positions-richtungsverben-data.js",
+  "i": 1,
+  "q": "What does Timo do with the documents?",
+  "opts": "'er wirft sie weg', 'er legt sie in den Ordner', 'er liest sie', 'er kopiert sie'"
+ },
+ {
+  "f": "chapter-a2-16-goethe-mini-2-data.js",
+  "i": 0,
+  "q": "What can Timo do if he fails?",
+  "opts": "'nichts', 'die Prüfung wiederholen', 'den Kurs verlassen', 'warten'"
+ },
+ {
+  "f": "chapter-a2-16-goethe-mini-2-data.js",
+  "i": 1,
+  "q": "How does Frau Wolter describe Timo\\'s effort?",
+  "opts": "'faul', 'fleißig', 'müde', 'unsicher'"
+ },
+ {
+  "f": "chapter-a2-17-werden-data.js",
+  "i": 0,
+  "q": "What will Timo probably do next year?",
+  "opts": "'studieren', 'in Hamburg arbeiten', 'reisen', 'heiraten'"
+ },
+ {
+  "f": "chapter-a2-17-werden-data.js",
+  "i": 1,
+  "q": "What does Timo joke he will become more often?",
+  "opts": "'müde', 'krank', 'reich', 'glücklich'"
+ },
+ {
+  "f": "chapter-a2-18-ortsangaben-data.js",
+  "i": 0,
+  "q": "Where should Timo turn for the pharmacy?",
+  "opts": "'rechts', 'links an der Ampel', 'geradeaus weiter', 'zurück'"
+ },
+ {
+  "f": "chapter-a2-18-ortsangaben-data.js",
+  "i": 1,
+  "q": "Where is the station?",
+  "opts": "'links von der Apotheke', 'hinter der Kirche', 'vor der Schule', 'neben dem Park'"
+ },
+ {
+  "f": "chapter-a2-19-indirekte-fragen-data.js",
+  "i": 0,
+  "q": "What does Franka not know?",
+  "opts": "'ob der Zug pünktlich ist', 'wo der Bahnhof ist', 'wie spät es ist', 'wer kommt'"
+ },
+ {
+  "f": "chapter-a2-19-indirekte-fragen-data.js",
+  "i": 1,
+  "q": "What does the app show?",
+  "opts": "'keine Verspätung', 'zehn Minuten Verspätung', 'eine Stunde Verspätung', 'Zugausfall'"
+ },
+ {
+  "f": "chapter-a2-2-perfekt-review-data.js",
+  "i": 0,
+  "q": "What did Fynn photograph?",
+  "opts": "'einen Hund', 'einen Fuchs', 'einen Vogel', 'eine Katze'"
+ },
+ {
+  "f": "chapter-a2-2-perfekt-review-data.js",
+  "i": 1,
+  "q": "What did Insa make in her cooking class?",
+  "opts": "'einen Kuchen', 'eine Suppe', 'Brot', 'Pizza'"
+ },
+ {
+  "f": "chapter-a2-20-was-fuer-ein-data.js",
+  "i": 0,
+  "q": "What kind of book is Solveig looking for?",
+  "opts": "'ein dickes Wörterbuch', 'ein einfaches Grammatikbuch', 'eine Zeitung', 'einen Roman'"
+ },
+ {
+  "f": "chapter-a2-20-was-fuer-ein-data.js",
+  "i": 1,
+  "q": "What exercises does Solveig like best?",
+  "opts": "'lange Texte', 'kurze Dialoge', 'Grammatiktabellen', 'Diktate'"
+ },
+ {
+  "f": "chapter-a2-21-verben-dativ-akkusativ-data.js",
+  "i": 0,
+  "q": "What does Timo give Karla?",
+  "opts": "'ein Foto', 'ein Buch', 'eine Karte', 'eine Blume'"
+ },
+ {
+  "f": "chapter-a2-21-verben-dativ-akkusativ-data.js",
+  "i": 1,
+  "q": "When will Timo send the photos?",
+  "opts": "'morgen früh', 'heute Abend', 'nächste Woche', 'jetzt sofort'"
+ },
+ {
+  "f": "chapter-a2-22-konjunktiv2-koennte-data.js",
+  "i": 0,
+  "q": "What does Ronja need help with?",
+  "opts": "'ihrer Wohnung', 'ihrer Bewerbung', 'ihrem Auto', 'ihrem Deutsch'"
+ },
+ {
+  "f": "chapter-a2-22-konjunktiv2-koennte-data.js",
+  "i": 1,
+  "q": "What does Timo want to see first?",
+  "opts": "'ihre Fotos', 'ihren Lebenslauf', 'ihr Zeugnis', 'ihren Pass'"
+ },
+ {
+  "f": "chapter-a2-23-konjunktiv2-sollte-data.js",
+  "i": 0,
+  "q": "What does Petra advise Timo to do tonight?",
+  "opts": "'noch üben', 'früh schlafen gehen', 'fernsehen', 'laufen gehen'"
+ },
+ {
+  "f": "chapter-a2-23-konjunktiv2-sollte-data.js",
+  "i": 1,
+  "q": "What should Timo do tomorrow morning?",
+  "opts": "'viel üben', 'ein gutes Frühstück essen', 'nichts essen', 'noch einmal alles lesen'"
+ },
+ {
+  "f": "chapter-a2-24-deshalb-trotzdem-data.js",
+  "i": 0,
+  "q": "Why does Merle stay home?",
+  "opts": "'Sie ist krank.', 'Es regnet stark.', 'Sie hat keine Zeit.', 'Sie mag Timo nicht.'"
+ },
+ {
+  "f": "chapter-a2-24-deshalb-trotzdem-data.js",
+  "i": 1,
+  "q": "Does Timo cycle despite the rain?",
+  "opts": "'Nein, er bleibt zu Hause', 'Ja, trotzdem', 'Er nimmt den Bus', 'Er weiß es nicht'"
+ },
+ {
+  "f": "chapter-a2-25-goethe-mini-3-data.js",
+  "i": 0,
+  "q": "What parts does the exam have?",
+  "opts": "'nur Hören', 'Hören, Lesen und Schreiben', 'nur Schreiben', 'Sprechen und Singen'"
+ },
+ {
+  "f": "chapter-a2-25-goethe-mini-3-data.js",
+  "i": 1,
+  "q": "What does Frau Sander suggest they do?",
+  "opts": "'nach Hause gehen', 'fünf Minuten gemeinsam üben', 'eine Pause machen', 'die Prüfung verschieben'"
+ },
+ {
+  "f": "chapter-a2-26-adjektiv-bestimmter-artikel-data.js",
+  "i": 0,
+  "q": "What does Ida need besides the jacket?",
+  "opts": "'den großen Rucksack', 'das kleine Zelt', 'die gute Karte', 'das warme Essen'"
+ },
+ {
+  "f": "chapter-a2-26-adjektiv-bestimmter-artikel-data.js",
+  "i": 1,
+  "q": "What is still missing at the end?",
+  "opts": "'die Jacke', 'der Rucksack', 'das warme Essen', 'die Karte'"
+ },
+ {
+  "f": "chapter-a2-27-adjektiv-unbestimmter-artikel-data.js",
+  "i": 0,
+  "q": "What size tent does Timo need?",
+  "opts": "'ein großes', 'ein kleines', 'kein Zelt', 'zwei Zelte'"
+ },
+ {
+  "f": "chapter-a2-27-adjektiv-unbestimmter-artikel-data.js",
+  "i": 1,
+  "q": "What does Timo need for a cold day?",
+  "opts": "'eine dünne Jacke', 'eine dicke Jacke und ein leichtes Paddel', 'nur Schuhe', 'ein großes Zelt'"
+ },
+ {
+  "f": "chapter-a2-28-als-wenn-data.js",
+  "i": 0,
+  "q": "What did Insa have as a child?",
+  "opts": "'einen Hund', 'eine Katze', 'einen Vogel', 'ein Kaninchen'"
+ },
+ {
+  "f": "chapter-a2-28-als-wenn-data.js",
+  "i": 1,
+  "q": "What happened whenever Timo\\'s cousin visited?",
+  "opts": "'er kam allein', 'er brachte seinen Hund mit', 'er blieb zu Hause', 'er brachte eine Katze mit'"
+ },
+ {
+  "f": "chapter-a2-29-indefinitpronomen-data.js",
+  "i": 0,
+  "q": "Is anyone home?",
+  "opts": "'Ja, viele Leute', 'Nein, niemand', 'Nur die Katze ist wach', 'Ja, Nadja'"
+ },
+ {
+  "f": "chapter-a2-29-indefinitpronomen-data.js",
+  "i": 1,
+  "q": "Has anyone watered the flowers?",
+  "opts": "'Ja, schon', 'Nein, noch niemand', 'Die Katze hat es getan', 'Nadja hat es getan'"
+ },
+ {
+  "f": "chapter-a2-3-artikel-review-data.js",
+  "i": 0,
+  "q": "Who did Timo meet?",
+  "opts": "'einen Bankangestellten', 'einen Zahnarzt und eine Köchin', 'eine Gärtnerin', 'einen Lehrer'"
+ },
+ {
+  "f": "chapter-a2-3-artikel-review-data.js",
+  "i": 1,
+  "q": "Who did Merle talk to?",
+  "opts": "'einer Ärztin', 'einer Lehrerin', 'einem Koch', 'einer Gärtnerin'"
+ },
+ {
+  "f": "chapter-a2-30-verben-praepositionen-data.js",
+  "i": 0,
+  "q": "What is Wibke interested in?",
+  "opts": "'ein neues Auto', 'ein neuer Job', 'eine neue Wohnung', 'ein neuer Kurs'"
+ },
+ {
+  "f": "chapter-a2-30-verben-praepositionen-data.js",
+  "i": 1,
+  "q": "What train is Timo waiting for?",
+  "opts": "'nach Berlin', 'nach Hamburg', 'nach München', 'nach Wien'"
+ },
+ {
+  "f": "chapter-a2-31-w-fragen-praepositionen-data.js",
+  "i": 0,
+  "q": "What was the radio show about?",
+  "opts": "'ein Politiker', 'ein Musiker', 'ein Sportler', 'ein Schauspieler'"
+ },
+ {
+  "f": "chapter-a2-31-w-fragen-praepositionen-data.js",
+  "i": 1,
+  "q": "What did the musician start with?",
+  "opts": "'einem Buch', 'einem kleinen Konzert', 'einer Reise', 'einem Film'"
+ },
+ {
+  "f": "chapter-a2-32-konjunktiv2-wuensche-hoeflichkeit-data.js",
+  "i": 0,
+  "q": "What does Timo order?",
+  "opts": "'Tee und Kuchen', 'Brot und Kaffee', 'Saft und Brot', 'Kaffee und Kuchen'"
+ },
+ {
+  "f": "chapter-a2-32-konjunktiv2-wuensche-hoeflichkeit-data.js",
+  "i": 1,
+  "q": "What does Timo ask for in addition?",
+  "opts": "'Zucker', 'Butter', 'Milch', 'Marmelade'"
+ },
+ {
+  "f": "chapter-a2-33-relativsatz-nominativ-data.js",
+  "i": 0,
+  "q": "Who reads the news?",
+  "opts": "'die Frau', 'das Kind', 'der Mann', 'Merit'"
+ },
+ {
+  "f": "chapter-a2-33-relativsatz-nominativ-data.js",
+  "i": 1,
+  "q": "Who is the dancing child?",
+  "opts": "'ihre Tochter', 'ihr Sohn', 'ihre Schwester', 'ihre Freundin'"
+ },
+ {
+  "f": "chapter-a2-34-relativsatz-akkusativ-data.js",
+  "i": 0,
+  "q": "What does Wenke say about the author?",
+  "opts": "'Sie kennt ihn nicht.', 'Sie liest ihn seit Jahren.', 'Er ist neu.', 'Er schreibt nicht mehr.'"
+ },
+ {
+  "f": "chapter-a2-34-relativsatz-akkusativ-data.js",
+  "i": 1,
+  "q": "Which chapter does Wenke love?",
+  "opts": "'das erste', 'das letzte', 'das zweite', 'keins'"
+ },
+ {
+  "f": "chapter-a2-35-goethe-mini-4-data.js",
+  "i": 0,
+  "q": "What does Timo wish he had had more of?",
+  "opts": "'Geld', 'Zeit für die Prüfung', 'Bücher', 'Kaffee'"
+ },
+ {
+  "f": "chapter-a2-35-goethe-mini-4-data.js",
+  "i": 1,
+  "q": "What is Silke looking forward to?",
+  "opts": "'der Prüfung', 'einer Woche ohne Stress', 'einem neuen Kurs', 'den Ferien im Sommer'"
+ },
+ {
+  "f": "chapter-a2-4-weil-data.js",
+  "i": 0,
+  "q": "Why does Kilian run every morning?",
+  "opts": "'weil er spät aufsteht', 'weil er fit bleiben will', 'weil sein Hund es mag', 'weil es Pflicht ist'"
+ },
+ {
+  "f": "chapter-a2-4-weil-data.js",
+  "i": 1,
+  "q": "Why does Rieke paint often?",
+  "opts": "'weil sie Geld verdient', 'weil es sie entspannt', 'weil ihre Freunde es tun', 'weil es einfach ist'"
+ },
+ {
+  "f": "chapter-a2-5-dass-data.js",
+  "i": 0,
+  "q": "What does Frauke think about the coffee?",
+  "opts": "'dass er schlecht ist', 'dass er sehr gut ist', 'dass er kalt ist', 'dass er teuer ist'"
+ },
+ {
+  "f": "chapter-a2-5-dass-data.js",
+  "i": 1,
+  "q": "What is Marek hoping for?",
+  "opts": "'ein Rabatt', 'ein Tisch', 'ein Geschenk', 'eine Rechnung'"
+ },
+ {
+  "f": "chapter-a2-6-modalverben-praeteritum-data.js",
+  "i": 0,
+  "q": "Why couldn\\'t Anke go to the concert?",
+  "opts": "'Sie war krank.', 'Sie musste arbeiten.', 'Sie hatte kein Ticket.', 'Sie wollte nicht.'"
+ },
+ {
+  "f": "chapter-a2-6-modalverben-praeteritum-data.js",
+  "i": 1,
+  "q": "What was Anke allowed to do?",
+  "opts": "'die Musik hören', 'früher gehen', 'das Konzert filmen', 'zu Hause bleiben'"
+ },
+ {
+  "f": "chapter-a2-7-possessivartikel-dativ-data.js",
+  "i": 0,
+  "q": "What does Nils\\' cat do around guests?",
+  "opts": "'Sie spielt mit ihnen.', 'Sie versteckt sich.', 'Sie schläft viel.', 'Sie miaut laut.'"
+ },
+ {
+  "f": "chapter-a2-7-possessivartikel-dativ-data.js",
+  "i": 1,
+  "q": "Where does Silke\\'s cat stay when she travels?",
+  "opts": "'bei Nils', 'bei ihrer Mutter', 'allein zu Hause', 'im Tierheim'"
+ },
+ {
+  "f": "chapter-a2-8-komparativ-superlativ-data.js",
+  "i": 0,
+  "q": "Which apartment is bigger?",
+  "opts": "'die alte', 'die neue', 'beide gleich', 'keine'"
+ },
+ {
+  "f": "chapter-a2-8-komparativ-superlativ-data.js",
+  "i": 1,
+  "q": "Which apartment has the nicest balcony?",
+  "opts": "'die neue', 'die alte', 'beide', 'keine'"
+ },
+ {
+  "f": "chapter-a2-9-vergleiche-als-wie-data.js",
+  "i": 0,
+  "q": "How does Timo rate the new restaurant?",
+  "opts": "'schlechter als das alte', 'besser als das alte', 'genauso gut wie das alte', 'viel teurer'"
+ },
+ {
+  "f": "chapter-a2-9-vergleiche-als-wie-data.js",
+  "i": 1,
+  "q": "How does the price compare?",
+  "opts": "'viel teurer', 'genauso teuer wie früher', 'viel billiger', 'unbekannt'"
+ },
+ {
+  "f": "chapter-b1-1-infinitiv-mit-zu-data.js",
+  "i": 0,
+  "q": "How does Timo feel about three weeks of camping?",
+  "opts": "'He\\'d love it', 'He doubts he could handle it', 'He\\'s already planning to join', 'He hates nature'"
+ },
+ {
+  "f": "chapter-b1-1-infinitiv-mit-zu-data.js",
+  "i": 1,
+  "q": "What does Renke do if it rains?",
+  "opts": "'She goes home', 'She complains all day', 'She reads a book in the tent', 'She cancels the trip'"
+ },
+ {
+  "f": "chapter-b1-10-passiv-praesens-data.js",
+  "i": 0,
+  "q": "Why is the museum closed?",
+  "opts": "'wegen eines Streiks', 'das Gemälde wird restauriert', 'es ist Feiertag', 'es ist zu voll'"
+ },
+ {
+  "f": "chapter-b1-10-passiv-praesens-data.js",
+  "i": 1,
+  "q": "What happens tomorrow at nine?",
+  "opts": "'nichts Besonderes', 'die neue Ausstellung wird eröffnet', 'das Museum bleibt zu', 'ein Konzert findet statt'"
+ },
+ {
+  "f": "chapter-b1-11-relativsaetze-dativ-data.js",
+  "i": 0,
+  "q": "What is Marret unsure about?",
+  "opts": "'ob sie ein neues Fahrrad braucht', 'ob sie der Werkstatt vertrauen kann', 'ob der Laden offen ist', 'ob das Fahrrad noch fahrbereit ist'"
+ },
+ {
+  "f": "chapter-b1-11-relativsaetze-dativ-data.js",
+  "i": 1,
+  "q": "What does Timo say about the mechanic?",
+  "opts": "'Er wirkte unsicher.', 'Er wirkte sehr kompetent.', 'Er war unfreundlich.', 'Er hatte keine Zeit.'"
+ },
+ {
+  "f": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+  "i": 0,
+  "q": "Which shirt does Timo recommend?",
+  "opts": "'das blaue', 'das weiße', 'keins', 'ein rotes'"
+ },
+ {
+  "f": "chapter-b1-12-adjektivdeklination-wiederholung-data.js",
+  "i": 1,
+  "q": "What does Timo say about the old bag?",
+  "opts": "'Sie passt perfekt.', 'Nimm lieber die neue.', 'Sie ist zu klein.', 'Sie ist kaputt.'"
+ },
+ {
+  "f": "chapter-b1-13-goethe-mini-2-data.js",
+  "i": 0,
+  "q": "Why does Grit still want the apartment?",
+  "opts": "'Die Miete ist niedrig.', 'Die Lage ist gut.', 'Der Vermieter ist freundlich.', 'Sie hat keine Alternative.'"
+ },
+ {
+  "f": "chapter-b1-13-goethe-mini-2-data.js",
+  "i": 1,
+  "q": "When will Grit sign?",
+  "opts": "'heute', 'morgen', 'nächste Woche', 'nie'"
+ },
+ {
+  "f": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+  "i": 0,
+  "q": "Which city has cheaper rents?",
+  "opts": "'Dresden', 'Leipzig', 'beide gleich', 'keine von beiden'"
+ },
+ {
+  "f": "chapter-b1-14-komparativ-superlativ-vor-nomen-data.js",
+  "i": 1,
+  "q": "Which city does Timo call livelier?",
+  "opts": "'Dresden', 'Leipzig', 'beide', 'keine'"
+ },
+ {
+  "f": "chapter-b1-15-n-deklination-data.js",
+  "i": 0,
+  "q": "What does Timo need help with?",
+  "opts": "'seinem Auto', 'seinem Vertrag', 'seiner Wohnung', 'seinem Job'"
+ },
+ {
+  "f": "chapter-b1-15-n-deklination-data.js",
+  "i": 1,
+  "q": "Does Silje trust the colleague?",
+  "opts": "'Nein', 'Absolut', 'Nicht ganz', 'Sie kennt ihn nicht'"
+ },
+ {
+  "f": "chapter-b1-16-futur1-data.js",
+  "i": 0,
+  "q": "What does Emke bet will happen next year?",
+  "opts": "'ein Umzug', 'der Urlaub', 'eine Hochzeit', 'ein neuer Job'"
+ },
+ {
+  "f": "chapter-b1-16-futur1-data.js",
+  "i": 1,
+  "q": "When will Emke book the tickets?",
+  "opts": "'nächsten Monat', 'diese Woche', 'nächstes Jahr', 'nie'"
+ },
+ {
+  "f": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+  "i": 0,
+  "q": "Why did Timo join car-sharing?",
+  "opts": "'um Freunde zu treffen', 'um Geld zu sparen', 'um schneller zu fahren', 'um Umwelt zu schützen'"
+ },
+ {
+  "f": "chapter-b1-17-nebensatz-damit-um-zu-data.js",
+  "i": 1,
+  "q": "Why had Antke hesitated?",
+  "opts": "'sie mag keine Autos', 'damit sie nicht in Verträge gebunden ist', 'sie hat kein Geld', 'sie kann nicht fahren'"
+ },
+ {
+  "f": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+  "i": 0,
+  "q": "What park is Marlen showing Timo?",
+  "opts": "'einen neuen Park', 'den Park, in dem sie als Kind spielte', 'einen Park in ihrer neuen Stadt', 'einen Park ohne Erinnerung'"
+ },
+ {
+  "f": "chapter-b1-18-relativsaetze-mit-praepositionen-data.js",
+  "i": 1,
+  "q": "Who sat on the bench?",
+  "opts": "'Marlens Vater', 'Marlens Großvater', 'Timo', 'ein Fremder'"
+ },
+ {
+  "f": "chapter-b1-19-goethe-halbzeit-test-data.js",
+  "i": 0,
+  "q": "What does Uta think of the first sentence?",
+  "opts": "'zu locker', 'zu förmlich', 'perfekt', 'zu kurz'"
+ },
+ {
+  "f": "chapter-b1-19-goethe-halbzeit-test-data.js",
+  "i": 1,
+  "q": "What does Uta suggest?",
+  "opts": "'etwas Persönliches am Anfang', 'einen kürzeren Brief', 'mehr Formalität', 'ein anderes Thema'"
+ },
+ {
+  "f": "chapter-b1-2-nebensaetze-weil-da-obwohl-data.js",
+  "i": 0,
+  "q": "Why is Frauke hesitant about the beach trip?",
+  "opts": "'She has to work', 'It\\'s too cold', 'She doesn\\'t like Timo', 'She\\'s sick'"
+ },
+ {
+  "f": "chapter-b1-2-nebensaetze-weil-da-obwohl-data.js",
+  "i": 1,
+  "q": "What convinces Frauke to come?",
+  "opts": "'A discount', 'A promise of a warm drink afterwards', 'Better weather forecast', 'A friend joining'"
+ },
+ {
+  "f": "chapter-b1-20-plusquamperfekt-data.js",
+  "i": 0,
+  "q": "Who did Wenke run into?",
+  "opts": "'ihre Schwester', 'Meike', 'Timo', 'eine Fremde'"
+ },
+ {
+  "f": "chapter-b1-20-plusquamperfekt-data.js",
+  "i": 1,
+  "q": "How did Wenke finally recognize her?",
+  "opts": "'durch ihre Stimme', 'nachdem sie gelacht hatte', 'durch ihre Kleidung', 'sofort'"
+ },
+ {
+  "f": "chapter-b1-21-temporale-nebensaetze-data.js",
+  "i": 0,
+  "q": "What will Runa do before playing loud music?",
+  "opts": "'nichts ändern', 'Timo fragen', 'das Zimmer verlassen', 'die Musik ganz lassen'"
+ },
+ {
+  "f": "chapter-b1-21-temporale-nebensaetze-data.js",
+  "i": 1,
+  "q": "How does Runa feel after clearing things up?",
+  "opts": "'schlechter', 'viel besser', 'unverändert', 'wütend'"
+ },
+ {
+  "f": "chapter-b1-22-brauchen-zu-infinitiv-data.js",
+  "i": 0,
+  "q": "What does Katrin need to do with the app?",
+  "opts": "'jede Zahl eintragen', 'ihre Belege fotografieren', 'alles selbst ausfüllen', 'einen Berater anrufen'"
+ },
+ {
+  "f": "chapter-b1-22-brauchen-zu-infinitiv-data.js",
+  "i": 1,
+  "q": "How does Timo reassure Katrin?",
+  "opts": "'Du brauchst dir keine Sorgen zu machen.', 'Es ist kompliziert.', 'Ruf lieber jemanden an.', 'Mach es lieber selbst.'"
+ },
+ {
+  "f": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+  "i": 0,
+  "q": "What can Timo not yet do himself?",
+  "opts": "'die Haare waschen', 'die Schuhe binden', 'essen', 'sprechen'"
+ },
+ {
+  "f": "chapter-b1-23-reflexivpronomen-akkusativ-dativ-data.js",
+  "i": 1,
+  "q": "What can Timo already do alone?",
+  "opts": "'die Schuhe binden', 'die Haare waschen', 'laufen', 'kochen'"
+ },
+ {
+  "f": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+  "i": 0,
+  "q": "Why doesn\\'t Nike want to go to both concerts?",
+  "opts": "'sie mag die Bands nicht', 'weder Geld noch Energie', 'sie hat keine Zeit', 'das Konzert ist ausverkauft'"
+ },
+ {
+  "f": "chapter-b1-24-zweiteilige-konnektoren-data.js",
+  "i": 1,
+  "q": "Which day do they choose?",
+  "opts": "'Freitag', 'Samstag', 'beide', 'keinen'"
+ },
+ {
+  "f": "chapter-b1-25-stellung-von-nicht-data.js",
+  "i": 0,
+  "q": "What did they find?",
+  "opts": "'ein Handy', 'eine Geldbörse', 'einen Schlüssel', 'eine Tasche'"
+ },
+ {
+  "f": "chapter-b1-25-stellung-von-nicht-data.js",
+  "i": 1,
+  "q": "What will they do first?",
+  "opts": "'zur Polizei gehen', 'den Besitzer anrufen', 'das Geld zählen', 'die Börse wegwerfen'"
+ },
+ {
+  "f": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+  "i": 0,
+  "q": "What happened during the show?",
+  "opts": "'jemand ist eingeschlafen', 'jemand ist gegangen', 'die Musik war zu laut', 'es gab keinen Applaus'"
+ },
+ {
+  "f": "chapter-b1-26-adjektiv-ohne-artikel-data.js",
+  "i": 1,
+  "q": "How does Timo reassure Yara?",
+  "opts": "'Er ignoriert die Frage.', 'Begeistertes Publikum blieb bis zum Schluss, mit lautem Applaus.', 'Er sagt, es war egal.', 'Er lädt sie zu einer neuen Show ein.'"
+ },
+ {
+  "f": "chapter-b1-27-goethe-mini-3-data.js",
+  "i": 0,
+  "q": "How many times had Marte postponed the appointment?",
+  "opts": "'einmal', 'zweimal', 'dreimal', 'nie'"
+ },
+ {
+  "f": "chapter-b1-27-goethe-mini-3-data.js",
+  "i": 1,
+  "q": "What does Marte need tonight?",
+  "opts": "'Gesellschaft', 'Ruhe', 'Arbeit', 'einen Ausflug'"
+ },
+ {
+  "f": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+  "i": 0,
+  "q": "What will happen to the roof next month?",
+  "opts": "'Es wird abgerissen.', 'Es wird isoliert.', 'Es wird bemalt.', 'Es wird verkauft.'"
+ },
+ {
+  "f": "chapter-b1-28-passiv-praesens-praeteritum-perfekt-data.js",
+  "i": 1,
+  "q": "What already happened to the windows?",
+  "opts": "'Sie wurden getauscht.', 'Sie wurden zerbrochen.', 'Nichts.', 'Sie wurden gestrichen.'"
+ },
+ {
+  "f": "chapter-b1-29-passiv-modalverben-data.js",
+  "i": 0,
+  "q": "What still needs to be booked?",
+  "opts": "'ein Bus', 'ein Raum', 'ein Restaurant', 'ein Auto'"
+ },
+ {
+  "f": "chapter-b1-29-passiv-modalverben-data.js",
+  "i": 1,
+  "q": "What must be decided beforehand?",
+  "opts": "'die Themen', 'das Datum', 'die Kosten', 'die Gäste'"
+ },
+ {
+  "f": "chapter-b1-3-konjunktiv2-hoefliche-bitten-data.js",
+  "i": 0,
+  "q": "What is wrong with Timo\\'s phone?",
+  "opts": "'It\\'s wet', 'The screen is cracked', 'The screen is black', 'It\\'s too old'"
+ },
+ {
+  "f": "chapter-b1-3-konjunktiv2-hoefliche-bitten-data.js",
+  "i": 1,
+  "q": "How does Frau Lorenzen offer to help?",
+  "opts": "'Order a new phone', 'Fix it in five minutes', 'Send it away for repair', 'Refund the phone'"
+ },
+ {
+  "f": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+  "i": 0,
+  "q": "Which cake does Frauke prefer?",
+  "opts": "'diesen hier', 'den daneben', 'keinen', 'beide'"
+ },
+ {
+  "f": "chapter-b1-30-artikelwoerter-als-pronomen-data.js",
+  "i": 1,
+  "q": "Which candles do they choose?",
+  "opts": "'die roten', 'die goldenen', 'keine', 'beide'"
+ },
+ {
+  "f": "chapter-b1-31-adjektive-als-nomen-data.js",
+  "i": 0,
+  "q": "Who is \"der Neue\"?",
+  "opts": "'ein Kunde', 'der neue Kollege', 'ein Familienmitglied', 'ein Nachbar'"
+ },
+ {
+  "f": "chapter-b1-31-adjektive-als-nomen-data.js",
+  "i": 1,
+  "q": "What does Timo say he likes?",
+  "opts": "'seine Kleidung', 'das Ehrliche', 'seine Sprache', 'seinen Humor'"
+ },
+ {
+  "f": "chapter-b1-32-relativsaetze-was-wo-data.js",
+  "i": 0,
+  "q": "Where should Timo take his sister?",
+  "opts": "'ins Museum', 'in den Stadtteil mit Straßenkunst', 'ins Restaurant', 'zum Bahnhof'"
+ },
+ {
+  "f": "chapter-b1-32-relativsaetze-was-wo-data.js",
+  "i": 1,
+  "q": "What does Renke like most there?",
+  "opts": "'die Kirche', 'die kleine Galerie an der Ecke', 'der Park', 'der Markt'"
+ },
+ {
+  "f": "chapter-b1-33-je-desto-umso-data.js",
+  "i": 0,
+  "q": "What does Britta feel guilty about?",
+  "opts": "'zu viel Sport', 'online bestellen', 'zu spät kommen', 'zu viel Kaffee trinken'"
+ },
+ {
+  "f": "chapter-b1-33-je-desto-umso-data.js",
+  "i": 1,
+  "q": "What do they plan for tomorrow?",
+  "opts": "'online einkaufen', 'beim Laden an der Ecke einkaufen', 'zu Hause bleiben', 'verreisen'"
+ },
+ {
+  "f": "chapter-b1-34-partizipien-als-adjektive-data.js",
+  "i": 0,
+  "q": "What does the plate turn out to be called?",
+  "opts": "'Müll', 'Kintsugi-Kunst', 'ein Fehler', 'ein Geschenk'"
+ },
+ {
+  "f": "chapter-b1-34-partizipien-als-adjektive-data.js",
+  "i": 1,
+  "q": "What does Timo ask about next?",
+  "opts": "'einen zerbrochenen Teller', 'einen reparierten Spiegel', 'einen neuen Stuhl', 'ein altes Buch'"
+ },
+ {
+  "f": "chapter-b1-35-goethe-zertifikat-b1-final-data.js",
+  "i": 0,
+  "q": "How did Timo sleep last night?",
+  "opts": "'sehr gut', 'kaum', 'normal', 'er weiß es nicht'"
+ },
+ {
+  "f": "chapter-b1-35-goethe-zertifikat-b1-final-data.js",
+  "i": 1,
+  "q": "What does Silke suggest before going in?",
+  "opts": "'noch einmal alles lesen', 'einen Kaffee trinken', 'nach Hause gehen', 'die Prüfung verschieben'"
+ },
+ {
+  "f": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+  "i": 0,
+  "q": "Why does Franzi want to return the cable?",
+  "opts": "'Wrong color', 'It\\'s too short', 'It\\'s so broken it doesn\\'t charge', 'She changed her mind'"
+ },
+ {
+  "f": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+  "i": 1,
+  "q": "What surprises Franzi?",
+  "opts": "'The price', 'That it broke after only two weeks', 'The store hours', 'The receipt'"
+ },
+ {
+  "f": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+  "i": 0,
+  "q": "Why is Timo avoiding cheese?",
+  "opts": "'He\\'s allergic', 'For his fitness', 'He doesn\\'t like it', 'It\\'s too expensive'"
+ },
+ {
+  "f": "chapter-b1-5-genitiv-wegen-trotz-waehrend-data.js",
+  "i": 1,
+  "q": "How long does Timo plan to cook vegan?",
+  "opts": "'One day', 'The whole week', 'A month', 'He already gave up'"
+ },
+ {
+  "f": "chapter-b1-6-goethe-mini-1-data.js",
+  "i": 0,
+  "q": "Why is Meike nervous?",
+  "opts": "'A job interview', 'The mock exam tomorrow', 'A doctor\\'s appointment', 'Moving apartments'"
+ },
+ {
+  "f": "chapter-b1-6-goethe-mini-1-data.js",
+  "i": 1,
+  "q": "What does Timo offer to do?",
+  "opts": "'Cancel the exam', 'Practice together now', 'Take the exam for her', 'Call the teacher'"
+ },
+ {
+  "f": "chapter-b1-7-praeteritum-data.js",
+  "i": 0,
+  "q": "How was Timo when they first met?",
+  "opts": "'sehr selbstsicher', 'sehr schüchtern', 'sehr müde', 'sehr laut'"
+ },
+ {
+  "f": "chapter-b1-7-praeteritum-data.js",
+  "i": 1,
+  "q": "What did Timo do even though he doesn\\'t like coffee?",
+  "opts": "'Er trank Tee.', 'Er sagte ja zum Kaffee.', 'Er ging weg.', 'Er kochte Kaffee.'"
+ },
+ {
+  "f": "chapter-b1-8-zeitangaben-dativ-genitiv-data.js",
+  "i": 0,
+  "q": "Why can\\'t Timo get a flight this week?",
+  "opts": "'Es gibt keinen Flughafen.', 'Kein freier Platz mehr.', 'Der Flug ist zu teuer.', 'Er hat keinen Pass.'"
+ },
+ {
+  "f": "chapter-b1-8-zeitangaben-dativ-genitiv-data.js",
+  "i": 1,
+  "q": "When could Timo fly?",
+  "opts": "'am Wochenende', 'am frühen Morgen nächste Woche', 'heute Abend', 'nie'"
+ },
+ {
+  "f": "chapter-b1-9-goethe-mini-2-data.js",
+  "i": 0,
+  "q": "What worries Nele the most?",
+  "opts": "'die Anfahrt', 'das Gehalt', 'die Kündigungsfrage', 'die Kleidung'"
+ },
+ {
+  "f": "chapter-b1-9-goethe-mini-2-data.js",
+  "i": 1,
+  "q": "What does Timo suggest?",
+  "opts": "'zu lügen', 'die Wahrheit zu sagen', 'nicht hinzugehen', 'die Frage zu vermeiden'"
+ },
+ {
+  "f": "chapter-b2-01-erweiterte-satzklammer-data.js",
+  "i": 0,
+  "q": "What did the policy take three months to do?",
+  "opts": "'scheitern', 'sich auf klare Kriterien einigen', 'verschwinden', 'abgesagt werden'"
+ },
+ {
+  "f": "chapter-b2-01-erweiterte-satzklammer-data.js",
+  "i": 1,
+  "q": "From now on, what must every job posting contain?",
+  "opts": "'ein Foto', 'diese Kriterien', 'eine Gehaltsangabe', 'nichts Neues'"
+ },
+ {
+  "f": "chapter-b2-02-verbalkomplex-data.js",
+  "i": 0,
+  "q": "What does Wibke regret not doing?",
+  "opts": "'zu viele Kontakte machen', 'das kleine Café besuchen', 'zu früh gehen', 'zu spät kommen'"
+ },
+ {
+  "f": "chapter-b2-02-verbalkomplex-data.js",
+  "i": 1,
+  "q": "What does Timo suggest?",
+  "opts": "'sie soll es vergessen', 'sie kann es nächstes Jahr nachholen', 'er geht stattdessen', 'sie soll sich beschweren'"
+ },
+ {
+  "f": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+  "i": 0,
+  "q": "What happens from the next station on?",
+  "opts": "'der Zug hält', 'Französisch wird gesprochen', 'es gibt Essen', 'der Wagen wechselt'"
+ },
+ {
+  "f": "chapter-b2-03-informationsstruktur-thema-rhema-data.js",
+  "i": 1,
+  "q": "When did Meret sign the contract?",
+  "opts": "'heute Morgen', 'gestern Abend', 'letzte Woche', 'noch nicht'"
+ },
+ {
+  "f": "chapter-b2-04-formales-es-data.js",
+  "i": 0,
+  "q": "Why isn\\'t Karla surprised?",
+  "opts": "'Sie kennt die Autorin nicht.', 'Es war von Anfang an klar.', 'Sie hat den Film nicht gesehen.', 'Der Preis war ein Fehler.'"
+ },
+ {
+  "f": "chapter-b2-04-formales-es-data.js",
+  "i": 1,
+  "q": "How does Timo feel about the writer winning?",
+  "opts": "'neidisch', 'es freut ihn', 'gleichgültig', 'enttäuscht'"
+ },
+ {
+  "f": "chapter-b2-05-korrelat-es-data.js",
+  "i": 0,
+  "q": "What is hard for Merle?",
+  "opts": "'Grafikdesign zu lernen', 'sich zu entscheiden', 'einen Job zu finden', 'Timo zu überzeugen'"
+ },
+ {
+  "f": "chapter-b2-05-korrelat-es-data.js",
+  "i": 1,
+  "q": "What does Timo suggest?",
+  "opts": "'sofort entscheiden', 'sich Zeit lassen', 'Grafikdesign wählen', 'das Filmemachen aufgeben'"
+ },
+ {
+  "f": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+  "i": 0,
+  "q": "What does \"it depends\" mean here?",
+  "opts": "'Es kommt darauf an', 'Es freut mich', 'Es tut mir leid', 'Es geht'"
+ },
+ {
+  "f": "chapter-b2-06-es-in-festen-ausdruecken-data.js",
+  "i": 1,
+  "q": "Did Timo enjoy the film?",
+  "opts": "'Nein, gar nicht', 'Ja, es lohnt sich', 'Er weiß es nicht', 'Nur teilweise'"
+ },
+ {
+  "f": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+  "i": 0,
+  "q": "What is Petra writing about?",
+  "opts": "'einen Regisseur', 'eine eingewanderte Familie', 'die Ausstellung selbst', 'ein Drehbuchfestival'"
+ },
+ {
+  "f": "chapter-b2-07-verbergaenzungen-erkennen-data.js",
+  "i": 1,
+  "q": "What style guides Petra?",
+  "opts": "'ein komödiantischer Stil', 'ein dokumentarischer Stil', 'kein bestimmter Stil', 'ein historischer Stil'"
+ },
+ {
+  "f": "chapter-b2-08-valenz-von-verben-data.js",
+  "i": 0,
+  "q": "How does Runa assess the study?",
+  "opts": "'unwichtig', 'sehr wichtig', 'fehlerhaft', 'uninteressant'"
+ },
+ {
+  "f": "chapter-b2-08-valenz-von-verben-data.js",
+  "i": 1,
+  "q": "Does the study fully contradict older results?",
+  "opts": "'Ja, komplett', 'Nein, aber sie stellt sie infrage', 'Nein, sie bestätigt sie', 'Das ist unklar'"
+ },
+ {
+  "f": "chapter-b2-09-trennbar-vs-untrennbar-data.js",
+  "i": 0,
+  "q": "What does Insa want to briefly address?",
+  "opts": "'ein neues Projekt', 'was letzte Woche passiert ist', 'ihren Urlaub', 'das Wetter'"
+ },
+ {
+  "f": "chapter-b2-09-trennbar-vs-untrennbar-data.js",
+  "i": 1,
+  "q": "How does Timo feel about Insa\\'s criticism now?",
+  "opts": "'er versteht sie nicht', 'er unterstützt ihre Sicht', 'er ist wütend', 'er ignoriert sie'"
+ },
+ {
+  "f": "chapter-b2-10-haeufige-b2-verben-data.js",
+  "i": 0,
+  "q": "What is Britta considering?",
+  "opts": "'einen Umzug', 'eine Umschulung', 'einen Urlaub', 'eine Kündigung'"
+ },
+ {
+  "f": "chapter-b2-10-haeufige-b2-verben-data.js",
+  "i": 1,
+  "q": "What did Britta already find?",
+  "opts": "'einen neuen Job', 'eine gute Berufsschule', 'einen Kredit', 'eine WG'"
+ },
+ {
+  "f": "chapter-b2-11-stellung-von-nicht-data.js",
+  "i": 0,
+  "q": "Why is Nadine stressed?",
+  "opts": "'wegen Timo', 'wegen des Termindrucks', 'wegen des Wetters', 'wegen der Kollegen'"
+ },
+ {
+  "f": "chapter-b2-11-stellung-von-nicht-data.js",
+  "i": 1,
+  "q": "What did Timo misunderstand?",
+  "opts": "'den Termin', 'den Grund für ihren Stress', 'ihre Pläne', 'ihre Position'"
+ },
+ {
+  "f": "chapter-b2-12-doppelte-verneinung-litotes-data.js",
+  "i": 0,
+  "q": "How does Timo describe the last line?",
+  "opts": "'perfekt', 'katastrophal', 'nicht ganz unproblematisch', 'viel zu kurz'"
+ },
+ {
+  "f": "chapter-b2-12-doppelte-verneinung-litotes-data.js",
+  "i": 1,
+  "q": "What does Timo suggest?",
+  "opts": "'die Szene streichen', 'eine kleine Pause davor', 'lauter sprechen', 'den Satz wiederholen'"
+ },
+ {
+  "f": "chapter-b2-13-nuancierte-negation-data.js",
+  "i": 0,
+  "q": "What does Frauke say about her son?",
+  "opts": "'Er ist sehr schüchtern.', 'Er wird schnell überfordert.', 'Er ist nie ruhig.', 'Er mag niemanden.'"
+ },
+ {
+  "f": "chapter-b2-13-nuancierte-negation-data.js",
+  "i": 1,
+  "q": "Does he ever completely withdraw?",
+  "opts": "'Ja, oft', 'Nein, nie ganz', 'Nur am Wochenende', 'Immer'"
+ },
+ {
+  "f": "chapter-b2-15-konzessivsaetze-obgleich-data.js",
+  "i": 0,
+  "q": "Why does Ronja hesitate despite the good salary?",
+  "opts": "'Sie mag den Job nicht.', 'Sie hat andere Erfahrungsberichte gelesen.', 'Sie hat schon einen Job.', 'Der Standort gefällt ihr nicht.'"
+ },
+ {
+  "f": "chapter-b2-15-konzessivsaetze-obgleich-data.js",
+  "i": 1,
+  "q": "What does Timo recommend?",
+  "opts": "'sofort zusagen', 'ablehnen', 'genauer nachfragen', 'den Job wechseln'"
+ },
+ {
+  "f": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen-data.js",
+  "i": 0,
+  "q": "What news does Frauke share?",
+  "opts": "'Sie hat gekündigt.', 'Sie hat die Stelle bekommen.', 'Sie zieht ins Ausland.', 'Sie sucht einen neuen Job.'"
+ },
+ {
+  "f": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen-data.js",
+  "i": 1,
+  "q": "Why must Frauke move?",
+  "opts": "'Die Miete ist zu hoch.', 'Die Agentur liegt zu weit weg.', 'Sie möchte einfach umziehen.', 'Ihr Vertrag verlangt es.'"
+ },
+ {
+  "f": "chapter-b2-17-modalsaetze-indem-data.js",
+  "i": 0,
+  "q": "How did Nele improve her application?",
+  "opts": "'durch ein neues Foto', 'indem sie konkrete Zahlen einbaute', 'durch längere Sätze', 'indem sie alles kürzte'"
+ },
+ {
+  "f": "chapter-b2-17-modalsaetze-indem-data.js",
+  "i": 1,
+  "q": "How did she make the opening vivid?",
+  "opts": "'mit einem Zitat', 'mit einer konkreten Situation', 'mit einer Frage', 'mit einem Witz'"
+ },
+ {
+  "f": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+  "i": 0,
+  "q": "How does Wibke train her sense of smell?",
+  "opts": "'durch Bücher', 'durch tägliches Training mit Proben', 'durch Urlaub', 'durch Musik'"
+ },
+ {
+  "f": "chapter-b2-18-modalsaetze-dadurch-dass-data.js",
+  "i": 1,
+  "q": "What can Wibke recognize now?",
+  "opts": "'nichts Besonderes', 'Nuancen, die andere übersehen', 'nur starke Düfte', 'nur ihre Lieblingsdüfte'"
+ },
+ {
+  "f": "chapter-b2-19-ohne-zu-data.js",
+  "i": 0,
+  "q": "What did Timo do without asking Steffi?",
+  "opts": "'ein Budget planen', 'ein Teamevent planen', 'einen Kollegen einstellen', 'einen Urlaub buchen'"
+ },
+ {
+  "f": "chapter-b2-19-ohne-zu-data.js",
+  "i": 1,
+  "q": "What does Timo admit?",
+  "opts": "'Er hat gut nachgedacht.', 'Er hat entschieden, ohne nachzudenken.', 'Er wusste alles genau.', 'Er hat nichts falsch gemacht.'"
+ },
+ {
+  "f": "chapter-b2-20-anstatt-zu-data.js",
+  "i": 0,
+  "q": "What did Katja\\'s brother do instead of continuing to study?",
+  "opts": "'er reiste', 'er nahm einen IT-Job an', 'er machte Pause', 'er wechselte das Fach'"
+ },
+ {
+  "f": "chapter-b2-20-anstatt-zu-data.js",
+  "i": 1,
+  "q": "What is he gaining instead of just theory?",
+  "opts": "'ein Gehalt', 'echte Praxiserfahrung', 'Freizeit', 'neue Freunde'"
+ },
+ {
+  "f": "chapter-b2-21-sowohl-als-auch-data.js",
+  "i": 0,
+  "q": "How is the family isolated?",
+  "opts": "'nur finanziell', 'nur sozial', 'sowohl finanziell als auch sozial', 'gar nicht'"
+ },
+ {
+  "f": "chapter-b2-21-sowohl-als-auch-data.js",
+  "i": 1,
+  "q": "What works best according to Svenja?",
+  "opts": "'nur Geld', 'nur Beratung', 'beides zusammen', 'keine Hilfe'"
+ },
+ {
+  "f": "chapter-b2-22-weder-noch-data.js",
+  "i": 0,
+  "q": "Who has responded to the complaint?",
+  "opts": "'die Verwaltung', 'die Polizei', 'weder die Verwaltung noch die Polizei', 'beide'"
+ },
+ {
+  "f": "chapter-b2-22-weder-noch-data.js",
+  "i": 1,
+  "q": "Has anyone seen the fence damage?",
+  "opts": "'ja, beide', 'nur die Polizei', 'weder sie noch wir', 'nur Doris'"
+ },
+ {
+  "f": "chapter-b2-23-nicht-nur-sondern-auch-data.js",
+  "i": 0,
+  "q": "Who does the clothing bank help besides refugees?",
+  "opts": "'nur Studenten', 'kinderreiche Familien', 'nur Rentner', 'niemand sonst'"
+ },
+ {
+  "f": "chapter-b2-23-nicht-nur-sondern-auch-data.js",
+  "i": 1,
+  "q": "What does Timo offer to do?",
+  "opts": "'Geld spenden', 'beim Sortieren helfen', 'einen Bericht schreiben', 'nichts'"
+ },
+ {
+  "f": "chapter-b2-24-einerseits-andererseits-data.js",
+  "i": 0,
+  "q": "What worries Britta on one hand?",
+  "opts": "'die Kosten', 'die Angst vor Online-Sucht', 'die Schule', 'die Zeit'"
+ },
+ {
+  "f": "chapter-b2-24-einerseits-andererseits-data.js",
+  "i": 1,
+  "q": "What does Timo suggest?",
+  "opts": "'gar kein Handy', 'ein einfaches Modell mit Regeln', 'ein teures Handy', 'warten bis 18'"
+ },
+ {
+  "f": "chapter-b2-25-verbindungsadverbien-data.js",
+  "i": 0,
+  "q": "What happened to the food after it was collected?",
+  "opts": "'es wurde weggeworfen', 'es wurde verteilt', 'es wurde verkauft', 'nichts'"
+ },
+ {
+  "f": "chapter-b2-25-verbindungsadverbien-data.js",
+  "i": 1,
+  "q": "Why is a second campaign being planned?",
+  "opts": "'aus Langeweile', 'der Bedarf ist zu groß', 'es gibt zu viel Essen', 'niemand will helfen'"
+ },
+ {
+  "f": "chapter-b2-27-perfekt-vs-praeteritum-data.js",
+  "i": 0,
+  "q": "What did Ines\\' grandma experience?",
+  "opts": "'einen Umzug', 'die Maueröffnung', 'eine Hochzeit', 'eine Reise'"
+ },
+ {
+  "f": "chapter-b2-27-perfekt-vs-praeteritum-data.js",
+  "i": 1,
+  "q": "What did people do on the street?",
+  "opts": "'sie tanzten', 'sie standen und weinten', 'sie schliefen', 'sie arbeiteten'"
+ },
+ {
+  "f": "chapter-b2-28-tempuswechsel-im-text-data.js",
+  "i": 0,
+  "q": "When was Germany divided?",
+  "opts": "'1945', '1961', '1989', '2001'"
+ },
+ {
+  "f": "chapter-b2-28-tempuswechsel-im-text-data.js",
+  "i": 1,
+  "q": "What is still noticeable today?",
+  "opts": "'nichts', 'vieles', 'die Mauer selbst', 'nur die Sprache'"
+ },
+ {
+  "f": "chapter-b2-29-futur1-vermutungen-data.js",
+  "i": 0,
+  "q": "What does Timo guess about the new boss?",
+  "opts": "'er wird faul sein', 'er wird streng sein', 'er wird abwesend sein', 'er wird unfreundlich sein'"
+ },
+ {
+  "f": "chapter-b2-29-futur1-vermutungen-data.js",
+  "i": 1,
+  "q": "What must the new boss be in any case, according to Timo?",
+  "opts": "'jung', 'kompetent', 'laut', 'still'"
+ },
+ {
+  "f": "chapter-b2-30-alternativen-zum-futur-data.js",
+  "i": 0,
+  "q": "What does Wiebke get today?",
+  "opts": "'Essen', 'Handschuhe und Müllsäcke', 'Wasser', 'ein Auto'"
+ },
+ {
+  "f": "chapter-b2-30-alternativen-zum-futur-data.js",
+  "i": 1,
+  "q": "Where will they go afterwards?",
+  "opts": "'nach Hause', 'zum Wertstoffhof', 'ins Büro', 'zum Fluss zurück'"
+ },
+ {
+  "f": "chapter-b2-31-konjunktiv2-vergangenheit-data.js",
+  "i": 0,
+  "q": "Why was Lea almost late?",
+  "opts": "'sie verschlief', 'der Zug hatte Verspätung', 'sie vergaß den Termin', 'das Auto war kaputt'"
+ },
+ {
+  "f": "chapter-b2-31-konjunktiv2-vergangenheit-data.js",
+  "i": 1,
+  "q": "What does Lea say she would have preferred?",
+  "opts": "'zu Hause bleiben', 'früher fahren', 'den Termin absagen', 'ein Taxi nehmen'"
+ },
+ {
+  "f": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+  "i": 0,
+  "q": "What does Nele first guess about Marco?",
+  "opts": "'er ist im Ausland', 'er könnte krank sein', 'er hat gekündigt', 'er ist beleidigt'"
+ },
+ {
+  "f": "chapter-b2-32-konjunktiv2-vermutungen-data.js",
+  "i": 1,
+  "q": "Why does Timo doubt the vacation guess?",
+  "opts": "'Marco hasst Urlaub', 'Marco hatte letzte Woche noch ein Projekt', 'Marco ist nie weg', 'es ist Winter'"
+ },
+ {
+  "f": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+  "i": 0,
+  "q": "How does Frauke act about the exam?",
+  "opts": "'als ob sie panisch wäre', 'als ob es sie nicht stressen würde', 'als ob sie es abgesagt hätte', 'als ob sie krank wäre'"
+ },
+ {
+  "f": "chapter-b2-33-irreale-vergleiche-als-ob-data.js",
+  "i": 1,
+  "q": "How does Frauke feel inside?",
+  "opts": "'sehr sicher', 'als hätte sie nichts gelernt', 'froh', 'müde'"
+ },
+ {
+  "f": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+  "i": 0,
+  "q": "Why does Marlen feel fitter?",
+  "opts": "'sie schläft mehr', 'sie hat das Rauchen aufgegeben', 'sie isst weniger', 'sie arbeitet weniger'"
+ },
+ {
+  "f": "chapter-b2-34-temporalsaetze-waehrend-seitdem-data.js",
+  "i": 1,
+  "q": "What does Marlen do now during breaks?",
+  "opts": "'sie raucht', 'sie geht spazieren', 'sie schläft', 'sie isst'"
+ },
+ {
+  "f": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+  "i": 0,
+  "q": "What does Anke want to do before the reading?",
+  "opts": "'schlafen', 'alles laut üben', 'essen', 'nach Hause gehen'"
+ },
+ {
+  "f": "chapter-b2-35-temporalsaetze-bevor-nachdem-data.js",
+  "i": 1,
+  "q": "What will they do after Anke has read?",
+  "opts": "'sofort nach Hause gehen', 'etwas trinken gehen', 'weiterüben', 'schlafen'"
+ },
+ {
+  "f": "chapter-b2-37-relativsaetze-genitiv-data.js",
+  "i": 0,
+  "q": "What just happened with Jonas Berger\\'s new book?",
+  "opts": "'es wurde abgesagt', 'es ist gerade erschienen', 'es wurde übersetzt', 'es ist vergriffen'"
+ },
+ {
+  "f": "chapter-b2-37-relativsaetze-genitiv-data.js",
+  "i": 1,
+  "q": "How many debut novels has the publisher\\'s series released?",
+  "opts": "'eins', 'zwei', 'drei', 'vier'"
+ },
+ {
+  "f": "chapter-b2-38-verschachtelte-relativsaetze-data.js",
+  "i": 0,
+  "q": "What is the grounds famous for?",
+  "opts": "'seine Türme', 'seine Gärten', 'seine Küche', 'seine Musik'"
+ },
+ {
+  "f": "chapter-b2-38-verschachtelte-relativsaetze-data.js",
+  "i": 1,
+  "q": "What does the recommended wing show?",
+  "opts": "'moderne Kunst', 'Bilder aus dem letzten Jahrhundert', 'nur Möbel', 'Fotografien'"
+ },
+ {
+  "f": "chapter-b2-39-relativsaetze-wer-der-data.js",
+  "i": 0,
+  "q": "What does the thief know well?",
+  "opts": "'die Polizei', 'die Galerie', 'das Museum', 'den Künstler'"
+ },
+ {
+  "f": "chapter-b2-39-relativsaetze-wer-der-data.js",
+  "i": 1,
+  "q": "Who is at the top of the suspect list?",
+  "opts": "'wer am ältesten ist', 'wer beides kann: Galerie kennen und Tresor öffnen', 'wer am lautesten ist', 'niemand'"
+ },
+ {
+  "f": "chapter-b2-40-verben-mit-praepositionen-data.js",
+  "i": 0,
+  "q": "What escaped from its enclosure?",
+  "opts": "'ein Löwe', 'eine Giraffe', 'ein Elefant', 'ein Affe'"
+ },
+ {
+  "f": "chapter-b2-40-verben-mit-praepositionen-data.js",
+  "i": 1,
+  "q": "What is Doreen annoyed about?",
+  "opts": "'die Öffnungszeiten', 'die schlechte Absicherung', 'den Eintrittspreis', 'das Wetter'"
+ },
+ {
+  "f": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+  "i": 0,
+  "q": "What is Merit especially interested in?",
+  "opts": "'die Architektur', 'die Geschichte des Königs', 'die Musik', 'die Kunst'"
+ },
+ {
+  "f": "chapter-b2-41-nomen-mit-praepositionen-data.js",
+  "i": 1,
+  "q": "How does Timo feel about the throne?",
+  "opts": "'begeistert', 'neutral', 'es macht ihm Angst', 'er will es kaufen'"
+ },
+ {
+  "f": "chapter-b2-42-adjektive-mit-praepositionen-data.js",
+  "i": 0,
+  "q": "What is Kerstin proud of?",
+  "opts": "'dem Museum', 'dem Künstler', 'dem Wetter', 'dem Essen'"
+ },
+ {
+  "f": "chapter-b2-42-adjektive-mit-praepositionen-data.js",
+  "i": 1,
+  "q": "What is Timo curious about?",
+  "opts": "'die Preise', 'die nächste Ausstellung', 'das Personal', 'die Öffnungszeiten'"
+ },
+ {
+  "f": "chapter-b2-44-zustandspassiv-data.js",
+  "i": 0,
+  "q": "What is finished, according to Merle?",
+  "opts": "'die Konferenz', 'die Studie', 'das Team', 'der Bericht'"
+ },
+ {
+  "f": "chapter-b2-44-zustandspassiv-data.js",
+  "i": 1,
+  "q": "Is the team informed?",
+  "opts": "'nein', 'ja', 'teilweise', 'unbekannt'"
+ },
+ {
+  "f": "chapter-b2-45-passiversatz-sich-lassen-data.js",
+  "i": 0,
+  "q": "Can Timo\\'s back pain be treated?",
+  "opts": "'nein, gar nicht', 'ja, gut', 'nur mit Operation', 'unklar'"
+ },
+ {
+  "f": "chapter-b2-45-passiversatz-sich-lassen-data.js",
+  "i": 1,
+  "q": "When can the blood value be checked?",
+  "opts": "'nächste Woche', 'morgen', 'sofort', 'nie'"
+ },
+ {
+  "f": "chapter-b2-46-unpersoenliches-passiv-data.js",
+  "i": 0,
+  "q": "What is happening at every stand?",
+  "opts": "'es wird geschlafen', 'es wird diskutiert und präsentiert', 'es wird gegessen', 'nichts'"
+ },
+ {
+  "f": "chapter-b2-46-unpersoenliches-passiv-data.js",
+  "i": 1,
+  "q": "What does Frauke like about the fair?",
+  "opts": "'die Preise', 'dass viel gelacht wird', 'die Größe', 'das Essen'"
+ },
+ {
+  "f": "chapter-b2-47-bekommen-kriegen-passiv-data.js",
+  "i": 0,
+  "q": "What did Wenke get done by the doctor?",
+  "opts": "'ein Rezept', 'ihr Formular ausgefüllt', 'eine Untersuchung', 'nichts'"
+ },
+ {
+  "f": "chapter-b2-47-bekommen-kriegen-passiv-data.js",
+  "i": 1,
+  "q": "What did Timo get today?",
+  "opts": "'seine Ergebnisse', 'seinen Termin bestätigt', 'ein neues Formular', 'nichts'"
+ },
+ {
+  "f": "chapter-b2-48-modalitaetsersatz-haben-sein-zu-data.js",
+  "i": 0,
+  "q": "What still needs to be planned?",
+  "opts": "'das Essen', 'die Route', 'die Kleidung', 'das Auto'"
+ },
+ {
+  "f": "chapter-b2-48-modalitaetsersatz-haben-sein-zu-data.js",
+  "i": 1,
+  "q": "What is hard to predict this week?",
+  "opts": "'der Zugfahrplan', 'das Wetter', 'die Kosten', 'die Zeit'"
+ },
+ {
+  "f": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+  "i": 0,
+  "q": "What is being carried out right now?",
+  "opts": "'die Präsentation', 'das Experiment', 'der Bericht', 'die Prüfung'"
+ },
+ {
+  "f": "chapter-b2-49-passiv-in-wissenschaft-und-beruf-data.js",
+  "i": 1,
+  "q": "How many times was Antje\\'s presentation revised?",
+  "opts": "'einmal', 'zweimal', 'dreimal', 'nie'"
+ },
+ {
+  "f": "chapter-b2-50-nominalisierung-data.js",
+  "i": 0,
+  "q": "What is taking a few more weeks?",
+  "opts": "'die Reparatur der Heizung', 'die Untersuchung der Ursache', 'der Umzug', 'die Kündigung'"
+ },
+ {
+  "f": "chapter-b2-50-nominalisierung-data.js",
+  "i": 1,
+  "q": "When should the heating improvement be done?",
+  "opts": "'morgen', 'nächste Woche', 'nächsten Monat', 'nie'"
+ },
+ {
+  "f": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+  "i": 0,
+  "q": "What worries Marret?",
+  "opts": "'ein neuer Kollege', 'der seit drei Nächten schlaflose Teilnehmer', 'das Wetter', 'der Zeitplan'"
+ },
+ {
+  "f": "chapter-b2-51-erweiterte-partizipialattribute-data.js",
+  "i": 1,
+  "q": "How do the values checked yesterday evening look?",
+  "opts": "'schlecht', 'gut', 'unklar', 'fehlend'"
+ },
+ {
+  "f": "chapter-b2-52-komplexe-nominalgruppen-data.js",
+  "i": 0,
+  "q": "Who is coming next week?",
+  "opts": "'ein Politiker', 'der Nobelpreisträger', 'ein Musiker', 'ein Journalist'"
+ },
+ {
+  "f": "chapter-b2-52-komplexe-nominalgruppen-data.js",
+  "i": 1,
+  "q": "What fascinates Runa?",
+  "opts": "'sein Alter', 'der Blick auf die Welt, den er verändert hat', 'seine Kleidung', 'sein Akzent'"
+ },
+ {
+  "f": "chapter-b2-53-goethe-mini-4-data.js",
+  "i": 0,
+  "q": "What has Nadine prepared?",
+  "opts": "'das Essen', 'alle Unterlagen', 'ihr Zimmer', 'einen Vortrag'"
+ },
+ {
+  "f": "chapter-b2-53-goethe-mini-4-data.js",
+  "i": 1,
+  "q": "What does Nadine still find difficult?",
+  "opts": "'das Passiv', 'die komplexen Nominalgruppen', 'die Aussprache', 'das Hören'"
+ },
+ {
+  "f": "chapter-b2-54-funktionsverbgefuege-data.js",
+  "i": 0,
+  "q": "What does Karla say she must do?",
+  "opts": "'eine Entscheidung treffen', 'nichts tun', 'sich streiten', 'warten'"
+ },
+ {
+  "f": "chapter-b2-54-funktionsverbgefuege-data.js",
+  "i": 1,
+  "q": "What does Timo put in the discussion?",
+  "opts": "'sein Geld', 'sein Vertrauen', 'seine Zeit', 'seine Meinung'"
+ },
+ {
+  "f": "chapter-b2-55-modalpartikeln-doch-ja-data.js",
+  "i": 0,
+  "q": "Where does Timo first think the keys are?",
+  "opts": "'in der Tasche', 'auf dem Tisch', 'im Auto', 'in der Jacke'"
+ },
+ {
+  "f": "chapter-b2-55-modalpartikeln-doch-ja-data.js",
+  "i": 1,
+  "q": "Where are the keys finally found?",
+  "opts": "'auf dem Tisch', 'in der Jacke', 'im Auto', 'in der Küche'"
+ },
+ {
+  "f": "chapter-b2-56-modalpartikeln-eben-halt-data.js",
+  "i": 0,
+  "q": "What happened to the national team?",
+  "opts": "'sie haben gewonnen', 'sie haben verloren', 'sie haben nicht gespielt', 'unbekannt'"
+ },
+ {
+  "f": "chapter-b2-56-modalpartikeln-eben-halt-data.js",
+  "i": 1,
+  "q": "How does Timo describe today?",
+  "opts": "'ein toller Tag', 'einfach kein guter Tag', 'ein wichtiger Tag', 'ein langer Tag'"
+ },
+ {
+  "f": "chapter-b2-57-textkohaerenz-verweiswoerter-data.js",
+  "i": 0,
+  "q": "What problem does Meret notice in her summary?",
+  "opts": "'sie ist zu kurz', 'sie wiederholt Wörter', 'sie hat Fehler', 'sie ist zu lang'"
+ },
+ {
+  "f": "chapter-b2-57-textkohaerenz-verweiswoerter-data.js",
+  "i": 1,
+  "q": "What does Timo suggest instead of repeating \"das Problem\"?",
+  "opts": "'\"es\" weglassen', '\"dieses\" schreiben', 'einen neuen Satz', 'ein Bild'"
+ },
+ {
+  "f": "chapter-b2-58-textkohaerenz-absatzlogik-data.js",
+  "i": 0,
+  "q": "What should Anke do first?",
+  "opts": "'ihr Gehalt nennen', 'sich kurz vorstellen', 'ihre Motivation begründen', 'zusammenfassen'"
+ },
+ {
+  "f": "chapter-b2-58-textkohaerenz-absatzlogik-data.js",
+  "i": 1,
+  "q": "What is Timo\\'s rule for each paragraph?",
+  "opts": "'drei Ideen pro Absatz', 'ein Absatz, eine Idee', 'möglichst lang', 'keine Regel'"
+ },
+ {
+  "f": "chapter-b2-59-konjunktiv-i-formen-data.js",
+  "i": 0,
+  "q": "What verb form replaces \"ist\" in the article?",
+  "opts": "'war', 'sei', 'wäre', 'ist gewesen'"
+ },
+ {
+  "f": "chapter-b2-59-konjunktiv-i-formen-data.js",
+  "i": 1,
+  "q": "What does the article say about the driver?",
+  "opts": "'er hatte Angst', 'er habe keine Angst gehabt', 'er ist gestürzt', 'er hat gewonnen'"
+ },
+ {
+  "f": "chapter-b2-60-indirekte-rede-grundlagen-data.js",
+  "i": 0,
+  "q": "What did Petra\\'s brother say happened?",
+  "opts": "'der Tennisprofi habe verloren', 'der Tennisprofi habe das Finale gewonnen', 'das Spiel wurde abgesagt', 'niemand hat gespielt'"
+ },
+ {
+  "f": "chapter-b2-60-indirekte-rede-grundlagen-data.js",
+  "i": 1,
+  "q": "Did Petra see the match herself?",
+  "opts": "'ja', 'nein', 'teilweise', 'unklar'"
+ },
+ {
+  "f": "chapter-b2-61-indirekte-rede-zeitverschiebung-data.js",
+  "i": 0,
+  "q": "What did the customer claim, according to Marlen?",
+  "opts": "'Das Paket sei zu teuer gewesen.', 'Das Paket sei nie angekommen.', 'Er habe nicht bezahlt.', 'Er brauche eine Rechnung.'"
+ },
+ {
+  "f": "chapter-b2-61-indirekte-rede-zeitverschiebung-data.js",
+  "i": 1,
+  "q": "What did Marlen promise?",
+  "opts": "'ein neues Paket zu schicken', 'das Geld zurückzugeben', 'es noch heute mit dem Versand zu klären', 'den Kunden anzurufen'"
+ },
+ {
+  "f": "chapter-b2-62-konjunktiv-i-berichtende-sprache-data.js",
+  "i": 0,
+  "q": "What does one newspaper give as the reason for the change?",
+  "opts": "'politisch', 'finanziell', 'technisch', 'persönlich'"
+ },
+ {
+  "f": "chapter-b2-62-konjunktiv-i-berichtende-sprache-data.js",
+  "i": 1,
+  "q": "What do both newspapers agree on regarding citizens?",
+  "opts": "'Sie seien begeistert.', 'Viele seien unzufrieden.', 'Niemand interessiere sich.', 'Sie hätten keine Meinung.'"
+ },
+ {
+  "f": "chapter-b2-63-goethe-mini-5-data.js",
+  "i": 0,
+  "q": "Why does Timo want to move the review?",
+  "opts": "'Er ist müde.', 'Er hat morgen früh einen Termin.', 'Er hat keine Zeit mehr.', 'Er mag den Zeitplan nicht.'"
+ },
+ {
+  "f": "chapter-b2-63-goethe-mini-5-data.js",
+  "i": 1,
+  "q": "What did the colleague say about the last appointment?",
+  "opts": "'Er sei perfekt gewesen.', 'Er sei ihr viel zu früh gewesen.', 'Er sei abgesagt worden.', 'Sie habe ihn vergessen.'"
+ },
+ {
+  "f": "chapter-b2-64-praepositionen-mit-genitiv-data.js",
+  "i": 0,
+  "q": "Why was the event postponed, according to the report?",
+  "opts": "'wegen des Wetters', 'aufgrund des Anlasses', 'wegen Timo', 'trotz der Tagesordnung'"
+ },
+ {
+  "f": "chapter-b2-64-praepositionen-mit-genitiv-data.js",
+  "i": 1,
+  "q": "Why does Wenke want to shorten the agenda?",
+  "opts": "'zugunsten der Übersichtlichkeit', 'wegen der Zeit', 'aufgrund des Chefs', 'trotz der Länge'"
+ },
+ {
+  "f": "chapter-b2-65-wissenschaftssprache-data.js",
+  "i": 0,
+  "q": "What is wrong with Timo\\'s original sentence?",
+  "opts": "'Es ist grammatisch falsch.', 'Es klingt zu persönlich.', 'Es ist zu kurz.', 'Es fehlt ein Verb.'"
+ },
+ {
+  "f": "chapter-b2-65-wissenschaftssprache-data.js",
+  "i": 1,
+  "q": "How does Frauke rephrase it?",
+  "opts": "'Ich glaube, es funktioniert.', 'Die Ergebnisse zeigen, dass die Methode zuverlässig funktioniert.', 'Man kann sagen, es funktioniert vielleicht.', 'Es funktioniert bestimmt.'"
+ },
+ {
+  "f": "chapter-b2-66-argumentieren-standpunkte-data.js",
+  "i": 0,
+  "q": "What does Katrin argue home office saves?",
+  "opts": "'Geld', 'Zeit', 'Energie', 'Papier'"
+ },
+ {
+  "f": "chapter-b2-66-argumentieren-standpunkte-data.js",
+  "i": 1,
+  "q": "What counterpoint does Timo raise?",
+  "opts": "'Es ist zu teuer.', 'Viele konzentrieren sich zu Hause schlechter.', 'Es ist unsicher.', 'Es gefällt niemandem.'"
+ },
+ {
+  "f": "chapter-b2-67-argumentieren-gegenargumente-data.js",
+  "i": 0,
+  "q": "What counterargument does Timo raise?",
+  "opts": "'Es kostet zu viel.', 'Manche fühlen sich einsam.', 'Es ist zu langsam.', 'Niemand mag es.'"
+ },
+ {
+  "f": "chapter-b2-67-argumentieren-gegenargumente-data.js",
+  "i": 1,
+  "q": "How does Katrin propose to balance that out?",
+  "opts": "'mehr Urlaub geben', 'regelmäßige Teamtreffen einplanen', 'das Gehalt erhöhen', 'Homeoffice verbieten'"
+ },
+ {
+  "f": "chapter-b2-68-redemittel-fuer-diskussionen-data.js",
+  "i": 0,
+  "q": "What does Timo ask before adding his point?",
+  "opts": "'ob er gehen darf', 'ob er unterbrechen darf', 'ob er anrufen darf', 'ob er schweigen soll'"
+ },
+ {
+  "f": "chapter-b2-68-redemittel-fuer-diskussionen-data.js",
+  "i": 1,
+  "q": "How does Katrin summarize her position?",
+  "opts": "'Ein Verbot ist am besten.', 'Klare Regeln sind wichtiger als ein Verbot.', 'KI-Tools sind nutzlos.', 'Universitäten sollten nichts ändern.'"
+ },
+ {
+  "f": "chapter-b2-69-goethe-zertifikat-b2-final-data.js",
+  "i": 0,
+  "q": "How does Timo feel the night before the exam?",
+  "opts": "'völlig ruhig', 'etwas nervös', 'sehr müde', 'gleichgültig'"
+ },
+ {
+  "f": "chapter-b2-69-goethe-zertifikat-b2-final-data.js",
+  "i": 1,
+  "q": "What do they decide to review once more?",
+  "opts": "'die Grammatik', 'die Redemittel für den mündlichen Teil', 'die Vokabeln', 'den Zeitplan'"
+ },
+ {
+  "f": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl-data.js",
+  "i": 0,
+  "q": "Why does Meret switch to the historical present?",
+  "opts": "'aus Versehen', 'um Spannung zu erhöhen', 'weil sie das Präteritum vergessen hat', 'um den Text zu kürzen'"
+ },
+ {
+  "f": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl-data.js",
+  "i": 1,
+  "q": "Where does Meret use the tense shift?",
+  "opts": "'im ganzen Text', 'nur an einer einzigen Stelle', 'am Anfang und Ende', 'in jedem Absatz'"
+ },
+ {
+  "f": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken-data.js",
+  "i": 0,
+  "q": "Where will Timo arrive?",
+  "opts": "'im Zentrum', 'direkt gegenüber dem Haupteingang', 'am Flughafen', 'vor der Universität'"
+ },
+ {
+  "f": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken-data.js",
+  "i": 1,
+  "q": "What does Grit tell her colleague to do?",
+  "opts": "'warten', 'sich innerhalb der nächsten zwanzig Minuten dorthin begeben', 'absagen', 'zu Hause bleiben'"
+ },
+ {
+  "f": "chapter-c1-03-nebensaetze-sicher-beherrschen-data.js",
+  "i": 0,
+  "q": "What is the problem with Timo\\'s sentence?",
+  "opts": "'zu kurz', 'vier verschachtelte Nebensätze', 'falsche Grammatik', 'kein Verb'"
+ },
+ {
+  "f": "chapter-c1-03-nebensaetze-sicher-beherrschen-data.js",
+  "i": 1,
+  "q": "What do they decide to do?",
+  "opts": "'den Satz löschen', 'ihn in zwei kürzere Sätze aufteilen', 'nichts ändern', 'ihn länger machen'"
+ },
+ {
+  "f": "chapter-c1-04-hauptsaetze-elegant-verbinden-data.js",
+  "i": 0,
+  "q": "What problem does Timo notice in the paragraph?",
+  "opts": "'zu viele Fehler', 'es klingt wie eine Aufzählung', 'es ist zu lang', 'falsches Thema'"
+ },
+ {
+  "f": "chapter-c1-04-hauptsaetze-elegant-verbinden-data.js",
+  "i": 1,
+  "q": "How does Wenke fix it?",
+  "opts": "'sie kürzt den Text', 'sie verbindet die Sätze elegant', 'sie löscht alles', 'sie fügt neue Fakten hinzu'"
+ },
+ {
+  "f": "chapter-c1-05-zweiteilige-satzverbindungen-data.js",
+  "i": 0,
+  "q": "What does Silke think of the candidate?",
+  "opts": "'nur fachlich gut', 'sowohl fachlich als auch menschlich überzeugend', 'völlig ungeeignet', 'zu jung'"
+ },
+ {
+  "f": "chapter-c1-05-zweiteilige-satzverbindungen-data.js",
+  "i": 1,
+  "q": "What is Timo\\'s concern?",
+  "opts": "'Sie ist zu teuer.', 'Weder ihre Erfahrung noch ihre Sprachkenntnisse reichen ganz aus.', 'Sie kommt zu spät.', 'Sie hat kein Interesse.'"
+ },
+ {
+  "f": "chapter-c1-06-goethe-mini-1-data.js",
+  "i": 0,
+  "q": "What was unclear in Nike\\'s argumentation?",
+  "opts": "'der Inhalt', 'die Struktur', 'die Aussprache', 'das Thema'"
+ },
+ {
+  "f": "chapter-c1-06-goethe-mini-1-data.js",
+  "i": 1,
+  "q": "What do they decide to do before the exam?",
+  "opts": "'schlafen', 'es laut üben', 'das Thema wechseln', 'nichts mehr tun'"
+ },
+ {
+  "f": "chapter-c1-07-praepositionen-mit-genitiv-data.js",
+  "i": 0,
+  "q": "Why was the application rejected?",
+  "opts": "'wegen der Kosten', 'aufgrund des Lärms', 'wegen des Wetters', 'ohne Grund'"
+ },
+ {
+  "f": "chapter-c1-07-praepositionen-mit-genitiv-data.js",
+  "i": 1,
+  "q": "How much time does Timo have to reapply?",
+  "opts": "'zwei Wochen', 'vier Wochen', 'ein Monat', 'ein Jahr'"
+ },
+ {
+  "f": "chapter-c1-08-anspruchsvolle-praepositionen-data.js",
+  "i": 0,
+  "q": "Why should they revise the proposal?",
+  "opts": "'wegen des Zeitdrucks', 'angesichts der neuen Ergebnisse', 'wegen eines Fehlers', 'ohne besonderen Grund'"
+ },
+ {
+  "f": "chapter-c1-08-anspruchsvolle-praepositionen-data.js",
+  "i": 1,
+  "q": "Where will the open questions be mentioned?",
+  "opts": "'in der Einleitung', 'im Ausblick', 'gar nicht', 'im Titel'"
+ },
+ {
+  "f": "chapter-c1-09-adjektive-mit-praepositionalergaenzungen-data.js",
+  "i": 0,
+  "q": "What is Marlen interested in?",
+  "opts": "'einem neuen Job', 'der neuen Praktikumsstelle im Labor', 'einem Urlaub', 'einer Prüfung'"
+ },
+ {
+  "f": "chapter-c1-09-adjektive-mit-praepositionalergaenzungen-data.js",
+  "i": 1,
+  "q": "What is Timo convinced of?",
+  "opts": "'ihrem Talent', 'ihrem Geld', 'ihrer Erfahrung', 'ihrem Alter'"
+ },
+ {
+  "f": "chapter-c1-10-nomen-mit-praepositionalobjekt-data.js",
+  "i": 0,
+  "q": "What is Antje afraid of?",
+  "opts": "'der Prüfung', 'dem Gespräch mit dem Betreuer', 'dem Wetter', 'der Reise'"
+ },
+ {
+  "f": "chapter-c1-10-nomen-mit-praepositionalobjekt-data.js",
+  "i": 1,
+  "q": "What does Timo say about their views?",
+  "opts": "'Sie sind identisch.', 'Der Unterschied ist nicht so groß.', 'Sie widersprechen sich völlig.', 'Es gibt keinen Unterschied.'"
+ },
+ {
+  "f": "chapter-c1-11-goethe-mini-2-data.js",
+  "i": 0,
+  "q": "By when must the proposal be ready?",
+  "opts": "'bis Montag', 'bis Freitag', 'bis Ende des Monats', 'es gibt keine Frist'"
+ },
+ {
+  "f": "chapter-c1-11-goethe-mini-2-data.js",
+  "i": 1,
+  "q": "What does Frauke take care of?",
+  "opts": "'die Überarbeitung des Textes', 'die Kooperation mit der Partneruniversität', 'die Finanzen', 'die Präsentation'"
+ },
+ {
+  "f": "chapter-c1-12-modalverben-praezise-verwenden-data.js",
+  "i": 0,
+  "q": "What does Timo think must be the problem?",
+  "opts": "'der Papierstau', 'die Tinte', 'der Strom', 'das Kabel'"
+ },
+ {
+  "f": "chapter-c1-12-modalverben-praezise-verwenden-data.js",
+  "i": 1,
+  "q": "What alternative does Kirsten suggest?",
+  "opts": "'der Strom', 'die Tinte', 'das Kabel', 'der Bildschirm'"
+ },
+ {
+  "f": "chapter-c1-13-vermutungen-mit-modalverben-ausdruecken-data.js",
+  "i": 0,
+  "q": "What might explain the sales drop, according to Timo?",
+  "opts": "'ein Systemfehler', 'die Konkurrenz', 'das Wetter', 'ein Feiertag'"
+ },
+ {
+  "f": "chapter-c1-13-vermutungen-mit-modalverben-ausdruecken-data.js",
+  "i": 1,
+  "q": "What alternative explanation does Sina offer?",
+  "opts": "'ein Streik', 'ein menschlicher Fehler bei der Eingabe', 'ein Feiertag', 'ein neues Produkt'"
+ },
+ {
+  "f": "chapter-c1-14-konjunktiv-ii-fuer-irreales-und-hypothesen-data.js",
+  "i": 0,
+  "q": "What does Uta wonder about?",
+  "opts": "'ob sie umziehen sollte', 'wie ihr Leben aussähe, wenn sie Medizin studiert hätte', 'ob sie heiraten sollte', 'ob sie kündigen sollte'"
+ },
+ {
+  "f": "chapter-c1-14-konjunktiv-ii-fuer-irreales-und-hypothesen-data.js",
+  "i": 1,
+  "q": "What would Uta do if she could choose again?",
+  "opts": "'etwas ganz anderes', 'wohl dasselbe', 'sofort Medizin studieren', 'gar nichts'"
+ },
+ {
+  "f": "chapter-c1-15-konjunktiv-i-und-indirekte-rede-data.js",
+  "i": 0,
+  "q": "What did the minister allegedly do?",
+  "opts": "'alle Vorwürfe zurückgewiesen', 'alles zugegeben', 'die Konferenz verlassen', 'nichts gesagt'"
+ },
+ {
+  "f": "chapter-c1-15-konjunktiv-i-und-indirekte-rede-data.js",
+  "i": 1,
+  "q": "What does the other source claim?",
+  "opts": "'er sei unschuldig', 'er habe schon vorher davon gewusst', 'er sei krank gewesen', 'er habe gekündigt'"
+ },
+ {
+  "f": "chapter-c1-16-aufforderung-empfehlung-und-handlungssteuerung-data.js",
+  "i": 0,
+  "q": "What does Silje recommend before entering?",
+  "opts": "'einen Helm tragen', 'die Schutzbrille aufsetzen', 'draußen warten', 'nichts Besonderes'"
+ },
+ {
+  "f": "chapter-c1-16-aufforderung-empfehlung-und-handlungssteuerung-data.js",
+  "i": 1,
+  "q": "What does Silje ask Timo to do in addition?",
+  "opts": "'die Tür schließen', 'den Kollegen Bescheid geben', 'das Licht ausschalten', 'früher gehen'"
+ },
+ {
+  "f": "chapter-c1-17-goethe-halbzeit-test-data.js",
+  "i": 0,
+  "q": "What does Timo suggest revising?",
+  "opts": "'die Einleitung', 'den letzten Absatz', 'den Titel', 'die Vokabeln'"
+ },
+ {
+  "f": "chapter-c1-17-goethe-halbzeit-test-data.js",
+  "i": 1,
+  "q": "What does Meret add?",
+  "opts": "'ein neues Kapitel', 'einen Übergangssatz', 'ein Bild', 'eine Tabelle'"
+ },
+ {
+  "f": "chapter-c1-18-adjektivdeklination-sicher-anwenden-data.js",
+  "i": 0,
+  "q": "What does the professor propose?",
+  "opts": "'nichts Neues', 'etwas ziemlich Ungewöhnliches', 'eine alte Idee', 'eine Absage'"
+ },
+ {
+  "f": "chapter-c1-18-adjektivdeklination-sicher-anwenden-data.js",
+  "i": 1,
+  "q": "What question remains open?",
+  "opts": "'ob das Projekt interessant ist', 'ob die begrenzten Ressourcen ausreichen', 'ob der Professor recht hat', 'ob die Konferenz stattfindet'"
+ },
+ {
+  "f": "chapter-c1-19-steigerung-und-sprachliche-abstufung-data.js",
+  "i": 0,
+  "q": "How does Timo describe the career chances at the new firm?",
+  "opts": "'etwas kleiner', 'erheblich größer', 'unverändert', 'unklar'"
+ },
+ {
+  "f": "chapter-c1-19-steigerung-und-sprachliche-abstufung-data.js",
+  "i": 1,
+  "q": "What downside does Solveig mention?",
+  "opts": "'das Gehalt', 'die Arbeitszeit', 'der Standort', 'die Kollegen'"
+ },
+ {
+  "f": "chapter-c1-20-relativsaetze-erweitern-und-variieren-data.js",
+  "i": 0,
+  "q": "What do they consider quoting again?",
+  "opts": "'ein neues Buch', 'das Dokument von letzter Woche', 'einen Artikel', 'eine E-Mail'"
+ },
+ {
+  "f": "chapter-c1-20-relativsaetze-erweitern-und-variieren-data.js",
+  "i": 1,
+  "q": "What alternative does Timo suggest?",
+  "opts": "'ganz weglassen', 'ein kürzerer Verweis', 'einen längeren Absatz', 'ein neues Kapitel'"
+ },
+ {
+  "f": "chapter-c1-21-partizipialattribute-verstehen-und-nutzen-data.js",
+  "i": 0,
+  "q": "What does Elke find too long-winded?",
+  "opts": "'der Titel', '\"die Zahlen, die stetig sinken\"', 'die Einleitung', 'der letzte Satz'"
+ },
+ {
+  "f": "chapter-c1-21-partizipialattribute-verstehen-und-nutzen-data.js",
+  "i": 1,
+  "q": "What compact alternative do they use for the CEO?",
+  "opts": "'ein neuer Relativsatz', 'der scheidende Geschäftsführer', 'ein längerer Satz', 'ein Zitat'"
+ },
+ {
+  "f": "chapter-c1-22-komplexe-attribute-und-nominalgruppen-data.js",
+  "i": 0,
+  "q": "What does Britta say about the last paragraph?",
+  "opts": "'er ist perfekt', 'er ist noch etwas unklar formuliert', 'er ist zu kurz', 'er fehlt komplett'"
+ },
+ {
+  "f": "chapter-c1-22-komplexe-attribute-und-nominalgruppen-data.js",
+  "i": 1,
+  "q": "What does Britta\\'s condensed phrase pack together?",
+  "opts": "'eine Idee', 'drei Ideen in eine Nominalgruppe', 'vier Sätze', 'nur ein Adjektiv'"
+ },
+ {
+  "f": "chapter-c1-23-goethe-mini-3-data.js",
+  "i": 0,
+  "q": "What did Timo try to do consistently?",
+  "opts": "'die Sätze verlängern', 'die Nominalgruppen verdichten', 'mehr Beispiele hinzufügen', 'das Thema wechseln'"
+ },
+ {
+  "f": "chapter-c1-23-goethe-mini-3-data.js",
+  "i": 1,
+  "q": "What do they plan to do tomorrow?",
+  "opts": "'den Artikel einreichen', 'das Thema ändern', 'die Konferenz absagen', 'neu anfangen'"
+ },
+ {
+  "f": "chapter-c1-24-nominalisierung-im-formellen-stil-data.js",
+  "i": 0,
+  "q": "What did the supervisor say about the analysis?",
+  "opts": "'sie sei ausreichend', 'sie müsse gründlicher erfolgen', 'sie sei überflüssig', 'sie sei fertig'"
+ },
+ {
+  "f": "chapter-c1-24-nominalisierung-im-formellen-stil-data.js",
+  "i": 1,
+  "q": "What does Marte question about the nominal style?",
+  "opts": "'ob es zu teuer ist', 'ob es die Klarheit erhöht oder verschleiert', 'ob es zu lang ist', 'ob es korrekt ist'"
+ },
+ {
+  "f": "chapter-c1-25-partizipien-und-adjektive-als-nomen-data.js",
+  "i": 0,
+  "q": "Who needs help?",
+  "opts": "'die Verantwortliche', 'die Verletzte', 'Timo', 'ein Kollege'"
+ },
+ {
+  "f": "chapter-c1-25-partizipien-und-adjektive-als-nomen-data.js",
+  "i": 1,
+  "q": "What is the responsible person bringing?",
+  "opts": "'Wasser', 'den Erste-Hilfe-Kasten', 'ein Telefon', 'nichts'"
+ },
+ {
+  "f": "chapter-c1-26-passiv-und-passiversatzformen-data.js",
+  "i": 0,
+  "q": "What does Karla want to change in the methods section?",
+  "opts": "'den Titel', 'man wertet aus → Passiv', 'die Länge', 'das Thema'"
+ },
+ {
+  "f": "chapter-c1-26-passiv-und-passiversatzformen-data.js",
+  "i": 1,
+  "q": "How do they rephrase the protocol sentence?",
+  "opts": "'man muss es befolgen', 'das Protokoll ist einzuhalten', 'es ist nicht wichtig', 'das Protokoll wird gelöscht'"
+ },
+ {
+  "f": "chapter-c1-27-funktionsverbgefuege-im-akademischen-deutsch-data.js",
+  "i": 0,
+  "q": "What does Timo say plays an important role?",
+  "opts": "'sein Alter', 'seine Forschung', 'sein Gehalt', 'sein Wohnort'"
+ },
+ {
+  "f": "chapter-c1-27-funktionsverbgefuege-im-akademischen-deutsch-data.js",
+  "i": 1,
+  "q": "What do they agree to do before deciding?",
+  "opts": "'sofort entscheiden', 'alle Unterlagen zur Kenntnis nehmen', 'ihn anrufen', 'die Konferenz verschieben'"
+ },
+ {
+  "f": "chapter-c1-28-goethe-mini-4-data.js",
+  "i": 0,
+  "q": "What does Merit need to do before publishing?",
+  "opts": "'die Unterlagen noch einmal durchgehen', 'alles löschen', 'neu schreiben', 'nichts'"
+ },
+ {
+  "f": "chapter-c1-28-goethe-mini-4-data.js",
+  "i": 1,
+  "q": "What does Timo decide to do?",
+  "opts": "'den Termin absagen', 'den Termin um einen Tag verschieben', 'sofort veröffentlichen', 'die Konferenz verlassen'"
+ },
+ {
+  "f": "chapter-c1-29-verben-mit-praefixen-sicher-unterscheiden-data.js",
+  "i": 0,
+  "q": "What does Timo suggest Yara portray instead?",
+  "opts": "'nur die Farben', 'die Technik des Künstlers', 'den Rahmen', 'den Preis'"
+ },
+ {
+  "f": "chapter-c1-29-verben-mit-praefixen-sicher-unterscheiden-data.js",
+  "i": 1,
+  "q": "What does Yara consider describing additionally?",
+  "opts": "'den Preis des Bildes', 'wie er das Licht aufträgt', 'den Namen des Künstlers', 'das Museum'"
+ },
+ {
+  "f": "chapter-c1-30-nomen-mit-numerusbesonderheiten-data.js",
+  "i": 0,
+  "q": "What does Insa say about the staff?",
+  "opts": "'es ist ausreichend', 'es ist viel zu knapp', 'es ist zu groß', 'es fehlt komplett'"
+ },
+ {
+  "f": "chapter-c1-30-nomen-mit-numerusbesonderheiten-data.js",
+  "i": 1,
+  "q": "What is missing from the form?",
+  "opts": "'eine Unterschrift', 'ein Wort (\"die Angaben\")', 'ein Foto', 'ein Stempel'"
+ },
+ {
+  "f": "chapter-c1-31-adversativangaben-und-gegensaetze-ausdruecken-data.js",
+  "i": 0,
+  "q": "What does Meike think of the bike path?",
+  "opts": "'zu teuer und unnötig', 'teuer, aber sinnvoll', 'völlig überflüssig', 'zu billig'"
+ },
+ {
+  "f": "chapter-c1-31-adversativangaben-und-gegensaetze-ausdruecken-data.js",
+  "i": 1,
+  "q": "Who is already happy about the bike path?",
+  "opts": "'die Autofahrer', 'die Radfahrer', 'niemand', 'die Politiker'"
+ },
+ {
+  "f": "chapter-c1-32-kohaerenz-und-textverknuepfung-data.js",
+  "i": 0,
+  "q": "What problem does Britta identify?",
+  "opts": "'zu viele Fehler', 'fehlender Übergang zwischen den Kapiteln', 'zu kurzer Text', 'falsches Thema'"
+ },
+ {
+  "f": "chapter-c1-32-kohaerenz-und-textverknuepfung-data.js",
+  "i": 1,
+  "q": "What does Timo plan to do at the beginning of chapter two?",
+  "opts": "'ein neues Thema beginnen', 'auf den vorherigen Gedanken verweisen', 'alles löschen', 'ein Zitat einfügen'"
+ },
+ {
+  "f": "chapter-c1-33-goethe-mini-5-data.js",
+  "i": 0,
+  "q": "What does Timo commit to?",
+  "opts": "'den Teil über die Methodik', 'den ganzen Vortrag', 'nichts', 'die Ergebnisse'"
+ },
+ {
+  "f": "chapter-c1-33-goethe-mini-5-data.js",
+  "i": 1,
+  "q": "What is left to do before the conference?",
+  "opts": "'alles neu schreiben', 'ein letzter Blick auf die Folien', 'ein neues Thema wählen', 'nichts mehr'"
+ },
+ {
+  "f": "chapter-c1-34-argumentieren-auf-c1-niveau-data.js",
+  "i": 0,
+  "q": "What advantage does Wibke see in remote teaching?",
+  "opts": "'es ist billiger', 'es spart Zeit und Wege', 'es ist einfacher', 'es macht mehr Spaß'"
+ },
+ {
+  "f": "chapter-c1-34-argumentieren-auf-c1-niveau-data.js",
+  "i": 1,
+  "q": "What does Timo say is missing?",
+  "opts": "'der direkte Austausch zwischen Studierenden', 'die Technik', 'das Interesse', 'die Lehrer'"
+ },
+ {
+  "f": "chapter-c1-35-konzession-und-abwaegen-data.js",
+  "i": 0,
+  "q": "What is Nadja fundamentally in favor of?",
+  "opts": "'einer Entlassung', 'der Fusion', 'einer Kündigung', 'eines Umzugs'"
+ },
+ {
+  "f": "chapter-c1-35-konzession-und-abwaegen-data.js",
+  "i": 1,
+  "q": "What gives Timo pause?",
+  "opts": "'die Vorteile', 'die Zahlen im letzten Quartal', 'das Wetter', 'die Konkurrenz'"
+ },
+ {
+  "f": "chapter-c1-36-register-und-stilebenen-beherrschen-data.js",
+  "i": 0,
+  "q": "What should Timo wear tonight?",
+  "opts": "'einen hellen Anzug', 'einen dunklen Anzug', 'Jeans', 'ein Hemd ohne Jacke'"
+ },
+ {
+  "f": "chapter-c1-36-register-und-stilebenen-beherrschen-data.js",
+  "i": 1,
+  "q": "How should Timo address the director at first?",
+  "opts": "'mit Vornamen', 'mit \"Herr Direktor\"', 'gar nicht', 'mit \"Du\"'"
+ },
+ {
+  "f": "chapter-c1-37-kollokationen-und-bedeutungsnuancen-data.js",
+  "i": 0,
+  "q": "What does Petra say they need to do?",
+  "opts": "'abwarten', 'Maßnahmen ergreifen', 'die Situation ignorieren', 'nichts tun'"
+ },
+ {
+  "f": "chapter-c1-37-kollokationen-und-bedeutungsnuancen-data.js",
+  "i": 1,
+  "q": "What does Timo decide to do today?",
+  "opts": "'eine Sitzung einberufen', 'nach Hause gehen', 'einen Brief schreiben', 'eine Pause machen'"
+ },
+ {
+  "f": "chapter-c1-38-zusammenfassung-schreiben-data.js",
+  "i": 0,
+  "q": "What does the chapter show, according to Renke?",
+  "opts": "'wie man reich wird', 'wie frühe Entbehrungen das Leben prägen', 'wie man Bücher schreibt', 'wie man reist'"
+ },
+ {
+  "f": "chapter-c1-38-zusammenfassung-schreiben-data.js",
+  "i": 1,
+  "q": "How do they decide to render the idea?",
+  "opts": "'direkt zitieren', 'paraphrasieren', 'ignorieren', 'übersetzen'"
+ },
+ {
+  "f": "chapter-c1-39-stellungnahme-schreiben-data.js",
+  "i": 0,
+  "q": "What is Alina\\'s thesis?",
+  "opts": "'KI-Prüfungen sollten Standard werden', 'KI-Prüfungen sollten die Ausnahme bleiben', 'Prüfungen sollten abgeschafft werden', 'KI sollte verboten werden'"
+ },
+ {
+  "f": "chapter-c1-39-stellungnahme-schreiben-data.js",
+  "i": 1,
+  "q": "How does Alina treat efficiency in her argument?",
+  "opts": "'sie ignoriert sie komplett', 'sie gewichtet sie geringer als Fairness', 'sie hält sie für am wichtigsten', 'sie erwähnt sie nicht'"
+ },
+ {
+  "f": "chapter-c1-40-forumsbeitrag-schreiben-data.js",
+  "i": 0,
+  "q": "What does the frustrated user claim?",
+  "opts": "'KI ist zu teuer', 'KI macht Hausaufgaben sinnlos', 'KI ist verboten', 'KI funktioniert nicht'"
+ },
+ {
+  "f": "chapter-c1-40-forumsbeitrag-schreiben-data.js",
+  "i": 1,
+  "q": "How does Merle plan to respond?",
+  "opts": "'ihn ignorieren', 'seinen Punkt sachlich aufgreifen und nachfragen', 'ihn kritisieren', 'das Thema wechseln'"
+ },
+ {
+  "f": "chapter-c1-41-grafikbeschreibung-und-grafikauswertung-data.js",
+  "i": 0,
+  "q": "What does the chart show?",
+  "opts": "'sinkender Umsatz', 'kontinuierlich steigender Umsatz', 'stabiler Umsatz', 'kein klares Muster'"
+ },
+ {
+  "f": "chapter-c1-41-grafikbeschreibung-und-grafikauswertung-data.js",
+  "i": 1,
+  "q": "Why does Katrin urge caution about Timo\\'s explanation?",
+  "opts": "'sie ist falsch', 'der stärkste Anstieg war schon vorher', 'sie ist zu kompliziert', 'sie ist unwichtig'"
+ },
+ {
+  "f": "chapter-c1-42-goethe-zertifikat-c1-probepruefung-data.js",
+  "i": 0,
+  "q": "What does Ines have, despite her preparation?",
+  "opts": "'keine Angst', 'Prüfungsangst', 'zu viel Selbstvertrauen', 'keine Motivation'"
+ },
+ {
+  "f": "chapter-c1-42-goethe-zertifikat-c1-probepruefung-data.js",
+  "i": 1,
+  "q": "What do examiners pay particular attention to, according to Timo?",
+  "opts": "'nur Grammatik', 'Kohärenz und angemessenen Wortschatz', 'die Aussprache allein', 'die Kleidung'"
+ },
+ {
+  "f": "chapter-c1-43-goethe-zertifikat-c1-final-data.js",
+  "i": 0,
+  "q": "What has Wenke just achieved?",
+  "opts": "'das C1-Zertifikat', 'das B2-Zertifikat', 'einen neuen Job', 'ein Stipendium'"
+ },
+ {
+  "f": "chapter-c1-43-goethe-zertifikat-c1-final-data.js",
+  "i": 1,
+  "q": "What level lies ahead of them?",
+  "opts": "'B2', 'C1', 'C2', 'kein weiteres Level'"
+ },
+ {
+  "f": "chapter-c2-01-zeitformen-der-verben-data.js",
+  "i": 0,
+  "q": "When does Constanze switch to present tense?",
+  "opts": "'für die ganze Dokumentation', 'sobald die Zeitzeugin spricht', 'nur am Anfang', 'nie'"
+ },
+ {
+  "f": "chapter-c2-01-zeitformen-der-verben-data.js",
+  "i": 1,
+  "q": "Why does she return to preterite afterward?",
+  "opts": "'aus Versehen', 'für die reine Chronologie', 'weil das Präsens verboten ist', 'um Zeit zu sparen'"
+ },
+ {
+  "f": "chapter-c2-02-verben-mit-praefixen-data.js",
+  "i": 0,
+  "q": "What sharper verb does Merit suggest?",
+  "opts": "'zeigt', 'belegt', 'sagt', 'meint'"
+ },
+ {
+  "f": "chapter-c2-02-verben-mit-praefixen-data.js",
+  "i": 1,
+  "q": "What does Merit add about the limitations?",
+  "opts": "'die Studie ignoriert sie', 'die Studie schränkt die Aussage ein', 'die Studie widerlegt alles', 'die Studie beweist nichts'"
+ },
+ {
+  "f": "chapter-c2-03-verben-und-ihre-ergaenzungen-data.js",
+  "i": 0,
+  "q": "How does Almut make the reference more precise?",
+  "opts": "'sie löscht den Satz', 'sie nennt das Jahr 2015 explizit', 'sie fügt ein neues Kapitel hinzu', 'sie verändert die Methode'"
+ },
+ {
+  "f": "chapter-c2-03-verben-und-ihre-ergaenzungen-data.js",
+  "i": 1,
+  "q": "What is the method based on?",
+  "opts": "'nur qualitativen Verfahren', 'nur quantitativen Verfahren', 'einer Kombination aus beidem', 'älteren Studien'"
+ },
+ {
+  "f": "chapter-c2-04-nomen-verb-verbindungen-data.js",
+  "i": 0,
+  "q": "What formal phrase replaces \"wir entscheiden das\"?",
+  "opts": "'eine Entscheidung treffen', 'das entscheiden', 'entscheiden wir', 'Entscheidung machen'"
+ },
+ {
+  "f": "chapter-c2-04-nomen-verb-verbindungen-data.js",
+  "i": 1,
+  "q": "What replaces \"wir kritisieren das Verfahren\"?",
+  "opts": "'Kritik machen', 'Kritik am Verfahren üben', 'das Verfahren kritisiert', 'Verfahren kritisch'"
+ },
+ {
+  "f": "chapter-c2-05-goethe-mini-1-data.js",
+  "i": 0,
+  "q": "Which chapter does Roswitha doubt?",
+  "opts": "'das erste', 'das zweite', 'das dritte', 'das letzte'"
+ },
+ {
+  "f": "chapter-c2-05-goethe-mini-1-data.js",
+  "i": 1,
+  "q": "What is she unsure about exactly?",
+  "opts": "'die Sprache', 'ob die Stichprobe repräsentativ genug war', 'das Layout', 'die Literaturliste'"
+ },
+ {
+  "f": "chapter-c2-06-konjunktiv-ii-data.js",
+  "i": 0,
+  "q": "What phrase does Timo suggest instead of \"das ist notwendig\"?",
+  "opts": "'das ist sicher', 'das wäre sinnvoll', 'das muss sein', 'das ist fraglich'"
+ },
+ {
+  "f": "chapter-c2-06-konjunktiv-ii-data.js",
+  "i": 1,
+  "q": "How do they phrase the cost estimate?",
+  "opts": "'es wird teurer', 'es könnte teurer werden', 'es ist zu teuer', 'die Kosten sind fix'"
+ },
+ {
+  "f": "chapter-c2-07-konjunktiv-i-data.js",
+  "i": 0,
+  "q": "What does the opposition claim, according to Ortrud\\'s article?",
+  "opts": "'die Zahlen seien korrekt', 'die Zahlen seien geschönt', 'es gebe keine Zahlen', 'die Regierung lüge nie'"
+ },
+ {
+  "f": "chapter-c2-07-konjunktiv-i-data.js",
+  "i": 1,
+  "q": "How does the government spokesperson respond?",
+  "opts": "'er gibt Fehler zu', 'er sagt, alle Angaben seien korrekt und geprüft worden', 'er schweigt', 'er tritt zurück'"
+ },
+ {
+  "f": "chapter-c2-08-modalverben-data.js",
+  "i": 0,
+  "q": "What does Waltraud predict about the recommendation?",
+  "opts": "'sie wird sicher abgelehnt', 'sie dürfte auf Widerstand stoßen', 'sie ist bereits akzeptiert', 'sie betrifft niemanden'"
+ },
+ {
+  "f": "chapter-c2-08-modalverben-data.js",
+  "i": 1,
+  "q": "What should not be hidden, according to Waltraud?",
+  "opts": "'die Vorteile', 'dass die Umsetzung teuer werden dürfte', 'der Zeitplan', 'die Autoren'"
+ },
+ {
+  "f": "chapter-c2-09-goethe-mini-2-data.js",
+  "i": 0,
+  "q": "What does Timo want to do before printing the story?",
+  "opts": "'den Minister anrufen', 'die Zahlen selbst nachprüfen', 'das Thema fallenlassen', 'sofort veröffentlichen'"
+ },
+ {
+  "f": "chapter-c2-09-goethe-mini-2-data.js",
+  "i": 1,
+  "q": "How will they phrase it if the numbers don\\'t hold up?",
+  "opts": "'der Minister habe recht', 'der Minister behaupte lediglich einen Erfolg', 'der Minister lüge', 'sie ignorieren die Zahlen'"
+ },
+ {
+  "f": "chapter-c2-10-adverbialsaetze-und-diskursmarker-data.js",
+  "i": 0,
+  "q": "What consequence does Gudrun draw from rising rents?",
+  "opts": "'die Mieten sinken wieder', 'viele Familien ziehen an den Stadtrand', 'niemand zieht mehr um', 'die Investoren verschwinden'"
+ },
+ {
+  "f": "chapter-c2-10-adverbialsaetze-und-diskursmarker-data.js",
+  "i": 1,
+  "q": "What does Timo want to strengthen in the essay?",
+  "opts": "'die Einleitung', 'den Widerspruch zwischen hoher Nachfrage und steigenden Mieten', 'die Statistik', 'das Fazit'"
+ },
+ {
+  "f": "chapter-c2-11-relativsaetze-data.js",
+  "i": 0,
+  "q": "What does Adelheid doubt?",
+  "opts": "'die Datenerhebung', 'die These, der Markt regle sich selbst', 'die Quellenangaben', 'das Layout'"
+ },
+ {
+  "f": "chapter-c2-11-relativsaetze-data.js",
+  "i": 1,
+  "q": "What is conspicuously missing from the data?",
+  "opts": "'die stabilsten Länder', 'die Länder mit den stärksten Schwankungen', 'alle europäischen Länder', 'die neuesten Studien'"
+ },
+ {
+  "f": "chapter-c2-12-passiv-data.js",
+  "i": 0,
+  "q": "How do they rephrase \"wir haben die Werte gemessen\"?",
+  "opts": "'die Werte messen wir', 'die Werte wurden unter kontrollierten Bedingungen gemessen', 'die Werte sind gemessen worden von uns', 'wir maßen die Werte'"
+ },
+ {
+  "f": "chapter-c2-12-passiv-data.js",
+  "i": 1,
+  "q": "How do they phrase the hypothesis confirmation?",
+  "opts": "'wir bestätigen sie', 'die Hypothese wird durch die Ergebnisse gestützt', 'die Hypothese ist falsch', 'wir sind uns sicher'"
+ },
+ {
+  "f": "chapter-c2-13-passiversatzformen-data.js",
+  "i": 0,
+  "q": "How is the new construction described?",
+  "opts": "'kaum belastbar', 'gut belastbar und skalierbar', 'nur für kurze Zeit nutzbar', 'zu teuer'"
+ },
+ {
+  "f": "chapter-c2-13-passiversatzformen-data.js",
+  "i": 1,
+  "q": "How often is maintenance needed, according to the report?",
+  "opts": "'jedes Jahr', 'alle zwei Jahre', 'alle vier Jahre', 'nie'"
+ },
+ {
+  "f": "chapter-c2-14-goethe-halbzeit-test-data.js",
+  "i": 0,
+  "q": "What does the government claim about the study?",
+  "opts": "'sie sei fehlerhaft', 'sie sei reproduzierbar', 'sie sei geheim', 'sie existiere nicht'"
+ },
+ {
+  "f": "chapter-c2-14-goethe-halbzeit-test-data.js",
+  "i": 1,
+  "q": "What does Timo want to do before citing the claim?",
+  "opts": "'sie sofort zitieren', 'seine eigene Analyse laufen lassen', 'die Regierung anrufen', 'das Thema fallenlassen'"
+ },
+ {
+  "f": "chapter-c2-15-partizipien-als-adjektive-data.js",
+  "i": 0,
+  "q": "How does Sieglinde describe the work?",
+  "opts": "'langweilig', 'bahnbrechend', 'fehlerhaft', 'unvollständig'"
+ },
+ {
+  "f": "chapter-c2-15-partizipien-als-adjektive-data.js",
+  "i": 1,
+  "q": "What does Timo say still needs revision?",
+  "opts": "'die Methodik', 'der einleitende Absatz', 'die Ergebnisse', 'die Literaturliste'"
+ },
+ {
+  "f": "chapter-c2-16-nominalisierte-adjektive-und-partizipien-data.js",
+  "i": 0,
+  "q": "How many affected parties are waiting?",
+  "opts": "'zehn', 'zwanzig', 'dreißig', 'keine'"
+ },
+ {
+  "f": "chapter-c2-16-nominalisierte-adjektive-und-partizipien-data.js",
+  "i": 1,
+  "q": "Who is responsible for the record?",
+  "opts": "'Ilse', 'Timo', 'die Zuständige vom Gericht', 'niemand'"
+ },
+ {
+  "f": "chapter-c2-17-adjektivdeklination-auf-c2-niveau-data.js",
+  "i": 0,
+  "q": "What supports the new method?",
+  "opts": "'ältere Studien', 'die kürzlich veröffentlichten Ergebnisse', 'Traudls Meinung', 'nichts'"
+ },
+ {
+  "f": "chapter-c2-17-adjektivdeklination-auf-c2-niveau-data.js",
+  "i": 1,
+  "q": "How does Traudl phrase her description?",
+  "opts": "'eine bewährte, sichere Methode', 'eine bisher wenig erprobte, aber vielversprechende Methode', 'eine veraltete Methode', 'eine unbrauchbare Methode'"
+ },
+ {
+  "f": "chapter-c2-18-stilistische-nuancen-und-register-von-adjektiven-data.js",
+  "i": 0,
+  "q": "What word does Hildegard suggest for the study section?",
+  "opts": "'groß', 'signifikant', 'klein', 'komisch'"
+ },
+ {
+  "f": "chapter-c2-18-stilistische-nuancen-und-register-von-adjektiven-data.js",
+  "i": 1,
+  "q": "What word fits the legal section?",
+  "opts": "'groß', 'erheblich', 'winzig', 'seltsam'"
+ },
+ {
+  "f": "chapter-c2-19-adjektive-mit-ergaenzungen-data.js",
+  "i": 0,
+  "q": "What is Elfriede ready for?",
+  "opts": "'einen Streit', 'eine Einigung', 'eine Kündigung', 'einen Vertrag'"
+ },
+ {
+  "f": "chapter-c2-19-adjektive-mit-ergaenzungen-data.js",
+  "i": 1,
+  "q": "What is Elfriede determined to do?",
+  "opts": "'aufgeben', 'den entscheidenden Schritt gehen', 'warten', 'nichts ändern'"
+ },
+ {
+  "f": "chapter-c2-20-goethe-mini-3-data.js",
+  "i": 0,
+  "q": "What has improved in Timo\\'s draft?",
+  "opts": "'die Rechtschreibung', 'der Nominalstil', 'die Länge', 'das Layout'"
+ },
+ {
+  "f": "chapter-c2-20-goethe-mini-3-data.js",
+  "i": 1,
+  "q": "What still gives Timo trouble?",
+  "opts": "'der Nominalstil', 'die Partizipialattribute', 'die Zeitformen', 'das Passiv'"
+ },
+ {
+  "f": "chapter-c2-21-wortbildung-der-adjektive-data.js",
+  "i": 0,
+  "q": "What must the concept sound like, according to Ottilie?",
+  "opts": "'billig', 'zukunftsfähig', 'kompliziert', 'altmodisch'"
+ },
+ {
+  "f": "chapter-c2-21-wortbildung-der-adjektive-data.js",
+  "i": 1,
+  "q": "What additional quality does Timo want to emphasize?",
+  "opts": "'wie günstig es ist', 'wie energieeffizient die Lösung ist', 'wie schnell es fertig ist', 'wie einfach es ist'"
+ },
+ {
+  "f": "chapter-c2-22-wortbildung-der-nomen-data.js",
+  "i": 0,
+  "q": "What does the law need to pass the committee?",
+  "opts": "'mehr Geld', 'eine klare Rechtsgrundlage', 'mehr Zeit', 'weniger Kritik'"
+ },
+ {
+  "f": "chapter-c2-22-wortbildung-der-nomen-data.js",
+  "i": 1,
+  "q": "What is still completely open?",
+  "opts": "'der Gesetzestext', 'die Umsetzungskosten', 'der Termin', 'die Mitglieder'"
+ },
+ {
+  "f": "chapter-c2-23-wortbildung-der-verben-data.js",
+  "i": 0,
+  "q": "What does Cordula want to digitalize?",
+  "opts": "'das Archiv', 'das Anmeldesystem', 'die Bibliothek', 'die Website'"
+ },
+ {
+  "f": "chapter-c2-23-wortbildung-der-verben-data.js",
+  "i": 1,
+  "q": "What does Timo want to do first?",
+  "opts": "'sofort digitalisieren', 'die Abläufe strukturieren', 'das Budget kürzen', 'das Projekt stoppen'"
+ },
+ {
+  "f": "chapter-c2-24-goethe-mini-4-data.js",
+  "i": 0,
+  "q": "What worries Wibke about the title?",
+  "opts": "'es ist zu kurz', 'es klingt zu sperrig für die Zeitung', 'es hat keinen Sinn', 'es ist zu billig'"
+ },
+ {
+  "f": "chapter-c2-24-goethe-mini-4-data.js",
+  "i": 1,
+  "q": "What do they do for the newspaper version?",
+  "opts": "'das Register verschärfen', 'das Register lockern', 'den Titel verlängern', 'den Fachbegriff behalten'"
+ },
+ {
+  "f": "chapter-c2-25-appositionen-data.js",
+  "i": 0,
+  "q": "What apposition do they add for the author?",
+  "opts": "'Gewinner des Literaturpreises 2011', 'ein unbekannter Schriftsteller', 'Autor mehrerer Romane', 'ein junger Journalist'"
+ },
+ {
+  "f": "chapter-c2-25-appositionen-data.js",
+  "i": 1,
+  "q": "How do they describe the chancellor?",
+  "opts": "'ein junger Politiker', 'ein erfahrener Verhandler', 'ein unbekannter Minister', 'ein neuer Kandidat'"
+ },
+ {
+  "f": "chapter-c2-26-nominalstil-data.js",
+  "i": 0,
+  "q": "What phrase does Timo suggest for the abstract?",
+  "opts": "'wir untersuchen das Thema', 'die Untersuchung der Entwicklung des Themas', 'das Thema wird entwickelt', 'wir schauen uns das Thema an'"
+ },
+ {
+  "f": "chapter-c2-26-nominalstil-data.js",
+  "i": 1,
+  "q": "How do they condense the second sentence?",
+  "opts": "'wir analysieren die Zahlen', 'die Analyse der Ursachen für die Schwankung der Zahlen', 'die Zahlen schwanken oft', 'wir wissen warum'"
+ },
+ {
+  "f": "chapter-c2-27-kollokationen-und-idiomatik-data.js",
+  "i": 0,
+  "q": "What did the campaign achieve?",
+  "opts": "'nichts', 'Schlagzeilen gemacht', 'wenig Aufmerksamkeit', 'Kritik'"
+ },
+ {
+  "f": "chapter-c2-27-kollokationen-und-idiomatik-data.js",
+  "i": 1,
+  "q": "What do they want to do with the success?",
+  "opts": "'ihn verstecken', 'ihn ausbauen', 'ihn ignorieren', 'ihn vergessen'"
+ },
+ {
+  "f": "chapter-c2-28-praepositionen-der-schriftsprache-data.js",
+  "i": 0,
+  "q": "Why do they need an extension?",
+  "opts": "'wegen Urlaub', 'wegen der Verzögerung im Labor', 'wegen eines Umzugs', 'ohne Grund'"
+ },
+ {
+  "f": "chapter-c2-28-praepositionen-der-schriftsprache-data.js",
+  "i": 1,
+  "q": "What do they list regarding the justification?",
+  "opts": "'persönliche Gründe', 'die technischen Probleme', 'das Budget', 'die Teilnehmerliste'"
+ },
+ {
+  "f": "chapter-c2-29-goethe-c2-final-data.js",
+  "i": 0,
+  "q": "What do the data clearly prove, according to Adelinde?",
+  "opts": "'nichts', 'ihre These', 'das Gegenteil', 'einen Fehler'"
+ },
+ {
+  "f": "chapter-c2-29-goethe-c2-final-data.js",
+  "i": 1,
+  "q": "What is the goal for tomorrow, according to Timo?",
+  "opts": "'neue Dinge lernen', 'zeigen, dass sie es beherrschen', 'das Thema wechseln', 'nervös sein'"
+ },
+ {
+  "f": "chapter-data.js",
+  "i": 0,
+  "q": "What does the man read?",
+  "opts": "'Eine Zeitung', 'Ein Buch', 'Einen Brief', 'Nichts'"
+ },
+ {
+  "f": "chapter-data.js",
+  "i": 1,
+  "q": "Who reads a story to the child?",
+  "opts": "'Anna', 'Der Mann', 'Sie (she)', 'Der Lehrer'"
+ }
+]

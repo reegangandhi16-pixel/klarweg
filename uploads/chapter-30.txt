@@ -1,0 +1,59 @@
+CHAPTER 30 — Verben mit Präpositionen   ·   Grammar: Verben + Präposition   ·   Theme: Unterhaltung & Medien   ·   56 words
+
+German (lemma)	Article	Part of Speech	English	NW Source	Status	Tier	Goethe	Activated in	Reinforced in
+die Anruferin	die	Noun	caller	NW K6	Active Core	A	High	30	31, 32, 34, 35
+der Austausch	der	Noun	exchange	NW K6	Active Core	B	Medium	30	31, 32, 35
+die Bahnhofshalle	die	Noun	station hall	NW K6	Active Core	A	High	30	31, 32, 34, 35
+der Berufswechsel	der	Noun	career change	NW K6	Active Core	A	High	30	31, 32, 34, 35
+der Berufswunsch		Adverb/Other	career goal	NW K6	Active Core	A	High	30	31, 32, 34, 35
+deutlich		Adjective	distinct	NW K6	Active Core	B	Medium	30	31, 32, 35
+der Einsatz	der	Noun	assignment	NW K12	Active Core	B	Low	30	31, 32, 35
+erreichbar		Adjective	reachable	NW K6	Active Core	B	Medium	30	31, 32, 35
+die Freiheit	die	Noun	freedom	NW K6	Active Core	B	Medium	30	31, 32, 35
+die Gewalt	die	Noun	violence	NW K12	Active Core	B	Low	30	31, 32, 35
+inklusive		Adverb/Other	including	NW K12	Active Core	B	Low	30	31, 32, 35
+klappen		Adverb/Other	to work	NW K6	Active Core	B	Medium	30	31, 32, 35
+der König	der	Noun	king	NW K12	Active Core	B	Low	30	31, 32, 35
+live		Adverb/Other	live	NW K12	Active Core	B	Low	30	31, 32, 35
+der Lkw	der	Noun	truck	NW K6	Active Core	B	Medium	30	31, 32, 35
+die Meldung	die	Noun	announcement	NW K12	Active Core	B	Low	30	31, 32, 35
+der Musiker	der	Noun	musician	NW K6	Active Core	B	Medium	30	31, 32, 35
+nebeneinander		Adverb/Other	next to each other	NW K6	Active Core	B	Medium	30	31, 32, 35
+netto		Adverb/Other	nett	NW K12	Active Core	B	Low	30	31, 32, 35
+der Neuanfang	der	Noun	new beginning	NW K6	Active Core	B	Medium	30	31, 32, 35
+der Pop	der	Noun	Pop	NW K12	Active Core	B	Low	30	31, 32, 35
+preiswert		Adverb/Other	cheap	NW K6	Active Core	B	Medium	30	31, 32, 35
+problemlos		Adjective	unproblematic	NW K6	Active Core	A	High	30	31, 32, 34, 35
+der Roman	der	Noun	novel	NW K12	Active Core	B	Low	30	31, 32, 35
+der Schritt	der	Noun	step	NW K6	Active Core	B	Medium	30	31, 32, 35
+der Sitzplatz	der	Noun	seat	NW K12	Active Core	B	Low	30	31, 32, 35
+die Stimme	die	Noun	voice	NW K12	Active Core	B	Low	30	31, 32, 35
+der Tagesgast	der	Noun	one-day visitor	NW K6	Active Core	B	Medium	30	31, 32, 35
+das Telefonat	das	Noun	telephone	NW K6	Active Core	B	Medium	30	31, 32, 35
+unter anderem		Adverb/Other	amongst other things, inter alia	NW K12	Active Core	B	Low	30	31, 32, 35
+verrückt		Adverb/Other	crazy	NW K12	Active Core	B	Low	30	31, 32, 35
+die Vokabel	die	Noun	word	NW K6	Active Core	B	Medium	30	31, 32, 35
+der Wagen	der	Noun	car	NW K6	Active Core	B	Medium	30	31, 32, 35
+der Warenkorb	der	Noun	shopping cart	NW K12	Active Core	B	Low	30	31, 32, 35
+wild		Adverb/Other	wild	NW K12	Active Core	B	Low	30	31, 32, 35
+wofür		Adverb/Other	what	NW K6	Active Core	B	Medium	30	31, 32, 35
+die Überweisung	die	Noun	bank transfer	NW K12	Active Core	A	High	30	31, 32, 34, 35
+der Audioguide	der	Noun	audio guide	NW K12	Active Support	C	Low	31	35
+das Englisch-Studium	das	Noun	English degree	NW K6	Active Support	C	Low	31	35
+die Ermäßigung	die	Noun	discount	NW K6	Active Support	C	Low	31	35
+der Hintergrund	der	Noun	background	NW K12	Active Support	C	Low	31	35
+das Jahrhundert	das	Noun	century	NW K6	Active Support	C	Low	31	35
+der Jobwechsel	der	Noun	job change	NW K6	Active Support	C	Low	31	35
+die Kriminalität	die	Noun	criminality	NW K12	Active Support	C	Low	31	35
+der Kunstexperte	der	Noun	art expert	NW K12	Active Support	C	Low	31	35
+das Musikfestival	das	Noun	music festival	NW K12	Active Support	C	Low	31	35
+der Operationssaal	der	Noun	operating theatre	NW K6	Active Support	C	Low	31	35
+die Radiosprecherin	die	Noun	radio announcer	NW K12	Active Support	C	Low	31	35
+die Rückmeldung	die	Noun	response	NW K6	Active Support	C	Low	31	35
+die Tiermalerei	die	Noun	animal painting	NW K12	Active Support	C	Low	31	35
+die Verpflegung	die	Noun	provisions	NW K12	Active Support	C	Low	31	35
+die Videokonferenz	die	Noun	video conference	NW K6	Active Support	C	Low	31	35
+der Vordergrund	der	Noun	foreground	NW K12	Active Support	C	Low	31	35
+die Übersetzerin	die	Noun	translator	NW K6	Active Support	C	Low	31	35
+das Schlüsselwort	das	Grammar term	keyword	NW K6	Reference/System	Sys	—	—	—
+die Datenschutzbestimmung	die	Noun	data protection regulations	NW K12	Passive	D	Low	—	—

@@ -1,0 +1,144 @@
+{
+ "phase": "33 — locate the actual mcq .de-link producer (DIAGNOSIS ONLY)",
+ "generatedAt": "2026-08-14T11:30:15.830Z",
+ "outcome": "PRODUCER NOT IDENTIFIED. Runtime capture returned zero insertions, which itself narrows the field but does not name the path. No fix is proposed.",
+ "A_producerInventory": [
+  {
+   "fn": "germanWordSpans (popup/token renderer)",
+   "line": 942,
+   "mechanism": "el('span', { class: ('de-link ' + role).trim() }, tk.w) per authored token",
+   "setsDataLinked": false,
+   "setsDataLinkedGated": false,
+   "checksLinkExclude": false,
+   "canRunDetached": true,
+   "canReceiveMcqContent": "no — driven by authored token arrays, not option strings",
+   "canRunAfterMcqConstruction": true
+  },
+  {
+   "fn": "popup inline linkifier (word-pop body)",
+   "line": 1894,
+   "mechanism": "span.className = ('de-link wp-inline-link ' + spanRole)",
+   "setsDataLinked": false,
+   "setsDataLinkedGated": false,
+   "checksLinkExclude": false,
+   "canRunDetached": true,
+   "canReceiveMcqContent": "no — runs inside .word-pop",
+   "canRunAfterMcqConstruction": true,
+   "note": "always carries the extra wp-inline-link class; the mcq nodes do NOT, so this producer is excluded by class signature"
+  },
+  {
+   "fn": "popup coreferent linkifier",
+   "line": 1971,
+   "mechanism": "span.className = ('de-link wp-inline-link ' + spanRole)",
+   "setsDataLinked": false,
+   "setsDataLinkedGated": false,
+   "checksLinkExclude": false,
+   "canRunDetached": true,
+   "canReceiveMcqContent": "no",
+   "canRunAfterMcqConstruction": true,
+   "note": "same wp-inline-link signature — excluded"
+  },
+  {
+   "fn": "wrapWordsIn",
+   "line": 2840,
+   "creates": 2863,
+   "mechanism": "span.className = ('de-link ' + spanRole).trim() per matched word in a text node",
+   "setsDataLinked": false,
+   "setsDataLinkedGated": false,
+   "checksLinkExclude": "NO — the guard lives in its CALLERS, not in the function",
+   "canRunDetached": true,
+   "canReceiveMcqContent": "yes if ever called with an mcq host",
+   "canRunAfterMcqConstruction": true,
+   "classSignature": "bare \"de-link <role>\" with NO wp-inline-link — MATCHES the 30 mcq nodes exactly"
+  },
+  {
+   "fn": "gatedWrapWordsIn",
+   "line": 2912,
+   "creates": 2945,
+   "mechanism": "span.className = ('de-link ' + roleFor(...))",
+   "setsDataLinked": false,
+   "setsDataLinkedGated": false,
+   "checksLinkExclude": "partially — its TreeWalker rejects text inside LINK_EXCLUDE + .de/.de-em/.de-link (:2916), so it cannot touch text inside a .de host",
+   "canRunDetached": true,
+   "canReceiveMcqContent": "no — mcq text lives inside span.de, which its walker rejects",
+   "canRunAfterMcqConstruction": true
+  },
+  {
+   "fn": "linkifyDe (guarded caller of wrapWordsIn)",
+   "line": 2819,
+   "guard": ":2826 closest(LINK_EXCLUDE) + :2828 sets dataset.linked",
+   "verdict": "NOT the producer — the 5 mcq host .de elements carry no data-linked"
+  },
+  {
+   "fn": "linkifyGated (guarded caller of gatedWrapWordsIn)",
+   "line": 2900,
+   "guard": ":2907 closest(LINK_EXCLUDE) + :2908 sets dataset.linkedGated",
+   "verdict": "NOT the producer — no data-linked-gated on any mcq host"
+  }
+ ],
+ "unguardedDirectCallSites": [
+  {
+   "line": 64,
+   "call": "gatedWrapWordsIn(elDe) inside the lexicon-onload re-sweep",
+   "guard": "NONE — this loop does not check LINK_EXCLUDE and does not set dataset.linkedGated",
+   "scope": "LINK_TARGETS_GATED only (.mistake-why, .grammar-text, .grammar-table-cell, .takeaway, .resource-desc, .lede)",
+   "mcqRelevance": "mcq options are not a gated target, so this cannot be the mcq producer — but it IS an unguarded path worth noting in its own right"
+  },
+  {
+   "line": 73,
+   "call": "wrapWordsIn(elDe) inside the same re-sweep",
+   "guard": "checks closest(LINK_EXCLUDE) at :72 but does NOT set dataset.linked",
+   "mcqRelevance": "would correctly skip mcq — and explains why a legitimately re-swept host can lack the marker, i.e. absence of data-linked does NOT by itself prove linkifyDe was bypassed"
+  },
+  {
+   "line": 3008,
+   "call": "wrapWordsIn(unit) on a DETACHED span.sentence-inline-unit",
+   "guard": "NONE",
+   "mcqRelevance": "unproven for mcq; creates bare de-link on a detached node with no exclusion test"
+  },
+  {
+   "line": 3830,
+   "call": "wrapWordsIn(line) on a DETACHED .sentence-unit-text",
+   "guard": "NONE",
+   "mcqRelevance": "unproven for mcq; same shape"
+  }
+ ],
+ "B_actualProducer": "NOT PROVEN. Narrowed to wrapWordsIn (the only producer whose class signature matches: bare \"de-link <role>\", no wp-inline-link). The CALL SITE that reaches mcq content is still unidentified.",
+ "C_exactSourceLine": "creation is chapter-app.js:2863 inside wrapWordsIn (:2840). The invoking call site is unknown.",
+ "D_firstStageWhereLinksAppear": "NOT ESTABLISHED — see E.",
+ "E_mutationTimingEvidence": {
+  "harness": "chapter/qa-mcq-link-producer-p33.html — wrapped Element.prototype.appendChild/insertBefore/replaceChild in the iframe (in-memory only, each wrapper calls through unchanged) plus a MutationObserver on documentElement, installed by a 10ms poll as soon as contentDocument existed",
+  "result": {
+   "captured": 0,
+   "insertionsIntoMcqAncestry": 0,
+   "detachedInsertions": 0,
+   "mcqLinksInFinalDom": 30
+  },
+  "interpretation": "zero captures with 30 links present means the links were NOT inserted as a subtree via appendChild/insertBefore/replaceChild after instrumentation. Two live explanations remain, and this phase cannot choose between them: (1) the links already existed before the wrappers were installed — chapter-app renders synchronously on parse, so a 10ms poll can lose the race; (2) the nodes are materialised by a mechanism the wrappers do not intercept, most plausibly an innerHTML/insertAdjacentHTML assignment or a DocumentFragment moved by a method not wrapped.",
+  "confidence": "the negative result is reliable; its cause is not determined"
+ },
+ "F_whyLinkExcludeBypassed": "UNKNOWN. What IS proven: the DOM ancestry is correct (closest(LINK_EXCLUDE) resolves to BUTTON.mcq-option), wrapWordsIn itself contains no exclusion test (the guard lives in linkifyDe), and at least four call sites invoke the word-wrappers directly — two of them (:3008, :3830) with no exclusion test at all and on detached nodes.",
+ "G_oneProducerForAll14": "CONSISTENT BUT UNPROVEN. All 14 share one class signature (bare de-link + role) and one region (button.mcq-option inside .mcq-options), which points to a single producer. Not demonstrated.",
+ "H_affectsNonMcqContent": "YES for the unguarded call sites in principle: :3008 and :3830 wrap detached sentence units with no exclusion test, and :64 re-sweeps gated containers with no exclusion test. Whether any of these currently produces links inside another excluded region was NOT measured. In b2-15 the breach is mcq-only: .quiz-stage 0, .builder-token/.builder-slot 0, .reading-passage 0.",
+ "I_smallestLikelyFixShape": "RECOMMENDATION ONLY, and deliberately not chosen: move the exclusion test INTO wrapWordsIn/gatedWrapWordsIn (a single early return per function) instead of relying on every caller to remember it. That makes the guard structural and would neutralise all four direct call sites at once. It must not be applied until the producing call site is identified, because a guard inside the wrapper changes behaviour for :3008/:3830 sentence units too.",
+ "J_expectedImpact": "ESTIMATE ONLY: −14 HCM, −11 RCB if mcq option text stops being linkified. Unchanged from Phase 31/32 since the target set has not moved.",
+ "nextExperiment": "Win the instrumentation race and widen the net: serve the chapter through a harness that injects the wrappers BEFORE chapter-app.js executes (e.g. document.write/srcdoc shell that defines the wrappers, or a <script> inserted ahead of the app script by fetching and re-serving the chapter HTML from the harness), and additionally wrap the innerHTML setter, insertAdjacentHTML, replaceWith and Range.createContextualFragment. Then re-run and read the captured stack for the first mcq .de-link.",
+ "correctionsToEarlierPhases": [
+  "Phase 32 inferred from \"no data-linked marker\" that neither linkifier processed these hosts. That inference is now WEAKENED: the lexicon-onload re-sweep at :73 calls wrapWordsIn directly WITHOUT setting dataset.linked, so a marker-less host is not proof that linkifyDe was bypassed. The producer question is genuinely open, not narrowed to a \"third subsystem\"."
+ ],
+ "productionSafety": {
+  "productionCodeModified": false,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "qaEngineModified": false,
+  "qaAssertModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false
+ },
+ "filesCreated": [
+  "chapter/qa-mcq-link-producer-p33.html",
+  "audit/mcq-link-producer-p33.json"
+ ],
+ "filesModified": "none"
+}

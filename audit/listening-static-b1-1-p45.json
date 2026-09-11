@@ -1,0 +1,34 @@
+{
+  "chapter": "chapter-b1-1-infinitiv-mit-zu-data.js",
+  "method": "static replay: production wrapWordsIn + resolveClickableWord + hasMeaningfulEntry over listening.transcript, real lexicons, no browser render",
+  "listeningTokensAuthored": false,
+  "totalGermanWords": 53,
+  "clickable": 49,
+  "plain": 4,
+  "clickablePct": 92.5,
+  "measuredBrowserPct": 51,
+  "top20Unresolved": [
+    [
+      "Renke",
+      1
+    ],
+    [
+      "vorzuhaben",
+      1
+    ],
+    [
+      "jammern",
+      1
+    ],
+    [
+      "bisschen",
+      1
+    ]
+  ],
+  "unresolvedAll": {
+    "Renke": 1,
+    "vorzuhaben": 1,
+    "jammern": 1,
+    "bisschen": 1
+  }
+}

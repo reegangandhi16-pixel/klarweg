@@ -1,0 +1,42 @@
+{
+  "task": "close the 34 listening-token rollout skips",
+  "rendererChange": {
+    "file": "chapter/chapter-app.js",
+    "scope": "listening tokens branch only (1 of 4 inline copies of the spacing rule)",
+    "addedFlags": [
+      "spaceBefore",
+      "noSpaceAfter"
+    ],
+    "byteIdenticalOnExistingChapters": "224 of 224 verified"
+  },
+  "chaptersClosed": 34,
+  "byLevel": {
+    "A1": 3,
+    "B1": 5,
+    "B2": 8,
+    "C1": 8,
+    "C2": 10
+  },
+  "germanWordTokens": 1459,
+  "totalFlags": 73,
+  "transcriptExactAll34": true,
+  "hyphenPolicy": "hyphenated units are split into segments so each resolvable part keeps its own span and popup; a unit stays merged only when the merged form resolves and no segment does (Mün-chen). Letter-by-letter spellings stay plain. Spacing is preserved with noSpaceAfter flags.",
+  "recoveredClickables": [
+    "Job",
+    "Zertifikat",
+    "Hilfe",
+    "Kasten",
+    "Steuer",
+    "App",
+    "Online",
+    "Sucht",
+    "Kunst",
+    "Aktion",
+    "Erste"
+  ],
+  "knownRemaining": {
+    "file": "chapter-a1-1-data.js",
+    "issue": "pre-existing hand-authored tokens render du\" Buch\"? and B - U - C - H.; predates this rollout. Not fixed — repairing it means editing authored role/gloss tokens."
+  },
+  "totalChaptersWithListeningTokens": 258
+}

@@ -1,0 +1,175 @@
+{
+ "phase": "18 — HEADWORD_COLOUR_MISMATCH root-cause validation",
+ "generatedAt": "2026-08-13T10:19:41.985Z",
+ "sources": {
+  "baseline": "audit/qa-baseline-p15-diagnostic.json",
+  "inventory": "audit/hcm-inventory-p15.json",
+  "liveTrace": "chapter-c1-01 rendered once and inspected in place (no sweep, no edits)"
+ },
+ "total": 110,
+ "classA": {
+  "count": 73,
+  "perChapter": {
+   "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html": 48,
+   "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html": 12,
+   "chapter-c1-05-zweiteilige-satzverbindungen.html": 8,
+   "chapter-c1-07-praepositionen-mit-genitiv.html": 4,
+   "chapter-c1-17-goethe-halbzeit-test.html": 1
+  },
+  "mechanism": "PRODUCTION CSS DEFECT — chapter-local inline <style> overrides a canonical grammar-role class",
+  "evidence": {
+   "markupPresent": "the prose span DOES carry the canonical role class: c1-01 story idx 4 \"habe\" has class \"rw de r-verb\" (data token authored role:\"r-verb\"), yet computed colour is rgb(31,78,74)",
+   "variablesDefined": "--g-verb #DC2626, --g-time #7C3AED, --g-negation #C026D3, --g-genitiv #A06B2C, --g-modalverb #9F1239 all resolve correctly at both :root and the node — the tokens are not missing",
+   "cascadeWinner": "two rules set color on that node: \".r-verb {color: var(--g-verb)}\" from chapter.css, and \".r-praesens, .r-praeteritum, .r-perfekt, .r-plusquam, .r-futur1, .r-futur2, .r-verb {color:#1F4E4A}\" from the page's own inline <style> (line 15). Equal specificity (0,1,0); the inline sheet comes later, so it wins.",
+   "rulePerChapter": {
+    "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html": {
+     "line": 15,
+     "selector": ".r-praesens, .r-praeteritum, .r-perfekt, .r-plusquam, .r-futur1, .r-futur2, .r-verb",
+     "swallowedCanonicalRole": "r-verb",
+     "findings": 48
+    },
+    "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html": {
+     "line": 15,
+     "selector": ".r-time, .r-simul, .r-duration, .r-space, .r-continuation",
+     "swallowedCanonicalRole": "r-time",
+     "findings": 12
+    },
+    "chapter-c1-05-zweiteilige-satzverbindungen.html": {
+     "line": 15,
+     "selector": ".r-addition, .r-alternative, .r-negation, .r-contrast, .r-comparison, .r-degree",
+     "swallowedCanonicalRole": "r-negation",
+     "findings": 8
+    },
+    "chapter-c1-07-praepositionen-mit-genitiv.html": {
+     "line": 15,
+     "selector": ".r-genitiv",
+     "swallowedCanonicalRole": "r-genitiv",
+     "findings": 4
+    },
+    "chapter-c1-17-goethe-halbzeit-test.html": {
+     "line": 15,
+     "selector": ".r-modalverb, .r-konjunktiv2, .r-konjunktiv1, .r-empfehlung, .r-bitte",
+     "swallowedCanonicalRole": "r-modalverb",
+     "findings": 1
+    }
+   },
+   "headColourConfirms": "the popup headword takes its colour from an inline style set by renderWordPop (chapter-app.js:2099) using var(--g-<role>), which the page stylesheet never overrides — so the SAME role renders teal in prose and correct in the popup",
+   "allAccountedFor": true
+  },
+  "attribution": "production defect (page-level CSS), NOT authored data, NOT the detector",
+  "learnerImpact": "every affected occurrence loses its grammar colour in prose while the popup shows it — the colour-carries-meaning contract is broken in exactly one direction",
+  "confidence": "PROVEN for c1-01 (live cascade trace) and for the rule presence in all five chapters (source read); PROVEN by construction that each chapter's swallowed role matches its findings' head colour"
+ },
+ "classB": {
+  "count": 37,
+  "mechanism": "occurrence role (span) vs lexeme/entry class (popup headword) — two different authorities, both intentional in the engine",
+  "codePath": {
+   "span": "roleFor()/tokenRole() paint the occurrence: explicit token role → authoredClassRole → guessRole (chapter-app.js:898-919)",
+   "head": "renderWordPop resolves normalizedRole from the ENTRY first; occurrence role is used only when the entry supplies nothing (\"OCCURRENCE ROLE IS THE COLOUR AUTHORITY … this only fills a genuine void\", chapter-app.js:2038-2052)"
+  },
+  "evidence": {
+   "coLocated": "11 of 37 Class-B findings share a node with a ROLE_CONTRADICTS_BADGE finding, which supplies badge + occurrence role for that exact node",
+   "worked": [
+    {
+     "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+     "section": "exercises",
+     "index": 241,
+     "surface": "dokumentiert",
+     "span": "rgb(220, 38, 38)",
+     "head": "rgb(245, 158, 11)",
+     "badge": "Adjective (Partizip II)",
+     "occurrenceRole": "r-verb",
+     "reading": "span = occurrence role verb; head = lexeme class adjective"
+    },
+    {
+     "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+     "section": "exercises",
+     "index": 794,
+     "surface": "Infolgedessen",
+     "span": "rgb(46, 125, 50)",
+     "head": "rgb(6, 182, 212)",
+     "badge": "Adverb (discourse marker)",
+     "occurrenceRole": "r-object",
+     "reading": "span = occurrence role object; head = lexeme class adverb"
+    },
+    {
+     "chapter": "chapter-b1-17-nebensatz-damit-um-zu.html",
+     "section": "exercises",
+     "index": 925,
+     "surface": "um",
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(202, 138, 4)",
+     "badge": "Preposition",
+     "occurrenceRole": "r-adverb"
+    },
+    {
+     "chapter": "chapter-b2-45-passiversatz-sich-lassen.html",
+     "section": "exercises",
+     "index": 813,
+     "surface": "sich",
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(24, 95, 165)",
+     "badge": "Pronoun",
+     "occurrenceRole": "r-adverb"
+    },
+    {
+     "chapter": "chapter-a1-19-satzposition.html",
+     "section": "grammar",
+     "index": 335,
+     "surface": "Nein",
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)",
+     "badge": null,
+     "occurrenceRole": null,
+     "note": "NO co-located finding — badge/role unavailable; mechanism inferred from the 11 observed cases, not read off this record"
+    }
+   ]
+  },
+  "detectorRule": {
+   "engineComment": "qa-engine.js:34 — \"Never flag: the same surface carrying different roles at different occurrences (occurrence-bound by design)\"",
+   "appliesTo": "the ROLE check only; HEADWORD_COLOUR_MISMATCH compares span colour against popup-headword colour within ONE occurrence, so the exemption never reaches it",
+   "verdict": "NOT an inconsistent rule in the engine — a different comparison. Whether the colour difference is a learner-facing defect is a curriculum decision, not a detector bug."
+  },
+  "quantification": {
+   "withDirectNodeEvidence": 11,
+   "inferredFromClassPattern": 26
+  },
+  "attribution": "mixed — legitimate engine behaviour by design (occurrence vs lexeme); learner-facing acceptability UNRESOLVED and owned by curriculum",
+  "confidence": "PROVEN for the 11 co-located cases; STRONGLY SUGGESTED for the remaining 26"
+ },
+ "unresolved": [
+  {
+   "case": "a1-39-ortsangaben vocabulary idx 570 \"a\"",
+   "span": "rgb(6, 182, 212)",
+   "head": "rgb(90, 90, 96)",
+   "why": "head is --ink-secondary, i.e. the popup resolved NO role (ROLE_COLOR_VAR maps letter/name/conjunction to ink-secondary). Not explained by either class."
+  },
+  {
+   "case": "b1-22-brauchen-zu-infinitiv listening idx 681 \"machen\"",
+   "span": "rgb(220, 38, 38)",
+   "head": "rgb(190, 24, 93)",
+   "why": "head rgb(190,24,93) is in no CLAUDE.md token list; source of that colour not identified from the baseline."
+  },
+  {
+   "topic": "multiword-headword / tokenization",
+   "status": "cannot be answered from P15 — no field records it; all 110 surfaces are single tokens"
+  }
+ ],
+ "attributionSummary": {
+  "productionRenderingDefect": 73,
+  "authoredDataDefect": 0,
+  "detectorFalsePositive": 0,
+  "byDesignEngineBehaviourPendingCurriculumCall": 35,
+  "unresolved": 2
+ },
+ "noChangesMade": [
+  "chapter data",
+  "production code",
+  "CSS",
+  "qa-engine.js",
+  "qa-assert.js",
+  "lint",
+  "baselines"
+ ],
+ "recommendedNextPhase": "Phase 19 — scope the Class-A CSS defect corpus-wide: grep every chapter HTML for inline <style> rules whose selector list includes a canonical grammar-role class (r-verb, r-time, r-negation, r-genitiv, r-modalverb, r-subject, r-object, r-place, case/modifier roles). The five known chapters were found via HCM, which only fires where a popup opens; chapters whose swallowed role never gets clicked would be invisible to this detector. Decide the fix shape (rename chapter-local pedagogical classes vs scope them) before editing anything."
+}

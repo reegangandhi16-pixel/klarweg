@@ -1,0 +1,3086 @@
+{
+  "version": "pilot-v2 (whole conversational units)",
+  "generatedAt": "2026-09-08",
+  "status": "STAGED — not yet synthesized; run: npx tsx scripts/generate-from-manifest.ts --pilot",
+  "policy": "audio-manifests/voice-policy.json",
+  "scope": "2 complete units per level per type, A1–C2",
+  "totals": {
+    "units": 48,
+    "files": 174
+  },
+  "byType": {
+    "story": {
+      "units": 12,
+      "files": 87
+    },
+    "listening": {
+      "units": 12,
+      "files": 51
+    },
+    "reading": {
+      "units": 12,
+      "files": 12
+    },
+    "speaking": {
+      "units": 12,
+      "files": 24
+    }
+  },
+  "uniqueIds": 174,
+  "featureCoverage": {
+    "question": 56,
+    "quoted": 4,
+    "umlaut": 84,
+    "eszett": 16,
+    "compound": 42,
+    "subordinate": 33,
+    "numerals": 8
+  },
+  "units": [
+    {
+      "type": "story",
+      "unitId": "STORY:a1-34-schreiben",
+      "chapter": "a1-34-schreiben",
+      "level": "A1",
+      "files": 10,
+      "chars": 426,
+      "speakers": [
+        "Petra",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.85,
+      "features": [
+        "question",
+        "quoted",
+        "umlaut",
+        "eszett",
+        "compound"
+      ],
+      "lines": [
+        {
+          "id": "A1_034_S001",
+          "speaker": "Petra",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 66,
+          "de": "Ich schreibe eine Einladungs-Mail. Machst du das zusammen mit uns?",
+          "audioFilename": "audio/story/A1_034_S001.mp3",
+          "contentHash": "209da57363a430fc"
+        },
+        {
+          "id": "A1_034_S002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 30,
+          "de": "Ja, gern! Was ist der Betreff?",
+          "audioFilename": "audio/story/A1_034_S002.mp3",
+          "contentHash": "04075476e1778850"
+        },
+        {
+          "id": "A1_034_S003",
+          "speaker": "Petra",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 36,
+          "de": "Ich schreibe: „Einladung zur Party\".",
+          "audioFilename": "audio/story/A1_034_S003.mp3",
+          "contentHash": "30c4227b3fd87f53"
+        },
+        {
+          "id": "A1_034_S004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 36,
+          "de": "Gut. Und welche Anrede schreibst du?",
+          "audioFilename": "audio/story/A1_034_S004.mp3",
+          "contentHash": "a9e44f07b4efff9c"
+        },
+        {
+          "id": "A1_034_S005",
+          "speaker": "Petra",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 67,
+          "de": "Ich schreibe „Liebe Freunde\", denn das ist freundlich und herzlich.",
+          "audioFilename": "audio/story/A1_034_S005.mp3",
+          "contentHash": "1b0db0a854aac22a"
+        },
+        {
+          "id": "A1_034_S006",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 36,
+          "de": "Schön! Und was schreibst du zuletzt?",
+          "audioFilename": "audio/story/A1_034_S006.mp3",
+          "contentHash": "207f1f0a9bd46c6f"
+        },
+        {
+          "id": "A1_034_S007",
+          "speaker": "Petra",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 68,
+          "de": "Ich schreibe „Herzliche Grüße\", und dann unterschreibe ich die Mail.",
+          "audioFilename": "audio/story/A1_034_S007.mp3",
+          "contentHash": "c3908f8ed674d8b4"
+        },
+        {
+          "id": "A1_034_S008",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 29,
+          "de": "Perfekt! Die Mail ist fertig.",
+          "audioFilename": "audio/story/A1_034_S008.mp3",
+          "contentHash": "ba7e83cb7858d3a4"
+        },
+        {
+          "id": "A1_034_S009",
+          "speaker": "Petra",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 25,
+          "de": "Ja! Sendest du sie jetzt?",
+          "audioFilename": "audio/story/A1_034_S009.mp3",
+          "contentHash": "47b1625ec166828b"
+        },
+        {
+          "id": "A1_034_S010",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 33,
+          "de": "Ja, ich sende sie gleich an alle.",
+          "audioFilename": "audio/story/A1_034_S010.mp3",
+          "contentHash": "680c29a04aa7b482"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:a1-9-verben",
+      "chapter": "a1-9-verben",
+      "level": "A1",
+      "files": 7,
+      "chars": 210,
+      "speakers": [
+        "Noah",
+        "Clara"
+      ],
+      "voices": [
+        "de-DE-Neural2-D",
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "question",
+        "compound"
+      ],
+      "lines": [
+        {
+          "id": "A1_009_S001",
+          "speaker": "Noah",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 28,
+          "de": "Was machst du morgen, Clara?",
+          "audioFilename": "audio/story/A1_009_S001.mp3",
+          "contentHash": "5d50b4774eecf3ee"
+        },
+        {
+          "id": "A1_009_S002",
+          "speaker": "Clara",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 41,
+          "de": "Ich arbeite morgen und ich lerne Deutsch.",
+          "audioFilename": "audio/story/A1_009_S002.mp3",
+          "contentHash": "5f40b44a1402bf4f"
+        },
+        {
+          "id": "A1_009_S003",
+          "speaker": "Noah",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 23,
+          "de": "Und was machst du gern?",
+          "audioFilename": "audio/story/A1_009_S003.mp3",
+          "contentHash": "6bc56bacc0012b81"
+        },
+        {
+          "id": "A1_009_S004",
+          "speaker": "Clara",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 34,
+          "de": "Ich koche gern und spiele Gitarre.",
+          "audioFilename": "audio/story/A1_009_S004.mp3",
+          "contentHash": "39fb703bda7e4155"
+        },
+        {
+          "id": "A1_009_S005",
+          "speaker": "Noah",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 34,
+          "de": "Und ich spiele nur Computerspiele!",
+          "audioFilename": "audio/story/A1_009_S005.mp3",
+          "contentHash": "af839e0eaab3af13"
+        },
+        {
+          "id": "A1_009_S006",
+          "speaker": "Clara",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 23,
+          "de": "Lernst du auch Deutsch?",
+          "audioFilename": "audio/story/A1_009_S006.mp3",
+          "contentHash": "76240a01b42eee72"
+        },
+        {
+          "id": "A1_009_S007",
+          "speaker": "Noah",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 27,
+          "de": "Klar! Ich lerne immer hier.",
+          "audioFilename": "audio/story/A1_009_S007.mp3",
+          "contentHash": "9febb9f40a61f50e"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:a2-11-wenn",
+      "chapter": "a2-11-wenn",
+      "level": "A2",
+      "files": 8,
+      "chars": 340,
+      "speakers": [
+        "Wiebke",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.85,
+      "features": [
+        "question",
+        "subordinate",
+        "umlaut",
+        "eszett"
+      ],
+      "lines": [
+        {
+          "id": "A2_011_S001",
+          "speaker": "Wiebke",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 40,
+          "de": "Wenn es regnet, feiern wir dann drinnen?",
+          "audioFilename": "audio/story/A2_011_S001.mp3",
+          "contentHash": "431600b2eafab066"
+        },
+        {
+          "id": "A2_011_S002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 43,
+          "de": "Ja, wenn es regnet, gehen wir ins Wohnheim.",
+          "audioFilename": "audio/story/A2_011_S002.mp3",
+          "contentHash": "b376df55a4b3fcac"
+        },
+        {
+          "id": "A2_011_S003",
+          "speaker": "Wiebke",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 47,
+          "de": "Gut. Und wenn es schön ist, feiern wir draußen?",
+          "audioFilename": "audio/story/A2_011_S003.mp3",
+          "contentHash": "880409f22bc6c036"
+        },
+        {
+          "id": "A2_011_S004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 46,
+          "de": "Genau! Ich bin so traurig, dass Lina wegfährt.",
+          "audioFilename": "audio/story/A2_011_S004.mp3",
+          "contentHash": "aaa83bb78488bbcb"
+        },
+        {
+          "id": "A2_011_S005",
+          "speaker": "Wiebke",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 42,
+          "de": "Ich auch. Aber ich bin auch stolz auf sie.",
+          "audioFilename": "audio/story/A2_011_S005.mp3",
+          "contentHash": "e7ce09f761ce0204"
+        },
+        {
+          "id": "A2_011_S006",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 49,
+          "de": "Wenn wir Zeit haben, machen wir eine Dankeskarte.",
+          "audioFilename": "audio/story/A2_011_S006.mp3",
+          "contentHash": "563598e3d9e0fe39"
+        },
+        {
+          "id": "A2_011_S007",
+          "speaker": "Wiebke",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 44,
+          "de": "Gute Idee! Ich schreibe tausend Dank hinein.",
+          "audioFilename": "audio/story/A2_011_S007.mp3",
+          "contentHash": "e1269d2293e5399f"
+        },
+        {
+          "id": "A2_011_S008",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 29,
+          "de": "Ich bringe das Feuerwerk mit.",
+          "audioFilename": "audio/story/A2_011_S008.mp3",
+          "contentHash": "0024b9c50ed0ad8d"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:a2-15-positions-richtungsverben",
+      "chapter": "a2-15-positions-richtungsverben",
+      "level": "A2",
+      "files": 8,
+      "chars": 248,
+      "speakers": [
+        "Meret",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.85,
+      "features": [
+        "question",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "A2_015_S001",
+          "speaker": "Meret",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 21,
+          "de": "Wo ist der Parkplatz?",
+          "audioFilename": "audio/story/A2_015_S001.mp3",
+          "contentHash": "0edc5f8f2ccd085c"
+        },
+        {
+          "id": "A2_015_S002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 28,
+          "de": "Er liegt neben der Kreuzung.",
+          "audioFilename": "audio/story/A2_015_S002.mp3",
+          "contentHash": "449902ec308ca622"
+        },
+        {
+          "id": "A2_015_S003",
+          "speaker": "Meret",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 23,
+          "de": "Gut. Fahr zur Kreuzung!",
+          "audioFilename": "audio/story/A2_015_S003.mp3",
+          "contentHash": "7edf8b0d5b6a28c0"
+        },
+        {
+          "id": "A2_015_S004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 24,
+          "de": "Ich fahre hin. Und dann?",
+          "audioFilename": "audio/story/A2_015_S004.mp3",
+          "contentHash": "206c365ad3b97b34"
+        },
+        {
+          "id": "A2_015_S005",
+          "speaker": "Meret",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 40,
+          "de": "Dann stell das Auto hinter das Parkhaus.",
+          "audioFilename": "audio/story/A2_015_S005.mp3",
+          "contentHash": "5610d8dac3035ec9"
+        },
+        {
+          "id": "A2_015_S006",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 40,
+          "de": "Ja, das mache ich. Steht es dort sicher?",
+          "audioFilename": "audio/story/A2_015_S006.mp3",
+          "contentHash": "d1607176822fde75"
+        },
+        {
+          "id": "A2_015_S007",
+          "speaker": "Meret",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 43,
+          "de": "Ja! Hinter dem Parkhaus ist es immer ruhig.",
+          "audioFilename": "audio/story/A2_015_S007.mp3",
+          "contentHash": "aa046bae6d8a177e"
+        },
+        {
+          "id": "A2_015_S008",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 29,
+          "de": "Perfekt! Dann parke ich dort.",
+          "audioFilename": "audio/story/A2_015_S008.mp3",
+          "contentHash": "336c0fe21619b8de"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:b1-3-konjunktiv2-hoefliche-bitten",
+      "chapter": "b1-3-konjunktiv2-hoefliche-bitten",
+      "level": "B1",
+      "files": 9,
+      "chars": 398,
+      "speakers": [
+        "Timo",
+        "Frau Lorenzen"
+      ],
+      "voices": [
+        "de-DE-Neural2-D",
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "question",
+        "compound",
+        "eszett",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B1_003_S001",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 45,
+          "de": "Entschuldigung! Könnten Sie mir bitte helfen?",
+          "audioFilename": "audio/story/B1_003_S001.mp3",
+          "contentHash": "3da83b6919f93c77"
+        },
+        {
+          "id": "B1_003_S002",
+          "speaker": "Frau Lorenzen",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 28,
+          "de": "Natürlich. Was ist passiert?",
+          "audioFilename": "audio/story/B1_003_S002.mp3",
+          "contentHash": "4c63748cd66227b4"
+        },
+        {
+          "id": "B1_003_S003",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 30,
+          "de": "Mein Handy ist kaputtgegangen.",
+          "audioFilename": "audio/story/B1_003_S003.mp3",
+          "contentHash": "0f6653aa3e0cd2ca"
+        },
+        {
+          "id": "B1_003_S004",
+          "speaker": "Frau Lorenzen",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 42,
+          "de": "Hätten Sie vielleicht die Anleitung dabei?",
+          "audioFilename": "audio/story/B1_003_S004.mp3",
+          "contentHash": "2302fd1e8cc46ad3"
+        },
+        {
+          "id": "B1_003_S005",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 52,
+          "de": "Nein, leider nicht. Würden Sie es bitte anschließen?",
+          "audioFilename": "audio/story/B1_003_S005.mp3",
+          "contentHash": "c11e393f4b40366a"
+        },
+        {
+          "id": "B1_003_S006",
+          "speaker": "Frau Lorenzen",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 44,
+          "de": "Ja, sofort. Könnten Sie es bitte einstecken?",
+          "audioFilename": "audio/story/B1_003_S006.mp3",
+          "contentHash": "23e5d3b2c27c8e61"
+        },
+        {
+          "id": "B1_003_S007",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 58,
+          "de": "Ja, gern. Ich würde gern wissen, ob es jetzt funktioniert.",
+          "audioFilename": "audio/story/B1_003_S007.mp3",
+          "contentHash": "ab03f30f55cf4676"
+        },
+        {
+          "id": "B1_003_S008",
+          "speaker": "Frau Lorenzen",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 56,
+          "de": "Es würde mich nicht wundern, wenn es schon funktioniert.",
+          "audioFilename": "audio/story/B1_003_S008.mp3",
+          "contentHash": "45fb943aaa908408"
+        },
+        {
+          "id": "B1_003_S009",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 43,
+          "de": "Wow, es funktioniert! Danke für Ihre Hilfe!",
+          "audioFilename": "audio/story/B1_003_S009.mp3",
+          "contentHash": "4c769e429f5e1c60"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:b1-25-stellung-von-nicht",
+      "chapter": "b1-25-stellung-von-nicht",
+      "level": "B1",
+      "files": 7,
+      "chars": 223,
+      "speakers": [
+        "Sinje",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.95,
+      "features": [
+        "question",
+        "umlaut",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B1_025_S001",
+          "speaker": "Sinje",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 30,
+          "de": "Ich nehme das Kleingeld nicht.",
+          "audioFilename": "audio/story/B1_025_S001.mp3",
+          "contentHash": "f7c6317af496b7fb"
+        },
+        {
+          "id": "B1_025_S002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 12,
+          "de": "Warum nicht?",
+          "audioFilename": "audio/story/B1_025_S002.mp3",
+          "contentHash": "826276b9b5680c56"
+        },
+        {
+          "id": "B1_025_S003",
+          "speaker": "Sinje",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 27,
+          "de": "Weil das nicht richtig ist.",
+          "audioFilename": "audio/story/B1_025_S003.mp3",
+          "contentHash": "072b1252003a2346"
+        },
+        {
+          "id": "B1_025_S004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 28,
+          "de": "Gehen wir nicht zur Polizei?",
+          "audioFilename": "audio/story/B1_025_S004.mp3",
+          "contentHash": "e89fd26d2cc91e53"
+        },
+        {
+          "id": "B1_025_S005",
+          "speaker": "Sinje",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 48,
+          "de": "Doch, wir sollten den Geldbeutel nicht behalten.",
+          "audioFilename": "audio/story/B1_025_S005.mp3",
+          "contentHash": "c4142d48edfa7201"
+        },
+        {
+          "id": "B1_025_S006",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 34,
+          "de": "Da hast du recht. Gehen wir jetzt.",
+          "audioFilename": "audio/story/B1_025_S006.mp3",
+          "contentHash": "85aabd4f790133d4"
+        },
+        {
+          "id": "B1_025_S007",
+          "speaker": "Sinje",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 44,
+          "de": "Ich bin froh, dass wir nicht gezögert haben.",
+          "audioFilename": "audio/story/B1_025_S007.mp3",
+          "contentHash": "02a6af4569422cd8"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:b2-67-argumentieren-gegenargumente",
+      "chapter": "b2-67-argumentieren-gegenargumente",
+      "level": "B2",
+      "files": 6,
+      "chars": 302,
+      "speakers": [
+        "Timo",
+        "Katrin"
+      ],
+      "voices": [
+        "de-DE-Neural2-D",
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "compound",
+        "subordinate",
+        "question",
+        "eszett"
+      ],
+      "lines": [
+        {
+          "id": "B2_067_S001",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 88,
+          "de": "Ich möchte ein Gegenargument nennen. Viele Mitarbeiter fühlen sich einsam im Homeoffice.",
+          "audioFilename": "audio/story/B2_067_S001.mp3",
+          "contentHash": "abf937928956831a"
+        },
+        {
+          "id": "B2_067_S002",
+          "speaker": "Katrin",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 47,
+          "de": "Ich räume ein, dass das ein echtes Problem ist.",
+          "audioFilename": "audio/story/B2_067_S002.mp3",
+          "contentHash": "0da872771192458d"
+        },
+        {
+          "id": "B2_067_S003",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 41,
+          "de": "Wie würdest du meinen Einwand widerlegen?",
+          "audioFilename": "audio/story/B2_067_S003.mp3",
+          "contentHash": "b7e914697595f4dd"
+        },
+        {
+          "id": "B2_067_S004",
+          "speaker": "Katrin",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 49,
+          "de": "Ich würde sagen, dass regelmäßige Treffen helfen.",
+          "audioFilename": "audio/story/B2_067_S004.mp3",
+          "contentHash": "128ebd0e67b18efe"
+        },
+        {
+          "id": "B2_067_S005",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 36,
+          "de": "Das ist ein ausgewogener Standpunkt.",
+          "audioFilename": "audio/story/B2_067_S005.mp3",
+          "contentHash": "9bd85c88809adb47"
+        },
+        {
+          "id": "B2_067_S006",
+          "speaker": "Katrin",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 41,
+          "de": "Danke! Ich finde den Kompromiss sinnvoll.",
+          "audioFilename": "audio/story/B2_067_S006.mp3",
+          "contentHash": "b3bed3f9ee463058"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:b2-56-modalpartikeln-eben-halt",
+      "chapter": "b2-56-modalpartikeln-eben-halt",
+      "level": "B2",
+      "files": 6,
+      "chars": 190,
+      "speakers": [
+        "Nike",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B2_056_S001",
+          "speaker": "Nike",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 18,
+          "de": "Das war eben Pech.",
+          "audioFilename": "audio/story/B2_056_S001.mp3",
+          "contentHash": "7a7691cfd2e2a74d"
+        },
+        {
+          "id": "B2_056_S002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 44,
+          "de": "Ja, die Nationalmannschaft war halt stärker.",
+          "audioFilename": "audio/story/B2_056_S002.mp3",
+          "contentHash": "274902075da85640"
+        },
+        {
+          "id": "B2_056_S003",
+          "speaker": "Nike",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 23,
+          "de": "Ich war eben zu nervös.",
+          "audioFilename": "audio/story/B2_056_S003.mp3",
+          "contentHash": "e49b5a6046c7f1d4"
+        },
+        {
+          "id": "B2_056_S004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 28,
+          "de": "Das kann halt mal passieren.",
+          "audioFilename": "audio/story/B2_056_S004.mp3",
+          "contentHash": "42a4014afb044da1"
+        },
+        {
+          "id": "B2_056_S005",
+          "speaker": "Nike",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 39,
+          "de": "Danke! Nächstes Mal üben wir halt mehr.",
+          "audioFilename": "audio/story/B2_056_S005.mp3",
+          "contentHash": "a07b03b0648916a0"
+        },
+        {
+          "id": "B2_056_S006",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 38,
+          "de": "Genau! Das ist eben der richtige Plan.",
+          "audioFilename": "audio/story/B2_056_S006.mp3",
+          "contentHash": "7d6fdef4376a8e6d"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:c1-20-relativsaetze-erweitern-und-variieren",
+      "chapter": "c1-20-relativsaetze-erweitern-und-variieren",
+      "level": "C1",
+      "files": 6,
+      "chars": 332,
+      "speakers": [
+        "Runa",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut",
+        "compound",
+        "subordinate",
+        "question",
+        "eszett"
+      ],
+      "lines": [
+        {
+          "id": "C1_020_S001",
+          "speaker": "Runa",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 71,
+          "de": "Das Dokument, auf das sich der Bericht bezieht, müssen wir archivieren.",
+          "audioFilename": "audio/story/C1_020_S001.mp3",
+          "contentHash": "8128d013ecc0d131"
+        },
+        {
+          "id": "C1_020_S002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 59,
+          "de": "Die Spezifizierung, die wir brauchen, ist sehr detailliert.",
+          "audioFilename": "audio/story/C1_020_S002.mp3",
+          "contentHash": "158a1a764ca76441"
+        },
+        {
+          "id": "C1_020_S003",
+          "speaker": "Runa",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 54,
+          "de": "Wer das Dokument erhebt, sollte es sofort archivieren.",
+          "audioFilename": "audio/story/C1_020_S003.mp3",
+          "contentHash": "056c119543c62ae6"
+        },
+        {
+          "id": "C1_020_S004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 37,
+          "de": "Ist der Bericht aussagekräftig genug?",
+          "audioFilename": "audio/story/C1_020_S004.mp3",
+          "contentHash": "e3ae4bf2c49913bd"
+        },
+        {
+          "id": "C1_020_S005",
+          "speaker": "Runa",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 66,
+          "de": "Ja. Die Quelle, von der wir das Zitat haben, ist sehr zuverlässig.",
+          "audioFilename": "audio/story/C1_020_S005.mp3",
+          "contentHash": "8edc1135d066cabe"
+        },
+        {
+          "id": "C1_020_S006",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 45,
+          "de": "Gut. Dann können wir das Projekt abschließen.",
+          "audioFilename": "audio/story/C1_020_S006.mp3",
+          "contentHash": "08aaad2be82e3d48"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:c1-33-goethe-mini-5",
+      "chapter": "c1-33-goethe-mini-5",
+      "level": "C1",
+      "files": 6,
+      "chars": 223,
+      "speakers": [
+        "Doreen",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut",
+        "compound",
+        "question",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "C1_033_S001",
+          "speaker": "Doreen",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 44,
+          "de": "Ich muss den Vortrag noch einmal überprüfen.",
+          "audioFilename": "audio/story/C1_033_S001.mp3",
+          "contentHash": "3c785d8641cda071"
+        },
+        {
+          "id": "C1_033_S002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 34,
+          "de": "Das Thema klingt vielversprechend.",
+          "audioFilename": "audio/story/C1_033_S002.mp3",
+          "contentHash": "ee4fb3e6b71598f3"
+        },
+        {
+          "id": "C1_033_S003",
+          "speaker": "Doreen",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 30,
+          "de": "Danke! Hast du schon zugesagt?",
+          "audioFilename": "audio/story/C1_033_S003.mp3",
+          "contentHash": "796911b3ef5f5009"
+        },
+        {
+          "id": "C1_033_S004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 46,
+          "de": "Ja. Ich werde einen wichtigen Beitrag leisten.",
+          "audioFilename": "audio/story/C1_033_S004.mp3",
+          "contentHash": "66952c13f1f532a1"
+        },
+        {
+          "id": "C1_033_S005",
+          "speaker": "Doreen",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 47,
+          "de": "Möchtest du am Ende auf das Thema zurückkommen?",
+          "audioFilename": "audio/story/C1_033_S005.mp3",
+          "contentHash": "6ab98014cafcf089"
+        },
+        {
+          "id": "C1_033_S006",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 22,
+          "de": "Ja, das wäre sinnvoll.",
+          "audioFilename": "audio/story/C1_033_S006.mp3",
+          "contentHash": "603526cee34fa038"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:c2-01-zeitformen-der-verben",
+      "chapter": "c2-01-zeitformen-der-verben",
+      "level": "C2",
+      "files": 8,
+      "chars": 339,
+      "speakers": [
+        "Constanze",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut",
+        "eszett",
+        "numerals",
+        "question"
+      ],
+      "lines": [
+        {
+          "id": "C2_001_S001",
+          "speaker": "Constanze",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 37,
+          "de": "Hör mal, ich lese dir den Anfang vor.",
+          "audioFilename": "audio/story/C2_001_S001.mp3",
+          "contentHash": "1adb743e8e8b798b"
+        },
+        {
+          "id": "C2_001_S002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 5,
+          "de": "Gern.",
+          "audioFilename": "audio/story/C2_001_S002.mp3",
+          "contentHash": "cd6dfbdcea346d08"
+        },
+        {
+          "id": "C2_001_S003",
+          "speaker": "Constanze",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 77,
+          "de": "Es ist Sommer 1989. Die Stadt schweigt. Ein Mann geht durch die leere Straße.",
+          "audioFilename": "audio/story/C2_001_S003.mp3",
+          "contentHash": "3ed2f282d6e57867"
+        },
+        {
+          "id": "C2_001_S004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 33,
+          "de": "Warum erzählst du das im Präsens?",
+          "audioFilename": "audio/story/C2_001_S004.mp3",
+          "contentHash": "53e47d7d35e3c515"
+        },
+        {
+          "id": "C2_001_S005",
+          "speaker": "Constanze",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 53,
+          "de": "Das historische Präsens macht die Erzählung lebendig.",
+          "audioFilename": "audio/story/C2_001_S005.mp3",
+          "contentHash": "923c7a762a1abf4e"
+        },
+        {
+          "id": "C2_001_S006",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 36,
+          "de": "Aus welcher Perspektive erzählst du?",
+          "audioFilename": "audio/story/C2_001_S006.mp3",
+          "contentHash": "4e261eecdb1a3f10"
+        },
+        {
+          "id": "C2_001_S007",
+          "speaker": "Constanze",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 69,
+          "de": "Aus der Perspektive des Mannes. Nur so bleibt die Vermutung bestehen.",
+          "audioFilename": "audio/story/C2_001_S007.mp3",
+          "contentHash": "8a0507eb39b9c6f8"
+        },
+        {
+          "id": "C2_001_S008",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 29,
+          "de": "Das klingt wirklich lebendig.",
+          "audioFilename": "audio/story/C2_001_S008.mp3",
+          "contentHash": "7f1531642c878271"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "unitId": "STORY:c2-15-partizipien-als-adjektive",
+      "chapter": "c2-15-partizipien-als-adjektive",
+      "level": "C2",
+      "files": 6,
+      "chars": 255,
+      "speakers": [
+        "Sieglinde",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 1,
+      "features": [
+        "compound",
+        "umlaut",
+        "question"
+      ],
+      "lines": [
+        {
+          "id": "C2_015_S001",
+          "speaker": "Sieglinde",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 39,
+          "de": "Diese Arbeit ist wirklich bahnbrechend.",
+          "audioFilename": "audio/story/C2_015_S001.mp3",
+          "contentHash": "0813fe9f63f3be4a"
+        },
+        {
+          "id": "C2_015_S002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 34,
+          "de": "Der Ansatz ist sehr differenziert.",
+          "audioFilename": "audio/story/C2_015_S002.mp3",
+          "contentHash": "53f695bc30b63ea5"
+        },
+        {
+          "id": "C2_015_S003",
+          "speaker": "Sieglinde",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 56,
+          "de": "Die Ergebnisse sind richtungsweisend für das ganze Feld.",
+          "audioFilename": "audio/story/C2_015_S003.mp3",
+          "contentHash": "297b8cffe9197604"
+        },
+        {
+          "id": "C2_015_S004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 62,
+          "de": "Ich finde die Argumentation sehr überzeugend und gut fundiert.",
+          "audioFilename": "audio/story/C2_015_S004.mp3",
+          "contentHash": "d2227e745d26b0ec"
+        },
+        {
+          "id": "C2_015_S005",
+          "speaker": "Sieglinde",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 49,
+          "de": "Sollten wir diese wegweisende Arbeit auszeichnen?",
+          "audioFilename": "audio/story/C2_015_S005.mp3",
+          "contentHash": "925df4857f2d9caf"
+        },
+        {
+          "id": "C2_015_S006",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 15,
+          "de": "Auf jeden Fall.",
+          "audioFilename": "audio/story/C2_015_S006.mp3",
+          "contentHash": "687110561916399b"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:a1-42-welcher-dieser",
+      "chapter": "a1-42-welcher-dieser",
+      "level": "A1",
+      "files": 6,
+      "chars": 279,
+      "speakers": [
+        "Vreni",
+        "Jonas"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.85,
+      "features": [
+        "umlaut",
+        "question",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "A1_042_L001",
+          "speaker": "Vreni",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 43,
+          "de": "Welches Geschenk kaufst du für Nina, Jonas?",
+          "audioFilename": "audio/listening/A1_042_L001.mp3",
+          "contentHash": "6a387098735f1dec"
+        },
+        {
+          "id": "A1_042_L002",
+          "speaker": "Jonas",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 56,
+          "de": "Dieses Buch hier gefällt mir. Aber welche Farbe mag sie?",
+          "audioFilename": "audio/listening/A1_042_L002.mp3",
+          "contentHash": "c30e94c24e3b0b6e"
+        },
+        {
+          "id": "A1_042_L003",
+          "speaker": "Vreni",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 73,
+          "de": "Diese blaue Tasche ist schöner für sie. Und welchen Stift nimmst du dazu?",
+          "audioFilename": "audio/listening/A1_042_L003.mp3",
+          "contentHash": "b0fb4c57316798a2"
+        },
+        {
+          "id": "A1_042_L004",
+          "speaker": "Jonas",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 29,
+          "de": "Ich nehme diesen roten Stift.",
+          "audioFilename": "audio/listening/A1_042_L004.mp3",
+          "contentHash": "4bffef1639748e11"
+        },
+        {
+          "id": "A1_042_L005",
+          "speaker": "Vreni",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 44,
+          "de": "Mit welchem Geschenkpapier packst du es ein?",
+          "audioFilename": "audio/listening/A1_042_L005.mp3",
+          "contentHash": "64a0763f006b2b2e"
+        },
+        {
+          "id": "A1_042_L006",
+          "speaker": "Jonas",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 34,
+          "de": "Mit diesem hier, das ist glänzend.",
+          "audioFilename": "audio/listening/A1_042_L006.mp3",
+          "contentHash": "8cf7699f35c505d8"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:a1-9-verben",
+      "chapter": "a1-9-verben",
+      "level": "A1",
+      "files": 4,
+      "chars": 122,
+      "speakers": [
+        "Noah",
+        "Clara"
+      ],
+      "voices": [
+        "de-DE-Neural2-D",
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "question",
+        "umlaut"
+      ],
+      "lines": [
+        {
+          "id": "A1_009_L001",
+          "speaker": "Noah",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 27,
+          "de": "Was machst du heute, Clara?",
+          "audioFilename": "audio/listening/A1_009_L001.mp3",
+          "contentHash": "41c3568c86ab6510"
+        },
+        {
+          "id": "A1_009_L002",
+          "speaker": "Clara",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 41,
+          "de": "Heute schwimme ich und ich lese ein Buch.",
+          "audioFilename": "audio/listening/A1_009_L002.mp3",
+          "contentHash": "93eed9e8d1dbadfb"
+        },
+        {
+          "id": "A1_009_L003",
+          "speaker": "Noah",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 11,
+          "de": "Und morgen?",
+          "audioFilename": "audio/listening/A1_009_L003.mp3",
+          "contentHash": "1825162b6713a574"
+        },
+        {
+          "id": "A1_009_L004",
+          "speaker": "Clara",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 43,
+          "de": "Morgen putze ich und ich koche für Freunde.",
+          "audioFilename": "audio/listening/A1_009_L004.mp3",
+          "contentHash": "91c60f47111eb7ea"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:a2-10-goethe-mini-1",
+      "chapter": "a2-10-goethe-mini-1",
+      "level": "A2",
+      "files": 5,
+      "chars": 298,
+      "speakers": [
+        "Runa",
+        "Nick"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.85,
+      "features": [
+        "question",
+        "eszett",
+        "subordinate",
+        "compound"
+      ],
+      "lines": [
+        {
+          "id": "A2_010_L001",
+          "speaker": "Runa",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 38,
+          "de": "Nick, was hast du diese Woche gelernt?",
+          "audioFilename": "audio/listening/A2_010_L001.mp3",
+          "contentHash": "60707c992c48fd82"
+        },
+        {
+          "id": "A2_010_L002",
+          "speaker": "Nick",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 106,
+          "de": "Weil ich Familie hatte, konnte ich nicht viel lernen. Aber ich weiß, dass der Genitiv nicht so schwer ist.",
+          "audioFilename": "audio/listening/A2_010_L002.mp3",
+          "contentHash": "3b65e664cc511cff"
+        },
+        {
+          "id": "A2_010_L003",
+          "speaker": "Runa",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 74,
+          "de": "Meine Woche war interessanter als deine! Ich habe die beste Note bekommen.",
+          "audioFilename": "audio/listening/A2_010_L003.mp3",
+          "contentHash": "a0d75b5595485ec3"
+        },
+        {
+          "id": "A2_010_L004",
+          "speaker": "Nick",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 34,
+          "de": "Toll! Wessen Buch hast du benutzt?",
+          "audioFilename": "audio/listening/A2_010_L004.mp3",
+          "contentHash": "220f889dbd112c82"
+        },
+        {
+          "id": "A2_010_L005",
+          "speaker": "Runa",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 46,
+          "de": "Annas Buch. Es war hilfreicher als mein altes.",
+          "audioFilename": "audio/listening/A2_010_L005.mp3",
+          "contentHash": "4152c2add616413e"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:a2-14-wechselpraepositionen",
+      "chapter": "a2-14-wechselpraepositionen",
+      "level": "A2",
+      "files": 4,
+      "chars": 135,
+      "speakers": [
+        "Frieda",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.85,
+      "features": [
+        "question",
+        "umlaut"
+      ],
+      "lines": [
+        {
+          "id": "A2_014_L001",
+          "speaker": "Frieda",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 35,
+          "de": "Frieda, wohin stellst du die Lampe?",
+          "audioFilename": "audio/listening/A2_014_L001.mp3",
+          "contentHash": "9d1a883a8e3c6034"
+        },
+        {
+          "id": "A2_014_L002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 30,
+          "de": "Ich stelle sie neben das Bett.",
+          "audioFilename": "audio/listening/A2_014_L002.mp3",
+          "contentHash": "a2766e3b044b0734"
+        },
+        {
+          "id": "A2_014_L003",
+          "speaker": "Frieda",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 28,
+          "de": "Und wo hängt jetzt das Bild?",
+          "audioFilename": "audio/listening/A2_014_L003.mp3",
+          "contentHash": "e56f08ea3aff3413"
+        },
+        {
+          "id": "A2_014_L004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.85,
+          "chars": 42,
+          "de": "Es hängt schon an der Wand, über dem Sofa.",
+          "audioFilename": "audio/listening/A2_014_L004.mp3",
+          "contentHash": "b7d596742ba050ab"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:b1-12-adjektivdeklination-wiederholung",
+      "chapter": "b1-12-adjektivdeklination-wiederholung",
+      "level": "B1",
+      "files": 4,
+      "chars": 302,
+      "speakers": [
+        "Antje",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "eszett",
+        "question",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B1_012_L001",
+          "speaker": "Antje",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 88,
+          "de": "Timo, welches Hemd soll ich zum Vorstellungsgespräch anziehen? Das blaue oder das weiße?",
+          "audioFilename": "audio/listening/B1_012_L001.mp3",
+          "contentHash": "602a6486f63e9f1d"
+        },
+        {
+          "id": "B1_012_L002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 80,
+          "de": "Das weiße wirkt seriöser, finde ich. Mit einer dunklen Hose sieht das super aus.",
+          "audioFilename": "audio/listening/B1_012_L002.mp3",
+          "contentHash": "4e7911764f54b2e5"
+        },
+        {
+          "id": "B1_012_L003",
+          "speaker": "Antje",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 66,
+          "de": "Und die alte Tasche, die ich schon so lange habe — passt die noch?",
+          "audioFilename": "audio/listening/B1_012_L003.mp3",
+          "contentHash": "b2c49e658d41dc66"
+        },
+        {
+          "id": "B1_012_L004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 68,
+          "de": "Ehrlich? Nimm lieber die neue. Ein guter erster Eindruck zählt viel.",
+          "audioFilename": "audio/listening/B1_012_L004.mp3",
+          "contentHash": "8330325e759ce094"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:b1-28-passiv-praesens-praeteritum-perfekt",
+      "chapter": "b1-28-passiv-praesens-praeteritum-perfekt",
+      "level": "B1",
+      "files": 4,
+      "chars": 225,
+      "speakers": [
+        "Timo",
+        "Insa"
+      ],
+      "voices": [
+        "de-DE-Neural2-D",
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "question"
+      ],
+      "lines": [
+        {
+          "id": "B1_028_L001",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 62,
+          "de": "Insa, hast du gehört? Unser Dach wird nächsten Monat isoliert.",
+          "audioFilename": "audio/listening/B1_028_L001.mp3",
+          "contentHash": "b4a6a1603171db8c"
+        },
+        {
+          "id": "B1_028_L002",
+          "speaker": "Insa",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 58,
+          "de": "Endlich! Letztes Jahr wurde nur das Erdgeschoss renoviert.",
+          "audioFilename": "audio/listening/B1_028_L002.mp3",
+          "contentHash": "a638ccfe07635228"
+        },
+        {
+          "id": "B1_028_L003",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 55,
+          "de": "Stimmt, und die Fenster sind ja schon getauscht worden.",
+          "audioFilename": "audio/listening/B1_028_L003.mp3",
+          "contentHash": "ebeefd1c5fdd013b"
+        },
+        {
+          "id": "B1_028_L004",
+          "speaker": "Insa",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 50,
+          "de": "Dann wird es diesen Winter endlich wärmer bei uns!",
+          "audioFilename": "audio/listening/B1_028_L004.mp3",
+          "contentHash": "1514016f58f60c58"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:b2-25-verbindungsadverbien",
+      "chapter": "b2-25-verbindungsadverbien",
+      "level": "B2",
+      "files": 4,
+      "chars": 279,
+      "speakers": [
+        "Timo",
+        "Vera"
+      ],
+      "voices": [
+        "de-DE-Neural2-D",
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "question",
+        "compound",
+        "subordinate",
+        "umlaut",
+        "eszett"
+      ],
+      "lines": [
+        {
+          "id": "B2_025_L001",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 50,
+          "de": "Vera, die Spendenaktion war doch ein Erfolg, oder?",
+          "audioFilename": "audio/listening/B2_025_L001.mp3",
+          "contentHash": "b9ae39ffc7fc8bf3"
+        },
+        {
+          "id": "B2_025_L002",
+          "speaker": "Vera",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 113,
+          "de": "Ja, es wurden viele Lebensmittel gesammelt und anschließend verteilt. Trotzdem reicht es nicht für alle Familien.",
+          "audioFilename": "audio/listening/B2_025_L002.mp3",
+          "contentHash": "e6a1e3571833d363"
+        },
+        {
+          "id": "B2_025_L003",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 32,
+          "de": "Und was schlägst du deshalb vor?",
+          "audioFilename": "audio/listening/B2_025_L003.mp3",
+          "contentHash": "2d83d4f64defe9d5"
+        },
+        {
+          "id": "B2_025_L004",
+          "speaker": "Vera",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 84,
+          "de": "Deshalb planen wir eine zweite Aktion, denn der Bedarf ist folglich einfach zu groß.",
+          "audioFilename": "audio/listening/B2_025_L004.mp3",
+          "contentHash": "6a1b865772ba7e9a"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:b2-55-modalpartikeln-doch-ja",
+      "chapter": "b2-55-modalpartikeln-doch-ja",
+      "level": "B2",
+      "files": 4,
+      "chars": 187,
+      "speakers": [
+        "Ines",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut"
+      ],
+      "lines": [
+        {
+          "id": "B2_055_L001",
+          "speaker": "Ines",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 38,
+          "de": "Timo, ich finde meine Schlüssel nicht!",
+          "audioFilename": "audio/listening/B2_055_L001.mp3",
+          "contentHash": "0be31d6e0c1c6cc9"
+        },
+        {
+          "id": "B2_055_L002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 47,
+          "de": "Die liegen doch auf dem Tisch, hab ich gesehen.",
+          "audioFilename": "audio/listening/B2_055_L002.mp3",
+          "contentHash": "7bc2af21fffc7fa7"
+        },
+        {
+          "id": "B2_055_L003",
+          "speaker": "Ines",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 55,
+          "de": "Nein, da sind sie ja nicht, ich hab schon nachgeschaut!",
+          "audioFilename": "audio/listening/B2_055_L003.mp3",
+          "contentHash": "572a9f08573a3ef0"
+        },
+        {
+          "id": "B2_055_L004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 0.95,
+          "chars": 47,
+          "de": "Schau mal in deiner Jacke — ah, da sind sie ja!",
+          "audioFilename": "audio/listening/B2_055_L004.mp3",
+          "contentHash": "b6f4338805f211df"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:c1-26-passiv-und-passiversatzformen",
+      "chapter": "c1-26-passiv-und-passiversatzformen",
+      "level": "C1",
+      "files": 4,
+      "chars": 370,
+      "speakers": [
+        "Karla",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 1,
+      "features": [
+        "question",
+        "compound",
+        "eszett",
+        "subordinate",
+        "umlaut"
+      ],
+      "lines": [
+        {
+          "id": "C1_026_L001",
+          "speaker": "Karla",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 95,
+          "de": "Timo, im Methodenteil steht: man wertet die Daten aus. Sollten wir das nicht ins Passiv setzen?",
+          "audioFilename": "audio/listening/C1_026_L001.mp3",
+          "contentHash": "9e2c2beaad0dd6b3"
+        },
+        {
+          "id": "C1_026_L002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 87,
+          "de": "Auf jeden Fall — \"die Daten werden derzeit ausgewertet\" klingt viel wissenschaftlicher.",
+          "audioFilename": "audio/listening/C1_026_L002.mp3",
+          "contentHash": "e12c2995d1bff235"
+        },
+        {
+          "id": "C1_026_L003",
+          "speaker": "Karla",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 105,
+          "de": "Und beim Protokoll, das jeder befolgen muss, ließe sich das auch eleganter als \"einzuhalten\" formulieren.",
+          "audioFilename": "audio/listening/C1_026_L003.mp3",
+          "contentHash": "4b6ea158cf22b96d"
+        },
+        {
+          "id": "C1_026_L004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 83,
+          "de": "Stimmt, das Protokoll ist einzuhalten klingt tatsächlich passender für den Bericht.",
+          "audioFilename": "audio/listening/C1_026_L004.mp3",
+          "contentHash": "64485641a2ec175c"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:c1-25-partizipien-und-adjektive-als-nomen",
+      "chapter": "c1-25-partizipien-und-adjektive-als-nomen",
+      "level": "C1",
+      "files": 4,
+      "chars": 259,
+      "speakers": [
+        "Frauke",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut",
+        "question",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "C1_025_L001",
+          "speaker": "Frauke",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 56,
+          "de": "Timo, schnell — die Verletzte dort drüben braucht Hilfe!",
+          "audioFilename": "audio/listening/C1_025_L001.mp3",
+          "contentHash": "6380de715b7c4a2a"
+        },
+        {
+          "id": "C1_025_L002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 73,
+          "de": "Ich kümmere mich sofort um sie. Ist die Verantwortliche schon informiert?",
+          "audioFilename": "audio/listening/C1_025_L002.mp3",
+          "contentHash": "cbc21019ad85b822"
+        },
+        {
+          "id": "C1_025_L003",
+          "speaker": "Frauke",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 79,
+          "de": "Ja, die Zuständige ist bereits unterwegs und bringt den Erste-Hilfe-Kasten mit.",
+          "audioFilename": "audio/listening/C1_025_L003.mp3",
+          "contentHash": "d1b682e90403b7cc"
+        },
+        {
+          "id": "C1_025_L004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 51,
+          "de": "Gut, dann ist die Verletzte gleich in guten Händen.",
+          "audioFilename": "audio/listening/C1_025_L004.mp3",
+          "contentHash": "6a5217fe6b97c84b"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:c2-03-verben-und-ihre-ergaenzungen",
+      "chapter": "c2-03-verben-und-ihre-ergaenzungen",
+      "level": "C2",
+      "files": 4,
+      "chars": 309,
+      "speakers": [
+        "Timo",
+        "Almut"
+      ],
+      "voices": [
+        "de-DE-Neural2-D",
+        "de-DE-Neural2-F"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut",
+        "question",
+        "subordinate",
+        "numerals",
+        "compound"
+      ],
+      "lines": [
+        {
+          "id": "C2_003_L001",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 99,
+          "de": "Almut, dieser Satz hier: \"Die Studie bezieht sich auf ältere Ergebnisse.\" Reicht das als Ergänzung?",
+          "audioFilename": "audio/listening/C2_003_L001.mp3",
+          "contentHash": "f69c72d9b7b29985"
+        },
+        {
+          "id": "C2_003_L002",
+          "speaker": "Almut",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 83,
+          "de": "Fast — ich möchte präzisieren: \"bezieht sich explizit auf die Ergebnisse von 2015\".",
+          "audioFilename": "audio/listening/C2_003_L002.mp3",
+          "contentHash": "b4c8b39c58036a86"
+        },
+        {
+          "id": "C2_003_L003",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 50,
+          "de": "Und der nächste Satz? \"Die Methode beruht auf...\"?",
+          "audioFilename": "audio/listening/C2_003_L003.mp3",
+          "contentHash": "455f7a49da63b993"
+        },
+        {
+          "id": "C2_003_L004",
+          "speaker": "Almut",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 77,
+          "de": "\"…beruht auf einer Kombination aus qualitativen und quantitativen Verfahren.\"",
+          "audioFilename": "audio/listening/C2_003_L004.mp3",
+          "contentHash": "d0fd87cb4f9dd736"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "unitId": "LISTENING:c2-16-nominalisierte-adjektive-und-partizipien",
+      "chapter": "c2-16-nominalisierte-adjektive-und-partizipien",
+      "level": "C2",
+      "files": 4,
+      "chars": 252,
+      "speakers": [
+        "Ilse",
+        "Timo"
+      ],
+      "voices": [
+        "de-DE-Neural2-F",
+        "de-DE-Neural2-D"
+      ],
+      "rate": 1,
+      "features": [
+        "question",
+        "umlaut",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "C2_016_L001",
+          "speaker": "Ilse",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 53,
+          "de": "Timo, wie viele Betroffene warten schon vor dem Saal?",
+          "audioFilename": "audio/listening/C2_016_L001.mp3",
+          "contentHash": "bce03bcd5579c8ba"
+        },
+        {
+          "id": "C2_016_L002",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 68,
+          "de": "Etwa zwanzig, dazu einige Verletzte, die der Sanitätsdienst betreut.",
+          "audioFilename": "audio/listening/C2_016_L002.mp3",
+          "contentHash": "1ebec14fb88dbb5e"
+        },
+        {
+          "id": "C2_016_L003",
+          "speaker": "Ilse",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 62,
+          "de": "Und wer ist eigentlich für das Protokoll heute verantwortlich?",
+          "audioFilename": "audio/listening/C2_016_L003.mp3",
+          "contentHash": "1db7e4e75b949aee"
+        },
+        {
+          "id": "C2_016_L004",
+          "speaker": "Timo",
+          "gender": "male",
+          "voice": "de-DE-Neural2-D",
+          "rate": 1,
+          "chars": 69,
+          "de": "Die Zuständige vom Gericht, sie sitzt schon bereit am vorderen Tisch.",
+          "audioFilename": "audio/listening/C2_016_L004.mp3",
+          "contentHash": "90df1745df989cc8"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:a1-44-imperativ-modal2",
+      "chapter": "a1-44-imperativ-modal2",
+      "level": "A1",
+      "files": 1,
+      "chars": 281,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "question",
+        "compound",
+        "numerals"
+      ],
+      "lines": [
+        {
+          "id": "A1_044_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 281,
+          "de": "Max ist krank. Er hat Fieber und Kopfschmerzen. Die \\u00c4rztin untersucht ihn und sagt: \\u201eNehmen Sie das Medikament und bleiben Sie im Bett! \\u201c Max fragt: \\u201eDarf ich Kaffee trinken? \\u201c Die \\u00c4rztin sagt: \\u201eNein, du sollst Tee trinken! \\u201c Gute Besserung!",
+          "audioFilename": "audio/reading/A1_044_R001.mp3",
+          "contentHash": "6a2c6faa0005d2f8"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:a1-10-artikel",
+      "chapter": "a1-10-artikel",
+      "level": "A1",
+      "files": 1,
+      "chars": 97,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "umlaut"
+      ],
+      "lines": [
+        {
+          "id": "A1_010_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 97,
+          "de": "Der Tisch ist nicht leer. Da ist ein Buch, ein Stift und eine Karte. Die Sachen gehören zusammen.",
+          "audioFilename": "audio/reading/A1_010_R001.mp3",
+          "contentHash": "636b423e7a8b4eeb"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:a2-20-was-fuer-ein",
+      "chapter": "a2-20-was-fuer-ein",
+      "level": "A2",
+      "files": 1,
+      "chars": 922,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "umlaut",
+        "question",
+        "compound",
+        "quoted",
+        "numerals"
+      ],
+      "lines": [
+        {
+          "id": "A2_020_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 922,
+          "de": "Anna arbeitet diese Woche in der Bücherei. Viele Leute kommen und fragen: „Was für ein Buch empfehlen Sie ?\" oder „Was für eine Zeitschrift haben Sie über das Sprachenlernen ?\" Ein älterer Herr fragt: „Was für einen Kinderfilm zeigt die Bücherei am Samstag ?\" Anna erklärt: einen lustigen Film über Tiere, geeignet für Kinder ab fünf Jahren. Eine Frau fragt nach einem Kurs: „Was für einen Kursleiter hat der neue A2-Kurs ?\" Anna antwortet: einen pensionierten Lehrer aus Hamburg, sehr geduldig und erfahren. Am Nachmittag kommt ein Mann mit einer Frage über Beratung: „Was für eine Beratung bieten Sie für Senioren an ?\" Anna sagt: eine kostenlose Beratung, jeden Mittwoch, auch mit einem Gebärdendolmetscher für Gehörlose. Am Ende des Tages fragt Rohan: „Welches Buch hast du heute am meisten empfohlen ?\" — nicht „was für ein Buch \", sondern „welches Buch \" — denn er möchte genau wissen, welches eine Buch gemeint ist.",
+          "audioFilename": "audio/reading/A2_020_R001.mp3",
+          "contentHash": "ae850c0209252b87"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:a2-32-konjunktiv2-wuensche-hoeflichkeit",
+      "chapter": "a2-32-konjunktiv2-wuensche-hoeflichkeit",
+      "level": "A2",
+      "files": 1,
+      "chars": 230,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "umlaut",
+        "question"
+      ],
+      "lines": [
+        {
+          "id": "A2_032_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 230,
+          "de": "Anna hätte gern einen Kaffee, aber Max hätte lieber Tee. Rohan braucht einen Helfer für die Kajaktour, und er fragt höflich: \"Könnten Sie mir helfen ?\" Frau Weber würde ihm gern helfen. An Rohans Stelle würde Max auch mehr reisen.",
+          "audioFilename": "audio/reading/A2_032_R001.mp3",
+          "contentHash": "d8b4e4d4dd561422"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:b1-6-goethe-mini-1",
+      "chapter": "b1-6-goethe-mini-1",
+      "level": "B1",
+      "files": 1,
+      "chars": 520,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "eszett",
+        "question",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B1_006_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 520,
+          "de": "Liebe Kursteilnehmer, wegen der Probeprüfung am Freitag möchte ich Sie bitten, alle Unterlagen mitzubringen. Da viele Teilnehmer nervös sind, möchten wir versuchen, eine entspannte Atmosphäre zu schaffen. Obwohl die Probeprüfung anspruchsvoll ist, sind alle gut vorbereitet. Wären Sie so freundlich, pünktlich zu kommen? Wegen des engen Zeitplans beginnen wir pünktlich. Ich bin so gespannt auf eure Ergebnisse, dass ich kaum schlafen kann! Deshalb wünsche ich euch allen viel Erfolg. Mit freundlichen Grüßen, Frau Weber",
+          "audioFilename": "audio/reading/B1_006_R001.mp3",
+          "contentHash": "719200c6218943bd"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:b1-33-je-desto-umso",
+      "chapter": "b1-33-je-desto-umso",
+      "level": "B1",
+      "files": 1,
+      "chars": 246,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B1_033_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 246,
+          "de": "Je mehr Firmen ihre Produktion nach Asien verlegen, desto höher wird ihr Gewinn. Pro spricht der wachsende Wohlstand. Contra steht die Ansicht, dass kleine Firmen ums Überleben kämpfen müssen. Je kleiner eine Firma ist, umso schwieriger wird das.",
+          "audioFilename": "audio/reading/B1_033_R001.mp3",
+          "contentHash": "74548fb55ddf9e50"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:b2-65-wissenschaftssprache",
+      "chapter": "b2-65-wissenschaftssprache",
+      "level": "B2",
+      "files": 1,
+      "chars": 472,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "eszett",
+        "compound",
+        "subordinate",
+        "numerals"
+      ],
+      "lines": [
+        {
+          "id": "B2_065_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 472,
+          "de": "Die Analyse ergibt, dass der CO2-Ausstoß zugenommen hat. Im Mittelpunkt steht die Frage nach geeigneten Maßnahmen. Im Hinblick auf zukünftige Untersuchungen empfiehlt das Team weitere Messungen. Zusammenfassend lässt sich sagen, dass schnelles Handeln nötig ist. Weiterführende Studien sollen diese Hypothese im kommenden Jahr überprüfen. Es lässt sich feststellen, dass die Teilnahmequote gestiegen ist. Die Studie kommt zu dem Ergebnis, dass neue Programme wirksam sind.",
+          "audioFilename": "audio/reading/B2_065_R001.mp3",
+          "contentHash": "21f1833c2e67053f"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:b2-43-goethe-mini-3",
+      "chapter": "b2-43-goethe-mini-3",
+      "level": "B2",
+      "files": 1,
+      "chars": 188,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B2_043_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 188,
+          "de": "Die Professorin, deren Forschung, die international bekannt ist, ist interessiert an neuen Methoden. Wer sich für Nachhaltigkeit interessiert, dem gefällt unser Beitrag zu dieser Bewegung.",
+          "audioFilename": "audio/reading/B2_043_R001.mp3",
+          "contentHash": "c26350c485c896ad"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:c1-02-raum-und-zeit-praezise-ausdruecken",
+      "chapter": "c1-02-raum-und-zeit-praezise-ausdruecken",
+      "level": "C1",
+      "files": 1,
+      "chars": 745,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut",
+        "eszett",
+        "compound",
+        "numerals"
+      ],
+      "lines": [
+        {
+          "id": "C1_002_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 745,
+          "de": "Wer heute durch die Speicherstadt in Hamburg spaziert, sieht kaum noch etwas von ihrer ursprünglichen Bestimmung als Lagerhausviertel. Bis in die 1980er Jahre hinein lagerten hier Kaffee, Tee und Gewürze aus aller Welt. Im Laufe der neunziger Jahre jedoch verlor der Hafen zunehmend an Bedeutung für den klassischen Warenumschlag, und die Stadt stand vor der Frage, was mit den backsteinroten Speichern geschehen sollte. Zwischen 2003 und 2009 entstand daraufhin direkt angrenzend die HafenCity – eines der größten Stadtentwicklungsprojekte Europas. Heute, gut zwei Jahrzehnte später, leben und arbeiten dort mehrere Zehntausend Menschen, wo einst nur Kräne standen. Die Stadt liegt oberhalb des Flusses, am Rande eines ausgedehnten Waldgebiets.",
+          "audioFilename": "audio/reading/C1_002_R001.mp3",
+          "contentHash": "bd19e859f8e3fc61"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:c1-35-konzession-und-abwaegen",
+      "chapter": "c1-35-konzession-und-abwaegen",
+      "level": "C1",
+      "files": 1,
+      "chars": 241,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "C1_035_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 241,
+          "de": "Die Ergebnisse einer aktuellen Phase-III-Studie sind vielversprechend, müssen jedoch aufgrund der kurzen Beobachtungsdauer vorsichtig interpretiert werden. Kritiker räumen zwar ein, dass Fortschritte gemacht wurden. Dennoch bestehen Zweifel.",
+          "audioFilename": "audio/reading/C1_035_R001.mp3",
+          "contentHash": "a065aeadcef74578"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:c2-05-goethe-mini-1",
+      "chapter": "c2-05-goethe-mini-1",
+      "level": "C2",
+      "files": 1,
+      "chars": 271,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut",
+        "eszett",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "C2_005_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 271,
+          "de": "In diesen Tagen erinnert sich das Land an jene Nacht, in der die Mauer fällt. Historiker weisen seit Jahren darauf hin, dass diese Erinnerung ohne die Berichte der Zeitzeugen auf bloßer Vermutung beruhte. Wir führen eine Analyse durch, die auf umfangreichen Daten beruht.",
+          "audioFilename": "audio/reading/C2_005_R001.mp3",
+          "contentHash": "ea1d418d660ee2c4"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "unitId": "READING:c2-25-appositionen",
+      "chapter": "c2-25-appositionen",
+      "level": "C2",
+      "files": 1,
+      "chars": 81,
+      "speakers": [
+        "narrator"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut"
+      ],
+      "lines": [
+        {
+          "id": "C2_025_R001",
+          "speaker": "narrator",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 81,
+          "de": "Professorin Reuter, eine renommierte Linguistin, widerspricht der gängigen These.",
+          "audioFilename": "audio/reading/C2_025_R001.mp3",
+          "contentHash": "1fadb873e21091fd"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:a1-18-irregular",
+      "chapter": "a1-18-irregular",
+      "level": "A1",
+      "files": 2,
+      "chars": 71,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "umlaut",
+        "question"
+      ],
+      "lines": [
+        {
+          "id": "A1_018_Q001",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 41,
+          "de": "Dein Freund fragt: Wie fährst du zur Uni?",
+          "audioFilename": "audio/speaking/A1_018_Q001.mp3",
+          "contentHash": "e13bfdacd6671a05"
+        },
+        {
+          "id": "A1_018_P001",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 30,
+          "de": "Ich fahre mit dem Bus zur Uni.",
+          "audioFilename": "audio/speaking/A1_018_P001.mp3",
+          "contentHash": "367ff79d0d296262"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:a1-39-ortsangaben",
+      "chapter": "a1-39-ortsangaben",
+      "level": "A1",
+      "files": 2,
+      "chars": 107,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "question"
+      ],
+      "lines": [
+        {
+          "id": "A1_039_Q002",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 42,
+          "de": "Ein Tourist fragt: Wie komme ich zur Post?",
+          "audioFilename": "audio/speaking/A1_039_Q002.mp3",
+          "contentHash": "9caf26263de8a6bf"
+        },
+        {
+          "id": "A1_039_P002",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 65,
+          "de": "Gehen Sie geradeaus und dann rechts. Die Post ist neben der Bank.",
+          "audioFilename": "audio/speaking/A1_039_P002.mp3",
+          "contentHash": "0197dcbdcd58fa9d"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:a2-16-goethe-mini-2",
+      "chapter": "a2-16-goethe-mini-2",
+      "level": "A2",
+      "files": 2,
+      "chars": 141,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "umlaut",
+        "compound",
+        "numerals"
+      ],
+      "lines": [
+        {
+          "id": "A2_016_Q003",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 69,
+          "de": "Prüfung, Teil 3: Deine Partnerin fragt nach dem Vorstellungsgespräch.",
+          "audioFilename": "audio/speaking/A2_016_Q003.mp3",
+          "contentHash": "3f299d4a245230f7"
+        },
+        {
+          "id": "A2_016_P003",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 72,
+          "de": "Das Vorstellungsgespräch war gut. Nächste Woche habe ich einen Probetag.",
+          "audioFilename": "audio/speaking/A2_016_P003.mp3",
+          "contentHash": "3596bcd7c3ba495d"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:a2-31-w-fragen-praepositionen",
+      "chapter": "a2-31-w-fragen-praepositionen",
+      "level": "A2",
+      "files": 2,
+      "chars": 94,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.85,
+      "features": [
+        "umlaut",
+        "compound",
+        "question"
+      ],
+      "lines": [
+        {
+          "id": "A2_031_Q005",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 65,
+          "de": "Ein Kollege spricht von einer Geschäftsreise. Frag nach dem Ziel.",
+          "audioFilename": "audio/speaking/A2_031_Q005.mp3",
+          "contentHash": "c5d79c021434d13d"
+        },
+        {
+          "id": "A2_031_P005",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.85,
+          "chars": 29,
+          "de": "Wohin fährst du, und mit wem?",
+          "audioFilename": "audio/speaking/A2_031_P005.mp3",
+          "contentHash": "0b024e08c3f5f8c3"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:b1-16-futur1",
+      "chapter": "b1-16-futur1",
+      "level": "B1",
+      "files": 2,
+      "chars": 124,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "compound"
+      ],
+      "lines": [
+        {
+          "id": "B1_016_Q002",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 55,
+          "de": "Eine Kollegin fragt, was du nächstes Jahr machen wirst.",
+          "audioFilename": "audio/speaking/B1_016_Q002.mp3",
+          "contentHash": "5535fd41de45375b"
+        },
+        {
+          "id": "B1_016_P002",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 69,
+          "de": "Ich werde ein Praktikum machen und danach ein Musikinstrument lernen.",
+          "audioFilename": "audio/speaking/B1_016_P002.mp3",
+          "contentHash": "4c40003c91977e59"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:b1-31-adjektive-als-nomen",
+      "chapter": "b1-31-adjektive-als-nomen",
+      "level": "B1",
+      "files": 2,
+      "chars": 109,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B1_031_Q005",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 55,
+          "de": "Ein Kollege fragt, was für die Integration wichtig ist.",
+          "audioFilename": "audio/speaking/B1_031_Q005.mp3",
+          "contentHash": "03de3f6644aa011f"
+        },
+        {
+          "id": "B1_031_P005",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 54,
+          "de": "Wichtig ist, dass die Neuen eine Arbeitsstelle finden.",
+          "audioFilename": "audio/speaking/B1_031_P005.mp3",
+          "contentHash": "e148bda74bb11483"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:b2-14-goethe-mini-test-1",
+      "chapter": "b2-14-goethe-mini-test-1",
+      "level": "B2",
+      "files": 2,
+      "chars": 159,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "umlaut",
+        "compound",
+        "numerals",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B2_014_Q001",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 79,
+          "de": "Prüfung, Teil 1: Berichte, was der Abteilungsleiter in der Sitzung erklärt hat.",
+          "audioFilename": "audio/speaking/B2_014_Q001.mp3",
+          "contentHash": "1c821872d4a8686d"
+        },
+        {
+          "id": "B2_014_P001",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 80,
+          "de": "Er hat erklärt, dass das Projekt nicht rechtzeitig fertiggestellt werden konnte.",
+          "audioFilename": "audio/speaking/B2_014_P001.mp3",
+          "contentHash": "1e4a5a8a9c641d04"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:b2-49-passiv-in-wissenschaft-und-beruf",
+      "chapter": "b2-49-passiv-in-wissenschaft-und-beruf",
+      "level": "B2",
+      "files": 2,
+      "chars": 138,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 0.95,
+      "features": [
+        "compound",
+        "umlaut",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "B2_049_Q001",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 55,
+          "de": "Ein Kollege fragt, wie weit dein Praktikumsbericht ist.",
+          "audioFilename": "audio/speaking/B2_049_Q001.mp3",
+          "contentHash": "249221cac5d73c42"
+        },
+        {
+          "id": "B2_049_P001",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 0.95,
+          "chars": 83,
+          "de": "Das Experiment wird gerade durchgeführt, die Ergebnisse werden bald veröffentlicht.",
+          "audioFilename": "audio/speaking/B2_049_P001.mp3",
+          "contentHash": "8c0442d71dcb52f2"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:c1-09-adjektive-mit-praepositionalergaenzungen",
+      "chapter": "c1-09-adjektive-mit-praepositionalergaenzungen",
+      "level": "C1",
+      "files": 2,
+      "chars": 121,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 1,
+      "features": [
+        "subordinate",
+        "umlaut",
+        "compound"
+      ],
+      "lines": [
+        {
+          "id": "C1_009_Q002",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 51,
+          "de": "Deine Betreuerin fragt, ob du die Aufgabe schaffst.",
+          "audioFilename": "audio/speaking/C1_009_Q002.mp3",
+          "contentHash": "fca7d236a8381eb3"
+        },
+        {
+          "id": "C1_009_P002",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 70,
+          "de": "Ich bin überzeugt von der Methode und fähig zu selbstständiger Arbeit.",
+          "audioFilename": "audio/speaking/C1_009_P002.mp3",
+          "contentHash": "18ea28fc993678c3"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:c1-31-adversativangaben-und-gegensaetze-ausdruecken",
+      "chapter": "c1-31-adversativangaben-und-gegensaetze-ausdruecken",
+      "level": "C1",
+      "files": 2,
+      "chars": 114,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 1,
+      "features": [
+        "subordinate",
+        "umlaut",
+        "compound"
+      ],
+      "lines": [
+        {
+          "id": "C1_031_Q004",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 64,
+          "de": "Halte an deiner Position fest, obwohl die Kritik berechtigt ist.",
+          "audioFilename": "audio/speaking/C1_031_Q004.mp3",
+          "contentHash": "60f261f0aefd280a"
+        },
+        {
+          "id": "C1_031_P004",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 50,
+          "de": "Nichtsdestotrotz halte ich den Ausbau für richtig.",
+          "audioFilename": "audio/speaking/C1_031_P004.mp3",
+          "contentHash": "e1b0689c18cdb2af"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:c2-06-konjunktiv-ii",
+      "chapter": "c2-06-konjunktiv-ii",
+      "level": "C2",
+      "files": 2,
+      "chars": 131,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 1,
+      "features": [
+        "umlaut",
+        "compound",
+        "subordinate"
+      ],
+      "lines": [
+        {
+          "id": "C2_006_Q004",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 65,
+          "de": "Ein Gutachter fragt, wie du deine Annahme im Aufsatz formulierst.",
+          "audioFilename": "audio/speaking/C2_006_Q004.mp3",
+          "contentHash": "e693709b2b8c8ef8"
+        },
+        {
+          "id": "C2_006_P004",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 66,
+          "de": "Es wäre denkbar, dass der Zusammenhang institutionell bedingt ist.",
+          "audioFilename": "audio/speaking/C2_006_P004.mp3",
+          "contentHash": "d5489a717aefd72a"
+        }
+      ]
+    },
+    {
+      "type": "speaking",
+      "unitId": "SPEAKING:c2-21-wortbildung-der-adjektive",
+      "chapter": "c2-21-wortbildung-der-adjektive",
+      "level": "C2",
+      "files": 2,
+      "chars": 123,
+      "speakers": [
+        "task-prompt",
+        "model-answer"
+      ],
+      "voices": [
+        "de-DE-Neural2-F"
+      ],
+      "rate": 1,
+      "features": [
+        "subordinate",
+        "umlaut",
+        "compound"
+      ],
+      "lines": [
+        {
+          "id": "C2_021_Q003",
+          "speaker": "task-prompt",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 56,
+          "de": "Ein Investor fragt, ob die Firma am Markt bestehen kann.",
+          "audioFilename": "audio/speaking/C2_021_Q003.mp3",
+          "contentHash": "7f1e9abcbfc34492"
+        },
+        {
+          "id": "C2_021_P003",
+          "speaker": "model-answer",
+          "gender": "female",
+          "voice": "de-DE-Neural2-F",
+          "rate": 1,
+          "chars": 67,
+          "de": "Sie ist wettbewerbsfähig, zahlungsfähig und widerstandsfähig genug.",
+          "audioFilename": "audio/speaking/C2_021_P003.mp3",
+          "contentHash": "38e4eb654cfcc0fe"
+        }
+      ]
+    }
+  ]
+}

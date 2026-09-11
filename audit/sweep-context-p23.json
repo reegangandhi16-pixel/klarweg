@@ -1,0 +1,333 @@
+{
+ "phase": "23 — full-sweep context contamination investigation (diagnosis only)",
+ "generatedAt": "2026-08-14T05:04:13.263Z",
+ "harness": "chapter/qa-p23-context.html — investigation only. Measurement semantics and stability thresholds IDENTICAL to P14/P15/P21 (lexicon present + non-empty signature + 3 consecutive identical 180ms samples, 30s hard cap). Added read-only diagnostics only.",
+ "protocol": {
+  "fullSweeps": 2,
+  "run2FromFreshPageState": true,
+  "overlappingRuns": "none — one run() at a time, awaited",
+  "downloads": "none during either sweep",
+  "persistence": "per chapter, immediately, to localStorage kw_p23_run1 / kw_p23_run2",
+  "perChapterCaptured": [
+   "run",
+   "manifestPosition",
+   "chapter",
+   "occurrences",
+   "checked",
+   "findings",
+   "hcm",
+   "orderedSurfaceFingerprint",
+   "findingFingerprint",
+   "readyState",
+   "attempts",
+   "error/errorKind",
+   "elapsedMs",
+   "msToStable",
+   "msToFirstSig",
+   "gateSamples",
+   "sigChangedWhileSettling",
+   "secondReadingAfter900ms",
+   "DOM stats",
+   "lexiconEntries",
+   "hostHeapMB"
+  ]
+ },
+ "partOne_twoSweeps": {
+  "run1": {
+   "chapters": 259,
+   "measured": 259,
+   "occurrences": 156299,
+   "findings": 1405,
+   "clean": 71,
+   "errors": 0,
+   "nonStable": 0,
+   "rereadChanged": 0,
+   "hcm": 37,
+   "byCode": {
+    "ROLE_CONTRADICTS_BADGE": 1020,
+    "CASE_COLLISION_CAPITALISED": 236,
+    "PARADIGM_CLASS_MISMATCH": 76,
+    "HEADWORD_COLOUR_MISMATCH": 37,
+    "NO_POPUP": 22,
+    "CASE_COLLISION_LOWERCASE": 14,
+    "BLACK_FALLBACK": 0
+   }
+  },
+  "run2": {
+   "chapters": 259,
+   "measured": 259,
+   "occurrences": 156299,
+   "findings": 1405,
+   "clean": 71,
+   "errors": 0,
+   "nonStable": 0,
+   "rereadChanged": 0,
+   "hcm": 37,
+   "byCode": {
+    "ROLE_CONTRADICTS_BADGE": 1020,
+    "CASE_COLLISION_CAPITALISED": 236,
+    "PARADIGM_CLASS_MISMATCH": 76,
+    "HEADWORD_COLOUR_MISMATCH": 37,
+    "NO_POPUP": 22,
+    "CASE_COLLISION_LOWERCASE": 14,
+    "BLACK_FALLBACK": 0
+   }
+  },
+  "identical": true,
+  "divergentChapters": 0,
+  "comparisonBasis": "ordered-surface fingerprint AND finding fingerprint per chapter, not aggregate counts",
+  "verdict": "the two independent full sweeps are identical for all 259 chapters at fingerprint level. Sequential full-sweep context does NOT change measurement results."
+ },
+ "partTwo_anomalies": {
+  "targets": 3,
+  "allThreeMatchGoldenInBothSweeps": true,
+  "details": [
+   {
+    "chapter": "chapter-a1-11-negation.html",
+    "manifestPosition": 11,
+    "prev": "chapter-a1-10-artikel.html",
+    "next": "chapter-a1-12-akkusativ.html",
+    "golden": {
+     "occ": 412,
+     "find": 3,
+     "hcm": 1,
+     "fp": "8be4f29a",
+     "ffp": "831c658c"
+    },
+    "p15": {
+     "occ": 412,
+     "find": 3,
+     "hcm": 1
+    },
+    "p21": {
+     "occ": 407,
+     "find": 4,
+     "hcm": 2
+    },
+    "run1": {
+     "occ": 412,
+     "find": 3,
+     "hcm": 1,
+     "fp": "8be4f29a",
+     "matchesGolden": true,
+     "msToStable": 365
+    },
+    "run2": {
+     "occ": 412,
+     "find": 3,
+     "hcm": 1,
+     "fp": "8be4f29a",
+     "matchesGolden": true,
+     "msToStable": 364
+    },
+    "totalMeasurementsThisPhaseAndP22": 15,
+    "allAgree": true,
+    "firstDivergence": "none observable — the ordered-surface fingerprint is identical in every measurement, so there is no first differing surface to report. The P21 state (407 occurrences, extra HCM \"Nein\" at speaking/311) has never been reproduced."
+   },
+   {
+    "chapter": "chapter-a1-21-uhrzeit.html",
+    "manifestPosition": 21,
+    "prev": "chapter-a1-20-modalverben1.html",
+    "next": "chapter-a1-22-berufe.html",
+    "golden": {
+     "occ": 707,
+     "find": 17,
+     "hcm": 1,
+     "fp": "5ec20d8",
+     "ffp": "e5b6aa54"
+    },
+    "p15": {
+     "occ": 707,
+     "find": 17,
+     "hcm": 1
+    },
+    "p21": {
+     "occ": 703,
+     "find": 17,
+     "hcm": 1
+    },
+    "run1": {
+     "occ": 707,
+     "find": 17,
+     "hcm": 1,
+     "fp": "5ec20d8",
+     "matchesGolden": true,
+     "msToStable": 369
+    },
+    "run2": {
+     "occ": 707,
+     "find": 17,
+     "hcm": 1,
+     "fp": "5ec20d8",
+     "matchesGolden": true,
+     "msToStable": 364
+    },
+    "totalMeasurementsThisPhaseAndP22": 8,
+    "allAgree": true,
+    "firstDivergence": "none observable — identical fingerprint every time"
+   },
+   {
+    "chapter": "chapter-b2-07-verbergaenzungen-erkennen.html",
+    "manifestPosition": 124,
+    "prev": "chapter-b2-06-es-in-festen-ausdruecken.html",
+    "next": "chapter-b2-08-valenz-von-verben.html",
+    "golden": {
+     "occ": 655,
+     "find": 0,
+     "hcm": 0,
+     "fp": "2312e86a",
+     "ffp": "811c9dc5"
+    },
+    "p15": {
+     "occ": 655,
+     "find": 0,
+     "hcm": 0
+    },
+    "p21": {
+     "occ": 656,
+     "find": 0,
+     "hcm": 0
+    },
+    "run1": {
+     "occ": 655,
+     "find": 0,
+     "hcm": 0,
+     "fp": "2312e86a",
+     "matchesGolden": true,
+     "msToStable": 367
+    },
+    "run2": {
+     "occ": 655,
+     "find": 0,
+     "hcm": 0,
+     "fp": "2312e86a",
+     "matchesGolden": true,
+     "msToStable": 366
+    },
+    "totalMeasurementsThisPhaseAndP22": 7,
+    "allAgree": true,
+    "firstDivergence": "none observable — identical fingerprint every time"
+   }
+  ],
+  "note": "this is the decisive result: the three chapters that deviated in the P21 sweep reproduce their isolated golden values INSIDE a full sweep, twice. The P21 readings are not a property of sweep context."
+ },
+ "partThree_ordering": {
+  "configurations": [
+   {
+    "config": "1. target alone",
+    "result": "412 / 3 / 1  fp 8be4f29a  ffp 831c658c"
+   },
+   {
+    "config": "2. previous → target (a1-10 → a1-11)",
+    "result": "identical: 412 / 3 / 1  fp 8be4f29a  ffp 831c658c"
+   },
+   {
+    "config": "3. target → next (a1-11 → a1-12)",
+    "result": "identical"
+   },
+   {
+    "config": "4. previous → target → next",
+    "result": "identical"
+   },
+   {
+    "config": "5. target twice consecutively",
+    "result": "identical on both renders (msToStable 1500 then 1797 — timing moved, result did not)"
+   },
+   {
+    "config": "6. isolated target after fresh page reload",
+    "result": "identical (msToStable 1196)"
+   },
+   {
+    "config": "a1-21 previous → target → next",
+    "result": "707 / 17 / 1  fp 5ec20d8 — golden"
+   },
+   {
+    "config": "b2-07 previous → target → next",
+    "result": "655 / 0 / 0  fp 2312e86a — golden"
+   }
+  ],
+  "verdict": "no ordering dependency of any kind. Preceding chapter, following chapter, repeated rendering, cumulative state and fresh-reload isolation all produce byte-identical results."
+ },
+ "partFour_state": {
+  "lexiconEntries": "7802 in every chapter measured, in both sweeps and every mini-sweep — no growth, no drift",
+  "styleSheets": "5 per chapter (4 linked + inline), inlineStyleTags 2 — constant",
+  "iframes": "1 in the driver at all times (driver replaces, never accumulates)",
+  "wordPops": "1 per chapter — no popup accumulation",
+  "differencesObserved": "only host heap (15.4MB → 71.1MB across a sweep) and htmlChars varying by ±180 chars on repeated renders of the same chapter (a1-11: 115688 / 115677 / 115868). The htmlChars jitter is popup/aria scaffolding, not learner content: occurrence count, node count and both fingerprints are unchanged across those same renders.",
+  "storageMutated": "none — this phase only read"
+ },
+ "partFive_resource": {
+  "heapMB": {
+   "first": 15.4,
+   "last": 61.6,
+   "min": 15.4,
+   "max": 71.1
+  },
+  "largestDom": [
+   {
+    "chapter": "b1-7-praeteritum",
+    "nodes": 7638
+   },
+   {
+    "chapter": "b1-16-futur1",
+    "nodes": 6363
+   },
+   {
+    "chapter": "a1-22-berufe",
+    "nodes": 6255
+   }
+  ],
+  "anomalyPositions": "a1-11 at position 11 (after a1-10, 3861 nodes), a1-21 at 21 (after a1-20, 1543 nodes), b2-07 at 124 (after b2-06, 3122 nodes) — none follows an unusually heavy chapter",
+  "verdict": "heap grows monotonically across a sweep as expected, but results do not change with it. b2-07 at position 124 (heap ~38MB) measures identically to b2-07 rendered first in a 3-chapter mini-sweep. No causal link established; correlation not treated as cause."
+ },
+ "partSix_timing": {
+  "msToStable": {
+   "run1": {
+    "min": 363,
+    "max": 371,
+    "mean": 366,
+    "over1s": 0
+   },
+   "run2": {
+    "min": 361,
+    "max": 2399,
+    "mean": 379,
+    "over1s": 2
+   }
+  },
+  "sigChangedWhileSettling": {
+   "run1": 0,
+   "run2": 0,
+   "note": "in 518 chapter measurements the gate signature NEVER changed between first observation and settle — the page was already fully linkified when first sampled"
+  },
+  "secondReadingAfter900ms": {
+   "changedInAnyChapter": 0,
+   "of": 518,
+   "verdict": "the engine does NOT keep mutating after the driver records the chapter: a second full engine run 900ms later produced identical occurrence, finding and fingerprint values in all 518 measurements"
+  },
+  "gateNotLoosened": true,
+  "timingVariedResultDidNot": "msToStable ranged 361–2399ms across measurements of the SAME chapters (a1-11: 364, 365, 366, 1196, 1500, 1797) with byte-identical results — the gate is not the variable that produced the P21 readings"
+ },
+ "partSeven_classification": {
+  "A_deterministicSweepContextContamination": "DISPROVEN — two full sweeps are fingerprint-identical and both reproduce the isolated golden values",
+  "B_orderingDependentStateContamination": "DISPROVEN — six ordering configurations, all identical",
+  "C_timingStabilityGateProblem": "NOT SUPPORTED as the cause of the P21 readings — sigChangedWhileSettling 0/518, second-reading changed 0/518, and large msToStable swings produced no result change. NOT fully excluded as a mechanism available under conditions not reproduced here.",
+  "D_resourceMemoryPressure": "NOT SUPPORTED — heap varied 15–71MB with no result change",
+  "E_driverReentrancyLifecycle": "NOT TESTED HERE, and the most plausible remaining candidate. The P21 sweep is the one run where a concurrent run() loop is known to have existed in this project (phase 15 produced a 966-finding double-count on b2-68 from exactly that, and phase 21 required a mid-run localStorage key change plus a page navigation). This phase deliberately used one awaited run() and reproduced golden values every time.",
+  "F_unresolved": "the ORIGIN of the P21 readings themselves remains unresolved. They are now proven non-reproducible under clean single-run conditions; no mechanism has been positively demonstrated."
+ },
+ "conclusion": {
+  "sweepContextIsClean": true,
+  "p21SweepRowsForTheseThreeChapters": "not reproducible — treat as measurement error local to that run, not as data",
+  "correctPostFixCorpusState": "156,299 occurrences / 1,405 findings / 37 HCM / 71 clean — measured twice, identically, at fingerprint level",
+  "p21BaselineStatus": "its 1,406/38 total is 1 finding and 1 HCM too high; everything else in it is confirmed",
+  "fiveCssFixes": "confirmed again — HCM 110 → 37 across both sweeps, and the five corrected chapters are HCM-free in both"
+ },
+ "nextExperiment": "Test hypothesis E directly: instrument the driver to detect re-entrancy (a run-in-progress flag plus a per-chapter render-token check that discards a result if a second render started), then deliberately provoke it by starting two overlapping run() calls and confirm it produces exactly the P21 signature — occurrence undercount with an extra popup-dependent finding. If it does, the P21 anomaly is explained and the driver needs a re-entrancy guard, not the engine.",
+ "constraints": [
+  "no production code, chapter data, CSS, QA engine, lint rule, assertion or baseline modified",
+  "no P23 production baseline created",
+  "P14, P15 and P21 untouched",
+  "no caches cleared, no reloads between chapters, no stability thresholds changed"
+ ]
+}

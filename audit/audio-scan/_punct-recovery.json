@@ -1,0 +1,1019 @@
+{
+ "targetRows": 114,
+ "A": 106,
+ "C": 8,
+ "recovered": [
+  {
+   "assetId": "2244117cc6fc2d23",
+   "family": "reading",
+   "lookupText": "Letzte Woche bin ich nach München gefahren Die Reise war tatsächlich toll Ich hatte viel Zeit weil ich Urlaub hatte Am Samstag habe ich meine Tante getroffen Wir sind ins Café gegangen und ich habe Kuchen gegessen Es war ein schöner Urlaub",
+   "authored": "Letzte Woche bin ich nach München gefahren. Die Reise war tatsächlich toll. Ich hatte viel Zeit, weil ich Urlaub hatte. Am Samstag habe ich meine Tante getroffen. Wir sind ins Café gegangen und ich habe Kuchen gegessen. Es war ein schöner Urlaub!",
+   "chapter": "a1-35-goethe4",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "a364c579c78d238c",
+   "family": "reading",
+   "lookupText": "Anna kommt aus München Am Wochenende fährt sie mit dem Zug nach München Dort wohnt sie bei ihrer Tante Die Tante wohnt seit zehn Jahren dort Ihr Haus ist gegenüber dem Bahnhof Vom Bahnhof geht Anna zu Fuß",
+   "authored": "Anna kommt aus München. Am Wochenende fährt sie mit dem Zug nach München. Dort wohnt sie bei ihrer Tante. Die Tante wohnt seit zehn Jahren dort. Ihr Haus ist gegenüber dem Bahnhof. Vom Bahnhof geht Anna zu Fuß.",
+   "chapter": "a1-37-praep-dativ",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "453522d08981bf0b",
+   "family": "reading",
+   "lookupText": "Meine Wohnung ist hell und gemütlich Im Wohnzimmer steht ein Sofa an der Wand Über dem Sofa hängt ein Bild Die Lampe steht neben dem Sofa Heute stelle ich eine Pflanze auf den Tisch Dann gehe ich in die Küche und koche Kaffee",
+   "authored": "Meine Wohnung ist hell und gemütlich. Im Wohnzimmer steht ein Sofa an der Wand. Über dem Sofa hängt ein Bild. Die Lampe steht neben dem Sofa. Heute stelle ich eine Pflanze auf den Tisch. Dann gehe ich in die Küche und koche Kaffee.",
+   "chapter": "a1-38-wechselpraep",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "15e2cff8a49a9fe0",
+   "family": "reading",
+   "lookupText": "Rohan ist am Bahnhof Er geht geradeaus und dann links An der Ecke ist eine Apotheke Das Café ist direkt rechts neben der Apotheke Es ist in der Nähe nur zwei Minuten zu Fuß Rohan geht ins Café und sieht Anna am Fenster",
+   "authored": "Rohan ist am Bahnhof. Er geht geradeaus und dann links. An der Ecke ist eine Apotheke. Das Café ist direkt rechts, neben der Apotheke. Es ist in der Nähe, nur zwei Minuten zu Fuß. Rohan geht ins Café und sieht Anna am Fenster.",
+   "chapter": "a1-39-ortsangaben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "ea4fea1e97ef96f3",
+   "family": "reading",
+   "lookupText": "Anna braucht ein Kleid Das blaue Kleid gefällt ihr sehr Sie probiert es an Es passt ihr und es steht ihr gut Rohan hilft ihr und sie dankt ihm Nur Max sagt \"Mir tun die Füße weh",
+   "authored": "Anna braucht ein Kleid. Das blaue Kleid gefällt ihr sehr. Sie probiert es an. Es passt ihr und es steht ihr gut. Rohan hilft ihr und sie dankt ihm. Nur Max sagt: \"Mir tun die Füße weh \"",
+   "chapter": "a1-40-verben-dativ",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "8bc3cc0b8fb6c869",
+   "family": "reading",
+   "lookupText": "Rohan fehlt ein Stift Anna hilft ihm und gibt ihm einen Stift Rohan dankt ihr Dann erklärt er ihr die Aufgabe Frau Weber hilft ihnen allen Das gefällt ihnen sehr",
+   "authored": "Rohan fehlt ein Stift. Anna hilft ihm und gibt ihm einen Stift. Rohan dankt ihr. Dann erklärt er ihr die Aufgabe. Frau Weber hilft ihnen allen. Das gefällt ihnen sehr!",
+   "chapter": "a1-41-dativpronomen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "ab13b46032bfabb3",
+   "family": "reading",
+   "lookupText": "Anna und Rohan gehen ins Kaufhaus Rohan fragt \"Welches Buch kaufe ich Anna sagt \"Dieses Buch ist gut Dann fragt er nach einem Bleistift Anna sagt \"Nimm diesen Bleistift An der Kasse fragt die Verkäuferin \"Mit welcher Karte zahlen Sie",
+   "authored": "Anna und Rohan gehen ins Kaufhaus. Rohan fragt: \"Welches Buch kaufe ich? \" Anna sagt: \"Dieses Buch ist gut. \" Dann fragt er nach einem Bleistift. Anna sagt: \"Nimm diesen Bleistift! \" An der Kasse fragt die Verkäuferin: \"Mit welcher Karte zahlen Sie? \"",
+   "chapter": "a1-42-welcher-dieser",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "b5a9f1186fb3aa38",
+   "family": "reading",
+   "lookupText": "Max ist krank Er hat Fieber und Kopfschmerzen Die Ärztin untersucht ihn und sagt „Nehmen Sie das Medikament und bleiben Sie im Bett Max fragt „Darf ich Kaffee trinken Die Ärztin sagt „Nein du sollst Tee trinken Gute Besserung",
+   "authored": "Max ist krank. Er hat Fieber und Kopfschmerzen. Die Ärztin untersucht ihn und sagt: „Nehmen Sie das Medikament und bleiben Sie im Bett! \" Max fragt: „Darf ich Kaffee trinken? \" Die Ärztin sagt: „Nein, du sollst Tee trinken! \" Gute Besserung!",
+   "chapter": "a1-44-imperativ-modal2",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "97c6205dd8b8cc1f",
+   "family": "reading",
+   "lookupText": "Max ist krank und ruft Anna an Er sagt „Hier ist Max Was ist die Hausaufgabe Aber das Netz ist schlecht Max fragt „Wie bitte Kannst du das wiederholen Anna wiederholt langsam Seite zwölf Dann schickt sie ihm eine Sprachnachricht",
+   "authored": "Max ist krank und ruft Anna an. Er sagt: „Hier ist Max. Was ist die Hausaufgabe? \" Aber das Netz ist schlecht. Max fragt: „Wie bitte? Kannst du das wiederholen? \" Anna wiederholt langsam: Seite zwölf. Dann schickt sie ihm eine Sprachnachricht.",
+   "chapter": "a1-45-telefonieren",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "2cdfd8a28b9428f3",
+   "family": "reading",
+   "lookupText": "Seit zwei Monaten lerne ich Deutsch Am Montag beginnt die Prüfungswoche Ab morgen lerne ich jeden Abend Vokabeln Vor der Prüfung bin ich nervös aber bald bereit Die Prüfung dauert drei Stunden Nach der Prüfung feiern wir im Sommer",
+   "authored": "Seit zwei Monaten lerne ich Deutsch. Am Montag beginnt die Prüfungswoche. Ab morgen lerne ich jeden Abend Vokabeln. Vor der Prüfung bin ich nervös, aber bald bereit. Die Prüfung dauert drei Stunden. Nach der Prüfung feiern wir im Sommer.",
+   "chapter": "a1-46-zeitangaben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "c3fc32d4bd78c59a",
+   "family": "reading",
+   "lookupText": "Die Prüfung hat vier Teile Beim Lesen lies zuerst die Überschrift Ein langes Wort ist oft ein Kompositum zerlege es in Teile Beim Hören hör einfach weiter Und beim Schreiben mach zuerst Stichpunkte Dann machst du weniger Fehler",
+   "authored": "Die Prüfung hat vier Teile. Beim Lesen lies zuerst die Überschrift. Ein langes Wort ist oft ein Kompositum: zerlege es in Teile. Beim Hören hör einfach weiter. Und beim Schreiben mach zuerst Stichpunkte. Dann machst du weniger Fehler!",
+   "chapter": "a1-47-goethe-final",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "b50c5a7560ef1903",
+   "family": "reading",
+   "lookupText": "Meine Familie wohnt in Indien Meine Schwester Anita macht eine Ausbildung in Biologie Anitas Note ist sehr gut Mein Onkel Raj ist geschieden Er renoviert jetzt Omas Haus denn Oma hat die Grippe Dafür hilft die ganze Familie gemeinsam Am folgenden Tag kommt der Arzt Rajs Auto steht vor Omas Haus Spätestens im August ist alles fertig",
+   "authored": "Meine Familie wohnt in Indien. Meine Schwester Anita macht eine Ausbildung in Biologie. Anitas Note ist sehr gut. Mein Onkel Raj ist geschieden. Er renoviert jetzt Omas Haus, denn Oma hat die Grippe. Dafür hilft die ganze Familie gemeinsam. Am folgenden Tag kommt der Arzt. Rajs Auto steht vor Omas Haus. Spätestens im August ist alles fertig.",
+   "chapter": "a2-1-genitiv",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "25dd9a2818f4c414",
+   "family": "reading",
+   "lookupText": "Liebe Anna wie geht es dir Am Samstag feiere ich in meiner neuen Wohnung Sie ist größer als die alte Ich wollte dich unbedingt einladen weil du meine beste Freundin bist Bring bitte Rohans Gitarre mit wenn du kannst Ich glaube dass es ein schöner Abend wird Viele Grüße Lena",
+   "authored": "Liebe Anna, wie geht es dir? Am Samstag feiere ich in meiner neuen Wohnung. Sie ist größer als die alte. Ich wollte dich unbedingt einladen, weil du meine beste Freundin bist. Bring bitte Rohans Gitarre mit, wenn du kannst. Ich glaube, dass es ein schöner Abend wird. Viele Grüße, Lena",
+   "chapter": "a2-10-goethe-mini-1",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "76c2123e65588fee",
+   "family": "reading",
+   "lookupText": "Liebe Freunde wenn Max am Freitag wegfährt machen wir eine Feier Wenn du Zeit hast komm bitte in den Club Der Eintritt ist kostenlos wenn du diese Karte zeigst Anna backt Gebäck und wenn es dunkel wird gibt es ein Feuerwerk Wir sind aufgeregt und ein bisschen traurig weil Max so weit wegfährt Tausend Dank und alles Gute",
+   "authored": "Liebe Freunde, wenn Max am Freitag wegfährt, machen wir eine Feier. Wenn du Zeit hast, komm bitte in den Club. Der Eintritt ist kostenlos, wenn du diese Karte zeigst. Anna backt Gebäck, und wenn es dunkel wird, gibt es ein Feuerwerk. Wir sind aufgeregt und ein bisschen traurig, weil Max so weit wegfährt. Tausend Dank und alles Gute!",
+   "chapter": "a2-11-wenn",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "be03d77aafc5118c",
+   "family": "reading",
+   "lookupText": "Heute stehe ich früh auf Zuerst dusche ich mich und wäsche mir die Haare Dann ziehe ich mich an und rasiere mich Ich muss mich beeilen weil der Verkehr schlimm ist Ich treffe mich mit Anna vor der Kirche Ich freue mich und fühle mich nur ein bisschen nervös Gestern habe ich mich gut vorbereitet und gut erholt Wenn ich mich setze beruhige ich mich",
+   "authored": "Heute stehe ich früh auf. Zuerst dusche ich mich und wäsche mir die Haare. Dann ziehe ich mich an und rasiere mich. Ich muss mich beeilen, weil der Verkehr schlimm ist. Ich treffe mich mit Anna vor der Kirche. Ich freue mich und fühle mich nur ein bisschen nervös. Gestern habe ich mich gut vorbereitet und gut erholt. Wenn ich mich setze, beruhige ich mich.",
+   "chapter": "a2-12-reflexive-verben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "45f7cc88d80fd4ce",
+   "family": "reading",
+   "lookupText": "Seit einem Jahr wohne ich bei meiner Familie in Berlin Am Morgen komme ich aus dem Haus und fahre mit dem Bus zur Arbeit Die Fahrerin ist immer freundlich Mein Büro ist gegenüber dem Bahnhof neben dem Amt Nach der Arbeit komme ich oft spät vom Büro zurück Manchmal gehe ich mit den Kollegen zur Clubdisco Ich komme aus Indien aber Berlin ist seit diesem Jahr mein Zuhause",
+   "authored": "Seit einem Jahr wohne ich bei meiner Familie in Berlin. Am Morgen komme ich aus dem Haus und fahre mit dem Bus zur Arbeit. Die Fahrerin ist immer freundlich. Mein Büro ist gegenüber dem Bahnhof, neben dem Amt. Nach der Arbeit komme ich oft spät vom Büro zurück. Manchmal gehe ich mit den Kollegen zur Clubdisco. Ich komme aus Indien, aber Berlin ist seit diesem Jahr mein Zuhause.",
+   "chapter": "a2-13-praepositionen-dativ",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "777f0ebec292855e",
+   "family": "reading",
+   "lookupText": "Mein Zimmer in der Großstadt ist klein aber modern An der Wand hängt ein Bild von einer Malerin Auf dem Regal liegen meine Unterlagen Heute stelle ich den Tisch an das Fenster und lege den Laptop darauf Mein E-Bike stelle ich hinter das Haus weil es dort sicher ist Abends sitze ich gern vor dem Fenster und genieße die Ruhe",
+   "authored": "Mein Zimmer in der Großstadt ist klein, aber modern. An der Wand hängt ein Bild von einer Malerin. Auf dem Regal liegen meine Unterlagen. Heute stelle ich den Tisch an das Fenster und lege den Laptop darauf. Mein E-Bike stelle ich hinter das Haus, weil es dort sicher ist. Abends sitze ich gern vor dem Fenster und genieße die Ruhe.",
+   "chapter": "a2-14-wechselpraepositionen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "f73f0e3f542bf06b",
+   "family": "reading",
+   "lookupText": "Heute räume ich meinen Schreibtisch auf Die Unterlagen liegen überall auf dem Tisch Ich lege sie in eine Mappe Die Lampe steht hinten aber ich stelle sie an das Fenster Mein Schlüssel steckt in der Tasche und ich stecke die Karte in die Tasche Das Bild hängt schon an der Wand aber die Karte hänge ich daneben Zum Schluss setze ich mich auf den Stuhl und sitze zufrieden am Tisch",
+   "authored": "Heute räume ich meinen Schreibtisch auf. Die Unterlagen liegen überall auf dem Tisch. Ich lege sie in eine Mappe. Die Lampe steht hinten, aber ich stelle sie an das Fenster. Mein Schlüssel steckt in der Tasche, und ich stecke die Karte in die Tasche. Das Bild hängt schon an der Wand, aber die Karte hänge ich daneben. Zum Schluss setze ich mich auf den Stuhl und sitze zufrieden am Tisch.",
+   "chapter": "a2-15-positions-richtungsverben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "93e378488a575295",
+   "family": "reading",
+   "lookupText": "Die Stadt sucht eine Fahrerin für die Seilbahn in der Innenstadt Wenn Sie Interesse haben füllen Sie das Formular aus und geben Sie es bei der Behörde ab Der Probetag ist wichtiger als das Gespräch Man muss sich gut vorbereiten weil die Bezahlung gut ist Die Arbeit ist umweltfreundlich und sinnvoll",
+   "authored": "Die Stadt sucht eine Fahrerin für die Seilbahn in der Innenstadt. Wenn Sie Interesse haben, füllen Sie das Formular aus und geben Sie es bei der Behörde ab. Der Probetag ist wichtiger als das Gespräch. Man muss sich gut vorbereiten, weil die Bezahlung gut ist. Die Arbeit ist umweltfreundlich und sinnvoll.",
+   "chapter": "a2-16-goethe-mini-2",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "46daa2d69acf287c",
+   "family": "reading",
+   "lookupText": "Nächstes Jahr werde ich nach München umziehen Ich interessiere mich für die Kunst deshalb werde ich ein Kunststudium beginnen Ich glaube dass es am Anfang schwierig wird weil die Hektik groß ist Aber vor allem werde ich ruhiger je mehr ich übe Meine Freunde sagen ich werde bestimmt eine gute Künstlerin",
+   "authored": "Nächstes Jahr werde ich nach München umziehen. Ich interessiere mich für die Kunst, deshalb werde ich ein Kunststudium beginnen. Ich glaube, dass es am Anfang schwierig wird, weil die Hektik groß ist. Aber vor allem werde ich ruhiger, je mehr ich übe. Meine Freunde sagen, ich werde bestimmt eine gute Künstlerin.",
+   "chapter": "a2-17-werden",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "bff3e1820233e511",
+   "family": "reading",
+   "lookupText": "Mein Lieblingscafé liegt mitten in der Altstadt Von der Sprachschule gehen Sie geradeaus bis zur Kreuzung Biegen Sie links ab und gehen Sie am Rathaus vorbei Das Café ist gegenüber von dem Rathaus auf der rechten Seite Es ist genauso gemütlich wie zu Hause",
+   "authored": "Mein Lieblingscafé liegt mitten in der Altstadt. Von der Sprachschule gehen Sie geradeaus bis zur Kreuzung. Biegen Sie links ab und gehen Sie am Rathaus vorbei. Das Café ist gegenüber von dem Rathaus, auf der rechten Seite. Es ist genauso gemütlich wie zu Hause.",
+   "chapter": "a2-18-ortsangaben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "ae82c38c1aea8726",
+   "family": "reading",
+   "lookupText": "Mein Aufenthalt in Potsdam war kurz aber schön Am Samstag bin ich von Berlin nach Potsdam gefahren Mein Opa ist dort geboren Ich habe das Stadtzentrum besucht und ein Fahrrad gemietet Am Nachmittag habe ich an einer Stadttour teilgenommen Der Guide hat langsam gesprochen und ich habe gut zugehört Am Abend habe ich den Tag beendet und mich müde aber glücklich gefühlt",
+   "authored": "Mein Aufenthalt in Potsdam war kurz, aber schön. Am Samstag bin ich von Berlin nach Potsdam gefahren. Mein Opa ist dort geboren. Ich habe das Stadtzentrum besucht und ein Fahrrad gemietet. Am Nachmittag habe ich an einer Stadttour teilgenommen. Der Guide hat langsam gesprochen, und ich habe gut zugehört. Am Abend habe ich den Tag beendet und mich müde, aber glücklich gefühlt.",
+   "chapter": "a2-2-perfekt-review",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "af2162b0d9de012d",
+   "family": "reading",
+   "lookupText": "Heute denke ich an meine Schulzeit Ich war eine gute Schülerin Mein Lieblings-Fach war die Kunsterziehung aber ich mochte auch Medizin Meine Schule war eine Hauptschule und dieser Schultyp hat mir gut gefallen Wir hatten keine Schuluniform Am Nachmittag war ich in einer Theatergruppe Das war eine schöne Lernerfahrung Nach dem Schulabschluss will ich unabhängig sein",
+   "authored": "Heute denke ich an meine Schulzeit. Ich war eine gute Schülerin. Mein Lieblings-Fach war die Kunsterziehung, aber ich mochte auch Medizin. Meine Schule war eine Hauptschule und dieser Schultyp hat mir gut gefallen. Wir hatten keine Schuluniform. Am Nachmittag war ich in einer Theatergruppe. Das war eine schöne Lernerfahrung. Nach dem Schulabschluss will ich unabhängig sein.",
+   "chapter": "a2-3-artikel-review",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "b851933cd2b5f951",
+   "family": "reading",
+   "lookupText": "Ich heiße Max Ich lerne Deutsch weil ich Grafiker werden will In der Schulzeit mochte ich Informatik weil die Projekte so spannend waren Mein Englischlehrer hat mir geholfen weil mein Deutsch damals schlecht war Heute besuche ich einen Deutschkurs und sammle Erfahrung weil das Handwerk viel Vorbereitung braucht Ehrlich ich freue mich auf die Zukunft weil ich jetzt ein Ziel habe",
+   "authored": "Ich heiße Max. Ich lerne Deutsch, weil ich Grafiker werden will. In der Schulzeit mochte ich Informatik, weil die Projekte so spannend waren. Mein Englischlehrer hat mir geholfen, weil mein Deutsch damals schlecht war. Heute besuche ich einen Deutschkurs und sammle Erfahrung, weil das Handwerk viel Vorbereitung braucht. Ehrlich, ich freue mich auf die Zukunft, weil ich jetzt ein Ziel habe.",
+   "chapter": "a2-4-weil",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "732d4f75f73bb959",
+   "family": "reading",
+   "lookupText": "Ich heiße Max und ich blogge über Filme Ich glaube dass ein guter Krimi bis Mitternacht spannend bleibt Actionfilme finde ich oft furchtbar laut weil die Autos nur rasen Zuletzt habe ich einen Stummfilm gesehen Ich war überrascht dass die Hauptperson so intelligent war Auf meinem Kanal schreibe ich zu jedem Film eine kurze Filmbeschreibung Ich hoffe dass ich bald mehr Feedback bekomme",
+   "authored": "Ich heiße Max und ich blogge über Filme. Ich glaube, dass ein guter Krimi bis Mitternacht spannend bleibt. Actionfilme finde ich oft furchtbar laut, weil die Autos nur rasen. Zuletzt habe ich einen Stummfilm gesehen. Ich war überrascht, dass die Hauptperson so intelligent war. Auf meinem Kanal schreibe ich zu jedem Film eine kurze Filmbeschreibung. Ich hoffe, dass ich bald mehr Feedback bekomme.",
+   "chapter": "a2-5-dass",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "751ae4978b86c3f0",
+   "family": "reading",
+   "lookupText": "Als Kind lebte ich mit meiner Oma zusammen Sie war Hausfrau und konnte wunderbar kochen Jeden Sonntag gab es Apfelkuchen Ich durfte immer helfen aber ich musste danach aufräumen Abends durfte ich nicht lange wach bleiben weil ich im Dunkeln Angst hatte Ich wollte lieber lesen denn ich mochte Bücher sehr Sonntags sollte ich auf die kleinen Kinder Acht geben Diese Zeit war romantisch und schön",
+   "authored": "Als Kind lebte ich mit meiner Oma zusammen. Sie war Hausfrau und konnte wunderbar kochen. Jeden Sonntag gab es Apfelkuchen. Ich durfte immer helfen, aber ich musste danach aufräumen. Abends durfte ich nicht lange wach bleiben, weil ich im Dunkeln Angst hatte. Ich wollte lieber lesen, denn ich mochte Bücher sehr. Sonntags sollte ich auf die kleinen Kinder Acht geben. Diese Zeit war romantisch und schön.",
+   "chapter": "a2-6-modalverben-praeteritum",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "a1f7fcabfb8288e1",
+   "family": "reading",
+   "lookupText": "Ich wohne mit meiner Familie am Stadtrand Neben unserem Haus wohnt eine Mieterin Sie ist sehr modisch und hat ein Haustier Immer wenn ich komme bellt ihr Hund laut Der Lärm von ihrem Hund ist groß aber ich helfe der Mieterin gern Ich gebe ihrem Hund manchmal ein Spielzeug Auf dem Boden von ihrer Wohnung liegt oft ein nasses Kissen Meine Vermutung Das Leben mit ihren Tieren ist nie langweilig",
+   "authored": "Ich wohne mit meiner Familie am Stadtrand. Neben unserem Haus wohnt eine Mieterin. Sie ist sehr modisch und hat ein Haustier. Immer wenn ich komme, bellt ihr Hund laut. Der Lärm von ihrem Hund ist groß, aber ich helfe der Mieterin gern. Ich gebe ihrem Hund manchmal ein Spielzeug. Auf dem Boden von ihrer Wohnung liegt oft ein nasses Kissen. Meine Vermutung: Das Leben mit ihren Tieren ist nie langweilig!",
+   "chapter": "a2-7-possessivartikel-dativ",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "32dfb505bd5174cd",
+   "family": "reading",
+   "lookupText": "In meinem Blogbeitrag vergleiche ich zwei Schulen Meine alte Gesamtschule war größer als meine neue Berufsschule aber auch strenger Der Schulweg ist jetzt kürzer und das Schulsystem ist praktischer Physik finde ich schwieriger als Geschichte aber mein Talent ist die Informatik Am liebsten mag ich die Theater-AG denn dort ist der Humor am besten Meine schönste Erinnerung ist die Freundschaft mit meiner besten Freundin",
+   "authored": "In meinem Blogbeitrag vergleiche ich zwei Schulen. Meine alte Gesamtschule war größer als meine neue Berufsschule, aber auch strenger. Der Schulweg ist jetzt kürzer, und das Schulsystem ist praktischer. Physik finde ich schwieriger als Geschichte, aber mein Talent ist die Informatik. Am liebsten mag ich die Theater-AG, denn dort ist der Humor am besten. Meine schönste Erinnerung ist die Freundschaft mit meiner besten Freundin.",
+   "chapter": "a2-8-komparativ-superlativ",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "124adcbca093310b",
+   "family": "reading",
+   "lookupText": "Ich suche ein neues Zuhause und vergleiche zwei Wohnungen Die erste ist möbliert und größer als die zweite knapp sechzig Quadratmeter Aber die zweite ist genauso hell wie die erste und hat einen Keller Sie liegt außerhalb von Berlin am Ufer wo die Stille so schön ist wie Musik Die Miete ist niedriger als in der Stadt aber der Weg ist länger als jetzt Ehrlich Ruhe ist mir wertvoller als ein kurzer Weg Deshalb nehme ich die zweite",
+   "authored": "Ich suche ein neues Zuhause und vergleiche zwei Wohnungen. Die erste ist möbliert und größer als die zweite: knapp sechzig Quadratmeter. Aber die zweite ist genauso hell wie die erste und hat einen Keller. Sie liegt außerhalb von Berlin, am Ufer, wo die Stille so schön ist wie Musik. Die Miete ist niedriger als in der Stadt, aber der Weg ist länger als jetzt. Ehrlich: Ruhe ist mir wertvoller als ein kurzer Weg. Deshalb nehme ich die zweite.",
+   "chapter": "a2-9-vergleiche-als-wie",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "dee0e7bad8c62080",
+   "family": "reading",
+   "lookupText": "Anna hat den Bericht gestern nicht abschließen können Es liegt daran dass sie auf eine Antwort warten musste Trotzdem schließt sie die Arbeit heute ab",
+   "authored": "Anna hat den Bericht gestern nicht abschließen können. Es liegt daran, dass sie auf eine Antwort warten musste. Trotzdem schließt sie die Arbeit heute ab.",
+   "chapter": "b2-14-goethe-mini-test-1",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "3ba1cae7e59b0c58",
+   "family": "reading",
+   "lookupText": "Obgleich das Projekt kompliziert war schloss das Team es pünktlich ab Sie verbesserten die Effizienz indem sie digitale Prozesse nutzten Sie erledigten alles ohne zusätzliche Kosten zu verursachen",
+   "authored": "Obgleich das Projekt kompliziert war, schloss das Team es pünktlich ab. Sie verbesserten die Effizienz, indem sie digitale Prozesse nutzten. Sie erledigten alles, ohne zusätzliche Kosten zu verursachen.",
+   "chapter": "b2-26-goethe-mini-test-2",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "98cbcf29622b2874",
+   "family": "reading",
+   "lookupText": "In den letzten Jahren veränderte sich die Arbeitswelt stark Während viele Angestellte von zu Hause arbeiteten kehrten andere ins Büro zurück Nachdem die Pandemie abgeklungen war dürfte sich ein hybrides Modell durchgesetzt haben",
+   "authored": "In den letzten Jahren veränderte sich die Arbeitswelt stark. Während viele Angestellte von zu Hause arbeiteten, kehrten andere ins Büro zurück. Nachdem die Pandemie abgeklungen war, dürfte sich ein hybrides Modell durchgesetzt haben.",
+   "chapter": "b2-36-goethe-halbzeit-test",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "2af377b5c853c8e8",
+   "family": "reading",
+   "lookupText": "Die Professorin deren Forschung die international bekannt ist ist interessiert an neuen Methoden",
+   "authored": "Die Professorin, deren Forschung, die international bekannt ist, ist interessiert an neuen Methoden.",
+   "chapter": "b2-43-goethe-mini-3",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "3fc6c3b435818721",
+   "family": "reading",
+   "lookupText": "Der gestern veröffentlichte Forschungsbericht ist fertiggestellt Die Analyse lässt sich leicht wiederholen",
+   "authored": "Der gestern veröffentlichte Forschungsbericht ist fertiggestellt. Die Analyse lässt sich leicht wiederholen.",
+   "chapter": "b2-53-goethe-mini-4",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "b910bc5813bbec9a",
+   "family": "reading",
+   "lookupText": "Die Zeitung berichtet der Minister habe gestern mit dem Kanzler gesprochen Beide hätten sich nach Angaben des Ministeriums auf einen neuen Zeitplan geeinigt Der Vertrag werde voraussichtlich im Frühjahr unterzeichnet",
+   "authored": "Die Zeitung berichtet, der Minister habe gestern mit dem Kanzler gesprochen. Beide hätten sich nach Angaben des Ministeriums auf einen neuen Zeitplan geeinigt. Der Vertrag werde voraussichtlich im Frühjahr unterzeichnet.",
+   "chapter": "b2-61-indirekte-rede-zeitverschiebung",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "272e124262823223",
+   "family": "reading",
+   "lookupText": "Laut der Polizeimeisterin sei der Verdächtige festgenommen worden Der Sprecher betont das Konfliktpotential sei gering Die Ermittlungen dauerten nach Angaben der Behörde mehrere Monate Ein Gericht werde voraussichtlich kommende Woche über den Fall entscheiden Der Fall erregt somit bundesweite Aufmerksamkeit",
+   "authored": "Laut der Polizeimeisterin sei der Verdächtige festgenommen worden. Der Sprecher betont, das Konfliktpotential sei gering. Die Ermittlungen dauerten nach Angaben der Behörde mehrere Monate. Ein Gericht werde voraussichtlich kommende Woche über den Fall entscheiden. Der Fall erregt somit bundesweite Aufmerksamkeit.",
+   "chapter": "b2-62-konjunktiv-i-berichtende-sprache",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "7b2938c1fb36173a",
+   "family": "reading",
+   "lookupText": "Laut dem Ministerium habe sich die Lage verbessert Diese Entwicklung freut viele",
+   "authored": "Laut dem Ministerium habe sich die Lage verbessert. Diese Entwicklung freut viele.",
+   "chapter": "b2-63-goethe-mini-5",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "76fa7a45785df662",
+   "family": "reading",
+   "lookupText": "Aufgrund der Klimakrise plant die Regierung neue Maßnahmen Hinsichtlich der Kosten gibt es noch Diskussionen Trotz des Widerstands einiger Verbände hält die Koalition an ihrem Plan fest Innerhalb der nächsten fünf Jahre soll der Ausstoß deutlich sinken Angesichts des internationalen Drucks gilt ein Scheitern als ausgeschlossen",
+   "authored": "Aufgrund der Klimakrise plant die Regierung neue Maßnahmen. Hinsichtlich der Kosten gibt es noch Diskussionen. Trotz des Widerstands einiger Verbände hält die Koalition an ihrem Plan fest. Innerhalb der nächsten fünf Jahre soll der Ausstoß deutlich sinken. Angesichts des internationalen Drucks gilt ein Scheitern als ausgeschlossen.",
+   "chapter": "b2-64-praepositionen-mit-genitiv",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "ee805242f82c47f6",
+   "family": "reading",
+   "lookupText": "Die Analyse ergibt dass der CO2-Ausstoß zugenommen hat Im Mittelpunkt steht die Frage nach geeigneten Maßnahmen Im Hinblick auf zukünftige Untersuchungen empfiehlt das Team weitere Messungen Zusammenfassend lässt sich sagen dass schnelles Handeln nötig ist Weiterführende Studien sollen diese Hypothese im kommenden Jahr überprüfen",
+   "authored": "Die Analyse ergibt, dass der CO2-Ausstoß zugenommen hat. Im Mittelpunkt steht die Frage nach geeigneten Maßnahmen. Im Hinblick auf zukünftige Untersuchungen empfiehlt das Team weitere Messungen. Zusammenfassend lässt sich sagen, dass schnelles Handeln nötig ist. Weiterführende Studien sollen diese Hypothese im kommenden Jahr überprüfen.",
+   "chapter": "b2-65-wissenschaftssprache",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "6a547f8274eefed8",
+   "family": "reading",
+   "lookupText": "Viele Experten vertreten die Ansicht dass Homeoffice produktiver macht Allerdings fehlt oft der persönliche Austausch Zudem betont eine aktuelle Studie dass viele Angestellte flexiblere Arbeitszeiten bevorzugen Aus meiner Sicht überwiegen die Vorteile sofern Unternehmen klare Regeln schaffen",
+   "authored": "Viele Experten vertreten die Ansicht, dass Homeoffice produktiver macht. Allerdings fehlt oft der persönliche Austausch. Zudem betont eine aktuelle Studie, dass viele Angestellte flexiblere Arbeitszeiten bevorzugen. Aus meiner Sicht überwiegen die Vorteile, sofern Unternehmen klare Regeln schaffen.",
+   "chapter": "b2-66-argumentieren-standpunkte",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "9d03aac1f9f33cd7",
+   "family": "reading",
+   "lookupText": "Viele Experten argumentieren dass Social Media die Kommunikation erleichtert Dem stehen jedoch psychische Risiken gegenüber Ein weiteres Gegenargument betrifft die Verbreitung von Falschinformationen Trotzdem lässt sich nicht bestreiten dass viele Menschen dank Social Media in Kontakt bleiben Letztlich hängt viel vom verantwortungsvollen Umgang jedes Einzelnen ab",
+   "authored": "Viele Experten argumentieren, dass Social Media die Kommunikation erleichtert. Dem stehen jedoch psychische Risiken gegenüber. Ein weiteres Gegenargument betrifft die Verbreitung von Falschinformationen. Trotzdem lässt sich nicht bestreiten, dass viele Menschen dank Social Media in Kontakt bleiben. Letztlich hängt viel vom verantwortungsvollen Umgang jedes Einzelnen ab.",
+   "chapter": "b2-67-argumentieren-gegenargumente",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "1aa8bfbb0315aba7",
+   "family": "reading",
+   "lookupText": "Wollen wir über digitale Ethik sprechen Wie ist Ihre Meinung Eine Teilnehmerin meldet sich zu Wort Ich möchte kurz ergänzen dass Datenschutz dabei eine zentrale Rolle spielt Die Dozentin bedankt sich für den Beitrag und bittet um weitere Wortmeldungen Ein anderer Teilnehmer widerspricht höflich und schlägt einen weiteren Aspekt vor",
+   "authored": "Wollen wir über digitale Ethik sprechen? Wie ist Ihre Meinung? Eine Teilnehmerin meldet sich zu Wort: Ich möchte kurz ergänzen, dass Datenschutz dabei eine zentrale Rolle spielt. Die Dozentin bedankt sich für den Beitrag und bittet um weitere Wortmeldungen. Ein anderer Teilnehmer widerspricht höflich und schlägt einen weiteren Aspekt vor.",
+   "chapter": "b2-68-redemittel-fuer-diskussionen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "59beb50982bb9bab",
+   "family": "reading",
+   "lookupText": "Es wird zunehmend gefordert dass Kandidaten nicht nur Grammatik beherrschen sondern auch angemessen diskutieren können",
+   "authored": "Es wird zunehmend gefordert, dass Kandidaten nicht nur Grammatik beherrschen, sondern auch angemessen diskutieren können.",
+   "chapter": "b2-69-goethe-zertifikat-b2-final",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "1200559a2620ac97",
+   "family": "reading",
+   "lookupText": "Ein Team der Technischen Universität Dresden präsentiert heute die Ergebnisse einer außergewöhnlichen Studie zur Energiespeicherung Bereits seit fünf Jahren hatten die Forscher an dem neuen Material gearbeitet bevor der Durchbruch gelang Laut der Studienleiterin habe man zunächst mit deutlich geringeren Wirkungsgraden gerechnet Die Fachwelt reagiert überrascht Mehrere Institute wollen die Ergebnisse in den kommenden Monaten unabhängig überprüfen Bis dahin so vermuten Branchenkenner werden die Wissenschaftler ihre Methode bereits weiterentwickelt haben",
+   "authored": "Ein Team der Technischen Universität Dresden präsentiert heute die Ergebnisse einer außergewöhnlichen Studie zur Energiespeicherung. Bereits seit fünf Jahren hatten die Forscher an dem neuen Material gearbeitet, bevor der Durchbruch gelang. Laut der Studienleiterin habe man zunächst mit deutlich geringeren Wirkungsgraden gerechnet. Die Fachwelt reagiert überrascht: Mehrere Institute wollen die Ergebnisse in den kommenden Monaten unabhängig überprüfen. Bis dahin, so vermuten Branchenkenner, werden die Wissenschaftler ihre Methode bereits weiterentwickelt haben.",
+   "chapter": "c1-01-tempusgebrauch-stilistische-tempuswahl",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "7faaa6abcc593211",
+   "family": "reading",
+   "lookupText": "Wer heute durch die Speicherstadt in Hamburg spaziert sieht kaum noch etwas von ihrer ursprünglichen Bestimmung als Lagerhausviertel Bis in die 1980er Jahre hinein lagerten hier Kaffee Tee und Gewürze aus aller Welt Im Laufe der neunziger Jahre jedoch verlor der Hafen zunehmend an Bedeutung für den klassischen Warenumschlag und die Stadt stand vor der Frage was mit den backsteinroten Speichern geschehen sollte Zwischen 2003 und 2009 entstand daraufhin direkt angrenzend die HafenCity eines der größten Stadtentwicklungsprojekte Europas Heute gut zwei Jahrzehnte später leben und arbeiten dort mehrere Zehntausend Menschen wo einst nur Kräne standen",
+   "authored": "Wer heute durch die Speicherstadt in Hamburg spaziert, sieht kaum noch etwas von ihrer ursprünglichen Bestimmung als Lagerhausviertel. Bis in die 1980er Jahre hinein lagerten hier Kaffee, Tee und Gewürze aus aller Welt. Im Laufe der neunziger Jahre jedoch verlor der Hafen zunehmend an Bedeutung für den klassischen Warenumschlag, und die Stadt stand vor der Frage, was mit den backsteinroten Speichern geschehen sollte. Zwischen 2003 und 2009 entstand daraufhin direkt angrenzend die HafenCity – eines der größten Stadtentwicklungsprojekte Europas. Heute, gut zwei Jahrzehnte später, leben und arbeiten dort mehrere Zehntausend Menschen, wo einst nur Kräne standen.",
+   "chapter": "c1-02-raum-und-zeit-praezise-ausdruecken",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "857304a2facca6a8",
+   "family": "reading",
+   "lookupText": "Obwohl das Gericht in seiner Begründung betont dass die Meinungsfreiheit geschützt bleiben müsse sorgt das Urteil für erhebliche Kritik Kritiker bemängeln vor allem dass nicht ausreichend berücksichtigt worden sei wie stark die Betroffenen unter der Aussage gelitten hätten",
+   "authored": "Obwohl das Gericht in seiner Begründung betont, dass die Meinungsfreiheit geschützt bleiben müsse, sorgt das Urteil für erhebliche Kritik. Kritiker bemängeln vor allem, dass nicht ausreichend berücksichtigt worden sei, wie stark die Betroffenen unter der Aussage gelitten hätten.",
+   "chapter": "c1-03-nebensaetze-sicher-beherrschen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "47207825f77ba430",
+   "family": "reading",
+   "lookupText": "Die Zahlen bestätigen den Trend zur Solarenergie darüber hinaus zeigen sie ein stetig wachsendes Interesse an privaten Anlagen Allerdings bleiben die Netzkapazitäten ein ungelöstes Problem denn viele Regionen können den zusätzlichen Strom derzeit nicht aufnehmen",
+   "authored": "Die Zahlen bestätigen den Trend zur Solarenergie; darüber hinaus zeigen sie ein stetig wachsendes Interesse an privaten Anlagen. Allerdings bleiben die Netzkapazitäten ein ungelöstes Problem, denn viele Regionen können den zusätzlichen Strom derzeit nicht aufnehmen.",
+   "chapter": "c1-04-hauptsaetze-elegant-verbinden",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "88d70f59cdeb4755",
+   "family": "reading",
+   "lookupText": "Sowohl die Sprache als auch der Aufbau überzeugen in diesem Debütroman Zwar wirkt die Handlung zu Beginn etwas zäh aber spätestens ab der Mitte entfaltet sich ein Sog dem man sich kaum entziehen kann",
+   "authored": "Sowohl die Sprache als auch der Aufbau überzeugen in diesem Debütroman. Zwar wirkt die Handlung zu Beginn etwas zäh, aber spätestens ab der Mitte entfaltet sich ein Sog, dem man sich kaum entziehen kann.",
+   "chapter": "c1-05-zweiteilige-satzverbindungen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "2a52e2972685a743",
+   "family": "reading",
+   "lookupText": "Sowohl in Deutschland als auch in Österreich erlebt der Nachtzug derzeit eine erstaunliche Renaissance Nachdem viele Verbindungen in den 2000er Jahren nach und nach eingestellt worden waren kehrten sie im Laufe der vergangenen Jahre wieder auf die Schiene zurück Zwar sind die Fahrzeiten oft länger als bei einem Flug aber immer mehr Reisende nehmen das bewusst in Kauf",
+   "authored": "Sowohl in Deutschland als auch in Österreich erlebt der Nachtzug derzeit eine erstaunliche Renaissance. Nachdem viele Verbindungen in den 2000er Jahren nach und nach eingestellt worden waren, kehrten sie im Laufe der vergangenen Jahre wieder auf die Schiene zurück. Zwar sind die Fahrzeiten oft länger als bei einem Flug, aber immer mehr Reisende nehmen das bewusst in Kauf.",
+   "chapter": "c1-06-goethe-mini-1",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "d80ce1d6b0d2ff87",
+   "family": "reading",
+   "lookupText": "Aufgrund der stark gestiegenen Bewerberzahlen musste die Universität die Zulassungskriterien verschärfen Hinsichtlich der Wartezeit zeigt sich allerdings kaum eine Verbesserung Trotz zusätzlicher Studienplätze bleibt die Situation in gefragten Studiengängen angespannt Innerhalb der nächsten zwei Jahre sollen weitere Hörsäle entstehen",
+   "authored": "Aufgrund der stark gestiegenen Bewerberzahlen musste die Universität die Zulassungskriterien verschärfen. Hinsichtlich der Wartezeit zeigt sich allerdings kaum eine Verbesserung. Trotz zusätzlicher Studienplätze bleibt die Situation in gefragten Studiengängen angespannt. Innerhalb der nächsten zwei Jahre sollen weitere Hörsäle entstehen.",
+   "chapter": "c1-07-praepositionen-mit-genitiv",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "f9b820f073d0a168",
+   "family": "reading",
+   "lookupText": "Hinsichtlich der Methodik hat sich in der Altertumsforschung in den letzten Jahren grundlegend gewandelt Mithilfe hochauflösender 3D-Scans lassen sich heute selbst stark beschädigte Inschriften entziffern Angesichts dieser Möglichkeiten investieren immer mehr Institute in entsprechende Ausrüstung",
+   "authored": "Hinsichtlich der Methodik hat sich in der Altertumsforschung in den letzten Jahren grundlegend gewandelt. Mithilfe hochauflösender 3D-Scans lassen sich heute selbst stark beschädigte Inschriften entziffern. Angesichts dieser Möglichkeiten investieren immer mehr Institute in entsprechende Ausrüstung.",
+   "chapter": "c1-08-anspruchsvolle-praepositionen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "69edbb518d61a3c9",
+   "family": "reading",
+   "lookupText": "Das sechsköpfige Team ist besonders stolz auf seine internationale Zusammensetzung Die Forscherinnen und Forscher sind vor allem interessiert an Fragen der Klimaanpassung Ihre Doktorandin ist seit letztem Jahr zudem an einem EU-Projekt beteiligt das sich mit Küstenschutz befasst",
+   "authored": "Das sechsköpfige Team ist besonders stolz auf seine internationale Zusammensetzung. Die Forscherinnen und Forscher sind vor allem interessiert an Fragen der Klimaanpassung. Ihre Doktorandin ist seit letztem Jahr zudem an einem EU-Projekt beteiligt, das sich mit Küstenschutz befasst.",
+   "chapter": "c1-09-adjektive-mit-praepositionalergaenzungen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "6df3e8966a389e71",
+   "family": "reading",
+   "lookupText": "Das Interesse an nachhaltigkeitsbezogenen Studiengängen wächst seit Jahren stetig Der Einfluss auf klassische Fächer wie Betriebswirtschaft ist inzwischen deutlich spürbar Immer mehr Hochschulen zeigen Bereitschaft zur Reform ihrer traditionellen Curricula",
+   "authored": "Das Interesse an nachhaltigkeitsbezogenen Studiengängen wächst seit Jahren stetig. Der Einfluss auf klassische Fächer wie Betriebswirtschaft ist inzwischen deutlich spürbar. Immer mehr Hochschulen zeigen Bereitschaft zur Reform ihrer traditionellen Curricula.",
+   "chapter": "c1-10-nomen-mit-praepositionalobjekt",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "6a75e511810ebee9",
+   "family": "reading",
+   "lookupText": "Angesichts der vorliegenden Daten zeigt sich ein deutlicher Einfluss auf die Schlafqualität von Jugendlichen Wer mehr als drei Stunden täglich am Bildschirm verbringt schläft laut der Studie im Schnitt vierzig Minuten weniger",
+   "authored": "Angesichts der vorliegenden Daten zeigt sich ein deutlicher Einfluss auf die Schlafqualität von Jugendlichen. Wer mehr als drei Stunden täglich am Bildschirm verbringt, schläft laut der Studie im Schnitt vierzig Minuten weniger.",
+   "chapter": "c1-11-goethe-mini-2",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "b25d31e756339e7a",
+   "family": "reading",
+   "lookupText": "Die ungewöhnlichen Messwerte könnten auf eine bislang unbekannte Tierart hindeuten Ein Forschungsteam hatte die Signale bereits im letzten Sommer registriert Weitere Tauchgänge dürften diese Vermutung im kommenden Jahr bestätigen",
+   "authored": "Die ungewöhnlichen Messwerte könnten auf eine bislang unbekannte Tierart hindeuten. Ein Forschungsteam hatte die Signale bereits im letzten Sommer registriert. Weitere Tauchgänge dürften diese Vermutung im kommenden Jahr bestätigen.",
+   "chapter": "c1-12-modalverben-praezise-verwenden",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "ab6406bbcde7c4c2",
+   "family": "reading",
+   "lookupText": "Die Ausgrabungen könnten darauf hinweisen dass die Siedlung plötzlich verlassen wurde Auffällig viele Gefäße lagen noch vollständig gefüllt an Ort und Stelle Man muss daher davon ausgehen dass ein akutes Ereignis die Bewohner zur sofortigen Flucht zwang",
+   "authored": "Die Ausgrabungen könnten darauf hinweisen, dass die Siedlung plötzlich verlassen wurde. Auffällig viele Gefäße lagen noch vollständig gefüllt an Ort und Stelle. Man muss daher davon ausgehen, dass ein akutes Ereignis die Bewohner zur sofortigen Flucht zwang.",
+   "chapter": "c1-13-vermutungen-mit-modalverben-ausdruecken",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "aa83292b4c588254",
+   "family": "reading",
+   "lookupText": "Es wäre denkbar dass saisonale Schwankungen eine größere Rolle spielen als bislang angenommen Es ließe sich vermuten dass die Stichprobe schlicht zu klein war Die Autoren räumen diese Einschränkung selbst ein",
+   "authored": "Es wäre denkbar, dass saisonale Schwankungen eine größere Rolle spielen, als bislang angenommen. Es ließe sich vermuten, dass die Stichprobe schlicht zu klein war. Die Autoren räumen diese Einschränkung selbst ein.",
+   "chapter": "c1-14-konjunktiv-ii-fuer-irreales-und-hypothesen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "8b9a2ba917066dfc",
+   "family": "reading",
+   "lookupText": "Der Minister erklärte die Reform werde im nächsten Jahr umgesetzt Die Opposition entgegnete die geplanten Änderungen seien unzureichend durchdacht Beobachter vermuten derweil der eigentliche Streit werde erst im Bundestag sichtbar",
+   "authored": "Der Minister erklärte, die Reform werde im nächsten Jahr umgesetzt. Die Opposition entgegnete, die geplanten Änderungen seien unzureichend durchdacht. Beobachter vermuten derweil, der eigentliche Streit werde erst im Bundestag sichtbar.",
+   "chapter": "c1-15-konjunktiv-i-und-indirekte-rede",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "5aa01c2936b9908d",
+   "family": "reading",
+   "lookupText": "Es wird empfohlen die Arbeit spätestens zwei Wochen vor der Frist einzureichen Es ist zudem darauf zu achten dass sämtliche Anlagen digital signiert werden Verspätete Abgaben können nur mit ärztlichem Attest akzeptiert werden",
+   "authored": "Es wird empfohlen, die Arbeit spätestens zwei Wochen vor der Frist einzureichen. Es ist zudem darauf zu achten, dass sämtliche Anlagen digital signiert werden. Verspätete Abgaben können nur mit ärztlichem Attest akzeptiert werden.",
+   "chapter": "c1-16-aufforderung-empfehlung-und-handlungssteuerung",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "0fcc6b5c3054dc97",
+   "family": "reading",
+   "lookupText": "Es wäre denkbar dass jede Erinnerung beim Abrufen leicht verändert wird Neurowissenschaftler sprechen dabei von einer Art Neukonstruktion Es ließe sich vermuten dass genau dieser Mechanismus auch falsche Erinnerungen entstehen lässt",
+   "authored": "Es wäre denkbar, dass jede Erinnerung beim Abrufen leicht verändert wird. Neurowissenschaftler sprechen dabei von einer Art Neukonstruktion. Es ließe sich vermuten, dass genau dieser Mechanismus auch falsche Erinnerungen entstehen lässt.",
+   "chapter": "c1-17-goethe-halbzeit-test",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "efa2a6f488f025e2",
+   "family": "reading",
+   "lookupText": "Ein neuartiger Dämmstoff aus recyceltem Altpapier sorgt derzeit für Aufsehen Die ungewöhnliche Kombination aus niedrigen Produktionskosten und hervorragenden Dämmwerten überzeugt selbst skeptische Bauingenieure Ein großes deutsches Bauunternehmen plant bereits den flächendeckenden Einsatz in seinen nächsten Projekten",
+   "authored": "Ein neuartiger Dämmstoff aus recyceltem Altpapier sorgt derzeit für Aufsehen. Die ungewöhnliche Kombination aus niedrigen Produktionskosten und hervorragenden Dämmwerten überzeugt selbst skeptische Bauingenieure. Ein großes deutsches Bauunternehmen plant bereits den flächendeckenden Einsatz in seinen nächsten Projekten.",
+   "chapter": "c1-18-adjektivdeklination-sicher-anwenden",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "f6c5315671922635",
+   "family": "reading",
+   "lookupText": "Von den zehn getesteten Modellen überzeugt ein Kompaktwagen am meisten Er lädt zwar nicht so schnell wie der teuerste Konkurrent punktet dafür aber mit einem deutlich niedrigeren Preis Je größer die Batterie desto höher fällt erwartungsgemäß der Anschaffungspreis aus",
+   "authored": "Von den zehn getesteten Modellen überzeugt ein Kompaktwagen am meisten. Er lädt zwar nicht so schnell wie der teuerste Konkurrent, punktet dafür aber mit einem deutlich niedrigeren Preis. Je größer die Batterie, desto höher fällt erwartungsgemäß der Anschaffungspreis aus.",
+   "chapter": "c1-19-steigerung-und-sprachliche-abstufung",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "06fe847fd2dd9ac6",
+   "family": "reading",
+   "lookupText": "Die im Frühjahr durchgeführten Wasseranalysen zeigen eine überraschend hohe Mikroplastik-Konzentration weshalb die kantonale Umweltbehörde nun strengere Grenzwerte fordert Besonders betroffen sind jene Uferabschnitte an denen sich Wassersportler regelmäßig aufhalten",
+   "authored": "Die im Frühjahr durchgeführten Wasseranalysen zeigen eine überraschend hohe Mikroplastik-Konzentration, weshalb die kantonale Umweltbehörde nun strengere Grenzwerte fordert. Besonders betroffen sind jene Uferabschnitte, an denen sich Wassersportler regelmäßig aufhalten.",
+   "chapter": "c1-20-relativsaetze-erweitern-und-variieren",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "8e03b681a40d9fc7",
+   "family": "reading",
+   "lookupText": "Die auf historischen Grundmauern beruhenden Neubauten überzeugen sowohl Denkmalschützer als auch Anwohner Die im Zuge der Sanierung geborgenen Fundstücke sollen künftig im Erdgeschoss ausgestellt werden",
+   "authored": "Die auf historischen Grundmauern beruhenden Neubauten überzeugen sowohl Denkmalschützer als auch Anwohner. Die im Zuge der Sanierung geborgenen Fundstücke sollen künftig im Erdgeschoss ausgestellt werden.",
+   "chapter": "c1-21-partizipialattribute-verstehen-und-nutzen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "48d9cd99a722d792",
+   "family": "reading",
+   "lookupText": "Die auf internationalen Lieferketten basierende Produktion spürt die Folgen des Klimawandels inzwischen unmittelbar Ein auf mehrere Kontinente verteiltes Zuliefernetzwerk gilt dabei als besonders anfällig",
+   "authored": "Die auf internationalen Lieferketten basierende Produktion spürt die Folgen des Klimawandels inzwischen unmittelbar. Ein auf mehrere Kontinente verteiltes Zuliefernetzwerk gilt dabei als besonders anfällig.",
+   "chapter": "c1-22-komplexe-attribute-und-nominalgruppen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "d9de92a433da6d9d",
+   "family": "reading",
+   "lookupText": "Die im letzten Jahr durchgeführten Untersuchungen sind erheblich aussagekräftiger als frühere Studien Wird Legasthenie bereits im Vorschulalter erkannt lässt sich der schulische Rückstand oft deutlich verringern",
+   "authored": "Die im letzten Jahr durchgeführten Untersuchungen sind erheblich aussagekräftiger als frühere Studien. Wird Legasthenie bereits im Vorschulalter erkannt, lässt sich der schulische Rückstand oft deutlich verringern.",
+   "chapter": "c1-23-goethe-mini-3",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "fdf5db4eaa811554",
+   "family": "reading",
+   "lookupText": "Die Auswertung Ihres Antrags ist abgeschlossen Die Bewilligung erfolgt unter Berücksichtigung Ihres Haushaltseinkommens sowie der Anzahl der im Haushalt lebenden Personen Die Auszahlung erfolgt nach Eingang der unterschriebenen Bestätigung",
+   "authored": "Die Auswertung Ihres Antrags ist abgeschlossen. Die Bewilligung erfolgt unter Berücksichtigung Ihres Haushaltseinkommens sowie der Anzahl der im Haushalt lebenden Personen. Die Auszahlung erfolgt nach Eingang der unterschriebenen Bestätigung.",
+   "chapter": "c1-24-nominalisierung-im-formellen-stil",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "646e507653fd7d7d",
+   "family": "reading",
+   "lookupText": "Die Forschenden dieser Langzeitstudie arbeiten seit drei Jahren eng mit den Befragten zusammen Regelmäßige Gespräche sollen sicherstellen dass sich die Teilnehmenden ernst genommen fühlen",
+   "authored": "Die Forschenden dieser Langzeitstudie arbeiten seit drei Jahren eng mit den Befragten zusammen. Regelmäßige Gespräche sollen sicherstellen, dass sich die Teilnehmenden ernst genommen fühlen.",
+   "chapter": "c1-25-partizipien-und-adjektive-als-nomen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "cb2694622322933b",
+   "family": "reading",
+   "lookupText": "Die erhobenen Daten aus über zweitausend Schlaftagebüchern lassen sich eindeutig interpretieren Die Ergebnisse sind inzwischen vollständig ausgewertet und bestätigen frühere Annahmen zur Bedeutung regelmäßiger Schlafenszeiten",
+   "authored": "Die erhobenen Daten aus über zweitausend Schlaftagebüchern lassen sich eindeutig interpretieren. Die Ergebnisse sind inzwischen vollständig ausgewertet und bestätigen frühere Annahmen zur Bedeutung regelmäßiger Schlafenszeiten.",
+   "chapter": "c1-26-passiv-und-passiversatzformen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "9da53ec135d2572a",
+   "family": "reading",
+   "lookupText": "Die Forscher haben eine umfassende Untersuchung zu städtischen Hitzeinseln durchgeführt Die Ergebnisse stehen in engem Zusammenhang mit der Versiegelung innerstädtischer Flächen",
+   "authored": "Die Forscher haben eine umfassende Untersuchung zu städtischen Hitzeinseln durchgeführt. Die Ergebnisse stehen in engem Zusammenhang mit der Versiegelung innerstädtischer Flächen.",
+   "chapter": "c1-27-funktionsverbgefuege-im-akademischen-deutsch",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "2bff2b2d597f5803",
+   "family": "reading",
+   "lookupText": "Die Forschenden haben eine Untersuchung zur Zweisprachigkeit von Grundschulkindern durchgeführt Die Ergebnisse sind inzwischen vollständig dokumentiert und zeigen klare Vorteile beim Textverständnis",
+   "authored": "Die Forschenden haben eine Untersuchung zur Zweisprachigkeit von Grundschulkindern durchgeführt. Die Ergebnisse sind inzwischen vollständig dokumentiert und zeigen klare Vorteile beim Textverständnis.",
+   "chapter": "c1-28-goethe-mini-4",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "0ee8447bdc21049e",
+   "family": "reading",
+   "lookupText": "Die Forscher konnten einen klaren Zusammenhang zwischen regelmäßiger Bewegung und Gedächtnisleistung nachweisen Die Testreihe wurde kürzlich an drei Kliniken entwickelt und anschließend gemeinsam ausgewertet",
+   "authored": "Die Forscher konnten einen klaren Zusammenhang zwischen regelmäßiger Bewegung und Gedächtnisleistung nachweisen. Die Testreihe wurde kürzlich an drei Kliniken entwickelt und anschließend gemeinsam ausgewertet.",
+   "chapter": "c1-29-verben-mit-praefixen-sicher-unterscheiden",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "7b1186e7ed099493",
+   "family": "reading",
+   "lookupText": "Das Wissen über diese Krankheit wächst stetig Die Befunde einer neuen Langzeitstudie stimmen mit früheren Daten überein Auffällig ist dabei vor allem der Rückgang bei jüngeren Patienten",
+   "authored": "Das Wissen über diese Krankheit wächst stetig. Die Befunde einer neuen Langzeitstudie stimmen mit früheren Daten überein. Auffällig ist dabei vor allem der Rückgang bei jüngeren Patienten.",
+   "chapter": "c1-30-nomen-mit-numerusbesonderheiten",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "f616f473fbce2517",
+   "family": "reading",
+   "lookupText": "Zwar verbessert autonomes Fahren die Verkehrssicherheit in Testregionen nachweislich aber gleichzeitig wachsen die Bedenken hinsichtlich der Haftungsfrage bei Unfällen",
+   "authored": "Zwar verbessert autonomes Fahren die Verkehrssicherheit in Testregionen nachweislich, aber gleichzeitig wachsen die Bedenken hinsichtlich der Haftungsfrage bei Unfällen.",
+   "chapter": "c1-31-adversativangaben-und-gegensaetze-ausdruecken",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "e93a9d5748b33acd",
+   "family": "reading",
+   "lookupText": "Im Folgenden werden die wichtigsten Befunde der Handelskammer vorgestellt Diese stimmen mit den Prognosen aus dem Vorjahr überein Dabei fällt besonders der anhaltende Zuwachs im Online-Handel auf",
+   "authored": "Im Folgenden werden die wichtigsten Befunde der Handelskammer vorgestellt. Diese stimmen mit den Prognosen aus dem Vorjahr überein. Dabei fällt besonders der anhaltende Zuwachs im Online-Handel auf.",
+   "chapter": "c1-32-kohaerenz-und-textverknuepfung",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "a163ad96d205f59a",
+   "family": "reading",
+   "lookupText": "Im Folgenden werden die Ergebnisse der Alpenexpedition dargestellt Allerdings benötigt die Forschung weitere Messreihen da sich die Schmelzrate von Gletscher zu Gletscher deutlich unterscheidet",
+   "authored": "Im Folgenden werden die Ergebnisse der Alpenexpedition dargestellt. Allerdings benötigt die Forschung weitere Messreihen, da sich die Schmelzrate von Gletscher zu Gletscher deutlich unterscheidet.",
+   "chapter": "c1-33-goethe-mini-5",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "7c9de2d8db6d6412",
+   "family": "reading",
+   "lookupText": "Aktuelle Forschung belegt dass Tablets im Unterricht die Motivation vieler Schüler steigern Diese Sichtweise greift jedoch zu kurz denn sie blendet die wachsende Ablenkung durch Social-Media-Apps aus",
+   "authored": "Aktuelle Forschung belegt, dass Tablets im Unterricht die Motivation vieler Schüler steigern. Diese Sichtweise greift jedoch zu kurz, denn sie blendet die wachsende Ablenkung durch Social-Media-Apps aus.",
+   "chapter": "c1-34-argumentieren-auf-c1-niveau",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "48a476451be1d61a",
+   "family": "reading",
+   "lookupText": "Die Ergebnisse einer aktuellen Phase-III-Studie sind vielversprechend müssen jedoch aufgrund der kurzen Beobachtungsdauer vorsichtig interpretiert werden",
+   "authored": "Die Ergebnisse einer aktuellen Phase-III-Studie sind vielversprechend, müssen jedoch aufgrund der kurzen Beobachtungsdauer vorsichtig interpretiert werden.",
+   "chapter": "c1-35-konzession-und-abwaegen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "f619764991d64e0e",
+   "family": "reading",
+   "lookupText": "Die Ergebnisse lassen sich vorsichtig dahingehend interpretieren dass Windparks das Verhalten bestimmter Zugvogelarten beeinflussen Ein abschließendes Urteil lässt sich auf dieser Datenlage noch nicht fällen",
+   "authored": "Die Ergebnisse lassen sich vorsichtig dahingehend interpretieren, dass Windparks das Verhalten bestimmter Zugvogelarten beeinflussen. Ein abschließendes Urteil lässt sich auf dieser Datenlage noch nicht fällen.",
+   "chapter": "c1-36-register-und-stilebenen-beherrschen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "a14aa6633a35bd3e",
+   "family": "reading",
+   "lookupText": "Die Forscher haben eine umfassende Studie zu Stressbewältigung im Homeoffice durchgeführt Die Ergebnisse liefern wichtige Erkenntnisse darüber welche Pausenrituale die Konzentration nachweislich fördern",
+   "authored": "Die Forscher haben eine umfassende Studie zu Stressbewältigung im Homeoffice durchgeführt. Die Ergebnisse liefern wichtige Erkenntnisse darüber, welche Pausenrituale die Konzentration nachweislich fördern.",
+   "chapter": "c1-37-kollokationen-und-bedeutungsnuancen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "c84b870dc21d89a6",
+   "family": "reading",
+   "lookupText": "Die Studie untersucht die langfristigen Effekte erneuerbarer Energien auf regionale Arbeitsmärkte Die Ergebnisse zeigen positive Trends wobei ländliche Regionen besonders profitieren",
+   "authored": "Die Studie untersucht die langfristigen Effekte erneuerbarer Energien auf regionale Arbeitsmärkte. Die Ergebnisse zeigen positive Trends, wobei ländliche Regionen besonders profitieren.",
+   "chapter": "c1-38-zusammenfassung-schreiben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "0258cc9e8b8ee201",
+   "family": "reading",
+   "lookupText": "Ich vertrete die Ansicht dass Homeoffice die Produktivität vieler Angestellter nachweislich steigert Es lässt sich nicht bestreiten dass spontane Gespräche zwischen Kollegen seltener werden",
+   "authored": "Ich vertrete die Ansicht, dass Homeoffice die Produktivität vieler Angestellter nachweislich steigert. Es lässt sich nicht bestreiten, dass spontane Gespräche zwischen Kollegen seltener werden.",
+   "chapter": "c1-39-stellungnahme-schreiben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "cd0abddc077f43c1",
+   "family": "reading",
+   "lookupText": "Ich habe deinen Beitrag zur Aufzeichnungspflicht mit großem Interesse gelesen Dem stimme ich teilweise zu allerdings fürchte ich dass die Anwesenheit in den Vorlesungen dadurch weiter sinken würde",
+   "authored": "Ich habe deinen Beitrag zur Aufzeichnungspflicht mit großem Interesse gelesen. Dem stimme ich teilweise zu, allerdings fürchte ich, dass die Anwesenheit in den Vorlesungen dadurch weiter sinken würde.",
+   "chapter": "c1-40-forumsbeitrag-schreiben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "a7abb7531a2d58ba",
+   "family": "reading",
+   "lookupText": "Das Schaubild des Umweltbundesamts informiert über den Rückgang der CO2-Emissionen im Energiesektor Die Kurve geht seit 2020 deutlich zurück was vor allem auf den Kohleausstieg zurückzuführen ist",
+   "authored": "Das Schaubild des Umweltbundesamts informiert über den Rückgang der CO2-Emissionen im Energiesektor. Die Kurve geht seit 2020 deutlich zurück, was vor allem auf den Kohleausstieg zurückzuführen ist.",
+   "chapter": "c1-41-grafikbeschreibung-und-grafikauswertung",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "5f43a8930fd0b171",
+   "family": "reading",
+   "lookupText": "Die Forschungsergebnisse einer aktuellen Metastudie legen nahe dass digitale Lernmethoden unter bestimmten Bedingungen effektiver sind als klassischer Frontalunterricht Entscheidend sei dabei vor allem das unmittelbare Feedback",
+   "authored": "Die Forschungsergebnisse einer aktuellen Metastudie legen nahe, dass digitale Lernmethoden unter bestimmten Bedingungen effektiver sind als klassischer Frontalunterricht. Entscheidend sei dabei vor allem das unmittelbare Feedback.",
+   "chapter": "c1-42-goethe-zertifikat-c1-probepruefung",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "38a1431d755d8632",
+   "family": "reading",
+   "lookupText": "Die vorliegenden Ergebnisse einer zehnjährigen Kohortenstudie legen nahe dass regelmäßiger Zugang zu Grünflächen das Risiko für stressbedingte Erkrankungen spürbar senkt Besonders ausgeprägt sei dieser Effekt in dicht besiedelten Stadtteilen",
+   "authored": "Die vorliegenden Ergebnisse einer zehnjährigen Kohortenstudie legen nahe, dass regelmäßiger Zugang zu Grünflächen das Risiko für stressbedingte Erkrankungen spürbar senkt. Besonders ausgeprägt sei dieser Effekt in dicht besiedelten Stadtteilen.",
+   "chapter": "c1-43-goethe-zertifikat-c1-final",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "cf0c28b8d7afcfb1",
+   "family": "reading",
+   "lookupText": "Es ist kurz nach neunzehn Uhr als ein Politbüromitglied sich verspricht Von diesem Moment an erzählt dieser Essay die Ereignisse im Präsens Tausende strömen noch in derselben Nacht zu den Grenzübergängen Was damals wie ein Missverständnis wirkte gilt heute als einer der folgenreichsten Versprecher der Geschichte",
+   "authored": "Es ist kurz nach neunzehn Uhr, als ein Politbüromitglied sich verspricht. Von diesem Moment an erzählt dieser Essay die Ereignisse im Präsens. Tausende strömen noch in derselben Nacht zu den Grenzübergängen. Was damals wie ein Missverständnis wirkte, gilt heute als einer der folgenreichsten Versprecher der Geschichte.",
+   "chapter": "c2-01-zeitformen-der-verben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "4269c246b32882e1",
+   "family": "reading",
+   "lookupText": "Die Studie weist einen bislang unbekannten Mechanismus nach durch den sich bestimmte Immunzellen gegen chronische Entzündungen abschirmen Statt \"zeigen\" setzen die Autorinnen durchgehend präzisere Präfixverben ein",
+   "authored": "Die Studie weist einen bislang unbekannten Mechanismus nach, durch den sich bestimmte Immunzellen gegen chronische Entzündungen abschirmen. Statt \"zeigen\" setzen die Autorinnen durchgehend präzisere Präfixverben ein.",
+   "chapter": "c2-02-verben-mit-praefixen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "5fafd5988ac06437",
+   "family": "reading",
+   "lookupText": "Die Ergebnisse beruhen auf Interviews mit über zweihundert ehemaligen Dorfbewohnern Ohne diese Ergänzung bliebe der Befund bloße Spekulation Auffällig viele Befragte klagten über die fehlende ärztliche Versorgung",
+   "authored": "Die Ergebnisse beruhen auf Interviews mit über zweihundert ehemaligen Dorfbewohnern. Ohne diese Ergänzung bliebe der Befund bloße Spekulation. Auffällig viele Befragte klagten über die fehlende ärztliche Versorgung.",
+   "chapter": "c2-03-verben-und-ihre-ergaenzungen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "919596657487740d",
+   "family": "reading",
+   "lookupText": "Die Astronominnen führen eine aufwendige Analyse der Radiodaten durch Anschließend stellen sie eine gewagte Hypothese auf Das Signal könnte von einer kollidierenden Galaxie stammen",
+   "authored": "Die Astronominnen führen eine aufwendige Analyse der Radiodaten durch. Anschließend stellen sie eine gewagte Hypothese auf: Das Signal könnte von einer kollidierenden Galaxie stammen.",
+   "chapter": "c2-04-nomen-verb-verbindungen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "ce5a767740ec76c1",
+   "family": "reading",
+   "lookupText": "In diesen Tagen erinnert sich das Land an jene Nacht in der die Mauer fällt Historiker weisen seit Jahren darauf hin dass diese Erinnerung ohne die Berichte der Zeitzeugen auf bloßer Vermutung beruhte",
+   "authored": "In diesen Tagen erinnert sich das Land an jene Nacht, in der die Mauer fällt. Historiker weisen seit Jahren darauf hin, dass diese Erinnerung ohne die Berichte der Zeitzeugen auf bloßer Vermutung beruhte.",
+   "chapter": "c2-05-goethe-mini-1",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "bf0c599a461a9043",
+   "family": "reading",
+   "lookupText": "Die Ergebnisse der Wasserproben könnten darauf hindeuten dass ein ungewöhnlich warmer Meeresstrom eine zentrale Rolle spielte Ein endgültiger Beweis stehe jedoch noch aus so die Studienleiterin",
+   "authored": "Die Ergebnisse der Wasserproben könnten darauf hindeuten, dass ein ungewöhnlich warmer Meeresstrom eine zentrale Rolle spielte. Ein endgültiger Beweis stehe jedoch noch aus, so die Studienleiterin.",
+   "chapter": "c2-06-konjunktiv-ii",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "8439b654fbfb695f",
+   "family": "reading",
+   "lookupText": "Die Staatsanwaltschaft erklärte der Bürgermeister habe öffentliche Gelder zweckentfremdet Die Zeitung bestätigt diesen Vorwurf ausdrücklich nicht",
+   "authored": "Die Staatsanwaltschaft erklärte, der Bürgermeister habe öffentliche Gelder zweckentfremdet. Die Zeitung bestätigt diesen Vorwurf ausdrücklich nicht.",
+   "chapter": "c2-07-konjunktiv-i",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "f37c0af0d37b4674",
+   "family": "reading",
+   "lookupText": "Die Ergebnisse dürften darauf hindeuten dass individuelle Trainingspläne nötig sind Athleten sollten diese Erkenntnis schon in der Saisonvorbereitung berücksichtigen",
+   "authored": "Die Ergebnisse dürften darauf hindeuten, dass individuelle Trainingspläne nötig sind. Athleten sollten diese Erkenntnis schon in der Saisonvorbereitung berücksichtigen.",
+   "chapter": "c2-08-modalverben",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "20daf1b63afeb1f7",
+   "family": "reading",
+   "lookupText": "Die Staatsanwaltschaft erklärte der Landrat sei seit Jahren an einem Bestechungssystem beteiligt gewesen Dies dürfte weitreichende Folgen für die Kreisverwaltung haben",
+   "authored": "Die Staatsanwaltschaft erklärte, der Landrat sei seit Jahren an einem Bestechungssystem beteiligt gewesen. Dies dürfte weitreichende Folgen für die Kreisverwaltung haben.",
+   "chapter": "c2-09-goethe-mini-2",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "84f7c1d358732662",
+   "family": "reading",
+   "lookupText": "Die Datenlage zum sprachlichen Vergessen ist eindeutig Darüber hinaus zeigt die Studie signifikante Unterschiede zwischen aktiv genutzten und verdrängten Sprachen Demgegenüber bleibt die Frage nach einer möglichen Umkehrbarkeit unklar",
+   "authored": "Die Datenlage zum sprachlichen Vergessen ist eindeutig. Darüber hinaus zeigt die Studie signifikante Unterschiede zwischen aktiv genutzten und verdrängten Sprachen. Demgegenüber bleibt die Frage nach einer möglichen Umkehrbarkeit unklar.",
+   "chapter": "c2-10-adverbialsaetze-und-diskursmarker",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "375fe8f41ef0d72e",
+   "family": "reading",
+   "lookupText": "Die Studie deren Ergebnisse im Fachjournal ausführlich diskutiert werden überzeugt durch ihre methodische Sorgfalt",
+   "authored": "Die Studie, deren Ergebnisse im Fachjournal ausführlich diskutiert werden, überzeugt durch ihre methodische Sorgfalt.",
+   "chapter": "c2-11-relativsaetze",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "15c230ab0d79c357",
+   "family": "reading",
+   "lookupText": "Die Daten wurden über zwei Jahre hinweg erhoben Es konnte gezeigt werden dass die Faltungshypothese zutrifft",
+   "authored": "Die Daten wurden über zwei Jahre hinweg erhoben. Es konnte gezeigt werden, dass die Faltungshypothese zutrifft.",
+   "chapter": "c2-12-passiv",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "ed76efc143e6c4bf",
+   "family": "reading",
+   "lookupText": "Die Ergebnisse sind unter denselben Bedingungen reproduzierbar Das Modell lässt sich auf andere Regionen übertragen",
+   "authored": "Die Ergebnisse sind unter denselben Bedingungen reproduzierbar. Das Modell lässt sich auf andere Regionen übertragen.",
+   "chapter": "c2-13-passiversatzformen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "cd6ea76796ddedad",
+   "family": "reading",
+   "lookupText": "Die Regierung erklärte die Reform sei notwendig Darüber hinaus zeigt eine unabhängige Studie deren Ergebnisse signifikant sind gravierende Nachteile für Geringverdiener",
+   "authored": "Die Regierung erklärte, die Reform sei notwendig. Darüber hinaus zeigt eine unabhängige Studie, deren Ergebnisse signifikant sind, gravierende Nachteile für Geringverdiener.",
+   "chapter": "c2-14-goethe-halbzeit-test",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "42e982d7200a3dfa",
+   "family": "reading",
+   "lookupText": "Die kürzlich veröffentlichten Forschungsergebnisse überzeugen durch ihre methodische Präzision",
+   "authored": "Die kürzlich veröffentlichten Forschungsergebnisse überzeugen durch ihre methodische Präzision.",
+   "chapter": "c2-15-partizipien-als-adjektive",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "ef6c205f67820341",
+   "family": "reading",
+   "lookupText": "Die Mehrheit der Befragten stimmte der Forderung zu Das Entscheidende ist dabei die erwartete CO2-Ersparnis",
+   "authored": "Die Mehrheit der Befragten stimmte der Forderung zu. Das Entscheidende ist dabei die erwartete CO2-Ersparnis.",
+   "chapter": "c2-16-nominalisierte-adjektive-und-partizipien",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "43744a53be08ce14",
+   "family": "reading",
+   "lookupText": "Die kürzlich entdeckten mikrobiologischen Wirkstoffe überraschten die Fachwelt",
+   "authored": "Die kürzlich entdeckten mikrobiologischen Wirkstoffe überraschten die Fachwelt.",
+   "chapter": "c2-17-adjektivdeklination-auf-c2-niveau",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "ca7e2c604aca27c0",
+   "family": "reading",
+   "lookupText": "Die empirischen Ergebnisse sind konsistent mit früheren Studien Der Unterschied zwischen den Städten ist statistisch signifikant",
+   "authored": "Die empirischen Ergebnisse sind konsistent mit früheren Studien. Der Unterschied zwischen den Städten ist statistisch signifikant.",
+   "chapter": "c2-18-stilistische-nuancen-und-register-von-adjektiven",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "1702b5a61c924ef3",
+   "family": "reading",
+   "lookupText": "Der Forschungsansatz kombiniert eine präzise Fragestellung mit einer gründlichen Datenauswertung",
+   "authored": "Der Forschungsansatz kombiniert eine präzise Fragestellung mit einer gründlichen Datenauswertung.",
+   "chapter": "c2-22-wortbildung-der-nomen",
+   "section": "reading",
+   "via": "chapter data authored field"
+  },
+  {
+   "assetId": "a0f80efcd43f8bd3",
+   "family": "reading",
+   "lookupText": "Der Mann liest ein Buch Die Frau trinkt Kaffee Das Kind spielt im Garten Das Haus ist groß",
+   "authored": "Der Mann liest ein Buch. Die Frau trinkt Kaffee. Das Kind spielt im Garten. Das Haus ist groß.",
+   "chapter": "a1-3-nominativ",
+   "section": "reading",
+   "via": "chapter data authored field"
+  }
+ ],
+ "authorNeeded": [
+  {
+   "assetId": "91ce7f2a9760de2a",
+   "family": "story",
+   "text": "Wie gefällt dir die Jacke",
+   "chapter": "A1",
+   "hit": null
+  },
+  {
+   "assetId": "bbae6d15daffe7d6",
+   "family": "story",
+   "text": "Der Pullover steht dir sehr gut",
+   "chapter": "A1",
+   "hit": null
+  },
+  {
+   "assetId": "8939da4ea89d14ed",
+   "family": "story",
+   "text": "Ja Der gehört dir",
+   "chapter": "A1",
+   "hit": null
+  },
+  {
+   "assetId": "71d25285530f22bc",
+   "family": "story",
+   "text": "Ich nehme die Suppe Bringen Sie sie mir bitte",
+   "chapter": "A1",
+   "hit": null
+  },
+  {
+   "assetId": "fa5608d105852486",
+   "family": "story",
+   "text": "Ich habe das als hilfreich empfunden",
+   "chapter": "B2",
+   "hit": null
+  },
+  {
+   "assetId": "67c19f51ee689726",
+   "family": "story",
+   "text": "Als Sprachwissenschaftlerin beurteile ich die Studie als sehr wichtig",
+   "chapter": "B2",
+   "hit": null
+  },
+  {
+   "assetId": "5d20b9be05012c51",
+   "family": "story",
+   "text": "Perfekt Kennst du den Flügel den der Führer der immer lächelt empfiehlt",
+   "chapter": "B2",
+   "hit": null
+  },
+  {
+   "assetId": "09e42cf1c6881dae",
+   "family": "listening",
+   "text": "\"",
+   "chapter": "C2",
+   "hit": null
+  }
+ ]
+}

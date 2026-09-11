@@ -1,0 +1,120 @@
+{
+ "phase": "35 — is a colorWordsIn .de-link learner-interactive? (DIAGNOSIS ONLY)",
+ "generatedAt": "2026-08-15T06:55:31.636Z",
+ "harness": "chapter/qa-p35-interactivity.html — probe injected before chapter-app.js wraps EventTarget.prototype.addEventListener to record every click-listener registration and its stack; then real clicks are dispatched on one colorWordsIn span and one wrapWordsIn span. Production untouched.",
+ "verdict": "DECORATIVE",
+ "A_mechanismComparison": {
+  "wrapWordsIn": {
+   "directClickHandler": "YES — chapter-app.js:2865-2866 binds a click listener to every span it creates",
+   "listenerEvidence": "all sampled de-link listener stacks resolve to chapter-app.js:2865 inside wrapWordsIn (called from :3008)",
+   "popupPath": "the handler calls openWordPop with the resolved entry",
+   "wpInlineLink": "not present (that marker belongs to the in-popup linkifiers)",
+   "dataState": "none"
+  },
+  "colorWordsIn": {
+   "directClickHandler": "NO — chapter-app.js:2928-2953 creates the span, sets className at :2945 and commits at :2951, and binds nothing",
+   "delegatedHandler": "NONE APPLICABLE — only 3 document/window click listeners exist in the whole page and all three are dismissers (audio-speed menu :3659, grammar-helper panel :3871, account menu :3888). None inspects .de-link or calls openWordPop.",
+   "popupPath": "unreachable from the span itself",
+   "wpInlineLink": "not present",
+   "dataState": "none"
+  },
+  "listenerCensus": {
+   "b2_15": {
+    "totalClickListeners": 1210,
+    "onDeLinkElements": 698,
+    "onDocumentOrWindow": 3
+   },
+   "note": "698 de-link elements carry a handler out of 718 de-link spans created in b2-15. The ~20 without one are the mcq/option spans produced by colorWordsIn (30 nodes across 5 hosts, of which 3 matched the Obgleich probe)."
+  }
+ },
+ "B_liveTest_b2_15": {
+  "chapter": "b2-15 exercises mcq, surface \"Obgleich\"",
+  "span": {
+   "className": "de-link r-object",
+   "parentButton": "mcq-option",
+   "cursor": "pointer",
+   "pointerEvents": "auto",
+   "datasets": {},
+   "wpInlineLink": false
+  },
+  "dispatchPath": [
+   "span.de-link.r-object",
+   "span.de",
+   "span",
+   "button.mcq-option",
+   "div.mcq-options",
+   "div.exercise-block"
+  ],
+  "popupOpened": false,
+  "popupHeadword": null,
+  "optionSelectionFired": true,
+  "evidence": "after the click: 1 option marked is-correct, 3 options disabled — the mcq answer handler ran",
+  "interpretation": "the click passed straight through the span and was handled by the parent button. The span neither opened a popup nor blocked the option."
+ },
+ "C_liveTest_readingQuestion": {
+  "chapter": "a1-37 reading question, surface \"Fuß\"",
+  "span": {
+   "className": "de-link r-verb",
+   "parentButton": "mcq-option",
+   "cursor": "pointer",
+   "pointerEvents": "auto"
+  },
+  "dispatchPath": [
+   "span.de-link.r-verb",
+   "span.de",
+   "span",
+   "button.mcq-option",
+   "div.mcq-options",
+   "div.exercise-block"
+  ],
+  "popupOpened": false,
+  "optionSelectionFired": true,
+  "evidence": "after the click: 2 options marked, 4 disabled, feedback text set to ✗ \"Ich fahre mit dem Auto.\" — the question was answered",
+  "interpretation": "identical behaviour to the exercise mcq path"
+ },
+ "D_domEventEvidence": {
+  "colorWordsInSpan": "de-link r-object | no listener | no dataset | inside button.mcq-option | cursor:pointer (inherited from .de-link CSS, not from a handler)",
+  "wrapWordsInSpan": "de-link r-adjective | listener bound at chapter-app.js:2865 | popup reachable",
+  "contrastTest": "clicking a normal prose wrapWordsIn span DID resolve a popup headword (\"obgleich\" in b2-15, \"Präpositionen\" in a1-37); clicking the colorWordsIn span produced no popup at all",
+  "intendedTargetPreserved": "YES — the parent button remains the effective interaction target in both paths"
+ },
+ "E_finalDecision": {
+  "classification": "DECORATIVE",
+  "basis": "no direct handler, no applicable delegated handler (the only 3 document-level click listeners are unrelated dismissers), and two live clicks in two different chapters produced zero popups while the parent option handled the click normally",
+  "caveat": "the spans do carry cursor:pointer from the shared .de-link CSS rule, so they LOOK interactive on hover even though they are not. That is a cosmetic inconsistency, not an interaction defect."
+ },
+ "F_fixBoundary": {
+  "recommended": "QA ENGINE / SELECTOR",
+  "reasoning": "qa-engine.js selects candidate words by class (.rw, .de-link) and treats every match as a clickable learner word. colorWordsIn legitimately reuses .de-link for COLOUR only. The mismatch is in what the QA selector assumes, not in what the renderer does — the renderer is behaving as designed for a non-interactive coloured region.",
+  "productionRendererOption": "still available (give colorWordsIn its own non-interactive class, e.g. .de-word, with the same colour rules) and is arguably the cleaner long-term separation, but it touches CSS and every colorWordsIn call site",
+  "productDecision": "only relevant if someone wants mcq option words to BE tappable; today they are not, and the cursor:pointer styling is the only thing suggesting otherwise",
+  "notImplemented": true
+ },
+ "G_impactOnEstimate": {
+  "previousEstimate": "−14 HCM / −11 RCB",
+  "stillTheAffectedPopulation": true,
+  "butInterpretationChanges": "these 25 findings are NOT learner-visible defects. They are QA artefacts: the engine probed decorative spans, found no popup for them, and compared colours that no learner can ever see side by side. The colour difference is real in the DOM but has no interaction through which a learner could encounter it.",
+  "consequenceForP26Disposition": "the 14 G-A HCM records should arguably be reclassified from DATA/AUTHORING to DETECTOR SCOPE (decorative span counted as a learner word). That reclassification is NOT applied here — it is a follow-on decision, and it would also affect the 11 co-located RCB records.",
+  "cautionAgainstOverreach": "this does NOT retroactively excuse the remaining 7 HCM records (G-B homographs, G-C letter) — those sit in real prose with real handlers and remain genuine."
+ },
+ "H_remainingUncertainty": [
+  "only 2 of the 14 occurrences were live-clicked (b2-15 Obgleich, a1-37 Fuß); the other 12 share the same call path and DOM shape but were not individually dispatched",
+  "a full census of colorWordsIn call sites is still outstanding (carried over from P34) — other decorative regions may exist",
+  "the cursor:pointer cosmetic inconsistency was observed but not measured corpus-wide"
+ ],
+ "productionSafety": {
+  "productionModified": false,
+  "dataModified": false,
+  "cssModified": false,
+  "qaModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "chapter/qa-p35-interactivity.html",
+  "audit/mcq-colorwords-interactivity-p35.json"
+ ],
+ "filesModified": "none"
+}

@@ -1,0 +1,99 @@
+[
+ {
+  "assetId": "91ce7f2a9760de2a",
+  "chapter": "a1-40-verben-dativ",
+  "speaker": "Nele",
+  "uiText": "Wie gefällt dir die Jacke",
+  "authored_de": null,
+  "hasTokens": true,
+  "tokenCount": 6,
+  "punctuationTokens": [
+   "?"
+  ],
+  "verdict": "no punctuated authored form in chapter data"
+ },
+ {
+  "assetId": "bbae6d15daffe7d6",
+  "chapter": "a1-40-verben-dativ",
+  "speaker": "Nele",
+  "uiText": "Der Pullover steht dir sehr gut",
+  "authored_de": null,
+  "hasTokens": true,
+  "tokenCount": 7,
+  "punctuationTokens": [
+   "!"
+  ],
+  "verdict": "no punctuated authored form in chapter data"
+ },
+ {
+  "assetId": "8939da4ea89d14ed",
+  "chapter": "a1-40-verben-dativ",
+  "speaker": "Nele",
+  "uiText": "Ja Der gehört dir",
+  "authored_de": null,
+  "hasTokens": true,
+  "tokenCount": 6,
+  "punctuationTokens": [
+   "!",
+   "!"
+  ],
+  "verdict": "no punctuated authored form in chapter data"
+ },
+ {
+  "assetId": "71d25285530f22bc",
+  "chapter": "a1-41-dativpronomen",
+  "speaker": "Frau Sommer",
+  "uiText": "Ich nehme die Suppe Bringen Sie sie mir bitte",
+  "authored_de": null,
+  "hasTokens": true,
+  "tokenCount": 11,
+  "punctuationTokens": [
+   ".",
+   "."
+  ],
+  "verdict": "no punctuated authored form in chapter data"
+ },
+ {
+  "assetId": "fa5608d105852486",
+  "chapter": "b2-02-verbalkomplex",
+  "speaker": "Wibke",
+  "uiText": "Ich habe das als hilfreich empfunden",
+  "authored_de": null,
+  "hasTokens": true,
+  "tokenCount": 7,
+  "punctuationTokens": [
+   "."
+  ],
+  "verdict": "no punctuated authored form in chapter data"
+ },
+ {
+  "assetId": "67c19f51ee689726",
+  "chapter": "b2-08-valenz-von-verben",
+  "speaker": "Runa",
+  "uiText": "Als Sprachwissenschaftlerin beurteile ich die Studie als sehr wichtig",
+  "authored_de": null,
+  "hasTokens": true,
+  "tokenCount": 10,
+  "punctuationTokens": [
+   "."
+  ],
+  "verdict": "no punctuated authored form in chapter data"
+ },
+ {
+  "assetId": "5d20b9be05012c51",
+  "chapter": "b2-38-verschachtelte-relativsaetze",
+  "speaker": "Timo",
+  "uiText": "Perfekt Kennst du den Flügel den der Führer der immer lächelt empfiehlt",
+  "authored_de": null,
+  "hasTokens": true,
+  "tokenCount": 17,
+  "punctuationTokens": [
+   "!",
+   ",",
+   ",",
+   ",",
+   "?"
+  ],
+  "verdict": "no punctuated authored form in chapter data"
+ }
+]

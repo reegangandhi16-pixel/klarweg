@@ -1,0 +1,68 @@
+{
+ "phase": "40 — resolver A/B proof (lookupWord ± expectedClass)",
+ "generatedAt": "2026-08-15T09:52:06.512Z",
+ "verdict": "INCONCLUSIVE — MORE EVIDENCE REQUIRED",
+ "headline": "The A/B experiment could not be executed against the real resolver. Candidate 2 is therefore NOT proven and must not be implemented.",
+ "whatWasAttempted": {
+  "harness": "chapter/qa-hcm-resolver-p40.html",
+  "approach": "fetch chapter-app.js as text, append one export line before the final })(); so lookupWord/classesCompatible/wordClassOf become reachable, then serve that copy inline in place of the original <script src=\"chapter-app.js\"> via srcdoc + <base href>. The production file on disk was never edited and the app still executes exactly once.",
+  "whyThisApproach": "the brief forbids reimplementing or approximating lookupWord. chapter-app.js is a single IIFE and exports only window.KW_roleFor and window.KW_colorizeGerman (grep-verified), so the real function is otherwise unreachable from a harness."
+ },
+ "whyItFailed": {
+  "observed": "window.__P40 was created but every function reference was null; the harness reported \"lookupWord not exported\" for chapter-a1-8-goethemini1 and chapter-a1-15-cafe",
+  "diagnosis": "the injection point — the LAST occurrence of \"})();\" in chapter-app.js — is not inside the scope where lookupWord is declared. chapter-app.js contains multiple IIFEs (e.g. the loadGlobalLexicon block at :25), so the final \"})();\" closes a different function than the main module body.",
+  "secondaryFailures": "two later chapters returned \"Failed to fetch\" — the harness page also reset once mid-run, which is why an earlier attempt lost its in-memory results (per-chapter persistence was added afterwards).",
+  "confidence": "PROVEN that the export did not reach the intended scope; the exact correct injection point was NOT identified in this phase."
+ },
+ "whatThisDoesNotChange": [
+  "the P39 static findings stand: normWord() lowercases, so Deutsch/deutsch share one WORDIDX slot (chapter-app.js:2717, :2430)",
+  "a1-3 authors { de: \"Zahl\", plural: \"Zahlen\" }, so KW_INFLECTIONS maps lowercase \"zahlen\" to the NOUN lemma — Candidate 1 remains disproven for Zahlen",
+  "the 8 legitimate Zahlen noun uses all carry authored roles/types and resolve through the token path, so they remain insulated from any guess-path change",
+  "lookupWord already contains the expectedClass homograph guard at :2735-2738 — the machinery exists; what is unproven is its behaviour on these specific surfaces"
+ ],
+ "conditionStatus": {
+  "1_deutschAdjectiveResolves": "NOT TESTED",
+  "2_DeutschNounRemainsCorrect": "NOT TESTED",
+  "3_ZahlenBitteResolves": "NOT TESTED",
+  "4_ZahlenNounUsesRemain": "NOT TESTED (static insulation argument only)",
+  "5_fifteenByDesignControls": "NOT TESTED",
+  "6_rcbSampleNotWorse": "NOT TESTED",
+  "7_noResolverException": "NOT TESTED",
+  "8_realImplementationUsed": "FAILED — the real implementation could not be reached",
+  "overall": "condition 8 failed, so per the brief Candidate 2 is not recommended"
+ },
+ "letterA": {
+  "classification": "LEAVE UNCHANGED for now",
+  "reasoning": "Candidate 2 cannot solve it — the popup side is already correct by design (ROLE_COLOR_VAR maps letter|name|conjunction to --ink-secondary, chapter-app.js:2022) and the defect is the SPAN, which comes from guessRole rule 6, a function this phase is forbidden to touch. It would require Candidate 4 (a narrow single-letter guard), which is a separate decision. It is 1 finding, cosmetically inconsistent, and the popup a learner sees is correct.",
+  "confidence": "PROVEN for both colour sources (source-read in P38/P39)"
+ },
+ "nextStepToUnblock": {
+  "single": "identify the correct injection point inside chapter-app.js’s MAIN IIFE and re-run the same harness unchanged.",
+  "how": "locate the module body’s own closing sequence rather than the file’s last \"})();\" — e.g. anchor on a string unique to the main body (the existing \"window.KW_roleFor = roleFor;\" assignment at :966 is inside that scope and is a safe, verified anchor to append exports next to).",
+  "cost": "one edit to the harness, one run; no production change",
+  "note": "until that runs, every statement about expectedClass behaviour remains reasoning, not measurement — the same standard applied in P22 (isolation disproved a sweep reading), P27/P29 (a full pass overturned an isolation verdict) and P34 (instrumentation overturned two prior hypotheses)."
+ },
+ "unresolvedQuestions": [
+  "does supplying expectedClass actually select the adjective entry for deutsch?",
+  "does it fix Zahlen, given the collision arrives via the lemma/inflection path rather than the direct surface path?",
+  "does it leave the 15 by-design refinements untouched, as the compatibility rule predicts?",
+  "does it degrade any of the ~1,009 RCB occurrences, where span role and badge disagree by construction?"
+ ],
+ "productionSafety": {
+  "productionModified": false,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "chapterAppModified": false,
+  "qaEngineModified": false,
+  "qaAssertModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "chapter/qa-hcm-resolver-p40.html",
+  "audit/hcm-resolver-ab-p40.json"
+ ],
+ "filesModified": "none"
+}

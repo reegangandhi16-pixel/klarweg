@@ -1,0 +1,1966 @@
+{
+ "source": "audit/qa-baseline-p15-diagnostic.json",
+ "code": "HEADWORD_COLOUR_MISMATCH",
+ "count": 110,
+ "fieldsAvailable": [
+  "chapter",
+  "section",
+  "index",
+  "surface",
+  "severity",
+  "detail.span",
+  "detail.head"
+ ],
+ "fieldsNotAvailable": {
+  "note": "qa-engine.js emits HEADWORD_COLOUR_MISMATCH with detail {span, head} only (qa-engine.js:286). headword, entryType, badge, role, colour and badgeClass are NOT part of this code’s detail and are absent from the baseline for these 110 records; where another finding fired on the same node they are recoverable by join and are attached as coLocatedEvidence (11 of 110)."
+ },
+ "findings": [
+  {
+   "chapter": "chapter-a1-4-hallo.html",
+   "section": "vocabulary",
+   "index": 171,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-7-jaodernein.html",
+   "section": "grammar",
+   "index": 243,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-7-jaodernein.html",
+   "section": "writing",
+   "index": 328,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-7-jaodernein.html",
+   "section": "resources",
+   "index": 386,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-8-goethemini1.html",
+   "section": "vocabulary",
+   "index": 133,
+   "surface": "deutsch",
+   "severity": "medium",
+   "span": "rgb(245, 158, 11)",
+   "spanRole": "adjective",
+   "head": "rgb(46, 125, 50)",
+   "headRole": "object",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-8-goethemini1.html",
+   "section": "grammar",
+   "index": 542,
+   "surface": "deutsch",
+   "severity": "medium",
+   "span": "rgb(245, 158, 11)",
+   "spanRole": "adjective",
+   "head": "rgb(46, 125, 50)",
+   "headRole": "object",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-8-goethemini1.html",
+   "section": "grammar",
+   "index": 581,
+   "surface": "deutsch",
+   "severity": "medium",
+   "span": "rgb(245, 158, 11)",
+   "spanRole": "adjective",
+   "head": "rgb(46, 125, 50)",
+   "headRole": "object",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-8-goethemini1.html",
+   "section": "grammar",
+   "index": 585,
+   "surface": "deutsch",
+   "severity": "medium",
+   "span": "rgb(245, 158, 11)",
+   "spanRole": "adjective",
+   "head": "rgb(46, 125, 50)",
+   "headRole": "object",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-11-negation.html",
+   "section": "(none)",
+   "index": 1,
+   "surface": "Nicht",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-14-essen.html",
+   "section": "resources",
+   "index": 878,
+   "surface": "möchte",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(159, 18, 57)",
+   "headRole": "modalverb",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-15-cafe.html",
+   "section": "vocabulary",
+   "index": 168,
+   "surface": "Zahlen",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(46, 125, 50)",
+   "headRole": "object",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-15-cafe.html",
+   "section": "grammar",
+   "index": 581,
+   "surface": "Zahlen",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(46, 125, 50)",
+   "headRole": "object",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-19-satzposition.html",
+   "section": "grammar",
+   "index": 335,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-19-satzposition.html",
+   "section": "grammar",
+   "index": 340,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-19-satzposition.html",
+   "section": "grammar",
+   "index": 345,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-19-satzposition.html",
+   "section": "summary",
+   "index": 522,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-21-uhrzeit.html",
+   "section": "vocabulary",
+   "index": 321,
+   "surface": "Wann",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(236, 72, 153)",
+   "headRole": "question",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-25-trennbar.html",
+   "section": "grammar",
+   "index": 285,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a1-34-schreiben.html",
+   "section": "exercises",
+   "index": 448,
+   "surface": "Liebe",
+   "severity": "medium",
+   "span": "rgb(245, 158, 11)",
+   "spanRole": "adjective",
+   "head": "rgb(46, 125, 50)",
+   "headRole": "object",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Noun",
+     "role": "r-adjective",
+     "occurrenceColour": "rgb(245, 158, 11)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-a1-37-praep-dativ.html",
+   "section": "listening",
+   "index": 527,
+   "surface": "Fuß",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(234, 88, 12)",
+   "headRole": "place",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Noun",
+     "role": "r-verb",
+     "occurrenceColour": "rgb(220, 38, 38)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-a1-39-ortsangaben.html",
+   "section": "vocabulary",
+   "index": 570,
+   "surface": "a",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(90, 90, 96)",
+   "headRole": "ink-secondary",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a2-2-perfekt-review.html",
+   "section": "grammar",
+   "index": 394,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-a2-2-perfekt-review.html",
+   "section": "grammar",
+   "index": 410,
+   "surface": "Nein",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-b1-17-nebensatz-damit-um-zu.html",
+   "section": "exercises",
+   "index": 925,
+   "surface": "um",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(202, 138, 4)",
+   "headRole": "preposition",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Preposition",
+     "role": "r-adverb",
+     "occurrenceColour": "rgb(6, 182, 212)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-b1-22-brauchen-zu-infinitiv.html",
+   "section": "listening",
+   "index": 681,
+   "surface": "machen",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(190, 24, 93)",
+   "headRole": "pink-700(unmapped)",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-b2-15-konzessivsaetze-obgleich.html",
+   "section": "exercises",
+   "index": 782,
+   "surface": "Obgleich",
+   "severity": "medium",
+   "span": "rgb(46, 125, 50)",
+   "spanRole": "object",
+   "head": "rgb(245, 158, 11)",
+   "headRole": "adjective",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-b2-15-konzessivsaetze-obgleich.html",
+   "section": "exercises",
+   "index": 790,
+   "surface": "Obgleich",
+   "severity": "medium",
+   "span": "rgb(46, 125, 50)",
+   "spanRole": "object",
+   "head": "rgb(245, 158, 11)",
+   "headRole": "adjective",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-b2-15-konzessivsaetze-obgleich.html",
+   "section": "exercises",
+   "index": 798,
+   "surface": "Obgleich",
+   "severity": "medium",
+   "span": "rgb(46, 125, 50)",
+   "spanRole": "object",
+   "head": "rgb(245, 158, 11)",
+   "headRole": "adjective",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+   "section": "exercises",
+   "index": 794,
+   "surface": "Infolgedessen",
+   "severity": "medium",
+   "span": "rgb(46, 125, 50)",
+   "spanRole": "object",
+   "head": "rgb(6, 182, 212)",
+   "headRole": "adverb",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Adverb (discourse marker)",
+     "role": "r-object",
+     "occurrenceColour": "rgb(46, 125, 50)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+   "section": "exercises",
+   "index": 801,
+   "surface": "infolgedessen",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(6, 182, 212)",
+   "headRole": "adverb",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Adverb (discourse marker)",
+     "role": "r-verb",
+     "occurrenceColour": "rgb(220, 38, 38)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+   "section": "exercises",
+   "index": 806,
+   "surface": "Infolgedessen",
+   "severity": "medium",
+   "span": "rgb(46, 125, 50)",
+   "spanRole": "object",
+   "head": "rgb(6, 182, 212)",
+   "headRole": "adverb",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Adverb (discourse marker)",
+     "role": "r-object",
+     "occurrenceColour": "rgb(46, 125, 50)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-b2-45-passiversatz-sich-lassen.html",
+   "section": "exercises",
+   "index": 813,
+   "surface": "sich",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(24, 95, 165)",
+   "headRole": "subject",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Pronoun",
+     "role": "r-adverb",
+     "occurrenceColour": "rgb(6, 182, 212)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-b2-45-passiversatz-sich-lassen.html",
+   "section": "exercises",
+   "index": 818,
+   "surface": "sich",
+   "severity": "medium",
+   "span": "rgb(6, 182, 212)",
+   "spanRole": "adverb",
+   "head": "rgb(24, 95, 165)",
+   "headRole": "subject",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Pronoun",
+     "role": "r-adverb",
+     "occurrenceColour": "rgb(6, 182, 212)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 4,
+   "surface": "habe",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 11,
+   "surface": "genutzt",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 13,
+   "surface": "ist",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 20,
+   "surface": "erzeugt",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 22,
+   "surface": "wechsle",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 29,
+   "surface": "Ist",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 38,
+   "surface": "ist",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 45,
+   "surface": "erkennen",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 48,
+   "surface": "ist",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 54,
+   "surface": "ist",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "story",
+   "index": 58,
+   "surface": "hilft",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "grammar",
+   "index": 80,
+   "surface": "werden",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "grammar",
+   "index": 84,
+   "surface": "ausgewertet",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "grammar",
+   "index": 85,
+   "surface": "haben",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 117,
+   "surface": "präsentiert",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 130,
+   "surface": "hatten",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 137,
+   "surface": "gearbeitet",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 141,
+   "surface": "gelang",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 145,
+   "surface": "habe",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 152,
+   "surface": "gerechnet",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 155,
+   "surface": "reagiert",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 159,
+   "surface": "wollen",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 167,
+   "surface": "überprüfen",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 171,
+   "surface": "vermuten",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 173,
+   "surface": "werden",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "reading",
+   "index": 180,
+   "surface": "haben",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "speaking",
+   "index": 190,
+   "surface": "Erzähle",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "speaking",
+   "index": 203,
+   "surface": "tun",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "speaking",
+   "index": 204,
+   "surface": "würde",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "speaking",
+   "index": 205,
+   "surface": "Erzähle",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "speaking",
+   "index": 210,
+   "surface": "wäre",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "speaking",
+   "index": 214,
+   "surface": "Formuliere",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "speaking",
+   "index": 222,
+   "surface": "Formuliere",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "speaking",
+   "index": 231,
+   "surface": "Präsentiert",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "speaking",
+   "index": 234,
+   "surface": "wechselt",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "writing",
+   "index": 247,
+   "surface": "beginnt",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "writing",
+   "index": 254,
+   "surface": "stattgefunden",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "writing",
+   "index": 255,
+   "surface": "hatte",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "writing",
+   "index": 258,
+   "surface": "werden",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "writing",
+   "index": 262,
+   "surface": "veröffentlicht",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "writing",
+   "index": 263,
+   "surface": "haben",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "exercises",
+   "index": 270,
+   "surface": "haben",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "summary",
+   "index": 279,
+   "surface": "werden",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "summary",
+   "index": 280,
+   "surface": "ausgewertet",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "summary",
+   "index": 281,
+   "surface": "haben",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "summary",
+   "index": 289,
+   "surface": "werden",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "summary",
+   "index": 290,
+   "surface": "haben",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html",
+   "section": "(none)",
+   "index": 293,
+   "surface": "ausdrücken",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(220, 38, 38)",
+   "headRole": "verb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "story",
+   "index": 55,
+   "surface": "morgen",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "grammar",
+   "index": 134,
+   "surface": "später",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "grammar",
+   "index": 138,
+   "surface": "Später",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "reading",
+   "index": 198,
+   "surface": "Bis",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "reading",
+   "index": 199,
+   "surface": "in",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "reading",
+   "index": 203,
+   "surface": "hinein",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "reading",
+   "index": 213,
+   "surface": "Im",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "reading",
+   "index": 214,
+   "surface": "Laufe",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "reading",
+   "index": 243,
+   "surface": "Zwischen",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "reading",
+   "index": 245,
+   "surface": "und",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "reading",
+   "index": 258,
+   "surface": "Heute",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html",
+   "section": "reading",
+   "index": 262,
+   "surface": "später",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(124, 58, 237)",
+   "headRole": "time",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-05-zweiteilige-satzverbindungen.html",
+   "section": "grammar",
+   "index": 69,
+   "surface": "nicht",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-05-zweiteilige-satzverbindungen.html",
+   "section": "grammar",
+   "index": 87,
+   "surface": "nicht",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-05-zweiteilige-satzverbindungen.html",
+   "section": "grammar",
+   "index": 99,
+   "surface": "nicht",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-05-zweiteilige-satzverbindungen.html",
+   "section": "grammar",
+   "index": 107,
+   "surface": "nicht",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-05-zweiteilige-satzverbindungen.html",
+   "section": "grammar",
+   "index": 151,
+   "surface": "nicht",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-05-zweiteilige-satzverbindungen.html",
+   "section": "grammar",
+   "index": 154,
+   "surface": "nicht",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-05-zweiteilige-satzverbindungen.html",
+   "section": "grammar",
+   "index": 158,
+   "surface": "Nicht",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-05-zweiteilige-satzverbindungen.html",
+   "section": "summary",
+   "index": 335,
+   "surface": "nicht",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(192, 38, 211)",
+   "headRole": "negation",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-07-praepositionen-mit-genitiv.html",
+   "section": "reading",
+   "index": 202,
+   "surface": "Aufgrund",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(160, 107, 44)",
+   "headRole": "genitiv",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-07-praepositionen-mit-genitiv.html",
+   "section": "reading",
+   "index": 213,
+   "surface": "Hinsichtlich",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(160, 107, 44)",
+   "headRole": "genitiv",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-07-praepositionen-mit-genitiv.html",
+   "section": "reading",
+   "index": 222,
+   "surface": "Trotz",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(160, 107, 44)",
+   "headRole": "genitiv",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-07-praepositionen-mit-genitiv.html",
+   "section": "reading",
+   "index": 232,
+   "surface": "Innerhalb",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(160, 107, 44)",
+   "headRole": "genitiv",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-17-goethe-halbzeit-test.html",
+   "section": "story",
+   "index": 28,
+   "surface": "sollte",
+   "severity": "medium",
+   "span": "rgb(31, 78, 74)",
+   "spanRole": "TEAL-default",
+   "head": "rgb(159, 18, 57)",
+   "headRole": "modalverb",
+   "spanIsDefaultTeal": true,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  },
+  {
+   "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+   "section": "exercises",
+   "index": 241,
+   "surface": "dokumentiert",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(245, 158, 11)",
+   "headRole": "adjective",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Adjective (Partizip II)",
+     "role": "r-verb",
+     "occurrenceColour": "rgb(220, 38, 38)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+   "section": "exercises",
+   "index": 245,
+   "surface": "dokumentiert",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(245, 158, 11)",
+   "headRole": "adjective",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Adjective (Partizip II)",
+     "role": "r-verb",
+     "occurrenceColour": "rgb(220, 38, 38)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+   "section": "exercises",
+   "index": 247,
+   "surface": "dokumentiert",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(245, 158, 11)",
+   "headRole": "adjective",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": [
+    {
+     "code": "ROLE_CONTRADICTS_BADGE",
+     "badge": "Adjective (Partizip II)",
+     "role": "r-verb",
+     "occurrenceColour": "rgb(220, 38, 38)"
+    }
+   ]
+  },
+  {
+   "chapter": "chapter-c2-08-modalverben.html",
+   "section": "summary",
+   "index": 413,
+   "surface": "muss",
+   "severity": "medium",
+   "span": "rgb(220, 38, 38)",
+   "spanRole": "verb",
+   "head": "rgb(159, 18, 57)",
+   "headRole": "modalverb",
+   "spanIsDefaultTeal": false,
+   "detailKeysPresent": [
+    "span",
+    "head"
+   ],
+   "coLocatedEvidence": null
+  }
+ ]
+}

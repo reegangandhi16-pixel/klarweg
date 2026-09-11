@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · Listening transcript diagnosis</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:16px;max-width:820px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:pre-wrap;max-height:58vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>Listening transcript — why no Word Popup?</h1>
+<div class="sub">Read-only. Reveals the transcript (it is collapsed behind a button by default), inspects its DOM, checks whether <code>listening.tokens</code> exists in chapter data, and — where words ARE clickable — clicks one to confirm the existing popup works. Also verifies the play-line/audio control is unaffected.<br><code>KWLT.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+const CH=['chapter-a1-15-cafe.html','chapter-a2-16-goethe-mini-2.html','chapter-b1-7-praeteritum.html',
+ 'chapter-b2-27-perfekt-vs-praeteritum.html','chapter-c1-04-hauptsaetze-elegant-verbinden.html',
+ 'chapter-c2-04-nomen-verb-verbindungen.html'];
+const PROBE=`<script>window.__E=[];window.addEventListener('error',function(e){window.__E.push(String(e.message));});<\/script>`;
+async function boot(file){
+  const html=await (await fetch(file+'?lt='+Date.now())).text();
+  const base=location.href.replace(/[^/]*$/,'');
+  const f=$('#frame');
+  await new Promise(res=>{f.onload=()=>res();f.srcdoc=html.replace('<head>','<head><base href="'+base+'">'+PROBE);});
+  await new Promise(r=>setTimeout(r,7000));
+  return {w:f.contentWindow,d:f.contentDocument};
+}
+window.KWLT={async run(){
+ const out=[];
+ for(let i=0;i<CH.length;i++){
+  const file=CH[i];$('#status').textContent='['+(i+1)+'/'+CH.length+'] '+file.slice(8,36);
+  try{
+   const {w,d}=await boot(file);
+   const C=w.CHAPTER||{};
+   const L=C.listening||null;
+   const dataShape=L?{hasTranscript:!!L.transcript,transcriptChars:(L.transcript||'').length,
+     hasTokens:Array.isArray(L.tokens),tokenCount:Array.isArray(L.tokens)?L.tokens.length:0,
+     plainTokens:Array.isArray(L.tokens)?L.tokens.filter(t=>t.plain).length:0,
+     sampleToken:Array.isArray(L.tokens)&&L.tokens[0]?L.tokens[0]:null,
+     hasQuestions:Array.isArray(L.questions)?L.questions.length:0}:null;
+   const sec=d.getElementById('sec-listening');
+   // BEFORE reveal
+   const before={sectionExists:!!sec,
+     clickableInSection:sec?sec.querySelectorAll('.rw, .de-link').length:0,
+     transcriptVisible:!!(sec&&sec.querySelector('.reading-translation.is-visible'))};
+   // reveal the transcript the way a learner does
+   let revealed=null,after=null,clickTest=null,audioCheck=null;
+   const btn=sec&&[].slice.call(sec.querySelectorAll('button')).find(b=>/transcript/i.test(b.textContent||''));
+   if(btn){
+     btn.click();await new Promise(r=>setTimeout(r,600));
+     revealed={buttonLabel:btn.textContent.trim(),
+       transcriptVisible:!!sec.querySelector('.reading-translation.is-visible')};
+     const cont=sec.querySelector('.reading-translation');
+     const textHost=cont&&cont.firstElementChild;
+     after={containerClass:cont?String(cont.className):null,
+       textHostClass:textHost?String(textHost.className):'(no class)',
+       clickableInSection:sec.querySelectorAll('.rw, .de-link').length,
+       rwSpans:sec.querySelectorAll('.rw').length,
+       deLinkSpans:sec.querySelectorAll('.de-link').length,
+       deSpans:sec.querySelectorAll('.de').length,
+       inlineUnits:sec.querySelectorAll('.sentence-inline-unit').length,
+       firstChildTags:textHost?[].slice.call(textHost.childNodes).slice(0,6).map(n=>n.nodeType===3?'#text':(n.tagName.toLowerCase()+'.'+String(n.className).trim().replace(/\s+/g,'.'))):null};
+     // if words ARE clickable, verify the existing popup opens
+     const word=sec.querySelector('.reading-translation .rw, .reading-translation .de-link');
+     if(word){
+       const cl=d.querySelector('.wp-close');if(cl)cl.click();
+       word.click();await new Promise(r=>setTimeout(r,500));
+       const head=d.querySelector('.word-pop .word-pop-de');
+       clickTest={word:word.textContent.trim(),popupOpened:!!head,headword:head?head.textContent.trim():null};
+       const c2=d.querySelector('.wp-close');if(c2)c2.click();
+     }
+     // audio control in the listening player must be untouched
+     const ab=sec.querySelector('.audio-play-btn, .audio-track, button[class*="audio"]')||
+       [].slice.call(sec.querySelectorAll('button')).find(b=>b.querySelector('svg'));
+     audioCheck={found:!!ab,cls:ab?String(ab.className):null,connected:ab?!!ab.isConnected:null,
+       disabled:ab?!!ab.disabled:null};
+   }
+   out.push({file:file.slice(8,40),dataShape,before,revealed,after,clickTest,audioCheck,
+     errors:(w.__E||[]).length});
+  }catch(e){out.push({file:file.slice(8,40),fatal:String(e&&e.message||e)});}
+  window.__LT=out;$('#out').textContent=JSON.stringify(out,null,1);
+ }
+ $('#status').textContent='done';return out.length;
+}};
+$('#out').textContent='ready';
+</script>
+</body></html>

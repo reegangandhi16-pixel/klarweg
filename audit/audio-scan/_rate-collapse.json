@@ -1,0 +1,140 @@
+{
+ "collapsedGroups": 12,
+ "aliasRows": 13,
+ "rowsBefore": 39307,
+ "canonicalRows": 39294,
+ "duplicateManifestKeys": 3020,
+ "textsNeedingVariantEntry": 10561,
+ "aliases": [
+  {
+   "aliasAssetId": "fa464c840792650f",
+   "sharesAssetId": "29f7ca0d9dfe5136",
+   "text": "Ja bitte",
+   "voice": "de-DE-Neural2-F",
+   "aliasRate": 0.95,
+   "canonicalRate": 0.85,
+   "family": "story",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "820c9b08b17a4fdc",
+   "sharesAssetId": "4b4b7a3dd3a7b243",
+   "text": "Ja gern",
+   "voice": "de-DE-Neural2-F",
+   "aliasRate": 0.95,
+   "canonicalRate": 0.85,
+   "family": "story",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "205327d47075d88f",
+   "sharesAssetId": "ef002636cc8f6524",
+   "text": "Natürlich",
+   "voice": "de-DE-Neural2-F",
+   "aliasRate": 1,
+   "canonicalRate": 0.95,
+   "family": "clickable-word",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "f442a26510bf7d2e",
+   "sharesAssetId": "54e2eabba8b41b2d",
+   "text": "Was meinst du?",
+   "voice": "de-DE-Neural2-F",
+   "aliasRate": 0.95,
+   "canonicalRate": 0.85,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "eed4ed4a6039a53f",
+   "sharesAssetId": "491ce58825d65925",
+   "text": "Gut.",
+   "voice": "de-DE-Neural2-F",
+   "aliasRate": 0.95,
+   "canonicalRate": 0.85,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "dae87904f0ff93af",
+   "sharesAssetId": "98d8455f20dc5313",
+   "text": "Wirklich?",
+   "voice": "de-DE-Neural2-D",
+   "aliasRate": 0.95,
+   "canonicalRate": 0.85,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "a19469988bb3ae37",
+   "sharesAssetId": "98d8455f20dc5313",
+   "text": "Wirklich?",
+   "voice": "de-DE-Neural2-D",
+   "aliasRate": 1,
+   "canonicalRate": 0.85,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "2426986974d8ffaa",
+   "sharesAssetId": "fb32ac8f302b0ace",
+   "text": "Und wenn es regnet?",
+   "voice": "de-DE-Neural2-D",
+   "aliasRate": 0.95,
+   "canonicalRate": 0.85,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "9f76bef8f74b346e",
+   "sharesAssetId": "ddb23ccdbc3f64d0",
+   "text": "Vielleicht!",
+   "voice": "de-DE-Neural2-F",
+   "aliasRate": 0.95,
+   "canonicalRate": 0.85,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "0cfad38aa335b288",
+   "sharesAssetId": "fc578ccdae0b9bf2",
+   "text": "Stimmt.",
+   "voice": "de-DE-Neural2-D",
+   "aliasRate": 1,
+   "canonicalRate": 0.95,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "7e0d4003edb96ecc",
+   "sharesAssetId": "754a8aed345b2a43",
+   "text": "Interessant.",
+   "voice": "de-DE-Neural2-D",
+   "aliasRate": 1,
+   "canonicalRate": 0.95,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "83d24d7654679148",
+   "sharesAssetId": "2b708996e3170463",
+   "text": "Verstehe.",
+   "voice": "de-DE-Neural2-D",
+   "aliasRate": 1,
+   "canonicalRate": 0.95,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  },
+  {
+   "aliasAssetId": "6c3365bf2cd049b8",
+   "sharesAssetId": "a0a7e7dbc481e174",
+   "text": "Gute Idee.",
+   "voice": "de-DE-Neural2-D",
+   "aliasRate": 1,
+   "canonicalRate": 0.95,
+   "family": "listening",
+   "reason": "same text + voice; rate is applied as HTMLMediaElement.playbackRate at playback (engine playUrl), so one rendered file serves both levels"
+  }
+ ]
+}

@@ -1,0 +1,167 @@
+{
+ "total": 1047,
+ "withCompareTotal": 33,
+ "trulyMissing": 1014,
+ "sample": [
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "eigene/eigener"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "thematisch"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "weitere"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "bestimmt"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "feminin"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "maskulin"
+  },
+  {
+   "file": "chapter-a1-10-artikel-data.js",
+   "word": "unbestimmt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "falsch"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "super"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "toll"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "anstrengend"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "attraktiv"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "beliebt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "berühmt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "böse"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "cool"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "doof"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "faul"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "fleißig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "froh"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "gefährlich"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "glücklich"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "günstig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "hungrig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "hässlich"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "kaputt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "langweilig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "leicht"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "lustig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "müde"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "nett"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "neu"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "normal"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "perfekt"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "praktisch"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "sauber"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "schwer"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "sicher"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "wichtig"
+  },
+  {
+   "file": "chapter-a1-13-adjektive-data.js",
+   "word": "wunderbar"
+  }
+ ]
+}

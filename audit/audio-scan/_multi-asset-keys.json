@@ -1,0 +1,595 @@
+[
+ {
+  "manifestKey": "Ja bitte",
+  "assets": [
+   {
+    "assetId": "29f7ca0d9dfe5136",
+    "family": "story",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/story/29f7ca0d9dfe5136.mp3"
+   },
+   {
+    "assetId": "fa464c840792650f",
+    "family": "story",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/story/fa464c840792650f.mp3"
+   },
+   {
+    "assetId": "b7660d9958fe05fc",
+    "family": "story",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/story/b7660d9958fe05fc.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Ja gern",
+  "assets": [
+   {
+    "assetId": "4b4b7a3dd3a7b243",
+    "family": "story",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/story/4b4b7a3dd3a7b243.mp3"
+   },
+   {
+    "assetId": "820c9b08b17a4fdc",
+    "family": "story",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/story/820c9b08b17a4fdc.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Genau Wir schaffen das zusammen",
+  "assets": [
+   {
+    "assetId": "ddbec42aad1b9aed",
+    "family": "story",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/story/ddbec42aad1b9aed.mp3"
+   },
+   {
+    "assetId": "f47a3f949717bfb8",
+    "family": "story",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/story/f47a3f949717bfb8.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Ja das schaffen wir",
+  "assets": [
+   {
+    "assetId": "a66c1655ccd6aac3",
+    "family": "story",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/story/a66c1655ccd6aac3.mp3"
+   },
+   {
+    "assetId": "3da7810a86f3d020",
+    "family": "story",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/story/3da7810a86f3d020.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Und danach",
+  "assets": [
+   {
+    "assetId": "c135a263c6c747a5",
+    "family": "story",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/story/c135a263c6c747a5.mp3"
+   },
+   {
+    "assetId": "f968e3900426c59b",
+    "family": "story",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/story/f968e3900426c59b.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Wofür",
+  "assets": [
+   {
+    "assetId": "f56be77575ccca6a",
+    "family": "story",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/story/f56be77575ccca6a.mp3"
+   },
+   {
+    "assetId": "31260993df0c6504",
+    "family": "clickable-word",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/words/31260993df0c6504.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Natürlich",
+  "assets": [
+   {
+    "assetId": "ef002636cc8f6524",
+    "family": "story",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/story/ef002636cc8f6524.mp3"
+   },
+   {
+    "assetId": "205327d47075d88f",
+    "family": "clickable-word",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/words/205327d47075d88f.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Gern",
+  "assets": [
+   {
+    "assetId": "dff0faa8b78e1c33",
+    "family": "story",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/story/dff0faa8b78e1c33.mp3"
+   },
+   {
+    "assetId": "3d011e1cb79553c0",
+    "family": "clickable-word",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/words/3d011e1cb79553c0.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Danke!",
+  "assets": [
+   {
+    "assetId": "83b85086bd1bfb1e",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/83b85086bd1bfb1e.mp3"
+   },
+   {
+    "assetId": "006fb70e73bdf3da",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/listening/006fb70e73bdf3da.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Und du?",
+  "assets": [
+   {
+    "assetId": "de9bf7d9d8f63903",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/de9bf7d9d8f63903.mp3"
+   },
+   {
+    "assetId": "9c8fa19311536320",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/9c8fa19311536320.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Guten Tag!",
+  "assets": [
+   {
+    "assetId": "800c571d515ac85d",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/800c571d515ac85d.mp3"
+   },
+   {
+    "assetId": "152ec3d140397e39",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/152ec3d140397e39.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Vielen Dank!",
+  "assets": [
+   {
+    "assetId": "0ba41dc4e78b0d13",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/0ba41dc4e78b0d13.mp3"
+   },
+   {
+    "assetId": "042c66766106da93",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/042c66766106da93.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Was meinst du?",
+  "assets": [
+   {
+    "assetId": "54e2eabba8b41b2d",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/54e2eabba8b41b2d.mp3"
+   },
+   {
+    "assetId": "f442a26510bf7d2e",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/f442a26510bf7d2e.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Und danach?",
+  "assets": [
+   {
+    "assetId": "f8ca952ba53f5949",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/f8ca952ba53f5949.mp3"
+   },
+   {
+    "assetId": "acb42a0067e4d0b5",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/acb42a0067e4d0b5.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Gut.",
+  "assets": [
+   {
+    "assetId": "491ce58825d65925",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/491ce58825d65925.mp3"
+   },
+   {
+    "assetId": "eed4ed4a6039a53f",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/eed4ed4a6039a53f.mp3"
+   },
+   {
+    "assetId": "816d1a11785bc777",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/816d1a11785bc777.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Schön!",
+  "assets": [
+   {
+    "assetId": "c30a014507dcadae",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/c30a014507dcadae.mp3"
+   },
+   {
+    "assetId": "8016ffcfbd57bafc",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/8016ffcfbd57bafc.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Ich bin einundzwanzig Jahre alt.",
+  "assets": [
+   {
+    "assetId": "05587ad1dc872ed6",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/05587ad1dc872ed6.mp3"
+   },
+   {
+    "assetId": "281700399eed87d6",
+    "family": "speaking",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/speaking/281700399eed87d6.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Wirklich?",
+  "assets": [
+   {
+    "assetId": "98d8455f20dc5313",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/98d8455f20dc5313.mp3"
+   },
+   {
+    "assetId": "dae87904f0ff93af",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/dae87904f0ff93af.mp3"
+   },
+   {
+    "assetId": "9fee4d69f345ec00",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/9fee4d69f345ec00.mp3"
+   },
+   {
+    "assetId": "a19469988bb3ae37",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/listening/a19469988bb3ae37.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Und wenn es regnet?",
+  "assets": [
+   {
+    "assetId": "fb32ac8f302b0ace",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/fb32ac8f302b0ace.mp3"
+   },
+   {
+    "assetId": "2426986974d8ffaa",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/2426986974d8ffaa.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Vielleicht!",
+  "assets": [
+   {
+    "assetId": "ddb23ccdbc3f64d0",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.85,
+    "outputPath": "audio/v3/listening/ddb23ccdbc3f64d0.mp3"
+   },
+   {
+    "assetId": "9f76bef8f74b346e",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/9f76bef8f74b346e.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Ehrlich?",
+  "assets": [
+   {
+    "assetId": "5a8d143bd43abdf2",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/5a8d143bd43abdf2.mp3"
+   },
+   {
+    "assetId": "14d566046f4d4013",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/14d566046f4d4013.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Interessant.",
+  "assets": [
+   {
+    "assetId": "fe287831a0c5034f",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/fe287831a0c5034f.mp3"
+   },
+   {
+    "assetId": "754a8aed345b2a43",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/754a8aed345b2a43.mp3"
+   },
+   {
+    "assetId": "7e0d4003edb96ecc",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/listening/7e0d4003edb96ecc.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Verständlich.",
+  "assets": [
+   {
+    "assetId": "a86b5f327b3e812f",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/a86b5f327b3e812f.mp3"
+   },
+   {
+    "assetId": "2a4b2899ff81611e",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/listening/2a4b2899ff81611e.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Unser Dach wird nächsten Monat isoliert.",
+  "assets": [
+   {
+    "assetId": "c5f38569d3d5ba2a",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/c5f38569d3d5ba2a.mp3"
+   },
+   {
+    "assetId": "614d18e51ba95f3b",
+    "family": "speaking",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/speaking/614d18e51ba95f3b.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Je kleiner der lokale Laden, desto mehr freut sich der Besitzer über Kunden.",
+  "assets": [
+   {
+    "assetId": "0b226aab069e0be4",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/0b226aab069e0be4.mp3"
+   },
+   {
+    "assetId": "280885201c90f6ae",
+    "family": "speaking",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/speaking/280885201c90f6ae.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Stimmt.",
+  "assets": [
+   {
+    "assetId": "fc578ccdae0b9bf2",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/fc578ccdae0b9bf2.mp3"
+   },
+   {
+    "assetId": "f9d37dc1406540ed",
+    "family": "listening",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/f9d37dc1406540ed.mp3"
+   },
+   {
+    "assetId": "0cfad38aa335b288",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/listening/0cfad38aa335b288.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Verstehe.",
+  "assets": [
+   {
+    "assetId": "2b708996e3170463",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/2b708996e3170463.mp3"
+   },
+   {
+    "assetId": "83d24d7654679148",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/listening/83d24d7654679148.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Gute Idee.",
+  "assets": [
+   {
+    "assetId": "a0a7e7dbc481e174",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/a0a7e7dbc481e174.mp3"
+   },
+   {
+    "assetId": "6c3365bf2cd049b8",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 1,
+    "outputPath": "audio/v3/listening/6c3365bf2cd049b8.mp3"
+   }
+  ]
+ },
+ {
+  "manifestKey": "Ich hoffe wirklich auf eine schnelle Rückkehr.",
+  "assets": [
+   {
+    "assetId": "d7a5835e574027e0",
+    "family": "listening",
+    "voice": "de-DE-Neural2-D",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/listening/d7a5835e574027e0.mp3"
+   },
+   {
+    "assetId": "b8eb8f0879ca723f",
+    "family": "speaking",
+    "voice": "de-DE-Neural2-F",
+    "speakingRate": 0.95,
+    "outputPath": "audio/v3/speaking/b8eb8f0879ca723f.mp3"
+   }
+  ]
+ }
+]

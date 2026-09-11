@@ -1,0 +1,136 @@
+{
+ "phase": "24 — deliberate re-entrancy reproduction test (diagnosis only)",
+ "generatedAt": "2026-08-14T07:02:44.790Z",
+ "harness": "chapter/qa-p24-reentrancy.html (investigation only; qa-sweep14.html, qa-sweep-diag.html and all production files untouched)",
+ "instrumentation": {
+  "added": [
+   "runInProgress flag",
+   "activeRunToken / previousOwner",
+   "per-run runToken with start+finish timestamps",
+   "per-render renderToken stamped on the iframe (f.__p24token) and re-checked before the gate, during every gate poll, and after the engine run",
+   "documentInFrame read back from the iframe location and compared with the requested chapter",
+   "overlapLog recording RUN-STARTED-WHILE-ACTIVE, iframe-busy-on-navigate, onload-for-foreign-token, render-token-stolen(-during-gate)",
+   "observe mode (records corruption) vs guard mode (rejects a stolen render instead of accepting it)"
+  ],
+  "measurementSemanticsChanged": false,
+  "stabilityThresholdsChanged": false
+ },
+ "partTwo_control": {
+  "mode": "observe, one awaited run() at a time",
+  "chapters": 259,
+  "measured": 259,
+  "occurrences": 156299,
+  "findings": 1405,
+  "hcm": 37,
+  "clean": 71,
+  "expected": {
+   "occurrences": 156299,
+   "findings": 1405,
+   "hcm": 37,
+   "clean": 71
+  },
+  "exactMatch": true,
+  "errors": 0,
+  "nonStable": 0,
+  "tokenStolen": 0,
+  "rejected": 0,
+  "documentMismatch": 0,
+  "chaptersMeasuredTwice": 0,
+  "goldenChapters": {
+   "a1-11": "412 / 3 / 1  fp 8be4f29a",
+   "a1-21": "707 / 17 / 1  fp 5ec20d8",
+   "b2-07": "655 / 0 / 0  fp 2312e86a",
+   "b2-68": "463 / 5 / 0  fp f84af12c"
+  },
+  "verdict": "the instrumented driver reproduces the Phase 23 corpus state exactly — instrumentation does not perturb measurement",
+  "incidentalFinding": "3 iframe-busy-on-navigate events fired in the clean run (a1-28, b2-50 ×2). All three are a retry navigating while the previous attempt of the SAME chapter was still marked busy — benign self-overlap inside the retry loop, not cross-run overlap, and none produced a wrong value."
+ },
+ "partThree_overlap": {
+  "configuration": "two run() calls started 2ms apart, not awaited, same corpus subset, same iframe",
+  "subsetUsed": [
+   "a1-10",
+   "a1-11",
+   "a1-12",
+   "a1-20",
+   "a1-21",
+   "a1-22",
+   "b2-06",
+   "b2-07",
+   "b2-08",
+   "b2-68"
+  ],
+  "subsetRationale": "the P21 signature is chapter-level (a1-11 = 407/4/2). Two concurrent 259-chapter runs serialise into ~500 renders with 90s stalls per starved measurement and would not have completed; the anomaly neighbourhoods plus their immediate predecessors and successors test the same claim directly. A full overlapped corpus sweep was NOT run — stated as a limit, not a result.",
+  "detected": {
+   "RUN_STARTED_WHILE_ACTIVE": true,
+   "startedWhileActive": true,
+   "previousOwner": "recorded",
+   "iframeBusyOnNavigate": true
+  },
+  "observedFailureMode": "STARVATION, not corruption. The later-starting run owns the iframe and completes normally; the earlier run's onload handler is replaced, so each of its measurements hangs to its 90s timeout and is then retried.",
+  "values": "every record produced under overlap was correct: a1-11 412/3/1, a1-21 707/17/1, b2-07 655/0/0, b2-68 463/5/0, plus correct values for all six neighbour chapters",
+  "tokenTheftObserved": 0,
+  "documentMismatchObserved": 0,
+  "note": "the driver page reloaded during the first overlap attempt (external), so only the winning run's records survived it; the test was repeated in tighter configurations below with the same outcome"
+ },
+ "partFive_b2_68": {
+  "isolatedClean": "463 occurrences / 5 findings — matches the Phase 14 isolated re-measurement",
+  "overlapped": "two concurrent runs × 3 renders of b2-68 = 6 records, ALL 463 / 5. The starved run recovered on attempt 2 and produced correct values.",
+  "phase15Signature": "486 occurrences / 966 findings",
+  "reproduced": false,
+  "verdict": "the Phase 15 double-count was NOT reproduced by deliberate overlap in this driver structure"
+ },
+ "partSix_lifecycle": {
+  "A_twoConcurrentRuns": "tested — starvation of the earlier run, all values correct",
+  "B_runPlusReloadNavigation": "observed accidentally during the first overlap attempt: the page reloaded mid-run and the in-flight run's records were simply absent from the store. No wrong values were written — records are lost, not corrupted.",
+  "C_storageKeyChange": "NOT TESTED — deliberately skipped. The safe way to change the key mid-run is to navigate the driver, which is variant B; testing it standalone would have required deleting storage keys, which is off-limits.",
+  "D_persistExportDuringRun": "tested — a 400KB localStorage write plus an 800KB Blob + createObjectURL fired 4s into a run. Values remained golden (a1-11 412/3/1, b2-07 655/0/0). No effect.",
+  "E_runRestartedBeforeCompletion": "tested — second run() started 3s into the first, on the three anomaly chapters. All golden: 412/3/1, 707/17/1, 655/0/0."
+ },
+ "partFour_p21Signature": {
+  "soughtSignature": {
+   "occurrenceUndercount": "~8 corpus-wide",
+   "extraFindings": 1,
+   "extraHcm": 1,
+   "anomalousChapters": {
+    "a1-11": "407 / 4 / 2",
+    "a1-21": "703 / 17 / 1",
+    "b2-07": "656 / 0 / 0"
+   }
+  },
+  "observed": "none of it. Across every overlap and lifecycle configuration, all three chapters returned their golden values with identical surface fingerprints. No occurrence undercount, no extra finding, no extra HCM.",
+  "classification": "NO CORRELATION — overlap produces starvation and delay, never the P21 numeric signature"
+ },
+ "partSeven_driverSafety": {
+  "detectsOverlap": "YES — RUN-STARTED-WHILE-ACTIVE logged with both run tokens on every deliberate overlap",
+  "silentlyAcceptsSecondRun": "NO — the second run is recorded as startedWhileActive with its previousOwner",
+  "recordsPageOwner": "YES — activeRunToken plus a per-render token stamped on the iframe and re-verified at three points",
+  "preventsCorruptResultBeingAcceptedAsStable": "UNPROVEN IN PRACTICE. Guard mode ran under deliberate overlap and rejected nothing (rejected: 0) because the reject path requires a render token to be stolen mid-measurement, and that never happened — the loser never reaches the gate at all. The guard is correct but its rejection branch is untested against a real theft.",
+  "changesMeasurementSemantics": "NO — the 259-chapter control matched the expected values exactly"
+ },
+ "partEight_verdict": {
+  "classification": "5. NOT REPRODUCED",
+  "reasoning": "Overlapping execution is detectable and does degrade the run (starvation, 90s stalls, retries, and — under an external reload — silently missing records), but in 4 lifecycle variants and ~40 overlapped measurements it never produced a wrong value. The P21 numeric signature was not reproduced once. Driver re-entrancy is therefore NOT established as the cause; the Phase 23 hypothesis E is not confirmed.",
+  "whatIsNowKnown": [
+   "overlap causes lost/delayed records, not altered ones",
+   "a starved run recovers correct values via its retry loop",
+   "persist/export activity during a run has no measurable effect",
+   "a mid-run reload loses records rather than corrupting them",
+   "the Phase 15 b2-68 966-finding event remains unexplained and was not reproducible"
+  ],
+  "p21AnomalyStatus": "still unexplained after two dedicated phases. It is proven non-reproducible under clean single-run conditions (Phase 23, 2 sweeps) and under deliberately hostile overlap/lifecycle conditions (Phase 24). Treat the P21 sweep rows for a1-11 / a1-21 / b2-07 as discarded data, not as evidence of a mechanism."
+ },
+ "authoritativeCorpusState": {
+  "occurrences": 156299,
+  "findings": 1405,
+  "hcm": 37,
+  "clean": 71,
+  "measuredBy": "Phase 23 run1, Phase 23 run2, and Phase 24 control — three independent full sweeps, identical"
+ },
+ "nextExperiment": "Stop chasing the P21 numbers. The remaining open item with real value is the Phase 15 b2-68 double-count (966 findings), the only observed event where a value was demonstrably wrong rather than missing. Test whether injecting qa-engine.js twice into ONE loaded document — which overlap can cause when both runs reach the same live page — produces duplicate findings; that is a single-page experiment needing no sweep. If it does not, close the whole line of inquiry: three independent sweeps agree, and the driver's real defect (starvation under overlap) is now characterised and cheap to guard.",
+ "constraints": [
+  "no production code, chapter data, CSS, QA engine, lint rule, assertion or baseline modified",
+  "no baseline created or overwritten",
+  "P14, P15 and P21 untouched",
+  "no storage keys belonging to other work were removed"
+ ]
+}

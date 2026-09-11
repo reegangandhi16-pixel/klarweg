@@ -1,0 +1,13 @@
+{
+ "totalChapters": 47,
+ "totalLines": 263,
+ "totalIssues": 6,
+ "issueDetail": [
+  "chapter-a1-11-negation-data.js: 1 consecutive same-speaker line-pair(s) (merged turn)",
+  "chapter-a1-12-akkusativ-data.js: 1 consecutive same-speaker line-pair(s) (merged turn)",
+  "chapter-a1-13-adjektive-data.js: 1 consecutive same-speaker line-pair(s) (merged turn)",
+  "chapter-a1-14-essen-data.js: 1 consecutive same-speaker line-pair(s) (merged turn)",
+  "chapter-a1-8-goethemini1-data.js: 1 consecutive same-speaker line-pair(s) (merged turn)",
+  "chapter-a1-9-verben-data.js: 1 consecutive same-speaker line-pair(s) (merged turn)"
+ ]
+}

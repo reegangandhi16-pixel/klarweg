@@ -1,0 +1,176 @@
+{
+ "phase": "20 — targeted validation of the 6 unproven CSS colour collisions",
+ "generatedAt": "2026-08-13T10:34:10.337Z",
+ "method": "each chapter rendered once through the P14/P15 render-stability gate; computed colours read off the live DOM; no QA engine run, no baseline written, nothing edited",
+ "renderedChapters": 5,
+ "collisionsValidated": 6,
+ "allReadyState": "stable",
+ "results": [
+  {
+   "chapter": "chapter-b2-34-temporalsaetze-waehrend-seitdem.html",
+   "selector": ".r-temporal",
+   "role": "r-temporal",
+   "localColour": "rgb(31, 78, 74)",
+   "expectedCanonicalColour": "--g-temporal",
+   "overridesCanonicalRule": true,
+   "overrideProof": "local inline rule sets color on a selector list containing .r-temporal; specificity 0,1,0 ties chapter.css and wins on document order",
+   "renderedSpansWithRole": 0,
+   "affectedOccurrences": 0,
+   "popupOpened": null,
+   "learnerVisible": false,
+   "hcmFindingsInChapter": 0,
+   "classification": "B",
+   "rationale": "the override is real, but this chapter renders ZERO spans carrying .r-temporal — no token can be miscoloured, so there is nothing learner-visible. Consistent with P15: the chapter has no HCM finding.",
+   "chapterNodesInspected": 640
+  },
+  {
+   "chapter": "chapter-b2-64-praepositionen-mit-genitiv.html",
+   "selector": ".r-cause, .r-time, .r-place, .r-topic, .r-means, .r-benefit, .r-authority",
+   "role": "r-time",
+   "localColour": "rgb(31, 78, 74)",
+   "expectedCanonicalColour": "#7C3AED",
+   "overridesCanonicalRule": true,
+   "overrideProof": "local inline rule sets color on a selector list containing .r-time; specificity 0,1,0 ties chapter.css and wins on document order",
+   "renderedSpansWithRole": 0,
+   "affectedOccurrences": 0,
+   "popupOpened": null,
+   "learnerVisible": false,
+   "hcmFindingsInChapter": 0,
+   "classification": "B",
+   "rationale": "the override is real, but this chapter renders ZERO spans carrying .r-time — no token can be miscoloured, so there is nothing learner-visible. Consistent with P15: the chapter has no HCM finding.",
+   "chapterNodesInspected": 306
+  },
+  {
+   "chapter": "chapter-b2-64-praepositionen-mit-genitiv.html",
+   "selector": ".r-cause, .r-time, .r-place, .r-topic, .r-means, .r-benefit, .r-authority",
+   "role": "r-place",
+   "localColour": "rgb(31, 78, 74)",
+   "expectedCanonicalColour": "#EA580C",
+   "overridesCanonicalRule": true,
+   "overrideProof": "local inline rule sets color on a selector list containing .r-place; specificity 0,1,0 ties chapter.css and wins on document order",
+   "renderedSpansWithRole": 0,
+   "affectedOccurrences": 0,
+   "popupOpened": null,
+   "learnerVisible": false,
+   "hcmFindingsInChapter": 0,
+   "classification": "B",
+   "rationale": "the override is real, but this chapter renders ZERO spans carrying .r-place — no token can be miscoloured, so there is nothing learner-visible. Consistent with P15: the chapter has no HCM finding.",
+   "chapterNodesInspected": 306
+  },
+  {
+   "chapter": "chapter-b2-65-wissenschaftssprache.html",
+   "selector": ".r-academic, .r-genitiv, .r-fvg, .r-nomgroup, .r-head",
+   "role": "r-genitiv",
+   "localColour": "rgb(31, 78, 74)",
+   "expectedCanonicalColour": "#A06B2C",
+   "overridesCanonicalRule": true,
+   "overrideProof": "local inline rule sets color on a selector list containing .r-genitiv; specificity 0,1,0 ties chapter.css and wins on document order",
+   "renderedSpansWithRole": 0,
+   "affectedOccurrences": 0,
+   "popupOpened": null,
+   "learnerVisible": false,
+   "hcmFindingsInChapter": 0,
+   "classification": "B",
+   "rationale": "the override is real, but this chapter renders ZERO spans carrying .r-genitiv — no token can be miscoloured, so there is nothing learner-visible. Consistent with P15: the chapter has no HCM finding.",
+   "chapterNodesInspected": 355
+  },
+  {
+   "chapter": "chapter-c1-08-anspruchsvolle-praepositionen.html",
+   "selector": ".r-topic, .r-cause, .r-method, .r-purpose, .r-scope",
+   "role": "r-purpose",
+   "localColour": "rgb(31, 78, 74)",
+   "expectedCanonicalColour": "--g-purpose",
+   "overridesCanonicalRule": true,
+   "overrideProof": "local inline rule sets color on a selector list containing .r-purpose; specificity 0,1,0 ties chapter.css and wins on document order",
+   "renderedSpansWithRole": 0,
+   "affectedOccurrences": 0,
+   "popupOpened": null,
+   "learnerVisible": false,
+   "hcmFindingsInChapter": 0,
+   "classification": "B",
+   "rationale": "the override is real, but this chapter renders ZERO spans carrying .r-purpose — no token can be miscoloured, so there is nothing learner-visible. Consistent with P15: the chapter has no HCM finding.",
+   "chapterNodesInspected": 370
+  },
+  {
+   "chapter": "chapter-c1-11-goethe-mini-2.html",
+   "selector": ".r-genitiv, .r-anspruchsvoll, .r-adjektiv, .r-nomen",
+   "role": "r-genitiv",
+   "localColour": "rgb(31, 78, 74)",
+   "expectedCanonicalColour": "#A06B2C",
+   "overridesCanonicalRule": true,
+   "overrideProof": "local inline rule sets color on a selector list containing .r-genitiv; specificity 0,1,0 ties chapter.css and wins on document order",
+   "renderedSpansWithRole": 0,
+   "affectedOccurrences": 0,
+   "popupOpened": null,
+   "learnerVisible": false,
+   "hcmFindingsInChapter": 0,
+   "classification": "B",
+   "rationale": "the override is real, but this chapter renders ZERO spans carrying .r-genitiv — no token can be miscoloured, so there is nothing learner-visible. Consistent with P15: the chapter has no HCM finding.",
+   "chapterNodesInspected": 246
+  }
+ ],
+ "summary": {
+  "classA_confirmedLearnerVisible": 0,
+  "classB_collisionButNoAffectedRenderedToken": 6,
+  "classC_doesNotOverride": 0,
+  "classD_unresolved": 0,
+  "learnerVisibleOccurrencesAdded": 0
+ },
+ "corroboration": {
+  "canonicalColoursIntactInTheseChapters": "every canonical role that IS rendered in the five chapters shows its correct token colour — e.g. b2-34 verb 118/118 rgb(220,38,38), subject 71/71 rgb(24,95,165), negation 2/2 rgb(192,38,211); c1-08 preposition 196/196 rgb(202,138,4); b2-65 modalverb 2/2 rgb(159,18,57)",
+  "p15Agreement": "none of the five chapters has any HEADWORD_COLOUR_MISMATCH finding in P15, which is exactly what zero affected tokens predicts",
+  "note": "two unrelated colour populations were observed and are NOT collisions: object/conjunction/name spans at rgb(90,90,96) (ink-secondary, the documented ROLE_COLOR_VAR mapping) and article spans at rgb(22,58,55) inside vocabulary chips (the .vword-de .art override in the same local block)"
+ },
+ "hiddenCollisionCheck": [
+  {
+   "chapter": "chapter-b2-34-temporalsaetze-waehrend-seitdem.html",
+   "localSelector": ".r-temporal",
+   "otherCanonicalNamesInBlock": [],
+   "note": "single-role block; no other canonical name"
+  },
+  {
+   "chapter": "chapter-b2-64-praepositionen-mit-genitiv.html",
+   "localSelector": ".r-cause, .r-time, .r-place, .r-topic, .r-means, .r-benefit, .r-authority",
+   "otherCanonicalNamesInBlock": [
+    "time",
+    "place"
+   ],
+   "note": "both already in scope; r-cause/topic/means/benefit/authority are non-canonical"
+  },
+  {
+   "chapter": "chapter-b2-65-wissenschaftssprache.html",
+   "localSelector": ".r-academic, .r-genitiv, .r-fvg, .r-nomgroup, .r-head",
+   "otherCanonicalNamesInBlock": [
+    "genitiv"
+   ],
+   "note": "a SECOND local rule .r-subjective {color: rgb(192,57,43)} exists; r-subjective is NOT canonical — no collision"
+  },
+  {
+   "chapter": "chapter-c1-08-anspruchsvolle-praepositionen.html",
+   "localSelector": ".r-topic, .r-cause, .r-method, .r-purpose, .r-scope",
+   "otherCanonicalNamesInBlock": [
+    "purpose"
+   ],
+   "note": "no additional canonical name"
+  },
+  {
+   "chapter": "chapter-c1-11-goethe-mini-2.html",
+   "localSelector": ".r-genitiv, .r-anspruchsvoll, .r-adjektiv, .r-nomen",
+   "otherCanonicalNamesInBlock": [
+    "genitiv"
+   ],
+   "note": ".r-adjektiv and .r-nomen are German-spelled near-misses of canonical .r-adjective / .r-nnoun — they do NOT collide today, but they show how close the naming convention runs to the canonical namespace"
+  }
+ ],
+ "recommendationForPhase21": {
+  "scope": "apply the minimal fix to the 5 PROVEN chapters only (c1-01 .r-verb, c1-02 .r-time, c1-05 .r-negation, c1-07 .r-genitiv, c1-17 .r-modalverb) — 5 selector edits, 73 learner-visible occurrences restored",
+  "theseSix": "leave the six Class-B collisions in place OR clean them opportunistically; they are latent, not harmful. Cleaning them is cheap and removes a trap for future authoring, but it changes no rendered pixel today and carries a small risk of touching a chapter that needs no change.",
+  "guard": "the stronger value is the lint rule from P19 option 4 — these six prove the collision pattern recurs across levels (B2 and C1) and is one bad name away from becoming visible",
+  "verification": "after any edit, re-render only the touched chapters and confirm the affected role reports its canonical token colour; a full sweep is not required to prove a colour change"
+ },
+ "constraints": [
+  "no production file, chapter data, CSS, QA engine, assertion, lint rule or baseline modified",
+  "no full sweep",
+  "probe harness chapter/qa-p20-probe.html is investigation-only"
+ ]
+}

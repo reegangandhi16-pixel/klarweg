@@ -1,0 +1,345 @@
+abspeichern - to save (digitally)
+anbauen - to grow, cultivate; to build an extension
+anmelden - to register, sign up
+anpacken - to tackle, get to grips with
+aufkochen - to bring to a boil
+aufzeichnen - to record, document
+ausstatten - to equip, furnish
+beheben, behebt, behob, hat behoben - to fix, resolve
+beheizen - to heat
+beseitigen - to remove, eliminate
+betreiben, betreibt, betrieb, hat betrieben - to operate, run; to pursue
+bewirken - to bring about, cause
+durchführen - to carry out, conduct
+durchschauen - to see through
+einschränken - to restrict, limit
+entkommen, entkommt, entkam, ist entkommen - to escape
+entschleunigen - to slow down, decelerate
+entspannen - to relax
+entsperren - to unlock
+erachten - to consider, deem
+erfahren, erfährt, erfuhr, hat erfahren - to learn, find out; to experience
+erfüllen - to fulfill
+erobern - to conquer
+gehen, geht, ging, ist gegangen - to go
+gehen, geht, ging, ist gegangen - to go
+mitgestalten - to help shape, participate in designing
+mitwirken - to participate, collaborate
+umbauen - to rebuild, renovate
+umgehen, umgeht, umging, hat umgangen - to circumvent; to handle, deal with
+umkehren - to turn around, reverse
+umschreiben, umschreibt, umschrieb, hat umschrieben - to paraphrase; to rewrite
+unterordnen - to subordinate
+unterschätzen - to underestimate
+vergehen, vergeht, verging, ist vergangen - to pass (of time); to fade
+verlieren, verliert, verlor, hat verloren - to lose
+verspielen - to gamble away, forfeit
+widerspiegeln - to reflect
+widerstehen, widerstehen, widerstand, hat widerstanden - to resist
+zerstreuen - to disperse, scatter; to distract
+zurückblicken - to look back
+zurückziehen, zieht zurück, zog - to withdraw, retract
+überdenken, überdenkt, überdachte, hat überdacht - to reconsider
+übergeben, übergibt, übergab, hat übergeben - to hand over
+überrennen, überrennt, überrannte, hat überrannt - to overrun
+ablegen - to take off; to lay down; to take (an exam)
+abschalten - to switch off
+aneignen - to acquire, appropriate
+angesehen - respected, esteemed
+aufstellen - to set up
+ausbilden - to train, educate
+ausdrücken - to express
+bedürfen, bedarf, bedurfte, hat bedurft - to require, need
+beherrschen - to master; to dominate
+bestehen, besteht, bestand, hat bestanden - to exist; to pass (an exam); to insist
+betrachten - to view, consider
+bewegen - to move
+erhalten, erhält, erhielt, hat erhalten - to receive; to preserve
+erscheinen, erscheint, erschien, ist erschienen - to appear
+erweitern - to expand
+geben, gibt, gab, hat gegeben - to give
+umfassen - to comprise, include
+umformen - to reshape, transform
+verarbeiten - to process
+verblüffen - to amaze, baffle
+verbreiten - to spread
+verfolgen - to pursue, follow
+verlernen - to unlearn, forget (a skill)
+verlieren, verliert, verlor, hat verloren - to lose
+verwirren - to confuse
+zurückhalten, hält zurück, hielt - to hold back, restrain
+abgelegen - remote, secluded
+abgeschlossen - completed; self-contained
+absolvieren - to complete, graduate from
+abwechseln - to alternate
+anstreben - to strive for, aim for
+aufleuchten - to light up, flash
+ausbügeln - to iron out, smooth over (a problem)
+beinhalten - to contain, include
+berühren - to touch
+beschäftigen - to occupy, employ
+betätigen - to operate, activate
+bewältigen - to cope with, manage
+durcharbeiten - to work through
+einschätzen - to assess, estimate
+enthalten, enthält, enthielt, hat enthalten - to contain
+erhalten, erhält, erhielt, hat erhalten - to receive; to preserve
+erlernen - to learn (a skill)
+erlesen - exquisite, select
+erliegen, erliegt, erlag, hat erlegen - to succumb (to)
+geben, gibt, gab, hat gegeben - to give
+gelangen - to reach, arrive at
+gelassen - calm, composed
+genießen, genießt, genoss, hat genossen - to enjoy
+herausfiltern - to filter out
+hindurchgelangen - to get through
+nachhaken - to follow up, press for more info
+vermitteln - to mediate; to convey, impart
+verplempern - to waste (time)
+verschaffen - to obtain, procure
+verschwenden - to waste
+verzetteln - to fritter away one's efforts, lose focus
+verzögern - to delay
+zusammenstellen - to compile, put together
+überwiegen, überwiegt, überwog, hat überwogen - to predominate, outweigh
+abarbeiten - to work off; to wear oneself out
+abschrecken - to deter
+anfordern - to request, demand
+anlegen - to invest; to lay out, set up
+anmahnen - to remind, press for (something due)
+ansiedeln - to settle, establish
+auftauchen - to emerge, surface
+behalten, behält, behielt, hat behalten - to keep, retain
+beschenken - to give a gift to
+betroffen - affected; moved, shocked
+bezeichnen - to designate, label
+beziehen, bezieht, bezog, hat bezogen - to obtain; to relate (to)
+einfordern - to demand, claim
+einstellen - to hire; to stop, cease; to adjust
+entfallen, entfällt, entfiel, ist entfallen - to be omitted; to slip one's mind
+entgegensetzen - to counter, oppose
+entgegenwirken - to counteract
+enthalten, enthält, enthielt, hat enhalten - to contain
+entpuppen - to turn out to be, reveal itself as
+erklimmen, erklimmt, erklomm, hat erklommen - to climb, scale
+erscheinen, erscheint, erschien, ist erschienen - to appear
+erweisen, erweist, erwies, hat erwiesen - to prove; to render (a service)
+erwirtschaften - to generate (profit), earn through business
+erzeugen - to produce, generate
+erzielen - to achieve, attain
+gedankenversunken - lost in thought
+gewähren - to grant
+umgestalten - to redesign, transform
+verbleiben, verbleibt, verblieb, ist verblieben - to remain
+verlegen - to relocate; to misplace; embarrassed
+verstellen - to adjust wrongly; to disguise
+verweigern - to refuse
+verwirklichen - to realize, achieve
+vorfinanzieren - to pre-finance
+wiederfinden, findet wieder, fand - to find again
+zurückzahlen - to pay back
+zusammenkriegen - to manage to get together, pull off (colloquial)
+abbauen - to dismantle; to reduce
+abstellen - to switch off; to park; to eliminate
+anfertigen - to make, produce
+angemessen - appropriate
+aufgehoben - well looked after, in good hands
+ausmachen - to matter; to agree on; to turn off
+belohnen - to reward
+bereichern - to enrich
+besagen - to state, say (of a text/document)
+durchleben - to go through, experience
+einbauen - to install, build in
+einstellen - to hire; to stop
+erscheinen, erscheint, erschien, ist erschienen - to appear
+geben, gibt, gab, hat gegeben - to give
+gewinnen, gewinnt, gewann, hat gewonnen - to win
+herumirren - to wander around, roam
+veranstalten - to organize, hold (an event)
+verbergen, verbirgt, verbarg, hat verborgen - to hide
+verdanken - to owe (thanks to)
+verheimlichen - to conceal
+verlieren, verliert, verlor, hat verloren - to lose
+verlieren, verliert, verlor, hat verloren - to lose
+vermerken - to note down
+verpuffen - to fizzle out, come to nothing
+verzweifeln - to despair
+verzweigen - to branch out
+überfordern - to overwhelm, overtax
+übersehen, übersieht, übersah, hat übersehen - to overlook
+abgestorben - dead, numb (of tissue/limb)
+abknabbern - to nibble off/away
+ansonsten - otherwise
+aufbessern - to improve, top up
+aufdecken - to uncover, expose
+aufsuchen - to visit, go to see
+aufwärmen - to warm up
+ausprägen - to develop, manifest
+ausschöpfen - to exhaust, make full use of
+ausschütten - to pour out; to distribute (dividends)
+auszahlen - to pay off; to pay out
+bedenken, bedenkt, bedachte, hat bedacht - to consider, take into account
+behalten, behält, behielt, hat behalten - to keep
+behandeln - to treat
+behandeln - to treat
+benachteiligen - to disadvantage
+beugen - to bend
+durchsetzen - to enforce; (sich durchsetzen) to prevail
+einteilen - to divide up, organize
+entsprechen, entspricht, entsprach, hat entsprochen - to correspond to
+erheben, erhebt, erhob, hat erhoben - to raise; to levy
+ernten - to harvest
+geben, gibt, gab, hat gegeben - to give
+hingucken - to look (at something), take a look
+umstritten - controversial
+verantworten - to take responsibility for
+verdoppeln - to double
+vergehen, vergeht, verging, ist vergangen - to pass, fade
+verkraften - to cope with, withstand
+verlieren, verliert, verlor, hat verloren - to lose
+vernachlässigen - to neglect
+verspüren - to sense, feel
+verteuern - to make more expensive
+verunsichern - to unsettle
+verwöhnen - to spoil, pamper
+verzehren - to consume, eat
+vorbeugen - to prevent
+zukaufen - to buy additionally
+zulegen - to acquire, get; to pick up (speed)
+überschreiten, überschreitet, überschritt, hat überschritten - to exceed, cross
+anketten - to chain up
+anmalen - to paint
+anstellen - to employ; to turn on
+aufdrehen - to turn up/on
+aufgedunsen - bloated, swollen
+aufkleben - to stick on
+ausdenken, denkt aus, dachte aus, hat ausgedacht - to devise, think up
+auslegen - to interpret; to lay out
+ausloggen - to log out
+ausmachen - to turn off; to agree on
+ausräumen - to clear out
+ausstrahlen - to broadcast; to radiate
+begehen, begeht, beging, hat begangen - to commit (a crime); to celebrate
+behalten, behält, behielt, hat behalten - to keep
+bekritzeln - to scribble on
+belästigen - to harass
+bescheren - to bring, give (as a gift)
+bezwingen, bezwingt, bezwang, hat bezwungen - to conquer, overcome
+einig sein - to be in agreement
+einstreuen - to sprinkle in, insert (into a conversation)
+erbeuten - to capture, seize (as loot)
+erlassen, erlässt, erließ, hat erlassen - to enact, issue (a decree); to remit (a debt)
+ermitteln - to investigate, determine
+ernennen, ernennt, ernannte, hat ernannt - to appoint
+erpressen - to blackmail, extort
+erschauern - to shudder
+ertönen - to sound, ring out
+gefährden - to endanger
+gehen, geht, ging, ist gegangen - to go
+missglücken - to fail, go wrong
+nachahmen - to imitate
+verhängen - to impose (a penalty)
+verringern - to reduce
+versagen - to fail
+versammeln - to gather, assemble
+verschlingen, verschlingt, verschlang, hat verschlungen - to devour
+verwickeln - to entangle, involve
+vorlegen - to present, submit
+abschaffen - to abolish
+abspielen - to play (a recording); to take place
+anlehnen - to lean against
+anstecken - to infect; to pin on
+ausgeschlossen - excluded; out of the question
+ausmisten - to clean out, declutter
+beeindrucken - to impress
+beklagen - to lament, complain about
+bestärken - to reinforce, encourage
+bewegen - to move
+einhaken - to hook in, link arms; to interject
+einparken - to park
+entmachten - to strip of power
+entschlacken - to detox, cleanse
+erfassen - to grasp, comprehend; to record (data)
+geben, gibt, gab, hat gegeben - to give
+mitfühlen - to empathize, sympathize
+mitlächeln - to smile along
+untermauern - to substantiate, back up
+verbummeln - to waste (time); to miss (through negligence)
+vermitteln - to mediate, convey
+versunken - immersed, absorbed
+verängstigen - to frighten
+vorleben - to set an example (by one's own life)
+zurückschalten - to shift down (gear); to switch back
+abdecken - to cover
+abverlangen - to demand (of someone)
+auftun, tut auf, tat auf, hat aufgetan - to open up
+ausfeilen - to refine, polish
+ausgeglichen - balanced
+beherbergen - to house, accommodate
+belesen - well-read
+durchlaufen, durchläuft, durchlief, hat durchlaufen - to go through, pass through
+einholen - to catch up with; to obtain (permission)
+einsenden - to submit, send in
+einüben - to practice, rehearse
+entmutigen - to discourage
+entwerfen, entwirft, entwarf, hat entworfen - to design, draft
+erfahren - experienced; to learn, find out
+gehen, geht, ging, ist gegangen - to go
+geschlossen - closed
+herumreisen - to travel around
+hinausposaunen - to trumpet, broadcast loudly
+verkörpern - to embody
+verlesen, verliest, verlas, hat verlesen - to read out
+verschreiben, verschreibt, verschrieb, hat verschrieben - to prescribe
+versperren - to block, bar
+vorführen - to demonstrate, present
+wegsperren - to lock away
+widerlegen - to refute
+überbewerten - to overvalue, overrate
+überfallen, überfällt, überfiel, hat überfallen - to attack, raid
+überspringen, überspringt, übersprang, hat übersprungen - to skip over
+abstreifen - to shed, strip off
+anfühlen - to feel (to the touch)
+angeboren - innate, congenital
+angehören - to belong to
+angenommen - assumed, supposing
+anmuten - to seem, appear (to have a certain quality)
+aufbewahren - to store, keep
+auftauchen - to emerge, surface
+aufteilen - to divide up
+auslachen - to laugh at, mock
+befremden - to alienate, disconcert
+begreifen, begreift, begriff, hat begriffen - to comprehend
+beherrschen - to master
+bescheiden - modest
+entschlüsseln - to decode
+erheben, erhebt, erhob, hat erhoben - to raise; to levy
+erneuern - to renew
+erregen - to excite, arouse
+erschließen, erschließt, erschloss, hat erschlossen - to develop, open up (access to)
+gegensteuern - to counteract, take countermeasures
+herrichten - to prepare, fix up
+hineinleben - to immerse oneself in, put oneself in
+hinterfragen - to question, scrutinize
+mitspielen - to play along, join in
+verblassen - to fade
+vererben - to bequeath, pass on (inheritance/genes)
+verlieren, verliert, verlor, hat verloren - to lose
+vermischen - to mix
+verstopfen - to clog, block
+verstorben - deceased
+verstärken - to strengthen, reinforce
+verunglücken - to have an accident
+verwundern - to surprise, astonish
+verziehen, verzieht, verzog, hat verzogen - to distort (face); to move away; to spoil (a child)
+vorbeirasen - to race past
+vorhanden - available, present
+zerfallen, zerfällt, zerfiel, ist zerfallen - to disintegrate, fall apart
+zucken - to twitch
+zunicken - to nod at
+zurücknicken - to nod back
+zusammenfegen - to sweep up
+zusammenfügen - to join together
+zusammenschweißen - to weld together; (fig.) to bond
+zuteilen - to allocate
+überlagern - to overlay, superimpose

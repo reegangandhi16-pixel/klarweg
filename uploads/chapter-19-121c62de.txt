@@ -1,0 +1,490 @@
+achtsam - mindful, careful
+anonym - anonymous
+aufgerichtet - upright, erected
+bewährt - proven, tried-and-tested
+bisherig - previous, former
+computerspielsüchtig - addicted to computer games
+defekt - defective, broken
+definitiv - definite, definitive
+dicht - dense, tight; close
+dramatisch - dramatic
+dreckig - dirty
+ehrenamtlich - voluntary (unpaid)
+eifrig - eager, zealous
+einvernehmlich - amicable, by mutual agreement
+einwandfrei - flawless, impeccable
+elastisch - elastic
+enttäuscht - disappointed
+erfolglos - unsuccessful
+exzessiv - excessive
+fest - firm, solid
+findig - resourceful, ingenious
+gaumenfreundlich - palate-friendly, easy on the palate
+gefühlt - felt, perceived
+gerade - straight; just, exactly
+gerade - straight; just, exactly
+gesellschaftlich - social, societal
+gewaltsam - violent, forceful
+gleich - same, equal; immediately
+integriert - integrated
+kiefergerecht - jaw-friendly
+klammheimlich - secretly, on the sly
+kriminologisch - criminological
+kurzerhand - without further ado, on the spot
+kündbar - terminable, cancellable
+lauwarm - lukewarm
+mehrfach - multiple, several times
+meistverkauft - best-selling
+nachdenklich - thoughtful, pensive
+namens - named, by the name of
+offensichtlich - obvious
+permanent - permanent
+professionell - professional
+real - real
+regelrecht - real, downright
+routiniert - experienced, practiced
+seriös - reputable, serious
+spielsüchtig - addicted to gambling
+studentisch - student (adj.)
+textil - textile
+umgehend - immediate
+unbeschäftigt - unoccupied, idle
+undicht - leaky
+ungerecht - unjust
+unheimlich - eerie, scary; (colloq.) incredibly
+versichert - insured
+versteckt - hidden
+verwunderlich - surprising
+voreilig - hasty, premature
+winzig - tiny
+zeitaufwendig - time-consuming
+zeitgemäß - contemporary, up to date
+zeitgleich - simultaneous
+zeitig - early
+zeitlos - timeless
+zeitraubend - time-consuming
+zeitsparend - time-saving
+zeitweise - temporarily, at times
+zueinander - to one another
+zukunftsorientiert - future-oriented
+zündend - inspiring, sparking (an idea)
+überflüssig - superfluous
+übermäßig - excessive
+abstrakt - abstract
+allererst - very first
+allermeist - most of all
+anderweitig - otherwise, elsewhere
+atemberaubend - breathtaking
+barfuß - barefoot
+beharrlich - persistent
+bemerkenswert - remarkable
+bewusst - conscious, deliberate
+contra - against
+desinteressiert - disinterested
+erreichbar - reachable
+explizit - explicit
+fest - firm, solid
+fragil - fragile
+gefärbt - colored, dyed
+geistig - mental, intellectual
+gelangweilt - bored
+gelegentlich - occasional
+gleich - same, equal
+gleichgültig - indifferent
+grammatisch - grammatical
+heutzutage - nowadays
+identisch - identical
+implizit - implicit
+indirekt - indirect
+inwieweit - to what extent
+ironisch - ironic
+irritiert - irritated
+jeweilig - respective
+klassisch - classic
+komödiantisch - comedic
+liebevoll - loving
+minderbemittelt - (colloquial, derogatory) simple-minded
+schlagfertig - quick-witted
+spielerisch - playful
+sprachlich - linguistic
+sprachlos - speechless
+umfassend - comprehensive
+unbewusst - unconscious
+ungebildet - uneducated
+ungebräuchlich - uncommon, not customary
+unverbindlich - non-binding
+unverschämt - outrageous, impertinent
+unvollständig - incomplete
+unüberschaubar - unmanageable, overwhelming
+vage - vague
+vernetzt - networked, connected
+voll - full
+abgelenkt - distracted
+abwechslungsreich - varied
+akademisch - academic
+akribisch - meticulous
+aufschlussreich - informative, revealing
+ausführlich - detailed
+außergewöhnlich - extraordinary
+belastbar - resilient, able to bear a load
+berufsbegleitend - alongside work (e.g. part-time study while working)
+durchsetzungsstark - assertive
+eingespielt - well-rehearsed, well-coordinated
+einhellig - unanimous
+entscheidend - decisive
+fachlich - professional, technical (in expertise)
+floskelhaft - clichéd, full of stock phrases
+flüssig - fluent; liquid
+frei - free
+geometrisch - geometric
+geschickt - skillful
+haufenweise - in droves, heaps
+höchst - highly, extremely
+innovativ - innovative
+kognitiv - cognitive
+kommunikativ - communicative
+kurfürstlich - electoral (relating to a Prince-Elector, historical)
+legendär - legendary
+lehrreich - instructive
+logisch - logical
+lückenlos - seamless, without gaps
+monoton - monotonous
+mäßig - moderate; mediocre
+nebensächlich - secondary, unimportant
+passgenau - precisely fitting
+phrasenhaft - clichéd
+physisch - physical
+plausibel - plausible
+primär - primary
+prämiert - award-winning
+ratsam - advisable
+rund - round; approximately
+schlüssig - conclusive, coherent
+schwer - heavy; difficult
+sekundär - secondary
+stressig - stressful
+teamfähig - able to work in a team
+thematisch - thematic
+unmittelbar - immediate, direct
+versetzt - staggered, offset
+verunsichert - unsettled, insecure
+vielfach - multiple, manifold
+vorherig - previous
+zeitlich - temporal, in terms of time
+zielstrebig - goal-oriented
+anständig - decent
+arbeitsintensiv - labor-intensive
+arbeitsunfähig - unable to work
+ausgenutzt - exploited
+authentisch - authentic
+beglückt - delighted
+chronologisch - chronological
+dazugehörig - belonging to it, associated
+drohend - threatening
+energetisch - energetic
+erspart - saved (money)
+erstmals - for the first time
+europaweit - Europe-wide
+frei - free
+frei - free
+fremd - foreign, strange
+gefährdet - at risk, endangered
+genial - brilliant
+geografisch - geographic
+geregelt - regulated
+gesetzlich - legal, statutory
+grenzenlos - boundless
+hochwertig - high-quality
+innerlich - inward, internal
+insgeheim - secretly
+insolvent - insolvent
+inspirierend - inspiring
+jegliche - any, every
+juristisch - legal, juridical
+konkret - concrete
+künstlerisch - artistic
+moralisch - moral
+nachhaltig - sustainable
+nebeneinander - side by side
+profan - mundane, profane
+qualifiziert - qualified
+qualitativ - qualitative
+rasant - rapid, fast-paced
+rasch - quick
+rockig - rock-like (music style)
+schlicht - simple, plain
+stabil - stable
+technologieintensiv - technology-intensive
+unbenutzt - unused
+undenkbar - unthinkable
+unerlässlich - essential, indispensable
+unerwartet - unexpected
+unerwähnt - unmentioned
+unmoralisch - immoral
+unpräsent - absent, not present
+vertrauensvoll - trusting
+vielfältig - diverse
+vielversprechend - promising
+zahlungsunfähig - insolvent, unable to pay
+zwischenmenschlich - interpersonal
+äußerst - extremely
+überfordert - overwhelmed
+übersichtlich - clear, well-organized
+anerkannt - recognized
+bedenkenlos - without hesitation
+bedürftig - needy
+beeindruckend - impressive
+begabt - talented
+beispielhaft - exemplary
+betrieblich - operational, company-related
+durchaus - definitely, quite
+durchsichtig - transparent
+effizient - efficient
+eigens - specially, expressly
+finanzierbar - affordable, financeable
+geschwind - quick, swift
+gesund - healthy
+getrennt - separated
+größtenteils - for the most part
+gut - good
+hautnah - close-up, first-hand
+heraus - out
+immens - immense
+langfristig - long-term
+laufend - ongoing, continuous
+mehrmals - several times
+obere - upper
+oberflächlich - superficial
+optimal - optimal
+planmäßig - as planned, on schedule
+räumlich - spatial
+spannungsmindernd - tension-reducing
+systematisch - systematic
+umfangreich - extensive
+unbezahlbar - priceless, unaffordable
+unerreichbar - unreachable
+unrealistisch - unrealistic
+unwürdig - unworthy, undignified
+verbreitet - widespread
+verplant - already scheduled, committed (time)
+vielerorts - in many places
+weitaus - by far
+weltumspannend - global, spanning the world
+üppig - lavish, abundant
+allumfassend - all-encompassing
+archaisch - archaic
+aufrecht - upright
+ayurvedisch - Ayurvedic
+belastet - burdened, contaminated
+betreffend - concerning, regarding
+breiig - mushy, pulpy
+bundesweit - nationwide (federal)
+chemisch - chemical
+engmaschig - close-meshed, tight-knit
+entfettet - defatted, fat-free
+erfüllt - fulfilled
+flächendeckend - comprehensive, blanket (coverage)
+frisch - fresh
+generell - general
+gerade - straight; just
+geschlechterspezifisch - gender-specific
+glutenfrei - gluten-free
+hellblau - light blue
+herkömmlich - conventional
+herzhaft - hearty, savory
+heutig - today's, current
+hocheffektiv - highly effective
+hundeelend - (colloquial) terribly sick, feeling awful
+innere - inner
+intim - intimate
+konventionell - conventional
+kostbar - precious
+lediglich - merely
+luxuriös - luxurious
+maßgeschneidert - tailor-made
+multilateral - multilateral
+munter - lively, cheerful
+mühsam - laborious
+probiotisch - probiotic
+promoviert - having a doctorate
+saisonal - seasonal
+schlau - clever
+sinnhaft - meaningful
+unbedenklich - harmless, safe
+ungewohnt - unfamiliar
+vehement - vehement
+verkappt - disguised, covert
+verträglich - compatible, agreeable (esp. food/medicine)
+vorzugsweise - preferably
+wählerisch - picky, choosy
+zart - tender, delicate
+zuckerfrei - sugar-free
+übel - bad, nasty
+abartig - abnormal, sick (pejorative)
+abwaschbar - washable
+ausdrücklich - explicit
+begehrt - sought-after, coveted
+bekanntlich - as is well known
+beruhigend - calming, reassuring
+beschädigt - damaged
+betrügerisch - fraudulent
+bewaffnet - armed
+brutal - brutal
+chaotisch - chaotic
+charmant - charming
+erlaubterweise - legitimately, with permission
+fanatisch - fanatical
+formell - formal
+geistesgegenwärtig - quick-witted, level-headed (in a crisis)
+geregelt - regulated
+gestört - disturbed
+grob - coarse, rough
+gut - good
+gängig - common, standard
+kitschig - kitschy
+kriminell - criminal
+kurios - curious, odd
+königlich - royal
+lustig - funny
+mörderisch - murderous
+nachträglich - subsequent, retroactive
+närrisch - foolish, silly
+rechtswidrig - unlawful
+reichlich - ample, plenty
+reizvoll - appealing, attractive
+schusselig - scatterbrained
+sozialkritisch - socially critical
+stellvertretend - representative, deputy
+strafbar - punishable, criminal
+sturmfrei - "storm-free" (home alone, parents away)
+tollpatschig - clumsy
+tröstlich - comforting
+unauffällig - inconspicuous
+unendlich - infinite
+ungeduldig - impatient
+ungeschickt - clumsy, awkward
+unverzüglich - immediate, without delay
+unzulässig - inadmissible
+voll - full
+vorsätzlich - deliberate, premeditated
+wachsam - vigilant
+wohldosiert - well-dosed
+wörtlich - literal
+zulässig - permissible
+zwischendurch - in between, occasionally
+überallhin - everywhere (to)
+überschaubar - manageable
+altersgemischt - mixed-age
+autoritär - authoritarian
+bildungsbürgerlich - relating to the educated middle class
+denkbar - conceivable
+durchdringend - piercing
+eineinhalb - one and a half
+farblich - in terms of color
+fatal - fatal, disastrous
+gewiss - certain
+grundlegend - fundamental
+halbdunkel - dim, half-dark
+hochbegabt - highly gifted
+kerngesund - perfectly healthy
+kindgerecht - child-friendly, age-appropriate
+kollektiv - collective
+kompetent - competent
+kugelrund - perfectly round
+möglicherweise - possibly
+ozeanblau - ocean blue
+pädagogisch - pedagogical
+regnerisch - rainy
+scheinbar - seemingly
+schulisch - school-related
+stets - always
+stichhaltig - valid, sound (argument)
+subjektiv - subjective
+unbeschwert - carefree
+unerträglich - unbearable
+ungefragt - unasked, uninvited
+ungetrübt - unclouded
+veranlagt - predisposed, inclined
+vergebens - in vain
+widersprüchlich - contradictory
+wolkenlos - cloudless
+zweifellos - undoubtedly
+altbewährt - tried and trusted
+anregend - stimulating
+aufgeregt - excited, nervous
+aufregend - exciting
+ausgereift - mature, fully developed
+beachtenswert - noteworthy
+brillant - brilliant
+brotlos - unprofitable, thankless (e.g. "brotlose Kunst")
+dicht - dense
+dummerweise - unfortunately, stupidly enough
+durchdacht - well thought-out
+einfallsreich - imaginative
+einzigartig - unique
+friedlich - peaceful
+gedanklich - mental, in thought
+gedruckt - printed
+großartig - great, wonderful
+hochkarätig - top-notch, high-caliber
+ideenreich - full of ideas
+kurzweilig - entertaining
+lesenswert - worth reading
+materiell - material
+nste - (unclear entry — likely a data fragment)
+psychisch - psychological, mental
+skrupulös - scrupulous
+tiefsinnig - profound
+unbändig - unbridled, immense
+unerklärlich - inexplicable
+ungehemmt - uninhibited
+unterhaltsam - entertaining
+unvermeidlich - unavoidable
+vergesslich - forgetful
+vollendet - accomplished, perfected
+wüst - wild, desolate
+zeitgenössisch - contemporary
+zuversichtlich - confident, optimistic
+empfindlich - sensitive
+episodisch - episodic
+erschwinglich - affordable
+etliche - several, quite a few
+exotisch - exotic
+fahrig - fidgety, distracted
+frisch - fresh
+frühzeitig - early, timely
+gefleckt - spotted, speckled
+geisterhaft - ghostly
+geistig - mental
+gelebt - lived
+gestrig - yesterday's
+getreulich - faithfully
+getrost - confidently, without worry
+halbherzig - half-hearted
+her - here, hither
+hilflos - helpless
+kahl - bald, bare
+kitzlig - ticklish
+klar - clear
+lauter - nothing but; pure
+literarisch - literary
+prosit - cheers! (toast)
+prosopagnostisch - relating to face blindness
+prozedural - procedural
+robust - robust
+schrill - shrill
+selektiv - selective
+semantisch - semantic
+sensorisch - sensory
+streng - strict
+theologisch - theological
+umständlich - cumbersome, complicated
+unbestechlich - incorruptible
+unhandlich - unwieldy
+unschuldig - innocent
+unsichtbar - invisible
+untereinander - among each other
+verkürzt - shortened
+vorübergehend - temporary
+woanders - elsewhere
+zermürbt - worn down, exhausted

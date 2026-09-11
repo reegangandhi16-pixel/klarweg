@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · Listening coverage audit</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:16px;max-width:820px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:pre-wrap;max-height:58vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>Listening transcript — word-popup coverage</h1>
+<div class="sub">Reveals the transcript, then compares EVERY German word in the transcript text against the set that is actually <code>.de-link</code>. Missing words are classified by pattern and a sample is clicked. Also runs the same measurement on the Reading passage as a control. Read-only.<br><code>KWCOV.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+const CH=['chapter-a1-15-cafe.html','chapter-a2-16-goethe-mini-2.html','chapter-b1-7-praeteritum.html',
+ 'chapter-b2-27-perfekt-vs-praeteritum.html','chapter-c1-04-hauptsaetze-elegant-verbinden.html',
+ 'chapter-c2-04-nomen-verb-verbindungen.html'];
+const PROBE=`<script>window.__E=[];window.addEventListener('error',function(e){window.__E.push(String(e.message));});<\/script>`;
+async function boot(file){
+  const html=await (await fetch(file+'?cov='+Date.now())).text();
+  const base=location.href.replace(/[^/]*$/,'');
+  const f=$('#frame');
+  await new Promise(res=>{f.onload=()=>res();f.srcdoc=html.replace('<head>','<head><base href="'+base+'">'+PROBE);});
+  await new Promise(r=>setTimeout(r,7000));
+  return {w:f.contentWindow,d:f.contentDocument};
+}
+// every word-like run in the rendered German text, punctuation stripped
+function words(txt){
+  return (txt.match(/[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß'’\-]*/g)||[]);
+}
+function classify(word,linkedSet){
+  if(/^\d+$/.test(word))return 'number';
+  if(/[-]/.test(word))return 'hyphenated';
+  if(/['’]/.test(word))return 'contraction';
+  if(/[ÄÖÜäöüß]/.test(word))return 'umlaut/ß';
+  if(word.length<=2)return 'short (<=2 chars)';
+  if(/^[A-ZÄÖÜ]/.test(word))return 'capitalised';
+  return 'lowercase other';
+}
+window.KWCOV={async run(){
+ const out=[];
+ for(let i=0;i<CH.length;i++){
+  const file=CH[i];$('#status').textContent='['+(i+1)+'/'+CH.length+'] '+file.slice(8,36);
+  try{
+   const {w,d}=await boot(file);
+   const sec=d.getElementById('sec-listening');
+   const btn=sec&&[].slice.call(sec.querySelectorAll('button')).find(b=>/transcript/i.test(b.textContent||''));
+   if(btn){btn.click();await new Promise(r=>setTimeout(r,700));}
+   const cont=sec&&sec.querySelector('.reading-translation');
+   const host=cont&&cont.firstElementChild;
+   // German transcript text = the host only (translation is a sibling .muted div)
+   const germanText=host?host.textContent:'';
+   const all=words(germanText);
+   const linked=[].slice.call(host?host.querySelectorAll('.de-link, .rw'):[]);
+   const linkedWords=linked.map(n=>n.textContent.trim()).filter(Boolean);
+   // multiset difference: what appears in text but is not a linked span
+   const pool={};linkedWords.forEach(x=>{const k=x.toLowerCase();pool[k]=(pool[k]||0)+1;});
+   const missing=[];
+   all.forEach(x=>{const k=x.toLowerCase();if(pool[k]>0){pool[k]--;}else missing.push(x);});
+   const patterns={};missing.forEach(m=>{const c=classify(m);patterns[c]=(patterns[c]||0)+1;});
+   // click-test up to 3 missing words: locate the text node and check any ancestor link
+   const clickTests=[];
+   for(const m of missing.slice(0,3)){
+     const tw=d.createTreeWalker(host,NodeFilter.SHOW_TEXT,null);let node,found=null;
+     while((node=tw.nextNode())){if(node.nodeValue&&node.nodeValue.indexOf(m)>=0){found=node;break;}}
+     let res={word:m,textNodeFound:!!found};
+     if(found){
+       const p=found.parentElement;
+       res.parentTag=p?p.tagName.toLowerCase()+'.'+String(p.className).trim().replace(/\s+/g,'.'):null;
+       res.insideLink=!!(p&&p.closest('.de-link, .rw'));
+       const cl=d.querySelector('.wp-close');if(cl)cl.click();
+       if(p){p.click();await new Promise(r=>setTimeout(r,420));}
+       const head=d.querySelector('.word-pop .word-pop-de');
+       res.clickOpensPopup=!!head;res.headword=head?head.textContent.trim():null;
+       const c2=d.querySelector('.wp-close');if(c2)c2.click();
+     }
+     clickTests.push(res);
+   }
+   // Reading control, same measurement
+   const rsec=d.getElementById('sec-reading');
+   const rhost=rsec&&rsec.querySelector('.reading-passage');
+   let reading=null;
+   if(rhost){
+     const rall=words(rhost.textContent);
+     const rlinked=[].slice.call(rhost.querySelectorAll('.de-link, .rw')).map(n=>n.textContent.trim());
+     const rpool={};rlinked.forEach(x=>{const k=x.toLowerCase();rpool[k]=(rpool[k]||0)+1;});
+     let rmiss=0;rall.forEach(x=>{const k=x.toLowerCase();if(rpool[k]>0)rpool[k]--;else rmiss++;});
+     reading={total:rall.length,clickable:rlinked.length,missing:rmiss,
+       coverage:rall.length?Math.round((rall.length-rmiss)/rall.length*100):null};
+   }
+   out.push({file:file.slice(8,40),
+     totalGermanWords:all.length,clickable:linkedWords.length,missing:missing.length,
+     coveragePct:all.length?Math.round((all.length-missing.length)/all.length*100):null,
+     missingList:missing,patterns,clickTests,readingControl:reading,errors:(w.__E||[]).length});
+  }catch(e){out.push({file:file.slice(8,40),fatal:String(e&&e.message||e)});}
+  window.__COV=out;$('#out').textContent=JSON.stringify(out,null,1);
+ }
+ $('#status').textContent='done';return out.length;
+}};
+$('#out').textContent='ready';
+</script>
+</body></html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · Leak Rendered-Impact Audit</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:20px;max-width:680px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:70vh;overflow:auto}
+iframe{position:absolute;width:1280px;height:960px;left:-9999px;top:0;border:0}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60}
+</style></head><body>
+<h1>Leak Rendered-Impact Audit</h1>
+<div class="sub">Phase 7. Renders each affected chapter, reproduces the <code>AUTHORED_GERMAN()</code> harvest with per-source attribution, and measures rendered consequences of ONE authored source entry at a time. Investigation only — writes nothing to production.</div>
+<div class="st" id="status">idle · call KWLEAK.run([slugs])</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script src="qa-data-lint.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+// Inventory: chapter slug, line in its -data.js?v=7, field. The VALUE is read from the
+// data file at that line so nothing is retyped.
+const INVENTORY=[
+ ['b2-03-informationsstruktur-thema-rhema',42,'ex'],
+ ['b2-07-verbergaenzungen-erkennen',181,'de'],
+ ['b2-20-anstatt-zu',196,'de'],
+ ['b2-21-sowohl-als-auch',179,'de'],
+ ['b2-22-weder-noch',191,'de'],
+ ['b2-23-nicht-nur-sondern-auch',193,'de'],
+ ['b2-23-nicht-nur-sondern-auch',194,'de'],
+ ['b2-34-temporalsaetze-waehrend-seitdem',187,'de'],
+ ['b2-35-temporalsaetze-bevor-nachdem',177,'de'],
+ ['b2-38-verschachtelte-relativsaetze',174,'de'],
+ ['b2-38-verschachtelte-relativsaetze',175,'de'],
+ ['b2-38-verschachtelte-relativsaetze',176,'de'],
+ ['b2-38-verschachtelte-relativsaetze',177,'de'],
+ ['b2-38-verschachtelte-relativsaetze',466,'sentence'],
+ ['b2-39-relativsaetze-wer-der',191,'de'],
+ ['b2-40-verben-mit-praepositionen',190,'de'],
+ ['b2-41-nomen-mit-praepositionen',189,'de'],
+ ['b2-45-passiversatz-sich-lassen',187,'de'],
+ ['b2-46-unpersoenliches-passiv',171,'de'],
+ ['b2-46-unpersoenliches-passiv',172,'de'],
+ ['b2-47-bekommen-kriegen-passiv',178,'de'],
+ ['b2-48-modalitaetsersatz-haben-sein-zu',178,'de'],
+ ['b2-50-nominalisierung',186,'de'],
+ ['b2-50-nominalisierung',187,'de'],
+ ['b2-51-erweiterte-partizipialattribute',177,'de'],
+ ['b2-51-erweiterte-partizipialattribute',178,'de'],
+ ['b2-52-komplexe-nominalgruppen',174,'de'],
+ ['b2-54-funktionsverbgefuege',179,'de'],
+ ['b2-58-textkohaerenz-absatzlogik',172,'de'],
+ ['b2-61-indirekte-rede-zeitverschiebung',179,'de'],
+ // Phase 10 addition (NOT part of the authoritative 29): sibling outcome row
+ // discovered during phase 9 review; measured with the identical method.
+ ['b2-61-indirekte-rede-zeitverschiebung',180,'de'],
+ // Phase 12 addition (NOT part of the authoritative 29): discovered in phase 11.
+ // Phase 13 candidates from the independent object-tree scan (not in the 29).
+ ['b2-15-konzessivsaetze-obgleich',178,'de'],
+ ['b2-16-konsekutivsaetze-sodass-infolgedessen',186,'de'],
+ ['b2-17-modalsaetze-indem',177,'de'],
+ ['b2-18-modalsaetze-dadurch-dass',174,'de'],
+ ['b2-19-ohne-zu',193,'de'],
+ ['b2-19-ohne-zu',195,'de'],
+ ['b2-20-anstatt-zu',195,'de'],
+ ['b2-21-sowohl-als-auch',180,'de'],
+ ['b2-24-einerseits-andererseits',193,'de'],
+ ['b2-28-tempuswechsel-im-text',182,'de'],
+ ['b2-33-irreale-vergleiche-als-ob',179,'de'],
+ ['b2-59-konjunktiv-i-formen',178,'de'],
+ ['b2-60-indirekte-rede-grundlagen',185,'de']
+];
+// Independent English test for the SOURCE string — deliberately NOT the lint
+// (the lint's lexical list has known blind spots, e.g. news/newspapers/business).
+const EN_MARK=['the','and','is','are','were','of','to','for','with','that','does','it','from','when','which','be','been','by','do','did','has','have','how','its','into','this','these','those','what','where','while','who','whom','would','should','could','you','your','their','them','they','there','than','then','if','all','each','more','most','must','may','about','after','before','both','but','such','very','only','any','because','other','between','through','using','without','instead','always','never','every'];
+const EN_LEX=['formal','reports','report','newspaper','newspapers','presentations','presentation','academic','writing','business','communication','scientific','texts','text','discussion','essays','people','nouns','noun','verbs','verb','adjectives','adverbs','prepositional','phrases','same','subject','required','now','yesterday','background','direct','speech','reality','unknown','impression','strong','comparison','known','info','first','new','later','sentence','chapter','movement','common','german','english','radio','news','manuals','signs','notices','announcements','service','healthcare','administrative','contracts','regulations','official','theses','papers','articles','university','assignments','clause','clauses','nested','main','natural','much','too','proverbs','persuasive','goethe','reading','time','event','original','reporting','action','happened','talking','remove','still','work','learn','alone','find','belongs','pronoun','relative','one','resumes','endings','agree','gender','case','number','object','construction','acted','upon','connectors','end','true','neither'];
+const GE_EV=['der','die','das','den','dem','des','ein','eine','einen','einem','einer','und','ist','sind','war','nicht','mit','für','auf','von','zu','im','am','du','ich','wir','sie','er','hast','hat','haben','wird','werden','kann','man','als','wenn','während','hier','heute','was','es','sich','dass','oder','aber','vor','nach','bei','um','wie','an','in','auch','nur','noch','kein','keine','beim','zum','zur','durch','ohne','über','unter','sehr','schon','immer','muss','soll','darf','mehr','viele','alle','diese','dieser','wann','warum','weil','damit','sondern','statt','anstatt','weder','sowohl'];
+function sourceIsEnglishText(v){
+  const t=String(v).toLowerCase().match(/[a-zäöüß]+/g)||[];
+  if(t.length<2) return false;
+  const ge=t.filter(w=>GE_EV.indexOf(w)!==-1).length+(/[äöüßÄÖÜ]/.test(v)?1:0);
+  if(t.filter(w=>EN_MARK.indexOf(w)!==-1).length) return true;
+  if(ge>0) return false;
+  const el=t.filter(w=>EN_LEX.indexOf(w)!==-1);
+  const morph=t.filter(w=>(/ly$/.test(w)&&w.length>4)||(/ing$/.test(w)&&w.length>5));
+  return el.length>=2||morph.length>0;
+}
+const GERMAN_FIELDS=['w','de','ex','ex2','sentence','front','answer','solution'];
+const NON_GERMAN_FIELDS=['en','hi','exEn','exHi','ex2En','ex2Hi','why','body','titleEn','titleHi',
+ 'html','label','explain','prompt','tip','hint','en2','description','hinglish','note','takeaways','revisionTips'];
+
+// Read the exact authored value at (file,line,field) from the data source.
+async function valueAt(slug,line,field){
+  const src=await (await fetch('chapter-'+slug+'-data.js?v=7?v='+Date.now())).text();
+  const L=src.split('\n')[line-1]||'';
+  // Single-quoted first (may legally contain " chars), then double-quoted.
+  const reS=new RegExp('\\b'+field+"\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'",'g');
+  const reD=new RegExp('\\b'+field+'\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"','g');
+  let m,best=null;
+  while((m=reS.exec(L))) if(best===null) best=m[1];
+  if(best===null) while((m=reD.exec(L))) if(best===null) best=m[1];
+  if(best===null) return null;
+  // JS string literal → runtime value (unescape \' \" \\ \n).
+  return best.replace(/\\(['"\\])/g,'$1').replace(/\\n/g,'\n');
+}
+
+function auditChapter(slug,entries){
+  return new Promise(resolve=>{
+    const f=$('#frame'); let done=false;
+    const finish=r=>{if(done)return;done=true;resolve(r);};
+    const timer=setTimeout(()=>finish({slug,error:'timeout',rows:[]}),120000);
+    f.onload=()=>setTimeout(()=>{
+      try{
+        const w=f.contentWindow,d=f.contentDocument;
+        const s=d.createElement('script'); s.src='qa-engine.js?v='+Date.now();
+        s.onerror=()=>{clearTimeout(timer);finish({slug,error:'engine load failed',rows:[]});};
+        s.onload=()=>{
+          try{
+            const qa=w.KWQA.run();
+            const findings=qa.findings||[];
+            // Same node list, same filters, same order as the engine → indices align.
+            const nodes=[].slice.call(d.querySelectorAll('.rw, .de-link'))
+              .filter(n=>!n.querySelector('.rw, .de-link'))
+              .filter(n=>!n.closest('.word-pop'))
+              .filter(n=>!!(n.offsetParent||n.getClientRects().length));
+            const findByIdx={};
+            findings.forEach(fd=>{ if(fd.index>=0)(findByIdx[fd.index]=findByIdx[fd.index]||[]).push(fd.code); });
+
+            const normWord=x=>String(x||'').toLowerCase()
+              .replace(/[.,!?;:\u201e\u201c\u201d\u201a\u2018\u2019\u00bb\u00ab()\u00bf\u00a1\u2026\u2014\u2013]/g,'')
+              .replace(/^['\u2019-]+|['\u2019-]+$/g,'').trim();
+            const storyNorm=x=>normWord(x).replace(/['\u2019\-]/g,'');
+            const wordRe=w.KW_germanWordRegex;
+
+            // Harvest with attribution: surface → list of {field, value}
+            const C=w.CHAPTER||{}, GF=new Set(GERMAN_FIELDS), NGF=new Set(NON_GERMAN_FIELDS);
+            const contrib={},seen=new Set();
+            function walk(node,key,depth){
+              if(!node||depth>12)return;
+              if(typeof node==='string'){
+                if(!GF.has(key))return;
+                const re=wordRe(),txt=node.replace(/<[^>]*>/g,' ');let m;
+                while((m=re.exec(txt))){
+                  const k=storyNorm(m[0]);
+                  (contrib[k]=contrib[k]||[]).push(key+'\u0000'+node);
+                }
+                return;
+              }
+              if(typeof node!=='object'||seen.has(node))return;
+              seen.add(node);
+              if(Array.isArray(node)){node.forEach(n=>walk(n,key,depth+1));return;}
+              Object.keys(node).forEach(k=>{if(!NGF.has(k))walk(node[k],k,depth+1);});
+            }
+            walk(C,null,0);
+
+            // Visible text for occurrence counting (popup text excluded).
+            const tw=d.createTreeWalker(d.body,NodeFilter.SHOW_TEXT,null);
+            let visText='',tn;
+            while((tn=tw.nextNode())){ if(tn.parentElement&&tn.parentElement.closest('.word-pop'))continue; visText+=' '+tn.nodeValue; }
+
+            const rows=entries.map(e=>{
+              const value=e.value;
+              if(value==null) return {slug,line:e.line,field:e.field,value:null,error:'value not readable at line'};
+              const tag0=e.field+'\u0000'+value;
+              if(!Object.keys(contrib).some(k=>contrib[k].indexOf(tag0)!==-1)){
+                return {slug,line:e.line,field:e.field,value,injected:[],soleSource:[],
+                  attributed:0,silent:0,qaFindings:0,classification:'AMBIGUOUS',
+                  note:'exact value not found in rendered chapter data under this field'};
+              }
+              // Harmfulness is a property of the SOURCE: only a defective English
+              // source entry can make its sole-source links illegitimate. A German
+              // source authoring the same surface produces a correct link.
+              const lint=window.KWLINT||null;
+              const lintFlagged=lint?(lint.offendingWords(value).length>0||lint.reviewSignal(value)):null;
+              const srcEnglish=sourceIsEnglishText(value);
+              const tag=tag0;
+              const injected=Object.keys(contrib).filter(k=>contrib[k].indexOf(tag)!==-1);
+              const sole=injected.filter(k=>{
+                const set=new Set(contrib[k]); return set.size===1&&set.has(tag);
+              });
+              const surfaces=[];
+              let attributed=0,silent=0,qaFind=0,sharedLinkOutside=0,anyTextOcc=0,harmfulVisible=0,legitVisible=0;
+              injected.forEach(k=>{
+                const isSole=sole.indexOf(k)!==-1;
+                const occ=nodes.map((n,i)=>({n,i})).filter(o=>storyNorm(o.n.textContent.trim())===k);
+                const re2=new RegExp('(^|[^A-Za-z\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df])'+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?=[^A-Za-z\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df]|$)','gi');
+                const textOcc=(visText.match(re2)||[]).length;
+                anyTextOcc+=textOcc;
+                const outside=occ.filter(o=>!o.n.closest('.de'));
+                if(!isSole) sharedLinkOutside+=outside.length;
+                const det=[];
+                if(isSole){
+                  outside.forEach((o,j)=>{
+                    attributed++;
+                    if(srcEnglish===false) legitVisible++; else harmfulVisible++;
+                    const codes=findByIdx[o.i]||[];
+                    if(codes.length) qaFind+=1; else if(srcEnglish!==false) silent++;
+                    if(j<6){
+                      const cl=d.querySelector('.wp-close'); if(cl)cl.click();
+                      o.n.click();
+                      const p=d.querySelector('.word-pop');
+                      det.push({surfaceText:o.n.textContent.trim(),
+                        badge:p?((p.querySelector('.wp-badge')||{}).textContent||'').trim():null,
+                        role:(String(o.n.className).match(/\br-([a-z-]+)/)||[])[1]||null,
+                        cls:o.n.className, section:(o.n.closest('[id^="sec-"]')||{}).id||'?',
+                        qa:codes});
+                    }
+                  });
+                }
+                surfaces.push({surface:k,soleSource:isSole,textOccurrences:textOcc,
+                  linkified:occ.length,inDe:occ.length-outside.length,outsideDe:outside.length,samples:det});
+              });
+              const cl=d.querySelector('.wp-close'); if(cl)cl.click();
+              let cls;
+              if(srcEnglish===false) cls=sole.length?'LEGITIMATE (German source)':'LEGITIMATE (German source, no unique injection)';
+              else if(harmfulVisible>0) cls='HARMFUL';
+              else if(sole.length>0&&anyTextOcc>0) cls='LATENT';
+              else if(sole.length===0&&sharedLinkOutside>0) cls='AMBIGUOUS';
+              else cls='NO CONSEQUENCE';
+              return {slug,line:e.line,field:e.field,value,sourceIsEnglish:srcEnglish,
+                injected:injected,soleSource:sole,surfaces,lintFlagged,
+                attributed,harmfulVisible,legitimateVisible:legitVisible,silent,qaFindings:qaFind,
+                sharedLinkifiedOutsideDe:sharedLinkOutside,
+                totalNodes:nodes.length,totalQaFindings:findings.length,
+                classification:cls};
+            });
+            clearTimeout(timer); finish({slug,rows});
+          }catch(err){clearTimeout(timer);finish({slug,error:String(err&&err.stack||err),rows:[]});}
+        };
+        d.head.appendChild(s);
+      }catch(err){clearTimeout(timer);finish({slug,error:String(err),rows:[]});}
+    },3000);
+    f.src='chapter-'+slug+'.html?lk='+Date.now();
+  });
+}
+
+window.KWLEAK={
+  INVENTORY,
+  slugs:[...new Set(INVENTORY.map(x=>x[0]))],
+  async run(slugs){
+    const list=slugs&&slugs.length?slugs:this.slugs;
+    const state=window.__state={status:'running',done:false,results:[]};
+    for(let i=0;i<list.length;i++){
+      state.status='['+(i+1)+'/'+list.length+'] '+list[i];
+      $('#status').textContent=state.status;
+      const entries=[];
+      for(const [sl,ln,fd] of INVENTORY) if(sl===list[i]) entries.push({line:ln,field:fd,value:await valueAt(sl,ln,fd)});
+      const r=await auditChapter(list[i],entries);
+      state.results.push(r);
+      $('#out').textContent=JSON.stringify(state.results,null,1);
+    }
+    state.status='done'; state.done=true; $('#status').textContent='done';
+    return state.results;
+  }
+};
+</script>
+</body></html>

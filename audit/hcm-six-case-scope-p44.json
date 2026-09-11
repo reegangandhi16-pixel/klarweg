@@ -1,0 +1,64 @@
+{
+ "phase": "44 — smallest local change for the six deutsch/Zahlen occurrences (SCOPING ONLY, nothing modified)",
+ "generatedAt": "2026-08-15T10:46:32.499Z",
+ "roleSynthesisProven": {
+  "finding": "role:\"r-object\" is NOT authored anywhere. It is synthesized by lookupWord from the ENTRY HEADWORD/LEMMA, not from the clicked surface.",
+  "evidence": [
+   "chapter WORDIDX entry for \"deutsch\": { w:\"Deutsch\", type:\"Adjective\", role:null }",
+   "global lexicon entry for \"deutsch\": { w:\"Deutsch\", type:\"Language\", role:null }",
+   "lookupWord(\"deutsch\") returns the same object PLUS role:\"r-object\" and pron — key-diff proves synthesis",
+   "roleFor(\"Deutsch\") === \"r-object\" — the capitalised headword drives the guess",
+   "KW_INFLECTIONS[\"zahlen\"] === \"Zahl\", and roleFor(\"Zahl\") === \"r-object\" — the lemma drives it for Zahlen",
+   "roleFor(\"zahlen\") === \"r-verb\" — the surface would have been correct; the lemma path overrides it"
+  ],
+  "confidence": "PROVEN — runtime values from the real functions"
+ },
+ "whyAuthoredRolesWin": "chapter-app.js:2048-2051 states authored entry roles take precedence and the occurrence role only fills a genuine void. Confirmed empirically: the Nein entry carries role r-negation and paints --g-negation, even though roleFor(\"Nein\") would guess r-object.",
+ "proposals": [
+  {
+   "group": "Zahlen x2 (a1-15)",
+   "change": "add role:'r-verb' to the existing verb entry { de:'zahlen', pos:'verb', ex:'Zahlen, bitte!' } at chapter-a1-15-cafe-data.js:259",
+   "why": "the synthesized r-object comes from the lemma Zahl; an authored role short-circuits the guess and makes the popup paint --g-verb, matching the r-verb span and the Verb badge",
+   "scope": "one property on one entry",
+   "collateral": "the 8 legitimate plural-noun uses of Zahlen (c1-35, c1-19, c1-32, b2-10, c1-21, c2-09, c1-04) all carry AUTHORED occurrence tokens and were proven in P39 to resolve through the token path, so they are insulated from this entry",
+   "expectedEffect": "-2 HCM, no other occurrence changes",
+   "confidence": "STRONGLY SUPPORTED — the mechanism is proven; the edit itself is unverified",
+   "risk": "LOW"
+  },
+  {
+   "group": "deutsch x4 (a1-8)",
+   "change": "add role:'r-adjective' to { de:'deutsch', pos:'adjective' } at chapter-a1-8-goethemini1-data.js:233",
+   "why": "same mechanism — the synthesized r-object comes from the capitalised headword Deutsch",
+   "scope": "one property on one entry",
+   "BLOCKER": "the two a1-8 entries (Deutsch/language line 231 and deutsch/adjective line 233) MERGE into a single WORDIDX slot — the resolved object carries w:\"Deutsch\" with type:\"Adjective\" and en:\"German (language)\", i.e. fields from both. An authored role on that slot would therefore also colour the CAPITALISED Deutsch occurrences amber. Those currently have span r-object green and popup green, so they emit NO HCM today; changing the slot colour would give them span green vs popup amber and CREATE 2 new HCM.",
+   "netEffect": "-4 HCM but +2 new HCM unless the merge is addressed",
+   "confidence": "the merge is PROVEN (observed in the resolved object); the +2 consequence is STRONGLY SUPPORTED but not measured",
+   "risk": "MEDIUM — do not apply blind",
+   "alternativesNotYetEvaluated": [
+    "author the role on the LANGUAGE entry instead so both surfaces agree on object, accepting an amber span vs green popup on the lowercase ones (worse)",
+    "give the two entries distinct index keys so they stop merging — larger blast radius, touches resolution",
+    "leave deutsch unchanged and fix only Zahlen"
+   ]
+  },
+  {
+   "group": "letter a x1",
+   "change": "NOT IN SCOPE for this request",
+   "note": "separate mechanism (entry role r-letter is correct; the badge is the odd one out)"
+  }
+ ],
+ "recommendation": "apply the Zahlen change alone if a minimal, low-risk step is wanted (-2 HCM, no collateral). Do NOT apply the deutsch change until the merged-slot consequence for capitalised Deutsch is measured — the smallest honest next step is to add the role in a diagnostic copy and re-run the a1-8 pipeline trace to count HCM before and after.",
+ "nothingApplied": true,
+ "status": {
+  "productionModified": false,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "chapterAppModified": false,
+  "qaEngineModified": false,
+  "baselinesModified": false,
+  "sweepRun": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "audit/hcm-six-case-scope-p44.json"
+ ]
+}

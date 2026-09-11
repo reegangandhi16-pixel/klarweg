@@ -1,0 +1,96 @@
+{
+ "total": 258,
+ "failing": 26,
+ "fails": {
+  "a1-15-cafe": [
+   "speaker(s) not named in Story intro: Kellner"
+  ],
+  "a1-26-goethe3": [
+   "speaker(s) not named in Story intro: Ralf"
+  ],
+  "a1-32-akkusativpronomen": [
+   "speaker(s) not named in Story intro: Fabian"
+  ],
+  "a1-34-schreiben": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "a1-35-goethe4": [
+   "speaker(s) not named in Story intro: Nick"
+  ],
+  "a1-36-dativ": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "a1-37-praep-dativ": [
+   "speaker(s) not named in Story intro: Kerstin, Nico"
+  ],
+  "a1-38-wechselpraep": [
+   "speaker(s) not named in Story intro: Basti"
+  ],
+  "a1-40-verben-dativ": [
+   "speaker(s) not named in Story intro: Kevin"
+  ],
+  "a1-41-dativpronomen": [
+   "speaker(s) not named in Story intro: Kellner"
+  ],
+  "a1-43-smalltalk-man": [
+   "speaker(s) not named in Story intro: Georg"
+  ],
+  "a1-46-zeitangaben": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "a2-1-genitiv": [
+   "speaker(s) not named in Story intro: Malte"
+  ],
+  "a2-11-wenn": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "a2-12-reflexive-verben": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "a2-14-wechselpraepositionen": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "a2-15-positions-richtungsverben": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "a2-17-werden": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "a2-18-ortsangaben": [
+   "speaker(s) not named in Story intro: Timo, Frauke"
+  ],
+  "a2-19-indirekte-fragen": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "a2-2-perfekt-review": [
+   "speaker(s) not named in Story intro: Fynn"
+  ],
+  "a2-20-was-fuer-ein": [
+   "speaker(s) not named in Story intro: Timo"
+  ],
+  "b2-14-goethe-mini-test-1": [
+   "story speakers = 0 ()",
+   "story dialogue only 0 lines",
+   "no listening dialogue",
+   "no scene/situation set"
+  ],
+  "b2-26-goethe-mini-test-2": [
+   "story speakers = 0 ()",
+   "story dialogue only 0 lines",
+   "no listening dialogue",
+   "no scene/situation set"
+  ],
+  "b2-36-goethe-halbzeit-test": [
+   "story speakers = 0 ()",
+   "story dialogue only 0 lines",
+   "no listening dialogue",
+   "no scene/situation set"
+  ],
+  "b2-43-goethe-mini-3": [
+   "story speakers = 0 ()",
+   "story dialogue only 0 lines",
+   "no listening dialogue",
+   "no scene/situation set"
+  ]
+ }
+}

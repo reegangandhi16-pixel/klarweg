@@ -1,0 +1,196 @@
+{
+ "phase": "27 — final live verification of the three b2-15 \"Obgleich\" HCM findings (diagnostic only)",
+ "generatedAt": "2026-08-14T07:33:42.249Z",
+ "harness": "chapter/qa-p27-obgleich.html — b2-15 rendered once through the P23/P24/P25 stability gate; qa-engine.js loaded unmodified; read-only DOM/CSSOM inspection",
+ "render": {
+  "file": "chapter-b2-15-konzessivsaetze-obgleich.html",
+  "readyState": "stable",
+  "hardTimeout": false,
+  "injectionError": false,
+  "measurementError": false,
+  "totalNodes": 831,
+  "occurrences": 831,
+  "checked": 804,
+  "chapterFindingCounts": {
+   "HEADWORD_COLOUR_MISMATCH": 3
+  }
+ },
+ "identities": {
+  "located": 3,
+  "unambiguous": true,
+  "source": "audit/qa-baseline-p15-diagnostic.json, cross-checked against audit/hcm-final-disposition-p26.json (identities agree exactly)",
+  "records": [
+   {
+    "chapter": "chapter-b2-15-konzessivsaetze-obgleich.html",
+    "section": "exercises",
+    "index": 782,
+    "surface": "Obgleich",
+    "span": "rgb(46, 125, 50)",
+    "head": "rgb(245, 158, 11)"
+   },
+   {
+    "chapter": "chapter-b2-15-konzessivsaetze-obgleich.html",
+    "section": "exercises",
+    "index": 790,
+    "surface": "Obgleich",
+    "span": "rgb(46, 125, 50)",
+    "head": "rgb(245, 158, 11)"
+   },
+   {
+    "chapter": "chapter-b2-15-konzessivsaetze-obgleich.html",
+    "section": "exercises",
+    "index": 798,
+    "surface": "Obgleich",
+    "span": "rgb(46, 125, 50)",
+    "head": "rgb(245, 158, 11)"
+   }
+  ],
+  "liveReproduction": "all three reproduced exactly in the live run at the same indices with the same span/head values; they are also the ONLY three findings in the whole chapter"
+ },
+ "spanEvidence": {
+  "classList": "de-link r-object",
+  "roleClasses": [
+   "r-object"
+  ],
+  "computedColour": "rgb(46, 125, 50)",
+  "fontWeight": "500",
+  "matchedColorRules": [
+   {
+    "selector": ".r-object",
+    "color": "var(--g-object)",
+    "sheet": "chapter.css?v=3"
+   }
+  ],
+  "colourSource": "CANONICAL role CSS. Exactly one rule sets colour on these nodes — .r-object in chapter.css. No local rule, no fallback, no cascade conflict.",
+  "localKonzRule": {
+   "selector": ".r-konz",
+   "color": "rgb(31, 78, 74)",
+   "sheet": "INLINE <style>",
+   "nodesUsingIt": 2,
+   "note": "the chapter DOES define a pedagogical .r-konz (teal) and uses it on 2 nodes (overviewIntro html + parserSentence), but NOT on these three exercise nodes"
+  },
+  "authoredSource": {
+   "wordsAndDialogue": "role: 'r-conjunction' (data lines 45, 65, 75)",
+   "readingTokens": "role: 'r-connector' (data lines 332, 368, 396, 419)",
+   "parserSentence": "role: 'r-konz' (data line 130)",
+   "exerciseSentenceOrdering": "roles: { 'Obgleich': 'r-konz' } (data line 502)",
+   "rendered": "r-object — none of the four authored roles. The exercise bank/answer chips are plain strings that the auto-linkifier wrapped and guessRole resolved to r-object."
+  }
+ },
+ "popupEvidence": {
+  "clickOpensOwnPopup": false,
+  "method": "clicked each node, then polled up to 5000ms for .word-pop .word-pop-de to equal the clicked surface",
+  "verified": false,
+  "waitedMs": 5100,
+  "observed": {
+   "headword": "infolgedessen",
+   "headwordColour": "rgb(6, 182, 212)",
+   "headwordInlineStyle": "color:var(--g-adverb)",
+   "badge": "Adverb (discourse marker)"
+  },
+  "conclusion": "clicking these three nodes never produces a popup for \"Obgleich\". The singleton .word-pop retains whatever word was last resolved — in the probe, a leftover \"infolgedessen\" popup; during the engine pass, some other word whose headword renders amber."
+ },
+ "detectorMechanism": {
+  "hcmCondition": "qa-engine.js:285 — if (headEl && !inChip && getComputedStyle(headEl).color !== colour)",
+  "guardReached": "the HCM check is only reachable when `opened` is true, because qa-engine.js:224-227 returns early when !opened",
+  "openedDefinition": "qa-engine.js:221 — opened = !!pop && (headText.toLowerCase() === word.toLowerCase() || headText !== prevHead)",
+  "defect": "the second disjunct (`headText !== prevHead`) is a weak fallback intended for words whose popup headword legitimately differs from the surface (inflected form to lemma). It is ALSO satisfied by a completely DIFFERENT word’s popup, provided that word differs from the previous iteration’s headword. For these three nodes the popup never showed \"Obgleich\", yet `opened` evaluated true, so HCM compared Obgleich’s span colour against another word’s headword colour.",
+  "corroboration": "no NO_POPUP finding fires on these nodes, which is only possible if `opened` was true — consistent with the fallback branch being taken rather than a genuine match",
+  "recordedHeadColour": "rgb(245, 158, 11) = --g-adjective. Proven NOT to be Obgleich’s headword colour; the specific word it belonged to cannot be recovered from the baseline and is not claimed."
+ },
+ "coLocatedQA": {
+  "ROLE_CONTRADICTS_BADGE": 0,
+  "CASE_COLLISION_CAPITALISED": 0,
+  "CASE_COLLISION_LOWERCASE": 0,
+  "PARADIGM_CLASS_MISMATCH": 0,
+  "NO_POPUP": 0,
+  "note": "checked directly against the live engine run, not inferred from HCM"
+ },
+ "perOccurrence": [
+  {
+   "index": 782,
+   "section": "exercises",
+   "surface": "Obgleich",
+   "spanRoleRendered": "r-object",
+   "spanColour": "rgb(46, 125, 50)",
+   "spanColourSource": ".r-object in chapter.css (canonical)",
+   "authoredRoleForThisContext": "r-konz (exercise roles map, data line 502) — not applied to the rendered chip",
+   "popupOpensForThisWord": false,
+   "recordedHeadColour": "rgb(245, 158, 11)",
+   "headColourBelongsToThisWord": false,
+   "coLocatedFindings": "none",
+   "classification": "DETECTOR FALSE POSITIVE",
+   "confidence": "PROVEN"
+  },
+  {
+   "index": 790,
+   "section": "exercises",
+   "surface": "Obgleich",
+   "spanRoleRendered": "r-object",
+   "spanColour": "rgb(46, 125, 50)",
+   "spanColourSource": ".r-object in chapter.css (canonical)",
+   "authoredRoleForThisContext": "r-konz (exercise roles map, data line 502) — not applied to the rendered chip",
+   "popupOpensForThisWord": false,
+   "recordedHeadColour": "rgb(245, 158, 11)",
+   "headColourBelongsToThisWord": false,
+   "coLocatedFindings": "none",
+   "classification": "DETECTOR FALSE POSITIVE",
+   "confidence": "PROVEN"
+  },
+  {
+   "index": 798,
+   "section": "exercises",
+   "surface": "Obgleich",
+   "spanRoleRendered": "r-object",
+   "spanColour": "rgb(46, 125, 50)",
+   "spanColourSource": ".r-object in chapter.css (canonical)",
+   "authoredRoleForThisContext": "r-konz (exercise roles map, data line 502) — not applied to the rendered chip",
+   "popupOpensForThisWord": false,
+   "recordedHeadColour": "rgb(245, 158, 11)",
+   "headColourBelongsToThisWord": false,
+   "coLocatedFindings": "none",
+   "classification": "DETECTOR FALSE POSITIVE",
+   "confidence": "PROVEN"
+  }
+ ],
+ "allThreeShareMechanism": true,
+ "overallVerdict": "DETECTOR FALSE POSITIVE",
+ "confidence": "PROVEN — live evidence (popup never resolves to the clicked word across 5.1s of polling, on all three nodes) plus the source condition at qa-engine.js:221/285 showing HCM can be reached with a foreign popup still on screen",
+ "whyNotTheOtherClassifications": {
+  "dataAuthoring": "rejected as the HCM cause. There IS a separate authoring oddity here (see secondaryObservation), but the reported span/head colour comparison is invalid regardless of how the token is authored.",
+  "byDesign": "rejected. The design permits an occurrence role to differ from a lexeme class; it does not permit comparing one word’s span against another word’s headword.",
+  "productionDefect": "rejected for the colour rendering. The span colour is produced by exactly one canonical rule with no cascade conflict, and the popup side never rendered for this word at all — so no production rendering path produced a wrong colour.",
+  "unresolved": "no longer applicable — the mechanism is now directly observed."
+ },
+ "secondaryObservation": {
+  "what": "the three exercise chips render as r-object (auto-linkified guessRole) although the chapter authors \"Obgleich\" as r-conjunction / r-connector / r-konz elsewhere, and the exercise itself supplies roles: { Obgleich: r-konz }. A concessive conjunction shown in object green is pedagogically wrong under the colour-carries-meaning contract.",
+  "status": "SEPARATE from the HCM verdict, and currently reported by NO detector",
+  "confidence": "PROVEN (rendered class is r-object; authored roles are r-conjunction/r-connector/r-konz)",
+  "recommendedAction": "curriculum/data review: have the sentence-ordering exercise apply its authored roles map to the rendered chips (or author the chips as tokens), so Obgleich renders with its concessive role rather than a guessed object role. NOT APPLIED."
+ },
+ "recommendedAction": {
+  "detector": "tighten the HCM precondition so it requires a popup that actually belongs to the clicked word — i.e. gate HCM on headText matching the surface (or on a resolved-headword identity), not on the `headText !== prevHead` fallback. This is a QA-detector change, NOT a production change, and it is NOT APPLIED in this phase.",
+  "expectedEffect": "the 3 b2-15 findings would disappear; the other 34 HCM records are unaffected because their popups did resolve (they are `checked` occurrences with badge/role evidence available in 11 cases).",
+  "caveat": "before changing the detector, confirm on the other 34 that a stricter gate does not silently suppress genuine mismatches — several legitimately show a lemma headword that differs in spelling from the surface, which is exactly what the weak fallback was written to allow."
+ },
+ "dispositionUpdate": {
+  "p26": {
+   "byDesign": 16,
+   "dataAuthoring": 18,
+   "unresolved": 3
+  },
+  "afterThisPhase": {
+   "byDesign": 16,
+   "dataAuthoring": 18,
+   "detectorFalsePositive": 3,
+   "unresolved": 0
+  },
+  "sum": 37,
+  "note": "this supersedes only the 3 G4 rows; the other 34 classifications are untouched"
+ },
+ "filesCreated": [
+  "chapter/qa-p27-obgleich.html",
+  "audit/obgleich-live-p27.json"
+ ],
+ "filesModified": "none — no chapter data, CSS, chapter-app.js, qa-engine.js, lint, assertions or baselines touched; no existing artifact overwritten"
+}

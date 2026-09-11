@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · Popup + colour inventory</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:16px;max-width:820px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:pre-wrap;max-height:58vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>Word Popup + colour inventory (12 chapters)</h1>
+<div class="sub">Read-only. Per surface: samples clickable German words, clicks each, records whether a popup opened and whether its headword corresponds to the clicked word; separately flags grammar-role classes whose rendered colour differs from the canonical token. Decorative spans inside <code>button.mcq-option</code> are excluded by design.<br><code>KWINV.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+const CH=['chapter-a1-15-cafe.html','chapter-a1-7-jaodernein.html',
+ 'chapter-a2-16-goethe-mini-2.html','chapter-a2-8-komparativ-superlativ.html',
+ 'chapter-b1-7-praeteritum.html','chapter-b1-17-nebensatz-damit-um-zu.html',
+ 'chapter-b2-27-perfekt-vs-praeteritum.html','chapter-b2-15-konzessivsaetze-obgleich.html',
+ 'chapter-c1-04-hauptsaetze-elegant-verbinden.html','chapter-c1-26-passiv-und-passiversatzformen.html',
+ 'chapter-c2-04-nomen-verb-verbindungen.html','chapter-c2-08-modalverben.html'];
+const TOKEN={subject:'rgb(24, 95, 165)',verb:'rgb(220, 38, 38)',object:'rgb(46, 125, 50)',
+ time:'rgb(124, 58, 237)',place:'rgb(234, 88, 12)',akkusativ:'rgb(16, 185, 129)',dativ:'rgb(92, 122, 29)',
+ genitiv:'rgb(160, 107, 44)',modalverb:'rgb(159, 18, 57)',article:'rgb(180, 83, 9)',
+ preposition:'rgb(202, 138, 4)',negation:'rgb(192, 38, 211)',adjective:'rgb(245, 158, 11)',
+ adverb:'rgb(6, 182, 212)',question:'rgb(236, 72, 153)'};
+const SURFACES=[['story','sec-story'],['vocabulary','sec-vocabulary'],['grammar','sec-grammar'],
+ ['reading','sec-reading'],['listening','sec-listening'],['exercises','sec-exercises']];
+const PROBE=`<script>window.__E=[];window.addEventListener('error',function(e){window.__E.push(String(e.message));});
+(function(){var c=console.error;console.error=function(){window.__E.push([].slice.call(arguments).join(' ').slice(0,120));return c.apply(console,arguments);};})();<\/script>`;
+async function boot(file){
+  const html=await (await fetch(file+'?inv='+Date.now())).text();
+  const base=location.href.replace(/[^/]*$/,'');
+  const f=$('#frame');
+  await new Promise(res=>{f.onload=()=>res();f.srcdoc=html.replace('<head>','<head><base href="'+base+'">'+PROBE);});
+  await new Promise(r=>setTimeout(r,7000));
+  return {w:f.contentWindow,d:f.contentDocument};
+}
+const norm=s=>String(s||'').toLowerCase().replace(/[^a-zäöüß]/g,'');
+window.KWINV={async run(){
+ const out=[];
+ for(let i=0;i<CH.length;i++){
+  const file=CH[i];$('#status').textContent='['+(i+1)+'/'+CH.length+'] '+file.slice(8,36);
+  try{
+   const {w,d}=await boot(file);
+   const all=[].slice.call(d.querySelectorAll('.rw, .de-link'))
+     .filter(n=>!n.querySelector('.rw, .de-link')).filter(n=>!n.closest('.word-pop'))
+     .filter(n=>!!(n.offsetParent||n.getClientRects().length));
+   const interactive=all.filter(n=>!n.closest('button.mcq-option'));
+   const decorative=all.length-interactive.length;
+   // ---- colour check: role class vs canonical token ----
+   const colour=[];
+   interactive.forEach(n=>{
+     const m=String(n.className).match(/\br-([a-z0-9-]+)\b/);if(!m)return;
+     const want=TOKEN[m[1]];if(!want)return;
+     const got=getComputedStyle(n).color;
+     if(got!==want)colour.push({word:n.textContent.trim(),role:m[1],expected:want,actual:got,
+       section:(n.closest('[id^="sec-"]')||{}).id||'?'});
+   });
+   const colourByRole={};colour.forEach(c=>{const k=c.role+' '+c.expected+'→'+c.actual;colourByRole[k]=(colourByRole[k]||0)+1;});
+   // ---- popup check: sample up to 3 words per surface ----
+   const popupIssues=[];const perSurface={};
+   for(const [name,secId] of SURFACES){
+     const sec=d.getElementById(secId);
+     const pool=sec?interactive.filter(n=>sec.contains(n)):[];
+     perSurface[name]={clickable:pool.length,tested:0,opened:0,mismatch:0,noPopup:0};
+     if(!pool.length)continue;
+     const step=Math.max(1,Math.floor(pool.length/3));
+     const picks=[pool[0],pool[Math.min(step,pool.length-1)],pool[pool.length-1]].filter((v,k,a)=>a.indexOf(v)===k);
+     for(const n of picks){
+       const word=n.textContent.trim();
+       const cl=d.querySelector('.wp-close');if(cl)cl.click();
+       await new Promise(r=>setTimeout(r,120));
+       n.click();
+       await new Promise(r=>setTimeout(r,420));
+       const pop=d.querySelector('.word-pop');
+       const head=pop&&pop.querySelector('.word-pop-de');
+       const ht=head?head.textContent.trim():null;
+       perSurface[name].tested++;
+       if(!ht){perSurface[name].noPopup++;
+         popupIssues.push({surface:name,word,kind:'NO_POPUP_ON_CLICK',headword:null});continue;}
+       perSurface[name].opened++;
+       // corresponds = exact, or lemma/inflection relationship (shared 4-char stem)
+       const a=norm(word),b=norm(ht);
+       const related=a===b||b.indexOf(a)===0||a.indexOf(b)===0||
+         (a.length>=4&&b.length>=4&&a.slice(0,4)===b.slice(0,4));
+       if(!related){perSurface[name].mismatch++;
+         popupIssues.push({surface:name,word,kind:'HEADWORD_UNRELATED',headword:ht});}
+     }
+   }
+   out.push({file:file.slice(8,40),clickableTotal:all.length,interactive:interactive.length,decorativeExcluded:decorative,
+     perSurface,popupIssues,colourMismatches:colour.length,colourPatterns:colourByRole,
+     colourSamples:colour.slice(0,4),errors:(w.__E||[]).length});
+  }catch(e){out.push({file:file.slice(8,40),fatal:String(e&&e.message||e)});}
+  window.__INV=out;$('#out').textContent=JSON.stringify(out,null,1);
+ }
+ $('#status').textContent='done';return out.length;
+}};
+$('#out').textContent='ready';
+</script>
+</body></html>

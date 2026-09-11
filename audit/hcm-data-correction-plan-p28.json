@@ -1,0 +1,279 @@
+{
+ "phase": "28 Part A/C — data/authoring correction plan for the 18 DATA/AUTHORING HCM findings (PLAN ONLY, nothing edited)",
+ "generatedAt": "2026-08-14T09:05:43.678Z",
+ "source": "audit/hcm-final-disposition-p26.json (18 DATA/AUTHORING rows, count verified) plus first-hand reads of each chapter data file",
+ "countCheck": {
+  "expected": 18,
+  "found": 18,
+  "groupsCover": 18,
+  "match": true
+ },
+ "correctionGroups": 5,
+ "groups": [
+  {
+   "id": "D1",
+   "cause": "occurrence-role mismatch — exercise `roles` map authored but not applied to the rendered chips",
+   "count": 3,
+   "findings": [
+    {
+     "chapter": "chapter-b2-45-passiversatz-sich-lassen.html",
+     "section": "exercises",
+     "index": 813,
+     "surface": "sich"
+    },
+    {
+     "chapter": "chapter-b2-45-passiversatz-sich-lassen.html",
+     "section": "exercises",
+     "index": 818,
+     "surface": "sich"
+    },
+    {
+     "chapter": "chapter-b1-17-nebensatz-damit-um-zu.html",
+     "section": "exercises",
+     "index": 925,
+     "surface": "um"
+    }
+   ],
+   "chapters": [
+    "b2-45",
+    "b1-17"
+   ],
+   "surfaces": [
+    "sich",
+    "um"
+   ],
+   "sourceField": "exercises.builder.roles",
+   "currentAuthored": {
+    "b2-45 line 524": "roles: { 'lässt': 'r-lassen', 'sich': 'r-lassen', 'ersetzen': 'r-lassen' }",
+    "b1-17 line 487": "roles: { 'um': 'r-purpose', 'zu': 'r-purpose', 'kaufen': 'r-purpose' }"
+   },
+   "renderedRole": "r-adverb in both (from the co-located ROLE_CONTRADICTS_BADGE detail)",
+   "grammaticalTruth": "sich = reflexive pronoun in the sich-lassen construction (badge Pronoun); um = subordinating element of um…zu (badge Preposition). r-adverb is wrong for both.",
+   "proposedCorrection": "apply the authored roles map to the rendered builder chips so the authored role wins over guessRole. NOTE: if the map is genuinely ignored by the renderer this is a PRODUCTION change (chapter-app.js), not a data edit — it must be approved separately and is NOT proposed as a data correction here.",
+   "confidence": "STRONGLY SUGGESTED — authored role and rendered role are both known, but the exact rendering path for these two indices was not confirmed live (only b2-15 Obgleich was live-verified in P27)",
+   "oneEditFixesN": "2 source locations → 3 HCM + 3 RCB findings",
+   "required": "REQUIRED (pending root-site confirmation)",
+   "expectedQaImpact": "3 HCM and 3 RCB resolve"
+  },
+  {
+   "id": "D2",
+   "cause": "occurrence-role mismatch — auto-linkified region with no authored role; guessRole contradicts the lexeme badge",
+   "count": 8,
+   "findings": [
+    {
+     "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+     "section": "exercises",
+     "index": 794,
+     "surface": "Infolgedessen"
+    },
+    {
+     "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+     "section": "exercises",
+     "index": 801,
+     "surface": "infolgedessen"
+    },
+    {
+     "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+     "section": "exercises",
+     "index": 806,
+     "surface": "Infolgedessen"
+    },
+    {
+     "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+     "section": "exercises",
+     "index": 241,
+     "surface": "dokumentiert"
+    },
+    {
+     "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+     "section": "exercises",
+     "index": 245,
+     "surface": "dokumentiert"
+    },
+    {
+     "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+     "section": "exercises",
+     "index": 247,
+     "surface": "dokumentiert"
+    },
+    {
+     "chapter": "chapter-a1-34-schreiben.html",
+     "section": "exercises",
+     "index": 448,
+     "surface": "Liebe"
+    },
+    {
+     "chapter": "chapter-a1-37-praep-dativ.html",
+     "section": "listening",
+     "index": 527,
+     "surface": "Fuß"
+    }
+   ],
+   "chapters": [
+    "b2-16",
+    "c1-26",
+    "a1-34",
+    "a1-37"
+   ],
+   "surfaces": [
+    "Infolgedessen",
+    "dokumentiert",
+    "Liebe",
+    "Fuß"
+   ],
+   "sourceField": "plain strings inside exercises (mcq options / match pairs / errorCorrection) and the listening transcript — no token role exists for these occurrences",
+   "evidence": {
+    "b2-16": "builder roles map (line 503) names only \"sodass\"; Infolgedessen has no authored role. Rendered r-object ×2 / r-verb ×1 against badge \"Adverb (discourse marker)\".",
+    "c1-26": "\"dokumentiert\" appears as plain text in mcq options (line 235) and match pairs (line 237). Rendered r-verb against badge \"Adjective (Partizip II)\" — in \"Die Ergebnisse sind dokumentiert\" it is Zustandspassiv, i.e. predicative adjective, so the badge is right and the role is wrong.",
+    "a1-34": "\"Liebe Grüße\" appears in mcq options (line 414) / quiz (line 445). Rendered r-adjective against badge \"Noun\". The chapter DOES author Liebe as r-adjective with type \"Salutation\" in its parser tokens (lines 334, 368) — so the authored intent exists elsewhere but does not reach the exercise text.",
+    "a1-37": "\"zu Fuß\" in the listening transcript. Rendered r-verb against badge \"Noun\" — Fuß is authored r-dativ in the dialogue (line 110) and r-place in the parser (line 401); r-verb matches neither."
+   },
+   "proposedCorrection": "author the intended role for these occurrences (token-ise the exercise/transcript text, or supply a chapter-level role hint for these surfaces) so a concessive adverb, a Partizip-II adjective, a salutation adjective and a fixed-phrase noun are not coloured as object/verb.",
+   "confidence": "PROVEN that authored role is absent and rendered role contradicts the badge (both read from source + baseline); STRONGLY SUGGESTED for the specific correction shape",
+   "oneEditFixesN": "4 source locations → 8 HCM + 8 RCB findings",
+   "required": "REQUIRED",
+   "expectedQaImpact": "8 HCM and 8 RCB resolve"
+  },
+  {
+   "id": "D3",
+   "cause": "capitalisation/homograph — the popup resolved the opposite member of a deliberately taught minimal pair",
+   "count": 4,
+   "findings": [
+    {
+     "chapter": "chapter-a1-8-goethemini1.html",
+     "section": "vocabulary",
+     "index": 133,
+     "surface": "deutsch"
+    },
+    {
+     "chapter": "chapter-a1-8-goethemini1.html",
+     "section": "grammar",
+     "index": 542,
+     "surface": "deutsch"
+    },
+    {
+     "chapter": "chapter-a1-8-goethemini1.html",
+     "section": "grammar",
+     "index": 581,
+     "surface": "deutsch"
+    },
+    {
+     "chapter": "chapter-a1-8-goethemini1.html",
+     "section": "grammar",
+     "index": 585,
+     "surface": "deutsch"
+    }
+   ],
+   "chapters": [
+    "a1-8"
+   ],
+   "surfaces": [
+    "deutsch"
+   ],
+   "sourceField": "vocab entries (data lines 231-234)",
+   "currentAuthored": "{ de: 'Deutsch', pos: 'language' } AND { de: 'deutsch', pos: 'adjective' } — an intentional contrast pair",
+   "renderedVsPopup": "span = adjective amber (correct for lower-case deutsch); popup headword = object green, i.e. it resolved the capitalised language noun Deutsch",
+   "grammaticalTruth": "lower-case deutsch is the nationality adjective; capitalised Deutsch is the language noun. The chapter teaches exactly this distinction and lists it as a top A1 mistake (line 439: \"The language is a noun — capitalise it. Lower-case deutsch is the adjective.\").",
+   "proposedCorrection": "make headword resolution case-respecting for this pair so lower-case deutsch resolves to the adjective entry. Data-side option: give the adjective entry a distinguishing key/alias so it wins for the lower-case surface. Do NOT equalise the colours — the colours are semantically correct on each side; the wrong lexeme is being picked.",
+   "confidence": "PROVEN (both entries exist in source; the chapter states the distinction explicitly)",
+   "oneEditFixesN": "1 resolution decision → 4 findings",
+   "required": "REQUIRED — highest pedagogical priority: the popup contradicts the chapter’s own headline teaching point",
+   "expectedQaImpact": "4 HCM resolve; no other code affected (no CASE_COLLISION finding fires on these nodes)"
+  },
+  {
+   "id": "D4",
+   "cause": "capitalisation/homograph — sentence-initial verb resolved as the plural noun",
+   "count": 2,
+   "findings": [
+    {
+     "chapter": "chapter-a1-15-cafe.html",
+     "section": "vocabulary",
+     "index": 168,
+     "surface": "Zahlen"
+    },
+    {
+     "chapter": "chapter-a1-15-cafe.html",
+     "section": "grammar",
+     "index": 581,
+     "surface": "Zahlen"
+    }
+   ],
+   "chapters": [
+    "a1-15"
+   ],
+   "surfaces": [
+    "Zahlen"
+   ],
+   "sourceField": "vocab entry (line 259) { de: 'zahlen', pos: 'verb', ex: 'Zahlen, bitte!' } and the phrase table (line 379) '<span class=\"de\">Zahlen, bitte.</span>'",
+   "renderedVsPopup": "span = verb red (correct: it is zahlen, \"to pay\", capitalised only because it opens the utterance); popup headword = object green, i.e. it resolved die Zahlen (\"the numbers\")",
+   "grammaticalTruth": "\"Zahlen, bitte!\" = the verb zahlen. die Zahlen (numbers) is an unrelated lexeme.",
+   "proposedCorrection": "case/context-aware resolution for the sentence-initial verb, or an explicit token role for the phrase-table cell. Colours are individually correct; the lexeme choice is wrong.",
+   "confidence": "PROVEN (source entry and phrase context both read)",
+   "oneEditFixesN": "1 resolution decision → 2 findings",
+   "required": "REQUIRED",
+   "expectedQaImpact": "2 HCM resolve"
+  },
+  {
+   "id": "D5",
+   "cause": "non-grammatical entity — a single letter carrying a grammar role in prose",
+   "count": 1,
+   "findings": [
+    {
+     "chapter": "chapter-a1-39-ortsangaben.html",
+     "section": "vocabulary",
+     "index": 570,
+     "surface": "a"
+    }
+   ],
+   "chapters": [
+    "a1-39"
+   ],
+   "surfaces": [
+    "a"
+   ],
+   "sourceField": "no authored token — auto-linkified from vocabulary text (grep for a Fuß/letter token in a1-39 data returned no match)",
+   "renderedVsPopup": "span = adverb cyan; popup headword = --ink-secondary, which chapter-app.js:2022 ROLE_COLOR_VAR assigns deliberately to letter|name|conjunction entries",
+   "grammaticalTruth": "the popup side is CORRECT by design. The defect is the prose span: a bare letter should not be coloured as an adverb.",
+   "proposedCorrection": "exclude the single letter from role colouring (or author it as a letter token) so it renders in neutral ink like its popup.",
+   "confidence": "PROVEN for the head side (source-identified mapping); STRONGLY SUGGESTED that the span is simply mis-guessed",
+   "oneEditFixesN": "1 correction → 1 finding",
+   "required": "OPTIONAL — lowest impact of the 18: one letter in one vocabulary list, no grammatical claim is contradicted",
+   "expectedQaImpact": "1 HCM resolves"
+  }
+ ],
+ "rollup": {
+  "findings": 18,
+  "correctionGroups": 5,
+  "distinctSourceLocations": "11 (2 builder role maps, 4 auto-linkified regions, 2 homograph resolution decisions, 1 letter, plus the 2 already-authored-elsewhere intents)",
+  "requiredFindings": 17,
+  "optionalFindings": 1,
+  "oneUnderlyingCorrectionToNFindings": [
+   "D1: 2 locations → 3 HCM + 3 RCB",
+   "D2: 4 locations → 8 HCM + 8 RCB",
+   "D3: 1 decision → 4 HCM",
+   "D4: 1 decision → 2 HCM",
+   "D5: 1 correction → 1 HCM"
+  ],
+  "totalQaFindingsResolvedIfAllApplied": "18 HCM + 11 RCB = 29 findings from 9 distinct decisions"
+ },
+ "g2RcbRelationship": {
+  "claim": "the 11 G2 HCM findings are NOT 11 independent corrections",
+  "evidence": "every one is co-located with a ROLE_CONTRADICTS_BADGE finding on the same node. RCB already names the real problem (authored occurrence role contradicts the lexeme badge); HCM is the same defect seen through colour. Correcting the role resolves both.",
+  "independentCorrections": 6,
+  "findingsResolved": "11 HCM + 11 RCB = 22"
+ },
+ "byDesignReview": {
+  "count": 16,
+  "family": "Nein ×11, Nicht, möchte, Wann, machen, muss",
+  "consistencyWithKlarwegSemantics": "CONSISTENT. In every case the popup headword names a MORE SPECIFIC member of the span’s family (adverb ⊃ negation/question, verb ⊃ modalverb/brauchen). No grammatical claim is contradicted, so the colour system is not lying — it is less specific in prose than in the popup.",
+  "optionalImprovement": "authoring Nein/Nicht as r-negation (and Wann as r-question) at their occurrences would make prose and popup agree and would close 12 of the 16 in one decision. Recorded as OPTIONAL only.",
+  "required": "NONE — these are explicitly NOT converted into data defects to reduce the HCM count"
+ },
+ "unresolvedAuthoringDecisions": [
+  "D1: whether the exercise `roles` map is genuinely ignored by the renderer (a production question) or the two indices sit outside the builder block — must be confirmed live before any edit",
+  "D3/D4: whether case-sensitive lexeme resolution belongs in the lexicon data or in the resolver (production) — the plan states the required outcome, not the implementation site",
+  "every group: WHICH side to correct is a curriculum call; this plan proposes the grammatically defensible side and does not apply it"
+ ],
+ "preservationRule": "no proposed change touches any English `text:` sibling, `en:`/`hi:` field, or bilingual intent; all proposals are role/resolution changes only",
+ "filesModified": "none"
+}

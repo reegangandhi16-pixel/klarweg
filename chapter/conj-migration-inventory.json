@@ -1,0 +1,6074 @@
+{
+ "safeCount": 114,
+ "reviewCount": 1203,
+ "safe": [
+  {
+   "lemma": "ziehen",
+   "gen": {
+    "ich": "ziehe",
+    "du": "ziehst",
+    "er": "zieht",
+    "wir": "ziehen",
+    "ihr": "zieht",
+    "sie": "ziehen"
+   }
+  },
+  {
+   "lemma": "unterstreichen",
+   "gen": {
+    "ich": "unterstreiche",
+    "du": "unterstreichst",
+    "er": "unterstreicht",
+    "wir": "unterstreichen",
+    "ihr": "unterstreicht",
+    "sie": "unterstreichen"
+   }
+  },
+  {
+   "lemma": "vergleichen",
+   "gen": {
+    "ich": "vergleiche",
+    "du": "vergleichst",
+    "er": "vergleicht",
+    "wir": "vergleichen",
+    "ihr": "vergleicht",
+    "sie": "vergleichen"
+   }
+  },
+  {
+   "lemma": "finden",
+   "gen": {
+    "ich": "finde",
+    "du": "findest",
+    "er": "findet",
+    "wir": "finden",
+    "ihr": "findet",
+    "sie": "finden"
+   }
+  },
+  {
+   "lemma": "beschreiben",
+   "gen": {
+    "ich": "beschreibe",
+    "du": "beschreibst",
+    "er": "beschreibt",
+    "wir": "beschreiben",
+    "ihr": "beschreibt",
+    "sie": "beschreiben"
+   }
+  },
+  {
+   "lemma": "trinken",
+   "gen": {
+    "ich": "trinke",
+    "du": "trinkst",
+    "er": "trinkt",
+    "wir": "trinken",
+    "ihr": "trinkt",
+    "sie": "trinken"
+   }
+  },
+  {
+   "lemma": "schneiden",
+   "gen": {
+    "ich": "schneide",
+    "du": "schneidest",
+    "er": "schneidet",
+    "wir": "schneiden",
+    "ihr": "schneidet",
+    "sie": "schneiden"
+   }
+  },
+  {
+   "lemma": "bringen",
+   "gen": {
+    "ich": "bringe",
+    "du": "bringst",
+    "er": "bringt",
+    "wir": "bringen",
+    "ihr": "bringt",
+    "sie": "bringen"
+   }
+  },
+  {
+   "lemma": "singen",
+   "gen": {
+    "ich": "singe",
+    "du": "singst",
+    "er": "singt",
+    "wir": "singen",
+    "ihr": "singt",
+    "sie": "singen"
+   }
+  },
+  {
+   "lemma": "genießen",
+   "gen": {
+    "ich": "genieße",
+    "du": "genießt",
+    "er": "genießt",
+    "wir": "genießen",
+    "ihr": "genießt",
+    "sie": "genießen"
+   }
+  },
+  {
+   "lemma": "bleiben",
+   "gen": {
+    "ich": "bleibe",
+    "du": "bleibst",
+    "er": "bleibt",
+    "wir": "bleiben",
+    "ihr": "bleibt",
+    "sie": "bleiben"
+   }
+  },
+  {
+   "lemma": "fliegen",
+   "gen": {
+    "ich": "fliege",
+    "du": "fliegst",
+    "er": "fliegt",
+    "wir": "fliegen",
+    "ihr": "fliegt",
+    "sie": "fliegen"
+   }
+  },
+  {
+   "lemma": "denken",
+   "gen": {
+    "ich": "denke",
+    "du": "denkst",
+    "er": "denkt",
+    "wir": "denken",
+    "ihr": "denkt",
+    "sie": "denken"
+   }
+  },
+  {
+   "lemma": "unterschreiben",
+   "gen": {
+    "ich": "unterschreibe",
+    "du": "unterschreibst",
+    "er": "unterschreibt",
+    "wir": "unterschreiben",
+    "ihr": "unterschreibt",
+    "sie": "unterschreiben"
+   }
+  },
+  {
+   "lemma": "liegen",
+   "gen": {
+    "ich": "liege",
+    "du": "liegst",
+    "er": "liegt",
+    "wir": "liegen",
+    "ihr": "liegt",
+    "sie": "liegen"
+   }
+  },
+  {
+   "lemma": "sitzen",
+   "gen": {
+    "ich": "sitze",
+    "du": "sitzt",
+    "er": "sitzt",
+    "wir": "sitzen",
+    "ihr": "sitzt",
+    "sie": "sitzen"
+   }
+  },
+  {
+   "lemma": "stehen",
+   "gen": {
+    "ich": "stehe",
+    "du": "stehst",
+    "er": "steht",
+    "wir": "stehen",
+    "ihr": "steht",
+    "sie": "stehen"
+   }
+  },
+  {
+   "lemma": "überweisen",
+   "gen": {
+    "ich": "überweise",
+    "du": "überweist",
+    "er": "überweist",
+    "wir": "überweisen",
+    "ihr": "überweist",
+    "sie": "überweisen"
+   }
+  },
+  {
+   "lemma": "gehören",
+   "gen": {
+    "ich": "gehöre",
+    "du": "gehörst",
+    "er": "gehört",
+    "wir": "gehören",
+    "ihr": "gehört",
+    "sie": "gehören"
+   }
+  },
+  {
+   "lemma": "schließen",
+   "gen": {
+    "ich": "schließe",
+    "du": "schließt",
+    "er": "schließt",
+    "wir": "schließen",
+    "ihr": "schließt",
+    "sie": "schließen"
+   }
+  },
+  {
+   "lemma": "scheinen",
+   "gen": {
+    "ich": "scheine",
+    "du": "scheinst",
+    "er": "scheint",
+    "wir": "scheinen",
+    "ihr": "scheint",
+    "sie": "scheinen"
+   }
+  },
+  {
+   "lemma": "klingen",
+   "gen": {
+    "ich": "klinge",
+    "du": "klingst",
+    "er": "klingt",
+    "wir": "klingen",
+    "ihr": "klingt",
+    "sie": "klingen"
+   }
+  },
+  {
+   "lemma": "riechen",
+   "gen": {
+    "ich": "rieche",
+    "du": "riechst",
+    "er": "riecht",
+    "wir": "riechen",
+    "ihr": "riecht",
+    "sie": "riechen"
+   }
+  },
+  {
+   "lemma": "wiegen",
+   "gen": {
+    "ich": "wiege",
+    "du": "wiegst",
+    "er": "wiegt",
+    "wir": "wiegen",
+    "ihr": "wiegt",
+    "sie": "wiegen"
+   }
+  },
+  {
+   "lemma": "verbinden",
+   "gen": {
+    "ich": "verbinde",
+    "du": "verbindest",
+    "er": "verbindet",
+    "wir": "verbinden",
+    "ihr": "verbindet",
+    "sie": "verbinden"
+   }
+  },
+  {
+   "lemma": "erschließen",
+   "gen": {
+    "ich": "erschließe",
+    "du": "erschließt",
+    "er": "erschließt",
+    "wir": "erschließen",
+    "ihr": "erschließt",
+    "sie": "erschließen"
+   }
+  },
+  {
+   "lemma": "verstehen",
+   "gen": {
+    "ich": "verstehe",
+    "du": "verstehst",
+    "er": "versteht",
+    "wir": "verstehen",
+    "ihr": "versteht",
+    "sie": "verstehen"
+   }
+  },
+  {
+   "lemma": "bestehen",
+   "gen": {
+    "ich": "bestehe",
+    "du": "bestehst",
+    "er": "besteht",
+    "wir": "bestehen",
+    "ihr": "besteht",
+    "sie": "bestehen"
+   }
+  },
+  {
+   "lemma": "entscheiden",
+   "gen": {
+    "ich": "entscheide",
+    "du": "entscheidest",
+    "er": "entscheidet",
+    "wir": "entscheiden",
+    "ihr": "entscheidet",
+    "sie": "entscheiden"
+   }
+  },
+  {
+   "lemma": "gewöhnen",
+   "gen": {
+    "ich": "gewöhne",
+    "du": "gewöhnst",
+    "er": "gewöhnt",
+    "wir": "gewöhnen",
+    "ihr": "gewöhnt",
+    "sie": "gewöhnen"
+   }
+  },
+  {
+   "lemma": "gestalten",
+   "gen": {
+    "ich": "gestalte",
+    "du": "gestaltest",
+    "er": "gestaltet",
+    "wir": "gestalten",
+    "ihr": "gestaltet",
+    "sie": "gestalten"
+   }
+  },
+  {
+   "lemma": "bitten",
+   "gen": {
+    "ich": "bitte",
+    "du": "bittest",
+    "er": "bittet",
+    "wir": "bitten",
+    "ihr": "bittet",
+    "sie": "bitten"
+   }
+  },
+  {
+   "lemma": "genehmigen",
+   "gen": {
+    "ich": "genehmige",
+    "du": "genehmigst",
+    "er": "genehmigt",
+    "wir": "genehmigen",
+    "ihr": "genehmigt",
+    "sie": "genehmigen"
+   }
+  },
+  {
+   "lemma": "verbringen",
+   "gen": {
+    "ich": "verbringe",
+    "du": "verbringst",
+    "er": "verbringt",
+    "wir": "verbringen",
+    "ihr": "verbringt",
+    "sie": "verbringen"
+   }
+  },
+  {
+   "lemma": "reiten",
+   "gen": {
+    "ich": "reite",
+    "du": "reitest",
+    "er": "reitet",
+    "wir": "reiten",
+    "ihr": "reitet",
+    "sie": "reiten"
+   }
+  },
+  {
+   "lemma": "verschieben",
+   "gen": {
+    "ich": "verschiebe",
+    "du": "verschiebst",
+    "er": "verschiebt",
+    "wir": "verschieben",
+    "ihr": "verschiebt",
+    "sie": "verschieben"
+   }
+  },
+  {
+   "lemma": "leihen",
+   "gen": {
+    "ich": "leihe",
+    "du": "leihst",
+    "er": "leiht",
+    "wir": "leihen",
+    "ihr": "leiht",
+    "sie": "leihen"
+   }
+  },
+  {
+   "lemma": "schießen",
+   "gen": {
+    "ich": "schieße",
+    "du": "schießt",
+    "er": "schießt",
+    "wir": "schießen",
+    "ihr": "schießt",
+    "sie": "schießen"
+   }
+  },
+  {
+   "lemma": "stinken",
+   "gen": {
+    "ich": "stinke",
+    "du": "stinkst",
+    "er": "stinkt",
+    "wir": "stinken",
+    "ihr": "stinkt",
+    "sie": "stinken"
+   }
+  },
+  {
+   "lemma": "gießen",
+   "gen": {
+    "ich": "gieße",
+    "du": "gießt",
+    "er": "gießt",
+    "wir": "gießen",
+    "ihr": "gießt",
+    "sie": "gießen"
+   }
+  },
+  {
+   "lemma": "besitzen",
+   "gen": {
+    "ich": "besitze",
+    "du": "besitzt",
+    "er": "besitzt",
+    "wir": "besitzen",
+    "ihr": "besitzt",
+    "sie": "besitzen"
+   }
+  },
+  {
+   "lemma": "vergehen",
+   "gen": {
+    "ich": "vergehe",
+    "du": "vergehst",
+    "er": "vergeht",
+    "wir": "vergehen",
+    "ihr": "vergeht",
+    "sie": "vergehen"
+   }
+  },
+  {
+   "lemma": "gestehen",
+   "gen": {
+    "ich": "gestehe",
+    "du": "gestehst",
+    "er": "gesteht",
+    "wir": "gestehen",
+    "ihr": "gesteht",
+    "sie": "gestehen"
+   }
+  },
+  {
+   "lemma": "rufen",
+   "gen": {
+    "ich": "rufe",
+    "du": "rufst",
+    "er": "ruft",
+    "wir": "rufen",
+    "ihr": "ruft",
+    "sie": "rufen"
+   }
+  },
+  {
+   "lemma": "verlieren",
+   "gen": {
+    "ich": "verliere",
+    "du": "verlierst",
+    "er": "verliert",
+    "wir": "verlieren",
+    "ihr": "verliert",
+    "sie": "verlieren"
+   }
+  },
+  {
+   "lemma": "bieten",
+   "gen": {
+    "ich": "biete",
+    "du": "bietest",
+    "er": "bietet",
+    "wir": "bieten",
+    "ihr": "bietet",
+    "sie": "bieten"
+   }
+  },
+  {
+   "lemma": "senden",
+   "gen": {
+    "ich": "sende",
+    "du": "sendest",
+    "er": "sendet",
+    "wir": "senden",
+    "ihr": "sendet",
+    "sie": "senden"
+   }
+  },
+  {
+   "lemma": "verzeihen",
+   "gen": {
+    "ich": "verzeihe",
+    "du": "verzeihst",
+    "er": "verzeiht",
+    "wir": "verzeihen",
+    "ihr": "verzeiht",
+    "sie": "verzeihen"
+   }
+  },
+  {
+   "lemma": "beißen",
+   "gen": {
+    "ich": "beiße",
+    "du": "beißt",
+    "er": "beißt",
+    "wir": "beißen",
+    "ihr": "beißt",
+    "sie": "beißen"
+   }
+  },
+  {
+   "lemma": "lügen",
+   "gen": {
+    "ich": "lüge",
+    "du": "lügst",
+    "er": "lügt",
+    "wir": "lügen",
+    "ihr": "lügt",
+    "sie": "lügen"
+   }
+  },
+  {
+   "lemma": "befragen",
+   "gen": {
+    "ich": "befrage",
+    "du": "befragst",
+    "er": "befragt",
+    "wir": "befragen",
+    "ihr": "befragt",
+    "sie": "befragen"
+   }
+  },
+  {
+   "lemma": "gelingen",
+   "gen": {
+    "ich": "gelinge",
+    "du": "gelingst",
+    "er": "gelingt",
+    "wir": "gelingen",
+    "ihr": "gelingt",
+    "sie": "gelingen"
+   }
+  },
+  {
+   "lemma": "vermeiden",
+   "gen": {
+    "ich": "vermeide",
+    "du": "vermeidest",
+    "er": "vermeidet",
+    "wir": "vermeiden",
+    "ihr": "vermeidet",
+    "sie": "vermeiden"
+   }
+  },
+  {
+   "lemma": "entstehen",
+   "gen": {
+    "ich": "entstehe",
+    "du": "entstehst",
+    "er": "entsteht",
+    "wir": "entstehen",
+    "ihr": "entsteht",
+    "sie": "entstehen"
+   }
+  },
+  {
+   "lemma": "unterscheiden",
+   "gen": {
+    "ich": "unterscheide",
+    "du": "unterscheidest",
+    "er": "unterscheidet",
+    "wir": "unterscheiden",
+    "ihr": "unterscheidet",
+    "sie": "unterscheiden"
+   }
+  },
+  {
+   "lemma": "verleihen",
+   "gen": {
+    "ich": "verleihe",
+    "du": "verleihst",
+    "er": "verleiht",
+    "wir": "verleihen",
+    "ihr": "verleiht",
+    "sie": "verleihen"
+   }
+  },
+  {
+   "lemma": "fließen",
+   "gen": {
+    "ich": "fließe",
+    "du": "fließt",
+    "er": "fließt",
+    "wir": "fließen",
+    "ihr": "fließt",
+    "sie": "fließen"
+   }
+  },
+  {
+   "lemma": "springen",
+   "gen": {
+    "ich": "springe",
+    "du": "springst",
+    "er": "springt",
+    "wir": "springen",
+    "ihr": "springt",
+    "sie": "springen"
+   }
+  },
+  {
+   "lemma": "steigen",
+   "gen": {
+    "ich": "steige",
+    "du": "steigst",
+    "er": "steigt",
+    "wir": "steigen",
+    "ihr": "steigt",
+    "sie": "steigen"
+   }
+  },
+  {
+   "lemma": "beschließen",
+   "gen": {
+    "ich": "beschließe",
+    "du": "beschließt",
+    "er": "beschließt",
+    "wir": "beschließen",
+    "ihr": "beschließt",
+    "sie": "beschließen"
+   }
+  },
+  {
+   "lemma": "schweigen",
+   "gen": {
+    "ich": "schweige",
+    "du": "schweigst",
+    "er": "schweigt",
+    "wir": "schweigen",
+    "ihr": "schweigt",
+    "sie": "schweigen"
+   }
+  },
+  {
+   "lemma": "übertreiben",
+   "gen": {
+    "ich": "übertreibe",
+    "du": "übertreibst",
+    "er": "übertreibt",
+    "wir": "übertreiben",
+    "ihr": "übertreibt",
+    "sie": "übertreiben"
+   }
+  },
+  {
+   "lemma": "überziehen",
+   "gen": {
+    "ich": "überziehe",
+    "du": "überziehst",
+    "er": "überzieht",
+    "wir": "überziehen",
+    "ihr": "überzieht",
+    "sie": "überziehen"
+   }
+  },
+  {
+   "lemma": "verschreiben",
+   "gen": {
+    "ich": "verschreibe",
+    "du": "verschreibst",
+    "er": "verschreibt",
+    "wir": "verschreiben",
+    "ihr": "verschreibt",
+    "sie": "verschreiben"
+   }
+  },
+  {
+   "lemma": "beweisen",
+   "gen": {
+    "ich": "beweise",
+    "du": "beweist",
+    "er": "beweist",
+    "wir": "beweisen",
+    "ihr": "beweist",
+    "sie": "beweisen"
+   }
+  },
+  {
+   "lemma": "empfinden",
+   "gen": {
+    "ich": "empfinde",
+    "du": "empfindest",
+    "er": "empfindet",
+    "wir": "empfinden",
+    "ihr": "empfindet",
+    "sie": "empfinden"
+   }
+  },
+  {
+   "lemma": "gelangen",
+   "gen": {
+    "ich": "gelange",
+    "du": "gelangst",
+    "er": "gelangt",
+    "wir": "gelangen",
+    "ihr": "gelangt",
+    "sie": "gelangen"
+   }
+  },
+  {
+   "lemma": "leiden",
+   "gen": {
+    "ich": "leide",
+    "du": "leidest",
+    "er": "leidet",
+    "wir": "leiden",
+    "ihr": "leidet",
+    "sie": "leiden"
+   }
+  },
+  {
+   "lemma": "sinken",
+   "gen": {
+    "ich": "sinke",
+    "du": "sinkst",
+    "er": "sinkt",
+    "wir": "sinken",
+    "ihr": "sinkt",
+    "sie": "sinken"
+   }
+  },
+  {
+   "lemma": "zwingen",
+   "gen": {
+    "ich": "zwinge",
+    "du": "zwingst",
+    "er": "zwingt",
+    "wir": "zwingen",
+    "ihr": "zwingt",
+    "sie": "zwingen"
+   }
+  },
+  {
+   "lemma": "betrügen",
+   "gen": {
+    "ich": "betrüge",
+    "du": "betrügst",
+    "er": "betrügt",
+    "wir": "betrügen",
+    "ihr": "betrügt",
+    "sie": "betrügen"
+   }
+  },
+  {
+   "lemma": "erschießen",
+   "gen": {
+    "ich": "erschieße",
+    "du": "erschießt",
+    "er": "erschießt",
+    "wir": "erschießen",
+    "ihr": "erschießt",
+    "sie": "erschießen"
+   }
+  },
+  {
+   "lemma": "zerreißen",
+   "gen": {
+    "ich": "zerreiße",
+    "du": "zerreißt",
+    "er": "zerreißt",
+    "wir": "zerreißen",
+    "ihr": "zerreißt",
+    "sie": "zerreißen"
+   }
+  },
+  {
+   "lemma": "schreien",
+   "gen": {
+    "ich": "schreie",
+    "du": "schreist",
+    "er": "schreit",
+    "wir": "schreien",
+    "ihr": "schreit",
+    "sie": "schreien"
+   }
+  },
+  {
+   "lemma": "ergreifen",
+   "gen": {
+    "ich": "ergreife",
+    "du": "ergreifst",
+    "er": "ergreift",
+    "wir": "ergreifen",
+    "ihr": "ergreift",
+    "sie": "ergreifen"
+   }
+  },
+  {
+   "lemma": "nähen",
+   "gen": {
+    "ich": "nähe",
+    "du": "nähst",
+    "er": "näht",
+    "wir": "nähen",
+    "ihr": "näht",
+    "sie": "nähen"
+   }
+  },
+  {
+   "lemma": "streichen",
+   "gen": {
+    "ich": "streiche",
+    "du": "streichst",
+    "er": "streicht",
+    "wir": "streichen",
+    "ihr": "streicht",
+    "sie": "streichen"
+   }
+  },
+  {
+   "lemma": "erscheinen",
+   "gen": {
+    "ich": "erscheine",
+    "du": "erscheinst",
+    "er": "erscheint",
+    "wir": "erscheinen",
+    "ihr": "erscheint",
+    "sie": "erscheinen"
+   }
+  },
+  {
+   "lemma": "bedenken",
+   "gen": {
+    "ich": "bedenke",
+    "du": "bedenkst",
+    "er": "bedenkt",
+    "wir": "bedenken",
+    "ihr": "bedenkt",
+    "sie": "bedenken"
+   }
+  },
+  {
+   "lemma": "erfinden",
+   "gen": {
+    "ich": "erfinde",
+    "du": "erfindest",
+    "er": "erfindet",
+    "wir": "erfinden",
+    "ihr": "erfindet",
+    "sie": "erfinden"
+   }
+  },
+  {
+   "lemma": "verbieten",
+   "gen": {
+    "ich": "verbiete",
+    "du": "verbietest",
+    "er": "verbietet",
+    "wir": "verbieten",
+    "ihr": "verbietet",
+    "sie": "verbieten"
+   }
+  },
+  {
+   "lemma": "genügen",
+   "gen": {
+    "ich": "genüge",
+    "du": "genügst",
+    "er": "genügt",
+    "wir": "genügen",
+    "ihr": "genügt",
+    "sie": "genügen"
+   }
+  },
+  {
+   "lemma": "verschwinden",
+   "gen": {
+    "ich": "verschwinde",
+    "du": "verschwindest",
+    "er": "verschwindet",
+    "wir": "verschwinden",
+    "ihr": "verschwindet",
+    "sie": "verschwinden"
+   }
+  },
+  {
+   "lemma": "missverstehen",
+   "gen": {
+    "ich": "missverstehe",
+    "du": "missverstehst",
+    "er": "missversteht",
+    "wir": "missverstehen",
+    "ihr": "missversteht",
+    "sie": "missverstehen"
+   }
+  },
+  {
+   "lemma": "zerschneiden",
+   "gen": {
+    "ich": "zerschneide",
+    "du": "zerschneidest",
+    "er": "zerschneidet",
+    "wir": "zerschneiden",
+    "ihr": "zerschneidet",
+    "sie": "zerschneiden"
+   }
+  },
+  {
+   "lemma": "weisen",
+   "gen": {
+    "ich": "weise",
+    "du": "weist",
+    "er": "weist",
+    "wir": "weisen",
+    "ihr": "weist",
+    "sie": "weisen"
+   }
+  },
+  {
+   "lemma": "betreiben",
+   "gen": {
+    "ich": "betreibe",
+    "du": "betreibst",
+    "er": "betreibt",
+    "wir": "betreiben",
+    "ihr": "betreibt",
+    "sie": "betreiben"
+   }
+  },
+  {
+   "lemma": "hängen",
+   "gen": {
+    "ich": "hänge",
+    "du": "hängst",
+    "er": "hängt",
+    "wir": "hängen",
+    "ihr": "hängt",
+    "sie": "hängen"
+   }
+  },
+  {
+   "lemma": "umschreiben",
+   "gen": {
+    "ich": "umschreibe",
+    "du": "umschreibst",
+    "er": "umschreibt",
+    "wir": "umschreiben",
+    "ihr": "umschreibt",
+    "sie": "umschreiben"
+   }
+  },
+  {
+   "lemma": "scheren",
+   "gen": {
+    "ich": "schere",
+    "du": "scherst",
+    "er": "schert",
+    "wir": "scheren",
+    "ihr": "schert",
+    "sie": "scheren"
+   }
+  },
+  {
+   "lemma": "treiben",
+   "gen": {
+    "ich": "treibe",
+    "du": "treibst",
+    "er": "treibt",
+    "wir": "treiben",
+    "ihr": "treibt",
+    "sie": "treiben"
+   }
+  },
+  {
+   "lemma": "vertreiben",
+   "gen": {
+    "ich": "vertreibe",
+    "du": "vertreibst",
+    "er": "vertreibt",
+    "wir": "vertreiben",
+    "ihr": "vertreibt",
+    "sie": "vertreiben"
+   }
+  },
+  {
+   "lemma": "ergehen",
+   "gen": {
+    "ich": "ergehe",
+    "du": "ergehst",
+    "er": "ergeht",
+    "wir": "ergehen",
+    "ihr": "ergeht",
+    "sie": "ergehen"
+   }
+  },
+  {
+   "lemma": "erzwingen",
+   "gen": {
+    "ich": "erzwinge",
+    "du": "erzwingst",
+    "er": "erzwingt",
+    "wir": "erzwingen",
+    "ihr": "erzwingt",
+    "sie": "erzwingen"
+   }
+  },
+  {
+   "lemma": "vergießen",
+   "gen": {
+    "ich": "vergieße",
+    "du": "vergießt",
+    "er": "vergießt",
+    "wir": "vergießen",
+    "ihr": "vergießt",
+    "sie": "vergießen"
+   }
+  },
+  {
+   "lemma": "begießen",
+   "gen": {
+    "ich": "begieße",
+    "du": "begießt",
+    "er": "begießt",
+    "wir": "begießen",
+    "ihr": "begießt",
+    "sie": "begießen"
+   }
+  },
+  {
+   "lemma": "schmeißen",
+   "gen": {
+    "ich": "schmeiße",
+    "du": "schmeißt",
+    "er": "schmeißt",
+    "wir": "schmeißen",
+    "ihr": "schmeißt",
+    "sie": "schmeißen"
+   }
+  },
+  {
+   "lemma": "schwören",
+   "gen": {
+    "ich": "schwöre",
+    "du": "schwörst",
+    "er": "schwört",
+    "wir": "schwören",
+    "ihr": "schwört",
+    "sie": "schwören"
+   }
+  },
+  {
+   "lemma": "begreifen",
+   "gen": {
+    "ich": "begreife",
+    "du": "begreifst",
+    "er": "begreift",
+    "wir": "begreifen",
+    "ihr": "begreift",
+    "sie": "begreifen"
+   }
+  },
+  {
+   "lemma": "besteigen",
+   "gen": {
+    "ich": "besteige",
+    "du": "besteigst",
+    "er": "besteigt",
+    "wir": "besteigen",
+    "ihr": "besteigt",
+    "sie": "besteigen"
+   }
+  },
+  {
+   "lemma": "verweisen",
+   "gen": {
+    "ich": "verweise",
+    "du": "verweist",
+    "er": "verweist",
+    "wir": "verweisen",
+    "ihr": "verweist",
+    "sie": "verweisen"
+   }
+  },
+  {
+   "lemma": "schleichen",
+   "gen": {
+    "ich": "schleiche",
+    "du": "schleichst",
+    "er": "schleicht",
+    "wir": "schleichen",
+    "ihr": "schleicht",
+    "sie": "schleichen"
+   }
+  },
+  {
+   "lemma": "heben",
+   "gen": {
+    "ich": "hebe",
+    "du": "hebst",
+    "er": "hebt",
+    "wir": "heben",
+    "ihr": "hebt",
+    "sie": "heben"
+   }
+  },
+  {
+   "lemma": "entfliehen",
+   "gen": {
+    "ich": "entfliehe",
+    "du": "entfliehst",
+    "er": "entflieht",
+    "wir": "entfliehen",
+    "ihr": "entflieht",
+    "sie": "entfliehen"
+   }
+  },
+  {
+   "lemma": "untertreiben",
+   "gen": {
+    "ich": "untertreibe",
+    "du": "untertreibst",
+    "er": "untertreibt",
+    "wir": "untertreiben",
+    "ihr": "untertreibt",
+    "sie": "untertreiben"
+   }
+  },
+  {
+   "lemma": "greifen",
+   "gen": {
+    "ich": "greife",
+    "du": "greifst",
+    "er": "greift",
+    "wir": "greifen",
+    "ihr": "greift",
+    "sie": "greifen"
+   }
+  },
+  {
+   "lemma": "preisen",
+   "gen": {
+    "ich": "preise",
+    "du": "preist",
+    "er": "preist",
+    "wir": "preisen",
+    "ihr": "preist",
+    "sie": "preisen"
+   }
+  },
+  {
+   "lemma": "versinken",
+   "gen": {
+    "ich": "versinke",
+    "du": "versinkst",
+    "er": "versinkt",
+    "wir": "versinken",
+    "ihr": "versinkt",
+    "sie": "versinken"
+   }
+  },
+  {
+   "lemma": "meiden",
+   "gen": {
+    "ich": "meide",
+    "du": "meidest",
+    "er": "meidet",
+    "wir": "meiden",
+    "ihr": "meidet",
+    "sie": "meiden"
+   }
+  },
+  {
+   "lemma": "verbleiben",
+   "gen": {
+    "ich": "verbleibe",
+    "du": "verbleibst",
+    "er": "verbleibt",
+    "wir": "verbleiben",
+    "ihr": "verbleibt",
+    "sie": "verbleiben"
+   }
+  },
+  {
+   "lemma": "widerrufen",
+   "gen": {
+    "ich": "widerrufe",
+    "du": "widerrufst",
+    "er": "widerruft",
+    "wir": "widerrufen",
+    "ihr": "widerruft",
+    "sie": "widerrufen"
+   }
+  },
+  {
+   "lemma": "überwiegen",
+   "gen": {
+    "ich": "überwiege",
+    "du": "überwiegst",
+    "er": "überwiegt",
+    "wir": "überwiegen",
+    "ihr": "überwiegt",
+    "sie": "überwiegen"
+   }
+  },
+  {
+   "lemma": "erheben",
+   "gen": {
+    "ich": "erhebe",
+    "du": "erhebst",
+    "er": "erhebt",
+    "wir": "erheben",
+    "ihr": "erhebt",
+    "sie": "erheben"
+   }
+  },
+  {
+   "lemma": "bestreiten",
+   "gen": {
+    "ich": "bestreite",
+    "du": "bestreitest",
+    "er": "bestreitet",
+    "wir": "bestreiten",
+    "ihr": "bestreitet",
+    "sie": "bestreiten"
+   }
+  }
+ ],
+ "review": [
+  {
+   "lemma": "merken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): merkte"
+  },
+  {
+   "lemma": "einfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "recherchieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): recherchierte"
+  },
+  {
+   "lemma": "verwenden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verwendete"
+  },
+  {
+   "lemma": "berichten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): berichtete"
+  },
+  {
+   "lemma": "markieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): markierte"
+  },
+  {
+   "lemma": "zuordnen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammengehören",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "suchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): suchte"
+  },
+  {
+   "lemma": "möchten",
+   "reason": "modal verb"
+  },
+  {
+   "lemma": "mögen",
+   "reason": "modal verb"
+  },
+  {
+   "lemma": "probieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): probierte"
+  },
+  {
+   "lemma": "schmecken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schmeckte"
+  },
+  {
+   "lemma": "schälen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schälte"
+  },
+  {
+   "lemma": "zubereiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bestellen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bestellte"
+  },
+  {
+   "lemma": "bezahlen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bezahlte"
+  },
+  {
+   "lemma": "kaufen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kaufte"
+  },
+  {
+   "lemma": "kosten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kostete"
+  },
+  {
+   "lemma": "zahlen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): zahlte"
+  },
+  {
+   "lemma": "stimmen",
+   "reason": "stem change / irregular (authored 3rd sg \"stimmt\" != generated \"stimmet\")"
+  },
+  {
+   "lemma": "wechseln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "drankommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "fotografieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): fotografierte"
+  },
+  {
+   "lemma": "joggen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): joggte"
+  },
+  {
+   "lemma": "klettern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "lieben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): liebte"
+  },
+  {
+   "lemma": "schwimmen",
+   "reason": "stem change / irregular (authored 3rd sg \"schwimmt\" != generated \"schwimmet\")"
+  },
+  {
+   "lemma": "tanzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): tanzte"
+  },
+  {
+   "lemma": "wandern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "feiern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "laufen",
+   "reason": "stem change / irregular (authored 3rd sg \"läuft\" != generated \"lauft\")"
+  },
+  {
+   "lemma": "malen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): malte"
+  },
+  {
+   "lemma": "reisen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reiste"
+  },
+  {
+   "lemma": "spazieren gehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "trainieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): trainierte"
+  },
+  {
+   "lemma": "zeigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): zeigte"
+  },
+  {
+   "lemma": "chillen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): chillte"
+  },
+  {
+   "lemma": "dirigieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): dirigierte"
+  },
+  {
+   "lemma": "glauben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): glaubte"
+  },
+  {
+   "lemma": "grillen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): grillte"
+  },
+  {
+   "lemma": "segeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "ausfüllen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "wählen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): wählte"
+  },
+  {
+   "lemma": "zusammenpassen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "geben",
+   "reason": "stem change / irregular (authored 3rd sg \"gibt\" != generated \"gebt\")"
+  },
+  {
+   "lemma": "schlafen",
+   "reason": "stem change / irregular (authored 3rd sg \"schläft\" != generated \"schlaft\")"
+  },
+  {
+   "lemma": "treffen",
+   "reason": "stem change / irregular (authored 3rd sg \"trifft\" != generated \"trefft\")"
+  },
+  {
+   "lemma": "besuchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): besuchte"
+  },
+  {
+   "lemma": "waschen",
+   "reason": "stem change / irregular (authored 3rd sg \"wäscht\" != generated \"wascht\")"
+  },
+  {
+   "lemma": "duschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): duschte"
+  },
+  {
+   "lemma": "frühstücken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): frühstückte"
+  },
+  {
+   "lemma": "achten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): achtete"
+  },
+  {
+   "lemma": "nachsprechen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mitsprechen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "klopfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): klopfte"
+  },
+  {
+   "lemma": "können",
+   "reason": "modal verb"
+  },
+  {
+   "lemma": "müssen",
+   "reason": "modal verb"
+  },
+  {
+   "lemma": "wollen",
+   "reason": "modal verb"
+  },
+  {
+   "lemma": "planen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): plante"
+  },
+  {
+   "lemma": "verabreden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beantworten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beantwortete"
+  },
+  {
+   "lemma": "freihaben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "geben (Unterricht)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "verdienen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verdiente"
+  },
+  {
+   "lemma": "betreuen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): betreute"
+  },
+  {
+   "lemma": "präsentieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): präsentierte"
+  },
+  {
+   "lemma": "schenken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schenkte"
+  },
+  {
+   "lemma": "wünschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): wünschte"
+  },
+  {
+   "lemma": "aufstehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einkaufen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einladen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "fernsehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mitkommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abholen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anfangen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anmachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufhören",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufmachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufpassen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausmachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beginnen",
+   "reason": "stem change / irregular (authored 3rd sg \"beginnt\" != generated \"beginnet\")"
+  },
+  {
+   "lemma": "einkaufen gehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einpacken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "losgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mitbringen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mitmachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mitnehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "rausgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "weitermachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zumachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufhängen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufschreiben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufstellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einsammeln",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorbereiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorlesen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "wegräumen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "wissen",
+   "reason": "stem change / irregular (authored 3rd sg \"weiß\" != generated \"wisst\")"
+  },
+  {
+   "lemma": "da sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entschuldigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): entschuldigte"
+  },
+  {
+   "lemma": "haben (Termin)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "leidtun",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "tun",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "vereinbaren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vereinbarte"
+  },
+  {
+   "lemma": "warten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): wartete"
+  },
+  {
+   "lemma": "überlegen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): überlegte"
+  },
+  {
+   "lemma": "abwechseln",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorspielen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "haben (Perfekt)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "passieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): passierte"
+  },
+  {
+   "lemma": "studieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): studierte"
+  },
+  {
+   "lemma": "abfahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ankommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "losfahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "werden",
+   "reason": "auxiliary verb"
+  },
+  {
+   "lemma": "zurückfahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einschlafen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "wecken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): weckte"
+  },
+  {
+   "lemma": "bekommen",
+   "reason": "stem change / irregular (authored 3rd sg \"bekommt\" != generated \"bekommet\")"
+  },
+  {
+   "lemma": "annehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "empfehlen",
+   "reason": "stem change / irregular (authored 3rd sg \"empfiehlt\" != generated \"empfehlt\")"
+  },
+  {
+   "lemma": "erklären",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erklärte"
+  },
+  {
+   "lemma": "erzählen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erzählte"
+  },
+  {
+   "lemma": "vergessen",
+   "reason": "stem change / irregular (authored 3rd sg \"vergisst\" != generated \"vergesst\")"
+  },
+  {
+   "lemma": "verkaufen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verkaufte"
+  },
+  {
+   "lemma": "entdecken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): entdeckte"
+  },
+  {
+   "lemma": "vermissen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vermisste"
+  },
+  {
+   "lemma": "zu Fuß gehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ansehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sauber machen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "stellen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): stellte"
+  },
+  {
+   "lemma": "stellen (put)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "umziehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aussteigen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "benutzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): benutzte"
+  },
+  {
+   "lemma": "einsteigen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nehmen (Bus)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "reservieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reservierte"
+  },
+  {
+   "lemma": "umsteigen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "verpassen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verpasste"
+  },
+  {
+   "lemma": "übernachten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): übernachtete"
+  },
+  {
+   "lemma": "besichtigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): besichtigte"
+  },
+  {
+   "lemma": "orientieren (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vermieten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vermietete"
+  },
+  {
+   "lemma": "zurückfinden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "danken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): dankte"
+  },
+  {
+   "lemma": "gefallen",
+   "reason": "stem change / irregular (authored 3rd sg \"gefällt\" != generated \"gefallt\")"
+  },
+  {
+   "lemma": "helfen",
+   "reason": "stem change / irregular (authored 3rd sg \"hilft\" != generated \"helft\")"
+  },
+  {
+   "lemma": "passen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): passte"
+  },
+  {
+   "lemma": "tragen",
+   "reason": "stem change / irregular (authored 3rd sg \"trägt\" != generated \"tragt\")"
+  },
+  {
+   "lemma": "anprobieren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anziehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aussehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausziehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "fehlen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): fehlte"
+  },
+  {
+   "lemma": "freuen (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "packen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): packte"
+  },
+  {
+   "lemma": "passen (match)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "stehen (suit)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auf sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "kriegen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kriegte"
+  },
+  {
+   "lemma": "shoppen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): shoppte"
+  },
+  {
+   "lemma": "shoppen gehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "umtauschen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zu sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "öffnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): öffnete"
+  },
+  {
+   "lemma": "zuhaben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zurückschicken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "regnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): regnete"
+  },
+  {
+   "lemma": "interessieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): interessierte"
+  },
+  {
+   "lemma": "kennenlernen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "los sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "meinen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): meinte"
+  },
+  {
+   "lemma": "reden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): redete"
+  },
+  {
+   "lemma": "schauen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schaute"
+  },
+  {
+   "lemma": "schneien",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schneite"
+  },
+  {
+   "lemma": "diskutieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): diskutierte"
+  },
+  {
+   "lemma": "nerven",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): nervte"
+  },
+  {
+   "lemma": "schütten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schüttete"
+  },
+  {
+   "lemma": "dürfen",
+   "reason": "modal verb"
+  },
+  {
+   "lemma": "husten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): hustete"
+  },
+  {
+   "lemma": "sollen",
+   "reason": "modal verb"
+  },
+  {
+   "lemma": "bewegen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bewegte"
+  },
+  {
+   "lemma": "erlaubt sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "geben (Anweisung)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "holen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): holte"
+  },
+  {
+   "lemma": "kontrollieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kontrollierte"
+  },
+  {
+   "lemma": "rauchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): rauchte"
+  },
+  {
+   "lemma": "schaffen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schaffte"
+  },
+  {
+   "lemma": "untersuchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): untersuchte"
+  },
+  {
+   "lemma": "versuchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): versuchte"
+  },
+  {
+   "lemma": "wehtun",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "baden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): badete"
+  },
+  {
+   "lemma": "hinlegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "inhalieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): inhalierte"
+  },
+  {
+   "lemma": "vermuten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vermutete"
+  },
+  {
+   "lemma": "telefonieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): telefonierte"
+  },
+  {
+   "lemma": "ausdrucken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "melden (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nachfragen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "schicken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schickte"
+  },
+  {
+   "lemma": "wiederholen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): wiederholte"
+  },
+  {
+   "lemma": "drucken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): druckte"
+  },
+  {
+   "lemma": "eingeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "hochfahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "speichern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "verbinden (mit)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "dauern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "enden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): endete"
+  },
+  {
+   "lemma": "stattfinden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorbei sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausdrücken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "dazugehören",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "formulieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): formulierte"
+  },
+  {
+   "lemma": "korrigieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): korrigierte"
+  },
+  {
+   "lemma": "weiterhören",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "wiedergeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zerlegen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): zerlegte"
+  },
+  {
+   "lemma": "wohnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): wohnte"
+  },
+  {
+   "lemma": "fragen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): fragte"
+  },
+  {
+   "lemma": "antworten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): antwortete"
+  },
+  {
+   "lemma": "kennen",
+   "reason": "stem change / irregular (authored 3rd sg \"kennt\" != generated \"kennet\")"
+  },
+  {
+   "lemma": "vorstellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "raten",
+   "reason": "stem change / irregular (authored 3rd sg \"rät\" != generated \"ratet\")"
+  },
+  {
+   "lemma": "variieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): variierte"
+  },
+  {
+   "lemma": "ergänzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ergänzte"
+  },
+  {
+   "lemma": "notieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): notierte"
+  },
+  {
+   "lemma": "mischen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): mischte"
+  },
+  {
+   "lemma": "ankreuzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bilden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bildete"
+  },
+  {
+   "lemma": "kreisen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kreiste"
+  },
+  {
+   "lemma": "nummerieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): nummerierte"
+  },
+  {
+   "lemma": "ordnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ordnete"
+  },
+  {
+   "lemma": "würfeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "zeichnen",
+   "reason": "stem change / irregular (authored 3rd sg \"zeichnet\" != generated \"zeichnt\")"
+  },
+  {
+   "lemma": "hören",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): hörte"
+  },
+  {
+   "lemma": "bedeuten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bedeutete"
+  },
+  {
+   "lemma": "führen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): führte"
+  },
+  {
+   "lemma": "reagieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reagierte"
+  },
+  {
+   "lemma": "grüßen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): grüßte"
+  },
+  {
+   "lemma": "verabschieden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verabschiedete"
+  },
+  {
+   "lemma": "tauschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): tauschte"
+  },
+  {
+   "lemma": "arbeiten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): arbeitete"
+  },
+  {
+   "lemma": "brauchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): brauchte"
+  },
+  {
+   "lemma": "kochen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kochte"
+  },
+  {
+   "lemma": "lernen",
+   "reason": "stem change / irregular (authored 3rd sg \"lernt\" != generated \"lernet\")"
+  },
+  {
+   "lemma": "spielen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): spielte"
+  },
+  {
+   "lemma": "sammeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "nennen",
+   "reason": "stem change / irregular (authored 3rd sg \"nennt\" != generated \"nennet\")"
+  },
+  {
+   "lemma": "anmelden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einverstanden sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "renovieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): renovierte"
+  },
+  {
+   "lemma": "hoffen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): hoffte"
+  },
+  {
+   "lemma": "wegfahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "unterrichten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): unterrichtete"
+  },
+  {
+   "lemma": "langweilen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): langweilte"
+  },
+  {
+   "lemma": "austauschen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aussprechen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "strukturieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): strukturierte"
+  },
+  {
+   "lemma": "sich interessieren",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich treffen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich waschen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich anziehen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich setzen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich beeilen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich entspannen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich erinnern",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich fühlen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich vorstellen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich anmelden",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich entschuldigen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich kümmern",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich rasieren",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich duschen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich ausruhen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich erholen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich vorbereiten",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich bedanken",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich ärgern",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich wohlfühlen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich unterhalten",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich streiten",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich beruhigen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "anbieten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bewundern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "erkennen",
+   "reason": "stem change / irregular (authored 3rd sg \"erkennt\" != generated \"erkennet\")"
+  },
+  {
+   "lemma": "fallen",
+   "reason": "stem change / irregular (authored 3rd sg \"fällt\" != generated \"fallt\")"
+  },
+  {
+   "lemma": "gratulieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): gratulierte"
+  },
+  {
+   "lemma": "schmücken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schmückte"
+  },
+  {
+   "lemma": "abheben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bedienen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bediente"
+  },
+  {
+   "lemma": "erledigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erledigte"
+  },
+  {
+   "lemma": "erwarten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erwartete"
+  },
+  {
+   "lemma": "funktionieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): funktionierte"
+  },
+  {
+   "lemma": "melden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): meldete"
+  },
+  {
+   "lemma": "pflegen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): pflegte"
+  },
+  {
+   "lemma": "transportieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): transportierte"
+  },
+  {
+   "lemma": "aufräumen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bremsen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bremste"
+  },
+  {
+   "lemma": "parken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): parkte"
+  },
+  {
+   "lemma": "tanken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): tankte"
+  },
+  {
+   "lemma": "drücken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): drückte"
+  },
+  {
+   "lemma": "leeren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): leerte"
+  },
+  {
+   "lemma": "klatschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): klatschte"
+  },
+  {
+   "lemma": "bestimmen",
+   "reason": "stem change / irregular (authored 3rd sg \"bestimmt\" != generated \"bestimmet\")"
+  },
+  {
+   "lemma": "buchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): buchte"
+  },
+  {
+   "lemma": "halten",
+   "reason": "stem change / irregular (authored 3rd sg \"hält\" != generated \"haltet\")"
+  },
+  {
+   "lemma": "pendeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "reduzieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reduzierte"
+  },
+  {
+   "lemma": "abfliegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "weiterfahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammenfassen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abgeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "erfragen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erfragte"
+  },
+  {
+   "lemma": "erreichen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erreichte"
+  },
+  {
+   "lemma": "eröffnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): eröffnete"
+  },
+  {
+   "lemma": "beschützen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beschützte"
+  },
+  {
+   "lemma": "landen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): landete"
+  },
+  {
+   "lemma": "lösen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): löste"
+  },
+  {
+   "lemma": "prüfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): prüfte"
+  },
+  {
+   "lemma": "registrieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): registrierte"
+  },
+  {
+   "lemma": "sperren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): sperrte"
+  },
+  {
+   "lemma": "versprechen",
+   "reason": "stem change / irregular (authored 3rd sg \"verspricht\" != generated \"versprecht\")"
+  },
+  {
+   "lemma": "vorbeigehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "weitergehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausschalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "behalten",
+   "reason": "stem change / irregular (authored 3rd sg \"behält\" != generated \"behaltet\")"
+  },
+  {
+   "lemma": "bluten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): blutete"
+  },
+  {
+   "lemma": "produzieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): produzierte"
+  },
+  {
+   "lemma": "äußern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "abbiegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "erleben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erlebte"
+  },
+  {
+   "lemma": "stören",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): störte"
+  },
+  {
+   "lemma": "setzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): setzte"
+  },
+  {
+   "lemma": "einzeichnen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorhaben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mieten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): mietete"
+  },
+  {
+   "lemma": "auswählen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "teilnehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zuhören",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beenden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beendete"
+  },
+  {
+   "lemma": "fühlen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): fühlte"
+  },
+  {
+   "lemma": "folgen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): folgte"
+  },
+  {
+   "lemma": "begründen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): begründete"
+  },
+  {
+   "lemma": "abonnieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): abonnierte"
+  },
+  {
+   "lemma": "anhören (sich etw.)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beachten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beachtete"
+  },
+  {
+   "lemma": "faszinieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): faszinierte"
+  },
+  {
+   "lemma": "putzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): putzte"
+  },
+  {
+   "lemma": "starten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): startete"
+  },
+  {
+   "lemma": "verplanen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verplante"
+  },
+  {
+   "lemma": "zurechtkommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammenbringen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beraten",
+   "reason": "stem change / irregular (authored 3rd sg \"berät\" != generated \"beratet\")"
+  },
+  {
+   "lemma": "konzentrieren (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nutzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): nutzte"
+  },
+  {
+   "lemma": "verändern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "ablesen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anstellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausgeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beantragen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beantragte"
+  },
+  {
+   "lemma": "bewerben (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "blicken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): blickte"
+  },
+  {
+   "lemma": "dolmetschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): dolmetschte"
+  },
+  {
+   "lemma": "durchatmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "kümmern (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "lassen",
+   "reason": "stem change / irregular (authored 3rd sg \"lässt\" != generated \"lasst\")"
+  },
+  {
+   "lemma": "reparieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reparierte"
+  },
+  {
+   "lemma": "servieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): servierte"
+  },
+  {
+   "lemma": "sorgen (für)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "spülen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): spülte"
+  },
+  {
+   "lemma": "vortragen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "unternehmen",
+   "reason": "stem change / irregular (authored 3rd sg \"unternimmt\" != generated \"unternehmt\")"
+  },
+  {
+   "lemma": "verlängern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "aufnehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beeilen (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bereitlegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bereuen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bereute"
+  },
+  {
+   "lemma": "beschweren (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "dazukommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "dazulernen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einhalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "freimachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "hinterlassen",
+   "reason": "stem change / irregular (authored 3rd sg \"hinterlässt\" != generated \"hinterlasst\")"
+  },
+  {
+   "lemma": "kapieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kapierte"
+  },
+  {
+   "lemma": "lächeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "wegwerfen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "weiterarbeiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zunehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "übersetzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): übersetzte"
+  },
+  {
+   "lemma": "bewachen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bewachte"
+  },
+  {
+   "lemma": "langlaufen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "surfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): surfte"
+  },
+  {
+   "lemma": "verstärken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verstärkte"
+  },
+  {
+   "lemma": "ausfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "benehmen (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mitspielen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zurückgeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "basteln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "bauen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): baute"
+  },
+  {
+   "lemma": "dazuschreiben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einrichten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einziehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entlassen",
+   "reason": "stem change / irregular (authored 3rd sg \"entlässt\" != generated \"entlasst\")"
+  },
+  {
+   "lemma": "entspannen (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "heizen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): heizte"
+  },
+  {
+   "lemma": "hängen (an)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "schaukeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "sparen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): sparte"
+  },
+  {
+   "lemma": "tauchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): tauchte"
+  },
+  {
+   "lemma": "verreisen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verreiste"
+  },
+  {
+   "lemma": "verzichten (auf)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorkommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "werfen",
+   "reason": "stem change / irregular (authored 3rd sg \"wirft\" != generated \"werft\")"
+  },
+  {
+   "lemma": "spiegeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "verbessern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "zurücklaufen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "organisieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): organisierte"
+  },
+  {
+   "lemma": "informieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): informierte"
+  },
+  {
+   "lemma": "heiraten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): heiratete"
+  },
+  {
+   "lemma": "vorschlagen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "weitersuchen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "klappen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): klappte"
+  },
+  {
+   "lemma": "auffallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausrichten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "erhalten",
+   "reason": "stem change / irregular (authored 3rd sg \"erhält\" != generated \"erhaltet\")"
+  },
+  {
+   "lemma": "mithelfen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zurückrufen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "backen",
+   "reason": "stem change / irregular (authored 3rd sg \"bäckt\" != generated \"backt\")"
+  },
+  {
+   "lemma": "brechen",
+   "reason": "stem change / irregular (authored 3rd sg \"bricht\" != generated \"brecht\")"
+  },
+  {
+   "lemma": "füllen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): füllte"
+  },
+  {
+   "lemma": "heilen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): heilte"
+  },
+  {
+   "lemma": "hereinkommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "schimpfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schimpfte"
+  },
+  {
+   "lemma": "verschlafen",
+   "reason": "stem change / irregular (authored 3rd sg \"verschläft\" != generated \"verschlaft\")"
+  },
+  {
+   "lemma": "deuten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): deutete"
+  },
+  {
+   "lemma": "warten auf",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "denken an",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sich freuen auf",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "träumen von",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ändern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "abschließen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zustimmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bloggen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bloggte"
+  },
+  {
+   "lemma": "hochladen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "runterladen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "löschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): löschte"
+  },
+  {
+   "lemma": "teilen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): teilte"
+  },
+  {
+   "lemma": "checken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): checkte"
+  },
+  {
+   "lemma": "bearbeiten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bearbeitete"
+  },
+  {
+   "lemma": "weitergeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "begleiten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): begleitete"
+  },
+  {
+   "lemma": "ansprechen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einplanen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "gründen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): gründete"
+  },
+  {
+   "lemma": "jobben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): jobbte"
+  },
+  {
+   "lemma": "gewinnen",
+   "reason": "stem change / irregular (authored 3rd sg \"gewinnt\" != generated \"gewinnet\")"
+  },
+  {
+   "lemma": "kommunizieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kommunizierte"
+  },
+  {
+   "lemma": "rasen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): raste"
+  },
+  {
+   "lemma": "existieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): existierte"
+  },
+  {
+   "lemma": "überraschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): überraschte"
+  },
+  {
+   "lemma": "weiterwissen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "besorgen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): besorgte"
+  },
+  {
+   "lemma": "empfangen",
+   "reason": "stem change / irregular (authored 3rd sg \"empfängt\" != generated \"empfangt\")"
+  },
+  {
+   "lemma": "klingeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "träumen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): träumte"
+  },
+  {
+   "lemma": "verletzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verletzte"
+  },
+  {
+   "lemma": "zusagen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammenleben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "weiterhelfen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "Acht geben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bellen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bellte"
+  },
+  {
+   "lemma": "hergeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auskennen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "gelten",
+   "reason": "stem change / irregular (authored 3rd sg \"gilt\" != generated \"geltet\")"
+  },
+  {
+   "lemma": "verirren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "betonen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): betonte"
+  },
+  {
+   "lemma": "anklicken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ablehnen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "kommentieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kommentierte"
+  },
+  {
+   "lemma": "kopieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kopierte"
+  },
+  {
+   "lemma": "tippen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): tippte"
+  },
+  {
+   "lemma": "chatten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): chattete"
+  },
+  {
+   "lemma": "mitteilen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "weiterleiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "weiterflüstern",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entwickeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "ausschlafen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "üben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): übte"
+  },
+  {
+   "lemma": "abmalen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "herunterladen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "posten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): postete"
+  },
+  {
+   "lemma": "mailen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): mailte"
+  },
+  {
+   "lemma": "programmieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): programmierte"
+  },
+  {
+   "lemma": "kündigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kündigte"
+  },
+  {
+   "lemma": "legen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): legte"
+  },
+  {
+   "lemma": "auspacken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausprobieren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bestätigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bestätigte"
+  },
+  {
+   "lemma": "füttern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "weglaufen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "lachen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): lachte"
+  },
+  {
+   "lemma": "weinen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): weinte"
+  },
+  {
+   "lemma": "flüstern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "sterben",
+   "reason": "stem change / irregular (authored 3rd sg \"stirbt\" != generated \"sterbt\")"
+  },
+  {
+   "lemma": "faulenzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): faulenzte"
+  },
+  {
+   "lemma": "zelten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): zeltete"
+  },
+  {
+   "lemma": "freinehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "verwechseln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "zusammensitzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "färben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): färbte"
+  },
+  {
+   "lemma": "föhnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): föhnte"
+  },
+  {
+   "lemma": "sich irren",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "blitzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): blitzte"
+  },
+  {
+   "lemma": "donnern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "hageln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "nieseln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "stürmen",
+   "reason": "stem change / irregular (authored 3rd sg \"stürmt\" != generated \"stürmet\")"
+  },
+  {
+   "lemma": "voraussetzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "überzeugen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): überzeugte"
+  },
+  {
+   "lemma": "abschreiben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "decken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): deckte"
+  },
+  {
+   "lemma": "enthalten",
+   "reason": "stem change / irregular (authored 3rd sg \"enthält\" != generated \"enthaltet\")"
+  },
+  {
+   "lemma": "hassen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): hasste"
+  },
+  {
+   "lemma": "kleinmachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "klären",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): klärte"
+  },
+  {
+   "lemma": "mitschicken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "schätzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schätzte"
+  },
+  {
+   "lemma": "sich verspäten",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "streiken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): streikte"
+  },
+  {
+   "lemma": "brüllen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): brüllte"
+  },
+  {
+   "lemma": "davongehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "fressen",
+   "reason": "stem change / irregular (authored 3rd sg \"frisst\" != generated \"fresst\")"
+  },
+  {
+   "lemma": "loben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): lobte"
+  },
+  {
+   "lemma": "sich beziehen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich eignen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich erkundigen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "stecken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): steckte"
+  },
+  {
+   "lemma": "stehlen",
+   "reason": "stem change / irregular (authored 3rd sg \"stiehlt\" != generated \"stehlt\")"
+  },
+  {
+   "lemma": "vorsingen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zurückbrüllen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "angehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sich aufhalten",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "begegnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): begegnete"
+  },
+  {
+   "lemma": "formen",
+   "reason": "stem change / irregular (authored 3rd sg \"formt\" != generated \"formet\")"
+  },
+  {
+   "lemma": "sich ausbreiten",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich befinden",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "umformulieren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vergrößern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "lauten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): lautete"
+  },
+  {
+   "lemma": "wachsen",
+   "reason": "stem change / irregular (authored 3rd sg \"wächst\" != generated \"wachst\")"
+  },
+  {
+   "lemma": "anbauen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aushalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "austragen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "herstellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zustellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sich beschäftigen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "anpassen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bemerken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bemerkte"
+  },
+  {
+   "lemma": "benötigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): benötigte"
+  },
+  {
+   "lemma": "berühren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): berührte"
+  },
+  {
+   "lemma": "bewerten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bewertete"
+  },
+  {
+   "lemma": "bezeichnen",
+   "reason": "stem change / irregular (authored 3rd sg \"bezeichnet\" != generated \"bezeichnt\")"
+  },
+  {
+   "lemma": "einschalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entsprechen",
+   "reason": "stem change / irregular (authored 3rd sg \"entspricht\" != generated \"entsprecht\")"
+  },
+  {
+   "lemma": "fassen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): fasste"
+  },
+  {
+   "lemma": "geschehen",
+   "reason": "stem change / irregular (authored 3rd sg \"geschieht\" != generated \"gescheht\")"
+  },
+  {
+   "lemma": "hinsehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mitsingen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nachdenken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "realisieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): realisierte"
+  },
+  {
+   "lemma": "sich leisten",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich vornehmen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "steuern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "übernehmen",
+   "reason": "stem change / irregular (authored 3rd sg \"übernimmt\" != generated \"übernehmt\")"
+  },
+  {
+   "lemma": "schweben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schwebte"
+  },
+  {
+   "lemma": "stapeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "staubsaugen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): staubsaugte"
+  },
+  {
+   "lemma": "erwärmen",
+   "reason": "stem change / irregular (authored 3rd sg \"erwärmt\" != generated \"erwärmet\")"
+  },
+  {
+   "lemma": "liefern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "retten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): rettete"
+  },
+  {
+   "lemma": "verlangen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verlangte"
+  },
+  {
+   "lemma": "verschmutzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verschmutzte"
+  },
+  {
+   "lemma": "zurückbekommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zurückbringen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abhängen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anschauen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausreden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "berücksichtigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): berücksichtigte"
+  },
+  {
+   "lemma": "betreffen",
+   "reason": "stem change / irregular (authored 3rd sg \"betrifft\" != generated \"betrefft\")"
+  },
+  {
+   "lemma": "eingehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einliefern",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "erwachen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erwachte"
+  },
+  {
+   "lemma": "festlegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "fortsetzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "herunterfahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "hindern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "hineingehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "parkieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): parkierte"
+  },
+  {
+   "lemma": "unterbrechen",
+   "reason": "stem change / irregular (authored 3rd sg \"unterbricht\" != generated \"unterbrecht\")"
+  },
+  {
+   "lemma": "vermitteln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "werten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): wertete"
+  },
+  {
+   "lemma": "rollen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): rollte"
+  },
+  {
+   "lemma": "rauffahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "rumfahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufbauen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "brennen",
+   "reason": "stem change / irregular (authored 3rd sg \"brennt\" != generated \"brennet\")"
+  },
+  {
+   "lemma": "diktieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): diktierte"
+  },
+  {
+   "lemma": "fest machen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "schiefgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "spazieren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "feststellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "guttun",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "hervorheben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammenstoßen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammenwohnen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sich verstehen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "akzeptieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): akzeptierte"
+  },
+  {
+   "lemma": "erleichtern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "nachgeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sich aufregen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich einigen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "anfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "angeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "eintragen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einzahlen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "gutschreiben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "regieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): regierte"
+  },
+  {
+   "lemma": "sich einloggen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "versäumen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): versäumte"
+  },
+  {
+   "lemma": "atmen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): atmete,atmt"
+  },
+  {
+   "lemma": "aufbewahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auflösen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufteilen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "betragen",
+   "reason": "stem change / irregular (authored 3rd sg \"beträgt\" != generated \"betragt\")"
+  },
+  {
+   "lemma": "einbauen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "eincremen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einnehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "kleben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): klebte"
+  },
+  {
+   "lemma": "krankschreiben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "kühlen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kühlte"
+  },
+  {
+   "lemma": "sich anstrengen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich kämmen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "spüren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): spürte"
+  },
+  {
+   "lemma": "stärken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): stärkte"
+  },
+  {
+   "lemma": "warnen",
+   "reason": "stem change / irregular (authored 3rd sg \"warnt\" != generated \"warnet\")"
+  },
+  {
+   "lemma": "zusammenzählen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "behaupten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): behauptete"
+  },
+  {
+   "lemma": "auslösen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "dokumentieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): dokumentierte"
+  },
+  {
+   "lemma": "klicken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): klickte"
+  },
+  {
+   "lemma": "komponieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): komponierte"
+  },
+  {
+   "lemma": "sich ausdenken",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich fürchten",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "verarbeiten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verarbeitete"
+  },
+  {
+   "lemma": "verhindern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "überprüfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): überprüfte"
+  },
+  {
+   "lemma": "sich amüsieren",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich wundern",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "basieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): basierte"
+  },
+  {
+   "lemma": "befürworten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): befürwortete"
+  },
+  {
+   "lemma": "einwerfen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nachprüfen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sich räuspern",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "tolerieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): tolerierte"
+  },
+  {
+   "lemma": "weiterverschenken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anwenden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufführen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auftreten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "behandeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "besprechen",
+   "reason": "stem change / irregular (authored 3rd sg \"bespricht\" != generated \"besprecht\")"
+  },
+  {
+   "lemma": "einsperren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "erarbeiten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erarbeitete"
+  },
+  {
+   "lemma": "musizieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): musizierte"
+  },
+  {
+   "lemma": "relativieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): relativierte"
+  },
+  {
+   "lemma": "sich schminken",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "umsetzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorbeifliegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "herumspringen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "rennen",
+   "reason": "stem change / irregular (authored 3rd sg \"rennt\" != generated \"rennet\")"
+  },
+  {
+   "lemma": "aufhalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufheben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufklären",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bekämpfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bekämpfte"
+  },
+  {
+   "lemma": "beobachten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beobachtete"
+  },
+  {
+   "lemma": "berechnen",
+   "reason": "stem change / irregular (authored 3rd sg \"berechnet\" != generated \"berechnt\")"
+  },
+  {
+   "lemma": "dienen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): diente"
+  },
+  {
+   "lemma": "durchsetzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "durchstreichen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entfallen",
+   "reason": "stem change / irregular (authored 3rd sg \"entfällt\" != generated \"entfallt\")"
+  },
+  {
+   "lemma": "erforschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erforschte"
+  },
+  {
+   "lemma": "ernten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erntete"
+  },
+  {
+   "lemma": "fördern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "messen",
+   "reason": "stem change / irregular (authored 3rd sg \"misst\" != generated \"messt\")"
+  },
+  {
+   "lemma": "mitrechnen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "pflanzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): pflanzte"
+  },
+  {
+   "lemma": "schaden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schadete"
+  },
+  {
+   "lemma": "schützen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schützte"
+  },
+  {
+   "lemma": "sich anschließen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "stoppen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): stoppte"
+  },
+  {
+   "lemma": "verbrauchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verbrauchte"
+  },
+  {
+   "lemma": "vernichten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vernichtete"
+  },
+  {
+   "lemma": "verringern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "verschwenden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verschwendete"
+  },
+  {
+   "lemma": "verteilen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verteilte"
+  },
+  {
+   "lemma": "zerstören",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): zerstörte"
+  },
+  {
+   "lemma": "zählen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): zählte"
+  },
+  {
+   "lemma": "drehen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): drehte"
+  },
+  {
+   "lemma": "sich beteiligen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich engagieren",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "deklinieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): deklinierte"
+  },
+  {
+   "lemma": "befürchten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): befürchtete"
+  },
+  {
+   "lemma": "beitreten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "regeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "unterzeichnen",
+   "reason": "stem change / irregular (authored 3rd sg \"unterzeichnet\" != generated \"unterzeichnt\")"
+  },
+  {
+   "lemma": "anschließen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufladen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einsetzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einstecken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "herunterfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "installieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): installierte"
+  },
+  {
+   "lemma": "kaputtgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auf den Markt kommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "stumm schalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sich anschaffen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich lohnen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "reinigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reinigte"
+  },
+  {
+   "lemma": "abmelden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abräumen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abstimmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abziehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "alarmieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): alarmierte"
+  },
+  {
+   "lemma": "ausbilden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bewältigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bewältigte"
+  },
+  {
+   "lemma": "durchführen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entsorgen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): entsorgte"
+  },
+  {
+   "lemma": "erfüllen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erfüllte"
+  },
+  {
+   "lemma": "finanzieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): finanzierte"
+  },
+  {
+   "lemma": "herausfinden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "hingehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mitorganisieren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "spenden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): spendete"
+  },
+  {
+   "lemma": "verbreiten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verbreitete"
+  },
+  {
+   "lemma": "würzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): würzte"
+  },
+  {
+   "lemma": "zulassen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sichern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "verlassen",
+   "reason": "stem change / irregular (authored 3rd sg \"verlässt\" != generated \"verlasst\")"
+  },
+  {
+   "lemma": "anregen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "konsumieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): konsumierte"
+  },
+  {
+   "lemma": "weiterentwickeln",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "widersprechen",
+   "reason": "stem change / irregular (authored 3rd sg \"widerspricht\" != generated \"widersprecht\")"
+  },
+  {
+   "lemma": "nützen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): nützte"
+  },
+  {
+   "lemma": "profitieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): profitierte"
+  },
+  {
+   "lemma": "überleben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): überlebte"
+  },
+  {
+   "lemma": "verlegen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verlegte"
+  },
+  {
+   "lemma": "beschädigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beschädigte"
+  },
+  {
+   "lemma": "erraten",
+   "reason": "stem change / irregular (authored 3rd sg \"errät\" != generated \"erratet\")"
+  },
+  {
+   "lemma": "ersetzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ersetzte"
+  },
+  {
+   "lemma": "handeln",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "herankommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "improvisieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): improvisierte"
+  },
+  {
+   "lemma": "rumliegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "veranstalten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): veranstaltete"
+  },
+  {
+   "lemma": "verneinen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verneinte"
+  },
+  {
+   "lemma": "anhaben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anschalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beeinflussen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beeinflusste"
+  },
+  {
+   "lemma": "dabeihaben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nachsehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "reichen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reichte"
+  },
+  {
+   "lemma": "reklamieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reklamierte"
+  },
+  {
+   "lemma": "testen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): testete"
+  },
+  {
+   "lemma": "verraten",
+   "reason": "stem change / irregular (authored 3rd sg \"verrät\" != generated \"verratet\")"
+  },
+  {
+   "lemma": "wirken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): wirkte"
+  },
+  {
+   "lemma": "zurückgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zurückzahlen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einleiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "geraten",
+   "reason": "stem change / irregular (authored 3rd sg \"gerät\" != generated \"geratet\")"
+  },
+  {
+   "lemma": "sich ernähren",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "stammen",
+   "reason": "stem change / irregular (authored 3rd sg \"stammt\" != generated \"stammet\")"
+  },
+  {
+   "lemma": "beten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): betete"
+  },
+  {
+   "lemma": "aufgeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufwachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "begeistern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "ehren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ehrte"
+  },
+  {
+   "lemma": "erben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erbte"
+  },
+  {
+   "lemma": "erstellen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erstellte"
+  },
+  {
+   "lemma": "heimfahren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "kämpfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kämpfte"
+  },
+  {
+   "lemma": "mitarbeiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "operieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): operierte"
+  },
+  {
+   "lemma": "sich ereignen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich erkälten",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "stürzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): stürzte"
+  },
+  {
+   "lemma": "verursachen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verursachte"
+  },
+  {
+   "lemma": "wegziehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "überqueren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): überquerte"
+  },
+  {
+   "lemma": "gucken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): guckte"
+  },
+  {
+   "lemma": "melken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): melkte"
+  },
+  {
+   "lemma": "sich einsetzen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich entschließen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich verlieben",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "heraussuchen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "signalisieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): signalisierte"
+  },
+  {
+   "lemma": "vorbeikommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorziehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammenstellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anfügen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anhören",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausnutzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auswandern",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bereisen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bereiste"
+  },
+  {
+   "lemma": "einleben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "erkunden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erkundete"
+  },
+  {
+   "lemma": "erweitern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "etablieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): etablierte"
+  },
+  {
+   "lemma": "flechten",
+   "reason": "stem change / irregular (authored 3rd sg \"flicht\" != generated \"flechtet\")"
+  },
+  {
+   "lemma": "knüpfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): knüpfte"
+  },
+  {
+   "lemma": "konfrontieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): konfrontierte"
+  },
+  {
+   "lemma": "leuchten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): leuchtete"
+  },
+  {
+   "lemma": "riskieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): riskierte"
+  },
+  {
+   "lemma": "scheitern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "trösten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): tröstete"
+  },
+  {
+   "lemma": "umarmen",
+   "reason": "stem change / irregular (authored 3rd sg \"umarmt\" != generated \"umarmet\")"
+  },
+  {
+   "lemma": "verbergen",
+   "reason": "stem change / irregular (authored 3rd sg \"verbirgt\" != generated \"verbergt\")"
+  },
+  {
+   "lemma": "verfilmen",
+   "reason": "stem change / irregular (authored 3rd sg \"verfilmt\" != generated \"verfilmet\")"
+  },
+  {
+   "lemma": "anerkennen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausbremsen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auszeichnen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beherrschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beherrschte"
+  },
+  {
+   "lemma": "beschriften",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beschriftete"
+  },
+  {
+   "lemma": "disqualifizieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): disqualifizierte"
+  },
+  {
+   "lemma": "entstammen",
+   "reason": "stem change / irregular (authored 3rd sg \"entstammt\" != generated \"entstammet\")"
+  },
+  {
+   "lemma": "ermöglichen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ermöglichte"
+  },
+  {
+   "lemma": "fernliegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "leichtfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "veröffentlichen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): veröffentlichte"
+  },
+  {
+   "lemma": "zusammenbinden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beurteilen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beurteilte"
+  },
+  {
+   "lemma": "verurteilen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verurteilte"
+  },
+  {
+   "lemma": "anlegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auffordern",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "austeilen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auszahlen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "blamieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): blamierte"
+  },
+  {
+   "lemma": "brillieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): brillierte"
+  },
+  {
+   "lemma": "erzeugen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erzeugte"
+  },
+  {
+   "lemma": "gewittern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "herumschlagen (sich)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "hinhören",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "hinnehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "touren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): tourte"
+  },
+  {
+   "lemma": "umgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorgeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "werben",
+   "reason": "stem change / irregular (authored 3rd sg \"wirbt\" != generated \"werbt\")"
+  },
+  {
+   "lemma": "ausstrecken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "daherkommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "draufhauen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nachweisen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "phrasieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): phrasierte"
+  },
+  {
+   "lemma": "schwerfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "überfordern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "unterfordern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "wahrnehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zurückkehren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abkaufen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "animieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): animierte"
+  },
+  {
+   "lemma": "aufreiben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aushandeln",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausüben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "avancieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): avancierte"
+  },
+  {
+   "lemma": "besagen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): besagte"
+  },
+  {
+   "lemma": "beschäftigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beschäftigte"
+  },
+  {
+   "lemma": "einsehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einstellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "erhoffen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erhoffte"
+  },
+  {
+   "lemma": "erhöhen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erhöhte"
+  },
+  {
+   "lemma": "erregen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erregte"
+  },
+  {
+   "lemma": "gefragt sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "verantworten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verantwortete"
+  },
+  {
+   "lemma": "gliedern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "hofieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): hofierte"
+  },
+  {
+   "lemma": "kreieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): kreierte"
+  },
+  {
+   "lemma": "locken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): lockte"
+  },
+  {
+   "lemma": "loswerden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nachgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "rudern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "subventionieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): subventionierte"
+  },
+  {
+   "lemma": "umrunden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): umrundete"
+  },
+  {
+   "lemma": "verankern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "verlagern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "vertiefen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vertiefte"
+  },
+  {
+   "lemma": "verwöhnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verwöhnte"
+  },
+  {
+   "lemma": "zusammenarbeiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zutrauen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "dekorieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): dekorierte"
+  },
+  {
+   "lemma": "demotivieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): demotivierte"
+  },
+  {
+   "lemma": "durchhalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einbringen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "eingestehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "importieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): importierte"
+  },
+  {
+   "lemma": "restaurieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): restaurierte"
+  },
+  {
+   "lemma": "umgestalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ablegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ableiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abweichen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anbringen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufregen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausleihen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einarbeiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "erachten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erachtete"
+  },
+  {
+   "lemma": "erfassen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erfasste"
+  },
+  {
+   "lemma": "ermutigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ermutigte"
+  },
+  {
+   "lemma": "erwerben",
+   "reason": "stem change / irregular (authored 3rd sg \"erwirbt\" != generated \"erwerbt\")"
+  },
+  {
+   "lemma": "erwischen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erwischte"
+  },
+  {
+   "lemma": "fluchen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): fluchte"
+  },
+  {
+   "lemma": "klauen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): klaute"
+  },
+  {
+   "lemma": "meckern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "plagen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): plagte"
+  },
+  {
+   "lemma": "richten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): richtete"
+  },
+  {
+   "lemma": "schnappen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schnappte"
+  },
+  {
+   "lemma": "sprühen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): sprühte"
+  },
+  {
+   "lemma": "steigern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "übergeben",
+   "reason": "stem change / irregular (authored 3rd sg \"übergibt\" != generated \"übergebt\")"
+  },
+  {
+   "lemma": "verbauen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verbaute"
+  },
+  {
+   "lemma": "verfolgen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verfolgte"
+  },
+  {
+   "lemma": "verlaufen",
+   "reason": "stem change / irregular (authored 3rd sg \"verläuft\" != generated \"verlauft\")"
+  },
+  {
+   "lemma": "versetzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): versetzte"
+  },
+  {
+   "lemma": "verzichten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verzichtete"
+  },
+  {
+   "lemma": "vorleben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zugrunde liegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammenhängen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufbereiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausreichen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beibringen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "definieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): definierte"
+  },
+  {
+   "lemma": "hinauszögern",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "pauschalisieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): pauschalisierte"
+  },
+  {
+   "lemma": "randalieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): randalierte"
+  },
+  {
+   "lemma": "respektieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): respektierte"
+  },
+  {
+   "lemma": "sicherstellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "thematisieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): thematisierte"
+  },
+  {
+   "lemma": "überlassen",
+   "reason": "stem change / irregular (authored 3rd sg \"überlässt\" != generated \"überlasst\")"
+  },
+  {
+   "lemma": "verallgemeinern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "abgrenzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abriegeln",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ängstigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ängstigte"
+  },
+  {
+   "lemma": "ausbauen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausreisen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beitragen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "besetzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): besetzte"
+  },
+  {
+   "lemma": "distanzieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): distanzierte"
+  },
+  {
+   "lemma": "einlenken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "eintreten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ereignen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ereignete"
+  },
+  {
+   "lemma": "ergeben",
+   "reason": "stem change / irregular (authored 3rd sg \"ergibt\" != generated \"ergebt\")"
+  },
+  {
+   "lemma": "ernennen",
+   "reason": "stem change / irregular (authored 3rd sg \"ernennt\" != generated \"ernennet\")"
+  },
+  {
+   "lemma": "errichten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): errichtete"
+  },
+  {
+   "lemma": "irren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): irrte"
+  },
+  {
+   "lemma": "kennzeichnen",
+   "reason": "stem change / irregular (authored 3rd sg \"kennzeichnet\" != generated \"kennzeichnt\")"
+  },
+  {
+   "lemma": "schlüpfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schlüpfte"
+  },
+  {
+   "lemma": "schnitzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schnitzte"
+  },
+  {
+   "lemma": "staunen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): staunte"
+  },
+  {
+   "lemma": "taufen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): taufte"
+  },
+  {
+   "lemma": "verwalten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verwaltete"
+  },
+  {
+   "lemma": "wach halten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zumauern",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auseinanderreißen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "benachrichtigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): benachrichtigte"
+  },
+  {
+   "lemma": "freihalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "fusionieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): fusionierte"
+  },
+  {
+   "lemma": "initiieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): initiierte"
+  },
+  {
+   "lemma": "reformieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reformierte"
+  },
+  {
+   "lemma": "schaufeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "schöpfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schöpfte"
+  },
+  {
+   "lemma": "überfluten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): überflutete"
+  },
+  {
+   "lemma": "verwelken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verwelkte"
+  },
+  {
+   "lemma": "ausleeren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ablaufen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ähneln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "anknüpfen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ärgern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "aufgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aussuchen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beerdigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beerdigte"
+  },
+  {
+   "lemma": "befassen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): befasste"
+  },
+  {
+   "lemma": "beladen",
+   "reason": "stem change / irregular (authored 3rd sg \"belädt\" != generated \"beladet\")"
+  },
+  {
+   "lemma": "zusammensetzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammentragen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einholen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "engagieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): engagierte"
+  },
+  {
+   "lemma": "entlaufen",
+   "reason": "stem change / irregular (authored 3rd sg \"entläuft\" != generated \"entlauft\")"
+  },
+  {
+   "lemma": "fällen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): fällte"
+  },
+  {
+   "lemma": "investieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): investierte"
+  },
+  {
+   "lemma": "loslassen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nominieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): nominierte"
+  },
+  {
+   "lemma": "prägen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): prägte"
+  },
+  {
+   "lemma": "rinnen",
+   "reason": "stem change / irregular (authored 3rd sg \"rinnt\" != generated \"rinnet\")"
+  },
+  {
+   "lemma": "rotschämen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sehnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): sehnte"
+  },
+  {
+   "lemma": "senken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): senkte"
+  },
+  {
+   "lemma": "verärgern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "vergolden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vergoldete"
+  },
+  {
+   "lemma": "vertonen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vertonte"
+  },
+  {
+   "lemma": "verwirklichen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verwirklichte"
+  },
+  {
+   "lemma": "zugreifen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abschwächen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beschweren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beschwerte"
+  },
+  {
+   "lemma": "einfrieren",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "parodieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): parodierte"
+  },
+  {
+   "lemma": "reaktivieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reaktivierte"
+  },
+  {
+   "lemma": "reproduzieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): reproduzierte"
+  },
+  {
+   "lemma": "überschatten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): überschattete"
+  },
+  {
+   "lemma": "verwandeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "vorausdenken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammenbrechen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "gewohnt sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "andeuten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ankaufen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "antreten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufliegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auflisten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufreißen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausrauben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bedecken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bedeckte"
+  },
+  {
+   "lemma": "bereiten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bereitete"
+  },
+  {
+   "lemma": "besehen",
+   "reason": "stem change / irregular (authored 3rd sg \"besieht\" != generated \"beseht\")"
+  },
+  {
+   "lemma": "betreten",
+   "reason": "stem change / irregular (authored 3rd sg \"betritt\" != generated \"betretet\")"
+  },
+  {
+   "lemma": "einführen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einlassen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entführen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): entführte"
+  },
+  {
+   "lemma": "erfolgen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erfolgte"
+  },
+  {
+   "lemma": "erpressen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erpresste"
+  },
+  {
+   "lemma": "schlagen",
+   "reason": "stem change / irregular (authored 3rd sg \"schlägt\" != generated \"schlagt\")"
+  },
+  {
+   "lemma": "erstarren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erstarrte"
+  },
+  {
+   "lemma": "erwähnen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erwähnte"
+  },
+  {
+   "lemma": "glänzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): glänzte"
+  },
+  {
+   "lemma": "knirschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): knirschte"
+  },
+  {
+   "lemma": "knurren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): knurrte"
+  },
+  {
+   "lemma": "mahlen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): mahlte"
+  },
+  {
+   "lemma": "nagen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): nagte"
+  },
+  {
+   "lemma": "rechnen",
+   "reason": "stem change / irregular (authored 3rd sg \"rechnet\" != generated \"rechnt\")"
+  },
+  {
+   "lemma": "schwitzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schwitzte"
+  },
+  {
+   "lemma": "stapfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): stapfte"
+  },
+  {
+   "lemma": "ticken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): tickte"
+  },
+  {
+   "lemma": "verdächtigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verdächtigte"
+  },
+  {
+   "lemma": "vererben",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vererbte"
+  },
+  {
+   "lemma": "wegkommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zittern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "aufdrücken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufschwingen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aussterben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "hinaustragen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "katapultieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): katapultierte"
+  },
+  {
+   "lemma": "quietschen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): quietschte"
+  },
+  {
+   "lemma": "runterfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "verdrängen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verdrängte"
+  },
+  {
+   "lemma": "versterben",
+   "reason": "stem change / irregular (authored 3rd sg \"verstirbt\" != generated \"versterbt\")"
+  },
+  {
+   "lemma": "vorausgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "wegbleiben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "wiedererkennen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zusammenschreiben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zuschlagen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abbrechen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufkommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufwärmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausführen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausräumen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auswerten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "befolgen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): befolgte"
+  },
+  {
+   "lemma": "begeben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beliefern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "benennen",
+   "reason": "stem change / irregular (authored 3rd sg \"benennt\" != generated \"benennet\")"
+  },
+  {
+   "lemma": "bündeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "einatmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einhaken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einräumen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "interagieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): interagierte"
+  },
+  {
+   "lemma": "kentern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "lindern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "ratifizieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ratifizierte"
+  },
+  {
+   "lemma": "schildern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "sträuben",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "umbringen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vermessen",
+   "reason": "stem change / irregular (authored 3rd sg \"vermisst\" != generated \"vermesst\")"
+  },
+  {
+   "lemma": "vermindern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "wegfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zukommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zustande kommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "attackieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): attackierte"
+  },
+  {
+   "lemma": "auslöschen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beschränken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beschränkte"
+  },
+  {
+   "lemma": "diagnostizieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): diagnostizierte"
+  },
+  {
+   "lemma": "einpflanzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "hinterherhinken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "manipulieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): manipulierte"
+  },
+  {
+   "lemma": "optimieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): optimierte"
+  },
+  {
+   "lemma": "abbauen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "abwägen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ansiedeln",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "aufrufen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auftanken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorhersagen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vorsprechen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "wiedertreffen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "auskommen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bemühen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "dösen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): döste"
+  },
+  {
+   "lemma": "eintauchen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entfalten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): entfaltete"
+  },
+  {
+   "lemma": "ertragen",
+   "reason": "stem change / irregular (authored 3rd sg \"erträgt\" != generated \"ertragt\")"
+  },
+  {
+   "lemma": "erwecken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erweckte"
+  },
+  {
+   "lemma": "grübeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "hemmen",
+   "reason": "stem change / irregular (authored 3rd sg \"hemmt\" != generated \"hemmet\")"
+  },
+  {
+   "lemma": "heranführen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "klagen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): klagte"
+  },
+  {
+   "lemma": "lenken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): lenkte"
+  },
+  {
+   "lemma": "ruhen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ruhte"
+  },
+  {
+   "lemma": "spritzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): spritzte"
+  },
+  {
+   "lemma": "übereinstimmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "übersehen",
+   "reason": "stem change / irregular (authored 3rd sg \"übersieht\" != generated \"überseht\")"
+  },
+  {
+   "lemma": "umfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vereinen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vereinte"
+  },
+  {
+   "lemma": "verfügen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verfügte"
+  },
+  {
+   "lemma": "vermehren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): vermehrte"
+  },
+  {
+   "lemma": "verpennen",
+   "reason": "stem change / irregular (authored 3rd sg \"verpennt\" != generated \"verpennet\")"
+  },
+  {
+   "lemma": "vertreten",
+   "reason": "stem change / irregular (authored 3rd sg \"vertritt\" != generated \"vertretet\")"
+  },
+  {
+   "lemma": "wackeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "wälzen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): wälzte"
+  },
+  {
+   "lemma": "wenden",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): wendete"
+  },
+  {
+   "lemma": "zerfallen",
+   "reason": "stem change / irregular (authored 3rd sg \"zerfällt\" != generated \"zerfallt\")"
+  },
+  {
+   "lemma": "absolvieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): absolvierte"
+  },
+  {
+   "lemma": "ankündigen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "beleuchten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): beleuchtete"
+  },
+  {
+   "lemma": "durcharbeiten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einstürzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "experimentieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): experimentierte"
+  },
+  {
+   "lemma": "ignorieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): ignorierte"
+  },
+  {
+   "lemma": "konfiszieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): konfiszierte"
+  },
+  {
+   "lemma": "konzipieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): konzipierte"
+  },
+  {
+   "lemma": "publizieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): publizierte"
+  },
+  {
+   "lemma": "qualifizieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): qualifizierte"
+  },
+  {
+   "lemma": "regulieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): regulierte"
+  },
+  {
+   "lemma": "revolutionieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): revolutionierte"
+  },
+  {
+   "lemma": "schrumpfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): schrumpfte"
+  },
+  {
+   "lemma": "schwindeln",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "verschaffen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verschaffte"
+  },
+  {
+   "lemma": "verschärfen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verschärfte"
+  },
+  {
+   "lemma": "zurückerobern",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zurückfallen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anfühlen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "angewiesen sein",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "anstehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "argumentieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): argumentierte"
+  },
+  {
+   "lemma": "ausmalen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "befehlen",
+   "reason": "stem change / irregular (authored 3rd sg \"befiehlt\" != generated \"befehlt\")"
+  },
+  {
+   "lemma": "benehmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "bewirken",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): bewirkte"
+  },
+  {
+   "lemma": "einprägen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einteilen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "erstatten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): erstattete"
+  },
+  {
+   "lemma": "gönnen",
+   "reason": "stem change / irregular (authored 3rd sg \"gönnt\" != generated \"gönnet\")"
+  },
+  {
+   "lemma": "nachhaken",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "verwählen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "widmen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): widmete,widmt"
+  },
+  {
+   "lemma": "würdigen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): würdigte"
+  },
+  {
+   "lemma": "eingrenzen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entgegenbringen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entgegensehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "festhalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "klarmachen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "mitbestimmen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "untergehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "vergewissern",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "verunsichern",
+   "reason": "non -en infinitive"
+  },
+  {
+   "lemma": "voranstellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "widerlegen",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): widerlegte"
+  },
+  {
+   "lemma": "übergeneralisieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): übergeneralisierte"
+  },
+  {
+   "lemma": "davon ausgehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "ausschließen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "nahelegen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "überarbeiten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): überarbeitete"
+  },
+  {
+   "lemma": "sich beziehen auf",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "archivieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): archivierte"
+  },
+  {
+   "lemma": "falten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): faltete"
+  },
+  {
+   "lemma": "zurücktreten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "verdichten",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): verdichtete"
+  },
+  {
+   "lemma": "basieren auf",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sich lassen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "darstellen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "zurückkommen (auf)",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "einwenden",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "entgegenhalten",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "weglassen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "paraphrasieren",
+   "reason": "KW_INFLECTIONS has conflicting Präsens-shaped form(s): paraphrasierte"
+  },
+  {
+   "lemma": "nachvollziehen",
+   "reason": "separable/multiword"
+  },
+  {
+   "lemma": "sich belaufen auf",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "sich auseinandersetzen",
+   "reason": "reflexive"
+  },
+  {
+   "lemma": "einbeziehen",
+   "reason": "separable/multiword"
+  }
+ ]
+}

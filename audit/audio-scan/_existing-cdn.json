@@ -1,0 +1,55 @@
+{
+  "capturedAt": "2026-09-09",
+  "method": "live HTTP fetch/HEAD from the running Klarweg runtime (kw-audio-engine.js resolution chain), not from project copies",
+  "runtimeChain": {
+    "loadedOnChapterPages": ["public/audio/kw-audio-engine.js", "public/audio/kw-tts-config.js"],
+    "notLoadedAnywhere": ["public/audio/kw-audio.js"],
+    "order": [
+      "1. vocab dual-voice manifest (github.io CDN) — only when a gender is requested",
+      "2. text-keyed manifest.json (KW_AUDIO_BASE = jsDelivr klarweg-audio)",
+      "3. IndexedDB cache (per exact text)",
+      "4. hosted neural TTS endpoint — DISABLED (endpoint: null in kw-tts-config.js)",
+      "5. browser speechSynthesis de-DE"
+    ]
+  },
+  "vocabCdn": {
+    "base": "https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/",
+    "manifest": "manifest.json",
+    "status": 200,
+    "keys": 9403,
+    "entriesWithBothVoices": 9403,
+    "filesAvailable": 18806,
+    "filenameScheme": "audio/{female|male}/<readable_term>.mp3",
+    "spotChecked": ["führen", "machen", "jedoch"],
+    "missingBasics": ["der Apfel", "das Buch"],
+    "chapterAudioProbes404": [
+      "audio/story/A1_001_S001.mp3",
+      "audio/listening/A1_001_L001.mp3",
+      "audio/reading/A1_001_R001.mp3",
+      "audio/speaking/A1_001_P001.mp3",
+      "audio/vocab/female/ffb93ae3703c904b_F.mp3"
+    ]
+  },
+  "sentenceCdn": {
+    "base": "https://cdn.jsdelivr.net/gh/reegangandhi16-pixel/klarweg-audio@main/public/audio/",
+    "manifestKeys": 126,
+    "filesAvailable": 126,
+    "orphanedManifests": {
+      "a1-words-manifest.json": { "entries": 1902, "voices": 2, "files": 3804, "loadedByEngine": false },
+      "a2-words-manifest.json": { "entries": 1444, "voices": 2, "files": 2888, "loadedByEngine": false },
+      "b1-words-manifest.json": { "status": 404, "projectCopyEntries": 108 }
+    },
+    "note": "A1/A2 dual-voice vocabulary audio is present and serving 200s (e.g. 'der Apfel' → audio/words/female/ffb93ae3703c904b.mp3) but the current engine never fetches these manifests, so the runtime cannot see it."
+  },
+  "localFiles": {
+    "public/audio/words": 60,
+    "public/audio/sentences": 61,
+    "public/audio/dialogues": 8,
+    "resolvedByLocalManifest": 126,
+    "brokenLocalManifests": {
+      "a1-words-manifest.json": "1903 entries → /audio/words/{female,male}/… — those directories do not exist in the project",
+      "a2-words-manifest.json": "1491 entries → same",
+      "b1-words-manifest.json": "108 entries → same"
+    }
+  }
+}

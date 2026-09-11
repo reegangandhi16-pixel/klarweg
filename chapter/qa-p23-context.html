@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P23 sweep-context diagnosis</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:18px;max-width:780px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:56vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P23 — sweep-context contamination diagnosis</h1>
+<div class="sub">Same measurement path and stability gate as P14/P15/P21 (unchanged semantics, unchanged thresholds). Adds read-only diagnostics: ordered-surface + finding fingerprints, DOM/lexicon counts, timings, and a SECOND engine reading after a short wait to test whether the page keeps mutating past the gate. No downloads, one run at a time, persisted per chapter.<br>
+<code>KWP23.sweep(runId)</code> · <code>KWP23.mini(list,label)</code> · <code>KWP23.compare()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script src="qa-finding-serializer.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const GOLD={'chapter-a1-11-negation.html':{occ:412,find:3,hcm:1,fp:'8be4f29a'},
+ 'chapter-a1-21-uhrzeit.html':{occ:707,find:17,hcm:1,fp:'5ec20d8'},
+ 'chapter-b2-07-verbergaenzungen-erkennen.html':{occ:655,find:0,hcm:0,fp:'2312e86a'}};
+function key(run){return 'kw_p23_'+run;}
+function store(run){try{return JSON.parse(localStorage.getItem(key(run))||'{}');}catch(e){return{};}}
+function commit(run,file,rec){const s=store(run);s[file]=rec;localStorage.setItem(key(run),JSON.stringify(s));}
+function freshFrame(){const o=$('#frame');const n=document.createElement('iframe');n.id='frame';o.parentNode.replaceChild(n,o);}
+function fnv(str){let h=0x811c9dc5;for(let i=0;i<str.length;i++)h=((h^str.charCodeAt(i))*0x01000193)>>>0;return h.toString(16);}
+
+// UNCHANGED stability gate: lexicon present + non-empty signature + 3 identical samples.
+function ready(f,cb){
+  const S=180,N=3,HARD=30000,t0=Date.now();let last=null,same=0,samples=0,firstSig=null,tFirst=null;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const nodes=d.querySelectorAll('.rw, .de-link');if(!nodes.length)return null;
+    const roles={};let n=0;for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;return n+'|'+d.querySelectorAll('[id^="sec-"]').length+'|'+d.querySelectorAll('.wp-badge').length+'|'+
+      Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{
+    if(Date.now()-t0>HARD)return cb('hard-timeout',{msToStable:null,samples:samples,firstSig:firstSig,settleSig:last});
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,S);}
+    const s=sig();samples++;
+    if(s===null){last=null;same=0;return setTimeout(poll,S);}
+    if(firstSig===null){firstSig=s;tFirst=Date.now()-t0;}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=N)return cb('stable',{msToStable:Date.now()-t0,msToFirstSig:tFirst,samples:samples,
+      firstSig:firstSig,settleSig:s,sigChangedWhileSettling:firstSig!==s});
+    setTimeout(poll,S);};
+  poll();
+}
+function measure(file,opts){
+  opts=opts||{};
+  return new Promise(resolve=>{
+    const f=$('#frame');let done=false;const t0=Date.now();
+    const fin=r=>{if(done)return;done=true;resolve(r);};
+    const timer=setTimeout(()=>fin({file,error:'timeout',errorKind:'hard-timeout'}),90000);
+    f.onload=()=>ready(f,(state,gate)=>{
+      const d=f.contentDocument,w=f.contentWindow;
+      if(state!=='stable'){clearTimeout(timer);return fin({file,readyState:state,gate:gate,discarded:true});}
+      if(!w||!d||!d.head){clearTimeout(timer);return fin({file,error:'iframe doc unavailable',errorKind:'injection-error'});}
+      const s=d.createElement('script');s.src='qa-engine.js?v='+Date.now();
+      s.onerror=()=>{clearTimeout(timer);fin({file,error:'engine load failed',errorKind:'injection-error'});};
+      s.onload=()=>{try{
+        const snap=()=>{
+          const nodes=[].slice.call(d.querySelectorAll('.rw, .de-link')).filter(n=>!n.querySelector('.rw, .de-link'))
+            .filter(n=>!n.closest('.word-pop')).filter(n=>!!(n.offsetParent||n.getClientRects().length));
+          const qa=w.KWQA.run();
+          const ser=(qa.findings||[]).map(window.KWFSER.serialize);
+          return {occurrences:qa.occurrences,checked:qa.checked,clean:!!qa.clean,counts:qa.counts,
+            findings:ser.length,hcm:(qa.findings||[]).filter(x=>x.code==='HEADWORD_COLOUR_MISMATCH').length,
+            surfaceFingerprint:fnv(nodes.map(n=>n.textContent.trim()).join('\u0001')),
+            findingFingerprint:fnv(ser.map(x=>JSON.stringify([x.code,x.section,x.index,x.surface,x.detail])).join('\n')),
+            nodeCount:nodes.length,serialized:opts.keepFindings?ser:null,
+            surfaces:opts.keepSurfaces?nodes.map(n=>n.textContent.trim()):null};
+        };
+        const first=snap();
+        // Part 6: does the page keep mutating after the gate says stable?
+        setTimeout(()=>{try{
+          const second=snap();
+          const res={file,readyState:state,gate:gate,elapsedMs:Date.now()-t0,
+            occurrences:first.occurrences,checked:first.checked,findings:first.findings,hcm:first.hcm,
+            clean:first.clean,counts:first.counts,
+            surfaceFingerprint:first.surfaceFingerprint,findingFingerprint:first.findingFingerprint,
+            reread:{occurrences:second.occurrences,findings:second.findings,hcm:second.hcm,
+              surfaceFingerprint:second.surfaceFingerprint,findingFingerprint:second.findingFingerprint,
+              changed:first.surfaceFingerprint!==second.surfaceFingerprint||first.findingFingerprint!==second.findingFingerprint},
+            dom:{allNodes:d.getElementsByTagName('*').length,htmlChars:d.documentElement.outerHTML.length,
+              styleSheets:d.styleSheets.length,inlineStyleTags:d.querySelectorAll('style').length,
+              rw:d.querySelectorAll('.rw').length,de:d.querySelectorAll('.de').length,
+              deLink:d.querySelectorAll('.de-link').length,wordPops:d.querySelectorAll('.word-pop').length,
+              lexiconEntries:(function(){try{const L=w.KW_GLOBAL_LEXICON;if(!L)return null;
+                return L.size!==undefined?L.size:Object.keys(L).length;}catch(e){return null;}})()},
+            host:{heapMB:(performance.memory?+(performance.memory.usedJSHeapSize/1048576).toFixed(1):null),
+              iframes:document.querySelectorAll('iframe').length},
+            serialized:first.serialized||null,surfaces:first.surfaces||null};
+          clearTimeout(timer);fin(res);
+        }catch(e){clearTimeout(timer);fin({file,error:String(e),errorKind:'measurement-error'});}},opts.rereadDelay||900);
+      }catch(e){clearTimeout(timer);fin({file,error:String(e&&e.stack||e),errorKind:'measurement-error'});}};
+      d.head.appendChild(s);
+    });
+    f.src=file+'?p23='+Date.now()+'_'+Math.random();
+  });
+}
+window.KWP23={
+  GOLD,store,key,
+  progress(run){const s=store(run);const k=Object.keys(s);
+    return {measured:k.length,errors:k.filter(x=>s[x].error).length,
+      occurrences:k.reduce((a,x)=>a+(s[x].occurrences||0),0),
+      findings:k.reduce((a,x)=>a+(s[x].findings||0),0),
+      clean:k.filter(x=>s[x].clean).length,
+      rereadChanged:k.filter(x=>s[x].reread&&s[x].reread.changed).length};},
+  async sweep(run){
+    const CH=await (await fetch('qa-chapters.json?v='+Date.now())).json();
+    window.__chapters=CH;const have=store(run);
+    for(let i=0;i<CH.length;i++){
+      const file=CH[i];
+      if(have[file]&&!have[file].error&&!have[file].discarded)continue;
+      $('#status').textContent='['+run+'] '+(i+1)+'/'+CH.length+'  '+file.slice(8,40);
+      let r=null;
+      for(let a=1;a<=3;a++){
+        r=await measure(file,{keepFindings:!!GOLD[file],keepSurfaces:!!GOLD[file]});
+        r.attempts=a;r.manifestPosition=i;r.prevChapter=i>0?CH[i-1]:null;r.nextChapter=i<CH.length-1?CH[i+1]:null;
+        if(!r.error&&!r.discarded)break;
+        freshFrame();await new Promise(x=>setTimeout(x,1000));
+      }
+      commit(run,file,r);
+      if(i%20===0)$('#out').textContent=JSON.stringify(this.progress(run),null,1);
+    }
+    $('#status').textContent='['+run+'] done';return this.progress(run);
+  },
+  async mini(list,label){
+    const out=[];
+    for(let i=0;i<list.length;i++){
+      $('#status').textContent='mini['+label+'] '+(i+1)+'/'+list.length+' '+list[i].slice(8,34);
+      let r=null;
+      for(let a=1;a<=3;a++){r=await measure(list[i],{keepFindings:!!GOLD[list[i]]});r.attempts=a;
+        if(!r.error&&!r.discarded)break;freshFrame();await new Promise(x=>setTimeout(x,1000));}
+      out.push(r);
+    }
+    const s=store('mini');s[label]=out.map(r=>({file:r.file,readyState:r.readyState,occ:r.occurrences,find:r.findings,
+      hcm:r.hcm,fp:r.surfaceFingerprint,ffp:r.findingFingerprint,msToStable:r.gate&&r.gate.msToStable,
+      sigChangedWhileSettling:r.gate&&r.gate.sigChangedWhileSettling,reread:r.reread&&r.reread.changed,
+      dom:r.dom,host:r.host,attempts:r.attempts}));
+    localStorage.setItem(key('mini'),JSON.stringify(s));
+    $('#status').textContent='mini['+label+'] done';
+    return s[label];
+  },
+  compare(){
+    const a=store('run1'),b=store('run2'),ch=window.__chapters||Object.keys(a);
+    const diff=[],anomalies=[];
+    ch.forEach(f=>{const x=a[f],y=b[f];if(!x||!y)return;
+      if(x.surfaceFingerprint!==y.surfaceFingerprint||x.findingFingerprint!==y.findingFingerprint)
+        diff.push({file:f,run1:[x.occurrences,x.findings,x.hcm,x.surfaceFingerprint,x.findingFingerprint],
+                   run2:[y.occurrences,y.findings,y.hcm,y.surfaceFingerprint,y.findingFingerprint]});
+      const g=GOLD[f];
+      if(g){[['run1',x],['run2',y]].forEach(([r,v])=>{
+        anomalies.push({run:r,file:f,occ:v.occurrences,find:v.findings,hcm:v.hcm,fp:v.surfaceFingerprint,
+          matchesGold:v.occurrences===g.occ&&v.findings===g.find&&v.hcm===g.hcm&&v.surfaceFingerprint===g.fp,
+          pos:v.manifestPosition,prev:v.prevChapter,next:v.nextChapter,msToStable:v.gate&&v.gate.msToStable,
+          sigChangedWhileSettling:v.gate&&v.gate.sigChangedWhileSettling,rereadChanged:v.reread&&v.reread.changed,
+          dom:v.dom,host:v.host});});}
+    });
+    const tot=r=>{const s=store(r);const k=Object.keys(s);return {n:k.length,
+      occ:k.reduce((p,x)=>p+(s[x].occurrences||0),0),find:k.reduce((p,x)=>p+(s[x].findings||0),0),
+      clean:k.filter(x=>s[x].clean).length,rereadChanged:k.filter(x=>s[x].reread&&s[x].reread.changed).length,
+      nonStable:k.filter(x=>s[x].readyState!=='stable').length};};
+    return {run1:tot('run1'),run2:tot('run2'),divergentChapters:diff.length,divergent:diff.slice(0,40),anomalies};
+  }
+};
+$('#out').textContent='ready';
+</script>
+</body></html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · Phase 1 Story sentence component</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:16px;max-width:800px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:pre-wrap;max-height:58vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>Phase 1 — Story sentence component</h1>
+<div class="sub">Verifies, per chapter: story lines get the X-Ray affordance, the panel carries a Grammar Breakdown, a background click opens it, a <b>word</b> click still opens the Word Popup unchanged (the regression the rollout plan flags), and the other surfaces stay paused. Read-only probe.<br><code>KWP1.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+const CH=['chapter-a1-15-cafe.html','chapter-a2-16-goethe-mini-2.html','chapter-b1-7-praeteritum.html',
+ 'chapter-b2-27-perfekt-vs-praeteritum.html','chapter-c1-04-hauptsaetze-elegant-verbinden.html',
+ 'chapter-c2-04-nomen-verb-verbindungen.html'];
+function ready(f,cb){
+  const S=180,N=3,HARD=30000,t0=Date.now();let last=null,same=0;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const n=d.querySelectorAll('.rw, .de-link');if(!n.length)return null;
+    return n.length+'|'+d.querySelectorAll('.story-card').length+'|'+d.querySelectorAll('[id^="sec-"]').length;}catch(e){return null;}};
+  const poll=()=>{if(Date.now()-t0>HARD)return cb('hard-timeout');
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,S);}
+    const s=sig();if(s===null){last=null;same=0;return setTimeout(poll,S);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=N)return cb('stable');setTimeout(poll,S);};
+  poll();
+}
+window.KWP1={async run(){
+ const out=[];
+ for(let i=0;i<CH.length;i++){
+  const file=CH[i];$('#status').textContent='['+(i+1)+'/'+CH.length+'] '+file.slice(8,40);
+  const r=await new Promise((res)=>{
+   const f=$('#frame');const t=setTimeout(()=>res({file,error:'timeout'}),90000);
+   f.onload=()=>ready(f,async(state)=>{
+    clearTimeout(t);
+    if(state!=='stable')return res({file,error:'unstable: '+state});
+    const d=f.contentDocument,w=f.contentWindow;
+    const errs=[];
+    try{const ce=w.console.error;w.console.error=function(){errs.push([].slice.call(arguments).join(' ').slice(0,120));return ce.apply(w.console,arguments);};}catch(e){}
+    const cards=[].slice.call(d.querySelectorAll('.story-card'));
+    const enabled=cards.filter(c=>c.classList.contains('is-xray-enabled'));
+    const panels=cards.filter(c=>c.querySelector('.sentence-xray'));
+    const withBreakdown=cards.filter(c=>c.querySelector('.si-breakdown-head'));
+    const rows=cards.filter(c=>c.querySelectorAll('.sentence-xray .si-breakdown, .sentence-xray .si-label').length>0).length;
+    // 1) background click opens the panel
+    let bgOpen=null;
+    const target=enabled[0];
+    if(target){
+      const lineEl=target.querySelector('.story-line');
+      const before=target.classList.contains('is-xray-open');
+      lineEl.click();
+      await new Promise(x=>setTimeout(x,400));
+      const after=target.classList.contains('is-xray-open');
+      bgOpen={before,after,opened:!before&&after};
+      // close again
+      lineEl.click();await new Promise(x=>setTimeout(x,250));
+      bgOpen.closesAgain=!target.classList.contains('is-xray-open');
+    }
+    // 2) WORD click must still open the Word Popup and must NOT toggle X-Ray
+    let wordClick=null;
+    const wordCard=enabled[0]||cards[0];
+    const word=wordCard&&wordCard.querySelector('.story-line .rw, .story-line .de-link');
+    if(word){
+      const cl=d.querySelector('.wp-close');if(cl)cl.click();
+      const xrayBefore=wordCard.classList.contains('is-xray-open');
+      word.click();
+      await new Promise(x=>setTimeout(x,600));
+      const pop=d.querySelector('.word-pop');
+      const head=pop&&pop.querySelector('.word-pop-de');
+      wordClick={surface:word.textContent.trim(),
+        popupOpened:!!head,popupHeadword:head?head.textContent.trim():null,
+        headwordMatches:!!head&&head.textContent.trim().toLowerCase()===word.textContent.trim().toLowerCase(),
+        xrayDidNotToggle:wordCard.classList.contains('is-xray-open')===xrayBefore};
+      const c2=d.querySelector('.wp-close');if(c2)c2.click();
+    }
+    // 3) audio controls must survive X-Ray (buttons live inside the story card)
+    let audio=null;
+    const ab=d.querySelector('.story-card .audio-play-btn, .story-card [class*="audio"][class*="btn"]');
+    if(ab){
+      const card=ab.closest('.story-card');
+      const xrayBefore=card?card.classList.contains('is-xray-open'):null;
+      const reachable=(function(){try{const r=ab.getBoundingClientRect();
+        const hit=d.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+        return !!hit&&(hit===ab||ab.contains(hit)||hit.contains(ab));}catch(e){return null;}})();
+      let threw=null;try{ab.click();}catch(e){threw=String(e&&e.message||e);}
+      await new Promise(x=>setTimeout(x,500));
+      audio={found:true,pointerReachable:reachable,clickThrew:threw,
+        xrayDidNotToggle:card?card.classList.contains('is-xray-open')===xrayBefore:null,
+        stillInDom:!!ab.isConnected,disabled:!!ab.disabled};
+    } else { audio={found:false}; }
+    // 4) other surfaces still paused
+    const otherSurfaces={grammarExamples:d.querySelectorAll('.sentence-unit.is-xray-enabled').length,
+      readingInline:d.querySelectorAll('.sentence-inline-unit.is-xray-enabled').length};
+    res({file,readyState:state,
+      storyCards:cards.length,xrayEnabled:enabled.length,panels:panels.length,
+      withGrammarBreakdown:withBreakdown.length,cardsWithBreakdownRows:rows,
+      backgroundClick:bgOpen,wordClick,audio,otherSurfaces,
+      clickableWords:d.querySelectorAll('.rw, .de-link').length,
+      consoleErrors:errs.length});
+   });
+   f.src=file+'?p1='+Date.now();
+  });
+  out.push(r);window.__P1=out;$('#out').textContent=JSON.stringify(out,null,1);
+ }
+ $('#status').textContent='done';return out.length;
+}};
+$('#out').textContent='ready';
+</script>
+</body></html>

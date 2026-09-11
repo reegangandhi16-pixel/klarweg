@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Klarweg · production architecture proof</title>
+<style>
+:root{--canvas:#FAFAF7;--surface:#fff;--elevated:#F4F3EE;--ink:#0E0E10;--ink2:#5A5A60;--ok:#1F4E4A;--bad:#E55A3F}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;padding:24px}
+h1{font:600 20px/1.3 Inter,sans-serif;margin:0 0 4px}p.sub{color:var(--ink2);margin:0 0 18px;font-size:13.5px;max-width:900px}
+button{font:500 13px Inter,sans-serif;padding:9px 14px;border:1px solid #E3E1DA;border-radius:8px;background:var(--surface);cursor:pointer}
+#msg{color:var(--ink2);font-size:13px;margin-left:12px}
+pre{background:var(--surface);border:1px solid #EDEBE4;border-radius:10px;padding:14px;font:12px/1.5 "JetBrains Mono",ui-monospace,monospace;max-height:58vh;overflow:auto;white-space:pre-wrap;margin-top:16px}
+</style></head><body>
+<h1>Production architecture proof</h1>
+<p class="sub">Follows the real resolution path in <code>kw-audio-engine.js</code> end to end: text key → manifest entry → CDN URL → decodable audio. Also sweeps for unreachable published assets and manifest entries pointing at nothing. No TTS, no upload, no playback beyond a decode test. Results in <code>window.__KWP2</code>.</p>
+<div><button id="go">Run proof</button><span id="msg">idle</span></div>
+<pre id="log">—</pre>
+<script src="../public/audio/kw-audio-engine.js"></script>
+<script src="../public/audio/kw-tts-config.js"></script>
+<script>
+const P = window.__KWP2 = {};
+const logEl = document.getElementById('log'), msg = document.getElementById('msg');
+const say = t => { msg.textContent = t; };
+const show = o => { logEl.textContent = JSON.stringify(o, null, 1); };
+const ready = () => new Promise(res => { const t0 = Date.now(); const p = () => { const s = window.KW_audioManifestStats && window.KW_audioManifestStats(); if ((s && s.totalMergedWords > 0) || Date.now() - t0 > 20000) return res(s); setTimeout(p, 300); }; p(); });
+
+// Chain proof: for a term, walk every hop the runtime actually walks.
+async function chain(term, gender) {
+  const info = window.KW_resolveInfo(term, gender);
+  const step = { term, gender, textKey: null, manifestEntry: null, url: null, http: null, contentType: null, bytes: null, decodable: null, layout: null };
+  step.textKey = info.text || null;
+  step.manifestSource = info.source || null;
+  step.matchKind = info.match || null;
+  step.url = info.url || null;
+  if (!info.url) return step;
+  step.layout = /\/audio\/(female|male)\//.test(info.url) ? 'readable-filename (vocab CDN)'
+    : /\/audio\/words\/(female|male)\//.test(info.url) ? 'hash-filename (a1/a2 words CDN)' : 'other';
+  try {
+    const r = await fetch(info.url, { cache: 'no-cache' });
+    step.http = r.status; step.contentType = r.headers.get('content-type');
+    if (r.ok) {
+      const buf = await r.arrayBuffer();
+      step.bytes = buf.byteLength;
+      // real decode — proves the browser can play it, not just that it 200s
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const ab = await ctx.decodeAudioData(buf.slice(0));
+        step.decodable = true; step.durationSec = +ab.duration.toFixed(2);
+        ctx.close();
+      } catch (e) { step.decodable = false; step.decodeError = String(e && e.message || e); }
+    }
+  } catch (e) { step.http = 'ERR'; step.error = String(e); }
+  return step;
+}
+
+async function run() {
+  say('loading manifests…');
+  P.engine = await ready();
+
+  // 1. chain proof across both layouts + both voices
+  say('chain proof…');
+  const probes = [['der Apfel','female'],['der Apfel','male'],['das Buch','female'],['führen','female'],['führen','male'],['die Chancengleichheit','female'],['machen','male'],['jedoch','female']];
+  P.chains = [];
+  for (const [t,g] of probes) P.chains.push(await chain(t,g));
+  show({ engine: P.engine, chains: P.chains });
+
+  // 2. no manifest entry may point at a nonexistent file (sample sweep, both layouts)
+  say('manifest → file sweep…');
+  const voc = await (await fetch('audio-inventory/vocabulary.json', {cache:'no-cache'})).json();
+  const terms = [...new Set(voc.map(a => a.text))];
+  const byLayout = { readable: [], hash: [], none: [] };
+  for (const t of terms) {
+    const u = window.KW_resolveInfo(t, 'female').url;
+    if (!u) byLayout.none.push(t);
+    else if (/\/audio\/words\//.test(u)) byLayout.hash.push({ t, u });
+    else byLayout.readable.push({ t, u });
+  }
+  P.layoutSplit = { readable: byLayout.readable.length, hash: byLayout.hash.length, unresolved: byLayout.none.length };
+  const sweep = async (list, n) => {
+    const step = Math.max(1, Math.floor(list.length / n)); const picks = [];
+    for (let i = 0; i < list.length && picks.length < n; i += step) picks.push(list[i]);
+    const res = await Promise.all(picks.map(async p => { try { const r = await fetch(p.u, {method:'HEAD',cache:'no-cache'}); return r.status; } catch(e){ return 'ERR'; } }));
+    const tal = {}; res.forEach(s => tal[s] = (tal[s]||0)+1);
+    return { probed: picks.length, status: tal, sample: picks[0] };
+  };
+  P.sweepReadable = await sweep(byLayout.readable, 60);
+  P.sweepHash = await sweep(byLayout.hash, 60);
+  show({ layoutSplit: P.layoutSplit, readable: P.sweepReadable, hash: P.sweepHash });
+
+  // 3. unreachable published assets: manifest keys no control ever requests
+  say('unreachable-published sweep…');
+  const req = new Set(terms.map(t => window.KW_normalizeAudioText ? window.KW_normalizeAudioText(t) : t));
+  const stats = window.KW_audioManifestStats();
+  P.published = { mergedTerms: stats.totalMergedWords, requiredTerms: terms.length,
+    publishedNotRequired: stats.totalMergedWords - terms.filter(t => !!window.KW_resolveInfo(t,'female').url).length,
+    note: 'published-but-not-required = terms on the CDN that no current control asks for (obsolete corpus, retained not deleted)' };
+  P.verdict = {
+    bothLayoutsResolve: P.chains.filter(c => c.http === 200).length,
+    decodable: P.chains.filter(c => c.decodable === true).length,
+    chainsProbed: P.chains.length
+  };
+  say('DONE');
+  show({ engine: P.engine, chains: P.chains, layoutSplit: P.layoutSplit, sweepReadable: P.sweepReadable, sweepHash: P.sweepHash, published: P.published, verdict: P.verdict });
+}
+document.getElementById('go').onclick = run;
+window.__KWP2_run = run;
+say('ready');
+</script>
+</body></html>

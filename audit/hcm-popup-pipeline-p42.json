@@ -1,0 +1,127 @@
+{
+ "phase": "42 — popup pipeline trace: locating the first divergence (DIAGNOSIS ONLY)",
+ "generatedAt": "2026-08-15T10:24:17.152Z",
+ "harness": "chapter/qa-hcm-pipeline-p42.html — diagnostic copy of chapter-app.js with the P41 export anchored at :966; real lookupWord and resolveClickableWord called directly, then real nodes clicked and the rendered popup read. 8 chapters, 0 errors. No production file touched.",
+ "headline": "THE POPUP BADGE IS CORRECT IN EVERY ACTIONABLE CASE; THE HEADWORD COLOUR IS NOT DERIVED FROM IT. The first divergence is inside renderWordPop colour derivation, downstream of every resolution step.",
+ "pipelineTables": {
+  "deutsch": {
+   "chapter": "a1-8",
+   "occurrences": 2,
+   "occurrenceRole": "adjective",
+   "spanColour": "rgb(245, 158, 11) — amber, CORRECT",
+   "lookupWord": "Adjective — CORRECT",
+   "resolveClickableWord_notInitial": "Adjective — CORRECT",
+   "resolveClickableWord_initial": "Adjective — CORRECT",
+   "popupBadge": "Adjective — CORRECT",
+   "popupHeadColour": "rgb(46, 125, 50) via inline style color:var(--g-object) — WRONG",
+   "firstDivergence": "E — renderWordPop colour derivation / ROLE_COLOR_VAR. Every upstream stage returns Adjective, and the popup even LABELS it Adjective, yet paints the headword with --g-object."
+  },
+  "Deutsch": {
+   "chapter": "a1-8",
+   "occurrences": 2,
+   "occurrenceRole": "object",
+   "spanColour": "rgb(46, 125, 50)",
+   "lookupWord": "Adjective — WRONG for the language noun (the P41 collision finding, reconfirmed)",
+   "resolveClickableWord": "Adjective (both sentenceInitial values)",
+   "popupBadge": "Noun — CORRECT despite the resolver returning Adjective",
+   "popupHeadColour": "rgb(46, 125, 50) var(--g-object) — matches the span, so NO HCM fires here",
+   "firstDivergence": "A — lookupWord returns the adjective entry for the capitalised language noun. It produces no HCM because the colour happens to agree with the span, so this is a latent data-quality defect, not a rendered one."
+  },
+  "Zahlen": {
+   "chapter": "a1-15",
+   "occurrences": 2,
+   "occurrenceRole": "verb",
+   "spanColour": "rgb(220, 38, 38) — red, CORRECT for the verb",
+   "lookupWord": "Verb — CORRECT",
+   "resolveClickableWord_notInitial": "Noun · plural — WRONG",
+   "resolveClickableWord_initial": "Verb — CORRECT",
+   "popupBadge": "Verb — CORRECT",
+   "popupHeadColour": "rgb(46, 125, 50) var(--g-object) — WRONG",
+   "firstDivergence": "E — same as deutsch. Note the SECONDARY divergence at B: resolveClickableWord returns Noun·plural when sentenceInitial=false, which is the P39 inflection-index collision (Zahl→plural Zahlen) surfacing at the resolver level. The live click uses the sentenceInitial=true path and gets Verb, so B is not what produces this HCM."
+  },
+  "zahlen_lowercase": {
+   "chapter": "a1-15",
+   "occurrenceRole": "verb",
+   "spanColour": "rgb(220, 38, 38)",
+   "lookupWord": "Verb",
+   "resolveClickableWord": "Verb (both)",
+   "popupBadge": "Verb",
+   "popupHeadColour": "rgb(220, 38, 38) var(--g-verb) — CORRECT, colour matches span",
+   "firstDivergence": "NONE — this is the control that proves the pipeline CAN produce a correct colour. The only difference from the capitalised case is the surface capitalisation."
+  },
+  "letter_a": {
+   "chapter": "a1-39",
+   "occurrenceRole": "adverb",
+   "spanColour": "rgb(6, 182, 212)",
+   "lookupWord": "Adverb",
+   "resolveClickableWord": "Adverb (both)",
+   "popupBadge": "Adverb",
+   "popupHeadColour": "rgb(90, 90, 96) var(--ink-secondary) — does not match the Adverb badge",
+   "firstDivergence": "E — the colour is the letter|name|conjunction ink-secondary mapping while every upstream stage and the badge say Adverb. So the popup is internally inconsistent here too, in the opposite direction: the COLOUR treats it as a letter, the BADGE treats it as an adverb.",
+   "letterControls": "\"e\" and \"i\" are NOT rendered as clickable nodes in a1-39, so the P41 finding that they resolve as type Letter could not be compared at the rendered level. The a-vs-e/i contrast remains a lexicon-level observation only."
+  }
+ },
+ "crossCaseFinding": {
+  "pattern": "in deutsch, Zahlen and letter a the popup badge matches the resolved entry and the headword colour does not",
+  "colourObserved": "--g-object for deutsch and Zahlen; --ink-secondary for a",
+  "whatItIsNot": [
+   "not the occurrence role — deutsch is r-adjective, Zahlen is r-verb, neither is object",
+   "not the badge class — the badges read Adjective, Verb and Adverb respectively",
+   "not lookupWord — it returns the correct entry in all three",
+   "not resolveClickableWord on the live path — it returns the correct entry for the sentenceInitial value the click actually uses"
+  ],
+  "implication": "renderWordPop derives the headword colour from a THIRD source that is neither the occurrence role nor the resolved entry type. Identifying that source is the remaining work.",
+  "contrastControl": "lowercase \"zahlen\" in the same chapter paints var(--g-verb) correctly, so the mechanism is conditional — capitalisation is the visible discriminator between the correct and incorrect case."
+ },
+ "byDesignControls": {
+  "tested": [
+   "Nein (a1-7)",
+   "Wann (a1-21)",
+   "muss (c2-08)"
+  ],
+  "result": "traced without error; these were not re-classified and remain BY-DESIGN per P26/P38",
+  "note": "this phase did not re-open them; the brief instructs not to treat a span/popup colour difference as a defect on its own"
+ },
+ "rcbControls": {
+  "tested": [
+   "dokumentiert (c1-26)",
+   "um (b1-17)"
+  ],
+  "result": "traced without error. Consistent with P41: the popup follows the lexeme/badge, not the occurrence guess, which is why forcing the occurrence role into expectedClass returned null there.",
+  "confirms": "the popup correctly prefers the lexeme over the occurrence guess — the RCB colour difference is the documented occurrence-vs-lexeme design, not a resolution failure"
+ },
+ "rootCauseCandidate": {
+  "stage": "E — renderWordPop headword colour derivation",
+  "evidence": "PROVEN that stages A–C return the correct entry for deutsch, Zahlen and a, and PROVEN that the popup badge derived from that entry is correct, while the inline style on .word-pop-de is var(--g-object) / var(--ink-secondary) instead of the entry colour",
+  "notYetIdentified": "the exact expression inside renderWordPop that selects the colour variable. chapter-app.js:2038-2052 and :2099 are the candidate lines but were not instrumented in this phase.",
+  "confidence": "PROVEN for the divergence location (stage E); UNIDENTIFIED for the precise expression"
+ },
+ "correctionsToEarlierPhases": [
+  "P38/P39 attributed the deutsch and Zahlen HCM to a case-blind WORDIDX slot causing the popup to resolve the wrong lexeme. P41 disproved the resolution claim and P42 now shows the popup resolves AND labels them correctly — only the colour is wrong. The WORDIDX collision is real but affects capitalised \"Deutsch\" (latent, no HCM), not the four lowercase \"deutsch\" HCM records.",
+  "P38 group D4 assumed \"Zahlen, bitte!\" resolves to the noun. It resolves to the Verb on the live path; the noun only appears when resolveClickableWord is called with sentenceInitial=false."
+ ],
+ "unresolvedQuestions": [
+  "which expression in renderWordPop chooses var(--g-object) for an entry typed Adjective/Verb?",
+  "why does the same pipeline paint lowercase \"zahlen\" correctly but capitalised \"Zahlen\" incorrectly, when both resolve to Verb on the live path?",
+  "is the capitalised-Deutsch lookupWord mis-resolution learner-visible anywhere (it produces no HCM because its colour coincidentally matches the span)?"
+ ],
+ "nextPhase": "instrument renderWordPop itself — capture the local variables that feed the headword inline style (the role/colour selection at :2038-2052 and the assignment at :2099) for one deutsch click and one lowercase-zahlen click, and diff them. That single comparison should name the expression.",
+ "status": {
+  "productionModified": false,
+  "diagnosticCopyModified": true,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "chapterAppProductionFileModified": false,
+  "qaEngineModified": false,
+  "assertionsModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "chapter/qa-hcm-pipeline-p42.html",
+  "audit/hcm-popup-pipeline-p42.json"
+ ],
+ "filesModified": "none (production)"
+}

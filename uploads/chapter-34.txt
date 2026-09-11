@@ -1,0 +1,28 @@
+CHAPTER 34 — Relativsätze im Akkusativ   ·   Grammar: Relativsätze (Akk.)   ·   Theme: Unterhaltung & Relativsätze   ·   25 words
+
+German (lemma)	Article	Part of Speech	English	NW Source	Status	Tier	Goethe	Activated in	Reinforced in
+die Abkürzung	die	Noun	abbreviation	NW K12	Active Core	B	Low	34	35
+befreundet		Adverb/Other	friendly	NW K12	Active Core	B	Low	34	35
+deuten		Verb	to indicate	NW K12	Active Core	B	Low	34	35
+dunkel-		Adverb/Other	dark	NW K12	Active Core	B	Low	34	35
+die Gebühr	die	Noun	fee	NW K12	Active Core	B	Low	34	35
+gestanden		Adverb/Other	love.)	NW K12	Active Core	B	Low	34	35
+die Hörerin	die	Noun	listener	NW K12	Active Core	B	Low	34	35
+hübsch		Adverb/Other	pretty	NW K12	Active Core	B	Low	34	35
+meistabonniert		Adverb/Other	most often subscribed to	NW K12	Active Core	B	Low	34	35
+melodisch		Adjective	melodious	NW K12	Active Core	B	Low	34	35
+die Nachrichtensprecherin	die	Noun	newsreader	NW K12	Active Core	A	High	34	35
+das Quiz	das	Noun	quiz	NW K12	Active Core	B	Low	34	35
+die Reihe	die	Noun	row	NW K12	Active Core	B	Low	34	35
+die Steuer	die	Noun	tax	NW K12	Active Core	B	Low	34	35
+das Tierbild	das	Noun	animal picture	NW K12	Active Core	B	Low	34	35
+die Wanderin	die	Noun	wanderer	NW K12	Active Core	B	Low	34	35
+der Wert	der	Noun	value	NW K12	Active Core	B	Low	34	35
+die Bestseller-Liste	die	Noun	bestseller list	NW K12	Active Support	C	Low	35	—
+der Festivalbesuch	der	Noun	festival visit	NW K12	Active Support	C	Low	35	—
+das Kinderbuch	das	Noun	children's book	NW K12	Active Support	C	Low	35	—
+die Mehrwertsteuer	die	Noun	value-added tax	NW K12	Active Support	C	Low	35	—
+das Schnäppchen	das	Noun	bargain	NW K12	Active Support	C	Low	35	—
+die Versandkosten	die	Noun	shipping cost	NW K12	Active Support	C	Low	35	—
+die Zwischensumme	die	Noun	subtotal	NW K12	Active Support	C	Low	35	—
+die Synchronsprecherin	die	Noun	voice actress	NW K12	Passive	D	Low	—	—

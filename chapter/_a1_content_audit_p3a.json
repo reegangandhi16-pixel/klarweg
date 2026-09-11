@@ -1,0 +1,98 @@
+{
+ "chapter-a1-33-saetze-verbinden-data.js": {
+  "scene": "Wochenendplanung \\u2014 im Kurs, Berlin",
+  "intro": "Weekend plans are up in the air. Carla wants to go out, but Jonas has a reason to stay in — work — and, as ever, an excuse ready. As they argue it out, every sentence gets glued to the next with und, aber, denn, deshalb and weil.",
+  "listening": [
+   "Jonas: Kommst du heute, Carla?",
+   "Carla: Ja, ich komme, aber ich habe wenig Zeit.",
+   "Jonas: Warum?",
+   "Carla: Ich muss lernen, weil ich morgen eine Prüfung habe.",
+   "Jonas: Und Max?",
+   "Carla: Max bleibt zu Hause, denn er ist müde. Es regnet auch, deshalb will er nicht rausgehen."
+  ]
+ },
+ "chapter-a1-34-schreiben-data.js": {
+  "scene": "Eine Einladung schreiben \\u2014 im Kurs, Berlin",
+  "intro": "Petra is throwing a birthday party and needs two messages: a casual WhatsApp to the gang and a formal email to invite Petra. As the group helps her write both, the difference between \"Hi, kommst du?\" and \"Sehr geehrte Petra\" comes alive.",
+  "listening": [
+   "Petra: Hallo Timo, ich mache am Samstag eine Party. Möchtest du kommen? Wir treffen uns um 19 Uhr bei mir.",
+   "Timo: Hallo Petra, ja, sehr gern! Vielen Dank für die Einladung. Soll ich etwas mitbringen?",
+   "Petra: Bring bitte nur gute Laune mit! Liebe Grüße."
+  ]
+ },
+ "chapter-a1-35-goethe4-data.js": {
+  "scene": "Vor dem Checkpoint \\u2014 Annas Reisebericht, Berlin",
+  "intro": "Runa is back from a trip and has written a little holiday report. As she reads it out and the group reacts, almost every structure from Phase 4 surfaces \\u2014 the Perfekt, war and hatte, pronouns, weil and deshalb \\u2014 a perfect warm-up before the checkpoint.",
+  "listening": [
+   "Nick: Was hast du im Urlaub gemacht, Runa?",
+   "Runa: Ich bin nach München gefahren, weil meine Tante dort wohnt.",
+   "Nick: Wie war es?",
+   "Runa: Es war tatsächlich super! Ich hatte viel Zeit.",
+   "Nick: Habt ihr etwas Schönes gemacht?",
+   "Runa: Ja, wir sind ins Café gegangen und ich habe Kuchen gegessen. Ich habe dir auch eine Urlaubsnachricht geschickt!"
+  ]
+ },
+ "chapter-a1-36-dativ-data.js": {
+  "scene": "Geschenke vor den Ferien \\u2014 im Kurs, Berlin",
+  "intro": "It\\'s gift time before the holidays. Alina gives the teacher flowers, helps a classmate, and — of course — saves herself the last piece of cake. Every \"to whom?\" puts the dative to work — dem, der, den — the case of the receiver.",
+  "listening": [
+   "Timo: Wem gibst du die Blumen, Alina?",
+   "Alina: Ich gebe sie der Lehrerin. Und du?",
+   "Timo: Ich helfe dem neuen Studenten und gebe ihm mein Buch.",
+   "Alina: Schön! Und Max?",
+   "Timo: Max gibt nur sich Kuchen!",
+   "Alina: Aber das Buch gehört mir, Timo!",
+   "Timo: Stimmt, ich gebe es dir morgen zurück."
+  ]
+ },
+ "chapter-a1-37-praep-dativ-data.js": {
+  "scene": "Wochenendplanung \\u2014 eine Reise, Berlin",
+  "intro": "The group is planning a weekend trip to Munich. Who travels how, who they\\u2019re staying with, how long they\\u2019ve studied German \\u2014 every answer rides on a dative preposition: mit dem Zug, bei der Tante, seit einem Jahr.",
+  "listening": [
+   "Kerstin: Wie fährst du nach München, Nico?",
+   "Nico: Ich fahre mit dem Zug. Und du?",
+   "Kerstin: Ich fahre mit dem Bus, denn er ist billig. Bei wem wohnt ihr dort?",
+   "Nico: Wir wohnen bei meiner Tante. Sie wohnt gegenüber dem Bahnhof.",
+   "Kerstin: Seit wann lernst du Deutsch?",
+   "Nico: Seit einem Jahr!"
+  ]
+ },
+ "chapter-a1-38-wechselpraep-data.js": {
+  "scene": "Umzug \\u2014 Annas neue Wohnung, Berlin",
+  "intro": "Franzi has a new flat and the gang is helping her move in. As they decide where the sofa, the lamp and the pictures go, the two-way prepositions come alive: putting things somewhere is accusative (Wohin?), and where they already sit is dative (Wo?).",
+  "listening": [
+   "Basti: Wo ist mein Buch, Franzi?",
+   "Franzi: Es liegt auf dem Tisch.",
+   "Basti: Und meine Tasche?",
+   "Franzi: Sie ist unter dem Stuhl.",
+   "Basti: Wohin stelle ich die Lampe?",
+   "Franzi: Stell sie neben das Sofa.",
+   "Basti: Und das Bild?",
+   "Franzi: Häng es über das Sofa, bitte. So, jetzt ist die Wohnung fertig!"
+  ]
+ },
+ "chapter-a1-39-ortsangaben-data.js": {
+  "scene": "Auf dem Weg \\u2014 eine Wegbeschreibung, Berlin",
+  "intro": "Meike is lost on the way to a new café and calls Timo for directions. As he walks her there — left, right, straight on, past the pharmacy — the location words and the everyday contractions (zum, zur, am, ins) do all the work.",
+  "listening": [
+   "Timo: Entschuldigung, wie komme ich zum Bahnhof?",
+   "Meike: Gehen Sie geradeaus, dann rechts. An der Ecke ist eine Bäckerei. Der Bahnhof ist direkt dahinter.",
+   "Timo: Ist es weit?",
+   "Meike: Nein, es ist in der Nähe, nur fünf Minuten.",
+   "Timo: Und der Supermarkt?",
+   "Meike: Der ist am Bahnhof, links vom Ausgang."
+  ]
+ },
+ "chapter-a1-40-verben-dativ-data.js": {
+  "scene": "Im Kleidergesch\\u00e4ft \\u2014 ein Outfit f\\u00fcr die Party, Berlin",
+  "intro": "Nele needs an outfit for a party and drags the gang to a clothes shop. As they judge every jacket, dress and pair of shoes, the dative verbs do the talking: Das gefällt mir, das passt dir, der Mantel steht dir \\u2014 and Nele, of course, helps no one.",
+  "listening": [
+   "Nele: Wie findest du die Jacke?",
+   "Kevin: Sie gefällt mir, aber sie passt mir nicht. Sie ist zu eng.",
+   "Nele: Und das Hemd? Das Hemd steht dir gut! Nimm es.",
+   "Kevin: Gehört der Schal auch dir?",
+   "Nele: Nein, der gehört Max. Danke für deine Hilfe!",
+   "Kevin: Gern!"
+  ]
+ }
+}

@@ -1,0 +1,199 @@
+{
+ "chapter-a1-17-goethe2-data.js": {
+  "scene": "Anmeldung \\u2014 Sprachschule, Berlin",
+  "intro": "Jan signs up for the Goethe exam. Frau Roth helps him fill out the registration form line by line — family name, address, postcode, email — so every piece of personal info from Chapters 1\\u201316 gets one more workout.",
+  "listening": [
+   "Jan: Guten Tag! Ich möchte mich für die Prüfung anmelden.",
+   "Frau Roth: Gern. Wie ist Ihr Familienname?",
+   "Jan: Müller. Mein Vorname ist Jan.",
+   "Frau Roth: Und Ihr Wohnort?",
+   "Jan: Ich wohne in Berlin, Postleitzahl 10115.",
+   "Frau Roth: Haben Sie eine E-Mail?",
+   "Jan: Ja, das ist mein Kontakt.",
+   "Frau Roth: Perfekt, alle Angaben sind richtig!"
+  ]
+ },
+ "chapter-a1-18-irregular-data.js": {
+  "scene": "Am Morgen \\u2014 Universität, Berlin",
+  "intro": "A normal morning at the Uni. Nora and Timo sort out how they get there, who\\'s too tired, who sees the library, and whether there\\'s cake in the Mensa — and almost every verb in the scene is an irregular one changing its stem.",
+  "listening": [
+   "Timo: Wie kommst du zur Uni, Nora?",
+   "Nora: Ich gehe zu Fuß. Und du?",
+   "Timo: Ich fahre mit dem Bus.",
+   "Nora: Und was macht ihr dann?",
+   "Timo: Wir treffen Max und essen in der Mensa. Heute gibt es Kuchen!",
+   "Nora: Schläft Max wieder zu wenig?",
+   "Timo: Ja, er ist immer müde. Danach liest er die Zeitung im Unicafé."
+  ]
+ },
+ "chapter-a1-19-satzposition-data.js": {
+  "scene": "In der Mensa \\u2014 Mittagspause, Berlin",
+  "intro": "Pia asks Lukas about his daily routine, and Lukas chimes in with his (not very disciplined) version. As they compare mornings, noons and nights, the verb keeps landing in the same place — position 2 — no matter what word starts the sentence.",
+  "listening": [
+   "Lukas: Was machst du normalerweise am Wochenende, Pia?",
+   "Pia: Morgens schlafe ich lange, und dann frühstücke ich in Ruhe.",
+   "Lukas: Und nachmittags?",
+   "Pia: Nachmittags treffe ich oft Freunde. Manchmal gehen wir ins Café.",
+   "Lukas: Lernst du auch?",
+   "Pia: Ja, abends lerne ich täglich Deutsch. Aber sonntags lerne ich nichts!"
+  ]
+ },
+ "chapter-a1-20-modalverben1-data.js": {
+  "scene": "Nach dem Kurs \\u2014 Sprachschule, Berlin",
+  "intro": "A party is coming. Jule wants to plan it, Finn definitely wants to come, and Finn must finish his homework first. As they sort out who can do what, every sentence shows the same shape — modal in position 2, main verb at the very end.",
+  "listening": [
+   "Jule: Was willst du am Wochenende machen, Finn?",
+   "Finn: Ich muss leider lernen, aber danach kann ich kommen. Und du?",
+   "Jule: Ich möchte eine Party machen! Wir wollen Pizza bestellen.",
+   "Finn: Kann Max auch kommen?",
+   "Jule: Ja, aber er muss diesmal bezahlen!"
+  ]
+ },
+ "chapter-a1-21-uhrzeit-data.js": {
+  "scene": "In der Mensa \\u2014 Terminplanung, Berlin",
+  "intro": "After the party plan, the group needs a time. Mara checks the calendar — her class runs until the afternoon — while Jonas, predictably, wants the latest possible start. Watch how every appointment locks onto the clock with um, am and von…bis.",
+  "listening": [
+   "Jonas: Wie spät ist es, Mara?",
+   "Mara: Es ist Viertel vor neun.",
+   "Jonas: Oh, der Kurs beginnt um neun Uhr!",
+   "Mara: Kein Problem, wir haben noch eine Viertelstunde. Und wann triffst du Max?",
+   "Jonas: Am Abend, um halb acht. Wir gehen ins Kino.",
+   "Mara: Wie lange dauert der Film?",
+   "Jonas: Von halb acht bis zehn Uhr."
+  ]
+ },
+ "chapter-a1-22-berufe-data.js": {
+  "scene": "In der Mensa \\u2014 \\u00fcber Berufe, Berlin",
+  "intro": "Career day comes up in the canteen. Lea wants to be a doctor, Erik has just landed an engineering job, and between the two of them the two job patterns keep resurfacing: Ich bin … and Ich arbeite als …",
+  "listening": [
+   "Lea: Was machst du beruflich, Erik?",
+   "Erik: Ich arbeite als Ingenieur in einem Büro. Und du?",
+   "Lea: Ich bin Lehrerin. Ich gebe Deutschunterricht.",
+   "Erik: Wie sind deine Arbeitszeiten?",
+   "Lea: Von acht bis zwei. Am Nachmittag habe ich frei.",
+   "Erik: Und verdienst du gut?",
+   "Lea: Ja, aber ich arbeite oft länger."
+  ]
+ },
+ "chapter-a1-23-familie-data.js": {
+  "scene": "In der Mensa \\u2014 Familienfotos, Berlin",
+  "intro": "Ines brings a family photo to the canteen. As she and Nils pass it around, every \"this is my…/her…/his…\" puts a possessive article to work — and Ines, of course, has a photo of someone unexpected.",
+  "listening": [
+   "Ines: Ist das deine Familie, Nils?",
+   "Nils: Ja! Das ist mein Vater und das ist meine Mutter.",
+   "Ines: Hast du Geschwister?",
+   "Nils: Ich habe einen Bruder und eine Schwester. Mein Bruder ist ledig, meine Schwester ist verheiratet.",
+   "Ines: Und wer ist das?",
+   "Nils: Das ist meine Oma. Sie wohnt bei uns."
+  ]
+ },
+ "chapter-a1-24-datum-data.js": {
+  "scene": "Geburtstagsplanung \\u2014 Sprachschule, Berlin",
+  "intro": "Katja\\'s birthday is coming. Katja and Tobias plan a surprise party around the calendar — fixing the date, counting the guests, and sorting out gifts — so ordinal numbers and months come up in every line.",
+  "listening": [
+   "Katja: Wann hast du Geburtstag, Tobias?",
+   "Tobias: Am fünfzehnten Juni. Und du?",
+   "Katja: Im Winter, am ersten Dezember.",
+   "Tobias: Oh, und Ninas Geburtstag ist am dritten Mai, oder?",
+   "Katja: Genau! Die Feier ist am zweiten Mai. Insgesamt kommen ungefähr zwanzig Gäste."
+  ]
+ },
+ "chapter-a1-25-trennbar-data.js": {
+  "scene": "Samstagmorgen \\u2014 ein Anruf, Berlin",
+  "intro": "Saturday morning. Svenja calls Malte to plan the day — getting up, shopping, picking him up — and almost every plan is a separable verb whose prefix lands, with a little click, at the end of the sentence.",
+  "listening": [
+   "Svenja: Wann stehst du am Samstag auf, Malte?",
+   "Malte: Ich stehe um neun Uhr auf. Dann rufe ich dich an.",
+   "Svenja: Und was machen wir dann?",
+   "Malte: Wir kaufen ein und holen Max ab. Er kommt mit.",
+   "Svenja: Bringst du etwas mit?",
+   "Malte: Ja, ich bringe Kuchen mit. Am Abend sehen wir fern."
+  ]
+ },
+ "chapter-a1-26-goethe3-data.js": {
+  "scene": "Lerngruppe \\u2014 Treffpunkt Café, Berlin",
+  "intro": "The study group agreed to meet at four to prepare for the checkpoint. It\\'s ten past — and Britta is missing again. When she finally arrives, the lesson becomes a real one: how to apologise, accept an apology, and arrange the next appointment, German-style.",
+  "listening": [
+   "Britta: Praxis Dr. Klein, guten Tag!",
+   "Ralf: Guten Tag, ich möchte einen Termin vereinbaren.",
+   "Britta: Sind Sie am Montag frei?",
+   "Ralf: Am Montag habe ich keine Zeit. Geht es am Dienstag?",
+   "Britta: Ja, am Dienstag um halb elf ist ein Termin frei.",
+   "Ralf: Perfekt, ich bin pünktlich da. Vielen Dank!"
+  ]
+ },
+ "chapter-a1-27-praeteritum-data.js": {
+  "scene": "Montagmorgen \\u2014 vor dem Kurs, Berlin",
+  "intro": "Monday morning. Doris missed the weekend get-together, so Kai fills her in on what happened — where everyone was, who had cake, and why the weekend was, as usual, eventful. Every sentence lands in the past with war and hatte.",
+  "listening": [
+   "Kai: Wo warst du gestern, Doris?",
+   "Doris: Ich war bei Max. Wir hatten eine kleine Party.",
+   "Kai: Schön! Und wie war es?",
+   "Doris: Es war super! Es gab Pizza und Musik.",
+   "Kai: Hattet ihr viele Gäste?",
+   "Doris: Ja, wir waren acht Personen. Aber Nils war leider nicht da."
+  ]
+ },
+ "chapter-a1-28-perfekt-data.js": {
+  "scene": "Im Kurs \\u2014 \"Was hast du gemacht?\", Berlin",
+  "intro": "Tuesday. Jens asks Vera the most natural question in the world — what did you do yesterday? He travelled and visited his brother; she worked and had only coffee. Every answer arrives in the Perfekt: a helper verb up front, a participle at the end.",
+  "listening": [
+   "Jens: Was hast du am Wochenende gemacht, Vera?",
+   "Vera: Ich habe viel gelernt und ich bin ins Kino gegangen.",
+   "Jens: Schön! Und Max?",
+   "Vera: Er hat nur gegessen und geschlafen! Aber am Sonntag ist er zu Freunden gefahren.",
+   "Jens: Und was habt ihr gemacht?",
+   "Vera: Wir haben Musik gehört und Pizza gegessen."
+  ]
+ },
+ "chapter-a1-29-perfekt-haben-data.js": {
+  "scene": "Nach der Prüfung \\u2014 im Café, Berlin",
+  "intro": "The exam is over. In the café, Miriam and Robert compare how they prepared — who studied for two weeks, who read every question, who drank too much coffee. Every line is a haben-Perfekt: habe gelernt, hat gelesen, haben getrunken.",
+  "listening": [
+   "Miriam: Was hast du gestern gemacht, Robert?",
+   "Robert: Ich habe für die Prüfung gelernt und ein Projekt gemacht. Und du?",
+   "Miriam: Ich habe ein Buch gelesen und Übungen gemacht.",
+   "Robert: Und Max?",
+   "Miriam: Max hat nur Kaffee getrunken und einen Film gesehen!",
+   "Robert: Typisch!"
+  ]
+ },
+ "chapter-a1-30-perfekt-sein-data.js": {
+  "scene": "Nach der Reise \\u2014 im Kurs, Berlin",
+  "intro": "Ole is back from a short trip and Steffi wants every detail — where he flew, when he arrived, how long he stayed. His whole story runs on sein-Perfekt: bin geflogen, ist angekommen, sind geblieben.",
+  "listening": [
+   "Ole: Was hast du am Wochenende gemacht, Steffi?",
+   "Steffi: Ich bin nach München gefahren.",
+   "Ole: Wann bist du angekommen?",
+   "Steffi: Am Abend. Ich bin müde gewesen und früh eingeschlafen.",
+   "Ole: Und wie lange bist du geblieben?",
+   "Steffi: Zwei Tage. Am Sonntag bin ich zurückgekommen. Die Reise ist super gelaufen!"
+  ]
+ },
+ "chapter-a1-31-partizip-praefix-data.js": {
+  "scene": "Vor dem Kurs \\u2014 was gestern passiert ist, Berlin",
+  "intro": "A lot happened yesterday. Wanda got a package, her brother took her book before she could read it, and Timo — forgot the whole thing. As they catch up, every verb has a prefix: some keep ge- in the middle, some drop it completely.",
+  "listening": [
+   "Timo: Was hast du gestern gemacht, Wanda?",
+   "Wanda: Ich habe ein Paket bekommen und dich angerufen.",
+   "Timo: Und dann?",
+   "Wanda: Wir haben ein neues Café entdeckt. Der Kellner hat uns einen Kuchen empfohlen.",
+   "Timo: Schön! Und Max?",
+   "Wanda: Max hat den Kurs vergessen! Wir haben ihn vermisst."
+  ]
+ },
+ "chapter-a1-32-akkusativpronomen-data.js": {
+  "scene": "Kursplanung \\u2014 das Fest, Berlin",
+  "intro": "The class is planning a little party. Who is bringing the cake, who is calling Ronja, who has the music? As the group sorts out the jobs, every answer swaps the noun for a pronoun — ihn, sie, es, uns — so nobody has to repeat themselves.",
+  "listening": [
+   "Ronja: Kennst du den neuen Studenten?",
+   "Fabian: Ja, ich kenne ihn.",
+   "Ronja: Und hast du das Buch für ihn?",
+   "Fabian: Ja, ich habe es.",
+   "Ronja: Gut. Rufst du Anna an?",
+   "Fabian: Natürlich rufe ich sie an.",
+   "Ronja: Und hört uns Frau Weber?",
+   "Fabian: Ja, sie hört uns sehr gut."
+  ]
+ }
+}

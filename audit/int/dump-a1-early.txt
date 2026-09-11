@@ -1,0 +1,280 @@
+########## a1-1 — Das Alphabet & Aussprache (The Alphabet & Pronunciation) · phase A1 · Phase 1 · 35min
+DESC: Before words, the sounds. Learn the 26 letters, the four extra signs (ä ö ü ß), and the handful of rules that make German read exactly the way it is written.
+SECTIONS: overview,story,vocabulary,grammar,reading,listening,speaking,writing,exercises,quiz,summary,resources
+STORY scene: Deutschkurs, Tag 1 — Berlin | headline: The first day.
+STORY intro: Frau Weber's very first German lesson in Berlin. She welcomes new student Rohan — and the first thing he learns is how to spell his own name, letter by letter, and where those two little dots come from.
+  D1 Frau Weber: Herzlich willkommen! Ich bin Frau Weber.  [EN] A warm welcome! I am Frau Weber.  [HI] Dil se swaagat! Main Frau Weber hoon.
+  D2 Rohan: Guten Tag! Ich heiße Rohan.  [EN] Hello! My name is Rohan.  [HI] Namaste! Mera naam Rohan hai.
+  D3 Frau Weber: Schön! Wie ist dein Name? Buchstabier bitte.  [EN] Lovely! What is your name? Please spell it.  [HI] Badhiya! Tumhaara naam kya hai? Kripya spell karo.
+  D4 Rohan: Gern : R – O – H – A – N.  [EN] Gladly: R – O – H – A – N.  [HI] Khushi se: R – O – H – A – N.
+  D5 Frau Weber: Sehr gut! Und mein Name? Weber, mit W.  [EN] Very good! And my name? Weber, with a W.  [HI] Bahut achha! Aur mera naam? Weber, W ke saath.
+  D6 Rohan: Mit W? Aber das klingt wie ein V!  [EN] With a W? But that sounds like a V!  [HI] W ke saath? Par yeh to V jaisa lagta hai!
+  D7 Frau Weber: Genau. Und das Z? Das klingt wie ts.  [EN] Exactly. And the Z? That sounds like "ts".  [HI] Bilkul. Aur Z? Yeh "ts" jaisa lagta hai.
+  D8 Rohan: Und die Punkte hier — ä, ö, ü?  [EN] And the dots here — ä, ö, ü?  [HI] Aur ye bindu yahaan — ä, ö, ü?
+  D9 Frau Weber: Das sind Umlaute. Wir üben zusammen!  [EN] Those are umlauts. We’ll practise together!  [HI] Ye umlaut hain. Hum saath abhyaas karenge!
+VOCAB (12): Apfel=apple | Buch=book | Eis=ice cream | Hund=dog | Jahr=year | Käse=cheese | Schule=school | Vater=father | Wasser=water | Zeit=time | Mädchen=girl | Straße=street
+GRAMMAR 1: The German alphabet — 26 letters
+   golden: German is written the way it is spoken. Learn the letters once — then you can read almost anything; only eight spellings need learning by hand.
+   trick: J-V-W = "yot–fow–vay". Teen naam, ek saans mein. Baaki alphabet English jaisa hi hai.
+   HINGLISH: German bilkul jaise likha hai waise hi bola jaata hai — isliye reading aasaan hai. Bas har letter ka naam yaad karo, kyunki apna naam aur email spell karne mein yahi kaam aayega. Teen letters dhyaan se: J = "yot", V = "fow", W = "vay".
+   body: Spelling out loud has its own verb: buchstabieren. Your name, your email, your street — you will spell all of them in your first week in Germany.
+   body: And the letters are worth the effort for a second reason: German spells what it says. Learn the sound of each letter and you can read almost any German word correctly on the first try, without a pronunciation guide.
+GRAMMAR 2: Spelling out loud: "A wie Apfel"
+   trick: "wie" = "jaisa". Letter + wie + word. Bas.
+   HINGLISH: Phone par sirf letter ka naam bolne se confusion hoti hai (B aur P, D aur T ek jaise sunte hain). Isliye Germans letter ke saath ek word bolte hain: A wie Apfel = "A jaisa Apfel mein". Koi official list nahi hai — jo word aata ho, wahi bol do.
+   body: You will hear this every single time you give your name or address over the phone, and you are expected to do it back. There is no fixed official list you must memorise — any well-known word works, so use the vocabulary you already have.
+GRAMMAR 3: The umlauts (ä ö ü) and the ß
+   golden: The dots are part of the letter, not an accent you may leave off. If you cannot type them, write ae oe ue ss — never bare a o u s.
+   trick: Umlaut ka formula: honth pehle wale vowel ke, aawaaz "e" family ki — ö = honth O + "e", ü = honth U + "ee", ä = seedha "e". Aur ß vs ss: lamba vowel → ß, chhota vowel → ss.
+   HINGLISH: Char extra signs hain: ä ö ü (do dots = umlaut) aur ß (sharp "ss"). ö aur ü ka trick: honth "o"/"u" ke shape mein rakho, par andar se "e"/"ee" bolo. Dots optional nahi hain — Mutter (maa) aur Mütter (maayein) do alag words hain. Type na kar pao to ae oe ue ss likho.
+   body: These are not decoration. Umlaut dots change the word: Mutter is "mother", Mütter is "mothers". Drop the dots and you have said something else.
+GRAMMAR 4: Eight sound rules beginners always mix up
+   golden: Two moves cover almost all of it: in ei/ie say the second vowel, and at the start of a word the s-family softens — s = "z", st = "sht", sp = "shp".
+   trick: ei/ie — doosra vowel bolo. v aur w ek step aage khisak jaate hain: v se f, w se v. Aur shuru mein s soft ho jaata hai: s se z, st se sht.
+   HINGLISH: Ye rules yaad rakhne hi padenge, par logic simple hai: German mein ek spelling aksar ek hi tarah boli jaati hai — English ki tarah har word ka guess nahi karna padta. ei = "eye" (Eis = ice), ie = "ee" (Liebe = LEE-buh), z = "ts" (Zeit = TSAIT), sch = English "sh" (Schule = SHOO-luh), v = "f" (Vater = FAH-ter), w = "v" (Wasser = VA-ser), aur shuru ka s = "z" (sagen = ZAH-gen), st- = "sht" (Straße = SHTRAH-suh). Sirf v ka ek exception hai: international words mein v = "v" hi rehta hai (Video, Vase).
+   body: Seven of the eight are completely regular — the spelling always makes the same sound. Only v has a second setting, and it is easy to spot.
+EX.mcq: {"q":"How is \"Zeit\" pronounced?","options":["ZAYT","TSAIT","ZEET","SAIT"],"answer":1,"explain":"z = \"ts\" and ei = \"eye\", so Zeit = \"TSAIT\"."}
+EX.gap: {"sentence":["A wie ",", B wie ","."],"gaps":[{"answer":"Apfel","accepts":["apfel"]},{"answer":"Buch","accepts":["buch"]}],"explain":"The classic spelling examples: A wie Apfel, B wie Buch."}
+EX.match: {"q":"Match each letter to the sound it makes.","pairs":[{"noun":"ei","art":"eye"},{"noun":"ie","art":"ee"},{"noun":"z","art":"ts"},{"noun":"w","art":"v"}]}
+EX.builder: {"target":"Build: \"A as in apple.\"","bank":["Apfel","A","wie"],"answer":["A","wie","Apfel"],"roles":{"A":"r-subject","wie":"r-preposition","Apfel":"r-object"}}
+QUIZ1: How do you say the letter "W" in German? ["double-u" / "vay" / "way" / "vee"] →1 :: W is named "vay" — and it sounds like an English "v".
+QUIZ2: The letters "ei" sound like… ["ee" / "ay" / "eye" / "oy"] →2 :: ei = "eye": Eis = "ice".
+QUIZ3: Which sign is the "sharp s"? [ä / ö / ü / ß] →3 :: ß (Eszett) is the sharp s; it sounds like "ss".
+QUIZ4: How is "z" pronounced in German? ["z" / "ts" / "s" / "sh"] →1 :: z is always "ts": Zeit = "TSAIT".
+QUIZ5: Which word correctly demonstrates "V → f"? [Wasser / Vater / Zeit / Buch] →1 :: Vater is pronounced "FAH-ter" — v sounds like "f".
+LISTENING (19 words): Rohan, wie schreibst du "Buch"? Bitte buchstabiere es. B-U-C-H. Buch. Richtig! Und "Heft"? H-E-F-T. Das Heft ist mein Lieblingswort!
+  LQ1: Welches Wort buchstabiert Rohan zuerst? [Heft / Buch / Apfel / Stift] →1
+  LQ2: Warum buchstabiert Rohan Wörter für Frau Weber? [Um seinen eigenen Namen zu lernen / Um sein Heft richtig zu beschriften / Um ein Buch zu lesen / Um einen Anruf anzunehmen] →1
+SPEAK1: Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es. || model: B-U-C-H. Buch.
+SPEAK2: Deine Lehrerin fragt: Welches Wort ist dein Lieblingswort? Buchstabiere es. || model: Käse. K-Ä-S-E.
+SPEAK3: Sag drei Buchstaben mit einem Wort aus dem Kurs. || model: A wie Apfel, B wie Buch, H wie Hund.
+WRITING: Spell three German words out loud, then write them: their letters, then the whole word. Use the letter names you learned (e.g. "Buch = bay, oo, tsay, hah"). | minWords 9 | starters: Apfel = … / Buch = … / Zeit = …
+TAKEAWAYS: [object Object] | [object Object] | [object Object]
+
+########## a1-4 — Hallo! (Greetings & Introductions) · phase A1 · Phase 1 · 40min
+DESC: Your first real conversation. Greet by the time of day, say who you are and where you are from, and choose the right register — du or Sie — so you sound polite from the very first word.
+SECTIONS: overview,story,vocabulary,grammar,reading,listening,speaking,writing,exercises,quiz,summary,resources
+STORY scene: Anmeldung an der Sprachschule — Berlin | headline: The right hello.
+STORY intro: David arrives at his Berlin language school and meets the receptionist, Frau Klein. A first, formal conversation — Sie, Herr and Frau — and he learns exactly when Germans switch to the friendly du.
+  D1 Frau Klein: Guten Tag! Herzlich willkommen!  [EN] Good day! A warm welcome!  [HI] Namaskar! Hardik swaagat!
+  D2 David: Guten Tag! Ich heiße David Sharma.  [EN] Good day! My name is David Sharma.  [HI] Namaskar! Mera naam David Sharma hai.
+  D3 Frau Klein: Freut mich, Herr Sharma. Woher kommen Sie?  [EN] Pleased to meet you, Mr Sharma. Where are you from?  [HI] Aap se milkar khushi hui, Herr Sharma. Aap kahaan se hain?
+  D4 David: Ich komme aus Indien. Jetzt wohne ich in Berlin.  [EN] I come from India. Now I live in Berlin.  [HI] Main Bharat se hoon. Ab main Berlin mein rehta hoon.
+  D5 Frau Klein: Wunderbar! Ihr Deutsch ist schon gut.  [EN] Wonderful! Your German is already good.  [HI] Shaandaar! Aapka German pehle se achha hai.
+  D6 David: Danke schön! Und ich? Sie oder du?  [EN] Thank you! And me? "Sie" or "du"?  [HI] Dhanyavaad! Aur main? "Sie" ya "du"?
+  D7 Frau Klein: Ich bin die Lehrerin — bitte Sie. Freunde sind du.  [EN] I am the teacher — please "Sie". Friends are "du".  [HI] Main teacher hoon — kripya "Sie". Dost "du" hain.
+  D8 David: Ah! Hallo und du sind informell, oder?  [EN] Ah! "Hallo" and "du" are informal, right?  [HI] Achha! "Hallo" aur "du" informal hain, na?
+  D9 Frau Klein: Genau! Auf Wiedersehen, Herr Sharma.  [EN] Exactly! Goodbye, Mr Sharma.  [HI] Bilkul! Alvida, Herr Sharma.
+  D10 David: Auf Wiedersehen, Frau Klein! Bis bald!  [EN] Goodbye, Mrs Klein! See you soon.  [HI] Alvida, Frau Klein! Jald milte hain.
+VOCAB (38): hallo=hello | guten Morgen=good morning | guten Tag=good day, hello | guten Abend=good evening | gute Nacht=good night | auf Wiedersehen=goodbye (formal) | tschüs=bye (informal) | ciao=bye | bis bald=see you soon | bis dann=until then | bis später=see you later | willkommen=welcome | danke=thank you | danke schön=thank you (kindly) | bitte=please; you're welcome | ja=yes | nein=no | auch=also, too | da=there | hier=here | ganz=quite, completely | gut=good, well | okay=okay | sehr=very | so=so; so-so | gehen=to go | das=this, that | Frau=Mrs, Ms; woman | Herr=Mr; gentleman | Höflichkeit=politeness | formell=formal | informell=informal | grüezi=hello (Switzerland) | grüß Gott=hello (Austria/S. Germany) | moin=hi (North Germany) | hey=hey | hi=hi | hurra=hooray
+GRAMMAR 1: Greetings — by the time of day
+   golden: Morning · day · evening → Guten Morgen · Guten Tag · Guten Abend. Unsure of the hour? Guten Tag.
+   trick: Subah–din–shaam = Morgen–Tag–Abend. Aur Nacht wala sirf bistar ke liye.
+   HINGLISH: German mein greeting ghadi dekh kar chunte hain — koi ek "hello" nahi jo har waqt polite bhi ho. Hallo kabhi bhi chalega, par woh dostana hai, formal nahi. Guten Morgen (subah), Guten Tag (din — sabse safe), Guten Abend (shaam). Gute Nacht sirf sone jaate waqt — yeh hello nahi hai. Aur dhyaan do: Gute Nacht par Guten Tag — ending badal jaati hai. Wajah baad ke chapter mein aayegi; abhi chaaron ko poore phrase ki tarah yaad rakho.
+   body: Hallo is the exception: it works almost anytime and with almost anyone, but it stays friendly rather than formal. The "Guten …" greetings are the polite set.
+   body: Regional hellos exist too, and Germans use them constantly: Moin in the north, Grüß Gott in the south and Austria, Grüezi in Switzerland. You do not have to say them, but you should recognise them.
+GRAMMAR 2: Saying goodbye
+   golden: Formal = Auf Wiedersehen. Friendly = Tschüs and the bis … family.
+   trick: bis = "tak". Jo bhi time word peeche lagao, goodbye ban jaata hai.
+   HINGLISH: Goodbye bhi formal/informal hota hai, aur yeh galat hona greeting se zyada notice hota hai — kyunki yeh aakhri cheez hai jo saamne wale ne suna. Auf Wiedersehen = formal alvida. Tschüs, Ciao = casual. Bis … ka matlab "… tak" hai, isliye yeh poora family time ka vaada hai: bis bald (jald tak), bis später (baad tak), bis morgen (kal tak) — matlab tum khud naye bana sakte ho.
+   body: Auf Wiedersehen is the full, formal goodbye. Everything else on this list is friendly.
+GRAMMAR 3: Introduce yourself — the four questions
+   golden: Name → Ich heiße … · Origin → Ich komme aus … · Age → Ich bin … Jahre alt.
+   trick: Naam ke liye heiße, desh ke liye komme aus, umar ke liye bin … Jahre alt. Teen kaam, teen fixed phrase.
+   HINGLISH: Pehli baat-cheet chaar sawaal-jawaab par chalti hai, aur inhe jodi mein seekhna chahiye — akela sentence yaad karne se tum sirf jawaab de paoge, sawaal nahi. Wie heißt du? → Ich heiße … (naam ke liye alag verb hai). Woher kommst du? → Ich komme aus … (desh ya shehar, dono ke liye aus). Wie alt bist du? → Ich bin … Jahre alt (Chapter 3 wala pattern). Aur agar rehte kahin aur ho: Ich wohne in Berlin.
+   body: Notice that two of the four answers use Ich bin and two use their own verb. That is not random — bin is for identity and age, heiße is specifically for names, and komme aus is specifically for origin.
+GRAMMAR 4: Formal vs informal — du or Sie
+   golden: du → verb ends in -st. Sie → verb ends in -en, and Sie is always capitalised.
+   trick: du = -st, Sie = -en, ich = -e. Teen ending, teen log. Aur Sie hamesha capital S. (Stem mein pehle se s/ß/z ho to du ka ending sirf -t: du heißt.)
+   HINGLISH: German mein "you" ke do roop hain, aur yeh choice tumhari politeness ka sabse saaf signal hai. Doston, ghar walon aur bacchon ke saath du. Baaki sab ke saath Sie + Herr/Frau + surname. Sirf shabd nahi badalta — verb ka ending bhi badalta hai: du ke saath -st (du kommst), Sie ke saath -en (Sie kommen), aur ich ke saath -e (ich komme). Aur formal "aapka" = Ihr (Ihr Name), informal = dein. Ek chhoti baat: agar verb ka stem pehle se s/ß/z par khatam hota hai, to du ka ending sirf -t ban jaata hai — du heißt, kyunki "heißst" bola hi nahi jaa sakta. Sabse zaruri baat: ek conversation mein ek hi register — du aur Sie mix karna sabse zyada notice hota hai. Doubt ho to Sie; zyada polite hona kabhi galat nahi.
+   body: And the choice does more than swap one word: the verb ending changes with it. That is why the same question looks different in the two columns below.
+GRAMMAR 5: Mistakes Hindi & English speakers make
+   trick: Chaar check: Sie chahiye tha? Register same raha? Nacht sirf sote waqt? Desh ke saath aus?
+   HINGLISH: Chaar galtiyan hoti hain, aur inme se sirf ek vocabulary ki hai — baaki teen register ki hain, jahan German ki asli politeness rehti hai. Pehli, Herr ya Frau ke saath surname aaye to Sie aur -en ending aani chahiye. Doosri, ek hi conversation mein register badalna — formal shuru karke informal khatam karna sabse zyada ajeeb lagta hai. Teesri, Gute Nacht aate waqt nahi bolte; shaam ko Guten Abend aata hai. Aur chauthi, desh ke liye aus lagta hai, "von" nahi.
+   body: Each row is a rule from this chapter, seen from the wrong side.
+EX.mcq: {"q":"You meet your teacher at 9 a.m. What do you say?","options":["Gute Nacht, Herr Wolan!","Tschüs, Herr Wolan!","Guten Morgen, Herr Wolan!","Hey, du!"],"answer":2,"explain":"Morning + a teacher → the polite \"Guten Morgen, Herr Wolan!\""
+EX.gap: {"sentence":["Wie "," du? — Ich "," Anna."],"gaps":[{"answer":"heißt","accepts":["heißt","heisst"]},{"answer":"heiße","accepts":["heiße","heisse"]}],"explain":"Wie heißt du? → Ich heiße Anna. The verb is heißen (to be called)."}
+EX.match: {"q":"Match each greeting to when or how it is used.","pairs":[{"noun":"Guten Morgen","art":"in the morning"},{"noun":"Guten Abend","art":"in the evening"},{"noun":"Auf Wiedersehen","art":"formal goodbye"},{"noun":"Tschüs","art":"informal b
+EX.builder: {"target":"Build: \"I come from India.\"","bank":["aus","Ich","Indien","komme"],"answer":["Ich","komme","aus","Indien"],"roles":{"Ich":"r-subject","komme":"r-verb","aus":"r-preposition","Indien":"r-place"}}
+QUIZ1: Which greeting is best for a teacher in the afternoon? [Hey! / Guten Tag, Herr Wolan! / Gute Nacht! / Tschüs!] →1 :: Daytime + formal → "Guten Tag, Herr Wolan!"
+QUIZ2: How do you ask a classmate's name (informal)? [Wie heißen Sie? / Wer ist das? / Wie heißt du? / Woher kommst du?] →2 :: Informal "you" = du → "Wie heißt du?"
+QUIZ3: Complete: "Ich komme ___ Indien." [von / aus / in / zu] →1 :: Origin uses aus + place: "Ich komme aus Indien."
+QUIZ4: Which is the FORMAL goodbye? [Tschüs / Ciao / Auf Wiedersehen / Bis bald] →2 :: Auf Wiedersehen is the formal goodbye; the others are informal.
+QUIZ5: When do you say "Gute Nacht"? [When you arrive / Any time of day / Only at bedtime / When you say thanks] →2 :: Gute Nacht is used only at night before sleeping — not as a hello.
+LISTENING (26 words): Guten Tag! Für Ihren Studentenausweis brauche ich Ihren Namen. Ich heiße David. Ich komme aus Indien. Und wie alt sind Sie? Ich bin einundzwanzig Jahre alt.
+  LQ1: Was macht Frau Klein für David? [Einen Kaffee / Einen Studentenausweis / Einen Anruf / Einen Brief] →1
+  LQ2: Wie alt ist David? [Zwanzig / Einundzwanzig / Zweiundzwanzig / Neunzehn] →1
+SPEAK1: Du kommst am Morgen in den Kurs. Begrüße die Gruppe. || model: Guten Morgen! Hallo!
+SPEAK2: Im Büro fragt man: Wie ist Ihr Name und woher kommen Sie? || model: Ich heiße David. Ich komme aus Indien.
+SPEAK3: Der Kurs ist zu Ende. Was sagst du? || model: Danke schön! Auf Wiedersehen, bis bald!
+WRITING: Write a short self-introduction of three or four lines: greet, give your name, say which country you come from, and add your age (use a number word from Chapter 3). Choose one register and keep it consistent. | minWords 12 | starters: Hallo! Ich heiße … / Ich komme aus … / Ich bin … Jahre alt.
+TAKEAWAYS: [object Object] | [object Object] | [object Object]
+
+########## a1-5 — Wer bist du? (Who are you?) · phase A1 · Phase 1 · 45min
+DESC: Your first real personal conversation. Two tools carry it: the personal pronouns (ich, du, er, sie …) and the verb sein (to be). With those you can say who you are, ask who someone else is, and answer like a Goethe A1 candidate.
+SECTIONS: overview,story,vocabulary,grammar,reading,listening,speaking,writing,exercises,quiz,summary,resources
+STORY scene: Vorstellungsrunde — Deutschkurs | headline: Who are you?
+STORY intro: A partner exercise. Two classmates, Lena and Paul, introduce themselves properly — names, where they are from, where they live, their age — and discover they are both new in Berlin.
+  D1 Lena: Hallo! Wer bist du?  [EN] Hello! Who are you?  [HI] Namaste! Tum kaun ho?
+  D2 Paul: Ich bin Paul. Und wer bist du?  [EN] I am Paul. And who are you?  [HI] Main Paul hoon. Aur tum kaun ho?
+  D3 Lena: Ich heiße Lena Berg. Mein Nachname ist Berg.  [EN] My name is Lena Berg. My last name is Berg.  [HI] Main Lena Berg hoon. Mera nachname Berg hai.
+  D4 Paul: Freut mich, Lena! Mein Name ist Paul Vogel.  [EN] Pleased to meet you, Lena! My name is Paul Vogel.  [HI] Milkar khushi hui, Lena! Mera naam Paul Vogel hai.
+  D5 Lena: Woher kommst du, Paul?  [EN] Where are you from, Paul?  [HI] Tum kahaan se ho, Paul?
+  D6 Paul: Ich komme aus Hamburg. Und ich wohne jetzt in Berlin.  [EN] I come from Hamburg. And I now live in Berlin.  [HI] Main Hamburg se hoon. Aur ab main Berlin mein rehta hoon.
+  D7 Lena: Ich komme aus Indien. Ich wohne auch in Berlin!  [EN] I come from India. I also live in Berlin!  [HI] Main Bharat se hoon. Main bhi Berlin mein rehti hoon!
+  D8 Paul: Super! Wie alt bist du?  [EN] Great! How old are you?  [HI] Badhiya! Tum kitne saal ki ho?
+  D9 Lena: Ich bin zweiundzwanzig. Und du?  [EN] I am twenty-two. And you?  [HI] Main baaees ki hoon. Aur tum?
+  D10 Paul: Ich bin vierundzwanzig. Und jetzt sind wir Partner!  [EN] I am twenty-four. And now we are partners!  [HI] Main chaubees ka hoon. Aur ab hum partner hain!
+VOCAB (38): ich=I | du=you (informal) | er=he | sie=she; they | es=it | wir=we | ihr=you (plural) | Sie=you (formal) | sein=to be | heißen=to be called | kommen=to come (from) | wohnen=to live, reside | fragen=to ask | antworten=to answer | kennen=to know (a person) | vorstellen=to introduce | raten=to guess | variieren=to vary | mein/meine=my | dein/deine=your (informal) | aus=from | in=in | auf=in (a language); on | für=for | Name=name | Vorname=first name | Nachname=last name | Person=person | Partner=partner (m) | Partnerin=partner (f) | Antwort=answer | Telefon=telephone | Reiseführer=travel guide (m) | Reiseführerin=travel guide (f) | Personalpronomen=personal pronoun | Subjekt=subject | Verb=verb | Aussagesatz=declarative sentence
+GRAMMAR 1: The personal pronouns (Personalpronomen)
+   golden: Choose the pronoun first, then the verb follows it. Never the other way round.
+   trick: Verb hi sie ka matlab kholta hai: ist = akeli (vah), sind = kai (ve/aap).
+   HINGLISH: Personalpronomen = wo chhota word jo subject ki jagah aata hai. Aath yaad karo, aur isi order mein: ich (main), du (tum), er/sie/es (vah), wir (hum), ihr (tum sab), sie (ve), Sie (aap). Aage ke saare verb tables isi order mein aayenge, isliye order khud hi yaad rakhne mein madad karta hai. Teen roop ek jaise dikhte hain — sie=vah (stri), sie=ve, Sie=aap — par guess karne ki zarurat nahi: verb bata deta hai. sie ist = vah hai; sie sind = ve hain / aap hain.
+   body: Learn them as one block, in this order. Every verb table you meet from now on — in this chapter and every chapter after it — is printed in exactly this order, so the order itself becomes a memory aid.
+GRAMMAR 2: The verb "sein" (to be)
+   golden: Six forms, three of them the same word: bin · bist · ist · sind · seid · sind.
+   trick: bin–bist sirf main aur tum ke liye. Uske baad sab s se: ist · sind · seid · sind.
+   HINGLISH: sein (hona) German ka sabse zyada use hone wala verb hai, aur bilkul irregular hai — forms infinitive jaisi dikhti hi nahi. Par ghabrane ki baat nahi: sirf chhe chhote shabd hain, aur teen pronoun ek hi shabd share karte hain. Do group bana lo: b- wale singular aur personal hain (bin, bist), aur s- wale baaki sab (ist, sind, seid, sind). wir, sie aur Sie — teeno sind, matlab ek form se aadhi table cover ho gayi. Galti se bhi "ich bist" ya "du bin" nahi.
+   body: You need this verb for almost everything in this chapter: who you are, where you are, how old you are, what you are.
+GRAMMAR 3: Other verbs: what er, sie and es do
+   golden: ich -e · du -st · er/sie/es -t.
+   trick: -e, -st, -t — main, tum, vah. Teen ending, teen log.
+   HINGLISH: Apne baare mein bol liya, ab kisi aur ke baare mein. Aam verbs mein — sein ko chhod kar — er/sie/es ke saath sirf -t lagta hai: sie kommt, er wohnt, sie heißt. Poora pattern: ich -e, du -st, er/sie/es -t. Ek dilchasp baat: heißen mein du heißt aur sie heißt ek jaise ban jaate hain — isliye pronoun girana kabhi possible nahi.
+   body: You only need this one extra ending in this chapter, so that you can say what a third person does: Sie kommt aus Indien.
+GRAMMAR 4: Asking & answering: who, name, where
+   golden: Wer → a person · Wie heißt … → a name · Woher → where from · Wo → where at.
+   trick: Woher mein "her" hai = se aana (aus). Wo akela = mein hona (in).
+   HINGLISH: Identity fixed jodi mein chalti hai — sawaal aur jawaab saath seekho, phir ek hi shabd dono kaam kar dega. Wer bist du? → Ich bin … Wie heißt du? → Ich heiße … Wie ist dein Name? → Mein Name ist … Do sawaal jo ek letter se alag hain: Woher (kahaan se — jawaab mein aus) aur Wo (kahaan — jawaab mein in). Naam ke do hisse: Vorname (pehla) + Nachname (last).
+   body: Match the register throughout: du forms with a classmate, Sie forms with anyone formal.
+GRAMMAR 5: Word order: the verb is always second
+   golden: One idea, then the verb, then everything else. The verb never moves from slot 2.
+   trick: Verb ki seat number 2 reserved hai. Pehli seat par kuch bhi baithe, verb apni seat nahi chhodta.
+   HINGLISH: German statement ka ek hi pakka rule hai: verb doosri jagah par aata hai. Dhyaan do ki yeh doosra shabd nahi, balki doosra slot hai. Pehle slot mein jo bhi daalo, verb turant uske baad aayega. Do cheezein log galat samajhte hain. Pehli, ki pehla slot ek se zyada shabd le sakta hai — Mein Name do shabd hain par ek hi idea hai, isliye ist phir bhi doosre slot par rehta hai. Doosri, ki pehle slot mein subject hona zaroori nahi — agar Jetzt aage rakh do to subject verb ke peeche chala jaata hai: Jetzt wohne ich in Berlin. Verb khud apni jagah nahi chhodta. Wajah simple hai: German baaki sab kuch idhar-udhar kar sakta hai, isliye sunne wale ko ek fixed point chahiye, aur wahi point verb hai.
+   body: This is the rule that makes German feel different from English, and it holds for the whole language. Get it now and dozens of later chapters cost you nothing.
+GRAMMAR 6: Mistakes Hindi & English speakers make
+   trick: Chaar check: verb pronoun se match? subject likha? verb slot 2 mein? Sie capital?
+   HINGLISH: Chaar galtiyan hoti hain, aur do seedhe Hindi ke structure se aati hain — isliye pehle se pata hai kahan sambhalna hai. Pehli, verb ko pronoun se match karna: ich bin sahi hai, "ich bist" nahi. Doosri, subject girana — Hindi mein "main" chhod sakte hain, par German mein ich nahi chhodte. Teesri, verb ko sentence ke end mein bhej dena — statement mein woh doosri jagah par rehta hai: Ich bin Anna, na ki "Ich Anna bin". Aur chauthi, likhte waqt Sie capital rakhna, kyunki chhota "sie" ka matlab "ve" ho jaata hai.
+   body: Each row is a rule from this chapter, seen from the wrong side.
+EX.mcq: {"q":"Choose the correct form: \"Du ___ Rohan.\"","options":["bin","bist","ist","sind"],"answer":1,"explain":"du takes bist: \"Du bist Rohan.\""}
+EX.gap: {"sentence":["Ich "," Anna. Wer "," du?"],"gaps":[{"answer":"bin","accepts":["bin"]},{"answer":"bist","accepts":["bist"]}],"explain":"ich bin … / Wer bist du? — match each pronoun to its sein form."}
+EX.match: {"q":"Match each pronoun to its \"sein\" form.","pairs":[{"noun":"ich","art":"bin"},{"noun":"du","art":"bist"},{"noun":"er/sie/es","art":"ist"},{"noun":"wir","art":"sind"}]}
+EX.builder: {"target":"Build: \"My name is Anna Klein.\"","bank":["ist","Mein","Anna Klein","Name"],"answer":["Mein","Name","ist","Anna Klein"],"roles":{"Mein":"r-article","Name":"r-subject","ist":"r-verb","Anna Klein":"r-object"}}
+QUIZ1: Which pronoun means "you" (formal)? [du / sie / Sie / ihr] →2 :: Capital Sie is the formal "you"; du is informal, ihr is informal plural.
+QUIZ2: Complete: "Ich ___ Student." [bist / bin / ist / seid] →1 :: ich bin — the ich-form of sein.
+QUIZ3: Which question asks for someone's name (informal)? [Wer sind Sie? / Wie heißt du? / Wo wohnst du? / Woher kommst du?] →1 :: "Wie heißt du?" asks an informal "you" for their name.
+QUIZ4: In "Mein Name ist Anna", the verb "ist" is in position… [one / two / three / last] →1 :: In a declarative sentence (Aussagesatz) the verb is always second.
+QUIZ5: A full name = … [Nachname only / Vorname + Nachname / Vorname only / Subjekt + Verb] →1 :: Vorname (first name) + Nachname (last name) make the full name.
+LISTENING (26 words): Lena, suchst du eine Lerngruppe? Ja! Ich bin Lena, aus Indien, einundzwanzig Jahre alt. Perfekt, ich bin auch neu in Berlin. Toll, dann lernen wir zusammen!
+  LQ1: Was sucht Paul? [Ein Café / Eine Lerngruppe / Einen Job / Eine Wohnung] →1
+  LQ2: Was beschließen Lena und Paul zu machen? [Zusammen reisen / Zusammen lernen / Zusammen arbeiten / Zusammen kochen] →1
+SPEAK1: Eine Lerngruppe fragt: Wer bist du? || model: Ich bin Lena. Ich komme aus Indien und wohne in Berlin.
+SPEAK2: Du bist auch neu im Kurs. Frag deinen Partner zwei Sachen. || model: Wie heißt du? Und woher kommst du?
+SPEAK3: Die Lehrerin fragt: Wer ist das neben dir? || model: Das ist Anna. Sie kommt aus Indien.
+WRITING: Write a short profile (a Goethe A1 mini-task) of four lines: your name (Vorname + Nachname), where you come from, where you live, and your age. Use full sentences with the correct sein and pronoun forms. | minWords 14 | starters: Ich heiße … / Mein Name ist … / Ich komme aus … / Ich wohne in … und ich bin … Jahre alt.
+TAKEAWAYS: [object Object] | [object Object] | [object Object]
+
+########## a1-9 — Verben im Alltag (Everyday Verbs) · phase A1 · Phase 2 · 45min
+DESC: Verbs are the engine of every German sentence. Learn the everyday ones — arbeiten, lernen, machen, spielen, kochen — and the one regular pattern of present-tense endings that conjugates almost all of them across ich, du, er, wir, ihr, sie.
+SECTIONS: overview,story,vocabulary,grammar,reading,listening,speaking,writing,exercises,quiz,summary,resources
+STORY scene: Mein Tag — Deutschkurs | headline: Every day.
+STORY intro: Phase 2 begins. Noah asks Clara what she does every day, and the two swap everyday routines — working, learning, cooking, playing — putting the new verb endings straight to work.
+  D1 Noah: Was machst du morgen, Clara?  [EN] What do you do tomorrow, Clara?  [HI] Clara, tum kal kya karti ho?
+  D2 Clara: Ich arbeite morgen und ich lerne Deutsch.  [EN] I work tomorrow and I learn German.  [HI] Main kal kaam karti hoon aur German seekhti hoon.
+  D3 Noah: Und was machst du gern?  [EN] And what do you like to do?  [HI] Aur tumhe kya karna pasand hai?
+  D4 Clara: Ich koche gern und spiele Gitarre.  [EN] I like to cook and play guitar.  [HI] Mujhe khaana banaana aur guitar bajaana pasand hai.
+  D5 Noah: Und ich spiele nur Computerspiele!  [EN] And I only play computer games!  [HI] Aur main sirf computer games khelta hoon!
+  D6 Clara: Lernst du auch Deutsch?  [EN] Do you learn German too?  [HI] Kya tum German bhi seekhte ho?
+  D7 Noah: Klar! Ich lerne immer hier.  [EN] Of course. I always learn here.  [HI] Bilkul. Main hamesha yahaan seekhta hoon.
+VOCAB (22): arbeiten=to work | brauchen=to need | kochen=to cook | lernen=to learn | machen=to do, to make | spielen=to play | und=and | Wochenende=weekend | morgen=tomorrow | sammeln=to collect | wirklich=really | Deutschbuch=German book | Kapitel=chapter | Übungsbuch=exercise book | Form=form, shape | Lernkarte=flashcard | Seite=page | nennen=to name, to call | Infinitiv=infinitive | Lernwortschatz=vocabulary list | Endung=ending | Regel=rule
+GRAMMAR 1: What is a verb? The infinitive
+   golden: Cut -en off the infinitive and you have the stem. Everything you ever do to a German verb happens after that stem.
+   trick: Infinitiv = stem + -en. Ulta karo: -en hatao, stem mil gaya.
+   HINGLISH: Verb action word hai — sentence ka engine. Dictionary wala base form = Infinitiv, jo aksar -en par khatam hota hai (lernen, machen). -en hatao to bachta hai stem (lern-, mach-). Regular verbs mein stem nahi badalta, sirf ending badalti hai.
+   body: A verb (Verb) is the action word — the engine of the sentence. Its base form, the one you find in a dictionary, is the Infinitiv.
+   body: Almost every German infinitive ends in -en (a few in just -n). Cut that off and what is left is the stem — the part you build on.
+GRAMMAR 2: The present-tense endings
+   golden: ich -e · du -st · er/sie/es -t · wir -en · ihr -t · sie/Sie -en.
+   trick: Do endings do baar aate hain: -en (wir, sie/Sie) aur -t (er, ihr). Matlab chhe forms mein sirf chaar shabd yaad karne hain.
+   HINGLISH: Verb use karne ke liye subject ke hisaab se ending lagao: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Ek hi set lagbhag har regular verb par chalta hai. Dhyaan: wir aur sie/Sie infinitive jaise hi (-en) hain.
+   body: To use a verb, add the ending that matches the subject to the stem. This single set of endings works for almost every regular verb — learn it once.
+GRAMMAR 3: Spelling helper: stems ending in -t or -d
+   golden: Stem ends in -t or -d? Slip an -e- in before the du, er and ihr endings.
+   trick: Do consonant takra rahe hain? Beech mein ek -e- daal do.
+   HINGLISH: Agar stem -t ya -d par khatam ho (jaise arbeit-), to du/er/ihr mein ek extra -e- aata hai: du arbeitest, er arbeitet. Warna "arbeitst" bola hi nahi jaata. Yeh rule sirf -t/-d wale stems par.
+   body: If the stem already ends in -t or -d, the du, er/sie/es and ihr forms add an extra -e- so you can actually pronounce them.
+GRAMMAR 4: Word order: verb in second position
+   golden: Whatever fills slot 1, the verb is slot 2 — and the subject moves out of the way if it has to.
+   trick: Verb ki seat number 2 reserved hai. Time word aage aaya to subject peeche khisak jaata hai.
+   HINGLISH: Normal statement (Hauptsatz) mein verb doosri position par hota hai (Chapter 5 wala rule). Agar time word pehle aaye (morgen, am Wochenende), to verb phir bhi doosre, aur subject uske peeche: Morgen arbeite ich — "Morgen ich arbeite" nahi.
+   body: In a statement the conjugated verb stays in second position — the same rule from Chapter 5. If a time word like morgen or am Wochenende comes first, the verb still sits second and the subject jumps behind it.
+GRAMMAR 5: Mistakes Hindi & English speakers make
+   HINGLISH: Char galtiyan common hain. Pehli, ending subject se match nahi karna — sahi hai ich lerne aur du lernst. Doosri, jin stems ke end mein -t ya -d hai, unme extra -e- bhool jaana: du arbeitest. Teesri, time word aage hone par verb ko doosri jagah par na rakhna: Morgen arbeite ich. Aur chauthi, infinitive aur conjugated form ko mix kar dena.
+   body: Each row is a rule from this chapter, seen from the wrong side.
+EX.mcq: {"q":"Choose the correct form: \"Du ___ Deutsch.\"","options":["lerne","lernst","lernt","lernen"],"answer":1,"explain":"du takes -st: \"Du lernst Deutsch.\""}
+EX.gap: {"sentence":["Ich "," am Wochenende und "," jeden Tag."],"gaps":[{"answer":"koche","accepts":["koche"]},{"answer":"lerne","accepts":["lerne"]}],"explain":"ich-form adds -e: ich koche, ich lerne."}
+EX.match: {"q":"Match each verb to its English meaning.","pairs":[{"noun":"arbeiten","art":"to work"},{"noun":"kochen","art":"to cook"},{"noun":"spielen","art":"to play"},{"noun":"brauchen","art":"to need"}]}
+EX.builder: {"target":"Build: \"On the weekend I cook.\"","bank":["koche","Am Wochenende","ich"],"answer":["Am Wochenende","koche","ich"],"roles":{"Am Wochenende":"r-time","koche":"r-verb","ich":"r-subject"}}
+QUIZ1: What is the infinitive of "ich lerne"? [lernst / lernen / lernt / gelernt] →1 :: The dictionary form is "lernen" (stem lern- + -en).
+QUIZ2: Complete: "Wir ___ am Wochenende." [spielt / spielst / spielen / spiele] →2 :: wir takes -en: "Wir spielen."
+QUIZ3: Which is correct for a stem ending in -t? [du arbeitst / du arbeitest / du arbeit / du arbeiten] →1 :: Stems in -t/-d add -e-: "du arbeitest".
+QUIZ4: Put in order: "Morgen ___ ich." (arbeiten) [arbeite / arbeitest / arbeiten / arbeitet] →0 :: ich-form: "Morgen arbeite ich." (verb second, subject after).
+QUIZ5: Which sentence has correct word order? [Am Wochenende ich koche. / Am Wochenende koche ich. / Ich am Wochenende koche. / Koche am Wochenende ich.] →1 :: Time word first → verb second → subject: "Am Wochenende koche ich."
+LISTENING (23 words): Was machst du heute, Clara? Heute schwimme ich und ich lese ein Buch. Und morgen? Morgen putze ich und ich koche für Freunde.
+  LQ1: Was macht Clara heute? [arbeiten und kochen / schwimmen und lesen / putzen und lernen / spielen und schreiben] →1
+  LQ2: Was macht Clara morgen? [schwimmen und lesen / putzen und kochen / arbeiten und lernen / nichts] →1
+SPEAK1: Dein Partner fragt: Was machst du heute? || model: Heute lerne ich Deutsch und ich koche.
+SPEAK2: Deine Lehrerin fragt: Was machst du morgen? || model: Morgen arbeite ich und ich spiele Fußball.
+SPEAK3: Frag deinen Partner nach dem Wochenende. || model: Was machst du am Wochenende?
+WRITING: Write five sentences about your daily routine. Use a different everyday verb in each (lernen, arbeiten, kochen, spielen, brauchen) and a time word (jeden Tag, morgen, am Wochenende) in at least two. Keep the verb in second position. | minWords 16 | starters: Ich lerne … / Am Wochenende … / Morgen …
+TAKEAWAYS: [object Object] | [object Object] | [object Object]
+
+########## a1-12 — Akkusativ (The Accusative Case) · phase A1 · Phase 2 · 45min
+DESC: The accusative is the case of the direct object — the thing a verb acts on. The good news: only one thing changes. Masculine der becomes den (and ein becomes einen); die, das and plural die stay exactly the same.
+SECTIONS: overview,story,vocabulary,grammar,reading,listening,speaking,writing,exercises,quiz,summary,resources
+STORY scene: Im Geschäft — Berlin | headline: In the shop.
+STORY intro: Tom and Lisa go shopping after class. Tom is looking for a few things — and every object he wants becomes a direct object in the accusative.
+  D1 Tom: Ich suche den Schlüssel.  [EN] I am looking for the key.  [HI] Main chaabi dhoondh raha hoon.
+  D2 Lisa: Und ich brauche einen Stift und ein Heft.  [EN] And I need a pen and an exercise book.  [HI] Aur mujhe ek pen aur ek copy chahiye.
+  D3 Tom: Hast du den Stift?  [EN] Do you have the pen?  [HI] Kya tumhaare paas pen hai?
+  D4 Lisa: Ja! Und ich habe auch ein Buch.  [EN] Yes! And I also have a book.  [HI] Haan! Aur mere paas kitaab bhi hai.
+  D5 Tom: Das Geschäft hat alles!  [EN] The shop has everything!  [HI] Is dukaan mein sab kuch hai!
+  D6 Lisa: Ja! Und ich finde alles hier.  [EN] Yes! And I find everything here.  [HI] Haan! Aur mujhe yahaan sab kuch mil jaata hai.
+  D7 Tom: Ich brauche die Karte für Ben.  [EN] I need the card for Ben.  [HI] Mujhe Ben ke liye ye card chahiye.
+  D8 Lisa: Schön! Wir haben alles. Wir sind gut!  [EN] Lovely! We have everything. We are good!  [HI] Badhiya! Hamaare paas sab kuch hai. Hum theek hain!
+VOCAB (15): den=the (masc. acc.) | haben=to have | finden=to find | suchen=to look for | alles=everything | Geschäft=shop | Lösung=solution | Sache=thing | ein paar=a few | genug=enough | so=this way, like this | Ding=thing | Meer=sea | Akkusativ=accusative | Nominativ=nominative
+GRAMMAR 1: Subject, verb, object
+   golden: Ask Wen? or Was? after the verb. Whatever answers is your accusative object.
+   trick: Verb ke baad Wen? poochho — jo jawaab aaye, wahi Akkusativ.
+   HINGLISH: Zyadatar sentence mein teen hisse: subject (kaun — Nominativ), verb (action), aur object (kis par — Akkusativ). Object dhoondhne ke liye verb ke baad Wen? (kisko) ya Was? (kya) poochho. Subject action karta hai, aur object us action ko receive karta hai.
+   body: Most sentences have three parts: who does it (the subject, in the Nominativ), the action (the verb), and what it is done to (the direct object, in the Akkusativ).
+   body: Find the object by asking Wen? (whom?) for a person or Was? (what?) for a thing, after the verb.
+GRAMMAR 2: The one change: der → den
+   golden: Only the masculine changes: der → den, ein → einen. Feminine, neuter and plural do not move at all.
+   trick: Chaar gender mein se teen bilkul same rehte hain. Bas masculine par dhyaan do: der → den.
+   HINGLISH: Poora Akkusativ ek line mein: sirf masculine article badalta hai — der → den (den Mann). Feminine (die), neuter (das), plural (die) bilkul same rehte hain. Indefinite bhi: ein → einen (einen Stift); eine/ein same. Aur kein → keinen (Chapter 11).
+   body: Here is the whole accusative in one line: only the masculine article changes. Feminine, neuter and plural look exactly the same as the nominative.
+GRAMMAR 3: Verbs that take the accusative
+   golden: If the verb can be followed by "…what?", it takes an accusative object.
+   trick: Verb aur object ko hamesha ek saath practice karo — einen Stift haben, den Schlüssel suchen — taaki case sochna na pade.
+   HINGLISH: Bahut saare rozmarra verbs ke baad object Akkusativ mein aata hai: haben, sehen, suchen, finden, kaufen, brauchen, essen, trinken, lesen. Verb ko hamesha "… + object" ke saath practice karo, taaki case sochne ki zarurat na pade.
+   body: Many everyday verbs are followed by a direct object in the accusative. Learn the verb together with "… + object" so the case comes automatically.
+GRAMMAR 4: Mistakes Hindi & English speakers make
+   HINGLISH: Char galtiyan common hain. Agar object masculine hai to den aayega: Ich sehe den Mann. ein bhi masculine object ke saath einen ban jaata hai: einen Stift. Feminine aur neuter ko badalna nahi hai — die Karte aur das Buch waise hi rehte hain. Yaad rakho ki Akkusativ mein sirf masculine badalta hai, aur yahi poora rule hai.
+   body: Each row is a rule from this chapter, seen from the wrong side.
+EX.mcq: {"q":"Choose the article: \"Ich sehe ___ Mann.\"","options":["der","den","die","das"],"answer":1,"explain":"Mann is the masculine object → der becomes den."}
+EX.gap: {"sentence":["Ich kaufe "," Buch und "," Stift."],"gaps":[{"answer":"ein","accepts":["ein"]},{"answer":"einen","accepts":["einen"]}],"explain":"Buch is neuter → ein (unchanged); Stift is masculine object → einen."}
+EX.match: {"q":"Match each noun to its accusative article.","pairs":[{"noun":"Mann (m)","art":"den"},{"noun":"Karte (f)","art":"die"},{"noun":"Buch (n)","art":"das"},{"noun":"Stift (m, ein)","art":"einen"}]}
+EX.builder: {"target":"Build: \"I am looking for the key.\"","bank":["den","Ich","Schlüssel","suche"],"answer":["Ich","suche","den","Schlüssel"],"roles":{"Ich":"r-subject","suche":"r-verb","den":"r-akkusativ","Schlüssel":"r-object"}}
+QUIZ1: The accusative is the case of the… [subject / direct object / verb / question] →1 :: The accusative marks the direct object — what the verb acts on.
+QUIZ2: Complete: "Ich sehe ___ Mann." [der / den / dem / die] →1 :: Masculine object → der becomes den.
+QUIZ3: Which article does NOT change in the accusative? [der (m) / die (f) / ein (m) / all of them change] →1 :: die (feminine) stays die; only masculine changes (der→den, ein→einen).
+QUIZ4: "Wen?" asks about… [a thing / a place / a person (object) / a time] →2 :: Wen? asks for a person object; Was? asks for a thing.
+QUIZ5: Complete: "Ich habe ___ Stift." [ein / einen / eine / den] →1 :: Masculine object with the indefinite article → einen Stift.
+LISTENING (28 words): Was suchst du, Lisa? Ich suche den Schlüssel und einen Stift. Ich kaufe auch ein Buch und eine Karte. Hast du alles? Ja, ich finde alles im Geschäft.
+  LQ1: Was sucht Lisa? [das Buch und die Karte / den Schlüssel und einen Stift / das Meer / die Lösung] →1
+  LQ2: Wo findet Lisa alles? [zu Hause / im Café / im Geschäft / in der Schule] →2
+SPEAK1: Du bist im Geschäft. Die Verkäuferin fragt: Was suchen Sie? || model: Ich suche einen Stift und ein Buch.
+SPEAK2: Dein Freund fragt: Was hast du in der Tasche? || model: Ich habe alles: den Schlüssel, die Karte und das Buch.
+SPEAK3: Du findest deine Sachen nicht. Dein Freund fragt: Was findest du nicht? || model: Ich finde den Schlüssel nicht.
+WRITING: Write five accusative sentences (Subject–Verb–Object). Use a different verb each time (haben, sehen, kaufen, suchen, finden) and include at least two masculine objects so you practise den / einen. | minWords 15 | starters: Ich sehe den … / Ich kaufe ein … / Ich suche die …
+TAKEAWAYS: [object Object] | [object Object] | [object Object]

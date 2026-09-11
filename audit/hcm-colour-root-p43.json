@@ -1,0 +1,158 @@
+{
+ "phase": "43 — exact popup colour expression identified (DIAGNOSIS ONLY)",
+ "generatedAt": "2026-08-15T10:35:11.795Z",
+ "harness": "chapter/qa-hcm-colour-p43.html — diagnostic copy with the P41 export anchored at chapter-app.js:966; the REAL normalizeRole / isWordClassRole / nameOccurrenceRole are called on the REAL resolved entry, then the actual --pop-color and .word-pop-de inline style are read from the rendered popup. 5 chapters, 0 errors.",
+ "answer": {
+  "firstWrongColourValue": "entry.role === \"r-object\" on the resolved lexicon entry",
+  "expression": "the initial normalizedRole assignment that seeds the colour chain (chapter-app.js ~:2033, immediately above the :2037 guard), consumed by roleVar at :2053 and colorVar at :2055",
+  "chain": "entry.role (r-object) -> normalizeRole -> normalizedRole -> roleVar \"object\" -> colorVar \"--g-object\" -> color \"var(--g-object)\" -> inline style on .word-pop-de",
+  "notTheCause": [
+   "line 2037 (isWordClassRole -> nameOccurrenceRole) does NOT fire: isWordClassRole returned FALSE in every traced case",
+   "line 2052 (occurrence-role fallback) does NOT fire when the entry supplies a role — it only filled the void in the dokumentiert control",
+   "ROLE_COLOR_VAR is correct: it mapped letter->--ink-secondary exactly as documented",
+   "lookupWord, resolveClickableWord, normWord and WORDIDX are all correct (P41/P42)"
+  ],
+  "natureOfDefect": "DATA, not renderer. The renderer faithfully paints the role the entry declares. The entry declares role \"r-object\" while declaring type \"Adjective\" (deutsch) or \"Verb\" (Zahlen) — the entry contradicts itself.",
+  "confidence": "PROVEN — the reproduced prediction equals the observed --pop-color in 4 of 5 traces, including both actionable groups"
+ },
+ "traces": [
+  {
+   "word": "deutsch",
+   "chapter": "a1-8",
+   "occurrenceRole": "r-adjective",
+   "spanColour": "rgb(245,158,11)",
+   "entryType": "Adjective",
+   "entryRole": "r-object",
+   "normalizedRole_before2037": "r-object",
+   "isWordClassRole": false,
+   "nameOccurrenceRole": "",
+   "normalizedRole_after2037": "r-object",
+   "normalizedRole_after2052": "r-object",
+   "roleVar": "object",
+   "predictedColorVar": "--g-object",
+   "actualPopColor": "var(--g-object)",
+   "headInline": "color:var(--g-object)",
+   "badge": "Adjective",
+   "verdict": "PREDICTION MATCHES ACTUAL. Entry type Adjective but entry role r-object -> object green headword under an Adjective badge."
+  },
+  {
+   "word": "Deutsch",
+   "chapter": "a1-8",
+   "occurrenceRole": "r-object",
+   "spanColour": "rgb(46,125,50)",
+   "entryType": "Adjective",
+   "entryRole": "r-object",
+   "roleVar": "object",
+   "predictedColorVar": "--g-object",
+   "actualPopColor": "var(--g-object)",
+   "badge": "Noun",
+   "verdict": "MATCHES. No HCM fires because the span is also r-object — the same contradictory entry, invisible here."
+  },
+  {
+   "word": "zahlen (lowercase)",
+   "chapter": "a1-15",
+   "occurrenceRole": "r-verb",
+   "spanColour": "rgb(220,38,38)",
+   "entryType": "Verb",
+   "entryRole": "r-object",
+   "roleVar": "object",
+   "predictedColorVar": "--g-object",
+   "actualPopColor": "var(--g-verb)",
+   "badge": "Verb",
+   "verdict": "PREDICTION DIVERGES FROM ACTUAL — the only case that does. The live click painted --g-verb although lookupWord’s entry declares r-object, so the live path used a DIFFERENT, occurrence-bound token (authored chapter data) rather than the surface-resolved entry. This is the control that shows an authored token overrides the contradictory lexicon entry."
+  },
+  {
+   "word": "Zahlen (capitalised)",
+   "chapter": "a1-15",
+   "occurrenceRole": "r-verb",
+   "spanColour": "rgb(220,38,38)",
+   "entryType": "Verb",
+   "entryRole": "r-object",
+   "roleVar": "object",
+   "predictedColorVar": "--g-object",
+   "actualPopColor": "var(--g-object)",
+   "badge": "Verb",
+   "verdict": "MATCHES. The capitalised surface finds no authored token, falls through to the surface-resolved entry, and inherits its r-object role -> object green under a Verb badge."
+  },
+  {
+   "word": "a",
+   "chapter": "a1-39",
+   "occurrenceRole": "r-adverb",
+   "spanColour": "rgb(6,182,212)",
+   "entryType": "Adverb",
+   "entryRole": "r-letter",
+   "roleVar": "letter",
+   "predictedColorVar": "--g-letter (harness fallback; ROLE_COLOR_VAR was not exposed)",
+   "actualPopColor": "var(--ink-secondary)",
+   "badge": "Adverb",
+   "verdict": "DIFFERENT MECHANISM. The entry role is r-letter and ROLE_COLOR_VAR maps letter->--ink-secondary, exactly as designed. The popup colour is CORRECT for a letter; the inconsistency is that the same entry is TYPED \"Adverb\", which drives the badge. Separate from the r-object group."
+  },
+  {
+   "word": "dokumentiert (RCB control)",
+   "chapter": "c1-26",
+   "occurrenceRole": "r-adjective",
+   "entryType": "Adjective (Partizip II)",
+   "entryRole": null,
+   "normalizedRole_after2037": null,
+   "normalizedRole_after2052": "r-adjective",
+   "roleVar": "adjective",
+   "predictedColorVar": "--g-adjective",
+   "actualPopColor": "var(--g-adjective)",
+   "badge": "Adjective (Partizip II)",
+   "verdict": "MATCHES. Entry supplies no role, so the :2052 occurrence-role fallback fills the void correctly. Confirms that branch is healthy."
+  },
+  {
+   "word": "Nein (BY-DESIGN control)",
+   "chapter": "a1-7",
+   "occurrenceRole": "r-negation",
+   "entryType": "Particle",
+   "entryRole": "r-negation",
+   "roleVar": "negation",
+   "predictedColorVar": "--g-negation",
+   "actualPopColor": "var(--g-negation)",
+   "badge": "Answer",
+   "verdict": "MATCHES and is CORRECT. The entry role and colour agree; only the badge label differs from the role name. Confirms BY-DESIGN classification."
+  }
+ ],
+ "capitalisationAnalysis": {
+  "question": "does capitalisation enter the colour expression?",
+  "answer": "NO — not directly. Capitalisation never appears in the colour chain.",
+  "indirectRoute": "capitalisation decides whether an AUTHORED occurrence token is matched. Lowercase \"zahlen\" matches an authored token (role r-verb) and is painted correctly; capitalised \"Zahlen\" matches none, falls through to the surface-resolved lexicon entry, and inherits that entry’s contradictory r-object role.",
+  "confidence": "STRONGLY SUPPORTED — inferred from the lowercase/capitalised pair diverging on exactly this point; the token-matching step itself was not instrumented"
+ },
+ "badgeVsColourAuthority": {
+  "badge": "derived from the entry TYPE (Adjective / Verb / Adverb / Particle)",
+  "colour": "derived from the entry ROLE (r-object / r-letter / r-negation), or from the occurrence role only when the entry supplies none",
+  "rootProblem": "these are two independent fields on the same entry, and nothing enforces that they agree. Where they contradict, the popup labels one thing and colours another.",
+  "classification": "B — role; specifically the entry’s own role field, not the occurrence role and not the badge"
+ },
+ "doesOneMechanismExplainAll": {
+  "r_object_group": "YES for deutsch x4 and Zahlen x2 — all six trace to entry.role=\"r-object\" contradicting entry.type",
+  "letter_a": "NO — different mechanism: entry.role=\"r-letter\" is correct and the colour is correct; the badge is the odd one out",
+  "conclusion": "6 of the 7 actionable HCM share one root cause; the letter \"a\" is separate"
+ },
+ "remainingUncertainty": [
+  "WHERE entry.role=\"r-object\" is authored for deutsch and Zahlen was not traced — it may come from chapter vocab, the Global Lexicon, or the merge. That is the next question.",
+  "the lowercase-zahlen divergence proves an authored-token path overrides the entry, but that path was not instrumented",
+  "whether other entries corpus-wide carry a role that contradicts their type is UNMEASURED — this could be a class of defect rather than two words"
+ ],
+ "nextPhase": "find where role:\"r-object\" is attached to the deutsch and Zahlen entries (chapter vocab vs global-lexicon.js vs merge), and count corpus-wide how many lexicon entries declare a role whose word class contradicts their own type.",
+ "status": {
+  "productionModified": false,
+  "diagnosticCopyModified": true,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "chapterAppProductionModified": false,
+  "qaEngineModified": false,
+  "assertionsModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "chapter/qa-hcm-colour-p43.html",
+  "audit/hcm-colour-root-p43.json"
+ ],
+ "filesModified": "none (production)"
+}

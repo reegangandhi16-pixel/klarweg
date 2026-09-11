@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · Sweep 14 (resumable)</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:18px;max-width:720px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:50vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>Sweep 14 — resumable full-corpus run</h1>
+<div class="sub">Same measurement path as <code>qa-runner.html</code> (render-stability gate, injection liveness check, bounded retry, errors never counted as zero). Difference: each chapter is committed to <code>localStorage['kw_sweep_p14']</code> the moment it completes, and the run resumes where it stopped. No download is triggered — the persist step is what reset the previous run.</div>
+<div class="st" id="status">idle · KWSWEEP.run()</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+const KEY='kw_sweep_p14';
+function store(){ try{ return JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ return {}; } }
+function commit(file,rec){ const s=store(); s[file]=rec; localStorage.setItem(KEY,JSON.stringify(s)); }
+function freshFrame(){const o=$('#frame');const n=document.createElement('iframe');n.id='frame';o.parentNode.replaceChild(n,o);}
+function ready(f,cb){
+  const SAMPLE_MS=180,STABLE=3,HARD=30000,t0=Date.now();let last=null,same=0;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;
+    const nodes=d.querySelectorAll('.rw, .de-link');if(!nodes.length)return null;
+    const roles={};let n=0;
+    for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;
+    return n+'|'+d.querySelectorAll('[id^="sec-"]').length+'|'+d.querySelectorAll('.wp-badge').length+'|'+
+      Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{
+    if(Date.now()-t0>HARD)return cb('hard-timeout');
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,SAMPLE_MS);}
+    const s=sig();
+    if(s===null){last=null;same=0;return setTimeout(poll,SAMPLE_MS);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=STABLE)return cb('stable');
+    setTimeout(poll,SAMPLE_MS);};
+  poll();
+}
+function runChapter(file){
+  return new Promise(resolve=>{
+    const f=$('#frame');let done=false;
+    const fin=r=>{if(done)return;done=true;resolve(r);};
+    const timer=setTimeout(()=>fin({file,error:'timeout',errorKind:'hard-timeout'}),90000);
+    f.onload=()=>ready(f,(state)=>{
+      try{
+        const w=f.contentWindow,d=f.contentDocument;
+        if(!w||!d||!d.head){clearTimeout(timer);return fin({file,error:'injection-error: iframe document unavailable',errorKind:'injection-error',readyState:state});}
+        const s=d.createElement('script');s.src='qa-engine.js?v='+Date.now();
+        s.onload=()=>{try{const r=w.KWQA.run();r.readyState=state;clearTimeout(timer);fin(r);}
+          catch(e){clearTimeout(timer);fin({file,error:String(e),errorKind:'measurement-error',readyState:state});}};
+        s.onerror=()=>{clearTimeout(timer);fin({file,error:'engine failed to load',errorKind:'injection-error',readyState:state});};
+        d.head.appendChild(s);
+      }catch(e){clearTimeout(timer);fin({file,error:String(e),errorKind:'injection-error',readyState:state});}
+    });
+    f.src=file+'?s14='+Date.now();
+  });
+}
+window.KWSWEEP={
+  key:KEY,
+  progress(){ const s=store(); const k=Object.keys(s);
+    return {measured:k.length, errors:k.filter(x=>s[x].error).length,
+      occurrences:k.reduce((a,x)=>a+(s[x].occurrences||0),0),
+      findings:k.reduce((a,x)=>a+(s[x].findings?s[x].findings.length:0),0),
+      clean:k.filter(x=>s[x].clean).length}; },
+  reset(){ localStorage.removeItem(KEY); },
+  async run(){
+    const CH=await (await fetch('qa-chapters.json?v='+Date.now())).json();
+    window.__chapters=CH;
+    const s0=store();
+    for(let i=0;i<CH.length;i++){
+      const file=CH[i];
+      if(s0[file]&&!s0[file].error){ continue; }              // resume: keep good results
+      $('#status').textContent='['+(i+1)+'/'+CH.length+'] '+file;
+      let r=null,attempts=[];
+      for(let a=1;a<=3;a++){
+        r=await runChapter(file);
+        attempts.push({attempt:a,readyState:r.readyState||null,error:r.error||null});
+        if(!r.error) break;
+        if(r.errorKind==='measurement-error') break;
+        freshFrame(); await new Promise(x=>setTimeout(x,1200));
+      }
+      commit(file,{file:file,occurrences:r.occurrences||0,checked:r.checked||0,clean:!!r.clean,
+        readyState:r.readyState||null,error:r.error||null,errorKind:r.errorKind||null,attempts:attempts,
+        findings:(r.findings||[]).map(f=>({c:f.code,s:f.section,i:f.index,w:f.surface,
+          b:(f.detail&&(f.detail.badge||f.detail.badgeClass))||null,r:(f.detail&&f.detail.role)||null,
+          hw:(f.detail&&f.detail.headword)||null}))});
+      const p=this.progress();
+      $('#out').textContent=JSON.stringify(p,null,1);
+    }
+    $('#status').textContent='done';
+    return this.progress();
+  }
+};
+$('#out').textContent=JSON.stringify(window.KWSWEEP.progress(),null,1);
+</script>
+</body></html>

@@ -1,0 +1,103 @@
+{
+  "rows": [
+    {
+      "ch": "b1-2-nebensaetze-weil-da-obwohl",
+      "words": 58,
+      "before": 53,
+      "after": 58,
+      "exact": true,
+      "every": true,
+      "audioChars": 323,
+      "readingTokens": 93,
+      "probes": [
+        "Na=✓\"well\"",
+        "Warmes=✓\"warm\"",
+        "diese=✓\"this (fem.)\"",
+        "morgen=✓\"tomorrow\"",
+        "Strand=✓\"beach\"",
+        "obwohl=✓\"although, even though\"",
+        "kalt=✓\"cold\""
+      ]
+    },
+    {
+      "ch": "b1-3-konjunktiv2-hoefliche-bitten",
+      "words": 49,
+      "before": 40,
+      "after": 49,
+      "exact": true,
+      "every": true,
+      "audioChars": 311,
+      "readingTokens": 82,
+      "probes": [
+        "Höppla=✓\"oops\"",
+        "Wackelkontakt=✓\"loose connection\"",
+        "Display=✓\"screen\"",
+        "draufschauen=✓\"to take a look\"",
+        "könnten=✓\"could\"",
+        "reparieren=✓\"to repair\"",
+        "schwarz=✓\"black\""
+      ]
+    },
+    {
+      "ch": "b1-5-genitiv-wegen-trotz-waehrend",
+      "words": 44,
+      "before": 37,
+      "after": 44,
+      "exact": true,
+      "every": true,
+      "audioChars": 281,
+      "readingTokens": 58,
+      "probes": [
+        "Camembert=✓\"Camembert\"",
+        "Freitagabend=✓\"Friday evening\"",
+        "Timo=✓\"Timo\"",
+        "großen=✓\"great\"",
+        "Käse=✓\"cheese\"",
+        "vegan=✓\"vegan\"",
+        "wegen=✗\"because of (+ Genitiv)\""
+      ]
+    },
+    {
+      "ch": "b1-6-goethe-mini-1",
+      "words": 63,
+      "before": 58,
+      "after": 63,
+      "exact": true,
+      "every": true,
+      "audioChars": 356,
+      "readingTokens": 89,
+      "probes": [
+        "Musst=✓\"must, to have to\"",
+        "ernst=✓\"seriously\"",
+        "Timo=✓\"Timo\"",
+        "letzte=✓\"last\"",
+        "nervös=✓\"nervous\"",
+        "helfen=✓\"to help\""
+      ]
+    },
+    {
+      "ch": "b1-1-infinitiv-mit-zu",
+      "words": 53,
+      "before": 49,
+      "after": 53,
+      "exact": true,
+      "every": true,
+      "audioChars": 318,
+      "readingTokens": 133,
+      "probes": [
+        "Renke=✓\"Renke\"",
+        "vorzuhaben=✓\"to have planned\"",
+        "jammern=✓\"to complain\"",
+        "bisschen=✓\"a little bit\"",
+        "zelten=✓\"to camp\"",
+        "Buch=✓\"book\""
+      ]
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "blocked": {
+    "chapter": "chapter-b1-4-folgen-deshalb-so-dass-data.js",
+    "reason": "transcript contains a space-delimited ellipsis (\"Zeigen Sie mal … stimmt, hier\"); the token renderer suppresses the space before any token starting with …, so character-exact reconstruction is impossible without changing chapter-app.js or the transcript. Not attempted; file untouched."
+  }
+}

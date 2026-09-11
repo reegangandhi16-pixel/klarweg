@@ -1,0 +1,29 @@
+{
+  "chapter": "chapter-b1-1-infinitiv-mit-zu-data.js",
+  "beforeClickable": 49,
+  "afterClickable": 53,
+  "totalGermanWords": 53,
+  "missingBefore": [
+    "Renke",
+    "vorzuhaben",
+    "jammern",
+    "bisschen"
+  ],
+  "missingAfter": [],
+  "transcriptExact": true,
+  "everyWordTokenised": true,
+  "warnings": [],
+  "errors": [],
+  "probes": [
+    "Renke: link=true headword=Renke en=\"Renke\" type=\"Name\"",
+    "vorzuhaben: link=true headword=vorzuhaben en=\"to have planned\" type=\"Verb · vorhaben (zu + Infinitiv)\"",
+    "jammern: link=true headword=jammern en=\"to complain\" type=\"Verb\"",
+    "bisschen: link=true headword=bisschen en=\"a little bit\" type=\"\"",
+    "zelten: link=true headword=zelten en=\"to camp\" type=\"Verb\"",
+    "Buch: link=true headword=Buch en=\"book\" type=\"Noun\"",
+    "würde: link=true headword=würde en=\"would\" type=\"Verb\"",
+    "Klingt: link=true headword=Klingt en=\"sounds\" type=\"Verb · klingen\"",
+    "gesagt: link=true headword=gesagt en=\"to say\" type=\"Verb\"",
+    "ehrlich: link=true headword=ehrlich en=\"honest(ly); really?\" type=\"Adverb\""
+  ]
+}

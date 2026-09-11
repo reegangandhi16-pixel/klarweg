@@ -1,0 +1,386 @@
+{
+ "phase": "7",
+ "batch": 1,
+ "chapters": 3,
+ "entries": 3,
+ "results": [
+  {
+   "slug": "b2-03-informationsstruktur-thema-rhema",
+   "rows": [
+    {
+     "line": 42,
+     "field": "ex",
+     "value": "Thema-Rhema: known info (Thema) first, new info (Rhema) later in the sentence (this chapter).",
+     "totalNodes": 582,
+     "totalQaFindings": 2,
+     "injected": [
+      "themarhema",
+      "known",
+      "info",
+      "thema",
+      "first",
+      "new",
+      "rhema",
+      "later",
+      "in",
+      "the",
+      "sentence",
+      "this",
+      "chapter"
+     ],
+     "soleSource": [
+      "themarhema",
+      "known",
+      "info",
+      "first",
+      "new",
+      "later",
+      "the",
+      "sentence",
+      "this",
+      "chapter"
+     ],
+     "attributed": 0,
+     "silent": 0,
+     "qaFindings": 0,
+     "sharedLinkifiedOutsideDe": 11,
+     "classification": "LATENT",
+     "surfaces": [
+      {
+       "s": "themarhema",
+       "sole": true,
+       "txt": 0,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "known",
+       "sole": true,
+       "txt": 27,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "info",
+       "sole": true,
+       "txt": 0,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "thema",
+       "sole": false,
+       "txt": 30,
+       "link": 12,
+       "inDe": 2,
+       "out": 10
+      },
+      {
+       "s": "first",
+       "sole": true,
+       "txt": 7,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "new",
+       "sole": true,
+       "txt": 29,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "rhema",
+       "sole": false,
+       "txt": 31,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "later",
+       "sole": true,
+       "txt": 1,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "in",
+       "sole": false,
+       "txt": 19,
+       "link": 9,
+       "inDe": 8,
+       "out": 1
+      },
+      {
+       "s": "the",
+       "sole": true,
+       "txt": 50,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "sentence",
+       "sole": true,
+       "txt": 28,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "this",
+       "sole": true,
+       "txt": 10,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "chapter",
+       "sole": true,
+       "txt": 11,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "b2-07-verbergaenzungen-erkennen",
+   "rows": [
+    {
+     "line": 181,
+     "field": "de",
+     "value": "Remove it — does the sentence still work?",
+     "totalNodes": 660,
+     "totalQaFindings": 0,
+     "injected": [
+      "remove",
+      "it",
+      "does",
+      "the",
+      "sentence",
+      "still",
+      "work"
+     ],
+     "soleSource": [
+      "remove",
+      "it",
+      "does",
+      "the",
+      "sentence",
+      "still",
+      "work"
+     ],
+     "attributed": 5,
+     "silent": 5,
+     "qaFindings": 0,
+     "sharedLinkifiedOutsideDe": 0,
+     "classification": "HARMFUL",
+     "surfaces": [
+      {
+       "s": "remove",
+       "sole": true,
+       "txt": 10,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "it",
+       "sole": true,
+       "txt": 20,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "does",
+       "sole": true,
+       "txt": 3,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "the",
+       "sole": true,
+       "txt": 49,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "sentence",
+       "sole": true,
+       "txt": 28,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "still",
+       "sole": true,
+       "txt": 6,
+       "link": 5,
+       "inDe": 0,
+       "out": 5,
+       "samples": [
+        {
+         "t": "still",
+         "badge": "Adjective",
+         "role": "adjective",
+         "sec": "sec-overview",
+         "qa": []
+        },
+        {
+         "t": "still",
+         "badge": "Adjective",
+         "role": "adjective",
+         "sec": "sec-grammar",
+         "qa": []
+        },
+        {
+         "t": "still",
+         "badge": "Adjective",
+         "role": "adjective",
+         "sec": "sec-grammar",
+         "qa": []
+        },
+        {
+         "t": "still",
+         "badge": "Adjective",
+         "role": "adjective",
+         "sec": "sec-grammar",
+         "qa": []
+        },
+        {
+         "t": "still",
+         "badge": "Adjective",
+         "role": "adjective",
+         "sec": "sec-summary",
+         "qa": []
+        }
+       ]
+      },
+      {
+       "s": "work",
+       "sole": true,
+       "txt": 2,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "b2-20-anstatt-zu",
+   "rows": [
+    {
+     "line": 196,
+     "field": "de",
+     "value": "ohne...zu (without) vs. (an)statt...zu (instead of)",
+     "totalNodes": 781,
+     "totalQaFindings": 2,
+     "injected": [
+      "zu",
+      "statt",
+      "ohne",
+      "without",
+      "vs",
+      "an",
+      "instead",
+      "of"
+     ],
+     "soleSource": [
+      "without",
+      "instead",
+      "of"
+     ],
+     "attributed": 0,
+     "silent": 0,
+     "qaFindings": 0,
+     "sharedLinkifiedOutsideDe": 84,
+     "classification": "LATENT",
+     "surfaces": [
+      {
+       "s": "zu",
+       "sole": false,
+       "txt": 117,
+       "link": 85,
+       "inDe": 32,
+       "out": 53
+      },
+      {
+       "s": "statt",
+       "sole": false,
+       "txt": 75,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "ohne",
+       "sole": false,
+       "txt": 14,
+       "link": 10,
+       "inDe": 4,
+       "out": 6
+      },
+      {
+       "s": "without",
+       "sole": true,
+       "txt": 9,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "vs",
+       "sole": false,
+       "txt": 6,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "an",
+       "sole": false,
+       "txt": 58,
+       "link": 30,
+       "inDe": 5,
+       "out": 25
+      },
+      {
+       "s": "instead",
+       "sole": true,
+       "txt": 31,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      },
+      {
+       "s": "of",
+       "sole": true,
+       "txt": 36,
+       "link": 0,
+       "inDe": 0,
+       "out": 0
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

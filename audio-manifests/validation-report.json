@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-08-03",
+  "architecture": "permanent-id-v2: filename derived from ID only; contentHash tracks regeneration need",
+  "vocabulary": {
+    "totalManifestEntries": 15572,
+    "duplicateIds": 0,
+    "duplicateFilenames": 0,
+    "missingContentHash": 0
+  },
+  "storyDialogue": {
+    "totalLines": 1775,
+    "duplicateIds": 0,
+    "duplicateFilenames": 0,
+    "missingContentHash": 0
+  },
+  "listeningDialogue": {
+    "totalLines": 1079,
+    "duplicateIds": 0,
+    "duplicateFilenames": 0,
+    "missingContentHash": 0
+  },
+  "blockingIssues": [],
+  "readyForOneClickGeneration": true
+}

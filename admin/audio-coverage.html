@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audio Coverage Dashboard — Klarweg</title>
+<style>
+  :root {
+    --bg:#FAFAF7; --surface:#fff; --ink:#0E0E10; --ink2:#5A5A60; --ink3:#9A9AA0;
+    --line:rgba(14,14,16,.09); --green:#2E7D32; --red:#C0392B; --amber:#B07F00;
+    --r:14px; --font:'Inter',-apple-system,system-ui,sans-serif; --mono:ui-monospace,Menlo,monospace;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:var(--font); background:var(--bg); color:var(--ink); padding:40px 24px; line-height:1.5; }
+  .wrap { max-width:920px; margin:0 auto; }
+  h1 { font-size:28px; letter-spacing:-.02em; margin-bottom:6px; }
+  .sub { color:var(--ink3); font-size:14px; margin-bottom:28px; }
+  .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px; }
+  @media(max-width:680px){ .cards{ grid-template-columns:repeat(2,1fr);} }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:18px 20px; }
+  .card .n { font-size:30px; font-weight:600; letter-spacing:-.02em; }
+  .card .l { font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink3); margin-top:4px; }
+  .card.ok .n { color:var(--green); } .card.bad .n { color:var(--red); }
+  .bar { height:10px; border-radius:99px; background:#eee; overflow:hidden; margin-bottom:28px; }
+  .bar i { display:block; height:100%; background:var(--green); }
+  .status { display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:14px; padding:7px 14px; border-radius:99px; margin-bottom:24px; }
+  .status.pass { background:#EAF3DE; color:var(--green); }
+  .status.fail { background:#FBEAE7; color:var(--red); }
+  h2 { font-size:15px; margin:24px 0 10px; display:flex; align-items:center; gap:8px; }
+  h2 .count { font-family:var(--mono); font-size:12px; color:var(--ink3); }
+  .list { background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; }
+  .row { display:flex; justify-content:space-between; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line); font-size:14px; }
+  .row:last-child { border-bottom:0; }
+  .row .de { font-family:Georgia,serif; font-style:italic; }
+  .row .tag { font-family:var(--mono); font-size:11px; color:var(--red); }
+  .empty { padding:16px; color:var(--ink3); font-size:14px; }
+  .when { font-family:var(--mono); font-size:11px; color:var(--ink3); margin-top:24px; }
+  code { font-family:var(--mono); font-size:12px; background:#F0EFEA; padding:2px 6px; border-radius:6px; }
+  .note { background:#FFF8EC; border:1px solid #f0deb8; border-radius:var(--r); padding:14px 16px; font-size:13.5px; color:var(--ink2); margin-bottom:24px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Audio Coverage Dashboard</h1>
+  <div class="sub">Every German string the app needs, cross-checked against <code>public/audio/manifest.json</code>.</div>
+
+  <div id="state"></div>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+function listBlock(title, arr){
+  if (!arr || !arr.length) return '<h2>'+title+' <span class="count">0</span></h2><div class="list"><div class="empty">None — all generated. ✓</div></div>';
+  return '<h2>'+title+' <span class="count">'+arr.length+'</span></h2><div class="list">' +
+    arr.map(t => '<div class="row"><span class="de">'+esc(t)+'</span><span class="tag">missing</span></div>').join('') + '</div>';
+}
+
+function render(r){
+  const pct = r.total ? Math.round(r.present / r.total * 100) : 0;
+  const pass = r.missing === 0;
+  $('#state').innerHTML =
+    '<div class="cards">' +
+      '<div class="card"><div class="n">'+r.total+'</div><div class="l">Total items</div></div>' +
+      '<div class="card ok"><div class="n">'+r.present+'</div><div class="l">Generated</div></div>' +
+      '<div class="card '+(r.missing?'bad':'ok')+'"><div class="n">'+r.missing+'</div><div class="l">Missing</div></div>' +
+      '<div class="card"><div class="n">'+pct+'%</div><div class="l">Coverage</div></div>' +
+    '</div>' +
+    '<div class="bar"><i style="width:'+pct+'%"></i></div>' +
+    '<div class="status '+(pass?'pass':'fail')+'">'+(pass?'✅ PASS — every referenced item has audio':'❌ FAIL — '+r.missing+' item(s) missing audio')+'</div>' +
+    (pass ? '' : '<div class="note">Add the missing strings to <code>content/audio-extra.json</code>, then run <code>npm run generate-audio</code> and <code>npm run build-coverage</code>.</div>') +
+    listBlock('Missing words', r.missingWords) +
+    listBlock('Missing sentences', r.missingSentences) +
+    listBlock('Missing dialogues', r.missingDialogues) +
+    (r.generatedAt ? '<div class="when">Snapshot: '+esc(r.generatedAt)+'</div>' : '');
+}
+
+// Load the pre-built coverage snapshot (written by `npm run build-coverage`).
+fetch('../public/audio/coverage.json?cb=' + Date.now())
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(render)
+  .catch(() => {
+    $('#state').innerHTML = '<div class="note">No <code>coverage.json</code> yet. Run <code>npm run build-coverage</code> to generate the snapshot this dashboard reads.</div>';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P21 style-lint runner + fix regression</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:18px;max-width:760px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:60vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P21 — style-lint + targeted fix regression</h1>
+<div class="sub"><code>KWP21.lint()</code> runs the namespace guard over all 259 chapters (canonical vocabulary read from chapter-app.js?v=9, never duplicated). <code>KWP21.regress()</code> re-renders the five corrected chapters and reports role colours + a full QA engine run per chapter.</div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script src="qa-style-lint.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+function ready(f,cb){
+  const S=180,N=3,HARD=30000,t0=Date.now();let last=null,same=0;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const nodes=d.querySelectorAll('.rw, .de-link');if(!nodes.length)return null;
+    const roles={};let n=0;for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;return n+'|'+d.querySelectorAll('[id^="sec-"]').length+'|'+Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{if(Date.now()-t0>HARD)return cb('hard-timeout');
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,S);}
+    const s=sig();if(s===null){last=null;same=0;return setTimeout(poll,S);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=N)return cb('stable');setTimeout(poll,S);};
+  poll();
+}
+const FIXED=[
+ {file:'chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html',role:'verb',expect:'rgb(220, 38, 38)',keep:['praesens','praeteritum','perfekt','plusquam','futur1','futur2']},
+ {file:'chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html',role:'time',expect:'rgb(124, 58, 237)',keep:['simul','duration','space','continuation']},
+ {file:'chapter-c1-05-zweiteilige-satzverbindungen.html',role:'negation',expect:'rgb(192, 38, 211)',keep:['addition','alternative','contrast','comparison','degree']},
+ {file:'chapter-c1-07-praepositionen-mit-genitiv.html',role:'genitiv',expect:'rgb(160, 107, 44)',keep:[]},
+ {file:'chapter-c1-17-goethe-halbzeit-test.html',role:'modalverb',expect:'rgb(159, 18, 57)',keep:['konjunktiv2','konjunktiv1','empfehlung','bitte']}];
+function regressOne(c){
+  return new Promise(resolve=>{
+    const f=$('#frame');let done=false;const fin=r=>{if(done)return;done=true;resolve(r);};
+    const timer=setTimeout(()=>fin({file:c.file,error:'timeout'}),90000);
+    f.onload=()=>ready(f,(state)=>{
+      const d=f.contentDocument,w=f.contentWindow;
+      const s=d.createElement('script');s.src='qa-engine.js?v='+Date.now();
+      s.onerror=()=>{clearTimeout(timer);fin({file:c.file,error:'engine load failed'});};
+      s.onload=()=>{try{
+        const nodes=[].slice.call(d.querySelectorAll('.rw, .de-link')).filter(n=>!n.querySelector('.rw, .de-link'))
+          .filter(n=>!n.closest('.word-pop')).filter(n=>!!(n.offsetParent||n.getClientRects().length));
+        const re=new RegExp('\\br-'+c.role+'\\b');
+        const hits=nodes.filter(n=>re.test(n.className));
+        const colours={};hits.forEach(n=>{const col=getComputedStyle(n).color;colours[col]=(colours[col]||0)+1;});
+        // pedagogical classes must still be highlighted
+        const kept={};c.keep.forEach(k=>{const el=d.querySelector('.r-'+k);
+          kept[k]=el?{found:true,colour:getComputedStyle(el).color,weight:getComputedStyle(el).fontWeight}:{found:false};});
+        // popup headword colour for one affected token
+        let popup=null;
+        if(hits.length){const cl=d.querySelector('.wp-close');if(cl)cl.click();
+          hits[0].click();const p=d.querySelector('.word-pop');const h=p&&p.querySelector('.word-pop-de');
+          popup={surface:hits[0].textContent.trim(),spanColour:getComputedStyle(hits[0]).color,
+            headColour:h?getComputedStyle(h).color:null};
+          const c2=d.querySelector('.wp-close');if(c2)c2.click();}
+        const qa=w.KWQA.run();
+        clearTimeout(timer);
+        fin({file:c.file,readyState:state,role:c.role,expected:c.expect,
+          roleSpans:hits.length,colourHistogram:colours,
+          allCanonical:Object.keys(colours).length===1&&colours[c.expect]===hits.length,
+          pedagogicalClassesIntact:kept,popup,
+          qa:{occurrences:qa.occurrences,checked:qa.checked,findings:(qa.findings||[]).length,clean:!!qa.clean,counts:qa.counts}});
+      }catch(e){clearTimeout(timer);fin({file:c.file,error:String(e&&e.stack||e)});}};
+      d.head.appendChild(s);
+    });
+    f.src=c.file+'?p21='+Date.now();
+  });
+}
+window.KWP21={
+  async lint(){
+    const app=await (await fetch('chapter-app.js?v=9?v='+Date.now())).text();
+    const canon=KWSTYLELINT.parseCanonicalRoles(app);
+    if(!canon.ok)return {error:canon.error};
+    const st=KWSTYLELINT.selfTest(canon.roles);
+    const files=await (await fetch('qa-chapters.json?v='+Date.now())).json();
+    const findings=[];
+    for(let i=0;i<files.length;i++){
+      if(i%40===0)$('#status').textContent='lint ['+(i+1)+'/'+files.length+']';
+      const html=await (await fetch(files[i]+'?v='+Date.now())).text();
+      KWSTYLELINT.scanChapter(html,files[i],canon.roles).forEach(x=>findings.push(x));
+    }
+    const bySev={},byKind={};findings.forEach(f=>{bySev[f.severity]=(bySev[f.severity]||0)+1;byKind[f.kind]=(byKind[f.kind]||0)+1;});
+    const res={canonical:{count:canon.roles.length,source:canon.source},selfTest:st,
+      chaptersScanned:files.length,findings:findings.length,bySeverity:bySev,byKind:byKind,
+      violations:findings.filter(f=>f.severity==='violation')};
+    window.__p21lint=res;$('#status').textContent='lint done';$('#out').textContent=JSON.stringify(res,null,1);
+    return res;
+  },
+  async regress(){
+    const out=[];
+    for(let i=0;i<FIXED.length;i++){$('#status').textContent='regress ['+(i+1)+'/'+FIXED.length+'] '+FIXED[i].file;
+      out.push(await regressOne(FIXED[i]));window.__p21reg=out;$('#out').textContent=JSON.stringify(out,null,1);}
+    $('#status').textContent='regress done';return out;
+  }
+};
+</script>
+</body></html>

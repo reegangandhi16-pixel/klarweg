@@ -1,0 +1,194 @@
+{
+ "generated": "2026-08-11T20:32:23.682Z",
+ "sweep": {
+  "chapters": 259,
+  "findings": 1688,
+  "clean": 57
+ },
+ "clusters": {
+  "conjunction → r-question": [
+   {
+    "file": "chapter-a2-9-vergleiche-als-wie.html",
+    "n": 87,
+    "eg": [
+     {
+      "i": 3,
+      "w": "wie",
+      "sec": "(none)",
+      "badge": "Conjunction"
+     },
+     {
+      "i": 7,
+      "w": "wie",
+      "sec": "(none)",
+      "badge": "Conjunction"
+     },
+     {
+      "i": 18,
+      "w": "wie",
+      "sec": "(none)",
+      "badge": "Conjunction"
+     },
+     {
+      "i": 29,
+      "w": "wie",
+      "sec": "overview",
+      "badge": "Conjunction"
+     }
+    ]
+   },
+   {
+    "file": "chapter-a2-10-goethe-mini-1.html",
+    "n": 17,
+    "eg": [
+     {
+      "i": 20,
+      "w": "wie",
+      "sec": "overview",
+      "badge": "Conjunction"
+     },
+     {
+      "i": 150,
+      "w": "wie",
+      "sec": "vocabulary",
+      "badge": "Conjunction"
+     },
+     {
+      "i": 301,
+      "w": "wie",
+      "sec": "vocabulary",
+      "badge": "Conjunction"
+     },
+     {
+      "i": 307,
+      "w": "wie",
+      "sec": "vocabulary",
+      "badge": "Conjunction"
+     }
+    ]
+   },
+   {
+    "file": "chapter-a2-19-indirekte-fragen.html",
+    "n": 1,
+    "eg": [
+     {
+      "i": 942,
+      "w": "ob",
+      "sec": "reading",
+      "badge": "Conjunction"
+     }
+    ]
+   }
+  ],
+  "noun → r-article": [
+   {
+    "file": "chapter-c2-22-wortbildung-der-nomen.html",
+    "n": 43,
+    "eg": [
+     {
+      "i": 34,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 44,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 53,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 63,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     }
+    ]
+   },
+   {
+    "file": "chapter-c2-25-appositionen.html",
+    "n": 23,
+    "eg": [
+     {
+      "i": 45,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 57,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 85,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 95,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     }
+    ]
+   },
+   {
+    "file": "chapter-c2-26-nominalstil.html",
+    "n": 23,
+    "eg": [
+     {
+      "i": 56,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 66,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 78,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 94,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     }
+    ]
+   },
+   {
+    "file": "chapter-c1-30-nomen-mit-numerusbesonderheiten.html",
+    "n": 2,
+    "eg": [
+     {
+      "i": 65,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     },
+     {
+      "i": 67,
+      "w": "die",
+      "sec": "vocabulary",
+      "badge": "Noun"
+     }
+    ]
+   }
+  ]
+ }
+}

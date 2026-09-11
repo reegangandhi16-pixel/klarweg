@@ -1,0 +1,179 @@
+{
+ "chapter-a1-1-data.js": {
+  "scene": "Deutschkurs, Tag 1 — Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'The first <em>day.</em>',\n    intro: 'Frau Weber\\'s very first German lesson in Berlin. She welcomes new student Rohan — and the first thing he learns is how to spell his own name, letter by letter, and where those two little dots come from.',\n    outcomes: ['Every word is clickable for meaning + audio', 'Native-speed audio you can slow down', 'A real two-person conversation you can replay line by line'],\n    scene: 'Deutschkurs, Tag 1 — Berlin',\n    femaleSpeakers: ['Frau Weber'],\n    dialogue: [\n      { speaker: 'Frau Weber', tokens: [\n        { w: 'Herzlich', role: 'r-adjective', en: 'warm(ly)', hi: 'हार्दिक', pron: 'HERTS-likh', type: 'Adjective', why: 'Herzlich willkommen = a warm welcome — a fixed greeting.', ex: 'Herzlich willkommen!', exEn: 'A warm welcome!' },\n        { w: 'willkommen', role: 'r-adjective', en: 'welcom",
+  "listening": [
+   "Frau Weber: Wiederholen Sie bitte: A wie Apfel.",
+   "Rohan: A wie Apfel.",
+   "Frau Weber: Gut. Und B wie Buch.",
+   "Rohan: B wie Buch. Das ist leicht!"
+  ]
+ },
+ "chapter-a1-10-artikel-data.js": {
+  "scene": "Im Klassenzimmer — Deutschkurs",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'der, die, <em>das.</em>',\n    intro: 'Kai points around the classroom and Julia names each object — but every noun comes with a colour: der, die or das. A quick trick turns the hardest habit in German into a game.',\n    outcomes: ['Every word is clickable for meaning + audio', 'Hear each noun with its article', 'The der/die/das colours in action'],\n    scene: 'Im Klassenzimmer — Deutschkurs',\n    femaleSpeakers: ['Julia'],\n    dialogue: [\n      { speaker: 'Kai', tokens: [\n        { w: 'Hallo', role: 'r-subject', en: 'hello', hi: 'नमस्ते', pron: 'HA-lo', type: 'Greeting' },\n        { w: 'Julia', role: 'r-name', en: 'Julia', hi: 'यूलिया', pron: 'YOO-lya', type: 'Name · person' },\n        { w: '!', plain: true },\n        { w: 'Hast', role: 'r-verb', en: 'do you have', hi: 'है', pron: 'hast', type: 'Verb · haben (du)' },\n        { ",
+  "listening": [
+   "Kai: Was ist das?",
+   "Julia: Das ist der Tisch.",
+   "Kai: Und das?",
+   "Julia: Das ist die Karte. Auf dem Tisch sind ein Buch, ein Stift und eine Flasche.",
+   "Kai: Die Sachen gehören zusammen."
+  ]
+ },
+ "chapter-a1-11-negation-data.js": {
+  "scene": "Mittagspause — Deutschkurs",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'No, <em>thanks.</em>',\n    intro: 'Lunchtime talk. Ben has no time, Anna has no more money, and the two learn the two ways to say no in German — kein for things, nicht for everything else.',\n    outcomes: ['Every word is clickable for meaning + audio', 'Hear kein vs nicht in real sentences', 'A very relatable conversation'],\n    scene: 'Mittagspause — Deutschkurs',\n    femaleSpeakers: ['Anna'],\n    dialogue: [\n      { speaker: 'Ben', tokens: [\n        { w: 'Anna', role: 'r-name', en: 'Anna', hi: 'अना', pron: 'AH-na', type: 'Name · person' },\n        { w: ',', plain: true },\n        { w: 'hast', role: 'r-verb', en: 'do you have', hi: 'है', pron: 'hast', type: 'Verb · haben (du)' },\n        { w: 'du', role: 'r-subject', en: 'you', hi: 'तुम', pron: 'doo', type: 'Pronoun · subject' },\n        { w: 'heute', role: 'r-time', en: 'toda",
+  "listening": [
+   "Ben: Hast du heute Zeit, Anna?",
+   "Anna: Nein, ich habe keine Zeit. Ich bin nicht müde, aber ich habe kein Geld mehr.",
+   "Ben: Kein Problem, vielleicht morgen!"
+  ]
+ },
+ "chapter-a1-12-akkusativ-data.js": {
+  "scene": "Im Geschäft — Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'In the <em>shop.</em>',\n    intro: 'Tom and Lisa go shopping after class. Tom is looking for a few things — and every object he wants becomes a direct object in the accusative.',\n    outcomes: ['Every word is clickable for meaning + audio', 'Hear der become den in real sentences', 'Lisa helps Tom find what he needs'],\n    scene: 'Im Geschäft — Berlin',\n    femaleSpeakers: ['Lisa'],\n    dialogue: [\n      { speaker: 'Tom', tokens: [\n        { w: 'Ich', role: 'r-subject', en: 'I', hi: 'मैं', pron: 'ikh', type: 'Pronoun · subject' },\n        { w: 'suche', role: 'r-verb', en: 'look for', hi: 'खोजता हूँ', pron: 'ZOO-khuh', type: 'Verb · suchen (ich)' },\n        { w: 'den', role: 'r-akkusativ', en: 'the (masc. acc.)', hi: 'यह', pron: 'dayn', type: 'Article · masc. acc.', why: 'Schlüssel is masculine and the object → der becomes den.',",
+  "listening": [
+   "Tom: Was suchst du, Lisa?",
+   "Lisa: Ich suche den Schlüssel und einen Stift. Ich kaufe auch ein Buch und eine Karte.",
+   "Tom: Hast du alles?",
+   "Lisa: Ja, ich finde alles im Geschäft."
+  ]
+ },
+ "chapter-a1-13-adjektive-data.js": {
+  "scene": "Beschreibungen — Deutschkurs",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'How is it <em>really?</em>',\n    intro: 'Marie asks Leon to describe his city and his friends. With sein and an adjective, Leon paints a picture of his new life in Berlin.',\n    outcomes: ['Every word is clickable for meaning + audio', 'Hear sein + adjective with no endings', 'Leon describes his new home'],\n    scene: 'Beschreibungen — Deutschkurs',\n    femaleSpeakers: ['Marie'],\n    dialogue: [\n      { speaker: 'Marie', tokens: [\n        { w: 'Leon', role: 'r-name', en: 'Leon', hi: 'लियोन', pron: 'LAY-on', type: 'Name · person' },\n        { w: ',', plain: true },\n        { w: 'wie', role: 'r-question', en: 'how', hi: 'कैसा', pron: 'vee', type: 'Question word' },\n        { w: 'ist', role: 'r-verb', en: 'is', hi: 'है', pron: 'ist', type: 'Verb · sein' },\n        { w: 'Berlin', role: 'r-place', en: 'Berlin', hi: 'बर्लिन', pron: '",
+  "listening": [
+   "Leon: Wie ist deine Stadt, Marie?",
+   "Marie: Meine Stadt ist groß und sehr schön. Mein Freund ist nett und fleißig. Heute bin ich müde, aber das Wetter ist wunderbar."
+  ]
+ },
+ "chapter-a1-14-essen-data.js": {
+  "scene": "Im Café — Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'Hanna is working at a café in Berlin when Simon comes in for breakfast — and the food words arrive before any rule does.',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'A real two-person café order, start to finish'\n    ],\n    scene: 'Im Café — Berlin',\n    femaleSpeakers: ['Hanna'],\n    dialogue: [\n      { speaker: 'Hanna', tokens: [\n        { w: 'Guten', role: 'r-subject', en: 'good', hi: 'अच्छा', pron: 'GOO-ten', type: 'Greeting' },\n        { w: 'Morgen', role: 'r-subject', en: 'morning', hi: 'सुबह', pron: 'MOR-gen', type: 'Greeting', why: 'Guten Morgen — good morning (Chapter 4).', ex: 'Guten Morgen!', exEn: 'Good morning!' },\n        { w: '!', plain: true },\n        { w: 'Was', role: 'r-question', en: 'wh",
+  "listening": [
+   "Simon: Was möchtest du, Hanna?",
+   "Hanna: Ich möchte einen Kaffee und ein Brötchen mit Käse. Ich esse kein Fleisch. Und du?",
+   "Simon: Ich nehme einen Orangensaft und einen Salat. Das schmeckt super!"
+  ]
+ },
+ "chapter-a1-15-cafe-data.js": {
+  "scene": "Im Café — Kreuzberg, Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'After class, Ida drops into a café in Kreuzberg. The waiter takes her order, the prices come up, and she settles the bill — every café phrase you need, in one real scene.',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'A real two-person café order, start to finish'\n    ],\n    scene: 'Im Café — Kreuzberg, Berlin',\n    femaleSpeakers: ['Ida'],\n    dialogue: [\n      { speaker: 'Kellner', tokens: [\n        { w: 'Guten', role: 'r-adverb', en: 'good', hi: 'अच्छा', pron: 'GOO-ten', type: 'Greeting' },\n        { w: 'Tag', role: 'r-object', en: 'day', hi: 'दिन', pron: 'tahk', type: 'Greeting', why: 'Guten Tag — hello (Chapter 4).', ex: 'Guten Tag!', exEn: 'Hello!' },\n        { w: '!', plain: true },\n        { w: 'Hier'",
+  "listening": [
+   "Kellner: Guten Tag! Was möchten Sie?",
+   "Ida: Ich hätte gern einen Kaffee und ein Stück Kuchen. Was kostet das?",
+   "Kellner: Das macht zusammen fünf Euro fünfzig.",
+   "Ida: Hier sind sechs Euro. Stimmt so!",
+   "Kellner: Vielen Dank, schönen Tag!"
+  ]
+ },
+ "chapter-a1-16-hobbies-data.js": {
+  "scene": "Nach dem Unterricht — Sprachschule, Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'It is Friday after class. Elias asks Sara about the weekend, and their hobbies come out — Sara\\u2019s tennis, Elias\\u2019s photography, and one firm preference for the sofa.',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'A real two-person hobby conversation'\n    ],\n    scene: 'Nach dem Unterricht — Sprachschule, Berlin',\n    femaleSpeakers: ['Sara'],\n    dialogue: [\n      { speaker: 'Elias', tokens: [\n        { w: 'Sara', role: 'r-name', en: 'Sara', hi: 'सारा', pron: 'ZA-ra', type: 'Name · person' },\n        { w: ',', plain: true },\n        { w: 'was', role: 'r-question', en: 'what', hi: 'क्या', pron: 'vas', type: 'Question word' },\n        { w: 'machst', role: 'r-verb', en: 'are doing', hi: 'करती हो', pron: ",
+  "listening": [
+   "Elias: Was machst du am Wochenende, Sara?",
+   "Sara: Am Samstag spiele ich Tennis und am Sonntag gehe ich schwimmen. Und du?",
+   "Elias: Ich höre gern Musik, aber am liebsten fotografiere ich.",
+   "Sara: Macht das Spaß?",
+   "Elias: Ja, das macht großen Spaß!"
+  ]
+ },
+ "chapter-a1-17-goethe2-data.js": {
+  "scene": "Anmeldung \\u2014 Sprachschule, Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'Jan signs up for the Goethe exam. Frau Roth helps him fill out the registration form line by line — family name, address, postcode, email — so every piece of personal info from Chapters 1\\u201316 gets one more workout.',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'Recycles names, numbers, addresses & questions you already know'\n    ],\n    scene: 'Anmeldung \\u2014 Sprachschule, Berlin',\n    femaleSpeakers: ['Frau Roth'],\n    dialogue: [\n      { speaker: 'Frau Roth', tokens: [\n        { w: 'Hier', role: 'r-adverb', en: 'here', hi: 'यहाँ', pron: 'heer', type: 'Adverb' },\n        { w: 'ist', role: 'r-verb', en: 'is', hi: 'है', pron: 'ist', type: 'Verb · sein' },\n        { w: 'das', role: 'r-article', en: 'the (n",
+  "listening": [
+   "Jan: Guten Tag! Ich möchte mich für die Prüfung anmelden.",
+   "Frau Roth: Gern. Wie ist Ihr Familienname?",
+   "Jan: Müller. Mein Vorname ist Jan.",
+   "Frau Roth: Und Ihr Wohnort?",
+   "Jan: Ich wohne in Berlin, Postleitzahl 10115.",
+   "Frau Roth: Haben Sie eine E-Mail?",
+   "Jan: Ja, das ist mein Kontakt.",
+   "Frau Roth: Perfekt, alle Angaben sind richtig!"
+  ]
+ },
+ "chapter-a1-18-irregular-data.js": {
+  "scene": "Am Morgen \\u2014 Universität, Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'A normal morning at the Uni. Nora and Timo sort out how they get there, who\\'s too tired, who sees the library, and whether there\\'s cake in the Mensa — and almost every verb in the scene is an irregular one changing its stem.',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'Hear stem changes (fährst, siehst, schläft, gibt) in real speech'\n    ],\n    scene: 'Am Morgen \\u2014 Universität, Berlin',\n    femaleSpeakers: ['Nora'],\n    dialogue: [\n      { speaker: 'Nora', tokens: [\n        { w: 'Hallo', role: 'r-subject', en: 'hello', hi: 'नमस्ते', pron: 'HA-lo', type: 'Greeting' },\n        { w: 'Timo', role: 'r-name', en: 'Timo', hi: 'टीमो', pron: 'TEE-mo', type: 'Name · person' },\n        { w: '!', plain: true },\n ",
+  "listening": [
+   "Timo: Wie kommst du zur Uni, Nora?",
+   "Nora: Ich gehe zu Fuß. Und du?",
+   "Timo: Ich fahre mit dem Bus.",
+   "Nora: Und was macht ihr dann?",
+   "Timo: Wir treffen Max und essen in der Mensa. Heute gibt es Kuchen!",
+   "Nora: Schläft Max wieder zu wenig?",
+   "Timo: Ja, er ist immer müde. Danach liest er die Zeitung im Unicafé."
+  ]
+ },
+ "chapter-a1-19-satzposition-data.js": {
+  "scene": "In der Mensa \\u2014 Mittagspause, Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'Pia asks Lukas about his daily routine, and Lukas chimes in with his (not very disciplined) version. As they compare mornings, noons and nights, the verb keeps landing in the same place — position 2 — no matter what word starts the sentence.',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'Hear the verb stay in position 2 as sentences flip'\n    ],\n    scene: 'In der Mensa \\u2014 Mittagspause, Berlin',\n    femaleSpeakers: ['Pia'],\n    dialogue: [\n      { speaker: 'Pia', tokens: [\n        { w: 'Lukas', role: 'r-name', en: 'Lukas', hi: 'लुकास', pron: 'LOO-kas', type: 'Name · person' },\n        { w: ',', plain: true },\n        { w: 'wann', role: 'r-question', en: 'when', hi: 'कब', pron: 'van', type: 'Question word'",
+  "listening": [
+   "Lukas: Was machst du normalerweise am Wochenende, Pia?",
+   "Pia: Morgens schlafe ich lange, und dann frühstücke ich in Ruhe.",
+   "Lukas: Und nachmittags?",
+   "Pia: Nachmittags treffe ich oft Freunde. Manchmal gehen wir ins Café.",
+   "Lukas: Lernst du auch?",
+   "Pia: Ja, abends lerne ich täglich Deutsch. Aber sonntags lerne ich nichts!"
+  ]
+ },
+ "chapter-a1-2-data.js": {
+  "scene": "Ausspracheübung — Deutschkurs",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Say it <em>again.</em>',\n    intro: 'Second lesson, pure sound. Frau Bauer coaches Jonas through the five German vowels and the umlauts that Hindi does not have — and Jonas finds his inner German.',\n    outcomes: ['Every word is clickable for meaning + audio', 'Slow the audio to 0.5× to hear each vowel', 'Hear the umlauts ä, ö, ü in real speech'],\n    scene: 'Ausspracheübung — Deutschkurs',\n    femaleSpeakers: ['Frau Bauer'],\n    dialogue: [\n      { speaker: 'Frau Bauer', tokens: [\n        { w: 'Heute', role: 'r-time', en: 'today', hi: 'आज', pron: 'HOY-tuh', type: 'Adverb · time', why: 'heute = today; a front adverb pushes the verb to position 2.', ex: 'Heute üben wir.', exEn: 'Today we practise.' },\n        { w: 'üben', role: 'r-verb', en: 'practise', hi: 'अभ्यास करते हैं', pron: 'Ü-ben', type: 'Verb · üben (wir)', why: 'üben ",
+  "listening": [
+   "Frau Bauer: Jonas, sprich bitte langsam nach: Der Mann liest ein Buch.",
+   "Jonas: Der Mann liest ein Buch.",
+   "Frau Bauer: Sehr gut. Sag das noch einmal.",
+   "Jonas: Der Mann liest ein Buch."
+  ]
+ },
+ "chapter-a1-20-modalverben1-data.js": {
+  "scene": "Nach dem Kurs \\u2014 Sprachschule, Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'A party is coming. Jule wants to plan it, Finn definitely wants to come, and Finn must finish his homework first. As they sort out who can do what, every sentence shows the same shape — modal in position 2, main verb at the very end.',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'Hear the modal + infinitive \"bracket\" in real speech'\n    ],\n    scene: 'Nach dem Kurs \\u2014 Sprachschule, Berlin',\n    femaleSpeakers: ['Jule'],\n    dialogue: [\n      { speaker: 'Jule', tokens: [\n        { w: 'Finn', role: 'r-name', en: 'Finn', hi: 'फ़िन', pron: 'fin', type: 'Name · person' },\n        { w: ',', plain: true },\n        { w: 'morgen', role: 'r-time', en: 'tomorrow', hi: 'कल', pron: 'MOR-gen', type: 'Adverb · time' },\n",
+  "listening": [
+   "Jule: Was willst du am Wochenende machen, Finn?",
+   "Finn: Ich muss leider lernen, aber danach kann ich kommen. Und du?",
+   "Jule: Ich möchte eine Party machen! Wir wollen Pizza bestellen.",
+   "Finn: Kann Max auch kommen?",
+   "Jule: Ja, aber er muss diesmal bezahlen!"
+  ]
+ },
+ "chapter-a1-21-uhrzeit-data.js": {
+  "scene": "In der Mensa \\u2014 Terminplanung, Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'After the party plan, the group needs a time. Mara checks the calendar — her class runs until the afternoon — while Jonas, predictably, wants the latest possible start. Watch how every appointment locks onto the clock with um, am and von…bis.',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'Hear halb, Viertel, nach & vor on a real clock'\n    ],\n    scene: 'In der Mensa \\u2014 Terminplanung, Berlin',\n    femaleSpeakers: ['Mara'],\n    dialogue: [\n      { speaker: 'Mara', tokens: [\n        { w: 'Jonas', role: 'r-name', en: 'Jonas', hi: 'योनास', pron: 'YO-nas', type: 'Name · person' },\n        { w: ',', plain: true },\n        { w: 'wann', role: 'r-question', en: 'when', hi: 'कब', pron: 'van', type: 'Question word',",
+  "listening": [
+   "Jonas: Wie spät ist es, Mara?",
+   "Mara: Es ist Viertel vor neun.",
+   "Jonas: Oh, der Kurs beginnt um neun Uhr!",
+   "Mara: Kein Problem, wir haben noch eine Viertelstunde. Und wann triffst du Max?",
+   "Jonas: Am Abend, um halb acht. Wir gehen ins Kino.",
+   "Mara: Wie lange dauert der Film?",
+   "Jonas: Von halb acht bis zehn Uhr."
+  ]
+ },
+ "chapter-a1-22-berufe-data.js": {
+  "scene": "In der Mensa \\u2014 \\u00fcber Berufe, Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'Career day comes up in the canteen. Lea wants to be a doctor, Erik has just landed an engineering job, and between the two of them the two job patterns keep resurfacing: Ich bin … and Ich arbeite als …',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'Hear \"Ich bin Arzt\" vs \"Ich arbeite als …\" in real speech'\n    ],\n    scene: 'In der Mensa \\u2014 \\u00fcber Berufe, Berlin',\n    femaleSpeakers: ['Lea'],\n    dialogue: [\n      { speaker: 'Lea', tokens: [\n        { w: 'Erik', role: 'r-name', en: 'Erik', hi: 'एरिक', pron: 'AY-rik', type: 'Name · person' },\n        { w: '!', plain: true },\n        { w: 'Was', role: 'r-question', en: 'what', hi: 'क्या', pron: 'vas', type: 'Question word' },\n        { w: 'machst', role:",
+  "listening": [
+   "Lea: Was machst du beruflich, Erik?",
+   "Erik: Ich arbeite als Ingenieur in einem Büro. Und du?",
+   "Lea: Ich bin Lehrerin. Ich gebe Deutschunterricht.",
+   "Erik: Wie sind deine Arbeitszeiten?",
+   "Lea: Von acht bis zwei. Am Nachmittag habe ich frei.",
+   "Erik: Und verdienst du gut?",
+   "Lea: Ja, aber ich arbeite oft länger."
+  ]
+ },
+ "chapter-a1-23-familie-data.js": {
+  "scene": "In der Mensa \\u2014 Familienfotos, Berlin",
+  "storyBlockExcerpt": "story: {\n    eyebrow: 'Story-based learning',\n    headline: 'Stories that <em>stick.</em>',\n    intro: 'Ines brings a family photo to the canteen. As she and Nils pass it around, every \"this is my…/her…/his…\" puts a possessive article to work — and Ines, of course, has a photo of someone unexpected.',\n    outcomes: [\n      'Every word in every line is clickable',\n      'Native-speed audio with adjustable playback',\n      'Hear mein / meine / dein / sein / ihr in real speech'\n    ],\n    scene: 'In der Mensa \\u2014 Familienfotos, Berlin',\n    femaleSpeakers: ['Ines'],\n    dialogue: [\n      { speaker: 'Ines', tokens: [\n        { w: 'Hier', role: 'r-place', en: 'here', hi: 'यहाँ', pron: 'heer', type: 'Adverb · place' },\n        { w: ',', plain: true },\n        { w: 'Nils', role: 'r-name', en: 'Nils', hi: 'निल्स', pron: 'nils', type: 'Name · person' },\n        { w: '!', plain: true },\n       ",
+  "listening": [
+   "Ines: Ist das deine Familie, Nils?",
+   "Nils: Ja! Das ist mein Vater und das ist meine Mutter.",
+   "Ines: Hast du Geschwister?",
+   "Nils: Ich habe einen Bruder und eine Schwester. Mein Bruder ist ledig, meine Schwester ist verheiratet.",
+   "Ines: Und wer ist das?",
+   "Nils: Das ist meine Oma. Sie wohnt bei uns."
+  ]
+ }
+}

@@ -1,0 +1,76 @@
+Chapter 24 — Datum & Ordinalzahlen  ·  66 words
+
+**Core Active**
+
+- achtzig — eighty
+- das Datum — date
+- das Jahr — year
+- der April — April
+- der August — August
+- der Dezember — December
+- der Februar — February
+- der Geburtstag — birthday
+- der Januar — January
+- der Juli — July
+- der Juni — June
+- der Mai — May
+- der Monat — month
+- der März — March
+- der November — November
+- der Oktober — October
+- der September — September
+- die Einladung — invitation
+- dreißig — thirty
+- einhundert — one hundred
+- eintausend — one thousand
+- fünfzig — fifty
+- hundert — hundred
+- neunzig — ninety
+- sechzig — sixty
+- siebzig — seventy
+- tausend — thousand
+- vierzig — forty
+**Active Support**
+
+- ab — from (number)
+- alle — all
+- das Geschenk — present
+- der Frühling — spring
+- der Glückwunsch — congratulations
+- der Herbst — autumn
+- der Sommer — summer
+- der Winter — winter
+- der Wunsch — wish
+- der/die Erste — first
+- die Blume — flower
+- die Feier — celebration
+- die Jahreszeit — season
+- die Milliarde — billion
+- die Million — million
+- die Überraschung — surprise
+- dreimal — three times
+- dreitausend — three thousand
+- erste/erster — first
+- insgesamt — in total
+- mindestens — at least
+- rund (around) — around/about
+- schenken — to give (gift)
+- ungefähr — approximately
+- wünschen — to wish
+- zweihundert — two hundred
+- zweimal — twice
+**Passive**
+
+- (ein)hunderttausend — one hundred thousand
+- circa — approx.
+- das Geburtsdatum — date of birth
+- der Geburtsort — place of birth
+- der Kilometer — kilometre
+- der Meter — metre
+- der Überraschungstag — surprise day
+- die Einweihungsfeier — housewarming
+- zehntausend — ten thousand
+- zweihunderttausend — two hundred thousand
+**Reference / System**
+
+- die Ordinalzahl — ordinal number

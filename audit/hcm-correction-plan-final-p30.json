@@ -1,0 +1,390 @@
+{
+ "phase": "30 — final source-grounded correction plan for the 21 DATA/AUTHORING HCM findings (REVIEW ONLY)",
+ "generatedAt": "2026-08-14T09:21:07.327Z",
+ "inputs": [
+  "audit/hcm-final-disposition-p26.json",
+  "audit/hcm-data-correction-plan-p28.json",
+  "audit/hcm-detector-ownership-p29.json",
+  "chapter data files read first-hand",
+  "chapter-app.js renderer/inference source"
+ ],
+ "dispositionUsed": {
+  "byDesign": 16,
+  "dataAuthoring": 21,
+  "detectorFalsePositive": 0,
+  "unresolved": 0,
+  "total": 37,
+  "note": "Phase-27 Obgleich false-positive verdict is REVOKED per Phase 29; those 3 are included here as DATA/AUTHORING"
+ },
+ "countCheck": {
+  "expected": 21,
+  "found": 21,
+  "groupsCover": 21,
+  "match": true
+ },
+ "sharedRootCause": {
+  "id": "ROOT",
+  "title": "One renderer asymmetry generates every one of the 21",
+  "spanSide": "chapter-app.js:2862 — const spanRole = roleFor(word, null, isSentenceInitial(...)); span.className = ('de-link ' + spanRole).trim(). For an auto-linkified word there is no authored token, so roleFor falls through to guessRole.",
+  "guessRole": "chapter-app.js:735-754, a pure SURFACE heuristic in this order: (1) known chapter adjective stem + strong ending → r-adjective; (2) /^[A-ZÄÖÜ]/ → r-object; (3) lich|ig|isch|bar|sam|los|haft|voll|ell|iv → r-adjective; (4) er|es|em|ste… → r-adjective; (5) en|st|te|ten|iert|iere… or vowel+t → r-verb; (6) everything else → r-adverb.",
+  "popupSide": "chapter-app.js:2871 — let base = (spanRole && spanRole !== 'plain' && !hit.role) ? Object.assign({}, hit, { role: spanRole }) : hit. The occurrence role is injected ONLY when the resolved entry has no role of its own. When the entry HAS a role, the entry wins for the popup while the span keeps the guess.",
+  "consequence": "the span is painted by a surface guess and the popup by a real dictionary resolution. Wherever the two disagree, HCM fires. This is not a bug in either function — each behaves exactly as documented — it is an asymmetry between them.",
+  "authoritativeSide": "the POPUP. guessRole is explicitly the fallback (\"Explicit role in data wins; empty or plain falls back to automatic inference\", :756-759); lookupWord (:2716) performs real resolution (exact surface → lemma → declension tables). A dictionary hit outranks a spelling heuristic.",
+  "confidence": "PROVEN — every rendered role below is reproduced by hand-applying guessRole to the surface"
+ },
+ "groups": [
+  {
+   "id": "G-A",
+   "title": "Auto-linkified prose: guessRole surface heuristic disagrees with the resolved lexeme class",
+   "count": 14,
+   "findings": [
+    {
+     "chapter": "chapter-b2-15-konzessivsaetze-obgleich.html",
+     "section": "exercises",
+     "index": 782,
+     "surface": "Obgleich"
+    },
+    {
+     "chapter": "chapter-b2-15-konzessivsaetze-obgleich.html",
+     "section": "exercises",
+     "index": 790,
+     "surface": "Obgleich"
+    },
+    {
+     "chapter": "chapter-b2-15-konzessivsaetze-obgleich.html",
+     "section": "exercises",
+     "index": 798,
+     "surface": "Obgleich"
+    },
+    {
+     "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+     "section": "exercises",
+     "index": 794,
+     "surface": "Infolgedessen"
+    },
+    {
+     "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+     "section": "exercises",
+     "index": 801,
+     "surface": "infolgedessen"
+    },
+    {
+     "chapter": "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html",
+     "section": "exercises",
+     "index": 806,
+     "surface": "Infolgedessen"
+    },
+    {
+     "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+     "section": "exercises",
+     "index": 241,
+     "surface": "dokumentiert"
+    },
+    {
+     "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+     "section": "exercises",
+     "index": 245,
+     "surface": "dokumentiert"
+    },
+    {
+     "chapter": "chapter-c1-26-passiv-und-passiversatzformen.html",
+     "section": "exercises",
+     "index": 247,
+     "surface": "dokumentiert"
+    },
+    {
+     "chapter": "chapter-b2-45-passiversatz-sich-lassen.html",
+     "section": "exercises",
+     "index": 813,
+     "surface": "sich"
+    },
+    {
+     "chapter": "chapter-b2-45-passiversatz-sich-lassen.html",
+     "section": "exercises",
+     "index": 818,
+     "surface": "sich"
+    },
+    {
+     "chapter": "chapter-b1-17-nebensatz-damit-um-zu.html",
+     "section": "exercises",
+     "index": 925,
+     "surface": "um"
+    },
+    {
+     "chapter": "chapter-a1-34-schreiben.html",
+     "section": "exercises",
+     "index": 448,
+     "surface": "Liebe"
+    },
+    {
+     "chapter": "chapter-a1-37-praep-dativ.html",
+     "section": "listening",
+     "index": 527,
+     "surface": "Fuß"
+    }
+   ],
+   "perSurface": [
+    {
+     "surface": "Obgleich",
+     "chapters": [
+      "b2-15"
+     ],
+     "n": 3,
+     "authoredRoleElsewhere": "r-konz (parserSentence line 130, exercises.sentenceOrdering roles line 502), r-conjunction (words/dialogue lines 45,65,75), r-connector (reading tokens)",
+     "renderedRole": "r-object",
+     "guessRoleTrace": "capitalised → rule 2 → r-object",
+     "popupHeadword": "obgleich (PROVEN in P29 full pass — same lexeme, case-only difference; popup ownership is no longer in question)",
+     "popupRole": "adjective amber",
+     "authoritative": "popup/entry, and separately the chapter’s own authored r-konz/r-conjunction intent",
+     "confidence": "PROVEN"
+    },
+    {
+     "surface": "Infolgedessen / infolgedessen",
+     "chapters": [
+      "b2-16"
+     ],
+     "n": 3,
+     "authoredRoleElsewhere": "none for these occurrences (builder roles map line 503 names only \"sodass\")",
+     "renderedRole": "r-object ×2 (capitalised), r-verb ×1 (lower-case)",
+     "guessRoleTrace": "capitalised → r-object; lower-case ends \"en\" → rule 5 → r-verb",
+     "popupRole": "adverb cyan, badge \"Adverb (discourse marker)\"",
+     "authoritative": "popup — it is a discourse adverb in every occurrence",
+     "confidence": "PROVEN"
+    },
+    {
+     "surface": "dokumentiert",
+     "chapters": [
+      "c1-26"
+     ],
+     "n": 3,
+     "authoredRoleElsewhere": "none (plain text in mcq options line 235 / match pairs line 237)",
+     "renderedRole": "r-verb",
+     "guessRoleTrace": "ends \"iert\" → rule 5 → r-verb",
+     "popupRole": "adjective amber, badge \"Adjective (Partizip II)\"",
+     "authoritative": "popup — \"Die Ergebnisse sind dokumentiert\" is Zustandspassiv, i.e. a predicative adjective, which is the chapter’s teaching point",
+     "confidence": "PROVEN"
+    },
+    {
+     "surface": "sich",
+     "chapters": [
+      "b2-45"
+     ],
+     "n": 2,
+     "authoredRoleElsewhere": "r-lassen (exercises.builder.roles line 524)",
+     "renderedRole": "r-adverb",
+     "guessRoleTrace": "lower-case, matches no ending rule → rule 6 → r-adverb",
+     "popupRole": "subject blue, badge \"Pronoun\"",
+     "authoritative": "popup — reflexive pronoun",
+     "confidence": "PROVEN",
+     "correctsPhase28": "P28 group D1 supposed the builder roles map was being ignored. It is NOT: builderWidget consumes it at chapter-app.js:3301 (const role = B.roles[word] || ''). Builder tokens are <button class=\"builder-token\">, excluded from linkification (LINK_EXCLUDE, :2818) and absent from the QA node list, so they cannot be these findings. These two occurrences are auto-linkified prose elsewhere in the exercises."
+    },
+    {
+     "surface": "um",
+     "chapters": [
+      "b1-17"
+     ],
+     "n": 1,
+     "authoredRoleElsewhere": "r-purpose (exercises.builder.roles line 487)",
+     "renderedRole": "r-adverb",
+     "guessRoleTrace": "lower-case, no ending match → r-adverb",
+     "popupRole": "preposition gold, badge \"Preposition\"",
+     "authoritative": "popup",
+     "confidence": "PROVEN",
+     "correctsPhase28": "same correction as \"sich\" — the builder map is consumed; this occurrence is not a builder token"
+    },
+    {
+     "surface": "Liebe",
+     "chapters": [
+      "a1-34"
+     ],
+     "n": 1,
+     "authoredRoleElsewhere": "r-adjective with type \"Salutation\" (parser tokens lines 334, 368)",
+     "renderedRole": "r-adjective",
+     "guessRoleTrace": "chapter vocab has adjective \"lieb\" (line 248), so rule 1 fires: stem \"lieb\" + \"e\" → r-adjective",
+     "popupRole": "object green, badge \"Noun\"",
+     "authoritative": "AMBIGUOUS — in \"Liebe Grüße\" it is the salutation adjective (the chapter authors exactly that), but the popup resolved die Liebe. Here the SPAN is arguably right and the POPUP wrong.",
+     "confidence": "REQUIRES REVIEW"
+    },
+    {
+     "surface": "Fuß",
+     "chapters": [
+      "a1-37"
+     ],
+     "n": 1,
+     "authoredRoleElsewhere": "r-dativ (dialogue line 110), r-place (parser line 401)",
+     "renderedRole": "r-verb per the co-located ROLE_CONTRADICTS_BADGE",
+     "guessRoleTrace": "DOES NOT REPRODUCE — capitalised \"Fuß\" should give r-object by rule 2, and a sentence-initial reading would give r-adverb. r-verb matches no path.",
+     "popupRole": "place orange, badge \"Noun\"",
+     "authoritative": "unknown until the rendered role is traced live",
+     "confidence": "REQUIRES REVIEW — the one case whose rendered role is not explained by the shared root"
+    }
+   ],
+   "correctionSite": "EITHER (a) renderer/role-inference: prefer the resolved entry’s role over guessRole when lookupWord returns a hit with a role — one edit at chapter-app.js:2862/2871, fixes ~13 of 14 at once but has corpus-wide blast radius; OR (b) chapter data: token-ise these specific occurrences so an authored role exists. (a) is architecturally correct, (b) is zero-risk.",
+   "hcmResolved": 14,
+   "otherQaResolved": "11 ROLE_CONTRADICTS_BADGE on the same nodes (all except the 3 Obgleich, which carry no co-located RCB)",
+   "elsewhereInCorpus": "YES — this is the general behaviour of every auto-linkified word in the corpus (1,020 RCB findings are the same asymmetry seen through the role check rather than the colour check). These 14 are only the subset where a popup also opened and the colours differed."
+  },
+  {
+   "id": "G-B",
+   "title": "Homograph: guessRole is right for the surface, but lookupWord resolved the wrong member of a taught minimal pair",
+   "count": 6,
+   "findings": [
+    {
+     "chapter": "chapter-a1-8-goethemini1.html",
+     "section": "vocabulary",
+     "index": 133,
+     "surface": "deutsch"
+    },
+    {
+     "chapter": "chapter-a1-8-goethemini1.html",
+     "section": "grammar",
+     "index": 542,
+     "surface": "deutsch"
+    },
+    {
+     "chapter": "chapter-a1-8-goethemini1.html",
+     "section": "grammar",
+     "index": 581,
+     "surface": "deutsch"
+    },
+    {
+     "chapter": "chapter-a1-8-goethemini1.html",
+     "section": "grammar",
+     "index": 585,
+     "surface": "deutsch"
+    },
+    {
+     "chapter": "chapter-a1-15-cafe.html",
+     "section": "vocabulary",
+     "index": 168,
+     "surface": "Zahlen"
+    },
+    {
+     "chapter": "chapter-a1-15-cafe.html",
+     "section": "grammar",
+     "index": 581,
+     "surface": "Zahlen"
+    }
+   ],
+   "perSurface": [
+    {
+     "surface": "deutsch",
+     "chapters": [
+      "a1-8"
+     ],
+     "n": 4,
+     "renderedRole": "r-adjective",
+     "guessRoleTrace": "ends \"isch\" → rule 3 → r-adjective, which is CORRECT for the lower-case nationality adjective",
+     "popupRole": "object green — it resolved the capitalised language noun Deutsch",
+     "sourceEvidence": "both entries are authored deliberately: { de: 'Deutsch', pos: 'language' } line 231 and { de: 'deutsch', pos: 'adjective' } line 233; the chapter lists the confusion as a top A1 mistake at line 439",
+     "authoritative": "the SPAN. lower-case deutsch is the adjective; the popup picked the wrong lexeme",
+     "correctionSite": "LEXICON RESOLUTION — lookupWord (chapter-app.js:2716) must respect case when both members exist. Not a data defect: the data already distinguishes them.",
+     "confidence": "PROVEN"
+    },
+    {
+     "surface": "Zahlen",
+     "chapters": [
+      "a1-15"
+     ],
+     "n": 2,
+     "renderedRole": "r-verb",
+     "guessRoleTrace": "ends \"en\" → rule 5 → r-verb, which is CORRECT for \"Zahlen, bitte!\" (the verb zahlen, capitalised only because it opens the utterance)",
+     "popupRole": "object green — it resolved the plural noun die Zahlen",
+     "sourceEvidence": "{ de: 'zahlen', pos: 'verb', ex: 'Zahlen, bitte!' } line 259; phrase table line 379 renders 'Zahlen, bitte.' inside a .de span",
+     "authoritative": "the SPAN",
+     "correctionSite": "LEXICON RESOLUTION — sentence-initial capitalisation must not force the noun reading. isSentenceInitial is already computed at :2862 and passed to roleFor; the same signal is available to lookupWord but is not used for resolution.",
+     "confidence": "PROVEN"
+    }
+   ],
+   "hcmResolved": 6,
+   "otherQaResolved": "none — no CASE_COLLISION finding fires on these nodes, which is itself worth noting: the existing case-collision detectors did not catch either pair",
+   "elsewhereInCorpus": "LIKELY — 236 CASE_COLLISION_CAPITALISED and 14 CASE_COLLISION_LOWERCASE findings exist corpus-wide, so capitalisation-driven mis-resolution is a known family. Whether other pairs also escape those detectors was not measured."
+  },
+  {
+   "id": "G-C",
+   "title": "Non-grammatical entity: a bare letter given a grammar role by the fallback",
+   "count": 1,
+   "findings": [
+    {
+     "chapter": "chapter-a1-39-ortsangaben.html",
+     "section": "vocabulary",
+     "index": 570,
+     "surface": "a"
+    }
+   ],
+   "perSurface": [
+    {
+     "surface": "a",
+     "chapters": [
+      "a1-39"
+     ],
+     "n": 1,
+     "authoredRoleElsewhere": "none — no token for it exists in a1-39 data",
+     "renderedRole": "r-adverb",
+     "guessRoleTrace": "lower-case, matches no ending rule → rule 6 (the catch-all) → r-adverb",
+     "popupRole": "--ink-secondary, from ROLE_COLOR_VAR letter|name|conjunction (chapter-app.js:2022)",
+     "authoritative": "the POPUP is correct by design. The span should not carry a grammar colour at all — a letter is not a part of speech.",
+     "correctionSite": "TOKENISATION — guessRole rule 6 assigns r-adverb to anything it cannot classify, including single letters. Either exclude 1-character surfaces from role colouring, or author the letter as a letter token.",
+     "explicitNote": "this is NOT proposed in order to make the colours match. The popup stays exactly as it is; only the span’s unjustified adverb colour is questioned.",
+     "confidence": "PROVEN for the head side, STRONGLY SUPPORTED for the span side"
+    }
+   ],
+   "hcmResolved": 1,
+   "otherQaResolved": "none",
+   "elsewhereInCorpus": "UNMEASURED — any single letter in linkified prose would take the same path"
+  }
+ ],
+ "correctionSiteSummary": {
+  "renderer/role-inference": "G-A (14 findings) — prefer a resolved entry’s role over the surface guess",
+  "lexicon resolution": "G-B (6) — case-respecting resolution for taught minimal pairs",
+  "tokenisation": "G-C (1) — stop assigning a grammar role to unclassifiable 1-character surfaces",
+  "chapter data": "the zero-risk alternative for G-A: token-ise the 14 occurrences instead of changing the renderer",
+  "curriculum review": "G-A \"Liebe\" and G-A \"Fuß\" — 2 findings that cannot be decided from source alone"
+ },
+ "filesThatWouldNeedEditing": {
+  "ifRendererRoute": [
+   "chapter/chapter-app.js:2862 (spanRole assignment) and/or :2871 (occurrence-role injection) — G-A",
+   "chapter/chapter-app.js:2716 lookupWord resolution order — G-B",
+   "chapter/chapter-app.js:735-754 guessRole rule 6 — G-C"
+  ],
+  "ifDataRoute": [
+   "chapter/chapter-b2-15-…-data.js, -b2-16-, -c1-26-, -b2-45-, -b1-17-, -a1-34-, -a1-37- — token-ise the 14 G-A occurrences",
+   "no data edit can fix G-B or G-C: both live in resolution/inference, and the data is already correct"
+  ],
+  "linesNotToTouch": [
+   "any English text:/en:/hi: sibling",
+   "qa-engine.js",
+   "qa-assert.js",
+   "qa-data-lint.js",
+   "chapter.css",
+   "every baseline in audit/"
+  ]
+ },
+ "blastRadiusWarning": "the renderer route is architecturally right but corpus-wide: guessRole currently paints EVERY auto-linkified word, and 1,020 ROLE_CONTRADICTS_BADGE findings are the same asymmetry. Changing :2862 would recolour words across all 259 chapters and must be measured by a full before/after sweep, not spot-checked. The data route touches 7 files and cannot regress anything else.",
+ "mustRemainUntouched": [
+  "the 16 BY-DESIGN findings — the popup naming a more specific family member is correct behaviour",
+  "the popup side of G-C (ink-secondary for letters is deliberate, chapter-app.js:2022)",
+  "the popup side of G-B (the entries are authored correctly; only resolution picks wrongly)",
+  "qa-engine.js — Phase 29 established there is no detector false positive to fix",
+  "audit/obgleich-live-p27.json and every other prior artifact — superseded on one point, not rewritten"
+ ],
+ "openQuestionsRequiringReview": [
+  "\"Liebe\" (a1-34/448): the span may be RIGHT and the popup wrong — the only finding where that direction is plausible",
+  "\"Fuß\" (a1-37/527): rendered r-verb is not reproduced by any guessRole path; trace it live before proposing anything",
+  "whether the renderer or the data route is preferred for G-A — an architectural decision, not a QA one"
+ ],
+ "productionSafety": {
+  "productionCodeModified": false,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "qaEngineModified": false,
+  "qaAssertModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false
+ },
+ "filesCreated": [
+  "audit/hcm-correction-plan-final-p30.json"
+ ],
+ "filesModified": "none"
+}

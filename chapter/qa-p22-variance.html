@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P22 variance reconciliation</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:18px;max-width:760px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:58vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P22 — repeated-isolation variance reconciliation</h1>
+<div class="sub">Renders one chapter at a time, N independent times, through the same stability gate as P14/P15/P21. Unstable renders are discarded and retried, never counted. Every stable run is persisted to <code>kw_p22_runs</code>. Investigation only.</div>
+<div class="st" id="status">idle · KWP22.series(file,n)</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script src="qa-finding-serializer.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const KEY='kw_p22_runs';
+function store(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return{};}}
+function commit(file,rec){const s=store();(s[file]=s[file]||[]).push(rec);localStorage.setItem(KEY,JSON.stringify(s));}
+function freshFrame(){const o=$('#frame');const n=document.createElement('iframe');n.id='frame';o.parentNode.replaceChild(n,o);}
+function ready(f,cb){
+  const S=180,N=3,HARD=30000,t0=Date.now();let last=null,same=0;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const nodes=d.querySelectorAll('.rw, .de-link');if(!nodes.length)return null;
+    const roles={};let n=0;for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;return n+'|'+d.querySelectorAll('[id^="sec-"]').length+'|'+d.querySelectorAll('.wp-badge').length+'|'+
+      Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{if(Date.now()-t0>HARD)return cb('hard-timeout');
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,S);}
+    const s=sig();if(s===null){last=null;same=0;return setTimeout(poll,S);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=N)return cb('stable');setTimeout(poll,S);};
+  poll();
+}
+// One render + engine run. Also captures an occurrence IDENTITY fingerprint
+// (ordered surface list) so drift can be compared without relying on indices.
+function once(file){
+  return new Promise(resolve=>{
+    const f=$('#frame');let done=false;const fin=r=>{if(done)return;done=true;resolve(r);};
+    const timer=setTimeout(()=>fin({file,error:'timeout',errorKind:'hard-timeout'}),90000);
+    f.onload=()=>ready(f,(state)=>{
+      if(state!=='stable'){clearTimeout(timer);return fin({file,readyState:state,discarded:true});}
+      const d=f.contentDocument,w=f.contentWindow;
+      const s=d.createElement('script');s.src='qa-engine.js?v='+Date.now();
+      s.onerror=()=>{clearTimeout(timer);fin({file,error:'engine load failed',errorKind:'injection-error'});};
+      s.onload=()=>{try{
+        const nodes=[].slice.call(d.querySelectorAll('.rw, .de-link')).filter(n=>!n.querySelector('.rw, .de-link'))
+          .filter(n=>!n.closest('.word-pop')).filter(n=>!!(n.offsetParent||n.getClientRects().length));
+        const surfaces=nodes.map(n=>n.textContent.trim());
+        let h=0x811c9dc5;const j=surfaces.join('\u0001');
+        for(let i=0;i<j.length;i++)h=((h^j.charCodeAt(i))*0x01000193)>>>0;
+        const roleColours={};nodes.forEach(n=>{const m=String(n.className).match(/\br-([a-z-]+)\b/);if(!m)return;
+          const k=m[1]+' '+getComputedStyle(n).color;roleColours[k]=(roleColours[k]||0)+1;});
+        const qa=w.KWQA.run();
+        const findings=(qa.findings||[]).map(window.KWFSER.serialize);
+        const hcm=(qa.findings||[]).filter(x=>x.code==='HEADWORD_COLOUR_MISMATCH')
+          .map(x=>({section:x.section,index:x.index,surface:x.surface,span:x.detail.span,head:x.detail.head}));
+        clearTimeout(timer);
+        fin({file,readyState:state,occurrences:qa.occurrences,checked:qa.checked,findings:findings.length,
+          clean:!!qa.clean,counts:qa.counts,hcm,surfaceFingerprint:h.toString(16),surfaceCount:surfaces.length,
+          roleColours,serialized:findings});
+      }catch(e){clearTimeout(timer);fin({file,error:String(e&&e.stack||e),errorKind:'measurement-error'});}};
+      d.head.appendChild(s);
+    });
+    f.src=file+'?p22='+Date.now()+'_'+Math.random();
+  });
+}
+window.KWP22={
+  key:KEY,reset(){localStorage.removeItem(KEY);},
+  summary(){const s=store();const o={};Object.keys(s).forEach(f=>{o[f]=s[f].map(r=>({occ:r.occurrences,find:r.findings,hcm:(r.hcm||[]).length,fp:r.surfaceFingerprint}));});return o;},
+  async series(file,n){
+    const out=[];let attempts=0;
+    while(out.length<n&&attempts<n*3){
+      attempts++;
+      $('#status').textContent=file.slice(8,34)+'  stable '+out.length+'/'+n+'  (attempt '+attempts+')';
+      const r=await once(file);
+      if(r.error||r.discarded){freshFrame();await new Promise(x=>setTimeout(x,800));continue;}
+      commit(file,r);out.push(r);
+      $('#out').textContent=JSON.stringify(this.summary(),null,1);
+    }
+    return {file,stableRuns:out.length,attempts};
+  }
+};
+</script>
+</body></html>

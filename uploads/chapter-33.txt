@@ -1,0 +1,32 @@
+CHAPTER 33 — Relativsätze im Nominativ   ·   Grammar: Relativsätze (Nom.)   ·   Theme: Kultur & Relativsätze   ·   29 words
+
+German (lemma)	Article	Part of Speech	English	NW Source	Status	Tier	Goethe	Activated in	Reinforced in
+abstrakt		Adverb/Other	abstract	NW K12	Active Core	B	Low	33	34, 35
+der Ausblick	der	Noun	view	NW K12	Active Core	B	Low	33	34, 35
+dahinter		Adverb/Other	behind it	NW K12	Active Core	B	Low	33	34, 35
+der/die Angehörige		Adverb/Other	relative	NW K8	Active Core	B	Medium	33	34, 35
+der/die Prominente		Adverb/Other	celebrity	NW K12	Active Core	B	Low	33	34, 35
+Elektro		Adverb/Other	electric	NW K12	Active Core	B	Low	33	34, 35
+der Hit	der	Noun	hit	NW K12	Active Core	B	Low	33	34, 35
+der Hörer	der	Noun	listener	NW K12	Active Core	B	Low	33	34, 35
+jährlich		Adjective	vearly	NW K12	Active Core	B	Low	33	34, 35
+der Nachrichtensprecher	der	Noun	newsreader	NW K12	Active Core	A	High	33	34, 35
+die Rechnungsinformation	die	Noun	invoice information	NW K12	Active Core	A	High	33	34, 35
+rockig		Adjective	rocking	NW K12	Active Core	B	Low	33	34, 35
+die Rockmusik	die	Noun	rock music	NW K12	Active Core	B	Low	33	34, 35
+die Sammlerin	die	Noun	collector	NW K12	Active Core	B	Low	33	34, 35
+der Stehplatz	der	Noun	standing room	NW K12	Active Core	B	Low	33	34, 35
+verschlafen		Verb	to oversleep	NW K12	Active Core	B	Low	33	34, 35
+der Wanderer	der	Noun	wanderer	NW K12	Active Core	B	Low	33	34, 35
+zuzüglich		Adjective	in addition	NW K12	Active Core	B	Low	33	34, 35
+der Firmenkunde	der	Noun	business client	NW K12	Active Support	C	Low	34	35
+die Kontaktdaten	die	Noun	contact details	NW K12	Active Support	C	Low	34	35
+die Kunstgeschichte	die	Noun	art history	NW K12	Active Support	C	Low	34	35
+das Märchenschloss	das	Noun	fairytale castle	NW K12	Active Support	C	Low	34	35
+der Synchronsprecher	der	Noun	voice actor	NW K12	Active Support	C	Low	34	35
+die Unterhaltung	die	Noun	entertainment	NW K12	Active Support	C	Low	34	35
+die Versandart	die	Noun	shipping method	NW K12	Active Support	C	Low	34	35
+die Übernachtung	die	Noun	overnight stay	NW K12	Active Support	C	Low	34	35
+das Bezugswort	das	Grammar term	antecedent	NW K12	Reference/System	Sys	—	—	—
+das Relativpronomen	das	Grammar term	relative pronoun	NW K12	Reference/System	Sys	—	—	—
+der Relativsatz	der	Grammar term	relative clause	NW K12	Reference/System	Sys	—	—	—

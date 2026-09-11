@@ -1,0 +1,94 @@
+{
+ "phase": "32 — validation of MCQ LINK_EXCLUDE behaviour before any fix (REVIEW ONLY, nothing modified)",
+ "generatedAt": "2026-08-14T10:38:19.052Z",
+ "verdictHeadline": "INTENDED EXCLUSION: PROVEN. ROOT CAUSE: NOT PROVEN. Per the brief’s own gate (\"If unclear, stop before proposing a production fix\"), NO fix is proposed and no candidate was simulated.",
+ "step1_intendedBehaviour": {
+  "classification": "PROVEN intentional exclusion",
+  "evidence": [
+   "chapter-app.js:2817 carries the explicit comment \"Never linkify inside these (already interactive or would double-wrap).\"",
+   "chapter-app.js:2818 LINK_EXCLUDE = button,a,summary,input,textarea,.word-pop,.builder-token,.builder-slot,.mcq-options,.quiz-stage,.reading-passage,.rw,.de-link,[data-no-link] — .mcq-options is named explicitly, AND the generic element selector \"button\" is the very first entry, so an mcq option is excluded twice over (mcq options are <button class=\"mcq-option\">, chapter-app.js:3047 and :3346)",
+   "the neighbouring exclusions demonstrably work in the same rendered page: .quiz-stage 0 de-links, .builder-token/.builder-slot 0, .reading-passage 0",
+   "both linkifiers consult the same list: linkifyDe at :2826 and linkifyGated at :2906, each via elDe.closest(LINK_EXCLUDE)",
+   "the intent is coherent with the widget design — mcq options are themselves click targets (b.addEventListener('click') at :3051/:3350), so per-word popups inside them would fight the option button for the tap"
+  ],
+  "conclusion": "German text inside mcq options is intended NOT to be word-linkified. This is deliberate, redundantly specified, and effective everywhere else in the same list."
+ },
+ "step2_domLifecycle": {
+  "sequenceRead": [
+   "chapter-app.js:3043 const opts = el('div', { class: 'mcq-options' })",
+   "chapter-app.js:3047-3049 const b = el('button', { class: 'mcq-option', type: 'button' }, el('span',{class:'mcq-key'}, …), el('span', { html: optionIsGerman(opt) ? '<span class=\"de\">'+opt+'</span>' : opt })) — the .de is created as a CHILD of the button in the same synchronous el() call, so it is inside button.mcq-option from the moment the button exists",
+   "chapter-app.js:3051 option click handler bound to the button",
+   "chapter-app.js:3423/3543 linkifyDe(host) + linkifyGated(host) run on an ATTACHED host after all blocks are appended"
+  ],
+  "detachedSubtreeHypothesis": "DISPROVEN. Two independent reasons: (a) el() nests the .de inside the button synchronously, so there is no window in which the .de exists without a button ancestor; (b) live inspection confirms every mcq .de is currently attached with closest(LINK_EXCLUDE) === BUTTON.mcq-option, so a linkifier running now would correctly skip it. Phase 31 recorded this hypothesis as STRONGLY SUPPORTED; that grading was wrong and is retracted here.",
+  "whereTheAncestorRelationshipIsMissing": "NOWHERE — the ancestor relationship is present. The exclusion is not failing because of the DOM shape."
+ },
+ "step2b_decisiveNegativeEvidence": {
+  "observation": "in the rendered b2-15, 30 .de-link nodes exist inside .mcq-options (5 host .de elements), yet NONE of those 5 host .de elements carries any dataset key at all — no data-linked (set by linkifyDe at :2827) and no data-linked-gated (set by linkifyGated at :2907)",
+  "liveDump": "[{tag:SPAN,cls:\"de\",ds:{}} , {tag:SPAN,cls:\"\",ds:{}} , {tag:BUTTON,cls:\"mcq-option\",ds:{}} , {tag:DIV,cls:\"mcq-options\",ds:{}} , {tag:DIV,cls:\"exercise-block\",ds:{}}]",
+  "inference": "neither known linkifier processed these elements — both stamp their marker BEFORE wrapping, so a processed host always carries one. The .de-link spans inside mcq options are therefore produced by a THIRD, unidentified code path that does not consult LINK_EXCLUDE.",
+  "confidence": "PROVEN that neither linkifyDe nor linkifyGated processed them; the identity of the actual producer is NOT established",
+  "alsoNotable": "document-wide, 30 of 30 .de-link nodes inside any <button> are exactly these mcq ones — no other button type is breached"
+ },
+ "step3_candidates": {
+  "assessmentBlocked": "every candidate in the brief presumes the breach comes from linkifyDe’s ancestor test. That presumption is now disproven, so all four would be fixes to the wrong site.",
+  "A_attachBeforeLinkify": "INEFFECTIVE — the subtree is already attached and already inside a button; attachment order is not the variable",
+  "B_passHostIntoLinkifyDe": "INEFFECTIVE — same reason; closest() already resolves to BUTTON.mcq-option",
+  "C_mcqGuardAtCallSite": "INEFFECTIVE against the real producer — linkifyDe/linkifyGated are not creating these nodes",
+  "D_smallestArchitectureCompatible": "CANNOT BE IDENTIFIED until the producing code path is found. The correct next step is to locate the third linkification path (candidates to inspect: any MutationObserver-driven sweep, any wrapWordsIn/story-token path invoked on exercise content, or a re-render that rebuilds option innerHTML from already-linkified markup)."
+ },
+ "step4_simulatedFixRegression": {
+  "run": false,
+  "reason": "simulating a patch to linkifyDe or linkifyGated would prove nothing: those functions did not create the 14 links. A harness patch would leave all 14 in place and produce a misleading \"fix does not work\" result, or worse, a misleading pass. Refused deliberately rather than reported as evidence.",
+  "whatWasVerifiedInstead": {
+   "excludedRegionsStillClean": {
+    "quizStage": 0,
+    "builderTokens": 0,
+    "readingPassage": 0
+   },
+   "mcqBreachScope": "30 de-links across 5 host .de elements in b2-15 alone",
+   "normalTokensUnaffected": "718 .de-link total in b2-15, i.e. the overwhelming majority are legitimate story/reading/grammar/vocabulary links outside any excluded region"
+  }
+ },
+ "step5_mcqInteraction": {
+  "assessedFromSource": true,
+  "optionSelection": "unaffected by any exclusion change — the handler is bound to the button itself (chapter-app.js:3051, :3350), not to inner word spans",
+  "answerChecking": "unaffected — b.classList.add(is-correct/is-wrong) and the disable sweep $$('.mcq-option', opts).forEach(x => x.disabled = true) operate on the button (:3053-3056, :3352-3355)",
+  "hoverSelectionStates": "unaffected — CSS keys off .mcq-option / .is-correct / .is-wrong",
+  "keyboardInteraction": "unaffected — <button type=\"button\"> keeps native focus/Enter/Space semantics; removing inner spans does not change tab order",
+  "caveat": "today the inner word spans ARE clickable inside a disabled-able button, which means a learner can currently tap a word inside a distractor option. Removing that restores the intended single tap target. No regression to option behaviour is expected from removing inner linkification."
+ },
+ "step6_scopeRespected": {
+  "guessRoleChanged": false,
+  "lookupWordChanged": false,
+  "qaEngineChanged": false,
+  "perWordRoleMetadataAdded": false
+ },
+ "step7_recommendation": {
+  "A_intendedMcqBehaviour": "PROVEN: mcq option text must not be word-linkified (comment + double exclusion + effective sibling exclusions + option-button click design)",
+  "B_provenRootCause": "NOT PROVEN. Proven negatives only: the DOM ancestry is correct, both known linkifiers check LINK_EXCLUDE, and neither processed these hosts (no dataset marker). An unidentified third path creates the links.",
+  "C_candidateFixes": "all four brief candidates are invalidated by the negative evidence; none is recommended",
+  "D_recommendedSmallestFix": "NONE YET — stop, per the brief’s gate. Next phase should identify the producing code path, not patch a presumed one.",
+  "E_diagnosticResults": "exclusion effective for quiz-stage/builder/reading-passage (0 each); breached only for mcq options (30 nodes in b2-15); host .de elements carry no linkifier marker",
+  "F_expectedReduction": "still 14 HCM and 11 RCB if mcq option text stops being linkified — unchanged from Phase 31, since the target set is unchanged",
+  "G_regressionRisks": "unquantifiable until the producer is known. If the producer turns out to be a re-render path, the fix may also affect other re-rendered regions.",
+  "H_filesThatWouldChange": "UNKNOWN — cannot be named without the producing path. It will be somewhere in chapter/chapter-app.js; no chapter data, CSS, or QA file is implicated."
+ },
+ "correctionsToEarlierPhases": [
+  "Phase 31 graded the detached-subtree explanation STRONGLY SUPPORTED. It is now DISPROVEN. The finding that all 14 sit inside button.mcq-option and that .mcq-options is in LINK_EXCLUDE still stands — only the mechanism was wrong."
+ ],
+ "productionSafety": {
+  "productionCodeModified": false,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "qaEngineModified": false,
+  "qaAssertModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "sweepRun": false
+ },
+ "filesCreated": [
+  "audit/mcq-link-exclude-p32.json"
+ ],
+ "filesModified": "none"
+}

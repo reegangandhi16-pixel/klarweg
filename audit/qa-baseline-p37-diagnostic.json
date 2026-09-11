@@ -1,0 +1,623 @@
+{
+ "runId": "sweep-p37-diagnostic-2026-08-15",
+ "generatedAt": "2026-08-15T07:53:39.326Z",
+ "preserves": "audit/qa-baseline-p14-findings.json, -p15-, -p21- all unchanged; P23/P24 measurements documented in their own artifacts",
+ "driver": "chapter/qa-sweep-diag.html?key=kw_sweep_p37_diag + qa-finding-serializer.js (kwfser-1)",
+ "engine": "chapter/qa-engine.js WITH the P37 decorative-MCQ scope filter (post-finding, indices preserved)",
+ "corpus": {
+  "chapters": 259,
+  "measured": 259,
+  "occurrences": 156297,
+  "findings": 1379,
+  "clean": 75,
+  "errors": 0,
+  "readyState": {
+   "stable": 259
+  },
+  "hardTimeouts": 0,
+  "injectionErrors": 0,
+  "measurementErrors": 0,
+  "note": "c2-04-nomen-verb-verbindungen returned hard-timeout on the first pass (0 occ / 0 findings, wrongly counted clean); discarded and re-measured in isolation to stable. Only the stable reading is counted."
+ },
+ "byCode": {
+  "ROLE_CONTRADICTS_BADGE": 1009,
+  "CASE_COLLISION_CAPITALISED": 236,
+  "PARADIGM_CLASS_MISMATCH": 76,
+  "HEADWORD_COLOUR_MISMATCH": 22,
+  "NO_POPUP": 22,
+  "CASE_COLLISION_LOWERCASE": 14,
+  "BLACK_FALLBACK": 0
+ },
+ "integrity": {
+  "findings": 1379,
+  "fullFidelityChecksum": {
+   "fnv1a": "8d42464c",
+   "djb2": "4efa36c8",
+   "chars": 261461,
+   "basis": "JSON.stringify([chapter,code,severity,section,index,surface,detail]) per finding, joined by \\n, in sweep order",
+   "computedInBrowser": true
+  }
+ },
+ "deltaVsP23P24": {
+  "occurrences": {
+   "from": 156299,
+   "to": 156297,
+   "delta": -2
+  },
+  "findings": {
+   "from": 1405,
+   "to": 1379,
+   "delta": -26
+  },
+  "clean": {
+   "from": 71,
+   "to": 75,
+   "delta": 4
+  },
+  "HEADWORD_COLOUR_MISMATCH": {
+   "from": 37,
+   "to": 22,
+   "delta": -15
+  },
+  "ROLE_CONTRADICTS_BADGE": {
+   "from": 1020,
+   "to": 1009,
+   "delta": -11
+  },
+  "unchanged": [
+   "CASE_COLLISION_CAPITALISED 236",
+   "PARADIGM_CLASS_MISMATCH 76",
+   "NO_POPUP 22",
+   "CASE_COLLISION_LOWERCASE 14",
+   "BLACK_FALLBACK 0"
+  ]
+ },
+ "hcmRemaining": {
+  "count": 22,
+  "records": [
+   {
+    "chapter": "chapter-a1-4-hallo.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "vocabulary",
+    "index": 171,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-7-jaodernein.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 243,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-7-jaodernein.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "writing",
+    "index": 328,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-7-jaodernein.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "resources",
+    "index": 386,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "vocabulary",
+    "index": 133,
+    "surface": "deutsch",
+    "detail": {
+     "span": "rgb(245, 158, 11)",
+     "head": "rgb(46, 125, 50)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 542,
+    "surface": "deutsch",
+    "detail": {
+     "span": "rgb(245, 158, 11)",
+     "head": "rgb(46, 125, 50)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 581,
+    "surface": "deutsch",
+    "detail": {
+     "span": "rgb(245, 158, 11)",
+     "head": "rgb(46, 125, 50)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-8-goethemini1.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 585,
+    "surface": "deutsch",
+    "detail": {
+     "span": "rgb(245, 158, 11)",
+     "head": "rgb(46, 125, 50)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-11-negation.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "(none)",
+    "index": 1,
+    "surface": "Nicht",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-14-essen.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "resources",
+    "index": 878,
+    "surface": "möchte",
+    "detail": {
+     "span": "rgb(220, 38, 38)",
+     "head": "rgb(159, 18, 57)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-15-cafe.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "vocabulary",
+    "index": 168,
+    "surface": "Zahlen",
+    "detail": {
+     "span": "rgb(220, 38, 38)",
+     "head": "rgb(46, 125, 50)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-15-cafe.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 581,
+    "surface": "Zahlen",
+    "detail": {
+     "span": "rgb(220, 38, 38)",
+     "head": "rgb(46, 125, 50)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 335,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 340,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 345,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-19-satzposition.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "summary",
+    "index": 522,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-21-uhrzeit.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "vocabulary",
+    "index": 321,
+    "surface": "Wann",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(236, 72, 153)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-25-trennbar.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 285,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a1-39-ortsangaben.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "vocabulary",
+    "index": 570,
+    "surface": "a",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(90, 90, 96)"
+    }
+   },
+   {
+    "chapter": "chapter-a2-2-perfekt-review.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 394,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-a2-2-perfekt-review.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "grammar",
+    "index": 410,
+    "surface": "Nein",
+    "detail": {
+     "span": "rgb(6, 182, 212)",
+     "head": "rgb(192, 38, 211)"
+    }
+   },
+   {
+    "chapter": "chapter-c2-08-modalverben.html",
+    "code": "HEADWORD_COLOUR_MISMATCH",
+    "severity": "medium",
+    "section": "summary",
+    "index": 413,
+    "surface": "muss",
+    "detail": {
+     "span": "rgb(220, 38, 38)",
+     "head": "rgb(159, 18, 57)"
+    }
+   }
+  ],
+  "composition": {
+   "G1 BY-DESIGN (Nein/Nicht/möchte/Wann/muss)": 15,
+   "G-B homograph deutsch": 4,
+   "G-B homograph Zahlen": 2,
+   "G-C letter a": 1
+  },
+  "note": "every decorative-MCQ record is gone; all G-B and G-C genuine cases are intact. The 15 G1 records are the by-design subtype refinements P26 classified as no-fix."
+ },
+ "caveats": [
+  "HCM fell by 15, one more than the 14 predicted. The extra is a1-11-negation, whose non-reproducible second HCM (\"Nein\", speaking/311) was characterised in P22/P23 as sweep-run variance (0/6 in isolation). This sweep did not emit it. The scope filter cannot have removed it — that node has no button.mcq-option ancestor.",
+  "occurrences moved by −2, which the filter cannot cause (node selection is untouched); consistent with the documented small drift across unedited chapters."
+ ],
+ "chapters": "see audit/qa-scope-fix-p37.json for per-chapter targeted results",
+ "findings": [
+  {
+   "chapter": "chapter-a1-4-hallo.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "vocabulary",
+   "index": 171,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-7-jaodernein.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 243,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-7-jaodernein.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "writing",
+   "index": 328,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-7-jaodernein.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "resources",
+   "index": 386,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-8-goethemini1.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "vocabulary",
+   "index": 133,
+   "surface": "deutsch",
+   "detail": {
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-8-goethemini1.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 542,
+   "surface": "deutsch",
+   "detail": {
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-8-goethemini1.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 581,
+   "surface": "deutsch",
+   "detail": {
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-8-goethemini1.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 585,
+   "surface": "deutsch",
+   "detail": {
+    "span": "rgb(245, 158, 11)",
+    "head": "rgb(46, 125, 50)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-11-negation.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "(none)",
+   "index": 1,
+   "surface": "Nicht",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-14-essen.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "resources",
+   "index": 878,
+   "surface": "möchte",
+   "detail": {
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(159, 18, 57)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-15-cafe.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "vocabulary",
+   "index": 168,
+   "surface": "Zahlen",
+   "detail": {
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(46, 125, 50)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-15-cafe.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 581,
+   "surface": "Zahlen",
+   "detail": {
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(46, 125, 50)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-19-satzposition.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 335,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-19-satzposition.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 340,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-19-satzposition.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 345,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-19-satzposition.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "summary",
+   "index": 522,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-21-uhrzeit.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "vocabulary",
+   "index": 321,
+   "surface": "Wann",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(236, 72, 153)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-25-trennbar.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 285,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a1-39-ortsangaben.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "vocabulary",
+   "index": 570,
+   "surface": "a",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(90, 90, 96)"
+   }
+  },
+  {
+   "chapter": "chapter-a2-2-perfekt-review.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 394,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-a2-2-perfekt-review.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "grammar",
+   "index": 410,
+   "surface": "Nein",
+   "detail": {
+    "span": "rgb(6, 182, 212)",
+    "head": "rgb(192, 38, 211)"
+   }
+  },
+  {
+   "chapter": "chapter-c2-08-modalverben.html",
+   "code": "HEADWORD_COLOUR_MISMATCH",
+   "severity": "medium",
+   "section": "summary",
+   "index": 413,
+   "surface": "muss",
+   "detail": {
+    "span": "rgb(220, 38, 38)",
+    "head": "rgb(159, 18, 57)"
+   }
+  }
+ ],
+ "findingsNote": "this file records the full corpus totals, per-code counts, checksum and the complete HEADWORD_COLOUR_MISMATCH population. The full 1,379-record per-finding set lives in browser storage key kw_sweep_p37_diag; export it to a durable file if it is needed as the next comparison baseline."
+}

@@ -1,0 +1,223 @@
+{
+ "chapter-b2-01-erweiterte-satzklammer-data.js": {
+  "female": "Franzi",
+  "male": "Timo",
+  "all": [
+   "Franzi",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-02-verbalkomplex-data.js": {
+  "female": "Wibke",
+  "male": "Timo",
+  "all": [
+   "Wibke",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-03-informationsstruktur-thema-rhema-data.js": {
+  "female": "Meret",
+  "male": "Timo",
+  "all": [
+   "Meret",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-04-formales-es-data.js": {
+  "female": "Karla",
+  "male": "Timo",
+  "all": [
+   "Karla",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-05-korrelat-es-data.js": {
+  "female": "Merle",
+  "male": "Timo",
+  "all": [
+   "Merle",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-06-es-in-festen-ausdruecken-data.js": {
+  "female": "Doreen",
+  "male": "Timo",
+  "all": [
+   "Doreen",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-07-verbergaenzungen-erkennen-data.js": {
+  "female": "Petra",
+  "male": "Timo",
+  "all": [
+   "Petra",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-08-valenz-von-verben-data.js": {
+  "female": "Runa",
+  "male": "Timo",
+  "all": [
+   "Runa",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-09-trennbar-vs-untrennbar-data.js": {
+  "female": "Insa",
+  "male": "Timo",
+  "all": [
+   "Insa",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-10-haeufige-b2-verben-data.js": {
+  "female": "Britta",
+  "male": "Timo",
+  "all": [
+   "Britta",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-11-stellung-von-nicht-data.js": {
+  "female": "Nadine",
+  "male": "Timo",
+  "all": [
+   "Nadine",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-12-doppelte-verneinung-litotes-data.js": {
+  "female": "Meike",
+  "male": "Timo",
+  "all": [
+   "Meike",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-13-nuancierte-negation-data.js": {
+  "female": "Frauke",
+  "male": "Timo",
+  "all": [
+   "Frauke",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-14-goethe-mini-test-1-data.js": {
+  "female": null,
+  "all": [],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-15-konzessivsaetze-obgleich-data.js": {
+  "female": "Ronja",
+  "male": "Timo",
+  "all": [
+   "Ronja",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-16-konsekutivsaetze-sodass-infolgedessen-data.js": {
+  "female": "Frauke",
+  "male": "Timo",
+  "all": [
+   "Frauke",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-17-modalsaetze-indem-data.js": {
+  "female": "Nele",
+  "male": "Timo",
+  "all": [
+   "Nele",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-18-modalsaetze-dadurch-dass-data.js": {
+  "female": "Wibke",
+  "male": "Timo",
+  "all": [
+   "Wibke",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-19-ohne-zu-data.js": {
+  "female": "Steffi",
+  "male": "Timo",
+  "all": [
+   "Steffi",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-20-anstatt-zu-data.js": {
+  "female": "Katja",
+  "male": "Timo",
+  "all": [
+   "Katja",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-21-sowohl-als-auch-data.js": {
+  "female": "Svenja",
+  "male": "Timo",
+  "all": [
+   "Svenja",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-22-weder-noch-data.js": {
+  "female": "Doris",
+  "male": "Timo",
+  "all": [
+   "Doris",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-23-nicht-nur-sondern-auch-data.js": {
+  "female": "Miriam",
+  "male": "Timo",
+  "all": [
+   "Miriam",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-24-einerseits-andererseits-data.js": {
+  "female": "Britta",
+  "male": "Timo",
+  "all": [
+   "Britta",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ },
+ "chapter-b2-25-verbindungsadverbien-data.js": {
+  "female": "Vera",
+  "male": "Timo",
+  "all": [
+   "Vera",
+   "Timo"
+  ],
+  "hasListeningDialogue": false
+ }
+}

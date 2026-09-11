@@ -1,0 +1,23 @@
+{
+ "$schema": "klarweg-audio-audit/punctuation-review/v1",
+ "generatedAt": "2026-09-10",
+ "count": 1,
+ "rule": "not synthesized, not guessed",
+ "classification": {
+  "A_authoredField": 106,
+  "B_alreadyPunctuatedOrTokenStream": 660,
+  "C_authorDecision": 1
+ },
+ "rows": [
+  {
+   "assetId": "09e42cf1c6881dae",
+   "family": "listening",
+   "section": "listening",
+   "text": "\"",
+   "levels": [
+    "C2"
+   ],
+   "why": "the lookup text carries no punctuation, chapter data has no punctuated authored field, and the token stream yields no punctuation tokens — nothing in the project states where sentences end"
+  }
+ ]
+}

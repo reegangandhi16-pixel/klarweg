@@ -1,0 +1,58 @@
+[
+ {
+  "assetId": "91ce7f2a9760de2a",
+  "chapter": "a1-40-verben-dativ",
+  "speaker": "Nele",
+  "lookupText": "Wie gefällt dir die Jacke",
+  "reconstructed": "Wie gefällt dir die Jacke?",
+  "via": "token stream (plain punctuation tokens the UI join discards)"
+ },
+ {
+  "assetId": "bbae6d15daffe7d6",
+  "chapter": "a1-40-verben-dativ",
+  "speaker": "Nele",
+  "lookupText": "Der Pullover steht dir sehr gut",
+  "reconstructed": "Der Pullover steht dir sehr gut!",
+  "via": "token stream (plain punctuation tokens the UI join discards)"
+ },
+ {
+  "assetId": "8939da4ea89d14ed",
+  "chapter": "a1-40-verben-dativ",
+  "speaker": "Nele",
+  "lookupText": "Ja Der gehört dir",
+  "reconstructed": "Ja! Der gehört dir!",
+  "via": "token stream (plain punctuation tokens the UI join discards)"
+ },
+ {
+  "assetId": "71d25285530f22bc",
+  "chapter": "a1-41-dativpronomen",
+  "speaker": "Frau Sommer",
+  "lookupText": "Ich nehme die Suppe Bringen Sie sie mir bitte",
+  "reconstructed": "Ich nehme die Suppe. Bringen Sie sie mir bitte.",
+  "via": "token stream (plain punctuation tokens the UI join discards)"
+ },
+ {
+  "assetId": "fa5608d105852486",
+  "chapter": "b2-02-verbalkomplex",
+  "speaker": "Wibke",
+  "lookupText": "Ich habe das als hilfreich empfunden",
+  "reconstructed": "Ich habe das als hilfreich empfunden.",
+  "via": "token stream (plain punctuation tokens the UI join discards)"
+ },
+ {
+  "assetId": "67c19f51ee689726",
+  "chapter": "b2-08-valenz-von-verben",
+  "speaker": "Runa",
+  "lookupText": "Als Sprachwissenschaftlerin beurteile ich die Studie als sehr wichtig",
+  "reconstructed": "Als Sprachwissenschaftlerin beurteile ich die Studie als sehr wichtig.",
+  "via": "token stream (plain punctuation tokens the UI join discards)"
+ },
+ {
+  "assetId": "5d20b9be05012c51",
+  "chapter": "b2-38-verschachtelte-relativsaetze",
+  "speaker": "Timo",
+  "lookupText": "Perfekt Kennst du den Flügel den der Führer der immer lächelt empfiehlt",
+  "reconstructed": "Perfekt! Kennst du den Flügel, den der Führer, der immer lächelt, empfiehlt?",
+  "via": "token stream (plain punctuation tokens the UI join discards)"
+ }
+]

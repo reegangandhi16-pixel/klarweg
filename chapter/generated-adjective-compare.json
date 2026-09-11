@@ -1,0 +1,5259 @@
+{
+ "thematisch": {
+  "positive": "thematisch",
+  "comparative": "thematischer",
+  "superlative": "am thematischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "feminin": {
+  "positive": "feminin",
+  "comparative": "femininer",
+  "superlative": "am femininsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "maskulin": {
+  "positive": "maskulin",
+  "comparative": "maskuliner",
+  "superlative": "am maskulinsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unbestimmt": {
+  "positive": "unbestimmt",
+  "comparative": "unbestimmter",
+  "superlative": "am unbestimmtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "falsch": {
+  "positive": "falsch",
+  "comparative": "falscher",
+  "superlative": "am falschesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "toll": {
+  "positive": "toll",
+  "comparative": "toller",
+  "superlative": "am tollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "anstrengend": {
+  "positive": "anstrengend",
+  "comparative": "anstrengender",
+  "superlative": "am anstrengendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "attraktiv": {
+  "positive": "attraktiv",
+  "comparative": "attraktiver",
+  "superlative": "am attraktivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "beliebt": {
+  "positive": "beliebt",
+  "comparative": "beliebter",
+  "superlative": "am beliebtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "berühmt": {
+  "positive": "berühmt",
+  "comparative": "berühmter",
+  "superlative": "am berühmtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "böse": {
+  "positive": "böse",
+  "comparative": "böser",
+  "superlative": "am bösesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "cool": {
+  "positive": "cool",
+  "comparative": "cooler",
+  "superlative": "am coolsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "doof": {
+  "positive": "doof",
+  "comparative": "doofer",
+  "superlative": "am doofsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "faul": {
+  "positive": "faul",
+  "comparative": "fauler",
+  "superlative": "am faulsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fleißig": {
+  "positive": "fleißig",
+  "comparative": "fleißiger",
+  "superlative": "am fleißigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "froh": {
+  "positive": "froh",
+  "comparative": "froher",
+  "superlative": "am frohsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gefährlich": {
+  "positive": "gefährlich",
+  "comparative": "gefährlicher",
+  "superlative": "am gefährlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "glücklich": {
+  "positive": "glücklich",
+  "comparative": "glücklicher",
+  "superlative": "am glücklichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "günstig": {
+  "positive": "günstig",
+  "comparative": "günstiger",
+  "superlative": "am günstigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hungrig": {
+  "positive": "hungrig",
+  "comparative": "hungriger",
+  "superlative": "am hungrigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hässlich": {
+  "positive": "hässlich",
+  "comparative": "hässlicher",
+  "superlative": "am hässlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kaputt": {
+  "positive": "kaputt",
+  "comparative": "kaputter",
+  "superlative": "am kaputtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "langweilig": {
+  "positive": "langweilig",
+  "comparative": "langweiliger",
+  "superlative": "am langweiligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "leicht": {
+  "positive": "leicht",
+  "comparative": "leichter",
+  "superlative": "am leichtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "lustig": {
+  "positive": "lustig",
+  "comparative": "lustiger",
+  "superlative": "am lustigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "müde": {
+  "positive": "müde",
+  "comparative": "müder",
+  "superlative": "am müdesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nett": {
+  "positive": "nett",
+  "comparative": "netter",
+  "superlative": "am nettesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "neu": {
+  "positive": "neu",
+  "comparative": "neuer",
+  "superlative": "am neusten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "normal": {
+  "positive": "normal",
+  "comparative": "normaler",
+  "superlative": "am normalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "praktisch": {
+  "positive": "praktisch",
+  "comparative": "praktischer",
+  "superlative": "am praktischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sauber": {
+  "positive": "sauber",
+  "comparative": "sauberer",
+  "superlative": "am saubersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schwer": {
+  "positive": "schwer",
+  "comparative": "schwerer",
+  "superlative": "am schwersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sicher": {
+  "positive": "sicher",
+  "comparative": "sicherer",
+  "superlative": "am sichersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wichtig": {
+  "positive": "wichtig",
+  "comparative": "wichtiger",
+  "superlative": "am wichtigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wunderbar": {
+  "positive": "wunderbar",
+  "comparative": "wunderbarer",
+  "superlative": "am wunderbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wunderschön": {
+  "positive": "wunderschön",
+  "comparative": "wunderschöner",
+  "superlative": "am wunderschönsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "breit": {
+  "positive": "breit",
+  "comparative": "breiter",
+  "superlative": "am breitesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eilig": {
+  "positive": "eilig",
+  "comparative": "eiliger",
+  "superlative": "am eiligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "elegant": {
+  "positive": "elegant",
+  "comparative": "eleganter",
+  "superlative": "am elegantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fehlend": {
+  "positive": "fehlend",
+  "comparative": "fehlender",
+  "superlative": "am fehlendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "individuell": {
+  "positive": "individuell",
+  "comparative": "individueller",
+  "superlative": "am individuellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "k.o.": {
+  "positive": "k.o.",
+  "comparative": "k.o.er",
+  "superlative": "am k.o.sten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "lebendig": {
+  "positive": "lebendig",
+  "comparative": "lebendiger",
+  "superlative": "am lebendigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "originell": {
+  "positive": "originell",
+  "comparative": "origineller",
+  "superlative": "am originellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "populär": {
+  "positive": "populär",
+  "comparative": "populärer",
+  "superlative": "am populärsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "supernett": {
+  "positive": "supernett",
+  "comparative": "supernetter",
+  "superlative": "am supernettesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "top": {
+  "positive": "top",
+  "comparative": "toper",
+  "superlative": "am topsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "typisch": {
+  "positive": "typisch",
+  "comparative": "typischer",
+  "superlative": "am typischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "frisch": {
+  "positive": "frisch",
+  "comparative": "frischer",
+  "superlative": "am frischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "lecker": {
+  "positive": "lecker",
+  "comparative": "leckerer",
+  "superlative": "am leckersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "süß": {
+  "positive": "süß",
+  "comparative": "süßer",
+  "superlative": "am süßesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "asiatisch": {
+  "positive": "asiatisch",
+  "comparative": "asiatischer",
+  "superlative": "am asiatischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "satt": {
+  "positive": "satt",
+  "comparative": "satter",
+  "superlative": "am sattesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "persönlich": {
+  "positive": "persönlich",
+  "comparative": "persönlicher",
+  "superlative": "am persönlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unregelmäßig": {
+  "positive": "unregelmäßig",
+  "comparative": "unregelmäßiger",
+  "superlative": "am unregelmäßigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "abwechselnd": {
+  "positive": "abwechselnd",
+  "comparative": "abwechselnder",
+  "superlative": "am abwechselndesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wach": {
+  "positive": "wach",
+  "comparative": "wacher",
+  "superlative": "am wachsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "stressig": {
+  "positive": "stressig",
+  "comparative": "stressiger",
+  "superlative": "am stressigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "spät": {
+  "positive": "spät",
+  "comparative": "später",
+  "superlative": "am spätesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "inoffiziell": {
+  "positive": "inoffiziell",
+  "comparative": "inoffizieller",
+  "superlative": "am inoffiziellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "offiziell": {
+  "positive": "offiziell",
+  "comparative": "offizieller",
+  "superlative": "am offiziellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "arbeitslos": {
+  "positive": "arbeitslos",
+  "comparative": "arbeitsloser",
+  "superlative": "am arbeitslosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kreativ": {
+  "positive": "kreativ",
+  "comparative": "kreativer",
+  "superlative": "am kreativsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "trennbar": {
+  "positive": "trennbar",
+  "comparative": "trennbarer",
+  "superlative": "am trennbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fertig": {
+  "positive": "fertig",
+  "comparative": "fertiger",
+  "superlative": "am fertigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "frei": {
+  "positive": "frei",
+  "comparative": "freier",
+  "superlative": "am freisten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "frei (termin)": {
+  "positive": "frei (Termin)",
+  "comparative": "frei (Termin)er",
+  "superlative": "am frei (Termin)sten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "höflich": {
+  "positive": "höflich",
+  "comparative": "höflicher",
+  "superlative": "am höflichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "pünktlich": {
+  "positive": "pünktlich",
+  "comparative": "pünktlicher",
+  "superlative": "am pünktlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unhöflich": {
+  "positive": "unhöflich",
+  "comparative": "unhöflicher",
+  "superlative": "am unhöflichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "herzlich": {
+  "positive": "herzlich",
+  "comparative": "herzlicher",
+  "superlative": "am herzlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "lieb": {
+  "positive": "lieb",
+  "comparative": "lieber",
+  "superlative": "am liebsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "blau": {
+  "positive": "blau",
+  "comparative": "blauer",
+  "superlative": "am blausten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gelb": {
+  "positive": "gelb",
+  "comparative": "gelber",
+  "superlative": "am gelbsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "grau": {
+  "positive": "grau",
+  "comparative": "grauer",
+  "superlative": "am grausten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "grün": {
+  "positive": "grün",
+  "comparative": "grüner",
+  "superlative": "am grünsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "weiß": {
+  "positive": "weiß",
+  "comparative": "weißer",
+  "superlative": "am weißesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "braun": {
+  "positive": "braun",
+  "comparative": "brauner",
+  "superlative": "am braunsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "dunkel": {
+  "positive": "dunkel",
+  "comparative": "dunkler",
+  "superlative": "am dunkelsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gemütlich": {
+  "positive": "gemütlich",
+  "comparative": "gemütlicher",
+  "superlative": "am gemütlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hell": {
+  "positive": "hell",
+  "comparative": "heller",
+  "superlative": "am hellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zufrieden": {
+  "positive": "zufrieden",
+  "comparative": "zufriedener",
+  "superlative": "am zufriedensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "renoviert": {
+  "positive": "renoviert",
+  "comparative": "renovierter",
+  "superlative": "am renoviertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einfach": {
+  "positive": "einfach",
+  "comparative": "einfacher",
+  "superlative": "am einfachsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "offen": {
+  "positive": "offen",
+  "comparative": "offener",
+  "superlative": "am offensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "weit (far)": {
+  "positive": "weit (far)",
+  "comparative": "weit (far)er",
+  "superlative": "am weit (far)sten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zentral": {
+  "positive": "zentral",
+  "comparative": "zentraler",
+  "superlative": "am zentralsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "willkommen": {
+  "positive": "willkommen",
+  "comparative": "willkommener",
+  "superlative": "am willkommensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bequem": {
+  "positive": "bequem",
+  "comparative": "bequemer",
+  "superlative": "am bequemsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eng": {
+  "positive": "eng",
+  "comparative": "enger",
+  "superlative": "am engsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "weit": {
+  "positive": "weit",
+  "comparative": "weiter",
+  "superlative": "am weitesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "topaktuell": {
+  "positive": "topaktuell",
+  "comparative": "topaktueller",
+  "superlative": "am topaktuellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sonnig": {
+  "positive": "sonnig",
+  "comparative": "sonniger",
+  "superlative": "am sonnigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "anders": {
+  "positive": "anders",
+  "comparative": "anderser",
+  "superlative": "am andersesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "egal": {
+  "positive": "egal",
+  "comparative": "egaler",
+  "superlative": "am egalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "heiß": {
+  "positive": "heiß",
+  "comparative": "heißer",
+  "superlative": "am heißesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "negativ": {
+  "positive": "negativ",
+  "comparative": "negativer",
+  "superlative": "am negativsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "positiv": {
+  "positive": "positiv",
+  "comparative": "positiver",
+  "superlative": "am positivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "windig": {
+  "positive": "windig",
+  "comparative": "windiger",
+  "superlative": "am windigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aktuell": {
+  "positive": "aktuell",
+  "comparative": "aktueller",
+  "superlative": "am aktuellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "neutral": {
+  "positive": "neutral",
+  "comparative": "neutraler",
+  "superlative": "am neutralsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schrecklich": {
+  "positive": "schrecklich",
+  "comparative": "schrecklicher",
+  "superlative": "am schrecklichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aktiv": {
+  "positive": "aktiv",
+  "comparative": "aktiver",
+  "superlative": "am aktivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fit": {
+  "positive": "fit",
+  "comparative": "fiter",
+  "superlative": "am fitesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "leise": {
+  "positive": "leise",
+  "comparative": "leiser",
+  "superlative": "am leisesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ruhig": {
+  "positive": "ruhig",
+  "comparative": "ruhiger",
+  "superlative": "am ruhigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schlecht": {
+  "positive": "schlecht",
+  "comparative": "schlechter",
+  "superlative": "am schlechtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sportlich": {
+  "positive": "sportlich",
+  "comparative": "sportlicher",
+  "superlative": "am sportlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gegenseitig": {
+  "positive": "gegenseitig",
+  "comparative": "gegenseitiger",
+  "superlative": "am gegenseitigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "international": {
+  "positive": "international",
+  "comparative": "internationaler",
+  "superlative": "am internationalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "deutschsprachig": {
+  "positive": "deutschsprachig",
+  "comparative": "deutschsprachiger",
+  "superlative": "am deutschsprachigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "argentinisch": {
+  "positive": "argentinisch",
+  "comparative": "argentinischer",
+  "superlative": "am argentinischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "folgend": {
+  "positive": "folgend",
+  "comparative": "folgender",
+  "superlative": "am folgendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bitter": {
+  "positive": "bitter",
+  "comparative": "bitterer",
+  "superlative": "am bittersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aufgeregt": {
+  "positive": "aufgeregt",
+  "comparative": "aufgeregter",
+  "superlative": "am aufgeregtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "stolz": {
+  "positive": "stolz",
+  "comparative": "stolzer",
+  "superlative": "am stolzesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "traurig": {
+  "positive": "traurig",
+  "comparative": "trauriger",
+  "superlative": "am traurigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "emotional": {
+  "positive": "emotional",
+  "comparative": "emotionaler",
+  "superlative": "am emotionalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unangenehm": {
+  "positive": "unangenehm",
+  "comparative": "unangenehmer",
+  "superlative": "am unangenehmsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fremd": {
+  "positive": "fremd",
+  "comparative": "fremder",
+  "superlative": "am fremdesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wahr": {
+  "positive": "wahr",
+  "comparative": "wahrer",
+  "superlative": "am wahrsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ordentlich": {
+  "positive": "ordentlich",
+  "comparative": "ordentlicher",
+  "superlative": "am ordentlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unordentlich": {
+  "positive": "unordentlich",
+  "comparative": "unordentlicher",
+  "superlative": "am unordentlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unwichtig": {
+  "positive": "unwichtig",
+  "comparative": "unwichtiger",
+  "superlative": "am unwichtigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kostenlos": {
+  "positive": "kostenlos",
+  "comparative": "kostenloser",
+  "superlative": "am kostenlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "weltweit": {
+  "positive": "weltweit",
+  "comparative": "weltweiter",
+  "superlative": "am weltweitesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nervös": {
+  "positive": "nervös",
+  "comparative": "nervöser",
+  "superlative": "am nervösesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gestresst": {
+  "positive": "gestresst",
+  "comparative": "gestresster",
+  "superlative": "am gestresstesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "genervt": {
+  "positive": "genervt",
+  "comparative": "genervter",
+  "superlative": "am genervtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aufregend": {
+  "positive": "aufregend",
+  "comparative": "aufregender",
+  "superlative": "am aufregendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hilfsbereit": {
+  "positive": "hilfsbereit",
+  "comparative": "hilfsbereiter",
+  "superlative": "am hilfsbereitesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unsympathisch": {
+  "positive": "unsympathisch",
+  "comparative": "unsympathischer",
+  "superlative": "am unsympathischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "riesig": {
+  "positive": "riesig",
+  "comparative": "riesiger",
+  "superlative": "am riesigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schlimm": {
+  "positive": "schlimm",
+  "comparative": "schlimmer",
+  "superlative": "am schlimmsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "reflexiv": {
+  "positive": "reflexiv",
+  "comparative": "reflexiver",
+  "superlative": "am reflexivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "öffentlich": {
+  "positive": "öffentlich",
+  "comparative": "öffentlicher",
+  "superlative": "am öffentlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "telefonisch": {
+  "positive": "telefonisch",
+  "comparative": "telefonischer",
+  "superlative": "am telefonischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "spontan": {
+  "positive": "spontan",
+  "comparative": "spontaner",
+  "superlative": "am spontansten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ungeduldig": {
+  "positive": "ungeduldig",
+  "comparative": "ungeduldiger",
+  "superlative": "am ungeduldigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "modern": {
+  "positive": "modern",
+  "comparative": "moderner",
+  "superlative": "am modernsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "elektrisch": {
+  "positive": "elektrisch",
+  "comparative": "elektrischer",
+  "superlative": "am elektrischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unterschiedlich": {
+  "positive": "unterschiedlich",
+  "comparative": "unterschiedlicher",
+  "superlative": "am unterschiedlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "regelmäßig": {
+  "positive": "regelmäßig",
+  "comparative": "regelmäßiger",
+  "superlative": "am regelmäßigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "allgemein": {
+  "positive": "allgemein",
+  "comparative": "allgemeiner",
+  "superlative": "am allgemeinsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sinnvoll": {
+  "positive": "sinnvoll",
+  "comparative": "sinnvoller",
+  "superlative": "am sinnvollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "umweltfreundlich": {
+  "positive": "umweltfreundlich",
+  "comparative": "umweltfreundlicher",
+  "superlative": "am umweltfreundlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "altmodisch": {
+  "positive": "altmodisch",
+  "comparative": "altmodischer",
+  "superlative": "am altmodischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ortskundig": {
+  "positive": "ortskundig",
+  "comparative": "ortskundiger",
+  "superlative": "am ortskundigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "direkt": {
+  "positive": "direkt",
+  "comparative": "direkter",
+  "superlative": "am direktesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "indirekt": {
+  "positive": "indirekt",
+  "comparative": "indirekter",
+  "superlative": "am indirektesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mobil": {
+  "positive": "mobil",
+  "comparative": "mobiler",
+  "superlative": "am mobilsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ewig": {
+  "positive": "ewig",
+  "comparative": "ewiger",
+  "superlative": "am ewigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "beruflich": {
+  "positive": "beruflich",
+  "comparative": "beruflicher",
+  "superlative": "am beruflichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "finanziell": {
+  "positive": "finanziell",
+  "comparative": "finanzieller",
+  "superlative": "am finanziellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "flexibel": {
+  "positive": "flexibel",
+  "comparative": "flexibler",
+  "superlative": "am flexibelsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "möglich": {
+  "positive": "möglich",
+  "comparative": "möglicher",
+  "superlative": "am möglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nervig": {
+  "positive": "nervig",
+  "comparative": "nerviger",
+  "superlative": "am nervigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unpraktisch": {
+  "positive": "unpraktisch",
+  "comparative": "unpraktischer",
+  "superlative": "am unpraktischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erforderlich": {
+  "positive": "erforderlich",
+  "comparative": "erforderlicher",
+  "superlative": "am erforderlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "pensioniert": {
+  "positive": "pensioniert",
+  "comparative": "pensionierter",
+  "superlative": "am pensioniertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "tief": {
+  "positive": "tief",
+  "comparative": "tiefer",
+  "superlative": "am tiefsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fantastisch": {
+  "positive": "fantastisch",
+  "comparative": "fantastischer",
+  "superlative": "am fantastischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "komisch": {
+  "positive": "komisch",
+  "comparative": "komischer",
+  "superlative": "am komischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "lebenslang": {
+  "positive": "lebenslang",
+  "comparative": "lebenslanger",
+  "superlative": "am lebenslangsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fest": {
+  "positive": "fest",
+  "comparative": "fester",
+  "superlative": "am festesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aufgenommen": {
+  "positive": "aufgenommen",
+  "comparative": "aufgenommener",
+  "superlative": "am aufgenommensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bunt": {
+  "positive": "bunt",
+  "comparative": "bunter",
+  "superlative": "am buntesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "dringend": {
+  "positive": "dringend",
+  "comparative": "dringender",
+  "superlative": "am dringendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erfahren": {
+  "positive": "erfahren",
+  "comparative": "erfahrener",
+  "superlative": "am erfahrensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "freiberuflich": {
+  "positive": "freiberuflich",
+  "comparative": "freiberuflicher",
+  "superlative": "am freiberuflichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gehörlos": {
+  "positive": "gehörlos",
+  "comparative": "gehörloser",
+  "superlative": "am gehörlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kompliziert": {
+  "positive": "kompliziert",
+  "comparative": "komplizierter",
+  "superlative": "am kompliziertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "notwendig": {
+  "positive": "notwendig",
+  "comparative": "notwendiger",
+  "superlative": "am notwendigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schriftlich": {
+  "positive": "schriftlich",
+  "comparative": "schriftlicher",
+  "superlative": "am schriftlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ausländisch": {
+  "positive": "ausländisch",
+  "comparative": "ausländischer",
+  "superlative": "am ausländischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einzeln": {
+  "positive": "einzeln",
+  "comparative": "einzelner",
+  "superlative": "am einzelnsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "häufig": {
+  "positive": "häufig",
+  "comparative": "häufiger",
+  "superlative": "am häufigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "neugierig": {
+  "positive": "neugierig",
+  "comparative": "neugieriger",
+  "superlative": "am neugierigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "realistisch": {
+  "positive": "realistisch",
+  "comparative": "realistischer",
+  "superlative": "am realistischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "selbstständig": {
+  "positive": "selbstständig",
+  "comparative": "selbstständiger",
+  "superlative": "am selbstständigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "stressfrei": {
+  "positive": "stressfrei",
+  "comparative": "stressfreier",
+  "superlative": "am stressfreisten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unnötig": {
+  "positive": "unnötig",
+  "comparative": "unnötiger",
+  "superlative": "am unnötigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "faszinierend": {
+  "positive": "faszinierend",
+  "comparative": "faszinierender",
+  "superlative": "am faszinierendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "genial": {
+  "positive": "genial",
+  "comparative": "genialer",
+  "superlative": "am genialsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "trocken": {
+  "positive": "trocken",
+  "comparative": "trockener",
+  "superlative": "am trockensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unglaublich": {
+  "positive": "unglaublich",
+  "comparative": "unglaublicher",
+  "superlative": "am unglaublichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einverstanden": {
+  "positive": "einverstanden",
+  "comparative": "einverstandener",
+  "superlative": "am einverstandensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kulturell": {
+  "positive": "kulturell",
+  "comparative": "kultureller",
+  "superlative": "am kulturellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "treu": {
+  "positive": "treu",
+  "comparative": "treuer",
+  "superlative": "am treusten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sympathisch": {
+  "positive": "sympathisch",
+  "comparative": "sympathischer",
+  "superlative": "am sympathischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "besorgt": {
+  "positive": "besorgt",
+  "comparative": "besorgter",
+  "superlative": "am besorgtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "effektiv": {
+  "positive": "effektiv",
+  "comparative": "effektiver",
+  "superlative": "am effektivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eineinhalb": {
+  "positive": "eineinhalb",
+  "comparative": "eineinhalber",
+  "superlative": "am eineinhalbsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einsam": {
+  "positive": "einsam",
+  "comparative": "einsamer",
+  "superlative": "am einsamsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "großartig": {
+  "positive": "großartig",
+  "comparative": "großartiger",
+  "superlative": "am großartigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "niedrig": {
+  "positive": "niedrig",
+  "comparative": "niedriger",
+  "superlative": "am niedrigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ständig": {
+  "positive": "ständig",
+  "comparative": "ständiger",
+  "superlative": "am ständigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wahnsinnig": {
+  "positive": "wahnsinnig",
+  "comparative": "wahnsinniger",
+  "superlative": "am wahnsinnigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "blitzschnell": {
+  "positive": "blitzschnell",
+  "comparative": "blitzschneller",
+  "superlative": "am blitzschnellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "dünn": {
+  "positive": "dünn",
+  "comparative": "dünner",
+  "superlative": "am dünnsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einmalig": {
+  "positive": "einmalig",
+  "comparative": "einmaliger",
+  "superlative": "am einmaligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gespannt": {
+  "positive": "gespannt",
+  "comparative": "gespannter",
+  "superlative": "am gespanntesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vorgekommen": {
+  "positive": "vorgekommen",
+  "comparative": "vorgekommener",
+  "superlative": "am vorgekommensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "intensiv": {
+  "positive": "intensiv",
+  "comparative": "intensiver",
+  "superlative": "am intensivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "salzig": {
+  "positive": "salzig",
+  "comparative": "salziger",
+  "superlative": "am salzigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "konjugiert": {
+  "positive": "konjugiert",
+  "comparative": "konjugierter",
+  "superlative": "am konjugiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "deutlich": {
+  "positive": "deutlich",
+  "comparative": "deutlicher",
+  "superlative": "am deutlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erreichbar": {
+  "positive": "erreichbar",
+  "comparative": "erreichbarer",
+  "superlative": "am erreichbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "preiswert": {
+  "positive": "preiswert",
+  "comparative": "preiswerter",
+  "superlative": "am preiswertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "problemlos": {
+  "positive": "problemlos",
+  "comparative": "problemloser",
+  "superlative": "am problemlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "verrückt": {
+  "positive": "verrückt",
+  "comparative": "verrückter",
+  "superlative": "am verrücktesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wild": {
+  "positive": "wild",
+  "comparative": "wilder",
+  "superlative": "am wildesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "anschließend": {
+  "positive": "anschließend",
+  "comparative": "anschließender",
+  "superlative": "am anschließendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erfolgreich": {
+  "positive": "erfolgreich",
+  "comparative": "erfolgreicher",
+  "superlative": "am erfolgreichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gelaunt": {
+  "positive": "gelaunt",
+  "comparative": "gelaunter",
+  "superlative": "am gelauntesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hektisch": {
+  "positive": "hektisch",
+  "comparative": "hektischer",
+  "superlative": "am hektischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "komplett": {
+  "positive": "komplett",
+  "comparative": "kompletter",
+  "superlative": "am komplettesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "professionell": {
+  "positive": "professionell",
+  "comparative": "professioneller",
+  "superlative": "am professionellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "virtuell": {
+  "positive": "virtuell",
+  "comparative": "virtueller",
+  "superlative": "am virtuellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "reich": {
+  "positive": "reich",
+  "comparative": "reicher",
+  "superlative": "am reichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "abstrakt": {
+  "positive": "abstrakt",
+  "comparative": "abstrakter",
+  "superlative": "am abstraktesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "rockig": {
+  "positive": "rockig",
+  "comparative": "rockiger",
+  "superlative": "am rockigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zuzüglich": {
+  "positive": "zuzüglich",
+  "comparative": "zuzüglicher",
+  "superlative": "am zuzüglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hübsch": {
+  "positive": "hübsch",
+  "comparative": "hübscher",
+  "superlative": "am hübschesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "meistabonniert": {
+  "positive": "meistabonniert",
+  "comparative": "meistabonnierter",
+  "superlative": "am meistabonniertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "melodisch": {
+  "positive": "melodisch",
+  "comparative": "melodischer",
+  "superlative": "am melodischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "spannend": {
+  "positive": "spannend",
+  "comparative": "spannender",
+  "superlative": "am spannendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sozial": {
+  "positive": "sozial",
+  "comparative": "sozialer",
+  "superlative": "am sozialsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "intelligent": {
+  "positive": "intelligent",
+  "comparative": "intelligenter",
+  "superlative": "am intelligentesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "peinlich": {
+  "positive": "peinlich",
+  "comparative": "peinlicher",
+  "superlative": "am peinlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "furchtbar": {
+  "positive": "furchtbar",
+  "comparative": "furchtbarer",
+  "superlative": "am furchtbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "witzig": {
+  "positive": "witzig",
+  "comparative": "witziger",
+  "superlative": "am witzigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "real": {
+  "positive": "real",
+  "comparative": "realer",
+  "superlative": "am realsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fett": {
+  "positive": "fett",
+  "comparative": "fetter",
+  "superlative": "am fettesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "romantisch": {
+  "positive": "romantisch",
+  "comparative": "romantischer",
+  "superlative": "am romantischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "betrunken": {
+  "positive": "betrunken",
+  "comparative": "betrunkener",
+  "superlative": "am betrunkensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sauer": {
+  "positive": "sauer",
+  "comparative": "saurer",
+  "superlative": "am sauersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "dick": {
+  "positive": "dick",
+  "comparative": "dicker",
+  "superlative": "am dicksten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schmutzig": {
+  "positive": "schmutzig",
+  "comparative": "schmutziger",
+  "superlative": "am schmutzigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "modisch": {
+  "positive": "modisch",
+  "comparative": "modischer",
+  "superlative": "am modischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kritisch": {
+  "positive": "kritisch",
+  "comparative": "kritischer",
+  "superlative": "am kritischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "logisch": {
+  "positive": "logisch",
+  "comparative": "logischer",
+  "superlative": "am logischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nützlich": {
+  "positive": "nützlich",
+  "comparative": "nützlicher",
+  "superlative": "am nützlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schwierig": {
+  "positive": "schwierig",
+  "comparative": "schwieriger",
+  "superlative": "am schwierigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "streng": {
+  "positive": "streng",
+  "comparative": "strenger",
+  "superlative": "am strengsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "privat": {
+  "positive": "privat",
+  "comparative": "privater",
+  "superlative": "am privatesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wertvoll": {
+  "positive": "wertvoll",
+  "comparative": "wertvoller",
+  "superlative": "am wertvollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vorsichtig": {
+  "positive": "vorsichtig",
+  "comparative": "vorsichtiger",
+  "superlative": "am vorsichtigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "still": {
+  "positive": "still",
+  "comparative": "stiller",
+  "superlative": "am stillsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unendlich": {
+  "positive": "unendlich",
+  "comparative": "unendlicher",
+  "superlative": "am unendlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "uninteressant": {
+  "positive": "uninteressant",
+  "comparative": "uninteressanter",
+  "superlative": "am uninteressantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "knapp": {
+  "positive": "knapp",
+  "comparative": "knapper",
+  "superlative": "am knappsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mehrmalig": {
+  "positive": "mehrmalig",
+  "comparative": "mehrmaliger",
+  "superlative": "am mehrmaligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "angenehm": {
+  "positive": "angenehm",
+  "comparative": "angenehmer",
+  "superlative": "am angenehmsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "entspannend": {
+  "positive": "entspannend",
+  "comparative": "entspannender",
+  "superlative": "am entspannendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "herrlich": {
+  "positive": "herrlich",
+  "comparative": "herrlicher",
+  "superlative": "am herrlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "giftig": {
+  "positive": "giftig",
+  "comparative": "giftiger",
+  "superlative": "am giftigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "reif": {
+  "positive": "reif",
+  "comparative": "reifer",
+  "superlative": "am reifsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "irreal": {
+  "positive": "irreal",
+  "comparative": "irrealer",
+  "superlative": "am irrealsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unfreundlich": {
+  "positive": "unfreundlich",
+  "comparative": "unfreundlicher",
+  "superlative": "am unfreundlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "feucht": {
+  "positive": "feucht",
+  "comparative": "feuchter",
+  "superlative": "am feuchtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mild": {
+  "positive": "mild",
+  "comparative": "milder",
+  "superlative": "am mildesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "neblig": {
+  "positive": "neblig",
+  "comparative": "nebliger",
+  "superlative": "am nebligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "regnerisch": {
+  "positive": "regnerisch",
+  "comparative": "regnerischer",
+  "superlative": "am regnerischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schwül": {
+  "positive": "schwül",
+  "comparative": "schwüler",
+  "superlative": "am schwülsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "stürmisch": {
+  "positive": "stürmisch",
+  "comparative": "stürmischer",
+  "superlative": "am stürmischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wolkig": {
+  "positive": "wolkig",
+  "comparative": "wolkiger",
+  "superlative": "am wolkigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "qualifiziert": {
+  "positive": "qualifiziert",
+  "comparative": "qualifizierter",
+  "superlative": "am qualifiziertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zukünftig": {
+  "positive": "zukünftig",
+  "comparative": "zukünftiger",
+  "superlative": "am zukünftigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "relevant": {
+  "positive": "relevant",
+  "comparative": "relevanter",
+  "superlative": "am relevantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "seriös": {
+  "positive": "seriös",
+  "comparative": "seriöser",
+  "superlative": "am seriösesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sämtlich": {
+  "positive": "sämtlich",
+  "comparative": "sämtlicher",
+  "superlative": "am sämtlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aussagekräftig": {
+  "positive": "aussagekräftig",
+  "comparative": "aussagekräftiger",
+  "superlative": "am aussagekräftigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "befriedigend": {
+  "positive": "befriedigend",
+  "comparative": "befriedigender",
+  "superlative": "am befriedigendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kraftlos": {
+  "positive": "kraftlos",
+  "comparative": "kraftloser",
+  "superlative": "am kraftlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zwischenmenschlich": {
+  "positive": "zwischenmenschlich",
+  "comparative": "zwischenmenschlicher",
+  "superlative": "am zwischenmenschlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "großer/große/großes": {
+  "positive": "großer/große/großes",
+  "comparative": "großer/große/großeser",
+  "superlative": "am großer/große/großesesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "begeistert": {
+  "positive": "begeistert",
+  "comparative": "begeisterter",
+  "superlative": "am begeistertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zusätzlich": {
+  "positive": "zusätzlich",
+  "comparative": "zusätzlicher",
+  "superlative": "am zusätzlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "alltäglich": {
+  "positive": "alltäglich",
+  "comparative": "alltäglicher",
+  "superlative": "am alltäglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "anonym": {
+  "positive": "anonym",
+  "comparative": "anonymer",
+  "superlative": "am anonymsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "autonom": {
+  "positive": "autonom",
+  "comparative": "autonomer",
+  "superlative": "am autonomsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eindeutig": {
+  "positive": "eindeutig",
+  "comparative": "eindeutiger",
+  "superlative": "am eindeutigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "essbar": {
+  "positive": "essbar",
+  "comparative": "essbarer",
+  "superlative": "am essbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "heutig": {
+  "positive": "heutig",
+  "comparative": "heutiger",
+  "superlative": "am heutigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "interaktiv": {
+  "positive": "interaktiv",
+  "comparative": "interaktiver",
+  "superlative": "am interaktivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "lebenswert": {
+  "positive": "lebenswert",
+  "comparative": "lebenswerter",
+  "superlative": "am lebenswertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "visuell": {
+  "positive": "visuell",
+  "comparative": "visueller",
+  "superlative": "am visuellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "barrierearm": {
+  "positive": "barrierearm",
+  "comparative": "barrierearmer",
+  "superlative": "am barrierearmsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "entsprechend": {
+  "positive": "entsprechend",
+  "comparative": "entsprechender",
+  "superlative": "am entsprechendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "familienfreundlich": {
+  "positive": "familienfreundlich",
+  "comparative": "familienfreundlicher",
+  "superlative": "am familienfreundlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "traumhaft": {
+  "positive": "traumhaft",
+  "comparative": "traumhafter",
+  "superlative": "am traumhaftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "voraussichtlich": {
+  "positive": "voraussichtlich",
+  "comparative": "voraussichtlicher",
+  "superlative": "am voraussichtlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "exakt": {
+  "positive": "exakt",
+  "comparative": "exakter",
+  "superlative": "am exaktesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fair": {
+  "positive": "fair",
+  "comparative": "fairer",
+  "superlative": "am fairsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "dauernd": {
+  "positive": "dauernd",
+  "comparative": "dauernder",
+  "superlative": "am dauerndesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eventuell": {
+  "positive": "eventuell",
+  "comparative": "eventueller",
+  "superlative": "am eventuellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "konkret": {
+  "positive": "konkret",
+  "comparative": "konkreter",
+  "superlative": "am konkretesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "smart": {
+  "positive": "smart",
+  "comparative": "smarter",
+  "superlative": "am smartesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sparsam": {
+  "positive": "sparsam",
+  "comparative": "sparsamer",
+  "superlative": "am sparsamsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "verständlich": {
+  "positive": "verständlich",
+  "comparative": "verständlicher",
+  "superlative": "am verständlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gleichzeitig": {
+  "positive": "gleichzeitig",
+  "comparative": "gleichzeitiger",
+  "superlative": "am gleichzeitigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kitschig": {
+  "positive": "kitschig",
+  "comparative": "kitschiger",
+  "superlative": "am kitschigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nachhaltig": {
+  "positive": "nachhaltig",
+  "comparative": "nachhaltiger",
+  "superlative": "am nachhaltigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "effizient": {
+  "positive": "effizient",
+  "comparative": "effizienter",
+  "superlative": "am effizientesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "elektronisch": {
+  "positive": "elektronisch",
+  "comparative": "elektronischer",
+  "superlative": "am elektronischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erhältlich": {
+  "positive": "erhältlich",
+  "comparative": "erhältlicher",
+  "superlative": "am erhältlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "korrekt": {
+  "positive": "korrekt",
+  "comparative": "korrekter",
+  "superlative": "am korrektesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sogenannt": {
+  "positive": "sogenannt",
+  "comparative": "sogenannter",
+  "superlative": "am sogenanntesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "haltbar": {
+  "positive": "haltbar",
+  "comparative": "haltbarer",
+  "superlative": "am haltbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "krumm": {
+  "positive": "krumm",
+  "comparative": "krummer",
+  "superlative": "am krummsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "recycelbar": {
+  "positive": "recycelbar",
+  "comparative": "recycelbarer",
+  "superlative": "am recycelbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gesellschaftlich": {
+  "positive": "gesellschaftlich",
+  "comparative": "gesellschaftlicher",
+  "superlative": "am gesellschaftlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gesetzlich": {
+  "positive": "gesetzlich",
+  "comparative": "gesetzlicher",
+  "superlative": "am gesetzlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fern": {
+  "positive": "fern",
+  "comparative": "ferner",
+  "superlative": "am fernsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "jeweilig": {
+  "positive": "jeweilig",
+  "comparative": "jeweiliger",
+  "superlative": "am jeweiligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "rechtlich": {
+  "positive": "rechtlich",
+  "comparative": "rechtlicher",
+  "superlative": "am rechtlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schmal": {
+  "positive": "schmal",
+  "comparative": "schmaler",
+  "superlative": "am schmalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "städtisch": {
+  "positive": "städtisch",
+  "comparative": "städtischer",
+  "superlative": "am städtischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unruhig": {
+  "positive": "unruhig",
+  "comparative": "unruhiger",
+  "superlative": "am unruhigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "konzentriert": {
+  "positive": "konzentriert",
+  "comparative": "konzentrierter",
+  "superlative": "am konzentriertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "halbformell": {
+  "positive": "halbformell",
+  "comparative": "halbformeller",
+  "superlative": "am halbformellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schweizerdeutsch": {
+  "positive": "schweizerdeutsch",
+  "comparative": "schweizerdeutscher",
+  "superlative": "am schweizerdeutschesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ehrlich": {
+  "positive": "ehrlich",
+  "comparative": "ehrlicher",
+  "superlative": "am ehrlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "verzweifelt": {
+  "positive": "verzweifelt",
+  "comparative": "verzweifelter",
+  "superlative": "am verzweifeltesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "berufstätig": {
+  "positive": "berufstätig",
+  "comparative": "berufstätiger",
+  "superlative": "am berufstätigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kräftig": {
+  "positive": "kräftig",
+  "comparative": "kräftiger",
+  "superlative": "am kräftigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "diplomatisch": {
+  "positive": "diplomatisch",
+  "comparative": "diplomatischer",
+  "superlative": "am diplomatischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erschöpft": {
+  "positive": "erschöpft",
+  "comparative": "erschöpfter",
+  "superlative": "am erschöpftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "undiplomatisch": {
+  "positive": "undiplomatisch",
+  "comparative": "undiplomatischer",
+  "superlative": "am undiplomatischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "abhängig": {
+  "positive": "abhängig",
+  "comparative": "abhängiger",
+  "superlative": "am abhängigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fällig": {
+  "positive": "fällig",
+  "comparative": "fälliger",
+  "superlative": "am fälligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gering": {
+  "positive": "gering",
+  "comparative": "geringer",
+  "superlative": "am geringsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "umgehend": {
+  "positive": "umgehend",
+  "comparative": "umgehender",
+  "superlative": "am umgehendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fristgerecht": {
+  "positive": "fristgerecht",
+  "comparative": "fristgerechter",
+  "superlative": "am fristgerechtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "grundsätzlich": {
+  "positive": "grundsätzlich",
+  "comparative": "grundsätzlicher",
+  "superlative": "am grundsätzlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ausreichend": {
+  "positive": "ausreichend",
+  "comparative": "ausreichender",
+  "superlative": "am ausreichendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "blass": {
+  "positive": "blass",
+  "comparative": "blasser",
+  "superlative": "am blassesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "diätisch": {
+  "positive": "diätisch",
+  "comparative": "diätischer",
+  "superlative": "am diätischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "prinzipiell": {
+  "positive": "prinzipiell",
+  "comparative": "prinzipieller",
+  "superlative": "am prinzipiellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sichtbar": {
+  "positive": "sichtbar",
+  "comparative": "sichtbarer",
+  "superlative": "am sichtbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unbequem": {
+  "positive": "unbequem",
+  "comparative": "unbequemer",
+  "superlative": "am unbequemsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zuständig": {
+  "positive": "zuständig",
+  "comparative": "zuständiger",
+  "superlative": "am zuständigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "blutig": {
+  "positive": "blutig",
+  "comparative": "blutiger",
+  "superlative": "am blutigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eiskalt": {
+  "positive": "eiskalt",
+  "comparative": "eiskalter",
+  "superlative": "am eiskaltesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "roh": {
+  "positive": "roh",
+  "comparative": "roher",
+  "superlative": "am rohsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schwindelig": {
+  "positive": "schwindelig",
+  "comparative": "schwindeliger",
+  "superlative": "am schwindeligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "angeblich": {
+  "positive": "angeblich",
+  "comparative": "angeblicher",
+  "superlative": "am angeblichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "beruhigend": {
+  "positive": "beruhigend",
+  "comparative": "beruhigender",
+  "superlative": "am beruhigendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eigen": {
+  "positive": "eigen",
+  "comparative": "eigener",
+  "superlative": "am eigensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "geheim": {
+  "positive": "geheim",
+  "comparative": "geheimer",
+  "superlative": "am geheimsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "klassisch": {
+  "positive": "klassisch",
+  "comparative": "klassischer",
+  "superlative": "am klassischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kommerziell": {
+  "positive": "kommerziell",
+  "comparative": "kommerzieller",
+  "superlative": "am kommerziellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "leidenschaftlich": {
+  "positive": "leidenschaftlich",
+  "comparative": "leidenschaftlicher",
+  "superlative": "am leidenschaftlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "motiviert": {
+  "positive": "motiviert",
+  "comparative": "motivierter",
+  "superlative": "am motiviertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ungewöhnlich": {
+  "positive": "ungewöhnlich",
+  "comparative": "ungewöhnlicher",
+  "superlative": "am ungewöhnlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wundervoll": {
+  "positive": "wundervoll",
+  "comparative": "wundervoller",
+  "superlative": "am wundervollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zweiteilig": {
+  "positive": "zweiteilig",
+  "comparative": "zweiteiliger",
+  "superlative": "am zweiteiligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fantasievoll": {
+  "positive": "fantasievoll",
+  "comparative": "fantasievoller",
+  "superlative": "am fantasievollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "feierlich": {
+  "positive": "feierlich",
+  "comparative": "feierlicher",
+  "superlative": "am feierlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "tragisch": {
+  "positive": "tragisch",
+  "comparative": "tragischer",
+  "superlative": "am tragischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "würzig": {
+  "positive": "würzig",
+  "comparative": "würziger",
+  "superlative": "am würzigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unmöglich": {
+  "positive": "unmöglich",
+  "comparative": "unmöglicher",
+  "superlative": "am unmöglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "künstlerisch": {
+  "positive": "künstlerisch",
+  "comparative": "künstlerischer",
+  "superlative": "am künstlerischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "talentiert": {
+  "positive": "talentiert",
+  "comparative": "talentierter",
+  "superlative": "am talentiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "traditionell": {
+  "positive": "traditionell",
+  "comparative": "traditioneller",
+  "superlative": "am traditionellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "uncool": {
+  "positive": "uncool",
+  "comparative": "uncooler",
+  "superlative": "am uncoolsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zeitlos": {
+  "positive": "zeitlos",
+  "comparative": "zeitloser",
+  "superlative": "am zeitlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "finster": {
+  "positive": "finster",
+  "comparative": "finsterer",
+  "superlative": "am finstersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nächtlich": {
+  "positive": "nächtlich",
+  "comparative": "nächtlicher",
+  "superlative": "am nächtlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vergeblich": {
+  "positive": "vergeblich",
+  "comparative": "vergeblicher",
+  "superlative": "am vergeblichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "brasilianisch": {
+  "positive": "brasilianisch",
+  "comparative": "brasilianischer",
+  "superlative": "am brasilianischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nominal": {
+  "positive": "nominal",
+  "comparative": "nominaler",
+  "superlative": "am nominalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aufwändig": {
+  "positive": "aufwändig",
+  "comparative": "aufwändiger",
+  "superlative": "am aufwändigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bio-": {
+  "positive": "Bio-",
+  "comparative": "Bio-er",
+  "superlative": "am Bio-sten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "digital": {
+  "positive": "digital",
+  "comparative": "digitaler",
+  "superlative": "am digitalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "extrem": {
+  "positive": "extrem",
+  "comparative": "extremer",
+  "superlative": "am extremsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hilflos": {
+  "positive": "hilflos",
+  "comparative": "hilfloser",
+  "superlative": "am hilflosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ländlich": {
+  "positive": "ländlich",
+  "comparative": "ländlicher",
+  "superlative": "am ländlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "regional": {
+  "positive": "regional",
+  "comparative": "regionaler",
+  "superlative": "am regionalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schädlich": {
+  "positive": "schädlich",
+  "comparative": "schädlicher",
+  "superlative": "am schädlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ökologisch": {
+  "positive": "ökologisch",
+  "comparative": "ökologischer",
+  "superlative": "am ökologischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "europäisch": {
+  "positive": "europäisch",
+  "comparative": "europäischer",
+  "superlative": "am europäischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wirtschaftlich": {
+  "positive": "wirtschaftlich",
+  "comparative": "wirtschaftlicher",
+  "superlative": "am wirtschaftlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "endgültig": {
+  "positive": "endgültig",
+  "comparative": "endgültiger",
+  "superlative": "am endgültigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "national": {
+  "positive": "national",
+  "comparative": "nationaler",
+  "superlative": "am nationalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ehrenamtlich": {
+  "positive": "ehrenamtlich",
+  "comparative": "ehrenamtlicher",
+  "superlative": "am ehrenamtlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "verantwortlich": {
+  "positive": "verantwortlich",
+  "comparative": "verantwortlicher",
+  "superlative": "am verantwortlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bedürftig": {
+  "positive": "bedürftig",
+  "comparative": "bedürftiger",
+  "superlative": "am bedürftigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bundesweit": {
+  "positive": "bundesweit",
+  "comparative": "bundesweiter",
+  "superlative": "am bundesweitesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "elternfrei": {
+  "positive": "elternfrei",
+  "comparative": "elternfreier",
+  "superlative": "am elternfreisten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "qualitativ": {
+  "positive": "qualitativ",
+  "comparative": "qualitativer",
+  "superlative": "am qualitativsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zuverlässig": {
+  "positive": "zuverlässig",
+  "comparative": "zuverlässiger",
+  "superlative": "am zuverlässigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "übrig": {
+  "positive": "übrig",
+  "comparative": "übriger",
+  "superlative": "am übrigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "körperlich": {
+  "positive": "körperlich",
+  "comparative": "körperlicher",
+  "superlative": "am körperlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vollständig": {
+  "positive": "vollständig",
+  "comparative": "vollständiger",
+  "superlative": "am vollständigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "humorvoll": {
+  "positive": "humorvoll",
+  "comparative": "humorvoller",
+  "superlative": "am humorvollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "steil": {
+  "positive": "steil",
+  "comparative": "steiler",
+  "superlative": "am steilsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "weich": {
+  "positive": "weich",
+  "comparative": "weicher",
+  "superlative": "am weichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "pauschal": {
+  "positive": "pauschal",
+  "comparative": "pauschaler",
+  "superlative": "am pauschalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "problematisch": {
+  "positive": "problematisch",
+  "comparative": "problematischer",
+  "superlative": "am problematischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "überzeugend": {
+  "positive": "überzeugend",
+  "comparative": "überzeugender",
+  "superlative": "am überzeugendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "global": {
+  "positive": "global",
+  "comparative": "globaler",
+  "superlative": "am globalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wünschenswert": {
+  "positive": "wünschenswert",
+  "comparative": "wünschenswerter",
+  "superlative": "am wünschenswertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "chaotisch": {
+  "positive": "chaotisch",
+  "comparative": "chaotischer",
+  "superlative": "am chaotischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "clever": {
+  "positive": "clever",
+  "comparative": "cleverer",
+  "superlative": "am cleversten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "dankbar": {
+  "positive": "dankbar",
+  "comparative": "dankbarer",
+  "superlative": "am dankbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "heimlich": {
+  "positive": "heimlich",
+  "comparative": "heimlicher",
+  "superlative": "am heimlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "original": {
+  "positive": "original",
+  "comparative": "originaler",
+  "superlative": "am originalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "tierisch": {
+  "positive": "tierisch",
+  "comparative": "tierischer",
+  "superlative": "am tierischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wartend": {
+  "positive": "wartend",
+  "comparative": "wartender",
+  "superlative": "am wartendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ansprechend": {
+  "positive": "ansprechend",
+  "comparative": "ansprechender",
+  "superlative": "am ansprechendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aufmerksam": {
+  "positive": "aufmerksam",
+  "comparative": "aufmerksamer",
+  "superlative": "am aufmerksamsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ausgezeichnet": {
+  "positive": "ausgezeichnet",
+  "comparative": "ausgezeichneter",
+  "superlative": "am ausgezeichnetesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "automatisch": {
+  "positive": "automatisch",
+  "comparative": "automatischer",
+  "superlative": "am automatischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gratis": {
+  "positive": "gratis",
+  "comparative": "gratiser",
+  "superlative": "am gratisesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "interessiert": {
+  "positive": "interessiert",
+  "comparative": "interessierter",
+  "superlative": "am interessiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "merkwürdig": {
+  "positive": "merkwürdig",
+  "comparative": "merkwürdiger",
+  "superlative": "am merkwürdigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "rein": {
+  "positive": "rein",
+  "comparative": "reiner",
+  "superlative": "am reinsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "seltsam": {
+  "positive": "seltsam",
+  "comparative": "seltsamer",
+  "superlative": "am seltsamsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ungesund": {
+  "positive": "ungesund",
+  "comparative": "ungesunder",
+  "superlative": "am ungesundesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unmodern": {
+  "positive": "unmodern",
+  "comparative": "unmoderner",
+  "superlative": "am unmodernsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "überrascht": {
+  "positive": "überrascht",
+  "comparative": "überraschter",
+  "superlative": "am überraschtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "frech": {
+  "positive": "frech",
+  "comparative": "frecher",
+  "superlative": "am frechsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unverständlich": {
+  "positive": "unverständlich",
+  "comparative": "unverständlicher",
+  "superlative": "am unverständlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bewusst": {
+  "positive": "bewusst",
+  "comparative": "bewusster",
+  "superlative": "am bewusstesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "biologisch": {
+  "positive": "biologisch",
+  "comparative": "biologischer",
+  "superlative": "am biologischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "damalig": {
+  "positive": "damalig",
+  "comparative": "damaliger",
+  "superlative": "am damaligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fortschrittlich": {
+  "positive": "fortschrittlich",
+  "comparative": "fortschrittlicher",
+  "superlative": "am fortschrittlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "katholisch": {
+  "positive": "katholisch",
+  "comparative": "katholischer",
+  "superlative": "am katholischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "produziert": {
+  "positive": "produziert",
+  "comparative": "produzierter",
+  "superlative": "am produziertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "symbolisch": {
+  "positive": "symbolisch",
+  "comparative": "symbolischer",
+  "superlative": "am symbolischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "touristisch": {
+  "positive": "touristisch",
+  "comparative": "touristischer",
+  "superlative": "am touristischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vegan": {
+  "positive": "vegan",
+  "comparative": "veganer",
+  "superlative": "am vegansten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vegetarisch": {
+  "positive": "vegetarisch",
+  "comparative": "vegetarischer",
+  "superlative": "am vegetarischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ausgeruht": {
+  "positive": "ausgeruht",
+  "comparative": "ausgeruhter",
+  "superlative": "am ausgeruhtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vorbereitet": {
+  "positive": "vorbereitet",
+  "comparative": "vorbereiteter",
+  "superlative": "am vorbereitetesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "politisch": {
+  "positive": "politisch",
+  "comparative": "politischer",
+  "superlative": "am politischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wesentlich": {
+  "positive": "wesentlich",
+  "comparative": "wesentlicher",
+  "superlative": "am wesentlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erholt": {
+  "positive": "erholt",
+  "comparative": "erholter",
+  "superlative": "am erholtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "historisch": {
+  "positive": "historisch",
+  "comparative": "historischer",
+  "superlative": "am historischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "jetzig": {
+  "positive": "jetzig",
+  "comparative": "jetziger",
+  "superlative": "am jetzigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "literarisch": {
+  "positive": "literarisch",
+  "comparative": "literarischer",
+  "superlative": "am literarischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "lokal": {
+  "positive": "lokal",
+  "comparative": "lokaler",
+  "superlative": "am lokalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "medizinisch": {
+  "positive": "medizinisch",
+  "comparative": "medizinischer",
+  "superlative": "am medizinischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "monoton": {
+  "positive": "monoton",
+  "comparative": "monotoner",
+  "superlative": "am monotonsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "radikal": {
+  "positive": "radikal",
+  "comparative": "radikaler",
+  "superlative": "am radikalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "relativ": {
+  "positive": "relativ",
+  "comparative": "relativer",
+  "superlative": "am relativsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "tolerant": {
+  "positive": "tolerant",
+  "comparative": "toleranter",
+  "superlative": "am tolerantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unverändert": {
+  "positive": "unverändert",
+  "comparative": "unveränderter",
+  "superlative": "am unverändertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zufällig": {
+  "positive": "zufällig",
+  "comparative": "zufälliger",
+  "superlative": "am zufälligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zweimonatig": {
+  "positive": "zweimonatig",
+  "comparative": "zweimonatiger",
+  "superlative": "am zweimonatigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "automatisiert": {
+  "positive": "automatisiert",
+  "comparative": "automatisierter",
+  "superlative": "am automatisiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "liebevoll": {
+  "positive": "liebevoll",
+  "comparative": "liebevoller",
+  "superlative": "am liebevollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gründlich": {
+  "positive": "gründlich",
+  "comparative": "gründlicher",
+  "superlative": "am gründlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "rechtzeitig": {
+  "positive": "rechtzeitig",
+  "comparative": "rechtzeitiger",
+  "superlative": "am rechtzeitigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schick": {
+  "positive": "schick",
+  "comparative": "schicker",
+  "superlative": "am schicksten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kommunikativ": {
+  "positive": "kommunikativ",
+  "comparative": "kommunikativer",
+  "superlative": "am kommunikativsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aggressiv": {
+  "positive": "aggressiv",
+  "comparative": "aggressiver",
+  "superlative": "am aggressivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "entspannt": {
+  "positive": "entspannt",
+  "comparative": "entspannter",
+  "superlative": "am entspanntesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "inhaltlich": {
+  "positive": "inhaltlich",
+  "comparative": "inhaltlicher",
+  "superlative": "am inhaltlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "konservativ": {
+  "positive": "konservativ",
+  "comparative": "konservativer",
+  "superlative": "am konservativsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "locker": {
+  "positive": "locker",
+  "comparative": "lockerer",
+  "superlative": "am lockersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "menschlich": {
+  "positive": "menschlich",
+  "comparative": "menschlicher",
+  "superlative": "am menschlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "optimistisch": {
+  "positive": "optimistisch",
+  "comparative": "optimistischer",
+  "superlative": "am optimistischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "speziell": {
+  "positive": "speziell",
+  "comparative": "spezieller",
+  "superlative": "am speziellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "steif": {
+  "positive": "steif",
+  "comparative": "steifer",
+  "superlative": "am steifsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zahlreich": {
+  "positive": "zahlreich",
+  "comparative": "zahlreicher",
+  "superlative": "am zahlreichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zornig": {
+  "positive": "zornig",
+  "comparative": "zorniger",
+  "superlative": "am zornigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "atypisch": {
+  "positive": "atypisch",
+  "comparative": "atypischer",
+  "superlative": "am atypischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "begehrt": {
+  "positive": "begehrt",
+  "comparative": "begehrter",
+  "superlative": "am begehrtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einig": {
+  "positive": "einig",
+  "comparative": "einiger",
+  "superlative": "am einigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erheblich": {
+  "positive": "erheblich",
+  "comparative": "erheblicher",
+  "superlative": "am erheblichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "exotisch": {
+  "positive": "exotisch",
+  "comparative": "exotischer",
+  "superlative": "am exotischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hilfreich": {
+  "positive": "hilfreich",
+  "comparative": "hilfreicher",
+  "superlative": "am hilfreichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "klimatisiert": {
+  "positive": "klimatisiert",
+  "comparative": "klimatisierter",
+  "superlative": "am klimatisiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sehnsüchtig": {
+  "positive": "sehnsüchtig",
+  "comparative": "sehnsüchtiger",
+  "superlative": "am sehnsüchtigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vornehm": {
+  "positive": "vornehm",
+  "comparative": "vornehmer",
+  "superlative": "am vornehmsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "abenteuerlich": {
+  "positive": "abenteuerlich",
+  "comparative": "abenteuerlicher",
+  "superlative": "am abenteuerlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "alkoholfrei": {
+  "positive": "alkoholfrei",
+  "comparative": "alkoholfreier",
+  "superlative": "am alkoholfreisten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "amtlich": {
+  "positive": "amtlich",
+  "comparative": "amtlicher",
+  "superlative": "am amtlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bürgerlich": {
+  "positive": "bürgerlich",
+  "comparative": "bürgerlicher",
+  "superlative": "am bürgerlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einheitlich": {
+  "positive": "einheitlich",
+  "comparative": "einheitlicher",
+  "superlative": "am einheitlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "entscheidend": {
+  "positive": "entscheidend",
+  "comparative": "entscheidender",
+  "superlative": "am entscheidendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erstaunlich": {
+  "positive": "erstaunlich",
+  "comparative": "erstaunlicher",
+  "superlative": "am erstaunlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "farbenfroh": {
+  "positive": "farbenfroh",
+  "comparative": "farbenfroher",
+  "superlative": "am farbenfrohsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gelegentlich": {
+  "positive": "gelegentlich",
+  "comparative": "gelegentlicher",
+  "superlative": "am gelegentlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gläubig": {
+  "positive": "gläubig",
+  "comparative": "gläubiger",
+  "superlative": "am gläubigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "heimisch": {
+  "positive": "heimisch",
+  "comparative": "heimischer",
+  "superlative": "am heimischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "inhaltsleer": {
+  "positive": "inhaltsleer",
+  "comparative": "inhaltslerer",
+  "superlative": "am inhaltsleersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "intolerant": {
+  "positive": "intolerant",
+  "comparative": "intoleranter",
+  "superlative": "am intolerantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "jeglich": {
+  "positive": "jeglich",
+  "comparative": "jeglicher",
+  "superlative": "am jeglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "komplex": {
+  "positive": "komplex",
+  "comparative": "komplexer",
+  "superlative": "am komplexesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "missverständlich": {
+  "positive": "missverständlich",
+  "comparative": "missverständlicher",
+  "superlative": "am missverständlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "multikulturell": {
+  "positive": "multikulturell",
+  "comparative": "multikultureller",
+  "superlative": "am multikulturellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nachdenklich": {
+  "positive": "nachdenklich",
+  "comparative": "nachdenklicher",
+  "superlative": "am nachdenklichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nonverbal": {
+  "positive": "nonverbal",
+  "comparative": "nonverbaler",
+  "superlative": "am nonverbalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "passioniert": {
+  "positive": "passioniert",
+  "comparative": "passionierter",
+  "superlative": "am passioniertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schmerzlos": {
+  "positive": "schmerzlos",
+  "comparative": "schmerzloser",
+  "superlative": "am schmerzlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "üblich": {
+  "positive": "üblich",
+  "comparative": "üblicher",
+  "superlative": "am üblichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unerwartet": {
+  "positive": "unerwartet",
+  "comparative": "unerwarteter",
+  "superlative": "am unerwartetesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vielsprachig": {
+  "positive": "vielsprachig",
+  "comparative": "vielsprachiger",
+  "superlative": "am vielsprachigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vollkommen": {
+  "positive": "vollkommen",
+  "comparative": "vollkommener",
+  "superlative": "am vollkommensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vertraut": {
+  "positive": "vertraut",
+  "comparative": "vertrauter",
+  "superlative": "am vertrautesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "abgesehen": {
+  "positive": "abgesehen",
+  "comparative": "abgesehener",
+  "superlative": "am abgesehensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "betroffen": {
+  "positive": "betroffen",
+  "comparative": "betroffener",
+  "superlative": "am betroffensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "geduldig": {
+  "positive": "geduldig",
+  "comparative": "geduldiger",
+  "superlative": "am geduldigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "obligatorisch": {
+  "positive": "obligatorisch",
+  "comparative": "obligatorischer",
+  "superlative": "am obligatorischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "angemessen": {
+  "positive": "angemessen",
+  "comparative": "angemessener",
+  "superlative": "am angemessensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bilingual": {
+  "positive": "bilingual",
+  "comparative": "bilingualer",
+  "superlative": "am bilingualsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "destruktiv": {
+  "positive": "destruktiv",
+  "comparative": "destruktiver",
+  "superlative": "am destruktivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "dreckig": {
+  "positive": "dreckig",
+  "comparative": "dreckiger",
+  "superlative": "am dreckigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einsprachig": {
+  "positive": "einsprachig",
+  "comparative": "einsprachiger",
+  "superlative": "am einsprachigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fehlerlos": {
+  "positive": "fehlerlos",
+  "comparative": "fehlerloser",
+  "superlative": "am fehlerlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hervorragend": {
+  "positive": "hervorragend",
+  "comparative": "hervorragender",
+  "superlative": "am hervorragendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hitzig": {
+  "positive": "hitzig",
+  "comparative": "hitziger",
+  "superlative": "am hitzigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "instinktiv": {
+  "positive": "instinktiv",
+  "comparative": "instinktiver",
+  "superlative": "am instinktivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kinderleicht": {
+  "positive": "kinderleicht",
+  "comparative": "kinderleichter",
+  "superlative": "am kinderleichtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "konstruktiv": {
+  "positive": "konstruktiv",
+  "comparative": "konstruktiver",
+  "superlative": "am konstruktivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "lexikalisch": {
+  "positive": "lexikalisch",
+  "comparative": "lexikalischer",
+  "superlative": "am lexikalischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "monolingual": {
+  "positive": "monolingual",
+  "comparative": "monolingualer",
+  "superlative": "am monolingualsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nichtssagend": {
+  "positive": "nichtssagend",
+  "comparative": "nichtssagender",
+  "superlative": "am nichtssagendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "platt": {
+  "positive": "platt",
+  "comparative": "platter",
+  "superlative": "am plattesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "poetisch": {
+  "positive": "poetisch",
+  "comparative": "poetischer",
+  "superlative": "am poetischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ratsam": {
+  "positive": "ratsam",
+  "comparative": "ratsamer",
+  "superlative": "am ratsamsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "systematisch": {
+  "positive": "systematisch",
+  "comparative": "systematischer",
+  "superlative": "am systematischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unbedingt": {
+  "positive": "unbedingt",
+  "comparative": "unbedingter",
+  "superlative": "am unbedingtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ungefragt": {
+  "positive": "ungefragt",
+  "comparative": "ungefragter",
+  "superlative": "am ungefragtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "verwunderlich": {
+  "positive": "verwunderlich",
+  "comparative": "verwunderlicher",
+  "superlative": "am verwunderlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zweisprachig": {
+  "positive": "zweisprachig",
+  "comparative": "zweisprachiger",
+  "superlative": "am zweisprachigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "angestellt": {
+  "positive": "angestellt",
+  "comparative": "angestellter",
+  "superlative": "am angestelltesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "edel": {
+  "positive": "edel",
+  "comparative": "edler",
+  "superlative": "am edelsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mutig": {
+  "positive": "mutig",
+  "comparative": "mutiger",
+  "superlative": "am mutigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "psychisch": {
+  "positive": "psychisch",
+  "comparative": "psychischer",
+  "superlative": "am psychischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unkompliziert": {
+  "positive": "unkompliziert",
+  "comparative": "unkomplizierter",
+  "superlative": "am unkompliziertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "winzig": {
+  "positive": "winzig",
+  "comparative": "winziger",
+  "superlative": "am winzigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "abgeschlossen": {
+  "positive": "abgeschlossen",
+  "comparative": "abgeschlossener",
+  "superlative": "am abgeschlossensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "anspruchsvoll": {
+  "positive": "anspruchsvoll",
+  "comparative": "anspruchsvoller",
+  "superlative": "am anspruchsvollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "arrogant": {
+  "positive": "arrogant",
+  "comparative": "arroganter",
+  "superlative": "am arrogantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ausgesprochen": {
+  "positive": "ausgesprochen",
+  "comparative": "ausgesprochener",
+  "superlative": "am ausgesprochensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fachlich": {
+  "positive": "fachlich",
+  "comparative": "fachlicher",
+  "superlative": "am fachlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "final": {
+  "positive": "final",
+  "comparative": "finaler",
+  "superlative": "am finalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "genügend": {
+  "positive": "genügend",
+  "comparative": "genügender",
+  "superlative": "am genügendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "hauptsächlich": {
+  "positive": "hauptsächlich",
+  "comparative": "hauptsächlicher",
+  "superlative": "am hauptsächlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kooperativ": {
+  "positive": "kooperativ",
+  "comparative": "kooperativer",
+  "superlative": "am kooperativsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mangelnd": {
+  "positive": "mangelnd",
+  "comparative": "mangelnder",
+  "superlative": "am mangelndesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nahegelegen": {
+  "positive": "nahegelegen",
+  "comparative": "nahegelegener",
+  "superlative": "am nahegelegensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "teamfähig": {
+  "positive": "teamfähig",
+  "comparative": "teamfähiger",
+  "superlative": "am teamfähigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "überlastet": {
+  "positive": "überlastet",
+  "comparative": "überlasteter",
+  "superlative": "am überlastetesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "übersichtlich": {
+  "positive": "übersichtlich",
+  "comparative": "übersichtlicher",
+  "superlative": "am übersichtlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "umfangreich": {
+  "positive": "umfangreich",
+  "comparative": "umfangreicher",
+  "superlative": "am umfangreichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ungeliebt": {
+  "positive": "ungeliebt",
+  "comparative": "ungeliebter",
+  "superlative": "am ungeliebtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "verlässlich": {
+  "positive": "verlässlich",
+  "comparative": "verlässlicher",
+  "superlative": "am verlässlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vernünftig": {
+  "positive": "vernünftig",
+  "comparative": "vernünftiger",
+  "superlative": "am vernünftigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wirkungsvoll": {
+  "positive": "wirkungsvoll",
+  "comparative": "wirkungsvoller",
+  "superlative": "am wirkungsvollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zielorientiert": {
+  "positive": "zielorientiert",
+  "comparative": "zielorientierter",
+  "superlative": "am zielorientiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "anerkannt": {
+  "positive": "anerkannt",
+  "comparative": "anerkannter",
+  "superlative": "am anerkanntesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "auffällig": {
+  "positive": "auffällig",
+  "comparative": "auffälliger",
+  "superlative": "am auffälligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gebürtig": {
+  "positive": "gebürtig",
+  "comparative": "gebürtiger",
+  "superlative": "am gebürtigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "nutzlos": {
+  "positive": "nutzlos",
+  "comparative": "nutzloser",
+  "superlative": "am nutzlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "akut": {
+  "positive": "akut",
+  "comparative": "akuter",
+  "superlative": "am akutesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bemerkenswert": {
+  "positive": "bemerkenswert",
+  "comparative": "bemerkenswerter",
+  "superlative": "am bemerkenswertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bestechend": {
+  "positive": "bestechend",
+  "comparative": "bestechender",
+  "superlative": "am bestechendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einwandfrei": {
+  "positive": "einwandfrei",
+  "comparative": "einwandfreier",
+  "superlative": "am einwandfreisten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "enorm": {
+  "positive": "enorm",
+  "comparative": "enormer",
+  "superlative": "am enormsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kriminell": {
+  "positive": "kriminell",
+  "comparative": "krimineller",
+  "superlative": "am kriminellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "langfristig": {
+  "positive": "langfristig",
+  "comparative": "langfristiger",
+  "superlative": "am langfristigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mehrheitlich": {
+  "positive": "mehrheitlich",
+  "comparative": "mehrheitlicher",
+  "superlative": "am mehrheitlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "orientiert": {
+  "positive": "orientiert",
+  "comparative": "orientierter",
+  "superlative": "am orientiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "samt": {
+  "positive": "samt",
+  "comparative": "samter",
+  "superlative": "am samtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schutzlos": {
+  "positive": "schutzlos",
+  "comparative": "schutzloser",
+  "superlative": "am schutzlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "tatenlos": {
+  "positive": "tatenlos",
+  "comparative": "tatenloser",
+  "superlative": "am tatenlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "überregional": {
+  "positive": "überregional",
+  "comparative": "überregionaler",
+  "superlative": "am überregionalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "überschüssig": {
+  "positive": "überschüssig",
+  "comparative": "überschüssiger",
+  "superlative": "am überschüssigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "übertrieben": {
+  "positive": "übertrieben",
+  "comparative": "übertriebener",
+  "superlative": "am übertriebensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unbezahlt": {
+  "positive": "unbezahlt",
+  "comparative": "unbezahlter",
+  "superlative": "am unbezahltesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unentgeltlich": {
+  "positive": "unentgeltlich",
+  "comparative": "unentgeltlicher",
+  "superlative": "am unentgeltlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unentschlossen": {
+  "positive": "unentschlossen",
+  "comparative": "unentschlossener",
+  "superlative": "am unentschlossensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ungebrochen": {
+  "positive": "ungebrochen",
+  "comparative": "ungebrochener",
+  "superlative": "am ungebrochensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "verderblich": {
+  "positive": "verderblich",
+  "comparative": "verderblicher",
+  "superlative": "am verderblichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zeitintensiv": {
+  "positive": "zeitintensiv",
+  "comparative": "zeitintensiver",
+  "superlative": "am zeitintensivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zurückhaltend": {
+  "positive": "zurückhaltend",
+  "comparative": "zurückhaltender",
+  "superlative": "am zurückhaltendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zuversichtlich": {
+  "positive": "zuversichtlich",
+  "comparative": "zuversichtlicher",
+  "superlative": "am zuversichtlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eifersüchtig": {
+  "positive": "eifersüchtig",
+  "comparative": "eifersüchtiger",
+  "superlative": "am eifersüchtigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "stellvertretend": {
+  "positive": "stellvertretend",
+  "comparative": "stellvertretender",
+  "superlative": "am stellvertretendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "arbeitsfrei": {
+  "positive": "arbeitsfrei",
+  "comparative": "arbeitsfreier",
+  "superlative": "am arbeitsfreisten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "friedlich": {
+  "positive": "friedlich",
+  "comparative": "friedlicher",
+  "superlative": "am friedlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "grafisch": {
+  "positive": "grafisch",
+  "comparative": "grafischer",
+  "superlative": "am grafischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "immerwährend": {
+  "positive": "immerwährend",
+  "comparative": "immerwährender",
+  "superlative": "am immerwährendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "komfortabel": {
+  "positive": "komfortabel",
+  "comparative": "komfortabler",
+  "superlative": "am komfortabelsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unentbehrlich": {
+  "positive": "unentbehrlich",
+  "comparative": "unentbehrlicher",
+  "superlative": "am unentbehrlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wund": {
+  "positive": "wund",
+  "comparative": "wunder",
+  "superlative": "am wundesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "abwechslungsreich": {
+  "positive": "abwechslungsreich",
+  "comparative": "abwechslungsreicher",
+  "superlative": "am abwechslungsreichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "elementar": {
+  "positive": "elementar",
+  "comparative": "elementarer",
+  "superlative": "am elementarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ernsthaft": {
+  "positive": "ernsthaft",
+  "comparative": "ernsthafter",
+  "superlative": "am ernsthaftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "heldenhaft": {
+  "positive": "heldenhaft",
+  "comparative": "heldenhafter",
+  "superlative": "am heldenhaftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ironisch": {
+  "positive": "ironisch",
+  "comparative": "ironischer",
+  "superlative": "am ironischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "loyal": {
+  "positive": "loyal",
+  "comparative": "loyaler",
+  "superlative": "am loyalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "markant": {
+  "positive": "markant",
+  "comparative": "markanter",
+  "superlative": "am markantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "millionenfach": {
+  "positive": "millionenfach",
+  "comparative": "millionenfacher",
+  "superlative": "am millionenfachsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "pessimistisch": {
+  "positive": "pessimistisch",
+  "comparative": "pessimistischer",
+  "superlative": "am pessimistischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vorhanden": {
+  "positive": "vorhanden",
+  "comparative": "vorhandener",
+  "superlative": "am vorhandensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "chronisch": {
+  "positive": "chronisch",
+  "comparative": "chronischer",
+  "superlative": "am chronischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "depressiv": {
+  "positive": "depressiv",
+  "comparative": "depressiver",
+  "superlative": "am depressivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erträglich": {
+  "positive": "erträglich",
+  "comparative": "erträglicher",
+  "superlative": "am erträglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gemein": {
+  "positive": "gemein",
+  "comparative": "gemeiner",
+  "superlative": "am gemeinsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gesundheitsfördernd": {
+  "positive": "gesundheitsfördernd",
+  "comparative": "gesundheitsfördernder",
+  "superlative": "am gesundheitsförderndesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "limitiert": {
+  "positive": "limitiert",
+  "comparative": "limitierter",
+  "superlative": "am limitiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "melancholisch": {
+  "positive": "melancholisch",
+  "comparative": "melancholischer",
+  "superlative": "am melancholischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schmerzlindernd": {
+  "positive": "schmerzlindernd",
+  "comparative": "schmerzlindernder",
+  "superlative": "am schmerzlinderndesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "selbstsicher": {
+  "positive": "selbstsicher",
+  "comparative": "selbstsicherer",
+  "superlative": "am selbstsichersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "strukturiert": {
+  "positive": "strukturiert",
+  "comparative": "strukturierter",
+  "superlative": "am strukturiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unsterblich": {
+  "positive": "unsterblich",
+  "comparative": "unsterblicher",
+  "superlative": "am unsterblichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vielfach": {
+  "positive": "vielfach",
+  "comparative": "vielfacher",
+  "superlative": "am vielfachsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wohltuend": {
+  "positive": "wohltuend",
+  "comparative": "wohltuender",
+  "superlative": "am wohltuendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zunehmend": {
+  "positive": "zunehmend",
+  "comparative": "zunehmender",
+  "superlative": "am zunehmendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bang": {
+  "positive": "bang",
+  "comparative": "banger",
+  "superlative": "am bangsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bankrott": {
+  "positive": "bankrott",
+  "comparative": "bankrotter",
+  "superlative": "am bankrottesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bedeutend": {
+  "positive": "bedeutend",
+  "comparative": "bedeutender",
+  "superlative": "am bedeutendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mythologisch": {
+  "positive": "mythologisch",
+  "comparative": "mythologischer",
+  "superlative": "am mythologischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "rettungslos": {
+  "positive": "rettungslos",
+  "comparative": "rettungsloser",
+  "superlative": "am rettungslosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "satirisch": {
+  "positive": "satirisch",
+  "comparative": "satirischer",
+  "superlative": "am satirischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schlummerlos": {
+  "positive": "schlummerlos",
+  "comparative": "schlummerloser",
+  "superlative": "am schlummerlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "stetig": {
+  "positive": "stetig",
+  "comparative": "stetiger",
+  "superlative": "am stetigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "talentlos": {
+  "positive": "talentlos",
+  "comparative": "talentloser",
+  "superlative": "am talentlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "talentvoll": {
+  "positive": "talentvoll",
+  "comparative": "talentvoller",
+  "superlative": "am talentvollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unbewusst": {
+  "positive": "unbewusst",
+  "comparative": "unbewusster",
+  "superlative": "am unbewusstesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unerfüllt": {
+  "positive": "unerfüllt",
+  "comparative": "unerfüllter",
+  "superlative": "am unerfülltesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ungehört": {
+  "positive": "ungehört",
+  "comparative": "ungehörter",
+  "superlative": "am ungehörtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "üppig": {
+  "positive": "üppig",
+  "comparative": "üppiger",
+  "superlative": "am üppigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "angelehnt": {
+  "positive": "angelehnt",
+  "comparative": "angelehnter",
+  "superlative": "am angelehntesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "geheimnisvoll": {
+  "positive": "geheimnisvoll",
+  "comparative": "geheimnisvoller",
+  "superlative": "am geheimnisvollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gelungen": {
+  "positive": "gelungen",
+  "comparative": "gelungener",
+  "superlative": "am gelungensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "generell": {
+  "positive": "generell",
+  "comparative": "genereller",
+  "superlative": "am generellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "skeptisch": {
+  "positive": "skeptisch",
+  "comparative": "skeptischer",
+  "superlative": "am skeptischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unbekannt": {
+  "positive": "unbekannt",
+  "comparative": "unbekannter",
+  "superlative": "am unbekanntesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unglaubwürdig": {
+  "positive": "unglaubwürdig",
+  "comparative": "unglaubwürdiger",
+  "superlative": "am unglaubwürdigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vielseitig": {
+  "positive": "vielseitig",
+  "comparative": "vielseitiger",
+  "superlative": "am vielseitigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "aufsehenerregend": {
+  "positive": "aufsehenerregend",
+  "comparative": "aufsehenerregender",
+  "superlative": "am aufsehenerregendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ausgewogen": {
+  "positive": "ausgewogen",
+  "comparative": "ausgewogener",
+  "superlative": "am ausgewogensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "baumbeschattet": {
+  "positive": "baumbeschattet",
+  "comparative": "baumbeschatteter",
+  "superlative": "am baumbeschattetesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "durchsichtig": {
+  "positive": "durchsichtig",
+  "comparative": "durchsichtiger",
+  "superlative": "am durchsichtigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fein": {
+  "positive": "fein",
+  "comparative": "feiner",
+  "superlative": "am feinsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "filmreif": {
+  "positive": "filmreif",
+  "comparative": "filmreifer",
+  "superlative": "am filmreifsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fraglich": {
+  "positive": "fraglich",
+  "comparative": "fraglicher",
+  "superlative": "am fraglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "füllig": {
+  "positive": "füllig",
+  "comparative": "fülliger",
+  "superlative": "am fülligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "fürsorglich": {
+  "positive": "fürsorglich",
+  "comparative": "fürsorglicher",
+  "superlative": "am fürsorglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gepflegt": {
+  "positive": "gepflegt",
+  "comparative": "gepflegter",
+  "superlative": "am gepflegtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "glaubhaft": {
+  "positive": "glaubhaft",
+  "comparative": "glaubhafter",
+  "superlative": "am glaubhaftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gütig": {
+  "positive": "gütig",
+  "comparative": "gütiger",
+  "superlative": "am gütigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "heiter": {
+  "positive": "heiter",
+  "comparative": "heiterer",
+  "superlative": "am heitersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "imposant": {
+  "positive": "imposant",
+  "comparative": "imposanter",
+  "superlative": "am imposantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kaiserlich": {
+  "positive": "kaiserlich",
+  "comparative": "kaiserlicher",
+  "superlative": "am kaiserlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "klischeehaft": {
+  "positive": "klischeehaft",
+  "comparative": "klischeehafter",
+  "superlative": "am klischeehaftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "lesefreundlich": {
+  "positive": "lesefreundlich",
+  "comparative": "lesefreundlicher",
+  "superlative": "am lesefreundlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "manikürt": {
+  "positive": "manikürt",
+  "comparative": "manikürter",
+  "superlative": "am manikürtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "philosophisch": {
+  "positive": "philosophisch",
+  "comparative": "philosophischer",
+  "superlative": "am philosophischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "prominent": {
+  "positive": "prominent",
+  "comparative": "prominenter",
+  "superlative": "am prominentesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "rücksichtsvoll": {
+  "positive": "rücksichtsvoll",
+  "comparative": "rücksichtsvoller",
+  "superlative": "am rücksichtsvollsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schlagartig": {
+  "positive": "schlagartig",
+  "comparative": "schlagartiger",
+  "superlative": "am schlagartigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schützenswert": {
+  "positive": "schützenswert",
+  "comparative": "schützenswerter",
+  "superlative": "am schützenswertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schwerelos": {
+  "positive": "schwerelos",
+  "comparative": "schwereloser",
+  "superlative": "am schwerelosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "siegessicher": {
+  "positive": "siegessicher",
+  "comparative": "siegessicherer",
+  "superlative": "am siegessichersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "übersetzbar": {
+  "positive": "übersetzbar",
+  "comparative": "übersetzbarer",
+  "superlative": "am übersetzbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "überwiegend": {
+  "positive": "überwiegend",
+  "comparative": "überwiegender",
+  "superlative": "am überwiegendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unverschlossen": {
+  "positive": "unverschlossen",
+  "comparative": "unverschlossener",
+  "superlative": "am unverschlossensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "verwahrlost": {
+  "positive": "verwahrlost",
+  "comparative": "verwahrloster",
+  "superlative": "am verwahrlostesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vorangegangen": {
+  "positive": "vorangegangen",
+  "comparative": "vorangegangener",
+  "superlative": "am vorangegangensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "weltbekannt": {
+  "positive": "weltbekannt",
+  "comparative": "weltbekannter",
+  "superlative": "am weltbekanntesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sozialistisch": {
+  "positive": "sozialistisch",
+  "comparative": "sozialistischer",
+  "superlative": "am sozialistischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "surreal": {
+  "positive": "surreal",
+  "comparative": "surrealer",
+  "superlative": "am surrealsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vordergründig": {
+  "positive": "vordergründig",
+  "comparative": "vordergründiger",
+  "superlative": "am vordergründigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "engagiert": {
+  "positive": "engagiert",
+  "comparative": "engagierter",
+  "superlative": "am engagiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erneuerbar": {
+  "positive": "erneuerbar",
+  "comparative": "erneuerbarer",
+  "superlative": "am erneuerbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "garantiert": {
+  "positive": "garantiert",
+  "comparative": "garantierter",
+  "superlative": "am garantiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "heftig": {
+  "positive": "heftig",
+  "comparative": "heftiger",
+  "superlative": "am heftigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kostbar": {
+  "positive": "kostbar",
+  "comparative": "kostbarer",
+  "superlative": "am kostbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "tierlieb": {
+  "positive": "tierlieb",
+  "comparative": "tierlieber",
+  "superlative": "am tierliebsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "traumatisiert": {
+  "positive": "traumatisiert",
+  "comparative": "traumatisierter",
+  "superlative": "am traumatisiertesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "variabel": {
+  "positive": "variabel",
+  "comparative": "variabler",
+  "superlative": "am variabelsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zugänglich": {
+  "positive": "zugänglich",
+  "comparative": "zugänglicher",
+  "superlative": "am zugänglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "anormal": {
+  "positive": "anormal",
+  "comparative": "anormaler",
+  "superlative": "am anormalsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eigenständig": {
+  "positive": "eigenständig",
+  "comparative": "eigenständiger",
+  "superlative": "am eigenständigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "einleuchtend": {
+  "positive": "einleuchtend",
+  "comparative": "einleuchtender",
+  "superlative": "am einleuchtendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "energiesparend": {
+  "positive": "energiesparend",
+  "comparative": "energiesparender",
+  "superlative": "am energiesparendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erkennbar": {
+  "positive": "erkennbar",
+  "comparative": "erkennbarer",
+  "superlative": "am erkennbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kostengünstig": {
+  "positive": "kostengünstig",
+  "comparative": "kostengünstiger",
+  "superlative": "am kostengünstigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kursiv": {
+  "positive": "kursiv",
+  "comparative": "kursiver",
+  "superlative": "am kursivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mechanisch": {
+  "positive": "mechanisch",
+  "comparative": "mechanischer",
+  "superlative": "am mechanischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "rasant": {
+  "positive": "rasant",
+  "comparative": "rasanter",
+  "superlative": "am rasantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "rosig": {
+  "positive": "rosig",
+  "comparative": "rosiger",
+  "superlative": "am rosigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sagenhaft": {
+  "positive": "sagenhaft",
+  "comparative": "sagenhafter",
+  "superlative": "am sagenhaftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "simpel": {
+  "positive": "simpel",
+  "comparative": "simpler",
+  "superlative": "am simpelsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "naturwissenschaftlich": {
+  "positive": "naturwissenschaftlich",
+  "comparative": "naturwissenschaftlicher",
+  "superlative": "am naturwissenschaftlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "umstritten": {
+  "positive": "umstritten",
+  "comparative": "umstrittener",
+  "superlative": "am umstrittensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unangebracht": {
+  "positive": "unangebracht",
+  "comparative": "unangebrachter",
+  "superlative": "am unangebrachtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "zukunftssicher": {
+  "positive": "zukunftssicher",
+  "comparative": "zukunftssicherer",
+  "superlative": "am zukunftssichersten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "gehoben": {
+  "positive": "gehoben",
+  "comparative": "gehobener",
+  "superlative": "am gehobensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "glaubwürdig": {
+  "positive": "glaubwürdig",
+  "comparative": "glaubwürdiger",
+  "superlative": "am glaubwürdigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "überlebenswichtig": {
+  "positive": "überlebenswichtig",
+  "comparative": "überlebenswichtiger",
+  "superlative": "am überlebenswichtigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "akustisch": {
+  "positive": "akustisch",
+  "comparative": "akustischer",
+  "superlative": "am akustischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "analytisch": {
+  "positive": "analytisch",
+  "comparative": "analytischer",
+  "superlative": "am analytischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ausgewechselt": {
+  "positive": "ausgewechselt",
+  "comparative": "ausgewechselter",
+  "superlative": "am ausgewechseltesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "außergewöhnlich": {
+  "positive": "außergewöhnlich",
+  "comparative": "außergewöhnlicher",
+  "superlative": "am außergewöhnlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bedroht": {
+  "positive": "bedroht",
+  "comparative": "bedrohter",
+  "superlative": "am bedrohtesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "bestmöglich": {
+  "positive": "bestmöglich",
+  "comparative": "bestmöglicher",
+  "superlative": "am bestmöglichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "dauerhaft": {
+  "positive": "dauerhaft",
+  "comparative": "dauerhafter",
+  "superlative": "am dauerhaftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "deprimierend": {
+  "positive": "deprimierend",
+  "comparative": "deprimierender",
+  "superlative": "am deprimierendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "dramatisch": {
+  "positive": "dramatisch",
+  "comparative": "dramatischer",
+  "superlative": "am dramatischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "durchführbar": {
+  "positive": "durchführbar",
+  "comparative": "durchführbarer",
+  "superlative": "am durchführbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eigensinnig": {
+  "positive": "eigensinnig",
+  "comparative": "eigensinniger",
+  "superlative": "am eigensinnigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "eingerechnet": {
+  "positive": "eingerechnet",
+  "comparative": "eingerechneter",
+  "superlative": "am eingerechnetesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "erfolglos": {
+  "positive": "erfolglos",
+  "comparative": "erfolgloser",
+  "superlative": "am erfolglosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "intakt": {
+  "positive": "intakt",
+  "comparative": "intakter",
+  "superlative": "am intaktesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "intellektuell": {
+  "positive": "intellektuell",
+  "comparative": "intellektueller",
+  "superlative": "am intellektuellsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kahl": {
+  "positive": "kahl",
+  "comparative": "kahler",
+  "superlative": "am kahlsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kontinuierlich": {
+  "positive": "kontinuierlich",
+  "comparative": "kontinuierlicher",
+  "superlative": "am kontinuierlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kurzfristig": {
+  "positive": "kurzfristig",
+  "comparative": "kurzfristiger",
+  "superlative": "am kurzfristigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "längerfristig": {
+  "positive": "längerfristig",
+  "comparative": "längerfristiger",
+  "superlative": "am längerfristigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "langlebig": {
+  "positive": "langlebig",
+  "comparative": "langlebiger",
+  "superlative": "am langlebigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "langwierig": {
+  "positive": "langwierig",
+  "comparative": "langwieriger",
+  "superlative": "am langwierigsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "maßgeblich": {
+  "positive": "maßgeblich",
+  "comparative": "maßgeblicher",
+  "superlative": "am maßgeblichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mathematisch": {
+  "positive": "mathematisch",
+  "comparative": "mathematischer",
+  "superlative": "am mathematischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "mittelalterlich": {
+  "positive": "mittelalterlich",
+  "comparative": "mittelalterlicher",
+  "superlative": "am mittelalterlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "müdegearbeitet": {
+  "positive": "müdegearbeitet",
+  "comparative": "müdegearbeiteter",
+  "superlative": "am müdegearbeitetesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "physikalisch": {
+  "positive": "physikalisch",
+  "comparative": "physikalischer",
+  "superlative": "am physikalischsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "radioaktiv": {
+  "positive": "radioaktiv",
+  "comparative": "radioaktiver",
+  "superlative": "am radioaktivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "rastlos": {
+  "positive": "rastlos",
+  "comparative": "rastloser",
+  "superlative": "am rastlosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "sanft": {
+  "positive": "sanft",
+  "comparative": "sanfter",
+  "superlative": "am sanftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "schlaflos": {
+  "positive": "schlaflos",
+  "comparative": "schlafloser",
+  "superlative": "am schlaflosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "solide": {
+  "positive": "solide",
+  "comparative": "solider",
+  "superlative": "am solidesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unpassend": {
+  "positive": "unpassend",
+  "comparative": "unpassender",
+  "superlative": "am unpassendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vehement": {
+  "positive": "vehement",
+  "comparative": "vehementer",
+  "superlative": "am vehementesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "verstärkt": {
+  "positive": "verstärkt",
+  "comparative": "verstärkter",
+  "superlative": "am verstärktesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vorbildlich": {
+  "positive": "vorbildlich",
+  "comparative": "vorbildlicher",
+  "superlative": "am vorbildlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wacklig": {
+  "positive": "wacklig",
+  "comparative": "wackliger",
+  "superlative": "am wackligsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "konstant": {
+  "positive": "konstant",
+  "comparative": "konstanter",
+  "superlative": "am konstantesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "benommen": {
+  "positive": "benommen",
+  "comparative": "benommener",
+  "superlative": "am benommensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "anerkennend": {
+  "positive": "anerkennend",
+  "comparative": "anerkennender",
+  "superlative": "am anerkennendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ausverkauft": {
+  "positive": "ausverkauft",
+  "comparative": "ausverkaufter",
+  "superlative": "am ausverkauftesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "freundschaftlich": {
+  "positive": "freundschaftlich",
+  "comparative": "freundschaftlicher",
+  "superlative": "am freundschaftlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "kurios": {
+  "positive": "kurios",
+  "comparative": "kurioser",
+  "superlative": "am kuriosesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "umgangssprachlich": {
+  "positive": "umgangssprachlich",
+  "comparative": "umgangssprachlicher",
+  "superlative": "am umgangssprachlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unangemessen": {
+  "positive": "unangemessen",
+  "comparative": "unangemessener",
+  "superlative": "am unangemessensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "undenkbar": {
+  "positive": "undenkbar",
+  "comparative": "undenkbarer",
+  "superlative": "am undenkbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "ungeschlagen": {
+  "positive": "ungeschlagen",
+  "comparative": "ungeschlagener",
+  "superlative": "am ungeschlagensten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "unleserlich": {
+  "positive": "unleserlich",
+  "comparative": "unleserlicher",
+  "superlative": "am unleserlichsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "wohlwollend": {
+  "positive": "wohlwollend",
+  "comparative": "wohlwollender",
+  "superlative": "am wohlwollendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "objektiv": {
+  "positive": "objektiv",
+  "comparative": "objektiver",
+  "superlative": "am objektivsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "denkbar": {
+  "positive": "denkbar",
+  "comparative": "denkbarer",
+  "superlative": "am denkbarsten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ },
+ "vielversprechend": {
+  "positive": "vielversprechend",
+  "comparative": "vielversprechender",
+  "superlative": "am vielversprechendesten",
+  "source": "generated",
+  "generatorVersion": "v1"
+ }
+}

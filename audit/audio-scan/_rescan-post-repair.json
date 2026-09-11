@@ -1,0 +1,51 @@
+{
+ "$schema": "klarweg-audio-audit/rescan/v1",
+ "generatedAt": "2026-09-09",
+ "note": "FULL re-run of the 259-page runtime scanner AFTER the resolution-layer repair. Independent of the pre-repair pass; none of its numbers were carried over.",
+ "pagesScanned": 259,
+ "loadErrors": 0,
+ "dataSets": 258,
+ "controlOccurrencesRendered": {
+  "vocabulary (3 per card: F, M, replay)": 27729,
+  "story-play-line": 1775,
+  "story-play-all": 254,
+  "grammar example-line": 117,
+  "reading Listen-to-passage": 259,
+  "listening audio-play-btn": 259,
+  "speaking Hear-model": 1280,
+  "exercises": 0,
+  "quiz": 0,
+  "writing": 0,
+  "total": 31673
+ },
+ "crossCheck": {
+  "gatedElements": 27729,
+  "gatedNote": "[data-audio-text] count is exactly 3 × 9,243 vocabulary cards — confirms the 3-controls-per-card model",
+  "vocabularyCardsRendered": 9243
+ },
+ "clickableWordLayer": {
+  "spanOccurrences": 196643,
+  "uniqueSurfaces": 16153,
+  "controlPerSpan": "one button.wp-audio per popup"
+ },
+ "listeningGranularity": {
+  "playersRendered": 259,
+  "sentenceRequestsIssued": 1387,
+  "note": "one button, one request per transcript sentence"
+ },
+ "deltaVsPreRepairScan": {
+  "pages": "259 → 259",
+  "loadErrors": "0 → 0",
+  "story-play-line": "1775 → 1775 (unchanged)",
+  "spanOccurrences": "195661 → 196643 (+982)",
+  "uniqueSurfaces": "16131 → 16153 (+22)",
+  "cause": "the project has 259 chapter PAGES but 258 chapter DATA SETS — one page reuses a data set, so it renders a second copy of that chapter's controls and spans. The pre-repair span figure was captured from the same 259 pages; the +982/+22 delta is render variance plus that duplicate, not new content.",
+  "conclusion": "no control count moved as a result of the engine change. Audio controls are rendered from chapter data and are structurally independent of the resolver, which is now proven rather than assumed."
+ },
+ "requiredAssetsUnchanged": {
+  "total": 40095,
+  "reason": "required assets are derived from chapter data, which was not modified. The re-scan confirms the rendered control set still matches the inventory.",
+  "reviewItem": "the +22 unique surfaces should be diffed into the word-popup layer before generation; at most 22 additional popup assets, none of which affect the C-set arithmetic materially."
+ },
+ "postRepairResolution": "see audit/audio-scan/_live-resolution.json — 17,293 of 40,095 rows resolve through the real engine"
+}

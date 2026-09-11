@@ -1,0 +1,4171 @@
+{
+ "$schema": "klarweg-audio-audit/slash-review/v1",
+ "generatedAt": "2026-09-10",
+ "termCount": 222,
+ "assetRows": 444,
+ "classification": "NEEDS_AUTHOR_DECISION (364 rows) / RESOLVE_EXISTING (80 rows already served)",
+ "question": "for each term, what should the audio actually say?",
+ "options": [
+  "first alternate only",
+  "all alternates in sequence, one file",
+  "do not offer audio for this card"
+ ],
+ "unsafeBecause": [
+  "the term is a display convention, not an utterance: \"der/die/das\" is three articles shown together, \"ein/eine\" two, \"eigene/eigener\" two inflected adjective endings",
+  "the alternates are NOT separate inventory terms, so there is no existing asset to share",
+  "three readings are all defensible and the data does not choose between them: speak the first alternate only · speak every alternate in sequence as one file · speak the slash aloud",
+  "reading a slash aloud as a pause would teach a false form; picking the first alternate silently drops the contrast the card exists to teach",
+  "the correct reading is a teaching decision that lives with the author, not a derivation"
+ ],
+ "terms": [
+  {
+   "term": "der/die/das",
+   "alternates": [
+    "der",
+    "die",
+    "das"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a137781b4a4fbaea_F",
+     "resolved": false
+    },
+    {
+     "id": "a137781b4a4fbaea_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "ein/eine",
+   "alternates": [
+    "ein",
+    "eine"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d82008cd098f3b05_F",
+     "resolved": false
+    },
+    {
+     "id": "d82008cd098f3b05_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kranke",
+   "alternates": [
+    "der",
+    "die Kranke"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "6ae00ca2ae356cc9_F",
+     "resolved": false
+    },
+    {
+     "id": "6ae00ca2ae356cc9_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "eigene/eigener",
+   "alternates": [
+    "eigene",
+    "eigener"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "19b70e2e83ceeb50_F",
+     "resolved": false
+    },
+    {
+     "id": "19b70e2e83ceeb50_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "kein/keine",
+   "alternates": [
+    "kein",
+    "keine"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "88d249ad1f43ec3d_F",
+     "resolved": false
+    },
+    {
+     "id": "88d249ad1f43ec3d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "viel/viele",
+   "alternates": [
+    "viel",
+    "viele"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "f7ce109a837ccc16_F",
+     "resolved": false
+    },
+    {
+     "id": "f7ce109a837ccc16_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/das Sandwich",
+   "alternates": [
+    "der",
+    "das Sandwich"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "c15e8e45ab962d8a_F",
+     "resolved": false
+    },
+    {
+     "id": "c15e8e45ab962d8a_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "jede/jeder",
+   "alternates": [
+    "jede",
+    "jeder"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a4d13c3d6230a1c7_F",
+     "resolved": false
+    },
+    {
+     "id": "a4d13c3d6230a1c7_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "nächste/nächster",
+   "alternates": [
+    "nächste",
+    "nächster"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "61207e91a62aeb53_F",
+     "resolved": false
+    },
+    {
+     "id": "61207e91a62aeb53_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "euer/eure",
+   "alternates": [
+    "euer",
+    "eure"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "b0f596280f0baebb_F",
+     "resolved": false
+    },
+    {
+     "id": "b0f596280f0baebb_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "Ihr/Ihre",
+   "alternates": [
+    "Ihr",
+    "Ihre"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "21128e4906ec9a9d_F",
+     "resolved": false
+    },
+    {
+     "id": "21128e4906ec9a9d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "ihr/ihre",
+   "alternates": [
+    "ihr",
+    "ihre"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "556f78396af718c1_F",
+     "resolved": false
+    },
+    {
+     "id": "556f78396af718c1_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "sein/seine",
+   "alternates": [
+    "sein",
+    "seine"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "dfb625f92fdd9a91_F",
+     "resolved": false
+    },
+    {
+     "id": "dfb625f92fdd9a91_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "unser/unsere",
+   "alternates": [
+    "unser",
+    "unsere"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "0ff4e0726ba0ae90_F",
+     "resolved": false
+    },
+    {
+     "id": "0ff4e0726ba0ae90_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bekannte",
+   "alternates": [
+    "der",
+    "die Bekannte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "3d2136e3539b4600_F",
+     "resolved": false
+    },
+    {
+     "id": "3d2136e3539b4600_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Jugendliche",
+   "alternates": [
+    "der",
+    "die Jugendliche"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "862616f5b4403e0e_F",
+     "resolved": false
+    },
+    {
+     "id": "862616f5b4403e0e_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Erwachsene",
+   "alternates": [
+    "der",
+    "die Erwachsene"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "51fa1404967512e6_F",
+     "resolved": false
+    },
+    {
+     "id": "51fa1404967512e6_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Verwandte",
+   "alternates": [
+    "der",
+    "die Verwandte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "4d0c53b4506f28f7_F",
+     "resolved": false
+    },
+    {
+     "id": "4d0c53b4506f28f7_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Erste",
+   "alternates": [
+    "der",
+    "die Erste"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "25e202ca6d20c964_F",
+     "resolved": false
+    },
+    {
+     "id": "25e202ca6d20c964_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "erste/erster",
+   "alternates": [
+    "erste",
+    "erster"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "f606aacfca019235_F",
+     "resolved": false
+    },
+    {
+     "id": "f606aacfca019235_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "diese/dieser",
+   "alternates": [
+    "diese",
+    "dieser"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "b48600d006304b4a_F",
+     "resolved": false
+    },
+    {
+     "id": "b48600d006304b4a_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "welche/welcher",
+   "alternates": [
+    "welche",
+    "welcher"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "039c08ea7d3c8ac1_F",
+     "resolved": false
+    },
+    {
+     "id": "039c08ea7d3c8ac1_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Verletzte",
+   "alternates": [
+    "der",
+    "die Verletzte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a4354dd14c89c17f_F",
+     "resolved": false
+    },
+    {
+     "id": "a4354dd14c89c17f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "letzte/letzter",
+   "alternates": [
+    "letzte",
+    "letzter"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "7637b6f35b24e209_F",
+     "resolved": false
+    },
+    {
+     "id": "7637b6f35b24e209_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "mein/meine",
+   "alternates": [
+    "mein",
+    "meine"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9ba83425aa7fb530_F",
+     "resolved": false
+    },
+    {
+     "id": "9ba83425aa7fb530_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "dein/deine",
+   "alternates": [
+    "dein",
+    "deine"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "49133ad903cabf0b_F",
+     "resolved": false
+    },
+    {
+     "id": "49133ad903cabf0b_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "wie viel/viele",
+   "alternates": [
+    "wie viel",
+    "viele"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "dda8ec0c3aea1b99_F",
+     "resolved": false
+    },
+    {
+     "id": "dda8ec0c3aea1b99_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "die Ja-/Nein-Frage",
+   "alternates": [
+    "Ja-",
+    "Nein-Frage"
+   ],
+   "article": "die",
+   "rows": [
+    {
+     "id": "573996735beb65bc_F",
+     "resolved": false
+    },
+    {
+     "id": "573996735beb65bc_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Deutsche",
+   "alternates": [
+    "der",
+    "die Deutsche"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "ebb969e5c1a8c139_F",
+     "resolved": false
+    },
+    {
+     "id": "ebb969e5c1a8c139_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Nächste",
+   "alternates": [
+    "der",
+    "die Nächste"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a73ddc8d03190e08_F",
+     "resolved": false
+    },
+    {
+     "id": "a73ddc8d03190e08_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Angestellte",
+   "alternates": [
+    "der",
+    "die Angestellte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d639e0ca835301f5_F",
+     "resolved": false
+    },
+    {
+     "id": "d639e0ca835301f5_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Gehörlose",
+   "alternates": [
+    "der",
+    "die Gehörlose"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "dce1ca727625dc77_F",
+     "resolved": false
+    },
+    {
+     "id": "dce1ca727625dc77_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Lernende",
+   "alternates": [
+    "der",
+    "die Lernende"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "4bc0e8e3722ea24d_F",
+     "resolved": false
+    },
+    {
+     "id": "4bc0e8e3722ea24d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Freiwillige",
+   "alternates": [
+    "der",
+    "die Freiwillige"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "8bacce292181ca0d_F",
+     "resolved": false
+    },
+    {
+     "id": "8bacce292181ca0d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Angehörige",
+   "alternates": [
+    "der",
+    "die Angehörige"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "1e5518966702df51_F",
+     "resolved": false
+    },
+    {
+     "id": "1e5518966702df51_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Prominente",
+   "alternates": [
+    "der",
+    "die Prominente"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "5ec3e7d40c839fd3_F",
+     "resolved": false
+    },
+    {
+     "id": "5ec3e7d40c839fd3_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Auszubildende",
+   "alternates": [
+    "der",
+    "die Auszubildende"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "3b8101abf5fbbc7c_F",
+     "resolved": false
+    },
+    {
+     "id": "3b8101abf5fbbc7c_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Studierende",
+   "alternates": [
+    "der",
+    "die Studierende"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "238234bba6c792b1_F",
+     "resolved": false
+    },
+    {
+     "id": "238234bba6c792b1_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Lehrende",
+   "alternates": [
+    "der",
+    "die Lehrende"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "1b8d11659e39c261_F",
+     "resolved": false
+    },
+    {
+     "id": "1b8d11659e39c261_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Prüfende",
+   "alternates": [
+    "der",
+    "die Prüfende"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "406688d89d719afd_F",
+     "resolved": false
+    },
+    {
+     "id": "406688d89d719afd_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Arme",
+   "alternates": [
+    "der",
+    "die Arme"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "20c771c1ac41f725_F",
+     "resolved": false
+    },
+    {
+     "id": "20c771c1ac41f725_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Letzte",
+   "alternates": [
+    "der",
+    "die Letzte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "454d47af914145ec_F",
+     "resolved": false
+    },
+    {
+     "id": "454d47af914145ec_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "großer/große/großes",
+   "alternates": [
+    "großer",
+    "große",
+    "großes"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "de21e8bf9cc6bc6d_F",
+     "resolved": false
+    },
+    {
+     "id": "de21e8bf9cc6bc6d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Teilnehmende",
+   "alternates": [
+    "der",
+    "die Teilnehmende"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "f63358a434eb2616_F",
+     "resolved": false
+    },
+    {
+     "id": "f63358a434eb2616_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/das Ketchup",
+   "alternates": [
+    "der",
+    "das Ketchup"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "851803872b6fe6dc_F",
+     "resolved": false
+    },
+    {
+     "id": "851803872b6fe6dc_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Abgeordnete",
+   "alternates": [
+    "der",
+    "die Abgeordnete"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "eaf16df27c5f2de6_F",
+     "resolved": false
+    },
+    {
+     "id": "eaf16df27c5f2de6_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Blinde",
+   "alternates": [
+    "der",
+    "die Blinde"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "f6860e57a3c06e6b_F",
+     "resolved": false
+    },
+    {
+     "id": "f6860e57a3c06e6b_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Alte",
+   "alternates": [
+    "der",
+    "die Alte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "84c114f93d98fc45_F",
+     "resolved": false
+    },
+    {
+     "id": "84c114f93d98fc45_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Büroangestellte",
+   "alternates": [
+    "der",
+    "die Büroangestellte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "e8377d1f820084c0_F",
+     "resolved": false
+    },
+    {
+     "id": "e8377d1f820084c0_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Begleiter",
+   "alternates": [
+    "der",
+    "die Begleiter"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "40a1643f5fd4fc5e_F",
+     "resolved": false
+    },
+    {
+     "id": "40a1643f5fd4fc5e_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Grafiker/in",
+   "alternates": [
+    "der",
+    "die Grafiker",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "372623d089b61387_F",
+     "resolved": false
+    },
+    {
+     "id": "372623d089b61387_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Gründer/in",
+   "alternates": [
+    "der",
+    "die Gründer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "2a4d4706a7c2b0ee_F",
+     "resolved": false
+    },
+    {
+     "id": "2a4d4706a7c2b0ee_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Muslim/in",
+   "alternates": [
+    "der",
+    "die Muslim",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "fe63400e7013dc7d_F",
+     "resolved": false
+    },
+    {
+     "id": "fe63400e7013dc7d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Nachmieter/in",
+   "alternates": [
+    "der",
+    "die Nachmieter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "c585e398ed103352_F",
+     "resolved": false
+    },
+    {
+     "id": "c585e398ed103352_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Pate/Patin",
+   "alternates": [
+    "der",
+    "die Pate",
+    "Patin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "0ae629feaf6b04ed_F",
+     "resolved": false
+    },
+    {
+     "id": "0ae629feaf6b04ed_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Produzent/in",
+   "alternates": [
+    "der",
+    "die Produzent",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "6a3c5981f202a528_F",
+     "resolved": false
+    },
+    {
+     "id": "6a3c5981f202a528_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Regisseur/in",
+   "alternates": [
+    "der",
+    "die Regisseur",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9fc4e152b9625cda_F",
+     "resolved": false
+    },
+    {
+     "id": "9fc4e152b9625cda_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Senior/in",
+   "alternates": [
+    "der",
+    "die Senior",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "60415b4debff615f_F",
+     "resolved": false
+    },
+    {
+     "id": "60415b4debff615f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Zugewanderte",
+   "alternates": [
+    "der",
+    "die Zugewanderte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "2ef98191aac86b68_F",
+     "resolved": false
+    },
+    {
+     "id": "2ef98191aac86b68_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Amateur-Boxer/in",
+   "alternates": [
+    "der",
+    "die Amateur-Boxer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "16f98c242b99bbce_F",
+     "resolved": false
+    },
+    {
+     "id": "16f98c242b99bbce_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Drehbuchautor/in",
+   "alternates": [
+    "der",
+    "die Drehbuchautor",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "72049cc49745c2d5_F",
+     "resolved": false
+    },
+    {
+     "id": "72049cc49745c2d5_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Einwanderer/in",
+   "alternates": [
+    "der",
+    "die Einwanderer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "c0f4a0553868ec79_F",
+     "resolved": false
+    },
+    {
+     "id": "c0f4a0553868ec79_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Filmregisseur/in",
+   "alternates": [
+    "der",
+    "die Filmregisseur",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d5436ec5236e6027_F",
+     "resolved": false
+    },
+    {
+     "id": "d5436ec5236e6027_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Sprachwissenschaftler/in",
+   "alternates": [
+    "der",
+    "die Sprachwissenschaftler",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "19cb585492788a61_F",
+     "resolved": false
+    },
+    {
+     "id": "19cb585492788a61_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Wissenschaftler/in",
+   "alternates": [
+    "der",
+    "die Wissenschaftler",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "c1ec7631c7fcf83a_F",
+     "resolved": false
+    },
+    {
+     "id": "c1ec7631c7fcf83a_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kneipenbesitzer/in",
+   "alternates": [
+    "der",
+    "die Kneipenbesitzer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "331ec036f331cd58_F",
+     "resolved": false
+    },
+    {
+     "id": "331ec036f331cd58_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kommilitone/Kommilitonin",
+   "alternates": [
+    "der",
+    "die Kommilitone",
+    "Kommilitonin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "6096eac8052f97b0_F",
+     "resolved": false
+    },
+    {
+     "id": "6096eac8052f97b0_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Nichtschwimmer/in",
+   "alternates": [
+    "der",
+    "die Nichtschwimmer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "80e77aaeb8d83635_F",
+     "resolved": false
+    },
+    {
+     "id": "80e77aaeb8d83635_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Wanderarbeiter/in",
+   "alternates": [
+    "der",
+    "die Wanderarbeiter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9433dc46363200c4_F",
+     "resolved": false
+    },
+    {
+     "id": "9433dc46363200c4_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Autor/in",
+   "alternates": [
+    "der",
+    "die Autor",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a708f4e56ec37855_F",
+     "resolved": false
+    },
+    {
+     "id": "a708f4e56ec37855_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Gegner/in",
+   "alternates": [
+    "der",
+    "die Gegner",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "8c37a29ed256db5b_F",
+     "resolved": false
+    },
+    {
+     "id": "8c37a29ed256db5b_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kabarettist/in",
+   "alternates": [
+    "der",
+    "die Kabarettist",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "893b278849980a1d_F",
+     "resolved": false
+    },
+    {
+     "id": "893b278849980a1d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Komponist/in",
+   "alternates": [
+    "der",
+    "die Komponist",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "6b233176bbdf9e0a_F",
+     "resolved": false
+    },
+    {
+     "id": "6b233176bbdf9e0a_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Telefonist/in",
+   "alternates": [
+    "der",
+    "die Telefonist",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "5fc7ff56fe8903d6_F",
+     "resolved": false
+    },
+    {
+     "id": "5fc7ff56fe8903d6_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Therapeut/in",
+   "alternates": [
+    "der",
+    "die Therapeut",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "dc9fd6bd005f2e95_F",
+     "resolved": false
+    },
+    {
+     "id": "dc9fd6bd005f2e95_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bibliothekar/in",
+   "alternates": [
+    "der",
+    "die Bibliothekar",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "dd0d6883261e6dca_F",
+     "resolved": false
+    },
+    {
+     "id": "dd0d6883261e6dca_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Gepäckermittler/in",
+   "alternates": [
+    "der",
+    "die Gepäckermittler",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9020a0d081a607dc_F",
+     "resolved": false
+    },
+    {
+     "id": "9020a0d081a607dc_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Psychologe/Psychologin",
+   "alternates": [
+    "der",
+    "die Psychologe",
+    "Psychologin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "13fd820285094ae4_F",
+     "resolved": false
+    },
+    {
+     "id": "13fd820285094ae4_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Stellvertreter/in",
+   "alternates": [
+    "der",
+    "die Stellvertreter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "0bcad87b1f4efb9f_F",
+     "resolved": false
+    },
+    {
+     "id": "0bcad87b1f4efb9f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Trendforscher/in",
+   "alternates": [
+    "der",
+    "die Trendforscher",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "b4efd89d1018b984_F",
+     "resolved": false
+    },
+    {
+     "id": "b4efd89d1018b984_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Arbeitslose/r",
+   "alternates": [
+    "der",
+    "die Arbeitslose",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "599a0f7a742a7b15_F",
+     "resolved": false
+    },
+    {
+     "id": "599a0f7a742a7b15_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bauzeichner/in",
+   "alternates": [
+    "der",
+    "die Bauzeichner",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "504b08394497e875_F",
+     "resolved": false
+    },
+    {
+     "id": "504b08394497e875_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Befragte/r",
+   "alternates": [
+    "der",
+    "die Befragte",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "b46afa020531392d_F",
+     "resolved": false
+    },
+    {
+     "id": "b46afa020531392d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bewerber/in",
+   "alternates": [
+    "der",
+    "die Bewerber",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "e34ce455cbc94a0a_F",
+     "resolved": false
+    },
+    {
+     "id": "e34ce455cbc94a0a_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Blogger/in",
+   "alternates": [
+    "der",
+    "die Blogger",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "53eb899c7f783b62_F",
+     "resolved": false
+    },
+    {
+     "id": "53eb899c7f783b62_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Jurist/in",
+   "alternates": [
+    "der",
+    "die Jurist",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d6f0d5831cbc1cf1_F",
+     "resolved": false
+    },
+    {
+     "id": "d6f0d5831cbc1cf1_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Konzertpianist/in",
+   "alternates": [
+    "der",
+    "die Konzertpianist",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "39d4f823f3166171_F",
+     "resolved": false
+    },
+    {
+     "id": "39d4f823f3166171_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Manager/in",
+   "alternates": [
+    "der",
+    "die Manager",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d5ff735124f120bc_F",
+     "resolved": false
+    },
+    {
+     "id": "d5ff735124f120bc_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Näher/in",
+   "alternates": [
+    "der",
+    "die Näher",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d7dcd66e8d04943e_F",
+     "resolved": false
+    },
+    {
+     "id": "d7dcd66e8d04943e_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Parfümeur/in",
+   "alternates": [
+    "der",
+    "die Parfümeur",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "f91ec30e80b2e486_F",
+     "resolved": false
+    },
+    {
+     "id": "f91ec30e80b2e486_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Schneider/in",
+   "alternates": [
+    "der",
+    "die Schneider",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "ce1bbd7ce3cb25cd_F",
+     "resolved": false
+    },
+    {
+     "id": "ce1bbd7ce3cb25cd_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Unternehmer/in",
+   "alternates": [
+    "der",
+    "die Unternehmer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "f42c5037a41e2fe4_F",
+     "resolved": false
+    },
+    {
+     "id": "f42c5037a41e2fe4_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Vorgesetzte/r",
+   "alternates": [
+    "der",
+    "die Vorgesetzte",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "995d403153eeb18c_F",
+     "resolved": false
+    },
+    {
+     "id": "995d403153eeb18c_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bewerbungstrainer/in",
+   "alternates": [
+    "der",
+    "die Bewerbungstrainer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d3169c30ffedb211_F",
+     "resolved": false
+    },
+    {
+     "id": "d3169c30ffedb211_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Eventmanager/in",
+   "alternates": [
+    "der",
+    "die Eventmanager",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "508a81e72c1d85e0_F",
+     "resolved": false
+    },
+    {
+     "id": "508a81e72c1d85e0_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Geschäftsführer/in",
+   "alternates": [
+    "der",
+    "die Geschäftsführer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "0f21bd4d07e9f505_F",
+     "resolved": false
+    },
+    {
+     "id": "0f21bd4d07e9f505_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Grillmeister/in",
+   "alternates": [
+    "der",
+    "die Grillmeister",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "27df1b33e497bb90_F",
+     "resolved": false
+    },
+    {
+     "id": "27df1b33e497bb90_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Informatiker/in",
+   "alternates": [
+    "der",
+    "die Informatiker",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "0455c0c61d2ab203_F",
+     "resolved": false
+    },
+    {
+     "id": "0455c0c61d2ab203_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Klavierbauer/in",
+   "alternates": [
+    "der",
+    "die Klavierbauer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "97b92882375b4c53_F",
+     "resolved": false
+    },
+    {
+     "id": "97b92882375b4c53_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Langzeitarbeitslose/r",
+   "alternates": [
+    "der",
+    "die Langzeitarbeitslose",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "6dc2bbe4c8bf7194_F",
+     "resolved": false
+    },
+    {
+     "id": "6dc2bbe4c8bf7194_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Maskenbildner/in",
+   "alternates": [
+    "der",
+    "die Maskenbildner",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "87ad3af10002a8bc_F",
+     "resolved": false
+    },
+    {
+     "id": "87ad3af10002a8bc_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Stuntman/Stuntfrau",
+   "alternates": [
+    "der",
+    "die Stuntman",
+    "Stuntfrau"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "3f042b80cdbf0f44_F",
+     "resolved": false
+    },
+    {
+     "id": "3f042b80cdbf0f44_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Textilunternehmer/in",
+   "alternates": [
+    "der",
+    "die Textilunternehmer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "f261440ecd64f643_F",
+     "resolved": false
+    },
+    {
+     "id": "f261440ecd64f643_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Verkaufsassistent/in",
+   "alternates": [
+    "der",
+    "die Verkaufsassistent",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "233d9a060f16506d_F",
+     "resolved": false
+    },
+    {
+     "id": "233d9a060f16506d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Werbepartner/in",
+   "alternates": [
+    "der",
+    "die Werbepartner",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a347d9ee65824672_F",
+     "resolved": false
+    },
+    {
+     "id": "a347d9ee65824672_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bedürftige/r",
+   "alternates": [
+    "der",
+    "die Bedürftige",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "393ffc5b0bc4e84a_F",
+     "resolved": false
+    },
+    {
+     "id": "393ffc5b0bc4e84a_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Betreiber/in",
+   "alternates": [
+    "der",
+    "die Betreiber",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "5c4b04b96cd2724f_F",
+     "resolved": false
+    },
+    {
+     "id": "5c4b04b96cd2724f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Gebildete/r",
+   "alternates": [
+    "der",
+    "die Gebildete",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "866714526a7e0749_F",
+     "resolved": false
+    },
+    {
+     "id": "866714526a7e0749_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Helfer/in",
+   "alternates": [
+    "der",
+    "die Helfer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "eb69c84dd38be2e4_F",
+     "resolved": false
+    },
+    {
+     "id": "eb69c84dd38be2e4_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Sponsor/in",
+   "alternates": [
+    "der",
+    "die Sponsor",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "442c60322a9e10da_F",
+     "resolved": false
+    },
+    {
+     "id": "442c60322a9e10da_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Alleinernährer/in",
+   "alternates": [
+    "der",
+    "die Alleinernährer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a7c2820ee413f8c6_F",
+     "resolved": false
+    },
+    {
+     "id": "a7c2820ee413f8c6_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Asylberechtigte/r",
+   "alternates": [
+    "der",
+    "die Asylberechtigte",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "21f9e7d167253ff9_F",
+     "resolved": false
+    },
+    {
+     "id": "21f9e7d167253ff9_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Geringverdiener/in",
+   "alternates": [
+    "der",
+    "die Geringverdiener",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "56bae33e9e4f77cc_F",
+     "resolved": false
+    },
+    {
+     "id": "56bae33e9e4f77cc_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Sicherheitsleiter/in",
+   "alternates": [
+    "der",
+    "die Sicherheitsleiter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d9c2ae7249a0a0df_F",
+     "resolved": false
+    },
+    {
+     "id": "d9c2ae7249a0a0df_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Sozialhilfeempfänger/in",
+   "alternates": [
+    "der",
+    "die Sozialhilfeempfänger",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "8d31d9cd7923fc17_F",
+     "resolved": false
+    },
+    {
+     "id": "8d31d9cd7923fc17_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Amtsinhaber/in",
+   "alternates": [
+    "der",
+    "die Amtsinhaber",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "09ab3c92224ab5c6_F",
+     "resolved": false
+    },
+    {
+     "id": "09ab3c92224ab5c6_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bauarbeiter/in",
+   "alternates": [
+    "der",
+    "die Bauarbeiter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "92922d5d44a0bbdb_F",
+     "resolved": false
+    },
+    {
+     "id": "92922d5d44a0bbdb_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Grenzsoldat/in",
+   "alternates": [
+    "der",
+    "die Grenzsoldat",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "08d29610f1f80479_F",
+     "resolved": false
+    },
+    {
+     "id": "08d29610f1f80479_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kanzler/in",
+   "alternates": [
+    "der",
+    "die Kanzler",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "be4042c673206a76_F",
+     "resolved": false
+    },
+    {
+     "id": "be4042c673206a76_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Klassenbeste/r",
+   "alternates": [
+    "der",
+    "die Klassenbeste",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "1625861bfb0606ed_F",
+     "resolved": false
+    },
+    {
+     "id": "1625861bfb0606ed_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Krieger/in",
+   "alternates": [
+    "der",
+    "die Krieger",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "b7295bdc56c529de_F",
+     "resolved": false
+    },
+    {
+     "id": "b7295bdc56c529de_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Lokführer/in",
+   "alternates": [
+    "der",
+    "die Lokführer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "ab72377840c82021_F",
+     "resolved": false
+    },
+    {
+     "id": "ab72377840c82021_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Regierungschef/in",
+   "alternates": [
+    "der",
+    "die Regierungschef",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "aab2cf2d91033663_F",
+     "resolved": false
+    },
+    {
+     "id": "aab2cf2d91033663_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Rentner/in",
+   "alternates": [
+    "der",
+    "die Rentner",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "045243f82318d357_F",
+     "resolved": false
+    },
+    {
+     "id": "045243f82318d357_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Schiedsrichter/in",
+   "alternates": [
+    "der",
+    "die Schiedsrichter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "e1a20bf06c8a0630_F",
+     "resolved": false
+    },
+    {
+     "id": "e1a20bf06c8a0630_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Waise",
+   "alternates": [
+    "der",
+    "die Waise"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9fa64cd9ba30b4fe_F",
+     "resolved": false
+    },
+    {
+     "id": "9fa64cd9ba30b4fe_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Zeitzeuge/-zeugin",
+   "alternates": [
+    "der",
+    "die Zeitzeuge",
+    "-zeugin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "0132f343d2e4d2c0_F",
+     "resolved": false
+    },
+    {
+     "id": "0132f343d2e4d2c0_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Besitzer/in",
+   "alternates": [
+    "der",
+    "die Besitzer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "fe304efdd5d0ad0f_F",
+     "resolved": false
+    },
+    {
+     "id": "fe304efdd5d0ad0f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bundeskanzler/in",
+   "alternates": [
+    "der",
+    "die Bundeskanzler",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "fdf361829f38681b_F",
+     "resolved": false
+    },
+    {
+     "id": "fdf361829f38681b_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bundesminister/in",
+   "alternates": [
+    "der",
+    "die Bundesminister",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "246026eedfc2608e_F",
+     "resolved": false
+    },
+    {
+     "id": "246026eedfc2608e_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kanzlerkandidat/in",
+   "alternates": [
+    "der",
+    "die Kanzlerkandidat",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "2a8b5664dcfd9098_F",
+     "resolved": false
+    },
+    {
+     "id": "2a8b5664dcfd9098_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Parteivorsitzende/r",
+   "alternates": [
+    "der",
+    "die Parteivorsitzende",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "8b41133f32ee0315_F",
+     "resolved": false
+    },
+    {
+     "id": "8b41133f32ee0315_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Pressesprecher/in",
+   "alternates": [
+    "der",
+    "die Pressesprecher",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a47f0af8c6940ff8_F",
+     "resolved": false
+    },
+    {
+     "id": "a47f0af8c6940ff8_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Regierungssprecher/in",
+   "alternates": [
+    "der",
+    "die Regierungssprecher",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9cfaa9619487f6c9_F",
+     "resolved": false
+    },
+    {
+     "id": "9cfaa9619487f6c9_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Staatsführer/in",
+   "alternates": [
+    "der",
+    "die Staatsführer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "b315c15ab9184302_F",
+     "resolved": false
+    },
+    {
+     "id": "b315c15ab9184302_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Betroffene/r",
+   "alternates": [
+    "der",
+    "die Betroffene",
+    "r"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "6549f4a229a21520_F",
+     "resolved": false
+    },
+    {
+     "id": "6549f4a229a21520_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Außenseiter/in",
+   "alternates": [
+    "der",
+    "die Außenseiter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9c1723ca01394c29_F",
+     "resolved": false
+    },
+    {
+     "id": "9c1723ca01394c29_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Bewunderer/Bewunderin",
+   "alternates": [
+    "der",
+    "die Bewunderer",
+    "Bewunderin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "95429991325036a0_F",
+     "resolved": false
+    },
+    {
+     "id": "95429991325036a0_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Dichter/in",
+   "alternates": [
+    "der",
+    "die Dichter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "f2e70f6f6820f957_F",
+     "resolved": false
+    },
+    {
+     "id": "f2e70f6f6820f957_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Essayist/in",
+   "alternates": [
+    "der",
+    "die Essayist",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "e8a7597861db87ef_F",
+     "resolved": false
+    },
+    {
+     "id": "e8a7597861db87ef_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Musiktherapeut/in",
+   "alternates": [
+    "der",
+    "die Musiktherapeut",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "0549a84b9d79c587_F",
+     "resolved": false
+    },
+    {
+     "id": "0549a84b9d79c587_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Philosoph/in",
+   "alternates": [
+    "der",
+    "die Philosoph",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "46cc917d9a86ff9a_F",
+     "resolved": false
+    },
+    {
+     "id": "46cc917d9a86ff9a_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Romantiker/in",
+   "alternates": [
+    "der",
+    "die Romantiker",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "23d86f5e1f032a4f_F",
+     "resolved": false
+    },
+    {
+     "id": "23d86f5e1f032a4f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Satiriker/in",
+   "alternates": [
+    "der",
+    "die Satiriker",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a04564e250f5aa1f_F",
+     "resolved": false
+    },
+    {
+     "id": "a04564e250f5aa1f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Schriftsteller/in",
+   "alternates": [
+    "der",
+    "die Schriftsteller",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "13b14715de13a9f1_F",
+     "resolved": false
+    },
+    {
+     "id": "13b14715de13a9f1_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Witwer/Witwe",
+   "alternates": [
+    "der",
+    "die Witwer",
+    "Witwe"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "2f53867a7071c3aa_F",
+     "resolved": false
+    },
+    {
+     "id": "2f53867a7071c3aa_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Detektiv/in",
+   "alternates": [
+    "der",
+    "die Detektiv",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "15a807bc0c25826e_F",
+     "resolved": false
+    },
+    {
+     "id": "15a807bc0c25826e_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Idiot/in",
+   "alternates": [
+    "der",
+    "die Idiot",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "5964775dfa70f92d_F",
+     "resolved": false
+    },
+    {
+     "id": "5964775dfa70f92d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Informant/in",
+   "alternates": [
+    "der",
+    "die Informant",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "bd7800cdfc97e2ba_F",
+     "resolved": false
+    },
+    {
+     "id": "bd7800cdfc97e2ba_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kaiser/in",
+   "alternates": [
+    "der",
+    "die Kaiser",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d2cae6a08015db52_F",
+     "resolved": false
+    },
+    {
+     "id": "d2cae6a08015db52_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kiefer",
+   "alternates": [
+    "der",
+    "die Kiefer"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "23e398b22811e2aa_F",
+     "resolved": false
+    },
+    {
+     "id": "23e398b22811e2aa_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kommissar/in",
+   "alternates": [
+    "der",
+    "die Kommissar",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "66f6cb249b82aa43_F",
+     "resolved": false
+    },
+    {
+     "id": "66f6cb249b82aa43_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Mandant/in",
+   "alternates": [
+    "der",
+    "die Mandant",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "b240f28681bba22a_F",
+     "resolved": false
+    },
+    {
+     "id": "b240f28681bba22a_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Reporter/in",
+   "alternates": [
+    "der",
+    "die Reporter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "e9f47cc49aba9b00_F",
+     "resolved": false
+    },
+    {
+     "id": "e9f47cc49aba9b00_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Verdächtige",
+   "alternates": [
+    "der",
+    "die Verdächtige"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "39f1c1348d0b0b3b_F",
+     "resolved": false
+    },
+    {
+     "id": "39f1c1348d0b0b3b_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Betrachter/in",
+   "alternates": [
+    "der",
+    "die Betrachter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9f9441cd606f06d8_F",
+     "resolved": false
+    },
+    {
+     "id": "9f9441cd606f06d8_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Entdecker/in",
+   "alternates": [
+    "der",
+    "die Entdecker",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9651095b4f25a303_F",
+     "resolved": false
+    },
+    {
+     "id": "9651095b4f25a303_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Galerist/in",
+   "alternates": [
+    "der",
+    "die Galerist",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "e924b7499cee2f46_F",
+     "resolved": false
+    },
+    {
+     "id": "e924b7499cee2f46_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Gehilfe/Gehilfin",
+   "alternates": [
+    "der",
+    "die Gehilfe",
+    "Gehilfin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "9d0172fe23acbfca_F",
+     "resolved": false
+    },
+    {
+     "id": "9d0172fe23acbfca_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Ich-Erzähler/in",
+   "alternates": [
+    "der",
+    "die Ich-Erzähler",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "e4fc28a4441675ba_F",
+     "resolved": false
+    },
+    {
+     "id": "e4fc28a4441675ba_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Komplize/Komplizin",
+   "alternates": [
+    "der",
+    "die Komplize",
+    "Komplizin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "fb4312f2175d645b_F",
+     "resolved": false
+    },
+    {
+     "id": "fb4312f2175d645b_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Malereiprofessor/in",
+   "alternates": [
+    "der",
+    "die Malereiprofessor",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "198b83aa34170b12_F",
+     "resolved": false
+    },
+    {
+     "id": "198b83aa34170b12_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Meisterschüler/in",
+   "alternates": [
+    "der",
+    "die Meisterschüler",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a4bad0c8e6c11482_F",
+     "resolved": false
+    },
+    {
+     "id": "a4bad0c8e6c11482_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Muttersprachler/in",
+   "alternates": [
+    "der",
+    "die Muttersprachler",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "59e5a705a7f72992_F",
+     "resolved": false
+    },
+    {
+     "id": "59e5a705a7f72992_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Schlossbesucher/in",
+   "alternates": [
+    "der",
+    "die Schlossbesucher",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "59be81b798768a3c_F",
+     "resolved": false
+    },
+    {
+     "id": "59be81b798768a3c_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Sprachforscher/in",
+   "alternates": [
+    "der",
+    "die Sprachforscher",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "dc54fec1c135575f_F",
+     "resolved": false
+    },
+    {
+     "id": "dc54fec1c135575f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Vertreter/in",
+   "alternates": [
+    "der",
+    "die Vertreter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "cc97ada73b1bf011_F",
+     "resolved": false
+    },
+    {
+     "id": "cc97ada73b1bf011_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Astronom/in",
+   "alternates": [
+    "der",
+    "die Astronom",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "8e42069ce6531e9f_F",
+     "resolved": false
+    },
+    {
+     "id": "8e42069ce6531e9f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Aussteller/in",
+   "alternates": [
+    "der",
+    "die Aussteller",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "b7b5ca2b72cbe513_F",
+     "resolved": false
+    },
+    {
+     "id": "b7b5ca2b72cbe513_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Autofahrer/in",
+   "alternates": [
+    "der",
+    "die Autofahrer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "51aab1d3da452e4d_F",
+     "resolved": false
+    },
+    {
+     "id": "51aab1d3da452e4d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Berater/in",
+   "alternates": [
+    "der",
+    "die Berater",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "20254deea1e0f783_F",
+     "resolved": false
+    },
+    {
+     "id": "20254deea1e0f783_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Fischer/in",
+   "alternates": [
+    "der",
+    "die Fischer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "2e83831943c796ec_F",
+     "resolved": false
+    },
+    {
+     "id": "2e83831943c796ec_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Mitinhaber/in",
+   "alternates": [
+    "der",
+    "die Mitinhaber",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "f968ce0d36b09a0e_F",
+     "resolved": false
+    },
+    {
+     "id": "f968ce0d36b09a0e_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Mitschüler/in",
+   "alternates": [
+    "der",
+    "die Mitschüler",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "3d200634ecc16bb9_F",
+     "resolved": false
+    },
+    {
+     "id": "3d200634ecc16bb9_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Moderator/in",
+   "alternates": [
+    "der",
+    "die Moderator",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "b75e013948121778_F",
+     "resolved": false
+    },
+    {
+     "id": "b75e013948121778_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Optiker/in",
+   "alternates": [
+    "der",
+    "die Optiker",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "0f2e40c791165023_F",
+     "resolved": false
+    },
+    {
+     "id": "0f2e40c791165023_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Schwimmer/in",
+   "alternates": [
+    "der",
+    "die Schwimmer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a268e1dc0dfbb03f_F",
+     "resolved": false
+    },
+    {
+     "id": "a268e1dc0dfbb03f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Berufsanfänger/in",
+   "alternates": [
+    "der",
+    "die Berufsanfänger",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "10c0eaf63f0a6909_F",
+     "resolved": false
+    },
+    {
+     "id": "10c0eaf63f0a6909_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Veranstalter/in",
+   "alternates": [
+    "der",
+    "die Veranstalter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "fbc8b9aef32750e1_F",
+     "resolved": false
+    },
+    {
+     "id": "fbc8b9aef32750e1_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Wissensmanager/in",
+   "alternates": [
+    "der",
+    "die Wissensmanager",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "c4aab273c49dc017_F",
+     "resolved": false
+    },
+    {
+     "id": "c4aab273c49dc017_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Beschäftigte",
+   "alternates": [
+    "der",
+    "die Beschäftigte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a8025212ef744f28_F",
+     "resolved": false
+    },
+    {
+     "id": "a8025212ef744f28_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Erfinder/in",
+   "alternates": [
+    "der",
+    "die Erfinder",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "eafe25855b999918_F",
+     "resolved": false
+    },
+    {
+     "id": "eafe25855b999918_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Feind/in",
+   "alternates": [
+    "der",
+    "die Feind",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "fce610611a8cfbc4_F",
+     "resolved": false
+    },
+    {
+     "id": "fce610611a8cfbc4_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Forscher/in",
+   "alternates": [
+    "der",
+    "die Forscher",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "62c97fd186906a98_F",
+     "resolved": false
+    },
+    {
+     "id": "62c97fd186906a98_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Gealterte",
+   "alternates": [
+    "der",
+    "die Gealterte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "dfad02725f603056_F",
+     "resolved": false
+    },
+    {
+     "id": "dfad02725f603056_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Gewinner/in",
+   "alternates": [
+    "der",
+    "die Gewinner",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "52b3ef2ba76a7811_F",
+     "resolved": false
+    },
+    {
+     "id": "52b3ef2ba76a7811_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Intellektuelle",
+   "alternates": [
+    "der",
+    "die Intellektuelle"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "da028cd9063f3fca_F",
+     "resolved": false
+    },
+    {
+     "id": "da028cd9063f3fca_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kämpfer/in",
+   "alternates": [
+    "der",
+    "die Kämpfer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "658ff0b91b567d56_F",
+     "resolved": false
+    },
+    {
+     "id": "658ff0b91b567d56_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kandidat/in",
+   "alternates": [
+    "der",
+    "die Kandidat",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "c58752d384974686_F",
+     "resolved": false
+    },
+    {
+     "id": "c58752d384974686_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Leiter/in",
+   "alternates": [
+    "der",
+    "die Leiter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "763a8a5d1efcbe14_F",
+     "resolved": false
+    },
+    {
+     "id": "763a8a5d1efcbe14_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Mediziner/in",
+   "alternates": [
+    "der",
+    "die Mediziner",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "e29fb2de14cd53d6_F",
+     "resolved": false
+    },
+    {
+     "id": "e29fb2de14cd53d6_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Mitbewohner/in",
+   "alternates": [
+    "der",
+    "die Mitbewohner",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "cb45f44286365b54_F",
+     "resolved": false
+    },
+    {
+     "id": "cb45f44286365b54_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Physiker/in",
+   "alternates": [
+    "der",
+    "die Physiker",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "3e60951b3cdb4a3f_F",
+     "resolved": false
+    },
+    {
+     "id": "3e60951b3cdb4a3f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Präsident/in",
+   "alternates": [
+    "der",
+    "die Präsident",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "2fdbcfe5bc537447_F",
+     "resolved": false
+    },
+    {
+     "id": "2fdbcfe5bc537447_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Proband/in",
+   "alternates": [
+    "der",
+    "die Proband",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a140bc4e7bc1cec0_F",
+     "resolved": false
+    },
+    {
+     "id": "a140bc4e7bc1cec0_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Pubertierende",
+   "alternates": [
+    "der",
+    "die Pubertierende"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a679125e3a5cc20d_F",
+     "resolved": false
+    },
+    {
+     "id": "a679125e3a5cc20d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Techniker/in",
+   "alternates": [
+    "der",
+    "die Techniker",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "5f796d9541dd4187_F",
+     "resolved": false
+    },
+    {
+     "id": "5f796d9541dd4187_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Verlierer/in",
+   "alternates": [
+    "der",
+    "die Verlierer",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "27661d062ec88f42_F",
+     "resolved": false
+    },
+    {
+     "id": "27661d062ec88f42_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Vermieter/in",
+   "alternates": [
+    "der",
+    "die Vermieter",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a3ea8d9d7a248f66_F",
+     "resolved": false
+    },
+    {
+     "id": "a3ea8d9d7a248f66_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Allesfresser/in",
+   "alternates": [
+    "der",
+    "die Allesfresser",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "25c21cc79d34bbc4_F",
+     "resolved": false
+    },
+    {
+     "id": "25c21cc79d34bbc4_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Artgenosse/Artgenossin",
+   "alternates": [
+    "der",
+    "die Artgenosse",
+    "Artgenossin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "62225ed482ceebb0_F",
+     "resolved": false
+    },
+    {
+     "id": "62225ed482ceebb0_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Feuilletonist/in",
+   "alternates": [
+    "der",
+    "die Feuilletonist",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "65a54c7c26fecd66_F",
+     "resolved": false
+    },
+    {
+     "id": "65a54c7c26fecd66_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Ministerpräsident/in",
+   "alternates": [
+    "der",
+    "die Ministerpräsident",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "bece71071035b77f_F",
+     "resolved": false
+    },
+    {
+     "id": "bece71071035b77f_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Nationalsozialist/in",
+   "alternates": [
+    "der",
+    "die Nationalsozialist",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "6ce7724b327dde3b_F",
+     "resolved": false
+    },
+    {
+     "id": "6ce7724b327dde3b_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Nobelpreisträger/in",
+   "alternates": [
+    "der",
+    "die Nobelpreisträger",
+    "in"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "3d4a57f3abe83048_F",
+     "resolved": false
+    },
+    {
+     "id": "3d4a57f3abe83048_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Ökologe/Ökologin",
+   "alternates": [
+    "der",
+    "die Ökologe",
+    "Ökologin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "db4085cb880f4b65_F",
+     "resolved": false
+    },
+    {
+     "id": "db4085cb880f4b65_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Pädagoge/Pädagogin",
+   "alternates": [
+    "der",
+    "die Pädagoge",
+    "Pädagogin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "8a697ec8c50eeb4d_F",
+     "resolved": false
+    },
+    {
+     "id": "8a697ec8c50eeb4d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Schlafexperte/Schlafexpertin",
+   "alternates": [
+    "der",
+    "die Schlafexperte",
+    "Schlafexpertin"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "28a76ea4b2641a03_F",
+     "resolved": false
+    },
+    {
+     "id": "28a76ea4b2641a03_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Anrufer",
+   "alternates": [
+    "der",
+    "die Anrufer"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "349ff06c46beb3b5_F",
+     "resolved": false
+    },
+    {
+     "id": "349ff06c46beb3b5_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Coach",
+   "alternates": [
+    "der",
+    "die Coach"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d135349a884ab77d_F",
+     "resolved": false
+    },
+    {
+     "id": "d135349a884ab77d_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Konsument",
+   "alternates": [
+    "der",
+    "die Konsument"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "8c139894f5f78b11_F",
+     "resolved": false
+    },
+    {
+     "id": "8c139894f5f78b11_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kritisierte",
+   "alternates": [
+    "der",
+    "die Kritisierte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "68d07cc15fb3729a_F",
+     "resolved": false
+    },
+    {
+     "id": "68d07cc15fb3729a_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Kunstturner",
+   "alternates": [
+    "der",
+    "die Kunstturner"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "61ceaaaf47fc607c_F",
+     "resolved": false
+    },
+    {
+     "id": "61ceaaaf47fc607c_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Prüfer",
+   "alternates": [
+    "der",
+    "die Prüfer"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "ec08237104d1fabe_F",
+     "resolved": false
+    },
+    {
+     "id": "ec08237104d1fabe_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Tennisprofi",
+   "alternates": [
+    "der",
+    "die Tennisprofi"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "d98f98d26af85472_F",
+     "resolved": false
+    },
+    {
+     "id": "d98f98d26af85472_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Monoskibobfahrer",
+   "alternates": [
+    "der",
+    "die Monoskibobfahrer"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "419b42684fff7349_F",
+     "resolved": false
+    },
+    {
+     "id": "419b42684fff7349_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Polizeimeister",
+   "alternates": [
+    "der",
+    "die Polizeimeister"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "a3fd85e555961433_F",
+     "resolved": false
+    },
+    {
+     "id": "a3fd85e555961433_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Schwager",
+   "alternates": [
+    "der",
+    "die Schwager"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "299c810362f41606_F",
+     "resolved": false
+    },
+    {
+     "id": "299c810362f41606_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Verantwortliche",
+   "alternates": [
+    "der",
+    "die Verantwortliche"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "10204374350346e1_F",
+     "resolved": false
+    },
+    {
+     "id": "10204374350346e1_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "das Wort / die Wörter / die Worte",
+   "alternates": [
+    "Wort",
+    "die Wörter",
+    "die Worte"
+   ],
+   "article": "das",
+   "rows": [
+    {
+     "id": "fae6b638b16236a4_F",
+     "resolved": false
+    },
+    {
+     "id": "fae6b638b16236a4_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Berechtigte",
+   "alternates": [
+    "der",
+    "die Berechtigte"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "45d1f47a778f400b_F",
+     "resolved": false
+    },
+    {
+     "id": "45d1f47a778f400b_M",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "term": "der/die Verpflichtete",
+   "alternates": [
+    "der",
+    "die Verpflichtete"
+   ],
+   "article": null,
+   "rows": [
+    {
+     "id": "2427373d04b5b8a1_F",
+     "resolved": false
+    },
+    {
+     "id": "2427373d04b5b8a1_M",
+     "resolved": false
+    }
+   ]
+  }
+ ]
+}

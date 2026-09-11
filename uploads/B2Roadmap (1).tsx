@@ -1,0 +1,1813 @@
+"use client";
+
+import { useEffect } from "react";
+
+/* ------------------------------------------------------------------ */
+/*  Types                                                              */
+/* ------------------------------------------------------------------ */
+type Variant = "primary" | "secondary";
+type Skill = "audio" | "speak" | "grammar" | "quiz" | "pdf";
+
+interface CtaButton {
+  label: string;
+  href: string;
+  variant: Variant;
+  arrow: boolean;
+}
+interface NavLink {
+  label: string;
+  href: string;
+  active?: boolean;
+}
+interface Nav {
+  logo: { text: string; href: string; dot: boolean; ariaLabel: string };
+  links: NavLink[];
+  cta: { label: string; href: string };
+}
+interface Headline {
+  prefix: string;
+  accent: string;
+  suffix: string;
+}
+interface Pill {
+  label: string;
+  dotColor?: string;
+}
+interface Hero {
+  badge: string;
+  pills: Pill[];
+  headline: Headline;
+  lede: string;
+  ctas: CtaButton[];
+}
+interface Stat {
+  num: string;
+  label: string;
+}
+interface PathBand {
+  ariaLabel: string;
+  eyebrow: string;
+  title: string;
+  note: string;
+}
+interface Station {
+  num: string;
+  title: string;
+  meta: string;
+}
+interface RoadmapIntro {
+  eyebrow: string;
+  title: string;
+  body: string;
+}
+interface Phase {
+  eyebrow: string;
+  title: string;
+  range: [number, number];
+}
+interface Chapter {
+  id: string;
+  n: number;
+  title: string;
+  goal: string;
+  duration: string;
+  skills: Skill[];
+  status: "free" | "locked";
+  cta: string;
+  route: string;
+}
+interface LoopStep {
+  num: string;
+  title: string;
+  desc: string;
+  icon: string;
+}
+interface LearnLoop {
+  ariaLabel: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  steps: LoopStep[];
+}
+interface PriceCard {
+  tier: string;
+  price: string;
+  priceStrike: string | null;
+  sub: string;
+  center: boolean;
+  features: string[];
+  cta: CtaButton;
+}
+interface Pricing {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  cards: PriceCard[];
+}
+interface FinalCta {
+  title: string;
+  body: string;
+  ctas: CtaButton[];
+}
+interface Level {
+  code: string;
+  name: string;
+  hero: Hero;
+  heroStats: Stat[];
+  pathBand: PathBand;
+  pathStations: Station[];
+  roadmapIntro: RoadmapIntro;
+  phases: Phase[];
+  chapters: Chapter[];
+  learnLoop: LearnLoop;
+  pricing: Pricing;
+  finalCta: FinalCta;
+}
+interface RoadmapData {
+  meta: { lang: string; title: string; description: string; canonical: string };
+  nav: Nav;
+  skillLabels: Record<Skill, string>;
+  icons: Record<string, string>;
+  levels: { b2: Level };
+  footer: { meta: string; links: NavLink[] };
+}
+
+const data: RoadmapData = {
+  meta: {
+    lang: "en",
+    title: "B2 · Oberstufe — Klarweg",
+    description:
+      "The complete B2 German journey for Hindi-speaking learners — 69 chapters, color-coded grammar, Goethe-aligned. Begin Chapter 1 free.",
+    canonical: "https://klarweg.com/b2",
+  },
+  nav: {
+    logo: { text: "Klarweg", href: "/", dot: true, ariaLabel: "Klarweg home" },
+    links: [
+      { label: "A1", href: "/a1" },
+      { label: "A2", href: "/a2" },
+      { label: "B1", href: "/b1" },
+      { label: "B2", href: "/b2", active: true },
+      { label: "C1", href: "/c1" },
+      { label: "C2", href: "/c2" },
+      { label: "Method", href: "/method" },
+      { label: "Pricing", href: "/pricing" },
+    ],
+    cta: { label: "Begin free", href: "/b2/chapter-1" },
+  },
+  skillLabels: {
+    audio: "Audio practice",
+    speak: "Speaking with AI tutor",
+    grammar: "Color-coded grammar",
+    quiz: "Mini quiz",
+    pdf: "Homework PDF",
+  },
+  icons: {
+    audio:
+      '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12C3 8 6 5 9 5V9C9 11 7 12 6 12C4 12 3 13 3 15V18C3 19 4 20 5 20H7V13M21 12C21 8 18 5 15 5V9C15 11 17 12 18 12C20 12 21 13 21 15V18C21 19 20 20 19 20H17V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    speak:
+      '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M6 11C6 14 8.7 17 12 17C15.3 17 18 14 18 11M12 17V20M9 20H15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    grammar:
+      '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="7" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="17" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>',
+    quiz:
+      '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9C9 7 10.5 5.5 12 5.5C13.5 5.5 15 7 15 9C15 11 12 11 12 14M12 18.5V18.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    pdf:
+      '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3H14L19 8V20C19 20.5 18.5 21 18 21H7C6.5 21 6 20.5 6 20V4C6 3.5 6.5 3 7 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3V8H19" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
+    lock:
+      '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="11" width="12" height="8" rx="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 11V8C8.5 6 10 4 12 4C14 4 15.5 6 15.5 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    arrow:
+      '<svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    clock:
+      '<svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.3" stroke="currentColor" stroke-width="1.3"/><path d="M7 4V7L9 8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
+  },
+  levels: {
+    b2: {
+      code: "B2",
+      name: "Oberstufe",
+      hero: {
+        badge: "B2 · Oberstufe",
+        pills: [
+          { label: "Goethe-aligned", dotColor: "var(--g-object)" },
+          { label: "69 chapters" },
+        ],
+        headline: {
+          prefix: "From ",
+          accent: "klare Sätze",
+          suffix: " to precise, formal, academic German.",
+        },
+        lede:
+          "B2 is where German becomes precise — the passive in all its forms, reported speech, nominalization, and the structures that let you argue, report, and write for work and study. Sixty-nine chapters of color-coded grammar, premium audio, and AI-corrected practice — built for Hindi-speaking learners, aligned to the Goethe-Zertifikat B2.",
+        ctas: [
+          { label: "Begin Chapter 1 — Free", href: "/b2/chapter-1", variant: "primary", arrow: true },
+          { label: "See the full path", href: "#roadmap", variant: "secondary", arrow: false },
+        ],
+      },
+      heroStats: [
+        { num: "69", label: 'Chapters from <span class="de-italic">Satzklammer</span> to <span class="de-italic">Goethe-Pr&uuml;fung</span>' },
+        { num: "~42h", label: "Of structured learning, at your own pace" },
+        { num: "7", label: "Thematic phases that build on each other" },
+        { num: "1", label: "Free chapter — the full premium experience" },
+      ],
+      pathBand: {
+        ariaLabel: "Seven phases of B2",
+        eyebrow: "The B2 Path",
+        title: "Seven phases. One clear arc.",
+        note: "Each phase builds on the last. By the end, you can speak with precision, argue and connect ideas, handle every form of the passive, report what others say, and write formal, academic German — ready for the Goethe-Zertifikat B2 and the bridge to C1.",
+      },
+      pathStations: [
+        { num: "01–14", title: "Präziser & natürlicher sprechen", meta: "Satzklammer → Goethe Mini 1" },
+        { num: "15–26", title: "Vergleichen, begründen & verbinden", meta: "Konzessivsätze → Goethe Mini 2" },
+        { num: "27–36", title: "Zeit, Vermutung & Perspektive", meta: "Tempus → Halbzeit-Test" },
+        { num: "37–43", title: "Relativsätze & Präpositionen", meta: "Relativsätze → Goethe Mini 3" },
+        { num: "44–53", title: "Passiv, Modalität & formelles Deutsch", meta: "Zustandspassiv → Goethe Mini 4" },
+        { num: "54–63", title: "Akademisches & schriftliches Deutsch", meta: "Funktionsverben → Goethe Mini 5" },
+        { num: "64–69", title: "C1-Brücke", meta: "Genitivpräpositionen → Goethe B2 Final" },
+      ],
+      roadmapIntro: {
+        eyebrow: "The Roadmap",
+        title: "The complete B2 journey.",
+        body: "Chapter 1 is yours, no payment, no signup wall. The next 68 chapters unlock with the B2 bundle or Lifetime A1–C2.",
+      },
+      phases: [
+        { eyebrow: "Phase 01", title: "Präziser & natürlicher sprechen", range: [1, 14] },
+        { eyebrow: "Phase 02", title: "Vergleichen, begründen & verbinden", range: [15, 26] },
+        { eyebrow: "Phase 03", title: "Zeit, Vermutung & Perspektive", range: [27, 36] },
+        { eyebrow: "Phase 04", title: "Relativsätze & Präpositionen", range: [37, 43] },
+        { eyebrow: "Phase 05", title: "Passiv, Modalität & formelles Deutsch", range: [44, 53] },
+        { eyebrow: "Phase 06", title: "Akademisches & schriftliches Deutsch", range: [54, 63] },
+        { eyebrow: "Phase 07", title: "C1-Brücke", range: [64, 69] },
+      ],
+      chapters: [
+        { id: "b2-1", n: 1, title: "Erweiterte Satzklammer", goal: "Hold a long sentence together — the conjugated verb early, the rest of the verb at the very end — even across many words in between.", duration: "30 min", skills: ["audio", "grammar", "quiz", "pdf"], status: "free", cta: "Begin chapter", route: "/b2/chapter-1" },
+        { id: "b2-2", n: 2, title: "Mehrteilige Verben im Satz (Verbalkomplex)", goal: "Order a stack of verbs at the end of the clause — gemacht werden müssen — in the sequence German expects.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-2" },
+        { id: "b2-3", n: 3, title: "Informationsstruktur: Thema → Rhema", goal: "Start with what is known and end with what is new — the rhythm that makes German text flow naturally.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-3" },
+        { id: "b2-4", n: 4, title: "Formales es (Subjekt-es)", goal: "Use the placeholder es as a grammatical subject — es regnet, es gibt — where English would have nothing.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-4" },
+        { id: "b2-5", n: 5, title: "Korrelat-es (es freut mich, dass …)", goal: "Point ahead to a clause with es — es freut mich, dass du kommst — and know when it stays and when it drops.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-5" },
+        { id: "b2-6", n: 6, title: "es in festen Ausdrücken", goal: "Lock in the idioms that carry es — es geht um, es kommt darauf an, ich habe es eilig.", duration: "25 min", skills: ["audio", "grammar", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-6" },
+        { id: "b2-7", n: 7, title: "Verbergänzungen erkennen", goal: "Spot what a verb requires — an accusative, a dative, a preposition — before you build the sentence.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-7" },
+        { id: "b2-8", n: 8, title: "Valenz von Verben", goal: "Know how many partners each verb takes — geben needs three, schlafen needs one — and build around it.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-8" },
+        { id: "b2-9", n: 9, title: "Trennbar vs. untrennbar — Bedeutungsunterschiede", goal: "Hear the stress, change the meaning — úmfahren versus umfáhren — where one prefix tells two different stories.", duration: "30 min", skills: ["audio", "grammar", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-9" },
+        { id: "b2-10", n: 10, title: "Häufige B2-Verben (trennbar/untrennbar)", goal: "Build fluency with the separable and inseparable verbs that fill B2 texts — and split them correctly.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-10" },
+        { id: "b2-11", n: 11, title: "Stellung von nicht — Satz- vs. Sondernegation", goal: "Place nicht to negate the whole sentence or just one element — and shift the meaning on purpose.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-11" },
+        { id: "b2-12", n: 12, title: "Doppelte Verneinung & Litotes", goal: "Say more by negating less — nicht unwichtig, nicht selten — the understatement educated German loves.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-12" },
+        { id: "b2-13", n: 13, title: "Nuancierte Negation (kaum, keineswegs, keinesfalls)", goal: "Negate with precision and weight — kaum, keineswegs, keinesfalls — beyond a plain nicht or kein.", duration: "30 min", skills: ["audio", "grammar", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-13" },
+        { id: "b2-14", n: 14, title: "Goethe Mini 1", goal: "A short Goethe-style checkpoint covering every topic in Phase 1.", duration: "40 min", skills: ["audio", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-14" },
+        { id: "b2-15", n: 15, title: "Konzessivsätze: obgleich", goal: "Concede a point in formal register — obgleich es regnete, gingen wir — the written cousin of obwohl.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-15" },
+        { id: "b2-16", n: 16, title: "Konsekutivsätze: sodass / infolgedessen", goal: "Express results across a clause — sodass — and link consequences in formal text — infolgedessen.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-16" },
+        { id: "b2-17", n: 17, title: "Modalsätze: indem", goal: "Say how something is done — indem man übt, lernt man — the by-doing-X structure of formal German.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-17" },
+        { id: "b2-18", n: 18, title: "Modalsätze: dadurch, dass", goal: "Name the means with dadurch, dass — the heavier, more explicit partner of indem.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-18" },
+        { id: "b2-19", n: 19, title: "ohne … zu", goal: "Say what didn't happen alongside — er ging, ohne zu grüßen — when the subject is the same.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-19" },
+        { id: "b2-20", n: 20, title: "(an)statt … zu", goal: "Express doing one thing in place of another — statt zu arbeiten, schlief er — with the infinitive.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-20" },
+        { id: "b2-21", n: 21, title: "sowohl … als auch", goal: "Join two equal elements — sowohl Deutsch als auch Englisch — as a polished, balanced pair.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-21" },
+        { id: "b2-22", n: 22, title: "weder … noch", goal: "Negate two things at once — weder Zeit noch Geld — without a second nicht in sight.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-22" },
+        { id: "b2-23", n: 23, title: "nicht nur … sondern auch", goal: "Add weight to a second point — nicht nur klug, sondern auch fleißig — the classic escalation.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-23" },
+        { id: "b2-24", n: 24, title: "einerseits … andererseits", goal: "Weigh two sides of an argument — einerseits … andererseits — the connector every B2 essay needs.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-24" },
+        { id: "b2-25", n: 25, title: "Verbindungsadverbien (deshalb, trotzdem, dennoch, folglich)", goal: "Connect sentences from position one — deshalb, trotzdem, dennoch, folglich — and keep the verb second.", duration: "30 min", skills: ["audio", "grammar", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-25" },
+        { id: "b2-26", n: 26, title: "Goethe Mini 2", goal: "A Goethe-style checkpoint across Phase 2 — connectors, reasoning, and cohesion.", duration: "40 min", skills: ["audio", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-26" },
+        { id: "b2-27", n: 27, title: "Vergangenheitstempus: Stilunterschiede (Perfekt vs. Präteritum)", goal: "Choose the right past for the register — Perfekt when you speak, Präteritum when you write.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-27" },
+        { id: "b2-28", n: 28, title: "Tempuswechsel im Text", goal: "Move between tenses inside one text without losing the reader — narration, background, and result.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-28" },
+        { id: "b2-29", n: 29, title: "Futur I für Vermutungen", goal: "Use the future to guess about now — er wird wohl zu Hause sein — not only to talk about later.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-29" },
+        { id: "b2-30", n: 30, title: "Alternativen zum Futur (wohl, wahrscheinlich + Präsens)", goal: "Speculate without werden — er kommt wohl später — using present tense plus a probability word.", duration: "25 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-30" },
+        { id: "b2-31", n: 31, title: "Konjunktiv II der Vergangenheit (hätte/wäre + Partizip)", goal: "Talk about an unreal past — wenn ich gewusst hätte — with hätte or wäre plus the participle.", duration: "35 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-31" },
+        { id: "b2-32", n: 32, title: "Konjunktiv II für Vermutungen (dürfte, könnte)", goal: "Soften a guess with dürfte and könnte — das dürfte stimmen — the careful tone of formal German.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-32" },
+        { id: "b2-33", n: 33, title: "Irreale Vergleiche: als ob / als wenn / als hätte / als wäre", goal: "Compare with the unreal — er tut, als ob er schliefe — across both word orders.", duration: "35 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-33" },
+        { id: "b2-34", n: 34, title: "Temporalsätze im Diskurs: während / seitdem", goal: "Set events against a backdrop — während and seitdem — to mark overlap and duration in text.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-34" },
+        { id: "b2-35", n: 35, title: "Temporalsätze im Diskurs: bevor / nachdem", goal: "Sequence cause and effect in time — bevor and nachdem — with the tense each one demands.", duration: "30 min", skills: ["audio", "grammar", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-35" },
+        { id: "b2-36", n: 36, title: "Goethe Halbzeit-Test", goal: "A mid-course Goethe-style mock across Phases 1–3 — Lesen, Hören, Schreiben, and Sprechen.", duration: "60 min", skills: ["audio", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-36" },
+        { id: "b2-37", n: 37, title: "Komplexe Relativsätze (Genitiv: dessen / deren)", goal: "Build relative clauses in the Genitiv — der Mann, dessen Auto — to show belonging inside a clause.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-37" },
+        { id: "b2-38", n: 38, title: "Verschachtelte Relativsätze", goal: "Nest one relative clause inside another and still land every verb in its right place.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-38" },
+        { id: "b2-39", n: 39, title: "Relativsätze mit wer …, der …", goal: "Make general statements — wer A sagt, muss auch B sagen — with the wer …, der … pattern.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-39" },
+        { id: "b2-40", n: 40, title: "Verben mit Präpositionen — B2-Kombinationen", goal: "Lock in the verb-plus-preposition pairs B2 expects — sich bewerben um, bestehen aus, hinweisen auf.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-40" },
+        { id: "b2-41", n: 41, title: "Nomen mit Präpositionen (Einfluss auf, Interesse an, Teilnahme an)", goal: "Pair nouns with their fixed prepositions — Einfluss auf, Interesse an, Teilnahme an — and the right case.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-41" },
+        { id: "b2-42", n: 42, title: "Adjektive mit Präpositionen — B2 (abhängig von, überzeugt von)", goal: "Combine adjectives with their prepositions — abhängig von, überzeugt von, stolz auf — naturally.", duration: "30 min", skills: ["audio", "grammar", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-42" },
+        { id: "b2-43", n: 43, title: "Goethe Mini 3", goal: "A Goethe-style checkpoint across Phase 4 — relative clauses and prepositional combinations.", duration: "40 min", skills: ["audio", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-43" },
+        { id: "b2-44", n: 44, title: "Zustandspassiv (sein + Partizip II)", goal: "Describe a state, not an action — die Tür ist geöffnet — with sein plus the participle.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-44" },
+        { id: "b2-45", n: 45, title: "Passiversatz: sich lassen", goal: "Replace the passive with sich lassen — das lässt sich machen — a lighter way to say it can be done.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-45" },
+        { id: "b2-46", n: 46, title: "Unpersönliches Passiv (Hier wird nicht geraucht)", goal: "Form the subjectless passive — hier wird nicht geraucht — to state a rule with no actor at all.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-46" },
+        { id: "b2-47", n: 47, title: "bekommen-/kriegen-Passiv (Rezipientenpassiv)", goal: "Put the receiver first — er bekommt das Buch geschenkt — the recipient passive of spoken German.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-47" },
+        { id: "b2-48", n: 48, title: "Modalitätsersatz: haben + zu / sein + zu", goal: "Swap a modal for a structure — das ist zu erledigen, du hast zu warten — active and passive necessity.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-48" },
+        { id: "b2-49", n: 49, title: "Passiv in Wissenschaft & Beruf", goal: "Use the passive where it belongs — reports, procedures, and academic text — to foreground the action.", duration: "30 min", skills: ["audio", "grammar", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-49" },
+        { id: "b2-50", n: 50, title: "Nominalisierung (Verb → Nomen, Adjektiv → Nomen)", goal: "Turn verbs and adjectives into nouns — prüfen → die Prüfung, schön → die Schönheit — for dense, formal style.", duration: "35 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-50" },
+        { id: "b2-51", n: 51, title: "Erweiterte Partizipialattribute (das von allen bewunderte Bild)", goal: "Pack a whole clause before a noun — das von allen bewunderte Bild — the hallmark of written German.", duration: "35 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-51" },
+        { id: "b2-52", n: 52, title: "Komplexe Nominalgruppen", goal: "Read and build long noun phrases — article, attributes, noun, and trailing genitive — without losing the thread.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-52" },
+        { id: "b2-53", n: 53, title: "Goethe Mini 4", goal: "A Goethe-style checkpoint across Phase 5 — passive forms, modality, and nominalization.", duration: "40 min", skills: ["audio", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-53" },
+        { id: "b2-54", n: 54, title: "Nomen-Verb-Verbindungen & Funktionsverbgefüge", goal: "Master the set phrases of formal German — eine Entscheidung treffen, in Betracht ziehen, zur Verfügung stehen.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-54" },
+        { id: "b2-55", n: 55, title: "Modalpartikeln: doch / ja", goal: "Color a sentence with doch and ja — komm doch, das ist ja toll — the particles that make you sound native.", duration: "25 min", skills: ["audio", "grammar", "quiz", "speak"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-55" },
+        { id: "b2-56", n: 56, title: "Modalpartikeln: eben / halt", goal: "Add resignation and finality — das ist eben so, das ist halt so — the everyday particles of spoken German.", duration: "25 min", skills: ["audio", "grammar", "quiz", "speak"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-56" },
+        { id: "b2-57", n: 57, title: "Textkohärenz: Verweiswörter & Pronominaladverbien", goal: "Keep a text linked with reference words — dieser, jener, dabei, hierfür — so ideas point back cleanly.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-57" },
+        { id: "b2-58", n: 58, title: "Textkohärenz: Satzverknüpfung & Absatzlogik", goal: "Build paragraphs that hold together — topic, support, transition — the logic graders look for.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-58" },
+        { id: "b2-59", n: 59, title: "Konjunktiv I: Formen", goal: "Build the reporting subjunctive — er sei, er habe, er komme — the forms behind indirect speech.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-59" },
+        { id: "b2-60", n: 60, title: "Indirekte Rede: Grundlagen (mit KI)", goal: "Report what someone said — er sagte, er sei müde — with Konjunktiv I and the right anchor verb.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-60" },
+        { id: "b2-61", n: 61, title: "Indirekte Rede: Zeitverschiebung", goal: "Shift the tense when you report the past — er sagte, er habe es getan — without losing the timeline.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-61" },
+        { id: "b2-62", n: 62, title: "Konjunktiv I: journalistische / berichtende Sprache", goal: "Read and write reported speech in news German — die Regierung erklärte, man werde handeln.", duration: "30 min", skills: ["audio", "grammar", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-62" },
+        { id: "b2-63", n: 63, title: "Goethe Mini 5", goal: "A Goethe-style checkpoint across Phase 6 — particles, reported speech, and text cohesion.", duration: "40 min", skills: ["audio", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-63" },
+        { id: "b2-64", n: 64, title: "Präpositionen mit Genitiv (angesichts, aufgrund, innerhalb)", goal: "Use the formal Genitiv prepositions — angesichts, aufgrund, innerhalb — the register of academic German.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-64" },
+        { id: "b2-65", n: 65, title: "Wissenschaftssprache: unpersönliche & objektive Formulierungen", goal: "Write objectively and without a personal subject — man, es lässt sich, the passive — for study and work.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-65" },
+        { id: "b2-66", n: 66, title: "Argumentieren: Standpunkte ausdrücken", goal: "State a clear position — meiner Ansicht nach, ich bin überzeugt — the language of a B2 opinion essay.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-66" },
+        { id: "b2-67", n: 67, title: "Argumentieren: Gegenargumente & Einräumen", goal: "Handle the other side — zwar … aber, es mag sein, dass — concede and then counter with control.", duration: "30 min", skills: ["grammar", "quiz", "speak", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-67" },
+        { id: "b2-68", n: 68, title: "Redemittel für Diskussion & Präsentation", goal: "Equip the spoken exam — phrases to open, structure, agree, disagree, and close a discussion or talk.", duration: "30 min", skills: ["audio", "speak", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-68" },
+        { id: "b2-69", n: 69, title: "Goethe-Zertifikat B2 Final", goal: "Full Goethe-Zertifikat B2 mock — Hören, Lesen, Schreiben, Sprechen — with review.", duration: "90 min", skills: ["audio", "speak", "quiz", "pdf"], status: "locked", cta: "Unlock to begin", route: "/b2/chapter-69" },
+      ],
+      learnLoop: {
+        ariaLabel: "How a B2 chapter works",
+        eyebrow: "Inside every chapter",
+        title: "One loop. Repeated until German feels obvious.",
+        intro:
+          'Klarweg&rsquo;s core method is the same in every chapter — <span class="de-italic">see the color, hear the sound, understand the role, produce the structure, get corrected, move on.</span>',
+        steps: [
+          { num: "01", title: "Listen", desc: "Premium native-quality audio. Slow and very slow speeds. Word-by-word when you need it.", icon: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12C3 7 6 4 9 4V9C9 11 7 12 6 12C4 12 3 13 3 16V19C3 20 4 21 5 21H7V14M21 12C21 7 18 4 15 4V9C15 11 17 12 18 12C20 12 21 13 21 16V19C21 20 20 21 19 21H17V14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' },
+          { num: "02", title: "Understand", desc: "Every sentence is color-coded by grammatical role. Structure becomes visible before you read a rule.", icon: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' },
+          { num: "03", title: "Tap words", desc: "Any German word opens a card — pronunciation, Hindi, English, role, and an example in context.", icon: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 4V12L13 9L16 16L19 14L16 7L19 5L10 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>' },
+          { num: "04", title: "Practice", desc: "Interactive widgets — drag-drop word order, audio recognition, fill-the-blank. Three to seven rounds.", icon: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 9H20M8 13H12M8 16H14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>' },
+          { num: "05", title: "Speak", desc: "Say the sentence. The Klarweg AI tutor flags grammar, word choice, and pronunciation in seconds.", icon: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M6 11V12C6 15.3 8.7 18 12 18C15.3 18 18 15.3 18 12V11M12 18V21M9 21H15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>' },
+          { num: "06", title: "Revise", desc: "Five-card recap. Structural, not flashcard memorization. The pattern, then the example.", icon: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12C21 16.97 16.97 21 12 21C9.5 21 7.2 20 5.5 18.3M3 12C3 7 7 3 12 3C14.5 3 16.8 4 18.5 5.7M3 19V14H8M21 5V10H16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' },
+          { num: "07", title: "Unlock", desc: "Finish the mini quiz, download the homework PDF, move to the next chapter. No timers, no streaks.", icon: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8C8 6 9.5 4 12 4C14.5 4 16 6 16 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg>' },
+        ],
+      },
+      pricing: {
+        eyebrow: "Unlock B2",
+        title: "One-time. No subscriptions.",
+        intro: "Pay once for B2, or unlock the entire CEFR ladder with Lifetime. Chapter 1 stays free either way.",
+        cards: [
+          {
+            tier: "B2 · Oberstufe",
+            price: "₹499",
+            priceStrike: null,
+            sub: "One-time. Lifetime access to B2.",
+            center: false,
+            features: [
+              "All 69 B2 chapters unlocked",
+              "Color-coded grammar across every sentence",
+              "Premium audio: 1×, slow, very slow",
+              "AI tutor for speaking & writing",
+              "Homework PDFs and mini quizzes",
+              "Klarweg B2 certificate on completion",
+            ],
+            cta: { label: "Unlock B2", href: "/b2/checkout", variant: "secondary", arrow: true },
+          },
+          {
+            tier: "Lifetime · A1 → C2",
+            price: "₹1,999",
+            priceStrike: "₹30,994",
+            sub: "One-time. The complete CEFR ladder, forever.",
+            center: true,
+            features: [
+              "Every chapter of A1, A2, B1, B2, C1, C2",
+              "Goethe Prüfungstraining from B1 onward",
+              "Full AI tutor — speaking & writing, all levels",
+              "Every future chapter included, automatically",
+              "Klarweg certificate at every level",
+              "Lifetime updates, no recurring fees",
+            ],
+            cta: { label: "Get Lifetime — ₹1,999", href: "/lifetime/checkout", variant: "primary", arrow: true },
+          },
+        ],
+      },
+      finalCta: {
+        title: "The first chapter is <em>free</em>. The next sixty-eight are waiting.",
+        body: "Pick up where B1 left off — with the full passive, reported speech, nominalization, and the structures that make your German sound precise, formal, and ready for work or study.",
+        ctas: [
+          { label: "Begin Chapter 1 — Free", href: "/b2/chapter-1", variant: "primary", arrow: true },
+          { label: "View pricing", href: "#pricing", variant: "secondary", arrow: false },
+        ],
+      },
+    },
+  },
+  footer: {
+    meta: "© Klarweg · German for Hindi-speaking learners",
+    links: [
+      { label: "Method", href: "/method" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "About", href: "/about" },
+      { label: "Sign in", href: "/login" },
+    ],
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/*  Styles — sourced verbatim from a1.html (Klarweg OS Part 4-7)      */
+/* ------------------------------------------------------------------ */
+const STYLES = `@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* ============================================================
+   KLARWEG TOKENS — sourced from Klarweg OS Part 4–7
+   ============================================================ */
+:root {
+  /* Surfaces */
+  --bg-canvas:        #FAFAF7;
+  --bg-surface:       #FFFFFF;
+  --bg-warm:          #FFF8EC;
+  --bg-warm-soft:     #FFFCF4;
+
+  /* Ink */
+  --ink-primary:      #0E0E10;
+  --ink-secondary:    #3A3A40;
+  --ink-tertiary:     #7A7A80;
+  --ink-quaternary:   #A5A5AC;
+
+  /* Hairlines */
+  --hairline-light:   rgba(14, 14, 16, 0.05);
+  --hairline:         rgba(14, 14, 16, 0.09);
+  --hairline-strong:  rgba(14, 14, 16, 0.18);
+
+  /* Shadows — warm-tinted, low-alpha */
+  --shadow-soft:      0 1px 2px rgba(64, 40, 10, 0.04), 0 4px 12px rgba(64, 40, 10, 0.05);
+  --shadow-card:      0 1px 3px rgba(64, 40, 10, 0.05), 0 8px 24px rgba(64, 40, 10, 0.06);
+  --shadow-glow:      0 1px 3px rgba(64, 40, 10, 0.05), 0 12px 36px rgba(234, 88, 12, 0.06), 0 0 0 1px rgba(24, 95, 165, 0.08);
+  --shadow-modal:     0 2px 8px rgba(64, 40, 10, 0.08), 0 24px 64px rgba(64, 40, 10, 0.12);
+
+  /* Radii */
+  --r-xs:             6px;
+  --r-sm:             10px;
+  --r-md:             14px;
+  --r-lg:             20px;
+  --r-full:           999px;
+
+  /* Grammar Spine 5 — locked hexes per Klarweg OS Part 5.1 */
+  --g-subject:        #185FA5;
+  --g-verb:           #DC2626;
+  --g-object:         #2E7D32;
+  --g-time:           #7C3AED;
+  --g-place:          #EA580C;
+  --g-akkusativ:      #10B981;
+  --g-dativ:          #5C7A1D;
+
+  /* Motion */
+  --dur-fast:         150ms;
+  --dur-base:         250ms;
+  --dur-slow:         400ms;
+  --dur-xl:           600ms;
+  --ease:             cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft:        cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Fonts */
+  --font-display:     'Fraunces', Georgia, serif;
+  --font-ui:          'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-german:      'Fraunces', Georgia, serif;
+  --font-mono:        'JetBrains Mono', 'SF Mono', Menlo, monospace;
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  color: var(--ink-primary);
+  background: var(--bg-canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.container-narrow { max-width: 820px; margin: 0 auto; padding: 0 32px; }
+section { padding: 88px 0; }
+@media (max-width: 768px) {
+  .container, .container-narrow { padding: 0 20px; }
+  section { padding: 64px 0; }
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+  font-family: var(--font-ui);
+}
+.display-xl, .display-lg, .display-md, .display-sm {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink-primary);
+  margin: 0;
+}
+.display-xl { font-size: 88px; letter-spacing: -0.04em; }
+.display-lg { font-size: 64px; }
+.display-md { font-size: 48px; }
+.display-sm { font-size: 32px; letter-spacing: -0.02em; }
+.lede {
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.de-italic {
+  font-family: var(--font-german);
+  font-style: italic;
+  font-weight: 500;
+}
+@media (max-width: 768px) {
+  .display-xl { font-size: 52px; }
+  .display-lg { font-size: 40px; }
+  .display-md { font-size: 32px; }
+  .display-sm { font-size: 24px; }
+  .lede { font-size: 18px; }
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 250, 247, 0.82);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--hairline-light);
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+}
+.nav-logo .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--g-place);
+  margin: 0 2px 2px 0;
+  vertical-align: middle;
+}
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  font-weight: 500;
+  transition: color var(--dur-fast) var(--ease);
+}
+.nav-links a:hover { color: var(--ink-primary); }
+.nav-links a.active { color: var(--ink-primary); }
+.nav-cta {
+  padding: 8px 16px;
+  border-radius: var(--r-full);
+  background: var(--ink-primary);
+  color: var(--bg-surface);
+  font-size: 13px;
+  font-weight: 500;
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+@media (max-width: 768px) {
+  .nav-inner { padding: 12px 20px; }
+  .nav-links { display: none; }
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  border-radius: var(--r-full);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-base) var(--ease), border-color var(--dur-fast) var(--ease);
+  border: 1px solid transparent;
+  min-height: 44px;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--ink-primary);
+  color: var(--bg-surface);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 12px 28px rgba(234, 88, 12, 0.18);
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--ink-primary);
+  border-color: var(--hairline);
+}
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  border-color: var(--hairline-strong);
+  box-shadow: var(--shadow-soft);
+}
+.btn-arrow {
+  transition: transform var(--dur-base) var(--ease);
+}
+.btn:hover .btn-arrow { transform: translateX(3px); }
+
+/* ============================================================
+   PILLS
+   ============================================================ */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: var(--r-full);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  border: 1px solid var(--hairline);
+  background: var(--bg-surface);
+  color: var(--ink-secondary);
+}
+.pill-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ink-tertiary);
+}
+.pill-free {
+  background: rgba(46, 125, 50, 0.08);
+  border-color: rgba(46, 125, 50, 0.2);
+  color: var(--g-object);
+}
+.pill-free .pill-dot { background: var(--g-object); }
+.pill-locked {
+  background: var(--bg-warm-soft);
+  border-color: var(--hairline);
+  color: var(--ink-tertiary);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  padding: 96px 0 64px;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: -10% -10% auto -10%;
+  height: 600px;
+  background:
+    radial-gradient(ellipse 50% 60% at 30% 0%, rgba(234, 88, 12, 0.06), transparent 65%),
+    radial-gradient(ellipse 40% 60% at 80% 10%, rgba(24, 95, 165, 0.045), transparent 60%),
+    radial-gradient(ellipse 70% 80% at 50% 0%, rgba(255, 248, 236, 1), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--r-full);
+  background: var(--bg-surface);
+  border: 1px solid var(--hairline);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink-primary);
+}
+.level-badge::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--g-subject);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: 76px;
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin: 0 0 24px;
+  max-width: 880px;
+}
+.hero h1 .accent {
+  font-style: italic;
+  color: var(--ink-primary);
+  background: linear-gradient(115deg, var(--g-subject) 0%, var(--g-place) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-right: 0.04em;
+}
+.hero-lede {
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  max-width: 680px;
+  margin: 0 0 40px;
+  letter-spacing: -0.01em;
+}
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding: 32px 0 0;
+  border-top: 1px solid var(--hairline-light);
+  max-width: 880px;
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink-primary);
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 13px;
+  color: var(--ink-tertiary);
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+}
+@media (max-width: 768px) {
+  .hero { padding: 56px 0 40px; }
+  .hero h1 { font-size: 44px; }
+  .hero-lede { font-size: 17px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 20px; padding-top: 24px; }
+  .stat-num { font-size: 24px; }
+  .hero-ctas { gap: 10px; }
+}
+
+/* ============================================================
+   PATH OVERVIEW BAND
+   ============================================================ */
+.path-band {
+  padding: 56px 0;
+  border-top: 1px solid var(--hairline-light);
+  border-bottom: 1px solid var(--hairline-light);
+  background: linear-gradient(180deg, var(--bg-warm-soft) 0%, var(--bg-canvas) 100%);
+}
+.path-band-head {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.path-band-head h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 6px 0 0;
+}
+.path-band-note {
+  font-size: 14px;
+  color: var(--ink-tertiary);
+  max-width: 360px;
+  line-height: 1.5;
+}
+.path-stations {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  position: relative;
+}
+.path-stations::before {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hairline-strong) 15%, var(--hairline-strong) 85%, transparent);
+}
+.station {
+  position: relative;
+  text-align: left;
+  padding: 0 8px;
+}
+.station-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg-canvas);
+  border: 1px solid var(--hairline-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+.station-dot::after {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ink-quaternary);
+}
+.station:nth-child(1) .station-dot::after { background: var(--g-subject); }
+.station:nth-child(2) .station-dot::after { background: var(--g-verb); }
+.station:nth-child(3) .station-dot::after { background: var(--g-akkusativ); }
+.station:nth-child(4) .station-dot::after { background: var(--g-time); }
+.station:nth-child(5) .station-dot::after { background: var(--g-dativ); }
+.station:nth-child(6) .station-dot::after { background: var(--g-place); }
+
+.station-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-tertiary);
+  letter-spacing: 0;
+  margin-bottom: 4px;
+}
+.station-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-primary);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.station-meta {
+  font-size: 12px;
+  color: var(--ink-tertiary);
+}
+@media (max-width: 900px) {
+  .path-stations { grid-template-columns: repeat(3, 1fr); row-gap: 32px; }
+  .path-stations::before { display: none; }
+}
+@media (max-width: 480px) {
+  .path-stations { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   ROADMAP — phase + chapter cards
+   ============================================================ */
+.roadmap {
+  padding: 80px 0 96px;
+}
+.roadmap-intro {
+  margin-bottom: 56px;
+  max-width: 720px;
+}
+.roadmap-intro h2 {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 12px 0 16px;
+}
+.roadmap-intro p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+  margin: 0;
+}
+
+.phase {
+  margin-bottom: 64px;
+}
+.phase:last-child { margin-bottom: 0; }
+.phase-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--hairline-light);
+  flex-wrap: wrap;
+}
+.phase-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  letter-spacing: 0;
+}
+.phase-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+.phase-range {
+  font-size: 13px;
+  color: var(--ink-tertiary);
+}
+
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .chapter-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .chapter-grid { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* ===== chapter-card ===== */
+.chapter-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  padding: 22px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 184px;
+  transition:
+    transform var(--dur-base) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-base) var(--ease);
+  cursor: pointer;
+  overflow: hidden;
+  text-align: left;
+  width: 100%;
+}
+.chapter-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--hairline-strong);
+  box-shadow: var(--shadow-soft);
+}
+.chapter-card:focus-visible {
+  outline: 2px solid var(--g-subject);
+  outline-offset: 3px;
+}
+
+.cc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cc-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-tertiary);
+  letter-spacing: 0;
+}
+.cc-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--ink-primary);
+  margin: 0;
+}
+.cc-goal {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+  margin: 0;
+  letter-spacing: -0.005em;
+  flex: 1;
+}
+.cc-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline-light);
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.cc-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  flex-wrap: wrap;
+}
+.cc-duration { display: inline-flex; align-items: center; gap: 5px; }
+.cc-skills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cc-skill {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg-warm-soft);
+  border: 1px solid var(--hairline-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-tertiary);
+  transition: all var(--dur-fast) var(--ease);
+}
+.cc-skill svg { width: 11px; height: 11px; }
+.cc-cta {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap var(--dur-base) var(--ease);
+}
+.chapter-card:hover .cc-cta { gap: 7px; }
+
+/* ===== FREE (Chapter 1) — same template as locked, quietly differentiated.
+   No padding, font-size, or min-height divergence. The only differences are
+   the left accent stripe, a slightly warmer hover shadow, and a bolder CTA. */
+.chapter-card.free::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--g-subject), var(--g-place));
+  border-radius: 3px 0 0 3px;
+  pointer-events: none;
+}
+.chapter-card.free:hover {
+  box-shadow:
+    0 1px 3px rgba(64, 40, 10, 0.05),
+    0 10px 28px rgba(234, 88, 12, 0.07),
+    0 0 0 1px rgba(24, 95, 165, 0.10);
+}
+.chapter-card.free .cc-cta {
+  color: var(--ink-primary);
+  font-weight: 600;
+}
+
+/* ===== LOCKED cards ===== */
+.chapter-card.locked {
+  background: var(--bg-surface);
+}
+.chapter-card.locked .cc-title {
+  color: var(--ink-primary);
+}
+.chapter-card.locked .cc-goal {
+  color: var(--ink-tertiary);
+  opacity: 0.78;
+  filter: blur(0.3px);
+}
+.chapter-card.locked .cc-num { color: var(--ink-quaternary); }
+.chapter-card.locked .cc-skill {
+  opacity: 0.5;
+}
+.chapter-card.locked .cc-cta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-tertiary);
+  gap: 5px;
+  transition: color var(--dur-fast) var(--ease);
+}
+.chapter-card.locked:hover .cc-cta {
+  color: var(--ink-primary);
+}
+.cc-lock {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--bg-warm-soft);
+  border: 1px solid var(--hairline);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-tertiary);
+  flex-shrink: 0;
+}
+.cc-lock svg { width: 12px; height: 12px; }
+@media (prefers-reduced-motion: reduce) {
+  .chapter-card { transition: none; }
+  .chapter-card.locked .cc-goal { filter: none; }
+}
+@media (max-width: 768px) {
+  .chapter-card.locked .cc-goal { filter: none; opacity: 0.7; }
+}
+
+/* ============================================================
+   LEARN LOOP — How A1 works
+   ============================================================ */
+.learn-loop {
+  background: linear-gradient(180deg, var(--bg-canvas) 0%, var(--bg-warm-soft) 100%);
+  border-top: 1px solid var(--hairline-light);
+  border-bottom: 1px solid var(--hairline-light);
+  padding: 96px 0;
+}
+.loop-head {
+  margin-bottom: 56px;
+  max-width: 720px;
+}
+.loop-head h2 {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 12px 0 16px;
+}
+.loop-head p {
+  font-size: 18px;
+  color: var(--ink-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+.loop-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 14px;
+  position: relative;
+}
+.loop-step {
+  background: var(--bg-surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  padding: 20px 16px 18px;
+  transition: transform var(--dur-base) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-base) var(--ease);
+}
+.loop-step:hover {
+  transform: translateY(-1px);
+  border-color: var(--hairline-strong);
+  box-shadow: var(--shadow-soft);
+}
+.loop-step-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-quaternary);
+  margin-bottom: 12px;
+}
+.loop-step-icon {
+  width: 32px; height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-sm);
+  background: var(--bg-warm-soft);
+  margin-bottom: 14px;
+  color: var(--ink-secondary);
+}
+.loop-step-icon svg { width: 16px; height: 16px; }
+.loop-step:nth-child(1) .loop-step-icon { color: var(--g-subject); background: rgba(24, 95, 165, 0.08); }
+.loop-step:nth-child(2) .loop-step-icon { color: var(--g-verb); background: rgba(220, 38, 38, 0.07); }
+.loop-step:nth-child(3) .loop-step-icon { color: var(--g-object); background: rgba(46, 125, 50, 0.08); }
+.loop-step:nth-child(4) .loop-step-icon { color: var(--g-time); background: rgba(124, 58, 237, 0.07); }
+.loop-step:nth-child(5) .loop-step-icon { color: var(--g-place); background: rgba(234, 88, 12, 0.08); }
+.loop-step:nth-child(6) .loop-step-icon { color: var(--g-akkusativ); background: rgba(16, 185, 129, 0.08); }
+.loop-step:nth-child(7) .loop-step-icon { color: var(--g-dativ); background: rgba(92, 122, 29, 0.10); }
+
+.loop-step-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+  color: var(--ink-primary);
+}
+.loop-step-desc {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--ink-tertiary);
+  margin: 0;
+}
+@media (max-width: 1100px) {
+  .loop-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 700px) {
+  .loop-grid { grid-template-columns: repeat(2, 1fr); }
+  .learn-loop { padding: 64px 0; }
+  .loop-head h2 { font-size: 32px; }
+}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing-sec {
+  padding: 96px 0;
+}
+.pricing-head {
+  text-align: center;
+  margin-bottom: 56px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pricing-head h2 {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 12px 0 16px;
+}
+.pricing-head p {
+  font-size: 18px;
+  color: var(--ink-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.price-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+}
+.price-card.center {
+  background: linear-gradient(160deg, var(--bg-surface) 0%, var(--bg-warm) 100%);
+  box-shadow: var(--shadow-card);
+  border-color: var(--hairline-strong);
+}
+.price-card.center::before {
+  content: 'Recommended';
+  position: absolute;
+  top: -1px; right: 24px;
+  transform: translateY(-50%);
+  padding: 5px 12px;
+  background: var(--ink-primary);
+  color: var(--bg-surface);
+  border-radius: var(--r-full);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.price-tier {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.price-big {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--ink-primary);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+.price-strike {
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--ink-tertiary);
+  text-decoration: line-through;
+  letter-spacing: -0.005em;
+}
+.price-sub {
+  font-size: 14px;
+  color: var(--ink-tertiary);
+  margin: 8px 0 24px;
+}
+.price-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.price-list li {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.45;
+}
+.price-list li::before {
+  content: '';
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--bg-warm-soft);
+  border: 1px solid var(--hairline);
+  display: inline-block;
+  flex-shrink: 0;
+  margin-top: 3px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M3 6.5L5 8.5L9 4' stroke='%237A7A80' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.price-card.center .price-list li::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M3 6.5L5 8.5L9 4' stroke='%232E7D32' stroke-width='1.7' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  border-color: rgba(46, 125, 50, 0.2);
+  background-color: rgba(46, 125, 50, 0.06);
+}
+@media (max-width: 760px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  .price-big { font-size: 44px; }
+  .pricing-head h2 { font-size: 32px; }
+  .pricing-sec { padding: 64px 0; }
+}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final-cta {
+  padding: 96px 0;
+  border-top: 1px solid var(--hairline-light);
+  text-align: center;
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-canvas) 0%, var(--bg-warm-soft) 100%);
+}
+.final-cta h2 {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin: 0 0 20px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.final-cta h2 em {
+  font-style: italic;
+  background: linear-gradient(115deg, var(--g-subject) 0%, var(--g-place) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.final-cta p {
+  font-size: 18px;
+  color: var(--ink-secondary);
+  margin: 0 auto 36px;
+  max-width: 560px;
+  line-height: 1.55;
+}
+.final-cta-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+  .final-cta { padding: 64px 0; }
+  .final-cta h2 { font-size: 36px; }
+  .final-cta p { font-size: 16px; }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  padding: 48px 0;
+  border-top: 1px solid var(--hairline-light);
+  background: var(--bg-canvas);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-meta { font-size: 13px; color: var(--ink-tertiary); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-size: 13px;
+  color: var(--ink-tertiary);
+  transition: color var(--dur-fast) var(--ease);
+}
+.footer-links a:hover { color: var(--ink-primary); }
+
+/* ============================================================
+   SCROLL-IN ANIMATION
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+`;
+
+/* ------------------------------------------------------------------ */
+/*  Small shared bits                                                  */
+/* ------------------------------------------------------------------ */
+function BtnArrow() {
+  return (
+    <svg
+      className="btn-arrow"
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M3 7H11M11 7L7 3M11 7L7 11"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CtaLink({
+  cta,
+  style,
+}: {
+  cta: CtaButton;
+  style?: React.CSSProperties;
+}) {
+  const cls = "btn " + (cta.variant === "primary" ? "btn-primary" : "btn-secondary");
+  return (
+    <a href={cta.href} className={cls} style={style}>
+      {cta.label}
+      {cta.arrow ? <BtnArrow /> : null}
+    </a>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Chapter card — one template, two modifiers (free / locked)        */
+/* ------------------------------------------------------------------ */
+function ChapterCard({
+  chapter,
+  code,
+  icons,
+  skillLabels,
+  onLockedClick,
+}: {
+  chapter: Chapter;
+  code: string;
+  icons: Record<string, string>;
+  skillLabels: Record<string, string>;
+  onLockedClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}) {
+  const isLocked = chapter.status === "locked";
+  const numPadded = String(chapter.n).padStart(2, "0");
+  const modifier = isLocked ? "locked" : "free";
+  const ariaLabel = isLocked
+    ? "Chapter " + chapter.n + ": " + chapter.title + ". Locked. Unlock with B2 bundle or Lifetime."
+    : "Chapter " + chapter.n + ": " + chapter.title + ". Free.";
+
+  const lockAttrs = isLocked
+    ? { "data-action": "scroll-pricing", onClick: onLockedClick }
+    : {};
+
+  return (
+    <a
+      className={"chapter-card " + modifier}
+      href={chapter.route}
+      aria-label={ariaLabel}
+      {...lockAttrs}
+    >
+      <div className="cc-top">
+        <span className="cc-num">{code + " \u00B7 " + numPadded}</span>
+        {isLocked ? (
+          <span
+            className="cc-lock"
+            aria-hidden="true"
+            dangerouslySetInnerHTML={{ __html: icons.lock }}
+          />
+        ) : (
+          <span className="pill pill-free">
+            <span className="pill-dot" /> Free chapter
+          </span>
+        )}
+      </div>
+      <h3 className="cc-title">{chapter.title}</h3>
+      <p className="cc-goal">{chapter.goal}</p>
+      <div className="cc-foot">
+        <div className="cc-meta">
+          <span
+            className="cc-duration"
+            dangerouslySetInnerHTML={{ __html: icons.clock + " " + chapter.duration }}
+          />
+          <span className="cc-skills">
+            {chapter.skills.slice(0, 5).map((s, i) => (
+              <span
+                key={i}
+                className="cc-skill"
+                title={skillLabels[s] || s}
+                aria-label={skillLabels[s] || s}
+                dangerouslySetInnerHTML={{ __html: icons[s] || "" }}
+              />
+            ))}
+          </span>
+        </div>
+        <span
+          className="cc-cta"
+          dangerouslySetInnerHTML={{ __html: chapter.cta + " " + icons.arrow }}
+        />
+      </div>
+    </a>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Page                                                               */
+/* ------------------------------------------------------------------ */
+export default function B2Roadmap() {
+  const level = data.levels.b2;
+  const { nav, footer, icons, skillLabels } = data;
+  const { hero, heroStats, pathBand, pathStations, roadmapIntro, phases, chapters, learnLoop, pricing, finalCta } = level;
+
+  /* Scroll-in reveal — IntersectionObserver, no parallax, no bounce */
+  useEffect(() => {
+    const reveals = document.querySelectorAll<HTMLElement>(".reveal");
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "0px 0px -60px 0px", threshold: 0.05 }
+      );
+      reveals.forEach((el) => io.observe(el));
+      return () => io.disconnect();
+    }
+    reveals.forEach((el) => el.classList.add("in"));
+  }, []);
+
+  /* Locked-card click -> smooth-scroll to pricing */
+  const handleLockedClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    document
+      .getElementById("pricing")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: STYLES }} />
+
+      {/* ========== NAV ========== */}
+      <nav className="nav" aria-label="Main navigation">
+        <div className="nav-inner">
+          <a href={nav.logo.href} className="nav-logo" aria-label={nav.logo.ariaLabel}>
+            {nav.logo.dot ? <span className="dot" aria-hidden="true" /> : null}
+            {nav.logo.text}
+          </a>
+          <div className="nav-links">
+            {nav.links.map((l, i) => (
+              <a key={i} href={l.href} className={l.active ? "active" : undefined}>
+                {l.label}
+              </a>
+            ))}
+          </div>
+          <a href={nav.cta.href} className="nav-cta">
+            {nav.cta.label}
+          </a>
+        </div>
+      </nav>
+
+      <main>
+        {/* ========== HERO ========== */}
+        <section className="hero">
+          <div className="container hero-inner">
+            <div className="hero-eyebrow-row">
+              <span className="level-badge">{hero.badge}</span>
+              {hero.pills.map((p, i) =>
+                p.dotColor ? (
+                  <span className="pill" key={i}>
+                    <span className="pill-dot" style={{ background: p.dotColor }} /> {p.label}
+                  </span>
+                ) : (
+                  <span className="pill" key={i}>
+                    {p.label}
+                  </span>
+                )
+              )}
+            </div>
+            <h1>
+              {hero.headline.prefix}
+              <span className="accent">{hero.headline.accent}</span>
+              {hero.headline.suffix}
+            </h1>
+            <p className="hero-lede">{hero.lede}</p>
+            <div className="hero-ctas">
+              {hero.ctas.map((c, i) => (
+                <CtaLink key={i} cta={c} />
+              ))}
+            </div>
+            <div className="hero-stats">
+              {heroStats.map((st, i) => (
+                <div key={i}>
+                  <div className="stat-num">{st.num}</div>
+                  <div
+                    className="stat-label"
+                    dangerouslySetInnerHTML={{ __html: st.label }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========== PATH OVERVIEW BAND ========== */}
+        <section className="path-band" aria-label={pathBand.ariaLabel}>
+          <div className="container">
+            <div className="path-band-head">
+              <div>
+                <div className="eyebrow">{pathBand.eyebrow}</div>
+                <h2>{pathBand.title}</h2>
+              </div>
+              <p className="path-band-note">{pathBand.note}</p>
+            </div>
+            <div className="path-stations" id="path-stations">
+              {pathStations.map((s, i) => (
+                <div className="station" key={i}>
+                  <div className="station-dot" />
+                  <div className="station-num">{s.num}</div>
+                  <div className="station-title">{s.title}</div>
+                  <div className="station-meta">{s.meta}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========== ROADMAP ========== */}
+        <section className="roadmap" id="roadmap">
+          <div className="container">
+            <div className="roadmap-intro">
+              <div className="eyebrow">{roadmapIntro.eyebrow}</div>
+              <h2>{roadmapIntro.title}</h2>
+              <p>{roadmapIntro.body}</p>
+            </div>
+
+            <div id="phases-mount">
+              {phases.map((phase, pi) => {
+                const [from, to] = phase.range;
+                const phaseChapters = chapters.filter(
+                  (c) => c.n >= from && c.n <= to
+                );
+                return (
+                  <div className="phase reveal" key={pi}>
+                    <div className="phase-head">
+                      <span className="phase-num">{phase.eyebrow}</span>
+                      <h3 className="phase-title">{phase.title}</h3>
+                      <span className="phase-range">
+                        {"Chapters " + from + "\u2013" + to}
+                      </span>
+                    </div>
+                    <div className="chapter-grid">
+                      {phaseChapters.map((c) => (
+                        <ChapterCard
+                          key={c.id}
+                          chapter={c}
+                          code={level.code}
+                          icons={icons}
+                          skillLabels={skillLabels}
+                          onLockedClick={handleLockedClick}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ========== LEARN LOOP ========== */}
+        <section className="learn-loop" aria-label={learnLoop.ariaLabel}>
+          <div className="container">
+            <div className="loop-head">
+              <div className="eyebrow">{learnLoop.eyebrow}</div>
+              <h2>{learnLoop.title}</h2>
+              <p dangerouslySetInnerHTML={{ __html: learnLoop.intro }} />
+            </div>
+            <div className="loop-grid">
+              {learnLoop.steps.map((step, i) => (
+                <div className="loop-step" key={i}>
+                  <div className="loop-step-num">{step.num}</div>
+                  <div
+                    className="loop-step-icon"
+                    dangerouslySetInnerHTML={{ __html: step.icon }}
+                  />
+                  <h3 className="loop-step-title">{step.title}</h3>
+                  <p className="loop-step-desc">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========== PRICING ========== */}
+        <section className="pricing-sec" id="pricing">
+          <div className="container">
+            <div className="pricing-head">
+              <div className="eyebrow">{pricing.eyebrow}</div>
+              <h2>{pricing.title}</h2>
+              <p>{pricing.intro}</p>
+            </div>
+            <div className="pricing-grid">
+              {pricing.cards.map((card, i) => (
+                <div
+                  className={"price-card" + (card.center ? " center" : "")}
+                  key={i}
+                >
+                  <div className="price-tier">{card.tier}</div>
+                  <div className="price-big">
+                    {card.price}
+                    {card.priceStrike ? (
+                      <span className="price-strike">{card.priceStrike}</span>
+                    ) : null}
+                  </div>
+                  <div className="price-sub">{card.sub}</div>
+                  <ul className="price-list">
+                    {card.features.map((f, j) => (
+                      <li key={j}>{f}</li>
+                    ))}
+                  </ul>
+                  <CtaLink cta={card.cta} style={{ alignSelf: "flex-start" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========== FINAL CTA ========== */}
+        <section className="final-cta">
+          <div className="container-narrow">
+            <h2 dangerouslySetInnerHTML={{ __html: finalCta.title }} />
+            <p>{finalCta.body}</p>
+            <div className="final-cta-row">
+              {finalCta.ctas.map((c, i) => (
+                <CtaLink key={i} cta={c} />
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* ========== FOOTER ========== */}
+      <footer>
+        <div className="container">
+          <div className="footer-inner">
+            <div className="footer-meta">{footer.meta}</div>
+            <div className="footer-links">
+              {footer.links.map((l, i) => (
+                <a key={i} href={l.href}>
+                  {l.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}

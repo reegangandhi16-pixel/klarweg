@@ -1,0 +1,19 @@
+# ── Secrets — never commit ──────────────────────────────────
+.env.local
+.env*.local
+
+# ── Generated audio artifacts ───────────────────────────────
+# The MP3s are build output. Two valid strategies:
+#   A) Commit them (recommended for static hosting) — DELETE the
+#      three ignore lines below so the files are tracked.
+#   B) Generate in CI on every deploy — keep them ignored.
+# The manifest itself should always be committed so audioUrl() works
+# even before a local generate, and so CI can diff what's missing.
+public/audio/words/*.mp3
+public/audio/sentences/*.mp3
+public/audio/dialogues/*.mp3
+
+# ── Node ────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+.DS_Store

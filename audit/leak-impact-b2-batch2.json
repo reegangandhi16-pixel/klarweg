@@ -1,0 +1,187 @@
+{
+ "phase": "7",
+ "batch": 2,
+ "chapters": 5,
+ "entries": 6,
+ "note": "all sole-source; zero linkified occurrences of any injected surface outside .de",
+ "results": [
+  {
+   "slug": "b2-21-sowohl-als-auch",
+   "line": 179,
+   "field": "de",
+   "value": "People, nouns, verbs, adjectives, prepositional phrases",
+   "totalNodes": 885,
+   "totalQaFindings": 1,
+   "injected": [
+    "people",
+    "nouns",
+    "verbs",
+    "adjectives",
+    "prepositional",
+    "phrases"
+   ],
+   "soleSourceCount": 6,
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 0,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "people": 4,
+    "nouns": 6,
+    "verbs": 6,
+    "adjectives": 4,
+    "prepositional": 5,
+    "phrases": 5
+   },
+   "linkifiedAttributed": 0
+  },
+  {
+   "slug": "b2-22-weder-noch",
+   "line": 191,
+   "field": "de",
+   "value": "Formal reports, presentations, academic writing",
+   "totalNodes": 856,
+   "totalQaFindings": 6,
+   "injected": [
+    "formal",
+    "reports",
+    "presentations",
+    "academic",
+    "writing"
+   ],
+   "soleSourceCount": 5,
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 0,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "formal": 0,
+    "reports": 2,
+    "presentations": 1,
+    "academic": 1,
+    "writing": 8
+   },
+   "linkifiedAttributed": 0
+  },
+  {
+   "slug": "b2-23-nicht-nur-sondern-auch",
+   "line": 193,
+   "field": "de",
+   "value": "Nouns, verbs, adjectives, adverbs, prepositional phrases",
+   "totalNodes": 1005,
+   "totalQaFindings": 0,
+   "injected": [
+    "nouns",
+    "verbs",
+    "adjectives",
+    "adverbs",
+    "prepositional",
+    "phrases"
+   ],
+   "soleSourceCount": 6,
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 0,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "nouns": 4,
+    "verbs": 4,
+    "adjectives": 4,
+    "adverbs": 4,
+    "prepositional": 4,
+    "phrases": 4
+   },
+   "linkifiedAttributed": 0
+  },
+  {
+   "slug": "b2-23-nicht-nur-sondern-auch",
+   "line": 194,
+   "field": "de",
+   "value": "Formal newspapers, reports, persuasive writing",
+   "totalNodes": 1005,
+   "totalQaFindings": 0,
+   "injected": [
+    "formal",
+    "newspapers",
+    "reports",
+    "persuasive",
+    "writing"
+   ],
+   "soleSourceCount": 5,
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 0,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "formal": 1,
+    "newspapers": 0,
+    "reports": 3,
+    "persuasive": 6,
+    "writing": 9
+   },
+   "linkifiedAttributed": 0
+  },
+  {
+   "slug": "b2-34-temporalsaetze-waehrend-seitdem",
+   "line": 187,
+   "field": "de",
+   "value": "Both connectors: verb at the end",
+   "totalNodes": 640,
+   "totalQaFindings": 26,
+   "injected": [
+    "both",
+    "connectors",
+    "verb",
+    "at",
+    "the",
+    "end"
+   ],
+   "soleSourceCount": 6,
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 0,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "both": 2,
+    "connectors": 5,
+    "verb": 13,
+    "at": 11,
+    "the": 41,
+    "end": 4
+   },
+   "linkifiedAttributed": 0
+  },
+  {
+   "slug": "b2-35-temporalsaetze-bevor-nachdem",
+   "line": 177,
+   "field": "de",
+   "value": "Which action happened first?",
+   "totalNodes": 660,
+   "totalQaFindings": 5,
+   "injected": [
+    "which",
+    "action",
+    "happened",
+    "first"
+   ],
+   "soleSourceCount": 4,
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 0,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "which": 7,
+    "action": 53,
+    "happened": 7,
+    "first": 15
+   },
+   "linkifiedAttributed": 0
+  }
+ ]
+}

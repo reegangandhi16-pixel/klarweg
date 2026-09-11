@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klarweg · Review</title>
+<meta name="description" content="Spaced-repetition review for the German words you have saved across Klarweg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-canvas:#FAFAF7; --bg-surface:#FFFFFF; --bg-elevated:#F4F3EE; --bg-warm:#FFF8EC;
+  --ink-primary:#0E0E10; --ink-secondary:#5A5A60; --ink-tertiary:#9A9AA0; --ink-quaternary:#C7C7C2;
+  --coral:#E55A3F; --accent:#1F4E4A; --accent-tint:#E7F0EE; --accent-deep:#143331;
+  --lvl-a1:#185FA5; --lvl-a2:#2E7D32; --lvl-b1:#7C3AED; --lvl-b2:#EA580C; --lvl-c1:#0F766E; --lvl-c2:#9F1239;
+  --hairline:rgba(14,14,16,0.08); --hairline-strong:rgba(14,14,16,0.14); --hairline-light:rgba(14,14,16,0.04);
+  --r-sm:10px; --r-md:14px; --r-lg:20px; --r-xl:24px; --r-full:999px;
+  --shadow-card:0 1px 0 rgba(14,14,16,0.02), 0 12px 32px -16px rgba(14,14,16,0.12);
+  --shadow-lift:0 24px 60px -24px rgba(14,14,16,0.18);
+  --ease:cubic-bezier(0.16,1,0.3,1); --dur-fast:150ms; --dur-base:240ms;
+  --font-display:'General Sans','Inter',system-ui,sans-serif;
+  --font-ui:'Inter',system-ui,sans-serif;
+  --font-german:'Fraunces','Times New Roman',serif;
+  --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --font-hindi:'Noto Sans Devanagari','Inter',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}*{margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--font-ui);background:var(--bg-canvas);color:var(--ink-primary);line-height:1.6;min-height:100vh}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-deep)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.container{max-width:760px;margin:0 auto;padding:0 32px}
+.topbar{position:sticky;top:0;z-index:50;background:var(--bg-canvas);border-bottom:1px solid var(--hairline)}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1120px;margin:0 auto;padding:0 32px}
+.brand{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.02em;color:var(--ink-primary)}
+.brand:hover{color:var(--ink-primary)}
+.exit{font-size:14px;font-weight:500;color:var(--ink-secondary);display:flex;align-items:center;gap:7px}
+.exit:hover{color:var(--ink-primary)}
+.exit svg{width:15px;height:15px}
+
+/* Session head */
+.session-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:40px 0 20px}
+.eyebrow{font-family:var(--font-mono);font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-tertiary)}
+.counter{font-family:var(--font-mono);font-size:13px;color:var(--ink-secondary);font-variant-numeric:tabular-nums}
+.rail{height:2px;background:var(--hairline-light);border-radius:var(--r-full);overflow:hidden;margin-bottom:36px}
+.rail-fill{height:100%;background:var(--accent);width:0;transition:width var(--dur-base) var(--ease)}
+
+/* Card */
+.card{background:var(--bg-surface);border:1px solid var(--hairline);border-radius:var(--r-xl);box-shadow:var(--shadow-card);padding:56px 44px;text-align:center}
+.tags{display:flex;justify-content:center;gap:7px;margin-bottom:26px}
+.tag{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.02em;padding:4px 10px;border-radius:var(--r-full)}
+.tag-type{background:var(--bg-elevated);color:var(--ink-secondary)}
+.tag-type.noun{background:#E6F1FB;color:#0C447C}
+.tag-type.verb{background:#FBEAEA;color:#a01f1f}
+.tag-type.adjective{background:#FBF1E1;color:#92500B}
+.tag-lvl{color:#fff}
+.word{font-family:var(--font-german);font-style:italic;font-weight:500;font-size:clamp(34px,6vw,52px);letter-spacing:-.02em;line-height:1.15}
+.word .art{font-style:normal;font-weight:400;color:var(--ink-tertiary);font-size:.62em}
+.ipa{font-family:var(--font-mono);font-size:13px;color:var(--ink-tertiary);margin-top:10px}
+.hear{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:13.5px;font-weight:500;color:var(--ink-secondary);border:1px solid var(--hairline-strong);border-radius:var(--r-full);padding:9px 16px;min-height:44px;transition:color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease),transform var(--dur-base) var(--ease)}
+.hear:hover{color:var(--ink-primary);border-color:var(--ink-quaternary);transform:translateY(-1px)}
+.hear svg{width:15px;height:15px}
+
+/* Reveal */
+.reveal-btn{margin-top:30px;font-size:14px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:var(--r-full);padding:12px 26px;min-height:44px;transition:background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease),transform var(--dur-base) var(--ease)}
+.reveal-btn:hover{background:var(--accent);color:#fff;transform:translateY(-1px)}
+.hint{font-family:var(--font-mono);font-size:11px;color:var(--ink-tertiary);margin-top:14px;letter-spacing:.04em}
+.answer{margin-top:30px;padding-top:28px;border-top:1px solid var(--hairline-light);text-align:left}
+.answer[hidden]{display:none}
+.en{font-size:22px;font-weight:600;letter-spacing:-.01em;text-align:center}
+.hi{font-family:var(--font-hindi);font-size:16px;color:var(--ink-secondary);margin-top:6px;text-align:center}
+.example{margin-top:22px;padding:16px 18px;background:var(--bg-elevated);border-radius:var(--r-md)}
+.example .de{font-family:var(--font-german);font-style:italic;font-size:16px;line-height:1.5}
+.example .tr{font-size:13.5px;color:var(--ink-secondary);margin-top:4px}
+.forms{margin-top:14px;font-family:var(--font-mono);font-size:12px;color:var(--ink-tertiary);text-align:center}
+
+/* Grades */
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}
+.grade{display:flex;flex-direction:column;align-items:center;gap:3px;padding:14px 8px;min-height:44px;border:1px solid var(--hairline-strong);border-radius:var(--r-md);background:var(--bg-surface);transition:border-color var(--dur-fast) var(--ease),transform var(--dur-base) var(--ease),background var(--dur-fast) var(--ease)}
+.grade:hover{transform:translateY(-1px);border-color:var(--ink-quaternary);background:var(--bg-elevated)}
+.grade .g{font-size:13.5px;font-weight:600;letter-spacing:.01em}
+.grade .i{font-family:var(--font-mono);font-size:11px;color:var(--ink-secondary)}
+.grade[data-g="again"] .g{color:var(--coral)}
+.grade[data-g="easy"] .g{color:var(--accent)}
+.k{font-family:var(--font-mono);font-size:10px;color:var(--ink-secondary)}
+
+/* States */
+.state{text-align:center;padding:96px 20px}
+.state-icon{width:56px;height:56px;border-radius:50%;background:var(--bg-elevated);display:grid;place-items:center;margin:0 auto 20px;color:var(--ink-quaternary)}
+.state-icon svg{width:26px;height:26px}
+.state h2{font-family:var(--font-display);font-size:24px;font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+.state p{font-size:15px;color:var(--ink-secondary);max-width:400px;margin:0 auto 26px}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#fff;background:var(--accent);border-radius:var(--r-full);padding:12px 22px;min-height:44px}
+.back:hover{background:var(--accent-deep);color:#fff}
+.done-meta{font-family:var(--font-mono);font-size:12px;color:var(--ink-tertiary);margin-bottom:26px}
+@media (max-width:600px){
+  .container{padding:0 20px}
+  .card{padding:40px 22px}
+  .grades{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html">Klarweg</a>
+    <a class="exit" href="saved-words.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 4L6 8l4 4"/></svg>
+      Saved Words</a>
+  </div>
+</header>
+
+<div class="container">
+  <div id="session" hidden>
+    <div class="session-head">
+      <span class="eyebrow">Review</span>
+      <span class="counter" id="counter">1 of 1</span>
+    </div>
+    <div class="rail"><div class="rail-fill" id="rail"></div></div>
+
+    <div class="card">
+      <div class="tags" id="tags"></div>
+      <div class="word" id="word"></div>
+      <div class="ipa" id="ipa"></div>
+      <button class="hear" id="hear">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 2.5L4.5 5.5H2v5h2.5L8 13.5z"/><path d="M11 5.5a3.5 3.5 0 010 5"/></svg>
+        Hear it</button>
+
+      <div id="front">
+        <button class="reveal-btn" id="reveal">Show meaning</button>
+        <div class="hint">space to reveal</div>
+      </div>
+
+      <div class="answer" id="answer" hidden>
+        <div class="en" id="en"></div>
+        <div class="hi" id="hi"></div>
+        <div class="example" id="example" hidden>
+          <div class="de" id="ex-de"></div>
+          <div class="tr" id="ex-en"></div>
+        </div>
+        <div class="forms" id="forms"></div>
+        <div class="grades" id="grades">
+          <button class="grade" data-g="again"><span class="g">Again</span><span class="i" id="i-again"></span><span class="k">1</span></button>
+          <button class="grade" data-g="hard"><span class="g">Hard</span><span class="i" id="i-hard"></span><span class="k">2</span></button>
+          <button class="grade" data-g="good"><span class="g">Good</span><span class="i" id="i-good"></span><span class="k">3</span></button>
+          <button class="grade" data-g="easy"><span class="g">Easy</span><span class="i" id="i-easy"></span><span class="k">4</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="state" id="empty" hidden>
+    <div class="state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12.5l5 5 11-11"/></svg></div>
+    <h2>You’re all caught up.</h2>
+    <p id="empty-sub">Nothing is due for review right now. Saved words come back on their own schedule.</p>
+    <a class="back" href="saved-words.html">Back to Saved Words</a>
+  </div>
+
+  <div class="state" id="done" hidden>
+    <div class="state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12.5l5 5 11-11"/></svg></div>
+    <h2>Session finished.</h2>
+    <div class="done-meta" id="done-meta"></div>
+    <a class="back" href="saved-words.html">Back to Saved Words</a>
+  </div>
+</div>
+
+<script src="../public/audio/kw-audio-engine.js"></script>
+<script src="../public/audio/kw-tts-config.js"></script>
+<script src="kw-account.js"></script>
+<script src="../chapter/global-lexicon.js"></script>
+<script>
+var Saved = KW_Account.Saved;
+function $(s){return document.querySelector(s)}
+function speak(t){ if(window.KW_speak){ window.KW_speak(t); return; } if('speechSynthesis'in window){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t.replace(/^(der|die|das)\s+/,''));u.lang='de-DE';speechSynthesis.speak(u);}catch(e){}} }
+
+var LVL_COLOR={A1:'var(--lvl-a1)',A2:'var(--lvl-a2)',B1:'var(--lvl-b1)',B2:'var(--lvl-b2)',C1:'var(--lvl-c1)',C2:'var(--lvl-c2)'};
+
+/* The chapter lexicon is READ here so review shows the same entry the Word
+   Popup shows — no second dictionary. Missing entries simply show less. */
+function lex(de){
+  var G=window.KW_GLOBAL_LEXICON||{},I=window.KW_INFLECTIONS||{};
+  var k=String(de||'').toLowerCase().replace(/^(der|die|das)\s+/,'').replace(/[.,!?;:]/g,'').trim();
+  var hit=G[k];
+  if(!hit&&I[k])hit=G[String(I[k]).toLowerCase()];
+  return hit||null;
+}
+function plural(n,unit){return n+' '+unit+(n===1?'':'s');}
+function intervalLabel(w,grade){
+  var d=Saved.previewDays(w,grade);
+  return d===0?'now':plural(d,'day');
+}
+
+/* Session queue is snapshotted once, so grading never reshuffles the run. */
+var queue=Saved.dueNow(), idx=0, revealed=false, reviewed=0;
+
+function start(){
+  if(!queue.length){
+    $('#empty').hidden=false;
+    if(!Saved.counts().total)$('#empty-sub').textContent='No saved words yet. Open a chapter and save a word — it will appear here for review.';
+    return;
+  }
+  $('#session').hidden=false;
+  paint();
+}
+function paint(){
+  var w=queue[idx];
+  revealed=false;
+  $('#answer').hidden=true;
+  $('#front').hidden=false;
+  $('#counter').textContent=(idx+1)+' of '+queue.length;
+  $('#rail').style.width=(idx/queue.length*100)+'%';
+  $('#word').innerHTML=String(w.de).replace(/^(der|die|das)\s+/,function(m){return '<span class="art">'+m.trim()+'</span> ';});
+  var e=lex(w.de);
+  $('#ipa').textContent=w.ipa||'';
+  var t=(w.type||'').toLowerCase();
+  $('#tags').innerHTML=(t?'<span class="tag tag-type '+t+'">'+t+'</span>':'')+
+    (w.level?'<span class="tag tag-lvl" style="background:'+(LVL_COLOR[w.level]||'var(--ink-tertiary)')+'">'+w.level+'</span>':'');
+  $('#en').textContent=w.en||(e&&e.en)||'—';
+  $('#hi').textContent=(e&&e.hi)||'';
+  var exDe=(e&&e.ex)||'', exEn=(e&&e.exEn)||'';
+  $('#example').hidden=!exDe;
+  $('#ex-de').textContent=exDe;
+  $('#ex-en').textContent=exEn;
+  var forms=[];
+  if(e&&e.plural)forms.push('plural · '+e.plural);
+  if(e&&e.compare)forms.push('compare · '+[].concat(e.compare).join(' / '));
+  $('#forms').textContent=forms.join('   ');
+  ['again','hard','good','easy'].forEach(function(g){$('#i-'+g).textContent=intervalLabel(w,g);});
+}
+function reveal(){
+  if(revealed)return;
+  revealed=true;
+  $('#front').hidden=true;
+  $('#answer').hidden=false;
+}
+function grade(g){
+  if(!revealed)return;
+  var w=queue[idx];
+  Saved.review(w.id,g);
+  reviewed++;
+  idx++;
+  if(idx>=queue.length){
+    $('#session').hidden=true;
+    $('#done-meta').textContent=plural(reviewed,'word')+' reviewed';
+    $('#done').hidden=false;
+    return;
+  }
+  paint();
+}
+
+$('#reveal').addEventListener('click',reveal);
+$('#hear').addEventListener('click',function(){speak(queue[idx].de);});
+$('#grades').addEventListener('click',function(e){
+  var b=e.target.closest('.grade');
+  if(b)grade(b.getAttribute('data-g'));
+});
+document.addEventListener('keydown',function(e){
+  if($('#session').hidden)return;
+  if(e.key===' '||e.key==='Enter'){e.preventDefault();reveal();return;}
+  var map={'1':'again','2':'hard','3':'good','4':'easy'};
+  if(map[e.key])grade(map[e.key]);
+});
+
+start();
+</script>
+</body>
+</html>

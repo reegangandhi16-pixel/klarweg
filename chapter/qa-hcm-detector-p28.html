@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Klarweg · P28 HCM detector fix regression</title>
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font:14px/1.5 Inter,system-ui,sans-serif;padding:28px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:#5A5A60;font-size:13px;margin-bottom:18px;max-width:800px}
+.st{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A5A60;margin-bottom:12px}
+pre{background:#fff;border:1px solid #EDEBE4;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;white-space:pre-wrap;max-height:56vh;overflow:auto}
+iframe{position:absolute;width:1200px;height:900px;left:-9999px;top:0;border:0}
+</style></head><body>
+<h1>P28 — HCM detector fix regression</h1>
+<div class="sub">Diagnostic re-implementation of the HCM check, run side by side in two modes on the same rendered chapter: <b>LOOSE</b> = today's <code>opened</code> condition (<code>headText===word || headText!==prevHead</code>), <b>STRICT</b> = popup ownership proven by freshness marker (the pre-existing popup is tagged before the click; a popup still carrying the tag did not belong to this click). qa-engine.js and all production files are untouched — this file re-implements the comparison for testing only.<br><code>KWP28.run()</code></div>
+<div class="st" id="status">idle</div>
+<pre id="out">—</pre>
+<iframe id="frame"></iframe>
+<script>
+const $=s=>document.querySelector(s);
+// One representative chapter per disposition group, plus the false-positive chapter.
+const CASES=[
+ {file:'chapter-b2-15-konzessivsaetze-obgleich.html',label:'FALSE POSITIVE (3× Obgleich)',expectLoose:3,expectStrict:0,indices:[782,790,798]},
+ {file:'chapter-a1-7-jaodernein.html',label:'G1 BY-DESIGN (Nein → negation)',indices:[243,328,386]},
+ {file:'chapter-c1-26-passiv-und-passiversatzformen.html',label:'G2 DATA (dokumentiert, co-located RCB)',indices:[241,245,247]},
+ {file:'chapter-a1-8-goethemini1.html',label:'G3 homograph (deutsch/Deutsch)',indices:[133,542,581,585]},
+ {file:'chapter-a1-39-ortsangaben.html',label:'G5 letter (a)',indices:[570]},
+ {file:'chapter-b1-22-brauchen-zu-infinitiv.html',label:'lemma/inflection case (machen)',indices:[681]}];
+function ready(f,cb){
+  const S=180,N=3,HARD=30000,t0=Date.now();let last=null,same=0;
+  const sig=()=>{try{const d=f.contentDocument;if(!d)return null;const nodes=d.querySelectorAll('.rw, .de-link');if(!nodes.length)return null;
+    const roles={};let n=0;for(let i=0;i<nodes.length;i++){const el=nodes[i];if(el.querySelector('.rw, .de-link'))continue;n++;
+      const m=String(el.className).match(/\br-[a-z-]+/);const k=m?m[0]:'(none)';roles[k]=(roles[k]||0)+1;}
+    if(!n)return null;return n+'|'+Object.keys(roles).sort().map(k=>k+':'+roles[k]).join(',');}catch(e){return null;}};
+  const poll=()=>{if(Date.now()-t0>HARD)return cb('hard-timeout');
+    let lex=false;try{lex=!!(f.contentWindow&&f.contentWindow.KW_GLOBAL_LEXICON);}catch(e){}
+    if(!lex){last=null;same=0;return setTimeout(poll,S);}
+    const s=sig();if(s===null){last=null;same=0;return setTimeout(poll,S);}
+    if(s===last)same++;else{same=1;last=s;}
+    if(same>=N)return cb('stable');setTimeout(poll,S);};
+  poll();
+}
+// Mirrors qa-engine.js node selection exactly.
+function nodesOf(d){return [].slice.call(d.querySelectorAll('.rw, .de-link'))
+  .filter(n=>!n.querySelector('.rw, .de-link')).filter(n=>!n.closest('.word-pop'))
+  .filter(n=>!!(n.offsetParent||n.getClientRects().length));}
+function probeChapter(c){
+  return new Promise((resolve,reject)=>{
+    const f=$('#frame');const t=setTimeout(()=>reject(new Error('timeout '+c.file)),90000);
+    f.onload=()=>ready(f,async(state)=>{
+      clearTimeout(t);
+      if(state!=='stable')return reject(new Error('unstable '+c.file));
+      const d=f.contentDocument;const nodes=nodesOf(d);
+      const rows=[];let prevHead='';
+      for(const i of c.indices){
+        const n=nodes[i];
+        if(!n){rows.push({index:i,error:'node missing'});continue;}
+        const word=n.textContent.trim();
+        const spanColour=getComputedStyle(n).color;
+        // STRICT evidence: tag the popup that exists BEFORE the click. A popup that
+        // still carries the tag afterwards was not produced by this click.
+        const before=d.querySelector('.word-pop');
+        if(before)before.setAttribute('data-p28-stale','1');
+        const closeBtn=d.querySelector('.wp-close');if(closeBtn)closeBtn.click();
+        n.click();
+        await new Promise(r=>setTimeout(r,600));
+        const pop=d.querySelector('.word-pop');
+        const headEl=pop&&pop.querySelector('.word-pop-de');
+        const headText=headEl?headEl.textContent.trim():'';
+        const headColour=headEl?getComputedStyle(headEl).color:null;
+        const isFresh=!!pop&&!pop.hasAttribute('data-p28-stale');
+        const textMatch=headText.toLowerCase()===word.toLowerCase();
+        const openedLoose=!!pop&&(textMatch||headText!==prevHead);
+        const openedStrict=!!pop&&isFresh&&!!headEl;
+        const colourDiffers=!!headEl&&headColour!==spanColour;
+        const inChip=!!n.closest('.vword, .vword-de, #vocab-grid');
+        rows.push({index:i,word:word,spanColour:spanColour,
+          headText:headText,headColour:headColour,
+          popupFresh:isFresh,headTextMatchesSurface:textMatch,
+          surfaceNotEqualLemma:!!headText&&!textMatch,
+          openedLoose:openedLoose,openedStrict:openedStrict,
+          hcmLoose:openedLoose&&colourDiffers&&!inChip,
+          hcmStrict:openedStrict&&colourDiffers&&!inChip});
+        prevHead=headText;
+      }
+      resolve({file:c.file,label:c.label,readyState:state,totalNodes:nodes.length,rows:rows,
+        hcmLoose:rows.filter(r=>r.hcmLoose).length,hcmStrict:rows.filter(r=>r.hcmStrict).length,
+        freshPopups:rows.filter(r=>r.popupFresh).length,
+        lemmaCases:rows.filter(r=>r.surfaceNotEqualLemma).length});
+    });
+    f.src=c.file+'?p28='+Date.now()+'_'+Math.random();
+  });
+}
+window.KWP28={CASES,async run(){
+  const out=[];
+  for(let i=0;i<CASES.length;i++){
+    $('#status').textContent='['+(i+1)+'/'+CASES.length+'] '+CASES[i].file.slice(8,36);
+    try{out.push(await probeChapter(CASES[i]));}
+    catch(e){out.push({file:CASES[i].file,error:String(e.message||e)});}
+    window.__P28=out;$('#out').textContent=JSON.stringify(out.map(o=>({f:(o.file||'').slice(8,32),loose:o.hcmLoose,strict:o.hcmStrict})),null,1);
+  }
+  $('#status').textContent='done';
+  return out.map(o=>({file:(o.file||'').slice(8,34),label:o.label,loose:o.hcmLoose,strict:o.hcmStrict,
+    fresh:o.freshPopups,lemma:o.lemmaCases,err:o.error||null}));
+}};
+$('#out').textContent='ready';
+</script>
+</body></html>

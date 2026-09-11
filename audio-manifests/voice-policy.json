@@ -1,0 +1,204 @@
+{
+  "version": "audio-policy-v3",
+  "approvedOn": null,
+  "supersedes": "audio-policy-v2 (2026-09-08) — v2 content is preserved verbatim below; v3 only ADDS the surfaces v2 never covered (vocabulary headword, popup headword, paradigm forms, grammar examples) and records the resolution architecture the runtime now uses. No v2 voice, rate, hash rule or legacy exception was changed.",
+  "status": "PROPOSED — awaiting sign-off. No audio may be generated under v3 until approvedOn is set.",
+  "provider": "google-cloud-tts",
+  "api": "texttospeech.googleapis.com/v1/text:synthesize",
+  "languageCode": "de-DE",
+  "voices": {
+    "female": "de-DE-Neural2-F",
+    "male": "de-DE-Neural2-D"
+  },
+  "retiredVoices": {
+    "de-DE-Neural2-B": "RETIRED for chapter audio (Story / Listening / Reading / Speaking) on 2026-09-08. Never reintroduce it there. NOT retired for vocabulary — see legacyExceptions."
+  },
+  "assignment": {
+    "vocabulary-headword": {
+      "surface": "vocabulary card · .vword-voice[data-g=female] / [data-g=male] / .vword-btn[title=Listen]",
+      "requestText": "vocabTerm(art, de) — article + headword as displayed",
+      "voices": {
+        "female": "de-DE-Neural2-F",
+        "male": "de-DE-Neural2-B"
+      },
+      "maleVoiceNote": "de-DE-Neural2-B is the frozen legacy vocabulary voice (see legacyExceptions). The 7,795-term corpus is already rendered in it; a term that needs synthesis is rendered in the SAME voice so one card never mixes two male timbres.",
+      "speakingRate": 1,
+      "rateNote": "vocabulary has always been rendered at rate 1 — it is a single word or a determiner + noun, not connected speech, and the level rates in speakingRateByLevel do not apply. The runtime does not pass a rate for vocabulary.",
+      "controlsPerCard": 3,
+      "assetsPerCard": 2,
+      "assetsPerCardNote": "the speaker button replays the learner's current voice preference; it is not a third asset"
+    },
+    "popup-headword": {
+      "surface": "word popup · button.wp-audio (every clickable German word, all sections)",
+      "requestText": "resolveHeadword(displayed surface) — the chapter's own vocabulary index first, else the displayed form",
+      "voice": "de-DE-Neural2-F",
+      "voiceRationale": "the popup calls speakWordFemale() unconditionally; there is one voice and it is the female narrator",
+      "speakingRate": 1,
+      "rateNote": "long-press Slow (0.75×) and Very-slow (0.4×) change HTMLMediaElement.playbackRate on the same file — they must NEVER be rendered as separate assets",
+      "reuse": "a popup on a word that is also a chapter vocabulary headword resolves through resolveHeadword() to that vocabulary asset. Do not render a second file for it."
+    },
+    "paradigm-forms": {
+      "surface": "word popup · button.wp-mini-audio (Comparison / Conjugation / Number / Declension cells)",
+      "requestText": "the cell's form with a leading \"am|ist|hat\" stripped — e.g. \"hat umgestaltet\" plays \"umgestaltet\"",
+      "voice": "de-DE-Neural2-F",
+      "voiceRationale": "these cells call Audio.speak() with no gender, so they resolve through the single-voice text manifest. Pinning them to the female narrator keeps a paradigm grid in one voice.",
+      "speakingRate": 1,
+      "note": "each cell is its own audio target. umgestalten / gestaltet um / gestaltete um / hat umgestaltet are FOUR assets because the grid renders four controls."
+    },
+    "grammar-examples": {
+      "surface": "grammar section · .example-line (the whole line is click-to-listen)",
+      "requestText": "line.textContent.split(\"→\")[0] — the German half only, never the Hinglish gloss",
+      "voice": "de-DE-Neural2-F",
+      "voiceRationale": "explanatory narration, same register as reading; no speaker identity is involved",
+      "speakingRate": "speakingRateByLevel",
+      "scope": "114 unique lines (A1 ×3, B1 ×111). No other level authors grammar[].example."
+    },
+    "story": {
+      "surface": "story section · button.story-play-line (and story-play-all, which replays them)",
+      "requestText": "line.tokens.filter(!plain).map(w).join(\" \") — the UI drops punctuation tokens; the resolver's canonical key absorbs that difference so the punctuated manifest text is what gets rendered",
+      "renderText": "the AUTHORED punctuated line from story-dialogue-manifest.json — punctuation drives prosody and must be synthesized, not stripped",
+      "voice": "speaker gender from the manifest: male speaker -> de-DE-Neural2-D, female speaker -> de-DE-Neural2-F. Never inferred from names.",
+      "speakingRate": "speakingRateByLevel",
+      "speakerIdentity": "preserved per line from story.dialogue[].speaker + story.femaleSpeakers; one voice per speaker within a chapter"
+    },
+    "listening": {
+      "surface": "listening section · button.audio-play-btn",
+      "requestText": "one request per TRANSCRIPT SENTENCE — Audio.speakSequence() splits listening.transcript on /[^.!?]+[.!?]*/",
+      "renderText": "the sentence as it appears in the transcript",
+      "voice": "speaker gender from the authored listening.dialogue[].gender field of the line that contains the sentence. Never inferred from the German text.",
+      "speakingRate": "speakingRateByLevel",
+      "unresolvedRule": "if a transcript sentence cannot be tied to an authored dialogue line, its speaker is UNRESOLVED. Do not synthesize it and do not guess a gender — it goes to human review.",
+      "granularityNote": "a stored multi-sentence dialogue line cannot answer a single-sentence request (the player would replay the whole line per sentence). Such rows are reported genuinely missing rather than mapped."
+    },
+    "reading": {
+      "surface": "reading section · button \"Listen to passage\"",
+      "requestText": "reading.tokens.filter(!plain).map(w).join(\" \") — one request for the WHOLE passage, punctuation dropped; the canonical key absorbs it",
+      "renderText": "the authored punctuated passage from reading-manifest.json",
+      "voice": "single narrator de-DE-Neural2-F for all 258 chapters",
+      "speakingRate": "speakingRateByLevel"
+    },
+    "speaking": {
+      "surface": "speaking section · button \"Hear model\"",
+      "requestText": "speaking[].de",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": "speakingRateByLevel",
+      "scopeChange": "v2 assigned a voice to the German task prompt as well. speaking[].task has NO audio control in the current UI, so its 1,277 manifest rows are NOT production targets. They stay in the manifest, unsynthesized, unless a control is added."
+    },
+    "vocabulary-example": {
+      "surface": "vocabulary card · example sentence (vocab[].ex / exTokens)",
+      "requestText": null,
+      "voice": null,
+      "speakingRate": null,
+      "status": "NOT A PRODUCTION TARGET — verified across all 259 pages: the example sentence renders no audio control. Each German word in it is individually clickable and resolves through popup-headword instead.",
+      "ifAControlIsAdded": "it would follow the reading policy — de-DE-Neural2-F at speakingRateByLevel"
+    }
+  },
+  "speakingRateByLevel": {
+    "A1": 0.85,
+    "A2": 0.85,
+    "B1": 0.95,
+    "B2": 0.95,
+    "C1": 1,
+    "C2": 1
+  },
+  "rateScope": "Applied uniformly to Story, Listening, Reading, Speaking and Grammar examples — connected speech inside a level. Word-level audio (vocabulary headwords, popup headwords, paradigm forms) is level-independent and always rate 1, because the same word is clickable at every level and must not exist in six renders. No per-sample overrides.",
+  "audioConfig": {
+    "audioEncoding": "MP3",
+    "sampleRateHertz": 24000,
+    "pitch": 0
+  },
+  "contentHash": {
+    "rule": "sha256(de + \"::\" + voice + \"::\" + speakingRate) truncated to the first 16 hex characters",
+    "appliesTo": [
+      "story-dialogue-manifest.json",
+      "listening-dialogue-manifest.json",
+      "reading-manifest.json",
+      "speaking-manifest.json",
+      "grammar (new in v3)",
+      "popup headwords and paradigm forms (new in v3)"
+    ],
+    "rationale": "Text alone is not identity. Two artifacts with identical German but a different voice or a different speaking rate are materially different renders and must hash differently.",
+    "supersedes": "v1 rule sha256(de + \"::\" + voice) used by Story/Listening before 2026-09-08. All 2856 Story+Listening rows were rehashed under the v2 rule; no German text was altered.",
+    "vocabulary": "UNCHANGED — the vocabulary pipeline keeps its own sha256(text) id/hash scheme and was not touched."
+  },
+  "resolution": {
+    "note": "v3 records the resolution architecture because voice choice and lookup key are the same decision: a file rendered under one key and requested under another is indistinguishable from a missing file.",
+    "engine": "public/audio/kw-audio-engine.js",
+    "vocabularySources": [
+      "https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/manifest.json (priority 1, 9,403 terms, readable filenames)",
+      "<KW_AUDIO_BASE>a1-words-manifest.json (priority 2, 1,902 terms, sha256 filenames)",
+      "<KW_AUDIO_BASE>a2-words-manifest.json (priority 3, 1,444 terms)",
+      "<KW_AUDIO_BASE>b1-words-manifest.json (priority 4, published when it exists)"
+    ],
+    "vocabularyMergeRule": "earlier source wins; a later manifest can only ADD coverage, never repoint a term that already resolves",
+    "canonicalKey": "formatting-only equivalence — whitespace, typographic quotes/dashes/ellipses, punctuation and case. Letters, digits, umlauts and ß are untouched, punctuation collapses to a space (never to nothing), and every canonical index is collision-guarded: if two different stored texts reduce to one key, the key resolves to nothing rather than to the wrong render.",
+    "sentenceOfLine": "a stored line consisting of exactly one sentence may answer that sentence's request; multi-sentence lines may not.",
+    "canonicalKeyDefect": {
+      "issue": "the canonical key strips \"&\" as punctuation, so \"& Co\" reduces to the same key as the unrelated stored asset \"Co\" and currently resolves to it",
+      "affected": 2,
+      "severity": "false match — must be fixed before generation or serving",
+      "requiredFix": "treat \"&\" as content in canonKey(), not as punctuation",
+      "status": "OPEN — reported, not yet fixed (it is a resolver rule change and this pass was gated to reconciliation)"
+    }
+  },
+  "unitTypes": {
+    "S": "story dialogue line",
+    "L": "listening transcript sentence (v3: the unit the player actually requests)",
+    "LA": "listening authored dialogue line — data only, no control",
+    "R": "reading passage",
+    "Q": "speaking German task prompt — data only, no control in the current UI",
+    "P": "speaking German model answer",
+    "G": "grammar example line (new in v3)",
+    "VF": "vocabulary headword, female (new in v3)",
+    "VM": "vocabulary headword, male (new in v3)",
+    "W": "popup headword (new in v3)",
+    "F": "paradigm form cell (new in v3)"
+  },
+  "neverSynthesized": [
+    "speaking[].taskEn",
+    "speaking[].en",
+    "reading.translation",
+    "all hi fields",
+    "any English or Hindi editorial text",
+    "speaking[].task — displayed but has no audio control (v3)",
+    "listening.dialogue[] authored lines — superseded at runtime by transcript-sentence playback (v3)",
+    "exercise, quiz, writing, overview, summary and resources text — verified across all 259 pages to expose zero audio controls (v3)",
+    "clickable spans that are not German lexical content — English fragments and punctuation-only spans; these are clickability defects to fix in the UI, not audio targets (v3)",
+    "Slow / Very-slow variants of any asset — they are playbackRate changes on the same file (v3)",
+    "vocabulary example sentences — no audio control; their words are covered by popup-headword (v3)"
+  ],
+  "legacyExceptions": {
+    "vocabularyMaleVoice": {
+      "voice": "de-DE-Neural2-B",
+      "scope": "audio-manifests/vocabulary-manifest.json — all 7786 male entries (7786 F + 7786 B = 15572 total)",
+      "status": "INTENTIONAL LEGACY EXCEPTION — approved 2026-09-08, carried forward unchanged into v3",
+      "rationale": "The male vocabulary corpus is already rendered and live on the CDN. Re-rendering 7786 files and rehashing the vocabulary manifest would be a vocabulary-system change, which is explicitly out of scope for this rollout.",
+      "rules": [
+        "Do NOT re-render the 7786 existing male vocabulary files.",
+        "Do NOT modify vocabulary audio files, the vocabulary manifest, vocabulary hashes, or vocabulary generation output as part of this rollout.",
+        "Vocabulary keeps its own sha256(text) id/hash scheme — unchanged."
+      ],
+      "futureWork": "Vocabulary voice migration to de-DE-Neural2-D is a separate future project, to be opened only if we later decide it is necessary."
+    },
+    "strandedA1A2Corpus": {
+      "status": "PROTECTED — do not regenerate, do not delete (new in v3)",
+      "scope": "the dual-voice files published under a1-words-manifest.json and a2-words-manifest.json",
+      "rule": "these files exist and serve 200. The engine now reads their manifests, so they resolve. They are not synthesis targets under any circumstance."
+    }
+  },
+  "approvedMaleVoiceByDomain": {
+    "story / listening / reading / speaking / grammar": "de-DE-Neural2-D",
+    "vocabulary (existing corpus)": "de-DE-Neural2-B (legacy exception, frozen)",
+    "popup headwords / paradigm forms": "no male voice — these surfaces are female-only by construction"
+  },
+  "pendingApproval": {
+    "whatYouAreApproving": [
+      "the 10 assignment entries below (9 generated families + vocabulary-example as a non-target)",
+      "speakingRateByLevel applied to connected speech only; all word-level audio at rate 1",
+      "the frozen de-DE-Neural2-B vocabulary male voice legacy exception",
+      "the neverSynthesized list, including speaking[].task and the 1,963 unreachable rows",
+      "the unresolvedRule for listening: no gender is ever inferred from German text"
+    ],
+    "howToApprove": "set approvedOn to the date and status to APPROVED. No audio may be generated until then."
+  }
+}

@@ -1,0 +1,208 @@
+{
+ "phase": "7",
+ "batch": 4,
+ "chapters": 4,
+ "entries": 5,
+ "results": [
+  {
+   "slug": "b2-45-passiversatz-sich-lassen",
+   "line": 187,
+   "field": "de",
+   "value": "Common in manuals, reports, and formal German",
+   "totalNodes": 869,
+   "totalQaFindings": 4,
+   "injected": [
+    "common",
+    "in",
+    "manuals",
+    "reports",
+    "and",
+    "formal",
+    "german"
+   ],
+   "soleSource": [
+    "common",
+    "manuals",
+    "reports",
+    "and",
+    "formal",
+    "german"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 3,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "common": 7,
+    "in": 21,
+    "manuals": 3,
+    "reports": 4,
+    "and": 27,
+    "formal": 3,
+    "german": 10
+   },
+   "note": "`in` linkified 5 (2 inDe / 3 outside) but shared with legitimate German `in` — not attributed",
+   "linkifiedAttributed": 0
+  },
+  {
+   "slug": "b2-46-unpersoenliches-passiv",
+   "line": 171,
+   "field": "de",
+   "value": "Talking about WHO? vs THE ACTION?",
+   "totalNodes": 799,
+   "totalQaFindings": 6,
+   "injected": [
+    "talking",
+    "about",
+    "who",
+    "vs",
+    "the",
+    "action"
+   ],
+   "soleSource": [
+    "talking",
+    "about",
+    "who",
+    "vs",
+    "the",
+    "action"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 0,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "talking": 3,
+    "about": 6,
+    "who": 8,
+    "vs": 2,
+    "the": 55,
+    "action": 15
+   },
+   "note": null,
+   "linkifiedAttributed": 0
+  },
+  {
+   "slug": "b2-46-unpersoenliches-passiv",
+   "line": 172,
+   "field": "de",
+   "value": "Common in signs, notices, and announcements",
+   "totalNodes": 799,
+   "totalQaFindings": 6,
+   "injected": [
+    "common",
+    "in",
+    "signs",
+    "notices",
+    "and",
+    "announcements"
+   ],
+   "soleSource": [
+    "common",
+    "signs",
+    "notices",
+    "and",
+    "announcements"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 13,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "common": 3,
+    "in": 35,
+    "signs": 3,
+    "notices": 3,
+    "and": 29,
+    "announcements": 6
+   },
+   "note": "`in` linkified 15 (2 inDe / 13 outside), shared — not attributed",
+   "linkifiedAttributed": 0
+  },
+  {
+   "slug": "b2-47-bekommen-kriegen-passiv",
+   "line": 178,
+   "field": "de",
+   "value": "Common in service, healthcare, and administrative German",
+   "totalNodes": 786,
+   "totalQaFindings": 0,
+   "injected": [
+    "common",
+    "in",
+    "service",
+    "healthcare",
+    "and",
+    "administrative",
+    "german"
+   ],
+   "soleSource": [
+    "common",
+    "service",
+    "healthcare",
+    "and",
+    "administrative",
+    "german"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 6,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "common": 10,
+    "in": 18,
+    "service": 3,
+    "healthcare": 2,
+    "and": 27,
+    "administrative": 2,
+    "german": 5
+   },
+   "note": "`in` linkified 7 (1 inDe / 6 outside), shared — not attributed",
+   "linkifiedAttributed": 0
+  },
+  {
+   "slug": "b2-48-modalitaetsersatz-haben-sein-zu",
+   "line": 178,
+   "field": "de",
+   "value": "Common in contracts, regulations, and official notices",
+   "totalNodes": 849,
+   "totalQaFindings": 0,
+   "injected": [
+    "common",
+    "in",
+    "contracts",
+    "regulations",
+    "and",
+    "official",
+    "notices"
+   ],
+   "soleSource": [
+    "common",
+    "contracts",
+    "regulations",
+    "and",
+    "official",
+    "notices"
+   ],
+   "attributed": 0,
+   "silent": 0,
+   "qaFindings": 0,
+   "sharedLinkifiedOutsideDe": 8,
+   "classification": "LATENT",
+   "textOccurrencesBySurface": {
+    "common": 5,
+    "in": 24,
+    "contracts": 4,
+    "regulations": 4,
+    "and": 32,
+    "official": 6,
+    "notices": 4
+   },
+   "note": "`in` linkified 11 (3 inDe / 8 outside), shared — not attributed",
+   "linkifiedAttributed": 0
+  }
+ ]
+}

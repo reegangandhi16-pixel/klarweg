@@ -1,0 +1,204 @@
+{
+ "phase": "38 — reconcile P37 and finalise the remaining-HCM plan (REVIEW ONLY, nothing modified)",
+ "generatedAt": "2026-08-15T07:59:40.278Z",
+ "partA_occurrenceReconciliation": {
+  "question": "P37 measured 156,297 occurrences vs the authoritative 156,299",
+  "method": "per-chapter comparison of the P37 store (kw_sweep_p37_diag) against the two retained P23 full-sweep stores (kw_p23_run1, kw_p23_run2), 259 chapters each; then an isolated re-render of the only divergent chapter",
+  "result": {
+   "divergentChapters": 1,
+   "chapter": "chapter-a1-12-akkusativ.html",
+   "p23run1": 401,
+   "p23run2": 401,
+   "p37": 399,
+   "delta": -2,
+   "allOtherChapters": "258 of 259 identical to BOTH P23 runs"
+  },
+  "isolatedRemeasure": {
+   "chapter": "a1-12-akkusativ",
+   "measured": 401,
+   "decorativeNodes": 20,
+   "note": "the isolated render reproduces the P23 value (401), NOT the P37 value (399)"
+  },
+  "verdict": "NOT ATTRIBUTABLE TO THE SCOPE FIX, and not reproducible.",
+  "reasoning": [
+   "the filter is post-finding: node selection is untouched, so it cannot change an occurrence count by construction",
+   "a1-12 does contain 20 decorative MCQ nodes, but they are still SELECTED and still counted — confirmed by the isolated render returning 401 with 20 decorative nodes present",
+   "the isolated value matches P23 exactly, so the P37 reading is the anomalous one",
+   "this is the same signature already characterised in P22/P23/P24: a chapter that is deterministic in isolation reporting a slightly different occurrence count inside one full-sweep run. Phase 24 tested overlap, lifecycle and persist variants and could not reproduce that class of anomaly either."
+  ],
+  "classification": "MEASUREMENT VARIANCE — consistent with the documented, still-unexplained full-sweep drift. The mechanism remains UNRESOLVED (as it has been since P23); only the attribution is settled: it is not the P37 fix.",
+  "confidence": "PROVEN that the fix did not cause it (per-chapter isolation + construction argument). UNRESOLVED as to why the sweep read 399."
+ },
+ "partB_remainingHcm": {
+  "total": 22,
+  "group1_byDesign": {
+   "count": 15,
+   "surfaces": {
+    "Nein": 11,
+    "Nicht": 1,
+    "möchte": 1,
+    "Wann": 1,
+    "muss": 1
+   },
+   "chapters": [
+    "a1-4",
+    "a1-7 ×3",
+    "a1-11",
+    "a1-14",
+    "a1-19 ×4",
+    "a1-21",
+    "a1-25",
+    "a2-2 ×2",
+    "c2-08"
+   ],
+   "colourPairs": [
+    {
+     "span": "rgb(6, 182, 212) adverb",
+     "head": "rgb(192, 38, 211) negation",
+     "cases": "Nein ×11, Nicht ×1"
+    },
+    {
+     "span": "rgb(6, 182, 212) adverb",
+     "head": "rgb(236, 72, 153) question",
+     "cases": "Wann ×1"
+    },
+    {
+     "span": "rgb(220, 38, 38) verb",
+     "head": "rgb(159, 18, 57) modalverb",
+     "cases": "möchte ×1, muss ×1"
+    }
+   ],
+   "verification": "in every one of the 15, the popup headword names a MORE SPECIFIC member of the span colour’s own family: adverb ⊃ negation, adverb ⊃ question, verb ⊃ modalverb. No pair crosses families (no noun↔verb, no subject↔object).",
+   "contradictionFound": false,
+   "classification": "BY-DESIGN — unchanged",
+   "action": "NONE. Per instruction these are not touched, and the evidence does not disprove the classification.",
+   "optionalNote": "authoring Nein/Nicht as r-negation and Wann as r-question at their occurrences would make prose and popup agree and would close 13 of the 15 in one decision. Recorded as OPTIONAL only — it changes no grammatical claim."
+  },
+  "group2_deutsch": {
+   "count": 4,
+   "chapter": "a1-8-goethemini1",
+   "indices": [
+    133,
+    542,
+    581,
+    585
+   ],
+   "authoredEntries": [
+    "{ de: 'Deutsch', pos: 'language', en: 'German (language)' } — data line 231",
+    "{ de: 'deutsch', pos: 'adjective', en: 'German (adj.)' } — data line 233"
+   ],
+   "renderedSurface": "deutsch (lower-case) in all four occurrences",
+   "spanRoleColour": "r-adjective / rgb(245, 158, 11) — CORRECT for the lower-case adjective (guessRole rule 3, -isch ending)",
+   "popupResolution": "resolves the CAPITALISED language noun; headword colour rgb(46, 125, 50) object green",
+   "rootCause": "THE WORD INDEX IS CASE-BLIND. lookupWord (chapter-app.js:2717) keys everything through normWord(surface), and normWord (:2430) lowercases. So WORDIDX[normWord('Deutsch')] and WORDIDX[normWord('deutsch')] are THE SAME SLOT — the two deliberately distinct authored entries collide in one bucket and whichever is indexed last wins for both surfaces.",
+   "existingMachineryThatShouldHavePrevented": "lookupWord already has a homograph guard: `if (expectedClass) { if (local && !classesCompatible(wordClassOf(local.type), expectedClass)) local = null; ... }` (:2735-2738). It is exactly the right mechanism — an adjective occurrence would reject a language/noun entry. The popup path evidently does not supply expectedClass for these occurrences.",
+   "correctFixBoundary": "LEXICON RESOLUTION — either key the index case-sensitively for entries whose authored headwords differ only by case, or pass the occurrence class as expectedClass so the existing guard fires.",
+   "whySaferThanGlobalChanges": "both options work INSIDE lookupWord’s existing homograph machinery rather than changing guessRole (which is already correct here) or the renderer (which is already correct here). Changing chapter data cannot fix it — the data is right; two correct entries are being collapsed by the index.",
+   "confidence": "PROVEN for the collision mechanism (normWord lowercases; both entries read from source). STRONGLY SUPPORTED for the expectedClass gap (the guard exists and does not fire; the exact popup call was not stepped through).",
+   "priority": "HIGHEST of the 7 — the chapter itself teaches this distinction and lists it as a top A1 mistake (data line 439). The popup currently contradicts the chapter’s own headline teaching point.",
+   "action": "NONE in this phase"
+  },
+  "group3_zahlen": {
+   "count": 2,
+   "chapter": "a1-15-cafe",
+   "indices": [
+    168,
+    581
+   ],
+   "authoredEntry": "{ de: 'zahlen', pos: 'verb', ex: 'Zahlen, bitte!' } — data line 259",
+   "renderedSurface": "Zahlen (capitalised, utterance-initial in \"Zahlen, bitte.\")",
+   "spanRoleColour": "r-verb / rgb(220, 38, 38) — CORRECT; guessRole rule 5 (-en) gives verb",
+   "popupResolution": "resolves die Zahlen (plural noun); headword colour rgb(46, 125, 50) object green",
+   "rootCause": "SAME case-blind index as group 2, plus the absence of a sentence-position signal in resolution. The renderer already computes isSentenceInitial and passes it to roleFor (:2862) — the same signal is available but is not used by lookupWord.",
+   "shouldItResolveToTheVerb": "YES for these two occurrences. \"Zahlen, bitte!\" is the authored example of the verb entry itself.",
+   "safetyForLegitimateNounUses": "a case-sensitive index alone would NOT break noun uses: mid-sentence \"die Zahlen\" stays capitalised and still matches the noun entry. The risk is only for utterance-initial capitalised verbs, which is precisely the case needing the sentence-position signal. Any change must be measured against chapters that use die Zahlen as a noun — NOT surveyed in this phase.",
+   "correctFixBoundary": "LEXICON RESOLUTION (same site as group 2)",
+   "confidence": "PROVEN for the mechanism; the corpus-wide safety of a case-sensitive index is UNMEASURED",
+   "action": "NONE in this phase"
+  },
+  "group4_letterA": {
+   "count": 1,
+   "chapter": "a1-39-ortsangaben",
+   "index": 570,
+   "surface": "a",
+   "spanRoleColour": "r-adverb / rgb(6, 182, 212) — from guessRole rule 6, the catch-all that labels anything it cannot classify r-adverb (chapter-app.js:735-754)",
+   "popupColour": "rgb(90, 90, 96) --ink-secondary, assigned deliberately by ROLE_COLOR_VAR for entry classes letter|name|conjunction (chapter-app.js:2022), mirroring chapter.css:231",
+   "popupIsIntentional": "PROVEN — the mapping is explicit in source and mirrors the stylesheet",
+   "defectSide": "the PROSE SPAN. A bare letter is not a part of speech and should not carry a grammar colour.",
+   "classification": "RENDERER (role inference) — guessRole’s catch-all is assigning a grammatical role to a non-grammatical token",
+   "correctFixBoundary": "tokenisation/inference: exclude single-character surfaces from role colouring, OR author the letter as a letter token in a1-39 (no such token exists today)",
+   "whyNotQaOnly": "the span is a genuine wrapWordsIn link with a real click handler, so a learner can click it and see a grammar-coloured letter. Unlike the decorative MCQ case, this IS learner-visible.",
+   "whyNotJustMatchColours": "explicitly not proposed — the popup is correct and must not change",
+   "confidence": "PROVEN for the popup side; STRONGLY SUPPORTED that the span is a mis-guess",
+   "action": "NONE in this phase"
+  }
+ },
+ "partD_finalDisposition": [
+  {
+   "case": "Nein / Nicht / möchte / Wann / muss",
+   "count": 15,
+   "classification": "BY-DESIGN",
+   "rootCause": "popup names a more specific member of the span colour’s family; no contradiction",
+   "fixBoundary": "none required",
+   "confidence": "PROVEN",
+   "action": "leave unchanged (optional role-alignment noted)"
+  },
+  {
+   "case": "deutsch",
+   "count": 4,
+   "classification": "LEXICON RESOLUTION",
+   "rootCause": "case-blind WORDIDX key (normWord lowercases) collapses two deliberately distinct authored entries; existing expectedClass homograph guard does not fire",
+   "fixBoundary": "lookupWord — case-aware key or supply expectedClass",
+   "confidence": "PROVEN (mechanism) / STRONGLY SUPPORTED (guard gap)",
+   "action": "awaiting approval"
+  },
+  {
+   "case": "Zahlen",
+   "count": 2,
+   "classification": "LEXICON RESOLUTION",
+   "rootCause": "same case-blind key; utterance-initial capitalised verb resolves to the plural noun",
+   "fixBoundary": "lookupWord — case-aware key plus the already-computed sentence-position signal",
+   "confidence": "PROVEN (mechanism) / UNMEASURED (corpus safety)",
+   "action": "awaiting approval; requires a noun-use survey first"
+  },
+  {
+   "case": "letter a",
+   "count": 1,
+   "classification": "RENDERER",
+   "rootCause": "guessRole rule 6 catch-all assigns r-adverb to an unclassifiable single character",
+   "fixBoundary": "inference/tokenisation — skip 1-char surfaces, or author a letter token",
+   "confidence": "PROVEN (popup) / STRONGLY SUPPORTED (span)",
+   "action": "awaiting approval"
+  }
+ ],
+ "whyTheseAreSaferThanGlobalChanges": [
+  "all three actionable fixes are LOCAL to a decision point that already exists: lookupWord already has a homograph guard, and guessRole already has an ordered rule chain with a catch-all",
+  "none requires changing guessRole’s existing rules (which produce the CORRECT span role in 6 of the 7 actionable cases)",
+  "none requires changing the renderer’s colour assignment or the popup’s ROLE_COLOR_VAR mapping",
+  "none touches chapter data: in every actionable case the authored data is already correct and is being mis-resolved or over-inferred",
+  "by contrast, a global resolver change would touch all 259 chapters and 1,009 RCB findings, which this phase is explicitly scoped out of"
+ ],
+ "scopeRespected": {
+  "rcbNotInvestigated": true,
+  "byDesignNotChanged": true,
+  "decorativeFixNotRevisited": true,
+  "guessRoleNotModified": true,
+  "globalResolverNotModified": true
+ },
+ "productionSafety": {
+  "productionModified": false,
+  "chapterDataModified": false,
+  "cssModified": false,
+  "chapterAppModified": false,
+  "qaEngineModified": false,
+  "qaAssertModified": false,
+  "lintModified": false,
+  "baselinesModified": false,
+  "fullSweepRun": false,
+  "fixApplied": false
+ },
+ "filesCreated": [
+  "audit/hcm-final-correction-plan-p38.json"
+ ],
+ "filesModified": "none"
+}

@@ -197,7 +197,7 @@
         fetch(candidates[i], { cache: 'no-cache' })
           .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
           .then(function (json) {
-            MAP = json || {};
+            MAP = (json && json.entries) ? json.entries : (json || {});
             MAP_LC = {}; MAP_CANON = {}; MAP_SENT = {};
             for (var k in MAP) if (Object.prototype.hasOwnProperty.call(MAP, k)) {
               MAP_LC[normalize(k).toLowerCase()] = MAP[k];

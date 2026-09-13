@@ -203,8 +203,9 @@
     function speakSequence(text, rate, onProgress, onDone) {
       endSequence(false);
       stopped = false;
-      const parts = String(text).match(/[^.!?]+[.!?]*/g) || [text];
-      const clean = parts.map(s => s.trim()).filter(Boolean);
+      const clean = Array.isArray(text)
+        ? text.map(s => String(s || '').trim()).filter(Boolean)
+        : (String(text).match(/[^.!?]+[.!?]*/g) || [text]).map(s => s.trim()).filter(Boolean);
       let i = 0, finished = false;
       const mine = { done: function (completed) { if (finished) return; finished = true; onDone && onDone(completed !== false); } };
       seq = mine;
@@ -3181,14 +3182,15 @@
     playBtn.addEventListener('click', () => {
       if (playing) { Audio.stop(); return; }
       playing = true; playBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>'; playBtn.setAttribute('aria-label', 'Pause');
-      const est = (L.transcript.split(' ').length / 2) / rate;
+      const lines = Array.isArray(L.dialogue) && L.dialogue.length
+        ? L.dialogue.map(x => x && x.de).filter(Boolean)
+        : [L.transcript];
+      const est = (lines.join(' ').split(' ').length / 2) / rate;
       startFill(est);
-      // Sentence-by-sentence playback: reliable on long passages (avoids the
-      // Chrome long-utterance silent-stop bug) and uses static MP3s per line.
-      // onDone(completed) also fires when the sequence is cut short (stop, or a
-      // word popup taking the audio channel), so the button can never stay
-      // stuck showing "playing".
-      Audio.speakSequence(L.transcript, rate,
+      // Play the authored Listening dialogue lines in their stored order.
+      // This maps directly to the existing L001/L002/... MP3 units instead of
+      // re-splitting the transcript by punctuation.
+      Audio.speakSequence(lines, rate,
         (p) => { fill.style.width = Math.round(p * 100) + '%'; },
         (completed) => { playing = false; playBtn.innerHTML = ICON.play; playBtn.setAttribute('aria-label', 'Play'); if (completed) fill.style.width = '100%'; clearInterval(fillTimer); });
     });

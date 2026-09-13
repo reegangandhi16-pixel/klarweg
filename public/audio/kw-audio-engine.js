@@ -190,7 +190,7 @@
     function startLoading() {
       var ab = audioBase();
       // Prefer the CDN copy of each manifest first, then local fallbacks.
-      var candidates = [ab + 'manifest.json', base + 'manifest.json', '/audio/manifest.json', 'public/audio/manifest.json'];
+      var candidates = [base + 'manifest.json', '/audio/manifest.json', ab + 'manifest.json', 'public/audio/manifest.json'];
       var i = 0;
       (function next() {
         if (i >= candidates.length) { manifestReady = true; emit('manifest-loaded', { entries: 0, source: 'none' }); return; }
@@ -252,13 +252,15 @@
     if (sn) return { text: n, source: 'manifest', match: 'sentence-of-line', url: resolveUrl(relOf(sn)) };
     return { text: n, source: 'none', match: null, url: undefined };
   }
-  function relOf(entry) { return !entry ? undefined : (typeof entry === 'string' ? entry : entry.audio); }
+  function relOf(entry) { return !entry ? undefined : (typeof entry === 'string' ? entry : (entry.audio || entry.file)); }
   function resolveUrl(rel) {
     if (!rel) return undefined;
     if (rel.indexOf('http') === 0) return rel;            // already absolute
     // Root-relative manifest paths ("/audio/words/x.mp3") resolve against the
     // CDN base when KW_AUDIO_BASE is set, else the script-relative folder.
-    return rel.replace(/^\/audio\//, audioBase());
+    if (rel.indexOf('/audio/') === 0) return rel.replace(/^\/audio\//, audioBase());
+    if (rel.indexOf('audio/') === 0) return audioBase() + rel.slice('audio/'.length);
+    return rel;
   }
   function audioUrl(text) {
     var rel = relOf(manifestEntry(text));

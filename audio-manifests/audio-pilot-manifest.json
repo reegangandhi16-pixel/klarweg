@@ -6,7 +6,7 @@
   "scope": "2 complete units per level per type, A1–C2",
   "totals": {
     "units": 48,
-    "files": 174
+    "files": 162
   },
   "byType": {
     "story": {
@@ -23,10 +23,10 @@
     },
     "speaking": {
       "units": 12,
-      "files": 24
+      "files": 12
     }
   },
-  "uniqueIds": 174,
+  "uniqueIds": 162,
   "featureCoverage": {
     "question": 56,
     "quoted": 4,
@@ -2566,17 +2566,6 @@
       ],
       "lines": [
         {
-          "id": "A1_018_Q001",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 0.85,
-          "chars": 41,
-          "de": "Dein Freund fragt: Wie fährst du zur Uni?",
-          "audioFilename": "audio/speaking/A1_018_Q001.mp3",
-          "contentHash": "e13bfdacd6671a05"
-        },
-        {
           "id": "A1_018_P001",
           "speaker": "model-answer",
           "gender": "female",
@@ -2608,17 +2597,6 @@
         "question"
       ],
       "lines": [
-        {
-          "id": "A1_039_Q002",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 0.85,
-          "chars": 42,
-          "de": "Ein Tourist fragt: Wie komme ich zur Post?",
-          "audioFilename": "audio/speaking/A1_039_Q002.mp3",
-          "contentHash": "9caf26263de8a6bf"
-        },
         {
           "id": "A1_039_P002",
           "speaker": "model-answer",
@@ -2654,17 +2632,6 @@
       ],
       "lines": [
         {
-          "id": "A2_016_Q003",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 0.85,
-          "chars": 69,
-          "de": "Prüfung, Teil 3: Deine Partnerin fragt nach dem Vorstellungsgespräch.",
-          "audioFilename": "audio/speaking/A2_016_Q003.mp3",
-          "contentHash": "3f299d4a245230f7"
-        },
-        {
           "id": "A2_016_P003",
           "speaker": "model-answer",
           "gender": "female",
@@ -2699,17 +2666,6 @@
       ],
       "lines": [
         {
-          "id": "A2_031_Q005",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 0.85,
-          "chars": 65,
-          "de": "Ein Kollege spricht von einer Geschäftsreise. Frag nach dem Ziel.",
-          "audioFilename": "audio/speaking/A2_031_Q005.mp3",
-          "contentHash": "c5d79c021434d13d"
-        },
-        {
           "id": "A2_031_P005",
           "speaker": "model-answer",
           "gender": "female",
@@ -2742,17 +2698,6 @@
         "compound"
       ],
       "lines": [
-        {
-          "id": "B1_016_Q002",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 0.95,
-          "chars": 55,
-          "de": "Eine Kollegin fragt, was du nächstes Jahr machen wirst.",
-          "audioFilename": "audio/speaking/B1_016_Q002.mp3",
-          "contentHash": "5535fd41de45375b"
-        },
         {
           "id": "B1_016_P002",
           "speaker": "model-answer",
@@ -2787,17 +2732,6 @@
         "subordinate"
       ],
       "lines": [
-        {
-          "id": "B1_031_Q005",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 0.95,
-          "chars": 55,
-          "de": "Ein Kollege fragt, was für die Integration wichtig ist.",
-          "audioFilename": "audio/speaking/B1_031_Q005.mp3",
-          "contentHash": "03de3f6644aa011f"
-        },
         {
           "id": "B1_031_P005",
           "speaker": "model-answer",
@@ -2834,17 +2768,6 @@
       ],
       "lines": [
         {
-          "id": "B2_014_Q001",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 0.95,
-          "chars": 79,
-          "de": "Prüfung, Teil 1: Berichte, was der Abteilungsleiter in der Sitzung erklärt hat.",
-          "audioFilename": "audio/speaking/B2_014_Q001.mp3",
-          "contentHash": "1c821872d4a8686d"
-        },
-        {
           "id": "B2_014_P001",
           "speaker": "model-answer",
           "gender": "female",
@@ -2878,17 +2801,6 @@
         "subordinate"
       ],
       "lines": [
-        {
-          "id": "B2_049_Q001",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 0.95,
-          "chars": 55,
-          "de": "Ein Kollege fragt, wie weit dein Praktikumsbericht ist.",
-          "audioFilename": "audio/speaking/B2_049_Q001.mp3",
-          "contentHash": "249221cac5d73c42"
-        },
         {
           "id": "B2_049_P001",
           "speaker": "model-answer",
@@ -2924,17 +2836,6 @@
       ],
       "lines": [
         {
-          "id": "C1_009_Q002",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 1,
-          "chars": 51,
-          "de": "Deine Betreuerin fragt, ob du die Aufgabe schaffst.",
-          "audioFilename": "audio/speaking/C1_009_Q002.mp3",
-          "contentHash": "fca7d236a8381eb3"
-        },
-        {
           "id": "C1_009_P002",
           "speaker": "model-answer",
           "gender": "female",
@@ -2968,17 +2869,6 @@
         "compound"
       ],
       "lines": [
-        {
-          "id": "C1_031_Q004",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 1,
-          "chars": 64,
-          "de": "Halte an deiner Position fest, obwohl die Kritik berechtigt ist.",
-          "audioFilename": "audio/speaking/C1_031_Q004.mp3",
-          "contentHash": "60f261f0aefd280a"
-        },
         {
           "id": "C1_031_P004",
           "speaker": "model-answer",
@@ -3014,17 +2904,6 @@
       ],
       "lines": [
         {
-          "id": "C2_006_Q004",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 1,
-          "chars": 65,
-          "de": "Ein Gutachter fragt, wie du deine Annahme im Aufsatz formulierst.",
-          "audioFilename": "audio/speaking/C2_006_Q004.mp3",
-          "contentHash": "e693709b2b8c8ef8"
-        },
-        {
           "id": "C2_006_P004",
           "speaker": "model-answer",
           "gender": "female",
@@ -3058,17 +2937,6 @@
         "compound"
       ],
       "lines": [
-        {
-          "id": "C2_021_Q003",
-          "speaker": "task-prompt",
-          "gender": "female",
-          "voice": "de-DE-Neural2-F",
-          "rate": 1,
-          "chars": 56,
-          "de": "Ein Investor fragt, ob die Firma am Markt bestehen kann.",
-          "audioFilename": "audio/speaking/C2_021_Q003.mp3",
-          "contentHash": "7f1e9abcbfc34492"
-        },
         {
           "id": "C2_021_P003",
           "speaker": "model-answer",

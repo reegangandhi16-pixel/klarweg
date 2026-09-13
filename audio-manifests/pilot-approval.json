@@ -1,0 +1,17 @@
+{
+  "verdict": "approved",
+  "approvedBy": "Reegan Gandhi",
+  "approvedAt": "2026-09-13",
+  "manifest": "audio-manifests/audio-pilot-manifest.json",
+  "scope": {
+    "units": 48,
+    "files": 162,
+    "speakingQ": 0,
+    "speakingP": 12
+  },
+  "automatedChecks": {
+    "verifyPilot": "PASS",
+    "previewIntegrity": "PASS"
+  },
+  "manualQA": "PASS"
+}

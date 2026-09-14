@@ -267,6 +267,70 @@
     return rel ? resolveUrl(rel) : undefined;
   }
 
+  /* ── Exact conjugation-form audio ─────────────────────────────────────── */
+  var conjugationManifestPromise = null;
+  var CONJUGATION_CDN_BASE =
+    'https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/';
+  var CONJUGATION_MANIFEST_URL =
+    CONJUGATION_CDN_BASE + 'manifest-conjugation.json';
+  var CONJUGATION_MAP = Object.create(null);
+
+  function ensureConjugationManifest() {
+    if (conjugationManifestPromise) return conjugationManifestPromise;
+
+    conjugationManifestPromise = fetchWithTimeout(
+      CONJUGATION_MANIFEST_URL,
+      MANIFEST_FETCH_TIMEOUT_MS
+    ).then(function (r) {
+      if (!r.ok) throw new Error('http-' + r.status);
+      return r.json();
+    }).then(function (json) {
+      CONJUGATION_MAP = (json && typeof json === 'object')
+        ? json
+        : Object.create(null);
+
+      emit('conjugation-manifest-ready', {
+        entries: Object.keys(CONJUGATION_MAP).length
+      });
+
+      return CONJUGATION_MAP;
+    }).catch(function (err) {
+      emit('conjugation-manifest-missing', {
+        manifest: CONJUGATION_MANIFEST_URL,
+        error: err && err.message
+      });
+
+      CONJUGATION_MAP = Object.create(null);
+      return CONJUGATION_MAP;
+    });
+
+    return conjugationManifestPromise;
+  }
+
+  function conjugationUrl(text) {
+    var key = normalize(text);
+    var rel = CONJUGATION_MAP[key];
+
+    if (!rel && Object.prototype.hasOwnProperty.call(CONJUGATION_MAP, text)) {
+      rel = CONJUGATION_MAP[text];
+    }
+
+    return rel
+      ? (rel.indexOf('http') === 0
+        ? rel
+        : CONJUGATION_CDN_BASE + rel.replace(/^\/+/, ''))
+      : undefined;
+  }
+
+  function conjugationUrlAsync(text) {
+    var sync = conjugationUrl(text);
+    if (sync) return Promise.resolve(sync);
+
+    return ensureConjugationManifest().then(function () {
+      return conjugationUrl(text);
+    });
+  }
+
   /* ── A1 dual-voice vocab lookup (female / male) ───────────────────────── */
   // Lazy/robust loader: guarantees A1MAP is populated on demand, regardless of
   // script load order or a cached engine — fixes "F/M buttons silent" when the
@@ -666,7 +730,41 @@
     emit('request', { text: key });
     var notify = function (s) { if (typeof opts.onState === 'function') opts.onState(s); };
 
-    // 0. Dual-voice vocab fast path — if a gender is requested, ensure the A1
+    // 0. Exact authored conjugation-form audio.
+    //    This must win over vocabulary lemma audio and generic TTS.
+    var conjSync = conjugationUrl(text);
+    if (conjSync) {
+      notify('playing');
+      return playUrl(
+        conjSync,
+        Object.assign({ _src: 'conjugation' }, opts)
+      ).then(function (ok) {
+        return ok
+          ? 'conjugation'
+          : fallbackChain(text, key, opts, notify);
+      });
+    }
+
+    // Lazy-load conjugation manifest before falling through to vocabulary.
+    return conjugationUrlAsync(text).then(function (conjUrl) {
+      if (conjUrl) {
+        notify('playing');
+        return playUrl(
+          conjUrl,
+          Object.assign({ _src: 'conjugation' }, opts)
+        ).then(function (ok) {
+          return ok
+            ? 'conjugation'
+            : speakAfterConjugation(text, key, opts, notify);
+        });
+      }
+
+      return speakAfterConjugation(text, key, opts, notify);
+    });
+  }
+
+  function speakAfterConjugation(text, key, opts, notify) {
+    // 1. Dual-voice vocab fast path — if a gender is requested, ensure the A1
     //    manifest is loaded (lazy/robust), then play that voice from the CDN.
     if (opts.gender) {
       var vSync = vocabUrl(text, opts.gender);

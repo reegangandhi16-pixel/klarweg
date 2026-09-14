@@ -2341,7 +2341,7 @@
           formEl.appendChild(germanWordSpans(form));
         }
         const mini = el('button', { class: 'wp-mini-audio', type: 'button', 'aria-label': 'Hear ' + form, html: ICON.speaker });
-        mini.addEventListener('click', (ev) => { ev.stopPropagation(); Audio.speak(cleanForm); });
+        mini.addEventListener('click', (ev) => { ev.stopPropagation(); if (window.KW_speak) window.KW_speak(cleanForm, { gender: 'female', rate: 1 }); else Audio.speak(cleanForm); });
         const cell = el('div', { class: 'wp-compare-cell' + (isCurrent ? ' is-current' : ''), role: 'listitem', 'aria-current': isCurrent ? 'true' : null },
           el('div', { class: 'wp-compare-label' }, label, hint ? ' ' : '', hint ? el('span', { class: 'wp-conj-hint' }, hint) : ''),
           el('div', { class: 'wp-compare-word-row' }, formEl, mini));

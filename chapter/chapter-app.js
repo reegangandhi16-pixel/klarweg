@@ -4423,26 +4423,31 @@
      spokenAs only reaches the TTS layer. `pron` is never used as TTS input. */
   function speakWordFemale(text, rate, popupOpts) {
     try { Audio.stop(); } catch (_) {}
-    const headword = resolveHeadword(text);
+    const surface = String(text || '').trim();
+    const headword = resolveHeadword(surface);
     const spokenAs = (popupOpts && typeof popupOpts.spokenAs === 'string' && popupOpts.spokenAs.trim())
       ? popupOpts.spokenAs.trim() : null;
-    // Debug log: surface word → resolved headword → final MP3 URL (async-accurate).
-    if (window.KW_vocabUrlAsync) {
-      window.KW_vocabUrlAsync(headword, 'female').then(function (u) {
-        try { console.log('[KW popup audio]', { surface: text, headword: headword, mp3: u || '(none → TTS fallback)' }); } catch (_) {}
-      });
-    } else {
-      try { console.log('[KW popup audio]', { surface: text, headword: headword, mp3: (window.KW_vocabUrl && window.KW_vocabUrl(headword, 'female')) || '(none → TTS fallback)' }); } catch (_) {}
-    }
+
+    // Popup audio must try the exact displayed surface first.
+    // This is important for inflected forms such as "schwerfällt":
+    // the learner clicked "schwerfällt", so the audio request must first
+    // use "schwerfällt", not silently replace it with "schwerfallen".
     var fn = window.KW_speak || window.KW_playAudio;
     if (fn) {
       var o = { gender: 'female', rate: rate };
       if (spokenAs) o.spokenAs = spokenAs;
-      return fn(headword, o).then(function (s) {
-        if (s === 'error') Audio.speak(spokenAs || text, rate);
+      return fn(surface, o).then(function (s) {
+        if (s === 'error' && headword !== surface) {
+          return fn(headword, o).then(function (s2) {
+            if (s2 === 'error') Audio.speak(spokenAs || surface, rate);
+            return s2;
+          });
+        }
+        if (s === 'error') Audio.speak(spokenAs || surface, rate);
+        return s;
       });
     }
-    return Audio.speak(spokenAs || text, rate);
+    return Audio.speak(spokenAs || surface, rate);
   }
   function attachAudioSpeed(btn, text, popupOpts) {
     let timer = null, longFired = false;

@@ -4402,7 +4402,8 @@
   }
   function resolveHeadword(surface) {
     if (!HEADIDX) buildHeadwordIndex();
-    return HEADIDX[normWord(surface)] || surface;
+    const key = normWord(surface);
+    return HEADIDX[key] || (window.KW_INFLECTIONS || {})[key] || surface;
   }
   // Play a single word through the SAME path the vocab F/M buttons use — the
   // female dual-voice MP3 (keyed by article + noun), then the fallback chain,

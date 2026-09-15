@@ -233,6 +233,12 @@
    *  the repair report. Never plays anything. */
   function resolveInfo(text, gender) {
     var n = normalize(text);
+
+    // Match speak() priority: exact authored conjugation audio first.
+    var conj = conjugationUrl(text);
+    if (conj) return {
+      text: n, source: 'conjugation', match: 'exact', url: conj
+    };
     if (gender) {
       var ve = a1Entry(text);
       if (ve) {
@@ -836,6 +842,7 @@
   global.KW_ensureVocab = ensureA1Loaded;
   global.KW_hasVocabVoices = function (text) { return !!a1Entry(text); };
   global.KW_resolveInfo = resolveInfo;           // (text, gender?) → which layer answers, no playback
+  global.KW_ensureConjugation = ensureConjugationManifest;
   global.KW_canonKey = canonKey;
   global.KW_splitSentences = splitSentences;
   global.KW_dialogueInfo = dialogueInfo;

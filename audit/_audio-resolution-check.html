@@ -41,6 +41,11 @@ function waitForManifests() {
       setTimeout(poll, 300);
     };
     poll();
+  }).then(async s => {
+    if (window.KW_ensureConjugation) {
+      await window.KW_ensureConjugation();
+    }
+    return s;
   });
 }
 

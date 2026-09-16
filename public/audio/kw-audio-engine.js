@@ -957,6 +957,7 @@ function wordFormUrl(text) {
   global.KW_hasVocabVoices = function (text) { return !!a1Entry(text); };
   global.KW_resolveInfo = resolveInfo;           // (text, gender?) → which layer answers, no playback
   global.KW_ensureConjugation = ensureConjugationManifest;
+  global.KW_ensureWordFormManifest = ensureWordFormManifest;
   global.KW_canonKey = canonKey;
   global.KW_splitSentences = splitSentences;
   global.KW_dialogueInfo = dialogueInfo;

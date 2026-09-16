@@ -2343,7 +2343,7 @@
         const mini = el('button', { class: 'wp-mini-audio', type: 'button', 'aria-label': 'Hear ' + form, html: ICON.speaker });
         mini.addEventListener('click', (ev) => {
           ev.stopPropagation();
-          const audioText = /\s/.test(form.trim()) ? form.trim() : resolveHeadword(cleanForm);
+          const audioText = form.trim();
           if (window.KW_speak) {
             window.KW_speak(audioText, { gender: 'female', rate: 1 });
           } else {

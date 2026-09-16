@@ -273,6 +273,81 @@
     return rel ? resolveUrl(rel) : undefined;
   }
 
+  /* ── Exact word-form audio (comparison / declension / number forms) ─────── */
+  var wordFormManifestPromise = null;
+  var WORD_FORM_CDN_BASE =
+    'https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/';
+  var WORD_FORM_MANIFEST_URL =
+    WORD_FORM_CDN_BASE + 'manifest-word-form.json';
+  var WORD_FORM_MAP = Object.create(null);
+
+  function ensureWordFormManifest() {
+    if (wordFormManifestPromise) return wordFormManifestPromise;
+
+    wordFormManifestPromise = fetchWithTimeout(
+      WORD_FORM_MANIFEST_URL,
+      MANIFEST_FETCH_TIMEOUT_MS
+    ).then(function (r) {
+      if (!r.ok) throw new Error('http-' + r.status);
+      return r.json();
+    }).then(function (json) {
+      WORD_FORM_MAP = (json && typeof json === 'object')
+        ? json
+        : Object.create(null);
+
+      emit('word-form-manifest-ready', {
+        entries: Object.keys(WORD_FORM_MAP).length
+      });
+
+      return WORD_FORM_MAP;
+    }).catch(function (err) {
+      emit('word-form-manifest-missing', {
+        manifest: WORD_FORM_MANIFEST_URL,
+        error: err && err.message
+      });
+
+      WORD_FORM_MAP = Object.create(null);
+      return WORD_FORM_MAP;
+    });
+
+    return wordFormManifestPromise;
+  }
+
+  function wordFormUrl(text) {
+    var key = normalize(text);
+    var rel = WORD_FORM_MAP[key];
+
+    if (!rel && Object.prototype.hasOwnProperty.call(WORD_FORM_MAP, text)) {
+      rel = WORD_FORM_MAP[text];
+    }
+
+    return rel
+      ? (rel.indexOf('http') === 0
+        ? rel
+        : WORD_FORM_CDN_BASE + String(rel).replace(/^\/+/, ''))
+      : undefined;
+  }
+
+  function wordFormUrlAsync(text) {
+    var sync = wordFormUrl(text);
+    if (sync) return Promise.resolve(sync);
+
+    return ensureWordFormManifest().then(function () {
+      return wordFormUrl(text);
+    });
+  }
+
+  // TEMP DEBUG: expose word-form resolver state for browser verification.
+  window.KW_wordFormDebug = function (text) {
+    return {
+      text: text,
+      normalized: normalize(text),
+      manifestUrl: WORD_FORM_MANIFEST_URL,
+      mapEntries: Object.keys(WORD_FORM_MAP).length,
+      mapped: wordFormUrl(text) || null
+    };
+  };
+
   /* ── Exact conjugation-form audio ─────────────────────────────────────── */
   var conjugationManifestPromise = null;
   var CONJUGATION_CDN_BASE =
@@ -770,7 +845,42 @@
   }
 
   function speakAfterConjugation(text, key, opts, notify) {
-    // 1. Dual-voice vocab fast path — if a gender is requested, ensure the A1
+    // 1. Exact word-form audio — comparison / declension / number forms.
+    //    This sits after authored conjugation audio and before vocabulary lemma
+    //    audio, so an exact form such as "größer" uses its authored form asset.
+    var wfSync = wordFormUrl(text);
+    if (wfSync) {
+      notify('playing');
+      return playUrl(
+        wfSync,
+        Object.assign({ _src: 'word-form' }, opts)
+      ).then(function (ok) {
+        return ok
+          ? 'word-form'
+          : speakAfterWordForm(text, key, opts, notify);
+      });
+    }
+
+    // Lazy-load the word-form manifest before falling through to vocabulary.
+    return wordFormUrlAsync(text).then(function (wfUrl) {
+      if (wfUrl) {
+        notify('playing');
+        return playUrl(
+          wfUrl,
+          Object.assign({ _src: 'word-form' }, opts)
+        ).then(function (ok) {
+          return ok
+            ? 'word-form'
+            : speakAfterWordForm(text, key, opts, notify);
+        });
+      }
+
+      return speakAfterWordForm(text, key, opts, notify);
+    });
+  }
+
+  function speakAfterWordForm(text, key, opts, notify) {
+    // 2. Dual-voice vocab fast path — if a gender is requested, ensure the A1
     //    manifest is loaded (lazy/robust), then play that voice from the CDN.
     if (opts.gender) {
       var vSync = vocabUrl(text, opts.gender);

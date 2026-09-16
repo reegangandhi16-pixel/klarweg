@@ -313,7 +313,11 @@
     return wordFormManifestPromise;
   }
 
-  function wordFormUrl(text) {
+  window.KW_testEnsureWordFormManifest = function () {
+  return ensureWordFormManifest();
+};
+
+function wordFormUrl(text) {
     var key = normalize(text);
     var rel = WORD_FORM_MAP[key];
 

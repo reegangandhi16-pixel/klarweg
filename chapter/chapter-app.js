@@ -2341,7 +2341,15 @@
           formEl.appendChild(germanWordSpans(form));
         }
         const mini = el('button', { class: 'wp-mini-audio', type: 'button', 'aria-label': 'Hear ' + form, html: ICON.speaker });
-        mini.addEventListener('click', (ev) => { ev.stopPropagation(); if (window.KW_speak) window.KW_speak(cleanForm, { gender: 'female', rate: 1 }); else Audio.speak(cleanForm); });
+        mini.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          const audioText = /\s/.test(form.trim()) ? form.trim() : resolveHeadword(cleanForm);
+          if (window.KW_speak) {
+            window.KW_speak(audioText, { gender: 'female', rate: 1 });
+          } else {
+            Audio.speak(audioText);
+          }
+        });
         const cell = el('div', { class: 'wp-compare-cell' + (isCurrent ? ' is-current' : ''), role: 'listitem', 'aria-current': isCurrent ? 'true' : null },
           el('div', { class: 'wp-compare-label' }, label, hint ? ' ' : '', hint ? el('span', { class: 'wp-conj-hint' }, hint) : ''),
           el('div', { class: 'wp-compare-word-row' }, formEl, mini));
@@ -4403,7 +4411,31 @@
   function resolveHeadword(surface) {
     if (!HEADIDX) buildHeadwordIndex();
     const key = normWord(surface);
-    return HEADIDX[key] || (window.KW_INFLECTIONS || {})[key] || surface;
+
+    // First prefer the chapter's authored headword index.
+    if (HEADIDX[key]) {
+      const indexed = String(HEADIDX[key]).trim();
+      if (/^(der|die|das)\\s/i.test(indexed)) return indexed;
+      const lex = (window.KW_GLOBAL_LEXICON || {})[normWord(indexed)];
+      const gender = lex && lex.gender;
+      const article = gender === 'm' ? 'der' : gender === 'f' ? 'die' : gender === 'n' ? 'das' : null;
+      return article ? article + ' ' + indexed : indexed;
+    }
+
+    // Inflected forms may resolve to a bare lemma (e.g. Arbeitsplätze → Arbeitsplatz).
+    // The vocab audio manifest is keyed by article + noun, so when the shared
+    // lexicon provides trusted gender metadata, construct the nominative
+    // definite article using the same closed-set grammar table used elsewhere.
+    const lemma = (window.KW_INFLECTIONS || {})[key];
+    if (lemma) {
+      const lex = (window.KW_GLOBAL_LEXICON || {})[normWord(lemma)];
+      const gender = lex && lex.gender;
+      const article = gender === 'm' ? 'der' : gender === 'f' ? 'die' : gender === 'n' ? 'das' : null;
+      if (article) return article + ' ' + lemma;
+      return lemma;
+    }
+
+    return surface;
   }
   // Play a single word through the SAME path the vocab F/M buttons use — the
   // female dual-voice MP3 (keyed by article + noun), then the fallback chain,
@@ -4437,9 +4469,9 @@
       var o = { gender: 'female', rate: rate };
       if (spokenAs) o.spokenAs = spokenAs;
       return fn(surface, o).then(function (s) {
-        if (s === 'error' && headword !== surface) {
+        if ((s === 'error' || s === 'browser-tts') && headword !== surface) {
           return fn(headword, o).then(function (s2) {
-            if (s2 === 'error') Audio.speak(spokenAs || surface, rate);
+            if (s2 === 'error' || s2 === 'browser-tts') Audio.speak(spokenAs || surface, rate);
             return s2;
           });
         }

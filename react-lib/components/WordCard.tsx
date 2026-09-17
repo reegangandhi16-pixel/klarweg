@@ -26,7 +26,7 @@ export function WordCard({ word, onClose }: WordCardProps) {
 
   if (!word) return null;
   const color = grammar[word.role];
-  const say = (t: string, s: Speed = 1) => speak(t, s);
+  const say = (t: string, s: Speed = 1) => speak(t.replace(/^(ist|hat|am)\s+/, ''), s);
 
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center p-5" role="dialog" aria-modal="true">

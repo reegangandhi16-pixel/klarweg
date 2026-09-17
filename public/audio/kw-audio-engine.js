@@ -325,6 +325,13 @@ function wordFormUrl(text) {
       rel = WORD_FORM_MAP[text];
     }
 
+    // Some Superlativ surfaces are displayed as "am + form",
+    // while the generated word-form asset is keyed by the bare form.
+    if (!rel && /^am\s+/i.test(String(text).trim())) {
+      var bareKey = normalize(String(text).trim().replace(/^am\s+/i, ''));
+      rel = WORD_FORM_MAP[bareKey];
+    }
+
     return rel
       ? (rel.indexOf('http') === 0
         ? rel

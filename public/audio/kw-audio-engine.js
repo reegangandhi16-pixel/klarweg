@@ -749,13 +749,41 @@ function wordFormUrl(text) {
       current = a;
       if (typeof opts.onAudio === 'function') { try { opts.onAudio(a); } catch (e) {} }
       var settled = false;
-      var onEnd = function () { if (!settled) { settled = true; } if (typeof opts.onEnded === 'function') opts.onEnded(); emit('play-complete', { url: url }); };
+      var onEnd = function () {
+        if (!settled) {
+          settled = true;
+          if (typeof opts.onEnded === 'function') opts.onEnded();
+          emit('play-complete', { url: url });
+          resolve(true);
+        }
+      };
+
       a.addEventListener('ended', onEnd, { once: true });
-      a.addEventListener('error', function () { emit('play-error', { url: url, code: a.error && a.error.code }); resolve(false); }, { once: true });
+
+      a.addEventListener('error', function () {
+        if (!settled) {
+          settled = true;
+          emit('play-error', { url: url, code: a.error && a.error.code });
+          resolve(false);
+        }
+      }, { once: true });
+
       var p = a.play();
-      if (p && p.then) p.then(function () { emit('play-start', { url: url, source: opts._src || 'file' }); resolve(true); })
-                        .catch(function (err) { emit('play-error', { url: url, name: err && err.name }); resolve(false); });
-      else resolve(true);
+
+      if (p && p.then) {
+        p.then(function () {
+          emit('play-start', { url: url, source: opts._src || 'file' });
+        }).catch(function (err) {
+          if (!settled) {
+            settled = true;
+            emit('play-error', { url: url, name: err && err.name });
+            resolve(false);
+          }
+        });
+      } else {
+        emit('play-start', { url: url, source: opts._src || 'file' });
+      }
+
     });
   }
   function playBlob(blob, opts) {

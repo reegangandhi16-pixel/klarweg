@@ -1371,7 +1371,7 @@
         t.appendChild(el('thead', {}, thead));
         const tb = el('tbody', {});
         g.table.rows.forEach(r => { const tr = el('tr', {}); r.forEach((c, ci) => tr.appendChild(el('td', { class: (ci === 0 ? 'row-head ' : '') + 'grammar-table-cell', html: c }))); tb.appendChild(tr); });
-        t.appendChild(tb); inner.appendChild(t);
+        t.appendChild(tb); inner.appendChild(el('div', { class: 'grammar-table-scroll' }, t));
       }
       if (g.note) inner.appendChild(el('p', { class: 'grammar-text', html: g.note }));
       if (g.hinglish) inner.appendChild(
@@ -1393,7 +1393,7 @@
           t2.appendChild(el('thead', {}, th2));
           const tb2 = el('tbody', {});
           (g.compare.rows || []).forEach(r => { const tr = el('tr', {}); r.forEach((cell, ci) => tr.appendChild(el('td', { class: (ci === 0 ? 'row-head ' : '') + 'grammar-table-cell', html: cell }))); tb2.appendChild(tr); });
-          t2.appendChild(tb2); c.appendChild(t2); }
+          t2.appendChild(tb2); c.appendChild(el('div', { class: 'grammar-table-scroll' }, t2)); }
         inner.appendChild(c); }
       if (g.connect) inner.appendChild(el('div', { class: 'gr-connect' },
         grLabel(g.connect.from ? 'Remember from ' + g.connect.from : 'Connects back'),

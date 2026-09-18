@@ -1019,7 +1019,19 @@
     if (!S) return el('div', { class: 'card' }, 'Story coming soon.');
     const femaleSpeakers = (S.femaleSpeakers || ['Anna', 'Frau Weber', 'Lena', 'Frau Klein']);
     const genderFor = (line) => line.voice || (femaleSpeakers.indexOf(line.speaker) >= 0 ? 'female' : 'male');
-    const lineText = (line) => line.tokens ? line.tokens.filter(t => !t.plain).map(t => t.w).join(' ') : (line.de || '');
+    const lineText = (line) => {
+      if (!Array.isArray(line.tokens)) return line.de || '';
+      let out = '';
+      let prevNoSpaceAfter = true;
+      line.tokens.forEach((t) => {
+        const w = String(t.w || '');
+        const noSpaceBefore = prevNoSpaceAfter || /^[.,!?;:)\\]…”"'”]/.test(w);
+        if (!noSpaceBefore && out) out += ' ';
+        out += w;
+        prevNoSpaceAfter = /[„«(]$/.test(w) && w.length <= 2;
+      });
+      return out;
+    };
 
     const wrap = el('div', { class: 'story-split' });
 

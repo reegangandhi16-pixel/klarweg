@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>kw-report · worker unit tests (dev)</title>
+<style>
+body{margin:0;background:#0E0E10;color:#F4F3EE;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.65;padding:24px}
+h1{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#9A9AA0;margin:0 0 4px}
+#sum{font-size:15px;margin:0 0 16px}
+pre{white-space:pre-wrap;margin:0}
+.p{color:#7FBFA8}.f{color:#FF9B8A}.g{color:#9A9AA0;margin-top:14px;display:block}
+</style>
+</head>
+<body>
+<h1>Worker unit + integration tests (mock D1 / R2)</h1>
+<p id="sum">running…</p>
+<pre id="out"></pre>
+<script type="module">
+import worker from './worker/src/index.js?v=3';
+const { makeD1, makeR2, ctx } = await import('./_dev-mocks.js?v=3');
+import { derive } from './worker/src/auth.js';
+import { validateAndSanitise, sniff } from './worker/src/images.js';
+import { normaliseDescription, dupHash, safeEqual } from './worker/src/ids.js';
+import { looksLikeRef } from './worker/src/refs.js';
+
+const out = [], results = [];
+let pass = 0, fail = 0;
+/* Browsers strip Set-Cookie from Response headers (forbidden response header),
+   so capture what the Worker sets by tapping Headers.append. Test-only. */
+let SETCOOKIES = [];
+const _append = Headers.prototype.append;
+Headers.prototype.append = function (k, v) {
+  if (String(k).toLowerCase() === 'set-cookie') SETCOOKIES.push(v);
+  return _append.call(this, k, v);
+};
+const grab = () => { const c = SETCOOKIES.slice(); SETCOOKIES = []; return c; };
+function render(){
+  document.getElementById('sum').innerHTML =
+    (fail === 0 ? '<span class="p">' : '<span class="f">') + pass + ' passed, ' + fail + ' failed</span>';
+  document.getElementById('out').innerHTML = out.join('\n');
+  window.__testSummary = { pass, fail, failures: out.filter(l => l.includes('FAIL')) };
+}
+window.addEventListener('error', e => { out.push('<span class="f">SUITE ABORTED: ' + e.message + '</span>'); fail++; render(); });
+window.addEventListener('unhandledrejection', e => { out.push('<span class="f">SUITE ABORTED: ' + (e.reason && e.reason.message || e.reason) + '</span>'); fail++; render(); });
+function group(name){ out.push('<span class="g">── ' + name + '</span>'); }
+function t(name, cond, detail){
+  const ok = cond === true;
+  ok ? pass++ : fail++;
+  out.push('<span class="' + (ok?'p':'f') + '">' + (ok?'PASS':'FAIL') + '</span>  ' + name + (ok?'':'  → ' + (detail !== undefined ? JSON.stringify(detail) : cond)));
+}
+
+/* ---------- fixtures ---------- */
+const refs = (await (await fetch('./section-refs.json')).json()).refs;
+const REF = 'klarweg:a2/a2-1-genitiv/vocabulary';
+const sample = refs.filter(r => r.ref === REF || r.ref === 'klarweg:b1/b1-1-infinitiv-mit-zu/story' || r.ref === 'klarweg:a1/a1-1-alphabet/quiz');
+
+const SALT = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))));
+const PASSPHRASE = 'correct horse battery staple';
+const HASH = await derive(PASSPHRASE, SALT);
+
+function makeEnv(){
+  return {
+    DB: makeD1(sample), SCREENSHOTS: makeR2(),
+    ALLOWED_ORIGINS: 'https://klarweg.com,https://reegangandhi16-pixel.github.io',
+    MAX_UPLOAD_BYTES: '2097152', SITE_BASE_URL: 'https://klarweg.com',
+    RATE_SALT: 'test-salt', SESSION_PEPPER: 'test-pepper',
+    ADMIN_PASSPHRASE_HASH: HASH, ADMIN_PASSPHRASE_SALT: SALT,
+    ASSETS: { fetch: async () => new Response('<html>admin<\/html>', { headers:{'Content-Type':'text/html'} }) }
+    // TURNSTILE_SECRET_KEY deliberately unset → verified:false path
+  };
+}
+let env = makeEnv();
+
+/* Browsers forbid scripts from setting Origin or Cookie on a real Request,
+   so tests use a minimal request stand-in with the same surface the Worker
+   actually touches: method, url, headers.get(), formData(), json(). */
+function req(path, init = {}){
+  const h = Object.assign({ 'CF-Connecting-IP': init.ip || '203.0.113.7' }, init.headers || {});
+  const get = n => {
+    const k = Object.keys(h).find(x => x.toLowerCase() === String(n).toLowerCase());
+    return k ? h[k] : null;
+  };
+  return {
+    method: init.method || 'GET',
+    url: 'https://klarweg-reports.workers.dev' + path,
+    headers: { get },
+    async formData(){ if (init.body instanceof FormData) return init.body; throw new Error('not form data'); },
+    async json(){ return JSON.parse(init.body || '{}'); },
+    async text(){ return String(init.body || ''); }
+  };
+}
+function reportForm(over = {}){
+  const f = new FormData();
+  f.append('section_ref', over.ref !== undefined ? over.ref : REF);
+  f.append('category', over.category !== undefined ? over.category : 'audio');
+  f.append('description', over.description !== undefined ? over.description : 'The audio on word three does not play on my phone.');
+  f.append('meta', over.meta !== undefined ? over.meta : JSON.stringify({ claimed_title:'x', page_url:'https://evil.test/hax', viewport:'390x844', dpr:3, ua_family:'Safari / iOS', prefers_reduced_motion:false }));
+  if (over.file) f.append('screenshot', over.file, 'shot.png');
+  return f;
+}
+const post = (body, init={}) => worker.fetch(req('/api/reports', { method:'POST', body, ...init }), env, ctx);
+
+/* image fixtures from a real canvas */
+function canvasBlob(type, w = 20, h = 12){
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const x = c.getContext('2d'); x.fillStyle = '#1F4E4A'; x.fillRect(0,0,w,h);
+  return new Promise(r => c.toBlob(r, type, .9));
+}
+const bytesOf = async b => new Uint8Array(await b.arrayBuffer());
+const PNG = await bytesOf(await canvasBlob('image/png'));
+const JPG = await bytesOf(await canvasBlob('image/jpeg'));
+const WBP = await bytesOf(await canvasBlob('image/webp'));
+
+/* PNG with an injected tEXt metadata chunk */
+function injectPngText(src){
+  const len = 12 + 4 + 20;
+  const chunk = new Uint8Array(len);
+  const dv = new DataView(chunk.buffer);
+  dv.setUint32(0, 24);
+  chunk.set([0x74,0x45,0x58,0x74], 4);                       // 'tEXt'
+  chunk.set(new TextEncoder().encode('GPS\0 51.5N 0.1W secret'), 8);
+  const at = 8 + 25;                                          // after IHDR
+  const out = new Uint8Array(src.length + chunk.length);
+  out.set(src.subarray(0, at), 0); out.set(chunk, at); out.set(src.subarray(at), at + chunk.length);
+  return out;
+}
+/* JPEG with an injected APP1 EXIF segment */
+function injectJpegExif(src){
+  const payload = new TextEncoder().encode('Exif\0\0GPS 51.5N 0.1W');
+  const seg = new Uint8Array(4 + payload.length);
+  seg[0] = 0xff; seg[1] = 0xe1;
+  seg[2] = ((payload.length + 2) >> 8) & 0xff; seg[3] = (payload.length + 2) & 0xff;
+  seg.set(payload, 4);
+  const out = new Uint8Array(src.length + seg.length);
+  out.set(src.subarray(0,2), 0); out.set(seg, 2); out.set(src.subarray(2), 2 + seg.length);
+  return out;
+}
+const contains = (bytes, str) => new TextDecoder('latin1').decode(bytes).includes(str);
+
+/* ============================================================ */
+group('static checks');
+t('report id shape is server-generated only', /^KW-[0-9A-HJ-NP-TV-Z]{6}$/.test((await (await post(reportForm())).json()).id));
+env = makeEnv();
+t('ref shape regex accepts a real ref', looksLikeRef(REF));
+t('ref shape regex rejects traversal', looksLikeRef('klarweg:a2/../../etc/passwd') === false);
+t('ref shape regex rejects SQL-ish input', looksLikeRef("klarweg:a2/x'; DROP TABLE reports;--/story") === false);
+t('description normalisation', normaliseDescription('  The AUDIO,  does NOT  play!! ') === 'the audio does not play');
+t('dup hash stable across punctuation/case', await dupHash(REF,'audio','Audio does not play!') === await dupHash(REF,'audio','audio  does not  play'));
+t('dup hash differs by section', await dupHash(REF,'audio','x y z') !== await dupHash('klarweg:a1/a1-1-alphabet/quiz','audio','x y z'));
+t('safeEqual rejects different-length', safeEqual('abc','abcd') === false);
+
+group('POST /api/reports — validation');
+let r = await post(reportForm({ ref: 'klarweg:a2/not-a-chapter/vocabulary' }));
+t('unknown section ref → 400 invalid_section', r.status === 400 && (await r.json()).error === 'invalid_section', r.status);
+r = await post(reportForm({ ref: 'garbage' }));
+t('malformed ref → 400', r.status === 400, r.status);
+r = await post(reportForm({ category: 'spam' }));
+t('invalid category → 400 invalid_category', r.status === 400 && (await r.json()).error === 'invalid_category', r.status);
+r = await post(reportForm({ description: 'short' }));
+t('too-short description → 400', r.status === 400 && (await r.json()).error === 'invalid_description', r.status);
+r = await post(reportForm({ description: 'y'.repeat(5000) }));
+t('over-long description accepted but truncated to 2000', r.status === 201 && env.DB._db.reports[0].description.length === 2000, env.DB._db.reports[0] && env.DB._db.reports[0].description.length);
+
+env = makeEnv();
+r = await post(reportForm());
+const created = await r.json();
+t('valid report → 201 with id', r.status === 201 && /^KW-/.test(created.id), created);
+const row = env.DB._db.reports[0];
+t('level derived server-side', row.level === 'a2', row.level);
+t('chapter derived server-side', row.chapter_id === 'a2-1-genitiv' && row.chapter_no === 1, row.chapter_id);
+t('section derived server-side', row.section_id === 'vocabulary', row.section_id);
+t('page_path derived from DB, not client', row.page_path === 'chapter/chapter-a2-1-genitiv.html', row.page_path);
+t('client page_url (evil.test) never stored', !JSON.stringify(row).includes('evil.test'));
+t('status defaults to new', row.status === 'new', row.status);
+t('created_at is server time', Math.abs(row.created_at - Date.now()) < 5000);
+t('viewport captured', row.viewport === '390x844', row.viewport);
+t('no raw IP persisted', !JSON.stringify(row).includes('203.0.113.7'));
+t('reporter_hash is a 64-hex digest', /^[0-9a-f]{64}$/.test(row.reporter_hash));
+t('dup_hash stored', /^[0-9a-f]{64}$/.test(row.dup_hash));
+r = await post(reportForm({ meta: '{"viewport":"<scr'+'ipt>","dpr":"NaN","ua_family":', description: 'A second, clearly different problem in this same section.' }));
+t('malformed meta JSON tolerated', r.status === 201, r.status);
+t('bad viewport dropped, not stored', env.DB._db.reports[1].viewport === null, env.DB._db.reports[1].viewport);
+env = makeEnv();
+r = await post(reportForm({ meta: JSON.stringify({ viewport:'<scr'+'ipt>', dpr:'NaN', ua_family:'x'.repeat(500) }) }));
+t('hostile meta values sanitised', env.DB._db.reports[0].viewport === null && env.DB._db.reports[0].dpr === null && env.DB._db.reports[0].ua_family.length === 40, env.DB._db.reports[0]);
+
+group('duplicate suppression');
+env = makeEnv();
+const a1 = await (await post(reportForm())).json();
+const r2 = await post(reportForm({ description: 'The  AUDIO on word three, does not play on my phone!!' }));
+const a2 = await r2.json();
+t('same reporter + same words → 200 duplicate', r2.status === 200 && a2.duplicate === true && a2.id === a1.id, a2);
+t('duplicate did not insert a second row', env.DB._db.reports.length === 1, env.DB._db.reports.length);
+const r3 = await worker.fetch(req('/api/reports', { method:'POST', body: reportForm(), headers:{'CF-Connecting-IP':'198.51.100.22'} }), env, ctx);
+const a3 = await r3.json();
+t('different reporter → kept as its own report', r3.status === 201 && a3.id !== a1.id, a3);
+t('two rows now stored', env.DB._db.reports.length === 2, env.DB._db.reports.length);
+
+group('rate limiting');
+env = makeEnv();
+let last;
+for (let i = 0; i < 5; i++) last = await post(reportForm({ description: 'Unique problem number ' + i + ' in this lesson section.' }));
+t('5th submission within the hourly budget → 201', last.status === 201, last.status);
+last = await post(reportForm({ description: 'Unique problem number six in this lesson section.' }));
+t('6th within the hour → 429', last.status === 429, last.status);
+t('429 carries Retry-After', Number(last.headers.get('Retry-After')) > 0, last.headers.get('Retry-After'));
+t('429 body has no internals', (await last.clone().json()).error === 'rate_limited');
+env = makeEnv();
+env.TURNSTILE_SECRET_KEY = 'x';   // configured but no token sent → tighter budget
+for (let i = 0; i < 2; i++) last = await post(reportForm({ description: 'Unverified distinct problem ' + i + ' in this section.' }));
+t('unverified: 2nd still accepted', last.status === 201, last.status);
+last = await post(reportForm({ description: 'Unverified distinct problem three in this section.' }));
+t('unverified: 3rd throttled → 429', last.status === 429, last.status);
+
+group('screenshots');
+t('sniff PNG', sniff(PNG) === 'png');
+t('sniff JPEG', sniff(JPG) === 'jpeg');
+t('sniff WebP', sniff(WBP) === 'webp');
+t('GIF rejected by magic bytes', validateAndSanitise(new Uint8Array([0x47,0x49,0x46,0x38,0x39,0x61,1,2,3,4,5,6,7,8,9,10]), 2e6).reason === 'unsupported_type');
+t('HTML disguised as image rejected', validateAndSanitise(new TextEncoder().encode('<html><scr'+'ipt>alert(1)<\/scr'+'ipt></html>'), 2e6).reason === 'unsupported_type');
+t('empty file rejected', validateAndSanitise(new Uint8Array(0), 2e6).reason === 'empty');
+t('oversize rejected before parsing', validateAndSanitise(PNG, 10).reason === 'too_large');
+const vp = validateAndSanitise(PNG, 2e6);
+t('valid PNG accepted with real dimensions', vp.ok && vp.width === 20 && vp.height === 12, vp);
+t('valid JPEG accepted', validateAndSanitise(JPG, 2e6).ok === true);
+t('valid WebP accepted', validateAndSanitise(WBP, 2e6).ok === true);
+const dirty = injectPngText(PNG);
+t('injected PNG tEXt present before sanitise', contains(dirty, 'GPS'));
+const cleanPng = validateAndSanitise(dirty, 2e6);
+t('PNG metadata chunk stripped', cleanPng.ok && !contains(cleanPng.bytes, 'GPS'), cleanPng.reason);
+const dirtyJ = injectJpegExif(JPG);
+t('injected JPEG APP1 present before sanitise', contains(dirtyJ, 'GPS 51.5N'));
+const cleanJ = validateAndSanitise(dirtyJ, 2e6);
+t('JPEG EXIF segment stripped', cleanJ.ok && !contains(cleanJ.bytes, 'GPS 51.5N'), cleanJ.reason);
+
+env = makeEnv();
+r = await post(reportForm({ file: new File([PNG], 'shot.png', { type:'image/png' }) }));
+let body = await r.json();
+t('report with screenshot → 201 stored', r.status === 201 && body.screenshot === 'stored', body);
+const key = env.DB._db.reports[0].screenshot_key;
+t('R2 key is namespaced by date + report id', /^reports\/\d{4}\/\d{2}\/KW-[0-9A-HJ-NP-TV-Z]{6}\.png$/.test(key), key);
+t('object actually written to R2', env.SCREENSHOTS._store.has(key));
+env = makeEnv();
+r = await post(reportForm({ file: new File([new Uint8Array([0x47,0x49,0x46,0x38,0x39,0x61,1,2,3,4,5,6,7,8,9,10])], 'x.gif', { type:'image/png' }) }));
+body = await r.json();
+t('bad screenshot → report still created, screenshot rejected', r.status === 201 && body.screenshot === 'rejected:unsupported_type', body);
+t('no screenshot_key stored for rejected file', env.DB._db.reports[0].screenshot_key === null);
+
+group('CORS + origin policy');
+env = makeEnv();
+r = await worker.fetch(req('/api/reports', { method:'POST', body: reportForm(), headers:{ Origin:'https://evil.test' } }), env, ctx);
+t('unknown origin → 403', r.status === 403 && (await r.json()).error === 'origin_not_allowed', r.status);
+r = await worker.fetch(req('/api/reports', { method:'POST', body: reportForm(), headers:{ Origin:'https://klarweg.com' } }), env, ctx);
+t('allowed origin → 201 with ACAO echo', r.status === 201 && r.headers.get('Access-Control-Allow-Origin') === 'https://klarweg.com', r.headers.get('Access-Control-Allow-Origin'));
+t('ACAO is not a wildcard', r.headers.get('Access-Control-Allow-Origin') !== '*');
+t('Vary: Origin set', r.headers.get('Vary') === 'Origin');
+r = await worker.fetch(req('/api/reports', { method:'OPTIONS', headers:{ Origin:'https://klarweg.com' } }), env, ctx);
+t('preflight from allowed origin → 204', r.status === 204, r.status);
+r = await worker.fetch(req('/api/reports', { method:'OPTIONS', headers:{ Origin:'https://evil.test' } }), env, ctx);
+t('preflight from unknown origin → 403', r.status === 403, r.status);
+r = await worker.fetch(req('/api/reports', { method:'GET' }), env, ctx);
+t('GET /api/reports → 405', r.status === 405, r.status);
+r = await worker.fetch(req('/api/health'), env, ctx);
+const health = await r.json();
+t('health is minimal { ok: true }', r.status === 200 && JSON.stringify(health) === '{"ok":true}', health);
+
+group('admin: deny by default');
+env = makeEnv();
+for (const [p, m] of [['/api/admin/reports','GET'],['/api/admin/reports/KW-ABC234','GET'],['/api/admin/reports/KW-ABC234','PATCH'],['/api/admin/reports/KW-ABC234/screenshot','GET'],['/api/admin/facets','GET'],['/api/admin/me','GET']]) {
+  const res = await worker.fetch(req(p, { method:m }), env, ctx);
+  t('no session: ' + m + ' ' + p + ' → 401', res.status === 401, res.status);
+}
+r = await worker.fetch(req('/api/admin/reports', { headers:{ Origin:'https://klarweg.com' } }), env, ctx);
+t('admin route from another origin → 403 (never CORS)', r.status === 403, r.status);
+t('admin responses carry no ACAO header', r.headers.get('Access-Control-Allow-Origin') === null);
+
+group('admin: login + session');
+r = await worker.fetch(req('/api/admin/login', { method:'POST', body: JSON.stringify({ passphrase:'wrong' }) }), env, ctx);
+t('wrong passphrase → 401 invalid_credentials', r.status === 401 && (await r.json()).error === 'invalid_credentials', r.status);
+t('no Set-Cookie on failed login', grab().length === 0);
+for (let i = 0; i < 4; i++) await worker.fetch(req('/api/admin/login', { method:'POST', body: JSON.stringify({ passphrase:'wrong' }) }), env, ctx);
+r = await worker.fetch(req('/api/admin/login', { method:'POST', body: JSON.stringify({ passphrase: PASSPHRASE }) }), env, ctx);
+t('login throttled after 5 failures → 429', r.status === 429, r.status);
+t('throttle carries Retry-After', Number(r.headers.get('Retry-After')) > 0);
+
+env = makeEnv();
+grab();
+r = await worker.fetch(req('/api/admin/login', { method:'POST', body: JSON.stringify({ passphrase: PASSPHRASE }) }), env, ctx);
+const loginBody = await r.json();
+const setCookies = grab();
+const cookieHeader = setCookies.map(c => c.split(';')[0]).join('; ');
+const sessionCookie = setCookies.find(c => c.startsWith('kw_admin='));
+t('correct passphrase → 200 + csrf token', r.status === 200 && !!loginBody.csrf, loginBody);
+t('session cookie is HttpOnly', /HttpOnly/i.test(sessionCookie), sessionCookie);
+t('session cookie is Secure', /Secure/i.test(sessionCookie));
+t('session cookie is SameSite=Strict', /SameSite=Strict/i.test(sessionCookie));
+t('session cookie expires in 8h', /Max-Age=28800/.test(sessionCookie));
+t('csrf cookie is readable by the admin page (not HttpOnly)', !/HttpOnly/i.test(setCookies.find(c => c.startsWith('kw_admin_csrf='))));
+const tokenValue = sessionCookie.split('=')[1].split(';')[0];
+t('raw session token is NOT stored in D1', ![...env.DB._db.admin_sessions.keys()].includes(tokenValue));
+t('only a 64-hex token hash is stored', /^[0-9a-f]{64}$/.test([...env.DB._db.admin_sessions.keys()][0]));
+t('passphrase never appears in stored session row', !JSON.stringify([...env.DB._db.admin_sessions.values()]).includes(PASSPHRASE));
+
+const auth = { Cookie: cookieHeader };
+r = await worker.fetch(req('/api/admin/me', { headers: auth }), env, ctx);
+t('session works on /me', r.status === 200, r.status);
+t('admin response is no-store', r.headers.get('Cache-Control') === 'no-store');
+r = await worker.fetch(req('/api/admin/me', { headers:{ Cookie:'kw_admin=forged-token-value-1234567890' } }), env, ctx);
+t('forged session token → 401', r.status === 401, r.status);
+
+group('admin: reports API');
+await worker.fetch(req('/api/reports', { method:'POST', body: reportForm({ file: new File([PNG],'s.png',{type:'image/png'}) }) }), env, ctx);
+await worker.fetch(req('/api/reports', { method:'POST', body: reportForm({ ref:'klarweg:b1/b1-1-infinitiv-mit-zu/story', category:'content', description:'The second line of the story is missing its translation entirely.' }), headers:{'CF-Connecting-IP':'198.51.100.5'} }), env, ctx);
+const id = env.DB._db.reports[0].id;
+
+r = await worker.fetch(req('/api/admin/reports', { headers: auth }), env, ctx);
+let list = await r.json();
+t('list endpoint returns 200 with a reports array', r.status === 200 && Array.isArray(list.reports), { status: r.status, body: list });
+list.reports = list.reports || [];
+t('list returns both reports newest-first', list.reports.length === 2 && list.reports[0].created_at >= list.reports[1].created_at, list.reports.length);
+t('list joins chapter title', list.reports.some(x => x.chapter_title === 'Genitiv: Name + s'), list.reports.map(x=>x.chapter_title));
+t('list never exposes reporter_hash', !JSON.stringify(list).includes('reporter_hash'));
+r = await worker.fetch(req('/api/admin/reports?level=b1', { headers: auth }), env, ctx);
+let lv = await r.json();
+t('level filter works', Array.isArray(lv.reports) && lv.reports.every(x => x.level === 'b1'), { status: r.status, body: lv });
+r = await worker.fetch(req('/api/admin/reports?category=audio', { headers: auth }), env, ctx);
+lv = await r.json();
+t('category filter works', Array.isArray(lv.reports) && lv.reports.every(x => x.category === 'audio'), lv);
+r = await worker.fetch(req('/api/admin/reports?status=fixed', { headers: auth }), env, ctx);
+lv = await r.json();
+t('status filter works (none fixed yet)', Array.isArray(lv.reports) && lv.reports.length === 0, lv);
+r = await worker.fetch(req('/api/admin/reports?q=translation', { headers: auth }), env, ctx);
+lv = await r.json();
+t('search matches description text', Array.isArray(lv.reports) && lv.reports.length === 1, lv);
+r = await worker.fetch(req('/api/admin/reports?status=bogus&level=zz&chapter=%27%20OR%201%3D1--', { headers: auth }), env, ctx);
+lv = await r.json();
+t('invalid filter values are ignored, not injected', Array.isArray(lv.reports) && lv.reports.length === 2, lv);
+
+r = await worker.fetch(req('/api/admin/reports/' + id, { headers: auth }), env, ctx);
+const detailBody = await r.json();
+const detail = detailBody.report || {};
+t('detail returns the report', r.status === 200 && detail.id === id, { status: r.status, body: detailBody, id });
+t('detail hides reporter_hash', detail.reporter_hash === undefined);
+t('detail hides raw R2 key', detail.screenshot_key === undefined && detail.has_screenshot === true);
+t('detail carries a deep link to the section', detail.open_url === 'https://klarweg.com/chapter/chapter-a2-1-genitiv.html#sec-vocabulary', detail.open_url);
+r = await worker.fetch(req('/api/admin/reports/KW-ZZZZZZ', { headers: auth }), env, ctx);
+t('unknown id → 404', r.status === 404, r.status);
+r = await worker.fetch(req('/api/admin/reports/..%2F..%2Fetc', { headers: auth }), env, ctx);
+t('path-traversal id → 404', r.status === 404, r.status);
+
+group('admin: mutations + CSRF');
+r = await worker.fetch(req('/api/admin/reports/' + id, { method:'PATCH', headers: auth, body: JSON.stringify({ status:'fixed' }) }), env, ctx);
+t('PATCH without CSRF header → 403', r.status === 403 && (await r.json()).error === 'csrf', r.status);
+const csrfAuth = { ...auth, 'X-KW-CSRF': loginBody.csrf };
+r = await worker.fetch(req('/api/admin/reports/' + id, { method:'PATCH', headers:{ ...auth, 'X-KW-CSRF':'wrong-value' }, body: JSON.stringify({ status:'fixed' }) }), env, ctx);
+t('PATCH with mismatched CSRF → 403', r.status === 403, r.status);
+r = await worker.fetch(req('/api/admin/reports/' + id, { method:'PATCH', headers: csrfAuth, body: JSON.stringify({ status:'banana' }) }), env, ctx);
+t('invalid status → 400 invalid_status', r.status === 400 && (await r.json()).error === 'invalid_status', r.status);
+r = await worker.fetch(req('/api/admin/reports/' + id, { method:'PATCH', headers: csrfAuth, body: JSON.stringify({ status:'reviewing', admin_notes:'Checked on iOS 18 — reproducible.' }) }), env, ctx);
+t('valid status + notes → 200', r.status === 200, r.status);
+t('status persisted', env.DB._db.reports[0].status === 'reviewing', env.DB._db.reports[0].status);
+t('admin notes persisted separately from description', env.DB._db.reports[0].admin_notes.startsWith('Checked on iOS 18') && env.DB._db.reports[0].description.includes('audio'));
+t('updated_by recorded', env.DB._db.reports[0].updated_by === 'admin');
+r = await worker.fetch(req('/api/admin/reports/' + id, { method:'PATCH', headers: csrfAuth, body: JSON.stringify({ admin_notes: 'z'.repeat(9000) }) }), env, ctx);
+t('long note truncated to 4000', env.DB._db.reports[0].admin_notes.length === 4000, env.DB._db.reports[0].admin_notes.length);
+
+group('admin: screenshot + facets');
+r = await worker.fetch(req('/api/admin/reports/' + id + '/screenshot', { headers: auth }), env, ctx);
+t('screenshot served through the Worker', r.status === 200, r.status);
+t('screenshot is no-store + private', /no-store/.test(r.headers.get('Cache-Control')) && /private/.test(r.headers.get('Cache-Control')));
+t('screenshot has nosniff', r.headers.get('X-Content-Type-Options') === 'nosniff');
+t('screenshot is CSP-sandboxed', /sandbox/.test(r.headers.get('Content-Security-Policy')));
+r = await worker.fetch(req('/api/admin/reports/' + id + '/screenshot'), env, ctx);
+t('screenshot without session → 401', r.status === 401, r.status);
+r = await worker.fetch(req('/api/admin/facets', { headers: auth }), env, ctx);
+const facets = await r.json();
+t('facets return levels + chapters', facets.levels.length === 2 && facets.chapters.length === 2, facets);
+
+group('admin: logout + failure safety');
+r = await worker.fetch(req('/api/admin/logout', { method:'POST', headers: auth }), env, ctx);
+t('logout → 200', r.status === 200);
+t('logout clears the session cookie', /kw_admin=;/.test(grab().join('|')));
+t('session revoked in D1', env.DB._db.admin_sessions.size === 0, env.DB._db.admin_sessions.size);
+r = await worker.fetch(req('/api/admin/reports', { headers: auth }), env, ctx);
+t('revoked cookie no longer works → 401', r.status === 401, r.status);
+
+const broken = { ...makeEnv(), DB: { prepare(){ throw new Error('D1_ERROR: near "SELECT": syntax error at /worker/src/reports.js:42'); } } };
+r = await worker.fetch(req('/api/reports', { method:'POST', body: reportForm() }), broken, ctx);
+const errBody = await r.text();
+t('DB failure → generic 500', r.status === 500 && JSON.parse(errBody).error === 'server_error', errBody);
+t('no SQL text leaked', !/SELECT|D1_ERROR|syntax/i.test(errBody));
+t('no file path leaked', !/worker\/src|\.js:/.test(errBody));
+r = await worker.fetch(req('/api/admin/reports', { headers: auth }), broken, ctx);
+t('admin DB failure → 401/500 without internals', (r.status === 500 || r.status === 401) && !/D1_ERROR/.test(await r.text()), r.status);
+
+group('secret hygiene (source scan)');
+const sources = await Promise.all(['index','cors','ids','refs','ratelimit','turnstile','images','auth','reports','admin']
+  .map(f => fetch('./worker/src/' + f + '.js').then(x => x.text())));
+const all = sources.join('\n');
+t('no hardcoded secret-looking literals', !/(sk-|secret\s*[:=]\s*['"][A-Za-z0-9]{12,})/i.test(all));
+t('turnstile secret only read from env', (all.match(/TURNSTILE_SECRET_KEY/g) || []).length === 2 && /env\.TURNSTILE_SECRET_KEY/.test(all));
+t('passphrase hash only read from env', /env\.ADMIN_PASSPHRASE_HASH/.test(all) && !/ADMIN_PASSPHRASE_HASH\s*=\s*['"]/.test(all));
+t('no console.log of raw IP', !/console\.log[^\n]*CF-Connecting-IP/.test(all));
+t('no R2 public url construction', !/r2\.dev|pub-[a-f0-9]{32}/i.test(all));
+const wrangler = await (await fetch('./worker/wrangler.toml')).text();
+t('wrangler.toml contains no secret values', !/SECRET_KEY\s*=\s*"[^"]+"|PASSPHRASE_HASH\s*=\s*"[^"]+"/.test(wrangler));
+const schema = await (await fetch('./worker/schema.sql')).text();
+t('schema constrains status', /status IN \('new','reviewing','fixed','dismissed'\)/.test(schema));
+t('schema constrains category', /category IN \('content','grammar'/.test(schema));
+t('schema constrains level', /level IN \('a1','a2','b1','b2','c1','c2'\)/.test(schema));
+t('dup_hash indexed', /reports_dup_idx/.test(schema));
+
+render();
+</script>
+</body>
+</html>

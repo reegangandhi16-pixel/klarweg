@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin dashboard · responsive check</title>
+<style>
+body{margin:0;background:#E9E7E1;font-family:'JetBrains Mono',ui-monospace,monospace;padding:16px}
+.row{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px}
+figure{margin:0;flex:none}figcaption{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A5A60;margin-bottom:6px}
+iframe{border:1px solid rgba(14,14,16,.18);border-radius:10px;background:#FAFAF7;display:block}
+pre{white-space:pre-wrap;font-size:12px;line-height:1.6;background:#0E0E10;color:#F4F3EE;padding:16px;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="row">
+  <figure><figcaption>390 × 700 · mobile</figcaption><iframe id="f390" src="_dev-admin.html?state=in" width="390" height="700"></iframe></figure>
+  <figure><figcaption>768 × 700 · tablet</figcaption><iframe id="f768" src="_dev-admin.html?state=in" width="768" height="700"></iframe></figure>
+  <figure><figcaption>1280 × 700 · desktop</figcaption><iframe id="f1280" src="_dev-admin.html?state=in" width="1280" height="700"></iframe></figure>
+</div>
+<pre id="out">measuring…</pre>
+<script>
+async function run(){
+  const lines=[]; let pass=0, fail=0;
+  const wait = ms => new Promise(r=>setTimeout(r,ms));
+  const ck=(w,n,v)=>{ if(v===true){pass++;lines.push('PASS  '+w+'  '+n);} else {fail++;lines.push('FAIL  '+w+'  '+n+'  → '+v);} };
+  for (const w of [390,768,1280]) {
+    const fr=document.getElementById('f'+w), d=fr.contentDocument, win=fr.contentWindow;
+    try {
+      ck(w,'dashboard rendered', !!d.querySelector('#list .row') || 'no rows');
+      ck(w,'no horizontal overflow', d.documentElement.scrollWidth <= d.documentElement.clientWidth || d.documentElement.scrollWidth+'>'+d.documentElement.clientWidth);
+      const rows=[...d.querySelectorAll('#list .row')];
+      ck(w,'rows inside viewport', rows.every(r=>{const b=r.getBoundingClientRect();return b.left>=-0.5 && b.right<=w+0.5;}) || 'overflow');
+      const inputs=[...d.querySelectorAll('input,select,button')].filter(n=>n.offsetParent!==null);
+      const small=inputs.filter(n=>n.getBoundingClientRect().height<36);
+      ck(w,'no control under 36px tall', small.length===0 || small.map(n=>(n.id||n.className)+'='+Math.round(n.getBoundingClientRect().height)).join(', '));
+      ck(w,'counts grid wraps sensibly', d.querySelectorAll('#counts .count').length===5);
+      // open the drawer at this width
+      d.querySelector('#list .row').click();
+      await wait(700);
+      const dlg=d.querySelector('#drawer').getBoundingClientRect();
+      ck(w,'drawer within viewport', (dlg.left>=-0.5 && dlg.right<=w+0.5) || Math.round(dlg.left)+'..'+Math.round(dlg.right));
+      ck(w,'drawer still no page overflow', d.documentElement.scrollWidth <= d.documentElement.clientWidth || d.documentElement.scrollWidth);
+      ck(w, w<=700 ? 'drawer is a bottom sheet' : 'drawer is a right rail',
+         w<=700 ? (Math.abs(dlg.bottom-win.innerHeight)<2 || Math.round(dlg.bottom)+' vs '+win.innerHeight)
+                : (Math.abs(dlg.right-w)<2 || Math.round(dlg.right)+' vs '+w));
+      ck(w,'open-section button visible', d.querySelector('#drawer-open').offsetParent!==null || 'hidden');
+      d.querySelector('#drawer-close').click();
+    } catch(e){ fail++; lines.push('ERROR '+w+'  '+e.message); }
+  }
+  document.getElementById('out').textContent = pass+' passed, '+fail+' failed\n\n'+lines.join('\n');
+}
+setTimeout(run, 2500);
+window.rerun = run;
+</script>
+</body>
+</html>

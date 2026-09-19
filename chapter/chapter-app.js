@@ -395,6 +395,38 @@
 
   /* ---------- section shell ---------- */
   const TAG_LABEL = { core: 'Core', practice: 'Practice', assess: 'Assessment' };
+
+  /* ---------- issue reporting (report/kw-report.js) ----------
+     Optional by construction: the module is loaded lazily, every call into
+     it is wrapped, and a failure to load simply means no report affordance.
+     No lesson code path depends on it. */
+  var kwReportQueue = [];
+  function kwFlushReport() {
+    try {
+      var q = kwReportQueue.splice(0);
+      for (var i = 0; i < q.length; i++) window.KW_Report.attach(q[i][0], q[i][1], C);
+    } catch (e) { /* reporting is never allowed to break a chapter */ }
+  }
+  function kwQueueReport(head, s) {
+    try {
+      kwReportQueue.push([head, s]);
+      if (window.KW_Report) kwFlushReport();
+    } catch (e) {}
+  }
+  function kwLoadReporter() {
+    try {
+      if (window.KW_Report) { kwFlushReport(); return; }
+      if (window.__kwReportLoading) return;
+      window.__kwReportLoading = true;
+      var sc = document.createElement('script');
+      sc.src = '../report/kw-report.js?v=1';
+      sc.async = true;
+      sc.onload = kwFlushReport;
+      sc.onerror = function () { kwReportQueue.length = 0; };
+      document.head.appendChild(sc);
+    } catch (e) {}
+  }
+
   function sectionShell(s, idx, bodyNode) {
     const head = el('div', { class: 'section-head' },
       el('div', { class: 'section-head-left' },
@@ -405,6 +437,7 @@
         el('p', { class: 'section-objective' }, s.objective)),
       s.auto ? null : completeToggle(s)
     );
+    kwQueueReport(head, s);
     return el('section', { class: 'dash-section', id: 'sec-' + s.id, dataset: { sec: s.id } }, head, bodyNode);
   }
 
@@ -4744,6 +4777,7 @@
     setupGrammarHelper();
     setupAccountMenu();
     preloadChapterAudio();
+    kwLoadReporter();
   }
 
   /* Preload this chapter's vocab + first reading/listening lines so the first

@@ -1,0 +1,34 @@
+name = "klarweg-reports"
+main = "src/index.js"
+compatibility_date = "2024-11-06"
+# workers.dev host for now; a custom domain can be added later without code changes.
+workers_dev = true
+
+[vars]
+# Origins allowed to POST /api/reports. Admin routes are same-origin only.
+ALLOWED_ORIGINS = "https://klarweg.com,https://www.klarweg.com,https://reegangandhi16-pixel.github.io"
+TURNSTILE_SITE_KEY = ""
+MAX_UPLOAD_BYTES = "2097152"
+SITE_BASE_URL = "https://klarweg.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "klarweg-reports"
+database_id = "REPLACE_AFTER_wrangler_d1_create"
+
+[[r2_buckets]]
+binding = "SCREENSHOTS"
+bucket_name = "klarweg-report-screenshots"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+# Worker code runs first; only unmatched routes fall through to assets.
+run_worker_first = true
+
+# Secrets (wrangler secret put <NAME>) — never in this file:
+#   TURNSTILE_SECRET_KEY
+#   ADMIN_PASSPHRASE_HASH
+#   ADMIN_PASSPHRASE_SALT
+#   RATE_SALT
+#   SESSION_PEPPER

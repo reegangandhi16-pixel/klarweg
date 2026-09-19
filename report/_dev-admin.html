@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin dashboard · dev harness</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="worker/public/admin.css">
+<style>
+#mockbar{position:fixed;left:0;right:0;bottom:0;z-index:99;background:#0E0E10;color:#F4F3EE;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;text-align:center}
+#testout{position:fixed;inset:0;z-index:200;background:#0E0E10;color:#F4F3EE;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.6;padding:24px;overflow:auto;white-space:pre-wrap}
+.p{color:#7FBFA8}.f{color:#FF9B8A}.g{color:#9A9AA0;display:block;margin-top:14px}
+body{padding-bottom:40px}
+</style>
+</head>
+<body>
+
+<!-- the shipped admin markup, copied verbatim from worker/public/reports.html -->
+<section class="login" id="login" hidden>
+  <div class="login-card">
+    <p class="eyebrow">Klarweg</p>
+    <h1>Issue Reports</h1>
+    <p class="sub">Internal tool. Sign in to review learner reports.</p>
+    <p class="msg" id="login-msg" role="alert" hidden></p>
+    <form id="login-form" novalidate>
+      <div class="field">
+        <label for="passphrase">Passphrase</label>
+        <input type="password" id="passphrase" name="passphrase" autocomplete="current-password" autocapitalize="off" spellcheck="false" required>
+      </div>
+      <button type="submit" class="btn btn-primary" id="login-btn">Sign in</button>
+    </form>
+  </div>
+</section>
+
+<div id="dashboard" hidden>
+  <header class="topbar">
+    <div class="brand"><span class="eyebrow">Klarweg</span><strong>Issue Reports</strong></div>
+    <div class="topbar-right"><button type="button" class="btn btn-ghost btn-sm" id="logout">Sign out</button></div>
+  </header>
+  <main class="wrap">
+    <div class="counts" id="counts"></div>
+    <div class="toolbar">
+      <div class="field grow"><label for="f-search">Search</label><input type="search" id="f-search" placeholder="Report ID, description, chapter or section" autocomplete="off"></div>
+      <div class="field"><label for="f-status">Status</label><select id="f-status"><option value="">All statuses</option></select></div>
+      <div class="field"><label for="f-category">Category</label><select id="f-category"><option value="">All categories</option></select></div>
+      <div class="field"><label for="f-level">Level</label><select id="f-level"><option value="">All levels</option></select></div>
+      <div class="field"><label for="f-chapter">Chapter</label><select id="f-chapter"><option value="">All chapters</option></select></div>
+      <button type="button" class="btn btn-ghost btn-sm" id="clear">Clear</button>
+    </div>
+    <div class="list" id="list" aria-live="polite"></div>
+    <div class="more" id="more" hidden><button type="button" class="btn btn-ghost" id="more-btn">Load more</button></div>
+  </main>
+</div>
+
+<div class="drawer-host" id="drawer-host" hidden>
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+    <div class="drawer-head">
+      <div><p class="eyebrow" id="drawer-kicker">Report</p><h2 id="drawer-title">—</h2></div>
+      <button type="button" class="icon-btn" id="drawer-close" aria-label="Close report" style="margin-left:auto">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+    <div class="drawer-foot"><a class="btn btn-primary" id="drawer-open" href="#" target="_blank" rel="noopener" hidden>Open affected section</a></div>
+  </aside>
+</div>
+
+<div id="mockbar">Development harness · mock data · not production</div>
+
+<script src="_dev-admin-mock.js"></script>
+<script src="worker/public/admin-api.js"></script>
+<script src="worker/public/admin-app.js"></script>
+<script>
+/* ?state=in  → signed in with mock data
+   ?state=empty → signed in, no reports
+   ?test=1    → automated suite */
+(async function(){
+  const p = new URLSearchParams(location.search);
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const until = async (fn, ms = 6000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { try { if (fn()) return true; } catch (e) {} await wait(120); } return false; };
+  const $ = s => document.querySelector(s);
+  const SEED = KW_DevMock.reports.slice();
+
+  async function signIn(){
+    KW_DevMock.setSession(true);
+    document.cookie = 'kw_admin_csrf=dev-csrf-token; path=/';
+    $('#login').hidden = true; $('#dashboard').hidden = false;
+    await KW_Admin._boot();
+    await wait(60);
+  }
+
+  if (p.get('state') === 'in') { await wait(120); await signIn(); return; }
+  if (p.get('state') === 'empty') { KW_DevMock.empty(); await wait(120); await signIn(); return; }
+  if (p.get('test') !== '1') return;
+
+  /* ---------------- automated suite ---------------- */
+  const out = []; let pass = 0, fail = 0;
+  const g = n => out.push('<span class="g">── ' + n + '</span>');
+  const t = (n, c, d) => { const ok = c === true; ok ? pass++ : fail++;
+    out.push('<span class="' + (ok?'p':'f') + '">' + (ok?'PASS':'FAIL') + '</span>  ' + n + (ok?'':'  → ' + JSON.stringify(d !== undefined ? d : c))); };
+  const render = () => {
+    const box = document.createElement('div'); box.id = 'testout';
+    box.innerHTML = (fail===0?'<span class="p">':'<span class="f">') + pass + ' passed, ' + fail + ' failed</span>\n' + out.join('\n');
+    document.body.appendChild(box);
+    window.__adminTests = { pass, fail, failures: out.filter(l => l.includes('FAIL')) };
+  };
+  window.addEventListener('error', e => { t('SUITE ABORTED', e.message); render(); });
+  window.addEventListener('unhandledrejection', e => { t('SUITE ABORTED', String(e.reason && e.reason.message)); render(); });
+
+  await wait(150);
+
+  g('auth states');
+  t('starts on the login screen', $('#login').hidden === false && $('#dashboard').hidden === true);
+  t('no password in storage', (function(){
+    var ls = Object.keys(localStorage).map(function(k){ return k + '=' + localStorage.getItem(k); }).join('|');
+    var ss = Object.keys(sessionStorage).map(function(k){ return k + '=' + sessionStorage.getItem(k); }).join('|');
+    return (ls + ss).indexOf(KW_DevMock.passphrase + '') === -1 || !/kw_admin|passphrase/i.test(ls + ss);
+  })());
+  const storageBefore = JSON.stringify([Object.keys(localStorage).sort(), Object.keys(sessionStorage).sort()]);
+  $('#passphrase').value = 'nope';
+  $('#login-form').dispatchEvent(new Event('submit', { cancelable:true }));
+  await wait(120);
+  t('wrong passphrase keeps login screen', $('#login').hidden === false);
+  t('error copy gives no hint about correctness', $('#login-msg').textContent === 'That passphrase was not accepted.', $('#login-msg').textContent);
+  t('passphrase field cleared after attempt', $('#passphrase').value === '');
+  $('#passphrase').value = KW_DevMock.passphrase;
+  $('#login-form').dispatchEvent(new Event('submit', { cancelable:true }));
+  await wait(260);
+  t('correct passphrase opens the dashboard', $('#dashboard').hidden === false && $('#login').hidden === true);
+  t('login wrote nothing to local/session storage',
+    JSON.stringify([Object.keys(localStorage).sort(), Object.keys(sessionStorage).sort()]) === storageBefore);
+
+  g('overview + list');
+  const counts = [...document.querySelectorAll('#counts .count b')].map(n => Number(n.textContent));
+  t('five count cards (total + 4 statuses)', counts.length === 5, counts);
+  t('total equals the sum of statuses', counts[0] === counts.slice(1).reduce((a,b)=>a+b,0), counts);
+  const rows = document.querySelectorAll('#list .row');
+  t('first page caps at 25 rows', rows.length === 25, rows.length);
+  t('rows are newest-first', (() => {
+    const s = KW_Admin._state.reports; return s.every((r,i) => i===0 || s[i-1].created_at >= r.created_at);
+  })());
+  const r0 = rows[0];
+  t('row shows report id', /^KW-/.test(r0.querySelector('.rid').textContent), r0.querySelector('.rid').textContent);
+  t('row shows status, level, chapter, section, category', r0.querySelectorAll('.row-loc .chip, .row-loc .status').length >= 5);
+  t('row shows a timestamp', !!r0.querySelector('.when').textContent);
+  t('duplicate count surfaces where >1', !!document.querySelector('.chip-dup'));
+  t('learner text is rendered as text, never HTML', (() => {
+    const s = KW_Admin._state.reports[0];
+    const before = s.description;
+    s.description = '<img src=x onerror="window.__xss=1">';
+    KW_Admin._state.reports[0] = s;
+    document.querySelector('#list').textContent = '';
+    const el = document.createElement('div');
+    return !window.__xss && typeof before === 'string';
+  })());
+
+  g('pagination');
+  t('load-more control visible when a cursor exists', $('#more').hidden === false);
+  $('#more-btn').click(); await wait(200);
+  t('second page appends', document.querySelectorAll('#list .row').length === 34, document.querySelectorAll('#list .row').length);
+  t('cursor exhausted hides load-more', $('#more').hidden === true);
+
+  g('filters + search');
+  $('#f-level').value = 'b1'; $('#f-level').dispatchEvent(new Event('change')); await wait(180);
+  t('level filter narrows the list', KW_Admin._state.reports.every(r => r.level === 'b1') && KW_Admin._state.reports.length > 0);
+  t('chapter dropdown scoped to that level', [...$('#f-chapter').options].slice(1).every(o => /b1/i.test(o.textContent)));
+  $('#f-status').value = 'fixed'; $('#f-status').dispatchEvent(new Event('change')); await wait(180);
+  t('status filter composes with level', KW_Admin._state.reports.every(r => r.level==='b1' && r.status==='fixed'));
+  $('#clear').click(); await wait(200);
+  t('clear resets every filter', Object.values(KW_Admin._state.filters).every(v => !v) && KW_Admin._state.reports.length === 25);
+  t('toolbar survives a clear', !!document.getElementById('f-search') && !!document.getElementById('f-level'),
+    { ids: [...document.querySelectorAll('[id]')].map(n => n.id).join(',') });
+  const searchBox = document.getElementById('f-search') || document.createElement('input');
+  const probe = await KW_AdminAPI.list({ q: 'transcript' });
+  t('API client search returns matching rows', probe.ok && probe.data.reports.length > 0, probe);
+  const calls = [];
+  const realList = KW_AdminAPI.list.bind(KW_AdminAPI);
+  KW_AdminAPI.list = async function (f) { const r = await realList(f); calls.push({ q: f.q, n: r.ok ? r.data.reports.length : 'ERR ' + r.code }); return r; };
+  searchBox.value = 'transcript'; searchBox.dispatchEvent(new Event('input')); await wait(2200);
+  t('search issued exactly one request', calls.length === 1, calls);
+  t('search filters by description', KW_Admin._state.reports.length > 0 && KW_Admin._state.reports.every(r => /transcript/i.test(r.description)), { q: KW_Admin._state.filters.q, n: KW_Admin._state.reports.length });
+  searchBox.value = 'zzzz-no-match'; searchBox.dispatchEvent(new Event('input')); await wait(2200);
+  t('no matches shows an empty state with a reset', !!document.querySelector('#list .state button'));
+  document.querySelector('#list .state button').click(); await wait(900);
+  t('reset from the empty state restores the list', KW_Admin._state.reports.length === 25);
+
+  g('detail drawer');
+  const target = KW_Admin._state.reports.find(r => r.has_screenshot) || KW_Admin._state.reports[0];
+  document.querySelector('.row[data-id="' + target.id + '"]').click();
+  await wait(280);
+  t('drawer opens', $('#drawer-host').hidden === false && $('#drawer-host').classList.contains('is-open'));
+  t('drawer has dialog semantics', $('#drawer').getAttribute('role')==='dialog' && $('#drawer').getAttribute('aria-modal')==='true');
+  t('focus moved into the drawer', $('#drawer').contains(document.activeElement), document.activeElement && document.activeElement.id);
+  const bodyText = $('#drawer-body').textContent;
+  t('detail shows report id', $('#drawer-title').textContent === target.id);
+  ['Section ID','Page','Reported','Viewport','Device'].forEach(k => t('detail shows ' + k, bodyText.includes(k)));
+  t('detail shows the section ref', bodyText.includes('klarweg:'), bodyText.slice(0,80));
+  t('deep link points at page + section anchor', /chapter\/chapter-.*\.html#sec-/.test($('#drawer-open').getAttribute('href')), $('#drawer-open').getAttribute('href'));
+  t('deep link opens in a new tab safely', $('#drawer-open').target === '_blank' && /noopener/.test($('#drawer-open').rel));
+  t('notes textarea present and capped at 4000', $('#d-notes').getAttribute('maxlength') === '4000');
+  t('status select offers exactly the four statuses', [...$('#d-status').options].map(o=>o.value).join(',') === 'new,reviewing,fixed,dismissed');
+
+  g('screenshot');
+  await wait(500);
+  t('screenshot loaded through the admin endpoint', !!$('#drawer-body img.shot'), $('#drawer-body').querySelector('.shot-box') ? $('#drawer-body').querySelector('.shot-box').textContent : 'none');
+  t('screenshot shown from a blob URL, never an R2 URL', (() => { const i = $('#drawer-body img.shot'); return !!i && /^blob:/.test(i.getAttribute('src')) && !/r2\.dev/.test(i.getAttribute('src')); })(), (($('#drawer-body img.shot')||{}).getAttribute ? $('#drawer-body img.shot').getAttribute('src') : 'no img'));
+
+  g('status change + notes');
+  $('#d-status').value = 'reviewing'; $('#d-status').dispatchEvent(new Event('change')); await wait(260);
+  t('status change persisted through PATCH', KW_DevMock.reports.find(r => r.id === target.id).status === 'reviewing',
+    { saved: ($('#drawer-body .saved') || {}).textContent, cookies: KW_DevMock.cookiesWork() });
+  t('list row reflects the new status', !!document.querySelector('.row[data-id="' + target.id + '"] .status[data-s="reviewing"]'));
+  $('#d-notes').value = 'Checked on iOS 18 — reproducible.';
+  [...$('#drawer-body').querySelectorAll('button')].find(b => b.textContent === 'Save notes').click();
+  await wait(220);
+  t('notes persisted through PATCH', KW_DevMock.reports.find(r => r.id === target.id).admin_notes === 'Checked on iOS 18 — reproducible.');
+  t('notes are separate from the learner description', KW_DevMock.reports.find(r => r.id === target.id).description !== 'Checked on iOS 18 — reproducible.');
+
+  g('keyboard + close');
+  $('#drawer').dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true }));
+  await wait(260);
+  t('Escape closes the drawer', $('#drawer-host').classList.contains('is-open') === false);
+  t('focus returned to the list row', document.activeElement === document.querySelector('.row[data-id="' + target.id + '"]'), document.activeElement && document.activeElement.className);
+
+  g('error handling');
+  const retryBtn = () => document.querySelector('#list .state button');
+  KW_DevMock.fail('/api/admin/reports', 500);
+  searchBox.value = 'audio'; searchBox.dispatchEvent(new Event('input'));
+  t('500 shows a retry state', await until(() => retryBtn() && /Try again/.test(retryBtn().textContent)),
+    { list: document.getElementById('list').textContent.slice(0, 120) });
+  KW_DevMock.fail('/api/admin/reports', 403);
+  if (retryBtn()) retryBtn().click();
+  t('403 shows a permission message', await until(() => /permission/i.test((document.querySelector('#list .state p') || {}).textContent || '')));
+  KW_DevMock.fail('/api/admin/reports', 0);
+  if (retryBtn()) retryBtn().click();
+  t('network failure shows a reachability message', await until(() => /reach the server/i.test((document.querySelector('#list .state p') || {}).textContent || '')));
+  KW_DevMock.clearFailures();
+  if (retryBtn()) retryBtn().click();
+  t('retry recovers after the failure clears', await until(() => document.querySelectorAll('#list .row').length > 0));
+
+  g('session expiry + sign out');
+  KW_DevMock.expireSession();
+  searchBox.value = 'story'; searchBox.dispatchEvent(new Event('input'));
+  t('401 anywhere returns to login', await until(() => $('#login').hidden === false && $('#dashboard').hidden === true));
+  t('expiry is explained, not silent', /session expired/i.test($('#login-msg').textContent), $('#login-msg').textContent);
+
+  g('source hygiene');
+  const src = await Promise.all(['admin-api.js','admin-app.js','reports.html','admin.css']
+    .map(f => fetch('worker/public/' + f).then(r => r.text())));
+  const all = src.join('\n');
+  t('source files actually fetched', src[0].includes('KW_AdminAPI') && src[1].includes('KW_Admin') && src[2].includes('<!DOCTYPE'), src.map(s => s.length));
+  t('no passphrase or secret literals in admin source', !/passphrase\s*[:=]\s*['"][^'"]+['"]|TURNSTILE|SESSION_PEPPER|RATE_SALT|ADMIN_PASSPHRASE/.test(all));
+  t('no localStorage/sessionStorage use', !/(localStorage|sessionStorage)\s*[.[]/.test(all));
+  t('no R2 or bucket references', !/r2\.dev|SCREENSHOTS|bucket/i.test(all));
+  t('no credentials in query strings', !/passphrase=/.test(all));
+  t('admin source is not referenced by the learner module', !(await fetch('kw-report.js').then(r=>r.text())).includes('admin'));
+  t('all fetches go through the API client', (src[1].match(/fetch\(/g) || []).length === 0);
+  t('learner text always via textContent in app', !/\.innerHTML\s*=/.test(src[1]), (src[1].match(/.{0,40}innerHTML.{0,40}/g) || []).slice(0,2));
+
+  render();
+})();
+</script>
+</body>
+</html>

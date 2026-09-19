@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>kw-report · dev harness</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FAFAF7;color:#0E0E10;font-family:'Inter',system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:48px 24px 120px}
+.note{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9A9AA0;margin:0 0 24px}
+.dash-section{background:#fff;border:1px solid rgba(14,14,16,.09);border-radius:14px;padding:24px;margin-bottom:24px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.section-head-left{min-width:0}
+.section-kicker{display:flex;gap:8px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9A9AA0;margin-bottom:8px}
+.section-title{font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin:0 0 4px}
+.section-objective{margin:0;font-size:14px;color:#5A5A60;max-width:52ch}
+#log{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;background:#0E0E10;color:#F4F3EE;padding:16px;border-radius:10px;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="note">dev harness · not part of the shipped site</p>
+<div id="host"></div>
+<pre id="log">running…</pre>
+</div>
+<script src="kw-report.js"></script>
+<script>
+/* Two fake sections mirroring chapter-app.js sectionShell() output shape. */
+var CHAPTER = { id:'a2-1-genitiv', number:1, title:'Genitiv: Name + s', phase:'A2 · Phase 1' };
+var SECTIONS = [
+  { id:'vocabulary', label:'Vocabulary', tag:'core', objective:'17 words with audio, IPA and Hindi.' },
+  { id:'overview',   label:'Overview',   tag:'core', objective:'Should NOT get a report affordance.' }
+];
+var host = document.getElementById('host');
+SECTIONS.forEach(function(s,i){
+  var head = document.createElement('div'); head.className='section-head';
+  head.innerHTML = '<div class="section-head-left"><div class="section-kicker"><span>'+String(i).padStart(2,'0')+'</span><span>Core</span></div>'+
+    '<h2 class="section-title"></h2><p class="section-objective"></p></div>';
+  head.querySelector('.section-title').textContent = s.label;
+  head.querySelector('.section-objective').textContent = s.objective;
+  var sec = document.createElement('section'); sec.className='dash-section'; sec.id='sec-'+s.id;
+  sec.appendChild(head); host.appendChild(sec);
+  window.KW_Report.attach(head, s, CHAPTER);
+});
+window.__harness = { CHAPTER: CHAPTER, SECTIONS: SECTIONS };
+
+/* ?state=open → visual mode: open the modal with sample content, no tests. */
+if (/[?&]state=open/.test(location.search)) {
+  var vt = document.querySelector('.kw-report-trigger'); vt.focus(); vt.click();
+  var VM = KW_Report._internals();
+  VM.radios[4].checked = true;
+  VM.desc.value = 'The audio button on word three does nothing on my phone. It works on the laptop.';
+  VM.desc.dispatchEvent(new Event('input'));
+  document.getElementById('log').textContent = 'visual mode · ' + window.innerWidth + 'px';
+} else {
+
+/* ---- self-test suite ---- */
+/* Submission is live now; keep the harness offline so no report is ever sent. */
+var _realFetch = window.fetch.bind(window);
+window.fetch = function(u, i){ if (String(u).indexOf('/api/reports') > -1) return Promise.reject(new TypeError('offline harness')); return _realFetch(u, i); };
+var out = [], pass = 0, fail = 0;
+function t(name, fn){
+  try { var r = fn(); if (r === true) { pass++; out.push('PASS  ' + name); }
+        else { fail++; out.push('FAIL  ' + name + '  → ' + r); } }
+  catch (e) { fail++; out.push('ERROR ' + name + '  → ' + e.message); }
+}
+function fakeFile(name, type, size){ var b = new Blob([new Uint8Array(1)], {type:type}); var f = new File([b], name, {type:type}); Object.defineProperty(f,'size',{value:size}); return f; }
+
+var trig = document.querySelector('.kw-report-trigger');
+t('one trigger, on vocabulary only', function(){
+  var all = document.querySelectorAll('.kw-report-trigger');
+  return all.length === 1 && all[0].getAttribute('data-kwr-section') === 'vocabulary' || 'got ' + all.length;
+});
+t('trigger has accessible label', function(){ return /Vocabulary/.test(trig.getAttribute('aria-label')) || trig.getAttribute('aria-label'); });
+t('trigger min height >= 44px', function(){ var h = trig.getBoundingClientRect().height; return h >= 44 || h; });
+
+trig.click();
+var M = KW_Report._internals();
+t('modal opens (root visible)', function(){ return M.root.hidden === false || 'hidden'; });
+t('dialog semantics', function(){ var d = M.dialog;
+  return (d.getAttribute('role')==='dialog' && d.getAttribute('aria-modal')==='true' && d.getAttribute('aria-labelledby')==='kwr-title') || 'bad attrs'; });
+t('context line auto-filled', function(){ return /A2/.test(M.ctxLine.textContent) && /Kapitel 1/.test(M.ctxLine.textContent) && /Vocabulary/.test(M.ctxLine.textContent) || M.ctxLine.textContent; });
+t('section ref in context detail', function(){ return /klarweg:a2\/a2-1-genitiv\/vocabulary/.test(M.ctxDetail.textContent) || M.ctxDetail.textContent; });
+t('9 categories rendered', function(){ return M.radios.length === 9 || M.radios.length; });
+t('body scroll locked while open', function(){ return document.body.style.overflow === 'hidden' || 'not locked'; });
+t('send enabled (live backend path)', function(){ return M.sendBtn.disabled === false && KW_Report.submitEnabled === true || 'disabled'; });
+
+/* validation: empty */
+M.sendBtn.click();
+t('empty form → both errors', function(){ return (!M.catErr.hidden && !M.descErr.hidden) || 'cat=' + M.catErr.hidden + ' desc=' + M.descErr.hidden; });
+t('invalid form never reaches the network', function(){ return M.successBody.hidden === true && M.busy === false || 'submitted!'; });
+
+/* category + short text */
+M.radios[4].checked = true; M.radios[4].dispatchEvent(new Event('change'));
+t('category clears its error', function(){ return M.catErr.hidden === true || 'still shown'; });
+M.desc.value = 'short'; M.desc.dispatchEvent(new Event('input'));
+M.sendBtn.click();
+t('short text rejected', function(){ return !M.descErr.hidden || 'accepted'; });
+
+/* counter + 2000 limit */
+M.desc.value = 'x'.repeat(1900); M.desc.dispatchEvent(new Event('input'));
+t('counter reads 1900 / 2000', function(){ return M.count.textContent === '1900 / 2000' || M.count.textContent; });
+t('counter warns near limit', function(){ return M.count.classList.contains('is-near') || 'no warn'; });
+t('textarea maxlength = 2000', function(){ return M.desc.getAttribute('maxlength') === '2000' || M.desc.getAttribute('maxlength'); });
+M.desc.value = 'The audio on word three does not play on my phone.'; M.desc.dispatchEvent(new Event('input'));
+
+/* screenshot validation */
+t('rejects GIF', function(){ var r = KW_Report.validateScreenshot(fakeFile('a.gif','image/gif',1000)); return (!r.ok && r.reason==='type') || JSON.stringify(r); });
+t('rejects >2MB PNG', function(){ var r = KW_Report.validateScreenshot(fakeFile('a.png','image/png',3000000)); return (!r.ok && r.reason==='size') || JSON.stringify(r); });
+t('accepts 1MB WebP', function(){ return KW_Report.validateScreenshot(fakeFile('a.webp','image/webp',1000000)).ok === true || 'rejected'; });
+t('accepts no file', function(){ return KW_Report.validateScreenshot(null).ok === true || 'rejected'; });
+
+/* attach / replace / remove through the UI path */
+var png = fakeFile('screen.png','image/png',153600);
+M.fileInput.dispatchEvent(new Event('change'));   // no file selected → no-op
+var f2 = new DataTransfer(); f2.items.add(png); M.fileInput.files = f2.files;
+M.fileInput.dispatchEvent(new Event('change'));
+t('preview shows after attach', function(){ return (M.filePreview.hidden === false && M.fileName.textContent === 'screen.png' && /Preparing|KB|MB|B$/.test(M.fileMeta.textContent)) || M.fileName.textContent + '/' + M.fileMeta.textContent; });
+t('attach button hides when file set', function(){ return M.attachBtn.hidden === true || 'still visible'; });
+var f3 = new DataTransfer(); f3.items.add(fakeFile('other.webp','image/webp',51200)); M.fileInput.files = f3.files;
+M.fileInput.dispatchEvent(new Event('change'));
+t('replace swaps the file', function(){ return M.fileName.textContent === 'other.webp' || M.fileName.textContent; });
+var f4 = new DataTransfer(); f4.items.add(fakeFile('huge.png','image/png',2500000)); M.fileInput.files = f4.files;
+M.fileInput.dispatchEvent(new Event('change'));
+t('oversized file → error + cleared', function(){ return (!M.fileErr.hidden && M.filePreview.hidden === true && M.file === null) || 'err=' + M.fileErr.hidden; });
+var f5 = new DataTransfer(); f5.items.add(png); M.fileInput.files = f5.files; M.fileInput.dispatchEvent(new Event('change'));
+M.filePreview.querySelectorAll('.kwr-linkbtn')[1].click();
+t('remove clears the file', function(){ return (M.file === null && M.filePreview.hidden === true && M.attachBtn.hidden === false) || 'not cleared'; });
+
+/* overflow */
+t('no horizontal document overflow', function(){ var d = document.documentElement; return d.scrollWidth <= d.clientWidth || d.scrollWidth + ' > ' + d.clientWidth; });
+t('dialog fits viewport width', function(){ var r = M.dialog.getBoundingClientRect(); return (r.left >= -0.5 && r.right <= window.innerWidth + 0.5) || r.left + '..' + r.right + ' vs ' + window.innerWidth; });
+
+/* focus + keyboard */
+t('focusables inside dialog > 5', function(){ return M.dialog.querySelectorAll('a[href],button:not([disabled]),textarea,input:not([disabled]),summary,[tabindex]:not([tabindex="-1"])').length > 5 || 'too few'; });
+M.desc.focus();
+t('ESC on dirty form asks before discarding', function(){
+  M.dialog.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+  return (M.confirmBar.hidden === false && M.root.hidden === false) || 'closed with unsaved text';
+});
+t('keep writing dismisses the confirm', function(){
+  M.confirmBar.querySelector('.kwr-linkbtn').click();
+  return M.confirmBar.hidden === true || 'still shown';
+});
+t('discard closes', function(){
+  M.dialog.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+  M.confirmBar.querySelector('.kwr-btn').click();
+  return M.root.classList.contains('is-open') === false || 'still open';
+});
+setTimeout(function(){
+  t('focus returned to trigger', function(){ return document.activeElement === trig || (document.activeElement && document.activeElement.className); });
+  t('body scroll restored', function(){ return document.body.style.overflow !== 'hidden' || 'still locked'; });
+  t('pristine form closes without confirm', function(){
+    trig.click(); var m = KW_Report._internals();
+    m.dialog.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+    return (m.confirmBar.hidden === true && m.root.classList.contains('is-open') === false) || 'asked anyway';
+  });
+  document.getElementById('log').textContent =
+    'KW_Report ' + KW_Report.version + ' · submitEnabled=' + KW_Report.submitEnabled +
+    ' · reduced-motion=' + matchMedia('(prefers-reduced-motion: reduce)').matches +
+    ' · viewport=' + window.innerWidth + 'x' + window.innerHeight +
+    '\n' + pass + ' passed, ' + fail + ' failed\n\n' + out.join('\n');
+}, 320);
+}
+</script>
+</body>
+</html>

@@ -23,6 +23,8 @@ bucket_name = "klarweg-report-screenshots"
 [assets]
 directory = "./public"
 binding = "ASSETS"
+
+html_handling = "none"
 # Worker code runs first; only unmatched routes fall through to assets.
 run_worker_first = true
 

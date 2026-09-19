@@ -75,6 +75,16 @@ export default {
       }
     }
 
+    /* ---------- admin UI assets ---------- */
+    if (path === "/admin/admin.css" || path === "/admin/admin-api.js" || path === "/admin/admin-app.js") {
+      const assetPath = path.replace("/admin/", "/");
+      const res = await env.ASSETS.fetch(new Request(url.origin + assetPath, req));
+      const out = new Response(res.body, res);
+      Object.entries(SEC_HEADERS).forEach(([k, v]) => { if (!out.headers.has(k)) out.headers.set(k, v); });
+      out.headers.set("Cache-Control", "no-store");
+      return out;
+    }
+
     /* ---------- admin UI (static asset, served by the Worker) ---------- */
     if (path === '/admin' || path === '/admin/reports.html') {
       const res = await env.ASSETS.fetch(new Request(url.origin + '/reports.html', req));

@@ -10,7 +10,7 @@ import { checkLoginLimit, recordLoginFailure } from './ratelimit.js';
 export const COOKIE = 'kw_admin';
 export const CSRF_COOKIE = 'kw_admin_csrf';
 export const SESSION_MS = 8 * 60 * 60 * 1000;          // 8 hours
-const PBKDF2_ITERS = 210000;
+const PBKDF2_ITERS = 100000;
 
 /* ---------- passphrase ---------- */
 

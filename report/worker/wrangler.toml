@@ -9,12 +9,12 @@ workers_dev = true
 ALLOWED_ORIGINS = "https://klarweg.com,https://www.klarweg.com,https://reegangandhi16-pixel.github.io"
 TURNSTILE_SITE_KEY = ""
 MAX_UPLOAD_BYTES = "2097152"
-SITE_BASE_URL = "https://klarweg.com"
+SITE_BASE_URL = "https://reegangandhi16-pixel.github.io/klarweg"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "klarweg-reports"
-database_id = "REPLACE_AFTER_wrangler_d1_create"
+database_id = "df25bfe9-5040-46e3-8370-64ee9624e860"
 
 [[r2_buckets]]
 binding = "SCREENSHOTS"

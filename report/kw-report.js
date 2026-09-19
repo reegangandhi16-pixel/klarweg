@@ -22,7 +22,7 @@
 
   /* ---------- configuration (the only place these values live) ---------- */
   var ENDPOINT = global.KW_REPORT_ENDPOINT ||
-    'https://klarweg-reports.workers.dev';
+    'https://klarweg-reports.klarweg-issue-reports-2026.workers.dev';
 
   /* Public Turnstile SITE key (never the secret). Empty = not configured for
      this environment, in which case the Worker's unverified-report path

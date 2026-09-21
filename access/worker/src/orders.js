@@ -186,3 +186,95 @@ export async function createOrder(request, env) {
     paymentSessionId: cashfreeData.payment_session_id
   });
 }
+
+export async function getOrder(request, env, orderId) {
+  const token = getSessionToken(request);
+  const user = await findSessionUser(env.DB, token);
+
+  if (!user) {
+    return json(
+      { ok: false, error: "Authentication required." },
+      401
+    );
+  }
+
+  if (!/^ord_[0-9a-f-]{36}$/.test(orderId)) {
+    return json(
+      { ok: false, error: "Invalid order ID." },
+      400
+    );
+  }
+
+  const localOrder = await env.DB
+    .prepare(
+      `SELECT id, user_id, cashfree_order_id, amount_paise, currency,
+              status, payment_id, product_id
+       FROM orders
+       WHERE id = ?1 AND user_id = ?2
+       LIMIT 1`
+    )
+    .bind(orderId, user.id)
+    .first();
+
+  if (!localOrder) {
+    return json(
+      { ok: false, error: "Order not found." },
+      404
+    );
+  }
+
+  const cashfreeResponse = await fetch(
+    `${CASHFREE_BASE_URL}/orders/${encodeURIComponent(localOrder.cashfree_order_id)}`,
+    {
+      method: "GET",
+      headers: {
+        "x-api-version": CASHFREE_API_VERSION,
+        "x-client-id": env.CASHFREE_APP_ID,
+        "x-client-secret": env.CASHFREE_SECRET_KEY,
+        "x-idempotency-key": crypto.randomUUID()
+      }
+    }
+  );
+
+  const cashfreeData = await cashfreeResponse.json();
+
+  if (!cashfreeResponse.ok) {
+    return json(
+      { ok: false, error: "Unable to verify payment order." },
+      502
+    );
+  }
+
+  const returnedAmountPaise = Math.round(
+    Number(cashfreeData.order_amount) * 100
+  );
+
+  if (
+    cashfreeData.order_id !== localOrder.cashfree_order_id ||
+    returnedAmountPaise !== localOrder.amount_paise ||
+    cashfreeData.order_currency !== localOrder.currency
+  ) {
+    return json(
+      { ok: false, error: "Cashfree order validation failed." },
+      502
+    );
+  }
+
+  const cashfreeStatus =
+    typeof cashfreeData.order_status === "string"
+      ? cashfreeData.order_status.toLowerCase()
+      : "unknown";
+
+  return json({
+    ok: true,
+    order: {
+      id: localOrder.id,
+      productId: localOrder.product_id,
+      amountPaise: localOrder.amount_paise,
+      currency: localOrder.currency,
+      status: localOrder.status,
+      cashfreeStatus,
+      paymentId: localOrder.payment_id
+    }
+  });
+}

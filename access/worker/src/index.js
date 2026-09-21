@@ -1,6 +1,6 @@
 import { corsHeaders, withCors } from "./cors.js";
 import { signup, login, logout, me } from "./auth-routes.js";
-import { createOrder } from "./orders.js";
+import { createOrder, getOrder } from "./orders.js";
 function json(data, status = 200) {
   return Response.json(data, { status });
 }
@@ -28,6 +28,11 @@ export default {
 
     if (request.method === "POST" && url.pathname === "/orders") {
       return withCors(await createOrder(request, env), request);
+    }
+
+    const orderMatch = url.pathname.match(/^\/orders\/(ord_[0-9a-f-]{36})$/);
+    if (request.method === "GET" && orderMatch) {
+      return withCors(await getOrder(request, env, orderMatch[1]), request);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/signup") {

@@ -42,12 +42,21 @@ export async function readEntitlements(db, userId) {
 }
 
 export async function grantProduct(db, userId, productId, orderId) {
+  const normalizedProductId =
+    typeof productId === "string"
+      ? productId.trim().toUpperCase()
+      : "";
+
+  if (!["A1", "A2", "B1", "B2", "C1", "C2", "LIFETIME"].includes(normalizedProductId)) {
+    throw new Error("Invalid entitlement product.");
+  }
+
   const now = Math.floor(Date.now() / 1000);
 
   const grants =
-    productId === "LIFETIME"
+    normalizedProductId === "LIFETIME"
       ? ["LIFETIME", ...LEVELS]
-      : [productId];
+      : [normalizedProductId];
 
   const statements = grants.map((product) =>
     db

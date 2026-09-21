@@ -1,6 +1,7 @@
 import { corsHeaders, withCors } from "./cors.js";
 import { signup, login, logout, me } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
+import { cashfreeWebhook } from "./webhooks-cashfree.js";
 function json(data, status = 200) {
   return Response.json(data, { status });
 }
@@ -58,6 +59,10 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
         }),
         request
       );
+    }
+
+    if (request.method === "POST" && url.pathname === "/webhooks/cashfree") {
+      return cashfreeWebhook(request, env);
     }
 
     return withCors(

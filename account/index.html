@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klarweg · Your Account</title>
+<meta name="description" content="Sign in to Klarweg to see your levels, your access, and your learner profile.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg-canvas:#FAFAF7;--bg-surface:#FFFFFF;--bg-elevated:#F4F3EE;--bg-warm:#FFF8EC;--ink-primary:#0E0E10;--ink-secondary:#5A5A60;--ink-tertiary:#9A9AA0;--ink-quaternary:#C7C7C2;--coral:#E55A3F;--coral-tint:#FAECE7;--coral-deep:#993C1D;--accent:#1F4E4A;--accent-tint:#E7F0EE;--accent-deep:#143331;--hairline:rgba(14,14,16,0.08);--hairline-strong:rgba(14,14,16,0.14);--r-sm:10px;--r-md:14px;--r-lg:20px;--r-full:999px;--shadow-soft:0 8px 24px -12px rgba(14,14,16,0.10);--shadow-card:0 1px 0 rgba(14,14,16,0.02),0 12px 32px -16px rgba(14,14,16,0.12);--ease:cubic-bezier(0.16,1,0.3,1);--dur-fast:150ms;--dur-base:240ms;--font-display:'General Sans','Inter',system-ui,sans-serif;--font-ui:'Inter',system-ui,sans-serif;--font-german:'Fraunces','Times New Roman',serif;--font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+*,*::before,*::after{box-sizing:border-box}*{margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--font-ui);background:var(--bg-canvas);color:var(--ink-primary);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--ink-primary);outline-offset:3px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.container{width:100%;max-width:1040px;margin:0 auto;padding:0 24px}
+@media(max-width:600px){.container{padding:0 18px}}
+.topbar{position:sticky;top:0;z-index:50;background:var(--bg-canvas);border-bottom:1px solid var(--hairline)}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px;color:var(--ink-primary)}
+.brand:hover{color:var(--ink-primary)}
+.brand .dot{width:11px;height:11px;border-radius:50%;background:var(--coral)}
+.topnav{display:flex;gap:4px;align-items:center}
+.topnav a{font-size:14px;font-weight:500;color:var(--ink-secondary);padding:8px 12px;border-radius:var(--r-full);min-height:36px;display:inline-flex;align-items:center}
+.topnav a:hover{color:var(--ink-primary);background:var(--bg-elevated)}
+@media(max-width:600px){.topnav a{padding:8px}}
+main{flex:1;padding:56px 0 96px}
+@media(max-width:600px){main{padding:36px 0 64px}}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-tertiary)}
+h1{font-family:var(--font-display);font-size:clamp(28px,5vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:14px 0 0}
+.lede{font-size:16px;color:var(--ink-secondary);margin-top:12px;max-width:560px;text-wrap:pretty}
+/* ---- auth card ---- */
+.auth-wrap{max-width:440px;margin:0 auto}
+.auth-card{background:var(--bg-surface);border:1px solid var(--hairline);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:32px;margin-top:28px}
+@media(max-width:480px){.auth-card{padding:24px 20px}}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+.field label{font-size:13.5px;font-weight:600;color:var(--ink-secondary)}
+.field input{font-family:var(--font-ui);font-size:16px;color:var(--ink-primary);background:var(--bg-canvas);border:1px solid var(--hairline-strong);border-radius:var(--r-sm);padding:13px 14px;min-height:48px;width:100%;transition:border-color var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease)}
+.field input:hover{border-color:rgba(14,14,16,.24)}
+.field input:focus{outline:none;border-color:var(--accent);background:var(--bg-surface);box-shadow:0 0 0 3px var(--accent-tint)}
+.field input[aria-invalid="true"]{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-tint)}
+.field .hint{font-size:12.5px;color:var(--ink-tertiary)}
+.field .err{font-size:13px;color:var(--coral-deep);display:none}
+.field.invalid .err{display:block}
+.form-err{font-size:14px;line-height:1.5;color:var(--coral-deep);background:var(--coral-tint);border:1px solid rgba(229,90,63,.22);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:18px;display:none}
+.form-err.on{display:block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 24px;border-radius:var(--r-sm);border:1px solid transparent;font-size:15px;font-weight:600;cursor:pointer;transition:transform var(--dur-base) var(--ease),box-shadow var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn[disabled]{opacity:.55;cursor:default;transform:none}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{box-shadow:0 8px 24px -10px rgba(31,78,74,.5)}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{box-shadow:0 8px 24px -10px rgba(229,90,63,.55)}
+.btn-quiet{background:transparent;color:var(--ink-primary);border-color:var(--hairline-strong)}
+.btn-quiet:hover{border-color:rgba(14,14,16,.3)}
+.btn-block{width:100%}
+.spin{width:17px;height:17px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.swap{font-size:14px;color:var(--ink-secondary);text-align:center;margin-top:20px}
+.swap button{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.legal{font-size:12.5px;color:var(--ink-tertiary);text-align:center;margin-top:24px;line-height:1.55}
+/* ---- account view ---- */
+.acct-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.who{display:flex;align-items:center;gap:16px;margin-top:28px}
+.avatar{width:54px;height:54px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:600;font-size:20px;flex:none}
+.who .nm{font-family:var(--font-display);font-size:20px;font-weight:600;letter-spacing:-.01em}
+.who .em{font-size:14px;color:var(--ink-tertiary);word-break:break-all}
+.panel{background:var(--bg-surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:28px;margin-top:20px}
+@media(max-width:480px){.panel{padding:20px}}
+.panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.panel-head h2{font-family:var(--font-display);font-size:19px;font-weight:600;letter-spacing:-.01em}
+.panel-head .note{font-size:13px;color:var(--ink-tertiary)}
+.state-row{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-secondary)}
+.dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--ink-quaternary)}
+.dot.on{background:var(--accent)}
+.lifetime{display:flex;align-items:center;gap:14px;background:var(--bg-warm);border:1px solid rgba(229,90,63,.16);border-radius:var(--r-md);padding:16px 18px;margin-bottom:20px}
+.lifetime .t{font-weight:600;font-size:15px}
+.lifetime .s{font-size:13.5px;color:var(--ink-secondary)}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.levels{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:380px){.levels{grid-template-columns:1fr}}
+.lv{border:1px solid var(--hairline);border-radius:var(--r-md);padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--bg-canvas)}
+.lv.owned{background:var(--accent-tint);border-color:rgba(31,78,74,.18)}
+.lv-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.lv-code{font-family:var(--font-display);font-size:17px;font-weight:600}
+.lv-state{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-tertiary);display:flex;align-items:center;gap:6px}
+.lv.owned .lv-state{color:var(--accent-deep)}
+.lv-price{font-size:14px;color:var(--ink-secondary)}
+.lv .btn{min-height:44px;font-size:14px;padding:0 16px}
+.acct-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.acct-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid var(--hairline-strong);border-radius:var(--r-sm);font-size:14px;font-weight:500;color:var(--ink-primary)}
+.acct-links a:hover{border-color:rgba(14,14,16,.3);color:var(--ink-primary)}
+.loading{display:flex;align-items:center;gap:12px;color:var(--ink-secondary);font-size:15px;margin-top:32px}
+.spin-dark{width:18px;height:18px;border-radius:50%;border:2px solid rgba(14,14,16,.14);border-top-color:var(--accent);animation:sp .8s linear infinite}
+.offline{font-size:14px;line-height:1.55;color:var(--coral-deep);background:var(--coral-tint);border:1px solid rgba(229,90,63,.22);border-radius:var(--r-sm);padding:12px 14px;margin-top:20px}
+footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:var(--ink-tertiary)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="../index.html"><span class="dot"></span>Klarweg</a>
+    <nav class="topnav" aria-label="Account navigation">
+      <a href="../index.html#pricing">Pricing</a>
+      <a href="saved-words.html">Saved words</a>
+      <a href="../index.html">Home</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- loading -->
+    <div id="view-loading">
+      <p class="loading" role="status" aria-live="polite"><span class="spin-dark" aria-hidden="true"></span> Checking your Klarweg session…</p>
+    </div>
+
+    <!-- signed out: login / signup -->
+    <div id="view-auth" hidden>
+      <div class="auth-wrap">
+        <div style="text-align:center">
+          <p class="eyebrow" id="auth-eyebrow">Klarweg account</p>
+          <h1 id="auth-title">Sign in</h1>
+          <p class="lede" id="auth-lede" style="margin-left:auto;margin-right:auto">Your levels, your access, and your saved words follow your account to any device.</p>
+        </div>
+
+        <!-- LOGIN -->
+        <form class="auth-card" id="form-login" novalidate>
+          <p class="form-err" id="login-error" role="alert"></p>
+          <div class="field" id="f-login-email">
+            <label for="login-email">Email</label>
+            <input id="login-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="login-email-err">
+            <span class="err" id="login-email-err"></span>
+          </div>
+          <div class="field" id="f-login-password">
+            <label for="login-password">Password</label>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required aria-describedby="login-password-err">
+            <span class="err" id="login-password-err"></span>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit" id="login-submit">Sign in</button>
+          <p class="swap">New to Klarweg? <button type="button" data-goto="signup">Create an account</button></p>
+        </form>
+
+        <!-- SIGNUP -->
+        <form class="auth-card" id="form-signup" novalidate hidden>
+          <p class="form-err" id="signup-error" role="alert"></p>
+          <div class="field" id="f-signup-name">
+            <label for="signup-name">Your name</label>
+            <input id="signup-name" name="name" type="text" autocomplete="name" required aria-describedby="signup-name-err">
+            <span class="err" id="signup-name-err"></span>
+          </div>
+          <div class="field" id="f-signup-email">
+            <label for="signup-email">Email</label>
+            <input id="signup-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="signup-email-err">
+            <span class="err" id="signup-email-err"></span>
+          </div>
+          <div class="field" id="f-signup-password">
+            <label for="signup-password">Password</label>
+            <input id="signup-password" name="password" type="password" autocomplete="new-password" required aria-describedby="signup-password-hint signup-password-err">
+            <span class="hint" id="signup-password-hint">At least 8 characters.</span>
+            <span class="err" id="signup-password-err"></span>
+          </div>
+          <div class="field" id="f-signup-confirm">
+            <label for="signup-confirm">Confirm password</label>
+            <input id="signup-confirm" name="confirm" type="password" autocomplete="new-password" required aria-describedby="signup-confirm-err">
+            <span class="err" id="signup-confirm-err"></span>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit" id="signup-submit">Create account</button>
+          <p class="swap">Already have an account? <button type="button" data-goto="login">Sign in</button></p>
+        </form>
+
+        <p class="legal">Chapter 1 of every level stays free, with or without an account. Purchases are one-time and attached to your account.</p>
+      </div>
+    </div>
+
+    <!-- signed in -->
+    <div id="view-account" hidden>
+      <div class="acct-head">
+        <div>
+          <p class="eyebrow">Your account</p>
+          <h1 id="acct-greeting">Your Klarweg access</h1>
+        </div>
+      </div>
+
+      <div class="who">
+        <div class="avatar" id="acct-initial" aria-hidden="true">K</div>
+        <div>
+          <div class="nm" id="acct-name">—</div>
+          <div class="em" id="acct-email">—</div>
+        </div>
+      </div>
+
+      <section class="panel" aria-labelledby="panel-access-title">
+        <div class="panel-head">
+          <h2 id="panel-access-title">Access</h2>
+          <span class="note" id="acct-state-note"></span>
+        </div>
+        <div id="acct-lifetime" class="lifetime" hidden>
+          <div>
+            <div class="t">Lifetime access is active</div>
+            <div class="s">Every chapter of A1 through C2, including chapters added later.</div>
+          </div>
+        </div>
+        <div class="levels" id="acct-levels"></div>
+        <div id="acct-lifetime-offer" hidden style="margin-top:20px">
+          <div class="lifetime" style="justify-content:space-between;flex-wrap:wrap">
+            <div>
+              <div class="t">Klarweg Lifetime — <span id="lifetime-price">₹4,999</span></div>
+              <div class="s">All six levels, A1 → C2. Individually they come to <span id="levels-total">₹30,994</span>.</div>
+            </div>
+            <button class="btn btn-coral" type="button" data-kw-buy="LIFETIME">Get Lifetime Access</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="panel-profile-title">
+        <div class="panel-head"><h2 id="panel-profile-title">Profile</h2></div>
+        <div class="state-row"><span class="dot on"></span> Signed in — session active on this device</div>
+        <div class="acct-links">
+          <a href="saved-words.html">Saved words</a>
+          <a href="review.html">Review</a>
+          <a href="../index.html#pricing">Pricing</a>
+        </div>
+        <div style="margin-top:20px">
+          <button class="btn btn-quiet" type="button" id="btn-logout">Sign out</button>
+        </div>
+      </section>
+    </div>
+
+    <div id="net-error" class="offline" hidden role="alert">
+      We could not reach the Klarweg account service. Your access is unchanged — please check your connection and reload.
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">© <span data-year>2026</span> Klarweg. Passwords are stored hashed on our servers and are never shown back to you.</div>
+</footer>
+
+<script src="../kw-config.js"></script>
+<script src="../kw-products.js"></script>
+<script src="../kw-auth.js"></script>
+<script src="../kw-checkout.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var params = new URLSearchParams(location.search);
+  var nextUrl = params.get('next') || '';
+  var buyAfter = params.get('buy') || '';
+  var LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+
+  /* ---- view switching ---- */
+  function show(view) {
+    ['loading', 'auth', 'account'].forEach(function (v) { $('view-' + v).hidden = v !== view; });
+  }
+  function setMode(mode) {
+    var signup = mode === 'signup';
+    $('form-signup').hidden = !signup;
+    $('form-login').hidden = signup;
+    $('auth-title').textContent = signup ? 'Create your account' : 'Sign in';
+    $('auth-lede').textContent = signup
+      ? 'One account holds your purchases, your progress and your saved words.'
+      : 'Your levels, your access, and your saved words follow your account to any device.';
+    var url = new URL(location.href);
+    url.searchParams.set('mode', signup ? 'signup' : 'login');
+    history.replaceState({}, '', url.toString());
+    var first = (signup ? $('form-signup') : $('form-login')).querySelector('input');
+    if (first) { try { first.focus({ preventScroll: true }); } catch (e) {} }
+  }
+  document.querySelectorAll('[data-goto]').forEach(function (b) {
+    b.addEventListener('click', function () { clearErrors(); setMode(b.getAttribute('data-goto')); });
+  });
+
+  /* ---- form helpers ---- */
+  function clearErrors() {
+    document.querySelectorAll('.field').forEach(function (f) { f.classList.remove('invalid'); });
+    document.querySelectorAll('.field input').forEach(function (i) { i.removeAttribute('aria-invalid'); });
+    document.querySelectorAll('.form-err').forEach(function (p) { p.classList.remove('on'); p.textContent = ''; });
+  }
+  function fieldError(form, field, message) {
+    var wrap = $('f-' + form + '-' + field);
+    if (!wrap) return formError(form, message);
+    wrap.classList.add('invalid');
+    wrap.querySelector('.err').textContent = message;
+    var input = wrap.querySelector('input');
+    input.setAttribute('aria-invalid', 'true');
+    try { input.focus({ preventScroll: true }); } catch (e) {}
+  }
+  function formError(form, message) {
+    var p = $(form + '-error');
+    p.textContent = message;
+    p.classList.add('on');
+  }
+  function busy(btn, on, label) {
+    btn.disabled = on;
+    btn.innerHTML = on
+      ? '<span class="spin" aria-hidden="true"></span>' + (label || 'Working…')
+      : btn.getAttribute('data-label');
+  }
+  ['login-submit', 'signup-submit'].forEach(function (id) {
+    $(id).setAttribute('data-label', $(id).textContent);
+  });
+
+  function afterAuth(state) {
+    if (!state.authenticated) return;
+    if (buyAfter && window.KWProducts && window.KWProducts.get(buyAfter)) {
+      if (nextUrl) { location.href = appendResume(nextUrl, buyAfter); return; }
+      renderAccount(state);
+      show('account');
+      if (window.KWCheckout) window.KWCheckout.start(buyAfter, { resumed: true });
+      return;
+    }
+    if (nextUrl) { location.href = nextUrl; return; }
+    renderAccount(state);
+    show('account');
+  }
+  function appendResume(url, product) {
+    try {
+      var u = new URL(url, location.href);
+      if (u.origin !== location.origin) return url;
+      u.searchParams.set('resume', product);
+      return u.toString();
+    } catch (e) { return url; }
+  }
+
+  /* ---- login ---- */
+  $('form-login').addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearErrors();
+    var btn = $('login-submit');
+    busy(btn, true, 'Signing in…');
+    KWAuth.login({ email: $('login-email').value, password: $('login-password').value })
+      .then(function (state) { busy(btn, false); afterAuth(state); })
+      .catch(function (err) {
+        busy(btn, false);
+        if (err.field) fieldError('login', err.field, err.message);
+        else formError('login', err.message);
+      });
+  });
+
+  /* ---- signup ---- */
+  $('form-signup').addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearErrors();
+    var btn = $('signup-submit');
+    busy(btn, true, 'Creating your account…');
+    KWAuth.signup({
+      name: $('signup-name').value,
+      email: $('signup-email').value,
+      password: $('signup-password').value,
+      confirm: $('signup-confirm').value
+    }).then(function (state) { busy(btn, false); afterAuth(state); })
+      .catch(function (err) {
+        busy(btn, false);
+        if (err.field) fieldError('signup', err.field, err.message);
+        else formError('signup', err.message);
+      });
+  });
+
+  /* ---- logout ---- */
+  $('btn-logout').addEventListener('click', function () {
+    var btn = $('btn-logout');
+    btn.disabled = true;
+    btn.textContent = 'Signing out…';
+    KWAuth.logout().then(function () {
+      btn.disabled = false;
+      btn.textContent = 'Sign out';
+      show('auth');
+      setMode('login');
+    });
+  });
+
+  /* ---- account view ---- */
+  function renderAccount(state) {
+    var u = state.user || {};
+    var name = u.name || 'Learner';
+    $('acct-name').textContent = name;
+    $('acct-email').textContent = u.email || '';
+    $('acct-initial').textContent = (name.trim()[0] || 'K').toUpperCase();
+    $('acct-greeting').textContent = 'Your Klarweg access';
+
+    var owned = LEVELS.filter(function (l) { return state.entitlements[l]; });
+    $('acct-state-note').textContent = state.hasFullAccess
+      ? 'Lifetime — all six levels'
+      : (owned.length ? owned.length + ' of 6 levels unlocked' : 'Chapter 1 of every level is open');
+    $('acct-lifetime').hidden = !state.hasFullAccess;
+    $('acct-lifetime-offer').hidden = state.hasFullAccess;
+
+    var P = window.KWProducts;
+    if (P) {
+      $('lifetime-price').textContent = P.priceLabel('LIFETIME');
+      $('levels-total').textContent = P.LEVEL_TOTAL_LABEL;
+    }
+
+    $('acct-levels').innerHTML = LEVELS.map(function (code) {
+      var has = state.entitlements[code] === true;
+      var price = P ? P.priceLabel(code) : '';
+      return '<div class="lv' + (has ? ' owned' : '') + '">' +
+        '<div class="lv-top"><span class="lv-code">' + code + '</span>' +
+        '<span class="lv-state">' + (has ? 'Unlocked' : 'Locked') + '</span></div>' +
+        (has
+          ? '<a class="lv-price" href="../' + code.toLowerCase() + '.html">Open the ' + code + ' roadmap →</a>'
+          : '<span class="lv-price">' + price + ' one-time</span>' +
+            '<button class="btn btn-quiet" type="button" data-kw-buy="' + code + '">Unlock ' + code + '</button>') +
+        '</div>';
+    }).join('');
+  }
+
+  KWAuth.onChange(function (state) {
+    if (state.authenticated && !$('view-account').hidden) renderAccount(state);
+  });
+
+  /* ---- boot ---- */
+  setMode(params.get('mode') === 'signup' ? 'signup' : 'login');
+  KWAuth.refresh({ force: true }).then(function (state) {
+    $('net-error').hidden = state.error !== 'network';
+    if (state.authenticated) { renderAccount(state); show('account'); if (buyAfter) afterAuth(state); }
+    else show('auth');
+  });
+})();
+</script>
+</body>
+</html>

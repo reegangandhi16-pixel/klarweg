@@ -17,3 +17,6 @@ public/audio/dialogues/*.mp3
 node_modules/
 npm-debug.log*
 .DS_Store
+
+# Cloudflare Wrangler local state
+.wrangler/

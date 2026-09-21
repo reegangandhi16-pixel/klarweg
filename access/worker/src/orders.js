@@ -1,0 +1,188 @@
+import { getProduct } from "./products.js";
+import {
+  getSessionToken,
+  findSessionUser
+} from "./sessions.js";
+
+const CASHFREE_API_VERSION = "2023-08-01";
+const CASHFREE_BASE_URL = "https://sandbox.cashfree.com/pg";
+
+function json(data, status = 200) {
+  return Response.json(data, { status });
+}
+
+function createOrderId() {
+  return `ord_${crypto.randomUUID()}`;
+}
+
+function rupeesFromPaise(amountPaise) {
+  return amountPaise / 100;
+}
+
+export async function createOrder(request, env) {
+  const token = getSessionToken(request);
+  const user = await findSessionUser(env.DB, token);
+
+  if (!user) {
+    return json(
+      { ok: false, error: "Authentication required." },
+      401
+    );
+  }
+
+  let body;
+
+  try {
+    body = await request.json();
+  } catch {
+    return json(
+      { ok: false, error: "Invalid JSON body." },
+      400
+    );
+  }
+
+  const productId =
+    typeof body?.product_id === "string"
+      ? body.product_id.trim().toUpperCase()
+      : "";
+
+  const product = getProduct(productId);
+
+  if (!product) {
+    return json(
+      { ok: false, error: "Invalid product." },
+      400
+    );
+  }
+
+  const orderId = createOrderId();
+  const now = Math.floor(Date.now() / 1000);
+  const amount = rupeesFromPaise(product.amountPaise);
+
+  const existingEntitlement = await env.DB
+    .prepare(
+      `SELECT product_id
+       FROM user_entitlements
+       WHERE user_id = ?1
+         AND product_id = ?2
+       LIMIT 1`
+    )
+    .bind(user.id, product.id)
+    .first();
+
+  if (existingEntitlement) {
+    return json(
+      {
+        ok: false,
+        error: "This product is already owned."
+      },
+      409
+    );
+  }
+
+  const cashfreeResponse = await fetch(
+    `${CASHFREE_BASE_URL}/orders`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-version": CASHFREE_API_VERSION,
+        "x-client-id": env.CASHFREE_APP_ID,
+        "x-client-secret": env.CASHFREE_SECRET_KEY,
+        "x-idempotency-key": crypto.randomUUID()
+      },
+      body: JSON.stringify({
+        order_id: orderId,
+        order_amount: amount,
+        order_currency: "INR",
+        customer_details: {
+          customer_id: user.id,
+          customer_email: user.email,
+          customer_phone: "9999999999",
+          customer_name: user.name || "Klarweg Customer"
+        },
+        order_note: `Klarweg ${product.id}`
+      })
+    }
+  );
+
+  const cashfreeData = await cashfreeResponse.json();
+
+  if (!cashfreeResponse.ok) {
+    return json(
+      {
+        ok: false,
+        error: "Unable to create payment order."
+      },
+      502
+    );
+  }
+
+  const returnedAmountPaise = Math.round(
+    Number(cashfreeData.order_amount) * 100
+  );
+
+  if (
+    cashfreeData.order_id !== orderId ||
+    returnedAmountPaise !== product.amountPaise ||
+    cashfreeData.order_currency !== "INR"
+  ) {
+    return json(
+      {
+        ok: false,
+        error: "Cashfree order validation failed."
+      },
+      502
+    );
+  }
+
+  if (
+    typeof cashfreeData.payment_session_id !== "string" ||
+    cashfreeData.payment_session_id.length === 0
+  ) {
+    return json(
+      {
+        ok: false,
+        error: "Cashfree did not return a payment session."
+      },
+      502
+    );
+  }
+
+  await env.DB
+    .prepare(
+      `INSERT INTO orders (
+        id,
+        user_id,
+        cashfree_order_id,
+        amount_paise,
+        currency,
+        status,
+        payment_id,
+        created_at,
+        updated_at,
+        product_id
+      ) VALUES (?1, ?2, ?3, ?4, 'INR', 'created', NULL, ?5, ?5, ?6)`
+    )
+    .bind(
+      orderId,
+      user.id,
+      orderId,
+      product.amountPaise,
+      now,
+      product.id
+    )
+    .run();
+
+  return json({
+    ok: true,
+    order: {
+      id: orderId,
+      productId: product.id,
+      amountPaise: product.amountPaise,
+      currency: "INR",
+      status: "created"
+    },
+    paymentSessionId: cashfreeData.payment_session_id
+  });
+}

@@ -1,0 +1,15 @@
+name = "klarweg-access"
+
+main = "src/index.js"
+
+compatibility_date = "2024-11-06"
+
+workers_dev = true
+
+[vars]
+CASHFREE_ENV = "sandbox"
+CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
+[[d1_databases]]
+binding = "DB"
+database_name = "klarweg-access"
+database_id = "208a8507-b0ec-48e0-812c-c4aa38c8dd32"

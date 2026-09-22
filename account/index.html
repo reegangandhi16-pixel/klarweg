@@ -263,6 +263,8 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
   var buyAfter = params.get('buy') || '';
   var LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
   var checkoutResumeHandled = false;
+  var loginInFlight = false;
+  var signupInFlight = false;
 
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
@@ -345,12 +347,15 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
   /* ---- login ---- */
   $('form-login').addEventListener('submit', function (e) {
     e.preventDefault();
+    if (loginInFlight) return;
+    loginInFlight = true;
     clearErrors();
     var btn = $('login-submit');
     busy(btn, true, 'Signing in…');
     KWAuth.login({ email: $('login-email').value, password: $('login-password').value })
-      .then(function (state) { busy(btn, false); afterAuth(state); })
+      .then(function (state) { loginInFlight = false; busy(btn, false); afterAuth(state); })
       .catch(function (err) {
+        loginInFlight = false;
         busy(btn, false);
         if (err.field) fieldError('login', err.field, err.message);
         else formError('login', err.message);
@@ -360,6 +365,8 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
   /* ---- signup ---- */
   $('form-signup').addEventListener('submit', function (e) {
     e.preventDefault();
+    if (signupInFlight) return;
+    signupInFlight = true;
     clearErrors();
     var btn = $('signup-submit');
     busy(btn, true, 'Creating your account…');
@@ -368,8 +375,9 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
       email: $('signup-email').value,
       password: $('signup-password').value,
       confirm: $('signup-confirm').value
-    }).then(function (state) { busy(btn, false); afterAuth(state); })
+    }).then(function (state) { signupInFlight = false; busy(btn, false); afterAuth(state); })
       .catch(function (err) {
+        signupInFlight = false;
         busy(btn, false);
         if (err.field) fieldError('signup', err.field, err.message);
         else formError('signup', err.message);

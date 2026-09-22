@@ -133,7 +133,9 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
           <h1 id="auth-title">Sign in</h1>
           <p class="lede" id="auth-lede" style="margin-left:auto;margin-right:auto">Your levels, your access, and your saved words follow your account to any device.</p>
         </div>
-
+<div class="google-auth">
+  <div id="google-signin-button"></div>
+</div>
         <!-- LOGIN -->
         <form class="auth-card" id="form-login" novalidate>
           <p class="form-err" id="login-error" role="alert"></p>
@@ -260,6 +262,7 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
   var nextUrl = params.get('next') || '';
   var buyAfter = params.get('buy') || '';
   var LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+  var checkoutResumeHandled = false;
 
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
@@ -318,6 +321,8 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
   function afterAuth(state) {
     if (!state.authenticated) return;
     if (buyAfter && window.KWProducts && window.KWProducts.get(buyAfter)) {
+      if (checkoutResumeHandled) return;
+      checkoutResumeHandled = true;
       if (nextUrl) { location.href = appendResume(nextUrl, buyAfter); return; }
       renderAccount(state);
       show('account');
@@ -419,7 +424,58 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
         '</div>';
     }).join('');
   }
+function initGoogleSignIn() {
+  var clientId = window.KW_GOOGLE_CLIENT_ID;
+  var target = $('google-signin-button');
 
+  if (!clientId || !target) return;
+
+  function renderGoogleButton() {
+    if (!window.google || !window.google.accounts || !window.google.accounts.id) return;
+
+    window.google.accounts.id.initialize({
+      client_id: clientId,
+      callback: function (response) {
+        clearErrors();
+
+        KWAuth.googleLogin(response.credential)
+          .then(function (state) {
+            afterAuth(state);
+          })
+          .catch(function (err) {
+            formError('login', err.message || 'Google sign-in failed.');
+          });
+      }
+    });
+
+    target.innerHTML = '';
+    window.google.accounts.id.renderButton(target, {
+      type: 'standard',
+      theme: 'outline',
+      size: 'large',
+      text: 'continue_with',
+      shape: 'rectangular',
+      width: 320
+    });
+  }
+
+  if (window.google && window.google.accounts && window.google.accounts.id) {
+    renderGoogleButton();
+    return;
+  }
+
+  var script = document.createElement('script');
+  script.src = [
+    "https://" + "accounts.google.com",
+    '/gsi/client'
+  ].join('');
+  script.async = true;
+  script.defer = true;
+  script.onload = renderGoogleButton;
+  document.head.appendChild(script);
+}
+
+initGoogleSignIn();
   KWAuth.onChange(function (state) {
     if (state.authenticated && !$('view-account').hidden) renderAccount(state);
   });

@@ -1,5 +1,5 @@
 /* ============================================================
-   KLARWEG · AUTHENTICATION + ENTITLEMENT ADAPTER (kw-auth.js)
+    KLARWEG · AUTHENTICATION + ENTITLEMENT ADAPTER (kw-auth.js)
    ------------------------------------------------------------
    The ONLY place the frontend talks to the Access Worker's auth
    surface. Every other file asks this module.
@@ -189,7 +189,20 @@
       .catch(function () { /* the local session is dropped either way */ })
       .then(function () { return refresh({ force: true }); });
   }
+function googleLogin(credential) {
+  if (!credential || typeof credential !== 'string') {
+    return Promise.reject(
+      err('validation', 'Google sign-in credential is missing.')
+    );
+  }
 
+  return request('/auth/google', {
+    method: 'POST',
+    body: { credential: credential }
+  }).then(function () {
+    return refresh({ force: true });
+  });
+}
   /* ---------- validation (mirrors the Worker's rules) ---------- */
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -244,6 +257,7 @@
     signup: signup,
     login: login,
     logout: logout,
+    googleLogin: googleLogin,
     getState: getState,
     isAuthenticated: isAuthenticated,
     hasLevel: hasLevel,

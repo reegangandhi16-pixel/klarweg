@@ -9,6 +9,7 @@ workers_dev = true
 [vars]
 CASHFREE_ENV = "sandbox"
 CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
+GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
 [[d1_databases]]
 binding = "DB"
 database_name = "klarweg-access"

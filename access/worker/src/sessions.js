@@ -58,6 +58,7 @@ export async function findSessionUser(db, token) {
         u.id,
         u.email,
         u.name,
+        u.phone,
         COALESCE(e.has_full_access, 0) AS has_full_access,
         s.expires_at
       FROM sessions s
@@ -78,6 +79,7 @@ export async function findSessionUser(db, token) {
     id: result.id,
     email: result.email,
     name: result.name,
+    phone: result.phone,
     hasFullAccess: Boolean(result.has_full_access),
     expiresAt: result.expires_at
   };

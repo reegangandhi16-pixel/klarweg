@@ -89,6 +89,23 @@ export function normalizeEmail(email) {
   return typeof email === "string" ? email.trim().toLowerCase() : "";
 }
 
+/* Cashfree's customer_phone requirement, per the official Create Order
+   schema: a bare 10-digit number, or a "+"-prefixed international
+   number that overrides the 10-digit limit. Cashfree's docs do not
+   state a minimum/maximum length for the international case — the
+   8-15 digit bound below is a Klarweg sanity check, not a Cashfree
+   requirement. This is format validation only — no uniqueness or
+   other business rule is enforced here. */
+const PHONE_RE = /^(\d{10}|\+\d{8,15})$/;
+
+export function normalizePhone(phone) {
+  return typeof phone === "string" ? phone.trim() : "";
+}
+
+export function isValidPhone(phone) {
+  return PHONE_RE.test(phone);
+}
+
 export function sessionCookie(token, maxAgeSeconds) {
   return [
     `kw_session=${token}`,

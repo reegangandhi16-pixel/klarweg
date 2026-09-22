@@ -8,6 +8,7 @@
      POST /auth/signup   { name, email, password }
      POST /auth/login    { email, password }
      POST /auth/logout
+     POST /auth/phone    { phone }
      GET  /auth/me
 
    SESSION HANDLING — non-negotiable
@@ -58,7 +59,7 @@
     return {
       status: state.status,
       authenticated: state.status === 'authenticated',
-      user: state.user ? { id: state.user.id, email: state.user.email, name: state.user.name } : null,
+      user: state.user ? { id: state.user.id, email: state.user.email, name: state.user.name, phone: state.user.phone || null } : null,
       entitlements: Object.assign({}, state.entitlements),
       hasFullAccess: !!state.hasFullAccess,
       error: state.error,
@@ -90,7 +91,7 @@
     }
     return {
       authenticated: authed,
-      user: authed ? { id: res.user.id, email: res.user.email, name: res.user.name } : null,
+      user: authed ? { id: res.user.id, email: res.user.email, name: res.user.name, phone: res.user.phone || null } : null,
       entitlements: ent,
       hasFullAccess: authed && full
     };
@@ -203,8 +204,33 @@ function googleLogin(credential) {
     return refresh({ force: true });
   });
 }
+
+  /* Saves the phone number on the CURRENT signed-in account — required
+     by Cashfree before checkout can create an order. Server-authoritative:
+     this only ever updates the account matching the session cookie. */
+  function updatePhone(phone) {
+    var v = validatePhone({ phone: phone });
+    if (v) return Promise.reject(err('validation', v.message, 0, v.field));
+    return request('/auth/phone', {
+      method: 'POST',
+      body: { phone: phone.trim() }
+    }).then(function () {
+      return refresh({ force: true });
+    });
+  }
+
   /* ---------- validation (mirrors the Worker's rules) ---------- */
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var PHONE_RE = /^(\d{10}|\+\d{8,15})$/;
+
+  function validatePhone(i) {
+    i = i || {};
+    var p = typeof i.phone === 'string' ? i.phone.trim() : '';
+    if (!p || !PHONE_RE.test(p)) {
+      return { field: 'phone', message: 'Enter a valid phone number — 10 digits, or an international number starting with +.' };
+    }
+    return null;
+  }
 
   function validateSignup(i) {
     i = i || {};
@@ -232,6 +258,7 @@ function googleLogin(credential) {
     return state.entitlements[k] === true;
   }
   function ownedLevels() { return LEVELS.filter(hasLevel); }
+  function hasPhone() { return !!(state.user && PHONE_RE.test(state.user.phone || '')); }
   function onChange(fn) {
     if (typeof fn === 'function') listeners.push(fn);
     return function () { listeners = listeners.filter(function (f) { return f !== fn; }); };
@@ -258,13 +285,16 @@ function googleLogin(credential) {
     login: login,
     logout: logout,
     googleLogin: googleLogin,
+    updatePhone: updatePhone,
     getState: getState,
     isAuthenticated: isAuthenticated,
     hasLevel: hasLevel,
     ownedLevels: ownedLevels,
+    hasPhone: hasPhone,
     onChange: onChange,
     accountUrl: accountUrl,
     validateSignup: validateSignup,
-    validateLogin: validateLogin
+    validateLogin: validateLogin,
+    validatePhone: validatePhone
   };
 })(window);

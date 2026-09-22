@@ -5,7 +5,9 @@ import {
   sessionCookie,
   verifyPassword,
   clearSessionCookie,
-  normalizeEmail
+  normalizeEmail,
+  normalizePhone,
+  isValidPhone
 } from "./auth.js";
 
 import {
@@ -16,7 +18,7 @@ import {
   revokeSession
 } from "./sessions.js";
 
-import { createUser, findUserByEmail, findUserByGoogleSub, createGoogleUser } from "./users.js";
+import { createUser, findUserByEmail, findUserByGoogleSub, createGoogleUser, updateUserPhone } from "./users.js";
 import { verifyGoogleIdToken } from "./google-auth.js";
 import { readEntitlements } from "./entitlements.js";
 import { createUserId } from "./user-id.js";
@@ -173,7 +175,8 @@ export async function login(request, env) {
       user: {
         id: user.id,
         email: user.email,
-        name: user.name
+        name: user.name,
+        phone: user.phone || null
       }
     }),
     {
@@ -256,7 +259,8 @@ export async function googleLogin(request, env) {
       user: {
         id: user.id,
         email: user.email,
-        name: user.name
+        name: user.name,
+        phone: user.phone || null
       }
     }),
     {
@@ -309,9 +313,56 @@ export async function me(request, env) {
     user: {
       id: user.id,
       email: user.email,
-      name: user.name
+      name: user.name,
+      phone: user.phone || null
     },
     hasFullAccess: user.hasFullAccess,
     entitlements
+  });
+}
+
+/* Updates the phone number on the CURRENT authenticated user's own
+   account only — the user id always comes from the session, never
+   from the request body, so a client cannot target another account.
+   Does not touch email, name, google_sub or password. No uniqueness
+   is enforced (none was required). Cashfree's customer_phone is a
+   required field on order creation (verified against the official
+   Create Order schema), so orders.js depends on this being set — a
+   missing/invalid phone must produce a clear error here, never a
+   silent fake value. */
+export async function updatePhone(request, env) {
+  const token = getSessionToken(request);
+  const user = await findSessionUser(env.DB, token);
+
+  if (!user) {
+    return json(
+      { ok: false, error: "Authentication required." },
+      401
+    );
+  }
+
+  const body = await readJson(request);
+  const phone = normalizePhone(body?.phone);
+
+  if (!isValidPhone(phone)) {
+    return json(
+      {
+        ok: false,
+        error: "Enter a valid phone number — 10 digits, or an international number starting with +."
+      },
+      400
+    );
+  }
+
+  await updateUserPhone(env.DB, user.id, phone);
+
+  return json({
+    ok: true,
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      phone
+    }
   });
 }

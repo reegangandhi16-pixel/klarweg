@@ -1,5 +1,5 @@
 import { corsHeaders, withCors } from "./cors.js";
-import { signup, login, googleLogin, logout, me } from "./auth-routes.js";
+import { signup, login, googleLogin, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
 function json(data, status = 200) {
@@ -54,6 +54,10 @@ export default {
 if (request.method === "GET" && url.pathname === "/auth/me") {
   return withCors(await me(request, env), request);
 }
+
+    if (request.method === "POST" && url.pathname === "/auth/phone") {
+      return withCors(await updatePhone(request, env), request);
+    }
     if (request.method === "GET" && url.pathname === "/") {
       return withCors(
         json({

@@ -67,6 +67,10 @@
     '.kwco-body{font-size:15px;line-height:1.6;color:var(--ink-secondary,#5A5A60);margin:12px 0 0;text-wrap:pretty}',
     '.kwco-line{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-top:24px;padding-top:16px;border-top:1px solid rgba(14,14,16,.08);font-size:14px;color:var(--ink-secondary,#5A5A60)}',
     '.kwco-amount{font-family:var(--font-display,Fraunces,Georgia,serif);font-size:24px;font-weight:500;color:var(--ink-primary,#0E0E10)}',
+    '.kwco-field{margin-top:20px}',
+    '.kwco-field label{display:block;font-size:13px;font-weight:600;color:var(--ink-primary,#0E0E10);margin-bottom:6px}',
+    '.kwco-field input{width:100%;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid rgba(14,14,16,.16);font-size:15px;font-family:inherit;box-sizing:border-box;color:var(--ink-primary,#0E0E10);background:var(--bg-surface,#FFFFFF)}',
+    '.kwco-field input:focus-visible{outline:2px solid var(--accent,#1F4E4A);outline-offset:1px}',
     '.kwco-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}',
     '.kwco-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;border:1px solid transparent;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;text-decoration:none;transition:transform 240ms cubic-bezier(.16,1,.3,1),box-shadow 240ms cubic-bezier(.16,1,.3,1),background-color 150ms linear}',
     '.kwco-btn:hover{transform:translateY(-1px)}',
@@ -156,6 +160,7 @@
   }
 
   /* view: { eyebrow, title, body, mark, amount, amountLabel, error, note,
+            field:{id,label,type,placeholder,autocomplete,value},
             actions:[{label, kind, onClick, href}], busy, dismissible } */
   function render(view) {
     var d = open();
@@ -168,6 +173,13 @@
     if (view.amountLabel) {
       html += '<div class="kwco-line"><span>' + esc(view.amountFor || 'One-time payment') + '</span>' +
               '<span class="kwco-amount">' + esc(view.amountLabel) + '</span></div>';
+    }
+    if (view.field) {
+      html += '<div class="kwco-field"><label for="' + esc(view.field.id) + '">' + esc(view.field.label) + '</label>' +
+              '<input id="' + esc(view.field.id) + '" type="' + esc(view.field.type || 'text') + '"' +
+              (view.field.placeholder ? ' placeholder="' + esc(view.field.placeholder) + '"' : '') +
+              (view.field.autocomplete ? ' autocomplete="' + esc(view.field.autocomplete) + '"' : '') +
+              ' value="' + esc(view.field.value || '') + '"></div>';
     }
     if (view.error) html += '<p class="kwco-err" role="alert">' + esc(view.error) + '</p>';
     if (view.busy) {
@@ -188,7 +200,7 @@
       var btn = d.card.querySelector('[data-act="' + i + '"]');
       if (btn && a.onClick) btn.addEventListener('click', a.onClick);
     });
-    var focusable = d.card.querySelector('.kwco-btn') || d.card;
+    var focusable = (view.field && d.card.querySelector('#' + view.field.id)) || d.card.querySelector('.kwco-btn') || d.card;
     try { focusable.focus({ preventScroll: true }); } catch (e) {}
     return d;
   }
@@ -369,7 +381,63 @@
     });
   }
 
+  /* Cashfree requires a phone number on every order (verified against
+     the official Create Order schema). Klarweg never had a phone field
+     until now, so any account — password or Google, new or existing —
+     may still have none on file. Gate here, once, right before the
+     order is actually created; accounts that already have a valid
+     phone see no extra step. */
   function begin(product) {
+    var A = auth();
+    if (!A.hasPhone()) return collectPhone(product);
+    beginOrder(product);
+  }
+
+  function collectPhone(product, fieldError) {
+    render({
+      eyebrow: product.tier,
+      title: 'Add a phone number',
+      body: 'Cashfree, our payment partner, requires a phone number to process this payment securely. It is saved to your Klarweg account.',
+      field: {
+        id: 'kwco-phone',
+        label: 'Phone number',
+        type: 'tel',
+        placeholder: '9876543210',
+        autocomplete: 'tel',
+        value: ''
+      },
+      error: fieldError || null,
+      actions: [
+        { label: 'Continue to payment', kind: 'primary', onClick: function () { submitPhone(product); } },
+        { label: 'Cancel', onClick: close }
+      ],
+      dismissible: true
+    });
+  }
+
+  function submitPhone(product) {
+    var A = auth();
+    var input = doc.getElementById('kwco-phone');
+    var phone = input ? input.value : '';
+    var v = A.validatePhone({ phone: phone });
+    if (v) return collectPhone(product, v.message);
+
+    render({
+      eyebrow: product.tier,
+      title: product.name,
+      body: 'Saving your phone number.',
+      busy: 'One moment',
+      dismissible: false
+    });
+
+    A.updatePhone(phone).then(function () {
+      beginOrder(product);
+    }).catch(function (e) {
+      collectPhone(product, e && e.message ? e.message : 'Could not save your phone number.');
+    });
+  }
+
+  function beginOrder(product) {
     render({
       eyebrow: product.tier,
       title: product.name,

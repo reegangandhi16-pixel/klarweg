@@ -261,6 +261,19 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
   var params = new URLSearchParams(location.search);
   var nextUrl = params.get('next') || '';
   var buyAfter = params.get('buy') || '';
+  /* Cashfree appends order_id to return_url after a redirect-based
+     payment (per Cashfree's Web Checkout docs). The value in the URL
+     is never trusted as proof of payment — KWCheckout.pollOrder()
+     re-asks the Worker, exactly as the in-page modal flow already
+     does. Stripped from the visible URL immediately either way. */
+  var orderIdParam = params.get('order_id') || '';
+  if (orderIdParam) {
+    try {
+      var _returnUrl = new URL(location.href);
+      _returnUrl.searchParams.delete('order_id');
+      history.replaceState({}, '', _returnUrl.toString());
+    } catch (e) {}
+  }
   var LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
   var checkoutResumeHandled = false;
   var loginInFlight = false;
@@ -488,11 +501,58 @@ initGoogleSignIn();
     if (state.authenticated && !$('view-account').hidden) renderAccount(state);
   });
 
+  /* Minimal Cashfree-return handling: reuses the existing checkout
+     dialog (KWCheckout.render) and the existing server-verified
+     status check (KWCheckout.pollOrder → GET /orders/:id). Does not
+     introduce a new verification path and never trusts the redirect
+     itself — pollOrder remains the sole source of truth. */
+  function resumeOrderReturn(orderId) {
+    if (!window.KWCheckout) return;
+    window.KWCheckout.render({
+      title: 'Confirming your payment',
+      body: 'We are checking this payment with the bank. This usually takes a few seconds.',
+      busy: 'Verifying with Klarweg',
+      dismissible: false
+    });
+    window.KWCheckout.pollOrder(orderId).then(function (status) {
+      if (status === 'paid' || status === 'confirming') {
+        KWAuth.refresh({ force: true }).then(function (s) {
+          renderAccount(s);
+          window.KWCheckout.render({
+            mark: 'ok', markTone: 'ok',
+            title: 'Payment confirmed',
+            body: 'Your access has been updated.',
+            actions: [{ label: 'Continue', kind: 'primary', onClick: window.KWCheckout.close }]
+          });
+        });
+      } else if (status === 'failed' || status === 'cancelled') {
+        window.KWCheckout.render({
+          mark: 'alert', markTone: 'warn',
+          title: 'Payment not completed',
+          body: 'No access was granted. If any amount was debited, your bank returns it automatically.',
+          actions: [{ label: 'Close', onClick: window.KWCheckout.close }]
+        });
+      } else {
+        window.KWCheckout.render({
+          mark: 'clock',
+          title: 'Still processing',
+          body: 'Your payment is still being confirmed. Access will open automatically once it clears.',
+          actions: [{ label: 'Close', onClick: window.KWCheckout.close }],
+          note: 'Order reference ' + orderId + '.'
+        });
+      }
+    });
+  }
+
   /* ---- boot ---- */
   setMode(params.get('mode') === 'signup' ? 'signup' : 'login');
   KWAuth.refresh({ force: true }).then(function (state) {
     $('net-error').hidden = state.error !== 'network';
-    if (state.authenticated) { renderAccount(state); show('account'); if (buyAfter) afterAuth(state); }
+    if (state.authenticated) {
+      renderAccount(state); show('account');
+      if (buyAfter) afterAuth(state);
+      else if (orderIdParam) resumeOrderReturn(orderIdParam);
+    }
     else show('auth');
   });
 })();

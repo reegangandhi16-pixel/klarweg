@@ -1,8 +1,14 @@
 import { getProduct } from "./products.js";
+import { isValidPhone } from "./auth.js";
 import {
   getSessionToken,
   findSessionUser
 } from "./sessions.js";
+
+/* Klarweg is served as a GitHub Pages project site from this repo
+   (github.com/reegangandhi16-pixel/klarweg) — not a <user>.github.io
+   root repo — so the published base path includes /klarweg/. */
+const SITE_BASE_URL = "https://reegangandhi16-pixel.github.io/klarweg";
 
 const CASHFREE_API_VERSION = "2023-08-01";
 const CASHFREE_BASE_URL = "https://sandbox.cashfree.com/pg";
@@ -80,6 +86,20 @@ export async function createOrder(request, env) {
     );
   }
 
+  /* Cashfree's customer_phone is a required field on Create Order
+     (verified against the official API schema). Klarweg has no fake
+     fallback for it — if the authenticated user has not saved a valid
+     phone yet (see POST /auth/phone), the order cannot be created. */
+  if (!isValidPhone(user.phone)) {
+    return json(
+      {
+        ok: false,
+        error: "A valid phone number is required before checkout. Please add one to your account."
+      },
+      400
+    );
+  }
+
   const cashfreeResponse = await fetch(
     `${CASHFREE_BASE_URL}/orders`,
     {
@@ -98,10 +118,29 @@ export async function createOrder(request, env) {
         customer_details: {
           customer_id: user.id,
           customer_email: user.email,
-          customer_phone: "9999999999",
+          customer_phone: user.phone,
           customer_name: user.name || "Klarweg Customer"
         },
-        order_note: `Klarweg ${product.id}`
+        order_note: product.name,
+        cart_details: {
+          cart_items: [
+            {
+              item_id: product.id,
+              item_name: product.name,
+              item_quantity: 1,
+              item_original_unit_price: amount,
+              item_currency: "INR"
+            }
+          ]
+        },
+        order_meta: {
+          // Cashfree redirects here after payment and appends the order
+          // id itself as the query parameter "order_id" (per Cashfree's
+          // Web Checkout docs). The literal "{order_id}" placeholder
+          // must stay a plain string, not a template interpolation of
+          // the orderId variable above.
+          return_url: SITE_BASE_URL + "/account/index.html?order_id={order_id}"
+        }
       })
     }
   );

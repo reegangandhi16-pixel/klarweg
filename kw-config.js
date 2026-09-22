@@ -16,4 +16,4 @@
   if (typeof global.KW_ACCESS_API === 'string' && global.KW_ACCESS_API) return;
   global.KW_ACCESS_API = 'https://klarweg-access.klarweg-issue-reports-2026.workers.dev';
 })(window);
-global.KW_GOOGLE_CLIENT_ID = '584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com';
+window.KW_GOOGLE_CLIENT_ID = '584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com';

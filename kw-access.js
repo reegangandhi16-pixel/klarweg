@@ -105,6 +105,23 @@
   var entitlementSource = null;   // see configureEntitlementSource()
   var listeners = [];
 
+  /* ---------- Readiness ----------
+     Resolves once, the first time the entitlement source has actually
+     answered (success or failure — "never fail open" still applies to
+     the state itself; ready() only reports that a real answer, not the
+     default-anonymous placeholder, is now in state). Callers that must
+     not render before the server-authoritative access decision is known
+     (e.g. a chapter page) await KWAccess.ready() before checking access. */
+  var readyResolve = null;
+  var readyResolved = false;
+  var readyPromise = new Promise(function (resolve) { readyResolve = resolve; });
+  function resolveReady(snap) {
+    if (readyResolved) return;
+    readyResolved = true;
+    readyResolve(snap);
+  }
+  function ready() { return readyPromise; }
+
   function snapshot() {
     return {
       authenticated: !!state.authenticated,
@@ -188,10 +205,16 @@
     if (!entitlementSource) return Promise.resolve(snapshot());
     return Promise.resolve()
       .then(function () { return entitlementSource.fetchEntitlement(); })
-      .then(function (res) { return setState(readEntitlements(res), 'server'); })
+      .then(function (res) {
+        var snap = setState(readEntitlements(res), 'server');
+        resolveReady(snap);
+        return snap;
+      })
       .catch(function () {
         // Never fail open.
-        return setState(readEntitlements(null), 'server-unavailable');
+        var snap = setState(readEntitlements(null), 'server-unavailable');
+        resolveReady(snap);
+        return snap;
       });
   }
 
@@ -400,9 +423,11 @@
   function guardChapterPage(chapterData, options) {
     options = options || {};
     var ref = parseChapterRef(chapterData);
-    // Unknown chapter shape → do not lock a learner out by accident.
-    if (!ref.level || !ref.number) return true;
-    if (canAccessChapter(ref.level, ref.number)) return true;
+    // Fail CLOSED, not open: a chapter we cannot identify is a chapter we
+    // cannot prove is free or entitled. renderLockedChapter() below
+    // tolerates a missing level/number (falls back to 'a1' / omits the
+    // chapter number in the eyebrow), so this stays visually safe.
+    if (ref.level && ref.number && canAccessChapter(ref.level, ref.number)) return true;
 
     var prefix = options.prefix == null ? '../' : options.prefix;
     var removeSelectors = options.remove || ['#story-stage', '#dashboard'];
@@ -436,7 +461,7 @@
      ============================================================ */
   function bootstrap() {
     function wire() {
-      if (!global.KWAuth) return;
+      if (!global.KWAuth) { resolveReady(snapshot()); return; }
       configureEntitlementSource({
         fetchEntitlement: function () {
           return global.KWAuth.refresh().then(function (s) {
@@ -463,7 +488,10 @@
       .then(function () { return loadScript(siblingUrl('kw-products.js')).catch(function () {}); })
       .then(function () { return loadScript(siblingUrl('kw-auth.js')); })
       .then(wire)
-      .catch(function () { /* stays anonymous — never fails open */ });
+      .catch(function () {
+        /* stays anonymous — never fails open */
+        resolveReady(snapshot());
+      });
   }
 
   var API = {
@@ -480,6 +508,7 @@
     onAccessChange: onAccessChange,
     configureEntitlementSource: configureEntitlementSource,
     refresh: refresh,
+    ready: ready,
     onUnlockRequested: onUnlockRequested,
     requestUnlock: requestUnlock,
     buy: buy,

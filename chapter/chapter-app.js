@@ -4765,8 +4765,70 @@
     document.addEventListener('click', (e) => { if (acct && !acct.contains(e.target)) { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
   }
 
+  /* ---------- access-control integration ---------- */
+  // True only for the 259 real, numbered learner chapter pages
+  // (filenames like chapter-a1-1-alphabet.html). QA/probe/scaffolding
+  // pages (qa-*.html, _standalone-*.html, WORD-POPUP-AUDIT.html, etc.)
+  // never match this — they are internal tooling, not paywalled
+  // content, and keep rendering exactly as before even without
+  // kw-access.js loaded.
+  function isProtectedChapterPage() {
+    var file = String((window.location && window.location.pathname) || '').split('/').pop() || '';
+    return /^chapter-(a1|a2|b1|b2|c1|c2)-\d+-/i.test(file);
+  }
+
+  // Fail-CLOSED fallback for a real chapter page when kw-access.js itself
+  // never loaded/executed (network failure, blocked script, CDN outage).
+  // kw-access.js's own locked screen is unavailable for the same reason,
+  // so this is a minimal, self-contained "try again" state — never a
+  // silent render of protected content.
+  function renderAccessUnavailable() {
+    ['#story-stage', '#dashboard'].forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (n) { n.remove(); });
+    });
+    var el = document.createElement('main');
+    el.setAttribute('role', 'main');
+    el.style.cssText = 'display:flex;align-items:center;justify-content:center;min-height:60vh;padding:64px 24px;text-align:center;font-family:system-ui,sans-serif;';
+    el.innerHTML =
+      '<div style="max-width:420px">' +
+        '<h1 style="font-size:22px;margin:0 0 12px">Access check unavailable</h1>' +
+        '<p style="font-size:15px;line-height:1.6;color:#5A5A60;margin:0 0 20px">We could not verify your access to this chapter. Please check your connection and try again.</p>' +
+        '<button type="button" onclick="location.reload()" style="min-height:44px;padding:0 20px;border-radius:8px;border:1px solid rgba(14,14,16,.16);background:transparent;cursor:pointer;font-size:14px">Try again</button>' +
+      '</div>';
+    document.body.appendChild(el);
+    document.title = 'Access Unavailable · Klarweg';
+  }
+
   /* ---------- init ---------- */
+  // When kw-access.js is present on the page, its first entitlement
+  // resolution (server-authoritative, via the existing KWAuth.refresh()
+  // flow) must land before any chapter content renders — otherwise a
+  // paying learner would see a flash of default-anonymous state. Reusing
+  // KWAccess.ready() costs no extra /auth/me request: it resolves off the
+  // same refresh() call kw-access.js's own bootstrap already triggers.
+  // If access is denied, guardChapterPage() has already shown the locked
+  // screen and rendering must not proceed.
+  //
+  // If KWAccess is missing entirely, that means one of two things:
+  //   - this is a QA/probe/scaffolding page, which never carries
+  //     kw-access.js and is not paywalled content → render as before.
+  //   - this is a real chapter page whose access-control script failed
+  //     to load → fail CLOSED, never render protected content.
   function init() {
+    if (window.KWAccess && typeof window.KWAccess.ready === 'function') {
+      window.KWAccess.ready().then(function () {
+        if (window.KWAccess.guardChapterPage(C)) renderChapter();
+      });
+      return;
+    }
+    if (isProtectedChapterPage()) {
+      renderAccessUnavailable();
+      return;
+    }
+    renderChapter();
+  }
+
+  function renderChapter() {
     renderStory();
     renderHeader();
     renderNav();

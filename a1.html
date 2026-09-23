@@ -202,9 +202,68 @@ section { padding: 88px 0; }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 .nav-login { font-size: 14px; color: var(--ink-secondary); font-weight: 500; transition: color var(--dur-fast) var(--ease); }
 .nav-login:hover { color: var(--ink-primary); }
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin-left: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-hamburger-bar { display: block; width: 20px; height: 2px; background: var(--ink-primary); border-radius: 2px; }
+.nav-hamburger:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
+.mobile-nav-overlay {
+  position: fixed; inset: 0; background: rgba(14, 14, 16, 0.45); z-index: 90;
+}
+.mobile-nav {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 86vw);
+  background: var(--bg-surface); z-index: 91; box-shadow: -8px 0 32px rgba(14, 14, 16, 0.16);
+  display: flex; flex-direction: column; padding: 20px; overflow-y: auto;
+  box-sizing: border-box;
+}
+.mobile-nav-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.mobile-nav-logo { font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--ink-primary); }
+.mobile-nav-close {
+  width: 44px; height: 44px; border: none; background: transparent; font-size: 18px;
+  color: var(--ink-secondary); cursor: pointer; border-radius: 8px;
+}
+.mobile-nav-close:hover { background: var(--bg-elevated); color: var(--ink-primary); }
+.mobile-nav-close:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
+.mobile-nav-links { display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; }
+.mobile-nav-links a {
+  padding: 12px 10px; font-size: 16px; font-weight: 500; color: var(--ink-primary);
+  border-radius: 8px; min-height: 44px; display: flex; align-items: center; box-sizing: border-box;
+}
+.mobile-nav-links a:hover, .mobile-nav-links a:focus-visible, .mobile-nav-links a.active { background: var(--bg-elevated); }
+.mobile-nav-links a:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: -2px; }
+.mobile-nav-actions {
+  display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 20px;
+  border-top: 1px solid var(--hairline-light);
+}
+.mobile-nav-actions a {
+  min-height: 44px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+}
+.mobile-nav-actions .nav-login { border: 1px solid var(--hairline-light); border-radius: var(--r-full); }
+/* .mobile-nav/-overlay set their own `display`, which has the same
+   specificity as the UA stylesheet's [hidden]{display:none} — without
+   this override an author `display` rule wins the cascade and the
+   "hidden" drawer stays rendered (and clickable) on top of the page. */
+.mobile-nav[hidden], .mobile-nav-overlay[hidden] { display: none; }
+body.mobile-nav-open { overflow: hidden; }
 @media (max-width: 768px) {
   .nav-inner { padding: 12px 20px; }
   .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+}
+@media (min-width: 769px) {
+  .mobile-nav-overlay, .mobile-nav { display: none !important; }
 }
 
 /* ============================================================
@@ -1080,9 +1139,35 @@ footer {
       <a href="index.html#how">Method</a>
       <a href="#pricing">Pricing</a>
     </div>
-    <div class="nav-actions"><a href="account/index.html" class="nav-login" id="nav-login-link">Log in</a><a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Begin free</a></div>
+    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link">Log in</a><a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Begin free</a></div>
+    <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+    </button>
   </div>
 </nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay" hidden></div>
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-logo">Klarweg</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+  </div>
+  <nav class="mobile-nav-links" aria-label="Mobile navigation">
+    <a href="a1.html" class="active">A1</a>
+    <a href="a2.html">A2</a>
+    <a href="b1.html">B1</a>
+    <a href="b2.html">B2</a>
+    <a href="c1.html">C1</a>
+    <a href="c2.html">C2</a>
+    <a href="index.html#how">Method</a>
+    <a href="#pricing">Pricing</a>
+  </nav>
+  <div class="mobile-nav-actions">
+    <a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile">Log in</a>
+    <a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Begin free</a>
+  </div>
+</div>
 
 <main>
 
@@ -1575,21 +1660,80 @@ function wireReveals() {
 }
 wireReveals();
 
-/* Roadmap-header login/account link. account/index.html already
-   renders login vs account-overview based on real session state, so
-   only the LABEL needs to reflect auth state here — the destination
-   stays the same either way. Reuses KWAuth exactly as account/index.html
-   does; kw-auth.js is already loaded above, synchronously, before this
-   script runs, so window.KWAuth is guaranteed present. */
+/* Roadmap-header login/account link (header + mobile-drawer copies).
+   account/index.html already renders login vs account-overview based
+   on real session state, so only the LABEL needs to reflect auth state
+   here — the destination stays the same either way. Reuses KWAuth
+   exactly as account/index.html does; kw-auth.js is already loaded
+   above, synchronously, before this script runs, so window.KWAuth is
+   guaranteed present. */
 (function () {
-  var link = document.getElementById('nav-login-link');
-  if (!link || !window.KWAuth) return;
+  var links = document.querySelectorAll('.js-nav-login');
+  if (!links.length || !window.KWAuth) return;
   function render(s) {
-    link.textContent = (s && s.authenticated) ? 'My account' : 'Log in';
+    var label = (s && s.authenticated) ? 'My account' : 'Log in';
+    links.forEach(function (l) { l.textContent = label; });
   }
   render(KWAuth.getState());
   KWAuth.onChange(render);
   KWAuth.refresh();
+})();
+
+/* Mobile hamburger menu. Accessible drawer: focus moves in on open and
+   returns to the trigger on close, Escape closes, backdrop click
+   closes, Tab is trapped inside while open, background scroll is
+   blocked. Desktop nav is untouched — this only ever shows at the
+   .nav-hamburger media breakpoint above. */
+(function () {
+  var btn = document.getElementById('nav-hamburger');
+  var panel = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-nav-overlay');
+  var closeBtn = document.getElementById('mobile-nav-close');
+  if (!btn || !panel || !overlay) return;
+  var lastFocused = null;
+
+  function focusable() {
+    return Array.prototype.slice.call(
+      panel.querySelectorAll('a[href], button:not([disabled])')
+    );
+  }
+  function openMenu() {
+    lastFocused = document.activeElement;
+    panel.hidden = false;
+    overlay.hidden = false;
+    document.body.classList.add('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'true');
+    var items = focusable();
+    if (items.length) items[0].focus();
+  }
+  function closeMenu() {
+    panel.hidden = true;
+    overlay.hidden = true;
+    document.body.classList.remove('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'false');
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+  btn.addEventListener('click', function () {
+    if (panel.hidden) openMenu(); else closeMenu();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function (e) {
+    if (panel.hidden) return;
+    if (e.key === 'Escape') { closeMenu(); return; }
+    if (e.key === 'Tab') {
+      var items = focusable();
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  // Resizing past the desktop breakpoint while open shouldn't leave the
+  // drawer stuck open with body scroll locked.
+  window.addEventListener('resize', function () {
+    if (!panel.hidden && window.innerWidth > 768) closeMenu();
+  });
 })();
 </script>
 

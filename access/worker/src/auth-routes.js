@@ -22,6 +22,7 @@ import { createUser, findUserByEmail, findUserByGoogleSub, createGoogleUser, upd
 import { verifyGoogleIdToken } from "./google-auth.js";
 import { readEntitlements } from "./entitlements.js";
 import { createUserId } from "./user-id.js";
+import { checkLoginLimit, recordLoginFailure } from "./ratelimit.js";
 
 const SESSION_COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 const GOOGLE_NONCE_TTL_SECONDS = 60 * 5;
@@ -253,6 +254,14 @@ export async function signup(request, env) {
 }
 
 export async function login(request, env) {
+  const limit = await checkLoginLimit(env, request);
+  if (!limit.ok) {
+    return json(
+      { ok: false, error: "Too many attempts. Please try again shortly." },
+      429
+    );
+  }
+
   const body = await readJson(request);
 
   if (
@@ -278,6 +287,7 @@ export async function login(request, env) {
       hash: user.password_hash
     }))
   ) {
+    await recordLoginFailure(env, request);
     return json(
       { ok: false, error: "Invalid email or password." },
       401

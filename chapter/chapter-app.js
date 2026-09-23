@@ -4811,14 +4811,48 @@
   function setupAccountMenu() {
     const btn = $('#acct-btn'), menu = $('#acct-menu'), acct = $('#acct');
     if (!btn || !menu) return;
-    if (window.KW_Account) {
-      const u = KW_Account.User.get();
-      const initial = (u.name || 'L').trim().charAt(0).toUpperCase();
-      const av = $('#acct-avatar'); if (av) av.textContent = initial;
-      const nm = $('#acct-menu-name'); if (nm) nm.textContent = u.name || 'Learner';
-      const em = $('#acct-menu-email'); if (em) em.textContent = u.email || 'on this device';
-      refreshSavedCount();
+    refreshSavedCount(); // Saved Words badge is localStorage-based, independent of login state
+
+    // Real session state (server-authoritative), not the pre-auth
+    // "device learner" placeholder KW_Account.User was built as before
+    // real auth existed. Mirrors the render pattern account/index.html
+    // already uses for KWAuth.onChange — no second auth system.
+    function renderAuthState(s) {
+      const av = $('#acct-avatar'), nm = $('#acct-menu-name'), em = $('#acct-menu-email');
+      if (s && s.authenticated && s.user) {
+        const label = s.user.name || s.user.email || 'Learner';
+        if (av) av.textContent = label.trim().charAt(0).toUpperCase();
+        if (nm) nm.textContent = s.user.name || s.user.email;
+        if (em) em.textContent = s.user.email || '';
+      } else {
+        if (av) av.textContent = 'G';
+        if (nm) nm.textContent = 'Guest';
+        if (em) em.textContent = 'Log in from Profile';
+      }
     }
+    // kw-access.js (already loaded on every chapter page) lazily loads
+    // kw-auth.js itself; KWAccess.ready() resolves only once that wiring
+    // has completed, so window.KWAuth is guaranteed present by then —
+    // the same wait this file already relies on for chapter locking.
+    if (window.KWAccess && typeof KWAccess.ready === 'function') {
+      KWAccess.ready().then(() => {
+        if (window.KWAuth) {
+          renderAuthState(KWAuth.getState());
+          KWAuth.onChange(renderAuthState);
+        } else if (window.KW_Account) {
+          const u = KW_Account.User.get();
+          const av = $('#acct-avatar'); if (av) av.textContent = (u.name || 'G').trim().charAt(0).toUpperCase();
+          const nm = $('#acct-menu-name'); if (nm) nm.textContent = u.name || 'Guest';
+          const em = $('#acct-menu-email'); if (em) em.textContent = u.email || '';
+        }
+      });
+    } else if (window.KW_Account) {
+      const u = KW_Account.User.get();
+      const av = $('#acct-avatar'); if (av) av.textContent = (u.name || 'G').trim().charAt(0).toUpperCase();
+      const nm = $('#acct-menu-name'); if (nm) nm.textContent = u.name || 'Guest';
+      const em = $('#acct-menu-email'); if (em) em.textContent = u.email || '';
+    }
+
     btn.addEventListener('click', (e) => { e.stopPropagation(); const open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', open); });
     document.addEventListener('click', (e) => { if (acct && !acct.contains(e.target)) { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
   }

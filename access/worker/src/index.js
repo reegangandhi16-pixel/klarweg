@@ -20,7 +20,7 @@ function handleOptions(request) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     if (request.method === "OPTIONS") {
@@ -41,7 +41,7 @@ export default {
     }
 
     if (request.method === "POST" && url.pathname === "/auth/login") {
-      return withCors(await login(request, env), request);
+      return withCors(await login(request, env, ctx), request);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/google") {

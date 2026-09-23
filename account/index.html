@@ -523,23 +523,27 @@ function initGoogleSignIn() {
 
     var base = String(window.KW_ACCESS_API || '').replace(/\/+$/, '');
 
-    fetch(base + '/auth/google/nonce', { credentials: 'omit' })
+    /* mode/buy/next travel on the /auth/google/nonce request (an endpoint
+       we control and Google never inspects), NOT on login_uri — Google's
+       redirect_uri validation requires login_uri to exactly match the
+       bare, pre-registered URI with no query string at all. */
+    var qs = ['mode=' + encodeURIComponent(params.get('mode') === 'signup' ? 'signup' : 'login')];
+    if (buyAfter) qs.push('buy=' + encodeURIComponent(buyAfter));
+    var safeNext = safeNextPath(nextUrl);
+    if (safeNext) qs.push('next=' + encodeURIComponent(safeNext));
+
+    fetch(base + '/auth/google/nonce?' + qs.join('&'), { credentials: 'omit' })
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (!data || !data.ok || typeof data.nonce !== 'string' || !data.nonce) {
           throw new Error('nonce-fetch-failed');
         }
 
-        var qs = ['mode=' + encodeURIComponent(params.get('mode') === 'signup' ? 'signup' : 'login')];
-        if (buyAfter) qs.push('buy=' + encodeURIComponent(buyAfter));
-        var safeNext = safeNextPath(nextUrl);
-        if (safeNext) qs.push('next=' + encodeURIComponent(safeNext));
-
         window.google.accounts.id.initialize({
           client_id: clientId,
           nonce: data.nonce,
           ux_mode: 'redirect',
-          login_uri: base + '/auth/google/redirect?' + qs.join('&')
+          login_uri: base + '/auth/google/redirect'
         });
 
         renderButton();

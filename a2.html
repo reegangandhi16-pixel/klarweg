@@ -1513,6 +1513,7 @@ if (window.KWAuth) {
   window.KWAuth.refresh({ force: true }).then(function () {
     ownsLevel = window.KWAuth.hasLevel(currentLevel.code);
     renderRoadmap(currentLevel);
+    wireReveals();
   }).catch(function () {
     // KWAuth could not resolve — remain fail-closed (ownsLevel stays false).
   });
@@ -1530,20 +1531,23 @@ document.addEventListener('click', e => {
 });
 
 /* ===== Scroll-in reveal ===== */
-const reveals = document.querySelectorAll('.reveal');
-if ('IntersectionObserver' in window) {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
-  reveals.forEach(el => io.observe(el));
-} else {
-  reveals.forEach(el => el.classList.add('in'));
+function wireReveals() {
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
 }
+wireReveals();
 </script>
 
 </body>

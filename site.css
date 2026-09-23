@@ -117,6 +117,12 @@ section { padding: 88px 0; }
   display: flex; align-items: center; justify-content: space-between; height: 56px;
 }
 .nav-logo { font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.02em; color: var(--ink-primary); }
+.skip-link {
+  position: absolute; top: -48px; left: 12px; z-index: 9999;
+  padding: 12px 18px; background: var(--ink-primary); color: var(--bg-surface);
+  border-radius: 8px; font-size: 14px; font-weight: 600; transition: top 150ms ease;
+}
+.skip-link:focus { top: 12px; }
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a { font-size: 14px; color: var(--ink-secondary); font-weight: 500; transition: color var(--dur-fast) var(--ease); }
 .nav-links a:hover { color: var(--ink-primary); }

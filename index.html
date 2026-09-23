@@ -345,6 +345,20 @@ section.flush-top { padding-top: 0; }
   border-radius: 4px;
   background: var(--bg-canvas);
 }
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 12px;
+  z-index: 9999;
+  padding: 12px 18px;
+  background: var(--ink-primary);
+  color: var(--bg-surface);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: top 150ms ease;
+}
+.skip-link:focus { top: 12px; }
 .nav-links {
   display: flex;
   align-items: center;
@@ -4656,6 +4670,8 @@ body {
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
+
 <template id="__bundler_thumbnail" data-bg-color="#1F4E4A">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
     <rect width="1200" height="800" fill="#1F4E4A"/>
@@ -4709,6 +4725,7 @@ body {
   </div>
 </div>
 
+<main id="main" tabindex="-1">
 <!-- ============================================================
      HERO
 ============================================================ -->
@@ -6021,6 +6038,7 @@ body {
     <p class="final-fine">12,400+ learners · 6 levels · One ecosystem · One price</p>
   </div>
 </section>
+</main>
 
 <!-- ============================================================
      FOOTER

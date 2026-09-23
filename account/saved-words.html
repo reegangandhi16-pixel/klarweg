@@ -293,6 +293,10 @@ var SEED = [
 var Saved = KW_Account.Saved, User = KW_Account.User;
 Saved.seedOnce(SEED);
 
+// Saved-word fields can come from an imported backup file (Saved.importData),
+// so they are untrusted content, not authored markup — escape before innerHTML.
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
 var LEVELS = ['A1','A2','B1','B2'];
 var LVL_COLOR = {A1:'var(--lvl-a1)',A2:'var(--lvl-a2)',B1:'var(--lvl-b1)',B2:'var(--lvl-b2)'};
 var state = { level:'all', type:'all', q:'', sort:'new' };
@@ -402,22 +406,22 @@ function render(){
   }
   list.forEach(function(w){
     var card=document.createElement('div');card.className='sword';
-    var de=w.de.replace(/^(der|die|das)\s+/,function(m){return '<span class="art">'+m.trim()+'</span> ';});
+    var de=esc(w.de).replace(/^(der|die|das)\s+/,function(m){return '<span class="art">'+m.trim()+'</span> ';});
     card.innerHTML=
       '<div class="sword-top"><div class="sword-de">'+de+'</div>'+
         '<button class="sword-play" title="Hear it" aria-label="Hear it">'+PLAY+'</button></div>'+
-      '<div class="sword-en">'+w.en+'</div>'+
-      (w.ipa?'<div class="sword-ipa">'+w.ipa+'</div>':'')+
+      '<div class="sword-en">'+esc(w.en)+'</div>'+
+      (w.ipa?'<div class="sword-ipa">'+esc(w.ipa)+'</div>':'')+
       '<div class="sword-meta">'+
-        '<span class="tag tag-type '+w.type+'">'+w.type+'</span>'+
-        '<span class="tag tag-lvl" style="background:'+LVL_COLOR[w.level]+'">'+w.level+'</span>'+
+        '<span class="tag tag-type '+esc(w.type)+'">'+esc(w.type)+'</span>'+
+        '<span class="tag tag-lvl" style="background:'+LVL_COLOR[w.level]+'">'+esc(w.level)+'</span>'+
       '</div>'+
       '<div class="sword-foot"><span class="sword-date">'+CAL+' '+fmtDate(w.savedAt)+'</span>'+
         '<button class="sword-remove">'+TRASH+' Remove</button></div>';
     card.querySelector('.sword-play').addEventListener('click',function(){speak(w.de);});
     card.querySelector('.sword-remove').addEventListener('click',function(){
       Saved.remove(w.id);
-      toast('Removed <b style="font-family:var(--font-german)">'+w.de+'</b>',function(){Saved.add(w);syncFilters();render();});
+      toast('Removed <b style="font-family:var(--font-german)">'+esc(w.de)+'</b>',function(){Saved.add(w);syncFilters();render();});
       syncFilters();render();
     });
     grid.appendChild(card);

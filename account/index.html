@@ -333,28 +333,44 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
     $(id).setAttribute('data-label', $(id).textContent);
   });
 
+  /* Same-origin check shared by every client-side redirect derived from
+     the `next` query param — `next` is attacker-controllable (a crafted
+     link), so it must never be navigated to unless it resolves to this
+     site's own origin. */
+  function isSameOriginUrl(url) {
+    try {
+      return new URL(url, location.href).origin === location.origin;
+    } catch (e) {
+      return false;
+    }
+  }
   function afterAuth(state) {
     if (!state.authenticated) return;
     if (buyAfter && window.KWProducts && window.KWProducts.get(buyAfter)) {
       if (checkoutResumeHandled) return;
       checkoutResumeHandled = true;
-      if (nextUrl) { location.href = appendResume(nextUrl, buyAfter); return; }
+      if (nextUrl) {
+        var resumeUrl = appendResume(nextUrl, buyAfter);
+        if (resumeUrl) { location.href = resumeUrl; return; }
+      }
       renderAccount(state);
       show('account');
       if (window.KWCheckout) window.KWCheckout.start(buyAfter, { resumed: true });
       return;
     }
-    if (nextUrl) { location.href = nextUrl; return; }
+    if (nextUrl && isSameOriginUrl(nextUrl)) { location.href = nextUrl; return; }
     renderAccount(state);
     show('account');
   }
+  /* Returns null (never the raw url) when `url` is not same-origin, so
+     callers can never be tricked into an external redirect. */
   function appendResume(url, product) {
     try {
       var u = new URL(url, location.href);
-      if (u.origin !== location.origin) return url;
+      if (u.origin !== location.origin) return null;
       u.searchParams.set('resume', product);
       return u.toString();
-    } catch (e) { return url; }
+    } catch (e) { return null; }
   }
 
   /* ---- login ---- */

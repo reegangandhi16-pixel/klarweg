@@ -1491,7 +1491,7 @@ function renderRoadmap(level) {
     const phaseChapters = level.chapters.filter(c => c.n >= from && c.n <= to);
 
     const cards = phaseChapters.map(c => {
-      const isFree = c.n === 1 || !!c.href;
+      const isFree = c.n === 1 || (!!c.href && ownsLevel);
       return renderChapterCard(c, level.code, !isFree);
     }).join('');
 
@@ -1514,9 +1514,19 @@ function renderRoadmap(level) {
 /* ============================================================
    INIT
    ============================================================ */
+let ownsLevel = false; // fail-closed default until KWAuth resolves
 const currentLevel = LEVELS.a1;
 renderPathStations(currentLevel);
 renderRoadmap(currentLevel);
+
+if (window.KWAuth) {
+  window.KWAuth.refresh({ force: true }).then(function () {
+    ownsLevel = window.KWAuth.hasLevel(currentLevel.code);
+    renderRoadmap(currentLevel);
+  }).catch(function () {
+    // KWAuth could not resolve — remain fail-closed (ownsLevel stays false).
+  });
+}
 
 /* ===== Locked-card click → scroll to pricing ===== */
 document.addEventListener('click', e => {
@@ -1546,6 +1556,7 @@ if ('IntersectionObserver' in window) {
 }
 </script>
 
+<script src="kw-config.js"></script>
 <script src="kw-products.js"></script>
 <script src="kw-auth.js"></script>
 <script src="kw-checkout.js"></script>

@@ -445,13 +445,56 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
         '</div>';
     }).join('');
   }
+/* Due to Safari's ITP, Google's own guidance requires redirect UX (not
+   popup) on iOS — every iOS browser is WebKit-based regardless of brand,
+   so this detects the platform, not "Safari" specifically. iPadOS 13+
+   reports a desktop Mac user agent by default, hence the touch-point
+   check. Desktop Chrome/Safari on macOS never match this and keep the
+   existing popup flow untouched. */
+function isIOSPlatform() {
+  var ua = navigator.userAgent || '';
+  var isIOSDevice = /iP(hone|od|ad)/.test(ua);
+  var isIPadOSDesktopMode = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+  return isIOSDevice || isIPadOSDesktopMode;
+}
+
+/* Same-origin-relative paths only — mirrors the Worker's own allowlist so
+   a hostile `next` value is dropped before it ever reaches login_uri. */
+function safeNextPath(raw) {
+  if (typeof raw !== 'string' || !raw) return '';
+  if (raw.indexOf('://') !== -1) return '';
+  if (raw.slice(0, 2) === '//') return '';
+  if (raw.slice(0, 9) !== '/klarweg/') return '';
+  return raw;
+}
+
+var GOOGLE_AUTH_ERROR_MESSAGES = {
+  google_conflict: 'An account with this email already exists. Sign in with your email and password first, then link Google from your account.',
+  invalid_nonce: 'Google sign-in could not be verified. Please try again.',
+  invalid_credential: 'Google sign-in could not be verified. Please try again.',
+  missing_credential: 'Google sign-in did not complete. Please try again.'
+};
+
 function initGoogleSignIn() {
   var clientId = window.KW_GOOGLE_CLIENT_ID;
   var target = $('google-signin-button');
 
   if (!clientId || !target) return;
 
-  function renderGoogleButton() {
+  function renderButton() {
+    target.innerHTML = '';
+    window.google.accounts.id.renderButton(target, {
+      type: 'standard',
+      theme: 'outline',
+      size: 'large',
+      text: 'continue_with',
+      shape: 'rectangular',
+      width: 320
+    });
+  }
+
+  /* Desktop — unchanged popup flow. */
+  function renderGoogleButtonPopup() {
     if (!window.google || !window.google.accounts || !window.google.accounts.id) return;
 
     window.google.accounts.id.initialize({
@@ -469,19 +512,49 @@ function initGoogleSignIn() {
       }
     });
 
-    target.innerHTML = '';
-    window.google.accounts.id.renderButton(target, {
-      type: 'standard',
-      theme: 'outline',
-      size: 'large',
-      text: 'continue_with',
-      shape: 'rectangular',
-      width: 320
-    });
+    renderButton();
   }
 
+  /* iOS only — redirect flow via a Worker-issued single-use nonce. There
+     is no JS callback in redirect mode: Google bypasses this page's JS
+     entirely and POSTs straight to the Worker's login_uri. */
+  function renderGoogleButtonRedirect() {
+    if (!window.google || !window.google.accounts || !window.google.accounts.id) return;
+
+    var base = String(window.KW_ACCESS_API || '').replace(/\/+$/, '');
+
+    fetch(base + '/auth/google/nonce', { credentials: 'omit' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data || !data.ok || typeof data.nonce !== 'string' || !data.nonce) {
+          throw new Error('nonce-fetch-failed');
+        }
+
+        var qs = ['mode=' + encodeURIComponent(params.get('mode') === 'signup' ? 'signup' : 'login')];
+        if (buyAfter) qs.push('buy=' + encodeURIComponent(buyAfter));
+        var safeNext = safeNextPath(nextUrl);
+        if (safeNext) qs.push('next=' + encodeURIComponent(safeNext));
+
+        window.google.accounts.id.initialize({
+          client_id: clientId,
+          nonce: data.nonce,
+          ux_mode: 'redirect',
+          login_uri: base + '/auth/google/redirect?' + qs.join('&')
+        });
+
+        renderButton();
+      })
+      .catch(function () {
+        /* Nonce fetch failed — leave the button area empty rather than
+           falling back to popup mode, which is the mode known not to
+           work on this platform. */
+      });
+  }
+
+  var render = isIOSPlatform() ? renderGoogleButtonRedirect : renderGoogleButtonPopup;
+
   if (window.google && window.google.accounts && window.google.accounts.id) {
-    renderGoogleButton();
+    render();
     return;
   }
 
@@ -492,7 +565,7 @@ function initGoogleSignIn() {
   ].join('');
   script.async = true;
   script.defer = true;
-  script.onload = renderGoogleButton;
+  script.onload = render;
   document.head.appendChild(script);
 }
 
@@ -546,6 +619,14 @@ initGoogleSignIn();
 
   /* ---- boot ---- */
   setMode(params.get('mode') === 'signup' ? 'signup' : 'login');
+  /* Redirect-mode Google login has no JS callback to surface an error
+     through — the Worker instead returns here with an allowlisted
+     `authError` code, which is mapped to the same formError() UI the
+     popup flow already uses. Raw server text is never reflected. */
+  var googleAuthError = params.get('authError') || '';
+  if (googleAuthError && GOOGLE_AUTH_ERROR_MESSAGES[googleAuthError]) {
+    formError('login', GOOGLE_AUTH_ERROR_MESSAGES[googleAuthError]);
+  }
   KWAuth.refresh({ force: true }).then(function (state) {
     $('net-error').hidden = state.error !== 'network';
     if (state.authenticated) {

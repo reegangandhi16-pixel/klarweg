@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 59, title: 'Konjunktiv I: Formen', titleEn: 'Konjunktiv I: forms' , href: 'chapter-b2-59-konjunktiv-i-formen.html' },
 
+  prevChapter: { number: 57, title: 'Textkohärenz: Verweiswörter', titleEn: 'Text coherence: reference words', href: 'chapter-b2-57-textkohaerenz-verweiswoerter.html' },
   heroAnimationPath: null,
 
   story: {

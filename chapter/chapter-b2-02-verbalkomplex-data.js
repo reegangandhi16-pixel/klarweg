@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 3, title: 'Informationsstruktur: Thema → Rhema', titleEn: 'Information structure: theme → rheme' , href: 'chapter-b2-03-informationsstruktur-thema-rhema.html' },
 
+  prevChapter: { number: 1, title: 'Erweiterte Satzklammer', titleEn: 'The extended sentence bracket', href: 'chapter-b2-01-erweiterte-satzklammer.html' },
   heroAnimationPath: null,
 
   story: {

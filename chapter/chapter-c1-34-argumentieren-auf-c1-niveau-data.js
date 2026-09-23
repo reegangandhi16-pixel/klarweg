@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'Every strong C1 argument answers seven questions: what is my opinion, why, what evidence, what example, what would someone disagree with, how do I answer that, what conclusion follows? Strong argumentation is not emotional — it is structured and evidence-based.',
   xp: 870, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 35, title: 'Konzession & Abwägen', titleEn: 'Concession and weighing arguments' , href: 'chapter-c1-35-konzession-und-abwaegen.html' },
+  prevChapter: { number: 33, title: 'Goethe Mini 5', titleEn: 'Checkpoint: Chapters 29–32', href: 'chapter-c1-33-goethe-mini-5.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

@@ -40,6 +40,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 31, title: 'W-Fragen mit Präpositionen', titleEn: 'Question words with prepositions' , href: 'chapter-a2-31-w-fragen-praepositionen.html' },
 
+  prevChapter: { number: 29, title: 'Indefinitpronomen', titleEn: 'Indefinite pronouns', href: 'chapter-a2-29-indefinitpronomen.html' },
   heroAnimationPath: null,
 
   story: {

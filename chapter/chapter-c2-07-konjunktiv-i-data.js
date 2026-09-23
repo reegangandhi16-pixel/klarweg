@@ -15,6 +15,7 @@ const CHAPTER = {
   description: 'Imagine Konjunktiv I as quotation marks you cannot see. You are carrying someone else\'s words without claiming they are true. That invisible distance is the essence of C2 mastery.',
   xp: 1350, time: 130, difficulty: 'Mastery',
   nextChapter: { number: 8, title: 'Modalverben', titleEn: 'Modal verbs as a pair of glasses' , href: 'chapter-c2-08-modalverben.html' },
+  prevChapter: { number: 6, title: 'Konjunktiv II', titleEn: 'Konjunktiv II as speaker attitude', href: 'chapter-c2-06-konjunktiv-ii.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

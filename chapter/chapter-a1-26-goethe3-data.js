@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 27, title: 'Präteritum haben/sein', titleEn: 'war & hatte' , href: 'chapter-a1-27-praeteritum.html' },
 
+  prevChapter: { number: 25, title: 'Trennbare Verben', titleEn: 'Separable Verbs', href: 'chapter-a1-25-trennbar.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

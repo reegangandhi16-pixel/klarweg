@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 5, title: 'Wer bist du?', titleEn: 'Who are you?' , href: 'chapter-a1-5-werbistdu.html' },
 
+  prevChapter: { number: 3, title: 'Zahlen 0–100', titleEn: 'Numbers 0–100', href: 'chapter-a1-3-zahlen.html' },
   heroAnimationPath: null,
 
   overviewIntro: {

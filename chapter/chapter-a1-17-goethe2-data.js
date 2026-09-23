@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 18, title: 'Unregelmäßige Verben', titleEn: 'Irregular Verbs' , href: 'chapter-a1-18-irregular.html' },
 
+  prevChapter: { number: 16, title: 'Hobbies & Freizeit', titleEn: 'Hobbies & Free Time', href: 'chapter-a1-16-hobbies.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

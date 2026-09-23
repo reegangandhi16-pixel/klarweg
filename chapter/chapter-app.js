@@ -4281,6 +4281,15 @@
       el('a', { class: 'btn btn-primary', href: C.nextChapter.href || '#' }, 'Continue ', el('span', { class: 'arrow' }, '→')));
   }
 
+  /* ---------- Previous-chapter link (small, quiet — placed just above Up
+     Next; forward progress stays the primary CTA, this is a secondary way
+     back). Absent entirely for the first chapter of the whole curriculum. */
+  function buildPrevChapter() {
+    if (!C.prevChapter) return null;
+    return el('a', { class: 'prev-chapter-link', href: C.prevChapter.href },
+      '← Previous · ', el('span', { class: 'de' }, C.prevChapter.title));
+  }
+
   /* ---------- Study Resources (UI only) ---------- */
   const KIND_TAG = { Vocabulary: 'tag-core', Practice: 'tag-practice', Grammar: 'tag-assess' };
   function bodyResources() {
@@ -4380,7 +4389,10 @@
       host.appendChild(sectionShell(s, i, body));
     });
     renderSummary();
-    // Up Next card sits after the final section (Study Resources).
+    // Up Next card sits after the final section (Study Resources); the
+    // previous-chapter link, if any, sits just above it.
+    const prevEl = buildPrevChapter();
+    if (prevEl) host.appendChild(prevEl);
     host.appendChild(buildNextChapter());
     // Make every German word clickable across all sections (not just Reading).
     linkifyDe(host);

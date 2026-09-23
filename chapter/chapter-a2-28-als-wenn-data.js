@@ -36,6 +36,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 29, title: 'Indefinitpronomen', titleEn: 'Indefinite pronouns' , href: 'chapter-a2-29-indefinitpronomen.html' },
 
+  prevChapter: { number: 27, title: 'Adjektiv nach unbestimmtem Artikel', titleEn: 'Adjective endings after the indefinite article', href: 'chapter-a2-27-adjektiv-unbestimmter-artikel.html' },
   heroAnimationPath: null,
 
   story: {

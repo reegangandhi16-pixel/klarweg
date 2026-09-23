@@ -37,6 +37,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 17, title: 'werden', titleEn: 'The verb werden' , href: 'chapter-a2-17-werden.html' },
 
+  prevChapter: { number: 15, title: 'Positions- & Richtungsverben', titleEn: 'Position & Direction Verbs', href: 'chapter-a2-15-positions-richtungsverben.html' },
   heroAnimationPath: null,
 
   story: {

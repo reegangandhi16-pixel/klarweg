@@ -25,6 +25,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 32, title: 'Relativsätze mit was & wo', titleEn: 'Relative clauses with was & wo' , href: 'chapter-b1-32-relativsaetze-was-wo.html' },
 
+  prevChapter: { number: 30, title: 'Artikelwörter als Pronomen', titleEn: 'Article words as pronouns', href: 'chapter-b1-30-artikelwoerter-als-pronomen.html' },
   heroAnimationPath: null,
 
   story: {

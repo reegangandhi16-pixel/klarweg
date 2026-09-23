@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 38, title: 'Wechselpräpositionen', titleEn: 'Two-Way Prepositions' , href: 'chapter-a1-38-wechselpraep.html' },
 
+  prevChapter: { number: 36, title: 'Dativ Einführung', titleEn: 'The Dative Case', href: 'chapter-a1-36-dativ.html' },
   heroAnimationPath: null,
 
   story: {

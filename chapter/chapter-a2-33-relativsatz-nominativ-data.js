@@ -29,6 +29,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 34, title: 'Relativsätze im Akkusativ', titleEn: 'Relative clauses in the accusative' , href: 'chapter-a2-34-relativsatz-akkusativ.html' },
 
+  prevChapter: { number: 32, title: 'Konjunktiv II: Wünsche & Höflichkeit', titleEn: 'Subjunctive II: wishes and politeness', href: 'chapter-a2-32-konjunktiv2-wuensche-hoeflichkeit.html' },
   heroAnimationPath: null,
 
   story: {

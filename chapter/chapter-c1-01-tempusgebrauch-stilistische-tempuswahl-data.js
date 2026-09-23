@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 2, title: 'Raum & Zeit präzise ausdrücken', titleEn: 'Expressing space & time precisely' , href: 'chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html' },
 
+  prevChapter: { number: 69, title: 'Goethe-Zertifikat B2 Final', titleEn: 'Goethe-Zertifikat B2 — Final Examination', href: 'chapter-b2-69-goethe-zertifikat-b2-final.html' },
   heroAnimationPath: null,
 
   story: {

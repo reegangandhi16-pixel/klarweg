@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 18, title: 'Adjektivdeklination sicher anwenden', titleEn: 'Applying adjective declension with confidence' , href: 'chapter-c1-18-adjektivdeklination-sicher-anwenden.html' },
 
+  prevChapter: { number: 16, title: 'Aufforderung, Empfehlung & Handlungssteuerung', titleEn: 'Directives, recommendations & guiding action', href: 'chapter-c1-16-aufforderung-empfehlung-und-handlungssteuerung.html' },
   heroAnimationPath: null,
 
   story: {

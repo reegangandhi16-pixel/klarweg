@@ -31,6 +31,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 16, title: 'Futur I', titleEn: 'Future tense I' , href: 'chapter-b1-16-futur1.html' },
 
+  prevChapter: { number: 14, title: 'Komparativ & Superlativ vor Nomen', titleEn: 'Comparative & superlative before nouns', href: 'chapter-b1-14-komparativ-superlativ-vor-nomen.html' },
   heroAnimationPath: null,
 
   story: {

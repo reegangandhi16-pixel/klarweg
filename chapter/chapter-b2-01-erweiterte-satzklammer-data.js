@@ -25,6 +25,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 2, title: 'Mehrteilige Verben (Verbalkomplex)', titleEn: 'Multi-part verb clusters (Verbalkomplex)' , href: 'chapter-b2-02-verbalkomplex.html' },
 
+  prevChapter: { number: 35, title: 'Goethe-Zertifikat B1 Final', titleEn: 'Goethe-Zertifikat B1 — Final exam & graduation', href: 'chapter-b1-35-goethe-zertifikat-b1-final.html' },
   heroAnimationPath: null,
 
   story: {

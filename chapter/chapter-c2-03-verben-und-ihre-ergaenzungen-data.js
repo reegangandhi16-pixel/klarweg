@@ -16,6 +16,7 @@ const CHAPTER = {
   description: 'Imagine every German verb is a stage director. The verb decides who appears, who receives the action, where it happens, what is optional, what cannot be omitted.',
   xp: 1250, time: 130, difficulty: 'Mastery',
   nextChapter: { number: 4, title: 'Nomen-Verb-Verbindungen', titleEn: 'Noun-verb constructions at native level' , href: 'chapter-c2-04-nomen-verb-verbindungen.html' },
+  prevChapter: { number: 2, title: 'Verben mit Präfixen', titleEn: 'Prefix verbs at native level', href: 'chapter-c2-02-verben-mit-praefixen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

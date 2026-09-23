@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 50, title: 'Nominalisierung', titleEn: 'Verb → noun / adjective → noun' , href: 'chapter-b2-50-nominalisierung.html' },
 
+  prevChapter: { number: 48, title: 'Modalitätsersatz: haben + zu / sein + zu', titleEn: 'Modal-verb replacements: haben + zu / sein + zu', href: 'chapter-b2-48-modalitaetsersatz-haben-sein-zu.html' },
   heroAnimationPath: null,
 
   story: {

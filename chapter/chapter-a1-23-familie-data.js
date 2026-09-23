@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 24, title: 'Datum & Ordinalzahlen', titleEn: 'Dates & Ordinals' , href: 'chapter-a1-24-datum.html' },
 
+  prevChapter: { number: 22, title: 'Berufe & Arbeit', titleEn: 'Jobs & Work', href: 'chapter-a1-22-berufe.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

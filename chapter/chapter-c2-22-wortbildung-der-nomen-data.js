@@ -15,6 +15,7 @@ const CHAPTER = {
   description: 'Each carriage adds information. The last carriage is always the locomotive — it decides gender, plural, and core meaning. Everything before it just describes the destination.',
   xp: 1750, time: 150, difficulty: 'Mastery',
   nextChapter: { number: 23, title: 'Wortbildung der Verben', titleEn: 'Word formation: verbs' , href: 'chapter-c2-23-wortbildung-der-verben.html' },
+  prevChapter: { number: 21, title: 'Wortbildung der Adjektive', titleEn: 'Word formation: adjectives', href: 'chapter-c2-21-wortbildung-der-adjektive.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

@@ -12,6 +12,7 @@ const CHAPTER = {
   description: 'Well-structured academic German combines precise prefix verbs, correct noun number, sophisticated contrast, and coherent discourse. This checkpoint tests whether that combination has become automatic.',
   xp: 850, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 34, title: 'Argumentieren auf C1-Niveau', titleEn: 'Arguing at C1 level' , href: 'chapter-c1-34-argumentieren-auf-c1-niveau.html' },
+  prevChapter: { number: 32, title: 'Kohärenz & Textverknüpfung', titleEn: 'Text coherence and cohesion', href: 'chapter-c1-32-kohaerenz-und-textverknuepfung.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

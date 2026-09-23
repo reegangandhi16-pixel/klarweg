@@ -17,6 +17,7 @@ const CHAPTER = {
   description: 'In everyday conversation, simple prepositions are casual clothes. But entering a university, a courtroom, or a government office, native writers change into a business suit — aufgrund, hinsichtlich, gemäß, mittels, zugunsten.',
   xp: 1900, time: 140, difficulty: 'Mastery',
   nextChapter: { number: 29, title: 'Goethe C2 Finalprüfung', titleEn: 'Goethe C2 final exam' , href: 'chapter-c2-29-goethe-c2-final.html' },
+  prevChapter: { number: 27, title: 'Kollokationen & Idiomatik', titleEn: 'Collocations and idiomatic usage', href: 'chapter-c2-27-kollokationen-und-idiomatik.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

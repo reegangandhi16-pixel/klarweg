@@ -20,6 +20,7 @@ const CHAPTER = {
   isCheckpoint: true,
   nextChapter: { number: 44, title: 'Zustandspassiv (sein + Partizip II)', titleEn: 'Statal passive (sein + past participle)' , href: 'chapter-b2-44-zustandspassiv.html' },
 
+  prevChapter: { number: 42, title: 'Adjektive mit Präpositionen (B2)', titleEn: 'Adjectives with fixed prepositions (B2)', href: 'chapter-b2-42-adjektive-mit-praepositionen.html' },
   heroAnimationPath: null,
 
   story: null,

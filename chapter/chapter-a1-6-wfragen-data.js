@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 7, title: 'Ja oder Nein?', titleEn: 'Yes/No Questions' , href: 'chapter-a1-7-jaodernein.html' },
 
+  prevChapter: { number: 5, title: 'Wer bist du?', titleEn: 'Who are you?', href: 'chapter-a1-5-werbistdu.html' },
   heroAnimationPath: null,
 
   overviewIntro: {

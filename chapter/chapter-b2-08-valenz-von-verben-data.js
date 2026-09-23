@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 9, title: 'Trennbar vs. untrennbar (Bedeutungsunterschiede)', titleEn: 'Separable vs inseparable verbs (meaning differences)' , href: 'chapter-b2-09-trennbar-vs-untrennbar.html' },
 
+  prevChapter: { number: 7, title: 'Verbergänzungen erkennen', titleEn: 'Recognizing verb complements', href: 'chapter-b2-07-verbergaenzungen-erkennen.html' },
   heroAnimationPath: null,
 
   story: {

@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 24, title: 'einerseits ... andererseits', titleEn: 'on the one hand ... on the other hand ...' , href: 'chapter-b2-24-einerseits-andererseits.html' },
 
+  prevChapter: { number: 22, title: 'weder ... noch', titleEn: 'neither ... nor ...', href: 'chapter-b2-22-weder-noch.html' },
   heroAnimationPath: null,
 
   story: {

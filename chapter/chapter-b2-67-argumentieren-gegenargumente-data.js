@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 68, title: 'Redemittel für Diskussionen', titleEn: 'Discussion phrases' , href: 'chapter-b2-68-redemittel-fuer-diskussionen.html' },
 
+  prevChapter: { number: 66, title: 'Argumentieren: Standpunkte', titleEn: 'Arguing: expressing viewpoints', href: 'chapter-b2-66-argumentieren-standpunkte.html' },
   heroAnimationPath: null,
 
   story: {

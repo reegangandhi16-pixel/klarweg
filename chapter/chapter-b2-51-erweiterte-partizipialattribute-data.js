@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 52, title: 'Komplexe Nominalgruppen', titleEn: 'Complex noun phrases' , href: 'chapter-b2-52-komplexe-nominalgruppen.html' },
 
+  prevChapter: { number: 50, title: 'Nominalisierung', titleEn: 'Verb → noun / adjective → noun', href: 'chapter-b2-50-nominalisierung.html' },
   heroAnimationPath: null,
 
   story: {

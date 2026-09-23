@@ -25,6 +25,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 17, title: 'Nebensätze mit damit & um ... zu', titleEn: 'Purpose clauses: damit & um ... zu' , href: 'chapter-b1-17-nebensatz-damit-um-zu.html' },
 
+  prevChapter: { number: 15, title: 'N-Deklination', titleEn: 'N-declension (weak masculine nouns)', href: 'chapter-b1-15-n-deklination.html' },
   heroAnimationPath: null,
 
   story: {

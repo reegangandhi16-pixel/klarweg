@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 19, title: 'Satzposition', titleEn: 'Word Order' , href: 'chapter-a1-19-satzposition.html' },
 
+  prevChapter: { number: 17, title: 'Goethe Mini 2', titleEn: 'Goethe Checkpoint 2', href: 'chapter-a1-17-goethe2.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

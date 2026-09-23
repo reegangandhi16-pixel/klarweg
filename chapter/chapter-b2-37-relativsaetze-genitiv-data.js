@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 38, title: 'Verschachtelte Relativsätze', titleEn: 'Nested relative clauses' , href: 'chapter-b2-38-verschachtelte-relativsaetze.html' },
 
+  prevChapter: { number: 36, title: 'Goethe Halbzeit-Test (Checkpoint)', titleEn: 'Goethe mid-course test (checkpoint)', href: 'chapter-b2-36-goethe-halbzeit-test.html' },
   heroAnimationPath: null,
 
   story: {

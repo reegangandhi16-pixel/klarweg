@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 55, title: 'Modalpartikeln: doch / ja', titleEn: 'Modal particles: doch / ja' , href: 'chapter-b2-55-modalpartikeln-doch-ja.html' },
 
+  prevChapter: { number: 53, title: 'Goethe Mini 4', titleEn: 'Phase 5 checkpoint exam', href: 'chapter-b2-53-goethe-mini-4.html' },
   heroAnimationPath: null,
 
   story: {

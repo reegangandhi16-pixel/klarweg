@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 4, title: 'Hauptsätze elegant verbinden', titleEn: 'Connecting main clauses elegantly' , href: 'chapter-c1-04-hauptsaetze-elegant-verbinden.html' },
 
+  prevChapter: { number: 2, title: 'Raum & Zeit präzise ausdrücken', titleEn: 'Expressing space & time precisely', href: 'chapter-c1-02-raum-und-zeit-praezise-ausdruecken.html' },
   heroAnimationPath: null,
 
   story: {

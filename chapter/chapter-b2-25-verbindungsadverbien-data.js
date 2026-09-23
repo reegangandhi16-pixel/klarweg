@@ -23,6 +23,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 26, title: 'Goethe Mini Test 2 (Checkpoint)', titleEn: 'Goethe Mini Test 2 (checkpoint)' , href: 'chapter-b2-26-goethe-mini-test-2.html' },
 
+  prevChapter: { number: 24, title: 'einerseits ... andererseits', titleEn: 'on the one hand ... on the other hand ...', href: 'chapter-b2-24-einerseits-andererseits.html' },
   heroAnimationPath: null,
 
   story: {

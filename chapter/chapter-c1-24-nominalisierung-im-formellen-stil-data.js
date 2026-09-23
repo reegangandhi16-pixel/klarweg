@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Think of nominalization as turning actions into concepts. Instead of saying what someone does, formal German often talks about the action itself. C1 writers constantly choose between verbal style and nominal style.',
   xp: 670, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 25, title: 'Partizipien & Adjektive als Nomen', titleEn: 'Participles and adjectives as nouns' , href: 'chapter-c1-25-partizipien-und-adjektive-als-nomen.html' },
+  prevChapter: { number: 23, title: 'Goethe Mini 3', titleEn: 'Checkpoint: Chapters 18–22', href: 'chapter-c1-23-goethe-mini-3.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

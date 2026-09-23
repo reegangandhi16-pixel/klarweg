@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 32, title: 'Akkusativpronomen', titleEn: 'Accusative Pronouns' , href: 'chapter-a1-32-akkusativpronomen.html' },
 
+  prevChapter: { number: 30, title: 'Perfekt mit sein', titleEn: 'Perfect with sein', href: 'chapter-a1-30-perfekt-sein.html' },
   heroAnimationPath: null,
 
   story: {

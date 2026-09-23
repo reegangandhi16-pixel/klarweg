@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 42, title: 'Welcher & Dieser', titleEn: 'which & this' , href: 'chapter-a1-42-welcher-dieser.html' },
 
+  prevChapter: { number: 40, title: 'Verben mit Dativ', titleEn: 'Dative Verbs', href: 'chapter-a1-40-verben-dativ.html' },
   heroAnimationPath: null,
 
   story: {

@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 11, title: 'Goethe Mini 2', titleEn: 'Checkpoint: Chapters 7–10' , href: 'chapter-c1-11-goethe-mini-2.html' },
 
+  prevChapter: { number: 9, title: 'Adjektive mit Präpositionalergänzungen', titleEn: 'Adjectives with fixed prepositional complements', href: 'chapter-c1-09-adjektive-mit-praepositionalergaenzungen.html' },
   heroAnimationPath: null,
 
   story: {

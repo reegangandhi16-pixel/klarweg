@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'The root is the main block. Prefixes and suffixes are extra pieces that change the meaning. Once you understand the bricks, you can build thousands of adjectives you\'ve never seen before.',
   xp: 1725, time: 150, difficulty: 'Mastery',
   nextChapter: { number: 22, title: 'Wortbildung der Nomen', titleEn: 'Word formation: nouns' , href: 'chapter-c2-22-wortbildung-der-nomen.html' },
+  prevChapter: { number: 20, title: 'Goethe Mini 3', titleEn: 'Checkpoint — Chapters 1–19 integrated', href: 'chapter-c2-20-goethe-mini-3.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

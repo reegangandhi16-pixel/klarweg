@@ -26,6 +26,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 35, title: 'Goethe-Zertifikat B1 Final', titleEn: 'Goethe-Zertifikat B1 — Final exam & graduation' , href: 'chapter-b1-35-goethe-zertifikat-b1-final.html' },
 
+  prevChapter: { number: 33, title: 'je … desto / umso', titleEn: 'Proportional comparisons: je … desto/umso', href: 'chapter-b1-33-je-desto-umso.html' },
   heroAnimationPath: null,
 
   story: {

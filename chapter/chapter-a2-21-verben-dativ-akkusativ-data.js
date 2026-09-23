@@ -34,6 +34,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 22, title: 'Konjunktiv II: könnte', titleEn: 'Konjunktiv II: könnte' , href: 'chapter-a2-22-konjunktiv2-koennte.html' },
 
+  prevChapter: { number: 20, title: 'Interrogativartikel: was für ein(e)', titleEn: 'The Interrogative was für ein(e)', href: 'chapter-a2-20-was-fuer-ein.html' },
   heroAnimationPath: null,
 
   story: {

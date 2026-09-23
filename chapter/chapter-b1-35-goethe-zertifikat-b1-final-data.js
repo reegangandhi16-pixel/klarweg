@@ -28,6 +28,7 @@ const CHAPTER = {
   difficulty: 'Final Exam',
   nextChapter: { number: 1, title: 'Erweiterte Satzklammer', titleEn: 'The extended sentence bracket' , href: 'chapter-b2-01-erweiterte-satzklammer.html' },
 
+  prevChapter: { number: 34, title: 'Partizipien als Adjektive', titleEn: 'Participles as adjectives', href: 'chapter-b1-34-partizipien-als-adjektive.html' },
   heroAnimationPath: null,
 
   story: {

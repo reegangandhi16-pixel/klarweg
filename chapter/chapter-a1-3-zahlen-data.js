@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 4, title: 'Hallo!', titleEn: 'Greetings & Introductions' , href: 'chapter-a1-4-hallo.html' },
 
+  prevChapter: { number: 2, title: 'Vokale & Laute', titleEn: 'Vowels & Sounds', href: 'chapter-a1-2-vokale.html' },
   // No grammar animation for this chapter — renderer skips the Watch First block.
   heroAnimationPath: null,
 

@@ -29,6 +29,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 25, title: 'Goethe Mini 3', titleEn: 'Goethe Checkpoint 3' , href: 'chapter-a2-25-goethe-mini-3.html' },
 
+  prevChapter: { number: 23, title: 'Konjunktiv II: sollte (Ratschläge)', titleEn: 'Konjunktiv II: sollte (advice)', href: 'chapter-a2-23-konjunktiv2-sollte.html' },
   heroAnimationPath: null,
 
   story: {

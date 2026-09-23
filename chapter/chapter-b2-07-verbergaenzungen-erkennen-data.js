@@ -23,6 +23,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 8, title: 'Valenz von Verben', titleEn: 'Verb valency' , href: 'chapter-b2-08-valenz-von-verben.html' },
 
+  prevChapter: { number: 6, title: 'Es in festen Ausdrücken', titleEn: 'Es in fixed expressions', href: 'chapter-b2-06-es-in-festen-ausdruecken.html' },
   heroAnimationPath: null,
 
   story: {

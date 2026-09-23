@@ -33,6 +33,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 16, title: 'Goethe Mini 2', titleEn: 'Goethe Checkpoint 2' , href: 'chapter-a2-16-goethe-mini-2.html' },
 
+  prevChapter: { number: 14, title: 'Wechselpr\u00e4positionen', titleEn: 'Two-Way Prepositions', href: 'chapter-a2-14-wechselpraepositionen.html' },
   heroAnimationPath: null,
 
   story: {

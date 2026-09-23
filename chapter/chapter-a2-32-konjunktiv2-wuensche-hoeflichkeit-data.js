@@ -37,6 +37,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 33, title: 'Relativsätze im Nominativ', titleEn: 'Relative clauses in the nominative' , href: 'chapter-a2-33-relativsatz-nominativ.html' },
 
+  prevChapter: { number: 31, title: 'W-Fragen mit Präpositionen', titleEn: 'Question words with prepositions', href: 'chapter-a2-31-w-fragen-praepositionen.html' },
   heroAnimationPath: null,
 
   story: {

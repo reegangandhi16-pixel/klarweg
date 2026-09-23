@@ -30,6 +30,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 6, title: 'Modalverben im Pr\u00e4teritum', titleEn: 'Modal Verbs in the Past' , href: 'chapter-a2-6-modalverben-praeteritum.html' },
 
+  prevChapter: { number: 4, title: 'Nebensatz mit weil', titleEn: 'Subordinate Clauses with weil', href: 'chapter-a2-4-weil.html' },
   heroAnimationPath: null,
 
   story: {

@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 33, title: 'Sätze verbinden', titleEn: 'Connecting Sentences' , href: 'chapter-a1-33-saetze-verbinden.html' },
 
+  prevChapter: { number: 31, title: 'Partizip II mit Präfix', titleEn: 'Participles with Prefixes', href: 'chapter-a1-31-partizip-praefix.html' },
   heroAnimationPath: null,
 
   story: {

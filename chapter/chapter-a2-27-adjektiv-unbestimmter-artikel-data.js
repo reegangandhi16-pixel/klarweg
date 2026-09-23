@@ -39,6 +39,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 28, title: 'Nebensatz mit als / wenn', titleEn: 'Subordinate clauses with als / wenn' , href: 'chapter-a2-28-als-wenn.html' },
 
+  prevChapter: { number: 26, title: 'Adjektiv nach bestimmtem Artikel', titleEn: 'Adjective endings after the definite article', href: 'chapter-a2-26-adjektiv-bestimmter-artikel.html' },
   heroAnimationPath: null,
 
   story: {

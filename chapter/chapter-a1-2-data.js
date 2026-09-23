@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 3, title: 'Zahlen 0–100', titleEn: 'Numbers 0–100' , href: 'chapter-a1-3-zahlen.html' },
 
+  prevChapter: { number: 1, title: 'Das Alphabet & Aussprache', titleEn: 'The Alphabet & Pronunciation', href: 'chapter-a1-1-alphabet.html' },
   // No grammar animation for this chapter — renderer skips the Watch First block.
   heroAnimationPath: null,
 

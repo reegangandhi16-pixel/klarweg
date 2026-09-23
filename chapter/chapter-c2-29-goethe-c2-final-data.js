@@ -18,6 +18,7 @@ const CHAPTER = {
   description: 'Grammar gave you the equipment. Vocabulary showed you the route. Style taught you how to move efficiently. Register helped you choose the right path. This exam is not about learning something new — it is about proving you can use everything you have learned, confidently and naturally, in any situation.',
   xp: 2000, time: 220, difficulty: 'Final Exam',
   nextChapter: null,
+  prevChapter: { number: 28, title: 'Präpositionen der Schriftsprache', titleEn: 'Prepositions of written German', href: 'chapter-c2-28-praepositionen-der-schriftsprache.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Goethe C2 Finalprüfung · Complete mastery assessment',

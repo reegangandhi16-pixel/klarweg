@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 69, title: 'Goethe-Zertifikat B2 Final', titleEn: 'Goethe-Zertifikat B2 — Final Examination' , href: 'chapter-b2-69-goethe-zertifikat-b2-final.html' },
 
+  prevChapter: { number: 67, title: 'Argumentieren: Gegenargumente', titleEn: 'Arguing: counterarguments', href: 'chapter-b2-67-argumentieren-gegenargumente.html' },
   heroAnimationPath: null,
 
   story: {

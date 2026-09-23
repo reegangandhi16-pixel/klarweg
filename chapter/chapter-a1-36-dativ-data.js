@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 37, title: 'Präpositionen mit Dativ', titleEn: 'Dative Prepositions' , href: 'chapter-a1-37-praep-dativ.html' },
 
+  prevChapter: { number: 35, title: 'Goethe Mini 4', titleEn: 'Goethe Checkpoint 4', href: 'chapter-a1-35-goethe4.html' },
   heroAnimationPath: null,
 
   story: {

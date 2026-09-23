@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 16, title: 'Hobbies & Freizeit', titleEn: 'Hobbies & Free Time' , href: 'chapter-a1-16-hobbies.html' },
 
+  prevChapter: { number: 14, title: 'Essen & Trinken', titleEn: 'Food & Drink', href: 'chapter-a1-14-essen.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

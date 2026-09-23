@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 16, title: 'Aufforderung, Empfehlung & Handlungssteuerung', titleEn: 'Directives, recommendations & guiding action' , href: 'chapter-c1-16-aufforderung-empfehlung-und-handlungssteuerung.html' },
 
+  prevChapter: { number: 14, title: 'Konjunktiv II für Irreales & Hypothesen', titleEn: 'Konjunktiv II for the unreal and hypothetical', href: 'chapter-c1-14-konjunktiv-ii-fuer-irreales-und-hypothesen.html' },
   heroAnimationPath: null,
 
   story: {

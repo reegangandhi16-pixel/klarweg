@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 6, title: 'Es in festen Ausdrücken', titleEn: 'Es in fixed expressions' , href: 'chapter-b2-06-es-in-festen-ausdruecken.html' },
 
+  prevChapter: { number: 4, title: 'Formales es (Subjekt-es)', titleEn: 'Formal es (dummy subject)', href: 'chapter-b2-04-formales-es.html' },
   heroAnimationPath: null,
 
   story: {

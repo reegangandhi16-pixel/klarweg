@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 1, title: 'Tempusgebrauch & Stilistische Tempuswahl', titleEn: 'Advanced tense usage & stylistic choice', href: 'chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html' },
 
+  prevChapter: { number: 68, title: 'Redemittel für Diskussionen', titleEn: 'Discussion phrases', href: 'chapter-b2-68-redemittel-fuer-diskussionen.html' },
   heroAnimationPath: null,
 
   story: {

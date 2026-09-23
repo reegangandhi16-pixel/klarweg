@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'Think like a scientist, not a lawyer. A lawyer proves one side. A scientist asks: what supports this, what speaks against it, what are the limitations, what conclusion is justified? That mindset produces authentic C1 academic German.',
   xp: 890, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 36, title: 'Register & Stilebenen beherrschen', titleEn: 'Mastering register and style levels' , href: 'chapter-c1-36-register-und-stilebenen-beherrschen.html' },
+  prevChapter: { number: 34, title: 'Argumentieren auf C1-Niveau', titleEn: 'Arguing at C1 level', href: 'chapter-c1-34-argumentieren-auf-c1-niveau.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

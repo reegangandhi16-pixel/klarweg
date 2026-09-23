@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 14, title: 'Goethe Mini Test 1 (Checkpoint)', titleEn: 'Goethe Mini Test 1 (checkpoint)' , href: 'chapter-b2-14-goethe-mini-test-1.html' },
 
+  prevChapter: { number: 12, title: 'Doppelte Verneinung & Litotes', titleEn: 'Double negation & litotes', href: 'chapter-b2-12-doppelte-verneinung-litotes.html' },
   heroAnimationPath: null,
 
   story: {

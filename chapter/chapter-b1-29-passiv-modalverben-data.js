@@ -25,6 +25,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 30, title: 'Artikelwörter als Pronomen', titleEn: 'Article words as pronouns' , href: 'chapter-b1-30-artikelwoerter-als-pronomen.html' },
 
+  prevChapter: { number: 28, title: 'Passiv: Präsens, Präteritum & Perfekt', titleEn: 'Passive: present, simple past & perfect', href: 'chapter-b1-28-passiv-praesens-praeteritum-perfekt.html' },
   heroAnimationPath: null,
 
   story: {

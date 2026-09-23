@@ -29,6 +29,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 14, title: 'Wechselpr\u00e4positionen', titleEn: 'Two-Way Prepositions' , href: 'chapter-a2-14-wechselpraepositionen.html' },
 
+  prevChapter: { number: 12, title: 'Reflexive Verben', titleEn: 'Reflexive Verbs', href: 'chapter-a2-12-reflexive-verben.html' },
   heroAnimationPath: null,
 
   story: {

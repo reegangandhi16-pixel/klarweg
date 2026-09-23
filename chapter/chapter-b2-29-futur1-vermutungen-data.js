@@ -26,6 +26,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 30, title: 'Alternativen zum Futur', titleEn: 'Alternatives to the future tense' , href: 'chapter-b2-30-alternativen-zum-futur.html' },
 
+  prevChapter: { number: 28, title: 'Tempuswechsel im Text', titleEn: 'Tense-switching within a text', href: 'chapter-b2-28-tempuswechsel-im-text.html' },
   heroAnimationPath: null,
 
   story: {

@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 43, title: 'Goethe Mini 3 (Checkpoint)', titleEn: 'Goethe mini-test 3 (checkpoint)' , href: 'chapter-b2-43-goethe-mini-3.html' },
 
+  prevChapter: { number: 41, title: 'Nomen mit Präpositionen (B2)', titleEn: 'Nouns with fixed prepositions (B2)', href: 'chapter-b2-41-nomen-mit-praepositionen.html' },
   heroAnimationPath: null,
 
   story: {

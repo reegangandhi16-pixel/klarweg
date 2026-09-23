@@ -23,6 +23,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 4, title: 'Formales es (Subjekt-es)', titleEn: 'Formal es (dummy subject)' , href: 'chapter-b2-04-formales-es.html' },
 
+  prevChapter: { number: 2, title: 'Mehrteilige Verben (Verbalkomplex)', titleEn: 'Multi-part verb clusters (Verbalkomplex)', href: 'chapter-b2-02-verbalkomplex.html' },
   heroAnimationPath: null,
 
   story: {

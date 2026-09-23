@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 42, title: 'Adjektive mit Präpositionen (B2)', titleEn: 'Adjectives with fixed prepositions (B2)' , href: 'chapter-b2-42-adjektive-mit-praepositionen.html' },
 
+  prevChapter: { number: 40, title: 'Verben mit Präpositionen (B2)', titleEn: 'Verbs with fixed prepositions (B2)', href: 'chapter-b2-40-verben-mit-praepositionen.html' },
   heroAnimationPath: null,
 
   story: {

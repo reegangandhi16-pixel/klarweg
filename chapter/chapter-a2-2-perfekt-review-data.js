@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 3, title: 'Artikel (Wiederholung)', titleEn: 'Articles — Review' , href: 'chapter-a2-3-artikel-review.html' },
 
+  prevChapter: { number: 1, title: 'Genitiv: Name + s', titleEn: 'Possession with Names', href: 'chapter-a2-1-genitiv.html' },
   heroAnimationPath: null,
 
   story: {

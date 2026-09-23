@@ -17,6 +17,7 @@ const CHAPTER = {
   description: 'A word rarely dances alone. Every important noun has a verb it naturally prefers — Entscheidungen trifft man, Verantwortung übernimmt man. Choose the wrong partner, and native speakers notice immediately.',
   xp: 1875, time: 140, difficulty: 'Mastery',
   nextChapter: { number: 28, title: 'Präpositionen der Schriftsprache', titleEn: 'Prepositions of written German' , href: 'chapter-c2-28-praepositionen-der-schriftsprache.html' },
+  prevChapter: { number: 26, title: 'Nominalstil', titleEn: 'Nominal style', href: 'chapter-c2-26-nominalstil.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

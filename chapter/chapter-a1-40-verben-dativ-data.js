@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 41, title: 'Dativpronomen', titleEn: 'Dative Pronouns' , href: 'chapter-a1-41-dativpronomen.html' },
 
+  prevChapter: { number: 39, title: 'Ortsangaben & Kurzformen', titleEn: 'Places & Contractions', href: 'chapter-a1-39-ortsangaben.html' },
   heroAnimationPath: null,
 
   story: {

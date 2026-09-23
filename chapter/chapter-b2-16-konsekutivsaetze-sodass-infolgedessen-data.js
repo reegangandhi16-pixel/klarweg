@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 17, title: 'Modalsätze: indem', titleEn: 'Modal clauses: indem' , href: 'chapter-b2-17-modalsaetze-indem.html' },
 
+  prevChapter: { number: 15, title: 'Konzessivsätze: obgleich', titleEn: 'Concessive clauses: obgleich', href: 'chapter-b2-15-konzessivsaetze-obgleich.html' },
   heroAnimationPath: null,
 
   story: {

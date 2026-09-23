@@ -16,6 +16,7 @@ const CHAPTER = {
   description: 'The noun tells you who someone is. The apposition is the business card pinned right next to the name badge — profession, title, or function, given instantly, without a new sentence.',
   xp: 1825, time: 140, difficulty: 'Mastery',
   nextChapter: { number: 26, title: 'Nominalstil', titleEn: 'Nominal style' , href: 'chapter-c2-26-nominalstil.html' },
+  prevChapter: { number: 24, title: 'Goethe Mini 4', titleEn: 'Checkpoint — Chapters 1–23 integrated', href: 'chapter-c2-24-goethe-mini-4.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

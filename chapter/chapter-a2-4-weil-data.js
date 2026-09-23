@@ -31,6 +31,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 5, title: 'Nebensatz mit dass', titleEn: 'Subordinate Clauses with dass' , href: 'chapter-a2-5-dass.html' },
 
+  prevChapter: { number: 3, title: 'Artikel (Wiederholung)', titleEn: 'Articles — Review', href: 'chapter-a2-3-artikel-review.html' },
   heroAnimationPath: null,
 
   story: {

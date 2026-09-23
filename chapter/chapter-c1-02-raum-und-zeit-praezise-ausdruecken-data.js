@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 3, title: 'Nebensätze sicher beherrschen', titleEn: 'Mastering complex subordinate clauses' , href: 'chapter-c1-03-nebensaetze-sicher-beherrschen.html' },
 
+  prevChapter: { number: 1, title: 'Tempusgebrauch & Stilistische Tempuswahl', titleEn: 'Advanced tense usage & stylistic choice', href: 'chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html' },
   heroAnimationPath: null,
 
   story: {

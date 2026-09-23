@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 29, title: 'Perfekt mit haben', titleEn: 'Perfect with haben' , href: 'chapter-a1-29-perfekt-haben.html' },
 
+  prevChapter: { number: 27, title: 'Präteritum haben/sein', titleEn: 'war & hatte', href: 'chapter-a1-27-praeteritum.html' },
   heroAnimationPath: null,
 
   story: {

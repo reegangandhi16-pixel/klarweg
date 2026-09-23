@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 7, title: 'Präpositionen mit Genitiv', titleEn: 'Genitive prepositions in formal German' , href: 'chapter-c1-07-praepositionen-mit-genitiv.html' },
 
+  prevChapter: { number: 5, title: 'Zweiteilige Satzverbindungen', titleEn: 'Correlative & paired sentence connectors', href: 'chapter-c1-05-zweiteilige-satzverbindungen.html' },
   heroAnimationPath: null,
 
   story: {

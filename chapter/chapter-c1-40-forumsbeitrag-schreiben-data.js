@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Imagine you\'re sitting at a round table discussion, not giving a speech. A Forumsbeitrag contributes ideas, reacts to others, asks questions, and keeps the conversation moving.',
   xp: 990, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 41, title: 'Grafikbeschreibung & Grafikauswertung', titleEn: 'Describing and evaluating graphics' , href: 'chapter-c1-41-grafikbeschreibung-und-grafikauswertung.html' },
+  prevChapter: { number: 39, title: 'Stellungnahme schreiben', titleEn: 'Writing a statement of opinion', href: 'chapter-c1-39-stellungnahme-schreiben.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

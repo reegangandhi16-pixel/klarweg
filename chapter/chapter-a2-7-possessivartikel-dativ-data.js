@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 8, title: 'Komparativ & Superlativ', titleEn: 'Comparative & Superlative' , href: 'chapter-a2-8-komparativ-superlativ.html' },
 
+  prevChapter: { number: 6, title: 'Modalverben im Pr\u00e4teritum', titleEn: 'Modal Verbs in the Past', href: 'chapter-a2-6-modalverben-praeteritum.html' },
   heroAnimationPath: null,
 
   story: {

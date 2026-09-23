@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 12, title: 'Modalverben präzise verwenden', titleEn: 'Using modal verbs precisely' , href: 'chapter-c1-12-modalverben-praezise-verwenden.html' },
 
+  prevChapter: { number: 10, title: 'Nomen mit Präpositionalobjekt', titleEn: 'Nouns with fixed prepositional objects', href: 'chapter-c1-10-nomen-mit-praepositionalobjekt.html' },
   heroAnimationPath: null,
 
   story: {

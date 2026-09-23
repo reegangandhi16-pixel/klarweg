@@ -23,6 +23,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 34, title: 'Partizipien als Adjektive', titleEn: 'Participles as adjectives' , href: 'chapter-b1-34-partizipien-als-adjektive.html' },
 
+  prevChapter: { number: 32, title: 'Relativsätze mit was & wo', titleEn: 'Relative clauses with was & wo', href: 'chapter-b1-32-relativsaetze-was-wo.html' },
   heroAnimationPath: null,
 
   story: {

@@ -36,6 +36,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 30, title: 'Verben mit Präpositionen', titleEn: 'Verbs with fixed prepositions' , href: 'chapter-a2-30-verben-praepositionen.html' },
 
+  prevChapter: { number: 28, title: 'Nebensatz mit als / wenn', titleEn: 'Subordinate clauses with als / wenn', href: 'chapter-a2-28-als-wenn.html' },
   heroAnimationPath: null,
 
   story: {

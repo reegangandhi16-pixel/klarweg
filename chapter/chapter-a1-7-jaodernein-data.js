@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 8, title: 'Goethe Mini 1', titleEn: 'Phase 1 Checkpoint' , href: 'chapter-a1-8-goethemini1.html' },
 
+  prevChapter: { number: 6, title: 'W-Fragen', titleEn: 'Question Words', href: 'chapter-a1-6-wfragen.html' },
   heroAnimationPath: null,
 
   overviewIntro: {

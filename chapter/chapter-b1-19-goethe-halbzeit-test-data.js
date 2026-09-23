@@ -33,6 +33,7 @@ const CHAPTER = {
   difficulty: 'Halbzeit-Prüfung',
   nextChapter: { number: 20, title: 'Plusquamperfekt', titleEn: 'Pluperfect (past perfect)' , href: 'chapter-b1-20-plusquamperfekt.html' },
 
+  prevChapter: { number: 18, title: 'Relativsätze mit Präpositionen', titleEn: 'Relative clauses with prepositions', href: 'chapter-b1-18-relativsaetze-mit-praepositionen.html' },
   heroAnimationPath: null,
 
   story: {

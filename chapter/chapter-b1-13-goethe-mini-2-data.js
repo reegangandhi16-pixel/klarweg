@@ -35,6 +35,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 14, title: 'Komparativ & Superlativ vor Nomen', titleEn: 'Comparative & superlative before nouns' , href: 'chapter-b1-14-komparativ-superlativ-vor-nomen.html' },
 
+  prevChapter: { number: 12, title: 'Adjektivdeklination (Wiederholung & Vertiefung)', titleEn: 'Adjective declension — review & depth', href: 'chapter-b1-12-adjektivdeklination-wiederholung.html' },
   heroAnimationPath: null,
 
   story: {

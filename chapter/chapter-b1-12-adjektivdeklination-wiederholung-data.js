@@ -37,6 +37,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 13, title: 'Goethe Mini 3', titleEn: 'Goethe Checkpoint 3 — Passiv, Relativsätze & Adjektivdeklination' , href: 'chapter-b1-13-goethe-mini-2.html' },
 
+  prevChapter: { number: 11, title: 'Relativsätze im Dativ', titleEn: 'Relative clauses in the Dativ', href: 'chapter-b1-11-relativsaetze-dativ.html' },
   heroAnimationPath: null,
 
   story: {

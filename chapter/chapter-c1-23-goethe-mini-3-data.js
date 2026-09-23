@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Goethe Mini 3 verifies whether the learner can automatically produce authentic C1 sentence architecture before entering the final phase of the course. The focus is fluency and information density, not isolated grammar knowledge.',
   xp: 650, time: 120, difficulty: 'Checkpoint',
   nextChapter: { number: 24, title: 'Nominalisierung im formellen Stil', titleEn: 'Nominalization in formal style' , href: 'chapter-c1-24-nominalisierung-im-formellen-stil.html' },
+  prevChapter: { number: 22, title: 'Komplexe Attribute & Nominalgruppen', titleEn: 'Complex attributes and noun groups', href: 'chapter-c1-22-komplexe-attribute-und-nominalgruppen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

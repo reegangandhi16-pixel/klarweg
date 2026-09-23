@@ -16,6 +16,7 @@ const CHAPTER = {
   description: 'Konjunktiv II is a dimmer switch, not an ON/OFF switch. You are not changing reality — you are adjusting how strongly your statement shines.',
   xp: 1325, time: 130, difficulty: 'Mastery',
   nextChapter: { number: 7, title: 'Konjunktiv I', titleEn: 'Konjunktiv I as invisible quotation marks' , href: 'chapter-c2-07-konjunktiv-i.html' },
+  prevChapter: { number: 5, title: 'Goethe Mini 1', titleEn: 'Checkpoint — Chapters 1–4 integrated', href: 'chapter-c2-05-goethe-mini-1.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

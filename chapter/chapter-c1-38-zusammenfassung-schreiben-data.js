@@ -12,6 +12,7 @@ const CHAPTER = {
   description: 'Imagine packing for a flight — you cannot take everything. Keep the essentials, leave unnecessary details behind, arrange everything neatly, and never change what the original author intended.',
   xp: 950, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 39, title: 'Stellungnahme schreiben', titleEn: 'Writing a statement of opinion' , href: 'chapter-c1-39-stellungnahme-schreiben.html' },
+  prevChapter: { number: 37, title: 'Kollokationen & Bedeutungsnuancen', titleEn: 'Collocations and shades of meaning', href: 'chapter-c1-37-kollokationen-und-bedeutungsnuancen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

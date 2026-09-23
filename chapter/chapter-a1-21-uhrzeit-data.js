@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 22, title: 'Berufe & Arbeit', titleEn: 'Jobs & Work' , href: 'chapter-a1-22-berufe.html' },
 
+  prevChapter: { number: 20, title: 'Modalverben 1', titleEn: 'Modal Verbs 1', href: 'chapter-a1-20-modalverben1.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

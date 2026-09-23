@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 9, title: 'Adjektive mit Präpositionalergänzungen', titleEn: 'Adjectives with fixed prepositional complements' , href: 'chapter-c1-09-adjektive-mit-praepositionalergaenzungen.html' },
 
+  prevChapter: { number: 7, title: 'Präpositionen mit Genitiv', titleEn: 'Genitive prepositions in formal German', href: 'chapter-c1-07-praepositionen-mit-genitiv.html' },
   heroAnimationPath: null,
 
   story: {

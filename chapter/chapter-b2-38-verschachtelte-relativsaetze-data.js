@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 39, title: 'Relativsätze mit wer... der...', titleEn: 'Indefinite relative clauses: whoever... that person...' , href: 'chapter-b2-39-relativsaetze-wer-der.html' },
 
+  prevChapter: { number: 37, title: 'Relativsätze im Genitiv (dessen / deren)', titleEn: 'Genitive relative clauses (dessen / deren)', href: 'chapter-b2-37-relativsaetze-genitiv.html' },
   heroAnimationPath: null,
 
   story: {

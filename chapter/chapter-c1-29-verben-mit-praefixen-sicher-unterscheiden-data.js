@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'Never memorize beschreiben, unterschreiben, umschreiben, aufschreiben as separate words. Memorize schreiben, then learn what each prefix answers. Native speakers think in verb families, not isolated vocabulary.',
   xp: 770, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 30, title: 'Nomen mit Numerusbesonderheiten', titleEn: 'Nouns with special number behavior' , href: 'chapter-c1-30-nomen-mit-numerusbesonderheiten.html' },
+  prevChapter: { number: 28, title: 'Goethe Mini 4', titleEn: 'Checkpoint: Chapters 24–27', href: 'chapter-c1-28-goethe-mini-4.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

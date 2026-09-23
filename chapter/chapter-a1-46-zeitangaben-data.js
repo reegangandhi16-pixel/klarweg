@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 47, title: 'Goethe A1 Final', titleEn: 'The A1 Finale' , href: 'chapter-a1-47-goethe-final.html' },
 
+  prevChapter: { number: 45, title: 'Telefonieren & Nachfragen', titleEn: 'Phone Calls', href: 'chapter-a1-45-telefonieren.html' },
   heroAnimationPath: null,
 
   story: {

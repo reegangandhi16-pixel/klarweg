@@ -27,6 +27,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 23, title: 'Reflexivpronomen: Akkusativ & Dativ', titleEn: 'Reflexive pronouns: Akkusativ & Dativ' , href: 'chapter-b1-23-reflexivpronomen-akkusativ-dativ.html' },
 
+  prevChapter: { number: 21, title: 'Temporale Nebensätze', titleEn: 'Temporal subordinate clauses', href: 'chapter-b1-21-temporale-nebensaetze.html' },
   heroAnimationPath: null,
 
   story: {

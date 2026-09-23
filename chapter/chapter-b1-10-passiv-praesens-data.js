@@ -27,6 +27,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 11, title: 'Relativsätze im Dativ', titleEn: 'Relative clauses in the Dativ' , href: 'chapter-b1-11-relativsaetze-dativ.html' },
 
+  prevChapter: { number: 9, title: 'Goethe Mini 2', titleEn: 'Goethe Checkpoint 2 — Präteritum & Zeitangaben', href: 'chapter-b1-9-goethe-mini-2.html' },
   heroAnimationPath: null,
 
   story: {

@@ -30,6 +30,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 7, title: 'Präteritum', titleEn: 'The simple past (Präteritum)' , href: 'chapter-b1-7-praeteritum.html' },
 
+  prevChapter: { number: 5, title: 'Genitiv & Präpositionen mit Genitiv', titleEn: 'Genitive & prepositions with the Genitive (wegen, trotz, während)', href: 'chapter-b1-5-genitiv-wegen-trotz-waehrend.html' },
   heroAnimationPath: null,
 
   story: {

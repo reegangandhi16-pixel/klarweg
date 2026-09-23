@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Think like a data analyst, not a calculator. A calculator only reads numbers. A data analyst asks: what changed, why, what matters, and what conclusion can reasonably be drawn?',
   xp: 1010, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 42, title: 'Goethe-Zertifikat C1 Probeprüfung', titleEn: 'Goethe-Zertifikat C1 mock examination' , href: 'chapter-c1-42-goethe-zertifikat-c1-probepruefung.html' },
+  prevChapter: { number: 40, title: 'Forumsbeitrag schreiben', titleEn: 'Writing a forum post', href: 'chapter-c1-40-forumsbeitrag-schreiben.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

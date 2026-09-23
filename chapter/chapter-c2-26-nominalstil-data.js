@@ -16,6 +16,7 @@ const CHAPTER = {
   description: 'Verbstil is a video, showing every action step by step. Nominalstil is a high-resolution photograph, summarizing everything in one compact, objective image. Native German switches between both depending on the situation.',
   xp: 1850, time: 140, difficulty: 'Mastery',
   nextChapter: { number: 27, title: 'Kollokationen & Idiomatik', titleEn: 'Collocations and idiomatic usage' , href: 'chapter-c2-27-kollokationen-und-idiomatik.html' },
+  prevChapter: { number: 25, title: 'Appositionen', titleEn: 'Appositions', href: 'chapter-c2-25-appositionen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

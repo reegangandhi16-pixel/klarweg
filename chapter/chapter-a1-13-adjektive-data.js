@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 14, title: 'Essen & Trinken', titleEn: 'Food & Drink' , href: 'chapter-a1-14-essen.html' },
 
+  prevChapter: { number: 12, title: 'Akkusativ', titleEn: 'The Accusative Case', href: 'chapter-a1-12-akkusativ.html' },
   heroAnimationPath: null,
 
   overviewIntro: {

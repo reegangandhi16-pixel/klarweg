@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Final',
   nextChapter: { number: 1, title: 'Genitiv: Name + s', titleEn: 'Possession with Names' , href: 'chapter-a2-1-genitiv.html' },
 
+  prevChapter: { number: 46, title: 'Zeitangaben mit Dativ', titleEn: 'Time Expressions', href: 'chapter-a1-46-zeitangaben.html' },
   heroAnimationPath: null,
 
   story: {

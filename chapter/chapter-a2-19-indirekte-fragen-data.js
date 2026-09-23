@@ -35,6 +35,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 20, title: 'Interrogativartikel: was für ein(e)', titleEn: 'The Interrogative was für ein(e)' , href: 'chapter-a2-20-was-fuer-ein.html' },
 
+  prevChapter: { number: 18, title: 'Ortsangaben: Pr\u00e4positionen', titleEn: 'Location Expressions', href: 'chapter-a2-18-ortsangaben.html' },
   heroAnimationPath: null,
 
   story: {

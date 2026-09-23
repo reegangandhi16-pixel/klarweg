@@ -23,6 +23,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 41, title: 'Nomen mit Präpositionen (B2)', titleEn: 'Nouns with fixed prepositions (B2)' , href: 'chapter-b2-41-nomen-mit-praepositionen.html' },
 
+  prevChapter: { number: 39, title: 'Relativsätze mit wer... der...', titleEn: 'Indefinite relative clauses: whoever... that person...', href: 'chapter-b2-39-relativsaetze-wer-der.html' },
   heroAnimationPath: null,
 
   story: {

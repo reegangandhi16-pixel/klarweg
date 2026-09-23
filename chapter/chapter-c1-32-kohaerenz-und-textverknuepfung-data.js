@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'Imagine your text as a train. Each sentence is a carriage. Grammar makes every carriage work. Kohärenz connects all the carriages into one train — if one is disconnected, the reader notices immediately.',
   xp: 830, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 33, title: 'Goethe Mini 5', titleEn: 'Checkpoint: Chapters 29–32' , href: 'chapter-c1-33-goethe-mini-5.html' },
+  prevChapter: { number: 31, title: 'Adversativangaben & Gegensätze ausdrücken', titleEn: 'Expressing contrast and opposition precisely', href: 'chapter-c1-31-adversativangaben-und-gegensaetze-ausdruecken.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

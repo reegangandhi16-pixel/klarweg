@@ -27,6 +27,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 21, title: 'Temporale Nebensätze', titleEn: 'Temporal subordinate clauses' , href: 'chapter-b1-21-temporale-nebensaetze.html' },
 
+  prevChapter: { number: 19, title: 'Goethe Halbzeit-Test', titleEn: 'Goethe Halfway Test — the B1 midpoint checkpoint', href: 'chapter-b1-19-goethe-halbzeit-test.html' },
   heroAnimationPath: null,
 
   story: {

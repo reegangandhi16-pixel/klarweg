@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'You have reached the base camp of Mount Everest. Everything you learned in Chapters 1–13 got you here. This is the last equipment check before the final ascent.',
   xp: 1550, time: 165, difficulty: 'Checkpoint',
   nextChapter: { number: 15, title: 'Partizipien als Adjektive', titleEn: 'Participles as adjectives' , href: 'chapter-c2-15-partizipien-als-adjektive.html' },
+  prevChapter: { number: 13, title: 'Passiversatzformen', titleEn: 'Alternatives to the passive', href: 'chapter-c2-13-passiversatzformen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

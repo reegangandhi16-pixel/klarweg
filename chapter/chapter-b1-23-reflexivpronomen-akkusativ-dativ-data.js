@@ -27,6 +27,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 24, title: 'Zweiteilige Konnektoren', titleEn: 'Two-part connectors' , href: 'chapter-b1-24-zweiteilige-konnektoren.html' },
 
+  prevChapter: { number: 22, title: 'brauchen + zu + Infinitiv', titleEn: 'Expressing "don\'t need to"', href: 'chapter-b1-22-brauchen-zu-infinitiv.html' },
   heroAnimationPath: null,
 
   story: {

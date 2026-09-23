@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Imagine you\'re already at the Goethe exam. Don\'t think "I have to remember everything." Think "I\'ve already learned everything — now I simply demonstrate what I know."',
   xp: 1050, time: 150, difficulty: 'Advanced',
   nextChapter: { number: 43, title: 'Goethe-Zertifikat C1 Final', titleEn: 'Complete C1 mastery & certification readiness' , href: 'chapter-c1-43-goethe-zertifikat-c1-final.html' },
+  prevChapter: { number: 41, title: 'Grafikbeschreibung & Grafikauswertung', titleEn: 'Describing and evaluating graphics', href: 'chapter-c1-41-grafikbeschreibung-und-grafikauswertung.html' },
   heroAnimationPath: null,
   isRevision: true,
   story: {

@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Imagine you own six different suits. You would never wear a wedding suit to the gym or pajamas to a lecture. Every situation has its own linguistic dress code — native speakers instinctively choose the right one.',
   xp: 910, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 37, title: 'Kollokationen & Bedeutungsnuancen', titleEn: 'Collocations and shades of meaning' , href: 'chapter-c1-37-kollokationen-und-bedeutungsnuancen.html' },
+  prevChapter: { number: 35, title: 'Konzession & Abwägen', titleEn: 'Concession and weighing arguments', href: 'chapter-c1-35-konzession-und-abwaegen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

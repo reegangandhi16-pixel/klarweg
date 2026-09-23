@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 27, title: 'Goethe Mini 4', titleEn: 'Goethe Checkpoint 4 — Plusquamperfekt, Nebensätze & Konnektoren' , href: 'chapter-b1-27-goethe-mini-3.html' },
 
+  prevChapter: { number: 25, title: 'Stellung von „nicht" im Satz', titleEn: 'Position of "nicht" in the sentence', href: 'chapter-b1-25-stellung-von-nicht.html' },
   heroAnimationPath: null,
 
   story: {

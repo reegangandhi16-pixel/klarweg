@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 26, title: 'Adjektiv nach bestimmtem Artikel', titleEn: 'Adjective endings after the definite article' , href: 'chapter-a2-26-adjektiv-bestimmter-artikel.html' },
 
+  prevChapter: { number: 24, title: 'deshalb & trotzdem', titleEn: 'deshalb & trotzdem', href: 'chapter-a2-24-deshalb-trotzdem.html' },
   heroAnimationPath: null,
 
   story: {

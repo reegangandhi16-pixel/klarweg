@@ -15,6 +15,7 @@ const CHAPTER = {
   description: 'Every grammar topic is an instrument. Knowing each one is not enough — at C2, your job is to conduct the entire orchestra so every part works together naturally.',
   xp: 1700, time: 180, difficulty: 'Checkpoint',
   nextChapter: { number: 21, title: 'Wortbildung der Adjektive', titleEn: 'Word formation: adjectives' , href: 'chapter-c2-21-wortbildung-der-adjektive.html' },
+  prevChapter: { number: 19, title: 'Adjektive mit Ergänzungen', titleEn: 'Adjectives with complements', href: 'chapter-c2-19-adjektive-mit-ergaenzungen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Goethe Mini 3 · Integrated revision',

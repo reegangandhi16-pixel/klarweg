@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 63, title: 'Goethe Mini 5', titleEn: 'Phase 6 checkpoint exam' , href: 'chapter-b2-63-goethe-mini-5.html' },
 
+  prevChapter: { number: 61, title: 'Indirekte Rede: Zeitverschiebung', titleEn: 'Reported speech: time reference', href: 'chapter-b2-61-indirekte-rede-zeitverschiebung.html' },
   heroAnimationPath: null,
 
   story: {

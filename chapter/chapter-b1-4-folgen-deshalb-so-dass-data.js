@@ -27,6 +27,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 5, title: 'Genitiv & Präpositionen mit Genitiv', titleEn: 'Genitive & prepositions with the Genitive (wegen, trotz, während)' , href: 'chapter-b1-5-genitiv-wegen-trotz-waehrend.html' },
 
+  prevChapter: { number: 3, title: 'Konjunktiv II: Höfliche Bitten', titleEn: 'Subjunctive II: Polite requests', href: 'chapter-b1-3-konjunktiv2-hoefliche-bitten.html' },
   heroAnimationPath: null,
 
   story: {

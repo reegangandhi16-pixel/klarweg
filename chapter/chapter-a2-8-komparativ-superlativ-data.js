@@ -31,6 +31,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 9, title: 'Vergleiche mit als / wie', titleEn: 'Comparisons with als / wie' , href: 'chapter-a2-9-vergleiche-als-wie.html' },
 
+  prevChapter: { number: 7, title: 'Possessivartikel im Dativ', titleEn: 'Possessives in the Dative', href: 'chapter-a2-7-possessivartikel-dativ.html' },
   heroAnimationPath: null,
 
   story: {

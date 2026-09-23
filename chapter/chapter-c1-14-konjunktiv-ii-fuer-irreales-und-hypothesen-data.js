@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 15, title: 'Konjunktiv I & Indirekte Rede', titleEn: 'Konjunktiv I and reported speech' , href: 'chapter-c1-15-konjunktiv-i-und-indirekte-rede.html' },
 
+  prevChapter: { number: 13, title: 'Vermutungen mit Modalverben ausdrücken', titleEn: 'Expressing assumptions with modal verbs', href: 'chapter-c1-13-vermutungen-mit-modalverben-ausdruecken.html' },
   heroAnimationPath: null,
 
   story: {

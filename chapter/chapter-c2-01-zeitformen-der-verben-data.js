@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Imagine time as a camera. The event never changes — only the camera angle changes. Verb tenses are the camera angles of German. Native speakers choose the best angle, not simply the grammatical tense.',
   xp: 1200, time: 130, difficulty: 'Mastery',
   nextChapter: { number: 2, title: 'Verben mit Präfixen', titleEn: 'Prefix verbs at native level' , href: 'chapter-c2-02-verben-mit-praefixen.html' },
+  prevChapter: { number: 43, title: 'Goethe-Zertifikat C1 Final', titleEn: 'Complete C1 mastery & certification readiness', href: 'chapter-c1-43-goethe-zertifikat-c1-final.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

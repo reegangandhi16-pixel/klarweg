@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 67, title: 'Argumentieren: Gegenargumente', titleEn: 'Arguing: counterarguments' , href: 'chapter-b2-67-argumentieren-gegenargumente.html' },
 
+  prevChapter: { number: 65, title: 'Wissenschaftssprache', titleEn: 'Academic German', href: 'chapter-b2-65-wissenschaftssprache.html' },
   heroAnimationPath: null,
 
   story: {

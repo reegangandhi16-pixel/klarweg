@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 60, title: 'Indirekte Rede: Grundlagen', titleEn: 'Reported speech: basics' , href: 'chapter-b2-60-indirekte-rede-grundlagen.html' },
 
+  prevChapter: { number: 58, title: 'Textkohärenz: Absatzlogik', titleEn: 'Text coherence: paragraph logic', href: 'chapter-b2-58-textkohaerenz-absatzlogik.html' },
   heroAnimationPath: null,
 
   story: {

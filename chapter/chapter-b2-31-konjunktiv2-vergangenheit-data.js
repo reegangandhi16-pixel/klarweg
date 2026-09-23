@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 32, title: 'Konjunktiv II für Vermutungen', titleEn: 'Konjunktiv II for assumptions' , href: 'chapter-b2-32-konjunktiv2-vermutungen.html' },
 
+  prevChapter: { number: 30, title: 'Alternativen zum Futur', titleEn: 'Alternatives to the future tense', href: 'chapter-b2-30-alternativen-zum-futur.html' },
   heroAnimationPath: null,
 
   story: {

@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'A professional orchestra: Chapter 1 taught rhythm (time), Chapter 2 the instruments (prefix verbs), Chapter 3 harmony (complements), Chapter 4 orchestration (nominal style). This is the first full performance.',
   xp: 1300, time: 150, difficulty: 'Checkpoint',
   nextChapter: { number: 6, title: 'Konjunktiv II', titleEn: 'Konjunktiv II as speaker attitude' , href: 'chapter-c2-06-konjunktiv-ii.html' },
+  prevChapter: { number: 4, title: 'Nomen-Verb-Verbindungen', titleEn: 'Noun-verb constructions at native level', href: 'chapter-c2-04-nomen-verb-verbindungen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

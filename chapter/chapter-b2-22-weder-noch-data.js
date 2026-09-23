@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 23, title: 'nicht nur ... sondern auch', titleEn: 'not only ... but also ...' , href: 'chapter-b2-23-nicht-nur-sondern-auch.html' },
 
+  prevChapter: { number: 21, title: 'sowohl ... als auch', titleEn: 'both ... and ...', href: 'chapter-b2-21-sowohl-als-auch.html' },
   heroAnimationPath: null,
 
   story: {

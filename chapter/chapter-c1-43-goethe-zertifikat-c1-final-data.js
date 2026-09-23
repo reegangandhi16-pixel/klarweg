@@ -16,6 +16,7 @@ const CHAPTER = {
   isFinalChapter: true,
   courseComplete: true,
   nextChapter: { number: 1, title: 'Zeitformen der Verben', titleEn: 'Verb tenses at native level', href: 'chapter-c2-01-zeitformen-der-verben.html' },
+  prevChapter: { number: 42, title: 'Goethe-Zertifikat C1 Probeprüfung', titleEn: 'Goethe-Zertifikat C1 mock examination', href: 'chapter-c1-42-goethe-zertifikat-c1-probepruefung.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

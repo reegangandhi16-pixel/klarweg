@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 31, title: 'Partizip II mit Präfix', titleEn: 'Participles with Prefixes' , href: 'chapter-a1-31-partizip-praefix.html' },
 
+  prevChapter: { number: 29, title: 'Perfekt mit haben', titleEn: 'Perfect with haben', href: 'chapter-a1-29-perfekt-haben.html' },
   heroAnimationPath: null,
 
   story: {

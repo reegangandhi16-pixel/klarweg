@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 12, title: 'Akkusativ', titleEn: 'The Accusative Case' , href: 'chapter-a1-12-akkusativ.html' },
 
+  prevChapter: { number: 10, title: 'Der / Die / Das', titleEn: 'Articles & Gender', href: 'chapter-a1-10-artikel.html' },
   heroAnimationPath: null,
 
   overviewIntro: {

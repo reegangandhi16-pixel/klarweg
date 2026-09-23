@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 17, title: 'Goethe Halbzeit-Test', titleEn: 'Halfway Checkpoint: Chapters 12–16' , href: 'chapter-c1-17-goethe-halbzeit-test.html' },
 
+  prevChapter: { number: 15, title: 'Konjunktiv I & Indirekte Rede', titleEn: 'Konjunktiv I and reported speech', href: 'chapter-c1-15-konjunktiv-i-und-indirekte-rede.html' },
   heroAnimationPath: null,
 
   story: {

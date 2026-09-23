@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 36, title: 'Dativ Einführung', titleEn: 'The Dative Case' , href: 'chapter-a1-36-dativ.html' },
 
+  prevChapter: { number: 34, title: 'Schreiben & Einladungen', titleEn: 'Writing & Invitations', href: 'chapter-a1-34-schreiben.html' },
   heroAnimationPath: null,
 
   story: {

@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 11, title: 'Kein & Nicht', titleEn: 'Negation' , href: 'chapter-a1-11-negation.html' },
 
+  prevChapter: { number: 9, title: 'Verben im Alltag', titleEn: 'Everyday Verbs', href: 'chapter-a1-9-verben.html' },
   heroAnimationPath: null,
 
   overviewIntro: {

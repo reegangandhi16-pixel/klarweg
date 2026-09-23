@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 31, title: 'Konjunktiv II der Vergangenheit', titleEn: 'Konjunktiv II of the past' , href: 'chapter-b2-31-konjunktiv2-vergangenheit.html' },
 
+  prevChapter: { number: 29, title: 'Futur I für Vermutungen', titleEn: 'Futur I for assumptions', href: 'chapter-b2-29-futur1-vermutungen.html' },
   heroAnimationPath: null,
 
   story: {

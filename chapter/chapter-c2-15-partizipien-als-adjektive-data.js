@@ -15,6 +15,7 @@ const CHAPTER = {
   description: 'A relative clause is a large suitcase carried beside the traveler. A participial adjective packs the same information into a compact backpack — the traveler moves faster, and the reader follows more easily.',
   xp: 1575, time: 145, difficulty: 'Mastery',
   nextChapter: { number: 16, title: 'Nominalisierte Adjektive und Partizipien', titleEn: 'Nominalised adjectives and participles' , href: 'chapter-c2-16-nominalisierte-adjektive-und-partizipien.html' },
+  prevChapter: { number: 14, title: 'Goethe Halbzeit Test', titleEn: 'Halfway checkpoint — Chapters 1–13 integrated', href: 'chapter-c2-14-goethe-halbzeit-test.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

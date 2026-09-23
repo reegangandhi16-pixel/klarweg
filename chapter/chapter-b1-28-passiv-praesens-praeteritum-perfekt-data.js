@@ -23,6 +23,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 29, title: 'Passiv mit Modalverben', titleEn: 'Passive with modal verbs' , href: 'chapter-b1-29-passiv-modalverben.html' },
 
+  prevChapter: { number: 27, title: 'Goethe Mini 4', titleEn: 'Goethe Checkpoint 4 — Plusquamperfekt, Nebensätze & Konnektoren', href: 'chapter-b1-27-goethe-mini-3.html' },
   heroAnimationPath: null,
 
   story: {

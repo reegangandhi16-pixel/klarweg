@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 61, title: 'Indirekte Rede: Zeitverschiebung', titleEn: 'Reported speech: time reference' , href: 'chapter-b2-61-indirekte-rede-zeitverschiebung.html' },
 
+  prevChapter: { number: 59, title: 'Konjunktiv I: Formen', titleEn: 'Konjunktiv I: forms', href: 'chapter-b2-59-konjunktiv-i-formen.html' },
   heroAnimationPath: null,
 
   story: {

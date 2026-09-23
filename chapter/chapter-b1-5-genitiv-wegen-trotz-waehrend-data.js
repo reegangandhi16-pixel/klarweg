@@ -27,6 +27,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 6, title: 'Goethe Mini 1', titleEn: 'Goethe Checkpoint 1 — First B1 Readiness' , href: 'chapter-b1-6-goethe-mini-1.html' },
 
+  prevChapter: { number: 4, title: 'Folgen: deshalb & so … dass', titleEn: 'Consequences: deshalb & so … dass', href: 'chapter-b1-4-folgen-deshalb-so-dass.html' },
   heroAnimationPath: null,
 
   story: {

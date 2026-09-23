@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 20, title: '(an)statt ... zu', titleEn: 'instead of ... -ing' , href: 'chapter-b2-20-anstatt-zu.html' },
 
+  prevChapter: { number: 18, title: 'Modalsätze: dadurch, dass', titleEn: 'Modal clauses: dadurch, dass', href: 'chapter-b2-18-modalsaetze-dadurch-dass.html' },
   heroAnimationPath: null,
 
   story: {

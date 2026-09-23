@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'Think of German argumentation as a bridge. One idea stands on one side, the opposing idea on the other. Different bridges serve different purposes — native speakers choose the bridge by the relationship between ideas, not because all of them mean "but".',
   xp: 810, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 32, title: 'Kohärenz & Textverknüpfung', titleEn: 'Text coherence and cohesion' , href: 'chapter-c1-32-kohaerenz-und-textverknuepfung.html' },
+  prevChapter: { number: 30, title: 'Nomen mit Numerusbesonderheiten', titleEn: 'Nouns with special number behavior', href: 'chapter-c1-30-nomen-mit-numerusbesonderheiten.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

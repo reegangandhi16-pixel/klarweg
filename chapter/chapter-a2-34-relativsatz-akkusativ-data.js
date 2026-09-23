@@ -32,6 +32,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 35, title: 'Goethe A2 Final', titleEn: 'Goethe Checkpoint 4 — Final A2 Readiness' , href: 'chapter-a2-35-goethe-mini-4.html' },
 
+  prevChapter: { number: 33, title: 'Relativsätze im Nominativ', titleEn: 'Relative clauses in the nominative', href: 'chapter-a2-33-relativsatz-nominativ.html' },
   heroAnimationPath: null,
 
   story: {

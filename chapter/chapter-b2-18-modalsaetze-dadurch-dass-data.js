@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 19, title: 'ohne ... zu', titleEn: 'without ... -ing' , href: 'chapter-b2-19-ohne-zu.html' },
 
+  prevChapter: { number: 17, title: 'Modalsätze: indem', titleEn: 'Modal clauses: indem', href: 'chapter-b2-17-modalsaetze-indem.html' },
   heroAnimationPath: null,
 
   story: {

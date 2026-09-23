@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 33, title: 'je … desto / umso', titleEn: 'Proportional comparisons: je … desto/umso' , href: 'chapter-b1-33-je-desto-umso.html' },
 
+  prevChapter: { number: 31, title: 'Adjektive als Nomen', titleEn: 'Adjectives as nouns', href: 'chapter-b1-31-adjektive-als-nomen.html' },
   heroAnimationPath: null,
 
   story: {

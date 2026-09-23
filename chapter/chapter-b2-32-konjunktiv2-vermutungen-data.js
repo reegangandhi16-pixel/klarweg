@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 33, title: 'Irreale Vergleiche: als ob', titleEn: 'Unreal comparisons: as if' , href: 'chapter-b2-33-irreale-vergleiche-als-ob.html' },
 
+  prevChapter: { number: 31, title: 'Konjunktiv II der Vergangenheit', titleEn: 'Konjunktiv II of the past', href: 'chapter-b2-31-konjunktiv2-vergangenheit.html' },
   heroAnimationPath: null,
 
   story: {

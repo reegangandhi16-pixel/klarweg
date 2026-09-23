@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 26, title: 'Adjektivdeklination ohne Artikel', titleEn: 'Adjective declension without an article' , href: 'chapter-b1-26-adjektiv-ohne-artikel.html' },
 
+  prevChapter: { number: 24, title: 'Zweiteilige Konnektoren', titleEn: 'Two-part connectors', href: 'chapter-b1-24-zweiteilige-konnektoren.html' },
   heroAnimationPath: null,
 
   story: {

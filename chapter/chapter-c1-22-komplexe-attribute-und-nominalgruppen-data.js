@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'A2 sentences grow by adding new clauses. C1 sentences grow by enriching the noun phrase. The more formal German becomes, the more information moves into the noun phrase.',
   xp: 630, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 23, title: 'Goethe Mini 3', titleEn: 'Checkpoint: Chapters 18–22' , href: 'chapter-c1-23-goethe-mini-3.html' },
+  prevChapter: { number: 21, title: 'Partizipialattribute verstehen und nutzen', titleEn: 'Understanding and using participial attributes', href: 'chapter-c1-21-partizipialattribute-verstehen-und-nutzen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

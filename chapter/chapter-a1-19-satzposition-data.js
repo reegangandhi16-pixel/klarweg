@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 20, title: 'Modalverben 1', titleEn: 'Modal Verbs 1' , href: 'chapter-a1-20-modalverben1.html' },
 
+  prevChapter: { number: 18, title: 'Unregelmäßige Verben', titleEn: 'Irregular Verbs', href: 'chapter-a1-18-irregular.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

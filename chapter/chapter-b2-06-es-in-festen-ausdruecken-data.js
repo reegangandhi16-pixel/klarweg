@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 7, title: 'Verbergänzungen erkennen', titleEn: 'Recognizing verb complements' , href: 'chapter-b2-07-verbergaenzungen-erkennen.html' },
 
+  prevChapter: { number: 5, title: 'Korrelat-es (es freut mich, dass …)', titleEn: 'Correlative es (anticipatory es)', href: 'chapter-b2-05-korrelat-es.html' },
   heroAnimationPath: null,
 
   story: {

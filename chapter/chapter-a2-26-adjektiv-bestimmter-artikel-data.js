@@ -30,6 +30,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 27, title: 'Adjektiv nach unbestimmtem Artikel', titleEn: 'Adjective endings after the indefinite article' , href: 'chapter-a2-27-adjektiv-unbestimmter-artikel.html' },
 
+  prevChapter: { number: 25, title: 'Goethe Mini 3', titleEn: 'Goethe Checkpoint 3', href: 'chapter-a2-25-goethe-mini-3.html' },
   heroAnimationPath: null,
 
   story: {

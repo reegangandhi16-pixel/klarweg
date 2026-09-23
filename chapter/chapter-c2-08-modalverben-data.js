@@ -15,6 +15,7 @@ const CHAPTER = {
   description: 'Imagine every modal verb is a pair of glasses. The event stays exactly the same. Only the lens changes — certainty, possibility, obligation, or politeness.',
   xp: 1375, time: 130, difficulty: 'Mastery',
   nextChapter: { number: 9, title: 'Goethe Mini 2', titleEn: 'Checkpoint — Chapters 1–8 integrated' , href: 'chapter-c2-09-goethe-mini-2.html' },
+  prevChapter: { number: 7, title: 'Konjunktiv I', titleEn: 'Konjunktiv I as invisible quotation marks', href: 'chapter-c2-07-konjunktiv-i.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

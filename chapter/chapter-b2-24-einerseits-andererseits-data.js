@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 25, title: 'Verbindungsadverbien', titleEn: 'Conjunctive adverbs' , href: 'chapter-b2-25-verbindungsadverbien.html' },
 
+  prevChapter: { number: 23, title: 'nicht nur ... sondern auch', titleEn: 'not only ... but also ...', href: 'chapter-b2-23-nicht-nur-sondern-auch.html' },
   heroAnimationPath: null,
 
   story: {

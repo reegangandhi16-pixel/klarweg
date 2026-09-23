@@ -31,6 +31,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 7, title: 'Possessivartikel im Dativ', titleEn: 'Possessives in the Dative' , href: 'chapter-a2-7-possessivartikel-dativ.html' },
 
+  prevChapter: { number: 5, title: 'Nebensatz mit dass', titleEn: 'Subordinate Clauses with dass', href: 'chapter-a2-5-dass.html' },
   heroAnimationPath: null,
 
   story: {

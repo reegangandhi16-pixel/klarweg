@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 10, title: 'Häufige B2-Verben (trennbar & untrennbar)', titleEn: 'High-frequency B2 verbs (separable & inseparable)' , href: 'chapter-b2-10-haeufige-b2-verben.html' },
 
+  prevChapter: { number: 8, title: 'Valenz von Verben', titleEn: 'Verb valency', href: 'chapter-b2-08-valenz-von-verben.html' },
   heroAnimationPath: null,
 
   story: {

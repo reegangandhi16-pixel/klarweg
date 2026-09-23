@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'The noun disappears — but its meaning stays. Instead of "die Studenten", modern German often says "die Studierenden". The adjective or participle takes over the job of the noun.',
   xp: 690, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 26, title: 'Passiv & Passiversatzformen', titleEn: 'Passive and passive alternatives' , href: 'chapter-c1-26-passiv-und-passiversatzformen.html' },
+  prevChapter: { number: 24, title: 'Nominalisierung im formellen Stil', titleEn: 'Nominalization in formal style', href: 'chapter-c1-24-nominalisierung-im-formellen-stil.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

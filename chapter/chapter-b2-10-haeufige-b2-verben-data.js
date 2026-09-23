@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 11, title: 'Stellung von nicht (Satz- vs. Sondernegation)', titleEn: 'Position of nicht (sentence vs. special negation)' , href: 'chapter-b2-11-stellung-von-nicht.html' },
 
+  prevChapter: { number: 9, title: 'Trennbar vs. untrennbar (Bedeutungsunterschiede)', titleEn: 'Separable vs inseparable verbs (meaning differences)', href: 'chapter-b2-09-trennbar-vs-untrennbar.html' },
   heroAnimationPath: null,
 
   story: {

@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 2, title: 'Perfekt (Wiederholung)', titleEn: 'The Spoken Past — Review' , href: 'chapter-a2-2-perfekt-review.html' },
 
+  prevChapter: { number: 47, title: 'Goethe A1 Final', titleEn: 'The A1 Finale', href: 'chapter-a1-47-goethe-final.html' },
   heroAnimationPath: null,
 
   story: {

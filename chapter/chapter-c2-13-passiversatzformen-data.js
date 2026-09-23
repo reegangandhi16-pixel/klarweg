@@ -15,6 +15,7 @@ const CHAPTER = {
   description: 'Passive voice is only one road to your destination. At C2, native speakers know an entire network of roads — sometimes the highway, sometimes a shortcut, sometimes a scenic road. Mastery means choosing the best route.',
   xp: 1500, time: 150, difficulty: 'Mastery',
   nextChapter: { number: 14, title: 'Goethe Halbzeit Test', titleEn: 'Halfway checkpoint — Chapters 1–13 integrated' , href: 'chapter-c2-14-goethe-halbzeit-test.html' },
+  prevChapter: { number: 12, title: 'Passiv', titleEn: 'The passive voice at native level', href: 'chapter-c2-12-passiv.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

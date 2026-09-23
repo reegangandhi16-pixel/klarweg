@@ -32,6 +32,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 1, title: 'Infinitiv mit zu', titleEn: 'Infinitive with zu' , href: 'chapter-b1-1-infinitiv-mit-zu.html' },
 
+  prevChapter: { number: 34, title: 'Relativsätze im Akkusativ', titleEn: 'Relative clauses in the accusative', href: 'chapter-a2-34-relativsatz-akkusativ.html' },
   heroAnimationPath: null,
 
   story: {

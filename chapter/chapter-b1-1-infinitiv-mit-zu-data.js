@@ -26,6 +26,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 2, title: 'Nebensätze: weil / da & obwohl', titleEn: 'Subordinate clauses: weil / da & obwohl' , href: 'chapter-b1-2-nebensaetze-weil-da-obwohl.html' },
 
+  prevChapter: { number: 35, title: 'Goethe A2 Final', titleEn: 'Goethe Checkpoint 4 — Final A2 Readiness', href: 'chapter-a2-35-goethe-mini-4.html' },
   heroAnimationPath: null,
 
   story: {

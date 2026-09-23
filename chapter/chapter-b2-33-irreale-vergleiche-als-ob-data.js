@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 34, title: 'Temporalsätze: während / seitdem', titleEn: 'Time clauses: while / since' , href: 'chapter-b2-34-temporalsaetze-waehrend-seitdem.html' },
 
+  prevChapter: { number: 32, title: 'Konjunktiv II für Vermutungen', titleEn: 'Konjunktiv II for assumptions', href: 'chapter-b2-32-konjunktiv2-vermutungen.html' },
   heroAnimationPath: null,
 
   story: {

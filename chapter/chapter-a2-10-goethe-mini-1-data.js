@@ -25,6 +25,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 11, title: 'Nebensatz mit wenn', titleEn: 'Subordinate Clauses with wenn' , href: 'chapter-a2-11-wenn.html' },
 
+  prevChapter: { number: 9, title: 'Vergleiche mit als / wie', titleEn: 'Comparisons with als / wie', href: 'chapter-a2-9-vergleiche-als-wie.html' },
   heroAnimationPath: null,
 
   story: {

@@ -16,6 +16,7 @@ const CHAPTER = {
   description: 'Every noun is the center of a solar system. The adjectives are planets orbiting it. At C2, the entire system is perfectly organized — every modifier has its exact orbit and purpose.',
   xp: 1625, time: 145, difficulty: 'Mastery',
   nextChapter: { number: 18, title: 'Stilistische Nuancen & Register von Adjektiven', titleEn: 'Stylistic nuance & register in adjectives' , href: 'chapter-c2-18-stilistische-nuancen-und-register-von-adjektiven.html' },
+  prevChapter: { number: 16, title: 'Nominalisierte Adjektive und Partizipien', titleEn: 'Nominalised adjectives and participles', href: 'chapter-c2-16-nominalisierte-adjektive-und-partizipien.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

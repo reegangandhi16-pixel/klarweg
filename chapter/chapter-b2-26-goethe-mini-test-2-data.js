@@ -22,6 +22,7 @@ const CHAPTER = {
   isCheckpoint: true,
   nextChapter: { number: 27, title: 'Tempus: Perfekt vs. Präteritum', titleEn: 'Tense: Perfekt vs. Präteritum (usage)' , href: 'chapter-b2-27-perfekt-vs-praeteritum.html' },
 
+  prevChapter: { number: 25, title: 'Verbindungsadverbien', titleEn: 'Conjunctive adverbs', href: 'chapter-b2-25-verbindungsadverbien.html' },
   heroAnimationPath: null,
 
   story: null,

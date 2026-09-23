@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 45, title: 'Passiversatz: sich lassen', titleEn: 'Passive alternative: sich lassen' , href: 'chapter-b2-45-passiversatz-sich-lassen.html' },
 
+  prevChapter: { number: 43, title: 'Goethe Mini 3 (Checkpoint)', titleEn: 'Goethe mini-test 3 (checkpoint)', href: 'chapter-b2-43-goethe-mini-3.html' },
   heroAnimationPath: null,
 
   story: {

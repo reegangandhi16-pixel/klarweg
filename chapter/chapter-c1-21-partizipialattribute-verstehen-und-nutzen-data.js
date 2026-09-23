@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Think of every participial attribute as a folded relative clause. Nothing disappears — the information is simply compressed into the noun phrase.',
   xp: 630, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 22, title: 'Komplexe Attribute & Nominalgruppen', titleEn: 'Complex attributes and noun groups' , href: 'chapter-c1-22-komplexe-attribute-und-nominalgruppen.html' },
+  prevChapter: { number: 20, title: 'Relativsätze erweitern und variieren', titleEn: 'Expanding and varying relative clauses', href: 'chapter-c1-20-relativsaetze-erweitern-und-variieren.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

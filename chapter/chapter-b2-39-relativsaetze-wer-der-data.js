@@ -23,6 +23,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 40, title: 'Verben mit Präpositionen (B2)', titleEn: 'Verbs with fixed prepositions (B2)' , href: 'chapter-b2-40-verben-mit-praepositionen.html' },
 
+  prevChapter: { number: 38, title: 'Verschachtelte Relativsätze', titleEn: 'Nested relative clauses', href: 'chapter-b2-38-verschachtelte-relativsaetze.html' },
   heroAnimationPath: null,
 
   story: {

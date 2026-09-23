@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 57, title: 'Textkohärenz: Verweiswörter', titleEn: 'Text coherence: reference words' , href: 'chapter-b2-57-textkohaerenz-verweiswoerter.html' },
 
+  prevChapter: { number: 55, title: 'Modalpartikeln: doch / ja', titleEn: 'Modal particles: doch / ja', href: 'chapter-b2-55-modalpartikeln-doch-ja.html' },
   heroAnimationPath: null,
 
   story: {

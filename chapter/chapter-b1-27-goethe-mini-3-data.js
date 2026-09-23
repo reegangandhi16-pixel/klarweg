@@ -32,6 +32,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 28, title: 'Passiv: Präsens, Präteritum & Perfekt', titleEn: 'Passive: present, simple past & perfect' , href: 'chapter-b1-28-passiv-praesens-praeteritum-perfekt.html' },
 
+  prevChapter: { number: 26, title: 'Adjektivdeklination ohne Artikel', titleEn: 'Adjective declension without an article', href: 'chapter-b1-26-adjektiv-ohne-artikel.html' },
   heroAnimationPath: null,
 
   story: {

@@ -12,6 +12,7 @@ const CHAPTER = {
   description: 'Native-like academic German balances nominal style, passive alternatives, and Funktionsverbgefüge while staying fluent and readable. This checkpoint tests whether that balance has become automatic.',
   xp: 750, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 29, title: 'Verben mit Präfixen sicher unterscheiden', titleEn: 'Confidently distinguishing prefix verb families' , href: 'chapter-c1-29-verben-mit-praefixen-sicher-unterscheiden.html' },
+  prevChapter: { number: 27, title: 'Funktionsverbgefüge im akademischen Deutsch', titleEn: 'Light verb constructions in academic German', href: 'chapter-c1-27-funktionsverbgefuege-im-akademischen-deutsch.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

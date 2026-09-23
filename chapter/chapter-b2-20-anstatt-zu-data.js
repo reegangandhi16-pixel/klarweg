@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 21, title: 'sowohl ... als auch', titleEn: 'both ... and ...' , href: 'chapter-b2-21-sowohl-als-auch.html' },
 
+  prevChapter: { number: 19, title: 'ohne ... zu', titleEn: 'without ... -ing', href: 'chapter-b2-19-ohne-zu.html' },
   heroAnimationPath: null,
 
   story: {

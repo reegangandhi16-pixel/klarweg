@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 3, title: 'Konjunktiv II: Höfliche Bitten', titleEn: 'Subjunctive II: Polite requests' , href: 'chapter-b1-3-konjunktiv2-hoefliche-bitten.html' },
 
+  prevChapter: { number: 1, title: 'Infinitiv mit zu', titleEn: 'Infinitive with zu', href: 'chapter-b1-1-infinitiv-mit-zu.html' },
   heroAnimationPath: null,
 
   story: {

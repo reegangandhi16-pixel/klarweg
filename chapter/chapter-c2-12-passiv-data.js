@@ -16,6 +16,7 @@ const CHAPTER = {
   description: 'Active voice points the camera at the actor. Passive voice points it at the action or result. At C2, native speakers don\'t ask "can I use the passive?" — they ask "where should I point the camera?"',
   xp: 1475, time: 145, difficulty: 'Mastery',
   nextChapter: { number: 13, title: 'Passiversatzformen', titleEn: 'Alternatives to the passive' , href: 'chapter-c2-13-passiversatzformen.html' },
+  prevChapter: { number: 11, title: 'Relativsätze', titleEn: 'Relative clauses at native level', href: 'chapter-c2-11-relativsaetze.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

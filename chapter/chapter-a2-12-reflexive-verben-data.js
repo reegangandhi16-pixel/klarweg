@@ -28,6 +28,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 13, title: 'Pr\u00e4positionen mit Dativ', titleEn: 'Prepositions with the Dative' , href: 'chapter-a2-13-praepositionen-dativ.html' },
 
+  prevChapter: { number: 11, title: 'Nebensatz mit wenn', titleEn: 'Subordinate Clauses with wenn', href: 'chapter-a2-11-wenn.html' },
   heroAnimationPath: null,
 
   story: {

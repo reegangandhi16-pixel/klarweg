@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Think of a Funktionsverbgefüge as a team: the noun carries the meaning, the verb carries the grammar. "Analysieren" becomes "eine Analyse durchführen" — the action stays the same, but the expression becomes more formal and objective.',
   xp: 730, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 28, title: 'Goethe Mini 4', titleEn: 'Checkpoint: Chapters 24–27' , href: 'chapter-c1-28-goethe-mini-4.html' },
+  prevChapter: { number: 26, title: 'Passiv & Passiversatzformen', titleEn: 'Passive and passive alternatives', href: 'chapter-c1-26-passiv-und-passiversatzformen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

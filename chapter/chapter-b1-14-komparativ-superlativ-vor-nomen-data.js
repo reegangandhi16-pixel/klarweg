@@ -31,6 +31,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 15, title: 'N-Deklination', titleEn: 'N-declension (weak masculine nouns)' , href: 'chapter-b1-15-n-deklination.html' },
 
+  prevChapter: { number: 13, title: 'Goethe Mini 3', titleEn: 'Goethe Checkpoint 3 — Passiv, Relativsätze & Adjektivdeklination', href: 'chapter-b1-13-goethe-mini-2.html' },
   heroAnimationPath: null,
 
   story: {

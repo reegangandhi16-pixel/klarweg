@@ -29,6 +29,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 9, title: 'Goethe Mini 2', titleEn: 'Goethe Checkpoint 2 — Präteritum & Zeitangaben' , href: 'chapter-b1-9-goethe-mini-2.html' },
 
+  prevChapter: { number: 7, title: 'Präteritum', titleEn: 'The simple past (Präteritum)', href: 'chapter-b1-7-praeteritum.html' },
   heroAnimationPath: null,
 
   story: {

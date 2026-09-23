@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 35, title: 'Temporalsätze: bevor / nachdem', titleEn: 'Time clauses: before / after' , href: 'chapter-b2-35-temporalsaetze-bevor-nachdem.html' },
 
+  prevChapter: { number: 33, title: 'Irreale Vergleiche: als ob', titleEn: 'Unreal comparisons: as if', href: 'chapter-b2-33-irreale-vergleiche-als-ob.html' },
   heroAnimationPath: null,
 
   story: {

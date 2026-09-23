@@ -1179,6 +1179,9 @@ img { max-width: 100%; display: block; }
 .next-chapter-label { font-family: var(--font-ui); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 8px; }
 .next-chapter-title { font-family: var(--font-display); font-size: 26px; font-weight: 600; }
 .next-chapter-title .de { font-style: italic; }
+.prev-chapter-link { display: inline-block; font-family: var(--font-ui); font-size: 14px; color: var(--ink-tertiary); margin-top: 28px; text-decoration: none; }
+.prev-chapter-link:hover { color: var(--ink-secondary); }
+.prev-chapter-link .de { font-style: italic; }
 
 /* Top nav bar (chapter chrome) */
 .chapter-topbar {

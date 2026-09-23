@@ -26,6 +26,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 18, title: 'Ortsangaben: Pr\u00e4positionen', titleEn: 'Location Expressions' , href: 'chapter-a2-18-ortsangaben.html' },
 
+  prevChapter: { number: 16, title: 'Goethe Mini 2', titleEn: 'Goethe Checkpoint 2', href: 'chapter-a2-16-goethe-mini-2.html' },
   heroAnimationPath: null,
 
   story: {

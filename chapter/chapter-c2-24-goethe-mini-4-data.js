@@ -18,6 +18,7 @@ const CHAPTER = {
   description: 'Grammar is the building material. Morphology builds the buildings. Vocabulary furnishes the rooms. Register picks the neighborhood. At C2, your job is not one correct house — it is a whole city where every part works together naturally.',
   xp: 1800, time: 190, difficulty: 'Checkpoint',
   nextChapter: { number: 25, title: 'Appositionen', titleEn: 'Appositions' , href: 'chapter-c2-25-appositionen.html' },
+  prevChapter: { number: 23, title: 'Wortbildung der Verben', titleEn: 'Word formation: verbs', href: 'chapter-c2-23-wortbildung-der-verben.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Goethe Mini 4 · Integrated revision',

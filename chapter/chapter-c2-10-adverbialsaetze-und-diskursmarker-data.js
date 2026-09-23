@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Every paragraph is a train carriage. Grammar builds each carriage. Discourse markers are the couplings that connect them — without strong couplings, the train falls apart.',
   xp: 1425, time: 140, difficulty: 'Mastery',
   nextChapter: { number: 11, title: 'Relativsätze', titleEn: 'Relative clauses at native level' , href: 'chapter-c2-11-relativsaetze.html' },
+  prevChapter: { number: 9, title: 'Goethe Mini 2', titleEn: 'Checkpoint — Chapters 1–8 integrated', href: 'chapter-c2-09-goethe-mini-2.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 36, title: 'Goethe Halbzeit-Test (Checkpoint)', titleEn: 'Goethe mid-course test (checkpoint)' , href: 'chapter-b2-36-goethe-halbzeit-test.html' },
 
+  prevChapter: { number: 34, title: 'Temporalsätze: während / seitdem', titleEn: 'Time clauses: while / since', href: 'chapter-b2-34-temporalsaetze-waehrend-seitdem.html' },
   heroAnimationPath: null,
 
   story: {

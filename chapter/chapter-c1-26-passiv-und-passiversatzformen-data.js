@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Active: someone performs the action. Passive: the action becomes the star. Passiversatzformen achieve the same effect without the passive at all. The question is never "can I form it?" but "which structure sounds most natural?"',
   xp: 710, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 27, title: 'Funktionsverbgefüge im akademischen Deutsch', titleEn: 'Light verb constructions in academic German' , href: 'chapter-c1-27-funktionsverbgefuege-im-akademischen-deutsch.html' },
+  prevChapter: { number: 25, title: 'Partizipien & Adjektive als Nomen', titleEn: 'Participles and adjectives as nouns', href: 'chapter-c1-25-partizipien-und-adjektive-als-nomen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

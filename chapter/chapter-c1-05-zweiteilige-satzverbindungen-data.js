@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 6, title: 'Goethe Mini 1', titleEn: 'Checkpoint: Chapters 1–5' , href: 'chapter-c1-06-goethe-mini-1.html' },
 
+  prevChapter: { number: 4, title: 'Hauptsätze elegant verbinden', titleEn: 'Connecting main clauses elegantly', href: 'chapter-c1-04-hauptsaetze-elegant-verbinden.html' },
   heroAnimationPath: null,
 
   story: {

@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'Before making a noun plural, always ask: does this noun actually have a plural? Native speakers remember these as lexical properties, not grammar rules.',
   xp: 790, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 31, title: 'Adversativangaben & Gegensätze ausdrücken', titleEn: 'Expressing contrast and opposition precisely' , href: 'chapter-c1-31-adversativangaben-und-gegensaetze-ausdruecken.html' },
+  prevChapter: { number: 29, title: 'Verben mit Präfixen sicher unterscheiden', titleEn: 'Confidently distinguishing prefix verb families', href: 'chapter-c1-29-verben-mit-praefixen-sicher-unterscheiden.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

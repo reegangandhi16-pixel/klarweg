@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 30, title: 'Perfekt mit sein', titleEn: 'Perfect with sein' , href: 'chapter-a1-30-perfekt-sein.html' },
 
+  prevChapter: { number: 28, title: 'Perfekt Einführung', titleEn: 'The Perfect Tense', href: 'chapter-a1-28-perfekt.html' },
   heroAnimationPath: null,
 
   story: {

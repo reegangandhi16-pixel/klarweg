@@ -25,6 +25,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 25, title: 'Stellung von „nicht" im Satz', titleEn: 'Position of "nicht" in the sentence' , href: 'chapter-b1-25-stellung-von-nicht.html' },
 
+  prevChapter: { number: 23, title: 'Reflexivpronomen: Akkusativ & Dativ', titleEn: 'Reflexive pronouns: Akkusativ & Dativ', href: 'chapter-b1-23-reflexivpronomen-akkusativ-dativ.html' },
   heroAnimationPath: null,
 
   story: {

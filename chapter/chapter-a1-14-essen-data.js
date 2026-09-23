@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 15, title: 'Im Café', titleEn: 'At the Café' , href: 'chapter-a1-15-cafe.html' },
 
+  prevChapter: { number: 13, title: 'Adjektive mit sein', titleEn: 'Adjectives with sein', href: 'chapter-a1-13-adjektive.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

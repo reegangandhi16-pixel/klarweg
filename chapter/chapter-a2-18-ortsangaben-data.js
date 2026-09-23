@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 19, title: 'Indirekte Frage (W-Frage & ob)', titleEn: 'Indirect Questions (W-word & ob)' , href: 'chapter-a2-19-indirekte-fragen.html' },
 
+  prevChapter: { number: 17, title: 'werden', titleEn: 'The verb werden', href: 'chapter-a2-17-werden.html' },
   heroAnimationPath: null,
 
   story: {

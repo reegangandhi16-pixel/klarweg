@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 43, title: 'Small Talk & man', titleEn: 'Small Talk & man' , href: 'chapter-a1-43-smalltalk-man.html' },
 
+  prevChapter: { number: 41, title: 'Dativpronomen', titleEn: 'Dative Pronouns', href: 'chapter-a1-41-dativpronomen.html' },
   heroAnimationPath: null,
 
   story: {

@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 16, title: 'Konsekutivsätze: sodass / infolgedessen', titleEn: 'Consequence clauses: sodass / infolgedessen' , href: 'chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html' },
 
+  prevChapter: { number: 14, title: 'Goethe Mini Test 1 (Checkpoint)', titleEn: 'Goethe Mini Test 1 (checkpoint)', href: 'chapter-b2-14-goethe-mini-test-1.html' },
   heroAnimationPath: null,
 
   story: {

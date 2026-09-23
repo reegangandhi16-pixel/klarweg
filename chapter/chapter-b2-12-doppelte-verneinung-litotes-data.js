@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 13, title: 'Nuancierte Negation', titleEn: 'Nuanced negation' , href: 'chapter-b2-13-nuancierte-negation.html' },
 
+  prevChapter: { number: 11, title: 'Stellung von nicht (Satz- vs. Sondernegation)', titleEn: 'Position of nicht (sentence vs. special negation)', href: 'chapter-b2-11-stellung-von-nicht.html' },
   heroAnimationPath: null,
 
   story: {

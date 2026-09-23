@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 18, title: 'Modalsätze: dadurch, dass', titleEn: 'Modal clauses: dadurch, dass' , href: 'chapter-b2-18-modalsaetze-dadurch-dass.html' },
 
+  prevChapter: { number: 16, title: 'Konsekutivsätze: sodass / infolgedessen', titleEn: 'Consequence clauses: sodass / infolgedessen', href: 'chapter-b2-16-konsekutivsaetze-sodass-infolgedessen.html' },
   heroAnimationPath: null,
 
   story: {

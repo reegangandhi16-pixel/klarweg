@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 39, title: 'Ortsangaben & Kurzformen', titleEn: 'Places & Contractions' , href: 'chapter-a1-39-ortsangaben.html' },
 
+  prevChapter: { number: 37, title: 'Präpositionen mit Dativ', titleEn: 'Dative Prepositions', href: 'chapter-a1-37-praep-dativ.html' },
   heroAnimationPath: null,
 
   story: {

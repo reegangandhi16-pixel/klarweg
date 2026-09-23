@@ -31,6 +31,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 21, title: 'Verben mit Dativ und Akkusativ', titleEn: 'Verbs with Dative and Accusative' , href: 'chapter-a2-21-verben-dativ-akkusativ.html' },
 
+  prevChapter: { number: 19, title: 'Indirekte Frage (W-Frage & ob)', titleEn: 'Indirect Questions (W-word & ob)', href: 'chapter-a2-19-indirekte-fragen.html' },
   heroAnimationPath: null,
 
   story: {

@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 29, title: 'Futur I für Vermutungen', titleEn: 'Futur I for assumptions' , href: 'chapter-b2-29-futur1-vermutungen.html' },
 
+  prevChapter: { number: 27, title: 'Tempus: Perfekt vs. Präteritum', titleEn: 'Tense: Perfekt vs. Präteritum (usage)', href: 'chapter-b2-27-perfekt-vs-praeteritum.html' },
   heroAnimationPath: null,
 
   story: {

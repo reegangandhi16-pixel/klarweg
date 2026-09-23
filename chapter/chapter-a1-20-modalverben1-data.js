@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 21, title: 'Uhrzeit', titleEn: 'Telling the Time' , href: 'chapter-a1-21-uhrzeit.html' },
 
+  prevChapter: { number: 19, title: 'Satzposition', titleEn: 'Word Order', href: 'chapter-a1-19-satzposition.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

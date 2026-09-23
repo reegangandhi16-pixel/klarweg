@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 5, title: 'Korrelat-es (es freut mich, dass …)', titleEn: 'Correlative es (anticipatory es)' , href: 'chapter-b2-05-korrelat-es.html' },
 
+  prevChapter: { number: 3, title: 'Informationsstruktur: Thema → Rhema', titleEn: 'Information structure: theme → rheme', href: 'chapter-b2-03-informationsstruktur-thema-rhema.html' },
   heroAnimationPath: null,
 
   story: {

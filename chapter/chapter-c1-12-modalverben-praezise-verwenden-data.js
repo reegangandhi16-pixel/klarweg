@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 13, title: 'Vermutungen mit Modalverben ausdrücken', titleEn: 'Expressing assumptions with modal verbs' , href: 'chapter-c1-13-vermutungen-mit-modalverben-ausdruecken.html' },
 
+  prevChapter: { number: 11, title: 'Goethe Mini 2', titleEn: 'Checkpoint: Chapters 7–10', href: 'chapter-c1-11-goethe-mini-2.html' },
   heroAnimationPath: null,
 
   story: {

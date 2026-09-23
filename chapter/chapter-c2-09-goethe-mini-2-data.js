@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'Imagine conducting an international symposium. Each speaker represents one major grammar system. Goethe C2 expects you to coordinate the entire conference flawlessly.',
   xp: 1400, time: 150, difficulty: 'Checkpoint',
   nextChapter: { number: 10, title: 'Adverbialsätze & Diskursmarker', titleEn: 'Adverbial clauses & discourse markers' , href: 'chapter-c2-10-adverbialsaetze-und-diskursmarker.html' },
+  prevChapter: { number: 8, title: 'Modalverben', titleEn: 'Modal verbs as a pair of glasses', href: 'chapter-c2-08-modalverben.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

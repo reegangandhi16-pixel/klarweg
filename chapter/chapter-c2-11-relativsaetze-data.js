@@ -17,6 +17,7 @@ const CHAPTER = {
   description: 'The main clause is the box. The relative clause is a carefully wrapped note placed inside. C2 mastery means knowing exactly how much belongs inside, how much belongs outside, and how to keep the package elegant.',
   xp: 1450, time: 145, difficulty: 'Mastery',
   nextChapter: { number: 12, title: 'Passiv', titleEn: 'The passive voice at native level' , href: 'chapter-c2-12-passiv.html' },
+  prevChapter: { number: 10, title: 'Adverbialsätze & Diskursmarker', titleEn: 'Adverbial clauses & discourse markers', href: 'chapter-c2-10-adverbialsaetze-und-diskursmarker.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

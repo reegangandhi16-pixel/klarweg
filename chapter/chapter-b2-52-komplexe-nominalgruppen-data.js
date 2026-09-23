@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 53, title: 'Goethe Mini 4', titleEn: 'Phase 5 checkpoint exam' , href: 'chapter-b2-53-goethe-mini-4.html' },
 
+  prevChapter: { number: 51, title: 'Erweiterte Partizipialattribute', titleEn: 'Extended participial attributes', href: 'chapter-b2-51-erweiterte-partizipialattribute.html' },
   heroAnimationPath: null,
 
   story: {

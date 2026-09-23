@@ -17,6 +17,7 @@ const CHAPTER = {
   description: 'The root verb is the trunk. Prefixes grow new branches — new meanings, new valencies. Suffixes grow the leaves that mark register. Once you see the tree, thousands of unfamiliar verbs become instantly readable.',
   xp: 1775, time: 150, difficulty: 'Mastery',
   nextChapter: { number: 24, title: 'Goethe Mini 4', titleEn: 'Checkpoint — Chapters 1–23 integrated' , href: 'chapter-c2-24-goethe-mini-4.html' },
+  prevChapter: { number: 22, title: 'Wortbildung der Nomen', titleEn: 'Word formation: nouns', href: 'chapter-c2-22-wortbildung-der-nomen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

@@ -16,6 +16,7 @@ const CHAPTER = {
   description: 'Some magnets attract a preposition. Some attract an infinitive. Some attract a dass-clause. Without the correct companion, the adjective feels incomplete.',
   xp: 1675, time: 150, difficulty: 'Mastery',
   nextChapter: { number: 20, title: 'Goethe Mini 3', titleEn: 'Checkpoint — Chapters 1–19 integrated' , href: 'chapter-c2-20-goethe-mini-3.html' },
+  prevChapter: { number: 18, title: 'Stilistische Nuancen & Register von Adjektiven', titleEn: 'Stylistic nuance & register in adjectives', href: 'chapter-c2-18-stilistische-nuancen-und-register-von-adjektiven.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

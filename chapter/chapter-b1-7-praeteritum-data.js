@@ -29,6 +29,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 8, title: 'Zeitangaben: Dativ & Genitiv', titleEn: 'Time expressions: Dativ & Genitiv' , href: 'chapter-b1-8-zeitangaben-dativ-genitiv.html' },
 
+  prevChapter: { number: 6, title: 'Goethe Mini 1', titleEn: 'Goethe Checkpoint 1 — First B1 Readiness', href: 'chapter-b1-6-goethe-mini-1.html' },
   heroAnimationPath: null,
 
   story: {

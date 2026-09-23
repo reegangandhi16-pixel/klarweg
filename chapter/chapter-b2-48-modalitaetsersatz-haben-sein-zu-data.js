@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 49, title: 'Passiv in Wissenschaft & Beruf', titleEn: 'Passive voice in science & the workplace' , href: 'chapter-b2-49-passiv-in-wissenschaft-und-beruf.html' },
 
+  prevChapter: { number: 47, title: 'bekommen-/kriegen-Passiv', titleEn: 'The recipient passive', href: 'chapter-b2-47-bekommen-kriegen-passiv.html' },
   heroAnimationPath: null,
 
   story: {

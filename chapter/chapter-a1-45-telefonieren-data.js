@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 46, title: 'Zeitangaben mit Dativ', titleEn: 'Time Expressions' , href: 'chapter-a1-46-zeitangaben.html' },
 
+  prevChapter: { number: 44, title: 'Imperativ & Modalverben 2', titleEn: 'Commands · dürfen & sollen', href: 'chapter-a1-44-imperativ-modal2.html' },
   heroAnimationPath: null,
 
   story: {

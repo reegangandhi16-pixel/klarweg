@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 5, title: 'Zweiteilige Satzverbindungen', titleEn: 'Correlative & paired sentence connectors' , href: 'chapter-c1-05-zweiteilige-satzverbindungen.html' },
 
+  prevChapter: { number: 3, title: 'Nebensätze sicher beherrschen', titleEn: 'Mastering complex subordinate clauses', href: 'chapter-c1-03-nebensaetze-sicher-beherrschen.html' },
   heroAnimationPath: null,
 
   story: {

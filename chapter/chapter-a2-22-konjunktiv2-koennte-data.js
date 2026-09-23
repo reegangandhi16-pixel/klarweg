@@ -51,6 +51,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 23, title: 'Konjunktiv II: sollte (Ratschläge)', titleEn: 'Konjunktiv II: sollte (advice)' , href: 'chapter-a2-23-konjunktiv2-sollte.html' },
 
+  prevChapter: { number: 21, title: 'Verben mit Dativ und Akkusativ', titleEn: 'Verbs with Dative and Accusative', href: 'chapter-a2-21-verben-dativ-akkusativ.html' },
   heroAnimationPath: null,
 
   story: {

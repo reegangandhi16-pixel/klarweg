@@ -30,6 +30,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 15, title: 'Positions- & Richtungsverben', titleEn: 'Position & Direction Verbs' , href: 'chapter-a2-15-positions-richtungsverben.html' },
 
+  prevChapter: { number: 13, title: 'Pr\u00e4positionen mit Dativ', titleEn: 'Prepositions with the Dative', href: 'chapter-a2-13-praepositionen-dativ.html' },
   heroAnimationPath: null,
 
   story: {

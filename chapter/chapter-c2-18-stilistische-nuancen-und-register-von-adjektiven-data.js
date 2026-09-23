@@ -17,6 +17,7 @@ const CHAPTER = {
   description: 'Every adjective is a paint color. Navy, cobalt, turquoise, sapphire, indigo — all "blue," but each creates a different impression. Native speakers choose the exact shade a situation requires.',
   xp: 1650, time: 150, difficulty: 'Mastery',
   nextChapter: { number: 19, title: 'Adjektive mit Ergänzungen', titleEn: 'Adjectives with complements' , href: 'chapter-c2-19-adjektive-mit-ergaenzungen.html' },
+  prevChapter: { number: 17, title: 'Adjektivdeklination auf C2-Niveau', titleEn: 'Adjective declension at native level', href: 'chapter-c2-17-adjektivdeklination-auf-c2-niveau.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

@@ -25,6 +25,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 18, title: 'Relativsätze mit Präpositionen', titleEn: 'Relative clauses with prepositions' , href: 'chapter-b1-18-relativsaetze-mit-praepositionen.html' },
 
+  prevChapter: { number: 16, title: 'Futur I', titleEn: 'Future tense I', href: 'chapter-b1-16-futur1.html' },
   heroAnimationPath: null,
 
   story: {

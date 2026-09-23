@@ -15,6 +15,7 @@ const CHAPTER = {
   description: 'Imagine every German word has close friends. Entscheidungen are treffen, not machen. Maßnahmen are ergreifen, not nehmen. Learning one word is useful — learning its friends is what makes you sound native.',
   xp: 930, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 38, title: 'Zusammenfassung schreiben', titleEn: 'Writing a summary' , href: 'chapter-c1-38-zusammenfassung-schreiben.html' },
+  prevChapter: { number: 36, title: 'Register & Stilebenen beherrschen', titleEn: 'Mastering register and style levels', href: 'chapter-c1-36-register-und-stilebenen-beherrschen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

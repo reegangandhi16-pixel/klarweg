@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 48, title: 'Modalitätsersatz: haben + zu / sein + zu', titleEn: 'Modal-verb replacements: haben + zu / sein + zu' , href: 'chapter-b2-48-modalitaetsersatz-haben-sein-zu.html' },
 
+  prevChapter: { number: 46, title: 'Unpersönliches Passiv', titleEn: 'Impersonal passive', href: 'chapter-b2-46-unpersoenliches-passiv.html' },
   heroAnimationPath: null,
 
   story: {

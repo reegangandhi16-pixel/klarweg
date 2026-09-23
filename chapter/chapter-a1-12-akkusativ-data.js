@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 13, title: 'Adjektive mit sein', titleEn: 'Adjectives with sein' , href: 'chapter-a1-13-adjektive.html' },
 
+  prevChapter: { number: 11, title: 'Kein & Nicht', titleEn: 'Negation', href: 'chapter-a1-11-negation.html' },
   heroAnimationPath: null,
 
   overviewIntro: {

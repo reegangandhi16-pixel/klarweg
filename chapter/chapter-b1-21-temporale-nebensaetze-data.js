@@ -28,6 +28,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 22, title: 'brauchen + zu + Infinitiv', titleEn: 'Expressing "don\'t need to"' , href: 'chapter-b1-22-brauchen-zu-infinitiv.html' },
 
+  prevChapter: { number: 20, title: 'Plusquamperfekt', titleEn: 'Pluperfect (past perfect)', href: 'chapter-b1-20-plusquamperfekt.html' },
   heroAnimationPath: null,
 
   story: {

@@ -17,6 +17,7 @@ const CHAPTER = {
   description: 'Every simple verb has a formal twin. The verb is what people say in conversation. The noun-verb construction is what professors, researchers, journalists and officials choose when precision matters.',
   xp: 1275, time: 130, difficulty: 'Mastery',
   nextChapter: { number: 5, title: 'Goethe Mini 1', titleEn: 'Checkpoint — Chapters 1–4 integrated' , href: 'chapter-c2-05-goethe-mini-1.html' },
+  prevChapter: { number: 3, title: 'Verben und ihre Ergänzungen', titleEn: 'Verbs and their complements at native level', href: 'chapter-c2-03-verben-und-ihre-ergaenzungen.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

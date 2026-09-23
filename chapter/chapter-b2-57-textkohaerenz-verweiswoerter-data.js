@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 58, title: 'Textkohärenz: Absatzlogik', titleEn: 'Text coherence: paragraph logic' , href: 'chapter-b2-58-textkohaerenz-absatzlogik.html' },
 
+  prevChapter: { number: 56, title: 'Modalpartikeln: eben / halt', titleEn: 'Modal particles: eben / halt', href: 'chapter-b2-56-modalpartikeln-eben-halt.html' },
   heroAnimationPath: null,
 
   story: {

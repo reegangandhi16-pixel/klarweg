@@ -22,6 +22,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 62, title: 'Konjunktiv I: Berichtende Sprache', titleEn: 'Konjunktiv I: reporting language' , href: 'chapter-b2-62-konjunktiv-i-berichtende-sprache.html' },
 
+  prevChapter: { number: 60, title: 'Indirekte Rede: Grundlagen', titleEn: 'Reported speech: basics', href: 'chapter-b2-60-indirekte-rede-grundlagen.html' },
   heroAnimationPath: null,
 
   story: {

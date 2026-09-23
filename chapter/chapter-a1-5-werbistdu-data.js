@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 6, title: 'W-Fragen', titleEn: 'Question Words' , href: 'chapter-a1-6-wfragen.html' },
 
+  prevChapter: { number: 4, title: 'Hallo!', titleEn: 'Greetings & Introductions', href: 'chapter-a1-4-hallo.html' },
   heroAnimationPath: null,
 
   overviewIntro: {

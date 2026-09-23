@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 40, title: 'Verben mit Dativ', titleEn: 'Dative Verbs' , href: 'chapter-a1-40-verben-dativ.html' },
 
+  prevChapter: { number: 38, title: 'Wechselpräpositionen', titleEn: 'Two-Way Prepositions', href: 'chapter-a1-38-wechselpraep.html' },
   heroAnimationPath: null,
 
   story: {

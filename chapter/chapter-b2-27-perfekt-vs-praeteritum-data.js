@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 28, title: 'Tempuswechsel im Text', titleEn: 'Tense-switching within a text' , href: 'chapter-b2-28-tempuswechsel-im-text.html' },
 
+  prevChapter: { number: 26, title: 'Goethe Mini Test 2 (Checkpoint)', titleEn: 'Goethe Mini Test 2 (checkpoint)', href: 'chapter-b2-26-goethe-mini-test-2.html' },
   heroAnimationPath: null,
 
   story: {

@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 26, title: 'Goethe Mini 3', titleEn: 'Goethe Checkpoint 3' , href: 'chapter-a1-26-goethe3.html' },
 
+  prevChapter: { number: 24, title: 'Datum & Ordinalzahlen', titleEn: 'Dates & Ordinals', href: 'chapter-a1-24-datum.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

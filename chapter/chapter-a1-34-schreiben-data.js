@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 35, title: 'Goethe Mini 4', titleEn: 'Goethe Checkpoint 4' , href: 'chapter-a1-35-goethe4.html' },
 
+  prevChapter: { number: 33, title: 'Sätze verbinden', titleEn: 'Connecting Sentences', href: 'chapter-a1-33-saetze-verbinden.html' },
   heroAnimationPath: null,
 
   story: {

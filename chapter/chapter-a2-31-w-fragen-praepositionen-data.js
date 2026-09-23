@@ -48,6 +48,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 32, title: 'Konjunktiv II: Wünsche & Höflichkeit', titleEn: 'Subjunctive II: wishes and politeness' , href: 'chapter-a2-32-konjunktiv2-wuensche-hoeflichkeit.html' },
 
+  prevChapter: { number: 30, title: 'Verben mit Präpositionen', titleEn: 'Verbs with fixed prepositions', href: 'chapter-a2-30-verben-praepositionen.html' },
   heroAnimationPath: null,
 
   story: {

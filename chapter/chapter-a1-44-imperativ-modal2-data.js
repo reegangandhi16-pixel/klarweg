@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 45, title: 'Telefonieren & Nachfragen', titleEn: 'Phone Calls' , href: 'chapter-a1-45-telefonieren.html' },
 
+  prevChapter: { number: 43, title: 'Small Talk & man', titleEn: 'Small Talk & man', href: 'chapter-a1-43-smalltalk-man.html' },
   heroAnimationPath: null,
 
   story: {

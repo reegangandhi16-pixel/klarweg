@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 56, title: 'Modalpartikeln: eben / halt', titleEn: 'Modal particles: eben / halt' , href: 'chapter-b2-56-modalpartikeln-eben-halt.html' },
 
+  prevChapter: { number: 54, title: 'Funktionsverbgefüge', titleEn: 'Noun + light verb constructions', href: 'chapter-b2-54-funktionsverbgefuege.html' },
   heroAnimationPath: null,
 
   story: {

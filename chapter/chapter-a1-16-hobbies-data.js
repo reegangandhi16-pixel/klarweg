@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 17, title: 'Goethe Mini 2', titleEn: 'Goethe Checkpoint 2' , href: 'chapter-a1-17-goethe2.html' },
 
+  prevChapter: { number: 15, title: 'Im Café', titleEn: 'At the Café', href: 'chapter-a1-15-cafe.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

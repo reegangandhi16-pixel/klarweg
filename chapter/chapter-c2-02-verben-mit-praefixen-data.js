@@ -14,6 +14,7 @@ const CHAPTER = {
   description: 'Imagine every German verb as the trunk of a tree. Each prefix grows into a different branch. The trunk stays the same, but every branch reaches a different direction.',
   xp: 1225, time: 130, difficulty: 'Mastery',
   nextChapter: { number: 3, title: 'Verben und ihre Ergänzungen', titleEn: 'Verbs and their complements at native level' , href: 'chapter-c2-03-verben-und-ihre-ergaenzungen.html' },
+  prevChapter: { number: 1, title: 'Zeitformen der Verben', titleEn: 'Verb tenses at native level', href: 'chapter-c2-01-zeitformen-der-verben.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

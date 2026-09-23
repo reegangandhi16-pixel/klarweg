@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 23, title: 'Possessivartikel & Familie', titleEn: 'Possessives & Family' , href: 'chapter-a1-23-familie.html' },
 
+  prevChapter: { number: 21, title: 'Uhrzeit', titleEn: 'Telling the Time', href: 'chapter-a1-21-uhrzeit.html' },
   heroAnimationPath: null,
 
   // ---------- Story Dialogue (signature section — before vocab/grammar) ----------

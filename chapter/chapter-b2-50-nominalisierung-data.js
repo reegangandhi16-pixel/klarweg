@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 51, title: 'Erweiterte Partizipialattribute', titleEn: 'Extended participial attributes' , href: 'chapter-b2-51-erweiterte-partizipialattribute.html' },
 
+  prevChapter: { number: 49, title: 'Passiv in Wissenschaft & Beruf', titleEn: 'Passive voice in science & the workplace', href: 'chapter-b2-49-passiv-in-wissenschaft-und-beruf.html' },
   heroAnimationPath: null,
 
   story: {

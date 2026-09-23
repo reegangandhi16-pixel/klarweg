@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 47, title: 'bekommen-/kriegen-Passiv', titleEn: 'The recipient passive' , href: 'chapter-b2-47-bekommen-kriegen-passiv.html' },
 
+  prevChapter: { number: 45, title: 'Passiversatz: sich lassen', titleEn: 'Passive alternative: sich lassen', href: 'chapter-b2-45-passiversatz-sich-lassen.html' },
   heroAnimationPath: null,
 
   story: {

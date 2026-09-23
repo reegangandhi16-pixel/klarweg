@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 65, title: 'Wissenschaftssprache', titleEn: 'Academic German' , href: 'chapter-b2-65-wissenschaftssprache.html' },
 
+  prevChapter: { number: 63, title: 'Goethe Mini 5', titleEn: 'Phase 6 checkpoint exam', href: 'chapter-b2-63-goethe-mini-5.html' },
   heroAnimationPath: null,
 
   story: {

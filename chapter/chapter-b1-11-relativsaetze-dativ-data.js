@@ -31,6 +31,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 12, title: 'Adjektivdeklination (Wiederholung & Vertiefung)', titleEn: 'Adjective declension — review & depth' , href: 'chapter-b1-12-adjektivdeklination-wiederholung.html' },
 
+  prevChapter: { number: 10, title: 'Passiv (Präsens)', titleEn: 'The passive voice (present tense)', href: 'chapter-b1-10-passiv-praesens.html' },
   heroAnimationPath: null,
 
   story: {

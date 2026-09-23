@@ -17,6 +17,7 @@ const CHAPTER = {
   description: 'Adjectives are labels attached to people. Nominalization removes the person and keeps only the label. Instead of "people who are injured," German simply says die Verletzten.',
   xp: 1600, time: 145, difficulty: 'Mastery',
   nextChapter: { number: 17, title: 'Adjektivdeklination auf C2-Niveau', titleEn: 'Adjective declension at native level' , href: 'chapter-c2-17-adjektivdeklination-auf-c2-niveau.html' },
+  prevChapter: { number: 15, title: 'Partizipien als Adjektive', titleEn: 'Participles as adjectives', href: 'chapter-c2-15-partizipien-als-adjektive.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

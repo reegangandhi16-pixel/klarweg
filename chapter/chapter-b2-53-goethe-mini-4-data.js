@@ -21,6 +21,7 @@ const CHAPTER = {
   isCheckpoint: true,
   nextChapter: { number: 54, title: 'Funktionsverbgefüge', titleEn: 'Noun + light verb constructions' , href: 'chapter-b2-54-funktionsverbgefuege.html' },
 
+  prevChapter: { number: 52, title: 'Komplexe Nominalgruppen', titleEn: 'Complex noun phrases', href: 'chapter-b2-52-komplexe-nominalgruppen.html' },
   heroAnimationPath: null,
 
   story: {

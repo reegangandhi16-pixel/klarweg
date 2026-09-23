@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 19, title: 'Steigerung & sprachliche Abstufung', titleEn: 'Gradation and linguistic nuance' , href: 'chapter-c1-19-steigerung-und-sprachliche-abstufung.html' },
 
+  prevChapter: { number: 17, title: 'Goethe Halbzeit-Test', titleEn: 'Halfway Checkpoint: Chapters 12–16', href: 'chapter-c1-17-goethe-halbzeit-test.html' },
   heroAnimationPath: null,
 
   story: {

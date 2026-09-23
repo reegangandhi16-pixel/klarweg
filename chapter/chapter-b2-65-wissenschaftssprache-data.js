@@ -21,6 +21,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 66, title: 'Argumentieren: Standpunkte', titleEn: 'Arguing: expressing viewpoints' , href: 'chapter-b2-66-argumentieren-standpunkte.html' },
 
+  prevChapter: { number: 64, title: 'Präpositionen mit Genitiv', titleEn: 'Prepositions with Genitiv', href: 'chapter-b2-64-praepositionen-mit-genitiv.html' },
   heroAnimationPath: null,
 
   story: {

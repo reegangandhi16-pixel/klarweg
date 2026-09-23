@@ -29,6 +29,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 4, title: 'Folgen: deshalb & so … dass', titleEn: 'Consequences: deshalb & so … dass' , href: 'chapter-b1-4-folgen-deshalb-so-dass.html' },
 
+  prevChapter: { number: 2, title: 'Nebensätze: weil / da & obwohl', titleEn: 'Subordinate clauses: weil / da & obwohl', href: 'chapter-b1-2-nebensaetze-weil-da-obwohl.html' },
   heroAnimationPath: null,
 
   story: {

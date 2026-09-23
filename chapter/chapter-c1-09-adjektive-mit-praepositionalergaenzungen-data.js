@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 10, title: 'Nomen mit Präpositionalobjekt', titleEn: 'Nouns with fixed prepositional objects' , href: 'chapter-c1-10-nomen-mit-praepositionalobjekt.html' },
 
+  prevChapter: { number: 8, title: 'Anspruchsvolle Präpositionen', titleEn: 'Advanced prepositional expressions', href: 'chapter-c1-08-anspruchsvolle-praepositionen.html' },
   heroAnimationPath: null,
 
   story: {

@@ -22,6 +22,7 @@ const CHAPTER = {
   isCheckpoint: true,
   nextChapter: { number: 37, title: 'Relativsätze im Genitiv (dessen / deren)', titleEn: 'Genitive relative clauses (dessen / deren)' , href: 'chapter-b2-37-relativsaetze-genitiv.html' },
 
+  prevChapter: { number: 35, title: 'Temporalsätze: bevor / nachdem', titleEn: 'Time clauses: before / after', href: 'chapter-b2-35-temporalsaetze-bevor-nachdem.html' },
   heroAnimationPath: null,
 
   story: null,

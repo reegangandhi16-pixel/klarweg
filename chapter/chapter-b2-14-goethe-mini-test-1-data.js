@@ -21,6 +21,7 @@ const CHAPTER = {
   isCheckpoint: true,
   nextChapter: { number: 15, title: 'Konzessivsätze: obgleich', titleEn: 'Concessive clauses: obgleich' , href: 'chapter-b2-15-konzessivsaetze-obgleich.html' },
 
+  prevChapter: { number: 13, title: 'Nuancierte Negation', titleEn: 'Nuanced negation', href: 'chapter-b2-13-nuancierte-negation.html' },
   heroAnimationPath: null,
 
   story: null,

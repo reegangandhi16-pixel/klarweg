@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 20, title: 'Relativsätze erweitern und variieren', titleEn: 'Expanding and varying relative clauses' , href: 'chapter-c1-20-relativsaetze-erweitern-und-variieren.html' },
 
+  prevChapter: { number: 18, title: 'Adjektivdeklination sicher anwenden', titleEn: 'Applying adjective declension with confidence', href: 'chapter-c1-18-adjektivdeklination-sicher-anwenden.html' },
   heroAnimationPath: null,
 
   story: {

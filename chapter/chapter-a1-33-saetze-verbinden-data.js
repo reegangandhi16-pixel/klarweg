@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 34, title: 'Schreiben & Einladungen', titleEn: 'Writing & Invitations' , href: 'chapter-a1-34-schreiben.html' },
 
+  prevChapter: { number: 32, title: 'Akkusativpronomen', titleEn: 'Accusative Pronouns', href: 'chapter-a1-32-akkusativpronomen.html' },
   heroAnimationPath: null,
 
   story: {

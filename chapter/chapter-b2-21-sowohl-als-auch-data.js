@@ -20,6 +20,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 22, title: 'weder ... noch', titleEn: 'neither ... nor ...' , href: 'chapter-b2-22-weder-noch.html' },
 
+  prevChapter: { number: 20, title: '(an)statt ... zu', titleEn: 'instead of ... -ing', href: 'chapter-b2-20-anstatt-zu.html' },
   heroAnimationPath: null,
 
   story: {

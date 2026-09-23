@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 14, title: 'Konjunktiv II für Irreales & Hypothesen', titleEn: 'Konjunktiv II for the unreal and hypothetical' , href: 'chapter-c1-14-konjunktiv-ii-fuer-irreales-und-hypothesen.html' },
 
+  prevChapter: { number: 12, title: 'Modalverben präzise verwenden', titleEn: 'Using modal verbs precisely', href: 'chapter-c1-12-modalverben-praezise-verwenden.html' },
   heroAnimationPath: null,
 
   story: {

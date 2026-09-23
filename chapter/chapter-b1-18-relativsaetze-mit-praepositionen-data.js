@@ -29,6 +29,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 19, title: 'Goethe Halbzeit-Test', titleEn: 'Goethe Halfway Test — the B1 midpoint checkpoint' , href: 'chapter-b1-19-goethe-halbzeit-test.html' },
 
+  prevChapter: { number: 17, title: 'Nebensätze mit damit & um ... zu', titleEn: 'Purpose clauses: damit & um ... zu', href: 'chapter-b1-17-nebensatz-damit-um-zu.html' },
   heroAnimationPath: null,
 
   story: {

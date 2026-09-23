@@ -21,6 +21,7 @@ const CHAPTER = {
   isCheckpoint: true,
   nextChapter: { number: 64, title: 'Präpositionen mit Genitiv', titleEn: 'Prepositions with Genitiv' , href: 'chapter-b2-64-praepositionen-mit-genitiv.html' },
 
+  prevChapter: { number: 62, title: 'Konjunktiv I: Berichtende Sprache', titleEn: 'Konjunktiv I: reporting language', href: 'chapter-b2-62-konjunktiv-i-berichtende-sprache.html' },
   heroAnimationPath: null,
 
   story: {

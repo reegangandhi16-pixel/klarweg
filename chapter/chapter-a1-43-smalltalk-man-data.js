@@ -17,6 +17,7 @@ const CHAPTER = {
   difficulty: 'Beginner',
   nextChapter: { number: 44, title: 'Imperativ & Modalverben 2', titleEn: 'Commands · dürfen & sollen' , href: 'chapter-a1-44-imperativ-modal2.html' },
 
+  prevChapter: { number: 42, title: 'Welcher & Dieser', titleEn: 'which & this', href: 'chapter-a1-42-welcher-dieser.html' },
   heroAnimationPath: null,
 
   story: {

@@ -27,6 +27,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 4, title: 'Nebensatz mit weil', titleEn: 'Subordinate Clauses with weil' , href: 'chapter-a2-4-weil.html' },
 
+  prevChapter: { number: 2, title: 'Perfekt (Wiederholung)', titleEn: 'The Spoken Past — Review', href: 'chapter-a2-2-perfekt-review.html' },
   heroAnimationPath: null,
 
   story: {

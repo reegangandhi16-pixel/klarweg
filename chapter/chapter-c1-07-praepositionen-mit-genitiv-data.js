@@ -19,6 +19,7 @@ const CHAPTER = {
   difficulty: 'Advanced',
   nextChapter: { number: 8, title: 'Anspruchsvolle Präpositionen', titleEn: 'Advanced prepositional expressions' , href: 'chapter-c1-08-anspruchsvolle-praepositionen.html' },
 
+  prevChapter: { number: 6, title: 'Goethe Mini 1', titleEn: 'Checkpoint: Chapters 1–5', href: 'chapter-c1-06-goethe-mini-1.html' },
   heroAnimationPath: null,
 
   story: {

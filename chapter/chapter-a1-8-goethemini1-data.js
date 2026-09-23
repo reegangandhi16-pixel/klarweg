@@ -18,6 +18,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 9, title: 'Verben im Alltag', titleEn: 'Everyday Verbs' , href: 'chapter-a1-9-verben.html' },
 
+  prevChapter: { number: 7, title: 'Ja oder Nein?', titleEn: 'Yes/No Questions', href: 'chapter-a1-7-jaodernein.html' },
   heroAnimationPath: null,
 
   overviewIntro: {

@@ -24,6 +24,7 @@ const CHAPTER = {
   difficulty: 'Intermediate',
   nextChapter: { number: 31, title: 'Adjektive als Nomen', titleEn: 'Adjectives as nouns' , href: 'chapter-b1-31-adjektive-als-nomen.html' },
 
+  prevChapter: { number: 29, title: 'Passiv mit Modalverben', titleEn: 'Passive with modal verbs', href: 'chapter-b1-29-passiv-modalverben.html' },
   heroAnimationPath: null,
 
   story: {

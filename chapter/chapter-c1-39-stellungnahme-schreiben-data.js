@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'Imagine you\'re a judge, not a fan. A fan supports one side immediately. A judge listens to both sides, evaluates the evidence, explains the reasoning, then reaches a justified decision.',
   xp: 970, time: 110, difficulty: 'Advanced',
   nextChapter: { number: 40, title: 'Forumsbeitrag schreiben', titleEn: 'Writing a forum post' , href: 'chapter-c1-40-forumsbeitrag-schreiben.html' },
+  prevChapter: { number: 38, title: 'Zusammenfassung schreiben', titleEn: 'Writing a summary', href: 'chapter-c1-38-zusammenfassung-schreiben.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

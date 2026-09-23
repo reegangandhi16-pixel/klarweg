@@ -29,6 +29,7 @@ const CHAPTER = {
   difficulty: 'Elementary',
   nextChapter: { number: 12, title: 'Reflexive Verben', titleEn: 'Reflexive Verbs' , href: 'chapter-a2-12-reflexive-verben.html' },
 
+  prevChapter: { number: 10, title: 'Goethe Mini 1', titleEn: 'Goethe Checkpoint 1', href: 'chapter-a2-10-goethe-mini-1.html' },
   heroAnimationPath: null,
 
   story: {

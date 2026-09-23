@@ -13,6 +13,7 @@ const CHAPTER = {
   description: 'A2 uses relative clauses to identify nouns. C1 uses them to organize information efficiently. Always ask: is a relative clause the clearest option, or can the sentence be expressed more elegantly?',
   xp: 610, time: 105, difficulty: 'Advanced',
   nextChapter: { number: 21, title: 'Partizipialattribute verstehen und nutzen', titleEn: 'Understanding and using participial attributes' , href: 'chapter-c1-21-partizipialattribute-verstehen-und-nutzen.html' },
+  prevChapter: { number: 19, title: 'Steigerung & sprachliche Abstufung', titleEn: 'Gradation and linguistic nuance', href: 'chapter-c1-19-steigerung-und-sprachliche-abstufung.html' },
   heroAnimationPath: null,
   story: {
     eyebrow: 'Story-based learning',

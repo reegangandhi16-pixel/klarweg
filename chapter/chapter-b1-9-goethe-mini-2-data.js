@@ -31,6 +31,7 @@ const CHAPTER = {
   difficulty: 'Checkpoint',
   nextChapter: { number: 10, title: 'Passiv (Präsens)', titleEn: 'The passive voice (present tense)' , href: 'chapter-b1-10-passiv-praesens.html' },
 
+  prevChapter: { number: 8, title: 'Zeitangaben: Dativ & Genitiv', titleEn: 'Time expressions: Dativ & Genitiv', href: 'chapter-b1-8-zeitangaben-dativ-genitiv.html' },
   heroAnimationPath: null,
 
   story: {

@@ -4268,6 +4268,25 @@
   }
 
   /* ---------- Up Next card (placed after the final section) ---------- */
+  const CROSS_CHAPTER_LOCK_SVG = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="14" height="14" style="vertical-align:-2px;margin-right:5px"><rect x="6" y="11" width="12" height="8" rx="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 11V8C8.5 6 10 4 12 4C14 4 15.5 6 15.5 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
+
+  /* Shared by buildNextChapter()/buildPrevChapter(): true when the target
+     chapter's level is not owned (and it is not the free first chapter).
+     This code path only ever runs after guardChapterPage() has already
+     succeeded for THIS chapter, so KWAccess.ready() is already settled --
+     no extra async wait needed here. Cross-level neighbours (e.g. A2
+     chapter 1's previous chapter is A1's last) are exactly why this is
+     needed: owning the current chapter says nothing about the neighbour's
+     level. Fails open to "not locked" only if KWAccess itself is
+     unavailable, matching this card's non-authoritative role -- the
+     destination page's own guard is what actually enforces access. */
+  function crossChapterIsLocked(href, number) {
+    if (!window.KWAccess || !window.KWAccess.canAccessChapter) return false;
+    const m = /^chapter-([a-c][12])-/.exec(href || '');
+    if (!m) return false;
+    return !window.KWAccess.canAccessChapter(m[1], number);
+  }
+
   function buildNextChapter() {
     if (!C.nextChapter) {
       return el('div', { class: 'next-chapter' },
@@ -4275,10 +4294,13 @@
           el('div', { class: 'next-chapter-title' }, 'You\u2019ve finished the entire Klarweg curriculum', ' — ', el('span', { class: 'muted', style: 'font-weight:400;font-size:18px' }, 'A1 through C2'))),
         el('a', { class: 'btn btn-primary', href: '../c2.html' }, 'Back to C2 overview ', el('span', { class: 'arrow' }, '\u2192')));
     }
+    const nextLocked = crossChapterIsLocked(C.nextChapter.href, C.nextChapter.number);
     return el('div', { class: 'next-chapter' },
       el('div', {}, el('div', { class: 'next-chapter-label' }, 'Up next · Chapter ' + C.nextChapter.number),
         el('div', { class: 'next-chapter-title' }, el('span', { class: 'de' }, C.nextChapter.title), ' — ', el('span', { class: 'muted', style: 'font-weight:400;font-size:18px' }, C.nextChapter.titleEn))),
-      el('a', { class: 'btn btn-primary', href: C.nextChapter.href || '#' }, 'Continue ', el('span', { class: 'arrow' }, '→')));
+      nextLocked
+        ? el('a', { class: 'btn btn-primary', href: C.nextChapter.href || '#' }, el('span', { html: CROSS_CHAPTER_LOCK_SVG }), 'Unlock to continue')
+        : el('a', { class: 'btn btn-primary', href: C.nextChapter.href || '#' }, 'Continue ', el('span', { class: 'arrow' }, '→')));
   }
 
   /* ---------- Previous-chapter link (small, quiet — placed just above Up
@@ -4286,8 +4308,10 @@
      back). Absent entirely for the first chapter of the whole curriculum. */
   function buildPrevChapter() {
     if (!C.prevChapter) return null;
+    const prevLocked = crossChapterIsLocked(C.prevChapter.href, C.prevChapter.number);
     return el('a', { class: 'prev-chapter-link', href: C.prevChapter.href },
-      '← Previous · ', el('span', { class: 'de' }, C.prevChapter.title));
+      prevLocked ? el('span', { html: CROSS_CHAPTER_LOCK_SVG }) : '← ',
+      'Previous · ', el('span', { class: 'de' }, C.prevChapter.title));
   }
 
   /* ---------- Study Resources (UI only) ---------- */

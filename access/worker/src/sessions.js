@@ -52,6 +52,12 @@ export async function findSessionUser(db, token) {
   const tokenHash = await hashSessionToken(token);
   const now = Math.floor(Date.now() / 1000);
 
+  /* has_full_access previously came from a LEFT JOIN against the legacy
+     `entitlements` table, which nothing has ever written to — it always
+     evaluated to false. Real access (including Lifetime) lives in
+     `user_entitlements`, already the single source of truth read via
+     readEntitlements() in entitlements.js; callers that need Lifetime
+     status use that, not this row. */
   const result = await db
     .prepare(
       `SELECT
@@ -59,13 +65,10 @@ export async function findSessionUser(db, token) {
         u.email,
         u.name,
         u.phone,
-        COALESCE(e.has_full_access, 0) AS has_full_access,
         s.expires_at
       FROM sessions s
       INNER JOIN users u
         ON u.id = s.user_id
-      LEFT JOIN entitlements e
-        ON e.user_id = u.id
       WHERE s.token_hash = ?1
         AND s.expires_at > ?2
       LIMIT 1`
@@ -80,7 +83,6 @@ export async function findSessionUser(db, token) {
     email: result.email,
     name: result.name,
     phone: result.phone,
-    hasFullAccess: Boolean(result.has_full_access),
     expiresAt: result.expires_at
   };
 }

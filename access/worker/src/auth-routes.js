@@ -566,7 +566,7 @@ export async function me(request, env) {
       name: user.name,
       phone: user.phone || null
     },
-    hasFullAccess: user.hasFullAccess,
+    hasFullAccess: entitlements.LIFETIME,
     entitlements
   });
 }

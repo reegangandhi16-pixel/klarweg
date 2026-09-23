@@ -21,7 +21,13 @@ const SITE_BASE_URL = "https://reegangandhi16-pixel.github.io/klarweg";
 const NOTIFY_URL = "https://klarweg-access.klarweg-issue-reports-2026.workers.dev/webhooks/cashfree";
 
 const CASHFREE_API_VERSION = "2023-08-01";
-const CASHFREE_BASE_URL = "https://sandbox.cashfree.com/pg";
+
+/* Must match webhooks-cashfree.js's apiBase(env) exactly — both need to
+   agree on sandbox vs production or a live-mode order would be created
+   against one Cashfree environment while the webhook re-verifies it
+   against the other, and every payment would fail to reconcile. */
+const cashfreeBaseUrl = env =>
+  env.CASHFREE_ENV === "production" ? "https://api.cashfree.com/pg" : "https://sandbox.cashfree.com/pg";
 
 function json(data, status = 200) {
   return Response.json(data, { status });
@@ -111,7 +117,7 @@ export async function createOrder(request, env) {
   }
 
   const cashfreeResponse = await fetch(
-    `${CASHFREE_BASE_URL}/orders`,
+    `${cashfreeBaseUrl(env)}/orders`,
     {
       method: "POST",
       headers: {
@@ -279,7 +285,7 @@ export async function getOrder(request, env, orderId) {
   }
 
   const cashfreeResponse = await fetch(
-    `${CASHFREE_BASE_URL}/orders/${encodeURIComponent(localOrder.cashfree_order_id)}`,
+    `${cashfreeBaseUrl(env)}/orders/${encodeURIComponent(localOrder.cashfree_order_id)}`,
     {
       method: "GET",
       headers: {
@@ -336,7 +342,7 @@ export async function getOrder(request, env, orderId) {
 
     try {
       const paymentsResponse = await fetch(
-        `${CASHFREE_BASE_URL}/orders/${encodeURIComponent(localOrder.cashfree_order_id)}/payments`,
+        `${cashfreeBaseUrl(env)}/orders/${encodeURIComponent(localOrder.cashfree_order_id)}/payments`,
         {
           method: "GET",
           headers: {

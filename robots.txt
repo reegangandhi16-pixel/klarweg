@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /audit/
+Disallow: /report/
+Disallow: /uploads/
+Disallow: /deliverables/
+Disallow: /deployment/
+Disallow: /scripts/

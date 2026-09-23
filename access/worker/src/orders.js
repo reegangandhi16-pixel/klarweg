@@ -1,5 +1,6 @@
 import { getProduct } from "./products.js";
 import { isValidPhone } from "./auth.js";
+import { grantProduct } from "./entitlements.js";
 import {
   getSessionToken,
   findSessionUser
@@ -9,6 +10,15 @@ import {
    (github.com/reegangandhi16-pixel/klarweg) — not a <user>.github.io
    root repo — so the published base path includes /klarweg/. */
 const SITE_BASE_URL = "https://reegangandhi16-pixel.github.io/klarweg";
+
+/* This Worker's own deployed URL. Cashfree's sandbox webhook for this
+   account is order_meta/notify_url-driven (confirmed via the merchant
+   dashboard, which shows no static webhook URL — it reads notify_url
+   from each Create Order request instead). Without this field Cashfree
+   has no destination to call, and webhooks-cashfree.js is never
+   invoked — confirmed root cause of all 9 pre-fix orders staying at
+   status 'created' with zero webhook delivery attempts. */
+const NOTIFY_URL = "https://klarweg-access.klarweg-issue-reports-2026.workers.dev/webhooks/cashfree";
 
 const CASHFREE_API_VERSION = "2023-08-01";
 const CASHFREE_BASE_URL = "https://sandbox.cashfree.com/pg";
@@ -139,7 +149,13 @@ export async function createOrder(request, env) {
           // Web Checkout docs). The literal "{order_id}" placeholder
           // must stay a plain string, not a template interpolation of
           // the orderId variable above.
-          return_url: SITE_BASE_URL + "/account/index.html?order_id={order_id}"
+          return_url: SITE_BASE_URL + "/account/index.html?order_id={order_id}",
+          // Server-to-server webhook target. Confirmed required by this
+          // Cashfree sandbox account's own dashboard (order_meta-driven,
+          // not a static dashboard URL) — without this field Cashfree
+          // never calls webhooks-cashfree.js and grantProduct() is
+          // never reached.
+          notify_url: NOTIFY_URL
         }
       })
     }
@@ -303,6 +319,64 @@ export async function getOrder(request, env, orderId) {
     typeof cashfreeData.order_status === "string"
       ? cashfreeData.order_status.toLowerCase()
       : "unknown";
+
+  /* Reconciliation fallback. The webhook is the normal path to a grant,
+     but it can be lost (a network blip, a delivery failure, or any other
+     transient reason — this exact class of failure has already happened
+     once in production). Cashfree's own server response — already
+     re-verified above against order id, amount and currency — is the
+     same authority the webhook itself trusts, so a learner's own poll of
+     their order can safely self-heal a lost webhook without ever
+     trusting client input. Same "grant before flip" ordering and the
+     same idempotent grantProduct() as the webhook path, so this is safe
+     to run from concurrent polls or after the webhook eventually does
+     arrive too. */
+  if (cashfreeStatus === "paid" && localOrder.status !== "paid") {
+    let paymentId = null;
+
+    try {
+      const paymentsResponse = await fetch(
+        `${CASHFREE_BASE_URL}/orders/${encodeURIComponent(localOrder.cashfree_order_id)}/payments`,
+        {
+          method: "GET",
+          headers: {
+            "x-api-version": CASHFREE_API_VERSION,
+            "x-client-id": env.CASHFREE_APP_ID,
+            "x-client-secret": env.CASHFREE_SECRET_KEY,
+            "x-idempotency-key": crypto.randomUUID()
+          }
+        }
+      );
+
+      if (paymentsResponse.ok) {
+        const payments = await paymentsResponse.json();
+        const successfulPayment = Array.isArray(payments)
+          ? payments.find(
+              (p) => String(p?.payment_status || "").toUpperCase() === "SUCCESS"
+            )
+          : null;
+
+        if (successfulPayment && successfulPayment.cf_payment_id) {
+          paymentId = String(successfulPayment.cf_payment_id);
+        }
+      }
+    } catch {
+      // The payment id is an audit convenience, not required for the
+      // grant itself — reconciliation proceeds without it.
+    }
+
+    await grantProduct(env.DB, localOrder.user_id, localOrder.product_id, localOrder.id);
+
+    await env.DB
+      .prepare(
+        `UPDATE orders SET status = 'paid', payment_id = ?1, updated_at = ?2 WHERE id = ?3`
+      )
+      .bind(paymentId, Math.floor(Date.now() / 1000), localOrder.id)
+      .run();
+
+    localOrder.status = "paid";
+    localOrder.payment_id = paymentId;
+  }
 
   return json({
     ok: true,

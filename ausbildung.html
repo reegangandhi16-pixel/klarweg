@@ -30,9 +30,32 @@
       <a href="resources.html">Resources</a>
       <a href="about.html">About</a>
     </div>
-    <a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Begin free</a>
+    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link">Log in</a><a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Begin free</a></div>
+    <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+    </button>
   </div>
 </nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay" hidden></div>
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-logo">Klarweg</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+  </div>
+  <nav class="mobile-nav-links" aria-label="Mobile navigation">
+    <a href="courses.html">Courses</a>
+    <a href="goethe-exam.html">Goethe Exam</a>
+    <a href="ausbildung.html" class="active">Ausbildung</a>
+    <a href="resources.html">Resources</a>
+    <a href="about.html">About</a>
+  </nav>
+  <div class="mobile-nav-actions">
+    <a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile">Log in</a>
+    <a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Begin free</a>
+  </div>
+</div>
 
 <main>
 
@@ -182,5 +205,79 @@
 </footer>
 
 <script src="site.js"></script>
+<script src="kw-config.js"></script>
+<script src="kw-auth.js"></script>
+<script>
+/* Header login/account link (desktop + mobile-drawer copies).
+   account/index.html already renders login vs account-overview based
+   on real session state, so only the LABEL needs to reflect auth state
+   here -- the destination stays the same either way. */
+(function () {
+  var links = document.querySelectorAll('.js-nav-login');
+  if (!links.length || !window.KWAuth) return;
+  function render(s) {
+    var label = (s && s.authenticated) ? 'My account' : 'Log in';
+    links.forEach(function (l) { l.textContent = label; });
+  }
+  render(KWAuth.getState());
+  KWAuth.onChange(render);
+  KWAuth.refresh();
+})();
+
+/* Mobile hamburger menu. Accessible drawer: focus moves in on open and
+   returns to the trigger on close, Escape closes, backdrop click
+   closes, Tab is trapped inside the drawer while open, background
+   scroll is blocked. Desktop nav is untouched -- this only ever shows
+   at the .nav-hamburger media breakpoint above. */
+(function () {
+  var btn = document.getElementById('nav-hamburger');
+  var panel = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-nav-overlay');
+  var closeBtn = document.getElementById('mobile-nav-close');
+  if (!btn || !panel || !overlay) return;
+  var lastFocused = null;
+
+  function focusable() {
+    return Array.prototype.slice.call(
+      panel.querySelectorAll('a[href], button:not([disabled])')
+    );
+  }
+  function openMenu() {
+    lastFocused = document.activeElement;
+    panel.hidden = false;
+    overlay.hidden = false;
+    document.body.classList.add('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'true');
+    var items = focusable();
+    if (items.length) items[0].focus();
+  }
+  function closeMenu() {
+    panel.hidden = true;
+    overlay.hidden = true;
+    document.body.classList.remove('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'false');
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+  btn.addEventListener('click', function () {
+    if (panel.hidden) openMenu(); else closeMenu();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function (e) {
+    if (panel.hidden) return;
+    if (e.key === 'Escape') { closeMenu(); return; }
+    if (e.key === 'Tab') {
+      var items = focusable();
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (!panel.hidden && window.innerWidth > 860) closeMenu();
+  });
+})();
+</script>
 </body>
 </html>

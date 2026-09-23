@@ -127,9 +127,67 @@ section { padding: 88px 0; }
   transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
 }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+.nav-actions { display: flex; align-items: center; gap: 16px; }
+.nav-login { font-size: 14px; color: var(--ink-secondary); font-weight: 500; transition: color var(--dur-fast) var(--ease); }
+.nav-login:hover { color: var(--ink-primary); }
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin-left: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-hamburger-bar { display: block; width: 20px; height: 2px; background: var(--ink-primary); border-radius: 2px; }
+.nav-hamburger:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
+.mobile-nav-overlay { position: fixed; inset: 0; background: rgba(14, 14, 16, 0.45); z-index: 90; }
+.mobile-nav {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 86vw);
+  background: var(--bg-surface); z-index: 91; box-shadow: -8px 0 32px rgba(14, 14, 16, 0.16);
+  display: flex; flex-direction: column; padding: 20px; overflow-y: auto; box-sizing: border-box;
+}
+.mobile-nav-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.mobile-nav-logo { font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--ink-primary); }
+.mobile-nav-close {
+  width: 44px; height: 44px; border: none; background: transparent; font-size: 18px;
+  color: var(--ink-secondary); cursor: pointer; border-radius: 8px;
+}
+.mobile-nav-close:hover { background: var(--bg-elevated); color: var(--ink-primary); }
+.mobile-nav-close:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
+.mobile-nav-links { display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; }
+.mobile-nav-links a {
+  padding: 12px 10px; font-size: 16px; font-weight: 500; color: var(--ink-primary);
+  border-radius: 8px; min-height: 44px; display: flex; align-items: center; box-sizing: border-box;
+}
+.mobile-nav-links a:hover, .mobile-nav-links a:focus-visible, .mobile-nav-links a.active { background: var(--bg-elevated); }
+.mobile-nav-links a:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: -2px; }
+.mobile-nav-actions {
+  display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 20px;
+  border-top: 1px solid var(--hairline-light);
+}
+.mobile-nav-actions a { min-height: 44px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.mobile-nav-actions .nav-login { border: 1px solid var(--hairline-light); border-radius: var(--r-full); }
+/* .mobile-nav/-overlay set their own `display`, which has the same
+   specificity as the UA stylesheet's [hidden]{display:none} — without
+   this override an author `display` rule wins the cascade and the
+   "hidden" drawer stays rendered (and clickable) on top of the page. */
+.mobile-nav[hidden], .mobile-nav-overlay[hidden] { display: none; }
+body.mobile-nav-open { overflow: hidden; }
 @media (max-width: 860px) {
   .nav-inner { padding: 12px 20px; }
   .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-actions a { min-height: 44px; display: inline-flex; align-items: center; box-sizing: border-box; }
+}
+@media (min-width: 861px) {
+  .mobile-nav-overlay, .mobile-nav { display: none !important; }
 }
 
 /* ---------- buttons (matched) ---------- */

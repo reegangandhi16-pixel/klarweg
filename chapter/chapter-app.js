@@ -102,6 +102,15 @@
     return n;
   }
 
+  // Escapes AI-generated text before it reaches innerHTML — the model's
+  // output is not trusted markup (a crafted writing submission could try to
+  // prompt-inject raw HTML/script into its own feedback). Mirrors the same
+  // escape-first approach chapter-tutor.js already uses for its AI replies.
+  function escapeHtml(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
   /* ---------- progress state (localStorage) ---------- */
   const SKEY = 'kw-ch-' + (C.id || ('a1-' + C.number));
   let state = { done: {}, learned: {}, saved: {}, quizScore: null };
@@ -3898,7 +3907,7 @@
         if (!window.claude || typeof window.claude.complete !== 'function' || !C.writingTutorPrompt) throw new Error('no-api');
         const prompt = C.writingTutorPrompt.replace('{{TEXT}}', function () { return text; });
         const out = await window.claude.complete({ messages: [{ role: 'user', content: prompt }] });
-        const clean = (out || '').replace(/```html?/gi, '').replace(/```/g, '').trim();
+        const clean = escapeHtml((out || '').replace(/```html?/gi, '').replace(/```/g, '').trim()).replace(/\n/g, '<br>');
         fb.innerHTML =
           '<div class="wf-head"><b>Grammar feedback</b> <span class="wf-ai-tag">AI tutor</span></div>' +
           '<div class="wf-ai">' + (clean || 'No feedback returned — try again.') + '</div>' +

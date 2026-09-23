@@ -1435,7 +1435,7 @@ function renderChapterCard(chapter, levelCode, isLocked) {
     : `<span class="pill pill-free"><span class="pill-dot"></span> Free chapter</span>`;
   const ctaText     = isLocked ? 'Unlock to begin' : 'Begin chapter';
   // Chapters with a built page carry an href in the data; locked cards scroll to pricing.
-  const href        = isLocked ? '#pricing' : (chapter.href || 'chapter/chapter-a1-3-nominativ.html');
+  const href        = isLocked ? '#pricing' : (chapter.href || '#pricing');
   const actionAttr  = isLocked ? ' data-action="scroll-pricing"' : '';
   const ariaLabel   = isLocked
     ? `Chapter ${chapter.n}: ${chapter.title}. Locked. Unlock with A1 bundle or Lifetime.`

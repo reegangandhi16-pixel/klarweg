@@ -1,5 +1,5 @@
 import { corsHeaders, withCors } from "./cors.js";
-import { signup, login, googleLogin, logout, me, updatePhone } from "./auth-routes.js";
+import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
 function json(data, status = 200) {
@@ -46,6 +46,17 @@ export default {
 
     if (request.method === "POST" && url.pathname === "/auth/google") {
       return withCors(await googleLogin(request, env), request);
+    }
+
+    if (request.method === "GET" && url.pathname === "/auth/google/nonce") {
+      return withCors(await googleNonce(request, env), request);
+    }
+
+    /* Google POSTs here directly as a top-level, cross-origin,
+       form-encoded navigation (ux_mode: 'redirect') — not a fetch()
+       target, so CORS handling does not apply and must not be added. */
+    if (request.method === "POST" && url.pathname === "/auth/google/redirect") {
+      return googleLoginRedirect(request, env);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/logout") {

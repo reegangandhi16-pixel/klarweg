@@ -200,6 +200,7 @@ export async function verifyGoogleIdToken(idToken, clientId) {
     name:
       typeof payload.name === "string"
         ? payload.name.trim()
-        : ""
+        : "",
+    nonce: typeof payload.nonce === "string" ? payload.nonce : null
   };
 }

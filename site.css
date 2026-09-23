@@ -86,6 +86,13 @@ section { padding: 88px 0; }
 .display-md { font-size: clamp(30px, 4.6vw, 48px); }
 .display-sm { font-size: clamp(26px, 3.4vw, 32px); letter-spacing: -0.02em; }
 .lede { font-size: 22px; line-height: 1.5; color: var(--ink-secondary); margin: 0; letter-spacing: -0.01em; }
+.link-btn {
+  background: none; border: none; padding: 0; margin: 0; cursor: pointer;
+  font: inherit; font-weight: 600; color: var(--accent);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.link-btn:hover { color: var(--coral); }
+.link-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .de-italic { font-family: var(--font-german); font-style: italic; font-weight: 500; }
 .accent { font-family: var(--font-german); font-style: italic; font-weight: 500; }
 .measure { max-width: 680px; }

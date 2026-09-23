@@ -1923,6 +1923,19 @@
     // time, because badge and colour then agree on the WRONG answer — finding
     // counts are blind to this. Fix precedence (chapter vocab class must outrank
     // the Global Lexicon) or error-isolate the re-sweep instead.
+    //
+    // FIX APPLIED (2026): every direct WORDIDX[...] read in this function below
+    // now uses (WORDIDX || {})[...] instead. This does NOT call buildWordIndex()
+    // and does NOT change precedence/timing at all -- a not-yet-built index is
+    // simply treated as "no WORDIDX hit yet" for that one lookup, falling
+    // through to KW_GLOBAL_LEXICON/KW_STORY_LEX exactly as a genuine miss
+    // already does. buildWordIndex() still first runs wherever it already did
+    // (lookupWord et al.), so the A2-9 regression described above does not
+    // reapply. Measured live in production before this fix: chapters where the
+    // crash fired early lost ALL clickability (0 linked .de-link words, not
+    // just the 11-word loss measured on A1-1 historically). Verified after
+    // this fix: those same chapters' .de-link counts moved into the normal
+    // range alongside chapters that never crashed, with no console errors.
     // A trailing hyphen usually marks prose prefix/suffix notation ("er-",
     // "an-", "-ieren" used to explain a pattern) — never look those up, even
     // if the substring happens to match a real word once the hyphen is
@@ -1934,7 +1947,7 @@
     // trailing hyphen, not incidentally matched after hyphen-stripping.
     if (/-$/.test(word)) {
       const nk0 = normWord(word);
-      const raw0 = WORDIDX[nk0] || (window.KW_GLOBAL_LEXICON || {})[nk0];
+      const raw0 = (WORDIDX || {})[nk0] || (window.KW_GLOBAL_LEXICON || {})[nk0];
       if (!raw0 || !raw0.w || !raw0.w.endsWith('-')) return null;
     } else if (gated) {
       // Converse guard: a bare prose word must not become a German learner
@@ -1942,7 +1955,7 @@
       // (e.g. English "extra" matching the German prefix entry "extra-").
       // A prefix is not a standalone word occurrence.
       const nkP = normWord(word);
-      const rawP = WORDIDX[nkP] || (window.KW_GLOBAL_LEXICON || {})[nkP];
+      const rawP = (WORDIDX || {})[nkP] || (window.KW_GLOBAL_LEXICON || {})[nkP];
       if (rawP && rawP.w && rawP.w.endsWith('-')) return null;
     }
     if (gated && word.length <= 1) return null; // KW_STORY_LEX alphabet-letter entries vs. English "a"/"I" — see TODO below
@@ -2001,7 +2014,7 @@
     if (expectNoun && !/^noun/i.test(String(hit.type || hit.pos || ''))) return null;
     if (gated) {
       const nk = normWord(word);
-      let raw = WORDIDX[nk] || (window.KW_GLOBAL_LEXICON || {})[nk] || (window.KW_STORY_LEX || {})[storyNorm(word)];
+      let raw = (WORDIDX || {})[nk] || (window.KW_GLOBAL_LEXICON || {})[nk] || (window.KW_STORY_LEX || {})[storyNorm(word)];
       // The guard must also see through the inflection index: a plural/
       // conjugated surface form (e.g. "Infinitive", the plural of "Infinitiv")
       // resolves via KW_INFLECTIONS to a capitalized-noun lemma, but that
@@ -2009,7 +2022,7 @@
       // what carries the capitalization signal this guard checks.
       if (!raw) {
         const lemma = (window.KW_INFLECTIONS || {})[nk];
-        if (lemma) raw = (window.KW_GLOBAL_LEXICON || {})[normWord(lemma)] || WORDIDX[normWord(lemma)];
+        if (lemma) raw = (window.KW_GLOBAL_LEXICON || {})[normWord(lemma)] || (WORDIDX || {})[normWord(lemma)];
       }
       // TODO (architectural, permanent): this orthography-based guard is a
       // TEMPORARY safeguard, not the intended long-term design. The correct

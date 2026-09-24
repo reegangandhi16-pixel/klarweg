@@ -10,10 +10,10 @@
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="chapter.css?v=10">
+<link rel="stylesheet" href="chapter.css?v=11">
 <style>
   /* Cache-proof article-color override — articles are always #B45309,
-     never the gender/subject colors, regardless of a stale chapter.css?v=10. */
+     never the gender/subject colors, regardless of a stale chapter.css?v=11. */
   #vocab-grid .vword-tag.gender-m,
   #vocab-grid .vword-tag.gender-f,
   #vocab-grid .vword-tag.gender-n {
@@ -29,7 +29,7 @@
   .audio-play-btn { background: #c44e26 !important; }
   .audio-track-fill { background: #c44e26 !important; }
   /* Genitiv role color (spec 3.7 case token — bronze). Cache-proof:
-     chapter.css?v=10 defines --g-genitiv but no .r-genitiv rule yet. */
+     chapter.css?v=11 defines --g-genitiv but no .r-genitiv rule yet. */
   .r-genitiv { color: var(--g-genitiv, #A06B2C); }
   /* weil highlight — the subordinator this chapter is built around.
      Uses the spec conjunction token (brown) with weight so it stands
@@ -48,6 +48,8 @@
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 </head>
 <body>
+
+<a class="skip-link" href="#story-stage">Skip to content</a>
 
 <!-- ============================================================
      CHAPTER TOPBAR (chrome)
@@ -86,7 +88,7 @@
 <!-- ============================================================
      PART 1 — HERO  (static intro that flows into the dashboard)
 ============================================================ -->
-<div id="story-stage" class="single">
+<div id="story-stage" class="single" tabindex="-1">
 
   <!-- HERO -->
   <section class="flow-section" data-slide="1">

@@ -1183,6 +1183,13 @@ img { max-width: 100%; display: block; }
 .prev-chapter-link:hover { color: var(--ink-secondary); }
 .prev-chapter-link .de { font-style: italic; }
 
+.skip-link {
+  position: absolute; top: -48px; left: 12px; z-index: 9999;
+  padding: 12px 18px; background: var(--ink-primary); color: var(--bg-surface);
+  border-radius: 8px; font-size: 14px; font-weight: 600; transition: top 150ms ease;
+}
+.skip-link:focus { top: 12px; }
+
 /* Top nav bar (chapter chrome) */
 .chapter-topbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;

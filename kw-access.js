@@ -381,6 +381,8 @@
     var eyebrow = LVL + (num ? ' · Chapter ' + String(num).padStart(2, '0') : '');
 
     var el = document.createElement('main');
+    el.id = 'story-stage';
+    el.tabIndex = -1;
     el.className = 'kwlock';
     el.setAttribute('role', 'main');
     el.innerHTML =

@@ -307,6 +307,20 @@
     return p;
   }
 
+  /* True only when this purchase was clicked from a level's OWN roadmap
+     pricing card (not the account page, not a locked-chapter modal, not
+     a different level's page, and never for the Lifetime bundle). Used
+     solely to pick a better "Start learning" destination on success —
+     every other outcome (pending/failed/cancelled/etc.) is unaffected. */
+  function isOwnRoadmapPageLevelPurchase(product, ctx) {
+    if (!product || product.kind !== 'level' || !product.firstChapterHref) return false;
+    if (!ctx || !ctx.trigger || typeof ctx.trigger.closest !== 'function') return false;
+    if (!ctx.trigger.closest('#pricing')) return false;
+    var path = global.location.pathname || '';
+    var expected = '/' + product.id.toLowerCase() + '.html';
+    return path.length >= expected.length && path.slice(-expected.length) === expected;
+  }
+
   function start(productId, ctx) {
     ctx = ctx || {};
     var product = productOrThrow(productId);
@@ -324,7 +338,7 @@
     return A.refresh({ force: true }).then(function (s) {
       if (!s.authenticated) return promptSignIn(product, s);
       if (alreadyOwns(product, s)) return showOwned(product);
-      return confirmPurchase(product);
+      return confirmPurchase(product, ctx);
     });
   }
 
@@ -364,7 +378,7 @@
     if (global.KWAccess) global.KWAccess.refresh();
   }
 
-  function confirmPurchase(product) {
+  function confirmPurchase(product, ctx) {
     render({
       eyebrow: product.tier,
       title: product.name,
@@ -375,7 +389,7 @@
       amountLabel: product.label,
       note: 'Payment is handled by Cashfree. Klarweg never sees your card details.',
       actions: [
-        { label: 'Continue to payment', kind: 'primary', onClick: function () { begin(product); } },
+        { label: 'Continue to payment', kind: 'primary', onClick: function () { begin(product, ctx); } },
         { label: 'Cancel', onClick: close }
       ]
     });
@@ -387,13 +401,13 @@
      may still have none on file. Gate here, once, right before the
      order is actually created; accounts that already have a valid
      phone see no extra step. */
-  function begin(product) {
+  function begin(product, ctx) {
     var A = auth();
-    if (!A.hasPhone()) return collectPhone(product);
-    beginOrder(product);
+    if (!A.hasPhone()) return collectPhone(product, null, ctx);
+    beginOrder(product, ctx);
   }
 
-  function collectPhone(product, fieldError) {
+  function collectPhone(product, fieldError, ctx) {
     render({
       eyebrow: product.tier,
       title: 'Add a phone number',
@@ -408,19 +422,19 @@
       },
       error: fieldError || null,
       actions: [
-        { label: 'Continue to payment', kind: 'primary', onClick: function () { submitPhone(product); } },
+        { label: 'Continue to payment', kind: 'primary', onClick: function () { submitPhone(product, ctx); } },
         { label: 'Cancel', onClick: close }
       ],
       dismissible: true
     });
   }
 
-  function submitPhone(product) {
+  function submitPhone(product, ctx) {
     var A = auth();
     var input = doc.getElementById('kwco-phone');
     var phone = input ? input.value : '';
     var v = A.validatePhone({ phone: phone });
-    if (v) return collectPhone(product, v.message);
+    if (v) return collectPhone(product, v.message, ctx);
 
     render({
       eyebrow: product.tier,
@@ -431,13 +445,13 @@
     });
 
     A.updatePhone(phone).then(function () {
-      beginOrder(product);
+      beginOrder(product, ctx);
     }).catch(function (e) {
-      collectPhone(product, e && e.message ? e.message : 'Could not save your phone number.');
+      collectPhone(product, e && e.message ? e.message : 'Could not save your phone number.', ctx);
     });
   }
 
-  function beginOrder(product) {
+  function beginOrder(product, ctx) {
     render({
       eyebrow: product.tier,
       title: product.name,
@@ -465,15 +479,15 @@
       });
     }).then(function () {
       // Cashfree has closed. This tells us NOTHING about the payment.
-      return verify(product, order.id);
+      return verify(product, order.id, ctx);
     }).catch(function (e) {
       if (e && e.code === 'unauthorized') return sessionExpired(product);
-      if (order && order.id) return verify(product, order.id);
+      if (order && order.id) return verify(product, order.id, ctx);
       failedToStart(product, e);
     });
   }
 
-  function verify(product, orderId) {
+  function verify(product, orderId, ctx) {
     render({
       eyebrow: product.tier,
       title: 'Confirming your payment',
@@ -482,7 +496,7 @@
       dismissible: false
     });
     return pollOrder(orderId).then(function (status) {
-      if (status === 'paid' || status === 'confirming') return succeeded(product, orderId);
+      if (status === 'paid' || status === 'confirming') return succeeded(product, orderId, ctx);
       if (status === 'failed') return failed(product, orderId);
       if (status === 'cancelled') return cancelled(product);
       if (status === 'session-expired') return sessionExpired(product);
@@ -493,10 +507,13 @@
   /* The ONLY place that declares success, and it does so only when
      /auth/me actually reports the entitlement. A paid order row or a
      paid gateway status is not enough on its own. */
-  function succeeded(product, orderId) {
+  function succeeded(product, orderId, ctx) {
     return auth().refresh({ force: true }).then(function (s) {
       if (!alreadyOwns(product, s)) return pending(product, orderId);
       if (global.KWAccess) global.KWAccess.refresh();
+      var startLearning = isOwnRoadmapPageLevelPurchase(product, ctx)
+        ? { label: 'Start learning', kind: 'primary', href: product.firstChapterHref }
+        : { label: 'Start learning', kind: 'primary', onClick: function () { close(); global.location.reload(); } };
       render({
         mark: 'ok', markTone: 'ok',
         eyebrow: 'Payment confirmed',
@@ -505,7 +522,7 @@
           ? 'Every chapter from A1 to C2 is now unlocked on your account.'
           : 'Every ' + product.id + ' chapter is now unlocked on your account.',
         actions: [
-          { label: 'Start learning', kind: 'primary', onClick: function () { close(); global.location.reload(); } },
+          startLearning,
           { label: 'Your account', href: auth().accountUrl({ prefix: prefixToRoot(), next: null }) }
         ],
         note: 'A receipt has been sent to your registered email address.'

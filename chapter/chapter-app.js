@@ -4804,6 +4804,9 @@
     });
     btn.addEventListener('click', () => panel.classList.toggle('is-open'));
     document.addEventListener('click', (ev) => { if (!panel.contains(ev.target) && !btn.contains(ev.target)) panel.classList.remove('is-open'); });
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape' && panel.classList.contains('is-open')) { panel.classList.remove('is-open'); btn.focus(); }
+    });
     window.addEventListener('scroll', () => { btn.classList.add('dimmed'); }, { passive: true });
     document.body.append(btn, panel);
   }

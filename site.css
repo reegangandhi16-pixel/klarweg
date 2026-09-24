@@ -271,6 +271,18 @@ body.mobile-nav-open { overflow: hidden; }
 .flist .tick { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: rgba(46,125,50,0.12); color: var(--g-object); display: flex; align-items: center; justify-content: center; margin-top: 1px; }
 .flist .tick svg { width: 13px; height: 13px; }
 
+/* ---------- manifesto list (numbered principles, no card chrome) ---------- */
+.manifesto-list { display: flex; flex-direction: column; }
+.manifesto-item { display: flex; gap: 28px; align-items: flex-start; padding: 32px 0; border-top: 1px solid var(--hairline-light); }
+.manifesto-item:last-child { border-bottom: 1px solid var(--hairline-light); }
+.manifesto-num { font-family: var(--font-display); font-size: 40px; font-weight: 400; line-height: 1; color: var(--ink-quaternary); flex: 0 0 auto; width: 64px; }
+.manifesto-item h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; margin: 0 0 8px; }
+.manifesto-item p { margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--ink-secondary); max-width: 560px; }
+@media (max-width: 480px) {
+  .manifesto-num { font-size: 28px; width: 44px; }
+  .manifesto-item { gap: 16px; }
+}
+
 /* ---------- table (outcomes / exam) ---------- */
 .ktable { width: 100%; background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); overflow: hidden; border-collapse: collapse; }
 .ktable th, .ktable td { text-align: left; padding: 18px 22px; border-bottom: 1px solid var(--hairline-light); font-size: 15px; vertical-align: top; }

@@ -87,7 +87,7 @@
   --dur-slow: 480ms;
   --dur-cinematic: 800ms;
 
-  --font-display: 'General Sans', 'Inter', system-ui, sans-serif;
+  --font-display: 'Fraunces', 'Times New Roman', serif;
   --font-ui: 'Inter', system-ui, sans-serif;
   --font-german: 'Fraunces', 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
@@ -171,21 +171,21 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
   font-size: 15px;
   padding: 13px 22px;
-  border-radius: var(--r-full);
+  border-radius: var(--r-lg);
   transition: transform var(--dur-base) var(--ease), background var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease);
   white-space: nowrap;
   letter-spacing: -0.01em;
 }
 .btn-primary {
-  background: #1fa84b;
+  background: var(--coral);
   color: #fff;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 24px -8px rgba(31,168,75,0.42);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 24px -8px rgba(229,90,63,0.42);
 }
-.btn-primary:hover { background: #1a9342; transform: translateY(-1px); box-shadow: 0 0 32px -6px rgba(31,168,75,0.34), 0 12px 32px -8px rgba(31,168,75,0.44); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 32px -6px rgba(229,90,63,0.34), 0 12px 32px -8px rgba(229,90,63,0.44); }
 .btn-primary:active { transform: translateY(0); }
-.btn-ghost { background: transparent; color: var(--ink-primary); border: 1px solid var(--hairline-strong); }
+.btn-ghost { background: transparent; color: var(--ink-primary); border: 1px solid var(--hairline-strong); border-radius: var(--r-md); }
 .btn-ghost:hover { background: var(--bg-surface); border-color: var(--ink-tertiary); }
-.btn-soft { background: var(--bg-elevated); color: var(--ink-primary); border: 1px solid var(--hairline); }
+.btn-soft { background: var(--bg-elevated); color: var(--ink-primary); border: 1px solid var(--hairline); border-radius: var(--r-md); }
 .btn-soft:hover { background: var(--bg-surface); border-color: var(--hairline-strong); }
 .btn-large { padding: 17px 30px; font-size: 16px; }
 .btn-small { padding: 9px 16px; font-size: 13.5px; }

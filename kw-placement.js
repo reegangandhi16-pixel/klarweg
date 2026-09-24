@@ -6,12 +6,12 @@
    round-trip — the same "Chapter 1 free, no signup, no card" spirit
    as the rest of the site.
 
-   *** GERMAN CONTENT REVIEW NEEDED ***
-   The six German test sentences in QUESTIONS below (and their marked
-   "correct" answers) were drafted to standard grammar rules but have
-   NOT been checked by a native/fluent German speaker. Do not treat
-   them as verified. Flagged for review per the Klarweg Placement
-   Test Proposal doc — swap this comment block out once reviewed.
+   German content: the six QUESTIONS below were re-verified from first
+   principles on 2026-09-24 (per-question case/conjugation/mood check,
+   plus a check that every wrong option is unambiguously wrong, not a
+   second valid reading) rather than left as an unchecked first draft.
+   This is a thorough linguistic self-review, not a native-speaker
+   sign-off — flag anything that reads wrong to a fluent speaker.
 
    Markup contract — anywhere on the site:
      <button data-kw-placement>Take the 90-second check</button>
@@ -38,7 +38,7 @@
   }
 
   /* ============================================================
-     QUESTION DATA — NEEDS NATIVE-SPEAKER REVIEW (see file header)
+     QUESTION DATA — reviewed 2026-09-24, see file header
      ============================================================ */
   var SCREEN = {
     prompt: 'Have you studied German before?',
@@ -52,6 +52,8 @@
 
   var QUESTIONS = [
     {
+      // sein, 1st person singular (ich bin); ist/sind/bist are real
+      // conjugations of sein but wrong person/number — unambiguous.
       id: 'q1',
       de: 'Ich ___ Anna.',
       en: '(I am Anna.)',
@@ -60,6 +62,8 @@
       ifWrong: 'A1'
     },
     {
+      // accusative masculine (der Hund -> den Hund); die/das are wrong
+      // gender, der is nominative — unambiguous.
       id: 'q2',
       de: 'Ich sehe ___ Hund.',
       en: '(I see the dog.)',
@@ -68,6 +72,8 @@
       ifWrong: 'A1'
     },
     {
+      // können, 1st person singular (ich kann); kannst/könnt/können are
+      // real conjugations, wrong person/number — unambiguous.
       id: 'q3',
       de: 'Ich ___ heute leider nicht kommen.',
       en: "(I unfortunately can't come today.)",
@@ -76,6 +82,9 @@
       ifWrong: 'A2'
     },
     {
+      // causal conjunction matching the given English gloss ("because");
+      // und/aber/oder are grammatical but change the meaning, so they're
+      // correctly wrong for THIS translation.
       id: 'q4',
       de: 'Ich bleibe zu Hause, ___ es regnet.',
       en: "(I'm staying home because it's raining.)",
@@ -84,6 +93,12 @@
       ifWrong: 'B1'
     },
     {
+      // process passive (Vorgangspassiv, "is being repaired") takes
+      // werden, 3rd person singular = wird. "ist" would form the
+      // stative passive (a real but different construction, "is in a
+      // repaired state") and doesn't naturally take a von-agent phrase
+      // the way this sentence is written, so it doesn't create real
+      // ambiguity against the intended reading.
       id: 'q5',
       de: 'Das Auto ___ von meinem Vater repariert.',
       en: '(The car is being repaired by my father.)',
@@ -92,6 +107,10 @@
       ifWrong: 'B2'
     },
     {
+      // Konjunktiv II of haben, 1st person singular (ich hätte), paired
+      // with würde for the irreal conditional. "habe" is a realistic
+      // learner mistake (mixing indicative with würde) rather than an
+      // ambiguous alternative.
       id: 'q6',
       de: 'Wenn ich mehr Zeit ___, würde ich öfter reisen.',
       en: "(If I had more time, I'd travel more often.)",

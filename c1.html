@@ -1006,6 +1006,16 @@ body.mobile-nav-open { overflow: hidden; }
   margin-top: 12px;
 }
 .price-guarantee svg { flex-shrink: 0; color: var(--green); }
+.price-owned {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--green);
+  align-self: flex-start;
+}
+.price-owned svg { flex-shrink: 0; }
 .price-list {
   list-style: none;
   padding: 0;
@@ -1685,6 +1695,41 @@ function renderRoadmap(level) {
   mount.innerHTML = html;
 }
 
+/* Swaps the #pricing section's buy CTAs for an owned/continue state once
+   KWAuth confirms entitlement — reuses the exact same state already
+   resolved for the chapter grid above, no separate auth call. Level
+   ownership (individual purchase OR Lifetime) replaces the level card's
+   buy link with a real entry point into Chapter 1; Lifetime ownership
+   additionally replaces the Lifetime card's own buy link. Server-side
+   prices, PRODUCTS, and entitlement logic are untouched — display only. */
+function updatePricingOwnership(level, owns, fullAccess) {
+  const ownedBadge = function (text) {
+    const el = document.createElement('div');
+    el.className = 'price-owned';
+    el.innerHTML = '<svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg>';
+    el.appendChild(document.createTextNode(text));
+    return el;
+  };
+
+  const levelBtn = document.querySelector('#pricing [data-kw-buy="' + level.code + '"]');
+  if (levelBtn && owns) {
+    const first = level.chapters.find(c => c.n === 1);
+    const badge = ownedBadge('You own ' + level.code);
+    const cta = document.createElement('a');
+    cta.className = 'btn btn-secondary';
+    cta.style.alignSelf = 'flex-start';
+    cta.style.marginTop = '12px';
+    cta.href = (first && first.href) || C1_CHAPTER_HREFS[1] || '#pricing';
+    cta.innerHTML = 'Go to Chapter 1 <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    levelBtn.replaceWith(badge, cta);
+  }
+
+  const lifetimeBtn = document.querySelector('#pricing [data-kw-buy="LIFETIME"]');
+  if (lifetimeBtn && fullAccess) {
+    lifetimeBtn.replaceWith(ownedBadge('Lifetime access active'));
+  }
+}
+
 /* ============================================================
    INIT
    ============================================================ */
@@ -1694,9 +1739,10 @@ renderPathStations(currentLevel);
 renderRoadmap(currentLevel);
 
 if (window.KWAuth) {
-  window.KWAuth.refresh({ force: true }).then(function () {
+  window.KWAuth.refresh({ force: true }).then(function (state) {
     ownsLevel = window.KWAuth.hasLevel(currentLevel.code);
     renderRoadmap(currentLevel);
+    updatePricingOwnership(currentLevel, ownsLevel, !!(state && state.hasFullAccess));
     wireReveals();
   }).catch(function () {
     // KWAuth could not resolve — remain fail-closed (ownsLevel stays false).

@@ -49,10 +49,24 @@
 
   /* Radii */
   --r-xs:             6px;
-  --r-sm:             10px;
-  --r-md:             14px;
-  --r-lg:             20px;
+  --r-sm:             8px;
+  --r-md:             12px;
+  --r-lg:             16px;
   --r-full:           999px;
+
+  /* Level accent — one hue per CEFR level, shared with the account pages */
+  --lvl-a1:           #185FA5;
+  --lvl-a2:           #2E7D32;
+  --lvl-b1:           #7C3AED;
+  --lvl-b2:           #EA580C;
+  --lvl-c1:           #0F766E;
+  --lvl-c2:           #9F1239;
+
+  /* Brand coral — conversion CTAs */
+  --coral:            #E55A3F;
+  --coral-bright:     #F0997B;
+  --coral-tint:       #FAECE7;
+  --coral-deep:       #993C1D;
 
   /* Grammar Spine 5 — locked hexes per Klarweg OS Part 5.1 */
   --g-subject:        #185FA5;
@@ -281,7 +295,7 @@ body.mobile-nav-open { overflow: hidden; }
   align-items: center;
   gap: 8px;
   padding: 14px 22px;
-  border-radius: var(--r-full);
+  border-radius: var(--r-lg);
   font-size: 15px;
   font-weight: 500;
   letter-spacing: -0.005em;
@@ -291,18 +305,19 @@ body.mobile-nav-open { overflow: hidden; }
   cursor: pointer;
 }
 .btn-primary {
-  background: #1fa84b;
+  background: var(--coral);
   color: #fff;
 }
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 12px 28px rgba(31,168,75,0.22);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 12px 28px rgba(229,90,63,0.22);
 }
 .btn-primary:active { transform: translateY(0); }
 .btn-secondary {
   background: var(--bg-surface);
   color: var(--ink-primary);
   border-color: var(--hairline);
+  border-radius: var(--r-md);
 }
 .btn-secondary:hover {
   transform: translateY(-1px);
@@ -942,7 +957,18 @@ body.mobile-nav-open { overflow: hidden; }
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
   transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+}
+/* Level accent — ties this level's own pricing card to its account/roadmap
+   color, so A1 and C2 read as two chapters of one system, not two
+   unrelated pages. Lifetime spans every level, so it stays neutral. */
+.price-card:not(.center)::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--lvl-b1);
 }
 .price-card.center {
   background: linear-gradient(160deg, var(--bg-surface) 0%, var(--bg-warm) 100%);
@@ -1146,7 +1172,6 @@ footer {
 }
 
 </style>
-<link id="gfont-Rubik" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&amp;display=swap">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
@@ -1210,7 +1235,7 @@ footer {
       <span class="pill"><span class="pill-dot" style="background: var(--g-object);"></span> Goethe-aligned</span>
       <span class="pill">35 chapters</span>
     </div>
-    <h1 style="font-family: Rubik">From <span class="accent">verbundene Sätze</span> to independent, structured German.</h1>
+    <h1>From <span class="accent">verbundene Sätze</span> to independent, structured German.</h1>
     <p class="hero-lede">B1 is where German becomes your own — the subjunctive, the passive, and the structures that let you argue, explain, and tell a longer story. Thirty-five chapters of color-coded grammar, premium audio, and AI-corrected practice — built for Hindi-speaking learners, aligned to the Goethe-Zertifikat B1.</p>
     <div class="hero-ctas">
       <a href="chapter/chapter-b1-1-infinitiv-mit-zu.html" class="btn btn-primary">

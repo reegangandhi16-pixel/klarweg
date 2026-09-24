@@ -1169,6 +1169,11 @@ body.mobile-nav-open { overflow: hidden; }
   margin-top: 32px;
 }
 @media (max-width: 768px) { .case-grid { grid-template-columns: repeat(2, 1fr); } }
+/* Below 340px the 2-column grid (each card's own 16px×2 padding, times
+   two columns, plus the gap) no longer fits within the available width
+   — confirmed the sole source of the page's 320px horizontal overflow.
+   375px+ (where 2 columns already fits) is unaffected. */
+@media (max-width: 339px) { .case-grid { grid-template-columns: 1fr; } }
 .case-card { text-align: center; padding: 24px 16px; }
 .case-name {
   font-family: var(--font-display);
@@ -4904,7 +4909,7 @@ body {
 
     <!-- TIER 1: the core spine — bigger, more prominent -->
     <div class="cs-tier cs-tier-core">
-      <h4 class="cs-tier-title">The spine</h4>
+      <h3 class="cs-tier-title">The spine</h3>
       <div class="cs-grid cs-grid-core">
         <div class="cs-chip core"><span class="cs-dot" style="background: var(--g-subject);"></span><span class="cs-label">Subject</span></div>
         <div class="cs-chip core"><span class="cs-dot" style="background: var(--g-verb);"></span><span class="cs-label">Main Verb</span></div>
@@ -4928,7 +4933,7 @@ body {
 
     <!-- TIER 2: extended grammar parts -->
     <div class="cs-tier">
-      <h4 class="cs-tier-title">Words &amp; modifiers</h4>
+      <h3 class="cs-tier-title">Words &amp; modifiers</h3>
       <div class="cs-grid">
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-adjective);"></span><span class="cs-label">Adjective</span></div>
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-adverb);"></span><span class="cs-label">Adverb</span></div>
@@ -4947,7 +4952,7 @@ body {
 
     <!-- TIER 3: pronouns -->
     <div class="cs-tier">
-      <h4 class="cs-tier-title">Pronouns</h4>
+      <h3 class="cs-tier-title">Pronouns</h3>
       <div class="cs-grid">
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-possessive);"></span><span class="cs-label">Possessive</span></div>
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-reflexive);"></span><span class="cs-label">Reflexive</span></div>
@@ -4960,7 +4965,7 @@ body {
 
     <!-- TIER 4: cases (key differentiator) -->
     <div class="cs-tier">
-      <h4 class="cs-tier-title">Cases</h4>
+      <h3 class="cs-tier-title">Cases</h3>
       <div class="cs-grid">
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-akkusativ);"></span><span class="cs-label">Akkusativ Object</span></div>
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-dativ);"></span><span class="cs-label">Dativ Object</span></div>
@@ -4970,7 +4975,7 @@ body {
 
     <!-- TIER 5: verbs and verb-related -->
     <div class="cs-tier">
-      <h4 class="cs-tier-title">Verbs</h4>
+      <h3 class="cs-tier-title">Verbs</h3>
       <div class="cs-grid">
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-modalverb);"></span><span class="cs-label">Modal Verb</span></div>
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-auxiliary);"></span><span class="cs-label">Auxiliary Verb</span></div>
@@ -4988,7 +4993,7 @@ body {
 
     <!-- TIER 6: clause structure -->
     <div class="cs-tier">
-      <h4 class="cs-tier-title">Clause structure</h4>
+      <h3 class="cs-tier-title">Clause structure</h3>
       <div class="cs-grid">
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-main-clause);"></span><span class="cs-label">Main Clause</span></div>
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-subordinate);"></span><span class="cs-label">Subordinate Clause</span></div>
@@ -5003,7 +5008,7 @@ body {
 
     <!-- TIER 7: comparison + direction + advanced adverbs -->
     <div class="cs-tier">
-      <h4 class="cs-tier-title">Advanced</h4>
+      <h3 class="cs-tier-title">Advanced</h3>
       <div class="cs-grid">
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-comparison);"></span><span class="cs-label">Comparison</span></div>
         <div class="cs-chip"><span class="cs-dot" style="background: var(--g-superlative);"></span><span class="cs-label">Superlative</span></div>

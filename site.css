@@ -313,7 +313,7 @@ footer { padding: 64px 0 48px; border-top: 1px solid var(--hairline-light); back
 .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
 .footer-brand .nav-logo { font-size: 22px; }
 .footer-brand p { font-size: 14px; color: var(--ink-tertiary); margin: 14px 0 0; max-width: 280px; line-height: 1.55; }
-.footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary); margin: 0 0 16px; }
+.footer-col h3, .footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary); margin: 0 0 16px; }
 .footer-col a { display: block; font-size: 14px; color: var(--ink-secondary); margin-bottom: 11px; transition: color var(--dur-fast) var(--ease); }
 .footer-col a:hover { color: var(--ink-primary); }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; padding-top: 28px; border-top: 1px solid var(--hairline-light); }

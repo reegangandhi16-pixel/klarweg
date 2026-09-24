@@ -496,6 +496,14 @@ body.mobile-nav-open { overflow: hidden; }
 @media (min-width: 769px) {
   .mobile-nav-overlay, .mobile-nav { display: none !important; }
 }
+/* Below ~405px the top-bar Log in + Try Chapter 1 free buttons (fixed-
+   width content, no further shrink) don't leave room for the hamburger,
+   which renders clipped and unclickable by body's overflow-x:hidden.
+   .mobile-nav-actions already duplicates both actions inside the drawer,
+   so hiding them here only removes the redundant, broken copy. */
+@media (max-width: 404px) {
+  .nav-cta { display: none; }
+}
 
 /* ============================================================
    GERMAN WORDS — the core interactive language

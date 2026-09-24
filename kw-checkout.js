@@ -27,7 +27,7 @@
 
    Markup contract — anywhere on the site:
      <button data-kw-buy="B2">Unlock B2</button>
-     <button data-kw-buy="LIFETIME">Get Lifetime Access</button>
+     <button data-kw-buy="LIFETIME">Unlock everything</button>
    ============================================================ */
 (function (global) {
   'use strict';

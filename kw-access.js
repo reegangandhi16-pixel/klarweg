@@ -395,7 +395,7 @@
         '<div class="kwlock-actions">' +
           '<button type="button" class="kwlock-cta" data-kw-unlock="' + esc(LVL) + '">Unlock ' + esc(LVL) + ' — ' + esc(priceLabel(LVL)) + '</button>' +
           '<p class="kwlock-sub">One payment opens every ' + esc(LVL) + ' chapter.</p>' +
-          '<button type="button" class="kwlock-cta secondary" data-kw-unlock="LIFETIME">Get Lifetime Access — ' + esc(priceLabel('LIFETIME')) + '</button>' +
+          '<button type="button" class="kwlock-cta secondary" data-kw-unlock="LIFETIME">Unlock everything — ' + esc(priceLabel('LIFETIME')) + '</button>' +
           '<p class="kwlock-sub">All six levels, A1 through C2.</p>' +
         '</div>' +
         '<div class="kwlock-foot">' +

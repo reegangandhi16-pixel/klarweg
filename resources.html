@@ -27,6 +27,17 @@
   .pron-cell .w { font-family:var(--font-german); font-size:24px; font-weight:500; }
   .pron-cell .ipa { font-family:var(--font-mono); font-size:12px; color:var(--ink-tertiary); margin-top:4px; }
   .pron-cell .hi { font-size:13px; color:var(--ink-secondary); margin-top:2px; }
+  /* Fanned document tiles — same recipe as the unused .pdf-stack tile on
+     index.html (surface + hairline border + radius + mono "PDF" label),
+     scaled up from a 28x36px corner decoration to a real section visual
+     instead of inventing a new component. */
+  .pdf-fan { position:relative; height:220px; display:flex; align-items:center; justify-content:center; }
+  .pdf-tile { position:absolute; width:118px; height:154px; background:var(--bg-surface); border:1px solid var(--hairline); border-radius:var(--r-md); box-shadow:var(--shadow-soft); }
+  .pdf-tile::after { content:'PDF'; position:absolute; bottom:16px; left:50%; transform:translateX(-50%); font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.08em; color:var(--accent); }
+  .pdf-tile.p1 { transform:rotate(-7deg) translateX(-34px); z-index:1; }
+  .pdf-tile.p2 { z-index:2; }
+  .pdf-tile.p3 { transform:rotate(7deg) translateX(34px); z-index:1; }
+  .pdf-downloads-list b { white-space:nowrap; }
 </style>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -151,10 +162,17 @@
       <h2 class="display-md">Take it offline.</h2>
       <p class="lede">Every chapter ships with downloadable PDFs for revision and offline study. Here's what's inside each one.</p>
     </div>
-    <div class="grid grid-3">
-      <div class="card card-hover reveal"><div class="card-num">PDF</div><h3>Vocabulary</h3><p>The full chapter vocabulary — translations, genders, plurals and example sentences — in one printable sheet.</p><span class="card-link">Inside every chapter</span></div>
-      <div class="card card-hover reveal"><div class="card-num">PDF</div><h3>Grammar rules</h3><p>Explanations, structures, examples, exceptions and revision tables for the chapter's grammar.</p><span class="card-link">Inside every chapter</span></div>
-      <div class="card card-hover reveal"><div class="card-num">PDF</div><h3>Homework</h3><p>Extra exercises, writing tasks and speaking practice to consolidate the chapter on your own time.</p><span class="card-link">Inside every chapter</span></div>
+    <div class="grid grid-2" style="gap:48px;align-items:center">
+      <div class="pdf-fan" aria-hidden="true">
+        <div class="pdf-tile p1"></div>
+        <div class="pdf-tile p2"></div>
+        <div class="pdf-tile p3"></div>
+      </div>
+      <ul class="flist pdf-downloads-list">
+        <li><span class="tick"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Vocabulary.</b> The full chapter vocabulary — translations, genders, plurals and example sentences — in one printable sheet.</li>
+        <li><span class="tick"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Grammar rules.</b> Explanations, structures, examples, exceptions and revision tables for the chapter's grammar.</li>
+        <li><span class="tick"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Homework.</b> Extra exercises, writing tasks and speaking practice to consolidate the chapter on your own time.</li>
+      </ul>
     </div>
   </div>
 </section>

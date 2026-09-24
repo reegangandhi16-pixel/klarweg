@@ -667,7 +667,6 @@ body.mobile-nav-open { overflow: hidden; }
   height: 900px;
   background:
     radial-gradient(circle at 30% 30%, rgba(55,138,221,0.18), transparent 50%),
-    radial-gradient(circle at 70% 40%, rgba(216,90,48,0.16), transparent 55%),
     radial-gradient(circle at 50% 70%, rgba(99,153,34,0.14), transparent 60%),
     radial-gradient(circle at 80% 80%, rgba(239,159,39,0.16), transparent 55%);
   filter: blur(40px);
@@ -760,13 +759,13 @@ body.mobile-nav-open { overflow: hidden; }
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--coral);
-  box-shadow: 0 0 0 4px rgba(216,90,48,0.15);
+  background: var(--ink-tertiary);
+  box-shadow: 0 0 0 4px rgba(14,14,16,0.15);
   animation: pulse-dot 2s var(--ease) infinite;
 }
 @keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(216,90,48,0.15); }
-  50% { box-shadow: 0 0 0 8px rgba(216,90,48,0.05); }
+  0%, 100% { box-shadow: 0 0 0 4px rgba(14,14,16,0.15); }
+  50% { box-shadow: 0 0 0 8px rgba(14,14,16,0.05); }
 }
 .decode-toggle {
   display: inline-flex;
@@ -2685,7 +2684,7 @@ body.mobile-nav-open { overflow: hidden; }
   border: 1px dashed var(--hairline-strong);
 }
 .price-card.free .price-title {
-  background: linear-gradient(135deg, var(--coral), var(--amber));
+  background: linear-gradient(135deg, var(--ink-primary) 0%, var(--ink-secondary) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -5203,7 +5202,7 @@ body {
       <div class="word-card-mock">
         <div class="wc-header">
           <div class="wc-word-block">
-            <h3 class="wc-word" style="color: var(--coral-text);">gibt</h3>
+            <h3 class="wc-word" style="color: var(--g-verb);">gibt</h3>
             <p class="wc-pron">sounds like <em>"geept"</em></p>
           </div>
           <button class="wc-audio" data-state="idle" aria-label="Play pronunciation" type="button">
@@ -5221,8 +5220,8 @@ body {
         </div>
 
         <div class="wc-badges">
-          <span class="wc-badge accent" style="--accent-tint: var(--coral-tint); --accent-deep: var(--coral-deep);">
-            <span class="dot" style="background: var(--coral);"></span> Verb
+          <span class="wc-badge accent" style="--accent-tint: rgba(220,38,38,0.10); --accent-deep: #991B1B;">
+            <span class="dot" style="background: var(--g-verb);"></span> Verb
           </span>
           <span class="wc-badge">Present tense</span>
           <span class="wc-badge">geben (infinitive)</span>
@@ -5230,7 +5229,7 @@ body {
 
         <div class="wc-section">
           <div class="wc-section-title">Why this form?</div>
-          <p class="wc-why" style="background: var(--coral-tint); color: var(--coral-deep);">"geben" is irregular: e changes to i for er/sie/es.</p>
+          <p class="wc-why" style="background: rgba(220,38,38,0.10); color: #991B1B;">"geben" is irregular: e changes to i for er/sie/es.</p>
         </div>
 
         <div class="wc-section">
@@ -5438,7 +5437,7 @@ body {
               You'd say: <strong style="font-family: var(--font-german);">Ich möchte einen Kaffee, bitte.</strong>
               <div class="msg-mini">
                 <span class="msg-mini-tag" style="--c: var(--blue); --t: var(--blue-tint);">Ich = subject</span>
-                <span class="msg-mini-tag" style="--c: var(--coral); --t: var(--coral-tint);">möchte = polite verb</span>
+                <span class="msg-mini-tag" style="--c: var(--g-verb); --t: rgba(220,38,38,0.10);">möchte = polite verb</span>
                 <span class="msg-mini-tag" style="--c: var(--green); --t: var(--green-tint);">einen Kaffee = Akkusativ</span>
               </div>
             </div>
@@ -5586,7 +5585,7 @@ body {
         <div class="cstep-body">The chapter's new grammar shown in colors — roles, cases, position rules.</div>
         <div class="cstep-visual cv-grammar">
           <span class="cv-pill" style="background: var(--blue-tint); color: var(--blue);">Subject</span>
-          <span class="cv-pill" style="background: var(--coral-tint); color: var(--coral-text);">Verb</span>
+          <span class="cv-pill" style="background: rgba(220,38,38,0.10); color: var(--g-verb);">Verb</span>
           <span class="cv-pill" style="background: var(--green-tint); color: var(--green);">Object · Akk</span>
         </div>
       </div>
@@ -5596,7 +5595,7 @@ body {
         <div class="cstep-title">Vocabulary</div>
         <div class="cstep-body">12-20 new words with gender, plural, audio. Auto-added to spaced revision.</div>
         <div class="cstep-visual cv-vocab">
-          <div class="cv-card"><span style="color: var(--coral-text);">die</span> Tasse</div>
+          <div class="cv-card"><span style="color: var(--g-article);">die</span> Tasse</div>
           <div class="cv-card"><span style="color: var(--blue);">der</span> Kaffee</div>
           <div class="cv-card"><span style="color: var(--green);">das</span> Stück</div>
         </div>
@@ -6004,7 +6003,7 @@ body {
         <p class="price-sub">Experience Klarweg before you pay.</p>
 
         <div style="margin: 20px 0;">
-          <div style="font-family: var(--font-display); font-size: 48px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; background: linear-gradient(135deg, var(--coral), var(--amber)); -webkit-background-clip: text; background-clip: text; color: transparent;">Free</div>
+          <div style="font-family: var(--font-display); font-size: 48px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; background: linear-gradient(135deg, var(--ink-primary) 0%, var(--ink-secondary) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Free</div>
           <p style="font-size: 13px; color: var(--ink-secondary); margin-top: 8px;">Chapter 1 of any level. No card. No signup.</p>
         </div>
 

@@ -1267,14 +1267,14 @@
       if (fn) return fn(term, { gender: g });
       return Audio.speak(term);
     };
-    const fBtn = Audio.gate(el('button', { class: 'vword-voice' + (voicePref() === 'female' ? ' is-active' : ''), title: 'Female voice', 'data-g': 'female',
+    const fBtn = Audio.gate(el('button', { class: 'vword-voice' + (voicePref() === 'female' ? ' is-active' : ''), title: 'Female voice', 'aria-label': 'Female voice', 'data-g': 'female',
       onclick: () => { state.vocabVoice = 'female'; save(); refreshVoice(); playVoice('female'); } }, 'F'), term);
-    const mBtn = Audio.gate(el('button', { class: 'vword-voice' + (voicePref() === 'male' ? ' is-active' : ''), title: 'Male voice', 'data-g': 'male',
+    const mBtn = Audio.gate(el('button', { class: 'vword-voice' + (voicePref() === 'male' ? ' is-active' : ''), title: 'Male voice', 'aria-label': 'Male voice', 'data-g': 'male',
       onclick: () => { state.vocabVoice = 'male'; save(); refreshVoice(); playVoice('male'); } }, 'M'), term);
     function refreshVoice() {
       [fBtn, mBtn].forEach(b => b.classList.toggle('is-active', b.getAttribute('data-g') === voicePref()));
     }
-    const listenBtn = Audio.gate(el('button', { class: 'vword-btn', style: 'flex:0 0 auto;width:38px;padding:8px', title: 'Listen', html: ICON.speaker,
+    const listenBtn = Audio.gate(el('button', { class: 'vword-btn', style: 'flex:0 0 auto;width:38px;padding:8px', title: 'Listen', 'aria-label': 'Listen', html: ICON.speaker,
       onclick: () => playVoice(voicePref()) }), term);
     card.append(
       el('div', { class: 'vword-top' },
@@ -3877,9 +3877,9 @@
     const W = C.writing;
     const card = el('div', { class: 'card' });
     card.append(
-      el('p', { class: 'lede', style: 'font-size:16px;margin-bottom:8px' }, W.prompt),
+      el('p', { class: 'lede', id: 'writing-prompt', style: 'font-size:16px;margin-bottom:8px' }, W.prompt),
       el('div', { class: 'muted', style: 'font-size:13.5px;margin-bottom:16px' }, 'Starters: ', ...W.starters.map(s => el('span', { class: 'de', style: 'margin-right:14px' }, s))));
-    const ta = el('textarea', { class: 'writing-area', placeholder: W.placeholder || '' });
+    const ta = el('textarea', { class: 'writing-area', placeholder: W.placeholder || '', 'aria-labelledby': 'writing-prompt' });
     const wc = el('span', {}, '0 words'); const cc = el('span', {}, '0 characters');
     const meta = el('div', { class: 'writing-meta' }, wc, cc);
     const fbBtn = el('button', { class: 'btn btn-soft btn-small', style: 'margin-top:14px' }, 'Check my grammar');
@@ -4032,7 +4032,7 @@
     const inputs = [];
     E.gap.sentence.forEach((part, i) => {
       gapSent.appendChild(germanWordSpansGated(part));
-      if (i < E.gap.gaps.length) { const inp = el('input', { class: 'gap-input', type: 'text', size: '5' }); inputs.push(inp); gapSent.appendChild(inp); }
+      if (i < E.gap.gaps.length) { const inp = el('input', { class: 'gap-input', type: 'text', size: '5', 'aria-label': 'Fill in the blank, gap ' + (inputs.length + 1) + ' of ' + E.gap.gaps.length }); inputs.push(inp); gapSent.appendChild(inp); }
     });
     const gapFb = el('div', { class: 'exercise-feedback' });
     const gapCheck = el('button', { class: 'btn btn-primary btn-small', style: 'margin-top:16px' }, 'Check');

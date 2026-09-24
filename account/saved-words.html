@@ -311,8 +311,10 @@ function fmtDate(ms){var d=new Date(ms);return d.toLocaleDateString('en-GB',{day
   $('#acct-menu-name').textContent=u.name||'Learner';
   $('#acct-menu-email').textContent=u.email||'on this device';
   var btn=$('#acct-btn'),menu=$('#acct-menu');
-  btn.addEventListener('click',function(e){e.stopPropagation();var open=menu.classList.toggle('open');btn.setAttribute('aria-expanded',open);});
-  document.addEventListener('click',function(e){if(!$('#acct').contains(e.target)){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
+  function closeAcctMenu(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+  btn.addEventListener('click',function(e){e.stopPropagation();var open=menu.classList.toggle('open');btn.setAttribute('aria-expanded',open);if(open){var first=menu.querySelector('.acct-item');if(first)first.focus();}});
+  document.addEventListener('click',function(e){if(!$('#acct').contains(e.target))closeAcctMenu();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){closeAcctMenu();btn.focus();}});
 })();
 
 /* ---- Level summary cards ---- */

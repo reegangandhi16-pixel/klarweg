@@ -4853,8 +4853,22 @@
       const em = $('#acct-menu-email'); if (em) em.textContent = u.email || '';
     }
 
-    btn.addEventListener('click', (e) => { e.stopPropagation(); const open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', open); });
-    document.addEventListener('click', (e) => { if (acct && !acct.contains(e.target)) { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
+    function closeAcctMenu() {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      if (open) { const first = menu.querySelector('.acct-item'); if (first) first.focus(); }
+    });
+    document.addEventListener('click', (e) => { if (acct && !acct.contains(e.target)) closeAcctMenu(); });
+    // ARIA role="menu" implies Escape closes it and returns focus to the
+    // trigger — the click-toggle above never covered the keyboard case.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) { closeAcctMenu(); btn.focus(); }
+    });
   }
 
   /* ---------- access-control integration ---------- */

@@ -98,7 +98,7 @@
   /* Ink */
   --ink-primary: #0E0E10;
   --ink-secondary: #5A5A60;
-  --ink-tertiary: #9A9AA0;
+  --ink-tertiary: #6F6F73;
   --ink-quaternary: #C7C7C2;
 
   /* Brand spine */
@@ -110,6 +110,7 @@
   --coral: #E55A3F;
   --coral-bright: #F0997B;
   --coral-tint: #FAECE7;
+  --coral-text: #C9371B;
 
   /* Klarweg brand accent — deep teal (visual-system spec 3.7).
      For primary/Can-Do markers; coral is reserved for conversion CTAs. */
@@ -1252,7 +1253,7 @@ body.mobile-nav-open { overflow: hidden; }
   font-size: 48px;
   font-weight: 500;
   line-height: 1;
-  color: var(--coral);
+  color: var(--coral-text);
   text-decoration: underline;
   text-underline-offset: 6px;
   text-decoration-thickness: 2px;
@@ -1273,7 +1274,7 @@ body.mobile-nav-open { overflow: hidden; }
 .wc-audio:hover {
   background: var(--coral-tint);
   border-color: var(--coral);
-  color: var(--coral);
+  color: var(--coral-text);
 }
 .wc-ipa {
   font-family: var(--font-german);
@@ -1537,7 +1538,7 @@ body.mobile-nav-open { overflow: hidden; }
 }
 .msg-audio:hover {
   background: var(--coral-tint);
-  color: var(--coral);
+  color: var(--coral-text);
   border-color: var(--coral);
 }
 
@@ -1629,7 +1630,7 @@ body.mobile-nav-open { overflow: hidden; }
   justify-content: center;
   cursor: pointer;
 }
-.chat-mic:hover { color: var(--coral); border-color: var(--coral); }
+.chat-mic:hover { color: var(--coral-text); border-color: var(--coral); }
 .chat-send {
   padding: 9px 18px;
   background: var(--ink-primary);
@@ -2763,7 +2764,7 @@ body.mobile-nav-open { overflow: hidden; }
   font-family: var(--font-german);
   font-style: italic;
   font-weight: 500;
-  color: var(--coral);
+  color: var(--coral-text);
   display: inline-block;
   line-height: 1.3;
   padding-bottom: 0.12em;
@@ -3007,7 +3008,7 @@ body.modal-open .sticky-bar { transform: translate(-50%, 120px) !important; }
 .sb:hover {
   background: var(--coral-tint);
   border-color: var(--coral);
-  color: var(--coral);
+  color: var(--coral-text);
   transform: translateY(-1px);
 }
 .sb:active { transform: translateY(0); }
@@ -3310,7 +3311,7 @@ body.modal-open .sticky-bar { transform: translate(-50%, 120px) !important; }
   font-size: 40px;
   font-weight: 500;
   line-height: 1.05;
-  color: var(--coral);
+  color: var(--coral-text);
   letter-spacing: -0.01em;
   margin-bottom: 6px;
   word-break: break-word;
@@ -3350,7 +3351,7 @@ body.modal-open .sticky-bar { transform: translate(-50%, 120px) !important; }
 .wc-audio:hover {
   background: var(--coral-tint);
   border-color: var(--coral);
-  color: var(--coral);
+  color: var(--coral-text);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px -4px rgba(216,90,48,0.25);
 }
@@ -3737,11 +3738,11 @@ body.modal-open .sticky-bar { transform: translate(-50%, 120px) !important; }
   align-self: flex-start;
 }
 .cstep:nth-child(2) .cstep-num { color: var(--blue); background: var(--blue-tint); }
-.cstep:nth-child(3) .cstep-num { color: var(--coral); background: var(--coral-tint); }
+.cstep:nth-child(3) .cstep-num { color: var(--coral-text); background: var(--coral-tint); }
 .cstep:nth-child(4) .cstep-num { color: var(--green); background: var(--green-tint); }
 .cstep:nth-child(5) .cstep-num { color: var(--amber); background: var(--amber-tint); }
 .cstep:nth-child(6) .cstep-num { color: var(--place); background: var(--place-tint); }
-.cstep:nth-child(7) .cstep-num { color: var(--coral); background: var(--coral-tint); }
+.cstep:nth-child(7) .cstep-num { color: var(--coral-text); background: var(--coral-tint); }
 .cstep:nth-child(8) .cstep-num { color: var(--green); background: var(--green-tint); }
 .cstep:nth-child(9) .cstep-num { color: var(--amber); background: var(--amber-tint); }
 
@@ -4132,7 +4133,7 @@ body.modal-open .sticky-bar { transform: translate(-50%, 120px) !important; }
   margin-bottom: 6px;
   line-height: 1.1;
 }
-.pron-cell-word .accent { color: var(--coral); }
+.pron-cell-word .accent { color: var(--coral-text); }
 .pron-cell-ipa {
   font-family: var(--font-mono, ui-monospace, monospace);
   font-size: 12px;
@@ -4372,7 +4373,7 @@ body.modal-open .sticky-bar { transform: translate(-50%, 120px) !important; }
   line-height: 1.5;
 }
 .quiz-feedback.ok { color: var(--g-object); }
-.quiz-feedback.no { color: var(--coral); }
+.quiz-feedback.no { color: var(--coral-text); }
 .quiz-btn-row { display: flex; gap: 8px; }
 
 /* ---------- AI TUTOR · one-shot scroll-in reveal of corrections ---------- */
@@ -4814,7 +4815,7 @@ body {
       <h1 class="display display-xl">See German <span class="clearly">clearly.</span></h1>
       <p class="lede">The visual, Hindi-first way to A1 → C2. Color shows you the structure before the rules do. Chapter 1 is free at every level — no signup, no card.</p>
       <div class="hero-ctas">
-        <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-large" style="background-color: rgb(31, 168, 75)">Start Chapter 1 — free <span class="arrow">→</span></a>
+        <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-large" style="background-color: rgb(31, 168, 75)">Try Chapter 1 <span class="arrow">→</span></a>
         <a href="#how" class="btn btn-ghost btn-large">See the method</a>
       </div>
 
@@ -5186,7 +5187,7 @@ body {
       <div class="word-card-mock">
         <div class="wc-header">
           <div class="wc-word-block">
-            <h3 class="wc-word" style="color: var(--coral);">gibt</h3>
+            <h3 class="wc-word" style="color: var(--coral-text);">gibt</h3>
             <p class="wc-pron">sounds like <em>"geept"</em></p>
           </div>
           <button class="wc-audio" data-state="idle" aria-label="Play pronunciation" type="button">
@@ -5377,7 +5378,7 @@ body {
           </div>
         </div>
         <div class="chat-cap">
-          <div class="chat-cap-icon" style="background: var(--coral-tint); color: var(--coral);">🎙</div>
+          <div class="chat-cap-icon" style="background: var(--coral-tint); color: var(--coral-text);">🎙</div>
           <div>
             <div class="chat-cap-title">Speaking feedback</div>
             <div class="chat-cap-sub">Per-syllable accuracy. Hear the correction.</div>
@@ -5569,7 +5570,7 @@ body {
         <div class="cstep-body">The chapter's new grammar shown in colors — roles, cases, position rules.</div>
         <div class="cstep-visual cv-grammar">
           <span class="cv-pill" style="background: var(--blue-tint); color: var(--blue);">Subject</span>
-          <span class="cv-pill" style="background: var(--coral-tint); color: var(--coral);">Verb</span>
+          <span class="cv-pill" style="background: var(--coral-tint); color: var(--coral-text);">Verb</span>
           <span class="cv-pill" style="background: var(--green-tint); color: var(--green);">Object · Akk</span>
         </div>
       </div>
@@ -5579,7 +5580,7 @@ body {
         <div class="cstep-title">Vocabulary</div>
         <div class="cstep-body">12-20 new words with gender, plural, audio. Auto-added to spaced revision.</div>
         <div class="cstep-visual cv-vocab">
-          <div class="cv-card"><span style="color: var(--coral);">die</span> Tasse</div>
+          <div class="cv-card"><span style="color: var(--coral-text);">die</span> Tasse</div>
           <div class="cv-card"><span style="color: var(--blue);">der</span> Kaffee</div>
           <div class="cv-card"><span style="color: var(--green);">das</span> Stück</div>
         </div>

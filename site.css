@@ -15,7 +15,7 @@
 
   --ink-primary:      #0E0E10;
   --ink-secondary:    #3A3A40;
-  --ink-tertiary:     #7A7A80;
+  --ink-tertiary:     #6F6F73;
   --ink-quaternary:   #A5A5AC;
 
   --hairline-light:   rgba(14, 14, 16, 0.05);
@@ -31,7 +31,7 @@
 
   --g-subject: #185FA5; --g-verb: #DC2626; --g-object: #2E7D32;
   --g-time: #7C3AED; --g-place: #EA580C; --g-akkusativ: #10B981; --g-dativ: #5C7A1D;
-  --accent: #1F4E4A; --coral: #E55A3F;
+  --accent: #1F4E4A; --coral: #E55A3F; --coral-text: #C9371B;
 
   --dur-fast: 150ms; --dur-base: 250ms; --dur-slow: 400ms; --dur-xl: 600ms;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -91,7 +91,7 @@ section { padding: 88px 0; }
   font: inherit; font-weight: 600; color: var(--accent);
   text-decoration: underline; text-underline-offset: 3px;
 }
-.link-btn:hover { color: var(--coral); }
+.link-btn:hover { color: var(--coral-text); }
 .link-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .de-italic { font-family: var(--font-german); font-style: italic; font-weight: 500; }
 .accent { font-family: var(--font-german); font-style: italic; font-weight: 500; }

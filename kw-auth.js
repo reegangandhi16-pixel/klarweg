@@ -265,7 +265,13 @@ function googleLogin(credential) {
   }
 
   /* Where the learner signs in from anywhere on the site. `next` brings
-     them back; `buy` resumes an interrupted checkout after login. */
+     them back; `buy` resumes an interrupted checkout after login.
+     Defaults to a root-relative path (not the absolute location.href) so
+     it satisfies account/index.html's safeNextPath() and the Worker's
+     matching isSafeNextPath() on the iOS/redirect-mode Google flow -
+     both require a bare "/klarweg/..." path and reject anything
+     containing "://". The desktop popup flow's isSameOriginUrl() check
+     accepts either form, so this doesn't change its behavior. */
   function accountUrl(opts) {
     opts = opts || {};
     var prefix = opts.prefix == null ? '' : opts.prefix;
@@ -273,7 +279,8 @@ function googleLogin(credential) {
     var q = [];
     if (opts.mode) q.push('mode=' + encodeURIComponent(opts.mode));
     if (opts.buy) q.push('buy=' + encodeURIComponent(opts.buy));
-    if (opts.next !== null) q.push('next=' + encodeURIComponent(opts.next || global.location.href));
+    var herePath = global.location.pathname + global.location.search + global.location.hash;
+    if (opts.next !== null) q.push('next=' + encodeURIComponent(opts.next || herePath));
     return url + (q.length ? '?' + q.join('&') : '');
   }
 

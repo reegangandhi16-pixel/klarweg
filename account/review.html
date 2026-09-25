@@ -101,6 +101,11 @@ a:hover{color:var(--accent-deep)}
   .card{padding:40px 22px}
   .grades{grid-template-columns:repeat(2,1fr)}
 }
+/* Toast — same component as account/saved-words.html, for a review-grade
+   save failure (there was no error-surfacing mechanism on this page
+   before Phase 5). */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);z-index:90;background:var(--ink-primary);color:var(--bg-canvas);font-size:14px;font-weight:500;padding:12px 20px;border-radius:var(--r-full);box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:all var(--dur-base) var(--ease);display:flex;align-items:center;gap:10px}
+.toast.show{opacity:1;transform:translateX(-50%)}
 </style>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -117,7 +122,7 @@ a:hover{color:var(--accent-deep)}
       Saved Words</a>
   </div>
 </header>
-<p class="container" style="margin-top:10px;font-size:12.5px;color:var(--ink-tertiary)">Review progress is saved on this device only — it won't follow you to another browser or device yet.</p>
+<p class="container" style="margin-top:10px;font-size:12.5px;color:var(--ink-tertiary)">Your review progress is tied to your account and follows you to any device you sign in on.</p>
 
 <div class="container">
   <div id="session" hidden>
@@ -173,6 +178,9 @@ a:hover{color:var(--accent-deep)}
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
+<script src="../kw-config.js"></script>
 <script src="../public/audio/kw-audio-engine.js"></script>
 <script src="../public/audio/kw-tts-config.js"></script>
 <script src="kw-account.js"></script>
@@ -202,17 +210,45 @@ function intervalLabel(w,grade){
   return d===0?'now':plural(d,'day');
 }
 
-/* Session queue is snapshotted once, so grading never reshuffles the run. */
-var queue=Saved.dueNow(), idx=0, revealed=false, reviewed=0;
+/* Session queue is fetched once (async now — Phase 3/5) and snapshotted,
+   so grading never reshuffles the run. */
+var queue=[], idx=0, revealed=false, reviewed=0;
+
+function redirectToLogin(){
+  location.href = 'index.html?mode=login&next=' + encodeURIComponent(location.pathname + location.search + location.hash);
+}
+
+var toastTimer;
+function toast(html){
+  var t=$('#toast');if(!t)return;clearTimeout(toastTimer);
+  t.innerHTML=html;
+  t.classList.add('show');
+  toastTimer=setTimeout(function(){t.classList.remove('show');},4000);
+}
 
 function start(){
-  if(!queue.length){
-    $('#empty').hidden=false;
-    if(!Saved.counts().total)$('#empty-sub').textContent='No saved words yet. Open a chapter and save a word — it will appear here for review.';
-    return;
-  }
-  $('#session').hidden=false;
-  paint();
+  Saved.dueNow().then(function(res){
+    if(res.reason==='unauthenticated'){redirectToLogin();return;}
+    if(!res.ok){
+      $('#empty').hidden=false;
+      $('#empty-sub').textContent=res.reason==='network'
+        ? 'Could not reach Klarweg. Check your connection and try again.'
+        : 'Something went wrong loading your review queue. Please try again.';
+      return;
+    }
+    queue=res.words;
+    if(!queue.length){
+      $('#empty').hidden=false;
+      Saved.counts().then(function(countsRes){
+        if(countsRes.ok&&!countsRes.counts.total){
+          $('#empty-sub').textContent='No saved words yet. Open a chapter and save a word — it will appear here for review.';
+        }
+      });
+      return;
+    }
+    $('#session').hidden=false;
+    paint();
+  });
 }
 function paint(){
   var w=queue[idx];
@@ -248,7 +284,16 @@ function reveal(){
 function grade(g){
   if(!revealed)return;
   var w=queue[idx];
-  Saved.review(w.id,g);
+  // The review is already snapshotted/one-directional from the learner's
+  // point of view (they've seen the answer and picked a grade), so the
+  // session advances immediately rather than blocking on the network —
+  // a failed save is reported via toast, not by freezing the session or
+  // reverting to the reveal screen.
+  Saved.review(w.id,g).then(function(res){
+    if(!res.ok){
+      toast(res.reason==='unauthenticated'?'Your session expired — please sign in again.':'Could not save that review. Please try again.');
+    }
+  });
   reviewed++;
   idx++;
   if(idx>=queue.length){

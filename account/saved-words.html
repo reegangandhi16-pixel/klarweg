@@ -194,7 +194,7 @@ a{color:inherit;text-decoration:none}
     <div class="page-eyebrow">Your vocabulary</div>
     <h1 class="page-title">Saved <span class="de">Wörter.</span></h1>
     <p class="page-sub">Every word you bookmark across Klarweg, gathered in one place and organized by level. Tap to hear it, search to find it, and remove what you've mastered.</p>
-    <p style="font-size:13px;color:var(--ink-tertiary);margin-top:8px;">Saved on this device only — your words won't follow you to another browser or device yet.</p>
+    <p style="font-size:13px;color:var(--ink-tertiary);margin-top:8px;">Your saved words are tied to your account and follow you to any device you sign in on.</p>
   </div>
 
   <div class="levels" id="levels"></div>
@@ -228,11 +228,11 @@ a{color:inherit;text-decoration:none}
   <div class="backup">
     <div class="backup-txt">
       <h3>Back up your words</h3>
-      <p>Download your saved words and their review schedule as a file, then bring them back on another device or after clearing your browser.</p>
+      <p>Download your saved words and their review schedule as a file. Your account already keeps them in sync across devices — this is just a personal backup. Restoring a backup isn't available yet.</p>
     </div>
     <div class="future-actions">
       <button class="btn btn-soft" id="export-btn">Export saved words</button>
-      <button class="btn btn-soft" id="import-btn">Import saved words</button>
+      <button class="btn btn-soft" id="import-btn" disabled title="Restoring a backup isn't available yet for account-based saved words.">Import saved words (coming soon)</button>
       <input type="file" id="import-file" accept="application/json,.json" hidden>
     </div>
   </div>
@@ -240,57 +240,16 @@ a{color:inherit;text-decoration:none}
 
 <div class="toast" id="toast"></div>
 
+<script src="../kw-config.js"></script>
 <script src="../public/audio/kw-audio-engine.js"></script>
 <script src="../public/audio/kw-tts-config.js"></script>
 <script src="kw-account.js"></script>
 <script>
-/* ---- Seed: realistic saved words across levels (real German vocab) ---- */
-var SEED = [
-  // A1
-  {de:'der Mann',en:'man',type:'noun',level:'A1',gender:'m',ipa:'/man/'},
-  {de:'die Frau',en:'woman',type:'noun',level:'A1',gender:'f',ipa:'/fʁaʊ̯/'},
-  {de:'das Kind',en:'child',type:'noun',level:'A1',gender:'n',ipa:'/kɪnt/'},
-  {de:'das Haus',en:'house',type:'noun',level:'A1',gender:'n',ipa:'/haʊ̯s/'},
-  {de:'der Hund',en:'dog',type:'noun',level:'A1',gender:'m',ipa:'/hʊnt/'},
-  {de:'das Buch',en:'book',type:'noun',level:'A1',gender:'n',ipa:'/buːx/'},
-  {de:'trinken',en:'to drink',type:'verb',level:'A1',ipa:'/ˈtʁɪŋkn̩/'},
-  {de:'gehen',en:'to go',type:'verb',level:'A1',ipa:'/ˈɡeːən/'},
-  {de:'essen',en:'to eat',type:'verb',level:'A1',ipa:'/ˈʔɛsn̩/'},
-  {de:'groß',en:'big, large',type:'adjective',level:'A1',ipa:'/ɡʁoːs/'},
-  {de:'klein',en:'small',type:'adjective',level:'A1',ipa:'/klaɪ̯n/'},
-  {de:'gut',en:'good',type:'adjective',level:'A1',ipa:'/ɡuːt/'},
-  {de:'die Schule',en:'school',type:'noun',level:'A1',gender:'f',ipa:'/ˈʃuːlə/'},
-  {de:'der Tisch',en:'table',type:'noun',level:'A1',gender:'m',ipa:'/tɪʃ/'},
-  // A2
-  {de:'die Reise',en:'journey, trip',type:'noun',level:'A2',gender:'f',ipa:'/ˈʁaɪ̯zə/'},
-  {de:'der Termin',en:'appointment',type:'noun',level:'A2',gender:'m',ipa:'/tɛʁˈmiːn/'},
-  {de:'einkaufen',en:'to shop',type:'verb',level:'A2',ipa:'/ˈʔaɪ̯nˌkaʊ̯fn̩/'},
-  {de:'bezahlen',en:'to pay',type:'verb',level:'A2',ipa:'/bəˈtsaːlən/'},
-  {de:'gesund',en:'healthy',type:'adjective',level:'A2',ipa:'/ɡəˈzʊnt/'},
-  {de:'das Wetter',en:'weather',type:'noun',level:'A2',gender:'n',ipa:'/ˈvɛtɐ/'},
-  {de:'wichtig',en:'important',type:'adjective',level:'A2',ipa:'/ˈvɪçtɪç/'},
-  {de:'treffen',en:'to meet',type:'verb',level:'A2',ipa:'/ˈtʁɛfn̩/'},
-  {de:'die Nachricht',en:'message, news',type:'noun',level:'A2',gender:'f',ipa:'/ˈnaːxˌʁɪçt/'},
-  // B1
-  {de:'die Umwelt',en:'environment',type:'noun',level:'B1',gender:'f',ipa:'/ˈʊmˌvɛlt/'},
-  {de:'sich bewerben',en:'to apply (for a job)',type:'verb',level:'B1',ipa:'/bəˈvɛʁbn̩/'},
-  {de:'die Gesellschaft',en:'society',type:'noun',level:'B1',gender:'f',ipa:'/ɡəˈzɛlʃaft/'},
-  {de:'entscheiden',en:'to decide',type:'verb',level:'B1',ipa:'/ɛntˈʃaɪ̯dn̩/'},
-  {de:'erfolgreich',en:'successful',type:'adjective',level:'B1',ipa:'/ɛɐ̯ˈfɔlkˌʁaɪ̯ç/'},
-  {de:'die Verantwortung',en:'responsibility',type:'noun',level:'B1',gender:'f',ipa:'/fɛɐ̯ˈʔantvɔʁtʊŋ/'},
-  {de:'der Vorschlag',en:'suggestion',type:'noun',level:'B1',gender:'m',ipa:'/ˈfoːɐ̯ʃlaːk/'},
-  // B2
-  {de:'die Auseinandersetzung',en:'debate, conflict',type:'noun',level:'B2',gender:'f',ipa:'/aʊ̯sʔaɪ̯ˈnandɐˌzɛtsʊŋ/'},
-  {de:'nachhaltig',en:'sustainable',type:'adjective',level:'B2',ipa:'/ˈnaːxˌhaltɪç/'},
-  {de:'berücksichtigen',en:'to take into account',type:'verb',level:'B2',ipa:'/bəˈʁʏkzɪçtɪɡn̩/'},
-  {de:'die Voraussetzung',en:'prerequisite',type:'noun',level:'B2',gender:'f',ipa:'/foˈʁaʊ̯sˌzɛtsʊŋ/'},
-  {de:'der Zusammenhang',en:'context, connection',type:'noun',level:'B2',gender:'m',ipa:'/tsuˈzamənˌhaŋ/'},
-  {de:'vermeiden',en:'to avoid',type:'verb',level:'B2',ipa:'/fɛɐ̯ˈmaɪ̯dn̩/'},
-  {de:'anspruchsvoll',en:'demanding, sophisticated',type:'adjective',level:'B2',ipa:'/ˈanʃpʁʊxsˌfɔl/'}
-];
-
 var Saved = KW_Account.Saved, User = KW_Account.User;
-Saved.seedOnce(SEED);
+
+function redirectToLogin(){
+  location.href = 'index.html?mode=login&next=' + encodeURIComponent(location.pathname + location.search + location.hash);
+}
 
 // Saved-word fields can come from an imported backup file (Saved.importData),
 // so they are untrusted content, not authored markup — escape before innerHTML.
@@ -319,17 +278,52 @@ function fmtDate(ms){var d=new Date(ms);return d.toLocaleDateString('en-GB',{day
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){closeAcctMenu();btn.focus();}});
 })();
 
+/* ---- Account-backed data cache ----
+   Saved.all()/counts() are async now (Phase 3) — fetched once via
+   loadAll(), cached here, and re-derived locally for every filter/search/
+   sort change so those stay instant (no network round-trip per
+   keystroke). loadError holds the last failed load's result (or null),
+   so render() can show a real error state instead of ever presenting a
+   failure as "0 saved words". */
+var allWords = [];
+var allCounts = { A1:0, A2:0, B1:0, B2:0, C1:0, C2:0, total:0 };
+var loadError = null;
+
+function deriveCounts(words){
+  var c = { A1:0, A2:0, B1:0, B2:0, C1:0, C2:0, total:0 };
+  words.forEach(function(w){ if (c[w.level] != null) c[w.level]++; c.total++; });
+  return c;
+}
+
+function loadAll(){
+  return Promise.all([Saved.all(), Saved.counts()]).then(function(results){
+    var wordsRes = results[0], countsRes = results[1];
+    if (wordsRes.reason === 'unauthenticated') { redirectToLogin(); return; }
+    if (!wordsRes.ok) {
+      loadError = wordsRes;
+      syncFilters(); render();
+      return;
+    }
+    loadError = null;
+    allWords = wordsRes.words;
+    // countsRes failing independently (rare) doesn't need to block the
+    // page — derive the same numbers locally from the word list we do
+    // have, rather than showing an error for data we can already see.
+    allCounts = countsRes.ok ? countsRes.counts : deriveCounts(allWords);
+    syncFilters(); render();
+  });
+}
+
 /* ---- Level summary cards ---- */
 function renderLevels(){
-  var counts=Saved.counts();
-  $('#acct-saved-count').textContent=counts.total;
+  $('#acct-saved-count').textContent=allCounts.total;
   var host=$('#levels');host.innerHTML='';
   LEVELS.forEach(function(lv){
     var card=document.createElement('button');
     card.className='level-card'+(state.level===lv?' active':'');
     card.style.setProperty('--lc',LVL_COLOR[lv]);
     card.innerHTML='<div class="lc-top"><span class="lc-dot"></span><span class="lc-name">'+lv+'</span></div>'+
-      '<div class="lc-count">'+counts[lv]+'</div><div class="lc-label">saved word'+(counts[lv]===1?'':'s')+'</div>';
+      '<div class="lc-count">'+allCounts[lv]+'</div><div class="lc-label">saved word'+(allCounts[lv]===1?'':'s')+'</div>';
     card.addEventListener('click',function(){ state.level=(state.level===lv?'all':lv); syncFilters(); render(); });
     host.appendChild(card);
   });
@@ -345,14 +339,13 @@ var FILTERS=[
 ];
 function renderFilters(){
   var host=$('#filters');host.innerHTML='';
-  var counts=Saved.counts();
   FILTERS.forEach(function(f){
     if(f.div){host.appendChild(Object.assign(document.createElement('span'),{className:'filter-divider'}));return;}
     var active=(f.k==='level'&&state.level===f.v)||(f.k==='type'&&state.type===f.v);
     var chip=document.createElement('button');
     chip.className='chip'+(active?' active':'');
     var ct='';
-    if(f.k==='level'&&f.v!=='all')ct=' <span class="ct">'+counts[f.v]+'</span>';
+    if(f.k==='level'&&f.v!=='all')ct=' <span class="ct">'+allCounts[f.v]+'</span>';
     chip.innerHTML=f.label+ct;
     chip.addEventListener('click',function(){
       if(f.k==='level'){state.level=f.v;}
@@ -366,24 +359,31 @@ function syncFilters(){renderLevels();renderFilters();renderReview();}
 
 /* ---- Review entry point (spaced repetition) ---- */
 function renderReview(){
-  var total=Saved.counts().total, due=Saved.dueCount();
+  var total=allCounts.total;
   var sub=$('#review-sub'), act=$('#review-actions');
   if(!sub||!act)return;
+  if(loadError){ sub.textContent=''; act.innerHTML=''; return; }
   if(!total){
     sub.textContent='Save a word in any chapter and it will start its review schedule here.';
     act.innerHTML='';
-  }else if(due){
-    sub.textContent='Spaced repetition brings each word back just before you would forget it.';
-    act.innerHTML='<a class="btn btn-accent" href="review.html">Due for review · '+due+'</a>';
-  }else{
-    sub.textContent='You\u2019re all caught up.';
-    act.innerHTML='';
+    return;
   }
+  Saved.dueCount().then(function(res){
+    if(!res.ok)return; // leave the last-known state showing rather than erroring a secondary widget
+    var due=res.count;
+    if(due){
+      sub.textContent='Spaced repetition brings each word back just before you would forget it.';
+      act.innerHTML='<a class="btn btn-accent" href="review.html">Due for review · '+due+'</a>';
+    }else{
+      sub.textContent='You\u2019re all caught up.';
+      act.innerHTML='';
+    }
+  });
 }
 
 /* ---- Words ---- */
 function filtered(){
-  var list=Saved.all();
+  var list=allWords.slice();
   if(state.level!=='all')list=list.filter(function(w){return w.level===state.level;});
   if(state.type!=='all')list=list.filter(function(w){return w.type===state.type;});
   if(state.q){var q=state.q.toLowerCase();list=list.filter(function(w){return w.de.toLowerCase().indexOf(q)>-1||w.en.toLowerCase().indexOf(q)>-1;});}
@@ -397,12 +397,26 @@ function filtered(){
 var PLAY='<svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 2v10l8-5z"/></svg>';
 var CAL='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></svg>';
 var TRASH='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4.5h10M6.5 4V2.5h3V4M4.5 4.5l.6 9h5.8l.6-9"/></svg>';
+function emptyState(h3,p){
+  return '<div class="empty" style="grid-column:1/-1"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div><h3>'+esc(h3)+'</h3><p>'+esc(p)+'</p></div>';
+}
 function render(){
+  var grid=$('#grid');
+  if(loadError){
+    $('#results-count').textContent='';
+    grid.innerHTML=emptyState('Could not load your saved words',
+      loadError.reason==='network'
+        ? 'Check your connection and try again.'
+        : 'Something went wrong on our end. Please try again.');
+    return;
+  }
   var list=filtered();
   $('#results-count').textContent=list.length+' word'+(list.length===1?'':'s')+(state.level!=='all'?' in '+state.level:'')+(state.type!=='all'?' · '+state.type+'s':'');
-  var grid=$('#grid');grid.innerHTML='';
+  grid.innerHTML='';
   if(!list.length){
-    grid.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div><h3>'+(Saved.counts().total?'No words match':'No saved words yet')+'</h3><p>'+(Saved.counts().total?'Try a different level, type, or search term.':'Open a chapter and tap ⭐ Save on any word — it will appear here, sorted by level.')+'</p></div>';
+    grid.innerHTML=allCounts.total
+      ? emptyState('No words match','Try a different level, type, or search term.')
+      : emptyState('No saved words yet','Open a chapter and tap ⭐ Save on any word — it will appear here, sorted by level.');
     return;
   }
   list.forEach(function(w){
@@ -421,9 +435,30 @@ function render(){
         '<button class="sword-remove">'+TRASH+' Remove</button></div>';
     card.querySelector('.sword-play').addEventListener('click',function(){speak(w.de);});
     card.querySelector('.sword-remove').addEventListener('click',function(){
-      Saved.remove(w.id);
-      toast('Removed <b style="font-family:var(--font-german)">'+esc(w.de)+'</b>',function(){Saved.add(w);syncFilters();render();});
+      var i=allWords.findIndex(function(x){return x.id===w.id;});
+      if(i===-1)return;
+      // Optimistic removal, rolled back below if the backend call fails —
+      // same pattern Phase 4 uses on the chapter Save button.
+      allWords.splice(i,1);
+      allCounts=deriveCounts(allWords);
       syncFilters();render();
+      Saved.remove(w.id).then(function(res){
+        if(!res.ok){
+          allWords.splice(i,0,w);
+          allCounts=deriveCounts(allWords);
+          syncFilters();render();
+          toast(res.reason==='unauthenticated'?'Your session expired — please sign in again.':'Could not remove that word. Please try again.');
+          return;
+        }
+        toast('Removed <b style="font-family:var(--font-german)">'+esc(w.de)+'</b>',function(){
+          // Undo re-saves through the real backend (a fresh row/id), then
+          // reloads from the server rather than faking the old one back in.
+          Saved.add(w).then(function(addRes){
+            if(addRes.ok)loadAll();
+            else toast('Could not restore that word.');
+          });
+        });
+      });
     });
     grid.appendChild(card);
   });
@@ -437,40 +472,28 @@ $('#sort-btn').addEventListener('click',function(){
   render();
 });
 
-/* ---- Backup: export / import ---- */
+/* ---- Backup: export (import is disabled — see the button's markup) ---- */
 function stamp(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 $('#export-btn').addEventListener('click',function(){
-  var data=Saved.exportData();
-  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='klarweg-saved-words-'+stamp()+'.json';
-  document.body.appendChild(a);a.click();a.remove();
-  setTimeout(function(){URL.revokeObjectURL(url)},1000);
-  var n=data.words.length;
-  toast(n?('<b>'+n+'</b> '+(n===1?'word':'words')+' exported'):'No saved words to export');
+  Saved.exportData().then(function(res){
+    if(!res.ok){toast(res.reason==='unauthenticated'?'Please sign in to export your words.':'Could not export right now. Please try again.');return;}
+    var data={format:res.format,version:res.version,exportedAt:res.exportedAt,words:res.words};
+    var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;a.download='klarweg-saved-words-'+stamp()+'.json';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url)},1000);
+    var n=data.words.length;
+    toast(n?('<b>'+n+'</b> '+(n===1?'word':'words')+' exported'):'No saved words to export');
+  });
 });
-$('#import-btn').addEventListener('click',function(){$('#import-file').click()});
-$('#import-file').addEventListener('change',function(e){
-  var file=e.target.files&&e.target.files[0];
-  e.target.value='';
-  if(!file)return;
-  var reader=new FileReader();
-  reader.onerror=function(){toast('That file could not be read')};
-  reader.onload=function(){
-    var data;
-    try{data=JSON.parse(reader.result)}catch(err){toast('That file is not valid JSON');return}
-    var r=Saved.importData(data);
-    if(!r.ok){toast(r.error);return}
-    var parts=[];
-    if(r.imported)parts.push('<b>'+r.imported+'</b> '+(r.imported===1?'word':'words')+' imported');
-    if(r.merged)parts.push('<b>'+r.merged+'</b> updated');
-    if(r.unchanged)parts.push('<b>'+r.unchanged+'</b> already existed');
-    toast(parts.length?parts.join(' · '):'Nothing to import');
-    if(r.imported||r.merged){syncFilters();render();}
-  };
-  reader.readAsText(file);
-});
+/* Import is intentionally disabled (see the #import-btn markup above):
+   Saved.importData() is a not-yet-implemented stub as of Phase 3 —
+   replaying an old backup as sequential requests against account-owned
+   data isn't atomic and could silently clobber real review progress.
+   Needs a dedicated batch-import endpoint, deliberately left as later
+   backend work, not built in this phase. */
 
 /* ---- Toast (with optional undo) ---- */
 var toastTimer;
@@ -482,11 +505,7 @@ function toast(html,undo){
   toastTimer=setTimeout(function(){t.classList.remove('show');},4000);
 }
 
-/* React to saves made elsewhere (other tabs / chapter page) */
-window.addEventListener('kw:saved-changed',function(){syncFilters();render();});
-window.addEventListener('storage',function(e){if(e.key==='kw-saved-words'){syncFilters();render();}});
-
-syncFilters();render();
+loadAll();
 </script>
 </body>
 </html>

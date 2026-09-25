@@ -257,19 +257,6 @@
     return function () { listeners = listeners.filter(function (f) { return f !== fn; }); };
   }
 
-  /* ---------- TEMPORARY DEVELOPMENT SWITCH ----------
-     NOT a payment flow, NOT persisted, NOT reachable from the UI.
-     Exists so access states can be exercised without a backend.
-     Console only:
-       KWAccess.__devOnly_setEntitlement({authenticated:true, entitlements:{A1:true}})
-     Delete this block once the backend is live in production. */
-  function __devOnly_setEntitlement(next) {
-    if (global.console && console.warn) {
-      console.warn('[kw-access] TEMPORARY DEV OVERRIDE — not an entitlement. In-memory only.');
-    }
-    return setState(readEntitlements(next || {}), 'dev-override');
-  }
-
   /* ---------- Unlock routing ---------- */
   var unlockHandler = null;
   function onUnlockRequested(fn) { unlockHandler = typeof fn === 'function' ? fn : null; }
@@ -516,8 +503,7 @@
     buy: buy,
     rootPrefix: rootPrefix,
     renderLockedChapter: renderLockedChapter,
-    guardChapterPage: guardChapterPage,
-    __devOnly_setEntitlement: __devOnly_setEntitlement
+    guardChapterPage: guardChapterPage
   };
 
   global.KWAccess = API;

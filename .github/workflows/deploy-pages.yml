@@ -122,6 +122,7 @@ jobs:
               base="$(basename "$f")"
               case "$base" in
                 chapter-app.js|chapter.css|chapter-tutor.js) ;;
+                story-lexicon.js|tokenizer.js|chapter-story.js|global-lexicon.js) ;;
                 chapter-*-data.js) ;;
                 chapter-*.html) ;;
                 *)

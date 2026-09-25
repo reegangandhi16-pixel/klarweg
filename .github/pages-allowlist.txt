@@ -101,11 +101,24 @@ public/audio/b1-words-manifest.json
 GLOB:chapter/chapter-*.html
 GLOB:chapter/chapter-*-data.js
 
-# Exactly 3 named shared runtime files chapter pages depend on.
+# Exactly 7 named shared runtime files chapter pages depend on.
 # (The other ~140 files in chapter/ - CLICKABILITY-AUDIT.md,
 # BUILD_INFLECTION_INDEX.md, internal QA .js/.json scripts, etc. -
-# are deliberately excluded; none of them are named chapter-app.js,
-# chapter.css, or chapter-tutor.js, and none match either glob above.)
+# are deliberately excluded; none of them are named below, and none
+# match either glob above.)
 chapter/chapter-app.js
 chapter/chapter.css
 chapter/chapter-tutor.js
+
+# N1 fix: these 4 were omitted from the original allowlist despite
+# being real, required dependencies - story-lexicon.js, tokenizer.js,
+# and chapter-story.js are directly <script src>'d by all 258/258
+# chapter pages; global-lexicon.js is dynamically injected by
+# chapter-app.js (s.src = 'global-lexicon.js') on every chapter load.
+# Their absence broke tap-any-word, vocabulary-card rendering, and
+# story/dialogue rendering site-wide. Verified via grep across all
+# 258 chapter-*.html files before adding these lines.
+chapter/story-lexicon.js
+chapter/tokenizer.js
+chapter/chapter-story.js
+chapter/global-lexicon.js

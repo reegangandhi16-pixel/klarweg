@@ -37,7 +37,7 @@ export default {
     }
 
     if (request.method === "POST" && url.pathname === "/auth/signup") {
-      return withCors(await signup(request, env), request);
+      return withCors(await signup(request, env, ctx), request);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/login") {

@@ -22,7 +22,7 @@ import { createUser, findUserByEmail, findUserByGoogleSub, createGoogleUser, upd
 import { verifyGoogleIdToken } from "./google-auth.js";
 import { readEntitlements } from "./entitlements.js";
 import { createUserId } from "./user-id.js";
-import { checkLoginLimit, recordLoginFailure, sweepRateCounters } from "./ratelimit.js";
+import { checkLoginLimit, recordLoginFailure, checkSignupLimit, recordSignupAttempt, sweepRateCounters } from "./ratelimit.js";
 
 const SESSION_COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 const GOOGLE_NONCE_TTL_SECONDS = 60 * 5;
@@ -170,7 +170,18 @@ async function createUserSession(db, userId) {
   return token;
 }
 
-export async function signup(request, env) {
+export async function signup(request, env, ctx) {
+  if (ctx && ctx.waitUntil) ctx.waitUntil(sweepRateCounters(env));
+
+  const limit = await checkSignupLimit(env, request);
+  if (!limit.ok) {
+    return json(
+      { ok: false, error: "Too many attempts. Please try again shortly." },
+      429
+    );
+  }
+  await recordSignupAttempt(env, request);
+
   const body = await readJson(request);
 
   if (

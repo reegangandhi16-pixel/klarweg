@@ -2,6 +2,13 @@ import { corsHeaders, withCors } from "./cors.js";
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
+import {
+  listSavedWords,
+  createSavedWord,
+  getSavedWordCounts,
+  deleteSavedWord,
+  reviewSavedWord
+} from "./saved-words.js";
 function json(data, status = 200) {
   return Response.json(data, { status });
 }
@@ -69,6 +76,29 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
     if (request.method === "POST" && url.pathname === "/auth/phone") {
       return withCors(await updatePhone(request, env), request);
     }
+
+    if (request.method === "GET" && url.pathname === "/saved-words") {
+      return withCors(await listSavedWords(request, env), request);
+    }
+
+    if (request.method === "POST" && url.pathname === "/saved-words") {
+      return withCors(await createSavedWord(request, env), request);
+    }
+
+    if (request.method === "GET" && url.pathname === "/saved-words/counts") {
+      return withCors(await getSavedWordCounts(request, env), request);
+    }
+
+    const savedWordMatch = url.pathname.match(/^\/saved-words\/(sw_[0-9a-f-]{36})$/);
+    if (request.method === "DELETE" && savedWordMatch) {
+      return withCors(await deleteSavedWord(request, env, savedWordMatch[1]), request);
+    }
+
+    const savedWordReviewMatch = url.pathname.match(/^\/saved-words\/(sw_[0-9a-f-]{36})\/review$/);
+    if (request.method === "PATCH" && savedWordReviewMatch) {
+      return withCors(await reviewSavedWord(request, env, savedWordReviewMatch[1]), request);
+    }
+
     if (request.method === "GET" && url.pathname === "/") {
       return withCors(
         json({

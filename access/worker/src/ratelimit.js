@@ -82,6 +82,36 @@ export async function recordSignupAttempt(env, request, now = Date.now()) {
   ).bind(key, end).run();
 }
 
+/* Authenticated-endpoint variant: bucketed by the already-authenticated
+   user id (an opaque app-generated identifier, not raw PII like an IP),
+   so mutation volume is bounded per account rather than per network.
+   Used by Saved Words POST/DELETE/PATCH. Every attempt counts, same
+   "record regardless of outcome" reasoning as signup — the thing being
+   bounded is write volume itself, not credential guessing. Does not
+   touch LOGIN_LIMIT or SIGNUP_LIMIT above. */
+const SAVED_WORDS_LIMIT = { max: 200, win: 15 * 60 * 1000 };
+
+export async function checkSavedWordsLimit(env, userId, now = Date.now()) {
+  const key = "sw:" + userId;
+  const end = windowEnd(now, SAVED_WORDS_LIMIT.win);
+  const row = await env.DB.prepare(
+    "SELECT hits FROM rate_counters WHERE bucket = ?1 AND window_end = ?2"
+  ).bind(key, end).first();
+  const hits = row ? row.hits : 0;
+  return hits < SAVED_WORDS_LIMIT.max
+    ? { ok: true }
+    : { ok: false, retryAfter: Math.max(1, Math.ceil((end - now) / 1000)) };
+}
+
+export async function recordSavedWordsAttempt(env, userId, now = Date.now()) {
+  const key = "sw:" + userId;
+  const end = windowEnd(now, SAVED_WORDS_LIMIT.win);
+  await env.DB.prepare(
+    "INSERT INTO rate_counters (bucket, window_end, hits) VALUES (?1, ?2, 1) " +
+    "ON CONFLICT(bucket, window_end) DO UPDATE SET hits = hits + 1"
+  ).bind(key, end).run();
+}
+
 /* Cheap housekeeping — call opportunistically, never blocks a response. */
 export async function sweepRateCounters(env, now = Date.now()) {
   try {

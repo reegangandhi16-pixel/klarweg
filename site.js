@@ -41,12 +41,24 @@
     });
   }
 
-  // ---- contact form (front-end only; no backend) ----
+  // ---- contact form (no backend yet — hands off to a pre-filled mailto:
+  //      rather than claiming a delivery that never happens) ----
   function initContact() {
     var form = document.getElementById('contact-form');
     if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      var name = form.querySelector('#cf-name');
+      var email = form.querySelector('#cf-email');
+      var topic = form.querySelector('#cf-topic');
+      var msg = form.querySelector('#cf-msg');
+      var subject = 'Klarweg — ' + (topic && topic.value ? topic.value : 'Website enquiry');
+      var body = 'From: ' + (name ? name.value : '') + '\n' +
+        'Email: ' + (email ? email.value : '') + '\n\n' +
+        (msg ? msg.value : '');
+      window.location.href = 'mailto:hallo@klarweg.app'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
       var ok = form.querySelector('[data-form-ok]');
       form.querySelectorAll('input,textarea,select,button').forEach(function (el) { el.disabled = true; });
       if (ok) ok.hidden = false;

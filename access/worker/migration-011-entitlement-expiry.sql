@@ -1,0 +1,13 @@
+-- 2-year entitlement expiry (owner-approved: single-level purchases expire
+-- 2 years after grant; LIFETIME never expires; the clock starts at
+-- granted_at, the same server-side payment-confirmation timestamp
+-- grantProduct() already stamps every row with).
+--
+-- Nullable, additive column - existing rows are left NULL by this
+-- migration (grandfathered, per explicit owner decision: no backfill).
+-- NULL is also the value grantProduct() will write for every row of a
+-- LIFETIME grant (including the 6 per-level rows it creates alongside
+-- the LIFETIME row itself) - readEntitlements()'s existing
+-- "if LIFETIME then all levels true" cascade is what actually grants
+-- those 6 levels, so they do not need their own expiry.
+ALTER TABLE user_entitlements ADD COLUMN expires_at INTEGER;

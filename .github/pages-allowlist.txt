@@ -122,3 +122,27 @@ chapter/story-lexicon.js
 chapter/tokenizer.js
 chapter/chapter-story.js
 chapter/global-lexicon.js
+
+# ---------------------------------------------------------------
+# Issue reporting: exactly 2 files out of the whole report/ directory.
+# report/README.md documents both as "Published to GitHub Pages" —
+# report/kw-report.js is dynamically <script src>'d by chapter-app.js
+# (line ~431) on every chapter page, and it in turn injects a <link>
+# to report/kw-report.css from the same directory. Verified via grep
+# that neither file references any other same-origin path (only the
+# separate klarweg-reports Worker API, an external Turnstile script,
+# and in-memory blob URLs) — these two files are the complete public
+# surface of report/.
+#
+# Everything else in report/ - report/worker/ (a separate, complete
+# Cloudflare Worker: source, wrangler.toml, an admin-credential
+# hashing tool, an admin dashboard), _dev-admin.html, _dev-admin-
+# mock.js, _dev-harness.html, _dev-worker-tests.html, _dev-
+# responsive.html, _dev-stage5.html, _dev-mocks.js, README.md,
+# build-section-refs.mjs, section-refs.json - stays excluded. The
+# workflow's post-build assertion step (see deploy-pages.yml) is the
+# safety net enforcing that report/ can never publish anything beyond
+# these 2 named files, the same pattern already used for chapter/.
+# ---------------------------------------------------------------
+report/kw-report.js
+report/kw-report.css

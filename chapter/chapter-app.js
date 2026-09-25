@@ -1324,38 +1324,132 @@
     });
     return b;
   }
+  // de (bare, no article — the SAME key state.saved/state.learned already
+  // use) -> the server's opaque sw_<uuid> id for that saved word, for
+  // THIS chapter's vocab only. In-memory only, never persisted: the
+  // server is authoritative, so this is rebuilt from scratch by
+  // hydrateSavedWords() on every page load rather than cached to disk.
+  let savedWordIds = Object.create(null);
+
   function saveBtn(w) {
     const on = !!state.saved[w.de];
     const b = el('button', { class: 'vword-btn' + (on ? ' save-on' : '') },
       el('span', { html: ICON.bookmark }), el('span', {}, on ? 'Saved' : 'Save'));
     b.addEventListener('click', () => {
+      // Account-backed Saved Words needs a real session. A logged-out
+      // learner is sent to the existing login/create-account flow
+      // instead of ever writing a local-only save that would never
+      // reach the server (and would go stale/misleading forever).
+      if (!(window.KWAuth && KWAuth.isAuthenticated())) {
+        window.location.href = savedWordsLoginUrl();
+        return;
+      }
+      if (!window.KW_Account) return;
+
       const nowOn = !state.saved[w.de];
+      const prevId = savedWordIds[w.de];
+
+      // Optimistic UI update, same immediate-redraw pattern the rest of
+      // this file already uses (e.g. learnBtn) — reconciled below if the
+      // server call fails.
       if (nowOn) state.saved[w.de] = true; else delete state.saved[w.de];
       save();
-      // Sync to the account-level Saved Words store (cross-page).
-      if (window.KW_Account) {
-        const typeMap = { Noun: 'noun', Verb: 'verb', Adjective: 'adjective', Adverb: 'adverb' };
-        const word = {
-          de: vocabTerm(w.art, w.de),
-          en: w.en,
-          type: typeMap[(w.pos || '').split(' ')[0]] || 'noun',
-          level: (CHAPTER.phase || 'A1').slice(0, 2),
-          gender: w.gender || null,
-          ipa: w.ipa || null
-        };
-        const id = word.level + ':' + word.de;
-        if (nowOn) KW_Account.Saved.add(word); else KW_Account.Saved.remove(id);
-        refreshSavedCount();
-      }
       drawVocab();
+
+      const typeMap = { Noun: 'noun', Verb: 'verb', Adjective: 'adjective', Adverb: 'adverb' };
+      const word = {
+        de: vocabTerm(w.art, w.de),
+        en: w.en,
+        type: typeMap[(w.pos || '').split(' ')[0]] || 'noun',
+        level: (CHAPTER.phase || 'A1').slice(0, 2),
+        gender: w.gender || null,
+        ipa: w.ipa || null
+      };
+
+      const request = nowOn ? KW_Account.Saved.add(word) : KW_Account.Saved.remove(prevId);
+
+      request.then((res) => {
+        if (!res.ok) {
+          // Roll back the optimistic flip — a failed save/remove must
+          // never be left looking like it persisted.
+          if (nowOn) delete state.saved[w.de]; else state.saved[w.de] = true;
+          save();
+          drawVocab();
+          toast(res.reason === 'unauthenticated'
+            ? 'Your session expired — please sign in again.'
+            : 'Could not ' + (nowOn ? 'save' : 'remove') + ' that word. Please try again.');
+          return;
+        }
+        if (nowOn) savedWordIds[w.de] = res.word.id; else delete savedWordIds[w.de];
+        refreshSavedCount();
+      });
     });
     return b;
+  }
+
+  // Same URL a real KWAuth.accountUrl({prefix:'../', mode:'login'}) call
+  // would build (return-path preserved via `next`), with a KWAuth-free
+  // fallback for the edge case where kw-access.js's lazy KWAuth load has
+  // not landed yet even though a click somehow already happened.
+  function savedWordsLoginUrl() {
+    if (window.KWAuth) return KWAuth.accountUrl({ prefix: '../', mode: 'login' });
+    const here = location.pathname + location.search + location.hash;
+    return '../account/index.html?mode=login&next=' + encodeURIComponent(here);
   }
 
   function refreshSavedCount() {
     if (!window.KW_Account) return;
     const badge = $('#acct-saved-count');
-    if (badge) badge.textContent = KW_Account.Saved.counts().total;
+    if (!badge) return;
+    if (!(window.KWAuth && KWAuth.isAuthenticated())) { badge.textContent = '0'; return; }
+    KW_Account.Saved.counts().then((res) => {
+      if (res.ok) badge.textContent = res.counts.total;
+      // On failure, leave the badge showing its last known value rather
+      // than replacing a real number with an error state.
+    });
+  }
+
+  // Reconciles this chapter's per-word "Saved" state against the real
+  // server records (Phase 3's KW_Account.Saved), so a word only shows as
+  // saved here if the account actually has it saved — not because of
+  // whatever was last written to this chapter's local state before
+  // Saved Words became account-backed. Must run before a learner can
+  // trust what the bookmark buttons show.
+  function hydrateSavedWords() {
+    if (!window.KW_Account) return;
+    function run() {
+      if (!(window.KWAuth && KWAuth.isAuthenticated())) {
+        // No session: any leftover "saved" marks from before Saved Words
+        // was account-backed no longer have a server record behind them
+        // and must stop showing as saved.
+        state.saved = {};
+        savedWordIds = Object.create(null);
+        save();
+        drawVocab();
+        refreshSavedCount();
+        return;
+      }
+      KW_Account.Saved.all().then((res) => {
+        if (!res.ok) return; // fail soft — leave whatever was already showing
+        const byServerDe = new Map();
+        (C.vocab || []).forEach((w) => byServerDe.set(vocabTerm(w.art, w.de), w.de));
+        const nextSaved = {};
+        const nextIds = Object.create(null);
+        res.words.forEach((row) => {
+          const rawKey = byServerDe.get(row.de);
+          if (rawKey == null) return; // a saved word from another chapter/level
+          nextSaved[rawKey] = true;
+          nextIds[rawKey] = row.id;
+        });
+        state.saved = nextSaved;
+        savedWordIds = nextIds;
+        save();
+        drawVocab();
+        refreshSavedCount();
+      });
+    }
+    if (window.KWAccess && typeof KWAccess.ready === 'function') KWAccess.ready().then(run);
+    else run();
   }
 
   // ---- Grammar ----
@@ -4814,7 +4908,10 @@
   function setupAccountMenu() {
     const btn = $('#acct-btn'), menu = $('#acct-menu'), acct = $('#acct');
     if (!btn || !menu) return;
-    refreshSavedCount(); // Saved Words badge is localStorage-based, independent of login state
+    // Saved Words is account-backed (Phase 3/4): both the badge count and
+    // each word's "Saved" state depend on the real session, and this
+    // reconciles this chapter's bookmark buttons against the server too.
+    hydrateSavedWords();
 
     // Real session state (server-authoritative), not the pre-auth
     // "device learner" placeholder KW_Account.User was built as before

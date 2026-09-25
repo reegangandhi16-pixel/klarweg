@@ -294,7 +294,7 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
     $('form-login').hidden = signup;
     $('auth-title').textContent = signup ? 'Create your account' : 'Sign in';
     $('auth-lede').textContent = signup
-      ? 'One account holds your purchases, your progress and your saved words.'
+      ? 'One account holds your purchases and your saved words.'
       : 'Your levels, your access, and your saved words follow your account to any device.';
     var url = new URL(location.href);
     url.searchParams.set('mode', signup ? 'signup' : 'login');

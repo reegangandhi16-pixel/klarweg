@@ -1,0 +1,111 @@
+# Klarweg GitHub Pages publication allowlist (P0-01 remediation)
+#
+# This file is the single source of truth for what gets published to
+# GitHub Pages. Everything NOT listed here (explicitly, or via the two
+# proven-safe glob patterns marked below) stays in the repository but
+# is never copied into the deployment artifact.
+#
+# Format: one repo-relative path per line. Blank lines and lines
+# starting with # are ignored. No trailing slashes on directories.
+#
+# Each root-level file's inclusion was individually verified this
+# session: either it's a page users navigate to directly, or grep
+# confirmed at least one live page actually references it
+# (<script src>, <link href>, or fetch()). Nothing here is a guess.
+
+# ---------------------------------------------------------------
+# Root-level marketing / product pages
+# ---------------------------------------------------------------
+404.html
+index.html
+about.html
+ausbildung.html
+contact.html
+courses.html
+goethe-exam.html
+resources.html
+a1.html
+a2.html
+b1.html
+b2.html
+c1.html
+c2.html
+
+# ---------------------------------------------------------------
+# Root-level frontend runtime (calls the Worker's public HTTPS API;
+# contains no backend secrets or server-side logic)
+# ---------------------------------------------------------------
+kw-access.js
+kw-auth.js
+kw-checkout.js
+kw-config.js
+kw-placement.js
+kw-products.js
+site.css
+site.js
+
+# ---------------------------------------------------------------
+# Root-level site infrastructure
+# ---------------------------------------------------------------
+robots.txt
+sitemap.xml
+manifest.json
+favicon.svg
+apple-touch-icon.png
+icon-192.png
+icon-512.png
+
+# ---------------------------------------------------------------
+# Account pages + runtime
+# (account/SAVED-WORDS-BACKEND.md is deliberately excluded — an
+# internal implementation note, never fetched by any page)
+# ---------------------------------------------------------------
+account/index.html
+account/saved-words.html
+account/review.html
+account/kw-account.js
+
+# ---------------------------------------------------------------
+# Audio engine + manifests actually loaded by the live site.
+# (public/audio/TTS_PROXY.md, public/audio/kw-audio.js, and the
+# empty .gitkeep placeholders are deliberately excluded — none are
+# referenced by any page; verified via grep this session. The
+# actual MP3 audio files are gitignored in this repo and served
+# from the separate klarweg-audio-cdn repo/Pages site, so there is
+# nothing to copy for them here.)
+# ---------------------------------------------------------------
+public/audio/kw-audio-engine.js
+public/audio/kw-tts-config.js
+public/audio/manifest.json
+public/audio/a1-words-manifest.json
+public/audio/a2-words-manifest.json
+public/audio/b1-words-manifest.json
+
+# ---------------------------------------------------------------
+# Chapter system: two glob patterns, PROVEN this session to match
+# exactly the legitimate files and nothing else.
+#
+#   chapter/chapter-*.html   -> matches exactly the 258 pages linked
+#                                from a1.html-c2.html's own hrefs
+#                                (diffed byte-for-byte against disk;
+#                                zero extra, zero missing matches)
+#   chapter/chapter-*-data.js -> matches exactly the 258 corresponding
+#                                data files (same proof)
+#
+# These are glob patterns, not literal lines, because 516 files is
+# impractical to hand-list and the glob is provably exact against the
+# CURRENT repo. The workflow's own post-build assertion step (see
+# deploy-pages.yml) is the safety net against a FUTURE internal file
+# accidentally matching one of these patterns.
+# ---------------------------------------------------------------
+GLOB:chapter/chapter-*.html
+GLOB:chapter/chapter-*-data.js
+
+# Exactly 3 named shared runtime files chapter pages depend on.
+# (The other ~140 files in chapter/ - CLICKABILITY-AUDIT.md,
+# BUILD_INFLECTION_INDEX.md, internal QA .js/.json scripts, etc. -
+# are deliberately excluded; none of them are named chapter-app.js,
+# chapter.css, or chapter-tutor.js, and none match either glob above.)
+chapter/chapter-app.js
+chapter/chapter.css
+chapter/chapter-tutor.js

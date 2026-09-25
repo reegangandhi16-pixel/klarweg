@@ -1,0 +1,165 @@
+name: Deploy Pages (public allowlist only)
+
+# P0-01 remediation. This workflow is the ONLY thing that decides what
+# gets published to GitHub Pages. It never copies the repository
+# wholesale - it reads .github/pages-allowlist.txt and copies exactly
+# those paths (plus two proven-exact glob patterns for the 258-page
+# chapter system) into a clean artifact directory, then hard-fails the
+# build if anything matching a known-private path ever ends up in that
+# artifact. The boundary is enforced by what gets built and deployed,
+# not by robots.txt, filenames, or GitHub Pages' default Jekyll
+# dotfile/underscore behavior.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build public artifact from allowlist
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+
+          ARTIFACT_DIR="_site"
+          ALLOWLIST=".github/pages-allowlist.txt"
+
+          rm -rf "$ARTIFACT_DIR"
+          mkdir -p "$ARTIFACT_DIR"
+
+          copy_path() {
+            local src="$1"
+            if [ ! -f "$src" ]; then
+              echo "::error::Allowlisted path does not exist in repo: $src"
+              exit 1
+            fi
+            mkdir -p "$ARTIFACT_DIR/$(dirname "$src")"
+            cp "$src" "$ARTIFACT_DIR/$src"
+          }
+
+          total=0
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            case "$line" in
+              \#*) continue ;;
+            esac
+
+            if [[ "$line" == GLOB:* ]]; then
+              pattern="${line#GLOB:}"
+              matched=0
+              for f in $pattern; do
+                copy_path "$f"
+                matched=$((matched + 1))
+                total=$((total + 1))
+              done
+              if [ "$matched" -eq 0 ]; then
+                echo "::error::Glob pattern matched zero files (was something renamed/deleted?): $pattern"
+                exit 1
+              fi
+              echo "Glob $pattern -> $matched files"
+            else
+              copy_path "$line"
+              total=$((total + 1))
+            fi
+          done < "$ALLOWLIST"
+
+          echo "----------------------------------------"
+          echo "PUBLIC FILE COUNT (from allowlist): $total"
+          echo "TOTAL ARTIFACT FILE COUNT: $(find "$ARTIFACT_DIR" -type f | wc -l)"
+          echo "----------------------------------------"
+
+      - name: Assert no prohibited private paths in artifact
+        run: |
+          set -euo pipefail
+          ARTIFACT_DIR="_site"
+          FAIL=0
+
+          # Directories that must never appear in the artifact at all.
+          PROHIBITED_PREFIXES=(
+            "access"
+            "admin"
+            "audit"
+            "uploads"
+            "scripts"
+            "report"
+            "content"
+            "audio-manifests"
+            "deployment"
+            "deliverables"
+            "lib"
+            "react-lib"
+            "app"
+            "screenshots"
+          )
+          for prefix in "${PROHIBITED_PREFIXES[@]}"; do
+            if [ -e "$ARTIFACT_DIR/$prefix" ]; then
+              echo "::error::PROHIBITED PATH PRESENT IN ARTIFACT: $prefix"
+              FAIL=1
+            fi
+          done
+
+          # chapter/ is the one directory where public and private files
+          # are interleaved in the source repo. Every file that ends up
+          # in the artifact's chapter/ must match one of the known-good
+          # patterns - anything else is a leak of an internal doc/script.
+          if [ -d "$ARTIFACT_DIR/chapter" ]; then
+            while IFS= read -r f; do
+              base="$(basename "$f")"
+              case "$base" in
+                chapter-app.js|chapter.css|chapter-tutor.js) ;;
+                chapter-*-data.js) ;;
+                chapter-*.html) ;;
+                *)
+                  echo "::error::UNEXPECTED FILE IN chapter/ ARTIFACT: $f"
+                  FAIL=1
+                  ;;
+              esac
+            done < <(find "$ARTIFACT_DIR/chapter" -type f)
+          fi
+
+          # No dotfiles or .env-shaped files should ever be in the
+          # artifact - the allowlist should never have listed one, but
+          # assert it explicitly rather than relying on that.
+          if find "$ARTIFACT_DIR" -name ".*" -type f | grep -q .; then
+            echo "::error::Dotfile present in artifact - should never be listed in the allowlist:"
+            find "$ARTIFACT_DIR" -name ".*" -type f
+            FAIL=1
+          fi
+
+          if [ "$FAIL" -eq 1 ]; then
+            echo "::error::Deployment artifact must not contain any prohibited private path. Failing build - Pages will NOT be updated."
+            exit 1
+          fi
+
+          echo "Assertion passed: no prohibited private paths found in artifact."
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

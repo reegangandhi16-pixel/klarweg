@@ -91,13 +91,29 @@ export async function grantProduct(db, userId, productId, orderId) {
 
   const grants = isLifetime ? ["LIFETIME", ...LEVELS] : [normalizedProductId];
 
+  // A single-level purchase of a level whose row has EXPIRED renews that row
+  // (createOrder() lets an expired level be bought again, and a plain
+  // DO NOTHING would keep the old expiry: paid, but still locked). Only an
+  // expired row with a real expiry is touched: an active row is never
+  // extended (so replaying the same grant stays idempotent), and a NULL
+  // expiry (grandfathered / Lifetime) is never changed. LIFETIME grants keep
+  // DO NOTHING for all 7 rows, exactly as before.
+  const conflictClause = isLifetime
+    ? `ON CONFLICT(user_id, product_id) DO NOTHING`
+    : `ON CONFLICT(user_id, product_id) DO UPDATE SET
+           source_order_id = excluded.source_order_id,
+           granted_at      = excluded.granted_at,
+           expires_at      = excluded.expires_at
+         WHERE user_entitlements.expires_at IS NOT NULL
+           AND user_entitlements.expires_at <= excluded.granted_at`;
+
   const statements = grants.map((product) =>
     db
       .prepare(
         `INSERT INTO user_entitlements
           (user_id, product_id, source_order_id, granted_at, expires_at)
          VALUES (?1, ?2, ?3, ?4, ?5)
-         ON CONFLICT(user_id, product_id) DO NOTHING`
+         ${conflictClause}`
       )
       .bind(userId, product, orderId, now, expiresAt)
   );

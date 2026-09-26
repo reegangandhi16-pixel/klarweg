@@ -67,12 +67,18 @@ function getCookie(request, name) {
 
 /* Same-origin-relative paths only — never a scheme, never protocol-relative.
    This is intentionally stricter than the existing popup flow's `next`
-   handling elsewhere on this page, not a reuse of it. */
+   handling elsewhere on this page, not a reuse of it.
+   During the klarweg.in migration the site's paths are either "/klarweg/…"
+   (GitHub Pages project URL) or "/…" (custom-domain root), so any
+   root-relative path is accepted. A backslash is refused because browsers
+   read "/\host" like "//host", as are whitespace and control characters,
+   which never occur in a real path here. */
 function isSafeNextPath(value) {
   if (typeof value !== "string" || !value) return false;
   if (value.includes("://")) return false;
   if (value.startsWith("//")) return false;
-  return value.startsWith("/klarweg/");
+  if (/[\\\s\u0000-\u001f\u007f]/.test(value)) return false;
+  return value.startsWith("/");
 }
 
 function sanitizeMode(value) {

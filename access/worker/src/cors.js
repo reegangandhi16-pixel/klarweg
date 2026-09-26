@@ -1,14 +1,24 @@
-const ALLOWED_ORIGIN = "https://reegangandhi16-pixel.github.io";
+/* The Klarweg site's origins, matched exactly. During the klarweg.in
+   migration both the current GitHub Pages origin and the new custom
+   domain are accepted; github.io is removed once the move is complete. */
+const ALLOWED_ORIGINS = [
+  "https://reegangandhi16-pixel.github.io",
+  "https://klarweg.in"
+];
+
+function isAllowedOrigin(origin) {
+  return origin !== null && ALLOWED_ORIGINS.includes(origin);
+}
 
 export function corsHeaders(request) {
   const origin = request.headers.get("Origin");
 
-  if (origin !== ALLOWED_ORIGIN) {
+  if (!isAllowedOrigin(origin)) {
     return {};
   }
 
   return {
-    "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
+    "Access-Control-Allow-Origin": origin,
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "GET, POST, DELETE, PATCH, OPTIONS",
@@ -27,7 +37,7 @@ export function isForeignOriginWrite(request) {
   const method = request.method.toUpperCase();
   if (method === "GET" || method === "HEAD" || method === "OPTIONS") return false;
   const origin = request.headers.get("Origin");
-  return origin !== null && origin !== ALLOWED_ORIGIN;
+  return origin !== null && !isAllowedOrigin(origin);
 }
 
 export function withCors(response, request) {

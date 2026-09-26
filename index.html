@@ -1910,6 +1910,20 @@ body.mobile-nav-open { overflow: hidden; }
   transform: translateY(-3px);
   box-shadow: var(--shadow-card);
 }
+/* Each level card links to its roadmap. */
+a.level-node { display: block; color: inherit; text-decoration: none; }
+a.level-node:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 3px; }
+.level-view {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-tertiary);
+  transition: color var(--dur-fast) var(--ease);
+}
+.level-view .arrow { display: inline-block; transition: transform var(--dur-base) var(--ease); }
+a.level-node:hover .level-view, a.level-node:focus-visible .level-view { color: var(--ink-primary); }
+a.level-node:hover .level-view .arrow { transform: translateX(3px); }
 .level-dot {
   width: 16px;
   height: 16px;
@@ -2500,6 +2514,18 @@ body.mobile-nav-open { overflow: hidden; }
   font-size: 14px;
 }
 .price-tier-list li:last-child { border-bottom: none; }
+/* Each row opens the existing checkout for that level (data-kw-buy → kw-checkout.js).
+   The link fills the row; the row keeps its original spacing and hairline. */
+.price-tier-list li { padding: 0; }
+.price-tier-row {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; min-height: 44px; padding: 10px 0; box-sizing: border-box;
+  color: inherit; text-decoration: none;
+}
+.price-tier-row .arrow { display: inline-block; margin-left: 6px; color: var(--ink-tertiary); transition: transform var(--dur-base) var(--ease), color var(--dur-fast) var(--ease); }
+.price-tier-row:hover .amt, .price-tier-row:focus-visible .amt { color: var(--ink-primary); }
+.price-tier-row:hover .arrow, .price-tier-row:focus-visible .arrow { color: var(--ink-primary); transform: translateX(3px); }
+.price-tier-row:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; border-radius: var(--r-sm); }
 .price-tier-list .tier { font-family: var(--font-display); font-weight: 600; }
 .price-tier-list .amt { color: var(--ink-secondary); font-weight: 500; }
 
@@ -2897,53 +2923,6 @@ body.mobile-nav-open { overflow: hidden; }
   border-color: var(--hairline-strong);
 }
 
-/* ============================================================
-   STICKY CTA BAR
-============================================================ */
-.sticky-bar {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translate(-50%, 100px);
-  background: var(--ink-primary);
-  color: #fff;
-  padding: 12px 12px 12px 24px;
-  border-radius: var(--r-full);
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  box-shadow: 0 24px 60px -16px rgba(14,14,16,0.4);
-  z-index: 90;
-  transition: transform var(--dur-slow) var(--ease-out);
-  max-width: calc(100% - 32px);
-}
-.sticky-bar.visible {
-  transform: translate(-50%, 0);
-}
-.sticky-bar-text {
-  font-size: 14px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-.sticky-bar .btn {
-  padding: 10px 20px;
-  background: #1FA84B;
-  font-size: 14px;
-  color: #fff;
-  border-radius: var(--r-md);
-}
-@media (max-width: 600px) {
-  .sticky-bar { left: 16px; right: 16px; transform: translateY(100px); }
-  .sticky-bar.visible { transform: translateY(0); }
-  .sticky-bar-text { font-size: 13px; }
-  .sticky-bar .btn { padding: 8px 14px; font-size: 13px; }
-}
-
-/* Hide sticky bar when the word card modal is open — prevents overlap on mobile */
-body.modal-open .sticky-bar { transform: translate(-50%, 120px) !important; }
-@media (max-width: 600px) {
-  body.modal-open .sticky-bar { transform: translateY(120px) !important; }
-}
 
 /* ============================================================
    SENTENCE & PARAGRAPH AUDIO — synchronized highlighting + controls
@@ -5787,53 +5766,59 @@ body {
     <div class="roadmap">
       <div class="roadmap-line"></div>
 
-      <div class="level-node a1">
+      <a class="level-node a1" href="a1.html" aria-label="A1 Beginner: view the A1 roadmap">
         <div class="level-dot"></div>
         <div class="level-name">A1</div>
         <div class="level-cefr">Beginner</div>
         <div class="level-price">₹1,999</div>
         <div class="level-free-badge">Chapter 1 free</div>
-      </div>
+        <span class="level-view" aria-hidden="true">View A1 <span class="arrow">→</span></span>
+      </a>
 
-      <div class="level-node a2">
+      <a class="level-node a2" href="a2.html" aria-label="A2 Elementary: view the A2 roadmap">
         <div class="level-dot"></div>
         <div class="level-name">A2</div>
         <div class="level-cefr">Elementary</div>
         <div class="level-price">₹2,999</div>
         <div class="level-free-badge">Chapter 1 free</div>
-      </div>
+        <span class="level-view" aria-hidden="true">View A2 <span class="arrow">→</span></span>
+      </a>
 
-      <div class="level-node b1">
+      <a class="level-node b1" href="b1.html" aria-label="B1 Intermediate: view the B1 roadmap">
         <div class="level-dot"></div>
         <div class="level-name">B1</div>
         <div class="level-cefr">Intermediate</div>
         <div class="level-price">₹3,999</div>
         <div class="level-free-badge">Chapter 1 free</div>
-      </div>
+        <span class="level-view" aria-hidden="true">View B1 <span class="arrow">→</span></span>
+      </a>
 
-      <div class="level-node b2">
+      <a class="level-node b2" href="b2.html" aria-label="B2 Upper intermediate: view the B2 roadmap">
         <div class="level-dot"></div>
         <div class="level-name">B2</div>
         <div class="level-cefr">Upper int.</div>
         <div class="level-price">₹4,999</div>
         <div class="level-free-badge">Chapter 1 free</div>
-      </div>
+        <span class="level-view" aria-hidden="true">View B2 <span class="arrow">→</span></span>
+      </a>
 
-      <div class="level-node c1">
+      <a class="level-node c1" href="c1.html" aria-label="C1 Advanced: view the C1 roadmap">
         <div class="level-dot"></div>
         <div class="level-name">C1</div>
         <div class="level-cefr">Advanced</div>
         <div class="level-price">₹7,999</div>
         <div class="level-free-badge">Chapter 1 free</div>
-      </div>
+        <span class="level-view" aria-hidden="true">View C1 <span class="arrow">→</span></span>
+      </a>
 
-      <div class="level-node c2">
+      <a class="level-node c2" href="c2.html" aria-label="C2 Mastery: view the C2 roadmap">
         <div class="level-dot"></div>
         <div class="level-name">C2</div>
         <div class="level-cefr">Mastery</div>
         <div class="level-price">₹8,999</div>
         <div class="level-free-badge">Chapter 1 free</div>
-      </div>
+        <span class="level-view" aria-hidden="true">View C2 <span class="arrow">→</span></span>
+      </a>
     </div>
   </div>
 </section>
@@ -5974,17 +5959,16 @@ body {
         <p class="price-sub">Master one level at a time.</p>
 
         <ul class="price-tier-list">
-          <li><span class="tier">A1</span><span class="amt">₹1,999</span></li>
-          <li><span class="tier">A2</span><span class="amt">₹2,999</span></li>
-          <li><span class="tier">B1</span><span class="amt">₹3,999</span></li>
-          <li><span class="tier">B2</span><span class="amt">₹4,999</span></li>
-          <li><span class="tier">C1</span><span class="amt">₹7,999</span></li>
-          <li><span class="tier">C2</span><span class="amt">₹8,999</span></li>
+          <li><a href="a1.html#pricing" class="price-tier-row" data-kw-buy="A1" aria-label="Unlock A1 for ₹1,999"><span class="tier">A1</span><span class="amt">₹1,999 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+          <li><a href="a2.html#pricing" class="price-tier-row" data-kw-buy="A2" aria-label="Unlock A2 for ₹2,999"><span class="tier">A2</span><span class="amt">₹2,999 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+          <li><a href="b1.html#pricing" class="price-tier-row" data-kw-buy="B1" aria-label="Unlock B1 for ₹3,999"><span class="tier">B1</span><span class="amt">₹3,999 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+          <li><a href="b2.html#pricing" class="price-tier-row" data-kw-buy="B2" aria-label="Unlock B2 for ₹4,999"><span class="tier">B2</span><span class="amt">₹4,999 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+          <li><a href="c1.html#pricing" class="price-tier-row" data-kw-buy="C1" aria-label="Unlock C1 for ₹7,999"><span class="tier">C1</span><span class="amt">₹7,999 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+          <li><a href="c2.html#pricing" class="price-tier-row" data-kw-buy="C2" aria-label="Unlock C2 for ₹8,999"><span class="tier">C2</span><span class="amt">₹8,999 <span class="arrow" aria-hidden="true">→</span></span></a></li>
         </ul>
 
         <p style="font-size: 13px; color: var(--ink-tertiary); margin-bottom: 20px;">All levels include AI tutor, certificates, homework PDFs, and stories. Chapter 1 free at every level.</p>
 
-        <a href="a1.html" class="btn">Pick a level</a>
       </div>
 
       <!-- Lifetime — the centerpiece. Premium without a top label. -->
@@ -6013,7 +5997,7 @@ body {
           <li><span class="check-icon">✓</span> 7-day money-back guarantee</li>
         </ul>
 
-        <a href="a1.html" class="btn btn-primary btn-large">Unlock everything <span class="arrow">→</span></a>
+        <a href="a1.html" class="btn btn-primary btn-large" data-kw-buy="LIFETIME">Unlock everything <span class="arrow">→</span></a>
       </div>
 
       <!-- Free chapter -->
@@ -6204,13 +6188,6 @@ body {
   </div>
 </footer>
 
-<!-- ============================================================
-     STICKY CTA
-============================================================ -->
-<div class="sticky-bar" id="sticky-bar">
-  <span class="sticky-bar-text">Try Chapter 1 free — no signup needed</span>
-  <a href="chapter/chapter-a1-1-alphabet.html" class="btn">Start <span class="arrow">→</span></a>
-</div>
 
 <!-- ============================================================
      WORD CARD MODAL — clean, focused, audible
@@ -6343,19 +6320,12 @@ window.addEventListener('load', () => {
    NAVIGATION SCROLL
 ============================================================ */
 const nav = document.getElementById('nav');
-const stickyBar = document.getElementById('sticky-bar');
-const heroDemo = document.getElementById('hero-demo');
 
 let lastScroll = 0;
 function onScroll() {
   const y = window.scrollY;
   if (y > 12) nav.classList.add('scrolled');
   else nav.classList.remove('scrolled');
-
-  // Sticky bar appears after the hero is past
-  const heroRect = heroDemo.getBoundingClientRect();
-  if (heroRect.bottom < 0) stickyBar.classList.add('visible');
-  else stickyBar.classList.remove('visible');
 
   lastScroll = y;
 }
@@ -8174,8 +8144,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script src="kw-config.js"></script>
+<script src="kw-products.js"></script>
 <script src="kw-auth.js"></script>
 <script src="kw-nav-auth.js"></script>
+<script src="kw-checkout.js"></script>
 
 </body>
 </html>

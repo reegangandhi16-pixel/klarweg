@@ -1210,6 +1210,7 @@ img { max-width: 100%; display: block; }
 .acct { position: relative; }
 .acct-btn { display: flex; align-items: center; gap: 7px; padding: 5px 9px 5px 5px; border-radius: var(--r-full); border: 1px solid var(--hairline); background: var(--bg-surface); transition: border-color var(--dur-base) var(--ease); }
 .acct-btn:hover { border-color: var(--hairline-strong); }
+.acct-btn:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
 .acct-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 12.5px; }
 .acct-caret { width: 13px; height: 13px; color: var(--ink-tertiary); }
 .acct-menu { position: absolute; right: 0; top: calc(100% + 8px); width: 232px; background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); box-shadow: var(--shadow-lift); padding: 8px; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease); z-index: 60; }

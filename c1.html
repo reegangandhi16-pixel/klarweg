@@ -211,26 +211,29 @@ section { padding: 88px 0; }
   transition: color var(--dur-fast) var(--ease);
 }
 .nav-links a:hover { color: var(--ink-primary); }
-.nav-links a.active { color: var(--ink-primary); }
-.nav-cta {
-  padding: 8px 16px;
-  border-radius: var(--r-full);
-  background: var(--ink-primary);
-  color: var(--bg-surface);
-  font-size: 14px;
-  font-weight: 500;
-  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+.nav-links a.active { color: var(--ink-primary); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 8px; text-decoration-color: var(--hairline-strong); }
+.nav-links a:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 4px; border-radius: 4px; }
+/* Header action pair: Login / My Account (quiet, bordered) and the CTA
+   (solid ink) share one height, radius and type so they read as a set.
+   Hover changes colour; the CTA also lifts 1px (never scale). */
+.nav-login, .nav-cta {
+  display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
+  height: 36px; padding: 0 16px; border: 1px solid transparent; border-radius: var(--r-full);
+  font-size: 14px; font-weight: 500; line-height: 1;
+  transition: color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
-.nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+.nav-login { color: var(--ink-primary); background: transparent; border-color: var(--hairline-strong); }
+.nav-login:hover { color: var(--ink-primary); background: var(--bg-surface); border-color: rgba(14, 14, 16, 0.3); }
+.nav-cta { color: var(--bg-surface); background: var(--ink-primary); border-color: var(--ink-primary); }
+.nav-cta:hover { color: var(--bg-surface); background: #26262B; border-color: #26262B; transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+.nav-login:focus-visible, .nav-cta:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
 /* Header actions on narrow phones: below 460px "Login"/"My Account" lives in
    the drawer only, and below 340px the CTA does too, so the bar never wraps
    or pushes the hamburger off-screen. Both stay in .mobile-nav-actions. */
 .nav-login, .nav-cta { white-space: nowrap; }
 @media (max-width: 459px) { .nav-actions .nav-login { display: none; } }
 @media (max-width: 339px) { .nav-actions .nav-cta { display: none; } }
-.nav-actions { display: flex; align-items: center; gap: 16px; }
-.nav-login { font-size: 14px; color: var(--ink-secondary); font-weight: 500; transition: color var(--dur-fast) var(--ease); }
-.nav-login:hover { color: var(--ink-primary); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
 /* Header Login / My Account link while the session check is in flight
    (kw-nav-auth.js): it keeps its place but is not shown, so a signed-in
    learner never sees "Login" flash first. The delayed reveal shows the
@@ -269,14 +272,14 @@ section { padding: 88px 0; }
   width: 44px; height: 44px; border: none; background: transparent; font-size: 18px;
   color: var(--ink-secondary); cursor: pointer; border-radius: 8px;
 }
-.mobile-nav-close:hover { background: var(--bg-elevated); color: var(--ink-primary); }
+.mobile-nav-close:hover { background: var(--bg-elevated, #F4F3EE); color: var(--ink-primary); }
 .mobile-nav-close:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
 .mobile-nav-links { display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; }
 .mobile-nav-links a {
   padding: 12px 10px; font-size: 16px; font-weight: 500; color: var(--ink-primary);
   border-radius: 8px; min-height: 44px; display: flex; align-items: center; box-sizing: border-box;
 }
-.mobile-nav-links a:hover, .mobile-nav-links a:focus-visible, .mobile-nav-links a.active { background: var(--bg-elevated); }
+.mobile-nav-links a:hover, .mobile-nav-links a:focus-visible, .mobile-nav-links a.active { background: var(--bg-elevated, #F4F3EE); }
 .mobile-nav-links a:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: -2px; }
 .mobile-nav-actions {
   display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 20px;
@@ -285,7 +288,7 @@ section { padding: 88px 0; }
 .mobile-nav-actions a {
   min-height: 44px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
 }
-.mobile-nav-actions .nav-login { border: 1px solid var(--hairline-light); border-radius: var(--r-full); }
+.mobile-nav-actions .nav-login, .mobile-nav-actions .nav-cta { height: 44px; width: 100%; font-size: 15px; }
 /* .mobile-nav/-overlay set their own `display`, which has the same
    specificity as the UA stylesheet's [hidden]{display:none} — without
    this override an author `display` rule wins the cascade and the
@@ -1259,7 +1262,7 @@ footer {
     <h1>From <span class="accent">präzise Sätze</span> to nuanced, academic, near-native German.</h1>
     <p class="hero-lede">C1 is where German becomes truly your own — the nominal style of academic writing, the full range of Konjunktiv, extended participial attributes, and the stylistic control to argue, summarize, and write for university and career. Forty-three chapters of color-coded grammar, premium audio, and AI-corrected practice — built for Hindi-speaking learners, aligned to the Goethe-Zertifikat C1.</p>
     <div class="hero-ctas">
-      <a href="chapter/chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html" class="btn btn-primary">
+      <a href="chapter/chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html" class="btn btn-primary js-nav-cta" data-auth-pending>
         Try Chapter 1 free
         <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1469,7 +1472,7 @@ footer {
     <h2>The first chapter is <em>free</em>. The next forty-two are waiting.</h2>
     <p>Pick up where B2 left off — with the nominal style, the full Konjunktiv, and the stylistic control that makes your German ready for university and career.</p>
     <div class="final-cta-row">
-      <a href="chapter/chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html" class="btn btn-primary">
+      <a href="chapter/chapter-c1-01-tempusgebrauch-stilistische-tempuswahl.html" class="btn btn-primary js-nav-cta" data-auth-pending>
         Try Chapter 1 free
         <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1749,6 +1752,15 @@ function renderRoadmap(level) {
    buy link with a real entry point into Chapter 1; Lifetime ownership
    additionally replaces the Lifetime card's own buy link. Server-side
    prices, PRODUCTS, and entitlement logic are untouched — display only. */
+/* Bottom CTA heading: an owner (level purchase or Lifetime, both via
+   KWAuth.hasLevel) already has this level, so the "first chapter is free"
+   pitch becomes an unlocked note. Non-owners keep the static heading. */
+function updateFinalCtaOwnership(level, owns) {
+  const h = document.querySelector('.final-cta h2');
+  if (!h || !owns) return;
+  h.innerHTML = 'Your ' + level.code + ' path is <em>unlocked</em>.';
+}
+
 function updatePricingOwnership(level, owns, fullAccess) {
   const ownedBadge = function (text) {
     const el = document.createElement('div');
@@ -1809,6 +1821,7 @@ if (window.KWAuth) {
     ownsLevel = window.KWAuth.hasLevel(currentLevel.code);
     renderRoadmap(currentLevel);
     updatePricingOwnership(currentLevel, ownsLevel, !!(state && state.hasFullAccess));
+    updateFinalCtaOwnership(currentLevel, ownsLevel);
     wireReveals();
   }).catch(function () {
     // KWAuth could not resolve — remain fail-closed (ownsLevel stays false).

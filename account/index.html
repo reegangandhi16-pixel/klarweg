@@ -22,14 +22,10 @@ a:hover{color:var(--accent-deep)}
 .container{width:100%;max-width:1040px;margin:0 auto;padding:0 24px}
 @media(max-width:600px){.container{padding:0 18px}}
 .topbar{position:sticky;top:0;z-index:50;background:var(--bg-canvas);border-bottom:1px solid var(--hairline)}
-.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
 .brand{font-family:var(--font-display);font-weight:600;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px;color:var(--ink-primary)}
 .brand:hover{color:var(--ink-primary)}
 .brand .dot{display:none} /* canonical Klarweg logo has no mark (coral is for conversion CTAs) */
-.topnav{display:flex;gap:4px;align-items:center}
-.topnav a{font-size:14px;font-weight:500;color:var(--ink-secondary);padding:8px 12px;border-radius:var(--r-full);min-height:36px;display:inline-flex;align-items:center}
-.topnav a:hover{color:var(--ink-primary);background:var(--bg-elevated)}
-@media(max-width:600px){.topnav a{padding:8px;min-height:44px}}
 main{flex:1;padding:56px 0 96px}
 @media(max-width:600px){main{padding:36px 0 64px}}
 .eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-tertiary)}
@@ -112,11 +108,6 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
 <header class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="../index.html"><span class="dot"></span>Klarweg</a>
-    <nav class="topnav" aria-label="Account navigation">
-      <a href="../index.html#pricing">Pricing</a>
-      <a href="saved-words.html">Saved words</a>
-      <a href="../index.html">Home</a>
-    </nav>
   </div>
 </header>
 

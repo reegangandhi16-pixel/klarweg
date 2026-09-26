@@ -115,7 +115,13 @@
   const SKEY = 'kw-ch-' + (C.id || ('a1-' + C.number));
   let state = { done: {}, learned: {}, saved: {}, quizScore: null };
   try { state = Object.assign(state, JSON.parse(localStorage.getItem(SKEY) || '{}')); } catch (e) {}
-  function save() { try { localStorage.setItem(SKEY, JSON.stringify(state)); } catch (e) {} }
+  function save() {
+    // Also record this chapter's XP (earned / available) exactly as the
+    // chapter computes it, so the level roadmap — which has no chapter data
+    // — can show Begin / Continue / Completed from the same numbers.
+    try { state.xpEarned = earnedXP(); state.xpMax = C.xp; } catch (e) {}
+    try { localStorage.setItem(SKEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   const completable = C.sections.filter(s => !s.auto).map(s => s.id); // 8 sections incl. quiz
   const PER_SECTION_XP = 15;     // 7 non-quiz sections × 15 = 105
@@ -130,8 +136,23 @@
     });
     return Math.min(xp, C.xp);
   }
+  // Progress saved before xpEarned/xpMax existed: fill them in on the next
+  // visit so the roadmap can read it. Only for a chapter that already has
+  // saved progress — never creates an entry just because a page was opened.
+  try {
+    if (localStorage.getItem(SKEY) != null && (state.xpEarned !== earnedXP() || state.xpMax !== C.xp)) save();
+  } catch (e) {}
   function completedCount() { return completable.filter(id => state.done[id]).length; }
-  function progressPct() { return Math.round((completedCount() / completable.length) * 100); }
+  // A chapter is complete only when 100% of its XP is earned — the same rule
+  // the level roadmap uses (kw-roadmap-progress.js). Ticking every section is
+  // not enough: a 4/5 quiz leaves the chapter in progress.
+  function isChapterComplete() { return earnedXP() >= C.xp; }
+  // Share of the chapter's XP earned. Floored and held below 100 until the
+  // chapter is complete, so it never reads 100% while XP is still missing.
+  function progressPct() {
+    if (isChapterComplete()) return 100;
+    return Math.min(99, Math.floor((earnedXP() / C.xp) * 100));
+  }
 
   /* ---------- vocab term builder (defensive: never duplicate the article) --
    * Handles Pattern A (art:'der', de:'Tisch') and Pattern B (art:'der',
@@ -371,7 +392,7 @@
     $('#stat-done').textContent = completedCount() + ' / ' + completable.length;
     const tb = $('#topbar-xp-val'); if (tb) tb.textContent = earnedXP() + ' XP';
     const status = $('#stat-status');
-    if (status) status.textContent = completedCount() === completable.length ? 'Complete' : 'In progress';
+    if (status) status.textContent = isChapterComplete() ? 'Complete' : 'In progress';
   }
 
   /* ---------- sticky nav (generated from sections) ---------- */
@@ -4576,12 +4597,18 @@
       location.reload();
     });
     $('#act-complete').addEventListener('click', () => {
-      completable.forEach(id => { state.done[id] = true; });
-      // Quiz counts as done; if it was never attempted, award full quiz credit.
-      if (state.quizScore == null) state.quizScore = C.quiz.length;
+      // Marks the non-quiz sections done. The quiz is left exactly as it is:
+      // its XP comes only from a real attempt (never a filled-in score), so
+      // this can reach 100% XP — "Complete" — only if the quiz was aced.
+      completable.forEach(id => { if (id !== 'quiz') state.done[id] = true; });
       save(); refreshNavTicks(); updateRing(); updateStats(); renderSummary();
-      $$('.section-complete').forEach(b => { b.classList.add('is-done'); b.querySelector('.cc-box').innerHTML = ICON.check; b.querySelector('.cc-label').textContent = 'Completed'; });
-      toast('Chapter marked complete');
+      $$('.dash-section').forEach(sec => {
+        if (sec.dataset.sec === 'quiz') return;
+        const b = sec.querySelector('.section-complete'); if (!b) return;
+        b.classList.add('is-done'); b.querySelector('.cc-box').innerHTML = ICON.check; b.querySelector('.cc-label').textContent = 'Completed';
+      });
+      toast(isChapterComplete() ? 'Chapter complete'
+        : 'Sections marked complete · ' + earnedXP() + ' / ' + C.xp + ' XP' + (state.quizScore == null ? ' — the quiz is still to do' : ''));
     });
   }
 

@@ -1485,6 +1485,7 @@ footer {
 <script src="kw-products.js"></script>
 <script src="kw-auth.js"></script>
 <script src="kw-checkout.js"></script>
+<script src="kw-roadmap-progress.js"></script>
 
 <script>
 /* ============================================================
@@ -1585,17 +1586,22 @@ function renderChapterCard(chapter, levelCode, isLocked) {
   `).join('');
 
   const numPadded   = String(chapter.n).padStart(2, '0');
-  const modifier    = isLocked ? 'locked' : 'free';
-  const topRight    = isLocked
-    ? `<span class="cc-lock" aria-hidden="true">${ICONS.lock}</span>`
-    : `<span class="pill pill-free"><span class="pill-dot"></span> Free chapter</span>`;
-  const ctaText     = isLocked ? 'Unlock to begin' : 'Begin chapter';
   // Chapters with a built page carry an href in the data; locked cards scroll to pricing.
   const href        = isLocked ? '#pricing' : (chapter.href || '#pricing');
   const actionAttr  = isLocked ? ' data-action="scroll-pricing"' : '';
-  const ariaLabel   = isLocked
-    ? `Chapter ${chapter.n}: ${chapter.title}. Locked. Unlock with A1 bundle or Lifetime.`
-    : `Chapter ${chapter.n}: ${chapter.title}. Free.`;
+  // Free / unlocked / in progress / completed / locked — read from the
+  // chapter's own saved XP (kw-roadmap-progress.js). Locked cards unchanged.
+  const RP          = window.KWRoadmapProgress;
+  const view        = RP
+    ? RP.card({ href, locked: isLocked, free: chapter.n === 1, levelCode, n: chapter.n, title: chapter.title })
+    : { modifier: isLocked ? 'locked' : 'free',
+        topRight: chapter.n === 1 ? `<span class="pill pill-free"><span class="pill-dot"></span> Free chapter</span>` : '',
+        ctaText: isLocked ? 'Unlock to begin' : 'Begin chapter',
+        ariaLabel: `Chapter ${chapter.n}: ${chapter.title}.` + (isLocked ? ` Locked. Unlock with ${levelCode} bundle or Lifetime.` : '') };
+  const modifier    = view.modifier;
+  const topRight    = isLocked ? `<span class="cc-lock" aria-hidden="true">${ICONS.lock}</span>` : view.topRight;
+  const ctaText     = view.ctaText;
+  const ariaLabel   = view.ariaLabel;
 
   // ONE template. Free and locked share identical DOM structure;
   // every difference is carried by the parent modifier class + content slots.
@@ -1676,14 +1682,13 @@ function updatePricingOwnership(level, owns, fullAccess) {
 
   const levelBtn = document.querySelector('#pricing [data-kw-buy="' + level.code + '"]');
   if (levelBtn && owns) {
-    const first = level.chapters.find(c => c.n === 1);
     const badge = ownedBadge('You own ' + level.code);
     const cta = document.createElement('a');
     cta.className = 'btn btn-secondary';
     cta.style.alignSelf = 'flex-start';
     cta.style.marginTop = '12px';
-    cta.href = first ? first.href : '#pricing';
-    cta.innerHTML = 'Go to Chapter 1 <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    cta.setAttribute('data-kw-resume', '');
+    applyResumeCta(level, cta);
     levelBtn.replaceWith(badge, cta);
   }
 
@@ -1691,6 +1696,26 @@ function updatePricingOwnership(level, owns, fullAccess) {
   if (lifetimeBtn && fullAccess) {
     lifetimeBtn.replaceWith(ownedBadge('Lifetime access active'));
   }
+}
+
+/* Owner CTA in #pricing: the first chapter, in roadmap order, that is not
+   yet 100% XP complete — or a level-complete state once every chapter is. */
+function chapterHrefOf(c) { return c.href; }
+function applyResumeCta(level, cta) {
+  cta = cta || document.querySelector('#pricing [data-kw-resume]');
+  if (!cta) return;
+  const arrow = '<svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const first = level.chapters.find(c => c.n === 1);
+  const r = window.KWRoadmapProgress
+    ? window.KWRoadmapProgress.resume(level.chapters, chapterHrefOf)
+    : { status: 'not-started', chapter: first, href: first && chapterHrefOf(first) };
+  if (r.status === 'completed') {
+    cta.href = '#roadmap';
+    cta.innerHTML = level.code + ' complete · Review chapters ' + arrow;
+    return;
+  }
+  cta.href = r.href || '#pricing';
+  cta.innerHTML = (r.status === 'not-started' ? 'Begin Chapter ' : 'Continue with Chapter ') + (r.chapter ? r.chapter.n : 1) + ' ' + arrow;
 }
 
 /* ============================================================
@@ -1711,6 +1736,15 @@ if (window.KWAuth) {
     // KWAuth could not resolve — remain fail-closed (ownsLevel stays false).
   });
 }
+
+/* Returning from a chapter with Back restores this page from the bfcache
+   without re-running scripts: re-read progress so the cards are current. */
+window.addEventListener('pageshow', function (e) {
+  if (!e.persisted) return;
+  renderRoadmap(currentLevel);
+  applyResumeCta(currentLevel);
+  wireReveals();
+});
 
 /* ===== Locked-card click → scroll to pricing ===== */
 document.addEventListener('click', e => {

@@ -454,15 +454,14 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
     $('acct-levels').innerHTML = LEVELS.map(function (code) {
       var has = state.entitlements[code] === true;
       var price = P ? P.priceLabel(code) : '';
-      var product = P ? P.get(code) : null;
-      var chapterHref = product && product.firstChapterHref
-        ? '../' + product.firstChapterHref
-        : '../' + code.toLowerCase() + '.html';
+      // An owned level opens its roadmap (the level's entry point, where
+      // chapter progress and "continue" live), never Chapter 1 directly.
+      var roadmapHref = '../' + code.toLowerCase() + '.html';
       return '<div class="lv' + (has ? ' owned' : '') + '">' +
         '<div class="lv-top"><span class="lv-code">' + code + '</span>' +
         '<span class="lv-state">' + (has ? 'Unlocked' : 'Locked') + '</span></div>' +
         (has
-          ? '<a class="lv-price" href="' + chapterHref + '">Go to Chapter 1 →</a>'
+          ? '<a class="lv-price" href="' + roadmapHref + '">Open ' + code + ' roadmap →</a>'
           : '<span class="lv-price">' + price + ' one-time</span>' +
             '<button class="btn btn-quiet" type="button" data-kw-buy="' + code + '">Unlock ' + code + '</button>') +
         '</div>';

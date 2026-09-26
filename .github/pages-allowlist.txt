@@ -44,6 +44,7 @@ kw-checkout.js
 kw-config.js
 kw-placement.js
 kw-products.js
+kw-roadmap-progress.js
 site.css
 site.js
 

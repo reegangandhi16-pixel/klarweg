@@ -146,7 +146,7 @@ section { padding: 88px 0; }
    (kw-nav-auth.js): it keeps its place but is not shown, so a signed-in
    learner never sees "Login" flash first. The delayed reveal shows the
    static "Login" text on its own if the check never answers. */
-.js-nav-login[data-auth-pending] { visibility: hidden; animation: kw-nav-auth-reveal 0s linear 2.5s forwards !important; }
+.js-nav-login[data-auth-pending], .js-nav-cta[data-auth-pending] { visibility: hidden; animation: kw-nav-auth-reveal 0s linear 2.5s forwards !important; }
 @keyframes kw-nav-auth-reveal { to { visibility: visible; } }
 .nav-hamburger {
   display: none;

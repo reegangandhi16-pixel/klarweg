@@ -235,7 +235,7 @@ section { padding: 88px 0; }
    (kw-nav-auth.js): it keeps its place but is not shown, so a signed-in
    learner never sees "Login" flash first. The delayed reveal shows the
    static "Login" text on its own if the check never answers. */
-.js-nav-login[data-auth-pending] { visibility: hidden; animation: kw-nav-auth-reveal 0s linear 2.5s forwards !important; }
+.js-nav-login[data-auth-pending], .js-nav-cta[data-auth-pending] { visibility: hidden; animation: kw-nav-auth-reveal 0s linear 2.5s forwards !important; }
 @keyframes kw-nav-auth-reveal { to { visibility: visible; } }
 .nav-hamburger {
   display: none;
@@ -1210,7 +1210,7 @@ footer {
       <a href="index.html#how">Method</a>
       <a href="#pricing">Pricing</a>
     </div>
-    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link" data-auth-pending>Login</a><a href="chapter/chapter-b1-1-infinitiv-mit-zu.html" class="nav-cta js-nav-cta">Try Chapter 1 free</a></div>
+    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link" data-auth-pending>Login</a><a href="chapter/chapter-b1-1-infinitiv-mit-zu.html" class="nav-cta js-nav-cta" data-auth-pending>Try Chapter 1 free</a></div>
     <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
       <span class="nav-hamburger-bar"></span>
       <span class="nav-hamburger-bar"></span>
@@ -1236,7 +1236,7 @@ footer {
   </nav>
   <div class="mobile-nav-actions">
     <a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile" data-auth-pending>Login</a>
-    <a href="chapter/chapter-b1-1-infinitiv-mit-zu.html" class="nav-cta js-nav-cta">Try Chapter 1 free</a>
+    <a href="chapter/chapter-b1-1-infinitiv-mit-zu.html" class="nav-cta js-nav-cta" data-auth-pending>Try Chapter 1 free</a>
   </div>
 </div>
 

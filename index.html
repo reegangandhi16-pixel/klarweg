@@ -453,7 +453,7 @@ section.flush-top { padding-top: 0; }
    (kw-nav-auth.js): it keeps its place but is not shown, so a signed-in
    learner never sees "Login" flash first. The delayed reveal shows the
    static "Login" text on its own if the check never answers. */
-.js-nav-login[data-auth-pending] { visibility: hidden; animation: kw-nav-auth-reveal 0s linear 2.5s forwards !important; }
+.js-nav-login[data-auth-pending], .js-nav-cta[data-auth-pending] { visibility: hidden; animation: kw-nav-auth-reveal 0s linear 2.5s forwards !important; }
 @keyframes kw-nav-auth-reveal { to { visibility: visible; } }
 .nav-hamburger {
   display: none;
@@ -4799,7 +4799,7 @@ body {
     </div>
     <div class="nav-cta">
       <a href="account/index.html" class="btn btn-ghost btn-small js-nav-login" data-auth-pending>Login</a>
-      <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small js-nav-cta">Try Chapter 1 free <span class="arrow">→</span></a>
+      <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small js-nav-cta" data-auth-pending>Try Chapter 1 free <span class="arrow">→</span></a>
     </div>
     <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
       <span class="nav-hamburger-bar"></span>
@@ -4823,7 +4823,7 @@ body {
   </nav>
   <div class="mobile-nav-actions">
     <a href="account/index.html" class="btn btn-ghost btn-small js-nav-login" data-auth-pending>Login</a>
-    <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small js-nav-cta">Try Chapter 1 free <span class="arrow">→</span></a>
+    <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small js-nav-cta" data-auth-pending>Try Chapter 1 free <span class="arrow">→</span></a>
   </div>
 </div>
 

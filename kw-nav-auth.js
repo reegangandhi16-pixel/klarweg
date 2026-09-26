@@ -24,8 +24,10 @@
    and Lifetime owns every level). The relevant level is the one whose
    Chapter 1 the CTA links to. If that level is owned, the CTA becomes
    the Account page's owner link, "Open <LEVEL> roadmap", or is hidden on
-   that level's own roadmap, which already shows owner CTAs. Signed out,
-   not owned, or still checking: the original CTA, unchanged.
+   that level's own roadmap, which already shows owner CTAs. Signed out
+   or not owned: the original CTA, unchanged. While the answer is still
+   pending the CTAs carry `data-auth-pending` too, so an owner never sees
+   the trial CTA first; they are revealed the same way as the login link.
 
    Load after kw-config.js and kw-auth.js.
    ============================================================ */
@@ -76,6 +78,7 @@
         a.setAttribute('href', level.toLowerCase() + '.html');
         a.style.display = ''; a.removeAttribute('aria-hidden');
       }
+      a.removeAttribute('data-auth-pending');            // ownership known: show the result
     }
   }
 
@@ -92,7 +95,7 @@
   // here. Only the pending state is cleared; the text stays as it is and a
   // late answer still sets the right label.
   function revealPending() {
-    var list = links();
+    var list = document.querySelectorAll('.js-nav-login, .js-nav-cta');
     for (var i = 0; i < list.length; i++) list[i].removeAttribute('data-auth-pending');
   }
 
@@ -107,7 +110,8 @@
     var auth = global.KWAuth;
     if (!auth || typeof auth.getState !== 'function' || typeof auth.onChange !== 'function') {
       setLabel(SIGNED_OUT);                           // no auth code: never claim a session
-      return;                                          // CTAs keep their original trial link
+      revealPending();                                 // CTAs show their original trial link
+      return;
     }
     auth.onChange(render);
     render(auth.getState());

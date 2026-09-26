@@ -218,6 +218,25 @@
 
       // Dual-voice vocabulary manifest (female/male) — single CDN source.
       ensureVocabManifest();
+
+      // Warm the conjugation + word-form manifests now, in parallel, instead
+      // of serially on the first click (speak() awaits both before it can
+      // resolve any URL). Both loaders are memoized, so speak() just joins
+      // these in-flight fetches. If this early attempt fails (e.g. a timeout
+      // while the page is still loading), forget it so the first click still
+      // gets its own attempt — exactly as before this warm-up existed.
+      warmManifest(ensureConjugationManifest, function () { return conjugationManifestPromise; },
+        function () { return CONJUGATION_MAP; }, function () { conjugationManifestPromise = null; });
+      warmManifest(ensureWordFormManifest, function () { return wordFormManifestPromise; },
+        function () { return WORD_FORM_MAP; }, function () { wordFormManifestPromise = null; });
+    }
+    function warmManifest(ensure, current, map, reset) {
+      try {
+        var p = ensure();
+        p.then(function () {
+          if (current() === p && !Object.keys(map()).length) reset();
+        });
+      } catch (e) {}
     }
   })();
 
@@ -792,6 +811,95 @@ function wordFormUrl(text) {
   }
 
   /* ════════════════════════════════════════════════════════════════════
+     PRELOAD — warm urlCache so a first tap starts like a replay
+     window.KW_audioPreload(list) — list of German strings. Resolves each
+     exactly as speak() does without a gender (conjugation → word-form →
+     manifest) and primes the SAME element playUrl() later reuses. Never
+     touches the current clip, never emits 'request', never throws. Only
+     manifest-backed MP3s are warmed; unresolved text is skipped.
+     ════════════════════════════════════════════════════════════════════ */
+  var PRELOAD_MAX = 40, PRELOAD_CONCURRENCY = 3, PRELOAD_ITEM_TIMEOUT_MS = 8000;
+  var preloadQueued = {};
+  function whenMainManifest() {
+    return new Promise(function (resolve) {
+      if (manifestReady) { resolve(); return; }
+      var off = function (ev) {
+        if (ev.type !== 'manifest-loaded') return;
+        // Unsubscribe after emit() finishes its loop, so no other listener
+        // is skipped by the array shifting mid-iteration.
+        setTimeout(function () { listeners = listeners.filter(function (x) { return x !== off; }); }, 0);
+        resolve();
+      };
+      listeners.push(off);
+    });
+  }
+  function preloadUrlOf(text) {
+    return conjugationUrl(text) || wordFormUrl(text) || audioUrl(text);
+  }
+  function preloadOne(url) {
+    return new Promise(function (resolve) {
+      var a;
+      try {
+        a = new AudioCtor();
+        a.preload = 'auto';
+        a.src = url;
+      } catch (e) { resolve(); return; }
+      urlCache[url] = a;
+      var done = false, timer;
+      var fin = function () {
+        if (done) return; done = true; clearTimeout(timer);
+        a.removeEventListener('canplaythrough', fin);
+        a.removeEventListener('error', onErr);
+        resolve();
+      };
+      // A failed preload must not leave a broken element behind: drop it so
+      // a later click builds a fresh one, exactly as without preloading.
+      var onErr = function () {
+        if (urlCache[url] === a && current !== a) delete urlCache[url];
+        emit('preload-error', { url: url, code: a.error && a.error.code });
+        fin();
+      };
+      a.addEventListener('canplaythrough', fin);
+      a.addEventListener('error', onErr);
+      timer = setTimeout(fin, PRELOAD_ITEM_TIMEOUT_MS);   // move on; the load continues
+      try { a.load(); } catch (e) {}
+    });
+  }
+  function preload(list) {
+    try {
+      if (!AudioCtor) return Promise.resolve({ queued: 0 });
+      var conn = global.navigator && global.navigator.connection;
+      if (conn && conn.saveData) return Promise.resolve({ queued: 0, skipped: 'save-data' });
+      if (!Array.isArray(list)) list = [list];
+      list = list.filter(function (t) { return typeof t === 'string' && t.trim(); });
+      return Promise.all([
+        ensureConjugationManifest(), ensureWordFormManifest(), whenMainManifest()
+      ]).then(function () {
+        var urls = [];
+        for (var i = 0; i < list.length && urls.length < PRELOAD_MAX; i++) {
+          var url = preloadUrlOf(list[i]);
+          if (!url || urlCache[url] || preloadQueued[url]) continue;
+          preloadQueued[url] = 1;
+          urls.push(url);
+        }
+        emit('preload', { requested: list.length, queued: urls.length });
+        var idx = 0;
+        function worker() {
+          if (idx >= urls.length) return Promise.resolve();
+          var url = urls[idx++];
+          var job = urlCache[url] ? Promise.resolve() : preloadOne(url);   // a click may have beaten us
+          return job.then(function () { delete preloadQueued[url]; return worker(); });
+        }
+        var workers = [];
+        for (var w = 0; w < PRELOAD_CONCURRENCY; w++) workers.push(worker());
+        return Promise.all(workers).then(function () { return { queued: urls.length }; });
+      }).catch(function () { return { queued: 0 }; });
+    } catch (e) {
+      return Promise.resolve({ queued: 0 });
+    }
+  }
+
+  /* ════════════════════════════════════════════════════════════════════
      RESOLVE STATE (for button gating — NEVER show silent buttons)
      Returns the BEST source available WITHOUT playing:
         'manifest' | 'cache' | 'remote' | 'browser' | 'none'
@@ -1004,6 +1112,7 @@ function wordFormUrl(text) {
   // directly and stay silent, since starting the next clip is not a stop.
   global.KW_stopAudio = function () { stopCurrent(); emit('stop', {}); };
   global.KW_prepare = prepare;
+  global.KW_audioPreload = preload;
   global.KW_audioState = audioStateSync;
   global.KW_audioStateAsync = audioState;
   global.KW_cacheStats = cacheStats;

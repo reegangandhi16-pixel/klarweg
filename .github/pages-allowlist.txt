@@ -30,6 +30,9 @@ b1.html
 b2.html
 c1.html
 c2.html
+privacy.html
+terms.html
+refund-policy.html
 
 # ---------------------------------------------------------------
 # Root-level frontend runtime (calls the Worker's public HTTPS API;

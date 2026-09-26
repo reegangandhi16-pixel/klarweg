@@ -1,4 +1,4 @@
-import { corsHeaders, withCors } from "./cors.js";
+import { corsHeaders, withCors, isForeignOriginWrite } from "./cors.js";
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
@@ -32,6 +32,18 @@ export default {
 
     if (request.method === "OPTIONS") {
       return handleOptions(request);
+    }
+
+    /* Refuse cross-site writes (see isForeignOriginWrite). Exempt: the
+       Cashfree webhook (server-to-server, HMAC-verified) and Google's
+       redirect sign-in (a top-level POST from accounts.google.com that
+       carries its own g_csrf_token check). */
+    if (
+      isForeignOriginWrite(request) &&
+      url.pathname !== "/webhooks/cashfree" &&
+      url.pathname !== "/auth/google/redirect"
+    ) {
+      return json({ ok: false, error: "Cross-site request refused." }, 403);
     }
 
     if (request.method === "POST" && url.pathname === "/orders") {

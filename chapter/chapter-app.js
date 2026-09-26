@@ -142,7 +142,14 @@
   try {
     if (localStorage.getItem(SKEY) != null && (state.xpEarned !== earnedXP() || state.xpMax !== C.xp)) save();
   } catch (e) {}
-  function completedCount() { return completable.filter(id => state.done[id]).length; }
+  // The quiz is done only when a real attempt has earned all of its XP (same
+  // expression as earnedXP()). A done.quiz flag on its own — e.g. an older
+  // manual tick with no attempt behind it — never counts, and never gives XP.
+  function quizComplete() {
+    return state.quizScore != null && Math.round((state.quizScore / C.quiz.length) * QUIZ_MAX_XP) >= QUIZ_MAX_XP;
+  }
+  function sectionDone(id) { return id === 'quiz' ? quizComplete() : !!state.done[id]; }
+  function completedCount() { return completable.filter(sectionDone).length; }
   // A chapter is complete only when 100% of its XP is earned — the same rule
   // the level roadmap uses (kw-roadmap-progress.js). Ticking every section is
   // not enough: a 4/5 quiz leaves the chapter in progress.
@@ -400,9 +407,9 @@
     const nav = $('#dash-nav-inner');
     C.sections.forEach((s, i) => {
       const item = el('a', { class: 'dash-nav-item', href: '#sec-' + s.id, dataset: { sec: s.id } },
-        el('span', { class: 'nav-tick', html: state.done[s.id] ? ICON.check : '' }),
+        el('span', { class: 'nav-tick', html: sectionDone(s.id) ? ICON.check : '' }),
         s.label);
-      if (state.done[s.id]) item.classList.add('is-done');
+      if (sectionDone(s.id)) item.classList.add('is-done');
       item.addEventListener('click', (e) => {
         e.preventDefault();
         const t = $('#sec-' + s.id);
@@ -417,7 +424,7 @@
   function refreshNavTicks() {
     $$('.dash-nav-item').forEach(item => {
       const id = item.dataset.sec;
-      const done = !!state.done[id];
+      const done = sectionDone(id);
       item.classList.toggle('is-done', done);
       item.querySelector('.nav-tick').innerHTML = done ? ICON.check : '';
     });
@@ -465,7 +472,8 @@
           el('span', { class: 'sk-tag tag-' + s.tag }, TAG_LABEL[s.tag])),
         el('h2', { class: 'section-title' }, s.label),
         el('p', { class: 'section-objective' }, s.objective)),
-      s.auto ? null : completeToggle(s)
+      // The quiz gets no manual toggle: it is done only through a real attempt.
+      (s.auto || s.id === 'quiz') ? null : completeToggle(s)
     );
     kwQueueReport(head, s);
     return el('section', { class: 'dash-section', id: 'sec-' + s.id, dataset: { sec: s.id } }, head, bodyNode);
@@ -4330,9 +4338,14 @@
     }
     function showResult() {
       paintProgress(); $$('.quiz-progress-dot', progress).forEach(d => d.classList.add('done'));
-      state.quizScore = score; state.done['quiz'] = true; save();
+      // The saved score is the learner's BEST attempt: a practice retake can
+      // raise it but never lower it, so earned XP (and completion) never drop.
+      const quizXpFor = (n) => n == null ? 0 : Math.round((n / Q.length) * QUIZ_MAX_XP);
+      const prevBest = state.quizScore;
+      const best = prevBest == null ? score : Math.max(prevBest, score);
+      const gained = quizXpFor(best) - quizXpFor(prevBest);
+      state.quizScore = best; state.done['quiz'] = true; save();
       refreshNavTicks(); updateRing(); updateStats(); renderSummary();
-      const xp = Math.round((score / Q.length) * QUIZ_MAX_XP);
       const pct = Math.round((score / Q.length) * 100);
       stage.innerHTML = '';
       const R = C.quizRecommendation || {};
@@ -4345,13 +4358,16 @@
         el('div', { class: 'quiz-result' },
           el('div', { class: 'quiz-score-big', style: pct >= 60 ? 'color:var(--g-object)' : 'color:var(--coral)' }, score + '/' + Q.length),
           el('div', { class: 'muted', style: 'margin-top:6px' }, pct + '% correct'),
-          el('div', { class: 'quiz-xp-earned' }, el('span', { class: 'meta-dot', style: 'width:8px;height:8px;border-radius:50%;background:var(--coral)' }), '+' + xp + ' XP banked'),
+          el('div', { class: 'quiz-xp-earned' }, el('span', { class: 'meta-dot', style: 'width:8px;height:8px;border-radius:50%;background:var(--coral)' }),
+            gained > 0 ? '+' + gained + ' XP banked'
+              : best > score ? 'Best score kept · ' + best + '/' + Q.length
+              : 'No new XP · best score ' + best + '/' + Q.length),
           el('div', { class: 'quiz-reco' },
             el('div', { class: 'eyebrow', style: 'margin-bottom:8px' }, 'Recommendation'),
             el('p', { class: 'lede', style: 'font-size:16px', html: reco })),
           el('button', { class: 'btn btn-soft btn-small', style: 'margin-top:20px', onclick: () => { score = 0; idx = 0; showQ(); } }, 'Retake quiz'))
       );
-      toast('Quiz complete', xp);
+      toast('Quiz complete', gained);
     }
     showQ();
     return card;
@@ -4365,11 +4381,14 @@
     checklist.appendChild(el('div', { class: 'eyebrow', style: 'margin-bottom:6px' }, 'Your progress'));
     const list = el('div', { class: 'summary-checklist' });
     C.sections.filter(s => !s.auto).forEach(s => {
-      const done = !!state.done[s.id];
+      const done = sectionDone(s.id);
+      // A quiz attempted below full marks is neither "completed" nor "not yet":
+      // show its best score so the learner knows a retake is what's left.
+      const partialQuiz = s.id === 'quiz' && !done && state.quizScore != null;
       list.appendChild(el('div', { class: 'summary-item ' + (done ? 'done' : 'todo') },
         el('span', { class: 'si-tick', html: done ? ICON.check : '' }),
-        el('span', {}, s.label + (done ? ' completed' : ' — not yet')),
-        done ? el('span', { class: 'muted', style: 'margin-left:auto;font-size:13px' }, s.id === 'quiz' && state.quizScore != null ? state.quizScore + '/' + C.quiz.length : '✓') : null));
+        el('span', {}, s.label + (done ? ' completed' : partialQuiz ? ' — best score, retake for full XP' : ' — not yet')),
+        (done || partialQuiz) ? el('span', { class: 'muted', style: 'margin-left:auto;font-size:13px' }, s.id === 'quiz' ? state.quizScore + '/' + C.quiz.length : '✓') : null));
     });
     checklist.appendChild(list);
     checklist.appendChild(el('div', { class: 'flex-between', style: 'margin-top:8px;padding-top:16px;border-top:1px solid var(--hairline-light)' },
@@ -4587,8 +4606,12 @@
   /* ---------- header action buttons ---------- */
   function setupHeaderActions() {
     $('#act-continue').addEventListener('click', () => {
-      // jump to first incomplete section
-      const next = completable.find(id => !state.done[id]) || 'summary';
+      // Jump to what still stands between the learner and 100% XP: the first
+      // unticked section, then the quiz until it is aced. Summary only once
+      // the chapter is complete.
+      const next = isChapterComplete() ? 'summary'
+        : completable.find(id => id !== 'quiz' && !sectionDone(id))
+          || (completable.includes('quiz') && !quizComplete() ? 'quiz' : 'summary');
       const t = $('#sec-' + next); if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 64, behavior: 'smooth' });
     });
     $('#act-restart').addEventListener('click', () => {

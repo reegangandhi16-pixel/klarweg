@@ -44,19 +44,25 @@
     var rec = id ? readRecord(id) : null;
     if (!rec || typeof rec !== 'object') return { status: 'not-started', pct: 0 };
 
+    // Stored XP is used only when it is a sane pair the chapter could have
+    // written: finite numbers with 0 <= xpEarned <= xpMax. A corrupted pair
+    // (e.g. xpEarned > xpMax, NaN, strings) is ignored and the record is read
+    // like an older one below — which can say "in progress", never "completed".
     var earned = rec.xpEarned, max = rec.xpMax;
-    if (typeof earned === 'number' && typeof max === 'number' && max > 0) {
+    if (isFinite(earned) && isFinite(max) && typeof earned === 'number' && typeof max === 'number' &&
+        max > 0 && earned >= 0 && earned <= max) {
       if (earned >= max) return { status: 'completed', pct: 100 };
       if (earned > 0) return { status: 'in-progress', pct: Math.min(99, Math.floor(earned / max * 100)) };
       return { status: 'not-started', pct: 0 };
     }
 
-    // Older record without stored XP: earned XP is visible from a ticked
-    // (non-quiz) section or a quiz score above zero — the only inputs of
-    // the chapter's earnedXP().
-    var done = rec.done && typeof rec.done === 'object' ? rec.done : {};
-    var hasXp = Object.keys(done).some(function (k) { return k !== 'quiz' && done[k]; }) ||
-      (typeof rec.quizScore === 'number' && rec.quizScore > 0);
+    // Older record without stored XP (or with an invalid pair): earned XP is
+    // visible from a ticked (non-quiz) section or a real quiz score above
+    // zero — the only inputs of the chapter's earnedXP(), read the same way
+    // the chapter reads them (done entries must be exactly true).
+    var done = rec.done && typeof rec.done === 'object' && !Array.isArray(rec.done) ? rec.done : {};
+    var hasXp = Object.keys(done).some(function (k) { return k !== 'quiz' && done[k] === true; }) ||
+      (Number.isInteger(rec.quizScore) && rec.quizScore > 0);
     return hasXp ? { status: 'in-progress', pct: null } : { status: 'not-started', pct: 0 };
   }
 

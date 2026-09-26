@@ -114,7 +114,26 @@
   /* ---------- progress state (localStorage) ---------- */
   const SKEY = 'kw-ch-' + (C.id || ('a1-' + C.number));
   let state = { done: {}, learned: {}, saved: {}, quizScore: null };
-  try { state = Object.assign(state, JSON.parse(localStorage.getItem(SKEY) || '{}')); } catch (e) {}
+  try { state = normalizeState(JSON.parse(localStorage.getItem(SKEY) || '{}')); } catch (e) {}
+  // A saved record is trusted field by field, never wholesale: anything the
+  // chapter could not have written itself (a corrupted or hand-edited record)
+  // falls back to its empty default instead of crashing the page or counting
+  // as earned progress. Records the chapter wrote pass through unchanged.
+  function normalizeState(raw) {
+    const isObj = v => !!v && typeof v === 'object' && !Array.isArray(v);
+    const s = { done: {}, learned: {}, saved: {}, quizScore: null };
+    if (!isObj(raw)) return s;
+    Object.assign(s, raw);
+    s.done = {};
+    if (isObj(raw.done)) Object.keys(raw.done).forEach(k => { if (raw.done[k] === true) s.done[k] = true; });
+    s.learned = isObj(raw.learned) ? raw.learned : {};
+    s.saved = isObj(raw.saved) ? raw.saved : {};
+    // A quiz score is a whole number of correct answers, 0..number of questions.
+    // Anything else is not a real attempt and must not become quiz XP.
+    const q = raw.quizScore, n = (C.quiz || []).length;
+    s.quizScore = Number.isInteger(q) && q >= 0 && q <= n ? q : null;
+    return s;
+  }
   function save() {
     // Also record this chapter's XP (earned / available) exactly as the
     // chapter computes it, so the level roadmap — which has no chapter data
@@ -142,6 +161,37 @@
   try {
     if (localStorage.getItem(SKEY) != null && (state.xpEarned !== earnedXP() || state.xpMax !== C.xp)) save();
   } catch (e) {}
+  // Keep this tab in step with the same chapter open in another tab. Every
+  // save() writes the whole in-memory state, so without this an older tab
+  // would overwrite newer progress (e.g. erase a 5/5 quiz) the next time it
+  // saved anything. The browser fires 'storage' only in the OTHER tabs.
+  let chapterRendered = false;
+  window.addEventListener('storage', (e) => {
+    if (e.key !== SKEY && e.key !== null) return;          // null = storage cleared
+    let next;
+    try { next = normalizeState(JSON.parse(e.newValue || '{}')); } catch (err) { return; }
+    state = next;
+    if (chapterRendered) refreshProgressUI();
+  });
+  // A page restored by Back/Forward (bfcache) missed any 'storage' events
+  // while it was frozen — re-read the saved record before it can save again.
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    try { state = normalizeState(JSON.parse(localStorage.getItem(SKEY) || '{}')); } catch (err) { return; }
+    if (chapterRendered) refreshProgressUI();
+  });
+  function refreshProgressUI() {
+    [refreshNavTicks, updateRing, updateStats, renderSummary, drawVocab, refreshSavedCount].forEach(fn => { try { fn(); } catch (e) {} });
+    $$('.dash-section').forEach(sec => {
+      try {
+        const b = sec.querySelector('.section-complete'); if (!b) return;
+        const d = !!state.done[sec.dataset.sec];
+        b.classList.toggle('is-done', d);
+        b.querySelector('.cc-box').innerHTML = d ? ICON.check : '';
+        b.querySelector('.cc-label').textContent = d ? 'Completed' : 'Mark complete';
+      } catch (e) {}
+    });
+  }
   // The quiz is done only when a real attempt has earned all of its XP (same
   // expression as earnedXP()). A done.quiz flag on its own — e.g. an older
   // manual tick with no attempt behind it — never counts, and never gives XP.
@@ -5096,6 +5146,7 @@
     setupAccountMenu();
     preloadChapterAudio();
     kwLoadReporter();
+    chapterRendered = true;
   }
 
   /* Preload this chapter's vocab + first reading/listening lines so the first

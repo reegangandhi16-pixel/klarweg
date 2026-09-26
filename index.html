@@ -380,7 +380,7 @@ section.flush-top { padding-top: 0; }
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 16px 32px;
+  padding: 0;
   background: var(--bg-glass-strong);
   backdrop-filter: saturate(1.2) blur(20px);
   -webkit-backdrop-filter: saturate(1.2) blur(20px);
@@ -391,6 +391,8 @@ section.flush-top { padding-top: 0; }
 .nav-inner {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 0 32px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -398,9 +400,9 @@ section.flush-top { padding-top: 0; }
 }
 .logo {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -436,7 +438,7 @@ section.flush-top { padding-top: 0; }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
   font-size: 14px;
   font-weight: 500;
   color: var(--ink-secondary);
@@ -444,6 +446,12 @@ section.flush-top { padding-top: 0; }
 .nav-links a { transition: color var(--dur-fast) var(--ease); }
 .nav-links a:hover { color: var(--ink-primary); }
 .nav-cta { display: flex; align-items: center; gap: 12px; }
+/* Header Login / My Account link while the session check is in flight
+   (kw-nav-auth.js): it keeps its place but is not shown, so a signed-in
+   learner never sees "Login" flash first. The delayed reveal shows the
+   static "Login" text on its own if the check never answers. */
+.js-nav-login[data-auth-pending] { visibility: hidden; animation: kw-nav-auth-reveal 0s linear 2.5s forwards !important; }
+@keyframes kw-nav-auth-reveal { to { visibility: visible; } }
 .nav-hamburger {
   display: none;
   flex-direction: column;
@@ -493,16 +501,16 @@ section.flush-top { padding-top: 0; }
    "hidden" drawer stays rendered (and clickable) on top of the page. */
 .mobile-nav[hidden], .mobile-nav-overlay[hidden] { display: none; }
 body.mobile-nav-open { overflow: hidden; }
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .nav-links { display: none; }
-  .nav { padding: 12px 18px; }
-  .nav-inner { gap: 16px; }
-  .logo { font-size: 19px; gap: 6px; }
+  .nav { padding: 0; }
+  .nav-inner { gap: 16px; padding: 12px 20px; }
+  .logo { font-size: 20px; gap: 6px; }
   .logo-mark { width: 22px; height: 22px; }
   .nav-cta .btn { padding: 8px 14px; font-size: 13px; min-height: 44px; box-sizing: border-box; }
   .nav-hamburger { display: flex; }
 }
-@media (min-width: 769px) {
+@media (min-width: 861px) {
   .mobile-nav-overlay, .mobile-nav { display: none !important; }
 }
 /* Below ~405px the top-bar Log in + Try Chapter 1 free buttons (fixed-
@@ -4774,7 +4782,7 @@ body {
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      klarweg
+      Klarweg
     </a>
     <div class="nav-links">
       <a href="courses.html">Courses</a>
@@ -4784,7 +4792,7 @@ body {
       <a href="#pricing">Pricing</a>
     </div>
     <div class="nav-cta">
-      <a href="account/index.html" class="btn btn-ghost btn-small">Log in</a>
+      <a href="account/index.html" class="btn btn-ghost btn-small js-nav-login" data-auth-pending>Login</a>
       <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small">Try Chapter 1 free <span class="arrow">→</span></a>
     </div>
     <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
@@ -4808,7 +4816,7 @@ body {
     <a href="#pricing">Pricing</a>
   </nav>
   <div class="mobile-nav-actions">
-    <a href="account/index.html" class="btn btn-ghost btn-small">Log in</a>
+    <a href="account/index.html" class="btn btn-ghost btn-small js-nav-login" data-auth-pending>Login</a>
     <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small">Try Chapter 1 free <span class="arrow">→</span></a>
   </div>
 </div>
@@ -8154,10 +8162,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Resizing past the desktop breakpoint while open shouldn't leave the
   // drawer stuck open with body scroll locked.
   window.addEventListener('resize', function () {
-    if (!panel.hidden && window.innerWidth > 768) closeMenu();
+    if (!panel.hidden && window.innerWidth > 860) closeMenu();
   });
 })();
 </script>
+
+<script src="kw-config.js"></script>
+<script src="kw-auth.js"></script>
+<script src="kw-nav-auth.js"></script>
 
 </body>
 </html>

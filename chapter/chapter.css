@@ -1199,7 +1199,7 @@ img { max-width: 100%; display: block; }
   transition: all var(--dur-base) var(--ease);
 }
 .chapter-topbar.is-solid { background: var(--bg-canvas); border-bottom: 1px solid var(--hairline); }
-.topbar-brand { font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
+.topbar-brand { font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
 .topbar-brand .brand-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--coral); }
 .topbar-actions { display: flex; align-items: center; gap: 10px; }
 .topbar-xp { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink-primary); background: var(--bg-glass-strong); border: 1px solid var(--hairline); padding: 7px 14px; border-radius: var(--r-full); }

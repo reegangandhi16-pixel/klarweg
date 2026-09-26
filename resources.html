@@ -62,7 +62,7 @@
       <a href="resources.html" class="active">Resources</a>
       <a href="about.html">About</a>
     </div>
-    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link">Log in</a><a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Try Chapter 1 free</a></div>
+    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link" data-auth-pending>Login</a><a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Try Chapter 1 free</a></div>
     <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
       <span class="nav-hamburger-bar"></span>
       <span class="nav-hamburger-bar"></span>
@@ -84,7 +84,7 @@
     <a href="about.html">About</a>
   </nav>
   <div class="mobile-nav-actions">
-    <a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile">Log in</a>
+    <a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile" data-auth-pending>Login</a>
     <a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Try Chapter 1 free</a>
   </div>
 </div>
@@ -268,23 +268,8 @@
 <script src="site.js"></script>
 <script src="kw-config.js"></script>
 <script src="kw-auth.js"></script>
+<script src="kw-nav-auth.js"></script>
 <script>
-/* Header login/account link (desktop + mobile-drawer copies).
-   account/index.html already renders login vs account-overview based
-   on real session state, so only the LABEL needs to reflect auth state
-   here -- the destination stays the same either way. */
-(function () {
-  var links = document.querySelectorAll('.js-nav-login');
-  if (!links.length || !window.KWAuth) return;
-  function render(s) {
-    var label = (s && s.authenticated) ? 'My account' : 'Log in';
-    links.forEach(function (l) { l.textContent = label; });
-  }
-  render(KWAuth.getState());
-  KWAuth.onChange(render);
-  KWAuth.refresh();
-})();
-
 /* Mobile hamburger menu. Accessible drawer: focus moves in on open and
    returns to the trigger on close, Escape closes, backdrop click
    closes, Tab is trapped inside the drawer while open, background

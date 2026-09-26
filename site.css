@@ -136,6 +136,12 @@ section { padding: 88px 0; }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 .nav-login { font-size: 14px; color: var(--ink-secondary); font-weight: 500; transition: color var(--dur-fast) var(--ease); }
 .nav-login:hover { color: var(--ink-primary); }
+/* Header Login / My Account link while the session check is in flight
+   (kw-nav-auth.js): it keeps its place but is not shown, so a signed-in
+   learner never sees "Login" flash first. The delayed reveal shows the
+   static "Login" text on its own if the check never answers. */
+.js-nav-login[data-auth-pending] { visibility: hidden; animation: kw-nav-auth-reveal 0s linear 2.5s forwards !important; }
+@keyframes kw-nav-auth-reveal { to { visibility: visible; } }
 .nav-hamburger {
   display: none;
   flex-direction: column;

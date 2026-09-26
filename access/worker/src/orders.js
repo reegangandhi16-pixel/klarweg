@@ -81,15 +81,20 @@ export async function createOrder(request, env) {
   const now = Math.floor(Date.now() / 1000);
   const amount = rupeesFromPaise(product.amountPaise);
 
+  /* An expired single-level entitlement (expires_at in the past) must
+     not block re-purchasing that same level - only a still-active
+     entitlement (NULL expires_at = grandfathered/Lifetime-granted, or
+     a future expires_at) counts as "already owned" here. */
   const existingEntitlement = await env.DB
     .prepare(
       `SELECT product_id
        FROM user_entitlements
        WHERE user_id = ?1
          AND product_id = ?2
+         AND (expires_at IS NULL OR expires_at > ?3)
        LIMIT 1`
     )
-    .bind(user.id, product.id)
+    .bind(user.id, product.id, now)
     .first();
 
   if (existingEntitlement) {

@@ -217,11 +217,17 @@ section { padding: 88px 0; }
   border-radius: var(--r-full);
   background: var(--ink-primary);
   color: var(--bg-surface);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
 }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+/* Header actions on narrow phones: below 460px "Login"/"My Account" lives in
+   the drawer only, and below 340px the CTA does too, so the bar never wraps
+   or pushes the hamburger off-screen. Both stay in .mobile-nav-actions. */
+.nav-login, .nav-cta { white-space: nowrap; }
+@media (max-width: 459px) { .nav-actions .nav-login { display: none; } }
+@media (max-width: 339px) { .nav-actions .nav-cta { display: none; } }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 .nav-login { font-size: 14px; color: var(--ink-secondary); font-weight: 500; transition: color var(--dur-fast) var(--ease); }
 .nav-login:hover { color: var(--ink-primary); }
@@ -1204,7 +1210,7 @@ footer {
       <a href="index.html#how">Method</a>
       <a href="#pricing">Pricing</a>
     </div>
-    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link" data-auth-pending>Login</a><a href="chapter/chapter-b1-1-infinitiv-mit-zu.html" class="nav-cta">Try Chapter 1 free</a></div>
+    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link" data-auth-pending>Login</a><a href="chapter/chapter-b1-1-infinitiv-mit-zu.html" class="nav-cta js-nav-cta">Try Chapter 1 free</a></div>
     <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
       <span class="nav-hamburger-bar"></span>
       <span class="nav-hamburger-bar"></span>
@@ -1230,7 +1236,7 @@ footer {
   </nav>
   <div class="mobile-nav-actions">
     <a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile" data-auth-pending>Login</a>
-    <a href="chapter/chapter-b1-1-infinitiv-mit-zu.html" class="nav-cta">Try Chapter 1 free</a>
+    <a href="chapter/chapter-b1-1-infinitiv-mit-zu.html" class="nav-cta js-nav-cta">Try Chapter 1 free</a>
   </div>
 </div>
 

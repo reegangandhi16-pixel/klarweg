@@ -18,6 +18,15 @@
    after 3s, and by the page CSS on its own (after 2.5s) if this script
    never runs — so the link is never left invisible.
 
+   Header "Try Chapter 1 free" CTAs (`.js-nav-cta`) follow the learner's
+   purchases through KWAuth.hasLevel() — the same entitlement answer the
+   roadmaps use (server-side, so expired access is already "not owned"
+   and Lifetime owns every level). The relevant level is the one whose
+   Chapter 1 the CTA links to. If that level is owned, the CTA becomes
+   the Account page's owner link, "Open <LEVEL> roadmap", or is hidden on
+   that level's own roadmap, which already shows owner CTAs. Signed out,
+   not owned, or still checking: the original CTA, unchanged.
+
    Load after kw-config.js and kw-auth.js.
    ============================================================ */
 (function (global) {
@@ -40,9 +49,41 @@
     }
   }
 
+  // Level whose Chapter 1 a header CTA links to ("chapter-b1-1-…" → "B1").
+  function ctaLevel(orig) {
+    var m = /chapter-([abc][12])-0?1-/.exec(orig.href || '');
+    return m ? m[1].toUpperCase() : null;
+  }
+  function onRoadmapOf(level) {
+    return new RegExp('(^|/)' + level.toLowerCase() + '\\.html$').test(global.location.pathname);
+  }
+  function renderCtas(signedIn) {
+    var list = document.querySelectorAll('.js-nav-cta');
+    for (var i = 0; i < list.length; i++) {
+      var a = list[i];
+      if (!a._kwOrig) a._kwOrig = { html: a.innerHTML, href: a.getAttribute('href') };
+      var o = a._kwOrig, level = ctaLevel(o);
+      var owned = signedIn && level && typeof global.KWAuth.hasLevel === 'function' && global.KWAuth.hasLevel(level);
+      if (!owned) {                                     // original CTA
+        if (a.innerHTML !== o.html) a.innerHTML = o.html;
+        a.setAttribute('href', o.href);
+        a.style.display = ''; a.removeAttribute('aria-hidden');
+      } else if (onRoadmapOf(level)) {                  // this roadmap already has owner CTAs
+        a.style.display = 'none'; a.setAttribute('aria-hidden', 'true');
+      } else {                                          // Account page's owner link
+        var arrow = /class="arrow"/.test(o.html) ? ' <span class="arrow">→</span>' : '';
+        a.innerHTML = 'Open ' + level + ' roadmap' + arrow;
+        a.setAttribute('href', level.toLowerCase() + '.html');
+        a.style.display = ''; a.removeAttribute('aria-hidden');
+      }
+    }
+  }
+
   function render(s) {
     if (!s || s.status === 'unknown') return;          // no answer yet: stay pending
-    setLabel(s.status === 'authenticated' && s.authenticated ? SIGNED_IN : SIGNED_OUT);
+    var signedIn = s.status === 'authenticated' && !!s.authenticated;
+    setLabel(signedIn ? SIGNED_IN : SIGNED_OUT);
+    renderCtas(signedIn);
   }
 
   // A check that never answers must not keep the links hidden. The CSS
@@ -66,7 +107,7 @@
     var auth = global.KWAuth;
     if (!auth || typeof auth.getState !== 'function' || typeof auth.onChange !== 'function') {
       setLabel(SIGNED_OUT);                           // no auth code: never claim a session
-      return;
+      return;                                          // CTAs keep their original trial link
     }
     auth.onChange(render);
     render(auth.getState());

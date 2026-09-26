@@ -396,7 +396,7 @@ section.flush-top { padding-top: 0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
 }
 .logo {
   font-family: var(--font-display);
@@ -446,6 +446,9 @@ section.flush-top { padding-top: 0; }
 .nav-links a { transition: color var(--dur-fast) var(--ease); }
 .nav-links a:hover { color: var(--ink-primary); }
 .nav-cta { display: flex; align-items: center; gap: 12px; }
+.nav-cta .btn { white-space: nowrap; }
+/* The Login/My Account button is the green CTA's partner: same size, same corners. */
+.nav-cta .btn-ghost, .mobile-nav-actions .btn-ghost { border-radius: var(--r-lg); }
 /* Header Login / My Account link while the session check is in flight
    (kw-nav-auth.js): it keeps its place but is not shown, so a signed-in
    learner never sees "Login" flash first. The delayed reveal shows the
@@ -513,12 +516,15 @@ body.mobile-nav-open { overflow: hidden; }
 @media (min-width: 861px) {
   .mobile-nav-overlay, .mobile-nav { display: none !important; }
 }
-/* Below ~405px the top-bar Log in + Try Chapter 1 free buttons (fixed-
-   width content, no further shrink) don't leave room for the hamburger,
-   which renders clipped and unclickable by body's overflow-x:hidden.
-   .mobile-nav-actions already duplicates both actions inside the drawer,
-   so hiding them here only removes the redundant, broken copy. */
-@media (max-width: 404px) {
+/* Narrow phones: the top-bar buttons (fixed-width, no further shrink) must
+   leave room for the hamburger, which otherwise renders clipped and
+   unclickable under body's overflow-x:hidden. Below 460px Login/My Account
+   lives in the drawer only; below 340px the green CTA does too.
+   .mobile-nav-actions already duplicates both actions inside the drawer. */
+@media (max-width: 459px) {
+  .nav-cta .js-nav-login { display: none; }
+}
+@media (max-width: 339px) {
   .nav-cta { display: none; }
 }
 
@@ -4793,7 +4799,7 @@ body {
     </div>
     <div class="nav-cta">
       <a href="account/index.html" class="btn btn-ghost btn-small js-nav-login" data-auth-pending>Login</a>
-      <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small">Try Chapter 1 free <span class="arrow">→</span></a>
+      <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small js-nav-cta">Try Chapter 1 free <span class="arrow">→</span></a>
     </div>
     <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
       <span class="nav-hamburger-bar"></span>
@@ -4817,7 +4823,7 @@ body {
   </nav>
   <div class="mobile-nav-actions">
     <a href="account/index.html" class="btn btn-ghost btn-small js-nav-login" data-auth-pending>Login</a>
-    <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small">Try Chapter 1 free <span class="arrow">→</span></a>
+    <a href="chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-small js-nav-cta">Try Chapter 1 free <span class="arrow">→</span></a>
   </div>
 </div>
 

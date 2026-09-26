@@ -129,10 +129,16 @@ section { padding: 88px 0; }
 .nav-links a.active { color: var(--ink-primary); }
 .nav-cta {
   padding: 8px 16px; border-radius: var(--r-full); background: var(--ink-primary);
-  color: var(--bg-surface); font-size: 13px; font-weight: 500;
+  color: var(--bg-surface); font-size: 14px; font-weight: 500;
   transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
 }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+/* Header actions on narrow phones: below 460px "Login"/"My Account" lives in
+   the drawer only, and below 340px the CTA does too, so the bar never wraps
+   or pushes the hamburger off-screen. Both stay in .mobile-nav-actions. */
+.nav-login, .nav-cta { white-space: nowrap; }
+@media (max-width: 459px) { .nav-actions .nav-login { display: none; } }
+@media (max-width: 339px) { .nav-actions .nav-cta { display: none; } }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 .nav-login { font-size: 14px; color: var(--ink-secondary); font-weight: 500; transition: color var(--dur-fast) var(--ease); }
 .nav-login:hover { color: var(--ink-primary); }

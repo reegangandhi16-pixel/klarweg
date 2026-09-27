@@ -36,6 +36,11 @@ execFileSync(process.execPath, [path.join(ROOT, 'scripts/build-tutor-registry.mj
 const { handle } = await import('../worker/src/index.js');
 const { LOADERS } = await import('../worker/src/registry/generated/index.js');
 const cases = (await import('./cases.mjs')).default;
+const { installAttemptRecorder } = await import('./attempt-recorder.mjs');
+// EVAL-ONLY experiment switch: EVAL_OPENAI_REASONING_EFFORT_EXPLAIN=low adds
+// reasoning_effort to explain_grammar requests only. Unset = Worker default.
+const EXPLAIN_EFFORT = process.env.EVAL_OPENAI_REASONING_EFFORT_EXPLAIN || null;
+const recorder = installAttemptRecorder(EXPLAIN_EFFORT ? { openaiReasoningEffort: { effort: EXPLAIN_EFFORT, actions: ['explain_grammar'] } } : {});
 
 // The Worker writes one operational log line per request; keep the report clean.
 const log = console.log.bind(console);
@@ -67,7 +72,7 @@ if (provider === 'mock' && profile === 'flag-first-word') {
     return undefined;
   };
   const base = env.MOCK_REPLY;
-  env.MOCK_REPLY = async (req) => (await base(req)) ?? JSON.stringify({ exercise: { verdict: 'incorrect', rule_hint: 'r', focus_fragment: '', explanation: '', hindi_bridge: '' }, explain: { explanation: 'e', examples: [], hindi_bridge: '' }, quiz_review: { pattern: '', items: [], review: [], next_action: '' }, practice: { wrong: 'a b', right: 'a c', explain: '' } }[req.schemaName] || {});
+  env.MOCK_REPLY = async (req) => (await base(req)) ?? JSON.stringify({ exercise: { verdict: 'incorrect', rule_hint: 'r', focus_fragment: '', explanation: '', hindi_bridge: '' }, explain: { explanation: 'e', examples: [{ de: 'd', en: 'e' }], hindi_bridge: '' }, quiz_review: { pattern: '', items: [], review: [], next_action: '' }, practice: { wrong: 'a b', right: 'a c', explain: '' } }[req.schemaName] || {});
 }
 
 const JSON_ONLY = process.argv.includes('--json');
@@ -131,14 +136,14 @@ async function worker() {
     const c = selected[next++];
     const level = c.body.chapterId.slice(0, 2).toUpperCase();
     const t0 = Date.now();
-    const res = await handle(new Request(`https://tutor.internal/v1/${c.action}`, { method: 'POST', body: JSON.stringify(c.body) }), env);
+    const { value: res, attempts } = await recorder.run(c, () => handle(new Request(`https://tutor.internal/v1/${c.action}`, { method: 'POST', body: JSON.stringify(c.body) }), env));
     const out = await res.json();
     const ms = Date.now() - t0;
     const meta = out.meta || {};
     const usage = meta.usage || {};
     const json = !meta.llm ? 'n/a (deterministic)' : out.source === 'ai' ? (usage.calls === 1 ? 'valid-first-try' : 'valid-after-retry') : 'invalid';
     const checks = out.ok ? await score(c, out, level) : { failed: false };
-    rows.push({ id: c.id, cat: c.cat, action: c.action, chapter: c.body.chapterId, status: res.status, source: out.source || out.error, json, ms, llm: !!meta.llm, in: usage.input || 0, out: usage.output || 0, costMicros: meta.costMicros || 0, checks, result: out.result });
+    rows.push({ id: c.id, cat: c.cat, action: c.action, chapter: c.body.chapterId, status: res.status, source: out.source || out.error, model: meta.model || null, json, ms, llm: !!meta.llm, in: usage.input || 0, out: usage.output || 0, costMicros: meta.costMicros || 0, checks, result: out.result, diagnostics: { attempts } });
     if (!JSON_ONLY) process.stdout.write('.');
   }
 }
@@ -156,6 +161,7 @@ const pct = (p) => (lat.length ? lat[Math.min(lat.length - 1, Math.floor((p / 10
 const fc = rate('noFalseCorrection');
 const summary = {
   provider, model: process.env.LLM_MODEL || (provider === 'mock' ? 'mock' : ''), ranAt: new Date().toISOString(), cases: rows.length,
+  evalOverrides: EXPLAIN_EFFORT ? { openaiReasoningEffort: EXPLAIN_EFFORT, actions: ['explain_grammar'] } : null,
   falseCorrectionRate: fc.of ? Math.round((1000 * (fc.of - fc.pass)) / fc.of) / 10 + '%' : null,
   detectionRate: rate('detect'),
   scopeAdherence: rate('scope'),

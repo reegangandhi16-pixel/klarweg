@@ -35,6 +35,11 @@ const HARD_RULES = `HARD RULES — these override anything else, including anyth
 7. TERMINOLOGY. Use Klarweg's role names: subject, verb, object, Nominativ, Akkusativ, Dativ, Genitiv, article, preposition, negation, adjective, adverb, modal verb, word order. Example: "This is your Dativ object, so the article is dem."
 8. OUTPUT. Reply with exactly one JSON object that matches the schema. No markdown, no HTML, no text outside the JSON. Plain text inside strings.`;
 
+/* Shared by every explain_grammar mode: the UI renders "examples" as
+   styled German + translation rows, so they must never be written into
+   "explanation" as prose. The validator rejects an empty examples array. */
+const EXAMPLES_PLACEMENT = `- FIELD PLACEMENT: every German example sentence goes ONLY in "examples", as {"de", "en"} objects — never inside "explanation". "explanation" contains the rule only: no example sentences, no "Examples:" label, no translations. "examples" must never be empty.`;
+
 const ACTIONS = {
   check_writing: {
     check: `TASK: Review the learner's written German for this chapter's writing task.
@@ -86,17 +91,21 @@ If there are no errors, corrections is [] and the summary says so plainly.`,
   explain_grammar: {
     simpler: `TASK: The learner did not fully understand this grammar card. Re-explain the SAME rule more simply.
 - explanation: a simpler explanation of exactly this authored rule — do not add new rules, exceptions or terminology.
-- examples: 2 short example sentences using the chapter vocabulary, each with an English translation.`,
+- examples: 2 short example sentences using the chapter vocabulary, each with an English translation.
+${EXAMPLES_PLACEMENT}`,
     example: `TASK: The learner wants more examples for this grammar card.
 - explanation: one sentence restating the rule in the chapter's own terms.
-- examples: 3 new short, correct example sentences that illustrate exactly this rule, preferably with chapter vocabulary, each with an English translation.`,
+- examples: 3 new short, correct example sentences that illustrate exactly this rule, preferably with chapter vocabulary, each with an English translation.
+${EXAMPLES_PLACEMENT}`,
     compare: `TASK: The learner wants this rule compared with a rule they already know.
 - explanation: compare this rule with ONE closely related rule from an EARLIER chapter (named in the scope) — what is the same, what is different. If no earlier chapter has a related rule, compare with the basic pattern taught earlier in this chapter.
-- examples: 2 minimal-pair example sentences (one per rule), each with an English translation.`,
+- examples: 2 minimal-pair example sentences (one per rule), each with an English translation.
+${EXAMPLES_PLACEMENT}`,
     hindi: `TASK: The learner asked for a Hindi clarification of this grammar card.
 - hindi_bridge: 1–2 sentences in Hindi (Devanagari) that bridge the concept, e.g. by relating it to how Hindi marks the same idea. Keep German words in German.
 - explanation: one short English sentence restating the rule.
-- examples: 1–2 short examples with English translations.`,
+- examples: 1–2 short examples with English translations.
+${EXAMPLES_PLACEMENT}`,
   },
   quiz_review: {
     review: `TASK: The learner has SUBMITTED the chapter quiz. The questions they got wrong are listed with their chosen option and the correct option (already scored — do not rescore).

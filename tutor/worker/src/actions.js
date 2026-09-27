@@ -34,10 +34,19 @@ async function askModel(env, { action, mode, C, task, input, lang, attempt, rece
     user: buildUser({ C, task, input, lang, attempt, recent }),
     schema: SCHEMAS[schemaName],
     schemaName,
-    maxTokens: action === 'check_writing' ? 1400 : 700,
+    maxTokens: action === 'check_writing' ? 1400 : action === 'explain_grammar' ? 2000 : 700,
     timeoutMs: Number(env.LLM_TIMEOUT_MS) || 12000,
+    // Server configuration only (wrangler [vars]); never taken from the request.
+    reasoningEffort: action === 'explain_grammar' ? (env.LLM_REASONING_EFFORT_EXPLAIN || undefined) : undefined,
   };
-  const usage = { input: 0, output: 0, calls: 0 };
+  /* calls:        provider replies received (tokens known)
+     failedCalls:  requests that reached the provider but returned no
+                   usable reply (timeout, HTTP error, network error,
+                   refusal) — counted so the global daily ceiling sees them
+     estimated*:   a timed-out request may still be billed, so it is
+                   charged against the daily budget at a conservative
+                   estimate: the whole prompt plus the full output cap. */
+  const usage = { input: 0, output: 0, calls: 0, failedCalls: 0, estimatedInput: 0, estimatedOutput: 0 };
   let lastErr;
   for (let tryNo = 0; tryNo < 2; tryNo++) {
     try {
@@ -49,6 +58,14 @@ async function askModel(env, { action, mode, C, task, input, lang, attempt, rece
       return { parsed, usage, provider: res.provider, model: res.model };
     } catch (err) {
       lastErr = err;
+      // ai_unconfigured is raised before any network request, so it is not a call.
+      if (err instanceof ProviderError && err.code !== 'ai_unconfigured') {
+        usage.failedCalls++;
+        if (err.code === 'ai_timeout') {
+          usage.estimatedInput += Math.ceil((req.system.length + req.user.length) / 3);
+          usage.estimatedOutput += req.maxTokens;
+        }
+      }
       // Retry once on a transient upstream error or a malformed reply;
       // never on configuration errors, refusals or timeouts (latency).
       const retriable = err instanceof SchemaError || (err instanceof ProviderError && err.retriable && err.code !== 'ai_timeout');
@@ -63,8 +80,12 @@ function costMicros(env, usage) {
   const pin = Number(env.PRICE_INPUT_PER_MTOK_USD) || 0;
   const pout = Number(env.PRICE_OUTPUT_PER_MTOK_USD) || 0;
   // $/1M tokens == micro-dollars per token
-  return Math.round(usage.input * pin + usage.output * pout);
+  return Math.round((usage.input + (usage.estimatedInput || 0)) * pin + (usage.output + (usage.estimatedOutput || 0)) * pout);
 }
+
+/* meta.llm = "the provider was contacted", including failed attempts, so
+   klarweg-access records the request against the global daily ceiling. */
+const contacted = (usage) => usage.calls + (usage.failedCalls || 0) > 0;
 
 function aiResult(env, result, m) {
   return { ok: true, source: 'ai', result, meta: { llm: true, provider: m.provider, model: m.model, usage: m.usage, costMicros: costMicros(env, m.usage) } };
@@ -74,11 +95,11 @@ function deterministic(result) {
 }
 function fallback(env, result, err) {
   const usage = (err && err.usage) || { input: 0, output: 0, calls: 0 };
-  return { ok: true, source: 'fallback', notice: 'Klarweg AI is unavailable right now. This is the lesson’s own guidance.', error: (err && err.code) || 'ai_unavailable', result, meta: { llm: usage.calls > 0, usage, costMicros: costMicros(env, usage) } };
+  return { ok: true, source: 'fallback', notice: 'Klarweg AI is unavailable right now. This is the lesson’s own guidance.', error: (err && err.code) || 'ai_unavailable', result, meta: { llm: contacted(usage), usage, costMicros: costMicros(env, usage) } };
 }
 function unavailable(env, err) {
   const usage = (err && err.usage) || { input: 0, output: 0, calls: 0 };
-  return { ok: false, status: 503, error: (err && err.code) || 'ai_unavailable', message: 'Klarweg AI is unavailable right now. The lesson works as normal — try again later.', meta: { llm: usage.calls > 0, usage, costMicros: costMicros(env, usage) } };
+  return { ok: false, status: 503, error: (err && err.code) || 'ai_unavailable', message: 'Klarweg AI is unavailable right now. The lesson works as normal — try again later.', meta: { llm: contacted(usage), usage, costMicros: costMicros(env, usage) } };
 }
 
 function recentTitles(C, recent) {

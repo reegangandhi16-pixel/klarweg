@@ -13,18 +13,25 @@ preview_urls = false
 command = "node ../../scripts/build-tutor-registry.mjs"
 
 [vars]
-# Ships DISABLED. "none" = every request returns the deterministic
-# fallback / 503. Choose the provider from the measured evaluation
-# (tutor/eval) — do not change this without that evidence.
+# Provider chosen from the tutor/eval validation (2026-09-27).
+# Learners reach this Worker only when klarweg-access has
+# AI_ENABLED = "true"; the access kill switch stays authoritative.
+# Emergency off here: LLM_PROVIDER = "none" (every request returns the
+# deterministic fallback / 503).
 #   none | anthropic | openai | gemini        (mock = tests only)
-LLM_PROVIDER = "none"
-LLM_MODEL = ""
+LLM_PROVIDER = "openai"
+LLM_MODEL = "gpt-6-luna"
 LLM_TIMEOUT_MS = "12000"
+# Chat Completions reasoning_effort for explain_grammar ONLY (OpenAI).
+# "low" measured 15/15, p95 6.1 s; the default (medium) timed out 1/15.
+# Other actions send no reasoning_effort (model default).
+LLM_REASONING_EFFORT_EXPLAIN = "low"
 # Current list price of the selected model in USD per 1M tokens,
 # used for the global daily spend limit enforced by klarweg-access.
-# Set these together with LLM_MODEL, from the provider's pricing page.
-PRICE_INPUT_PER_MTOK_USD = "0"
-PRICE_OUTPUT_PER_MTOK_USD = "0"
+# Set these together with LLM_MODEL, from the provider's pricing page
+# (gpt-6-luna, fetched 2026-09-27 — see tutor/eval/prices.json).
+PRICE_INPUT_PER_MTOK_USD = "0.10"
+PRICE_OUTPUT_PER_MTOK_USD = "0.50"
 
 # Secrets — `wrangler secret put <NAME>`; NEVER in this file or the repo.
 # Only the one matching LLM_PROVIDER is needed:

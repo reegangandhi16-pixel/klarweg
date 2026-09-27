@@ -287,6 +287,31 @@ test('explain differently: hindi only when asked', async () => {
   assert.equal(hi.body.result.hindi_bridge, 'हिंदी');
 });
 
+test('explain differently: examples folded into the explanation (empty array) is retried', async () => {
+  const folded = JSON.stringify({ explanation: 'Verb second. Examples: Zu Hause koche ich. = At home, I cook.', examples: [], hindi_bridge: '' });
+  const good = JSON.stringify({ explanation: 'Verb second.', examples: [{ de: 'Zu Hause koche ich.', en: 'At home, I cook.' }], hindi_bridge: '' });
+  const body = { chapterId: CH, sectionId: 'grammar', itemId: 'grammar.0', mode: 'simpler' };
+
+  const e1 = env((req, n) => (n === 1 ? folded : good));
+  const ok = await call('explain_grammar', body, e1);
+  assert.equal(e1.calls.length, 2, 'one retry');
+  assert.equal(ok.body.source, 'ai');
+  assert.equal(ok.body.result.examples.length, 1);
+
+  const e2 = env(folded);
+  const bad = await call('explain_grammar', body, e2);
+  assert.equal(e2.calls.length, 2, 'exactly one retry, then give up');
+  assert.notEqual(bad.body.source, 'ai', 'an explanation without examples never reaches the learner');
+});
+
+test('every explain_grammar prompt carries the examples-placement rule', async () => {
+  for (const mode of ['simpler', 'example', 'compare', 'hindi']) {
+    const e = env(JSON.stringify({ explanation: 'x', examples: [{ de: 'Ich sehe den Hund.', en: 'I see the dog.' }], hindi_bridge: '' }));
+    await call('explain_grammar', { chapterId: CH, sectionId: 'grammar', itemId: 'grammar.0', mode }, e);
+    assert.match(e.calls[0].system, /FIELD PLACEMENT/, mode);
+  }
+});
+
 test('more like this: rejects a generated item identical to the authored one', async () => {
   const answer = await authoredAnswer();
   const e = env(JSON.stringify({ wrong: 'Das Haus wird gebaut von der Firma.', right: answer, explain: 'x' }));
@@ -311,4 +336,79 @@ test('authored accepted alternatives and the corrected B1·10 key are recognised
   const b = await call('check_exercise', { ...base, itemId: 'ex.transformActiveToPassive', input: 'Das Fahrrad wird von der Verkäuferin verkauft' }, e);
   assert.equal(b.body.result.correct, true);
   assert.equal(e.calls.length, 0);
+});
+
+/* ---------- production OpenAI path (network stubbed; never a real call) ---------- */
+const OAI = { LLM_PROVIDER: 'openai', LLM_MODEL: 'gpt-6-luna', OPENAI_API_KEY: 'sk-test-unit', PRICE_INPUT_PER_MTOK_USD: '0.10', PRICE_OUTPUT_PER_MTOK_USD: '0.50' };
+const GRAMMAR = { chapterId: CH, sectionId: 'grammar', itemId: 'grammar.0', mode: 'example' };
+const EXPLAIN_OK = JSON.stringify({ explanation: 'Masculine der becomes den.', examples: [{ de: 'Ich sehe den Hund.', en: 'I see the dog.' }], hindi_bridge: '' });
+const EXERCISE_OK = JSON.stringify({ verdict: 'incorrect', rule_hint: 'Check the article after von.', focus_fragment: '', explanation: '', hindi_bridge: '' });
+
+async function withOpenAI(respond, fn) {
+  const saved = globalThis.fetch;
+  const bodies = [];
+  globalThis.fetch = async (url, init) => { bodies.push(JSON.parse(init.body)); return respond(url, init, bodies.length); };
+  try { return await fn(bodies); } finally { globalThis.fetch = saved; }
+}
+const reply = (content) => new Response(JSON.stringify({ model: 'gpt-6-luna', choices: [{ message: { content }, finish_reason: 'stop' }], usage: { prompt_tokens: 1900, completion_tokens: 300 } }), { status: 200 });
+const byName = (b) => (b.response_format.json_schema.name === 'explain' ? EXPLAIN_OK : b.response_format.json_schema.name === 'exercise' ? EXERCISE_OK : JSON.stringify({ summary: 's', corrections: [], focus: { status: 'not_applicable', note: '' }, improved: '', rubric: [], hindi_bridge: '', next_action: 'n' }));
+
+test('reasoning_effort: server config reaches explain_grammar only; browser cannot set it; invalid values dropped', async () => {
+  await withOpenAI((u, init, n) => reply(byName(JSON.parse(init.body))), async (bodies) => {
+    const e = { ...OAI, LLM_REASONING_EFFORT_EXPLAIN: 'low' };
+    await call('explain_grammar', GRAMMAR, e);
+    await call('check_exercise', { ...EC, input: WRONG, attempt: 1 }, e);
+    await call('check_writing', { chapterId: CH, sectionId: 'writing', itemId: 'writing', input: 'Ich sehe den Mann.' }, e);
+    assert.equal(bodies[0].reasoning_effort, 'low');
+    assert.equal(bodies[0].max_completion_tokens, 2000);
+    assert.equal(bodies[0].model, 'gpt-6-luna');
+    assert.ok(!('reasoning_effort' in bodies[1]), 'exercise untouched');
+    assert.equal(bodies[1].max_completion_tokens, 700);
+    assert.ok(!('reasoning_effort' in bodies[2]), 'writing untouched');
+    assert.equal(bodies[2].max_completion_tokens, 1400);
+
+    // a browser-supplied value is never forwarded (config unset)
+    await call('explain_grammar', { ...GRAMMAR, reasoning_effort: 'max', reasoningEffort: 'max' }, OAI);
+    assert.ok(!('reasoning_effort' in bodies[3]));
+    // a value outside gpt-6-luna's documented list is not sent
+    await call('explain_grammar', GRAMMAR, { ...OAI, LLM_REASONING_EFFORT_EXPLAIN: 'minimal' });
+    assert.ok(!('reasoning_effort' in bodies[4]));
+  });
+});
+
+test('accounting: an OpenAI timeout counts as a provider call with a conservative cost; no retry', async () => {
+  const hang = (u, init) => new Promise((_, reject) => init.signal.addEventListener('abort', () => reject(Object.assign(new Error('aborted'), { name: 'AbortError' }))));
+  await withOpenAI(hang, async (bodies) => {
+    const r = await call('check_exercise', { ...EC, input: WRONG, attempt: 1 }, { ...OAI, LLM_TIMEOUT_MS: '30' });
+    assert.equal(bodies.length, 1, 'timeouts are not retried');
+    assert.equal(r.body.source, 'fallback');
+    assert.equal(r.body.meta.llm, true, 'provider was contacted');
+    assert.equal(r.body.meta.usage.calls, 0);
+    assert.equal(r.body.meta.usage.failedCalls, 1);
+    assert.equal(r.body.meta.usage.estimatedOutput, 700, 'full output cap assumed');
+    assert.ok(r.body.meta.usage.estimatedInput > 0);
+    assert.ok(r.body.meta.costMicros >= 350, 'estimate reaches the budget');
+  });
+});
+
+test('accounting: OpenAI HTTP errors count as provider calls (400 once, 500 retried once); provider "none" counts nothing', async () => {
+  await withOpenAI(() => new Response('{"error":{"message":"bad"}}', { status: 400 }), async (bodies) => {
+    const r = await call('explain_grammar', GRAMMAR, OAI);
+    assert.equal(r.status, 503);
+    assert.equal(bodies.length, 1, '400 not retried');
+    assert.equal(r.body.meta.llm, true);
+    assert.equal(r.body.meta.usage.failedCalls, 1);
+    assert.equal(r.body.meta.costMicros, 0, 'rejected requests are not estimated');
+    assert.ok(!JSON.stringify(r.body).includes('bad'), 'provider error body not returned');
+  });
+  await withOpenAI(() => new Response('upstream', { status: 500 }), async (bodies) => {
+    const r = await call('explain_grammar', GRAMMAR, OAI);
+    assert.equal(bodies.length, 2, '5xx retried once');
+    assert.equal(r.body.meta.usage.failedCalls, 2);
+  });
+  const none = await call('explain_grammar', GRAMMAR, { LLM_PROVIDER: 'none' });
+  assert.equal(none.body.meta.llm, false, 'no network call, nothing to count');
+  const noKey = await call('explain_grammar', GRAMMAR, { ...OAI, OPENAI_API_KEY: '' });
+  assert.equal(noKey.body.error, 'ai_unconfigured');
+  assert.equal(noKey.body.meta.llm, false);
 });

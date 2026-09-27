@@ -220,6 +220,49 @@ test('config interlock: sandbox mode refuses a live app id; production refuses a
   assert.match(cashfreeConfigProblem({ CASHFREE_ENV: 'production', CASHFREE_APP_ID: 'TEST1', CASHFREE_SECRET_KEY: 's' }), /TEST/);
   assert.match(cashfreeConfigProblem({ CASHFREE_ENV: 'prod', CASHFREE_APP_ID: 'x', CASHFREE_SECRET_KEY: 's' }), /must be/);
   assert.match(cashfreeConfigProblem({ CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST1' }), /SECRET/);
+  // secret-key environment marker must agree with the mode
+  assert.match(cashfreeConfigProblem({ CASHFREE_ENV: 'production', CASHFREE_APP_ID: '123live', CASHFREE_SECRET_KEY: 'cfsk_ma_test_abc' }), /sandbox \(test\) secret/);
+  assert.match(cashfreeConfigProblem({ CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST1', CASHFREE_SECRET_KEY: 'cfsk_ma_prod_abc' }), /production secret/);
+  assert.equal(cashfreeConfigProblem({ CASHFREE_ENV: 'production', CASHFREE_APP_ID: '123live', CASHFREE_SECRET_KEY: 'cfsk_ma_prod_abc' }), null);
+  // callback URLs must be well-formed https
+  assert.match(cashfreeConfigProblem({ CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST1', CASHFREE_SECRET_KEY: 's', CASHFREE_NOTIFY_URL: 'http://x.dev/webhooks/cashfree' }), /NOTIFY/);
+  assert.match(cashfreeConfigProblem({ CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST1', CASHFREE_SECRET_KEY: 's', SITE_BASE_URL: 'https://klarweg.in/' }), /SITE_BASE_URL/);
+  assert.equal(cashfreeConfigProblem({ CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST1', CASHFREE_SECRET_KEY: 's', SITE_BASE_URL: 'https://klarweg.in', CASHFREE_NOTIFY_URL: 'https://api.klarweg.in/webhooks/cashfree' }), null);
+});
+
+test('repeated confirmation polls after payment: one grant, stable status', async () => {
+  const env = makeEnv();
+  const { cookie, id } = await signupUser(env);
+  await withPhone(env, cookie);
+  const { order } = await buy(env, cookie, 'B1');
+  gatewayPays(order.id);
+  const polls = await Promise.all(Array.from({ length: 5 }, () => req(env, 'GET', `/orders/${order.id}`, { cookie })));
+  assert.ok(polls.every((p) => p.json.order.status === 'paid'));
+  assert.equal((await signedWebhook(env, successPayload(order.id))).json.duplicate, true);
+  const n = (await env.DB.prepare("SELECT COUNT(*) AS n FROM user_entitlements WHERE user_id = ?1").bind(id).first()).n;
+  assert.equal(n, 1);
+});
+
+test('abandoned checkout (gateway still ACTIVE): nothing granted, order stays open, can start again', async () => {
+  const env = makeEnv();
+  const { cookie } = await signupUser(env);
+  await withPhone(env, cookie);
+  const { order } = await buy(env, cookie, 'A2');
+  const r = await req(env, 'GET', `/orders/${order.id}`, { cookie });
+  assert.equal(r.json.order.status, 'created');
+  assert.equal(r.json.order.cashfreeStatus, 'active');
+  assert.equal((await me(env, cookie)).json.entitlements.A2, false);
+  assert.equal((await req(env, 'POST', '/orders', { cookie, body: { product_id: 'A2' } })).status, 200);
+});
+
+test('client cannot claim payment: forged webhook body without a valid signature grants nothing', async () => {
+  const env = makeEnv();
+  const { cookie } = await signupUser(env);
+  await withPhone(env, cookie);
+  const { order } = await buy(env, cookie, 'C2');
+  const r = await req(env, 'POST', '/webhooks/cashfree', { origin: null, body: successPayload(order.id), headers: { 'x-webhook-timestamp': String(Math.floor(Date.now() / 1000)), 'x-webhook-signature': 'forged' } });
+  assert.equal(r.status, 401);
+  assert.equal((await me(env, cookie)).json.entitlements.C2, false);
 });
 
 test('misconfigured payments refuse to start (no Cashfree call)', async () => {

@@ -30,6 +30,15 @@ export function cashfreeConfigProblem(env) {
   const isTestId = /^TEST/i.test(appId);
   if (declared === "production" && isTestId) return "production mode with a sandbox (TEST) app id";
   if (declared === "sandbox" && !isTestId) return "sandbox mode with a live app id";
+  /* Current-format Cashfree secret keys name their environment
+     ("cfsk_ma_test_…" / "cfsk_ma_prod_…"). When the key carries that
+     marker it must agree with the mode; older-format keys carry none and
+     are left to the app-id check above. */
+  const secretEnv = (String(env.CASHFREE_SECRET_KEY).match(/^cfsk_ma_(test|prod)_/) || [])[1];
+  if (secretEnv === "test" && declared === "production") return "production mode with a sandbox (test) secret key";
+  if (secretEnv === "prod" && declared === "sandbox") return "sandbox mode with a production secret key";
+  if (env.CASHFREE_NOTIFY_URL && !/^https:\/\/[^/]+\/webhooks\/cashfree$/.test(env.CASHFREE_NOTIFY_URL)) return "CASHFREE_NOTIFY_URL must be https://<host>/webhooks/cashfree";
+  if (env.SITE_BASE_URL && !/^https:\/\/[^/]+(\/[a-z0-9-]+)?$/i.test(env.SITE_BASE_URL)) return "SITE_BASE_URL must be an https origin (optionally with one path segment), no trailing slash";
   return null;
 }
 

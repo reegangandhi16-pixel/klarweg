@@ -31,14 +31,15 @@
      grantProduct(db, userId, productId, orderId) → idempotent, and it
    validates the product id itself, so no catalog lookup is needed here. */
 import { grantProduct } from './entitlements.js';
+import { cashfreeBaseUrl, cashfreeConfigProblem } from './cashfree-config.js';
 
 const REPLAY_WINDOW_SECONDS = 300;          // 5 minutes
 const API_VERSION = '2023-08-01';
 /* Every timestamp in this database is in seconds. */
 const nowSeconds = () => Math.floor(Date.now() / 1000);
 
-const apiBase = env =>
-  env.CASHFREE_ENV === 'production' ? 'https://api.cashfree.com/pg' : 'https://sandbox.cashfree.com/pg';
+/* Same environment selection as orders.js (cashfree-config.js). */
+const apiBase = cashfreeBaseUrl;
 
 const jsonResponse = (body, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -83,6 +84,13 @@ export async function cashfreeWebhook(request, env) {
 
   if (!secret) {
     console.error('cashfree-webhook: no signing secret configured');
+    return jsonResponse({ ok: false, error: 'not-configured' }, 503);
+  }
+
+  const configProblem = cashfreeConfigProblem(env);
+  if (configProblem) {
+    // 503 → Cashfree retries later, after the configuration is fixed.
+    console.error('cashfree-webhook: configuration refused:', configProblem);
     return jsonResponse({ ok: false, error: 'not-configured' }, 503);
   }
 
@@ -172,11 +180,20 @@ export async function cashfreeWebhook(request, env) {
     : remoteCurrency !== localCurrency ? 'currency'
     : null;
 
+  /* Cashfree can deliver PAYMENT_SUCCESS a moment before its own order
+     record reads PAID. That is not a failed payment: leave the order
+     untouched and answer 503 so Cashfree retries the delivery (the
+     learner's own GET /orders/:id poll reconciles independently). */
+  if (mismatch === 'order-not-paid') {
+    console.error('cashfree-webhook: order not yet PAID at gateway, asking for retry', order.id, remoteStatus);
+    return jsonResponse({ ok: false, error: 'not-yet-paid' }, 503);
+  }
+
   if (mismatch) {
     console.error('cashfree-webhook: verification mismatch', order.id, mismatch);
     await env.DB.prepare(
       'UPDATE orders SET status = ?1, updated_at = ?2 WHERE id = ?3'
-    ).bind(remoteStatus === 'PAID' ? 'review' : 'failed', nowSeconds(), order.id).run();
+    ).bind('review', nowSeconds(), order.id).run();
     return jsonResponse({ ok: false, error: 'verification-failed', reason: mismatch }, 400);
   }
 

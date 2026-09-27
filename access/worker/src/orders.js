@@ -2,32 +2,23 @@ import { getProduct } from "./products.js";
 import { isValidPhone } from "./auth.js";
 import { grantProduct } from "./entitlements.js";
 import {
+  cashfreeMode,
+  cashfreeBaseUrl,
+  cashfreeConfigProblem,
+  siteBaseUrl,
+  notifyUrl,
+  readJson
+} from "./cashfree-config.js";
+import {
   getSessionToken,
   findSessionUser
 } from "./sessions.js";
 
-/* Klarweg is served as a GitHub Pages project site from this repo
-   (github.com/reegangandhi16-pixel/klarweg) — not a <user>.github.io
-   root repo — so the published base path includes /klarweg/. */
-const SITE_BASE_URL = "https://reegangandhi16-pixel.github.io/klarweg";
-
-/* This Worker's own deployed URL. Cashfree's sandbox webhook for this
-   account is order_meta/notify_url-driven (confirmed via the merchant
-   dashboard, which shows no static webhook URL — it reads notify_url
-   from each Create Order request instead). Without this field Cashfree
-   has no destination to call, and webhooks-cashfree.js is never
-   invoked — confirmed root cause of all 9 pre-fix orders staying at
-   status 'created' with zero webhook delivery attempts. */
-const NOTIFY_URL = "https://klarweg-access.klarweg-issue-reports-2026.workers.dev/webhooks/cashfree";
-
+/* Sandbox/production selection, the base URLs, the return and notify
+   URLs and the TEST-vs-live app-id interlock all live in
+   cashfree-config.js — shared with webhooks-cashfree.js so the two can
+   never disagree about which Cashfree environment an order belongs to. */
 const CASHFREE_API_VERSION = "2023-08-01";
-
-/* Must match webhooks-cashfree.js's apiBase(env) exactly — both need to
-   agree on sandbox vs production or a live-mode order would be created
-   against one Cashfree environment while the webhook re-verifies it
-   against the other, and every payment would fail to reconcile. */
-const cashfreeBaseUrl = env =>
-  env.CASHFREE_ENV === "production" ? "https://api.cashfree.com/pg" : "https://sandbox.cashfree.com/pg";
 
 function json(data, status = 200) {
   return Response.json(data, { status });
@@ -49,6 +40,16 @@ export async function createOrder(request, env) {
     return json(
       { ok: false, error: "Authentication required." },
       401
+    );
+  }
+
+  const configProblem = cashfreeConfigProblem(env);
+
+  if (configProblem) {
+    console.error("orders: Cashfree configuration refused:", configProblem);
+    return json(
+      { ok: false, error: "Payments are temporarily unavailable. Please try again later." },
+      503
     );
   }
 
@@ -160,21 +161,22 @@ export async function createOrder(request, env) {
           // Web Checkout docs). The literal "{order_id}" placeholder
           // must stay a plain string, not a template interpolation of
           // the orderId variable above.
-          return_url: SITE_BASE_URL + "/account/index.html?order_id={order_id}",
+          return_url: siteBaseUrl(env, request) + "/account/index.html?order_id={order_id}",
           // Server-to-server webhook target. Confirmed required by this
           // Cashfree sandbox account's own dashboard (order_meta-driven,
           // not a static dashboard URL) — without this field Cashfree
           // never calls webhooks-cashfree.js and grantProduct() is
           // never reached.
-          notify_url: NOTIFY_URL
+          notify_url: notifyUrl(env)
         }
       })
     }
   );
 
-  const cashfreeData = await cashfreeResponse.json();
+  const cashfreeData = await readJson(cashfreeResponse);
 
-  if (!cashfreeResponse.ok) {
+  if (!cashfreeResponse.ok || !cashfreeData) {
+    console.error("orders: Cashfree create failed", cashfreeResponse.status);
     return json(
       {
         ok: false,
@@ -249,7 +251,11 @@ export async function createOrder(request, env) {
       currency: "INR",
       status: "created"
     },
-    paymentSessionId: cashfreeData.payment_session_id
+    paymentSessionId: cashfreeData.payment_session_id,
+    /* The browser SDK must run in the same Cashfree environment the
+       order was created in. The Worker's configuration is the only
+       authority — kw-checkout.js never guesses. */
+    checkout: { mode: cashfreeMode(env) }
   });
 }
 
@@ -261,6 +267,13 @@ export async function getOrder(request, env, orderId) {
     return json(
       { ok: false, error: "Authentication required." },
       401
+    );
+  }
+
+  if (cashfreeConfigProblem(env)) {
+    return json(
+      { ok: false, error: "Payment verification is temporarily unavailable." },
+      503
     );
   }
 
@@ -302,9 +315,9 @@ export async function getOrder(request, env, orderId) {
     }
   );
 
-  const cashfreeData = await cashfreeResponse.json();
+  const cashfreeData = await readJson(cashfreeResponse);
 
-  if (!cashfreeResponse.ok) {
+  if (!cashfreeResponse.ok || !cashfreeData) {
     return json(
       { ok: false, error: "Unable to verify payment order." },
       502
@@ -387,6 +400,23 @@ export async function getOrder(request, env, orderId) {
 
     localOrder.status = "paid";
     localOrder.payment_id = paymentId;
+  }
+
+  /* A checkout the learner abandoned eventually expires at Cashfree.
+     Mirror that terminal state locally (only from 'created', never over
+     'paid' or a 'review' flag) so the account shows the truth. */
+  if (
+    (cashfreeStatus === "expired" || cashfreeStatus === "terminated") &&
+    localOrder.status === "created"
+  ) {
+    await env.DB
+      .prepare(
+        `UPDATE orders SET status = 'expired', updated_at = ?1 WHERE id = ?2 AND status = 'created'`
+      )
+      .bind(Math.floor(Date.now() / 1000), localOrder.id)
+      .run();
+
+    localOrder.status = "expired";
   }
 
   return json({

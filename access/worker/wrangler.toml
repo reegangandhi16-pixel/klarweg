@@ -20,16 +20,18 @@ CASHFREE_ENV = "sandbox"
 CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
 
-# Klarweg AI (see src/ai.js). OFF until a provider is selected from the
-# tutor/eval benchmark and klarweg-tutor has its key.
+# Klarweg AI (see src/ai.js). OFF until the controlled production test is
+# approved; klarweg-tutor (provider openai) must have OPENAI_API_KEY first.
 AI_ENABLED = "false"
 AI_DAILY_UNITS = "40"
 AI_MONTHLY_UNITS = "400"
-AI_PREVIEW_DAILY_UNITS = "5"
-AI_PREVIEW_MONTHLY_UNITS = "20"
-AI_GLOBAL_DAILY_REQUESTS = "3000"
-# US$ micro-units per UTC day across all learners (5000000 = $5.00).
-AI_GLOBAL_DAILY_BUDGET_MICROS = "5000000"
+# Controlled test: no Chapter-1 preview for non-buyers (0 = always 429).
+AI_PREVIEW_DAILY_UNITS = "0"
+AI_PREVIEW_MONTHLY_UNITS = "0"
+# Controlled-test ceilings (were 3000 / $5.00). Failed provider calls count too.
+AI_GLOBAL_DAILY_REQUESTS = "300"
+# US$ micro-units per UTC day across all learners (1000000 = $1.00).
+AI_GLOBAL_DAILY_BUDGET_MICROS = "1000000"
 
 [[d1_databases]]
 binding = "DB"

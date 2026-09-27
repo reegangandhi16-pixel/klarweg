@@ -587,3 +587,50 @@ test('AI response to the browser strips internal meta (provider, tokens, cost)',
   assert.equal(r.json.meta, undefined);
   assert.ok(!r.text.includes('costMicros'));
 });
+
+/* ---------- failed provider calls cannot bypass the global day ---------- */
+const failedTutor = (failedCalls, costMicros = 0) => tutorStub({ ok: true, source: 'fallback', result: { correct: false }, error: 'ai_timeout', meta: { llm: true, usage: { input: 0, output: 0, calls: 0, failedCalls }, costMicros } });
+
+test('AI accounting: failed provider calls count against the global day; the learner is refunded', async () => {
+  const env = aiEnv(failedTutor(1, 900));
+  const u = await signupUser(env);
+  await entitle(env, u.id, 'A2');
+  const r = await req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody() });
+  assert.equal(r.status, 200);
+  assert.equal(r.json.source, 'fallback');
+  const g = await env.DB.prepare('SELECT requests, cost_micros, failures FROM ai_global').first();
+  assert.equal(g.requests, 1); assert.equal(g.cost_micros, 900); assert.equal(g.failures, 1);
+  const used = await env.DB.prepare("SELECT units FROM ai_usage WHERE period LIKE 'd:%'").first();
+  assert.equal(used.units, 0, 'learner not charged for our failure');
+});
+
+test('AI accounting: repeated refunded failures still trip the global request ceiling', async () => {
+  const t = failedTutor(2);
+  const env = aiEnv(t, { AI_GLOBAL_DAILY_REQUESTS: '4' });
+  const u = await signupUser(env);
+  await entitle(env, u.id, 'A2');
+  assert.equal((await req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody() })).status, 200);
+  assert.equal((await req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody() })).status, 200);
+  const tripped = await req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody() });
+  assert.equal(tripped.status, 503);
+  assert.equal(tripped.json.error, 'ai_busy');
+  assert.equal(t.seen.length, 2, 'no provider traffic after the ceiling');
+});
+
+test('AI accounting: our own 25 s abort is recorded as a failed request; a binding error before the tutor runs is not', async () => {
+  const timedOut = { fetch: async () => { throw Object.assign(new Error('The operation was aborted due to timeout'), { name: 'TimeoutError' }); } };
+  const env = aiEnv(timedOut);
+  const u = await signupUser(env);
+  await entitle(env, u.id, 'A2');
+  const r = await req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody() });
+  assert.equal(r.status, 503);
+  assert.equal(r.json.error, 'ai_unavailable');
+  const g = await env.DB.prepare('SELECT requests, failures FROM ai_global').first();
+  assert.equal(g.requests, 1); assert.equal(g.failures, 1);
+
+  const down = aiEnv({ fetch: async () => { throw new Error('binding down'); } });
+  const v = await signupUser(down);
+  await entitle(down, v.id, 'A2');
+  assert.equal((await req(down, 'POST', '/ai/check_exercise', { cookie: v.cookie, body: aiBody() })).status, 503);
+  assert.equal(await down.DB.prepare('SELECT requests FROM ai_global').first(), null);
+});

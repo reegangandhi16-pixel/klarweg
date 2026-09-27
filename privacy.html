@@ -170,6 +170,7 @@
       <li><strong>Cloudflare</strong> — our backend application and database run on Cloudflare Workers and D1, which process account, order, and saved-words data on our behalf.</li>
       <li><strong>GitHub Pages</strong> — hosts the Klarweg website itself.</li>
       <li><strong>jsDelivr and GitHub Pages (as a CDN)</strong> — deliver course audio clips.</li>
+      <li><strong>OpenAI</strong> — generates Klarweg AI feedback (see <a href="#klarweg-ai">Klarweg AI feedback</a> below).</li>
     </ul>
     <p>We have chosen these providers for their security and reliability. We have not independently verified, and do not make claims about, each provider's specific internal compliance certifications beyond what they publish themselves.</p>
 
@@ -177,7 +178,7 @@
     <p>Klarweg AI gives feedback on German you write or say inside a chapter (for example "Check my German" in Writing, or a hint on an exercise). It runs only when you press one of those buttons. When it is not available, the course works as normal.</p>
     <ul>
       <li><strong>What is sent:</strong> the text you submitted (for speaking, the transcript your browser's speech recognition produced — never the audio recording), and which chapter and exercise it belongs to. Your name, email address, phone number and account identifier are <em>not</em> sent to the AI model provider.</li>
-      <li><strong>Who processes it:</strong> the request passes through Klarweg's own server on Cloudflare, which then sends it to an AI model provider to generate the feedback. The provider will be named in this section before Klarweg AI is switched on.</li>
+      <li><strong>Who processes it:</strong> the request passes through Klarweg's own server on Cloudflare, which then sends it to our AI model provider, <strong>OpenAI</strong>, to generate the feedback on our behalf.</li>
       <li><strong>What we keep:</strong> Klarweg does not store the text you submit or the feedback returned. To enforce fair-use limits we store only counts: how many AI requests your account made per day and per month, and service-wide totals of requests and usage.</li>
       <li><strong>Limits:</strong> Klarweg AI has daily and monthly limits per account, and a small preview allowance on Chapter 1 of each level.</li>
       <li><strong>Accuracy:</strong> AI feedback can be wrong. The chapter's own explanations and answer keys are the authoritative version.</li>

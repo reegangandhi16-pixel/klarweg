@@ -1,8 +1,15 @@
 /* OpenAI Chat Completions — POST /v1/chat/completions.
    Structured output: response_format = { type: "json_schema",
    json_schema: { name, strict: true, schema } }. OpenAI applies
-   prompt caching automatically to long, stable prefixes. */
+   prompt caching automatically to long, stable prefixes.
+   Optional `reasoning_effort` comes from server config only
+   (LLM_REASONING_EFFORT_EXPLAIN → req.reasoningEffort). */
 import { upstreamError } from './index.js';
+
+/* Values documented for gpt-6-luna (developers.openai.com/api/docs/models/
+   gpt-6-luna). Anything else is not sent, rather than risking an HTTP 400
+   on every request from a typo in configuration. */
+export const OPENAI_REASONING_EFFORTS = ['none', 'low', 'medium', 'high', 'xhigh', 'max'];
 
 export async function callOpenAI(req, env, ProviderError) {
   const key = env.OPENAI_API_KEY;
@@ -23,6 +30,7 @@ export async function callOpenAI(req, env, ProviderError) {
         type: 'json_schema',
         json_schema: { name: req.schemaName || 'klarweg_tutor', strict: true, schema: req.schema },
       },
+      ...(OPENAI_REASONING_EFFORTS.includes(req.reasoningEffort) ? { reasoning_effort: req.reasoningEffort } : {}),
     }),
   });
   if (!res.ok) throw await upstreamError('openai', res, ProviderError);

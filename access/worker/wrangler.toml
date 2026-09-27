@@ -6,11 +6,43 @@ compatibility_date = "2024-11-06"
 
 workers_dev = true
 
+# DEPLOY WITH `npm run deploy:access` (repo root). It runs
+# scripts/predeploy-access-check.mjs first, which refuses to deploy if
+# these [vars] would silently change the live Cashfree environment.
+#
+# Cashfree: production is currently SANDBOX. To go live, change BOTH
+# CASHFREE_ENV and CASHFREE_APP_ID here in one reviewed commit, set the
+# live secret with `wrangler secret put CASHFREE_SECRET_KEY`, and deploy
+# with --allow-cashfree-env-change=production. The Worker itself refuses
+# checkout when the two values disagree (src/cashfree-config.js).
 [vars]
 CASHFREE_ENV = "sandbox"
 CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
+
+# Klarweg AI (see src/ai.js). OFF until a provider is selected from the
+# tutor/eval benchmark and klarweg-tutor has its key.
+AI_ENABLED = "false"
+AI_DAILY_UNITS = "40"
+AI_MONTHLY_UNITS = "400"
+AI_PREVIEW_DAILY_UNITS = "5"
+AI_PREVIEW_MONTHLY_UNITS = "20"
+AI_GLOBAL_DAILY_REQUESTS = "3000"
+# US$ micro-units per UTC day across all learners (5000000 = $5.00).
+AI_GLOBAL_DAILY_BUDGET_MICROS = "5000000"
+
 [[d1_databases]]
 binding = "DB"
 database_name = "klarweg-access"
 database_id = "208a8507-b0ec-48e0-812c-c4aa38c8dd32"
+
+# Private tutor Worker (tutor/worker). Deploy klarweg-tutor FIRST —
+# a service binding to a Worker that does not exist fails the deploy.
+[[services]]
+binding = "TUTOR"
+service = "klarweg-tutor"
+
+# Secrets (wrangler secret put <NAME>) — never in this file:
+#   CASHFREE_SECRET_KEY
+#   RATE_SALT
+#   CASHFREE_WEBHOOK_SECRET   (optional; defaults to CASHFREE_SECRET_KEY)

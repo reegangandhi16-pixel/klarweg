@@ -14,7 +14,12 @@
     "generate-a1-audio:stats": "tsx scripts/generate-a1-audio.ts --stats",
     "verify-audio-coverage": "tsx scripts/verify-audio-coverage.ts",
     "build-coverage": "tsx scripts/build-coverage-json.ts",
-    "prebuild": "npm run verify-audio-coverage"
+    "prebuild": "npm run verify-audio-coverage",
+    "test": "node scripts/build-tutor-registry.mjs && node --test access/worker/test/*.test.mjs tutor/worker/test/*.test.mjs",
+    "build:tutor-registry": "node scripts/build-tutor-registry.mjs",
+    "tutor:eval": "node tutor/eval/run-eval.mjs",
+    "deploy:tutor": "cd tutor/worker && wrangler deploy",
+    "deploy:access": "node scripts/predeploy-access-check.mjs && cd access/worker && wrangler deploy"
   },
   "dependencies": {
     "dotenv": "^16.4.5"

@@ -1,0 +1,33 @@
+name = "klarweg-tutor"
+main = "src/index.js"
+compatibility_date = "2024-11-06"
+
+# PRIVATE WORKER. No public URL: reachable only through the
+# klarweg-access service binding (binding "TUTOR" there).
+workers_dev = false
+preview_urls = false
+
+# The content registry (src/registry/generated/) is built from the
+# authoritative chapter files before every deploy:
+[build]
+command = "node ../../scripts/build-tutor-registry.mjs"
+
+[vars]
+# Ships DISABLED. "none" = every request returns the deterministic
+# fallback / 503. Choose the provider from the measured evaluation
+# (tutor/eval) — do not change this without that evidence.
+#   none | anthropic | openai | gemini        (mock = tests only)
+LLM_PROVIDER = "none"
+LLM_MODEL = ""
+LLM_TIMEOUT_MS = "12000"
+# Current list price of the selected model in USD per 1M tokens,
+# used for the global daily spend limit enforced by klarweg-access.
+# Set these together with LLM_MODEL, from the provider's pricing page.
+PRICE_INPUT_PER_MTOK_USD = "0"
+PRICE_OUTPUT_PER_MTOK_USD = "0"
+
+# Secrets — `wrangler secret put <NAME>`; NEVER in this file or the repo.
+# Only the one matching LLM_PROVIDER is needed:
+#   ANTHROPIC_API_KEY
+#   OPENAI_API_KEY
+#   GEMINI_API_KEY

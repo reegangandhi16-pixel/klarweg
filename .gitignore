@@ -20,3 +20,6 @@ npm-debug.log*
 
 # Cloudflare Wrangler local state
 .wrangler/
+
+# Tutor registry — generated from chapter/*-data.js by scripts/build-tutor-registry.mjs
+tutor/worker/src/registry/generated/

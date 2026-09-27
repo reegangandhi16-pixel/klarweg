@@ -12,7 +12,7 @@ const DEFAULTS = {
   feedback: { summary: 'Mock review.', corrections: [], focus: { status: 'not_applicable', note: '' }, improved: '', rubric: [], hindi_bridge: '', next_action: 'Write one more sentence.' },
   exercise: { verdict: 'incorrect', rule_hint: 'Check the rule for this exercise.', focus_fragment: '', explanation: '', hindi_bridge: '' },
   practice: { wrong: 'Ich sehe der Mann.', right: 'Ich sehe den Mann.', explain: 'Masculine object: der becomes den.' },
-  explain: { explanation: 'Mock explanation.', examples: [], hindi_bridge: '' },
+  explain: { explanation: 'Mock explanation.', examples: [{ de: 'Ich sehe den Hund.', en: 'I see the dog.' }], hindi_bridge: '' },
   quiz_review: { pattern: 'Mock pattern.', items: [], review: [], next_action: 'Re-read the grammar section.' },
 };
 

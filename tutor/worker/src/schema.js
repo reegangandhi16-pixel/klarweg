@@ -9,6 +9,7 @@
 
    Rules enforced beyond shape:
      · strings are trimmed, HTML-stripped and length-capped
+     · array minItems/maxItems (minItems rejects, maxItems truncates)
      · enums are closed (the grammar-role list is Klarweg's own
        role vocabulary; the CLIENT maps a role to its colour —
        the model never outputs a colour or markup)
@@ -108,8 +109,12 @@ export const SCHEMAS = {
     type: 'object',
     properties: {
       explanation: str(700),
+      // Every explain mode asks for examples; an empty array means the model
+      // folded them into "explanation", where the UI renders them as plain
+      // prose. Rejecting it triggers the one bounded retry.
       examples: {
         type: 'array',
+        minItems: 1,
         maxItems: 3,
         items: {
           type: 'object',
@@ -190,6 +195,7 @@ export function validate(schema, value, path = '$') {
     }
     case 'array': {
       if (!Array.isArray(value)) throw new SchemaError(path, 'expected array');
+      if (schema.minItems != null && value.length < schema.minItems) throw new SchemaError(path, `expected at least ${schema.minItems} item(s)`);
       const items = schema.maxItems != null ? value.slice(0, schema.maxItems) : value;
       return items.map((v, i) => validate(schema.items, v, `${path}[${i}]`));
     }

@@ -133,9 +133,14 @@ async function globalOk(env, day) {
          Number(row.cost_micros) < num(env, "AI_GLOBAL_DAILY_BUDGET_MICROS");
 }
 
+/* Every provider contact counts against the global day, including failed
+   ones (usage.failedCalls: timeouts, HTTP errors) — otherwise an outage
+   would let requests bypass the ceiling, because failures are refunded to
+   the learner. meta.costMicros already includes the tutor's conservative
+   estimate for timed-out calls. */
 async function recordGlobal(env, day, meta, failed) {
   const usage = (meta && meta.usage) || {};
-  const calls = Number(usage.calls) || (meta && meta.llm ? 1 : 0);
+  const calls = (Number(usage.calls) + Number(usage.failedCalls || 0)) || (meta && meta.llm ? 1 : 0);
   await env.DB.prepare(
     `INSERT INTO ai_global (day, requests, input_tokens, output_tokens, cost_micros, failures)
      VALUES (?1, ?2, ?3, ?4, ?5, ?6)
@@ -244,18 +249,24 @@ export async function aiRequest(request, env, action, ctx) {
     status = res.status;
     out = await res.json();
   } catch (err) {
-    out = { ok: false, error: "ai_unavailable", message: "Klarweg AI is unavailable right now. The lesson works as normal — try again later.", meta: { llm: false } };
+    // Our own 25 s abort means the tutor was still working — almost always
+    // on a provider call — so it is recorded as one failed request. Any
+    // other binding error happens before the tutor runs and is not.
+    const abandoned = !!err && err.name === "TimeoutError";
+    out = { ok: false, error: "ai_unavailable", message: "Klarweg AI is unavailable right now. The lesson works as normal — try again later.", meta: { llm: abandoned, usage: { calls: 0, failedCalls: abandoned ? 1 : 0 } } };
     status = 503;
   }
 
   const meta = (out && out.meta) || { llm: false };
   // Only real model work is charged to the learner. Validation errors,
   // deterministic answers ("that's correct") and outright failures are
-  // refunded, so a learner never loses quota to our outage.
+  // refunded, so a learner never loses quota to our outage. Failed
+  // provider calls still count against the GLOBAL day (recordGlobal), so
+  // refunded retries during an outage stay bounded by the daily ceiling.
   const charge = meta.llm === true && out && out.ok === true && out.source === "ai";
   const tasks = [];
   if (!charge) tasks.push(release(env, user.id, dKey, units), release(env, user.id, mKey, units));
-  if (meta.llm) tasks.push(recordGlobal(env, day, meta, !(out && out.ok)));
+  if (meta.llm) tasks.push(recordGlobal(env, day, meta, !(out && out.ok && out.source === "ai")));
   await Promise.all(tasks).catch(() => {});
   if (ctx && ctx.waitUntil && Math.random() < 0.02) ctx.waitUntil(sweepUsage(env));
 

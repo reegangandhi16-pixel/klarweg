@@ -386,7 +386,9 @@
           '<p class="kwlock-sub">All six levels, A1 through C2.</p>' +
         '</div>' +
         '<div class="kwlock-foot">' +
-          '<span>Already bought this? <a href="' + esc(prefix) + 'account/index.html">Sign in to restore access</a></span>' +
+          (state.authenticated
+            ? '<span>Bought it on a different account? <a href="' + esc(prefix) + 'account/index.html">View your access</a></span>'
+            : '<span>Already bought this? <a href="' + esc(prefix) + 'account/index.html">Sign in to restore access</a></span>') +
           '<span><a href="' + esc(levelPageUrl(level, prefix)) + '">Back to the ' + esc(LVL) + ' roadmap</a></span>' +
         '</div>' +
       '</div>';

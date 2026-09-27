@@ -302,3 +302,13 @@ test('health endpoint exposes no secrets', async () => {
   assert.ok(!txt.includes('SECRET'));
   assert.equal(JSON.parse(txt).registry.chapters, 258);
 });
+
+test('authored accepted alternatives and the corrected B1·10 key are recognised without AI', async () => {
+  const e = env('{}');
+  const base = { chapterId: 'b1-10-passiv-praesens', sectionId: 'exercises', attempt: 1 };
+  const a = await call('check_exercise', { ...base, itemId: 'ex.transformPassiveToActive', input: 'Der Chef macht die Hausaufgaben.' }, e);
+  assert.equal(a.body.result.correct, true);
+  const b = await call('check_exercise', { ...base, itemId: 'ex.transformActiveToPassive', input: 'Das Fahrrad wird von der Verkäuferin verkauft' }, e);
+  assert.equal(b.body.result.correct, true);
+  assert.equal(e.calls.length, 0);
+});

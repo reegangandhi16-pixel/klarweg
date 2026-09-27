@@ -131,12 +131,12 @@ function buildRecord(C, ctx) {
   }
   if (E.builder) exercises.builder = { target: strip(E.builder.target), answer: (E.builder.answer || []).map(String) };
   if (E.errorCorrection && E.errorCorrection.wrong && E.errorCorrection.right) {
-    exercises.errorCorrection = { title: strip(E.errorCorrection.title || ''), wrong: strip(E.errorCorrection.wrong), right: strip(E.errorCorrection.right), explain: strip(E.errorCorrection.explain || '') };
+    exercises.errorCorrection = { title: strip(E.errorCorrection.title || ''), wrong: strip(E.errorCorrection.wrong), right: strip(E.errorCorrection.right), explain: strip(E.errorCorrection.explain || ''), accepts: (E.errorCorrection.accepts || []).map(strip) };
   }
   PROMPT_EXERCISE_KEYS.forEach((k) => {
     const ex = E[k];
     if (ex && typeof ex === 'object' && ex.prompt && ex.answer) {
-      exercises[k] = { title: strip(ex.title || ''), prompt: strip(ex.prompt), answer: Array.isArray(ex.answer) ? ex.answer.map(strip) : strip(ex.answer), explain: strip(ex.explain || '') };
+      exercises[k] = { title: strip(ex.title || ''), prompt: strip(ex.prompt), answer: Array.isArray(ex.answer) ? ex.answer.map(strip) : strip(ex.answer), explain: strip(ex.explain || ''), accepts: (ex.accepts || []).map(strip) };
     }
   });
   if (Array.isArray(C.errorCorrectionSet)) {

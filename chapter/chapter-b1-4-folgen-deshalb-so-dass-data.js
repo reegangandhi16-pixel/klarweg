@@ -793,6 +793,7 @@ const CHAPTER = {
       title: 'Transform: deshalb → so … dass',
       prompt: 'Rewrite using so … dass: "Ich bin krank. Deshalb bleibe ich zu Hause."',
       answer: 'Ich bin so krank, dass ich zu Hause bleiben muss.',
+      accepts: ['Ich bin so krank, dass ich zu Hause bleibe.'],
       explain: 'so … dass raises the intensity — the result becomes an unavoidable strong consequence.'
     },
     errorCorrection: {

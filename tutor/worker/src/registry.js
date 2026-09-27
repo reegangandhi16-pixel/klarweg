@@ -76,14 +76,14 @@ export function resolveItem(C, sectionId, itemId) {
       const key = parts[1];
       if (key === 'errorCorrection' && E.errorCorrection) {
         const it = E.errorCorrection;
-        return { kind: 'correction', key: itemId, item: { prompt: it.wrong, answer: it.right, explain: it.explain, task: it.title || 'Correct the sentence.' } };
+        return { kind: 'correction', key: itemId, item: { prompt: it.wrong, answer: it.right, accepts: it.accepts || [], explain: it.explain, task: it.title || 'Correct the sentence.' } };
       }
       if (key === 'gap' && E.gap) {
         return { kind: 'gap', key: itemId, item: E.gap };
       }
       if (key !== 'mcq' && key !== 'builder' && key !== 'ecs' && E[key] && E[key].prompt) {
         const it = E[key];
-        return { kind: 'transform', key: itemId, item: { prompt: it.prompt, answer: it.answer, explain: it.explain, task: it.title || 'Transform the sentence.' } };
+        return { kind: 'transform', key: itemId, item: { prompt: it.prompt, answer: it.answer, accepts: it.accepts || [], explain: it.explain, task: it.title || 'Transform the sentence.' } };
       }
       return null;
     }

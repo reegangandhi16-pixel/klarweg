@@ -232,10 +232,10 @@ async function checkExercise(env, C, body) {
 
   const input = requireInput(body.input, INPUT_LIMITS.check_exercise);
   const item = r.item;
-  if (isExactMatch(input, item.answer)) return deterministic({ correct: true, attempt });
+  if (isExactMatch(input, item.answer) || (item.accepts || []).some((a) => isExactMatch(input, a))) return deterministic({ correct: true, attempt });
 
   const task = {
-    text: `EXERCISE (authored): ${item.task}\nPROMPT: ${item.prompt}\nANSWER KEY (authoritative, do not reveal): ${Array.isArray(item.answer) ? item.answer.join(' → ') : item.answer}\nAUTHORED EXPLANATION (do not quote until allowed): ${item.explain || '(none)'}`,
+    text: `EXERCISE (authored): ${item.task}\nPROMPT: ${item.prompt}\nANSWER KEY (authoritative, do not reveal): ${Array.isArray(item.answer) ? item.answer.join(' → ') : item.answer}${item.accepts && item.accepts.length ? `\nALSO ACCEPTED (authored): ${item.accepts.join(' | ')}` : ''}\nAUTHORED EXPLANATION (do not quote until allowed): ${item.explain || '(none)'}`,
   };
   try {
     const m = await askModel(env, { action: 'check_exercise', mode, C, task, input, lang: body.lang, attempt, recent: recentTitles(C, body.recent) });

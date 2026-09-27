@@ -19,7 +19,7 @@
      4xx { ok:false, error, message }
      503 { ok:false, error:'ai_unavailable'|…, message, meta }
    ============================================================ */
-import { ACTIONS, RequestError } from './actions.js';
+import { ACTIONS, CHAPTERLESS_ACTIONS, RequestError } from './actions.js';
 import { getChapter, isChapterId } from './registry.js';
 import { providerConfig } from './providers/index.js';
 import { BUILT_FROM } from './registry/generated/index.js';
@@ -53,9 +53,13 @@ export async function handle(request, env) {
   try { body = JSON.parse(raw); } catch { return json({ ok: false, error: 'invalid_json' }, 400); }
   if (!body || typeof body !== 'object' || Array.isArray(body)) return json({ ok: false, error: 'invalid_json' }, 400);
 
-  if (!isChapterId(body.chapterId)) return json({ ok: false, error: 'invalid_chapter', message: 'Unknown chapter.' }, 400);
-  const C = await getChapter(body.chapterId);
-  if (!C) return json({ ok: false, error: 'invalid_chapter', message: 'Unknown chapter.' }, 400);
+  // Every action except the homepage chat works on one chapter.
+  let C = null;
+  if (!CHAPTERLESS_ACTIONS.has(m[1])) {
+    if (!isChapterId(body.chapterId)) return json({ ok: false, error: 'invalid_chapter', message: 'Unknown chapter.' }, 400);
+    C = await getChapter(body.chapterId);
+    if (!C) return json({ ok: false, error: 'invalid_chapter', message: 'Unknown chapter.' }, 400);
+  }
 
   body.lang = body.lang === 'hi' ? 'hi' : 'en';
   const started = Date.now();
@@ -63,11 +67,11 @@ export async function handle(request, env) {
     const out = await action(env, C, body);
     out.meta = { ...(out.meta || {}), ms: Date.now() - started };
     // Operational log: ids and numbers only — never learner text.
-    console.log(JSON.stringify({ svc: 'klarweg-tutor', action: m[1], chapter: C.id, item: body.itemId, source: out.source || 'error', ok: out.ok, ms: out.meta.ms, in: out.meta.usage && out.meta.usage.input, out: out.meta.usage && out.meta.usage.output }));
+    console.log(JSON.stringify({ svc: 'klarweg-tutor', action: m[1], chapter: C ? C.id : null, item: C ? body.itemId : null, source: out.source || 'error', ok: out.ok, ms: out.meta.ms, in: out.meta.usage && out.meta.usage.input, out: out.meta.usage && out.meta.usage.output }));
     return json(out, out.ok ? 200 : (out.status || 503));
   } catch (err) {
     if (err instanceof RequestError) return json({ ok: false, error: err.code, message: err.message }, err.status);
-    console.error(JSON.stringify({ svc: 'klarweg-tutor', action: m[1], chapter: C.id, error: String((err && err.message) || err) }));
+    console.error(JSON.stringify({ svc: 'klarweg-tutor', action: m[1], chapter: C ? C.id : null, error: String((err && err.message) || err) }));
     return json({ ok: false, error: 'internal', message: 'Klarweg AI could not process this request.' }, 500);
   }
 }

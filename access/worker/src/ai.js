@@ -3,7 +3,10 @@
    ------------------------------------------------------------
    Routes:
      GET  /ai/status?chapter=<chapterId>
+     GET  /ai/status?scope=chat
      POST /ai/<action>      action ∈ ACTION_UNITS below
+                            (chat: the homepage chat — no chapter; any
+                            owned level; its own quota bucket)
 
    This Worker owns the HttpOnly session and the D1 database, so it
    is the only place that can answer "who is this, what did they
@@ -42,8 +45,13 @@ const ACTION_UNITS = {
   more_like_this: 1,
   explain_grammar: 1,
   quiz_review: 1,
+  chat: 1, // homepage chat — metered in its own bucket (see chatTierFor)
 };
 const EXAM_WRITING_UNITS = 3;
+
+/* Homepage chat request limits. Mirrored (and re-enforced) by the tutor's
+   CHAT_LIMITS; history text is trimmed there, the message is rejected here. */
+const CHAT_LIMITS = { message: 600, turns: 6, turnChars: 800 };
 
 const CHAPTER_ID = /^(a1|a2|b1|b2|c1|c2)-([0-9]{1,2})(?:-[a-z0-9-]*)?$/;
 const MAX_BODY = 12 * 1024;
@@ -56,6 +64,8 @@ const DEFAULTS = {
   AI_PREVIEW_MONTHLY_UNITS: 20,
   AI_GLOBAL_DAILY_REQUESTS: 3000,
   AI_GLOBAL_DAILY_BUDGET_MICROS: 5000000, // US$5.00 / day until raised deliberately
+  AI_CHAT_DAILY_UNITS: 10,
+  AI_CHAT_MONTHLY_UNITS: 100,
 };
 
 function num(env, key) {
@@ -98,9 +108,39 @@ async function tierFor(env, user, chapter) {
   return null;
 }
 
-/* Preview usage is counted in its own bucket so trying Chapter 1 of a
-   level never eats into (or borrows from) a paid allowance. */
-const bucketKey = (key, tier) => (tier === "preview" ? "p" + key : key);
+/* Homepage chat has no chapter: it is open to signed-in learners who own
+   at least one level (the same entitlement the chapter AI requires; there
+   is no chat preview), with its own small daily/monthly allowance. */
+async function chatTierFor(env, user) {
+  const ent = await readEntitlements(env.DB, user.id);
+  if (!Object.values(ent).some(Boolean)) return null;
+  return { tier: "chat", daily: num(env, "AI_CHAT_DAILY_UNITS"), monthly: num(env, "AI_CHAT_MONTHLY_UNITS") };
+}
+
+/* Validate the chat request before any quota is touched. The message is
+   rejected when too long; history is context only, so it is capped to the
+   last few turns and trimmed rather than rejected. */
+function readChatInput(body) {
+  const message = typeof body.message === "string" ? body.message.trim() : "";
+  if (!message) return { error: { error: "invalid_input", message: "Type a question first." } };
+  if (message.length > CHAT_LIMITS.message) {
+    return { error: { error: "input_too_long", message: `Questions are limited to ${CHAT_LIMITS.message} characters.` } };
+  }
+  if (body.history != null && !Array.isArray(body.history)) return { error: { error: "invalid_history", message: "Conversation history is malformed." } };
+  const history = [];
+  for (const turn of (body.history || []).slice(-CHAT_LIMITS.turns)) {
+    if (!turn || typeof turn !== "object" || (turn.role !== "user" && turn.role !== "assistant") || typeof turn.text !== "string") {
+      return { error: { error: "invalid_history", message: "Conversation history is malformed." } };
+    }
+    history.push({ role: turn.role, text: turn.text.slice(0, CHAT_LIMITS.turnChars) });
+  }
+  return { message, history };
+}
+
+/* Preview and chat usage are counted in their own buckets, so trying
+   Chapter 1 of a level or chatting on the homepage never eats into (or
+   borrows from) the chapter allowance. */
+const bucketKey = (key, tier) => (tier === "preview" ? "p" + key : tier === "chat" ? "c" + key : key);
 
 async function usedUnits(env, userId, key) {
   const row = await env.DB.prepare("SELECT units FROM ai_usage WHERE user_id = ?1 AND period = ?2").bind(userId, key).first();
@@ -156,7 +196,7 @@ async function recordGlobal(env, day, meta, failed) {
 async function sweepUsage(env) {
   try {
     const cutoff = new Date(Date.now() - 40 * 86400000).toISOString().slice(0, 10);
-    await env.DB.prepare("DELETE FROM ai_usage WHERE (period LIKE 'd:%' OR period LIKE 'pd:%') AND substr(period, instr(period, ':') + 1) < ?1").bind(cutoff).run();
+    await env.DB.prepare("DELETE FROM ai_usage WHERE (period LIKE 'd:%' OR period LIKE 'pd:%' OR period LIKE 'cd:%') AND substr(period, instr(period, ':') + 1) < ?1").bind(cutoff).run();
   } catch { /* housekeeping only */ }
 }
 
@@ -164,11 +204,12 @@ async function sweepUsage(env) {
 export async function aiStatus(request, env) {
   if (!aiEnabled(env)) return json({ ok: true, enabled: false });
   const url = new URL(request.url);
+  const isChat = url.searchParams.get("scope") === "chat";
   const chapter = parseChapterId(url.searchParams.get("chapter") || "");
   const user = await findSessionUser(env.DB, getSessionToken(request));
   if (!user) return json({ ok: true, enabled: true, signedIn: false, eligible: false });
-  if (!chapter) return json({ ok: true, enabled: true, signedIn: true, eligible: false });
-  const t = await tierFor(env, user, chapter);
+  if (!isChat && !chapter) return json({ ok: true, enabled: true, signedIn: true, eligible: false });
+  const t = isChat ? await chatTierFor(env, user) : await tierFor(env, user, chapter);
   if (!t) return json({ ok: true, enabled: true, signedIn: true, eligible: false });
   const { dayKey, monthKey } = periods();
   const [d, m] = await Promise.all([
@@ -200,12 +241,22 @@ export async function aiRequest(request, env, action, ctx) {
   try { body = JSON.parse(raw); } catch { return json({ ok: false, error: "invalid_json" }, 400); }
   if (!body || typeof body !== "object" || Array.isArray(body)) return json({ ok: false, error: "invalid_json" }, 400);
 
-  const chapter = parseChapterId(body.chapterId);
-  if (!chapter) return json({ ok: false, error: "invalid_chapter", message: "Unknown chapter." }, 400);
-
-  const t = await tierFor(env, user, chapter);
-  if (!t) {
-    return json({ ok: false, error: "not_entitled", message: `Klarweg AI for ${chapter.level} is part of the ${chapter.level} course.` }, 403);
+  const isChat = action === "chat";
+  let t, chat;
+  if (isChat) {
+    chat = readChatInput(body);
+    if (chat.error) return json({ ok: false, ...chat.error }, 400);
+    t = await chatTierFor(env, user);
+    if (!t) {
+      return json({ ok: false, error: "not_entitled", message: "Klarweg AI chat is included with every Klarweg course level." }, 403);
+    }
+  } else {
+    const chapter = parseChapterId(body.chapterId);
+    if (!chapter) return json({ ok: false, error: "invalid_chapter", message: "Unknown chapter." }, 400);
+    t = await tierFor(env, user, chapter);
+    if (!t) {
+      return json({ ok: false, error: "not_entitled", message: `Klarweg AI for ${chapter.level} is part of the ${chapter.level} course.` }, 403);
+    }
   }
 
   const { day, dayKey, monthKey } = periods();
@@ -217,15 +268,18 @@ export async function aiRequest(request, env, action, ctx) {
   const dKey = bucketKey(dayKey, t.tier);
   const mKey = bucketKey(monthKey, t.tier);
   if (!(await reserve(env, user.id, dKey, units, t.daily))) {
-    return json({ ok: false, error: "quota_day", message: t.tier === "preview" ? "You have used today’s Klarweg AI preview. It resets at midnight UTC." : "You have used today’s Klarweg AI allowance. It resets at midnight UTC." }, 429);
+    const dayMessage = t.tier === "preview" ? "You have used today’s Klarweg AI preview. It resets at midnight UTC."
+      : t.tier === "chat" ? "You have used today’s Klarweg AI chat messages. They reset at midnight UTC."
+      : "You have used today’s Klarweg AI allowance. It resets at midnight UTC.";
+    return json({ ok: false, error: "quota_day", message: dayMessage }, 429);
   }
   if (!(await reserve(env, user.id, mKey, units, t.monthly))) {
     await release(env, user.id, dKey, units);
-    return json({ ok: false, error: "quota_month", message: "You have used this month’s Klarweg AI allowance." }, 429);
+    return json({ ok: false, error: "quota_month", message: t.tier === "chat" ? "You have used this month’s Klarweg AI chat messages." : "You have used this month’s Klarweg AI allowance." }, 429);
   }
 
   // Forward ONLY learning context — no user id, email, name or phone.
-  const forward = {
+  const forward = isChat ? { message: chat.message, history: chat.history, lang: body.lang === "hi" ? "hi" : "en" } : {
     chapterId: body.chapterId,
     sectionId: typeof body.sectionId === "string" ? body.sectionId.slice(0, 20) : "",
     itemId: typeof body.itemId === "string" ? body.itemId.slice(0, 60) : "",

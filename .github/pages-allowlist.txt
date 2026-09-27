@@ -47,6 +47,7 @@ kw-placement.js
 kw-products.js
 kw-roadmap-progress.js
 kw-nav-auth.js
+kw-ai-chat.js
 site.css
 site.js
 

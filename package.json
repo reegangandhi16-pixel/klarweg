@@ -15,11 +15,12 @@
     "verify-audio-coverage": "tsx scripts/verify-audio-coverage.ts",
     "build-coverage": "tsx scripts/build-coverage-json.ts",
     "prebuild": "npm run verify-audio-coverage",
-    "test": "node scripts/build-tutor-registry.mjs && node --test access/worker/test/*.test.mjs tutor/worker/test/*.test.mjs",
+    "test": "node scripts/build-tutor-registry.mjs && node --test access/worker/test/*.test.mjs tutor/worker/test/*.test.mjs && npm run check:generated",
     "build:tutor-registry": "node scripts/build-tutor-registry.mjs",
     "tutor:eval": "node tutor/eval/run-eval.mjs",
     "deploy:tutor": "cd tutor/worker && wrangler deploy",
-    "deploy:access": "node scripts/predeploy-access-check.mjs && cd access/worker && wrangler deploy"
+    "deploy:access": "node scripts/predeploy-access-check.mjs && cd access/worker && wrangler deploy",
+    "check:generated": "node scripts/build-grammar-index.mjs --check && node scripts/seo-chapter-meta.mjs --check"
   },
   "dependencies": {
     "dotenv": "^16.4.5"

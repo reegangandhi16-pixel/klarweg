@@ -1,425 +1,396 @@
 /* ============================================================
-   KLARWEG — AI TUTOR  (chapter-tutor.js)
+   KLARWEG AI — inline feedback modules  (chapter-tutor.js)
    ------------------------------------------------------------
-   A floating tutor that answers ONLY from the current chapter.
+   Loaded by every chapter page (the filename is kept so the 258
+   pages need no edits). It is a thin client:
 
-   Retrieval-Augmented Generation, fully client-side:
-     1. build()      → chunk CHAPTER content into searchable passages
-     2. retrieve(q)  → score chunks by term overlap, return top-k
-     3. ask(q)       → send ONLY the top chunks (not the whole chapter)
-                       to window.claude.complete, with a strict system prompt
+     · it NEVER talks to an AI provider and holds no prompt,
+       answer key or rule — it sends ids + the learner's input to
+       the klarweg-access Worker (POST /ai/<action>), which checks
+       session, entitlement and quota and forwards to the private
+       klarweg-tutor Worker;
+     · it renders NOTHING until GET /ai/status says Klarweg AI is
+       enabled for this learner and chapter — with AI off, the
+       lesson looks and works exactly as before;
+     · every reply is rendered as text (textContent); German
+       fragments are handed to the chapter's own deterministic
+       word renderer, and grammar-role colours come from Klarweg's
+       .r-<role> classes, never from the model.
 
-   No backend, no vector DB — a lightweight TF-overlap ranker is plenty for a
-   single chapter (~40 chunks) and keeps the prompt small + cheap every turn.
-
-   Requires: global `CHAPTER` (chapter-data.js) and window.claude.complete.
-============================================================ */
+   Contract with chapter-app.js — it registers inline slots:
+     (window.KW_AI_QUEUE = window.KW_AI_QUEUE || []).push(spec)
+   spec = { host, kind, itemId, ...kind-specific }
+     kind 'writing'  : getText(), lock(), isExam
+     kind 'speaking' : transcript, isExam
+     kind 'exercise' : getInput(), attempt(), isExam, canPractise, onPractice(item, panel)
+     kind 'grammar'  : (grammar card)
+     kind 'quiz'     : answers [{i, chosen}]
+   ============================================================ */
 (function (global) {
   'use strict';
 
-  /* ---------- tiny DOM helper ---------- */
-  function el(tag, attrs, ...kids) {
-    const n = document.createElement(tag);
-    if (attrs) for (const k in attrs) {
-      if (k === 'class') n.className = attrs[k];
-      else if (k === 'html') n.innerHTML = attrs[k];
-      else n.setAttribute(k, attrs[k]);
-    }
-    for (const kid of kids) if (kid != null) n.append(kid.nodeType ? kid : document.createTextNode(kid));
+  var C = global.CHAPTER;
+  if (!C || !C.id) return;
+
+  var LANG_KEY = 'kw-ai-lang';
+  var RECENT_KEY = 'kw-ai-recent-' + C.id;
+  var COLOUR_ROLES = { subject: 1, verb: 1, object: 1, time: 1, place: 1, akkusativ: 1, dativ: 1, genitiv: 1, modalverb: 1, article: 1, preposition: 1, negation: 1, adjective: 1, adverb: 1, question: 1, pronoun: 1 };
+  var ROLE_LABEL = { akkusativ: 'Akkusativ', dativ: 'Dativ', genitiv: 'Genitiv', modalverb: 'modal verb', word_order: 'word order' };
+
+  function api() { return global.KW_ACCESS_API || ''; }
+
+  /* ---------- tiny DOM helpers (text only, never innerHTML with data) ---------- */
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
     return n;
   }
-  const strip = (s) => String(s == null ? '' : s).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-
-  /* ========================================================
-     1. INDEX — chunk the chapter into retrievable passages
-     ======================================================== */
-  const STOP = new Set(('a an the of to in on is are was were be and or but if then this that these those ' +
-    'der die das ein eine den dem des ich du er sie es wir ihr und oder ist sind for with from your you it ' +
-    'as at by we i my we he she they').split(' '));
-
-  function tokenize(s) {
-    return strip(s).toLowerCase()
-      .replace(/[^a-zäöüß0-9\s·]/gi, ' ')
-      .split(/\s+/)
-      .filter(t => t && t.length > 1 && !STOP.has(t));
+  function btn(label, onClick, cls) {
+    var b = el('button', 'btn btn-soft btn-small kw-ai-btn' + (cls ? ' ' + cls : ''), label);
+    b.type = 'button';
+    b.addEventListener('click', onClick);
+    return b;
   }
-
-  const index = []; // { id, type, title, text, tokens:Set, raw }
-
-  function add(type, title, text, raw) {
-    const clean = strip(text);
-    if (!clean) return;
-    index.push({
-      id: index.length,
-      type, title,
-      text: clean,
-      raw: raw || clean,
-      tokens: new Set(tokenize(title + ' ' + clean)),
-    });
-  }
-
-  function build() {
-    if (index.length || !global.CHAPTER) return;
-    const C = global.CHAPTER;
-
-    // Chapter meta / overview
-    add('overview', C.title + ' (' + (C.titleEn || '') + ')',
-      C.description + ' Level: ' + C.phase + '. Difficulty: ' + C.difficulty + '.');
-
-    // Learning outcomes
-    (C.outcomes || []).forEach(o => add('outcome', 'Learning goal', (o.de ? o.de + ' — ' : '') + o.text));
-
-    // Vocabulary — one chunk per word (rich: article, gender, plural, EN, HI, example)
-    (C.vocab || []).forEach(v => {
-      const det = [
-        (v.art ? v.art + ' ' : '') + v.de,
-        v.en ? 'English: ' + v.en : '',
-        v.hi ? 'Hindi: ' + v.hi : '',
-        v.gender ? 'gender: ' + ({ m: 'masculine (der)', f: 'feminine (die)', n: 'neuter (das)' }[v.gender] || v.gender) : '',
-        v.plural ? 'plural: ' + v.plural : '',
-        v.pos ? 'part of speech: ' + v.pos : '',
-        v.ex ? 'example: ' + v.ex + (v.exEn ? ' (' + v.exEn + ')' : '') : '',
-      ].filter(Boolean).join('. ');
-      add('vocab', 'Vocabulary: ' + (v.art ? v.art + ' ' : '') + v.de, det);
-    });
-
-    // Grammar — one chunk per rule card (body + table + examples + mistakes + hinglish)
-    (C.grammar || []).forEach(g => {
-      let parts = [g.whatIsIt, (g.body || []).map(strip).join(' ')];
-      if (g.goldenRule) parts.push('Golden rule: ' + strip(g.goldenRule));
-      if (g.why) parts.push('Why: ' + strip(g.why));
-      if (g.formula) parts.push('Formula: ' + (Array.isArray(g.formula) ? g.formula : [g.formula]).map(strip).join(' / '));
-      if (g.table) {
-        parts.push((g.table.head || []).join(' | '));
-        (g.table.rows || []).forEach(r => parts.push(r.map(strip).join(' | ')));
-      }
-      (g.example || []).forEach(e => parts.push(strip(e.html || e)));
-      (g.mistakes || []).forEach(m => parts.push('Wrong: ' + strip(m.wrong) + ' → Right: ' + strip(m.right) + (m.why ? ' (' + strip(m.why) + ')' : '')));
-      if (g.compare) { if (g.compare.intro) parts.push('Compare: ' + strip(g.compare.intro));
-        if (g.compare.head) { parts.push((g.compare.head || []).join(' | '));
-          (g.compare.rows || []).forEach(r => parts.push(r.map(strip).join(' | '))); } }
-      if (g.connect) parts.push('Connects back: ' + strip(g.connect.text || g.connect));
-      if (g.memoryTrick) parts.push('Memory trick: ' + strip(g.memoryTrick));
-      if (g.recap) parts.push('Recap: ' + g.recap.map(strip).join('; '));
-      if (g.note) parts.push(strip(g.note));
-      if (g.hinglish) parts.push('Hinglish: ' + strip(g.hinglish));
-      add('grammar', 'Grammar: ' + g.title, parts.filter(Boolean).join('. '));
-    });
-
-    // Reading passage (full text + per-token glosses)
-    if (C.reading) {
-      const passage = (C.reading.tokens || []).map(t => (typeof t === 'string' ? t : t.w)).join(' ');
-      add('reading', 'Reading: ' + (C.reading.title || ''), passage + (C.reading.translation ? '. Translation: ' + C.reading.translation : ''));
-      (C.reading.tokens || []).forEach(t => {
-        if (typeof t === 'object' && t.w && (t.en || t.hi || t.ex)) {
-          add('reading-word', 'Word in reading: ' + t.w,
-            [t.w, t.type ? '(' + t.type + ')' : '', t.en ? 'English: ' + t.en : '', t.hi ? 'Hindi: ' + t.hi : '', t.ex ? 'example: ' + t.ex : ''].filter(Boolean).join('. '));
-        }
-      });
+  /* German text goes through the chapter's own renderer (tap-to-look-up,
+     deterministic role colouring) when available; plain text otherwise. */
+  function german(text) {
+    var ui = global.KW_ChapterUI;
+    if (ui && typeof ui.germanSpans === 'function') {
+      try { var n = ui.germanSpans(String(text)); if (n) return n; } catch (e) { /* fall through */ }
     }
-
-    // Listening transcript
-    if (C.listening) add('listening', 'Listening transcript',
-      (C.listening.transcript || '') + (C.listening.translation ? '. Translation: ' + C.listening.translation : ''));
-
-    // Speaking prompts
-    (C.speaking || []).forEach(s => add('speaking', 'Speaking practice', s.de + (s.en ? ' — ' + s.en : '')));
-
-    // Writing prompt
-    if (C.writing) add('writing', 'Writing task', C.writing.prompt + ' Starters: ' + (C.writing.starters || []).join(', '));
-
-    // Exercises
-    if (C.exercises) {
-      const ex = C.exercises;
-      if (ex.mcq) add('exercise', 'Exercise (multiple choice)', ex.mcq.q + ' Options: ' + (ex.mcq.options || []).join(', ') + (ex.mcq.explain ? '. ' + ex.mcq.explain : ''));
-      const gaps = [].concat(ex.gap || ex.gaps || []);
-      gaps.forEach(g => add('exercise', 'Exercise (gap fill)', strip(g.sentence || g.q || g.text || '') + (g.answer ? ' answer: ' + g.answer : '')));
-      if (ex.builder) add('exercise', 'Exercise (sentence builder)', strip(ex.builder.target || ex.builder.hint || '') + ' words: ' + [].concat(ex.builder.tokens || ex.builder.words || []).join(' '));
-    }
-
-    // Quiz
-    [].concat(C.quiz || []).forEach((q, i) => add('quiz', 'Quiz question ' + (i + 1),
-      q.q + ' Options: ' + (q.options || []).join(', ') + (q.explain ? '. Explanation: ' + q.explain : '')));
-
-    // Takeaways + revision tips
-    (C.takeaways || []).forEach(t => add('summary', 'Key takeaway', strip(t.html || t)));
-    (C.revisionTips || []).forEach(t => add('summary', 'Revision tip', strip(t)));
+    return el('span', 'de', text);
   }
 
-  /* ========================================================
-     2. RETRIEVE — score chunks by query-term overlap
-     ======================================================== */
-  function retrieve(query, k) {
-    k = k || 5;
-    const qTokens = tokenize(query);
-    if (!qTokens.length) return index.slice(0, 3);
-    const qSet = new Set(qTokens);
+  function lang() { try { return localStorage.getItem(LANG_KEY) === 'hi' ? 'hi' : 'en'; } catch (e) { return 'en'; } }
+  function setLang(v) { try { localStorage.setItem(LANG_KEY, v); } catch (e) {} }
 
-    // Type boosts: a "vocabulary" question should favour vocab chunks, etc.
-    const ql = query.toLowerCase();
-    const boost = {
-      vocab: /\b(mean|meaning|translate|translation|word|vocab|gender|plural|article|matlab|kya hai)\b/.test(ql) ? 1.6 : 1,
-      grammar: /\b(why|grammar|rule|case|nominativ|akkusativ|conjugat|ending|der|die|das|explain)\b/.test(ql) ? 1.5 : 1,
-      reading: /\b(read|passage|text|story)\b/.test(ql) ? 1.5 : 1,
-      quiz: /\b(quiz|answer|question|test)\b/.test(ql) ? 1.4 : 1,
-      exercise: /\b(exercise|practice|gap|fill|build)\b/.test(ql) ? 1.4 : 1,
-    };
-
-    const scored = index.map(ch => {
-      let overlap = 0;
-      ch.tokens.forEach(t => { if (qSet.has(t)) overlap++; });
-      // also reward exact substring of a query word inside the chunk title (e.g. "Mann")
-      let titleHit = 0;
-      qTokens.forEach(t => { if (ch.title.toLowerCase().includes(t)) titleHit += 1.5; });
-      let score = (overlap + titleHit) * (boost[ch.type] || 1);
-      return { ch, score };
-    }).filter(s => s.score > 0)
-      .sort((a, b) => b.score - a.score);
-
-    if (!scored.length) return index.filter(c => c.type === 'overview' || c.type === 'grammar').slice(0, 3);
-    return scored.slice(0, k).map(s => s.ch);
-  }
-
-  /* ========================================================
-     3. ASK — RAG retrieval + provider-agnostic callLLM adapter
-     ======================================================== */
-
-  // Endpoint for the secure server route. Override per deployment with:
-  //   window.KW_TUTOR_ENDPOINT = 'https://api.yoursite.com/api/chat'
-  function endpoint() {
-    return global.KW_TUTOR_ENDPOINT || '/api/chat';
-  }
-
-  /**
-   * Provider-agnostic client adapter. Sends ONLY the retrieved chunks + the
-   * question to the secure /api/chat endpoint (Anthropic Claude server-side).
-   * Resolution order:
-   *   1. POST /api/chat            — production path (key stays server-side)
-   *   2. window.claude.complete    — in-host preview fallback (this workspace)
-   *   3. offline chunk summary     — never leave the student with nothing
-   */
-  async function callLLM(query, hits, history) {
-    const C = global.CHAPTER || {};
-    function slugify(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
-
-    // ── 1. Secure backend endpoint ──────────────────────────
+  /* Session-only mistake memory (item ids, never text): lets the server
+     say "you also struggled with …" without any stored learner history. */
+  function recent() { try { return JSON.parse(sessionStorage.getItem(RECENT_KEY) || '[]'); } catch (e) { return []; } }
+  function noteMistake(itemId) {
     try {
-      const res = await fetch(endpoint(), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',          // send the session cookie
-        body: JSON.stringify({
-          // Server-side RAG: send ONLY an id + the question. The server owns
-          // the chapter content and does its own retrieval — we never ship
-          // lesson text (which the server would not trust anyway).
-          chapterId: (C.id || ((C.phase ? C.phase.slice(0, 2).toLowerCase() : 'a1') + '-' + (C.number || '') + '-' + slugify(C.title || ''))),
-          question: query,
-          history: (history || []).slice(-6).map(m => ({ role: m.role === 'bot' ? 'assistant' : 'user', text: m.text })),
-        }),
-      });
-      if (res.ok || res.status === 503) {
-        const data = await res.json();
-        if (data && typeof data.text === 'string' && data.text.trim()) {
-          return { text: data.text.trim(), sources: hits, offline: !!data.fallback };
-        }
-      }
-      // 401/403/429/4xx or empty → fall through to the next strategy
-    } catch (e) {
-      // network/endpoint missing (e.g. static preview) → fall through
-    }
-
-    // ── 2. In-host preview fallback (window.claude) ─────────
-    if (global.claude && typeof global.claude.complete === 'function') {
-      const recent = (history || []).slice(-4)
-        .map(m => (m.role === 'user' ? 'Student' : 'Tutor') + ': ' + m.text).join('\n');
-      const context = hits.map((c, i) => '[' + (i + 1) + '] ' + c.title + ': ' + c.text).join('\n\n');
-      const system =
-        'You are Klara, a warm, patient German tutor inside the Klarweg lesson "' +
-        (C.title || '') + ' (' + (C.titleEn || '') + ')", level ' + (C.phase || 'A1') + '.\n' +
-        'The student is a beginner who speaks Hindi and English. Be encouraging and concrete.\n\n' +
-        'STRICT RULES:\n' +
-        '1. Answer ONLY using the CHAPTER CONTEXT below. This tutor is scoped to THIS chapter.\n' +
-        '2. If the answer is not in the context, say so kindly and point to what the chapter DOES cover. Never invent content beyond the chapter.\n' +
-        '3. Beginner-friendly and short (under ~120 words). Prefer a clear example.\n' +
-        '4. Support German, English, and Hindi. For a German word/sentence add the English meaning and a simple Roman-Hindi gloss (e.g. "aadmi"), no diacritics.\n' +
-        '5. No HTML or markdown tables.\n' +
-        '6. Never give writing/quiz answers outright — nudge with a hint first.\n\n' +
-        'CHAPTER CONTEXT (the only source you may use):\n' + context +
-        (recent ? '\n\nRECENT CONVERSATION:\n' + recent : '');
-      try {
-        const out = await global.claude.complete({ messages: [{ role: 'user', content: system + '\n\nStudent question: ' + query + '\n\nTutor answer:' }] });
-        if (out && out.trim()) return { text: out.trim(), sources: hits, offline: false };
-      } catch (e) { /* fall through */ }
-    }
-
-    // ── 3. Offline fallback — surface the retrieved chunks ──
-    return {
-      text: "I can't reach the AI tutor right now, but here's the most relevant part of this chapter:\n\n" +
-        hits.slice(0, 2).map(c => '• ' + c.title + ': ' + c.text).join('\n\n') +
-        '\n\nPlease try again in a moment.',
-      sources: hits,
-      offline: true,
-    };
+      var list = recent().filter(function (x) { return x !== itemId; });
+      list.unshift(itemId);
+      sessionStorage.setItem(RECENT_KEY, JSON.stringify(list.slice(0, 5)));
+    } catch (e) {}
   }
 
-  async function ask(query, history) {
-    build();
-    const hits = retrieve(query, 5);   // RAG: only the top chunks leave the page
-    return callLLM(query, hits, history);
+  /* ---------- status: one request per page, only when a slot exists ---------- */
+  var statusPromise = null;
+  function status() {
+    if (statusPromise) return statusPromise;
+    if (!api() || typeof fetch !== 'function') return (statusPromise = Promise.resolve({ enabled: false }));
+    statusPromise = fetch(api() + '/ai/status?chapter=' + encodeURIComponent(C.id), { credentials: 'include' })
+      .then(function (r) { return r.ok ? r.json() : { enabled: false }; })
+      .catch(function () { return { enabled: false }; });
+    return statusPromise;
   }
 
-  /* ========================================================
-     4. UI — floating button + right-side chat panel
-     ======================================================== */
-  const SUGGESTIONS = [
-    'Explain the nominative simply',
-    'What does "der/die/das" mean?',
-    'Give me an example sentence',
-    'Why is it "der Mann"?',
-  ];
-
-  function buildUI() {
-    if (document.getElementById('kw-tutor-fab')) return;
-
-    // Floating action button
-    const fab = el('button', { id: 'kw-tutor-fab', class: 'kw-tutor-fab', type: 'button', 'aria-label': 'Ask the AI tutor' });
-    fab.innerHTML =
-      '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3C7 3 3 6.4 3 10.6c0 2.2 1.1 4.1 2.9 5.5L5 21l4.3-2.1c.85.2 1.76.3 2.7.3 5 0 9-3.4 9-7.6S17 3 12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 10.5h7M8.5 13h4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>' +
-      '<span class="kw-tutor-fab-label">Ask Klara</span>';
-    document.body.appendChild(fab);
-
-    // Scrim + panel
-    const scrim = el('div', { id: 'kw-tutor-scrim', class: 'kw-tutor-scrim' });
-    const panel = el('div', { id: 'kw-tutor-panel', class: 'kw-tutor-panel', role: 'dialog', 'aria-label': 'AI tutor', 'aria-modal': 'false' });
-
-    const C = global.CHAPTER || {};
-    panel.innerHTML =
-      '<header class="kw-tutor-head">' +
-        '<div class="kw-tutor-head-l">' +
-          '<span class="kw-tutor-avatar">K</span>' +
-          '<div><div class="kw-tutor-name">Klara · AI Tutor</div>' +
-          '<div class="kw-tutor-scope">Chapter ' + (C.number || '') + ' · ' + (C.title || '') + '</div></div>' +
-        '</div>' +
-        '<button class="kw-tutor-close" type="button" aria-label="Close tutor">&#10005;</button>' +
-      '</header>' +
-      '<div class="kw-tutor-log" id="kw-tutor-log"></div>' +
-      '<div class="kw-tutor-suggest" id="kw-tutor-suggest"></div>' +
-      '<form class="kw-tutor-input" id="kw-tutor-form">' +
-        '<textarea id="kw-tutor-text" rows="1" placeholder="Ask about this chapter…" aria-label="Your question"></textarea>' +
-        '<button class="kw-tutor-send" type="submit" aria-label="Send">' +
-          '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12l16-7-7 16-2-7-7-2Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>' +
-        '</button>' +
-      '</form>' +
-      '<div class="kw-tutor-foot">Answers come only from this chapter. Klara can make mistakes — check the lesson.</div>';
-
-    document.body.append(scrim, panel);
-
-    const log = panel.querySelector('#kw-tutor-log');
-    const form = panel.querySelector('#kw-tutor-form');
-    const textarea = panel.querySelector('#kw-tutor-text');
-    const suggestWrap = panel.querySelector('#kw-tutor-suggest');
-    const history = [];
-
-    function open() {
-      build();
-      document.body.classList.add('kw-tutor-open');
-      panel.classList.add('open'); scrim.classList.add('open'); fab.classList.add('hidden');
-      if (!log.childElementCount) greet();
-      setTimeout(() => textarea.focus(), 280);
-    }
-    function close() {
-      document.body.classList.remove('kw-tutor-open');
-      panel.classList.remove('open'); scrim.classList.remove('open'); fab.classList.remove('hidden');
-    }
-    fab.addEventListener('click', open);
-    scrim.addEventListener('click', close);
-    panel.querySelector('.kw-tutor-close').addEventListener('click', close);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panel.classList.contains('open')) close(); });
-
-    function bubble(role, text, opts) {
-      opts = opts || {};
-      const b = el('div', { class: 'kw-tutor-msg ' + role });
-      const body = el('div', { class: 'kw-tutor-bubble' });
-      body.innerHTML = opts.html || formatText(text);
-      b.appendChild(body);
-      if (opts.sources && opts.sources.length) {
-        const src = el('div', { class: 'kw-tutor-sources' });
-        src.appendChild(el('span', { class: 'kw-tutor-sources-label' }, 'From this chapter:'));
-        opts.sources.slice(0, 3).forEach(s => src.appendChild(el('span', { class: 'kw-tutor-chip' }, s.title.replace(/^(Vocabulary|Grammar|Reading|Quiz|Exercise|Word in reading): ?/, ''))));
-        body.appendChild(src);
-      }
-      log.appendChild(b);
-      log.scrollTop = log.scrollHeight;
-      return body;
-    }
-
-    function formatText(t) {
-      // minimal, safe formatting: escape, then bold **x**, line breaks, simple bullets
-      const esc = String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      return esc
-        .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
-        .replace(/^[•\-]\s?(.+)$/gm, '<span class="kw-li">• $1</span>')
-        .replace(/\n/g, '<br>');
-    }
-
-    function greet() {
-      bubble('bot', 'Hallo! 👋 I\'m Klara. Ask me anything about **' + (C.title || 'this chapter') +
-        '** — a word\'s meaning, why an article is der/die/das, an example sentence, or help with an exercise. ' +
-        'You can write in English, German, or Hindi.');
-      renderSuggestions();
-    }
-
-    function renderSuggestions() {
-      suggestWrap.innerHTML = '';
-      SUGGESTIONS.forEach(s => {
-        const chip = el('button', { class: 'kw-tutor-suggest-chip', type: 'button' }, s);
-        chip.addEventListener('click', () => { textarea.value = s; submit(); });
-        suggestWrap.appendChild(chip);
-      });
-    }
-
-    let busy = false;
-    async function submit() {
-      const q = textarea.value.trim();
-      if (!q || busy) return;
-      busy = true;
-      suggestWrap.innerHTML = '';
-      textarea.value = ''; autosize();
-      bubble('user', q);
-      history.push({ role: 'user', text: q });
-
-      const typing = bubble('bot', '', { html: '<span class="kw-tutor-typing"><i></i><i></i><i></i></span>' });
-      try {
-        const res = await ask(q, history);
-        typing.closest('.kw-tutor-msg').remove();
-        const body = bubble('bot', res.text, { sources: res.sources });
-        history.push({ role: 'bot', text: res.text });
-      } catch (err) {
-        typing.closest('.kw-tutor-msg').remove();
-        bubble('bot', 'Sorry — I had trouble answering just now. Please try again.');
-      } finally {
-        busy = false;
-        renderSuggestions();
-        textarea.focus();
-      }
-    }
-
-    form.addEventListener('submit', (e) => { e.preventDefault(); submit(); });
-    textarea.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); }
+  /* ---------- request ---------- */
+  function call(action, payload) {
+    var body = Object.assign({ chapterId: C.id, lang: lang(), recent: recent() }, payload);
+    return fetch(api() + '/ai/' + action, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { j = j || {}; j.httpStatus = r.status; return j; });
+    }, function () {
+      return { ok: false, httpStatus: 0, error: 'network', message: 'Klarweg AI could not be reached. Check your connection — the lesson works as normal.' };
     });
-    function autosize() { textarea.style.height = 'auto'; textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px'; }
-    textarea.addEventListener('input', autosize);
   }
 
-  /* ---------- public API + boot ---------- */
-  global.KW_Tutor = { build, retrieve, ask };
-
-  function boot() {
-    if (!global.CHAPTER) return;       // only on chapter pages
-    build();
-    buildUI();
+  /* ---------- output panel ---------- */
+  function panel(host) {
+    var p = null;
+    for (var i = 0; i < host.children.length; i++) if (host.children[i].classList.contains('kw-ai-out')) p = host.children[i];
+    if (!p) { p = el('div', 'kw-ai-out'); p.setAttribute('aria-live', 'polite'); host.appendChild(p); }
+    p.innerHTML = '';
+    return p;
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
+  function head(p, label) {
+    var h = el('div', 'kw-ai-head');
+    h.appendChild(el('span', 'kw-ai-mark', 'Klarweg AI'));
+    if (label) h.appendChild(el('span', 'kw-ai-sub', label));
+    p.appendChild(h);
+  }
+  function busy(host, label) {
+    var p = panel(host);
+    head(p, label);
+    p.appendChild(el('p', 'kw-ai-busy', 'Checking…'));
+    return p;
+  }
+  function failure(p, res) {
+    p.innerHTML = '';
+    head(p, null);
+    var msg = res.message || 'Klarweg AI is unavailable right now. The lesson works as normal.';
+    if (res.httpStatus === 401) msg = 'Your session has ended. Sign in again to use Klarweg AI.';
+    p.appendChild(el('p', 'kw-ai-note', msg));
+  }
+  function notice(p, res) {
+    if (res.source === 'fallback' && res.notice) p.appendChild(el('p', 'kw-ai-note', res.notice));
+  }
+  function roleChip(role) {
+    return el('span', 'kw-ai-role' + (COLOUR_ROLES[role] ? ' r-' + role : ''), ROLE_LABEL[role] || String(role || '').replace(/_/g, ' '));
+  }
+  function hindi(p, text) {
+    if (!text) return;
+    var d = el('div', 'kw-ai-hindi', text);
+    d.lang = 'hi';
+    p.appendChild(d);
+  }
+  function labelled(label, content, cls) {
+    var d = el('div', cls || 'kw-ai-next');
+    d.appendChild(el('span', 'kw-ai-label', label));
+    d.appendChild(typeof content === 'string' ? el('span', null, content) : content);
+    return d;
+  }
+  function langToggle() {
+    var wrap = el('div', 'kw-ai-lang');
+    wrap.setAttribute('role', 'group');
+    wrap.setAttribute('aria-label', 'Explanation language');
+    [['en', 'English'], ['hi', 'English + हिंदी']].forEach(function (o) {
+      var b = el('button', 'kw-ai-lang-opt' + (lang() === o[0] ? ' is-active' : ''), o[1]);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', lang() === o[0] ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        setLang(o[0]);
+        Array.prototype.forEach.call(wrap.children, function (c) { var on = c === b; c.classList.toggle('is-active', on); c.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      });
+      wrap.appendChild(b);
+    });
+    return wrap;
+  }
+  function actionsRow(host) {
+    var row = el('div', 'kw-ai-actions');
+    host.appendChild(row);
+    return row;
+  }
+  function setDisabled(row, v) { Array.prototype.forEach.call(row.querySelectorAll('.kw-ai-btn'), function (b) { b.disabled = v; }); }
+
+  /* ---------- feedback rendering (writing / speaking) ---------- */
+  function renderFeedback(p, r) {
+    if (r.summary) p.appendChild(el('p', 'kw-ai-summary', r.summary));
+    if (r.corrections && r.corrections.length) {
+      var ul = el('ul', 'kw-ai-corrections');
+      r.corrections.forEach(function (c) {
+        var li = el('li', 'kw-ai-corr' + (c.severity === 'style' ? ' is-style' : ''));
+        var line = el('div', 'kw-ai-corr-line');
+        line.appendChild(el('span', 'kw-ai-wrong de', c.wrong));
+        line.appendChild(el('span', 'kw-ai-arrow', '→'));
+        var right = el('span', 'kw-ai-right');
+        right.appendChild(german(c.right));
+        line.appendChild(right);
+        line.appendChild(roleChip(c.role));
+        li.appendChild(line);
+        if (c.reason) li.appendChild(el('div', 'kw-ai-reason', c.reason));
+        ul.appendChild(li);
+      });
+      p.appendChild(ul);
+    }
+    if (r.focus && r.focus.note && r.focus.status !== 'not_applicable') p.appendChild(labelled('This chapter’s grammar', r.focus.note, 'kw-ai-focus'));
+    if (r.rubric && r.rubric.length) {
+      var rb = el('div', 'kw-ai-rubric');
+      r.rubric.forEach(function (x) {
+        var row = el('div', 'kw-ai-rubric-row');
+        row.appendChild(el('span', 'kw-ai-label', x.criterion));
+        row.appendChild(el('span', 'kw-ai-band is-' + x.band, x.band));
+        row.appendChild(el('span', 'kw-ai-reason', x.note));
+        rb.appendChild(row);
+      });
+      p.appendChild(rb);
+    }
+    if (r.improved) {
+      var body = el('p', 'kw-ai-improved-text');
+      body.appendChild(german(r.improved));
+      p.appendChild(labelled('Your text, corrected at your level', body, 'kw-ai-improved'));
+    }
+    hindi(p, r.hindi_bridge);
+    if (r.next_action) p.appendChild(labelled('Next', r.next_action));
+  }
+
+  /* ---------- kinds ---------- */
+  function mountWriting(spec) {
+    var row = actionsRow(spec.host);
+    function run(mode, label) {
+      var text = String(spec.getText() || '').trim();
+      if (!text) { var e = panel(spec.host); head(e, null); e.appendChild(el('p', 'kw-ai-note', 'Write your text first.')); return; }
+      var payload = { sectionId: 'writing', itemId: 'writing', input: text };
+      if (spec.isExam) { spec.lock(); payload.submitted = true; } else payload.mode = mode;
+      var p = busy(spec.host, label);
+      setDisabled(row, true);
+      call('check_writing', payload).then(function (res) {
+        // An exam submission stays locked; a failed call unlocks so the learner can retry.
+        setDisabled(row, !!spec.isExam && res.ok);
+        if (spec.isExam && !res.ok && spec.unlock) spec.unlock();
+        if (!res.ok) return failure(p, res);
+        p.innerHTML = '';
+        head(p, label);
+        renderFeedback(p, res.result || {});
+      });
+    }
+    if (spec.isExam) {
+      row.appendChild(btn('Submit for examiner feedback', function () { run('exam', 'Examiner-style feedback'); }, 'kw-ai-primary'));
+      row.appendChild(el('span', 'kw-ai-hint', 'Your text is locked once submitted, as in the exam.'));
+    } else {
+      row.appendChild(btn('Check my German', function () { run('check', 'Feedback on your German'); }, 'kw-ai-primary'));
+      row.appendChild(btn('Improve without raising my level', function () { run('improve', 'Corrected at your level'); }));
+      row.appendChild(langToggle());
+    }
+  }
+
+  function mountSpeaking(spec) {
+    var row = actionsRow(spec.host);
+    var label = 'Grammar and word choice in what was recognised';
+    row.appendChild(btn('Check my German', function () {
+      var p = busy(spec.host, label);
+      setDisabled(row, true);
+      call('check_speaking', { sectionId: 'speaking', itemId: spec.itemId, input: spec.transcript }).then(function (res) {
+        setDisabled(row, false);
+        if (!res.ok) return failure(p, res);
+        p.innerHTML = '';
+        head(p, label);
+        renderFeedback(p, res.result || {});
+        p.appendChild(el('p', 'kw-ai-note', 'Based on the speech-recognition transcript. Pronunciation is not assessed.'));
+      });
+    }, 'kw-ai-primary'));
+  }
+
+  function mountExercise(spec) {
+    var row = actionsRow(spec.host);
+    function run(mode) {
+      var input = spec.getInput();
+      if (!String(input || '').replace(/[|\s]/g, '')) { var e = panel(spec.host); head(e, null); e.appendChild(el('p', 'kw-ai-note', 'Type your answer first.')); return; }
+      var attempt = spec.isExam ? 3 : spec.attempt();
+      var label = mode === 'why' ? 'Why your answer is wrong' : 'Hint ' + Math.min(attempt, 3) + ' of 3';
+      var p = busy(spec.host, label);
+      setDisabled(row, true);
+      call('check_exercise', { sectionId: 'exercises', itemId: spec.itemId, input: input, attempt: attempt, mode: mode }).then(function (res) {
+        setDisabled(row, false);
+        if (!res.ok) return failure(p, res);
+        var r = res.result || {};
+        p.innerHTML = '';
+        head(p, label);
+        notice(p, res);
+        if (r.correct) {
+          p.appendChild(el('p', 'kw-ai-summary', r.variant ? 'Accepted — your answer is also correct.' : 'Correct.'));
+          if (r.explanation) p.appendChild(el('p', 'kw-ai-reason', r.explanation));
+          if (r.variant && r.answer) p.appendChild(labelled('The lesson’s version', german(r.answer)));
+          return;
+        }
+        noteMistake(spec.itemId);
+        if (r.rule_hint) p.appendChild(el('p', 'kw-ai-summary', r.rule_hint));
+        if (r.focus_fragment) p.appendChild(labelled('Look again at', el('span', 'kw-ai-wrong de', r.focus_fragment), 'kw-ai-focus'));
+        else if (r.missing) p.appendChild(el('p', 'kw-ai-reason', 'Something is missing at the end of your answer.'));
+        if (r.explanation) p.appendChild(el('p', 'kw-ai-reason', r.explanation));
+        if (r.answer) {
+          p.appendChild(labelled('Answer', german(r.answer)));
+          if (r.authored_explain) p.appendChild(el('p', 'kw-ai-reason', r.authored_explain));
+        }
+        hindi(p, r.hindi_bridge);
+      });
+    }
+    if (!spec.isExam) row.appendChild(btn('Give me a hint', function () { run('hint'); }, 'kw-ai-primary'));
+    row.appendChild(btn('Why is my answer wrong?', function () { run('why'); }));
+    if (spec.canPractise && !spec.isExam) {
+      row.appendChild(btn('Give me another like this', function () {
+        var p = busy(spec.host, 'Practice sentence');
+        setDisabled(row, true);
+        call('more_like_this', { sectionId: 'exercises', itemId: spec.itemId }).then(function (res) {
+          setDisabled(row, false);
+          if (!res.ok) return failure(p, res);
+          p.innerHTML = '';
+          head(p, 'Practice sentence · generated, not part of the lesson');
+          if (spec.onPractice) spec.onPractice(res.result, p);
+        });
+      }));
+    }
+    if (!spec.isExam) row.appendChild(langToggle());
+  }
+
+  function mountGrammar(spec) {
+    var row = actionsRow(spec.host);
+    row.appendChild(el('span', 'kw-ai-hint', 'Explain differently'));
+    [['simpler', 'Simpler'], ['example', 'More examples'], ['compare', 'Compare with an earlier rule'], ['hindi', 'हिंदी में']].forEach(function (m) {
+      row.appendChild(btn(m[1], function () {
+        var p = busy(spec.host, m[1]);
+        setDisabled(row, true);
+        call('explain_grammar', { sectionId: 'grammar', itemId: spec.itemId, mode: m[0] }).then(function (res) {
+          setDisabled(row, false);
+          if (!res.ok) return failure(p, res);
+          var r = res.result || {};
+          p.innerHTML = '';
+          head(p, m[1]);
+          if (r.explanation) p.appendChild(el('p', 'kw-ai-summary', r.explanation));
+          (r.examples || []).forEach(function (x) {
+            var d = el('div', 'kw-ai-example');
+            d.appendChild(german(x.de));
+            d.appendChild(el('span', 'kw-ai-reason', x.en));
+            p.appendChild(d);
+          });
+          hindi(p, r.hindi_bridge);
+          p.appendChild(el('p', 'kw-ai-note', 'The rule card above is the authoritative version.'));
+        });
+      }));
+    });
+  }
+
+  function mountQuiz(spec) {
+    var row = actionsRow(spec.host);
+    row.appendChild(btn('Review my mistakes', function () {
+      var p = busy(spec.host, 'Quiz review');
+      setDisabled(row, true);
+      call('quiz_review', { sectionId: 'quiz', itemId: 'quiz', answers: spec.answers }).then(function (res) {
+        setDisabled(row, false);
+        if (!res.ok) return failure(p, res);
+        var r = res.result || {};
+        p.innerHTML = '';
+        head(p, 'Quiz review');
+        notice(p, res);
+        if (r.allCorrect) { p.appendChild(el('p', 'kw-ai-summary', 'No mistakes to review.')); return; }
+        if (r.pattern) p.appendChild(el('p', 'kw-ai-summary', r.pattern));
+        var ul = el('ul', 'kw-ai-corrections');
+        (r.items || []).forEach(function (x) {
+          var li = el('li', 'kw-ai-corr');
+          li.appendChild(el('span', 'kw-ai-label', 'Question ' + (x.i + 1)));
+          li.appendChild(el('div', 'kw-ai-reason', x.why));
+          ul.appendChild(li);
+        });
+        p.appendChild(ul);
+        var labels = {};
+        (C.sections || []).forEach(function (s) { labels[s.id] = s.label; });
+        (r.review || []).forEach(function (x) {
+          var a = el('a', 'kw-ai-link', 'Revisit ' + (labels[x.section] || x.section));
+          a.href = '#sec-' + x.section;
+          var d = el('div', 'kw-ai-next');
+          d.appendChild(a);
+          d.appendChild(el('span', 'kw-ai-reason', x.reason));
+          p.appendChild(d);
+        });
+        if (r.next_action) p.appendChild(labelled('Next', r.next_action));
+      });
+    }, 'kw-ai-primary'));
+  }
+
+  var MOUNT = { writing: mountWriting, speaking: mountSpeaking, exercise: mountExercise, grammar: mountGrammar, quiz: mountQuiz };
+
+  /* ---------- queue ---------- */
+  function mount(spec) {
+    if (!spec || !spec.host || !MOUNT[spec.kind]) return;
+    status().then(function (s) {
+      // AI off, signed out, or not entitled to this chapter → render nothing.
+      if (!s || !s.enabled || !s.eligible) return;
+      if (!spec.host.isConnected || spec.host.getAttribute('data-kw-ai') === 'on') return;
+      spec.host.setAttribute('data-kw-ai', 'on');
+      spec.host.classList.add('kw-ai');
+      MOUNT[spec.kind](spec);
+    });
+  }
+
+  var pending = Array.isArray(global.KW_AI_QUEUE) ? global.KW_AI_QUEUE : [];
+  global.KW_AI_QUEUE = { push: mount };
+  pending.forEach(mount);
+  global.KW_AI = { status: status };
 })(window);

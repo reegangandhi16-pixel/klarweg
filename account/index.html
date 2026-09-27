@@ -477,7 +477,10 @@ function safeNextPath(raw) {
   if (typeof raw !== 'string' || !raw) return '';
   if (raw.indexOf('://') !== -1) return '';
   if (raw.slice(0, 2) === '//') return '';
-  if (raw.slice(0, 9) !== '/klarweg/') return '';
+  // Only paths inside this site: '/klarweg/' on GitHub Pages, '/' on a
+  // custom domain — derived from where this page itself is served.
+  var base = location.pathname.replace(/account\/[^\/]*$/, '');
+  if (!base || raw.slice(0, base.length) !== base) return '';
   return raw;
 }
 

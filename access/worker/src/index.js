@@ -2,6 +2,7 @@ import { corsHeaders, withCors, isForeignOriginWrite } from "./cors.js";
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
+import { aiStatus, aiRequest } from "./ai.js";
 import {
   listSavedWords,
   createSavedWord,
@@ -109,6 +110,18 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
     const savedWordReviewMatch = url.pathname.match(/^\/saved-words\/(sw_[0-9a-f-]{36})\/review$/);
     if (request.method === "PATCH" && savedWordReviewMatch) {
       return withCors(await reviewSavedWord(request, env, savedWordReviewMatch[1]), request);
+    }
+
+    /* Klarweg AI — auth, entitlement, quotas and the kill switch are
+       enforced in ai.js before anything reaches the private
+       klarweg-tutor Worker (service binding env.TUTOR). */
+    if (request.method === "GET" && url.pathname === "/ai/status") {
+      return withCors(await aiStatus(request, env), request);
+    }
+
+    const aiMatch = url.pathname.match(/^\/ai\/([a-z_]{3,32})$/);
+    if (request.method === "POST" && aiMatch) {
+      return withCors(await aiRequest(request, env, aiMatch[1], ctx), request);
     }
 
     if (request.method === "GET" && url.pathname === "/") {

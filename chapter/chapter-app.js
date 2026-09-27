@@ -102,15 +102,6 @@
     return n;
   }
 
-  // Escapes AI-generated text before it reaches innerHTML — the model's
-  // output is not trusted markup (a crafted writing submission could try to
-  // prompt-inject raw HTML/script into its own feedback). Mirrors the same
-  // escape-first approach chapter-tutor.js already uses for its AI replies.
-  function escapeHtml(str) {
-    return String(str == null ? '' : str)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
   /* ---------- progress state (localStorage) ---------- */
   const SKEY = 'kw-ch-' + (C.id || ('a1-' + C.number));
   let state = { done: {}, learned: {}, saved: {}, quizScore: null };
@@ -1539,7 +1530,7 @@
     // chapter data supplies a heroAnimationPath; renderer holds no filename).
     if (C.heroAnimationPath) {
       const watch = el('div', { class: 'watch-first' });
-      watch.appendChild(el('h3', { class: 'watch-first-title' }, '🎬 Watch First'));
+      watch.appendChild(el('h3', { class: 'watch-first-title' }, 'Watch first'));
       const frameWrap = el('div', { class: 'watch-first-frame' });
       const iframe = document.createElement('iframe');
       iframe.title = (C.title || 'Chapter') + ' — animation';
@@ -1618,6 +1609,7 @@
       if (g.recap) { const r = el('div', { class: 'gr-recap' }, grLabel('10-second recap'));
         const ul = el('ul', {}); g.recap.forEach(li => ul.appendChild(el('li', { html: li }))); r.appendChild(ul);
         inner.appendChild(r); }
+      inner.appendChild(aiSlot({ kind: 'grammar', itemId: 'grammar.' + i }));
       body.appendChild(inner);
       const headBtn = el('button', { class: 'accordion-head', type: 'button' },
         el('span', { class: 'accordion-title' }, g.title),
@@ -3751,8 +3743,10 @@
       r.append(
         el('div', { class: 'muted', style: 'font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px' }, 'You said'),
         el('div', { class: 'speak-heard de' }, s.heard),
-        el('div', { class: 'speak-scores' }, scoreCard(acc + '%', 'Word match', true)),
-        el('p', { class: 'muted', style: 'font-size:13px;margin-top:12px' }, acc >= 70 ? 'Strong — your words matched the model closely.' : 'Keep going — try again and match each word.'));
+        el('div', { class: 'speak-scores' }, scoreCard(acc + '%', 'Words matched', true)),
+        el('p', { class: 'muted', style: 'font-size:13px;margin-top:12px' }, acc >= 70 ? 'Most of the model sentence\u2019s words were recognised.' : 'Several words of the model sentence were not recognised \u2014 listen to the model and try again.'),
+        el('p', { class: 'muted speak-score-note', style: 'font-size:12px;margin-top:4px' }, 'Compares the recognised words with the model sentence. It is not a pronunciation score.'),
+        aiSlot({ kind: 'speaking', itemId: 'speaking.' + C.speaking.indexOf(s.p), transcript: s.heard, isExam: IS_EXAM }));
     } else if (s.pending) {
       r.appendChild(el('p', { class: 'muted', style: 'font-size:14px;margin:0' }, 'Checking what you said…'));
     } else {
@@ -4045,6 +4039,37 @@
     return Math.round((hit / t.length) * 100);
   }
 
+  // ---- Klarweg AI integration ----
+  // chapter-tutor.js renders AI controls into these slots ONLY when the
+  // access Worker reports Klarweg AI enabled for this learner + chapter.
+  // With AI off, a slot stays an empty div and the lesson is unchanged.
+  const IS_EXAM = /goethe|halbzeit|mini-test|final/i.test(C.id || '') || !!C.isCheckpoint || !!C.scoring;
+  function aiSlot(spec) {
+    const host = el('div', { class: 'kw-ai-slot' });
+    spec.host = host;
+    (window.KW_AI_QUEUE = window.KW_AI_QUEUE || []).push(spec);
+    return host;
+  }
+  // Mirrors tutor/worker/src/deterministic.js normalizeAnswer(), so the
+  // instant browser check and the server agree on what "correct" means.
+  function kwNormAnswer(s) {
+    return String(s == null ? '' : s).replace(/<[^>]+>/g, '').normalize('NFC')
+      .replace(/[„“”«»‚‘’]/g, '"').replace(/[‐‑–—]/g, '-')
+      .replace(/\s+/g, ' ').replace(/\s+([.,!?;:])/g, '$1').trim()
+      .replace(/[.!?]+$/, '').trim();
+  }
+  function kwAnswerVariants(a) {
+    return Array.isArray(a) ? [a.join(' → '), a.join(', '), a.join(' ')].map(kwNormAnswer) : [kwNormAnswer(a)];
+  }
+  function kwAnswerMatches(input, answer) {
+    const got = kwNormAnswer(input);
+    return !!got && kwAnswerVariants(answer).indexOf(got) !== -1;
+  }
+  function kwCaseOnly(input, answer) {
+    const got = kwNormAnswer(input).toLowerCase();
+    return !!got && !kwAnswerMatches(input, answer) && kwAnswerVariants(answer).some(a => a.toLowerCase() === got);
+  }
+
   // ---- Writing ----
   function bodyWriting() {
     const W = C.writing;
@@ -4055,47 +4080,36 @@
     const ta = el('textarea', { class: 'writing-area', placeholder: W.placeholder || '', 'aria-labelledby': 'writing-prompt' });
     const wc = el('span', {}, '0 words'); const cc = el('span', {}, '0 characters');
     const meta = el('div', { class: 'writing-meta' }, wc, cc);
-    const fbBtn = el('button', { class: 'btn btn-soft btn-small', style: 'margin-top:14px' }, 'Check my grammar');
+    const fbBtn = el('button', { class: 'btn btn-soft btn-small', style: 'margin-top:14px', type: 'button' }, 'Check length');
     const fb = el('div', { class: 'writing-feedback', style: 'display:none' });
+    const countWords = t => (t.trim() ? t.trim().split(/\s+/).length : 0);
     ta.addEventListener('input', () => {
-      const words = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
-      wc.textContent = words + ' words'; cc.textContent = ta.value.length + ' characters';
+      wc.textContent = countWords(ta.value) + ' words'; cc.textContent = ta.value.length + ' characters';
     });
-    fbBtn.addEventListener('click', async () => {
+    // Deterministic, level-neutral check: length against the task's own
+    // target and sentence count. (It used to count sentences starting with
+    // der/die/das — an A1·Ch3 rule that was wrong for every other task.)
+    // Grammar feedback is Klarweg AI's job, rendered into the slot below.
+    fbBtn.addEventListener('click', () => {
       const text = ta.value.trim();
-      if (!text) { fb.innerHTML = '<span class="muted">Write a few sentences first, then I\'ll check them.</span>'; fb.style.display = 'block'; return; }
-      const words = text.split(/\s+/).length;
-
       fb.style.display = 'block';
-      fb.innerHTML = '<span class="writing-loading">Checking your German…</span>';
-      fbBtn.disabled = true;
-
-      // Quick local structural read (instant, always shown)
-      const lines = text.split(/\n|\./).map(s => s.trim()).filter(Boolean);
-      const startsOk = lines.filter(l => /^(der|die|das)\b/i.test(l)).length;
-      const structural = '• ' + words + ' words (target ≥ ' + W.minWords + '). ' + (words >= W.minWords ? '✓' : 'Add a little more.') +
-        '<br>• ' + startsOk + ' of ' + lines.length + ' sentence(s) start with der/die/das.';
-
-      try {
-        if (!window.claude || typeof window.claude.complete !== 'function' || !C.writingTutorPrompt) throw new Error('no-api');
-        const prompt = C.writingTutorPrompt.replace('{{TEXT}}', function () { return text; });
-        const out = await window.claude.complete({ messages: [{ role: 'user', content: prompt }] });
-        const clean = escapeHtml((out || '').replace(/```html?/gi, '').replace(/```/g, '').trim()).replace(/\n/g, '<br>');
-        fb.innerHTML =
-          '<div class="wf-head"><b>Grammar feedback</b> <span class="wf-ai-tag">AI tutor</span></div>' +
-          '<div class="wf-ai">' + (clean || 'No feedback returned — try again.') + '</div>' +
-          '<div class="wf-struct">' + structural + '</div>';
-      } catch (err) {
-        // Graceful fallback: structural check only
-        fb.innerHTML =
-          '<div class="wf-head"><b>Structural check</b> <span class="preview-tag">AI tutor unavailable</span></div>' +
-          '<div class="wf-struct">' + structural + '</div>' +
-          '<span class="muted" style="display:block;margin-top:8px">Live grammar feedback couldn\'t load right now. The checks above are still accurate — try again in a moment.</span>';
-      } finally {
-        fbBtn.disabled = false;
-      }
+      fb.innerHTML = '';
+      if (!text) { fb.appendChild(el('span', { class: 'muted' }, 'Write your text first.')); return; }
+      const words = countWords(text);
+      const sentences = text.split(/[.!?]+(?:\s|$)|\n+/).map(x => x.trim()).filter(Boolean).length;
+      const list = el('div', { class: 'wf-struct' });
+      if (W.minWords) list.appendChild(el('div', {}, '• ' + words + ' words (target: at least ' + W.minWords + '). ' + (words >= W.minWords ? 'Length reached.' : 'Add ' + (W.minWords - words) + ' more.')));
+      else list.appendChild(el('div', {}, '• ' + words + ' words.'));
+      list.appendChild(el('div', {}, '• ' + sentences + (sentences === 1 ? ' sentence.' : ' sentences.')));
+      fb.append(el('div', { class: 'wf-head' }, el('b', {}, 'Length check')), list,
+        el('span', { class: 'muted', style: 'display:block;margin-top:8px;font-size:13px' }, 'This checks length only, not grammar. Compare your sentences with the task and the Grammar section.'));
     });
-    card.append(ta, meta, fbBtn, fb);
+    card.append(ta, meta, fbBtn, fb, aiSlot({
+      kind: 'writing', itemId: 'writing', isExam: IS_EXAM,
+      getText: () => ta.value,
+      lock: () => { ta.readOnly = true; ta.classList.add('is-locked'); },
+      unlock: () => { ta.readOnly = false; ta.classList.remove('is-locked'); }
+    }));
     return card;
   }
 
@@ -4126,47 +4140,113 @@
     'genitivFill', 'dativToGenitiv', 'timelineOrdering'];
   const ITEMS_EXERCISE_KEYS = { classification: 'answer', classifyAkkDat: 'answer', identifyNNoun: 'isNNoun' };
 
-  // {title, wrong, right, explain} — reuses the grammar "Common mistakes" row so
-  // the ✕/✓ marks and the scoped `.mistake-text .strike` rule apply.
-  function errorCorrectionBlock(it) {
+  // Typed-answer exercise with a deterministic check first. The learner
+  // writes their own answer; "Check" compares it with the authored key
+  // (same normalisation as the server). Klarweg AI — when enabled — adds a
+  // hint ladder and "Why is my answer wrong?" into the slot; the reveal
+  // button always works without it.
+  //   opts: { promptNode, answer, explain, itemId, revealLabel, inputLabel, canPractise }
+  function answerCheckBlock(opts) {
     const block = el('div', { class: 'exercise-block' });
-    block.appendChild(el('div', { class: 'mistake-row' },
-      el('div', { style: 'display:flex;gap:10px;align-items:center' },
-        el('span', { class: 'mistake-mark wrong' }, '✕'),
-        el('span', { class: 'mistake-text' }, mistakeSide('de strike', it.wrong)))));
+    block.appendChild(opts.promptNode);
+    const inp = el('input', { class: 'kw-answer-input', type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', lang: 'de', 'aria-label': opts.inputLabel || 'Your answer' });
     const fb = el('div', { class: 'exercise-feedback' });
-    const btn = el('button', { class: 'btn btn-primary btn-small', type: 'button' }, 'Show correction');
-    btn.addEventListener('click', () => {
+    const checkBtn = el('button', { class: 'btn btn-primary btn-small', type: 'button' }, 'Check');
+    const revealBtn = el('button', { class: 'btn btn-soft btn-small', type: 'button' }, opts.revealLabel || 'Show answer');
+    let wrongChecks = 0;
+    const ansText = Array.isArray(opts.answer) ? opts.answer.join(' → ') : opts.answer;
+    function showAnswer() {
       fb.className = 'exercise-feedback ok';
       fb.innerHTML = '';
       fb.appendChild(el('div', { style: 'display:flex;gap:10px;align-items:center' },
         el('span', { class: 'mistake-mark right' }, '✓'),
-        el('span', { class: 'mistake-text' }, mistakeSide('de', it.right))));
-      if (it.explain) fb.appendChild(el('div', { class: 'muted', style: 'font-size:12px;margin-top:6px;padding-left:32px' }, it.explain));
-      btn.disabled = true;
+        el('span', { class: 'mistake-text' }, mistakeSide('de', ansText))));
+      if (opts.explain) fb.appendChild(el('div', { class: 'muted', style: 'font-size:12px;margin-top:6px;padding-left:32px' }, opts.explain));
+    }
+    checkBtn.addEventListener('click', () => {
+      const v = inp.value;
+      if (!v.trim()) { fb.className = 'exercise-feedback'; fb.textContent = 'Type your answer first.'; return; }
+      if (kwAnswerMatches(v, opts.answer) || (opts.accepts || []).some(a => kwAnswerMatches(v, a))) {
+        inp.classList.remove('is-wrong'); inp.classList.add('is-correct');
+        fb.className = 'exercise-feedback ok';
+        fb.innerHTML = '';
+        fb.appendChild(el('div', {}, '✓ Correct.'));
+        if (opts.explain) fb.appendChild(el('div', { class: 'muted', style: 'font-size:12px;margin-top:6px' }, opts.explain));
+        return;
+      }
+      wrongChecks++;
+      inp.classList.remove('is-correct'); inp.classList.add('is-wrong');
+      fb.className = 'exercise-feedback no';
+      fb.textContent = kwCaseOnly(v, opts.answer)
+        ? '✗ Almost — check capital letters. Every German noun starts with a capital.'
+        : '✗ This does not match the lesson\u2019s answer yet. Compare it with the rule, try again, or show the answer.';
     });
-    block.append(btn, fb);
+    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); checkBtn.click(); } });
+    const row = el('div', { class: 'kw-answer-row' }, inp, checkBtn, revealBtn);
+    block.append(row, fb);
+    const aiSpec = {
+      kind: 'exercise', itemId: opts.itemId, isExam: IS_EXAM,
+      getInput: () => inp.value,
+      attempt: () => Math.min(3, Math.max(1, wrongChecks)),
+      canPractise: !!opts.canPractise,
+      onPractice: (item, panel) => panel.appendChild(practiceBlock(item))
+    };
+    revealBtn.addEventListener('click', () => {
+      showAnswer();
+      revealBtn.disabled = true;
+      // Checkpoints: explanations only once the answer has been revealed.
+      if (IS_EXAM && inp.value.trim()) block.appendChild(aiSlot(aiSpec));
+    });
+    if (!IS_EXAM) block.appendChild(aiSlot(aiSpec));
     return block;
   }
 
-  // {title, prompt, answer, explain} — prompt shown, answer revealed on demand.
-  function promptExerciseBlock(it) {
-    const block = el('div', { class: 'exercise-block' });
-    block.appendChild(el('div', { class: 'exercise-q' }, it.prompt));
+  // A generated "one more like this" item: same deterministic check,
+  // answer key from the generator, clearly labelled as not authored.
+  function practiceBlock(item) {
+    const wrap = el('div', { class: 'kw-practice' });
+    wrap.appendChild(el('div', { class: 'mistake-row' },
+      el('div', { style: 'display:flex;gap:10px;align-items:center' },
+        el('span', { class: 'mistake-mark wrong' }, '✕'),
+        el('span', { class: 'mistake-text de strike' }, item.wrong))));
+    const inp = el('input', { class: 'kw-answer-input', type: 'text', autocomplete: 'off', spellcheck: 'false', lang: 'de', 'aria-label': 'Your corrected sentence' });
     const fb = el('div', { class: 'exercise-feedback' });
-    const btn = el('button', { class: 'btn btn-primary btn-small', type: 'button' }, 'Show answer');
-    btn.addEventListener('click', () => {
-      fb.className = 'exercise-feedback ok';
-      fb.innerHTML = '';
-      const ans = Array.isArray(it.answer) ? it.answer.join(' → ') : it.answer;
-      fb.appendChild(el('div', { style: 'display:flex;gap:10px;align-items:center' },
-        el('span', { class: 'mistake-mark right' }, '✓'),
-        el('span', { class: 'mistake-text' }, mistakeSide('de', ans))));
-      if (it.explain) fb.appendChild(el('div', { class: 'muted', style: 'font-size:12px;margin-top:6px;padding-left:32px' }, it.explain));
-      btn.disabled = true;
+    const check = el('button', { class: 'btn btn-primary btn-small', type: 'button' }, 'Check');
+    const show = el('button', { class: 'btn btn-soft btn-small', type: 'button' }, 'Show correction');
+    check.addEventListener('click', () => {
+      const ok = kwAnswerMatches(inp.value, item.right);
+      fb.className = 'exercise-feedback ' + (ok ? 'ok' : 'no');
+      fb.textContent = ok ? '✓ Correct. ' + (item.explain || '') : '✗ Not yet — try again or show the correction.';
     });
-    block.append(btn, fb);
-    return block;
+    show.addEventListener('click', () => {
+      fb.className = 'exercise-feedback ok';
+      fb.textContent = '✓ ' + item.right + (item.explain ? ' — ' + item.explain : '');
+    });
+    wrap.append(el('div', { class: 'kw-answer-row' }, inp, check, show), fb);
+    return wrap;
+  }
+
+  function wrongSentenceRow(text) {
+    return el('div', { class: 'mistake-row' },
+      el('div', { style: 'display:flex;gap:10px;align-items:center' },
+        el('span', { class: 'mistake-mark wrong' }, '✕'),
+        el('span', { class: 'mistake-text' }, mistakeSide('de strike', text))));
+  }
+
+  // {title, wrong, right, explain}
+  function errorCorrectionBlock(it, itemId) {
+    return answerCheckBlock({
+      promptNode: wrongSentenceRow(it.wrong), answer: it.right, accepts: it.accepts, explain: it.explain, itemId,
+      revealLabel: 'Show correction', inputLabel: 'Your corrected sentence', canPractise: true
+    });
+  }
+
+  // {title, prompt, answer, explain} — answer may be a string or an ordered array.
+  function promptExerciseBlock(it, itemId) {
+    return answerCheckBlock({
+      promptNode: el('div', { class: 'exercise-q' }, it.prompt), answer: it.answer, accepts: it.accepts, explain: it.explain, itemId,
+      revealLabel: 'Show answer', inputLabel: 'Your answer', canPractise: false
+    });
   }
 
   // {title, items:[{phrase, <verdictField>}]} — classify each phrase, reveal all.
@@ -4209,6 +4289,7 @@
     });
     const gapFb = el('div', { class: 'exercise-feedback' });
     const gapCheck = el('button', { class: 'btn btn-primary btn-small', style: 'margin-top:16px' }, 'Check');
+    let gapWrong = 0, gapAi = null;
     gapCheck.addEventListener('click', () => {
       let allOk = true;
       inputs.forEach((inp, i) => {
@@ -4217,6 +4298,15 @@
       });
       gapFb.className = 'exercise-feedback ' + (allOk ? 'ok' : 'no');
       gapFb.textContent = allOk ? '✓ ' + E.gap.explain : '✗ ' + E.gap.explain;
+      if (!allOk) {
+        gapWrong++;
+        if (!gapAi && !IS_EXAM) {
+          gapAi = aiSlot({ kind: 'exercise', itemId: 'ex.gap', isExam: false,
+            getInput: () => inputs.map(i => i.value.trim()).join(' | '),
+            attempt: () => Math.min(3, Math.max(1, gapWrong)) });
+          c2.appendChild(gapAi);
+        }
+      }
     });
     c2.append(gapSent, gapCheck, gapFb); wrap.appendChild(c2);
 
@@ -4235,27 +4325,11 @@
     if (Array.isArray(C.errorCorrectionSet) && C.errorCorrectionSet.length) {
       const c5 = el('div', { class: 'card' });
       c5.appendChild(el('div', { class: 'eyebrow', style: 'margin-bottom:14px' }, '05 · Error correction · ' + C.errorCorrectionSet.length + ' sentences'));
-      C.errorCorrectionSet.forEach((it) => {
-        // Same wrapper structure as the grammar "Common mistakes" rows, so the
-        // ✕/✓ marks and the scoped `.mistake-text .strike` rule both apply.
-        const block = el('div', { class: 'exercise-block' });
-        block.appendChild(el('div', { class: 'mistake-row' },
-          el('div', { style: 'display:flex;gap:10px;align-items:center' },
-            el('span', { class: 'mistake-mark wrong' }, '✕'),
-            el('span', { class: 'mistake-text' }, mistakeSide('de strike', it.wrong)))));
-        const fb = el('div', { class: 'exercise-feedback' });
-        const btn = el('button', { class: 'btn btn-primary btn-small', type: 'button' }, 'Show correction');
-        btn.addEventListener('click', () => {
-          fb.className = 'exercise-feedback ok';
-          fb.innerHTML = '';
-          fb.appendChild(el('div', { style: 'display:flex;gap:10px;align-items:center' },
-            el('span', { class: 'mistake-mark right' }, '✓'),
-            el('span', { class: 'mistake-text' }, mistakeSide('de', it.right))));
-          if (it.ref) fb.appendChild(el('div', { class: 'muted', style: 'font-size:12px;margin-top:6px;padding-left:32px' }, it.ref));
-          btn.disabled = true;
-        });
-        block.append(btn, fb);
-        c5.appendChild(block);
+      C.errorCorrectionSet.forEach((it, i) => {
+        c5.appendChild(answerCheckBlock({
+          promptNode: wrongSentenceRow(it.wrong), answer: it.right, explain: it.ref, itemId: 'ex.ecs.' + i,
+          revealLabel: 'Show correction', inputLabel: 'Your corrected sentence', canPractise: true
+        }));
       });
       wrap.appendChild(c5);
     }
@@ -4267,8 +4341,8 @@
       const ex = E[key];
       if (!ex || typeof ex !== 'object' || Array.isArray(ex)) return;
       let blockEl = null;
-      if (key === 'errorCorrection' && ex.wrong && ex.right) blockEl = errorCorrectionBlock(ex);
-      else if (PROMPT_EXERCISE_KEYS.indexOf(key) !== -1 && ex.prompt && ex.answer) blockEl = promptExerciseBlock(ex);
+      if (key === 'errorCorrection' && ex.wrong && ex.right) blockEl = errorCorrectionBlock(ex, 'ex.errorCorrection');
+      else if (PROMPT_EXERCISE_KEYS.indexOf(key) !== -1 && ex.prompt && ex.answer) blockEl = promptExerciseBlock(ex, 'ex.' + key);
       else if (ITEMS_EXERCISE_KEYS[key] && Array.isArray(ex.items) && ex.items.length) blockEl = itemsExerciseBlock(ex, ITEMS_EXERCISE_KEYS[key]);
       if (!blockEl) return;
       n += 1;
@@ -4355,7 +4429,7 @@
     Q.forEach(() => progress.appendChild(el('div', { class: 'quiz-progress-dot' })));
     const stage = el('div', {});
     card.append(progress, stage);
-    let idx = 0, score = 0;
+    let idx = 0, score = 0, chosen = [];
     function paintProgress() { $$('.quiz-progress-dot', progress).forEach((d, i) => { d.className = 'quiz-progress-dot' + (i < idx ? ' done' : i === idx ? ' current' : ''); }); }
     function showQ() {
       paintProgress();
@@ -4374,6 +4448,7 @@
         colorWordsIn(b.querySelector('.de'));
         b.addEventListener('click', () => {
           if (answered) return; answered = true;
+          chosen[idx] = oi;
           $$('.mcq-option', opts).forEach(x => x.disabled = true);
           if (oi === q.answer) { b.classList.add('is-correct'); score++; fb.className = 'exercise-feedback ok'; fb.textContent = '✓ ' + q.explain; }
           else { b.classList.add('is-wrong'); opts.children[q.answer].classList.add('is-correct'); fb.className = 'exercise-feedback no'; fb.textContent = '✗ ' + q.explain; }
@@ -4415,7 +4490,10 @@
           el('div', { class: 'quiz-reco' },
             el('div', { class: 'eyebrow', style: 'margin-bottom:8px' }, 'Recommendation'),
             el('p', { class: 'lede', style: 'font-size:16px', html: reco })),
-          el('button', { class: 'btn btn-soft btn-small', style: 'margin-top:20px', onclick: () => { score = 0; idx = 0; showQ(); } }, 'Retake quiz'))
+          el('button', { class: 'btn btn-soft btn-small', style: 'margin-top:20px', onclick: () => { score = 0; idx = 0; chosen = []; showQ(); } }, 'Retake quiz'),
+          // Post-submission only: the review is created after the result,
+          // never while a question is open.
+          score < Q.length ? aiSlot({ kind: 'quiz', itemId: 'quiz', answers: chosen.map((c, i) => ({ i, chosen: c })).filter(a => Number.isInteger(a.chosen)) }) : null)
       );
       toast('Quiz complete', gained);
     }
@@ -5135,6 +5213,10 @@
   }
 
   function renderChapter() {
+    // Klarweg AI output is rendered through the SAME deterministic word
+    // renderer as the lesson (lexicon look-up, role colours) — the model
+    // never supplies markup or colours.
+    window.KW_ChapterUI = { germanSpans: (t) => { const sp = el('span', { class: 'de' }); sp.appendChild(germanWordSpans(String(t))); return sp; } };
     renderStory();
     renderHeader();
     renderNav();

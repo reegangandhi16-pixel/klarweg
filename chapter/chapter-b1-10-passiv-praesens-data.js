@@ -502,13 +502,14 @@ const CHAPTER = {
       title: 'Transform: Active → Passive',
       prompt: 'Rewrite in the passive: "Die Verkäuferin verkauft das Fahrrad."',
       answer: 'Das Fahrrad wird verkauft.',
+      accepts: ['Das Fahrrad wird von der Verkäuferin verkauft.'],
       explain: 'The object (das Fahrrad) becomes the subject; the original subject (die Verkäuferin) can be dropped.'
     },
     transformPassiveToActive: {
       title: 'Transform: Passive → Active',
       prompt: 'Rewrite in the active, adding a subject "der Chef": "Die Hausaufgaben werden gemacht."',
-      answer: 'Die Schüler machen die Hausaufgaben.',
-      explain: 'The passive subject becomes the object; a doer is added (or reintroduced) as the new subject.'
+      answer: 'Der Chef macht die Hausaufgaben.',
+      explain: 'The passive subject becomes the object; the doer (der Chef) is added as the new subject, and the verb agrees with it.'
     },
     errorCorrection: {
       title: 'Error correction',

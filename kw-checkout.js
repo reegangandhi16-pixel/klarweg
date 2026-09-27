@@ -472,9 +472,14 @@
         busy: 'Redirecting to payment',
         dismissible: false
       });
-      var declared = (data.checkout && data.checkout.mode) || data.mode || data.env || 'sandbox';
+      /* The Worker's configuration is the only authority on which
+         Cashfree environment this order lives in. Never guess: a
+         production session opened by a sandbox SDK (or the reverse)
+         fails at the gateway. */
+      var declared = data.checkout && data.checkout.mode;
+      if (declared !== 'production' && declared !== 'sandbox') throw new Error('no-checkout-mode');
       return loadSdk().then(function (Cashfree) {
-        var cf = Cashfree({ mode: (declared === 'production' ? 'production' : 'sandbox') });
+        var cf = Cashfree({ mode: declared });
         return cf.checkout({ paymentSessionId: session, redirectTarget: '_modal' });
       });
     }).then(function () {
@@ -482,6 +487,7 @@
       return verify(product, order.id, ctx);
     }).catch(function (e) {
       if (e && e.code === 'unauthorized') return sessionExpired(product);
+      if (e && e.message === 'no-checkout-mode') return failedToStart(product, e);
       if (order && order.id) return verify(product, order.id, ctx);
       failedToStart(product, e);
     });
@@ -525,7 +531,7 @@
           startLearning,
           { label: 'Your account', href: auth().accountUrl({ prefix: prefixToRoot(), next: null }) }
         ],
-        note: 'A receipt has been sent to your registered email address.'
+        note: 'Order reference ' + orderId + '.'
       });
     });
   }

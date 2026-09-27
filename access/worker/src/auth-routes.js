@@ -100,9 +100,11 @@ function sanitizeNext(value) {
    values recovered from a just-consumed, single-use D1 nonce row
    (redirect completion) — never from login_uri, which carries no query
    string at all. */
-function buildAccountRedirectUrl(state) {
+function buildAccountRedirectUrl(state, env) {
   state = state || {};
-  const dest = new URL(ACCOUNT_RETURN_URL);
+  // ACCOUNT_RETURN_URL (Worker var) overrides the default only when the
+  // site moves domain; it is operator configuration, never request input.
+  const dest = new URL((env && env.ACCOUNT_RETURN_URL) || ACCOUNT_RETURN_URL);
 
   const mode = sanitizeMode(state.mode);
   if (mode) dest.searchParams.set("mode", mode);
@@ -453,7 +455,7 @@ export async function googleLoginRedirect(request, env) {
      registered redirect URI), so every failure before the nonce is
      verified and consumed can only redirect to the plain account URL —
      mode/buy/next are not known yet at that point. */
-  let dest = buildAccountRedirectUrl({});
+  let dest = buildAccountRedirectUrl({}, env);
 
   let form;
 
@@ -528,7 +530,7 @@ export async function googleLoginRedirect(request, env) {
     mode: nonceRow.mode,
     buy: nonceRow.buy,
     next: nonceRow.next_path
-  });
+  }, env);
 
   let user;
 

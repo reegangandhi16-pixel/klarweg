@@ -109,6 +109,7 @@ jobs:
             "react-lib"
             "app"
             "screenshots"
+            "tutor"
           )
           for prefix in "${PROHIBITED_PREFIXES[@]}"; do
             if [ -e "$ARTIFACT_DIR/$prefix" ]; then

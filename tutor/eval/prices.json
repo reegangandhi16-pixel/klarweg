@@ -1,0 +1,18 @@
+{
+  "_note": "USD per 1M tokens, standard (non-batch) tier. Fetched 2026-09-27 from the official pages below. Re-verify before any purchase decision. Model ids must be checked against each provider's model list before a run.",
+  "_sources": {
+    "gemini": "https://ai.google.dev/gemini-api/docs/pricing (page 'Last updated 2026-09-24')",
+    "openai": "https://developers.openai.com/api/docs/pricing (redirect target of platform.openai.com/docs/pricing)",
+    "anthropic": "https://platform.claude.com/docs/en/about-claude/pricing"
+  },
+  "candidates": [
+    { "provider": "gemini",    "name": "Gemini 3.5 Flash-Lite", "tier": "cheap", "input": 0.30, "cachedInput": 0.03,  "output": 2.50 },
+    { "provider": "gemini",    "name": "Gemini 3.8 Flash",      "tier": "mid",   "input": 0.75, "cachedInput": 0.075, "output": 3.75, "caveat": "Promotional through 2026-12-31; doubles on 2027-01-01 (1.50 / 7.50)." },
+    { "provider": "gemini",    "name": "Gemini 3.5 Flash",      "tier": "mid",   "input": 1.50, "cachedInput": 0.15,  "output": 9.00 },
+    { "provider": "openai",    "name": "gpt-6-luna",            "tier": "cheap", "input": 0.10, "cachedInput": 0.01,  "output": 0.50 },
+    { "provider": "openai",    "name": "gpt-5.6-luna",          "tier": "cheap", "input": 0.20, "cachedInput": 0.02,  "output": 1.20 },
+    { "provider": "openai",    "name": "gpt-6-sol",             "tier": "mid",   "input": 2.00, "cachedInput": 0.20,  "output": 10.00 },
+    { "provider": "anthropic", "name": "claude-haiku-4-5",      "tier": "cheap", "input": 1.00, "cachedInput": 0.10,  "output": 5.00 },
+    { "provider": "anthropic", "name": "claude-sonnet-5",       "tier": "mid",   "input": 2.00, "cachedInput": 0.20,  "output": 10.00 }
+  ]
+}

@@ -700,6 +700,7 @@ const CHAPTER = {
       title: 'Transform: Dativ → Genitiv',
       prompt: 'Rewrite using the Genitiv: "mit dem Lehrer" → "wegen ___"',
       answer: 'wegen des Lehrers',
+      accepts: ['des Lehrers'],
       explain: 'wegen always takes the Genitiv, not the Dativ — der Lehrer becomes des Lehrers.'
     },
     errorCorrection: {

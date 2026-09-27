@@ -66,3 +66,18 @@ Section padding 88px desktop / 64px mobile. Touch targets ≥44×44px.
 - `chapter/` — A1·Ch3 "Der Nominativ": chapter.css + chapter-data.js +
   chapter-story.js (GSAP story scroll) + chapter-app.js (dashboard) +
   chapter-a1-3-nominativ.html. Vanilla, GSAP via CDN.
+
+## Klarweg AI (architecture — keep)
+- Browser `chapter/chapter-tutor.js` → `klarweg-access` Worker `POST /ai/<action>`
+  (session, entitlement, quotas, kill switch `AI_ENABLED`) → service binding →
+  private `tutor/worker` (`klarweg-tutor`: registry, prompts, provider adapter,
+  JSON schema validation, deterministic fallbacks). No provider call or prompt
+  ever lives in the browser. Identity is "Klarweg AI" (never "Klara"/avatar).
+- Registry is generated from `chapter/*-data.js` + `_curriculum-*.json` by
+  `scripts/build-tutor-registry.mjs` (output gitignored) — chapter files stay
+  the single source of truth.
+- Provider is chosen only from the benchmark (`tutor/eval`, `npm run tutor:eval`);
+  `LLM_PROVIDER=none` and `AI_ENABLED=false` until then.
+- Deploy access only via `npm run deploy:access` (guards the Cashfree environment).
+- Tests: `npm test`. Generated SEO files: `scripts/build-grammar-index.mjs`,
+  `scripts/seo-chapter-meta.mjs`; domain move: `scripts/set-site-origin.mjs`.

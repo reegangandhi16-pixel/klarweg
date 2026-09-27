@@ -72,7 +72,9 @@ if (provider === 'mock' && profile === 'flag-first-word') {
 
 const JSON_ONLY = process.argv.includes('--json');
 const only = arg('--only') ? new Set(arg('--only').split(',')) : null;
-const selected = cases.filter((c) => !only || only.has(c.cat)).slice(0, Number(arg('--limit', 1e9)));
+const ids = arg('--ids') ? new Set(arg('--ids').split(',')) : null;
+const selected = cases.filter((c) => (!only || only.has(c.cat)) && (!ids || ids.has(c.id))).slice(0, Number(arg('--limit', 1e9)));
+if (ids && selected.length !== ids.size) { console.error('Unknown case id(s) in --ids'); process.exit(1); }
 const concurrency = Number(arg('--concurrency', provider === 'mock' ? 16 : 4));
 
 /* ---------- scoring helpers ---------- */
@@ -178,5 +180,6 @@ const dir = path.join(HERE, 'results');
 fs.mkdirSync(dir, { recursive: true });
 const file = path.join(dir, `${provider}-${(summary.model || 'x').replace(/[^a-z0-9.-]/gi, '_')}-${summary.ranAt.replace(/[:.]/g, '-')}.json`);
 fs.writeFileSync(file, JSON.stringify({ summary, rows }, null, 1));
+summary.resultFile = file;
 if (JSON_ONLY) log(JSON.stringify(summary));
 else { log(JSON.stringify(summary, null, 2)); log('Full results:', path.relative(ROOT, file)); }

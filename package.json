@@ -18,7 +18,7 @@
     "test": "node scripts/build-tutor-registry.mjs && node --test access/worker/test/*.test.mjs tutor/worker/test/*.test.mjs tutor/eval/*.test.mjs scripts/*.test.mjs && npm run check:generated",
     "build:tutor-registry": "node scripts/build-tutor-registry.mjs",
     "tutor:eval": "node tutor/eval/run-eval.mjs",
-    "deploy:tutor": "cd tutor/worker && wrangler deploy",
+    "deploy:tutor": "cd tutor/worker && npx wrangler deploy",
     "deploy:access": "node scripts/deploy-access.mjs",
     "check:generated": "node scripts/build-grammar-index.mjs --check && node scripts/seo-chapter-meta.mjs --check"
   },

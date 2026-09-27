@@ -13,7 +13,7 @@
    ============================================================ */
 import { resolveItem, describeItem } from './registry.js';
 import { SCHEMAS, validate, parseModelJson, SchemaError } from './schema.js';
-import { buildSystem, buildUser, SCHEMA_FOR_ACTION } from './prompts.js';
+import { buildSystem, buildUser, buildChatSystem, buildChatUser, SCHEMA_FOR_ACTION } from './prompts.js';
 import { callModel, ProviderError } from './providers/index.js';
 import {
   isExactMatch, isCaseOnlyDifference, gapIsCorrect, firstDifference,
@@ -39,6 +39,12 @@ async function askModel(env, { action, mode, C, task, input, lang, attempt, rece
     // Server configuration only (wrangler [vars]); never taken from the request.
     reasoningEffort: action === 'explain_grammar' ? (env.LLM_REASONING_EFFORT_EXPLAIN || undefined) : undefined,
   };
+  return runModel(env, req);
+}
+
+/* Shared by every action (chapter actions via askModel, and chat). */
+async function runModel(env, req) {
+  const { schemaName } = req;
   /* calls:        provider replies received (tokens known)
      failedCalls:  requests that reached the provider but returned no
                    usable reply (timeout, HTTP error, network error,
@@ -97,9 +103,9 @@ function fallback(env, result, err) {
   const usage = (err && err.usage) || { input: 0, output: 0, calls: 0 };
   return { ok: true, source: 'fallback', notice: 'Klarweg AI is unavailable right now. This is the lesson’s own guidance.', error: (err && err.code) || 'ai_unavailable', result, meta: { llm: contacted(usage), usage, costMicros: costMicros(env, usage) } };
 }
-function unavailable(env, err) {
+function unavailable(env, err, message = 'Klarweg AI is unavailable right now. The lesson works as normal — try again later.') {
   const usage = (err && err.usage) || { input: 0, output: 0, calls: 0 };
-  return { ok: false, status: 503, error: (err && err.code) || 'ai_unavailable', message: 'Klarweg AI is unavailable right now. The lesson works as normal — try again later.', meta: { llm: contacted(usage), usage, costMicros: costMicros(env, usage) } };
+  return { ok: false, status: 503, error: (err && err.code) || 'ai_unavailable', message, meta: { llm: contacted(usage), usage, costMicros: costMicros(env, usage) } };
 }
 
 function recentTitles(C, recent) {
@@ -377,6 +383,52 @@ function clampAttempt(a) {
   return Number.isInteger(n) ? Math.min(Math.max(n, 1), 3) : 1;
 }
 
+/* ---------- homepage chat (general German learning; no chapter) ----------
+   The one action without a chapter: klarweg-access decides who may use it
+   (signed in + owns a level) and meters it in its own quota bucket.
+   Limits mirror access/worker/src/ai.js (CHAT_LIMITS) and are enforced here
+   too, because this Worker never trusts its caller's validation. */
+export const CHAT_LIMITS = { message: 600, turns: 6, turnChars: 800 };
+const CHAT_UNAVAILABLE = 'Klarweg AI chat is unavailable right now. Please try again in a moment.';
+
+function chatHistory(history) {
+  if (history == null) return [];
+  if (!Array.isArray(history)) throw new RequestError('invalid_history', 'Conversation history is malformed.');
+  if (history.length > CHAT_LIMITS.turns) throw new RequestError('history_too_long', `Only the last ${CHAT_LIMITS.turns} messages can be sent.`);
+  return history.map((t) => {
+    if (!t || typeof t !== 'object' || (t.role !== 'user' && t.role !== 'assistant') || typeof t.text !== 'string') {
+      throw new RequestError('invalid_history', 'Conversation history is malformed.');
+    }
+    // Earlier answers can be long; context is trimmed, never rejected.
+    return { role: t.role, text: t.text.trim().slice(0, CHAT_LIMITS.turnChars) };
+  }).filter((t) => t.text);
+}
+
+async function chat(env, _C, body) {
+  const message = requireInput(body.message, CHAT_LIMITS.message);
+  const history = chatHistory(body.history);
+  const req = {
+    system: buildChatSystem(),
+    user: buildChatUser({ message, history, lang: body.lang }),
+    schema: SCHEMAS.chat,
+    schemaName: 'chat',
+    maxTokens: 1600,
+    timeoutMs: Number(env.LLM_TIMEOUT_MS) || 12000,
+    // Server configuration only (wrangler [vars]); never taken from the request.
+    reasoningEffort: env.LLM_REASONING_EFFORT_CHAT || undefined,
+  };
+  try {
+    const m = await runModel(env, req);
+    const out = m.parsed;
+    out.examples = (out.examples || []).filter((e) => e.de && e.en);
+    out.follow_ups = (out.follow_ups || []).filter(Boolean);
+    if (!out.answer) return unavailable(env, { code: 'ai_unavailable', usage: m.usage }, CHAT_UNAVAILABLE);
+    return aiResult(env, out, m);
+  } catch (err) {
+    return unavailable(env, err, CHAT_UNAVAILABLE);
+  }
+}
+
 export const ACTIONS = {
   check_writing: checkWriting,
   check_speaking: checkSpeaking,
@@ -384,4 +436,8 @@ export const ACTIONS = {
   more_like_this: moreLikeThis,
   explain_grammar: explainGrammar,
   quiz_review: quizReview,
+  chat,
 };
+
+/* Actions that do not operate on a chapter (index.js skips the chapter lookup). */
+export const CHAPTERLESS_ACTIONS = new Set(['chat']);

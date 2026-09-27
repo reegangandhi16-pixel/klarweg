@@ -159,6 +159,29 @@ export const SCHEMAS = {
     required: ['pattern', 'items', 'review', 'next_action'],
     additionalProperties: false,
   },
+
+  /* Homepage chat: only what the browser renders. Examples are optional
+     (not every question needs one), but when present they live here and
+     never inside "answer". */
+  chat: {
+    type: 'object',
+    properties: {
+      answer: str(1500),
+      examples: {
+        type: 'array',
+        maxItems: 5,
+        items: {
+          type: 'object',
+          properties: { de: str(160), en: str(200) },
+          required: ['de', 'en'],
+          additionalProperties: false,
+        },
+      },
+      follow_ups: { type: 'array', maxItems: 3, items: str(120) },
+    },
+    required: ['answer', 'examples', 'follow_ups'],
+    additionalProperties: false,
+  },
 };
 
 /* ---------- validation ---------- */

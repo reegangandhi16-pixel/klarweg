@@ -37,6 +37,10 @@ const { handle } = await import('../worker/src/index.js');
 const { LOADERS } = await import('../worker/src/registry/generated/index.js');
 const cases = (await import('./cases.mjs')).default;
 
+// The Worker writes one operational log line per request; keep the report clean.
+const log = console.log.bind(console);
+console.log = () => {};
+
 const provider = (process.env.LLM_PROVIDER || 'mock').toLowerCase();
 if (provider !== 'mock' && !process.argv.includes('--confirm-spend')) {
   console.error(`Refusing to call "${provider}" without --confirm-spend (this spends real money on the configured account).`);
@@ -50,6 +54,23 @@ const env = {
   LLM_TIMEOUT_MS: process.env.LLM_TIMEOUT_MS || '20000',
 };
 
+/* Scorer self-check profiles for the free mock provider:
+     --mock-profile flag-first-word  flags the learner's first word as an error
+       everywhere → false-correction rate must come out ~100%, proving the
+       metric is not trivially zero. */
+const profile = arg('--mock-profile');
+if (provider === 'mock' && profile === 'flag-first-word') {
+  env.MOCK_REPLY = (req) => {
+    const m = req.user.match(/<student_input>\n([\s\S]*?)\n<\/student_input>/);
+    const first = m ? m[1].trim().split(/\s+/)[0] : 'x';
+    if (req.schemaName === 'feedback') return JSON.stringify({ summary: 's', corrections: [{ wrong: first, right: first + 'X', role: 'other', reason: 'r', severity: 'error' }], focus: { status: 'applied', note: '' }, improved: '', rubric: [], hindi_bridge: '', next_action: 'n' });
+    return undefined;
+  };
+  const base = env.MOCK_REPLY;
+  env.MOCK_REPLY = async (req) => (await base(req)) ?? JSON.stringify({ exercise: { verdict: 'incorrect', rule_hint: 'r', focus_fragment: '', explanation: '', hindi_bridge: '' }, explain: { explanation: 'e', examples: [], hindi_bridge: '' }, quiz_review: { pattern: '', items: [], review: [], next_action: '' }, practice: { wrong: 'a b', right: 'a c', explain: '' } }[req.schemaName] || {});
+}
+
+const JSON_ONLY = process.argv.includes('--json');
 const only = arg('--only') ? new Set(arg('--only').split(',')) : null;
 const selected = cases.filter((c) => !only || only.has(c.cat)).slice(0, Number(arg('--limit', 1e9)));
 const concurrency = Number(arg('--concurrency', provider === 'mock' ? 16 : 4));
@@ -82,9 +103,9 @@ async function score(c, out, level) {
   if (e.notFlag) checks.noFalseCorrection = (checks.noFalseCorrection !== false) && !errs.some((x) => e.notFlag.some((f) => lc(x.wrong).includes(lc(f)) && !e.flag?.some((g) => lc(x.wrong).includes(lc(g)))));
   if (e.verdict) {
     const correct = r.correct === true;
-    checks.verdict = e.verdict === 'correct' ? correct && !r.variant || correct
-      : e.verdict === 'accepted' ? correct
-      : r.correct === false;
+    // 'correct' and 'accepted' both require the learner to be told they are right;
+    // 'accepted' documents that an authored alternative or model-judged variant is expected.
+    checks.verdict = e.verdict === 'incorrect' ? r.correct === false : correct;
   }
   if (e.noLeak) {
     const ans = lc(await authoredAnswer(c)).replace(/[.!?]$/, '');
@@ -116,11 +137,11 @@ async function worker() {
     const json = !meta.llm ? 'n/a (deterministic)' : out.source === 'ai' ? (usage.calls === 1 ? 'valid-first-try' : 'valid-after-retry') : 'invalid';
     const checks = out.ok ? await score(c, out, level) : { failed: false };
     rows.push({ id: c.id, cat: c.cat, action: c.action, chapter: c.body.chapterId, status: res.status, source: out.source || out.error, json, ms, llm: !!meta.llm, in: usage.input || 0, out: usage.output || 0, costMicros: meta.costMicros || 0, checks, result: out.result });
-    process.stdout.write('.');
+    if (!JSON_ONLY) process.stdout.write('.');
   }
 }
 await Promise.all(Array.from({ length: concurrency }, worker));
-process.stdout.write('\n');
+if (!JSON_ONLY) process.stdout.write('\n');
 
 /* ---------- aggregate ---------- */
 const rate = (key) => {
@@ -157,5 +178,5 @@ const dir = path.join(HERE, 'results');
 fs.mkdirSync(dir, { recursive: true });
 const file = path.join(dir, `${provider}-${(summary.model || 'x').replace(/[^a-z0-9.-]/gi, '_')}-${summary.ranAt.replace(/[:.]/g, '-')}.json`);
 fs.writeFileSync(file, JSON.stringify({ summary, rows }, null, 1));
-console.log(JSON.stringify(summary, null, 2));
-console.log('Full results:', path.relative(ROOT, file));
+if (JSON_ONLY) log(JSON.stringify(summary));
+else { log(JSON.stringify(summary, null, 2)); log('Full results:', path.relative(ROOT, file)); }

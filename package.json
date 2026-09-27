@@ -15,7 +15,7 @@
     "verify-audio-coverage": "tsx scripts/verify-audio-coverage.ts",
     "build-coverage": "tsx scripts/build-coverage-json.ts",
     "prebuild": "npm run verify-audio-coverage",
-    "test": "node scripts/build-tutor-registry.mjs && node --test access/worker/test/*.test.mjs tutor/worker/test/*.test.mjs && npm run check:generated",
+    "test": "node scripts/build-tutor-registry.mjs && node --test access/worker/test/*.test.mjs tutor/worker/test/*.test.mjs tutor/eval/*.test.mjs && npm run check:generated",
     "build:tutor-registry": "node scripts/build-tutor-registry.mjs",
     "tutor:eval": "node tutor/eval/run-eval.mjs",
     "deploy:tutor": "cd tutor/worker && wrangler deploy",

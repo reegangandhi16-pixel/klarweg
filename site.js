@@ -56,7 +56,7 @@
       var body = 'From: ' + (name ? name.value : '') + '\n' +
         'Email: ' + (email ? email.value : '') + '\n\n' +
         (msg ? msg.value : '');
-      window.location.href = 'mailto:hallo@klarweg.app'
+      window.location.href = 'mailto:klarwegofficial@gmail.com'
         + '?subject=' + encodeURIComponent(subject)
         + '&body=' + encodeURIComponent(body);
       var ok = form.querySelector('[data-form-ok]');

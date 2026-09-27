@@ -1530,7 +1530,7 @@
     // chapter data supplies a heroAnimationPath; renderer holds no filename).
     if (C.heroAnimationPath) {
       const watch = el('div', { class: 'watch-first' });
-      watch.appendChild(el('h3', { class: 'watch-first-title' }, '🎬 Watch First'));
+      watch.appendChild(el('h3', { class: 'watch-first-title' }, 'Watch first'));
       const frameWrap = el('div', { class: 'watch-first-frame' });
       const iframe = document.createElement('iframe');
       iframe.title = (C.title || 'Chapter') + ' — animation';

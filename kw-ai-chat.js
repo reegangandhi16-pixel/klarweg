@@ -100,7 +100,7 @@
   function remainingText(n) {
     if (n == null) return 'German-learning questions';
     var q = state.anon ? (n === 1 ? ' free question' : ' free questions') : (n === 1 ? ' question' : ' questions');
-    return n + q + ' left today';
+    return n + q + (state.monthLimited ? ' left this month' : ' left today');
   }
 
   /* Out of questions for today: lock the chat. A signed-out visitor is
@@ -140,12 +140,12 @@
       showGate('Klarweg AI chat is included with every Klarweg course level.', { label: 'See the courses', href: 'courses.html' });
       return;
     }
-    // Whichever runs out first — today's or this month's questions — is
-    // what is actually left.
+    // Show whichever runs out first. The month only counts when it is
+    // lower than today's allowance, or used up; otherwise today's does.
     var r = s.remaining || {};
     var day = typeof r.day === 'number' ? r.day : null;
     var month = typeof r.month === 'number' ? r.month : null;
-    state.monthLimited = month != null && (day == null || month <= day);
+    state.monthLimited = month != null && (month === 0 || day == null || month < day);
     state.remaining = state.monthLimited ? month : day;
     hideGate();
     if (state.remaining === 0) { showUsedUp(); return; }

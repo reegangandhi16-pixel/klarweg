@@ -112,6 +112,36 @@ export async function recordSavedWordsAttempt(env, userId, now = Date.now()) {
   ).bind(key, end).run();
 }
 
+/* Anonymous homepage-chat identity: HMAC(network + UTC day, RATE_SALT),
+   the same daily-rotating pseudonym as ipBucket — the raw IP is never
+   stored. IPv6 is grouped by its /64 prefix (one subscriber's network),
+   so rotating addresses inside it does not buy extra questions; IPv4 and
+   IPv4-mapped IPv6 use the full address. Returns null when there is no
+   usable client IP, so anonymous use fails closed. */
+export function networkOf(ip) {
+  ip = String(ip || "").trim().toLowerCase();
+  if (/^\d{1,3}(\.\d{1,3}){3}$/.test(ip)) return ip;
+  if (!ip.includes(":") || !/^[0-9a-f:.]+$/.test(ip)) return null;
+  const v4 = ip.match(/^::ffff:(\d{1,3}(?:\.\d{1,3}){3})$/);
+  if (v4) return v4[1];
+  const halves = ip.split("::");
+  if (halves.length > 2) return null;
+  const head = halves[0] ? halves[0].split(":") : [];
+  const tail = halves.length === 2 && halves[1] ? halves[1].split(":") : [];
+  const fill = halves.length === 2 ? 8 - head.length - tail.length : 0;
+  if (fill < 0) return null;
+  const groups = [...head, ...Array(fill).fill("0"), ...tail];
+  if (groups.length !== 8 || groups.some((g) => !/^[0-9a-f]{1,4}$/.test(g))) return null;
+  return groups.slice(0, 4).map((g) => g.padStart(4, "0")).join(":") + "::/64";
+}
+
+export async function anonymousChatId(env, request) {
+  const net = networkOf(request.headers.get("CF-Connecting-IP"));
+  if (!net) return null;
+  const day = new Date().toISOString().slice(0, 10);
+  return "anon:" + await hmacHex(env.RATE_SALT || "dev-salt", "chat|" + net + "|" + day);
+}
+
 /* Cheap housekeeping — call opportunistically, never blocks a response. */
 export async function sweepRateCounters(env, now = Date.now()) {
   try {

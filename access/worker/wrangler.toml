@@ -20,8 +20,9 @@ CASHFREE_ENV = "sandbox"
 CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
 
-# Klarweg AI (see src/ai.js). ON for the owner-only controlled test: with the
-# Chapter-1 preview at 0, only accounts holding a level entitlement qualify.
+# Klarweg AI (see src/ai.js). ON. Chapter AI: with the Chapter-1 preview at 0,
+# only accounts holding a level entitlement qualify. Homepage chat: buyers, plus
+# a few free questions a day for signed-out visitors (AI_ANON_* below).
 # Deploy with `npm run deploy:access -- --allow-ai-enabled`.
 # Kill switch: set "false" and redeploy (no flag needed), or wrangler rollback.
 AI_ENABLED = "true"
@@ -36,8 +37,13 @@ AI_GLOBAL_DAILY_REQUESTS = "300"
 AI_GLOBAL_DAILY_BUDGET_MICROS = "1000000"
 # Homepage chat: own per-learner bucket (any owned level), inside the same
 # global ceilings above.
-AI_CHAT_DAILY_UNITS = "10"
+AI_CHAT_DAILY_UNITS = "20"
 AI_CHAT_MONTHLY_UNITS = "100"
+# Homepage chat for signed-out visitors: free questions per network per UTC
+# day ("0" switches anonymous chat off), and all anonymous visitors together
+# per UTC day, kept well inside AI_GLOBAL_DAILY_REQUESTS.
+AI_ANON_DAILY_UNITS = "3"
+AI_ANON_GLOBAL_DAILY_REQUESTS = "100"
 
 [[d1_databases]]
 binding = "DB"

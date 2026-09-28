@@ -6,7 +6,9 @@
      GET  /ai/status?scope=chat
      POST /ai/<action>      action ∈ ACTION_UNITS below
                             (chat: the homepage chat — no chapter; any
-                            owned level; its own quota bucket)
+                            owned level; its own quota bucket. Signed-out
+                            visitors get a small free daily allowance —
+                            see anonTier)
 
    This Worker owns the HttpOnly session and the D1 database, so it
    is the only place that can answer "who is this, what did they
@@ -15,6 +17,8 @@
      1. kill switch        AI_ENABLED must be "true" and the TUTOR
                            service binding present        → 503
      2. session            HttpOnly kw_session cookie       → 401
+                           (except the anonymous homepage chat:
+                           Klarweg Origin + pseudonymous network id)
      3. request shape      action, chapterId, size          → 400
      4. entitlement        the chapter's level must be owned,
                            or it is Chapter 1 of its level
@@ -22,6 +26,8 @@
      5. global ceiling     requests + spend for the UTC day → 503
      6. per-user quota     daily AND monthly units, reserved
                            atomically before the call       → 429
+                           (anonymous: per-network daily units plus
+                           the shared anonymous daily pool)
      7. forward            service binding → klarweg-tutor,
                            with NO user identity in the body
      8. account            deterministic answers (no model call)
@@ -33,6 +39,8 @@
    ============================================================ */
 import { getSessionToken, findSessionUser } from "./sessions.js";
 import { readEntitlements } from "./entitlements.js";
+import { anonymousChatId } from "./ratelimit.js";
+import { corsHeaders } from "./cors.js";
 
 /* Quota currency per action. A Goethe exam review reads a long text
    and writes a rubric, so it costs more. Future conversation/roleplay
@@ -64,8 +72,10 @@ const DEFAULTS = {
   AI_PREVIEW_MONTHLY_UNITS: 20,
   AI_GLOBAL_DAILY_REQUESTS: 3000,
   AI_GLOBAL_DAILY_BUDGET_MICROS: 5000000, // US$5.00 / day until raised deliberately
-  AI_CHAT_DAILY_UNITS: 10,
+  AI_CHAT_DAILY_UNITS: 20,
   AI_CHAT_MONTHLY_UNITS: 100,
+  AI_ANON_DAILY_UNITS: 3,
+  AI_ANON_GLOBAL_DAILY_REQUESTS: 100,
 };
 
 function num(env, key) {
@@ -117,6 +127,19 @@ async function chatTierFor(env, user) {
   return { tier: "chat", daily: num(env, "AI_CHAT_DAILY_UNITS"), monthly: num(env, "AI_CHAT_MONTHLY_UNITS") };
 }
 
+/* Signed-out visitors get a few free homepage chat questions per UTC day,
+   counted per network under a daily-rotating pseudonym (anonymousChatId —
+   never the raw IP). All anonymous visitors together share one daily pool
+   (AI_ANON_GLOBAL_DAILY_REQUESTS), inside the global ceiling, so anonymous
+   traffic cannot use up what paying learners rely on.
+   AI_ANON_DAILY_UNITS = "0" switches anonymous chat off. Signed-in users
+   never use this tier: without a level they stay not_entitled. */
+const ANON_POOL = "anon:all"; // not hex, so never equal to a visitor id
+function anonTier(env) {
+  const daily = num(env, "AI_ANON_DAILY_UNITS");
+  return daily > 0 ? { tier: "anon", daily, monthly: null, pool: num(env, "AI_ANON_GLOBAL_DAILY_REQUESTS") } : null;
+}
+
 /* Validate the chat request before any quota is touched. The message is
    rejected when too long; history is context only, so it is capped to the
    last few turns and trimmed rather than rejected. */
@@ -140,7 +163,7 @@ function readChatInput(body) {
 /* Preview and chat usage are counted in their own buckets, so trying
    Chapter 1 of a level or chatting on the homepage never eats into (or
    borrows from) the chapter allowance. */
-const bucketKey = (key, tier) => (tier === "preview" ? "p" + key : tier === "chat" ? "c" + key : key);
+const bucketKey = (key, tier) => (tier === "preview" ? "p" + key : tier === "chat" ? "c" + key : tier === "anon" ? "a" + key : key);
 
 async function usedUnits(env, userId, key) {
   const row = await env.DB.prepare("SELECT units FROM ai_usage WHERE user_id = ?1 AND period = ?2").bind(userId, key).first();
@@ -196,7 +219,7 @@ async function recordGlobal(env, day, meta, failed) {
 async function sweepUsage(env) {
   try {
     const cutoff = new Date(Date.now() - 40 * 86400000).toISOString().slice(0, 10);
-    await env.DB.prepare("DELETE FROM ai_usage WHERE (period LIKE 'd:%' OR period LIKE 'pd:%' OR period LIKE 'cd:%') AND substr(period, instr(period, ':') + 1) < ?1").bind(cutoff).run();
+    await env.DB.prepare("DELETE FROM ai_usage WHERE (period LIKE 'd:%' OR period LIKE 'pd:%' OR period LIKE 'cd:%' OR period LIKE 'ad:%' OR period LIKE 'ag:%') AND substr(period, instr(period, ':') + 1) < ?1").bind(cutoff).run();
   } catch { /* housekeeping only */ }
 }
 
@@ -207,7 +230,14 @@ export async function aiStatus(request, env) {
   const isChat = url.searchParams.get("scope") === "chat";
   const chapter = parseChapterId(url.searchParams.get("chapter") || "");
   const user = await findSessionUser(env.DB, getSessionToken(request));
-  if (!user) return json({ ok: true, enabled: true, signedIn: false, eligible: false });
+  if (!user) {
+    const anon = isChat ? anonTier(env) : null;
+    const id = anon ? await anonymousChatId(env, request) : null;
+    if (!id) return json({ ok: true, enabled: true, signedIn: false, eligible: false });
+    const { day, dayKey } = periods();
+    const [d, g] = await Promise.all([usedUnits(env, id, bucketKey(dayKey, anon.tier)), usedUnits(env, ANON_POOL, "ag:" + day)]);
+    return json({ ok: true, enabled: true, signedIn: false, eligible: true, tier: anon.tier, remaining: { day: Math.max(0, Math.min(anon.daily - d, anon.pool - g)) } });
+  }
   if (!isChat && !chapter) return json({ ok: true, enabled: true, signedIn: true, eligible: false });
   const t = isChat ? await chatTierFor(env, user) : await tierFor(env, user, chapter);
   if (!t) return json({ ok: true, enabled: true, signedIn: true, eligible: false });
@@ -229,7 +259,16 @@ export async function aiRequest(request, env, action, ctx) {
   }
 
   const user = await findSessionUser(env.DB, getSessionToken(request));
-  if (!user) return json({ ok: false, error: "auth_required", message: "Sign in to use Klarweg AI." }, 401);
+  // Signed out: only the homepage chat, only while the anonymous allowance
+  // is on, and only from the Klarweg site. index.js already refuses a
+  // foreign Origin; an anonymous request must also carry the site's own.
+  let anonId = null;
+  if (!user) {
+    const allowed = action === "chat" && !!corsHeaders(request)["Access-Control-Allow-Origin"] && anonTier(env);
+    anonId = allowed ? await anonymousChatId(env, request) : null;
+    if (!anonId) return json({ ok: false, error: "auth_required", message: "Sign in to use Klarweg AI." }, 401);
+  }
+  const who = user ? user.id : anonId;
 
   if (!Object.prototype.hasOwnProperty.call(ACTION_UNITS, action)) {
     return json({ ok: false, error: "unknown_action" }, 404);
@@ -246,7 +285,7 @@ export async function aiRequest(request, env, action, ctx) {
   if (isChat) {
     chat = readChatInput(body);
     if (chat.error) return json({ ok: false, ...chat.error }, 400);
-    t = await chatTierFor(env, user);
+    t = user ? await chatTierFor(env, user) : anonTier(env);
     if (!t) {
       return json({ ok: false, error: "not_entitled", message: "Klarweg AI chat is included with every Klarweg course level." }, 403);
     }
@@ -267,15 +306,21 @@ export async function aiRequest(request, env, action, ctx) {
   const units = action === "check_writing" && body.submitted === true ? EXAM_WRITING_UNITS : ACTION_UNITS[action];
   const dKey = bucketKey(dayKey, t.tier);
   const mKey = bucketKey(monthKey, t.tier);
-  if (!(await reserve(env, user.id, dKey, units, t.daily))) {
+  const poolKey = "ag:" + day;
+  if (!(await reserve(env, who, dKey, units, t.daily))) {
     const dayMessage = t.tier === "preview" ? "You have used today’s Klarweg AI preview. It resets at midnight UTC."
       : t.tier === "chat" ? "You have used today’s Klarweg AI chat messages. They reset at midnight UTC."
+      : t.tier === "anon" ? "You have used today’s free Klarweg AI questions. Sign in to keep asking."
       : "You have used today’s Klarweg AI allowance. It resets at midnight UTC.";
     return json({ ok: false, error: "quota_day", message: dayMessage }, 429);
   }
-  if (!(await reserve(env, user.id, mKey, units, t.monthly))) {
-    await release(env, user.id, dKey, units);
+  if (t.monthly != null && !(await reserve(env, who, mKey, units, t.monthly))) {
+    await release(env, who, dKey, units);
     return json({ ok: false, error: "quota_month", message: t.tier === "chat" ? "You have used this month’s Klarweg AI chat messages." : "You have used this month’s Klarweg AI allowance." }, 429);
+  }
+  if (t.tier === "anon" && !(await reserve(env, ANON_POOL, poolKey, units, t.pool))) {
+    await release(env, who, dKey, units);
+    return json({ ok: false, error: "anon_busy", message: "Today’s free Klarweg AI questions are used up. Sign in to keep asking, or try again tomorrow." }, 429);
   }
 
   // Forward ONLY learning context — no user id, email, name or phone.
@@ -319,7 +364,13 @@ export async function aiRequest(request, env, action, ctx) {
   // refunded retries during an outage stay bounded by the daily ceiling.
   const charge = meta.llm === true && out && out.ok === true && out.source === "ai";
   const tasks = [];
-  if (!charge) tasks.push(release(env, user.id, dKey, units), release(env, user.id, mKey, units));
+  if (!charge) {
+    tasks.push(release(env, who, dKey, units));
+    if (t.monthly != null) tasks.push(release(env, who, mKey, units));
+  }
+  // The anonymous pool, like the global day, keeps every request that
+  // reached the model (failed ones too); only no-model answers return.
+  if (t.tier === "anon" && !meta.llm) tasks.push(release(env, ANON_POOL, poolKey, units));
   if (meta.llm) tasks.push(recordGlobal(env, day, meta, !(out && out.ok && out.source === "ai")));
   await Promise.all(tasks).catch(() => {});
   if (ctx && ctx.waitUntil && Math.random() < 0.02) ctx.waitUntil(sweepUsage(env));

@@ -12,7 +12,10 @@
 
    Privacy: the conversation lives only in this page's memory. The
    last few turns are sent with each question for context and are
-   never stored in the browser.
+   never stored in the browser. A random anonymous browser id (no
+   personal data) is kept in localStorage and sent as X-Klarweg-Anon,
+   so a signed-out visitor's free questions are counted per browser;
+   the server only ever stores a daily-rotating hash of it.
 
    Performance: nothing is requested until the chat section comes
    near the viewport (IntersectionObserver).
@@ -24,6 +27,7 @@
   if (!root) return;
 
   var LANG_KEY = 'kw-ai-lang';            // shared with the chapter Klarweg AI
+  var ANON_KEY = 'kw-ai-anon-id';         // random browser id for signed-out free questions
   var MAX_MESSAGE = 600;                  // mirrors the server limit
   var MAX_TURNS = 6;                      // turns of context sent per question
 
@@ -47,6 +51,31 @@
     if (cls) n.className = cls;
     if (text != null) n.textContent = text;
     return n;
+  }
+
+  /* ---------- anonymous browser id ----------
+     16 random bytes as 32 lowercase hex, kept in localStorage so reloads
+     keep the same free-question count. If storage is unavailable it lives
+     for this page only. Sent in a header, never in a URL. */
+  var anonIdCache = null;
+  function anonId() {
+    if (anonIdCache) return anonIdCache;
+    var id = null;
+    try { id = localStorage.getItem(ANON_KEY); } catch (e) {}
+    if (!/^[0-9a-f]{32}$/.test(id || '')) {
+      var c = global.crypto;
+      if (!c || typeof c.getRandomValues !== 'function') return null;
+      var bytes = c.getRandomValues(new Uint8Array(16));
+      id = '';
+      for (var i = 0; i < bytes.length; i++) id += (bytes[i] < 16 ? '0' : '') + bytes[i].toString(16);
+      try { localStorage.setItem(ANON_KEY, id); } catch (e) {}
+    }
+    return (anonIdCache = id);
+  }
+  function anonHeaders(h) {
+    var id = anonId();
+    if (id) h['X-Klarweg-Anon'] = id;
+    return h;
   }
 
   /* ---------- language preference ---------- */
@@ -157,7 +186,7 @@
   function checkStatus() {
     if (statusInflight) return statusInflight;
     if (!api() || typeof fetch !== 'function') { applyStatus({ enabled: false }); return Promise.resolve(); }
-    statusInflight = fetch(api() + '/ai/status?scope=chat', { credentials: 'include' })
+    statusInflight = fetch(api() + '/ai/status?scope=chat', { credentials: 'include', headers: anonHeaders({}) })
       .then(function (r) { return r.ok ? r.json() : { enabled: false }; })
       .catch(function () { return { enabled: false }; })
       .then(function (s) { statusInflight = null; applyStatus(s); });
@@ -240,7 +269,7 @@
     fetch(api() + '/ai/chat', {
       method: 'POST',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: anonHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({ message: message, history: history.slice(-MAX_TURNS), lang: lang() })
     }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) { j = j || {}; j.httpStatus = r.status; return j; });

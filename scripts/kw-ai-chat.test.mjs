@@ -8,6 +8,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import { randomBytes } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -66,17 +67,29 @@ function page() {
   return { body, log, status, gate, form, input, send };
 }
 
+/* A browser's localStorage. Pass the same one to two load() calls to
+   simulate a reload; `blocked` makes every access throw. */
+function storage({ blocked = false, initial = {} } = {}) {
+  const data = new Map(Object.entries(initial));
+  const guard = () => { if (blocked) throw new Error('SecurityError'); };
+  return { data, getItem: (k) => { guard(); return data.has(k) ? data.get(k) : null; }, setItem: (k, v) => { guard(); data.set(k, String(v)); } };
+}
+
 /* Load kw-ai-chat.js with a stubbed Access Worker. `server.status` is the
-   /ai/status body; `server.chat(n)` answers the n-th POST /ai/chat. */
-async function load(server) {
+   /ai/status body; `server.chat(n)` answers the n-th POST /ai/chat. Every
+   request's URL and headers are recorded in `requests`. */
+async function load(server, { store = storage() } = {}) {
   const p = page();
   const posts = [];
+  const requests = [];
   const res = (status, body) => ({ ok: status >= 200 && status < 300, status, json: async () => body });
   const ctx = {
     document: { querySelector: (s) => p.body.querySelector(s), createElement: (t) => new Node(t) },
-    localStorage: { getItem: () => null, setItem() {} },
+    localStorage: store,
+    crypto: { getRandomValues: (a) => { const r = randomBytes(a.length); for (let i = 0; i < a.length; i++) a[i] = r[i]; return a; } },
     KW_ACCESS_API: 'https://access.test',
     fetch: async (url, init = {}) => {
+      requests.push({ url, headers: { ...(init.headers || {}) } });
       if (url.includes('/ai/status')) return res(200, typeof server.status === 'function' ? server.status() : server.status);
       posts.push(JSON.parse(init.body));
       const [code, body] = server.chat(posts.length);
@@ -88,7 +101,7 @@ async function load(server) {
   vm.runInContext(SOURCE, ctx);
   await settle();
   const ask = async (text) => { p.input.value = text; p.input.fire('input'); p.form.fire('submit'); await settle(); };
-  return { ...p, posts, ask, statusText: () => p.status.textContent, gateText: () => (p.gate.hidden ? null : p.gate.textContent) };
+  return { ...p, posts, requests, ask, statusText: () => p.status.textContent, gateText: () => (p.gate.hidden ? null : p.gate.textContent) };
 }
 const settle = () => new Promise((r) => setTimeout(r, 5));
 
@@ -196,4 +209,74 @@ test('chat UI: signed out with anonymous chat off, and signed in without a level
   const down = await load({ status: { ok: true, enabled: false }, chat: () => answer });
   assert.equal(down.statusText(), 'Not available right now');
   assert.equal(down.input.disabled, true);
+});
+
+/* ---------- anonymous browser id (X-Klarweg-Anon) ---------- */
+const HEX32 = /^[0-9a-f]{32}$/;
+
+test('chat UI: a fresh browser creates a random 32-hex id, stores it, and sends it only in the X-Klarweg-Anon header', async () => {
+  const store = storage();
+  const c = await load(anon(3), { store });
+  const id = store.data.get('kw-ai-anon-id');
+  assert.match(id, HEX32);
+  await c.ask('Frage?');
+  assert.equal(c.requests.length, 2, 'status + one question');
+  for (const r of c.requests) {
+    assert.equal(r.headers['X-Klarweg-Anon'], id);
+    assert.ok(!r.url.includes(id), 'never in the URL');
+  }
+  assert.equal(c.requests[1].headers['Content-Type'], 'application/json');
+  assert.ok(!JSON.stringify(c.posts).includes(id), 'not in the body either');
+});
+
+test('chat UI: a reload keeps the same id; another browser (new storage) gets a different one', async () => {
+  const store = storage();
+  const first = await load(anon(3), { store });
+  const again = await load(anon(2), { store });
+  assert.equal(again.requests[0].headers['X-Klarweg-Anon'], first.requests[0].headers['X-Klarweg-Anon']);
+  const other = await load(anon(3));
+  assert.notEqual(other.requests[0].headers['X-Klarweg-Anon'], first.requests[0].headers['X-Klarweg-Anon']);
+});
+
+test('chat UI: a malformed stored id is replaced; blocked storage falls back to one id for the page', async () => {
+  const store = storage({ initial: { 'kw-ai-anon-id': 'not-an-id' } });
+  await load(anon(3), { store });
+  assert.match(store.data.get('kw-ai-anon-id'), HEX32);
+
+  const blocked = await load(anon(3), { store: storage({ blocked: true }) });
+  await blocked.ask('Frage?');
+  const ids = blocked.requests.map((r) => r.headers['X-Klarweg-Anon']);
+  assert.match(ids[0], HEX32);
+  assert.equal(ids[1], ids[0], 'same id for the whole page');
+});
+
+/* ---------- homepage markup + CSS: LIVE indicator and the finalized chat colors ---------- */
+const HTML = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const rule = (sel) => { const m = HTML.match(new RegExp('\\n' + sel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([^}]*)\\}')); return m ? m[1] : null; };
+
+test('homepage: "Klarweg AI" is followed by a LIVE label with a red status dot', () => {
+  assert.match(HTML, /<div class="chat-name">Klarweg AI <span class="chat-live"><span class="chat-live-dot" aria-hidden="true"><\/span>LIVE<\/span><\/div>/);
+  assert.match(rule('.chat-live-dot'), /background:\s*var\(--live-red\)/);
+  const red = (HTML.match(/--live-red:\s*(#[0-9A-Fa-f]{6})/) || [])[1];
+  assert.ok(red, '--live-red token defined');
+  const grammar = [...HTML.matchAll(/--g-[a-z-]+:\s*(#[0-9A-Fa-f]{6})/g)].map((m) => m[1].toUpperCase());
+  assert.ok(grammar.length > 10 && !grammar.includes(red.toUpperCase()), 'not a grammar color');
+  assert.notEqual(red.toUpperCase(), (HTML.match(/--coral:\s*(#[0-9A-Fa-f]{6})/) || [])[1].toUpperCase(), 'not coral');
+});
+
+test('homepage: the LIVE dot pulses with CSS only, and is static under prefers-reduced-motion', () => {
+  assert.match(rule('.chat-live-dot'), /animation:\s*kw-live-pulse\s/);
+  assert.match(HTML, /@keyframes kw-live-pulse\s*\{/);
+  const reduced = [...HTML.matchAll(/@media \(prefers-reduced-motion: reduce\) \{([\s\S]*?)\n\}/g)].map((m) => m[1]).join('\n');
+  assert.match(reduced, /\.chat-live-dot\s*\{\s*animation:\s*none;\s*\}/);
+  assert.ok(!/setInterval|setTimeout\([^)]*live/i.test(SOURCE), 'no JS timer drives the dot');
+});
+
+test('homepage: finalized chat colors unchanged — name, question bubble and Send are var(--accent) #1F4E4A', () => {
+  assert.match(HTML, /--accent:\s*#1F4E4A;/);
+  assert.match(rule('.chat-name'), /color:\s*var\(--accent\);/);
+  assert.match(rule('.msg-user .msg-bubble'), /background:\s*var\(--accent\);/);
+  assert.match(rule('.chat-send'), /background:\s*var\(--accent\);/);
+  assert.match(HTML, /\.chat-send:hover \{ background: var\(--accent\); \}/);
+  assert.match(HTML, /\.kw-chat \.chat-send:disabled \{ opacity: 1; cursor: not-allowed; \}/);
 });

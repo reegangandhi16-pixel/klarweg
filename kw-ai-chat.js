@@ -6,7 +6,9 @@
    Browser → klarweg-access (/ai/status?scope=chat, POST /ai/chat)
            → klarweg-tutor → model provider.
    This file holds no key and no instructions; the server decides
-   who may chat (signed in + owns a level) and how much.
+   who may chat (signed in + owns a level, or a signed-out visitor
+   within today's free questions) and how much. The remaining count
+   shown here is display only — the server enforces it.
 
    Privacy: the conversation lives only in this page's memory. The
    last few turns are sent with each question for context and are
@@ -35,7 +37,7 @@
   var langButtons = root.querySelectorAll('[data-kw-chat-lang]');
 
   var history = [];      // { role: 'user' | 'assistant', text }
-  var state = { eligible: false, busy: false, remaining: null, checked: false };
+  var state = { eligible: false, busy: false, remaining: null, checked: false, anon: false, monthLimited: false };
 
   function api() { return String(global.KW_ACCESS_API || '').replace(/\/+$/, ''); }
 
@@ -97,18 +99,36 @@
 
   function remainingText(n) {
     if (n == null) return 'German-learning questions';
-    return n === 1 ? '1 question left today' : n + ' questions left today';
+    var q = state.anon ? (n === 1 ? ' free question' : ' free questions') : (n === 1 ? ' question' : ' questions');
+    return n + q + ' left today';
+  }
+
+  /* Out of questions for today: lock the chat. A signed-out visitor is
+     sent to sign in; a learner waits for the reset. */
+  function showUsedUp() {
+    setEnabled(false);
+    if (state.anon) {
+      setStatusText('Sign in to ask');
+      showGate('You have used today’s free Klarweg AI questions. Sign in to keep asking.', signInLink());
+    } else if (state.monthLimited) {
+      setStatusText(remainingText(0));
+      showGate('You have used this month’s Klarweg AI chat questions.');
+    } else {
+      setStatusText(remainingText(0));
+      showGate('You have used today’s Klarweg AI chat questions. They reset at midnight UTC.');
+    }
   }
 
   function applyStatus(s) {
     state.checked = true;
+    state.anon = !!(s && s.enabled && !s.signedIn && s.eligible);
     if (!s || !s.enabled) {
       setEnabled(false);
       setStatusText('Not available right now');
       showGate('Klarweg AI chat is not available right now. The course works as normal.');
       return;
     }
-    if (!s.signedIn) {
+    if (!s.signedIn && !s.eligible) {
       setEnabled(false);
       setStatusText('Sign in to ask');
       showGate('Sign in to ask Klarweg AI.', signInLink());
@@ -120,14 +140,15 @@
       showGate('Klarweg AI chat is included with every Klarweg course level.', { label: 'See the courses', href: 'courses.html' });
       return;
     }
-    state.remaining = s.remaining && typeof s.remaining.day === 'number' ? s.remaining.day : null;
+    // Whichever runs out first — today's or this month's questions — is
+    // what is actually left.
+    var r = s.remaining || {};
+    var day = typeof r.day === 'number' ? r.day : null;
+    var month = typeof r.month === 'number' ? r.month : null;
+    state.monthLimited = month != null && (day == null || month <= day);
+    state.remaining = state.monthLimited ? month : day;
     hideGate();
-    if (state.remaining === 0) {
-      setEnabled(false);
-      setStatusText(remainingText(0));
-      showGate('You have used today’s Klarweg AI chat questions. They reset at midnight UTC.');
-      return;
-    }
+    if (state.remaining === 0) { showUsedUp(); return; }
     setStatusText(remainingText(state.remaining));
     setEnabled(true);
   }
@@ -236,11 +257,7 @@
         if (typeof state.remaining === 'number') {
           state.remaining = Math.max(0, state.remaining - 1);
           setStatusText(remainingText(state.remaining));
-          if (state.remaining === 0) {
-            setEnabled(false);
-            showGate('You have used today’s Klarweg AI chat questions. They reset at midnight UTC.');
-            return;
-          }
+          if (state.remaining === 0) { showUsedUp(); return; }
         }
         setEnabled(true);
         input.focus();

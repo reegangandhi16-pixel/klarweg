@@ -639,9 +639,9 @@ test('AI accounting: our own 25 s abort is recorded as a failed request; a bindi
 const chatReply = { ok: true, source: 'ai', result: { answer: 'a', examples: [], follow_ups: [] }, meta: { llm: true, usage: { input: 1500, output: 400, calls: 1 }, costMicros: 350 } };
 const chatBody = (message = 'What is the difference between gern and gerne?', extra = {}) => ({ message, ...extra });
 
-test('AI chat: signed out → 401; signed in without any level → 403; tutor never called', async () => {
+test('AI chat: signed out with anonymous chat off → 401; signed in without any level → 403; tutor never called', async () => {
   const t = tutorStub(chatReply);
-  const env = aiEnv(t);
+  const env = aiEnv(t, { AI_ANON_DAILY_UNITS: '0' });
   assert.equal((await req(env, 'POST', '/ai/chat', { body: chatBody() })).status, 401);
   const u = await signupUser(env);
   const r = await req(env, 'POST', '/ai/chat', { cookie: u.cookie, body: chatBody() });
@@ -753,7 +753,7 @@ test('AI chat: shares the global ceiling and the kill switch', async () => {
 
 test('AI chat status: scope=chat reports eligibility and remaining chat messages only', async () => {
   const env = aiEnv(tutorStub(chatReply));
-  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat')).json, { ok: true, enabled: true, signedIn: false, eligible: false });
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat')).json, { ok: true, enabled: true, signedIn: false, eligible: true, tier: 'anon', remaining: { day: 3 } });
   const u = await signupUser(env);
   assert.equal((await req(env, 'GET', '/ai/status?scope=chat', { cookie: u.cookie })).json.eligible, false);
   await entitle(env, u.id, 'B1');
@@ -761,7 +761,195 @@ test('AI chat status: scope=chat reports eligibility and remaining chat messages
   const s = (await req(env, 'GET', '/ai/status?scope=chat', { cookie: u.cookie })).json;
   assert.equal(s.eligible, true);
   assert.equal(s.tier, 'chat');
-  assert.deepEqual(s.remaining, { day: 9, month: 99 });
+  assert.deepEqual(s.remaining, { day: 19, month: 99 });
   // the chapter status is unchanged by chat usage
   assert.equal((await req(env, 'GET', '/ai/status?chapter=b1-10-passiv-praesens', { cookie: u.cookie })).json.remaining.day, 40);
+});
+
+/* ---------- homepage chat: 20/day buyers, signed-out free questions ---------- */
+import { readFileSync } from 'node:fs';
+import { networkOf } from '../src/ratelimit.js';
+
+const anonIp = (ip, opts = {}) => ({ ...opts, headers: { 'CF-Connecting-IP': ip, ...(opts.headers || {}) } });
+const today = () => new Date().toISOString().slice(0, 10);
+const tomlVar = (k) => (readFileSync(path.join(WORKER_DIR, 'wrangler.toml'), 'utf8').match(new RegExp('^' + k + ' = "([^"]*)"', 'm')) || [])[1];
+
+test('AI chat limits: shipped config is 20/day + 100/month for buyers, 3 anonymous per network, 100 anonymous pool; chapter + global unchanged', () => {
+  assert.equal(tomlVar('AI_CHAT_DAILY_UNITS'), '20');
+  assert.equal(tomlVar('AI_CHAT_MONTHLY_UNITS'), '100');
+  assert.equal(tomlVar('AI_ANON_DAILY_UNITS'), '3');
+  assert.equal(tomlVar('AI_ANON_GLOBAL_DAILY_REQUESTS'), '100');
+  assert.equal(tomlVar('AI_DAILY_UNITS'), '40');
+  assert.equal(tomlVar('AI_MONTHLY_UNITS'), '400');
+  assert.equal(tomlVar('AI_GLOBAL_DAILY_REQUESTS'), '300');
+  assert.equal(tomlVar('AI_GLOBAL_DAILY_BUDGET_MICROS'), '1000000');
+});
+
+test('AI chat: a buyer gets 20 questions a day (21st → 429); the 100/month limit is unchanged', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t);
+  const u = await signupUser(env);
+  await entitle(env, u.id, 'A1');
+  for (let i = 0; i < 20; i++) assert.equal((await req(env, 'POST', '/ai/chat', { cookie: u.cookie, body: chatBody() })).status, 200, 'question ' + (i + 1));
+  const over = await req(env, 'POST', '/ai/chat', { cookie: u.cookie, body: chatBody() });
+  assert.equal(over.status, 429);
+  assert.equal(over.json.error, 'quota_day');
+  assert.equal(t.seen.length, 20);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat', { cookie: u.cookie })).json.remaining, { day: 0, month: 80 });
+
+  // month: 100 used this month → quota_month even with the day untouched
+  const env2 = aiEnv(tutorStub(chatReply));
+  const v = await signupUser(env2);
+  await entitle(env2, v.id, 'A1');
+  await env2.DB.prepare('INSERT INTO ai_usage (user_id, period, units) VALUES (?1, ?2, 100)').bind(v.id, 'cm:' + today().slice(0, 7)).run();
+  const month = await req(env2, 'POST', '/ai/chat', { cookie: v.cookie, body: chatBody() });
+  assert.equal(month.status, 429);
+  assert.equal(month.json.error, 'quota_month');
+});
+
+test('AI chat anonymous: 3 free questions per network per day; the 4th → 429 and never reaches the tutor; nothing identifying is forwarded', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t);
+  for (let i = 0; i < 3; i++) {
+    const r = await req(env, 'POST', '/ai/chat', anonIp('198.51.100.7', { body: chatBody() }));
+    assert.equal(r.status, 200, 'free question ' + (i + 1));
+    assert.equal(r.json.result.answer, 'a');
+  }
+  const fourth = await req(env, 'POST', '/ai/chat', anonIp('198.51.100.7', { body: chatBody() }));
+  assert.equal(fourth.status, 429);
+  assert.equal(fourth.json.error, 'quota_day');
+  assert.match(fourth.json.message, /Sign in/);
+  assert.equal(t.seen.length, 3, 'the 4th never reached the tutor');
+  assert.deepEqual(Object.keys(t.seen[0].body).sort(), ['history', 'lang', 'message']);
+  assert.ok(!JSON.stringify(t.seen).includes('198.51.100.7'), 'no IP forwarded');
+  // the raw IP is never stored — only the pseudonymous daily id
+  const rows = (await env.DB.prepare('SELECT user_id, period, units FROM ai_usage ORDER BY period').all()).results;
+  assert.ok(rows.every((r) => !r.user_id.includes('198.51')));
+  assert.deepEqual(rows.map((r) => [r.user_id.startsWith('anon:'), r.period.slice(0, 3), r.units]), [[true, 'ad:', 3], [true, 'ag:', 3]]);
+  // another network still has its own 3
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp('198.51.100.8', { body: chatBody() }))).status, 200);
+  // chapter actions stay sign-in only
+  assert.equal((await req(env, 'POST', '/ai/check_exercise', anonIp('198.51.100.9', { body: aiBody() }))).status, 401);
+});
+
+test('AI chat anonymous: separate from signed-in quotas in both directions; a signed-in non-buyer stays 403', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t);
+  const ip = '198.51.100.20';
+  const buyer = await signupUser(env);
+  await entitle(env, buyer.id, 'A1');
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp(ip, { cookie: buyer.cookie, body: chatBody() }))).status, 200);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat', anonIp(ip))).json.remaining, { day: 3 }, 'buyer use does not touch the anonymous allowance');
+  for (let i = 0; i < 3; i++) assert.equal((await req(env, 'POST', '/ai/chat', anonIp(ip, { body: chatBody() }))).status, 200);
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp(ip, { body: chatBody() }))).status, 429);
+  // same network: the buyer is unaffected and still has 19 left today
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp(ip, { cookie: buyer.cookie, body: chatBody() }))).status, 200);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat', anonIp(ip, { cookie: buyer.cookie }))).json.remaining, { day: 18, month: 98 });
+  assert.equal((await env.DB.prepare('SELECT units FROM ai_usage WHERE user_id = ?1 AND period LIKE ?2').bind(buyer.id, 'cd:%').first()).units, 2);
+
+  // signed in without a level: still not_entitled, even from a network with free questions left
+  const seen = t.seen.length;
+  const plain = await signupUser(env);
+  const r = await req(env, 'POST', '/ai/chat', anonIp('198.51.100.21', { cookie: plain.cookie, body: chatBody() }));
+  assert.equal(r.status, 403);
+  assert.equal(r.json.error, 'not_entitled');
+  assert.equal((await req(env, 'GET', '/ai/status?scope=chat', anonIp('198.51.100.21', { cookie: plain.cookie }))).json.eligible, false);
+  assert.equal(t.seen.length, seen, 'tutor not called');
+});
+
+test('AI chat anonymous: all visitors share a daily pool (default 100) separate from the global ceiling; buyers keep working', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t, { AI_ANON_GLOBAL_DAILY_REQUESTS: '2' });
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp('198.51.100.30', { body: chatBody() }))).status, 200);
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp('198.51.100.31', { body: chatBody() }))).status, 200);
+  const third = await req(env, 'POST', '/ai/chat', anonIp('198.51.100.32', { body: chatBody() }));
+  assert.equal(third.status, 429);
+  assert.equal(third.json.error, 'anon_busy');
+  assert.equal(t.seen.length, 2);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat', anonIp('198.51.100.33'))).json.remaining, { day: 0 }, 'fresh network sees 0 once the pool is empty');
+  const buyer = await signupUser(env);
+  await entitle(env, buyer.id, 'A1');
+  assert.equal((await req(env, 'POST', '/ai/chat', { cookie: buyer.cookie, body: chatBody() })).status, 200, 'buyers are not limited by the anonymous pool');
+
+  // default pool of 100, with the global request ceiling at 300
+  const env2 = aiEnv(tutorStub(chatReply), { AI_GLOBAL_DAILY_REQUESTS: '300' });
+  await env2.DB.prepare("INSERT INTO ai_usage (user_id, period, units) VALUES ('anon:all', ?1, 100)").bind('ag:' + today()).run();
+  const full = await req(env2, 'POST', '/ai/chat', anonIp('198.51.100.34', { body: chatBody() }));
+  assert.equal(full.status, 429);
+  assert.equal(full.json.error, 'anon_busy');
+});
+
+test('AI chat anonymous: AI_ANON_DAILY_UNITS="0" switches it off; the kill switch and global ceiling still apply', async () => {
+  const t = tutorStub(chatReply);
+  const off = aiEnv(t, { AI_ANON_DAILY_UNITS: '0' });
+  assert.deepEqual((await req(off, 'GET', '/ai/status?scope=chat', anonIp('198.51.100.40'))).json, { ok: true, enabled: true, signedIn: false, eligible: false });
+  const r = await req(off, 'POST', '/ai/chat', anonIp('198.51.100.40', { body: chatBody() }));
+  assert.equal(r.status, 401);
+  assert.equal(r.json.error, 'auth_required');
+  const killed = makeEnv({ AI_ENABLED: 'false', TUTOR: t });
+  assert.equal((await req(killed, 'POST', '/ai/chat', anonIp('198.51.100.41', { body: chatBody() }))).status, 503);
+  assert.deepEqual((await req(killed, 'GET', '/ai/status?scope=chat', anonIp('198.51.100.41'))).json, { ok: true, enabled: false });
+  const ceiling = aiEnv(t, { AI_GLOBAL_DAILY_REQUESTS: '5' });
+  await ceiling.DB.prepare('INSERT INTO ai_global (day, requests) VALUES (?1, 5)').bind(today()).run();
+  const busy = await req(ceiling, 'POST', '/ai/chat', anonIp('198.51.100.42', { body: chatBody() }));
+  assert.equal(busy.status, 503);
+  assert.equal(busy.json.error, 'ai_busy');
+  assert.equal(t.seen.length, 0);
+});
+
+test('AI chat anonymous: a missing or foreign Origin is refused, and so is a request with no usable client IP', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t);
+  const none = await req(env, 'POST', '/ai/chat', anonIp('198.51.100.50', { origin: null, body: chatBody() }));
+  assert.equal(none.status, 401);
+  assert.equal(none.json.error, 'auth_required');
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp('198.51.100.50', { origin: 'https://evil.example', body: chatBody() }))).status, 403);
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp('not-an-ip', { body: chatBody() }))).status, 401);
+  assert.equal(t.seen.length, 0);
+  assert.equal(await env.DB.prepare('SELECT units FROM ai_usage').first(), null, 'nothing reserved');
+});
+
+test('AI chat anonymous: IPv6 is grouped by /64; IPv4-mapped IPv6 counts as the IPv4 address', async () => {
+  assert.equal(networkOf('2001:db8:1:2::1'), '2001:0db8:0001:0002::/64');
+  assert.equal(networkOf('2001:0DB8:0001:0002:aaaa:bbbb:cccc:dddd'), '2001:0db8:0001:0002::/64');
+  assert.equal(networkOf('::ffff:198.51.100.60'), '198.51.100.60');
+  assert.equal(networkOf('198.51.100.60'), '198.51.100.60');
+  assert.equal(networkOf('2001:db8::1::2'), null);
+  assert.equal(networkOf(''), null);
+
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t);
+  for (const ip of ['2001:db8:1:2::1', '2001:db8:1:2:ffff::9', '2001:0db8:0001:0002:aaaa:bbbb:cccc:dddd']) {
+    assert.equal((await req(env, 'POST', '/ai/chat', anonIp(ip, { body: chatBody() }))).status, 200, ip);
+  }
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp('2001:db8:1:2:1234::5', { body: chatBody() }))).status, 429, 'same /64');
+  assert.equal((await req(env, 'POST', '/ai/chat', anonIp('2001:db8:1:3::1', { body: chatBody() }))).status, 200, 'next /64 is separate');
+});
+
+test('AI chat anonymous: refunds — failed model call refunds the visitor but keeps the pool and global count; no-model answers and bad input cost nothing', async () => {
+  const failing = tutorStub({ ok: false, error: 'ai_timeout', message: 'Klarweg AI chat is unavailable right now.', meta: { llm: true, usage: { input: 0, output: 0, calls: 0, failedCalls: 1 }, costMicros: 950 } });
+  const env = aiEnv(failing);
+  const r = await req(env, 'POST', '/ai/chat', anonIp('198.51.100.70', { body: chatBody() }));
+  assert.equal(r.status, 503);
+  assert.equal((await env.DB.prepare("SELECT units FROM ai_usage WHERE period LIKE 'ad:%'").first()).units, 0, 'visitor refunded');
+  assert.equal((await env.DB.prepare("SELECT units FROM ai_usage WHERE period LIKE 'ag:%'").first()).units, 1, 'pool keeps the model call');
+  const g = await env.DB.prepare('SELECT requests, failures FROM ai_global').first();
+  assert.equal(g.requests, 1); assert.equal(g.failures, 1);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat', anonIp('198.51.100.70'))).json.remaining, { day: 3 });
+
+  const noModel = aiEnv(tutorStub({ ok: true, source: 'deterministic', result: { answer: 'x', examples: [], follow_ups: [] }, meta: { llm: false } }));
+  assert.equal((await req(noModel, 'POST', '/ai/chat', anonIp('198.51.100.71', { body: chatBody() }))).status, 200);
+  const rows = (await noModel.DB.prepare('SELECT units FROM ai_usage').all()).results;
+  assert.ok(rows.every((x) => x.units === 0), 'visitor and pool both released');
+
+  const bad = aiEnv(tutorStub(chatReply));
+  assert.equal((await req(bad, 'POST', '/ai/chat', anonIp('198.51.100.72', { body: chatBody('x'.repeat(601)) }))).status, 400);
+  assert.equal(await bad.DB.prepare('SELECT units FROM ai_usage').first(), null);
+});
+
+test('AI chat status signed out: counts down per network; non-chat scopes unchanged', async () => {
+  const env = aiEnv(tutorStub(chatReply));
+  await req(env, 'POST', '/ai/chat', anonIp('198.51.100.80', { body: chatBody() }));
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat', anonIp('198.51.100.80'))).json, { ok: true, enabled: true, signedIn: false, eligible: true, tier: 'anon', remaining: { day: 2 } });
+  assert.deepEqual((await req(env, 'GET', '/ai/status?chapter=a1-1-alphabet', anonIp('198.51.100.80'))).json, { ok: true, enabled: true, signedIn: false, eligible: false });
 });

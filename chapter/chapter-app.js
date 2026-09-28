@@ -455,7 +455,7 @@
         e.preventDefault();
         const t = $('#sec-' + s.id);
         if (!t) return;
-        const y = t.getBoundingClientRect().top + window.pageYOffset - 72;
+        const y = t.getBoundingClientRect().top + window.pageYOffset - stickyOffset();
         window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
       });
       nav.appendChild(item);
@@ -4723,6 +4723,13 @@
     $$('.dash-section').forEach(s => io.observe(s));
   }
 
+  /* Height of what sticks at the top (fixed top bar + sticky section tabs),
+     so scrolling to a section never hides its heading under them. */
+  function stickyOffset() {
+    const tb = $('#topbar'), nav = $('.dash-nav');
+    return (tb ? tb.offsetHeight : 0) + (nav ? nav.offsetHeight : 0) + 8;
+  }
+
   /* ---------- topbar solid on scroll ---------- */
   function setupTopbar() {
     const tb = $('#topbar');
@@ -4740,7 +4747,7 @@
       const next = isChapterComplete() ? 'summary'
         : completable.find(id => id !== 'quiz' && !sectionDone(id))
           || (completable.includes('quiz') && !quizComplete() ? 'quiz' : 'summary');
-      const t = $('#sec-' + next); if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 64, behavior: 'smooth' });
+      const t = $('#sec-' + next); if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - stickyOffset(), behavior: 'smooth' });
     });
     $('#act-restart').addEventListener('click', () => {
       if (!confirm('Reset all progress for this chapter?')) return;
@@ -5198,7 +5205,27 @@
   //     kw-access.js and is not paywalled content → render as before.
   //   - this is a real chapter page whose access-control script failed
   //     to load → fail CLOSED, never render protected content.
+  /* German text is marked lang="de" so browsers hyphenate long compounds
+     with German rules (chapter.css) and screen readers read it as German.
+     Covers the rendered chapter and anything added later (pop-ups, AI). */
+  const GERMAN_SEL = '.flow-inner > h1.display-xl, .de, .de-em, .vp-de, .vword-de, .vword-ex, .example-line, .gap-sentence, .speak-prompt, .speak-heard, .parser-sentence, .sentence-unit-text, .story-scene, .story-line, .gh-de, .wp-compare-form';
+  function markGerman(root) {
+    if (!root || root.nodeType !== 1) return;
+    if (root.matches(GERMAN_SEL) && !root.hasAttribute('lang')) root.setAttribute('lang', 'de');
+    root.querySelectorAll(GERMAN_SEL).forEach((n) => { if (!n.hasAttribute('lang')) n.setAttribute('lang', 'de'); });
+    // English UI inside German text: the parser's role labels (NOM, V2, AKK…)
+    if (root.matches('.parser-label')) root.setAttribute('lang', 'en');
+    root.querySelectorAll('.parser-label').forEach((n) => n.setAttribute('lang', 'en'));
+  }
+  function watchGerman() {
+    markGerman(document.body);
+    if (typeof MutationObserver !== 'function') return;
+    new MutationObserver((list) => list.forEach((m) => m.addedNodes.forEach(markGerman)))
+      .observe(document.body, { childList: true, subtree: true });
+  }
+
   function init() {
+    watchGerman();
     if (window.KWAccess && typeof window.KWAccess.ready === 'function') {
       window.KWAccess.ready().then(function () {
         if (window.KWAccess.guardChapterPage(C)) renderChapter();

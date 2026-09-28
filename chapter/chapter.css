@@ -4,6 +4,9 @@
    visually identical to the homepage. Light-first, color second.
 ============================================================ */
 :root {
+  /* Fixed chapter top bar; the sticky section tabs sit directly below it. */
+  --topbar-h: 76px;
+  --dash-nav-h: 61px;
   --bg-canvas: #FAFAF7;
   --bg-surface: #FFFFFF;
   --bg-elevated: #F4F3EE;
@@ -511,10 +514,10 @@ img { max-width: 100%; display: block; }
 
 .dash-actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
 
-/* Sticky section nav */
+/* Sticky section nav — sticks directly BELOW the fixed top bar, never under it */
 .dash-nav {
   position: sticky;
-  top: 0;
+  top: var(--topbar-h);
   z-index: 30;
   background: var(--bg-canvas);
   border-bottom: 1px solid var(--hairline-light);
@@ -554,7 +557,7 @@ img { max-width: 100%; display: block; }
 .dash-nav-item.is-active.is-done .nav-tick { background: var(--bg-canvas); color: var(--g-object); border-color: var(--bg-canvas); }
 
 /* Section shell */
-.dash-section { padding: 64px 0 16px; scroll-margin-top: 70px; }
+.dash-section { padding: 64px 0 16px; scroll-margin-top: calc(var(--topbar-h) + var(--dash-nav-h) + 8px); }
 .section-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 28px; flex-wrap: wrap; }
 .section-head-left { max-width: 680px; }
 .section-kicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 12px; }
@@ -650,7 +653,11 @@ img { max-width: 100%; display: block; }
 .vword-tag.gender-n { background: color-mix(in srgb, var(--g-article) 12%, var(--bg-surface)); color: var(--g-article); }
 .vword-tag .de-link { color: inherit; }
 .vword-ex { font-family: var(--font-german); font-size: 14px; color: var(--ink-secondary); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hairline-light); font-style: italic; line-height: 1.5; }
-.vword-actions { display: flex; gap: 8px; margin-top: 14px; }
+.vword-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+/* Each action sizes to its own label ("Mark learned" needs more room than
+   "Save") and never breaks mid-label; in a card too narrow for both, the
+   row wraps instead. */
+.vword-actions .vword-btn { flex: 1 1 auto; white-space: nowrap; }
 .vword-btn {
   flex: 1;
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
@@ -1195,7 +1202,8 @@ img { max-width: 100%; display: block; }
 .chapter-topbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 32px;
+  height: var(--topbar-h); box-sizing: border-box;
+  padding: 0 32px;
   transition: all var(--dur-base) var(--ease);
 }
 .chapter-topbar.is-solid { background: var(--bg-canvas); border-bottom: 1px solid var(--hairline); }
@@ -1204,7 +1212,7 @@ img { max-width: 100%; display: block; }
 .topbar-actions { display: flex; align-items: center; gap: 10px; }
 .topbar-xp { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink-primary); background: var(--bg-glass-strong); border: 1px solid var(--hairline); padding: 7px 14px; border-radius: var(--r-full); }
 .topbar-xp .xp-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); }
-@media (max-width: 720px) { .chapter-topbar { padding: 12px 18px; } .topbar-xp { display: none; } }
+@media (max-width: 720px) { :root { --topbar-h: 60px; } .chapter-topbar { padding: 0 16px; } .topbar-xp { display: none; } }
 
 /* Account menu (topbar) */
 .acct { position: relative; }
@@ -1219,7 +1227,7 @@ img { max-width: 100%; display: block; }
    so it overflowed the left edge (−50px at 320px, −10px at 360px). Pin it to
    the viewport under the fixed topbar, right-aligned inside 12px gutters. */
 @media (max-width: 480px) {
-  .acct-menu { position: fixed; top: 61px; left: 12px; right: 12px; width: auto; max-width: 300px; margin-left: auto; }
+  .acct-menu { position: fixed; top: calc(var(--topbar-h) + 4px); left: 12px; right: 12px; width: auto; max-width: 300px; margin-left: auto; }
 }
 .acct-head { padding: 10px 12px 12px; border-bottom: 1px solid var(--hairline-light); margin-bottom: 6px; }
 .acct-head .nm { font-weight: 600; font-size: 14px; }
@@ -1675,7 +1683,7 @@ img { max-width: 100%; display: block; }
    STORY DIALOGUE — signature split-layout section (before vocab)
    ============================================================ */
 .story-split { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: start; }
-.story-left { position: sticky; top: 96px; }
+.story-left { position: sticky; top: calc(var(--topbar-h) + var(--dash-nav-h) + 24px); }
 .story-left .eyebrow { margin-bottom: 18px; }
 .story-headline { font-family: var(--font-display); font-weight: 600; font-size: clamp(38px, 4.4vw, 60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink-primary); margin: 0 0 22px; }
 .story-headline em { font-style: italic; font-family: var(--font-german); font-weight: 500; }
@@ -1757,3 +1765,64 @@ img { max-width: 100%; display: block; }
 /* Comprehension header: the single "Show transcript & translation" control sits
    beside the eyebrow, directly above the questions it glosses. */
 .comprehension-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+
+/* ============================================================
+   RESPONSIVE PASS (all chapter pages, A1–C2)
+   Measured across 258 pages × 10 viewports. Nothing is hidden or
+   shrunk to fit: long words break only when they cannot fit, flexible
+   columns may shrink, and phone touch targets reach 44px.
+   ============================================================ */
+
+/* Long German compounds and slash-joined forms must never widen the page.
+   "anywhere" only breaks a word that cannot fit on its own line; German
+   text (lang="de", set by chapter-app.js) hyphenates properly first, and
+   only words of 12+ letters. Tables keep their own sizing and scroll. */
+.single, main, .grammar-helper-panel, .kw-ai-chat { overflow-wrap: anywhere; }
+.case-table, .case-table *, .dash-nav, .meta-pill, .btn, .filter-chip { overflow-wrap: normal; }
+[lang="de"] { hyphens: auto; -webkit-hyphens: auto; hyphenate-limit-chars: 12 6 6; }
+.case-table [lang="de"] { hyphens: manual; -webkit-hyphens: manual; }
+
+/* Flexible columns may shrink below their longest word (min-width: auto
+   made them grow past the viewport). */
+.story-split > *, .card-grid > *, .dash-section > *, .flex-between > *, .takeaway > *,
+.accordion-head > *, .gh-row > *, .next-chapter > * { min-width: 0; }
+.gh-row { flex-wrap: wrap; }
+/* Sentence parser: a long word may shrink to the line, and on phones the
+   role labels centred above the first/last word get room at the edges. */
+.parser-sentence { overflow-wrap: anywhere; }
+.parser-tok { max-width: 100%; }
+@media (max-width: 720px) {
+  .parser-sentence { padding-inline: 12px; }
+}
+
+@media (max-width: 860px) {
+  .story-split { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 720px) {
+  .flow-section { padding: 80px 20px; }
+}
+
+/* Chapter title: long single words ("Wechselpräpositionen") need a smaller
+   minimum on phones; the desktop rule above is unchanged. */
+@media (max-width: 600px) {
+  .display-xl { font-size: clamp(34px, 10vw, 92px); }
+}
+
+/* Button labels may wrap on narrow screens instead of poking out. */
+@media (max-width: 480px) {
+  .btn { white-space: normal; text-align: center; }
+}
+
+/* Touch targets: 44px on phones and touch screens. Same look, larger hit area. */
+@media (max-width: 720px), (pointer: coarse) {
+  .btn, .dash-nav-item, .filter-chip, .section-complete, .acct-btn,
+  .story-speed button, .story-play-line, .audio-speed button,
+  .vword-btn, .vword-voice { min-height: 44px; }
+  .story-play-line, .audio-speed button, .story-speed button, .filter-chip, .vword-voice, .vword-voicewrap .vword-btn { min-width: 44px; }
+  .story-play-line { width: 44px; height: 44px; }
+  .prev-chapter-link { display: inline-flex; align-items: center; min-height: 44px; }
+  .topbar-brand { min-height: 44px; }
+  .gap-input { min-height: 44px; vertical-align: middle; }
+  .search-box input { min-height: 44px; }
+}

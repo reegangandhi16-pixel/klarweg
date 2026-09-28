@@ -6,9 +6,15 @@
      GET  /ai/status?scope=chat
      POST /ai/<action>      action ∈ ACTION_UNITS below
                             (chat: the homepage chat — no chapter; any
-                            owned level; its own quota bucket. Signed-out
-                            visitors get a small free daily allowance —
-                            see anonTier)
+                            owned level. chapter_chat: free questions
+                            inside a chapter. Signed-out visitors get a
+                            small free homepage-chat allowance — see
+                            anonTier)
+
+   One account-wide Klarweg AI allowance (accountTier): the homepage
+   chat and every chapter action of a level owner draw on the SAME
+   daily and monthly units, so a buyer has AI_CHAT_DAILY_UNITS a day in
+   total, not one allowance per surface.
 
    This Worker owns the HttpOnly session and the D1 database, so it
    is the only place that can answer "who is this, what did they
@@ -55,7 +61,8 @@ const ACTION_UNITS = {
   more_like_this: 1,
   explain_grammar: 1,
   quiz_review: 1,
-  chat: 1, // homepage chat — metered in its own bucket (see chatTierFor)
+  chat: 1,         // homepage chat
+  chapter_chat: 1, // free questions inside a chapter
 };
 const EXAM_WRITING_UNITS = 3;
 
@@ -68,13 +75,11 @@ const MAX_BODY = 12 * 1024;
 const TUTOR_TIMEOUT_MS = 25000;
 
 const DEFAULTS = {
-  AI_DAILY_UNITS: 40,
-  AI_MONTHLY_UNITS: 400,
   AI_PREVIEW_DAILY_UNITS: 5,
   AI_PREVIEW_MONTHLY_UNITS: 20,
   AI_GLOBAL_DAILY_REQUESTS: 3000,
   AI_GLOBAL_DAILY_BUDGET_MICROS: 5000000, // US$5.00 / day until raised deliberately
-  AI_CHAT_DAILY_UNITS: 20,
+  AI_CHAT_DAILY_UNITS: 20,    // the account-wide allowance: homepage + chapters together
   AI_CHAT_MONTHLY_UNITS: 100,
   AI_ANON_DAILY_UNITS: 3,
   AI_ANON_NETWORK_DAILY_REQUESTS: 30,
@@ -109,12 +114,19 @@ function periods(now = new Date()) {
   return { day, dayKey: "d:" + day, monthKey: "m:" + day.slice(0, 7) };
 }
 
-/* Which quota tier applies to this user for this chapter, or null. */
+/* The one account-wide allowance. Tier id and buckets ("cd:"/"cm:") are
+   the homepage chat's, so chapter use and homepage use are counted
+   together. */
+function accountTier(env) {
+  return { tier: "chat", daily: num(env, "AI_CHAT_DAILY_UNITS"), monthly: num(env, "AI_CHAT_MONTHLY_UNITS") };
+}
+
+/* Which quota tier applies to this user for this chapter, or null. A
+   level owner uses the account-wide allowance; the Chapter-1 preview for
+   non-owners keeps its own (separately configured) bucket. */
 async function tierFor(env, user, chapter) {
   const ent = await readEntitlements(env.DB, user.id);
-  if (ent[chapter.level]) {
-    return { tier: "full", daily: num(env, "AI_DAILY_UNITS"), monthly: num(env, "AI_MONTHLY_UNITS") };
-  }
+  if (ent[chapter.level]) return accountTier(env);
   if (chapter.number === 1) {
     return { tier: "preview", daily: num(env, "AI_PREVIEW_DAILY_UNITS"), monthly: num(env, "AI_PREVIEW_MONTHLY_UNITS") };
   }
@@ -122,12 +134,12 @@ async function tierFor(env, user, chapter) {
 }
 
 /* Homepage chat has no chapter: it is open to signed-in learners who own
-   at least one level (the same entitlement the chapter AI requires; there
-   is no chat preview), with its own small daily/monthly allowance. */
+   at least one level (there is no chat preview), on the account-wide
+   allowance. */
 async function chatTierFor(env, user) {
   const ent = await readEntitlements(env.DB, user.id);
   if (!Object.values(ent).some(Boolean)) return null;
-  return { tier: "chat", daily: num(env, "AI_CHAT_DAILY_UNITS"), monthly: num(env, "AI_CHAT_MONTHLY_UNITS") };
+  return accountTier(env);
 }
 
 /* Signed-out visitors get a few free homepage chat questions per UTC day
@@ -308,6 +320,10 @@ export async function aiRequest(request, env, action, ctx) {
   } else {
     const chapter = parseChapterId(body.chapterId);
     if (!chapter) return json({ ok: false, error: "invalid_chapter", message: "Unknown chapter." }, 400);
+    if (action === "chapter_chat") {
+      chat = readChatInput(body);
+      if (chat.error) return json({ ok: false, ...chat.error }, 400);
+    }
     t = await tierFor(env, user, chapter);
     if (!t) {
       return json({ ok: false, error: "not_entitled", message: `Klarweg AI for ${chapter.level} is part of the ${chapter.level} course.` }, 403);
@@ -326,14 +342,14 @@ export async function aiRequest(request, env, action, ctx) {
   const poolKey = "ag:" + day;
   if (!(await reserve(env, who, dKey, units, t.daily))) {
     const dayMessage = t.tier === "preview" ? "You have used today’s Klarweg AI preview. It resets at midnight UTC."
-      : t.tier === "chat" ? "You have used today’s Klarweg AI chat messages. They reset at midnight UTC."
+      : t.tier === "chat" ? "You have used today’s Klarweg AI questions. They reset at midnight UTC."
       : t.tier === "anon" ? "You have used today’s free Klarweg AI questions. Sign in to keep asking."
       : "You have used today’s Klarweg AI allowance. It resets at midnight UTC.";
     return json({ ok: false, error: "quota_day", message: dayMessage }, 429);
   }
   if (t.monthly != null && !(await reserve(env, who, mKey, units, t.monthly))) {
     await release(env, who, dKey, units);
-    return json({ ok: false, error: "quota_month", message: t.tier === "chat" ? "You have used this month’s Klarweg AI chat messages." : "You have used this month’s Klarweg AI allowance." }, 429);
+    return json({ ok: false, error: "quota_month", message: t.tier === "chat" ? "You have used this month’s Klarweg AI questions." : "You have used this month’s Klarweg AI allowance." }, 429);
   }
   if (t.tier === "anon" && !(await reserve(env, anon.network, netKey, units, t.network))) {
     await release(env, who, dKey, units);
@@ -346,7 +362,9 @@ export async function aiRequest(request, env, action, ctx) {
   }
 
   // Forward ONLY learning context — no user id, email, name or phone.
-  const forward = isChat ? { message: chat.message, history: chat.history, lang: body.lang === "hi" ? "hi" : "en" } : {
+  const lang = body.lang === "hi" ? "hi" : "en";
+  const forward = isChat ? { message: chat.message, history: chat.history, lang }
+    : action === "chapter_chat" ? { chapterId: body.chapterId, message: chat.message, history: chat.history, lang } : {
     chapterId: body.chapterId,
     sectionId: typeof body.sectionId === "string" ? body.sectionId.slice(0, 20) : "",
     itemId: typeof body.itemId === "string" ? body.itemId.slice(0, 60) : "",

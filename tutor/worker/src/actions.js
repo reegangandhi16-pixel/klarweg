@@ -13,7 +13,7 @@
    ============================================================ */
 import { resolveItem, describeItem } from './registry.js';
 import { SCHEMAS, validate, parseModelJson, SchemaError } from './schema.js';
-import { buildSystem, buildUser, buildChatSystem, buildChatUser, SCHEMA_FOR_ACTION } from './prompts.js';
+import { buildSystem, buildUser, buildChatSystem, buildChatUser, buildChapterChatSystem, buildChapterChatUser, SCHEMA_FOR_ACTION } from './prompts.js';
 import { callModel, ProviderError } from './providers/index.js';
 import {
   isExactMatch, isCaseOnlyDifference, gapIsCorrect, firstDifference,
@@ -385,7 +385,7 @@ function clampAttempt(a) {
 
 /* ---------- homepage chat (general German learning; no chapter) ----------
    The one action without a chapter: klarweg-access decides who may use it
-   (signed in + owns a level) and meters it in its own quota bucket.
+   and meters it on the account-wide Klarweg AI allowance.
    Limits mirror access/worker/src/ai.js (CHAT_LIMITS) and are enforced here
    too, because this Worker never trusts its caller's validation. */
 export const CHAT_LIMITS = { message: 600, turns: 6, turnChars: 800 };
@@ -407,9 +407,31 @@ function chatHistory(history) {
 async function chat(env, _C, body) {
   const message = requireInput(body.message, CHAT_LIMITS.message);
   const history = chatHistory(body.history);
-  const req = {
+  return runChat(env, {
     system: buildChatSystem(),
     user: buildChatUser({ message, history, lang: body.lang }),
+  }, CHAT_UNAVAILABLE);
+}
+
+/* ---------- chapter chat ----------
+   Free questions inside one chapter: the chat's limits, schema and
+   rendering, grounded in this chapter's authoritative material (the
+   browser sends only the chapter id, never lesson text). */
+const CHAPTER_CHAT_UNAVAILABLE = 'Klarweg AI is unavailable right now. The lesson works as normal — try again in a moment.';
+
+async function chapterChat(env, C, body) {
+  const message = requireInput(body.message, CHAT_LIMITS.message);
+  const history = chatHistory(body.history);
+  return runChat(env, {
+    system: buildChapterChatSystem(C.level),
+    user: buildChapterChatUser({ C, message, history, lang: body.lang }),
+  }, CHAPTER_CHAT_UNAVAILABLE);
+}
+
+async function runChat(env, { system, user }, unavailableMessage) {
+  const req = {
+    system,
+    user,
     schema: SCHEMAS.chat,
     schemaName: 'chat',
     maxTokens: 1600,
@@ -422,10 +444,10 @@ async function chat(env, _C, body) {
     const out = m.parsed;
     out.examples = (out.examples || []).filter((e) => e.de && e.en);
     out.follow_ups = (out.follow_ups || []).filter(Boolean);
-    if (!out.answer) return unavailable(env, { code: 'ai_unavailable', usage: m.usage }, CHAT_UNAVAILABLE);
+    if (!out.answer) return unavailable(env, { code: 'ai_unavailable', usage: m.usage }, unavailableMessage);
     return aiResult(env, out, m);
   } catch (err) {
-    return unavailable(env, err, CHAT_UNAVAILABLE);
+    return unavailable(env, err, unavailableMessage);
   }
 }
 
@@ -437,6 +459,7 @@ export const ACTIONS = {
   explain_grammar: explainGrammar,
   quiz_review: quizReview,
   chat,
+  chapter_chat: chapterChat,
 };
 
 /* Actions that do not operate on a chapter (index.js skips the chapter lookup). */

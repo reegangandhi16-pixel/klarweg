@@ -82,11 +82,24 @@
     } catch (e) {}
   }
 
-  /* ---------- status: one request per page, only when a slot exists ---------- */
+  /* ---------- config readiness ----------
+     Chapter pages get kw-config.js (KW_ACCESS_API) from kw-access.js,
+     which loads it asynchronously; KWAccess.ready() resolves once that
+     wiring is done (or has failed — it never fails open). It is the same
+     signal chapter-app.js waits for before rendering the chapter. */
+  function whenReady(fn) {
+    var A = global.KWAccess;
+    if (A && typeof A.ready === 'function') A.ready().then(fn, fn);
+    else fn();
+  }
+
+  /* ---------- status: one request per page ---------- */
   var statusPromise = null;
   function status() {
     if (statusPromise) return statusPromise;
-    if (!api() || typeof fetch !== 'function') return (statusPromise = Promise.resolve({ enabled: false }));
+    // No Access Worker address yet: off for now, but not remembered —
+    // a missing config is never cached as "AI disabled".
+    if (!api() || typeof fetch !== 'function') return Promise.resolve({ enabled: false });
     statusPromise = fetch(api() + '/ai/status?chapter=' + encodeURIComponent(C.id), { credentials: 'include' })
       .then(function (r) { return r.ok ? r.json() : { enabled: false }; })
       .catch(function () { return { enabled: false }; });
@@ -609,13 +622,15 @@
   /* ---------- queue ---------- */
   function mount(spec) {
     if (!spec || !spec.host || !MOUNT[spec.kind]) return;
-    status().then(function (s) {
-      // AI off, signed out, or not entitled to this chapter → render nothing.
-      if (!s || !s.enabled || !s.eligible) return;
-      if (!spec.host.isConnected || spec.host.getAttribute('data-kw-ai') === 'on') return;
-      spec.host.setAttribute('data-kw-ai', 'on');
-      spec.host.classList.add('kw-ai');
-      MOUNT[spec.kind](spec);
+    whenReady(function () {
+      status().then(function (s) {
+        // AI off, signed out, or not entitled to this chapter → render nothing.
+        if (!s || !s.enabled || !s.eligible) return;
+        if (!spec.host.isConnected || spec.host.getAttribute('data-kw-ai') === 'on') return;
+        spec.host.setAttribute('data-kw-ai', 'on');
+        spec.host.classList.add('kw-ai');
+        MOUNT[spec.kind](spec);
+      });
     });
   }
 
@@ -625,8 +640,11 @@
   global.KW_AI = { status: status };
 
   // The chapter chat launcher: one status request per page (shared with
-  // the inline modules); rendered only for eligible learners.
-  status().then(function (s) {
-    if (s && s.enabled && s.eligible && document.body) mountChapterChat(s);
+  // the inline modules), made once the config is ready; rendered only for
+  // eligible learners.
+  whenReady(function () {
+    status().then(function (s) {
+      if (s && s.enabled && s.eligible && document.body) mountChapterChat(s);
+    });
   });
 })(window);

@@ -26,8 +26,6 @@ GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleuse
 # Deploy with `npm run deploy:access -- --allow-ai-enabled`.
 # Kill switch: set "false" and redeploy (no flag needed), or wrangler rollback.
 AI_ENABLED = "true"
-AI_DAILY_UNITS = "40"
-AI_MONTHLY_UNITS = "400"
 # Controlled test: no Chapter-1 preview for non-buyers (0 = always 429).
 AI_PREVIEW_DAILY_UNITS = "0"
 AI_PREVIEW_MONTHLY_UNITS = "0"
@@ -35,8 +33,9 @@ AI_PREVIEW_MONTHLY_UNITS = "0"
 AI_GLOBAL_DAILY_REQUESTS = "300"
 # US$ micro-units per UTC day across all learners (1000000 = $1.00).
 AI_GLOBAL_DAILY_BUDGET_MICROS = "1000000"
-# Homepage chat: own per-learner bucket (any owned level), inside the same
-# global ceilings above.
+# Klarweg AI per account: ONE allowance shared by the homepage chat and all
+# chapter AI of a level owner (any owned level for the homepage, that level
+# for its chapters), inside the same global ceilings above.
 AI_CHAT_DAILY_UNITS = "20"
 AI_CHAT_MONTHLY_UNITS = "100"
 # Homepage chat for signed-out visitors: free questions per browser/device

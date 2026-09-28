@@ -496,7 +496,7 @@ test('AI entitlement: locked level → 403; owned level → allowed; Chapter 1 �
   assert.equal(st.json.tier, 'preview');
   await entitle(env, u.id, 'A2');
   assert.equal((await req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody('a2-5-dass') })).status, 200);
-  assert.equal((await req(env, 'GET', '/ai/status?chapter=a2-5-dass', { cookie: u.cookie })).json.tier, 'full');
+  assert.equal((await req(env, 'GET', '/ai/status?chapter=a2-5-dass', { cookie: u.cookie })).json.tier, 'chat', 'owned level → the account-wide allowance');
 });
 
 test('AI forwards no personal data to the tutor', async () => {
@@ -512,7 +512,7 @@ test('AI forwards no personal data to the tutor', async () => {
 
 test('AI quota: daily limit enforced atomically; deterministic answers are refunded', async () => {
   const t = tutorStub();
-  const env = aiEnv(t, { AI_DAILY_UNITS: '3' });
+  const env = aiEnv(t, { AI_CHAT_DAILY_UNITS: '3' });
   const u = await signupUser(env);
   await entitle(env, u.id, 'A2');
   const results = await Promise.all(Array.from({ length: 6 }, () => req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody() })));
@@ -520,14 +520,14 @@ test('AI quota: daily limit enforced atomically; deterministic answers are refun
   assert.equal(results.filter((r) => r.status === 429).length, 3);
   // a fresh user whose calls are deterministic (no model) never runs out
   const t2 = tutorStub({ ok: true, source: 'deterministic', result: { correct: true }, meta: { llm: false } });
-  const env2 = aiEnv(t2, { AI_DAILY_UNITS: '2' });
+  const env2 = aiEnv(t2, { AI_CHAT_DAILY_UNITS: '2' });
   const v = await signupUser(env2);
   await entitle(env2, v.id, 'A2');
   for (let i = 0; i < 5; i++) assert.equal((await req(env2, 'POST', '/ai/check_exercise', { cookie: v.cookie, body: aiBody() })).status, 200);
 });
 
 test('AI quota: monthly limit and preview limits', async () => {
-  const env = aiEnv(tutorStub(), { AI_MONTHLY_UNITS: '2', AI_PREVIEW_DAILY_UNITS: '1' });
+  const env = aiEnv(tutorStub(), { AI_CHAT_MONTHLY_UNITS: '2', AI_PREVIEW_DAILY_UNITS: '1' });
   const u = await signupUser(env);
   await entitle(env, u.id, 'A2');
   assert.equal((await req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody() })).status, 200);
@@ -555,7 +555,7 @@ test('AI global daily spend breaker trips for everyone', async () => {
 
 test('AI tutor failure: learner refunded, failure counted, clean 503', async () => {
   const failing = { fetch: async () => { throw new Error('binding down'); } };
-  const env = aiEnv(failing, { AI_DAILY_UNITS: '1' });
+  const env = aiEnv(failing, { AI_CHAT_DAILY_UNITS: '1' });
   const u = await signupUser(env);
   await entitle(env, u.id, 'A2');
   for (let i = 0; i < 3; i++) {
@@ -563,7 +563,7 @@ test('AI tutor failure: learner refunded, failure counted, clean 503', async () 
     assert.equal(r.status, 503);
     assert.equal(r.json.error, 'ai_unavailable');
   }
-  const used = await env.DB.prepare("SELECT units FROM ai_usage WHERE period LIKE 'd:%'").first();
+  const used = await env.DB.prepare("SELECT units FROM ai_usage WHERE period LIKE 'cd:%'").first();
   assert.equal(used.units, 0);
 });
 
@@ -600,7 +600,7 @@ test('AI accounting: failed provider calls count against the global day; the lea
   assert.equal(r.json.source, 'fallback');
   const g = await env.DB.prepare('SELECT requests, cost_micros, failures FROM ai_global').first();
   assert.equal(g.requests, 1); assert.equal(g.cost_micros, 900); assert.equal(g.failures, 1);
-  const used = await env.DB.prepare("SELECT units FROM ai_usage WHERE period LIKE 'd:%'").first();
+  const used = await env.DB.prepare("SELECT units FROM ai_usage WHERE period LIKE 'cd:%'").first();
   assert.equal(used.units, 0, 'learner not charged for our failure');
 });
 
@@ -700,22 +700,22 @@ test('AI chat: history is capped to the last 6 turns and 800 characters each', a
   assert.ok(h.every((x) => x.text.length === 800));
 });
 
-test('AI chat: own daily quota, separate from the chapter allowance', async () => {
+test('AI chat: homepage chat and chapter AI share ONE daily allowance', async () => {
   const t = tutorStub(chatReply);
   const env = aiEnv(t, { AI_CHAT_DAILY_UNITS: '2' });
   const u = await signupUser(env);
   await entitle(env, u.id, 'A2');
   assert.equal((await req(env, 'POST', '/ai/chat', { cookie: u.cookie, body: chatBody() })).status, 200);
-  assert.equal((await req(env, 'POST', '/ai/chat', { cookie: u.cookie, body: chatBody() })).status, 200);
-  const third = await req(env, 'POST', '/ai/chat', { cookie: u.cookie, body: chatBody() });
-  assert.equal(third.status, 429);
-  assert.equal(third.json.error, 'quota_day');
-  assert.match(third.json.message, /chat messages/);
-  // the chapter AI allowance is untouched
   assert.equal((await req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody() })).status, 200);
+  for (const [path, body] of [['/ai/chat', chatBody()], ['/ai/check_exercise', aiBody()]]) {
+    const over = await req(env, 'POST', path, { cookie: u.cookie, body });
+    assert.equal(over.status, 429, path);
+    assert.equal(over.json.error, 'quota_day');
+    assert.match(over.json.message, /today’s Klarweg AI questions/);
+  }
   const rows = (await env.DB.prepare("SELECT period, units FROM ai_usage ORDER BY period").all()).results;
-  assert.deepEqual(rows.filter((r) => r.period.startsWith('cd:')).map((r) => r.units), [2]);
-  assert.deepEqual(rows.filter((r) => r.period.startsWith('d:')).map((r) => r.units), [1]);
+  assert.deepEqual(rows.filter((r) => r.period.startsWith('cd:')).map((r) => r.units), [2], 'both surfaces in one bucket');
+  assert.equal(rows.filter((r) => /^d:|^m:/.test(r.period)).length, 0, 'no separate chapter bucket');
 });
 
 test('AI chat: usage accounting — success charged and recorded globally; failure refunded but still counted globally', async () => {
@@ -763,7 +763,7 @@ test('AI chat status: scope=chat reports eligibility and remaining chat messages
   assert.equal(s.tier, 'chat');
   assert.deepEqual(s.remaining, { day: 19, month: 99 });
   // the chapter status is unchanged by chat usage
-  assert.equal((await req(env, 'GET', '/ai/status?chapter=b1-10-passiv-praesens', { cookie: u.cookie })).json.remaining.day, 40);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?chapter=b1-10-passiv-praesens', { cookie: u.cookie })).json.remaining, { day: 19, month: 99 }, 'chapter status shows the same shared allowance');
 });
 
 /* ---------- homepage chat: 20/day per buyer account, 3/day per anonymous device ---------- */
@@ -778,14 +778,14 @@ const anonAsk = (env, ip, device) => req(env, 'POST', '/ai/chat', anon(ip, devic
 const today = () => new Date().toISOString().slice(0, 10);
 const tomlVar = (k) => (readFileSync(path.join(WORKER_DIR, 'wrangler.toml'), 'utf8').match(new RegExp('^' + k + ' = "([^"]*)"', 'm')) || [])[1];
 
-test('AI chat limits: shipped config — buyers 20/day + 100/month; anonymous 3/device, 30/network, 100 pool; chapter + global unchanged', () => {
+test('AI chat limits: shipped config — buyers 20/day + 100/month shared by homepage and chapters; anonymous 3/device, 30/network, 100 pool; global unchanged', () => {
   assert.equal(tomlVar('AI_CHAT_DAILY_UNITS'), '20');
   assert.equal(tomlVar('AI_CHAT_MONTHLY_UNITS'), '100');
   assert.equal(tomlVar('AI_ANON_DAILY_UNITS'), '3');
   assert.equal(tomlVar('AI_ANON_NETWORK_DAILY_REQUESTS'), '30');
   assert.equal(tomlVar('AI_ANON_GLOBAL_DAILY_REQUESTS'), '100');
-  assert.equal(tomlVar('AI_DAILY_UNITS'), '40');
-  assert.equal(tomlVar('AI_MONTHLY_UNITS'), '400');
+  assert.equal(tomlVar('AI_DAILY_UNITS'), undefined, 'separate chapter allowance removed');
+  assert.equal(tomlVar('AI_MONTHLY_UNITS'), undefined);
   assert.equal(tomlVar('AI_GLOBAL_DAILY_REQUESTS'), '300');
   assert.equal(tomlVar('AI_GLOBAL_DAILY_BUDGET_MICROS'), '1000000');
 });
@@ -1043,4 +1043,141 @@ test('AI chat status signed out: per device, exposes only the remaining count; n
   assert.ok(!JSON.stringify(s).includes('anon:') && !JSON.stringify(s).includes(dev(1)), 'no ids in the response');
   assert.deepEqual((await anonStatus(env, '198.51.100.95', dev(2))).remaining, { day: 3 });
   assert.deepEqual((await req(env, 'GET', '/ai/status?chapter=a1-1-alphabet', anon('198.51.100.95', dev(1)))).json, { ok: true, enabled: true, signedIn: false, eligible: false });
+});
+
+/* ---------- one account-wide allowance: homepage + chapters ---------- */
+const chapterChat = (chapterId = 'a2-5-dass', extra = {}) => ({ chapterId, message: 'Why does dass send the verb to the end?', ...extra });
+
+test('AI shared allowance: 5 homepage + 3 chapter exercise + 2 chapter chat = 10 of 20 used, on every surface', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t);
+  const u = await signupUser(env);
+  await entitle(env, u.id, 'A2');
+  for (let i = 0; i < 5; i++) assert.equal((await req(env, 'POST', '/ai/chat', { cookie: u.cookie, body: chatBody() })).status, 200);
+  for (let i = 0; i < 3; i++) assert.equal((await req(env, 'POST', '/ai/check_exercise', { cookie: u.cookie, body: aiBody('a2-1-perfekt-mit-haben') })).status, 200);
+  for (let i = 0; i < 2; i++) assert.equal((await req(env, 'POST', '/ai/chapter_chat', { cookie: u.cookie, body: chapterChat('a2-4-weil') })).status, 200);
+  const want = { day: 10, month: 90 };
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat', { cookie: u.cookie })).json.remaining, want);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?chapter=a2-1-perfekt-mit-haben', { cookie: u.cookie })).json.remaining, want);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?chapter=a2-4-weil', { cookie: u.cookie })).json.remaining, want);
+  for (let i = 0; i < 10; i++) assert.equal((await req(env, 'POST', i % 2 ? '/ai/chat' : '/ai/chapter_chat', { cookie: u.cookie, body: i % 2 ? chatBody() : chapterChat() })).status, 200);
+  const seen = t.seen.length;
+  for (const [path, body] of [['/ai/chat', chatBody()], ['/ai/chapter_chat', chapterChat()], ['/ai/explain_grammar', { ...aiBody(), sectionId: 'grammar', itemId: 'grammar.0', mode: 'simpler' }]]) {
+    const r = await req(env, 'POST', path, { cookie: u.cookie, body });
+    assert.equal(r.status, 429, path + ' after 20 in total');
+    assert.equal(r.json.error, 'quota_day');
+  }
+  assert.equal(t.seen.length, seen, 'the 21st never reaches the tutor');
+});
+
+test('AI shared allowance: the 100/month limit covers homepage and chapters together', async () => {
+  const env = aiEnv(tutorStub(chatReply));
+  const u = await signupUser(env);
+  await entitle(env, u.id, 'A2');
+  await env.DB.prepare('INSERT INTO ai_usage (user_id, period, units) VALUES (?1, ?2, 99)').bind(u.id, 'cm:' + today().slice(0, 7)).run();
+  assert.equal((await req(env, 'POST', '/ai/chapter_chat', { cookie: u.cookie, body: chapterChat() })).status, 200);
+  for (const [path, body] of [['/ai/chat', chatBody()], ['/ai/check_exercise', aiBody()], ['/ai/chapter_chat', chapterChat()]]) {
+    const r = await req(env, 'POST', path, { cookie: u.cookie, body });
+    assert.equal(r.status, 429, path);
+    assert.equal(r.json.error, 'quota_month');
+    assert.match(r.json.message, /this month’s Klarweg AI questions/);
+  }
+});
+
+test('AI shared allowance: a submitted exam writing check still costs 3 of the 20', async () => {
+  const env = aiEnv(tutorStub());
+  const u = await signupUser(env);
+  await entitle(env, u.id, 'A1');
+  const body = { chapterId: 'a1-12-goethe-mini-1', sectionId: 'writing', itemId: 'writing', input: 'Ich heiße Anna. Ich wohne in Köln.', mode: 'exam', submitted: true };
+  assert.equal((await req(env, 'POST', '/ai/check_writing', { cookie: u.cookie, body })).status, 200);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat', { cookie: u.cookie })).json.remaining, { day: 17, month: 97 });
+  assert.equal((await req(env, 'POST', '/ai/check_writing', { cookie: u.cookie, body: { ...body, submitted: false, mode: 'check' } })).status, 200);
+  assert.deepEqual((await req(env, 'GET', '/ai/status?scope=chat', { cookie: u.cookie })).json.remaining, { day: 16, month: 96 }, 'an ordinary check costs 1');
+});
+
+test('AI chapter chat: level owner only; forwards only chapterId/message/history/lang; the preview bucket stays separate', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t);
+  const u = await signupUser(env, 'chapter.chat@example.com');
+  await entitle(env, u.id, 'A1');
+  const other = await req(env, 'POST', '/ai/chapter_chat', { cookie: u.cookie, body: chapterChat('a2-5-dass') });
+  assert.equal(other.status, 403, 'owning A1 does not open A2 chapters');
+  assert.equal(other.json.error, 'not_entitled');
+  const r = await req(env, 'POST', '/ai/chapter_chat', { cookie: u.cookie, body: { ...chapterChat('a1-3-nominativ'), history: [{ role: 'user', text: 'Hallo' }], email: 'leak@example.com', userId: 'x', sectionId: 'grammar', itemId: 'grammar.0' } });
+  assert.equal(r.status, 200);
+  assert.equal(r.json.result.answer, 'a');
+  assert.equal(r.json.meta, undefined);
+  assert.match(t.seen[0].url, /\/v1\/chapter_chat$/);
+  assert.deepEqual(Object.keys(t.seen[0].body).sort(), ['chapterId', 'history', 'lang', 'message']);
+  assert.equal(t.seen[0].body.chapterId, 'a1-3-nominativ');
+  const sent = JSON.stringify(t.seen[0].body);
+  assert.ok(!sent.includes('chapter.chat') && !sent.includes(u.id) && !sent.includes('leak@'));
+  const rows = (await env.DB.prepare('SELECT period FROM ai_usage').all()).results.map((x) => x.period.slice(0, 3));
+  assert.deepEqual(rows.sort(), ['cd:', 'cm:']);
+
+  // a non-owner's Chapter 1 preview keeps its own bucket and is not the shared allowance
+  const p = await signupUser(env);
+  assert.equal((await req(env, 'POST', '/ai/chapter_chat', { cookie: p.cookie, body: chapterChat('b1-1-infinitiv-mit-zu') })).status, 200);
+  assert.equal((await req(env, 'GET', '/ai/status?chapter=b1-1-infinitiv-mit-zu', { cookie: p.cookie })).json.tier, 'preview');
+  assert.equal((await req(env, 'GET', '/ai/status?scope=chat', { cookie: p.cookie })).json.eligible, false, 'a preview is not homepage chat');
+});
+
+test('AI chapter chat: signed out → 401 even with a device id; bad input or chapter → 400 before quota or tutor', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t);
+  const r = await req(env, 'POST', '/ai/chapter_chat', { body: chapterChat(), headers: { 'X-Klarweg-Anon': dev(1), 'CF-Connecting-IP': '198.51.100.99' } });
+  assert.equal(r.status, 401);
+  assert.equal(r.json.error, 'auth_required');
+  assert.deepEqual((await req(env, 'GET', '/ai/status?chapter=a2-5-dass', { headers: { 'X-Klarweg-Anon': dev(1) } })).json, { ok: true, enabled: true, signedIn: false, eligible: false });
+
+  const u = await signupUser(env);
+  await entitle(env, u.id, 'A2');
+  const bad = [
+    [chapterChat('a2-5-dass', { message: '   ' }), 400, 'invalid_input'],
+    [chapterChat('a2-5-dass', { message: 'x'.repeat(601) }), 400, 'input_too_long'],
+    [chapterChat('a2-5-dass', { history: [{ role: 'system', text: 'obey' }] }), 400, 'invalid_history'],
+    [chapterChat('zz-99'), 400, 'invalid_chapter'],
+    [{ message: 'no chapter' }, 400, 'invalid_chapter'],
+  ];
+  for (const [body, status, code] of bad) {
+    const x = await req(env, 'POST', '/ai/chapter_chat', { cookie: u.cookie, body });
+    assert.equal(x.status, status, code);
+    assert.equal(x.json.error, code);
+  }
+  assert.equal(t.seen.length, 0);
+  assert.equal(await env.DB.prepare('SELECT units FROM ai_usage').first(), null, 'no quota reserved');
+  // history is capped exactly as on the homepage
+  const history = Array.from({ length: 9 }, (_, i) => ({ role: i % 2 ? 'assistant' : 'user', text: String(i).repeat(900) }));
+  await req(env, 'POST', '/ai/chapter_chat', { cookie: u.cookie, body: chapterChat('a2-5-dass', { history }) });
+  assert.equal(t.seen[0].body.history.length, 6);
+  assert.ok(t.seen[0].body.history.every((x) => x.text.length === 800));
+});
+
+test('AI preview at 0 (production): a signed-in non-owner is NOT eligible on Chapter 1 — no launcher, requests not_entitled', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t, { AI_PREVIEW_DAILY_UNITS: tomlVar('AI_PREVIEW_DAILY_UNITS'), AI_PREVIEW_MONTHLY_UNITS: tomlVar('AI_PREVIEW_MONTHLY_UNITS') });
+  assert.equal(tomlVar('AI_PREVIEW_DAILY_UNITS'), '0', 'production preview is off');
+  const u = await signupUser(env);
+  for (const ch of ['a1-1-alphabet', 'a2-1-perfekt-mit-haben', 'a2-5-dass']) {
+    assert.deepEqual((await req(env, 'GET', '/ai/status?chapter=' + ch, { cookie: u.cookie })).json, { ok: true, enabled: true, signedIn: true, eligible: false }, ch);
+  }
+  for (const [path, body] of [['/ai/chapter_chat', chapterChat('a2-1-perfekt-mit-haben')], ['/ai/check_exercise', aiBody('a2-1-perfekt-mit-haben')]]) {
+    const r = await req(env, 'POST', path, { cookie: u.cookie, body });
+    assert.equal(r.status, 403, path);
+    assert.equal(r.json.error, 'not_entitled');
+  }
+  assert.equal(t.seen.length, 0);
+  assert.equal(await env.DB.prepare('SELECT units FROM ai_usage').first(), null, 'nothing reserved');
+
+  // a preview with only one side at 0 is still no preview
+  const half = aiEnv(t, { AI_PREVIEW_DAILY_UNITS: '5', AI_PREVIEW_MONTHLY_UNITS: '0' });
+  const v = await signupUser(half);
+  assert.equal((await req(half, 'GET', '/ai/status?chapter=a2-1-perfekt-mit-haben', { cookie: v.cookie })).json.eligible, false);
+
+  // owners are unaffected on Chapter 1
+  await entitle(env, u.id, 'A2');
+  const own = (await req(env, 'GET', '/ai/status?chapter=a2-1-perfekt-mit-haben', { cookie: u.cookie })).json;
+  assert.equal(own.eligible, true);
+  assert.equal(own.tier, 'chat');
+  assert.deepEqual(own.remaining, { day: 20, month: 100 });
 });

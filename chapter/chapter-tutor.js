@@ -25,6 +25,12 @@
      kind 'exercise' : getInput(), attempt(), isExam, canPractise, onPractice(item, panel)
      kind 'grammar'  : (grammar card)
      kind 'quiz'     : answers [{i, chosen}]
+
+   Chapter chat: a bottom-right "Klarweg AI" button opens a panel for
+   free questions about this chapter (POST /ai/chapter_chat with the
+   chapter id only — the server holds the chapter material). Shown
+   only to learners the server says are eligible for this chapter; it
+   uses the same account-wide allowance as every other Klarweg AI use.
    ============================================================ */
 (function (global) {
   'use strict';
@@ -376,6 +382,230 @@
 
   var MOUNT = { writing: mountWriting, speaking: mountSpeaking, exercise: mountExercise, grammar: mountGrammar, quiz: mountQuiz };
 
+  /* ---------- chapter chat (bottom-right launcher + panel) ---------- */
+  var CHAT_MAX = 600;      // mirrors the server limit
+  var CHAT_TURNS = 6;      // turns of context sent per question
+  var ICON = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>';
+
+  function mountChapterChat(s) {
+    if (document.querySelector('.kw-ai-fab')) return;
+    var history = [];
+    var st = { busy: false, remaining: null, monthLimited: false, locked: false, lastFocus: null };
+
+    var r = s.remaining || {};
+    var day = typeof r.day === 'number' ? r.day : null;
+    var month = typeof r.month === 'number' ? r.month : null;
+    st.monthLimited = month != null && (month === 0 || day == null || month < day);
+    st.remaining = st.monthLimited ? month : day;
+
+    var fab = el('button', 'kw-ai-fab');
+    fab.type = 'button';
+    fab.setAttribute('aria-haspopup', 'dialog');
+    fab.setAttribute('aria-controls', 'kw-ai-chat');
+    fab.setAttribute('aria-expanded', 'false');
+    fab.innerHTML = ICON;  // static markup only
+    fab.appendChild(el('span', 'kw-ai-fab-label', 'Klarweg AI'));
+    fab.setAttribute('aria-label', 'Open Klarweg AI for this chapter');
+
+    var scrim = el('div', 'kw-ai-scrim');
+    var box = el('aside', 'kw-ai-chat');
+    box.id = 'kw-ai-chat';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-labelledby', 'kw-ai-chat-title');
+    box.setAttribute('aria-hidden', 'true');
+    box.inert = true;
+
+    var headRow = el('div', 'kw-ai-chat-head');
+    var titles = el('div', 'kw-ai-chat-titles');
+    var name = el('div', 'kw-ai-chat-name', 'Klarweg AI');
+    name.id = 'kw-ai-chat-title';
+    titles.appendChild(name);
+    titles.appendChild(el('div', 'kw-ai-chat-scope', 'Chapter ' + (C.number || '') + ' · ' + (C.title || '')));
+    var statusLine = el('div', 'kw-ai-chat-status');
+    titles.appendChild(statusLine);
+    var close = el('button', 'kw-ai-chat-close', '×');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Close Klarweg AI');
+    headRow.appendChild(titles);
+    headRow.appendChild(close);
+
+    var bar = el('div', 'kw-ai-chat-bar');
+    bar.appendChild(langToggle());
+
+    var log = el('div', 'kw-ai-chat-log');
+    log.setAttribute('aria-live', 'polite');
+    var intro = el('div', 'kw-ai-msg is-ai');
+    intro.appendChild(el('div', 'kw-ai-bubble', 'Ask about this chapter — its grammar, words and examples. Answers stay within what you have learned so far.'));
+    log.appendChild(intro);
+    var starters = el('div', 'kw-ai-chips');
+    ['Explain this chapter’s grammar in simple words.', 'Give me more examples for this chapter.', 'Which mistakes are common in this chapter?'].forEach(function (q) {
+      var c = el('button', 'kw-ai-chip', q);
+      c.type = 'button';
+      c.addEventListener('click', function () { ask(q); });
+      starters.appendChild(c);
+    });
+    log.appendChild(starters);
+
+    var gate = el('p', 'kw-ai-chat-gate');
+    gate.hidden = true;
+
+    var form = el('form', 'kw-ai-chat-form');
+    var input = el('textarea', 'kw-ai-chat-input');
+    input.rows = 1;
+    input.maxLength = CHAT_MAX;
+    input.placeholder = 'Ask about this chapter…';
+    input.setAttribute('aria-label', 'Your question about this chapter');
+    var send = el('button', 'kw-ai-chat-send', 'Send');
+    send.type = 'submit';
+    form.appendChild(input);
+    form.appendChild(send);
+
+    box.appendChild(headRow);
+    box.appendChild(bar);
+    box.appendChild(log);
+    box.appendChild(gate);
+    box.appendChild(form);
+    box.appendChild(el('p', 'kw-ai-chat-foot', 'AI answers can be wrong. The chapter itself is the authoritative version.'));
+
+    document.body.appendChild(fab);
+    document.body.appendChild(scrim);
+    document.body.appendChild(box);
+
+    function remainingText(n) {
+      if (n == null) return 'Questions about this chapter';
+      return n + (n === 1 ? ' question' : ' questions') + (st.monthLimited ? ' left this month' : ' left today');
+    }
+    function paint() {
+      statusLine.textContent = remainingText(st.remaining);
+      input.disabled = st.locked || st.busy;
+      send.disabled = st.locked || st.busy || !input.value.trim();
+    }
+    function lock(message) {
+      st.locked = true;
+      gate.textContent = message;
+      gate.hidden = false;
+      paint();
+    }
+    if (st.remaining === 0) {
+      lock(st.monthLimited ? 'You have used this month’s Klarweg AI questions.' : 'You have used today’s Klarweg AI questions. They reset at midnight UTC.');
+    }
+    paint();
+
+    function open() {
+      st.lastFocus = document.activeElement;
+      box.inert = false;
+      box.setAttribute('aria-hidden', 'false');
+      box.classList.add('is-open');
+      scrim.classList.add('is-open');
+      fab.setAttribute('aria-expanded', 'true');
+      fab.classList.add('is-hidden');
+      setTimeout(function () { (st.locked ? close : input).focus(); }, 50);
+    }
+    function shut() {
+      box.classList.remove('is-open');
+      scrim.classList.remove('is-open');
+      box.setAttribute('aria-hidden', 'true');
+      box.inert = true;
+      fab.setAttribute('aria-expanded', 'false');
+      fab.classList.remove('is-hidden');
+      (st.lastFocus && st.lastFocus.focus ? st.lastFocus : fab).focus();
+    }
+    fab.addEventListener('click', open);
+    close.addEventListener('click', shut);
+    scrim.addEventListener('click', shut);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && box.classList.contains('is-open') && !document.querySelector('.word-pop.is-open, .word-pop.open')) shut();
+    });
+
+    function scrollEnd() { log.scrollTop = log.scrollHeight; }
+    function addUser(text) {
+      var m = el('div', 'kw-ai-msg is-user');
+      m.appendChild(el('div', 'kw-ai-bubble', text));
+      log.appendChild(m);
+      scrollEnd();
+    }
+    function addNote(text) {
+      var m = el('div', 'kw-ai-msg is-ai');
+      m.appendChild(el('div', 'kw-ai-bubble is-note', text));
+      log.appendChild(m);
+      scrollEnd();
+    }
+    function addAnswer(res) {
+      var m = el('div', 'kw-ai-msg is-ai');
+      var b = el('div', 'kw-ai-bubble');
+      String(res.answer || '').split(/\n{2,}/).forEach(function (para) { if (para.trim()) b.appendChild(el('p', null, para.trim())); });
+      if (res.examples && res.examples.length) {
+        var ul = el('ul', 'kw-ai-chat-examples');
+        res.examples.forEach(function (x) {
+          var li = el('li', 'kw-ai-example');
+          li.appendChild(german(x.de));
+          li.appendChild(el('span', 'kw-ai-reason', x.en));
+          ul.appendChild(li);
+        });
+        b.appendChild(ul);
+      }
+      m.appendChild(b);
+      if (res.follow_ups && res.follow_ups.length) {
+        var row = el('div', 'kw-ai-chips');
+        res.follow_ups.slice(0, 3).forEach(function (q) {
+          var c = el('button', 'kw-ai-chip', q);
+          c.type = 'button';
+          c.addEventListener('click', function () { ask(q); });
+          row.appendChild(c);
+        });
+        m.appendChild(row);
+      }
+      log.appendChild(m);
+      scrollEnd();
+    }
+
+    function ask(text) {
+      var message = String(text || '').trim().slice(0, CHAT_MAX);
+      if (!message || st.busy || st.locked) return;
+      starters.hidden = true;
+      st.busy = true;
+      addUser(message);
+      input.value = '';
+      paint();
+      var pending = el('div', 'kw-ai-msg is-ai');
+      pending.appendChild(el('div', 'kw-ai-bubble is-note', 'Writing an answer…'));
+      log.appendChild(pending);
+      scrollEnd();
+      call('chapter_chat', { message: message, history: history.slice(-CHAT_TURNS) }).then(function (res) {
+        pending.remove();
+        st.busy = false;
+        if (res.ok && res.result) {
+          addAnswer(res.result);
+          history.push({ role: 'user', text: message });
+          history.push({ role: 'assistant', text: String(res.result.answer || '') });
+          history = history.slice(-CHAT_TURNS);
+          if (typeof st.remaining === 'number') {
+            st.remaining = Math.max(0, st.remaining - 1);
+            if (st.remaining === 0) {
+              lock(st.monthLimited ? 'You have used this month’s Klarweg AI questions.' : 'You have used today’s Klarweg AI questions. They reset at midnight UTC.');
+              return;
+            }
+          }
+          paint();
+          input.focus();
+          return;
+        }
+        // Server messages are fixed, learner-safe strings; never raw provider text.
+        if (res.httpStatus === 401) { lock('Your session has ended. Sign in again to use Klarweg AI.'); return; }
+        if (res.httpStatus === 403 || res.httpStatus === 429) { lock(res.message || 'Klarweg AI is not available for this chapter right now.'); return; }
+        addNote(res.message || 'Klarweg AI is unavailable right now. The lesson works as normal.');
+        paint();
+      });
+    }
+
+    form.addEventListener('submit', function (e) { e.preventDefault(); ask(input.value); });
+    input.addEventListener('input', paint);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); ask(input.value); }
+    });
+  }
+
   /* ---------- queue ---------- */
   function mount(spec) {
     if (!spec || !spec.host || !MOUNT[spec.kind]) return;
@@ -393,4 +623,10 @@
   global.KW_AI_QUEUE = { push: mount };
   pending.forEach(mount);
   global.KW_AI = { status: status };
+
+  // The chapter chat launcher: one status request per page (shared with
+  // the inline modules); rendered only for eligible learners.
+  status().then(function (s) {
+    if (s && s.enabled && s.eligible && document.body) mountChapterChat(s);
+  });
 })(window);

@@ -1152,3 +1152,32 @@ test('AI chapter chat: signed out → 401 even with a device id; bad input or ch
   assert.equal(t.seen[0].body.history.length, 6);
   assert.ok(t.seen[0].body.history.every((x) => x.text.length === 800));
 });
+
+test('AI preview at 0 (production): a signed-in non-owner is NOT eligible on Chapter 1 — no launcher, requests not_entitled', async () => {
+  const t = tutorStub(chatReply);
+  const env = aiEnv(t, { AI_PREVIEW_DAILY_UNITS: tomlVar('AI_PREVIEW_DAILY_UNITS'), AI_PREVIEW_MONTHLY_UNITS: tomlVar('AI_PREVIEW_MONTHLY_UNITS') });
+  assert.equal(tomlVar('AI_PREVIEW_DAILY_UNITS'), '0', 'production preview is off');
+  const u = await signupUser(env);
+  for (const ch of ['a1-1-alphabet', 'a2-1-perfekt-mit-haben', 'a2-5-dass']) {
+    assert.deepEqual((await req(env, 'GET', '/ai/status?chapter=' + ch, { cookie: u.cookie })).json, { ok: true, enabled: true, signedIn: true, eligible: false }, ch);
+  }
+  for (const [path, body] of [['/ai/chapter_chat', chapterChat('a2-1-perfekt-mit-haben')], ['/ai/check_exercise', aiBody('a2-1-perfekt-mit-haben')]]) {
+    const r = await req(env, 'POST', path, { cookie: u.cookie, body });
+    assert.equal(r.status, 403, path);
+    assert.equal(r.json.error, 'not_entitled');
+  }
+  assert.equal(t.seen.length, 0);
+  assert.equal(await env.DB.prepare('SELECT units FROM ai_usage').first(), null, 'nothing reserved');
+
+  // a preview with only one side at 0 is still no preview
+  const half = aiEnv(t, { AI_PREVIEW_DAILY_UNITS: '5', AI_PREVIEW_MONTHLY_UNITS: '0' });
+  const v = await signupUser(half);
+  assert.equal((await req(half, 'GET', '/ai/status?chapter=a2-1-perfekt-mit-haben', { cookie: v.cookie })).json.eligible, false);
+
+  // owners are unaffected on Chapter 1
+  await entitle(env, u.id, 'A2');
+  const own = (await req(env, 'GET', '/ai/status?chapter=a2-1-perfekt-mit-haben', { cookie: u.cookie })).json;
+  assert.equal(own.eligible, true);
+  assert.equal(own.tier, 'chat');
+  assert.deepEqual(own.remaining, { day: 20, month: 100 });
+});

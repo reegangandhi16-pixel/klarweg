@@ -123,12 +123,16 @@ function accountTier(env) {
 
 /* Which quota tier applies to this user for this chapter, or null. A
    level owner uses the account-wide allowance; the Chapter-1 preview for
-   non-owners keeps its own (separately configured) bucket. */
+   non-owners keeps its own (separately configured) bucket. A preview
+   configured to 0 is no preview at all: not eligible, so no Klarweg AI
+   controls are shown and requests are not_entitled rather than a quota
+   the learner never had. */
 async function tierFor(env, user, chapter) {
   const ent = await readEntitlements(env.DB, user.id);
   if (ent[chapter.level]) return accountTier(env);
   if (chapter.number === 1) {
-    return { tier: "preview", daily: num(env, "AI_PREVIEW_DAILY_UNITS"), monthly: num(env, "AI_PREVIEW_MONTHLY_UNITS") };
+    const daily = num(env, "AI_PREVIEW_DAILY_UNITS"), monthly = num(env, "AI_PREVIEW_MONTHLY_UNITS");
+    if (daily > 0 && monthly > 0) return { tier: "preview", daily, monthly };
   }
   return null;
 }

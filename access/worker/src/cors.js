@@ -20,7 +20,7 @@ export function corsHeaders(request) {
   return {
     "Access-Control-Allow-Origin": origin,
     "Access-Control-Allow-Credentials": "true",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type, X-Klarweg-Anon",
     "Access-Control-Allow-Methods": "GET, POST, DELETE, PATCH, OPTIONS",
     "Vary": "Origin"
   };

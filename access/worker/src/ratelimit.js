@@ -112,12 +112,19 @@ export async function recordSavedWordsAttempt(env, userId, now = Date.now()) {
   ).bind(key, end).run();
 }
 
-/* Anonymous homepage-chat identity: HMAC(network + UTC day, RATE_SALT),
-   the same daily-rotating pseudonym as ipBucket — the raw IP is never
-   stored. IPv6 is grouped by its /64 prefix (one subscriber's network),
-   so rotating addresses inside it does not buy extra questions; IPv4 and
-   IPv4-mapped IPv6 use the full address. Returns null when there is no
-   usable client IP, so anonymous use fails closed. */
+/* Anonymous homepage chat has two server-side identities, both
+   daily-rotating HMACs under RATE_SALT (nothing raw is ever stored):
+
+   · anonymousDeviceId — the quota identity. The browser keeps a random
+     128-bit id (32 lowercase hex) and sends it as X-Klarweg-Anon, so each
+     browser/device gets its own free questions even on a shared network.
+   · anonymousNetworkId — a secondary abuse cap only, the same pseudonym
+     as ipBucket. IPv6 is grouped by its /64 prefix (one subscriber's
+     network), so rotating addresses inside it does not help; IPv4 and
+     IPv4-mapped IPv6 use the full address.
+
+   Each returns null when its input is missing or malformed, so anonymous
+   use fails closed. */
 export function networkOf(ip) {
   ip = String(ip || "").trim().toLowerCase();
   if (/^\d{1,3}(\.\d{1,3}){3}$/.test(ip)) return ip;
@@ -135,7 +142,16 @@ export function networkOf(ip) {
   return groups.slice(0, 4).map((g) => g.padStart(4, "0")).join(":") + "::/64";
 }
 
-export async function anonymousChatId(env, request) {
+const ANON_DEVICE = /^[0-9a-f]{32}$/;
+
+export async function anonymousDeviceId(env, request) {
+  const device = request.headers.get("X-Klarweg-Anon");
+  if (!device || !ANON_DEVICE.test(device)) return null;
+  const day = new Date().toISOString().slice(0, 10);
+  return "anon:" + await hmacHex(env.RATE_SALT || "dev-salt", "dev|" + device + "|" + day);
+}
+
+export async function anonymousNetworkId(env, request) {
   const net = networkOf(request.headers.get("CF-Connecting-IP"));
   if (!net) return null;
   const day = new Date().toISOString().slice(0, 10);

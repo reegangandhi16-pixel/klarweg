@@ -123,6 +123,10 @@
   --accent-deep: #143331;
   --coral-deep: #993C1D;
 
+  /* Live-status red — the homepage Klarweg AI "LIVE" dot only. Not a
+     grammar color (--g-verb is #DC2626) and not coral (conversion CTAs). */
+  --live-red: #E5484D;
+
   /* Primary CTA — deep pine green, dedicated token. Distinct from
      --green/--green-deep (success-state family), --g-object (grammar
      semantic), and --accent (brand teal, not green). */
@@ -1691,6 +1695,33 @@ body.mobile-nav-open { overflow: hidden; }
 
 /* ---------- Live Klarweg AI chat (kw-ai-chat.js) ---------- */
 .kw-chat .chat-head { justify-content: space-between; flex-wrap: wrap; }
+/* "LIVE" beside the Klarweg AI name: a small red status dot with a soft
+   pulse (static under reduced motion). The name keeps its own color. */
+.chat-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+  vertical-align: middle;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--ink-secondary);
+  white-space: nowrap;
+}
+.chat-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--live-red);
+  animation: kw-live-pulse 2s var(--ease) infinite;
+}
+@keyframes kw-live-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(229, 72, 77, 0.35); }
+  50% { opacity: 0.55; box-shadow: 0 0 0 4px rgba(229, 72, 77, 0); }
+}
 .kw-chat .chat-body { min-height: 280px; }
 .kw-chat-lang {
   display: inline-flex;
@@ -1786,6 +1817,7 @@ body.mobile-nav-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .kw-chat-chip, .kw-chat-lang-opt { transition: none; }
   .kw-chat-chip:hover { transform: none; }
+  .chat-live-dot { animation: none; }
 }
 
 /* ============================================================
@@ -5349,7 +5381,7 @@ body {
       <div class="chat-window kw-chat" data-kw-chat>
         <div class="chat-head">
           <div class="kw-chat-title">
-            <div class="chat-name">Klarweg AI</div>
+            <div class="chat-name">Klarweg AI <span class="chat-live"><span class="chat-live-dot" aria-hidden="true"></span>LIVE</span></div>
             <div class="chat-status" data-kw-chat-status>German-learning questions</div>
           </div>
           <div class="kw-chat-lang" role="group" aria-label="Answer language">

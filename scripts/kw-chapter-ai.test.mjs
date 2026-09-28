@@ -61,13 +61,18 @@ const settle = () => new Promise((r) => setTimeout(r, 70));
 /* Load chapter-tutor.js for chapter A2·5 with a stubbed Access Worker.
    `status` is the /ai/status?chapter= body; `answer(n)` → [httpStatus, body]
    for the n-th POST /ai/chapter_chat. */
-async function load(status, answer = () => [200, { ok: true, source: 'ai', result: { answer: 'Dass sends the verb to the end.', examples: [{ de: 'Ich weiß, dass er kommt.', en: 'I know that he is coming.' }], follow_ups: ['What about weil?'] } }]) {
+async function load(status, answer = () => [200, { ok: true, source: 'ai', result: { answer: 'Dass sends the verb to the end.', examples: [{ de: 'Ich weiß, dass er kommt.', en: 'I know that he is coming.' }], follow_ups: ['What about weil?'] } }], { lateConfig = false } = {}) {
   body = new Node('body'); focused = null; docListeners = {};
   const requests = [];
   const res = (code, b) => ({ ok: code >= 200 && code < 300, status: code, json: async () => b });
+  /* lateConfig reproduces the real chapter pages: kw-access.js loads
+     kw-config.js asynchronously, so KW_ACCESS_API does not exist yet when
+     chapter-tutor.js runs; KWAccess.ready() resolves once it does. */
+  let readyResolve;
+  const readyP = new Promise((r) => { readyResolve = r; });
   const ctx = {
     CHAPTER: { id: 'a2-5-dass', number: 5, title: 'Nebensätze mit dass', sections: [] },
-    KW_ACCESS_API: 'https://access.test',
+    ...(lateConfig ? { KWAccess: { ready: () => readyP } } : { KW_ACCESS_API: 'https://access.test' }),
     document: {
       body,
       createElement: (t) => new Node(t),
@@ -92,7 +97,8 @@ async function load(status, answer = () => [200, { ok: true, source: 'ai', resul
   await settle();
   const key = (k) => (docListeners.keydown || []).forEach((fn) => fn({ key: k, preventDefault() {} }));
   const ask = async (text) => { const i = $('kw-ai-chat-input'); i.value = text; i.fire('input'); $('kw-ai-chat-form').fire('submit'); await settle(); };
-  return { requests, key, ask, status: () => $('kw-ai-chat-status').textContent, gate: () => { const g = $('kw-ai-chat-gate'); return g.hidden ? null : g.textContent; } };
+  const configReady = async () => { ctx.KW_ACCESS_API = 'https://access.test'; readyResolve(); await settle(); };
+  return { ctx, requests, configReady, key, ask, status: () => $('kw-ai-chat-status').textContent, gate: () => { const g = $('kw-ai-chat-gate'); return g.hidden ? null : g.textContent; } };
 }
 const buyer = (day, month) => ({ ok: true, enabled: true, signedIn: true, eligible: true, tier: 'chat', remaining: { day, month } });
 
@@ -236,4 +242,59 @@ test('chapter AI CSS: layered below the word pop-up, above the top bar and Gramm
   assert.match(block, /\.kw-ai-chat \[hidden\] \{ display: none; \}/, 'hidden starters/gate really hide despite display:flex');
   assert.doesNotMatch(block, /var\(--g-/, 'no grammar colours in the launcher or panel');
   assert.doesNotMatch(block, /(?:^|[\s:])(?:18|20|50)px/m, 'spacing stays on the scale');
+});
+
+/* ---------- production load order: kw-config.js arrives AFTER chapter-tutor.js ---------- */
+function grammarSlot(ctx) {
+  const host = body.appendChild(new Node('div'));
+  ctx.KW_AI_QUEUE.push({ host, kind: 'grammar', itemId: 'grammar.0' });
+  return host;
+}
+
+test('load order: with KW_ACCESS_API missing at start, chapter AI waits for KWAccess.ready() instead of caching "disabled"', async () => {
+  const c = await load(buyer(20, 100), undefined, { lateConfig: true });
+  assert.equal(c.requests.length, 0, 'no request before the config exists');
+  assert.equal($('kw-ai-fab'), null, 'nothing rendered yet');
+  await c.configReady();
+  const statusCalls = c.requests.filter((r) => r.url.includes('/ai/status'));
+  assert.equal(statusCalls.length, 1, 'the normal status request happens once the config is ready');
+  assert.match(statusCalls[0].url, /^https:\/\/access\.test\/ai\/status\?chapter=a2-5-dass$/);
+  assert.ok($('kw-ai-fab'), 'an eligible owner gets the launcher');
+  // chapter-app.js renders (and pushes inline AI slots) after KWAccess.ready()
+  const host = grammarSlot(c.ctx);
+  await settle();
+  assert.equal(host.getAttribute('data-kw-ai'), 'on', 'existing inline AI mounts too');
+  assert.ok(host.querySelector('kw-ai-btn'), 'inline Klarweg AI buttons rendered');
+  assert.equal(c.requests.filter((r) => r.url.includes('/ai/status')).length, 1, 'still one status request per page');
+  assert.deepEqual(await c.ctx.KW_AI.status(), buyer(20, 100), 'server truth, not a cached "disabled"');
+});
+
+test('load order: an inline slot pushed before the config is ready still mounts once it is', async () => {
+  const c = await load(buyer(20, 100), undefined, { lateConfig: true });
+  const host = grammarSlot(c.ctx);
+  await settle();
+  assert.equal(host.getAttribute('data-kw-ai'), null);
+  await c.configReady();
+  assert.equal(host.getAttribute('data-kw-ai'), 'on');
+});
+
+test('load order: non-owner, signed out and AI off stay hidden after the config arrives', async () => {
+  for (const s of [{ ok: true, enabled: true, signedIn: true, eligible: false }, { ok: true, enabled: true, signedIn: false, eligible: false }, { ok: true, enabled: false }]) {
+    const c = await load(s, undefined, { lateConfig: true });
+    await c.configReady();
+    assert.equal(c.requests.filter((r) => r.url.includes('/ai/status')).length, 1, JSON.stringify(s));
+    assert.equal($('kw-ai-fab'), null, JSON.stringify(s));
+    const host = grammarSlot(c.ctx);
+    await settle();
+    assert.equal(host.getAttribute('data-kw-ai'), null, 'no inline AI: ' + JSON.stringify(s));
+  }
+});
+
+test('load order: if the config never loads, AI stays off and nothing is requested', async () => {
+  const c = await load(buyer(20, 100), undefined, { lateConfig: true });
+  // kw-access.js resolves ready() even when kw-config.js failed to load
+  c.ctx.KWAccess.ready = () => Promise.resolve();
+  await settle();
+  assert.equal(c.requests.length, 0);
+  assert.equal($('kw-ai-fab'), null);
 });

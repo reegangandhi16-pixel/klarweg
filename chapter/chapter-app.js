@@ -1359,7 +1359,7 @@
       el('div', { class: 'vword-hi' }, w.hi),
       el('div', { class: 'vword-meta' },
         (w.art ? (() => { const s = el('span', { class: 'vword-tag gender-' + w.gender }); const GEN = { m: 'masc.', f: 'fem.', n: 'neut.' }; s.appendChild(germanWordSpans(w.art, GEN[w.gender] ? { type: 'Article · ' + GEN[w.gender] + ' nom.' } : null)); return s; })() : ''),
-        (w.plural ? (() => { const s = el('span', { class: 'vword-tag' }, 'Pl. '); s.appendChild(germanWordSpans(w.plural, headwordCtx(w.plural, { type: 'Noun · plural' }))); return s; })() : '')),
+        (w.plural ? (() => { const s = el('span', { class: 'vword-tag' }, 'Pl. '); s.appendChild(germanWordSpans(w.plural, headwordCtx(w.plural, { type: 'Noun · plural' }))); slashBreaks(s); return s; })() : '')),
       (() => {
         // Vocabulary example: rendered through the SAME canonical German-word
         // infrastructure as the headword/chips. When the entry authors

@@ -112,6 +112,8 @@ test('vocabulary headword keeps whole words: buttons wrap below instead of mid-w
   assert.match(APP, /const longHeadword = term\.split\(.*\)\.some\(\(t\) => t\.length >= 16\);/);
   // slash-joined forms ("Bewunderer/Bewunderin") break after the slash
   assert.match(APP, /slashBreaks\(card\.querySelector\('\.vword-lex'\)\);\n    if \(longHeadword\) wordBoxes\(card\.querySelector\('\.vword-lex'\)\);\n    return card;/);
+  // plural tags ("Pl. Ministerpräsidenten/Ministerpräsidentinnen") break after the slash too
+  assert.match(APP, /'Noun · plural' \}\)\)\); slashBreaks\(s\); return s;/);
 });
 
 test('Grammar Helper rows wrap; sentence-parser labels get room at the edges', () => {
@@ -180,7 +182,7 @@ test('258 chapter pages load the new asset versions and nothing else changed in 
   assert.equal(pages.length, 258);
   for (const f of pages) {
     const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
-    assert.ok(h.includes('href="chapter.css?v=15"') && h.includes('src="chapter-app.js?v=18"'), f);
+    assert.ok(h.includes('href="chapter.css?v=15"') && h.includes('src="chapter-app.js?v=19"'), f);
     assert.ok(!h.includes('href="chapter.css?v=14"') && !h.includes('src="chapter-app.js?v=16"'), f);
   }
 });

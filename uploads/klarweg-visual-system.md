@@ -190,7 +190,7 @@ Skipping hierarchy levels (e.g., `display-lg` → `body` with no intermediate) c
 | `--canvas` | `#FAFAF7` | Page background — warm off-white, never pure white |
 | `--surface` | `#FFFFFF` | Cards, popups, raised elements on top of canvas |
 | `--elevated` | `#F4F3EE` | Alternating section backgrounds, subtle elevation |
-| `--warm` | `#FFF8EC` | Highlight surfaces, "free chapter" callouts, special framing |
+| `--warm` | `#FFF8EC` | Highlight surfaces, "free chapter" callouts, special framing (explanation callouts use the teal standard in §3.8, not `--warm`) |
 | `--glass` | `rgba(255,255,255,0.7)` | Nav backdrop on scroll |
 | `--glass-strong` | `rgba(255,255,255,0.85)` | Sticky CTAs, persistent overlays |
 
@@ -255,11 +255,33 @@ This scale is binding for all margins, padding, and gap values across the platfo
 **Light canvas first, color second, ink last.**
 
 The page background is always near-white. Color is reserved for grammar tokens (the product's vocabulary) and a small set of brand accents:
-- Klarweg accent (`--accent`): deep teal `#1F4E4A` for Can-Do markers, primary buttons, scenario header dots
+- Klarweg accent (`--accent`): deep teal `#1F4E4A` for Can-Do markers, primary buttons, scenario header dots, and the explanation-callout accent bar and tint (§3.8)
 - Coral accent (`--coral`): `#E55A3F` for primary CTAs only
 - Spine blue (`--g-subject`): `#185FA5` for focus rings (uses the grammar Subject color intentionally)
 
 Ink hierarchy carries reading order. Color carries grammatical meaning. The page does not feel busy despite carrying 51 color tokens because they are *contained* within grammar artifacts and never spill into decoration.
+
+### 3.8 Explanation Callouts (chapter pages)
+
+**Purpose.** The boxes that explain *why* a rule works — the learner's key insight — read as one calm, recognisable annotation layer: noticeable without competing with CTAs, grammar color, or the active tab. Approved after live experiments on C2·01 and C1·02; implemented once in `chapter/chapter.css`.
+
+| Property | Value |
+|---|---|
+| Background | `color-mix(in srgb, var(--accent) 7%, var(--bg-surface))` (≈ `#EFF3F2` in light mode) |
+| Border | `1px solid color-mix(in srgb, var(--accent) 24%, var(--bg-surface))` (≈ `#C9D5D4`) |
+| Accent bar | `inset 3px 0 0 var(--accent)` — a 3px `#1F4E4A` bar on the left edge, drawn as an inset shadow so box geometry and text position are unchanged |
+| Shadow | `0 4px 18px rgba(31, 78, 74, 0.08)` — static, combined with the accent bar in one `box-shadow` |
+| Label | The Overview card's existing eyebrow ("The one idea") uses `var(--accent)`; its wording is authored content and is not changed |
+| Text | Unchanged ink colors; radius, padding, margin and type scale unchanged |
+| Motion | None — no animation, transition, glow, pulse or gradient |
+
+**Included components (only these):**
+- `.hinglish-card` — the Hinglish explanation box in each Grammar topic
+- `.card.one-idea-card` — the Overview "The one idea" card (class set by `chapter-app.js`)
+
+**Remain warm / unchanged** (not part of this system even where they look similar): `.next-chapter` ("Up next"), `.resource-icon` tiles, `.sk-tag.tag-core` (Core labels), `.mistake-mark.wrong`, `.gap-input`, grammar role colors, CTAs / `.btn-primary`, `.writing-feedback`, `.quiz-xp-earned`, `.si-badge`, the active-sentence highlight, the Watch-Out callout (§11.17), and the `--warm` token itself.
+
+Adding a component to this system requires a design decision; do not infer membership from a warm or boxed appearance.
 
 ---
 

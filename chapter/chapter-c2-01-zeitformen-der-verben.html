@@ -18,21 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="chapter.css?v=15">
-<style>
-/* Visual experiment, C2·01 only: the explanation callouts (Hinglish cards and
-   the Overview "one idea" card) use the Klarweg teal family instead of the
-   warm orange one. Same boxes; only the tint and hairline change. The
-   Overview card is coloured by an inline style from chapter-app.js, hence
-   !important there. */
-.hinglish-card,
-#sec-overview .card-grid > .card {
-  --callout-tint: color-mix(in srgb, var(--accent) 7%, var(--bg-surface));
-  --callout-line: color-mix(in srgb, var(--accent) 24%, var(--bg-surface));
-}
-.hinglish-card { background: var(--callout-tint); border-color: var(--callout-line); }
-#sec-overview .card-grid > .card { background: var(--callout-tint) !important; border-color: var(--callout-line) !important; }
-</style>
+<link rel="stylesheet" href="chapter.css?v=16">
 <style>
   .r-historisches-praesens, .r-vermutung, .r-perspektive, .r-erzaehlendes-praesens { color: #1F4E4A; font-weight: 600; }
   #vocab-grid .vword-tag.gender-m, #vocab-grid .vword-tag.gender-f, #vocab-grid .vword-tag.gender-n { background: color-mix(in srgb, #1F4E4A 12%, #FFFFFF) !important; color: #163a37 !important; }
@@ -122,7 +108,7 @@
 <script src="story-lexicon.js"></script>
 <script src="tokenizer.js"></script>
 <script src="../kw-access.js?v=2"></script>
-<script src="chapter-app.js?v=19"></script>
+<script src="chapter-app.js?v=20"></script>
 <script src="chapter-story.js?v=7"></script>
 <script src="chapter-tutor.js?v=9"></script>
 

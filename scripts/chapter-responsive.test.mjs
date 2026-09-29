@@ -116,6 +116,25 @@ test('vocabulary headword keeps whole words: buttons wrap below instead of mid-w
   assert.match(APP, /'Noun · plural' \}\)\)\); slashBreaks\(s\); return s;/);
 });
 
+test('explanation callouts: one shared teal standard for the Hinglish card and the Overview one-idea card', () => {
+  const tint = /background: color-mix\(in srgb, var\(--accent\) 7%, var\(--bg-surface\)\);/;
+  const line = /color-mix\(in srgb, var\(--accent\) 24%, var\(--bg-surface\)\)/;
+  const depth = /box-shadow: inset 3px 0 0 var\(--accent\), 0 4px 18px rgba\(31, 78, 74, 0\.08\);/;
+  for (const sel of ['.hinglish-card', '.card.one-idea-card']) {
+    assert.match(rule(sel), tint, sel); assert.match(rule(sel), line, sel); assert.match(rule(sel), depth, sel);
+    assert.doesNotMatch(rule(sel), /animation|transition/, sel);
+  }
+  assert.match(rule('.one-idea-card > .eyebrow'), /color: var\(--accent\);/);
+  // the Overview card takes the class instead of its old inline warm style
+  assert.match(APP, /el\('div', \{ class: 'card one-idea-card' \},/);
+  assert.doesNotMatch(APP, /background:var\(--bg-warm\);border-color:#f0deb8/);
+  // no page keeps its own copy of the callout rules
+  for (const f of fs.readdirSync(path.join(ROOT, 'chapter')).filter((f) => /^chapter-.*\.html$/.test(f))) {
+    const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
+    assert.ok(!/Visual experiment|\.hinglish-card\s*\{|one-idea-card|#sec-overview \.card-grid > \.card/.test(h), f);
+  }
+});
+
 test('Grammar Helper rows wrap; sentence-parser labels get room at the edges', () => {
   assert.match(RESPONSIVE, /\.gh-row \{ flex-wrap: wrap; \}/);
   assert.match(RESPONSIVE, /\.parser-sentence \{ overflow-wrap: anywhere; \}\s*\.parser-tok \{ max-width: 100%; \}/);
@@ -182,7 +201,7 @@ test('258 chapter pages load the new asset versions and nothing else changed in 
   assert.equal(pages.length, 258);
   for (const f of pages) {
     const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
-    assert.ok(h.includes('href="chapter.css?v=15"') && h.includes('src="chapter-app.js?v=19"'), f);
+    assert.ok(h.includes('href="chapter.css?v=16"') && h.includes('src="chapter-app.js?v=20"'), f);
     assert.ok(!h.includes('href="chapter.css?v=14"') && !h.includes('src="chapter-app.js?v=16"'), f);
   }
 });

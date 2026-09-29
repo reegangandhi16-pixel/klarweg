@@ -632,6 +632,7 @@ img { max-width: 100%; display: block; }
 .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(248px, 1fr)); gap: 16px; }
 .vword {
   position: relative;
+  min-width: 0; /* stay inside the grid track; a long headword wraps instead of widening the card */
   background: var(--bg-surface);
   border: 1px solid var(--hairline);
   border-radius: var(--r-lg);
@@ -640,9 +641,16 @@ img { max-width: 100%; display: block; }
 }
 .vword:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); border-color: var(--hairline-strong); }
 .vword.is-learned { background: linear-gradient(180deg, #F4FAEC, var(--bg-surface)); border-color: #cfe6ad; }
-.vword-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
-.vword-de { flex: 1; min-width: 0; overflow-wrap: anywhere; font-family: var(--font-german); font-size: 24px; font-weight: 500; line-height: 1.1; }
+/* Headword and F/M/listen buttons share a row; when the headword's longest
+   word does not fit beside the buttons, the buttons wrap below instead of
+   the word breaking mid-word ("symbolisc|h"). */
+.vword-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+.vword-de { flex: 1 1 auto; width: min-content; min-width: 0; overflow-wrap: break-word; font-family: var(--font-german); font-size: 24px; font-weight: 500; line-height: 1.1; }
 .vword-de .art { font-weight: 600; color: var(--g-article); }
+/* The word after the article moves to the next line whole rather than being
+   hyphenated to fill the article's line; it hyphenates only when it is wider
+   than the whole card. */
+.vword-lex { display: inline-block; max-width: 100%; }
 .vword-pos { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-tertiary); padding-top: 6px; }
 .vword-en { font-size: 15px; color: var(--ink-primary); margin-top: 8px; }
 .vword-hi { font-size: 14px; color: var(--ink-secondary); }
@@ -1781,6 +1789,15 @@ img { max-width: 100%; display: block; }
 .case-table, .case-table *, .dash-nav, .meta-pill, .btn, .filter-chip { overflow-wrap: normal; }
 [lang="de"] { hyphens: auto; -webkit-hyphens: auto; hyphenate-limit-chars: 12 6 6; }
 .case-table [lang="de"] { hyphens: manual; -webkit-hyphens: manual; }
+/* Vocabulary headwords keep whole words: a word that does not fit beside the
+   F/M/listen buttons moves to its own line instead of being hyphenated. A
+   headword with a 16+ character word (chapter-app.js adds .vword-top--long)
+   takes the full card width; there a word wider than the whole card
+   hyphenates ("Verwaltungs-sprache") rather than breaking at a random letter. */
+.vword-de, .vword-de [lang="de"] { hyphens: manual; -webkit-hyphens: manual; }
+.vword-top--long .vword-de { flex-basis: 100%; }
+.vword-top--long .vword-w { display: inline-block; max-width: 100%; }
+.vword-top--long .vword-lex { hyphens: auto; -webkit-hyphens: auto; hyphenate-limit-chars: 14 5 5; -webkit-hyphenate-limit-before: 5; -webkit-hyphenate-limit-after: 5; }
 
 /* Flexible columns may shrink below their longest word (min-width: auto
    made them grow past the viewport). */

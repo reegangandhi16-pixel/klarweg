@@ -3636,8 +3636,12 @@
       }
       micBtn.addEventListener('click', () => {
         Promise.resolve(runRecognition(p, micBtn, result)).catch((err) => {
+          trace('click.error', false, String((err && (err.name || err.message)) || err));
+          micBtn._kwSession = null; micBtn._kwBusy = false;
           micBtn.classList.remove('is-recording'); micBtn.lastChild.textContent = ' Record & check';
-          result.innerHTML = '<p class="muted" style="font-size:14px">Something went wrong starting the recording (' + ((err && err.message) || 'unknown error') + '). Please try again.</p>';
+          result.innerHTML = '';
+          result.setAttribute('data-mic-state', 'error');
+          result.appendChild(el('p', { class: 'muted', style: 'font-size:14px;margin:0' }, 'The recording could not be started. Please press Record & check again.'));
           result.classList.add('is-visible');
         });
       });
@@ -3680,6 +3684,59 @@
     }
     return '';   // browser default container
   }
+  // Both vendor names: Chrome/Edge/Samsung expose webkitSpeechRecognition,
+  // Safari exposes both, a future unprefixed build only SpeechRecognition.
+  function speechRecognitionCtor() {
+    return window.SpeechRecognition || window.webkitSpeechRecognition || null;
+  }
+  /* Mobile microphones have ONE consumer. On Android Chrome the speech
+     service and a getUserMedia stream compete for the mic, and on iOS both
+     go through the single AVAudioSession — opening the playback recording
+     next to live recognition is what left mobile learners with a recording
+     but no transcript (recognition errors with audio-capture, or hangs with
+     no result/error/end at all). Desktop browsers share the device, so they
+     keep the parallel playback recording. */
+  function micSharedWithRecognition() {
+    const nav = window.navigator || {};
+    if (nav.userAgentData && nav.userAgentData.mobile) return false;
+    const ua = nav.userAgent || '';
+    if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua)) return false;
+    if (/Macintosh/.test(ua) && nav.maxTouchPoints > 1) return false;   // iPadOS reports a Mac UA
+    return true;
+  }
+  // The recognised words so far, and whether the recogniser has committed to
+  // them. Joins every result (Safari can split one utterance across several)
+  // and reads the best alternative of each.
+  function transcriptFrom(e) {
+    const list = (e && e.results) || [];
+    const parts = [];
+    let final = list.length > 0;
+    for (let i = 0; i < list.length; i++) {
+      const r = list[i];
+      const alt = r && r[0];
+      const t = alt && alt.transcript ? String(alt.transcript).trim() : '';
+      if (t) parts.push(t);
+      if (!r || !r.isFinal) final = false;
+    }
+    return { text: parts.join(' ').replace(/\s+/g, ' ').trim(), final: final };
+  }
+  // SpeechRecognition error code → the learner-facing class. null = the error
+  // is part of normal flow and the session decides the message on end.
+  const REC_ERROR_MSG = {
+    'permission-denied': 'Microphone permission was denied. Allow the microphone (and speech recognition, if your browser asks) for this site, then press Record & check again.',
+    'no-device': 'The microphone could not be opened — another app may be using it. Close that app and press Record & check again.',
+    'recognition-unavailable': 'Speech recognition is not available in this browser right now, so the word check cannot run. On iPhone and iPad it needs Dictation turned on in Settings. You can still hear the model above.'
+  };
+  function recErrorKind(code) {
+    if (code === 'not-allowed') return 'permission-denied';
+    if (code === 'audio-capture') return 'no-device';
+    if (code === 'service-not-allowed' || code === 'language-not-supported' || code === 'bad-grammar') return 'recognition-unavailable';
+    return null;
+  }
+  // How long a stopped session may wait for the recogniser / recorder to hand
+  // over what they have before it is closed with whatever arrived. iOS can
+  // leave recognition hanging with no result, error or end event at all.
+  const MIC_SETTLE_MS = 6000;
   /* Diagnostics ------------------------------------------------------------
      Additive only — no speaking logic depends on anything below. With
      ?micdebug=1 in the URL the trace is also rendered on the page, so a real
@@ -3788,7 +3845,15 @@
     if (s.reported) return;      // a classified permission/context message is already on screen
     const r = s.result;
     r.innerHTML = '';
-    r.setAttribute('data-mic-state', s.heard ? 'result' : (s.blob ? 'recorded' : 'no-speech'));
+    // Only a non-empty transcript that the recogniser has finished with is
+    // ever scored; every other outcome gets its own honest state.
+    const state = s.heard ? 'result'
+      : s.pending ? 'checking'
+      : s.noRecognition ? 'recognition-unavailable'
+      : s.recError === 'no-speech' ? 'no-speech'
+      : s.recError === 'network' ? 'network'
+      : 'no-transcript';
+    r.setAttribute('data-mic-state', state);
     if (s.heard) {
       const acc = wordAccuracy(s.p.de, s.heard);
       trace('wordAccuracy', true, { target: s.p.de, heard: s.heard, percent: acc });
@@ -3799,17 +3864,16 @@
         el('p', { class: 'muted', style: 'font-size:13px;margin-top:12px' }, acc >= 70 ? 'Most of the model sentence\u2019s words were recognised.' : 'Several words of the model sentence were not recognised \u2014 listen to the model and try again.'),
         el('p', { class: 'muted speak-score-note', style: 'font-size:12px;margin-top:4px' }, 'Compares the recognised words with the model sentence. It is not a pronunciation score.'),
         aiSlot({ kind: 'speaking', itemId: 'speaking.' + C.speaking.indexOf(s.p), transcript: s.heard, isExam: IS_EXAM }));
-    } else if (s.pending) {
+    } else if (state === 'checking') {
       r.appendChild(el('p', { class: 'muted', style: 'font-size:14px;margin:0' }, 'Checking what you said…'));
     } else {
-      let msg;
-      if (s.recError === 'no-speech') msg = 'No speech was detected. Press Record & check and start speaking straight away.';
-      else if (s.blob) msg = s.recError
-        ? 'Your recording is below. The word check could not run (' + s.recError + ') — play it back and compare it with the model.'
-        : 'Your recording is below. The speech check returned no words this time — play it back and compare with the model, or record again.';
-      else if (s.recError === 'network') msg = 'The speech check could not reach the recognition service. Check your connection and press Record & check again.';
-      else if (s.recError) msg = 'The speech check could not run (' + s.recError + '). Press Record & check to try again.';
-      else msg = 'Nothing was recorded. Press Record & check and speak straight after the button reads “Listening”.';
+      const tail = s.blob ? ' Your recording is below — play it back and compare it with the model.' : '';
+      const msg = {
+        'recognition-unavailable': 'This browser does not offer speech recognition, so the word check cannot run here.' + (s.blob ? tail : ' You can still hear the model above.'),
+        'no-speech': 'No speech was detected. Press Record & check and start speaking straight away.' + tail,
+        'network': 'The speech check could not reach the recognition service. Check your connection and press Record & check again.' + tail,
+        'no-transcript': 'The speech check did not return any words this time, so nothing was scored. Press Record & check and say the sentence again, close to the microphone.' + tail
+      }[state];
       r.appendChild(el('p', { class: 'muted', style: 'font-size:14px;margin:0' }, msg));
     }
     if (s.blob) {
@@ -3839,13 +3903,46 @@
     // MediaRecorder never fired onstop. The recorder re-renders later to add the
     // playback, and the word check never depends on it.
     if (s.heard) { s.pending = false; renderSession(s); }
+    let waitRecorder = false;
     if (s.recorder && s.recorder.state !== 'inactive') {
-      try { s.recorder.stop(); trace('recorder.stop', true, s.recorder.state); }
+      try { s.recorder.stop(); waitRecorder = true; trace('recorder.stop', true, s.recorder.state); }
       catch (e) { trace('recorder.stop', false, String(e)); releaseStream(s); renderSession(s); }
     } else {
       releaseStream(s);
       renderSession(s);
     }
+    if (s.pending || waitRecorder) armSettle(s);
+  }
+
+  // Recognition is over: the final transcript, or failing that the last
+  // words it did hear (iOS may end without ever marking a result final).
+  // Returns true when this call is what supplied the transcript.
+  function endRecognition(s) {
+    s.recEnded = true; s.pending = false;
+    if (!s.heard && s.interim) { s.heard = s.interim; trace('recognition.interimUsed', true, s.heard); return true; }
+    return false;
+  }
+
+  // Close a stopped session with whatever it has once MIC_SETTLE_MS passes,
+  // so neither a silent recogniser nor a recorder that never fires onstop
+  // (both seen on iOS) can leave the panel on "Checking what you said…".
+  function armSettle(s) {
+    clearTimeout(s.settleTimer);
+    s.settleTimer = setTimeout(() => {
+      let changed = false;
+      if (s.rec && !s.recEnded) {
+        trace('recognition.settle', false, 'no end event ' + MIC_SETTLE_MS + 'ms after stop');
+        try { s.rec.abort(); } catch (e) {}
+        endRecognition(s); changed = true;
+      }
+      if (s.recorder && !s.recorderDone) {
+        trace('recorder.settle', false, 'no onstop ' + MIC_SETTLE_MS + 'ms after stop');
+        s.recorderDone = true;
+        if (!s.blob && s.chunks && s.chunks.length) s.blob = new Blob(s.chunks, { type: s.recorder.mimeType || s.chunks[0].type || s.mime || '' });
+        releaseStream(s); changed = true;
+      }
+      if (changed && s.gen === s.result._kwGen && s.btn._kwSession !== s) renderSession(s);
+    }, MIC_SETTLE_MS);
   }
 
   const EMBEDDED_MSG = 'This page is running inside an embedded preview, which is not granted microphone access — your browser permission is fine. Speaking checks are unavailable here.';
@@ -3893,7 +3990,11 @@
     result._kwScrolled = false;
     micEnter(btn, ' Listening…');
 
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SR = speechRecognitionCtor();
+    // Release any model clip before the mic opens: on iOS a playing <audio>
+    // holds the audio session and recognition then hangs without an event,
+    // and on every platform the recogniser would otherwise hear the model.
+    try { Audio.stop(); } catch (e) {}
 
     /* ─────────────────────────────────────────────────────────────────────
        RECOGNITION FIRST — synchronously, in the click's own tick.
@@ -3905,18 +4006,22 @@
        ───────────────────────────────────────────────────────────────────── */
     result._kwGen = (result._kwGen || 0) + 1;
     const session = { p: p, btn: btn, result: result, gen: result._kwGen, stream: null, recorder: null, rec: null,
-      heard: null, blob: null, recError: null, diag: null, reported: false, recEnded: false, pending: false, capTimer: null };
+      heard: null, interim: null, blob: null, chunks: null, mime: '', recError: null, diag: null, reported: false, recEnded: false,
+      recorderDone: false, noRecognition: false, pending: false, capTimer: null, settleTimer: null };
     const renderIfCurrent = () => { if (session.gen === result._kwGen && !btn._kwSession) renderSession(session); };
     const contextHint = () => (env.policy === false || env.framed)
       ? { kind: 'context-blocked', msg: EMBEDDED, tab: true }
-      : { kind: 'permission-denied', msg: 'Microphone permission was denied. Allow the microphone for this site and press Record & check again.' };
+      : { kind: 'permission-denied', msg: REC_ERROR_MSG['permission-denied'] };
 
     if (!SR) trace('recognition', false, 'SpeechRecognition not supported');
     else {
       try {
         const rec = new SR();
         trace('recognition.new', true);
-        rec.lang = 'de-DE'; rec.interimResults = false; rec.maxAlternatives = 1;
+        // Interim results are only KEPT, never scored on their own: they are
+        // the fallback transcript when a recogniser (iOS Safari) ends without
+        // marking a result final. Desktop Chrome still scores its final result.
+        rec.lang = 'de-DE'; rec.continuous = false; rec.interimResults = true; rec.maxAlternatives = 1;
         rec.onstart = () => trace('recognition.onstart', true);
         rec.onaudiostart = () => trace('recognition.audiostart', true);
         rec.onspeechstart = () => trace('recognition.speechstart', true);
@@ -3924,7 +4029,14 @@
         rec.onaudioend = () => trace('recognition.audioend', true);
         rec.onnomatch = () => trace('recognition.nomatch', false);
         rec.onresult = (e) => {
-          session.heard = String(e.results[0][0].transcript || '').trim() || null;
+          const t = transcriptFrom(e);
+          if (t.text) session.interim = t.text;
+          if (!t.final) { trace('recognition.interim', true, t.text); return; }
+          // An empty final result is not a check — recognition carries on to
+          // onend, which reports "no words" rather than scoring nothing.
+          if (!t.text) { trace('recognition.result', false, 'empty transcript'); return; }
+          if (session.heard) return;
+          session.heard = t.text;
           session.pending = false; session.recError = null;
           trace('recognition.result', true, session.heard);
           // Auto-finish: the score appears without a second click.
@@ -3936,17 +4048,18 @@
           trace('recognition.error', false, code);
           if (code === 'aborted') return;
           session.recError = code;
-          if (code === 'not-allowed' || code === 'service-not-allowed') {
-            const d = session.diag || contextHint();
-            session.reported = true;
-            say(d.kind, d.msg, d.tab);
-          }
+          const kind = recErrorKind(code);
+          if (!kind || session.heard) return;
+          // A not-allowed from an embedded frame is not the learner's denial.
+          const d = kind === 'permission-denied' ? (session.diag || contextHint()) : { kind: kind, msg: REC_ERROR_MSG[kind] };
+          session.reported = true;
+          say(d.kind, d.msg, d.tab);
         };
         rec.onend = () => {
-          session.recEnded = true; session.pending = false;
+          const fromInterim = endRecognition(session);
           trace('recognition.end', true);
           if (btn._kwSession === session) stopSession(btn);
-          else if (!session.heard) renderIfCurrent();
+          else if (!session.heard || fromInterim) renderIfCurrent();
         };
         rec.start();
         session.rec = rec;
@@ -3964,13 +4077,16 @@
         { button: btn.textContent.trim(), panel: result.getAttribute('data-mic-state'), sessionOpen: btn._kwSession === session }), ms));
       // Optional extra, strictly after the fact: a parallel recording the
       // learner can play back. Failure here is recorded and otherwise ignored.
-      attachRecording(session, env);
+      // Never on mobile — a second mic consumer is what starves recognition.
+      if (micSharedWithRecognition()) attachRecording(session, env);
+      else trace('recording.skip', true, 'mobile: recognition owns the microphone');
       return;
     }
 
     /* Recognition unavailable (e.g. Firefox) — fall back to record-only so the
        button still does something useful. */
     trace('fallback', true, 'no recognition — record-only attempt');
+    session.noRecognition = true;
     let diag = null, stream = null;
     if (window.isSecureContext === false) { trace('secureContext', false); diag = { kind: 'context-blocked', msg: 'The microphone needs a secure (https) page. Open this chapter over https and try again.' }; }
     else if (env.policy === false) { trace('framePolicy', false, 'microphone not allowed for this frame'); diag = { kind: 'context-blocked', msg: EMBEDDED, tab: true }; }
@@ -4022,16 +4138,28 @@
   function startRecorder(session) {
     const mime = micMime();
     if (mime === null) { trace('MediaRecorder', false, 'not supported in this browser'); return false; }
-    const chunks = [];
+    const chunks = session.chunks = [];
+    session.mime = mime;
     let rc;
     try {
       rc = mime ? new MediaRecorder(session.stream, { mimeType: mime }) : new MediaRecorder(session.stream);
       trace('recorder.new', true, mime || 'browser default');
-    } catch (e) { trace('recorder.new', false, String(e && e.name || e)); return false; }
+    } catch (e) {
+      trace('recorder.new', false, String(e && e.name || e));
+      // isTypeSupported() and the constructor can disagree; the browser's own
+      // default container is always acceptable to it.
+      if (!mime) return false;
+      try { rc = new MediaRecorder(session.stream); session.mime = ''; trace('recorder.new', true, 'browser default (retry)'); }
+      catch (e2) { trace('recorder.new', false, String(e2 && e2.name || e2)); return false; }
+    }
     rc.ondataavailable = (e) => { if (e.data && e.data.size) { chunks.push(e.data); trace('dataavailable', true, e.data.size); } };
     rc.onerror = (e) => trace('recorder.error', false, (e && e.error && e.error.name) || 'error');
     rc.onstop = () => {
-      session.blob = chunks.length ? new Blob(chunks, { type: rc.mimeType || mime || 'audio/webm' }) : null;
+      if (session.recorderDone) return;      // the settle timer already closed it
+      session.recorderDone = true;
+      // Label the Blob with what the recorder actually produced — never a
+      // guessed container (Safari records MP4, Chrome/Firefox WebM/Ogg).
+      session.blob = chunks.length ? new Blob(chunks, { type: rc.mimeType || chunks[0].type || session.mime || '' }) : null;
       trace('blob', !!session.blob, session.blob ? session.blob.size : 0);
       releaseStream(session);
       if (session.gen === session.result._kwGen && session.btn._kwSession !== session) renderSession(session);

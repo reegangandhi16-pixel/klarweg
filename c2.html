@@ -742,24 +742,6 @@ body.mobile-nav-open { overflow: hidden; }
   flex-wrap: wrap;
 }
 .cc-duration { display: inline-flex; align-items: center; gap: 5px; }
-.cc-skills {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.cc-skill {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--bg-warm-soft);
-  border: 1px solid var(--hairline-light);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink-tertiary);
-  transition: all var(--dur-fast) var(--ease);
-}
-.cc-skill svg { width: 11px; height: 11px; }
 .cc-cta {
   font-size: 13px;
   font-weight: 500;
@@ -807,9 +789,6 @@ body.mobile-nav-open { overflow: hidden; }
   filter: blur(0.3px);
 }
 .chapter-card.locked .cc-num { color: var(--ink-quaternary); }
-.chapter-card.locked .cc-skill {
-  opacity: 0.5;
-}
 .chapter-card.locked .cc-cta {
   font-size: 12px;
   font-weight: 500;
@@ -1631,10 +1610,6 @@ const C2_CHAPTER_HREFS = {
   29: 'chapter/chapter-c2-29-goethe-c2-final.html'
 };
 function renderChapterCard(chapter, levelCode, isLocked) {
-  const skillsMarkup = chapter.skills.slice(0, 5).map(s => `
-    <span class="cc-skill" title="${skillLabel(s)}" aria-label="${skillLabel(s)}">${ICONS[s] || ''}</span>
-  `).join('');
-
   const numPadded   = String(chapter.n).padStart(2, '0');
   // Free Chapter 1 opens the real built chapter; locked cards scroll to pricing.
   const href        = isLocked ? '#pricing' : (chapter.href || C2_CHAPTER_HREFS[chapter.n] || '#pricing');
@@ -1666,22 +1641,11 @@ function renderChapterCard(chapter, levelCode, isLocked) {
       <div class="cc-foot">
         <div class="cc-meta">
           <span class="cc-duration">${ICONS.clock} ${chapter.duration}</span>
-          <span class="cc-skills">${skillsMarkup}</span>
         </div>
         <span class="cc-cta">${ctaText} ${ICONS.arrow}</span>
       </div>
     </a>
   `;
-}
-
-function skillLabel(s) {
-  return ({
-    audio: 'Audio practice',
-    speak: 'Speaking with AI tutor',
-    grammar: 'Color-coded grammar',
-    quiz: 'Mini quiz',
-    pdf: 'Homework PDF'
-  })[s] || s;
 }
 
 /* ============================================================

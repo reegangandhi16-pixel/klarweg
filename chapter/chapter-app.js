@@ -4622,7 +4622,7 @@
       el('div', {}, el('div', { class: 'next-chapter-label' }, 'Up next · Chapter ' + C.nextChapter.number),
         el('div', { class: 'next-chapter-title' }, el('span', { class: 'de' }, C.nextChapter.title), ' — ', el('span', { class: 'muted', style: 'font-weight:400;font-size:18px' }, C.nextChapter.titleEn))),
       nextLocked
-        ? el('a', { class: 'btn btn-primary', href: C.nextChapter.href || '#' }, el('span', { html: CROSS_CHAPTER_LOCK_SVG }), 'Unlock to continue')
+        ? el('a', { class: 'btn btn-primary btn-unlock', href: C.nextChapter.href || '#' }, el('span', { html: CROSS_CHAPTER_LOCK_SVG }), 'Unlock to continue')
         : el('a', { class: 'btn btn-primary', href: C.nextChapter.href || '#' }, 'Continue ', el('span', { class: 'arrow' }, '→')));
   }
 

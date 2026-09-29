@@ -135,6 +135,36 @@ test('explanation callouts: one shared teal standard for the Hinglish card and t
   }
 });
 
+test('chapter action theme: shared teal controls, amber grammar semantics, coral conversion CTA', () => {
+  // teal in-app action controls, defined once in chapter.css
+  assert.match(rule('.btn-primary'), /background: var\(--accent\);/);
+  assert.match(rule('.btn-primary'), /rgba\(31,78,74,0\.42\)/);
+  assert.doesNotMatch(rule('.btn-primary') + rule('.btn-primary:hover'), /229,90,63/, 'no coral glow under teal buttons');
+  assert.match(rule('.btn-primary:hover'), /background: #163A37;/);
+  assert.match(rule('.mic-btn'), /background: var\(--accent\);/);
+  assert.match(rule('.mic-btn.is-recording'), /background: var\(--g-verb\);/);
+  assert.match(rule('.audio-play-btn'), /background: var\(--accent\);/);
+  assert.match(rule('.audio-track-fill'), /background: var\(--accent\);/);
+  assert.doesNotMatch(CSS, /#c44e26/i);
+  // amber grammar semantics stay authoritative
+  assert.match(CSS, /--g-article: #B45309;/);
+  assert.match(rule('.vword-de .art'), /color: var\(--g-article\);/);
+  assert.match(rule('.vp-de .vp-article'), /color: var\(--g-article\);/);
+  // coral conversion exception: only the "Unlock to continue" link
+  assert.match(rule('.btn-primary.btn-unlock'), /background: var\(--coral\);/);
+  assert.equal((APP.match(/btn-unlock/g) || []).length, 1);
+  assert.match(APP, /class: 'btn btn-primary btn-unlock'[^\n]*'Unlock to continue'/);
+  assert.match(APP, /class: 'btn btn-primary', href: C\.nextChapter\.href \|\| '#' \}, 'Continue '/);
+  // pages no longer restate the theme; page-specific .r-* concept rules may stay
+  const THEME = /(\.btn-primary|\.mic-btn|\.audio-play-btn|\.audio-track-fill|\.vword-tag\.gender-|\.vword-de \.art|\.vp-article)[^{}]*\{/;
+  for (const f of fs.readdirSync(path.join(ROOT, 'chapter')).filter((f) => /^chapter-.*\.html$/.test(f))) {
+    const styles = (fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8').match(/<style>[\s\S]*?<\/style>/g) || []).join('');
+    assert.doesNotMatch(styles, THEME, f);
+  }
+  const c202 = fs.readFileSync(path.join(ROOT, 'chapter', 'chapter-c2-02-verben-mit-praefixen.html'), 'utf8');
+  assert.match(c202, /\.r-praefix-praezise, \.r-baum-metapher[^{]*\{ color: #1F4E4A; font-weight: 600; \}/);
+});
+
 test('Grammar Helper rows wrap; sentence-parser labels get room at the edges', () => {
   assert.match(RESPONSIVE, /\.gh-row \{ flex-wrap: wrap; \}/);
   assert.match(RESPONSIVE, /\.parser-sentence \{ overflow-wrap: anywhere; \}\s*\.parser-tok \{ max-width: 100%; \}/);
@@ -201,7 +231,7 @@ test('258 chapter pages load the new asset versions and nothing else changed in 
   assert.equal(pages.length, 258);
   for (const f of pages) {
     const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
-    assert.ok(h.includes('href="chapter.css?v=16"') && h.includes('src="chapter-app.js?v=20"'), f);
+    assert.ok(h.includes('href="chapter.css?v=17"') && h.includes('src="chapter-app.js?v=21"'), f);
     assert.ok(!h.includes('href="chapter.css?v=14"') && !h.includes('src="chapter-app.js?v=16"'), f);
   }
 });

@@ -727,14 +727,25 @@ img { max-width: 100%; display: block; }
 .grammar-text { font-size: 15px; color: var(--ink-secondary); line-height: 1.65; }
 .grammar-text + .grammar-text { margin-top: 12px; }
 
-/* Hinglish explanation card — warm surface, teal accent (no grammar colors in decoration) */
+/* Explanation callouts — the Hinglish card and the Overview "one idea" card
+   (visual-system §3.8): light brand-teal tint, teal hairline, a 3px teal
+   accent bar and a soft static shadow. The bar is an inset shadow, so box
+   geometry and text position are the same as a plain bordered box. No
+   grammar colors in decoration, no motion. */
 .hinglish-card {
   margin: 18px 0 4px;
-  background: var(--bg-warm);
-  border: 1px solid #f0deb8;
+  background: color-mix(in srgb, var(--accent) 7%, var(--bg-surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--bg-surface));
   border-radius: var(--r-md);
   padding: 16px 18px;
+  box-shadow: inset 3px 0 0 var(--accent), 0 4px 18px rgba(31, 78, 74, 0.08);
 }
+.card.one-idea-card {
+  background: color-mix(in srgb, var(--accent) 7%, var(--bg-surface));
+  border-color: color-mix(in srgb, var(--accent) 24%, var(--bg-surface));
+  box-shadow: inset 3px 0 0 var(--accent), 0 4px 18px rgba(31, 78, 74, 0.08);
+}
+.one-idea-card > .eyebrow { color: var(--accent); }
 .hinglish-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .hinglish-badge {
   flex-shrink: 0;

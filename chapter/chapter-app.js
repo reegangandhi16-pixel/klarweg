@@ -550,7 +550,7 @@
   function bodyOverview() {
     const wrap = el('div', { class: 'card-grid' });
     const intro = C.overviewIntro || {};
-    const goal = el('div', { class: 'card', style: 'background:var(--bg-warm);border-color:#f0deb8' },
+    const goal = el('div', { class: 'card one-idea-card' },
       el('div', { class: 'eyebrow', style: 'margin-bottom:10px' }, intro.eyebrow || 'The one idea'),
       el('p', { class: 'lede', style: 'color:var(--ink-primary);font-size:19px', html: intro.html || '' }));
     wrap.append(goal);

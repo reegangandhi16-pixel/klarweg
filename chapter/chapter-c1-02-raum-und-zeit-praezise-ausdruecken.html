@@ -28,6 +28,22 @@
   .audio-play-btn { background: #1F4E4A !important; }
   .audio-track-fill { background: #1F4E4A !important; }
 </style>
+<style>
+/* Visual experiment, C1·02 only: the explanation callouts (Hinglish cards and
+   the Overview "one idea" card) on a light brand-teal tint, with a 3px teal
+   accent bar and a soft static shadow. The bar is an inset shadow so the box
+   geometry and text position stay exactly as before. The Overview card is
+   coloured by an inline style from chapter-app.js, hence !important there. */
+.hinglish-card,
+#sec-overview .card-grid > .card {
+  --callout-tint: color-mix(in srgb, var(--accent) 7%, var(--bg-surface));
+  --callout-line: color-mix(in srgb, var(--accent) 24%, var(--bg-surface));
+  --callout-depth: inset 3px 0 0 var(--accent), 0 4px 18px rgba(31, 78, 74, 0.08);
+}
+.hinglish-card { background: var(--callout-tint); border-color: var(--callout-line); box-shadow: var(--callout-depth); }
+#sec-overview .card-grid > .card { background: var(--callout-tint) !important; border-color: var(--callout-line) !important; box-shadow: var(--callout-depth); }
+#sec-overview .card-grid > .card > .eyebrow { color: var(--accent); }
+</style>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="manifest" href="../manifest.json">

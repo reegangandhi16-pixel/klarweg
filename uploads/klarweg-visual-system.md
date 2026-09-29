@@ -256,7 +256,7 @@ This scale is binding for all margins, padding, and gap values across the platfo
 
 The page background is always near-white. Color is reserved for grammar tokens (the product's vocabulary) and a small set of brand accents:
 - Klarweg accent (`--accent`): deep teal `#1F4E4A` for Can-Do markers, primary buttons, scenario header dots, and the explanation-callout accent bar and tint (§3.8)
-- Coral accent (`--coral`): `#E55A3F` for primary CTAs only
+- Coral accent (`--coral`): `#E55A3F` for conversion CTAs only (on chapter pages: "Unlock to continue"; §3.9)
 - Spine blue (`--g-subject`): `#185FA5` for focus rings (uses the grammar Subject color intentionally)
 
 Ink hierarchy carries reading order. Color carries grammatical meaning. The page does not feel busy despite carrying 51 color tokens because they are *contained* within grammar artifacts and never spill into decoration.
@@ -282,6 +282,19 @@ Ink hierarchy carries reading order. Color carries grammatical meaning. The page
 **Remain warm / unchanged** (not part of this system even where they look similar): `.next-chapter` ("Up next"), `.resource-icon` tiles, `.sk-tag.tag-core` (Core labels), `.mistake-mark.wrong`, `.gap-input`, grammar role colors, CTAs / `.btn-primary`, `.writing-feedback`, `.quiz-xp-earned`, `.si-badge`, the active-sentence highlight, the Watch-Out callout (§11.17), and the `--warm` token itself.
 
 Adding a component to this system requires a design decision; do not infer membership from a warm or boxed appearance.
+
+### 3.9 Chapter Action Controls and Color Roles
+
+Chapter pages use one shared action theme, defined once in `chapter/chapter.css`; chapter HTML pages do not restate it.
+
+| Role | Color | Where |
+|---|---|---|
+| **Teal — in-app learning/action controls** | `var(--accent)` `#1F4E4A`, hover `#163A37`; shadow `0 8px 24px -8px rgba(31,78,74,0.42)` (hover `0 12px 32px -8px rgba(31,78,74,0.44)`) — no glow, pulse or gradient | `.btn-primary` (Check, Show answers, Continue, downloads), `.mic-btn` when not recording, `.audio-play-btn`, `.audio-track-fill` |
+| **Amber — grammar semantics** | `--g-article` `#B45309` | Articles (`.vword-de .art`, `.vp-de .vp-article`) and gender tags (`.vword-tag.gender-m/f/n`). Part of the 51-color grammar contract (§4.1): never re-themed per page |
+| **Coral — conversion CTAs** | `--coral` `#E55A3F` with its coral shadow | `.btn-primary.btn-unlock` — the "Unlock to continue" link to a locked next chapter |
+
+- Page-specific concept terms (`.r-*` rules in a chapter's own `<style>`) stay local to that chapter's authored content; they are never promoted to the shared theme.
+- A recording mic (`.mic-btn.is-recording`) keeps its verb-red state color.
 
 ---
 

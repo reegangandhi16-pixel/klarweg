@@ -1346,9 +1346,13 @@
     }
     const listenBtn = Audio.gate(el('button', { class: 'vword-btn', style: 'flex:0 0 auto;width:38px;padding:8px', title: 'Listen', 'aria-label': 'Listen', html: ICON.speaker,
       onclick: () => playVoice(voicePref()) }), term);
+    // A headword holding an unbreakable run of 16+ characters (a word, plus any
+    // "/in" suffix) never fits beside the F/M/listen buttons: the buttons go
+    // below and only such headwords may hyphenate.
+    const longHeadword = term.split(/\s+|\/(?!(?:in|innen)(?![a-zäöüß]))/).some((t) => t.length >= 16);
     card.append(
-      el('div', { class: 'vword-top' },
-        el('div', { class: 'vword-de' }, (w.art ? (() => { const s = el('span', { class: 'art r-article' }); const GEN = { m: 'masc.', f: 'fem.', n: 'neut.' }; s.appendChild(germanWordSpans(w.art.trim(), Object.assign({ scaffold: true }, GEN[w.gender] ? { type: 'Article · ' + GEN[w.gender] + ' nom.' } : null))); s.appendChild(document.createTextNode(' ')); return s; })() : ''), germanWordSpans(term.slice(w.art ? w.art.trim().length + 1 : 0), headwordCtx(term.slice(w.art ? w.art.trim().length + 1 : 0), w.art ? { type: 'Noun · singular' } : null))),
+      el('div', { class: 'vword-top' + (longHeadword ? ' vword-top--long' : '') },
+        el('div', { class: 'vword-de' }, (w.art ? (() => { const s = el('span', { class: 'art r-article' }); const GEN = { m: 'masc.', f: 'fem.', n: 'neut.' }; s.appendChild(germanWordSpans(w.art.trim(), Object.assign({ scaffold: true }, GEN[w.gender] ? { type: 'Article · ' + GEN[w.gender] + ' nom.' } : null))); s.appendChild(document.createTextNode(' ')); return s; })() : ''), el('span', { class: 'vword-lex' }, germanWordSpans(term.slice(w.art ? w.art.trim().length + 1 : 0), headwordCtx(term.slice(w.art ? w.art.trim().length + 1 : 0), w.art ? { type: 'Noun · singular' } : null)))),
         el('div', { class: 'vword-voicewrap' }, fBtn, mBtn, listenBtn)),
       el('div', { class: 'vword-pos' }, w.pos + (w.gender ? ' · ' + gMap[w.gender] : '')),
       el('div', { class: 'vword-en' }, w.en),
@@ -1382,6 +1386,8 @@
       el('div', { class: 'vword-actions' },
         learnBtn(w), saveBtn(w))
     );
+    slashBreaks(card.querySelector('.vword-lex'));
+    if (longHeadword) wordBoxes(card.querySelector('.vword-lex'));
     return card;
   }
   function learnBtn(w) {
@@ -2212,6 +2218,52 @@
       if (raw && /^Noun\b/.test(raw.type || '') && word === word.toLowerCase()) return null;
     }
     return hasMeaningfulEntry(hit) ? hit : null;
+  }
+  // Slash-joined headwords ("Bewunderer/Bewunderin") are one unbreakable
+  // token to the browser, so a card too narrow for both forms broke the second
+  // one mid-word. A <wbr> after the slash lets the line break there instead;
+  // "-in"/"-innen" suffixes ("Techniker/in") stay attached.
+  function slashBreaks(root) {
+    if (!root) return;
+    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); const nodes = []; let n;
+    while ((n = tw.nextNode())) nodes.push(n);
+    // the headword's words and slashes may be separate text nodes: read ahead across them
+    const after = (i, from) => (nodes[i].nodeValue.slice(from) + nodes.slice(i + 1).map((x) => x.nodeValue).join('')).slice(0, 8);
+    nodes.forEach((t, i) => {
+      const v = t.nodeValue, cuts = [];
+      for (let k = v.indexOf('/'); k !== -1; k = v.indexOf('/', k + 1)) {
+        const next = after(i, k + 1);
+        if (/^[A-Za-zÄÖÜäöüß]/.test(next) && !/^(?:in|innen)(?![a-zäöüß])/.test(next)) cuts.push(k + 1);
+      }
+      if (!cuts.length) return;
+      const frag = document.createDocumentFragment(); let prev = 0;
+      cuts.forEach((c) => { frag.appendChild(document.createTextNode(v.slice(prev, c))); frag.appendChild(document.createElement('wbr')); prev = c; });
+      if (prev < v.length) frag.appendChild(document.createTextNode(v.slice(prev)));
+      t.parentNode.replaceChild(frag, t);
+    });
+  }
+  // In a long headword each space-separated word becomes its own inline box,
+  // so a word that does not fit the line moves down whole and is hyphenated
+  // only when it is wider than the card ("veröf-fentlichten" filled lines).
+  function wordBoxes(lex) {
+    if (!lex) return;
+    const groups = [[]];
+    [...lex.childNodes].forEach((node) => {
+      if (node.nodeType !== 3) { groups[groups.length - 1].push(node); return; }
+      node.nodeValue.split(/(\s+)/).forEach((part) => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) groups.push([document.createTextNode(part)], []);
+        else groups[groups.length - 1].push(document.createTextNode(part));
+      });
+    });
+    const frag = document.createDocumentFragment();
+    groups.forEach((g) => {
+      if (!g.length) return;
+      if (g.length === 1 && g[0].nodeType === 3 && /^\s+$/.test(g[0].nodeValue)) { frag.appendChild(g[0]); return; }
+      const box = document.createElement('span'); box.className = 'vword-w';
+      g.forEach((n) => box.appendChild(n)); frag.appendChild(box);
+    });
+    lex.replaceChildren(frag);
   }
   function germanWordSpansGated(text) {
     const frag = document.createDocumentFragment();

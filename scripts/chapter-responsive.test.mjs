@@ -97,6 +97,23 @@ test('vocabulary card actions: each sizes to its label, never breaks mid-label, 
   assert.ok(media('(pointer: coarse)').includes('.vword-btn'), 'still 44px on phones');
 });
 
+test('vocabulary headword keeps whole words: buttons wrap below instead of mid-word breaks', () => {
+  assert.match(rule('.vword-top'), /display: flex; flex-wrap: wrap;/);
+  assert.match(rule('.vword-de'), /flex: 1 1 auto; width: min-content; min-width: 0; overflow-wrap: break-word;/);
+  assert.doesNotMatch(rule('.vword-de'), /overflow-wrap: anywhere/);
+  assert.match(rule('.vword'), /min-width: 0;/);
+  // never hyphenated, except a 16+ character word on its own full-width row
+  assert.match(rule('.vword-de, .vword-de [lang="de"]'), /hyphens: manual;/);
+  assert.match(rule('.vword-top--long .vword-de'), /flex-basis: 100%;/);
+  assert.match(rule('.vword-top--long .vword-lex'), /hyphens: auto;/);
+  assert.match(rule('.vword-lex'), /display: inline-block; max-width: 100%;/);
+  assert.match(rule('.vword-top--long .vword-w'), /display: inline-block; max-width: 100%;/);
+  assert.match(APP, /if \(longHeadword\) wordBoxes\(card\.querySelector\('\.vword-lex'\)\);/);
+  assert.match(APP, /const longHeadword = term\.split\(.*\)\.some\(\(t\) => t\.length >= 16\);/);
+  // slash-joined forms ("Bewunderer/Bewunderin") break after the slash
+  assert.match(APP, /slashBreaks\(card\.querySelector\('\.vword-lex'\)\);\n    if \(longHeadword\) wordBoxes\(card\.querySelector\('\.vword-lex'\)\);\n    return card;/);
+});
+
 test('Grammar Helper rows wrap; sentence-parser labels get room at the edges', () => {
   assert.match(RESPONSIVE, /\.gh-row \{ flex-wrap: wrap; \}/);
   assert.match(RESPONSIVE, /\.parser-sentence \{ overflow-wrap: anywhere; \}\s*\.parser-tok \{ max-width: 100%; \}/);
@@ -163,7 +180,7 @@ test('258 chapter pages load the new asset versions and nothing else changed in 
   assert.equal(pages.length, 258);
   for (const f of pages) {
     const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
-    assert.ok(h.includes('href="chapter.css?v=14"') && h.includes('src="chapter-app.js?v=17"'), f);
-    assert.ok(!h.includes('chapter.css?v=13"') && !h.includes('chapter-app.js?v=16"'), f);
+    assert.ok(h.includes('href="chapter.css?v=15"') && h.includes('src="chapter-app.js?v=18"'), f);
+    assert.ok(!h.includes('href="chapter.css?v=14"') && !h.includes('src="chapter-app.js?v=16"'), f);
   }
 });

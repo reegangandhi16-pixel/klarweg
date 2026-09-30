@@ -1,0 +1,205 @@
+/* ============================================================
+   KLARWEG — Chapter resource PDFs, print stylesheet (A4)
+   Tokens copied from chapter/chapter.css :root (spec Part 2 / 3.7).
+   Grammar-role colours (.r-*) are injected from chapter.css at
+   build time, so they never drift from the site.
+   One accent: deep teal. No coral, no emoji. Paper stays white for
+   printing; warm surfaces appear only on the masthead and callouts.
+============================================================ */
+
+@font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 600; src: url(fonts/Fraunces-600.ttf); }
+@font-face { font-family: 'Fraunces'; font-style: italic; font-weight: 500; src: url(fonts/Fraunces-500-Italic.ttf); }
+@font-face { font-family: 'Fraunces'; font-style: italic; font-weight: 600; src: url(fonts/Fraunces-600-Italic.ttf); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url(fonts/Inter-400.ttf); }
+@font-face { font-family: 'Inter'; font-weight: 500; src: url(fonts/Inter-500.ttf); }
+@font-face { font-family: 'Inter'; font-weight: 600; src: url(fonts/Inter-600.ttf); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url(fonts/JetBrainsMono-400.ttf); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 500; src: url(fonts/JetBrainsMono-500.ttf); }
+@font-face { font-family: 'Noto Sans Devanagari'; font-weight: 400; src: url(fonts/NotoSansDevanagari-400.ttf); }
+@font-face { font-family: 'Noto Sans Devanagari'; font-weight: 500; src: url(fonts/NotoSansDevanagari-500.ttf); }
+/* Last-resort faces for authored symbols no Klarweg face carries (═ ✓ ✗ ⚠ ✅ ❌ …).
+   Monochrome and embedded, so output never depends on the build machine. */
+@font-face { font-family: 'Noto Sans Symbols 2'; font-weight: 100 900; src: url(fonts/NotoSansSymbols2-400.ttf); }
+@font-face { font-family: 'Noto Emoji'; font-weight: 100 900; src: url(fonts/NotoEmoji-400.ttf); }
+
+:root {
+  --canvas: #FAFAF7; --surface: #FFFFFF; --elevated: #F4F3EE; --warm: #FFF8EC;
+  --ink-primary: #0E0E10; --ink-secondary: #5A5A60; --ink-tertiary: #9A9AA0;
+  --hairline: #E6E4DD; --hairline-strong: #D6D3CA;
+  --accent: #1F4E4A; --accent-tint: #E7F0EE;
+  /* Fallbacks stay inside the embedded Klarweg faces: a glyph Fraunces lacks
+     (e.g. → U+2192) comes from Inter, never from a system font such as
+     Times New Roman, which would vary by build machine. */
+  --font-display: 'Fraunces', 'Inter', 'Noto Sans Devanagari', 'JetBrains Mono', 'Noto Sans Symbols 2', 'Noto Emoji', serif;
+  --font-german: 'Fraunces', 'Inter', 'Noto Sans Devanagari', 'JetBrains Mono', 'Noto Sans Symbols 2', 'Noto Emoji', serif;
+  --font-ui: 'Inter', 'Noto Sans Devanagari', 'JetBrains Mono', 'Noto Sans Symbols 2', 'Noto Emoji', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Inter', 'Noto Sans Symbols 2', 'Noto Emoji', monospace;
+  --font-hindi: 'Noto Sans Devanagari', 'Inter', 'JetBrains Mono', 'Noto Sans Symbols 2', 'Noto Emoji', sans-serif;
+}
+
+@page {
+  size: A4;
+  margin: 18mm 18mm 20mm;
+  @bottom-left { font: 400 7pt 'JetBrains Mono', 'Inter', monospace; color: #9A9AA0; vertical-align: top; padding-top: 5mm; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 400 7pt 'JetBrains Mono', 'Inter', monospace; color: #9A9AA0; vertical-align: top; padding-top: 5mm; }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+/* Never fake a bold weight (Chrome embeds faked-bold glyphs as Type3) — every
+   bold used has a real face. Slanting stays allowed: authored <i> in Inter
+   text has no italic file and must still print italic. Emoji-style symbols
+   print in monochrome text form. */
+* { font-synthesis: style; font-variant-emoji: text; }
+body { margin: 0; background: var(--surface); color: var(--ink-primary); font: 400 9.5pt/1.55 var(--font-ui); }
+p { margin: 0 0 7pt; orphans: 3; widows: 3; }
+b, strong { font-weight: 600; }
+ul, ol { margin: 0; padding: 0; }
+
+/* German = Fraunces italic 500 */
+.de { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 1.06em; }
+.de .de { font-size: 1em; }
+[lang="hi"] { font-family: var(--font-hindi); }
+.strike { text-decoration: line-through; text-decoration-color: var(--ink-tertiary); color: var(--ink-secondary); }
+.muted { color: var(--ink-secondary); }
+.mono-sm { font: 400 7.5pt var(--font-mono); }
+.lbl, .eyebrow, .mast-tag, .mast-eyebrow, .tag, .clbl, .tlbl, .tnum, .opt-l, .ref, .mast-meta {
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.lbl { font-size: 6.5pt; color: var(--ink-secondary); margin-bottom: 4pt; }
+
+/* Keep a heading with the block that follows it */
+.keep { break-inside: avoid; }
+
+/* ---------- Masthead (page 1) ---------- */
+.mast { background: var(--canvas); border-radius: 8pt; padding: 14pt 16pt 16pt; margin-bottom: 20pt; border: 1px solid var(--hairline); }
+.mast-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18pt; }
+.wordmark { font: 600 12pt var(--font-display); letter-spacing: -0.01em; }
+.mast-tag { font-size: 6.5pt; color: var(--ink-secondary); }
+.mast-eyebrow { font-size: 7pt; color: var(--accent); margin-bottom: 6pt; }
+.mast h1 { font: 600 24pt/1.1 var(--font-display); letter-spacing: -0.015em; margin: 0 0 6pt; }
+.mast-chapter { font-size: 11pt; }
+.mast-chapter .de { font-size: 12.5pt; }
+.mast-desc { color: var(--ink-secondary); margin: 10pt 0 0; max-width: 150mm; }
+.mast-meta { margin-top: 10pt; padding-top: 8pt; border-top: 1px solid var(--hairline-strong); font-size: 6.5pt; color: var(--ink-tertiary); }
+
+/* ---------- Sections ---------- */
+.sec { margin-bottom: 18pt; }
+.eyebrow { font-size: 7pt; color: var(--accent); margin-bottom: 3pt; }
+h2 { font: 600 15pt/1.25 var(--font-display); letter-spacing: -0.01em; margin: 0 0 10pt; padding-bottom: 7pt; border-bottom: 1px solid var(--hairline-strong); }
+.sec + .sec { margin-top: 22pt; }
+.intro { margin-bottom: 10pt; }
+
+/* ---------- Grammar blocks ---------- */
+.what { font-size: 10pt; color: var(--ink-secondary); }
+.note { color: var(--ink-secondary); font-size: 9pt; }
+.co { border-radius: 6pt; padding: 8pt 11pt; margin: 9pt 0; break-inside: avoid; }
+.co p:last-child { margin-bottom: 0; }
+.co-rule { background: var(--accent-tint); border-left: 2px solid var(--accent); }
+.co-rule .lbl { color: var(--accent); }
+.co-rule .co-text { font-weight: 500; }
+.co-why, .co-compare, .co-connect { background: var(--elevated); }
+.co-formula { border: 1px solid var(--hairline-strong); }
+.fline { font-weight: 500; padding: 1.5pt 0; }
+.co-hinglish { background: var(--accent-tint); }
+.co-hinglish .lbl { color: var(--accent); }
+.co-trick { border: 1px dashed var(--hairline-strong); }
+.co-recap { border: 1px solid var(--hairline); }
+.co-recap ul, .takeaways, .checklist { list-style: none; }
+.co-recap li, .takeaways li { position: relative; padding-left: 12pt; margin: 3pt 0; }
+.co-recap li::before, .takeaways li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 4pt; height: 4pt; border-radius: 50%; background: var(--accent); }
+.examples { margin: 9pt 0; border-left: 1px solid var(--hairline-strong); padding-left: 11pt; }
+.exline { padding: 2pt 0; break-inside: avoid; }
+.mk { padding: 6pt 0; border-bottom: 1px solid var(--hairline); break-inside: avoid; }
+.mk-line { display: flex; gap: 8pt; align-items: baseline; }
+.mk-mark { width: 10pt; flex: none; display: inline-flex; align-items: center; }
+.mk-mark svg { display: block; }
+.mk-mark.x { color: var(--ink-tertiary); }
+.mk-mark.ok { color: var(--accent); }
+.mk-why { font-size: 8.5pt; color: var(--ink-secondary); padding-left: 18pt; margin-top: 2pt; }
+
+/* ---------- Tables ---------- */
+.tbl { width: 100%; border-collapse: collapse; margin: 9pt 0; font-size: 9pt; }
+.tbl thead { display: table-header-group; }
+.tbl th { font: 500 6.5pt var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-tertiary); text-align: left; padding: 5pt 8pt 5pt 0; border-bottom: 1px solid var(--hairline-strong); }
+.tbl td { padding: 5pt 8pt 5pt 0; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+.tbl tr { break-inside: avoid; }
+.tbl.keep-table { break-inside: avoid; }
+.tbl td.rh { font-weight: 500; }
+
+/* ---------- Vocabulary ---------- */
+.ventry { display: grid; grid-template-columns: 36% 1fr; column-gap: 14pt; padding: 9pt 0; border-bottom: 1px solid var(--hairline); break-inside: avoid; }
+.vword .de { font-size: 12pt; }
+.vtags { margin-top: 3pt; }
+.tag { display: inline-block; font-size: 5.5pt; color: var(--ink-tertiary); border: 1px solid var(--hairline); border-radius: 3pt; padding: 0 3pt; margin: 0 3pt 2pt 0; }
+.vforms { font-size: 8pt; color: var(--ink-secondary); margin-top: 4pt; line-height: 1.6; }
+.vforms .de { font-size: 8.5pt; }
+.nb { white-space: nowrap; }
+.clbl { font-size: 5.5pt; color: var(--ink-tertiary); }
+.vmean { display: flex; flex-wrap: wrap; gap: 4pt 12pt; align-items: baseline; }
+.ven { font-weight: 500; }
+.vhi { font-size: 9.5pt; color: var(--ink-secondary); }
+.vrel { font-size: 8pt; color: var(--ink-secondary); margin-top: 3pt; }
+.vex { margin-top: 5pt; padding-left: 9pt; border-left: 1px solid var(--hairline-strong); }
+.vex .de { font-size: 9.5pt; }
+.ex-en { color: var(--ink-secondary); font-size: 8.5pt; }
+.ex-hi { color: var(--ink-tertiary); font-size: 8pt; }
+
+/* ---------- Practice / worksheet ---------- */
+.task { display: grid; grid-template-columns: 18pt 1fr; padding: 8pt 0; border-bottom: 1px solid var(--hairline); break-inside: avoid; }
+.tnum { font-size: 7.5pt; color: var(--accent); padding-top: 1.5pt; }
+.tlbl { font-size: 6.5pt; color: var(--ink-secondary); margin-bottom: 4pt; }
+.tq { margin-bottom: 4pt; }
+.tq-en { font-size: 8.5pt; color: var(--ink-secondary); margin: -2pt 0 4pt; }
+.opts { list-style: none; display: flex; flex-wrap: wrap; gap: 3pt 16pt; }
+.opts li { display: flex; gap: 6pt; align-items: baseline; break-inside: avoid; }
+.opts:not(.stack) li { white-space: nowrap; }      /* an option never breaks mid-way */
+.opts.stack { flex-direction: column; flex-wrap: nowrap; gap: 3pt; }
+.opt-l { display: inline-block; width: 12pt; height: 12pt; line-height: 11pt; text-align: center; border: 1px solid var(--hairline-strong); border-radius: 50%; font-size: 6.5pt; color: var(--ink-secondary); flex: none; }
+.blank { display: inline-block; min-width: 60pt; border-bottom: 1px solid var(--ink-tertiary); margin: 0 3pt; height: 1em; vertical-align: baseline; }
+.blank.sm { min-width: 44pt; }
+.gapline { line-height: 2; }
+.match { display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; }
+.match-l { padding-left: 14pt; }
+.match-l li, .items li { margin: 3pt 0; }
+.match-r, .items { list-style: none; }
+.match-r li { display: flex; gap: 6pt; align-items: baseline; margin: 3pt 0; }
+.items { columns: 2; column-gap: 16pt; }
+.items li { break-inside: avoid; }
+.bank { display: flex; flex-wrap: wrap; gap: 4pt; margin: 4pt 0; }
+.chip { border: 1px solid var(--hairline-strong); border-radius: 4pt; padding: 1pt 6pt; background: var(--canvas); }
+.write-lines { margin-top: 6pt; }
+.wl { height: 21pt; border-bottom: 1px solid var(--hairline-strong); }
+.writing-area p { margin-bottom: 5pt; }
+.writing-area .cont { margin-top: 6pt; }
+
+/* Name / date line on printable worksheets */
+.namedate { display: flex; gap: 20pt; margin: -6pt 0 20pt; }
+.nd { flex: 1; display: flex; align-items: baseline; gap: 8pt; }
+.nd-l { font: 400 6.5pt var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-secondary); }
+.nd-line { flex: 1; border-bottom: 1px solid var(--ink-tertiary); height: 12pt; }
+.passage { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 6pt; padding: 10pt 12pt; margin-bottom: 8pt; }
+.passage p { line-height: 1.7; margin: 0; }
+.p-title { font-size: 11pt; margin-bottom: 5pt; }
+.task-plain p { margin-bottom: 5pt; }
+
+/* ---------- Answer key / scoring ---------- */
+.key { display: flex; gap: 7pt; align-items: baseline; margin-top: 2pt; font-weight: 500; }
+.key .opt-l { border-color: var(--accent); color: var(--accent); }
+.key-line { font-size: 10.5pt; }
+.fill-in { font: inherit; font-weight: 600; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1pt; text-underline-offset: 2.5pt; }
+.ref { font-size: 6pt; color: var(--ink-tertiary); margin-left: 8pt; }
+.kexp { font-size: 8.5pt; color: var(--ink-secondary); margin-top: 3pt; }
+.score td.fill { border-bottom: 1px solid var(--ink-tertiary); width: 30%; }
+.score tr.total td { font-weight: 600; border-top: 1px solid var(--hairline-strong); }
+.checklist li { display: flex; gap: 9pt; align-items: baseline; padding: 5pt 0; border-bottom: 1px solid var(--hairline); break-inside: avoid; }
+.box { width: 9pt; height: 9pt; border: 1px solid var(--ink-tertiary); border-radius: 2pt; flex: none; transform: translateY(1pt); }
+.tips { padding-left: 14pt; }
+.tips li { margin: 5pt 0; padding-left: 3pt; }
+
+/* ---------- End of document ---------- */
+.doc-end { margin-top: 24pt; padding-top: 8pt; border-top: 1px solid var(--hairline); font-size: 8pt; color: var(--ink-secondary); break-inside: avoid; }
+.doc-end p { margin: 0 0 3pt; }
+.doc-end .url { font: 400 6.5pt var(--font-mono); color: var(--ink-tertiary); }
+/* The chapter link is a real PDF hyperlink; it looks exactly like the plain text it replaced. */
+.doc-end .url a { color: inherit; font: inherit; text-decoration: none; }

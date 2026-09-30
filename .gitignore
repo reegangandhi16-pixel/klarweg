@@ -24,3 +24,7 @@ npm-debug.log*
 # Tutor registry — generated from chapter/*-data.js by scripts/build-tutor-registry.mjs
 tutor/worker/src/registry/generated/
 tutor/eval/results/
+
+# ── Chapter resource PDFs (never committed; releases live in the private R2 bucket) ──
+chapter-resources-out/
+scripts/chapter-resources/.build/

@@ -4765,28 +4765,146 @@
       'Previous · ', el('span', { class: 'de' }, C.prevChapter.title));
   }
 
-  /* ---------- Study Resources (UI only) ---------- */
+  /* ---------- Study Resources ----------
+     Protected delivery through the access Worker (access/worker/src/resources.js).
+     A card's type is the basename of its authored pdfUrl (/pdfs/vocabulary.pdf
+     → "vocabulary"); titles and descriptions stay as authored in C.resources.
+       1. After KWAccess.ready(), GET /resources/<chapter> lists what this
+          learner may download (page count + size only).
+       2. On click the new tab opens immediately (popup blockers), then
+          POST /resources/<chapter>/<type>/link returns a 5-minute signed URL
+          and the tab navigates to it — the tab needs no cookie.
+     Each card carries one state (link.dataset.state): loading · ready ·
+     signed-out · unavailable · error. Nothing is ever a dead link.
+     (Covered by scripts/chapter-resources-ui.test.mjs.) */
   const KIND_TAG = { Vocabulary: 'tag-core', Practice: 'tag-practice', Grammar: 'tag-assess' };
+  const resourceType = (r) => { const m = /\/([a-z0-9-]+)\.pdf$/i.exec(String((r && r.pdfUrl) || '')); return m ? m[1].toLowerCase() : null; };
+  /* Centrally added resources — must stay identical to DERIVED_RESOURCES in
+     scripts/chapter-resources/common.mjs (enforced by a test): shown only when
+     the Worker lists the file for this chapter and the chapter did not author
+     that card. */
+  const DERIVED_RESOURCE_CARDS = {
+    'test-paper': { icon: '\u{1F4DD}', title: 'Test Paper PDF', kind: 'Assessment',
+      desc: 'The full checkpoint test to take offline. Score it with the Scoring Table, then check it with the Complete Answer Key.' }
+  };
+  const RESOURCE_LINK_TIMEOUT_MS = 15000;
+  const fmtBytes = (b) => (b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB');
+  let resourceList = null;
+  /* → { state: 'ok' | 'signed-out' | 'unavailable' | 'error', files } */
+  function loadResourceList(force) {
+    if (!resourceList || force) {
+      const ready = (window.KWAccess && typeof KWAccess.ready === 'function') ? KWAccess.ready() : Promise.resolve();
+      resourceList = ready
+        .then(() => {
+          if (!window.KWAuth || typeof KWAuth.request !== 'function') return { state: 'unavailable', files: {} };
+          return KWAuth.request('/resources/' + encodeURIComponent(C.id))
+            .then(d => ({ state: 'ok', files: (d && d.chapter === C.id && d.resources) ? d.resources : {} }));
+        })
+        .catch(err => {
+          if (err && err.code === 'unauthorized') return { state: 'signed-out', files: {} };
+          if (err && (err.status === 403 || err.code === 'config')) return { state: 'unavailable', files: {} };
+          return { state: 'error', files: {} };
+        });
+    }
+    return resourceList;
+  }
+
+  function resourceCard(r, type) {
+    const meta = el('div', { class: 'resource-meta' }, el('span', { html: ICON.file, style: 'width:13px;display:inline-flex;vertical-align:-2px' }), ' PDF');
+    const link = el('a', { class: 'btn btn-primary btn-small', href: '#', role: 'button', onclick: (e) => onDownload(e, r, type) }, el('span', { html: ICON.download, style: 'width:15px;display:inline-flex' }), ' Download');
+    const card = el('div', { class: 'resource-card' },
+      el('div', { class: 'resource-icon', html: '<span aria-hidden="true">' + r.icon + '</span>' }),
+      el('div', { class: 'resource-body' },
+        el('div', { class: 'resource-head' },
+          el('h3', { class: 'resource-title' }, r.title)),
+        el('p', { class: 'resource-desc' }, r.desc),
+        meta,
+        el('div', { class: 'resource-actions' }, link)));
+    const c = { r, type, card, meta, link };
+    setCardState(c, 'loading');
+    return c;
+  }
+  function setCardState(c, state, f) {
+    c.link.dataset.state = state;
+    c.link.dataset.ready = state === 'ready' ? '1' : '';
+    if (state === 'loading') c.link.setAttribute('aria-busy', 'true'); else c.link.removeAttribute('aria-busy');
+    const bits = ['PDF'];
+    if (state === 'loading') bits.push('Checking…');
+    if (state === 'ready' && f) {
+      if (f.pages) bits.push(f.pages + (f.pages === 1 ? ' page' : ' pages'));
+      if (f.bytes) bits.push(fmtBytes(f.bytes));
+    }
+    c.meta.lastChild.textContent = ' ' + bits.join(' · ');
+  }
+
+  let retryResources = null;
   function bodyResources() {
     const wrap = el('div', {});
-    wrap.appendChild(el('div', { class: 'resource-grid' },
-      ...C.resources.map(r => el('div', { class: 'resource-card' },
-        el('div', { class: 'resource-icon', html: '<span aria-hidden="true">' + r.icon + '</span>' }),
-        el('div', { class: 'resource-body' },
-          el('div', { class: 'resource-head' },
-            el('h3', { class: 'resource-title' }, r.title)),
-          el('p', { class: 'resource-desc' }, r.desc),
-          el('div', { class: 'resource-meta' }, el('span', { html: ICON.file, style: 'width:13px;display:inline-flex;vertical-align:-2px' }), ' PDF'),
-          el('div', { class: 'resource-actions' },
-            el('a', { class: 'btn btn-primary btn-small', href: r.pdfUrl, download: '', onclick: (e) => onDownload(e, r) }, el('span', { html: ICON.download, style: 'width:15px;display:inline-flex' }), ' Download')))))));
-    wrap.appendChild(el('p', { class: 'muted', style: 'font-size:13px;margin-top:16px' }, 'Resources open in a preview panel. Files are added to each chapter by the Klarweg team.'));
+    const cards = C.resources.map(r => resourceCard(r, resourceType(r)));
+    const grid = el('div', { class: 'resource-grid' }, ...cards.map(c => c.card));
+    wrap.appendChild(grid);
+    wrap.appendChild(el('p', { class: 'muted', style: 'font-size:13px;margin-top:16px' }, 'PDFs open in a new tab. Sign in to download them.'));
+    const apply = (res) => {
+      const files = res.files || {};
+      cards.forEach(c => {
+        if (res.state !== 'ok') setCardState(c, res.state);
+        else if (c.type && files[c.type] && files[c.type].available) setCardState(c, 'ready', files[c.type]);
+        else setCardState(c, 'unavailable');
+      });
+      if (res.state !== 'ok') return;
+      Object.keys(DERIVED_RESOURCE_CARDS).forEach(type => {
+        if (!files[type] || !files[type].available || cards.some(c => c.type === type)) return;
+        const c = resourceCard(DERIVED_RESOURCE_CARDS[type], type);
+        setCardState(c, 'ready', files[type]);
+        cards.unshift(c);
+        grid.insertBefore(c.card, grid.firstChild);
+      });
+    };
+    retryResources = () => {
+      cards.forEach(c => setCardState(c, 'loading'));
+      return loadResourceList(true).then(apply);
+    };
+    loadResourceList().then(apply);
     return wrap;
   }
 
-  function onDownload(e, r) {
-    // Placeholder PDFs aren't present yet — guide the user instead of a dead link.
+  function onDownload(e, r, type) {
     e.preventDefault();
-    toast(r.title + ' will be available soon');
+    const btn = e.currentTarget;
+    const state = btn && btn.dataset.state;
+    if (state !== 'ready' || !type) {
+      // Never a dead link: explain the card's state instead.
+      if (state === 'loading') toast('Checking your study resources — one moment.');
+      else if (state === 'signed-out') toast('Sign in to download ' + r.title);
+      else if (state === 'error') {
+        toast('We couldn’t load the study resources just now. Trying again…');
+        if (retryResources) retryResources();
+      } else toast(r.title + ' will be available soon');
+      return;
+    }
+    if (btn.dataset.busy === '1') return;
+    btn.dataset.busy = '1';
+    // Open synchronously inside the click so popup blockers allow it.
+    const tab = window.open('', '_blank');
+    if (tab) { try { tab.opener = null; tab.document.title = 'Klarweg · ' + r.title; } catch (_) {} }
+    // Timeout applies to this one link request only.
+    let timer;
+    const timeout = new Promise((_, reject) => { timer = setTimeout(() => reject({ code: 'timeout' }), RESOURCE_LINK_TIMEOUT_MS); });
+    const request = KWAuth.request('/resources/' + encodeURIComponent(C.id) + '/' + encodeURIComponent(type) + '/link', { method: 'POST' });
+    Promise.race([request, timeout])
+      .then(d => {
+        if (!d || typeof d.url !== 'string') throw new Error('no link');
+        if (tab && !tab.closed) tab.location.replace(d.url);
+        else window.location.assign(d.url);   // popup blocked: open in this tab
+      })
+      .catch(err => {
+        if (tab && !tab.closed) tab.close();
+        const code = err && err.code;
+        toast(code === 'unauthorized' ? 'Sign in to download ' + r.title
+          : code === 'rate-limited' ? 'Too many downloads in a short time — please try again in a while.'
+          : 'We couldn’t open ' + r.title + ' just now. Please try again.');
+      })
+      .then(() => { clearTimeout(timer); btn.dataset.busy = ''; });
   }
 
   /* ---------- Preview dialog ---------- */

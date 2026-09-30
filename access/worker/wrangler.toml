@@ -46,6 +46,17 @@ AI_ANON_DAILY_UNITS = "3"
 AI_ANON_NETWORK_DAILY_REQUESTS = "30"
 AI_ANON_GLOBAL_DAILY_REQUESTS = "100"
 
+# Chapter resource PDFs (src/resources.js). The bucket is PRIVATE: no
+# public r2.dev URL and no custom domain — objects are only ever streamed
+# by this Worker after a signed-link check. RESOURCE_RELEASE selects the
+# immutable release prefix ("r1/…"); switching releases is this one line.
+# Secret (wrangler secret put): RESOURCE_URL_SECRET — HMAC key for links.
+RESOURCE_RELEASE = "r2"
+
+[[r2_buckets]]
+binding = "RESOURCES"
+bucket_name = "klarweg-resources"
+
 [[d1_databases]]
 binding = "DB"
 database_name = "klarweg-access"
@@ -61,3 +72,4 @@ service = "klarweg-tutor"
 #   CASHFREE_SECRET_KEY
 #   RATE_SALT
 #   CASHFREE_WEBHOOK_SECRET   (optional; defaults to CASHFREE_SECRET_KEY)
+#   RESOURCE_URL_SECRET       (signed chapter-resource links; 32+ random bytes)

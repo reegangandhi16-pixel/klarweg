@@ -871,6 +871,10 @@ img { max-width: 100%; display: block; }
    set their own color) — same precedence rule as the paradigm active-cell
    fix above, applied to the headword. */
 .word-pop-de .de-link { color: inherit; }
+/* Chapter titles (hero h1 + Up Next title) read as one black heading, not as
+   role-coloured tokens. Words stay tappable; only the link colour yields. */
+.flow-inner > h1.display-xl .de-link,
+.next-chapter-title .de-link { color: inherit; }
 .reading-controls { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; align-items: center; }
 .reading-translation {
   margin-top: 18px; padding: 18px 20px;

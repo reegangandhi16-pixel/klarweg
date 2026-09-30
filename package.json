@@ -14,6 +14,7 @@
     "generate-a1-audio:stats": "tsx scripts/generate-a1-audio.ts --stats",
     "verify-audio-coverage": "tsx scripts/verify-audio-coverage.ts",
     "build-coverage": "tsx scripts/build-coverage-json.ts",
+    "generate:chapter-pdfs": "node scripts/generate-chapter-resources.mjs",
     "prebuild": "npm run verify-audio-coverage",
     "test": "node scripts/build-tutor-registry.mjs && node --test access/worker/test/*.test.mjs tutor/worker/test/*.test.mjs tutor/eval/*.test.mjs scripts/*.test.mjs && npm run check:generated",
     "build:tutor-registry": "node scripts/build-tutor-registry.mjs",

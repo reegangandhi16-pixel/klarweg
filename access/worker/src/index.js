@@ -3,6 +3,7 @@ import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, m
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
 import { aiStatus, aiRequest } from "./ai.js";
+import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
 import {
   listSavedWords,
   createSavedWord,
@@ -122,6 +123,22 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
     const aiMatch = url.pathname.match(/^\/ai\/([a-z_]{3,32})$/);
     if (request.method === "POST" && aiMatch) {
       return withCors(await aiRequest(request, env, aiMatch[1], ctx), request);
+    }
+
+    /* Chapter resource PDFs — private R2, signed short-lived links
+       (resources.js). The file route is reached by a top-level tab
+       navigation, so it carries no CORS headers and needs no cookie. */
+    const resFile = url.pathname.match(RESOURCE_ROUTES.file);
+    if (request.method === "GET" && resFile) {
+      return streamResource(request, env, resFile[1], resFile[2]);
+    }
+    const resLink = url.pathname.match(RESOURCE_ROUTES.link);
+    if (request.method === "POST" && resLink) {
+      return withCors(await createResourceLink(request, env, resLink[1], resLink[2]), request);
+    }
+    const resList = url.pathname.match(RESOURCE_ROUTES.list);
+    if (request.method === "GET" && resList) {
+      return withCors(await listResources(request, env, resList[1]), request);
     }
 
     if (request.method === "GET" && url.pathname === "/") {

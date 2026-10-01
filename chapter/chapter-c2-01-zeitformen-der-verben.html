@@ -96,7 +96,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 <script src="../public/audio/kw-audio-engine.js"></script>
 <script src="../public/audio/kw-tts-config.js"></script>
-<script src="../public/audio/kw-word-sync.js?v=1"></script>
+<script src="../public/audio/kw-word-sync.js?v=2"></script>
 <script src="../account/kw-account.js"></script>
 <script src="chapter-c2-01-zeitformen-der-verben-data.js?v=8"></script>
 <script src="../public/audio/kw-story-exceptions.js?v=1"></script>
@@ -144,6 +144,8 @@
   var displayed = C.reading.tokens.filter(function (t) { return !t.plain; }).map(function (t) { return t.w; }).join(' ');
   var displayedKey = canon(displayed);
   var recorded = displayed + ' ' + ex.staleTail;
+  // Word sync (when on the page) prefetches the recording's timing under its recorded key.
+  if (global.KW_wordSync && global.KW_wordSync.alias) global.KW_wordSync.alias(displayed, recorded);
 
   function endsWithFile(src) { src = String(src || ''); return src.slice(-(ex.file.length + 1)) === '/' + ex.file; }
 

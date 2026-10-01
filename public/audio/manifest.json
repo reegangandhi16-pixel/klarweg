@@ -56275,6 +56275,106 @@
     "Wir sind eine Familie.": "/audio/sentences/0615de1d71a4590d.mp3",
     "Wo ist meine Brille?": "/audio/sentences/cfdb27974402e064.mp3",
     "Woher kommen Sie?": "/audio/sentences/fec17b90a93577c6.mp3",
-    "zuhause": "/audio/words/6c4cee2ed42308c1.mp3"
+    "zuhause": "/audio/words/6c4cee2ed42308c1.mp3",
+    "Wie gefällt dir die Jacke?": {
+      "id": "A1_040_S001_v2",
+      "kind": "story",
+      "level": "A1",
+      "chapter": "a1-40-verben-dativ",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.85,
+      "file": "audio/story/A1_040_S001_v2.mp3",
+      "contentHash": "deab37b905062981"
+    },
+    "Der Pullover steht dir sehr gut!": {
+      "id": "A1_040_S007_v2",
+      "kind": "story",
+      "level": "A1",
+      "chapter": "a1-40-verben-dativ",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.85,
+      "file": "audio/story/A1_040_S007_v2.mp3",
+      "contentHash": "6bc5496cfa1de7e1"
+    },
+    "Ja! Der gehört dir!": {
+      "id": "A1_040_S009_v2",
+      "kind": "story",
+      "level": "A1",
+      "chapter": "a1-40-verben-dativ",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.85,
+      "file": "audio/story/A1_040_S009_v2.mp3",
+      "contentHash": "c5e01150226c5014"
+    },
+    "Ich nehme die Suppe. Bringen Sie sie mir bitte.": {
+      "id": "A1_041_S002_v2",
+      "kind": "story",
+      "level": "A1",
+      "chapter": "a1-41-dativpronomen",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.85,
+      "file": "audio/story/A1_041_S002_v2.mp3",
+      "contentHash": "84b119355b4bb2fc"
+    },
+    "Ich habe das als hilfreich empfunden.": {
+      "id": "B2_002_S005_v2",
+      "kind": "story",
+      "level": "B2",
+      "chapter": "b2-02-verbalkomplex",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.95,
+      "file": "audio/story/B2_002_S005_v2.mp3",
+      "contentHash": "d09e54a528b2f54b"
+    },
+    "Als Sprachwissenschaftlerin beurteile ich die Studie als sehr wichtig.": {
+      "id": "B2_008_S001_v2",
+      "kind": "story",
+      "level": "B2",
+      "chapter": "b2-08-valenz-von-verben",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.95,
+      "file": "audio/story/B2_008_S001_v2.mp3",
+      "contentHash": "3e57a138f45bcda9"
+    },
+    "In der Teamsitzung heute Morgen hat der Abteilungsleiter erklärt, dass das Projekt nicht rechtzeitig fertiggestellt werden konnte. Es hängt hauptsächlich davon ab, dass zwei Kollegen krank waren. Niemand hat das vorher gewusst. Der Leiter ist keineswegs unzufrieden mit dem Team, aber er bittet alle, sich stärker auf die Deadline zu konzentrieren. Am Ende der Sitzung nahmen alle Mitarbeiter an einer kurzen Diskussion teil.": {
+      "id": "B2_014_L001",
+      "kind": "listening",
+      "level": "B2",
+      "chapter": "b2-14-goethe-mini-test-1",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.95,
+      "file": "audio/listening/B2_014_L001.mp3",
+      "contentHash": "a2d9a11585de8f77"
+    },
+    "In der Teamsitzung erklärte die Leiterin, dass das Projekt trotzdem erfolgreich war, obgleich es viele Hindernisse gab. Sie verbesserten den Prozess, indem sie regelmäßig Feedback sammelten. Nicht nur die Effizienz stieg, sondern auch die Zufriedenheit der Mitarbeiter. Folglich plant das Team eine Erweiterung.": {
+      "id": "B2_026_L001",
+      "kind": "listening",
+      "level": "B2",
+      "chapter": "b2-26-goethe-mini-test-2",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.95,
+      "file": "audio/listening/B2_026_L001.mp3",
+      "contentHash": "764769a3bd4f9d52"
+    },
+    "In der Firmensitzung erklärte die Managerin, dass sich die Arbeitszeiten wahrscheinlich ändern würden. Seitdem das neue System eingeführt wurde, arbeiten viele Mitarbeiter flexibler. Bevor die Entscheidung getroffen wurde, hatte das Team monatelang diskutiert. Es klingt, als wäre die Umstellung erfolgreich gewesen.": {
+      "id": "B2_036_L001",
+      "kind": "listening",
+      "level": "B2",
+      "chapter": "b2-36-goethe-halbzeit-test",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.95,
+      "file": "audio/listening/B2_036_L001.mp3",
+      "contentHash": "500c70ed52f83f51"
+    },
+    "Der Geschäftsführer, dessen Firma für Innovationen bekannt ist, ist verantwortlich für das neue Projekt. Wer an diesem Projekt teilnimmt, der arbeitet direkt mit dem Team, dessen Erfahrung mit internationalen Kunden groß ist.": {
+      "id": "B2_043_L001",
+      "kind": "listening",
+      "level": "B2",
+      "chapter": "b2-43-goethe-mini-3",
+      "voice": "de-DE-Neural2-F",
+      "speakingRate": 0.95,
+      "file": "audio/listening/B2_043_L001.mp3",
+      "contentHash": "0278ffb4fc4606cf"
+    }
   }
 }

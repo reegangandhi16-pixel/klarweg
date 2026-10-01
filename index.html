@@ -6337,6 +6337,9 @@ const KW_Audio = (() => {
   let currentMap = [];
   let fallbackTimers = [];
   let resetTimer = null;
+  let pendingStart = null;      // a Play waiting (≤ 1 s) for manifest + exact timing
+  let activeHL = null;          // the current sentence-highlight session (see playSentence)
+  const retireHL = () => { if (activeHL) { activeHL.done = true; activeHL = null; } };
 
   let dialogueQueue = null;     // for paragraph/dialogue sequential playback
   let dialogueIndex = 0;
@@ -6431,6 +6434,7 @@ const KW_Audio = (() => {
       if (dialogueButton) { setState(dialogueButton, 'idle'); dialogueButton = null; }
     }
     slowSession = null;
+    pendingStart = null;
     clearFallback();
     clearHighlight();
     if (supported && window.speechSynthesis.speaking) {
@@ -6645,6 +6649,96 @@ const KW_Audio = (() => {
   }
 
   /* ============================================================
+     KW_homeTiming — exact word timing for the homepage sentences.
+     Offline forced-alignment sidecars of the EXISTING MP3s (same schema
+     as the chapter sidecars), stored as audio-timing/<key>.json where
+     key = first 16 hex of sha256(data-sentence). The key needs no audio
+     manifest, so all sidecars are fetched at DOMContentLoaded, in
+     parallel with the manifest. A Play pressed before the manifest and
+     this sentence's timing are ready waits for both (at most WAIT_MS)
+     BEFORE the audio starts, so exact highlighting begins at word 1.
+     A sidecar is used only if its "file" is the clip that is playing and
+     its words match the rendered .de spans one-for-one; otherwise the
+     estimator below runs as before. Failed fetches are not memoised, so
+     a later Play retries.
+  ============================================================ */
+  const KW_homeTiming = (() => {
+    const WAIT_MS = 1000;       // longest a Play waits for manifest + timing
+    const LEAD = 0.03;          // + the loop's 0.02 s = aligner onset bias (as chapters)
+    const entries = {};         // sentence -> { p, settled, side }
+    const norm = (s) => String(s || '').normalize('NFC').replace(/[^\p{L}\p{N}]/gu, '').toLowerCase();
+    async function keyFor(text) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf).slice(0, 8), (b) => b.toString(16).padStart(2, '0')).join('');
+    }
+    function load(text) {
+      if (!text || !(window.crypto && crypto.subtle)) return null;
+      let e = entries[text];
+      if (!e) {
+        e = entries[text] = { settled: false, side: null };
+        e.p = keyFor(text)
+          .then((k) => fetch('audio-timing/' + k + '.json', { cache: 'no-cache' }))
+          .then((r) => (r.ok ? r.json() : null))
+          .catch(() => null)
+          .then((side) => {
+            e.settled = true; e.side = side;
+            if (!side && entries[text] === e) delete entries[text];   // next Play retries
+            return side;
+          });
+      }
+      return e;
+    }
+    const manifestReady = () => !!(window.KW_audioReady && window.KW_audioReady());
+    // Would a Play right now lose exact timing? (MP3 not resolvable yet, or
+    // this sentence's timing still in flight / to be retried.)
+    function pending(text) {
+      if (!manifestReady()) return true;
+      const e = load(text);
+      return !!(e && !e.settled);
+    }
+    // Resolves once the manifest is loaded and this sentence's timing has
+    // settled (loaded or failed), or after WAIT_MS — whichever is first.
+    function whenReady(text) {
+      const until = performance.now() + WAIT_MS;
+      let e = load(text), retried = false;
+      return new Promise((resolve) => {
+        const check = () => {
+          // A fetch that failed while we waited gets one retry within the same bound.
+          if (e && e.settled && !e.side && !retried) { retried = true; e = load(text); }
+          if ((manifestReady() && (!e || e.settled)) || performance.now() >= until) { resolve(); return; }
+          setTimeout(check, 15);
+        };
+        check();
+      });
+    }
+    // Exact marks for the clip now playing, if this sentence's timing is in hand.
+    function marksNow(text, audio, els) {
+      const e = entries[text];
+      return e && e.settled && e.side ? marksFor(e.side, audio, els) : null;
+    }
+    function marksFor(side, audio, els) {
+      if (!side || side.v !== 1 || !Array.isArray(side.words) || !side.file) return null;
+      const src = (audio && (audio.currentSrc || audio.src)) || '';
+      const tail = '/' + String(side.file).replace(/^\/?audio\//, '');
+      if (src.slice(-tail.length) !== tail) return null;                 // different clip
+      if (side.words.length !== els.length) return null;
+      for (let k = 0; k < els.length; k++) {
+        const w = side.words[k];
+        if (norm(w[0]) !== norm(els[k].textContent) || !(+w[2] > +w[1]) || (k && +w[1] < +side.words[k - 1][1])) return null;
+      }
+      return side.words.map((w, k) => ({ t: Math.max(0, +w[1] - LEAD), i: k }));
+    }
+    function prefetch() {
+      document.querySelectorAll('[data-sentence]').forEach((c) => {
+        if (c.querySelector('.de')) load(c.dataset.sentence.trim());
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', prefetch);
+    else prefetch();
+    return { pending, whenReady, marksNow };
+  })();
+
+  /* ============================================================
      KW_estimateMarks — heuristic word-timing model (no real marks).
      Distributes the clip's REAL duration across words by a cost that
      approximates spoken length: German syllables (vowel-group count)
@@ -6795,8 +6889,30 @@ const KW_Audio = (() => {
     // (0.5×) via audio.playbackRate. Word-by-word is NOT a speed behavior; it's
     // only the graceful fallback when this sentence has no MP3 (handled in the
     // .then below), or an explicit Word-Practice mode (opts._wordPractice).
+    //
+    // Exact timing from word 1: a Play pressed while the audio manifest or this
+    // sentence's timing is still loading waits for both (KW_homeTiming bound,
+    // at most 1 s) BEFORE any audio starts. A newer Play or stop() cancels it.
+    if (!opts._internal && !opts._wordPractice && !opts._skipFile && !opts._timingReady && sentenceText &&
+        container.querySelector('.de') && KW_homeTiming.pending(sentenceText)) {
+      retireHL();
+      const token = pendingStart = {};
+      setState(button, 'playing');
+      currentButton = button;
+      KW_homeTiming.whenReady(sentenceText).then(() => {
+        if (pendingStart !== token) return;
+        pendingStart = null;
+        // No MP3 resolvable even now: leave the state as the speech path expects it.
+        if (!(window.KW_playAudio && window.audioUrl && window.audioUrl(sentenceText))) setState(button, 'idle');
+        playSentence(container, button, { ...opts, _timingReady: true });
+      });
+      return;
+    }
     if (!opts._internal && !opts._wordPractice && !opts._skipFile && window.KW_playAudio && sentenceText && window.audioUrl(sentenceText)) {
       const playRate = opts.rate || 1;
+      // Retire the previous session now: the engine rewinds the reused <audio>
+      // (a 'seeked' event) before this play's own session exists.
+      retireHL();
       setState(button, 'playing');
       currentButton = button;
       // Real word-timing highlight: drive off audio.currentTime vs. actual
@@ -6813,15 +6929,20 @@ const KW_Audio = (() => {
       // hlEls are the .de spans — usually 1:1, but clamp defensively).
       const markToEl = (mi) => Math.max(0, Math.min(hlEls.length - 1, mi));
 
-      window.KW_playAudio(sentenceText, {
-        rate: playRate,            // 1.0 / 0.75 / 0.5 — slows the real recording
-        onAudio: function (audio) {
-          if (!hlEls.length) return;
+      function highlight(audio, marks) {
           KW_syncDebug && KW_syncDebug.attach(sentenceText, marks, hlEls);
+          // The engine reuses the <audio> element on replay, so listeners from an
+          // earlier play stay attached: only the latest highlight session may act.
+          const session = { done: false };
+          audio.__kwHL = session;
+          activeHL = session;
+          const live = () => audio.__kwHL === session && !session.done;
           if (marks && marks.length) {
             // Real-timestamp loop (rAF → tighter than 'timeupdate').
             const loop = () => {
-              if (currentButton !== button) { clearHL(); return; }
+              if (!live()) return;
+              // Ended: onEnded has cleared; a frame queued just before must not re-light.
+              if (currentButton !== button || audio.ended) { clearHL(); return; }
               const t = audio.currentTime;
               // find last mark whose time <= current playback time (binary search)
               let lo = 0, hi = marks.length - 1, found = 0;
@@ -6829,13 +6950,15 @@ const KW_Audio = (() => {
                 const mid = (lo + hi) >> 1;
                 if (marks[mid].t <= t + 0.02) { found = mid; lo = mid + 1; } else { hi = mid - 1; }
               }
-              setActive(markToEl(marks[found].i));
+              // Lead-in silence: nothing is lit until the first word is spoken.
+              if (marks[0].t > t + 0.02) clearHL();
+              else setActive(markToEl(marks[found].i));
               KW_syncDebug && KW_syncDebug.update(t, markToEl(marks[found].i), hlEls);
               if (!audio.paused && !audio.ended) rafId = requestAnimationFrame(loop);
             };
             // Keep it correct across pause/resume AND seek (forward/backward).
-            audio.addEventListener('play', () => { cancelAnimationFrame(rafId); rafId = requestAnimationFrame(loop); });
-            audio.addEventListener('pause', () => { cancelAnimationFrame(rafId); }); // highlight stays on current word
+            audio.addEventListener('play', () => { if (!live()) return; cancelAnimationFrame(rafId); rafId = requestAnimationFrame(loop); });
+            audio.addEventListener('pause', () => { if (live()) cancelAnimationFrame(rafId); }); // highlight stays on current word
             audio.addEventListener('seeked', () => { loop(); });
             rafId = requestAnimationFrame(loop);
           } else {
@@ -6845,6 +6968,7 @@ const KW_Audio = (() => {
             // silence is trimmed. Far less drift than equal-time proportional.
             const est = KW_estimateMarks(hlEls.map(e => e.textContent));
             const tick = () => {
+              if (!live()) return;
               if (currentButton !== button) { clearHL(); return; }
               const d = audio.duration;
               if (d && isFinite(d) && d > 0) {
@@ -6857,13 +6981,22 @@ const KW_Audio = (() => {
             };
             audio.addEventListener('timeupdate', tick);
             // rAF makes the estimator smooth too (timeupdate fires ~4/s only).
-            const eloop = () => { if (currentButton !== button || audio.paused || audio.ended) return; tick(); requestAnimationFrame(eloop); };
+            const eloop = () => { if (!live() || currentButton !== button || audio.paused || audio.ended) return; tick(); requestAnimationFrame(eloop); };
             audio.addEventListener('play', () => requestAnimationFrame(eloop));
             audio.addEventListener('seeked', tick);
             requestAnimationFrame(eloop);
           }
+      }
+
+      window.KW_playAudio(sentenceText, {
+        rate: playRate,            // 1.0 / 0.75 / 0.5 — slows the real recording
+        onAudio: function (audio) {
+          if (!hlEls.length) return;
+          // Exact homepage timing when it is in hand (the pre-start wait above
+          // makes that the case from word 1); otherwise the estimator as before.
+          highlight(audio, marks || KW_homeTiming.marksNow(sentenceText, audio, hlEls));
         },
-        onEnded: function () { if (rafId) cancelAnimationFrame(rafId); clearHL(); setState(button, 'idle'); }
+        onEnded: function () { retireHL(); if (rafId) cancelAnimationFrame(rafId); clearHL(); setState(button, 'idle'); }
       }).then(function (played) {
         if (!played) {
           if (rafId) cancelAnimationFrame(rafId);

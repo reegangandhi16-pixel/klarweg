@@ -1,0 +1,1 @@
+{"v":1,"contentHash":"4a4f84d99f79edd9","id":"A1_029_L005","file":"audio/listening/A1_029_L005.mp3","sha256":"d7ebd5467c2be4078f09671f83d291d8f6119b09db6c5221c0834baec9236785","duration":1.008,"timebase":"media-seconds","aligner":{"model":"jonatasgrosman/wav2vec2-large-xlsr-53-german","method":"ctc-viterbi","rules":"klarweg-align2/1"},"words":[["Typisch",0.141,0.645,1.0]]}

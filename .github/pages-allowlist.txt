@@ -87,6 +87,10 @@ public/audio/manifest.json
 public/audio/a1-words-manifest.json
 public/audio/a2-words-manifest.json
 public/audio/b1-words-manifest.json
+public/audio/kw-word-sync.js
+public/audio/kw-reading-exceptions.js
+public/audio/kw-story-exceptions.js
+GLOB:audio-timing/[0-9a-f]*.json
 
 # ---------------------------------------------------------------
 # Chapter system: two glob patterns, PROVEN this session to match

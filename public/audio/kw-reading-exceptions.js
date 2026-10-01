@@ -438,6 +438,8 @@
   var displayed = C.reading.tokens.filter(function (t) { return !t.plain; }).map(function (t) { return t.w; }).join(' ');
   var displayedKey = canon(displayed);
   var recorded = displayed + ' ' + ex.staleTail;
+  // Word sync (when on the page) prefetches the recording's timing under its recorded key.
+  if (global.KW_wordSync && global.KW_wordSync.alias) global.KW_wordSync.alias(displayed, recorded);
 
   function endsWithFile(src) { src = String(src || ''); return src.slice(-(ex.file.length + 1)) === '/' + ex.file; }
 

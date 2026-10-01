@@ -16,17 +16,23 @@
    API
      KW_wordSync.syncFor(audio, wordEls, { text, sentenceEls? }) → detach()
      KW_wordSync.attach(audio, wordEls, { timing?, sentenceEls? }) → detach()
-     KW_wordSync.loadTiming(contentHash) → Promise<sidecar|null>   (memoised)
+     KW_wordSync.loadTiming(contentHash) → Promise<sidecar|null>   (memoised on success)
      KW_wordSync.partitionLines(lineTexts, spanEls) → per-line span slices | null
      KW_wordSync.prefetch(lineTexts)    warm the sidecars of the given lines
-   Sidecars are fetched with cache: 'no-cache' (see loadTiming).
+     KW_wordSync.alias(displayed, recorded)  exception: prefetch under the recorded key
+   Sidecars are fetched with cache: 'no-cache' (see loadTiming). The page's own
+   Story + Reading sidecars are prefetched once those sections render.
 */
 (function (global) {
   'use strict';
 
   var LEAD = 0.05;            // aligner onset bias (measured median +43 ms) + one frame
   var EST_MAX_WORDS = 40;     // above this, an estimate drifts: use sentence mode
-  var TIMING_WAIT_MS = 300;   // show nothing rather than a guess while the sidecar loads
+  // Show nothing rather than a guess while the sidecar loads. Story/Reading
+  // sidecars are normally prefetched (prefetchPage) and resolve at once; this
+  // bound only matters for a sidecar still in flight. A cold GitHub Pages edge
+  // answers in ~260–370 ms, so 300 ms used to lose that race on a first play.
+  var TIMING_WAIT_MS = 1000;
   var CLS = 'speaking', SENT_CLS = 'is-speaking-sentence';
 
   var base = (function () {
@@ -44,9 +50,11 @@
       // 'no-cache' revalidates with the server (cheap 304 when unchanged), so a
       // 404 cached before a timing file was published can never hide it later.
       // Only this sidecar fetch; audio requests are untouched.
+      // A failed or missing sidecar is not memoised: the next request retries.
       cache[hash] = fetch(base + hash + '.json', { cache: 'no-cache' })
         .then(function (r) { return r.ok ? r.json() : null; })
-        .catch(function () { return null; });
+        .catch(function () { return null; })
+        .then(function (side) { if (!side) delete cache[hash]; return side; });
     }
     return cache[hash];
   }
@@ -253,13 +261,66 @@
     }
     return j === spanEls.length ? out : null;
   }
-  // Warm the per-line sidecars at play time so each line's timing is ready before it starts.
+  // Page-scoped audio exceptions (kw-reading-exceptions.js, C2·01) play a displayed
+  // text under a different RECORDED manifest key; they register it here so the
+  // recording's sidecar can be prefetched too. Prefetch only — playback unchanged.
+  var aliases = {};
+  function alias(displayed, recorded) { if (displayed && recorded) aliases[displayed] = recorded; }
+
+  // Warm the sidecars of the given texts so each timing is ready before it plays.
   function prefetch(texts) {
     (texts || []).forEach(function (t) {
-      var info = global.KW_dialogueInfo ? global.KW_dialogueInfo(t) : null;
+      var info = global.KW_dialogueInfo ? global.KW_dialogueInfo(aliases[t] || t) : null;
       if (info && info.contentHash) loadTiming(info.contentHash);
     });
   }
 
-  global.KW_wordSync = { attach: attach, syncFor: syncFor, loadTiming: loadTiming, partitionLines: partitionLines, prefetch: prefetch };
+  /* Warm THIS chapter's Story + Reading sidecars before the first Play, so a
+     first play finds its timing ready instead of racing the network. Runs once
+     the manifest is loaded (hashes come from it) and only for sections that are
+     actually rendered (a locked chapter fetches nothing). Never blocks the page.
+     Texts are built exactly as chapter-app.js requests them. Listening keeps its
+     own play-time prefetch. Exception pages resolve their recording through
+     alias(); anything still unresolved relies on syncFor's bounded wait. */
+  function storyLineText(line) {             // = chapter-app.js renderStory lineText()
+    if (!Array.isArray(line.tokens)) return line.de || '';
+    var out = '', prevNoSpaceAfter = true;
+    line.tokens.forEach(function (t) {
+      var w = String(t.w || '');
+      var noSpaceBefore = prevNoSpaceAfter || /^[.,!?;:)\\]…”"'”]/.test(w);
+      if (!noSpaceBefore && out) out += ' ';
+      out += w;
+      prevNoSpaceAfter = /[„«(]$/.test(w) && w.length <= 2;
+    });
+    return out;
+  }
+  (function prefetchPage() {
+    var doc = global.document;
+    if (!doc || !global.KW_onAudioEvent || !global.KW_audioReady || !global.MutationObserver) return;
+    var manifest = false, story = false, reading = false, mo = null;
+    function run() {
+      var C = global.CHAPTER;                // chapter data loads after this script
+      if (!manifest || !C) return;
+      if (!(C.story && Array.isArray(C.story.dialogue))) story = true;
+      if (!(C.reading && Array.isArray(C.reading.tokens))) reading = true;
+      if (!story && doc.querySelector('.story-card')) {
+        story = true;
+        prefetch(C.story.dialogue.filter(Boolean).map(storyLineText));
+      }
+      if (!reading && doc.querySelector('.reading-passage')) {
+        reading = true;
+        prefetch([C.reading.tokens.filter(function (t) { return !t.plain; }).map(function (t) { return t.w; }).join(' ')]);
+      }
+      if (story && reading && mo) { mo.disconnect(); mo = null; }
+    }
+    // The chapter renders after its access check: wait for the sections to appear.
+    mo = new MutationObserver(run);
+    mo.observe(doc.documentElement, { childList: true, subtree: true });
+    setTimeout(function () { if (mo) { mo.disconnect(); mo = null; } }, 60000);
+    function ready() { if (manifest) return; manifest = true; setTimeout(run, 0); }
+    if (global.KW_audioReady()) ready();
+    else global.KW_onAudioEvent(function (ev) { if (ev && ev.type === 'manifest-loaded') ready(); });
+  })();
+
+  global.KW_wordSync = { attach: attach, syncFor: syncFor, loadTiming: loadTiming, partitionLines: partitionLines, prefetch: prefetch, alias: alias };
 })(window);

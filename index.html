@@ -6338,8 +6338,11 @@ const KW_Audio = (() => {
   let fallbackTimers = [];
   let resetTimer = null;
   let pendingStart = null;      // a Play waiting (≤ 1 s) for manifest + exact timing
-  let activeHL = null;          // the current sentence-highlight session (see playSentence)
-  const retireHL = () => { if (activeHL) { activeHL.done = true; activeHL = null; } };
+  let activeHL = null;          // the current word-highlight session (playSentence / dialogue line)
+  const retireHL = () => {
+    if (activeHL) { activeHL.done = true; if (activeHL.clear) activeHL.clear(); activeHL = null; }
+  };
+  let dialogueLineEnd = null;   // tidies the conversation line that is playing (Stop mid-line)
 
   let dialogueQueue = null;     // for paragraph/dialogue sequential playback
   let dialogueIndex = 0;
@@ -6429,6 +6432,13 @@ const KW_Audio = (() => {
     const preserveDialogue = opts && opts.preserveDialogue === true;
     if (resetTimer) { clearTimeout(resetTimer); resetTimer = null; }
     if (!preserveDialogue) {
+      // A conversation line still playing stops with the conversation, and its
+      // word highlight is cleared (otherwise the line would play on after Stop).
+      if (dialogueLineEnd) {
+        const end = dialogueLineEnd; dialogueLineEnd = null;
+        try { window.KW_stopAudio && window.KW_stopAudio(); } catch (_) {}
+        end();
+      }
       dialogueQueue = null;
       dialogueIndex = 0;
       if (dialogueButton) { setState(dialogueButton, 'idle'); dialogueButton = null; }
@@ -7149,28 +7159,50 @@ const KW_Audio = (() => {
     // Natural conversational pause between speaker turns so the full dialogue
     // flows like a real back-and-forth. First bubble plays immediately.
     const delay = dialogueIndex === 1 ? 0 : 480;
+    const queue = dialogueQueue;        // this conversation run; a Stop or replay replaces it
+    const sentenceText = (container.dataset.sentence || container.textContent || '').trim();
     setTimeout(() => {
-      // Verify the dialogue wasn't cancelled during the delay
-      if (!dialogueQueue) {
+      // Verify the dialogue wasn't cancelled (or restarted) during the delay
+      if (dialogueQueue !== queue) {
+        if (document.body.contains(ghost)) document.body.removeChild(ghost);
+        return;
+      }
+      // Exact word timing from word 1: if the manifest or this line's timing is
+      // still loading, wait for both (KW_homeTiming bound, at most 1 s) first.
+      if (KW_homeTiming.pending(sentenceText)) KW_homeTiming.whenReady(sentenceText).then(startLine);
+      else startLine();
+    }, delay);
+
+    function startLine() {
+      if (dialogueQueue !== queue) {
         if (document.body.contains(ghost)) document.body.removeChild(ghost);
         return;
       }
       // Prefer the static dialogue MP3 — it already encodes the correct
       // per-speaker voice (Anna = Neural2-F, Rohan = Neural2-B). Chain to the
       // next bubble when it ENDS. Fall back to TTS only if no file exists.
-      const sentenceText = (container.dataset.sentence || container.textContent || '').trim();
-      const goNext = function () {
+      const endLine = function () {
+        if (dialogueLineEnd === endLine) dialogueLineEnd = null;
+        retireHL();
         container.classList.remove('speaking');
         if (document.body.contains(ghost)) document.body.removeChild(ghost);
-        if (dialogueQueue) advanceDialogue();
+      };
+      const goNext = function () {
+        endLine();
+        if (dialogueQueue === queue) advanceDialogue();
       };
       container.classList.add('speaking');
 
       // 1) Full-sentence MP3 if available — play at the chosen dialogue speed
       //    (Slow 0.75× / Very slow 0.5×) via audio.playbackRate.
       if (window.audioUrl && window.audioUrl(sentenceText) && window.KW_playAudio) {
-        window.KW_playAudio(sentenceText, { rate: dialogueRate, onEnded: goNext })
-          .then(function (played) { if (!played) playBubbleWords(); });
+        retireHL();
+        dialogueLineEnd = endLine;
+        window.KW_playAudio(sentenceText, {
+          rate: dialogueRate,
+          onAudio: function (audio) { syncDialogueLine(audio, container, sentenceText); },
+          onEnded: goNext
+        }).then(function (played) { if (!played) { if (dialogueLineEnd === endLine) dialogueLineEnd = null; playBubbleWords(); } });
         return;
       }
       // 2) No full MP3 → stitch the bubble's own word MP3s, then advance.
@@ -7187,7 +7219,7 @@ const KW_Audio = (() => {
         }
         let k = 0;
         (function nextWord() {
-          if (!dialogueQueue) { goNext(); return; }
+          if (dialogueQueue !== queue) { endLine(); return; }
           if (k >= wordEls.length) { goNext(); return; }
           const w = words[k++];
           if (w && window.audioUrl(w)) {
@@ -7196,7 +7228,7 @@ const KW_Audio = (() => {
           } else { setTimeout(nextWord, 180); }
         })();
       }
-    }, delay);
+    }
     // Clean up ghost after sentence ends
     const cleanup = setInterval(() => {
       if (ghost.dataset.state === 'idle' || !document.body.contains(ghost)) {
@@ -7204,6 +7236,43 @@ const KW_Audio = (() => {
         if (document.body.contains(ghost)) document.body.removeChild(ghost);
       }
     }, 200);
+  }
+
+  /* --- exact word highlight for ONE conversation line (Play conversation).
+         Same timing rules as playSentence: exact KW_homeTiming marks only
+         (no marks → the line plays exactly as before, without word
+         highlight); nothing lit during the lead-in silence; one session per
+         line on the engine's reused <audio>, retired when the line ends, on
+         Stop, or when any other play starts — so a finished line can never
+         re-light, and the next line starts clean from word 1. --- */
+  function syncDialogueLine(audio, container, sentenceText) {
+    const els = Array.from(container.querySelectorAll('.de')).filter(el => el.textContent.trim());
+    const marks = els.length ? KW_homeTiming.marksNow(sentenceText, audio, els) : null;
+    if (!marks || !marks.length) return;
+    const clear = () => els.forEach(el => el.classList.remove('speaking'));
+    retireHL();
+    const session = { done: false, clear };
+    audio.__kwHL = session;
+    activeHL = session;
+    const live = () => audio.__kwHL === session && !session.done;
+    let rafId = 0;
+    const loop = () => {
+      if (!live()) return;
+      if (audio.ended) { clear(); return; }
+      const t = audio.currentTime;
+      let lo = 0, hi = marks.length - 1, found = 0;
+      while (lo <= hi) {
+        const mid = (lo + hi) >> 1;
+        if (marks[mid].t <= t + 0.02) { found = mid; lo = mid + 1; } else { hi = mid - 1; }
+      }
+      if (marks[0].t > t + 0.02) clear();                       // lead-in silence
+      else els.forEach((el, k) => el.classList.toggle('speaking', k === marks[found].i));
+      if (!audio.paused) rafId = requestAnimationFrame(loop);
+    };
+    audio.addEventListener('play', () => { if (!live()) return; cancelAnimationFrame(rafId); rafId = requestAnimationFrame(loop); });
+    audio.addEventListener('pause', () => { if (live()) cancelAnimationFrame(rafId); });   // word stays lit
+    audio.addEventListener('seeked', () => { if (live()) loop(); });
+    rafId = requestAnimationFrame(loop);
   }
 
   return { playWord, playSentence, playDialogue, stop, setState, supported };

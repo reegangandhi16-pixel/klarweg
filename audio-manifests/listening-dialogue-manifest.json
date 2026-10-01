@@ -15132,5 +15132,61 @@
     "audioFilename": "audio/listening/C2_029_L004.mp3",
     "contentHash": "047f69677d4cefee",
     "speakingRate": 1
+  },
+  {
+    "id": "B2_014_L001",
+    "chapter": "b2-14-goethe-mini-test-1",
+    "level": "B2",
+    "speaker": "Narrator",
+    "speakerId": "narrator",
+    "gender": "female",
+    "voice": "de-DE-Neural2-F",
+    "de": "In der Teamsitzung heute Morgen hat der Abteilungsleiter erklärt, dass das Projekt nicht rechtzeitig fertiggestellt werden konnte. Es hängt hauptsächlich davon ab, dass zwei Kollegen krank waren. Niemand hat das vorher gewusst. Der Leiter ist keineswegs unzufrieden mit dem Team, aber er bittet alle, sich stärker auf die Deadline zu konzentrieren. Am Ende der Sitzung nahmen alle Mitarbeiter an einer kurzen Diskussion teil.",
+    "en": "In this morning's team meeting, the department head explained that the project could not be completed on time. It mainly depends on the fact that two colleagues were sick. Nobody knew this beforehand. The head is by no means dissatisfied with the team, but asks everyone to concentrate harder on the deadline. At the end of the meeting, all employees took part in a short discussion. — Script B (university): the discussion was about whether students should be taught bilingually — one student called it \"nicht unmöglich, aber schwierig\"; another disagreed, saying it depends on the school's resources; everyone agreed the topic deserves more attention.",
+    "audioFilename": "audio/listening/B2_014_L001.mp3",
+    "contentHash": "a2d9a11585de8f77",
+    "speakingRate": 0.95
+  },
+  {
+    "id": "B2_026_L001",
+    "chapter": "b2-26-goethe-mini-test-2",
+    "level": "B2",
+    "speaker": "Narrator",
+    "speakerId": "narrator",
+    "gender": "female",
+    "voice": "de-DE-Neural2-F",
+    "de": "In der Teamsitzung erklärte die Leiterin, dass das Projekt trotzdem erfolgreich war, obgleich es viele Hindernisse gab. Sie verbesserten den Prozess, indem sie regelmäßig Feedback sammelten. Nicht nur die Effizienz stieg, sondern auch die Zufriedenheit der Mitarbeiter. Folglich plant das Team eine Erweiterung.",
+    "en": "In the team meeting, the manager explained that the project was successful nevertheless, although there were many obstacles. They improved the process by regularly collecting feedback. Not only did efficiency rise, but also employee satisfaction. Consequently, the team plans an expansion.",
+    "audioFilename": "audio/listening/B2_026_L001.mp3",
+    "contentHash": "764769a3bd4f9d52",
+    "speakingRate": 0.95
+  },
+  {
+    "id": "B2_036_L001",
+    "chapter": "b2-36-goethe-halbzeit-test",
+    "level": "B2",
+    "speaker": "Narrator",
+    "speakerId": "narrator",
+    "gender": "female",
+    "voice": "de-DE-Neural2-F",
+    "de": "In der Firmensitzung erklärte die Managerin, dass sich die Arbeitszeiten wahrscheinlich ändern würden. Seitdem das neue System eingeführt wurde, arbeiten viele Mitarbeiter flexibler. Bevor die Entscheidung getroffen wurde, hatte das Team monatelang diskutiert. Es klingt, als wäre die Umstellung erfolgreich gewesen.",
+    "en": "In the company meeting, the manager explained that working hours would probably change. Since the new system was introduced, many employees work more flexibly. Before the decision was made, the team had discussed it for months. It sounds as if the transition had been successful.",
+    "audioFilename": "audio/listening/B2_036_L001.mp3",
+    "contentHash": "500c70ed52f83f51",
+    "speakingRate": 0.95
+  },
+  {
+    "id": "B2_043_L001",
+    "chapter": "b2-43-goethe-mini-3",
+    "level": "B2",
+    "speaker": "Narrator",
+    "speakerId": "narrator",
+    "gender": "female",
+    "voice": "de-DE-Neural2-F",
+    "de": "Der Geschäftsführer, dessen Firma für Innovationen bekannt ist, ist verantwortlich für das neue Projekt. Wer an diesem Projekt teilnimmt, der arbeitet direkt mit dem Team, dessen Erfahrung mit internationalen Kunden groß ist.",
+    "en": "The CEO, whose company is known for innovations, is responsible for the new project. Whoever takes part in this project works directly with the team, whose experience with international clients is great.",
+    "audioFilename": "audio/listening/B2_043_L001.mp3",
+    "contentHash": "0278ffb4fc4606cf",
+    "speakingRate": 0.95
   }
 ]

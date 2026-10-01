@@ -98,6 +98,101 @@
 <script src="../public/audio/kw-tts-config.js"></script>
 <script src="../account/kw-account.js"></script>
 <script src="chapter-c2-01-zeitformen-der-verben-data.js?v=8"></script>
+<script>
+/* Klarweg — Reading audio exceptions (page-scoped).
+   ------------------------------------------------------------------------
+   Some Reading passages were edited AFTER their MP3 was recorded, so the
+   recording carries a stale trailing sentence that the page no longer shows.
+   The engine looks audio up by text, finds no key for the edited passage and
+   falls back to browser speech synthesis.
+
+   This inline script lives ONLY in the affected chapter page (inline, so the
+   Pages allowlist needs no new file). When that page asks
+   for its displayed passage, it asks the engine for the passage's RECORDED
+   text instead (an existing manifest key, so the existing CDN MP3 plays through
+   the normal path), and ends playback at the validated end of the displayed
+   passage — before the stale sentence. No MP3, manifest or engine change.
+
+   Each entry is verified at play time: the recorded text must resolve to the
+   expected file, and the cutoff only applies to that exact file. Anything
+   unexpected falls through to the original behaviour, untouched.
+*/
+(function (global) {
+  'use strict';
+
+  var EXCEPTIONS = {
+    // C2·01 — recording ends with "Sie öffnet die Tür langsam.", removed from
+    // the page later. Forced alignment of the unmodified CDN MP3 (21.72 s):
+    // last displayed word "Geschichte" ends 19.08 s; stale sentence starts
+    // 19.94 s; silence between. Cut at 19.40 s, inside that silence.
+    'c2-01-zeitformen-der-verben': {
+      file: 'reading/C2_001_R001.mp3',
+      staleTail: 'Sie öffnet die Tür langsam.',
+      endAt: 19.40
+    }
+  };
+
+  var speak = global.KW_speak;
+  var canon = global.KW_canonKey;
+  var C = global.CHAPTER;
+  var ex = C && EXCEPTIONS[C.id];
+  if (!ex || typeof speak !== 'function' || typeof canon !== 'function' || !C.reading || !Array.isArray(C.reading.tokens)) return;
+
+  // Exactly what the Reading player requests: its word tokens joined by spaces.
+  var displayed = C.reading.tokens.filter(function (t) { return !t.plain; }).map(function (t) { return t.w; }).join(' ');
+  var displayedKey = canon(displayed);
+  var recorded = displayed + ' ' + ex.staleTail;
+
+  function endsWithFile(src) { src = String(src || ''); return src.slice(-(ex.file.length + 1)) === '/' + ex.file; }
+
+  function cutAt(audio, endAt) {
+    var raf = 0, done = false;
+    function check() {
+      if (done) return;
+      if (audio.currentTime >= endAt && !audio.paused) {
+        cleanup();
+        // Jump to the end while playing: the element fires 'ended', so the
+        // engine and the Reading button finish through their normal path.
+        try { audio.currentTime = audio.duration; } catch (e) { audio.pause(); }
+        return;
+      }
+      raf = global.requestAnimationFrame(check);
+    }
+    function cleanup() {
+      if (done) return;
+      done = true;
+      global.cancelAnimationFrame(raf);
+      audio.removeEventListener('timeupdate', check);   // backup when rAF is throttled
+      audio.removeEventListener('play', onPlay);
+      audio.removeEventListener('ended', cleanup);
+      audio.removeEventListener('pause', onPause);
+      audio.removeEventListener('emptied', cleanup);
+    }
+    function onPlay() { done = false; global.cancelAnimationFrame(raf); raf = global.requestAnimationFrame(check); }
+    function onPause() { global.cancelAnimationFrame(raf); if (audio.currentTime === 0 || audio.ended) cleanup(); }
+    audio.addEventListener('timeupdate', check);
+    audio.addEventListener('play', onPlay);
+    audio.addEventListener('ended', cleanup);
+    audio.addEventListener('pause', onPause);
+    audio.addEventListener('emptied', cleanup);
+    raf = global.requestAnimationFrame(check);
+  }
+
+  global.KW_speak = function (text, opts) {
+    if (canon(String(text || '')) !== displayedKey) return speak.apply(this, arguments);
+    var info = global.KW_resolveInfo ? global.KW_resolveInfo(recorded) : null;
+    if (!info || !endsWithFile(info.url)) return speak.apply(this, arguments);   // unexpected: original path
+    opts = opts || {};
+    var userOnAudio = opts.onAudio;
+    return speak(recorded, Object.assign({}, opts, {
+      onAudio: function (audio) {
+        if (endsWithFile(audio.currentSrc || audio.src)) cutAt(audio, ex.endAt);
+        if (typeof userOnAudio === 'function') userOnAudio(audio);
+      }
+    }));
+  };
+})(window);
+</script>
 <script src="story-lexicon.js"></script>
 <script src="tokenizer.js"></script>
 <script src="../kw-access.js?v=2"></script>

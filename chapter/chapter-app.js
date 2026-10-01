@@ -237,7 +237,7 @@
       if (onend) u.onend = onend;
       speechSynthesis.speak(u);
     }
-    function speak(text, rate = 1, onend) {
+    function speak(text, rate = 1, onend, extra) {
       // Unified engine for ALL rates: KW_speak plays the static/CDN MP3 and
       // applies playbackRate for Slow/Very-slow. Only when no audio exists at
       // any layer does it fall back to browser TTS — so a click is never silent
@@ -247,7 +247,7 @@
       if (fn) {
         var ended = false;
         var fin = function () { if (ended) return; ended = true; onend && onend(); };
-        fn(text, { rate: rate, onEnded: fin }).then(function (src) {
+        fn(text, Object.assign({ rate: rate, onEnded: fin }, extra)).then(function (src) {
           if (src === 'error') speakTTS(text, rate, onend);
         });
         return;
@@ -278,7 +278,8 @@
     // Speak a long passage reliably: split into sentences and play them in
     // sequence. Each sentence prefers its static MP3, else a SHORT TTS call —
     // which sidesteps Chrome's silent-failure bug on long utterances.
-    function speakSequence(text, rate, onProgress, onDone) {
+    // seqOpts.onAudio(index, audio) — optional, per played unit (kw-word-sync.js).
+    function speakSequence(text, rate, onProgress, onDone, seqOpts) {
       endSequence(false);
       stopped = false;
       const clean = Array.isArray(text)
@@ -295,7 +296,9 @@
         // The engine emits its `request` event synchronously inside speak(), so
         // this flag marks our own sentence and cannot leak.
         ownRequest = true;
-        speak(sentence, rate, function () { if (advanced || seq !== mine) return; advanced = true; next(); });
+        const idx = i - 1;
+        const extra = seqOpts && seqOpts.onAudio ? { onAudio: (a) => seqOpts.onAudio(idx, a) } : undefined;
+        speak(sentence, rate, function () { if (advanced || seq !== mine) return; advanced = true; next(); }, extra);
         ownRequest = false;
       }
       next();
@@ -1214,7 +1217,7 @@
       card.append(top, lineEl, trans);
       playBtn.addEventListener('click', () => playLine(i));
       thread.append(card);
-      cards.push({ card, playBtn, text: lineText(line), gender: genderFor(line) });
+      cards.push({ card, playBtn, lineEl, text: lineText(line), gender: genderFor(line) });
     });
     right.append(thread);
 
@@ -1243,7 +1246,11 @@
       c.card.classList.add('is-active'); c.playBtn.classList.add('is-playing');
       var fn = window.KW_speak || window.KW_playAudio;
       const done = () => { c.playBtn.classList.remove('is-playing'); c.playBtn.innerHTML = ICON.play; if (!seqPlaying) c.card.classList.remove('is-active'); onDone && onDone(); };
-      if (fn) { fn(c.text, { gender: c.gender, rate: rate }).then(function (s) { if (s === 'error') Audio.speak(c.text, rate, done); else done(); }); }
+      // Word sync: only when kw-word-sync.js is on the page; audio path unchanged.
+      const onAudio = window.KW_wordSync ? (a) => window.KW_wordSync.syncFor(a, $$('.rw', c.lineEl), { text: c.text }) : undefined;
+      // storyLine: identifies this exact Story line for page-scoped audio exceptions
+      // (kw-story-exceptions.js); the engine ignores unknown options.
+      if (fn) { fn(c.text, { gender: c.gender, rate: rate, onAudio: onAudio, storyLine: i }).then(function (s) { if (s === 'error') Audio.speak(c.text, rate, done); else done(); }); }
       else { Audio.speak(c.text, rate, done); }
     }
     function playAll() {
@@ -1685,7 +1692,9 @@
     playBtn.addEventListener('click', () => {
       if (playing) { Audio.stop(); playing = false; playBtn.querySelector('span:last-child') && (playBtn.lastChild.textContent = ' Listen to passage'); return; }
       const txt = r.tokens.filter(t => !t.plain).map(t => t.w).join(' ');
-      playing = true; Audio.speak(txt, 0.92, () => { playing = false; });
+      // Word sync: only when kw-word-sync.js is on the page; audio path unchanged.
+      const onAudio = window.KW_wordSync ? (a) => window.KW_wordSync.syncFor(a, $$('.rw', passage), { text: txt, sentenceEls: $$('.sentence-inline-unit', passage) }) : undefined;
+      playing = true; Audio.speak(txt, 0.92, () => { playing = false; }, onAudio ? { onAudio: onAudio } : undefined);
     });
     const transBtn = el('button', { class: 'btn btn-soft btn-small' }, 'Show translation');
     const trans = el('div', { class: 'reading-translation' }, r.translation);
@@ -3482,9 +3491,16 @@
       // Play the authored Listening dialogue lines in their stored order.
       // This maps directly to the existing L001/L002/... MP3 units instead of
       // re-splitting the transcript by punctuation.
+      // Word sync: only when kw-word-sync.js is on the page; each line's
+      // MP3 drives its own slice of the transcript spans. Audio path unchanged.
+      const ws = window.KW_wordSync;
+      const slices = ws ? ws.partitionLines(lines, $$('.rw', transcriptText)) : null;
+      if (slices) ws.prefetch(lines);
+      const seqOpts = slices ? { onAudio: (i, a) => { if (slices[i]) ws.syncFor(a, slices[i], { text: lines[i] }); } } : undefined;
       Audio.speakSequence(lines, rate,
         (p) => { fill.style.width = Math.round(p * 100) + '%'; },
-        (completed) => { playing = false; playBtn.innerHTML = ICON.play; playBtn.setAttribute('aria-label', 'Play'); if (completed) fill.style.width = '100%'; clearInterval(fillTimer); });
+        (completed) => { playing = false; playBtn.innerHTML = ICON.play; playBtn.setAttribute('aria-label', 'Play'); if (completed) fill.style.width = '100%'; clearInterval(fillTimer); },
+        seqOpts);
     });
     const player = el('div', { class: 'audio-player' }, playBtn,
       el('div', { class: 'audio-track' }, el('div', { class: 'audio-track-bar' }, fill),

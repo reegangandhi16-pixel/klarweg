@@ -1,0 +1,1 @@
+{"v":1,"contentHash":"cd6dfbdcea346d08","id":"C2_001_S002","file":"audio/story/C2_001_S002.mp3","sha256":"06ff0f8290bd64925bf4d1f5f120ee079a0ff8d9be2e3c037d12d68610a4d941","duration":0.6,"timebase":"media-seconds","aligner":{"model":"jonatasgrosman/wav2vec2-large-xlsr-53-german","method":"ctc-viterbi","rules":"klarweg-align2/1"},"words":[["Gern",0.103,0.372,1.0]]}

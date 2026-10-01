@@ -841,6 +841,19 @@ img { max-width: 100%; display: block; }
   transition: background var(--dur-fast) var(--ease);
 }
 .reading-passage .rw:hover { background: rgba(216,90,48,0.10); }
+/* Word-synchronised audio (kw-word-sync.js): the spoken word takes a
+   tint of its own role colour — same language as the homepage .speaking, but
+   no scale/lift, so running text never reflows or jitters. */
+.story-line .rw, .reading-passage .rw { border-radius: 5px; transition: background var(--dur-fast) var(--ease); }
+.story-line .rw.speaking, .reading-passage .rw.speaking {
+  background: color-mix(in srgb, currentColor 16%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent);
+}
+.reading-passage .sentence-inline-unit { border-radius: 6px; transition: background var(--dur-base) var(--ease); }
+.reading-passage .sentence-inline-unit.is-speaking-sentence { background: rgba(14,14,16,0.045); }
+@media (prefers-reduced-motion: reduce) {
+  .story-line .rw, .reading-passage .rw, .reading-passage .sentence-inline-unit { transition: none; }
+}
 /* Auto-linked German words outside the reading passage — subtle until hover */
 .de-link {
   cursor: pointer;

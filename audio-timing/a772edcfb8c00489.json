@@ -1,0 +1,1 @@
+{"v":1,"contentHash":"a772edcfb8c00489","id":"B2_068_S002","file":"audio/story/B2_068_S002.mp3","sha256":"f9b30ad2c96fa66b4f8ebd7d6f1f53e3dc1f21ed484fc9dda3af40dfee7f7356","duration":1.104,"timebase":"media-seconds","aligner":{"model":"jonatasgrosman/wav2vec2-large-xlsr-53-german","method":"ctc-viterbi","rules":"klarweg-align2/1"},"words":[["Natürlich",0.123,0.756,1.0]]}

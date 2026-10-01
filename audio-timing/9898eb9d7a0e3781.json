@@ -1,0 +1,1 @@
+{"v":1,"contentHash":"9898eb9d7a0e3781","id":"B1_021_S006","file":"audio/story/B1_021_S006.mp3","sha256":"806c40d3dcaa43c7a447594962cb82435179e7149f971b265b3fd728edac2b89","duration":0.864,"timebase":"media-seconds","aligner":{"model":"jonatasgrosman/wav2vec2-large-xlsr-53-german","method":"ctc-viterbi","rules":"klarweg-align2/1"},"words":[["Wofür",0.144,0.555,1.0]]}

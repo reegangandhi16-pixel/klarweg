@@ -1,0 +1,1 @@
+{"v":1,"contentHash":"ca9733d255c28932","id":"A1_002_L002","file":"audio/listening/A1_002_L002.mp3","sha256":"fab3d488f2cd8f34f3d16b4d2823f04f1c6bca6b1fabd59ae1ee9e4583b47a99","duration":0.84,"timebase":"media-seconds","aligner":{"model":"jonatasgrosman/wav2vec2-large-xlsr-53-german","method":"ctc-viterbi","rules":"klarweg-align2/1"},"words":[["München",0.143,0.553,1.0]]}

@@ -453,7 +453,15 @@
     }
     // A re-render is about to discard `container`: stop a sentence playing in it.
     function drop(container) { if (active && container.contains(active.btn)) stop(); }
-    return { enabled: enabled, button: button, toggle: toggle, row: row, drop: drop };
+    // Shared look and accessible state for controls that keep their own
+    // playback logic (Story lines): same glyphs and states, no click handler.
+    function shell(noun, cls) {
+      const btn = el('button', { class: 'kw-sb' + (cls ? ' ' + cls : ''), type: 'button', lang: 'en', html: GLYPH });
+      btn.dataset.noun = noun;
+      setState(btn, 'idle');
+      return btn;
+    }
+    return { enabled: enabled, button: button, toggle: toggle, row: row, drop: drop, shell: shell, state: setState };
   })();
 
   /* ---------- popup word speaker state (PILOT: A1·01 only) ---------------
@@ -536,6 +544,7 @@
 
   const ICON = {
     play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+    stop: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/></svg>',
     search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>',
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>',
     speaker: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 5V4L8 9H4z"/></svg>',
@@ -1352,7 +1361,9 @@
     dlg.forEach((line, i) => {
       const card = el('div', { class: 'story-card' + (sideForLine(line) === 'right' ? ' right' : '') , style: '--rise-delay:' + (i * 60) + 'ms' });
       card.style.animationDelay = (i * 60) + 'ms';
-      const playBtn = el('button', { class: 'story-play-line', type: 'button', 'aria-label': 'Play line', html: ICON.play });
+      // A1·01 pilot: the shared chapter audio control (38px Story size); elsewhere unchanged.
+      const playBtn = SentencePlay.enabled ? SentencePlay.shell('line', 'kw-sb-story')
+        : el('button', { class: 'story-play-line', type: 'button', 'aria-label': 'Play line', html: ICON.play });
       const top = el('div', { class: 'story-card-top' },
         el('span', { class: 'story-speaker' }, line.speaker || ''), playBtn);
       const lineEl = el('div', { class: 'story-line' });
@@ -1384,7 +1395,7 @@
       if (line.en) trans.append(el('span', { class: 'st-en' }, line.en));
       if (line.hi) trans.append(el('span', { class: 'st-hi' }, line.hi));
       card.append(top, lineEl, trans);
-      playBtn.addEventListener('click', () => playLine(i));
+      playBtn.addEventListener('click', () => (SentencePlay.enabled ? lineClick(i) : playLine(i)));
       thread.append(card);
       cards.push({ card, playBtn, lineEl, text: lineText(line), gender: genderFor(line) });
     });
@@ -1392,7 +1403,7 @@
 
     // Controls
     let rate = 1, seqPlaying = false, seqStop = false;
-    const playAllBtn = el('button', { class: 'story-play-all', type: 'button' }, el('span', { html: ICON.play }), el('span', {}, 'Play conversation'));
+    const playAllBtn = el('button', { class: 'story-play-all' + (SentencePlay.enabled ? ' kw-play-all' : ''), type: 'button' }, el('span', { html: ICON.play }), el('span', {}, 'Play conversation'));
     const speed = el('div', { class: 'story-speed' });
     [['1×', 1], ['0.75×', 0.75], ['0.5×', 0.5]].forEach(([lbl, v], i) => {
       const b = el('button', { type: 'button', class: i === 0 ? 'is-active' : '' }, lbl);
@@ -1407,8 +1418,78 @@
     const controls = el('div', { class: 'story-controls' }, playAllBtn, speed, transToggle);
     right.append(controls);
 
-    function clearActive() { cards.forEach(c => { c.card.classList.remove('is-active'); c.playBtn.classList.remove('is-playing'); c.playBtn.innerHTML = ICON.play; }); }
+    function clearActive() {
+      if (SentencePlay.enabled) { storyRun = null; cards.forEach(c => { c.card.classList.remove('is-active'); SentencePlay.state(c.playBtn, 'idle'); }); return; }
+      cards.forEach(c => { c.card.classList.remove('is-active'); c.playBtn.classList.remove('is-playing'); c.playBtn.innerHTML = ICON.play; });
+    }
+
+    /* A1·01 pilot — Story lines on the shared chapter audio control. The audio
+       call and word sync are exactly playLine's: same KW_speak options (gender,
+       rate, storyLine), same KW_wordSync.syncFor on the same <audio>, same
+       timing sidecars. Added: a truthful button state — loading → playing ❚❚ ⇄
+       paused ▶ (audio.pause()/play(): the sync keeps the current word lit while
+       paused and resumes exactly) → idle on end; any other audio resets the
+       line (and ends Play conversation) and retires its highlight. */
+    let storyRun = null, storyOwn = false;   // storyRun: { i, audio, cancelSync }
+    const own = (f) => { storyOwn = true; try { return f(); } finally { storyOwn = false; } };
+    function endConversation() { if (!seqPlaying) return; seqStop = true; seqPlaying = false; setPlayAllLabel(false); }
+    function setPlayAllLabel(on) {
+      playAllBtn.querySelector('span:last-child').textContent = on ? 'Stop' : 'Play conversation';
+      if (SentencePlay.enabled) playAllBtn.firstChild.innerHTML = on ? ICON.stop : ICON.play;
+    }
+    if (SentencePlay.enabled && window.KW_onAudioEvent) {
+      window.KW_onAudioEvent(function (ev) {
+        if (!ev || storyOwn || !(storyRun || seqPlaying)) return;
+        if (ev.type !== 'stop' && ev.type !== 'request') return;
+        const r = storyRun;                              // someone else took the channel
+        if (r) { if (r.audio) { try { r.audio.pause(); } catch (_) {} } if (r.cancelSync) r.cancelSync(); }
+        endConversation(); clearActive();
+      });
+    }
+    function pilotPlayLine(i, onDone) {
+      const c = cards[i]; if (!c) { onDone && onDone(); return; }
+      own(() => { try { Audio.stop(); } catch (_) {} });
+      clearActive();
+      c.card.classList.add('is-active');
+      const r = storyRun = { i: i, audio: null, cancelSync: null };
+      SentencePlay.state(c.playBtn, 'loading');
+      var fn = window.KW_speak || window.KW_playAudio;
+      const done = () => {
+        if (storyRun !== r) return;                      // retired: never touch the UI or the sequence
+        storyRun = null; SentencePlay.state(c.playBtn, 'idle');
+        if (!seqPlaying) c.card.classList.remove('is-active');
+        onDone && onDone();
+      };
+      const onAudio = (a) => {
+        if (storyRun !== r) return;
+        r.audio = a;
+        if (a.readyState >= 3) SentencePlay.state(c.playBtn, 'playing');
+        else a.addEventListener('playing', () => { if (storyRun === r && c.playBtn.dataset.state === 'loading') SentencePlay.state(c.playBtn, 'playing'); }, { once: true });
+        // Word sync: the same call as playLine; only its cancel handle is kept.
+        if (window.KW_wordSync) r.cancelSync = window.KW_wordSync.syncFor(a, $$('.rw', c.lineEl), { text: c.text });
+      };
+      if (fn) own(() => fn(c.text, { gender: c.gender, rate: rate, onAudio: onAudio, storyLine: i })).then(function (s) { if (s === 'error') own(() => Audio.speak(c.text, rate, done)); else done(); });
+      else own(() => Audio.speak(c.text, rate, done));
+    }
+    function lineClick(i) {
+      const r = storyRun, c = cards[i];
+      if (r && r.i === i) {
+        const st = c.playBtn.dataset.state;
+        if (st === 'playing' && r.audio && !r.audio.ended) { r.audio.pause(); SentencePlay.state(c.playBtn, 'paused'); return; }
+        if (st === 'paused' && r.audio) {                // resume where it stopped (a running conversation continues)
+          SentencePlay.state(c.playBtn, 'playing');
+          const p = r.audio.play();
+          if (p && p.catch) p.catch(() => { if (storyRun === r) { endConversation(); pilotPlayLine(i); } });
+          return;
+        }
+        endConversation(); own(() => { try { Audio.stop(); } catch (_) {} }); clearActive(); return;   // loading: Stop
+      }
+      endConversation();                                 // another line: the conversation ends there
+      pilotPlayLine(i);
+    }
+
     function playLine(i, onDone) {
+      if (SentencePlay.enabled) return pilotPlayLine(i, onDone);
       const c = cards[i]; if (!c) { onDone && onDone(); return; }
       try { Audio.stop(); } catch (_) {}
       clearActive();
@@ -1423,11 +1504,11 @@
       else { Audio.speak(c.text, rate, done); }
     }
     function playAll() {
-      if (seqPlaying) { seqStop = true; seqPlaying = false; try { Audio.stop(); } catch (_) {} clearActive(); playAllBtn.querySelector('span:last-child').textContent = 'Play conversation'; return; }
-      seqPlaying = true; seqStop = false; playAllBtn.querySelector('span:last-child').textContent = 'Stop';
+      if (seqPlaying) { seqStop = true; seqPlaying = false; own(() => { try { Audio.stop(); } catch (_) {} }); clearActive(); setPlayAllLabel(false); return; }
+      seqPlaying = true; seqStop = false; setPlayAllLabel(true);
       let i = 0;
       const next = () => {
-        if (seqStop || i >= cards.length) { seqPlaying = false; seqStop = false; clearActive(); playAllBtn.querySelector('span:last-child').textContent = 'Play conversation'; return; }
+        if (seqStop || i >= cards.length) { seqPlaying = false; seqStop = false; clearActive(); setPlayAllLabel(false); return; }
         playLine(i++, next);
       };
       next();

@@ -864,6 +864,15 @@ img { max-width: 100%; display: block; }
 }
 @keyframes kw-sb-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(31, 78, 74, 0.3); } 50% { box-shadow: 0 0 0 8px rgba(31, 78, 74, 0); } }
 @keyframes kw-sb-spin { to { transform: rotate(360deg); } }
+/* Story line variant: keeps the Story button's footprint (38px, 44px on
+   touch screens) so cards do not change height; glyph scaled to match. */
+.kw-sb.kw-sb-story { --kw-sb: 38px; }
+.kw-sb-story .kw-sb-glyph svg { width: 13px; height: 13px; }
+.kw-sb-story::after { inset: -5px; }                       /* 48px hit area */
+/* Story "Play conversation" in the chapter's teal action colour (one accent
+   per surface); same shape, size and label as before. */
+.story-play-all.kw-play-all { background: var(--accent); }
+@media (hover: hover) { .story-play-all.kw-play-all:hover { background: var(--accent-bright); } }
 /* Pill variant (homepage .sb-wide): glyph + constant label, e.g. "Hear model".
    Same box as the .btn-small buttons it sits beside (9px padding, 13.5px/600, 1.6). */
 .kw-sb-wide { width: auto; height: auto; padding: 9px 18px 9px 15px; border-radius: 999px; font-size: 13.5px; font-weight: 600; line-height: 1.6; }
@@ -874,6 +883,8 @@ img { max-width: 100%; display: block; }
   .kw-sb-row { --kw-sb: 32px; }
   .kw-sb::after { inset: -8px; }                 /* 48px hit area */
   .kw-sb-wide { min-height: 44px; }              /* matches .btn's 44px here */
+  .kw-sb.kw-sb-story { --kw-sb: 44px; }          /* matches .story-play-line's 44px here */
+  .kw-sb-story::after { inset: -2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .kw-sb { transition: none; }

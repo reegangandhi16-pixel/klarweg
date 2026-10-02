@@ -818,6 +818,68 @@ img { max-width: 100%; display: block; }
 
 /* Example block + mistakes */
 .example-line { font-family: var(--font-german); font-size: 19px; line-height: 1.6; padding: 10px 0; }
+
+/* Sentence audio control (PILOT: A1·01 only — rendered only when
+   chapter-app.js SentencePlay is enabled; every selector here targets markup
+   that only the pilot creates). Same component as the homepage .sb: hairline
+   circle, 30px (32px ≤600px), 11px glyph, 1px lift on hover; teal action
+   colour. States never change the button's size, so nothing shifts. */
+.kw-sb-row { --kw-sb: 30px; display: flex; align-items: flex-start; gap: 12px; }
+/* The slot is exactly one text line tall and centres the button on the
+   first line; a button taller than the line overhangs it evenly instead of
+   adding height, so no section's vertical rhythm changes. Wrapped lines
+   align under the text, never under the button. */
+.kw-sb-slot { flex-shrink: 0; display: flex; align-items: center; height: 1lh; }
+.kw-sb-text { min-width: 0; }
+.kw-sb {
+  position: relative; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: var(--kw-sb, 30px); height: var(--kw-sb, 30px); padding: 0; border-radius: 50%;
+  background: var(--bg-surface); border: 1px solid var(--hairline); color: var(--ink-secondary);
+  font-family: var(--font-ui); font-size: 13px; font-weight: 500; font-style: normal; line-height: 1;
+  cursor: pointer; user-select: none; -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  transition: background var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease), color var(--dur-base) var(--ease), transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+}
+.kw-sb::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; }   /* 48px hit area */
+.kw-sb:active { transform: translateY(0); }
+.kw-sb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }   /* outline: never hidden by the playing pulse */
+.kw-sb-glyph { position: relative; flex-shrink: 0; width: 14px; height: 14px; }
+.kw-sb-glyph > * { position: absolute; inset: 0; margin: auto; opacity: 0; transition: opacity var(--dur-fast) var(--ease); }
+.kw-sb-glyph svg { width: 11px; height: 11px; }
+.kw-sb-spin { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.4); border-top-color: #fff; animation: kw-sb-spin 0.7s linear infinite; }
+.kw-sb[data-state="idle"] .kw-sb-play, .kw-sb[data-state="paused"] .kw-sb-play { opacity: 1; }
+.kw-sb[data-state="playing"] .kw-sb-pause { opacity: 1; }
+.kw-sb[data-state="speaking"] .kw-sb-stop { opacity: 1; }
+.kw-sb[data-state="loading"] .kw-sb-spin { opacity: 1; transition-delay: 150ms; }   /* no flash on a fast start */
+.kw-sb[data-state="paused"] { background: var(--accent-tint); border-color: var(--accent); color: var(--accent); }
+.kw-sb[data-state="loading"], .kw-sb[data-state="playing"], .kw-sb[data-state="speaking"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.kw-sb[data-state="playing"], .kw-sb[data-state="speaking"] { animation: kw-sb-pulse 1.6s var(--ease) infinite; }
+/* Hover only where a pointer can hover: on touch screens a tap would leave
+   the hover colour stuck over the real state. */
+@media (hover: hover) {
+  .kw-sb:hover { background: var(--accent-tint); border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .kw-sb-wide[data-state="idle"]:hover { color: var(--accent); }
+  .kw-sb[data-state="loading"]:hover, .kw-sb[data-state="playing"]:hover, .kw-sb[data-state="speaking"]:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; transform: translateY(0); }
+}
+@keyframes kw-sb-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(31, 78, 74, 0.3); } 50% { box-shadow: 0 0 0 8px rgba(31, 78, 74, 0); } }
+@keyframes kw-sb-spin { to { transform: rotate(360deg); } }
+/* Pill variant (homepage .sb-wide): glyph + constant label, e.g. "Hear model".
+   Same box as the .btn-small buttons it sits beside (9px padding, 13.5px/600, 1.6). */
+.kw-sb-wide { width: auto; height: auto; padding: 9px 18px 9px 15px; border-radius: 999px; font-size: 13.5px; font-weight: 600; line-height: 1.6; }
+.kw-sb-wide[data-state="idle"] { color: var(--ink-primary); }
+.kw-sb-wide::after { inset: -2px; border-radius: 999px; }   /* ≥44px hit area */
+/* Same query as the chapter's touch-target rule: phones and touch screens. */
+@media (max-width: 720px), (pointer: coarse) {
+  .kw-sb-row { --kw-sb: 32px; }
+  .kw-sb::after { inset: -8px; }                 /* 48px hit area */
+  .kw-sb-wide { min-height: 44px; }              /* matches .btn's 44px here */
+}
+@media (prefers-reduced-motion: reduce) {
+  .kw-sb { transition: none; }
+  .kw-sb:hover { transform: none; }
+  .kw-sb[data-state="playing"], .kw-sb[data-state="speaking"] { animation: none; }
+}
 .mistake-row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--hairline-light); }
 .mistake-mark { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; }
 .mistake-mark.wrong { background: var(--coral-tint); color: var(--coral-deep); }
@@ -977,6 +1039,29 @@ img { max-width: 100%; display: block; }
 .wp-audio:hover { transform: translateY(-1px); border-color: var(--hairline-strong); }
 .wp-audio.is-playing { background: var(--accent); border-color: var(--accent); color: #fff; }
 .wp-audio svg { width: 17px; height: 17px; }
+/* Popup word speaker state (PILOT: A1·01 only — data-state and the
+   .wp-glyph markup exist only where chapter-app.js WordAudio is enabled).
+   Size and position unchanged (52px); teal like every chapter audio control. */
+.wp-audio[data-state] { color: var(--ink-primary); transition: transform var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease), background var(--dur-base) var(--ease), color var(--dur-base) var(--ease); }
+@media (hover: hover) {
+  .wp-audio[data-state]:hover { background: var(--accent-tint); border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .wp-audio[data-state="loading"]:hover, .wp-audio[data-state="playing"]:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; transform: translateY(0); }
+}
+.wp-audio[data-state]:active { transform: translateY(0); }
+.wp-audio[data-state]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wp-audio[data-state="loading"], .wp-audio[data-state="playing"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.wp-glyph { position: relative; width: 20px; height: 20px; display: block; }
+.wp-glyph > span { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity var(--dur-fast) var(--ease); }
+.wp-glyph svg { width: 20px; height: 20px; }
+.wp-g-stop svg { width: 20px; height: 20px; }
+.wp-g-spin { width: 16px; height: 16px; margin: auto; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.4); border-top-color: #fff; animation: kw-sb-spin 0.7s linear infinite; }
+.wp-audio[data-state="idle"] .wp-g-speaker { opacity: 1; }
+.wp-audio[data-state="playing"] .wp-g-stop { opacity: 1; }
+.wp-audio[data-state="loading"] .wp-g-spin { opacity: 1; transition-delay: 150ms; }
+@media (prefers-reduced-motion: reduce) {
+  .wp-audio[data-state] { transition: none; }
+  .wp-audio[data-state]:hover { transform: none; }
+}
 
 /* Big meaning + Hindi */
 .wp-meaning { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 4px; }

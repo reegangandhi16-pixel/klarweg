@@ -98,7 +98,8 @@ function harness({ ua = DESKTOP_UA, sr = 'webkit', gum = 'ok', mimes = ['audio/w
     matchMedia: () => ({ matches: true }), URL: { createObjectURL: (b) => { lastBlob = b; return 'blob:rec'; }, revokeObjectURL() {} },
     Blob, setTimeout: setTimeout_, clearTimeout: clearTimeout_, Date: { now: () => now }, JSON, String, Math, Promise, Object, Array, Set,
     el, C: { id: 'a1-3', speaking: [{ de: 'Der Hund ist groß.', en: 'The dog is big.' }] }, ICON: { mic: '', speaker: '' },
-    Audio: { stop() { audioStops++; }, speak() {} }, aiSlot: () => el('div', { class: 'kw-ai-slot' }), IS_EXAM: false
+    Audio: { stop() { audioStops++; }, speak() {} }, aiSlot: () => el('div', { class: 'kw-ai-slot' }), IS_EXAM: false,
+    SentencePlay: { enabled: false }   // A1·01-only sentence audio pilot: off for this chapter id, so the original "Hear model" path runs
   };
   if (mr) ctx.MediaRecorder = FakeMR;
   if (sr === 'webkit' || sr === 'both') ctx.webkitSpeechRecognition = FakeRec;

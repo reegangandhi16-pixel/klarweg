@@ -48,13 +48,14 @@ AI_ANON_GLOBAL_DAILY_REQUESTS = "100"
 
 # Record & Check speech transcription (src/speech.js → klarweg-tutor
 # /v1/transcribe → OpenAI gpt-transcribe; the key is the TUTOR's existing
-# OPENAI_API_KEY secret). OFF by default.
+# OPENAI_API_KEY secret). Shipped OFF; since 2026-10-03 "allowlist" (internal
+# staging: the SPEECH_ALLOWLIST secret lists the owner's account only).
 #   "off"        nobody; chapter pages keep browser speech recognition
 #   "allowlist"  only accounts listed in the SPEECH_ALLOWLIST secret
 #                (comma-separated user ids) — internal staging
 #   "entitled"   every signed-in owner of the chapter's level
 # Kill switch: set "off" and redeploy, or wrangler rollback.
-SPEECH_MODE = "off"
+SPEECH_MODE = "allowlist"
 # Exact chapter ids only. A1·01 until real validation is complete.
 SPEECH_CHAPTERS = "a1-1-alphabet"
 # Per account: checks per minute (anti-hammering), per UTC day, per month.

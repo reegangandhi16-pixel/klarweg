@@ -1257,6 +1257,18 @@ img { max-width: 100%; display: block; }
 /* Speaking */
 .speak-prompt { font-family: var(--font-german); font-size: 24px; font-weight: 500; margin-bottom: 8px; }
 .speak-hint { font-size: 14px; color: var(--ink-secondary); margin-bottom: 20px; }
+/* Word Match result (PILOT: A1·01 Whisper check — these classes exist only there). */
+.kw-wm-words { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.kw-wm-w { display: inline-flex; flex-direction: column; gap: 1px; border-radius: 8px; padding: 4px 9px; font-family: var(--font-german); font-size: 16px; line-height: 1.3; }
+.kw-wm-w small { font-family: var(--font-ui); font-size: 11px; }
+.kw-wm-w.ok { background: #EAF3DE; color: #2E6416; }
+.kw-wm-w.bad { background: var(--coral-tint); color: var(--coral-deep); }
+.kw-wm-w.extra { background: var(--bg-warm); color: #8A5A00; }
+.kw-wm-score { margin: 14px 0 0; font-family: var(--font-ui); font-size: 18px; font-weight: 600; color: var(--ink-primary); font-variant-numeric: tabular-nums; }
+.kw-wm-checking { display: inline-flex; align-items: center; gap: 10px; }
+.kw-wm-spin { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--hairline-strong); border-top-color: var(--accent); animation: kw-wm-spin 0.8s linear infinite; }
+@keyframes kw-wm-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .kw-wm-spin { animation-duration: 2s; } }
 .mic-btn {
   display: inline-flex; align-items: center; gap: 12px;
   background: var(--accent); color: #fff;

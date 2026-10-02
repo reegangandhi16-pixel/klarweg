@@ -18,11 +18,15 @@
            result, notice?, meta:{ llm, usage, costMicros, … } }
      4xx { ok:false, error, message }
      503 { ok:false, error:'ai_unavailable'|…, message, meta }
+
+   Speech (A1·01 Record & Check) has its own route, see transcribe.js:
+     POST /v1/transcribe   raw audio bytes → { ok, text, seconds }
    ============================================================ */
 import { ACTIONS, CHAPTERLESS_ACTIONS, RequestError } from './actions.js';
 import { getChapter, isChapterId } from './registry.js';
 import { providerConfig } from './providers/index.js';
 import { BUILT_FROM } from './registry/generated/index.js';
+import { transcribe } from './transcribe.js';
 
 const MAX_BODY = 12 * 1024;
 
@@ -40,6 +44,9 @@ export async function handle(request, env) {
     const { provider, model } = providerConfig(env);
     return json({ ok: true, service: 'klarweg-tutor', provider, model: model || null, registry: BUILT_FROM });
   }
+
+  // Audio, not JSON — handled before the JSON actions (and their 12 KB cap).
+  if (request.method === 'POST' && url.pathname === '/v1/transcribe') return transcribe(request, env);
 
   const m = url.pathname.match(/^\/v1\/([a-z_]{3,32})$/);
   if (request.method !== 'POST' || !m) return json({ ok: false, error: 'not_found' }, 404);

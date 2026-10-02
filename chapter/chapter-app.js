@@ -3881,6 +3881,7 @@
 
   // ---- Speaking ----
   function bodySpeaking() {
+    askSpeechAccess();
     const wrap = el('div', {});
     // Recording needs a capture path: MediaRecorder (produces real audio) OR
     // speech recognition (produces a transcript). Either one makes the button
@@ -4285,10 +4286,12 @@
     result._kwScrolled = false;
     micEnter(btn, ' Listening…');
 
-    // A1·01 Whisper pilot: when enabled (and the browser can record), the
+    // A1·01 speech check: when enabled (and the browser can record), the
     // recording goes to the Klarweg speech endpoint and browser recognition is
     // not used. Otherwise this is the unchanged browser-recognition path.
-    const SPEECH = speechPilotEndpoint();
+    // A local/dev endpoint (KW_SPEECH_API, ?kwspeech) wins over the Klarweg
+    // server check, which applies only once /speech/status said "eligible".
+    const SPEECH = speechPilotEndpoint() || speechServerEndpoint();
     const pilot = !!(SPEECH && navigator.mediaDevices && navigator.mediaDevices.getUserMedia && typeof MediaRecorder !== 'undefined');
     const SR = pilot ? null : speechRecognitionCtor();
     // Release any model clip before the mic opens: on iOS a playing <audio>
@@ -4469,7 +4472,7 @@
       releaseStream(session);
       if (session.gen === session.result._kwGen && session.btn._kwSession !== session) renderSession(session);
     };
-    try { rc.start(1000); trace('recorder.start', true, rc.state); }
+    try { rc.start(1000); session.recStartedAt = Date.now(); trace('recorder.start', true, rc.state); }
     catch (e) { trace('recorder.start', false, String(e && e.name || e)); return false; }
     session.recorder = rc;
     return true;
@@ -4537,6 +4540,49 @@
     }
     return null;
   }
+  /* ---- A1·01 Klarweg speech check (klarweg-access /speech/*) ---------------
+     GET /speech/status is asked once per page (A1·01 only, after
+     KWAccess.ready() so KW_ACCESS_API is known). Only an explicit
+     { enabled: true, eligible: true } switches Record & check to the server
+     path; signed out, not entitled, switched off server-side, an error or no
+     answer yet all keep browser speech recognition exactly as before. After a
+     server-side refusal (quota, access, switched off) or repeated failures the
+     page returns to browser recognition for the rest of the visit, and says so.
+     The server returns only { text }; Word Match below scores it unchanged. */
+  const ACCESS_SPEECH = 'kw-access';
+  const SPEECH_MAX_FAILURES = 3;
+  const speechAccess = { asked: false, eligible: false, off: false };
+  function speechAccessApi() {
+    const a = typeof window.KW_ACCESS_API === 'string' ? window.KW_ACCESS_API.replace(/\/+$/, '') : '';
+    return /^https:\/\/[^/]+$/.test(a) || /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(a) ? a : '';
+  }
+  function askSpeechAccess() {
+    if (speechAccess.asked || C.id !== SPEECH_PILOT_CHAPTER || typeof fetch !== 'function') return;
+    speechAccess.asked = true;
+    const go = () => {
+      const api = speechAccessApi();
+      if (!api) return;
+      fetch(api + '/speech/status?chapter=' + encodeURIComponent(C.id), { credentials: 'include', cache: 'no-store' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => { speechAccess.eligible = !!(j && j.enabled === true && j.eligible === true); trace('speech.status', speechAccess.eligible, j ? { enabled: j.enabled, eligible: j.eligible } : null); })
+        .catch(() => trace('speech.status', false, 'unreachable'));
+    };
+    const A = window.KWAccess;
+    if (A && typeof A.ready === 'function') A.ready().then(go, go); else go();
+  }
+  function speechServerEndpoint() { return speechAccess.eligible && !speechAccess.off && speechAccessApi() ? ACCESS_SPEECH : null; }
+  // Server answer → the check's error class (see WHISPER_ERRORS).
+  function speechAccessError(status, body) {
+    const e = body && body.error;
+    if (status === 429) return e === 'rate_minute' ? 'rate' : 'quota';
+    if (status === 401 || status === 403) return 'unavailable';
+    if (status === 413) return 'too-long';
+    if (status === 400 || status === 415 || status === 422) return 'unreadable';
+    if (status === 504) return 'timeout';
+    if (status === 503) return e === 'speech_unavailable' ? 'server' : 'unavailable';
+    return 'server';
+  }
+
   // Stop by itself after ~1.5 s of quiet that follows some speech (cap stays 20 s).
   function watchForPause(session) {
     let ctx = null, timer = null;
@@ -4566,25 +4612,41 @@
     s.wBusy = true; s.wError = null; s.check = null; s.heard = null;
     clearTimeout(s.btn._kwIdleTimer);              // a pending micIdle() must not relabel the button mid-check
     s.btn._kwBusy = true; s.btn.lastChild.textContent = ' Checking…'; s.btn.setAttribute('aria-busy', 'true');
-    const fd = new FormData();
-    fd.append('audio', s.blob, 'speech' + speechExt(s.blob.type || ''));
+    const viaAccess = s.whisper === ACCESS_SPEECH;
     const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     const limit = typeof window.KW_SPEECH_TIMEOUT_MS === 'number' ? window.KW_SPEECH_TIMEOUT_MS : SPEECH_TIMEOUT_MS;
     const timer = setTimeout(() => { if (ctl) ctl.abort(); }, limit);
     const t0 = Date.now();
-    trace('whisper.request', true, { bytes: s.blob.size, type: s.blob.type });
-    fetch(s.whisper + '/v1/transcribe', { method: 'POST', body: fd, cache: 'no-store', credentials: 'omit', signal: ctl ? ctl.signal : undefined })
+    trace('whisper.request', true, { bytes: s.blob.size, type: s.blob.type, via: viaAccess ? 'klarweg' : 'dev' });
+    let req;
+    if (viaAccess) {
+      // The recording's own bytes and type; the session cookie identifies the learner.
+      const ms = Math.max(1, (s.stoppedAt || t0) - (s.recStartedAt || s.stoppedAt || t0));
+      req = fetch(speechAccessApi() + '/speech/transcribe?chapter=' + encodeURIComponent(C.id) + '&ms=' + ms,
+        { method: 'POST', body: s.blob, headers: { 'Content-Type': s.blob.type || s.mime || 'application/octet-stream' }, cache: 'no-store', credentials: 'include', signal: ctl ? ctl.signal : undefined });
+    } else {
+      const fd = new FormData();
+      fd.append('audio', s.blob, 'speech' + speechExt(s.blob.type || ''));
+      req = fetch(s.whisper + '/v1/transcribe', { method: 'POST', body: fd, cache: 'no-store', credentials: 'omit', signal: ctl ? ctl.signal : undefined });
+    }
+    req
       .then((r) => r.json().catch(() => ({})).then((j) => (r.ok ? j : Promise.reject({ status: r.status, body: j }))))
       .then((j) => {
         if (s.wToken !== token) return;
         s.heard = String(j.text || '').trim();
         s.check = s.heard ? wordMatch(s.p.de, s.heard) : null;
-        s.wMeta = { model: j.model, audioSec: j.audio_sec, serverMs: j.total_ms };
+        s.wMeta = viaAccess ? { via: 'klarweg' } : { model: j.model, audioSec: j.audio_sec, serverMs: j.total_ms };
       })
       .catch((e) => {
         if (s.wToken !== token) return;
         const st = e && e.status;
-        s.wError = (e && e.name === 'AbortError') ? 'timeout' : st === 413 ? 'too-long' : st === 503 ? 'busy' : st === 504 ? 'timeout' : st === 422 || st === 415 || st === 400 ? 'unreadable' : st ? 'server' : 'network';
+        if (viaAccess && st) s.wError = speechAccessError(st, e.body);
+        else s.wError = (e && e.name === 'AbortError') ? 'timeout' : st === 413 ? 'too-long' : st === 503 ? 'busy' : st === 504 ? 'timeout' : st === 422 || st === 415 || st === 400 ? 'unreadable' : st ? 'server' : 'network';
+        if (viaAccess) {
+          s.wFailures = (s.wFailures || 0) + 1;
+          // Refusals, and repeated transient failures, send the next attempt to browser recognition.
+          if (s.wError === 'quota' || s.wError === 'unavailable' || s.wFailures >= SPEECH_MAX_FAILURES) { speechAccess.off = true; s.wFallback = true; }
+        }
       })
       .finally(() => {
         clearTimeout(timer);
@@ -4602,8 +4664,12 @@
     busy: ['The speech check is busy right now.', true],
     server: ['The speech check had a problem with this recording.', true],
     'too-long': ['The recording is longer than 30 seconds. Record a shorter answer.', false],
-    unreadable: ['The recording could not be read. Please record again.', false]
+    unreadable: ['The recording could not be read. Please record again.', false],
+    rate: ['Too many checks in a short time. Wait a moment, then check again.', true],
+    quota: ['You have used today\u2019s speech checks.', false],
+    unavailable: ['The speech check is not available right now.', false]
   };
+  const BROWSER_FALLBACK_MSG = ' Press Record & check again \u2014 your browser\u2019s speech recognition will check it instead.';
   function renderWhisper(s) {
     const r = s.result;
     if (s.gen !== r._kwGen) return;
@@ -4621,13 +4687,19 @@
         r.setAttribute('data-mic-state', 'checking');
         r.appendChild(el('p', { class: 'muted kw-wm-checking', style: 'font-size:14px;margin:0' }, el('span', { class: 'kw-wm-spin', 'aria-hidden': 'true' }), 'Checking…'));
       } else if (s.wError) {
-        const [msg, retry] = WHISPER_ERRORS[s.wError] || WHISPER_ERRORS.server;
-        r.setAttribute('data-mic-state', 'check-error');
-        r.appendChild(line(msg + (retry ? ' Your recording is kept — you can check it again.' : '')));
+        const [msg, retryable] = WHISPER_ERRORS[s.wError] || WHISPER_ERRORS.server;
+        const retry = retryable && !s.wFallback;
+        r.setAttribute('data-mic-state', s.wFallback ? 'check-fallback' : 'check-error');
+        r.appendChild(line(msg + (s.wFallback ? BROWSER_FALLBACK_MSG : retry ? ' Your recording is kept — you can check it again.' : '')));
         if (retry) {
           const again = el('button', { class: 'btn btn-soft btn-small', type: 'button', style: 'margin-top:10px' }, 'Check again');
-          again.addEventListener('click', () => { whisperCheck(s); renderWhisper(s); });
+          again.addEventListener('click', () => { if (!s.wBusy) { whisperCheck(s); renderWhisper(s); } });
           r.appendChild(again);
+          if (s.whisper === ACCESS_SPEECH) {
+            const browser = el('button', { class: 'btn btn-ghost btn-small', type: 'button', style: 'margin:10px 0 0 8px' }, 'Use browser check');
+            browser.addEventListener('click', () => { speechAccess.off = true; s.wFallback = true; trace('speech.fallback', true, 'learner chose browser recognition'); renderWhisper(s); });
+            r.appendChild(browser);
+          }
         }
       } else if (!s.heard) {
         r.setAttribute('data-mic-state', 'no-speech');

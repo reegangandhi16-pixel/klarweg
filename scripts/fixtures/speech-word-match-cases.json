@@ -1,0 +1,9090 @@
+[
+{
+"target": "B-U-C-H. Buch.",
+"heard": "B U C H. Buch.",
+"why": "ground truth",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"B",
+"B"
+],
+[
+"match",
+"U",
+"U"
+],
+[
+"match",
+"C",
+"C"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"match",
+"Buch",
+"Buch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "Boca Buch",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"B",
+null
+],
+[
+"missing",
+"U",
+null
+],
+[
+"missing",
+"C",
+null
+],
+[
+"substitution",
+"H",
+"Boca"
+],
+[
+"match",
+"Buch",
+"Buch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "B. U. C. H. Buch",
+"why": "whisper_small",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"B",
+"B"
+],
+[
+"match",
+"U",
+"U"
+],
+[
+"match",
+"C",
+"C"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"match",
+"Buch",
+"Buch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "Beutzehabeuch",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"B",
+null
+],
+[
+"missing",
+"U",
+null
+],
+[
+"missing",
+"C",
+null
+],
+[
+"missing",
+"H",
+null
+],
+[
+"substitution",
+"Buch",
+"Beutzehabeuch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "BOC Hörbuch",
+"why": "browser_de",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"B",
+null
+],
+[
+"missing",
+"U",
+null
+],
+[
+"missing",
+"C",
+null
+],
+[
+"substitution",
+"H",
+"BOC"
+],
+[
+"substitution",
+"Buch",
+"Hörbuch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "B.U.C. Habeuch",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"B",
+"B"
+],
+[
+"match",
+"U",
+"U"
+],
+[
+"match",
+"C",
+"C"
+],
+[
+"missing",
+"H",
+null
+],
+[
+"substitution",
+"Buch",
+"Habeuch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "V.U.T. haben",
+"why": "whisper_base",
+"matched": 1,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"B",
+"V"
+],
+[
+"match",
+"U",
+"U"
+],
+[
+"missing",
+"C",
+null
+],
+[
+"substitution",
+"H",
+"T"
+],
+[
+"substitution",
+"Buch",
+"haben"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "buci age Match",
+"why": "browser_de",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"B",
+null
+],
+[
+"missing",
+"U",
+null
+],
+[
+"substitution",
+"C",
+"buci"
+],
+[
+"substitution",
+"H",
+"age"
+],
+[
+"substitution",
+"Buch",
+"Match"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "b u c h batch",
+"why": "browser_unset",
+"matched": 4,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"B",
+"b"
+],
+[
+"match",
+"U",
+"u"
+],
+[
+"match",
+"C",
+"c"
+],
+[
+"match",
+"H",
+"h"
+],
+[
+"substitution",
+"Buch",
+"batch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "B-U-C-H-Butch",
+"why": "whisper_small",
+"matched": 4,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"B",
+"B"
+],
+[
+"match",
+"U",
+"U"
+],
+[
+"match",
+"C",
+"C"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"substitution",
+"Buch",
+"Butch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "BUCHBUTCH",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"B",
+null
+],
+[
+"missing",
+"U",
+null
+],
+[
+"missing",
+"C",
+null
+],
+[
+"missing",
+"H",
+null
+],
+[
+"substitution",
+"Buch",
+"BUCHBUTCH"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "Käse. K Ä S E.",
+"why": "ground truth",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Käse",
+"Käse"
+],
+[
+"match",
+"K",
+"K"
+],
+[
+"match",
+"Ä",
+"Ä"
+],
+[
+"match",
+"S",
+"S"
+],
+[
+"match",
+"E",
+"E"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "Käse kefe",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Käse",
+"Käse"
+],
+[
+"missing",
+"K",
+null
+],
+[
+"missing",
+"Ä",
+null
+],
+[
+"missing",
+"S",
+null
+],
+[
+"substitution",
+"E",
+"kefe"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "IAS",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Käse",
+null
+],
+[
+"missing",
+"K",
+null
+],
+[
+"missing",
+"Ä",
+null
+],
+[
+"missing",
+"S",
+null
+],
+[
+"substitution",
+"E",
+"IAS"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "Käse, K-E-S-E",
+"why": "whisper_small",
+"matched": 4,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Käse",
+"Käse"
+],
+[
+"match",
+"K",
+"K"
+],
+[
+"substitution",
+"Ä",
+"E"
+],
+[
+"match",
+"S",
+"S"
+],
+[
+"match",
+"E",
+"E"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "Jesus, K-A-S-E",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"Käse",
+"Jesus"
+],
+[
+"match",
+"K",
+"K"
+],
+[
+"substitution",
+"Ä",
+"A"
+],
+[
+"match",
+"S",
+"S"
+],
+[
+"match",
+"E",
+"E"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "Käse",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Käse",
+"Käse"
+],
+[
+"missing",
+"K",
+null
+],
+[
+"missing",
+"Ä",
+null
+],
+[
+"missing",
+"S",
+null
+],
+[
+"missing",
+"E",
+null
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "Jesus, R-E-S-E",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"Käse",
+"Jesus"
+],
+[
+"substitution",
+"K",
+"R"
+],
+[
+"substitution",
+"Ä",
+"E"
+],
+[
+"match",
+"S",
+"S"
+],
+[
+"match",
+"E",
+"E"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "Jesus, R-E-S-E.",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"Käse",
+"Jesus"
+],
+[
+"substitution",
+"K",
+"R"
+],
+[
+"substitution",
+"Ä",
+"E"
+],
+[
+"match",
+"S",
+"S"
+],
+[
+"match",
+"E",
+"E"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "tschüss KFC",
+"why": "browser_de",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Käse",
+null
+],
+[
+"missing",
+"K",
+null
+],
+[
+"missing",
+"Ä",
+null
+],
+[
+"substitution",
+"S",
+"tschüss"
+],
+[
+"substitution",
+"E",
+"KFC"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "chess kse",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Käse",
+null
+],
+[
+"missing",
+"K",
+null
+],
+[
+"missing",
+"Ä",
+null
+],
+[
+"substitution",
+"S",
+"chess"
+],
+[
+"substitution",
+"E",
+"kse"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "K.E.S.K.E.S.E",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"extra",
+null,
+"K"
+],
+[
+"extra",
+null,
+"E"
+],
+[
+"substitution",
+"Käse",
+"S"
+],
+[
+"match",
+"K",
+"K"
+],
+[
+"substitution",
+"Ä",
+"E"
+],
+[
+"match",
+"S",
+"S"
+],
+[
+"match",
+"E",
+"E"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "K, K, S, E",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Käse",
+null
+],
+[
+"match",
+"K",
+"K"
+],
+[
+"substitution",
+"Ä",
+"K"
+],
+[
+"match",
+"S",
+"S"
+],
+[
+"match",
+"E",
+"E"
+]
+]
+},
+{
+"target": "A wie Apfel, B wie Buch, H wie Hund.",
+"heard": "A wie Apfel, B wie Buch, H wie Hund.",
+"why": "ground truth",
+"matched": 9,
+"targetWords": 9,
+"ops": [
+[
+"match",
+"A",
+"A"
+],
+[
+"match",
+"wie",
+"wie"
+],
+[
+"match",
+"Apfel",
+"Apfel"
+],
+[
+"match",
+"B",
+"B"
+],
+[
+"match",
+"wie",
+"wie"
+],
+[
+"match",
+"Buch",
+"Buch"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"match",
+"wie",
+"wie"
+],
+[
+"match",
+"Hund",
+"Hund"
+]
+]
+},
+{
+"target": "A wie Apfel, B wie Buch, H wie Hund.",
+"heard": "Barbie Apfel Babybuch Barbie Hund",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 9,
+"ops": [
+[
+"missing",
+"A",
+null
+],
+[
+"substitution",
+"wie",
+"Barbie"
+],
+[
+"match",
+"Apfel",
+"Apfel"
+],
+[
+"missing",
+"B",
+null
+],
+[
+"missing",
+"wie",
+null
+],
+[
+"missing",
+"Buch",
+null
+],
+[
+"substitution",
+"H",
+"Babybuch"
+],
+[
+"substitution",
+"wie",
+"Barbie"
+],
+[
+"match",
+"Hund",
+"Hund"
+]
+]
+},
+{
+"target": "A wie Apfel, B wie Buch, H wie Hund.",
+"heard": "baby movie",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 9,
+"ops": [
+[
+"missing",
+"A",
+null
+],
+[
+"missing",
+"wie",
+null
+],
+[
+"missing",
+"Apfel",
+null
+],
+[
+"missing",
+"B",
+null
+],
+[
+"missing",
+"wie",
+null
+],
+[
+"missing",
+"Buch",
+null
+],
+[
+"missing",
+"H",
+null
+],
+[
+"substitution",
+"wie",
+"baby"
+],
+[
+"substitution",
+"Hund",
+"movie"
+]
+]
+},
+{
+"target": "A wie Apfel, B wie Buch, H wie Hund.",
+"heard": "A wie Apfel, D wie Buch, A wie Hund.",
+"why": "whisper_small",
+"matched": 7,
+"targetWords": 9,
+"ops": [
+[
+"match",
+"A",
+"A"
+],
+[
+"match",
+"wie",
+"wie"
+],
+[
+"match",
+"Apfel",
+"Apfel"
+],
+[
+"substitution",
+"B",
+"D"
+],
+[
+"match",
+"wie",
+"wie"
+],
+[
+"match",
+"Buch",
+"Buch"
+],
+[
+"substitution",
+"H",
+"A"
+],
+[
+"match",
+"wie",
+"wie"
+],
+[
+"match",
+"Hund",
+"Hund"
+]
+]
+},
+{
+"target": "A wie Apfel, B wie Buch, H wie Hund.",
+"heard": "Avi Apfel, David Buch, Avi Hund",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 9,
+"ops": [
+[
+"missing",
+"A",
+null
+],
+[
+"substitution",
+"wie",
+"Avi"
+],
+[
+"match",
+"Apfel",
+"Apfel"
+],
+[
+"missing",
+"B",
+null
+],
+[
+"substitution",
+"wie",
+"David"
+],
+[
+"match",
+"Buch",
+"Buch"
+],
+[
+"missing",
+"H",
+null
+],
+[
+"substitution",
+"wie",
+"Avi"
+],
+[
+"match",
+"Hund",
+"Hund"
+]
+]
+},
+{
+"target": "A wie Apfel, B wie Buch, H wie Hund.",
+"heard": "A we have full B we book, H we hum.",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 9,
+"ops": [
+[
+"match",
+"A",
+"A"
+],
+[
+"extra",
+null,
+"we"
+],
+[
+"substitution",
+"wie",
+"have"
+],
+[
+"substitution",
+"Apfel",
+"full"
+],
+[
+"match",
+"B",
+"B"
+],
+[
+"substitution",
+"wie",
+"we"
+],
+[
+"substitution",
+"Buch",
+"book"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"substitution",
+"wie",
+"we"
+],
+[
+"substitution",
+"Hund",
+"hum"
+]
+]
+},
+{
+"target": "A wie Apfel, B wie Buch, H wie Hund.",
+"heard": "Are we up for B-Rebook, H-Rehum?",
+"why": "whisper_base",
+"matched": 1,
+"targetWords": 9,
+"ops": [
+[
+"substitution",
+"A",
+"Are"
+],
+[
+"substitution",
+"wie",
+"we"
+],
+[
+"substitution",
+"Apfel",
+"up"
+],
+[
+"substitution",
+"B",
+"for"
+],
+[
+"substitution",
+"wie",
+"B"
+],
+[
+"substitution",
+"Buch",
+"Rebook"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"missing",
+"wie",
+null
+],
+[
+"substitution",
+"Hund",
+"Rehum"
+]
+]
+},
+{
+"target": "Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es.",
+"heard": "Die Lehrerin fragt: Wie schreibt man Buch? Buchstabiere es.",
+"why": "ground truth",
+"matched": 9,
+"targetWords": 9,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Lehrerin",
+"Lehrerin"
+],
+[
+"match",
+"fragt",
+"fragt"
+],
+[
+"match",
+"Wie",
+"Wie"
+],
+[
+"match",
+"schreibt",
+"schreibt"
+],
+[
+"match",
+"man",
+"man"
+],
+[
+"match",
+"Buch",
+"Buch"
+],
+[
+"match",
+"Buchstabiere",
+"Buchstabiere"
+],
+[
+"match",
+"es",
+"es"
+]
+]
+},
+{
+"target": "Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es.",
+"heard": "die Lehrerin fragt",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 9,
+"ops": [
+[
+"match",
+"Die",
+"die"
+],
+[
+"match",
+"Lehrerin",
+"Lehrerin"
+],
+[
+"match",
+"fragt",
+"fragt"
+],
+[
+"missing",
+"Wie",
+null
+],
+[
+"missing",
+"schreibt",
+null
+],
+[
+"missing",
+"man",
+null
+],
+[
+"missing",
+"Buch",
+null
+],
+[
+"missing",
+"Buchstabiere",
+null
+],
+[
+"missing",
+"es",
+null
+]
+]
+},
+{
+"target": "Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es.",
+"heard": "believer ringtone",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 9,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"missing",
+"Lehrerin",
+null
+],
+[
+"missing",
+"fragt",
+null
+],
+[
+"missing",
+"Wie",
+null
+],
+[
+"missing",
+"schreibt",
+null
+],
+[
+"missing",
+"man",
+null
+],
+[
+"missing",
+"Buch",
+null
+],
+[
+"substitution",
+"Buchstabiere",
+"believer"
+],
+[
+"substitution",
+"es",
+"ringtone"
+]
+]
+},
+{
+"target": "Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es.",
+"heard": "Die Lehrerin fragt, wie schreibt man Buch? Buch stabiler es.",
+"why": "whisper_small",
+"matched": 8,
+"targetWords": 9,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Lehrerin",
+"Lehrerin"
+],
+[
+"match",
+"fragt",
+"fragt"
+],
+[
+"match",
+"Wie",
+"wie"
+],
+[
+"match",
+"schreibt",
+"schreibt"
+],
+[
+"match",
+"man",
+"man"
+],
+[
+"extra",
+null,
+"Buch"
+],
+[
+"match",
+"Buch",
+"Buch"
+],
+[
+"substitution",
+"Buchstabiere",
+"stabiler"
+],
+[
+"match",
+"es",
+"es"
+]
+]
+},
+{
+"target": "Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es.",
+"heard": "Die Leveren fragt, die schreit mag Buch, Buch stabiler es.",
+"why": "whisper_base",
+"matched": 4,
+"targetWords": 9,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"substitution",
+"Lehrerin",
+"Leveren"
+],
+[
+"match",
+"fragt",
+"fragt"
+],
+[
+"extra",
+null,
+"die"
+],
+[
+"substitution",
+"Wie",
+"schreit"
+],
+[
+"substitution",
+"schreibt",
+"mag"
+],
+[
+"substitution",
+"man",
+"Buch"
+],
+[
+"match",
+"Buch",
+"Buch"
+],
+[
+"substitution",
+"Buchstabiere",
+"stabiler"
+],
+[
+"match",
+"es",
+"es"
+]
+]
+},
+{
+"target": "Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es.",
+"heard": "dein Lehrerin fragt Biskuit Mainboard Bad stabiles",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 9,
+"ops": [
+[
+"substitution",
+"Die",
+"dein"
+],
+[
+"match",
+"Lehrerin",
+"Lehrerin"
+],
+[
+"match",
+"fragt",
+"fragt"
+],
+[
+"missing",
+"Wie",
+null
+],
+[
+"missing",
+"schreibt",
+null
+],
+[
+"substitution",
+"man",
+"Biskuit"
+],
+[
+"substitution",
+"Buch",
+"Mainboard"
+],
+[
+"substitution",
+"Buchstabiere",
+"Bad"
+],
+[
+"substitution",
+"es",
+"stabiles"
+]
+]
+},
+{
+"target": "Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es.",
+"heard": "disc treatment",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 9,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"missing",
+"Lehrerin",
+null
+],
+[
+"missing",
+"fragt",
+null
+],
+[
+"missing",
+"Wie",
+null
+],
+[
+"missing",
+"schreibt",
+null
+],
+[
+"missing",
+"man",
+null
+],
+[
+"missing",
+"Buch",
+null
+],
+[
+"substitution",
+"Buchstabiere",
+"disc"
+],
+[
+"substitution",
+"es",
+"treatment"
+]
+]
+},
+{
+"target": "Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es.",
+"heard": "Die Lärder infrage, die Skreitmann-Berge, die Stabiers.",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 9,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"missing",
+"Lehrerin",
+null
+],
+[
+"substitution",
+"fragt",
+"Lärder"
+],
+[
+"substitution",
+"Wie",
+"infrage"
+],
+[
+"substitution",
+"schreibt",
+"die"
+],
+[
+"substitution",
+"man",
+"Skreitmann"
+],
+[
+"substitution",
+"Buch",
+"Berge"
+],
+[
+"substitution",
+"Buchstabiere",
+"die"
+],
+[
+"substitution",
+"es",
+"Stabiers"
+]
+]
+},
+{
+"target": "Die Lehrerin fragt: Wie schreibt man „Buch“? Buchstabiere es.",
+"heard": "Die Läder entschärkt, wir schrägt Manbot, but StBS.",
+"why": "whisper_base",
+"matched": 1,
+"targetWords": 9,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"missing",
+"Lehrerin",
+null
+],
+[
+"substitution",
+"fragt",
+"Läder"
+],
+[
+"substitution",
+"Wie",
+"entschärkt"
+],
+[
+"substitution",
+"schreibt",
+"wir"
+],
+[
+"substitution",
+"man",
+"schrägt"
+],
+[
+"substitution",
+"Buch",
+"Manbot"
+],
+[
+"substitution",
+"Buchstabiere",
+"but"
+],
+[
+"substitution",
+"es",
+"StBS"
+]
+]
+},
+{
+"target": "R-O-H-A-N.",
+"heard": "R O H A N.",
+"why": "ground truth",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"R",
+"R"
+],
+[
+"match",
+"O",
+"O"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"match",
+"A",
+"A"
+],
+[
+"match",
+"N",
+"N"
+]
+]
+},
+{
+"target": "R-O-H-A-N.",
+"heard": "Rohan",
+"why": "browser_de",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"R",
+null
+],
+[
+"missing",
+"O",
+null
+],
+[
+"missing",
+"H",
+null
+],
+[
+"missing",
+"A",
+null
+],
+[
+"substitution",
+"N",
+"Rohan"
+]
+]
+},
+{
+"target": "R-O-H-A-N.",
+"heard": "L-O-R-R-N",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"R",
+"L"
+],
+[
+"match",
+"O",
+"O"
+],
+[
+"substitution",
+"H",
+"R"
+],
+[
+"substitution",
+"A",
+"R"
+],
+[
+"match",
+"N",
+"N"
+]
+]
+},
+{
+"target": "R-O-H-A-N.",
+"heard": "E-U-H-A-N",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"R",
+"E"
+],
+[
+"substitution",
+"O",
+"U"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"match",
+"A",
+"A"
+],
+[
+"match",
+"N",
+"N"
+]
+]
+},
+{
+"target": "R-O-H-A-N.",
+"heard": "Alois en",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"R",
+null
+],
+[
+"missing",
+"O",
+null
+],
+[
+"missing",
+"H",
+null
+],
+[
+"substitution",
+"A",
+"Alois"
+],
+[
+"match",
+"N",
+"en"
+]
+]
+},
+{
+"target": "R-O-H-A-N.",
+"heard": "r o h a n",
+"why": "browser_unset",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"R",
+"r"
+],
+[
+"match",
+"O",
+"o"
+],
+[
+"match",
+"H",
+"h"
+],
+[
+"match",
+"A",
+"a"
+],
+[
+"match",
+"N",
+"n"
+]
+]
+},
+{
+"target": "R-O-H-A-N.",
+"heard": "R-O-H-E-N",
+"why": "whisper_small",
+"matched": 4,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"R",
+"R"
+],
+[
+"match",
+"O",
+"O"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"substitution",
+"A",
+"E"
+],
+[
+"match",
+"N",
+"N"
+]
+]
+},
+{
+"target": "R-O-H-A-N.",
+"heard": "ROHAN",
+"why": "whisper_base",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"R",
+"R"
+],
+[
+"match",
+"O",
+"O"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"match",
+"A",
+"A"
+],
+[
+"match",
+"N",
+"N"
+]
+]
+},
+{
+"target": "Weber, mit W.",
+"heard": "Weber, mit W.",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Weber",
+"Weber"
+],
+[
+"match",
+"mit",
+"mit"
+],
+[
+"match",
+"W",
+"W"
+]
+]
+},
+{
+"target": "Weber, mit W.",
+"heard": "Weber mit W",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Weber",
+"Weber"
+],
+[
+"match",
+"mit",
+"mit"
+],
+[
+"match",
+"W",
+"W"
+]
+]
+},
+{
+"target": "Weber, mit W.",
+"heard": "Vivah Mitra",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Weber",
+null
+],
+[
+"substitution",
+"mit",
+"Vivah"
+],
+[
+"substitution",
+"W",
+"Mitra"
+]
+]
+},
+{
+"target": "Weber, mit W.",
+"heard": "Weber mit weh",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Weber",
+"Weber"
+],
+[
+"match",
+"mit",
+"mit"
+],
+[
+"match",
+"W",
+"weh"
+]
+]
+},
+{
+"target": "Weber, mit W.",
+"heard": "Weber mit V",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Weber",
+"Weber"
+],
+[
+"match",
+"mit",
+"mit"
+],
+[
+"substitution",
+"W",
+"V"
+]
+]
+},
+{
+"target": "Weber, mit W.",
+"heard": "Weber Medaillon",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Weber",
+"Weber"
+],
+[
+"missing",
+"mit",
+null
+],
+[
+"substitution",
+"W",
+"Medaillon"
+]
+]
+},
+{
+"target": "Weber, mit W.",
+"heard": "Vivo midw",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Weber",
+null
+],
+[
+"substitution",
+"mit",
+"Vivo"
+],
+[
+"substitution",
+"W",
+"midw"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "Ich möchte einen Kaffee.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"match",
+"Kaffee",
+"Kaffee"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "ich möchte einen Kaffee",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"match",
+"Kaffee",
+"Kaffee"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "is metal I am happy",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"extra",
+null,
+"is"
+],
+[
+"substitution",
+"Ich",
+"metal"
+],
+[
+"substitution",
+"möchte",
+"I"
+],
+[
+"substitution",
+"einen",
+"am"
+],
+[
+"substitution",
+"Kaffee",
+"happy"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "which mountain Cafe",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"möchte",
+"which"
+],
+[
+"substitution",
+"einen",
+"mountain"
+],
+[
+"substitution",
+"Kaffee",
+"Cafe"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "Ich mobte einen Kaffee.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"möchte",
+"mobte"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"match",
+"Kaffee",
+"Kaffee"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "Ich möchte ein Kaffee.",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"substitution",
+"einen",
+"ein"
+],
+[
+"match",
+"Kaffee",
+"Kaffee"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "ich möchte den Kaffee",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"substitution",
+"einen",
+"den"
+],
+[
+"match",
+"Kaffee",
+"Kaffee"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "which method in traffic",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Ich",
+"which"
+],
+[
+"substitution",
+"möchte",
+"method"
+],
+[
+"substitution",
+"einen",
+"in"
+],
+[
+"substitution",
+"Kaffee",
+"traffic"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "Ich möchte ihn, Kaffee.",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"substitution",
+"einen",
+"ihn"
+],
+[
+"match",
+"Kaffee",
+"Kaffee"
+]
+]
+},
+{
+"target": "Ich möchte einen Kaffee.",
+"heard": "Ich mit den Tafi",
+"why": "whisper_base",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"möchte",
+"mit"
+],
+[
+"substitution",
+"einen",
+"den"
+],
+[
+"substitution",
+"Kaffee",
+"Tafi"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "Ich habe einen Bruder.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"habe",
+"habe"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"match",
+"Bruder",
+"Bruder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "ich habe einen Bruder",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"habe",
+"habe"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"match",
+"Bruder",
+"Bruder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "peshab Aana",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"missing",
+"habe",
+null
+],
+[
+"substitution",
+"einen",
+"peshab"
+],
+[
+"substitution",
+"Bruder",
+"Aana"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "Ich habe einen Ruder.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"habe",
+"habe"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"substitution",
+"Bruder",
+"Ruder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "ich heb ihnen Bruder",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"substitution",
+"habe",
+"heb"
+],
+[
+"substitution",
+"einen",
+"ihnen"
+],
+[
+"match",
+"Bruder",
+"Bruder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "HIV in breeder",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"habe",
+"HIV"
+],
+[
+"substitution",
+"einen",
+"in"
+],
+[
+"substitution",
+"Bruder",
+"breeder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "Ich habe ihn ein Bruder.",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"habe",
+"habe"
+],
+[
+"extra",
+null,
+"ihn"
+],
+[
+"substitution",
+"einen",
+"ein"
+],
+[
+"match",
+"Bruder",
+"Bruder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "Ich hab ihnen Bruder.",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"habe",
+"hab"
+],
+[
+"substitution",
+"einen",
+"ihnen"
+],
+[
+"match",
+"Bruder",
+"Bruder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "Ich habe ein Bruder.",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"habe",
+"habe"
+],
+[
+"substitution",
+"einen",
+"ein"
+],
+[
+"match",
+"Bruder",
+"Bruder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "pick up lines",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"habe",
+"pick"
+],
+[
+"substitution",
+"einen",
+"up"
+],
+[
+"substitution",
+"Bruder",
+"lines"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "Ich habe ein Ruder.",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"habe",
+"habe"
+],
+[
+"substitution",
+"einen",
+"ein"
+],
+[
+"substitution",
+"Bruder",
+"Ruder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "DJ mein Bruder",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"habe",
+"DJ"
+],
+[
+"substitution",
+"einen",
+"mein"
+],
+[
+"match",
+"Bruder",
+"Bruder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "each heaven breeder",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"habe",
+"each"
+],
+[
+"substitution",
+"einen",
+"heaven"
+],
+[
+"substitution",
+"Bruder",
+"breeder"
+]
+]
+},
+{
+"target": "Ich habe einen Bruder.",
+"heard": "Ich hebe ein Bruder.",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"habe",
+"hebe"
+],
+[
+"substitution",
+"einen",
+"ein"
+],
+[
+"match",
+"Bruder",
+"Bruder"
+]
+]
+},
+{
+"target": "Ich habe einen Hund und eine Katze.",
+"heard": "Ich habe einen Hund und eine Katze.",
+"why": "ground truth",
+"matched": 7,
+"targetWords": 7,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"habe",
+"habe"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"match",
+"Hund",
+"Hund"
+],
+[
+"match",
+"und",
+"und"
+],
+[
+"match",
+"eine",
+"eine"
+],
+[
+"match",
+"Katze",
+"Katze"
+]
+]
+},
+{
+"target": "Ich habe einen Hund und eine Katze.",
+"heard": "ich habe einen Hund und eine Katze",
+"why": "browser_de",
+"matched": 7,
+"targetWords": 7,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"habe",
+"habe"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"match",
+"Hund",
+"Hund"
+],
+[
+"match",
+"und",
+"und"
+],
+[
+"match",
+"eine",
+"eine"
+],
+[
+"match",
+"Katze",
+"Katze"
+]
+]
+},
+{
+"target": "Ich habe einen Hund und eine Katze.",
+"heard": "aitape einen Hund und eine Katze",
+"why": "browser_de",
+"matched": 5,
+"targetWords": 7,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"habe",
+"aitape"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"match",
+"Hund",
+"Hund"
+],
+[
+"match",
+"und",
+"und"
+],
+[
+"match",
+"eine",
+"eine"
+],
+[
+"match",
+"Katze",
+"Katze"
+]
+]
+},
+{
+"target": "Ich habe einen Hund und eine Katze.",
+"heard": "Ich hab einen Hund und eine Katze.",
+"why": "whisper_base",
+"matched": 6,
+"targetWords": 7,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"habe",
+"hab"
+],
+[
+"match",
+"einen",
+"einen"
+],
+[
+"match",
+"Hund",
+"Hund"
+],
+[
+"match",
+"und",
+"und"
+],
+[
+"match",
+"eine",
+"eine"
+],
+[
+"match",
+"Katze",
+"Katze"
+]
+]
+},
+{
+"target": "Der Apfel ist rot.",
+"heard": "Der Apfel ist rot.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"Der"
+],
+[
+"match",
+"Apfel",
+"Apfel"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"rot",
+"rot"
+]
+]
+},
+{
+"target": "Der Apfel ist rot.",
+"heard": "neapel ist gut",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Der",
+null
+],
+[
+"substitution",
+"Apfel",
+"neapel"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"rot",
+"gut"
+]
+]
+},
+{
+"target": "Der Apfel ist rot.",
+"heard": "new upcoming Sports",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Der",
+null
+],
+[
+"substitution",
+"Apfel",
+"new"
+],
+[
+"substitution",
+"ist",
+"upcoming"
+],
+[
+"substitution",
+"rot",
+"Sports"
+]
+]
+},
+{
+"target": "Der Apfel ist rot.",
+"heard": "den Apfel Eistorte",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Der",
+"den"
+],
+[
+"match",
+"Apfel",
+"Apfel"
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"substitution",
+"rot",
+"Eistorte"
+]
+]
+},
+{
+"target": "Der Apfel ist rot.",
+"heard": "then actual ice cream",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Der",
+"then"
+],
+[
+"substitution",
+"Apfel",
+"actual"
+],
+[
+"substitution",
+"ist",
+"ice"
+],
+[
+"substitution",
+"rot",
+"cream"
+]
+]
+},
+{
+"target": "Der Apfel ist rot.",
+"heard": "DER ACHFEL EISTROT",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"DER"
+],
+[
+"missing",
+"Apfel",
+null
+],
+[
+"substitution",
+"ist",
+"ACHFEL"
+],
+[
+"substitution",
+"rot",
+"EISTROT"
+]
+]
+},
+{
+"target": "Der Apfel ist rot.",
+"heard": "Dead-Agg-Full-Eistrot",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Der",
+"Dead"
+],
+[
+"substitution",
+"Apfel",
+"Agg"
+],
+[
+"substitution",
+"ist",
+"Full"
+],
+[
+"substitution",
+"rot",
+"Eistrot"
+]
+]
+},
+{
+"target": "Das Buch ist neu.",
+"heard": "Das Buch ist neu.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Das",
+"Das"
+],
+[
+"match",
+"Buch",
+"Buch"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"neu",
+"neu"
+]
+]
+},
+{
+"target": "Das Buch ist neu.",
+"heard": "das Buch ist neu",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Das",
+"das"
+],
+[
+"match",
+"Buch",
+"Buch"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"neu",
+"neu"
+]
+]
+},
+{
+"target": "Das Buch ist neu.",
+"heard": "Das Puch ist loi!",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Das",
+"Das"
+],
+[
+"substitution",
+"Buch",
+"Puch"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"neu",
+"loi"
+]
+]
+},
+{
+"target": "Das Buch ist neu.",
+"heard": "das Boot scheiß Neo",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Das",
+"das"
+],
+[
+"substitution",
+"Buch",
+"Boot"
+],
+[
+"substitution",
+"ist",
+"scheiß"
+],
+[
+"substitution",
+"neu",
+"Neo"
+]
+]
+},
+{
+"target": "Das Buch ist neu.",
+"heard": "dashboard ice cream",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Das",
+null
+],
+[
+"substitution",
+"Buch",
+"dashboard"
+],
+[
+"substitution",
+"ist",
+"ice"
+],
+[
+"substitution",
+"neu",
+"cream"
+]
+]
+},
+{
+"target": "Das Buch ist neu.",
+"heard": "Das Buch heißt Neu.",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Das",
+"Das"
+],
+[
+"match",
+"Buch",
+"Buch"
+],
+[
+"substitution",
+"ist",
+"heißt"
+],
+[
+"match",
+"neu",
+"Neu"
+]
+]
+},
+{
+"target": "Die Zeit ist da.",
+"heard": "Die Zeit.",
+"why": "ground truth",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Zeit",
+"Zeit"
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"missing",
+"da",
+null
+]
+]
+},
+{
+"target": "Die Zeit ist da.",
+"heard": "die Zeit",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"die"
+],
+[
+"match",
+"Zeit",
+"Zeit"
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"missing",
+"da",
+null
+]
+]
+},
+{
+"target": "Die Zeit ist da.",
+"heard": "decide",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"missing",
+"Zeit",
+null
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"substitution",
+"da",
+"decide"
+]
+]
+},
+{
+"target": "Die Zeit ist da.",
+"heard": "Die Zeit",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Zeit",
+"Zeit"
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"missing",
+"da",
+null
+]
+]
+},
+{
+"target": "Die Zeit ist da.",
+"heard": "Daisy",
+"why": "browser_de",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"missing",
+"Zeit",
+null
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"substitution",
+"da",
+"Daisy"
+]
+]
+},
+{
+"target": "Die Zeit ist da.",
+"heard": "diazide",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"missing",
+"Zeit",
+null
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"substitution",
+"da",
+"diazide"
+]
+]
+},
+{
+"target": "Die Zeit ist da.",
+"heard": "Dysite",
+"why": "whisper_small",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"missing",
+"Zeit",
+null
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"substitution",
+"da",
+"Dysite"
+]
+]
+},
+{
+"target": "Die Zeit ist da.",
+"heard": "Dyside",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"missing",
+"Zeit",
+null
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"substitution",
+"da",
+"Dyside"
+]
+]
+},
+{
+"target": "Der Käse ist gut.",
+"heard": "Der Käse ist gut.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"Der"
+],
+[
+"match",
+"Käse",
+"Käse"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"gut",
+"gut"
+]
+]
+},
+{
+"target": "Der Käse ist gut.",
+"heard": "der Käse ist gut",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"der"
+],
+[
+"match",
+"Käse",
+"Käse"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"gut",
+"gut"
+]
+]
+},
+{
+"target": "Der Käse ist gut.",
+"heard": "Aankhen Jo School",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Der",
+null
+],
+[
+"substitution",
+"Käse",
+"Aankhen"
+],
+[
+"substitution",
+"ist",
+"Jo"
+],
+[
+"substitution",
+"gut",
+"School"
+]
+]
+},
+{
+"target": "Der Käse ist gut.",
+"heard": "Der Kaiser ist gut.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"Der"
+],
+[
+"substitution",
+"Käse",
+"Kaiser"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"gut",
+"gut"
+]
+]
+},
+{
+"target": "Der Käse ist gut.",
+"heard": "Ja, Käse ist gut.",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Der",
+"Ja"
+],
+[
+"match",
+"Käse",
+"Käse"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"gut",
+"gut"
+]
+]
+},
+{
+"target": "Der Käse ist gut.",
+"heard": "türkise ist dort",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Der",
+null
+],
+[
+"substitution",
+"Käse",
+"türkise"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"gut",
+"dort"
+]
+]
+},
+{
+"target": "Der Käse ist gut.",
+"heard": "Du käseist gut?",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Der",
+null
+],
+[
+"substitution",
+"Käse",
+"Du"
+],
+[
+"substitution",
+"ist",
+"käseist"
+],
+[
+"match",
+"gut",
+"gut"
+]
+]
+},
+{
+"target": "Der Käse ist gut.",
+"heard": "www.dkcist.com",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Der",
+null
+],
+[
+"substitution",
+"Käse",
+"www"
+],
+[
+"substitution",
+"ist",
+"dkcist"
+],
+[
+"substitution",
+"gut",
+"com"
+]
+]
+},
+{
+"target": "Das Mädchen singt.",
+"heard": "Das Mädchen singt.",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Das",
+"Das"
+],
+[
+"match",
+"Mädchen",
+"Mädchen"
+],
+[
+"match",
+"singt",
+"singt"
+]
+]
+},
+{
+"target": "Das Mädchen singt.",
+"heard": "das Mädchen singt",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Das",
+"das"
+],
+[
+"match",
+"Mädchen",
+"Mädchen"
+],
+[
+"match",
+"singt",
+"singt"
+]
+]
+},
+{
+"target": "Das Mädchen singt.",
+"heard": "just making zinc",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"substitution",
+"Das",
+"just"
+],
+[
+"substitution",
+"Mädchen",
+"making"
+],
+[
+"substitution",
+"singt",
+"zinc"
+]
+]
+},
+{
+"target": "Das Mädchen singt.",
+"heard": "Das Mädchen sinkt.",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Das",
+"Das"
+],
+[
+"match",
+"Mädchen",
+"Mädchen"
+],
+[
+"substitution",
+"singt",
+"sinkt"
+]
+]
+},
+{
+"target": "Das Mädchen singt.",
+"heard": "10 chain Singh",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"substitution",
+"Das",
+"10"
+],
+[
+"substitution",
+"Mädchen",
+"chain"
+],
+[
+"substitution",
+"singt",
+"Singh"
+]
+]
+},
+{
+"target": "Das Mädchen singt.",
+"heard": "Das Mckchen sinkt.",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Das",
+"Das"
+],
+[
+"substitution",
+"Mädchen",
+"Mckchen"
+],
+[
+"substitution",
+"singt",
+"sinkt"
+]
+]
+},
+{
+"target": "Das Mädchen singt.",
+"heard": "Das Machen sinkt.",
+"why": "whisper_base",
+"matched": 1,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Das",
+"Das"
+],
+[
+"substitution",
+"Mädchen",
+"Machen"
+],
+[
+"substitution",
+"singt",
+"sinkt"
+]
+]
+},
+{
+"target": "Die Straße ist lang.",
+"heard": "Die Straße ist lang.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Straße",
+"Straße"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"lang",
+"lang"
+]
+]
+},
+{
+"target": "Die Straße ist lang.",
+"heard": "die Straße ist lang",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"die"
+],
+[
+"match",
+"Straße",
+"Straße"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"lang",
+"lang"
+]
+]
+},
+{
+"target": "Die Straße ist lang.",
+"heard": "Die Straße ist ran.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Straße",
+"Straße"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"lang",
+"ran"
+]
+]
+},
+{
+"target": "Die Straße ist lang.",
+"heard": "Dire Straits eyes flying",
+"why": "browser_de",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Die",
+"Dire"
+],
+[
+"substitution",
+"Straße",
+"Straits"
+],
+[
+"substitution",
+"ist",
+"eyes"
+],
+[
+"substitution",
+"lang",
+"flying"
+]
+]
+},
+{
+"target": "Die Straße ist lang.",
+"heard": "the stress Iceland",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"substitution",
+"Straße",
+"the"
+],
+[
+"substitution",
+"ist",
+"stress"
+],
+[
+"substitution",
+"lang",
+"Iceland"
+]
+]
+},
+{
+"target": "Die Straße ist lang.",
+"heard": "Die Stress-Eist-Lang.",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"substitution",
+"Straße",
+"Stress"
+],
+[
+"substitution",
+"ist",
+"Eist"
+],
+[
+"match",
+"lang",
+"Lang"
+]
+]
+},
+{
+"target": "Die Straße ist lang.",
+"heard": "Die Strasse ist lang.",
+"why": "whisper_base",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Straße",
+"Strasse"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"lang",
+"lang"
+]
+]
+},
+{
+"target": "Die Schule ist schön.",
+"heard": "Die Schule ist schön.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Schule",
+"Schule"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"schön",
+"schön"
+]
+]
+},
+{
+"target": "Die Schule ist schön.",
+"heard": "die Schule ist schön",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"die"
+],
+[
+"match",
+"Schule",
+"Schule"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"schön",
+"schön"
+]
+]
+},
+{
+"target": "Die Schule ist schön.",
+"heard": "Die Schuhe ist schön.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"substitution",
+"Schule",
+"Schuhe"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"schön",
+"schön"
+]
+]
+},
+{
+"target": "Die Schule ist schön.",
+"heard": "deichschule ist schon",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"substitution",
+"Schule",
+"deichschule"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"schön",
+"schon"
+]
+]
+},
+{
+"target": "Die Schule ist schön.",
+"heard": "Dhai shoulder is shown",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Die",
+"Dhai"
+],
+[
+"substitution",
+"Schule",
+"shoulder"
+],
+[
+"substitution",
+"ist",
+"is"
+],
+[
+"substitution",
+"schön",
+"shown"
+]
+]
+},
+{
+"target": "Die Schule ist schön.",
+"heard": "Deine Schule ist schon.",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Die",
+"Deine"
+],
+[
+"match",
+"Schule",
+"Schule"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"schön",
+"schon"
+]
+]
+},
+{
+"target": "Die Schule ist schön.",
+"heard": "Die Schule ist schon.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Schule",
+"Schule"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"schön",
+"schon"
+]
+]
+},
+{
+"target": "Ich wohne in München.",
+"heard": "Ich wohne in München.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"wohne",
+"wohne"
+],
+[
+"match",
+"in",
+"in"
+],
+[
+"match",
+"München",
+"München"
+]
+]
+},
+{
+"target": "Ich wohne in München.",
+"heard": "ich wohne in München",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"wohne",
+"wohne"
+],
+[
+"match",
+"in",
+"in"
+],
+[
+"match",
+"München",
+"München"
+]
+]
+},
+{
+"target": "Ich wohne in München.",
+"heard": "explain the invention",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"wohne",
+"explain"
+],
+[
+"substitution",
+"in",
+"the"
+],
+[
+"substitution",
+"München",
+"invention"
+]
+]
+},
+{
+"target": "Ich wohne in München.",
+"heard": "Ich war der Invention.",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"wohne",
+"war"
+],
+[
+"substitution",
+"in",
+"der"
+],
+[
+"substitution",
+"München",
+"Invention"
+]
+]
+},
+{
+"target": "Ich wohne in München.",
+"heard": "Ich wohne in Richtung.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"wohne",
+"wohne"
+],
+[
+"match",
+"in",
+"in"
+],
+[
+"substitution",
+"München",
+"Richtung"
+]
+]
+},
+{
+"target": "Ich wohne in München.",
+"heard": "Mietwohnungen München",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"missing",
+"wohne",
+null
+],
+[
+"substitution",
+"in",
+"Mietwohnungen"
+],
+[
+"match",
+"München",
+"München"
+]
+]
+},
+{
+"target": "Ich wohne in München.",
+"heard": "which one in monsoon",
+"why": "browser_unset",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Ich",
+"which"
+],
+[
+"substitution",
+"wohne",
+"one"
+],
+[
+"match",
+"in",
+"in"
+],
+[
+"substitution",
+"München",
+"monsoon"
+]
+]
+},
+{
+"target": "Ich wohne in München.",
+"heard": "Ich wohn in Munchen.",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"wohne",
+"wohn"
+],
+[
+"match",
+"in",
+"in"
+],
+[
+"substitution",
+"München",
+"Munchen"
+]
+]
+},
+{
+"target": "Ich möchte zwei Brötchen, bitte.",
+"heard": "Ich möchte zwei Brötchen, bitte.",
+"why": "ground truth",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"match",
+"zwei",
+"zwei"
+],
+[
+"match",
+"Brötchen",
+"Brötchen"
+],
+[
+"match",
+"bitte",
+"bitte"
+]
+]
+},
+{
+"target": "Ich möchte zwei Brötchen, bitte.",
+"heard": "ich möchte zwei Brötchen bitte",
+"why": "browser_de",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"match",
+"zwei",
+"zwei"
+],
+[
+"match",
+"Brötchen",
+"Brötchen"
+],
+[
+"match",
+"bitte",
+"bitte"
+]
+]
+},
+{
+"target": "Ich möchte zwei Brötchen, bitte.",
+"heard": "Snapchat",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"missing",
+"möchte",
+null
+],
+[
+"missing",
+"zwei",
+null
+],
+[
+"missing",
+"Brötchen",
+null
+],
+[
+"substitution",
+"bitte",
+"Snapchat"
+]
+]
+},
+{
+"target": "Ich möchte zwei Brötchen, bitte.",
+"heard": "Ich möchte zwei Kürchen bitte.",
+"why": "whisper_small",
+"matched": 4,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"match",
+"zwei",
+"zwei"
+],
+[
+"substitution",
+"Brötchen",
+"Kürchen"
+],
+[
+"match",
+"bitte",
+"bitte"
+]
+]
+},
+{
+"target": "Ich möchte zwei Brötchen, bitte.",
+"heard": "Ich möchte zwei Böchern nennen.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"match",
+"zwei",
+"zwei"
+],
+[
+"substitution",
+"Brötchen",
+"Böchern"
+],
+[
+"substitution",
+"bitte",
+"nennen"
+]
+]
+},
+{
+"target": "Ich möchte zwei Brötchen, bitte.",
+"heard": "ich möchte bitte",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"möchte",
+"möchte"
+],
+[
+"missing",
+"zwei",
+null
+],
+[
+"missing",
+"Brötchen",
+null
+],
+[
+"match",
+"bitte",
+"bitte"
+]
+]
+},
+{
+"target": "Ich möchte zwei Brötchen, bitte.",
+"heard": "which method",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"missing",
+"möchte",
+null
+],
+[
+"missing",
+"zwei",
+null
+],
+[
+"substitution",
+"Brötchen",
+"which"
+],
+[
+"substitution",
+"bitte",
+"method"
+]
+]
+},
+{
+"target": "Ich möchte zwei Brötchen, bitte.",
+"heard": "Es macht sehr viel Bitt.",
+"why": "whisper_small",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"Ich",
+"Es"
+],
+[
+"substitution",
+"möchte",
+"macht"
+],
+[
+"substitution",
+"zwei",
+"sehr"
+],
+[
+"substitution",
+"Brötchen",
+"viel"
+],
+[
+"substitution",
+"bitte",
+"Bitt"
+]
+]
+},
+{
+"target": "Ich möchte zwei Brötchen, bitte.",
+"heard": "Ich mitzwelle Brüchen, bitte.",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"missing",
+"möchte",
+null
+],
+[
+"substitution",
+"zwei",
+"mitzwelle"
+],
+[
+"substitution",
+"Brötchen",
+"Brüchen"
+],
+[
+"match",
+"bitte",
+"bitte"
+]
+]
+},
+{
+"target": "Grüße aus Köln.",
+"heard": "Grüße aus Köln.",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Grüße",
+"Grüße"
+],
+[
+"match",
+"aus",
+"aus"
+],
+[
+"match",
+"Köln",
+"Köln"
+]
+]
+},
+{
+"target": "Grüße aus Köln.",
+"heard": "Grüße aus Köln",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Grüße",
+"Grüße"
+],
+[
+"match",
+"aus",
+"aus"
+],
+[
+"match",
+"Köln",
+"Köln"
+]
+]
+},
+{
+"target": "Grüße aus Köln.",
+"heard": "Koi South film",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"substitution",
+"Grüße",
+"Koi"
+],
+[
+"substitution",
+"aus",
+"South"
+],
+[
+"substitution",
+"Köln",
+"film"
+]
+]
+},
+{
+"target": "Grüße aus Köln.",
+"heard": "grüße auskönnen",
+"why": "whisper_base",
+"matched": 1,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Grüße",
+"grüße"
+],
+[
+"missing",
+"aus",
+null
+],
+[
+"substitution",
+"Köln",
+"auskönnen"
+]
+]
+},
+{
+"target": "Grüße aus Köln.",
+"heard": "Grass aus Köln",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 3,
+"ops": [
+[
+"substitution",
+"Grüße",
+"Grass"
+],
+[
+"match",
+"aus",
+"aus"
+],
+[
+"match",
+"Köln",
+"Köln"
+]
+]
+},
+{
+"target": "Grüße aus Köln.",
+"heard": "gross all",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Grüße",
+null
+],
+[
+"substitution",
+"aus",
+"gross"
+],
+[
+"substitution",
+"Köln",
+"all"
+]
+]
+},
+{
+"target": "Grüße aus Köln.",
+"heard": "Gras Ostkallen",
+"why": "whisper_small",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Grüße",
+null
+],
+[
+"substitution",
+"aus",
+"Gras"
+],
+[
+"substitution",
+"Köln",
+"Ostkallen"
+]
+]
+},
+{
+"target": "Grüße aus Köln.",
+"heard": "Grass or skullen",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"substitution",
+"Grüße",
+"Grass"
+],
+[
+"substitution",
+"aus",
+"or"
+],
+[
+"substitution",
+"Köln",
+"skullen"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Ich heiße Rohan.",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"heiße",
+"heiße"
+],
+[
+"match",
+"Rohan",
+"Rohan"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "ich heiße Roman",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"heiße",
+"heiße"
+],
+[
+"substitution",
+"Rohan",
+"Roman"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "DJ Johann",
+"why": "browser_de",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"heiße",
+"DJ"
+],
+[
+"substitution",
+"Rohan",
+"Johann"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Piche Rohan",
+"why": "browser_unset",
+"matched": 1,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"heiße",
+"Piche"
+],
+[
+"match",
+"Rohan",
+"Rohan"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Iche Rohan",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"heiße",
+"Iche"
+],
+[
+"match",
+"Rohan",
+"Rohan"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Iche Rohan.",
+"why": "whisper_base",
+"matched": 1,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"heiße",
+"Iche"
+],
+[
+"match",
+"Rohan",
+"Rohan"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Ich heiße Rohan Kumar.",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"heiße",
+"heiße"
+],
+[
+"match",
+"Rohan",
+"Rohan"
+],
+[
+"extra",
+null,
+"Kumar"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "ich heiße Johannes Oma",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"heiße",
+"heiße"
+],
+[
+"extra",
+null,
+"Johannes"
+],
+[
+"substitution",
+"Rohan",
+"Oma"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Ich heiße Rohan Thomas.",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"heiße",
+"heiße"
+],
+[
+"match",
+"Rohan",
+"Rohan"
+],
+[
+"extra",
+null,
+"Thomas"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Italo handgemalt",
+"why": "browser_de",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"heiße",
+"Italo"
+],
+[
+"substitution",
+"Rohan",
+"handgemalt"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Piche Rohan Kumar",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"substitution",
+"Ich",
+"Piche"
+],
+[
+"substitution",
+"heiße",
+"Rohan"
+],
+[
+"substitution",
+"Rohan",
+"Kumar"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Ich he Rohan Kumar",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"heiße",
+"he"
+],
+[
+"match",
+"Rohan",
+"Rohan"
+],
+[
+"extra",
+null,
+"Kumar"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Ich heu, Rohan Gommar.",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"heiße",
+"heu"
+],
+[
+"match",
+"Rohan",
+"Rohan"
+],
+[
+"extra",
+null,
+"Gommar"
+]
+]
+},
+{
+"target": "Der Hund ist groß.",
+"heard": "Der Hund ist klein.",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"Der"
+],
+[
+"match",
+"Hund",
+"Hund"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"groß",
+"klein"
+]
+]
+},
+{
+"target": "Der Hund ist groß.",
+"heard": "der Hund ist klein",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"der"
+],
+[
+"match",
+"Hund",
+"Hund"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"groß",
+"klein"
+]
+]
+},
+{
+"target": "Der Hund ist groß.",
+"heard": "der Hand heißt klein",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"der"
+],
+[
+"substitution",
+"Hund",
+"Hand"
+],
+[
+"substitution",
+"ist",
+"heißt"
+],
+[
+"substitution",
+"groß",
+"klein"
+]
+]
+},
+{
+"target": "Der Hund ist groß.",
+"heard": "then I flying",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Der",
+null
+],
+[
+"substitution",
+"Hund",
+"then"
+],
+[
+"substitution",
+"ist",
+"I"
+],
+[
+"substitution",
+"groß",
+"flying"
+]
+]
+},
+{
+"target": "Der Hund ist groß.",
+"heard": "Der Hund ist fliegend.",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"Der"
+],
+[
+"match",
+"Hund",
+"Hund"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"groß",
+"fliegend"
+]
+]
+},
+{
+"target": "Der Hund ist groß.",
+"heard": "Dead Hunt Ice Climb",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Der",
+"Dead"
+],
+[
+"substitution",
+"Hund",
+"Hunt"
+],
+[
+"substitution",
+"ist",
+"Ice"
+],
+[
+"substitution",
+"groß",
+"Climb"
+]
+]
+},
+{
+"target": "Wie heißt du?",
+"heard": "Wie heißt du?",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Wie",
+"Wie"
+],
+[
+"match",
+"heißt",
+"heißt"
+],
+[
+"match",
+"du",
+"du"
+]
+]
+},
+{
+"target": "Wie heißt du?",
+"heard": "wie heißt du",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Wie",
+"wie"
+],
+[
+"match",
+"heißt",
+"heißt"
+],
+[
+"match",
+"du",
+"du"
+]
+]
+},
+{
+"target": "Wie heißt du?",
+"heard": "Reheist.",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Wie",
+null
+],
+[
+"missing",
+"heißt",
+null
+],
+[
+"substitution",
+"du",
+"Reheist"
+]
+]
+},
+{
+"target": "Wie heißt du?",
+"heard": "Ich weiß nicht.",
+"why": "whisper_small",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"substitution",
+"Wie",
+"Ich"
+],
+[
+"substitution",
+"heißt",
+"weiß"
+],
+[
+"substitution",
+"du",
+"nicht"
+]
+]
+},
+{
+"target": "Wie heißt du?",
+"heard": "Ich heiße mich.",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"substitution",
+"Wie",
+"Ich"
+],
+[
+"substitution",
+"heißt",
+"heiße"
+],
+[
+"substitution",
+"du",
+"mich"
+]
+]
+},
+{
+"target": "Wie heißt du?",
+"heard": "we reached",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"missing",
+"Wie",
+null
+],
+[
+"substitution",
+"heißt",
+"we"
+],
+[
+"substitution",
+"du",
+"reached"
+]
+]
+},
+{
+"target": "Wie heißt du?",
+"heard": "Wie ist es zu tun?",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Wie",
+"Wie"
+],
+[
+"extra",
+null,
+"ist"
+],
+[
+"extra",
+null,
+"es"
+],
+[
+"substitution",
+"heißt",
+"zu"
+],
+[
+"substitution",
+"du",
+"tun"
+]
+]
+},
+{
+"target": "Wie heißt du?",
+"heard": "We he is to do.",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 3,
+"ops": [
+[
+"extra",
+null,
+"We"
+],
+[
+"extra",
+null,
+"he"
+],
+[
+"substitution",
+"Wie",
+"is"
+],
+[
+"substitution",
+"heißt",
+"to"
+],
+[
+"substitution",
+"du",
+"do"
+]
+]
+},
+{
+"target": "Wie schreibt man Buch?",
+"heard": "Wie schreibt man Buch?",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Wie",
+"Wie"
+],
+[
+"match",
+"schreibt",
+"schreibt"
+],
+[
+"match",
+"man",
+"man"
+],
+[
+"match",
+"Buch",
+"Buch"
+]
+]
+},
+{
+"target": "Wie schreibt man Buch?",
+"heard": "wie schreibt man Buch",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Wie",
+"wie"
+],
+[
+"match",
+"schreibt",
+"schreibt"
+],
+[
+"match",
+"man",
+"man"
+],
+[
+"match",
+"Buch",
+"Buch"
+]
+]
+},
+{
+"target": "Wie schreibt man Buch?",
+"heard": "Vishal Mandir",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Wie",
+null
+],
+[
+"missing",
+"schreibt",
+null
+],
+[
+"substitution",
+"man",
+"Vishal"
+],
+[
+"substitution",
+"Buch",
+"Mandir"
+]
+]
+},
+{
+"target": "Wie schreibt man Buch?",
+"heard": "wie schreibt man book",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Wie",
+"wie"
+],
+[
+"match",
+"schreibt",
+"schreibt"
+],
+[
+"match",
+"man",
+"man"
+],
+[
+"substitution",
+"Buch",
+"book"
+]
+]
+},
+{
+"target": "Wie schreibt man Buch?",
+"heard": "we tried man book",
+"why": "browser_unset",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Wie",
+"we"
+],
+[
+"substitution",
+"schreibt",
+"tried"
+],
+[
+"match",
+"man",
+"man"
+],
+[
+"substitution",
+"Buch",
+"book"
+]
+]
+},
+{
+"target": "Wie schreibt man Buch?",
+"heard": "Wischreit man book",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Wie",
+null
+],
+[
+"substitution",
+"schreibt",
+"Wischreit"
+],
+[
+"match",
+"man",
+"man"
+],
+[
+"substitution",
+"Buch",
+"book"
+]
+]
+},
+{
+"target": "Wie schreibt man Buch?",
+"heard": "Wir schreit Mann-Book.",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Wie",
+"Wir"
+],
+[
+"substitution",
+"schreibt",
+"schreit"
+],
+[
+"substitution",
+"man",
+"Mann"
+],
+[
+"substitution",
+"Buch",
+"Book"
+]
+]
+},
+{
+"target": "Woher kommst du? Ich komme aus Indien.",
+"heard": "Woher kommst du? Ich komme aus Indien.",
+"why": "ground truth",
+"matched": 7,
+"targetWords": 7,
+"ops": [
+[
+"match",
+"Woher",
+"Woher"
+],
+[
+"match",
+"kommst",
+"kommst"
+],
+[
+"match",
+"du",
+"du"
+],
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"komme",
+"komme"
+],
+[
+"match",
+"aus",
+"aus"
+],
+[
+"match",
+"Indien",
+"Indien"
+]
+]
+},
+{
+"target": "Woher kommst du? Ich komme aus Indien.",
+"heard": "woher kommst du",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 7,
+"ops": [
+[
+"match",
+"Woher",
+"woher"
+],
+[
+"match",
+"kommst",
+"kommst"
+],
+[
+"match",
+"du",
+"du"
+],
+[
+"missing",
+"Ich",
+null
+],
+[
+"missing",
+"komme",
+null
+],
+[
+"missing",
+"aus",
+null
+],
+[
+"missing",
+"Indien",
+null
+]
+]
+},
+{
+"target": "Woher kommst du? Ich komme aus Indien.",
+"heard": "Ishq",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 7,
+"ops": [
+[
+"missing",
+"Woher",
+null
+],
+[
+"missing",
+"kommst",
+null
+],
+[
+"missing",
+"du",
+null
+],
+[
+"missing",
+"Ich",
+null
+],
+[
+"missing",
+"komme",
+null
+],
+[
+"missing",
+"aus",
+null
+],
+[
+"substitution",
+"Indien",
+"Ishq"
+]
+]
+},
+{
+"target": "Woher kommst du? Ich komme aus Indien.",
+"heard": "Vulkan still each kam aus Indien",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 7,
+"ops": [
+[
+"missing",
+"Woher",
+null
+],
+[
+"substitution",
+"kommst",
+"Vulkan"
+],
+[
+"substitution",
+"du",
+"still"
+],
+[
+"substitution",
+"Ich",
+"each"
+],
+[
+"substitution",
+"komme",
+"kam"
+],
+[
+"match",
+"aus",
+"aus"
+],
+[
+"match",
+"Indien",
+"Indien"
+]
+]
+},
+{
+"target": "Woher kommst du? Ich komme aus Indien.",
+"heard": "what comes to each commerce Indian",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 7,
+"ops": [
+[
+"missing",
+"Woher",
+null
+],
+[
+"substitution",
+"kommst",
+"what"
+],
+[
+"substitution",
+"du",
+"comes"
+],
+[
+"substitution",
+"Ich",
+"to"
+],
+[
+"substitution",
+"komme",
+"each"
+],
+[
+"substitution",
+"aus",
+"commerce"
+],
+[
+"substitution",
+"Indien",
+"Indian"
+]
+]
+},
+{
+"target": "Woher kommst du? Ich komme aus Indien.",
+"heard": "War-Koms-Do, ich komme aus Indien.",
+"why": "whisper_small",
+"matched": 4,
+"targetWords": 7,
+"ops": [
+[
+"substitution",
+"Woher",
+"War"
+],
+[
+"substitution",
+"kommst",
+"Koms"
+],
+[
+"substitution",
+"du",
+"Do"
+],
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"komme",
+"komme"
+],
+[
+"match",
+"aus",
+"aus"
+],
+[
+"match",
+"Indien",
+"Indien"
+]
+]
+},
+{
+"target": "Woher kommst du? Ich komme aus Indien.",
+"heard": "Warcoms do, ich komme aus Indien.",
+"why": "whisper_base",
+"matched": 4,
+"targetWords": 7,
+"ops": [
+[
+"missing",
+"Woher",
+null
+],
+[
+"substitution",
+"kommst",
+"Warcoms"
+],
+[
+"substitution",
+"du",
+"do"
+],
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"komme",
+"komme"
+],
+[
+"match",
+"aus",
+"aus"
+],
+[
+"match",
+"Indien",
+"Indien"
+]
+]
+},
+{
+"target": "Wo ist der Bahnhof?",
+"heard": "Wo ist der Bahnhof?",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Wo",
+"Wo"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"der",
+"der"
+],
+[
+"match",
+"Bahnhof",
+"Bahnhof"
+]
+]
+},
+{
+"target": "Wo ist der Bahnhof?",
+"heard": "wo ist der Bahnhof",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Wo",
+"wo"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"der",
+"der"
+],
+[
+"match",
+"Bahnhof",
+"Bahnhof"
+]
+]
+},
+{
+"target": "Wo ist der Bahnhof?",
+"heard": "Wo ist der Panko?",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Wo",
+"Wo"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"der",
+"der"
+],
+[
+"substitution",
+"Bahnhof",
+"Panko"
+]
+]
+},
+{
+"target": "Wo ist der Bahnhof?",
+"heard": "Wo ist der Banko?",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Wo",
+"Wo"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"der",
+"der"
+],
+[
+"substitution",
+"Bahnhof",
+"Banko"
+]
+]
+},
+{
+"target": "Wo ist der Bahnhof?",
+"heard": "wo ist der Deinhard",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Wo",
+"wo"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"der",
+"der"
+],
+[
+"substitution",
+"Bahnhof",
+"Deinhard"
+]
+]
+},
+{
+"target": "Wo ist der Bahnhof?",
+"heard": "Wo ist der Banker?",
+"why": "whisper_small",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Wo",
+"Wo"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"der",
+"der"
+],
+[
+"substitution",
+"Bahnhof",
+"Banker"
+]
+]
+},
+{
+"target": "Wo ist der Bahnhof?",
+"heard": "Bu iced gelben Haft.",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Wo",
+"Bu"
+],
+[
+"substitution",
+"ist",
+"iced"
+],
+[
+"substitution",
+"der",
+"gelben"
+],
+[
+"substitution",
+"Bahnhof",
+"Haft"
+]
+]
+},
+{
+"target": "Entschuldigung, wie spät ist es?",
+"heard": "Entschuldigung, wie spät ist es?",
+"why": "ground truth",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Entschuldigung",
+"Entschuldigung"
+],
+[
+"match",
+"wie",
+"wie"
+],
+[
+"match",
+"spät",
+"spät"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"es",
+"es"
+]
+]
+},
+{
+"target": "Entschuldigung, wie spät ist es?",
+"heard": "Entschuldigung wie spät ist es",
+"why": "browser_de",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Entschuldigung",
+"Entschuldigung"
+],
+[
+"match",
+"wie",
+"wie"
+],
+[
+"match",
+"spät",
+"spät"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"es",
+"es"
+]
+]
+},
+{
+"target": "Entschuldigung, wie spät ist es?",
+"heard": "Entschuldigung, wie steht SS?",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Entschuldigung",
+"Entschuldigung"
+],
+[
+"match",
+"wie",
+"wie"
+],
+[
+"missing",
+"spät",
+null
+],
+[
+"substitution",
+"ist",
+"steht"
+],
+[
+"substitution",
+"es",
+"SS"
+]
+]
+},
+{
+"target": "Entschuldigung, wie spät ist es?",
+"heard": "Entschuldigung Wii Sport heißt es",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Entschuldigung",
+"Entschuldigung"
+],
+[
+"substitution",
+"wie",
+"Wii"
+],
+[
+"substitution",
+"spät",
+"Sport"
+],
+[
+"substitution",
+"ist",
+"heißt"
+],
+[
+"match",
+"es",
+"es"
+]
+]
+},
+{
+"target": "Entschuldigung, wie spät ist es?",
+"heard": "in Chandigarh",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Entschuldigung",
+null
+],
+[
+"missing",
+"wie",
+null
+],
+[
+"missing",
+"spät",
+null
+],
+[
+"substitution",
+"ist",
+"in"
+],
+[
+"substitution",
+"es",
+"Chandigarh"
+]
+]
+},
+{
+"target": "Entschuldigung, wie spät ist es?",
+"heard": "In Chaldigang, we spotized this?",
+"why": "whisper_small",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"Entschuldigung",
+"In"
+],
+[
+"substitution",
+"wie",
+"Chaldigang"
+],
+[
+"substitution",
+"spät",
+"we"
+],
+[
+"substitution",
+"ist",
+"spotized"
+],
+[
+"substitution",
+"es",
+"this"
+]
+]
+},
+{
+"target": "Entschuldigung, wie spät ist es?",
+"heard": "In Jaldegang, we sportized as?",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"Entschuldigung",
+"In"
+],
+[
+"substitution",
+"wie",
+"Jaldegang"
+],
+[
+"substitution",
+"spät",
+"we"
+],
+[
+"substitution",
+"ist",
+"sportized"
+],
+[
+"substitution",
+"es",
+"as"
+]
+]
+},
+{
+"target": "Es ist halb drei.",
+"heard": "Es ist halb drei.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Es",
+"Es"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"halb",
+"halb"
+],
+[
+"match",
+"drei",
+"drei"
+]
+]
+},
+{
+"target": "Es ist halb drei.",
+"heard": "es ist 2:30 Uhr",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Es",
+"es"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"extra",
+null,
+"2"
+],
+[
+"substitution",
+"halb",
+"30"
+],
+[
+"substitution",
+"drei",
+"Uhr"
+]
+]
+},
+{
+"target": "Es ist halb drei.",
+"heard": "Es ist halb frei.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Es",
+"Es"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"halb",
+"halb"
+],
+[
+"substitution",
+"drei",
+"frei"
+]
+]
+},
+{
+"target": "Es ist halb drei.",
+"heard": "es ist Halloween",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Es",
+"es"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"missing",
+"halb",
+null
+],
+[
+"substitution",
+"drei",
+"Halloween"
+]
+]
+},
+{
+"target": "Es ist halb drei.",
+"heard": "assist Health Day",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Es",
+null
+],
+[
+"substitution",
+"ist",
+"assist"
+],
+[
+"substitution",
+"halb",
+"Health"
+],
+[
+"substitution",
+"drei",
+"Day"
+]
+]
+},
+{
+"target": "Es ist halb drei.",
+"heard": "assist-help-dreh",
+"why": "whisper_small",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Es",
+null
+],
+[
+"substitution",
+"ist",
+"assist"
+],
+[
+"substitution",
+"halb",
+"help"
+],
+[
+"substitution",
+"drei",
+"dreh"
+]
+]
+},
+{
+"target": "Es ist halb drei.",
+"heard": "Assist Haldre",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Es",
+null
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"substitution",
+"halb",
+"Assist"
+],
+[
+"substitution",
+"drei",
+"Haldre"
+]
+]
+},
+{
+"target": "Guten Morgen, Frau Weber!",
+"heard": "Guten Morgen, Frau Weber!",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Guten",
+"Guten"
+],
+[
+"match",
+"Morgen",
+"Morgen"
+],
+[
+"match",
+"Frau",
+"Frau"
+],
+[
+"match",
+"Weber",
+"Weber"
+]
+]
+},
+{
+"target": "Guten Morgen, Frau Weber!",
+"heard": "guten Morgen Frau Weber",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Guten",
+"guten"
+],
+[
+"match",
+"Morgen",
+"Morgen"
+],
+[
+"match",
+"Frau",
+"Frau"
+],
+[
+"match",
+"Weber",
+"Weber"
+]
+]
+},
+{
+"target": "Guten Morgen, Frau Weber!",
+"heard": "good morning wallpaper",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Guten",
+null
+],
+[
+"substitution",
+"Morgen",
+"good"
+],
+[
+"substitution",
+"Frau",
+"morning"
+],
+[
+"substitution",
+"Weber",
+"wallpaper"
+]
+]
+},
+{
+"target": "Guten Morgen, Frau Weber!",
+"heard": "Guten Morgen, Frau Weber.",
+"why": "whisper_small",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Guten",
+"Guten"
+],
+[
+"match",
+"Morgen",
+"Morgen"
+],
+[
+"match",
+"Frau",
+"Frau"
+],
+[
+"match",
+"Weber",
+"Weber"
+]
+]
+},
+{
+"target": "Guten Morgen, Frau Weber!",
+"heard": "guten morgen from Weber",
+"why": "browser_unset",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Guten",
+"guten"
+],
+[
+"match",
+"Morgen",
+"morgen"
+],
+[
+"substitution",
+"Frau",
+"from"
+],
+[
+"match",
+"Weber",
+"Weber"
+]
+]
+},
+{
+"target": "Herzlich willkommen!",
+"heard": "Herzlich willkommen!",
+"why": "ground truth",
+"matched": 2,
+"targetWords": 2,
+"ops": [
+[
+"match",
+"Herzlich",
+"Herzlich"
+],
+[
+"match",
+"willkommen",
+"willkommen"
+]
+]
+},
+{
+"target": "Herzlich willkommen!",
+"heard": "herzlich willkommen",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 2,
+"ops": [
+[
+"match",
+"Herzlich",
+"herzlich"
+],
+[
+"match",
+"willkommen",
+"willkommen"
+]
+]
+},
+{
+"target": "Herzlich willkommen!",
+"heard": "Herzlich Willkommen!",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 2,
+"ops": [
+[
+"match",
+"Herzlich",
+"Herzlich"
+],
+[
+"match",
+"willkommen",
+"Willkommen"
+]
+]
+},
+{
+"target": "Herzlich willkommen!",
+"heard": "Hercules will come in",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 2,
+"ops": [
+[
+"extra",
+null,
+"Hercules"
+],
+[
+"extra",
+null,
+"will"
+],
+[
+"substitution",
+"Herzlich",
+"come"
+],
+[
+"substitution",
+"willkommen",
+"in"
+]
+]
+},
+{
+"target": "Herzlich willkommen!",
+"heard": "Herzlichen Willkommen!",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 2,
+"ops": [
+[
+"substitution",
+"Herzlich",
+"Herzlichen"
+],
+[
+"match",
+"willkommen",
+"Willkommen"
+]
+]
+},
+{
+"target": "Danke schön. Bitte schön.",
+"heard": "Danke schön. Bitte schön.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Danke",
+"Danke"
+],
+[
+"match",
+"schön",
+"schön"
+],
+[
+"match",
+"Bitte",
+"Bitte"
+],
+[
+"match",
+"schön",
+"schön"
+]
+]
+},
+{
+"target": "Danke schön. Bitte schön.",
+"heard": "danke schön",
+"why": "browser_de",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Danke",
+"danke"
+],
+[
+"missing",
+"schön",
+null
+],
+[
+"missing",
+"Bitte",
+null
+],
+[
+"match",
+"schön",
+"schön"
+]
+]
+},
+{
+"target": "Danke schön. Bitte schön.",
+"heard": "Danke schön! Bitte schön!",
+"why": "whisper_small",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Danke",
+"Danke"
+],
+[
+"match",
+"schön",
+"schön"
+],
+[
+"match",
+"Bitte",
+"Bitte"
+],
+[
+"match",
+"schön",
+"schön"
+]
+]
+},
+{
+"target": "Danke schön. Bitte schön.",
+"heard": "danke schön bitte schön",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Danke",
+"danke"
+],
+[
+"match",
+"schön",
+"schön"
+],
+[
+"match",
+"Bitte",
+"bitte"
+],
+[
+"match",
+"schön",
+"schön"
+]
+]
+},
+{
+"target": "Danke schön. Bitte schön.",
+"heard": "Dhan Kesari",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Danke",
+null
+],
+[
+"missing",
+"schön",
+null
+],
+[
+"substitution",
+"Bitte",
+"Dhan"
+],
+[
+"substitution",
+"schön",
+"Kesari"
+]
+]
+},
+{
+"target": "Danke schön. Bitte schön.",
+"heard": "Dankeschön, bitterschein.",
+"why": "whisper_base",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Danke",
+null
+],
+[
+"missing",
+"schön",
+null
+],
+[
+"substitution",
+"Bitte",
+"Dankeschön"
+],
+[
+"substitution",
+"schön",
+"bitterschein"
+]
+]
+},
+{
+"target": "Ich spreche ein bisschen Deutsch.",
+"heard": "Ich spreche ein bisschen Deutsch.",
+"why": "ground truth",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"spreche",
+"spreche"
+],
+[
+"match",
+"ein",
+"ein"
+],
+[
+"match",
+"bisschen",
+"bisschen"
+],
+[
+"match",
+"Deutsch",
+"Deutsch"
+]
+]
+},
+{
+"target": "Ich spreche ein bisschen Deutsch.",
+"heard": "ich spreche ein bisschen Deutsch",
+"why": "browser_de",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"spreche",
+"spreche"
+],
+[
+"match",
+"ein",
+"ein"
+],
+[
+"match",
+"bisschen",
+"bisschen"
+],
+[
+"match",
+"Deutsch",
+"Deutsch"
+]
+]
+},
+{
+"target": "Ich spreche ein bisschen Deutsch.",
+"heard": "expression",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"missing",
+"spreche",
+null
+],
+[
+"missing",
+"ein",
+null
+],
+[
+"missing",
+"bisschen",
+null
+],
+[
+"substitution",
+"Deutsch",
+"expression"
+]
+]
+},
+{
+"target": "Ich spreche ein bisschen Deutsch.",
+"heard": "Beach Splash ein bisschen Deutsch",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"Ich",
+"Beach"
+],
+[
+"substitution",
+"spreche",
+"Splash"
+],
+[
+"match",
+"ein",
+"ein"
+],
+[
+"match",
+"bisschen",
+"bisschen"
+],
+[
+"match",
+"Deutsch",
+"Deutsch"
+]
+]
+},
+{
+"target": "Ich spreche ein bisschen Deutsch.",
+"heard": "each fresh ambition diet",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"spreche",
+"each"
+],
+[
+"substitution",
+"ein",
+"fresh"
+],
+[
+"substitution",
+"bisschen",
+"ambition"
+],
+[
+"substitution",
+"Deutsch",
+"diet"
+]
+]
+},
+{
+"target": "Ich spreche ein bisschen Deutsch.",
+"heard": "Echt Sprech-Ambition Deutsch.",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"spreche",
+"Echt"
+],
+[
+"substitution",
+"ein",
+"Sprech"
+],
+[
+"substitution",
+"bisschen",
+"Ambition"
+],
+[
+"match",
+"Deutsch",
+"Deutsch"
+]
+]
+},
+{
+"target": "Ich spreche ein bisschen Deutsch.",
+"heard": "Ich spreche Anweschen Deutsch.",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"spreche",
+"spreche"
+],
+[
+"missing",
+"ein",
+null
+],
+[
+"substitution",
+"bisschen",
+"Anweschen"
+],
+[
+"match",
+"Deutsch",
+"Deutsch"
+]
+]
+},
+{
+"target": "Das Wasser ist kalt.",
+"heard": "Das Wasser ist warm.",
+"why": "ground truth",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Das",
+"Das"
+],
+[
+"match",
+"Wasser",
+"Wasser"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"kalt",
+"warm"
+]
+]
+},
+{
+"target": "Das Wasser ist kalt.",
+"heard": "das Wasser ist warm",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Das",
+"das"
+],
+[
+"match",
+"Wasser",
+"Wasser"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"kalt",
+"warm"
+]
+]
+},
+{
+"target": "Das Wasser ist kalt.",
+"heard": "that's what",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Das",
+null
+],
+[
+"substitution",
+"Wasser",
+"that"
+],
+[
+"substitution",
+"ist",
+"s"
+],
+[
+"substitution",
+"kalt",
+"what"
+]
+]
+},
+{
+"target": "Das Wasser ist kalt.",
+"heard": "does water is worm",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Das",
+"does"
+],
+[
+"substitution",
+"Wasser",
+"water"
+],
+[
+"substitution",
+"ist",
+"is"
+],
+[
+"substitution",
+"kalt",
+"worm"
+]
+]
+},
+{
+"target": "Das Wasser ist kalt.",
+"heard": "Das war das Reste warm.",
+"why": "whisper_base",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Das",
+"Das"
+],
+[
+"extra",
+null,
+"war"
+],
+[
+"substitution",
+"Wasser",
+"das"
+],
+[
+"substitution",
+"ist",
+"Reste"
+],
+[
+"substitution",
+"kalt",
+"warm"
+]
+]
+},
+{
+"target": "Ich bin fünfundzwanzig Jahre alt.",
+"heard": "Ich bin fünfundzwanzig Jahre alt.",
+"why": "ground truth",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"bin",
+"bin"
+],
+[
+"match",
+"fünfundzwanzig",
+"fünfundzwanzig"
+],
+[
+"match",
+"Jahre",
+"Jahre"
+],
+[
+"match",
+"alt",
+"alt"
+]
+]
+},
+{
+"target": "Ich bin fünfundzwanzig Jahre alt.",
+"heard": "ich bin 25 Jahre alt",
+"why": "browser_de",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"bin",
+"bin"
+],
+[
+"match",
+"fünfundzwanzig",
+"25"
+],
+[
+"match",
+"Jahre",
+"Jahre"
+],
+[
+"match",
+"alt",
+"alt"
+]
+]
+},
+{
+"target": "Ich bin fünfundzwanzig Jahre alt.",
+"heard": "Ich bin 25 Jahre alt.",
+"why": "whisper_small",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"bin",
+"bin"
+],
+[
+"match",
+"fünfundzwanzig",
+"25"
+],
+[
+"match",
+"Jahre",
+"Jahre"
+],
+[
+"match",
+"alt",
+"alt"
+]
+]
+},
+{
+"target": "Ich bin fünfundzwanzig Jahre alt.",
+"heard": "is Pension Fund sunset",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"substitution",
+"bin",
+"is"
+],
+[
+"substitution",
+"fünfundzwanzig",
+"Pension"
+],
+[
+"substitution",
+"Jahre",
+"Fund"
+],
+[
+"substitution",
+"alt",
+"sunset"
+]
+]
+},
+{
+"target": "Ich bin fünfundzwanzig Jahre alt.",
+"heard": "it's been fungible hall",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"Ich",
+"it"
+],
+[
+"substitution",
+"bin",
+"s"
+],
+[
+"substitution",
+"fünfundzwanzig",
+"been"
+],
+[
+"substitution",
+"Jahre",
+"fungible"
+],
+[
+"substitution",
+"alt",
+"hall"
+]
+]
+},
+{
+"target": "Ich bin fünfundzwanzig Jahre alt.",
+"heard": "Ich bin froh, wenn Sie die Zeit haben.",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"bin",
+"bin"
+],
+[
+"extra",
+null,
+"froh"
+],
+[
+"extra",
+null,
+"wenn"
+],
+[
+"extra",
+null,
+"Sie"
+],
+[
+"substitution",
+"fünfundzwanzig",
+"die"
+],
+[
+"substitution",
+"Jahre",
+"Zeit"
+],
+[
+"substitution",
+"alt",
+"haben"
+]
+]
+},
+{
+"target": "Ich bin fünfundzwanzig Jahre alt.",
+"heard": "Ich bin von von 20 jahre alt.",
+"why": "whisper_base",
+"matched": 4,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"bin",
+"bin"
+],
+[
+"extra",
+null,
+"von"
+],
+[
+"extra",
+null,
+"von"
+],
+[
+"substitution",
+"fünfundzwanzig",
+"20"
+],
+[
+"match",
+"Jahre",
+"jahre"
+],
+[
+"match",
+"alt",
+"alt"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "Fünf, sechs, sieben, acht.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Fünf",
+"Fünf"
+],
+[
+"match",
+"sechs",
+"sechs"
+],
+[
+"match",
+"sieben",
+"sieben"
+],
+[
+"match",
+"acht",
+"acht"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "5678",
+"why": "browser_de",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Fünf",
+null
+],
+[
+"missing",
+"sechs",
+null
+],
+[
+"missing",
+"sieben",
+null
+],
+[
+"substitution",
+"acht",
+"5678"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "physics",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Fünf",
+null
+],
+[
+"missing",
+"sechs",
+null
+],
+[
+"missing",
+"sieben",
+null
+],
+[
+"substitution",
+"acht",
+"physics"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "5, 6, 7, 8",
+"why": "whisper_small",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Fünf",
+"5"
+],
+[
+"match",
+"sechs",
+"6"
+],
+[
+"match",
+"sieben",
+"7"
+],
+[
+"match",
+"acht",
+"8"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "sex sleeping",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Fünf",
+null
+],
+[
+"missing",
+"sechs",
+null
+],
+[
+"substitution",
+"sieben",
+"sex"
+],
+[
+"substitution",
+"acht",
+"sleeping"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "Frim, 6, 7, 8",
+"why": "whisper_base",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Fünf",
+"Frim"
+],
+[
+"match",
+"sechs",
+"6"
+],
+[
+"match",
+"sieben",
+"7"
+],
+[
+"match",
+"acht",
+"8"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "Franz Sanchez 7 Arsch",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Fünf",
+"Franz"
+],
+[
+"substitution",
+"sechs",
+"Sanchez"
+],
+[
+"match",
+"sieben",
+"7"
+],
+[
+"substitution",
+"acht",
+"Arsch"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "France searches C1 Ash",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Fünf",
+"France"
+],
+[
+"substitution",
+"sechs",
+"searches"
+],
+[
+"substitution",
+"sieben",
+"C1"
+],
+[
+"substitution",
+"acht",
+"Ash"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "Fernf, Setsches, Sieben, Asch.",
+"why": "whisper_small",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Fünf",
+"Fernf"
+],
+[
+"substitution",
+"sechs",
+"Setsches"
+],
+[
+"match",
+"sieben",
+"Sieben"
+],
+[
+"substitution",
+"acht",
+"Asch"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "Funf, Setschis, Sieben, Ash",
+"why": "whisper_base",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"substitution",
+"Fünf",
+"Funf"
+],
+[
+"substitution",
+"sechs",
+"Setschis"
+],
+[
+"match",
+"sieben",
+"Sieben"
+],
+[
+"substitution",
+"acht",
+"Ash"
+]
+]
+},
+{
+"target": "Mein Name ist Priya Sharma.",
+"heard": "Mein Name ist Priya Sharma.",
+"why": "ground truth",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Mein",
+"Mein"
+],
+[
+"match",
+"Name",
+"Name"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"Priya",
+"Priya"
+],
+[
+"match",
+"Sharma",
+"Sharma"
+]
+]
+},
+{
+"target": "Mein Name ist Priya Sharma.",
+"heard": "mein Name ist Frieda Sharma",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Mein",
+"mein"
+],
+[
+"match",
+"Name",
+"Name"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"Priya",
+"Frieda"
+],
+[
+"match",
+"Sharma",
+"Sharma"
+]
+]
+},
+{
+"target": "Mein Name ist Priya Sharma.",
+"heard": "my name is Priya Sharma",
+"why": "browser_unset",
+"matched": 3,
+"targetWords": 5,
+"ops": [
+[
+"substitution",
+"Mein",
+"my"
+],
+[
+"match",
+"Name",
+"name"
+],
+[
+"substitution",
+"ist",
+"is"
+],
+[
+"match",
+"Priya",
+"Priya"
+],
+[
+"match",
+"Sharma",
+"Sharma"
+]
+]
+},
+{
+"target": "Mein Name ist Priya Sharma.",
+"heard": "mein Name ist Pia Sharma",
+"why": "browser_de",
+"matched": 4,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Mein",
+"mein"
+],
+[
+"match",
+"Name",
+"Name"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"substitution",
+"Priya",
+"Pia"
+],
+[
+"match",
+"Sharma",
+"Sharma"
+]
+]
+},
+{
+"target": "Ich trinke gern Wasser.",
+"heard": "Ich trinke gern Wasser.",
+"why": "ground truth",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"trinke",
+"trinke"
+],
+[
+"match",
+"gern",
+"gern"
+],
+[
+"match",
+"Wasser",
+"Wasser"
+]
+]
+},
+{
+"target": "Ich trinke gern Wasser.",
+"heard": "ich trinke gerne Wasser",
+"why": "browser_de",
+"matched": 3,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"ich"
+],
+[
+"match",
+"trinke",
+"trinke"
+],
+[
+"substitution",
+"gern",
+"gerne"
+],
+[
+"match",
+"Wasser",
+"Wasser"
+]
+]
+},
+{
+"target": "Ich trinke gern Wasser.",
+"heard": "Ich bin gegen Wasser.",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"substitution",
+"trinke",
+"bin"
+],
+[
+"substitution",
+"gern",
+"gegen"
+],
+[
+"match",
+"Wasser",
+"Wasser"
+]
+]
+},
+{
+"target": "Ich trinke gern Wasser.",
+"heard": "Beach drink a girl Wasser",
+"why": "browser_de",
+"matched": 1,
+"targetWords": 4,
+"ops": [
+[
+"extra",
+null,
+"Beach"
+],
+[
+"substitution",
+"Ich",
+"drink"
+],
+[
+"substitution",
+"trinke",
+"a"
+],
+[
+"substitution",
+"gern",
+"girl"
+],
+[
+"match",
+"Wasser",
+"Wasser"
+]
+]
+},
+{
+"target": "Ich trinke gern Wasser.",
+"heard": "Priyanka Gandhi",
+"why": "browser_unset",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Ich",
+null
+],
+[
+"missing",
+"trinke",
+null
+],
+[
+"substitution",
+"gern",
+"Priyanka"
+],
+[
+"substitution",
+"Wasser",
+"Gandhi"
+]
+]
+},
+{
+"target": "Ich trinke gern Wasser.",
+"heard": "Ich trinke Gernwasser.",
+"why": "whisper_small",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"trinke",
+"trinke"
+],
+[
+"missing",
+"gern",
+null
+],
+[
+"substitution",
+"Wasser",
+"Gernwasser"
+]
+]
+},
+{
+"target": "Ich trinke gern Wasser.",
+"heard": "Ich trinke Gunwasser.",
+"why": "whisper_base",
+"matched": 2,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"trinke",
+"trinke"
+],
+[
+"missing",
+"gern",
+null
+],
+[
+"substitution",
+"Wasser",
+"Gunwasser"
+]
+]
+},
+{
+"target": "Die Straße ist lang.",
+"heard": "Die Strasse ist lang",
+"why": "ß = ss",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Die",
+"Die"
+],
+[
+"match",
+"Straße",
+"Strasse"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"lang",
+"lang"
+]
+]
+},
+{
+"target": "Der Käse ist gut.",
+"heard": "Der Kaese ist gut",
+"why": "ä = ae",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Der",
+"Der"
+],
+[
+"match",
+"Käse",
+"Kaese"
+],
+[
+"match",
+"ist",
+"ist"
+],
+[
+"match",
+"gut",
+"gut"
+]
+]
+},
+{
+"target": "Ich bin fünfundzwanzig Jahre alt.",
+"heard": "Ich bin 25 Jahre alt",
+"why": "digits",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"bin",
+"bin"
+],
+[
+"match",
+"fünfundzwanzig",
+"25"
+],
+[
+"match",
+"Jahre",
+"Jahre"
+],
+[
+"match",
+"alt",
+"alt"
+]
+]
+},
+{
+"target": "Ich bin einundzwanzig.",
+"heard": "Ich bin 21",
+"why": "ein-und",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Ich",
+"Ich"
+],
+[
+"match",
+"bin",
+"bin"
+],
+[
+"match",
+"einundzwanzig",
+"21"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "BUCH Buch",
+"why": "caps run",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"B",
+"B"
+],
+[
+"match",
+"U",
+"U"
+],
+[
+"match",
+"C",
+"C"
+],
+[
+"match",
+"H",
+"H"
+],
+[
+"match",
+"Buch",
+"Buch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "be u ce ha Buch",
+"why": "letter names",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"B",
+"be"
+],
+[
+"match",
+"U",
+"u"
+],
+[
+"match",
+"C",
+"ce"
+],
+[
+"match",
+"H",
+"ha"
+],
+[
+"match",
+"Buch",
+"Buch"
+]
+]
+},
+{
+"target": "B-U-C-H. Buch.",
+"heard": "Buch Buch",
+"why": "lowercase word is not a spelling",
+"matched": 1,
+"targetWords": 5,
+"ops": [
+[
+"missing",
+"B",
+null
+],
+[
+"missing",
+"U",
+null
+],
+[
+"missing",
+"C",
+null
+],
+[
+"substitution",
+"H",
+"Buch"
+],
+[
+"match",
+"Buch",
+"Buch"
+]
+]
+},
+{
+"target": "Die Zeit ist da.",
+"heard": "",
+"why": "empty",
+"matched": 0,
+"targetWords": 4,
+"ops": [
+[
+"missing",
+"Die",
+null
+],
+[
+"missing",
+"Zeit",
+null
+],
+[
+"missing",
+"ist",
+null
+],
+[
+"missing",
+"da",
+null
+]
+]
+},
+{
+"target": "Wie heißt du?",
+"heard": "Wie heisst du",
+"why": "ß fold",
+"matched": 3,
+"targetWords": 3,
+"ops": [
+[
+"match",
+"Wie",
+"Wie"
+],
+[
+"match",
+"heißt",
+"heisst"
+],
+[
+"match",
+"du",
+"du"
+]
+]
+},
+{
+"target": "Ich heiße Rohan.",
+"heard": "Rohan heiße ich",
+"why": "order matters",
+"matched": 1,
+"targetWords": 3,
+"ops": [
+[
+"substitution",
+"Ich",
+"Rohan"
+],
+[
+"match",
+"heiße",
+"heiße"
+],
+[
+"substitution",
+"Rohan",
+"ich"
+]
+]
+},
+{
+"target": "Fünf, sechs, sieben, acht.",
+"heard": "5 6 7 8",
+"why": "numbers",
+"matched": 4,
+"targetWords": 4,
+"ops": [
+[
+"match",
+"Fünf",
+"5"
+],
+[
+"match",
+"sechs",
+"6"
+],
+[
+"match",
+"sieben",
+"7"
+],
+[
+"match",
+"acht",
+"8"
+]
+]
+},
+{
+"target": "Käse. K-Ä-S-E.",
+"heard": "Käse K Ä S E",
+"why": "spelled umlaut",
+"matched": 5,
+"targetWords": 5,
+"ops": [
+[
+"match",
+"Käse",
+"Käse"
+],
+[
+"match",
+"K",
+"K"
+],
+[
+"match",
+"Ä",
+"Ä"
+],
+[
+"match",
+"S",
+"S"
+],
+[
+"match",
+"E",
+"E"
+]
+]
+}
+]

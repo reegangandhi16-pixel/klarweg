@@ -3893,11 +3893,15 @@
       // situation and the model answer (`de`) stays hidden behind a reveal.
       // `de` remains the TTS text and the wordAccuracy target either way.
       const hasTask = !!p.task;
-      // Pilot: "Hear model" becomes the sentence audio control (pill variant), in place.
+      // Pilot: the model answer's audio control (pill variant), in place. The
+      // learner is meant to say it back, hence "Hear & Repeat Aloud".
       const hearBtn = SentencePlay.enabled
-        ? SentencePlay.button(p.de, { label: 'Hear model' })
+        ? SentencePlay.button(p.de, { label: 'Hear & Repeat Aloud' })
         : el('button', { class: 'btn btn-soft btn-small', onclick: () => { var fn = window.KW_speak || window.KW_playAudio; if (fn) fn(p.de); else Audio.speak(p.de, 0.9); } }, el('span', { html: ICON.speaker, style: 'width:14px;display:inline-flex' }), ' Hear model');
-      const row = el('div', { style: 'display:flex;gap:10px;flex-wrap:wrap' }, hearBtn);
+      // A1·01: the task prompt is its own recording (a question the learner
+      // answers, not repeats), so it gets its own control, first in the row.
+      const questionBtn = SentencePlay.enabled && hasTask ? SentencePlay.button(p.task, { label: 'Hear Question' }) : null;
+      const row = el('div', { style: 'display:flex;gap:10px;flex-wrap:wrap' }, questionBtn, hearBtn);
       card.append(
         el('div', { class: 'speak-prompt de' }, hasTask ? p.task : p.de),
         el('div', { class: 'speak-hint' }, hasTask ? (p.taskEn || '') : p.en),
@@ -3909,8 +3913,9 @@
         const revealBtn = el('button', { class: 'btn btn-soft btn-small', onclick: () => {
           const open = model.style.display !== 'none';
           model.style.display = open ? 'none' : 'block';
-          revealBtn.lastChild.textContent = open ? 'Show model answer' : 'Hide model answer';
-        } }, 'Show model answer');
+          const short = SentencePlay.enabled;            // A1·01 pilot wording
+          revealBtn.lastChild.textContent = open ? (short ? 'Show Answer' : 'Show model answer') : (short ? 'Hide Answer' : 'Hide model answer');
+        } }, SentencePlay.enabled ? 'Show Answer' : 'Show model answer');
         row.appendChild(revealBtn);
         card.appendChild(model);
       }
@@ -4130,6 +4135,7 @@
   // when recognition returned a transcript, the existing word-match check.
   function renderSession(s) {
     if (s.reported) return;      // a classified permission/context message is already on screen
+    if (s.whisper) { renderWhisper(s); return; }
     const r = s.result;
     r.innerHTML = '';
     // Only a non-empty transcript that the recogniser has finished with is
@@ -4180,6 +4186,8 @@
     if (!s) return;
     btn._kwSession = null;
     clearTimeout(s.capTimer);
+    s.stoppedAt = Date.now();
+    if (s.vadStop) s.vadStop();
     micIdle(btn);
     s.pending = !!(s.rec && !s.recEnded);
     // stop(), never abort() — abort() throws away the utterance the learner
@@ -4277,7 +4285,12 @@
     result._kwScrolled = false;
     micEnter(btn, ' Listening…');
 
-    const SR = speechRecognitionCtor();
+    // A1·01 Whisper pilot: when enabled (and the browser can record), the
+    // recording goes to the Klarweg speech endpoint and browser recognition is
+    // not used. Otherwise this is the unchanged browser-recognition path.
+    const SPEECH = speechPilotEndpoint();
+    const pilot = !!(SPEECH && navigator.mediaDevices && navigator.mediaDevices.getUserMedia && typeof MediaRecorder !== 'undefined');
+    const SR = pilot ? null : speechRecognitionCtor();
     // Release any model clip before the mic opens: on iOS a playing <audio>
     // holds the audio session and recognition then hangs without an event,
     // and on every platform the recogniser would otherwise hear the model.
@@ -4294,13 +4307,15 @@
     result._kwGen = (result._kwGen || 0) + 1;
     const session = { p: p, btn: btn, result: result, gen: result._kwGen, stream: null, recorder: null, rec: null,
       heard: null, interim: null, blob: null, chunks: null, mime: '', recError: null, diag: null, reported: false, recEnded: false,
-      recorderDone: false, noRecognition: false, pending: false, capTimer: null, settleTimer: null };
+      recorderDone: false, noRecognition: false, pending: false, capTimer: null, settleTimer: null,
+      whisper: pilot ? SPEECH : null };
     const renderIfCurrent = () => { if (session.gen === result._kwGen && !btn._kwSession) renderSession(session); };
     const contextHint = () => (env.policy === false || env.framed)
       ? { kind: 'context-blocked', msg: EMBEDDED, tab: true }
       : { kind: 'permission-denied', msg: REC_ERROR_MSG['permission-denied'] };
 
-    if (!SR) trace('recognition', false, 'SpeechRecognition not supported');
+    if (pilot) trace('whisper-pilot', true, SPEECH);
+    else if (!SR) trace('recognition', false, 'SpeechRecognition not supported');
     else {
       try {
         const rec = new SR();
@@ -4372,8 +4387,8 @@
 
     /* Recognition unavailable (e.g. Firefox) — fall back to record-only so the
        button still does something useful. */
-    trace('fallback', true, 'no recognition — record-only attempt');
-    session.noRecognition = true;
+    if (!pilot) trace('fallback', true, 'no recognition — record-only attempt');
+    session.noRecognition = !pilot;
     let diag = null, stream = null;
     if (window.isSecureContext === false) { trace('secureContext', false); diag = { kind: 'context-blocked', msg: 'The microphone needs a secure (https) page. Open this chapter over https and try again.' }; }
     else if (env.policy === false) { trace('framePolicy', false, 'microphone not allowed for this frame'); diag = { kind: 'context-blocked', msg: EMBEDDED, tab: true }; }
@@ -4395,7 +4410,10 @@
     if (!startRecorder(session)) { releaseStream(session); reset(); say('error', 'The microphone opened, but this browser could not record from it.'); return; }
     btn._kwSession = session;
     micEnter(btn, ' Stop & check');
-    say('recording', 'Recording — say the sentence above, then press Stop & check.');
+    if (pilot) {
+      say('recording', 'Listening — say the answer, then press Stop & check. It also stops by itself after a short pause.');
+      watchForPause(session);
+    } else say('recording', 'Recording — say the sentence above, then press Stop & check.');
     session.capTimer = setTimeout(() => { if (btn._kwSession === session) { trace('autostop', true, '20s cap'); stopSession(btn); } }, 20000);
   }
 
@@ -4498,6 +4516,230 @@
       el('div', { class: 'speak-score-val', style: real ? '' : 'color:var(--ink-quaternary)' }, val),
       el('div', { class: 'speak-score-label' }, label, real ? null : el('span', { class: 'preview-tag' }, 'soon')));
   }
+  /* ---- A1·01 Whisper pilot (feature flag) ----------------------------------
+     Off unless an endpoint is configured: window.KW_SPEECH_API (https, set by
+     site config — not set anywhere yet), or for local testing ?kwspeech=<url>
+     with a loopback service on a loopback page. Only A1·01. The service only
+     transcribes; Word Match is computed below by deterministic code. */
+  const SPEECH_PILOT_CHAPTER = 'a1-1-alphabet';
+  const SPEECH_TIMEOUT_MS = 25000;
+  function speechPilotEndpoint() {
+    if (C.id !== SPEECH_PILOT_CHAPTER) return null;
+    const g = window.KW_SPEECH_API;
+    if (typeof g === 'string' && /^https:\/\/[^/]+/.test(g)) return g.replace(/\/+$/, '');
+    const m = /[?&]kwspeech=([^&]+)/.exec(location.search || '');
+    if (m) {
+      try {
+        const u = new URL(decodeURIComponent(m[1]));
+        const loop = (h) => h === '127.0.0.1' || h === 'localhost';
+        if (/^https?:$/.test(u.protocol) && loop(u.hostname) && loop(location.hostname)) return u.origin;
+      } catch (e) {}
+    }
+    return null;
+  }
+  // Stop by itself after ~1.5 s of quiet that follows some speech (cap stays 20 s).
+  function watchForPause(session) {
+    let ctx = null, timer = null;
+    session.vadStop = () => { clearInterval(timer); timer = null; if (ctx) { try { ctx.close(); } catch (e) {} ctx = null; } session.vadStop = null; };
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC || !session.stream) return;
+      ctx = new AC();
+      const an = ctx.createAnalyser(); an.fftSize = 1024;
+      ctx.createMediaStreamSource(session.stream).connect(an);
+      const buf = new Float32Array(an.fftSize);
+      let voiced = 0, quiet = 0;
+      timer = setInterval(() => {
+        if (session.btn._kwSession !== session) { if (session.vadStop) session.vadStop(); return; }
+        an.getFloatTimeDomainData(buf);
+        let sum = 0; for (let i = 0; i < buf.length; i++) sum += buf[i] * buf[i];
+        const rms = Math.sqrt(sum / buf.length);
+        if (rms > 0.02) { voiced += 100; quiet = 0; } else if (voiced >= 300) quiet += 100;
+        if (voiced >= 300 && quiet >= 1500) { trace('autostop', true, 'pause after speech'); stopSession(session.btn); }
+      }, 100);
+    } catch (e) { trace('vad', false, String(e && e.name || e)); }
+  }
+  function speechExt(type) { return /mp4|m4a|aac/.test(type) ? '.m4a' : /ogg/.test(type) ? '.ogg' : /wav/.test(type) ? '.wav' : '.webm'; }
+  // Send the finished recording; every call is a fresh request (no caching).
+  function whisperCheck(s) {
+    const token = s.wToken = {};
+    s.wBusy = true; s.wError = null; s.check = null; s.heard = null;
+    clearTimeout(s.btn._kwIdleTimer);              // a pending micIdle() must not relabel the button mid-check
+    s.btn._kwBusy = true; s.btn.lastChild.textContent = ' Checking…'; s.btn.setAttribute('aria-busy', 'true');
+    const fd = new FormData();
+    fd.append('audio', s.blob, 'speech' + speechExt(s.blob.type || ''));
+    const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const limit = typeof window.KW_SPEECH_TIMEOUT_MS === 'number' ? window.KW_SPEECH_TIMEOUT_MS : SPEECH_TIMEOUT_MS;
+    const timer = setTimeout(() => { if (ctl) ctl.abort(); }, limit);
+    const t0 = Date.now();
+    trace('whisper.request', true, { bytes: s.blob.size, type: s.blob.type });
+    fetch(s.whisper + '/v1/transcribe', { method: 'POST', body: fd, cache: 'no-store', credentials: 'omit', signal: ctl ? ctl.signal : undefined })
+      .then((r) => r.json().catch(() => ({})).then((j) => (r.ok ? j : Promise.reject({ status: r.status, body: j }))))
+      .then((j) => {
+        if (s.wToken !== token) return;
+        s.heard = String(j.text || '').trim();
+        s.check = s.heard ? wordMatch(s.p.de, s.heard) : null;
+        s.wMeta = { model: j.model, audioSec: j.audio_sec, serverMs: j.total_ms };
+      })
+      .catch((e) => {
+        if (s.wToken !== token) return;
+        const st = e && e.status;
+        s.wError = (e && e.name === 'AbortError') ? 'timeout' : st === 413 ? 'too-long' : st === 503 ? 'busy' : st === 504 ? 'timeout' : st === 422 || st === 415 || st === 400 ? 'unreadable' : st ? 'server' : 'network';
+      })
+      .finally(() => {
+        clearTimeout(timer);
+        if (s.wToken !== token) return;
+        s.wBusy = false;
+        s.latencyMs = Date.now() - (s.stoppedAt || t0);
+        s.btn._kwBusy = false; s.btn.removeAttribute('aria-busy'); micIdle(s.btn);
+        trace('whisper.result', !s.wError, { error: s.wError, heard: s.heard, wordMatch: s.check && s.check.percent, endToResultMs: s.latencyMs, requestMs: Date.now() - t0 });
+        if (s.gen === s.result._kwGen) renderWhisper(s);
+      });
+  }
+  const WHISPER_ERRORS = {
+    timeout: ['The check took too long, so nothing was scored.', true],
+    network: ['The speech check could not be reached. Check your connection.', true],
+    busy: ['The speech check is busy right now.', true],
+    server: ['The speech check had a problem with this recording.', true],
+    'too-long': ['The recording is longer than 30 seconds. Record a shorter answer.', false],
+    unreadable: ['The recording could not be read. Please record again.', false]
+  };
+  function renderWhisper(s) {
+    const r = s.result;
+    if (s.gen !== r._kwGen) return;
+    r.setAttribute('aria-live', 'polite');          // the result arrives after "Checking…": announce it
+    r.innerHTML = '';
+    const line = (txt, style) => el('p', { class: 'muted', style: 'font-size:14px;margin:0;' + (style || '') }, txt);
+    if (!s.blob && !s.recorderDone) {
+      r.setAttribute('data-mic-state', 'checking'); r.appendChild(line('Checking…'));
+    } else if (!s.blob) {
+      r.setAttribute('data-mic-state', 'no-recording');
+      r.appendChild(line('No audio was recorded, so nothing was checked. Press Record & check and speak close to the microphone.'));
+    } else {
+      if (!s.wRequested) { s.wRequested = true; whisperCheck(s); }
+      if (s.wBusy) {
+        r.setAttribute('data-mic-state', 'checking');
+        r.appendChild(el('p', { class: 'muted kw-wm-checking', style: 'font-size:14px;margin:0' }, el('span', { class: 'kw-wm-spin', 'aria-hidden': 'true' }), 'Checking…'));
+      } else if (s.wError) {
+        const [msg, retry] = WHISPER_ERRORS[s.wError] || WHISPER_ERRORS.server;
+        r.setAttribute('data-mic-state', 'check-error');
+        r.appendChild(line(msg + (retry ? ' Your recording is kept — you can check it again.' : '')));
+        if (retry) {
+          const again = el('button', { class: 'btn btn-soft btn-small', type: 'button', style: 'margin-top:10px' }, 'Check again');
+          again.addEventListener('click', () => { whisperCheck(s); renderWhisper(s); });
+          r.appendChild(again);
+        }
+      } else if (!s.heard) {
+        r.setAttribute('data-mic-state', 'no-speech');
+        r.appendChild(line('No German words were recognised in the recording, so nothing was scored. Press Record & check and say the answer again.'));
+      } else {
+        const c = s.check;
+        r.setAttribute('data-mic-state', 'result');
+        const label = (t) => el('div', { class: 'muted', style: 'font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:14px 0 6px' }, t);
+        const words = el('ul', { class: 'kw-wm-words', 'aria-label': 'Word by word' });
+        c.words.forEach((w) => {
+          const kind = w.result === 'match' ? 'ok' : w.result === 'extra' ? 'extra' : 'bad';
+          const text = w.result === 'match' ? w.target + ' ✓' : w.result === 'extra' ? '+' + w.heard : w.target + ' ✗';
+          const note = w.result === 'substitution' ? 'heard “' + w.heard + '”' : w.result === 'missing' ? 'missing' : w.result === 'extra' ? 'extra word' : '';
+          const sr = w.result === 'match' ? w.target + ': matched' : w.result === 'substitution' ? w.target + ': not matched, heard ' + w.heard : w.result === 'missing' ? w.target + ': missing' : 'extra word ' + w.heard;
+          words.appendChild(el('li', { class: 'kw-wm-w ' + kind, 'aria-label': sr }, el('span', { 'aria-hidden': 'true' }, text), note ? el('small', { 'aria-hidden': 'true' }, note) : null));
+        });
+        r.append(
+          label('Target'), el('div', { class: 'speak-heard de' }, s.p.de),
+          label('Recognized'), el('div', { class: 'speak-heard de' }, s.heard),
+          words,
+          el('p', { class: 'kw-wm-score' }, 'Word Match: ' + c.matched + '/' + c.targetWords, el('span', { class: 'muted' }, ' · ' + c.percent + '%')),
+          el('p', { class: 'muted speak-score-note', style: 'font-size:12px;margin-top:4px' }, 'Compares the recognized words with the answer above. It is not a pronunciation score.'),
+          aiSlot({ kind: 'speaking', itemId: 'speaking.' + C.speaking.indexOf(s.p), transcript: s.heard, isExam: IS_EXAM }));
+      }
+      if (r._kwUrl) { try { URL.revokeObjectURL(r._kwUrl); } catch (e) {} }
+      r._kwUrl = URL.createObjectURL(s.blob);
+      r.append(
+        el('div', { class: 'muted', style: 'font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 8px' }, 'Your recording · ' + Math.round(s.blob.size / 1024) + ' KB'),
+        el('audio', { controls: '', src: r._kwUrl, style: 'width:100%;max-width:420px;display:block' }));
+    }
+    r.classList.add('is-visible');
+    r.dataset.latencyMs = s.latencyMs == null ? '' : String(s.latencyMs);
+    trace('ui.render', true, { state: r.getAttribute('data-mic-state'), wordMatch: s.check ? s.check.percent : null });
+    micReveal(r, true);
+  }
+
+  // ---- Word Match scorer (deterministic) ----
+  /* Same rules as the benchmark scorer (speech/score_reference.py):
+     normalise (NFC, lowercase, punctuation) -> tokenise (B-U-C-H = four
+     letters, digits -> German number words) -> word alignment by edit
+     distance -> match / substitution / missing / extra.
+     Word Match = matched target words / target words; extra words are listed,
+     not counted. Equal: ä=ae, ö=oe, ü=ue, ß=ss; a spelled letter = its German
+     letter name; an all-capitals run = the target's spelled letters. It never
+     rewrites grammar: "ein" for "einen" stays an error. */
+  const WM_LETTERS = { a: 'a', be: 'b', beh: 'b', ce: 'c', ze: 'c', zeh: 'c', tse: 'c', de: 'd', deh: 'd', e: 'e', ef: 'f', eff: 'f', ge: 'g', geh: 'g',
+    ha: 'h', hah: 'h', i: 'i', jot: 'j', ka: 'k', kah: 'k', el: 'l', ell: 'l', em: 'm', emm: 'm', en: 'n', enn: 'n', o: 'o', pe: 'p', peh: 'p', ku: 'q',
+    kuh: 'q', er: 'r', err: 'r', es: 's', ess: 's', te: 't', teh: 't', u: 'u', vau: 'v', fau: 'v', we: 'w', weh: 'w', ix: 'x', ypsilon: 'y', zet: 'z',
+    zett: 'z', 'ä': 'ä', ae: 'ä', 'ö': 'ö', oe: 'ö', 'ü': 'ü', ue: 'ü', eszett: 'ß' };
+  const WM_ONES = ['null', 'eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf', 'zwölf', 'dreizehn', 'vierzehn',
+    'fünfzehn', 'sechzehn', 'siebzehn', 'achtzehn', 'neunzehn'];
+  const WM_TENS = { 20: 'zwanzig', 30: 'dreißig', 40: 'vierzig', 50: 'fünfzig', 60: 'sechzig', 70: 'siebzig', 80: 'achtzig', 90: 'neunzig' };
+  const WM_PUNCT = /[„“”"'‚‘’«»:;,.!?¿¡()[\]…—–/]/g;
+  function wmNumber(n) {
+    if (n < 20) return WM_ONES[n];
+    if (n < 100) { const o = n % 10, t = n - o; return o ? (o === 1 ? 'ein' : WM_ONES[o]) + 'und' + WM_TENS[t] : WM_TENS[t]; }
+    return String(n);
+  }
+  function wmTokens(text) {
+    const out = [];
+    String(text == null ? '' : text).normalize('NFC').replace(WM_PUNCT, ' ').split(/\s+/).filter(Boolean).forEach((raw) => {
+      const parts = raw.split('-').filter(Boolean);
+      if (parts.length > 1 && parts.every((x) => [...x].length === 1)) { parts.forEach((x) => out.push([x.toLowerCase(), x, true])); return; }
+      parts.forEach((x) => {
+        const low = x.toLowerCase();
+        if (/^[0-9]+$/.test(low)) out.push([wmNumber(parseInt(low, 10)), x, false]);
+        else out.push([low, x, [...x].length === 1 && /^\p{L}$/u.test(x)]);
+      });
+    });
+    return out;
+  }
+  const wmFold = (w) => w.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
+  function wmSame(t, r) {
+    if (wmFold(t[0]) === wmFold(r[0])) return true;
+    if (t[2] && [...t[0]].length === 1) return WM_LETTERS[r[0]] === t[0] || WM_LETTERS[wmFold(r[0])] === t[0];
+    return false;
+  }
+  function wmExpandCaps(T, R) {
+    const groups = []; let cur = [];
+    T.concat([['', '', false]]).forEach((t) => {
+      if (t[2] && [...t[0]].length === 1) cur.push(t[0]);
+      else { if (cur.length > 1) groups.push(cur.join('')); cur = []; }
+    });
+    const out = [];
+    R.forEach((r) => {
+      const raw = r[1];
+      if ([...raw].length > 1 && /^\p{L}+$/u.test(raw) && raw === raw.toUpperCase() && raw !== raw.toLowerCase() && groups.indexOf(raw.toLowerCase()) !== -1) {
+        [...raw].forEach((ch) => out.push([ch.toLowerCase(), ch, true]));
+      } else out.push(r);
+    });
+    return out;
+  }
+  function wordMatch(target, heard) {
+    const T = wmTokens(target), R = wmExpandCaps(T, wmTokens(heard));
+    const n = T.length, m = R.length;
+    const D = Array.from({ length: n + 1 }, (_, i) => Array.from({ length: m + 1 }, (_, j) => (i === 0 ? j : j === 0 ? i : 0)));
+    for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++)
+      D[i][j] = Math.min(D[i - 1][j - 1] + (wmSame(T[i - 1], R[j - 1]) ? 0 : 1), D[i - 1][j] + 1, D[i][j - 1] + 1);
+    const ops = []; let i = n, j = m;
+    while (i > 0 || j > 0) {
+      if (i > 0 && j > 0 && wmSame(T[i - 1], R[j - 1]) && D[i][j] === D[i - 1][j - 1]) { ops.push({ result: 'match', target: T[i - 1][1], heard: R[j - 1][1] }); i--; j--; }
+      else if (i > 0 && j > 0 && D[i][j] === D[i - 1][j - 1] + 1) { ops.push({ result: 'substitution', target: T[i - 1][1], heard: R[j - 1][1] }); i--; j--; }
+      else if (i > 0 && D[i][j] === D[i - 1][j] + 1) { ops.push({ result: 'missing', target: T[i - 1][1], heard: null }); i--; }
+      else { ops.push({ result: 'extra', target: null, heard: R[j - 1][1] }); j--; }
+    }
+    ops.reverse();
+    const matched = ops.filter((o) => o.result === 'match').length;
+    return { targetWords: n, matched: matched, percent: n ? Math.round((100 * matched) / n) : 0, words: ops,
+      substitutions: ops.filter((o) => o.result === 'substitution'), missing: ops.filter((o) => o.result === 'missing'), extra: ops.filter((o) => o.result === 'extra') };
+  }
+  // ---- end Word Match scorer ----
+
   function wordAccuracy(target, heard) {
     const norm = s => s.toLowerCase().replace(/[.,!?]/g, '').split(/\s+/).filter(Boolean);
     const t = norm(target), h = new Set(norm(heard));

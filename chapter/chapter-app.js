@@ -353,6 +353,175 @@
     }, 150);
   })();
 
+  /* ---------- sentence audio control (PILOT: A1·01 only) -----------------
+     One control for every learner-facing example sentence: the homepage's
+     sentence button (.sb: hairline circle, glyph swap) in the chapter's teal
+     action colour, plus a labelled pill variant for "Hear model". It plays
+     through Audio.speak (the engine's MP3 → … → browser-TTS chain) and only
+     adds state, which always matches what the audio can really do:
+       idle ▶ → loading (spinner after 150 ms, until sound actually flows) →
+         MP3 / cached / endpoint audio: playing ❚❚ ⇄ paused ▶ (resumes at currentTime)
+         browser TTS: speaking ■ — Chrome cannot pause speech reliably (the
+           engine un-pauses it), so this is an honest Stop; ▶ restarts.
+     One sentence at a time: starting one clears the channel; any other audio
+     request (Story, Reading, Listening, word audio) or stop pauses this
+     sentence's own <audio> and resets the button. A finished/stopped run can
+     never touch a button again (run identity check). No word highlighting is
+     added: none of these clips had any before.
+     Gated by chapter id: on every other chapter SentencePlay.enabled is false
+     and the renderers keep their original markup and handlers. */
+  const SentencePlay = (function () {
+    const enabled = C.id === 'a1-1-alphabet';
+    const GLYPH = '<span class="kw-sb-glyph" aria-hidden="true">' +
+      '<svg class="kw-sb-play" viewBox="0 0 11 11" fill="currentColor"><path d="M2 1.5v8l7-4z"/></svg>' +
+      '<svg class="kw-sb-pause" viewBox="0 0 11 11" fill="currentColor"><rect x="2" y="1.5" width="2.4" height="8" rx="0.6"/><rect x="6.6" y="1.5" width="2.4" height="8" rx="0.6"/></svg>' +
+      '<svg class="kw-sb-stop" viewBox="0 0 11 11" fill="currentColor"><rect x="2" y="2" width="7" height="7" rx="1.2"/></svg>' +
+      '<span class="kw-sb-spin"></span>' +
+      '</span>';
+    const VERB = { idle: 'Play', loading: 'Stop', playing: 'Pause', paused: 'Resume', speaking: 'Stop' };
+    let active = null, ownRequest = false;   // active: { btn, text, audio }
+
+    // Circle: "Play sentence" … ; pill: "Hear model, play" … — the accessible
+    // name always contains the visible label (WCAG 2.5.3 Label in Name).
+    function setState(btn, s) {
+      btn.dataset.state = s;
+      const label = btn.dataset.label;
+      btn.setAttribute('aria-label', label ? label + ', ' + VERB[s].toLowerCase() : VERB[s] + ' ' + btn.dataset.noun);
+    }
+    function reset() { const a = active; active = null; if (a) setState(a.btn, 'idle'); }
+    if (enabled && window.KW_onAudioEvent) {
+      window.KW_onAudioEvent(function (ev) {
+        const run = active;
+        if (!ev || !run) return;
+        if (ev.type === 'play-start' && ev.source === 'browser-tts' && !run.audio) { setState(run.btn, 'speaking'); return; }
+        if (ev.type === 'stop' || (ev.type === 'request' && !ownRequest)) {
+          if (run.audio) { try { run.audio.pause(); } catch (_) {} }   // never left playing under another source
+          reset();
+        }
+      });
+    }
+    function start(btn, text) {
+      reset();
+      // Like Story's playLine: clear the channel first — the engine's
+      // browser-TTS path does not stop an <audio> that is still playing.
+      try { Audio.stop(); } catch (_) {}
+      const run = active = { btn: btn, text: text, audio: null };
+      setState(btn, 'loading');
+      ownRequest = true;   // the engine emits `request` synchronously inside speak()
+      try {
+        Audio.speak(text, 1, function () { if (active === run) reset(); },
+          { onAudio: function (a) {
+            if (active !== run) return;
+            run.audio = a;
+            // ❚❚ only once sound can flow: a cold MP3 still downloading stays "loading".
+            if (a.readyState >= 3) { setState(btn, 'playing'); return; }
+            a.addEventListener('playing', function () { if (active === run && btn.dataset.state === 'loading') setState(btn, 'playing'); }, { once: true });
+          } });
+      } finally { ownRequest = false; }
+    }
+    function stop() { reset(); try { Audio.stop(); } catch (_) {} }
+    function toggle(btn, text) {
+      const run = active && active.btn === btn ? active : null;
+      if (!run) { start(btn, text); return; }
+      const s = btn.dataset.state;
+      if (s === 'playing' && run.audio && !run.audio.ended) { run.audio.pause(); setState(btn, 'paused'); return; }
+      if (s === 'paused' && run.audio) {       // resume where it stopped
+        setState(btn, 'playing');
+        const p = run.audio.play();
+        if (p && p.catch) p.catch(function () { if (active === run) start(btn, text); });
+        return;
+      }
+      stop();                                  // loading / speaking (TTS): honest Stop
+    }
+    // opts.label → pill variant with a constant visible label (no width change
+    // between states); opts.noun → the circle's accessible noun ("Play <noun>").
+    function button(text, opts) {
+      opts = opts || {};
+      const btn = el('button', { class: 'kw-sb' + (opts.label ? ' kw-sb-wide' : ''), type: 'button', lang: 'en', html: GLYPH });
+      if (opts.label) { btn.appendChild(el('span', { class: 'kw-sb-label', 'aria-hidden': 'true' }, opts.label)); btn.dataset.label = opts.label; }
+      btn.dataset.noun = opts.noun || 'sentence';
+      setState(btn, 'idle');
+      btn.addEventListener('click', function (e) { e.stopPropagation(); toggle(btn, text); });
+      return btn;
+    }
+    // Lay a sentence out as [button][text]: the button is centred on the first
+    // text line and wrapped lines align under the text, not under the button.
+    function row(container, btn, textEl) {
+      container.classList.add('kw-sb-row');
+      textEl.classList.add('kw-sb-text');
+      container.prepend(el('span', { class: 'kw-sb-slot' }, btn));
+    }
+    // A re-render is about to discard `container`: stop a sentence playing in it.
+    function drop(container) { if (active && container.contains(active.btn)) stop(); }
+    return { enabled: enabled, button: button, toggle: toggle, row: row, drop: drop };
+  })();
+
+  /* ---------- popup word speaker state (PILOT: A1·01 only) ---------------
+     Word-level, separate from SentencePlay. The popup's speaker keeps its
+     audio path (speakWordFemale: female word MP3 → headword → browser TTS) and
+     its long-press speed menu; this only gives it a truthful state:
+       idle (speaker) → loading (spinner after 150 ms) → playing (■, "Stop word")
+       → idle on natural end. Clicking while playing stops (words last ~0.3–1.5 s,
+       so Pause/Resume would add a state with no learning value).
+     Any other audio — another word, a sentence button, Story, Reading,
+     Listening, vocab F/M — resets it; if our <audio> is paused from outside it
+     resets too, so it can never stay lit over silence. Same chapter-id gate. */
+  const WordAudio = (function () {
+    const enabled = SentencePlay.enabled;
+    const GLYPH = '<span class="wp-glyph" aria-hidden="true">' +
+      '<span class="wp-g-speaker">' + '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' + '</span>' +
+      '<span class="wp-g-stop"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="7" width="10" height="10" rx="2"/></svg></span>' +
+      '<span class="wp-g-spin"></span>' +
+      '</span>';
+    const LABEL = { idle: 'Play word', loading: 'Stop word', playing: 'Stop word' };
+    let run = null, starting = false, timer = null;   // run: { btn, keys, audio }
+
+    function set(btn, st) { btn.dataset.state = st; btn.setAttribute('aria-label', LABEL[st]); }
+    function reset() { clearInterval(timer); timer = null; const r = run; run = null; if (r) set(r.btn, 'idle'); }
+    if (enabled && window.KW_onAudioEvent) {
+      window.KW_onAudioEvent(function (ev) {
+        const r = run;
+        if (!ev || !r || starting) return;           // speakWordFemale's own leading stop()
+        if (ev.type === 'play-start') { if (r.btn.dataset.state === 'loading') set(r.btn, 'playing'); return; }
+        if (ev.type === 'stop' || (ev.type === 'request' && !r.keys.has(ev.text))) reset();
+      });
+    }
+    // Natural end: the engine promise settles, then any trailing browser-TTS
+    // fallback (speakWordFemale fires it without waiting) must finish too.
+    function settle(r) {
+      if (run !== r) return;
+      clearInterval(timer);
+      timer = setInterval(function () {
+        if (run !== r) { clearInterval(timer); return; }
+        if (!(window.speechSynthesis && speechSynthesis.speaking) && !(r.audio && !r.audio.paused && !r.audio.ended)) reset();
+      }, 120);
+    }
+    // Same text key the engine puts on its `request` events.
+    const key = (t) => String(t == null ? '' : t).replace(/\s+/g, ' ').replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"').trim();
+    // force: the long-press speed menu always (re)starts instead of stopping.
+    function play(btn, text, rate, popupOpts, force) {
+      if (!force && run && run.btn === btn && btn.dataset.state !== 'idle') { reset(); try { Audio.stop(); } catch (_) {} return; }
+      reset();
+      const surface = String(text || '').trim();
+      const keys = new Set([key(surface), key(resolveHeadword(surface))]);
+      if (popupOpts && popupOpts.spokenAs) keys.add(key(popupOpts.spokenAs));
+      const r = run = { btn: btn, keys: keys, audio: null };
+      set(btn, 'loading');
+      const opts = Object.assign({}, popupOpts, { onAudio: function (a) {
+        if (run !== r) return;
+        r.audio = a;
+        // paused from outside (another source took the channel) → reset
+        a.addEventListener('pause', function () { if (run === r && r.audio === a && !a.ended) reset(); }, { once: true });
+      } });
+      starting = true;
+      let p;
+      try { p = speakWordFemale(text, rate, opts); } finally { starting = false; }
+      Promise.resolve(p).then(function () { settle(r); }, function () { settle(r); });
+    }
+    function decorate(btn) { btn.innerHTML = GLYPH; set(btn, 'idle'); }
+    return { enabled: enabled, play: play, decorate: decorate };
+  })();
+
   /* ---------- toast ---------- */
   let toastEl, toastTimer;
   function toast(msg, xp) {
@@ -1298,6 +1467,7 @@
 
   function drawVocab() {
     const grid = $('#vocab-grid'); if (!grid) return;
+    if (SentencePlay.enabled) SentencePlay.drop(grid);
     grid.innerHTML = '';
     const list = C.vocab.filter(w => {
       if (vocabFilter === 'learned' && !state.learned[w.de]) return false;
@@ -1387,6 +1557,11 @@
           });
         } else {
           box.textContent = w.ex || '';
+        }
+        if (SentencePlay.enabled && (w.ex || '').trim()) {
+          // Pilot: the example sentence gets the sentence audio control.
+          const body = el('span', {}); body.append(...box.childNodes); box.append(body);
+          SentencePlay.row(box, SentencePlay.button(w.ex.trim()), body);
         }
         return box;
       })(),
@@ -1597,7 +1772,19 @@
         el('div', { class: 'hinglish-card' },
           el('p', { class: 'hinglish-text', html: g.hinglish })));
       if (g.example) { inner.appendChild(el('div', { class: 'dash-section-divider', style: 'margin:18px 0' }));
-        g.example.forEach(ex => { const line = el('div', { class: 'example-line', html: ex.html }); line.style.cursor = 'pointer'; line.title = 'Listen'; line.addEventListener('click', () => Audio.speak(line.textContent.split('→')[0])); inner.appendChild(line); }); }
+        g.example.forEach(ex => {
+          const line = el('div', { class: 'example-line', html: ex.html }); line.style.cursor = 'pointer'; line.title = 'Listen';
+          if (SentencePlay.enabled) {
+            // Pilot: a visible Play/Pause button before the line; a click on the
+            // line itself drives the same button, so both stay in step.
+            const text = line.textContent.split('→')[0];
+            const btn = SentencePlay.button(text);
+            const body = el('span', {}); body.append(...line.childNodes);
+            line.append(body); SentencePlay.row(line, btn, body);
+            line.addEventListener('click', () => SentencePlay.toggle(btn, text));
+          } else line.addEventListener('click', () => Audio.speak(line.textContent.split('→')[0]));
+          inner.appendChild(line);
+        }); }
       if (g.mistakes) inner.appendChild(el('div', { class: 'gr-label gr-mistakes-label' }, g.mistakes.length > 1 ? 'Common mistakes' : 'Common mistake'));
       if (g.mistakes) g.mistakes.forEach(m => inner.appendChild(
         el('div', { class: 'mistake-row' },
@@ -3625,7 +3812,10 @@
       // situation and the model answer (`de`) stays hidden behind a reveal.
       // `de` remains the TTS text and the wordAccuracy target either way.
       const hasTask = !!p.task;
-      const hearBtn = el('button', { class: 'btn btn-soft btn-small', onclick: () => { var fn = window.KW_speak || window.KW_playAudio; if (fn) fn(p.de); else Audio.speak(p.de, 0.9); } }, el('span', { html: ICON.speaker, style: 'width:14px;display:inline-flex' }), ' Hear model');
+      // Pilot: "Hear model" becomes the sentence audio control (pill variant), in place.
+      const hearBtn = SentencePlay.enabled
+        ? SentencePlay.button(p.de, { label: 'Hear model' })
+        : el('button', { class: 'btn btn-soft btn-small', onclick: () => { var fn = window.KW_speak || window.KW_playAudio; if (fn) fn(p.de); else Audio.speak(p.de, 0.9); } }, el('span', { html: ICON.speaker, style: 'width:14px;display:inline-flex' }), ' Hear model');
       const row = el('div', { style: 'display:flex;gap:10px;flex-wrap:wrap' }, hearBtn);
       card.append(
         el('div', { class: 'speak-prompt de' }, hasTask ? p.task : p.de),
@@ -5164,6 +5354,8 @@
     if (fn) {
       var o = { gender: 'female', rate: rate };
       if (spokenAs) o.spokenAs = spokenAs;
+      // A1·01 pilot (WordAudio): lets the popup speaker see its own <audio>.
+      if (popupOpts && typeof popupOpts.onAudio === 'function') o.onAudio = popupOpts.onAudio;
       return fn(surface, o).then(function (s) {
         if ((s === 'error' || s === 'browser-tts') && headword !== surface) {
           return fn(headword, o).then(function (s2) {
@@ -5179,6 +5371,9 @@
   }
   function attachAudioSpeed(btn, text, popupOpts) {
     let timer = null, longFired = false;
+    // A1·01 pilot: route through WordAudio for a truthful playing state.
+    if (WordAudio.enabled) WordAudio.decorate(btn);
+    const say = (rate, force) => WordAudio.enabled ? WordAudio.play(btn, text, rate, popupOpts, force) : speakWordFemale(text, rate, popupOpts);
     const openMenu = () => {
       longFired = true;
       if (!speedMenu) {
@@ -5188,7 +5383,7 @@
       }
       speedMenu.innerHTML = '';
       [['Normal', 1], ['Slow', 0.75], ['Very slow', 0.4]].forEach(([label, rate]) => {
-        speedMenu.appendChild(el('button', { type: 'button', onclick: (ev) => { ev.stopPropagation(); speakWordFemale(text, rate, popupOpts); speedMenu.classList.remove('is-open'); } },
+        speedMenu.appendChild(el('button', { type: 'button', onclick: (ev) => { ev.stopPropagation(); say(rate, true); speedMenu.classList.remove('is-open'); } },
           el('span', {}, label), el('span', { class: 'asm-rate' }, rate + '×')));
       });
       const r = btn.getBoundingClientRect();
@@ -5210,7 +5405,7 @@
       e.preventDefault(); e.stopPropagation();
       clearTimeout(timer);
       if (longFired) { longFired = false; return; } // long-press already handled it
-      speakWordFemale(text, 1, popupOpts);
+      say(1);
     });
     btn.title = 'Tap to hear · hold for slow';
   }

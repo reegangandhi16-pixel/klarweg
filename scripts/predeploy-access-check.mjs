@@ -17,6 +17,9 @@
         target explicitly.
      3. AI_ENABLED in wrangler.toml must be "false" unless
         --allow-ai-enabled is passed.
+     4. SPEECH_MODE (Record & Check transcription) must be "off" unless
+        --allow-speech=<allowlist|entitled> names the mode explicitly,
+        and SPEECH_CHAPTERS must stay "a1-1-alphabet" (A1·01 only).
 
    Usage (from the repo root):
      node scripts/predeploy-access-check.mjs
@@ -33,6 +36,7 @@ const LIVE_URL = process.env.KW_ACCESS_LIVE_URL || 'https://klarweg-access.klarw
 const args = process.argv.slice(2);
 const allowEnv = (args.find((a) => a.startsWith('--allow-cashfree-env-change=')) || '').split('=')[1] || null;
 const allowAi = args.includes('--allow-ai-enabled');
+const allowSpeech = (args.find((a) => a.startsWith('--allow-speech=')) || '').split('=')[1] || null;
 
 function varOf(toml, name) {
   const m = toml.match(new RegExp('^\\s*' + name + '\\s*=\\s*"([^"]*)"', 'm'));
@@ -48,12 +52,17 @@ const toml = fs.readFileSync(TOML, 'utf8');
 const env = varOf(toml, 'CASHFREE_ENV');
 const appId = varOf(toml, 'CASHFREE_APP_ID') || '';
 const ai = (varOf(toml, 'AI_ENABLED') || 'false').toLowerCase();
+const speech = (varOf(toml, 'SPEECH_MODE') || 'off').toLowerCase();
+const speechChapters = varOf(toml, 'SPEECH_CHAPTERS') || 'a1-1-alphabet';
 
 if (env !== 'sandbox' && env !== 'production') fail(`CASHFREE_ENV in wrangler.toml is "${env}" — must be "sandbox" or "production".`);
 const isTest = /^TEST/i.test(appId);
 if (env === 'sandbox' && !isTest) fail('wrangler.toml pairs CASHFREE_ENV="sandbox" with a LIVE app id.');
 if (env === 'production' && isTest) fail('wrangler.toml pairs CASHFREE_ENV="production" with a sandbox (TEST) app id.');
 if (/CASHFREE_SECRET_KEY\s*=|_API_KEY\s*=/.test(toml)) fail('wrangler.toml appears to contain a secret. Secrets belong in `wrangler secret put`, never in the file.');
+if (!['off', 'allowlist', 'entitled'].includes(speech)) fail(`SPEECH_MODE in wrangler.toml is "${speech}" — must be "off", "allowlist" or "entitled".`);
+if (speech !== 'off' && allowSpeech !== speech) fail(`SPEECH_MODE="${speech}" in wrangler.toml. Enable the speech check deliberately with --allow-speech=${speech}.`);
+if (speechChapters !== 'a1-1-alphabet') fail(`SPEECH_CHAPTERS="${speechChapters}" — the speech check is A1·01-only ("a1-1-alphabet") until it is validated.`);
 if (ai === 'true' && !allowAi) fail('AI_ENABLED="true" in wrangler.toml. Enable Klarweg AI deliberately with --allow-ai-enabled once the provider is chosen and the tutor Worker has its key.');
 
 let live;
@@ -72,4 +81,4 @@ if (live !== env) {
   console.warn(`! Cashfree environment will change: ${live} → ${env} (explicitly allowed).`);
 }
 
-console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}.`);
+console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech} (${speechChapters}).`);

@@ -46,6 +46,32 @@ AI_ANON_DAILY_UNITS = "3"
 AI_ANON_NETWORK_DAILY_REQUESTS = "30"
 AI_ANON_GLOBAL_DAILY_REQUESTS = "100"
 
+# Record & Check speech transcription (src/speech.js → klarweg-tutor
+# /v1/transcribe → OpenAI gpt-transcribe; the key is the TUTOR's existing
+# OPENAI_API_KEY secret). OFF by default.
+#   "off"        nobody; chapter pages keep browser speech recognition
+#   "allowlist"  only accounts listed in the SPEECH_ALLOWLIST secret
+#                (comma-separated user ids) — internal staging
+#   "entitled"   every signed-in owner of the chapter's level
+# Kill switch: set "off" and redeploy, or wrangler rollback.
+SPEECH_MODE = "off"
+# Exact chapter ids only. A1·01 until real validation is complete.
+SPEECH_CHAPTERS = "a1-1-alphabet"
+# Per account: checks per minute (anti-hammering), per UTC day, per month.
+SPEECH_PER_MINUTE = "6"
+SPEECH_DAILY_CHECKS = "60"
+SPEECH_MONTHLY_CHECKS = "600"
+# All learners together per UTC day: requests, and estimated spend in US$
+# micro-units (500000 = $0.50) at SPEECH_PRICE_MICROS_PER_MIN (gpt-transcribe
+# list price $0.0045/min = 4500).
+SPEECH_GLOBAL_DAILY_REQUESTS = "500"
+SPEECH_GLOBAL_DAILY_BUDGET_MICROS = "500000"
+SPEECH_PRICE_MICROS_PER_MIN = "4500"
+# One recording: bytes (1 MiB ≈ 4 min of Opus — far above the cap below)
+# and declared length in seconds (the page itself stops at 20 s).
+SPEECH_MAX_BYTES = "1048576"
+SPEECH_MAX_SECONDS = "30"
+
 # Chapter resource PDFs (src/resources.js). The bucket is PRIVATE: no
 # public r2.dev URL and no custom domain — objects are only ever streamed
 # by this Worker after a signed-link check. RESOURCE_RELEASE selects the
@@ -73,3 +99,4 @@ service = "klarweg-tutor"
 #   RATE_SALT
 #   CASHFREE_WEBHOOK_SECRET   (optional; defaults to CASHFREE_SECRET_KEY)
 #   RESOURCE_URL_SECRET       (signed chapter-resource links; 32+ random bytes)
+#   SPEECH_ALLOWLIST          (only for SPEECH_MODE = "allowlist": comma-separated user ids)

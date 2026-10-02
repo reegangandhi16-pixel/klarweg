@@ -3,6 +3,7 @@ import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, m
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
 import { aiStatus, aiRequest } from "./ai.js";
+import { speechStatus, speechTranscribe } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
 import {
   listSavedWords,
@@ -123,6 +124,18 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
     const aiMatch = url.pathname.match(/^\/ai\/([a-z_]{3,32})$/);
     if (request.method === "POST" && aiMatch) {
       return withCors(await aiRequest(request, env, aiMatch[1], ctx), request);
+    }
+
+    /* Record & Check speech transcription (speech.js): session, A1·01-only
+       chapter list, entitlement, size/duration limits and quotas are all
+       enforced there before the audio reaches klarweg-tutor. Off unless
+       SPEECH_MODE is "allowlist" or "entitled". */
+    if (request.method === "GET" && url.pathname === "/speech/status") {
+      return withCors(await speechStatus(request, env), request);
+    }
+
+    if (request.method === "POST" && url.pathname === "/speech/transcribe") {
+      return withCors(await speechTranscribe(request, env, ctx), request);
     }
 
     /* Chapter resource PDFs — private R2, signed short-lived links

@@ -3,7 +3,7 @@ import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, m
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
 import { aiStatus, aiRequest } from "./ai.js";
-import { speechStatus, speechTranscribe } from "./speech.js";
+import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
 import {
   listSavedWords,
@@ -126,16 +126,21 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
       return withCors(await aiRequest(request, env, aiMatch[1], ctx), request);
     }
 
-    /* Record & Check speech transcription (speech.js): session, A1·01-only
-       chapter list, entitlement, size/duration limits and quotas are all
-       enforced there before the audio reaches klarweg-tutor. Off unless
-       SPEECH_MODE is "allowlist" or "entitled". */
+    /* Record & Check speech transcription (speech.js): session, chapter
+       scope, entitlement, the per-task daily cap, size/duration limits and
+       quotas are all enforced there before the audio reaches klarweg-tutor.
+       Off unless SPEECH_MODE is "allowlist" or "entitled". /speech/task-check
+       counts browser-recognition checks against the same per-task cap. */
     if (request.method === "GET" && url.pathname === "/speech/status") {
       return withCors(await speechStatus(request, env), request);
     }
 
     if (request.method === "POST" && url.pathname === "/speech/transcribe") {
       return withCors(await speechTranscribe(request, env, ctx), request);
+    }
+
+    if (request.method === "POST" && url.pathname === "/speech/task-check") {
+      return withCors(await speechTaskCheck(request, env), request);
     }
 
     /* Chapter resource PDFs — private R2, signed short-lived links

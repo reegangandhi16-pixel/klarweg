@@ -119,7 +119,7 @@ test('A1·01 eligible → the recording goes to the Klarweg speech service and i
   await h.recordOnce(2400);
   assert.equal(h.recs.length, 0, 'browser recognition is NOT used on the server path');
   const [c] = h.transcribeCalls();
-  assert.equal(c.url, API + '/speech/transcribe?chapter=a1-1-alphabet&ms=2400');
+  assert.equal(c.url, API + '/speech/transcribe?chapter=a1-1-alphabet&task=0&ms=2400');
   assert.equal(c.init.method, 'POST');
   assert.equal(c.init.credentials, 'include', 'the session cookie identifies the learner');
   assert.ok(c.init.body instanceof Blob, 'the recording itself, not multipart');
@@ -170,7 +170,7 @@ test('every chapter asks the server; out of scope → browser recognition, in sc
     h = harness({ chapter });
     await h.flush(); await h.recordOnce();
     assert.equal(h.recs.length, 0, chapter + ': eligible → server path');
-    assert.equal(h.transcribeCalls()[0].url, API + '/speech/transcribe?chapter=' + chapter + '&ms=2400');
+    assert.equal(h.transcribeCalls()[0].url, API + '/speech/transcribe?chapter=' + chapter + '&task=0&ms=2400');
     assert.equal(h.state(), 'result');
   }
 });

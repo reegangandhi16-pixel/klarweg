@@ -24,6 +24,8 @@
         ids of chapter pages that exist. Anything wider than the original
         "a1-1-alphabet" list needs --allow-speech-scope=<SPEECH_SCOPE>, or
         --allow-speech-scope=list when only the explicit list is wider.
+     6. SPEECH_TASK_DAILY_CHECKS (checks per Speaking task per day) may
+        only be 1, 2 or 3.
 
    Usage (from the repo root):
      node scripts/predeploy-access-check.mjs
@@ -78,6 +80,8 @@ if (badIds.length) fail(`SPEECH_CHAPTERS / SPEECH_CHAPTERS_EXCLUDE name no exist
 const wider = speechScope.length > 0 || speechChapters.some((id) => id !== 'a1-1-alphabet');
 const scopeKey = speechScope.length ? speechScope.join(',') : 'list';
 if (wider && allowScope !== scopeKey) fail(`the speech scope is wider than A1·01 (SPEECH_SCOPE="${speechScope.join(',')}", ${speechChapters.length} listed chapter(s)). Widen it deliberately with --allow-speech-scope=${scopeKey}.`);
+const taskCap = varOf(toml, 'SPEECH_TASK_DAILY_CHECKS');
+if (taskCap !== null && !/^[1-3]$/.test(taskCap)) fail(`SPEECH_TASK_DAILY_CHECKS="${taskCap}" — the per-task daily cap must be 1, 2 or 3.`);
 if (ai === 'true' && !allowAi) fail('AI_ENABLED="true" in wrangler.toml. Enable Klarweg AI deliberately with --allow-ai-enabled once the provider is chosen and the tutor Worker has its key.');
 
 let live;

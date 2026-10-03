@@ -34,7 +34,9 @@ function tutorStub() {
 }
 function makeEnv(extra = {}) {
   const TUTOR = tutorStub();
-  return { DB: createD1(WORKER_DIR), RATE_SALT: 'test-salt', CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST1', CASHFREE_SECRET_KEY: 'x', GOOGLE_CLIENT_ID: 'g', SPEECH_MODE: 'entitled', TUTOR, ...extra };
+  // The older tests below exercise the account/global layers with many checks on
+  // one task, so they lift the per-task cap; the per-task tests use the real 3.
+  return { DB: createD1(WORKER_DIR), RATE_SALT: 'test-salt', CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST1', CASHFREE_SECRET_KEY: 'x', GOOGLE_CLIENT_ID: 'g', SPEECH_MODE: 'entitled', SPEECH_TASK_DAILY_CHECKS: '1000', TUTOR, ...extra };
 }
 const ctx = { waitUntil() {} };
 async function call(env, method, pathname, { cookie, origin = SITE, body, headers = {} } = {}) {
@@ -46,8 +48,8 @@ async function call(env, method, pathname, { cookie, origin = SITE, body, header
   let json = null; try { json = JSON.parse(text); } catch {}
   return { status: res.status, json, text, headers: res.headers };
 }
-const transcribe = (env, cookie, { ms = 2500, type = 'audio/webm;codecs=opus', body = AUDIO, chapter = CH, headers = {}, origin } = {}) =>
-  call(env, 'POST', `/speech/transcribe?chapter=${chapter}&ms=${ms}`, { cookie, body, origin, headers: { 'content-type': type, ...headers } });
+const transcribe = (env, cookie, { ms = 2500, type = 'audio/webm;codecs=opus', body = AUDIO, chapter = CH, task = '0', headers = {}, origin } = {}) =>
+  call(env, 'POST', `/speech/transcribe?chapter=${chapter}&task=${task}&ms=${ms}`, { cookie, body, origin, headers: { 'content-type': type, ...headers } });
 const status = (env, cookie, chapter = CH) => call(env, 'GET', `/speech/status?chapter=${chapter}`, { cookie });
 
 async function signup(env) {
@@ -68,7 +70,10 @@ const units = async (env, id, prefix) => {
 test('flag OFF (default): status says disabled, transcribe refuses, nothing reaches the tutor', async () => {
   const env = makeEnv({ SPEECH_MODE: undefined });
   const u = await learner(env);
-  assert.deepEqual((await status(env, u.cookie)).json, { ok: true, enabled: false });
+  const off = (await status(env, u.cookie)).json;
+  assert.deepEqual({ ok: off.ok, enabled: off.enabled }, { ok: true, enabled: false });
+  assert.deepEqual(off.tasks.used, [0, 0, 0], 'per-task counts still answered (they also cap browser checks)');
+  assert.equal((await status(env, null)).json.tasks, undefined, 'signed out: no counts');
   const r = await transcribe(env, u.cookie);
   assert.equal(r.status, 503); assert.equal(r.json.error, 'speech_disabled');
   assert.equal(env.TUTOR.calls.length, 0);
@@ -120,7 +125,7 @@ test('valid check: browser gets only { ok, text }; the tutor gets only the exact
   assert.deepEqual(st.json.remaining, { day: 60, month: 600 });
   const r = await transcribe(env, u.cookie);
   assert.equal(r.status, 200);
-  assert.deepEqual(r.json, { ok: true, text: TRANSCRIPT }, 'nothing else — no engine, provider, meta or usage');
+  assert.deepEqual(r.json, { ok: true, text: TRANSCRIPT, task: { limit: 1000, used: 1, remaining: 999, locked: false } }, 'nothing else — no engine, provider, meta or usage; only this task\'s count');
   assert.equal(r.headers.get('access-control-allow-origin'), SITE);
   assert.equal(r.headers.get('cache-control'), 'no-store');
   const c = env.TUTOR.calls[0];
@@ -249,7 +254,7 @@ test('empty transcript is returned as text "" (the page shows "nothing recognise
   env.TUTOR.next = () => Response.json({ ok: true, text: '', seconds: 1, meta: { provider: true } });
   const u = await learner(env);
   const r = await transcribe(env, u.cookie);
-  assert.equal(r.status, 200); assert.deepEqual(r.json, { ok: true, text: '' });
+  assert.equal(r.status, 200); assert.deepEqual(r.json, { ok: true, text: '', task: { limit: 1000, used: 1, remaining: 999, locked: false } });
 });
 
 test('privacy: D1 holds counters only; logs hold numbers only', async () => {

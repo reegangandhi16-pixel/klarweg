@@ -4143,7 +4143,14 @@
         card.append(micBtn, el('p', { class: 'muted', style: 'font-size:13px;margin-top:10px' }, 'This browser cannot open a microphone. Chrome, Edge or Safari on desktop can record here. You can still hear the model above.'));
         wrap.appendChild(card); return;
       }
+      // Per-task daily cap: 3 checks per Record & check button (see TASK_DAILY_CHECKS).
+      const note = el('p', { class: 'muted kw-task-left', id: 'kw-task-note-' + i, role: 'status', 'aria-live': 'polite', style: 'font-size:13px;margin:10px 0 0' });
+      note.hidden = true;
+      micBtn.setAttribute('aria-describedby', note.id);
+      taskUI[i] = { btn: micBtn, note: note };
+      paintTask(i);
       micBtn.addEventListener('click', () => {
+        if (taskState(i).locked && !micBtn._kwSession) { paintTask(i); return; }
         Promise.resolve(runRecognition(p, micBtn, result)).catch((err) => {
           trace('click.error', false, String((err && (err.name || err.message)) || err));
           micBtn._kwSession = null; micBtn._kwBusy = false;
@@ -4154,7 +4161,7 @@
           result.classList.add('is-visible');
         });
       });
-      card.append(micBtn, result);
+      card.append(micBtn, note, result);
       wrap.appendChild(card);
     });
     return wrap;
@@ -4354,6 +4361,18 @@
     if (s.reported) return;      // a classified permission/context message is already on screen
     if (s.whisper) { renderWhisper(s); return; }
     const r = s.result;
+    // A browser-recognition transcript is one of the task's daily checks:
+    // counted (server-side when signed in) before it is scored.
+    if (s.heard && !s.taskCounted) {
+      if (s.taskCounted === undefined) {
+        s.taskCounted = null;
+        const done = (ok) => { s.taskCounted = ok ? true : false; if (s.gen === r._kwGen && s.btn._kwSession !== s) renderSession(s); };
+        const v = countBrowserCheck(s.p);
+        if (v === true || v === false) s.taskCounted = v; else v.then(done, () => done(false));
+      }
+      if (s.taskCounted === null) { r.innerHTML = ''; r.setAttribute('data-mic-state', 'checking'); r.appendChild(el('p', { class: 'muted', style: 'font-size:14px;margin:0' }, 'Checking what you said…')); r.classList.add('is-visible'); return; }
+      if (s.taskCounted === false) { renderTaskLimit(s); return; }
+    }
     r.innerHTML = '';
     // Only a non-empty transcript that the recogniser has finished with is
     // ever scored; every other outcome gets its own honest state.
@@ -4780,11 +4799,20 @@
     const go = (snap) => {
       const api = speechAccessApi();
       if (!api) return;
-      if (snap && snap.authenticated === false) { trace('speech.status', false, 'signed out'); return; }   // nothing to ask
+      if (!api) { taskCap.signedIn = false; paintTasks(); return; }
+      if (snap && snap.authenticated === false) { trace('speech.status', false, 'signed out'); taskCap.signedIn = false; paintTasks(); return; }   // nothing to ask
+      if (snap && snap.authenticated === true) taskCap.signedIn = true;
       fetch(api + '/speech/status?chapter=' + encodeURIComponent(C.id), { credentials: 'include', cache: 'no-store' })
         .then((r) => (r.ok ? r.json() : null))
-        .then((j) => { speechAccess.eligible = !!(j && j.enabled === true && j.eligible === true); trace('speech.status', speechAccess.eligible, j ? { enabled: j.enabled, eligible: j.eligible } : null); })
-        .catch(() => trace('speech.status', false, 'unreachable'));
+        .then((j) => {
+          speechAccess.eligible = !!(j && j.enabled === true && j.eligible === true);
+          if (j && j.signedIn === false) taskCap.signedIn = false;
+          else if (j && (j.signedIn === true || j.tasks)) taskCap.signedIn = true;
+          if (j && j.tasks) taskServerCounts(j.tasks);
+          trace('speech.status', speechAccess.eligible, j ? { enabled: j.enabled, eligible: j.eligible, tasks: j.tasks ? j.tasks.used : null } : null);
+        })
+        .catch(() => trace('speech.status', false, 'unreachable'))
+        .then(() => { if (taskCap.signedIn === null) taskCap.signedIn = false; paintTasks(); });
     };
     const A = window.KWAccess;
     if (A && typeof A.ready === 'function') A.ready().then(go, () => go()); else go();
@@ -4793,13 +4821,117 @@
   // Server answer → the check's error class (see WHISPER_ERRORS).
   function speechAccessError(status, body) {
     const e = body && body.error;
-    if (status === 429) return e === 'rate_minute' ? 'rate' : 'quota';
+    if (status === 429) return e === 'rate_minute' ? 'rate' : e === 'task_limit' ? 'task-limit' : 'quota';
     if (status === 401 || status === 403) return 'unavailable';
     if (status === 413) return 'too-long';
     if (status === 400 || status === 415 || status === 422) return 'unreadable';
     if (status === 504) return 'timeout';
     if (status === 503) return e === 'speech_unavailable' ? 'server' : 'unavailable';
     return 'server';
+  }
+
+  /* ---- Per-task daily cap: 3 checks per Record & check button ---------------
+     Key: account + chapter + task (its position in C.speaking) + UTC day,
+     enforced by klarweg-access: /speech/transcribe refuses a 4th AI check, and
+     a browser-recognition transcript is first counted at /speech/task-check
+     (same counter), so neither path adds checks. Signed out there is no
+     account: the count lives in this browser (localStorage, UTC day). The page
+     only shows the server's numbers; it never decides on its own that a
+     signed-in learner has checks left. */
+  const TASK_DAILY_CHECKS = 3;
+  const taskUI = [];
+  const taskCap = { signedIn: null, server: null, resetTimer: 0 };
+  const utcDay = () => String(Math.floor(Date.now() / 86400000));   // days since 1970-01-01 UTC
+  const TASK_STORE = 'kw-speech-task-checks';
+  let taskMem = null;
+  function taskStore() {
+    let d = taskMem;
+    try { d = JSON.parse(localStorage.getItem(TASK_STORE) || 'null') || d; } catch (e) {}
+    if (!d || d.day !== utcDay() || typeof d.c !== 'object' || !d.c) d = { day: utcDay(), c: {} };
+    return d;
+  }
+  function taskStoreSave(d) { taskMem = d; try { localStorage.setItem(TASK_STORE, JSON.stringify(d)); } catch (e) {} }
+  const taskLocalKey = (i) => (taskCap.signedIn ? 'acct:' : 'anon:') + C.id + ':' + i;
+  function taskLimit() { return taskCap.server && taskCap.server.limit > 0 ? taskCap.server.limit : TASK_DAILY_CHECKS; }
+  function taskState(i) {
+    if (taskCap.signedIn === null) return { known: false, locked: false };
+    const limit = taskLimit();
+    const srv = taskCap.server && taskCap.server.day === utcDay() ? (taskCap.server.used[i] || 0) : 0;
+    const loc = Number(taskStore().c[taskLocalKey(i)]) || 0;
+    const used = Math.min(limit, Math.max(srv, loc));
+    return { known: true, limit: limit, used: used, remaining: limit - used, locked: used >= limit };
+  }
+  function taskLimitText() { return 'You\u2019ve used all ' + taskLimit() + ' checks for this task today. Move to the next speaking task.'; }
+  function paintTask(i) {
+    const u = taskUI[i];
+    if (!u) return;
+    const st = taskState(i);
+    if (!st.known) { u.note.hidden = true; return; }
+    u.note.hidden = false;
+    const text = st.locked ? taskLimitText() : 'Checks left today: ' + st.remaining;
+    if (u.note.textContent !== text) u.note.textContent = text;
+    u.note.dataset.taskState = st.locked ? 'locked' : 'open';
+    u.note.style.color = st.locked ? 'var(--ink-secondary)' : '';
+    if (st.locked && !u.btn._kwSession && !u.btn._kwBusy) {
+      u.btn.disabled = true; u.btn.setAttribute('aria-disabled', 'true');
+    } else if (!st.locked && u.btn.getAttribute('aria-disabled') === 'true') {
+      u.btn.disabled = false; u.btn.removeAttribute('aria-disabled');
+    }
+  }
+  function paintTasks() { for (let i = 0; i < taskUI.length; i++) paintTask(i); }
+  function taskResetAt(iso) {
+    clearTimeout(taskCap.resetTimer);
+    const ms = (typeof Date.parse === 'function' ? Date.parse(iso) : NaN) - Date.now();
+    // A new UTC day: ask the server again (a page left open overnight unlocks).
+    if (ms > 0 && ms < 26 * 3600e3) taskCap.resetTimer = setTimeout(() => { speechAccess.asked = false; askSpeechAccess(); paintTasks(); }, ms + 2000);
+  }
+  function taskServerCounts(t) {
+    if (!t || !Array.isArray(t.used)) return;
+    taskCap.server = { day: utcDay(), limit: Number(t.limit) || TASK_DAILY_CHECKS, used: t.used.map((x) => Number(x) || 0) };
+    if (t.resetsAt) taskResetAt(t.resetsAt);
+  }
+  // One task's numbers from a /speech/transcribe or /speech/task-check answer.
+  function taskFromServer(i, t) {
+    if (!t || i < 0 || !Number.isFinite(Number(t.used))) return;
+    if (!taskCap.server || taskCap.server.day !== utcDay()) taskCap.server = { day: utcDay(), limit: Number(t.limit) || TASK_DAILY_CHECKS, used: [] };
+    taskCap.server.limit = Number(t.limit) || taskCap.server.limit;
+    taskCap.server.used[i] = Number(t.used);
+    paintTask(i);
+  }
+  function taskLocalCount(i) {
+    const d = taskStore(), k = taskLocalKey(i), n = Number(d.c[k]) || 0;
+    if (Math.max(n, taskState(i).used) >= taskLimit()) { paintTask(i); return false; }
+    d.c[k] = Math.max(n, taskState(i).used) + 1; taskStoreSave(d); paintTask(i);
+    return true;
+  }
+  /* A browser-recognition check finished with a transcript → true (count it,
+     show the score) or false (the task's checks are used up). Signed in: the
+     server decides (Promise); signed out: this browser's count (boolean). If
+     the server cannot be reached, this browser's count still caps the task. */
+  function countBrowserCheck(p) {
+    const i = C.speaking.indexOf(p);
+    if (i < 0) return true;
+    const api = speechAccessApi();
+    if (!taskCap.signedIn || !api || typeof fetch !== 'function') return taskLocalCount(i);
+    return fetch(api + '/speech/task-check?chapter=' + encodeURIComponent(C.id) + '&task=' + i, { method: 'POST', credentials: 'include', cache: 'no-store' })
+      .then((r) => r.json().catch(() => ({})).then((j) => {
+        trace('speech.taskCheck', r.ok, { status: r.status, task: j && j.task ? j.task.used : null });
+        if (j && j.task) taskFromServer(i, j.task);
+        if (r.ok) return true;
+        if (r.status === 429 && j && j.error === 'task_limit') return false;
+        if (r.status === 401) { taskCap.signedIn = false; return taskLocalCount(i); }
+        return taskLocalCount(i);
+      }), () => { trace('speech.taskCheck', false, 'unreachable'); return taskLocalCount(i); });
+  }
+  function renderTaskLimit(s) {
+    const r = s.result;
+    r.innerHTML = '';
+    r.setAttribute('data-mic-state', 'task-limit');
+    r.setAttribute('aria-live', 'polite');
+    r.appendChild(el('p', { class: 'muted', style: 'font-size:14px;margin:0' }, taskLimitText()));
+    r.classList.add('is-visible');
+    paintTask(C.speaking.indexOf(s.p));
+    micReveal(r, true);
   }
 
   // Stop by itself after ~1.5 s of quiet that follows some speech (cap stays 20 s).
@@ -4841,7 +4973,7 @@
     if (viaAccess) {
       // The recording's own bytes and type; the session cookie identifies the learner.
       const ms = Math.max(1, (s.stoppedAt || t0) - (s.recStartedAt || s.stoppedAt || t0));
-      req = fetch(speechAccessApi() + '/speech/transcribe?chapter=' + encodeURIComponent(C.id) + '&ms=' + ms,
+      req = fetch(speechAccessApi() + '/speech/transcribe?chapter=' + encodeURIComponent(C.id) + '&task=' + C.speaking.indexOf(s.p) + '&ms=' + ms,
         { method: 'POST', body: s.blob, headers: { 'Content-Type': s.blob.type || s.mime || 'application/octet-stream' }, cache: 'no-store', credentials: 'include', signal: ctl ? ctl.signal : undefined });
     } else {
       const fd = new FormData();
@@ -4851,6 +4983,7 @@
     req
       .then((r) => r.json().catch(() => ({})).then((j) => (r.ok ? j : Promise.reject({ status: r.status, body: j }))))
       .then((j) => {
+        if (viaAccess) taskFromServer(C.speaking.indexOf(s.p), j && j.task);
         if (s.wToken !== token) return;
         s.heard = String(j.text || '').trim();
         s.check = s.heard ? wordMatch(s.p.de, s.heard) : null;
@@ -4859,6 +4992,7 @@
       .catch((e) => {
         if (s.wToken !== token) return;
         const st = e && e.status;
+        if (viaAccess && e && e.body) taskFromServer(C.speaking.indexOf(s.p), e.body.task);
         if (viaAccess && st) s.wError = speechAccessError(st, e.body);
         else s.wError = (e && e.name === 'AbortError') ? 'timeout' : st === 413 ? 'too-long' : st === 503 ? 'busy' : st === 504 ? 'timeout' : st === 422 || st === 415 || st === 400 ? 'unreadable' : st ? 'server' : 'network';
         if (viaAccess) {
@@ -4873,6 +5007,7 @@
         s.wBusy = false;
         s.latencyMs = Date.now() - (s.stoppedAt || t0);
         s.btn._kwBusy = false; s.btn.removeAttribute('aria-busy'); micIdle(s.btn);
+        paintTask(C.speaking.indexOf(s.p));
         trace('whisper.result', !s.wError, { error: s.wError, heard: s.heard, wordMatch: s.check && s.check.percent, endToResultMs: s.latencyMs, requestMs: Date.now() - t0 });
         if (s.gen === s.result._kwGen) renderWhisper(s);
       });
@@ -4905,6 +5040,9 @@
       if (s.wBusy) {
         r.setAttribute('data-mic-state', 'checking');
         r.appendChild(el('p', { class: 'muted kw-wm-checking', style: 'font-size:14px;margin:0' }, el('span', { class: 'kw-wm-spin', 'aria-hidden': 'true' }), 'Checking…'));
+      } else if (s.wError === 'task-limit') {
+        r.setAttribute('data-mic-state', 'task-limit');
+        r.appendChild(line(taskLimitText()));
       } else if (s.wError) {
         const [msg, retryable] = WHISPER_ERRORS[s.wError] || WHISPER_ERRORS.server;
         const retry = retryable && !s.wFallback;
@@ -4912,7 +5050,7 @@
         r.appendChild(line(msg + (s.wFallback ? BROWSER_FALLBACK_MSG : retry ? ' Your recording is kept — you can check it again.' : '')));
         if (retry) {
           const again = el('button', { class: 'btn btn-soft btn-small', type: 'button', style: 'margin-top:10px' }, 'Check again');
-          again.addEventListener('click', () => { if (!s.wBusy) { whisperCheck(s); renderWhisper(s); } });
+          again.addEventListener('click', () => { if (taskState(C.speaking.indexOf(s.p)).locked) { paintTask(C.speaking.indexOf(s.p)); return; } if (!s.wBusy) { whisperCheck(s); renderWhisper(s); } });
           r.appendChild(again);
           if (s.whisper === ACCESS_SPEECH) {
             const browser = el('button', { class: 'btn btn-ghost btn-small', type: 'button', style: 'margin:10px 0 0 8px' }, 'Use browser check');

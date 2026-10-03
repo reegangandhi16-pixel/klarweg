@@ -3,9 +3,18 @@
    ------------------------------------------------------------
    Routes:
      GET  /speech/status?chapter=<chapterId>
-     POST /speech/transcribe?chapter=<chapterId>&ms=<recording ms>
+     POST /speech/transcribe?chapter=<chapterId>&task=<taskId>&ms=<recording ms>
           body: the learner's recording, raw bytes; content-type = the
           recorder's own type (audio/webm;codecs=opus, audio/mp4, …)
+     POST /speech/task-check?chapter=<chapterId>&task=<taskId>
+          counts one browser-recognition check (no audio, no AI call)
+
+   Per-task cap: every Speaking task (Record & check button) allows
+   SPEECH_TASK_DAILY_CHECKS (3) checks per account per UTC day — AI checks
+   (/speech/transcribe) and browser-recognition checks (/speech/task-check)
+   share the one counter. taskId = the task's position in CHAPTER.speaking;
+   speech-tasks.js (generated from the chapter data) lists every chapter
+   and its task count, so unknown chapters and invented tasks are refused.
 
    The browser only learns { text } — the transcript the deterministic
    Word Match in chapter-app.js then scores. The audio goes, unchanged
@@ -18,27 +27,32 @@
    Order of checks on every POST (fail closed):
      1. switch          SPEECH_MODE "off" (default) or no TUTOR binding  → 503
      2. session         HttpOnly kw_session cookie                       → 401
-     3. chapter         well-formed chapter id inside the speech scope:
+     3. chapter + task  known chapter (speech-tasks.js) inside the speech scope:
                         SPEECH_SCOPE (levels "a1,a2" or "all") and/or the
                         explicit SPEECH_CHAPTERS list, minus
-                        SPEECH_CHAPTERS_EXCLUDE                          → 403
+                        SPEECH_CHAPTERS_EXCLUDE                          → 403;
+                        task id outside the chapter's tasks             → 400
      4. access          SPEECH_MODE "entitled":  owns the chapter's level
                         SPEECH_MODE "allowlist": account id listed in the
                         SPEECH_ALLOWLIST secret (internal staging)       → 403
      5. request shape   audio type, size ≤ SPEECH_MAX_BYTES, declared
                         length ≤ SPEECH_MAX_SECONDS                     → 400/413/415
      6. global day      requests + estimated spend                      → 503
-     7. per account     per minute, per day, per month — reserved
+     7. per task        this task's checks today (3), reserved
+                        atomically before anything else is reserved     → 429
+     8. per account     per minute, per day, per month — reserved
                         atomically before the provider call             → 429
-     8. forward         klarweg-tutor /v1/transcribe (raw bytes only)
-     9. account         success keeps the reservation and adds the cost;
-                        provider failures refund the day/month units but
+     9. forward         klarweg-tutor /v1/transcribe (raw bytes only)
+    10. account         success keeps the reservations and adds the cost;
+                        provider failures refund the task check and the
+                        day/month units but
                         keep the per-minute and global counts (so retries
                         during an outage stay bounded); failures before the
                         provider was contacted refund everything.
    ============================================================ */
 import { getSessionToken, findSessionUser } from "./sessions.js";
 import { readEntitlements } from "./entitlements.js";
+import { SPEECH_TASKS } from "./speech-tasks.js";
 
 export const SPEECH_ENGINE = "openai:gpt-transcribe";   // internal label (logs, metrics); not sent to the browser
 
@@ -50,6 +64,7 @@ const GLOBAL_ID = "speech:global";   // not a user id (those are hex), so never 
 const STATS_ID = "speech:stats";
 
 const DEFAULTS = {
+  SPEECH_TASK_DAILY_CHECKS: 3,                 // per account, per Speaking task, per UTC day
   SPEECH_PER_MINUTE: 6,
   SPEECH_DAILY_CHECKS: 60,
   SPEECH_MONTHLY_CHECKS: 600,
@@ -78,6 +93,7 @@ const MESSAGES = {
   auth_required: "Sign in to use the speech check.",
   not_enabled: "The speech check is not available for this chapter.",
   not_entitled: "The speech check is part of this level's course.",
+  bad_task: "This speaking task cannot be checked.",
   unsupported_type: "This recording format cannot be checked. Please record again.",
   empty_audio: "No audio was recorded. Please record again.",
   too_large: "The recording is too long. Record a shorter answer.",
@@ -91,6 +107,7 @@ const MESSAGES = {
   speech_unavailable: "The speech check is not available right now. Please try again later."
 };
 const fail = (error, status, extra = {}) => json({ ok: false, error, message: MESSAGES[error] || MESSAGES.speech_unavailable, ...extra }, status);
+const taskLimitMessage = (limit) => `You\u2019ve used all ${limit} checks for this task today. Move to the next speaking task.`;
 
 export function speechMode(env) {
   const m = String(env.SPEECH_MODE || "off").toLowerCase();
@@ -115,16 +132,25 @@ export function speechScope(env) {
   };
 }
 
-/* A well-formed chapter id inside the scope → { id, level, number }; anything
-   else (malformed, out of scope, excluded) → null. */
+const knownChapter = (chapterId) => typeof chapterId === "string" && Object.prototype.hasOwnProperty.call(SPEECH_TASKS, chapterId);
+
+/* A known chapter id (speech-tasks.js) inside the scope → { id, level, number };
+   anything else (malformed, unknown, out of scope, excluded) → null. */
 export function speechChapter(env, chapterId) {
-  if (typeof chapterId !== "string" || chapterId.length > 80) return null;
+  if (typeof chapterId !== "string" || chapterId.length > 80 || !knownChapter(chapterId)) return null;
   const m = chapterId.match(CHAPTER_ID);
   if (!m) return null;
   const sc = speechScope(env);
   if (sc.exclude.has(chapterId)) return null;
   if (!(sc.all || sc.levels.has(m[1]) || sc.chapters.has(chapterId))) return null;
   return { id: chapterId, level: m[1].toUpperCase(), number: Number(m[2]) };
+}
+
+/* "0", "1", … below the chapter's task count → the task number; anything else → null. */
+export function speechTask(chapterId, raw) {
+  if (!knownChapter(chapterId) || typeof raw !== "string" || !/^(0|[1-9][0-9]?)$/.test(raw)) return null;
+  const n = Number(raw);
+  return n < SPEECH_TASKS[chapterId] ? n : null;
 }
 
 function allowlisted(env, userId) {
@@ -140,7 +166,35 @@ async function mayUse(env, mode, user, chapter) {
 function periods(now = new Date()) {
   const iso = now.toISOString();
   const day = iso.slice(0, 10);
-  return { day, minuteKey: "sx:" + iso.slice(0, 16), dayKey: "sd:" + day, monthKey: "sm:" + day.slice(0, 7), globalKey: "sg:" + day, costKey: "sc:" + day };
+  const next = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+  return { day, resetsAt: next.toISOString(), minuteKey: "sx:" + iso.slice(0, 16), dayKey: "sd:" + day, monthKey: "sm:" + day.slice(0, 7), globalKey: "sg:" + day, costKey: "sc:" + day };
+}
+
+/* Per-task counter: user_id = the account, period = "st:<UTC day>:<chapter>:<task>".
+   Only the account id, the day, the chapter id and the task number — no text, no audio. */
+const taskKey = (p, chapterId, task) => "st:" + p.day + ":" + chapterId + ":" + task;
+const taskInfo = (env, usedN) => {
+  const limit = num(env, "SPEECH_TASK_DAILY_CHECKS");
+  const u = Math.min(usedN, limit);
+  return { limit, used: u, remaining: limit - u, locked: u >= limit };
+};
+async function chapterTaskUse(env, userId, chapterId, p) {
+  const n = SPEECH_TASKS[chapterId];
+  const used = new Array(n).fill(0);
+  const rows = await env.DB.prepare("SELECT period, units FROM ai_usage WHERE user_id = ?1 AND period LIKE ?2")
+    .bind(userId, "st:" + p.day + ":" + chapterId + ":%").all();
+  for (const r of rows.results || []) {
+    const t = Number(String(r.period).slice(String(r.period).lastIndexOf(":") + 1));
+    if (Number.isInteger(t) && t >= 0 && t < n) used[t] = Number(r.units) || 0;
+  }
+  const limit = num(env, "SPEECH_TASK_DAILY_CHECKS");
+  return { limit, used: used.map((x) => Math.min(x, limit)), remaining: used.map((x) => Math.max(0, limit - x)), resetsAt: p.resetsAt };
+}
+// Atomic: the conditional upsert only succeeds while the count stays ≤ the limit.
+async function reserveTask(env, userId, key) {
+  const limit = num(env, "SPEECH_TASK_DAILY_CHECKS");
+  if (await reserve(env, userId, key, 1, limit)) return { ok: true, info: taskInfo(env, await used(env, userId, key)) };
+  return { ok: false, info: taskInfo(env, limit) };
 }
 
 /* Counters live in the existing ai_usage table (user_id, period, units) under
@@ -185,7 +239,7 @@ async function sweep(env) {
   try {
     const cutoff = new Date(Date.now() - 40 * 86400000).toISOString().slice(0, 10);
     await env.DB.prepare(
-      "DELETE FROM ai_usage WHERE (period LIKE 'sx:%' OR period LIKE 'sd:%' OR period LIKE 'sm:%' OR period LIKE 'sg:%' OR period LIKE 'sc:%' OR period LIKE 'sq:%' OR period LIKE 'so:%' OR period LIKE 'se:%' OR period LIKE 'sl:%' OR period LIKE 's4xx:%' OR period LIKE 's5xx:%' OR period LIKE 'stimeout:%') AND substr(period, instr(period, ':') + 1, 10) < ?1"
+      "DELETE FROM ai_usage WHERE (period LIKE 'st:%' OR period LIKE 'sx:%' OR period LIKE 'sd:%' OR period LIKE 'sm:%' OR period LIKE 'sg:%' OR period LIKE 'sc:%' OR period LIKE 'sq:%' OR period LIKE 'so:%' OR period LIKE 'se:%' OR period LIKE 'sl:%' OR period LIKE 's4xx:%' OR period LIKE 's5xx:%' OR period LIKE 'stimeout:%') AND substr(period, instr(period, ':') + 1, 10) < ?1"
     ).bind(cutoff).run();
   } catch { /* housekeeping only */ }
 }
@@ -195,18 +249,24 @@ function log(fields) {
 }
 
 /* ---------- GET /speech/status ---------- */
+/* For a signed-in learner on a known chapter the answer always carries
+   `tasks` — this chapter's per-task checks today — whatever the mode, because
+   the per-task cap also covers browser-recognition checks. */
 export async function speechStatus(request, env) {
   const mode = speechMode(env);
-  if (mode === "off") return json({ ok: true, enabled: false });
-  const chapter = speechChapter(env, new URL(request.url).searchParams.get("chapter") || "");
-  if (!chapter) return json({ ok: true, enabled: true, eligible: false });
-  const user = await findSessionUser(env.DB, getSessionToken(request));
-  if (!user) return json({ ok: true, enabled: true, signedIn: false, eligible: false });
-  if (!(await mayUse(env, mode, user, chapter))) return json({ ok: true, enabled: true, signedIn: true, eligible: false });
+  const chapterId = new URL(request.url).searchParams.get("chapter") || "";
+  const known = knownChapter(chapterId);
+  const user = known ? await findSessionUser(env.DB, getSessionToken(request)) : null;
   const p = periods();
+  const tasks = user ? { tasks: await chapterTaskUse(env, user.id, chapterId, p) } : {};
+  if (mode === "off") return json({ ok: true, enabled: false, ...(user ? { signedIn: true } : {}), ...tasks });
+  const chapter = speechChapter(env, chapterId);
+  if (!chapter) return json({ ok: true, enabled: true, ...(user ? { signedIn: true } : {}), eligible: false, ...tasks });
+  if (!user) return json({ ok: true, enabled: true, signedIn: false, eligible: false });
+  if (!(await mayUse(env, mode, user, chapter))) return json({ ok: true, enabled: true, signedIn: true, eligible: false, ...tasks });
   const [d, m] = await Promise.all([used(env, user.id, p.dayKey), used(env, user.id, p.monthKey)]);
   return json({
-    ok: true, enabled: true, signedIn: true, eligible: true,
+    ok: true, enabled: true, signedIn: true, eligible: true, ...tasks,
     remaining: { day: Math.max(0, num(env, "SPEECH_DAILY_CHECKS") - d), month: Math.max(0, num(env, "SPEECH_MONTHLY_CHECKS") - m) },
     limits: { maxSeconds: num(env, "SPEECH_MAX_SECONDS"), maxBytes: num(env, "SPEECH_MAX_BYTES") }
   });
@@ -224,6 +284,8 @@ export async function speechTranscribe(request, env, ctx) {
   const url = new URL(request.url);
   const chapter = speechChapter(env, url.searchParams.get("chapter") || "");
   if (!chapter) return fail("not_enabled", 403);
+  const task = speechTask(chapter.id, url.searchParams.get("task"));
+  if (task === null) return fail("bad_task", 400);
   if (!(await mayUse(env, mode, user, chapter))) return fail("not_entitled", 403);
 
   const type = String(request.headers.get("content-type") || "").trim().toLowerCase();
@@ -245,19 +307,29 @@ export async function speechTranscribe(request, env, ctx) {
     return fail("speech_busy", 503);
   }
 
+  /* This task's checks today first: a 4th check is refused before anything
+     else is reserved and before the provider is contacted. */
+  const tKey = taskKey(p, chapter.id, task);
+  const t = await reserveTask(env, user.id, tKey);
+  if (!t.ok) {
+    log({ status: 429, error: "task_limit", ms: Date.now() - started });
+    return json({ ok: false, error: "task_limit", message: taskLimitMessage(t.info.limit), task: t.info }, 429);
+  }
+  const unTask = async () => { await release(env, user.id, tKey, 1); return taskInfo(env, await used(env, user.id, tKey)); };
+
   /* Reserve, cheapest-to-refund first. Each failed step releases the ones before it. */
-  if (!(await reserve(env, user.id, p.minuteKey, 1, num(env, "SPEECH_PER_MINUTE")))) return fail("rate_minute", 429, { retryAfter: 60 - new Date().getUTCSeconds() });
+  if (!(await reserve(env, user.id, p.minuteKey, 1, num(env, "SPEECH_PER_MINUTE")))) return fail("rate_minute", 429, { retryAfter: 60 - new Date().getUTCSeconds(), task: await unTask() });
   if (!(await reserve(env, user.id, p.dayKey, 1, num(env, "SPEECH_DAILY_CHECKS")))) {
     await release(env, user.id, p.minuteKey, 1);
-    return fail("quota_day", 429);
+    return fail("quota_day", 429, { task: await unTask() });
   }
   if (!(await reserve(env, user.id, p.monthKey, 1, num(env, "SPEECH_MONTHLY_CHECKS")))) {
     await Promise.all([release(env, user.id, p.minuteKey, 1), release(env, user.id, p.dayKey, 1)]);
-    return fail("quota_month", 429);
+    return fail("quota_month", 429, { task: await unTask() });
   }
   if (!(await reserve(env, GLOBAL_ID, p.globalKey, 1, num(env, "SPEECH_GLOBAL_DAILY_REQUESTS")))) {
     await Promise.all([release(env, user.id, p.minuteKey, 1), release(env, user.id, p.dayKey, 1), release(env, user.id, p.monthKey, 1)]);
-    return fail("speech_busy", 503);
+    return fail("speech_busy", 503, { task: await unTask() });
   }
 
   // Forward ONLY the audio and its type — no cookie, no user id, no chapter text.
@@ -285,10 +357,10 @@ export async function speechTranscribe(request, env, ctx) {
     const seconds = Number.isFinite(Number(out.seconds)) && Number(out.seconds) > 0 ? Number(out.seconds) : declaredMs / 1000;
     tasks.push(add(env, GLOBAL_ID, p.costKey, Math.ceil(Math.ceil(seconds) * num(env, "SPEECH_PRICE_MICROS_PER_MIN") / 60)));
   } else {
-    // The learner never loses day/month units to our failure. The per-minute
-    // bucket and the global request count stay when the provider was
-    // contacted, so refunded retries during an outage remain bounded.
-    tasks.push(release(env, user.id, p.dayKey, 1), release(env, user.id, p.monthKey, 1));
+    // The learner never loses day/month units — or this task's check — to our
+    // failure. The per-minute bucket and the global request count stay when
+    // the provider was contacted, so refunded retries during an outage remain bounded.
+    tasks.push(release(env, user.id, p.dayKey, 1), release(env, user.id, p.monthKey, 1), release(env, user.id, tKey, 1));
     if (!contacted) tasks.push(release(env, user.id, p.minuteKey, 1), release(env, GLOBAL_ID, p.globalKey, 1));
   }
   const ms = Date.now() - started;
@@ -299,12 +371,32 @@ export async function speechTranscribe(request, env, ctx) {
 
   log({ ok, status: ok ? 200 : status, error: ok ? null : (out && out.error) || "unknown", ms, bytes: audio.byteLength, declaredMs: Math.round(declaredMs), seconds: ok ? out.seconds : null, provider: contacted });
 
-  if (ok) return json({ ok: true, text: out.text.trim() });
+  const taskNow = taskInfo(env, await used(env, user.id, tKey).catch(() => 0));
+  if (ok) return json({ ok: true, text: out.text.trim(), task: taskNow });
   const e = out && out.error;
-  if (e === "unreadable_audio") return fail("unreadable_audio", 422);
-  if (e === "too_large") return fail("too_large", 413);
-  if (e === "unsupported_type") return fail("unsupported_type", 415);
-  if (e === "empty_audio") return fail("empty_audio", 400);
-  if (e === "provider_timeout") return fail("speech_timeout", 504);
-  return fail("speech_unavailable", 503);
+  const extra = { task: taskNow };
+  if (e === "unreadable_audio") return fail("unreadable_audio", 422, extra);
+  if (e === "too_large") return fail("too_large", 413, extra);
+  if (e === "unsupported_type") return fail("unsupported_type", 415, extra);
+  if (e === "empty_audio") return fail("empty_audio", 400, extra);
+  if (e === "provider_timeout") return fail("speech_timeout", 504, extra);
+  return fail("speech_unavailable", 503, extra);
+}
+
+/* ---------- POST /speech/task-check ----------
+   One browser-recognition check (the transcript came from the learner's own
+   browser, not from us): counted against the same per-task counter as AI
+   checks, so "Use browser check" or a non-AI chapter never adds checks to a
+   task. No audio, no text, no AI call; works in every SPEECH_MODE. */
+export async function speechTaskCheck(request, env) {
+  const user = await findSessionUser(env.DB, getSessionToken(request));
+  if (!user) return fail("auth_required", 401);
+  const url = new URL(request.url);
+  const chapterId = url.searchParams.get("chapter") || "";
+  const task = speechTask(chapterId, url.searchParams.get("task"));
+  if (task === null) return fail("bad_task", 400);
+  const p = periods();
+  const t = await reserveTask(env, user.id, taskKey(p, chapterId, task));
+  if (!t.ok) return json({ ok: false, error: "task_limit", message: taskLimitMessage(t.info.limit), task: t.info }, 429);
+  return json({ ok: true, task: t.info });
 }

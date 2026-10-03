@@ -48,8 +48,8 @@ AI_ANON_GLOBAL_DAILY_REQUESTS = "100"
 
 # Record & Check speech transcription (src/speech.js → klarweg-tutor
 # /v1/transcribe → OpenAI gpt-transcribe; the key is the TUTOR's existing
-# OPENAI_API_KEY secret). Shipped OFF; since 2026-10-03 "allowlist" (internal
-# staging: the SPEECH_ALLOWLIST secret lists the owner's account only).
+# OPENAI_API_KEY secret). Shipped OFF; "allowlist" (owner-only internal
+# staging) from 2026-10-03; production: "entitled" on every chapter.
 # Every chapter page asks /speech/status; only chapters inside the scope
 # below can say yes (src/speech.js speechChapter).
 #   "off"        nobody; chapter pages keep browser speech recognition
@@ -57,14 +57,18 @@ AI_ANON_GLOBAL_DAILY_REQUESTS = "100"
 #                (comma-separated user ids) — internal staging
 #   "entitled"   every signed-in owner of the chapter's level
 # Kill switch: set "off" and redeploy, or wrangler rollback.
-SPEECH_MODE = "allowlist"
+SPEECH_MODE = "entitled"
 # Scope = levels ("a1", "a1,a2", … or "all"; empty = none) PLUS the explicit
-# chapter list, MINUS the exclusions. Staging: one or two chapters per level,
-# incl. structural exceptions (B2·14 Goethe test, B2·38), while allowlisted.
-# Widening needs `--allow-speech-scope=<SPEECH_SCOPE>` (or `=list`).
-SPEECH_SCOPE = ""
-SPEECH_CHAPTERS = "a1-1-alphabet,a1-2-vokale,a2-1-genitiv,b1-1-infinitiv-mit-zu,b2-01-erweiterte-satzklammer,b2-14-goethe-mini-test-1,b2-38-verschachtelte-relativsaetze,c1-01-tempusgebrauch-stilistische-tempuswahl,c2-01-zeitformen-der-verben,c2-29-goethe-c2-final"
+# chapter list, MINUS the exclusions. Production: "all" — every chapter in
+# src/speech-tasks.js (generated from the chapter data); access still comes
+# from the learner's level entitlement. Widening needs
+# `--allow-speech-scope=<SPEECH_SCOPE>` (or `=list`).
+SPEECH_SCOPE = "all"
+SPEECH_CHAPTERS = ""
 SPEECH_CHAPTERS_EXCLUDE = ""
+# Per account, per Speaking task (one Record & check button), per UTC day:
+# AI checks and browser-recognition checks together. Never above 3.
+SPEECH_TASK_DAILY_CHECKS = "3"
 # Per account: checks per minute (anti-hammering), per UTC day, per month.
 SPEECH_PER_MINUTE = "6"
 SPEECH_DAILY_CHECKS = "60"

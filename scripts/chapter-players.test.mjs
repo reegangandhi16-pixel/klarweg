@@ -192,9 +192,13 @@ test('scorer and Speaking/Story code unchanged by this rollout', () => {
   try { base = execFileSync('git', ['show', 'e66604c:chapter/chapter-app.js'], { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 << 20 }); } catch { return; }
   const same = (a, b) => assert.equal(cut(APP, a, b), cut(base, a, b), a);
   same('  // ---- Word Match scorer (deterministic) ----', '  // ---- end Word Match scorer ----');
-  same('  function bodySpeaking() {', '  /* Speaking check — microphone context');
   same('  function bodyStory() {', '  function bodyVocabulary() {');
-  same('  function askSpeechAccess() {', '  function speechServerEndpoint() {');
+  // The Speaking cards changed only by the per-task daily cap (the note under
+  // Record & check and the locked-click guard; scripts/speech-task-cap.test.mjs).
+  const TASK_CAP_LINES = /^ {6}\/\/ Per-task daily cap|^ {6}const note = el\('p', \{ class: 'muted kw-task-left'|^ {6}note\.hidden = true;$|^ {6}micBtn\.setAttribute\('aria-describedby', note\.id\);$|^ {6}taskUI\[i\] = |^ {6}paintTask\(i\);$|^ {8}if \(taskState\(i\)\.locked && !micBtn\._kwSession\)/;
+  const speaking = cut(APP, '  function bodySpeaking() {', '  /* Speaking check — microphone context').split('\n').filter((l) => !TASK_CAP_LINES.test(l)).join('\n')
+    .replace('card.append(micBtn, note, result);', 'card.append(micBtn, result);');
+  assert.equal(speaking, cut(base, '  function bodySpeaking() {', '  /* Speaking check — microphone context'), 'Speaking cards: only the per-task cap was added');
 });
 
 /* ---------- production audio mapping (data only, no playback) ---------- */

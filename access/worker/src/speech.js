@@ -178,14 +178,26 @@ const taskInfo = (env, usedN) => {
   const u = Math.min(usedN, limit);
   return { limit, used: u, remaining: limit - u, locked: u >= limit };
 };
+/* One query for this account's task counters of the day, then the exact
+   chapter and task are matched here. No LIKE/GLOB at all: Cloudflare D1
+   refuses LIKE patterns over 50 bytes, and "st:<day>:<chapterId>:%" is 54
+   for b1-18-relativsaetze-mit-praepositionen (49 real chapters exceeded it).
+   The range below is the same rows as LIKE 'st:<day>:%' (':' + 1 = ';'),
+   served by the (user_id, period) primary key, whatever the chapter id. */
 async function chapterTaskUse(env, userId, chapterId, p) {
   const n = SPEECH_TASKS[chapterId];
   const used = new Array(n).fill(0);
-  const rows = await env.DB.prepare("SELECT period, units FROM ai_usage WHERE user_id = ?1 AND period LIKE ?2")
-    .bind(userId, "st:" + p.day + ":" + chapterId + ":%").all();
+  const dayPrefix = "st:" + p.day + ":";
+  const rows = await env.DB.prepare("SELECT period, units FROM ai_usage WHERE user_id = ?1 AND period >= ?2 AND period < ?3")
+    .bind(userId, dayPrefix, "st:" + p.day + ";").all();
+  const mine = dayPrefix + chapterId + ":";
   for (const r of rows.results || []) {
-    const t = Number(String(r.period).slice(String(r.period).lastIndexOf(":") + 1));
-    if (Number.isInteger(t) && t >= 0 && t < n) used[t] = Number(r.units) || 0;
+    const period = String(r.period);
+    if (!period.startsWith(mine)) continue;
+    const rest = period.slice(mine.length);
+    if (!/^(0|[1-9][0-9]?)$/.test(rest)) continue;          // exactly a task number (another chapter's id never matches)
+    const t = Number(rest);
+    if (t < n) used[t] = Number(r.units) || 0;
   }
   const limit = num(env, "SPEECH_TASK_DAILY_CHECKS");
   return { limit, used: used.map((x) => Math.min(x, limit)), remaining: used.map((x) => Math.max(0, limit - x)), resetsAt: p.resetsAt };

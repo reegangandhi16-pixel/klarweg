@@ -3,7 +3,10 @@
      db.prepare(sql).bind(...).first() / .all() / .run()
      db.batch([stmts])   (atomic)
    and applies the real schema.sql + every migration-*.sql in order,
-   so tests run against the same schema production has. */
+   so tests run against the same schema production has.
+   Production limit enforced here too: D1 refuses LIKE/GLOB patterns longer
+   than 50 bytes ("LIKE or GLOB pattern too complex"); plain SQLite allows
+   50 000, which is how a too-long pattern once passed every local test. */
 import { DatabaseSync } from 'node:sqlite';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -26,8 +29,10 @@ class Stmt {
   _runSync() { return this._prep().run(...this.params); }
 }
 
+export const D1_LIKE_PATTERN_MAX_BYTES = 50;
+
 export function createD1(workerDir) {
-  const db = new DatabaseSync(':memory:');
+  const db = new DatabaseSync(':memory:', { limits: { likePatternLength: D1_LIKE_PATTERN_MAX_BYTES } });
   const files = ['schema.sql', ...fs.readdirSync(workerDir).filter((f) => /^migration-\d+.*\.sql$/.test(f)).sort()];
   for (const f of files) db.exec(fs.readFileSync(path.join(workerDir, f), 'utf8'));
   return {

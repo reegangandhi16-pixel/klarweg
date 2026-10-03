@@ -30,7 +30,23 @@ function handleOptions(request) {
 }
 
 export default {
+  /* Defence in depth: an unexpected exception (a D1 error, a bug) becomes a
+     JSON 500 with the normal CORS headers instead of Cloudflare's raw error
+     page, which the browser could only report as a CORS/network failure.
+     It never replaces fixing the cause. Logs carry the error class only. */
   async fetch(request, env, ctx) {
+    try {
+      return await route(request, env, ctx);
+    } catch (err) {
+      let path = "";
+      try { path = new URL(request.url).pathname; } catch {}
+      console.log(JSON.stringify({ svc: "klarweg-access", evt: "unhandled", path, error: (err && err.name) || "Error" }));
+      return withCors(json({ ok: false, error: "server_error" }, 500), request);
+    }
+  }
+};
+
+async function route(request, env, ctx) {
     const url = new URL(request.url);
 
     if (request.method === "OPTIONS") {
@@ -181,5 +197,4 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
       ),
       request
     );
-  }
-};
+}

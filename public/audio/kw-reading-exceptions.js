@@ -484,7 +484,8 @@
     var userOnAudio = opts.onAudio;
     return speak(recorded, Object.assign({}, opts, {
       onAudio: function (audio) {
-        if (endsWithFile(audio.currentSrc || audio.src)) cutAt(audio, ex.endAt);
+        // Effective end for the Reading seek bar (0 → endAt, not the whole file).
+        if (endsWithFile(audio.currentSrc || audio.src)) { audio.kwEndAt = ex.endAt; cutAt(audio, ex.endAt); }
         if (typeof userOnAudio === 'function') userOnAudio(audio);
       }
     }));

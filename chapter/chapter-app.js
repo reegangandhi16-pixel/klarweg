@@ -570,7 +570,14 @@
     const fmt = (t) => { t = Math.max(0, Math.floor(isFinite(t) ? t : 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
     function decorate(btn, noun) { btn.type = 'button'; btn.classList.add('kw-pp'); btn.innerHTML = GLYPH; btn.dataset.noun = noun; state(btn, 'idle'); }
     function state(btn, st) { btn.dataset.state = st; btn.setAttribute('aria-label', VERB[st] + ' ' + btn.dataset.noun); }
-    // opts: { label, step (s), getAudio() → the active <audio> or null, onShow(t, d)? }
+    // Playable length: opts.end(a) when it gives an earlier end (Reading's authored
+    // endAt on recordings with an unplayed tail), else the file's duration. Only
+    // once the duration is known, so the bar wakes at the same moment as before.
+    function spanOf(a, end) {
+      const d = a.duration, e = end ? end(a) : NaN;
+      return (isFinite(d) && isFinite(e) && e > 0 && e < d) ? e : d;
+    }
+    // opts: { label, step (s), getAudio() → the active <audio> or null, onShow(t, d)?, end(a)? }
     function seekBar(bar, fill, opts) {
       const thumb = el('span', { class: 'kw-seek-thumb', 'aria-hidden': 'true' });
       bar.appendChild(thumb); bar.classList.add('kw-seek');
@@ -586,7 +593,8 @@
       function seekTo(f) {
         f = Math.max(0, Math.min(1, f));
         const a = opts.getAudio();
-        if (a && isFinite(a.duration) && a.duration > 0) { a.currentTime = f * a.duration; show(f, a.currentTime, a.duration); }
+        const d = a ? spanOf(a, opts.end) : 0;
+        if (a && isFinite(d) && d > 0) { a.currentTime = f * d; show(f, Math.min(a.currentTime, d), d); }
       }
       const fracAt = (x) => { const b = bar.getBoundingClientRect(); return b.width ? (x - b.left) / b.width : 0; };
       bar.addEventListener('pointerdown', (e) => {
@@ -600,7 +608,7 @@
       bar.addEventListener('pointerup', end); bar.addEventListener('pointercancel', end); bar.addEventListener('lostpointercapture', end);
       bar.addEventListener('keydown', (e) => {
         if (!enabled) return;
-        const a = opts.getAudio(), d = a && isFinite(a.duration) ? a.duration : 0;
+        const a = opts.getAudio(), sp = a ? spanOf(a, opts.end) : 0, d = isFinite(sp) ? sp : 0;
         const k = e.key; if (!d || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'].includes(k)) return;
         e.preventDefault();
         const st = opts.step, t = a.currentTime;
@@ -612,9 +620,9 @@
       return { show: show, setEnabled: setEnabled, dragging: () => dragging };
     }
     // Keeps a seek bar in step with one <audio> until `signal` aborts.
-    function follow(a, seek, signal, alive) {
+    function follow(a, seek, signal, alive, end) {
       let raf = 0;
-      const paint = () => { if (!alive() || seek.dragging()) return; const d = a.duration; seek.show(d ? a.currentTime / d : 0, a.currentTime, d); };
+      const paint = () => { if (!alive() || seek.dragging()) return; const d = spanOf(a, end), t = d ? Math.min(a.currentTime, d) : a.currentTime; seek.show(d ? t / d : 0, t, d); };
       const loop = () => { paint(); if (alive() && !a.paused && !a.ended) raf = requestAnimationFrame(loop); };
       a.addEventListener('play', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); }, { signal: signal });
       ['timeupdate', 'seeked', 'loadedmetadata', 'durationchange', 'pause'].forEach((t) => a.addEventListener(t, paint, { signal: signal }));
@@ -2105,14 +2113,15 @@
     const bar = el('div', { class: 'audio-track-bar reading-seek' }, fill);
     const time = el('span', { class: 'reading-seek-time', 'aria-hidden': 'true' }, '0:00 / 0:00');
     let btn = null, ac = null;
-    const seek = PlayerUI.seekBar(bar, fill, { label: 'Position in passage', step: 2, getAudio: () => (btn ? SentencePlay.audioOf(btn) : null),
+    const endAt = (a) => a.kwEndAt;                     // set by the Reading exception scripts (alias pages only)
+    const seek = PlayerUI.seekBar(bar, fill, { label: 'Position in passage', step: 2, end: endAt, getAudio: () => (btn ? SentencePlay.audioOf(btn) : null),
       onShow: (t, d) => { time.textContent = PlayerUI.fmt(t) + ' / ' + PlayerUI.fmt(d); } });
     seek.setEnabled(false);
     btn = SentencePlay.button(txt, { noun: 'passage', rate: 0.92, sync: sync,
       onAudio: (a) => {
         if (ac) ac.abort();
         ac = new AbortController(); seek.setEnabled(true);
-        PlayerUI.follow(a, seek, ac.signal, () => SentencePlay.audioOf(btn) === a);
+        PlayerUI.follow(a, seek, ac.signal, () => SentencePlay.audioOf(btn) === a, endAt);
       },
       onIdle: () => { if (ac) { ac.abort(); ac = null; } seek.show(0, 0, 0); seek.setEnabled(false); } });
     const body = el('div', {}); body.append(...passage.childNodes); passage.append(body);

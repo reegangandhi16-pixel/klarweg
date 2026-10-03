@@ -190,7 +190,8 @@
     var userOnAudio = opts.onAudio;
     return speak(recorded, Object.assign({}, opts, {
       onAudio: function (audio) {
-        if (endsWithFile(audio.currentSrc || audio.src)) cutAt(audio, ex.endAt);
+        // Effective end for the Reading seek bar (0 → endAt, not the whole file).
+        if (endsWithFile(audio.currentSrc || audio.src)) { audio.kwEndAt = ex.endAt; cutAt(audio, ex.endAt); }
         if (typeof userOnAudio === 'function') userOnAudio(audio);
       }
     }));
@@ -200,7 +201,7 @@
 <script src="story-lexicon.js"></script>
 <script src="tokenizer.js"></script>
 <script src="../kw-access.js?v=2"></script>
-<script src="chapter-app.js?v=26"></script>
+<script src="chapter-app.js?v=27"></script>
 <script src="chapter-story.js?v=7"></script>
 <script src="chapter-tutor.js?v=9"></script>
 

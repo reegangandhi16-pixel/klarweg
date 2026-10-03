@@ -134,7 +134,7 @@ function harness({ chapter = 'a1-1-alphabet', speaking = TASKS, eligible = true,
 
 test('AI path: "Checks left today" 3 → 2 → 1, then the task locks with the message; another task stays usable', async () => {
   const h = harness();
-  assert.equal(h.note(0), null, 'nothing shown before the server answered');
+  assert.equal(h.note(0), 'Checking speech access\u2026', 'no "Checks left today" before the server answered');
   await h.flush();
   assert.equal(h.note(0), 'Checks left today: 3');
   for (const left of [2, 1]) { await h.aiCheck(0); assert.equal(h.state(0), 'result'); assert.equal(h.note(0), 'Checks left today: ' + left); assert.equal(h.locked(0), false); }

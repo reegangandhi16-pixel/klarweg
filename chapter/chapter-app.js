@@ -4515,6 +4515,26 @@
     // Click while recording = stop and check, never a dead button.
     if (btn._kwSession) { trace('click.stop', true, 'second click — manual stop'); stopSession(btn); return; }
     if (btn._kwBusy) { trace('click.ignored', false, 'busy'); return; }
+    // No speech-access decision yet (still loading, or the lookup failed): wait
+    // for it — never guess browser recognition, which would also spend one of
+    // the task's checks. A failed lookup runs no check at all.
+    if (!speechPilotEndpoint() && !speechAccess.off && !speechDecided()) {
+      btn._kwBusy = true;
+      result._kwScrolled = false;
+      micEnter(btn, ' Checking speech access\u2026');
+      btn.setAttribute('aria-busy', 'true');
+      say('checking-access', 'Checking speech access\u2026');
+      trace('click.wait', true, speechAccess.state);
+      const decision = askSpeechAccess(true);
+      let timer = 0;
+      const state = await Promise.race([decision, new Promise((r) => { timer = setTimeout(() => r('timeout'), SPEECH_STATUS_WAIT_MS); })]);
+      clearTimeout(timer);
+      btn._kwBusy = false; btn.removeAttribute('aria-busy');
+      if (state === 'eligible' || state === 'not-eligible' || state === 'signed-out') { micIdle(btn); return runRecognition(p, btn, result); }
+      micIdle(btn);
+      say('access-unavailable', 'The speech check could not be reached, so nothing was checked and none of this task\u2019s checks was used. Press Record & check to try again.');
+      return;
+    }
     trace('click', true, { prompt: p.de });
     // Acknowledge the click before touching any API, so no failure path — not
     // even a synchronous throw — can leave the button looking untouched.
@@ -4776,46 +4796,87 @@
     return null;
   }
   /* ---- Klarweg speech check (klarweg-access /speech/*) ---------------------
-     GET /speech/status is asked once per chapter page, after KWAccess.ready()
-     (so KW_ACCESS_API is known) and only for a signed-in learner; the server
-     decides from its own scope, mode and entitlement whether this chapter may
-     use it — the page holds no chapter list. Only an explicit
-     { enabled: true, eligible: true } switches Record & check to the server
-     path; signed out, not entitled, switched off server-side, an error or no
-     answer yet all keep browser speech recognition exactly as before. After a
-     server-side refusal (quota, access, switched off) or repeated failures the
-     page returns to browser recognition for the rest of the visit, and says so.
-     The server returns only { text }; Word Match below scores it unchanged. */
+     GET /speech/status is asked per chapter page, after KWAccess.ready() (so
+     KW_ACCESS_API is known); the server decides from its own scope, mode and
+     entitlement whether this chapter may use it — the page holds no chapter
+     list. speechAccess.state:
+       'loading'       no decision yet — a press WAITS for it (never guesses)
+       'eligible'      { enabled: true, eligible: true } → the server path
+       'not-eligible'  an explicit server answer (not entitled, switched off,
+                       out of scope) or no Access API → browser recognition
+       'signed-out'    → browser recognition (nothing to ask)
+       'unavailable'   the status request failed → no check runs; the learner
+                       is told and can press again (which asks again)
+     Transient failures are retried a bounded number of times. After a
+     server-side refusal of a real check (quota, access, switched off) or
+     repeated check failures the page returns to browser recognition for the
+     rest of the visit, and says so. The server returns only { text }; Word
+     Match below scores it unchanged. */
   const ACCESS_SPEECH = 'kw-access';
   const SPEECH_MAX_FAILURES = 3;
-  const speechAccess = { asked: false, eligible: false, off: false };
+  const SPEECH_STATUS_TIMEOUT_MS = 8000;           // one status request
+  const SPEECH_STATUS_RETRIES = [1500, 4000];      // automatic retries after a transient failure
+  const SPEECH_STATUS_WAIT_MS = 10000;             // how long a press waits for a pending decision
+  const speechAccess = { asked: false, state: 'loading', eligible: false, off: false, promise: null, settle: null, retry: 0, retryTimer: 0 };
   function speechAccessApi() {
     const a = typeof window.KW_ACCESS_API === 'string' ? window.KW_ACCESS_API.replace(/\/+$/, '') : '';
     return /^https:\/\/[^/]+$/.test(a) || /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(a) ? a : '';
   }
-  function askSpeechAccess() {
-    if (speechAccess.asked || typeof fetch !== 'function') return;
+  // Record the decision; resolves the promise a waiting press holds.
+  function speechDecide(state, info) {
+    clearTimeout(speechAccess.retryTimer);
+    speechAccess.state = state;
+    speechAccess.eligible = state === 'eligible';
+    if (state === 'signed-out') taskCap.signedIn = false;
+    trace('speech.status', state === 'eligible', Object.assign({ state: state }, info || {}));
+    paintTasks();
+    const done = speechAccess.settle; speechAccess.settle = null;
+    if (done) done(state);
+  }
+  const speechDecided = () => speechAccess.state === 'eligible' || speechAccess.state === 'not-eligible' || speechAccess.state === 'signed-out';
+  // Ask (or ask again, after 'unavailable'). Returns a promise of the decision.
+  function askSpeechAccess(again) {
+    if (typeof fetch !== 'function') { if (!speechDecided()) speechDecide('not-eligible', { why: 'no fetch' }); return Promise.resolve(speechAccess.state); }
+    if (speechAccess.asked && !(again && speechAccess.state === 'unavailable')) return speechAccess.promise || Promise.resolve(speechAccess.state);
     speechAccess.asked = true;
+    speechAccess.state = 'loading'; speechAccess.eligible = false;
+    clearTimeout(speechAccess.retryTimer);
+    if (again) speechAccess.retry = 0;
+    speechAccess.promise = new Promise((resolve) => { speechAccess.settle = resolve; });
+    paintTasks();
+    const ask = () => {
+      const api = speechAccessApi();
+      const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      const timer = setTimeout(() => { if (ctl) ctl.abort(); }, SPEECH_STATUS_TIMEOUT_MS);
+      fetch(api + '/speech/status?chapter=' + encodeURIComponent(C.id), { credentials: 'include', cache: 'no-store', signal: ctl ? ctl.signal : undefined })
+        .then((r) => r.json().catch(() => null).then((j) => {
+          clearTimeout(timer);
+          if (!r.ok || !j || j.ok !== true) return failed('http ' + r.status, r.status >= 500 || r.status === 429);
+          if (j.signedIn === false) taskCap.signedIn = false;
+          else if (j.signedIn === true || j.tasks) taskCap.signedIn = true;
+          if (j.tasks) taskServerCounts(j.tasks);
+          const ok = j.enabled === true && j.eligible === true;
+          speechDecide(ok ? 'eligible' : j.signedIn === false ? 'signed-out' : 'not-eligible', { enabled: j.enabled, eligible: j.eligible, tasks: j.tasks ? j.tasks.used : null });
+        }), () => { clearTimeout(timer); failed('unreachable', true); });
+    };
+    // A failed lookup is never a "no": it stays 'unavailable' (no check runs),
+    // with at most SPEECH_STATUS_RETRIES.length automatic retries.
+    const failed = (why, transient) => {
+      const wait = transient ? SPEECH_STATUS_RETRIES[speechAccess.retry] : undefined;
+      if (wait !== undefined) { speechAccess.retry++; trace('speech.status.retry', false, { why: why, inMs: wait }); speechAccess.retryTimer = setTimeout(ask, wait); return; }
+      speechDecide('unavailable', { why: why });
+    };
     const go = (snap) => {
       const api = speechAccessApi();
-      if (!api) return;
-      if (!api) { taskCap.signedIn = false; paintTasks(); return; }
-      if (snap && snap.authenticated === false) { trace('speech.status', false, 'signed out'); taskCap.signedIn = false; paintTasks(); return; }   // nothing to ask
+      if (!api) { taskCap.signedIn = false; speechDecide('not-eligible', { why: 'no Access API' }); return; }
+      // Signed out = nothing to ask. A failed /auth/me is not "signed out": ask the server.
+      if (snap && snap.authenticated === false && snap.source !== 'server-unavailable') { speechDecide('signed-out'); return; }
       if (snap && snap.authenticated === true) taskCap.signedIn = true;
-      fetch(api + '/speech/status?chapter=' + encodeURIComponent(C.id), { credentials: 'include', cache: 'no-store' })
-        .then((r) => (r.ok ? r.json() : null))
-        .then((j) => {
-          speechAccess.eligible = !!(j && j.enabled === true && j.eligible === true);
-          if (j && j.signedIn === false) taskCap.signedIn = false;
-          else if (j && (j.signedIn === true || j.tasks)) taskCap.signedIn = true;
-          if (j && j.tasks) taskServerCounts(j.tasks);
-          trace('speech.status', speechAccess.eligible, j ? { enabled: j.enabled, eligible: j.eligible, tasks: j.tasks ? j.tasks.used : null } : null);
-        })
-        .catch(() => trace('speech.status', false, 'unreachable'))
-        .then(() => { if (taskCap.signedIn === null) taskCap.signedIn = false; paintTasks(); });
+      ask();
     };
     const A = window.KWAccess;
     if (A && typeof A.ready === 'function') A.ready().then(go, () => go()); else go();
+    return speechAccess.promise;
   }
   function speechServerEndpoint() { return speechAccess.eligible && !speechAccess.off && speechAccessApi() ? ACCESS_SPEECH : null; }
   // Server answer → the check's error class (see WHISPER_ERRORS).
@@ -4854,7 +4915,7 @@
   const taskLocalKey = (i) => (taskCap.signedIn ? 'acct:' : 'anon:') + C.id + ':' + i;
   function taskLimit() { return taskCap.server && taskCap.server.limit > 0 ? taskCap.server.limit : TASK_DAILY_CHECKS; }
   function taskState(i) {
-    if (taskCap.signedIn === null) return { known: false, locked: false };
+    if (taskCap.signedIn === null || !speechDecided()) return { known: false, locked: false };
     const limit = taskLimit();
     const srv = taskCap.server && taskCap.server.day === utcDay() ? (taskCap.server.used[i] || 0) : 0;
     const loc = Number(taskStore().c[taskLocalKey(i)]) || 0;
@@ -4866,7 +4927,14 @@
     const u = taskUI[i];
     if (!u) return;
     const st = taskState(i);
-    if (!st.known) { u.note.hidden = true; return; }
+    if (!st.known) {
+      // No speech-access decision yet: never "Checks left today" before the page knows which check runs.
+      const pend = speechAccess.state === 'loading' ? 'Checking speech access\u2026' : speechAccess.state === 'unavailable' ? 'The speech check could not be reached. Press Record & check to try again.' : '';
+      u.note.hidden = !pend;
+      if (pend && u.note.textContent !== pend) u.note.textContent = pend;
+      u.note.style.color = '';
+      return;
+    }
     u.note.hidden = false;
     const text = st.locked ? taskLimitText() : 'Checks left today: ' + st.remaining;
     if (u.note.textContent !== text) u.note.textContent = text;
@@ -4883,7 +4951,7 @@
     clearTimeout(taskCap.resetTimer);
     const ms = (typeof Date.parse === 'function' ? Date.parse(iso) : NaN) - Date.now();
     // A new UTC day: ask the server again (a page left open overnight unlocks).
-    if (ms > 0 && ms < 26 * 3600e3) taskCap.resetTimer = setTimeout(() => { speechAccess.asked = false; askSpeechAccess(); paintTasks(); }, ms + 2000);
+    if (ms > 0 && ms < 26 * 3600e3) taskCap.resetTimer = setTimeout(() => { speechAccess.asked = false; speechAccess.retry = 0; askSpeechAccess(); paintTasks(); }, ms + 2000);
   }
   function taskServerCounts(t) {
     if (!t || !Array.isArray(t.used)) return;

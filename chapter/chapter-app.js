@@ -383,7 +383,7 @@
       '<span class="kw-sb-spin"></span>' +
       '</span>';
     const VERB = { idle: 'Play', loading: 'Stop', playing: 'Pause', paused: 'Resume', speaking: 'Stop' };
-    let active = null, ownRequest = false;   // active: { btn, text, audio }
+    let active = null, ownRequest = false;   // active: { btn, text, audio, cancelSync }
 
     // Circle: "Play sentence" … ; pill: "Hear model, play" … — the accessible
     // name always contains the visible label (WCAG 2.5.3 Label in Name).
@@ -392,7 +392,13 @@
       const label = btn.dataset.label;
       btn.setAttribute('aria-label', label ? label + ', ' + VERB[s].toLowerCase() : VERB[s] + ' ' + btn.dataset.noun);
     }
-    function reset() { const a = active; active = null; if (a) setState(a.btn, 'idle'); }
+    function reset() {
+      const a = active; active = null;
+      if (!a) return;
+      if (a.cancelSync) a.cancelSync();
+      setState(a.btn, 'idle');
+      const o = a.btn._kwOpts; if (o && o.onIdle) o.onIdle();
+    }
     if (enabled && window.KW_onAudioEvent) {
       window.KW_onAudioEvent(function (ev) {
         const run = active;
@@ -409,14 +415,17 @@
       // Like Story's playLine: clear the channel first — the engine's
       // browser-TTS path does not stop an <audio> that is still playing.
       try { Audio.stop(); } catch (_) {}
-      const run = active = { btn: btn, text: text, audio: null };
+      const opts = btn._kwOpts || {};
+      const run = active = { btn: btn, text: text, audio: null, cancelSync: null };
       setState(btn, 'loading');
       ownRequest = true;   // the engine emits `request` synchronously inside speak()
       try {
-        Audio.speak(text, 1, function () { if (active === run) reset(); },
+        Audio.speak(text, opts.rate || 1, function () { if (active === run) reset(); },
           { onAudio: function (a) {
             if (active !== run) return;
             run.audio = a;
+            if (opts.sync) run.cancelSync = opts.sync(a);    // the caller's own word sync (Reading)
+            if (opts.onAudio) opts.onAudio(a);             // e.g. a seek bar following this <audio>
             // ❚❚ only once sound can flow: a cold MP3 still downloading stays "loading".
             if (a.readyState >= 3) { setState(btn, 'playing'); return; }
             a.addEventListener('playing', function () { if (active === run && btn.dataset.state === 'loading') setState(btn, 'playing'); }, { once: true });
@@ -438,12 +447,16 @@
       stop();                                  // loading / speaking (TTS): honest Stop
     }
     // opts.label → pill variant with a constant visible label (no width change
-    // between states); opts.noun → the circle's accessible noun ("Play <noun>").
+    // between states); opts.noun → the circle's accessible noun ("Play <noun>");
+    // opts.rate → playback rate (default 1); opts.sync(audio) → start the caller's
+    // word sync on the <audio>, returning its cancel function; opts.onAudio(audio)
+    // / opts.onIdle() → follow this control's run (Reading's seek bar).
     function button(text, opts) {
       opts = opts || {};
       const btn = el('button', { class: 'kw-sb' + (opts.label ? ' kw-sb-wide' : ''), type: 'button', lang: 'en', html: GLYPH });
       if (opts.label) { btn.appendChild(el('span', { class: 'kw-sb-label', 'aria-hidden': 'true' }, opts.label)); btn.dataset.label = opts.label; }
       btn.dataset.noun = opts.noun || 'sentence';
+      btn._kwOpts = { rate: opts.rate, sync: opts.sync, onAudio: opts.onAudio, onIdle: opts.onIdle };
       setState(btn, 'idle');
       btn.addEventListener('click', function (e) { e.stopPropagation(); toggle(btn, text); });
       return btn;
@@ -465,7 +478,9 @@
       setState(btn, 'idle');
       return btn;
     }
-    return { enabled: enabled, button: button, toggle: toggle, row: row, drop: drop, shell: shell, state: setState };
+    // The <audio> this control is playing (or paused on), else null.
+    function audioOf(btn) { return active && active.btn === btn ? active.audio : null; }
+    return { enabled: enabled, button: button, toggle: toggle, row: row, drop: drop, shell: shell, state: setState, audioOf: audioOf };
   })();
   // Example-sentence buttons (vocabulary card, grammar example lines): A1·01 only.
   // Almost none of these sentences has a recording (35 of 9,200 vocabulary
@@ -492,7 +507,7 @@
     const LABEL = { idle: 'Play word', loading: 'Stop word', playing: 'Stop word' };
     let run = null, starting = false, timer = null;   // run: { btn, keys, audio }
 
-    function set(btn, st) { btn.dataset.state = st; btn.setAttribute('aria-label', LABEL[st]); }
+    function set(btn, st) { btn.dataset.state = st; btn.setAttribute('aria-label', LABEL[st] + (btn.dataset.voice ? ', ' + btn.dataset.voice + ' voice' : '')); }
     function reset() { clearInterval(timer); timer = null; const r = run; run = null; if (r) set(r.btn, 'idle'); }
     if (enabled && window.KW_onAudioEvent) {
       window.KW_onAudioEvent(function (ev) {
@@ -515,7 +530,9 @@
     // Same text key the engine puts on its `request` events.
     const key = (t) => String(t == null ? '' : t).replace(/\s+/g, ' ').replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"').trim();
     // force: the long-press speed menu always (re)starts instead of stopping.
-    function play(btn, text, rate, popupOpts, force) {
+    // speakImpl(opts): a caller's own audio call (vocabulary F/M voice); it gets
+    // the same { onAudio } hook. Default: speakWordFemale (the popup speaker).
+    function play(btn, text, rate, popupOpts, force, speakImpl) {
       if (!force && run && run.btn === btn && btn.dataset.state !== 'idle') { reset(); try { Audio.stop(); } catch (_) {} return; }
       reset();
       const surface = String(text || '').trim();
@@ -531,11 +548,80 @@
       } });
       starting = true;
       let p;
-      try { p = speakWordFemale(text, rate, opts); } finally { starting = false; }
+      try { p = speakImpl ? speakImpl(opts) : speakWordFemale(text, rate, opts); } finally { starting = false; }
       Promise.resolve(p).then(function () { settle(r); }, function () { settle(r); });
     }
     function decorate(btn) { btn.innerHTML = GLYPH; set(btn, 'idle'); }
-    return { enabled: enabled, play: play, decorate: decorate };
+    return { enabled: enabled, play: play, decorate: decorate, label: set };
+  })();
+
+  /* ---------- player controls: round Play/Pause and seek bar (all chapters) ----
+     Used by Reading (seek under the passage) and Listening (round play button +
+     seek within the current line). They only read and set the playing <audio>'s
+     currentTime — the audio calls, rates and word sync stay the sections' own;
+     kw-word-sync re-reads currentTime on 'seeked', so the highlight follows. */
+  const PlayerUI = (function () {
+    const GLYPH = '<span class="kw-pp-glyph" aria-hidden="true">' +
+      '<svg class="kw-pp-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
+      '<svg class="kw-pp-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>' +
+      '<svg class="kw-pp-stop" viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/></svg>' +
+      '<span class="kw-pp-spin"></span></span>';
+    const VERB = { idle: 'Play', loading: 'Stop', playing: 'Pause', paused: 'Resume', speaking: 'Stop' };
+    const fmt = (t) => { t = Math.max(0, Math.floor(isFinite(t) ? t : 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+    function decorate(btn, noun) { btn.type = 'button'; btn.classList.add('kw-pp'); btn.innerHTML = GLYPH; btn.dataset.noun = noun; state(btn, 'idle'); }
+    function state(btn, st) { btn.dataset.state = st; btn.setAttribute('aria-label', VERB[st] + ' ' + btn.dataset.noun); }
+    // opts: { label, step (s), getAudio() → the active <audio> or null, onShow(t, d)? }
+    function seekBar(bar, fill, opts) {
+      const thumb = el('span', { class: 'kw-seek-thumb', 'aria-hidden': 'true' });
+      bar.appendChild(thumb); bar.classList.add('kw-seek');
+      bar.setAttribute('role', 'slider'); bar.setAttribute('aria-label', opts.label); bar.setAttribute('aria-valuemin', '0');
+      let dragging = false, enabled = true;
+      function show(f, t, d) {
+        f = Math.max(0, Math.min(1, f || 0));
+        fill.style.width = (f * 100) + '%'; thumb.style.left = (f * 100) + '%';
+        bar.setAttribute('aria-valuenow', String(Math.round(t || 0))); bar.setAttribute('aria-valuemax', String(Math.round(d || 0)));
+        bar.setAttribute('aria-valuetext', fmt(t) + ' of ' + fmt(d));
+        if (opts.onShow) opts.onShow(t || 0, d || 0);
+      }
+      function seekTo(f) {
+        f = Math.max(0, Math.min(1, f));
+        const a = opts.getAudio();
+        if (a && isFinite(a.duration) && a.duration > 0) { a.currentTime = f * a.duration; show(f, a.currentTime, a.duration); }
+      }
+      const fracAt = (x) => { const b = bar.getBoundingClientRect(); return b.width ? (x - b.left) / b.width : 0; };
+      bar.addEventListener('pointerdown', (e) => {
+        if (!enabled) return;
+        e.preventDefault(); dragging = true;
+        try { bar.setPointerCapture(e.pointerId); } catch (_) {}
+        bar.classList.add('is-dragging'); seekTo(fracAt(e.clientX));
+      });
+      bar.addEventListener('pointermove', (e) => { if (dragging) seekTo(fracAt(e.clientX)); });
+      const end = () => { dragging = false; bar.classList.remove('is-dragging'); };
+      bar.addEventListener('pointerup', end); bar.addEventListener('pointercancel', end); bar.addEventListener('lostpointercapture', end);
+      bar.addEventListener('keydown', (e) => {
+        if (!enabled) return;
+        const a = opts.getAudio(), d = a && isFinite(a.duration) ? a.duration : 0;
+        const k = e.key; if (!d || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'].includes(k)) return;
+        e.preventDefault();
+        const st = opts.step, t = a.currentTime;
+        const to = k === 'Home' ? 0 : k === 'End' ? d - 0.05 : (k === 'ArrowLeft' || k === 'ArrowDown') ? t - st : (k === 'PageDown') ? t - st * 5 : (k === 'PageUp') ? t + st * 5 : t + st;
+        seekTo(Math.max(0, Math.min(d, to)) / d);
+      });
+      function setEnabled(b) { enabled = b; bar.tabIndex = b ? 0 : -1; bar.classList.toggle('is-disabled', !b); if (b) bar.removeAttribute('aria-disabled'); else bar.setAttribute('aria-disabled', 'true'); }
+      setEnabled(true); show(0, 0, 0);
+      return { show: show, setEnabled: setEnabled, dragging: () => dragging };
+    }
+    // Keeps a seek bar in step with one <audio> until `signal` aborts.
+    function follow(a, seek, signal, alive) {
+      let raf = 0;
+      const paint = () => { if (!alive() || seek.dragging()) return; const d = a.duration; seek.show(d ? a.currentTime / d : 0, a.currentTime, d); };
+      const loop = () => { paint(); if (alive() && !a.paused && !a.ended) raf = requestAnimationFrame(loop); };
+      a.addEventListener('play', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); }, { signal: signal });
+      ['timeupdate', 'seeked', 'loadedmetadata', 'durationchange', 'pause'].forEach((t) => a.addEventListener(t, paint, { signal: signal }));
+      signal.addEventListener('abort', () => cancelAnimationFrame(raf));
+      paint(); if (!a.paused) raf = requestAnimationFrame(loop);
+    }
+    return { decorate: decorate, state: state, seekBar: seekBar, follow: follow, fmt: fmt };
   })();
 
   /* ---------- toast ---------- */
@@ -1599,8 +1685,17 @@
     // in state.vocabVoice (default female). Each button plays its own gender.
     const voicePref = () => (state.vocabVoice || 'female');
     const playVoice = (g) => {
+      if (SentencePlay.enabled) return WordAudio.play(listenBtn, term, 1, null, true, voiceImpl(g));
       var fn = window.KW_speak || (window.KW_playAudio);
       if (fn) return fn(term, { gender: g });
+      return Audio.speak(term);
+    };
+    // The same audio call as playVoice, through WordAudio for a truthful state
+    // (stop the channel first, as every chapter control does).
+    const voiceImpl = (g) => (o) => {
+      try { Audio.stop(); } catch (_) {}
+      var fn = window.KW_speak || (window.KW_playAudio);
+      if (fn) return fn(term, { gender: g, onAudio: o.onAudio });
       return Audio.speak(term);
     };
     const fBtn = Audio.gate(el('button', { class: 'vword-voice' + (voicePref() === 'female' ? ' is-active' : ''), title: 'Female voice', 'aria-label': 'Female voice', 'data-g': 'female',
@@ -1609,9 +1704,22 @@
       onclick: () => { state.vocabVoice = 'male'; save(); refreshVoice(); playVoice('male'); } }, 'M'), term);
     function refreshVoice() {
       [fBtn, mBtn].forEach(b => b.classList.toggle('is-active', b.getAttribute('data-g') === voicePref()));
+      if (SentencePlay.enabled) {
+        // The voice is one chapter-wide preference: every card shows the same
+        // pick, so a highlighted F/M always matches what its speaker plays.
+        const g = voicePref() === 'male' ? 'male' : 'female';
+        [fBtn, mBtn].concat($$('.vword-voice')).forEach(x => { const on = x.getAttribute('data-g') === g; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+        [listenBtn].concat($$('.vword .kw-wa')).forEach(x => { x.dataset.voice = g; WordAudio.label(x, x.dataset.state || 'idle'); });
+      }
     }
-    const listenBtn = Audio.gate(el('button', { class: 'vword-btn', style: 'flex:0 0 auto;width:38px;padding:8px', title: 'Listen', 'aria-label': 'Listen', html: ICON.speaker,
-      onclick: () => playVoice(voicePref()) }), term);
+    // The compact word-audio control (WordAudio, as in the popup) replaces the
+    // old speaker; it plays the selected F/M voice. Original speaker if off.
+    const listenBtn = SentencePlay.enabled
+      ? Audio.gate((() => { const b = el('button', { class: 'kw-wa', type: 'button' }); b.dataset.voice = voicePref() === 'male' ? 'male' : 'female'; WordAudio.decorate(b);
+          b.addEventListener('click', () => WordAudio.play(b, term, 1, null, false, voiceImpl(voicePref()))); return b; })(), term)
+      : Audio.gate(el('button', { class: 'vword-btn', style: 'flex:0 0 auto;width:38px;padding:8px', title: 'Listen', 'aria-label': 'Listen', html: ICON.speaker,
+        onclick: () => playVoice(voicePref()) }), term);
+    if (SentencePlay.enabled) refreshVoice();
     // A headword holding an unbreakable run of 16+ characters (a word, plus any
     // "/in" suffix) never fits beside the F/M/listen buttons: the buttons go
     // below and only such headwords may hyphenate.
@@ -1975,10 +2083,41 @@
     const transBtn = el('button', { class: 'btn btn-soft btn-small' }, 'Show translation');
     const trans = el('div', { class: 'reading-translation' }, r.translation);
     transBtn.addEventListener('click', () => { const v = trans.classList.toggle('is-visible'); transBtn.textContent = v ? 'Hide translation' : 'Show translation'; });
-    controls.append(playBtn, transBtn);
-    card.append(passage, controls, trans);
+    const seekRow = SentencePlay.enabled ? readingStart(r, passage) : null;
+    if (seekRow) controls.append(transBtn); else controls.append(playBtn, transBtn);
+    card.append(passage, ...(seekRow ? [seekRow] : []), controls, trans);
     const hint = el('p', { class: 'muted', style: 'font-size:13.5px;margin-top:14px' }, 'Tip: tap any coloured word to see its role, case, meaning, and audio. Click a sentence for its Sentence X-Ray.');
     return el('div', {}, card, hint);
+  }
+
+  /* Reading: one compact sentence control at the start of the passage, plus a
+     seek bar under it. Same audio call as the "Listen to passage" button it
+     replaces (Audio.speak(txt, 0.92)) and the same KW_wordSync.syncFor on the
+     same <audio> with the same sentenceEls; Play / Pause / Resume / end come
+     from SentencePlay. The bar follows the passage's real <audio> (enabled once
+     it plays, also while paused) and seeks it; the word highlight follows. */
+  function readingStart(r, passage) {
+    const txt = r.tokens.filter(t => !t.plain).map(t => t.w).join(' ');
+    const sync = window.KW_wordSync
+      ? (a) => window.KW_wordSync.syncFor(a, $$('.rw', passage), { text: txt, sentenceEls: $$('.sentence-inline-unit', passage) })
+      : undefined;
+    const fill = el('div', { class: 'audio-track-fill' });
+    const bar = el('div', { class: 'audio-track-bar reading-seek' }, fill);
+    const time = el('span', { class: 'reading-seek-time', 'aria-hidden': 'true' }, '0:00 / 0:00');
+    let btn = null, ac = null;
+    const seek = PlayerUI.seekBar(bar, fill, { label: 'Position in passage', step: 2, getAudio: () => (btn ? SentencePlay.audioOf(btn) : null),
+      onShow: (t, d) => { time.textContent = PlayerUI.fmt(t) + ' / ' + PlayerUI.fmt(d); } });
+    seek.setEnabled(false);
+    btn = SentencePlay.button(txt, { noun: 'passage', rate: 0.92, sync: sync,
+      onAudio: (a) => {
+        if (ac) ac.abort();
+        ac = new AbortController(); seek.setEnabled(true);
+        PlayerUI.follow(a, seek, ac.signal, () => SentencePlay.audioOf(btn) === a);
+      },
+      onIdle: () => { if (ac) { ac.abort(); ac = null; } seek.show(0, 0, 0); seek.setEnabled(false); } });
+    const body = el('div', {}); body.append(...passage.childNodes); passage.append(body);
+    SentencePlay.row(passage, btn, body);
+    return el('div', { class: 'reading-seek-row' }, bar, time);
   }
 
   let wordPop, wordPopBackdrop, wpHistory = [], wpIndex = -1;
@@ -3757,6 +3896,7 @@
     });
     function startFill(dur) { let p = 0; clearInterval(fillTimer); fillTimer = setInterval(() => { p += 100 / (dur * 10); fill.style.width = Math.min(p, 100) + '%'; if (p >= 100) clearInterval(fillTimer); }, 100); }
     playBtn.addEventListener('click', () => {
+      if (SentencePlay.enabled) return;                // the dialogue player below handles it
       if (playing) { Audio.stop(); return; }
       playing = true; playBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>'; playBtn.setAttribute('aria-label', 'Pause');
       const lines = Array.isArray(L.dialogue) && L.dialogue.length
@@ -3778,9 +3918,68 @@
         (completed) => { playing = false; playBtn.innerHTML = ICON.play; playBtn.setAttribute('aria-label', 'Play'); if (completed) fill.style.width = '100%'; clearInterval(fillTimer); },
         seqOpts);
     });
-    const player = el('div', { class: 'audio-player' }, playBtn,
-      el('div', { class: 'audio-track' }, el('div', { class: 'audio-track-bar' }, fill),
-        el('div', { class: 'audio-track-meta' }, el('span', {}, 'Dialog · Familie'), el('span', {}, 'de-DE'))), speed);
+    const trackBar = el('div', { class: 'audio-track-bar' }, fill);
+    const metaLeft = el('span', {}, 'Dialog · Familie');
+    const player = el('div', { class: 'audio-player' + (SentencePlay.enabled ? ' kw-player' : '') }, playBtn,
+      el('div', { class: 'audio-track' }, trackBar,
+        el('div', { class: 'audio-track-meta' }, metaLeft, el('span', {}, 'de-DE'))), speed);
+
+    /* Listening dialogue player. The sequence is unchanged: the same
+       speakSequence over the authored lines (one MP3 each, matched by text — a
+       line without a recording keeps its browser-voice fallback), the same rate,
+       the same per-line word sync. Added: Play/Pause/Resume on the line that is
+       playing (the sequence continues after Resume), a loading state, and a seek
+       bar scoped to the CURRENT line ("Line 2 of 4"): the sequence has no global
+       timeline, so seeking moves within that line's own <audio>. */
+    if (SentencePlay.enabled) {
+      PlayerUI.decorate(playBtn, 'dialogue');
+      const origMeta = metaLeft.textContent;
+      let run = null;
+      const seek = PlayerUI.seekBar(trackBar, fill, { label: 'Position in current line', step: 1, getAudio: () => (run && run.audio) || null });
+      seek.setEnabled(false);
+      const reset = () => {
+        const x = run; run = null;
+        if (x && x.ac) x.ac.abort();
+        PlayerUI.state(playBtn, 'idle'); seek.show(0, 0, 0); seek.setEnabled(false); metaLeft.textContent = origMeta;
+      };
+      if (window.KW_onAudioEvent) window.KW_onAudioEvent((ev) => {
+        const x = run;
+        if (x && ev && ev.type === 'play-start' && ev.source === 'browser-tts') { x.audio = null; seek.setEnabled(false); PlayerUI.state(playBtn, 'speaking'); }
+      });
+      playBtn.addEventListener('click', () => {
+        const x = run;
+        if (x) {
+          const st = playBtn.dataset.state;
+          if (st === 'playing' && x.audio && !x.audio.ended) { x.audio.pause(); PlayerUI.state(playBtn, 'paused'); return; }
+          if (st === 'paused' && x.audio) {
+            PlayerUI.state(playBtn, 'playing');
+            const p = x.audio.play(); if (p && p.catch) p.catch(() => { if (run === x) Audio.stop(); });
+            return;
+          }
+          Audio.stop(); return;                         // loading / speaking: Stop (the sequence ends → reset)
+        }
+        const lines = Array.isArray(L.dialogue) && L.dialogue.length ? L.dialogue.map(y => y && y.de).filter(Boolean) : [L.transcript];
+        const ws = window.KW_wordSync;
+        const slices = ws ? ws.partitionLines(lines, $$('.rw', transcriptText)) : null;
+        if (slices) ws.prefetch(lines);
+        const r = run = { audio: null, ac: null, n: lines.length };
+        PlayerUI.state(playBtn, 'loading');
+        Audio.speakSequence(lines, rate, null,
+          (completed) => { if (run !== r) return; if (!completed && r.audio && !r.audio.paused) { try { r.audio.pause(); } catch (_) {} } reset(); },
+          { onAudio: (i, a) => {
+            if (run !== r) return;
+            if (r.ac) r.ac.abort();
+            r.ac = new AbortController(); r.audio = a;
+            metaLeft.textContent = 'Line ' + (i + 1) + ' of ' + r.n;
+            seek.setEnabled(true);
+            PlayerUI.follow(a, seek, r.ac.signal, () => run === r && r.audio === a);
+            if (a.readyState >= 3) PlayerUI.state(playBtn, 'playing'); else PlayerUI.state(playBtn, 'loading');
+            a.addEventListener('playing', () => { if (run === r && r.audio === a && playBtn.dataset.state === 'loading') PlayerUI.state(playBtn, 'playing'); }, { signal: r.ac.signal });
+            // Word sync: the same per-line call as the original handler.
+            if (slices && slices[i]) ws.syncFor(a, slices[i], { text: lines[i] });
+          } });
+      });
+    }
 
     const transBtn = el('button', { class: 'btn btn-soft btn-small' }, 'Show transcript & translation');
     const transcriptText = el('div', { class: L.tokens ? 'reading-passage' : '', style: 'font-size:18px;line-height:1.7;margin-bottom:12px' });

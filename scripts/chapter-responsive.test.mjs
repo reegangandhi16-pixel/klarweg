@@ -231,7 +231,7 @@ test('258 chapter pages load the new asset versions and nothing else changed in 
   assert.equal(pages.length, 258);
   for (const f of pages) {
     const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
-    assert.ok(h.includes('href="chapter.css?v=18"') && h.includes('src="chapter-app.js?v=24"'), f);
-    assert.ok(!h.includes('href="chapter.css?v=14"') && !h.includes('href="chapter.css?v=17"') && !h.includes('src="chapter-app.js?v=16"') && !h.includes('src="chapter-app.js?v=21"') && !h.includes('src="chapter-app.js?v=22"') && !h.includes('src="chapter-app.js?v=23"'), f);
+    assert.ok(h.includes('href="chapter.css?v=18"') && h.includes('src="chapter-app.js?v=25"'), f);
+    assert.ok(!h.includes('href="chapter.css?v=14"') && !h.includes('href="chapter.css?v=17"') && !h.includes('src="chapter-app.js?v=16"') && !h.includes('src="chapter-app.js?v=21"') && !h.includes('src="chapter-app.js?v=22"') && !h.includes('src="chapter-app.js?v=23"') && !h.includes('src="chapter-app.js?v=24"'), f);
   }
 });

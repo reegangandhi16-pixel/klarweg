@@ -18,7 +18,10 @@
    Order of checks on every POST (fail closed):
      1. switch          SPEECH_MODE "off" (default) or no TUTOR binding  → 503
      2. session         HttpOnly kw_session cookie                       → 401
-     3. chapter         listed in SPEECH_CHAPTERS (A1·01 only)           → 403
+     3. chapter         well-formed chapter id inside the speech scope:
+                        SPEECH_SCOPE (levels "a1,a2" or "all") and/or the
+                        explicit SPEECH_CHAPTERS list, minus
+                        SPEECH_CHAPTERS_EXCLUDE                          → 403
      4. access          SPEECH_MODE "entitled":  owns the chapter's level
                         SPEECH_MODE "allowlist": account id listed in the
                         SPEECH_ALLOWLIST secret (internal staging)       → 403
@@ -39,7 +42,8 @@ import { readEntitlements } from "./entitlements.js";
 
 export const SPEECH_ENGINE = "openai:gpt-transcribe";   // internal label (logs, metrics); not sent to the browser
 
-const CHAPTER_ID = /^(a1|a2|b1|b2|c1|c2)-([0-9]{1,2})(?:-[a-z0-9-]*)?$/;
+const CHAPTER_ID = /^(a1|a2|b1|b2|c1|c2)-([0-9]{1,2})(?:-[a-z0-9]+)*$/;   // e.g. a1-1-alphabet, c1-01-tempus…
+const LEVELS = ["a1", "a2", "b1", "b2", "c1", "c2"];
 const AUDIO_TYPES = new Set(["audio/webm", "audio/ogg", "audio/mp4", "audio/x-m4a", "audio/aac", "audio/mpeg", "audio/wav", "audio/x-wav"]);
 const TUTOR_TIMEOUT_MS = 20000;
 const GLOBAL_ID = "speech:global";   // not a user id (those are hex), so never collides
@@ -94,15 +98,33 @@ export function speechMode(env) {
   return on ? m : "off";
 }
 
-function speechChapters(env) {
-  return String(env.SPEECH_CHAPTERS || "a1-1-alphabet").split(",").map((s) => s.trim()).filter(Boolean);
+const csv = (v) => String(v == null ? "" : v).split(",").map((x) => x.trim().toLowerCase()).filter(Boolean);
+
+/* Which chapters may use the speech check. Three settings, all server-side:
+     SPEECH_SCOPE             levels ("a1", "a1,a2", …) or "all"; empty = none
+     SPEECH_CHAPTERS          explicit chapter ids (staging); default "a1-1-alphabet"
+     SPEECH_CHAPTERS_EXCLUDE  chapter ids that never use it, whatever the above say
+   Unknown scope words are ignored here (the predeploy guard refuses them). */
+export function speechScope(env) {
+  const scope = csv(env.SPEECH_SCOPE);
+  return {
+    all: scope.includes("all"),
+    levels: new Set(scope.filter((x) => LEVELS.includes(x))),
+    chapters: new Set(csv(env.SPEECH_CHAPTERS == null ? "a1-1-alphabet" : env.SPEECH_CHAPTERS)),
+    exclude: new Set(csv(env.SPEECH_CHAPTERS_EXCLUDE))
+  };
 }
 
-/* Chapter must be explicitly listed (exact id), and parse to a level. */
-function speechChapter(env, chapterId) {
-  if (typeof chapterId !== "string" || chapterId.length > 80 || !speechChapters(env).includes(chapterId)) return null;
+/* A well-formed chapter id inside the scope → { id, level, number }; anything
+   else (malformed, out of scope, excluded) → null. */
+export function speechChapter(env, chapterId) {
+  if (typeof chapterId !== "string" || chapterId.length > 80) return null;
   const m = chapterId.match(CHAPTER_ID);
-  return m ? { id: chapterId, level: m[1].toUpperCase(), number: Number(m[2]) } : null;
+  if (!m) return null;
+  const sc = speechScope(env);
+  if (sc.exclude.has(chapterId)) return null;
+  if (!(sc.all || sc.levels.has(m[1]) || sc.chapters.has(chapterId))) return null;
+  return { id: chapterId, level: m[1].toUpperCase(), number: Number(m[2]) };
 }
 
 function allowlisted(env, userId) {

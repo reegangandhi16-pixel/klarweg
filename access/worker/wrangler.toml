@@ -50,14 +50,21 @@ AI_ANON_GLOBAL_DAILY_REQUESTS = "100"
 # /v1/transcribe → OpenAI gpt-transcribe; the key is the TUTOR's existing
 # OPENAI_API_KEY secret). Shipped OFF; since 2026-10-03 "allowlist" (internal
 # staging: the SPEECH_ALLOWLIST secret lists the owner's account only).
+# Every chapter page asks /speech/status; only chapters inside the scope
+# below can say yes (src/speech.js speechChapter).
 #   "off"        nobody; chapter pages keep browser speech recognition
 #   "allowlist"  only accounts listed in the SPEECH_ALLOWLIST secret
 #                (comma-separated user ids) — internal staging
 #   "entitled"   every signed-in owner of the chapter's level
 # Kill switch: set "off" and redeploy, or wrangler rollback.
 SPEECH_MODE = "allowlist"
-# Exact chapter ids only. A1·01 until real validation is complete.
-SPEECH_CHAPTERS = "a1-1-alphabet"
+# Scope = levels ("a1", "a1,a2", … or "all"; empty = none) PLUS the explicit
+# chapter list, MINUS the exclusions. Staging: one or two chapters per level,
+# incl. structural exceptions (B2·14 Goethe test, B2·38), while allowlisted.
+# Widening needs `--allow-speech-scope=<SPEECH_SCOPE>` (or `=list`).
+SPEECH_SCOPE = ""
+SPEECH_CHAPTERS = "a1-1-alphabet,a1-2-vokale,a2-1-genitiv,b1-1-infinitiv-mit-zu,b2-01-erweiterte-satzklammer,b2-14-goethe-mini-test-1,b2-38-verschachtelte-relativsaetze,c1-01-tempusgebrauch-stilistische-tempuswahl,c2-01-zeitformen-der-verben,c2-29-goethe-c2-final"
+SPEECH_CHAPTERS_EXCLUDE = ""
 # Per account: checks per minute (anti-hammering), per UTC day, per month.
 SPEECH_PER_MINUTE = "6"
 SPEECH_DAILY_CHECKS = "60"

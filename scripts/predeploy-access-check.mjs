@@ -18,8 +18,12 @@
      3. AI_ENABLED in wrangler.toml must be "false" unless
         --allow-ai-enabled is passed.
      4. SPEECH_MODE (Record & Check transcription) must be "off" unless
-        --allow-speech=<allowlist|entitled> names the mode explicitly,
-        and SPEECH_CHAPTERS must stay "a1-1-alphabet" (A1·01 only).
+        --allow-speech=<allowlist|entitled> names the mode explicitly.
+     5. Speech scope: SPEECH_SCOPE may only hold "all" or level codes
+        (a1…c2); SPEECH_CHAPTERS / SPEECH_CHAPTERS_EXCLUDE may only hold
+        ids of chapter pages that exist. Anything wider than the original
+        "a1-1-alphabet" list needs --allow-speech-scope=<SPEECH_SCOPE>, or
+        --allow-speech-scope=list when only the explicit list is wider.
 
    Usage (from the repo root):
      node scripts/predeploy-access-check.mjs
@@ -37,6 +41,7 @@ const args = process.argv.slice(2);
 const allowEnv = (args.find((a) => a.startsWith('--allow-cashfree-env-change=')) || '').split('=')[1] || null;
 const allowAi = args.includes('--allow-ai-enabled');
 const allowSpeech = (args.find((a) => a.startsWith('--allow-speech=')) || '').split('=')[1] || null;
+const allowScope = (args.find((a) => a.startsWith('--allow-speech-scope=')) || '').split('=')[1] || null;
 
 function varOf(toml, name) {
   const m = toml.match(new RegExp('^\\s*' + name + '\\s*=\\s*"([^"]*)"', 'm'));
@@ -53,7 +58,11 @@ const env = varOf(toml, 'CASHFREE_ENV');
 const appId = varOf(toml, 'CASHFREE_APP_ID') || '';
 const ai = (varOf(toml, 'AI_ENABLED') || 'false').toLowerCase();
 const speech = (varOf(toml, 'SPEECH_MODE') || 'off').toLowerCase();
-const speechChapters = varOf(toml, 'SPEECH_CHAPTERS') || 'a1-1-alphabet';
+const csv = (v) => String(v || '').split(',').map((x) => x.trim().toLowerCase()).filter(Boolean);
+const speechScope = csv(varOf(toml, 'SPEECH_SCOPE'));
+const speechChapters = varOf(toml, 'SPEECH_CHAPTERS') == null ? ['a1-1-alphabet'] : csv(varOf(toml, 'SPEECH_CHAPTERS'));
+const speechExclude = csv(varOf(toml, 'SPEECH_CHAPTERS_EXCLUDE'));
+const pageExists = (id) => /^(a1|a2|b1|b2|c1|c2)-[0-9]{1,2}(?:-[a-z0-9]+)*$/.test(id) && fs.existsSync(path.join(ROOT, 'chapter', 'chapter-' + id + '.html'));
 
 if (env !== 'sandbox' && env !== 'production') fail(`CASHFREE_ENV in wrangler.toml is "${env}" — must be "sandbox" or "production".`);
 const isTest = /^TEST/i.test(appId);
@@ -62,7 +71,13 @@ if (env === 'production' && isTest) fail('wrangler.toml pairs CASHFREE_ENV="prod
 if (/CASHFREE_SECRET_KEY\s*=|_API_KEY\s*=/.test(toml)) fail('wrangler.toml appears to contain a secret. Secrets belong in `wrangler secret put`, never in the file.');
 if (!['off', 'allowlist', 'entitled'].includes(speech)) fail(`SPEECH_MODE in wrangler.toml is "${speech}" — must be "off", "allowlist" or "entitled".`);
 if (speech !== 'off' && allowSpeech !== speech) fail(`SPEECH_MODE="${speech}" in wrangler.toml. Enable the speech check deliberately with --allow-speech=${speech}.`);
-if (speechChapters !== 'a1-1-alphabet') fail(`SPEECH_CHAPTERS="${speechChapters}" — the speech check is A1·01-only ("a1-1-alphabet") until it is validated.`);
+const badScope = speechScope.filter((x) => !['all', 'a1', 'a2', 'b1', 'b2', 'c1', 'c2'].includes(x));
+if (badScope.length) fail(`SPEECH_SCOPE contains "${badScope.join(', ')}" — only "all" or level codes a1, a2, b1, b2, c1, c2.`);
+const badIds = speechChapters.concat(speechExclude).filter((id) => !pageExists(id));
+if (badIds.length) fail(`SPEECH_CHAPTERS / SPEECH_CHAPTERS_EXCLUDE name no existing chapter page: ${badIds.join(', ')}.`);
+const wider = speechScope.length > 0 || speechChapters.some((id) => id !== 'a1-1-alphabet');
+const scopeKey = speechScope.length ? speechScope.join(',') : 'list';
+if (wider && allowScope !== scopeKey) fail(`the speech scope is wider than A1·01 (SPEECH_SCOPE="${speechScope.join(',')}", ${speechChapters.length} listed chapter(s)). Widen it deliberately with --allow-speech-scope=${scopeKey}.`);
 if (ai === 'true' && !allowAi) fail('AI_ENABLED="true" in wrangler.toml. Enable Klarweg AI deliberately with --allow-ai-enabled once the provider is chosen and the tutor Worker has its key.');
 
 let live;
@@ -81,4 +96,4 @@ if (live !== env) {
   console.warn(`! Cashfree environment will change: ${live} → ${env} (explicitly allowed).`);
 }
 
-console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech} (${speechChapters}).`);
+console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech}, scope "${speechScope.join(',')}" + ${speechChapters.length} listed − ${speechExclude.length} excluded.`);

@@ -59,7 +59,7 @@ function el(tag, props = {}, ...kids) {
 
 /* ---------- harness ---------- */
 function harness({ chapter = 'a1-1-alphabet', status = { ok: true, enabled: true, signedIn: true, eligible: true }, statusFails = false, api = API,
-  speechApi = undefined, ua = DESKTOP_UA, replies = [] } = {}) {
+  speechApi = undefined, ua = DESKTOP_UA, replies = [], snap = { authenticated: true } } = {}) {
   let now = 1000; const timers = [];
   const setTimeout_ = (fn, ms) => { const t = { fn, at: now + (ms || 0), id: timers.length + 1 }; timers.push(t); return t.id; };
   const clearTimeout_ = (id) => { const t = timers.find((x) => x.id === id); if (t) t.fn = null; };
@@ -90,7 +90,7 @@ function harness({ chapter = 'a1-1-alphabet', status = { ok: true, enabled: true
     el, C: { id: chapter, speaking: [{ de: 'Ich heiße Rohan.', en: 'My name is Rohan.' }] }, ICON: { mic: '', speaker: '' },
     Audio: { stop() {}, speak() {} }, aiSlot: () => el('div', { class: 'kw-ai-slot' }), IS_EXAM: false, SentencePlay: { enabled: false },
     MediaRecorder: FakeMR, webkitSpeechRecognition: FakeRec, fetch: fetch_,
-    KWAccess: { ready: () => Promise.resolve({}) }, KW_ACCESS_API: api
+    KWAccess: { ready: () => Promise.resolve(snap) }, KW_ACCESS_API: api
   };
   if (speechApi) ctx.KW_SPEECH_API = speechApi;
   vm.createContext(ctx);
@@ -159,10 +159,26 @@ test('not eligible (signed out / not entitled) → browser recognition', async (
   }
 });
 
-test('other chapters (A1·02) never ask and keep browser recognition', async () => {
-  const h = harness({ chapter: 'a1-2-vokale' });
+test('every chapter asks the server; out of scope → browser recognition, in scope → server path', async () => {
+  for (const chapter of ['a1-2-vokale', 'b1-1-infinitiv-mit-zu', 'b2-14-goethe-mini-test-1', 'c2-29-goethe-c2-final']) {
+    let h = harness({ chapter, status: { ok: true, enabled: true, eligible: false } });
+    await h.flush();
+    assert.equal(h.fetches[0].url, API + '/speech/status?chapter=' + chapter, 'the page holds no chapter list: ' + chapter);
+    h.click();
+    assert.equal(h.recs.length, 1, chapter + ': out of scope → browser recognition');
+    assert.equal(h.transcribeCalls().length, 0);
+    h = harness({ chapter });
+    await h.flush(); await h.recordOnce();
+    assert.equal(h.recs.length, 0, chapter + ': eligible → server path');
+    assert.equal(h.transcribeCalls()[0].url, API + '/speech/transcribe?chapter=' + chapter + '&ms=2400');
+    assert.equal(h.state(), 'result');
+  }
+});
+
+test('signed out: no status request at all, browser recognition', async () => {
+  const h = harness({ chapter: 'b1-1-infinitiv-mit-zu', snap: { authenticated: false } });
   await h.flush(); h.click();
-  assert.equal(h.fetches.length, 0, 'no status request outside A1·01');
+  assert.equal(h.fetches.length, 0, 'nothing to ask for a signed-out visitor');
   assert.equal(h.recs.length, 1);
 });
 

@@ -353,7 +353,7 @@
     }, 150);
   })();
 
-  /* ---------- sentence audio control (PILOT: A1·01 only) -----------------
+  /* ---------- sentence audio control (all chapters) ------------------------
      One control for every learner-facing example sentence: the homepage's
      sentence button (.sb: hairline circle, glyph swap) in the chapter's teal
      action colour, plus a labelled pill variant for "Hear model". It plays
@@ -368,10 +368,14 @@
      sentence's own <audio> and resets the button. A finished/stopped run can
      never touch a button again (run identity check). No word highlighting is
      added: none of these clips had any before.
-     Gated by chapter id: on every other chapter SentencePlay.enabled is false
-     and the renderers keep their original markup and handlers. */
+     Used by Speaking (Hear Question / Hear & Repeat Aloud), Story lines and the
+     popup word speaker on every chapter; all of them play existing recordings.
+     window.KW_SENTENCE_PLAY = false (set before this script) turns it off and the
+     renderers fall back to their original markup and handlers. Vocabulary and
+     grammar example sentences stay an A1·01 pilot (EXAMPLE_AUDIO_PILOT below):
+     those sentences mostly have no recording. */
   const SentencePlay = (function () {
-    const enabled = C.id === 'a1-1-alphabet';
+    const enabled = window.KW_SENTENCE_PLAY !== false;
     const GLYPH = '<span class="kw-sb-glyph" aria-hidden="true">' +
       '<svg class="kw-sb-play" viewBox="0 0 11 11" fill="currentColor"><path d="M2 1.5v8l7-4z"/></svg>' +
       '<svg class="kw-sb-pause" viewBox="0 0 11 11" fill="currentColor"><rect x="2" y="1.5" width="2.4" height="8" rx="0.6"/><rect x="6.6" y="1.5" width="2.4" height="8" rx="0.6"/></svg>' +
@@ -463,8 +467,12 @@
     }
     return { enabled: enabled, button: button, toggle: toggle, row: row, drop: drop, shell: shell, state: setState };
   })();
+  // Example-sentence buttons (vocabulary card, grammar example lines): A1·01 only.
+  // Almost none of these sentences has a recording (35 of 9,200 vocabulary
+  // examples, 1 of 115 grammar lines), so elsewhere they keep their original form.
+  const EXAMPLE_AUDIO_PILOT = SentencePlay.enabled && C.id === 'a1-1-alphabet';
 
-  /* ---------- popup word speaker state (PILOT: A1·01 only) ---------------
+  /* ---------- popup word speaker state (all chapters) ----------------------
      Word-level, separate from SentencePlay. The popup's speaker keeps its
      audio path (speakWordFemale: female word MP3 → headword → browser TTS) and
      its long-press speed menu; this only gives it a truthful state:
@@ -473,7 +481,7 @@
        so Pause/Resume would add a state with no learning value).
      Any other audio — another word, a sentence button, Story, Reading,
      Listening, vocab F/M — resets it; if our <audio> is paused from outside it
-     resets too, so it can never stay lit over silence. Same chapter-id gate. */
+     resets too, so it can never stay lit over silence. Same switch as SentencePlay. */
   const WordAudio = (function () {
     const enabled = SentencePlay.enabled;
     const GLYPH = '<span class="wp-glyph" aria-hidden="true">' +
@@ -1361,7 +1369,7 @@
     dlg.forEach((line, i) => {
       const card = el('div', { class: 'story-card' + (sideForLine(line) === 'right' ? ' right' : '') , style: '--rise-delay:' + (i * 60) + 'ms' });
       card.style.animationDelay = (i * 60) + 'ms';
-      // A1·01 pilot: the shared chapter audio control (38px Story size); elsewhere unchanged.
+      // The shared chapter audio control (38px Story size); original button if SentencePlay is off.
       const playBtn = SentencePlay.enabled ? SentencePlay.shell('line', 'kw-sb-story')
         : el('button', { class: 'story-play-line', type: 'button', 'aria-label': 'Play line', html: ICON.play });
       const top = el('div', { class: 'story-card-top' },
@@ -1423,7 +1431,7 @@
       cards.forEach(c => { c.card.classList.remove('is-active'); c.playBtn.classList.remove('is-playing'); c.playBtn.innerHTML = ICON.play; });
     }
 
-    /* A1·01 pilot — Story lines on the shared chapter audio control. The audio
+    /* Story lines on the shared chapter audio control. The audio
        call and word sync are exactly playLine's: same KW_speak options (gender,
        rate, storyLine), same KW_wordSync.syncFor on the same <audio>, same
        timing sidecars. Added: a truthful button state — loading → playing ❚❚ ⇄
@@ -1639,8 +1647,8 @@
         } else {
           box.textContent = w.ex || '';
         }
-        if (SentencePlay.enabled && (w.ex || '').trim()) {
-          // Pilot: the example sentence gets the sentence audio control.
+        if (EXAMPLE_AUDIO_PILOT && (w.ex || '').trim()) {
+          // A1·01 pilot: the example sentence gets the sentence audio control.
           const body = el('span', {}); body.append(...box.childNodes); box.append(body);
           SentencePlay.row(box, SentencePlay.button(w.ex.trim()), body);
         }
@@ -1855,8 +1863,8 @@
       if (g.example) { inner.appendChild(el('div', { class: 'dash-section-divider', style: 'margin:18px 0' }));
         g.example.forEach(ex => {
           const line = el('div', { class: 'example-line', html: ex.html }); line.style.cursor = 'pointer'; line.title = 'Listen';
-          if (SentencePlay.enabled) {
-            // Pilot: a visible Play/Pause button before the line; a click on the
+          if (EXAMPLE_AUDIO_PILOT) {
+            // A1·01 pilot: a visible Play/Pause button before the line; a click on the
             // line itself drives the same button, so both stay in step.
             const text = line.textContent.split('→')[0];
             const btn = SentencePlay.button(text);
@@ -3894,12 +3902,12 @@
       // situation and the model answer (`de`) stays hidden behind a reveal.
       // `de` remains the TTS text and the wordAccuracy target either way.
       const hasTask = !!p.task;
-      // Pilot: the model answer's audio control (pill variant), in place. The
+      // The model answer's audio control (pill variant), in place. The
       // learner is meant to say it back, hence "Hear & Repeat Aloud".
       const hearBtn = SentencePlay.enabled
         ? SentencePlay.button(p.de, { label: 'Hear & Repeat Aloud' })
         : el('button', { class: 'btn btn-soft btn-small', onclick: () => { var fn = window.KW_speak || window.KW_playAudio; if (fn) fn(p.de); else Audio.speak(p.de, 0.9); } }, el('span', { html: ICON.speaker, style: 'width:14px;display:inline-flex' }), ' Hear model');
-      // A1·01: the task prompt is its own recording (a question the learner
+      // The task prompt is its own recording (a question the learner
       // answers, not repeats), so it gets its own control, first in the row.
       const questionBtn = SentencePlay.enabled && hasTask ? SentencePlay.button(p.task, { label: 'Hear Question' }) : null;
       const row = el('div', { style: 'display:flex;gap:10px;flex-wrap:wrap' }, questionBtn, hearBtn);
@@ -3914,7 +3922,7 @@
         const revealBtn = el('button', { class: 'btn btn-soft btn-small', onclick: () => {
           const open = model.style.display !== 'none';
           model.style.display = open ? 'none' : 'block';
-          const short = SentencePlay.enabled;            // A1·01 pilot wording
+          const short = SentencePlay.enabled;            // Show Answer / Hide Answer
           revealBtn.lastChild.textContent = open ? (short ? 'Show Answer' : 'Show model answer') : (short ? 'Hide Answer' : 'Hide model answer');
         } }, SentencePlay.enabled ? 'Show Answer' : 'Show model answer');
         row.appendChild(revealBtn);
@@ -4286,7 +4294,7 @@
     result._kwScrolled = false;
     micEnter(btn, ' Listening…');
 
-    // A1·01 speech check: when enabled (and the browser can record), the
+    // Klarweg speech check: when enabled (and the browser can record), the
     // recording goes to the Klarweg speech endpoint and browser recognition is
     // not used. Otherwise this is the unchanged browser-recognition path.
     // A local/dev endpoint (KW_SPEECH_API, ?kwspeech) wins over the Klarweg
@@ -4540,9 +4548,11 @@
     }
     return null;
   }
-  /* ---- A1·01 Klarweg speech check (klarweg-access /speech/*) ---------------
-     GET /speech/status is asked once per page (A1·01 only, after
-     KWAccess.ready() so KW_ACCESS_API is known). Only an explicit
+  /* ---- Klarweg speech check (klarweg-access /speech/*) ---------------------
+     GET /speech/status is asked once per chapter page, after KWAccess.ready()
+     (so KW_ACCESS_API is known) and only for a signed-in learner; the server
+     decides from its own scope, mode and entitlement whether this chapter may
+     use it — the page holds no chapter list. Only an explicit
      { enabled: true, eligible: true } switches Record & check to the server
      path; signed out, not entitled, switched off server-side, an error or no
      answer yet all keep browser speech recognition exactly as before. After a
@@ -4557,18 +4567,19 @@
     return /^https:\/\/[^/]+$/.test(a) || /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(a) ? a : '';
   }
   function askSpeechAccess() {
-    if (speechAccess.asked || C.id !== SPEECH_PILOT_CHAPTER || typeof fetch !== 'function') return;
+    if (speechAccess.asked || typeof fetch !== 'function') return;
     speechAccess.asked = true;
-    const go = () => {
+    const go = (snap) => {
       const api = speechAccessApi();
       if (!api) return;
+      if (snap && snap.authenticated === false) { trace('speech.status', false, 'signed out'); return; }   // nothing to ask
       fetch(api + '/speech/status?chapter=' + encodeURIComponent(C.id), { credentials: 'include', cache: 'no-store' })
         .then((r) => (r.ok ? r.json() : null))
         .then((j) => { speechAccess.eligible = !!(j && j.enabled === true && j.eligible === true); trace('speech.status', speechAccess.eligible, j ? { enabled: j.enabled, eligible: j.eligible } : null); })
         .catch(() => trace('speech.status', false, 'unreachable'));
     };
     const A = window.KWAccess;
-    if (A && typeof A.ready === 'function') A.ready().then(go, go); else go();
+    if (A && typeof A.ready === 'function') A.ready().then(go, () => go()); else go();
   }
   function speechServerEndpoint() { return speechAccess.eligible && !speechAccess.off && speechAccessApi() ? ACCESS_SPEECH : null; }
   // Server answer → the check's error class (see WHISPER_ERRORS).
@@ -5749,7 +5760,7 @@
     if (fn) {
       var o = { gender: 'female', rate: rate };
       if (spokenAs) o.spokenAs = spokenAs;
-      // A1·01 pilot (WordAudio): lets the popup speaker see its own <audio>.
+      // WordAudio: lets the popup speaker see its own <audio>.
       if (popupOpts && typeof popupOpts.onAudio === 'function') o.onAudio = popupOpts.onAudio;
       return fn(surface, o).then(function (s) {
         if ((s === 'error' || s === 'browser-tts') && headword !== surface) {
@@ -5766,7 +5777,7 @@
   }
   function attachAudioSpeed(btn, text, popupOpts) {
     let timer = null, longFired = false;
-    // A1·01 pilot: route through WordAudio for a truthful playing state.
+    // Route through WordAudio for a truthful playing state.
     if (WordAudio.enabled) WordAudio.decorate(btn);
     const say = (rate, force) => WordAudio.enabled ? WordAudio.play(btn, text, rate, popupOpts, force) : speakWordFemale(text, rate, popupOpts);
     const openMenu = () => {

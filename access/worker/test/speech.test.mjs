@@ -266,7 +266,9 @@ test('privacy: D1 holds counters only; logs hold numbers only', async () => {
   }
   const periods = env.DB.raw.prepare("SELECT user_id, period FROM ai_usage").all();
   assert.ok(periods.every((p) => /^s/.test(p.period)), 'speech uses its own s* buckets — AI chat quotas untouched');
-  assert.deepEqual(new Set(periods.filter((p) => p.user_id === 'speech:stats').map((p) => p.period.split(':')[0])), new Set(['sq', 'so', 'se', 'sl', 's5xx']));
+  const stats = new Set(periods.filter((p) => p.user_id === 'speech:stats').map((p) => p.period.split(':')[0]));
+  for (const k of ['sq', 'so', 'se', 's5xx']) assert.ok(stats.has(k), 'stats counter ' + k);
+  assert.ok([...stats].every((k) => ['sq', 'so', 'se', 'sl', 's5xx'].includes(k)), 'no other stats counters');   // sl (latency sum) is written only when > 0 ms
   const speechLogs = logs.filter((l) => l.includes('"evt":"speech"'));
   assert.equal(speechLogs.length, 2);
   for (const l of speechLogs) {
@@ -294,4 +296,88 @@ test('existing routes are unchanged by the speech routes', async () => {
   assert.equal((await call(env, 'GET', '/speech/nope')).status, 404);
   assert.equal((await call(env, 'GET', '/speech/transcribe')).status, 404, 'GET is not a transcribe');
   assert.equal((await call(env, 'GET', '/')).json.service, 'klarweg-access');
+});
+
+/* ---------------- scope: which chapters may use the speech check ---------------- */
+import fs from 'node:fs';
+import { speechChapter, speechScope } from '../src/speech.js';
+const REAL_IDS = fs.readdirSync(path.join(WORKER_DIR, '../../chapter')).filter((f) => /^chapter-[a-c][0-9]-.*\.html$/.test(f)).map((f) => f.slice(8, -5));
+const ok = (env, id) => !!speechChapter(env, id);
+
+test('scope: default is the explicit A1·01 list only', () => {
+  assert.equal(ok({}, 'a1-1-alphabet'), true);
+  assert.equal(ok({}, 'a1-2-vokale'), false);
+  assert.equal(ok({ SPEECH_CHAPTERS: 'a1-2-vokale' }, 'a1-1-alphabet'), false, 'an explicit list replaces the default');
+  assert.equal(ok({ SPEECH_CHAPTERS: '' }, 'a1-1-alphabet'), false, 'empty list = no chapters');
+});
+
+test('scope: levels "a1", "a1,a2", "all"; explicit list adds; exclusions always win', () => {
+  assert.equal(ok({ SPEECH_SCOPE: 'a1' }, 'a1-2-vokale'), true);
+  assert.equal(ok({ SPEECH_SCOPE: 'a1' }, 'a2-1-genitiv'), false);
+  assert.equal(ok({ SPEECH_SCOPE: 'a1, A2' }, 'a2-1-genitiv'), true, 'case and spaces tolerated');
+  assert.equal(ok({ SPEECH_SCOPE: 'a1,a2' }, 'b1-1-infinitiv-mit-zu'), false);
+  assert.equal(ok({ SPEECH_SCOPE: 'b1,b2' }, 'b2-38-verschachtelte-relativsaetze'), true);
+  assert.equal(ok({ SPEECH_SCOPE: 'all' }, 'c2-29-goethe-c2-final'), true);
+  assert.equal(ok({ SPEECH_SCOPE: 'a1', SPEECH_CHAPTERS: 'c1-01-tempusgebrauch-stilistische-tempuswahl' }, 'c1-01-tempusgebrauch-stilistische-tempuswahl'), true, 'list adds to the levels');
+  assert.equal(ok({ SPEECH_SCOPE: 'all', SPEECH_CHAPTERS_EXCLUDE: 'b2-14-goethe-mini-test-1' }, 'b2-14-goethe-mini-test-1'), false);
+  assert.equal(ok({ SPEECH_CHAPTERS: 'a1-1-alphabet', SPEECH_CHAPTERS_EXCLUDE: 'a1-1-alphabet' }, 'a1-1-alphabet'), false, 'exclusion beats the explicit list');
+  assert.equal(ok({ SPEECH_SCOPE: 'b3,everything,' }, 'b1-1-infinitiv-mit-zu'), false, 'unknown scope words grant nothing');
+  const sc = speechScope({ SPEECH_SCOPE: 'all,a1' });
+  assert.equal(sc.all, true); assert.deepEqual([...sc.levels], ['a1']);
+});
+
+test('scope: every real chapter id is well-formed; malformed ids are refused even under "all"', () => {
+  assert.equal(REAL_IDS.length, 258);
+  for (const id of REAL_IDS) assert.ok(ok({ SPEECH_SCOPE: 'all' }, id), id);
+  for (const bad of ['', 'a1', 'a1-', 'a1-1-', 'a1--x', 'A1-1-alphabet', 'z9-1-x', 'a1-123-x', '../a1-1-alphabet', 'a1-1-alphabet/../x', 'a1-1-ALPHABET', 'a1-1-alpha bet', 'a1-1-' + 'x'.repeat(80), null, 42]) {
+    assert.equal(ok({ SPEECH_SCOPE: 'all' }, bad), false, String(bad));
+  }
+});
+
+test('scope over HTTP: status and transcribe agree per chapter and level (entitled)', async () => {
+  const env = makeEnv({ SPEECH_SCOPE: 'a1,a2', SPEECH_CHAPTERS: '', SPEECH_CHAPTERS_EXCLUDE: 'a1-3-zahlen' });
+  const a1 = await learner(env, 'A1');
+  const both = await learner(env, 'A1'); await grant(env, both.id, 'A2');
+  assert.equal((await status(env, a1.cookie, 'a1-2-vokale')).json.eligible, true);
+  assert.equal((await transcribe(env, a1.cookie, { chapter: 'a1-2-vokale' })).status, 200);
+  assert.equal((await status(env, a1.cookie, 'a1-3-zahlen')).json.eligible, false, 'excluded');
+  assert.equal((await transcribe(env, a1.cookie, { chapter: 'a1-3-zahlen' })).json.error, 'not_enabled');
+  assert.equal((await status(env, a1.cookie, 'a2-1-genitiv')).json.eligible, false, 'in scope, but A2 not owned');
+  assert.equal((await transcribe(env, a1.cookie, { chapter: 'a2-1-genitiv' })).json.error, 'not_entitled');
+  assert.equal((await transcribe(env, both.cookie, { chapter: 'a2-1-genitiv' })).status, 200, 'owner of A2');
+  assert.equal((await transcribe(env, both.cookie, { chapter: 'b1-1-infinitiv-mit-zu' })).json.error, 'not_enabled', 'B1 outside scope');
+  const life = await learner(env, 'LIFETIME');
+  assert.equal((await status(env, life.cookie, 'a2-1-genitiv')).json.eligible, true);
+});
+
+test('scope over HTTP: allowlist mode + "all" — the listed account on every level, nobody else', async () => {
+  const env = makeEnv({ SPEECH_MODE: 'allowlist', SPEECH_SCOPE: 'all', SPEECH_PER_MINUTE: '50' });   // 7 chapters in one minute
+  const staff = await learner(env, null), buyer = await learner(env, 'LIFETIME');
+  env.SPEECH_ALLOWLIST = staff.id;
+  for (const ch of ['a1-2-vokale', 'a2-1-genitiv', 'b1-1-infinitiv-mit-zu', 'b2-38-verschachtelte-relativsaetze', 'b2-14-goethe-mini-test-1', 'c1-01-tempusgebrauch-stilistische-tempuswahl', 'c2-29-goethe-c2-final']) {
+    assert.equal((await status(env, staff.cookie, ch)).json.eligible, true, ch);
+    assert.equal((await transcribe(env, staff.cookie, { chapter: ch })).status, 200, ch);
+    assert.equal((await transcribe(env, buyer.cookie, { chapter: ch })).status, 403, 'not allowlisted: ' + ch);
+  }
+});
+
+test('quotas and budget are per account and shared across chapters and levels', async () => {
+  let env = makeEnv({ SPEECH_SCOPE: 'all', SPEECH_DAILY_CHECKS: '2' });
+  const u = await learner(env, 'LIFETIME');
+  assert.equal((await transcribe(env, u.cookie, { chapter: 'a1-2-vokale' })).status, 200);
+  assert.equal((await transcribe(env, u.cookie, { chapter: 'c2-29-goethe-c2-final' })).status, 200);
+  const r = await transcribe(env, u.cookie, { chapter: 'b1-1-infinitiv-mit-zu' });
+  assert.equal(r.status, 429); assert.equal(r.json.error, 'quota_day', 'one daily allowance across all chapters');
+  assert.deepEqual((await status(env, u.cookie, 'b2-01-erweiterte-satzklammer')).json.remaining, { day: 0, month: 598 });
+  env = makeEnv({ SPEECH_SCOPE: 'all', SPEECH_PER_MINUTE: '1' });
+  const v = await learner(env, 'LIFETIME');
+  assert.equal((await transcribe(env, v.cookie, { chapter: 'a1-2-vokale' })).status, 200);
+  assert.equal((await transcribe(env, v.cookie, { chapter: 'a2-1-genitiv' })).json.error, 'rate_minute', 'per-minute cap is per account, not per chapter');
+  env = makeEnv({ SPEECH_SCOPE: 'all', SPEECH_GLOBAL_DAILY_BUDGET_MICROS: '200' });
+  const a = await learner(env, 'LIFETIME'), b = await learner(env, 'LIFETIME');
+  assert.equal((await transcribe(env, a.cookie, { chapter: 'a1-2-vokale' })).status, 200);       // 150 micros
+  assert.equal((await transcribe(env, b.cookie, { chapter: 'c1-01-tempusgebrauch-stilistische-tempuswahl' })).status, 200);   // 300 ≥ 200 after
+  assert.equal((await transcribe(env, a.cookie, { chapter: 'b2-38-verschachtelte-relativsaetze' })).json.error, 'speech_busy', 'global budget shared by every chapter');
+  const keys = env.DB.raw.prepare('SELECT DISTINCT period FROM ai_usage').all().map((r) => r.period.split(':')[0]);
+  assert.ok(keys.every((k) => /^s/.test(k)), 'no chapter id in any counter key: ' + keys.join(','));
 });

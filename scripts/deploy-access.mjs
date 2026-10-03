@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* npm run deploy:access [-- --allow-cashfree-env-change=<env>] [-- --allow-ai-enabled] [-- --allow-speech=<mode>]
+/* npm run deploy:access [-- --allow-cashfree-env-change=<env>] [-- --allow-ai-enabled] [-- --allow-speech=<mode>] [-- --allow-speech-scope=<scope|list>]
    Runs the pre-deploy guard with the given allow-flags, then `wrangler deploy`
    for klarweg-access only if the guard passes. Allow-flags are never passed
    to wrangler. */

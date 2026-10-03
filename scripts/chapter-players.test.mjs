@@ -254,3 +254,86 @@ test('Reading + Listening on all 258 chapters: the requested texts are the autho
   assert.equal(linesOk, lines, 'every Listening line resolves');
   assert.deepEqual(transcriptOnly.sort(), ['b2-14-goethe-mini-test-1', 'b2-26-goethe-mini-test-2', 'b2-36-goethe-halbzeit-test', 'b2-43-goethe-mini-3']);
 });
+
+/* ---------- Reading seek range on alias pages: 0 → authored endAt ---------- */
+test('PlayerUI with end(): range is 0 → endAt (not the whole file), seeks clamp to endAt, Listening-style bars unaffected', () => {
+  const { PlayerUI } = load();
+  const fill = el('div'), bar = el('div', {}, fill), a = new FakeAudio(30);   // 30 s file, unplayed tail after 20 s
+  a.kwEndAt = 20;
+  let shown = null;
+  const seek = PlayerUI.seekBar(bar, fill, { label: 'Position in passage', step: 2, end: (x) => x.kwEndAt, getAudio: () => a, onShow: (t, d) => { shown = [t, d]; } });
+  bar.fire('pointerdown', { clientX: 150, pointerId: 1 }); bar.fire('pointerup');       // 25%
+  assert.equal(a.currentTime, 5); assert.deepEqual(shown, [5, 20]); assert.equal(bar.getAttribute('aria-valuemax'), '20');
+  bar.fire('pointerdown', { clientX: 400, pointerId: 1 }); bar.fire('pointerup');       // past the right edge
+  assert.equal(a.currentTime, 20, 'clamped to endAt, never into the tail'); assert.equal(fill.style.width, '100%');
+  bar.fire('keydown', { key: 'Home' }); assert.equal(a.currentTime, 0);
+  bar.fire('keydown', { key: 'End' }); assert.ok(Math.abs(a.currentTime - 19.95) < 1e-9, 'End = just before endAt');
+  bar.fire('keydown', { key: 'PageUp' }); assert.equal(a.currentTime, 20, 'keys clamp to endAt');
+  assert.equal(bar.getAttribute('aria-valuetext'), '0:20 of 0:20');
+  // follow(): position painted against endAt; the exception's jump to the file end paints 100%, not past it
+  const ac = new AbortController();
+  PlayerUI.follow(a, seek, ac.signal, () => true, (x) => x.kwEndAt);
+  a.currentTime = 10; a.fire('timeupdate'); assert.equal(fill.style.width, '50%');
+  a.currentTime = 30; a.fire('timeupdate'); assert.equal(fill.style.width, '100%'); assert.equal(bar.getAttribute('aria-valuenow'), '20');
+  ac.abort();
+  // metadata not loaded yet (duration NaN): no range yet, exactly like a normal page; endAt applies once it loads
+  const b2 = el('div', {}, el('div')), f2 = b2.children[0], n = new FakeAudio(NaN); n.kwEndAt = 12;
+  const s2 = PlayerUI.seekBar(b2, f2, { label: 'x', step: 2, end: (x) => x.kwEndAt, getAudio: () => n });
+  PlayerUI.follow(n, s2, new AbortController().signal, () => true, (x) => x.kwEndAt);
+  b2.fire('pointerdown', { clientX: 150, pointerId: 1 }); b2.fire('pointerup'); assert.equal(n.currentTime, 0, 'no seek before metadata');
+  assert.equal(b2.getAttribute('aria-valuemax'), '0');
+  n.duration = 20; n.fire('loadedmetadata'); assert.equal(b2.getAttribute('aria-valuemax'), '12');
+  // no end() (Listening) or no kwEndAt (normal Reading): full duration, as before
+  const b3 = el('div', {}, el('div')), f3 = b3.children[0], l = new FakeAudio(30); l.kwEndAt = 20;
+  PlayerUI.seekBar(b3, f3, { label: 'x', step: 2, getAudio: () => l });
+  b3.fire('pointerdown', { clientX: 400, pointerId: 1 }); assert.equal(l.currentTime, 30, 'no end(): whole file');
+  const b4 = el('div', {}, el('div')), f4 = b4.children[0], r = new FakeAudio(30);
+  PlayerUI.seekBar(b4, f4, { label: 'x', step: 2, end: (x) => x.kwEndAt, getAudio: () => r });
+  b4.fire('pointerdown', { clientX: 400, pointerId: 1 }); assert.equal(r.currentTime, 30, 'no kwEndAt: whole file');
+  // an endAt at/after the file's end is ignored (the file is shorter): whole file
+  const b5 = el('div', {}, el('div')), f5 = b5.children[0], s = new FakeAudio(10); s.kwEndAt = 15;
+  PlayerUI.seekBar(b5, f5, { label: 'x', step: 2, end: (x) => x.kwEndAt, getAudio: () => s });
+  b5.fire('pointerdown', { clientX: 400, pointerId: 1 }); assert.equal(s.currentTime, 10);
+});
+
+test('Reading wiring: readingStart passes the authored endAt to the seek bar and follow(); nothing else uses it', () => {
+  const rs = cut(APP, '  function readingStart(r, passage) {', '  let wordPop,');
+  assert.match(rs, /const endAt = \(a\) => a\.kwEndAt;/);
+  assert.match(rs, /PlayerUI\.seekBar\(bar, fill, \{ label: 'Position in passage', step: 2, end: endAt,/);
+  assert.match(rs, /PlayerUI\.follow\(a, seek, ac\.signal, \(\) => SentencePlay\.audioOf\(btn\) === a, endAt\)/);
+  assert.match(rs, /SentencePlay\.button\(txt, \{ noun: 'passage', rate: 0\.92, sync: sync,/, 'same Reading audio request');
+  assert.equal((APP.match(/kwEndAt/g) || []).length, 1, 'only Reading reads kwEndAt');
+  const listening = cut(APP, '  function bodyListening() {', '  function bodySpeaking() {');
+  assert.doesNotMatch(listening, /end:|kwEndAt/, 'Listening seek range unchanged');
+});
+
+test('Reading alias pages (81): the exception tags the recording with its authored endAt; normal pages are untagged; table data unchanged', () => {
+  const tags = {}; let tagged = 0, untagged = 0;
+  for (const page of PAGES) {
+    const html = fs.readFileSync(path.join(ROOT, 'chapter', page), 'utf8');
+    const C = chapterData(page);
+    const scripts = [];
+    if (/kw-reading-exceptions\.js/.test(html)) scripts.push(READING_EXC);
+    for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) if (/displayedKey/.test(m[1])) scripts.push(m[1]);
+    let url = null, onAudio = null;
+    const g = { CHAPTER: C, KW_canonKey: canon, requestAnimationFrame: () => 0, cancelAnimationFrame() {},
+      KW_resolveInfo: (t) => { const e = lookup(t); return e ? { url: 'https://cdn.example/audio/' + e.file.replace(/^audio\//, '') } : null; },
+      KW_speak: function (t, o) { const e = lookup(t); url = e ? 'https://cdn.example/audio/' + e.file.replace(/^audio\//, '') : null; onAudio = o && o.onAudio; return Promise.resolve('manifest'); },
+      console: { log() {}, warn() {} } };
+    g.window = g; vm.createContext(g);
+    for (const sc of scripts) vm.runInContext(sc, g);
+    let seen = null;
+    g.KW_speak(C.reading.tokens.filter((t) => !t.plain).map((t) => t.w).join(' '), { onAudio: (a) => { seen = a; } });
+    const a = new FakeAudio(60); a.src = url;
+    if (onAudio) onAudio(a);
+    assert.equal(seen, a, page + ': the Reading player still receives the <audio>');
+    if (a.kwEndAt !== undefined) { tagged++; tags[C.id] = a.kwEndAt; assert.ok(isFinite(a.kwEndAt) && a.kwEndAt > 0, page); } else untagged++;
+  }
+  assert.equal(tagged, 81); assert.equal(untagged, 258 - 81);
+  assert.equal(tags['c2-01-zeitformen-der-verben'], 19.40);
+  assert.equal(tags['c2-24-goethe-mini-4'], 6.48);
+  let base;
+  try { base = execFileSync('git', ['show', 'c622798:public/audio/kw-reading-exceptions.js'], { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 << 20 }); } catch { return; }
+  const table = (s) => cut(s, '  var EXCEPTIONS = {', '  var speak = global.KW_speak;');
+  assert.equal(table(READING_EXC), table(base), 'exception table (files, stale tails, endAt) byte-identical');
+});

@@ -182,17 +182,22 @@ test('signed out: no status request at all, browser recognition', async () => {
   assert.equal(h.recs.length, 1);
 });
 
-test('status unreachable, no Access API, or a click before the answer → browser recognition', async () => {
+test('status unreachable → no silent browser check; no Access API → browser recognition; a click before the answer waits for it', async () => {
   let h = harness({ statusFails: true });
-  await h.flush(); h.click();
-  assert.equal(h.recs.length, 1);
+  await h.flush(); h.advance(1500); await h.flush(); h.advance(4000); await h.flush();   // bounded automatic retries, then 'unavailable'
+  h.click(); await h.flush();
+  assert.equal(h.recs.length, 0, 'a failed lookup never starts browser recognition');
+  assert.equal(h.state(), 'checking-access', 'the press asks again and says so');
   h = harness({ api: 'http://evil.example' });
   await h.flush(); h.click();
   assert.equal(h.fetches.length, 0, 'a non-https Access origin is never used');
-  assert.equal(h.recs.length, 1);
+  assert.equal(h.recs.length, 1, 'no Access API at all: browser recognition, as before');
   h = harness();
   h.click();                                       // before /speech/status answered
-  assert.equal(h.recs.length, 1, 'never waits on the network inside the click');
+  assert.equal(h.recs.length, 0, 'no browser recognition while the decision is pending');
+  await h.flush(); await h.flush();
+  assert.equal(h.recorders.length, 1, 'eligible arrived → the server path records');
+  assert.equal(h.recs.length, 0);
 });
 
 test('dev endpoint (KW_SPEECH_API) still wins and keeps its own request shape', async () => {

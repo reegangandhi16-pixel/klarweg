@@ -1,7 +1,7 @@
 # B1 Final Decision Register (Pre-Implementation Freeze)
 
-> **Status:** decision freeze v1.0, 2026-10-04. Design only. Nothing implemented, migrated, deployed or committed.
-> **Baseline:** `origin/main` @ `bf2838c`.
+> **Status:** decision register **v1.1**, 2026-10-07 — owner decision alignment (OD-32, OD-14, OD-08) and §I sign-off; changes listed in §J. Originally issued as decision freeze v1.0, 2026-10-04 (design only; not signed).
+> **Baseline:** v1.0 `origin/main` @ `bf2838c`; v1.1 prepared against `origin/main` @ `54ea48a`.
 > **Inputs read in full:**
 > - `b1/GOETHE-B1-ADULT-MASTER-STANDARD.md` ("Standard")
 > - `ARCHITECTURE.md` ("ARCH")
@@ -105,11 +105,11 @@ Mapping of the old DIGITAL-SPEC items:
 |---|---|---|---|---|---|---|---|
 | OD-07 | Schreiben rounding of the two-rater mean | **UNRESOLVED (configurable)** | **No official rule assumed.** Store the unrounded mean; `scoring.schreiben.rounding = "unresolved"` blocks *final release* of Schreiben results until set. Options: half-up / half-down / banker's | OWN-D18; official text only says "auf volle Punkte auf- bzw. abgerundet" [OFFICIAL S1 §4.3] (U-01); resolves R-01 (Standard said half-up, SCORING said pending) | SCORING §4.2 | Mock gate M-21 | Low (config) |
 | OD-30 | Combination of a Schreiben third rating | **UNRESOLVED (configurable)** | Trigger implemented as official [OFFICIAL S1 §4.3]. **The combination rule is not assumed.** Store all three ratings; `scoring.schreiben.third_rating_combination = "unresolved"`. Options: R3 replaces / mean(R3, closer) / mean of three | OWN-D18; U-02 | SCORING §4.3 | M-21 | Low |
-| OD-32 | Sprechen Teil 3 construct for solo learners | **OWNER DECISION** (both supported by config) | Default proposal: (b) a **simulated pair** with a pre-recorded partner presentation, so feedback + question are elicited. Alternative (a): pure single-exam model (answer examiner questions only). The phase plan supports both | Conflict R-04: the official single exam has no partner presentation [S1 §3.3], but the official Teil 3 Erfüllung covers feedback/question/answer [S3 p.46]. Evidence does not resolve it (U-07) | SPEAKING §1.1 vs Standard §6.4 | OD-14 (extra partner audio) | Medium (content + phase plan) |
+| OD-32 | Sprechen Teil 3 construct for solo learners | **OWNER DECISION — LOCKED** (2026-10-07, v1.1) | **(b) Simulated pair — decided.** The learner hears a pre-recorded partner presentation (≈ 3 min, B1 level, a different topic), gives feedback, asks a question, then answers the recorded examiner's/partner's questions about their own talk (SPEAKING §1.1 option (b), phase plan §2). The decision is resolved; its implementation and content remain subject to the M0 gates (§G.2); partner audio depends on OD-14; U-07 remains unknown. Alternative (a), the pure single-exam model, was not selected | Conflict R-04: the official single exam has no partner presentation [S1 §3.3], but the official Teil 3 Erfüllung covers feedback/question/answer [S3 p.46]. Evidence does not resolve it (U-07) | SPEAKING §1.1 vs Standard §6.4 | OD-14 (extra partner audio) | Medium (content + phase plan) |
 | OD-03 | End-of-Hören review window | CONFIGURABLE | **5 min**, no audio [Klarweg Standardized Exam Behaviour; mirrors the paper transfer time] | U-06 | AUDIO A2 | Phase plan | Low |
 | OD-04 | Breaks between written modules | CONFIGURABLE | Offer a **15-min break**, learner may skip; break time is not exam time. Labelled as a simulation deviation (official centres require **≥ 15 min** [OFFICIAL S1 §2]) | Resolves R-07 wording | ENGINE §4 | – | Low |
 | OD-06 | Paste/clipboard policy in Schreiben | CONFIGURABLE (Klarweg operational decision) | `writing.paste_policy ∈ {allow, internal_only, block}`; default **`internal_only`** (external paste blocked, attempts logged, never penalised). **No official policy is assumed** | OWN-D10 | ENGINE §9.4 | – | Low |
-| OD-14 | Audio production route | OWNER DECISION | Studio voice actors (preferred for T3/T4/partner) **or** premium neural voices passing human naturalness review (MOS ≥ 4.0) — **[PROVISIONAL]** threshold; never browser TTS | OS §23.5 | AUDIO B3 | EX-06 | High (re-recording) |
+| OD-14 | Audio production route | **OWNER DECISION — LOCKED / CONDITIONAL** (2026-10-07, v1.1) | **(b) Premium neural voices — route decided, CONDITIONAL.** All existing gates stay mandatory (AUDIO B3, B5): ≥ 16 distinct native-sounding standard-German voices, ≥ 8 female + ≥ 8 male, ages ≈ 20–70, ≥ 2 authentic Austrian + ≥ 2 authentic Swiss standard pronunciation; 9–12 voices per form; human naturalness review **MOS ≥ 4.0/5 with 10 native raters** (**[PROVISIONAL]** threshold) and OS §23.5; written licence for exam use with AI-training exclusion and a perpetual licence for the forms (EX-06); masters WAV 48 kHz / 24-bit mono; delivery Opus 64 kbps + AAC-LC 96 kbps, −18 LUFS ± 1; never browser TTS. This decision does **not** approve any vendor, voice, licence or production audio; procurement is neither approved nor complete. Real production audio remains required before M0; test tones are engineering-only. (Option (a), studio voice actors, had been noted as preferred for T3/T4/partner; not selected) | OS §23.5 | AUDIO B3 | EX-06 | High (re-recording) |
 | OD-19 | Rater/admin authentication | CONFIGURABLE | Same Klarweg session + `exam_roles`; 2FA required for rater/admin roles before the pilot (needs a small Access auth addition later) | Pseudonymised voice/text data | ARCH §5 | Access change (later phase) | Medium |
 | OD-27 | Sprechen device support | CONFIGURABLE | Full simulation Sprechen on desktop/tablet; mobile Sprechen practice only | Recording reliability | ENGINE §10 | – | Low |
 | OD-35 | Pilot sample-size targets | **OWNER DECISION** (resourcing) | Default targets: Mock engineering pilot 40–60; Mock calibration pilot 100–150; each set ≥ 100 (random groups). **[PROVISIONAL]** | Resolves R-09/R-10: Standard §15.2 (N ≥ 40 with item thresholds) and §16.6 (N ≥ 25 per set) conflict with CALIB §7. Smaller N may be used for engineering checks but **cannot** support item-statistic gates | CALIB §7; MOCK M-29/M-30 | OD-34, EX-02 | Medium |
@@ -123,7 +123,7 @@ Mapping of the old DIGITAL-SPEC items:
 
 | ID | Decision / review | Status | Selected option (pending review) | Reason | Source | Dependencies | Change cost |
 |---|---|---|---|---|---|---|---|
-| OD-08 | Reuse of official criteria descriptor wording and standard instruction phrases | EXTERNAL (legal) | Until cleared: implement the **official scoring structure** (criteria names, bands, points) as facts; **paraphrase** descriptors and instructions | Copyright/trademark | Standard §8.4, §12 | Content authoring | Low (text) |
+| OD-08 | Reuse of official criteria descriptor wording and standard instruction phrases | **OWNER DECISION — LOCKED / CONDITIONAL** (2026-10-07, v1.1); legal clearance **EXTERNAL — not resolved** | **(b) Seek formal legal clearance** for closer Goethe-aligned wording — route decided. Scope: descriptor wording and instruction phrases only, and only where legally permitted; never Goethe questions, passages, audio, keys, images or other protected content. **Until cleared (fallback, unchanged):** implement the **official scoring structure** (criteria names, bands, points) as facts; Klarweg-original **paraphrase** of descriptors and instructions. Legal clearance itself is **not resolved** and remains an M0 gate (§G.2) | Copyright/trademark | Standard §8.4, §12 | Content authoring | Low (text) |
 | OD-34 | Pilot research consent, ethics, incentives | EXTERNAL (legal/ethics) + owner | Separate research consent; modest incentive | Data use in calibration | CALIB §8 | OD-35 | Low |
 | EX-01 | Privacy review: voice recordings, OpenAI sub-processor for transcription/pre-rating, retention, DPDP Act (India) / GDPR if applicable | EXTERNAL | Consent-gated; configurable retention (OD-21) | Personal and biometric-like data | SPEAKING §6 | OD-21 | Medium |
 | EX-02 | Rater recruitment, training and certification (≥ 2 qualified B1 raters + lead) | EXTERNAL (expert) | CALIB §5 procedure | Human rating authoritative (OD-13) | CALIB §5 | OD-13 | – |
@@ -176,7 +176,7 @@ Mapping of the old DIGITAL-SPEC items:
 | R-01 | Standard §7A note + §14 OD-07: "Klarweg applies half-up to both" | SCORING §4.2: rounding pending; must not assume Sprechen rule | **Not resolved by evidence**, so it becomes **OD-07 (unresolved, configurable)**. The Standard's half-up statement is superseded by OWN-D18 | Official text silent on threshold (U-01) |
 | R-02 | ARCH OD-30 / SCORING §4.3: proposal "Bewertung 3 replaces the mean" | OWN-D18: do not invent official rules | **OD-30 unresolved, configurable** | U-02 |
 | R-03 | Standard OD-10: "AI/scripted examiner-partner" | SPEAKING §3: scripted; live AI practice only | **Resolved: scripted/pre-recorded** (OD-24 locked) | OWN-D11 |
-| R-04 | Standard §6.4: single-exam model is the reference (no partner talk) | SPEAKING §1.1: simulated pair with a partner presentation | **Converted to owner decision OD-32** (both configurable; default (b)) | Two official facts in tension (U-07) |
+| R-04 | Standard §6.4: single-exam model is the reference (no partner talk) | SPEAKING §1.1: simulated pair with a partner presentation | **Converted to owner decision OD-32** (both configurable; default (b)). v1.1: decided as (b), OD-32 LOCKED | Two official facts in tension (U-07) |
 | R-05 | Standard OD-05: "one replay of an interrupted Hören play" | AUDIO A7: one recovery **per module**, only if the **last allowed** play was interrupted | **Resolved: AUDIO A7** (more specific, more conservative; configurable) | OWN-D9 deterministic play count |
 | R-06 | Standard §9.3 / ENGINE: server timers | visual-system "no countdowns" | **Resolved:** timers permitted in explicit Goethe Mode (visual-system l. 53, 1179, 1196); OS §15.5 is scoped to pricing | Repo specs |
 | R-07 | Standard §5.2: official break **≥ 15 min** | ENGINE §4: break "up to 15 min, skippable" | **Resolved as OD-04:** a 15-min break is offered and skippable, labelled as a simulation deviation from centre practice | Official rule applies to centre administration; Klarweg is self-paced practice |
@@ -212,7 +212,7 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 ### G.2 Stage gates beyond infrastructure
 | Stage | Blocked until |
 |---|---|
-| Mock **content authoring** | OD-08 (legal wording), OD-32, OD-14, EX-03 reviewers |
+| Mock **content authoring** | OD-08 legal clearance (route decided in v1.1; clearance outstanding — paraphrase fallback until then), OD-14 conditions for any Hören/Sprechen audio (route decided in v1.1; EX-06 licences, voice pool and MOS review outstanding), EX-03 reviewers. OD-32 decided in v1.1 (no longer open) |
 | Mock **pilot with real learners** | OD-20 same-site domain, EX-01 privacy review, consent texts, OD-19 rater 2FA, EX-02 raters, OD-35, OD-34 |
 | Mock **results release** | OD-07, OD-30 set |
 | Sets 01–10 authoring | All MOCK gates M-01…M-33 passed (OWN-D14) |
@@ -235,9 +235,9 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 | SESSION | **LOCKED** | Reuse Klarweg session via the Access proxy; attempt/lease model (ENGINE §3); OD-20 before pilot |
 | TIMER | **LOCKED** | OD-49, OD-26 (grace 10 s; config) |
 | CONTENT | **LOCKED** (model, storage) | SCHEMA, OD-47, OD-23; authoring itself gated by §G.2 |
-| AUDIO | **CONFIGURABLE** | Runtime LOCKED (OD-01, OD-02, OD-05); phase values OD-43/OD-03 configurable; production route OD-14 + EX-06 **EXTERNAL** |
+| AUDIO | **CONFIGURABLE** | Runtime LOCKED (OD-01, OD-02, OD-05); phase values OD-43/OD-03 configurable; production route OD-14 **decided (premium neural, CONDITIONAL, v1.1)**; licences EX-06 and the MOS review **EXTERNAL / outstanding** |
 | WRITING | **LOCKED** (paste CONFIGURABLE) | ENGINE §9.4; OD-38 locked; OD-06 config |
-| SPEAKING | **CONFIGURABLE** | Architecture LOCKED (OD-09, OD-10, OD-24); Teil 3 construct OD-32 config; privacy EX-01 **EXTERNAL** |
+| SPEAKING | **CONFIGURABLE** | Architecture LOCKED (OD-09, OD-10, OD-24); Teil 3 construct OD-32 **LOCKED = (b) simulated pair (v1.1)**; privacy EX-01 **EXTERNAL** |
 | SCORING | **CONFIGURABLE** | Objective + rubric structures LOCKED [OFFICIAL]; OD-07, OD-30 unresolved config |
 | RATING | **EXTERNAL** | Workflow LOCKED (OD-13); raters EX-02; rater 2FA OD-19 |
 | RESULTS | **LOCKED** | OD-45, OD-25, SCORING §6 result model |
@@ -245,7 +245,7 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 | AUTHORING | **LOCKED** (tooling) | OD-23, gates Q1–Q17; actual authoring BLOCKED until §G.2 |
 | SET BALANCING | **CONFIGURABLE** | OD-52 provisional v0; recalibrated after the M0 pilot |
 | ACCESSIBILITY | **LOCKED** (targets) | WCAG 2.2 AA, keyboard-only, S8 accommodations (OD-41 config); audit EX-04 **EXTERNAL** |
-| LEGAL / ORIGINALITY | **EXTERNAL** | OD-08, EX-01, EX-07; originality rules LOCKED (ARCH §10) |
+| LEGAL / ORIGINALITY | **EXTERNAL** | OD-08 route decided (legal clearance, CONDITIONAL, v1.1) with clearance **outstanding**; EX-01, EX-07; originality rules LOCKED (ARCH §10) |
 | MONITORING | **CONFIGURABLE** | Minimum locked: incidents table, audit log, phase/play/recording events, nightly stats. Alerting thresholds/dashboards to be specified in the implementation phase |
 | BACKUP / RECOVERY | **CONFIGURABLE** | Immutable R2 releases (rollback by release id); D1 point-in-time recovery [VERIFY plan/retention]; recordings per OD-21. A backup/restore runbook is to be written in the implementation phase (gap noted) |
 | DEPLOYMENT | **LOCKED** (pattern) | Private exam Worker (`workers_dev=false`); Access proxy behind a feature flag; `/exam/` static files added to the Pages allowlist only; content never on Pages; stop before commit/merge/deploy per the owner workflow |
@@ -256,6 +256,36 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 
 | Role | Name | Decision | Date |
 |---|---|---|---|
-| Owner | | ☐ Approve register v1.0 (sections A–H) · ☐ Approve with changes | |
+| Owner | – | Register v1.0 (sections A–H): **not signed**; superseded by v1.1 | – |
+| Owner | Klarweg owner | ☑ **Approve with changes — register v1.1** (sections A–H as amended; changes in §J) | 2026-10-07 |
+
+**Scope of this sign-off.** It approves the decisions and statuses **as recorded** in this register. It does **not** certify that any open gate is complete. Still open at v1.1 include:
+- OD-08 legal clearance (EXTERNAL, not resolved)
+- OD-14 conditions: EX-06 licences, voice pool, MOS review, production audio
+- OD-07 and OD-30 (UNRESOLVED)
+- the configurable defaults (OD-03, OD-04, OD-06, OD-19, OD-27, OD-36, OD-41, OD-43) and OD-35
+- EX-01…EX-08, including the EX-03 reviewer panel
+- the deferred items (§D)
+- all implementation, calibration and release gates (Q1–Q17, M-01…M-33)
+
+**G0 (Standard §17, "This standard approved; OD-01…OD-16 decided").** Under this register's precedence (header), G0's spec-freeze condition is met by this sign-off together with a **recorded status** for every OD-01…OD-16. It does **not** mean all of them are settled:
+- **LOCKED:** OD-01, OD-02, OD-05, OD-09, OD-10, OD-11, OD-12, OD-13, OD-15
+- **CLOSED:** OD-16
+- **CONFIGURABLE (defaults):** OD-03, OD-04, OD-06
+- **UNRESOLVED:** OD-07 — gates Schreiben result release only (§G.2)
+- **Route decided, CONDITIONAL:** OD-08 (clearance outstanding) and OD-14 (conditions outstanding)
+
+The §G.2 stage gates continue to apply in full.
 
 Changes after sign-off require a new register version that lists the changed IDs, their change cost and the affected components.
+
+---
+
+## J. Version history
+
+| Version | Date | Changed IDs | Change cost | Affected components |
+|---|---|---|---|---|
+| v1.0 | 2026-10-04 | Initial decision freeze (not signed) | – | – |
+| v1.1 | 2026-10-07 | **OD-32** → (b) simulated pair, LOCKED · **OD-14** → (b) premium neural voices, LOCKED / CONDITIONAL · **OD-08** → (b) formal legal clearance route, LOCKED / CONDITIONAL (clearance not resolved) · R-04 note · §G.2 content-authoring gate · §H AUDIO, SPEAKING, LEGAL rows · §I sign-off · this §J | OD-32: Medium (content + phase plan) · OD-14: High (re-recording) · OD-08: Low (text) — as listed in §B/§C | Sprechen Teil 3 content and partner audio (OD-32); Hören and Sprechen audio production, voice licensing and MOS review (OD-14); exam instructions and descriptor wording (OD-08). No change to engine, schema, scoring rules or level configuration (the pinned config already carries the option-(b) phase plan) |
+
+The §0 inventory counts reflect the v1.0 categorisation and are unchanged; the decisions above remain in their original §B/§C sections with updated statuses.

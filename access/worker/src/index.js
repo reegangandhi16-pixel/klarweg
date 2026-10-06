@@ -5,6 +5,7 @@ import { cashfreeWebhook } from "./webhooks-cashfree.js";
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
+import { examProxy } from "./exam-proxy.js";
 import {
   listSavedWords,
   createSavedWord,
@@ -189,6 +190,11 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
     if (request.method === "POST" && url.pathname === "/webhooks/cashfree") {
       return cashfreeWebhook(request, env);
     }
+
+    /* Klarweg exam (exam-proxy.js) — OFF unless EXAM_ROUTES = "on" and the
+       EXAM service binding exists; otherwise /exam/* falls through to 404. */
+    const examResponse = await examProxy(request, env, url);
+    if (examResponse) return examResponse;
 
     return withCors(
       json(

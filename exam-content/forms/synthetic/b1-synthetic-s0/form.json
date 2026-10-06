@@ -1,0 +1,526 @@
+{
+  "id": "frm:b1:synthetic-s0@1",
+  "level_config": "lc:b1@1",
+  "kind": "synthetic",
+  "label": "Synthetische Testform S0 (nur Systemtest)",
+  "status": "live",
+  "rev": 1,
+  "release_note": "TEST CONTENT ONLY",
+  "modules": [
+    {
+      "module": "lesen",
+      "parts": [
+        {
+          "part": 1,
+          "task_ids": [
+            "tsk:b1:syn-l1"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-l1-00",
+              "display_no": "0"
+            },
+            {
+              "item_id": "itm:b1:syn-l1-01",
+              "display_no": "1"
+            },
+            {
+              "item_id": "itm:b1:syn-l1-02",
+              "display_no": "2"
+            },
+            {
+              "item_id": "itm:b1:syn-l1-03",
+              "display_no": "3"
+            },
+            {
+              "item_id": "itm:b1:syn-l1-04",
+              "display_no": "4"
+            },
+            {
+              "item_id": "itm:b1:syn-l1-05",
+              "display_no": "5"
+            },
+            {
+              "item_id": "itm:b1:syn-l1-06",
+              "display_no": "6"
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "task_ids": [
+            "tsk:b1:syn-l2a",
+            "tsk:b1:syn-l2b"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-l2-00",
+              "display_no": "0"
+            },
+            {
+              "item_id": "itm:b1:syn-l2-07",
+              "display_no": "7"
+            },
+            {
+              "item_id": "itm:b1:syn-l2-08",
+              "display_no": "8"
+            },
+            {
+              "item_id": "itm:b1:syn-l2-09",
+              "display_no": "9"
+            },
+            {
+              "item_id": "itm:b1:syn-l2-10",
+              "display_no": "10"
+            },
+            {
+              "item_id": "itm:b1:syn-l2-11",
+              "display_no": "11"
+            },
+            {
+              "item_id": "itm:b1:syn-l2-12",
+              "display_no": "12"
+            }
+          ]
+        },
+        {
+          "part": 3,
+          "task_ids": [
+            "tsk:b1:syn-l3"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-l3-00",
+              "display_no": "0"
+            },
+            {
+              "item_id": "itm:b1:syn-l3-13",
+              "display_no": "13"
+            },
+            {
+              "item_id": "itm:b1:syn-l3-14",
+              "display_no": "14"
+            },
+            {
+              "item_id": "itm:b1:syn-l3-15",
+              "display_no": "15"
+            },
+            {
+              "item_id": "itm:b1:syn-l3-16",
+              "display_no": "16"
+            },
+            {
+              "item_id": "itm:b1:syn-l3-17",
+              "display_no": "17"
+            },
+            {
+              "item_id": "itm:b1:syn-l3-18",
+              "display_no": "18"
+            },
+            {
+              "item_id": "itm:b1:syn-l3-19",
+              "display_no": "19"
+            }
+          ]
+        },
+        {
+          "part": 4,
+          "task_ids": [
+            "tsk:b1:syn-l4"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-l4-00",
+              "display_no": "0"
+            },
+            {
+              "item_id": "itm:b1:syn-l4-20",
+              "display_no": "20"
+            },
+            {
+              "item_id": "itm:b1:syn-l4-21",
+              "display_no": "21"
+            },
+            {
+              "item_id": "itm:b1:syn-l4-22",
+              "display_no": "22"
+            },
+            {
+              "item_id": "itm:b1:syn-l4-23",
+              "display_no": "23"
+            },
+            {
+              "item_id": "itm:b1:syn-l4-24",
+              "display_no": "24"
+            },
+            {
+              "item_id": "itm:b1:syn-l4-25",
+              "display_no": "25"
+            },
+            {
+              "item_id": "itm:b1:syn-l4-26",
+              "display_no": "26"
+            }
+          ]
+        },
+        {
+          "part": 5,
+          "task_ids": [
+            "tsk:b1:syn-l5"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-l5-27",
+              "display_no": "27"
+            },
+            {
+              "item_id": "itm:b1:syn-l5-28",
+              "display_no": "28"
+            },
+            {
+              "item_id": "itm:b1:syn-l5-29",
+              "display_no": "29"
+            },
+            {
+              "item_id": "itm:b1:syn-l5-30",
+              "display_no": "30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "hoeren",
+      "parts": [
+        {
+          "part": 1,
+          "task_ids": [
+            "tsk:b1:syn-h1-ex",
+            "tsk:b1:syn-h1-t1",
+            "tsk:b1:syn-h1-t2",
+            "tsk:b1:syn-h1-t3",
+            "tsk:b1:syn-h1-t4",
+            "tsk:b1:syn-h1-t5"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-h1-01",
+              "display_no": "01"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-02",
+              "display_no": "02"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-01x",
+              "display_no": "1"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-02x",
+              "display_no": "2"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-03x",
+              "display_no": "3"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-04x",
+              "display_no": "4"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-05x",
+              "display_no": "5"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-06x",
+              "display_no": "6"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-07x",
+              "display_no": "7"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-08x",
+              "display_no": "8"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-09x",
+              "display_no": "9"
+            },
+            {
+              "item_id": "itm:b1:syn-h1-10x",
+              "display_no": "10"
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "task_ids": [
+            "tsk:b1:syn-h2"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-h2-11",
+              "display_no": "11"
+            },
+            {
+              "item_id": "itm:b1:syn-h2-12",
+              "display_no": "12"
+            },
+            {
+              "item_id": "itm:b1:syn-h2-13",
+              "display_no": "13"
+            },
+            {
+              "item_id": "itm:b1:syn-h2-14",
+              "display_no": "14"
+            },
+            {
+              "item_id": "itm:b1:syn-h2-15",
+              "display_no": "15"
+            }
+          ]
+        },
+        {
+          "part": 3,
+          "task_ids": [
+            "tsk:b1:syn-h3"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-h3-16",
+              "display_no": "16"
+            },
+            {
+              "item_id": "itm:b1:syn-h3-17",
+              "display_no": "17"
+            },
+            {
+              "item_id": "itm:b1:syn-h3-18",
+              "display_no": "18"
+            },
+            {
+              "item_id": "itm:b1:syn-h3-19",
+              "display_no": "19"
+            },
+            {
+              "item_id": "itm:b1:syn-h3-20",
+              "display_no": "20"
+            },
+            {
+              "item_id": "itm:b1:syn-h3-21",
+              "display_no": "21"
+            },
+            {
+              "item_id": "itm:b1:syn-h3-22",
+              "display_no": "22"
+            }
+          ]
+        },
+        {
+          "part": 4,
+          "task_ids": [
+            "tsk:b1:syn-h4"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-h4-00",
+              "display_no": "0"
+            },
+            {
+              "item_id": "itm:b1:syn-h4-23",
+              "display_no": "23"
+            },
+            {
+              "item_id": "itm:b1:syn-h4-24",
+              "display_no": "24"
+            },
+            {
+              "item_id": "itm:b1:syn-h4-25",
+              "display_no": "25"
+            },
+            {
+              "item_id": "itm:b1:syn-h4-26",
+              "display_no": "26"
+            },
+            {
+              "item_id": "itm:b1:syn-h4-27",
+              "display_no": "27"
+            },
+            {
+              "item_id": "itm:b1:syn-h4-28",
+              "display_no": "28"
+            },
+            {
+              "item_id": "itm:b1:syn-h4-29",
+              "display_no": "29"
+            },
+            {
+              "item_id": "itm:b1:syn-h4-30",
+              "display_no": "30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "schreiben",
+      "parts": [
+        {
+          "part": 1,
+          "task_ids": [
+            "tsk:b1:syn-s1"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-s1",
+              "display_no": null
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "task_ids": [
+            "tsk:b1:syn-s2"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-s2",
+              "display_no": null
+            }
+          ]
+        },
+        {
+          "part": 3,
+          "task_ids": [
+            "tsk:b1:syn-s3"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-s3",
+              "display_no": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "sprechen",
+      "parts": [
+        {
+          "part": 1,
+          "task_ids": [
+            "tsk:b1:syn-sp1"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-sp1",
+              "display_no": null
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "task_ids": [
+            "tsk:b1:syn-sp2"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-sp2-topic",
+              "display_no": null
+            },
+            {
+              "item_id": "itm:b1:syn-sp2",
+              "display_no": null
+            }
+          ]
+        },
+        {
+          "part": 3,
+          "task_ids": [
+            "tsk:b1:syn-sp3"
+          ],
+          "item_order": [
+            {
+              "item_id": "itm:b1:syn-sp3",
+              "display_no": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "topic_map": {
+    "lesen": [
+      "synthetic"
+    ],
+    "hoeren": [
+      "synthetic"
+    ],
+    "schreiben": [
+      "synthetic"
+    ],
+    "sprechen": [
+      "synthetic"
+    ]
+  },
+  "timing_overrides": {
+    "note": "Allowed for kind=synthetic only: short phases so end-to-end tests finish quickly.",
+    "hoeren": {
+      "example_preread_seconds": 2,
+      "item_preread_seconds_per_text": 2,
+      "gap_between_plays_seconds": 1,
+      "answer_seconds_after_text": 1,
+      "part_preread_seconds": {
+        "2": 2,
+        "3": 2,
+        "4": 2
+      },
+      "part_answer_seconds": {
+        "2": 1,
+        "3": 1,
+        "4": 1
+      },
+      "part_gap_seconds": {
+        "4": 1
+      },
+      "review_seconds": 15,
+      "total_seconds_gate": {
+        "min": 0,
+        "max": 900
+      }
+    },
+    "sprechen": {
+      "prep_seconds": 20,
+      "phases": [
+        {
+          "id": "intro",
+          "seconds": 5,
+          "rated": false
+        },
+        {
+          "id": "teil1",
+          "seconds": 120
+        },
+        {
+          "id": "teil2",
+          "seconds": 120
+        },
+        {
+          "id": "partner",
+          "seconds": 5,
+          "listen_only": true
+        },
+        {
+          "id": "teil3",
+          "seconds": 120
+        }
+      ]
+    }
+  },
+  "authored_by": [
+    "klarweg-engineering"
+  ],
+  "reviewed_by": [],
+  "created_at": "2026-10-04"
+}

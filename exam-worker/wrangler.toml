@@ -1,0 +1,42 @@
+name = "klarweg-exam"
+main = "src/index.js"
+compatibility_date = "2024-11-06"
+
+# PRIVATE WORKER — NOT DEPLOYED (Phase 5A). No public URL: reachable only
+# through the klarweg-access /exam/* proxy (service binding "EXAM" there,
+# which is deliberately NOT yet added to access/worker/wrangler.toml).
+# See docs/exam/RUNBOOK-EXAM-INFRA.md before any deploy.
+workers_dev = false
+preview_urls = false
+
+# Every flag ships OFF. Only the exact string "on" enables.
+[vars]
+EXAM_ENABLED = "off"
+EXAM_SYNTHETIC_FORMS = "off"
+EXAM_MOCK_FORMS = "off"
+EXAM_PRODUCTION_FORMS = "off"
+# Secrets (wrangler secret put …), never in this file:
+#   EXAM_PROXY_SECRET   shared with klarweg-access (≥ 32 chars)
+#   EXAM_MEDIA_SECRET   HMAC key for attempt-scoped media tokens (≥ 32 chars)
+
+# Separate exam database — never the chapter/access DB.
+# database_id is a placeholder until `wrangler d1 create klarweg-exam`.
+[[d1_databases]]
+binding = "DB"
+database_name = "klarweg-exam"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+# Private content (keyless packages, keys, TEST AUDIO). Never public, never jsDelivr.
+[[r2_buckets]]
+binding = "CONTENT"
+bucket_name = "klarweg-exam-content"
+
+# Private speaking recordings (retention configurable; see runbook).
+[[r2_buckets]]
+binding = "RECORDINGS"
+bucket_name = "klarweg-exam-recordings"
+
+# Deadline sweep (auto-submits abandoned modules).
+[triggers]
+crons = ["*/5 * * * *"]

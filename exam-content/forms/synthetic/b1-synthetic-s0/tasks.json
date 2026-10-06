@@ -1,0 +1,1376 @@
+[
+  {
+    "id": "tsk:b1:syn-l1",
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "interaction": "binary_choice",
+    "instructions": {
+      "text_de": "Lesen Sie den Testtext und die Aussagen 1 bis 6. Sind die Aussagen richtig oder falsch?",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l1-text",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-l1-00",
+      "itm:b1:syn-l1-01",
+      "itm:b1:syn-l1-02",
+      "itm:b1:syn-l1-03",
+      "itm:b1:syn-l1-04",
+      "itm:b1:syn-l1-05",
+      "itm:b1:syn-l1-06"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 64,
+      "inference_demand": 1,
+      "distractor_strength": 1,
+      "info_units": 7
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-l2a",
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "interaction": "mcq_single",
+    "instructions": {
+      "text_de": "Lesen Sie Testartikel A und die Aufgaben 7 bis 9. Wählen Sie a, b oder c.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l2a-text",
+        "label": "aus einer Testzeitung (synthetisch)",
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-l2-00",
+      "itm:b1:syn-l2-07",
+      "itm:b1:syn-l2-08",
+      "itm:b1:syn-l2-09"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 43,
+      "inference_demand": 1,
+      "distractor_strength": 1,
+      "info_units": 7
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-l2b",
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "interaction": "mcq_single",
+    "instructions": {
+      "text_de": "Lesen Sie Testartikel B und die Aufgaben 10 bis 12. Wählen Sie a, b oder c.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l2b-text",
+        "label": "aus einer Testbroschüre (synthetisch)",
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-l2-10",
+      "itm:b1:syn-l2-11",
+      "itm:b1:syn-l2-12"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 34,
+      "inference_demand": 1,
+      "distractor_strength": 1,
+      "info_units": 7
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-l3",
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "interaction": "matching_pool",
+    "instructions": {
+      "text_de": "Lesen Sie die Situationen 13 bis 19 und die Testanzeigen a bis j. Jede Anzeige nur einmal. Gibt es keine passende Anzeige, wählen Sie 0.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-a",
+        "label": "a",
+        "order": 1
+      },
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-b",
+        "label": "b",
+        "order": 2
+      },
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-c",
+        "label": "c",
+        "order": 3
+      },
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-d",
+        "label": "d",
+        "order": 4
+      },
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-e",
+        "label": "e",
+        "order": 5
+      },
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-f",
+        "label": "f",
+        "order": 6
+      },
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-g",
+        "label": "g",
+        "order": 7
+      },
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-h",
+        "label": "h",
+        "order": 8
+      },
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-i",
+        "label": "i",
+        "order": 9
+      },
+      {
+        "role": "ad",
+        "asset_id": "ast:syn-l3-ad-j",
+        "label": "j",
+        "order": 10
+      }
+    ],
+    "items": [
+      "itm:b1:syn-l3-00",
+      "itm:b1:syn-l3-13",
+      "itm:b1:syn-l3-14",
+      "itm:b1:syn-l3-15",
+      "itm:b1:syn-l3-16",
+      "itm:b1:syn-l3-17",
+      "itm:b1:syn-l3-18",
+      "itm:b1:syn-l3-19"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 100,
+      "inference_demand": 1,
+      "distractor_strength": 1,
+      "info_units": 10
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-l4",
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "interaction": "binary_choice",
+    "instructions": {
+      "text_de": "Lesen Sie die Testkommentare 20 bis 26. Ist die Person für den Testvorschlag?",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l4-c0",
+        "label": "Testperson Null",
+        "order": 1
+      },
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l4-c1",
+        "label": "Testperson Eins",
+        "order": 2
+      },
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l4-c2",
+        "label": "Testperson Zwei",
+        "order": 3
+      },
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l4-c3",
+        "label": "Testperson Drei",
+        "order": 4
+      },
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l4-c4",
+        "label": "Testperson Vier",
+        "order": 5
+      },
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l4-c5",
+        "label": "Testperson Fünf",
+        "order": 6
+      },
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l4-c6",
+        "label": "Testperson Sechs",
+        "order": 7
+      },
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l4-c7",
+        "label": "Testperson Sieben",
+        "order": 8
+      }
+    ],
+    "items": [
+      "itm:b1:syn-l4-00",
+      "itm:b1:syn-l4-20",
+      "itm:b1:syn-l4-21",
+      "itm:b1:syn-l4-22",
+      "itm:b1:syn-l4-23",
+      "itm:b1:syn-l4-24",
+      "itm:b1:syn-l4-25",
+      "itm:b1:syn-l4-26"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 88,
+      "inference_demand": 1,
+      "distractor_strength": 1,
+      "info_units": 7
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-l5",
+    "level": "B1",
+    "module": "lesen",
+    "part": 5,
+    "interaction": "mcq_single",
+    "instructions": {
+      "text_de": "Lesen Sie die Aufgaben 27 bis 30 und die Test-Hausordnung. Wählen Sie a, b oder c.",
+      "source": "klarweg_paraphrase"
+    },
+    "context_line": "Sie informieren sich über die synthetische Test-Hausordnung.",
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "text",
+        "asset_id": "ast:syn-l5-text",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-l5-27",
+      "itm:b1:syn-l5-28",
+      "itm:b1:syn-l5-29",
+      "itm:b1:syn-l5-30"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 37,
+      "inference_demand": 1,
+      "distractor_strength": 1,
+      "info_units": 7
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-h1-ex",
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "interaction": "audio_item_pairs",
+    "instructions": {
+      "text_de": "TEST AUDIO: Sie hören fünf kurze Testsignale. Jedes Signal hören Sie zweimal. Lesen Sie zuerst das Beispiel.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "audio",
+        "asset_id": "ast:syn-h1-ex",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-h1-01",
+      "itm:b1:syn-h1-02"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "speech_rate_wpm": null,
+      "speaker_count": 1,
+      "plays": 1,
+      "relevant_details": 2,
+      "distractor_details": 0
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-h1-t1",
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "interaction": "audio_item_pairs",
+    "instructions": {
+      "text_de": "TEST AUDIO: Testsignal 1.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "audio",
+        "asset_id": "ast:syn-h1-t1",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-h1-01x",
+      "itm:b1:syn-h1-02x"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "speech_rate_wpm": null,
+      "speaker_count": 1,
+      "plays": 2,
+      "relevant_details": 2,
+      "distractor_details": 0
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-h1-t2",
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "interaction": "audio_item_pairs",
+    "instructions": {
+      "text_de": "TEST AUDIO: Testsignal 2.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "audio",
+        "asset_id": "ast:syn-h1-t2",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-h1-03x",
+      "itm:b1:syn-h1-04x"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "speech_rate_wpm": null,
+      "speaker_count": 1,
+      "plays": 2,
+      "relevant_details": 2,
+      "distractor_details": 0
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-h1-t3",
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "interaction": "audio_item_pairs",
+    "instructions": {
+      "text_de": "TEST AUDIO: Testsignal 3.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "audio",
+        "asset_id": "ast:syn-h1-t3",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-h1-05x",
+      "itm:b1:syn-h1-06x"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "speech_rate_wpm": null,
+      "speaker_count": 1,
+      "plays": 2,
+      "relevant_details": 2,
+      "distractor_details": 0
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-h1-t4",
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "interaction": "audio_item_pairs",
+    "instructions": {
+      "text_de": "TEST AUDIO: Testsignal 4.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "audio",
+        "asset_id": "ast:syn-h1-t4",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-h1-07x",
+      "itm:b1:syn-h1-08x"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "speech_rate_wpm": null,
+      "speaker_count": 1,
+      "plays": 2,
+      "relevant_details": 2,
+      "distractor_details": 0
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-h1-t5",
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "interaction": "audio_item_pairs",
+    "instructions": {
+      "text_de": "TEST AUDIO: Testsignal 5.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "audio",
+        "asset_id": "ast:syn-h1-t5",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-h1-09x",
+      "itm:b1:syn-h1-10x"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "speech_rate_wpm": null,
+      "speaker_count": 1,
+      "plays": 2,
+      "relevant_details": 2,
+      "distractor_details": 0
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-h2",
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "interaction": "mcq_single",
+    "instructions": {
+      "text_de": "TEST AUDIO: Sie hören ein Testsignal einmal. Lösen Sie die Aufgaben 11 bis 15.",
+      "source": "klarweg_paraphrase"
+    },
+    "context_line": "Synthetische Situation: Testführung.",
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "audio",
+        "asset_id": "ast:syn-h2",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-h2-11",
+      "itm:b1:syn-h2-12",
+      "itm:b1:syn-h2-13",
+      "itm:b1:syn-h2-14",
+      "itm:b1:syn-h2-15"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "speech_rate_wpm": null,
+      "speaker_count": 1,
+      "plays": 1,
+      "relevant_details": 5,
+      "distractor_details": 0
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-h3",
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "interaction": "binary_choice",
+    "instructions": {
+      "text_de": "TEST AUDIO: Sie hören ein Testgespräch einmal. Sind die Aussagen 16 bis 22 richtig oder falsch?",
+      "source": "klarweg_paraphrase"
+    },
+    "context_line": "Synthetische Situation: zwei Testpersonen.",
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "audio",
+        "asset_id": "ast:syn-h3",
+        "label": null,
+        "order": 1,
+        "speaker_ids": [
+          "spk:a",
+          "spk:b"
+        ]
+      }
+    ],
+    "items": [
+      "itm:b1:syn-h3-16",
+      "itm:b1:syn-h3-17",
+      "itm:b1:syn-h3-18",
+      "itm:b1:syn-h3-19",
+      "itm:b1:syn-h3-20",
+      "itm:b1:syn-h3-21",
+      "itm:b1:syn-h3-22"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "speech_rate_wpm": null,
+      "speaker_count": 2,
+      "plays": 1,
+      "relevant_details": 7,
+      "distractor_details": 0
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-h4",
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "interaction": "speaker_assignment",
+    "instructions": {
+      "text_de": "TEST AUDIO: Sie hören eine Testdiskussion zweimal. Wer sagt was? Aussagen 23 bis 30.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "audio",
+        "asset_id": "ast:syn-h4",
+        "label": null,
+        "order": 1,
+        "speaker_ids": [
+          "spk:m",
+          "spk:g1",
+          "spk:g2"
+        ]
+      }
+    ],
+    "items": [
+      "itm:b1:syn-h4-00",
+      "itm:b1:syn-h4-23",
+      "itm:b1:syn-h4-24",
+      "itm:b1:syn-h4-25",
+      "itm:b1:syn-h4-26",
+      "itm:b1:syn-h4-27",
+      "itm:b1:syn-h4-28",
+      "itm:b1:syn-h4-29",
+      "itm:b1:syn-h4-30"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "speech_rate_wpm": null,
+      "speaker_count": 3,
+      "plays": 2,
+      "relevant_details": 8,
+      "distractor_details": 0
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-s1",
+    "level": "B1",
+    "module": "schreiben",
+    "part": 1,
+    "interaction": "text_response",
+    "instructions": {
+      "text_de": "TESTAUFGABE 1 (synthetisch): Schreiben Sie einer Testperson eine E-Mail (circa 80 Wörter). Beschreiben Sie etwas, begründen Sie etwas und machen Sie einen Vorschlag.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "prompt",
+        "asset_id": "ast:syn-s1-prompt",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-s1"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 23,
+      "functions": [
+        "describe",
+        "justify",
+        "propose"
+      ],
+      "function_count": 3,
+      "planning_demand": 2,
+      "register": "du",
+      "target_words": 80,
+      "stimulus_words": 23
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-s2",
+    "level": "B1",
+    "module": "schreiben",
+    "part": 2,
+    "interaction": "text_response",
+    "instructions": {
+      "text_de": "TESTAUFGABE 2 (synthetisch): Schreiben Sie Ihre Meinung zum Testbeitrag (circa 80 Wörter).",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "prompt",
+        "asset_id": "ast:syn-s2-prompt",
+        "label": null,
+        "order": 1
+      },
+      {
+        "role": "guestbook_post",
+        "asset_id": "ast:syn-s2-post",
+        "label": "Gästebuch (Test)",
+        "order": 2
+      }
+    ],
+    "items": [
+      "itm:b1:syn-s2"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 27,
+      "functions": [
+        "opine",
+        "justify"
+      ],
+      "function_count": 2,
+      "planning_demand": 3,
+      "register": "forum_neutral",
+      "target_words": 80,
+      "stimulus_words": 27
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-s3",
+    "level": "B1",
+    "module": "schreiben",
+    "part": 3,
+    "interaction": "text_response",
+    "instructions": {
+      "text_de": "TESTAUFGABE 3 (synthetisch): Schreiben Sie einer Test-Kursleitung eine E-Mail (circa 40 Wörter). Entschuldigen Sie sich und erklären Sie den Grund.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "prompt",
+        "asset_id": "ast:syn-s3-prompt",
+        "label": null,
+        "order": 1
+      }
+    ],
+    "items": [
+      "itm:b1:syn-s3"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 20,
+      "functions": [
+        "apologise",
+        "inform"
+      ],
+      "function_count": 2,
+      "planning_demand": 2,
+      "register": "Sie",
+      "target_words": 40,
+      "stimulus_words": 20
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-sp1",
+    "level": "B1",
+    "module": "sprechen",
+    "part": 1,
+    "interaction": "spoken_response",
+    "instructions": {
+      "text_de": "Teil 1 (Test): Planen Sie mit der simulierten Partnerperson. Machen Sie Vorschläge und reagieren Sie.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "planning_card",
+        "asset_id": "ast:syn-sp1-card",
+        "label": null,
+        "order": 1
+      },
+      {
+        "role": "partner_audio",
+        "asset_id": "ast:syn-sp1-partner-1",
+        "label": null,
+        "order": 2
+      },
+      {
+        "role": "partner_audio",
+        "asset_id": "ast:syn-sp1-partner-2",
+        "label": null,
+        "order": 3
+      },
+      {
+        "role": "partner_audio",
+        "asset_id": "ast:syn-sp1-partner-3",
+        "label": null,
+        "order": 4
+      }
+    ],
+    "items": [
+      "itm:b1:syn-sp1"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 14,
+      "functions": [
+        "propose",
+        "react",
+        "negotiate",
+        "plan"
+      ],
+      "function_count": 4,
+      "planning_demand": 2,
+      "interaction_demand": 4,
+      "prep_seconds": 900
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-sp2",
+    "level": "B1",
+    "module": "sprechen",
+    "part": 2,
+    "interaction": "spoken_response",
+    "instructions": {
+      "text_de": "Teil 2 (Test): Präsentieren Sie Ihr gewähltes Testthema anhand der fünf Folien.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t1-slide1",
+        "label": "Thema 1",
+        "order": 1
+      },
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t1-slide2",
+        "label": "Thema 1",
+        "order": 2
+      },
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t1-slide3",
+        "label": "Thema 1",
+        "order": 3
+      },
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t1-slide4",
+        "label": "Thema 1",
+        "order": 4
+      },
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t1-slide5",
+        "label": "Thema 1",
+        "order": 5
+      },
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t2-slide1",
+        "label": "Thema 2",
+        "order": 6
+      },
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t2-slide2",
+        "label": "Thema 2",
+        "order": 7
+      },
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t2-slide3",
+        "label": "Thema 2",
+        "order": 8
+      },
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t2-slide4",
+        "label": "Thema 2",
+        "order": 9
+      },
+      {
+        "role": "slide",
+        "asset_id": "ast:syn-sp2-t2-slide5",
+        "label": "Thema 2",
+        "order": 10
+      }
+    ],
+    "items": [
+      "itm:b1:syn-sp2-topic",
+      "itm:b1:syn-sp2"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "functions": [
+        "present",
+        "narrate",
+        "compare",
+        "opine",
+        "conclude"
+      ],
+      "function_count": 5,
+      "planning_demand": 3,
+      "interaction_demand": 0,
+      "prep_seconds": 900
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  },
+  {
+    "id": "tsk:b1:syn-sp3",
+    "level": "B1",
+    "module": "sprechen",
+    "part": 3,
+    "interaction": "spoken_response",
+    "instructions": {
+      "text_de": "Teil 3 (Test): Geben Sie eine Rückmeldung, stellen Sie eine Frage und antworten Sie.",
+      "source": "klarweg_paraphrase"
+    },
+    "frame": "synthetic",
+    "stimuli": [
+      {
+        "role": "partner_audio",
+        "asset_id": "ast:syn-sp3-partner-talk",
+        "label": null,
+        "order": 1
+      },
+      {
+        "role": "examiner_audio",
+        "asset_id": "ast:syn-sp3-examiner-q",
+        "label": null,
+        "order": 2
+      }
+    ],
+    "items": [
+      "itm:b1:syn-sp3"
+    ],
+    "indicators": {
+      "synthetic": true,
+      "words": 0,
+      "functions": [
+        "react",
+        "ask",
+        "answer"
+      ],
+      "function_count": 3,
+      "planning_demand": 1,
+      "interaction_demand": 3,
+      "prep_seconds": 900
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    }
+  }
+]

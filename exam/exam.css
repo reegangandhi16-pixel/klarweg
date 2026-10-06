@@ -1,0 +1,80 @@
+/* Klarweg exam shell. Canonical tokens (CLAUDE.md); in-app surface → teal
+   accent only (no coral). Spacing scale 4/8/12/16/24/36/48/64/80/96/120.
+   Color never carries decoration here; no grammar colors in the exam. */
+:root {
+  --canvas: #FAFAF7; --surface: #FFFFFF; --elevated: #F4F3EE; --warm: #FFF8EC;
+  --ink-primary: #0E0E10; --ink-secondary: #5A5A60; --ink-tertiary: #9A9AA0;
+  --accent: #1F4E4A; --accent-ink: #FFFFFF; --line: #E4E2DA; --focus: #1F4E4A;
+  --font-display: 'Fraunces', Georgia, serif; --font-ui: 'Inter', system-ui, sans-serif; --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --fast: 150ms; --base: 240ms; --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius: 12px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--canvas); color: var(--ink-primary); font: 400 16px/1.6 var(--font-ui); }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25; margin: 0 0 16px; }
+h1 { font-size: 28px; } h2 { font-size: 22px; } h3 { font-size: 18px; }
+p { margin: 0 0 16px; }
+.kx-skip { position: absolute; left: 16px; top: -64px; background: var(--surface); padding: 8px 16px; border-radius: 8px; z-index: 10; }
+.kx-skip:focus { top: 16px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.kx-app { max-width: 1080px; margin: 0 auto; padding: 24px 16px 96px; }
+.kx-card { max-width: 680px; margin: 48px auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; }
+.kx-eyebrow, .kx-meta { font: 500 12px/1.4 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-secondary); }
+.kx-banner { font: 500 12px/1.5 var(--font-mono); background: var(--warm); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+.kx-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.kx-btn { min-height: 44px; min-width: 44px; padding: 12px 24px; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink);
+  font: 600 16px/1 var(--font-ui); cursor: pointer; transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease); }
+.kx-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(14, 14, 16, 0.12); }
+.kx-btn:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
+.kx-head { position: sticky; top: 0; z-index: 5; display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 16px;
+  background: var(--canvas); border-bottom: 1px solid var(--line); padding: 12px 0; }
+.kx-title { margin: 0; font-size: 22px; }
+.kx-save { margin: 0; color: var(--ink-secondary); font-size: 14px; }
+.kx-timer { margin: 0; font: 500 20px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
+.kx-phase { min-height: 24px; margin: 16px 0; color: var(--ink-secondary); }
+.kx-announce { margin: 0 0 16px; color: var(--ink-primary); font-weight: 500; }
+.kx-announce:empty { display: none; }
+.kx-part { margin: 36px 0; }
+.kx-task { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
+.kx-stim, .kx-instr { max-width: 680px; }
+.kx-stim { background: var(--elevated); border-radius: 8px; padding: 16px 24px; margin-bottom: 16px; }
+.kx-item { border: 0; margin: 0 0 16px; padding: 16px 0 0; border-top: 1px solid var(--line); }
+.kx-item legend, .kx-item > label { font-weight: 500; padding: 0; margin-bottom: 8px; }
+.kx-example { color: var(--ink-secondary); }
+.kx-ex { font: 500 12px/1 var(--font-mono); text-transform: uppercase; color: var(--ink-tertiary); }
+.kx-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.kx-opt { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; background: var(--surface); }
+.kx-opt:has(input:checked) { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.kx-opt input { width: 20px; height: 20px; accent-color: var(--accent); margin: 0; }
+.kx-match select { min-height: 44px; font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); max-width: 100%; }
+.kx-writing textarea { width: 100%; min-height: 240px; font: 400 17px/1.6 var(--font-ui); padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); resize: vertical; }
+.kx-chars { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.kx-char { min-width: 44px; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font: 500 18px/1 var(--font-ui); cursor: pointer; }
+.kx-wc { font: 500 14px/1.4 var(--font-mono); color: var(--ink-secondary); margin-top: 8px; }
+.kx-turns { padding-left: 24px; }
+.kx-turn-status { font: 500 12px/1 var(--font-mono); color: var(--ink-secondary); }
+.kx-consent { display: flex; gap: 12px; align-items: center; min-height: 44px; }
+.kx-consent input { width: 20px; height: 20px; accent-color: var(--accent); }
+.kx-foot { position: sticky; bottom: 0; display: flex; justify-content: flex-end; padding: 16px 0; background: var(--canvas); border-top: 1px solid var(--line); }
+.kx-result { max-width: 680px; margin: 48px auto; }
+.kx-table { width: 100%; border-collapse: collapse; margin: 24px 0; background: var(--surface); }
+.kx-table caption { text-align: left; color: var(--ink-secondary); padding-bottom: 8px; }
+.kx-table th, .kx-table td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.kx-disclaimer { color: var(--ink-secondary); font-size: 14px; }
+.kx-error { color: var(--ink-primary); background: var(--warm); padding: 12px 16px; border-radius: 8px; }
+@media (max-width: 720px) {
+  .kx-app { padding: 16px 16px 96px; }
+  .kx-card { padding: 24px 16px; margin: 24px auto; }
+  .kx-task { padding: 16px; }
+  .kx-head { grid-template-columns: 1fr auto; }
+  .kx-save { grid-column: 1 / -1; order: 3; }
+  .kx-opts { flex-direction: column; }
+  .kx-opt { width: 100%; }
+  .kx-table th, .kx-table td { padding: 8px; }
+  h1 { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  .kx-btn:hover { transform: none; }
+}

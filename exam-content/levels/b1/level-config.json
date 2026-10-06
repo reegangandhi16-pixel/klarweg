@@ -1,0 +1,131 @@
+{
+  "id": "lc:b1@1",
+  "level": "B1",
+  "variant": "adult",
+  "address": "Sie",
+  "standard_ref": "docs/exam/b1/GOETHE-B1-ADULT-MASTER-STANDARD.md §4–§8; docs/exam/B1-FINAL-DECISION-REGISTER.md",
+  "aggregation_policy": "modular_independent",
+  "pass_threshold_points": 60,
+  "grade_bands": [
+    { "min": 90, "max": 100, "label": "sehr gut" },
+    { "min": 80, "max": 89, "label": "gut" },
+    { "min": 70, "max": 79, "label": "befriedigend" },
+    { "min": 60, "max": 69, "label": "ausreichend" },
+    { "min": 0, "max": 59, "label": "nicht bestanden" }
+  ],
+  "objective_tables": {
+    "b1_30_to_100": {
+      "source": "Durchführungsbestimmungen B1 §4.1–4.2 (Stand 1.9.2025)",
+      "max_raw": 30,
+      "map": {
+        "30": 100, "29": 97, "28": 93, "27": 90, "26": 87, "25": 83, "24": 80, "23": 77, "22": 73, "21": 70,
+        "20": 67, "19": 63, "18": 60, "17": 57, "16": 53, "15": 50, "14": 47, "13": 43, "12": 40, "11": 37,
+        "10": 33, "9": 30, "8": 27, "7": 23, "6": 20, "5": 17, "4": 13, "3": 10, "2": 7, "1": 3, "0": 0
+      }
+    }
+  },
+  "option_sets": {
+    "richtig_falsch": [{ "option_id": "richtig", "label": "Richtig" }, { "option_id": "falsch", "label": "Falsch" }],
+    "ja_nein": [{ "option_id": "ja", "label": "Ja" }, { "option_id": "nein", "label": "Nein" }],
+    "abc": [{ "option_id": "a", "label": "a" }, { "option_id": "b", "label": "b" }, { "option_id": "c", "label": "c" }]
+  },
+  "modules": [
+    {
+      "module": "lesen",
+      "order": 1,
+      "timing": { "kind": "fixed", "seconds": 3900 },
+      "navigation": "free",
+      "scoring": { "strategy": "objective_table", "table": "b1_30_to_100", "max_points": 100 },
+      "parts": [
+        { "part": 1, "construct": "Korrespondenz lesen", "interaction": "binary_choice", "option_set": "richtig_falsch", "item_count": 6, "example_count": 1, "advisory_seconds": 600, "points_per_item": 1 },
+        { "part": 2, "construct": "Information und Argumentation verstehen", "interaction": "mcq_single", "option_set": "abc", "item_count": 6, "example_count": 1, "advisory_seconds": 1200, "points_per_item": 1, "tasks": 2 },
+        { "part": 3, "construct": "Zur Orientierung lesen", "interaction": "matching_pool", "item_count": 7, "example_count": 1, "advisory_seconds": 600, "points_per_item": 1,
+          "constraints": { "pool_size": 10, "null_option": "0", "null_keys": 1, "unique_use": true, "unused_pool": 3 } },
+        { "part": 4, "construct": "Information und Argumentation verstehen", "interaction": "binary_choice", "option_set": "ja_nein", "item_count": 7, "example_count": 1, "advisory_seconds": 900, "points_per_item": 1 },
+        { "part": 5, "construct": "Schriftliche Anweisung verstehen", "interaction": "mcq_single", "option_set": "abc", "item_count": 4, "example_count": 0, "advisory_seconds": 600, "points_per_item": 1 }
+      ]
+    },
+    {
+      "module": "hoeren",
+      "order": 2,
+      "timing": { "kind": "phase_plan", "jitter_allowance_seconds": 60, "readiness_allowance_seconds": 120 },
+      "navigation": "linear",
+      "scoring": { "strategy": "objective_table", "table": "b1_30_to_100", "max_points": 100 },
+      "phase_template": {
+        "status": "PROVISIONAL — Klarweg Standardized Exam Behaviour; official pause values unknown (register OD-43, U-05)",
+        "instruction_seconds": 0,
+        "example_preread_seconds": 10,
+        "item_preread_seconds_per_text": 10,
+        "gap_between_plays_seconds": 5,
+        "answer_seconds_after_text": 10,
+        "part_preread_seconds": { "2": 60, "3": 60, "4": 60 },
+        "part_answer_seconds": { "2": 15, "3": 15, "4": 15 },
+        "part_gap_seconds": { "4": 10 },
+        "review_seconds": 300,
+        "recovery_replays_per_module": 1,
+        "total_seconds_gate": { "min": 2160, "max": 2520 }
+      },
+      "parts": [
+        { "part": 1, "construct": "Ankündigungen, Durchsagen und Anweisungen verstehen", "interaction": "audio_item_pairs", "item_count": 10, "example_count": 2, "plays": 2, "texts": 5, "points_per_item": 1,
+          "item_pattern": [{ "interaction": "binary_choice", "option_set": "richtig_falsch" }, { "interaction": "mcq_single", "option_set": "abc" }] },
+        { "part": 2, "construct": "Als Zuschauer/Zuhörer im Publikum verstehen", "interaction": "mcq_single", "option_set": "abc", "item_count": 5, "example_count": 0, "plays": 1, "points_per_item": 1 },
+        { "part": 3, "construct": "Gespräche zwischen Muttersprachlern verstehen", "interaction": "binary_choice", "option_set": "richtig_falsch", "item_count": 7, "example_count": 0, "plays": 1, "points_per_item": 1 },
+        { "part": 4, "construct": "Radiosendungen und Tonaufnahmen verstehen", "interaction": "speaker_assignment", "item_count": 8, "example_count": 1, "plays": 2, "points_per_item": 1,
+          "constraints": { "speakers": 3 } }
+      ]
+    },
+    {
+      "module": "schreiben",
+      "order": 3,
+      "timing": { "kind": "fixed", "seconds": 3600 },
+      "navigation": "free",
+      "scoring": {
+        "strategy": "rubric_double_rating",
+        "max_points": 100,
+        "rounding": "unresolved",
+        "rounding_note": "Official text: 'auf volle Punkte auf- bzw. abgerundet' — threshold not published (register OD-07, U-01).",
+        "third_rating": { "trigger": "one_below_one_at_or_above_pass_and_mean_below_pass", "combination": "unresolved",
+          "note": "Combination rule not published (register OD-30, U-02)." }
+      },
+      "parts": [
+        { "part": 1, "construct": "Persönliche Mitteilung zur Kontaktpflege", "interaction": "text_response", "item_count": 1, "example_count": 0, "advisory_seconds": 1200, "target_words": 80, "rubric": "rub:b1:schreiben:p1@1" },
+        { "part": 2, "construct": "Persönliche Meinung zu einem Thema äußern", "interaction": "text_response", "item_count": 1, "example_count": 0, "advisory_seconds": 1500, "target_words": 80, "rubric": "rub:b1:schreiben:p2@1" },
+        { "part": 3, "construct": "Persönliche Mitteilung zur Handlungsregulierung", "interaction": "text_response", "item_count": 1, "example_count": 0, "advisory_seconds": 900, "target_words": 40, "rubric": "rub:b1:schreiben:p3@1" }
+      ]
+    },
+    {
+      "module": "sprechen",
+      "order": 4,
+      "timing": {
+        "kind": "speaking_phases",
+        "prep_seconds": 900,
+        "phases": [
+          { "id": "intro", "seconds": 60, "rated": false },
+          { "id": "teil1", "seconds": 210 },
+          { "id": "teil2", "seconds": 240 },
+          { "id": "partner", "seconds": 180, "listen_only": true },
+          { "id": "teil3", "seconds": 150 }
+        ],
+        "transition_allowance_seconds": 120,
+        "upload_grace_seconds": 600
+      },
+      "navigation": "linear",
+      "recording": { "chunk_max_bytes": 262144, "attempt_max_bytes": 10485760, "turn_max_seconds": 270, "mime_allow": ["audio/webm", "audio/ogg", "audio/mp4", "audio/wav"] },
+      "scoring": { "strategy": "rubric_double_rating", "max_points": 100, "rounding": "half_up", "rounding_source": "Durchführungsbestimmungen B1 §5 (≤ .49 down, ≥ .5 up)" },
+      "parts": [
+        { "part": 1, "construct": "Gemeinsam etwas planen und aushandeln", "interaction": "spoken_response", "item_count": 1, "example_count": 0, "rubric": "rub:b1:sprechen:p1@1" },
+        { "part": 2, "construct": "In einem Monolog ein Thema präsentieren", "interaction": "spoken_response", "item_count": 1, "example_count": 0, "rubric": "rub:b1:sprechen:p2@1", "topic_choice": 2 },
+        { "part": 3, "construct": "Situationsadäquat reagieren", "interaction": "spoken_response", "item_count": 1, "example_count": 0, "rubric": "rub:b1:sprechen:p3@1" }
+      ]
+    }
+  ],
+  "rubrics": {
+    "rub:b1:schreiben:p1@1": { "module": "schreiben", "part": 1, "criteria": { "erfuellung": [10, 7.5, 5, 2.5, 0], "kohaerenz": [10, 7.5, 5, 2.5, 0], "wortschatz": [10, 7.5, 5, 2.5, 0], "strukturen": [10, 7.5, 5, 2.5, 0] }, "zero_rule": "erfuellung_E", "length_rule_pct": 50 },
+    "rub:b1:schreiben:p2@1": { "module": "schreiben", "part": 2, "criteria": { "erfuellung": [10, 7.5, 5, 2.5, 0], "kohaerenz": [10, 7.5, 5, 2.5, 0], "wortschatz": [10, 7.5, 5, 2.5, 0], "strukturen": [10, 7.5, 5, 2.5, 0] }, "zero_rule": "erfuellung_E", "length_rule_pct": 50 },
+    "rub:b1:schreiben:p3@1": { "module": "schreiben", "part": 3, "criteria": { "erfuellung": [4, 3, 2, 1, 0], "kohaerenz": [4, 3, 2, 1, 0], "wortschatz": [6, 4.5, 3, 1.5, 0], "strukturen": [6, 4.5, 3, 1.5, 0] }, "zero_rule": "erfuellung_E", "length_rule_pct": 50 },
+    "rub:b1:sprechen:p1@1": { "module": "sprechen", "part": 1, "criteria": { "erfuellung": [8, 6, 4, 2, 0], "interaktion": [4, 3, 2, 1, 0], "wortschatz": [8, 6, 4, 2, 0], "strukturen": [8, 6, 4, 2, 0] }, "zero_rule": "erfuellung_E" },
+    "rub:b1:sprechen:p2@1": { "module": "sprechen", "part": 2, "criteria": { "erfuellung": [12, 9, 6, 3, 0], "kohaerenz": [4, 3, 2, 1, 0], "wortschatz": [12, 9, 6, 3, 0], "strukturen": [12, 9, 6, 3, 0] }, "zero_rule": "erfuellung_E" },
+    "rub:b1:sprechen:p3@1": { "module": "sprechen", "part": 3, "criteria": { "erfuellung": [16, 12, 8, 4, 0] }, "zero_rule": "erfuellung_E" },
+    "rub:b1:sprechen:pron@1": { "module": "sprechen", "part": "all", "criteria": { "aussprache": [16, 12, 8, 4, 0] }, "ai_allowed": false }
+  }
+}

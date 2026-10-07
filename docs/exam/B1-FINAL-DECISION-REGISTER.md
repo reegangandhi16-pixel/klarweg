@@ -1,6 +1,6 @@
 # B1 Final Decision Register (Pre-Implementation Freeze)
 
-> **Status:** decision register **v1.2**, 2026-10-07 — EX-03 reviewer-panel decisions (§C.1); changes listed in §J. v1.1, 2026-10-07: owner decision alignment (OD-32, OD-14, OD-08) and §I sign-off. Originally issued as decision freeze v1.0, 2026-10-04 (design only; not signed).
+> **Status:** decision register **v1.2**, 2026-10-07 — EX-03 reviewer-panel decisions (§C.1) and §I sign-off; changes listed in §J. v1.1, 2026-10-07: owner decision alignment (OD-32, OD-14, OD-08) and §I sign-off. Originally issued as decision freeze v1.0, 2026-10-04 (design only; not signed).
 > **Baseline:** v1.0 `origin/main` @ `bf2838c`; v1.1 prepared against `origin/main` @ `54ea48a`; v1.2 prepared against `origin/main` @ `050339b`.
 > **Inputs read in full:**
 > - `b1/GOETHE-B1-ADULT-MASTER-STANDARD.md` ("Standard")
@@ -285,7 +285,7 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 |---|---|---|---|
 | Owner | – | Register v1.0 (sections A–H): **not signed**; superseded by v1.1 | – |
 | Owner | Klarweg owner | ☑ **Approve with changes — register v1.1** (sections A–H as amended; changes in §J) | 2026-10-07 |
-| Owner | – | Register v1.2 (§C.1 EX-03 panel decisions; changes in §J): **sign-off pending** | – |
+| Owner | Klarweg owner | ☑ **Approve — register v1.2** (§C.1 EX-03 panel decisions EX-03/O1…O10 as recorded; changes in §J) | 2026-10-07 |
 
 **Scope of this sign-off.** It approves the decisions and statuses **as recorded** in this register. It does **not** certify that any open gate is complete. Still open at v1.1 include:
 - OD-08 legal clearance (EXTERNAL, not resolved)
@@ -295,6 +295,10 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 - EX-01…EX-08, including the EX-03 reviewer panel (governance decided in v1.2, §C.1; panel not yet formed)
 - the deferred items (§D)
 - all implementation, calibration and release gates (Q1–Q17, M-01…M-33)
+
+**Scope of the v1.2 sign-off.** Same scope as above: it approves EX-03/O1…O10 **as recorded** in §C.1. It does **not**
+mean that the EX-03 panel is formed or that any reviewer has been appointed, and it does not close any of the items
+listed above. G0 below is unaffected.
 
 **G0 (Standard §17, "This standard approved; OD-01…OD-16 decided").** Under this register's precedence (header), G0's spec-freeze condition is met by this sign-off together with a **recorded status** for every OD-01…OD-16. It does **not** mean all of them are settled:
 - **LOCKED:** OD-01, OD-02, OD-05, OD-09, OD-10, OD-11, OD-12, OD-13, OD-15
@@ -315,6 +319,6 @@ Changes after sign-off require a new register version that lists the changed IDs
 |---|---|---|---|---|
 | v1.0 | 2026-10-04 | Initial decision freeze (not signed) | – | – |
 | v1.1 | 2026-10-07 | **OD-32** → (b) simulated pair, LOCKED · **OD-14** → (b) premium neural voices, LOCKED / CONDITIONAL · **OD-08** → (b) formal legal clearance route, LOCKED / CONDITIONAL (clearance not resolved) · R-04 note · §G.2 content-authoring gate · §H AUDIO, SPEAKING, LEGAL rows · §I sign-off · this §J | OD-32: Medium (content + phase plan) · OD-14: High (re-recording) · OD-08: Low (text) — as listed in §B/§C | Sprechen Teil 3 content and partner audio (OD-32); Hören and Sprechen audio production, voice licensing and MOS review (OD-14); exam instructions and descriptor wording (OD-08). No change to engine, schema, scoring rules or level configuration (the pinned config already carries the option-(b) phase plan) |
-| v1.2 | 2026-10-07 | **EX-03/O1…O10** recorded as owner decisions (new §C.1) · EX-03 row (status: governance decided, panel not formed) · §G.2 content-authoring gate · §I sign-off row (pending) and scope note · header · this §J | Low (process; recruitment and review effort) — as listed in §C.1 | Item review process and reviewer recruitment only. No change to engine, schema, scoring rules, level configuration, MOCK gates or the Standard |
+| v1.2 | 2026-10-07 | **EX-03/O1…O10** recorded as owner decisions (new §C.1) · EX-03 row (status: governance decided, panel not formed) · §G.2 content-authoring gate · §I sign-off and scope note · header · this §J | Low (process; recruitment and review effort) — as listed in §C.1 | Item review process and reviewer recruitment only. No change to engine, schema, scoring rules, level configuration, MOCK gates or the Standard |
 
 The §0 inventory counts reflect the v1.0 categorisation and are unchanged; the decisions above remain in their original §B/§C sections with updated statuses.

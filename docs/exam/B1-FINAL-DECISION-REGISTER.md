@@ -1,7 +1,7 @@
 # B1 Final Decision Register (Pre-Implementation Freeze)
 
-> **Status:** decision register **v1.1**, 2026-10-07 — owner decision alignment (OD-32, OD-14, OD-08) and §I sign-off; changes listed in §J. Originally issued as decision freeze v1.0, 2026-10-04 (design only; not signed).
-> **Baseline:** v1.0 `origin/main` @ `bf2838c`; v1.1 prepared against `origin/main` @ `54ea48a`.
+> **Status:** decision register **v1.2**, 2026-10-07 — EX-03 reviewer-panel decisions (§C.1); changes listed in §J. v1.1, 2026-10-07: owner decision alignment (OD-32, OD-14, OD-08) and §I sign-off. Originally issued as decision freeze v1.0, 2026-10-04 (design only; not signed).
+> **Baseline:** v1.0 `origin/main` @ `bf2838c`; v1.1 prepared against `origin/main` @ `54ea48a`; v1.2 prepared against `origin/main` @ `050339b`.
 > **Inputs read in full:**
 > - `b1/GOETHE-B1-ADULT-MASTER-STANDARD.md` ("Standard")
 > - `ARCHITECTURE.md` ("ARCH")
@@ -16,7 +16,7 @@
 > - Also the older `b1/GOETHE-B1-DIGITAL-EXAM-SPEC.md` §14 (items DS-D1…DS-D15, still referenced by OD-16)
 >
 > **Precedence:** this register **governs where the earlier documents conflict** (§F). The earlier documents are **not modified**.
-> **Naming:** owner defaults from the Phase 4 brief = **OWN-D1…OWN-D20**. The old DIGITAL-SPEC items = **DS-D1…DS-D15**. Decisions = **OD-xx** (OD-01…OD-34 existing; **OD-35…OD-45 new**, surfaced by this review; **OD-46…OD-52** = owner defaults made explicit). Explicit unknowns = **U-xx**. External items = **EX-xx**. Contradictions = **R-xx**.
+> **Naming:** owner defaults from the Phase 4 brief = **OWN-D1…OWN-D20**. The old DIGITAL-SPEC items = **DS-D1…DS-D15**. Decisions = **OD-xx** (OD-01…OD-34 existing; **OD-35…OD-45 new**, surfaced by this review; **OD-46…OD-52** = owner defaults made explicit). Explicit unknowns = **U-xx**. External items = **EX-xx**. EX-03 panel decisions = **EX-03/O1…O10** (§C.1). Contradictions = **R-xx**.
 > **Labels:** [OFFICIAL] (Standard source IDs S1–S10) · [Klarweg Standardized Exam Behaviour] (where Goethe's digital behaviour is undocumented) · [KLARWEG DESIGN] · [UNKNOWN] · [PROVISIONAL] (numeric thresholds to be revised with pilot data, OWN-D16).
 
 ---
@@ -127,12 +127,39 @@ Mapping of the old DIGITAL-SPEC items:
 | OD-34 | Pilot research consent, ethics, incentives | EXTERNAL (legal/ethics) + owner | Separate research consent; modest incentive | Data use in calibration | CALIB §8 | OD-35 | Low |
 | EX-01 | Privacy review: voice recordings, OpenAI sub-processor for transcription/pre-rating, retention, DPDP Act (India) / GDPR if applicable | EXTERNAL | Consent-gated; configurable retention (OD-21) | Personal and biometric-like data | SPEAKING §6 | OD-21 | Medium |
 | EX-02 | Rater recruitment, training and certification (≥ 2 qualified B1 raters + lead) | EXTERNAL (expert) | CALIB §5 procedure | Human rating authoritative (OD-13) | CALIB §5 | OD-13 | – |
-| EX-03 | Native-speaker linguist + B1 teacher review panel | EXTERNAL (expert) | ≥ 2 teachers + 1 native linguist per item | Content validity | MOCK M-27 | – | – |
+| EX-03 | Native-speaker linguist + B1 teacher review panel | EXTERNAL (expert) — **panel NOT FORMED**; governance decided in v1.2 (§C.1) | ≥ 2 teachers + 1 native linguist per item; how the panel works: EX-03/O1…O10 (§C.1) | Content validity | MOCK M-27 | – | – |
 | EX-04 | Accessibility audit (WCAG 2.2 AA, screen readers) | EXTERNAL (expert) | MOCK M-24 | – | ENGINE §10 | – | – |
 | EX-05 | Security review / penetration test | EXTERNAL (expert) | MOCK M-23 checklist | Key protection, IDOR, signed URLs | ARCH §5 | – | – |
 | EX-06 | Voice talent contracts / neural voice licences (exam use, no AI-training reuse) | EXTERNAL (third party) | AUDIO B3 terms | – | AUDIO B3 | OD-14 | – |
 | EX-07 | Trademark review of "Goethe" references and disclaimers | EXTERNAL (legal) | Nominative use only + disclaimer (OD-45) | – | ARCH §10.9 | OD-45 | Low |
 | EX-08 | Accommodation evidence process (medical documentation handling) | EXTERNAL (legal/privacy) | Mirrors S8 principles | – | – | OD-41 | Low |
+
+### C.1 EX-03 reviewer-panel decisions (v1.2)
+
+Owner decisions of 2026-10-07 on how the EX-03 panel works. They fill gaps the source documents leave open and do not
+change MOCK M-27/M-28, SCHEMA §8.2, §8.3 or §10, or the Standard. **No reviewer has been appointed; EX-03 remains
+EXTERNAL and open** (§G.2, §I). Reviewer identities, qualification evidence and conflict-of-interest disclosures are
+held privately by the owner and are never recorded in a repository; review records carry anonymised reviewer codes only.
+
+Role slots (labels, not identities): **A** and **B** = B1-qualified German teachers; **C** = qualified native German
+linguist — the "≥ 2 teachers + 1 native linguist" of EX-03 / MOCK M-27 / Standard §15.2.
+
+| ID | Decision | Status | Gap in the sources | Change cost |
+|---|---|---|---|---|
+| EX-03/O1 | Three distinct people fill slots A, B and C; no one person fills more than one slot | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | EX-03 / M-27 give only the count "≥ 2 + 1" | Low (recruitment) |
+| EX-03/O2 | A and B record the SCHEMA §10 `content` role. C still signs off every item for validity, key and distractors under M-27 | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | SCHEMA §10 role not assigned to a reviewer | Low (process) |
+| EX-03/O3 | C holds the SCHEMA §10 `originality` role: per-form human originality sign-off (ARCH §10.7; M-28) and Q14 human decisions | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | Role holder not named | Low (process) |
+| EX-03/O4 | C holds item-level `accessibility` review. The external accessibility audit EX-04 (MOCK M-24) is unaffected | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | Item-level accessibility not assigned to the panel | Low (process) |
+| EX-03/O5 | A and B give the SCHEMA §8.3 ratings (incl. BAL indicators 9–11 and 18–24, and the Sprechen Teil 2 topic pair, Standard §11.2(10)); C is the third reviewer | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | SCHEMA §8.3 does not assign the raters or the third reviewer | Low (process) |
+| EX-03/O6 | No carry-forward of approvals: every new item/form revision gets fresh verdicts from A, B and C | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | Not specified | Low (review effort) |
+| EX-03/O7 | No adjudicator, tie-break or vote for verdict disagreements. An unresolved item is either revised, or withdrawn by the owner and replaced by a new item reviewed from scratch. Reviewers may discuss only after recording independent verdicts. Neither AI nor the owner can turn a reviewer's rejection into an approval (M-27 sign-off) | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | Only SCHEMA §8.3 defines a reconciliation rule, and only for ratings | Low (process) |
+| EX-03/O8 | No general finding-severity scale: findings are recorded through the reviewer's verdict (SCHEMA §10) and the finding's disposition; ambiguity findings also carry `ambiguity_risk` (SCHEMA §8.2) | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | No general scale defined | Low (process) |
+| EX-03/O9 | No reviewer access to the commercial reference book in any form; reference materials stay outside the product repositories (ARCH §10.8) | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | Reviewer access not specified | Low (process) |
+| EX-03/O10 | SCHEMA §8.3 with no single agreeing pair (the third rating agrees with neither original rating, e.g. 1/5/3, or with both, e.g. 2/4/3; two ratings agree when they differ by less than 2): no value is recorded; A and B review the anchored examples and re-rate independently; §8.3 is applied again, with a fresh third rating from C if required; if there is still no single agreeing pair, the task is revised (BAL §4 step 4) | **OWNER DECISION — LOCKED** (2026-10-07, v1.2) | SCHEMA §8.3 records "the mean of the agreeing pair" without covering these cases | Low (process) |
+
+Remaining before the first human review (owner actions, outside any repository): appoint the three reviewers, verify
+qualifications, collect conflict-of-interest disclosures, assign anonymised codes, grant access, and calibrate A, B and C
+on the SCHEMA §8.3 anchored examples.
 
 ---
 
@@ -212,7 +239,7 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 ### G.2 Stage gates beyond infrastructure
 | Stage | Blocked until |
 |---|---|
-| Mock **content authoring** | OD-08 legal clearance (route decided in v1.1; clearance outstanding — paraphrase fallback until then), OD-14 conditions for any Hören/Sprechen audio (route decided in v1.1; EX-06 licences, voice pool and MOS review outstanding), EX-03 reviewers. OD-32 decided in v1.1 (no longer open) |
+| Mock **content authoring** | OD-08 legal clearance (route decided in v1.1; clearance outstanding — paraphrase fallback until then), OD-14 conditions for any Hören/Sprechen audio (route decided in v1.1; EX-06 licences, voice pool and MOS review outstanding), EX-03 reviewer panel (governance decided in v1.2, §C.1; panel not yet formed). OD-32 decided in v1.1 (no longer open) |
 | Mock **pilot with real learners** | OD-20 same-site domain, EX-01 privacy review, consent texts, OD-19 rater 2FA, EX-02 raters, OD-35, OD-34 |
 | Mock **results release** | OD-07, OD-30 set |
 | Sets 01–10 authoring | All MOCK gates M-01…M-33 passed (OWN-D14) |
@@ -258,13 +285,14 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 |---|---|---|---|
 | Owner | – | Register v1.0 (sections A–H): **not signed**; superseded by v1.1 | – |
 | Owner | Klarweg owner | ☑ **Approve with changes — register v1.1** (sections A–H as amended; changes in §J) | 2026-10-07 |
+| Owner | – | Register v1.2 (§C.1 EX-03 panel decisions; changes in §J): **sign-off pending** | – |
 
 **Scope of this sign-off.** It approves the decisions and statuses **as recorded** in this register. It does **not** certify that any open gate is complete. Still open at v1.1 include:
 - OD-08 legal clearance (EXTERNAL, not resolved)
 - OD-14 conditions: EX-06 licences, voice pool, MOS review, production audio
 - OD-07 and OD-30 (UNRESOLVED)
 - the configurable defaults (OD-03, OD-04, OD-06, OD-19, OD-27, OD-36, OD-41, OD-43) and OD-35
-- EX-01…EX-08, including the EX-03 reviewer panel
+- EX-01…EX-08, including the EX-03 reviewer panel (governance decided in v1.2, §C.1; panel not yet formed)
 - the deferred items (§D)
 - all implementation, calibration and release gates (Q1–Q17, M-01…M-33)
 
@@ -287,5 +315,6 @@ Changes after sign-off require a new register version that lists the changed IDs
 |---|---|---|---|---|
 | v1.0 | 2026-10-04 | Initial decision freeze (not signed) | – | – |
 | v1.1 | 2026-10-07 | **OD-32** → (b) simulated pair, LOCKED · **OD-14** → (b) premium neural voices, LOCKED / CONDITIONAL · **OD-08** → (b) formal legal clearance route, LOCKED / CONDITIONAL (clearance not resolved) · R-04 note · §G.2 content-authoring gate · §H AUDIO, SPEAKING, LEGAL rows · §I sign-off · this §J | OD-32: Medium (content + phase plan) · OD-14: High (re-recording) · OD-08: Low (text) — as listed in §B/§C | Sprechen Teil 3 content and partner audio (OD-32); Hören and Sprechen audio production, voice licensing and MOS review (OD-14); exam instructions and descriptor wording (OD-08). No change to engine, schema, scoring rules or level configuration (the pinned config already carries the option-(b) phase plan) |
+| v1.2 | 2026-10-07 | **EX-03/O1…O10** recorded as owner decisions (new §C.1) · EX-03 row (status: governance decided, panel not formed) · §G.2 content-authoring gate · §I sign-off row (pending) and scope note · header · this §J | Low (process; recruitment and review effort) — as listed in §C.1 | Item review process and reviewer recruitment only. No change to engine, schema, scoring rules, level configuration, MOCK gates or the Standard |
 
 The §0 inventory counts reflect the v1.0 categorisation and are unchanged; the decisions above remain in their original §B/§C sections with updated statuses.

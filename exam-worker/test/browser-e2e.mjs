@@ -107,9 +107,10 @@ async function run(viewport) {
     assert.equal(await evaluate(`document.querySelectorAll('#kx-main .kx-part').length`), 4, 'all four parts open by the end');
     const plays = (await dev.env.DB.prepare('SELECT kind, outcome, COUNT(*) AS n FROM audio_plays GROUP BY kind, outcome').all()).results;
     const n = (k, o) => plays.filter((r) => r.kind === k && (!o || r.outcome === o)).reduce((a, r) => a + r.n, 0);
-    assert.equal(n('normal'), 15, JSON.stringify(plays));
+    // 15 text plays (example 1 + 5×2, 1, 1, 2) + 1 synthetic Teil 2 instruction play (AUDIO-SPEC A1/A2)
+    assert.equal(n('normal'), 16, JSON.stringify(plays));
     assert.equal(n('normal', 'interrupted'), 1, JSON.stringify(plays));
-    assert.equal(n('normal', 'complete'), 14, JSON.stringify(plays));
+    assert.equal(n('normal', 'complete'), 15, JSON.stringify(plays));
     assert.equal(n('recovery'), 1); assert.equal(n('recovery', 'complete'), 1);
     await click('[data-act="submit"]');
 

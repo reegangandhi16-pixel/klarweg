@@ -100,6 +100,8 @@ type PartPlacement = {
   part: number; task_ids: string[];        // usually 1 task per part; H1 = 5 tasks (texts); L2 = 2 tasks
   item_order: { item_id: string; display_no: string }[]; // includes examples ("0","01","02")
   sprechen_topic_choice?: { role:"A"|"B"; topic_task_ids:[string,string] }[]; // official: choose 1 of 2 [OFFICIAL S1 §1.2]
+  instruction_asset_id?: string;           // Hören only: spoken part instructions (AUDIO-SPEC A1/A2), an audio asset; played once
+                                           // as the part's first phase, with its measured duration, never recovered (owner decision H-1)
 };
 ```
 

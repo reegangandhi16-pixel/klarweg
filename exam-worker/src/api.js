@@ -345,7 +345,7 @@ async function pendingRecovery(env, attemptId, plan, m) {
     .bind(attemptId).all()).results;
   for (const r of rows) {
     const ph = plan.phases.find((p) => p.seq === r.phase_seq);
-    if (ph && ph.play_no === ph.plays_allowed) return r.phase_seq;
+    if (ph && ph.recoverable !== false && ph.play_no === ph.plays_allowed) return r.phase_seq;
   }
   return null;
 }
@@ -416,7 +416,9 @@ export async function hoerenEvent(env, userId, attemptId, request) {
         return { ok: true, phase_seq: seq, kind, server_now: t, plan_shift_ms: m.plan_shift_ms };
       }
       // OD-05 recovery replay: max. once per module, only for the LAST allowed play of a
-      // segment whose normal play was reported interrupted while it was still playing
+      // segment whose normal play was reported interrupted while it was still playing.
+      // Spoken instructions (recoverable: false) are never replayed and never use up the module's recovery.
+      if (phase.recoverable === false) fail(409, 'recovery_not_applicable', 'Instructions are not replayed.');
       if (m.recovery_used >= (plan.recovery_replays_per_module ?? 1)) fail(409, 'recovery_exhausted');
       const normal = await env.DB.prepare("SELECT outcome FROM audio_plays WHERE attempt_id = ?1 AND phase_seq = ?2 AND kind = 'normal'").bind(attemptId, seq).first();
       if (!normal || normal.outcome !== 'interrupted') fail(409, 'recovery_not_applicable', 'Only an interrupted play can be recovered.');

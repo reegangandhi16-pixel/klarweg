@@ -66,6 +66,7 @@ export function buildRelease({ release, formDirs, levelsDir = path.join(ROOT, 'l
     const assetModule = {};
     for (const t of tasks) for (const s of t.stimuli) assetModule[s.asset_id] = t.module;
     for (const it of items) for (const turn of it.response_spec?.turns || []) if (turn.prompt_asset) assetModule[turn.prompt_asset] = it.module;
+    for (const fm of form.modules) for (const fp of fm.parts || []) if (fp.instruction_asset_id) assetModule[fp.instruction_asset_id] = fm.module;   // spoken Hören instructions
     const formAssets = [];
     for (const a of assets.filter((x) => x.kind === 'audio')) {
       let bytes, mime, duration;

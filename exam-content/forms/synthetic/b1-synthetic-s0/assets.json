@@ -412,6 +412,24 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:syn-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:syn-h3",
     "kind": "audio",
     "label": "TEST AUDIO – Hören Teil 3",

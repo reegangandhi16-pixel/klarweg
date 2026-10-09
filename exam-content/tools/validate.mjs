@@ -141,6 +141,13 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
     for (const pc of mc.parts) {
       const fp = (fm.parts || []).find((p) => p.part === pc.part);
       if (!fp) { E('part_count', `${mc.module} part ${pc.part} missing`); continue; }
+      if (fp.instruction_asset_id !== undefined) {   // spoken instructions (AUDIO-SPEC A1/A2): Hören only, measured audio
+        const ia = fp.instruction_asset_id;
+        if (mc.module !== 'hoeren') E('instruction_asset', `${mc.module} p${pc.part}: instruction_asset_id is allowed only on Hören parts`);
+        else if (typeof ia !== 'string' || !ID.asset.test(ia)) E('instruction_asset', `hoeren p${pc.part}: invalid instruction_asset_id ${ia}`);
+        else if (!assetsById[ia]) E('missing_asset', `hoeren p${pc.part}: instruction asset ${ia} unknown`);
+        else if (assetsById[ia].kind !== 'audio') E('instruction_asset', `hoeren p${pc.part}: instruction asset ${ia} is not audio`);
+      }
       for (const tid of fp.task_ids || []) {
         const t = tasksById[tid];
         if (!t) { E('missing_task', `${mc.module} p${pc.part} lists unknown task ${tid}`); continue; }
@@ -211,6 +218,7 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
   }
   for (const it of items) if (!placed.has(it.id)) E('unplaced_item', `item ${it.id} is not placed in the form`);
   const referenced = new Set(tasks.flatMap((t) => (t.stimuli || []).map((s) => s.asset_id)));
+  for (const fm of form.modules || []) for (const fp of fm.parts || []) if (typeof fp.instruction_asset_id === 'string') referenced.add(fp.instruction_asset_id);
   for (const it of items) for (const turn of it.response_spec?.turns || []) if (turn.prompt_asset) { referenced.add(turn.prompt_asset); if (!assetsById[turn.prompt_asset]) E('missing_asset', `item ${it.id} turn asset ${turn.prompt_asset}`); }
   for (const a of assets) if (!referenced.has(a.id)) W('unused_asset', `asset ${a.id} is not referenced`);
 

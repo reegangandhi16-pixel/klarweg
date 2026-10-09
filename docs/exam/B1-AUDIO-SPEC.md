@@ -45,6 +45,15 @@ type Phase =
 | T4 | instruction → preread **60 s** → play 1 → gap → play 2 → answer | gap 10 s · answer 15 s |
 | Review | answers editable, no audio | **5 min** (OD-03; mirrors paper transfer time [OFFICIAL]) |
 
+**Instruction phases (implementation, owner decision H-1, 2026-10-10):**
+- A part's spoken instruction is an optional audio asset named on the Hören part placement (`instruction_asset_id`,
+  EXAM-ITEM-SCHEMA §4).
+- The phase plan plays it once, as the part's first phase, with the asset's **measured** duration. It is a
+  non-recoverable `play` phase (it never uses up the OD-05 recovery replay).
+- It replaces the part's fixed `instruction_seconds` timer, which stays 0 in `lc:b1@1`. No OD-43 value changes.
+- Parts without an instruction asset are planned exactly as before.
+- Whether a form's total lies within gate Q5 (36–42 min) is decided by its measured audio (B7).
+
 **Expected total** (with measured official-like durations, B6):
 - audio ≈ 24–26 min (T1 ≈ 2 × 5 × 45 s, T2 ≈ 170 s, T3 ≈ 210 s, T4 ≈ 2 × 310 s)
 - pre-read ≈ 4 min, instructions ≈ 2 min, gaps/answers ≈ 3 min

@@ -147,6 +147,7 @@ for (let t = 1; t <= 5; t++) {
     ], indicators: hInd(2, 2) });
 }
 const h2 = toneAsset('ast:syn-h2', 3, 520, 'Hören Teil 2');
+const h2Instr = toneAsset('ast:syn-h2-instr', 1, 330, 'Hören Teil 2 Anweisung');   // spoken-instruction path (AUDIO-SPEC A1/A2)
 task({ id: 'tsk:b1:syn-h2', module: 'hoeren', part: 2, interaction: 'mcq_single', instructions: 'TEST AUDIO: Sie hören ein Testsignal einmal. Lösen Sie die Aufgaben 11 bis 15.',
   context: 'Synthetische Situation: Testführung.', stimuli: [{ role: 'audio', asset: h2 }],
   items: ['a', 'b', 'c', 'a', 'b'].map((k, i) => item({ id: `itm:b1:syn-h2-${11 + i}`, module: 'hoeren', part: 2, task: 'tsk:b1:syn-h2', interaction: 'mcq_single', options: abc('Option a', 'Option b', 'Option c'), stem: `${11 + i}. Testfrage ${11 + i}.`, key: k })),
@@ -233,7 +234,7 @@ const form = {
   id: FORM_ID, level_config: 'lc:b1@1', kind: 'synthetic', label: 'Synthetische Testform S0 (nur Systemtest)', status: 'live', rev: 1, release_note: 'TEST CONTENT ONLY',
   modules: [
     { module: 'lesen', parts: [1, 2, 3, 4, 5].map((p) => placement('lesen', p)) },
-    { module: 'hoeren', parts: [1, 2, 3, 4].map((p) => placement('hoeren', p)) },
+    { module: 'hoeren', parts: [1, 2, 3, 4].map((p) => (p === 2 ? { ...placement('hoeren', p), instruction_asset_id: h2Instr } : placement('hoeren', p))) },
     { module: 'schreiben', parts: [1, 2, 3].map((p) => placement('schreiben', p)) },
     { module: 'sprechen', parts: [1, 2, 3].map((p) => placement('sprechen', p)) }
   ],

@@ -279,7 +279,8 @@
               "item_id": "itm:b1:syn-h2-15",
               "display_no": "15"
             }
-          ]
+          ],
+          "instruction_asset_id": "ast:syn-h2-instr"
         },
         {
           "part": 3,

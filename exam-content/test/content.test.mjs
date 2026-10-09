@@ -32,7 +32,7 @@ const item = (d, id) => d.items.find((i) => i.id === id);
 test('VALIDATION: the synthetic form passes with no errors or warnings', () => {
   const v = validateForm(FORM);
   assert.deepEqual(v.errors, []); assert.deepEqual(v.warnings, []);
-  assert.equal(v.stats.items, 74); assert.equal(v.stats.tasks, 21); assert.equal(v.stats.assets, 51);
+  assert.equal(v.stats.items, 74); assert.equal(v.stats.tasks, 21); assert.equal(v.stats.assets, 52);   // incl. 1 synthetic instruction tone
 });
 
 test('VALIDATION: synthetic generator output is committed and deterministic (--check)', () => {
@@ -154,4 +154,61 @@ test('BUILD: real (non-synthetic) forms are refused when their source is inside 
   const link = path.join(outside, 'link');
   fs.symlinkSync(inside, link);
   assert.throws(() => buildRelease({ release: 'r000', formDirs: [link], repoRoot: fakeRepo }), /public product repo/);
+});
+
+/* ---------------- spoken Hören instructions (AUDIO-SPEC A1/A2; owner decision H-1, option O2) ---------------- */
+async function synthPlanInputs() {
+  const { loadForm, loadLevelConfig, toneWav } = await import('../tools/lib.mjs');
+  const f = loadForm(FORM);
+  const lc = loadLevelConfig(path.join(ROOT, 'levels'), f.form.level_config);
+  const durations = {};
+  for (const a of f.assets) if (a.kind === 'audio') durations[a.id] = toneWav(a.audio.generator).duration_ms;
+  return { form: f.form, lc, tasksById: Object.fromEntries(f.tasks.map((t) => [t.id, t])), itemsById: Object.fromEntries(f.items.map((i) => [i.id, i])), durations };
+}
+
+test('INSTRUCTION AUDIO: planner — one measured play first in its part; without the field the plan is otherwise identical', async () => {
+  const { hoerenPlan } = await import('../tools/lib.mjs');
+  const x = await synthPlanInputs();
+  const plan = hoerenPlan(x.lc, x.form, x.tasksById, x.itemsById, x.durations);
+  const ins = plan.phases.filter((p) => p.purpose === 'instruction');
+  assert.equal(ins.length, 1);
+  assert.deepEqual([ins[0].kind, ins[0].part, ins[0].asset_id, ins[0].plays_allowed, ins[0].recoverable], ['play', 2, 'ast:syn-h2-instr', 1, false]);
+  assert.equal(ins[0].ms, x.durations['ast:syn-h2-instr'], 'duration is the measured asset duration');
+  assert.equal(plan.phases.find((p) => p.part === 2).seq, ins[0].seq);
+  plan.phases.forEach((p, i) => assert.equal(p.seq, i));
+
+  const without = structuredClone(x.form);
+  delete without.modules.find((m) => m.module === 'hoeren').parts.find((p) => p.part === 2).instruction_asset_id;
+  const base = hoerenPlan(x.lc, without, x.tasksById, x.itemsById, x.durations);
+  assert.equal(base.phases.some((p) => p.purpose === 'instruction'), false);
+  assert.equal(plan.total_ms - base.total_ms, ins[0].ms);
+  const strip = (ps) => ps.filter((p) => p.purpose !== 'instruction').map(({ seq, ...r }) => r);
+  assert.deepEqual(strip(plan.phases), strip(base.phases), 'all other phases keep order, kind and duration');
+});
+
+test('INSTRUCTION AUDIO: planner — the measured asset replaces a fixed instruction timer for its part only; missing duration throws', async () => {
+  const { hoerenPlan } = await import('../tools/lib.mjs');
+  const x = await synthPlanInputs();
+  const lc = structuredClone(x.lc);
+  lc.modules.find((m) => m.module === 'hoeren').phase_template.instruction_seconds = 7;   // test fixture, not a timing value
+  const plan = hoerenPlan(lc, x.form, x.tasksById, x.itemsById, x.durations);
+  assert.deepEqual(plan.phases.filter((p) => p.kind === 'instruction').map((p) => p.part), [1, 3, 4]);
+  assert.equal(plan.phases.filter((p) => p.purpose === 'instruction').length, 1);
+  const d = { ...x.durations }; delete d['ast:syn-h2-instr'];
+  assert.throws(() => hoerenPlan(x.lc, x.form, x.tasksById, x.itemsById, d), /no duration for instruction asset/);
+});
+
+test('INSTRUCTION AUDIO: validator — Hören only, valid id, existing audio asset; counted as referenced', () => {
+  const part = (d, mod, n) => d.form.modules.find((m) => m.module === mod).parts.find((p) => p.part === n);
+  expectCode('instruction_asset', (d) => { part(d, 'lesen', 1).instruction_asset_id = 'ast:syn-h2-instr'; });
+  expectCode('instruction_asset', (d) => { part(d, 'hoeren', 2).instruction_asset_id = 'no-prefix'; });
+  expectCode('missing_asset', (d) => { part(d, 'hoeren', 2).instruction_asset_id = 'ast:does-not-exist'; });
+  expectCode('instruction_asset', (d) => { part(d, 'hoeren', 2).instruction_asset_id = d.assets.find((a) => a.kind === 'text').id; });
+  const v = validateForm(FORM);
+  assert.equal(v.warnings.some((w) => w.code === 'unused_asset'), false);
+});
+
+test('INSTRUCTION AUDIO: build maps the instruction asset to the hoeren module (needed for media access)', () => {
+  const b = buildRelease({ release: 'r000', formDirs: [FORM], builtAt: '2026-10-04T00:00:00.000Z' });
+  assert.match(b.sql, /INTO form_assets \([^)]*\) VALUES \('frm:b1:synthetic-s0@1', 'ast:syn-h2-instr', 'hoeren'/);
 });

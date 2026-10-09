@@ -23,7 +23,7 @@ export function phaseLabel(p) {
   if (!p) return '';
   switch (p.kind) {
     case 'preread': return 'Lesen Sie die Aufgaben.';
-    case 'play': return p.plays_allowed > 1 ? `Sie hören den Text (${p.play_no}. von ${p.plays_allowed} Mal).` : 'Sie hören den Text einmal.';
+    case 'play': return p.purpose === 'instruction' ? 'Sie hören die Anweisungen.' : p.plays_allowed > 1 ? `Sie hören den Text (${p.play_no}. von ${p.plays_allowed} Mal).` : 'Sie hören den Text einmal.';
     case 'gap': return 'Gleich hören Sie den Text noch einmal.';
     case 'answer': return 'Markieren Sie Ihre Lösungen.';
     case 'review': return 'Überprüfen Sie Ihre Antworten.';

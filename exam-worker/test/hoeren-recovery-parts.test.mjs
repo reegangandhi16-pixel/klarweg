@@ -94,16 +94,39 @@ test('F1 an "interruption" reported after the clip had finished is not genuine �
   assert.equal((await ev(s, 'play_start', 5, 'recovery')).json.error, 'recovery_not_applicable');
 });
 
-test('F1 normal playback counts unchanged: 2/1/1/2 plan → 15 normal plays (example 1 + 5×2, 1, 1, 2), no recovery plays', async () => {
+test('F1 normal playback counts unchanged: 2/1/1/2 plan → 15 text plays (example 1 + 5×2, 1, 1, 2) + 1 instruction play, no recovery plays', async () => {
   const s = await setup();
   await start(s, 'lesen'); await submit(s, 'lesen');
   await runHoeren(s, (it, k) => k.correct);
-  const rows = (await s.env.DB.prepare("SELECT kind, play_no FROM audio_plays WHERE attempt_id = ?1").bind(s.attempt).all()).results;
-  assert.equal(rows.filter((r) => r.kind === 'normal').length, 15);
+  const rows = (await s.env.DB.prepare("SELECT kind, play_no, asset_id FROM audio_plays WHERE attempt_id = ?1").bind(s.attempt).all()).results;
+  const instr = new Set(plan(s).phases.filter((x) => x.purpose === 'instruction').map((x) => x.asset_id));
+  assert.equal(rows.filter((r) => r.kind === 'normal' && !instr.has(r.asset_id)).length, 15);
+  assert.equal(rows.filter((r) => r.kind === 'normal' && instr.has(r.asset_id)).length, 1);   // synthetic Teil 2 instruction, played once
   assert.equal(rows.filter((r) => r.kind === 'recovery').length, 0);
   const byPart = {};
-  for (const ph of plan(s).phases.filter((x) => x.kind === 'play')) byPart[ph.part] = (byPart[ph.part] || 0) + 1;
+  for (const ph of plan(s).phases.filter((x) => x.kind === 'play' && x.purpose !== 'instruction')) byPart[ph.part] = (byPart[ph.part] || 0) + 1;
   assert.deepEqual(byPart, { 1: 11, 2: 1, 3: 1, 4: 2 });
+});
+
+test('INSTRUCTION AUDIO (AUDIO-SPEC A1/A2): a measured instruction play opens its part, is played once and an interrupted one is never recovered', async () => {
+  const s = await setup();
+  const ready = await toHoeren(s);
+  const p = plan(s);
+  const ins = p.phases.filter((x) => x.purpose === 'instruction');
+  assert.equal(ins.length, 1);
+  const [i] = ins;
+  assert.deepEqual([i.kind, i.part, i.play_no, i.plays_allowed, i.recoverable], ['play', 2, 1, 1, false]);
+  assert.equal(firstOfPart(p, 2).seq, i.seq, 'the instruction is the first phase of its part');
+  assert.ok(i.ms > 0);
+  await at(s, ready, i.seq, 100);
+  assert.equal((await ev(s, 'play_start', i.seq)).status, 200);
+  assert.equal((await ev(s, 'play_start', i.seq)).json.error, 'play_limit_reached', 'played once only');
+  assert.equal((await ev(s, 'interrupted', i.seq)).status, 200);
+  const r = await ev(s, 'play_start', i.seq, 'recovery');
+  assert.equal(r.status, 409); assert.equal(r.json.error, 'recovery_not_applicable');
+  assert.equal((await post(s, '/hoeren/events', { type: 'ready' })).json.pending_recovery_seq, null, 'no pending recovery is offered');
+  const h = await s.env.DB.prepare("SELECT recovery_used FROM attempt_modules WHERE attempt_id = ?1 AND module = 'hoeren'").bind(s.attempt).first();
+  assert.equal(h.recovery_used, 0, 'an instruction never uses up the module recovery');
 });
 
 /* ---------------- F2 ---------------- */

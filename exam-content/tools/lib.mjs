@@ -60,7 +60,11 @@ export function effectiveTiming(levelConfig, form) {
 }
 
 /* Hören phase plan: an ordered list of fixed-duration phases. Values are
-   PROVISIONAL Klarweg Standardized Exam Behaviour (register OD-43). */
+   PROVISIONAL Klarweg Standardized Exam Behaviour (register OD-43).
+   Spoken instructions (AUDIO-SPEC A1/A2): a Hören part placement may name an
+   `instruction_asset_id`. Its measured audio is played once, as the part's
+   first phase, as a non-recoverable `play` phase. It replaces that part's
+   fixed `instruction_seconds` timer. Parts without the field are unchanged. */
 export function hoerenPlan(levelConfig, form, tasksById, itemsById, audioDurations) {
   const t = effectiveTiming(levelConfig, form).hoeren;
   const cfg = levelConfig.modules.find((m) => m.module === 'hoeren');
@@ -71,7 +75,11 @@ export function hoerenPlan(levelConfig, form, tasksById, itemsById, audioDuratio
   for (const pc of cfg.parts) {
     const pl = placement.parts.find((p) => p.part === pc.part);
     const partItems = (ids) => ids.filter((id) => !itemsById[id]?.is_example);
-    if (t.instruction_seconds) push({ kind: 'instruction', part: pc.part, ms: sec(t.instruction_seconds) });
+    if (pl.instruction_asset_id) {
+      const dur = audioDurations[pl.instruction_asset_id];
+      if (!Number.isFinite(dur)) throw new Error(`no duration for instruction asset ${pl.instruction_asset_id}`);
+      push({ kind: 'play', purpose: 'instruction', part: pc.part, asset_id: pl.instruction_asset_id, play_no: 1, plays_allowed: 1, recoverable: false, ms: dur });
+    } else if (t.instruction_seconds) push({ kind: 'instruction', part: pc.part, ms: sec(t.instruction_seconds) });
     for (const taskId of pl.task_ids) {
       const task = tasksById[taskId];
       const audio = task.stimuli.find((s) => s.role === 'audio');

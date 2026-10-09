@@ -1,6 +1,6 @@
 # B1 Final Decision Register (Pre-Implementation Freeze)
 
-> **Status:** decision register **v1.3 (proposed)**, 2026-10-09 — owner decision OD-53, AI-assisted Mock DRAFT authoring (§B.1); **sign-off pending** (§I); changes listed in §J. v1.2, 2026-10-07: EX-03 reviewer-panel decisions (§C.1) and §I sign-off. v1.1, 2026-10-07: owner decision alignment (OD-32, OD-14, OD-08) and §I sign-off. Originally issued as decision freeze v1.0, 2026-10-04 (design only; not signed).
+> **Status:** decision register **v1.3**, 2026-10-09 — owner decision OD-53, AI-assisted Mock DRAFT authoring (§B.1) and §I sign-off; changes listed in §J. v1.2, 2026-10-07: EX-03 reviewer-panel decisions (§C.1) and §I sign-off. v1.1, 2026-10-07: owner decision alignment (OD-32, OD-14, OD-08) and §I sign-off. Originally issued as decision freeze v1.0, 2026-10-04 (design only; not signed).
 > **Baseline:** v1.0 `origin/main` @ `bf2838c`; v1.1 prepared against `origin/main` @ `54ea48a`; v1.2 prepared against `origin/main` @ `050339b`; v1.3 prepared against `origin/main` @ `b540d24`.
 > **Inputs read in full:**
 > - `b1/GOETHE-B1-ADULT-MASTER-STANDARD.md` ("Standard")
@@ -116,7 +116,7 @@ Mapping of the old DIGITAL-SPEC items:
 | OD-36 | Anchor composition | CONFIGURABLE | Default: **pilot-only anchor testlets** = Lesen T5 (4 items) + Hören T2 (5 items) from M0 (whole tasks, because items depend on their stimulus) | Resolves R-11: Standard §15.3 "6 Lesen + 6 Hören items, rotated" vs CALIB §6 testlets; local item dependence favours whole tasks | CALIB §6 | OD-35 | Medium |
 | OD-41 | Accommodations policy | CONFIGURABLE | Admin-granted only; extra time 25–100 % (speech impairment 25–50 %) mirroring [OFFICIAL S8]; evidence process per EX-08 | DS-D2 | ENGINE §2 | EX-08 | Low |
 | OD-43 | Hören internal pauses and answer windows | CONFIGURABLE (values unknown officially) | Provisional values: T1 item-preread 10 s · gap 5 s · answer 10 s; T2/T3 answer 15 s; T4 gap 10 s · answer 15 s; total gate 36–42 min **[PROVISIONAL]**. Replace after measuring the official full recordings (U-05/U-09) | DS-D14 | AUDIO A2 | U-05, U-09 | Low (phase-plan config) |
-| OD-53 | AI-assisted Mock DRAFT authoring before the §G.2 content gates clear | **OWNER DECISION — CONDITIONAL** (2026-10-09, v1.3; sign-off pending, §I) | **Permitted, drafts only:** unreleased, clearly labelled, unreviewed B1 Mock M0 drafts for internal development and QA, under the conditions in §B.1. Authorises **no** acceptance, release, learner access, deployment or validation claim; closes **no** gate | Progress on drafts while the EX-03 panel, OD-08 clearance and OD-14 conditions remain open | §G.2; EX-03 (§C.1) | OD-08, OD-14, EX-03, M-27, M-28 | Low (process) |
+| OD-53 | AI-assisted Mock DRAFT authoring before the §G.2 content gates clear | **OWNER DECISION — CONDITIONAL** (2026-10-09, v1.3) | **Permitted, drafts only:** unreleased, clearly labelled, unreviewed B1 Mock M0 drafts for internal development and QA, under the conditions in §B.1. Authorises **no** acceptance, release, learner access, deployment or validation claim; closes **no** gate | Progress on drafts while the EX-03 panel, OD-08 clearance and OD-14 conditions remain open | §G.2; EX-03 (§C.1) | OD-08, OD-14, EX-03, M-27, M-28 | Low (process) |
 
 ### B.1 OD-53 — AI-assisted Mock DRAFT authoring (v1.3)
 
@@ -325,7 +325,7 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 | Owner | – | Register v1.0 (sections A–H): **not signed**; superseded by v1.1 | – |
 | Owner | Klarweg owner | ☑ **Approve with changes — register v1.1** (sections A–H as amended; changes in §J) | 2026-10-07 |
 | Owner | Klarweg owner | ☑ **Approve — register v1.2** (§C.1 EX-03 panel decisions EX-03/O1…O10 as recorded; changes in §J) | 2026-10-07 |
-| Owner | – | Register v1.3 (§B.1 OD-53, AI-assisted Mock DRAFT authoring; changes in §J): **sign-off pending** | – |
+| Owner | Klarweg owner | ☑ **Approve — register v1.3** (§B.1 OD-53, AI-assisted Mock DRAFT authoring, as recorded; changes in §J) | 2026-10-09 |
 
 **Scope of this sign-off.** It approves the decisions and statuses **as recorded** in this register. It does **not** certify that any open gate is complete. Still open at v1.1 include:
 - OD-08 legal clearance (EXTERNAL, not resolved)
@@ -339,6 +339,12 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 **Scope of the v1.2 sign-off.** Same scope as above: it approves EX-03/O1…O10 **as recorded** in §C.1. It does **not**
 mean that the EX-03 panel is formed or that any reviewer has been appointed, and it does not close any of the items
 listed above. G0 below is unaffected.
+
+**Scope of the v1.3 sign-off.** Same scope as above: it approves OD-53 **as recorded** in §B.1 — a draft-only
+permission for unreleased, clearly labelled, AI-assisted B1 Mock M0 drafts and internal AI QA. It does **not** accept
+any item or form, and it does not close or relax any of the items listed above, including the EX-03 human panel and
+M-27 sign-off, OD-08 legal clearance, OD-14 conditions, Q14/M-28 originality, EX-01 privacy, EX-04 accessibility,
+OD-07/OD-30 scoring, calibration, or any release gate. G0 below is unaffected.
 
 **G0 (Standard §17, "This standard approved; OD-01…OD-16 decided").** Under this register's precedence (header), G0's spec-freeze condition is met by this sign-off together with a **recorded status** for every OD-01…OD-16. It does **not** mean all of them are settled:
 - **LOCKED:** OD-01, OD-02, OD-05, OD-09, OD-10, OD-11, OD-12, OD-13, OD-15
@@ -360,6 +366,6 @@ Changes after sign-off require a new register version that lists the changed IDs
 | v1.0 | 2026-10-04 | Initial decision freeze (not signed) | – | – |
 | v1.1 | 2026-10-07 | **OD-32** → (b) simulated pair, LOCKED · **OD-14** → (b) premium neural voices, LOCKED / CONDITIONAL · **OD-08** → (b) formal legal clearance route, LOCKED / CONDITIONAL (clearance not resolved) · R-04 note · §G.2 content-authoring gate · §H AUDIO, SPEAKING, LEGAL rows · §I sign-off · this §J | OD-32: Medium (content + phase plan) · OD-14: High (re-recording) · OD-08: Low (text) — as listed in §B/§C | Sprechen Teil 3 content and partner audio (OD-32); Hören and Sprechen audio production, voice licensing and MOS review (OD-14); exam instructions and descriptor wording (OD-08). No change to engine, schema, scoring rules or level configuration (the pinned config already carries the option-(b) phase plan) |
 | v1.2 | 2026-10-07 | **EX-03/O1…O10** recorded as owner decisions (new §C.1) · EX-03 row (status: governance decided, panel not formed) · §G.2 content-authoring gate · §I sign-off and scope note · header · this §J | Low (process; recruitment and review effort) — as listed in §C.1 | Item review process and reviewer recruitment only. No change to engine, schema, scoring rules, level configuration, MOCK gates or the Standard |
-| v1.3 (proposed) | 2026-10-09 | **OD-53** recorded as owner decision (new §B row and §B.1) · §G.2 content-authoring gate (draft-only note) · §H AUTHORING row · §I sign-off row (pending) · header · this §J | Low (process) — as listed in §B | Private Mock draft authoring and internal AI QA only. No change to engine, schema, validator, scoring rules, level configuration, MOCK gates, EX-03/O1…O10 or the Standard; no gate closed |
+| v1.3 | 2026-10-09 | **OD-53** recorded as owner decision (new §B row and §B.1) · §G.2 content-authoring gate (draft-only note) · §H AUTHORING row · §I sign-off and scope note · header · this §J | Low (process) — as listed in §B | Private Mock draft authoring and internal AI QA only. No change to engine, schema, validator, scoring rules, level configuration, MOCK gates, EX-03/O1…O10 or the Standard; no gate closed |
 
 The §0 inventory counts reflect the v1.0 categorisation and are unchanged; the decisions above remain in their original §B/§C sections with updated statuses.

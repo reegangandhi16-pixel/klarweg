@@ -12,6 +12,7 @@
 | Behaviour | Status |
 |---|---|
 | Plays per part 2 / 1 / 1 / 2; pre-read: example 10 s, Teil 2–4 60 s | **[OFFICIAL]** S3 p.18–21 |
+| Number of plays of the Teil 1 example | **[UNKNOWN / KLARWEG DESIGN DECISION]** Klarweg plays it **once** (owner decision H-2, 2026-10-10; see A2) |
 | The audio file contains all texts **and instructions** | **[OFFICIAL]** S1 §1.2 |
 | Digital: audio played by the test platform via headphones (centre) / speakers (online) | **[OFFICIAL]** S1 Anhang |
 | Digital: answers changeable until submission or time expiry | **[OFFICIAL]** S1 Anhang |
@@ -39,7 +40,7 @@ type Phase =
 
 | Part | Sequence | Provisional values |
 |---|---|---|
-| T1 | instruction → example preread **10 s** [OFFICIAL] → example play(s) → for each of 5 texts: label + item preread → play 1 → gap → play 2 → answer | item preread 10 s · gap 5 s · answer 10 s |
+| T1 | instruction → example preread **10 s** [OFFICIAL] → example play **once** (no gap, no answer phase; owner decision H-2) → for each of 5 texts: label + item preread → play 1 → gap → play 2 → answer | item preread 10 s · gap 5 s · answer 10 s |
 | T2 | instruction → preread **60 s** [OFFICIAL] → play 1 → answer | answer 15 s |
 | T3 | instruction → preread **60 s** → play 1 → answer | answer 15 s |
 | T4 | instruction → preread **60 s** → play 1 → gap → play 2 → answer | gap 10 s · answer 15 s |

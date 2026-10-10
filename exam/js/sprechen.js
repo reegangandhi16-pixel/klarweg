@@ -96,16 +96,24 @@ export function turnWindowMs(turnSeconds, nowMs, phaseEndsAt, { reserveMs = 0, m
   return ms >= minMs ? ms : 0;
 }
 
-/* Turn state after a reload (SPEAKING-SPEC §5): complete turns are skipped; a turn with uploaded or
-   buffered chunks was interrupted and is finalised with the contiguous chunks 0..n-1 (the part then
-   resumes at the next turn); a turn without chunks is still open. */
+/* Turn state after a reload (SPEAKING-SPEC §5), following the server's finalisation rule (completeTurn: the stored
+   chunks must be exactly 0..n-1). Server and locally buffered chunks are combined, because buffered chunks are
+   uploaded first.
+     done      the turn is complete
+     record    no chunks yet: the turn is still open
+     finalize  chunks 0..n-1 without a gap: finalise with n chunks; the part resumes at the next turn
+     gap       chunks exist but are not contiguous (e.g. one was lost when the page was killed). An invalid
+               finalisation is never requested: the turn stays open and recoverable, nothing is fabricated, and
+               the incident is surfaced. */
 export function resumeAction(turnStatus, serverSeqs, localSeqs = []) {
   if (turnStatus === 'complete') return { kind: 'done' };
   const all = new Set([...serverSeqs, ...localSeqs]);
   if (!all.size) return { kind: 'record' };
-  let n = 0;
-  while (all.has(n)) n++;
-  return n > 0 ? { kind: 'finalize', chunks: n } : { kind: 'record' };
+  const max = Math.max(...all);
+  if (all.size === max + 1 && all.has(0)) return { kind: 'finalize', chunks: all.size };
+  const missing = [];
+  for (let i = 0; i <= max; i++) if (!all.has(i)) missing.push(i);
+  return { kind: 'gap', have: [...all].sort((x, y) => x - y), missing };
 }
 
 /* Visible phase label (German UI copy, calm and factual). */

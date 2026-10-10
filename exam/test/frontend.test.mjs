@@ -311,13 +311,35 @@ test('SPRECHEN (client): recording windows are the turn seconds, capped at the e
   assert.equal(turnWindowMs(30, 121_000, 120_000), 0);
 });
 
-test('SPRECHEN (client): after a reload an interrupted turn is finalised with its contiguous chunks; the part resumes at the next turn', () => {
+test('SPRECHEN (client): after a reload an interrupted turn is finalised only when its chunks are contiguous (server rule)', () => {
   assert.deepEqual(resumeAction('complete', [0, 1]), { kind: 'done' });
   assert.deepEqual(resumeAction(undefined, []), { kind: 'record' });
   assert.deepEqual(resumeAction('open', [0, 1, 2]), { kind: 'finalize', chunks: 3 });
   assert.deepEqual(resumeAction('open', [0], [1, 2]), { kind: 'finalize', chunks: 3 }, 'locally buffered chunks count (they are uploaded first)');
-  assert.deepEqual(resumeAction('open', [0, 2]), { kind: 'finalize', chunks: 1 }, 'only the contiguous prefix');
-  assert.deepEqual(resumeAction('open', [1, 2]), { kind: 'record' }, 'no chunk 0: nothing usable');
+  assert.deepEqual(resumeAction('open', [0, 1], [1]), { kind: 'finalize', chunks: 2 }, 'a chunk both local and on the server counts once');
+  // a gap is never finalised (the server would refuse: chunk_count_mismatch / chunks_missing) — the turn stays open
+  assert.deepEqual(resumeAction('open', [0, 2]), { kind: 'gap', have: [0, 2], missing: [1] });
+  assert.deepEqual(resumeAction('open', [0, 1, 3]), { kind: 'gap', have: [0, 1, 3], missing: [2] });
+  assert.deepEqual(resumeAction('open', [1, 2]), { kind: 'gap', have: [1, 2], missing: [0] });
+  assert.deepEqual(resumeAction('open', [0], [2]), { kind: 'gap', have: [0, 2], missing: [1] });
+});
+
+test('SPRECHEN (client ↔ worker): every finalize the client asks for is accepted by the real server rule; a gap is refused there', async () => {
+  const { setup } = await import('../../exam-worker/test/harness.mjs');
+  const { post, start, submit, uploadChunk } = await import('../../exam-worker/test/flow.mjs');
+  const toSprechen = async (s) => { for (const m of ['lesen', 'hoeren', 'schreiben']) { await start(s, m); if (m === 'hoeren') await post(s, '/hoeren/events', { type: 'ready' }); await submit(s, m); }
+    await post(s, '/sprechen/consent', { granted: true, version: 'rec-consent@1' }); await start(s, 'sprechen'); };
+  for (const [seqs, expectFinalize] of [[[0, 1, 2], true], [[0], true], [[0, 1, 3], false], [[1, 2], false]]) {
+    const s = await setup(); await toSprechen(s);
+    for (const q of seqs) await uploadChunk(s, 'itm:b1:syn-sp1', 't1', q, Buffer.from(`c${q}`));
+    const action = resumeAction('open', seqs);
+    assert.equal(action.kind === 'finalize', expectFinalize, JSON.stringify(seqs));
+    // the client's request (finalize), or — for a gap — the old invalid prefix request, which the server must refuse
+    let prefix = 0; while (seqs.includes(prefix)) prefix++;
+    const n = action.kind === 'finalize' ? action.chunks : Math.max(1, prefix);
+    const r = await post(s, '/sprechen/turns', { item_id: 'itm:b1:syn-sp1', turn: 't1', chunks: n, duration_ms: n * 1000 });
+    assert.equal(r.status === 200, expectFinalize, `${JSON.stringify(seqs)} → ${r.status} ${r.json.error || ''}`);
+  }
 });
 
 test('SPRECHEN (render + labels): a locked topic choice renders disabled; German phase labels', () => {

@@ -35,6 +35,11 @@ p { margin: 0 0 16px; }
 .kx-phase { min-height: 24px; margin: 16px 0; color: var(--ink-secondary); }
 .kx-phase-time { margin: 0 0 16px; font: 500 12px/1.4 var(--font-mono); color: var(--ink-secondary); }
 .kx-phase-time:empty { display: none; }
+.kx-alerts:empty { display: none; }
+.kx-alert { margin: 0 0 16px; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--elevated); }
+.kx-alert p { margin: 0 0 8px; }
+.kx-alert p:last-child { margin: 0; }
+.kx-lock-note { margin: 8px 0 0; color: var(--ink-secondary); font-size: 14px; }
 .kx-announce { margin: 0 0 16px; color: var(--ink-primary); font-weight: 500; }
 .kx-announce:empty { display: none; }
 .kx-part { margin: 36px 0; }

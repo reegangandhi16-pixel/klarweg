@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { ID, SERVER_ONLY_FIELDS } from '../schemas/content-model.mjs';
 import { loadForm, loadLevelConfig, hoerenPlan, speakingPlan, toneWav, sha256 } from './lib.mjs';
 import { validateForm, findForms } from './validate.mjs';
+import { readAssetAudio } from './audio-duration.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const REPO_ROOT = path.resolve(ROOT, '..');
@@ -69,13 +70,19 @@ export function buildRelease({ release, formDirs, levelsDir = path.join(ROOT, 'l
     for (const fm of form.modules) for (const fp of fm.parts || []) if (fp.instruction_asset_id) assetModule[fp.instruction_asset_id] = fm.module;   // spoken Hören instructions
     const formAssets = [];
     for (const a of assets.filter((x) => x.kind === 'audio')) {
-      let bytes, mime, duration;
-      if (a.audio.generator) ({ bytes, mime, duration_ms: duration } = toneWav(a.audio.generator));
-      else throw new Error(`asset ${a.id}: only generated synthetic audio is supported in Phase 5A`);
+      let bytes, mime, duration, ext;
+      if (a.audio.generator) { ({ bytes, mime, duration_ms: duration } = toneWav(a.audio.generator)); ext = 'wav'; }
+      else {   // real audio: bytes and duration come from the file itself (validated above; never the declared value)
+        const m = readAssetAudio(dir, a);
+        const seen = v.measured_audio?.[a.id];   // ship exactly what validation measured (no change in between)
+        if (!seen || seen.sha256 !== sha256(m.bytes) || seen.duration_ms !== m.duration_ms) throw new Error(`asset ${a.id}: audio file changed after validation`);
+        ({ bytes, mime, duration_ms: duration } = m);
+        ext = { wav: 'wav', mp4: 'm4a', webm: 'webm' }[m.container];
+      }
       durations[a.id] = duration;
-      const key = `${base}/assets/${slug(a.id)}.wav`;
+      const key = `${base}/assets/${slug(a.id)}.${ext}`;
       put(key, bytes);
-      const meta = { key, mime, bytes: bytes.length, sha256: sha256(bytes), duration_ms: duration, label: a.label || null, test_audio: true };
+      const meta = { key, mime, bytes: bytes.length, sha256: sha256(bytes), duration_ms: duration, label: a.label || null, test_audio: !!a.audio.generator };
       manifest.assets[a.id] = meta;
       formAssets.push({ asset_id: a.id, module: assetModule[a.id] || null, ...meta });
     }

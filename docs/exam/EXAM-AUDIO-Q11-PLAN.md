@@ -23,8 +23,8 @@ Status key: **gate** = enforced by `validate.mjs`; **evidence** = measured and r
 
 | # | Check | Specified threshold (source) | Input | Method | Error behaviour | Tests | Status · dependencies |
 |---|---|---|---|---|---|---|---|
-| 1 | Integrated loudness | −18 LUFS ± 1 per segment, EBU R128 measurement, master and delivery (AUDIO B5; OD-14) | Decoded PCM of each file | BS.1770-4 K-weighting, 400 ms blocks with 75 % overlap, −70 LUFS absolute and −10 LU relative gates | `fail` outside −19…−17; `not_measured` under 400 ms or silent (never `pass`) | EBU Tech 3341 cases 1–3 with synthetic sines; gating; exact boundaries; real encoders compared with ffmpeg `ebur128` (≤ 0.15 LU) | **evidence** · as a gate: decision D-1 (decoder) |
-| 2 | True peak | ≤ −1.0 dBTP, master and delivery (AUDIO B5) | Decoded PCM | 4× oversampling (BS.1770-4 Annex 2), 129-tap Kaiser-windowed sinc | `fail` above −1.0; `not_measured` on digital silence | Inter-sample peak case (fs/4 sine at 45°: samples −3.01 dBFS, true peak 0 dBTP); boundary; compared with ffmpeg (≤ 0.3 dB) | **evidence** · D-1 |
+| 1 | Integrated loudness | −18 LUFS ± 1 per segment, EBU R128 measurement, master and delivery (AUDIO B5; OD-14) | Decoded PCM of each file | BS.1770-4 K-weighting, 400 ms blocks with 75 % overlap, −70 LUFS absolute and −10 LU relative gates | `fail` outside −19…−17; `not_measured` under 400 ms or silent (never `pass`) | EBU Tech 3341 cases 1–5 with synthetic sines (absolute and relative gate); exact boundaries on unrounded values; real encoders also compared with ffmpeg `ebur128` (≤ 0.15 LU) | **evidence** · as a gate: decision D-1 (decoder) |
+| 2 | True peak | ≤ −1.0 dBTP, master and delivery (AUDIO B5) | Decoded PCM | 4× oversampling (BS.1770-4 Annex 2), 129-tap Kaiser-windowed sinc | `fail` above −1.0; `not_measured` on digital silence | Analytic ground truth: steady sines 997 Hz–20 kHz at 48 and 44.1 kHz, several phases, within +0.2 / −0.4 dB of the amplitude (the Tech 3341 true-peak window); inter-sample case (fs/4 at 45°); boundary on unrounded values; real encoders also compared with ffmpeg (≤ 0.3 dB) | **evidence** · D-1 |
 | 3 | Channel count | Mono: master and both delivery codecs (AUDIO B5) | Decoded PCM (the decoder's output, not a header field) | Channel count after decoding | `fail` if ≠ 1 | Mono passes; stereo WAV and stereo AAC fail | **evidence** · D-1 |
 | 4 | Sample rate | Master 48 kHz (AUDIO B5; OD-14). Delivery: **not specified** | Decoded PCM | Rate after decoding | Master: `fail` if ≠ 48000. Delivery: `reported` only | Master 44.1 kHz fails; delivery rate reported | **evidence** (master) · delivery: question Q-2 |
 | 5 | Bit depth | Master 24-bit (AUDIO B5; OD-14) | WAV header of the master (integer PCM only) | `fmt` bits per sample | `fail` if ≠ 24 | 16-bit master fails | **evidence** |
@@ -41,7 +41,7 @@ Status key: **gate** = enforced by `validate.mjs`; **evidence** = measured and r
 | 16 | Distractor mentions | Option values present in the transcript where the design says so (AUDIO B7.5) | Transcript + item design | Text match | – | Synthetic transcripts | **open** · approved scripts (EX-03) |
 | 17 | Phase-plan total | 36–42 min (AUDIO B7.6; ARCH Q5; OD-43 **PROVISIONAL**) | Measured durations + `lc:b1@1` | `hoerenPlan()` | `timing_total` | Both bounds; the published gate (PR #51) | **gate** · values provisional (OD-43; U-05, U-09) |
 | 18 | Human listening QA | Per form, native speaker + B1 teacher: intelligibility, naturalness, regional authenticity, no unintended cues (AUDIO B7.7) | Real audio | Human review | – | – | **open (human)** · EX-03 panel; OD-14 MOS review |
-| 19 | Evidence and traceability | Manifest fields `duration_ms`, `loudness_lufs`, `true_peak_dbtp`, `sample_rate`, per-codec `bytes`/`sha256`, rates, `alignment_coverage`, `production`, `licence_ref` (AUDIO B6) | All of the above | Validation records file, container, MIME, duration, bytes and SHA-256 per asset (`measured_audio`); the builder ships a file only if hash and duration still match; `measure-audio.mjs` emits a record per file with SHA-256, values, method, decoder version and tool version | – | `audio-signal.test.mjs`, `audio-duration.test.mjs` | **partial** · where evidence records are stored and how they bind to a release is a design item (§3, stage 5); no schema change here |
+| 19 | Evidence and traceability | Manifest fields `duration_ms`, `loudness_lufs`, `true_peak_dbtp`, `sample_rate`, per-codec `bytes`/`sha256`, rates, `alignment_coverage`, `production`, `licence_ref` (AUDIO B6) | All of the above | Validation records file, container, MIME, duration, bytes and SHA-256 per asset (`measured_audio`); the builder ships a file only if hash and duration still match; `measure-audio.mjs` emits a record per file with SHA-256, values (rounded and unrounded), method, decoder path/SHA-256/version and the SHA-256 of its own sources | – | `audio-signal.test.mjs`, `audio-duration.test.mjs` | **partial** · where evidence records are stored and how they bind to a release is a design item (§3, stage 5); no schema change here |
 
 ### What can be built and tested now, and what needs real material
 
@@ -55,27 +55,47 @@ Status key: **gate** = enforced by `validate.mjs`; **evidence** = measured and r
 node exam-content/tools/measure-audio.mjs [--ffmpeg PATH] FILE...      # or KW_FFMPEG=PATH
 ```
 
-- WAV masters (integer PCM) are read directly. AAC-LC/MP4 and Opus/WebM are decoded with the ffmpeg given:
-  `ffmpeg -nostdin -v error -i FILE -map 0:a:0 -c:a pcm_s32le -f wav OUT`. No `-ac` or `-ar`, so the measurement is of
-  the decoder's actual output. The decoder also applies the Opus header output gain, as a player would; a test shows
-  that a +6 dB header edit is measured as +6 dB. Without a decoder, compressed files are `not_measured`.
-- Output is a JSON array of records:
-  - file, bytes, SHA-256, container, MIME;
-  - file duration (from `audio-duration.mjs`);
+- **Decoding.** WAV masters (integer PCM) are read directly. AAC-LC/MP4 and Opus/WebM are decoded only by the
+  executable given (`--ffmpeg PATH` or `KW_FFMPEG`; never looked up on `PATH`):
+  `ffmpeg -nostdin -v error -protocol_whitelist file -f <mov|matroska> -i file:<copy> -map 0:a:0 -c:a pcm_s32le -f wav file:<out>`.
+  - The decoder reads a private temporary copy of exactly the bytes that were hashed, with the demuxer forced to the
+    container already identified. A replaced file, or a path that looks like an option or protocol (`-…`, `concat:…`),
+    cannot change what is measured.
+  - No `-ac` or `-ar`, so the measurement is of the decoder's actual output. The decoder applies the Opus header output
+    gain, as a player would (a +6 dB header edit is measured as +6 dB).
+  - The decoded length must match the container-measured duration within 50 ms, or the record is an error
+    (`decode_length_mismatch`).
+  - Decoding times out after 120 s (`decode_timeout`). A failing decoder gives `decode_failed`.
+  - Without a decoder, compressed files are `not_measured`.
+- **Records.** Output is a JSON array, one record per file:
+  - file, bytes, SHA-256, container, MIME, file duration (`audio-duration.mjs`);
   - role (`master` = WAV, `delivery` = MP4/WebM);
-  - the signal measurement: loudness, gating blocks, true peak, sample peak, channels, sample rate, samples, method;
+  - signal: loudness, gating blocks, true peak, sample peak, channels, sample rate, samples, method, and the
+    unrounded values the checks use;
   - per-check status (`pass` / `fail` / `not_measured` / `reported`);
-  - decoder version line, Node version, tool version and timestamp.
-
-  Exit 0 only if every specified check passed or was reported.
-- Metadata is not trusted. Loudness tags, ReplayGain and similar fields are ignored; only decoded samples count.
-- Accuracy against the references:
-  - EBU Tech 3341 cases 1–3: within 0.05–0.1 LU.
-  - Real Opus and AAC encodes compared with ffmpeg `ebur128`: within 0.15 LU loudness and 0.3 dB true peak.
-  - True peak: ≤ 0.1 dB over-read in the worst inter-sample case. This is conservative against a "≤" limit.
-- Speed: about 7.6 s for a 5-minute mono 48 kHz file (Node 24, Apple Silicon).
-- Verified with ffmpeg 6.0 (static build) locally and the Ubuntu ffmpeg package in CI (`exam-tests.yml` prints its
-  version). The decoder version used is recorded in every record.
+  - provenance:
+    - the decoder's resolved path, the SHA-256 of its executable and its version line;
+    - the SHA-256 of the tool's own source files (`tool_sources`);
+    - the tool version, Node version and timestamp.
+- **Never a false pass.**
+  - Every error record has `ok: false`.
+  - A specified check that cannot be measured is `not_measured` and makes `ok` false.
+  - Checks compare unrounded values, so rounding for display cannot turn a fail into a pass.
+  - Exit code 0 only if every specified check passed or is report-only.
+- **Metadata is not trusted.** Loudness tags, ReplayGain and similar fields are ignored; only decoded samples count.
+- **Accuracy.** Checked against normative or analytic references first, and only then against ffmpeg:
+  - EBU Tech 3341 cases 1–5 within 0.05–0.1 LU.
+  - True peak of steady sines up to 20 kHz within −0.10…0.00 dB of the amplitude (the worst case is at fs/4, an
+    inherent limit of 4× oversampling).
+  - A sine that starts abruptly reads higher (up to about +1 dB). That is the real overshoot of the reconstructed
+    waveform at the onset, not an error. B5's 300 ms lead-in silence avoids it in produced audio.
+  - Real Opus and AAC encodes compared with ffmpeg `ebur128`: within 0.15 LU and 0.3 dB.
+- **Performance** (330 s mono file, Node 24, Apple Silicon, ffmpeg 6.0): 4.6–5.2 s. Peak memory is about 300 MB for a
+  WAV master and about 370 MB for an Opus or AAC file. Samples are held as Float32 (exact for 24-bit), with
+  double-precision arithmetic. Memory grows linearly with length; the 200 MB file-size limit of `audio-duration.mjs`
+  applies.
+- **Versions.** ffmpeg 6.0 (static build) was used locally; CI uses the Ubuntu ffmpeg package (`exam-tests.yml` prints
+  its version). Every record carries the decoder path, hash and version.
 
 ## 3. Measurement pathway for future approved recordings
 
@@ -95,7 +115,7 @@ At no stage does a file-duration or signal measurement stand in for stages 1, 2 
 
 | Id | Question | Why it matters | Who |
 |---|---|---|---|
-| D-1 | May validation depend on an external decoder (a pinned ffmpeg), or a bundled WASM decoder (a new dependency)? Or should the validator only verify stored evidence records by file hash? | Loudness, true peak and channel checks on Opus/AAC need decoding; Node has no built-in decoder. Until decided, rows 1–5 stay evidence, not gates | Owner (engineering policy) |
+| D-1 | May validation depend on an external decoder (a pinned ffmpeg), or a bundled WASM decoder (a new dependency)? Or should the validator only verify stored evidence records by file hash? | Loudness, true peak and channel checks on Opus/AAC need decoding; Node has no built-in decoder. Until decided, rows 1–5 stay evidence, not gates. Options analysis: §5 | Owner (engineering policy) |
 | Q-2 | Delivery sample rate | B5 states 48 kHz only for masters. Opus always decodes at 48 kHz; AAC can be any rate | AUDIO-SPEC owner / governance |
 | Q-3 | Bitrate tolerance and rate mode (CBR/VBR) for "64 kbps" / "96 kbps" | Without a tolerance, a bitrate check would invent one | AUDIO-SPEC owner |
 | Q-4 | Must each release asset ship both codecs (B6 `codecs`), with the client choosing? | The builder currently ships one delivery file per asset | Owner (engineering scope) |
@@ -108,9 +128,46 @@ At no stage does a file-duration or signal measurement stand in for stages 1, 2 
 The AUDIO-SPEC A2 "≈ 2 min" for spoken instructions stays a planning illustration. It is not a configured value and
 not a measurement; `instruction_seconds` stays 0 and no OD-43 value changes here.
 
-## 5. Tests
+## 5. D-1 options analysis (recommendation, not a decision)
+
+D-1 asks how the signal checks (rows 1–5) could become validator gates. Two approaches:
+
+| Criterion | **A. Validation invokes a pinned, version-verified decoder** | **B. Validation only verifies stored evidence records by file hash** |
+|---|---|---|
+| Reproducibility | Re-measured on every validation; the result depends on the pinned decoder build, which is recorded and checked | The record is reproducible only if the measuring environment is re-run; validation itself cannot re-check the numbers |
+| Dependency management | Needs a pinned decoder in the validation/build environment (exact version and executable SHA-256, ideally one static build per platform) | No new runtime dependency in validation; the measuring step still needs a decoder somewhere |
+| Security | Runs a large native binary on untrusted input. Mitigations: decode a private copy, `file:` protocol only, forced demuxer, timeout (all done here); sandboxing is possible | Validation parses only JSON and hashes. But the trust moves to whoever produced the record: a forged or stale record would pass unless records are produced by controlled tooling |
+| Portability | Bound to platforms where the pinned build is available (CI Linux, macOS) | Validation is portable; measurement is not |
+| Testability | Fully testable end to end (as in this PR, with real encoders in CI and stand-in decoders) | Validator tests are simple; correctness of the evidence depends on a separate, untested-by-validation step |
+| Provenance | Strong: the gate result is computed from the exact bytes released, by a recorded decoder | Medium: a hash binds record to file, but not the record to a trusted measurement run |
+
+**Recommendation:** A, limited to the controlled validation/build environment, with B's record as its output.
+- Validation runs the decoder only when it is given explicitly and matches a pinned version and executable SHA-256.
+  Otherwise the signal checks report `not_measured`, which fails the gate for real forms rather than passing them.
+- Each run's evidence record is stored and bound to the file SHA-256, for audit.
+
+This keeps the strength of A, re-measuring the exact released bytes, and the audit trail of B.
+
+**Approvable now (owner):** the policy choice above, and the pinned decoder (which build, how it is pinned, which
+platforms).
+
+**Needs a separate implementation PR (after approval):**
+- decoder pinning and verification;
+- wiring rows 1–5 into `validate.mjs` for non-synthetic forms only, with the synthetic release unchanged;
+- CI with the pinned build instead of the distribution package;
+- an evidence-record format in the private repository.
+
+**Still blocked on Q-2…Q-8:** delivery sample rate, bitrate, both codecs per asset, noise floor, silence, per-part
+duration targets and their location. None of these becomes a gate under either option until it is decided.
+
+## 6. Tests
 
 `exam-content/test/audio-signal.test.mjs` (part of `npm run test:exam`): synthetic sines and silence generated in
 memory or temp directories; no audio is committed. Two tests run real encoders when `KW_FFMPEG` is set (as in CI):
 - Opus/WebM and AAC-LC/MP4 measured and compared with ffmpeg `ebur128`, plus a stereo AAC that must fail.
 - The Opus output-gain header edit.
+
+Decoder handling is tested with stand-in decoder scripts, so it runs everywhere:
+- only the private copy is opened, with the forced demuxer and `file:` protocol;
+- the decoder path and hash are recorded;
+- failure, timeout, a wrong-length output, a non-WAV output and a stereo output each give a non-passing record.

@@ -64,6 +64,10 @@ test('SIGNAL: a 997 Hz sine at -23 dBFS reads -23.0 LUFS in stereo (EBU Tech 334
 test('SIGNAL: gating — the relative gate removes quiet passages (EBU Tech 3341 case 3) and the absolute gate removes silence', () => {
   const quietLoudQuiet = measureSignal(tone([{ seconds: 10, dbfs: -36 }, { seconds: 60, dbfs: -23 }, { seconds: 10, dbfs: -36 }], { channels: 2 }));
   near(quietLoudQuiet.integrated_lufs, -23.0, 0.1, 'quiet-loud-quiet');
+  // Tech 3341 case 4: -72 / -36 / -23 / -36 / -72 dBFS (10 / 10 / 60 / 10 / 10 s): the -72 dBFS blocks fall below the absolute gate
+  near(measureSignal(tone([{ seconds: 10, dbfs: -72 }, { seconds: 10, dbfs: -36 }, { seconds: 60, dbfs: -23 }, { seconds: 10, dbfs: -36 }, { seconds: 10, dbfs: -72 }], { channels: 2 })).integrated_lufs, -23.0, 0.1, 'case 4');
+  // Tech 3341 case 5: -26 / -20 / -26 dBFS (20 / 20.1 / 20 s)
+  near(measureSignal(tone([{ seconds: 20, dbfs: -26 }, { seconds: 20.1, dbfs: -20 }, { seconds: 20, dbfs: -26 }], { channels: 2 })).integrated_lufs, -23.0, 0.1, 'case 5');
   // Blocks entirely in digital silence fall below the -70 LUFS absolute gate and are dropped. Blocks that straddle an
   // edge are partly filled and stay (as BS.1770 specifies), so the tone is long enough for them to matter < 0.1 LU.
   const alone = measureSignal(tone([{ seconds: 20, dbfs: -20 }])).integrated_lufs;
@@ -95,6 +99,17 @@ test('SIGNAL: true peak finds inter-sample peaks (fs/4 sine at 45°: samples at 
   assert.ok(plain.true_peak_dbtp >= plain.sample_peak_dbfs, 'true peak is never below the sample peak');
 });
 
+test('SIGNAL: true peak of steady sines equals their amplitude within +0.2 / -0.4 dB (the EBU Tech 3341 true-peak window), up to 20 kHz', () => {
+  // Analytic ground truth, independent of any other meter: a band-limited sine of amplitude A has a true peak of A at
+  // any phase. Fades in and out avoid onset overshoot (a real property of the reconstructed waveform).
+  for (const rate of [48000, 44100]) for (const f of [997, 5000, 10000, 12000, 15000, 20000]) for (const ph of [0, 0.7, Math.PI / 4, 1.9]) {
+    const n = Math.round(0.3 * rate), fade = Math.round(0.05 * rate), amp = 0.5;
+    const x = Float64Array.from({ length: n }, (_, i) => amp * Math.min(1, i / fade, (n - 1 - i) / fade) * Math.sin(2 * Math.PI * f * i / rate + ph));
+    const err = measureSignal({ sampleRate: rate, channels: [x] }).exact.true_peak_dbtp - 20 * Math.log10(amp);
+    assert.ok(err <= 0.2 && err >= -0.4, `${rate} Hz, ${f} Hz, phase ${ph.toFixed(2)}: error ${err.toFixed(3)} dB`);
+  }
+});
+
 /* ---------- checks against AUDIO-SPEC B5 ---------- */
 test('SIGNAL: B5 checks — loudness -18 ± 1 LUFS and true peak ≤ -1.0 dBTP at their exact boundaries', () => {
   const base = { channels: 1, sample_rate: 48000, gating_blocks: 10, true_peak_dbtp: -3 };
@@ -103,6 +118,12 @@ test('SIGNAL: B5 checks — loudness -18 ± 1 LUFS and true peak ≤ -1.0 dBTP a
   for (const v of [-16.99, -19.01, -10, -30]) assert.equal(st(v).loudness.status, 'fail', `${v}`);
   assert.equal(st(-18, -1.0).true_peak.status, 'pass');
   assert.equal(st(-18, -0.99).true_peak.status, 'fail');
+  // Regression: the checks compare unrounded values; a value that only rounds onto the limit is still a fail
+  const exact = (lufs, tp) => checkSignal({ ...base, integrated_lufs: Math.round(lufs * 100) / 100, true_peak_dbtp: Math.round(tp * 100) / 100, exact: { integrated_lufs: lufs, true_peak_dbtp: tp } }, { role: 'delivery' }).checks;
+  assert.equal(exact(-16.996, -3).loudness.status, 'fail'); assert.equal(exact(-16.996, -3).loudness.value, -17);
+  assert.equal(exact(-19.004, -3).loudness.status, 'fail');
+  assert.equal(exact(-18, -0.996).true_peak.status, 'fail'); assert.equal(exact(-18, -0.996).true_peak.value, -1);
+  assert.equal(exact(-17.0, -1.0).loudness.status, 'pass');
   assert.deepEqual(B5_LIMITS.loudness_lufs, { target: -18, tolerance: 1 });
   assert.equal(B5_LIMITS.true_peak_max_dbtp, -1.0);
 });
@@ -224,7 +245,11 @@ test('MEASURE (KW_FFMPEG): Opus/WebM and AAC-LC/MP4 are decoded and measured; va
     near(r.signal.true_peak_dbtp, ref.TP, 0.3, `${kind} true peak vs ebur128`);
     near(r.signal.integrated_lufs, -18.0, 0.3, `${kind} loudness`);
     assert.equal(r.checks.loudness.status, 'pass', kind); assert.equal(r.checks.true_peak.status, 'pass', kind);
-    if (kind !== 'wav') { assert.equal(r.role, 'delivery'); assert.equal(r.checks.sample_rate.status, 'reported'); assert.match(r.decoder, /ffmpeg version/); }
+    if (kind !== 'wav') {
+      assert.equal(r.role, 'delivery'); assert.equal(r.checks.sample_rate.status, 'reported');
+      assert.match(r.decoder.version, /ffmpeg version/); assert.match(r.decoder.sha256, /^[0-9a-f]{64}$/); assert.equal(r.decoder.path, fs.realpathSync(FFMPEG));
+      assert.ok(Math.abs(r.signal.duration_ms - r.duration_ms) <= 50, `${kind}: decoded length agrees with the container`);
+    }
   }
   const stereo = measureAudioFile(enc('s.m4a', ['-c:a', 'aac', '-ac', '2']), { ffmpeg: FFMPEG });
   assert.equal(stereo.checks.channels.status, 'fail');
@@ -246,4 +271,86 @@ test('MEASURE (KW_FFMPEG): the Opus header output gain is applied by the decoder
   near(b.signal.integrated_lufs - a.signal.integrated_lufs, 6, 0.2, 'output gain');
   assert.equal(b.checks.loudness.status, 'fail');
   assert.notEqual(a.sha256, b.sha256);
+});
+
+/* ---------- decoder handling, with stand-in decoders (no real ffmpeg needed) ---------- */
+/* A shell script that answers -version, logs its arguments, and either copies a prepared WAV to its output path
+   (the last argument, a file: URL), exits with an error, or hangs. */
+function fakeDecoder(dir, { wav = null, mode = 'copy' } = {}) {
+  const log = path.join(dir, 'args.log'), src = path.join(dir, 'prepared.wav'), exe = path.join(dir, 'fake-ffmpeg');
+  if (wav) fs.writeFileSync(src, wav);
+  const body = mode === 'hang' ? 'exec sleep 30' : mode === 'fail' ? 'echo "Invalid data found when processing input" >&2; exit 1'
+    : `for a in "$@"; do out="$a"; done; cp "${src}" "\${out#file:}"`;
+  fs.writeFileSync(exe, `#!/bin/sh\nif [ "$2" = "-version" ]; then echo "ffmpeg version fake-1"; exit 0; fi\nprintf '%s\\n' "$@" > "${log}"\n${body}\n`, { mode: 0o755 });
+  return { exe, log };
+}
+/* A minimal ISO MP4 with one AAC-LC track that audio-duration.mjs accepts (edit list, consistent sample tables). Its
+   frames are not real AAC: the stand-in decoder supplies the PCM, so these tests need no encoder. */
+function tinyAacMp4(seconds = 1) {
+  const box = (type, ...parts) => { const body = Buffer.concat(parts); const h = Buffer.alloc(8); h.writeUInt32BE(8 + body.length); h.write(type, 4, 'latin1'); return Buffer.concat([h, body]); };
+  const full = (type, vf, ...parts) => box(type, Buffer.from([vf >>> 24, (vf >>> 16) & 255, (vf >>> 8) & 255, vf & 255]), ...parts);
+  const u32 = (n) => { const b = Buffer.alloc(4); b.writeUInt32BE(n); return b; };
+  const u16 = (n) => { const b = Buffer.alloc(2); b.writeUInt16BE(n); return b; };
+  const rate = 48000, frames = Math.ceil((seconds * rate + 1024) / 1024), frameBytes = 8;
+  const mvhd = full('mvhd', 0, u32(0), u32(0), u32(1000), u32(seconds * 1000), Buffer.alloc(80));
+  const mdhd = full('mdhd', 0, u32(0), u32(0), u32(rate), u32(frames * 1024), Buffer.alloc(4));
+  const hdlr = full('hdlr', 0, u32(0), Buffer.from('soun', 'latin1'), Buffer.alloc(13));
+  const asc = Buffer.from([0x11, 0x88]);   // AAC-LC (2), 48 kHz (3), mono (1)
+  const dsi = Buffer.concat([Buffer.from([0x05, asc.length]), asc]);
+  const dcd = Buffer.concat([Buffer.from([0x04, 13 + dsi.length, 0x40, 0x15]), Buffer.alloc(11), dsi]);
+  const esd = Buffer.concat([Buffer.from([0x03, 3 + dcd.length + 3]), u16(1), Buffer.from([0]), dcd, Buffer.from([0x06, 1, 2])]);
+  const mp4a = box('mp4a', Buffer.alloc(6), u16(1), Buffer.alloc(8), u16(1), u16(16), Buffer.alloc(4), u32(rate * 65536), full('esds', 0, esd));
+  const stsd = full('stsd', 0, u32(1), mp4a);
+  const stts = full('stts', 0, u32(1), u32(frames), u32(1024));
+  const stsz = full('stsz', 0, u32(frameBytes), u32(frames));
+  const stbl = box('stbl', stsd, stts, stsz);
+  const elst = full('elst', 0, u32(1), u32(seconds * 1000), u32(1024), u32(0x10000));
+  const trak = box('trak', box('edts', elst), box('mdia', mdhd, hdlr, box('minf', stbl)));
+  const ftyp = box('ftyp', Buffer.from('M4A ', 'latin1'), u32(0), Buffer.from('M4A mp42isom', 'latin1'));
+  return Buffer.concat([ftyp, box('moov', mvhd, trak), box('mdat', Buffer.alloc(frames * frameBytes))]);
+}
+
+test('DECODER: only a private copy of the hashed bytes is decoded (file: protocol only, forced demuxer), never the given path', () => {
+  const dir = tmp();
+  const mp4 = tinyAacMp4(1);
+  const f = writeTmp(dir, '-i concat:evil|other.m4a', mp4);   // a path ffmpeg would misread as an option or protocol
+  const { exe, log } = fakeDecoder(dir, { wav: wavBytes(tone([{ seconds: 1, dbfs: MASTER_AMP }])) });
+  const r = measureAudioFile(f, { ffmpeg: exe });
+  assert.ok(!r.error, JSON.stringify(r.error));
+  const args = fs.readFileSync(log, 'utf8').trim().split('\n');
+  assert.ok(!args.some((a) => a.includes('evil')), 'the given path is never passed to the decoder');
+  const input = args[args.indexOf('-i') + 1];
+  assert.match(input, /^file:\/.+\/input$/); assert.deepEqual(args.slice(args.indexOf('-protocol_whitelist'), args.indexOf('-protocol_whitelist') + 2), ['-protocol_whitelist', 'file']);
+  assert.equal(args[args.indexOf('-f') + 1], 'mov');
+  assert.equal(r.sha256, crypto.createHash('sha256').update(mp4).digest('hex'));
+  assert.equal(r.decoder.version, 'ffmpeg version fake-1'); assert.equal(r.decoder.path, fs.realpathSync(exe));
+  assert.equal(r.decoder.sha256, crypto.createHash('sha256').update(fs.readFileSync(exe)).digest('hex'));
+  for (const [k, v] of Object.entries(r.tool_sources)) assert.match(v, /^[0-9a-f]{64}$/, k);
+});
+
+test('DECODER: a failing, hanging or wrong-length decoder never yields a passing record', () => {
+  const dir = tmp();
+  const f = writeTmp(dir, 'a.m4a', tinyAacMp4(1));
+  const failing = measureAudioFile(f, { ffmpeg: fakeDecoder(fs.mkdtempSync(path.join(dir, 'f')), { mode: 'fail' }).exe });
+  assert.equal(failing.error.code, 'decode_failed'); assert.equal(failing.ok, false); assert.match(failing.error.message, /Invalid data/);
+  const t0 = Date.now();
+  const hanging = measureAudioFile(f, { ffmpeg: fakeDecoder(fs.mkdtempSync(path.join(dir, 'h')), { mode: 'hang' }).exe, timeoutMs: 500 });
+  assert.equal(hanging.error.code, 'decode_timeout'); assert.equal(hanging.ok, false); assert.ok(Date.now() - t0 < 10_000);
+  const long = measureAudioFile(f, { ffmpeg: fakeDecoder(fs.mkdtempSync(path.join(dir, 'l')), { wav: wavBytes(tone([{ seconds: 1.2, dbfs: MASTER_AMP }])) }).exe });
+  assert.equal(long.error.code, 'decode_length_mismatch'); assert.equal(long.ok, false);
+  const within = measureAudioFile(f, { ffmpeg: fakeDecoder(fs.mkdtempSync(path.join(dir, 'w')), { wav: wavBytes(tone([{ seconds: 1.04, dbfs: MASTER_AMP }])) }).exe });
+  assert.ok(!within.error, 'a decoded length within 50 ms is accepted (AAC end padding)');
+  const garbage = fakeDecoder(fs.mkdtempSync(path.join(dir, 'g')), { wav: Buffer.from('not a wav') });
+  const g = measureAudioFile(f, { ffmpeg: garbage.exe });
+  assert.equal(g.error.code, 'signal_unsupported'); assert.equal(g.ok, false);
+  const stereo = measureAudioFile(f, { ffmpeg: fakeDecoder(fs.mkdtempSync(path.join(dir, 's')), { wav: wavBytes(tone([{ seconds: 1, dbfs: MASTER_AMP }], { channels: 2 })) }).exe });
+  assert.equal(stereo.checks.channels.status, 'fail'); assert.equal(stereo.ok, false);
+  assert.equal(measureAudioFile(f, { ffmpeg: path.join(dir, 'no-such-decoder') }).ok, false);
+});
+
+test('MEASURE: every error record carries ok:false', () => {
+  const dir = tmp();
+  for (const r of [measureAudioFile(path.join(dir, 'missing.wav')), measureAudioFile(writeTmp(dir, 'c.wav', Buffer.from('RIFF\0\0\0\0WAVEjunk')))]) {
+    assert.ok(r.error); assert.equal(r.ok, false);
+  }
 });

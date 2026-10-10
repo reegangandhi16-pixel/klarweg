@@ -10,7 +10,8 @@ import {
   MODULES, FORM_KINDS, FORM_STATUS, ITEM_STATUS, ITEM_INTERACTIONS, STIMULUS_ROLES, ASSET_KINDS, LICENCE_KINDS, FRAMES,
   TRAP_MECHANISMS, REFERENCE_USE, ID, FORBIDDEN_ITEM_FIELDS, TASK_INDICATORS, ITEM_INDICATORS_OBJECTIVE, REQUIRED, countWords
 } from '../schemas/content-model.mjs';
-import { loadForm, loadLevelConfig, hoerenPlan, speakingPlan, toneWav } from './lib.mjs';
+import { loadForm, loadLevelConfig, hoerenPlan, speakingPlan, toneWav, sha256 } from './lib.mjs';
+import { readAssetAudio, AudioDurationError, DURATION_TOLERANCE_MS } from './audio-duration.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OBJECTIVE = new Set(['binary_choice', 'mcq_single', 'matching_pool', 'speaker_assignment']);
@@ -49,6 +50,9 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
   const seen = new Map();
   const unique = (id, what) => { if (seen.has(id)) E('duplicate_id', `${what} ${id} duplicates ${seen.get(id)}`); else seen.set(id, what); };
   const assetsById = {};
+  const measuredMs = {};    // duration read from each real audio file (never the declared value)
+  const measuredAudio = {}; // per real audio asset: what validation measured (the release builder must ship exactly this)
+  let audioMeasureFailed = false;
   for (const a of assets) {
     unique(a.id, 'asset'); req('asset', a, `asset ${a.id}`);
     if (!ID.asset.test(a.id || '')) E('bad_id', `asset id ${a.id}`);
@@ -59,6 +63,18 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
     if (a.kind === 'image' && !(a.image?.alt_de && a.image?.alt_en)) E('missing_alt', `image ${a.id} needs alt_de and alt_en`);
     if (a.kind === 'audio' && !a.audio?.generator && !a.audio?.file) E('audio_source', `audio ${a.id} has neither generator nor file`);
     if (a.kind === 'audio' && form.kind !== 'synthetic' && a.audio?.generator) E('synthetic_audio_in_real_form', `audio ${a.id} uses a generator`);
+    if (a.kind === 'audio' && a.audio?.generator && a.audio?.file) E('audio_source', `audio ${a.id} declares both a generator and a file`);
+    if (a.kind === 'audio' && !a.audio?.generator && a.audio?.file) {   // real audio: the file's own duration is the evidence
+      try {
+        const m = readAssetAudio(formDir, a);
+        measuredMs[a.id] = m.duration_ms;
+        measuredAudio[a.id] = { file: m.file, container: m.container, mime: m.mime, duration_ms: m.duration_ms, bytes: m.bytes.length, sha256: sha256(m.bytes) };
+        if (form.kind !== 'synthetic' && m.container === 'wav') E('audio_format', `audio ${a.id}: WAV is a master format, not a delivery format (AUDIO-SPEC B5: Opus/WebM or AAC/MP4)`);
+        const declared = a.audio.duration_ms;
+        if (!Number.isFinite(declared)) E('audio_duration_missing', `audio ${a.id}: declare audio.duration_ms (measured ${m.duration_ms} ms)`);
+        else if (Math.abs(declared - m.duration_ms) > DURATION_TOLERANCE_MS) E('audio_duration_mismatch', `audio ${a.id}: declared ${declared} ms, file ${m.duration_ms} ms (tolerance ${DURATION_TOLERANCE_MS} ms)`);
+      } catch (e) { if (e instanceof AudioDurationError) { audioMeasureFailed = true; E(e.code, e.message); } else throw e; }
+    }
     assetsById[a.id] = a;
   }
   const tasksById = {};
@@ -225,19 +241,24 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
   /* ---- timing ---- */
   for (const mc of levelConfig.modules) if (mc.timing.kind === 'fixed' && !(mc.timing.seconds > 0)) E('timing', `${mc.module} has no duration`);
   let plan = null;
+  if (!audioMeasureFailed) {   // a failed measurement is already reported; do not add a derived plan error
+    try {
+      const durations = {};
+      for (const a of assets) if (a.kind === 'audio') durations[a.id] = a.audio.generator ? toneWav(a.audio.generator).duration_ms : measuredMs[a.id];
+      plan = hoerenPlan(levelConfig, form, tasksById, itemsById, durations);
+      const gate = plan.gate;
+      if (gate && (plan.total_ms < gate.min * 1000 || plan.total_ms > gate.max * 1000)) E('timing_total', `Hören plan ${Math.round(plan.total_ms / 1000)} s outside ${gate.min}–${gate.max} s`);
+      for (const p of plan.phases) if (!(p.ms >= 0)) E('timing', `Hören phase ${p.seq} has invalid duration`);
+    } catch (e) { E('timing', `Hören phase plan failed: ${e.message}`); }
+  }
   try {
-    const durations = {};
-    for (const a of assets) if (a.kind === 'audio') durations[a.id] = a.audio.generator ? toneWav(a.audio.generator).duration_ms : a.audio.duration_ms;
-    plan = hoerenPlan(levelConfig, form, tasksById, itemsById, durations);
-    const gate = plan.gate;
-    if (gate && (plan.total_ms < gate.min * 1000 || plan.total_ms > gate.max * 1000)) E('timing_total', `Hören plan ${Math.round(plan.total_ms / 1000)} s outside ${gate.min}–${gate.max} s`);
-    for (const p of plan.phases) if (!(p.ms >= 0)) E('timing', `Hören phase ${p.seq} has invalid duration`);
     const sp = speakingPlan(levelConfig, form);
     if (!(sp.prep_ms > 0) || !sp.phases.length) E('timing', 'Sprechen plan incomplete');
-  } catch (e) { E('timing', `phase plan failed: ${e.message}`); }
+  } catch (e) { E('timing', `Sprechen phase plan failed: ${e.message}`); }
 
   return { ok: errors.length === 0, errors, warnings,
-    stats: { form: form.id, kind: form.kind, tasks: tasks.length, items: items.length, assets: assets.length, hoeren_plan_seconds: plan ? Math.round(plan.total_ms / 1000) : null } };
+    stats: { form: form.id, kind: form.kind, tasks: tasks.length, items: items.length, assets: assets.length, hoeren_plan_seconds: plan ? Math.round(plan.total_ms / 1000) : null },
+    measured_audio: measuredAudio };
 }
 
 function rubricMaxOf(r) { return r ? Object.values(r.criteria).reduce((n, pts) => n + Math.max(...pts), 0) : 0; }

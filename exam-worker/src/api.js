@@ -11,7 +11,7 @@ import { BANDS, rubricTotal, rubricUnits } from './scoring.js';
 import { signMediaToken, MEDIA_TTL_MS } from './media.js';
 import {
   loadAttempt, attemptModules, audit, requireRequestId, idempotent, acquireLease, requireLease,
-  computeDeadline, settle, submitModule, finalizeModule, scoreModule, buildResult, incident, SAVE_GRACE_MS, RESULT_LABEL
+  computeDeadline, speakingPrepEnd, settle, submitModule, finalizeModule, scoreModule, buildResult, incident, SAVE_GRACE_MS, RESULT_LABEL
 } from './core.js';
 
 const MAX_TEXT_CHARS = 20_000;
@@ -267,12 +267,17 @@ export async function saveAnswers(env, userId, attemptId, module, request) {
     const pkg = await loadPackage(env, attempt.form_id, module);
     const openPart = module === 'hoeren'
       ? hoerenPosition(pkg.data.timing.plan, m, t, await hoerenReadinessMs(env, attempt), PART_LEAD_MS).openPart : Infinity;
+    // Sprechen: the Teil 2 topic choice locks when the preparation ends (SPEAKING-SPEC §2). The same in-flight grace
+    // as module deadlines applies, so a choice made just before the end is not lost in transit.
+    const topicLockAt = module === 'sprechen' && pkg.data.timing.kind === 'speaking_phases'
+      ? speakingPrepEnd(pkg.data.timing.plan, m.started_at, attempt.time_multiplier) + SAVE_GRACE_MS : Infinity;
     // validate the whole batch first: a rejected save request changes nothing
     const checked = body.answers.map((a) => {
       const item = pkg.items.get(a?.item_id);
       if (!item) fail(422, 'unknown_item');
       if (item.is_example) fail(422, 'item_is_example', item.item_id);
       if (item.part > openPart) fail(409, 'part_not_open', item.item_id);   // OD-02: future Hören parts stay closed
+      if (item.interaction === 'topic_choice' && t > topicLockAt) fail(409, 'topic_locked', item.item_id);
       if (!Number.isInteger(a.seq) || a.seq < 1 || a.seq > 1e9) fail(422, 'invalid_seq', item.item_id);
       return { a, item, value: validateValue(item, a.value) };
     });

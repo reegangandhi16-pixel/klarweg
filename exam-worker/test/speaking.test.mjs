@@ -120,3 +120,32 @@ test('SPEAKING: deadline covers preparation + phases + transition allowance (syn
   assert.equal(m.deadline_at - m.started_at, plan.total_ms);
   assert.ok(plan.prep_ms > 0 && plan.phases.some((p) => p.listen_only));
 });
+
+test('SPEAKING: the Teil 2 topic choice is changeable during the preparation and locked after it (server-enforced, save grace)', async () => {
+  const s = await setup();
+  await toSprechen(s);
+  const TOPIC = 'itm:b1:syn-sp2-topic';
+  const save = (seq, option_id) => post(s, '/modules/sprechen/answers', { answers: [{ item_id: TOPIC, value: { option_id }, seq }] });
+  const prepMs = 20_000, grace = 10_000;   // synthetic preparation (timing override); SAVE_GRACE_MS
+  assert.equal((await save(1, 't1')).status, 200);
+  s.advance(prepMs - 1);
+  assert.equal((await save(2, 't2')).status, 200, 'still in the preparation');
+  s.advance(1 + grace);   // exactly prep end + grace: a choice sent at the end is still accepted in transit
+  assert.equal((await save(3, 't1')).status, 200);
+  s.advance(1);
+  const late = await save(4, 't2');
+  assert.equal(late.status, 409); assert.equal(late.json.error, 'topic_locked');
+  const answers = await get(s, '/modules/sprechen/answers');
+  assert.deepEqual(answers.json.answers.find((a) => a.item_id === TOPIC), { item_id: TOPIC, value: { option_id: 't1' }, seq: 3 }, 'the refused change left the stored choice untouched');
+});
+
+test('SPEAKING: with a time multiplier the topic lock moves with the longer preparation (same rule as the deadline)', async () => {
+  const s = await setup();
+  await s.env.DB.prepare('UPDATE attempts SET time_multiplier = 1.5 WHERE id = ?1').bind(s.attempt).run();
+  await toSprechen(s);
+  const TOPIC = 'itm:b1:syn-sp2-topic';
+  s.advance(30_000 + 10_000);   // 20 s × 1.5 + grace
+  assert.equal((await post(s, '/modules/sprechen/answers', { answers: [{ item_id: TOPIC, value: { option_id: 't2' }, seq: 1 }] })).status, 200);
+  s.advance(1);
+  assert.equal((await post(s, '/modules/sprechen/answers', { answers: [{ item_id: TOPIC, value: { option_id: 't1' }, seq: 2 }] })).json.error, 'topic_locked');
+});

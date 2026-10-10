@@ -13,6 +13,8 @@ import { ChunkQueue, sha256Hex } from '../js/recorder.js';
 import { createRenderer, resultPage, header, esc, RESULT_TITLE } from '../js/render.js';
 import { nextAction, assertSupported, unansweredCount, answerableItems } from '../js/engine.js';
 import { countWords } from '../js/wordcount.js';
+import { speakingSchedule, speakingPhaseAt, prepEndsAt, partOfPhase, partForListenPhase, speakingItemsForPart, partnerAssetFor,
+  listenPhaseAssets, topicItems, partnerPlayOffset, turnWindowMs, resumeAction, speakingPhaseLabel } from '../js/sprechen.js';
 import { syntheticBuild, pkgFor } from '../../exam-worker/test/harness.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -233,4 +235,140 @@ test('F1 (client): interruption reports use a keepalive request that survives pa
   assert.equal(seen[0].keepalive, true);
   assert.equal(seen[1].keepalive, undefined);
   assert.equal(JSON.parse(seen[0].body).type, 'interrupted');
+});
+
+/* ---------- SPRECHEN phase-driven flow (SPEAKING-SPEC §2, §5) ---------- */
+const sprechenPkg = pkgFor(build, 'sprechen');
+const SPLAN = sprechenPkg.timing.plan;
+
+test('SPRECHEN (client): schedule = preparation then the configured phases; the multiplier stretches the preparation only', () => {
+  assert.equal(sprechenPkg.timing.kind, 'speaking_phases');
+  const s1 = speakingSchedule(SPLAN);
+  assert.deepEqual(s1.map((p) => [p.id, p.kind, p.start_ms, p.ms]), [
+    ['prep', 'prep', 0, SPLAN.prep_ms], ['intro', 'speak', 20_000, 5_000], ['teil1', 'speak', 25_000, 120_000],
+    ['teil2', 'speak', 145_000, 120_000], ['partner', 'listen', 265_000, 5_000], ['teil3', 'speak', 270_000, 120_000]]);
+  const s2 = speakingSchedule(SPLAN, 1.5);
+  assert.equal(s2[0].ms, 30_000); assert.equal(s2[1].start_ms, 30_000);
+  assert.equal(s2.slice(1).reduce((n, p) => n + p.ms, 0), s1.slice(1).reduce((n, p) => n + p.ms, 0), 'speaking phases are not stretched');
+  // the published configuration: a 15-minute preparation (lc:b1@1), here as a plan with prep_ms 900 000
+  const published = { prep_ms: 900_000, phases: [{ seq: 0, id: 'teil1', ms: 210_000 }] };
+  assert.deepEqual(speakingSchedule(published).map((p) => [p.id, p.ms]), [['prep', 900_000], ['teil1', 210_000]]);
+  assert.equal(prepEndsAt(published, 1_000, 1), 901_000);
+  assert.equal(prepEndsAt(SPLAN, 1_000, 1.25), 1_000 + 25_000);
+});
+
+test('SPRECHEN (client): phase position is a pure function of server time — a refresh lands in the same phase with the same remaining time', () => {
+  const T0 = 1_000_000;
+  assert.equal(speakingPhaseAt(SPLAN, null, T0).state, 'not_started');
+  assert.equal(speakingPhaseAt(SPLAN, T0, T0 - 5).state, 'not_started');
+  const a = speakingPhaseAt(SPLAN, T0, T0);
+  assert.equal(a.phase.id, 'prep'); assert.equal(a.remaining_ms, 20_000); assert.equal(a.ends_at, T0 + 20_000);
+  assert.equal(speakingPhaseAt(SPLAN, T0, T0 + 19_999).phase.id, 'prep');
+  const b = speakingPhaseAt(SPLAN, T0, T0 + 20_000);
+  assert.equal(b.phase.id, 'intro'); assert.equal(b.elapsed_ms, 0); assert.equal(b.remaining_ms, 5_000);
+  const mid = T0 + 200_000;
+  const before = speakingPhaseAt(SPLAN, T0, mid), after = speakingPhaseAt(SPLAN, T0, mid);   // "reload": same inputs, same answer
+  assert.deepEqual(before, after);
+  assert.equal(before.phase.id, 'teil2'); assert.equal(before.remaining_ms, 65_000);
+  assert.equal(speakingPhaseAt(SPLAN, T0, T0 + 266_000).phase.id, 'partner');
+  assert.equal(speakingPhaseAt(SPLAN, T0, T0 + 389_999).phase.id, 'teil3');
+  assert.equal(speakingPhaseAt(SPLAN, T0, T0 + 390_000).state, 'finished');
+  assert.equal(speakingPhaseAt(SPLAN, T0, T0 + 30_000, 2).phase.id, 'prep', 'with multiplier 2 the preparation lasts 40 s');
+});
+
+test('SPRECHEN (client): phases map to parts; the partner phase plays the next part\'s partner presentation, which no turn replays', () => {
+  assert.equal(partOfPhase({ id: 'teil2' }), 2); assert.equal(partOfPhase({ id: 'intro' }), null); assert.equal(partOfPhase({ id: 'prep' }), null);
+  const partner = SPLAN.phases.find((p) => p.listen_only);
+  assert.equal(partForListenPhase(SPLAN, partner.seq), 3);
+  assert.deepEqual(partnerAssetFor(sprechenPkg, SPLAN, partner), { asset_id: 'ast:syn-sp3-partner-talk', duration_ms: 2000 });
+  assert.equal(partnerAssetFor(sprechenPkg, SPLAN, SPLAN.phases[1]), null, 'speaking phases have no partner presentation');
+  assert.deepEqual([...listenPhaseAssets(sprechenPkg, SPLAN)], ['ast:syn-sp3-partner-talk']);
+  assert.deepEqual(speakingItemsForPart(sprechenPkg, 1).map((i) => i.item_id), ['itm:b1:syn-sp1']);
+  assert.deepEqual(speakingItemsForPart(sprechenPkg, 2).map((i) => i.item_id), ['itm:b1:syn-sp2'], 'the topic choice is not a recording item');
+  assert.deepEqual(speakingItemsForPart(sprechenPkg, 9), []);
+  assert.deepEqual(topicItems(sprechenPkg).map((i) => i.item_id), ['itm:b1:syn-sp2-topic']);
+  const t3 = speakingItemsForPart(sprechenPkg, 3)[0].response_spec.turns;
+  assert.equal(t3[0].prompt_asset, 'ast:syn-sp3-partner-talk', 'fixture: Teil 3 turn 1 names the partner talk as its prompt');
+  assert.ok(listenPhaseAssets(sprechenPkg, SPLAN).has(t3[0].prompt_asset));
+  assert.equal(listenPhaseAssets(sprechenPkg, SPLAN).has(t3[1].prompt_asset), false, 'the examiner question is still played');
+});
+
+test('SPRECHEN (client): the partner presentation is played at most once, from its scheduled position', () => {
+  const T0 = 0, partnerStart = 265_000;
+  const at = (dt) => speakingPhaseAt(SPLAN, T0, partnerStart + dt);
+  assert.equal(partnerPlayOffset(at(0), 2000), 0);
+  assert.equal(partnerPlayOffset(at(1500), 2000), 1500, 'a refresh mid-presentation continues, never restarts');
+  assert.equal(partnerPlayOffset(at(2000), 2000), null, 'finished: nothing is replayed');
+  assert.equal(partnerPlayOffset(at(4000), 2000), null);
+  assert.equal(partnerPlayOffset(speakingPhaseAt(SPLAN, T0, 100_000), 2000), null, 'only in a listen-only phase');
+});
+
+test('SPRECHEN (client): recording windows are the turn seconds, capped at the end of the phase', () => {
+  assert.equal(turnWindowMs(30, 0, 120_000), 30_000);
+  assert.equal(turnWindowMs(30, 100_000, 120_000), 20_000, 'capped at the phase end');
+  assert.equal(turnWindowMs(240, 0, 120_000), 120_000);
+  assert.equal(turnWindowMs(30, 119_500, 120_000), 0, 'under 1 s left: the turn is not started');
+  assert.equal(turnWindowMs(30, 121_000, 120_000), 0);
+});
+
+test('SPRECHEN (client): after a reload an interrupted turn is finalised only when its chunks are contiguous (server rule)', () => {
+  assert.deepEqual(resumeAction('complete', [0, 1]), { kind: 'done' });
+  assert.deepEqual(resumeAction(undefined, []), { kind: 'record' });
+  assert.deepEqual(resumeAction('open', [0, 1, 2]), { kind: 'finalize', chunks: 3 });
+  assert.deepEqual(resumeAction('open', [0], [1, 2]), { kind: 'finalize', chunks: 3 }, 'locally buffered chunks count (they are uploaded first)');
+  assert.deepEqual(resumeAction('open', [0, 1], [1]), { kind: 'finalize', chunks: 2 }, 'a chunk both local and on the server counts once');
+  // a gap is never finalised (the server would refuse: chunk_count_mismatch / chunks_missing) — the turn stays open
+  assert.deepEqual(resumeAction('open', [0, 2]), { kind: 'gap', have: [0, 2], missing: [1] });
+  assert.deepEqual(resumeAction('open', [0, 1, 3]), { kind: 'gap', have: [0, 1, 3], missing: [2] });
+  assert.deepEqual(resumeAction('open', [1, 2]), { kind: 'gap', have: [1, 2], missing: [0] });
+  assert.deepEqual(resumeAction('open', [0], [2]), { kind: 'gap', have: [0, 2], missing: [1] });
+});
+
+test('SPRECHEN (client ↔ worker): every finalize the client asks for is accepted by the real server rule; a gap is refused there', async () => {
+  const { setup } = await import('../../exam-worker/test/harness.mjs');
+  const { post, start, submit, uploadChunk } = await import('../../exam-worker/test/flow.mjs');
+  const toSprechen = async (s) => { for (const m of ['lesen', 'hoeren', 'schreiben']) { await start(s, m); if (m === 'hoeren') await post(s, '/hoeren/events', { type: 'ready' }); await submit(s, m); }
+    await post(s, '/sprechen/consent', { granted: true, version: 'rec-consent@1' }); await start(s, 'sprechen'); };
+  for (const [seqs, expectFinalize] of [[[0, 1, 2], true], [[0], true], [[0, 1, 3], false], [[1, 2], false]]) {
+    const s = await setup(); await toSprechen(s);
+    for (const q of seqs) await uploadChunk(s, 'itm:b1:syn-sp1', 't1', q, Buffer.from(`c${q}`));
+    const action = resumeAction('open', seqs);
+    assert.equal(action.kind === 'finalize', expectFinalize, JSON.stringify(seqs));
+    // the client's request (finalize), or — for a gap — the old invalid prefix request, which the server must refuse
+    let prefix = 0; while (seqs.includes(prefix)) prefix++;
+    const n = action.kind === 'finalize' ? action.chunks : Math.max(1, prefix);
+    const r = await post(s, '/sprechen/turns', { item_id: 'itm:b1:syn-sp1', turn: 't1', chunks: n, duration_ms: n * 1000 });
+    assert.equal(r.status === 200, expectFinalize, `${JSON.stringify(seqs)} → ${r.status} ${r.json.error || ''}`);
+  }
+});
+
+test('SPRECHEN (render + labels): a locked topic choice renders disabled; German phase labels', () => {
+  const { module } = createRenderer();
+  const open = module(sprechenPkg, {}, {});
+  const locked = module(sprechenPkg, { 'itm:b1:syn-sp2-topic': { option_id: 't1' } }, { locked: new Set(['itm:b1:syn-sp2-topic']) });
+  const radios = (html) => html.match(/<input type="radio"[^>]*data-item="itm:b1:syn-sp2-topic"[^>]*>/g) || [];
+  assert.equal(radios(open).length, 2); assert.equal(radios(open).some((r) => r.includes(' disabled')), false);
+  assert.equal(radios(locked).length, 2); assert.ok(radios(locked).every((r) => r.includes(' disabled')));
+  assert.ok(radios(locked).some((r) => r.includes('value="t1"') && r.includes(' checked')), 'the chosen topic stays visible');
+  assert.match(speakingPhaseLabel({ kind: 'prep' }), /^Vorbereitung/);
+  assert.match(speakingPhaseLabel({ kind: 'listen', listen_only: true }), /nichts aufgenommen/);
+  assert.equal(speakingPhaseLabel({ kind: 'speak', id: 'teil3' }), 'Teil 3');
+  assert.equal(speakingPhaseLabel({ kind: 'speak', id: 'intro' }), 'Einführung');
+  assert.equal(speakingPhaseLabel(null), '');
+});
+
+test('AUTOSAVE: a save refused for good (topic_locked) is dropped and reported, not retried', async () => {
+  const sent = []; const dropped = [];
+  const a = new Autosave({
+    key: 'k', store: memoryStore(), debounceMs: 10, setTimer: () => 1, clearTimer: () => {},
+    onDropped: (code, batch) => dropped.push([code, batch.map((b) => b.item_id)]),
+    send: async (batch) => { sent.push(batch.length); throw new ExamApiError(409, 'topic_locked'); }
+  });
+  await a.load([]);
+  await a.set('itm:b1:syn-sp2-topic', { option_id: 't2' });
+  await a.flush();
+  assert.deepEqual(dropped, [['topic_locked', ['itm:b1:syn-sp2-topic']]]);
+  assert.equal(a.hasPending(), false); assert.equal(a.state, 'saved'); assert.equal(sent.length, 1);
+  await a.flush();
+  assert.equal(sent.length, 1, 'nothing left to retry');
 });

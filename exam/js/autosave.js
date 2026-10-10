@@ -1,12 +1,17 @@
 /* Autosave queue. Each item has a strictly increasing seq (persisted locally
    and seeded from the server on recovery); the latest value per item is sent
    in batches. A failed batch is retried with the SAME request id. The server
-   keeps only the highest seq, so reordering or duplicates are harmless. */
+   keeps only the highest seq, so reordering or duplicates are harmless.
+   A batch the server refuses for good (DROP_CODES, e.g. the Sprechen topic choice
+   after the preparation) is dropped: the server value stays authoritative and
+   onDropped(code, batch) lets the UI show it again. */
 import { randomId } from './ids.js';
 
+export const DROP_CODES = ['topic_locked'];
+
 export class Autosave {
-  constructor({ send, store, key, debounceMs = 800, onState = () => {}, onFatal = () => {}, setTimer = (fn, ms) => setTimeout(fn, ms), clearTimer = (t) => clearTimeout(t) }) {
-    Object.assign(this, { send, store, key, debounceMs, onState, onFatal, setTimer, clearTimer });
+  constructor({ send, store, key, debounceMs = 800, onState = () => {}, onFatal = () => {}, onDropped = () => {}, setTimer = (fn, ms) => setTimeout(fn, ms), clearTimer = (t) => clearTimeout(t) }) {
+    Object.assign(this, { send, store, key, debounceMs, onState, onFatal, onDropped, setTimer, clearTimer });
     this.seq = {}; this.pending = {}; this.inflight = null; this.timer = null; this.state = 'saved';
   }
   async load(serverAnswers = []) {
@@ -49,6 +54,14 @@ export class Autosave {
         this.inflight = null;
         const code = e && e.code;
         if (['lease_superseded', 'lease_expired', 'module_submitted', 'deadline_passed', 'module_not_running'].includes(code)) { this.setState('stopped'); this.onFatal(code); return; }
+        if (DROP_CODES.includes(code)) {
+          for (const b of batch) if (this.pending[b.item_id] && this.pending[b.item_id].seq === b.seq) delete this.pending[b.item_id];
+          await this.persist();
+          try { this.onDropped(code, batch); } catch { /* UI callback must not break saving */ }
+          if (Object.keys(this.pending).length) return this.flush();
+          this.setState('saved');
+          return;
+        }
         this.setState('offline');
         this.schedule(3000);
       }

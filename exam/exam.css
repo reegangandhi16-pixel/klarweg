@@ -33,6 +33,8 @@ p { margin: 0 0 16px; }
 .kx-save { margin: 0; color: var(--ink-secondary); font-size: 14px; }
 .kx-timer { margin: 0; font: 500 20px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
 .kx-phase { min-height: 24px; margin: 16px 0; color: var(--ink-secondary); }
+.kx-phase-time { margin: 0 0 16px; font: 500 12px/1.4 var(--font-mono); color: var(--ink-secondary); }
+.kx-phase-time:empty { display: none; }
 .kx-announce { margin: 0 0 16px; color: var(--ink-primary); font-weight: 500; }
 .kx-announce:empty { display: none; }
 .kx-part { margin: 36px 0; }

@@ -8,6 +8,8 @@ import { createRenderer, header, resultPage, esc, MODULE_LABELS } from './render
 import { nextAction, assertSupported, unansweredCount } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
 import { ChunkQueue, TurnRecorder } from './recorder.js';
+import { speakingPhaseAt, prepEndsAt, partOfPhase, speakingItemsForPart, partnerAssetFor, listenPhaseAssets, topicItems,
+  partnerPlayOffset, turnWindowMs, resumeAction, speakingPhaseLabel } from './sprechen.js';
 import { countWords } from './wordcount.js';
 import { randomId } from './ids.js';
 
@@ -17,7 +19,8 @@ const base = (document.querySelector('meta[name="kw-exam-api"]') || {}).content 
 const clock = new ServerClock();
 const api = createApi({ base, clock });
 const renderer = createRenderer();
-const S = { attempt: null, lease: null, pkg: null, answers: {}, autosave: null, module: null, timer: null, hb: null, store: null };
+const S = { attempt: null, lease: null, pkg: null, answers: {}, autosave: null, module: null, timer: null, hb: null, store: null, locked: new Set(), sprechen: null };
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function deviceId() {
   try { let d = localStorage.getItem('kx-device'); if (!d) { d = randomId('dev'); localStorage.setItem('kx-device', d); } return d; } catch { return randomId('dev'); }
@@ -90,6 +93,7 @@ function intro(module) {
 async function openModule(module) {
   const id = S.attempt.attempt_id;
   S.module = module;
+  S.locked = new Set(); S.sprechen = null;
   announced = {};
   const p = await api.pkg(id, S.lease, module);
   S.pkg = p.package;
@@ -99,11 +103,18 @@ async function openModule(module) {
   S.autosave = new Autosave({
     key: `answers:${id}:${module}`, store: S.store,
     send: (batch, requestId) => api.save(id, S.lease, module, batch, requestId),
-    onState: () => paintHeader(), onFatal: (code) => { if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else refresh(); }
+    onState: () => paintHeader(), onFatal: (code) => { if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else refresh(); },
+    onDropped: (code, batch) => syncFromServer(batch.map((b) => b.item_id)).catch(() => {})
   });
   await S.autosave.load(saved.answers);
   const local = (await S.store.get(`answers:${id}:${module}`)) || {};
   for (const v of Object.values(local.pending || {})) S.answers[v.item_id] = v.value;
+  if (module === 'sprechen' && S.pkg.timing.kind === 'speaking_phases') {
+    const m = moduleState();
+    S.sprechen = { plan: S.pkg.timing.plan, startedAt: m.started_at, multiplier: S.attempt.time_multiplier || 1 };
+    // after a refresh past the preparation the topic choice renders locked straight away
+    if (clock.serverNow() >= prepEndsAt(S.sprechen.plan, m.started_at, S.sprechen.multiplier)) for (const t of topicItems(S.pkg)) S.locked.add(t.item_id);
+  }
   paint();
   clearInterval(S.timer);
   S.timer = setInterval(tick, 250);
@@ -119,7 +130,8 @@ function paintHeader() {
   if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state });
 }
 function paint() {
-  screen(`<div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p><p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers)}</main>`
+  const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p>' : '';
+  screen(`<div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
     + `<footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
   paintHeader();
 }
@@ -128,6 +140,10 @@ function tick() {
   const m = moduleState(); if (!m) return;
   const rem = clock.remaining(m.deadline_at);
   const t = $('.kx-timer'); if (t) t.textContent = formatRemaining(rem);
+  if (S.sprechen) {   // time left in the current Sprechen phase (server time)
+    const at = speakingPhaseAt(S.sprechen.plan, S.sprechen.startedAt, clock.serverNow(), S.sprechen.multiplier);
+    const pt = $('#kx-phase-time'); if (pt) pt.textContent = at.state === 'running' ? `Diese Phase: noch ${formatRemaining(at.remaining_ms)}` : '';
+  }
   for (const mark of [300_000, 60_000]) if (rem <= mark && !announced[mark]) { announced[mark] = true; const ph = $('#kx-announce'); if (ph) ph.textContent = `Noch ${mark / 60_000} Minute${mark > 60_000 ? 'n' : ''}.`; }
   if (rem === 0) { clearInterval(S.timer); setTimeout(refresh, 11_000); }   // server auto-submits after its grace
 }
@@ -211,41 +227,134 @@ async function runHoeren() {
   loop();
 }
 
-/* ---------- Sprechen ---------- */
+/* ---------- Sprechen (SPEAKING-SPEC §2, §5) ---------- */
+/* Server answers for these items replace the local ones (after a refused save, e.g. topic_locked). */
+async function syncFromServer(itemIds) {
+  const saved = await api.answers(S.attempt.attempt_id, S.lease, S.module);
+  for (const id of itemIds) {
+    const row = saved.answers.find((a) => a.item_id === id);
+    if (row) S.answers[id] = row.value; else delete S.answers[id];
+    for (const el of document.querySelectorAll(`[data-item="${CSS.escape(id)}"]`)) {
+      if (el.type === 'radio') el.checked = !!row && row.value.option_id === el.value;
+      else if (el.tagName === 'SELECT') el.value = row ? row.value.option_id || '' : '';
+    }
+  }
+}
+
+/* Plays one Sprechen audio asset once, optionally from an offset; resolves when it ends. */
+async function playSpeakingAsset(assetId, offsetMs = 0) {
+  const id = S.attempt.attempt_id;
+  const m = await api.media(id, S.lease, assetId);
+  const a = new Audio();
+  a.dataset.asset = assetId;
+  a.src = URL.createObjectURL(new Blob([await api.mediaBytes(m.url)], { type: m.mime }));
+  if (offsetMs > 0) {
+    await new Promise((r) => { a.onloadedmetadata = r; a.onerror = r; });
+    try { a.currentTime = offsetMs / 1000; } catch { /* plays from the start if seeking is unavailable */ }
+  }
+  await new Promise((r) => { a.onended = r; a.onerror = r; a.play().catch(r); });
+}
+
+/* Phase-driven Sprechen: the server plan and server time decide the phase; a refresh lands in the same phase
+   with the same remaining time. Preparation → (intro) → Teil 1 → Teil 2 → partner presentation (listen only)
+   → Teil 3. The topic choice locks when the preparation ends (the server enforces the same rule). */
 async function runSprechen() {
   const id = S.attempt.attempt_id;
+  const { plan, startedAt, multiplier } = S.sprechen;
   const queue = new ChunkQueue({
     store: S.store,
     upload: (q, bytes, mime) => api.chunk(id, S.lease, q, bytes, mime),
     completeTurn: (b) => api.turn(id, S.lease, b)
   });
   const status = await api.speakingStatus(id, S.lease);
-  const done = new Set(status.turns.filter((t) => t.status === 'complete').map((t) => `${t.item_id}:${t.turn}`));
+  const turnRow = (part, turn) => status.turns.find((t) => t.part === part && t.turn === turn);
+  const serverSeqs = (part, turn) => status.chunks.filter((c) => c.part === part && c.turn === turn.turn).map((c) => c.seq);
+  const done = new Set();
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   const ph = $('#kx-phase');
-  const items = S.pkg.parts.flatMap((p) => p.tasks.flatMap((t) => t.items)).filter((i) => i.interaction === 'spoken_response');
-  for (const it of items) for (const turn of it.response_spec.turns) {
-    if (S.module !== 'sprechen') break;
-    const key = `${it.item_id}:${turn.turn}`;
-    const label = document.querySelector(`[data-turn="${CSS.escape(key)}"]`);
-    if (done.has(key)) { if (label) label.textContent = 'gespeichert'; continue; }
-    const have = new Set(status.chunks.filter((c) => c.turn === turn.turn).map((c) => c.seq));
-    const t = { item_id: it.item_id, turn: turn.turn };
-    await queue.drain(t, have);   // resend buffered chunks after a reload
-    ph.textContent = 'Hören Sie den Gesprächsimpuls (Prüfton).';
-    if (turn.prompt_asset) { const m = await api.media(id, S.lease, turn.prompt_asset); const a = new Audio(); a.src = URL.createObjectURL(new Blob([await api.mediaBytes(m.url)], { type: m.mime })); await new Promise((r) => { a.onended = r; a.onerror = r; a.play().catch(r); }); }
-    ph.textContent = `Aufnahme läuft — sprechen Sie jetzt (max. ${turn.seconds} s).`;
-    if (label) label.textContent = 'Aufnahme …';
-    const rec = new TurnRecorder({ stream, queue, turn: t });
-    rec.start();
-    await new Promise((r) => setTimeout(r, turn.seconds * 1000));
-    const res = await rec.stop();
-    if (label) label.textContent = 'wird hochgeladen …';
-    await queue.finish(t, res.chunks, res.duration_ms);
-    if (label) label.textContent = 'gespeichert';
+  const heard = listenPhaseAssets(S.pkg, plan);   // partner presentations are heard in their own phase, never replayed by a turn
+  const prepEnd = prepEndsAt(plan, startedAt, multiplier);
+  const topics = topicItems(S.pkg);
+  const lockTopics = () => {
+    for (const t of topics) {
+      S.locked.add(t.item_id);
+      for (const el of document.querySelectorAll(`[data-item="${CSS.escape(t.item_id)}"]`)) el.disabled = true;
+    }
+    if (S.autosave) S.autosave.flush().catch(() => {});   // send a last-second choice now (the server allows the save grace)
+  };
+  let topicsLocked = false;
+  const active = () => S.module === 'sprechen';
+  const label = (key, text) => { const el = document.querySelector(`[data-turn="${CSS.escape(key)}"]`); if (el) el.textContent = text; };
+  const waitUntil = async (serverT) => { while (active() && clock.serverNow() < serverT) await sleep(Math.min(200, Math.max(10, serverT - clock.serverNow()))); };
+
+  const runListen = async (at) => {
+    const asset = partnerAssetFor(S.pkg, plan, at.phase);
+    const offset = asset ? partnerPlayOffset(at, asset.duration_ms) : null;
+    if (offset == null) return;
+    await playSpeakingAsset(asset.asset_id, offset);
+  };
+
+  /* After a reload: every turn that was interrupted mid-recording keeps what was recorded and is finalised now,
+     whichever phase is running; its part resumes at the next turn (SPEAKING-SPEC §5). Complete turns are skipped. */
+  const settleTurns = async () => {
+    for (const p of S.pkg.parts) for (const it of speakingItemsForPart(S.pkg, Number(p.part))) for (const turn of it.response_spec.turns) {
+      const part = Number(p.part), key = `${it.item_id}:${turn.turn}`, t = { item_id: it.item_id, turn: turn.turn };
+      const local = (await queue.pending(t)).map((k) => Number(k.split(':').pop()));
+      const row = turnRow(part, turn.turn);
+      const action = resumeAction(row && row.status, serverSeqs(part, turn), local);
+      if (action.kind === 'done') { done.add(key); label(key, 'gespeichert'); }
+      if (action.kind === 'finalize') {
+        await queue.drain(t, new Set(serverSeqs(part, turn)));
+        // duration estimate for an interrupted turn: 1 s chunks (TurnRecorder timeslice), capped at the turn length
+        await api.turn(id, S.lease, { item_id: it.item_id, turn: turn.turn, chunks: action.chunks, duration_ms: Math.min(action.chunks * 1000, turn.seconds * 1000) });
+        done.add(key); label(key, 'gespeichert (unterbrochen)');
+      }
+    }
+  };
+
+  const runTurns = async (at) => {
+    const part = partOfPhase(at.phase);
+    if (part == null) return;
+    for (const it of speakingItemsForPart(S.pkg, part)) for (const turn of it.response_spec.turns) {
+      if (!active() || clock.serverNow() >= at.ends_at) return;
+      const key = `${it.item_id}:${turn.turn}`;
+      const t = { item_id: it.item_id, turn: turn.turn };
+      if (done.has(key)) { label(key, 'gespeichert'); continue; }
+      if (turn.prompt_asset && !heard.has(turn.prompt_asset)) { ph.textContent = `Teil ${part}: Hören Sie den Gesprächsimpuls.`; await playSpeakingAsset(turn.prompt_asset); }
+      const windowMs = turnWindowMs(turn.seconds, clock.serverNow(), at.ends_at);
+      if (!windowMs || !active()) return;
+      ph.textContent = `Teil ${part}: Aufnahme läuft — sprechen Sie jetzt (max. ${Math.round(windowMs / 1000)} s).`;
+      label(key, 'Aufnahme …');
+      const rec = new TurnRecorder({ stream, queue, turn: t });
+      rec.start();
+      await waitUntil(clock.serverNow() + windowMs);
+      const res = await rec.stop();
+      label(key, 'wird hochgeladen …');
+      if (res.chunks > 0) { await queue.finish(t, res.chunks, res.duration_ms); done.add(key); label(key, 'gespeichert'); }
+      else label(key, 'offen');
+    }
+    if (active() && clock.serverNow() < at.ends_at) ph.textContent = `Teil ${part} beendet. Der nächste Teil beginnt automatisch.`;
+  };
+
+  try {
+    await settleTurns();
+    let lastIndex = -2;
+    while (active()) {
+      if (!topicsLocked && clock.serverNow() >= prepEnd) { topicsLocked = true; lockTopics(); }
+      const at = speakingPhaseAt(plan, startedAt, clock.serverNow(), multiplier);
+      if (at.state === 'finished') { ph.textContent = 'Alle Teile beendet. Geben Sie das Modul ab.'; break; }
+      if (at.state === 'running' && at.index !== lastIndex) {
+        lastIndex = at.index;
+        ph.textContent = speakingPhaseLabel(at.phase);
+        if (at.phase.kind === 'listen') await runListen(at);
+        else if (at.phase.kind === 'speak') await runTurns(at);
+        continue;   // re-evaluate immediately: the phase may have ended while recording
+      }
+      await sleep(200);
+    }
+  } finally {
+    stream.getTracks().forEach((tr) => tr.stop());
   }
-  stream.getTracks().forEach((tr) => tr.stop());
-  ph.textContent = 'Alle Beiträge gespeichert. Geben Sie das Modul ab.';
 }
 
 async function showResult() {

@@ -1,8 +1,11 @@
 /* OPT-IN real-browser E2E (headless Chrome over CDP, no extra dependencies):
    START → LESEN → HÖREN (real WebAudio playback of test tones, real time)
-   → SCHREIBEN (typing + umlaut button + reload recovery) → SPRECHEN (fake
-   microphone, chunk upload) → SUBMIT → RESULT, at desktop and mobile widths.
-   Synthetic content only, against the local dev server. Takes ~3–4 minutes.
+   → SCHREIBEN (typing + umlaut button + reload recovery) → SPRECHEN (phase-driven:
+   preparation + reload, topic lock, fake-microphone recording, reload mid-part,
+   partner presentation played once without recording, Teil 3) → SUBMIT → RESULT,
+   at desktop and mobile widths. Synthetic content only, against the local dev
+   server. The Sprechen part moves the module start on the TEST server (in-memory
+   D1) to skip the long Teil 1/2 waits. Takes ~4–5 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override) */
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
@@ -59,6 +62,9 @@ async function run(viewport) {
     const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
     await send('Runtime.evaluate', { expression: 'window.confirm = () => true' });
     await send('Page.addScriptToEvaluateOnNewDocument', { source: 'window.confirm = () => true;' });
+    // record which Sprechen assets an <audio> element starts (the shell tags them with data-asset)
+    await send('Page.addScriptToEvaluateOnNewDocument', { source: `window.__plays = []; { const play = HTMLMediaElement.prototype.play;
+      HTMLMediaElement.prototype.play = function () { window.__plays.push((this.dataset && this.dataset.asset) || ''); return play.apply(this, arguments); }; }` });
     const base = `http://127.0.0.1:${dev.port}/exam/`;
     await send('Page.navigate', { url: base });
 
@@ -130,10 +136,71 @@ async function run(viewport) {
     await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`, 15000, 'Sprechen intro');
     await click('#kx-consent');
     await click('[data-act="start"][data-module="sprechen"]');
-    await waitFor(`/Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 30000, 'recording');
-    await sleep(3500);
-    const chunks = await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks').first();
-    assert.ok(chunks.n >= 1, 'chunks are uploaded progressively while recording');
+    const TOPIC = 'itm:b1:syn-sp2-topic', PARTNER = 'ast:syn-sp3-partner-talk';
+    const topicRadios = `[...document.querySelectorAll('input[type=radio][data-item="${TOPIC}"]')]`;
+    const sprechenRow = () => dev.env.DB.prepare("SELECT started_at, deadline_at FROM attempt_modules WHERE module = 'sprechen'").first();
+    const chunkCount = async (part) => (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks' + (part ? ' WHERE part = ?1' : '')).bind(...(part ? [part] : [])).first()).n;
+    const phaseSecondsLeft = async () => { const m = /noch (\d+):(\d+)/.exec(await evaluate(`document.querySelector('#kx-phase-time')?.textContent || ''`)); return m ? Number(m[1]) * 60 + Number(m[2]) : null; };
+
+    // 1. PREPARATION (synthetic: 20 s; published lc:b1@1: 15 min): topic choice open, nothing recorded
+    await waitFor(`/^Vorbereitung/.test(document.querySelector('#kx-phase')?.textContent || '')`, 20000, 'preparation phase');
+    assert.equal(await evaluate(`${topicRadios}.length`), 2);
+    assert.equal(await evaluate(`${topicRadios}.some((r) => r.disabled)`), false, 'topic choice open during the preparation');
+    await evaluate(`${topicRadios}.find((r) => r.value === 't1').click()`);
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'topic autosaved');
+    assert.equal(await chunkCount(), 0, 'nothing is recorded during the preparation');
+    // refresh during the preparation: same phase, same remaining time (server-derived)
+    await evaluate('window.__beforeReload = true');
+    await send('Page.reload');
+    await waitFor(`!window.__beforeReload && /^Vorbereitung/.test(document.querySelector('#kx-phase')?.textContent || '') && /noch/.test(document.querySelector('#kx-phase-time')?.textContent || '')`, 20000, 'preparation restored after reload');
+    const row0 = await sprechenRow();
+    const shown = await phaseSecondsLeft(), expected = (row0.started_at + 20_000 - Date.now()) / 1000;
+    assert.ok(shown !== null && Math.abs(shown - expected) <= 2, `remaining preparation after reload: shown ${shown} s, expected ≈ ${expected.toFixed(1)} s`);
+    assert.equal(await evaluate(`${topicRadios}.find((r) => r.value === 't1').checked`), true, 'chosen topic restored');
+
+    // 2. TOPIC LOCK at the end of the preparation (the server enforces it as well)
+    await waitFor(`${topicRadios}.every((r) => r.disabled)`, 25000, 'topic locked after the preparation');
+    await evaluate(`${topicRadios}.find((r) => r.value === 't2').click()`);
+    assert.equal(await evaluate(`${topicRadios}.find((r) => r.value === 't1').checked`), true, 'a locked choice cannot change');
+    const stored = await dev.env.DB.prepare('SELECT value_json FROM responses_current WHERE item_id = ?1').bind(TOPIC).first();
+    assert.deepEqual(JSON.parse(stored.value_json), { option_id: 't1' });
+
+    // 3. TEIL 1: recording windows follow the phase (intro first, then the partner prompt, then recording)
+    await waitFor(`/^Teil 1: Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 25000, 'Teil 1 recording');
+    for (const t1 = Date.now(); (await chunkCount(1)) < 2; ) { if (Date.now() - t1 > 15000) throw new Error('no Teil 1 chunks'); await sleep(200); }
+
+    // 4. TEST-SERVER TIME JUMP + reload mid-turn: land 8 s before the end of Teil 2 (no waiting for Teil 1/2)
+    const row1 = await sprechenRow();
+    const target = Date.now() - (265_000 - 8_000);   // Teil 2 ends 265 s after the module start (synthetic plan)
+    const delta = target - row1.started_at;
+    await dev.env.DB.prepare("UPDATE attempt_modules SET started_at = started_at + ?1, deadline_at = deadline_at + ?1 WHERE module = 'sprechen'").bind(delta).run();
+    await evaluate('window.__beforeReload = true');
+    await send('Page.reload');
+    await waitFor(`!window.__beforeReload && /^Teil 2/.test(document.querySelector('#kx-phase')?.textContent || '')`, 20000, 'reloaded into Teil 2');
+    // the interrupted Teil 1 turn kept its chunks and was finalised; Teil 1 is not repeated
+    for (const t1 = Date.now(); ; ) {
+      const turn = await dev.env.DB.prepare("SELECT status, chunks FROM recording_turns WHERE part = 1 AND turn = 't1'").first();
+      if (turn && turn.status === 'complete') { assert.ok(turn.chunks >= 2); break; }
+      if (Date.now() - t1 > 10000) throw new Error('interrupted Teil 1 turn not finalised: ' + JSON.stringify(turn));
+      await sleep(200);
+    }
+
+    // 5. PARTNER PRESENTATION: played once, nothing recorded
+    await waitFor(`/Präsentation Ihres Gesprächspartners/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'partner phase');
+    const chunksAtPartner = await chunkCount();
+    await waitFor(`window.__plays.includes(${JSON.stringify(PARTNER)})`, 5000, 'partner presentation started');
+    await sleep(3000);
+    assert.equal(await chunkCount(), chunksAtPartner, 'no recording during the partner presentation');
+    assert.equal(await chunkCount(3), 0);
+
+    // 6. TEIL 3: recording starts without replaying the partner talk; the examiner prompt is still played
+    await waitFor(`/^Teil 3: Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'Teil 3 recording');
+    for (const t1 = Date.now(); (await chunkCount(3)) < 1; ) { if (Date.now() - t1 > 15000) throw new Error('no Teil 3 chunks'); await sleep(200); }
+    assert.equal(await evaluate(`window.__plays.filter((a) => a === ${JSON.stringify(PARTNER)}).length`), 1, 'partner presentation played exactly once');
+    const teil2 = await dev.env.DB.prepare("SELECT status FROM recording_turns WHERE part = 2 AND turn = 't1'").first();
+    assert.equal(teil2 && teil2.status, 'complete', 'Teil 2 recorded in its (shortened) window');
+    const chunks = { n: await chunkCount() };
+    log(viewport.name, 'Sprechen phases: preparation + reload, topic lock, Teil 1, reload into Teil 2, partner once, Teil 3');
     await click('[data-act="submit"]');
     await waitFor(`document.querySelector('[data-act="complete"]')`, 20000, 'complete screen');
     await click('[data-act="complete"]');

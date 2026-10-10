@@ -53,7 +53,7 @@ function writing(it, value) {
     + `<p class="kx-wc" id="${id}_wc" aria-live="polite"><span data-wc-for="${id}">${countWords(text)}</span> Wörter</p></div>`;
 }
 
-function speaking(it, _value, ctx = {}) {
+function speaking(it, _value, _disabled, ctx = {}) {
   const turns = (it.response_spec && it.response_spec.turns) || [];
   const st = ctx.turnStatus || {};
   return `<section class="kx-item kx-speak" id="item-${idSafe(it.item_id)}" aria-label="${esc(it.stem)}"><h3>${esc(it.stem)}</h3><ol class="kx-turns">`
@@ -65,11 +65,12 @@ const DEFAULT_RENDERERS = { binary_choice: choice, mcq_single: choice, speaker_a
 
 export function createRenderer(extra = {}) {
   const registry = { ...DEFAULT_RENDERERS, ...extra };
-  function item(it, answers, ctx) {
+  /* ctx.locked: Set of item ids that are read-only now (e.g. the Sprechen topic choice after the preparation). */
+  function item(it, answers, ctx = {}) {
     const fn = registry[it.interaction];
     if (!fn) return `<p class="kx-error">Nicht unterstützter Aufgabentyp: ${esc(it.interaction)}</p>`;
     const value = it.is_example ? { option_id: it.example_answer } : answers[it.item_id];
-    return fn(it, value, it.is_example, ctx);
+    return fn(it, value, !!it.is_example || !!(ctx.locked && ctx.locked.has(it.item_id)), ctx);
   }
   function stimulus(s) {
     if (s.kind === 'text') return `<article class="kx-stim">${s.label ? `<h3 class="kx-stim-label">${esc(s.label)}</h3>` : ''}${paragraphs(s.text)}</article>`;

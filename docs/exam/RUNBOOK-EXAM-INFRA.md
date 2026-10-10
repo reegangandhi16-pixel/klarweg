@@ -121,6 +121,7 @@ The chapter/Access DB is never touched by exam migrations.
 ## 8. Tests
 
 - `npm run test:exam` runs validator + content, scoring golden, E2E API flow, timer/recovery, listening/media, speaking, security, frontend and Access proxy tests.
+- Real exam audio (`audio.file`) is measured from the file and checked against the declared `audio.duration_ms` (± 50 ms); supported formats, error codes and the opt-in real-encoder tests (`KW_FFMPEG`) are documented in `EXAM-AUDIO-DURATION-VALIDATION.md`. CI: `.github/workflows/exam-tests.yml`.
 - `npm run test:exam:browser` is an opt-in headless Chrome run (about 4–6 min, real time). It uses a local dev server with the exam Worker in-process and synthetic content only.
 - `npm test` is the existing suite. It also picks up `access/worker/test/exam-proxy.test.mjs`.
 - `npm run exam:check-public` checks the **public-repo boundary**. It also runs first in `npm test` and `npm run test:exam`. It fails on:

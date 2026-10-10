@@ -64,7 +64,8 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
     if (a.kind === 'audio' && !a.audio?.generator && !a.audio?.file) E('audio_source', `audio ${a.id} has neither generator nor file`);
     if (a.kind === 'audio' && form.kind !== 'synthetic' && a.audio?.generator) E('synthetic_audio_in_real_form', `audio ${a.id} uses a generator`);
     if (a.kind === 'audio' && a.audio?.generator && a.audio?.file) E('audio_source', `audio ${a.id} declares both a generator and a file`);
-    if (a.kind === 'audio' && !a.audio?.generator && a.audio?.file) {   // real audio: the file's own duration is the evidence
+    // real audio: the file's own duration is the evidence (docs/exam/EXAM-AUDIO-DURATION-VALIDATION.md)
+    if (a.kind === 'audio' && !a.audio?.generator && a.audio?.file) {
       try {
         const m = readAssetAudio(formDir, a);
         measuredMs[a.id] = m.duration_ms;

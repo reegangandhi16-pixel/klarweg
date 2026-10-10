@@ -3,22 +3,28 @@ name: Exam toolchain tests
 # Test-only workflow for the exam toolchain (content validator, release builder, exam Worker, exam shell).
 # It deploys nothing, needs no secrets and is independent of "Deploy Pages (public allowlist only)".
 # The exam tests use only Node built-ins (no npm install). ffmpeg from the distribution enables the opt-in
-# real-encoder audio checks (KW_FFMPEG).
+# real-encoder audio checks (KW_FFMPEG); its version is printed in the log (not pinned).
+# Actions are pinned by commit SHA.
 
 on:
   pull_request:
     paths:
+      - 'package.json'
       - 'exam-content/**'
       - 'exam-worker/**'
       - 'exam/**'
-      - 'access/worker/test/exam-proxy.test.mjs'
+      - 'access/worker/src/**'
+      - 'access/worker/test/**'
       - '.github/workflows/exam-tests.yml'
   push:
     branches: [main]
     paths:
+      - 'package.json'
       - 'exam-content/**'
       - 'exam-worker/**'
       - 'exam/**'
+      - 'access/worker/src/**'
+      - 'access/worker/test/**'
       - '.github/workflows/exam-tests.yml'
   workflow_dispatch:
 
@@ -38,10 +44,10 @@ jobs:
       matrix:
         node: ['22', '24']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1   # v7.1.0
         with:
           node-version: ${{ matrix.node }}
       - name: Install ffmpeg (real-encoder audio checks)

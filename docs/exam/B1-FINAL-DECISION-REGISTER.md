@@ -388,8 +388,9 @@ any item or form, and it does not close or relax any of the items listed above, 
 M-27 sign-off, OD-08 legal clearance, OD-14 conditions, Q14/M-28 originality, EX-01 privacy, EX-04 accessibility,
 OD-07/OD-30 scoring, calibration, or any release gate. G0 below is unaffected.
 
-**Scope of the v1.4 sign-off.** Same scope as above. It records the owner's approval, given on 2026-10-11 in the F4
-working session, of the **record-keeping mechanism only**: F4 decisions are recorded in §B.2 under namespaced
+**Scope of the v1.4 sign-off.** Same scope as above. It records the owner's approval, given on 2026-10-11 as a written
+instruction in the AI-assisted F4 documentation conversation (the owner's message approving "Option C"; no meeting
+took place), of the **record-keeping mechanism only**: F4 decisions are recorded in §B.2 under namespaced
 F4/P-n identifiers. Like the earlier rows, this is a recorded owner approval, not a cryptographic signature. It does
 **not** approve any F4 policy. F4/P-4 (A-bounded) and F4/P-8 (C1) remain owner-selected proposals pending formal
 approval, and every other F4/P-n item keeps the status recorded in §B.2, including the new OPEN item F4/P-25. The

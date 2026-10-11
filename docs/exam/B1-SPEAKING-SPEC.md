@@ -105,7 +105,7 @@ The table above is the design as decided. It is **not** a description of the cur
 | `POST …/sprechen/turns/stop` | `request_id`, `lease_id`, `rgr_id`, optional `declared_chunks`, `reason` | the recording grant and `server_now` |
 | Existing `chunks`, `turns`, `status` | gain an optional `rgr_id` (required only under `enforce`, §10) | `status` gains `recording_grants[]` |
 
-- `capture_window_ends_at` bounds the **capture**. `upload_deadline_at` is the end of the existing upload window (`recordingWindow`: while the module runs, deadline + save grace + `upload_grace_seconds`; after submission, deadline + `upload_grace_seconds`). They are different and must not be merged.
+- `capture_window_ends_at` bounds the **capture**. `upload_deadline_at` is the end of the upload window, proposed as `deadline_at + upload_grace_seconds * 1000` (milliseconds), with uploads accepted while `t ≤ upload_deadline_at` (§4.2.10, which also describes the current code's two formulas). They are different and must not be merged.
 - `part` and the phase are always derived by the server from the item; the client never supplies them.
 - Device claims are stored and labelled as claims. They are never evidence of capture time.
 - **Unresolved fields:** the `max_chunks` formula and constants **[OPEN P-1, P-14]**, so until approved it is computed and logged but never enforced; the rule that sets `kind` **[OPEN P-7]**; the `reason` values (subject to schema review).
@@ -134,7 +134,7 @@ Today only the client maps phases to parts (`teil<N>` → part N) [PR #53]; the 
 | Lifecycle | States | Owner of the state |
 |---|---|---|
 | Recording grant | `open` (active) → `closed` with a `close_reason`: `stopped`, `capture_window_elapsed`, `lease_changed`, `module_closed`, `consent_withdrawn` [P-19] | Server |
-| Turn evidence | `none` → `partial` → `complete`, or `incomplete` (final, set when `upload_deadline_at` passes without completion) | Server |
+| Turn evidence | `none` → `partial` → `complete`, or `incomplete` (terminal; set by the finalization step in §4.2.10 once `t > upload_deadline_at` — **not implemented**) | Server |
 | Chunk | `local` (browser only) → `accepted` or `refused(code)` | Client holds; server decides |
 | Submission (existing) | module `running → submitting → submitted`; attempt `in_progress → completed` | Server |
 
@@ -150,15 +150,16 @@ Rules that keep these consistent:
   - When the current generation is higher than the grant's, an `open` grant is closed by the server (`lease_changed`). It may not be used for further capture. The close reason keeps `lease_reacquired` and `lease_takeover` apart.
   - **Buffered-chunk recovery.** Chunks for a grant closed this way remain uploadable under the normal rules (seq below `max_chunks` once enforced, §4.2.1 and §4.2.8; upload window; consent), but **only** with the current lease. A client whose lease was taken over by another tab or device cannot capture or upload until the learner explicitly takes the lease back. The learner's takeover is itself audited and an incident. Taking the lease back closes any grant opened under the other holder's generation.
   - **Plain expiry during capture.** A device whose lease expired (for example offline for longer than the lease lifetime) cannot tell when the server closed its grant. It may therefore have captured audio after the closure. The server cannot distinguish those chunks by time. Two policies are possible: such grants carry a `lease_interrupted` evidence flag, or a grant closed by plain expiry may be resumed by the same attempt. This is **[OPEN P-22]**, not decided here.
-- **Late recording grants** (§5.1) are normally created already `closed` and never occupy the active slot. Whether a late request that arrives while the phase is still running may create an `open` grant: **[OPEN P-7]**.
+- **Late recording grants** (§5.1) are normally created already `closed` and never occupy the active slot. Whether a late request that arrives while the phase is still running may create an `open` grant: **[OPEN P-7]**. Late recording grants after module submission follow §4.2.10 (P-8, owner-selected option C1, pending formal approval).
 - **Re-recording.** Until **[OPEN P-3]** is decided, there is one recording grant per (attempt, item, turn). A repeated open returns the existing grant, and a closed empty grant is not reopened.
 - **Declared chunk count is optional.** If declared (stop or late open), completion must match it. If never declared, completion needs contiguous `0..n-1` with `n ≤ max_chunks` (once enforced), and the evidence records that the count was not declared. Loss of trailing chunks is then undetectable, and this must be shown (§5.3).
 - **Evidence after module submission.** Current behaviour [REPO @ ef64371]:
-  - After the Sprechen module is submitted, and **while the attempt is not completed**, the server still accepts chunks and completions inside the upload window (`recordingWindow`), with the current lease.
+  - After the Sprechen module is submitted, and **while the attempt is not completed**, the server still accepts chunks and completions inside the upload window (`recordingWindow`), with the current lease. It accepts them for **any** valid item and turn and creates the turn row on the first chunk, so it does not distinguish evidence for earlier turns from new evidence.
   - Completing the attempt deletes the attempt lease, and `lease` refuses completed attempts. From then on **no** upload can succeed.
+  - Nothing marks evidence `incomplete`: turn rows can only be `open` or `complete`, and the scheduled sweep only processes modules that are running past their deadline or still being submitted.
   - Client-side re-sending after module submission is not implemented in [PR #53].
 
-  This draft therefore does **not** promise recovery after attempt completion. Any post-submit recovery path (client re-sending after submission, a restricted upload-only credential after completion, or blocking or warning on completion while evidence is partial) is a **proposed change requiring a decision [OPEN P-4]**. New late recording grants after module submission: **[OPEN P-8]**.
+  Proposed (owner-selected P-4 option A-bounded and P-8 option C1, **pending formal approval**): §4.2.10. Recovery after attempt completion remains out of scope; no upload is possible after completion.
 - **Local storage keys** are scoped to attempt + recording grant + seq. Local storage only helps recovery; it is never acceptance.
 
 #### 4.2.5 Idempotency, retries, duplicates [PROPOSED]
@@ -233,6 +234,86 @@ Consequences:
 - A **`would_refuse`** is never a property of the grant alone. It is an event linked to the chunk, turn or grant it concerns, so the accepted row and the reason it would have been refused can both be shown.
 - The effective mode is recorded as the value the server applied, whatever mechanism supplies it **[OPEN P-13]**.
 
+#### 4.2.10 Upload deadline, completion gate and evidence finalization [PROPOSED — owner-selected P-4 A-bounded and P-8 C1, pending formal approval; NOT IMPLEMENTED]
+
+**Effective upload deadline.** Current code [REPO @ ef64371]: a running module accepts uploads while `t ≤ deadline_at + SAVE_GRACE_MS + upload_grace_seconds * 1000`, and a submitting or submitted module while `t ≤ deadline_at + upload_grace_seconds * 1000`. Every lease-checked request first auto-submits a module that is past `deadline_at + SAVE_GRACE_MS`, so the longer limit cannot be reached in practice. The B1 level configuration sets `upload_grace_seconds` to 600. Proposed single definition for every F4 path, in milliseconds: `upload_deadline_at = deadline_at + upload_grace_seconds * 1000` (600 s for B1), with uploads accepted while `t ≤ upload_deadline_at`. `deadline_at` is the module deadline fixed at module start; for attempts with a time multiplier other than 1.0 it depends on **[OPEN P-18]**.
+
+| Server time `t` | Chunk upload, turn completion, late grant (C1) | Evidence finalization | Attempt completion |
+|---|---|---|---|
+| `t < upload_deadline_at` | Accepted (other checks permitting) | Not run | Refused while evidence is pending |
+| `t = upload_deadline_at` | Accepted | Not run | Refused while evidence is pending |
+| `t > upload_deadline_at` | Refused (`upload_window_closed`) | Must run before any completion decision | Allowed once no evidence is pending |
+
+No new numerical value is introduced; the boundary is the existing `upload_grace_seconds`.
+
+**Eligibility time.** For a chunk upload, deadline eligibility is decided by the server time at which the request is admitted, which is when its reservation is recorded (below). It does not depend on when the storage write or the database commit finishes. For turn completion and late-grant creation, it is the server time of the atomic step that writes them.
+
+**P-8 option C1: late recording grant after module submission.** A `turns/open` request after the Sprechen module has been submitted is accepted only when all of these server-observed conditions hold:
+1. the module's server-recorded `submit_kind` is `auto_deadline` and its status is `submitted` (while it is still `submitting`, the request is refused as retryable, following the existing `finalization_pending` pattern); `manual` and `admin` submissions never qualify;
+2. the attempt is `in_progress`;
+3. `t ≤ upload_deadline_at`;
+4. the lease, consent and item/turn checks of §4.2.2 pass, and the turn has no other recording grant (P-3).
+
+The grant is created `closed`, with `kind: late`, the flag `after_submission` and the module's `submit_kind`. It has **no capture window**, so it never authorises capture after it is issued. It registers evidence that may already exist on the device.
+
+**Expected count and safety cap.** `declared_chunks` is a client-reported expected count, a device claim. `max_chunks` is the separate server-side safety cap of §4.2.1 and §4.2.8; its values remain **[OPEN P-14]**, and a per-grant byte cap remains **[OPEN P-15]**. A declared count is never used as the cap and never proves what was captured. Under §4.2.5 a completion that disagrees with a declared count is refused; that check concerns the consistency of the client's own requests, not capture integrity. **Additional proposal [OPEN P-24], which needs explicit owner approval:** require `declared_chunks` on a post-submission late grant, so the expected size is fixed when the evidence is registered. Without P-24, such a grant completes under the general rule of §4.2.4 (contiguous `0..n-1`, count not declared, loss of trailing chunks undetectable).
+
+**Limitation, not resolved by C1.** The server records `auto_deadline` whenever a module passes its deadline, whether or not the learner was online: any request after `deadline_at + SAVE_GRACE_MS`, or the scheduled sweep, auto-submits it. C1 therefore excludes only learners who submitted manually; it does **not** identify offline learners. It cannot stop a modified client from capturing new audio after the automatic submission and registering it as late evidence. A late grant records when the server received the registration. It is never evidence of offline recording, capture time, speaker identity or originality, and must not be described as verified offline recovery.
+
+**P-4 option A-bounded: completion gate.** Evidence is **pending** when the server knows of it and it is neither `complete` nor terminally `incomplete`:
+
+| Case | Server-visible | Blocks completion while `t ≤ upload_deadline_at` | At finalization (`t > upload_deadline_at`) |
+|---|---|---|---|
+| Open recording grant, zero chunks | Yes (grant row) | Cannot normally occur: completion needs the module submitted, and submission closes open grants (`module_closed`, §4.2.4). If found, it blocks | Grant closed; evidence `incomplete`, "no audio received" |
+| Closed (stopped or expired) recording grant, zero chunks | Yes (grant row) | Yes: chunks may still be on the device | Evidence `incomplete`, "no audio received" |
+| Chunks with a sequence gap | Yes | Yes | Evidence `incomplete`; the received seqs and the gap are recorded |
+| Contiguous chunks, turn completion not received | Yes | Yes | Evidence `incomplete` |
+| Closed recording grant (`stopped`, `capture_window_elapsed`, `lease_changed`) with partial chunks | Yes | Yes | As for a gap |
+| Late grant registered under C1 | Yes | Yes | According to its chunk state |
+| In-flight upload reservation, admitted but not yet `committed` or `failed` | Yes (reservation row) | Yes | Not finalized until the reservation is resolved |
+| Audio only in the browser, no grant and no chunk | **No** | **Cannot block.** A client-reported queue is advisory only | Nothing to finalize |
+
+**No automatic promotion to `complete`.** Evidence becomes `complete` only through a successful turn-completion request that passes the checks of §4.2.5. Finalization never promotes evidence to `complete`, whether on the basis of contiguous chunks or of a client-declared count.
+
+Completion is refused (proposed code `recording_evidence_pending`, listing the pending turns) while any pending evidence exists and `t ≤ upload_deadline_at`. After `upload_deadline_at`, all pending evidence must first be finalized; completion is then allowed. Completion never makes a later upload possible.
+
+**Empty grants and P-3.** An empty grant blocks completion only because chunks may still arrive; at finalization it becomes `incomplete` with no audio. Whether an empty closed grant may instead be re-recorded before the deadline is **[OPEN P-3]**. Until that is decided, an empty closed grant is not reopened (§4.2.4); finalization does not depend on the answer.
+
+**Evidence finalization: this does not exist today.** Turn rows can only be `open` or `complete`, no code path marks evidence `incomplete`, and the scheduled sweep only selects modules that are running past their deadline or still being submitted [REPO @ ef64371]. Proposed:
+- a terminal state `incomplete` with a reason, set by an idempotent conditional update that changes only evidence that is not yet terminal, only when `t > upload_deadline_at`, and only when no eligible upload reservation for that evidence is unresolved;
+- it runs lazily on every request path that reads or decides on evidence (status, attempt completion, the rater view, result building), and through a **new** scheduled-sweep query for attempts with non-terminal evidence past their deadline;
+- retries are safe because the update is idempotent; the sweep processes bounded batches.
+
+**In-flight upload reservations [REQUIRED — not implemented].** Today `uploadChunk` checks the upload window (`recordingWindow`, `exam-worker/src/api.js:518`). It then writes the object to R2 under a deterministic key (`api.js:545–546`), and only afterwards inserts the D1 chunk row (`api.js:549–556`) [REPO @ ef64371]. A request that passes the check just before the deadline can therefore still be writing to R2 when the deadline passes, and nothing records that it was admitted. Required:
+- Before any storage I/O, the server records a durable reservation for the chunk in one atomic database step. The reservation holds the attempt, item, turn, seq, the unique staging object key, the declared hash and size, and the server admission time `t_admit`. The step succeeds only if the attempt is `in_progress`, the grant checks pass (including the cap, once enforced), and `t_admit ≤ upload_deadline_at`. A request admitted at exactly `upload_deadline_at` is eligible.
+- An admitted reservation is not refused merely because the deadline passes while its storage write is in progress. It ends in exactly one terminal state: `committed` (the chunk row is written and references its object) or `failed` (the write or commit did not happen, and the outcome is reconciled as below).
+- Attempt completion treats an unresolved reservation as pending evidence. Finalization does not mark evidence terminal while an eligible reservation for it is unresolved.
+- A crashed or abandoned reservation must not block completion forever. It must reach `failed` through reconciliation. Reconciliation checks whether the exact staging object exists with the reserved hash, and whether a committed row references it, and resolves the reservation accordingly. Deciding that a reservation is abandoned, rather than still in progress, needs a bound after which a still-unresolved reservation is reconciled. If the bound is too short, a write that is still in progress could be failed and its evidence lost. That bound is a numerical value that has not been approved **[OPEN P-14]**. A platform limit on request duration could provide evidence for it, but none has been verified here. **Implementation cannot start until this bound is settled by an owner decision or by evidence.**
+
+**R2/D1 object consistency [REQUIRED — not implemented].** R2 and D1 are separate systems. A storage write and a database commit are two separate steps; they are **not** one atomic transaction. Today the object key is deterministic (`rec/<attempt>/p<part>/<turn>/<seq>`) and the object is written before the D1 decision, so a later or concurrent write to the same key can replace bytes that a committed row already describes [REPO @ ef64371]. Required:
+- every upload request writes to its own immutable, unique staging object key (the key recorded in its reservation), or uses another design verified to be equally safe; no request ever writes to a shared deterministic key before the D1 acceptance decision;
+- the committed D1 chunk row records the exact object key and the hash that were accepted;
+- cleanup never deletes, replaces or alters an object referenced by a valid committed chunk row;
+- an unreferenced staging object is removed only after reconciliation confirms that no committed row references that exact key. When the outcome is ambiguous (for example, a reservation whose commit result is unknown), it is reconciled first, not deleted.
+
+The reservation before storage I/O and the reconciliation after it together close the gap between the two steps. Every admitted upload is either committed with its exact object, or explicitly failed and cleaned up, and no committed evidence can be overwritten. This is a requirement for future implementation review; it has not been built or tested.
+
+**Race between acceptance and completion.** Reservation creation, turn completion and late-grant creation must each be conditional, in the same atomic database step as their write, on the attempt still being `in_progress` and on their eligibility time being `≤ upload_deadline_at`. Committing an admitted reservation is not re-checked against the deadline. It is still conditional on the reservation not having been failed by reconciliation; if it was, the late commit is refused and reconciled. Finalization is conditional on `t > upload_deadline_at` and on no unresolved eligible reservation. Attempt completion must, in one atomic step, finalize expired evidence, confirm that no pending evidence or unresolved reservation remains, and set the attempt `completed`. These are required guarantees. The mechanism needs implementation review, and whether D1 provides them under concurrent Worker instances is **not yet verified** (§4.2.6).
+
+**Schema prerequisites.** Turn rows allow only `open` and `complete` [REPO @ ef64371], so `incomplete` needs a migration (a changed constraint, or a separate evidence-state column or table, subject to schema review). A grant with zero chunks has no turn row, so its evidence state must be held on the recording-grant row, or a turn row must be created together with the grant. Closing open grants at module submission (`module_closed`) is likewise a requirement, not existing behaviour. Upload reservations need durable storage of their own. Chunk rows already store `r2_key` and `sha256`; with unique staging keys, the key they record changes format.
+
+**Modes: evidence safety versus grant enforcement [OPEN P-23].** The `off`/`observe`/`enforce` modes of §10 govern recording-grant and phase checks. The completion gate and finalization protect evidence the server already holds. If they followed the modes:
+
+| Mode | Grant and phase checks | Completion gate if it follows the mode | Completion gate if it is independent of the mode |
+|---|---|---|---|
+| `off` | None; no grant rows | Not applied: completion deletes the lease while server-visible turns are still partial, stranding buffered chunks. **Violates A-bounded** | Applied to server-visible turn evidence (no grant rows exist) |
+| `observe` | Run; failures logged as `would_refuse` | Logged only: completion still ends uploads. **Violates A-bounded** | Applied |
+| `enforce` | Run; failures refused | Applied | Applied |
+
+**Recommendation — NOT APPROVED:** keep evidence-lifecycle safety (the completion gate and finalization) independent of the modes, and let the modes govern only recording-grant and phase checks. Whether the gate needs its own rollout control, and how it applies to attempts already in progress when it is introduced, remain part of P-23.
+
+**Implementation readiness.** Not implementation-ready until all of these are done: formal approval of P-4 and P-8; P-23; P-24 if C1 is to require a declared count; schema review of the evidence state and of upload reservations; a reviewed design for upload reservations and R2/D1 reconciliation; the reservation abandonment bound **[OPEN P-14]**; verification of the atomicity requirements on D1 (§4.2.6); and, for multipliers other than 1.0, P-18. The `max_chunks` values and any byte cap remain open (P-14, P-15).
+
 ## 5. Interruption recovery
 
 | Event | Behaviour |
@@ -242,10 +323,10 @@ Consequences:
 | Refresh / crash during prep | Resume prep with the remaining server time (notes restored from local + server autosave) |
 | Refresh / crash mid-part | Chunks already uploaded are kept; the part resumes at the next turn with the remaining part time; incident logged. With recording grants [PROPOSED]: the reloaded client stops the open recording grant (`reason: interrupted`), re-sends buffered chunks, and requests completion only for contiguous `0..n-1`; a gap is never filled; the duration is marked as estimated (§5.2) |
 | Tab hidden during recording | Recording continues (desktop). iOS background suspension → incident handling as above |
-| Upload incomplete at module end | Up to 10 min background upload window ("Bitte Seite geöffnet lassen"); after that, missing chunks are an incident. With recording grants [PROPOSED]: evidence still partial at `upload_deadline_at` becomes `incomplete` |
+| Upload incomplete at module end | Up to 10 min background upload window ("Bitte Seite geöffnet lassen"); after that, missing chunks are an incident. With recording grants [PROPOSED]: evidence still pending once `t > upload_deadline_at` is finalized as `incomplete` by the finalization step in §4.2.10, which does not exist today |
 | Lease expiry / takeover [PROPOSED] | A new lease generation closes grants opened under the old one (`lease_changed`, §4.2.4). Buffered chunks for them may be uploaded only with the current lease. After a takeover the superseded tab stops capture, releases the microphone and keeps its chunks; it can upload them only after an explicit takeover back. How chunks captured after a plain expiry are treated: **[OPEN P-22]** |
 | Consent withdrawal | No route exists today **[OPEN P-19]**. Its effect on open recording grants, buffered chunks and stored audio must be decided together with OD-21 retention |
-| Submit with uploads pending [PROPOSED] | The submit dialog states that recordings are still uploading. While the attempt is not completed, the server already accepts uploads inside the upload window [REPO @ ef64371]. Re-sending by the client after module submission is not implemented. Attempt completion deletes the lease and ends all uploads. Any recovery path after submission is unresolved: **[OPEN P-4]**, and new late grants after submission **[OPEN P-8]** (§4.2.4) |
+| Submit with uploads pending [PROPOSED] | The submit dialog states that recordings are still uploading. While the attempt is not completed, the server already accepts uploads inside the upload window [REPO @ ef64371]. Re-sending by the client after module submission is not implemented. Proposed (owner-selected, pending formal approval): attempt completion is refused while server-visible evidence is pending, until `t > upload_deadline_at` and that evidence is finalized (P-4 A-bounded); late grants after an automatic submission only (P-8 C1); see §4.2.10 |
 
 The phase clock is server-authoritative (engine spec §3). Interruption pauses are the only exception, capped and logged.
 
@@ -263,7 +344,7 @@ These five facts are independent and are recorded and shown separately:
 | Evidence complete / incomplete | Server, from contiguous `0..n-1` | Ratability, valid score |
 | Submission | Module / attempt state (existing) | Complete evidence |
 
-Open policy: whether timing alone can refuse a late recording grant inside the upload window **[OPEN P-2]**; how `late` is classified, including any threshold **[OPEN P-7]**; late recording grants after module submission **[OPEN P-8]**; how long refused audio is kept in the browser, and how it is deleted **[OPEN P-9]**; how incomplete evidence is rated **[OPEN P-5]**; whether turns must be recorded in order **[OPEN P-10]**.
+Open policy: whether timing alone can refuse a late recording grant inside the upload window **[OPEN P-2]**; how `late` is classified, including any threshold **[OPEN P-7]**; late recording grants after module submission: owner-selected option C1, pending formal approval (§4.2.10); how long refused audio is kept in the browser, and how it is deleted **[OPEN P-9]**; how incomplete evidence is rated **[OPEN P-5]**; whether turns must be recorded in order **[OPEN P-10]**.
 
 **Risk.** Retrospective authorisation lets a client claim to have been offline and capture outside the phase. If timing is not a refusal reason (P-2), late recording grants **detect and label** this but do not prevent it. If it is a refusal reason, less audio is accepted than §5 "Network loss" promises today. That trade-off is P-2.
 
@@ -404,11 +485,11 @@ These authorise design work only.
 | P-1 | Chunk length: code (1 s) vs OD-09 (5 s, LOCKED) |
 | P-2 | Can timing alone refuse a late recording grant? |
 | P-3 | Can an empty recording grant be re-recorded? |
-| P-4 | Attempt completion while evidence is partial |
+| P-4 | Attempt completion while evidence is partial: **owner-selected A-bounded (§4.2.10), pending formal approval** |
 | P-5 | Rating of incomplete evidence |
 | P-6 | Intro binding and phase-binding fallback |
 | P-7 | `late` classification and any threshold |
-| P-8 | Late recording grants after module submission |
+| P-8 | Late recording grants after module submission: **owner-selected C1 (§4.2.10), pending formal approval** |
 | P-9 | Browser retention and deletion of refused audio |
 | P-10 | Turn order |
 | P-11 | F7 scope |
@@ -422,6 +503,8 @@ These authorise design work only.
 | P-20 | Retention period |
 | P-21 | Behaviour of a turn blocked by a valid grant of another attempt (per-user scope only) |
 | P-22 | Chunks captured after a plain lease expiry: evidence flag or resumption |
+| P-23 | Whether the completion gate and evidence finalization follow the `off`/`observe`/`enforce` modes |
+| P-24 | Whether a post-submission late grant must carry a declared chunk count (C1 dependency) |
 
 P-16 (how known client defects relate to PR #53) is a review item outside this specification.
 

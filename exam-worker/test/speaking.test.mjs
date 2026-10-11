@@ -82,6 +82,23 @@ test('SPEAKING: turn completion requires contiguous chunks 0..n-1; completed tur
   assert.equal((await uploadChunk(s, ITEM, 't1', 3, Buffer.from('d'))).json.error, 'turn_closed');
 });
 
+test('SPEAKING: a completed turn is never rewritten — identical repeat replays, different values conflict (SPEAKING §4.2.5)', async () => {
+  const s = await setup();
+  await toSprechen(s);
+  for (const [seq, b] of [[0, 'a'], [1, 'b'], [2, 'c']]) await uploadChunk(s, ITEM, 't1', seq, Buffer.from(b));
+  const first = await post(s, '/sprechen/turns', { item_id: ITEM, turn: 't1', chunks: 3, duration_ms: 3000 });
+  assert.equal(first.status, 200); assert.equal(first.json.complete, true); assert.equal(first.json.already, undefined);
+  // identical repeat with a NEW request id (not served from request_log) → success, flagged as already complete
+  const again = await post(s, '/sprechen/turns', { item_id: ITEM, turn: 't1', chunks: 3, duration_ms: 3000 });
+  assert.equal(again.status, 200); assert.equal(again.json.complete, true); assert.equal(again.json.already, true);
+  // different duration → refused, stored values unchanged
+  const conflict = await post(s, '/sprechen/turns', { item_id: ITEM, turn: 't1', chunks: 3, duration_ms: 4500 });
+  assert.equal(conflict.status, 409); assert.equal(conflict.json.error, 'turn_complete_conflict');
+  const st = await get(s, '/sprechen/status');
+  const row = st.json.turns.find((t) => t.item_id === ITEM && t.turn === 't1');
+  assert.equal(row.status, 'complete'); assert.equal(row.duration_ms, 3000);
+});
+
 test('SPEAKING: recovery — status lists what the server holds so a reloaded client resends only the gaps', async () => {
   const s = await setup();
   await toSprechen(s);

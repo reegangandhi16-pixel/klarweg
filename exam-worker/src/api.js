@@ -581,8 +581,16 @@ export async function completeTurn(env, userId, attemptId, request) {
     for (let i = 0; i < n; i++) if (!have.has(i)) missing.push(i);
     if (missing.length) fail(409, 'chunks_missing', 'Some recording chunks have not arrived yet.', { missing: missing.slice(0, 100) });
     if (have.size !== n) fail(409, 'chunk_count_mismatch');
-    await env.DB.prepare("UPDATE recording_turns SET status = 'complete', duration_ms = ?4, completed_at = ?5 WHERE attempt_id = ?1 AND part = ?2 AND turn = ?3")
+    // A completed turn is never rewritten (SPEAKING §4.2.5): an identical repeat replays, different values conflict.
+    // The status guard makes concurrent completions race-safe: only one of them can flip 'open' → 'complete'.
+    const r = await env.DB.prepare("UPDATE recording_turns SET status = 'complete', duration_ms = ?4, completed_at = ?5 WHERE attempt_id = ?1 AND part = ?2 AND turn = ?3 AND status = 'open'")
       .bind(attemptId, item.part, body.turn, dur, now(env)).run();
+    if (!r.meta.changes) {
+      const cur = await env.DB.prepare('SELECT status, chunks, duration_ms FROM recording_turns WHERE attempt_id = ?1 AND part = ?2 AND turn = ?3').bind(attemptId, item.part, body.turn).first();
+      if (!cur || cur.status !== 'complete') fail(409, 'invalid_transition');
+      if (cur.chunks !== n || cur.duration_ms !== dur) fail(409, 'turn_complete_conflict', 'This turn is already complete with different values.');
+      return { ok: true, item_id: item.item_id, turn: body.turn, chunks: n, complete: true, already: true };
+    }
     return { ok: true, item_id: item.item_id, turn: body.turn, chunks: n, complete: true };
   });
 }

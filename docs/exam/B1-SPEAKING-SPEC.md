@@ -2,7 +2,7 @@
 
 > **Status:** design only. No prompts, partner scripts, recordings or rating texts are created.
 > **Sources:** Standard §5.4, §6.4, §8.3 (official: S1 §1.4, §3, §5; S3 p.25–28, 45–47). **Labels:** **[OFFICIAL]** · **[DESIGN]** · **[UNKNOWN]** · **[OD-xx]**.
-> **F4 recording grants (draft, 2026-10-11):** §4.2, §5.1–§5.3 and §10 are **PROPOSED — NOT IMPLEMENTED**; §4.1 records observed implementation status and conflicts; §5.4 and §11 record open decisions. The proposals follow the owner's F4 directions F4-D1…F4-D5 (§11) and record every remaining owner decision as **[OPEN P-n]**. Additional labels: **[REPO @ ef64371]** = observed in the repository at that commit · **[PR #53]** = present only in the unmerged PR #53 · **[PROPOSED]** = design proposal, not a contract. This draft was prepared with AI assistance; it is not a human review and closes no gate.
+> **F4 recording grants (draft, 2026-10-11):** §4.2, §5.1–§5.3 and §10 are **PROPOSED — NOT IMPLEMENTED**; §4.2.11 is a verification plan whose tests have **not** been run; §4.1 records observed implementation status and conflicts; §5.4 and §11 record open decisions; §12 is an AI-prepared **recommendation, not approved**. The formal record of every F4 decision status is the decision register, §B.2 (`F4/P-n`); §11 mirrors it. The proposals follow the owner's F4 directions F4-D1…F4-D5 (§11) and record every remaining owner decision as **[OPEN P-n]**. Additional labels: **[REPO @ ef64371]** = observed in the repository at that commit · **[PR #53]** = present only in the unmerged PR #53 · **[PROPOSED]** = design proposal, not a contract. This draft was prepared with AI assistance; it is not a human review and closes no gate.
 
 ---
 
@@ -84,10 +84,10 @@ The table above is the design as decided. It is **not** a description of the cur
 | Phase check on upload | – | `uploadChunk` and `completeTurn` check lease, consent, module state and the upload window (`recordingWindow`), **not the speaking phase** | F4 gap; addressed by §4.2 |
 | Turn-open record | – | None. `recording_turns.opened_at` is the arrival time of the first chunk | F4 gap; addressed by §4.2 |
 | Repeated completion | – | `completeTurn` does not check whether a turn is already complete; a repeat with a new `request_id` rewrites `duration_ms` and `completed_at` | Defect; §4.2.5 proposes the rule |
-| Local chunk key | `attempt/part/turn/seq` | `chunk:<item_id>:<turn>:<seq>`, without an attempt id | Mismatch; risk of mixing chunks across attempts or users on one browser. §4.2.4 proposes the key scope |
+| Local chunk key | `attempt/part/turn/seq` | `chunk:<item_id>:<turn>:<seq>`, without an attempt id (`exam/js/recorder.js:14`, `:19`; unchanged by PR #53) | Mismatch; risk of mixing chunks across attempts or users on one browser. §4.2.4 proposes the key scope |
 | Duration | `duration_ms` | Client wall-clock time between recorder start and stop (`recorder.js`). [PR #53] also estimates interrupted turns as `chunks × 1000` | Neither is decoded media duration; see §5.2 |
 | Time multiplier | Engine spec, accommodations: "applied to module and phase durations" | `computeDeadline` (`speaking_phases`) multiplies the preparation only | **Conflict [OPEN P-18]** |
-| Retention | §6: 90 days after the final rating | Register OD-21: 30 days after the final rating | **Unresolved discrepancy [OPEN P-20]**; neither text is changed here |
+| Retention | §6: 90 days after the final rating | Register OD-21: 30 days after the final rating | The register already resolves this conflict: contradiction R-08 ("SPEAKING §6: 90 days") is resolved by OWN-D19, and OD-21 (LOCKED mechanism, signed v1.1) sets an admin-configurable default of **30 days**. Under the register's precedence rule OD-21 governs, and the 90-day text in §6 is superseded. P-20 stays listed as **[OPEN P-20]** only until the owner confirms its scope in the register (§12); nothing here changes OD-21 |
 | Consent withdrawal | §6: deletion right | `consents.withdrawn_at` is checked, but no route sets it | **Unresolved requirement [OPEN P-19]** |
 | Introduction | §1, §2: recorded, not rated | The level configuration has an unrated `intro` phase; the synthetic form has no intro item; nothing maps the intro phase to an item | **[OPEN P-6]** |
 
@@ -124,6 +124,13 @@ In the existing order (user → attempt ownership → request id → lease → m
 - phase-boundary checking is **not implementation-ready**;
 - no phase-boundary refusal may be enforced;
 - observe-mode results for attempts with a multiplier other than 1.0 cannot be interpreted.
+
+**First-version treatment of multipliers other than 1.0 [PROPOSED — recommendation, §12; NOT APPROVED].** This is a scoping rule. It does not decide the accommodation policy (OD-41; EX-04, EX-08). For an attempt whose `time_multiplier` is not 1.0, the first version:
+- evaluates no phase-boundary check and issues no phase-based refusal, in any mode. Grant and phase records are labelled `phase_rule_unresolved`;
+- still applies the evidence lifecycle of §4.2.10 (completion gate, reservations, finalization), using the attempt's stored `deadline_at` as the current code computes it;
+- is excluded from D3 measurements (§4.2.8) and from synthetic acceptance tests that assess phase timing.
+
+P-18 must be resolved through an OD-41 register revision, with accessibility input (EX-04, EX-08), **before any pilot or learner access**. Excluding these attempts is acceptable only while no learner uses the system (OD-53).
 
 #### 4.2.3 Phase binding [PROPOSED]
 
@@ -213,11 +220,16 @@ Evidence required before any value is approved:
 - bitrate per browser;
 - request counts in `observe` mode (§10).
 
+**Scope of P-14, P-15 and P-25.**
+- **P-14** covers the enforcement values above.
+- **P-15** decides **whether** a per-grant byte cap is required at all, and **at which stage** it would be enforced (`observe` only, or `enforce`). If a cap is required, its numerical value is a P-14 value.
+- The **reservation abandonment bound** of §4.2.10 is **not** a P-14 value. It is needed before implementation starts, whereas P-14 values are approved after observe-mode evidence (§10), so it is the separate item **[OPEN P-25]**.
+
 Each value needs boundary tests just below, exactly at and just above it, plus concurrent duplicate opens, delayed responses after a phase change, reconnection near `capture_window_ends_at`, expiry with queued chunks, the rate limit across a window boundary, an exact byte cap, clock skew, and long background suspension.
 
 #### 4.2.9 Migration and compatibility [PROPOSED]
 
-Additive only. Older clients keep working under `off` and `observe`; `enforce` requires the updated client to be served first (§10).
+Additive only. Under `off` and `observe`, older clients keep working for the recording-grant and phase checks; `enforce` requires the updated client to be served first (§10). How the completion gate and evidence finalization apply under each mode is **[OPEN P-23]** (§4.2.10). If they are independent of the modes, as recommended in §12, an older client can receive the new completion refusal `recording_evidence_pending`, which it does not handle. The updated client must therefore be served before the gate is deployed.
 
 **Where mode and provenance are stored.** This is a conceptual design; names, types and indexes are subject to schema review.
 
@@ -226,7 +238,9 @@ Additive only. Older clients keep working under `off` and `observe`; `enforce` r
 | Recording-grant row (new) | `rgr_id`, attempt, item, part, turn, phase, `kind`, `granted_at`, windows, `lease_generation`, state and `close_reason`, the **effective enforcement mode at issue** | A grant is created, which happens only under `observe` or `enforce` |
 | Chunk and turn rows (existing tables, new nullable columns) | `rgr_id` (or NULL), **effective enforcement mode at write**, authorisation provenance (`live`, `late`, or `none`), duration provenance on turns (§5.2) | Each accepted chunk or completion written after the migration |
 | Recording-grant event rows (new) | One row per failed check: the code, the target (open, stop, chunk or completion), ids, server time, the mode | Under `observe`, a `would_refuse` for a request that was still processed. Under `enforce`, a refusal; no chunk or turn row is written, because nothing was accepted |
-| `incidents` (existing) | A summary incident per event kind (§5.3) | As for event rows |
+| Upload-reservation row (new) | Attempt, item, turn, seq, `rgr_id` (or NULL), the unique staging object key, the declared hash and size, the server admission time `t_admit`, state (`reserved` → `committed` or `failed`), the failure or reconciliation reason, the effective mode | Before any storage write for a chunk upload (§4.2.10) |
+| Evidence state (new: on the recording-grant row; for turns without a grant, on the turn row or in a separate evidence table — subject to schema review) | `none` / `partial` / `complete` / `incomplete`, the terminal reason (`upload_deadline_passed`, "no audio received"), the time of finalization, the received and missing seqs | When evidence changes state; terminal states are set only by completion or by finalization (§4.2.10) |
+| `incidents` (existing) | A summary incident per event kind (§5.3), including reservation and finalization outcomes | As for event rows, reservation outcomes and finalization |
 
 Consequences:
 - Rows written **before the migration** have no mode and no grant; they are shown as "recorded before recording grants".
@@ -256,7 +270,12 @@ No new numerical value is introduced; the boundary is the existing `upload_grace
 
 The grant is created `closed`, with `kind: late`, the flag `after_submission` and the module's `submit_kind`. It has **no capture window**, so it never authorises capture after it is issued. It registers evidence that may already exist on the device.
 
-**Expected count and safety cap.** `declared_chunks` is a client-reported expected count, a device claim. `max_chunks` is the separate server-side safety cap of §4.2.1 and §4.2.8; its values remain **[OPEN P-14]**, and a per-grant byte cap remains **[OPEN P-15]**. A declared count is never used as the cap and never proves what was captured. Under §4.2.5 a completion that disagrees with a declared count is refused; that check concerns the consistency of the client's own requests, not capture integrity. **Additional proposal [OPEN P-24], which needs explicit owner approval:** require `declared_chunks` on a post-submission late grant, so the expected size is fixed when the evidence is registered. Without P-24, such a grant completes under the general rule of §4.2.4 (contiguous `0..n-1`, count not declared, loss of trailing chunks undetectable).
+**Expected count and safety cap.** `declared_chunks` is a client-reported expected count, a device claim. `max_chunks` is the separate server-side safety cap of §4.2.1 and §4.2.8; its values remain **[OPEN P-14]**, and a per-grant byte cap remains **[OPEN P-15]**. A declared count is never used as the cap and never proves what was captured. Under §4.2.5 a completion that disagrees with a declared count is refused; that check concerns the consistency of the client's own requests, not capture integrity. Three different server checks must not be confused:
+- **(a) A request-contract check.** A required field must be present and well formed. A request that lacks it is malformed and is refused as such. This judges the request, not the audio.
+- **(b) Using a claim as authority.** A claimed count, time or offline duration is **never** used to classify a grant, to authorise capture or upload, or as proof of capture time, originality or speaker identity (P-7). It is never the upload safety cap.
+- **(c) Consistency with what actually arrived.** The server compares a declared count with the chunks it actually received. That comparison only decides whether evidence can become `complete` (§4.2.5); it says nothing about what was captured.
+
+**Additional proposal [OPEN P-24], which needs explicit owner approval:** require `declared_chunks` on a post-submission late grant, so the expected size is fixed when the evidence is registered. Without P-24, such a grant completes under the general rule of §4.2.4 (contiguous `0..n-1`, count not declared, loss of trailing chunks undetectable).
 
 **Limitation, not resolved by C1.** The server records `auto_deadline` whenever a module passes its deadline, whether or not the learner was online: any request after `deadline_at + SAVE_GRACE_MS`, or the scheduled sweep, auto-submits it. C1 therefore excludes only learners who submitted manually; it does **not** identify offline learners. It cannot stop a modified client from capturing new audio after the automatic submission and registering it as late evidence. A late grant records when the server received the registration. It is never evidence of offline recording, capture time, speaker identity or originality, and must not be described as verified offline recovery.
 
@@ -288,15 +307,33 @@ Completion is refused (proposed code `recording_evidence_pending`, listing the p
 - Before any storage I/O, the server records a durable reservation for the chunk in one atomic database step. The reservation holds the attempt, item, turn, seq, the unique staging object key, the declared hash and size, and the server admission time `t_admit`. The step succeeds only if the attempt is `in_progress`, the grant checks pass (including the cap, once enforced), and `t_admit ≤ upload_deadline_at`. A request admitted at exactly `upload_deadline_at` is eligible.
 - An admitted reservation is not refused merely because the deadline passes while its storage write is in progress. It ends in exactly one terminal state: `committed` (the chunk row is written and references its object) or `failed` (the write or commit did not happen, and the outcome is reconciled as below).
 - Attempt completion treats an unresolved reservation as pending evidence. Finalization does not mark evidence terminal while an eligible reservation for it is unresolved.
-- A crashed or abandoned reservation must not block completion forever. It must reach `failed` through reconciliation. Reconciliation checks whether the exact staging object exists with the reserved hash, and whether a committed row references it, and resolves the reservation accordingly. Deciding that a reservation is abandoned, rather than still in progress, needs a bound after which a still-unresolved reservation is reconciled. If the bound is too short, a write that is still in progress could be failed and its evidence lost. That bound is a numerical value that has not been approved **[OPEN P-14]**. A platform limit on request duration could provide evidence for it, but none has been verified here. **Implementation cannot start until this bound is settled by an owner decision or by evidence.**
+- A crashed or abandoned reservation must not block completion forever. It must reach `failed` through reconciliation. Reconciliation checks whether the exact staging object exists with the reserved hash, and whether a committed row references it, and resolves the reservation accordingly. Deciding that a reservation is abandoned, rather than still in progress, needs a bound after which a still-unresolved reservation is reconciled. If the bound is too short, a write that is still in progress could be failed and its evidence lost. That bound is a numerical value that has not been approved **[OPEN P-25]**. It is not a P-14 enforcement value (§4.2.8). A platform limit on request duration could provide evidence for it, but none has been verified here; the evidence plan is in §4.2.11. **Implementation cannot start until this bound is settled by an owner decision or by evidence.**
 
 **R2/D1 object consistency [REQUIRED — not implemented].** R2 and D1 are separate systems. A storage write and a database commit are two separate steps; they are **not** one atomic transaction. Today the object key is deterministic (`rec/<attempt>/p<part>/<turn>/<seq>`) and the object is written before the D1 decision, so a later or concurrent write to the same key can replace bytes that a committed row already describes [REPO @ ef64371]. Required:
-- every upload request writes to its own immutable, unique staging object key (the key recorded in its reservation), or uses another design verified to be equally safe; no request ever writes to a shared deterministic key before the D1 acceptance decision;
-- the committed D1 chunk row records the exact object key and the hash that were accepted;
+- **Key scope.** Each reservation receives its own staging object key. The server generates the key; it is never reused by another reservation and never derived from client input alone. The key is written by at most one handler: the one that created the reservation. No request ever writes to a shared deterministic key, or to another reservation's key, before the D1 acceptance decision. An equivalent design is acceptable only if it has been verified to be equally safe;
+- **One logical chunk at a time.** A logical chunk is (attempt, item, turn, seq). It has at most one unresolved reservation at a time. A second request for the same logical chunk while a reservation is unresolved does not write anything; it is answered as pending;
+- **Retries.** Today's chunk-upload route carries no `request_id`; it is identified by the lease, item, turn, seq and declared hash [REPO @ ef64371]. A retry is therefore a request for the same logical chunk with the same declared hash. It is answered from the existing reservation and does not write again:
+  - if the reservation is `committed` with the same hash, the answer is `duplicate`;
+  - if it is unresolved, the answer is pending;
+  - only after reconciliation has marked it `failed` may a later request create a **new** reservation with a **new** key.
+
+  A request for the same logical chunk with a **different** hash is refused (`chunk_conflict`, the existing rule) while any reservation for it is unresolved or committed.
+
+  A handler never rewrites a key whose earlier write outcome is unknown. It reconciles first;
+- **Byte verification.** The server computes the SHA-256 hash and the size of the bytes it actually received, and writes exactly those bytes. Today's code already hashes and size-checks the received buffer before writing (`api.js:530–534`) [REPO @ ef64371]. A reservation is committed only if that computed hash and size equal the hash and size recorded in the reservation;
+- **Stored-copy integrity (design prerequisite).** The committed row must reference an object whose stored content matches the committed hash. A mechanism to confirm this (for example, reading the object back, or a checksum returned by R2) is **not verified** (§4.2.11 V9). Until one is verified, the design must not assume it;
+- the committed D1 chunk row records the exact object key, hash and size that were accepted;
 - cleanup never deletes, replaces or alters an object referenced by a valid committed chunk row;
-- an unreferenced staging object is removed only after reconciliation confirms that no committed row references that exact key. When the outcome is ambiguous (for example, a reservation whose commit result is unknown), it is reconciled first, not deleted.
+- **Ambiguous outcomes.** Where the result of a storage write or a commit is unknown, the reservation stays unresolved. Reconciliation determines the outcome before any retry, new reservation or cleanup for that logical chunk. An unreferenced staging object is removed only after reconciliation confirms that no committed row references that exact key.
 
 The reservation before storage I/O and the reconciliation after it together close the gap between the two steps. Every admitted upload is either committed with its exact object, or explicitly failed and cleaned up, and no committed evidence can be overwritten. This is a requirement for future implementation review; it has not been built or tested.
+
+**Required properties versus verified platform capabilities.** The requirements above do not depend on any unverified platform feature. Which platform capabilities could help is **not verified**:
+- whether R2 offers a conditional write that refuses to overwrite an existing key;
+- whether listing R2 objects by prefix is reliable enough for reconciliation sweeps;
+- whether the Workers platform enforces a maximum request duration (which could inform P-25).
+
+A unique key per reservation, with a single writer, makes the design safe without a conditional write. Reconciliation works from the reservation rows rather than from listing. Each capability above must be verified (§4.2.11) before an implementation relies on it.
 
 **Race between acceptance and completion.** Reservation creation, turn completion and late-grant creation must each be conditional, in the same atomic database step as their write, on the attempt still being `in_progress` and on their eligibility time being `≤ upload_deadline_at`. Committing an admitted reservation is not re-checked against the deadline. It is still conditional on the reservation not having been failed by reconciliation; if it was, the late commit is refused and reconciled. Finalization is conditional on `t > upload_deadline_at` and on no unresolved eligible reservation. Attempt completion must, in one atomic step, finalize expired evidence, confirm that no pending evidence or unresolved reservation remains, and set the attempt `completed`. These are required guarantees. The mechanism needs implementation review, and whether D1 provides them under concurrent Worker instances is **not yet verified** (§4.2.6).
 
@@ -312,7 +349,25 @@ The reservation before storage I/O and the reconciliation after it together clos
 
 **Recommendation — NOT APPROVED:** keep evidence-lifecycle safety (the completion gate and finalization) independent of the modes, and let the modes govern only recording-grant and phase checks. Whether the gate needs its own rollout control, and how it applies to attempts already in progress when it is introduced, remain part of P-23.
 
-**Implementation readiness.** Not implementation-ready until all of these are done: formal approval of P-4 and P-8; P-23; P-24 if C1 is to require a declared count; schema review of the evidence state and of upload reservations; a reviewed design for upload reservations and R2/D1 reconciliation; the reservation abandonment bound **[OPEN P-14]**; verification of the atomicity requirements on D1 (§4.2.6); and, for multipliers other than 1.0, P-18. The `max_chunks` values and any byte cap remain open (P-14, P-15).
+**Implementation readiness.** Not implementation-ready until all of these are done: formal approval of P-4 and P-8; P-23; P-24 if C1 is to require a declared count; schema review of the evidence state and of upload reservations; a reviewed design for upload reservations and R2/D1 reconciliation; the reservation abandonment bound **[OPEN P-25]**; verification of the atomicity requirements on D1 (§4.2.6), following §4.2.11; and, for multipliers other than 1.0, either P-18 or the first-version exclusion of §4.2.2. Whether a per-grant byte cap is required, and at which stage, is P-15. P-15 may remain OPEN at implementation start only if the implementation contains **no** per-grant cap. It must be decided before the earlier of: any per-grant cap being evaluated in any mode, and entering `enforce`. The `max_chunks` values and any byte-cap value are P-14 enforcement values, which are not needed before implementation because nothing is enforced until `enforce` is approved.
+
+#### 4.2.11 Technical verification plan [PROPOSED — NOT RUN]
+
+None of these tests has been run. A passing in-process SQLite harness is **not** evidence for any item in this table. All tests use a **non-production** environment: a separate D1 database, a separate R2 bucket and a separate Worker deployment, with synthetic attempts only, no learner data and no production audio.
+
+| # | What must be shown | Method | Pass condition | Informs |
+|---|---|---|---|---|
+| V1 | D1 batch atomicity and write serialisation for grant creation | Many concurrent `turns/open` requests for the same attempt, from parallel clients against the deployed non-production Worker | Exactly one `open` grant per scope; every other request receives the existing grant or `recording_grant_active`; no partial batch effects | §4.2.6; P-17 |
+| V2 | Atomic attempt completion versus concurrent acceptance | Race completion against reservation creation, turn completion and late-grant creation around `upload_deadline_at` | No accepted write after `completed`; completion never succeeds while evidence or a reservation is pending; boundary `t = upload_deadline_at` behaves as specified | §4.2.10 |
+| V3 | Reservation lifecycle under failure | Inject failures: R2 write error, Worker termination after the R2 write and before the D1 commit, D1 commit refused, duplicate retry | Every reservation reaches `committed` or `failed`; no committed row references a missing or mismatched object; no orphan is deleted while ambiguous | §4.2.10; P-25 |
+| V4 | Reservation abandonment bound evidence | Measure end-to-end chunk upload durations (including slow and throttled networks), and verify any platform request-duration limit from authoritative documentation and a direct test | A documented distribution and verified limit from which an owner can choose the P-25 value | P-25 |
+| V5 | Finalization idempotency | Run lazy finalization and the scheduled sweep concurrently and repeatedly on the same expired evidence | Exactly one terminal transition per evidence record; repeated runs change nothing; nothing is finalized while an eligible reservation is unresolved | §4.2.10 |
+| V6 | Storage reconciliation safety | Seed committed objects, orphaned staging objects and ambiguous reservations; run cleanup | No object referenced by a committed row is deleted or altered; only confirmed-unreferenced staging objects are removed; ambiguous cases are reconciled first | §4.2.10 R2/D1 |
+| V7 | Platform capabilities used by the design | Verify, from authoritative documentation and a direct test, any R2 conditional-write or listing behaviour that an implementation intends to rely on | Each relied-upon capability is confirmed, or the design does not depend on it | §4.2.10 |
+| V8 | Retries and concurrent handlers for one logical chunk | Replay the same logical chunk with the same hash, and with a different hash; send concurrent requests for the same (attempt, item, turn, seq); retry after a timeout whose write outcome is unknown | At most one unresolved reservation per logical chunk; no key is written by two handlers; no rewrite of a key with an unknown outcome; retries answered `duplicate` or pending | §4.2.10 R2/D1 |
+| V9 | Stored-copy integrity | For committed rows, confirm the stored object's bytes match the committed hash and size, using a mechanism verified from authoritative documentation and a direct test (for example a read-back) | Every committed row references an object whose content matches; the confirmation mechanism is documented | §4.2.10 R2/D1 |
+
+The browser measurements of §4.2.8 (D3 evidence) are separate. They need the browser matrix and are informed by observe-mode runs (§10).
 
 ## 5. Interruption recovery
 
@@ -360,7 +415,13 @@ Whether this belongs in the F4 change or a separate follow-up is **[OPEN P-11]**
 
 ### 5.3 Incidents and reviewer-visible uncertainty [PROPOSED]
 
-Proposed incident kinds: `recording_grant_late`, `recording_grant_refused`, `recording_grant_would_refuse` (observe mode), `recording_interrupted`, `recording_incomplete`, `recording_grant_closed_by_lease_change`. Details are limited to ids, seq numbers, refusal codes, server times, the lease generation, the enforcement mode and labelled device claims. They contain no audio, transcript, IP address or user-agent string.
+Proposed incident kinds: `recording_grant_late`, `recording_grant_refused`, `recording_grant_would_refuse` (observe mode), `recording_interrupted`, `recording_incomplete`, `recording_grant_closed_by_lease_change`. For the evidence lifecycle of §4.2.10:
+- `recording_reservation_failed`, with the reason: `storage_write_failed`, `commit_refused`, `abandoned` (P-25) or `reconciled_failed`;
+- `recording_reservation_reconciled`, with the outcome: committed object found and confirmed, or failed;
+- `recording_evidence_finalized`, with the terminal reason, such as `upload_deadline_passed` or "no audio received", and the received and missing seqs;
+- `recording_staging_object_removed`, recording only an unreferenced staging object removed after reconciliation.
+
+`recording_incomplete` remains the summary shown to raters. Details are limited to ids, seq numbers, refusal codes, server times, the lease generation, the enforcement mode and labelled device claims. They contain no audio, transcript, IP address or user-agent string.
 
 Raters see per turn:
 - the authorisation kind, or "recorded before recording grants";
@@ -380,7 +441,7 @@ A missing or incomplete turn is shown as a technical incident, never as "the lea
 - **No consent → no recording**, and Sprechen is not available.
 - **Storage:** private R2 `klarweg-exam-recordings`; no public URLs; raters stream via signed, rater-bound URLs (TTL 10 min).
 - **Retention proposal:** recordings deleted 90 days after the final rating (or on learner request). Transcripts and ratings are kept with the result. Pilot recordings are kept longer **only** with a separate research consent.
-  - *Note (2026-10-11):* register OD-21 states 30 days. The discrepancy is unresolved **[OPEN P-20]**; this bullet is left unchanged on purpose.
+  - *Note (2026-10-11):* this bullet is superseded. The decision register already resolves the conflict: R-08 is resolved by OWN-D19, and OD-21 (LOCKED mechanism, signed v1.1) sets an admin-configurable default of **30 days** after the final rating. Under the register's precedence rule OD-21 governs. The bullet is left unchanged as a record of the original proposal. P-20 is listed as open only until the owner confirms its scope (§4.1, §12).
 - **Consent withdrawal:** no withdrawal route exists yet **[OPEN P-19]** (§4.1). Recording grants do not resolve consent, privacy, retention or access-control requirements.
 - Learners may replay their own recordings in review until deletion.
 
@@ -424,12 +485,12 @@ turn manifests ─► transcription (Tutor: transcribe_long, per turn ≤ 60 s c
 - OD-24/OD-32 (partner model, Teil 3 construct)
 - Premium partner/examiner voice production (audio spec B3, OD-14)
 - Legal review of voice-data processing (an OpenAI sub-processor for transcription)
-- F4 recording grants: owner decisions in §11, D3 evidence (§4.2.8) and verification of the database guarantees (§4.2.6). No implementation is authorised by this draft
+- F4 recording grants: owner decisions in §11 (formal record: decision register §B.2), the reservation abandonment bound (P-25), D3 evidence (§4.2.8) and the verification plan (§4.2.11). No implementation is authorised by this draft
 
 ## 10. Rollout and rollback of recording grants [PROPOSED — mechanism OPEN P-13]
 
 **Modes.**
-- `off`: current behaviour; no recording-grant checks.
+- `off`: no recording-grant or phase checks. This is current behaviour, except for the completion gate and evidence finalization if P-23 makes them independent of the modes (§4.2.10, §12).
 - `observe`: every check runs; a failing check writes `recording_grant_would_refuse` and the request continues as under `off`.
 - `enforce`: failing checks are refused.
 
@@ -452,8 +513,8 @@ turn manifests ─► transcription (Tutor: transcribe_long, per turn ≤ 60 s c
 A combination (versioned policy with an override that can only lower it) is possible. The mechanism is not chosen **[OPEN P-13]**. The production configuration of the exam Worker has not been verified; the repository's `wrangler.toml` sets every `EXAM_*` flag to `off`.
 
 **Staged plan (design only).**
-1. Review and merge this specification with the open items recorded.
-2. Implementation PR, reviewed independently; synthetic content only.
+1. Review and merge this specification with the open items recorded, and record the formal owner decisions in the decision register, §B.2.
+2. **Before implementation:** P-25 settled (§4.2.11 V4), the schema and reservation design reviewed, and the decisions listed in §12 as first-version prerequisites formally recorded. Then an implementation PR, reviewed independently, using synthetic content only. Deployment order: the updated client is served **before** any server change that can return a new refusal (§4.2.9).
 3. Baseline measurement with `off` (D3 evidence).
 4. `observe` on synthetic attempts; collect `would_refuse` events by code.
 5. Owner approval of D3 values and of P-18, with the multiplier rule stated consistently across specs and code. Then a separate explicit owner approval to enter `enforce`.
@@ -478,7 +539,7 @@ None of this authorises learner access, a pilot, production audio, deployment or
 
 These authorise design work only.
 
-**Open decisions:**
+**Open decisions.** The formal record of each item's status is the decision register, §B.2 (`F4/P-n`); this table mirrors it. A status changes only through a register revision with owner sign-off. Recommendations (§12) never change a status.
 
 | ID | Decision |
 |---|---|
@@ -505,7 +566,64 @@ These authorise design work only.
 | P-22 | Chunks captured after a plain lease expiry: evidence flag or resumption |
 | P-23 | Whether the completion gate and evidence finalization follow the `off`/`observe`/`enforce` modes |
 | P-24 | Whether a post-submission late grant must carry a declared chunk count (C1 dependency) |
+| P-25 | Reservation abandonment bound (needed before implementation; not a P-14 enforcement value) |
 
 P-16 (how known client defects relate to PR #53) is a review item outside this specification.
 
 Recording grants do not close EX-03, Q14/M-28, OD-08, EX-01, EX-04, EX-05, OD-07/OD-30, OD-14/EX-06, or any calibration, privacy, consent, accessibility, originality, scoring or release gate.
+
+## 12. Recommended first-version path [AI-PREPARED RECOMMENDATION — NOT APPROVED]
+
+This section proposes one coherent path through the open items, so the owner can review it as a single package. It was prepared with AI assistance under the owner's delegation to recommend options. **It is not an owner decision, not a human review and not an implementation authorisation.** It changes no status in §11 or in the decision register (§B.2). A recommendation becomes a decision only when the owner records it in the register.
+
+### 12.1 Recommended options
+
+| Item | Recommendation | Rationale |
+|---|---|---|
+| P-4 | Keep the owner-selected **A-bounded** for formal approval; no learner override in the first version | Uses only server facts; protects evidence the server can see; bounded by the existing upload deadline |
+| P-8 | Keep the owner-selected **C1** for formal approval, with its limitation stated verbatim (§4.2.10) | Excludes learners who submitted manually; C1 is never proof of offline capture |
+| P-23 | The completion gate and finalization are **independent of the modes**: active in `off`, `observe` and `enforce`. Deploy order: updated client first, then the gate. No separate switch for the gate | Tying them to the modes breaks A-bounded under `off` and `observe` (§4.2.10). A switch that can turn the safety gate off recreates the stranding risk. Under OD-53 only synthetic attempts exist, so rollout risk is limited |
+| P-24 | **Require** `declared_chunks` on C1 late grants, as a **request-contract check** (§4.2.10 check (a)). A missing or malformed value refuses the request as malformed. The value is then used only for the consistency check (c), never as authority (b) | A late registration happens after capture has ended, so the count is known. It makes loss of trailing chunks detectable. It is a device claim: it proves nothing about capture time, originality or speaker identity, is never the upload cap, and never authorises anything |
+| P-25 | Settle the bound **from evidence** (§4.2.11 V4) before implementation; no value is proposed here | Too short loses evidence that is still being written; too long delays completion. Only measured upload durations and a verified platform limit can justify a value |
+| P-15 | The first version implements **no per-grant byte cap** and relies on the existing caps (256 KiB per chunk, 10 MiB per attempt) and on `max_chunks` once enforced. P-15 **stays OPEN** and must be decided before the earlier of: any per-grant cap being evaluated in any mode (including `observe`), and entering `enforce` (§12.3). Revisit after bitrate measurements | Avoids an unmeasured threshold. The existing caps already bound storage use. Leaving P-15 open does not permit enabling a cap |
+| P-14 | Unchanged: enforcement values are approved after observe-mode evidence (§10) | Nothing is enforced before then |
+| P-18 | First version: the exclusion rule of §4.2.2. Resolve the timing policy through OD-41, with EX-04 and EX-08 input, **before any pilot** | Unblocks a synthetic first version without deciding an accommodation policy |
+| P-17 | **Per attempt** | Matches the lease scope, so the uniqueness constraint is straightforward; P-21 then does not arise |
+| P-7 | `late` is decided only from **server-observed** facts. The **value** of a device claim never classifies, authorises, refuses or accepts a grant or audio; it can only add flags (§4.2.10 check (b)). This does not exclude request-contract checks (a), such as P-24's required field, or the count-consistency check (c) | Claims are unverifiable; separating the three checks keeps P-7 and P-24 compatible |
+| P-22 | **Flag** affected evidence `lease_interrupted`; no resumption | Simplest safe option; reviewers see the uncertainty |
+| P-13 | **Option A** (Worker variable) for the synthetic phase; reconsider Option B before real forms | Fast rollback and low cost while only synthetic attempts exist |
+| P-6 | An explicit, validated phase-to-part binding in the level configuration, with `teil<N>` kept as a validated fallback. **No recording grants for the introduction** until an intro item type is specified | The server needs a binding to check phases; the synthetic form has no intro item |
+| P-11 | Include duration provenance (`client_wallclock`, `chunk_estimate`) and the `recording_interrupted` incident in the **first** migration; reviewer-interface display later | Avoids a second migration; keeps estimated durations from being shown as measured |
+| P-3 | **Defer**; keep the current rule (one grant per turn, an empty closed grant is not reopened) | Safe default; no first-version dependency |
+| P-20 | Owner to confirm in the register that retention is governed by OD-21 (the R-08 resolution), and then retire or rescope P-20 | The register already decided the 30-day default (§4.1); a second open item invites conflict |
+| P-16 / PR #53 | **Fix first** before merging PR #53 (details below) | Its client is the base for F4 client work |
+
+### 12.2 PR #53 (recommendation only; PR #53 is not modified by this document)
+
+Before merging PR #53:
+1. Label its "preparation only" multiplier behaviour and its 10 s topic grace as **provisional**, pending P-18 and P-12. Correct the code comment that attributes the multiplier rule to SPEAKING §2, which does not state it.
+2. Stop capture and release the microphone when the lease is superseded.
+3. Recover from `lease_expired` without a page reload.
+
+Two further client changes belong to the F4 client work: re-sending buffered chunks after module submission, and **attempt-scoped local chunk keys**. Today the local key on `main` is `chunk:<item_id>:<turn>:<seq>`, **without** an attempt id (`exam/js/recorder.js:14`, `:19`), and PR #53 does not change it (§4.1). Scoping the key to attempt + recording grant + seq (§4.2.4) is a **required future change**, not existing behaviour.
+
+**Alternative:** merge as-is with the provisional labels only, and do all client fixes in the F4 client PR. **Not recommended**, because the superseded-tab recording is a privacy issue.
+
+### 12.3 What may be deferred, and under which conditions
+
+| Deferred until | Items | Condition |
+|---|---|---|
+| Before `enforce` | P-1, P-2, P-14, P-15 | No refusal is enforced before approval. P-15 must also be decided before any per-grant byte cap is evaluated in any mode, if that comes first; until then the implementation contains no per-grant cap |
+| Before any pilot or learner access | P-5, P-9, P-18 (policy), P-19, P-20 | Privacy (EX-01) and accessibility (EX-04) review; OD-53 permits no learners meanwhile |
+| Follow-up | P-3, P-10, P-12, P-21 | The default rules above apply; P-12 is decided together with PR #53 |
+
+### 12.4 Owner decisions needed before implementation can be authorised
+
+Formal approval, recorded in the register §B.2, of: P-4, P-8, P-23, P-24, P-17, P-7, P-22, P-13, P-6, P-11, and the first-version treatment of P-18 (§4.2.2). P-15 may stay OPEN at implementation start **only** if the implementation contains no per-grant byte cap (§12.3). In addition:
+- P-25 settled from evidence (§4.2.11 V4);
+- V1–V3 and V5–V7 planned on a non-production environment;
+- the schema and reservation design reviewed;
+- a decision on PR #53;
+- a separate, explicit implementation authorisation.
+
+OD-53 remains **OWNER DECISION — CONDITIONAL**: no learner access, pilot, production audio, deployment or release.

@@ -2,7 +2,7 @@
 
 > **Status:** design only. No prompts, partner scripts, recordings or rating texts are created.
 > **Sources:** Standard §5.4, §6.4, §8.3 (official: S1 §1.4, §3, §5; S3 p.25–28, 45–47). **Labels:** **[OFFICIAL]** · **[DESIGN]** · **[UNKNOWN]** · **[OD-xx]**.
-> **F4 recording grants (draft, 2026-10-11):** §4.2, §5.1–§5.3 and §10 are **PROPOSED — NOT IMPLEMENTED**; §4.2.11 is a verification plan whose tests have **not** been run; §4.1 records observed implementation status and conflicts; §5.4 and §11 record open decisions; §12 is an AI-prepared recommendation; the options marked **[OWNER-APPROVED]** there were approved by the owner's written instruction of 2026-10-11, and the rest are **not approved**. The formal record of every F4 decision status is the decision register, §B.2 (`F4/P-n`); §11 mirrors it. The proposals follow the owner's F4 directions F4-D1…F4-D5 (§11) and record every remaining owner decision as **[OPEN P-n]**. Additional labels: **[REPO @ ef64371]** = observed in the repository at that commit · **[PR #53]** = present only in the unmerged PR #53 · **[PROPOSED]** = design proposal, not a contract · **[OWNER-APPROVED]** = an option approved by the owner's written instruction of 2026-10-11 and recorded in the decision register §B.2 (v1.5 draft edition). An approved option is a policy choice; it does **not** mean the design is implemented or authorised for implementation. This draft was prepared with AI assistance; it is not a human review and closes no gate.
+> **F4 recording grants (draft, 2026-10-11):** §4.2, §5.1–§5.3 and §10 are **PROPOSED — NOT IMPLEMENTED**; §4.2.11 is a verification plan whose tests have **not** been run; §4.1 records observed implementation status and conflicts; §5.4 and §11 record open decisions; §12 is an AI-prepared recommendation; the options marked **[OWNER-APPROVED]** there were approved by the owner's written instruction of 2026-10-11, and the rest are **not approved**. The formal record of every F4 decision status is the decision register, §B.2 (`F4/P-n`); §11 mirrors it. The proposals follow the owner's F4 directions F4-D1…F4-D5 (§11) and record every remaining owner decision as **[OPEN P-n]**. Additional labels: **[REPO @ ef64371]** = observed in the repository at that commit · **[PR #53]** = present only in the unmerged PR #53 · **[PROPOSED]** = design proposal, not a contract · **[OWNER-APPROVED]** = an option approved by the owner's written instruction of 2026-10-11 and recorded in the decision register §B.2 (v1.5). An approved option is a policy choice; it does **not** mean the design is implemented or authorised for implementation. This draft was prepared with AI assistance; it is not a human review and closes no gate.
 
 ---
 
@@ -541,7 +541,7 @@ None of this authorises learner access, a pilot, production audio, deployment or
 
 These authorise design work only.
 
-**Decisions.** The formal record of each item's status is the decision register, §B.2 (`F4/P-n`; v1.5 draft edition, based on the owner's written instruction of 2026-10-11); this table mirrors it. An approved option does not authorise implementation or close any testing, privacy, pilot, learner-access, deployment or release gate. A status changes only through a register revision with owner sign-off. Recommendations (§12) never change a status.
+**Decisions.** The formal record of each item's status is the decision register, §B.2 (`F4/P-n`; register v1.5, based on the owner's written instruction of 2026-10-11); this table mirrors it. An approved option does not authorise implementation or close any testing, privacy, pilot, learner-access, deployment or release gate. A status changes only through a register revision with owner sign-off. Recommendations (§12) never change a status.
 
 | ID | Decision |
 |---|---|
@@ -578,7 +578,7 @@ Recording grants do not close EX-03, Q14/M-28, OD-08, EX-01, EX-04, EX-05, OD-07
 
 This section proposes one coherent path through the open items, so the owner can review it as a single package. It was prepared with AI assistance under the owner's delegation to recommend options. The rationales are AI-prepared and are **not a human review**.
 
-By written instruction of 2026-10-11, the owner approved the options marked **[OWNER-APPROVED]** below: P-4, P-6, P-7, P-8, P-11, P-13, P-17, P-22, P-23, P-24, and P-18's first-version treatment only. They are recorded in the decision register §B.2 (v1.5 draft edition). Every other recommendation here remains **NOT APPROVED** and changes no status. No approval here is an implementation authorisation.
+By written instruction of 2026-10-11, the owner approved the options marked **[OWNER-APPROVED]** below: P-4, P-6, P-7, P-8, P-11, P-13, P-17, P-22, P-23, P-24, and P-18's first-version treatment only. They are recorded in the decision register §B.2 (v1.5). Every other recommendation here remains **NOT APPROVED** and changes no status. No approval here is an implementation authorisation.
 
 ### 12.1 Recommended options
 
@@ -628,10 +628,9 @@ Two further client changes belong to the F4 client work: re-sending buffered chu
 
 ### 12.4 Owner decisions needed before implementation can be authorised
 
-**Recorded (owner's written instruction of 2026-10-11; register §B.2, v1.5 draft edition):** P-4, P-8, P-23, P-24, P-17, P-7, P-22, P-13, P-6, P-11, and the first-version treatment of P-18 (§4.2.2).
+**Recorded (owner's written instruction of 2026-10-11; register §B.2, v1.5):** P-4, P-8, P-23, P-24, P-17, P-7, P-22, P-13, P-6, P-11, and the first-version treatment of P-18 (§4.2.2).
 
 **Still outstanding before implementation can be authorised.** P-15 may stay OPEN at implementation start **only** if the implementation contains no per-grant byte cap (§12.3). In addition:
-- owner review of the v1.5 register edition;
 - P-25 settled from evidence (§4.2.11 V4);
 - V1–V3 and V5–V7 planned on a non-production environment;
 - the schema and reservation design reviewed;

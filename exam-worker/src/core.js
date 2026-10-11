@@ -106,9 +106,15 @@ export function computeDeadline(cfg, modCfg, pkg, startedAt, { planStartedAt = n
   }
   if (tm.kind === 'speaking_phases') {
     const p = tm.plan;
-    return startedAt + Math.round(p.prep_ms * multiplier) + (p.total_ms - p.prep_ms);
+    return speakingPrepEnd(p, startedAt, multiplier) + (p.total_ms - p.prep_ms);
   }
   throw new Error(`unknown timing kind ${tm.kind}`);
+}
+
+/* End of the Sprechen preparation (SPEAKING-SPEC §2): the time multiplier applies to the preparation only.
+   The Teil 2 topic choice locks here (changeable during the preparation). */
+export function speakingPrepEnd(plan, startedAt, multiplier = 1) {
+  return startedAt + Math.round(plan.prep_ms * multiplier);
 }
 
 /* ---------- settle: auto-submit past deadline; resume interrupted finalizations ---------- */

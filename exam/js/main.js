@@ -8,6 +8,9 @@ import { createRenderer, header, resultPage, esc, MODULE_LABELS } from './render
 import { nextAction, assertSupported, unansweredCount } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
 import { ChunkQueue, TurnRecorder } from './recorder.js';
+import { speakingPhaseAt, prepEndsAt, topicItems } from './sprechen.js';
+import { createSpeakingDriver } from './sprechen-driver.js';
+import { createSpeakingAudio } from './speaking-audio.js';
 import { countWords } from './wordcount.js';
 import { randomId } from './ids.js';
 
@@ -17,7 +20,8 @@ const base = (document.querySelector('meta[name="kw-exam-api"]') || {}).content 
 const clock = new ServerClock();
 const api = createApi({ base, clock });
 const renderer = createRenderer();
-const S = { attempt: null, lease: null, pkg: null, answers: {}, autosave: null, module: null, timer: null, hb: null, store: null };
+const S = { attempt: null, lease: null, pkg: null, answers: {}, autosave: null, module: null, timer: null, hb: null, store: null, locked: new Set(), sprechen: null };
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function deviceId() {
   try { let d = localStorage.getItem('kx-device'); if (!d) { d = randomId('dev'); localStorage.setItem('kx-device', d); } return d; } catch { return randomId('dev'); }
@@ -90,6 +94,7 @@ function intro(module) {
 async function openModule(module) {
   const id = S.attempt.attempt_id;
   S.module = module;
+  S.locked = new Set(); S.sprechen = null;
   announced = {};
   const p = await api.pkg(id, S.lease, module);
   S.pkg = p.package;
@@ -99,12 +104,23 @@ async function openModule(module) {
   S.autosave = new Autosave({
     key: `answers:${id}:${module}`, store: S.store,
     send: (batch, requestId) => api.save(id, S.lease, module, batch, requestId),
-    onState: () => paintHeader(), onFatal: (code) => { if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else refresh(); }
+    onState: () => paintHeader(), onFatal: (code) => { if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else refresh(); },
+    onDropped: (code, batch) => syncFromServer(batch.map((b) => b.item_id)).then(() => {
+      if (code === 'topic_locked') { announce('Die Themenwahl ist gesperrt. Ihre Änderung wurde nicht gespeichert.'); applyTopicLock(false); }
+    }).catch(() => {})
   });
   await S.autosave.load(saved.answers);
+  if (module === 'sprechen' && S.pkg.timing.kind === 'speaking_phases') {
+    const m = moduleState();
+    S.sprechen = { plan: S.pkg.timing.plan, startedAt: m.started_at, multiplier: S.attempt.time_multiplier || 1 };
+    // after a refresh past the preparation the topic choice renders locked straight away
+    if (clock.serverNow() >= prepEndsAt(S.sprechen.plan, m.started_at, S.sprechen.multiplier)) for (const t of topicItems(S.pkg)) S.locked.add(t.item_id);
+  }
+  // unsent local answers are shown again — except for locked items, whose server value is authoritative
   const local = (await S.store.get(`answers:${id}:${module}`)) || {};
-  for (const v of Object.values(local.pending || {})) S.answers[v.item_id] = v.value;
+  for (const v of Object.values(local.pending || {})) if (!S.locked.has(v.item_id)) S.answers[v.item_id] = v.value;
   paint();
+  if (S.locked.size) applyTopicLock(false);
   clearInterval(S.timer);
   S.timer = setInterval(tick, 250);
   const guard = (e) => { if (S.module === module) fail(e); };   // after submit, a stopped loop is not an error
@@ -119,7 +135,8 @@ function paintHeader() {
   if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state });
 }
 function paint() {
-  screen(`<div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p><p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers)}</main>`
+  const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p><div class="kx-alerts" id="kx-alerts"></div>' : '';
+  screen(`<div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
     + `<footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
   paintHeader();
 }
@@ -128,6 +145,10 @@ function tick() {
   const m = moduleState(); if (!m) return;
   const rem = clock.remaining(m.deadline_at);
   const t = $('.kx-timer'); if (t) t.textContent = formatRemaining(rem);
+  if (S.sprechen) {   // time left in the current Sprechen phase (server time)
+    const at = speakingPhaseAt(S.sprechen.plan, S.sprechen.startedAt, clock.serverNow(), S.sprechen.multiplier);
+    const pt = $('#kx-phase-time'); if (pt) pt.textContent = at.state === 'running' ? `Diese Phase: noch ${formatRemaining(at.remaining_ms)}` : '';
+  }
   for (const mark of [300_000, 60_000]) if (rem <= mark && !announced[mark]) { announced[mark] = true; const ph = $('#kx-announce'); if (ph) ph.textContent = `Noch ${mark / 60_000} Minute${mark > 60_000 ? 'n' : ''}.`; }
   if (rem === 0) { clearInterval(S.timer); setTimeout(refresh, 11_000); }   // server auto-submits after its grace
 }
@@ -211,41 +232,123 @@ async function runHoeren() {
   loop();
 }
 
-/* ---------- Sprechen ---------- */
+/* ---------- Sprechen (SPEAKING-SPEC §2, §5) ---------- */
+const announce = (text) => { const el = $('#kx-announce'); if (el) el.textContent = text; };
+const safeId = (s) => String(s).replace(/[^a-zA-Z0-9_-]/g, '_');
+
+/* Server answers for these items replace the local ones (after a refused save, e.g. topic_locked). */
+async function syncFromServer(itemIds) {
+  const saved = await api.answers(S.attempt.attempt_id, S.lease, S.module);
+  for (const id of itemIds) {
+    const row = saved.answers.find((a) => a.item_id === id);
+    if (row) S.answers[id] = row.value; else delete S.answers[id];
+    for (const el of document.querySelectorAll(`[data-item="${CSS.escape(id)}"]`)) {
+      if (el.type === 'radio') el.checked = !!row && row.value.option_id === el.value;
+      else if (el.tagName === 'SELECT') el.value = row ? row.value.option_id || '' : '';
+    }
+  }
+}
+
+/* Locks the Teil 2 topic choice: controls disabled, a note tied to the group (aria-describedby) says what was
+   chosen — or that no topic was chosen (no default is assumed). With announce, the change is also announced. */
+function applyTopicLock(withAnnouncement) {
+  if (!S.pkg) return;
+  for (const t of topicItems(S.pkg)) {
+    S.locked.add(t.item_id);
+    const inputs = [...document.querySelectorAll(`[data-item="${CSS.escape(t.item_id)}"]`)];
+    for (const el of inputs) el.disabled = true;
+    const chosen = inputs.find((el) => el.checked);
+    const chosenLabel = chosen ? (chosen.closest('label')?.querySelector('.kx-opt-label')?.textContent || chosen.value) : null;
+    const text = chosen ? `Die Themenwahl ist gesperrt. Gewählt: ${chosenLabel}.` : 'Die Themenwahl ist gesperrt. Es wurde kein Thema gewählt.';
+    const group = document.getElementById(`item-${safeId(t.item_id)}`);
+    if (group) {
+      const noteId = `lock-${safeId(t.item_id)}`;
+      let note = document.getElementById(noteId);
+      if (!note) { note = document.createElement('p'); note.id = noteId; note.className = 'kx-lock-note'; group.appendChild(note); }
+      note.textContent = text;
+      group.setAttribute('aria-describedby', noteId);
+    }
+    if (withAnnouncement) announce(`Die Vorbereitung ist beendet. ${text}`);
+  }
+  if (S.autosave) S.autosave.flush().catch(() => {});   // send a last-second choice now (the server allows the save grace)
+}
+
+/* Accessible alerts above the module (role="alert"), one per kind, optionally with an action button. */
+function showAlert(kind, text, action = null) {
+  const box = $('#kx-alerts'); if (!box) return null;
+  let el = box.querySelector(`[data-kind="${kind}"]`);
+  if (!el) { el = document.createElement('div'); el.className = 'kx-alert'; el.dataset.kind = kind; el.setAttribute('role', 'alert'); box.appendChild(el); }
+  el.innerHTML = `<p>${esc(text)}</p>` + (action ? `<button type="button" class="kx-btn" data-act="${esc(action.act)}">${esc(action.label)}</button>` : '');
+  return el;
+}
+function clearAlert(kind) { const el = document.querySelector(`#kx-alerts [data-kind="${kind}"]`); if (el) el.remove(); }
+
+/* Browser autoplay refused (e.g. after a reload without a click): ask for one click. Resolves 'clicked',
+   'timeout' (the phase ended first) or 'cancelled' (module left). The click gives the page user activation, so the
+   retried play() is allowed. */
+function requestAudioGesture(endsAt) {
+  return new Promise((resolve) => {
+    const el = showAlert('gesture', 'Ihr Browser hat die Wiedergabe blockiert. Bitte starten Sie das Audio.', { act: 'audio-start', label: 'Audio starten' });
+    const btn = el && el.querySelector('button'); if (btn) btn.focus({ preventScroll: true });
+    let finished = false;
+    const finish = (r) => { if (finished) return; finished = true; S.gestureResolve = null; clearAlert('gesture'); resolve(r); };
+    S.gestureResolve = () => finish('clicked');
+    (async () => { while (!finished) { if (S.module !== 'sprechen') return finish('cancelled'); if (clock.serverNow() >= endsAt) return finish('timeout'); await sleep(200); } })();
+  });
+}
+
+/* Microphone: requested right before the first recording (not during the preparation). Errors are reported as
+   microphone problems, with a retry; turns without a microphone are not recorded (nothing is fabricated). */
+const MIC_MESSAGES = {
+  NotAllowedError: 'Kein Zugriff auf das Mikrofon. Erlauben Sie den Mikrofonzugriff in Ihrem Browser und wählen Sie dann „Mikrofon erneut versuchen“.',
+  SecurityError: 'Kein Zugriff auf das Mikrofon. Erlauben Sie den Mikrofonzugriff in Ihrem Browser und wählen Sie dann „Mikrofon erneut versuchen“.',
+  NotFoundError: 'Es wurde kein Mikrofon gefunden. Schließen Sie ein Mikrofon an und wählen Sie dann „Mikrofon erneut versuchen“.',
+  NotReadableError: 'Das Mikrofon wird von einer anderen Anwendung verwendet oder ist nicht bereit.'
+};
+async function getMic() {
+  if (S.micStream && S.micStream.getAudioTracks().some((tr) => tr.readyState === 'live')) return S.micStream;
+  try {
+    S.micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    clearAlert('mic');
+    return S.micStream;
+  } catch (e) {
+    const name = (e && e.name) || 'Error';
+    showAlert('mic', MIC_MESSAGES[name] || 'Das Mikrofon konnte nicht gestartet werden.', { act: 'mic-retry', label: 'Mikrofon erneut versuchen' });
+    console.warn('[kx-sprechen]', 'microphone_unavailable', { name });
+    return null;
+  }
+}
+function releaseMic() { if (S.micStream) { S.micStream.getTracks().forEach((tr) => tr.stop()); S.micStream = null; } }
+
+/* Phase-driven Sprechen (sprechen-driver.js): the server plan and server time decide the phase; a refresh lands in
+   the same phase with the same remaining time. This function only wires the DOM, API, recorder and audio. */
 async function runSprechen() {
   const id = S.attempt.attempt_id;
+  const { plan, startedAt, multiplier } = S.sprechen;
   const queue = new ChunkQueue({
     store: S.store,
     upload: (q, bytes, mime) => api.chunk(id, S.lease, q, bytes, mime),
     completeTurn: (b) => api.turn(id, S.lease, b)
   });
   const status = await api.speakingStatus(id, S.lease);
-  const done = new Set(status.turns.filter((t) => t.status === 'complete').map((t) => `${t.item_id}:${t.turn}`));
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  const ph = $('#kx-phase');
-  const items = S.pkg.parts.flatMap((p) => p.tasks.flatMap((t) => t.items)).filter((i) => i.interaction === 'spoken_response');
-  for (const it of items) for (const turn of it.response_spec.turns) {
-    if (S.module !== 'sprechen') break;
-    const key = `${it.item_id}:${turn.turn}`;
-    const label = document.querySelector(`[data-turn="${CSS.escape(key)}"]`);
-    if (done.has(key)) { if (label) label.textContent = 'gespeichert'; continue; }
-    const have = new Set(status.chunks.filter((c) => c.turn === turn.turn).map((c) => c.seq));
-    const t = { item_id: it.item_id, turn: turn.turn };
-    await queue.drain(t, have);   // resend buffered chunks after a reload
-    ph.textContent = 'Hören Sie den Gesprächsimpuls (Prüfton).';
-    if (turn.prompt_asset) { const m = await api.media(id, S.lease, turn.prompt_asset); const a = new Audio(); a.src = URL.createObjectURL(new Blob([await api.mediaBytes(m.url)], { type: m.mime })); await new Promise((r) => { a.onended = r; a.onerror = r; a.play().catch(r); }); }
-    ph.textContent = `Aufnahme läuft — sprechen Sie jetzt (max. ${turn.seconds} s).`;
-    if (label) label.textContent = 'Aufnahme …';
-    const rec = new TurnRecorder({ stream, queue, turn: t });
-    rec.start();
-    await new Promise((r) => setTimeout(r, turn.seconds * 1000));
-    const res = await rec.stop();
-    if (label) label.textContent = 'wird hochgeladen …';
-    await queue.finish(t, res.chunks, res.duration_ms);
-    if (label) label.textContent = 'gespeichert';
-  }
-  stream.getTracks().forEach((tr) => tr.stop());
-  ph.textContent = 'Alle Beiträge gespeichert. Geben Sie das Modul ab.';
+  const audio = createSpeakingAudio({
+    fetchAsset: async (assetId) => { const m = await api.media(id, S.lease, assetId); return { bytes: await api.mediaBytes(m.url), mime: m.mime }; },
+    makeAudio: () => new Audio(),
+    makeUrl: (bytes, mime) => URL.createObjectURL(new Blob([bytes], { type: mime })),
+    now: () => clock.serverNow(), sleep, requestGesture: requestAudioGesture
+  });
+  const label = (key, text) => { const el = document.querySelector(`[data-turn="${CSS.escape(key)}"]`); if (el) el.textContent = text; };
+  const driver = createSpeakingDriver({
+    pkg: S.pkg, plan, startedAt, multiplier, now: () => clock.serverNow(), sleep, active: () => S.module === 'sprechen',
+    status, queue, audio, getMic, recorder: (turn, stream) => new TurnRecorder({ stream, queue, turn }),
+    ui: {
+      phase: (text) => { const el = $('#kx-phase'); if (el) el.textContent = text; },
+      turn: label, alert: (kind, text) => showAlert(kind, text), clear: clearAlert,
+      lockTopics: () => applyTopicLock(true)
+    },
+    log: (event, detail) => console.warn('[kx-sprechen]', event, detail)
+  });
+  try { await driver.run(); } finally { releaseMic(); }
 }
 
 async function showResult() {
@@ -277,6 +380,8 @@ app.addEventListener('click', async (e) => {
       ta.dispatchEvent(new Event('input', { bubbles: true })); return;
     }
     if (act === 'reload') return location.reload();
+    if (act === 'audio-start') { if (S.gestureResolve) S.gestureResolve(); return; }
+    if (act === 'mic-retry') { await getMic(); return; }
     if (act === 'create') { const r = await api.createAttempt({ mode: 'synthetic_full', level: 'b1', device_id: deviceId() }); S.lease = r.lease.lease_id; rememberLease(r.attempt_id, S.lease); S.attempt = r; return route(); }
     if (act === 'takeover') return resume(b.dataset.attempt || S.attempt.attempt_id, true);
     if (act === 'start') {

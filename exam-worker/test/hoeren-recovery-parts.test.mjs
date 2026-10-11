@@ -84,6 +84,23 @@ test('F1 recovery used once → a second recovery (same or another segment) is d
   assert.equal(n.n, p.recovery_replays_per_module);
 });
 
+test('F1 the recovery shift also delays the earliest start of later plays: the next text cannot start during the replay', async () => {
+  const s = await setup();
+  const ready = await toHoeren(s);
+  const p = plan(s);
+  const next = p.phases.find((x) => x.seq > 5 && x.kind === 'play');   // next text play after the recovered segment
+  await at(s, ready, 5); await ev(s, 'play_start', 5);
+  await goto(s, s.clock.t + 800);
+  await ev(s, 'interrupted', 5);
+  const rec = await ev(s, 'play_start', 5, 'recovery');
+  assert.equal(rec.status, 200, JSON.stringify(rec.json));
+  await goto(s, s.clock.t + 100);                          // the replay is still playing
+  const early = await ev(s, 'play_start', next.seq);
+  assert.equal(early.status, 409, JSON.stringify(early.json)); assert.equal(early.json.error, 'play_too_early');
+  await at(s, ready, next.seq, rec.json.plan_shift_ms);    // its shifted slot (the client's phaseAt model)
+  assert.equal((await ev(s, 'play_start', next.seq)).status, 200);
+});
+
 test('F1 an "interruption" reported after the clip had finished is not genuine → refused, no recovery', async () => {
   const s = await setup();
   const ready = await toHoeren(s);

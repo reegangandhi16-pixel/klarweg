@@ -10,15 +10,19 @@
    --autoplay-policy flag, no user gesture on load): the page is loaded just
    before the partner phase and reloaded during it; blocked audio must ask for
    "Audio starten" and continue from its scheduled position, never silently
-   count as played. Takes ~5–6 minutes.
-   Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override) */
+   count as played. A third scenario does the same for HÖREN: the page is reloaded
+   during Teil 2 with a recovery replay owed; the module must stay usable (parts,
+   answers) before the click, and after it the replay plays first, without
+   overlapping the next normal play. Takes ~6–7 minutes.
+   Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay runs one scenario) */
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { startDevServer } from './dev-server.mjs';
-import { call, rid } from './harness.mjs';
+import { call, rid, pkgFor, syntheticBuild } from './harness.mjs';
 import { post, start, submit, uploadChunk } from './flow.mjs';
 
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -315,14 +319,90 @@ async function runDefaultAutoplay(viewport) {
   }
 }
 
-const results = [];
-for (const vp of [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }]) {
-  const errs = await run(vp);
-  results.push({ vp: vp.name, uncaught: errs });
+/* ---------- DEFAULT autoplay policy, HÖREN: reload (no user gesture) with a recovery replay owed ---------- */
+async function runDefaultAutoplayHoeren(viewport) {
+  const dev = await startDevServer();
+  const b = await launch({ autoplayFlag: false });
+  const { send } = b;
+  try {
+    const created = await call(dev.env, 'POST', '/exam/v1/attempts', { user: dev.user, body: { mode: 'synthetic_full', level: 'b1', request_id: rid(), device_id: 'dev_e2e_autoplay_0000000002' } });
+    const s = { env: dev.env, user: dev.user, attempt: created.json.attempt_id, lease: created.json.lease.lease_id };
+    await start(s, 'lesen'); await submit(s, 'lesen');
+    await start(s, 'hoeren');
+    assert.equal((await post(s, '/hoeren/events', { type: 'ready' })).status, 200);
+    const plan = pkgFor(syntheticBuild(), 'hoeren').timing.plan;
+    const offsetOf = (seq) => plan.phases.filter((x) => x.seq < seq).reduce((n, x) => n + x.ms, 0);
+    const placeAt = async (msAfterPlanStart) => {   // TEST server only: move the Hören schedule so that "now" is msAfterPlanStart into it
+      const row = await dev.env.DB.prepare("SELECT plan_started_at FROM attempt_modules WHERE module = 'hoeren'").first();
+      const delta = (Date.now() - msAfterPlanStart) - row.plan_started_at;
+      await dev.env.DB.prepare("UPDATE attempt_modules SET started_at = started_at + ?1, plan_started_at = plan_started_at + ?1, deadline_at = deadline_at + ?1 WHERE module = 'hoeren'").bind(delta).run();
+    };
+    // Teil 1 text 1, play 2 of 2 (a LAST play) is interrupted mid-play → one recovery replay is owed
+    const LAST = plan.phases.find((x) => x.kind === 'play' && x.part === 1 && x.play_no === 2 && x.plays_allowed === 2);
+    await placeAt(offsetOf(LAST.seq) + 300);
+    assert.equal((await post(s, '/hoeren/events', { type: 'play_start', phase_seq: LAST.seq })).status, 200);
+    assert.equal((await post(s, '/hoeren/events', { type: 'interrupted', phase_seq: LAST.seq })).status, 200);
+    // reopen the page during the Teil 2 preread (fresh load = no user activation)
+    const T2 = plan.phases.find((x) => x.kind === 'preread' && x.part === 2);
+    const T2PLAY = plan.phases.find((x) => x.kind === 'play' && x.part === 2 && x.purpose !== 'instruction');
+    await placeAt(offsetOf(T2.seq) + 300);
+    await dev.env.DB.prepare('DELETE FROM attempt_leases').run();
+    const plays = async () => (await dev.env.DB.prepare('SELECT phase_seq, kind, started_at, ended_at, outcome FROM audio_plays ORDER BY started_at').all()).results;
+    const before = (await plays()).length;
+
+    await send('Runtime.enable'); await send('Page.enable');
+    await send('Emulation.setDeviceMetricsOverride', { width: viewport.w, height: viewport.h, deviceScaleFactor: 1, mobile: viewport.mobile });
+    const evaluate = async (expr, userGesture = false) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true, userGesture });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(100); }
+      throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+    };
+    await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+
+    // 1. blocked audio does not block the module: prompt shown, Teil 2 opens, answers save, nothing is played
+    await waitFor(`document.querySelector('[data-act="audio-start"]')`, 15000, '"Audio starten" offered (Hören)');
+    await waitFor(`document.querySelector('.kx-part[data-part="2"]')`, 8000, 'Teil 2 rendered without a click');
+    assert.equal(await evaluate(`document.querySelector('[data-act="audio-start"]').closest('[role="alert"]') !== null`), true, 'accessible alert');
+    assert.equal(await evaluate(`document.activeElement && document.activeElement.dataset.act`), 'audio-start', 'the action receives focus');
+    await evaluate(`(() => { const r = document.querySelector('.kx-part[data-part="1"] input[type=radio]:not([disabled])'); r.click(); })()`);
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 8000, 'answer saved while audio is blocked');
+    assert.equal((await plays()).length, before, 'nothing played or recovered before the click');
+
+    // 2. one click: the owed recovery replay plays first, then the next normal plays follow without overlapping it
+    await evaluate(`document.querySelector('[data-act="audio-start"]').click()`, true);
+    await waitFor(`!document.querySelector('[data-act="audio-start"]')`, 4000, 'prompt disappears after the click');
+    for (const t1 = Date.now(); !(await plays()).some((p) => p.phase_seq === T2PLAY.seq && p.kind === 'normal'); ) {
+      if (Date.now() - t1 > 15000) throw new Error('Teil 2 text never played: ' + JSON.stringify(await plays()));
+      await sleep(200);
+    }
+    const after = (await plays()).slice(before);
+    const rec = after.find((p) => p.kind === 'recovery');
+    assert.ok(rec && rec.phase_seq === LAST.seq, 'recovery replay of the interrupted last play: ' + JSON.stringify(after));
+    assert.equal(after[0].kind, 'recovery', 'the recovery replay is the first play after the click');
+    const nextNormal = after.find((p) => p.kind === 'normal');
+    assert.ok(rec.ended_at !== null && nextNormal.started_at >= rec.ended_at, 'the next normal play starts after the replay ended');
+    assert.equal(after.filter((p) => p.kind === 'recovery').length, 1);
+    const uncaught = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    log(viewport.name, 'DEFAULT autoplay HÖREN PASS', { after_click: after.map((p) => `${p.kind}:${p.phase_seq}`) });
+    return uncaught;
+  } finally {
+    b.close(); dev.server.close();
+  }
 }
-for (const vp of [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }]) {
-  const errs = await runDefaultAutoplay(vp);
-  results.push({ vp: `${vp.name} (default autoplay policy)`, uncaught: errs });
+
+const results = [];
+const ONLY = process.env.KX_E2E_ONLY || '';
+const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)']];
+if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
+for (const [name, fn, suffix] of SCENARIOS) {
+  if (ONLY && name !== ONLY) continue;
+  for (const vp of VIEWPORTS) results.push({ vp: vp.name + suffix, uncaught: await fn(vp) });
 }
 console.log(JSON.stringify(results));
 if (results.some((r) => r.uncaught.length)) process.exit(1);

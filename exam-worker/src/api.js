@@ -412,7 +412,8 @@ export async function hoerenEvent(env, userId, attemptId, request) {
 
     if (body.type === 'play_start') {
       if (kind === 'normal') {
-        if (elapsed < offset - PLAY_TOLERANCE_MS) fail(409, 'play_too_early');
+        // a recovery replay delays the whole remaining schedule (hoerenPosition, client phaseAt): both bounds shift
+        if (elapsed < offset + m.plan_shift_ms - PLAY_TOLERANCE_MS) fail(409, 'play_too_early');
         if (elapsed > offset + m.plan_shift_ms + phase.ms + PLAY_TOLERANCE_MS) fail(409, 'play_window_closed');
         try {
           await env.DB.prepare(`INSERT INTO audio_plays (attempt_id, phase_seq, asset_id, play_no, kind, started_at, outcome) VALUES (?1, ?2, ?3, ?4, 'normal', ?5, 'started')`)

@@ -135,7 +135,8 @@ function paintHeader() {
   if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state });
 }
 function paint() {
-  const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p><div class="kx-alerts" id="kx-alerts"></div>' : '';
+  const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p><div class="kx-alerts" id="kx-alerts"></div>'
+    : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
   screen(`<div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
     + `<footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
   paintHeader();
@@ -166,7 +167,18 @@ async function runHoeren() {
   const rendered = new Set([...document.querySelectorAll('#kx-main .kx-part')].map((el) => Number(el.dataset.part)));
   ph.textContent = 'Prüftöne werden geladen …';
   for (const a of assets) { const m = await api.media(id, S.lease, a); await player.preload(a, await api.mediaBytes(m.url)); }
-  await ctx.resume();
+  /* Autoplay policy: a reloaded page has no user gesture, so the AudioContext can stay suspended and resume() may never
+     settle. The module never waits on it: parts, answers and the schedule continue, and plays wait for one click on
+     "Audio starten", then continue from their scheduled position. A blocked play is never reported as played. */
+  const audioRunning = () => ctx.state === 'running';
+  let unlocked = null;
+  const unlockAudio = () => unlocked || (unlocked = new Promise((resolve) => {
+    const el = showAlert('gesture', 'Ihr Browser hat die Wiedergabe blockiert. Bitte starten Sie das Audio.', { act: 'audio-start', label: 'Audio starten' });
+    const btn = el && el.querySelector('button'); if (btn) btn.focus({ preventScroll: true });
+    // resume() runs inside the click handler (user activation)
+    S.gestureResolve = () => { ctx.resume().then(() => { if (audioRunning()) { S.gestureResolve = null; clearAlert('gesture'); resolve(); } }).catch(() => {}); };
+  }));
+  await Promise.race([ctx.resume().catch(() => {}), sleep(1500)]);
   // OD-05: report a genuine interruption of a running play (audio session interrupted / page torn down)
   const reportInterrupted = () => {
     const cp = S.currentPlay; if (!cp) return;
@@ -175,6 +187,10 @@ async function runHoeren() {
   };
   ctx.onstatechange = () => { if (ctx.state !== 'running') { player.stop(); reportInterrupted(); } };
   S.onPageHide = reportInterrupted;
+  if (!audioRunning()) {
+    unlockAudio();
+    if (moduleState().plan_started_at == null) await unlockAudio();   // first start: readiness waits for audible playback
+  }
   const ready = await api.hoerenEvent(id, S.lease, { type: 'ready' });
   let m = moduleState(); m.plan_started_at = ready.plan_started_at; m.deadline_at = ready.deadline_at; m.plan_shift_ms = ready.plan_shift_ms || 0;
 
@@ -204,12 +220,17 @@ async function runHoeren() {
     ph.textContent = 'Die unterbrochene Wiedergabe wird einmal wiederholt.';
     await play(phase, 'recovery', 0);
   };
-  if (ready.pending_recovery_seq != null) await recover(ready.pending_recovery_seq).catch(() => {});
+  // a recovery replay owed after a reload is played only once audio actually runs (before any later normal play)
+  let afterUnlock = null;
+  if (ready.pending_recovery_seq != null) {
+    if (audioRunning()) await recover(ready.pending_recovery_seq).catch(() => {});
+    else afterUnlock = unlockAudio().then(() => recover(ready.pending_recovery_seq)).catch(() => {});
+  }
   await refreshParts();
 
   let lastIndex = -2;
   const loop = async () => {
-    if (S.module !== 'hoeren') { player.stop(); S.onPageHide = null; return; }
+    if (S.module !== 'hoeren') { player.stop(); S.onPageHide = null; S.gestureResolve = null; return; }
     m = moduleState();
     const at = phaseAt(plan, m.plan_started_at, clock.serverNow(), m.plan_shift_ms || 0);
     const wanted = at.state === 'finished' ? lastPart : at.phase ? (at.phase.part ?? lastPart) : 0;
@@ -222,6 +243,14 @@ async function runHoeren() {
     setTimeout(loop, 200);
   };
   const playPhase = async (at) => {
+    if (!audioRunning() || afterUnlock) {   // also wait for a deferred recovery replay, so the two never overlap
+      const seq = at.phase.seq;
+      await (afterUnlock || unlockAudio());
+      if (S.module !== 'hoeren') return;
+      m = moduleState();
+      at = phaseAt(plan, m.plan_started_at, clock.serverNow(), m.plan_shift_ms || 0);
+      if (!at.phase || at.phase.seq !== seq) return;   // its slot ended before the click: missed, not reported as played
+    }
     try { await api.hoerenEvent(id, S.lease, { type: 'play_start', phase_seq: at.phase.seq }); }
     catch (e) {
       if (e.code !== 'play_limit_reached') throw e;

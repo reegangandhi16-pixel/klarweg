@@ -105,7 +105,7 @@ const l3Items = [
   ...l3Keys.map((k, i) => item({ id: `itm:b1:syn-l3-${13 + i}`, module: 'lesen', part: 3, task: 'tsk:b1:syn-l3', interaction: 'matching_pool', options: POOL_OPTIONS,
     stem: `${13 + i}. Testperson ${13 + i} sucht ${k === '0' ? 'ein Angebot, das es nicht gibt' : `Angebot Nummer ${POOL.indexOf(k) + 1}`}.`, key: k }))
 ];
-task({ id: 'tsk:b1:syn-l3', module: 'lesen', part: 3, interaction: 'matching_pool', instructions: 'Lesen Sie die Situationen 13 bis 19 und die Testanzeigen a bis j. Jede Anzeige nur einmal. Gibt es keine passende Anzeige, wählen Sie 0.',
+task({ id: 'tsk:b1:syn-l3', module: 'lesen', part: 3, interaction: 'matching_pool', instructions: 'Lesen Sie die Situationen 13 bis 19 und die Testanzeigen a bis j. Jede Anzeige darf nur einmal gewählt werden. Gibt es keine passende Anzeige, wählen Sie 0.',
   stimuli: l3Stimuli, items: l3Items, indicators: { ...lesenInd, info_units: 10 } });
 
 const people = ['Null', 'Eins', 'Zwei', 'Drei', 'Vier', 'Fünf', 'Sechs', 'Sieben'];

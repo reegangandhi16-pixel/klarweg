@@ -170,7 +170,7 @@
     "part": 3,
     "interaction": "matching_pool",
     "instructions": {
-      "text_de": "Lesen Sie die Situationen 13 bis 19 und die Testanzeigen a bis j. Jede Anzeige nur einmal. Gibt es keine passende Anzeige, wählen Sie 0.",
+      "text_de": "Lesen Sie die Situationen 13 bis 19 und die Testanzeigen a bis j. Jede Anzeige darf nur einmal gewählt werden. Gibt es keine passende Anzeige, wählen Sie 0.",
       "source": "klarweg_paraphrase"
     },
     "frame": "synthetic",

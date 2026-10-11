@@ -25,6 +25,13 @@ export function header({ module, remainingMs, saveState }) {
     + `<p class="kx-timer" role="timer" aria-label="Verbleibende Zeit">${esc(formatRemaining(remainingMs))}</p></header>`;
 }
 
+/* Example items already get a visible "Beispiel" label, so a leading "Beispiel:" in their stem is dropped to avoid
+   "Beispiel Beispiel: …". Non-example stems are returned unchanged. The caller still escapes the result. */
+export function displayStem(it) {
+  const stem = String(it.stem ?? '');
+  return it.is_example ? stem.replace(/^\s*Beispiel:\s*/, '') : stem;
+}
+
 function choice(it, value, disabled) {
   const name = `i_${idSafe(it.item_id)}`;
   const opts = (it.options || []).map((o) => {
@@ -33,13 +40,13 @@ function choice(it, value, disabled) {
     return `<label class="kx-opt" for="${id}"><input type="radio" id="${id}" name="${name}" value="${esc(o.option_id)}" data-item="${esc(it.item_id)}"${checked}${disabled ? ' disabled' : ''}>`
       + `<span class="kx-opt-label">${esc(o.label)}</span>${o.text ? ` <span class="kx-opt-text">${esc(o.text)}</span>` : ''}</label>`;
   }).join('');
-  return `<fieldset class="kx-item${it.is_example ? ' kx-example' : ''}" id="item-${idSafe(it.item_id)}"><legend>${it.is_example ? '<span class="kx-ex">Beispiel</span> ' : ''}${esc(it.stem)}</legend><div class="kx-opts">${opts}</div></fieldset>`;
+  return `<fieldset class="kx-item${it.is_example ? ' kx-example' : ''}" id="item-${idSafe(it.item_id)}"><legend>${it.is_example ? '<span class="kx-ex">Beispiel</span> ' : ''}${esc(displayStem(it))}</legend><div class="kx-opts">${opts}</div></fieldset>`;
 }
 
 function matching(it, value, disabled) {
   const id = `i_${idSafe(it.item_id)}`;
   const opts = ['<option value="">– bitte wählen –</option>'].concat((it.options || []).map((o) => `<option value="${esc(o.option_id)}"${value && value.option_id === o.option_id ? ' selected' : ''}>${esc(o.label)}</option>`)).join('');
-  return `<div class="kx-item kx-match${it.is_example ? ' kx-example' : ''}" id="item-${idSafe(it.item_id)}"><label for="${id}">${it.is_example ? '<span class="kx-ex">Beispiel</span> ' : ''}${esc(it.stem)}</label>`
+  return `<div class="kx-item kx-match${it.is_example ? ' kx-example' : ''}" id="item-${idSafe(it.item_id)}"><label for="${id}">${it.is_example ? '<span class="kx-ex">Beispiel</span> ' : ''}${esc(displayStem(it))}</label>`
     + `<select id="${id}" data-item="${esc(it.item_id)}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
 }
 

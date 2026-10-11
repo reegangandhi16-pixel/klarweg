@@ -27,7 +27,8 @@ import { speakingPhaseAt, prepEndsAt, partOfPhase, speakingItemsForPart, partner
 
 /* Server refusals that retrying cannot change. The chunks stay in the local queue (recoverable on reload). */
 export const FINALIZE_STOP_CODES = ['checksum_mismatch', 'chunk_conflict', 'turn_closed', 'upload_window_closed', 'consent_required',
-  'recording_quota_exceeded', 'chunk_count_mismatch', 'invalid_chunk_count', 'invalid_duration', 'lease_superseded'];
+  'recording_quota_exceeded', 'chunk_count_mismatch', 'invalid_chunk_count', 'invalid_duration', 'lease_superseded',
+  'turn_complete_conflict', 'invalid_transition'];
 
 export function createSpeakingDriver(deps) {
   const { pkg, plan, startedAt, multiplier, now, sleep, active, status, queue, audio, ui, log = () => {} } = deps;

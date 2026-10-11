@@ -280,3 +280,17 @@ test('DRIVER (F5): the microphone is requested only when the first recording pha
   assert.ok(h.calls.ui.some((u) => u.k === 'itm:b1:syn-sp1:t1' && /Mikrofon/.test(u.t)));
   h.stop();
 });
+
+test('SPRECHEN driver: a completed-turn conflict (SPEAKING §4.2.5) is a definitive refusal, not retried', async () => {
+  let calls = 0, slept = 0;
+  const alerts = [], logs = [];
+  const queue = { finish: async () => { calls++; throw Object.assign(new Error('conflict'), { code: 'turn_complete_conflict' }); } };
+  const d = createSpeakingDriver({ pkg, plan, startedAt: T0, multiplier: 1, now: () => T0, sleep: async () => { slept++; }, active: () => true,
+    status: { turns: [], chunks: [] }, queue, audio: {}, ui: { turn() {}, alert: (k, t) => alerts.push(k), clear() {} },
+    log: (e, d) => logs.push([e, d.code]) });
+  assert.equal(await d.finalize({ item_id: 'x', turn: 1 }, 3, 3000), 'refused');
+  assert.equal(calls, 1);
+  assert.equal(slept, 0);
+  assert.deepEqual(logs, [['turn_finalize_refused', 'turn_complete_conflict']]);
+  assert.deepEqual(alerts, ['upload']);
+});

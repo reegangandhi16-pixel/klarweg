@@ -1,7 +1,7 @@
 # F4 Implementation Blueprint — speaking recording grants and evidence lifecycle
 
 > **Status:** design blueprint, **documentation only, NOT IMPLEMENTED, NOT AUTHORISED.** Prepared with AI assistance on
-> 2026-10-11 against `origin/main` @ `e9d303c`. It is not a human review, not an owner decision and not an implementation
+> 2026-10-11 against `origin/main` @ `e9d303c`; F4 statuses synced with decision register **v1.5** (`main` @ `815d779`). It is not a human review, not an owner decision and not an implementation
 > authorisation. It changes no decision status. The formal record of every F4 decision is the decision register
 > (`B1-FINAL-DECISION-REGISTER.md` §B.2, `F4/P-n`); the design source is `B1-SPEAKING-SPEC.md` (§4.2, §5, §10–§12).
 > OD-53 remains **OWNER DECISION — CONDITIONAL**: no learner access, pilot, production audio, deployment or release.
@@ -11,7 +11,7 @@
 > - **[DOC]** = stated in official Cloudflare documentation, read on 2026-10-11. Documentation is **not** a test result.
 > - **[UNVERIFIED]** = a platform behaviour that is not established; it must be verified before anything relies on it.
 > - **[PROPOSED]** = a design proposal of this blueprint.
-> - **[REC]** = models a recommendation of SPEAKING §12. **Recommendation only, NOT APPROVED.**
+> - **[REC]** = models a recommendation of SPEAKING §12. **Recommendation only, NOT APPROVED.** **[REC — OWNER-APPROVED]** = a SPEAKING §12 recommendation the owner approved by written instruction on 2026-10-11 (register v1.5 §B.2). Approval of an option authorises no implementation.
 > - **[OPEN P-n]** = an owner decision that is still open (register §B.2).
 
 ---
@@ -82,20 +82,20 @@ All new structures are **additive**. Names and types are illustrative.
 |---|---|
 | `rgr_id` PK | `rgr_<uuid>`, server-generated |
 | `attempt_id`, `user_id`, `item_id`, `part`, `turn`, `phase_id` | `part` and `phase_id` derived on the server (P-6) |
-| `kind` | `live` \| `late` (server-observed facts only, P-7 [REC]) |
+| `kind` | `live` \| `late` (server-observed facts only, P-7 [REC — OWNER-APPROVED]) |
 | `after_submission`, `submit_kind` | Set for C1 late grants (P-8) |
 | `state` | `open` \| `closed` |
 | `close_reason` | `stopped`, `capture_window_elapsed`, `lease_reacquired`, `lease_takeover`, `module_closed`, `consent_withdrawn` (P-19) |
 | `lease_generation` | Lease generation at issue |
 | `granted_at`, `capture_window_ends_at`, `upload_deadline_at` | Server times in ms; fixed at first issue |
 | `max_chunks` | Nullable; computed and logged, never enforced until P-1 and P-14 are approved |
-| `declared_chunks` | Device claim; required for C1 late grants under P-24 [REC] as a request-contract field |
+| `declared_chunks` | Device claim; required for C1 late grants under P-24 [REC — OWNER-APPROVED] as a request-contract field |
 | `evidence_state`, `evidence_reason`, `finalized_at` | Holds evidence for **zero-chunk grants**, which have no turn row. A grant whose `evidence_state` is not terminal (`complete` or `incomplete`) counts as **pending evidence** for the completion gate (§6.2, §7), whether the grant is `open` or `closed` |
 | `mode`, `flags_json` | Effective mode at issue; flags such as `phase_rule_unresolved` (P-18) or `lease_interrupted` (P-22) |
 
 **Constraints.**
 - `UNIQUE (attempt_id, item_id, turn)`: one grant per turn (P-3 default).
-- Partial `UNIQUE (attempt_id) WHERE state = 'open'`: one active grant per attempt (P-17 per attempt [REC]). The schema already uses a partial unique index (migration line 116).
+- Partial `UNIQUE (attempt_id) WHERE state = 'open'`: one active grant per attempt (P-17 per attempt [REC — OWNER-APPROVED]). The schema already uses a partial unique index (migration line 116).
 
 **Indexes.** `(attempt_id)`; `(state, capture_window_ends_at)` for stale-grant closure.
 
@@ -129,7 +129,7 @@ All new structures are **additive**. Names and types are illustrative.
 
 ### 2.4 Turn evidence (existing `recording_turns`; new nullable columns)
 
-- **Add:** `evidence_state` (`partial` \| `complete` \| `incomplete`, own CHECK), `evidence_reason`, `finalized_at`, `received_seqs_summary`, `duration_ms_basis` (`client_wallclock` \| `chunk_estimate`, P-11 [REC]).
+- **Add:** `evidence_state` (`partial` \| `complete` \| `incomplete`, own CHECK), `evidence_reason`, `finalized_at`, `received_seqs_summary`, `duration_ms_basis` (`client_wallclock` \| `chunk_estimate`, P-11 [REC — OWNER-APPROVED]).
 - **Keep** the legacy `status` column and its CHECK unchanged, so the table needs no rebuild. `evidence_state` is authoritative for F4.
 
 ### 2.5 `recording_grant_events` (new) and `incidents` (existing)
@@ -158,11 +158,11 @@ General rules:
 
 ### 3.1 `POST …/sprechen/turns/open` (new)
 
-- **Request:** `request_id`, `lease_id`, `item_id`, `turn`; optional claims `client_elapsed_ms`, `client_offline_ms`, `declared_chunks`. For a **C1 late grant**, `declared_chunks` is **required** as a request-contract field (P-24 [REC]); it is never authority, proof or a cap.
+- **Request:** `request_id`, `lease_id`, `item_id`, `turn`; optional claims `client_elapsed_ms`, `client_offline_ms`, `declared_chunks`. For a **C1 late grant**, `declared_chunks` is **required** as a request-contract field (P-24 [REC — OWNER-APPROVED]); it is never authority, proof or a cap.
 - **Response:** `rgr_id`, `item_id`, `part`, `turn`, `phase_id`, `state`, `kind`, `granted_at`, `capture_window_ends_at`, `upload_deadline_at`, `max_chunks`, `flags[]`, `replayed`.
 - **Idempotency:** route key `turns/open:<item>:<turn>` in `request_log`, **plus** `UNIQUE(attempt,item,turn)`, so concurrent duplicates converge on one grant. A new `request_id` for the same turn returns the existing grant. Windows are never extended.
 - **Errors:** `recording_grant_active` (with the blocking grant; the client re-reads status and never stops a grant blindly); `phase_not_open`; `phase_closed`; `turn_closed`; `upload_window_closed`; `lease_expired`; `lease_superseded`; `consent_required`; `request_contract_invalid` (for example, a C1 late grant without `declared_chunks`); `finalization_pending` (module still `submitting`; retryable).
-- **Phase checks for multipliers other than 1.0.** Under the recommended first-version treatment (P-18 [REC], **NOT APPROVED; F4/P-18 is OPEN**), phase checks would not be evaluated for such attempts, and the grant would be flagged `phase_rule_unresolved`. This behaviour may be implemented only after the owner formally approves that first-version treatment (SPEAKING §12.4; §13).
+- **Phase checks for multipliers other than 1.0.** Under P-18's first-version treatment (**owner-approved, first-version treatment only**; register v1.5), phase checks are not evaluated for such attempts, and the grant is flagged `phase_rule_unresolved`. The broader accommodation timing policy is **not** approved (OD-41, with EX-04/EX-08, before any pilot or learner access). The behaviour is still subject to the separate implementation authorisation (§13).
 
 ### 3.2 `POST …/sprechen/turns/stop` (new)
 
@@ -381,7 +381,7 @@ Every multi-statement F4 transition is one D1 batch that satisfies all of the fo
 3. **Compatibility.**
    - A Worker without F4 ignores the new tables.
    - An F4 Worker treats NULL provenance as legacy.
-   - Clients that predate F4 do not handle `upload_pending`, `upload_outcome_unknown` or `recording_evidence_pending`. The updated client must be served **before** any server change that can return them (P-23 [REC]).
+   - Clients that predate F4 do not handle `upload_pending`, `upload_outcome_unknown` or `recording_evidence_pending`. The updated client must be served **before** any server change that can return them (P-23 [REC — OWNER-APPROVED]).
 4. **Reversibility.** D1 migrations are forward-only in practice. Rollback is a **code** rollback that leaves the additive schema in place. Tables or columns that may hold evidence are **never** dropped.
 5. **Rollout prerequisites.** Schema review; V1–V10 planned; V10 passed (§6.1); P-25 settled; the owner decisions in §13.
 
@@ -466,8 +466,8 @@ responses. Logs use the existing redacted logger (`exam-worker/src/log.js`, whic
 8. A separate owner approval to enter `enforce`.
 
 **Controls.**
-- The mode (P-13: Worker variable [REC] for the synthetic phase) governs grant and phase checks only.
-- The evidence-safety parts (reservations, verification, finalization, completion gate) are not mode-controlled (P-23 [REC]).
+- The mode (P-13: Worker variable [REC — OWNER-APPROVED] for the synthetic phase) governs grant and phase checks only.
+- The evidence-safety parts (reservations, verification, finalization, completion gate) are not mode-controlled (P-23 [REC — OWNER-APPROVED]).
 - Before real forms, reconsider versioned configuration (P-13 Option B).
 
 **Stop conditions:**
@@ -490,18 +490,18 @@ responses. Logs use the existing redacted logger (`exam-worker/src/log.js`, whic
 
 | Dependency | Item | Status (register §B.2 or as recorded) | Needed |
 |---|---|---|---|
-| Completion policy | F4/P-4 | Owner-selected, **pending formal approval** | Formal approval |
-| Late grants after submission | F4/P-8 | Owner-selected, **pending formal approval** | Formal approval (limitation retained) |
-| Gate versus modes | F4/P-23 | OPEN | Owner decision |
-| Declared count for C1 | F4/P-24 | OPEN | Owner decision |
+| Completion policy | F4/P-4 | **OWNER DECISION — APPROVED** (A-bounded; register v1.5) | – (implementation authorisation still separate) |
+| Late grants after submission | F4/P-8 | **OWNER DECISION — APPROVED** (C1, limitation retained; register v1.5) | – |
+| Gate versus modes | F4/P-23 | **OWNER DECISION — APPROVED** (independent of modes; client first; no gate switch) | How the gate applies to attempts already in progress: implementation design review |
+| Declared count for C1 | F4/P-24 | **OWNER DECISION — APPROVED** (required; request-contract check only) | – |
 | Abandonment bound | F4/P-25 | OPEN | V4 and V7 evidence, then an owner decision that also accepts the residual loss risk of §4.5; **blocks implementation start** |
-| One-active scope | F4/P-17 | OPEN | Owner decision |
-| `late` classification | F4/P-7 | OPEN | Owner decision |
-| Lease-expiry audio | F4/P-22 | OPEN | Owner decision |
-| Mode mechanism | F4/P-13 | OPEN | Owner decision |
-| Phase binding and intro | F4/P-6 | OPEN | Owner decision; validator rule against repeated turn ids (§2.3) |
-| Duration provenance | F4/P-11 | OPEN | Owner decision |
-| Multipliers other than 1.0 | F4/P-18; OD-41; EX-04; EX-08 | OPEN | **Before implementation:** formal owner approval of the first-version treatment, recorded in register §B.2 (SPEAKING §12.4). The synthetic exclusion (SPEAKING §4.2.2) is a recommendation only, **NOT APPROVED**. **Before any pilot or learner access:** the accommodation timing policy through OD-41, with EX-04 and EX-08 input |
+| One-active scope | F4/P-17 | **OWNER DECISION — APPROVED** (per attempt) | – |
+| `late` classification | F4/P-7 | **OWNER DECISION — APPROVED** (server-observed facts only) | Whether a late request during a running phase may create an `open` grant: implementation design review |
+| Lease-expiry audio | F4/P-22 | **OWNER DECISION — APPROVED** (flag `lease_interrupted`; no resumption) | – |
+| Mode mechanism | F4/P-13 | **OWNER DECISION — APPROVED** (Option A, synthetic phase only) | Reconsider Option B before real forms |
+| Phase binding and intro | F4/P-6 | **OWNER DECISION — APPROVED** (explicit validated binding, validated `teil<N>` fallback; no intro grant) | Validator rule against repeated turn ids (§2.3) |
+| Duration provenance | F4/P-11 | **OWNER DECISION — APPROVED** (first migration; reviewer display later) | – |
+| Multipliers other than 1.0 | F4/P-18; OD-41; EX-04; EX-08 | **OWNER DECISION — APPROVED, FIRST-VERSION TREATMENT ONLY** (register v1.5): exclusion from phase checks, `phase_rule_unresolved` | **Before any pilot or learner access:** the broader accommodation timing policy through OD-41, with EX-04 and EX-08 input (not approved) |
 | Per-grant byte cap | F4/P-15 | OPEN | Before any per-grant cap is evaluated in any mode, or before `enforce` |
 | Enforcement values | F4/P-1, P-2, P-14 | OPEN (OD-09 LOCKED unchanged) | Evidence, before `enforce` |
 | Re-recording; turn order; F8 | F4/P-3, P-10, P-12 | OPEN | Deferred |
@@ -522,12 +522,12 @@ Each phase is a separate, independently reviewable PR. None may start before the
 
 | Phase | Content | Depends on |
 |---|---|---|
-| 0 | Non-production evidence: V10 (transition invariant), V4 and V7 (write durations, cancellation, late `put()`); P-25 decision; schema review; read-back review; formal approval of the P-18 first-version treatment | Owner decisions in §13 |
+| 0 | Non-production evidence: V10 (transition invariant), V4 and V7 (write durations, cancellation, late `put()`); P-25 decision; schema review; read-back review | A provisioned non-production environment (separate D1 database, R2 bucket and Worker; none exists in the repository today); remaining owner decisions in §13 |
 | 1 | Migration `0002` (additive) and schema tests | Phase 0, with V10 passed |
 | 2 | Upload reservations, staging keys, read-back verification, commit under §6.1; existing route semantics preserved; new responses unused by old clients until the client is updated | Phase 1; P-25 |
 | 3 | Reconciliation (lazy and sweep) and indefinite round-robin cleanup of all failed keys (§4.5) | Phase 2 |
-| 4 | Evidence state, grant closure at submission, finalization of turn and grant evidence (zero-chunk grants included), completion gate (P-4, P-23) | Phases 2–3; formal approval of P-4 and P-23 (not yet given) |
-| 5 | Grant routes (`turns/open`, `turns/stop`), stale-grant closure, lease interaction, C1 late grants (P-8, P-24) under `off` and `observe`; phase-check handling for multipliers other than 1.0 | Phase 1; formal approval of P-8, P-17, P-7, P-22, P-24, P-6, P-13 and the P-18 first-version treatment (not yet given) |
+| 4 | Evidence state, grant closure at submission, finalization of turn and grant evidence (zero-chunk grants included), completion gate (P-4, P-23) | Phases 2–3 (P-4 and P-23 owner-approved, register v1.5) |
+| 5 | Grant routes (`turns/open`, `turns/stop`), stale-grant closure, lease interaction, C1 late grants (P-8, P-24) under `off` and `observe`; phase-check handling for multipliers other than 1.0 | Phase 1 (P-8, P-17, P-7, P-22, P-24, P-6, P-13 and the P-18 first-version treatment owner-approved, register v1.5); the P-7 and P-23 sub-questions settled in design review |
 | 6 | Client: attempt-scoped local keys, new responses, re-send after submission, superseded-tab stop | PR #53 decision |
 | 7 | V1–V10 on non-production; results documented | Phases 2–6 |
 | 8 | `observe` on synthetic attempts | Phase 7; owner go-ahead |

@@ -1,7 +1,7 @@
 # B1 Final Decision Register (Pre-Implementation Freeze)
 
-> **Status:** decision register **v1.3**, 2026-10-09 — owner decision OD-53, AI-assisted Mock DRAFT authoring (§B.1) and §I sign-off; changes listed in §J. v1.2, 2026-10-07: EX-03 reviewer-panel decisions (§C.1) and §I sign-off. v1.1, 2026-10-07: owner decision alignment (OD-32, OD-14, OD-08) and §I sign-off. Originally issued as decision freeze v1.0, 2026-10-04 (design only; not signed).
-> **Baseline:** v1.0 `origin/main` @ `bf2838c`; v1.1 prepared against `origin/main` @ `54ea48a`; v1.2 prepared against `origin/main` @ `050339b`; v1.3 prepared against `origin/main` @ `b540d24`.
+> **Status:** decision register **v1.4**, 2026-10-11 — F4 decision-recording section with namespaced `F4/P-n` identifiers (§B.2) and §I sign-off of that record-keeping mechanism only; **no F4 policy decision is approved by v1.4**; changes listed in §J. v1.3, 2026-10-09: owner decision OD-53, AI-assisted Mock DRAFT authoring (§B.1) and §I sign-off. v1.2, 2026-10-07: EX-03 reviewer-panel decisions (§C.1) and §I sign-off. v1.1, 2026-10-07: owner decision alignment (OD-32, OD-14, OD-08) and §I sign-off. Originally issued as decision freeze v1.0, 2026-10-04 (design only; not signed).
+> **Baseline:** v1.0 `origin/main` @ `bf2838c`; v1.1 prepared against `origin/main` @ `54ea48a`; v1.2 prepared against `origin/main` @ `050339b`; v1.3 prepared against `origin/main` @ `b540d24`; v1.4 prepared against `origin/main` @ `2e92ae3`.
 > **Inputs read in full:**
 > - `b1/GOETHE-B1-ADULT-MASTER-STANDARD.md` ("Standard")
 > - `ARCHITECTURE.md` ("ARCH")
@@ -16,7 +16,7 @@
 > - Also the older `b1/GOETHE-B1-DIGITAL-EXAM-SPEC.md` §14 (items DS-D1…DS-D15, still referenced by OD-16)
 >
 > **Precedence:** this register **governs where the earlier documents conflict** (§F). The earlier documents are **not modified**.
-> **Naming:** owner defaults from the Phase 4 brief = **OWN-D1…OWN-D20**. The old DIGITAL-SPEC items = **DS-D1…DS-D15**. Decisions = **OD-xx** (OD-01…OD-34 existing; **OD-35…OD-45 new**, surfaced by this review; **OD-46…OD-52** = owner defaults made explicit; **OD-53** = v1.3 owner decision, §B.1). Explicit unknowns = **U-xx**. External items = **EX-xx**. EX-03 panel decisions = **EX-03/O1…O10** (§C.1). Contradictions = **R-xx**.
+> **Naming:** owner defaults from the Phase 4 brief = **OWN-D1…OWN-D20**. The old DIGITAL-SPEC items = **DS-D1…DS-D15**. Decisions = **OD-xx** (OD-01…OD-34 existing; **OD-35…OD-45 new**, surfaced by this review; **OD-46…OD-52** = owner defaults made explicit; **OD-53** = v1.3 owner decision, §B.1). Explicit unknowns = **U-xx**. External items = **EX-xx**. EX-03 panel decisions = **EX-03/O1…O10** (§C.1). F4 speaking recording-grant items = **F4/P-n** (§B.2, v1.4; same numbers as the P-n items of SPEAKING §11). Contradictions = **R-xx**.
 > **Labels:** [OFFICIAL] (Standard source IDs S1–S10) · [Klarweg Standardized Exam Behaviour] (where Goethe's digital behaviour is undocumented) · [KLARWEG DESIGN] · [UNKNOWN] · [PROVISIONAL] (numeric thresholds to be revised with pilot data, OWN-D16).
 
 ---
@@ -155,6 +155,46 @@ change that gate for accepted content, and it does not close or relax any other 
 including: OD-08 legal clearance (paraphrase fallback until then); OD-14 conditions and EX-06; the EX-03 human panel
 and M-27 sign-off; Q14 and M-28 originality; EX-01, EX-02, EX-04, EX-05; OD-07 and OD-30; the release validator and
 gates Q1–Q17; MOCK gates M-01…M-33; and the calibration plan (OD-12, OD-35). No validator check is relaxed for drafts.
+
+### B.2 F4 — speaking recording-grant decisions (v1.4)
+
+**What this section is.** v1.4 adopts a record-keeping mechanism only (owner decision of 2026-10-11, Option C): F4 decisions are recorded in this register under the namespaced identifiers **F4/P-n**. These carry the same numbers as the P-n items of SPEAKING §11 (`B1-SPEAKING-SPEC.md` at `origin/main` @ `2e92ae3`); no item is renumbered, split or merged.
+
+**What this section is not.** Adding this section **approves no F4 policy decision** and changes no F4 status. Every status below is copied unchanged from SPEAKING §11 at `2e92ae3`. Recommendations in AI-prepared F4 reports are not recorded here and carry no status. This section does not change OD-53 (§B.1), which remains **OWNER DECISION — CONDITIONAL**. It does not authorise implementation, learner access, a pilot, deployment or release, and it closes no gate.
+
+**Status terms used here.** **OPEN** = no owner decision recorded. **OWNER-SELECTED — PENDING FORMAL APPROVAL** = the owner has selected an option, which is not yet formally approved. A change of any F4/P-n status requires a new register version (§I), and SPEAKING §11 is then updated to match.
+
+**F4 directions recorded in SPEAKING §11** (as stated there; they authorise design work only): F4-D1 server-authorised recording grants, specification first · F4-D2 local recording when offline, then a flagged late recording grant; a grant is not proof of capture time · F4-D3 no threshold approved without evidence · F4-D4 one active recording grant at a time · F4-D5 compare rollout controls; none chosen.
+
+| ID | Decision (as worded in SPEAKING §11) | Status (unchanged from SPEAKING §11 at `2e92ae3`) | Spec reference | Related register IDs (informational; not changed) |
+|---|---|---|---|---|
+| F4/P-1 | Chunk length: code (1 s) vs OD-09 (5 s, LOCKED) | **OPEN** | SPEAKING §4.1, §11 | OD-09 (**LOCKED**, unchanged) |
+| F4/P-2 | Can timing alone refuse a late recording grant? | **OPEN** | SPEAKING §5.1, §11 | – |
+| F4/P-3 | Can an empty recording grant be re-recorded? | **OPEN** | SPEAKING §4.2.4, §4.2.10, §11 | – |
+| F4/P-4 | Attempt completion while evidence is partial | **OWNER-SELECTED — PENDING FORMAL APPROVAL** (option A-bounded) | SPEAKING §4.2.10, §11 | – |
+| F4/P-5 | Rating of incomplete evidence | **OPEN** | SPEAKING §5.1, §11 | OD-07, OD-30 (unchanged) |
+| F4/P-6 | Intro binding and phase-binding fallback | **OPEN** | SPEAKING §4.1, §4.2.3, §11 | – |
+| F4/P-7 | `late` classification and any threshold | **OPEN** | SPEAKING §4.2.4, §5.1, §11 | – |
+| F4/P-8 | Late recording grants after module submission | **OWNER-SELECTED — PENDING FORMAL APPROVAL** (option C1) | SPEAKING §4.2.10, §11 | – |
+| F4/P-9 | Browser retention and deletion of refused audio | **OPEN** | SPEAKING §5.1, §11 | EX-01 (unchanged) |
+| F4/P-10 | Turn order | **OPEN** | SPEAKING §5.1, §11 | – |
+| F4/P-11 | F7 scope | **OPEN** | SPEAKING §5.2, §11 | – |
+| F4/P-12 | F8 grace | **OPEN** | SPEAKING §5.4, §11 | – |
+| F4/P-13 | Rollout mechanism | **OPEN** | SPEAKING §10, §11 | – |
+| F4/P-14 | All D3 values | **OPEN** | SPEAKING §4.2.8, §4.2.10, §11 | – |
+| F4/P-15 | Per-grant byte cap | **OPEN** | SPEAKING §4.2.8, §4.2.10, §11 | – |
+| F4/P-17 | Scope of the one-active invariant | **OPEN** | SPEAKING §4.2.6, §11 | – |
+| F4/P-18 | Time-multiplier scope | **OPEN** | SPEAKING §4.1, §4.2.2, §11 | OD-41 (CONFIGURABLE, unchanged); EX-04, EX-08 |
+| F4/P-19 | Consent withdrawal | **OPEN** | SPEAKING §4.1, §5, §6, §11 | EX-01 (unchanged) |
+| F4/P-20 | Retention period | **OPEN** | SPEAKING §4.1, §6, §11 | OD-21 (unchanged); the relation between F4/P-20 and OD-21's default is **not** resolved by v1.4 |
+| F4/P-21 | Behaviour of a turn blocked by a valid grant of another attempt (per-user scope only) | **OPEN** | SPEAKING §4.2.6, §11 | – |
+| F4/P-22 | Chunks captured after a plain lease expiry: evidence flag or resumption | **OPEN** | SPEAKING §4.2.4, §11 | – |
+| F4/P-23 | Whether the completion gate and evidence finalization follow the `off`/`observe`/`enforce` modes | **OPEN** | SPEAKING §4.2.10, §11 | – |
+| F4/P-24 | Whether a post-submission late grant must carry a declared chunk count (C1 dependency) | **OPEN** | SPEAKING §4.2.10, §11 | – |
+
+P-16 is not a decision: SPEAKING §11 records it as "a review item outside this specification" (how known client defects relate to the unmerged PR #53). It has no F4/P-16 entry.
+
+**Not recorded by v1.4.** No split of F4/P-14 (for example, separating the reservation abandonment bound) and no new F4/P-n identifier. Any such change needs a separate owner decision and a new register version.
 
 ---
 
@@ -326,6 +366,7 @@ After applying OWN-D1…OWN-D20 and the evidence-based resolutions: **none**. Ev
 | Owner | Klarweg owner | ☑ **Approve with changes — register v1.1** (sections A–H as amended; changes in §J) | 2026-10-07 |
 | Owner | Klarweg owner | ☑ **Approve — register v1.2** (§C.1 EX-03 panel decisions EX-03/O1…O10 as recorded; changes in §J) | 2026-10-07 |
 | Owner | Klarweg owner | ☑ **Approve — register v1.3** (§B.1 OD-53, AI-assisted Mock DRAFT authoring, as recorded; changes in §J) | 2026-10-09 |
+| Owner | Klarweg owner | ☑ **Approve — register v1.4** (§B.2 F4 decision-recording mechanism, Option C, only; F4/P-n statuses recorded unchanged; **no F4 policy decision approved**; changes in §J) | 2026-10-11 |
 
 **Scope of this sign-off.** It approves the decisions and statuses **as recorded** in this register. It does **not** certify that any open gate is complete. Still open at v1.1 include:
 - OD-08 legal clearance (EXTERNAL, not resolved)
@@ -345,6 +386,13 @@ permission for unreleased, clearly labelled, AI-assisted B1 Mock M0 drafts and i
 any item or form, and it does not close or relax any of the items listed above, including the EX-03 human panel and
 M-27 sign-off, OD-08 legal clearance, OD-14 conditions, Q14/M-28 originality, EX-01 privacy, EX-04 accessibility,
 OD-07/OD-30 scoring, calibration, or any release gate. G0 below is unaffected.
+
+**Scope of the v1.4 sign-off.** Same scope as above. It records the owner's approval, given on 2026-10-11 in the F4
+working session, of the **record-keeping mechanism only**: F4 decisions are recorded in §B.2 under namespaced
+F4/P-n identifiers. Like the earlier rows, this is a recorded owner approval, not a cryptographic signature. It does
+**not** approve any F4 policy. F4/P-4 (A-bounded) and F4/P-8 (C1) remain owner-selected proposals pending formal
+approval, and every other F4/P-n item keeps the status recorded in §B.2. It does not change OD-53, and it does not
+close or relax any of the items listed above. G0 below is unaffected.
 
 **G0 (Standard §17, "This standard approved; OD-01…OD-16 decided").** Under this register's precedence (header), G0's spec-freeze condition is met by this sign-off together with a **recorded status** for every OD-01…OD-16. It does **not** mean all of them are settled:
 - **LOCKED:** OD-01, OD-02, OD-05, OD-09, OD-10, OD-11, OD-12, OD-13, OD-15
@@ -367,5 +415,6 @@ Changes after sign-off require a new register version that lists the changed IDs
 | v1.1 | 2026-10-07 | **OD-32** → (b) simulated pair, LOCKED · **OD-14** → (b) premium neural voices, LOCKED / CONDITIONAL · **OD-08** → (b) formal legal clearance route, LOCKED / CONDITIONAL (clearance not resolved) · R-04 note · §G.2 content-authoring gate · §H AUDIO, SPEAKING, LEGAL rows · §I sign-off · this §J | OD-32: Medium (content + phase plan) · OD-14: High (re-recording) · OD-08: Low (text) — as listed in §B/§C | Sprechen Teil 3 content and partner audio (OD-32); Hören and Sprechen audio production, voice licensing and MOS review (OD-14); exam instructions and descriptor wording (OD-08). No change to engine, schema, scoring rules or level configuration (the pinned config already carries the option-(b) phase plan) |
 | v1.2 | 2026-10-07 | **EX-03/O1…O10** recorded as owner decisions (new §C.1) · EX-03 row (status: governance decided, panel not formed) · §G.2 content-authoring gate · §I sign-off and scope note · header · this §J | Low (process; recruitment and review effort) — as listed in §C.1 | Item review process and reviewer recruitment only. No change to engine, schema, scoring rules, level configuration, MOCK gates or the Standard |
 | v1.3 | 2026-10-09 | **OD-53** recorded as owner decision (new §B row and §B.1) · §G.2 content-authoring gate (draft-only note) · §H AUTHORING row · §I sign-off and scope note · header · this §J | Low (process) — as listed in §B | Private Mock draft authoring and internal AI QA only. No change to engine, schema, validator, scoring rules, level configuration, MOCK gates, EX-03/O1…O10 or the Standard; no gate closed |
+| v1.4 | 2026-10-11 | F4 decision-recording mechanism (owner decision, Option C): new §B.2 recording **F4/P-1…F4/P-15 and F4/P-17…F4/P-24** with their SPEAKING §11 statuses at `2e92ae3`, **all unchanged** (F4/P-4 and F4/P-8 owner-selected, pending formal approval; all others OPEN) · header (status, baseline, naming) · §I sign-off and scope note · this §J | Low (process) — record-keeping only | Decision record-keeping only. No F4 policy approved and no F4 status changed. No change to SPEAKING or any other specification, engine, Worker, schema, migrations, validator, scoring rules, level configuration, MOCK gates, OD-53 or any existing decision; no gate closed |
 
 The §0 inventory counts reflect the v1.0 categorisation and are unchanged; the decisions above remain in their original §B/§C sections with updated statuses.

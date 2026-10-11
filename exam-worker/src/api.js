@@ -11,7 +11,7 @@ import { BANDS, rubricTotal, rubricUnits } from './scoring.js';
 import { signMediaToken, MEDIA_TTL_MS } from './media.js';
 import {
   loadAttempt, attemptModules, audit, requireRequestId, idempotent, acquireLease, requireLease,
-  computeDeadline, settle, submitModule, finalizeModule, scoreModule, buildResult, incident, SAVE_GRACE_MS, RESULT_LABEL
+  computeDeadline, speakingPrepEnd, settle, submitModule, finalizeModule, scoreModule, buildResult, incident, SAVE_GRACE_MS, RESULT_LABEL
 } from './core.js';
 
 const MAX_TEXT_CHARS = 20_000;
@@ -267,12 +267,17 @@ export async function saveAnswers(env, userId, attemptId, module, request) {
     const pkg = await loadPackage(env, attempt.form_id, module);
     const openPart = module === 'hoeren'
       ? hoerenPosition(pkg.data.timing.plan, m, t, await hoerenReadinessMs(env, attempt), PART_LEAD_MS).openPart : Infinity;
+    // Sprechen: the Teil 2 topic choice locks when the preparation ends (SPEAKING-SPEC §2). The same in-flight grace
+    // as module deadlines applies, so a choice made just before the end is not lost in transit.
+    const topicLockAt = module === 'sprechen' && pkg.data.timing.kind === 'speaking_phases'
+      ? speakingPrepEnd(pkg.data.timing.plan, m.started_at, attempt.time_multiplier) + SAVE_GRACE_MS : Infinity;
     // validate the whole batch first: a rejected save request changes nothing
     const checked = body.answers.map((a) => {
       const item = pkg.items.get(a?.item_id);
       if (!item) fail(422, 'unknown_item');
       if (item.is_example) fail(422, 'item_is_example', item.item_id);
       if (item.part > openPart) fail(409, 'part_not_open', item.item_id);   // OD-02: future Hören parts stay closed
+      if (item.interaction === 'topic_choice' && t > topicLockAt) fail(409, 'topic_locked', item.item_id);
       if (!Number.isInteger(a.seq) || a.seq < 1 || a.seq > 1e9) fail(422, 'invalid_seq', item.item_id);
       return { a, item, value: validateValue(item, a.value) };
     });
@@ -581,8 +586,16 @@ export async function completeTurn(env, userId, attemptId, request) {
     for (let i = 0; i < n; i++) if (!have.has(i)) missing.push(i);
     if (missing.length) fail(409, 'chunks_missing', 'Some recording chunks have not arrived yet.', { missing: missing.slice(0, 100) });
     if (have.size !== n) fail(409, 'chunk_count_mismatch');
-    await env.DB.prepare("UPDATE recording_turns SET status = 'complete', duration_ms = ?4, completed_at = ?5 WHERE attempt_id = ?1 AND part = ?2 AND turn = ?3")
+    // A completed turn is never rewritten (SPEAKING §4.2.5): an identical repeat replays, different values conflict.
+    // The status guard makes concurrent completions race-safe: only one of them can flip 'open' → 'complete'.
+    const r = await env.DB.prepare("UPDATE recording_turns SET status = 'complete', duration_ms = ?4, completed_at = ?5 WHERE attempt_id = ?1 AND part = ?2 AND turn = ?3 AND status = 'open'")
       .bind(attemptId, item.part, body.turn, dur, now(env)).run();
+    if (!r.meta.changes) {
+      const cur = await env.DB.prepare('SELECT status, chunks, duration_ms FROM recording_turns WHERE attempt_id = ?1 AND part = ?2 AND turn = ?3').bind(attemptId, item.part, body.turn).first();
+      if (!cur || cur.status !== 'complete') fail(409, 'invalid_transition');
+      if (cur.chunks !== n || cur.duration_ms !== dur) fail(409, 'turn_complete_conflict', 'This turn is already complete with different values.');
+      return { ok: true, item_id: item.item_id, turn: body.turn, chunks: n, complete: true, already: true };
+    }
     return { ok: true, item_id: item.item_id, turn: body.turn, chunks: n, complete: true };
   });
 }

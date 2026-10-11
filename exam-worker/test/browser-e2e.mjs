@@ -1,8 +1,16 @@
 /* OPT-IN real-browser E2E (headless Chrome over CDP, no extra dependencies):
    START → LESEN → HÖREN (real WebAudio playback of test tones, real time)
-   → SCHREIBEN (typing + umlaut button + reload recovery) → SPRECHEN (fake
-   microphone, chunk upload) → SUBMIT → RESULT, at desktop and mobile widths.
-   Synthetic content only, against the local dev server. Takes ~3–4 minutes.
+   → SCHREIBEN (typing + umlaut button + reload recovery) → SPRECHEN (phase-driven:
+   preparation + reload, topic lock, fake-microphone recording, reload mid-part,
+   partner presentation played once without recording, Teil 3) → SUBMIT → RESULT,
+   at desktop and mobile widths. Synthetic content only, against the local dev
+   server. The Sprechen part moves the module start on the TEST server (in-memory
+   D1) to skip the long Teil 1/2 waits.
+   A second scenario runs Chrome with its DEFAULT autoplay policy (no
+   --autoplay-policy flag, no user gesture on load): the page is loaded just
+   before the partner phase and reloaded during it; blocked audio must ask for
+   "Audio starten" and continue from its scheduled position, never silently
+   count as played. Takes ~5–6 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override) */
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
@@ -10,15 +18,17 @@ import os from 'node:os';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { startDevServer } from './dev-server.mjs';
+import { call, rid } from './harness.mjs';
+import { post, start, submit, uploadChunk } from './flow.mjs';
 
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (...a) => console.log('[browser-e2e]', ...a);
 
-async function launch() {
+async function launch({ autoplayFlag = true } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-chrome-'));
   const proc = spawn(CHROME, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', `--user-data-dir=${dir}`,
-    '--remote-debugging-port=0', '--autoplay-policy=no-user-gesture-required', '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream',
+    '--remote-debugging-port=0', ...(autoplayFlag ? ['--autoplay-policy=no-user-gesture-required'] : []), '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream',
     'about:blank'], { stdio: 'ignore' });
   const portFile = path.join(dir, 'DevToolsActivePort');
   for (let i = 0; i < 100 && !fs.existsSync(portFile); i++) await sleep(100);
@@ -59,6 +69,9 @@ async function run(viewport) {
     const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
     await send('Runtime.evaluate', { expression: 'window.confirm = () => true' });
     await send('Page.addScriptToEvaluateOnNewDocument', { source: 'window.confirm = () => true;' });
+    // record which Sprechen assets an <audio> element starts (the shell tags them with data-asset)
+    await send('Page.addScriptToEvaluateOnNewDocument', { source: `window.__plays = []; { const play = HTMLMediaElement.prototype.play;
+      HTMLMediaElement.prototype.play = function () { window.__plays.push((this.dataset && this.dataset.asset) || ''); return play.apply(this, arguments); }; }` });
     const base = `http://127.0.0.1:${dev.port}/exam/`;
     await send('Page.navigate', { url: base });
 
@@ -130,10 +143,75 @@ async function run(viewport) {
     await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`, 15000, 'Sprechen intro');
     await click('#kx-consent');
     await click('[data-act="start"][data-module="sprechen"]');
-    await waitFor(`/Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 30000, 'recording');
-    await sleep(3500);
-    const chunks = await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks').first();
-    assert.ok(chunks.n >= 1, 'chunks are uploaded progressively while recording');
+    const TOPIC = 'itm:b1:syn-sp2-topic', PARTNER = 'ast:syn-sp3-partner-talk';
+    const topicRadios = `[...document.querySelectorAll('input[type=radio][data-item="${TOPIC}"]')]`;
+    const sprechenRow = () => dev.env.DB.prepare("SELECT started_at, deadline_at FROM attempt_modules WHERE module = 'sprechen'").first();
+    const chunkCount = async (part) => (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks' + (part ? ' WHERE part = ?1' : '')).bind(...(part ? [part] : [])).first()).n;
+    const phaseSecondsLeft = async () => { const m = /noch (\d+):(\d+)/.exec(await evaluate(`document.querySelector('#kx-phase-time')?.textContent || ''`)); return m ? Number(m[1]) * 60 + Number(m[2]) : null; };
+
+    // 1. PREPARATION (synthetic: 20 s; published lc:b1@1: 15 min): topic choice open, nothing recorded
+    await waitFor(`/^Vorbereitung/.test(document.querySelector('#kx-phase')?.textContent || '')`, 20000, 'preparation phase');
+    assert.equal(await evaluate(`${topicRadios}.length`), 2);
+    assert.equal(await evaluate(`${topicRadios}.some((r) => r.disabled)`), false, 'topic choice open during the preparation');
+    await evaluate(`${topicRadios}.find((r) => r.value === 't1').click()`);
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'topic autosaved');
+    assert.equal(await chunkCount(), 0, 'nothing is recorded during the preparation');
+    // refresh during the preparation: same phase, same remaining time (server-derived)
+    await evaluate('window.__beforeReload = true');
+    await send('Page.reload');
+    await waitFor(`!window.__beforeReload && /^Vorbereitung/.test(document.querySelector('#kx-phase')?.textContent || '') && /noch/.test(document.querySelector('#kx-phase-time')?.textContent || '')`, 20000, 'preparation restored after reload');
+    const row0 = await sprechenRow();
+    const shown = await phaseSecondsLeft(), expected = (row0.started_at + 20_000 - Date.now()) / 1000;
+    assert.ok(shown !== null && Math.abs(shown - expected) <= 2, `remaining preparation after reload: shown ${shown} s, expected ≈ ${expected.toFixed(1)} s`);
+    assert.equal(await evaluate(`${topicRadios}.find((r) => r.value === 't1').checked`), true, 'chosen topic restored');
+
+    // 2. TOPIC LOCK at the end of the preparation (the server enforces it as well)
+    await waitFor(`${topicRadios}.every((r) => r.disabled)`, 25000, 'topic locked after the preparation');
+    await evaluate(`${topicRadios}.find((r) => r.value === 't2').click()`);
+    assert.equal(await evaluate(`${topicRadios}.find((r) => r.value === 't1').checked`), true, 'a locked choice cannot change');
+    const stored = await dev.env.DB.prepare('SELECT value_json FROM responses_current WHERE item_id = ?1').bind(TOPIC).first();
+    assert.deepEqual(JSON.parse(stored.value_json), { option_id: 't1' });
+    // F6: the lock is announced and tied to the group for assistive technology
+    assert.equal(await evaluate(`document.getElementById('item-itm_b1_syn-sp2-topic').getAttribute('aria-describedby')`), 'lock-itm_b1_syn-sp2-topic');
+    assert.match(await evaluate(`document.getElementById('lock-itm_b1_syn-sp2-topic').textContent`), /gesperrt\. Gewählt: /);
+    assert.match(await evaluate(`document.querySelector('#kx-announce').textContent`), /Vorbereitung ist beendet/);
+
+    // 3. TEIL 1: recording windows follow the phase (intro first, then the partner prompt, then recording)
+    await waitFor(`/^Teil 1: Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 25000, 'Teil 1 recording');
+    for (const t1 = Date.now(); (await chunkCount(1)) < 2; ) { if (Date.now() - t1 > 15000) throw new Error('no Teil 1 chunks'); await sleep(200); }
+
+    // 4. TEST-SERVER TIME JUMP + reload mid-turn: land 8 s before the end of Teil 2 (no waiting for Teil 1/2)
+    const row1 = await sprechenRow();
+    const target = Date.now() - (265_000 - 8_000);   // Teil 2 ends 265 s after the module start (synthetic plan)
+    const delta = target - row1.started_at;
+    await dev.env.DB.prepare("UPDATE attempt_modules SET started_at = started_at + ?1, deadline_at = deadline_at + ?1 WHERE module = 'sprechen'").bind(delta).run();
+    await evaluate('window.__beforeReload = true');
+    await send('Page.reload');
+    await waitFor(`!window.__beforeReload && /^Teil 2/.test(document.querySelector('#kx-phase')?.textContent || '')`, 20000, 'reloaded into Teil 2');
+    // the interrupted Teil 1 turn kept its chunks and was finalised; Teil 1 is not repeated
+    for (const t1 = Date.now(); ; ) {
+      const turn = await dev.env.DB.prepare("SELECT status, chunks FROM recording_turns WHERE part = 1 AND turn = 't1'").first();
+      if (turn && turn.status === 'complete') { assert.ok(turn.chunks >= 2); break; }
+      if (Date.now() - t1 > 10000) throw new Error('interrupted Teil 1 turn not finalised: ' + JSON.stringify(turn));
+      await sleep(200);
+    }
+
+    // 5. PARTNER PRESENTATION: played once, nothing recorded
+    await waitFor(`/Präsentation Ihres Gesprächspartners/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'partner phase');
+    const chunksAtPartner = await chunkCount();
+    await waitFor(`window.__plays.includes(${JSON.stringify(PARTNER)})`, 5000, 'partner presentation started');
+    await sleep(3000);
+    assert.equal(await chunkCount(), chunksAtPartner, 'no recording during the partner presentation');
+    assert.equal(await chunkCount(3), 0);
+
+    // 6. TEIL 3: recording starts without replaying the partner talk; the examiner prompt is still played
+    await waitFor(`/^Teil 3: Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'Teil 3 recording');
+    for (const t1 = Date.now(); (await chunkCount(3)) < 1; ) { if (Date.now() - t1 > 15000) throw new Error('no Teil 3 chunks'); await sleep(200); }
+    assert.equal(await evaluate(`window.__plays.filter((a) => a === ${JSON.stringify(PARTNER)}).length`), 1, 'partner presentation played exactly once');
+    const teil2 = await dev.env.DB.prepare("SELECT status FROM recording_turns WHERE part = 2 AND turn = 't1'").first();
+    assert.equal(teil2 && teil2.status, 'complete', 'Teil 2 recorded in its (shortened) window');
+    const chunks = { n: await chunkCount() };
+    log(viewport.name, 'Sprechen phases: preparation + reload, topic lock, Teil 1, reload into Teil 2, partner once, Teil 3');
     await click('[data-act="submit"]');
     await waitFor(`document.querySelector('[data-act="complete"]')`, 20000, 'complete screen');
     await click('[data-act="complete"]');
@@ -150,10 +228,101 @@ async function run(viewport) {
   return errors;
 }
 
+/* ---------- DEFAULT autoplay policy (F1): no flag, no user gesture on load ---------- */
+async function runDefaultAutoplay(viewport) {
+  const dev = await startDevServer();
+  const b = await launch({ autoplayFlag: false });
+  const { send } = b;
+  const PARTNER = 'ast:syn-sp3-partner-talk', PARTNER_START = 265_000;   // synthetic plan: partner phase 265–270 s after the module start
+  try {
+    // drive Lesen/Hören/Schreiben through the in-process Worker (no browser clicks), then start Sprechen there too
+    const created = await call(dev.env, 'POST', '/exam/v1/attempts', { user: dev.user, body: { mode: 'synthetic_full', level: 'b1', request_id: rid(), device_id: 'dev_e2e_autoplay_0000000001' } });
+    const s = { env: dev.env, user: dev.user, attempt: created.json.attempt_id, lease: created.json.lease.lease_id };
+    for (const m of ['lesen', 'hoeren', 'schreiben']) { await start(s, m); if (m === 'hoeren') await post(s, '/hoeren/events', { type: 'ready' }); await submit(s, m); }
+    assert.equal((await post(s, '/sprechen/consent', { granted: true, version: 'rec-consent@1' })).status, 200);
+    await start(s, 'sprechen');
+    // Teil 1 and Teil 2 are already recorded (via the test Worker), so the page holds no live microphone before the
+    // partner phase: Chrome lets a page that is capturing audio autoplay, which would hide the default-policy refusal.
+    for (const [item, turns] of [['itm:b1:syn-sp1', ['t1', 't2', 't3']], ['itm:b1:syn-sp2', ['t1']]]) for (const turn of turns) {
+      assert.equal((await uploadChunk(s, item, turn, 0, Buffer.from(`pre-${item}-${turn}`))).status, 200);
+      assert.equal((await post(s, '/sprechen/turns', { item_id: item, turn, chunks: 1, duration_ms: 1000 })).status, 200);
+    }
+    const placeAt = async (msAfterStart) => {   // TEST server only: move the module start so that "now" is msAfterStart into the plan
+      const row = await dev.env.DB.prepare("SELECT started_at FROM attempt_modules WHERE module = 'sprechen'").first();
+      const delta = (Date.now() - msAfterStart) - row.started_at;
+      await dev.env.DB.prepare("UPDATE attempt_modules SET started_at = started_at + ?1, deadline_at = deadline_at + ?1 WHERE module = 'sprechen'").bind(delta).run();
+    };
+    await dev.env.DB.prepare('DELETE FROM attempt_leases').run();   // let the page take the attempt without a "Hier fortsetzen" click
+
+    await send('Runtime.enable'); await send('Page.enable');
+    await send('Emulation.setDeviceMetricsOverride', { width: viewport.w, height: viewport.h, deviceScaleFactor: 1, mobile: viewport.mobile });
+    // record successful and refused play() calls per asset (the shell tags Sprechen audio with data-asset)
+    await send('Page.addScriptToEvaluateOnNewDocument', { source: `window.__ok = []; window.__refused = []; { const play = HTMLMediaElement.prototype.play;
+      HTMLMediaElement.prototype.play = function () { const el = this, asset = (el.dataset && el.dataset.asset) || ''; const p = play.apply(el, arguments);
+        p.then(() => window.__ok.push({ asset, offset: el.currentTime }), (e) => window.__refused.push({ asset, name: e && e.name })); return p; }; }` });
+    const evaluate = async (expr, userGesture = false) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true, userGesture });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(100); }
+      throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+    };
+    const okPartner = () => evaluate(`window.__ok.filter((p) => p.asset === ${JSON.stringify(PARTNER)})`);
+
+    // 1. load the page 4 s before the partner phase (fresh load = no user activation)
+    await placeAt(PARTNER_START - 4_000);
+    await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+    await waitFor(`/Präsentation Ihres Gesprächspartners/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'partner phase (loaded just before)');
+    await waitFor(`document.querySelector('[data-act="audio-start"]')`, 4000, '"Audio starten" offered');
+    assert.ok(await evaluate(`window.__refused.some((r) => r.asset === ${JSON.stringify(PARTNER)} && r.name === 'NotAllowedError')`), 'default policy refused the play');
+    assert.equal((await okPartner()).length, 0, 'a refused play never counts as played');
+    assert.equal(await evaluate(`document.querySelector('[data-act="audio-start"]').closest('[role="alert"]') !== null`), true, 'the request is an accessible alert');
+    assert.equal(await evaluate(`document.activeElement && document.activeElement.dataset.act`), 'audio-start', 'the action receives focus');
+    await evaluate(`document.querySelector('[data-act="audio-start"]').click()`, true);   // a real user gesture
+    await waitFor(`window.__ok.some((p) => p.asset === ${JSON.stringify(PARTNER)})`, 4000, 'partner plays after the click');
+    assert.equal((await okPartner()).length, 1, 'played once');
+    assert.equal(await evaluate(`!!document.querySelector('[data-act="audio-start"]')`), false, 'the request disappears');
+
+    // 2. reload DURING the partner phase (0.6 s in; the synthetic presentation is 2 s): continue from the scheduled position
+    await placeAt(PARTNER_START + 600);
+    await evaluate('window.__beforeReload = true');
+    await send('Page.reload');
+    await waitFor(`!window.__beforeReload && document.querySelector('[data-act="audio-start"]')`, 6000, '"Audio starten" offered again after the reload');
+    assert.equal((await okPartner()).length, 0, 'nothing played before the click on the reloaded page');
+    await evaluate(`document.querySelector('[data-act="audio-start"]').click()`, true);
+    await waitFor(`window.__ok.some((p) => p.asset === ${JSON.stringify(PARTNER)})`, 4000, 'partner continues after the click');
+    const resumed = await okPartner();
+    assert.equal(resumed.length, 1, 'played once on this page');
+    assert.ok(resumed[0].offset >= 0.5, `continued at ${resumed[0].offset} s, not from the beginning`);
+
+    // 3. Teil 3 records on schedule (its first prompt is the partner talk, which is not replayed)
+    await waitFor(`/^Teil 3: Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 10000, 'Teil 3 recording');
+    assert.equal((await okPartner()).length, 1, 'no further partner play in Teil 3');
+    for (const t1 = Date.now(); ; ) {
+      const n = (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks WHERE part = 3').first()).n;
+      if (n >= 1) break;
+      if (Date.now() - t1 > 10000) throw new Error('no Teil 3 chunks');
+      await sleep(200);
+    }
+    const uncaught = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    log(viewport.name, 'DEFAULT autoplay PASS', { partner_resumed_offset_s: Number(resumed[0].offset.toFixed(2)) });
+    return uncaught;
+  } finally {
+    b.close(); dev.server.close();
+  }
+}
+
 const results = [];
 for (const vp of [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }]) {
   const errs = await run(vp);
   results.push({ vp: vp.name, uncaught: errs });
+}
+for (const vp of [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }]) {
+  const errs = await runDefaultAutoplay(vp);
+  results.push({ vp: `${vp.name} (default autoplay policy)`, uncaught: errs });
 }
 console.log(JSON.stringify(results));
 if (results.some((r) => r.uncaught.length)) process.exit(1);

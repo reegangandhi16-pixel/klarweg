@@ -82,6 +82,23 @@ test('SPEAKING: turn completion requires contiguous chunks 0..n-1; completed tur
   assert.equal((await uploadChunk(s, ITEM, 't1', 3, Buffer.from('d'))).json.error, 'turn_closed');
 });
 
+test('SPEAKING: a completed turn is never rewritten — identical repeat replays, different values conflict (SPEAKING §4.2.5)', async () => {
+  const s = await setup();
+  await toSprechen(s);
+  for (const [seq, b] of [[0, 'a'], [1, 'b'], [2, 'c']]) await uploadChunk(s, ITEM, 't1', seq, Buffer.from(b));
+  const first = await post(s, '/sprechen/turns', { item_id: ITEM, turn: 't1', chunks: 3, duration_ms: 3000 });
+  assert.equal(first.status, 200); assert.equal(first.json.complete, true); assert.equal(first.json.already, undefined);
+  // identical repeat with a NEW request id (not served from request_log) → success, flagged as already complete
+  const again = await post(s, '/sprechen/turns', { item_id: ITEM, turn: 't1', chunks: 3, duration_ms: 3000 });
+  assert.equal(again.status, 200); assert.equal(again.json.complete, true); assert.equal(again.json.already, true);
+  // different duration → refused, stored values unchanged
+  const conflict = await post(s, '/sprechen/turns', { item_id: ITEM, turn: 't1', chunks: 3, duration_ms: 4500 });
+  assert.equal(conflict.status, 409); assert.equal(conflict.json.error, 'turn_complete_conflict');
+  const st = await get(s, '/sprechen/status');
+  const row = st.json.turns.find((t) => t.item_id === ITEM && t.turn === 't1');
+  assert.equal(row.status, 'complete'); assert.equal(row.duration_ms, 3000);
+});
+
 test('SPEAKING: recovery — status lists what the server holds so a reloaded client resends only the gaps', async () => {
   const s = await setup();
   await toSprechen(s);
@@ -119,4 +136,33 @@ test('SPEAKING: deadline covers preparation + phases + transition allowance (syn
   const plan = (await get(s, '/modules/sprechen/package')).json.package.timing.plan;
   assert.equal(m.deadline_at - m.started_at, plan.total_ms);
   assert.ok(plan.prep_ms > 0 && plan.phases.some((p) => p.listen_only));
+});
+
+test('SPEAKING: the Teil 2 topic choice is changeable during the preparation and locked after it (server-enforced, save grace)', async () => {
+  const s = await setup();
+  await toSprechen(s);
+  const TOPIC = 'itm:b1:syn-sp2-topic';
+  const save = (seq, option_id) => post(s, '/modules/sprechen/answers', { answers: [{ item_id: TOPIC, value: { option_id }, seq }] });
+  const prepMs = 20_000, grace = 10_000;   // synthetic preparation (timing override); SAVE_GRACE_MS
+  assert.equal((await save(1, 't1')).status, 200);
+  s.advance(prepMs - 1);
+  assert.equal((await save(2, 't2')).status, 200, 'still in the preparation');
+  s.advance(1 + grace);   // exactly prep end + grace: a choice sent at the end is still accepted in transit
+  assert.equal((await save(3, 't1')).status, 200);
+  s.advance(1);
+  const late = await save(4, 't2');
+  assert.equal(late.status, 409); assert.equal(late.json.error, 'topic_locked');
+  const answers = await get(s, '/modules/sprechen/answers');
+  assert.deepEqual(answers.json.answers.find((a) => a.item_id === TOPIC), { item_id: TOPIC, value: { option_id: 't1' }, seq: 3 }, 'the refused change left the stored choice untouched');
+});
+
+test('SPEAKING: with a time multiplier the topic lock moves with the longer preparation (same rule as the deadline)', async () => {
+  const s = await setup();
+  await s.env.DB.prepare('UPDATE attempts SET time_multiplier = 1.5 WHERE id = ?1').bind(s.attempt).run();
+  await toSprechen(s);
+  const TOPIC = 'itm:b1:syn-sp2-topic';
+  s.advance(30_000 + 10_000);   // 20 s × 1.5 + grace
+  assert.equal((await post(s, '/modules/sprechen/answers', { answers: [{ item_id: TOPIC, value: { option_id: 't2' }, seq: 1 }] })).status, 200);
+  s.advance(1);
+  assert.equal((await post(s, '/modules/sprechen/answers', { answers: [{ item_id: TOPIC, value: { option_id: 't1' }, seq: 2 }] })).json.error, 'topic_locked');
 });

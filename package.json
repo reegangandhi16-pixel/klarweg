@@ -24,6 +24,7 @@
     "check:generated": "node scripts/build-grammar-index.mjs --check && node scripts/seo-chapter-meta.mjs --check",
     "test:exam": "node exam-content/tools/check-public-boundary.mjs && node exam-content/tools/validate.mjs && node --test exam-content/test/*.test.mjs exam-worker/test/*.test.mjs exam/test/*.test.mjs access/worker/test/exam-proxy.test.mjs",
     "test:exam:browser": "node exam-worker/test/browser-e2e.mjs",
+    "exam:demo": "node exam-worker/test/dev-server.mjs",
     "exam:validate": "node exam-content/tools/validate.mjs",
     "exam:build": "node exam-content/tools/build-release.mjs --release r000",
     "exam:check-public": "node exam-content/tools/check-public-boundary.mjs"

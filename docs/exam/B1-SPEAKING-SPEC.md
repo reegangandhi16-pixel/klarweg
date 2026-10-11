@@ -2,6 +2,7 @@
 
 > **Status:** design only. No prompts, partner scripts, recordings or rating texts are created.
 > **Sources:** Standard §5.4, §6.4, §8.3 (official: S1 §1.4, §3, §5; S3 p.25–28, 45–47). **Labels:** **[OFFICIAL]** · **[DESIGN]** · **[UNKNOWN]** · **[OD-xx]**.
+> **F4 recording grants (draft, 2026-10-11):** §4.2, §5.1–§5.3 and §10 are **PROPOSED — NOT IMPLEMENTED**; §4.1 records observed implementation status and conflicts; §5.4 and §11 record open decisions. The proposals follow the owner's F4 directions F4-D1…F4-D5 (§11) and record every remaining owner decision as **[OPEN P-n]**. Additional labels: **[REPO @ ef64371]** = observed in the repository at that commit · **[PR #53]** = present only in the unmerged PR #53 · **[PROPOSED]** = design proposal, not a contract. This draft was prepared with AI assistance; it is not a human review and closes no gate.
 
 ---
 
@@ -71,24 +72,235 @@ The official examiner moderation script (S3 p.45) is **not copied**. Klarweg wri
 | Limits | Teil 2 hard 4:30 of audio; whole module ≤ 20 min audio; ≤ 10 MB per attempt (32 kbps → ≈ 4 MB per 15 min) |
 | Monitoring | Live level meter; silence detection (> 15 s silence in Teil 2 → a gentle visual hint, no audio interruption [DESIGN]) |
 
+The table above is the design as decided. It is **not** a description of the current implementation; §4.1 lists the differences.
+
+### 4.1 Implementation status and unresolved conflicts [REPO @ ef64371]
+
+| Topic | This spec / decision register | Repository | Status |
+|---|---|---|---|
+| Chunk length | `timeslice = 5000 ms`; register **OD-09 LOCKED** ("5-s chunked upload") | `exam/js/recorder.js` `TurnRecorder.start()` calls `MediaRecorder.start(1000)` | **Conflict.** OD-09 stands. Aligning the code to OD-09, or amending OD-09, needs a separately authorised, evidence-backed change **[OPEN P-1]** |
+| Capture settings | Capture row (constraints, mono, 32 kbps) | `getUserMedia({ audio: true })`; no `mimeType` and no `audioBitsPerSecond` passed to `MediaRecorder` | Mismatch; actual bitrate not measured |
+| Routes | Upload and Finalisation rows use design-time names | Existing routes: `POST /exam/v1/attempts/:id/sprechen/consent`, `POST …/sprechen/chunks?lease_id&item_id&turn&seq&sha256` (raw bytes), `POST …/sprechen/turns {request_id, lease_id, item_id, turn, chunks, duration_ms}`, `GET …/sprechen/status` | These four are the only Sprechen routes. Routes in §4.2 do **not** exist |
+| Phase check on upload | – | `uploadChunk` and `completeTurn` check lease, consent, module state and the upload window (`recordingWindow`), **not the speaking phase** | F4 gap; addressed by §4.2 |
+| Turn-open record | – | None. `recording_turns.opened_at` is the arrival time of the first chunk | F4 gap; addressed by §4.2 |
+| Repeated completion | – | `completeTurn` does not check whether a turn is already complete; a repeat with a new `request_id` rewrites `duration_ms` and `completed_at` | Defect; §4.2.5 proposes the rule |
+| Local chunk key | `attempt/part/turn/seq` | `chunk:<item_id>:<turn>:<seq>`, without an attempt id | Mismatch; risk of mixing chunks across attempts or users on one browser. §4.2.4 proposes the key scope |
+| Duration | `duration_ms` | Client wall-clock time between recorder start and stop (`recorder.js`). [PR #53] also estimates interrupted turns as `chunks × 1000` | Neither is decoded media duration; see §5.2 |
+| Time multiplier | Engine spec, accommodations: "applied to module and phase durations" | `computeDeadline` (`speaking_phases`) multiplies the preparation only | **Conflict [OPEN P-18]** |
+| Retention | §6: 90 days after the final rating | Register OD-21: 30 days after the final rating | **Unresolved discrepancy [OPEN P-20]**; neither text is changed here |
+| Consent withdrawal | §6: deletion right | `consents.withdrawn_at` is checked, but no route sets it | **Unresolved requirement [OPEN P-19]** |
+| Introduction | §1, §2: recorded, not rated | The level configuration has an unrated `intro` phase; the synthetic form has no intro item; nothing maps the intro phase to an item | **[OPEN P-6]** |
+
+### 4.2 Recording grants — PROPOSED — NOT IMPLEMENTED
+
+**Terminology.** A *recording grant* (proposed id prefix `rgr_`) is unrelated to the `exam_access` grants of OD-18 and must never share identifiers, tables or wording with them.
+
+**Meaning.** A recording grant records that the server **authorised** one learner turn at `granted_at` (server time). It does **not** prove when the microphone captured audio, who spoke, that the speech is original, or that any score is valid. Client timestamps and device claims never authorise a recording.
+
+#### 4.2.1 Proposed routes and fields
+
+| Route (proposed) | Request | Response |
+|---|---|---|
+| `POST /exam/v1/attempts/:id/sprechen/turns/open` | Required: `request_id`, `lease_id`, `item_id`, `turn`. Optional **device claims**: `client_elapsed_ms`, `client_offline_ms`, `declared_chunks` | `rgr_id`, `item_id`, `part`, `turn`, `phase_id`, `state`, `kind` (`live` \| `late`), `granted_at`, `capture_window_ends_at`, `upload_deadline_at`, `max_chunks`, `flags[]`, `server_now`, `replayed` |
+| `POST …/sprechen/turns/stop` | `request_id`, `lease_id`, `rgr_id`, optional `declared_chunks`, `reason` | the recording grant and `server_now` |
+| Existing `chunks`, `turns`, `status` | gain an optional `rgr_id` (required only under `enforce`, §10) | `status` gains `recording_grants[]` |
+
+- `capture_window_ends_at` bounds the **capture**. `upload_deadline_at` is the end of the existing upload window (`recordingWindow`: while the module runs, deadline + save grace + `upload_grace_seconds`; after submission, deadline + `upload_grace_seconds`). They are different and must not be merged.
+- `part` and the phase are always derived by the server from the item; the client never supplies them.
+- Device claims are stored and labelled as claims. They are never evidence of capture time.
+- **Unresolved fields:** the `max_chunks` formula and constants **[OPEN P-1, P-14]**, so until approved it is computed and logged but never enforced; the rule that sets `kind` **[OPEN P-7]**; the `reason` values (subject to schema review).
+
+#### 4.2.2 Server checks for a live open [PROPOSED]
+
+In the existing order (user → attempt ownership → request id → lease → module state → server time):
+1. The attempt belongs to the user and is not voided; the `lease_id` is the current, unexpired lease.
+2. Module `sprechen` is `running` and server time ≤ deadline + save grace.
+3. Recording consent is active.
+4. The item is a `spoken_response` of the attempt's form, and the turn exists in it.
+5. The phase bound to the item's part (§4.2.3) is running in **server time**: `phase_start ≤ now < phase_end − MIN_OPEN_MS` **[OPEN P-14]**. The schedule is computed on the server from the release plan.
+6. The turn has no complete evidence, and no other recording grant is active within the invariant's scope (§4.2.6).
+
+**Dependency on P-18.** Check 5 needs one authoritative rule for how the time multiplier changes phase boundaries. Today the engine spec says the multiplier applies to module and phase durations, while the code multiplies only the preparation (§4.1). This draft does not choose between them **[OPEN P-18]**. Until P-18 is decided, and the engine spec, this spec, the deadline calculation and the client schedule all state the same rule:
+- phase-boundary checking is **not implementation-ready**;
+- no phase-boundary refusal may be enforced;
+- observe-mode results for attempts with a multiplier other than 1.0 cannot be interpreted.
+
+#### 4.2.3 Phase binding [PROPOSED]
+
+Today only the client maps phases to parts (`teil<N>` → part N) [PR #53]; the server has no mapping. Proposed: an explicit, validated binding between speaking phases and parts in the level configuration. The validator would reject a spoken-response part without exactly one bound phase, and a turn id repeated within a part. The representation is subject to schema review. Whether `teil<N>` stays as a fallback, and how the intro is bound, are **[OPEN P-6]**.
+
+#### 4.2.4 Three separate lifecycles [PROPOSED]
+
+| Lifecycle | States | Owner of the state |
+|---|---|---|
+| Recording grant | `open` (active) → `closed` with a `close_reason`: `stopped`, `capture_window_elapsed`, `lease_changed`, `module_closed`, `consent_withdrawn` [P-19] | Server |
+| Turn evidence | `none` → `partial` → `complete`, or `incomplete` (final, set when `upload_deadline_at` passes without completion) | Server |
+| Chunk | `local` (browser only) → `accepted` or `refused(code)` | Client holds; server decides |
+| Submission (existing) | module `running → submitting → submitted`; attempt `in_progress → completed` | Server |
+
+Rules that keep these consistent:
+- **Closed means no new capture, not no upload.** Chunks for a closed recording grant are still accepted until `upload_deadline_at`, within the existing checks.
+- **Lease changes.** Each recording grant stores the lease generation under which it was opened. How leases work today [REPO @ ef64371]:
+  - Every lease issue, including re-acquisition after plain expiry, creates a new `lease_id` and increments the generation.
+  - The server audits `lease_reacquired` when the previous lease had already expired, and `lease_takeover` (plus an incident) when it was still valid. That distinction rests on server time.
+  - The recorded "same device" detail rests on a client-supplied device id, so it is a device claim, not proof.
+  - All uploads already require the current, unexpired `lease_id`, so a superseded or expired client cannot upload.
+
+  Proposed:
+  - When the current generation is higher than the grant's, an `open` grant is closed by the server (`lease_changed`). It may not be used for further capture. The close reason keeps `lease_reacquired` and `lease_takeover` apart.
+  - **Buffered-chunk recovery.** Chunks for a grant closed this way remain uploadable under the normal rules (seq below `max_chunks` once enforced, §4.2.1 and §4.2.8; upload window; consent), but **only** with the current lease. A client whose lease was taken over by another tab or device cannot capture or upload until the learner explicitly takes the lease back. The learner's takeover is itself audited and an incident. Taking the lease back closes any grant opened under the other holder's generation.
+  - **Plain expiry during capture.** A device whose lease expired (for example offline for longer than the lease lifetime) cannot tell when the server closed its grant. It may therefore have captured audio after the closure. The server cannot distinguish those chunks by time. Two policies are possible: such grants carry a `lease_interrupted` evidence flag, or a grant closed by plain expiry may be resumed by the same attempt. This is **[OPEN P-22]**, not decided here.
+- **Late recording grants** (§5.1) are normally created already `closed` and never occupy the active slot. Whether a late request that arrives while the phase is still running may create an `open` grant: **[OPEN P-7]**.
+- **Re-recording.** Until **[OPEN P-3]** is decided, there is one recording grant per (attempt, item, turn). A repeated open returns the existing grant, and a closed empty grant is not reopened.
+- **Declared chunk count is optional.** If declared (stop or late open), completion must match it. If never declared, completion needs contiguous `0..n-1` with `n ≤ max_chunks` (once enforced), and the evidence records that the count was not declared. Loss of trailing chunks is then undetectable, and this must be shown (§5.3).
+- **Evidence after module submission.** Current behaviour [REPO @ ef64371]:
+  - After the Sprechen module is submitted, and **while the attempt is not completed**, the server still accepts chunks and completions inside the upload window (`recordingWindow`), with the current lease.
+  - Completing the attempt deletes the attempt lease, and `lease` refuses completed attempts. From then on **no** upload can succeed.
+  - Client-side re-sending after module submission is not implemented in [PR #53].
+
+  This draft therefore does **not** promise recovery after attempt completion. Any post-submit recovery path (client re-sending after submission, a restricted upload-only credential after completion, or blocking or warning on completion while evidence is partial) is a **proposed change requiring a decision [OPEN P-4]**. New late recording grants after module submission: **[OPEN P-8]**.
+- **Local storage keys** are scoped to attempt + recording grant + seq. Local storage only helps recovery; it is never acceptance.
+
+#### 4.2.5 Idempotency, retries, duplicates [PROPOSED]
+
+- `request_id` is unique per attempt (`request_log` primary key). The existing helper runs the operation **before** recording the request, so two concurrent identical requests both execute, and a refusal is not recorded [REPO @ ef64371]. Creating a recording grant must therefore be idempotent on its own, by uniqueness on (attempt, item, turn).
+- **Lost response.** Retrying with the same `request_id` replays the stored response, which can be stale. The client re-reads `status` before acting on it.
+- A new `request_id` for the same turn returns the existing recording grant. `granted_at`, `capture_window_ends_at`, `upload_deadline_at` and `max_chunks` are fixed at first issue and never extended.
+- **Stop:** identical values replay; a different `declared_chunks` is refused (409). **Completion:** identical values replay; different values are refused (409) and never overwrite.
+- **Chunks** keep the existing rule: same seq and sha256 → `duplicate`; same seq with different bytes → `chunk_conflict`. Today the object is written to storage before the database row [REPO @ ef64371], so concurrent conflicting uploads can leave stored bytes that differ from the recorded hash. The write ordering needs implementation review.
+- Gaps block completion. Out-of-order arrival is accepted. Missing chunks are never filled.
+
+#### 4.2.6 Concurrency invariant [PROPOSED]
+
+**At most one `open` recording grant per scope.** The scope (per attempt or per user) is **[OPEN P-17]**.
+
+Required guarantees, without prescribing the mechanism:
+1. Uniqueness is enforced by the database at write time, not by read-then-write and not by the client. The schema already uses a partial unique index elsewhere (`idx_attempts_one_open`), so one is a candidate for a per-attempt scope. A per-user scope cannot be enforced by an attempt-keyed constraint alone.
+2. Closing stale open grants (capture window elapsed, or lease generation no longer current) and creating the next one happen atomically.
+3. Every Worker instance makes this decision against the same serialised write path, with no stale read.
+
+**Stale versus valid active grants.**
+- A grant whose `capture_window_ends_at` has passed, or whose lease generation is no longer current, is **stale**. The server closes it (`capture_window_elapsed` / `lease_changed`) in the same atomic step that evaluates a new open (guarantee 2). Clients never close stale grants, and a stale grant never produces `recording_grant_active`.
+- A grant that is still within its capture window under the current lease generation is **valid**. The server ends it on schedule or on a lease change. Otherwise it ends only through `turns/stop`, which the server accepts only when all of these hold: the request presents the current lease and the `rgr_id`, and the grant belongs to that lease holder's attempt.
+- **Client behaviour on `recording_grant_active`:** re-read `status`. If the blocking grant is the client's own previous turn and that turn's capture has already ended locally (for example a lost stop response), it sends `turns/stop` for that `rgr_id`. Otherwise it **does not stop** the blocking grant, because it may be a recording still in progress.
+- With a per-attempt scope only the single lease holder can hold a valid grant, so the conflict can only come from the same client's own state. With a per-user scope (P-17) the blocking grant may belong to another attempt and must never be stopped from this one. What the blocked turn does then (skip it, or capture locally and request a late grant under §5.1) is **[OPEN P-21]**.
+
+**Not yet verified:** whether D1 batch atomicity and write serialisation hold for this path under concurrent Worker instances (the test harness uses in-process SQLite and cannot show it). A uniqueness constraint alone is not proof of concurrency correctness. Client-side locks (for example between tabs) only reduce local races and are **not** a security boundary.
+
+#### 4.2.7 Proposed refusals
+
+| Code | Meaning | Client action |
+|---|---|---|
+| `recording_grant_active` (+ the blocking grant's `rgr_id`, `item_id`, `turn`, `capture_window_ends_at`, `server_now`) | a **valid** recording grant is open in scope; stale grants never cause this refusal (§4.2.6) | re-read `status`; never stop a grant blindly (§4.2.6) |
+| `phase_not_open` (+ `phase_start_at`) | early by server time | retry at `phase_start_at` |
+| `phase_closed` | live open too late | no capture → skip the turn; capture already running → §5.1 |
+| `turn_closed` | evidence already complete | stop; keep local chunks |
+| `upload_window_closed` | after `upload_deadline_at` (existing code) | no retry; incident |
+| `lease_expired` / `lease_superseded` | existing codes | expired: re-acquire without takeover, then re-read `status` (open grants of the old generation are closed, §4.2.4) / superseded: stop capture, release the microphone, keep buffered chunks, offer an explicit takeover |
+| `recording_grant_required`, `recording_grant_mismatch`, `seq_beyond_cap` | under `enforce` only; `seq_beyond_cap` only once P-1 and P-14 are approved | no retry; keep the chunk; incident |
+
+Network failures, 5xx and 429 are retried with backoff (parameters **[OPEN P-14]**).
+
+#### 4.2.8 Thresholds — none approved (F4-D3)
+
+The candidate values, `MIN_OPEN_MS`, `STOP_TOLERANCE_MS`, chunk slack, open-retry backoff, an open-request rate limit, a per-grant byte cap **[OPEN P-15]** and a late-classification threshold **[OPEN P-7]**, are **not** constants of this specification **[OPEN P-14]**. The client's existing 1000 ms minimum turn window is current behaviour [PR #53], not an approved server threshold.
+
+Evidence required before any value is approved:
+- measured MediaRecorder chunk counts and sizes per browser for turns of about 1–270 s;
+- stop-time lag in foreground tabs, background tabs and tabs hidden for a long time;
+- client-to-server clock-offset error;
+- bitrate per browser;
+- request counts in `observe` mode (§10).
+
+Each value needs boundary tests just below, exactly at and just above it, plus concurrent duplicate opens, delayed responses after a phase change, reconnection near `capture_window_ends_at`, expiry with queued chunks, the rate limit across a window boundary, an exact byte cap, clock skew, and long background suspension.
+
+#### 4.2.9 Migration and compatibility [PROPOSED]
+
+Additive only. Older clients keep working under `off` and `observe`; `enforce` requires the updated client to be served first (§10).
+
+**Where mode and provenance are stored.** This is a conceptual design; names, types and indexes are subject to schema review.
+
+| Store | Contents | Written when |
+|---|---|---|
+| Recording-grant row (new) | `rgr_id`, attempt, item, part, turn, phase, `kind`, `granted_at`, windows, `lease_generation`, state and `close_reason`, the **effective enforcement mode at issue** | A grant is created, which happens only under `observe` or `enforce` |
+| Chunk and turn rows (existing tables, new nullable columns) | `rgr_id` (or NULL), **effective enforcement mode at write**, authorisation provenance (`live`, `late`, or `none`), duration provenance on turns (§5.2) | Each accepted chunk or completion written after the migration |
+| Recording-grant event rows (new) | One row per failed check: the code, the target (open, stop, chunk or completion), ids, server time, the mode | Under `observe`, a `would_refuse` for a request that was still processed. Under `enforce`, a refusal; no chunk or turn row is written, because nothing was accepted |
+| `incidents` (existing) | A summary incident per event kind (§5.3) | As for event rows |
+
+Consequences:
+- Rows written **before the migration** have no mode and no grant; they are shown as "recorded before recording grants".
+- Under **`off`** after the migration, **no recording-grant row exists**. Chunk and turn rows record mode `off`, `rgr_id` NULL and provenance `none`. The only exception is a chunk that names a grant created earlier under another mode. It stores that `rgr_id` and the grant's provenance, with mode `off`, which shows that no check was applied to it.
+- A **`would_refuse`** is never a property of the grant alone. It is an event linked to the chunk, turn or grant it concerns, so the accepted row and the reason it would have been refused can both be shown.
+- The effective mode is recorded as the value the server applied, whatever mechanism supplies it **[OPEN P-13]**.
+
 ## 5. Interruption recovery
 
 | Event | Behaviour |
 |---|---|
-| Network loss | Recording continues; chunks queue in IndexedDB; upload resumes; the turn completes when all chunks are acknowledged |
+| Network loss | Recording continues; chunks queue in IndexedDB; upload resumes; the turn completes when all chunks are acknowledged. With recording grants [PROPOSED]: §5.1 |
 | Mic permission revoked / device lost | Pause the phase clock **once** (≤ 60 s) to reconnect the mic; then continue. If it fails again: incident, part marked `unratable_technical`, offer a re-take of **that part only** in a new attempt slot (OD-33) |
 | Refresh / crash during prep | Resume prep with the remaining server time (notes restored from local + server autosave) |
-| Refresh / crash mid-part | Chunks already uploaded are kept; the part resumes at the next turn with the remaining part time; incident logged |
+| Refresh / crash mid-part | Chunks already uploaded are kept; the part resumes at the next turn with the remaining part time; incident logged. With recording grants [PROPOSED]: the reloaded client stops the open recording grant (`reason: interrupted`), re-sends buffered chunks, and requests completion only for contiguous `0..n-1`; a gap is never filled; the duration is marked as estimated (§5.2) |
 | Tab hidden during recording | Recording continues (desktop). iOS background suspension → incident handling as above |
-| Upload incomplete at module end | Up to 10 min background upload window ("Bitte Seite geöffnet lassen"); after that, missing chunks are an incident |
+| Upload incomplete at module end | Up to 10 min background upload window ("Bitte Seite geöffnet lassen"); after that, missing chunks are an incident. With recording grants [PROPOSED]: evidence still partial at `upload_deadline_at` becomes `incomplete` |
+| Lease expiry / takeover [PROPOSED] | A new lease generation closes grants opened under the old one (`lease_changed`, §4.2.4). Buffered chunks for them may be uploaded only with the current lease. After a takeover the superseded tab stops capture, releases the microphone and keeps its chunks; it can upload them only after an explicit takeover back. How chunks captured after a plain expiry are treated: **[OPEN P-22]** |
+| Consent withdrawal | No route exists today **[OPEN P-19]**. Its effect on open recording grants, buffered chunks and stored audio must be decided together with OD-21 retention |
+| Submit with uploads pending [PROPOSED] | The submit dialog states that recordings are still uploading. While the attempt is not completed, the server already accepts uploads inside the upload window [REPO @ ef64371]. Re-sending by the client after module submission is not implemented. Attempt completion deletes the lease and ends all uploads. Any recovery path after submission is unresolved: **[OPEN P-4]**, and new late grants after submission **[OPEN P-8]** (§4.2.4) |
 
 The phase clock is server-authoritative (engine spec §3). Interruption pauses are the only exception, capped and logged.
+
+### 5.1 Offline recording and late recording grants [PROPOSED — owner direction F4-D2]
+
+If the open request cannot reach the server, capture may still follow the client's copy of the server schedule and is stored locally. After reconnection, inside `upload_deadline_at`, the client sends `turns/open` with its device claims. The server records **when it received the request** and whether the bound phase was still running then. For attempts with a time multiplier, the phase boundaries depend on **[OPEN P-18]**. A late recording grant **never** establishes when, or whether inside the phase, the audio was captured.
+
+These five facts are independent and are recorded and shown separately:
+
+| Fact | Established by | Not implied by it |
+|---|---|---|
+| Captured locally | The client only | Authorisation, acceptance |
+| Authorised (`live` or `late`) | A server recording grant | Capture time, originality |
+| Chunks accepted | Server checks per chunk | Complete evidence |
+| Evidence complete / incomplete | Server, from contiguous `0..n-1` | Ratability, valid score |
+| Submission | Module / attempt state (existing) | Complete evidence |
+
+Open policy: whether timing alone can refuse a late recording grant inside the upload window **[OPEN P-2]**; how `late` is classified, including any threshold **[OPEN P-7]**; late recording grants after module submission **[OPEN P-8]**; how long refused audio is kept in the browser, and how it is deleted **[OPEN P-9]**; how incomplete evidence is rated **[OPEN P-5]**; whether turns must be recorded in order **[OPEN P-10]**.
+
+**Risk.** Retrospective authorisation lets a client claim to have been offline and capture outside the phase. If timing is not a refusal reason (P-2), late recording grants **detect and label** this but do not prevent it. If it is a refusal reason, less audio is accepted than §5 "Network loss" promises today. That trade-off is P-2.
+
+### 5.2 Duration provenance (F7) [PROPOSED; scope OPEN P-11]
+
+A duration that was not decoded from the media must not be stored or shown as if it were measured. Each completed turn carries a duration-provenance value; the exact names are subject to schema review. At minimum:
+- `client_wallclock`: the client's recorder start-to-stop time (current behaviour);
+- `chunk_estimate`: derived from the chunk count and the nominal chunk length [PR #53 for interrupted turns], always with the incident `recording_interrupted`.
+
+A `decoded_media` value may be added only after a validated measuring path exists. The existing `exam-content/tools/audio-duration.mjs` is a build-time tool that the Worker does not use. It rejects WebM with unknown-size clusters or laced blocks and rejects fragmented MP4. It must not be assumed to measure MediaRecorder recordings until it has been tested against real recordings per browser.
+
+Whether this belongs in the F4 change or a separate follow-up is **[OPEN P-11]**. The scoring engine and reviewer interface are not changed here.
+
+### 5.3 Incidents and reviewer-visible uncertainty [PROPOSED]
+
+Proposed incident kinds: `recording_grant_late`, `recording_grant_refused`, `recording_grant_would_refuse` (observe mode), `recording_interrupted`, `recording_incomplete`, `recording_grant_closed_by_lease_change`. Details are limited to ids, seq numbers, refusal codes, server times, the lease generation, the enforcement mode and labelled device claims. They contain no audio, transcript, IP address or user-agent string.
+
+Raters see per turn:
+- the authorisation kind, or "recorded before recording grants";
+- "capture time: device claim, not verified" for late recording grants;
+- the duration provenance;
+- whether the chunk count was declared;
+- gaps as gaps.
+
+A missing or incomplete turn is shown as a technical incident, never as "the learner did not speak".
+
+### 5.4 Topic-choice grace (F8) — OPEN P-12
+
+[PR #53] accepts a Teil 2 topic change until the end of preparation + 10 s (the general save grace), which falls inside the introduction. The client shows the choice as locked at the end of preparation. Alternatives include: keep the grace as tolerance for saves already in flight; shorten it; accept only saves whose client timestamp precedes the end of preparation (a device claim); remove it. None is decided **[OPEN P-12]**. Tests needed: saves at end − 1 ms, end, end + 10 000 ms and end + 10 001 ms, for each time multiplier.
 
 ## 6. Consent, storage, retention [OD-09, OD-21]
 - **Consent** before the device check: purpose (rating + feedback), raters (Klarweg teachers), AI processing (transcription and pre-rating by sub-processor OpenAI via the Tutor Worker), retention period, and the deletion right. Versioned in `consents`.
 - **No consent → no recording**, and Sprechen is not available.
 - **Storage:** private R2 `klarweg-exam-recordings`; no public URLs; raters stream via signed, rater-bound URLs (TTL 10 min).
 - **Retention proposal:** recordings deleted 90 days after the final rating (or on learner request). Transcripts and ratings are kept with the result. Pilot recordings are kept longer **only** with a separate research consent.
+  - *Note (2026-10-11):* register OD-21 states 30 days. The discrepancy is unresolved **[OPEN P-20]**; this bullet is left unchanged on purpose.
+- **Consent withdrawal:** no withdrawal route exists yet **[OPEN P-19]** (§4.1). Recording grants do not resolve consent, privacy, retention or access-control requirements.
 - Learners may replay their own recordings in review until deletion.
 
 ## 7. Evaluation pipeline
@@ -131,3 +343,86 @@ turn manifests ─► transcription (Tutor: transcribe_long, per turn ≤ 60 s c
 - OD-24/OD-32 (partner model, Teil 3 construct)
 - Premium partner/examiner voice production (audio spec B3, OD-14)
 - Legal review of voice-data processing (an OpenAI sub-processor for transcription)
+- F4 recording grants: owner decisions in §11, D3 evidence (§4.2.8) and verification of the database guarantees (§4.2.6). No implementation is authorised by this draft
+
+## 10. Rollout and rollback of recording grants [PROPOSED — mechanism OPEN P-13]
+
+**Modes.**
+- `off`: current behaviour; no recording-grant checks.
+- `observe`: every check runs; a failing check writes `recording_grant_would_refuse` and the request continues as under `off`.
+- `enforce`: failing checks are refused.
+
+**Rules for every mode.**
+- Changing the mode never deletes recording grants, chunks or buffered audio.
+- Every recording grant, and every chunk and turn row written after the migration, records the effective mode. `would_refuse` and refusals are stored as linked event rows, and under `off` no grant row exists (storage table in §4.2.9).
+- **Switching enforcement off does not make earlier questionable evidence valid**, and no mode change upgrades an evidence status or a provenance label.
+- `enforce` requires the updated client to be served first.
+
+| Aspect | Option A: Worker variable `off \| observe \| enforce` | Option B: versioned, server-controlled configuration (e.g. level configuration) |
+|---|---|---|
+| Default / invalid value | Like the existing flags (anything but an exact match = off) | Missing field = off; invalid values rejected at build time |
+| Scope and granularity | Whole Worker | Per configuration version → per form → per attempt |
+| Attempts in progress | Change at their next request | Keep their pinned setting |
+| Mixed versions during a deploy | Possible for a short time (not verified) | Consistent per attempt |
+| Rollback / emergency off | Fast (variable change and redeploy) | Slow (new release or forms); running attempts cannot change unless an override exists |
+| Audit and reproducibility | Deploy history; mode stored per record | Through the immutable release |
+| Operating cost | Low | Release build, validation and private-repository re-pin |
+
+A combination (versioned policy with an override that can only lower it) is possible. The mechanism is not chosen **[OPEN P-13]**. The production configuration of the exam Worker has not been verified; the repository's `wrangler.toml` sets every `EXAM_*` flag to `off`.
+
+**Staged plan (design only).**
+1. Review and merge this specification with the open items recorded.
+2. Implementation PR, reviewed independently; synthetic content only.
+3. Baseline measurement with `off` (D3 evidence).
+4. `observe` on synthetic attempts; collect `would_refuse` events by code.
+5. Owner approval of D3 values and of P-18, with the multiplier rule stated consistently across specs and code. Then a separate explicit owner approval to enter `enforce`.
+6. Monitoring.
+7. Rollback to `off`, then verify that buffered uploads are still accepted and nothing was deleted.
+
+Stop conditions:
+- any refusal of a correctly behaving client;
+- `recording_incomplete` above the baseline;
+- unexplained `seq_beyond_cap` or `phase_closed` refusals.
+
+None of this authorises learner access, a pilot, production audio, deployment or release. OD-53 remains OWNER DECISION — CONDITIONAL.
+
+## 11. F4 owner directions and open decisions
+
+**Directions already given (F4, 2026-10):**
+- **F4-D1:** server-authorised recording grants, specification first.
+- **F4-D2:** local recording when offline, then a flagged late recording grant; a grant is not proof of capture time.
+- **F4-D3:** no threshold approved without evidence.
+- **F4-D4:** one active recording grant at a time.
+- **F4-D5:** compare rollout controls; none chosen.
+
+These authorise design work only.
+
+**Open decisions:**
+
+| ID | Decision |
+|---|---|
+| P-1 | Chunk length: code (1 s) vs OD-09 (5 s, LOCKED) |
+| P-2 | Can timing alone refuse a late recording grant? |
+| P-3 | Can an empty recording grant be re-recorded? |
+| P-4 | Attempt completion while evidence is partial |
+| P-5 | Rating of incomplete evidence |
+| P-6 | Intro binding and phase-binding fallback |
+| P-7 | `late` classification and any threshold |
+| P-8 | Late recording grants after module submission |
+| P-9 | Browser retention and deletion of refused audio |
+| P-10 | Turn order |
+| P-11 | F7 scope |
+| P-12 | F8 grace |
+| P-13 | Rollout mechanism |
+| P-14 | All D3 values |
+| P-15 | Per-grant byte cap |
+| P-17 | Scope of the one-active invariant |
+| P-18 | Time-multiplier scope |
+| P-19 | Consent withdrawal |
+| P-20 | Retention period |
+| P-21 | Behaviour of a turn blocked by a valid grant of another attempt (per-user scope only) |
+| P-22 | Chunks captured after a plain lease expiry: evidence flag or resumption |
+
+P-16 (how known client defects relate to PR #53) is a review item outside this specification.
+
+Recording grants do not close EX-03, Q14/M-28, OD-08, EX-01, EX-04, EX-05, OD-07/OD-30, OD-14/EX-06, or any calibration, privacy, consent, accessibility, originality, scoring or release gate.

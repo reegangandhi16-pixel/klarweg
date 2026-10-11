@@ -372,3 +372,14 @@ test('AUTOSAVE: a save refused for good (topic_locked) is dropped and reported, 
   await a.flush();
   assert.equal(sent.length, 1, 'nothing left to retry');
 });
+
+test('RENDER: Lesen example stems are not labelled twice ("Beispiel Beispiel:"); Teil 3 instruction wording', () => {
+  const { module } = createRenderer();
+  const html = module(pkgFor(build, 'lesen'), {});
+  const LABEL = '<span class="kx-ex">Beispiel</span> ';
+  assert.ok(html.includes(`${LABEL}Alpha wohnt in Teststadt A.`), 'Teil 1 example: label followed by the stem without "Beispiel:"');
+  assert.ok(html.includes(`${LABEL}Testperson 0 sucht Angebot Nummer 2.`), 'Teil 3 (matching) example: same rule');
+  assert.ok(!/kx-ex">Beispiel<\/span>\s*Beispiel:/.test(html), 'no duplicated "Beispiel" label + "Beispiel:" stem');
+  assert.ok(html.includes('Jede Anzeige darf nur einmal gewählt werden. Gibt es keine passende Anzeige, wählen Sie 0.'));
+  assert.ok(!html.includes('Jede Anzeige nur einmal.'));
+});

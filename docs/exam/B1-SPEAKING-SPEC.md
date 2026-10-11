@@ -132,7 +132,7 @@ The owner-approved first-version treatment below handles this by excluding those
 - still applies the evidence lifecycle of §4.2.10 (completion gate, reservations, finalization), using the attempt's stored `deadline_at` as the current code computes it;
 - is excluded from D3 measurements (§4.2.8) and from synthetic acceptance tests that assess phase timing.
 
-P-18 must be resolved through an OD-41 register revision, with accessibility input (EX-04, EX-08), **before any pilot or learner access**. Excluding these attempts is acceptable only while no learner uses the system (OD-53).
+The owner-approved exclusion above is limited to the first version. The **broader accommodation timing policy** under P-18 remains **unresolved**: it must be decided through an OD-41 register revision, with accessibility input (EX-04, EX-08), **before any pilot or learner access**. Relying on the first-version exclusion is acceptable only while no learner uses the system (OD-53).
 
 #### 4.2.3 Phase binding [PROPOSED]
 
@@ -519,7 +519,7 @@ A combination (versioned policy with an override that can only lower it) is poss
 2. **Before implementation:** P-25 settled (§4.2.11 V4), the schema and reservation design reviewed, and the decisions listed in §12 as first-version prerequisites formally recorded. Then an implementation PR, reviewed independently, using synthetic content only. Deployment order: the updated client is served **before** any server change that can return a new refusal (§4.2.9).
 3. Baseline measurement with `off` (D3 evidence).
 4. `observe` on synthetic attempts; collect `would_refuse` events by code.
-5. Owner approval of D3 values and of P-18, with the multiplier rule stated consistently across specs and code. Then a separate explicit owner approval to enter `enforce`.
+5. Owner approval of D3 values. P-18's first-version treatment is already owner-approved (§4.2.2); the broader accommodation timing policy remains open and must be decided through OD-41 (with EX-04 and EX-08 input) before any pilot or learner access, with the multiplier rule then stated consistently across specs and code. Then a separate explicit owner approval to enter `enforce`.
 6. Monitoring.
 7. Rollback to `off`, then verify that buffered uploads are still accepted and nothing was deleted.
 
@@ -605,7 +605,12 @@ By written instruction of 2026-10-11, the owner approved the options marked **[O
 ### 12.2 PR #53 (recommendation only; PR #53 is not modified by this document)
 
 Before merging PR #53:
-1. Label its "preparation only" multiplier behaviour and its 10 s topic grace as **provisional**, pending P-18 and P-12. Correct the code comment that attributes the multiplier rule to SPEAKING §2, which does not state it.
+1. Label its "preparation only" multiplier behaviour and its 10 s topic grace as **provisional**:
+   - P-18's **first-version exclusion** is already owner-approved (attempts with a multiplier other than 1.0 are excluded from phase checks, §4.2.2);
+   - the **broader P-18 accommodation timing policy** is still open (OD-41, with EX-04 and EX-08);
+   - the **P-12 topic-choice grace** is still open.
+
+   The multiplier behaviour stays provisional until it is consistent with the approved first-version scope and these remaining decisions. Correct the code comment that attributes the multiplier rule to SPEAKING §2, which does not state it.
 2. Stop capture and release the microphone when the lease is superseded.
 3. Recover from `lease_expired` without a page reload.
 

@@ -156,9 +156,9 @@ including: OD-08 legal clearance (paraphrase fallback until then); OD-14 conditi
 and M-27 sign-off; Q14 and M-28 originality; EX-01, EX-02, EX-04, EX-05; OD-07 and OD-30; the release validator and
 gates Q1–Q17; MOCK gates M-01…M-33; and the calibration plan (OD-12, OD-35). No validator check is relaxed for drafts.
 
-### B.2 F4 — speaking recording-grant decisions (v1.4)
+### B.2 F4 — speaking recording-grant decisions (v1.5 draft)
 
-**What this section is.** v1.4 adopts a record-keeping mechanism only (owner decision of 2026-10-11, Option C): F4 decisions are recorded in this register under the namespaced identifiers **F4/P-n**. These carry the same numbers as the P-n items of SPEAKING §11 (`B1-SPEAKING-SPEC.md`); no existing item is renumbered, split or merged.
+**What this section is.** **v1.4** introduced the F4 decision-recording mechanism (owner decision of 2026-10-11, Option C): F4 decisions are recorded in this register under the namespaced identifiers **F4/P-n**, which carry the same numbers as the P-n items of SPEAKING §11 (`B1-SPEAKING-SPEC.md`); no existing item is renumbered, split or merged. The current **v1.5 draft** uses that mechanism to record the owner-approved F4 options (the owner's explicit written instruction of 2026-10-11). **v1.5 itself still awaits owner review and has no sign-off row** in §I. The v1.4 statements and sign-off entries below remain accurate as historical records.
 
 **History of the statuses.** In v1.4 this section approved no F4 policy decision; its statuses were copied from SPEAKING §11 at `2e92ae3`, and F4/P-25 was added as a new OPEN item. **In v1.5 (draft)** the statuses of F4/P-4, P-6, P-7, P-8, P-11, P-13, P-17, P-22, P-23, P-24, and the first-version treatment of F4/P-18 derive from the **owner's explicit written instruction of 2026-10-11**, given in the AI-assisted F4 documentation conversation (no meeting took place). That instruction approved the corresponding SPEAKING §12 recommendations. Every other F4 status is unchanged. Recommendations that the owner did not approve, including the remainder of SPEAKING §12, are not recorded here and carry no status. This section does not change OD-53 (§B.1), which remains **OWNER DECISION — CONDITIONAL**. It does not authorise implementation, learner access, a pilot, deployment or release, and it closes no gate.
 

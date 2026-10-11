@@ -111,13 +111,13 @@ All new structures are **additive**. Names and types are illustrative.
 | `state` | `reserved` → `committed` \| `failed` (terminal) |
 | `fail_reason` | `storage_write_failed`, `readback_mismatch`, `commit_refused`, `abandoned` (P-25), `reconciled_failed` |
 | `resolved_at`, `mode` | |
-| `cleanup_state`, `cleanup_checked_at` | For `failed` reservations: `pending` → `confirmed_absent` after a cleanup pass. A late-appearing object resets it to `pending` (§4.5). Reservation rows are **never deleted**, so every staging key ever issued stays tracked |
+| `last_cleanup_observation`, `cleanup_checked_at`, `cleanup_deletions` | For `failed` reservations only. `last_cleanup_observation` is what the most recent pass saw (`absent` or `present_deleted`); it is an **observation, not proof** that the key will stay absent. It never removes the reservation from future cleanup (§4.5). `cleanup_checked_at` orders revisits; `cleanup_deletions` counts deletions. Reservation rows are **never deleted**, so every staging key ever issued stays tracked |
 
 **Constraints.**
 - Partial `UNIQUE (attempt_id, item_id, turn, seq) WHERE state = 'reserved'`: at most one unresolved reservation per logical chunk.
 - `UNIQUE (staging_key)`.
 
-**Indexes.** `(state, t_admit)` for reconciliation; `(attempt_id, state)` for the completion gate.
+**Indexes.** `(state, t_admit)` for reconciliation; `(attempt_id, state)` for the completion gate; `(state, cleanup_checked_at)` for the round-robin cleanup order (§4.5).
 
 ### 2.3 `recording_chunks` (existing; new nullable columns)
 
@@ -270,7 +270,13 @@ Reconciliation never retries a write, never deletes an object it cannot classify
 **How the design stays safe anyway.** Integrity does not depend on the writer having stopped:
 - **A terminal reservation cannot be committed.** Every commit asserts `state = 'reserved'` (§6.1). If a `put()` completes after its reservation became `failed`, the object is unreferenced and can never be bound to evidence.
 - **No untracked objects.** Every staging key is created by an admission transition **before** any write (§4.1), and reservation rows are never deleted (§2.2). Any object under the staging prefix therefore belongs to exactly one tracked reservation.
-- **Late-appearing objects are cleaned up repeatedly.** A `failed` reservation keeps `cleanup_state = pending` until a cleanup pass finds no object. If an object appears later, the next pass deletes it, which is safe because no committed row can reference a failed reservation's key. The reservation returns to `pending`, and a later pass checks again. Cleanup never touches a `committed` reservation's key.
+- **Every failed key stays eligible for cleanup.** No platform guarantee bounds how late a `put()` can complete (§1.3 item 8), so no finite number of absence checks proves that an object will never appear. Cleanup therefore has **no stopping rule**:
+  - every `failed` reservation is revisited indefinitely, whatever its `last_cleanup_observation`;
+  - each sweep takes a bounded batch, least recently checked first (`cleanup_checked_at` ascending, never-checked first), so every failed key is revisited in turn;
+  - a present object is deleted, which is safe because no committed row can reference a failed reservation's key; an absent object is only recorded as `absent`.
+
+  A pass never deletes an object whose reservation is not `failed`, nor one that a committed row references. Cleanup never touches a `committed` reservation's key. A finite stopping rule may be introduced only on a separately verified platform guarantee (V7) and an explicit owner decision.
+- **Residual orphan-storage risk.** An object that appears after a pass observed `absent` remains stored until that key's next revisit. The revisit interval grows with the number of failed reservations, the sweep batch size and the 5-minute cron cadence. Eventual deletion holds only while the sweep keeps running and its batch capacity keeps up with the growth of failed reservations. Otherwise orphaned objects can accumulate. Such objects are never bound to evidence. Their storage, and their deletion under OD-21 retention, is a residual cost to monitor (§12).
 - **The client keeps the bytes.** The client discards a local chunk only after `committed` or `duplicate` (§3.3). If a reservation is failed while its write was still running, the client re-uploads under a **new** reservation and key, as long as the upload window is open.
 
 **What P-25 controls.** Integrity is safe without P-25, but **loss-free recovery** depends on it:
@@ -291,7 +297,7 @@ The bound is the earliest point at which a still-`reserved` reservation may be r
 2. **One unresolved reservation per logical chunk.** Enforced by the partial unique index (§2.2). A second request for the same logical chunk writes nothing.
 3. **Exact binding.** The committed chunk row records the exact `staging_key`, hash and size of the verified bytes, plus its `reservation_id`.
 4. **No blind retries or deletes.** An ambiguous outcome is resolved only by reconciliation. A handler never rewrites a key whose write outcome is unknown.
-5. **Safe cleanup.** An object is deleted only if its reservation is `failed` **and** no committed row references that exact key. Cleanup is **repeatable**, because a late `put()` may recreate the object (§4.5). Objects referenced by committed rows are never deleted, replaced or altered.
+5. **Safe cleanup.** An object is deleted only if its reservation is `failed` **and** no committed row references that exact key. Cleanup **revisits every failed key indefinitely**, in bounded batches, because a late `put()` may create or recreate the object at any time (§4.5). An `absent` observation is never treated as final. Objects referenced by committed rows are never deleted, replaced or altered.
 
 ### 5.2 Platform features: optional, not relied on
 
@@ -335,7 +341,7 @@ Every multi-statement F4 transition is one D1 batch that satisfies all of the fo
 | Grant creation | `open:<attempt>:<item>:<turn>` | Attempt `in_progress`; lease current; phase rules (where approved); no valid open grant | Close stale open grants; insert the grant (partial unique `(attempt) WHERE open`, `UNIQUE(attempt,item,turn)`) |
 | Reservation admission | `admit:<reservation_id>` | Attempt `in_progress`; `t_admit ≤ upload_deadline_at`; quota including reserved bytes; no committed chunk for the logical chunk | Insert the reservation (partial unique per logical chunk) |
 | Reservation commit | `commit:<reservation_id>` | Reservation `reserved`; attempt not `completed` | Insert the chunk row; upsert the turn; mark the reservation `committed` |
-| Reservation failure | `fail:<reservation_id>` | Reservation `reserved` | Mark `failed`; set `cleanup_state = pending` |
+| Reservation failure | `fail:<reservation_id>` | Reservation `reserved` | Mark `failed`; `cleanup_checked_at` NULL (checked first) |
 | Turn completion | `complete_turn:<attempt>:<item>:<turn>` | Contiguous committed `0..n-1`; no `reserved` reservation for `seq < n`; evidence not terminal | Mark turn (and grant) evidence `complete` |
 | Grant closure at module submission | `close:<rgr_id>` | Grant `open`; module `submitted` or `submitting` | Close with `module_closed` |
 | Finalization (turn or grant) | `finalize:<evidence id>` | `t > upload_deadline_at`; no `reserved` reservation for that evidence; evidence not terminal | Mark `incomplete` with reason and the received and missing seqs. A **zero-chunk grant** becomes `incomplete` ("no audio received") |
@@ -351,7 +357,7 @@ Every multi-statement F4 transition is one D1 batch that satisfies all of the fo
 1. **Lazy finalization** runs on status reads, completion attempts, rater views and result building, for the attempt concerned.
 2. **The sweep** (every 5 minutes [REPO]) gets **new** queries:
    - attempts with non-terminal turn or grant evidence, or `reserved` reservations, whose `upload_deadline_at` or P-25 bound has passed;
-   - `failed` reservations with `cleanup_state = pending` (§4.5).
+   - **all** `failed` reservations, whatever their last cleanup observation: a bounded batch per run, least recently checked first (§4.5). There is no exclusion after an `absent` observation.
 
    It works in bounded batches, within the documented 15-minute cron limit [DOC].
 3. **Order per attempt:**
@@ -387,10 +393,10 @@ Every multi-statement F4 transition is one D1 batch that satisfies all of the fo
 |---|---|---|---|
 | Worker terminated after the R2 write, before the D1 commit | Reservation `reserved`; object present | After the P-25 bound, reconciliation verifies the object and commits it, or fails the reservation | Committed, or failed and the client re-uploads |
 | R2 write error | `reserved` | The handler marks it `failed` (`storage_write_failed`) | The client retries, creating a new reservation and key |
-| D1 commit refused (assertion fails) | Reservation already `failed` | Whole commit batch rolled back (§6.1); object orphaned; repeatable cleanup | The client re-uploads if the window is open |
+| D1 commit refused (assertion fails) | Reservation already `failed` | Whole commit batch rolled back (§6.1); object orphaned; removed by the indefinite round-robin cleanup (§4.5) | The client re-uploads if the window is open |
 | `put()` still running when reconciliation runs | `reserved`; object absent | Reconciliation fails the reservation (absence is not proof the writer stopped, §4.5); a later `put()` can still create the object | Integrity safe: the object can never be committed. Possible loss if the window has closed (the P-25 trade-off) |
 | Task cancelled after the `waitUntil` lifetime | `reserved`; object present or absent | Reconciliation after the P-25 bound | Committed if the object verifies; otherwise failed |
-| Object appears after its reservation became `failed` | `failed`; `cleanup_state` reset to `pending` | The next cleanup pass deletes it (no committed row can reference it); later passes re-check | No evidence affected; no untracked object |
+| Object appears after its reservation became `failed`, including after a pass observed `absent` | `failed`; last observation `absent` | That key's next round-robin revisit finds and deletes it (no committed row can reference it); revisits continue indefinitely | No evidence affected; no untracked object; the orphan is stored until that revisit (residual risk, §4.5) |
 | D1 batch result unknown (network error) | Applied or not applied | Read the ledger key (§6.1); act only on the established outcome | No conflicting evidence |
 | Unexpected row count after a batch | Inconsistent with the ledger | Incident; stop that transition path; investigate | Never silently accepted |
 | Zero-chunk grant at attempt completion | Grant `open` or evidence not terminal | Completion refused; after submission and the deadline, the grant is closed and finalized `incomplete` ("no audio received") | Completion succeeds only afterwards |
@@ -439,7 +445,7 @@ responses. Logs use the existing redacted logger (`exam-worker/src/log.js`, whic
 | V3 | Reservations in each state | Kill the request after `put()` and before commit; R2 error; guard failure; duplicate retries | Every reservation ends `committed` or `failed`; no committed row references a missing or mismatched object |
 | V4 | Chunks of 1 KiB–256 KiB | Upload durations on fast, slow and throttled networks; disconnect mid-write; a task that outlives the 30 s `waitUntil` extension; whether a cancelled task's `put()` still completes, and how late | Distributions of (commit time − admission time), of completion after a disconnect, and of **late `put()` completion after cancellation**, from which the owner can choose P-25 |
 | V5 | Expired evidence, including **zero-chunk grants** (open and closed) | Lazy finalization and the sweep in parallel, repeated; finalization racing a late reservation commit | Exactly one terminal transition per record; repeats change nothing; nothing finalized while a reservation is unresolved; every zero-chunk grant ends `incomplete` ("no audio received") |
-| V6 | Committed, orphaned and ambiguous objects | Cleanup sweep, including an object that **reappears** after cleanup because a late `put()` completed | No referenced object deleted or altered; only confirmed unreferenced objects removed; ambiguous cases reconciled first; a reappearing object is removed by a later pass |
+| V6 | Committed, orphaned and ambiguous objects; a large population of failed reservations | Cleanup sweep. **Exact sequence:** (1) a reservation is failed while its `put()` is still in flight; (2) the first cleanup pass finds the key absent and records `absent`; (3) the original `put()` then creates the object; (4) later scheduled sweeps run. Also measure the revisit interval as the number of failed reservations grows | No referenced object deleted or altered; only unreferenced objects of failed reservations removed; ambiguous cases reconciled first; in step (4) a later sweep finds and removes the object; no failed reservation is ever excluded from revisits; the revisit interval is documented as evidence for the §4.5 residual risk |
 | V7 | Platform capabilities | Direct tests of the §1.3 behaviours the implementation intends to rely on; reconciliation running while a `put()` is in flight; if ever relied on, `put()` with `If-None-Match: *` against an existing key and under concurrent writers | Each relied-on behaviour confirmed, or the design does not use it; a reconciliation that fails an in-flight reservation never leads to a committed row for that key |
 | V8 | One logical chunk | Same hash replayed; different hash; concurrent requests; retry after an unknown outcome | One unresolved reservation at most; one writer per key; no rewrite of an unknown-outcome key; answers `duplicate`, `upload_pending` or `chunk_conflict` |
 | V9 | Committed chunks | Read-back hash for every committed row; separately, `put()` with a deliberately wrong `sha256`; read-back racing a late `put()` to a key whose reservation has failed | Every committed object matches; it is documented whether R2 rejects a wrong `sha256` (decides whether read-back can be replaced); no committed row ever binds to a failed reservation's key |
@@ -470,7 +476,8 @@ responses. Logs use the existing redacted logger (`exam-worker/src/log.js`, whic
 - any read-back mismatch;
 - any reservation older than the P-25 bound that reconciliation cannot classify;
 - any committed row whose object fails verification;
-- any unexpected row count or ledger mismatch after a transition (§6.1).
+- any unexpected row count or ledger mismatch after a transition (§6.1);
+- a cleanup revisit interval or count of present orphaned objects that keeps growing, meaning cleanup is not keeping up (§4.5 residual risk).
 
 **Rollback must never** delete or alter reservations, chunk rows, staging objects, grants, events or evidence states. It must never drop the additive schema, and never mark failed or incomplete evidence as valid.
 
@@ -518,7 +525,7 @@ Each phase is a separate, independently reviewable PR. None may start before the
 | 0 | Non-production evidence: V10 (transition invariant), V4 and V7 (write durations, cancellation, late `put()`); P-25 decision; schema review; read-back review; formal approval of the P-18 first-version treatment | Owner decisions in §13 |
 | 1 | Migration `0002` (additive) and schema tests | Phase 0, with V10 passed |
 | 2 | Upload reservations, staging keys, read-back verification, commit under §6.1; existing route semantics preserved; new responses unused by old clients until the client is updated | Phase 1; P-25 |
-| 3 | Reconciliation (lazy and sweep) and repeatable cleanup (§4.5) | Phase 2 |
+| 3 | Reconciliation (lazy and sweep) and indefinite round-robin cleanup of all failed keys (§4.5) | Phase 2 |
 | 4 | Evidence state, grant closure at submission, finalization of turn and grant evidence (zero-chunk grants included), completion gate (P-4, P-23) | Phases 2–3; formal approval of P-4 and P-23 (not yet given) |
 | 5 | Grant routes (`turns/open`, `turns/stop`), stale-grant closure, lease interaction, C1 late grants (P-8, P-24) under `off` and `observe`; phase-check handling for multipliers other than 1.0 | Phase 1; formal approval of P-8, P-17, P-7, P-22, P-24, P-6, P-13 and the P-18 first-version treatment (not yet given) |
 | 6 | Client: attempt-scoped local keys, new responses, re-send after submission, superseded-tab stop | PR #53 decision |

@@ -132,7 +132,7 @@ function harness({ startAt = AT.teil2 - 4000, upload, complete, status = { turns
   const store = memoryStore();
   const calls = { uploads: [], completes: [], recStarts: [], micAt: [], ui: [], alerts: [], logs: [], locks: [] };
   const queue = new ChunkQueue({
-    store, sleep: clock.sleep, maxRetries: 2,
+    attemptId: 'att_driver_test', store, sleep: clock.sleep, maxRetries: 2,
     upload: async (q) => { calls.uploads.push({ ...q, at: clock.now() }); return upload ? upload(q, clock) : { ok: true }; },
     completeTurn: async (b) => { calls.completes.push({ ...b, at: clock.now() }); return complete ? complete(b, clock) : { ok: true }; }
   });
@@ -179,12 +179,12 @@ test('DRIVER (F2): failing uploads never abort the flow; chunks stay in the loca
   await h.clock.run(AT.teil3 + 5_000);
   assert.equal(partnerStarts(h.made).length, 1, 'partner presentation still on schedule');
   assert.ok(h.calls.recStarts.some((r) => r.key.startsWith('itm:b1:syn-sp3')), 'Teil 3 still recorded');
-  const kept = await h.store.keys('chunk:itm:b1:syn-sp2:t1:');
+  const kept = await h.store.keys(h.queue.prefix({ item_id: 'itm:b1:syn-sp2', turn: 't1' }));
   assert.equal(kept.length, 2, 'recorded chunks are not discarded while the network is down');
   assert.ok(h.calls.alerts.some((a) => a.kind === 'upload'), 'upload problem surfaced');
   await h.clock.run(AT.teil3 + 120_000);
   assert.ok(h.calls.logs.some((l) => l.e === 'turn_finalize_pending' && l.d.key === 'itm:b1:syn-sp2:t1'), 'retries exhausted → pending, logged');
-  assert.equal((await h.store.keys('chunk:itm:b1:syn-sp2:t1:')).length, 2, 'still kept for the next reload');
+  assert.equal((await h.store.keys(h.queue.prefix({ item_id: 'itm:b1:syn-sp2', turn: 't1' }))).length, 2, 'still kept for the next reload');
   h.stop();
 });
 
@@ -293,4 +293,38 @@ test('SPRECHEN driver: a completed-turn conflict (SPEAKING §4.2.5) is a definit
   assert.equal(slept, 0);
   assert.deepEqual(logs, [['turn_finalize_refused', 'turn_complete_conflict']]);
   assert.deepEqual(alerts, ['upload']);
+});
+
+test('SPRECHEN (client ↔ worker): unsent chunks of another attempt on the same device are never uploaded into this attempt', async () => {
+  const { setup } = await import('../../exam-worker/test/harness.mjs');
+  const { post, start, submit, uploadChunk } = await import('../../exam-worker/test/flow.mjs');
+  const toSprechen = async (s) => { for (const m of ['lesen', 'hoeren', 'schreiben']) { await start(s, m); if (m === 'hoeren') await post(s, '/hoeren/events', { type: 'ready' }); await submit(s, m); }
+    await post(s, '/sprechen/consent', { granted: true, version: 'rec-consent@1' }); await start(s, 'sprechen'); };
+  const store = memoryStore();                               // one browser profile, two attempts (e.g. a shared computer)
+  const queueFor = (s) => new ChunkQueue({ attemptId: s.attempt, store, sleep: async () => {}, maxRetries: 0,
+    upload: async (q, bytes) => { const r = await uploadChunk(s, q.item_id, q.turn, Number(q.seq), Buffer.from(bytes), { checksum: q.sha256 }); if (r.status !== 200) throw Object.assign(new Error(r.json.error), { code: r.json.error }); return r.json; },
+    completeTurn: async (b) => { const r = await post(s, '/sprechen/turns', b); if (r.status !== 200) throw Object.assign(new Error(r.json.error), { code: r.json.error }); return r.json; } });
+  const turn = { item_id: 'itm:b1:syn-sp1', turn: 't1' };
+
+  // attempt A records Teil 1 / t1 but its two chunks are never uploaded (page closed, attempt abandoned)
+  const a = await setup(); await toSprechen(a);
+  const qa = queueFor(a);
+  for (const seq of [0, 1]) await qa.add(turn, seq, new TextEncoder().encode(`attempt A audio ${seq}`), 'audio/webm');
+
+  // attempt B starts Sprechen in the same browser: nothing recorded yet
+  const b = await setup(); await toSprechen(b);
+  const qb = queueFor(b);
+  assert.deepEqual(await qb.pending(turn), [], 'another attempt\'s chunks are not this attempt\'s pending chunks');
+  const status = (await (await import('../../exam-worker/test/flow.mjs')).get(b, '/sprechen/status')).json;
+  const logs = [];
+  const driver = createSpeakingDriver({ pkg, plan, startedAt: T0, multiplier: 1, now: () => T0, sleep: async () => {}, active: () => true, status, queue: qb,
+    audio: {}, ui: { phase() {}, turn() {}, alert() {}, clear() {}, lockTopics() {} }, log: (e, d) => logs.push(e) });
+  await driver.settleTurns();
+  await Promise.all(driver.pending());
+  const chunksB = (await b.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks WHERE attempt_id = ?1').bind(b.attempt).first()).n;
+  const turnB = await b.env.DB.prepare('SELECT status FROM recording_turns WHERE attempt_id = ?1').bind(b.attempt).first();
+  assert.equal(chunksB, 0, 'no audio from attempt A was stored in attempt B');
+  assert.equal(turnB, null, 'attempt B\'s turn was not completed with attempt A\'s audio');
+  assert.equal(driver.done.has('itm:b1:syn-sp1:t1'), false, 'the turn is still to be recorded in attempt B');
+  assert.deepEqual((await qa.pending(turn)).length, 2, 'attempt A\'s chunks stay in its own queue (recoverable there)');
 });

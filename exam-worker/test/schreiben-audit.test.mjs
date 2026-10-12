@@ -8,6 +8,7 @@ import path from 'node:path';
 import { setup, call, newUser, role, pkgFor, scoredItems, sha, ROOT } from './harness.mjs';
 import { A, post, get, start, submit } from './flow.mjs';
 import { countWords } from '../src/wordcount.js';
+import { _clearCaches } from '../src/content.js';
 
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'exam-content/levels/b1/level-config.json'), 'utf8'));
 const partCfg = (part) => cfg.modules.find((m) => m.module === 'schreiben').parts.find((p) => p.part === part);
@@ -81,6 +82,45 @@ test('SCHREIBEN below-half-target flag follows the configured length rule at its
   const f2 = await finalRows(s2);
   assert.equal(Object.keys(f2).length, 3);
   for (const r of Object.values(f2)) assert.deepEqual([r.text, r.words, r.below_half_target], ['', 0, 1]);
+});
+
+/* TEST DATABASE ONLY: replace the stored level config of this in-memory env (the committed config is not touched). */
+async function withRubricPct(s, pct, fn) {
+  const row = await s.env.DB.prepare('SELECT id, json FROM level_configs').first();
+  const changed = JSON.parse(row.json);
+  for (const r of Object.values(changed.rubrics)) if (r.module === 'schreiben') r.length_rule_pct = pct;
+  await s.env.DB.prepare('UPDATE level_configs SET json = ?2 WHERE id = ?1').bind(row.id, pct === undefined ? row.json.replace(/,\s*"length_rule_pct":\s*\d+/g, '') : JSON.stringify(changed)).run();
+  _clearCaches();
+  try { return await fn(); } finally { await s.env.DB.prepare('UPDATE level_configs SET json = ?2 WHERE id = ?1').bind(row.id, row.json).run(); _clearCaches(); }
+}
+
+test('SCHREIBEN length rule is read from the configured length_rule_pct (a non-default 40 % in a test database), not a fixed half', async () => {
+  const s = await setup();
+  await toSchreiben(s);
+  const [a, b] = items(s);
+  const at40 = (it) => (it.response_spec.target_words * 40) / 100;
+  assert.ok(Number.isInteger(at40(a)) && at40(a) < a.response_spec.target_words / 2, 'the 40 % limit lies below the 50 % one');
+  await saveText(s, a.item_id, words(at40(a)), 1);          // at the 40 % limit: not flagged (a fixed half would flag it)
+  await saveText(s, b.item_id, words(at40(b) - 1), 1);      // one word short of the 40 % limit: flagged
+  await withRubricPct(s, 40, () => submit(s, 'schreiben'));
+  const f = await finalRows(s);
+  assert.equal(f[a.item_id].below_half_target, 0, `${at40(a)} words of ${a.response_spec.target_words} is not below 40 %`);
+  assert.equal(f[b.item_id].below_half_target, 1);
+  assert.equal(cfg.rubrics[partCfg(1).rubric].length_rule_pct, 50, 'the committed configuration keeps 50 %');
+});
+
+test('SCHREIBEN missing length_rule_pct is a configuration error: finalization fails, the module stays recoverable (submitting), nothing is frozen', async () => {
+  const s = await setup();
+  await toSchreiben(s);
+  await withRubricPct(s, undefined, async () => {
+    const r = await post(s, '/modules/schreiben/submit', {});
+    assert.equal(r.status, 500, JSON.stringify(r.json));
+  });
+  const st = await s.env.DB.prepare("SELECT status FROM attempt_modules WHERE attempt_id = ?1 AND module = 'schreiben'").bind(s.attempt).first();
+  assert.equal(st.status, 'submitting');
+  assert.equal(Object.keys(await finalRows(s)).length, 0);
+  assert.equal((await post(s, '/modules/schreiben/submit', {})).status, 200);   // config repaired (restored): the retry finalizes
+  assert.equal(Object.keys(await finalRows(s)).length, 3);
 });
 
 test('SCHREIBEN text is stored NFC (decomposed umlauts normalised); punctuation-only tokens are not words; length limit enforced', async () => {

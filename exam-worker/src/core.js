@@ -189,16 +189,20 @@ export async function finalizeModule(env, attempt, module) {
 }
 
 async function computeWritingFinal(env, attempt) {
-  const items = (await env.DB.prepare("SELECT item_id FROM items_index WHERE form_id = ?1 AND module = 'schreiben' AND interaction = 'text_response'")
+  const items = (await env.DB.prepare("SELECT item_id, rubric_id FROM items_index WHERE form_id = ?1 AND module = 'schreiben' AND interaction = 'text_response'")
     .bind(attempt.form_id).all()).results;
   const pkg = await loadPackage(env, attempt.form_id, 'schreiben');
+  const cfg = await levelConfig(env, (await formRow(env, attempt.form_id)).level_config_id);
   const out = [];
   for (const it of items) {
     const cur = await env.DB.prepare('SELECT value_json FROM responses_current WHERE attempt_id = ?1 AND item_id = ?2').bind(attempt.id, it.item_id).first();
     const text = cur ? (JSON.parse(cur.value_json).text || '') : '';
     const words = countWords(text);
     const target = pkg.items.get(it.item_id)?.response_spec?.target_words ?? null;
-    out.push({ item_id: it.item_id, text, words, target, below_half: !!(target && words < target / 2), sha256: await sha256Hex(text) });
+    // rater hint for the length criterion: below the rubric's configured share of the target (B1: 50 %)
+    const pct = cfg.rubrics?.[it.rubric_id]?.length_rule_pct;
+    if (target && !(Number.isFinite(pct) && pct > 0 && pct < 100)) throw new Error(`length_rule_pct missing or invalid for ${it.rubric_id}`);
+    out.push({ item_id: it.item_id, text, words, target, below_half: !!(target && words * 100 < target * pct), sha256: await sha256Hex(text) });
   }
   return out;
 }

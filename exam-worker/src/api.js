@@ -516,9 +516,11 @@ export async function consent(env, userId, attemptId, request) {
     if (body.granted !== true || typeof body.version !== 'string' || !/^[a-z0-9.@-]{1,32}$/.test(body.version)) fail(422, 'consent_invalid');
     const m = await moduleRow(env, attemptId, 'sprechen');
     if (m.status === 'submitted') fail(409, 'module_submitted');
-    await env.DB.prepare("INSERT INTO consents (id, user_id, attempt_id, kind, version, granted_at) VALUES (?1, ?2, ?3, 'speaking_recording', ?4, ?5)")
+    // granting an already active consent of the same version is a no-op (no second row, no second audit entry)
+    const r = await env.DB.prepare(`INSERT INTO consents (id, user_id, attempt_id, kind, version, granted_at) SELECT ?1, ?2, ?3, 'speaking_recording', ?4, ?5
+        WHERE NOT EXISTS (SELECT 1 FROM consents WHERE attempt_id = ?3 AND kind = 'speaking_recording' AND version = ?4 AND withdrawn_at IS NULL)`)
       .bind(`cns_${crypto.randomUUID()}`, attempt.user_id, attemptId, body.version, now(env)).run();
-    await audit(env, userId, attemptId, 'speaking_consent', { version: body.version });
+    if (r.meta.changes) await audit(env, userId, attemptId, 'speaking_consent', { version: body.version });
     return { ok: true, consent: true };
   });
 }

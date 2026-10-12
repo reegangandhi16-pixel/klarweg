@@ -8,15 +8,20 @@ export async function sha256Hex(bytes) {
 }
 
 export class ChunkQueue {
-  constructor({ store, upload, completeTurn, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), maxRetries = 5 }) {
-    Object.assign(this, { store, upload, completeTurn, sleep, maxRetries });
+  /* attemptId scopes the local keys: the device store is shared by every attempt (and user) in this browser
+     profile, and all attempts of a form share item ids, so unsent chunks of one attempt must never be read,
+     resent or finalised as another attempt's recording. */
+  constructor({ attemptId, store, upload, completeTurn, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), maxRetries = 5 }) {
+    if (typeof attemptId !== 'string' || !attemptId) throw new Error('ChunkQueue: attemptId required');
+    Object.assign(this, { attemptId, store, upload, completeTurn, sleep, maxRetries });
   }
-  key(t, seq) { return `chunk:${t.item_id}:${t.turn}:${String(seq).padStart(4, '0')}`; }
+  prefix(t) { return `chunk:${this.attemptId}:${t.item_id}:${t.turn}:`; }
+  key(t, seq) { return `${this.prefix(t)}${String(seq).padStart(4, '0')}`; }
   async add(t, seq, bytes, mime) {
     const u8 = new Uint8Array(bytes);
     await this.store.set(this.key(t, seq), { ...t, seq, mime, sha256: await sha256Hex(u8), bytes: u8 });
   }
-  async pending(t) { return (await this.store.keys(`chunk:${t.item_id}:${t.turn}:`)).sort(); }
+  async pending(t) { return (await this.store.keys(this.prefix(t))).sort(); }
   /* serverHas: Set of seqs already confirmed (from /sprechen/status) */
   async drain(t, serverHas = new Set()) {
     for (const k of await this.pending(t)) {

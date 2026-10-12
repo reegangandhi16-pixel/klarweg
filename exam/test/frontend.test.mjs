@@ -116,7 +116,7 @@ test('SPEAKING (client): chunk queue hashes, buffers, resends only gaps, stops o
   const store = memoryStore();
   const uploads = [];
   let flaky = 1;
-  const q = new ChunkQueue({ store, sleep: async () => {},
+  const q = new ChunkQueue({ attemptId: 'att_fe_test', store, sleep: async () => {},
     upload: async (meta, bytes) => { if (flaky-- > 0) throw new TypeError('offline'); uploads.push({ ...meta, n: bytes.length }); },
     completeTurn: async (b) => ({ ok: true, ...b }) });
   const t = { item_id: 'itm:b1:syn-sp1', turn: 't1' };
@@ -128,7 +128,7 @@ test('SPEAKING (client): chunk queue hashes, buffers, resends only gaps, stops o
   assert.deepEqual(await q.pending(t), []);
   const r = await q.finish(t, 3, 4000);
   assert.deepEqual(r, { ok: true, item_id: t.item_id, turn: 't1', chunks: 3, duration_ms: 4000 });
-  const q2 = new ChunkQueue({ store, sleep: async () => {}, upload: async () => { throw new ExamApiError(403, 'consent_required'); }, completeTurn: async () => {} });
+  const q2 = new ChunkQueue({ attemptId: 'att_fe_test', store, sleep: async () => {}, upload: async () => { throw new ExamApiError(403, 'consent_required'); }, completeTurn: async () => {} });
   await q2.add(t, 9, new Uint8Array([1]).buffer, 'audio/webm');
   await assert.rejects(q2.drain(t), (e) => e.code === 'consent_required');
   assert.equal((await q2.pending(t)).length, 1);   // still buffered locally
@@ -382,4 +382,10 @@ test('RENDER: Lesen example stems are not labelled twice ("Beispiel Beispiel:");
   assert.ok(!/kx-ex">Beispiel<\/span>\s*Beispiel:/.test(html), 'no duplicated "Beispiel" label + "Beispiel:" stem');
   assert.ok(html.includes('Jede Anzeige darf nur einmal gewählt werden. Gibt es keine passende Anzeige, wählen Sie 0.'));
   assert.ok(!html.includes('Jede Anzeige nur einmal.'));
+});
+
+test('SPEAKING (client): the chunk queue is attempt-scoped — it refuses to run without an attempt id; keys carry it', () => {
+  assert.throws(() => new ChunkQueue({ store: memoryStore(), upload: async () => {}, completeTurn: async () => {} }), /attemptId required/);
+  const q = new ChunkQueue({ attemptId: 'att_x', store: memoryStore(), upload: async () => {}, completeTurn: async () => {} });
+  assert.equal(q.key({ item_id: 'itm:b1:syn-sp1', turn: 't1' }, 3), 'chunk:att_x:itm:b1:syn-sp1:t1:0003');
 });

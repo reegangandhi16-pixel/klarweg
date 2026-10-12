@@ -355,7 +355,7 @@ async function runSprechen() {
   const id = S.attempt.attempt_id;
   const { plan, startedAt, multiplier } = S.sprechen;
   const queue = new ChunkQueue({
-    store: S.store,
+    attemptId: id, store: S.store,
     upload: (q, bytes, mime) => api.chunk(id, S.lease, q, bytes, mime),
     completeTurn: (b) => api.turn(id, S.lease, b)
   });

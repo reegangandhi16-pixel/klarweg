@@ -622,6 +622,12 @@ export async function speakingStatus(env, userId, attemptId, url) {
 export async function completeAttempt(env, userId, attemptId, request) {
   const body = await readJsonBody(request);
   const requestId = requireRequestId(body.request_id);
+  // Completion ends the lease, so the owner's retry of a completion whose response was lost can never pass the
+  // lease check: replay its stored response first (ownership is still verified; the result is the owner's anyway).
+  await loadAttempt(env, attemptId, userId);
+  const done = await env.DB.prepare("SELECT status, response_json FROM request_log WHERE attempt_id = ?1 AND request_id = ?2 AND route = 'complete'")
+    .bind(attemptId, requestId).first();
+  if (done) return { status: done.status, body: { ...JSON.parse(done.response_json), replayed: true } };
   const { attempt } = await attemptCtx(env, userId, attemptId, body.lease_id);
   return idempotent(env, attemptId, requestId, 'complete', async () => {
     if (attempt.status === 'completed') fail(409, 'invalid_transition');

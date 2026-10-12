@@ -389,3 +389,24 @@ test('SPEAKING (client): the chunk queue is attempt-scoped — it refuses to run
   const q = new ChunkQueue({ attemptId: 'att_x', store: memoryStore(), upload: async () => {}, completeTurn: async () => {} });
   assert.equal(q.key({ item_id: 'itm:b1:syn-sp1', turn: 't1' }, 3), 'chunk:att_x:itm:b1:syn-sp1:t1:0003');
 });
+
+test('COMPLETE (client ↔ worker): a lost "complete" response is retried with the same request id and replays the result', async () => {
+  const { setup, PROXY_SECRET } = await import('../../exam-worker/test/harness.mjs');
+  const { post, start, submit } = await import('../../exam-worker/test/flow.mjs');
+  const { default: worker } = await import('../../exam-worker/src/index.js');
+  const s = await setup();
+  for (const m of ['lesen', 'hoeren', 'schreiben', 'sprechen']) { await start(s, m); if (m === 'hoeren') await post(s, '/hoeren/events', { type: 'ready' }); await submit(s, m); }
+  let dropped = 0;
+  const fetchImpl = async (url, init) => {
+    const res = await worker.fetch(new Request('https://klarweg-exam.internal' + url, { ...init, headers: { ...init.headers, 'x-kw-proxy-auth': PROXY_SECRET, 'x-kw-user': s.user } }), s.env);
+    if (url.endsWith('/complete') && !dropped++) throw new TypeError('network: response lost');   // the server committed; the client never saw it
+    return res;
+  };
+  const api = createApi({ base: '', fetchImpl, sleep: async () => {} });
+  const r = await api.complete(s.attempt, s.lease);
+  assert.equal(dropped, 2, 'the request was retried once');
+  assert.equal(r.ok, true); assert.equal(r.replayed, true); assert.equal(r.status, 'completed');
+  assert.equal(r.result.label, RESULT_TITLE);
+  const n = await s.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE attempt_id = ?1 AND action = 'attempt_completed'").bind(s.attempt).first();
+  assert.equal(n.n, 1, 'completed once');
+});

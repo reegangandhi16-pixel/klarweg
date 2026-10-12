@@ -139,3 +139,25 @@ test('CONCURRENCY lease: two simultaneous takeovers → exactly one lease is cur
   assert.equal(await statusOf(s, 'lesen'), 'running');
   assert.equal((await post(as(win), '/modules/lesen/answers', { answers: [item] })).status, 200);
 });
+
+test('COMPLETE retry after a lost response: the owner\'s same request id replays without a lease; nobody else, nothing new', async () => {
+  const s = await setup();
+  for (const m of ['lesen', 'hoeren', 'schreiben', 'sprechen']) { await start(s, m); if (m === 'hoeren') await post(s, '/hoeren/events', { type: 'ready' }); await submit(s, m); }
+  const id = rid();
+  const first = await post(s, '/complete', { request_id: id });
+  assert.equal(first.status, 200);
+  const again = await post(s, '/complete', { request_id: id });            // the lease is gone after completion
+  assert.equal(again.status, 200, JSON.stringify(again.json)); assert.equal(again.json.replayed, true);
+  assert.deepEqual(again.json.result, first.json.result);
+  const other = newUser(); await grant(s.env, other);
+  const foreign = await call(s.env, 'POST', A(s, '/complete'), { user: other, body: { lease_id: s.lease, request_id: id } });
+  assert.equal(foreign.status, 404); assert.equal(foreign.json.error, 'attempt_not_found');
+  const fresh = await post(s, '/complete', { request_id: rid() });          // a new completion request is still refused
+  assert.equal(fresh.status, 409);
+  const submitId = rid();
+  const s2 = await setup();
+  await start(s2, 'lesen'); await post(s2, '/modules/lesen/submit', { request_id: submitId });
+  const crossRoute = await post(s2, '/complete', { request_id: submitId });  // another route's request id never replays here
+  assert.equal(crossRoute.status, 409); assert.notEqual(crossRoute.json.replayed, true);
+  assert.equal(await n(s.env, "SELECT COUNT(*) AS n FROM audit_log WHERE attempt_id = ?1 AND action = 'attempt_completed'", s.attempt), 1);
+});

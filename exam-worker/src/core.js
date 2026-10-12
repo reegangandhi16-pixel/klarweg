@@ -43,7 +43,15 @@ export async function idempotent(env, attemptId, requestId, route, fn) {
     if (prior.route !== route) fail(409, 'request_id_reused');
     return { status: prior.status, body: { ...JSON.parse(prior.response_json), replayed: true } };
   }
-  const body = await fn();
+  let body;
+  try { body = await fn(); } catch (e) {
+    // A retry overlapping its own original (same attempt, request id and route) runs fn again and is refused by the
+    // state the original created (e.g. invalid_transition). If the original has committed meanwhile, replay it.
+    const done = await env.DB.prepare('SELECT route, status, response_json FROM request_log WHERE attempt_id = ?1 AND request_id = ?2')
+      .bind(attemptId, requestId).first();
+    if (done && done.route === route) return { status: done.status, body: { ...JSON.parse(done.response_json), replayed: true } };
+    throw e;
+  }
   try {
     await env.DB.prepare('INSERT INTO request_log (attempt_id, request_id, route, status, response_json, created_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6)')
       .bind(attemptId, requestId, route, 200, JSON.stringify(body), now(env)).run();

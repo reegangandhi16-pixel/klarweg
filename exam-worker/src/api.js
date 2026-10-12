@@ -114,12 +114,17 @@ export async function createAttempt(env, userId, request) {
   if (!flags(env)[def.flag]) fail(403, 'mode_disabled');
   if (!(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) fail(403, 'exam_access_required');
 
-  const same = await env.DB.prepare('SELECT * FROM attempts WHERE user_id = ?1 AND client_request_id = ?2').bind(userId, requestId).first();
-  if (same) {
-    return { ...(await attemptView(env, same)), lease: await acquireLease(env, same, body.device_id, true), replayed: true };
-  }
+  // a retried create (same request id) replays the attempt it created
+  const findSame = () => env.DB.prepare('SELECT * FROM attempts WHERE user_id = ?1 AND client_request_id = ?2').bind(userId, requestId).first();
+  const replay = async (a) => ({ ...(await attemptView(env, a)), lease: await acquireLease(env, a, body.device_id, true), replayed: true });
+  const same = await findSame();
+  if (same) return replay(same);
   const open = await env.DB.prepare("SELECT id FROM attempts WHERE user_id = ?1 AND mode = ?2 AND status IN ('created','in_progress')").bind(userId, body.mode).first();
-  if (open) fail(409, 'attempt_open', 'An attempt of this kind is already open.', { attempt_id: open.id });
+  if (open) {
+    const sameNow = await findSame();   // the original of this retry may have committed since the lookup above
+    if (sameNow) return replay(sameNow);
+    fail(409, 'attempt_open', 'An attempt of this kind is already open.', { attempt_id: open.id });
+  }
 
   const forms = (await env.DB.prepare(`SELECT f.id, f.release, f.level_config_id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
       WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')}) ORDER BY f.id`).bind(lvl, ...def.kinds).all()).results;
@@ -147,7 +152,10 @@ export async function createAttempt(env, userId, request) {
         .bind(attemptId, m.module, m.module_order, i === 0 ? 'available' : 'locked'))
     ]);
   } catch (e) {
-    // a concurrent create for the same mode lost the unique-open-attempt race
+    // a concurrent create for the same mode lost the unique-open-attempt race; if the winner is this very request
+    // (a retry racing the original), replay it like a sequential retry
+    const sameWinner = await findSame();
+    if (sameWinner) return replay(sameWinner);
     const winner = await env.DB.prepare("SELECT id FROM attempts WHERE user_id = ?1 AND mode = ?2 AND status IN ('created','in_progress')").bind(userId, body.mode).first();
     if (winner) fail(409, 'attempt_open', 'An attempt of this kind is already open.', { attempt_id: winner.id });
     throw e;
@@ -155,7 +163,8 @@ export async function createAttempt(env, userId, request) {
   const attempt = await loadAttempt(env, attemptId, userId);
   await audit(env, userId, attemptId, 'attempt_created', { mode: body.mode, reason });
   log(env, 'attempt_created', { attempt: attemptId, mode: body.mode, reason });
-  return { ok: true, ...(await attemptView(env, attempt)), lease: await acquireLease(env, attempt, body.device_id, false) };
+  // takeover: the attempt is new, so the only possible holder is a concurrent replay of this same request
+  return { ok: true, ...(await attemptView(env, attempt)), lease: await acquireLease(env, attempt, body.device_id, true) };
 }
 
 export async function getAttempt(env, userId, attemptId) {

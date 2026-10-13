@@ -83,12 +83,12 @@ export default {
 
   /* Cron sweep: auto-submit modules whose deadline + grace has passed even if
      the candidate never comes back, and finish any interrupted finalization
-     (scores and unlocks happen server-side). Recording retention (OD-21) runs
-     first and independently of EXAM_ENABLED: it has its own policy variable
-     and deletes nothing until that is set (retention.js). */
+     (scores and unlocks happen server-side). Recording retention (OD-21)
+     deletes nothing until its own policy variable is set (retention.js), and
+     like the rest of the sweep it stops when EXAM_ENABLED is off (kill switch). */
   async scheduled(event, env) {
-    try { await runRetention(env, now(env)); } catch (e) { log(env, 'retention_error', { error: e && e.name }); }
     if (!flags(env).enabled) return;
+    try { await runRetention(env, now(env)); } catch (e) { log(env, 'retention_error', { error: e && e.name }); }
     const rows = (await env.DB.prepare(`SELECT DISTINCT a.* FROM attempt_modules m JOIN attempts a ON a.id = m.attempt_id
         WHERE (m.status = 'running' AND m.deadline_at < ?1) OR m.status = 'submitting' LIMIT 200`).bind(now(env) - 10_000).all()).results;
     for (const a of rows) {

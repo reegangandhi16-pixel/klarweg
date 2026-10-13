@@ -68,9 +68,8 @@ test('RETENTION: deletes exactly the final attempts past the policy age, keeps e
   assert.deepEqual(await recordingState(fin), before, 'unset policy deletes nothing');
   h.clock.t = finalAt;
 
-  // policy 30 days: not one millisecond early, then exactly the final attempt; runs even with the exam switched off
+  // policy 30 days: not one millisecond early, then exactly the final attempt
   h.env.EXAM_RECORDING_RETENTION_DAYS = '30';
-  h.env.EXAM_ENABLED = 'off';
   h.clock.t = finalAt + 30 * DAY - 1; await cron(h.env);
   assert.deepEqual(await recordingState(fin), before, 'one millisecond before the policy age');
   h.clock.t = finalAt + 30 * DAY; await cron(h.env);
@@ -87,7 +86,6 @@ test('RETENTION: deletes exactly the final attempts past the policy age, keeps e
   assert.deepEqual({ scores: await count(h.env, 'SELECT COUNT(*) AS n FROM module_scores WHERE attempt_id = ?1', fin.attempt),
     ratings: await count(h.env, 'SELECT COUNT(*) AS n FROM ratings WHERE attempt_id = ?1', fin.attempt),
     writing: await count(h.env, 'SELECT COUNT(*) AS n FROM writing_final WHERE attempt_id = ?1', fin.attempt) }, kept);
-  h.env.EXAM_ENABLED = 'on';
   const res = await call(h.env, 'GET', A(fin, '/result'), { user: fin.user });
   assert.equal(res.status, 200); assert.equal(res.json.result.modules.find((m) => m.module === 'sprechen').status, 'final', 'the learner result is unchanged');
   const prod = await call(h.env, 'GET', `/exam/v1/admin/attempts/${fin.attempt}/productive`, { user: r1 });
@@ -98,7 +96,7 @@ test('RETENTION: deletes exactly the final attempts past the policy age, keeps e
   assert.equal((await audits(h.env, 'recordings_deleted')).length, 1);
 });
 
-test('RETENTION: a failed object delete keeps its row (no dangling pointer), is audit-logged and retried next run', async () => {
+test('RETENTION: a failed object delete call keeps its rows, is audit-logged as incomplete and retried next run', async () => {
   const h = makeEnv({ flags: { EXAM_RECORDING_RETENTION_DAYS: '30' } });
   const r1 = newUser(), r2 = newUser(); await role(h.env, r1, 'rater'); await role(h.env, r2, 'rater');
   const s = await finishedAttempt(h);
@@ -106,14 +104,15 @@ test('RETENTION: a failed object delete keeps its row (no dangling pointer), is 
   const before = await recordingState(s);
   const failing = (await h.env.DB.prepare('SELECT r2_key FROM recording_chunks WHERE attempt_id = ?1 ORDER BY r2_key LIMIT 1').bind(s.attempt).first()).r2_key;
   const del = h.env.RECORDINGS.delete;
-  h.env.RECORDINGS.delete = async (k) => { if (k === failing) throw new Error('r2 down'); return del(k); };
+  h.env.RECORDINGS.delete = async (k) => { if ([].concat(k).includes(failing)) throw new Error('r2 down'); return del(k); };
   h.advance(31 * DAY);
   const out = await runRetention(h.env, h.env.__clock());
   assert.equal(out.deleted[0].complete, false);
-  assert.deepEqual(await recordingState(s), { chunks: 1, turns: before.turns, objects: 1 }, 'the failed object and its row remain; turns stay until all chunks are gone');
+  assert.deepEqual(await recordingState(s), before, 'a failed delete call removes no row; turns stay until all chunks are gone');
   assert.equal(await count(h.env, 'SELECT COUNT(*) AS n FROM recording_chunks WHERE attempt_id = ?1 AND r2_key = ?2', s.attempt, failing), 1);
   const inc = await audits(h.env, 'recordings_delete_incomplete');
-  assert.equal(inc.length, 1); assert.equal(JSON.parse(inc[0].detail_json).chunks_remaining, 1);
+  assert.equal(inc.length, 1); assert.equal(JSON.parse(inc[0].detail_json).chunks_remaining, before.chunks);
+  assert.equal((await audits(h.env, 'recordings_deleted')).length, 0, 'never reported as fully deleted');
   h.env.RECORDINGS.delete = del;
   await runRetention(h.env, h.env.__clock());
   assert.deepEqual(await recordingState(s), { chunks: 0, turns: 0, objects: 0 });

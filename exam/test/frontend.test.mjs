@@ -10,8 +10,8 @@ import { memoryStore } from '../js/store.js';
 import { createApi, ExamApiError } from '../js/api.js';
 import { phaseAt, phaseLabel } from '../js/hoeren.js';
 import { ChunkQueue, sha256Hex } from '../js/recorder.js';
-import { createRenderer, resultPage, header, esc, RESULT_TITLE } from '../js/render.js';
-import { nextAction, assertSupported, unansweredCount, answerableItems } from '../js/engine.js';
+import { createRenderer, resultPage, header, moduleNav, reviewPanel, esc, RESULT_TITLE, RESULT_DISCLAIMER } from '../js/render.js';
+import { nextAction, assertSupported, unansweredCount, answerableItems, partProgress, isAnswered, itemNumber } from '../js/engine.js';
 import { countWords } from '../js/wordcount.js';
 import { speakingSchedule, speakingPhaseAt, prepEndsAt, partOfPhase, partForListenPhase, speakingItemsForPart, partnerAssetFor,
   listenPhaseAssets, topicItems, partnerPlayOffset, turnWindowMs, resumeAction, speakingPhaseLabel } from '../js/sprechen.js';
@@ -169,14 +169,74 @@ test('ACCESSIBILITY (render): labelled controls, legends, examples read-only, um
   assert.match(header({ module: 'hoeren', remainingMs: 61_000, saveState: 'saved' }), /role="timer"[^>]*>01:01</);
 });
 
-test('RESULTS (render): exact label, per-module rows, no combined score, never "Goethe score / official score / certificate"', () => {
-  const html = resultPage({ label: RESULT_TITLE, test_content: true, disclaimer: 'Klarweg B1 Simulation. Not an official Goethe-Institut result and not a certificate.',
-    modules: [{ module: 'lesen', status: 'final', points: 100, max_points: 100, pass: true, predikat: 'sehr gut' }, { module: 'schreiben', status: 'pending_rating', points: null, max_points: 100, note: 'Awaiting two independent human ratings.' }] });
-  assert.ok(html.includes('KLARWEG B1 SIMULATION — TEST RESULT'));
-  assert.ok(html.includes('100 / 100') && html.includes('in Bewertung'));
+test('RESULTS (render): OD-45 title and disclaimer, per-module rows with counts, no duplicated verdict, no combined score, never "Goethe score"', () => {
+  const html = resultPage({ label: RESULT_TITLE, test_content: true, disclaimer: 'ignored by the page',
+    modules: [{ module: 'lesen', status: 'final', points: 100, max_points: 100, pass: true, predikat: 'sehr gut', counts: { correct: 30, incorrect: 0, unanswered: 0 } },
+      { module: 'hoeren', status: 'final', points: 33, max_points: 100, pass: false, predikat: 'nicht bestanden', counts: { correct: 10, incorrect: 15, unanswered: 5 } },
+      { module: 'schreiben', status: 'pending_rating', points: null, max_points: 100, note: 'Awaiting two independent human ratings.' },
+      { module: 'sprechen', status: 'not_taken', points: null, max_points: 100 }] });
+  assert.equal(RESULT_TITLE, 'Klarweg B1 Simulation – Ergebnis', 'OD-45 title');
+  assert.equal(RESULT_DISCLAIMER, 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts.', 'OD-45 disclaimer');
+  assert.ok(html.includes(esc(RESULT_TITLE)) && html.includes(esc(RESULT_DISCLAIMER)));
+  assert.ok(html.includes('100 / 100') && html.includes('bestanden · sehr gut'));
+  assert.ok(html.includes('33 / 100') && html.includes('richtig 10 · falsch 15 · ohne Antwort 5'));
+  assert.equal(/nicht bestanden · nicht bestanden/.test(html), false, 'a band equal to the verdict is not repeated');
+  assert.ok(html.includes('in Bewertung') && html.includes('Wartet auf zwei unabhängige Bewertungen.') && html.includes('nicht abgelegt'));
+  assert.equal(/Awaiting|TEST RESULT/.test(html), false, 'no English learner-facing text');
   assert.ok(html.includes('kein Gesamtergebnis'));
-  assert.equal(/Goethe[- ]?(score|Zertifikat|certificate)|official score|Gesamtpunkte/i.test(html.replace('Not an official Goethe-Institut result and not a certificate.', '')), false);
+  assert.equal(/Goethe[- ]?(score|Ergebnis|Zertifikat|certificate)|official score|Gesamtpunkte/i.test(html.replace(esc(RESULT_DISCLAIMER), '')), false);
   assert.ok(/<th scope="col">/.test(html) && /<caption>/.test(html));
+});
+
+test('PROGRESS: answered counts per part on the real synthetic packages; examples and spoken turns excluded; whitespace text is unanswered', () => {
+  const lesen = pkgFor(build, 'lesen');
+  const empty = partProgress(lesen, {});
+  assert.equal(empty.reduce((n, p) => n + p.total, 0), answerableItems(lesen).length);
+  assert.ok(empty.every((p) => p.answered === 0 && p.items.every((r) => !r.answered)));
+  // the review uses the number the learner sees on the page (the stem's "29. …"), not the position within the part
+  const byId = Object.fromEntries(answerableItems(lesen).map((it) => [it.item_id, it]));
+  for (const r of empty.flatMap((p) => p.items)) assert.ok(String(byId[r.item_id].stem).startsWith(`${r.no}. `), `${r.item_id} → ${r.no}`);
+  assert.deepEqual(empty.flatMap((p) => p.items).map((r) => r.no), answerableItems(lesen).map((_, i) => i + 1), 'synthetic Lesen numbers 1…30 in order');
+  assert.equal(itemNumber({ stem: 'Ohne Nummer' }, 4), 5, 'fallback: position in the part');
+  const first = empty.find((p) => p.total).items[0];
+  const one = partProgress(lesen, { [first.item_id]: { option_id: 'x' } });
+  assert.equal(one.reduce((n, p) => n + p.answered, 0), 1);
+  assert.equal(unansweredCount(lesen, { [first.item_id]: { option_id: 'x' } }), answerableItems(lesen).length - 1, 'unansweredCount agrees');
+  assert.equal(isAnswered({ text: '   ' }), false); assert.equal(isAnswered({ option_id: null }), false); assert.equal(isAnswered({ text: 'Hallo' }), true);
+  const schreiben = pkgFor(build, 'schreiben');
+  const w = partProgress(schreiben, { [answerableItems(schreiben)[0].item_id]: { text: 'Liebe Grüße aus der Stadt' } }).flatMap((p) => p.items).find((r) => r.interaction === 'text_response');
+  assert.equal(w.words, 5);
+  assert.equal(partProgress(pkgFor(build, 'sprechen'), {}).flatMap((p) => p.items).some((r) => r.interaction === 'spoken_response'), false);
+});
+
+test('NAVIGATION + REVIEW (render): one link per part with counts; header progress; the review lists unanswered items with working anchors and word counts', () => {
+  const lesen = pkgFor(build, 'lesen');
+  const prog = partProgress(lesen, {});
+  const nav = moduleNav(prog);
+  assert.equal((nav.match(/<a href="#part-/g) || []).length, lesen.parts.length);
+  for (const p of lesen.parts) assert.ok(nav.includes(`href="#part-${p.part}"`));
+  const page = createRenderer().module(lesen, {});
+  for (const p of lesen.parts) assert.ok(page.includes(`id="part-${p.part}"`), 'every nav target exists on the page');
+  assert.match(nav, /aria-label="Teile dieses Moduls"/);
+  assert.equal(moduleNav([prog[0]]), '', 'no navigation for a single part');
+  assert.match(header({ module: 'lesen', remainingMs: 1000, saveState: 'saved', progress: prog }), new RegExp(`0 von ${answerableItems(lesen).length} beantwortet`));
+  assert.equal(/beantwortet/.test(header({ module: 'sprechen', remainingMs: 1000, saveState: 'saved' })), false);
+  const review = reviewPanel(prog);
+  assert.match(review, new RegExp(`${answerableItems(lesen).length} von ${answerableItems(lesen).length} Aufgaben sind noch ohne Antwort`));
+  for (const id of [...review.matchAll(/href="#(item-[^"]+)"/g)].map((m) => m[1])) assert.ok(page.includes(`id="${id}"`), `review anchor ${id} exists on the page`);
+  assert.ok(review.includes('data-act="submit-confirm"') && review.includes('data-act="review-close"'));
+  const all = Object.fromEntries(answerableItems(lesen).map((it) => [it.item_id, { option_id: 'x' }]));
+  assert.match(reviewPanel(partProgress(lesen, all)), /Alle \d+ Aufgaben sind beantwortet/);
+  const schreiben = pkgFor(build, 'schreiben');
+  assert.match(reviewPanel(partProgress(schreiben, {})), /Text: 0 Wörter \(Ziel ca\. \d+\)/);
+  assert.match(reviewPanel([]), /keine Aufgaben zum Ankreuzen/);
+});
+
+test('SUBMIT (static): the shell submits only from the review step; no browser confirm dialog remains', () => {
+  const main = read('exam/js/main.js');
+  assert.equal(/\bconfirm\(/.test(main), false);
+  assert.ok(/act === 'submit'\)[\s\S]{0,200}reviewPanel/.test(main), 'the first click opens the review');
+  assert.ok(/act === 'submit-confirm'\)[\s\S]{0,200}api\.submit\(/.test(main), 'only the confirmation submits');
 });
 
 test('WRITING: browser, worker and content-model word counts are the same function', () => {

@@ -8,7 +8,9 @@ const idSafe = (s) => String(s).replace(/[^a-zA-Z0-9_-]/g, '_');
 
 export const MODULE_LABELS = { lesen: 'Lesen', hoeren: 'Hören', schreiben: 'Schreiben', sprechen: 'Sprechen' };
 export const UMLAUTS = ['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'];
-export const RESULT_TITLE = 'KLARWEG B1 SIMULATION — TEST RESULT';
+/* OD-45 (LOCKED): student-facing title and mandatory disclaimer; never "Goethe score / Goethe-Ergebnis". */
+export const RESULT_TITLE = 'Klarweg B1 Simulation – Ergebnis';
+export const RESULT_DISCLAIMER = 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts.';
 
 export function paragraphs(md) {
   return String(md || '').split(/\n{2,}/).map((p) => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('');
@@ -18,9 +20,12 @@ export function testBanner(pkg) {
   return pkg && pkg.test_content ? '<p class="kx-banner" role="note">SYNTHETISCHER SYSTEMTEST — keine echte Prüfungsaufgabe. TEST AUDIO = Prüftöne.</p>' : '';
 }
 
-export function header({ module, remainingMs, saveState }) {
+export function header({ module, remainingMs, saveState, progress = null }) {
   const save = { saved: 'Gespeichert', pending: 'Änderungen …', saving: 'Speichert …', offline: 'Offline — wird erneut versucht', stopped: 'Speichern gestoppt' }[saveState] || '';
+  const total = progress ? progress.reduce((n, p) => n + p.total, 0) : 0;
+  const done = progress ? progress.reduce((n, p) => n + p.answered, 0) : 0;
   return `<header class="kx-head"><h1 class="kx-title">${esc(MODULE_LABELS[module] || module)}</h1>`
+    + (total ? `<p class="kx-progress" data-progress-total>${done} von ${total} beantwortet</p>` : '')
     + `<p class="kx-save" aria-live="polite">${esc(save)}</p>`
     + `<p class="kx-timer" role="timer" aria-label="Verbleibende Zeit">${esc(formatRemaining(remainingMs))}</p></header>`;
 }
@@ -99,14 +104,46 @@ export function createRenderer(extra = {}) {
   return { module, part, item, registry };
 }
 
+/* Part navigation for a module page: one link per part present, with its answered count. */
+export function moduleNav(progress) {
+  if (!progress || progress.length < 2 || !progress.some((p) => p.total)) return '';
+  return `<nav class="kx-nav" aria-label="Teile dieses Moduls"><ol>${progress.map((p) => `<li><a href="#part-${esc(p.part)}">Teil ${esc(p.part)}`
+    + (p.total ? ` <span class="kx-nav-count" data-progress-part="${esc(p.part)}">${p.answered}/${p.total}</span>` : '') + '</a></li>').join('')}</ol></nav>`;
+}
+
+/* In-page review before the final module submission (replaces a browser confirm dialog). The module page stays in
+   place underneath — the timer and, in Hören, the playback keep running. */
+export function reviewPanel(progress) {
+  const total = progress.reduce((n, p) => n + p.total, 0), done = progress.reduce((n, p) => n + p.answered, 0), open = total - done;
+  const summary = !total ? 'In diesem Modul gibt es keine Aufgaben zum Ankreuzen.'
+    : open ? `${open} von ${total} Aufgaben sind noch ohne Antwort.` : `Alle ${total} Aufgaben sind beantwortet.`;
+  const parts = progress.filter((p) => p.total).map((p) => {
+    const missing = p.items.filter((r) => !r.answered);
+    const writing = p.items.filter((r) => r.interaction === 'text_response')
+      .map((r) => `<li>Text: ${esc(r.words)} Wörter${r.target_words ? ` (Ziel ca. ${esc(r.target_words)})` : ''}</li>`).join('');
+    return `<li><span class="kx-review-part">Teil ${esc(p.part)}: ${p.answered} von ${p.total} beantwortet</span>`
+      + (missing.length ? `<span class="kx-review-open"> · ohne Antwort: ${missing.map((r) => `<a href="#item-${idSafe(r.item_id)}" data-review-jump>Aufgabe ${esc(r.no)}</a>`).join(', ')}</span>` : '')
+      + (writing ? `<ul class="kx-review-words">${writing}</ul>` : '') + '</li>';
+  }).join('');
+  return `<section class="kx-review" id="kx-review" aria-labelledby="kx-review-title"><h2 id="kx-review-title" tabindex="-1">Abgabe prüfen</h2>`
+    + `<p class="kx-review-summary">${esc(summary)}</p>${parts ? `<ul class="kx-review-list">${parts}</ul>` : ''}`
+    + '<p class="kx-meta">Nach der Abgabe sind keine Änderungen mehr möglich. Die Zeit läuft weiter.</p>'
+    + '<div class="kx-actions"><button type="button" class="kx-btn kx-btn-quiet" data-act="review-close">Weiter bearbeiten</button>'
+    + '<button type="button" class="kx-btn" data-act="submit-confirm">Endgültig abgeben</button></div></section>';
+}
+
+const RESULT_NOTES = { pending_rating: 'Wartet auf zwei unabhängige Bewertungen.', pending_rule: 'Bewertet; die Punkteregel ist noch nicht festgelegt.' };
 export function resultPage(result) {
   const rows = result.modules.map((m) => {
     const pts = m.status === 'final' ? `${esc(m.points)} / ${esc(m.max_points)}` : '–';
     const verdict = m.status === 'final' ? (m.pass ? 'bestanden' : 'nicht bestanden') : m.status === 'not_taken' ? 'nicht abgelegt' : 'in Bewertung';
-    return `<tr><th scope="row">${esc(MODULE_LABELS[m.module] || m.module)}</th><td>${pts}</td><td>${esc(verdict)}${m.predikat && m.status === 'final' ? ` · ${esc(m.predikat)}` : ''}</td><td>${esc(m.note || '')}</td></tr>`;
+    const band = m.status === 'final' && m.predikat && m.predikat !== verdict ? ` · ${esc(m.predikat)}` : '';
+    const counts = m.counts ? `richtig ${esc(m.counts.correct)} · falsch ${esc(m.counts.incorrect)} · ohne Antwort ${esc(m.counts.unanswered)}` : '';
+    const note = RESULT_NOTES[m.status] || '';
+    return `<tr><th scope="row">${esc(MODULE_LABELS[m.module] || m.module)}</th><td>${pts}</td><td>${esc(verdict)}${band}</td><td>${[counts, esc(note)].filter(Boolean).join('<br>')}</td></tr>`;
   }).join('');
   return `<main class="kx-result" aria-labelledby="kx-result-title"><p class="kx-eyebrow">${result.test_content ? 'Systemtest · synthetische Inhalte' : 'Simulation'}</p>`
     + `<h1 id="kx-result-title">${esc(RESULT_TITLE)}</h1>`
-    + `<table class="kx-table"><caption>Ergebnisse je Modul (kein Gesamtergebnis)</caption><thead><tr><th scope="col">Modul</th><th scope="col">Punkte</th><th scope="col">Status</th><th scope="col">Hinweis</th></tr></thead><tbody>${rows}</tbody></table>`
-    + `<p class="kx-disclaimer">${esc(result.disclaimer)}</p></main>`;
+    + `<table class="kx-table"><caption>Ergebnisse je Modul (kein Gesamtergebnis)</caption><thead><tr><th scope="col">Modul</th><th scope="col">Punkte</th><th scope="col">Status</th><th scope="col">Details</th></tr></thead><tbody>${rows}</tbody></table>`
+    + `<p class="kx-disclaimer">${esc(RESULT_DISCLAIMER)} Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.</p></main>`;
 }

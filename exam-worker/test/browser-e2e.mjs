@@ -31,7 +31,7 @@ const log = (...a) => console.log('[browser-e2e]', ...a);
 
 async function launch({ autoplayFlag = true } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-chrome-'));
-  const proc = spawn(CHROME, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', `--user-data-dir=${dir}`,
+  const proc = spawn(CHROME, ['--headless=new', '--mute-audio', '--disable-gpu', '--no-first-run', '--no-default-browser-check', `--user-data-dir=${dir}`,
     '--remote-debugging-port=0', ...(autoplayFlag ? ['--autoplay-policy=no-user-gesture-required'] : []), '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream',
     'about:blank'], { stdio: 'ignore' });
   const portFile = path.join(dir, 'DevToolsActivePort');
@@ -71,6 +71,7 @@ async function run(viewport) {
       throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 800)}\n--- console ---\n${b.events.filter((e) => e.method === 'Runtime.exceptionThrown' || e.method === 'Log.entryAdded' || (e.method === 'Runtime.consoleAPICalled' && e.params.type === 'error')).map((e) => JSON.stringify(e.params).slice(0, 300)).join('\n')}`);
     };
     const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const submitModule = async () => { await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]'); };
     await send('Runtime.evaluate', { expression: 'window.confirm = () => true' });
     await send('Page.addScriptToEvaluateOnNewDocument', { source: 'window.confirm = () => true;' });
     // record which Sprechen assets an <audio> element starts (the shell tags them with data-asset)
@@ -86,12 +87,37 @@ async function run(viewport) {
     await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
     assert.match(await text(), /SYNTHETISCHER SYSTEMTEST/);
     // answer: first option of each non-example radio group, first real option of each select
+    // part navigation and progress: one link per part, every target present, nothing answered yet
+    const navLinks = await evaluate(`[...document.querySelectorAll('.kx-nav a')].map((a) => a.getAttribute('href'))`);
+    assert.ok(navLinks.length >= 2, 'part navigation shown');
+    assert.equal(await evaluate(`${JSON.stringify(navLinks)}.every((h) => document.querySelector(h))`), true, 'every part link has a target');
+    const total = Number(/von (\d+) beantwortet/.exec(await evaluate(`document.querySelector('.kx-progress').textContent`))[1]);
+    assert.match(await evaluate(`document.querySelector('.kx-progress').textContent`), /^0 von \d+ beantwortet$/);
+    // the first "Modul abgeben" opens the review — nothing is submitted; it lists the unanswered items with working links
+    await click('[data-act="submit"]');
+    await waitFor(`document.querySelector('#kx-review')`, 5000, 'review panel');
+    assert.equal(await evaluate(`document.activeElement && document.activeElement.id`), 'kx-review-title', 'focus moves to the review');
+    assert.match(await evaluate(`document.querySelector('.kx-review-summary').textContent`), new RegExp(`^${total} von ${total} Aufgaben sind noch ohne Antwort`));
+    assert.equal(await evaluate(`[...document.querySelectorAll('#kx-review a[data-review-jump]')].every((a) => document.querySelector(a.getAttribute('href')))`), true);
+    assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'lesen'").first()).status, 'running', 'opening the review submits nothing');
+    // answering while the review is open refreshes the review (not only the header); focus stays where the learner is
+    await evaluate(`(() => { const r = document.querySelector('input[type=radio]:not([disabled])'); r.focus(); r.click(); })()`);   // as a pointer/keyboard user does
+    await waitFor(`document.querySelector('.kx-review-summary')?.textContent.startsWith('${total - 1} von ${total} Aufgaben')`, 5000, 'review refreshed after an answer');
+    assert.equal(await evaluate(`document.querySelector('.kx-progress').textContent`), `1 von ${total} beantwortet`);
+    assert.equal(await evaluate(`document.activeElement && document.activeElement.type`), 'radio', 'focus is not pulled into the review');
+    await click('[data-act="review-close"]');
+    await waitFor(`!document.querySelector('#kx-review') && !document.querySelector('.kx-foot').hidden`, 5000, 'review closed');
+    // answer: first option of each non-example radio group, first real option of each select
     await evaluate(`(() => { const seen = new Set(); for (const r of document.querySelectorAll('input[type=radio]:not([disabled])')) { if (!seen.has(r.name)) { seen.add(r.name); r.click(); } }
       for (const s of document.querySelectorAll('select:not([disabled])')) { s.selectedIndex = 1; s.dispatchEvent(new Event('change', { bubbles: true })); } })()`);
     await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Lesen autosaved');
+    assert.equal(await evaluate(`document.querySelector('.kx-progress').textContent`), `${total} von ${total} beantwortet`, 'progress follows the answers');
     const overflow = await evaluate('document.documentElement.scrollWidth > window.innerWidth + 1');
     assert.equal(overflow, false, 'no horizontal scroll');
     await click('[data-act="submit"]');
+    await waitFor(`/Alle \\d+ Aufgaben sind beantwortet/.test(document.querySelector('.kx-review-summary')?.textContent || '')`, 5000, 'review: all answered');
+    assert.equal(await evaluate('document.documentElement.scrollWidth > window.innerWidth + 1'), false, 'no horizontal scroll with the review open');
+    await click('[data-act="submit-confirm"]');
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Hören intro');
     await click('[data-act="start"][data-module="hoeren"]');
@@ -120,6 +146,20 @@ async function run(viewport) {
       await sleep(100);
     }
     log(viewport.name, 'interrupted last play recovered once');
+    // an open review is redrawn when Hören opens another part; keyboard focus stays on the equivalent review control
+    const partsBefore = await evaluate(`document.querySelectorAll('#kx-main .kx-part').length`);
+    assert.ok(partsBefore < 4, `a later part must still be locked here (parts open: ${partsBefore})`);
+    await click('[data-act="submit"]');
+    await waitFor(`document.querySelector('#kx-review')`, 5000, 'Hören review');
+    await evaluate(`document.querySelector('[data-act="review-close"]').focus()`);
+    const reviewParts = () => evaluate(`document.querySelectorAll('.kx-review-list > li').length`);
+    const listedBefore = await reviewParts();
+    await waitFor(`document.querySelectorAll('#kx-main .kx-part').length > ${partsBefore}`, 120000, 'next Hören part unlocked');
+    await waitFor(`document.querySelectorAll('.kx-review-list > li').length > ${listedBefore}`, 5000, 'review lists the newly opened part');
+    assert.equal(await evaluate(`document.activeElement && document.activeElement.dataset.act`), 'review-close', 'focus kept on the equivalent review control');
+    assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'hoeren'").first()).status, 'running', 'the open review submitted nothing');
+    await click('[data-act="review-close"]');
+    await waitFor(`!document.querySelector('#kx-review') && !document.querySelector('.kx-foot').hidden`, 5000, 'Hören review closed');
     await waitFor(`/Ende des Hörteils/.test(document.querySelector('#kx-phase')?.textContent || '')`, 150000, 'Hören finished');
     assert.equal(await evaluate(`document.querySelectorAll('#kx-main .kx-part').length`), 4, 'all four parts open by the end');
     const plays = (await dev.env.DB.prepare('SELECT kind, outcome, COUNT(*) AS n FROM audio_plays GROUP BY kind, outcome').all()).results;
@@ -129,7 +169,7 @@ async function run(viewport) {
     assert.equal(n('normal', 'interrupted'), 1, JSON.stringify(plays));
     assert.equal(n('normal', 'complete'), 15, JSON.stringify(plays));
     assert.equal(n('recovery'), 1); assert.equal(n('recovery', 'complete'), 1);
-    await click('[data-act="submit"]');
+    await submitModule();
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`, 15000, 'Schreiben intro');
     await click('[data-act="start"][data-module="schreiben"]');
@@ -142,7 +182,7 @@ async function run(viewport) {
     await send('Page.reload');
     await waitFor(`!window.__beforeReload && document.querySelector('[data-wc-for]') && document.querySelector('textarea') && document.querySelector('textarea').value.startsWith('Liebe Grüße aus der Straße ä')`, 15000, 'text recovered after reload');
     assert.match(await evaluate(`document.querySelector('[data-wc-for]').textContent`), /^[56]$/);
-    await click('[data-act="submit"]');
+    await submitModule();
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`, 15000, 'Sprechen intro');
     await click('#kx-consent');
@@ -216,13 +256,16 @@ async function run(viewport) {
     assert.equal(teil2 && teil2.status, 'complete', 'Teil 2 recorded in its (shortened) window');
     const chunks = { n: await chunkCount() };
     log(viewport.name, 'Sprechen phases: preparation + reload, topic lock, Teil 1, reload into Teil 2, partner once, Teil 3');
-    await click('[data-act="submit"]');
+    await submitModule();
     await waitFor(`document.querySelector('[data-act="complete"]')`, 20000, 'complete screen');
     await click('[data-act="complete"]');
-    await waitFor(`/KLARWEG B1 SIMULATION — TEST RESULT/.test(document.body.innerText)`, 15000, 'result page');
+    await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText)`, 15000, 'result page');
     const result = await text();
     assert.match(result, /Lesen/); assert.match(result, /in Bewertung/);
-    assert.equal(/Goethe[- ]?(score|Zertifikat)|official score/i.test(result.replace(/Not an official Goethe-Institut result and not a certificate\./, '')), false);
+    assert.match(result, /Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts\./, 'OD-45 disclaimer');
+    assert.equal(/Goethe[- ]?(score|Ergebnis|Zertifikat)|official score|TEST RESULT|Awaiting/i.test(result.replace(/Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts\./, '')), false);
+    assert.equal(/nicht bestanden · nicht bestanden/.test(result), false, 'no duplicated verdict');
+    assert.match(result, /richtig \d+ · falsch \d+ · ohne Antwort \d+/, 'objective counts shown');
     const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown');
     errors.push(...exceptions.map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text));
     log(viewport.name, 'PASS', { normal_plays: n('normal'), recovery_plays: n('recovery'), chunks: chunks.n });

@@ -4,8 +4,8 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, header, resultPage, esc, MODULE_LABELS } from './render.js';
-import { nextAction, assertSupported, unansweredCount } from './engine.js';
+import { createRenderer, header, resultPage, moduleNav, reviewPanel, esc, MODULE_LABELS } from './render.js';
+import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
 import { ChunkQueue, TurnRecorder } from './recorder.js';
 import { speakingPhaseAt, prepEndsAt, topicItems } from './sprechen.js';
@@ -129,17 +129,37 @@ async function openModule(module) {
 }
 
 function moduleState() { return S.attempt.modules.find((m) => m.module === S.module); }
+/* Progress counts only for the item-based modules; Sprechen is phase-driven and has no navigation. */
+function progress() { return S.pkg && S.module !== 'sprechen' ? partProgress(S.pkg, S.answers) : null; }
 function paintHeader() {
   const m = S.module && moduleState();
   const h = $('#kx-head');
-  if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state });
+  if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state, progress: progress() });
+}
+function paintNav() { const n = $('#kx-nav-slot'); if (n) n.innerHTML = S.module === 'sprechen' ? '' : moduleNav(progress()); }
+/* An open review is redrawn whenever its counts or parts change. Focus moves only if it was inside the review, and then
+   to the equivalent control (same button, or the same item link), else to the review title if that control is gone. */
+function refreshReview() {
+  const slot = $('#kx-review-slot'); if (!slot || !slot.innerHTML) return;
+  const active = document.activeElement;
+  const inside = !!active && active !== document.body && slot.contains(active);
+  const key = !inside ? null : active.dataset.act ? `[data-act="${active.dataset.act}"]`
+    : active.matches('a[data-review-jump]') ? `a[data-review-jump][href="${CSS.escape(active.getAttribute('href'))}"]` : null;
+  slot.innerHTML = reviewPanel(progress() || []);
+  if (inside) { const t = (key && slot.querySelector(key)) || $('#kx-review-title'); if (t) t.focus({ preventScroll: true }); }
+}
+function updateProgress() { paintHeader(); paintNav(); refreshReview(); }
+function closeReview(focusSubmit = true) {
+  const slot = $('#kx-review-slot'); if (slot) slot.innerHTML = '';
+  const foot = $('.kx-foot'); if (foot) foot.hidden = false;
+  if (focusSubmit) { const b = $('[data-act="submit"]'); if (b) b.focus(); }
 }
 function paint() {
   const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p><div class="kx-alerts" id="kx-alerts"></div>'
     : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
-  screen(`<div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
-    + `<footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
-  paintHeader();
+  screen(`<div id="kx-head"></div><div id="kx-nav-slot"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
+    + `<div id="kx-review-slot"></div><footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
+  updateProgress();
 }
 let announced = {};   // time warnings go to #kx-announce so they never overwrite the phase text
 function tick() {
@@ -205,6 +225,7 @@ async function runHoeren() {
       rendered.add(part.part);
       main.insertAdjacentHTML('beforeend', renderer.part(part, S.answers));
     }
+    updateProgress();   // also redraws an open review with the parts that are open now
   };
   const play = async (phase, kind, offsetMs) => {
     S.currentPlay = { seq: phase.seq, kind };
@@ -392,12 +413,14 @@ app.addEventListener('change', (e) => {
   if (!el.dataset || !el.dataset.item || !S.autosave) return;
   const value = { option_id: el.value === '' ? null : el.value };
   S.answers[el.dataset.item] = value; S.autosave.set(el.dataset.item, value);
+  updateProgress();
 });
 app.addEventListener('input', (e) => {
   const el = e.target;
   if (el.tagName !== 'TEXTAREA' || !S.autosave) return;
   const wc = document.querySelector(`[data-wc-for="${CSS.escape(el.id)}"]`); if (wc) wc.textContent = countWords(el.value);
   S.answers[el.dataset.item] = { text: el.value }; S.autosave.set(el.dataset.item, { text: el.value });
+  updateProgress();
 });
 app.addEventListener('click', async (e) => {
   const b = e.target.closest('button'); if (!b) return;
@@ -423,9 +446,16 @@ app.addEventListener('click', async (e) => {
       S.attempt = await api.getAttempt(S.attempt.attempt_id);
       return openModule(b.dataset.module);
     }
-    if (act === 'submit') {
-      const open = unansweredCount(S.pkg, S.answers);
-      if (!confirm(open ? `${open} Aufgabe(n) ohne Antwort. Modul trotzdem abgeben?` : 'Modul jetzt abgeben? Danach ist keine Änderung mehr möglich.')) return;
+    if (act === 'submit') {   // first step: an in-page review; nothing is submitted yet
+      const slot = $('#kx-review-slot'); if (!slot) return;
+      slot.innerHTML = reviewPanel(progress() || []);
+      const foot = $('.kx-foot'); if (foot) foot.hidden = true;
+      const h = $('#kx-review-title'); if (h) { h.scrollIntoView({ block: 'start' }); h.focus({ preventScroll: true }); }
+      return;
+    }
+    if (act === 'review-close') return closeReview();
+    if (act === 'submit-confirm') {
+      b.disabled = true;
       await S.autosave.flush();
       await api.submit(S.attempt.attempt_id, S.lease, S.module);
       clearInterval(S.timer); S.module = null;

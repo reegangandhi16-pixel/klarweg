@@ -11,7 +11,7 @@ Validates the `ABSENT → PENDING → COMPLETED` claim mechanism (`idempotentAto
 | S2 | The claim token changes before commit → the assertion fails and the **whole batch rolls back** (no effect, state unchanged) |
 | S3 | The transition precondition is false → rollback; the claim is released |
 | S4 | Success → the effect and the `completed` record are both present. A later failing statement in the batch → **neither** is present |
-| S5 | A stale pending claim and `n` simultaneous takeovers → exactly one execution |
+| S5 | A stale pending claim and `n` simultaneous takeovers → exactly one execution, exactly one **successful compare-and-set takeover** (counted from `claim_takeover`, which `idempotentAtomic` logs only when D1 reports the takeover `UPDATE` changed a row), and every other request gets `request_in_progress` or a replay |
 | S6 | The original resumes after a takeover → its batch rolls back, it is answered with the taker's response, one effect |
 | S7 | (a) The original dies before its batch → `request_in_progress` within the TTL, one takeover execution after it. (b) It dies after commit → the retry replays |
 | R  | Cross-request race: `n` HTTP requests carrying one request id, in several rounds → exactly one execution and one effect per round, record `completed` |
@@ -44,3 +44,62 @@ Use `wrangler.example.toml`. The secrets are `IDEM_PROBE_TOKEN` and `IDEM_PROBE_
 
 ## Timing
 Scenarios S2, S6 and S7 wait for the **observed pending claim** of the original request (bounded polling; 10 s timeout by default). They never wait a fixed time. If the claim never appears, the scenario **fails** with `original_never_claimed`; it never passes.
+
+## Which runner? Workers Paid vs Workers Free
+Cloudflare's D1 limit is **50 queries per Worker invocation on Workers Free, 1,000 on Workers Paid** ([D1 limits](https://developers.cloudflare.com/d1/platform/limits/); Workers Free also allows 50 subrequests per invocation ([Workers limits](https://developers.cloudflare.com/workers/platform/limits/)); both checked 2026-10-13).
+
+- **Combined runner, needs Workers Paid:** `worker.mjs` + `run-idem.mjs`. `POST /idem/scenarios` runs S1–S7 in **one** invocation. Measured on the local shim at n = 20, it uses **186 D1 calls / 227 SQL statements**. On Workers Free it would exceed the limit.
+- **Split runner, for Workers Free:** `worker-free.mjs` + `run-idem-free.mjs` + `budget.mjs` (config `wrangler.free.example.toml`). It makes **one scenario or one race step per invocation**, using the **same scenario functions** as `runScenarios()`.
+
+## Workers Free runner
+**Budget (enforced, not just reported).** Every D1 call goes through a guard that counts **every statement inside a `batch()`**. The docs do not say whether a batch counts as one query, so this is the conservative reading. The guard caps each invocation at **40 statements**, including the 7 statements of the database check. A call that would exceed the cap is refused **before it reaches D1**, and the result is **inconclusive**. A definite violation that was already observed (more than one execution or successful takeover) stays a **fail**.
+
+| Free invocation | Worst case (statements, incl. 7 for verification) | Measured max (local, 10× 0–150 ms latency) |
+|---|---|---|
+| S1 (n = 12 in one isolate) | 37 | 37 |
+| S2 / S6 / S7a | 19 / 24 / 20 + claim-wait polls. Polling stops while the remaining work still fits (≥ 15 polls available); otherwise **inconclusive** (`poll_budget_exhausted`) | 21 / 27 / 23 (≤ 3 polls) |
+| S3 / S4 / S7b | 18 / 28 / 17 | 18 / 28 / 17 |
+| S5 (n = 6 stale takeovers in one isolate) | 38 | 38 |
+| race prepare / one / state | 9 / 15 / 9 | 9 / 15 / 9 |
+| race fan (m = 6 claims in one invocation) | 35 | 35 (stale) / 23 (fresh) |
+
+**Concurrency: what the Cloudflare docs do and do not say.**
+- *Outgoing connections:* "Each Worker invocation can have up to six connections simultaneously waiting for response headers"; a seventh is **queued, not dropped**. The D1 limits FAQ also says a Worker can open "up to six connections (to D1) simultaneously" per invocation.
+- *In-flight D1 operations:* no documented cap on how many D1 binding calls one invocation may have pending, and the Workers list of connection-counted APIs does not name D1. Queued calls are still issued.
+- *D1 execution:* "Each individual D1 database is inherently single-threaded, and processes queries one at a time". Excess concurrent requests are queued, then rejected as overloaded. A race is therefore a question of **interleaving order** at the database, and more competing claims mean more interleavings.
+- *Budget:* 50 D1 queries per invocation on Free, 1,000 on Paid.
+- *Cross-request concurrency:* separate HTTP requests are separate invocations, each with its own budget.
+
+So a smaller in-invocation n is **not** the same race with fewer idle callers: it means fewer competing claims.
+
+**Why S1 / S5 use 12 / 6, and how ≥ 20 competing claims are kept.**
+- The Paid run issues n = 20 in one invocation. On Free that needs 7 + 46 = **53** statements for S1 and 7 + 87 = **94** for S5, above the platform limit of 50, so it cannot run there. Measured locally, S5 at n = 20 under the 40 cap reached **no** takeover `UPDATE` before the budget ran out: inconclusive, even for a broken compare-and-set.
+- S1 / S5 therefore keep the largest n that fits one invocation with their setup and checks (12 / 6). Every one of those claims is issued; the test counts claim `INSERT`s and takeover `UPDATE`s.
+- **Fan rounds** restore ≥ 20 competing claims per round:
+  - `RF` (fresh) and `RSF` (stale): **k = 4 invocations × m = 6 simultaneous claims = 24**, all released at one start time;
+  - each invocation stays within 35 statements (stale worst case);
+  - the Worker refuses `m` above 6.
+- **Single-claim rounds** `R` (fresh) and `RS` (stale) add n = 30 separate invocations per round.
+- Default is 5 rounds of each kind. The checks count **effect rows in D1** and **successful compare-and-set takeovers**, so a duplicate effect or a second winner fails a round however many claims compete.
+
+**Start barrier and verdicts.** Each race request runs its read-only verification and then waits for a **common start time** (`at`, on the Worker's clock, from `race/prepare`), so the claims reach D1 together. The wait only paces the start; the evidence is what is observed:
+- a round **fails** if there is more than one execution, more than one effect, more than one successful takeover (or any takeover in a fresh round), or an unexpected status. Executions and takeovers that a budget-tripped invocation already received from D1 still count;
+- a round is **inconclusive** if a request was not answered with the probe's JSON (a platform error, a CPU-limit error 1102 or a budget trip), or if **no claim overlapped** the winner (`no_contention_observed`: every loser arrived after the commit, so the round never raced);
+- the overall result is `pass` only if every check passes.
+
+**Negative controls (local).** Free and Paid reach the **same verdict** under each injected defect:
+- a batch that stops without rollback fails S4;
+- a batch that continues past an error fails S2, S3, S4 and S6;
+- an assertion that ignores the claim token fails S2 (S6 is also protected by the transition precondition);
+- a takeover **without compare-and-set** fails S5, and every RS and RSF round. Before the takeover count was added, this defect passed every scenario in both runners;
+- **no idempotency at all** (the claim is never written; the assertion and the precondition always hold) causes **duplicate effects**, which fail S1 (Paid too) and every R and RF round.
+- A round that never contends is inconclusive.
+
+**What only real D1 can show (not validated here).** The local shim runs a batch synchronously in one JavaScript turn, has no network, no six-connection cap and no replicas, and serves every "concurrent" request in one Node process. Five things remain open:
+- (1) whether D1 batches are really atomic: rollback on the failing assertion, and effect + completed record committed together;
+- (2) whether the unique claim `INSERT` and the compare-and-set `UPDATE` report `meta.changes` exactly when they win;
+- (3) whether real requests overlap enough to produce contention (the runner reports this per round; rerun if a round is inconclusive);
+- (4) where requests land (one isolate or many), and whether the D1 binding queues an invocation's calls behind six connections (it would delay, not drop, claims);
+- (5) whether a scenario stays within Workers Free's 10 ms CPU limit (an overrun appears as inconclusive).
+
+Operator steps are the same as above, except: use `wrangler.free.example.toml` (`main = "worker-free.mjs"`) and run `node run-idem-free.mjs --n 30 --rounds 5`. One run makes about 390 requests; the Free daily limit is 100,000.

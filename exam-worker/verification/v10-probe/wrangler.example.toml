@@ -1,0 +1,16 @@
+# V10 probe Worker — NON-PRODUCTION ONLY. Copy to wrangler.toml (not committed) and fill in a SEPARATE probe database.
+# Never use the exam database (`klarweg-exam`) or any production binding here; the probe also refuses exam databases.
+name = "klarweg-exam-v10-probe"
+main = "worker.mjs"
+compatibility_date = "2024-11-06"
+workers_dev = true
+
+[vars]
+V10_PROBE = "off"            # set to "on" only for the duration of a V10 run
+# Secret (set with `wrangler secret put V10_PROBE_TOKEN`, never committed):
+#   V10_PROBE_TOKEN   ≥ 32 random characters
+
+[[d1_databases]]
+binding = "DB"
+database_name = "klarweg-exam-v10-probe"
+database_id = "REPLACE_WITH_NON_PRODUCTION_PROBE_DATABASE_ID"

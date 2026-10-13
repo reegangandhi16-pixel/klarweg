@@ -2,7 +2,8 @@
 
    Checks, against a D1 binding, the design's assumption that a multi-statement transition is all-or-nothing when its
    FIRST statement asserts the precondition through a CHECK constraint, and a transition-ledger primary key makes it
-   apply at most once. Uses only its own `v10_*` tables and refuses to run on a database that holds exam tables.
+   apply at most once. Uses only its own `v10_*` tables. The Worker never creates them: the operator applies
+   probe-schema.sql and a qualification marker out of band, and verifyProbeDatabase() must pass before any route.
 
    Evidence status: results count as V10 evidence ONLY when produced by a deployed, non-production probe Worker bound
    to a separate, non-production D1 database (see README). In-process runs only check this file's own logic.
@@ -11,28 +12,38 @@
    runs in the probe Worker and in the local self-check test. */
 
 export const PROBE_TABLES = ['v10_assertions', 'v10_ledger', 'v10_state', 'v10_rows'];
-
-export const PROBE_SCHEMA = [
-  'CREATE TABLE IF NOT EXISTS v10_assertions (id INTEGER PRIMARY KEY AUTOINCREMENT, ok INTEGER NOT NULL CHECK (ok = 1))',
-  'CREATE TABLE IF NOT EXISTS v10_ledger (op_key TEXT PRIMARY KEY, run_id TEXT NOT NULL, applied_at INTEGER NOT NULL)',
-  'CREATE TABLE IF NOT EXISTS v10_state (run_id TEXT PRIMARY KEY, state TEXT NOT NULL)',
-  'CREATE TABLE IF NOT EXISTS v10_rows (run_id TEXT NOT NULL, k TEXT NOT NULL, v TEXT NOT NULL, PRIMARY KEY (run_id, k))'
-];
+export const MARKER_TABLE = 'v10_probe_marker';
 
 /* Tables whose presence means this is an exam database (migration 0001): the probe must never run there. */
 const EXAM_TABLES = ['attempts', 'attempt_modules', 'recording_chunks', 'recording_turns'];
 
 export const RUN_ID_RE = /^[a-z0-9-]{8,64}$/;
 
-export async function assertProbeDatabase(db) {
-  const rows = (await db.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all()).results.map((r) => r.name);
-  const hit = rows.filter((n) => EXAM_TABLES.includes(n));
-  if (hit.length) throw Object.assign(new Error('refusing_exam_database'), { code: 'refusing_exam_database', tables: hit });
+/* ---------- database qualification (fail closed, read-only) ----------
+   A Worker cannot read the physical identity (id or name) of its D1 binding at runtime, so this probe CANNOT PROVE
+   which database it is bound to. It requires evidence that only the operator's out-of-band provisioning creates: the
+   probe schema and exactly one marker row (label, sha256(V10_PROBE_DB_NONCE)), inserted with a wrangler command that
+   names the database whose name and id the operator verified. The Worker never creates tables or the marker, and runs
+   this check before every route; any doubt refuses. Operator name/id verification remains mandatory. */
+const refuse = (code, extra = {}) => { throw Object.assign(new Error(code), { code, ...extra }); };
+const sameHex = (a, b) => typeof a === 'string' && typeof b === 'string' && a.length === b.length && [...a].reduce((d, c, i) => d | (c.charCodeAt(0) ^ b.charCodeAt(i)), 0) === 0;
+export async function sha256Hex(text) {
+  const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
-export async function setupSchema(db) {
-  await assertProbeDatabase(db);
-  for (const sql of PROBE_SCHEMA) await db.prepare(sql).run();
+export async function verifyProbeDatabase(db, { label, nonce }) {
+  if (typeof label !== 'string' || !/^nonprod-[a-z0-9-]{3,40}$/.test(label)) refuse('label_required');
+  if (typeof nonce !== 'string' || nonce.length < 32) refuse('db_nonce_required');
+  const tables = (await db.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all()).results.map((r) => r.name);
+  const exam = tables.filter((n) => EXAM_TABLES.includes(n));
+  if (exam.length) refuse('refusing_exam_database', { tables: exam });
+  for (const t of [...PROBE_TABLES, MARKER_TABLE]) if (!tables.includes(t)) refuse('probe_schema_missing', { table: t });
+  const markers = (await db.prepare(`SELECT label, nonce_sha256 FROM ${MARKER_TABLE}`).all()).results;
+  if (markers.length !== 1) refuse('marker_missing_or_ambiguous', { markers: markers.length });
+  if (markers[0].label !== label) refuse('label_mismatch');
+  if (!sameHex(String(markers[0].nonce_sha256).toLowerCase(), await sha256Hex(nonce))) refuse('db_nonce_mismatch');   // hex case-insensitive only
+  return { ok: true, label };
 }
 
 /* The assertion statement: inserts 1 when `condSql` is true, 0 otherwise. CHECK (ok = 1) makes a false precondition fail
@@ -57,8 +68,8 @@ export async function resetRun(db, runId) {
 }
 
 /* Sequential scenarios A–D. Each returns { id, pass, detail }. */
+/* Callers must have passed verifyProbeDatabase() (the Worker does, before every route). */
 export async function runScenarios(db, runId) {
-  await assertProbeDatabase(db);
   await resetRun(db, runId);
   const out = [];
 
@@ -99,7 +110,6 @@ export async function runScenarios(db, runId) {
 
 /* Concurrency primitive E: transition reserved → committed under the §6.1 invariant. */
 export async function prepareClaim(db, runId) {
-  await assertProbeDatabase(db);
   await resetRun(db, runId);
   await setState(db, runId, 'reserved').run();
 }

@@ -6,9 +6,12 @@ compatibility_date = "2024-11-06"
 workers_dev = true
 
 [vars]
-V10_PROBE = "off"            # set to "on" only for the duration of a V10 run
-# Secret (set with `wrangler secret put V10_PROBE_TOKEN`, never committed):
-#   V10_PROBE_TOKEN   ≥ 32 random characters
+V10_PROBE = "off"                       # set to "on" only for the duration of a V10 run
+V10_PROBE_LABEL = "nonprod-v10-probe-1"  # must equal the label of the marker row the OPERATOR inserts (README)
+V10_FAULT_INJECTION = "off"             # "on" only for the ambiguous-result run (post-commit response delay on /v10/claim)
+# Secrets (set by piping into `wrangler secret put`; never committed, never printed):
+#   V10_PROBE_TOKEN       request token, ≥ 32 random characters
+#   V10_PROBE_DB_NONCE    database qualification nonce; only its sha256 goes into v10_probe_marker
 
 [[d1_databases]]
 binding = "DB"

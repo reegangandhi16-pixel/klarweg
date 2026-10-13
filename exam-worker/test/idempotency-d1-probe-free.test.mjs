@@ -14,7 +14,7 @@ import { handle } from '../verification/idempotency-d1/worker-free.mjs';
 import { handle as handlePaid } from '../verification/idempotency-d1/worker.mjs';
 import { runScenarios } from '../verification/idempotency-d1/probe.mjs';
 import { runFree, judgeRace, FREE_SCENARIOS } from '../verification/idempotency-d1/run-idem-free.mjs';
-import { FREE_QUERY_BUDGET, FREE_PLATFORM_LIMIT, VERIFY_MAX, WORST, AFTER_WAIT, FREE_N } from '../verification/idempotency-d1/budget.mjs';
+import { FREE_QUERY_BUDGET, FREE_PLATFORM_LIMIT, VERIFY_MAX, WORST, AFTER_WAIT, FREE_N, FREE_FAN } from '../verification/idempotency-d1/budget.mjs';
 
 const SCHEMA = fs.readFileSync(path.join(WORKER_DIR, 'verification/idempotency-d1/probe-schema.sql'), 'utf8');
 const LABEL = 'nonprod-local-check', NONCE = 'n'.repeat(16) + crypto.randomBytes(16).toString('hex'), TOKEN = 't'.repeat(40);
@@ -31,14 +31,17 @@ const quiet = async (fn) => { const l = console.log; console.log = () => {}; try
 /* `latency`: random 0–latency ms per call. `lockstep`: a FIXED model (each single statement 2 ms, a batch 10 ms) so that
    concurrent requests interleave the same way on every run — deterministic contention for the race tests. */
 const LOCKSTEP = { call: 2, batch: 10 };
-function instrument(DB, { latency = 0, lockstep = null, rewrite = (s) => s, batchImpl = null } = {}) {
+const CLAIM_SQL = "'pending', ?5, ?4) ON CONFLICT";
+function instrument(DB, { latency = 0, lockstep = null, rewrite = (s) => s, batchImpl = null, fakeClaim = false } = {}) {
   const c = { statements: 0 };
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const delay = (kind = 'call') => (lockstep ? wait(lockstep[kind]) : latency ? wait(Math.random() * latency) : null);
   const wrap = (st) => ({ _runSync: () => st._runSync(), bind: (...b) => wrap(st.bind(...b)),
     first: async (x) => { c.statements++; await delay(); return st.first(x); }, all: async () => { c.statements++; await delay(); return st.all(); },
     run: async () => { c.statements++; await delay(); return st.run(); } });
-  const db = { raw: DB.raw, prepare: (sql) => wrap(DB.prepare(rewrite(sql))),
+  // fakeClaim: the claim INSERT reports success but writes nothing (with `noIdempotency` below: no protection at all)
+  const fake = { bind: () => ({ run: async () => { c.statements++; await delay(); return { meta: { changes: 1 } }; } }) };
+  const db = { raw: DB.raw, prepare: (sql) => (fakeClaim && sql.includes(CLAIM_SQL) ? fake : wrap(DB.prepare(rewrite(sql)))),
     batch: async (s) => { c.statements += s.length; await delay('batch'); return batchImpl ? batchImpl(DB, s) : DB.batch(s); } };
   return { c, db };
 }
@@ -55,7 +58,11 @@ test('FREE BUDGET (static): worst-case statements per invocation fit the conserv
     assert.equal(WORST[id](0) - 2, AFTER_WAIT[id], `${id}: AFTER_WAIT matches the worst-case model`);
     assert.ok(maxPolls >= 15, `${id}: only ${maxPolls} claim polls fit`);
   }
-  assert.ok(FREE_N.S1 >= 2 * 6 && FREE_N.S5 >= 6, 'in-isolate n still saturates the six in-flight D1 connections per invocation');
+  // why S1 / S5 cannot keep the Paid n = 20 in ONE Free invocation, and how fan rounds restore ≥ 20 competing claims
+  assert.ok(VERIFY_MAX + WORST.S1(20) > FREE_PLATFORM_LIMIT && VERIFY_MAX + WORST.S5(20) > FREE_PLATFORM_LIMIT, 'n = 20 in one invocation exceeds the Free limit');
+  assert.ok(VERIFY_MAX + WORST.S1(FREE_N.S1 + 2) > FREE_QUERY_BUDGET || VERIFY_MAX + WORST.S5(FREE_N.S5 + 1) > FREE_QUERY_BUDGET, 'S1 / S5 use the largest n that fits');
+  assert.ok(VERIFY_MAX + WORST['race/fan'](FREE_FAN.m) <= FREE_QUERY_BUDGET, `fan: ${VERIFY_MAX + WORST['race/fan'](FREE_FAN.m)}`);
+  assert.ok(FREE_FAN.k * FREE_FAN.m >= 20, 'a fan round has at least as many competing claims as the Paid in-isolate n = 20');
 });
 
 test('FREE BUDGET (measured): every Free endpoint, every scenario passes and stays within budget — with and without latency (independent counter)', async () => {
@@ -74,6 +81,12 @@ test('FREE BUDGET (measured): every Free endpoint, every scenario passes and sta
       const run = `free-${latency}-race-${kind}`;
       const steps = [['POST', `/idem/race/prepare?kind=${kind}&run=${run}`], ...Array(4).fill(['POST', `/idem/race/one?run=${run}`]), ['GET', `/idem/race/state?run=${run}`]];
       for (const [m, p] of steps) { const { c, db } = instrument(DB, { latency }); const r = await invoke(db, p, m); assert.equal(r.http, 200, p); assert.ok(c.statements <= VERIFY_MAX + 8, `${p}: ${c.statements}`); }
+      const fanRun = `${run}-fan`; await invoke(DB, `/idem/race/prepare?kind=${kind}&run=${fanRun}`);
+      for (let i = 0; i < 2; i++) {             // first fan invocation holds the winner (stale: one takeover + m − 1 losers)
+        const { c, db } = instrument(DB, { latency }); const r = await invoke(db, `/idem/race/fan?run=${fanRun}&m=${FREE_FAN.m}`);
+        assert.equal(r.body.results.length, FREE_FAN.m, 'every claim of the fan was issued');
+        assert.equal(r.body.budget.used, c.statements); assert.ok(!r.body.inconclusive && c.statements <= VERIFY_MAX + WORST['race/fan'](FREE_FAN.m), `fan ${kind}: ${c.statements}`);
+      }
     }
   }
 });
@@ -87,13 +100,14 @@ test('FREE vs PAID: the single-invocation Paid run exceeds the Free limit; the s
   assert.equal(report.result, 'pass', JSON.stringify(report.checks.filter((x) => x.status !== 'pass')));
   assert.ok(report.max_budget_used <= FREE_QUERY_BUDGET);
   const ids = report.checks.map((x) => x.id);
-  for (const id of ['S1_', 'S2_', 'S3_', 'S4_', 'S5_', 'S6_', 'S7a_', 'S7b_', 'R_cross_request_race_', 'RS_cross_request_stale_takeover_race_']) assert.ok(ids.some((x) => x.startsWith(id)), id);
-  for (const c of report.checks.filter((x) => /^RS?_/.test(x.id))) { assert.ok(c.detail.overlapped > 0 && c.detail.late === 0, `${c.id} raced: ${JSON.stringify(c.detail)}`); }
+  for (const id of ['S1_', 'S2_', 'S3_', 'S4_', 'S5_', 'S6_', 'S7a_', 'S7b_', 'R_cross_request_race_', 'RS_cross_request_stale_takeover_race_', 'RF_fan_race_', 'RSF_fan_stale_takeover_race_']) assert.ok(ids.some((x) => x.startsWith(id)), id);
+  for (const c of report.checks.filter((x) => /^R(S|F|SF)?_/.test(x.id))) { assert.ok(c.detail.overlapped > 0 && c.detail.late === 0, `${c.id} raced: ${JSON.stringify(c.detail)}`); }
+  for (const c of report.checks.filter((x) => /^RS?F_/.test(x.id))) assert.equal(c.detail.claims, FREE_FAN.k * FREE_FAN.m, `${c.id}: every fan claim answered`);
 });
 
 test('FREE race rounds that never contend are INCONCLUSIVE, not pass (requests that ran one after another prove nothing)', async () => {
   const report = await runFree(inProcessCall(qualified()), { n: 10, rounds: 1, leadMs: 0 });     // the shim without latency runs each request to completion
-  for (const c of report.checks.filter((x) => /^RS?_/.test(x.id))) { assert.equal(c.status, 'inconclusive', c.id); assert.equal(c.detail.reason, 'no_contention_observed'); }
+  for (const c of report.checks.filter((x) => /^R(S|F|SF)?_/.test(x.id) && !/F_/.test(x.id))) { assert.equal(c.status, 'inconclusive', c.id); assert.equal(c.detail.reason, 'no_contention_observed'); }
   assert.equal(report.result, 'inconclusive');
   const DB = qualified(); await invoke(DB, '/idem/race/prepare?kind=fresh&run=bad-at-00001');
   for (const at of ['abc', String(Date.now() + 60_000), String(Date.now() - 120_000)]) assert.equal((await invoke(DB, `/idem/race/one?run=bad-at-00001&at=${at}`)).body.error, 'invalid_at', at);
@@ -134,8 +148,19 @@ test('FREE negative controls: the split still DETECTS a non-atomic batch, a miss
     const DB = qualified(); const { db } = instrument(DB, { rewrite: noCAS, lockstep: LOCKSTEP });
     const report = await runFree(inProcessCall(db), { n: 20, rounds: 2, leadMs: 60 });
     assert.equal(report.result, 'fail');
-    for (const c of report.checks.filter((x) => x.id.startsWith('RS_'))) { assert.equal(c.status, 'fail', c.id); assert.ok(c.detail.takeovers > 1, JSON.stringify(c.detail)); }
-    for (const c of report.checks.filter((x) => x.id.startsWith('R_'))) assert.equal(c.status, 'pass', c.id);
+    for (const c of report.checks.filter((x) => /^RS_|^RSF_/.test(x.id))) { assert.equal(c.status, 'fail', c.id); assert.ok(c.detail.takeovers > 1, JSON.stringify(c.detail)); }
+    for (const c of report.checks.filter((x) => /^R_|^RF_/.test(x.id))) assert.equal(c.status, 'pass', c.id);
+  }
+  { // no idempotency at all (claim never written, assertion and precondition always true): DUPLICATE EFFECTS must fail
+    // S1 and every fresh round, in the Free split and in the Paid run alike
+    const noIdempotency = (sql) => noClaimCheck(sql).replace("(EXISTS (SELECT 1 FROM idem_probe_state WHERE run_id = ?4 AND state = 'open'))", '(?4 = ?4)');
+    const mut = { rewrite: noIdempotency, fakeClaim: true, lockstep: LOCKSTEP };
+    const s1 = await invoke(instrument(qualified(), mut).db, '/idem/scenario?id=S1&run=noidem-s1-00001');
+    assert.equal(s1.body.status, 'fail'); assert.equal(s1.body.detail.violation, 'multiple_executions');
+    const paid = await quiet(() => runScenarios({ DB: instrument(qualified(), mut).db }, 'noidem-paid-01', { n: 20, wait: { pollMs: 1, timeoutMs: 200 } }));
+    assert.equal(paid.find((x) => x.id.startsWith('S1')).pass, false);
+    const DB = qualified(); const report = await runFree(inProcessCall(instrument(DB, mut).db, { wait: { pollMs: 1 } }), { n: 10, rounds: 1, leadMs: 60 });
+    for (const c of report.checks.filter((x) => /^R_|^RF_/.test(x.id))) { assert.equal(c.status, 'fail', c.id); assert.ok(c.detail.effects > 1 && c.detail.executed > 1, JSON.stringify(c.detail)); }
   }
   const DB = qualified(); const real = DB.prepare;          // claim insert "succeeds" but writes nothing (as in the PR #71 check)
   const broken = { raw: DB.raw, batch: DB.batch, prepare: (sql) => (sql.includes("'pending', ?5, ?4) ON CONFLICT") ? { bind: () => ({ run: async () => ({ meta: { changes: 1 } }) }) } : real(sql)) };
@@ -174,6 +199,16 @@ test('FREE inconclusive states: a tripped budget, an exhausted claim-wait budget
   assert.equal(judgeRace([took(ok(200)), took(ok(200, true))], done, { kind: 'stale' }).status, 'fail', 'stale: two successful takeovers');
   assert.equal(judgeRace([took(ok(200)), took(ok(200, true)), { http: 0, body: null }], done, { kind: 'stale' }).status, 'fail', 'two takeovers fail even with an unanswered request');
   assert.equal(judgeRace([took(ok(200))], done, { kind: 'fresh' }).status, 'fail', 'fresh: any takeover is a fail');
+  // fan responses (several claims per invocation)
+  const fan = (results, extra = {}) => ({ http: 200, body: { ok: true, results, takeovers: 0, ...extra } });
+  const r = (status, replayed = false, error) => ({ status, replayed, ...(error ? { error } : {}) });
+  const inProg = r(503, false, 'request_in_progress');
+  assert.equal(judgeRace([fan([r(200), inProg]), fan([inProg, r(200, true)])], done).status, 'pass', 'fan: one execution, contention observed');
+  assert.equal(judgeRace([fan([r(200), inProg]), fan([r(200), inProg])], { ...done, effects: 2 }).status, 'fail', 'fan: duplicate effects');
+  assert.equal(judgeRace([fan([r(200), inProg], { takeovers: 1 }), fan([r(500, false, 'query_budget_exceeded')], { takeovers: 1, inconclusive: true })], done, { kind: 'stale' }).status, 'fail',
+    'a budget-tripped invocation still reports its successful takeover: two winners fail');
+  assert.equal(judgeRace([fan([r(200), inProg], { takeovers: 1 }), fan([r(500, false, 'query_budget_exceeded')], { inconclusive: true })], done, { kind: 'stale' }).status, 'inconclusive',
+    'a budget-tripped invocation with no violation is inconclusive, never pass');
 });
 
 test('FREE guard fails closed — each refusal path is refused BEFORE any write on every Free endpoint (tables and row counts unchanged)', async () => {

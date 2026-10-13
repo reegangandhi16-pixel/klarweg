@@ -179,6 +179,14 @@ const countTakeovers = (logs) => logs.filter((l) => JSON.parse(l).evt === 'claim
    whether THIS request's compare-and-set takeover succeeded (the runner requires exactly one per stale round, none
    per fresh round). */
 export async function raceOne(base, run, rid) { const logs = []; const r = await outcome(op({ ...envAt(base, Date.now()), __logs: logs }, run, rid)); return { ...r, took_over: countTakeovers(logs) > 0 }; }
+/* Fan race step (Workers Free): ONE invocation issues `m` claims for the round's request id at once (in-isolate
+   concurrency); the runner starts several fan invocations at a common time, so one round has k × m competing claims
+   (≥ 20, like the Paid in-isolate n = 20) while each invocation stays inside its query budget. */
+export async function raceFan(base, run, rid, m) {
+  const logs = []; const t = Date.now();
+  const results = await Promise.all(Array.from({ length: m }, () => outcome(op({ ...envAt(base, t), __logs: logs }, run, rid))));
+  return { results, takeovers: countTakeovers(logs) };
+}
 export async function raceState(db, run, rid) { return { effects: await effects(db, run), record: await record(db, run, rid) }; }
 export const prepareRace = (db, run) => fresh(db, run);
 /* Cross-request STALE-claim race (Free split of S5): a dead claim older than the TTL by `marginMs` (real clock, so it is

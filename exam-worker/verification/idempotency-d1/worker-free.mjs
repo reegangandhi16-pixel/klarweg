@@ -2,8 +2,8 @@
    (IDEM_PROBE = "on", secret x-idem-token, verifyProbeDatabase() before any write), but every invocation does ONE
    scenario (or one race step) and runs on a budgeted D1 handle capped at FREE_QUERY_BUDGET statements (budget.mjs).
    Each response carries { budget: { used, cap } }. A tripped budget makes the result INCONCLUSIVE. */
-import { verifyProbeDatabase, SCENARIOS, SCENARIO_NAMES, raceOne, raceState, prepareRace, prepareStaleRace } from './probe.mjs';
-import { budgetedDB, FREE_QUERY_BUDGET, FREE_N, AFTER_WAIT } from './budget.mjs';
+import { verifyProbeDatabase, SCENARIOS, SCENARIO_NAMES, raceOne, raceFan, raceState, prepareRace, prepareStaleRace } from './probe.mjs';
+import { budgetedDB, FREE_QUERY_BUDGET, FREE_N, FREE_FAN, AFTER_WAIT } from './budget.mjs';
 
 const json = (b, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
 const tokenOk = (g, e) => typeof e === 'string' && e.length >= 32 && typeof g === 'string' && g.length === e.length && [...e].reduce((d, c, i) => d | (c.charCodeAt(0) ^ g.charCodeAt(i)), 0) === 0;
@@ -45,16 +45,19 @@ export async function handle(request, env, { cap = FREE_QUERY_BUDGET, wait = {} 
       else return json({ ok: false, error: 'invalid_kind' }, 400);
       return json({ ok: true, kind, now: Date.now(), budget: budget() });
     }
-    if (request.method === 'POST' && url.pathname === '/idem/race/one') {
+    if (request.method === 'POST' && (url.pathname === '/idem/race/one' || url.pathname === '/idem/race/fan')) {
       /* Start barrier: every request of a round carries the same `at` (server ms, from race/prepare's `now`). After its
          read-only verification, each invocation waits until `at`, so the claims hit D1 together instead of being spread
          by the verification queries. The wait only paces the start (it costs no CPU and no query); the evidence is
          the observed overlap and takeover counts. A request that arrives after `at` starts at once and reports `late`. */
+      const fan = url.pathname === '/idem/race/fan';
+      const m = fan ? Number(url.searchParams.get('m') || FREE_FAN.m) : 1;
+      if (fan && !(Number.isInteger(m) && m >= 2 && m <= FREE_FAN.m)) return json({ ok: false, error: 'invalid_m' }, 400);
       const at = Number(url.searchParams.get('at') || 0); const t = Date.now();
       if (url.searchParams.has('at') && !(Number.isInteger(at) && at > t - 60_000 && at < t + BARRIER_MAX_MS)) return json({ ok: false, error: 'invalid_at' }, 400);
       const late = at > 0 && at <= t;
       if (at > t) await sleep(at - t);
-      const r = await raceOne({ DB: db }, run, rid);
+      const r = fan ? await raceFan({ DB: db }, run, rid, m) : await raceOne({ DB: db }, run, rid);
       return json({ ok: true, ...r, ...(late ? { late: true } : {}), ...(db.tripped ? { inconclusive: true } : {}), budget: budget() });
     }
     if (request.method === 'GET' && url.pathname === '/idem/race/state') return json({ ok: true, ...(await raceState(db, run, rid)), budget: budget() });

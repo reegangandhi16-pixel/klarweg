@@ -42,11 +42,18 @@ export const WORST = {
   S6: (polls) => 1 + 1 + polls + 8 + 5 + 1 + 1,
   S7a: (polls) => 1 + 1 + polls + 2 + 8 + 1,
   S7b: () => 1 + 6 + 2 + 1,
-  'race/prepare:fresh': () => 1, 'race/prepare:stale': () => 2, 'race/one': () => 8, 'race/state': () => 2
+  'race/prepare:fresh': () => 1, 'race/prepare:stale': () => 2, 'race/one': () => 8, 'race/state': () => 2,
+  'race/fan': (m) => 8 + 4 * (m - 1)     // worst = stale round: one takeover winner + (m − 1) takeover losers
 };
 /* Statements a scenario still needs AFTER its claim wait; the wait polls only while more than this remains. */
 export const AFTER_WAIT = { S2: 1 + 5 + 1 + 3, S6: 8 + 5 + 1 + 1, S7a: 2 + 8 + 1 };
-/* In-isolate concurrency per Free invocation. Real D1 allows only six connections in flight per invocation
-   (D1 limits FAQ), so in-isolate n = 20 (Paid) never had more than 6 D1 calls truly concurrent; n = 12 / 6 still
-   saturates that. True high concurrency is exercised ACROSS invocations by the R (fresh) and RS (stale) races. */
+/* Concurrency on Workers Free. The Paid run issues n = 20 simultaneous claims in ONE invocation; on Free that needs
+   VERIFY_MAX + WORST.S1(20) = 53 statements (S5: 94), above even the platform limit of 50, so it cannot run there.
+   - S1 / S5 keep the largest n that fits one invocation with their setup and checks (12 / 6).
+   - Fan rounds restore ≥ 20 competing claims per round: FREE_FAN.k invocations, each issuing FREE_FAN.m claims at
+     once, all released at a common start time (k × m = 24).
+   - Single-claim rounds (R / RS) add n = 30 separate invocations per round.
+   Cloudflare documents six simultaneous connections per invocation and a single-threaded D1 database, but NOT a cap
+   on in-flight D1 queries; queued calls are still issued, so a smaller n means fewer competing claims, not the same race. */
 export const FREE_N = { S1: 12, S5: 6 };
+export const FREE_FAN = { k: 4, m: 6 };

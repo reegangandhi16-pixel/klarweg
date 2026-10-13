@@ -9,7 +9,9 @@ const call = async (m, p) => { const r = await fetch(base + p, { method: m, head
 const runId = (t) => `${t}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 const report = { base, n: N, rounds: ROUNDS, started_at: new Date().toISOString(), checks: [] };
 const check = (id, pass, detail) => report.checks.push({ id, pass: !!pass, detail });
-check('setup', (await call('POST', '/idem/setup')).status === 200);
+const v = await call('GET', '/idem/verify');           // read-only qualification of the bound database; nothing runs without it
+check('verify', v.status === 200 && v.body.verified === true, v.body);
+if (!(v.status === 200 && v.body.verified === true)) { report.pass = false; console.log(JSON.stringify(report, null, 2)); process.exit(1); }
 const sc = await call('POST', `/idem/scenarios?run=${runId('scn')}`);
 for (const r of sc.body.results || []) check(r.id, r.pass, r.detail);
 if (!sc.body.results) check('scenarios_ran', false, sc.body);

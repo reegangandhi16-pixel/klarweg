@@ -7,8 +7,10 @@ workers_dev = true
 
 [vars]
 IDEM_PROBE = "off"                          # "on" only for the duration of a validation run
-IDEM_PROBE_LABEL = "nonprod-idem-probe-1"   # must match the marker written by /idem/setup
-# Secret: wrangler secret put IDEM_PROBE_TOKEN   (≥ 32 random characters, never committed)
+IDEM_PROBE_LABEL = "nonprod-idem-probe-1"   # must equal the label of the marker row the OPERATOR inserts (README)
+# Secrets (never committed, never printed):
+#   IDEM_PROBE_TOKEN      request token (≥ 32 random characters)
+#   IDEM_PROBE_DB_NONCE   database qualification nonce; its sha256 is inserted into idem_probe_marker by the operator
 
 [[d1_databases]]
 binding = "DB"

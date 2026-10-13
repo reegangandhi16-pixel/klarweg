@@ -18,19 +18,29 @@ Validates the `ABSENT → PENDING → COMPLETED` claim mechanism (`idempotentAto
 
 Negative controls (local): with a batch that **stops without rollback**, S4 fails. With a batch that **continues past an error**, S2, S3, S4 and S6 fail. So the probe can detect non-atomic batches.
 
-## Safety
-- The Worker is disabled unless `IDEM_PROBE = "on"` **and** the request carries the secret `IDEM_PROBE_TOKEN` (32 or more characters).
-- `IDEM_PROBE_LABEL` must be `nonprod-…` and must match the marker that `/idem/setup` writes into the database.
-- It **refuses any database that contains exam attempts.** It never touches exam tables apart from `request_log` and `idempotency_assertions`.
-- Never bind it to `klarweg-exam` or to any production resource.
+## Safety (fail closed)
+**Limitation, stated plainly:** a Worker cannot read the physical identity (id or name) of its D1 binding at runtime, so the probe **cannot prove** which database it is bound to. Identity is established by the **operator**, and the probe refuses to act without evidence that only the operator's provisioning creates:
 
-## Human steps required (not done; needs Cloudflare access, which the agent does not have)
-1. Create a **new, separate** D1 database, for example `klarweg-exam-idem-probe`.
-2. Apply `exam-worker/migrations/0001_exam_init.sql`, then `0002_idempotency_claims.sql`, to **that** database only.
-3. Copy `wrangler.example.toml` to `wrangler.toml` (gitignored), set the database id, keep the `nonprod-…` label, and run `wrangler secret put IDEM_PROBE_TOKEN`.
-4. Deploy the probe Worker from this directory and set `IDEM_PROBE = "on"` for the run only.
-5. Run `IDEM_BASE_URL=https://… IDEM_TOKEN=… node run-idem.mjs --n 30 --rounds 5` and keep the JSON report. It exits 0 only if every check passes.
-6. Set `IDEM_PROBE = "off"`, or delete the probe Worker and its database.
-7. Attach the report to the PR. **The PR stays a draft and unmerged until this report passes and has been reviewed.**
+- The Worker is **disabled** unless `IDEM_PROBE = "on"` and the request carries the secret `IDEM_PROBE_TOKEN` (32 or more characters).
+- The Worker **creates no tables and no marker.** The operator applies `probe-schema.sql`, then inserts exactly one marker row `(label, sha256(nonce))`, using a `wrangler d1 execute <name> --remote` command that **names the database whose name and id they have just verified** (`wrangler d1 info <name>`).
+- On **every** endpoint, before any write, `verifyProbeDatabase()` requires all of the following. Any failure gives `412` with a code, and nothing is written:
+  - migrations 0001 and 0002 are present;
+  - the probe schema is present;
+  - there is **exactly one** marker;
+  - the marker's label equals `IDEM_PROBE_LABEL`, which must be `nonprod-…`;
+  - the marker's hash equals `sha256(IDEM_PROBE_DB_NONCE)`, where the nonce is a Worker secret;
+  - **no exam content** exists (`attempts`, `forms`, `level_configs`, `items_index`, `exam_access` are all empty). This check is defence in depth, not proof of identity.
+- So a Worker that is mistakenly bound to another database finds no matching marker and refuses. Defeating the check would require someone to insert the probe's secret-derived marker into that other database, which the operator's explicit name and id check is there to prevent.
+- Never bind the probe to `klarweg-exam` or to any production resource.
 
-Also run PR #60's V10 probe (assertion rollback, ledger, concurrent claims) on the same kind of database. It covers the batch semantics this design relies on.
+## Operator provisioning (human; the agent has no Cloudflare access)
+Use `wrangler.example.toml`. The secrets are `IDEM_PROBE_TOKEN` and `IDEM_PROBE_DB_NONCE`.
+1. Create a new D1 database. Verify its name and id with `wrangler d1 info <name>`, and confirm they match the `database_id` in your local `wrangler.toml`.
+2. Run `wrangler d1 execute <name> --remote --file=…` for each of `../../migrations/0001_exam_init.sql`, `../../migrations/0002_idempotency_claims.sql` and `probe-schema.sql`.
+3. Generate the nonce locally and insert **only its SHA-256**: `INSERT INTO idem_probe_marker (label, nonce_sha256, created_at) VALUES ('nonprod-…', '<64 hex>', <unix ms>)`. Set the nonce itself with `wrangler secret put IDEM_PROBE_DB_NONCE` (piped, never displayed).
+4. Deploy the Worker, set `IDEM_PROBE_TOKEN`, and switch the probe on for the run only. Check that `GET /idem/verify` with the token returns `verified: true`, and that deploy's binding output names the probe database.
+5. Run `IDEM_BASE_URL=… IDEM_TOKEN=… node run-idem.mjs --n 30 --rounds 5` and keep the JSON report. Its first check is `verify`, and the run aborts if verification fails.
+6. Switch the probe off, then delete the Worker and the database once the report has been retained.
+
+## Timing
+Scenarios S2, S6 and S7 wait for the **observed pending claim** of the original request (bounded polling; 10 s timeout by default). They never wait a fixed time. If the claim never appears, the scenario **fails** with `original_never_claimed`; it never passes.

@@ -2,28 +2,46 @@
    against a D1 binding migrated with 0001 + 0002. Business effects go to the probe's own idem_probe_* tables.
    Evidence only when run on an explicitly identified, isolated NON-PRODUCTION D1 (README.md). */
 import { idempotentAtomic, CLAIM_TTL_MS } from '../../src/core.js';
+import { sha256Hex } from '../../src/http.js';
 
-export const PROBE_SCHEMA = [
-  'CREATE TABLE IF NOT EXISTS idem_probe_marker (label TEXT PRIMARY KEY)',
-  'CREATE TABLE IF NOT EXISTS idem_probe_state (run_id TEXT PRIMARY KEY, state TEXT NOT NULL)',
-  'CREATE TABLE IF NOT EXISTS idem_probe_effects (id INTEGER PRIMARY KEY AUTOINCREMENT, run_id TEXT NOT NULL, request_id TEXT NOT NULL, tag TEXT NOT NULL)'
-];
+/* ---------- database qualification (fail closed, read-only) ----------
+   A Worker cannot read the physical identity (id or name) of its D1 binding at runtime. So the probe cannot PROVE which
+   database it is bound to. It instead requires evidence that only the operator's out-of-band provisioning step creates:
+   the probe schema (probe-schema.sql) and a marker row holding sha256(IDEM_PROBE_DB_NONCE), inserted by the operator with
+   a wrangler command that names the database whose name and id they verified. The Worker never creates tables or the
+   marker. Every endpoint verifies all of this BEFORE any write; any doubt refuses. As defence in depth, a database that
+   holds exam content (forms, level configs, items, access grants, attempts) is refused even if marked. */
+const EXAM_CONTENT_TABLES = ['attempts', 'forms', 'level_configs', 'items_index', 'exam_access'];
+const PROBE_TABLES = ['idem_probe_marker', 'idem_probe_state', 'idem_probe_effects'];
+const refuse = (code, extra = {}) => { throw Object.assign(new Error(code), { code, ...extra }); };
+const sameHex = (a, b) => typeof a === 'string' && typeof b === 'string' && a.length === b.length && [...a].reduce((d, c, i) => d | (c.charCodeAt(0) ^ b.charCodeAt(i)), 0) === 0;
 
-/* Refuse anything that is not a fresh, labelled probe database: a real exam database has attempts. */
-export async function guard(db, label) {
-  if (typeof label !== 'string' || !/^nonprod-[a-z0-9-]{3,40}$/.test(label)) throw Object.assign(new Error('label_required'), { code: 'label_required' });
+export async function verifyProbeDatabase(db, { label, nonce }) {
+  if (typeof label !== 'string' || !/^nonprod-[a-z0-9-]{3,40}$/.test(label)) refuse('label_required');
+  if (typeof nonce !== 'string' || nonce.length < 32) refuse('db_nonce_required');
   const tables = (await db.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all()).results.map((r) => r.name);
-  for (const t of ['request_log', 'idempotency_assertions']) if (!tables.includes(t)) throw Object.assign(new Error('migrations_missing'), { code: 'migrations_missing', table: t });
-  if (tables.includes('attempts') && (await db.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n > 0) throw Object.assign(new Error('refusing_database_with_attempts'), { code: 'refusing_database_with_attempts' });
-  if (tables.includes('idem_probe_marker')) {
-    const m = await db.prepare('SELECT label FROM idem_probe_marker').first();
-    if (m && m.label !== label) throw Object.assign(new Error('label_mismatch'), { code: 'label_mismatch' });
+  for (const t of ['request_log', 'idempotency_assertions']) if (!tables.includes(t)) refuse('migrations_missing', { table: t });
+  for (const t of PROBE_TABLES) if (!tables.includes(t)) refuse('probe_schema_missing', { table: t });
+  const markers = (await db.prepare('SELECT label, nonce_sha256 FROM idem_probe_marker').all()).results;
+  if (markers.length !== 1) refuse('marker_missing_or_ambiguous', { markers: markers.length });
+  if (markers[0].label !== label) refuse('label_mismatch');
+  if (!sameHex(String(markers[0].nonce_sha256).toLowerCase(), await sha256Hex(nonce))) refuse('db_nonce_mismatch');   // hex case-insensitive only
+  for (const t of EXAM_CONTENT_TABLES) {
+    if (tables.includes(t) && (await db.prepare(`SELECT COUNT(*) AS n FROM ${t}`).first()).n > 0) refuse('refusing_database_with_exam_content', { table: t });
   }
+  return { ok: true, label };
 }
-export async function setupProbe(db, label) {
-  await guard(db, label);
-  for (const sql of PROBE_SCHEMA) await db.prepare(sql).run();
-  await db.prepare('INSERT OR IGNORE INTO idem_probe_marker (label) VALUES (?1)').bind(label).run();
+
+/* Wait for the OBSERVABLE condition "this request id has a pending claim" (bounded polling; the sleep only paces the
+   polls and is never evidence). Returns { token } or { error: 'original_never_claimed', waited_ms }. */
+export async function waitForPendingClaim(db, attemptId, requestId, { pollMs = 25, timeoutMs = 10_000, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), clock = () => Date.now() } = {}) {
+  const t0 = clock();
+  for (;;) {
+    const row = await db.prepare("SELECT claim_token FROM request_log WHERE attempt_id = ?1 AND request_id = ?2 AND state = 'pending'").bind(attemptId, requestId).first();
+    if (row && row.claim_token) return { token: row.claim_token };
+    if (clock() - t0 >= timeoutMs) return { error: 'original_never_claimed', waited_ms: clock() - t0 };
+    await sleep(pollMs);
+  }
 }
 
 const envAt = (base, t) => ({ ...base, __clock: () => t });
@@ -50,8 +68,9 @@ function op(env, run, rid, { gate, extra = [], precondOk = true } = {}) {
 async function fresh(db, run) { await db.prepare("INSERT INTO idem_probe_state (run_id, state) VALUES (?1, 'open')").bind(run).run(); }
 const deferred = () => { let resolve; const promise = new Promise((r) => { resolve = r; }); return { promise, resolve }; };
 
-export async function runScenarios(base, runPrefix, { n = 20 } = {}) {
+export async function runScenarios(base, runPrefix, { n = 20, wait = {} } = {}) {
   const db = base.DB; const out = []; const T0 = Date.now();
+  const claimed = (run, rid) => waitForPendingClaim(db, attemptOf(run), rid, wait);
   const check = (id, pass, detail) => out.push({ id, pass: !!pass, detail });
 
   { // S1 simultaneous same-id claims inside one isolate
@@ -65,11 +84,16 @@ export async function runScenarios(base, runPrefix, { n = 20 } = {}) {
     const run = `${runPrefix}-s2`, rid = `rq_${run}_x`; await fresh(db, run);
     const g = deferred();
     const p = outcome(op(envAt(base, T0), run, rid, { gate: g.promise }));
-    await new Promise((r) => setTimeout(r, 50));
-    await db.prepare("UPDATE request_log SET claim_token = 'clm_stolen' WHERE attempt_id = ?1 AND request_id = ?2").bind(attemptOf(run), rid).run();
-    g.resolve(); const r = await p;
-    const st = (await db.prepare('SELECT state FROM idem_probe_state WHERE run_id = ?1').bind(run).first()).state;
-    check('S2_claim_assertion_rolls_back', (await effects(db, run)) === 0 && st === 'open' && (await record(db, run, rid)).state === 'pending', { response: r, state: st });
+    const w = await claimed(run, rid);                                  // the original's pending claim exists
+    if (w.error) { g.resolve(); await p; check('S2_claim_assertion_rolls_back', false, w); }
+    else {
+      const stolen = await db.prepare("UPDATE request_log SET claim_token = 'clm_stolen' WHERE attempt_id = ?1 AND request_id = ?2 AND state = 'pending' AND claim_token = ?3")
+        .bind(attemptOf(run), rid, w.token).run();
+      g.resolve(); const r = await p;
+      const st = (await db.prepare('SELECT state FROM idem_probe_state WHERE run_id = ?1').bind(run).first()).state;
+      check('S2_claim_assertion_rolls_back', stolen.meta.changes === 1 && (await effects(db, run)) === 0 && st === 'open' && (await record(db, run, rid)).state === 'pending',
+        { response: r, state: st, stolen: stolen.meta.changes });
+    }
   }
   { // S3 precondition false → rollback, claim released
     const run = `${runPrefix}-s3`, rid = `rq_${run}_x`; await fresh(db, run);
@@ -98,15 +122,19 @@ export async function runScenarios(base, runPrefix, { n = 20 } = {}) {
     const run = `${runPrefix}-s6`, rid = `rq_${run}_x`; await fresh(db, run);
     const g = deferred();
     const original = outcome(op(envAt(base, T0), run, rid, { gate: g.promise }));
-    await new Promise((r) => setTimeout(r, 50));
-    const taker = await outcome(op(envAt(base, T0 + CLAIM_TTL_MS + 1), run, rid));
-    g.resolve(); const o = await original;
-    check('S6_resumed_original_rolls_back', taker.status === 200 && !taker.replayed && o.status === 200 && o.replayed && (await effects(db, run)) === 1, { taker, original: o });
+    const w = await claimed(run, rid);                                  // the original holds the claim before the takeover
+    if (w.error) { g.resolve(); await original; check('S6_resumed_original_rolls_back', false, w); }
+    else {
+      const taker = await outcome(op(envAt(base, T0 + CLAIM_TTL_MS + 1), run, rid));
+      g.resolve(); const o = await original;
+      check('S6_resumed_original_rolls_back', taker.status === 200 && !taker.replayed && o.status === 200 && o.replayed && (await effects(db, run)) === 1, { taker, original: o });
+    }
   }
   { // S7 crash windows: (a) dies before the batch → 503 within the TTL, takeover after; (b) dies after commit → replay
     const run = `${runPrefix}-s7a`, rid = `rq_${run}_x`; await fresh(db, run);
     op(envAt(base, T0), run, rid, { gate: new Promise(() => {}) }).catch(() => {});   // abandoned forever
-    await new Promise((r) => setTimeout(r, 50));
+    const w = await claimed(run, rid);                                  // it died holding a pending claim
+    if (w.error) { check('S7_crash_windows', false, w); return out; }
     const within = await outcome(op(envAt(base, T0 + 1000), run, rid));
     const after = await outcome(op(envAt(base, T0 + CLAIM_TTL_MS + 1), run, rid));
     const run2 = `${runPrefix}-s7b`, rid2 = `rq_${run2}_x`; await fresh(db, run2);

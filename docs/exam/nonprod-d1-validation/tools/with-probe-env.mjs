@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /* LOCAL-ONLY. Runs a probe runner with the probe URL and token in ITS environment only — the token is read from the
-   private secrets.json and never appears on a command line, in shell history or in output.
+   private secrets.json and never appears on a command line, in shell history or in this tool's output. Precisely: the
+   child's environment is readable by other processes of the SAME OS user (e.g. `ps eww` on macOS), so use a
+   single-user machine and do not share the session.
      node with-probe-env.mjs --track idem|v10 --secrets <dir>/secrets.json --base https://<worker>.<subdomain>.workers.dev -- <command...>
    The base URL must be the track's own workers.dev host (checkBaseUrl). Exit code = the command's exit code. */
 import fs from 'node:fs';

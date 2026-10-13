@@ -40,10 +40,11 @@ export function unansweredCount(pkg, answers) {
   return answerableItems(pkg).filter((it) => !isAnswered(answers[it.item_id])).length;
 }
 
-/* The number the learner sees: the exam-wide number at the start of the stem ("29. …"), else the position in the part. */
+/* The number the learner sees: the package's exam-wide display_no, else a leading "29. " in the stem, else the position. */
 export function itemNumber(it, index) {
+  if (it.display_no != null && String(it.display_no).trim() !== '') return String(it.display_no);
   const m = /^\s*(\d{1,3})[.)]\s/.exec(String(it.stem || ''));
-  return m ? Number(m[1]) : index + 1;
+  return m ? m[1] : String(index + 1);
 }
 
 /* Progress per part of the package (only the parts present — for Hören, only those already open). Each answerable item

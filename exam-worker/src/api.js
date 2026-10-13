@@ -91,7 +91,9 @@ export async function availability(env, userId) {
     }
   }
   const open = (await env.DB.prepare("SELECT id, mode FROM attempts WHERE user_id = ?1 AND status IN ('created','in_progress')").bind(userId).all()).results;
-  return { ok: true, server_now: now(env), modes: out, open_attempts: open.map((a) => ({ attempt_id: a.id, mode: a.mode })) };
+  // the learner's most recent completed attempt, so its result (and later ratings) can be opened again
+  const last = await env.DB.prepare("SELECT id FROM attempts WHERE user_id = ?1 AND status = 'completed' ORDER BY completed_at DESC LIMIT 1").bind(userId).first();
+  return { ok: true, server_now: now(env), modes: out, open_attempts: open.map((a) => ({ attempt_id: a.id, mode: a.mode })), last_completed: last ? last.id : null };
 }
 
 /* ---------- create attempt (server-side, immutable form assignment) ---------- */
@@ -656,6 +658,43 @@ export async function getResult(env, userId, attemptId) {
   return { ok: true, attempt_id: attemptId, result };
 }
 
+/* ---------- item review after submission (OD-48: keys never reach the browser before the module is submitted) ----------
+   Owner only. Objectively scored modules only. Available once THAT module is submitted (SCORING §6 items[], OS §23.1).
+   Numbering, stems and options come from the release package; keys, responses and per-item points from D1. */
+export async function moduleReview(env, userId, attemptId, module) {
+  const attempt = await loadAttempt(env, attemptId, userId);
+  const form = await formRow(env, attempt.form_id);
+  const mc = moduleConfig(await levelConfig(env, form.level_config_id), module);
+  if (!mc || mc.scoring.strategy !== 'objective_table') fail(422, 'review_not_available', 'Only objectively scored modules have an item review.');
+  const m = await moduleRow(env, attemptId, module);
+  if (m.status !== 'submitted') fail(409, 'review_not_available', 'The review opens after this module has been submitted.');
+  const pkg = (await loadPackage(env, attempt.form_id, module)).data;
+  const index = Object.fromEntries((await env.DB.prepare('SELECT item_id, points, is_example FROM items_index WHERE form_id = ?1 AND module = ?2')
+    .bind(attempt.form_id, module).all()).results.map((r) => [r.item_id, r]));
+  const keys = Object.fromEntries((await env.DB.prepare('SELECT k.item_id, k.key_json FROM item_keys k JOIN items_index i ON i.item_id = k.item_id WHERE k.form_id = ?1 AND i.module = ?2')
+    .bind(attempt.form_id, module).all()).results.map((r) => [r.item_id, JSON.parse(r.key_json)]));
+  const resp = Object.fromEntries((await env.DB.prepare('SELECT item_id, value_json FROM responses_current WHERE attempt_id = ?1 AND module = ?2')
+    .bind(attempt.id, module).all()).results.map((r) => [r.item_id, JSON.parse(r.value_json)]));
+  const option = (it, id) => { const o = (it.options || []).find((x) => x.option_id === id); return o ? { option_id: o.option_id, label: o.label, text: o.text || null } : (id ? { option_id: id, label: id, text: null } : null); };
+  const items = [], transcripts = [];   // listening scripts: released with the key, never before
+  for (const p of pkg.parts) for (const t of p.tasks) for (const it of t.items) {
+    const ix = index[it.item_id];
+    if (!ix || ix.is_example || !ix.points) continue;   // examples and unscored items are not reviewed
+    const key = keys[it.item_id], v = resp[it.item_id];
+    const given = v && typeof v.option_id === 'string' ? v.option_id : null;
+    const correct = key && key.kind === 'single' ? key.correct : null;
+    const status = given === null ? 'unanswered' : given === correct ? 'correct' : 'incorrect';
+    const rv = (key && key.review) || {};
+    items.push({ item_id: it.item_id, part: p.part, display_no: it.display_no, stem: it.stem, your_answer: option(it, given), correct_answer: option(it, correct),
+      status, points: status === 'correct' ? ix.points : 0, max_points: ix.points,
+      explanation: rv.explanation_de || null, evidence: (rv.evidence || []).map((e) => ({ asset_id: e.asset_id, start: e.start, end: e.end, text: e.text })) });
+    for (const tr of rv.transcripts || []) if (!transcripts.some((x) => x.asset_id === tr.asset_id)) transcripts.push({ asset_id: tr.asset_id, part: p.part, text: tr.text });
+  }
+  const count = (k) => items.filter((i) => i.status === k).length;
+  return { ok: true, attempt_id: attempt.id, module, items, transcripts,
+    summary: { correct: count('correct'), incorrect: count('incorrect'), unanswered: count('unanswered'), total: items.length } };
+}
+
 /* ---------- staff: ratings (two independent human raters are authoritative) ---------- */
 export async function submitRating(env, userId, request) {
   const body = await readJsonBody(request);
@@ -693,10 +732,80 @@ export async function submitRating(env, userId, request) {
   return { ok: true, module, item_id: unit.item_id, round: body.round, total: total.total, module_status: s.status };
 }
 
+/* Rater playback of one recorded Sprechen turn (SPEAKING §6: private storage, no public URL, rater-bound access).
+   Bound to the rater's own session (no bearer URL at all): rater or lead_rater role, never the rater's own attempt,
+   only after the Sprechen module was submitted. Chunks are re-checked against their stored SHA-256 and joined in
+   seq order; gaps stay gaps (the metadata view shows them). Every playback is audit-logged; nothing is cached. */
+export async function recordingForRating(env, userId, attemptId, part, turn) {
+  if (!(await hasRole(env, userId, ['rater', 'lead_rater']))) fail(403, 'rater_role_required');
+  const attempt = await loadAttempt(env, attemptId, userId, { allowAdmin: true });
+  if (attempt.user_id === userId) fail(403, 'cannot_rate_own_attempt');
+  const m = await moduleRow(env, attempt.id, 'sprechen');
+  if (m.status !== 'submitted') fail(409, 'module_not_submitted');
+  const chunks = (await env.DB.prepare('SELECT seq, r2_key, sha256, mime FROM recording_chunks WHERE attempt_id = ?1 AND part = ?2 AND turn = ?3 ORDER BY seq')
+    .bind(attempt.id, Number(part), turn).all()).results;
+  if (!chunks.length) fail(404, 'recording_not_found');
+  const parts = [];
+  for (const c of chunks) {
+    const obj = await env.RECORDINGS.get(c.r2_key);
+    if (!obj) fail(503, 'recording_unavailable');
+    const bytes = new Uint8Array(await obj.arrayBuffer());
+    if ((await sha256Hex(bytes)) !== c.sha256) fail(503, 'recording_integrity');
+    parts.push(bytes);
+  }
+  const body = new Uint8Array(parts.reduce((n, b) => n + b.length, 0));
+  let o = 0; for (const b of parts) { body.set(b, o); o += b.length; }
+  await audit(env, userId, attempt.id, 'recording_played_by_rater', { part: Number(part), turn, chunks: chunks.length });
+  return new Response(body, { status: 200, headers: { 'content-type': chunks[0].mime, 'content-length': String(body.length),
+    'cache-control': 'private, no-store', 'x-content-type-options': 'nosniff', 'content-disposition': 'inline' } });
+}
+
 export async function productiveForRating(env, userId, attemptId) {
   if (!(await hasRole(env, userId, ['rater', 'lead_rater']))) fail(403, 'rater_role_required');
   const attempt = await loadAttempt(env, attemptId, userId, { allowAdmin: true });
+  if (attempt.user_id === userId) fail(403, 'cannot_rate_own_attempt');
   const writing = (await env.DB.prepare('SELECT item_id, text, words, target_words, below_half_target, sha256 FROM writing_final WHERE attempt_id = ?1').bind(attempt.id).all()).results;
   const turns = (await env.DB.prepare('SELECT item_id, part, turn, status, chunks, bytes, duration_ms FROM recording_turns WHERE attempt_id = ?1').bind(attempt.id).all()).results;
-  return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, writing, recordings: turns };
+  /* What the rating API validates against, so a rating UI never guesses: every rubric unit with its prompt, criteria
+     (band → points, bands A..E) and which rounds are already taken. Other raters' bands are never returned. */
+  const form = await formRow(env, attempt.form_id);
+  const cfg = await levelConfig(env, form.level_config_id);
+  const mods = Object.fromEntries((await env.DB.prepare("SELECT module, status FROM attempt_modules WHERE attempt_id = ?1 AND module IN ('schreiben','sprechen')").bind(attempt.id).all()).results.map((m) => [m.module, m]));
+  const scores = Object.fromEntries((await env.DB.prepare("SELECT module, status, points, max_points FROM module_scores WHERE attempt_id = ?1 AND module IN ('schreiben','sprechen')").bind(attempt.id).all()).results.map((r) => [r.module, r]));
+  const rated = (await env.DB.prepare('SELECT item_id, round, rater_id FROM ratings WHERE attempt_id = ?1').bind(attempt.id).all()).results;
+  const units = [];
+  for (const module of ['schreiben', 'sprechen']) {
+    const items = (await env.DB.prepare('SELECT item_id, rubric_id FROM items_index WHERE form_id = ?1 AND module = ?2').bind(attempt.form_id, module).all()).results;
+    const pkg = (await loadPackage(env, attempt.form_id, module)).data;
+    const prompt = {};
+    for (const p of pkg.parts) for (const t of p.tasks) for (const it of t.items) prompt[it.item_id] = { part: p.part, stem: it.stem || null, instructions: t.instructions || null };
+    for (const u of rubricUnits(cfg, module, items)) {
+      const rub = cfg.rubrics[u.rubric_id];
+      units.push({ module, item_id: u.item_id, rubric_id: u.rubric_id, part: (prompt[u.item_id] || {}).part ?? null, stem: (prompt[u.item_id] || {}).stem ?? null,
+        instructions: (prompt[u.item_id] || {}).instructions ?? null, criteria: rub.criteria, zero_rule: rub.zero_rule || null,
+        rounds_taken: rated.filter((r) => r.item_id === u.item_id).map((r) => ({ round: r.round, mine: r.rater_id === userId })) });
+    }
+  }
+  const modules = ['schreiben', 'sprechen'].map((m) => ({ module: m, status: mods[m] ? mods[m].status : null, score_status: scores[m] ? scores[m].status : null,
+    points: scores[m] && scores[m].status === 'final' ? scores[m].points : null, max_points: scores[m] ? scores[m].max_points : null }));
+  return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, writing, recordings: turns, bands: BANDS, modules, units,
+    lead: await hasRole(env, userId, ['lead_rater']) };
+}
+
+/* Rating queue for raters: attempts whose Schreiben or Sprechen is submitted and not yet final. No learner identity is
+   returned, and a rater never sees their own attempts. */
+export async function ratingQueue(env, userId) {
+  if (!(await hasRole(env, userId, ['rater', 'lead_rater']))) fail(403, 'rater_role_required');
+  const rows = (await env.DB.prepare(`SELECT m.attempt_id, m.module, m.submitted_at, s.status AS score_status FROM attempt_modules m
+      JOIN attempts a ON a.id = m.attempt_id LEFT JOIN module_scores s ON s.attempt_id = m.attempt_id AND s.module = m.module
+      WHERE m.module IN ('schreiben','sprechen') AND m.status = 'submitted' AND a.user_id != ?1 AND (s.status IS NULL OR s.status != 'final')
+      ORDER BY m.submitted_at, m.attempt_id LIMIT 100`).bind(userId).all()).results;
+  const mine = (await env.DB.prepare('SELECT attempt_id, module, round FROM ratings WHERE rater_id = ?1').bind(userId).all()).results;
+  const out = new Map();
+  for (const r of rows) {
+    if (!out.has(r.attempt_id)) out.set(r.attempt_id, { attempt_id: r.attempt_id, modules: [] });
+    out.get(r.attempt_id).modules.push({ module: r.module, submitted_at: r.submitted_at, score_status: r.score_status || 'pending_rating',
+      my_rounds: [...new Set(mine.filter((x) => x.attempt_id === r.attempt_id && x.module === r.module).map((x) => x.round))] });
+  }
+  return { ok: true, attempts: [...out.values()] };
 }

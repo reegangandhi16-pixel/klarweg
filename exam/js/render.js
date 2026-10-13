@@ -17,7 +17,9 @@ export function paragraphs(md) {
 }
 
 export function testBanner(pkg) {
-  return pkg && pkg.test_content ? '<p class="kx-banner" role="note">SYNTHETISCHER SYSTEMTEST — keine echte Prüfungsaufgabe. TEST AUDIO = Prüftöne.</p>' : '';
+  if (!pkg || !pkg.test_content) return '';
+  const adjusted = pkg.timing && pkg.timing.adjusted ? ' Verkürzte Übungszeiten – nicht die Zeiten der Prüfung.' : '';
+  return `<p class="kx-banner" role="note">SYNTHETISCHE ÜBUNGSINHALTE — keine echte Prüfung. Hörtexte werden als Prüftöne abgespielt.${adjusted}</p>`;
 }
 
 export function header({ module, remainingMs, saveState, progress = null }) {
@@ -132,6 +134,26 @@ export function reviewPanel(progress) {
     + '<button type="button" class="kx-btn" data-act="submit-confirm">Endgültig abgeben</button></div></section>';
 }
 
+/* Item review after submission (server data only: GET …/modules/<m>/review). Numbers as shown in the test. */
+const REVIEW_STATUS = { correct: 'richtig', incorrect: 'falsch', unanswered: 'ohne Antwort' };
+const answerText = (a) => (a ? `${a.label}${a.text ? ` – ${a.text}` : ''}` : '–');
+export function itemReview(module, review) {
+  const s = review.summary;
+  const rows = review.items.map((it) => `<tr class="kx-rv-${esc(it.status)}"><th scope="row">${esc(it.display_no)}</th><td>${esc(answerText(it.your_answer))}</td>`
+    + `<td>${esc(answerText(it.correct_answer))}</td><td><span class="kx-rv-status">${esc(REVIEW_STATUS[it.status] || it.status)}</span></td>`
+    + `<td>${esc(it.points)} / ${esc(it.max_points)}</td></tr>`
+    + (it.explanation ? `<tr class="kx-rv-explain"><td colspan="5">${esc(it.explanation)}${(it.evidence || []).map((e) => ` <q>${esc(e.text)}</q>`).join('')}</td></tr>` : '')).join('');
+  const label = MODULE_LABELS[module] || module;
+  // listening scripts, released by the server only with the review (after this module was submitted)
+  const scripts = (review.transcripts || []).length
+    ? `<details class="kx-transcripts"><summary>Hörtexte zum Nachlesen (${esc(review.transcripts.length)})</summary>`
+      + review.transcripts.map((t) => `<h3>Teil ${esc(t.part)}</h3>${paragraphs(t.text)}`).join('') + '</details>' : '';
+  return `<section class="kx-review-items" aria-labelledby="rv-${esc(module)}"><h2 id="rv-${esc(module)}">${esc(label)}: Ihre Antworten</h2>`
+    + `<p>richtig ${esc(s.correct)} · falsch ${esc(s.incorrect)} · ohne Antwort ${esc(s.unanswered)} (von ${esc(s.total)})</p>`
+    + `<div class="kx-table-wrap"><table class="kx-table"><caption>${esc(label)}: Antworten je Aufgabe</caption><thead><tr><th scope="col">Nr.</th><th scope="col">Ihre Antwort</th>`
+    + `<th scope="col">Lösung</th><th scope="col">Ergebnis</th><th scope="col">Punkte</th></tr></thead><tbody>${rows}</tbody></table></div>${scripts}</section>`;
+}
+
 const RESULT_NOTES = { pending_rating: 'Wartet auf zwei unabhängige Bewertungen.', pending_rule: 'Bewertet; die Punkteregel ist noch nicht festgelegt.' };
 export function resultPage(result) {
   const rows = result.modules.map((m) => {
@@ -142,7 +164,7 @@ export function resultPage(result) {
     const note = RESULT_NOTES[m.status] || '';
     return `<tr><th scope="row">${esc(MODULE_LABELS[m.module] || m.module)}</th><td>${pts}</td><td>${esc(verdict)}${band}</td><td>${[counts, esc(note)].filter(Boolean).join('<br>')}</td></tr>`;
   }).join('');
-  return `<main class="kx-result" aria-labelledby="kx-result-title"><p class="kx-eyebrow">${result.test_content ? 'Systemtest · synthetische Inhalte' : 'Simulation'}</p>`
+  return `<main class="kx-result" aria-labelledby="kx-result-title"><p class="kx-eyebrow">${result.test_content ? 'Übung · synthetische Inhalte' : 'Simulation'}</p>`
     + `<h1 id="kx-result-title">${esc(RESULT_TITLE)}</h1>`
     + `<table class="kx-table"><caption>Ergebnisse je Modul (kein Gesamtergebnis)</caption><thead><tr><th scope="col">Modul</th><th scope="col">Punkte</th><th scope="col">Status</th><th scope="col">Details</th></tr></thead><tbody>${rows}</tbody></table>`
     + `<p class="kx-disclaimer">${esc(RESULT_DISCLAIMER)} Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.</p></main>`;

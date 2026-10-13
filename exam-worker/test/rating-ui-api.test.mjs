@@ -1,0 +1,79 @@
+/* Rater UI support on the server: GET /admin/rating-queue and the extended GET /admin/attempts/<id>/productive.
+   Authorization stays on the server; no learner identity, no other rater's bands; the existing POST /admin/ratings
+   rules (role, own attempt, independence, no duplicate round) are exercised through the same data the UI uses. */
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { setup, call, newUser, role } from './harness.mjs';
+import { start, submit, answerObjective, runHoeren, runSchreiben, runSprechen, complete } from './flow.mjs';
+import { ratingRound, missingCriteria } from '../../exam/js/rating.js';
+
+async function finishedAttempt() {
+  const s = await setup();
+  await start(s, 'lesen'); await answerObjective(s, 'lesen'); await submit(s, 'lesen');
+  await runHoeren(s, (it, k) => k.correct); await submit(s, 'hoeren');
+  await runSchreiben(s); await submit(s, 'schreiben');
+  await runSprechen(s); await submit(s, 'sprechen');
+  await complete(s);
+  return s;
+}
+const queue = (s, user) => call(s.env, 'GET', '/exam/v1/admin/rating-queue', { user });
+const productive = (s, user) => call(s.env, 'GET', `/exam/v1/admin/attempts/${s.attempt}/productive`, { user });
+const rate = (s, user, body) => call(s.env, 'POST', '/exam/v1/admin/ratings', { user, body: { attempt_id: s.attempt, ...body } });
+const allBands = (u, band = 'B') => Object.fromEntries(Object.keys(u.criteria).map((c) => [c, band]));
+
+test('RATER API: queue and productive data are staff-only; no learner identity; a rater never sees or rates their own attempt', async () => {
+  const s = await finishedAttempt();
+  const learner2 = newUser(), r1 = newUser();
+  await role(s.env, r1, 'rater');
+  for (const u of [s.user, learner2]) {
+    for (const r of [await queue(s, u), await productive(s, u)]) { assert.equal(r.status, 403, JSON.stringify(r.json)); assert.equal(r.json.error, 'rater_role_required'); }
+    const x = await rate(s, u, { item_id: 'sprechen:pron', round: 1, bands: { aussprache: 'A' } });
+    assert.equal(x.status, 403, 'unauthorized rating request fails');
+  }
+  const r = await call(s.env, 'GET', '/exam/v1/admin/rating-queue', {});
+  assert.ok(r.status === 401 || r.status === 403, `unauthenticated → ${r.status}`);
+  const q = await queue(s, r1);
+  assert.equal(q.status, 200);
+  const entry = q.json.attempts.find((a) => a.attempt_id === s.attempt);
+  assert.ok(entry, 'the submitted attempt is in the queue');
+  assert.deepEqual(entry.modules.map((m) => [m.module, m.score_status]).sort(), [['schreiben', 'pending_rating'], ['sprechen', 'pending_rating']]);
+  assert.equal(JSON.stringify(q.json).includes(s.user), false, 'no learner identity in the queue');
+  // a rater who is also the learner of an attempt neither sees it nor can open or rate it
+  await role(s.env, s.user, 'rater');
+  assert.equal((await queue(s, s.user)).json.attempts.some((a) => a.attempt_id === s.attempt), false);
+  assert.equal((await productive(s, s.user)).json.error, 'cannot_rate_own_attempt');
+  assert.equal((await rate(s, s.user, { item_id: 'sprechen:pron', round: 1, bands: { aussprache: 'A' } })).json.error, 'cannot_rate_own_attempt');
+});
+
+test('RATER API: productive returns what the rating API validates; rounds are tracked without revealing another rater\'s bands; finals leave the queue', async () => {
+  const s = await finishedAttempt();
+  const r1 = newUser(), r2 = newUser();
+  await role(s.env, r1, 'rater'); await role(s.env, r2, 'rater');
+  let d = (await productive(s, r1)).json;
+  assert.deepEqual(d.bands, ['A', 'B', 'C', 'D', 'E']);
+  assert.deepEqual(d.units.map((u) => u.module).sort(), [...Array(3).fill('schreiben'), ...Array(4).fill('sprechen')].sort());
+  assert.ok(d.units.some((u) => u.item_id === 'sprechen:pron'));
+  assert.ok(d.units.every((u) => Object.keys(u.criteria).length && u.rounds_taken.length === 0));
+  assert.ok(d.writing.length === 3 && d.recordings.length > 0);
+  assert.equal(ratingRound(d, 'schreiben'), 1);
+  // rater 1 rates everything in round 1 (the data the UI shows is enough to build valid requests)
+  for (const u of d.units) { const x = await rate(s, r1, { item_id: u.item_id, round: 1, bands: allBands(u) }); assert.equal(x.status, 200, JSON.stringify(x.json)); }
+  assert.equal((await rate(s, r1, { item_id: d.units[0].item_id, round: 1, bands: allBands(d.units[0]) })).json.error, 'already_rated', 'no duplicate round');
+  assert.equal((await rate(s, r1, { item_id: d.units[0].item_id, round: 2, bands: allBands(d.units[0]) })).json.error, 'rater_not_independent');
+  d = (await productive(s, r1)).json;
+  assert.ok(d.units.every((u) => u.rounds_taken.some((r) => r.round === 1 && r.mine)));
+  assert.equal(ratingRound(d, 'sprechen'), 1, 'a rater stays in their round');
+  const d2 = (await productive(s, r2)).json;
+  assert.ok(d2.units.every((u) => u.rounds_taken.length === 1 && u.rounds_taken[0].mine === false));
+  assert.equal(/bands_json|"aussprache":"B"|rater_id/.test(JSON.stringify(d2)), false, 'another rater\'s bands and identity are not revealed');
+  assert.equal(ratingRound(d2, 'schreiben'), 2);
+  assert.deepEqual(missingCriteria(d2.units[0], {}), Object.keys(d2.units[0].criteria));
+  for (const u of d2.units) { const x = await rate(s, r2, { item_id: u.item_id, round: 2, bands: allBands(u) }); assert.equal(x.status, 200, JSON.stringify(x.json)); }
+  const after = (await productive(s, r2)).json;
+  assert.deepEqual(after.modules.map((m) => m.score_status), ['final', 'final']);
+  assert.equal((await queue(s, r1)).json.attempts.some((a) => a.attempt_id === s.attempt), false, 'final attempts leave the queue');
+  const res = await call(s.env, 'GET', `/exam/v1/attempts/${s.attempt}/result`, { user: s.user });
+  const by = Object.fromEntries(res.json.result.modules.map((m) => [m.module, m]));
+  assert.equal(by.schreiben.status, 'final'); assert.equal(by.sprechen.status, 'final');
+  assert.equal(by.schreiben.points, after.modules[0].points); assert.equal(by.sprechen.points, after.modules[1].points);
+});

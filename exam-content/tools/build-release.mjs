@@ -95,9 +95,10 @@ export function buildRelease({ release, formDirs, levelsDir = path.join(ROOT, 'l
       const pkg = {
         package_version: 1, level: lc.level, variant: lc.variant, module: fm.module, navigation: mc.navigation,
         test_content: form.kind === 'synthetic',
-        timing: mc.timing.kind === 'fixed' ? { kind: 'fixed', seconds: mc.timing.seconds }
+        timing: { ...(mc.timing.kind === 'fixed' ? { kind: 'fixed', seconds: mc.timing.seconds }
           : mc.timing.kind === 'phase_plan' ? { kind: 'phase_plan', plan: hoerenPlan(lc, form, tasksById, itemsById, durations) }
-            : { kind: 'speaking_phases', plan: speakingPlan(lc, form) },
+            : { kind: 'speaking_phases', plan: speakingPlan(lc, form) }),
+          ...(form.kind === 'synthetic' && form.timing_overrides?.[fm.module] ? { adjusted: true } : {}) },   // synthetic timing, not exam timing
         parts: fm.parts.map((fp) => {
           const pc = mc.parts.find((p) => p.part === fp.part);
           return {
@@ -148,7 +149,7 @@ export function buildRelease({ release, formDirs, levelsDir = path.join(ROOT, 'l
     for (const fm of form.modules) for (const fp of fm.parts) for (const o of fp.item_order) {
       const it = itemsById[o.item_id];
       const scored = !it.is_example && OBJECTIVE.has(it.interaction) ? 1 : 0;
-      const k = keys.keys[it.id];
+      const k = withReview(keys.keys[it.id], it, tasksById, assetsById);
       sql.push(`INSERT OR REPLACE INTO items_index (item_id, form_id, module, part, display_no, interaction, is_example, points, rubric_id) VALUES (${q(it.id)}, ${q(form.id)}, ${q(fm.module)}, ${fp.part}, ${q(o.display_no)}, ${q(it.interaction)}, ${it.is_example ? 1 : 0}, ${scored}, ${q(k.kind === 'rubric' ? k.rubric_id : null)});`);
       sql.push(`INSERT OR REPLACE INTO item_keys (item_id, form_id, key_json) VALUES (${q(it.id)}, ${q(form.id)}, ${q(JSON.stringify(k))});`);
     }
@@ -166,13 +167,25 @@ function publicResponseSpec(rs, durations) {
   return { type: rs.type };
 }
 
+/* Post-submission review material (EXAM-ITEM-SCHEMA §11 "review package"): the item's explanation, its evidence
+   span(s) and, for listening, the scripts of the task's audio stimuli. Stored ONLY with the server-side key in D1
+   item_keys (never in a module package or a media asset), so the Worker can release it exactly when it releases the key. */
+function withReview(key, it, tasksById, assetsById) {
+  if (!it.feedback && !it.anchors) return key;
+  const source = (id) => { const a = assetsById[id]; return a ? (a.kind === 'text' ? a.text.body_md : a.script_de || null) : null; };
+  const evidence = (it.anchors || []).filter((a) => a.kind === 'text_span').map((a) => ({ asset_id: a.asset_id, start: a.start, end: a.end, text: (source(a.asset_id) || '').slice(a.start, a.end) }));
+  const transcripts = (tasksById[it.task_id]?.stimuli || []).map((s) => assetsById[s.asset_id])
+    .filter((a) => a && a.kind === 'audio' && a.script_de).map((a) => ({ asset_id: a.id, text: a.script_de }));
+  return { ...key, review: { explanation_de: it.feedback?.explanation_de || null, evidence, transcripts } };
+}
+
 /* Leak scanner: no server-only field name may appear anywhere in a package. */
 export function assertNoLeak(obj, where) {
   const bad = [];
   const walk = (o, p) => {
     if (Array.isArray(o)) return o.forEach((v, i) => walk(v, `${p}[${i}]`));
     if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) {
-      if (SERVER_ONLY_FIELDS.includes(k) || k === 'correct' || k === 'key_json') bad.push(`${p}.${k}`);
+      if (SERVER_ONLY_FIELDS.includes(k) || ['correct', 'key_json', 'script_de', 'explanation_de', 'review'].includes(k)) bad.push(`${p}.${k}`);
       walk(v, `${p}.${k}`);
     }
   };

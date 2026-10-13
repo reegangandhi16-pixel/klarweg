@@ -121,6 +121,14 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
       if (new Set(oids).size !== oids.length) E('options', `item ${it.id} has duplicate option ids`);
     }
     for (const d of it.distractors || []) if (!TRAP_MECHANISMS.includes(d.mechanism)) E('bad_enum', `item ${it.id} distractor mechanism ${d.mechanism}`);
+    // review material (released only after submission): text spans must lie inside a stimulus of the item's own task
+    for (const an of it.anchors || []) {
+      const st = (tasksById[it.task_id]?.stimuli || []).some((x) => x.asset_id === an.asset_id);
+      const a = assets.find((x) => x.id === an.asset_id);
+      const src = a ? (a.kind === 'text' ? a.text?.body_md : a.script_de) : null;
+      if (an.kind !== 'text_span' || !st || typeof src !== 'string' || !(Number.isInteger(an.start) && Number.isInteger(an.end) && an.start >= 0 && an.end > an.start && an.end <= src.length)) E('bad_anchor', `item ${it.id} anchor ${an.asset_id} ${an.start}–${an.end}`);
+    }
+    if (it.feedback && (typeof it.feedback.explanation_de !== 'string' || !it.feedback.explanation_de.trim())) E('bad_feedback', `item ${it.id} feedback needs explanation_de`);
     const stemKey = `${it.module}|${it.part}|${(it.stem || '').trim().toLowerCase()}`;
     if (it.stem && OBJECTIVE.has(it.interaction)) { if (stems.has(stemKey)) E('duplicate_item', `item ${it.id} duplicates the stem of ${stems.get(stemKey)}`); else stems.set(stemKey, it.id); }
     itemsById[it.id] = it;

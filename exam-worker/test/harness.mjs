@@ -13,6 +13,7 @@ import { buildRelease } from '../../exam-content/tools/build-release.mjs';
 export const WORKER_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const ROOT = path.resolve(WORKER_DIR, '..');
 export const FORM_DIR = path.join(ROOT, 'exam-content/forms/synthetic/b1-synthetic-s0');
+export const PRACTICE_FORM_DIR = path.join(ROOT, 'exam-content/forms/synthetic/b1-synthetic-p1');
 export const PROXY_SECRET = 'test-exam-proxy-secret-0123456789abcdef';
 export const MEDIA_SECRET = 'test-exam-media-secret-0123456789abcdef';
 
@@ -54,14 +55,16 @@ export function makeBucket() {
   };
 }
 
-let cachedBuild = null;
-export function syntheticBuild() {
-  if (!cachedBuild) cachedBuild = buildRelease({ release: 'r000', formDirs: [FORM_DIR], builtAt: '2026-10-04T00:00:00.000Z' });
-  return cachedBuild;
+const builds = new Map();
+/* The synthetic release used by tests and the dev server: S0 (system test) unless other form directories are given. */
+export function syntheticBuild(formDirs = [FORM_DIR]) {
+  const key = formDirs.join('|');
+  if (!builds.has(key)) builds.set(key, buildRelease({ release: 'r000', formDirs, builtAt: '2026-10-04T00:00:00.000Z' }));
+  return builds.get(key);
 }
 
-export function makeEnv({ flags = {}, start = Date.UTC(2026, 9, 4, 9, 0, 0) } = {}) {
-  const build = syntheticBuild();
+export function makeEnv({ flags = {}, start = Date.UTC(2026, 9, 4, 9, 0, 0), formDirs } = {}) {
+  const build = syntheticBuild(formDirs);
   const DB = createExamD1();
   DB.raw.exec(build.sql);
   const CONTENT = makeBucket();
@@ -117,12 +120,15 @@ export async function setup(opts = {}) {
   return { ...h, user, device, attempt: r.json.attempt_id, lease: r.json.lease.lease_id, created: r.json };
 }
 
-export function keysFor(build) {
-  const k = build.files.get('releases/r000/keys/frm_b1_synthetic_s0_1.json');
-  return JSON.parse(k.toString('utf8')).keys;
+export function keysFor(build) {   // the server-only keys of the (single) form in this build
+  const k = [...build.files.keys()].filter((x) => x.startsWith('releases/r000/keys/'));
+  if (k.length !== 1) throw new Error(`expected one key file in the build, found ${k.length}`);
+  return JSON.parse(build.files.get(k[0]).toString('utf8')).keys;
 }
-export function pkgFor(build, module) {
-  return JSON.parse(build.files.get(`releases/r000/forms/frm_b1_synthetic_s0_1/module-${module}.json`).toString('utf8'));
+export function pkgFor(build, module) {   // the module package of the (single) form in this build
+  const k = [...build.files.keys()].filter((x) => x.startsWith('releases/r000/forms/') && x.endsWith(`/module-${module}.json`));
+  if (k.length !== 1) throw new Error(`expected one ${module} package in the build, found ${k.length}`);
+  return JSON.parse(build.files.get(k[0]).toString('utf8'));
 }
 export function scoredItems(pkg) {
   const out = [];

@@ -58,6 +58,16 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     speakingStatus: (id, leaseId) => call('GET', att(id, `/sprechen/status?lease_id=${encodeURIComponent(leaseId)}`)),
     complete: (id, leaseId) => call('POST', att(id, '/complete'), { body: rq({ lease_id: leaseId }) }),
     result: (id) => call('GET', att(id, '/result')),
+    review: (id, module) => call('GET', att(id, `/modules/${module}/review`)),
+    // staff (rater / lead_rater): authorization is enforced by the server; the browser carries no token or secret
+    ratingQueue: () => call('GET', '/exam/v1/admin/rating-queue'),
+    productive: (id) => call('GET', `/exam/v1/admin/attempts/${id}/productive`),
+    async recording(id, part, turn) {   // rater playback: audio bytes, session-bound (no URL token)
+      const res = await fetchImpl(`${base}/exam/v1/admin/attempts/${id}/recordings/${part}/${turn}`, { credentials: 'include' });
+      if (!res.ok) { let j = null; try { j = await res.json(); } catch { /* non-JSON */ } throw new ExamApiError(res.status, (j && j.error) || 'http_' + res.status, j); }
+      return res.blob();
+    },
+    rate: (body) => once('POST', '/exam/v1/admin/ratings', { body }),   // not retried: a lost response must not turn into a second rating
     mediaBytes: async (url) => {
       const res = await fetchImpl(base + url, { credentials: 'omit' });
       if (!res.ok) throw new ExamApiError(res.status, 'media_' + res.status);

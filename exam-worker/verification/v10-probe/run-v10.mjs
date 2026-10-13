@@ -22,8 +22,9 @@ const runId = (tag) => `${tag}-${Date.now().toString(36)}-${Math.random().toStri
 const report = { base, n: N, rounds: ROUNDS, started_at: new Date().toISOString(), checks: [] };
 const check = (id, pass, detail) => report.checks.push({ id, pass: !!pass, detail });
 
-const setup = await call('POST', '/v10/setup');
-check('setup', setup.status === 200, setup.body);
+const v = await call('GET', '/v10/verify');          // read-only qualification of the bound database; nothing runs without it
+check('verify', v.status === 200 && v.body.verified === true, v.body);
+if (!(v.status === 200 && v.body.verified === true)) { report.pass = false; console.log(JSON.stringify(report, null, 2)); process.exit(1); }
 
 const sc = await call('POST', `/v10/scenarios?run=${runId('scn')}`);
 for (const r of (sc.body.results || [])) check(r.id, r.pass, r.detail);

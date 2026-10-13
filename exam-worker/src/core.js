@@ -253,7 +253,8 @@ export async function scoreModule(env, attempt, module) {
 }
 
 /* ---------- result ---------- */
-export const RESULT_LABEL = 'KLARWEG B1 SIMULATION — TEST RESULT';
+/* OD-45 (LOCKED): student-facing title and mandatory disclaimer; never "Goethe score / Goethe-Ergebnis". */
+export const RESULT_LABEL = 'Klarweg B1 Simulation – Ergebnis';
 
 export async function buildResult(env, attempt) {
   const form = await formRow(env, attempt.form_id);
@@ -264,7 +265,7 @@ export async function buildResult(env, attempt) {
     level: attempt.level,
     form_kind: form.kind,
     test_content: form.kind === 'synthetic',
-    disclaimer: 'Klarweg B1 Simulation. Not an official Goethe-Institut result and not a certificate. Modules are reported separately; there is no combined score.',
+    disclaimer: 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.',
     modules: mods.map((m) => {
       const s = rows.find((r) => r.module === m.module);
       const flags = s ? JSON.parse(s.rule_flags_json || '{}') : {};
@@ -278,8 +279,8 @@ export async function buildResult(env, attempt) {
         pass: s && s.status === 'final' ? !!s.pass : null,
         predikat: s && s.status === 'final' ? s.predikat : null,
         counts: s && 'correct' in flags ? { correct: flags.correct, incorrect: flags.incorrect, unanswered: flags.unanswered } : null,
-        note: !s ? null : s.status === 'pending_rating' ? 'Awaiting two independent human ratings.'
-          : s.status === 'pending_rule' ? 'Ratings complete; final points await a scoring rule that is not yet configured.' : null
+        note: !s ? null : s.status === 'pending_rating' ? 'Wartet auf zwei unabhängige Bewertungen.'
+          : s.status === 'pending_rule' ? 'Bewertet; die Punkteregel ist noch nicht festgelegt.' : null
       };
     })
   };

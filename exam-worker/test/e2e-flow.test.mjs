@@ -25,7 +25,7 @@ test('E2E full synthetic flow START→LESEN→HÖREN→SCHREIBEN→SPRECHEN→SU
 
   const done = await complete(s);
   const r = done.result;
-  assert.equal(r.label, 'KLARWEG B1 SIMULATION — TEST RESULT');
+  assert.equal(r.label, 'Klarweg B1 Simulation – Ergebnis');
   assert.equal(r.test_content, true);
   const by = Object.fromEntries(r.modules.map((m) => [m.module, m]));
   assert.equal(by.lesen.points, 100); assert.equal(by.lesen.pass, true); assert.equal(by.lesen.predikat, 'sehr gut');
@@ -42,7 +42,7 @@ test('E2E full synthetic flow START→LESEN→HÖREN→SCHREIBEN→SPRECHEN→SU
 
   // GET /result (owner)
   const res = await call(s.env, 'GET', A(s, '/result'), { user: s.user });
-  assert.equal(res.status, 200); assert.equal(res.json.result.label, 'KLARWEG B1 SIMULATION — TEST RESULT');
+  assert.equal(res.status, 200); assert.equal(res.json.result.label, 'Klarweg B1 Simulation – Ergebnis');
 
   // two independent human raters → Sprechen becomes final (half-up), Schreiben integer mean final
   const r1 = newUser(), r2 = newUser();

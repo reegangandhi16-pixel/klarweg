@@ -8,6 +8,7 @@ import { verifyProxy, requireUser } from './auth.js';
 import { streamMedia } from './media.js';
 import { settle } from './core.js';
 import * as api from './api.js';
+import { runRetention } from './retention.js';
 
 const MODULE = '(lesen|hoeren|schreiben|sprechen)';
 const A = '(att_[0-9a-f-]{36})';
@@ -82,8 +83,11 @@ export default {
 
   /* Cron sweep: auto-submit modules whose deadline + grace has passed even if
      the candidate never comes back, and finish any interrupted finalization
-     (scores and unlocks happen server-side). */
+     (scores and unlocks happen server-side). Recording retention (OD-21) runs
+     first and independently of EXAM_ENABLED: it has its own policy variable
+     and deletes nothing until that is set (retention.js). */
   async scheduled(event, env) {
+    try { await runRetention(env, now(env)); } catch (e) { log(env, 'retention_error', { error: e && e.name }); }
     if (!flags(env).enabled) return;
     const rows = (await env.DB.prepare(`SELECT DISTINCT a.* FROM attempt_modules m JOIN attempts a ON a.id = m.attempt_id
         WHERE (m.status = 'running' AND m.deadline_at < ?1) OR m.status = 'submitting' LIMIT 200`).bind(now(env) - 10_000).all()).results;

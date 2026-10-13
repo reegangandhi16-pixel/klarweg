@@ -10,7 +10,7 @@ import { memoryStore } from '../js/store.js';
 import { createApi, ExamApiError } from '../js/api.js';
 import { phaseAt, phaseLabel } from '../js/hoeren.js';
 import { ChunkQueue, sha256Hex } from '../js/recorder.js';
-import { createRenderer, resultPage, header, moduleNav, reviewPanel, esc, RESULT_TITLE, RESULT_DISCLAIMER } from '../js/render.js';
+import { createRenderer, resultPage, header, moduleNav, reviewPanel, itemReview, testBanner, esc, RESULT_TITLE, RESULT_DISCLAIMER } from '../js/render.js';
 import { nextAction, assertSupported, unansweredCount, answerableItems, partProgress, isAnswered, itemNumber } from '../js/engine.js';
 import { countWords } from '../js/wordcount.js';
 import { speakingSchedule, speakingPhaseAt, prepEndsAt, partOfPhase, partForListenPhase, speakingItemsForPart, partnerAssetFor,
@@ -160,7 +160,7 @@ test('ACCESSIBILITY (render): labelled controls, legends, examples read-only, um
   assert.equal((html.match(/<fieldset/g) || []).length, (html.match(/<legend>/g) || []).length);
   assert.ok(/class="kx-item kx-example"[\s\S]*?disabled/.test(html));
   assert.ok(html.includes('aria-label="ä einfügen"'));
-  assert.ok(html.includes('SYNTHETISCHER SYSTEMTEST'));
+  assert.ok(html.includes('SYNTHETISCHE ÜBUNGSINHALTE'));
   assert.ok(/TEST AUDIO/.test(html));
   assert.equal(/"correct"|data-correct|data-key/.test(html), false);
   const evil = item({ item_id: 'x"><script>', interaction: 'binary_choice', stem: '<img src=x onerror=alert(1)>', options: [{ option_id: 'a', label: '<b>' }] }, {}, {});
@@ -196,8 +196,10 @@ test('PROGRESS: answered counts per part on the real synthetic packages; example
   // the review uses the number the learner sees on the page (the stem's "29. …"), not the position within the part
   const byId = Object.fromEntries(answerableItems(lesen).map((it) => [it.item_id, it]));
   for (const r of empty.flatMap((p) => p.items)) assert.ok(String(byId[r.item_id].stem).startsWith(`${r.no}. `), `${r.item_id} → ${r.no}`);
-  assert.deepEqual(empty.flatMap((p) => p.items).map((r) => r.no), answerableItems(lesen).map((_, i) => i + 1), 'synthetic Lesen numbers 1…30 in order');
-  assert.equal(itemNumber({ stem: 'Ohne Nummer' }, 4), 5, 'fallback: position in the part');
+  assert.deepEqual(empty.flatMap((p) => p.items).map((r) => r.no), answerableItems(lesen).map((_, i) => String(i + 1)), 'synthetic Lesen numbers 1…30 in order');
+  assert.equal(itemNumber({ display_no: '01', stem: '7. irrelevant' }, 0), '01', 'the package display_no wins (keeps leading zeros and gaps)');
+  assert.equal(itemNumber({ stem: '12) Mit Klammer' }, 0), '12');
+  assert.equal(itemNumber({ stem: 'Ohne Nummer' }, 4), '5', 'fallback: position in the part');
   const first = empty.find((p) => p.total).items[0];
   const one = partProgress(lesen, { [first.item_id]: { option_id: 'x' } });
   assert.equal(one.reduce((n, p) => n + p.answered, 0), 1);
@@ -469,4 +471,27 @@ test('COMPLETE (client ↔ worker): a lost "complete" response is retried with t
   assert.equal(r.result.label, RESULT_TITLE);
   const n = await s.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE attempt_id = ?1 AND action = 'attempt_completed'").bind(s.attempt).first();
   assert.equal(n.n, 1, 'completed once');
+});
+
+test('ITEM REVIEW render: explanation and evidence under each row, scripts collapsed after the table, all escaped', () => {
+  const html = itemReview('hoeren', {
+    summary: { correct: 1, incorrect: 0, unanswered: 1, total: 2 },
+    items: [
+      { display_no: '1', status: 'correct', points: 1, max_points: 1, your_answer: { label: 'a', text: 'x' }, correct_answer: { label: 'a', text: 'x' },
+        explanation: 'Lea sagt <nicht> ab.', evidence: [{ text: 'halb zehn' }] },
+      { display_no: '2', status: 'unanswered', points: 0, max_points: 1, your_answer: null, correct_answer: { label: 'b', text: 'y' }, explanation: null, evidence: [] }
+    ],
+    transcripts: [{ part: 1, text: 'Hallo Ben,\nhier ist Lea.' }]
+  });
+  assert.equal((html.match(/class="kx-rv-explain"/g) || []).length, 1, 'only rows with an explanation get one');
+  assert.match(html, /Lea sagt &lt;nicht&gt; ab\. <q>halb zehn<\/q>/);
+  assert.match(html, /<details class="kx-transcripts"><summary>Hörtexte zum Nachlesen \(1\)<\/summary><h3>Teil 1<\/h3><p>Hallo Ben,<br>hier ist Lea\.<\/p><\/details>/);
+  assert.equal(/kx-transcripts/.test(itemReview('lesen', { summary: { correct: 0, incorrect: 0, unanswered: 0, total: 0 }, items: [], transcripts: [] })), false);
+});
+
+test('TIMING label: synthetic packages with adjusted timing say so; exam-timed modules do not', () => {
+  const b = syntheticBuild();
+  for (const m of ['hoeren', 'sprechen']) assert.match(testBanner(pkgFor(b, m)), /Verkürzte Übungszeiten – nicht die Zeiten der Prüfung\./, m);
+  for (const m of ['lesen', 'schreiben']) { assert.equal(pkgFor(b, m).timing.adjusted, undefined); assert.equal(/Verkürzte/.test(testBanner(pkgFor(b, m))), false, m); }
+  assert.equal(testBanner({ test_content: false, timing: { adjusted: true } }), '');
 });

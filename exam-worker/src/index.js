@@ -32,8 +32,11 @@ const ROUTES = [
   ['GET', R(`/attempts/${A}/sprechen/status`), (c, m) => api.speakingStatus(c.env, c.user, m[1], c.url)],
   ['POST', R(`/attempts/${A}/complete`), (c, m) => api.completeAttempt(c.env, c.user, m[1], c.request)],
   ['GET', R(`/attempts/${A}/result`), (c, m) => api.getResult(c.env, c.user, m[1])],
+  ['GET', R(`/attempts/${A}/modules/${MODULE}/review`), (c, m) => api.moduleReview(c.env, c.user, m[1], m[2])],
   ['POST', R('/admin/ratings'), (c) => api.submitRating(c.env, c.user, c.request)],
-  ['GET', R(`/admin/attempts/${A}/productive`), (c, m) => api.productiveForRating(c.env, c.user, m[1])]
+  ['GET', R(`/admin/attempts/${A}/productive`), (c, m) => api.productiveForRating(c.env, c.user, m[1])],
+  ['GET', R('/admin/rating-queue'), (c) => api.ratingQueue(c.env, c.user)],
+  ['GET', R(`/admin/attempts/${A}/recordings/([1-3])/(t[1-9])`), (c, m) => api.recordingForRating(c.env, c.user, m[1], m[2], m[3])]
 ];
 const MEDIA = R('/media/([A-Za-z0-9_.-]{20,500})');
 
@@ -54,6 +57,7 @@ async function route(request, env) {
     if (request.method !== method) continue;
     const user = requireUser(request);
     const out = await handler({ env, request, url, user }, m);
+    if (out instanceof Response) return out;   // binary (rater recording playback)
     if (out && typeof out.status === 'number' && out.body) return json(out.body, out.status);   // idempotent() envelope
     return json(out);
   }

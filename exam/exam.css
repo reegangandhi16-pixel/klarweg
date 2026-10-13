@@ -87,6 +87,23 @@ p { margin: 0 0 16px; }
 .kx-table caption { text-align: left; color: var(--ink-secondary); padding-bottom: 8px; }
 .kx-table th, .kx-table td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .kx-disclaimer { color: var(--ink-secondary); font-size: 14px; }
+.kx-review-items { max-width: 680px; margin: 36px auto; }
+.kx-rater { max-width: 860px; margin: 24px auto; }
+.kx-queue { list-style: none; padding: 0; }
+.kx-queue-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.kx-written { white-space: normal; }
+.kx-rate select { min-height: 44px; font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); max-width: 100%; }
+.kx-rate-msg:empty { display: none; }
+.kx-table-wrap { max-width: 100%; overflow-x: auto; }
+.kx-rv-status { font-weight: 600; }
+.kx-rv-incorrect .kx-rv-status, .kx-rv-unanswered .kx-rv-status { color: var(--ink-secondary); }
+.kx-review-items tr:has(+ .kx-rv-explain) > * { border-bottom: 0; }
+.kx-rv-explain td { padding-top: 0; color: var(--ink-secondary); font-size: 14px; }
+.kx-rv-explain q { font-family: var(--font-display); font-style: italic; font-weight: 500; color: var(--ink-primary); }
+.kx-transcripts { margin-top: 24px; padding: 16px 24px; background: var(--elevated); border-radius: 8px; }
+.kx-transcripts summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; }
+.kx-transcripts h3 { font-size: 16px; margin: 16px 0 8px; }
+.kx-rater audio { display: block; width: 100%; max-width: 360px; margin-top: 8px; }
 .kx-error { color: var(--ink-primary); background: var(--warm); padding: 12px 16px; border-radius: 8px; }
 @media (max-width: 720px) {
   .kx-app { padding: 16px 16px 96px; }

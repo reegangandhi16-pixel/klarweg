@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p1-l1-text",
+    "kind": "text",
+    "label": "E-Mail",
+    "text": {
+      "lang": "de",
+      "body_md": "Liebe Jana,\n\nseit drei Wochen wohne ich jetzt in Lindenau, und ich wollte dir endlich von meinem neuen Leben erzählen. Die Wohnung ist kleiner als meine alte, aber sie hat einen Balkon, und morgens scheint dort die Sonne. Zur Arbeit fahre ich mit der Straßenbahn – nur zwölf Minuten, das ist viel besser als früher mit dem Auto im Stau.\n\nMeine Nachbarin, Frau Okafor, hat mich am ersten Tag zum Kaffee eingeladen. Sie hat mir gezeigt, wo man am Samstag auf dem Markt frisches Gemüse kaufen kann. Leider kenne ich sonst noch kaum jemanden. Deshalb habe ich mich für einen Kochkurs an der Volkshochschule angemeldet. Er beginnt erst im November, weil der Oktoberkurs schon voll war.\n\nHast du Lust, mich bald zu besuchen? Am Wochenende vom 15. bin ich zu Hause. Du kannst bei mir übernachten – das Sofa ist ganz bequem!\n\nViele Grüße\nMila"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Stadtbibliothek öffnet am Sonntag\n\nAb dem ersten März ist die Stadtbibliothek Lindenau auch sonntags von 11 bis 17 Uhr geöffnet. Ein Test im letzten Winter war so erfolgreich, dass der Stadtrat das Angebot jetzt fest eingeführt hat. Vor allem Familien und Berufstätige, die unter der Woche keine Zeit haben, kamen am Sonntag. Am Sonntag gibt es allerdings keine Beratung: Bücher ausleihen und zurückgeben kann man nur an den Automaten. Für die zusätzlichen Stunden hat die Bibliothek zwei neue Mitarbeiterinnen eingestellt; ehrenamtliche Helfer lesen außerdem jeden Sonntag um 15 Uhr Geschichten für Kinder vor."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Weniger Müll auf dem Wochenmarkt\n\nSeit Juni können Kundinnen und Kunden auf dem Wochenmarkt am Rathausplatz Pfandbecher und Pfandboxen benutzen. Wer zum Beispiel Suppe oder Salat kauft, zahlt zwei Euro Pfand und bekommt das Geld zurück, wenn er die Box an einem der Stände abgibt. Die Idee kam von einer Gruppe Schülerinnen, die im Unterricht ein Projekt zum Thema Verpackung gemacht haben. Nach drei Monaten sind die Händler zufrieden: Es gibt deutlich weniger Müll. Nur einige ältere Kunden finden das System noch zu kompliziert."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gitarrenunterricht für Anfänger – Einzelstunden am Abend, auch online. Probestunde kostenlos."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Fahrradwerkstatt zum Mitmachen: Jeden Samstag reparieren Sie Ihr Rad selbst – wir helfen und haben Werkzeug."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sprachcafé im Stadtteilzentrum: Deutsch sprechen in kleinen Gruppen, dienstags 18–20 Uhr, ohne Anmeldung."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wanderclub Lindenau sucht neue Mitglieder: Touren am Sonntag, 10–15 km, Kinder willkommen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nachhilfe Mathematik für Schüler der Klassen 5–10, zu Hause oder in der Bibliothek."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gebrauchte Möbel günstig abzugeben: Tisch, Stühle, Regal – nur Abholung."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Yoga für Berufstätige: Kurs am frühen Morgen, 7–8 Uhr, vor der Arbeit."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Babysitterin mit Erfahrung, auch am Wochenende und abends, Erste-Hilfe-Kurs vorhanden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Computerkurs für Seniorinnen und Senioren: E-Mails schreiben und Videotelefonie, vormittags."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wohnung zu vermieten: 2 Zimmer, Balkon, ab 1. Dezember, Haustiere erlaubt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Svenja, 34: Ja, unbedingt. Meine Tochter kann sich ohne Handy viel besser konzentrieren. Im Unterricht braucht man es nicht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Mehmet, 17: Ich finde ein Verbot übertrieben. Wir benutzen das Handy oft für Recherchen, und das ist wichtig für später."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Clara, 45: Kinder werden heute ständig abgelenkt. Ein paar Stunden am Tag ohne Handy tun allen gut – also bitte verbieten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Jonas, 29: Verbote helfen selten. Besser ist es, wenn die Schule zeigt, wie man das Handy sinnvoll benutzt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ilse, 66: Früher ging es auch ohne. Ich bin dafür, dass die Geräte während der Schulzeit im Schrank bleiben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Tarek, 38: Als Lehrer erlebe ich, dass das Handy im Unterricht manchmal sehr nützlich ist, etwa für Wörterbücher. Ein totales Verbot lehne ich ab."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Paula, 16: Ehrlich gesagt bin ich froh, wenn das Handy weg ist. Dann gibt es in der Pause wieder echte Gespräche."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Benedikt, 52: Die Eltern müssen ihre Kinder im Notfall erreichen können. Deshalb bin ich gegen ein Verbot."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nutzungsordnung der Gemeinschaftsräume, Wohnanlage Am Lindenhof\n\n1. Der Gemeinschaftsraum kann von allen Mieterinnen und Mietern für private Feiern gebucht werden. Die Buchung erfolgt mindestens zwei Wochen vorher bei der Hausverwaltung.\n\n2. Für jede Buchung zahlen Sie eine Kaution von 50 Euro. Sie bekommen die Kaution zurück, wenn der Raum sauber und ohne Schäden übergeben wird.\n\n3. Ab 22 Uhr ist Musik nur noch leise erlaubt. Feiern müssen spätestens um Mitternacht enden.\n\n4. Den Schlüssel holen Sie am Tag der Feier ab 14 Uhr beim Hausmeister ab und geben ihn am nächsten Morgen bis 10 Uhr zurück."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage am Bahnhof: Der Regionalzug nach Bergheim fährt heute von Gleis 4 statt von Gleis 2.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht auf dem Anrufbeantworter: Hallo Ben, hier ist Lea. Das Kino um acht ist ausverkauft. Wollen wir stattdessen um halb zehn gehen? Ruf mich bitte bis sechs zurück.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiohinweis: Wegen Bauarbeiten ist die Brücke an der Hafenstraße am Wochenende gesperrt. Autofahrer fahren bitte über die Ringstraße. Busse fahren normal.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage im Kaufhaus: Liebe Kundinnen und Kunden, nur heute gibt es in der Sportabteilung im dritten Stock zwanzig Prozent auf alle Laufschuhe.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Arztpraxis: Guten Tag, Frau Weber. Ihr Termin am Donnerstag muss leider ausfallen. Bitte rufen Sie uns an, damit wir einen neuen Termin finden.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Wetterbericht: Morgen bleibt es im Norden trocken, im Süden regnet es ab Mittag. Am Abend wird es überall deutlich kühler.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Führung durch das Stadtmuseum: Willkommen! Wir beginnen im Erdgeschoss mit der Geschichte des Hafens. Die Führung dauert etwa neunzig Minuten. Fotos sind erlaubt, aber bitte ohne Blitz. Um 12 Uhr machen wir eine Pause im Museumscafé. Am Ende können Sie im Shop Postkarten kaufen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Paul: Hallo Nora! Lange nicht gesehen. Was machst du denn jetzt?\nNora: Hallo Paul! Stell dir vor, ich habe eine neue Stelle gefunden – in einer Gärtnerei am Stadtrand.\nPaul: In einer Gärtnerei? Ich dachte, du arbeitest noch im Café.\nNora: Nein, das Café habe ich im Sommer verlassen. In der Gärtnerei arbeite ich nur vormittags, weil ich nachmittags noch eine Weiterbildung mache.\nPaul: Das klingt anstrengend, aber gut. Bei mir gibt es auch Neues: Ich ziehe im Frühling um, in eine größere Wohnung.\nNora: Toll! Brauchst du Hilfe beim Umzug?\nPaul: Gern! Hast du am Wochenende Zeit?\nNora: Am Samstag ja. Am Sonntag besuche ich meine Eltern.\nPaul: Super, dann am Samstag. Und danach lade ich dich zum Essen ein.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderatorin: Guten Abend und herzlich willkommen! Unser Thema heute: das Auto in der Stadt. Bei mir im Studio sind Herr Lang, er hat ein Taxiunternehmen, und Frau Demir, Lehrerin.\nHerr Lang: Für mich ist die Sache klar. Denken Sie an Handwerker: Die müssen schweres Werkzeug mitnehmen – mit dem Fahrrad geht das einfach nicht.\nFrau Demir: Bei mir ist es anders. Ich habe kein Auto und fahre schon lange bei jedem Wetter mit dem Fahrrad zu meiner Schule.\nModeratorin: Erzählen Sie doch etwas mehr: Wie sieht das bei Ihnen im Alltag aus?\nHerr Lang: Vergessen Sie die Seniorinnen und Senioren nicht. Viele können nicht mehr weit laufen und brauchen das Auto.\nFrau Demir: Das stimmt, aber dann muss die Stadt mehr für Radfahrer tun. Wir brauchen viel mehr sichere Radwege.\nModeratorin: Eine letzte Frage noch an Sie beide: Was wünschen Sie sich für die nächsten zehn Jahre?\nHerr Lang: Für viele Menschen ohne eigenes Auto ist das Taxi oft die einzige Lösung, zum Beispiel nachts oder für den Weg zum Arzt.\nFrau Demir: Mir geht es vor allem um die Kinder. Sie müssen ohne Gefahr mit dem Rad zur Schule fahren können.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie sind letzte Woche in eine neue Wohnung umgezogen. Ihr Freund Tom konnte nicht beim Umzug helfen. Schreiben Sie Tom eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Wie ist die neue Wohnung?\n– Begründen Sie: Warum sind Sie umgezogen?\n– Machen Sie einen Vorschlag für ein Treffen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben im Online-Forum einer Zeitschrift einen Beitrag zum Thema „Homeoffice“ gelesen. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Lukas: Seit einem Jahr arbeite ich drei Tage pro Woche zu Hause. Ich spare Zeit und kann mich besser konzentrieren. Aber ich vermisse meine Kolleginnen und Kollegen. Wie sehen Sie das?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihr Deutschkurs findet am Montag statt. Sie können nicht kommen. Schreiben Sie Ihrer Kursleiterin, Frau Hansen. Entschuldigen Sie sich höflich und erklären Sie, warum Sie nicht kommen können (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir wollen doch für unsere Kollegin Eva eine Abschiedsfeier organisieren. Wann passt es dir?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gute Idee. Und wo sollen wir feiern – im Büro oder lieber in einem Restaurant?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Okay. Wer kümmert sich um das Geschenk? Ich könnte die Einladung schreiben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Eine Kollegin, Eva, verlässt nach zehn Jahren die Firma. Sie möchten gemeinsam eine kleine Abschiedsfeier planen.\n\n– Wann feiern?\n– Wo feiern?\n– Essen und Getränke?\n– Geschenk?\n– Wer lädt ein?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Mit dem Fahrrad zur Arbeit?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Sollen Kinder ein eigenes Smartphone haben?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin präsentiert das andere Thema: Sollen Kinder ein eigenes Smartphone haben? Sie meint, ab zwölf Jahren sei das sinnvoll.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Wie viel Zeit verbringen Sie selbst am Tag mit dem Smartphone?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

@@ -15,7 +15,8 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay runs one scenario) */
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice runs one scenario). A fourth scenario runs one complete attempt on
+   the synthetic PRACTICE form P1 plus rating by two raters (see runPractice). Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -85,7 +86,7 @@ async function run(viewport) {
     await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'Lesen intro');
     await click('[data-act="start"][data-module="lesen"]');
     await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
-    assert.match(await text(), /SYNTHETISCHER SYSTEMTEST/);
+    assert.match(await text(), /SYNTHETISCHE ÜBUNGSINHALTE/);
     // answer: first option of each non-example radio group, first real option of each select
     // part navigation and progress: one link per part, every target present, nothing answered yet
     const navLinks = await evaluate(`[...document.querySelectorAll('.kx-nav a')].map((a) => a.getAttribute('href'))`);
@@ -440,11 +441,178 @@ async function runDefaultAutoplayHoeren(viewport) {
 
 const results = [];
 const ONLY = process.env.KX_E2E_ONLY || '';
+/* PRACTICE (form P1, realistic synthetic content): one complete attempt as learner, then rating as two raters, in one
+   headless, muted browser. Proves: Lesen autosave; the item review is refused before and exact after submission; full
+   Hören playback; Schreiben; Sprechen recording; result + review tables; outsider and learner refused on the rater
+   screen and API; rater validation and keyboard reach; two raters → final scores on the learner's result; mobile
+   layout without horizontal scroll; no uncaught errors. Users are the dev server's local test users (cookie). */
+async function runPractice() {
+  const dev = await startDevServer({ form: 'p1' });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const text = () => evaluate('document.body.innerText');
+    const waitFor = async (src, ms = 15000, label = src) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
+    const base = `http://127.0.0.1:${dev.port}/exam/`;
+    const as = async (alias, page = '') => { await send('Page.navigate', { url: base }); await waitFor('document.readyState === "complete"'); await evaluate(`document.cookie = 'kx-dev-as=${alias}; path=/'`); await send('Page.navigate', { url: base + page }); };
+    const noHScroll = () => evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1');
+    const keys = Object.fromEntries((await dev.env.DB.prepare('SELECT item_id, key_json FROM item_keys').all()).results.map((r) => [r.item_id, JSON.parse(r.key_json).correct]));
+    const answerAll = (plan) => evaluate(`(() => { const plan = ${JSON.stringify(plan)};
+      for (const [id, v] of Object.entries(plan)) { const el = document.querySelector('[data-item="' + id + '"][value="' + v + '"]');
+        if (el) { el.click(); continue; } const sel = document.querySelector('select[data-item="' + id + '"]'); if (sel) { sel.value = v; sel.dispatchEvent(new Event('change', { bubbles: true })); } } })()`);
+    const submitModule = async () => { await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]'); };
+    const apiFetch = (method, path, body) => evaluate(`fetch(${JSON.stringify('/exam/v1' + path)}, { method: ${JSON.stringify(method)}, credentials: 'include', headers: { 'content-type': 'application/json' }${body ? `, body: ${JSON.stringify(JSON.stringify(body))}` : ''} }).then(async (r) => ({ status: r.status, json: await r.json().catch(() => null) }))`);
+    await vp(1280, 800, false);
+
+    // ---- learner: Lesen (1–10 correct, 11–20 wrong, 21–30 blank), autosave, review refused before submission ----
+    await send('Page.navigate', { url: base });
+    await waitFor(`document.querySelector('[data-act="create"]')`, 15000, 'start screen');
+    assert.match(await text(), /Übung · synthetische Inhalte/i); // eyebrow is uppercased by CSS
+    await click('[data-act="create"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`); await click('[data-act="start"][data-module="lesen"]');
+    await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
+    assert.match(await text(), /Lindenau/, 'realistic practice text is shown');
+    const attempt = (await dev.env.DB.prepare('SELECT id FROM attempts').first()).id;
+    const lesen = (await dev.env.DB.prepare("SELECT item_id, display_no FROM items_index WHERE module = 'lesen' AND is_example = 0").all()).results;
+    const wrong = (id) => { const k = keys[id]; return ['richtig', 'falsch'].includes(k) ? (k === 'richtig' ? 'falsch' : 'richtig') : ['ja', 'nein'].includes(k) ? (k === 'ja' ? 'nein' : 'ja') : k === 'a' ? 'b' : 'a'; };
+    await answerAll(Object.fromEntries(lesen.filter((r) => Number(r.display_no) <= 20).map((r) => [r.item_id, Number(r.display_no) <= 10 ? keys[r.item_id] : wrong(r.item_id)])));
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Lesen autosaved');
+    assert.equal(await evaluate(`document.querySelector('.kx-progress').textContent`), '20 von 30 beantwortet');
+    let r = await apiFetch('GET', `/attempts/${attempt}/modules/lesen/review`);
+    assert.equal(r.status, 409, 'no item review while Lesen is running'); assert.equal(/correct|explanation|evidence|transcript/.test(JSON.stringify(r.json)), false);
+    await submitModule();
+    await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Lesen submitted');
+    r = await apiFetch('GET', `/attempts/${attempt}/modules/lesen/review`);
+    assert.equal(r.status, 200, 'item review after submission'); assert.deepEqual(r.json.summary, { correct: 10, incorrect: 10, unanswered: 10, total: 30 });
+
+    // ---- Hören: full real-time plan, then all answers correct ----
+    await click('[data-act="start"][data-module="hoeren"]');
+    await waitFor(`/Verkürzte Übungszeiten – nicht die Zeiten der Prüfung/.test(document.querySelector('.kx-banner')?.textContent || '')`, 15000, 'practice timing labelled');
+    r = await apiFetch('GET', `/attempts/${attempt}/modules/hoeren/review`);
+    assert.equal(r.status, 409, 'no Hören review or script while Hören runs'); assert.equal(/Gärtnerei|Radwege|explanation/.test(JSON.stringify(r.json)), false);
+    await waitFor(`/Ende des Hörteils/.test(document.querySelector('#kx-phase')?.textContent || '')`, 480000, 'Hören finished');
+    const hoeren = (await dev.env.DB.prepare("SELECT item_id FROM items_index WHERE module = 'hoeren' AND is_example = 0").all()).results;
+    await answerAll(Object.fromEntries(hoeren.map((x) => [x.item_id, keys[x.item_id]])));
+    await waitFor(`document.querySelector('.kx-progress')?.textContent === '30 von 30 beantwortet' && document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Hören answered');
+    await submitModule();
+
+    // ---- Schreiben: three texts ----
+    await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`); await click('[data-act="start"][data-module="schreiben"]');
+    await waitFor(`document.querySelectorAll('textarea').length === 3`, 15000, 'Schreiben');
+    await evaluate(`[...document.querySelectorAll('textarea')].forEach((t, i) => { t.value = 'Lieber Tom, meine neue Wohnung ist hell und ruhig. Ich bin umgezogen, weil ich näher an der Arbeit wohnen wollte. Treffen wir uns am Samstag? Viele Grüße ' + i; t.dispatchEvent(new Event('input', { bubbles: true })); })`);
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Schreiben autosaved');
+    await submitModule();
+
+    // ---- Sprechen: consent, preparation, skip to Teil 1 (test server time), record, submit ----
+    await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`);
+    await click('#kx-consent'); await click('[data-act="start"][data-module="sprechen"]');
+    await waitFor(`/^Vorbereitung/.test(document.querySelector('#kx-phase')?.textContent || '')`, 30000, 'preparation');
+    await evaluate(`document.querySelector('input[type=radio][value="t1"]').click()`);
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'topic saved');
+    await dev.env.DB.prepare("UPDATE attempt_modules SET started_at = started_at - 118000, deadline_at = deadline_at - 118000 WHERE module = 'sprechen'").run();
+    await send('Page.reload');
+    await waitFor(`/^Teil 1: Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 40000, 'Teil 1 recording');
+    for (const t0 = Date.now(); (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks').first()).n < 1; ) { if (Date.now() - t0 > 20000) throw new Error('no recording'); await sleep(250); }
+    await submitModule();
+    await waitFor(`document.querySelector('[data-act="complete"]')`, 20000, 'complete screen'); await click('[data-act="complete"]');
+
+    // ---- result + item review tables ----
+    await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText) && document.querySelectorAll('.kx-review-items').length === 2`, 20000, 'result with reviews');
+    let res = await text();
+    assert.match(res, /Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts\./);
+    assert.match(res, /richtig 10 · falsch 10 · ohne Antwort 10/); assert.match(res, /richtig 30 · falsch 0 · ohne Antwort 0/);
+    const lesenRows = await evaluate(`[...document.querySelectorAll('.kx-review-items')[0].querySelectorAll('tbody tr:not(.kx-rv-explain)')].map((tr) => [tr.querySelector('th').textContent, tr.querySelector('.kx-rv-status').textContent])`);
+    assert.equal(lesenRows.length, 30);
+    assert.deepEqual(lesenRows.map((x) => x[0]), Array.from({ length: 30 }, (_, i) => String(i + 1)), 'numbers as in the test');
+    assert.deepEqual([lesenRows[0][1], lesenRows[14][1], lesenRows[24][1]], ['richtig', 'falsch', 'ohne Antwort']);
+    assert.equal(await evaluate(`document.querySelectorAll('.kx-review-items')[0].querySelectorAll('.kx-rv-explain').length`), 30, 'Lesen: an explanation for every item');
+    assert.equal(await evaluate(`document.querySelectorAll('.kx-review-items')[1].querySelectorAll('.kx-rv-explain q').length`), 30, 'Hören: evidence quoted for every item');
+    assert.equal(await evaluate(`document.querySelectorAll('.kx-review-items')[0].querySelector('.kx-transcripts')`), null, 'no scripts for Lesen');
+    await click('.kx-transcripts summary');
+    assert.equal(await evaluate(`document.querySelectorAll('.kx-transcripts h3').length`), 8, 'Hören scripts after submission');
+    assert.match(await text(), /Nora: Am Samstag ja\. Am Sonntag besuche ich meine Eltern\./);
+    assert.match(res, /Schreiben\s+–\s+in Bewertung/); assert.match(res, /Sprechen\s+–\s+in Bewertung/);
+    await vp(390, 844, true); await sleep(300);
+    assert.equal(await noHScroll(), true, 'result + review: no horizontal scroll on mobile'); await vp(1280, 800, false);
+
+    // ---- unauthorized: an outsider and the learner on the rater screen and the API ----
+    for (const alias of ['outsider', 'learner']) {
+      await as(alias, 'rater.html');
+      await waitFor(`/Kein Zugriff/.test(document.body.innerText)`, 10000, `${alias} refused`);
+      r = await apiFetch('POST', '/admin/ratings', { attempt_id: attempt, item_id: 'sprechen:pron', round: 1, bands: { aussprache: 'A' } });
+      assert.equal(r.status, 403, `${alias}: rating refused by the server`);
+      r = await evaluate(`fetch('/exam/v1/admin/attempts/${attempt}/recordings/1/t1', { credentials: 'include' }).then((x) => x.status)`);
+      assert.equal(r, 403, `${alias}: recording refused by the server`);
+      assert.equal(/Lieber Tom/.test(await text()), false, `${alias} sees no learner text`);
+    }
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings').first()).n, 0);
+
+    // ---- two raters ----
+    for (const [alias, round] of [['rater1', 1], ['rater2', 2]]) {
+      await as(alias, 'rater.html');
+      await waitFor(`document.querySelector('[data-act="open"][data-attempt="${attempt}"]')`, 10000, `${alias} queue`);
+      await click(`[data-act="open"][data-attempt="${attempt}"]`);
+      await waitFor(`document.querySelectorAll('form.kx-rate').length === 7`, 10000, `${alias} rating forms`);
+      assert.match(await text(), new RegExp(`Ihre Runde: ${round}`)); assert.match(await text(), /Lieber Tom/, 'the writing is shown to the rater');
+      // the recording: loaded on request through the rater's own session, playable, no autoplay
+      await click('[data-act="play"][data-part="1"][data-turn="t1"]');
+      await waitFor(`(() => { const a = document.querySelector('.kx-play-cell audio'); return a && a.src.startsWith('blob:') && a.readyState >= 1; })()`, 15000, `${alias} recording loaded`);
+      const audio = await evaluate(`(async () => { const a = document.querySelector('.kx-play-cell audio'); const b = await (await fetch(a.src)).blob(); return { size: b.size, type: b.type, paused: a.paused, autoplay: a.autoplay }; })()`);
+      assert.ok(audio.size > 0 && /^audio\/webm/.test(audio.type) && audio.paused && !audio.autoplay, `recording playable: ${JSON.stringify(audio)}`);
+      if (round === 1) {
+        // validation: an incomplete form is not sent
+        await evaluate(`document.querySelector('form.kx-rate button[type=submit]').click()`);
+        await waitFor(`/Bitte für jedes Kriterium/.test(document.querySelector('form.kx-rate .kx-rate-msg').textContent)`, 5000, 'validation message');
+        assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings').first()).n, 0, 'nothing stored for an incomplete form');
+        // keyboard: Tab reaches the band selects and the save buttons
+        await evaluate('document.activeElement && document.activeElement.blur()');
+        let reached = false;
+        for (let i = 0; i < 40 && !reached; i++) { await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 }); await send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 }); reached = await evaluate(`document.activeElement && document.activeElement.matches('form.kx-rate select')`); }
+        assert.ok(reached, 'band selects are reachable by keyboard');
+      }
+      for (let i = 0; i < 7; i++) {
+        await evaluate(`(() => { const f = [...document.querySelectorAll('form.kx-rate')].find((x) => !x.querySelector('button[type=submit]').disabled);
+          f.querySelectorAll('select').forEach((s) => { s.value = 'B'; }); f.querySelector('button[type=submit]').click(); })()`);
+        await waitFor(`/Gespeichert: [\\d,]+ Punkte \\(Runde ${round}\\)/.test(document.body.innerText) && document.querySelectorAll('form.kx-rate button[type=submit]:not([disabled])').length === ${6 - i}`, 10000, `${alias} saved ${i + 1}`);
+      }
+      assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings WHERE round = ?1').bind(round).first()).n, 7);
+      await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'rater screen: no horizontal scroll on mobile'); await vp(1280, 800, false);
+    }
+    await as('rater2', 'rater.html'); await waitFor(`!/data-attempt="${attempt}"/.test(document.body.innerHTML) && /Keine Versuche warten/.test(document.body.innerText)`, 10000, 'queue empty after final');
+
+    // ---- learner: final result reflects the ratings ----
+    await as('learner', '');
+    await waitFor(`document.querySelector('[data-act="last-result"][data-attempt="${attempt}"]')`, 15000, 'last result link'); await click('[data-act="last-result"]');
+    await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText)`, 15000, 'learner result');
+    res = await text();
+    assert.equal(/in Bewertung/.test(res), false, 'nothing awaits rating any more');
+    const final = (await dev.env.DB.prepare("SELECT module, points FROM module_scores WHERE module IN ('schreiben','sprechen') AND status = 'final' ORDER BY module").all()).results;
+    assert.equal(final.length, 2);
+    for (const f of final) assert.match(res, new RegExp(`${f.module === 'schreiben' ? 'Schreiben' : 'Sprechen'}\\s+${f.points} / 100`));
+    const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    log('practice P1', 'PASS', { lesen: '10/10/10', hoeren: '30/30', ratings: 14, final: final.map((f) => `${f.module}:${f.points}`) });
+    return exceptions;
+  } finally { b.close(); dev.server.close(); }
+}
+
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'practice') { results.push({ vp: 'practice P1 (desktop + mobile checks)', uncaught: await fn() }); continue; }
   for (const vp of VIEWPORTS) results.push({ vp: vp.name + suffix, uncaught: await fn(vp) });
 }
 console.log(JSON.stringify(results));

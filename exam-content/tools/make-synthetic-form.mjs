@@ -10,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { countWords } from '../schemas/content-model.mjs';
+import { PRACTICE_FORM } from './make-practice-form.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'forms', 'synthetic', 'b1-synthetic-s0');
@@ -261,17 +262,20 @@ const files = {
 export const SYNTHETIC_FORMS = [{
   rel: 'forms/synthetic/b1-synthetic-s0',
   files: Object.fromEntries(Object.entries(files).map(([name, data]) => [name, JSON.stringify(data, null, 2) + '\n']))
-}];
+}, { rel: PRACTICE_FORM.rel, files: PRACTICE_FORM.files }];   // P1: realistic synthetic practice (tools/make-practice-form.mjs)
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const check = process.argv.includes('--check');
   let drift = false;
-  fs.mkdirSync(OUT, { recursive: true });
-  for (const [name, next] of Object.entries(SYNTHETIC_FORMS[0].files)) {
-    const p = path.join(OUT, name);
-    if (check) { if (!fs.existsSync(p) || fs.readFileSync(p, 'utf8') !== next) { drift = true; console.error('out of date:', p); } }
-    else fs.writeFileSync(p, next);
+  for (const f of SYNTHETIC_FORMS) {
+    const out = path.join(ROOT, f.rel);
+    if (!check) fs.mkdirSync(out, { recursive: true });
+    for (const [name, next] of Object.entries(f.files)) {
+      const p = path.join(out, name);
+      if (check) { if (!fs.existsSync(p) || fs.readFileSync(p, 'utf8') !== next) { drift = true; console.error('out of date:', p); } }
+      else fs.writeFileSync(p, next);
+    }
   }
   if (check && drift) process.exit(1);
-  console.log(JSON.stringify({ form: FORM_ID, tasks: tasks.length, items: items.length, assets: assets.length, check }));
+  console.log(JSON.stringify({ forms: SYNTHETIC_FORMS.map((f) => f.rel), s0: { tasks: tasks.length, items: items.length, assets: assets.length }, p1: PRACTICE_FORM.counts, check }));
 }

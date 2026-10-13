@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, header, resultPage, moduleNav, reviewPanel, esc, MODULE_LABELS } from './render.js';
+import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, esc, MODULE_LABELS } from './render.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
 import { ChunkQueue, TurnRecorder } from './recorder.js';
@@ -46,7 +46,7 @@ async function boot() {
     if (open) return resume(open.attempt_id);
     const mode = av.modes.find((m) => m.mode === 'synthetic_full' && m.available);
     if (!mode) return message('Nicht verfügbar', 'Der Prüfungsbereich ist für Ihr Konto noch nicht freigeschaltet.');
-    screen(`<main class="kx-card"><p class="kx-eyebrow">Systemtest</p><h1>Klarweg B1 Simulation</h1><p>Synthetischer Ablauf mit Prüftönen statt echter Aufgaben: Lesen, Hören, Schreiben, Sprechen. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create">Systemtest starten</button></div></main>`);
+    screen(`<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create">Übung starten</button>${av.last_completed ? `<button class="kx-btn-quiet" data-act="last-result" data-attempt="${esc(av.last_completed)}">Letztes Ergebnis ansehen</button>` : ''}</div></main>`);
   } catch (e) { fail(e); }
 }
 
@@ -80,7 +80,7 @@ async function route() {
   const a = nextAction(S.attempt);
   if (a.kind === 'start') return intro(a.module);
   if (a.kind === 'resume') return openModule(a.module);
-  if (a.kind === 'complete') return screen('<main class="kx-card"><h1>Alle Module abgegeben</h1><p>Schließen Sie den Systemtest ab, um das Ergebnis zu sehen.</p><div class="kx-actions"><button class="kx-btn" data-act="complete">Abschließen</button></div></main>');
+  if (a.kind === 'complete') return screen('<main class="kx-card"><h1>Alle Module abgegeben</h1><p>Schließen Sie die Übung ab, um das Ergebnis zu sehen.</p><div class="kx-actions"><button class="kx-btn" data-act="complete">Abschließen</button></div></main>');
   if (a.kind === 'result') return showResult();
   if (a.kind === 'wait') return message('Abgabe wird abgeschlossen', 'Ihre Abgabe ist gespeichert und wird gerade abgeschlossen.', '<button class="kx-btn" data-act="reload">Erneut prüfen</button>');
 }
@@ -404,7 +404,13 @@ async function runSprechen() {
 async function showResult() {
   clearInterval(S.hb); clearInterval(S.timer);
   const r = await api.result(S.attempt.attempt_id);
-  screen(resultPage(r.result));
+  // item review for the objectively scored modules, from the server; a module without a review simply shows none
+  const reviews = [];
+  for (const m of r.result.modules) {
+    if (!m.counts) continue;
+    try { reviews.push(itemReview(m.module, await api.review(S.attempt.attempt_id, m.module))); } catch { /* not available */ }
+  }
+  screen(resultPage(r.result) + reviews.join(''));
 }
 
 /* ---------- events ---------- */
@@ -434,6 +440,7 @@ app.addEventListener('click', async (e) => {
     if (act === 'reload') return location.reload();
     if (act === 'audio-start') { if (S.gestureResolve) S.gestureResolve(); return; }
     if (act === 'mic-retry') { await getMic(); return; }
+    if (act === 'last-result') { S.attempt = { attempt_id: b.dataset.attempt }; return showResult(); }
     if (act === 'create') { const r = await api.createAttempt({ mode: 'synthetic_full', level: 'b1', device_id: deviceId() }); S.lease = r.lease.lease_id; rememberLease(r.attempt_id, S.lease); S.attempt = r; return route(); }
     if (act === 'takeover') return resume(b.dataset.attempt || S.attempt.attempt_id, true);
     if (act === 'start') {

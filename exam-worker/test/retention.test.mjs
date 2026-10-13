@@ -114,6 +114,7 @@ test('RETENTION: a failed object delete call keeps its rows, is audit-logged as 
   assert.equal(inc.length, 1); assert.equal(JSON.parse(inc[0].detail_json).chunks_remaining, before.chunks);
   assert.equal((await audits(h.env, 'recordings_deleted')).length, 0, 'never reported as fully deleted');
   h.env.RECORDINGS.delete = del;
+  h.advance(3_600_000);   // after the first retry backoff (1 h)
   await runRetention(h.env, h.env.__clock());
   assert.deepEqual(await recordingState(s), { chunks: 0, turns: 0, objects: 0 });
   assert.equal((await audits(h.env, 'recordings_deleted')).length, 1);

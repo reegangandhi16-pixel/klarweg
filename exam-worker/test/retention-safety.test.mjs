@@ -53,6 +53,7 @@ test('SAFETY A: objects deleted but the D1 batch fails → rows briefly point at
   assert.deepEqual(await state(s), { chunks: before.chunks, turns: before.turns, objects: 0 }, 'objects are gone, rows remain (documented window)');
   assert.equal(await auditCount(h.env, 'recordings_deleted', s.attempt), 0, 'never reported as deleted');
   assert.equal(await auditCount(h.env, 'recordings_delete_failed', s.attempt), 1, 'the object deletion is on record');
+  h.advance(3_600_000);   // after the first retry backoff (1 h)
   await runRetention(h.env, h.env.__clock());
   assert.deepEqual(await state(s), GONE);
   assert.equal(await auditCount(h.env, 'recordings_deleted', s.attempt), 1);
@@ -125,6 +126,7 @@ test('SAFETY E: one attempt failing does not stop others; batches stay bounded; 
   assert.ok(calls <= 2, `storage delete calls per run: ${calls}`);
   assert.equal(await auditCount(h.env, 'recordings_deleted', bad.attempt), 0);
   h.env.RECORDINGS.delete = del;
+  h.advance(3_600_000);   // after the first retry backoff (1 h)
   await runRetention(h.env, h.env.__clock());
   assert.deepEqual(await state(bad), GONE);
   assert.equal(RETENTION_ATTEMPTS_PER_RUN, 20);

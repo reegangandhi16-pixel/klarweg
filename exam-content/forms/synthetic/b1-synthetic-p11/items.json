@@ -178,7 +178,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Beide fahren mit dem Fahrrad zur Arbeit."
+      "explanation_de": "Sanja und ihr Mann radeln jetzt beide zur Arbeit, nur bei Regen nehmen sie die Straßenbahn."
     }
   },
   {
@@ -242,7 +242,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Kinder gehen zu Fuß zur Schule."
+      "explanation_de": "Die Kinder fahren nicht mit dem Bus, sondern laufen zur Schule, was sie lieber mögen."
     }
   },
   {
@@ -505,7 +505,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Mehrere Stände bieten warmes Essen an."
+      "explanation_de": "Neben Obst und Gemüse verkaufen einige Stände warme Gerichte, man kann dort also essen."
     }
   },
   {
@@ -576,7 +576,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Markt ist für Berufstätige, die morgens keine Zeit haben."
+      "explanation_de": "Wer morgens arbeitet, hat keine Zeit für den Wochenmarkt, für diese Berufstätigen ist der Abendmarkt gedacht."
     }
   },
   {
@@ -647,7 +647,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Markt findet auch bei schlechtem Wetter statt."
+      "explanation_de": "Auch bei Regen fällt der Abendmarkt nicht aus und zieht nicht in eine Halle."
     }
   },
   {
@@ -779,7 +779,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Man bestellt das Taxi mindestens 30 Minuten vorher."
+      "explanation_de": "30 Minuten sind eine halbe Stunde, so früh muss man das Ruftaxi mindestens bestellen."
     }
   },
   {
@@ -850,7 +850,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Man zahlt nur den normalen Bus-Preis."
+      "explanation_de": "Das Ruftaxi kostet nicht mehr als ein normales Busticket."
     }
   },
   {
@@ -1311,7 +1311,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "In der Schreibwerkstatt (f) schreibt man gemeinsam Geschichten."
+      "explanation_de": "In der Schreibwerkstatt (f) arbeiten mehrere Leute zusammen an Texten, so kann man sie gemeinsam besprechen."
     }
   },
   {
@@ -1511,7 +1511,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Physiotherapie (b) macht Hausbesuche."
+      "explanation_de": "Wer nach einer Knie-Operation nicht in eine Praxis kann, braucht Physiotherapie zu Hause wie in Anzeige b."
     }
   },
   {
@@ -1611,7 +1611,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Bei der Kräuterwanderung (h) lernt man Pflanzen erkennen."
+      "explanation_de": "Bei der Kräuterwanderung (h) lernt man, essbare Pflanzen in der Natur zu erkennen."
     }
   },
   {
@@ -2144,12 +2144,12 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p11-l4-c6",
-        "start": 129,
-        "end": 165
+        "start": 130,
+        "end": 180
       }
     ],
     "feedback": {
-      "explanation_de": "Hamid will Noten nicht ganz abschaffen."
+      "explanation_de": "Hamid hält Noten für die Empfehlung zur weiterführenden Schule für nötig, Berichte sind für ihn nur eine Ergänzung."
     }
   },
   {
@@ -2284,7 +2284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 1: Ohne Reservierung darf man grillen, wenn der Platz frei ist."
+      "explanation_de": "Ohne Reservierung ist Grillen nicht verboten, man darf aber nur einen freien Platz nutzen."
     }
   },
   {
@@ -2355,7 +2355,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 2: Bei großer Trockenheit kann die Stadt das Grillen verbieten."
+      "explanation_de": "Lange Trockenheit kann nach Regel 2 zu einem kompletten Grillverbot durch die Stadt führen."
     }
   },
   {
@@ -2426,7 +2426,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 3: Eigene Grills sind auf der Wiese nicht erlaubt."
+      "explanation_de": "Nach Regel 3 sind auf der Wiese nur die eingebauten Grills zugelassen, kein mitgebrachter."
     }
   },
   {
@@ -2497,7 +2497,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 4: Heiße Asche gehört in die roten Metallbehälter."
+      "explanation_de": "Die roten Metallbehälter neben den Grillplätzen sind speziell für heiße Asche da."
     }
   },
   {
@@ -2747,7 +2747,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Uhrzeiten bleiben gleich."
+      "explanation_de": "Nur die Person wechselt, ein Kollege übernimmt, an den Uhrzeiten ändert sich nichts."
     }
   },
   {
@@ -2811,7 +2811,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Stadt sucht Rettungsschwimmer für die Freibäder."
+      "explanation_de": "Rettungsschwimmer sind Personal für die Freibäder, und die Stadt sucht sie für den Sommer."
     }
   },
   {
@@ -3152,7 +3152,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Malte hat einen Tisch im Restaurant reserviert."
+      "explanation_de": "Malte hat für Sonntag einen Tisch in einem Restaurant bestellt, gefeiert wird also dort."
     }
   },
   {
@@ -3216,7 +3216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Impftermine gibt es nur noch online."
+      "explanation_de": "Telefonisch gibt es keine Impftermine mehr, sie werden nur über die Internetseite vergeben."
     }
   },
   {
@@ -3287,7 +3287,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "In dringenden Fällen bleibt man in der Leitung."
+      "explanation_de": "„In der Leitung bleiben“ heißt, dass man am Telefon wartet, bis jemand antwortet."
     }
   },
   {
@@ -3358,7 +3358,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Rathaus wurde vor zehn Jahren renoviert."
+      "explanation_de": "Das Rathaus ist zwar alt, wurde aber vor zehn Jahren erneuert."
     }
   },
   {
@@ -3429,7 +3429,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Führung beginnt im Ratssaal."
+      "explanation_de": "Die Führung startet im Ratssaal, der Turm folgt danach."
     }
   },
   {
@@ -3571,7 +3571,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Sitzungen sind öffentlich."
+      "explanation_de": "„Öffentlich“ bedeutet, dass alle Bürger zu den Sitzungen kommen dürfen."
     }
   },
   {
@@ -3706,7 +3706,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Bruno gehört der Nachbarin von Ines."
+      "explanation_de": "Bruno gehört nicht Ines, sondern ihrer Nachbarin, die im Krankenhaus liegt."
     }
   },
   {
@@ -3770,7 +3770,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Ines geht zweimal am Tag mit Bruno raus."
+      "explanation_de": "Ines führt Bruno zweimal pro Tag aus, solange die Nachbarin im Krankenhaus ist."
     }
   },
   {
@@ -3834,7 +3834,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Ihr Freund hat eine Allergie."
+      "explanation_de": "Ines wollte selbst einen Hund, verzichtet aber wegen der Allergie ihres Freundes darauf."
     }
   },
   {
@@ -3898,7 +3898,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Bruno ist nicht in Ines’ Wohnung."
+      "explanation_de": "Bruno lebt nicht bei Ines, sie holt ihn nur zum Spazierengehen ab."
     }
   },
   {
@@ -3962,7 +3962,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Ines passt noch etwa eine Woche auf."
+      "explanation_de": "Ines muss nur noch rund eine Woche aufpassen, dann kehrt die Nachbarin heim."
     }
   },
   {
@@ -4026,7 +4026,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Vera hat nachmittags oft Zeit."
+      "explanation_de": "Vera bietet ihre Hilfe an, weil sie am Nachmittag häufig frei hat."
     }
   },
   {
@@ -4216,7 +4216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Huber sagt, dass Nachtarbeit sehr anstrengend ist."
+      "explanation_de": "Frau Huber findet Nachtschichten sehr belastend, gerade für Kolleginnen mit Kindern."
     }
   },
   {
@@ -4284,7 +4284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Demir kommt erst um Mitternacht nach Hause."
+      "explanation_de": "Herr Demir arbeitet abends im Restaurant und kommt erst gegen Mitternacht heim, dann haben normale Läden zu."
     }
   },
   {
@@ -4352,7 +4352,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Moderator fragt, wie viele Kunden nachts kommen."
+      "explanation_de": "Der Moderator fragt, ob nachts wirklich genug Kundschaft kommt."
     }
   },
   {
@@ -4420,7 +4420,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Demir nennt Pflegekräfte, Taxifahrer und Leute nach der Spätschicht."
+      "explanation_de": "Herr Demir zählt Pflegekräfte, Taxifahrer und Leute nach der Spätschicht auf, also Menschen, die in Schichten arbeiten."
     }
   },
   {
@@ -4488,7 +4488,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Huber sagt, dass manche Märkte nachts ohne Personal sind."
+      "explanation_de": "Frau Huber weist darauf hin, dass manche Läden nachts nur Kassenautomaten haben und dann niemand dort arbeitet."
     }
   },
   {
@@ -4556,7 +4556,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Moderator erwähnt die Nachricht einer Hörerin."
+      "explanation_de": "Der Moderator leitet zur schriftlichen Nachricht einer Hörerin über."
     }
   },
   {
@@ -4624,7 +4624,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Huber fordert mehr Lohn für Nachtarbeit."
+      "explanation_de": "Frau Huber akzeptiert Nachtarbeit höchstens mit einem deutlich höheren Lohn."
     }
   },
   {

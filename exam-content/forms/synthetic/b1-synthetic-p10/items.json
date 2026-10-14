@@ -114,7 +114,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Henriks Frau arbeitet wieder."
+      "explanation_de": "Henriks Frau geht wieder arbeiten, während Henrik allein mit Emil zu Hause bleibt."
     }
   },
   {
@@ -242,7 +242,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Emil schläft nachts noch nicht durch."
+      "explanation_de": "Henrik schreibt, dass das Baby in der Nacht immer wieder wach wird, also nicht ohne Pause schläft."
     }
   },
   {
@@ -370,7 +370,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Henriks Chef hat die Elternzeit sofort akzeptiert."
+      "explanation_de": "Nur die Firma war überrascht, Henriks Chef hat die lange Elternzeit dagegen sofort akzeptiert."
     }
   },
   {
@@ -505,7 +505,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Es gibt einen Gemeinschaftsraum und einen Garten für alle."
+      "explanation_de": "Jede Partei hat eine eigene Wohnung und Küche, gemeinsam gibt es nur einen großen Raum und den Garten."
     }
   },
   {
@@ -576,7 +576,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Mieten sind günstiger als in der Umgebung."
+      "explanation_de": "„Günstiger als in der Umgebung“ bedeutet niedrigere Mieten als in der Nähe."
     }
   },
   {
@@ -647,7 +647,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Für 24 Wohnungen gab es über 300 Bewerbungen."
+      "explanation_de": "Über 300 Bewerbungen für 24 Wohnungen zeigen, dass sich sehr viele Menschen beworben haben."
     }
   },
   {
@@ -779,7 +779,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Stadt verleiht die Lastenräder kostenlos."
+      "explanation_de": "Die Stadt verlangt kein Geld für die Lastenräder, man leiht sie also gratis."
     }
   },
   {
@@ -850,7 +850,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Man holt die Räder im Rathaus oder in der Bücherei ab."
+      "explanation_de": "Nach der Reservierung im Internet holt man das Rad im Rathaus oder in der Bücherei, nicht am Bahnhof."
     }
   },
   {
@@ -921,7 +921,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Besonders junge Familien nutzen das Angebot."
+      "explanation_de": "Vor allem junge Familien leihen die Räder, um damit ihre Kinder zu transportieren."
     }
   },
   {
@@ -1211,7 +1211,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Hundeschule (f) trainiert junge Hunde."
+      "explanation_de": "Ein junger Hund, der nicht gehorcht, braucht Training, und die Hundeschule (f) bietet das in kleinen Gruppen an."
     }
   },
   {
@@ -1411,7 +1411,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Tischlerei (j) repariert alte Stühle."
+      "explanation_de": "Den Stuhl der Großmutter will man reparieren lassen statt wegwerfen, das macht die Tischlerei (j)."
     }
   },
   {
@@ -1511,7 +1511,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Buchhaltungskurs (e) ist für Selbstständige."
+      "explanation_de": "Rechnungen organisieren ist Buchhaltung, und der Online-Kurs (e) richtet sich an Selbstständige."
     }
   },
   {
@@ -2021,7 +2021,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Jens meint, dass Großeltern durch die Enkel fit bleiben."
+      "explanation_de": "Jens findet, dass Enkel ihre Großeltern fit halten, deshalb unterstützt er das regelmäßige Aufpassen."
     }
   },
   {
@@ -2213,7 +2213,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Sascha findet, dass man von Großeltern nicht zu viel erwarten sollte."
+      "explanation_de": "Saschas Schwiegereltern sind über achtzig, für sie wäre das zu anstrengend, deshalb ist er dagegen."
     }
   },
   {
@@ -2284,7 +2284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 1: Die Maschinen funktionieren nur mit der Kundenkarte."
+      "explanation_de": "Münzen werden an den Maschinen nicht angenommen, bezahlt wird nur mit der aufgeladenen Kundenkarte."
     }
   },
   {
@@ -2426,7 +2426,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 3: Nach 15 Minuten dürfen andere Kunden die Wäsche in einen Korb legen."
+      "explanation_de": "Wer nicht spätestens 15 Minuten nach Programmende kommt, findet die Wäsche vielleicht in einem Korb."
     }
   },
   {
@@ -2497,7 +2497,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 4: Die letzte Wäsche startet um 20.30 Uhr."
+      "explanation_de": "Um 20.30 Uhr muss die letzte Maschine laufen, damit sie bis zur Schließung um 22 Uhr fertig ist."
     }
   },
   {
@@ -2882,7 +2882,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Karten gibt es nur im Vorverkauf in der Buchhandlung."
+      "explanation_de": "Eine Abendkasse oder Online-Karten gibt es nicht, man kauft die Karten vorher direkt in der Buchhandlung."
     }
   },
   {
@@ -3017,7 +3017,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Man braucht eine Fahrradkarte."
+      "explanation_de": "Ohne eigene Karte für das Rad darf man das Fahrrad nicht in den Fahrradwagen stellen."
     }
   },
   {
@@ -3152,7 +3152,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Simone wartet am Seiteneingang."
+      "explanation_de": "Simone hat keinen Schlüssel und wartet deshalb am Nebeneingang, bis Jan sie hineinlässt."
     }
   },
   {
@@ -3216,7 +3216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Kinder spielen dort bis zu einer Stunde kostenlos."
+      "explanation_de": "Im Kinderparadies dürfen Kinder bis zu sechzig Minuten spielen, ohne dass die Eltern bezahlen."
     }
   },
   {
@@ -3287,7 +3287,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Kinderparadies ist für Kinder ab drei Jahren."
+      "explanation_de": "Das Kinderparadies nimmt Kinder ab drei Jahren auf, jüngere dürfen nicht hinein."
     }
   },
   {
@@ -3358,7 +3358,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Kurs hat sechs Abende, immer dienstags."
+      "explanation_de": "Der Töpferkurs trifft sich sechsmal, jedes Mal dienstags, also an sechs Dienstagen."
     }
   },
   {
@@ -3429,7 +3429,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Heute macht man eine Schale mit der Hand."
+      "explanation_de": "Am ersten Abend formen die Teilnehmer die Schale nur mit den Händen, ohne Scheibe."
     }
   },
   {
@@ -3500,7 +3500,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Scheibe benutzt man ab dem dritten Abend."
+      "explanation_de": "Die Töpferscheibe kommt erst ab dem dritten Treffen zum Einsatz, nicht heute."
     }
   },
   {
@@ -3571,7 +3571,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Stücke müssen zwei Wochen trocknen."
+      "explanation_de": "Bevor der Ton gebrannt wird, muss er zwei Wochen lang trocknen."
     }
   },
   {
@@ -3706,7 +3706,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Hanna fährt im Februar eine Woche nach Österreich."
+      "explanation_de": "Hanna fährt im Februar für eine Woche zum Skifahren nach Österreich."
     }
   },
   {
@@ -3962,7 +3962,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Felix bleibt im Winter zu Hause."
+      "explanation_de": "Felix verreist im Winter nicht, sein Urlaub ist erst im Sommer."
     }
   },
   {
@@ -4026,7 +4026,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Felix fährt im Sommer drei Wochen ans Meer."
+      "explanation_de": "Statt Skiurlaub plant Felix drei Wochen Sommerurlaub am Meer mit Hund."
     }
   },
   {
@@ -4216,7 +4216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Becker sagt, dass Eltern schon in der dritten Klasse kommen."
+      "explanation_de": "Die dritte Klasse gehört zur Grundschule, und schon dann kommen Eltern zu Frau Becker."
     }
   },
   {
@@ -4420,7 +4420,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Becker sagt, dass sich viele Familien das nicht leisten können."
+      "explanation_de": "Mit 25 Euro pro Stunde ist Nachhilfe für viele Familien zu teuer, sagt Frau Becker."
     }
   },
   {
@@ -4556,7 +4556,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Moderator kündigt die Nachricht einer Hörerin an."
+      "explanation_de": "Der Moderator kündigt an, dass er die Nachricht einer Hörerin gleich vorliest."
     }
   },
   {
@@ -4624,7 +4624,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Becker sagt, dass Kinder jemanden brauchen, der Zeit hat."
+      "explanation_de": "Frau Becker meint, dass Kinder oft keinen Fachunterricht, sondern einfach Zuwendung brauchen."
     }
   },
   {
@@ -4692,7 +4692,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Ulrich sagt, dass viele zu Hause keinen ruhigen Platz haben."
+      "explanation_de": "Herr Ulrich weist darauf hin, dass viele Kinder daheim keinen stillen Lernplatz haben."
     }
   },
   {

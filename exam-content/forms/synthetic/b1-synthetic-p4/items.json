@@ -127,7 +127,7 @@
     "task_id": "tsk:b1:p4-l1",
     "is_example": false,
     "interaction": "binary_choice",
-    "stem": "2. Der Bauernhof liegt weit von Anas Wohnort entfernt.",
+    "stem": "2. Für die Fahrt zum Bauernhof brauchte die Familie einen ganzen Tag.",
     "options": [
       {
         "option_id": "richtig",
@@ -178,7 +178,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Hof ist nur zwei Stunden von Anas Wohnort entfernt."
+      "explanation_de": "Ana betont, dass der Hof nur zwei Autostunden entfernt liegt, für die Fahrt reichte also ein kleiner Teil des Tages."
     }
   },
   {
@@ -370,7 +370,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Es hat fast jeden Tag geregnet."
+      "explanation_de": "Ana schreibt von Regen an fast jedem Tag, von schönem Wetter kann also keine Rede sein."
     }
   },
   {
@@ -647,7 +647,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Einige Geschäftsleute fürchten, dass Parkplätze wegfallen."
+      "explanation_de": "„Sorge, dass Parkplätze wegfallen“ heißt, dass die Geschäftsleute weniger Parkplätze befürchten."
     }
   },
   {
@@ -779,7 +779,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Idee hatte die Leiterin der Kita."
+      "explanation_de": "Nicht ein Großvater oder eine Bibliothekarin, sondern die Kita-Leiterin hatte die Idee, weil sie selbst gern mit ihrer Oma gelesen hat."
     }
   },
   {
@@ -850,7 +850,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Kinder dürfen die Bücher selbst aussuchen."
+      "explanation_de": "Die Kinder bekommen keine Bücher vorgegeben, sie suchen sie selbst aus."
     }
   },
   {
@@ -2284,7 +2284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 1: Man hinterlegt einen Ausweis oder Reisepass."
+      "explanation_de": "„Hinterlegen“ bedeutet, dass man den Ausweis beim Verleih lässt und ihn bei der Rückgabe zurückbekommt."
     }
   },
   {
@@ -2355,7 +2355,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 2: Nach 19 Uhr zahlt man einen weiteren Tag."
+      "explanation_de": "Die Räder müssen bis 19 Uhr zurück sein, wer um 20 Uhr kommt, zahlt nach Regel 2 einen weiteren Tag."
     }
   },
   {
@@ -2426,7 +2426,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 3: Kleine Reparaturen wie einen Platten übernimmt der Verleih."
+      "explanation_de": "Ein platter Reifen zählt zu den kleinen Reparaturen, und die macht nach Regel 3 der Verleih."
     }
   },
   {
@@ -2497,7 +2497,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 4: Kindersitze reserviert man mindestens einen Tag vorher."
+      "explanation_de": "Kindersitze sind zwar kostenlos, müssen nach Regel 4 aber spätestens am Vortag bestellt werden."
     }
   },
   {
@@ -2747,7 +2747,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Heller bittet um einen kleinen Kuchen."
+      "explanation_de": "Frau Heller bittet Frau Neumann, für den Elternabend nach Möglichkeit einen kleinen Kuchen zu backen oder zu kaufen."
     }
   },
   {
@@ -2811,7 +2811,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Nur Privatleute dürfen dort verkaufen."
+      "explanation_de": "Der Radiotipp erlaubt das Verkaufen ausdrücklich nur Privatleuten, Händler und Läden sind ausgeschlossen."
     }
   },
   {
@@ -2882,7 +2882,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Parkhaus ist am Sonntag kostenlos."
+      "explanation_de": "Am Tag des Flohmarkts muss man im Parkhaus neben der Markthalle nichts bezahlen."
     }
   },
   {
@@ -2946,7 +2946,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Pause dauert heute zwanzig Minuten."
+      "explanation_de": "Die Ansage nennt für die heutige Pause genau zwanzig Minuten, die Aussage stimmt."
     }
   },
   {
@@ -3017,7 +3017,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Getränke gibt es im Foyer im ersten Stock."
+      "explanation_de": "Getränke verkauft das Theater im Foyer, und dieses liegt im ersten Stock, nicht im Saal."
     }
   },
   {
@@ -3081,7 +3081,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Paket konnte heute nicht zugestellt werden."
+      "explanation_de": "Der Paketdienst konnte Herrn Adeyemi heute nicht antreffen, er hat das Paket also noch nicht."
     }
   },
   {
@@ -3152,7 +3152,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Paket liegt bei der Nachbarin Frau Kowalski."
+      "explanation_de": "Das Paket wurde bei Frau Kowalski im Erdgeschoss abgegeben, das ist eine Nachbarin."
     }
   },
   {
@@ -3216,7 +3216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Zwischen Rathaus und Zoo fahren Ersatzbusse."
+      "explanation_de": "Ersatzbusse sind Busse, die statt der Straßenbahn zwischen Rathaus und Zoo fahren."
     }
   },
   {
@@ -3358,7 +3358,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Neue Freiwillige beginnen immer mit den Hunden."
+      "explanation_de": "Mit den Katzen arbeiten Freiwillige erst später, der Anfang ist immer bei den Hunden."
     }
   },
   {
@@ -3500,7 +3500,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Man soll den Tieren kein eigenes Futter geben."
+      "explanation_de": "Die Bitte, kein eigenes Futter zu geben, ist ein Verbot, also darf man es nicht."
     }
   },
   {
@@ -3571,7 +3571,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Am Wochenende ist das Büro nur bis 14 Uhr besetzt."
+      "explanation_de": "„Nur bis 14 Uhr besetzt“ heißt, dass am Wochenende nach 14 Uhr niemand mehr im Büro ist."
     }
   },
   {
@@ -3642,7 +3642,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Einmal im Monat gibt es einen Abend mit Informationen über Tierpflege."
+      "explanation_de": "Der monatliche Abend über Tierpflege ist ein Informationsabend, kein Fest und kein Tierarztbesuch."
     }
   },
   {
@@ -3706,7 +3706,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Aylin hat nächste Woche ihre Statistikprüfung."
+      "explanation_de": "Aylin lernt so viel, weil ihre Statistikprüfung schon in der nächsten Woche ist."
     }
   },
   {
@@ -3770,7 +3770,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Moritz hatte Statistik schon letztes Semester."
+      "explanation_de": "Moritz kennt das Fach bereits aus dem letzten Semester und bietet deshalb seine Hilfe an."
     }
   },
   {
@@ -3834,7 +3834,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Aylin arbeitet am Donnerstag bis sechs im Café."
+      "explanation_de": "Aylin kann erst nach ihrer Arbeit im Café lernen, die am Donnerstag um sechs endet."
     }
   },
   {
@@ -3898,7 +3898,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Sie treffen sich um sieben in der Bibliothek."
+      "explanation_de": "Das Café ist Aylins Arbeitsplatz, getroffen wird sich aber um sieben in der Bibliothek."
     }
   },
   {
@@ -3962,7 +3962,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Moritz sagt, dass die Bibliothek bis zehn Uhr offen ist."
+      "explanation_de": "Moritz schlägt die Bibliothek vor, weil sie abends bis zehn Uhr offen hat."
     }
   },
   {
@@ -4090,7 +4090,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Nachhilfe ist besser bezahlt."
+      "explanation_de": "Moritz hat zur Nachhilfe gewechselt, weil er dort mehr verdient, nicht weniger."
     }
   },
   {
@@ -4216,7 +4216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Roth sagt, dass sie ohne Spenden viele Familien nicht versorgen könnten."
+      "explanation_de": "Frau Roth erklärt, dass ihre Lebensmittelausgabe ohne Spenden viele Familien nicht versorgen könnte."
     }
   },
   {
@@ -4284,7 +4284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Kaya meint, dass ein Gesetz nur mehr Papierkram bringt."
+      "explanation_de": "„Papierkram“ ist zusätzliche Büroarbeit, und dafür haben kleine Läden laut Herrn Kaya keine Zeit."
     }
   },
   {
@@ -4352,7 +4352,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Moderator fragt nach Produkten nach dem Datum."
+      "explanation_de": "Der Moderator möchte wissen, was mit Lebensmitteln nach dem Haltbarkeitsdatum geschieht."
     }
   },
   {
@@ -4420,7 +4420,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Kaya verkauft solche Produkte billiger in einer extra Kiste."
+      "explanation_de": "Herr Kaya bietet Waren nach dem Datum günstiger in einer eigenen Kiste an."
     }
   },
   {
@@ -4556,7 +4556,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Moderator kündigt eine Frage aus dem Publikum an."
+      "explanation_de": "Der Moderator kündigt an, dass er gleich eine Frage aus dem Publikum weitergibt."
     }
   },
   {
@@ -4624,7 +4624,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Roth wünscht sich, dass Supermärkte einen Kühlwagen bezahlen."
+      "explanation_de": "Ein Kühlwagen ist ein Kühlfahrzeug, und Frau Roth möchte, dass die Supermärkte es bezahlen."
     }
   },
   {
@@ -4692,7 +4692,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Kaya sagt, dass auch die Kunden verantwortlich sind."
+      "explanation_de": "Wer nur perfekte Äpfel kauft, trägt nach Herrn Kaya Mitverantwortung, also auch der Kunde."
     }
   },
   {

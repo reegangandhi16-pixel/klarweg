@@ -19,12 +19,12 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
         + 'Familie Herzog',
       example: ['Familie Herzog hatte ein Jahr lang einen Austauschschüler.', 'richtig'],
       items: [
-        ['Lucas konnte am Anfang schon sehr gut Deutsch.', 'falsch', 'Er hatte vorher nur ein halbes Jahr Deutsch gelernt.', 'Lucas hatte nur ein halbes Jahr Deutsch gelernt.'],
+        ['Lucas konnte am Anfang schon sehr gut Deutsch.', 'falsch', 'Er hatte vorher nur ein halbes Jahr Deutsch gelernt.', 'Nach nur einem halben Jahr Deutschunterricht konnte Lucas sich anfangs kaum verständigen.'],
         ['Lucas hatte am Anfang Heimweh.', 'richtig', 'weil er seine Familie vermisst hat', 'Lucas war abends traurig, weil er seine Familie vermisst hat.'],
-        ['Im Fußballverein hat Lucas Freunde gefunden.', 'richtig', 'hat dort schnell Freunde gefunden', 'Im Fußballverein hat Lucas schnell Freunde gefunden.'],
-        ['Tim hat sich von Anfang an über Lucas gefreut.', 'falsch', 'war zuerst eifersüchtig', 'Tim war zuerst eifersüchtig.'],
-        ['Die Familie hat jeden Sonntag für Lucas gekocht.', 'falsch', 'Lucas hat uns jeden Sonntag ein brasilianisches Gericht gekocht.', 'Lucas hat sonntags für die Familie gekocht.'],
-        ['Tim möchte Lucas in Brasilien besuchen.', 'richtig', 'Tim möchte ihn nächsten Sommer in São Paulo besuchen.', 'Tim will Lucas nächsten Sommer besuchen.']
+        ['Im Fußballverein hat Lucas Freunde gefunden.', 'richtig', 'hat dort schnell Freunde gefunden', 'Im Fußballverein lernte Lucas nach Weihnachten schnell neue Freunde kennen.'],
+        ['Tim hat sich von Anfang an über Lucas gefreut.', 'falsch', 'war zuerst eifersüchtig', 'Tim war am Anfang eifersüchtig auf Lucas, erst später wurden sie wie Brüder.'],
+        ['Die Familie hat jeden Sonntag für Lucas gekocht.', 'falsch', 'Lucas hat uns jeden Sonntag ein brasilianisches Gericht gekocht.', 'Umgekehrt: Lucas hat jeden Sonntag für die Familie Herzog brasilianisch gekocht.'],
+        ['Tim möchte Lucas in Brasilien besuchen.', 'richtig', 'Tim möchte ihn nächsten Sommer in São Paulo besuchen.', 'São Paulo liegt in Brasilien, und Tim plant dort nächsten Sommer einen Besuch.']
       ]
     },
     t2: [
@@ -35,9 +35,9 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
           + 'Viele Kunden freuen sich nicht nur über die Bücher, sondern auch über ein kurzes Gespräch an der Tür.',
         example: ['Die Bücherei bringt Bücher …', ['nach Hause.', 'in Schulen.', 'in Krankenhäuser.'], 'a'],
         items: [
-          ['Die Bücher bringen …', ['Mitarbeiter mit dem Auto.', 'Freiwillige mit dem Fahrrad.', 'Postboten.'], 'b', 'Ehrenamtliche Helferinnen und Helfer fahren einmal im Monat mit dem Fahrrad', 'Ehrenamtliche bringen die Bücher mit dem Fahrrad.'],
-          ['Die Bücher suchen die Leser …', ['telefonisch aus.', 'im Internet aus.', 'gar nicht selbst aus.'], 'a', 'Die Leser wählen ihre Bücher am Telefon aus', 'Die Leser wählen ihre Bücher am Telefon aus.'],
-          ['Für den Service braucht man …', ['eine Bescheinigung vom Arzt.', 'eine Gebühr.', 'einen Leseausweis.'], 'c', 'nur einen Leseausweis braucht man', 'Man braucht nur einen Leseausweis.']
+          ['Die Bücher bringen …', ['Mitarbeiter mit dem Auto.', 'Freiwillige mit dem Fahrrad.', 'Postboten.'], 'b', 'Ehrenamtliche Helferinnen und Helfer fahren einmal im Monat mit dem Fahrrad', 'Ehrenamtliche Helfer sind Freiwillige, und sie bringen die Bücher einmal im Monat mit dem Rad.'],
+          ['Die Bücher suchen die Leser …', ['telefonisch aus.', 'im Internet aus.', 'gar nicht selbst aus.'], 'a', 'Die Leser wählen ihre Bücher am Telefon aus', 'Die Leser müssen nicht in die Bücherei kommen, sie bestellen ihre Bücher per Telefon.'],
+          ['Für den Service braucht man …', ['eine Bescheinigung vom Arzt.', 'eine Gebühr.', 'einen Leseausweis.'], 'c', 'nur einen Leseausweis braucht man', 'Der Lieferdienst kostet nichts, Voraussetzung ist nur ein Leseausweis.']
         ]
       },
       {
@@ -45,9 +45,9 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
           + 'Die Kunden bringen ihre eigenen Flaschen mit oder kaufen eine Glasflasche am Automaten. Ein Liter kostet 1,50 Euro. '
           + 'Für die Familie Kerner lohnt sich der Verkauf, weil die Molkerei zu wenig für die Milch bezahlt. Am Wochenende bilden sich manchmal sogar Schlangen vor dem Automaten.',
         items: [
-          ['Die Milch …', ['kommt aus einer Molkerei.', 'kann man nur morgens kaufen.', 'kann man zu jeder Zeit kaufen.'], 'c', 'Dort gibt es rund um die Uhr frische Milch', 'Die Milch gibt es rund um die Uhr.'],
-          ['Wer keine eigene Flasche hat, …', ['kann am Automaten eine kaufen.', 'bekommt keine Milch.', 'bekommt eine Flasche geschenkt.'], 'a', 'kaufen eine Glasflasche am Automaten', 'Man kann am Automaten eine Glasflasche kaufen.'],
-          ['Die Familie verkauft die Milch selbst, weil …', ['die Kunden es wollten.', 'die Molkerei zu wenig bezahlt.', 'der Hof neu ist.'], 'b', 'weil die Molkerei zu wenig für die Milch bezahlt', 'Die Molkerei bezahlt zu wenig für die Milch.']
+          ['Die Milch …', ['kommt aus einer Molkerei.', 'kann man nur morgens kaufen.', 'kann man zu jeder Zeit kaufen.'], 'c', 'Dort gibt es rund um die Uhr frische Milch', '„Rund um die Uhr“ bedeutet zu jeder Tages- und Nachtzeit.'],
+          ['Wer keine eigene Flasche hat, …', ['kann am Automaten eine kaufen.', 'bekommt keine Milch.', 'bekommt eine Flasche geschenkt.'], 'a', 'kaufen eine Glasflasche am Automaten', 'Wer ohne eigene Flasche kommt, kann am Automaten eine Glasflasche dazukaufen.'],
+          ['Die Familie verkauft die Milch selbst, weil …', ['die Kunden es wollten.', 'die Molkerei zu wenig bezahlt.', 'der Hof neu ist.'], 'b', 'weil die Molkerei zu wenig für die Milch bezahlt', 'Familie Kerner verkauft direkt, weil sie von der Molkerei zu wenig Geld bekommt.']
         ]
       }
     ],
@@ -66,12 +66,12 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
       ],
       example: ['Sie kochen sehr gern und möchten Ihr Können zeigen.', 'a'],
       situations: [
-        ['Ihr Sohn interessiert sich für Planeten und Sterne.', 'b', 'Sterne beobachten in der Sternwarte', 'In der Sternwarte (b) beobachten Kinder die Sterne.'],
+        ['Ihr Sohn interessiert sich für Planeten und Sterne.', 'b', 'Sterne beobachten in der Sternwarte', 'Planeten und Sterne beobachtet man in der Sternwarte, und Anzeige b ist ein Angebot für Kinder.'],
         ['Sie haben eine große Wohnung, aber die Kinder sind ausgezogen, und Sie wollen etwas Kleineres.', 'c', 'Wir suchen eine größere Wohnung und bieten 2 Zimmer', 'Beim Wohnungstausch (c) bietet jemand eine kleinere Wohnung an.'],
-        ['Sie gehen abends oft allein nach Hause und möchten sich sicherer fühlen.', 'd', 'Selbstverteidigung für Frauen', 'Der Selbstverteidigungskurs (d) ist für Frauen.'],
+        ['Sie gehen abends oft allein nach Hause und möchten sich sicherer fühlen.', 'd', 'Selbstverteidigung für Frauen', 'Ein Kurs in Selbstverteidigung (d) hilft Frauen, sich auf dem Heimweg sicherer zu fühlen.'],
         ['Bevor es kalt wird, möchten Sie Ihr Auto prüfen lassen.', 'e', 'Wintercheck für 29 Euro', 'Die Werkstatt (e) bietet einen Wintercheck an.'],
-        ['Sie haben Grippe und können nicht einkaufen gehen.', 'f', 'Wir gehen für Sie einkaufen, wenn Sie krank sind.', 'Die Nachbarschaftshilfe (f) kauft für Kranke ein.'],
-        ['Ihr Wohnzimmerteppich ist sehr schmutzig.', 'i', 'Wir holen Ihren Teppich ab und bringen ihn sauber zurück.', 'Die Teppichreinigung (i) reinigt Teppiche.'],
+        ['Sie haben Grippe und können nicht einkaufen gehen.', 'f', 'Wir gehen für Sie einkaufen, wenn Sie krank sind.', 'Wer mit Grippe im Bett liegt, bekommt Hilfe von der Nachbarschaftshilfe (f), die für Kranke einkauft.'],
+        ['Ihr Wohnzimmerteppich ist sehr schmutzig.', 'i', 'Wir holen Ihren Teppich ab und bringen ihn sauber zurück.', 'Einen schmutzigen Teppich holt die Teppichreinigung (i) ab und bringt ihn sauber zurück.'],
         ['Sie haben vor einem Jahr den Führerschein gemacht und brauchen einen Transporter für Ihren Umzug.', '0', 'seit mindestens drei Jahren', 'Für den Mietwagen (j) braucht man den Führerschein seit drei Jahren: 0.', 'j']
       ]
     },
@@ -97,10 +97,10 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
         + '3. Einsendung: Schicken Sie Ihre Fotos bis zum 31. August per E-Mail. Ausdrucke auf Papier werden nicht angenommen.\n\n'
         + '4. Preise: Die besten zwölf Fotos erscheinen im Stadtkalender. Die Gewinner werden im Oktober benachrichtigt.',
       items: [
-        ['Jeder Teilnehmer darf …', ['so viele Fotos schicken, wie er möchte.', 'bis zu drei Fotos schicken.', 'nur ein Foto schicken.'], 'b', 'Jede Person darf höchstens drei Fotos einreichen.', 'Regel 1: Man darf höchstens drei Fotos einreichen.'],
-        ['Wenn auf dem Foto Menschen zu sehen sind, …', ['muss man sie um Erlaubnis fragen.', 'darf man es nicht schicken.', 'muss man ihre Namen nennen.'], 'a', 'Sind Personen gut zu erkennen, brauchen Sie deren Erlaubnis.', 'Regel 2: Für erkennbare Personen braucht man ihre Erlaubnis.'],
-        ['Die Fotos schickt man …', ['per Post.', 'persönlich ins Rathaus.', 'per E-Mail.'], 'c', 'Schicken Sie Ihre Fotos bis zum 31. August per E-Mail.', 'Regel 3: Die Fotos schickt man per E-Mail.'],
-        ['Die besten Fotos …', ['werden verkauft.', 'kommen in einen Kalender.', 'hängen im Rathaus.'], 'b', 'Die besten zwölf Fotos erscheinen im Stadtkalender.', 'Regel 4: Die besten zwölf Fotos erscheinen im Stadtkalender.']
+        ['Jeder Teilnehmer darf …', ['so viele Fotos schicken, wie er möchte.', 'bis zu drei Fotos schicken.', 'nur ein Foto schicken.'], 'b', 'Jede Person darf höchstens drei Fotos einreichen.', 'Höchstens drei Fotos bedeutet, dass jeder bis zu drei Bilder einreichen darf.'],
+        ['Wenn auf dem Foto Menschen zu sehen sind, …', ['muss man sie um Erlaubnis fragen.', 'darf man es nicht schicken.', 'muss man ihre Namen nennen.'], 'a', 'Sind Personen gut zu erkennen, brauchen Sie deren Erlaubnis.', 'Sind Menschen auf dem Foto gut zu erkennen, muss man sie nach Regel 2 vorher um Erlaubnis bitten.'],
+        ['Die Fotos schickt man …', ['per Post.', 'persönlich ins Rathaus.', 'per E-Mail.'], 'c', 'Schicken Sie Ihre Fotos bis zum 31. August per E-Mail.', 'Nach Regel 3 gehen die Fotos per E-Mail ein, Ausdrucke auf Papier werden abgelehnt.'],
+        ['Die besten Fotos …', ['werden verkauft.', 'kommen in einen Kalender.', 'hängen im Rathaus.'], 'b', 'Die besten zwölf Fotos erscheinen im Stadtkalender.', 'Die zwölf besten Bilder werden im Stadtkalender gedruckt, das ist der Preis.']
       ]
     }
   },
@@ -110,20 +110,20 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
         rf: ['Ein Teil der Liegewiese ist heute gesperrt.', 'richtig'], mc: ['Das Wasser hat …', ['20 Grad.', '23 Grad.', '26 Grad.'], 'b'] },
       texts: [
         { script: 'Nachricht vom Möbelhaus: Guten Tag, Frau Lehmann, hier ist der Lieferservice von Wohnwelt. Ihr neuer Schrank wird am Donnerstag zwischen acht und zwölf Uhr geliefert. Bitte sorgen Sie dafür, dass jemand zu Hause ist.',
-          rf: ['Der Schrank kommt am Donnerstagvormittag.', 'richtig', 'am Donnerstag zwischen acht und zwölf Uhr geliefert', 'Der Schrank wird am Donnerstag zwischen acht und zwölf Uhr geliefert.'],
+          rf: ['Der Schrank kommt am Donnerstagvormittag.', 'richtig', 'am Donnerstag zwischen acht und zwölf Uhr geliefert', 'Acht bis zwölf Uhr ist der Vormittag, an dem der Schrank am Donnerstag kommt.'],
           mc: ['Frau Lehmann soll …', ['zu Hause sein.', 'zurückrufen.', 'den Schrank selbst aufbauen.'], 'a', 'Bitte sorgen Sie dafür, dass jemand zu Hause ist.', 'Es soll jemand zu Hause sein.'] },
         { script: 'Radiotipp: Am Sonntag lädt der Gärtnerhof Sonnenberg zum Kürbisfest ein. Kinder können Kürbisse schnitzen, und es gibt Kürbissuppe für alle. Wegen der wenigen Parkplätze fährt ab dem Bahnhof ein Sonderbus.',
           rf: ['Beim Kürbisfest gibt es genug Parkplätze.', 'falsch', 'Wegen der wenigen Parkplätze fährt ab dem Bahnhof ein Sonderbus.', 'Es gibt nur wenige Parkplätze, deshalb fährt ein Sonderbus.'],
-          mc: ['Kinder können beim Fest …', ['Kürbisse schnitzen.', 'auf Pferden reiten.', 'Kürbisse pflanzen.'], 'a', 'Kinder können Kürbisse schnitzen', 'Kinder können Kürbisse schnitzen.'] },
+          mc: ['Kinder können beim Fest …', ['Kürbisse schnitzen.', 'auf Pferden reiten.', 'Kürbisse pflanzen.'], 'a', 'Kinder können Kürbisse schnitzen', 'Beim Kürbisfest dürfen Kinder Kürbisse schnitzen, Reiten oder Pflanzen wird nicht erwähnt.'] },
         { script: 'Durchsage in der U-Bahn-Station: Sehr geehrte Fahrgäste, der Aufzug zum Bahnsteig Richtung Stadtmitte ist bis Freitag außer Betrieb. Fahrgäste mit Kinderwagen oder Rollstuhl nutzen bitte die Haltestelle Marktplatz.',
-          rf: ['Der Aufzug funktioniert ab heute wieder.', 'falsch', 'ist bis Freitag außer Betrieb', 'Der Aufzug ist bis Freitag außer Betrieb.'],
-          mc: ['Fahrgäste mit Kinderwagen sollen …', ['die Treppe nehmen.', 'zum Marktplatz gehen.', 'auf Hilfe warten.'], 'b', 'nutzen bitte die Haltestelle Marktplatz', 'Sie sollen die Haltestelle Marktplatz nutzen.'] },
+          rf: ['Der Aufzug funktioniert ab heute wieder.', 'falsch', 'ist bis Freitag außer Betrieb', 'Der Aufzug bleibt bis Freitag kaputt, er funktioniert ab heute also nicht.'],
+          mc: ['Fahrgäste mit Kinderwagen sollen …', ['die Treppe nehmen.', 'zum Marktplatz gehen.', 'auf Hilfe warten.'], 'b', 'nutzen bitte die Haltestelle Marktplatz', 'Mit Kinderwagen soll man die Haltestelle Marktplatz benutzen, weil dort ein Aufzug funktioniert.'] },
         { script: 'Nachricht von der Tochter: Hallo Mama, hier ist Nele. Für die Klassenfahrt nach Hamburg brauche ich bis Montag noch die Unterschrift von dir oder Papa. Das Formular liegt auf dem Küchentisch. Und kannst du mir 30 Euro Taschengeld mitgeben?',
           rf: ['Nele fährt mit ihrer Klasse nach Hamburg.', 'richtig', 'Für die Klassenfahrt nach Hamburg', 'Nele macht eine Klassenfahrt nach Hamburg.'],
-          mc: ['Das Formular liegt …', ['in der Schule.', 'in Neles Tasche.', 'auf dem Küchentisch.'], 'c', 'Das Formular liegt auf dem Küchentisch.', 'Das Formular liegt auf dem Küchentisch.'] },
+          mc: ['Das Formular liegt …', ['in der Schule.', 'in Neles Tasche.', 'auf dem Küchentisch.'], 'c', 'Das Formular liegt auf dem Küchentisch.', 'Nele sagt ihrer Mutter, dass das Formular zum Unterschreiben in der Küche auf dem Tisch bereitliegt.'] },
         { script: 'Ansage der Gemeinde: Hier ist die Gemeindeverwaltung Sonnenberg. Sperrmüll wird nur noch nach Anmeldung abgeholt. Bitte melden Sie sich mindestens zwei Wochen vorher an. Elektrogeräte gehören nicht zum Sperrmüll.',
-          rf: ['Sperrmüll kann man ohne Anmeldung an die Straße stellen.', 'falsch', 'Sperrmüll wird nur noch nach Anmeldung abgeholt.', 'Sperrmüll wird nur nach Anmeldung abgeholt.'],
-          mc: ['Elektrogeräte …', ['holt die Gemeinde mit dem Sperrmüll ab.', 'darf man nicht zum Sperrmüll stellen.', 'muss man zwei Wochen vorher anmelden.'], 'b', 'Elektrogeräte gehören nicht zum Sperrmüll.', 'Elektrogeräte gehören nicht zum Sperrmüll.'] }
+          rf: ['Sperrmüll kann man ohne Anmeldung an die Straße stellen.', 'falsch', 'Sperrmüll wird nur noch nach Anmeldung abgeholt.', 'Ohne Anmeldung holt die Gemeinde keinen Sperrmüll ab, man muss sich zwei Wochen vorher melden.'],
+          mc: ['Elektrogeräte …', ['holt die Gemeinde mit dem Sperrmüll ab.', 'darf man nicht zum Sperrmüll stellen.', 'muss man zwei Wochen vorher anmelden.'], 'b', 'Elektrogeräte gehören nicht zum Sperrmüll.', 'Die Gemeinde erklärt, dass Elektrogeräte getrennt entsorgt werden und nicht zum Sperrmüll dürfen.'] }
       ]
     },
     t2: {
@@ -132,8 +132,8 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
         + 'Danach gehen wir in die Kuppel zum großen Fernrohr. Bitte nicht fotografieren mit Blitz, das stört die Beobachtung. '
         + 'Heute können wir den Mond und den Jupiter sehen, wenn keine Wolken kommen. Am Ende gibt es für die Kinder eine kleine Sternkarte zum Mitnehmen.',
       items: [
-        ['Zuerst sehen die Besucher …', ['einen Film.', 'den Mond.', 'eine Ausstellung.'], 'a', 'Zuerst zeige ich Ihnen im Vortragsraum einen kurzen Film', 'Zuerst gibt es einen Film.'],
-        ['Der Film dauert …', ['zehn Minuten.', 'zwanzig Minuten.', 'eine Stunde.'], 'b', 'er dauert zwanzig Minuten', 'Der Film dauert zwanzig Minuten.'],
+        ['Zuerst sehen die Besucher …', ['einen Film.', 'den Mond.', 'eine Ausstellung.'], 'a', 'Zuerst zeige ich Ihnen im Vortragsraum einen kurzen Film', 'Bevor es zum Fernrohr geht, sehen die Besucher im Vortragsraum einen Film über das Sonnensystem.'],
+        ['Der Film dauert …', ['zehn Minuten.', 'zwanzig Minuten.', 'eine Stunde.'], 'b', 'er dauert zwanzig Minuten', 'Der kurze Film über das Sonnensystem dauert zwanzig Minuten, nicht zehn und keine Stunde.'],
         ['In der Kuppel …', ['darf man nicht sprechen.', 'gibt es Getränke.', 'darf man nicht mit Blitz fotografieren.'], 'c', 'Bitte nicht fotografieren mit Blitz', 'Fotos mit Blitz sind nicht erlaubt.'],
         ['Den Jupiter sieht man nur, wenn …', ['der Himmel klar ist.', 'es dunkel ist.', 'man ein eigenes Fernglas hat.'], 'a', 'wenn keine Wolken kommen', 'Den Jupiter sieht man nur ohne Wolken.'],
         ['Die Kinder bekommen am Ende …', ['ein Foto.', 'ein Buch.', 'eine Sternkarte.'], 'c', 'eine kleine Sternkarte zum Mitnehmen', 'Die Kinder bekommen eine kleine Sternkarte.']
@@ -152,11 +152,11 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
       items: [
         ['Marco findet das Sofa zu teuer.', 'richtig', 'Das ist mehr, als wir ausgeben wollten.', 'Das Sofa ist teurer, als sie ausgeben wollten.'],
         ['Das Sofa kostet heute mehr als normal.', 'falsch', 'Es ist im Angebot, normalerweise kostet es 1 900.', 'Das Sofa ist im Angebot und normalerweise teurer.'],
-        ['Auf dem Sofa kann man auch schlafen.', 'richtig', 'es ist ein Schlafsofa', 'Es ist ein Schlafsofa.'],
+        ['Auf dem Sofa kann man auch schlafen.', 'richtig', 'es ist ein Schlafsofa', 'Ein Schlafsofa kann man zum Bett machen, deshalb können Marcos Eltern dort übernachten.'],
         ['Das Sofa ist zu breit für das Wohnzimmer.', 'falsch', 'Es ist zwei Meter breit, ich habe schon nachgemessen.', 'Das Sofa ist zwei Meter breit, es gibt 2,20 Meter Platz.'],
-        ['Kathrin und Marco haben einen Aufzug im Haus.', 'falsch', 'Wir haben keinen Aufzug.', 'Sie haben keinen Aufzug.'],
-        ['Das Geschäft bringt das Sofa in die Wohnung.', 'richtig', 'Das Geschäft liefert kostenlos und trägt es auch nach oben.', 'Das Geschäft liefert und trägt das Sofa nach oben.'],
-        ['Marco kauft das Sofa sofort.', 'falsch', 'lass uns noch eine Nacht darüber schlafen', 'Marco will noch eine Nacht darüber schlafen.']
+        ['Kathrin und Marco haben einen Aufzug im Haus.', 'falsch', 'Wir haben keinen Aufzug.', 'Marco sorgt sich um den Transport in den vierten Stock, weil es im Haus keinen Aufzug gibt.'],
+        ['Das Geschäft bringt das Sofa in die Wohnung.', 'richtig', 'Das Geschäft liefert kostenlos und trägt es auch nach oben.', 'Das Möbelgeschäft liefert gratis und trägt das Sofa bis hinauf in die Wohnung.'],
+        ['Marco kauft das Sofa sofort.', 'falsch', 'lass uns noch eine Nacht darüber schlafen', 'Marco ist überzeugt, möchte die Entscheidung aber noch einen Tag überdenken.']
       ]
     },
     t4: {
@@ -173,14 +173,14 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
         + 'Herr Baumann: Ich würde vorher gern selbst noch einmal eine Fahrstunde nehmen.',
       example: ['Thema heute: begleitetes Fahren schon ab 16?', 'a'],
       items: [
-        ['Wer länger mit Begleitung fährt, hat später weniger Unfälle.', 'b', 'machen Jugendliche, die lange mit Begleitung fahren, später weniger Unfälle', 'Frau Ritter sagt, dass langes begleitetes Fahren Unfälle verringert.'],
-        ['Ich bin nicht sicher, ob ich ruhig bleiben kann.', 'c', 'ob ich die Nerven habe', 'Herr Baumann weiß nicht, ob er die Nerven hat.'],
-        ['Wie teuer ist ein Führerschein?', 'a', 'Und was kostet so ein Führerschein heute?', 'Der Moderator fragt nach den Kosten.'],
-        ['Viele Familien können den Führerschein kaum bezahlen.', 'b', 'Das ist für viele Familien ein Problem.', 'Frau Ritter sagt, dass der Preis für viele Familien ein Problem ist.'],
-        ['Ohne Auto kommt man bei uns abends nicht weg.', 'c', 'Bei uns fährt am Abend kein Bus mehr.', 'Herr Baumann sagt, dass abends kein Bus mehr fährt.'],
-        ['Ein Hörer hat geschrieben.', 'a', 'Ein Hörer hat uns dazu eine Nachricht geschickt.', 'Der Moderator erwähnt die Nachricht eines Hörers.'],
+        ['Wer länger mit Begleitung fährt, hat später weniger Unfälle.', 'b', 'machen Jugendliche, die lange mit Begleitung fahren, später weniger Unfälle', 'Frau Ritter berichtet aus Erfahrung, dass begleitetes Fahren später zu weniger Unfällen führt.'],
+        ['Ich bin nicht sicher, ob ich ruhig bleiben kann.', 'c', 'ob ich die Nerven habe', '„Die Nerven haben“ heißt ruhig bleiben, und daran zweifelt Herr Baumann beim Mitfahren.'],
+        ['Wie teuer ist ein Führerschein?', 'a', 'Und was kostet so ein Führerschein heute?', 'Der Moderator fragt, wie viel ein Führerschein heute kostet.'],
+        ['Viele Familien können den Führerschein kaum bezahlen.', 'b', 'Das ist für viele Familien ein Problem.', 'Frau Ritter nennt Kosten von oft über 3 000 Euro, die für viele Familien schwer zu bezahlen sind.'],
+        ['Ohne Auto kommt man bei uns abends nicht weg.', 'c', 'Bei uns fährt am Abend kein Bus mehr.', 'Herr Baumann wohnt auf dem Land, wo am Abend kein Bus mehr fährt, deshalb braucht man ein Auto.'],
+        ['Ein Hörer hat geschrieben.', 'a', 'Ein Hörer hat uns dazu eine Nachricht geschickt.', 'Der Moderator erwähnt eine Zuschrift, die ein Hörer an die Sendung geschickt hat.'],
         ['Die Erwachsenen sind ein Vorbild beim Fahren.', 'b', 'Kinder machen nach, was sie sehen.', 'Frau Ritter sagt, dass Jugendliche den Fahrstil der Begleiter nachmachen.'],
-        ['Ich möchte selbst noch einmal üben.', 'c', 'Ich würde vorher gern selbst noch einmal eine Fahrstunde nehmen.', 'Herr Baumann möchte selbst eine Fahrstunde nehmen.']
+        ['Ich möchte selbst noch einmal üben.', 'c', 'Ich würde vorher gern selbst noch einmal eine Fahrstunde nehmen.', 'Herr Baumann würde vor dem Begleiten selbst wieder eine Fahrstunde machen.']
       ]
     }
   },

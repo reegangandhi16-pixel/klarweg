@@ -114,7 +114,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Yusuf bezahlt nur die Nebenkosten, keine Miete."
+      "explanation_de": "Yusuf zahlt nur die Nebenkosten, und Nebenkosten sind keine Miete, deshalb stimmt die Aussage."
     }
   },
   {
@@ -242,7 +242,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Am Anfang war Yusuf unsicher, ob es gut geht."
+      "explanation_de": "Wegen der großen Unterschiede zwischen ihm und der alten Dame hatte Yusuf zuerst Zweifel."
     }
   },
   {
@@ -306,7 +306,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Hildebrandt war Lehrerin."
+      "explanation_de": "Frau Hildebrandt hat als Lehrerin gearbeitet und hilft Yusuf deshalb bei seinen Hausarbeiten."
     }
   },
   {
@@ -370,7 +370,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Besuch ist nur nach 22 Uhr nicht erlaubt."
+      "explanation_de": "Besuch ist nicht den ganzen Abend verboten, sondern erst ab 22 Uhr."
     }
   },
   {
@@ -647,7 +647,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Bohrmaschine wird am häufigsten ausgeliehen."
+      "explanation_de": "Die Bohrmaschine liegt bei den Ausleihen vorn, das Zelt folgt auf Platz zwei."
     }
   },
   {
@@ -779,7 +779,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Mit dem Schild zeigt man das Ziel an."
+      "explanation_de": "Wer auf der Bank sitzt, hält ein Schild hoch, auf dem man das Fahrtziel angeben kann."
     }
   },
   {
@@ -850,7 +850,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Jugendgruppe hatte die Idee, weil abends kaum Busse fahren."
+      "explanation_de": "Die Jugendgruppe erfand die Mitfahrbank, weil am Abend fast keine Busse mehr unterwegs sind."
     }
   },
   {
@@ -1111,7 +1111,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Rechtsberatung (d) ist kostenlos und für Mieter."
+      "explanation_de": "Bei einer Mieterhöhung hilft die kostenlose Rechtsberatung für Mieter (d) zu klären, was erlaubt ist."
     }
   },
   {
@@ -1211,7 +1211,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Ferienbetreuung (g) ist für Kinder von 6 bis 12 im Sommer."
+      "explanation_de": "Ein achtjähriger Junge passt in die Ferienbetreuung (g) für Sechs- bis Zwölfjährige."
     }
   },
   {
@@ -1311,7 +1311,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Reparaturdienst (c) repariert Geschirrspüler."
+      "explanation_de": "Eine Spülmaschine ist ein Geschirrspüler, und Anzeige c bietet genau diese Reparatur an."
     }
   },
   {
@@ -1411,7 +1411,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Im Schachclub (f) sind Anfänger und Kinder willkommen."
+      "explanation_de": "Schach ist ein Brettspiel, und der Schachclub (f) nimmt auch Anfänger und Kinder auf."
     }
   },
   {
@@ -1611,7 +1611,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Tierarztpraxis (b) sucht eine Aushilfe."
+      "explanation_de": "In einer Tierarztpraxis (b) hat man mit Tieren zu tun, und dort wird eine Aushilfe gesucht."
     }
   },
   {
@@ -2021,7 +2021,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Fynn hat sich durch das Du sofort willkommen gefühlt."
+      "explanation_de": "Fynn fühlte sich als neuer Azubi durch das angebotene Du sofort willkommen und ist deshalb dafür."
     }
   },
   {
@@ -2284,7 +2284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 1: Man bucht höchstens 14 Tage im Voraus."
+      "explanation_de": "Höchstens 14 Tage im Voraus bedeutet, dass man ein Auto bis zu zwei Wochen vorher buchen kann."
     }
   },
   {
@@ -2355,7 +2355,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 2: Man tankt mit der Tankkarte aus dem Handschuhfach."
+      "explanation_de": "Das Benzin bezahlt man mit der Tankkarte aus dem Handschuhfach, deshalb kostet es nichts extra."
     }
   },
   {
@@ -2426,7 +2426,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 3: Tiere dürfen nur in einer Transportbox mit."
+      "explanation_de": "Ein Hund darf mit, aber nur in einer Transportbox, frei im Auto ist er nicht erlaubt."
     }
   },
   {
@@ -2497,7 +2497,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 4: Bei Verspätung ruft man sofort an."
+      "explanation_de": "Wer sich verspätet, muss den Verein sofort anrufen, sonst kostet jede Stunde 15 Euro extra."
     }
   },
   {
@@ -2676,7 +2676,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Katze braucht keine Tabletten mehr."
+      "explanation_de": "Die Blutwerte sind gut, deshalb braucht die Katze die Tabletten nicht mehr."
     }
   },
   {
@@ -2747,7 +2747,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Fischer soll in drei Monaten zur Kontrolle kommen."
+      "explanation_de": "Die Praxis bestellt Herrn Fischer in drei Monaten zu einer Kontrolle der Katze."
     }
   },
   {
@@ -2946,7 +2946,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Fahrt um 14 Uhr ist ausgebucht."
+      "explanation_de": "Für die Fahrt um 14 Uhr sind alle Plätze vergeben, freie Plätze gibt es erst um 15.30 Uhr."
     }
   },
   {
@@ -3152,7 +3152,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Eltern bringen den Salat mit."
+      "explanation_de": "Die Mutter kündigt an, dass die Eltern den Salat selbst mitbringen."
     }
   },
   {
@@ -3216,7 +3216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Für Fragen zur Rechnung drückt man die Zwei."
+      "explanation_de": "Die Ansage der Stadtwerke ordnet Rechnungsfragen der Taste Zwei zu."
     }
   },
   {
@@ -3287,7 +3287,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Bei einem Stromausfall drückt man die Eins."
+      "explanation_de": "Bei einem Stromausfall wählt man die erste Taste, die Eins."
     }
   },
   {
@@ -3429,7 +3429,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Alle fahren immer hintereinander."
+      "explanation_de": "Der Tourleiter verlangt, dass man in einer Reihe fährt, also hintereinander."
     }
   },
   {
@@ -3571,7 +3571,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Kaffee und Kuchen sind im Preis enthalten."
+      "explanation_de": "Die Pause mit Kaffee und Kuchen in der zweiten Mühle kostet nichts zusätzlich."
     }
   },
   {
@@ -3706,7 +3706,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Ömers Tochter hatte Windpocken."
+      "explanation_de": "Windpocken sind eine Krankheit, deshalb blieben Ömer und seine Frau zu Hause."
     }
   },
   {
@@ -3834,7 +3834,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Tochter ist wieder im Kindergarten."
+      "explanation_de": "Ömers Tochter ist gesund und besucht wieder den Kindergarten."
     }
   },
   {
@@ -3898,7 +3898,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Tage der Fortbildung waren sehr lang."
+      "explanation_de": "Paula fand die Fortbildung interessant, aber die Tage von acht bis sechs Uhr waren lang."
     }
   },
   {
@@ -3962,7 +3962,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Paula macht am Montag eine kurze Präsentation."
+      "explanation_de": "In der Besprechung am Montag stellt Paula ihre Fortbildung in einer kurzen Präsentation vor."
     }
   },
   {
@@ -4026,7 +4026,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Paula bereitet die Präsentation am Wochenende vor."
+      "explanation_de": "Paula arbeitet nicht im Büro an der Präsentation, sondern am Wochenende."
     }
   },
   {
@@ -4216,7 +4216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Vogt sagt, dass ihm zu Hause die Decke auf den Kopf fiel."
+      "explanation_de": "„Die Decke fiel mir auf den Kopf“ bedeutet, dass es Herrn Vogt zu Hause zu langweilig war."
     }
   },
   {
@@ -4284,7 +4284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Engel sagt, dass bei vielen die Rente nicht reicht."
+      "explanation_de": "Frau Engel findet es bedenklich, dass viele Rentner wegen einer zu kleinen Rente weiterarbeiten müssen."
     }
   },
   {
@@ -4488,7 +4488,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Vogt sagt, dass Kunden oft nach ihm fragen."
+      "explanation_de": "Weil Herr Vogt früher Gärtner war, möchten Kunden in der Gartenabteilung gezielt mit ihm sprechen."
     }
   },
   {
@@ -4556,7 +4556,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Moderatorin erwähnt den Anruf einer Hörerin."
+      "explanation_de": "Die Moderatorin teilt mit, dass eine Hörerin in der Sendung angerufen hat."
     }
   },
   {
@@ -4692,7 +4692,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Engel sagt, dass schwere Arbeit im Alter oft nicht mehr geht."
+      "explanation_de": "Frau Engel sagt, dass harte körperliche Arbeit für ältere Menschen oft nicht mehr machbar ist."
     }
   },
   {

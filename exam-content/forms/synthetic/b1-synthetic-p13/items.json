@@ -114,7 +114,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Team hat sich mit Zetteln und E-Mails verständigt."
+      "explanation_de": "Zettel und E-Mails sind schriftliche Wege, deshalb hat das Team anfangs schriftlich mit Merve kommuniziert."
     }
   },
   {
@@ -178,7 +178,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Merve saß in der Pause meistens allein."
+      "explanation_de": "Dennis fand es schade, dass Merve in der Pause allein saß, sie war also nicht mit den Kollegen zusammen."
     }
   },
   {
@@ -242,7 +242,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Lehrerin ist selbst gehörlos."
+      "explanation_de": "„Gehörlos“ bedeutet, dass die Lehrerin nicht hören kann."
     }
   },
   {
@@ -306,7 +306,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Im Unterricht wird kein Wort gesprochen."
+      "explanation_de": "Im Gebärdensprachkurs spricht niemand, das fand Dennis in der ersten Stunde ungewohnt."
     }
   },
   {
@@ -434,7 +434,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Zwei weitere Kollegen haben sich angemeldet."
+      "explanation_de": "Nach Dennis haben sich noch zwei Kollegen angemeldet, er ist also nicht der einzige."
     }
   },
   {
@@ -576,7 +576,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Im Winter werden die Brunnen abgestellt."
+      "explanation_de": "Die Brunnen werden im Winter abgestellt, damit die Leitungen nicht einfrieren, sie sind dann außer Betrieb."
     }
   },
   {
@@ -1111,7 +1111,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Übersetzungsdienst (d) übersetzt Zeugnisse beglaubigt."
+      "explanation_de": "Für eine Arbeit in Deutschland braucht man oft eine beglaubigte, also offizielle Übersetzung, die Anzeige d anbietet."
     }
   },
   {
@@ -1411,7 +1411,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Gesucht wird ehrenamtliche Begleitung für ältere Menschen (b)."
+      "explanation_de": "Die Begleitung zu Arztbesuchen (b) ist ehrenamtlich und hilft älteren Menschen, dafür reichen ein paar Stunden."
     }
   },
   {
@@ -1611,7 +1611,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Bei der Haushaltsauflösung (f) gibt es Schallplatten."
+      "explanation_de": "Als Sammler alter Musikplatten werden Sie bei der Haushaltsauflösung in Anzeige f fündig."
     }
   },
   {
@@ -1624,7 +1624,7 @@
     "task_id": "tsk:b1:p13-l3",
     "is_example": false,
     "interaction": "matching_pool",
-    "stem": "19. Ihre Kinder wünschen sich zwei Goldfische mit Aquarium.",
+    "stem": "19. Ihre Kinder wünschen sich ein kleines Aquarium mit höchstens 30 Litern für ihr Zimmer.",
     "options": [
       {
         "option_id": "a",
@@ -1706,12 +1706,12 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p13-l3-ad-h",
-        "start": 46,
-        "end": 57
+        "start": 35,
+        "end": 44
       }
     ],
     "feedback": {
-      "explanation_de": "Das Aquarium (h) wird ohne Fische verkauft, Goldfische gibt es nicht: 0."
+      "explanation_de": "Das einzige Aquarium (h) fasst 120 Liter und ist damit viel größer als die gewünschten 30 Liter, deshalb passt keine Anzeige: 0."
     }
   },
   {
@@ -2021,7 +2021,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Fenja findet, dass kurze Gespräche erlaubt bleiben müssen."
+      "explanation_de": "Fenja will kurze Anrufe im Zug weiter erlauben, deshalb ist sie gegen ein Verbot."
     }
   },
   {
@@ -2284,7 +2284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 1: Fundsachen kommen zwei Werktage später ins Fundbüro."
+      "explanation_de": "Am selben Tag ist der Schirm noch nicht im Fundbüro, nach Regel 1 dauert es zwei Werktage."
     }
   },
   {
@@ -2355,7 +2355,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 2: Man kann online eine Verlustmeldung ausfüllen."
+      "explanation_de": "Eine Verlustmeldung kann man nach Regel 2 im Internet ausfüllen, das Fundbüro meldet sich dann."
     }
   },
   {
@@ -2676,7 +2676,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Prüfungstermin steht erst fest."
+      "explanation_de": "Die Fahrschule teilt nur den Termin der Prüfung mit, die Prüfung liegt also noch vor Frau Okoro."
     }
   },
   {
@@ -2747,7 +2747,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Sie soll eine Viertelstunde früher kommen."
+      "explanation_de": "Eine Viertelstunde sind fünfzehn Minuten, so viel früher soll Frau Okoro zur Prüfung kommen."
     }
   },
   {
@@ -2811,7 +2811,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Schüler zahlen den halben Preis."
+      "explanation_de": "Karten zum halben Preis sind billiger, und dieses Angebot gilt für Schülerinnen und Schüler."
     }
   },
   {
@@ -2946,7 +2946,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Zug fährt in umgekehrter Wagenreihung."
+      "explanation_de": "„Umgekehrte Wagenreihung“ bedeutet, dass die Wagen in anderer Reihenfolge als sonst stehen."
     }
   },
   {
@@ -3017,7 +3017,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Wagen mit Fahrradplätzen sind am Ende."
+      "explanation_de": "Die erste Klasse steht am Anfang, die Wagen für Fahrräder stehen am Ende des Bahnsteigs."
     }
   },
   {
@@ -3081,7 +3081,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Feier ist ein Grillabend im Garten, kein schickes Fest."
+      "explanation_de": "Ruth korrigiert sich: Die Firmenfeier ist ein Grillabend im Garten, man soll etwas Bequemes anziehen."
     }
   },
   {
@@ -3216,7 +3216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Im Raum Seeburg gibt es eine Störung."
+      "explanation_de": "Die Störung betrifft den Raum Seeburg, dort funktioniert das Internet gerade nicht."
     }
   },
   {
@@ -3287,7 +3287,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Ab 18 Uhr soll das Internet wieder funktionieren."
+      "explanation_de": "Der Anbieter erwartet, dass die Störung um 18 Uhr behoben ist."
     }
   },
   {
@@ -3358,7 +3358,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Wohnung hat drei Zimmer."
+      "explanation_de": "Die Maklerin nennt drei Zimmer plus Küche und Bad, insgesamt 78 Quadratmeter."
     }
   },
   {
@@ -3429,7 +3429,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Geräte bleiben in der Wohnung."
+      "explanation_de": "Die neue Küche wird mit allen Geräten übergeben, man muss also keine kaufen."
     }
   },
   {
@@ -3500,7 +3500,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Haustiere sind nach Absprache mit dem Vermieter erlaubt."
+      "explanation_de": "„Nach Absprache mit dem Vermieter“ heißt, dass er Haustiere im Einzelfall erlauben muss."
     }
   },
   {
@@ -3571,7 +3571,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Wohnung ist ab dem 1. März frei."
+      "explanation_de": "Ab dem ersten März ist die Wohnung frei, dann kann man einziehen."
     }
   },
   {
@@ -3642,7 +3642,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Interessenten schicken ihre Unterlagen per E-Mail."
+      "explanation_de": "Interessenten sollen der Maklerin bis Freitag ihre Bewerbungsunterlagen mailen, nicht sofort unterschreiben."
     }
   },
   {
@@ -3770,7 +3770,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Mit dem Auto war es nicht viel schneller."
+      "explanation_de": "Ali stand mit dem Auto oft im Stau und war damit kaum schneller als mit dem Rad."
     }
   },
   {
@@ -3834,7 +3834,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Im Keller gibt es eine Dusche."
+      "explanation_de": "Für Mitarbeiter gibt es im Keller der Firma eine Dusche, die viele nicht kennen."
     }
   },
   {
@@ -3962,7 +3962,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Im Winter nimmt Ali wahrscheinlich die S-Bahn."
+      "explanation_de": "Ali findet den Winter zum Radfahren zu kalt und will dann die S-Bahn nehmen."
     }
   },
   {
@@ -4090,7 +4090,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Sie treffen sich am Montag an der Brücke."
+      "explanation_de": "Ali und Stefan verabreden sich für Montag an der Brücke, um zusammen zu radeln."
     }
   },
   {
@@ -4352,7 +4352,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Moderator fragt nach der Dauer."
+      "explanation_de": "Der Moderator möchte wissen, wie viele Wochen ein Pflichtpraktikum dauern sollte."
     }
   },
   {
@@ -4420,7 +4420,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Wagner hält zwei Wochen für realistisch."
+      "explanation_de": "Frau Wagner sagt, dass das Schuljahr nicht mehr als zwei Wochen Praktikum zulässt."
     }
   },
   {
@@ -4488,7 +4488,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Costa findet zwei Wochen zu kurz."
+      "explanation_de": "Herr Costa findet zwei Wochen zu kurz, weil die Bewohner die Praktikanten in dieser Zeit kaum kennenlernen."
     }
   },
   {
@@ -4556,7 +4556,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Moderator erwähnt die Frage einer Hörerin."
+      "explanation_de": "Der Moderator teilt mit, dass eine Hörerin eine Frage eingesandt hat."
     }
   },
   {
@@ -4692,7 +4692,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Wagner möchte, dass die Schüler wählen können."
+      "explanation_de": "Frau Wagner möchte, dass Schüler zwischen Pflegeheim, Krankenhaus und Kita wählen dürfen."
     }
   },
   {

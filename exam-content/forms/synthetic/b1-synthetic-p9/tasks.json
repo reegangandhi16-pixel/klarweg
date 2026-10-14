@@ -248,7 +248,7 @@
     ],
     "indicators": {
       "synthetic": true,
-      "words": 96,
+      "words": 99,
       "inference_demand": 2,
       "distractor_strength": 2,
       "info_units": 10

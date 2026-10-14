@@ -208,7 +208,7 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
     t2: { topics: ['Leben auf dem Land oder in der Stadt?', 'Ein Jahr im Ausland arbeiten?'] },
     t3: {
       partnerFemale: false,
-      partnerTalk: 'Partner präsentiert das Thema „Ein Jahr im Ausland arbeiten?“: Er hat ein Jahr in einem Hotel in Spanien gearbeitet und dort viel gelernt, aber seine Familie hat ihm sehr gefehlt.',
+      partnerTalk: 'Partner: Mein Thema ist die Frage, ob man ein Jahr im Ausland arbeiten sollte. Nach meiner Ausbildung habe ich ein Jahr in einem Hotel an der Küste in Spanien gearbeitet, zuerst an der Rezeption und später im Restaurant. Am Anfang war das sehr schwer, weil ich kaum Spanisch konnte. Nach drei Monaten konnte ich aber schon mit den Gästen sprechen. In meinem Heimatland machen das nicht so viele junge Leute, weil die Familie oft möchte, dass man in der Nähe bleibt. Die Vorteile sind klar: Man lernt eine Sprache, man wird selbstständig und hat später bessere Chancen bei Bewerbungen. Ein Nachteil war für mich das Heimweh. Ich habe meine Familie sehr vermisst, besonders an Feiertagen, und das Gehalt war auch nicht besonders hoch. Trotzdem würde ich es jedem empfehlen, vielleicht nicht gleich ein ganzes Jahr, sondern zuerst sechs Monate. Am Ende hat mir diese Zeit sehr viel Selbstvertrauen gegeben. Vielen Dank.',
       examinerQuestion: 'Prüferin: Möchten Sie später lieber auf dem Land oder in der Stadt wohnen? Warum?'
     }
   }

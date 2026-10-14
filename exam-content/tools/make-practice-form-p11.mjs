@@ -205,7 +205,7 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
     t2: { topics: ['Ist Mode wichtig?', 'Hausarbeit – sollen Männer und Frauen sie gleich teilen?'] },
     t3: {
       partnerFemale: true,
-      partnerTalk: 'Partnerin präsentiert das Thema „Hausarbeit – sollen Männer und Frauen sie gleich teilen?“: Bei ihr zu Hause kocht ihr Mann und sie putzt. Mit einem Plan am Kühlschrank gibt es weniger Streit.',
+      partnerTalk: 'Partnerin: Ich spreche heute über die Hausarbeit und die Frage, ob Männer und Frauen sie gleich teilen sollen. Bei uns zu Hause gibt es seit einem Jahr einen Plan am Kühlschrank. Mein Mann kocht und kauft ein, ich putze und mache die Wäsche, und die Kinder räumen den Tisch ab. Vorher hatten wir oft Streit, weil ich das Gefühl hatte, dass ich alles allein mache. In meinem Heimatland machen die Frauen meistens den ganzen Haushalt, auch wenn sie arbeiten gehen. Bei der jüngeren Generation ändert sich das zum Glück. Eine faire Aufteilung hat Vorteile: Niemand ist überlastet, und die Kinder lernen, dass Hausarbeit keine Frauensache ist. Schwierig wird es, wenn beide sehr unterschiedliche Arbeitszeiten haben. Dann kann man nicht alles genau halb und halb machen. Ich finde, es muss nicht genau gleich sein, aber beide sollten zufrieden sein. Mein Tipp zum Schluss: Sprechen Sie offen darüber, bevor es Streit gibt. Danke schön.',
       examinerQuestion: 'Prüferin: Wie wichtig ist Ihnen Kleidung im Alltag? Erzählen Sie kurz.'
     }
   }

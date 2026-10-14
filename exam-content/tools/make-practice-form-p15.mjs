@@ -204,7 +204,7 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
     t2: { topics: ['Eine Fremdsprache im Ausland lernen?', 'Wie wichtig ist genug Schlaf?'] },
     t3: {
       partnerFemale: true,
-      partnerTalk: 'Partnerin präsentiert das Thema „Wie wichtig ist genug Schlaf?“: Sie schläft nur sechs Stunden, weil sie zwei kleine Kinder hat. Am Wochenende versucht sie, am Nachmittag zu schlafen.',
+      partnerTalk: 'Partnerin: Ich spreche heute über die Frage, wie wichtig genug Schlaf ist. Im Moment schlafe ich leider nur ungefähr sechs Stunden pro Nacht, denn ich habe zwei kleine Kinder, und der Jüngere wacht oft auf. Am Tag merke ich das sehr: Ich bin vergesslich und schnell nervös. Am Wochenende versuche ich deshalb, nachmittags eine Stunde zu schlafen, während mein Mann mit den Kindern auf den Spielplatz geht. In meinem Heimatland ist ein kurzer Mittagsschlaf ganz normal, viele Geschäfte schließen sogar am frühen Nachmittag. Ärzte sagen, dass Erwachsene sieben bis acht Stunden Schlaf brauchen. Wer genug schläft, ist gesünder, lernt besser und hat bessere Laune. Wer zu wenig schläft, macht mehr Fehler, zum Beispiel beim Autofahren. Leider ist es nicht immer einfach, früh ins Bett zu gehen, weil abends noch Arbeit im Haushalt wartet. Meine Meinung: Schlaf ist genauso wichtig wie gesundes Essen. Mein Tipp: Eine Stunde vor dem Schlafen kein Handy mehr. Danke schön.',
       examinerQuestion: 'Prüferin: Haben Sie schon einmal im Ausland eine Sprache gelernt? Wie war das?'
     }
   }

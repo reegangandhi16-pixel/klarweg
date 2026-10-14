@@ -205,7 +205,7 @@ export const PRACTICE_FORM_P5 = buildPracticeForm({
     t2: { topics: ['Im Internet oder im Geschäft einkaufen?', 'Frühstück – die wichtigste Mahlzeit des Tages?'] },
     t3: {
       partnerFemale: true,
-      partnerTalk: 'Partnerin präsentiert das Thema „Frühstück – die wichtigste Mahlzeit des Tages?“: Sie frühstückt jeden Tag mit der Familie, weil sie sonst keine Energie hat. Ihr Mann trinkt dagegen nur einen Kaffee.',
+      partnerTalk: 'Partnerin: Ich möchte über das Frühstück sprechen und über die Frage, ob es wirklich die wichtigste Mahlzeit des Tages ist. Bei uns zu Hause frühstücken wir jeden Morgen um halb sieben zusammen, mit Brot, Käse, Obst und Tee. Ohne Frühstück habe ich keine Energie und bekomme schon um zehn Uhr Kopfschmerzen. Mein Mann sieht das ganz anders: Er trinkt nur schnell einen Kaffee und isst erst mittags etwas. In meinem Heimatland ist das Frühstück eine große Mahlzeit, oft mit warmem Essen, und am Wochenende sitzt die ganze Familie lange am Tisch. Was spricht für ein gutes Frühstück? Man kann sich in der Schule oder bei der Arbeit besser konzentrieren und isst später weniger Süßigkeiten. Dagegen spricht, dass morgens viele Menschen einfach keinen Hunger haben, und man muss früher aufstehen. Ich denke, jeder sollte selbst ausprobieren, was ihm guttut, aber Kinder sollten nicht ohne Frühstück aus dem Haus gehen. Danke fürs Zuhören.',
       examinerQuestion: 'Prüferin: Was haben Sie zuletzt im Internet gekauft, und waren Sie zufrieden?'
     }
   }

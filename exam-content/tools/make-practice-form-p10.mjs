@@ -207,7 +207,7 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
     t2: { topics: ['Sparen oder das Leben genießen?', 'Computerspiele für Kinder – gut oder schlecht?'] },
     t3: {
       partnerFemale: false,
-      partnerTalk: 'Partner präsentiert das Thema „Computerspiele für Kinder – gut oder schlecht?“: Sein Sohn spielt am Wochenende eine Stunde am Computer. Er findet, dass manche Spiele beim Lernen helfen.',
+      partnerTalk: 'Partner: Mein Thema heute: Computerspiele für Kinder – gut oder schlecht? Mein Sohn ist neun Jahre alt und darf am Wochenende eine Stunde am Computer spielen. Unter der Woche gibt es keine Spiele, weil er sonst seine Hausaufgaben vergisst. Am liebsten spielt er ein Spiel, in dem man eine Stadt baut und auf das Geld achten muss. Ich finde, dabei lernt er sogar etwas, zum Beispiel Rechnen und Planen. In meinem Heimatland spielen Kinder viel draußen, Computer haben dort nicht alle Familien, aber Handyspiele sind sehr beliebt. Vorteile von Spielen sind: Kinder lernen den Umgang mit Technik, und manche Spiele trainieren das Denken. Nachteile sind: Kinder bewegen sich zu wenig, und einige Spiele sind zu brutal für ihr Alter. Außerdem kann man schnell süchtig werden. Meiner Meinung nach sind Computerspiele nicht schlecht, wenn Eltern die Spiele kennen und eine feste Zeit vereinbaren. Zum Schluss: Am wichtigsten ist, dass Kinder auch Freunde treffen und Sport machen. Vielen Dank.',
       examinerQuestion: 'Prüferin: Sparen Sie für etwas Bestimmtes? Wofür würden Sie gern Geld ausgeben?'
     }
   }

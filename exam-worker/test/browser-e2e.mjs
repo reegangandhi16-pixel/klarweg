@@ -640,6 +640,11 @@ async function runPractice() {
     await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText)`, 15000, 'learner result');
     res = await text();
     assert.equal(/in Bewertung/.test(res), false, 'nothing awaits rating any more');
+    // rated feedback per task and criterion, and per-part lines in the reviews
+    await waitFor(`document.querySelectorAll('.kx-rated').length === 2`, 10000, 'rated feedback for Schreiben and Sprechen');
+    assert.equal(await evaluate(`document.querySelectorAll('.kx-rated table').length`), 7, '3 Schreiben tasks + 3 Sprechen parts + Aussprache');
+    assert.match(await text(), /Teil 1: 10 von 10 · Teil 2: 5 von 5/i, 'Hören per-part line (shown in uppercase metadata style)');
+    await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'final result: no horizontal scroll on mobile'); await vp(1280, 800, false);
     const final = (await dev.env.DB.prepare("SELECT module, points FROM module_scores WHERE module IN ('schreiben','sprechen') AND status = 'final' ORDER BY module").all()).results;
     assert.equal(final.length, 2);
     for (const f of final) assert.match(res, new RegExp(`${f.module === 'schreiben' ? 'Schreiben' : 'Sprechen'}\\s+${f.points} / 100`));

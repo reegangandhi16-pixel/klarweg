@@ -59,6 +59,7 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     complete: (id, leaseId) => call('POST', att(id, '/complete'), { body: rq({ lease_id: leaseId }) }),
     result: (id) => call('GET', att(id, '/result')),
     review: (id, module) => call('GET', att(id, `/modules/${module}/review`)),
+    feedback: (id, module) => call('GET', att(id, `/modules/${module}/feedback`)),
     myRecordings: (id) => call('GET', att(id, '/sprechen/recordings')),
     async myRecording(id, part, turn) {   // the learner's own recording after submission: audio bytes, session-bound
       const res = await fetchImpl(`${base}${att(id, `/sprechen/recordings/${part}/${turn}`)}`, { credentials: 'include' });

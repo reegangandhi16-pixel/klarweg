@@ -33,6 +33,7 @@ const ROUTES = [
   ['POST', R(`/attempts/${A}/complete`), (c, m) => api.completeAttempt(c.env, c.user, m[1], c.request)],
   ['GET', R(`/attempts/${A}/result`), (c, m) => api.getResult(c.env, c.user, m[1])],
   ['GET', R(`/attempts/${A}/modules/${MODULE}/review`), (c, m) => api.moduleReview(c.env, c.user, m[1], m[2])],
+  ['GET', R(`/attempts/${A}/modules/${MODULE}/feedback`), (c, m) => api.moduleFeedback(c.env, c.user, m[1], m[2])],
   ['GET', R(`/attempts/${A}/sprechen/recordings`), (c, m) => api.myRecordings(c.env, c.user, m[1])],
   ['GET', R(`/attempts/${A}/sprechen/recordings/([1-3])/(t[1-9])`), (c, m) => api.myRecording(c.env, c.user, m[1], m[2], m[3])],
   ['POST', R('/admin/ratings'), (c) => api.submitRating(c.env, c.user, c.request)],

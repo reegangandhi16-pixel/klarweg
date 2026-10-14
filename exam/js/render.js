@@ -147,6 +147,23 @@ export function recordingsSection(list) {
     + (rows ? `<ul class="kx-queue">${rows}</ul>` : '<p>Es sind keine Aufnahmen verfügbar.</p>') + '</section>';
 }
 
+const num = (x) => String(x).replace('.', ',');
+const PRON_LABEL = 'Aussprache (ganze Prüfung)';
+/* Rated feedback for a FINAL Schreiben/Sprechen module: mean points of the two ratings per criterion and task. */
+export function ratedFeedback(module, fb, criterionLabels = {}) {
+  const label = MODULE_LABELS[module] || module;
+  const units = fb.units.map((u) => {
+    const title = u.part ? `${label} Teil ${esc(u.part)}` : PRON_LABEL;
+    const rows = u.criteria.map((c) => `<tr><th scope="row">${esc(criterionLabels[c.criterion] || c.criterion)}</th><td>${esc(num(c.points))} / ${esc(num(c.max))}</td></tr>`).join('');
+    const text = u.text != null ? `<details class="kx-transcripts"><summary>Ihr Text (${esc(u.words)} Wörter${u.target_words ? `, Ziel ca. ${esc(u.target_words)}` : ''})</summary><p class="kx-written" lang="de">${esc(u.text).replace(/\n/g, '<br>')}</p></details>` : '';
+    return `<div class="kx-table-wrap"><table class="kx-table"><caption>${title}: ${esc(num(u.total))} / ${esc(num(u.max))} Punkte</caption>`
+      + `<thead><tr><th scope="col">Kriterium</th><th scope="col">Punkte</th></tr></thead><tbody>${rows}</tbody></table></div>`
+      + (u.zero_rule ? '<p class="kx-meta">Die Aufgabe wurde nicht erfüllt (Erfüllung E): Diese Bewertung zählt mit 0 Punkten.</p>' : '') + text;
+  }).join('');
+  return `<section class="kx-rated" aria-labelledby="rv-fb-${esc(module)}"><h2 id="rv-fb-${esc(module)}">${esc(label)}: Bewertung je Teil</h2>`
+    + '<p>Mittelwert aus zwei unabhängigen Bewertungen.</p>' + units + '</section>';
+}
+
 export function itemReview(module, review) {
   const s = review.summary;
   const rows = review.items.map((it) => `<tr class="kx-rv-${esc(it.status)}"><th scope="row">${esc(it.display_no)}</th><td>${esc(answerText(it.your_answer))}</td>`
@@ -158,8 +175,13 @@ export function itemReview(module, review) {
   const scripts = (review.transcripts || []).length
     ? `<details class="kx-transcripts"><summary>Hörtexte zum Nachlesen (${esc(review.transcripts.length)})</summary>`
       + review.transcripts.map((t) => `<h3>Teil ${esc(t.part)}</h3>${paragraphs(t.text)}`).join('') + '</details>' : '';
+  const parts = [...new Set(review.items.map((it) => it.part))].map((p) => {
+    const its = review.items.filter((it) => it.part === p);
+    return `Teil ${esc(p)}: ${esc(its.filter((it) => it.status === 'correct').length)} von ${esc(its.length)}`;
+  }).join(' · ');
   return `<section class="kx-review-items" aria-labelledby="rv-${esc(module)}"><h2 id="rv-${esc(module)}">${esc(label)}: Ihre Antworten</h2>`
     + `<p>richtig ${esc(s.correct)} · falsch ${esc(s.incorrect)} · ohne Antwort ${esc(s.unanswered)} (von ${esc(s.total)})</p>`
+    + (parts ? `<p class="kx-meta kx-rv-parts">${parts}</p>` : '')
     + `<div class="kx-table-wrap"><table class="kx-table"><caption>${esc(label)}: Antworten je Aufgabe</caption><thead><tr><th scope="col">Nr.</th><th scope="col">Ihre Antwort</th>`
     + `<th scope="col">Lösung</th><th scope="col">Ergebnis</th><th scope="col">Punkte</th></tr></thead><tbody>${rows}</tbody></table></div>${scripts}</section>`;
 }

@@ -33,6 +33,10 @@ export function reviewSheetHtml(form) {
   const j = (n) => JSON.parse(form.files[n]);
   const items = j('items.json'), tasks = j('tasks.json'), assets = j('assets.json'), keys = j('keys.json').keys;
   const asset = (id) => assets.find((a) => a.id === id);
+  // OD-32: which Teil 3 talk / examiner question a learner hears depends on their Teil 2 topic choice
+  const promptTopic = {};
+  for (const it of items) for (const turn of it.response_spec?.turns || []) for (const [k, id] of Object.entries(turn.prompt_asset_by_topic || {})) promptTopic[id] = k;
+  const topicNote = (s) => { const k = s.for_topic || promptTopic[s.asset_id]; return k ? ` — für Lernende mit Thema ${k.slice(1)}` : ''; };
   const sourceOf = (a) => (a.kind === 'text' ? a.text.body_md : a.script_de);
   const out = [`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>EX-03 Review ${esc(form.name)}</title>
 <style>body{font:14px/1.45 system-ui,sans-serif;margin:24px;color:#111}h1{font-size:20px}h2{margin-top:28px;border-bottom:1px solid #999}
@@ -45,7 +49,7 @@ td,th{border:1px solid #bbb;padding:4px;vertical-align:top}.box{display:inline-b
   for (const m of ['lesen', 'hoeren', 'schreiben', 'sprechen']) {
     for (const t of tasks.filter((x) => x.module === m)) {
       out.push(`<h2>${MODULE[m]} Teil ${t.part} — ${esc(t.id)}</h2><p>${esc(t.instructions.text_de)}</p>${t.context_line ? `<p><i>${esc(t.context_line)}</i></p>` : ''}`);
-      for (const s of t.stimuli) { const a = asset(s.asset_id); const src = sourceOf(a); if (src) out.push(`<div class="stim"><b>${esc(s.label || s.role)}</b>${a.kind === 'audio' ? ' (script; audio is TEST AUDIO)' : ''}\n${esc(src)}</div>`); }
+      for (const s of t.stimuli) { const a = asset(s.asset_id); const src = sourceOf(a); if (src) out.push(`<div class="stim"><b>${esc(s.label || s.role)}${esc(topicNote(s))}</b>${a.kind === 'audio' ? ' (script; audio is TEST AUDIO)' : ''}\n${esc(src)}</div>`); }
       for (const id of t.items) {
         const it = items.find((x) => x.id === id);
         if (it.is_example) { out.push(`<p>Beispiel: ${esc(it.stem)} → ${esc(it.example_answer)}</p>`); continue; }

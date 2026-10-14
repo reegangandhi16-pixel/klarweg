@@ -543,6 +543,11 @@ async function runPractice() {
     await click('.kx-transcripts summary');
     assert.equal(await evaluate(`document.querySelectorAll('.kx-transcripts h3').length`), 8, 'Hören scripts after submission');
     assert.match(await text(), /Nora: Am Samstag ja\. Am Sonntag besuche ich meine Eltern\./);
+    // the learner's own recordings: listed after submission, loaded only on request, never autoplayed
+    assert.ok(await evaluate(`document.querySelectorAll('[data-act="my-recording"]').length >= 1`), 'own recordings listed');
+    await click('[data-act="my-recording"]');
+    await waitFor(`(() => { const a = document.querySelector('.kx-my-recordings audio'); return a && a.src.startsWith('blob:') && a.readyState >= 1; })()`, 15000, 'own recording loaded');
+    assert.deepEqual(await evaluate(`(() => { const a = document.querySelector('.kx-my-recordings audio'); return [a.paused, a.autoplay]; })()`), [true, false]);
     assert.match(res, /Schreiben\s+–\s+in Bewertung/); assert.match(res, /Sprechen\s+–\s+in Bewertung/);
     await vp(390, 844, true); await sleep(300);
     assert.equal(await noHScroll(), true, 'result + review: no horizontal scroll on mobile'); await vp(1280, 800, false);

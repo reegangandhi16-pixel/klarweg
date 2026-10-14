@@ -59,6 +59,12 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     complete: (id, leaseId) => call('POST', att(id, '/complete'), { body: rq({ lease_id: leaseId }) }),
     result: (id) => call('GET', att(id, '/result')),
     review: (id, module) => call('GET', att(id, `/modules/${module}/review`)),
+    myRecordings: (id) => call('GET', att(id, '/sprechen/recordings')),
+    async myRecording(id, part, turn) {   // the learner's own recording after submission: audio bytes, session-bound
+      const res = await fetchImpl(`${base}${att(id, `/sprechen/recordings/${part}/${turn}`)}`, { credentials: 'include' });
+      if (!res.ok) { let j = null; try { j = await res.json(); } catch { /* non-JSON */ } throw new ExamApiError(res.status, (j && j.error) || 'http_' + res.status, j); }
+      return res.blob();
+    },
     // staff (rater / lead_rater): authorization is enforced by the server; the browser carries no token or secret
     ratingQueue: () => call('GET', '/exam/v1/admin/rating-queue'),
     productive: (id) => call('GET', `/exam/v1/admin/attempts/${id}/productive`),

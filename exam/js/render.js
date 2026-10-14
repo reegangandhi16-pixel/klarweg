@@ -137,6 +137,16 @@ export function reviewPanel(progress) {
 /* Item review after submission (server data only: GET …/modules/<m>/review). Numbers as shown in the test. */
 const REVIEW_STATUS = { correct: 'richtig', incorrect: 'falsch', unanswered: 'ohne Antwort' };
 const answerText = (a) => (a ? `${a.label}${a.text ? ` – ${a.text}` : ''}` : '–');
+/* The learner's own Sprechen recordings after submission: each is loaded only on request (no autoplay). */
+export function recordingsSection(list) {
+  const rows = (list.recordings || []).map((r) => `<li class="kx-rec-row"><span>Teil ${esc(r.part)}, Beitrag ${esc(String(r.turn).replace(/^t/, ''))}`
+    + `${r.duration_ms ? ` · ${esc(Math.round(r.duration_ms / 1000))} s` : ''}${r.complete ? '' : ' · unvollständig übertragen'}</span>`
+    + (r.available ? `<span class="kx-play-cell"><button type="button" class="kx-btn kx-btn-quiet" data-act="my-recording" data-part="${esc(r.part)}" data-turn="${esc(r.turn)}">Anhören</button></span>`
+      : '<span class="kx-meta">nicht mehr verfügbar</span>') + '</li>').join('');
+  return `<section class="kx-my-recordings" aria-labelledby="rv-rec"><h2 id="rv-rec">Sprechen: Ihre Aufnahmen</h2>`
+    + (rows ? `<ul class="kx-queue">${rows}</ul>` : '<p>Es sind keine Aufnahmen verfügbar.</p>') + '</section>';
+}
+
 export function itemReview(module, review) {
   const s = review.summary;
   const rows = review.items.map((it) => `<tr class="kx-rv-${esc(it.status)}"><th scope="row">${esc(it.display_no)}</th><td>${esc(answerText(it.your_answer))}</td>`

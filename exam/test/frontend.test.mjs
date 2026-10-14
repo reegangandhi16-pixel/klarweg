@@ -10,7 +10,7 @@ import { memoryStore } from '../js/store.js';
 import { createApi, ExamApiError } from '../js/api.js';
 import { phaseAt, phaseLabel } from '../js/hoeren.js';
 import { ChunkQueue, sha256Hex } from '../js/recorder.js';
-import { createRenderer, resultPage, header, moduleNav, reviewPanel, itemReview, testBanner, esc, RESULT_TITLE, RESULT_DISCLAIMER } from '../js/render.js';
+import { createRenderer, resultPage, header, moduleNav, reviewPanel, itemReview, testBanner, recordingsSection, esc, RESULT_TITLE, RESULT_DISCLAIMER } from '../js/render.js';
 import { nextAction, assertSupported, unansweredCount, answerableItems, partProgress, isAnswered, itemNumber } from '../js/engine.js';
 import { countWords } from '../js/wordcount.js';
 import { speakingSchedule, speakingPhaseAt, prepEndsAt, partOfPhase, partForListenPhase, speakingItemsForPart, partnerAssetFor,
@@ -494,4 +494,16 @@ test('TIMING label: synthetic packages with adjusted timing say so; exam-timed m
   for (const m of ['hoeren', 'sprechen']) assert.match(testBanner(pkgFor(b, m)), /Verkürzte Übungszeiten – nicht die Zeiten der Prüfung\./, m);
   for (const m of ['lesen', 'schreiben']) { assert.equal(pkgFor(b, m).timing.adjusted, undefined); assert.equal(/Verkürzte/.test(testBanner(pkgFor(b, m))), false, m); }
   assert.equal(testBanner({ test_content: false, timing: { adjusted: true } }), '');
+});
+
+test('MY RECORDINGS render: one load button per available turn, no player until requested, gaps labelled', () => {
+  const html = recordingsSection({ recordings: [
+    { part: 1, turn: 't1', complete: true, duration_ms: 31000, available: true },
+    { part: 2, turn: 't1', complete: false, duration_ms: null, available: true },
+    { part: 3, turn: 't2', complete: true, duration_ms: 4000, available: false }] });
+  assert.equal((html.match(/data-act="my-recording"/g) || []).length, 2);
+  assert.match(html, /Teil 1, Beitrag 1 · 31 s/); assert.match(html, /Teil 2, Beitrag 1 · unvollständig übertragen/);
+  assert.match(html, /Teil 3, Beitrag 2 · 4 s<\/span><span class="kx-meta">nicht mehr verfügbar/);
+  assert.equal(/<audio/.test(html), false, 'nothing loads or plays before the learner asks');
+  assert.match(recordingsSection({ recordings: [] }), /Es sind keine Aufnahmen verfügbar/);
 });

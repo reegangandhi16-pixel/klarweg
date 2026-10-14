@@ -114,7 +114,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Feuer war bei Rafaels Nachbarn, nicht bei ihm."
+      "explanation_de": "Rafael hat das kleine Küchenfeuer bei den Nachbarn erlebt, seine eigene Küche hat nicht gebrannt."
     }
   },
   {
@@ -370,7 +370,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "In der Gruppe sind Handwerker, Lehrerinnen und ein Zahnarzt."
+      "explanation_de": "Handwerker, Lehrerinnen und ein Zahnarzt sind unterschiedliche Berufe, also stimmt die Aussage."
     }
   },
   {
@@ -505,7 +505,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Dorfbüro hat acht Schreibtische."
+      "explanation_de": "Acht Schreibtische sind acht Arbeitsplätze, ein Café oder Parkplätze für Gäste werden nicht genannt."
     }
   },
   {
@@ -576,7 +576,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Viele fühlen sich im Homeoffice allein."
+      "explanation_de": "Wer sich im Homeoffice allein fühlt, hat zu Hause zu wenig Kontakt zu anderen Menschen."
     }
   },
   {
@@ -647,7 +647,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Ein Verein kümmert sich um den Betrieb."
+      "explanation_de": "Die Gemeinde hat nur den Umbau bezahlt, um den laufenden Betrieb kümmert sich ein Verein."
     }
   },
   {
@@ -779,7 +779,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Eine Schülergruppe hat den Schrank im Technikunterricht gebaut."
+      "explanation_de": "Den Schrank haben Jugendliche als Projekt im Unterricht selbst hergestellt, keine Mitarbeiter der Stadt."
     }
   },
   {
@@ -850,7 +850,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Rentner sieht jeden Morgen nach, ob alles in Ordnung ist."
+      "explanation_de": "Der Rentner prüft jeden Morgen den Schrank und sortiert alte Bücher aus, also kontrolliert er ihn täglich."
     }
   },
   {
@@ -1111,7 +1111,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Pilates (e) ist ein ruhiges Training für den Rücken am Abend."
+      "explanation_de": "Pilates (e) ist abends und schont den Rücken, das passt zu Rückenschmerzen nach der Arbeit."
     }
   },
   {
@@ -1211,7 +1211,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Fotograf (g) macht Bewerbungsfotos."
+      "explanation_de": "Für ein Bewerbungsfoto ist der Fotograf in Anzeige g die richtige Adresse."
     }
   },
   {
@@ -1311,7 +1311,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Reiterhof (c) sucht Helfer am Wochenende."
+      "explanation_de": "Der Reiterhof (c) braucht am Wochenende Hilfe bei den Pferden und lässt dafür reiten."
     }
   },
   {
@@ -1411,7 +1411,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Im Bürgerzentrum (b) hilft man beim Ausfüllen von Anträgen."
+      "explanation_de": "Wer einen Brief vom Amt nicht versteht, bekommt im Bürgerzentrum (b) kostenlos Hilfe bei Anträgen."
     }
   },
   {
@@ -1511,7 +1511,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Bei der Tauschbörse (i) kann man Pflanzen tauschen."
+      "explanation_de": "Ableger und Samen tauscht man bei der Pflanzen-Tauschbörse (i)."
     }
   },
   {
@@ -1611,7 +1611,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Mitfahrgelegenheit (h) fährt jeden Freitag nach Hamburg."
+      "explanation_de": "Die Mitfahrgelegenheit (h) fährt freitags nach Hamburg und sonntags zurück, ideal für Wochenendbesuche."
     }
   },
   {
@@ -2149,7 +2149,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Lea würde sich über mehr hundefreundliche Cafés freuen."
+      "explanation_de": "Lea möchte die Entscheidung den Restaurants überlassen, wünscht sich aber mehr hundefreundliche Cafés und ist deshalb dafür."
     }
   },
   {
@@ -2284,7 +2284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 1: Die Anmeldung ist nur online möglich."
+      "explanation_de": "Nach Regel 1 geht die Anmeldung nur online, eine Nachmeldung am Lauftag gibt es nicht."
     }
   },
   {
@@ -2355,7 +2355,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 2: Für die Startnummer bringt man die Anmeldebestätigung mit."
+      "explanation_de": "Die Startnummer bekommt man in der Stadthalle nur gegen die Anmeldebestätigung."
     }
   },
   {
@@ -2426,7 +2426,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 3: Kinder unter 12 brauchen die Unterschrift eines Elternteils."
+      "explanation_de": "Ein zehnjähriges Kind ist unter 12 und braucht deshalb die Unterschrift von Mutter oder Vater."
     }
   },
   {
@@ -2497,7 +2497,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 4: Bei einer Absage wird die Startgebühr nicht zurückgezahlt."
+      "explanation_de": "Bei einer Absage wegen Unwetter behält der Veranstalter die Startgebühr, man bekommt nichts zurück."
     }
   },
   {
@@ -2882,7 +2882,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Wer am neuen Termin keine Zeit hat, bekommt sein Geld zurück."
+      "explanation_de": "Wer den Ersatztermin eine Woche später nicht wahrnehmen kann, erhält den Kartenpreis erstattet."
     }
   },
   {
@@ -2946,7 +2946,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Sportbecken ist für eine Stunde gesperrt."
+      "explanation_de": "„Gesperrt“ bedeutet geschlossen, und die Sperre des Sportbeckens dauert eine Stunde."
     }
   },
   {
@@ -3017,7 +3017,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Rutsche kann man weiter benutzen."
+      "explanation_de": "Nur das Sportbecken ist zu, das Nichtschwimmerbecken und die Rutsche bleiben offen."
     }
   },
   {
@@ -3152,7 +3152,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "In Frau Itos Raum wird der Boden repariert."
+      "explanation_de": "Der Kurs zieht in Raum 12 um, weil im alten Raum der Boden repariert wird."
     }
   },
   {
@@ -3216,7 +3216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Donnerstags ist zusätzlich von 14 bis 18 Uhr geöffnet."
+      "explanation_de": "Am Donnerstag hat das Bürgeramt zusätzlich nachmittags von 14 bis 18 Uhr geöffnet."
     }
   },
   {
@@ -3287,7 +3287,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Termine kann man auch online buchen."
+      "explanation_de": "„Online buchen“ bedeutet, dass man den Termin auch über das Internet bekommen kann."
     }
   },
   {
@@ -3429,7 +3429,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Nach einer Stunde gibt es eine Pause an einer Raststätte."
+      "explanation_de": "Nach einer Stunde Fahrt hält der Bus an einer Raststätte für eine kurze Pause."
     }
   },
   {
@@ -3500,7 +3500,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Zuerst haben die Gäste Zeit für einen eigenen Spaziergang."
+      "explanation_de": "In Uferstadt haben die Gäste zuerst freie Zeit für einen Spaziergang, die Schifffahrt kommt später."
     }
   },
   {
@@ -3642,7 +3642,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Rückfahrt ist um 18 Uhr."
+      "explanation_de": "Die Rückfahrt beginnt um 18 Uhr, 13 Uhr ist der Treffpunkt für das Schiff."
     }
   },
   {
@@ -3770,7 +3770,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Sie haben vorher einen Zettel an die Haustür gehängt."
+      "explanation_de": "Mit dem Zettel an der Haustür haben die neuen Mieter das Fest vorher angekündigt."
     }
   },
   {
@@ -3834,7 +3834,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Schulz hat den Zettel nicht gesehen."
+      "explanation_de": "Herr Schulz hat den Zettel nicht bemerkt und deshalb auch nicht gelesen."
     }
   },
   {
@@ -4284,7 +4284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Mendes meint, dass Kinder eine Sprache jeden Tag hören müssen."
+      "explanation_de": "Für Herrn Mendes reicht eine Stunde pro Woche nicht, Kinder müssen die Sprache jeden Tag hören."
     }
   },
   {
@@ -4420,7 +4420,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Haas findet Deutsch für diese Kinder am wichtigsten."
+      "explanation_de": "Frau Haas will Kinder mit wenig Deutsch nicht überfordern, für sie hat Deutsch Vorrang."
     }
   },
   {
@@ -4488,7 +4488,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Mendes sagt, dass mehrere Sprachen für Kinder normal sind."
+      "explanation_de": "Herr Mendes erzählt, dass seine Kinder mit Portugiesisch und Deutsch aufwachsen, und hält das für normal."
     }
   },
   {
@@ -4624,7 +4624,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Haas ist gegen Noten und Tests im Kindergarten."
+      "explanation_de": "Frau Haas lehnt Noten und Tests ab, weil das Lernen sonst kein Spiel mehr wäre."
     }
   },
   {
@@ -4692,7 +4692,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Mendes sagt, dass Erzieherinnen mit guten Fremdsprachenkenntnissen fehlen."
+      "explanation_de": "Herr Mendes bedauert, dass vielen Kindergärten Erzieherinnen fehlen, die eine Fremdsprache gut beherrschen."
     }
   },
   {

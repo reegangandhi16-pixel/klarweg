@@ -114,7 +114,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Lina hatte abends oft Kopfschmerzen."
+      "explanation_de": "Häufige Kopfschmerzen nach den Tagen vor dem Bildschirm sind gesundheitliche Probleme, also stimmt die Aussage."
     }
   },
   {
@@ -242,7 +242,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Lina musste viele lateinische Pflanzennamen lernen."
+      "explanation_de": "Lateinische Pflanzennamen sind Fachbegriffe der Gärtnerei, Lina musste viele davon lernen."
     }
   },
   {
@@ -505,7 +505,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Fahrerinnen und Fahrer arbeiten ehrenamtlich."
+      "explanation_de": "„Ehrenamtlich“ bedeutet, dass die Fahrerinnen und Fahrer kein Geld für ihre Arbeit bekommen."
     }
   },
   {
@@ -576,7 +576,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Bus fährt zweimal am Tag nach Hohenberg."
+      "explanation_de": "Zweimal am Tag fährt der Kleinbus nach Hohenberg zum Ärztehaus und zum Supermarkt, nicht stündlich."
     }
   },
   {
@@ -647,7 +647,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Man meldet sich bis zum Vortag telefonisch an."
+      "explanation_de": "Spätestens am Vortag muss man telefonisch Bescheid geben, eine Mitgliedschaft wird nicht verlangt."
     }
   },
   {
@@ -850,7 +850,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Inzwischen essen mehr Mitarbeiter in der Kantine als vorher."
+      "explanation_de": "Nach anfänglichen Beschwerden kommen inzwischen sogar mehr Beschäftigte zum Essen als früher."
     }
   },
   {
@@ -921,7 +921,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Firma zahlt einen Euro pro Mahlzeit dazu."
+      "explanation_de": "Den höheren Preis gleicht die Firma aus, indem sie pro Mahlzeit einen Euro übernimmt."
     }
   },
   {
@@ -1411,7 +1411,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Bei der Wohnungsauflösung (f) werden Möbel verschenkt."
+      "explanation_de": "Wer wenig Geld für Möbel hat, profitiert von der Wohnungsauflösung (f), dort sind Möbel geschenkt zu haben."
     }
   },
   {
@@ -1611,7 +1611,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Seniorenheim (b) sucht ehrenamtliche Vorleser."
+      "explanation_de": "Vorlesen im Seniorenheim (b) ist eine ehrenamtliche Aufgabe, mit der man älteren Menschen eine Freude macht."
     }
   },
   {
@@ -2021,7 +2021,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Hannelore findet, dass ein Feuerwerk der Stadt reicht."
+      "explanation_de": "Hannelore stören Müll und schlechte Luft, ihr genügt ein städtisches Feuerwerk, deshalb ist sie für das Verbot."
     }
   },
   {
@@ -2284,7 +2284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 1: Am Abreisetag verlässt man das Zimmer bis 10 Uhr."
+      "explanation_de": "Laut Regel 1 muss das Zimmer am Abreisetag um 10 Uhr frei sein, 15 Uhr gilt nur für die Ankunft."
     }
   },
   {
@@ -2426,7 +2426,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 3: Lunchpakete bestellt man bis 18 Uhr am Vortag."
+      "explanation_de": "Für Freitag ist Donnerstag der Vortag, also bestellt man das Lunchpaket am Donnerstag bis 18 Uhr."
     }
   },
   {
@@ -2497,7 +2497,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 4: Gruppenleiter sind für ihre Gruppe verantwortlich."
+      "explanation_de": "Nach Regel 4 trägt der Gruppenleiter die Verantwortung dafür, dass seine Gruppe die Nachtruhe einhält."
     }
   },
   {
@@ -2676,7 +2676,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das größere Auto kostet den gleichen Preis."
+      "explanation_de": "Die Autovermietung bietet als Ersatz ein größeres Auto ohne Aufpreis an, Frau Berger zahlt also nicht mehr."
     }
   },
   {
@@ -2747,7 +2747,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das reservierte Auto ist kaputt."
+      "explanation_de": "Das für Freitag reservierte Auto hat einen Schaden, deshalb bekommt Frau Berger ein anderes."
     }
   },
   {
@@ -2811,7 +2811,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Auf Brücken und Nebenstraßen kann es glatt werden."
+      "explanation_de": "Weil es nachts friert, warnt der Wetterbericht vor Glätte am Morgen, besonders auf Brücken."
     }
   },
   {
@@ -2946,7 +2946,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Leon wartet an der Information im Erdgeschoss."
+      "explanation_de": "Leon wartet nicht an einer Kasse oben, sondern unten an der Information."
     }
   },
   {
@@ -3017,7 +3017,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Leon ist vier Jahre alt."
+      "explanation_de": "Die Durchsage nennt Leons Alter, er ist vier, und eine rote Jacke, keine blaue."
     }
   },
   {
@@ -3081,7 +3081,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Kraus ist ab Montag eine Woche verreist."
+      "explanation_de": "Herr Kraus verreist ab Montag für sieben Tage und bittet deshalb um Hilfe mit der Post."
     }
   },
   {
@@ -3216,7 +3216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Kurs fällt diese Woche aus."
+      "explanation_de": "Weil die Kursleiterin krank ist, findet der Italienischkurs diese Woche nicht statt."
     }
   },
   {
@@ -3287,7 +3287,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Den genauen Termin bekommen die Teilnehmer per E-Mail."
+      "explanation_de": "Die Volkshochschule verschickt den Nachholtermin in den Osterferien per E-Mail."
     }
   },
   {
@@ -3358,7 +3358,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Kurs dauert bis 16 Uhr."
+      "explanation_de": "Der Erste-Hilfe-Kurs geht heute bis 16 Uhr und endet dann mit der Bescheinigung."
     }
   },
   {
@@ -3429,7 +3429,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Mittags gibt es eine Stunde Pause."
+      "explanation_de": "Die Kursleiterin plant mittags eine Pause von einer ganzen Stunde ein."
     }
   },
   {
@@ -3500,7 +3500,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Am Nachmittag üben alle an Puppen."
+      "explanation_de": "Am Nachmittag wird die Herz-Druck-Massage praktisch an Übungspuppen trainiert."
     }
   },
   {
@@ -3642,7 +3642,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Bescheinigung gibt es am Ende des Kurses."
+      "explanation_de": "Die Bescheinigung wird nicht verschickt, sondern am Kursende direkt ausgegeben."
     }
   },
   {
@@ -3770,7 +3770,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Tobias hat das Auto von einem älteren Herrn gekauft."
+      "explanation_de": "Tobias kaufte das Auto von einem älteren Herrn, der nicht mehr fahren darf."
     }
   },
   {
@@ -3834,7 +3834,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Sein Schwager, ein Mechaniker, hat alles angeschaut."
+      "explanation_de": "Der Schwager von Tobias ist Mechaniker, also hat ein Familienmitglied das Auto kontrolliert."
     }
   },
   {
@@ -3898,7 +3898,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Vor dem Winter muss Tobias die Reifen wechseln."
+      "explanation_de": "Ganz ohne Arbeit geht es nicht: Vor dem Winter braucht das Auto neue Reifen."
     }
   },
   {
@@ -3962,7 +3962,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Zur Arbeit fährt Tobias weiter mit dem Rad."
+      "explanation_de": "Das Auto braucht Tobias nur für die Fahrten zu den Eltern, zur Arbeit nimmt er weiter das Fahrrad."
     }
   },
   {
@@ -4216,7 +4216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Braun empfiehlt, den Schulweg vorher gemeinsam zu üben."
+      "explanation_de": "Herr Braun rät, den Schulweg vorher mehrmals zusammen zu gehen, damit Kinder die gefährlichen Stellen kennen."
     }
   },
   {
@@ -4488,7 +4488,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Okonkwo meint, dass man Kindern etwas zutrauen muss."
+      "explanation_de": "Frau Okonkwo versteht die Angst der Eltern, findet aber, dass Kinder Vertrauen brauchen."
     }
   },
   {
@@ -4556,7 +4556,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Moderatorin erwähnt die Frage eines Hörers."
+      "explanation_de": "Nur die Moderatorin leitet durch die Sendung und gibt deshalb die Frage aus dem Publikum weiter."
     }
   },
   {
@@ -4624,7 +4624,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Braun beschreibt Laufgruppen mit einem Erwachsenen."
+      "explanation_de": "Herr Braun lobt Laufgruppen, in denen ein Erwachsener mehrere Kinder auf dem Schulweg abholt."
     }
   },
   {
@@ -4692,7 +4692,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Okonkwo sagt, dass der Weg in der Gruppe mehr Spaß macht."
+      "explanation_de": "Frau Okonkwo erzählt, dass die Kinder ihrer Straße zusammen gehen, weil der Weg dann lustiger ist."
     }
   },
   {

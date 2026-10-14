@@ -114,7 +114,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Ihr Abschluss muss erst anerkannt werden."
+      "explanation_de": "Bevor Amira wieder als Krankenschwester arbeiten darf, muss ihr Abschluss anerkannt werden."
     }
   },
   {
@@ -306,7 +306,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Amira hat jetzt weniger Verantwortung."
+      "explanation_de": "Als Pflegehelferin trägt Amira weniger Verantwortung als früher in ihrer Heimat."
     }
   },
   {
@@ -370,7 +370,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Eine alte Dame bringt ihr Lieder aus ihrer Jugend bei."
+      "explanation_de": "Eine alte Dame aus dem Seniorenheim ist eine Bewohnerin, und sie lehrt Amira Lieder aus ihrer Jugend."
     }
   },
   {
@@ -434,7 +434,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Amira findet die Dokumentationen am Computer schwierig."
+      "explanation_de": "Die vielen Dokumentationen am Computer findet Amira als einzigen Teil der Arbeit schwierig."
     }
   },
   {
@@ -505,7 +505,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Gasthörer bekommen keinen Abschluss."
+      "explanation_de": "Gasthörer müssen keine Prüfung machen, erhalten dafür aber auch keinen Abschluss."
     }
   },
   {
@@ -576,7 +576,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Gasthörer stellen oft interessante Fragen."
+      "explanation_de": "Die Professorinnen und Professoren freuen sich, weil die Senioren oft interessante Fragen stellen."
     }
   },
   {
@@ -647,7 +647,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Anmeldung ist bis Ende September möglich."
+      "explanation_de": "Die Frist für die Anmeldung im Studierendenbüro endet Ende September."
     }
   },
   {
@@ -779,7 +779,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "230 Bürger haben den Laden zusammen gegründet."
+      "explanation_de": "230 Einwohner haben jeweils mindestens 100 Euro gegeben und den Laden gemeinsam gegründet."
     }
   },
   {
@@ -921,7 +921,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "In der Kaffee-Ecke trifft man sich zum Plaudern."
+      "explanation_de": "„Plaudern“ bedeutet sich unterhalten, und dafür treffen sich die Leute in der Kaffee-Ecke."
     }
   },
   {
@@ -1111,7 +1111,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Bügelservice (b) holt die Hemden ab und bringt sie gebügelt zurück."
+      "explanation_de": "Wer nicht selbst bügeln will, gibt die Hemden dem Bügelservice in Anzeige b, der sie abholt und zurückbringt."
     }
   },
   {
@@ -1211,7 +1211,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Schuhmacher (e) repariert Schuhe."
+      "explanation_de": "Ein Absatz gehört zum Schuh, und Anzeige e repariert Schuhe sogar innerhalb von 24 Stunden."
     }
   },
   {
@@ -1511,7 +1511,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Gesprächskreis (f) ist für Eltern von Kindern mit ADHS."
+      "explanation_de": "Der monatliche Gesprächskreis (f) richtet sich genau an Eltern, deren Kinder ADHS haben."
     }
   },
   {
@@ -1611,7 +1611,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Biohof (j) sucht im September Erntehelfer."
+      "explanation_de": "Kartoffelernte im September ist Arbeit im Herbst an der frischen Luft, und der Biohof (j) sucht dafür Helfer."
     }
   },
   {
@@ -2208,12 +2208,12 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p14-l4-c7",
-        "start": 137,
-        "end": 177
+        "start": 108,
+        "end": 148
       }
     ],
     "feedback": {
-      "explanation_de": "Gisela findet es falsch, alle Tiere im Zirkus zu verbieten."
+      "explanation_de": "Gisela meint, dass auch wilde Tiere mit regelmäßiger Kontrolle durch einen Tierarzt gut im Zirkus leben können, und ist gegen das Verbot."
     }
   },
   {
@@ -2426,7 +2426,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 3: Topfpflanzen sind nicht erlaubt."
+      "explanation_de": "Aus hygienischen Gründen dürfen nach Regel 3 keine Pflanzen im Topf mitgebracht werden."
     }
   },
   {
@@ -2497,7 +2497,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Regel 4: Die erste Stunde im Parkhaus ist kostenlos."
+      "explanation_de": "Wer im Parkhaus P2 parkt, zahlt für die erste Stunde nichts."
     }
   },
   {
@@ -2676,7 +2676,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Hose wurde gekürzt."
+      "explanation_de": "Die Schneiderei hat die Hose um drei Zentimeter kürzer gemacht, nicht länger."
     }
   },
   {
@@ -2811,7 +2811,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Altstadt ist am Wochenende für Autos gesperrt."
+      "explanation_de": "Weil die Altstadt wegen des Weinfests gesperrt ist, dürfen am Wochenende keine Autos hinein."
     }
   },
   {
@@ -2882,7 +2882,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Busse fahren über die Ringstraße."
+      "explanation_de": "Wegen der Sperrung nehmen die Busse eine Umleitung über die Ringstraße."
     }
   },
   {
@@ -2946,7 +2946,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Nur eine Rolltreppe ist defekt."
+      "explanation_de": "Kaputt ist nur die eine Rolltreppe zwischen erstem und zweitem Stock, nicht alle."
     }
   },
   {
@@ -3017,7 +3017,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Aufzüge sind neben dem Haupteingang."
+      "explanation_de": "Als Ersatz für die Rolltreppe nennt die Durchsage die Aufzüge beim Haupteingang."
     }
   },
   {
@@ -3216,7 +3216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Es gibt noch Restkarten an der Abendkasse."
+      "explanation_de": "Restkarten gibt es nur noch direkt vor der Vorstellung an der Abendkasse."
     }
   },
   {
@@ -3358,7 +3358,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Am Vormittag lernt man an Land."
+      "explanation_de": "Vormittags werden an Land Begriffe und Knoten gelernt, aufs Wasser geht es erst nachmittags."
     }
   },
   {
@@ -3500,7 +3500,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Rettungswesten sind für alle Pflicht."
+      "explanation_de": "Rettungswesten tragen alle, auch Teilnehmer, die sehr gut schwimmen können."
     }
   },
   {
@@ -3571,7 +3571,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Handys bleiben im Vereinsheim."
+      "explanation_de": "Damit sie nicht nass werden, bleiben die Handys im Vereinsheim."
     }
   },
   {
@@ -3706,7 +3706,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Das Bad war nicht sauber."
+      "explanation_de": "Lena beschwert sich, dass Jakob das Putzen vergessen hat und das Bad schmutzig ist."
     }
   },
   {
@@ -3770,7 +3770,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Jakob hatte Prüfungen und hat es vergessen."
+      "explanation_de": "Jakob hatte keine Zeit wegen dreier Prüfungen und hat das Putzen vergessen, nicht verweigert."
     }
   },
   {
@@ -3834,7 +3834,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Jakob macht nächste Woche auch die Küche."
+      "explanation_de": "Als Ausgleich übernimmt Jakob nächste Woche neben dem Bad auch die Küche."
     }
   },
   {
@@ -3898,7 +3898,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Käse gehört Nils."
+      "explanation_de": "Jakob vermutet, dass der alte Käse seinem Mitbewohner Nils gehört."
     }
   },
   {
@@ -3962,7 +3962,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Nils ist seit zwei Wochen bei seinen Eltern."
+      "explanation_de": "Nils besucht seit zwei Wochen seine Eltern und ist deshalb gerade nicht in der WG."
     }
   },
   {
@@ -4216,7 +4216,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Brandl sagt, dass es nach ein paar Wochen normal ist."
+      "explanation_de": "Herr Brandl erzählt, dass mitgebrachte Gläser am Anfang ungewohnt sind, nach wenigen Wochen aber normal."
     }
   },
   {
@@ -4284,7 +4284,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Schmid findet es für eine große Familie schwierig."
+      "explanation_de": "Frau Schmid kann für den großen Familieneinkauf nicht zwanzig Gläser mitnehmen."
     }
   },
   {
@@ -4352,7 +4352,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Moderatorin fragt, ob es teurer ist."
+      "explanation_de": "Die Moderatorin fragt, ob verpackungsfreies Einkaufen mehr Geld kostet."
     }
   },
   {
@@ -4420,7 +4420,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Herr Brandl sagt, dass man nur kauft, was man braucht."
+      "explanation_de": "Herr Brandl argumentiert, dass man unverpackt nur die nötige Menge kauft und weniger wegwirft."
     }
   },
   {
@@ -4488,7 +4488,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Schmid sagt, dass loses Obst manchmal mehr kostet."
+      "explanation_de": "Frau Schmid wundert sich, dass loses Obst in ihrem Supermarkt manchmal mehr kostet als verpacktes."
     }
   },
   {
@@ -4556,7 +4556,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Moderatorin kündigt die Frage eines Hörers an."
+      "explanation_de": "Die Moderatorin kündigt an, dass gleich ein Hörer seine Frage stellt."
     }
   },
   {
@@ -4692,7 +4692,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Schmid wünscht sich klare Regeln von der Politik."
+      "explanation_de": "Frau Schmid möchte, dass die Politik und nicht die Kunden über Verpackungen entscheiden."
     }
   },
   {

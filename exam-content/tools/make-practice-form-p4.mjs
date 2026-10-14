@@ -20,10 +20,10 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
       example: ['Ana war mit ihrer Familie auf einem Bauernhof.', 'richtig'],
       items: [
         ['Die Familie hat zuerst einen Urlaub am Meer geplant.', 'richtig', 'Eigentlich wollten wir ans Meer', 'Ana schreibt, dass sie eigentlich ans Meer fahren wollten.'],
-        ['Der Bauernhof liegt weit von Anas Wohnort entfernt.', 'falsch', 'nur zwei Stunden von uns entfernt', 'Der Hof ist nur zwei Stunden von Anas Wohnort entfernt.'],
+        ['Für die Fahrt zum Bauernhof brauchte die Familie einen ganzen Tag.', 'falsch', 'nur zwei Stunden von uns entfernt', 'Ana betont, dass der Hof nur zwei Autostunden entfernt liegt, für die Fahrt reichte also ein kleiner Teil des Tages.'],
         ['Die Kinder haben morgens bei den Tieren geholfen.', 'richtig', 'weil sie beim Füttern der Kälber helfen durften', 'Die Kinder durften morgens beim Füttern der Kälber helfen.'],
         ['Anas Mann hat auf dem Hof gelernt, Brot zu backen.', 'falsch', 'wie man Käse macht', 'Anas Mann hat gelernt, Käse zu machen, nicht Brot zu backen.'],
-        ['In dieser Woche war das Wetter meistens schön.', 'falsch', 'Es hat fast jeden Tag ein bisschen geregnet.', 'Es hat fast jeden Tag geregnet.'],
+        ['In dieser Woche war das Wetter meistens schön.', 'falsch', 'Es hat fast jeden Tag ein bisschen geregnet.', 'Ana schreibt von Regen an fast jedem Tag, von schönem Wetter kann also keine Rede sein.'],
         ['In den Herbstferien fährt Ana mit ihren Eltern auf den Hof.', 'richtig', 'diesmal zusammen mit meinen Eltern', 'Für die Herbstferien hat Ana zusammen mit ihren Eltern gebucht.']
       ]
     },
@@ -38,7 +38,7 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
         items: [
           ['Die Bäume sollen vor allem …', ['den Verkehr langsamer machen.', 'die Stadt im Sommer kühler machen.', 'Vögel in die Stadt bringen.'], 'b', 'die Luft in den Straßen kühler machen', 'Die Bäume sollen Schatten geben und die Luft kühler machen.'],
           ['Wer eine Baumpatenschaft übernimmt, …', ['zahlt einen festen Betrag.', 'muss den Baum selbst pflanzen.', 'gießt den Baum im Sommer.'], 'c', 'Sie gießen ihn im Sommer regelmäßig', 'Paten gießen ihren Baum im Sommer regelmäßig.'],
-          ['Manche Geschäftsleute …', ['befürchten weniger Parkplätze.', 'spenden Geld für die Bäume.', 'wollen selbst Paten werden.'], 'a', 'Einige Geschäftsleute haben Sorge, dass dafür Parkplätze wegfallen.', 'Einige Geschäftsleute fürchten, dass Parkplätze wegfallen.']
+          ['Manche Geschäftsleute …', ['befürchten weniger Parkplätze.', 'spenden Geld für die Bäume.', 'wollen selbst Paten werden.'], 'a', 'Einige Geschäftsleute haben Sorge, dass dafür Parkplätze wegfallen.', '„Sorge, dass Parkplätze wegfallen“ heißt, dass die Geschäftsleute weniger Parkplätze befürchten.']
         ]
       },
       {
@@ -48,8 +48,8 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
           + 'Weil die Nachfrage so groß ist, sucht die Kita noch weitere Freiwillige.',
         label: 'aus einer Lokalzeitung (erfunden)',
         items: [
-          ['Die Idee für die Lesepaten hatte …', ['ein Großvater.', 'die Leiterin der Kita.', 'eine Bibliothekarin.'], 'b', 'Die Idee stammt von der Leiterin der Kita', 'Die Idee hatte die Leiterin der Kita.'],
-          ['Die Bücher …', ['wählen die Kinder selbst aus.', 'bringen die Eltern mit.', 'sind nur über Tiere.'], 'a', 'dürfen die Bücher selbst aussuchen', 'Die Kinder dürfen die Bücher selbst aussuchen.'],
+          ['Die Idee für die Lesepaten hatte …', ['ein Großvater.', 'die Leiterin der Kita.', 'eine Bibliothekarin.'], 'b', 'Die Idee stammt von der Leiterin der Kita', 'Nicht ein Großvater oder eine Bibliothekarin, sondern die Kita-Leiterin hatte die Idee, weil sie selbst gern mit ihrer Oma gelesen hat.'],
+          ['Die Bücher …', ['wählen die Kinder selbst aus.', 'bringen die Eltern mit.', 'sind nur über Tiere.'], 'a', 'dürfen die Bücher selbst aussuchen', 'Die Kinder bekommen keine Bücher vorgegeben, sie suchen sie selbst aus.'],
           ['Die Kita sucht …', ['eine neue Leiterin.', 'Spenden für Bücher.', 'noch mehr Lesepaten.'], 'c', 'sucht die Kita noch weitere Freiwillige', 'Wegen der großen Nachfrage sucht die Kita weitere Freiwillige.']
         ]
       }
@@ -100,10 +100,10 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
         + '3. Schäden: Kleine Reparaturen wie einen Platten übernehmen wir. Für größere Schäden, die Sie verursacht haben, zahlen Sie selbst.\n\n'
         + '4. Kinder: Kindersitze und Helme leihen wir kostenlos aus. Bitte reservieren Sie diese mindestens einen Tag vorher.',
       items: [
-        ['Bei der Ausleihe muss man …', ['einen Ausweis abgeben.', 'eine Kaution in bar bezahlen.', 'ein Formular online ausfüllen.'], 'a', 'hinterlegen Sie einen Personalausweis oder Reisepass', 'Regel 1: Man hinterlegt einen Ausweis oder Reisepass.'],
-        ['Wer das Fahrrad erst um 20 Uhr zurückbringt, …', ['muss nichts extra bezahlen.', 'bezahlt für einen zusätzlichen Tag.', 'darf kein Rad mehr leihen.'], 'b', 'Wer später kommt, zahlt einen weiteren Tag.', 'Regel 2: Nach 19 Uhr zahlt man einen weiteren Tag.'],
-        ['Einen platten Reifen …', ['muss man selbst reparieren.', 'bezahlt man selbst.', 'repariert der Verleih.'], 'c', 'Kleine Reparaturen wie einen Platten übernehmen wir.', 'Regel 3: Kleine Reparaturen wie einen Platten übernimmt der Verleih.'],
-        ['Kindersitze …', ['kosten einen kleinen Betrag.', 'sollte man vorher reservieren.', 'gibt es nicht.'], 'b', 'Bitte reservieren Sie diese mindestens einen Tag vorher.', 'Regel 4: Kindersitze reserviert man mindestens einen Tag vorher.']
+        ['Bei der Ausleihe muss man …', ['einen Ausweis abgeben.', 'eine Kaution in bar bezahlen.', 'ein Formular online ausfüllen.'], 'a', 'hinterlegen Sie einen Personalausweis oder Reisepass', '„Hinterlegen“ bedeutet, dass man den Ausweis beim Verleih lässt und ihn bei der Rückgabe zurückbekommt.'],
+        ['Wer das Fahrrad erst um 20 Uhr zurückbringt, …', ['muss nichts extra bezahlen.', 'bezahlt für einen zusätzlichen Tag.', 'darf kein Rad mehr leihen.'], 'b', 'Wer später kommt, zahlt einen weiteren Tag.', 'Die Räder müssen bis 19 Uhr zurück sein, wer um 20 Uhr kommt, zahlt nach Regel 2 einen weiteren Tag.'],
+        ['Einen platten Reifen …', ['muss man selbst reparieren.', 'bezahlt man selbst.', 'repariert der Verleih.'], 'c', 'Kleine Reparaturen wie einen Platten übernehmen wir.', 'Ein platter Reifen zählt zu den kleinen Reparaturen, und die macht nach Regel 3 der Verleih.'],
+        ['Kindersitze …', ['kosten einen kleinen Betrag.', 'sollte man vorher reservieren.', 'gibt es nicht.'], 'b', 'Bitte reservieren Sie diese mindestens einen Tag vorher.', 'Kindersitze sind zwar kostenlos, müssen nach Regel 4 aber spätestens am Vortag bestellt werden.']
       ]
     }
   },
@@ -114,18 +114,18 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
       texts: [
         { script: 'Nachricht von der Kita: Guten Tag, Frau Neumann, hier ist Frau Heller aus der Kita. Der Elternabend findet nicht am Mittwoch, sondern schon am Dienstag um 19 Uhr statt. Bitte bringen Sie, wenn möglich, einen kleinen Kuchen mit.',
           rf: ['Der Elternabend ist am Mittwoch.', 'falsch', 'nicht am Mittwoch, sondern schon am Dienstag', 'Der Elternabend findet schon am Dienstag statt.'],
-          mc: ['Frau Neumann soll …', ['einen Kuchen mitbringen.', 'Frau Heller anrufen.', 'ihr Kind früher abholen.'], 'a', 'Bitte bringen Sie, wenn möglich, einen kleinen Kuchen mit.', 'Frau Heller bittet um einen kleinen Kuchen.'] },
+          mc: ['Frau Neumann soll …', ['einen Kuchen mitbringen.', 'Frau Heller anrufen.', 'ihr Kind früher abholen.'], 'a', 'Bitte bringen Sie, wenn möglich, einen kleinen Kuchen mit.', 'Frau Heller bittet Frau Neumann, für den Elternabend nach Möglichkeit einen kleinen Kuchen zu backen oder zu kaufen.'] },
         { script: 'Radiotipp: Am Sonntag gibt es in der Markthalle einen großen Flohmarkt für Kindersachen. Verkaufen dürfen nur Privatleute. Der Markt beginnt um zehn Uhr, und das Parkhaus nebenan ist an diesem Tag kostenlos.',
-          rf: ['Auf dem Flohmarkt verkaufen auch Geschäfte.', 'falsch', 'Verkaufen dürfen nur Privatleute.', 'Nur Privatleute dürfen dort verkaufen.'],
-          mc: ['Am Sonntag …', ['kostet das Parkhaus nichts.', 'ist die Markthalle geschlossen.', 'beginnt der Markt am Nachmittag.'], 'a', 'das Parkhaus nebenan ist an diesem Tag kostenlos', 'Das Parkhaus ist am Sonntag kostenlos.'] },
+          rf: ['Auf dem Flohmarkt verkaufen auch Geschäfte.', 'falsch', 'Verkaufen dürfen nur Privatleute.', 'Der Radiotipp erlaubt das Verkaufen ausdrücklich nur Privatleuten, Händler und Läden sind ausgeschlossen.'],
+          mc: ['Am Sonntag …', ['kostet das Parkhaus nichts.', 'ist die Markthalle geschlossen.', 'beginnt der Markt am Nachmittag.'], 'a', 'das Parkhaus nebenan ist an diesem Tag kostenlos', 'Am Tag des Flohmarkts muss man im Parkhaus neben der Markthalle nichts bezahlen.'] },
         { script: 'Ansage im Theater: Meine Damen und Herren, die Pause dauert heute zwanzig Minuten. Getränke bekommen Sie im Foyer im ersten Stock. Bitte denken Sie daran, Ihre Handys auch im zweiten Teil auszuschalten.',
-          rf: ['Die Pause dauert zwanzig Minuten.', 'richtig', 'die Pause dauert heute zwanzig Minuten', 'Die Pause dauert heute zwanzig Minuten.'],
-          mc: ['Getränke gibt es …', ['im Saal.', 'vor dem Theater.', 'im ersten Stock.'], 'c', 'Getränke bekommen Sie im Foyer im ersten Stock.', 'Getränke gibt es im Foyer im ersten Stock.'] },
+          rf: ['Die Pause dauert zwanzig Minuten.', 'richtig', 'die Pause dauert heute zwanzig Minuten', 'Die Ansage nennt für die heutige Pause genau zwanzig Minuten, die Aussage stimmt.'],
+          mc: ['Getränke gibt es …', ['im Saal.', 'vor dem Theater.', 'im ersten Stock.'], 'c', 'Getränke bekommen Sie im Foyer im ersten Stock.', 'Getränke verkauft das Theater im Foyer, und dieses liegt im ersten Stock, nicht im Saal.'] },
         { script: 'Nachricht vom Paketdienst: Hallo, Herr Adeyemi, wir konnten Ihr Paket heute leider nicht zustellen. Es liegt jetzt bei Ihrer Nachbarin, Frau Kowalski, im Erdgeschoss. Sie ist ab 16 Uhr zu Hause.',
-          rf: ['Herr Adeyemi hat sein Paket heute bekommen.', 'falsch', 'wir konnten Ihr Paket heute leider nicht zustellen', 'Das Paket konnte heute nicht zugestellt werden.'],
-          mc: ['Das Paket ist …', ['in der Post.', 'bei einer Nachbarin.', 'vor der Tür.'], 'b', 'Es liegt jetzt bei Ihrer Nachbarin', 'Das Paket liegt bei der Nachbarin Frau Kowalski.'] },
+          rf: ['Herr Adeyemi hat sein Paket heute bekommen.', 'falsch', 'wir konnten Ihr Paket heute leider nicht zustellen', 'Der Paketdienst konnte Herrn Adeyemi heute nicht antreffen, er hat das Paket also noch nicht.'],
+          mc: ['Das Paket ist …', ['in der Post.', 'bei einer Nachbarin.', 'vor der Tür.'], 'b', 'Es liegt jetzt bei Ihrer Nachbarin', 'Das Paket wurde bei Frau Kowalski im Erdgeschoss abgegeben, das ist eine Nachbarin.'] },
         { script: 'Verkehrsmeldung: Wegen Bauarbeiten fährt die Straßenbahnlinie 3 ab Montag zwei Wochen lang nicht bis zum Zoo. Zwischen Rathaus und Zoo fahren Ersatzbusse. Die Fahrt dauert dadurch etwa zehn Minuten länger.',
-          rf: ['Zwischen Rathaus und Zoo fahren Busse.', 'richtig', 'Zwischen Rathaus und Zoo fahren Ersatzbusse.', 'Zwischen Rathaus und Zoo fahren Ersatzbusse.'],
+          rf: ['Zwischen Rathaus und Zoo fahren Busse.', 'richtig', 'Zwischen Rathaus und Zoo fahren Ersatzbusse.', 'Ersatzbusse sind Busse, die statt der Straßenbahn zwischen Rathaus und Zoo fahren.'],
           mc: ['Die Bauarbeiten dauern …', ['zwei Tage.', 'zehn Tage.', 'zwei Wochen.'], 'c', 'ab Montag zwei Wochen lang', 'Die Linie 3 fährt zwei Wochen lang nicht bis zum Zoo.'] }
       ]
     },
@@ -136,11 +136,11 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
         + 'Bitte geben Sie den Tieren kein eigenes Futter. Unser Büro ist am Wochenende nur bis 14 Uhr besetzt. '
         + 'Und noch etwas: Einmal im Monat gibt es einen Abend, an dem wir über Tierpflege informieren.',
       items: [
-        ['Neue Freiwillige arbeiten zuerst mit …', ['Katzen.', 'Hunden.', 'Kaninchen.'], 'b', 'Neue Freiwillige beginnen bei uns immer mit den Hunden', 'Neue Freiwillige beginnen immer mit den Hunden.'],
+        ['Neue Freiwillige arbeiten zuerst mit …', ['Katzen.', 'Hunden.', 'Kaninchen.'], 'b', 'Neue Freiwillige beginnen bei uns immer mit den Hunden', 'Mit den Katzen arbeiten Freiwillige erst später, der Anfang ist immer bei den Hunden.'],
         ['Bevor man allein mit einem Hund geht, …', ['geht man dreimal mit einer erfahrenen Person.', 'macht man eine Prüfung.', 'muss man einen Kurs bezahlen.'], 'a', 'machen Sie drei Spaziergänge mit einer erfahrenen Person', 'Man macht zuerst drei Spaziergänge mit einer erfahrenen Person.'],
-        ['Eigenes Futter …', ['soll man mitbringen.', 'gibt es im Büro.', 'darf man nicht geben.'], 'c', 'Bitte geben Sie den Tieren kein eigenes Futter.', 'Man soll den Tieren kein eigenes Futter geben.'],
-        ['Am Wochenende ist das Büro …', ['bis 14 Uhr offen.', 'den ganzen Tag offen.', 'geschlossen.'], 'a', 'am Wochenende nur bis 14 Uhr besetzt', 'Am Wochenende ist das Büro nur bis 14 Uhr besetzt.'],
-        ['Einmal im Monat …', ['gibt es ein Fest.', 'gibt es einen Informationsabend.', 'kommt ein Tierarzt.'], 'b', 'Einmal im Monat gibt es einen Abend, an dem wir über Tierpflege informieren.', 'Einmal im Monat gibt es einen Abend mit Informationen über Tierpflege.']
+        ['Eigenes Futter …', ['soll man mitbringen.', 'gibt es im Büro.', 'darf man nicht geben.'], 'c', 'Bitte geben Sie den Tieren kein eigenes Futter.', 'Die Bitte, kein eigenes Futter zu geben, ist ein Verbot, also darf man es nicht.'],
+        ['Am Wochenende ist das Büro …', ['bis 14 Uhr offen.', 'den ganzen Tag offen.', 'geschlossen.'], 'a', 'am Wochenende nur bis 14 Uhr besetzt', '„Nur bis 14 Uhr besetzt“ heißt, dass am Wochenende nach 14 Uhr niemand mehr im Büro ist.'],
+        ['Einmal im Monat …', ['gibt es ein Fest.', 'gibt es einen Informationsabend.', 'kommt ein Tierarzt.'], 'b', 'Einmal im Monat gibt es einen Abend, an dem wir über Tierpflege informieren.', 'Der monatliche Abend über Tierpflege ist ein Informationsabend, kein Fest und kein Tierarztbesuch.']
       ]
     },
     t3: {
@@ -154,13 +154,13 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
         + 'Moritz: Nein, seit Oktober gebe ich Nachhilfe in Mathe. Das ist besser bezahlt, und ich kann mir die Zeit selbst einteilen.\n'
         + 'Aylin: Klingt gut. Ich bringe am Donnerstag Kekse mit, versprochen.',
       items: [
-        ['Aylin hat nächste Woche eine Prüfung.', 'richtig', 'Nächste Woche habe ich meine Statistikprüfung', 'Aylin hat nächste Woche ihre Statistikprüfung.'],
-        ['Moritz hatte Statistik noch nicht.', 'falsch', 'Statistik hatte ich letztes Semester.', 'Moritz hatte Statistik schon letztes Semester.'],
-        ['Am Donnerstag arbeitet Aylin bis sechs Uhr.', 'richtig', 'am Donnerstag arbeite ich im Café, bis sechs', 'Aylin arbeitet am Donnerstag bis sechs im Café.'],
-        ['Die beiden treffen sich in einem Café.', 'falsch', 'um sieben in der Bibliothek', 'Sie treffen sich um sieben in der Bibliothek.'],
-        ['Die Bibliothek ist abends bis zehn Uhr geöffnet.', 'richtig', 'Die ist bis zehn Uhr offen.', 'Moritz sagt, dass die Bibliothek bis zehn Uhr offen ist.'],
+        ['Aylin hat nächste Woche eine Prüfung.', 'richtig', 'Nächste Woche habe ich meine Statistikprüfung', 'Aylin lernt so viel, weil ihre Statistikprüfung schon in der nächsten Woche ist.'],
+        ['Moritz hatte Statistik noch nicht.', 'falsch', 'Statistik hatte ich letztes Semester.', 'Moritz kennt das Fach bereits aus dem letzten Semester und bietet deshalb seine Hilfe an.'],
+        ['Am Donnerstag arbeitet Aylin bis sechs Uhr.', 'richtig', 'am Donnerstag arbeite ich im Café, bis sechs', 'Aylin kann erst nach ihrer Arbeit im Café lernen, die am Donnerstag um sechs endet.'],
+        ['Die beiden treffen sich in einem Café.', 'falsch', 'um sieben in der Bibliothek', 'Das Café ist Aylins Arbeitsplatz, getroffen wird sich aber um sieben in der Bibliothek.'],
+        ['Die Bibliothek ist abends bis zehn Uhr geöffnet.', 'richtig', 'Die ist bis zehn Uhr offen.', 'Moritz schlägt die Bibliothek vor, weil sie abends bis zehn Uhr offen hat.'],
         ['Moritz arbeitet immer noch im Supermarkt.', 'falsch', 'seit Oktober gebe ich Nachhilfe in Mathe', 'Moritz gibt seit Oktober Nachhilfe und arbeitet nicht mehr im Supermarkt.'],
-        ['Moritz verdient mit der Nachhilfe weniger als vorher.', 'falsch', 'Das ist besser bezahlt', 'Die Nachhilfe ist besser bezahlt.']
+        ['Moritz verdient mit der Nachhilfe weniger als vorher.', 'falsch', 'Das ist besser bezahlt', 'Moritz hat zur Nachhilfe gewechselt, weil er dort mehr verdient, nicht weniger.']
       ]
     },
     t4: {
@@ -177,14 +177,14 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
         + 'Herr Kaya: Am Ende entscheidet der Kunde. Wer nur perfekte Äpfel kauft, ist auch verantwortlich.',
       example: ['Unser Thema: Sollen Supermärkte Lebensmittel spenden müssen?', 'a'],
       items: [
-        ['Viele Familien brauchen die gespendeten Lebensmittel.', 'b', 'Ohne diese Spenden könnten wir viele Familien nicht versorgen.', 'Frau Roth sagt, dass sie ohne Spenden viele Familien nicht versorgen könnten.'],
-        ['Ein Gesetz macht kleinen Geschäften zu viel Arbeit.', 'c', 'Ein Gesetz bringt nur mehr Papierkram', 'Herr Kaya meint, dass ein Gesetz nur mehr Papierkram bringt.'],
-        ['Was macht man mit Waren nach dem Datum?', 'a', 'Was passiert denn mit Produkten, die das Datum überschritten haben?', 'Der Moderator fragt nach Produkten nach dem Datum.'],
-        ['Ältere Produkte werden billiger verkauft.', 'c', 'Deshalb verkaufen wir solche Produkte billiger in einer extra Kiste.', 'Herr Kaya verkauft solche Produkte billiger in einer extra Kiste.'],
+        ['Viele Familien brauchen die gespendeten Lebensmittel.', 'b', 'Ohne diese Spenden könnten wir viele Familien nicht versorgen.', 'Frau Roth erklärt, dass ihre Lebensmittelausgabe ohne Spenden viele Familien nicht versorgen könnte.'],
+        ['Ein Gesetz macht kleinen Geschäften zu viel Arbeit.', 'c', 'Ein Gesetz bringt nur mehr Papierkram', '„Papierkram“ ist zusätzliche Büroarbeit, und dafür haben kleine Läden laut Herrn Kaya keine Zeit.'],
+        ['Was macht man mit Waren nach dem Datum?', 'a', 'Was passiert denn mit Produkten, die das Datum überschritten haben?', 'Der Moderator möchte wissen, was mit Lebensmitteln nach dem Haltbarkeitsdatum geschieht.'],
+        ['Ältere Produkte werden billiger verkauft.', 'c', 'Deshalb verkaufen wir solche Produkte billiger in einer extra Kiste.', 'Herr Kaya bietet Waren nach dem Datum günstiger in einer eigenen Kiste an.'],
         ['Es fehlt an Fahrzeugen und Fahrern.', 'b', 'Das Problem ist der Transport.', 'Frau Roth nennt den Transport als Problem: ehrenamtliche Fahrer und ein altes Auto.'],
-        ['Jemand aus dem Publikum hat eine Frage.', 'a', 'Wir haben eine Frage aus dem Publikum', 'Der Moderator kündigt eine Frage aus dem Publikum an.'],
-        ['Supermärkte sollten ein Kühlfahrzeug finanzieren.', 'b', 'dass Supermärkte uns wenigstens einen Kühlwagen bezahlen', 'Frau Roth wünscht sich, dass Supermärkte einen Kühlwagen bezahlen.'],
-        ['Auch die Kunden tragen Verantwortung.', 'c', 'Wer nur perfekte Äpfel kauft, ist auch verantwortlich.', 'Herr Kaya sagt, dass auch die Kunden verantwortlich sind.']
+        ['Jemand aus dem Publikum hat eine Frage.', 'a', 'Wir haben eine Frage aus dem Publikum', 'Der Moderator kündigt an, dass er gleich eine Frage aus dem Publikum weitergibt.'],
+        ['Supermärkte sollten ein Kühlfahrzeug finanzieren.', 'b', 'dass Supermärkte uns wenigstens einen Kühlwagen bezahlen', 'Ein Kühlwagen ist ein Kühlfahrzeug, und Frau Roth möchte, dass die Supermärkte es bezahlen.'],
+        ['Auch die Kunden tragen Verantwortung.', 'c', 'Wer nur perfekte Äpfel kauft, ist auch verantwortlich.', 'Wer nur perfekte Äpfel kauft, trägt nach Herrn Kaya Mitverantwortung, also auch der Kunde.']
       ]
     }
   },

@@ -19,11 +19,11 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
         + 'Besuch uns doch mal, Emil freut sich bestimmt!\nHenrik',
       example: ['Henrik ist zurzeit in Elternzeit.', 'richtig'],
       items: [
-        ['Henriks Frau ist auch zu Hause.', 'falsch', 'Meine Frau arbeitet wieder', 'Henriks Frau arbeitet wieder.'],
+        ['Henriks Frau ist auch zu Hause.', 'falsch', 'Meine Frau arbeitet wieder', 'Henriks Frau geht wieder arbeiten, während Henrik allein mit Emil zu Hause bleibt.'],
         ['Henrik findet die Zeit mit dem Baby anstrengender als erwartet.', 'richtig', 'Ehrlich gesagt hatte ich mir das ruhiger vorgestellt.', 'Henrik hatte sich die Zeit ruhiger vorgestellt.'],
-        ['Emil schläft nachts schon ohne Pause.', 'falsch', 'Emil schläft nachts noch nicht durch', 'Emil schläft nachts noch nicht durch.'],
+        ['Emil schläft nachts schon ohne Pause.', 'falsch', 'Emil schläft nachts noch nicht durch', 'Henrik schreibt, dass das Baby in der Nacht immer wieder wach wird, also nicht ohne Pause schläft.'],
         ['In der Krabbelgruppe sind kaum andere Väter.', 'richtig', 'Dort bin ich meistens der einzige Vater', 'Henrik ist meistens der einzige Vater in der Gruppe.'],
-        ['Henriks Chef war gegen die lange Elternzeit.', 'falsch', 'Mein Chef hat es aber sofort akzeptiert.', 'Henriks Chef hat die Elternzeit sofort akzeptiert.'],
+        ['Henriks Chef war gegen die lange Elternzeit.', 'falsch', 'Mein Chef hat es aber sofort akzeptiert.', 'Nur die Firma war überrascht, Henriks Chef hat die lange Elternzeit dagegen sofort akzeptiert.'],
         ['Nach der Elternzeit arbeitet Henrik zuerst weniger Stunden.', 'richtig', 'zuerst nur mit 30 Stunden pro Woche', 'Henrik beginnt zuerst mit 30 Stunden pro Woche.']
       ]
     },
@@ -35,9 +35,9 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
           + 'Für die 24 Wohnungen gab es über 300 Bewerbungen.',
         example: ['Im neuen Haus wohnen …', ['Menschen verschiedenen Alters.', 'nur Studierende.', 'nur Familien.'], 'a'],
         items: [
-          ['Gemeinsam benutzen die Bewohner …', ['die Küchen der Wohnungen.', 'einen Raum und den Garten.', 'die Autos.'], 'b', 'einen großen Gemeinschaftsraum und einen Garten für alle', 'Es gibt einen Gemeinschaftsraum und einen Garten für alle.'],
-          ['Die Mieten sind …', ['niedriger als in der Nähe.', 'höher als in der Nähe.', 'für alle gleich.'], 'a', 'Die Mieten sind günstiger als in der Umgebung', 'Die Mieten sind günstiger als in der Umgebung.'],
-          ['Für die Wohnungen …', ['gibt es noch keine Bewerber.', 'hat die Stadt die Mieter ausgewählt.', 'haben sich sehr viele Menschen beworben.'], 'c', 'Für die 24 Wohnungen gab es über 300 Bewerbungen.', 'Für 24 Wohnungen gab es über 300 Bewerbungen.']
+          ['Gemeinsam benutzen die Bewohner …', ['die Küchen der Wohnungen.', 'einen Raum und den Garten.', 'die Autos.'], 'b', 'einen großen Gemeinschaftsraum und einen Garten für alle', 'Jede Partei hat eine eigene Wohnung und Küche, gemeinsam gibt es nur einen großen Raum und den Garten.'],
+          ['Die Mieten sind …', ['niedriger als in der Nähe.', 'höher als in der Nähe.', 'für alle gleich.'], 'a', 'Die Mieten sind günstiger als in der Umgebung', '„Günstiger als in der Umgebung“ bedeutet niedrigere Mieten als in der Nähe.'],
+          ['Für die Wohnungen …', ['gibt es noch keine Bewerber.', 'hat die Stadt die Mieter ausgewählt.', 'haben sich sehr viele Menschen beworben.'], 'c', 'Für die 24 Wohnungen gab es über 300 Bewerbungen.', 'Über 300 Bewerbungen für 24 Wohnungen zeigen, dass sich sehr viele Menschen beworben haben.']
         ]
       },
       {
@@ -46,9 +46,9 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
           + 'Ein Rad kann man höchstens drei Tage behalten. Die Räder haben einen Elektromotor, deshalb sind auch Hügel kein Problem. '
           + 'Besonders junge Familien nutzen das Angebot, um ihre Kinder zu transportieren.',
         items: [
-          ['Die Lastenräder …', ['kosten pro Tag fünf Euro.', 'kann man gratis leihen.', 'kann man nur kaufen.'], 'b', 'Die Stadt verleiht seit April vier Lastenräder kostenlos.', 'Die Stadt verleiht die Lastenräder kostenlos.'],
-          ['Abholen kann man die Räder …', ['im Rathaus oder in der Bücherei.', 'am Bahnhof.', 'im Fahrradgeschäft.'], 'a', 'holt sie dann im Rathaus oder in der Bücherei ab', 'Man holt die Räder im Rathaus oder in der Bücherei ab.'],
-          ['Die Räder benutzen oft …', ['ältere Menschen.', 'Firmen.', 'Familien mit Kindern.'], 'c', 'Besonders junge Familien nutzen das Angebot', 'Besonders junge Familien nutzen das Angebot.']
+          ['Die Lastenräder …', ['kosten pro Tag fünf Euro.', 'kann man gratis leihen.', 'kann man nur kaufen.'], 'b', 'Die Stadt verleiht seit April vier Lastenräder kostenlos.', 'Die Stadt verlangt kein Geld für die Lastenräder, man leiht sie also gratis.'],
+          ['Abholen kann man die Räder …', ['im Rathaus oder in der Bücherei.', 'am Bahnhof.', 'im Fahrradgeschäft.'], 'a', 'holt sie dann im Rathaus oder in der Bücherei ab', 'Nach der Reservierung im Internet holt man das Rad im Rathaus oder in der Bücherei, nicht am Bahnhof.'],
+          ['Die Räder benutzen oft …', ['ältere Menschen.', 'Firmen.', 'Familien mit Kindern.'], 'c', 'Besonders junge Familien nutzen das Angebot', 'Vor allem junge Familien leihen die Räder, um damit ihre Kinder zu transportieren.']
         ]
       }
     ],
@@ -68,10 +68,10 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
       example: ['Sie möchten selbst Geschirr aus Ton machen.', 'a'],
       situations: [
         ['Ihre Tochter ist 15 und möchte vor der Schule etwas Geld verdienen.', 'b', 'ab 14 Jahren, Bezahlung pro Monat', 'Als Zeitungsausträgerin (b) kann man ab 14 morgens Geld verdienen.'],
-        ['Sie haben einen jungen Hund, der nicht gut hört.', 'f', 'Training für junge Hunde in kleinen Gruppen', 'Die Hundeschule (f) trainiert junge Hunde.'],
+        ['Sie haben einen jungen Hund, der nicht gut hört.', 'f', 'Training für junge Hunde in kleinen Gruppen', 'Ein junger Hund, der nicht gehorcht, braucht Training, und die Hundeschule (f) bietet das in kleinen Gruppen an.'],
         ['Sie möchten Arabisch lernen und dafür jemandem mit Deutsch helfen.', 'g', 'Ich lerne Deutsch und biete Arabisch.', 'Das Sprachtandem (g) bietet Arabisch und sucht Deutsch.'],
-        ['Ein Stuhl von Ihrer Großmutter ist kaputt, und Sie möchten ihn behalten.', 'j', 'repariert alte Stühle und Tische', 'Die Tischlerei (j) repariert alte Stühle.'],
-        ['Sie haben sich selbstständig gemacht und müssen Ihre Rechnungen selbst organisieren.', 'e', 'Online-Kurs Buchhaltung für Selbstständige', 'Der Buchhaltungskurs (e) ist für Selbstständige.'],
+        ['Ein Stuhl von Ihrer Großmutter ist kaputt, und Sie möchten ihn behalten.', 'j', 'repariert alte Stühle und Tische', 'Den Stuhl der Großmutter will man reparieren lassen statt wegwerfen, das macht die Tischlerei (j).'],
+        ['Sie haben sich selbstständig gemacht und müssen Ihre Rechnungen selbst organisieren.', 'e', 'Online-Kurs Buchhaltung für Selbstständige', 'Rechnungen organisieren ist Buchhaltung, und der Online-Kurs (e) richtet sich an Selbstständige.'],
         ['Ihr Sohn ist 16 und möchte gern als Babysitter arbeiten.', 'h', 'Babysitter-Kurs für Jugendliche', 'Der Babysitter-Kurs (h) ist für Jugendliche und gibt ein Zertifikat.'],
         ['Sie möchten mit Ihrer Familie eine mehrtägige Klettertour in den Alpen machen.', '0', 'geführte Touren mit leichten Wegen', 'Die Familientouren (c) haben nur leichte Wege, keine Klettertouren: 0.', 'c']
       ]
@@ -84,10 +84,10 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
         ['Wilhelm, 67', 'Ich liebe meine Enkel, aber ich habe 45 Jahre gearbeitet. Jetzt möchte ich reisen und Zeit für mich haben. Feste Termine als Babysitter will ich nicht.', 'nein', 'Feste Termine als Babysitter will ich nicht.', 'Wilhelm möchte nach dem Arbeitsleben keine festen Babysitter-Termine.'],
         ['Leyla, 29', 'Meine Kinder lernen bei ihrer Oma Dinge, die ich ihnen nicht beibringen kann, zum Beispiel Stricken und alte Lieder. Das finde ich wunderbar.', 'ja', 'Das finde ich wunderbar.', 'Leyla findet es wunderbar, was die Kinder bei der Oma lernen.'],
         ['Petra, 63', 'Es gibt oft Streit, weil meine Tochter andere Regeln hat als ich, zum Beispiel bei Süßigkeiten. Deshalb passe ich nur noch im Notfall auf.', 'nein', 'Deshalb passe ich nur noch im Notfall auf.', 'Petra passt wegen des Streits nur noch im Notfall auf.'],
-        ['Jens, 41', 'Großeltern bleiben durch die Enkel fit und jung. Mein Vater sagt, die Nachmittage mit den Kindern sind das Beste in seiner Woche.', 'ja', 'Großeltern bleiben durch die Enkel fit und jung.', 'Jens meint, dass Großeltern durch die Enkel fit bleiben.'],
+        ['Jens, 41', 'Großeltern bleiben durch die Enkel fit und jung. Mein Vater sagt, die Nachmittage mit den Kindern sind das Beste in seiner Woche.', 'ja', 'Großeltern bleiben durch die Enkel fit und jung.', 'Jens findet, dass Enkel ihre Großeltern fit halten, deshalb unterstützt er das regelmäßige Aufpassen.'],
         ['Agnieszka, 38', 'Meine Eltern wohnen 600 Kilometer entfernt. Ich finde, der Staat muss für genug Kita-Plätze sorgen, damit niemand von den Großeltern abhängig ist.', 'nein', 'damit niemand von den Großeltern abhängig ist', 'Agnieszka möchte genug Kita-Plätze, damit niemand von den Großeltern abhängt.'],
         ['Ruth, 70', 'Jeden Mittwoch sind die Enkel bei mir, und wir backen oder gehen in den Wald. Ich möchte das nicht mehr missen.', 'ja', 'Ich möchte das nicht mehr missen.', 'Ruth möchte die Mittwoche mit den Enkeln nicht mehr missen.'],
-        ['Sascha, 36', 'Meine Schwiegereltern sind schon über achtzig. Für sie wäre das zu anstrengend. Man sollte von Großeltern nicht zu viel erwarten.', 'nein', 'Man sollte von Großeltern nicht zu viel erwarten.', 'Sascha findet, dass man von Großeltern nicht zu viel erwarten sollte.']
+        ['Sascha, 36', 'Meine Schwiegereltern sind schon über achtzig. Für sie wäre das zu anstrengend. Man sollte von Großeltern nicht zu viel erwarten.', 'nein', 'Man sollte von Großeltern nicht zu viel erwarten.', 'Saschas Schwiegereltern sind über achtzig, für sie wäre das zu anstrengend, deshalb ist er dagegen.']
       ]
     },
     t5: {
@@ -98,10 +98,10 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
         + '3. Wäsche abholen: Holen Sie Ihre Wäsche bitte spätestens 15 Minuten nach Programmende ab. Danach dürfen andere Kunden die Wäsche in einen Korb legen.\n\n'
         + '4. Öffnungszeiten: Der Salon ist täglich von 6 bis 22 Uhr geöffnet. Die letzte Wäsche muss um 20.30 Uhr starten.',
       items: [
-        ['Bezahlen kann man …', ['mit Münzen direkt an der Maschine.', 'nur mit einer Kundenkarte.', 'bei einem Mitarbeiter.'], 'b', 'Die Maschinen funktionieren nur mit der Kundenkarte.', 'Regel 1: Die Maschinen funktionieren nur mit der Kundenkarte.'],
+        ['Bezahlen kann man …', ['mit Münzen direkt an der Maschine.', 'nur mit einer Kundenkarte.', 'bei einem Mitarbeiter.'], 'b', 'Die Maschinen funktionieren nur mit der Kundenkarte.', 'Münzen werden an den Maschinen nicht angenommen, bezahlt wird nur mit der aufgeladenen Kundenkarte.'],
         ['Eigenes Waschmittel …', ['darf man nicht benutzen.', 'muss man mitbringen.', 'kostet extra.'], 'a', 'Bitte füllen Sie kein eigenes Waschmittel in die Maschinen.', 'Regel 2: Eigenes Waschmittel darf man nicht einfüllen.'],
-        ['Wer seine Wäsche zu spät abholt, …', ['muss eine Strafe zahlen.', 'bekommt sie erst am nächsten Tag.', 'findet sie vielleicht in einem Korb.'], 'c', 'Danach dürfen andere Kunden die Wäsche in einen Korb legen.', 'Regel 3: Nach 15 Minuten dürfen andere Kunden die Wäsche in einen Korb legen.'],
-        ['Die letzte Wäsche muss …', ['um 22 Uhr fertig sein.', 'vor 20.30 Uhr beginnen.', 'am Morgen starten.'], 'b', 'Die letzte Wäsche muss um 20.30 Uhr starten.', 'Regel 4: Die letzte Wäsche startet um 20.30 Uhr.']
+        ['Wer seine Wäsche zu spät abholt, …', ['muss eine Strafe zahlen.', 'bekommt sie erst am nächsten Tag.', 'findet sie vielleicht in einem Korb.'], 'c', 'Danach dürfen andere Kunden die Wäsche in einen Korb legen.', 'Wer nicht spätestens 15 Minuten nach Programmende kommt, findet die Wäsche vielleicht in einem Korb.'],
+        ['Die letzte Wäsche muss …', ['um 22 Uhr fertig sein.', 'vor 20.30 Uhr beginnen.', 'am Morgen starten.'], 'b', 'Die letzte Wäsche muss um 20.30 Uhr starten.', 'Um 20.30 Uhr muss die letzte Maschine laufen, damit sie bis zur Schließung um 22 Uhr fertig ist.']
       ]
     }
   },
@@ -115,16 +115,16 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
           mc: ['Frau Hartmann braucht …', ['ihren Ausweis.', 'ihre alte Karte.', 'einen Termin.'], 'a', 'Bitte bringen Sie Ihren Personalausweis mit.', 'Sie soll ihren Personalausweis mitbringen.'] },
         { script: 'Radiotipp: Morgen Abend liest die Krimiautorin Hanna Feld in der Buchhandlung am Markt aus ihrem neuen Roman. Die Lesung beginnt um 19.30 Uhr. Karten gibt es nur im Vorverkauf in der Buchhandlung.',
           rf: ['Die Lesung ist morgen Abend.', 'richtig', 'Morgen Abend liest die Krimiautorin', 'Die Autorin liest morgen Abend in der Buchhandlung.'],
-          mc: ['Karten bekommt man …', ['an der Abendkasse.', 'im Internet.', 'vorher in der Buchhandlung.'], 'c', 'Karten gibt es nur im Vorverkauf in der Buchhandlung.', 'Karten gibt es nur im Vorverkauf in der Buchhandlung.'] },
+          mc: ['Karten bekommt man …', ['an der Abendkasse.', 'im Internet.', 'vorher in der Buchhandlung.'], 'c', 'Karten gibt es nur im Vorverkauf in der Buchhandlung.', 'Eine Abendkasse oder Online-Karten gibt es nicht, man kauft die Karten vorher direkt in der Buchhandlung.'] },
         { script: 'Durchsage am Bahnhof: Reisende mit Fahrrad nach Bergstadt beachten bitte: In der Regionalbahn um 8.15 Uhr ist der Fahrradwagen heute im letzten Teil des Zuges. Fahrräder sind dort nur mit Fahrradkarte erlaubt.',
           rf: ['Der Fahrradwagen ist heute vorne im Zug.', 'falsch', 'im letzten Teil des Zuges', 'Der Fahrradwagen ist heute hinten im Zug.'],
-          mc: ['Für das Fahrrad braucht man …', ['eine Reservierung.', 'eine Fahrradkarte.', 'nichts extra.'], 'b', 'Fahrräder sind dort nur mit Fahrradkarte erlaubt.', 'Man braucht eine Fahrradkarte.'] },
+          mc: ['Für das Fahrrad braucht man …', ['eine Reservierung.', 'eine Fahrradkarte.', 'nichts extra.'], 'b', 'Fahrräder sind dort nur mit Fahrradkarte erlaubt.', 'Ohne eigene Karte für das Rad darf man das Fahrrad nicht in den Fahrradwagen stellen.'] },
         { script: 'Nachricht von einer Kollegin: Hi Jan, hier ist Simone. Ich habe heute Morgen meinen Büroschlüssel zu Hause vergessen. Kannst du mir die Tür aufmachen? Ich bin gegen halb neun da und warte am Seiteneingang.',
           rf: ['Simone hat ihren Schlüssel verloren.', 'falsch', 'meinen Büroschlüssel zu Hause vergessen', 'Simone hat den Schlüssel zu Hause vergessen, nicht verloren.'],
-          mc: ['Simone wartet …', ['am Haupteingang.', 'am Seiteneingang.', 'in der Kantine.'], 'b', 'warte am Seiteneingang', 'Simone wartet am Seiteneingang.'] },
+          mc: ['Simone wartet …', ['am Haupteingang.', 'am Seiteneingang.', 'in der Kantine.'], 'b', 'warte am Seiteneingang', 'Simone hat keinen Schlüssel und wartet deshalb am Nebeneingang, bis Jan sie hineinlässt.'] },
         { script: 'Ansage im Möbelhaus: Liebe Eltern, unser Kinderparadies im Erdgeschoss ist heute bis 19 Uhr geöffnet. Kinder ab drei Jahren können dort bis zu einer Stunde kostenlos spielen, während Sie in Ruhe einkaufen.',
-          rf: ['Im Kinderparadies können Kinder kostenlos spielen.', 'richtig', 'bis zu einer Stunde kostenlos spielen', 'Kinder spielen dort bis zu einer Stunde kostenlos.'],
-          mc: ['Kinder dürfen ins Kinderparadies, wenn sie …', ['mindestens drei Jahre alt sind.', 'mit einem Erwachsenen kommen.', 'angemeldet sind.'], 'a', 'Kinder ab drei Jahren', 'Das Kinderparadies ist für Kinder ab drei Jahren.'] }
+          rf: ['Im Kinderparadies können Kinder kostenlos spielen.', 'richtig', 'bis zu einer Stunde kostenlos spielen', 'Im Kinderparadies dürfen Kinder bis zu sechzig Minuten spielen, ohne dass die Eltern bezahlen.'],
+          mc: ['Kinder dürfen ins Kinderparadies, wenn sie …', ['mindestens drei Jahre alt sind.', 'mit einem Erwachsenen kommen.', 'angemeldet sind.'], 'a', 'Kinder ab drei Jahren', 'Das Kinderparadies nimmt Kinder ab drei Jahren auf, jüngere dürfen nicht hinein.'] }
       ]
     },
     t2: {
@@ -134,10 +134,10 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
         + 'Tragen Sie bitte alte Kleidung, denn Ton macht schmutzig. Ihre Stücke müssen zwei Wochen trocknen, bevor wir sie brennen. '
         + 'Am letzten Abend dürfen Sie alles mit nach Hause nehmen.',
       items: [
-        ['Der Kurs findet statt …', ['an sechs Dienstagen.', 'jeden Tag eine Woche lang.', 'an zwei Wochenenden.'], 'a', 'Der Kurs hat sechs Abende, wir treffen uns immer dienstags', 'Der Kurs hat sechs Abende, immer dienstags.'],
-        ['Heute arbeiten die Teilnehmer …', ['an der Töpferscheibe.', 'mit den Händen.', 'mit Farben.'], 'b', 'Heute machen wir eine einfache Schale mit der Hand', 'Heute macht man eine Schale mit der Hand.'],
-        ['Die Töpferscheibe benutzt man …', ['heute.', 'am letzten Abend.', 'ab dem dritten Abend.'], 'c', 'die Töpferscheibe benutzen wir erst ab dem dritten Abend', 'Die Scheibe benutzt man ab dem dritten Abend.'],
-        ['Bevor die Stücke gebrannt werden, …', ['müssen sie trocknen.', 'werden sie bemalt.', 'nimmt man sie mit nach Hause.'], 'a', 'Ihre Stücke müssen zwei Wochen trocknen, bevor wir sie brennen.', 'Die Stücke müssen zwei Wochen trocknen.'],
+        ['Der Kurs findet statt …', ['an sechs Dienstagen.', 'jeden Tag eine Woche lang.', 'an zwei Wochenenden.'], 'a', 'Der Kurs hat sechs Abende, wir treffen uns immer dienstags', 'Der Töpferkurs trifft sich sechsmal, jedes Mal dienstags, also an sechs Dienstagen.'],
+        ['Heute arbeiten die Teilnehmer …', ['an der Töpferscheibe.', 'mit den Händen.', 'mit Farben.'], 'b', 'Heute machen wir eine einfache Schale mit der Hand', 'Am ersten Abend formen die Teilnehmer die Schale nur mit den Händen, ohne Scheibe.'],
+        ['Die Töpferscheibe benutzt man …', ['heute.', 'am letzten Abend.', 'ab dem dritten Abend.'], 'c', 'die Töpferscheibe benutzen wir erst ab dem dritten Abend', 'Die Töpferscheibe kommt erst ab dem dritten Treffen zum Einsatz, nicht heute.'],
+        ['Bevor die Stücke gebrannt werden, …', ['müssen sie trocknen.', 'werden sie bemalt.', 'nimmt man sie mit nach Hause.'], 'a', 'Ihre Stücke müssen zwei Wochen trocknen, bevor wir sie brennen.', 'Bevor der Ton gebrannt wird, muss er zwei Wochen lang trocknen.'],
         ['Die fertigen Stücke …', ['bleiben im Kursraum.', 'werden verkauft.', 'nimmt man am letzten Abend mit.'], 'c', 'Am letzten Abend dürfen Sie alles mit nach Hause nehmen.', 'Am letzten Abend darf man alles mitnehmen.']
       ]
     },
@@ -153,12 +153,12 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
         + 'Hanna: Auch schön. Und wer kümmert sich in der Zeit um euren Hund?\n'
         + 'Felix: Den nehmen wir mit. Die Ferienwohnung ist extra für Familien mit Hund.',
       items: [
-        ['Hanna fährt im Februar in den Skiurlaub.', 'richtig', 'wir fahren im Februar eine Woche nach Österreich', 'Hanna fährt im Februar eine Woche nach Österreich.'],
+        ['Hanna fährt im Februar in den Skiurlaub.', 'richtig', 'wir fahren im Februar eine Woche nach Österreich', 'Hanna fährt im Februar für eine Woche zum Skifahren nach Österreich.'],
         ['Hannas Familie übernachtet in einem Hotel.', 'falsch', 'Diesmal in eine kleine Pension, nicht ins Hotel.', 'Die Familie wohnt in einer kleinen Pension.'],
         ['Hannas Familie fährt mit dem Zug.', 'richtig', 'Nein, mit dem Zug.', 'Die Familie fährt diesmal mit dem Zug.'],
         ['Beide Kinder von Hanna können schon Ski fahren.', 'falsch', 'der Kleine macht dieses Jahr seinen ersten Skikurs', 'Der kleine Sohn macht erst seinen ersten Skikurs.'],
-        ['Felix fährt im Winter weg.', 'falsch', 'Wir bleiben im Winter zu Hause.', 'Felix bleibt im Winter zu Hause.'],
-        ['Felix macht im Sommer drei Wochen Urlaub am Meer.', 'richtig', 'im Sommer drei Wochen ans Meer', 'Felix fährt im Sommer drei Wochen ans Meer.'],
+        ['Felix fährt im Winter weg.', 'falsch', 'Wir bleiben im Winter zu Hause.', 'Felix verreist im Winter nicht, sein Urlaub ist erst im Sommer.'],
+        ['Felix macht im Sommer drei Wochen Urlaub am Meer.', 'richtig', 'im Sommer drei Wochen ans Meer', 'Statt Skiurlaub plant Felix drei Wochen Sommerurlaub am Meer mit Hund.'],
         ['Der Hund von Felix bleibt bei Freunden.', 'falsch', 'Den nehmen wir mit.', 'Felix nimmt den Hund mit.']
       ]
     },
@@ -176,14 +176,14 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
         + 'Herr Ulrich: Und manchmal hilft schon ein ruhiger Platz zum Lernen, den viele zu Hause nicht haben.',
       example: ['Thema: Brauchen Kinder heute mehr Nachhilfe?', 'a'],
       items: [
-        ['Schon in der Grundschule suchen Eltern Hilfe.', 'b', 'Viele Eltern kommen schon in der dritten Klasse zu mir', 'Frau Becker sagt, dass Eltern schon in der dritten Klasse kommen.'],
+        ['Schon in der Grundschule suchen Eltern Hilfe.', 'b', 'Viele Eltern kommen schon in der dritten Klasse zu mir', 'Die dritte Klasse gehört zur Grundschule, und schon dann kommen Eltern zu Frau Becker.'],
         ['Guter Unterricht macht Nachhilfe oft überflüssig.', 'c', 'so unterrichten, dass Nachhilfe meistens nicht nötig ist', 'Herr Ulrich meint, dass guter Unterricht Nachhilfe meistens unnötig macht.'],
         ['Was kostet eine Stunde Nachhilfe?', 'a', 'Wie teuer ist Nachhilfe denn?', 'Der Moderator fragt nach dem Preis.'],
-        ['Nicht alle Eltern haben genug Geld für Nachhilfe.', 'b', 'Viele Familien können sich das nicht leisten.', 'Frau Becker sagt, dass sich viele Familien das nicht leisten können.'],
+        ['Nicht alle Eltern haben genug Geld für Nachhilfe.', 'b', 'Viele Familien können sich das nicht leisten.', 'Mit 25 Euro pro Stunde ist Nachhilfe für viele Familien zu teuer, sagt Frau Becker.'],
         ['An unserer Schule helfen ältere Schüler den jüngeren.', 'c', 'mit älteren Schülern als Helfern', 'Herr Ulrich beschreibt kostenlose Lernzeiten mit älteren Schülern.'],
-        ['Ich lese gleich eine Nachricht vor.', 'a', 'Gleich lese ich noch die Nachricht einer Hörerin vor.', 'Der Moderator kündigt die Nachricht einer Hörerin an.'],
-        ['Viele Kinder brauchen vor allem Aufmerksamkeit.', 'b', 'Die Kinder brauchen einfach jemanden, der Zeit für sie hat.', 'Frau Becker sagt, dass Kinder jemanden brauchen, der Zeit hat.'],
-        ['Manchen Kindern fehlt zu Hause ein ruhiger Ort.', 'c', 'ein ruhiger Platz zum Lernen, den viele zu Hause nicht haben', 'Herr Ulrich sagt, dass viele zu Hause keinen ruhigen Platz haben.']
+        ['Ich lese gleich eine Nachricht vor.', 'a', 'Gleich lese ich noch die Nachricht einer Hörerin vor.', 'Der Moderator kündigt an, dass er die Nachricht einer Hörerin gleich vorliest.'],
+        ['Viele Kinder brauchen vor allem Aufmerksamkeit.', 'b', 'Die Kinder brauchen einfach jemanden, der Zeit für sie hat.', 'Frau Becker meint, dass Kinder oft keinen Fachunterricht, sondern einfach Zuwendung brauchen.'],
+        ['Manchen Kindern fehlt zu Hause ein ruhiger Ort.', 'c', 'ein ruhiger Platz zum Lernen, den viele zu Hause nicht haben', 'Herr Ulrich weist darauf hin, dass viele Kinder daheim keinen stillen Lernplatz haben.']
       ]
     }
   },

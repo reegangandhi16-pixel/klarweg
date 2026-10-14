@@ -22,7 +22,7 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
       items: [
         ['Tomasz fährt jeden Tag mit dem Bus zur Arbeit.', 'richtig', 'fahre ich jeden Morgen über eine Stunde mit zwei Bussen', 'Bisher fährt Tomasz jeden Morgen mit zwei Bussen zur Arbeit.'],
         ['Für die Theorieprüfung hat Tomasz einen Kurs am Abend besucht.', 'falsch', 'Ich habe abends mit einer App geübt', 'Tomasz hat abends allein mit einer App geübt, nicht in einem Kurs.'],
-        ['Das Einparken war für Tomasz schwierig.', 'richtig', 'beim Einparken war ich oft verzweifelt', 'Beim Einparken war Tomasz oft verzweifelt.'],
+        ['Das Einparken war für Tomasz schwierig.', 'richtig', 'beim Einparken war ich oft verzweifelt', 'Tomasz war beim Einparken oft verzweifelt, das zeigt, wie schwer es ihm fiel.'],
         ['Tomasz hat weniger Fahrstunden gebraucht als geplant.', 'falsch', 'mehr, als ich geplant hatte', 'Er hat 28 Fahrstunden gebraucht, also mehr als geplant.'],
         ['In der Prüfung hat Tomasz zuerst den Gurt vergessen.', 'richtig', 'dass ich zuerst vergessen habe, den Sicherheitsgurt anzulegen', 'Vor Nervosität hat er zuerst vergessen, den Gurt anzulegen.'],
         ['Tomasz hat sich nach der Prüfung ein Auto gekauft.', 'falsch', 'Ein eigenes Auto kaufe ich aber noch nicht', 'Tomasz kauft noch kein Auto, er leiht sich das Auto seiner Schwester.']
@@ -49,8 +49,8 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
           + 'Montags bleibt das Bad am Vormittag für Schulklassen reserviert.',
         items: [
           ['Das Becken wurde flacher gemacht, …', ['weil das Wasser zu teuer war.', 'damit mehr Gruppen dort Kurse machen können.', 'weil es zu wenige Besucher gab.'], 'b', 'damit auch Kinder und ältere Menschen dort Schwimmkurse machen können', 'Das flachere Becken ist für Kurse mit Kindern und älteren Menschen gedacht.'],
-          ['Die Sauna …', ['kostet extra.', 'ist nur für Familien.', 'ist im Eintritt enthalten.'], 'c', 'die man ohne Aufpreis benutzen kann', 'Die Sauna kann man ohne Aufpreis benutzen.'],
-          ['Am Montagvormittag …', ['schwimmen dort Schulklassen.', 'ist der Eintritt billiger.', 'ist die Sauna geschlossen.'], 'a', 'Montags bleibt das Bad am Vormittag für Schulklassen reserviert.', 'Montagvormittags ist das Bad für Schulklassen reserviert.']
+          ['Die Sauna …', ['kostet extra.', 'ist nur für Familien.', 'ist im Eintritt enthalten.'], 'c', 'die man ohne Aufpreis benutzen kann', '„Ohne Aufpreis“ bedeutet, dass die Sauna schon im normalen Eintrittspreis enthalten ist.'],
+          ['Am Montagvormittag …', ['schwimmen dort Schulklassen.', 'ist der Eintritt billiger.', 'ist die Sauna geschlossen.'], 'a', 'Montags bleibt das Bad am Vormittag für Schulklassen reserviert.', 'Wenn das Bad montags vormittags für Schulklassen reserviert ist, schwimmen dann Schüler dort.']
         ]
       }
     ],
@@ -69,13 +69,13 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
       ],
       example: ['Sie möchten mit Ihrem Mann tanzen lernen.', 'a'],
       situations: [
-        ['Sie ziehen nächsten Samstag um und brauchen Leute, die Ihnen beim Tragen helfen.', 'b', 'helfen beim Tragen, auch kurzfristig und am Wochenende', 'Die Studenten (b) helfen beim Tragen, auch kurzfristig und am Wochenende.'],
+        ['Sie ziehen nächsten Samstag um und brauchen Leute, die Ihnen beim Tragen helfen.', 'b', 'helfen beim Tragen, auch kurzfristig und am Wochenende', 'Für den Umzug am Samstag passt Anzeige b, weil die Studenten tragen helfen und auch am Wochenende kommen.'],
         ['Sie machen den Führerschein und brauchen noch einen Nachweis über Erste Hilfe.', 'e', 'mit Bescheinigung für die Führerscheinprüfung', 'Der Erste-Hilfe-Kurs (e) gibt eine Bescheinigung für die Führerscheinprüfung.'],
-        ['Sie pflegen Ihre Mutter zu Hause und möchten mit Menschen in derselben Situation sprechen.', 'd', 'Gesprächskreis für pflegende Angehörige', 'Der Gesprächskreis (d) ist für Menschen, die Angehörige pflegen.'],
+        ['Sie pflegen Ihre Mutter zu Hause und möchten mit Menschen in derselben Situation sprechen.', 'd', 'Gesprächskreis für pflegende Angehörige', 'Wer seine Mutter pflegt, ist eine pflegende Angehörige, genau für diese Gruppe ist der Gesprächskreis (d).'],
         ['Sie suchen für den Urlaub ein Hotel, in das Sie mit Ihren zwei kleinen Kindern fahren können.', '0', 'nur für Erwachsene', 'Das einzige Hotel (j) ist nur für Erwachsene, deshalb passt keine Anzeige: 0.', 'j'],
         ['Sie wohnen in einer Wohnung ohne Balkon und möchten gern eigenes Gemüse anbauen.', 'f', 'Beet für eine Saison mieten', 'Im Gemeinschaftsgarten (f) kann man ein eigenes Beet mieten.'],
         ['Sie spielen gern Rollen und möchten einmal auf einer Bühne stehen.', 'i', 'Theatergruppe für Erwachsene sucht Mitspielende', 'Die Theatergruppe (i) sucht Erwachsene, auch ohne Erfahrung.'],
-        ['Sie arbeiten in einem Büro und wollen lernen, Ihre Steuererklärung selbst zu machen.', 'g', 'Abendkurs für Angestellte', 'Der Steuerkurs (g) ist ein Abendkurs für Angestellte.']
+        ['Sie arbeiten in einem Büro und wollen lernen, Ihre Steuererklärung selbst zu machen.', 'g', 'Abendkurs für Angestellte', 'Als Büroangestellte passen Sie zum Steuerkurs (g), denn er ist für Angestellte gedacht.']
       ]
     },
     t4: {
@@ -101,8 +101,8 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
         + '4. Schließfächer: Die Fächer müssen am Ende des Besuchs geleert werden. Für Wertsachen übernimmt das Studio keine Haftung.',
       items: [
         ['Wer die Mitgliedskarte vergessen hat, …', ['darf nicht trainieren.', 'muss an der Theke einen Ausweis zeigen.', 'bekommt sofort eine neue Karte.'], 'b', 'meldet sich an der Theke und zeigt einen Ausweis', 'Regel 1: Ohne Karte meldet man sich an der Theke und zeigt einen Ausweis.'],
-        ['Auf der Trainingsfläche …', ['braucht man ein Handtuch.', 'darf man Straßenschuhe tragen.', 'muss man einen Trainer fragen.'], 'a', 'legen Sie bitte immer ein Handtuch auf die Geräte', 'Regel 2: Auf die Geräte legt man immer ein Handtuch.'],
-        ['Wer zu spät zum Kurs kommt, …', ['muss eine Strafe zahlen.', 'darf nur zuschauen.', 'kann seinen Platz verlieren.'], 'c', 'Plätze, die zehn Minuten nach Kursbeginn nicht besetzt sind, werden freigegeben.', 'Regel 3: Zehn Minuten nach Kursbeginn werden nicht besetzte Plätze freigegeben.'],
+        ['Auf der Trainingsfläche …', ['braucht man ein Handtuch.', 'darf man Straßenschuhe tragen.', 'muss man einen Trainer fragen.'], 'a', 'legen Sie bitte immer ein Handtuch auf die Geräte', 'Regel 2 verlangt ein Handtuch auf jedem Gerät, deshalb braucht man es beim Training.'],
+        ['Wer zu spät zum Kurs kommt, …', ['muss eine Strafe zahlen.', 'darf nur zuschauen.', 'kann seinen Platz verlieren.'], 'c', 'Plätze, die zehn Minuten nach Kursbeginn nicht besetzt sind, werden freigegeben.', 'Wer mehr als zehn Minuten zu spät kommt, dessen Platz wird nach Regel 3 an andere vergeben.'],
         ['Die Schließfächer …', ['kann man für einen Monat mieten.', 'muss man nach dem Training leer machen.', 'sind für Wertsachen versichert.'], 'b', 'Die Fächer müssen am Ende des Besuchs geleert werden.', 'Regel 4: Am Ende des Besuchs muss man das Fach leeren.']
       ]
     }
@@ -113,20 +113,20 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
         rf: ['Im Kaufhaus gibt es heute ein Sonderangebot.', 'richtig'], mc: ['Die Spielwarenabteilung ist …', ['im ersten Stock.', 'im dritten Stock.', 'im Erdgeschoss.'], 'b'] },
       texts: [
         { script: 'Nachricht auf dem Anrufbeantworter: Guten Tag, Herr Brenner, hier ist die Zahnarztpraxis Dr. Kühn. Ihr Termin am Donnerstag muss leider ausfallen, weil die Ärztin krank ist. Bitte melden Sie sich bei uns, nächste Woche haben wir noch freie Termine.',
-          rf: ['Herr Brenner hat am Donnerstag einen Termin beim Zahnarzt.', 'falsch', 'Ihr Termin am Donnerstag muss leider ausfallen', 'Der Termin am Donnerstag fällt aus.'],
+          rf: ['Herr Brenner hat am Donnerstag einen Termin beim Zahnarzt.', 'falsch', 'Ihr Termin am Donnerstag muss leider ausfallen', 'Die Praxis sagt den Termin am Donnerstag ab, weil die Ärztin krank ist, er findet also nicht statt.'],
           mc: ['Herr Brenner soll …', ['am Freitag kommen.', 'sich bei der Praxis melden.', 'eine Überweisung abholen.'], 'b', 'Bitte melden Sie sich bei uns', 'Die Praxis bittet Herrn Brenner, sich wegen eines neuen Termins zu melden.'] },
         { script: 'Wetterbericht: Morgen bleibt es im Norden trocken, aber windig, bei Temperaturen um zwölf Grad. Im Süden regnet es den ganzen Tag. Erst am Wochenende wird es überall wieder sonnig und wärmer.',
           rf: ['Morgen regnet es im Norden.', 'falsch', 'Morgen bleibt es im Norden trocken', 'Im Norden bleibt es morgen trocken; Regen gibt es im Süden.'],
-          mc: ['Am Wochenende …', ['wird es sonnig.', 'gibt es Schnee.', 'bleibt es kalt.'], 'a', 'Erst am Wochenende wird es überall wieder sonnig und wärmer.', 'Am Wochenende wird es sonnig und wärmer.'] },
+          mc: ['Am Wochenende …', ['wird es sonnig.', 'gibt es Schnee.', 'bleibt es kalt.'], 'a', 'Erst am Wochenende wird es überall wieder sonnig und wärmer.', 'Laut Wetterbericht kommen Sonne und Wärme erst am Wochenende, vorher regnet es im Süden.'] },
         { script: 'Durchsage im Zug: Sehr geehrte Fahrgäste, wegen einer Störung an einem Signal hat unser Zug etwa zwanzig Minuten Verspätung. Reisende nach Hellbrunn können in Altdorf in den Bus umsteigen, der dort auf Sie wartet.',
-          rf: ['Der Zug kommt später an.', 'richtig', 'hat unser Zug etwa zwanzig Minuten Verspätung', 'Der Zug hat etwa zwanzig Minuten Verspätung.'],
-          mc: ['Wer nach Hellbrunn fährt, …', ['muss ein Taxi nehmen.', 'bleibt im Zug.', 'kann in Altdorf einen Bus nehmen.'], 'c', 'Reisende nach Hellbrunn können in Altdorf in den Bus umsteigen', 'Reisende nach Hellbrunn steigen in Altdorf in den Bus um.'] },
+          rf: ['Der Zug kommt später an.', 'richtig', 'hat unser Zug etwa zwanzig Minuten Verspätung', 'Zwanzig Minuten Verspätung wegen einer Signalstörung bedeuten, dass der Zug später ankommt.'],
+          mc: ['Wer nach Hellbrunn fährt, …', ['muss ein Taxi nehmen.', 'bleibt im Zug.', 'kann in Altdorf einen Bus nehmen.'], 'c', 'Reisende nach Hellbrunn können in Altdorf in den Bus umsteigen', 'Die Durchsage bietet Reisenden nach Hellbrunn einen wartenden Anschlussbus in Altdorf an, ein Taxi oder Weiterfahren im Zug ist nicht nötig.'] },
         { script: 'Nachricht von einer Freundin: Hi Nadia, hier ist Jule. Ich habe zwei Karten für das Konzert am Freitag, aber Paul kann nicht mitkommen. Hast du Lust? Das Konzert fängt um acht an, wir könnten vorher noch zusammen essen.',
           rf: ['Jule möchte mit Nadia ins Konzert gehen.', 'richtig', 'Hast du Lust?', 'Jule hat eine Karte übrig und fragt Nadia, ob sie Lust hat.'],
           mc: ['Vor dem Konzert möchte Jule …', ['Paul abholen.', 'mit Nadia essen.', 'Karten kaufen.'], 'b', 'wir könnten vorher noch zusammen essen', 'Jule schlägt vor, vorher zusammen zu essen.'] },
         { script: 'Information der Stadtbücherei: Ab nächster Woche können Sie Bücher auch am Automaten im Eingang zurückgeben, rund um die Uhr. Bitte beachten Sie: Spiele und DVDs geben Sie weiterhin nur an der Theke ab.',
           rf: ['Bücher kann man bald auch nachts zurückgeben.', 'richtig', 'rund um die Uhr', 'Am Automaten kann man Bücher rund um die Uhr zurückgeben.'],
-          mc: ['DVDs gibt man …', ['am Automaten zurück.', 'an der Theke zurück.', 'per Post zurück.'], 'b', 'Spiele und DVDs geben Sie weiterhin nur an der Theke ab.', 'DVDs gibt man weiterhin nur an der Theke ab.'] }
+          mc: ['DVDs gibt man …', ['am Automaten zurück.', 'an der Theke zurück.', 'per Post zurück.'], 'b', 'Spiele und DVDs geben Sie weiterhin nur an der Theke ab.', 'Nur Bücher kann man bald am Automaten abgeben, für Spiele und DVDs bleibt die Theke zuständig.'] }
       ]
     },
     t2: {
@@ -138,11 +138,11 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
         + 'Wenn Sie krank sind, rufen Sie bitte vor Schichtbeginn an der Rezeption an – eine E-Mail reicht nicht. '
         + 'Am Freitag laden wir alle Neuen zu einem kleinen Frühstück ein.',
       items: [
-        ['Am Nachmittag bekommen die Praktikanten …', ['einen Schlüssel.', 'ihre Arbeitskleidung.', 'einen Arbeitsplan.'], 'b', 'am Nachmittag bekommen Sie Ihre Arbeitskleidung', 'Am Nachmittag gibt es die Arbeitskleidung.'],
-        ['In den ersten zwei Wochen arbeiten sie …', ['nur morgens und mittags.', 'auch nachts.', 'nur am Wochenende.'], 'a', 'nur in der Frühschicht, also von sechs bis vierzehn Uhr', 'Die Frühschicht geht von sechs bis vierzehn Uhr.'],
-        ['Das Mittagessen …', ['muss man selbst mitbringen.', 'kostet wenig.', 'ist kostenlos.'], 'c', 'Ihr Mittagessen bekommen Sie kostenlos in der Personalküche.', 'Das Mittagessen in der Personalküche ist kostenlos.'],
+        ['Am Nachmittag bekommen die Praktikanten …', ['einen Schlüssel.', 'ihre Arbeitskleidung.', 'einen Arbeitsplan.'], 'b', 'am Nachmittag bekommen Sie Ihre Arbeitskleidung', 'Frau Ostermann zeigt am Vormittag das Haus und verteilt am Nachmittag die Arbeitskleidung.'],
+        ['In den ersten zwei Wochen arbeiten sie …', ['nur morgens und mittags.', 'auch nachts.', 'nur am Wochenende.'], 'a', 'nur in der Frühschicht, also von sechs bis vierzehn Uhr', 'Die Frühschicht von sechs bis vierzehn Uhr umfasst den Morgen und den Mittag, aber keinen Abend.'],
+        ['Das Mittagessen …', ['muss man selbst mitbringen.', 'kostet wenig.', 'ist kostenlos.'], 'c', 'Ihr Mittagessen bekommen Sie kostenlos in der Personalküche.', 'In der Personalküche müssen die Praktikanten für das Mittagessen nichts bezahlen.'],
         ['Wer krank ist, soll …', ['eine E-Mail schreiben.', 'an der Rezeption anrufen.', 'eine Kollegin informieren.'], 'b', 'rufen Sie bitte vor Schichtbeginn an der Rezeption an', 'Man ruft vor Schichtbeginn an der Rezeption an; eine E-Mail reicht nicht.'],
-        ['Am Freitag gibt es …', ['eine Besprechung.', 'einen Ausflug.', 'ein Frühstück für die Neuen.'], 'c', 'Am Freitag laden wir alle Neuen zu einem kleinen Frühstück ein.', 'Am Freitag gibt es ein Frühstück für alle Neuen.']
+        ['Am Freitag gibt es …', ['eine Besprechung.', 'einen Ausflug.', 'ein Frühstück für die Neuen.'], 'c', 'Am Freitag laden wir alle Neuen zu einem kleinen Frühstück ein.', 'Das kleine Frühstück am Freitag ist eine Einladung speziell für alle neuen Kolleginnen und Kollegen.']
       ]
     },
     t3: {
@@ -156,12 +156,12 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
         + 'Sabine: Mit dem Fahrrad zehn Minuten. Ich frage meine Mutter heute Abend, wer der Vermieter ist.\n'
         + 'Elif: Das wäre wunderbar. Ich lade dich dafür auf einen Kaffee ein!',
       items: [
-        ['Elif hat noch keine Wohnung angeschaut.', 'falsch', 'Ich habe schon fünf Wohnungen angeschaut', 'Elif hat schon fünf Wohnungen angeschaut.'],
+        ['Elif hat noch keine Wohnung angeschaut.', 'falsch', 'Ich habe schon fünf Wohnungen angeschaut', 'Elif hat bereits fünf Wohnungen besichtigt, aber keine passende gefunden.'],
         ['Die Wohnungen waren zum Teil zu weit von Elifs Arbeit entfernt.', 'richtig', 'zu weit weg von der Firma', 'Einige Wohnungen waren zu weit weg von der Firma.'],
         ['Die Wohnung in der Gartenstraße hatte einen Balkon.', 'richtig', 'mit Balkon und neuer Küche', 'Die Wohnung in der Gartenstraße hatte einen Balkon und eine neue Küche.'],
         ['Elif möchte ihre Katze abgeben.', 'falsch', 'meine Katze gebe ich nicht weg', 'Elif sagt, dass sie ihre Katze nicht weggibt.'],
-        ['Im Haus von Sabines Eltern ist schon jetzt eine Wohnung frei.', 'falsch', 'wird im Dezember eine Wohnung frei', 'Die Wohnung wird erst im Dezember frei.'],
-        ['Man fährt mit dem Fahrrad etwa zehn Minuten dorthin.', 'richtig', 'Mit dem Fahrrad zehn Minuten.', 'Sabine sagt, dass es mit dem Fahrrad zehn Minuten sind.'],
+        ['Im Haus von Sabines Eltern ist schon jetzt eine Wohnung frei.', 'falsch', 'wird im Dezember eine Wohnung frei', '„Schon jetzt“ stimmt nicht, denn Sabine kündigt die Wohnung erst für Dezember an.'],
+        ['Man fährt mit dem Fahrrad etwa zehn Minuten dorthin.', 'richtig', 'Mit dem Fahrrad zehn Minuten.', 'Sabine schätzt den Weg mit dem Rad auf zehn Minuten, die Aussage stimmt also.'],
         ['Sabine fragt heute ihren Vater nach dem Vermieter.', 'falsch', 'Ich frage meine Mutter heute Abend', 'Sabine fragt ihre Mutter, nicht ihren Vater.']
       ]
     },
@@ -181,12 +181,12 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
       items: [
         ['Im Job lernen Jugendliche, pünktlich zu sein.', 'b', 'lernt pünktlich zu sein und mit Kunden zu sprechen', 'Herr Lang sagt, dass man im Job Pünktlichkeit und den Umgang mit Kunden lernt.'],
         ['Manche Schüler sind wegen ihres Jobs im Unterricht müde.', 'c', 'dass sie in der Schule müde sind und schlechtere Noten bekommen', 'Frau Demir erlebt Jugendliche, die nach langer Arbeit in der Schule müde sind.'],
-        ['Wie viel Zeit sollte ein Schüler arbeiten?', 'a', 'Wie viele Stunden pro Woche sind denn sinnvoll?', 'Die Moderatorin fragt nach einer sinnvollen Stundenzahl.'],
+        ['Wie viel Zeit sollte ein Schüler arbeiten?', 'a', 'Wie viele Stunden pro Woche sind denn sinnvoll?', 'Die Moderatorin will wissen, wie viele Wochenstunden ein Nebenjob haben sollte.'],
         ['Vor Klassenarbeiten müssen die Schüler nicht arbeiten.', 'b', 'nie vor einer Klassenarbeit', 'Herr Lang sagt, dass Schüler nie vor einer Klassenarbeit arbeiten.'],
         ['Einige Jugendliche arbeiten, weil ihre Familie das Geld braucht.', 'c', 'weil ihre Familie wenig Geld hat', 'Frau Demir sagt, dass manche Jugendliche jobben, weil die Familie wenig Geld hat.'],
-        ['Ein Hörer hat uns geschrieben.', 'a', 'Wir haben dazu auch eine Nachricht von einem Hörer bekommen.', 'Die Moderatorin erwähnt die Nachricht eines Hörers.'],
-        ['Wer selbst Geld verdient, ist stolz darauf.', 'b', 'Ein eigenes Gehalt macht stolz.', 'Herr Lang sagt, dass ein eigenes Gehalt stolz macht.'],
-        ['Schulen und Firmen sollten mehr zusammen machen.', 'c', 'dass Schulen und Betriebe mehr zusammenarbeiten', 'Frau Demir wünscht sich mehr Zusammenarbeit von Schulen und Betrieben.']
+        ['Ein Hörer hat uns geschrieben.', 'a', 'Wir haben dazu auch eine Nachricht von einem Hörer bekommen.', 'Die Moderatorin weist auf die Zuschrift eines Hörers hin, die die Sendung bekommen hat.'],
+        ['Wer selbst Geld verdient, ist stolz darauf.', 'b', 'Ein eigenes Gehalt macht stolz.', '„Ein eigenes Gehalt“ ist selbst verdientes Geld, und Herr Lang sagt, dass es stolz macht.'],
+        ['Schulen und Firmen sollten mehr zusammen machen.', 'c', 'dass Schulen und Betriebe mehr zusammenarbeiten', 'Frau Demir möchte, dass Schulen und Betriebe zusammenarbeiten, etwa mit Praktika in den Ferien.']
       ]
     }
   },

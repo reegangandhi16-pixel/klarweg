@@ -23,6 +23,19 @@ const sourceOf = (a) => (a.kind === 'text' ? a.text.body_md : a.script_de);
    Schreiben task formulas such as "Schreiben Sie Ihre Meinung (circa 80 Wörter)"); prompts are compared whole instead */
 const BOILERPLATE = /-h2-instr$|-sp2-t\d-slide[2-5]$|-s\d-prompt$/;
 
+/* An explanation must EXPLAIN: besides the quoted evidence (which the review shows next to it) it has to add at least
+   two content words — the paraphrase link, the contrast with a false statement or the reason. Speaker names and framing
+   verbs ("sagt", "meint", "Regel") do not count. Five-letter stems make inflected forms count as the same word. */
+const FRAME = new Set('der die das den dem des ein eine einen einem einer eines und oder aber zu im in am an auf mit von für ist sind war waren hat haben hatte wird werden wurde nicht kein keine keinen man sie er es ich wir ihr ihm ihn sich auch nur noch schon sehr so wie was wer wenn weil dass bei aus nach vor um bis über als zum zur vom dann mehr dort da hier jetzt also sagt sagen meint findet schreibt erzählt steht text regel heißt nennt erklärt erwähnt'.split(' '));
+const stems = (s) => (s || '').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 2 && !FRAME.has(w)).map((w) => w.slice(0, 5));
+function addedWords(f, it) {
+  const an = it.anchors[0];
+  const src = sourceOf(f.assets.find((a) => a.id === an.asset_id));
+  const quote = new Set(stems(src.slice(an.start, an.end)));
+  const names = new Set(stems((src.match(/\b(Herr|Frau)\s+\p{Lu}\p{L}+|\b\p{Lu}\p{L}+(?=[,:])/gu) || []).join(' ') + ' ' + (it.options || []).map((o) => o.label).join(' ')));
+  return [...new Set(stems(it.feedback.explanation_de))].filter((t) => !quote.has(t) && !names.has(t));
+}
+
 test('LIBRARY: the registry lists P1 … Pn in order, each with its own id and directory', () => {
   assert.deepEqual(LIB.map((f) => f.name), LIB.map((_, i) => `P${i + 1}`));
   assert.deepEqual(LIB.map((f) => f.form.id), LIB.map((_, i) => `frm:b1:synthetic-p${i + 1}@1`));
@@ -49,6 +62,9 @@ for (const f of LIB) {
       assert.match(e, /^\S.{8,}[.!?]$/, `${it.id}: explanation is a sentence`);
       assert.equal(/[^\d][.!?]\s+[A-ZÄÖÜ]/.test(e.slice(0, -1)), false, `${it.id}: explanation is ONE sentence: ${e}`);
       assert.equal(visible.includes(e), false, `${it.id}: explanation is not a verbatim copy of a text, stem or option: ${e}`);
+      assert.equal(sourceOf(f.assets.find((a) => a.id === it.anchors[0].asset_id)).includes(e.slice(0, -1)), false, `${it.id}: explanation is not copied from its own text or script: ${e}`);
+      const added = addedWords(f, it);
+      assert.ok(added.length >= 2, `${it.id}: explanation only restates the evidence (adds ${JSON.stringify(added)}): ${e}`);
       assert.equal(it.anchors.length, 1);
       const [an] = it.anchors;
       const task = f.tasks.find((t) => t.id === it.task_id);
@@ -69,6 +85,48 @@ for (const f of LIB) {
     assert.equal(mcq.length, 20);
     for (const k of ['a', 'b', 'c']) within(count(mcq, k), 4, 10, `a/b/c items with key ${k} of 20`);
     for (const it of mcq) assert.equal(new Set(it.options.map((o) => o.text)).size, 3, `${it.id}: three different options`);
+  });
+}
+
+for (const f of LIB) {
+  test(`LIBRARY ${f.name}: explanations agree with the key (ad letter, speaker, verdict, opinion)`, () => {
+    const bad = [];
+    for (const it of f.items.filter((x) => x.feedback)) {
+      const e = it.feedback.explanation_de, k = f.keys[it.id].correct;
+      if (it.interaction === 'matching_pool') {
+        const evidenceAd = it.anchors[0].asset_id.slice(-1);
+        for (const m of e.matchAll(/\(([a-j])\)|Anzeige ([a-j])\b/g)) if ((m[1] || m[2]) !== (k === '0' ? evidenceAd : k)) bad.push(`${it.id}: key ${k}, explanation names ad ${m[1] || m[2]}`);
+        if (k === '0' && !/\b0\b|keine/.test(e)) bad.push(`${it.id}: the "no ad" key is not explained`);
+      }
+      if (it.interaction === 'speaker_assignment') {
+        const name = (o) => o.label.replace(/^(Herr|Frau) /, '');
+        const keyed = it.options.find((o) => o.option_id === k);
+        if (!/^Moderat/.test(keyed.label) && !e.includes(name(keyed))) bad.push(`${it.id}: explanation does not name the speaker ${keyed.label}`);
+        for (const o of it.options) if (o !== keyed && !/^Moderat/.test(o.label) && e.includes(name(o))) bad.push(`${it.id}: explanation names ${o.label}, key is ${keyed.label}`);
+      }
+      if (k === 'falsch' && /\b(stimmt also|Aussage stimmt|ist richtig)\b/.test(e)) bad.push(`${it.id}: key falsch, explanation says it is right`);
+      if (k === 'richtig' && /\b(stimmt nicht|ist falsch|nicht richtig)\b/.test(e)) bad.push(`${it.id}: key richtig, explanation says it is wrong`);
+      if (k === 'ja' && /\b(dagegen|lehnt)\b/.test(e)) bad.push(`${it.id}: key ja, explanation reads as against`);
+      if (k === 'nein' && /\b(dafür|ist für)\b/.test(e)) bad.push(`${it.id}: key nein, explanation reads as in favour`);
+    }
+    assert.deepEqual(bad, []);
+  });
+
+  test(`LIBRARY ${f.name}: task instructions name the item numbers they contain; Schreiben prompts state the scored word target`, () => {
+    const bad = [];
+    const num = (id) => Number((f.items.find((i) => i.id === id).stem.match(/^(\d+)\./) || [])[1]);
+    for (const t of f.tasks) {
+      const m = t.instructions.text_de.match(/(?:Aufgaben|Situationen|Kommentare) (\d+) bis (\d+)|\((\d+) bis (\d+)\)/);
+      if (!m) continue;
+      const scope = m[3] ? f.tasks.filter((x) => x.module === t.module && x.part === t.part) : [t];
+      const nums = scope.flatMap((x) => x.items).filter((id) => { const i = f.items.find((y) => y.id === id); return !i.is_example && i.interaction !== 'topic_choice'; }).map(num);
+      if (Math.min(...nums) !== Number(m[1] || m[3]) || Math.max(...nums) !== Number(m[2] || m[4])) bad.push(`${t.id}: says ${m[0]}, items ${Math.min(...nums)}–${Math.max(...nums)}`);
+    }
+    for (const it of f.items.filter((x) => x.interaction === 'text_response')) {
+      const prompt = f.tasks.find((t) => t.id === it.task_id).instructions.text_de;
+      if (!new RegExp(`circa ${it.response_spec.target_words} Wörter`).test(prompt)) bad.push(`${it.id}: prompt does not state circa ${it.response_spec.target_words} Wörter`);
+    }
+    assert.deepEqual(bad, []);
   });
 }
 

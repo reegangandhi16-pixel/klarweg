@@ -20,8 +20,8 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
       example: ['Das Auto von Sanjas Familie ist kaputtgegangen.', 'richtig'],
       items: [
         ['Die Familie hat das alte Auto reparieren lassen.', 'falsch', 'Die Reparatur hätte 2 000 Euro gekostet', 'Die Reparatur wäre zu teuer gewesen; die Familie lebt seitdem ohne Auto.'],
-        ['Sanja und ihr Mann fahren meistens mit dem Rad zur Arbeit.', 'richtig', 'Zur Arbeit fahren wir jetzt beide mit dem Fahrrad', 'Beide fahren mit dem Fahrrad zur Arbeit.'],
-        ['Die Kinder fahren mit dem Bus zur Schule.', 'falsch', 'Die Kinder gehen zu Fuß zur Schule', 'Die Kinder gehen zu Fuß zur Schule.'],
+        ['Sanja und ihr Mann fahren meistens mit dem Rad zur Arbeit.', 'richtig', 'Zur Arbeit fahren wir jetzt beide mit dem Fahrrad', 'Sanja und ihr Mann radeln jetzt beide zur Arbeit, nur bei Regen nehmen sie die Straßenbahn.'],
+        ['Die Kinder fahren mit dem Bus zur Schule.', 'falsch', 'Die Kinder gehen zu Fuß zur Schule', 'Die Kinder fahren nicht mit dem Bus, sondern laufen zur Schule, was sie lieber mögen.'],
         ['Für den Wocheneinkauf benutzt die Familie einen Anhänger.', 'richtig', 'haben wir einen Fahrradanhänger gekauft', 'Für den großen Einkauf hat die Familie einen Fahrradanhänger gekauft.'],
         ['Zu Sanjas Eltern kommt man am Wochenende gut mit dem Bus.', 'falsch', 'weil der Bus am Wochenende kaum fährt', 'Am Wochenende fährt der Bus kaum zu Sanjas Eltern.'],
         ['Die Familie möchte vorerst kein neues Auto kaufen.', 'richtig', 'Ein neues Auto kaufen wir deshalb erst einmal nicht.', 'Die Familie kauft erst einmal kein neues Auto.']
@@ -35,9 +35,9 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
           + 'Bei schlechtem Wetter findet der Markt trotzdem statt.',
         example: ['Der Abendmarkt findet …', ['donnerstags statt.', 'samstags statt.', 'jeden Tag statt.'], 'a'],
         items: [
-          ['Auf dem Abendmarkt …', ['gibt es nur Obst und Gemüse.', 'kann man auch warm essen.', 'darf man nicht essen.'], 'b', 'bieten mehrere Stände warmes Essen an', 'Mehrere Stände bieten warmes Essen an.'],
-          ['Der Abendmarkt ist vor allem für Menschen, die …', ['am Morgen arbeiten.', 'Musik machen.', 'auf dem Land wohnen.'], 'a', 'Die Idee kam von Berufstätigen, die morgens keine Zeit für den Markt haben.', 'Der Markt ist für Berufstätige, die morgens keine Zeit haben.'],
-          ['Wenn es regnet, …', ['fällt der Markt aus.', 'zieht der Markt in eine Halle.', 'gibt es den Markt trotzdem.'], 'c', 'Bei schlechtem Wetter findet der Markt trotzdem statt.', 'Der Markt findet auch bei schlechtem Wetter statt.']
+          ['Auf dem Abendmarkt …', ['gibt es nur Obst und Gemüse.', 'kann man auch warm essen.', 'darf man nicht essen.'], 'b', 'bieten mehrere Stände warmes Essen an', 'Neben Obst und Gemüse verkaufen einige Stände warme Gerichte, man kann dort also essen.'],
+          ['Der Abendmarkt ist vor allem für Menschen, die …', ['am Morgen arbeiten.', 'Musik machen.', 'auf dem Land wohnen.'], 'a', 'Die Idee kam von Berufstätigen, die morgens keine Zeit für den Markt haben.', 'Wer morgens arbeitet, hat keine Zeit für den Wochenmarkt, für diese Berufstätigen ist der Abendmarkt gedacht.'],
+          ['Wenn es regnet, …', ['fällt der Markt aus.', 'zieht der Markt in eine Halle.', 'gibt es den Markt trotzdem.'], 'c', 'Bei schlechtem Wetter findet der Markt trotzdem statt.', 'Auch bei Regen fällt der Abendmarkt nicht aus und zieht nicht in eine Halle.']
         ]
       },
       {
@@ -46,8 +46,8 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
           + 'Das Taxi fährt nicht direkt nach Hause, sondern zu festen Haltestellen. Für Frauen, die allein unterwegs sind, gibt es eine Ausnahme: '
           + 'Sie dürfen sich bis vor die Haustür bringen lassen. Der Test läuft ein Jahr.',
         items: [
-          ['Das Ruftaxi muss man …', ['eine halbe Stunde vorher bestellen.', 'am Vortag bestellen.', 'nicht bestellen.'], 'a', 'Man bestellt es mindestens 30 Minuten vorher per App oder Telefon', 'Man bestellt das Taxi mindestens 30 Minuten vorher.'],
-          ['Eine Fahrt kostet …', ['so viel wie ein normales Taxi.', 'so viel wie eine Busfahrt.', 'nichts.'], 'b', 'zahlt nur den normalen Bus-Preis', 'Man zahlt nur den normalen Bus-Preis.'],
+          ['Das Ruftaxi muss man …', ['eine halbe Stunde vorher bestellen.', 'am Vortag bestellen.', 'nicht bestellen.'], 'a', 'Man bestellt es mindestens 30 Minuten vorher per App oder Telefon', '30 Minuten sind eine halbe Stunde, so früh muss man das Ruftaxi mindestens bestellen.'],
+          ['Eine Fahrt kostet …', ['so viel wie ein normales Taxi.', 'so viel wie eine Busfahrt.', 'nichts.'], 'b', 'zahlt nur den normalen Bus-Preis', 'Das Ruftaxi kostet nicht mehr als ein normales Busticket.'],
           ['Frauen, die allein fahren, …', ['fahren kostenlos.', 'müssen an der Haltestelle aussteigen.', 'können bis zur Haustür fahren.'], 'c', 'Sie dürfen sich bis vor die Haustür bringen lassen.', 'Allein reisende Frauen werden bis vor die Haustür gebracht.']
         ]
       }
@@ -69,10 +69,10 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
       situations: [
         ['Ihre Stromrechnung ist sehr hoch, und Sie wissen nicht, warum.', 'g', 'wie Sie Strom und Heizkosten sparen', 'Die Energieberatung (g) zeigt, wie man Strom spart.'],
         ['Sie machen eine Weiterbildung und haben in Mathematik große Lücken.', 'e', 'Mathe-Nachhilfe für Erwachsene', 'Die Mathe-Nachhilfe (e) ist für Erwachsene mit einer beruflichen Prüfung.'],
-        ['Sie schreiben gern und möchten Ihre Texte mit anderen besprechen.', 'f', 'Gemeinsam Geschichten und Gedichte schreiben', 'In der Schreibwerkstatt (f) schreibt man gemeinsam Geschichten.'],
+        ['Sie schreiben gern und möchten Ihre Texte mit anderen besprechen.', 'f', 'Gemeinsam Geschichten und Gedichte schreiben', 'In der Schreibwerkstatt (f) arbeiten mehrere Leute zusammen an Texten, so kann man sie gemeinsam besprechen.'],
         ['Ihre Tochter braucht neue Fußballschuhe, die nicht so teuer sind.', 'i', 'Second-Hand-Laden für Sportkleidung und Fußballschuhe', 'Der Second-Hand-Laden (i) verkauft gebrauchte Fußballschuhe.'],
-        ['Ihr Vater hatte eine Operation am Knie und kann nicht in eine Praxis gehen.', 'b', 'Physiotherapie mit Hausbesuch', 'Die Physiotherapie (b) macht Hausbesuche.'],
-        ['Sie möchten mehr über essbare Pflanzen in der Natur lernen.', 'h', 'Pflanzen am Wegrand erkennen und sammeln', 'Bei der Kräuterwanderung (h) lernt man Pflanzen erkennen.'],
+        ['Ihr Vater hatte eine Operation am Knie und kann nicht in eine Praxis gehen.', 'b', 'Physiotherapie mit Hausbesuch', 'Wer nach einer Knie-Operation nicht in eine Praxis kann, braucht Physiotherapie zu Hause wie in Anzeige b.'],
+        ['Sie möchten mehr über essbare Pflanzen in der Natur lernen.', 'h', 'Pflanzen am Wegrand erkennen und sammeln', 'Bei der Kräuterwanderung (h) lernt man, essbare Pflanzen in der Natur zu erkennen.'],
         ['Sie suchen einen Teilzeitjob am Wochenende in einem Hotel.', '0', 'in Vollzeit', 'Das Hotel (j) sucht nur Personal in Vollzeit: 0.', 'j']
       ]
     },
@@ -86,7 +86,7 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
         ['Volker, 47', 'Ohne Noten wissen Eltern nicht genau, wo ihr Kind steht. Die Berichte sind oft so freundlich formuliert, dass man Probleme gar nicht erkennt.', 'nein', 'dass man Probleme gar nicht erkennt', 'Volker meint, dass man in freundlichen Berichten Probleme nicht erkennt.'],
         ['Elena, 26', 'Als Lehrerin sehe ich: Kinder lernen besser, wenn sie keine Angst vor Fehlern haben. Ohne Noten trauen sie sich mehr.', 'ja', 'Ohne Noten trauen sie sich mehr.', 'Elena erlebt, dass Kinder ohne Noten mehr wagen.'],
         ['Günther, 68', 'Ich habe als Kind Noten bekommen, meine Kinder auch. Eine Zwei war für uns ein schöner Erfolg. So etwas sollte man Kindern nicht wegnehmen.', 'nein', 'So etwas sollte man Kindern nicht wegnehmen.', 'Günther findet, dass gute Noten Kinder freuen.'],
-        ['Hamid, 44', 'Bis zur dritten Klasse brauchen Kinder keine Noten, später schon, wegen der Empfehlung für die weiterführende Schule. Ganz abschaffen würde ich sie nicht.', 'nein', 'Ganz abschaffen würde ich sie nicht.', 'Hamid will Noten nicht ganz abschaffen.'],
+        ['Hamid, 44', 'Berichte finde ich als Ergänzung gut, aber spätestens für die Empfehlung zur weiterführenden Schule braucht man Noten. Abschaffen würde ich sie in der Grundschule nicht.', 'nein', 'Abschaffen würde ich sie in der Grundschule nicht.', 'Hamid hält Noten für die Empfehlung zur weiterführenden Schule für nötig, Berichte sind für ihn nur eine Ergänzung.'],
         ['Lotte, 15', 'In der Grundschule hatte ich keine Noten und habe trotzdem viel gelernt. Ich fand das super und würde es allen Kindern wünschen.', 'ja', 'würde es allen Kindern wünschen', 'Lotte wünscht allen Kindern eine Grundschule ohne Noten.']
       ]
     },
@@ -98,10 +98,10 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
         + '3. Grill: Benutzen Sie nur die fest eingebauten Grills. Eigene Grills sind auf der Wiese nicht erlaubt.\n\n'
         + '4. Müll: Nehmen Sie Ihren Müll bitte wieder mit. Die heiße Asche gehört in die roten Metallbehälter neben den Grillplätzen.',
       items: [
-        ['Ohne Reservierung …', ['darf man nie grillen.', 'darf man grillen, wenn der Platz frei ist.', 'muss man mehr bezahlen.'], 'b', 'Ohne Reservierung dürfen Sie nur grillen, wenn der Platz frei ist.', 'Regel 1: Ohne Reservierung darf man grillen, wenn der Platz frei ist.'],
-        ['Wenn es lange nicht geregnet hat, …', ['darf man nur bis 18 Uhr grillen.', 'muss man Wasser mitbringen.', 'kann das Grillen verboten sein.'], 'c', 'Bei großer Trockenheit kann die Stadt das Grillen ganz verbieten.', 'Regel 2: Bei großer Trockenheit kann die Stadt das Grillen verbieten.'],
-        ['Einen eigenen Grill …', ['darf man auf der Wiese nicht benutzen.', 'kann man ausleihen.', 'muss man anmelden.'], 'a', 'Eigene Grills sind auf der Wiese nicht erlaubt.', 'Regel 3: Eigene Grills sind auf der Wiese nicht erlaubt.'],
-        ['Die heiße Asche …', ['nimmt man mit nach Hause.', 'kommt in spezielle Behälter.', 'darf man auf der Wiese lassen.'], 'b', 'Die heiße Asche gehört in die roten Metallbehälter', 'Regel 4: Heiße Asche gehört in die roten Metallbehälter.']
+        ['Ohne Reservierung …', ['darf man nie grillen.', 'darf man grillen, wenn der Platz frei ist.', 'muss man mehr bezahlen.'], 'b', 'Ohne Reservierung dürfen Sie nur grillen, wenn der Platz frei ist.', 'Ohne Reservierung ist Grillen nicht verboten, man darf aber nur einen freien Platz nutzen.'],
+        ['Wenn es lange nicht geregnet hat, …', ['darf man nur bis 18 Uhr grillen.', 'muss man Wasser mitbringen.', 'kann das Grillen verboten sein.'], 'c', 'Bei großer Trockenheit kann die Stadt das Grillen ganz verbieten.', 'Lange Trockenheit kann nach Regel 2 zu einem kompletten Grillverbot durch die Stadt führen.'],
+        ['Einen eigenen Grill …', ['darf man auf der Wiese nicht benutzen.', 'kann man ausleihen.', 'muss man anmelden.'], 'a', 'Eigene Grills sind auf der Wiese nicht erlaubt.', 'Nach Regel 3 sind auf der Wiese nur die eingebauten Grills zugelassen, kein mitgebrachter.'],
+        ['Die heiße Asche …', ['nimmt man mit nach Hause.', 'kommt in spezielle Behälter.', 'darf man auf der Wiese lassen.'], 'b', 'Die heiße Asche gehört in die roten Metallbehälter', 'Die roten Metallbehälter neben den Grillplätzen sind speziell für heiße Asche da.']
       ]
     }
   },
@@ -112,19 +112,19 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
       texts: [
         { script: 'Nachricht von der Physiotherapie: Hallo, Herr Schmitt, hier ist die Praxis Bewegung. Ihre Therapeutin ist nächste Woche im Urlaub. Ihre Termine am Dienstag und Donnerstag übernimmt ein Kollege. Die Uhrzeiten bleiben gleich.',
           rf: ['Herr Schmitts Termine fallen nächste Woche aus.', 'falsch', 'Ihre Termine am Dienstag und Donnerstag übernimmt ein Kollege', 'Die Termine finden mit einem Kollegen statt.'],
-          mc: ['Die Uhrzeiten …', ['ändern sich.', 'bleiben gleich.', 'sind noch nicht klar.'], 'b', 'Die Uhrzeiten bleiben gleich.', 'Die Uhrzeiten bleiben gleich.'] },
+          mc: ['Die Uhrzeiten …', ['ändern sich.', 'bleiben gleich.', 'sind noch nicht klar.'], 'b', 'Die Uhrzeiten bleiben gleich.', 'Nur die Person wechselt, ein Kollege übernimmt, an den Uhrzeiten ändert sich nichts.'] },
         { script: 'Radiomeldung: Die Stadt Bergfeld sucht für den Sommer Rettungsschwimmer für die beiden Freibäder. Bewerben können sich alle ab 18 Jahren mit gültigem Rettungsschein. Die Bezahlung beträgt 16 Euro pro Stunde.',
-          rf: ['Die Stadt sucht Personal für die Freibäder.', 'richtig', 'sucht für den Sommer Rettungsschwimmer für die beiden Freibäder', 'Die Stadt sucht Rettungsschwimmer für die Freibäder.'],
+          rf: ['Die Stadt sucht Personal für die Freibäder.', 'richtig', 'sucht für den Sommer Rettungsschwimmer für die beiden Freibäder', 'Rettungsschwimmer sind Personal für die Freibäder, und die Stadt sucht sie für den Sommer.'],
           mc: ['Bewerber brauchen …', ['einen Rettungsschein.', 'einen Führerschein.', 'Erfahrung als Trainer.'], 'a', 'mit gültigem Rettungsschein', 'Bewerber brauchen einen gültigen Rettungsschein.'] },
         { script: 'Durchsage im Fernbus: Liebe Fahrgäste, wir machen in zehn Minuten eine Pause von zwanzig Minuten an der Raststätte Hügelwald. Bitte seien Sie pünktlich zurück, der Bus wartet nicht.',
           rf: ['Der Bus macht gleich eine längere Pause.', 'richtig', 'eine Pause von zwanzig Minuten', 'Der Bus macht eine Pause von zwanzig Minuten.'],
           mc: ['Die Fahrgäste sollen …', ['im Bus bleiben.', 'pünktlich zurückkommen.', 'ihr Gepäck mitnehmen.'], 'b', 'Bitte seien Sie pünktlich zurück', 'Die Fahrgäste sollen pünktlich zurück sein.'] },
         { script: 'Nachricht vom Bruder: Hey Lisa, hier ist Malte. Ich bin für Mamas Geburtstag zuständig und habe einen Tisch im Restaurant reserviert, für Sonntag um 13 Uhr. Kannst du die Blumen besorgen? Ich kümmere mich um die Torte.',
           rf: ['Malte kauft die Blumen.', 'falsch', 'Kannst du die Blumen besorgen?', 'Malte bittet Lisa, die Blumen zu besorgen.'],
-          mc: ['Die Familie feiert …', ['zu Hause.', 'bei Malte.', 'im Restaurant.'], 'c', 'habe einen Tisch im Restaurant reserviert', 'Malte hat einen Tisch im Restaurant reserviert.'] },
+          mc: ['Die Familie feiert …', ['zu Hause.', 'bei Malte.', 'im Restaurant.'], 'c', 'habe einen Tisch im Restaurant reserviert', 'Malte hat für Sonntag einen Tisch in einem Restaurant bestellt, gefeiert wird also dort.'] },
         { script: 'Ansage der Kinderarztpraxis: Sie haben die Praxis Dr. Wolf erreicht. Impftermine vergeben wir nur noch online über unsere Internetseite. In dringenden Fällen bleiben Sie bitte in der Leitung.',
-          rf: ['Impftermine bekommt man am Telefon.', 'falsch', 'Impftermine vergeben wir nur noch online', 'Impftermine gibt es nur noch online.'],
-          mc: ['In dringenden Fällen …', ['soll man am Telefon warten.', 'soll man eine E-Mail schreiben.', 'soll man ins Krankenhaus fahren.'], 'a', 'In dringenden Fällen bleiben Sie bitte in der Leitung.', 'In dringenden Fällen bleibt man in der Leitung.'] }
+          rf: ['Impftermine bekommt man am Telefon.', 'falsch', 'Impftermine vergeben wir nur noch online', 'Telefonisch gibt es keine Impftermine mehr, sie werden nur über die Internetseite vergeben.'],
+          mc: ['In dringenden Fällen …', ['soll man am Telefon warten.', 'soll man eine E-Mail schreiben.', 'soll man ins Krankenhaus fahren.'], 'a', 'In dringenden Fällen bleiben Sie bitte in der Leitung.', '„In der Leitung bleiben“ heißt, dass man am Telefon wartet, bis jemand antwortet.'] }
       ]
     },
     t2: {
@@ -133,10 +133,10 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
         + 'Wir beginnen im Ratssaal im ersten Stock, wo der Stadtrat jeden zweiten Mittwoch tagt. Diese Sitzungen sind übrigens öffentlich. '
         + 'Danach steigen wir auf den Turm – von oben sieht man bei gutem Wetter bis zu den Bergen. Bitte nehmen Sie die Treppe, einen Aufzug gibt es im Turm nicht.',
       items: [
-        ['Das Rathaus …', ['ist ganz neu.', 'wurde renoviert.', 'soll bald renoviert werden.'], 'b', 'wurde aber vor zehn Jahren komplett renoviert', 'Das Rathaus wurde vor zehn Jahren renoviert.'],
-        ['Die Führung beginnt …', ['im Ratssaal.', 'auf dem Turm.', 'im Keller.'], 'a', 'Wir beginnen im Ratssaal im ersten Stock', 'Die Führung beginnt im Ratssaal.'],
+        ['Das Rathaus …', ['ist ganz neu.', 'wurde renoviert.', 'soll bald renoviert werden.'], 'b', 'wurde aber vor zehn Jahren komplett renoviert', 'Das Rathaus ist zwar alt, wurde aber vor zehn Jahren erneuert.'],
+        ['Die Führung beginnt …', ['im Ratssaal.', 'auf dem Turm.', 'im Keller.'], 'a', 'Wir beginnen im Ratssaal im ersten Stock', 'Die Führung startet im Ratssaal, der Turm folgt danach.'],
         ['Der Stadtrat trifft sich …', ['jeden Mittwoch.', 'einmal im Monat.', 'alle zwei Wochen.'], 'c', 'jeden zweiten Mittwoch', 'Der Stadtrat tagt jeden zweiten Mittwoch.'],
-        ['Die Sitzungen des Stadtrats …', ['kann jeder besuchen.', 'sind geheim.', 'kosten Eintritt.'], 'a', 'Diese Sitzungen sind übrigens öffentlich.', 'Die Sitzungen sind öffentlich.'],
+        ['Die Sitzungen des Stadtrats …', ['kann jeder besuchen.', 'sind geheim.', 'kosten Eintritt.'], 'a', 'Diese Sitzungen sind übrigens öffentlich.', '„Öffentlich“ bedeutet, dass alle Bürger zu den Sitzungen kommen dürfen.'],
         ['Auf den Turm kommt man …', ['mit dem Aufzug.', 'nur bei gutem Wetter.', 'über die Treppe.'], 'c', 'Bitte nehmen Sie die Treppe', 'Auf den Turm geht man über die Treppe.']
       ]
     },
@@ -151,12 +151,12 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
         + 'Vera: Dann brauchst du vielleicht Hilfe? Ich habe nachmittags oft Zeit.\n'
         + 'Ines: Das wäre super! Vielleicht könntest du am Wochenende gehen, da besuche ich meine Oma.',
       items: [
-        ['Der Hund gehört Ines.', 'falsch', 'das ist Bruno, der Hund meiner Nachbarin', 'Bruno gehört der Nachbarin von Ines.'],
-        ['Ines geht zweimal täglich mit dem Hund spazieren.', 'richtig', 'ich gehe zweimal am Tag mit ihm raus', 'Ines geht zweimal am Tag mit Bruno raus.'],
-        ['Ines hat keinen eigenen Hund, weil ihr Freund allergisch ist.', 'richtig', 'mein Freund hat eine Allergie', 'Ihr Freund hat eine Allergie.'],
-        ['Bruno wohnt zurzeit bei Ines in der Wohnung.', 'falsch', 'er ist ja nicht in unserer Wohnung', 'Bruno ist nicht in Ines’ Wohnung.'],
-        ['Die Nachbarin kommt in ungefähr einer Woche zurück.', 'richtig', 'Noch etwa eine Woche.', 'Ines passt noch etwa eine Woche auf.'],
-        ['Vera hat nachmittags meistens keine Zeit.', 'falsch', 'Ich habe nachmittags oft Zeit.', 'Vera hat nachmittags oft Zeit.'],
+        ['Der Hund gehört Ines.', 'falsch', 'das ist Bruno, der Hund meiner Nachbarin', 'Bruno gehört nicht Ines, sondern ihrer Nachbarin, die im Krankenhaus liegt.'],
+        ['Ines geht zweimal täglich mit dem Hund spazieren.', 'richtig', 'ich gehe zweimal am Tag mit ihm raus', 'Ines führt Bruno zweimal pro Tag aus, solange die Nachbarin im Krankenhaus ist.'],
+        ['Ines hat keinen eigenen Hund, weil ihr Freund allergisch ist.', 'richtig', 'mein Freund hat eine Allergie', 'Ines wollte selbst einen Hund, verzichtet aber wegen der Allergie ihres Freundes darauf.'],
+        ['Bruno wohnt zurzeit bei Ines in der Wohnung.', 'falsch', 'er ist ja nicht in unserer Wohnung', 'Bruno lebt nicht bei Ines, sie holt ihn nur zum Spazierengehen ab.'],
+        ['Die Nachbarin kommt in ungefähr einer Woche zurück.', 'richtig', 'Noch etwa eine Woche.', 'Ines muss nur noch rund eine Woche aufpassen, dann kehrt die Nachbarin heim.'],
+        ['Vera hat nachmittags meistens keine Zeit.', 'falsch', 'Ich habe nachmittags oft Zeit.', 'Vera bietet ihre Hilfe an, weil sie am Nachmittag häufig frei hat.'],
         ['Am Wochenende besucht Ines ihre Großmutter.', 'richtig', 'da besuche ich meine Oma', 'Am Wochenende besucht Ines ihre Oma.']
       ]
     },
@@ -174,13 +174,13 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
         + 'Herr Demir: Ich wäre auch zufrieden, wenn die Läden nur bis ein Uhr offen wären.',
       example: ['Thema: Brauchen wir Supermärkte, die nachts offen sind?', 'a'],
       items: [
-        ['Nachtarbeit ist für die Beschäftigten hart.', 'b', 'Für uns Angestellte ist Nachtarbeit sehr anstrengend.', 'Frau Huber sagt, dass Nachtarbeit sehr anstrengend ist.'],
-        ['Ich kann erst spät in der Nacht einkaufen.', 'c', 'komme erst um Mitternacht nach Hause', 'Herr Demir kommt erst um Mitternacht nach Hause.'],
-        ['Kommen nachts überhaupt Kunden?', 'a', 'Und wie viele Kunden kommen nachts wirklich?', 'Der Moderator fragt, wie viele Kunden nachts kommen.'],
-        ['Nachts kaufen viele Menschen mit Schichtarbeit ein.', 'c', 'Pflegekräfte, Taxifahrer, Leute nach der Spätschicht', 'Herr Demir nennt Pflegekräfte, Taxifahrer und Leute nach der Spätschicht.'],
-        ['In manchen Läden arbeitet nachts niemand.', 'b', 'Manche Märkte haben nachts nur Automatenkassen, ganz ohne Personal.', 'Frau Huber sagt, dass manche Märkte nachts ohne Personal sind.'],
-        ['Eine Hörerin hat uns geschrieben.', 'a', 'Dazu hat uns eine Hörerin eine Nachricht geschrieben.', 'Der Moderator erwähnt die Nachricht einer Hörerin.'],
-        ['Wer nachts arbeitet, sollte mehr verdienen.', 'b', 'dann bitte mit deutlich mehr Lohn', 'Frau Huber fordert mehr Lohn für Nachtarbeit.'],
+        ['Nachtarbeit ist für die Beschäftigten hart.', 'b', 'Für uns Angestellte ist Nachtarbeit sehr anstrengend.', 'Frau Huber findet Nachtschichten sehr belastend, gerade für Kolleginnen mit Kindern.'],
+        ['Ich kann erst spät in der Nacht einkaufen.', 'c', 'komme erst um Mitternacht nach Hause', 'Herr Demir arbeitet abends im Restaurant und kommt erst gegen Mitternacht heim, dann haben normale Läden zu.'],
+        ['Kommen nachts überhaupt Kunden?', 'a', 'Und wie viele Kunden kommen nachts wirklich?', 'Der Moderator fragt, ob nachts wirklich genug Kundschaft kommt.'],
+        ['Nachts kaufen viele Menschen mit Schichtarbeit ein.', 'c', 'Pflegekräfte, Taxifahrer, Leute nach der Spätschicht', 'Herr Demir zählt Pflegekräfte, Taxifahrer und Leute nach der Spätschicht auf, also Menschen, die in Schichten arbeiten.'],
+        ['In manchen Läden arbeitet nachts niemand.', 'b', 'Manche Märkte haben nachts nur Automatenkassen, ganz ohne Personal.', 'Frau Huber weist darauf hin, dass manche Läden nachts nur Kassenautomaten haben und dann niemand dort arbeitet.'],
+        ['Eine Hörerin hat uns geschrieben.', 'a', 'Dazu hat uns eine Hörerin eine Nachricht geschrieben.', 'Der Moderator leitet zur schriftlichen Nachricht einer Hörerin über.'],
+        ['Wer nachts arbeitet, sollte mehr verdienen.', 'b', 'dann bitte mit deutlich mehr Lohn', 'Frau Huber akzeptiert Nachtarbeit höchstens mit einem deutlich höheren Lohn.'],
         ['Öffnungszeiten bis ein Uhr würden mir reichen.', 'c', 'wenn die Läden nur bis ein Uhr offen wären', 'Herr Demir wäre mit Öffnung bis ein Uhr zufrieden.']
       ]
     }

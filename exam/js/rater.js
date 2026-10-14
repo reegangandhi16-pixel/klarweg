@@ -12,6 +12,7 @@ const MODULE_LABELS = { schreiben: 'Schreiben', sprechen: 'Sprechen' };
 const STATUS = { pending_rating: 'wartet auf Bewertung', pending_rule: 'bewertet – Punkteregel offen', final: 'abgeschlossen' };
 const points = (n) => String(n).replace('.', ',');
 let current = null;
+let renderSeq = 0;   // overlapping saves re-render out of order: only the latest started render may paint
 
 const audioUrls = [];   // object URLs of loaded recordings, released on every re-render
 function screen(html) { for (const u of audioUrls.splice(0)) URL.revokeObjectURL(u); app.innerHTML = html; const h = app.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
@@ -43,8 +44,10 @@ function unitForm(u, round, data) {
 }
 
 async function showAttempt(attemptId, note = '') {
+  const seq = ++renderSeq;
   let d;
-  try { d = await api.productive(attemptId); } catch (e) { return showQueue(errorText(e)); }
+  try { d = await api.productive(attemptId); } catch (e) { if (seq === renderSeq) showQueue(errorText(e)); return; }
+  if (seq !== renderSeq) return;   // a later render has fresher data; never paint an older state over it
   current = d;
   const parts = d.modules.map((m) => {
     const units = d.units.filter((u) => u.module === m.module);

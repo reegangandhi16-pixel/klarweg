@@ -740,6 +740,14 @@ export async function recordingForRating(env, userId, attemptId, part, turn) {
   if (!(await hasRole(env, userId, ['rater', 'lead_rater']))) fail(403, 'rater_role_required');
   const attempt = await loadAttempt(env, attemptId, userId, { allowAdmin: true });
   if (attempt.user_id === userId) fail(403, 'cannot_rate_own_attempt');
+  const { response, chunks } = await submittedRecording(env, attempt, part, turn);
+  await audit(env, userId, attempt.id, 'recording_played_by_rater', { part: Number(part), turn, chunks });
+  return response;
+}
+
+/* One recorded turn of a SUBMITTED Sprechen module, chunks re-checked against their stored SHA-256 and joined in seq
+   order (gaps stay gaps). Shared by rater playback and the learner's own replay; callers do the authorization. */
+async function submittedRecording(env, attempt, part, turn) {
   const m = await moduleRow(env, attempt.id, 'sprechen');
   if (m.status !== 'submitted') fail(409, 'module_not_submitted');
   const chunks = (await env.DB.prepare('SELECT seq, r2_key, sha256, mime FROM recording_chunks WHERE attempt_id = ?1 AND part = ?2 AND turn = ?3 ORDER BY seq')
@@ -755,9 +763,24 @@ export async function recordingForRating(env, userId, attemptId, part, turn) {
   }
   const body = new Uint8Array(parts.reduce((n, b) => n + b.length, 0));
   let o = 0; for (const b of parts) { body.set(b, o); o += b.length; }
-  await audit(env, userId, attempt.id, 'recording_played_by_rater', { part: Number(part), turn, chunks: chunks.length });
-  return new Response(body, { status: 200, headers: { 'content-type': chunks[0].mime, 'content-length': String(body.length),
-    'cache-control': 'private, no-store', 'x-content-type-options': 'nosniff', 'content-disposition': 'inline' } });
+  return { chunks: chunks.length, response: new Response(body, { status: 200, headers: { 'content-type': chunks[0].mime, 'content-length': String(body.length),
+    'cache-control': 'private, no-store', 'x-content-type-options': 'nosniff', 'content-disposition': 'inline' } }) };
+}
+
+/* The learner's own recordings after submitting Sprechen (SPEAKING §6: "Learners may replay their own recordings in
+   review until deletion"). Owner only — another user's attempt is indistinguishable from a missing one. */
+export async function myRecordings(env, userId, attemptId) {
+  const attempt = await loadAttempt(env, attemptId, userId);
+  const m = await moduleRow(env, attempt.id, 'sprechen');
+  if (m.status !== 'submitted') fail(409, 'module_not_submitted');
+  const turns = (await env.DB.prepare(`SELECT t.part, t.turn, t.status, t.duration_ms,
+      (SELECT COUNT(*) FROM recording_chunks c WHERE c.attempt_id = t.attempt_id AND c.part = t.part AND c.turn = t.turn) AS chunks
+      FROM recording_turns t WHERE t.attempt_id = ?1 ORDER BY t.part, t.turn`).bind(attempt.id).all()).results;
+  return { ok: true, attempt_id: attempt.id, recordings: turns.map((t) => ({ part: t.part, turn: t.turn, complete: t.status === 'complete', duration_ms: t.duration_ms, available: t.chunks > 0 })) };
+}
+export async function myRecording(env, userId, attemptId, part, turn) {
+  const attempt = await loadAttempt(env, attemptId, userId);
+  return (await submittedRecording(env, attempt, part, turn)).response;
 }
 
 export async function productiveForRating(env, userId, attemptId) {

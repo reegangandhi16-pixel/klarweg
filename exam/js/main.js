@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, esc, MODULE_LABELS } from './render.js';
+import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, esc, MODULE_LABELS } from './render.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
 import { ChunkQueue, TurnRecorder } from './recorder.js';
@@ -20,7 +20,7 @@ const base = (document.querySelector('meta[name="kw-exam-api"]') || {}).content 
 const clock = new ServerClock();
 const api = createApi({ base, clock });
 const renderer = createRenderer();
-const S = { attempt: null, lease: null, pkg: null, answers: {}, autosave: null, module: null, timer: null, hb: null, store: null, locked: new Set(), sprechen: null };
+const S = { attempt: null, lease: null, pkg: null, answers: {}, autosave: null, module: null, timer: null, hb: null, store: null, locked: new Set(), sprechen: null, recordingUrls: [] };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function deviceId() {
@@ -410,6 +410,10 @@ async function showResult() {
     if (!m.counts) continue;
     try { reviews.push(itemReview(m.module, await api.review(S.attempt.attempt_id, m.module))); } catch { /* not available */ }
   }
+  if (r.result.modules.some((m) => m.module === 'sprechen' && m.status !== 'not_taken')) {
+    try { reviews.push(recordingsSection(await api.myRecordings(S.attempt.attempt_id))); } catch { /* not available */ }
+  }
+  for (const u of S.recordingUrls.splice(0)) URL.revokeObjectURL(u);
   screen(resultPage(r.result) + reviews.join(''));
 }
 
@@ -441,6 +445,14 @@ app.addEventListener('click', async (e) => {
     if (act === 'audio-start') { if (S.gestureResolve) S.gestureResolve(); return; }
     if (act === 'mic-retry') { await getMic(); return; }
     if (act === 'last-result') { S.attempt = { attempt_id: b.dataset.attempt }; return showResult(); }
+    if (act === 'my-recording') {
+      const cell = b.closest('.kx-play-cell'); b.disabled = true; b.textContent = 'Wird geladen …';
+      try {
+        const url = URL.createObjectURL(await api.myRecording(S.attempt.attempt_id, b.dataset.part, b.dataset.turn)); S.recordingUrls.push(url);
+        cell.innerHTML = `<audio controls preload="metadata" src="${url}" aria-label="Ihre Aufnahme Teil ${esc(b.dataset.part)}"></audio>`;
+      } catch { b.disabled = false; b.textContent = 'Erneut versuchen'; }
+      return;
+    }
     if (act === 'create') { const r = await api.createAttempt({ mode: 'synthetic_full', level: 'b1', device_id: deviceId() }); S.lease = r.lease.lease_id; rememberLease(r.attempt_id, S.lease); S.attempt = r; return route(); }
     if (act === 'takeover') return resume(b.dataset.attempt || S.attempt.attempt_id, true);
     if (act === 'start') {

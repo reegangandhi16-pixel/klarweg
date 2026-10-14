@@ -5,7 +5,9 @@
    raters and one outsider without any role. The dev-only cookie `kx-dev-as=<alias>` picks one of THESE users (it can
    never name any other user id); authorization is still decided by the exam Worker from the stored roles.
    Usage: node exam-worker/test/dev-server.mjs [port] [s0|p1|p2|…|practice] (practice = every registered practice form)  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
-   Default form for the demo: p1 (synthetic practice). Tests default to s0 (system test). */
+   Default for the demo: practice (every practice form; each new attempt gets the least-attempted one). Tests default to s0.
+   Switching user in the demo: open /exam/dev/as/<alias> (learner, rater1, rater2, outsider); it sets the dev cookie and
+   goes to the matching screen. Only these local test users exist. */
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -37,6 +39,12 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
         res.end(Buffer.from(await r.arrayBuffer()));
         return;
       }
+      const as = /^\/exam\/dev\/as\/([a-z0-9]+)$/.exec(url.pathname);
+      if (as) {   // demo convenience: pick one of the local test users (never any other user id)
+        if (!users[as[1]]) { res.writeHead(404); res.end('unknown test user'); return; }
+        res.writeHead(302, { 'set-cookie': `kx-dev-as=${as[1]}; Path=/; SameSite=Lax`, location: /^rater/.test(as[1]) ? '/exam/rater.html' : '/exam/', 'cache-control': 'no-store' });
+        res.end(); return;
+      }
       let p = url.pathname === '/exam/' || url.pathname === '/exam' ? '/exam/index.html' : url.pathname;
       const file = path.join(ROOT, path.normalize(p));
       if (!file.startsWith(path.join(ROOT, 'exam') + path.sep) || !fs.existsSync(file)) { res.writeHead(404); res.end('not found'); return; }
@@ -53,5 +61,9 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const s = await startDevServer({ port: Number(process.argv[2] || 8788), form: process.argv[3] || 'practice' });
-  console.log(`klarweg-exam dev server: http://127.0.0.1:${s.port}/exam/  (synthetic content only, form ${s.form}; rater screen /exam/rater.html with cookie kx-dev-as=rater1)`);
+  const u = `http://127.0.0.1:${s.port}/exam`;
+  console.log(`klarweg-exam dev server (local only, synthetic content, TEST AUDIO tones — not real listening audio), form ${s.form}
+  learner:   ${u}/dev/as/learner
+  raters:    ${u}/dev/as/rater1   ${u}/dev/as/rater2
+  no role:   ${u}/dev/as/outsider`);
 }

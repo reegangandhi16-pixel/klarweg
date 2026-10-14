@@ -141,14 +141,14 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
       ]
     },
     t3: {
-      context: 'Sie sind im Park und hören, wie sich zwei Freundinnen über einen Hund unterhalten.',
-      script: 'Vera: Sag mal, Ines, ist das dein Hund?\n'
+      context: 'Sie sind im Park und hören, wie sich zwei Freunde über einen Hund unterhalten.',
+      script: 'Vincent: Sag mal, Ines, ist das dein Hund?\n'
         + 'Ines: Nein, das ist Bruno, der Hund meiner Nachbarin. Sie liegt im Krankenhaus, und ich gehe zweimal am Tag mit ihm raus.\n'
-        + 'Vera: Wie lieb von dir! Wolltest du nicht selbst einen Hund?\n'
+        + 'Vincent: Wie lieb von dir! Wolltest du nicht selbst einen Hund?\n'
         + 'Ines: Doch, aber mein Freund hat eine Allergie. Bei Bruno ist es zum Glück nicht so schlimm, er ist ja nicht in unserer Wohnung.\n'
-        + 'Vera: Und wie lange musst du noch auf ihn aufpassen?\n'
+        + 'Vincent: Und wie lange musst du noch auf ihn aufpassen?\n'
         + 'Ines: Noch etwa eine Woche. Dann kommt meine Nachbarin nach Hause, aber sie darf erst mal nicht lange laufen.\n'
-        + 'Vera: Dann brauchst du vielleicht Hilfe? Ich habe nachmittags oft Zeit.\n'
+        + 'Vincent: Dann brauchst du vielleicht Hilfe? Ich habe nachmittags oft Zeit.\n'
         + 'Ines: Das wäre super! Vielleicht könntest du am Wochenende gehen, da besuche ich meine Oma.',
       items: [
         ['Der Hund gehört Ines.', 'falsch', 'das ist Bruno, der Hund meiner Nachbarin', 'Bruno gehört nicht Ines, sondern ihrer Nachbarin, die im Krankenhaus liegt.'],
@@ -156,7 +156,7 @@ export const PRACTICE_FORM_P11 = buildPracticeForm({
         ['Ines hat keinen eigenen Hund, weil ihr Freund allergisch ist.', 'richtig', 'mein Freund hat eine Allergie', 'Ines wollte selbst einen Hund, verzichtet aber wegen der Allergie ihres Freundes darauf.'],
         ['Bruno wohnt zurzeit bei Ines in der Wohnung.', 'falsch', 'er ist ja nicht in unserer Wohnung', 'Bruno lebt nicht bei Ines, sie holt ihn nur zum Spazierengehen ab.'],
         ['Die Nachbarin kommt in ungefähr einer Woche zurück.', 'richtig', 'Noch etwa eine Woche.', 'Ines muss nur noch rund eine Woche aufpassen, dann kehrt die Nachbarin heim.'],
-        ['Vera hat nachmittags meistens keine Zeit.', 'falsch', 'Ich habe nachmittags oft Zeit.', 'Vera bietet ihre Hilfe an, weil sie am Nachmittag häufig frei hat.'],
+        ['Vincent hat nachmittags meistens keine Zeit.', 'falsch', 'Ich habe nachmittags oft Zeit.', 'Vincent bietet seine Hilfe an, weil er am Nachmittag häufig frei hat.'],
         ['Am Wochenende besucht Ines ihre Großmutter.', 'richtig', 'da besuche ich meine Oma', 'Am Wochenende besucht Ines ihre Oma.']
       ]
     },

@@ -3701,8 +3701,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p11-h3",
-        "start": 52,
-        "end": 92
+        "start": 55,
+        "end": 95
       }
     ],
     "feedback": {
@@ -3765,8 +3765,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p11-h3",
-        "start": 124,
-        "end": 160
+        "start": 127,
+        "end": 163
       }
     ],
     "feedback": {
@@ -3829,8 +3829,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p11-h3",
-        "start": 240,
-        "end": 269
+        "start": 246,
+        "end": 275
       }
     ],
     "feedback": {
@@ -3893,8 +3893,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p11-h3",
-        "start": 316,
-        "end": 350
+        "start": 322,
+        "end": 356
       }
     ],
     "feedback": {
@@ -3957,8 +3957,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p11-h3",
-        "start": 411,
-        "end": 432
+        "start": 420,
+        "end": 441
       }
     ],
     "feedback": {
@@ -3975,7 +3975,7 @@
     "task_id": "tsk:b1:p11-h3",
     "is_example": false,
     "interaction": "binary_choice",
-    "stem": "21. Vera hat nachmittags meistens keine Zeit.",
+    "stem": "21. Vincent hat nachmittags meistens keine Zeit.",
     "options": [
       {
         "option_id": "richtig",
@@ -4021,12 +4021,12 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p11-h3",
-        "start": 556,
-        "end": 586
+        "start": 568,
+        "end": 598
       }
     ],
     "feedback": {
-      "explanation_de": "Vera bietet ihre Hilfe an, weil sie am Nachmittag häufig frei hat."
+      "explanation_de": "Vincent bietet seine Hilfe an, weil er am Nachmittag häufig frei hat."
     }
   },
   {
@@ -4085,8 +4085,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p11-h3",
-        "start": 653,
-        "end": 677
+        "start": 665,
+        "end": 689
       }
     ],
     "feedback": {

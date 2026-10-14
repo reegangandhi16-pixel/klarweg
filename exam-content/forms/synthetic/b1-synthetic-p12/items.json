@@ -3975,7 +3975,7 @@
     "task_id": "tsk:b1:p12-h3",
     "is_example": false,
     "interaction": "binary_choice",
-    "stem": "21. Frau Novak möchte Kartoffeln anpflanzen.",
+    "stem": "21. Herr Novak möchte Kartoffeln anpflanzen.",
     "options": [
       {
         "option_id": "richtig",
@@ -4026,7 +4026,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Frau Novak möchte Tomaten und Kräuter, keine Kartoffeln."
+      "explanation_de": "Herr Novak möchte Tomaten und Kräuter, keine Kartoffeln."
     }
   },
   {

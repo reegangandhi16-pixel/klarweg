@@ -822,7 +822,7 @@
       "text_de": "Sie hören ein Gespräch. Sie hören das Gespräch einmal. Dazu lösen Sie sieben Aufgaben (16 bis 22). Wählen Sie: Sind die Aussagen richtig oder falsch?",
       "source": "klarweg_paraphrase"
     },
-    "context_line": "Sie sind im Park und hören, wie sich zwei Freundinnen über einen Hund unterhalten.",
+    "context_line": "Sie sind im Park und hören, wie sich zwei Freunde über einen Hund unterhalten.",
     "frame": "synthetic",
     "stimuli": [
       {

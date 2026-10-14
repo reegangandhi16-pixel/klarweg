@@ -3701,8 +3701,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p13-h3",
-        "start": 82,
-        "end": 134
+        "start": 84,
+        "end": 136
       }
     ],
     "feedback": {
@@ -3765,8 +3765,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p13-h3",
-        "start": 269,
-        "end": 323
+        "start": 273,
+        "end": 327
       }
     ],
     "feedback": {
@@ -3829,8 +3829,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p13-h3",
-        "start": 361,
-        "end": 411
+        "start": 367,
+        "end": 417
       }
     ],
     "feedback": {
@@ -3893,8 +3893,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p13-h3",
-        "start": 412,
-        "end": 439
+        "start": 418,
+        "end": 445
       }
     ],
     "feedback": {
@@ -3957,8 +3957,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p13-h3",
-        "start": 578,
-        "end": 624
+        "start": 586,
+        "end": 632
       }
     ],
     "feedback": {
@@ -3975,7 +3975,7 @@
     "task_id": "tsk:b1:p13-h3",
     "is_example": false,
     "interaction": "binary_choice",
-    "stem": "21. Stefan will nächste Woche mit dem Fahrrad kommen.",
+    "stem": "21. Stefanie will nächste Woche mit dem Fahrrad kommen.",
     "options": [
       {
         "option_id": "richtig",
@@ -4021,12 +4021,12 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p13-h3",
-        "start": 647,
-        "end": 687
+        "start": 657,
+        "end": 697
       }
     ],
     "feedback": {
-      "explanation_de": "Stefan will es nächste Woche ausprobieren."
+      "explanation_de": "Stefanie will es nächste Woche ausprobieren."
     }
   },
   {
@@ -4085,12 +4085,12 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p13-h3",
-        "start": 731,
-        "end": 770
+        "start": 741,
+        "end": 780
       }
     ],
     "feedback": {
-      "explanation_de": "Ali und Stefan verabreden sich für Montag an der Brücke, um zusammen zu radeln."
+      "explanation_de": "Ali und Stefanie verabreden sich für Montag an der Brücke, um zusammen zu radeln."
     }
   },
   {

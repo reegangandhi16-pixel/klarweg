@@ -151,6 +151,21 @@ test('LIBRARY: OD-32 — the partner talk for each Teil 2 topic presents the OTH
   assert.deepEqual(bad, []);
 });
 
+test('LIBRARY: AUDIO-SPEC B3 — every Hören Teil 3 dialogue is a man and a woman (voices must be told apart)', () => {
+  // Explicit table of the dialogue speakers; a new or renamed speaker fails until it is added here.
+  const GENDER = { Paul: 'm', Nora: 'f', Ben: 'm', Lisa: 'f', Sebastian: 'm', Elif: 'f', Moritz: 'm', Aylin: 'f', Jana: 'f', Max: 'm',
+    'Herr Schulz': 'm', 'Frau Pohl': 'f', Tobias: 'm', Miriam: 'f', Paula: 'f', 'Ömer': 'm', Nico: 'm', Clara: 'f', Felix: 'm', Hanna: 'f',
+    Vincent: 'm', Ines: 'f', 'Herr Novak': 'm', 'Frau Lindemann': 'f', Stefanie: 'f', Ali: 'm', Lena: 'f', Jakob: 'm', Kathrin: 'f', Marco: 'm' };
+  const bad = [];
+  for (const f of LIB) {
+    const script = f.assets.find((a) => /-h3$/.test(a.id)).script_de;
+    const speakers = [...new Set(script.split('\n').map((l) => l.split(':')[0]))];
+    const genders = speakers.map((sp) => GENDER[sp] || `unknown(${sp})`);
+    if (speakers.length !== 2 || genders.sort().join() !== 'f,m') bad.push(`${f.name}: ${speakers.join(' / ')} → ${genders.join(', ')}`);
+  }
+  assert.deepEqual(bad, []);
+});
+
 test('LIBRARY: forms are mutually original — no shared 8-word passage, stem, prompt or topic between any two forms', () => {
   const shingles = (s) => { const w = s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter(Boolean); const out = new Set(); for (let i = 0; i + 8 <= w.length; i++) out.add(w.slice(i, i + 8).join(' ')); return out; };
   const owner = new Map();

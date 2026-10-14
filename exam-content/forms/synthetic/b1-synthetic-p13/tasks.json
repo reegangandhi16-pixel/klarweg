@@ -822,7 +822,7 @@
       "text_de": "Sie hören ein Gespräch. Sie hören das Gespräch einmal. Dazu lösen Sie sieben Aufgaben (16 bis 22). Wählen Sie: Sind die Aussagen richtig oder falsch?",
       "source": "klarweg_paraphrase"
     },
-    "context_line": "Sie sind in der Kantine und hören, wie zwei Kollegen über den Weg zur Arbeit sprechen.",
+    "context_line": "Sie sind in der Kantine und hören, wie eine Kollegin und ein Kollege über den Weg zur Arbeit sprechen.",
     "frame": "synthetic",
     "stimuli": [
       {

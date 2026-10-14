@@ -1,64 +1,18 @@
-/* Generates the SYNTHETIC B1 PRACTICE form P1: original, fictional, realistic B1-style texts written for Klarweg (no
-   Goethe-Institut or other published exam material, no real people, brands or venues). It has the same structure as
-   the synthetic system-test form S0 (tools/make-synthetic-form.mjs) so it runs on the unchanged engine.
-   Hören stimuli are generated TEST AUDIO tones (the public-repo boundary allows no recorded audio); each tone asset
-   carries the German listening script it stands for in `script_de` — server-side content data, never shipped in a
-   module package. Every scored item carries a one-sentence `feedback.explanation_de` and an evidence `anchors` span
-   (EXAM-ITEM-SCHEMA §5: server only, released in the review after submission); spans are computed from the quoted
-   evidence below and the build fails if a quote is not in its text or script. For Hören the span points into the
-   script, not to an audio timestamp (the tones have none). Registered via SYNTHETIC_FORMS in make-synthetic-form.mjs and byte-checked by
-   check-public-boundary.mjs like S0. Clearly synthetic practice: not an official exam, no official status. */
+/* SYNTHETIC B1 PRACTICE form P1: original, fictional, realistic B1-style texts written for Klarweg (no Goethe-Institut
+   or other published exam material, no real people, brands or venues), built with the shared practice builder
+   (tools/practice-lib.mjs: TEST AUDIO tones with server-only scripts, explanations and evidence released only after
+   submission). Registered via SYNTHETIC_FORMS in make-synthetic-form.mjs and byte-checked by check-public-boundary.mjs.
+   Clearly synthetic practice: not an official exam, no official status. */
 import { countWords } from '../schemas/content-model.mjs';
+import { createPracticeBuilder, PRACTICE_TIMING } from './practice-lib.mjs';
 
 export const PRACTICE_REL = 'forms/synthetic/b1-synthetic-p1';
 const FORM_ID = 'frm:b1:synthetic-p1@1';
 const DATE = '2026-10-13';
 
-const provenance = () => ({
-  author_ids: ['klarweg-engineering'], created_at: DATE, reference_material_used: 'none',
-  originality_check: { method: 'synthetic_fixture', max_overlap: 0, corpus_versions: [], passed: true, checked_at: DATE },
-  reviews: [], standard_refs: ['synthetic practice form — original Klarweg text, not exam content']
-});
-const itemInd = () => ({ synthetic: true, reasoning_steps: 1, inference_demand: 2, distractor_strength: 2 });
+const { textAsset, toneAsset, item, task, choice, explain, finish, RF, JN, abc } = createPracticeBuilder({ formId: FORM_ID, date: DATE });
 
-const assets = [], tasks = [], items = [], keys = {};
-function textAsset(id, body, label) {
-  assets.push({ id, kind: 'text', label: label || null, text: { lang: 'de', body_md: body }, licence: { kind: 'synthetic_test' }, creator: 'klarweg-engineering' });
-  return id;
-}
-function toneAsset(id, seconds, freqHz, label, script) {
-  assets.push({ id, kind: 'audio', label: `TEST AUDIO – ${label}`, audio: { generator: { type: 'tone', seconds, freq_hz: freqHz, beep_ms: 250 }, plays: null },
-    script_de: script, licence: { kind: 'synthetic_test' }, creator: 'klarweg-engineering' });
-  return id;
-}
-function item(o) {
-  const it = {
-    id: o.id, rev: 1, meta_version: 1, level: 'B1', module: o.module, part: o.part, task_id: o.task, is_example: !!o.example,
-    interaction: o.interaction, stem: o.stem, options: o.options || undefined, response_spec: o.response_spec || { type: 'choice' },
-    indicators: o.indicators || itemInd(), topic: ['practice'], provenance: provenance(), status: 'live'
-  };
-  if (o.example) it.example_answer = o.key;
-  items.push(it);
-  keys[o.id] = o.keyspec || { kind: 'single', correct: o.key };
-  return o.id;
-}
-function task(o) {
-  const words = (o.stimuli || []).filter((s) => s.text).reduce((n, s) => n + countWords(s.text), 0);
-  tasks.push({
-    id: o.id, level: 'B1', module: o.module, part: o.part, interaction: o.interaction,
-    instructions: { text_de: o.instructions, source: 'klarweg_paraphrase' },
-    context_line: o.context || undefined, frame: 'synthetic',
-    stimuli: (o.stimuli || []).map((s, i) => ({ role: s.role, asset_id: s.asset, label: s.label || null, order: i + 1, speaker_ids: s.speakers || undefined })),
-    items: o.items, indicators: { synthetic: true, words, ...(o.indicators || {}) }, topic: ['practice'], provenance: provenance(),
-    turns: o.turns || undefined
-  });
-  return o.id;
-}
-const RF = [{ option_id: 'richtig', label: 'Richtig' }, { option_id: 'falsch', label: 'Falsch' }];
-const JN = [{ option_id: 'ja', label: 'Ja' }, { option_id: 'nein', label: 'Nein' }];
-const abc = (a, b, c) => [{ option_id: 'a', label: 'a', text: a }, { option_id: 'b', label: 'b', text: b }, { option_id: 'c', label: 'c', text: c }];
 const lesenInd = { inference_demand: 2, distractor_strength: 2, info_units: 7 };
-const choice = (id, part, tsk, interaction, options, stem, key, example = false) => item({ id, module: part.m, part: part.p, task: tsk, interaction, options, stem, key, example });
 
 /* ---------------- LESEN ---------------- */
 const L1 = { m: 'lesen', p: 1 };
@@ -377,58 +331,10 @@ const EXPLAIN = {
   'itm:b1:p1-h4-29': ['ast:p1-h4', 'ist das Taxi oft die einzige Lösung', 'Herr Lang sagt, dass das Taxi für viele Menschen ohne Auto die einzige Lösung ist.'],
   'itm:b1:p1-h4-30': ['ast:p1-h4', 'Sie müssen ohne Gefahr mit dem Rad zur Schule fahren können.', 'Frau Demir möchte, dass Kinder sicher mit dem Rad fahren können.']
 };
-const sourceText = (assetId) => { const a = assets.find((x) => x.id === assetId); return a && (a.kind === 'text' ? a.text.body_md : a.script_de); };
-for (const it of items) {
-  if (it.is_example || !['binary_choice', 'mcq_single', 'matching_pool', 'speaker_assignment'].includes(it.interaction)) continue;
-  const e = EXPLAIN[it.id];
-  if (!e) throw new Error(`no explanation for ${it.id}`);
-  const [assetId, quote, explanation] = e;
-  const start = (sourceText(assetId) || '').indexOf(quote);
-  if (start < 0) throw new Error(`${it.id}: evidence not found in ${assetId}`);
-  it.anchors = [{ kind: 'text_span', asset_id: assetId, start, end: start + quote.length }];
-  it.feedback = { explanation_de: explanation };
-}
+explain(EXPLAIN);
 
-/* ---------------- FORM ---------------- */
-const byPart = (module, part) => tasks.filter((t) => t.module === module && t.part === part);
-const placement = (module, part) => {
-  const ts = byPart(module, part);
-  const order = ts.flatMap((t) => t.items).map((id) => {
-    const it = items.find((x) => x.id === id);
-    const productive = ['topic_choice', 'text_response', 'spoken_response'].includes(it.interaction);
-    const display = productive ? null
-      : it.is_example ? (id.endsWith('-01') ? '01' : id.endsWith('-02') ? '02' : '0')
-        : it.stem.match(/^(\d+)\./)[1];
-    return { item_id: id, display_no: display };
-  });
-  return { part, task_ids: ts.map((t) => t.id), item_order: order };
-};
-const form = {
-  id: FORM_ID, level_config: 'lc:b1@1', kind: 'synthetic', label: 'Synthetische Übungsform P1 (Klarweg-Übung, kein Original)', status: 'live', rev: 1,
-  release_note: 'SYNTHETIC PRACTICE CONTENT — original Klarweg texts; Hören as TEST AUDIO tones',
-  modules: [
-    { module: 'lesen', parts: [1, 2, 3, 4, 5].map((p) => placement('lesen', p)) },
-    { module: 'hoeren', parts: [1, 2, 3, 4].map((p) => (p === 2 ? { ...placement('hoeren', p), instruction_asset_id: h2Instr } : placement('hoeren', p))) },
-    { module: 'schreiben', parts: [1, 2, 3].map((p) => placement('schreiben', p)) },
-    { module: 'sprechen', parts: [1, 2, 3].map((p) => placement('sprechen', p)) }
-  ],
-  topic_map: { lesen: ['practice'], hoeren: ['practice'], schreiben: ['practice'], sprechen: ['practice'] },
-  timing_overrides: {
-    note: 'Allowed for kind=synthetic only. Hören runs on short TEST AUDIO tones; the reading and answer pauses are longer than in S0 so the practice is usable.',
-    hoeren: { example_preread_seconds: 10, item_preread_seconds_per_text: 10, gap_between_plays_seconds: 2, answer_seconds_after_text: 5,
-      part_preread_seconds: { 2: 30, 3: 30, 4: 30 }, part_answer_seconds: { 2: 10, 3: 10, 4: 10 }, part_gap_seconds: { 4: 2 }, review_seconds: 60, total_seconds_gate: { min: 0, max: 900 } },
-    sprechen: { prep_seconds: 120, phases: [{ id: 'intro', seconds: 5, rated: false }, { id: 'teil1', seconds: 180 }, { id: 'teil2', seconds: 240 }, { id: 'partner', seconds: 5, listen_only: true }, { id: 'teil3', seconds: 150 }] }
-  },
-  authored_by: ['klarweg-engineering'], reviewed_by: [], created_at: DATE
-};
-
-const files = {
-  'form.json': form, 'tasks.json': tasks, 'items.json': items,
-  'keys.json': { form_id: FORM_ID, note: 'SERVER ONLY — synthetic practice keys; never served to browsers', keys },
-  'assets.json': assets
-};
-export const PRACTICE_FORM = {
-  rel: PRACTICE_REL, form_id: FORM_ID,
-  files: Object.fromEntries(Object.entries(files).map(([name, data]) => [name, JSON.stringify(data, null, 2) + '\n'])),
-  counts: { tasks: tasks.length, items: items.length, assets: assets.length }
-};
+export const PRACTICE_FORM = finish({
+  rel: PRACTICE_REL, label: 'Synthetische Übungsform P1 (Klarweg-Übung, kein Original)',
+  releaseNote: 'SYNTHETIC PRACTICE CONTENT — original Klarweg texts; Hören as TEST AUDIO tones',
+  hoerenInstructions: { 2: h2Instr }, timingOverrides: PRACTICE_TIMING
+});

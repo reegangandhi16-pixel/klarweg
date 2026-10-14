@@ -457,6 +457,7 @@ async function runPractice() {
   const dev = await startDevServer({ form: PRACTICE.name.toLowerCase() });
   const b = await launch();
   const { send } = b;
+  let dialogWatch = null;
   try {
     await send('Runtime.enable'); await send('Page.enable');
     const evaluate = async (expr) => {
@@ -475,6 +476,67 @@ async function runPractice() {
     const base = `http://127.0.0.1:${dev.port}/exam/`;
     const as = async (alias, page = '') => { await send('Page.navigate', { url: base }); await waitFor('document.readyState === "complete"'); await evaluate(`document.cookie = 'kx-dev-as=${alias}; path=/'`); await send('Page.navigate', { url: base + page }); };
     const noHScroll = () => evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1');
+    /* Automated accessibility audit of the screen as rendered (EX-04 is the manual audit; this does not replace it):
+       every interactive node in Chrome's accessibility tree has a name; no duplicate ids; lang set; one h1; and real
+       Tab key presses land on elements that show a visible focus indicator. Findings are collected and asserted at the end. */
+    const a11yFindings = [], a11yScreens = [];
+    /* JavaScript dialogs (e.g. the leave warning) block CDP navigation; record and accept them instead of hanging. */
+    const dialogs = [];
+    let seenEvents = 0;
+    dialogWatch = setInterval(() => {
+      for (; seenEvents < b.events.length; seenEvents++) {
+        const ev = b.events[seenEvents];
+        if (ev.method !== 'Page.javascriptDialogOpening') continue;
+        dialogs.push({ type: ev.params.type, message: ev.params.message, url: ev.params.url });
+        if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] dialog', JSON.stringify(ev.params).slice(0, 200));
+        send('Page.handleJavaScriptDialog', { accept: true }).catch(() => {});
+      }
+    }, 100);
+    const INTERACTIVE = new Set(['button', 'link', 'textbox', 'radio', 'checkbox', 'combobox', 'slider', 'spinbutton', 'searchbox', 'listbox', 'switch', 'tab', 'menuitem']);
+    const within = (p, ms, what) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(`a11y step timed out: ${what}`)), ms))]);
+    const a11y = async (label, opts = {}) => {
+      if (process.env.KX_E2E_NO_A11Y) return;
+      try { await within(a11yScreen(label, opts), 30000, label); } catch (e) { a11yFindings.push(`${label}: ${e.message}`); }
+      // leave nothing behind: an enabled Accessibility domain makes Chrome rebuild the tree on every DOM change (the
+      // ticking Sprechen screen then stalls), and Tab presses may have moved focus out of the page
+      await within(send('Accessibility.disable'), 5000, 'Accessibility.disable').catch(() => {});
+      await evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur(), window.focus(), true').catch(() => {});
+      if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] a11y findings so far', JSON.stringify(a11yFindings));
+      if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] a11y done', label, new Date().toISOString());
+    };
+    /* The audit must be able to fail: inject an unnamed button and a duplicate id, require both findings, remove them. */
+    const a11ySelfCheck = async () => {
+      await evaluate(`(() => { const d = document.createElement('div'); d.id = 'kx-a11y-probe';
+        d.innerHTML = '<button type="button"></button><span id="kx-probe-dup"></span><span id="kx-probe-dup"></span>'; document.body.appendChild(d); return true; })()`);
+      const before = a11yFindings.length;
+      await a11y('self-check', { tabs: 0 });
+      const got = a11yFindings.splice(before);
+      a11yScreens.splice(a11yScreens.indexOf('self-check'), 1);
+      await evaluate(`(document.getElementById('kx-a11y-probe').remove(), true)`);
+      assert.ok(got.some((f) => /button without an accessible name/.test(f)) && got.some((f) => /duplicate id "kx-probe-dup"/.test(f)), `a11y audit self-check failed: ${JSON.stringify(got)}`);
+    };
+    const a11yScreen = async (label, { tabs = 12 } = {}) => {
+      a11yScreens.push(label);
+      if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] a11y', label, new Date().toISOString());
+      await within(send('Accessibility.enable'), 5000, 'Accessibility.enable');
+      const { nodes } = await within(send('Accessibility.getFullAXTree'), 5000, 'getFullAXTree');
+      for (const n of nodes) {
+        if (n.ignored || !INTERACTIVE.has(n.role?.value)) continue;
+        if (!String(n.name?.value || '').trim()) a11yFindings.push(`${label}: ${n.role.value} without an accessible name`);
+      }
+      const page = await evaluate(`(() => { const ids = [...document.querySelectorAll('[id]')].map((e) => e.id);
+        return { lang: document.documentElement.lang, dup: [...new Set(ids.filter((x, i) => ids.indexOf(x) !== i))], h1: document.querySelectorAll('h1').length }; })()`);
+      if (!page.lang) a11yFindings.push(`${label}: no lang on <html>`);
+      for (const d of page.dup) a11yFindings.push(`${label}: duplicate id "${d}"`);
+      if (page.h1 !== 1) a11yFindings.push(`${label}: ${page.h1} h1 elements`);
+      await evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur()');
+      for (let i = 0; i < tabs; i++) {
+        for (const type of ['keyDown', 'keyUp']) await within(send('Input.dispatchKeyEvent', { type, key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 }), 5000, `Tab ${i + 1} ${type}`);
+        const f = await evaluate(`(() => { const e = document.activeElement; if (!e || e === document.body) return null; const st = getComputedStyle(e);
+          return { what: e.tagName.toLowerCase() + (e.dataset.act ? '[' + e.dataset.act + ']' : '') + (e.type ? ':' + e.type : ''), visible: (st.outlineStyle !== 'none' && parseFloat(st.outlineWidth) > 0) || st.boxShadow !== 'none' }; })()`);
+        if (f && !f.visible) a11yFindings.push(`${label}: keyboard focus on ${f.what} is not visible`);
+      }
+    };
     const keys = Object.fromEntries((await dev.env.DB.prepare('SELECT item_id, key_json FROM item_keys').all()).results.map((r) => [r.item_id, JSON.parse(r.key_json).correct]));
     const answerAll = (plan) => evaluate(`(() => { const plan = ${JSON.stringify(plan)};
       for (const [id, v] of Object.entries(plan)) { const el = document.querySelector('[data-item="' + id + '"][value="' + v + '"]');
@@ -491,6 +553,8 @@ async function runPractice() {
     await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`); await click('[data-act="start"][data-module="lesen"]');
     await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
     assert.ok((await text()).includes(PRACTICE_L1_START), `realistic practice text is shown: ${PRACTICE_L1_START}`);
+    if (!process.env.KX_E2E_NO_A11Y) await a11ySelfCheck();
+    await a11y('Lesen');
     const attempt = (await dev.env.DB.prepare('SELECT id FROM attempts').first()).id;
     const lesen = (await dev.env.DB.prepare("SELECT item_id, display_no FROM items_index WHERE module = 'lesen' AND is_example = 0").all()).results;
     const wrong = (id) => { const k = keys[id]; return ['richtig', 'falsch'].includes(k) ? (k === 'richtig' ? 'falsch' : 'richtig') : ['ja', 'nein'].includes(k) ? (k === 'ja' ? 'nein' : 'ja') : k === 'a' ? 'b' : 'a'; };
@@ -518,6 +582,7 @@ async function runPractice() {
     // ---- Schreiben: three texts ----
     await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`); await click('[data-act="start"][data-module="schreiben"]');
     await waitFor(`document.querySelectorAll('textarea').length === 3`, 15000, 'Schreiben');
+    await a11y('Schreiben');
     await evaluate(`[...document.querySelectorAll('textarea')].forEach((t, i) => { t.value = 'Lieber Tom, meine neue Wohnung ist hell und ruhig. Ich bin umgezogen, weil ich näher an der Arbeit wohnen wollte. Treffen wir uns am Samstag? Viele Grüße ' + i; t.dispatchEvent(new Event('input', { bubbles: true })); })`);
     await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Schreiben autosaved');
     await submitModule();
@@ -526,7 +591,15 @@ async function runPractice() {
     await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`);
     await click('#kx-consent'); await click('[data-act="start"][data-module="sprechen"]');
     await waitFor(`/^Vorbereitung/.test(document.querySelector('#kx-phase')?.textContent || '')`, 30000, 'preparation');
+    await a11y('Sprechen preparation', { tabs: 6 });
     await evaluate(`document.querySelector('input[type=radio][value="t1"]').click()`);
+    // the save indicator already reads "Gespeichert" before the click, so wait for the SERVER to hold the topic choice
+    // (the reload below with an unsaved answer correctly triggers the leave warning)
+    for (const t0 = Date.now(); ; await sleep(200)) {
+      const row = await dev.env.DB.prepare("SELECT value_json FROM responses_current WHERE item_id LIKE '%-sp2-topic'").first();
+      if (row && JSON.parse(row.value_json).option_id === 't1') break;
+      if (Date.now() - t0 > 15000) throw new Error('topic choice never reached the server');
+    }
     await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'topic saved');
     await dev.env.DB.prepare("UPDATE attempt_modules SET started_at = started_at - 118000, deadline_at = deadline_at - 118000 WHERE module = 'sprechen'").run();
     await send('Page.reload');
@@ -537,6 +610,7 @@ async function runPractice() {
 
     // ---- result + item review tables ----
     await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText) && document.querySelectorAll('.kx-review-items').length === 2`, 20000, 'result with reviews');
+    await a11y('result + item review');
     let res = await text();
     assert.match(res, /Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts\./);
     assert.match(res, /richtig 10 · falsch 10 · ohne Antwort 10/); assert.match(res, /richtig 30 · falsch 0 · ohne Antwort 0/);
@@ -577,6 +651,7 @@ async function runPractice() {
       await waitFor(`document.querySelector('[data-act="open"][data-attempt="${attempt}"]')`, 10000, `${alias} queue`);
       await click(`[data-act="open"][data-attempt="${attempt}"]`);
       await waitFor(`document.querySelectorAll('form.kx-rate').length === 7`, 10000, `${alias} rating forms`);
+      if (alias === 'rater1') await a11y('rater forms');
       assert.match(await text(), new RegExp(`Ihre Runde: ${round}`)); assert.match(await text(), /Lieber Tom/, 'the writing is shown to the rater');
       // the recording: loaded on request through the rater's own session, playable, no autoplay
       await click('[data-act="play"][data-part="1"][data-turn="t1"]');
@@ -646,6 +721,7 @@ async function runPractice() {
     await waitFor(`document.querySelector('[data-act="last-result"][data-attempt="${attempt}"]')`, 15000, 'last result link');
     // the practice history on the start screen: this attempt with its final rated scores
     await waitFor(`document.querySelectorAll('.kx-history tbody tr').length === 1`, 10000, 'practice history');
+    await a11y('start screen with history', { tabs: 6 });
     const hist = await evaluate(`[...document.querySelectorAll('.kx-history tbody td')].map((td) => td.textContent)`);
     assert.deepEqual(hist.slice(3, 5), ['75 / 100', '75 / 100'], `Schreiben and Sprechen final in the history: ${JSON.stringify(hist)}`);
     await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'start screen with history: no horizontal scroll on mobile'); await vp(1280, 800, false);
@@ -655,6 +731,9 @@ async function runPractice() {
     assert.equal(/in Bewertung/.test(res), false, 'nothing awaits rating any more');
     // rated feedback per task and criterion, and per-part lines in the reviews
     await waitFor(`document.querySelectorAll('.kx-rated').length === 2`, 10000, 'rated feedback for Schreiben and Sprechen');
+    await a11y('final result with rated feedback');
+    assert.deepEqual(a11yFindings, [], `automated accessibility findings on ${a11yScreens.join(', ')}`);
+    assert.deepEqual(dialogs, [], 'no leave warning or other dialog appeared while everything was saved');
     assert.equal(await evaluate(`document.querySelectorAll('.kx-rated table').length`), 7, '3 Schreiben tasks + 3 Sprechen parts + Aussprache');
     assert.match(await text(), /Teil 1: 10 von 10 · Teil 2: 5 von 5/i, 'Hören per-part line (shown in uppercase metadata style)');
     await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'final result: no horizontal scroll on mobile'); await vp(1280, 800, false);
@@ -664,7 +743,7 @@ async function runPractice() {
     const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
     log(`practice ${PRACTICE.name}`, 'PASS', { lesen: '10/10/10', hoeren: '30/30', ratings: 14, final: final.map((f) => `${f.module}:${f.points}`) });
     return exceptions;
-  } finally { b.close(); dev.server.close(); }
+  } finally { clearInterval(dialogWatch); b.close(); dev.server.close(); }
 }
 
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];

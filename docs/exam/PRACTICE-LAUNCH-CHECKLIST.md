@@ -21,8 +21,10 @@
 | Authorization boundaries: entitlement, roles, media tokens, expired session | `security.test`, `listening-media.test` |
 | 15 forms: validator, originality between forms, balanced keys, length band, explanations that explain and agree with the key, instruction numbering, word targets | `validate.mjs`, `practice-library.test` |
 | Every script recordable as written; Teil 4 speakers = answer options | `audio-plan.test` (`tools/audio-plan.mjs`) |
+| Sprechen Teil 3 (OD-32): the partner presents the topic the learner did not choose; the examiner asks about the learner's own topic; raters see the chosen topic | validator `topic_partner` rules (`content.test`), `sprechen-topic.test` (all 15 forms, both choices, driver), `practice-form.test` rater data, `practice-library.test` mapping check |
 | Browser journey per form (Lesen autosave, Hören, Schreiben, Sprechen recording, result, history, two raters, mobile 390 px) | `KX_E2E_ONLY=practice KX_E2E_FORM=pN npm run test:exam:browser`: PASS on all 15 forms (2026-10-14) |
 | Accessibility and responsive basics: labelled controls, legends, skip link, focus ring, 44 px targets, reduced motion, no horizontal scroll on mobile | `frontend.test` ACCESSIBILITY / RESPONSIVE, browser E2E mobile checks |
+| Automated accessibility audit in the real browser: every interactive element in Chrome's accessibility tree has a name; no duplicate ids; `lang` set; one h1; real Tab key presses show a visible focus indicator. Covers Lesen, Schreiben, Sprechen preparation, result + item review, rater forms, start screen with history, final result | Browser practice journey (`a11y()` in `browser-e2e.mjs`), self-checked against injected defects each run; 0 findings on P3 (2026-10-14) |
 | Public-repository boundary | `check-public-boundary.mjs` |
 
 ## 2. Implemented, awaiting human review
@@ -30,8 +32,8 @@
 | Item | What is missing |
 |---|---|
 | Content of P1–P15 (texts, items, keys, explanations, partner talks) | **EX-03** (panel not formed): review by native B1 item writers. Machine checks are not native-speaker validation. Plan per register §C.1: reviewers A and B (teachers) rate every item independently (verdict, ambiguity_risk, inference_demand, distractor_strength); C (native linguist) signs off key and distractors, originality and item accessibility; disagreements are revised or withdrawn (EX-03/O7), with no carry-forward (O6). Sheets: `node exam-content/tools/review-sheet.mjs <dir outside the repo> [p3 …]` (HTML to fill in plus a JSON record per form). Suggested start: P3, P8, P13, then the rest. |
-| Accessibility | Manual screen-reader and keyboard pass on the learner screens (automated checks only so far); EX-04 |
-| Sprechen Teil 3 partner talks | About 1.5 min each; OD-32 describes about 3 min for the mock. The owner/reviewers must accept the length for practice or ask for longer talks. |
+| Accessibility | **EX-04** manual audit (WCAG 2.2 AA, screen readers, full keyboard pass incl. Hören and Sprechen during playback/recording). The automated audit covers only names, ids, lang, headings and focus visibility, and does not replace it |
+| Sprechen Teil 3 partner talks (two per form, one per topic) | About 1.5 min each; OD-32 describes about 3 min for the mock. The owner/reviewers must accept the length for practice or ask for longer talks. |
 
 ## 3. Blocked by owner or external decisions
 
@@ -51,7 +53,6 @@
 | Real audio files | Waits for OD-14; files would live in the private content repository |
 | Rater/admin second factor | Needs an Access auth method (OD-19) |
 | Consent withdrawal flow | Policy P-19 open |
-| Partner talk matched to the learner's topic | The partner always presents topic 2, so a learner who chooses topic 2 hears the same topic, not "a different topic" (OD-32) |
 
 ## 5. Not deployed
 Exam Worker flags all `off` (`exam-worker/wrangler.toml`); `EXAM_ROUTES` off in klarweg-access; no `exam/` path in

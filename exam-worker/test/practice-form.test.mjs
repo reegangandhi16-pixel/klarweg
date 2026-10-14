@@ -1,14 +1,14 @@
-/* SYNTHETIC PRACTICE FORMS P1 and P2 (tools/make-practice-form*.mjs, shared tools/practice-lib.mjs) on the unchanged engine: a complete attempt at API level.
+/* SYNTHETIC PRACTICE LIBRARY P1 … Pn (tools/practice-forms.mjs; shared tools/practice-lib.mjs) on the unchanged engine: a complete attempt at API level.
    Original Klarweg texts, not placeholders; every scored item has a server key; numbering is exam-wide; nothing
    server-only (keys, listening scripts) reaches a module package; OD-45 result wording is unchanged. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { setup, call, newUser, role, pkgFor, keysFor, scoredItems, PRACTICE_FORM_DIR, PRACTICE_P2_FORM_DIR } from './harness.mjs';
+import { setup, call, newUser, role, pkgFor, keysFor, scoredItems, PRACTICE_FORM_DIR, PRACTICE_P2_FORM_DIR, PRACTICE_LIBRARY } from './harness.mjs';
 import { A, start, submit, answerObjective, runHoeren, runSchreiben, runSprechen, complete } from './flow.mjs';
 
-for (const [NAME, DIR] of [['P1', PRACTICE_FORM_DIR], ['P2', PRACTICE_P2_FORM_DIR]]) {
+for (const { name: NAME, dir: DIR } of PRACTICE_LIBRARY) {
   test(`PRACTICE ${NAME}: content is original and realistic (no placeholders), clearly synthetic practice, keys complete, numbering exam-wide`, async () => {
     const s = await setup({ formDirs: [DIR] });
     const keys = keysFor(s.build);

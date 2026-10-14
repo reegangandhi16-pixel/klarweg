@@ -3,7 +3,7 @@
    one-open-attempt and idempotency rules still hold under concurrent creates. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { makeEnv, call, newUser, grant, rid, dev, FORM_DIR, PRACTICE_FORM_DIR, PRACTICE_P2_FORM_DIR } from './harness.mjs';
+import { makeEnv, call, newUser, grant, rid, dev, FORM_DIR, PRACTICE_FORM_DIR, PRACTICE_P2_FORM_DIR, PRACTICE_LIBRARY } from './harness.mjs';
 
 const S0 = 'frm:b1:synthetic-s0@1', P1 = 'frm:b1:synthetic-p1@1', P2 = 'frm:b1:synthetic-p2@1';
 const create = (env, user, request_id = rid(), device_id = dev()) => call(env, 'POST', '/exam/v1/attempts', { user, body: { mode: 'synthetic_full', level: 'b1', request_id, device_id } });
@@ -101,4 +101,24 @@ test('ASSIGNMENT: concurrent and repeated creates keep the one-open-attempt and 
   const e = await call(h.env, 'POST', '/exam/v1/attempts', { user: u, body: { mode: 'synthetic_full', level: 'b1', request_id: rid(), device_id: dv, form_id: (await row(h.env, a.json.attempt_id)).form_id } });
   assert.equal(e.status, 200);
   assert.notEqual((await row(h.env, e.json.attempt_id)).form_id, (await row(h.env, a.json.attempt_id)).form_id, 'the requested (already seen) form is ignored');
+});
+
+test('ASSIGNMENT: across the whole practice library a learner meets every form once before any repeat; replays never change the form', async () => {
+  const h = makeEnv({ formDirs: PRACTICE_LIBRARY.map((f) => f.dir) });
+  const ids = PRACTICE_LIBRARY.map((f) => f.id), N = ids.length;
+  const u = newUser(); await grant(h.env, u);
+  const seen = [];
+  for (let i = 0; i < 2 * N; i++) {
+    const request = rid(), device = dev();
+    const r = await create(h.env, u, request, device); assert.equal(r.status, 200, JSON.stringify(r.json));
+    const replay = await create(h.env, u, request, device);   // the same request again: the same attempt and form
+    assert.equal(replay.json.attempt_id, r.json.attempt_id);
+    const a = await row(h.env, r.json.attempt_id);
+    assert.ok(ids.includes(a.form_id));
+    const round = Math.floor(i / N), left = N - (i % N);
+    assert.equal(a.assignment_reason, round === 0 ? `csprng_uniform_unseen:${left}` : `csprng_uniform_least_seen:${round}:${left}`, `attempt ${i + 1}`);
+    seen.push(a.form_id); await close(h.env, r.json.attempt_id);
+  }
+  assert.deepEqual([...seen.slice(0, N)].sort(), [...ids].sort(), 'first round: every form exactly once');
+  assert.deepEqual([...seen.slice(N)].sort(), [...ids].sort(), 'second round: every form exactly once again');
 });

@@ -9,12 +9,15 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import worker from '../src/index.js';
 import { buildRelease } from '../../exam-content/tools/build-release.mjs';
+import { PRACTICE_FORMS } from '../../exam-content/tools/practice-forms.mjs';
 
 export const WORKER_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const ROOT = path.resolve(WORKER_DIR, '..');
 export const FORM_DIR = path.join(ROOT, 'exam-content/forms/synthetic/b1-synthetic-s0');
 export const PRACTICE_FORM_DIR = path.join(ROOT, 'exam-content/forms/synthetic/b1-synthetic-p1');
 export const PRACTICE_P2_FORM_DIR = path.join(ROOT, 'exam-content/forms/synthetic/b1-synthetic-p2');
+/* the whole practice library, in registry order: [{ name: 'P1', dir, id }, …] */
+export const PRACTICE_LIBRARY = PRACTICE_FORMS.map((f) => ({ name: f.name, dir: path.join(ROOT, 'exam-content', f.rel), id: f.form_id }));
 export const PROXY_SECRET = 'test-exam-proxy-secret-0123456789abcdef';
 export const MEDIA_SECRET = 'test-exam-media-secret-0123456789abcdef';
 

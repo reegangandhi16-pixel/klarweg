@@ -131,12 +131,15 @@ export async function createAttempt(env, userId, request) {
   const forms = (await env.DB.prepare(`SELECT f.id, f.release, f.level_config_id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
       WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')}) ORDER BY f.id`).bind(lvl, ...def.kinds).all()).results;
   if (!forms.length) fail(409, 'no_forms_available');
-  const seen = new Set((await env.DB.prepare('SELECT DISTINCT form_id FROM attempts WHERE user_id = ?1').bind(userId).all()).results.map((r) => r.form_id));
-  const unseen = forms.filter((f) => !seen.has(f.id));
-  const pool = unseen.length ? unseen : forms;
+  /* ENGINE §7.3 repeat-avoidance: among the forms THIS user has attempted least often (never attempted = 0, so unseen
+     forms always win), choose uniformly with the server CSPRNG. Other learners' attempts play no part. */
+  const times = Object.fromEntries((await env.DB.prepare('SELECT form_id, COUNT(*) AS n FROM attempts WHERE user_id = ?1 GROUP BY form_id').bind(userId).all())
+    .results.map((r) => [r.form_id, r.n]));
+  const least = Math.min(...forms.map((f) => times[f.id] || 0));
+  const pool = forms.filter((f) => (times[f.id] || 0) === least);
   const form = pool[csprngIndex(pool.length)];
   const seed = [...crypto.getRandomValues(new Uint8Array(8))].map((b) => b.toString(16).padStart(2, '0')).join('');
-  const reason = unseen.length ? `csprng_uniform_unseen:${pool.length}` : `csprng_uniform_all_seen:${pool.length}`;
+  const reason = least === 0 ? `csprng_uniform_unseen:${pool.length}` : `csprng_uniform_least_seen:${least}:${pool.length}`;
 
   const acc = await env.DB.prepare('SELECT time_multiplier FROM accommodations WHERE user_id = ?1 AND (valid_until IS NULL OR valid_until > ?2)')
     .bind(userId, Math.floor(now(env) / 1000)).first();

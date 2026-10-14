@@ -99,7 +99,7 @@ test('SECURITY lease from one attempt cannot be used on another attempt of the s
   assert.equal(r.json.error, 'lease_superseded');
   // the second attempt re-used the only synthetic form: reason records it
   const row = await env.DB.prepare('SELECT assignment_reason FROM attempts WHERE id = ?1').bind(n.json.attempt_id).first();
-  assert.equal(row.assignment_reason, 'csprng_uniform_all_seen:1');
+  assert.equal(row.assignment_reason, 'csprng_uniform_least_seen:1:1');   // seen once; the least-attempted pool is that one form
 });
 
 test('SECURITY expired session: without the proxy-resolved user nothing is reachable', async () => {

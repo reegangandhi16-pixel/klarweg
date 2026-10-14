@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p11-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin: Ich spreche über die Frage, ob Mode wichtig ist. Für mich spielt Kleidung eine ziemlich große Rolle. Ich arbeite in einem Geschäft für Brillen und habe täglich mit Kunden zu tun, deshalb möchte ich gepflegt aussehen. Teure Marken kaufe ich aber nicht, ich achte eher auf Farben, die zu mir passen. In meinem Heimatland ist Kleidung sehr wichtig, besonders bei Festen und Hochzeiten. Dort zeigt man mit schöner Kleidung auch Respekt vor den Gastgebern. Mode hat Vorteile: Sie macht Spaß, und man kann zeigen, wer man ist. Gute Kleidung gibt mir auch Selbstvertrauen, zum Beispiel bei einem Vorstellungsgespräch. Nachteile gibt es aber auch: Viele Menschen kaufen ständig neue Sachen, die sie kaum tragen, und das kostet Geld und schadet der Umwelt. Jugendliche werden manchmal ausgelacht, wenn sie keine Markenkleidung haben. Meine Meinung: Mode ist wichtig, aber man sollte nicht jedem Trend folgen. Danke schön.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p11-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Wie wichtig ist Ihnen Kleidung im Alltag? Erzählen Sie kurz.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Welche Arbeit im Haushalt machen Sie am liebsten, welche gar nicht gern?",
     "licence": {
       "kind": "synthetic_test"
     },

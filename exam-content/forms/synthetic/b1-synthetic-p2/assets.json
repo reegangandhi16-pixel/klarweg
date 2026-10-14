@@ -764,5 +764,43 @@
       "kind": "synthetic_test"
     },
     "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Ich möchte über ehrenamtliche Arbeit sprechen. Seit zwei Jahren helfe ich jeden Samstagvormittag in einer Kleiderkammer, wo Menschen mit wenig Geld kostenlos Kleidung bekommen. Ich sortiere Spenden und berate die Leute. Angefangen habe ich, weil ich nach meinem Umzug niemanden kannte. In meinem Heimatland hilft man eher in der Familie oder in der Nachbarschaft, feste Vereine für Ehrenamt gibt es dort weniger. Ehrenamt hat viele Vorteile: Man lernt neue Menschen kennen, man übt die Sprache und man hat das Gefühl, etwas Sinnvolles zu tun. Für mich war es auch gut für den Lebenslauf. Es gibt aber auch Nachteile. Ehrenamt kostet Zeit, und manchmal erwarten Organisationen zu viel von den Freiwilligen. Wer Familie hat und viel arbeitet, kann das oft nicht schaffen. Ich finde, Ehrenamt ist eine sehr gute Idee, aber jeder sollte nur so viel machen, wie er wirklich kann. Danke für Ihre Aufmerksamkeit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Hatten Sie selbst schon einmal ein Haustier? Erzählen Sie kurz.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
   }
 ]

@@ -59,19 +59,36 @@ export function speakingItemsForPart(pkg, n) {
   return part.tasks.flatMap((t) => t.items).filter((it) => it.interaction === 'spoken_response');
 }
 
-/* The partner presentation for a listen_only phase: { asset_id, duration_ms } or null. */
-export function partnerAssetFor(pkg, plan, phase) {
-  if (!phase || !phase.listen_only) return null;
-  const part = partById(pkg, partForListenPhase(plan, phase.seq));
-  if (!part) return null;
-  for (const t of part.tasks) for (const s of t.stimuli || []) if (s.role === 'partner_audio' && s.asset_id) return { asset_id: s.asset_id, duration_ms: s.duration_ms ?? null };
-  return null;
+/* The learner's Teil 2 topic option ("t1", "t2") from the saved answers, or null when none was chosen. */
+export function chosenTopic(pkg, answers) {
+  const it = topicItems(pkg)[0];
+  const v = it && answers ? answers[it.item_id] : null;
+  return (v && v.option_id) || null;
 }
 
-/* Every asset played in a listen_only phase (a later turn must not replay it). */
+const partnerStimuli = (part) => (part ? part.tasks.flatMap((t) => (t.stimuli || []).filter((s) => s.role === 'partner_audio' && s.asset_id)) : []);
+
+/* The partner presentation for a listen_only phase: { asset_id, duration_ms } or null. OD-32: the partner presents a
+   DIFFERENT topic, so when the talks carry for_topic the one for the learner's topic option is played; without a
+   choice the first talk in package order is used (deterministic). */
+export function partnerAssetFor(pkg, plan, phase, topic = null) {
+  if (!phase || !phase.listen_only) return null;
+  const list = partnerStimuli(partById(pkg, partForListenPhase(plan, phase.seq)));
+  const s = list.find((x) => x.for_topic !== undefined && x.for_topic === topic) || list.find((x) => x.for_topic === undefined) || list[0];
+  return s ? { asset_id: s.asset_id, duration_ms: s.duration_ms ?? null } : null;
+}
+
+/* The prompt played before a turn: per topic when the turn has prompt_asset_by_topic (same fallback rule). */
+export function turnPromptAsset(turn, topic = null) {
+  const by = turn && turn.prompt_asset_by_topic;
+  if (by) { const hit = (topic && by[topic]) || Object.values(by)[0]; if (hit) return hit.asset_id; }
+  return (turn && turn.prompt_asset) || null;
+}
+
+/* Every partner talk of a listen_only phase (a later turn must not replay one of them). */
 export function listenPhaseAssets(pkg, plan) {
   const out = new Set();
-  for (const p of plan.phases || []) { const a = partnerAssetFor(pkg, plan, p); if (a) out.add(a.asset_id); }
+  for (const p of plan.phases || []) if (p.listen_only) for (const s of partnerStimuli(partById(pkg, partForListenPhase(plan, p.seq)))) out.add(s.asset_id);
   return out;
 }
 

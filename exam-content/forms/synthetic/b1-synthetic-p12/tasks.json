@@ -1326,13 +1326,27 @@
         "role": "partner_audio",
         "asset_id": "ast:p12-sp3-partner-talk",
         "label": null,
-        "order": 1
+        "order": 1,
+        "for_topic": "t1"
+      },
+      {
+        "role": "partner_audio",
+        "asset_id": "ast:p12-sp3-partner-talk-t2",
+        "label": null,
+        "order": 2,
+        "for_topic": "t2"
       },
       {
         "role": "examiner_audio",
         "asset_id": "ast:p12-sp3-examiner-q",
         "label": null,
-        "order": 2
+        "order": 3
+      },
+      {
+        "role": "examiner_audio",
+        "asset_id": "ast:p12-sp3-examiner-q-t2",
+        "label": null,
+        "order": 4
       }
     ],
     "items": [

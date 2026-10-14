@@ -20,10 +20,11 @@
      getMic()                                  resolves a stream, or null when the microphone is unavailable
      recorder(turn, stream)                    { start(), stop() → { chunks, duration_ms } }
      ui: { phase(text), turn(key, text), alert(kind, text), clear(kind), lockTopics() }
+     topic()                                   the learner's Teil 2 topic option (locked after the preparation), or null
      log(event, detail)                        client-side incident log (console in the browser)
      finalizeRetries, finalizeBackoffMs        background finalisation policy (defaults below) */
 import { speakingPhaseAt, prepEndsAt, partOfPhase, speakingItemsForPart, partnerAssetFor, listenPhaseAssets,
-  partnerPlayOffset, turnWindowMs, resumeAction, speakingPhaseLabel } from './sprechen.js';
+  partnerPlayOffset, turnWindowMs, resumeAction, speakingPhaseLabel, turnPromptAsset } from './sprechen.js';
 
 /* Server refusals that retrying cannot change. The chunks stay in the local queue (recoverable on reload). */
 export const FINALIZE_STOP_CODES = ['checksum_mismatch', 'chunk_conflict', 'turn_closed', 'upload_window_closed', 'consent_required',
@@ -32,6 +33,7 @@ export const FINALIZE_STOP_CODES = ['checksum_mismatch', 'chunk_conflict', 'turn
 
 export function createSpeakingDriver(deps) {
   const { pkg, plan, startedAt, multiplier, now, sleep, active, status, queue, audio, ui, log = () => {} } = deps;
+  const topic = deps.topic || (() => null);
   const retries = deps.finalizeRetries ?? 12;
   const backoff = deps.finalizeBackoffMs ?? ((i) => Math.min(30_000, 1000 * 2 ** i));
   const done = new Set();
@@ -109,7 +111,7 @@ export function createSpeakingDriver(deps) {
   }
 
   async function runListen(at) {
-    const asset = partnerAssetFor(pkg, plan, at.phase);
+    const asset = partnerAssetFor(pkg, plan, at.phase, topic());
     if (!asset) return;
     // offset recomputed right before playback (after loading / after a click): a late start continues, never restarts
     const offsetMs = () => partnerPlayOffset(speakingPhaseAt(plan, startedAt, now(), multiplier), asset.duration_ms);
@@ -132,12 +134,13 @@ export function createSpeakingDriver(deps) {
       if (!active() || now() >= at.ends_at) return;
       const t = { item_id: it.item_id, turn: turn.turn }, key = keyOf(t);
       if (done.has(key)) continue;
-      if (turn.prompt_asset && !heard.has(turn.prompt_asset)) {
+      const prompt = turnPromptAsset(turn, topic());
+      if (prompt && !heard.has(prompt)) {
         ui.phase(`Teil ${part}: Hören Sie den Gesprächsimpuls.`);
-        const r = await audio.play(turn.prompt_asset, { offsetMs: 0, endsAt: at.ends_at });
+        const r = await audio.play(prompt, { offsetMs: 0, endsAt: at.ends_at });
         if (r.status === 'missed' || r.status === 'error') {
           ui.alert('audio', 'Der Gesprächsimpuls konnte nicht abgespielt werden.');
-          log('prompt_audio_' + r.status, { asset: turn.prompt_asset, reason: r.reason, detail: r.detail });
+          log('prompt_audio_' + r.status, { asset: prompt, reason: r.reason, detail: r.detail });
         }
       }
       const mic = stream || await deps.getMic();

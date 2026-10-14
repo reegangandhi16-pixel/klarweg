@@ -247,6 +247,29 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
   const referenced = new Set(tasks.flatMap((t) => (t.stimuli || []).map((s) => s.asset_id)));
   for (const fm of form.modules || []) for (const fp of fm.parts || []) if (typeof fp.instruction_asset_id === 'string') referenced.add(fp.instruction_asset_id);
   for (const it of items) for (const turn of it.response_spec?.turns || []) if (turn.prompt_asset) { referenced.add(turn.prompt_asset); if (!assetsById[turn.prompt_asset]) E('missing_asset', `item ${it.id} turn asset ${turn.prompt_asset}`); }
+
+  /* OD-32 simulated pair: the partner presents a DIFFERENT topic, so a topic-aware partner talk is chosen by the learner's
+     Teil 2 topic option. Either no partner_audio carries for_topic, or every topic option has exactly one talk. */
+  const topicOptions = items.filter((i) => i.interaction === 'topic_choice').flatMap((i) => (i.options || []).map((o) => o.option_id));
+  for (const t of tasks) {
+    const tagged = (t.stimuli || []).filter((s) => s.for_topic !== undefined);
+    for (const s of tagged) {
+      if (s.role !== 'partner_audio') E('topic_partner', `task ${t.id}: for_topic is allowed only on partner_audio`);
+      else if (!topicOptions.includes(s.for_topic)) E('topic_partner', `task ${t.id}: for_topic ${s.for_topic} is not a topic option`);
+      if (assetsById[s.asset_id] && assetsById[s.asset_id].kind !== 'audio') E('topic_partner', `task ${t.id}: partner talk ${s.asset_id} is not audio`);
+    }
+    if (tagged.length) {
+      const partners = (t.stimuli || []).filter((s) => s.role === 'partner_audio');
+      if (partners.length !== tagged.length) E('topic_partner', `task ${t.id}: every partner_audio needs for_topic once one has it`);
+      if (JSON.stringify(tagged.map((s) => s.for_topic).sort()) !== JSON.stringify([...topicOptions].sort())) E('topic_partner', `task ${t.id}: one partner talk per topic option (${topicOptions.join(', ')}) required`);
+    }
+  }
+  for (const it of items) for (const turn of it.response_spec?.turns || []) {
+    if (turn.prompt_asset_by_topic === undefined) continue;
+    const by = turn.prompt_asset_by_topic || {};
+    if (JSON.stringify(Object.keys(by).sort()) !== JSON.stringify([...topicOptions].sort())) E('topic_partner', `item ${it.id} turn ${turn.turn}: prompt_asset_by_topic must cover exactly the topic options`);
+    for (const id of Object.values(by)) { referenced.add(id); if (!assetsById[id] || assetsById[id].kind !== 'audio') E('missing_asset', `item ${it.id} turn ${turn.turn} topic prompt ${id}`); }
+  }
   for (const a of assets) if (!referenced.has(a.id)) W('unused_asset', `asset ${a.id} is not referenced`);
 
   /* ---- timing ---- */

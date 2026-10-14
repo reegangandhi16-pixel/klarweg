@@ -212,3 +212,23 @@ test('INSTRUCTION AUDIO: build maps the instruction asset to the hoeren module (
   const b = buildRelease({ release: 'r000', formDirs: [FORM], builtAt: '2026-10-04T00:00:00.000Z' });
   assert.match(b.sql, /INTO form_assets \([^)]*\) VALUES \('frm:b1:synthetic-s0@1', 'ast:syn-h2-instr', 'hoeren'/);
 });
+
+test('VALIDATION: OD-32 topic-aware partner talks — one per topic option, partner_audio only, complete per-topic prompts', () => {
+  const P3 = path.join(ROOT, 'forms/synthetic/b1-synthetic-p3');
+  const mutatedP3 = (mutate) => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kw-exam-form-'));
+    const d = Object.fromEntries(FILES.map((f) => [f.replace('.json', ''), JSON.parse(fs.readFileSync(path.join(P3, f), 'utf8'))]));
+    mutate(d);
+    for (const f of FILES) fs.writeFileSync(path.join(dir, f), JSON.stringify(d[f.replace('.json', '')]));
+    return validateForm(dir).errors.map((e) => e.code);
+  };
+  const sp3Task = (d) => d.tasks.find((t) => t.id === 'tsk:b1:p3-sp3');
+  const sp3Item = (d) => d.items.find((i) => i.id === 'itm:b1:p3-sp3');
+  assert.deepEqual(validateForm(P3).errors, []);
+  assert.ok(mutatedP3((d) => { sp3Task(d).stimuli[1].for_topic = 't3'; }).includes('topic_partner'), 'unknown topic option');
+  assert.ok(mutatedP3((d) => { sp3Task(d).stimuli[1].for_topic = 't1'; }).includes('topic_partner'), 'two talks for one topic, none for the other');
+  assert.ok(mutatedP3((d) => { delete sp3Task(d).stimuli[1].for_topic; }).includes('topic_partner'), 'a partner talk without for_topic beside tagged ones');
+  assert.ok(mutatedP3((d) => { sp3Task(d).stimuli[2].for_topic = 't1'; }).includes('topic_partner'), 'for_topic on an examiner prompt');
+  assert.ok(mutatedP3((d) => { delete sp3Item(d).response_spec.turns[1].prompt_asset_by_topic.t2; }).includes('topic_partner'), 'per-topic prompts must cover both topics');
+  assert.ok(mutatedP3((d) => { sp3Item(d).response_spec.turns[1].prompt_asset_by_topic.t2 = 'ast:p3-ghost'; }).includes('missing_asset'), 'per-topic prompt asset must exist');
+});

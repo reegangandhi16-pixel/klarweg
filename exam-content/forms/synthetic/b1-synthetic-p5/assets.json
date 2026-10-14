@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p5-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin: Mein Thema lautet: Im Internet oder im Geschäft einkaufen? Bücher und Elektronik bestelle ich fast immer online, weil es schnell geht und ich die Preise gut vergleichen kann. Kleidung und Schuhe kaufe ich dagegen lieber im Laden, denn ich möchte sie vorher anprobieren. Letzten Monat musste ich drei Pakete mit Hosen zurückschicken, das war sehr lästig. In meinem Heimatland ist Online-Einkaufen noch nicht so verbreitet, weil die Lieferung lange dauert, aber auf den Märkten kann man gut handeln. Für das Internet spricht, dass man auch nachts einkaufen kann und nicht in die Stadt fahren muss. Gegen das Internet spricht, dass viele kleine Geschäfte schließen müssen und dass die vielen Pakete schlecht für die Umwelt sind. Außerdem fehlt die Beratung. Ich denke, beides hat seinen Platz, aber wir sollten die Läden in unserer Nähe unterstützen, damit unsere Innenstädte lebendig bleiben. Danke fürs Zuhören.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p5-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Was haben Sie zuletzt im Internet gekauft, und waren Sie zufrieden?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Was essen Sie normalerweise zum Frühstück?",
     "licence": {
       "kind": "synthetic_test"
     },

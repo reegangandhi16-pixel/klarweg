@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p15-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin: Ich spreche über die Frage, ob man eine Fremdsprache im Ausland lernen sollte. Vor drei Jahren habe ich einen Monat lang einen Sprachkurs in Frankreich gemacht und bei einer Gastfamilie gewohnt. Morgens hatte ich vier Stunden Unterricht, und am Nachmittag musste ich beim Bäcker und im Bus Französisch sprechen. In diesem Monat habe ich mehr gelernt als vorher in einem ganzen Jahr zu Hause. In meinem Heimatland können sich nur wenige Menschen so eine Reise leisten, deshalb lernen die meisten in der Schule oder mit dem Internet. Ein Kurs im Ausland ist ideal, weil man die Sprache den ganzen Tag hört und die Kultur kennenlernt. Er ist aber teuer, und man braucht Urlaub dafür. Manche Teilnehmer sprechen außerdem mit anderen Ausländern nur Englisch. Meine Meinung: Wer die Möglichkeit hat, sollte ins Ausland gehen, aber erst mit Grundkenntnissen. Danke schön.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p15-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Haben Sie schon einmal im Ausland eine Sprache gelernt? Wie war das?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Wie viele Stunden schlafen Sie normalerweise, und reicht Ihnen das?",
     "licence": {
       "kind": "synthetic_test"
     },

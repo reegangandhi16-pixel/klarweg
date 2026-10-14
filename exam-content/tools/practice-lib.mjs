@@ -44,7 +44,7 @@ export function createPracticeBuilder({ formId, date }) {
       id: o.id, level: 'B1', module: o.module, part: o.part, interaction: o.interaction,
       instructions: { text_de: o.instructions, source: 'klarweg_paraphrase' },
       context_line: o.context || undefined, frame: 'synthetic',
-      stimuli: (o.stimuli || []).map((s, i) => ({ role: s.role, asset_id: s.asset, label: s.label || null, order: i + 1, speaker_ids: s.speakers || undefined })),
+      stimuli: (o.stimuli || []).map((s, i) => ({ role: s.role, asset_id: s.asset, label: s.label || null, order: i + 1, speaker_ids: s.speakers || undefined, for_topic: s.forTopic || undefined })),
       items: o.items, indicators: { synthetic: true, words, ...(o.indicators || {}) }, topic: ['practice'], provenance: provenance(),
       turns: o.turns || undefined
     });
@@ -301,14 +301,22 @@ export function buildPracticeForm(spec) {
     instructions: 'Teil 2: Ein Thema präsentieren. Stellen Sie Ihr Thema anhand der fünf Folien vor: Thema, persönliche Erfahrungen, Situation in Ihrem Heimatland, Vor- und Nachteile mit Ihrer Meinung, Abschluss.',
     stimuli: slides.flatMap((ss, k) => ss.map((a) => ({ role: 'slide', asset: a, label: `Thema ${k + 1}` }))), items: [topic, sp2],
     indicators: { functions: ['present', 'narrate', 'compare', 'opine', 'conclude'], function_count: 5, planning_demand: 3, interaction_demand: 0, prep_seconds: 900 } });
+  /* OD-32: the partner presents the topic the learner did NOT choose, and the examiner asks about the learner's own
+     topic. partnerTalk / examinerQuestion are for a learner who chose Thema 1; …ForTopic2 for one who chose Thema 2. */
+  for (const k of ['partnerTalk', 'partnerTalkForTopic2', 'examinerQuestion', 'examinerQuestionForTopic2']) if (typeof SP.t3[k] !== 'string' || !SP.t3[k].trim()) throw new Error(`${P}: sprechen.t3.${k} is required`);
   const partnerTalk = toneAsset(`ast:${P}-sp3-partner-talk`, 2, 780, 'Sprechen Teil 3 Partner-Präsentation', SP.t3.partnerTalk);
+  const partnerTalk2 = toneAsset(`ast:${P}-sp3-partner-talk-t2`, 2, 790, 'Sprechen Teil 3 Partner-Präsentation (Thema 1)', SP.t3.partnerTalkForTopic2);
   const examinerQ = toneAsset(`ast:${P}-sp3-examiner-q`, 1, 840, 'Sprechen Teil 3 Prüferfrage', SP.t3.examinerQuestion);
+  const examinerQ2 = toneAsset(`ast:${P}-sp3-examiner-q-t2`, 1, 850, 'Sprechen Teil 3 Prüferfrage (Thema 2)', SP.t3.examinerQuestionForTopic2);
   const sp3 = item({ id: `itm:b1:${P}-sp3`, module: 'sprechen', part: 3, task: `tsk:b1:${P}-sp3`, interaction: 'spoken_response', stem: 'Sprechen Teil 3',
-    response_spec: { type: 'audio', max_seconds: 150, turns: [{ turn: 't1', seconds: 60, prompt_asset: partnerTalk }, { turn: 't2', seconds: 45, prompt_asset: examinerQ }] },
+    response_spec: { type: 'audio', max_seconds: 150, turns: [
+      { turn: 't1', seconds: 60, prompt_asset: partnerTalk, prompt_asset_by_topic: { t1: partnerTalk, t2: partnerTalk2 } },
+      { turn: 't2', seconds: 45, prompt_asset: examinerQ, prompt_asset_by_topic: { t1: examinerQ, t2: examinerQ2 } }] },
     indicators: { synthetic: true }, keyspec: { kind: 'rubric', rubric_id: 'rub:b1:sprechen:p3@1' } });
   task({ id: `tsk:b1:${P}-sp3`, module: 'sprechen', part: 3, interaction: 'spoken_response',
     instructions: `Teil 3: Über ein Thema sprechen. Geben Sie nach der Präsentation ${SP.t3.partnerFemale ? 'Ihrer Gesprächspartnerin' : 'Ihres Gesprächspartners'} eine Rückmeldung und stellen Sie eine Frage. Beantworten Sie danach die Frage der Prüferin.`,
-    stimuli: [{ role: 'partner_audio', asset: partnerTalk }, { role: 'examiner_audio', asset: examinerQ }], items: [sp3],
+    stimuli: [{ role: 'partner_audio', asset: partnerTalk, forTopic: 't1' }, { role: 'partner_audio', asset: partnerTalk2, forTopic: 't2' },
+      { role: 'examiner_audio', asset: examinerQ }, { role: 'examiner_audio', asset: examinerQ2 }], items: [sp3],
     indicators: { functions: ['react', 'ask', 'answer'], function_count: 3, planning_demand: 1, interaction_demand: 3, prep_seconds: 900 } });
 
   explain(ex);

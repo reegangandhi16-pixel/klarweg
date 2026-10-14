@@ -130,6 +130,27 @@ for (const f of LIB) {
   });
 }
 
+test('LIBRARY: OD-32 — the partner talk for each Teil 2 topic presents the OTHER topic (all forms, both choices)', () => {
+  const words = (s) => new Set((s || '').toLowerCase().replace(/[^\p{L}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 4).map((w) => w.slice(0, 6)));
+  const bad = [];
+  for (const f of LIB) {
+    const topic = f.items.find((it) => it.interaction === 'topic_choice');
+    const title = Object.fromEntries(topic.options.map((o) => [o.option_id, words(o.label.replace(/^Thema \d: /, ''))]));
+    const task = f.tasks.find((t) => t.module === 'sprechen' && t.part === 3);
+    const talks = task.stimuli.filter((st) => st.role === 'partner_audio');
+    if (JSON.stringify(talks.map((t) => t.for_topic).sort()) !== '["t1","t2"]') { bad.push(`${f.name}: partner talks ${JSON.stringify(talks.map((t) => t.for_topic))}`); continue; }
+    for (const t of talks) {
+      const script = words(f.assets.find((a) => a.id === t.asset_id).script_de);
+      const other = t.for_topic === 't1' ? 't2' : 't1';
+      const hits = (o) => [...title[o]].filter((w) => script.has(w)).length;
+      if (!(hits(other) >= 1 && hits(other) >= hits(t.for_topic))) bad.push(`${f.name}: talk for ${t.for_topic} does not present topic ${other} (${hits(other)} vs ${hits(t.for_topic)})`);
+    }
+    const turns = f.items.find((it) => it.id.endsWith('-sp3')).response_spec.turns;
+    for (const turn of turns) if (JSON.stringify(Object.keys(turn.prompt_asset_by_topic || {}).sort()) !== '["t1","t2"]') bad.push(`${f.name}: turn ${turn.turn} is not topic-aware`);
+  }
+  assert.deepEqual(bad, []);
+});
+
 test('LIBRARY: forms are mutually original — no shared 8-word passage, stem, prompt or topic between any two forms', () => {
   const shingles = (s) => { const w = s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter(Boolean); const out = new Set(); for (let i = 0; i + 8 <= w.length; i++) out.add(w.slice(i, i + 8).join(' ')); return out; };
   const owner = new Map();

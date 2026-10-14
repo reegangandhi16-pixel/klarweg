@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p4-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Ich spreche über die Frage: Leben auf dem Land oder in der Stadt? Ich bin in einem kleinen Dorf aufgewachsen und wohne seit fünf Jahren in einer Großstadt. Im Dorf kannte jeder jeden, und wir Kinder konnten den ganzen Tag draußen spielen. Aber für die Schule mussten wir jeden Tag eine Stunde mit dem Bus fahren. In meinem Heimatland ziehen viele junge Leute vom Land in die Hauptstadt, weil es dort Arbeit gibt, und die Dörfer werden immer leerer. Das Leben in der Stadt ist praktisch: Es gibt Kinos, Ärzte und Geschäfte gleich um die Ecke, und man braucht kein Auto. Dafür sind die Mieten sehr hoch, und es ist laut. Auf dem Land ist die Luft besser und das Wohnen billiger, aber ohne Auto ist man verloren. Für mich ist die Stadt im Moment richtig. Wenn ich Kinder habe, möchte ich aber lieber in einem Ort mit Garten leben. Vielen Dank.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p4-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Möchten Sie später lieber auf dem Land oder in der Stadt wohnen? Warum?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: In welchem Land würden Sie gern einmal arbeiten, und warum?",
     "licence": {
       "kind": "synthetic_test"
     },

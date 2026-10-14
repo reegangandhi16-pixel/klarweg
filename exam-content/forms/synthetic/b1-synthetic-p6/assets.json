@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p6-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Ich möchte die Frage besprechen, ob jedes Kind ein Instrument lernen sollte. Ich habe als Kind sechs Jahre Klavier gespielt, weil meine Mutter es wollte. Am Anfang fand ich das Üben furchtbar, aber heute bin ich ihr dankbar, denn ich spiele immer noch gern am Abend. Mein Bruder hat nach einem Jahr aufgehört, und er bereut es nicht. In meinem Heimatland ist Musikunterricht teuer, deshalb lernen dort vor allem Kinder aus reichen Familien ein Instrument. Ein Instrument zu lernen fördert die Konzentration und die Geduld, und gemeinsames Musizieren macht Freude. Viele Studien sagen außerdem, dass Kinder dadurch besser lernen. Andererseits kostet Unterricht viel Geld, und wenn ein Kind keine Lust hat, gibt es zu Hause nur Streit. Meine Meinung: Jedes Kind sollte die Chance bekommen, ein Instrument auszuprobieren, zum Beispiel in der Schule. Zwingen sollte man aber niemanden. Vielen Dank für Ihre Aufmerksamkeit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p6-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Haben Sie als Kind ein Instrument gelernt? Erzählen Sie kurz.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Wie sind Sie zuletzt in den Urlaub gefahren, und wie war die Reise?",
     "licence": {
       "kind": "synthetic_test"
     },

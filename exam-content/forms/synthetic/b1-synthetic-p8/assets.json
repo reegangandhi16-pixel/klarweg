@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p8-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Mein Thema heißt: Soziale Netzwerke – mehr Vor- oder Nachteile? Ich benutze jeden Tag zwei soziale Netzwerke, vor allem, um mit meiner Familie im Ausland in Kontakt zu bleiben. Meine Mutter schickt mir fast jeden Tag Fotos von meinen Nichten. Früher war ich aber auch abends stundenlang online und habe schlecht geschlafen. Deshalb habe ich jetzt eine Regel: Nach zehn Uhr ist das Handy aus. In meinem Heimatland sind soziale Netzwerke sehr wichtig, viele Geschäfte verkaufen dort nur über ihre Seite. Die Vorteile sind klar: Man bleibt in Kontakt, findet Informationen schnell und kann eigene Ideen zeigen. Die Nachteile sind aber auch groß. Es gibt viele falsche Nachrichten, und manche Menschen werden im Netz beleidigt. Außerdem vergleichen sich besonders junge Leute ständig mit anderen. Meine Meinung: Soziale Netzwerke sind nützlich, wenn man bewusst und nicht zu lange damit umgeht. Vielen Dank.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p8-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Welches soziale Netzwerk benutzen Sie am meisten, und wofür?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Mit wem wohnen Sie zurzeit zusammen, und gefällt Ihnen das?",
     "licence": {
       "kind": "synthetic_test"
     },

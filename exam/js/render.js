@@ -22,13 +22,23 @@ export function testBanner(pkg) {
   return `<p class="kx-banner" role="note">SYNTHETISCHE ÜBUNGSINHALTE — keine echte Prüfung. Hörtexte werden als Prüftöne abgespielt.${adjusted}</p>`;
 }
 
+/* What a screen reader should hear about saving: only trouble and the recovery from it, never the routine
+   "Speichert … / Gespeichert" after each pause. Announced in the persistent #kx-announce status region. */
+export function saveAnnouncement(prev, next) {
+  if (next === prev) return null;
+  if (next === 'offline') return 'Speichern zurzeit nicht möglich. Es wird automatisch erneut versucht.';
+  if (next === 'stopped') return 'Speichern gestoppt. Ihre letzten Änderungen wurden nicht gespeichert.';
+  if (next === 'saved' && prev === 'offline') return 'Wieder verbunden. Alle Antworten sind gespeichert.';
+  return null;
+}
+
 export function header({ module, remainingMs, saveState, progress = null }) {
   const save = { saved: 'Gespeichert', pending: 'Änderungen …', saving: 'Speichert …', offline: 'Offline — wird erneut versucht', stopped: 'Speichern gestoppt' }[saveState] || '';
   const total = progress ? progress.reduce((n, p) => n + p.total, 0) : 0;
   const done = progress ? progress.reduce((n, p) => n + p.answered, 0) : 0;
   return `<header class="kx-head"><h1 class="kx-title">${esc(MODULE_LABELS[module] || module)}</h1>`
     + (total ? `<p class="kx-progress" data-progress-total>${done} von ${total} beantwortet</p>` : '')
-    + `<p class="kx-save" aria-live="polite">${esc(save)}</p>`
+    + `<p class="kx-save">${esc(save)}</p>`   // visual only: the header is redrawn, so problems are announced via #kx-announce (saveAnnouncement)
     + `<p class="kx-timer" role="timer" aria-label="Verbleibende Zeit">${esc(formatRemaining(remainingMs))}</p></header>`;
 }
 
@@ -64,7 +74,7 @@ function writing(it, value) {
   return `<div class="kx-item kx-writing" id="item-${idSafe(it.item_id)}"><label for="${id}" class="kx-wlabel">${esc(it.stem)}${target ? ` <span class="kx-meta">(ca. ${esc(target)} Wörter)</span>` : ''}</label>`
     + `<div class="kx-chars" role="group" aria-label="Sonderzeichen einfügen">${UMLAUTS.map((c) => `<button type="button" class="kx-char" data-insert="${c}" data-target="${id}" aria-label="${c} einfügen">${c}</button>`).join('')}</div>`
     + `<textarea id="${id}" data-item="${esc(it.item_id)}" lang="de" spellcheck="false" autocomplete="off" autocapitalize="sentences" rows="10" aria-describedby="${id}_wc">${esc(text)}</textarea>`
-    + `<p class="kx-wc" id="${id}_wc" aria-live="polite"><span data-wc-for="${id}">${countWords(text)}</span> Wörter</p></div>`;
+    + `<p class="kx-wc" id="${id}_wc"><span data-wc-for="${id}">${countWords(text)}</span> Wörter</p></div>`;   // read with the textarea (aria-describedby), not on every keystroke
 }
 
 function speaking(it, _value, _disabled, ctx = {}) {

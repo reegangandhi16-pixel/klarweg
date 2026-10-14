@@ -531,3 +531,19 @@ test('HISTORY render: a row per practice with each module result and a way back 
   assert.match(html, /data-act="last-result" data-attempt="att_x">Ergebnis ansehen/);
   assert.equal(attemptHistory({ attempts: [] }), '');
 });
+
+test('ACCESSIBILITY (live regions): the redrawn header is not a live region; saving problems and the recovery are announced in the persistent status region; the word count is read with the textarea, not on every keystroke', async () => {
+  const { header, saveAnnouncement, createRenderer } = await import('../js/render.js');
+  for (const st of ['saved', 'pending', 'saving', 'offline', 'stopped']) assert.equal(/aria-live/.test(header({ module: 'lesen', remainingMs: 60000, saveState: st })), false, `header (${st})`);
+  assert.equal(saveAnnouncement('saved', 'pending'), null); assert.equal(saveAnnouncement('pending', 'saving'), null); assert.equal(saveAnnouncement('saving', 'saved'), null);
+  assert.match(saveAnnouncement('saving', 'offline'), /nicht möglich/); assert.match(saveAnnouncement('offline', 'saved'), /Wieder verbunden/);
+  assert.match(saveAnnouncement('saving', 'stopped'), /gestoppt/); assert.equal(saveAnnouncement('offline', 'offline'), null);
+  const pkg = { module: 'schreiben', parts: [{ part: 1, tasks: [{ task_id: 't', instructions: 'x', stimuli: [], items: [{ item_id: 'itm:b1:x-s1', interaction: 'text_response', stem: 'Schreiben Teil 1', response_spec: { type: 'text', target_words: 80 } }] }] }] };
+  const html = createRenderer().module(pkg, {}, {});
+  const ta = html.match(/<textarea[^>]*aria-describedby="([^"]+)"/);
+  assert.ok(ta, 'the textarea is described by its word count');
+  assert.match(html, new RegExp(`<p class="kx-wc" id="${ta[1]}">`)); assert.equal(/class="kx-wc"[^>]*aria-live/.test(html), false);
+  const main = fs.readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
+  assert.match(main, /onState: \(st\) => \{ const say = saveAnnouncement\(S\.saveState, st\); S\.saveState = st; if \(say\) announce\(say\);/);
+  assert.match(main, /id="kx-announce" role="status"/);
+});

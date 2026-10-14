@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, esc, MODULE_LABELS } from './render.js';
+import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -47,7 +47,9 @@ async function boot() {
     if (open) return resume(open.attempt_id);
     const mode = av.modes.find((m) => m.mode === 'synthetic_full' && m.available);
     if (!mode) return message('Nicht verfügbar', 'Der Prüfungsbereich ist für Ihr Konto noch nicht freigeschaltet.');
-    screen(`<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create">Übung starten</button>${av.last_completed ? `<button class="kx-btn-quiet" data-act="last-result" data-attempt="${esc(av.last_completed)}">Letztes Ergebnis ansehen</button>` : ''}</div></main>`);
+    let history = '';
+    if (av.last_completed) { try { history = attemptHistory(await api.myAttempts()); } catch { /* the start screen works without it */ } }
+    screen(`<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create">Übung starten</button>${av.last_completed ? `<button class="kx-btn-quiet" data-act="last-result" data-attempt="${esc(av.last_completed)}">Letztes Ergebnis ansehen</button>` : ''}</div>${history}</main>`);
   } catch (e) { fail(e); }
 }
 

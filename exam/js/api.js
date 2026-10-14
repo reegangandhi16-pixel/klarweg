@@ -61,6 +61,7 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     review: (id, module) => call('GET', att(id, `/modules/${module}/review`)),
     feedback: (id, module) => call('GET', att(id, `/modules/${module}/feedback`)),
     myRecordings: (id) => call('GET', att(id, '/sprechen/recordings')),
+    myAttempts: () => call('GET', '/exam/v1/attempts'),
     async myRecording(id, part, turn) {   // the learner's own recording after submission: audio bytes, session-bound
       const res = await fetchImpl(`${base}${att(id, `/sprechen/recordings/${part}/${turn}`)}`, { credentials: 'include' });
       if (!res.ok) { let j = null; try { j = await res.json(); } catch { /* non-JSON */ } throw new ExamApiError(res.status, (j && j.error) || 'http_' + res.status, j); }

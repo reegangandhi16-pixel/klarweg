@@ -521,3 +521,13 @@ test('RATED FEEDBACK render: per task and criterion with German decimals; own te
     { part: 2, display_no: '3', status: 'correct', points: 1, max_points: 1 }] });
   assert.match(rv, /<p class="kx-meta kx-rv-parts">Teil 1: 1 von 2 · Teil 2: 1 von 1<\/p>/);
 });
+
+test('HISTORY render: a row per practice with each module result and a way back into it; nothing when empty', async () => {
+  const { attemptHistory } = await import('../js/render.js');
+  const html = attemptHistory({ attempts: [{ attempt_id: 'att_x', completed_at: 0, form_label: 'Übung <P1>', modules: [
+    { module: 'lesen', status: 'final', points: 70, max_points: 100 }, { module: 'hoeren', status: 'final', points: 100, max_points: 100 },
+    { module: 'schreiben', status: 'pending_rating', points: null, max_points: 100 }, { module: 'sprechen', status: 'not_taken', points: null, max_points: 100 }] }] }, () => '14.10.2026');
+  assert.match(html, /<th scope="row">14\.10\.2026<\/th><td>Übung &lt;P1&gt;<\/td><td>70 \/ 100<\/td><td>100 \/ 100<\/td><td>in Bewertung<\/td><td>–<\/td>/);
+  assert.match(html, /data-act="last-result" data-attempt="att_x">Ergebnis ansehen/);
+  assert.equal(attemptHistory({ attempts: [] }), '');
+});

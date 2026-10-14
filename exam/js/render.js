@@ -137,6 +137,25 @@ export function reviewPanel(progress) {
 /* Item review after submission (server data only: GET …/modules/<m>/review). Numbers as shown in the test. */
 const REVIEW_STATUS = { correct: 'richtig', incorrect: 'falsch', unanswered: 'ohne Antwort' };
 const answerText = (a) => (a ? `${a.label}${a.text ? ` – ${a.text}` : ''}` : '–');
+/* The learner's completed practices, newest first: date, form, per-module result, and a way back into each result. */
+const MODULE_ORDER = ['lesen', 'hoeren', 'schreiben', 'sprechen'];
+export function attemptHistory(list, formatDate = (ms) => new Date(ms).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })) {
+  const rows = (list.attempts || []).map((a) => {
+    const cell = (mod) => {
+      const m = (a.modules || []).find((x) => x.module === mod);
+      if (!m || m.status === 'not_taken') return '–';
+      return m.status === 'final' ? `${esc(m.points)} / ${esc(m.max_points)}` : 'in Bewertung';
+    };
+    return `<tr><th scope="row">${esc(formatDate(a.completed_at))}</th><td>${esc(a.form_label)}</td>${MODULE_ORDER.map((mod) => `<td>${cell(mod)}</td>`).join('')}`
+      + `<td><button type="button" class="kx-btn-quiet" data-act="last-result" data-attempt="${esc(a.attempt_id)}">Ergebnis ansehen</button></td></tr>`;
+  }).join('');
+  if (!rows) return '';
+  return '<section class="kx-history" aria-labelledby="kx-history-title"><h2 id="kx-history-title">Ihre bisherigen Übungen</h2>'
+    + `<div class="kx-table-wrap"><table class="kx-table"><caption>Abgeschlossene Übungen (neueste zuerst)</caption><thead><tr><th scope="col">Datum</th><th scope="col">Übung</th>`
+    + MODULE_ORDER.map((mod) => `<th scope="col">${esc(MODULE_LABELS[mod])}</th>`).join('') + '<th scope="col"><span class="kx-sr">Aktion</span></th></tr></thead>'
+    + `<tbody>${rows}</tbody></table></div></section>`;
+}
+
 /* The learner's own Sprechen recordings after submission: each is loaded only on request (no autoplay). */
 export function recordingsSection(list) {
   const rows = (list.recordings || []).map((r) => `<li class="kx-rec-row"><span>Teil ${esc(r.part)}, Beitrag ${esc(String(r.turn).replace(/^t/, ''))}`

@@ -16,6 +16,7 @@ const R = (s) => new RegExp(`^/exam/v1${s}$`);
 const ROUTES = [
   ['GET', R('/availability'), (c) => api.availability(c.env, c.user)],
   ['POST', R('/attempts'), (c) => api.createAttempt(c.env, c.user, c.request)],
+  ['GET', R('/attempts'), (c) => api.myAttempts(c.env, c.user)],
   ['GET', R(`/attempts/${A}`), (c, m) => api.getAttempt(c.env, c.user, m[1])],
   ['POST', R(`/attempts/${A}/lease`), (c, m) => api.lease(c.env, c.user, m[1], c.request)],
   ['POST', R(`/attempts/${A}/heartbeat`), (c, m) => api.heartbeat(c.env, c.user, m[1], c.request)],

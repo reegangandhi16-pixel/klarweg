@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS } from './render.js';
+import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -104,10 +104,11 @@ async function openModule(module) {
   assertSupported(S.pkg, renderer.registry);
   const saved = await api.answers(id, S.lease, module);
   S.answers = Object.fromEntries(saved.answers.map((a) => [a.item_id, a.value]));
+  S.saveState = 'saved';   // a new module starts with nothing unsaved (no stale "offline" from the previous one)
   S.autosave = new Autosave({
     key: `answers:${id}:${module}`, store: S.store,
     send: (batch, requestId) => api.save(id, S.lease, module, batch, requestId),
-    onState: () => paintHeader(), onFatal: (code) => { if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else refresh(); },
+    onState: (st) => { const say = saveAnnouncement(S.saveState, st); S.saveState = st; if (say) announce(say); paintHeader(); }, onFatal: (code) => { if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else refresh(); },
     onDropped: (code, batch) => syncFromServer(batch.map((b) => b.item_id)).then(() => {
       if (code === 'topic_locked') { announce('Die Themenwahl ist gesperrt. Ihre Änderung wurde nicht gespeichert.'); applyTopicLock(false); }
     }).catch(() => {})

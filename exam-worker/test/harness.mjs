@@ -14,6 +14,7 @@ export const WORKER_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.ur
 export const ROOT = path.resolve(WORKER_DIR, '..');
 export const FORM_DIR = path.join(ROOT, 'exam-content/forms/synthetic/b1-synthetic-s0');
 export const PRACTICE_FORM_DIR = path.join(ROOT, 'exam-content/forms/synthetic/b1-synthetic-p1');
+export const PRACTICE_P2_FORM_DIR = path.join(ROOT, 'exam-content/forms/synthetic/b1-synthetic-p2');
 export const PROXY_SECRET = 'test-exam-proxy-secret-0123456789abcdef';
 export const MEDIA_SECRET = 'test-exam-media-secret-0123456789abcdef';
 

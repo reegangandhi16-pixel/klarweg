@@ -11,6 +11,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { countWords } from '../schemas/content-model.mjs';
 import { PRACTICE_FORM } from './make-practice-form.mjs';
+import { PRACTICE_FORM_P2 } from './make-practice-form-p2.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'forms', 'synthetic', 'b1-synthetic-s0');
@@ -262,7 +263,8 @@ const files = {
 export const SYNTHETIC_FORMS = [{
   rel: 'forms/synthetic/b1-synthetic-s0',
   files: Object.fromEntries(Object.entries(files).map(([name, data]) => [name, JSON.stringify(data, null, 2) + '\n']))
-}, { rel: PRACTICE_FORM.rel, files: PRACTICE_FORM.files }];   // P1: realistic synthetic practice (tools/make-practice-form.mjs)
+}, { rel: PRACTICE_FORM.rel, files: PRACTICE_FORM.files },   // P1: realistic synthetic practice (tools/make-practice-form.mjs)
+  { rel: PRACTICE_FORM_P2.rel, files: PRACTICE_FORM_P2.files }];   // P2: second practice form (tools/make-practice-form-p2.mjs)
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const check = process.argv.includes('--check');
@@ -277,5 +279,5 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     }
   }
   if (check && drift) process.exit(1);
-  console.log(JSON.stringify({ forms: SYNTHETIC_FORMS.map((f) => f.rel), s0: { tasks: tasks.length, items: items.length, assets: assets.length }, p1: PRACTICE_FORM.counts, check }));
+  console.log(JSON.stringify({ forms: SYNTHETIC_FORMS.map((f) => f.rel), s0: { tasks: tasks.length, items: items.length, assets: assets.length }, p1: PRACTICE_FORM.counts, p2: PRACTICE_FORM_P2.counts, check }));
 }

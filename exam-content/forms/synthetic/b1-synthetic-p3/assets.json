@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p3-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin: Mein Thema ist: Allein reisen oder in einer Gruppe? Letztes Jahr bin ich zum ersten Mal ganz allein verreist, für eine Woche an die Küste. Am Anfang hatte ich ein bisschen Angst, besonders abends im Restaurant. Nach zwei Tagen habe ich aber gemerkt, wie frei ich war: Ich konnte schlafen, so lange ich wollte, und jeden Tag selbst planen. Früher bin ich immer mit einer Reisegruppe gefahren. In meinem Heimatland reisen Frauen selten allein, die meisten fahren mit der Familie. Eine Gruppenreise hat Vorteile: Alles ist organisiert, man ist sicher und findet schnell Gesprächspartner. Dafür muss man sich nach den anderen richten und hat wenig Zeit für sich. Allein zu reisen ist oft teurer, weil das Einzelzimmer mehr kostet. Ich finde, jeder sollte einmal allein reisen, weil man dabei viel über sich selbst lernt. Für weite Reisen in fremde Länder würde ich aber lieber eine Gruppe wählen. Danke.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p3-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Was ist für Sie auf einer Reise am wichtigsten – und warum?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p3-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Haben Sie selbst schon einmal etwas Gebrauchtes gekauft? Was war das?",
     "licence": {
       "kind": "synthetic_test"
     },

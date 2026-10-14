@@ -4997,12 +4997,20 @@
         {
           "turn": "t1",
           "seconds": 60,
-          "prompt_asset": "ast:p5-sp3-partner-talk"
+          "prompt_asset": "ast:p5-sp3-partner-talk",
+          "prompt_asset_by_topic": {
+            "t1": "ast:p5-sp3-partner-talk",
+            "t2": "ast:p5-sp3-partner-talk-t2"
+          }
         },
         {
           "turn": "t2",
           "seconds": 45,
-          "prompt_asset": "ast:p5-sp3-examiner-q"
+          "prompt_asset": "ast:p5-sp3-examiner-q",
+          "prompt_asset_by_topic": {
+            "t1": "ast:p5-sp3-examiner-q",
+            "t2": "ast:p5-sp3-examiner-q-t2"
+          }
         }
       ]
     },

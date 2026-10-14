@@ -15,7 +15,7 @@ const ROLES = /^(Moderator|Moderatorin|Partner|Partnerin|Prüfer|Prüferin|(Herr
 const DESCRIBES = /^(Partner|Partnerin) präsentiert\b/;
 
 function slotOf(assetId) {
-  const m = assetId.match(/-(h1-ex|h1-t\d|h2-instr|h2|h3|h4|sp1-partner-\d|sp3-partner-talk|sp3-examiner-q)$/);
+  const m = assetId.match(/-(h1-ex|h1-t\d|h2-instr|h2|h3|h4|sp1-partner-\d|sp3-partner-talk(?:-t2)?|sp3-examiner-q(?:-t2)?)$/);
   return m ? m[1] : null;
 }
 
@@ -48,7 +48,7 @@ export function planForm(form) {
   if (speakersIn('h3').length !== 2) issues.push(`Hören Teil 3: ${speakersIn('h3').length} speakers, expected 2`);
   const h4Options = (items.find((i) => i.interaction === 'speaker_assignment') || { options: [] }).options.map((o) => o.label);
   if (JSON.stringify(speakersIn('h4').sort()) !== JSON.stringify([...h4Options].sort())) issues.push(`Hören Teil 4: speakers ${speakersIn('h4').join(', ')} ≠ answer options ${h4Options.join(', ')}`);
-  const voiceSlots = [...new Set(segments.map((s) => `${s.slot.startsWith('h3') || s.slot.startsWith('h4') ? s.slot : s.slot.replace(/-\d$/, '')}|${s.speaker}`))];
+  const voiceSlots = [...new Set(segments.map((s) => `${s.slot.startsWith('h3') || s.slot.startsWith('h4') ? s.slot : s.slot.replace(/-(\d|t2)$/, '')}|${s.speaker}`))];
   return {
     form: form.name, form_id: form.form_id, segments, issues,
     voice_slots: voiceSlots.length,

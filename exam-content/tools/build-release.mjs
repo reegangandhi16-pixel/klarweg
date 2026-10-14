@@ -76,7 +76,10 @@ export function buildRelease({ release, formDirs, purpose = 'test', levelsDir = 
     const durations = {};
     const assetModule = {};
     for (const t of tasks) for (const s of t.stimuli) assetModule[s.asset_id] = t.module;
-    for (const it of items) for (const turn of it.response_spec?.turns || []) if (turn.prompt_asset) assetModule[turn.prompt_asset] = it.module;
+    for (const it of items) for (const turn of it.response_spec?.turns || []) {
+      if (turn.prompt_asset) assetModule[turn.prompt_asset] = it.module;
+      for (const id of Object.values(turn.prompt_asset_by_topic || {})) assetModule[id] = it.module;
+    }
     for (const fm of form.modules) for (const fp of fm.parts || []) if (fp.instruction_asset_id) assetModule[fp.instruction_asset_id] = fm.module;   // spoken Hören instructions
     const formAssets = [];
     for (const a of assets.filter((x) => x.kind === 'audio')) {
@@ -120,7 +123,7 @@ export function buildRelease({ release, formDirs, purpose = 'test', levelsDir = 
                 stimuli: t.stimuli.map((s) => {
                   const a = assetsById[s.asset_id];
                   return { role: s.role, asset_id: s.asset_id, kind: a.kind, label: s.label || a.label || null, order: s.order,
-                    speaker_ids: s.speaker_ids || null, text: a.kind === 'text' ? a.text.body_md : null,
+                    speaker_ids: s.speaker_ids || null, text: a.kind === 'text' ? a.text.body_md : null, ...(s.for_topic ? { for_topic: s.for_topic } : {}),
                     duration_ms: a.kind === 'audio' ? durations[a.id] : null };
                 }),
                 items: fp.item_order.filter((o) => t.items.includes(o.item_id)).map((o) => {
@@ -173,7 +176,8 @@ export function buildRelease({ release, formDirs, purpose = 'test', levelsDir = 
 function publicResponseSpec(rs, durations) {
   if (!rs) return null;
   if (rs.type === 'text') return { type: 'text', target_words: rs.target_words, editor: 'plain' };
-  if (rs.type === 'audio') return { type: 'audio', max_seconds: rs.max_seconds, turns: (rs.turns || []).map((t) => ({ turn: t.turn, seconds: t.seconds, prompt_asset: t.prompt_asset || null, prompt_ms: t.prompt_asset ? durations[t.prompt_asset] : null })) };
+  if (rs.type === 'audio') return { type: 'audio', max_seconds: rs.max_seconds, turns: (rs.turns || []).map((t) => ({ turn: t.turn, seconds: t.seconds, prompt_asset: t.prompt_asset || null, prompt_ms: t.prompt_asset ? durations[t.prompt_asset] : null,
+    ...(t.prompt_asset_by_topic ? { prompt_asset_by_topic: Object.fromEntries(Object.entries(t.prompt_asset_by_topic).map(([k, id]) => [k, { asset_id: id, duration_ms: durations[id] }])) } : {}) })) };
   return { type: rs.type };
 }
 

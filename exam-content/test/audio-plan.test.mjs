@@ -13,9 +13,13 @@ for (const f of PRACTICE_FORMS) {
     const scripted = JSON.parse(f.files['assets.json']).filter((a) => a.kind === 'audio' && a.script_de).map((a) => a.id);
     assert.deepEqual([...new Set(p.segments.map((s) => s.asset_id))].sort(), [...scripted].sort(), 'every scripted audio asset is planned');
     assert.ok(p.segments.every((s) => s.recordable !== false && s.chars > 0 && s.speaker));
-    const talk = p.segments.find((s) => s.slot === 'sp3-partner-talk');
-    assert.match(talk.speaker, /^Partner(in)?$/);
-    assert.ok(talk.text.split(/\s+/).length >= 120, `partner presentation is a talk (${talk.text.split(/\s+/).length} words)`);
+    const talks = p.segments.filter((s) => /^sp3-partner-talk/.test(s.slot));
+    assert.equal(talks.length, 2, 'one partner talk per Teil 2 topic (OD-32: the partner presents the other topic)');
+    assert.equal(talks[0].speaker, talks[1].speaker, 'the same partner gives both talks');
+    for (const talk of talks) {
+      assert.match(talk.speaker, /^Partner(in)?$/);
+      assert.ok(talk.text.split(/\s+/).length >= 120, `partner presentation is a talk (${talk.text.split(/\s+/).length} words)`);
+    }
   });
 }
 

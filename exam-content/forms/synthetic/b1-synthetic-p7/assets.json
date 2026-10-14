@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p7-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin: Ich spreche über Taschengeld und die Frage, ab welchem Alter Kinder es bekommen sollten. Meine Kinder bekommen seit dem ersten Schuljahr Taschengeld, zuerst einen Euro pro Woche, heute mit zwölf Jahren zwanzig Euro im Monat. Davon kaufen sie Süßigkeiten, Comics oder sparen für etwas Größeres. Ich selbst habe als Kind nie Taschengeld bekommen, meine Eltern haben alles direkt bezahlt. In meinem Heimatland ist das bis heute ganz normal. Taschengeld hat einen großen Vorteil: Kinder lernen, mit Geld umzugehen und Entscheidungen zu treffen. Wenn das Geld weg ist, ist es weg, und das ist eine wichtige Erfahrung. Problematisch ist, wenn Eltern sehr wenig Geld haben, oder wenn Kinder mit dem Geld Dinge kaufen, die die Eltern nicht gut finden. Ich finde, mit sechs Jahren kann man mit einem kleinen Betrag beginnen. Wichtig ist, dass die Eltern regelmäßig zahlen und nicht zu viel kontrollieren. Danke schön.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p7-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Haben Sie als Kind Taschengeld bekommen? Was haben Sie damit gemacht?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Wie möchten Sie in zehn Jahren wohnen?",
     "licence": {
       "kind": "synthetic_test"
     },

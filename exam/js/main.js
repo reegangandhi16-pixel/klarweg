@@ -9,7 +9,7 @@ import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
 import { ChunkQueue, TurnRecorder } from './recorder.js';
-import { speakingPhaseAt, prepEndsAt, topicItems } from './sprechen.js';
+import { speakingPhaseAt, prepEndsAt, topicItems, chosenTopic } from './sprechen.js';
 import { createSpeakingDriver } from './sprechen-driver.js';
 import { createSpeakingAudio } from './speaking-audio.js';
 import { countWords } from './wordcount.js';
@@ -399,6 +399,7 @@ async function runSprechen() {
       turn: label, alert: (kind, text) => showAlert(kind, text), clear: clearAlert,
       lockTopics: () => applyTopicLock(true)
     },
+    topic: () => chosenTopic(S.pkg, S.answers),
     log: (event, detail) => console.warn('[kx-sprechen]', event, detail)
   });
   try { await driver.run(); } finally { releaseMic(); }

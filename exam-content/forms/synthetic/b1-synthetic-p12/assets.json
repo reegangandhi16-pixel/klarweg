@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p12-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Ich möchte über die Frage sprechen, ob Kinder schon mit einem Jahr in die Kita gehen sollten. Unser Sohn ist mit vierzehn Monaten in die Kita gekommen, weil meine Frau und ich beide wieder arbeiten wollten. Die ersten zwei Wochen waren schwer, er hat jeden Morgen geweint. Danach hat er sich aber schnell an die Erzieherinnen gewöhnt, und heute geht er sehr gern hin. In meinem Heimatland bleiben Kinder meist bis drei Jahre bei der Mutter oder bei den Großeltern, Krippen gibt es kaum. Eine frühe Kita hat Vorteile: Kinder lernen von anderen Kindern, und beide Eltern können arbeiten. Für Kinder aus anderen Ländern ist sie auch gut für die Sprache. Es gibt aber auch Nachteile: Kleine Kinder sind in der Kita oft krank, und manche Gruppen sind zu groß. Ich finde, ab einem Jahr ist die Kita in Ordnung, wenn die Eingewöhnung langsam ist und die Gruppen klein sind. Vielen Dank.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p12-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Wie war das bei Ihnen oder in Ihrer Familie: Wann sind die Kinder in die Kita gekommen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Lesen Sie im Urlaub E-Mails von der Arbeit oder vom Kurs? Warum, oder warum nicht?",
     "licence": {
       "kind": "synthetic_test"
     },

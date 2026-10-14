@@ -849,9 +849,11 @@ export async function productiveForRating(env, userId, attemptId) {
   const scores = Object.fromEntries((await env.DB.prepare("SELECT module, status, points, max_points FROM module_scores WHERE attempt_id = ?1 AND module IN ('schreiben','sprechen')").bind(attempt.id).all()).results.map((r) => [r.module, r]));
   const rated = (await env.DB.prepare('SELECT item_id, round, rater_id FROM ratings WHERE attempt_id = ?1').bind(attempt.id).all()).results;
   const units = [];
+  let topic = null;
   for (const module of ['schreiben', 'sprechen']) {
     const items = (await env.DB.prepare('SELECT item_id, rubric_id FROM items_index WHERE form_id = ?1 AND module = ?2').bind(attempt.form_id, module).all()).results;
     const pkg = (await loadPackage(env, attempt.form_id, module)).data;
+    if (module === 'sprechen') topic = await speakingTopic(env, attempt.id, pkg);
     const prompt = {};
     for (const p of pkg.parts) for (const t of p.tasks) for (const it of t.items) prompt[it.item_id] = { part: p.part, stem: it.stem || null, instructions: t.instructions || null };
     for (const u of rubricUnits(cfg, module, items)) {
@@ -863,8 +865,22 @@ export async function productiveForRating(env, userId, attemptId) {
   }
   const modules = ['schreiben', 'sprechen'].map((m) => ({ module: m, status: mods[m] ? mods[m].status : null, score_status: scores[m] ? scores[m].status : null,
     points: scores[m] && scores[m].status === 'final' ? scores[m].points : null, max_points: scores[m] ? scores[m].max_points : null }));
-  return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, writing, recordings: turns, bands: BANDS, modules, units,
+  return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, writing, recordings: turns, bands: BANDS, modules, units, topic,
     lead: await hasRole(env, userId, ['lead_rater']) };
+}
+
+/* The learner's Sprechen Teil 2 topic (raters judge Teil 2 against it) and the partner talk that topic implies for
+   Teil 3 (OD-32: the partner presents the other topic). null when the form has no topic choice. */
+async function speakingTopic(env, attemptId, pkg) {
+  const tasks = pkg.parts.flatMap((p) => p.tasks);
+  const item = tasks.flatMap((t) => t.items).find((it) => it.interaction === 'topic_choice');
+  if (!item) return null;
+  const row = await env.DB.prepare('SELECT value_json FROM responses_current WHERE attempt_id = ?1 AND item_id = ?2').bind(attemptId, item.item_id).first();
+  const optionId = row ? (JSON.parse(row.value_json) || {}).option_id || null : null;
+  const option = item.options.find((o) => o.option_id === optionId) || null;
+  const partners = tasks.flatMap((t) => t.stimuli || []).filter((st) => st.role === 'partner_audio');
+  const partner = partners.find((st) => st.for_topic !== undefined && st.for_topic === optionId) || partners.find((st) => st.for_topic === undefined) || partners[0] || null;
+  return { item_id: item.item_id, option_id: optionId, label: option ? option.label : null, partner_asset_id: partner ? partner.asset_id : null };
 }
 
 /* Rating queue for raters: attempts whose Schreiben or Sprechen is submitted and not yet final. No learner identity is

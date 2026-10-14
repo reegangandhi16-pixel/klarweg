@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p14-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Mein Thema lautet: Tattoos – Kunst oder später ein Problem? Ich habe seit zehn Jahren ein kleines Tattoo am Arm, den Namen meiner Tochter. Ich bereue es überhaupt nicht. Mein bester Freund hat sich aber mit achtzehn ein großes Bild auf den Rücken machen lassen und möchte es heute entfernen lassen, was teuer und schmerzhaft ist. In meinem Heimatland hatten früher nur Seeleute oder Kriminelle Tattoos, heute sieht man sie auch bei jungen Leuten, aber ältere Menschen finden das immer noch schlimm. Tattoos können sehr schön sein, und viele Menschen erinnern sich damit an wichtige Momente. Ein Tattoo ist aber für immer, und der Geschmack ändert sich. In manchen Berufen, zum Beispiel bei der Bank, haben Menschen mit sichtbaren Tattoos manchmal Probleme. Meine Meinung: Ein Tattoo ist Kunst, aber man sollte lange darüber nachdenken und lieber mit einem kleinen anfangen. Vielen Dank.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p14-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Was denken Sie: Würden Sie selbst ein Tattoo tragen? Warum oder warum nicht?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Wie oft sind Sie schon umgezogen? Was war dabei am schwierigsten?",
     "licence": {
       "kind": "synthetic_test"
     },

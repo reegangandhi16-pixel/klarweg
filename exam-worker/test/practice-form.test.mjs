@@ -138,3 +138,21 @@ test('PRACTICE P1 + P2: a learner is assigned the practice form they have not ta
   assert.equal(second.assignment_reason, 'csprng_uniform_unseen:1');
   assert.deepEqual([first.form_id, second.form_id].sort(), ['frm:b1:synthetic-p1@1', 'frm:b1:synthetic-p2@1']);
 });
+
+test('PRACTICE Sprechen Teil 3 (OD-32): raters see the learner\u2019s Teil 2 topic and the partner talk it implied, for both choices', async () => {
+  const dir = PRACTICE_LIBRARY[2].dir;   // P3
+  for (const [choice, talk] of [['t1', 'ast:p3-sp3-partner-talk'], ['t2', 'ast:p3-sp3-partner-talk-t2']]) {
+    const s = await setup({ formDirs: [dir] });
+    await start(s, 'lesen'); await answerObjective(s, 'lesen'); await submit(s, 'lesen');
+    await runHoeren(s, (it, k) => k.correct); await submit(s, 'hoeren');
+    await runSchreiben(s); await submit(s, 'schreiben');
+    await runSprechen(s, { topic: choice }); await submit(s, 'sprechen');
+    const rater = newUser(); await role(s.env, rater, 'rater');
+    const d = (await call(s.env, 'GET', `/exam/v1/admin/attempts/${s.attempt}/productive`, { user: rater })).json;
+    assert.equal(d.topic.option_id, choice);
+    assert.match(d.topic.label, new RegExp(`^Thema ${choice.slice(1)}: `));
+    assert.equal(d.topic.partner_asset_id, talk);
+    const learner = await call(s.env, 'GET', `/exam/v1/admin/attempts/${s.attempt}/productive`, { user: s.user });
+    assert.equal(learner.status, 403, 'the learner cannot open the rater data');
+  }
+});

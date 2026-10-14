@@ -747,6 +747,25 @@
     "creator": "klarweg-engineering"
   },
   {
+    "id": "ast:p13-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin: Mein Thema ist das gemeinsame Familienessen und wie wichtig es ist. Bei uns gibt es eine feste Regel: Am Abend essen wir um sieben alle zusammen, ohne Fernseher und ohne Handy. Mein Sohn ist fünfzehn und findet das manchmal langweilig, aber oft erzählt er gerade beim Essen, was in der Schule passiert ist. In meinem Heimatland ist das gemeinsame Essen das Zentrum der Familie, am Wochenende kommen oft auch Onkel und Tanten dazu. Gemeinsame Mahlzeiten haben viele Vorteile: Man redet miteinander, die Kinder essen gesünder, und man lernt Tischregeln. Schwierig ist es, wenn alle zu unterschiedlichen Zeiten arbeiten oder Training haben. Dann muss man flexibel sein, zum Beispiel ein gemeinsames Frühstück am Sonntag planen. Ich finde, mindestens einmal am Tag sollte die Familie zusammen am Tisch sitzen. Es muss nicht kompliziert gekocht werden, wichtig ist das Gespräch. Danke für Ihre Aufmerksamkeit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
     "id": "ast:p13-sp3-examiner-q",
     "kind": "audio",
     "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
@@ -760,6 +779,25 @@
       "plays": null
     },
     "script_de": "Prüferin: Wie oft isst Ihre Familie zusammen? Was ist dabei für Sie wichtig?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Welche App benutzen Sie zum Lernen, und was gefällt Ihnen daran?",
     "licence": {
       "kind": "synthetic_test"
     },

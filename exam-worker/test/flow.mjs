@@ -71,13 +71,13 @@ export async function runSchreiben(s, text = SAMPLE_TEXT) {
   return items;
 }
 
-export async function runSprechen(s) {
+export async function runSprechen(s, { topic: choice = 't1' } = {}) {
   const c = await post(s, '/sprechen/consent', { granted: true, version: 'rec-consent@1' });
   assert.equal(c.status, 200, JSON.stringify(c.json));
   await start(s, 'sprechen');
   const pkg = pkgFor(s.build, 'sprechen');
   const topic = scoredItems(pkg).find((i) => i.interaction === 'topic_choice');
-  const t = await post(s, '/modules/sprechen/answers', { answers: [{ item_id: topic.item_id, value: { option_id: 't1' }, seq: 1 }] });
+  const t = await post(s, '/modules/sprechen/answers', { answers: [{ item_id: topic.item_id, value: { option_id: choice }, seq: 1 }] });
   assert.equal(t.status, 200, JSON.stringify(t.json));
   for (const it of scoredItems(pkg).filter((i) => i.interaction === 'spoken_response')) {
     for (const turn of it.response_spec.turns) {

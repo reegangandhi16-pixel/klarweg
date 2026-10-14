@@ -759,6 +759,44 @@
       },
       "plays": null
     },
+    "script_de": "Prüferin: Wie kommen Sie selbst zur Arbeit oder zum Kurs, und warum gerade so?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp3-partner-talk-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation (Thema 1)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 790,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin: Heute spreche ich über die Frage: Mit dem Fahrrad zur Arbeit? Seit dem letzten Frühling fahre ich fast jeden Tag mit dem Rad ins Büro, ungefähr acht Kilometer. Vorher bin ich mit dem Auto gefahren und stand morgens oft im Stau. Jetzt brauche ich etwa dreißig Minuten und bin danach richtig wach. In meinem Heimatland fahren nur wenige Erwachsene mit dem Rad zur Arbeit, weil es kaum Radwege gibt und es im Sommer sehr heiß ist. Für das Fahrrad spricht viel: Man spart Geld für Benzin und Parkplätze, man bewegt sich und tut etwas für die Umwelt. Es gibt aber auch Probleme. Bei Regen und im Winter ist es unangenehm, und auf großen Straßen fühle ich mich manchmal nicht sicher. Außerdem braucht man im Büro eine Möglichkeit, sich umzuziehen. Meine Meinung: Für Strecken bis zehn Kilometer ist das Rad ideal, wenn die Stadt gute Radwege baut. Vielen Dank fürs Zuhören.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p1-sp3-examiner-q-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage (Thema 2)",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 850,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
     "script_de": "Prüferin: Wie viel Zeit verbringen Sie selbst am Tag mit dem Smartphone?",
     "licence": {
       "kind": "synthetic_test"

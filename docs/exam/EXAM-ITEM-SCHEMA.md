@@ -133,7 +133,10 @@ type Task = {
 type StimulusRef = { role: "text"|"ad"|"image"|"audio"|"transcript"|"guestbook_post"|"slide"|"planning_card"|"partner_audio";
                      asset_id: string; label?: string; order: number;
                      speaker_ids?: string[];                // audio
-                     play_count?: 1|2 };                     // audio (from PartConfig; duplicated for validation)
+                     play_count?: 1|2;                       // audio (from PartConfig; duplicated for validation)
+                     for_topic?: string };                   // partner_audio only: the learner's Sprechen Teil 2 topic option
+                                                             // this partner talk is played for (OD-32: the partner presents
+                                                             // a different topic); one talk per topic option, or none
 ```
 
 ---
@@ -174,6 +177,9 @@ type ResponseSpec =
   | { type:"choice"; options_ref:"inline"; allow_change:true }
   | { type:"text"; min_words_target:number; target_words:number; max_chars?:number; editor:"plain" }   // B1: 80/80/40 [OFFICIAL]
   | { type:"audio"; max_seconds:number; soft_seconds?:number; turns?: TurnSpec[] };
+type TurnSpec = { turn: string; seconds: number;
+                 prompt_asset?: string;                                 // audio played before the turn (if not heard yet)
+                 prompt_asset_by_topic?: Record<string, string> };      // by the learner's Teil 2 topic option; overrides prompt_asset
 
 type KeySpec =
   | { kind:"single"; correct: string }                  // option_id, "0" allowed for matching_pool

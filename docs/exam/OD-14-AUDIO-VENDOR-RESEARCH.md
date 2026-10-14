@@ -37,16 +37,16 @@ says so most directly. None of them is, by itself, the EX-06 licence (exam use, 
 That requires a written confirmation or enterprise agreement from the chosen vendor.
 
 ## 4. Cost at the actual volume
-`node exam-content/tools/audio-plan.mjs` counts **64,060 spoken characters** for P1–P15. That includes the Sprechen
-partner presentations, which became real first-person talks on 2026-10-14; stage directions are excluded. Assuming
-five takes per line (about 320,000 characters), list prices give:
+`node exam-content/tools/audio-plan.mjs` counts **78,385 spoken characters** for P1–P15. That includes both Sprechen
+partner presentations per form (one per Teil 2 topic, OD-32) and both examiner questions; stage directions are excluded. Assuming
+five takes per line (about 392,000 characters), list prices give:
 
 | | Price / 1 M characters | One pass | Five takes |
 |---|---|---|---|
-| Azure Neural [11] | $15 | ≈ $0.96 | ≈ $4.80 |
-| Azure Neural HD [11] | $22 | ≈ $1.41 | ≈ $7.05 |
-| Google Chirp 3 HD [12] | $30 | ≈ $1.92 | ≈ $9.61 |
-| Polly Neural / Generative [13] | $16 / $30 | ≈ $1.02 / $1.92 | ≈ $5.12 / $9.61 |
+| Azure Neural [11] | $15 | ≈ $1.18 | ≈ $5.88 |
+| Azure Neural HD [11] | $22 | ≈ $1.72 | ≈ $8.62 |
+| Google Chirp 3 HD [12] | $30 | ≈ $2.35 | ≈ $11.76 |
+| Polly Neural / Generative [13] | $16 / $30 | ≈ $1.25 / $2.35 | ≈ $6.27 / $11.76 |
 
 Synthesis cost is negligible. The real costs are the 10 native raters, audio post-production and the licence negotiation.
 
@@ -58,7 +58,7 @@ Synthesis cost is negligible. The real costs are the 10 native raters, audio pos
 
 ## 6. Smallest executable pilot (once OD-14a–c are decided)
 - **Scope:** P3 Hören (texts 1–5 and the example, Teil 2–4, Teil 2 instruction) plus Sprechen partner turns, talk and examiner
-  question. About 4,000 spoken characters across 16 voice slots (`audio-plan.mjs p3`).
+  questions (both topic variants). About 5,500 spoken characters across 16 voice slots (`audio-plan.mjs p3`).
 - **Cast:** the owner-approved voice list. Teil 3 man + woman; Teil 4 three contrasting voices (Moderatorin, Herr Lang,
   Frau Demir); ≥ 1 Austrian or Swiss voice in Teil 1.
 - **Production:** synthesize each line per `audio-plan.mjs --json`, keep 48 kHz / 24-bit WAV masters, normalize to
@@ -78,6 +78,49 @@ Synthesis cost is negligible. The real costs are the 10 native raters, audio pos
 3. **OD-14c Voice cast:** approve the voice list after listening (gender, age spread, AT/CH authenticity).
 4. **OD-14d Raters:** appoint 10 native German raters for the MOS review.
 5. **OD-14e Disclosure:** approve the learner-facing sentence stating that the audio uses synthetic voices.
+
+## 8. Draft inquiry to Microsoft (EX-06), ready to send; NOT sent
+Send only after the owner approves it, through the owner's Azure account or Microsoft licensing contact. Sending it buys
+nothing and accepts nothing.
+
+> **Subject:** Licensing clarification: Azure AI Speech neural TTS audio in a paid German-learning course (exam practice)
+>
+> Dear Microsoft Licensing / Azure AI Speech team,
+>
+> We are evaluating Azure AI Speech (prebuilt neural and Neural HD voices, de-DE, de-AT, de-CH) to produce pre-recorded
+> listening and speaking prompts for a paid online German course. The material is original practice for a B1-level
+> language exam, written by us. It is not an official exam and is not affiliated with any exam provider. We would generate
+> about 80,000 characters once (with re-takes, up to about 400,000), store the audio files, and stream them to
+> enrolled learners for as long as the course is offered. Before any purchase we need written confirmation of the
+> following:
+>
+> 1. **Ownership and use of the audio:** that synthesized speech audio is "Output Content" under the Microsoft Product
+>    Terms (Universal License Terms for Online Services), that Microsoft does not own it, and that we may use it
+>    commercially in a paid course.
+> 2. **Redistribution and retention:** that we may store the generated files and keep distributing them to paying
+>    learners (streaming and download) indefinitely, **including after our Azure subscription ends**, without
+>    regenerating them or paying further fees.
+> 3. **Exam-practice use:** that use in graded practice tests (learners hear the audio and answer questions) is permitted
+>    under the Product Terms and the Code of Conduct for Microsoft AI Services, with no restriction on educational
+>    assessment use.
+> 4. **Synthetic-voice disclosure:** what wording and placement satisfy the Code of Conduct requirement to disclose the
+>    synthetic nature of generated voices. We plan a statement on the course page and in the listening instructions.
+> 5. **Training and data:** that our input scripts and the generated audio are not used to train or improve Microsoft
+>    models (please confirm which clause covers Azure AI Speech), and that real-time synthesis inputs and outputs are not
+>    retained, as described in the Azure TTS data-privacy documentation; and, if we use the batch synthesis API, how long
+>    inputs and outputs are kept and how to delete them.
+> 6. **Voices:** that no additional licence, attribution or limited-access approval is required for the prebuilt voices
+>    Ingrid, Jonas (de-AT), Leni, Jan (de-CH) and the de-DE neural / Neural HD voices for this use.
+> 7. **Change protection:** whether voice retirement or later changes to the terms affect audio files we have already
+>    generated.
+>
+> Please reply in writing, or point us to the exact contractual clauses, so we can file the confirmation with our
+> licensing records.
+>
+> Kind regards, [owner name, company, Azure tenant / subscription id if any]
+
+The listening-quality review stays as specified in §6 (10 native raters, MOS ≥ 4.0). A positive reply from Microsoft
+does not replace it.
 
 ## Sources (checked 2026-10-14)
 1. Azure voice list: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts

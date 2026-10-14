@@ -57,7 +57,8 @@ async function showAttempt(attemptId, note = '') {
       ? d.writing.map((w) => `<article class="kx-stim"><h3 class="kx-stim-label">${esc((units.find((u) => u.item_id === w.item_id) || {}).stem || w.item_id)}</h3>`
         + `<p class="kx-meta">${esc(w.words)} Wörter${w.target_words ? ` (Ziel ca. ${esc(w.target_words)})` : ''}${w.below_half_target ? ' · unter der Hälfte des Ziels' : ''}</p>`
         + `<p class="kx-written" lang="de">${esc(w.text).replace(/\n/g, '<br>')}</p></article>`).join('') || '<p>Kein Text abgegeben.</p>'
-      : `<div class="kx-table-wrap"><table class="kx-table"><caption>Aufnahmen</caption><thead><tr><th scope="col">Teil</th><th scope="col">Beitrag</th><th scope="col">Status</th><th scope="col">Dauer</th><th scope="col">Anhören</th></tr></thead><tbody>`
+      : (d.topic ? `<p class="kx-meta">Teil 2 – gewähltes Thema: <strong>${d.topic.label ? esc(d.topic.label) : 'kein Thema gewählt'}</strong>.${d.topic.label ? ' In Teil 3 präsentierte der Partner das andere Thema.' : ''}</p>` : '')
+        + `<div class="kx-table-wrap"><table class="kx-table"><caption>Aufnahmen</caption><thead><tr><th scope="col">Teil</th><th scope="col">Beitrag</th><th scope="col">Status</th><th scope="col">Dauer</th><th scope="col">Anhören</th></tr></thead><tbody>`
         + d.recordings.map((r) => `<tr><td>${esc(r.part)}</td><td>${esc(r.turn)}</td><td>${esc(r.status)}</td><td>${r.duration_ms ? esc(Math.round(r.duration_ms / 1000)) + ' s' : '–'}</td>`
           + `<td class="kx-play-cell">${m.status === 'submitted' && r.chunks > 0 ? `<button type="button" class="kx-btn kx-btn-quiet" data-act="play" data-part="${esc(r.part)}" data-turn="${esc(r.turn)}">Aufnahme laden</button>` : '–'}</td></tr>`).join('')
         + '</tbody></table></div><p class="kx-meta">Fehlende Teile einer Aufnahme sind technische Lücken, kein Schweigen.</p>';

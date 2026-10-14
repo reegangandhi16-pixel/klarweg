@@ -86,7 +86,7 @@ export function createPracticeBuilder({ formId, date }) {
   /* Assemble the five form files. hoerenInstructions: { part: asset_id } spoken part instructions. */
   function finish({ rel, label, releaseNote, hoerenInstructions = {}, timingOverrides }) {
     const form = {
-      id: formId, level_config: 'lc:b1@1', kind: 'synthetic', label, status: 'live', rev: 1,
+      id: formId, level_config: 'lc:b1@1', kind: 'synthetic', purpose: 'practice', label, status: 'live', rev: 1,
       release_note: releaseNote,
       modules: [
         { module: 'lesen', parts: [1, 2, 3, 4, 5].map((p) => placement('lesen', p)) },

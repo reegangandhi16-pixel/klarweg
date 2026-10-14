@@ -205,7 +205,7 @@ export const PRACTICE_FORM_P7 = buildPracticeForm({
     t2: { topics: ['Taschengeld für Kinder – ab welchem Alter?', 'Ein eigenes Haus oder eine Mietwohnung?'] },
     t3: {
       partnerFemale: true,
-      partnerTalk: 'Partnerin präsentiert das Thema „Ein eigenes Haus oder eine Mietwohnung?“: Sie wohnt zur Miete, weil sie flexibel bleiben will. Später möchte sie aber ein kleines Haus mit Garten kaufen.',
+      partnerTalk: 'Partnerin: Ich spreche heute über die Frage: Ein eigenes Haus oder eine Mietwohnung? Ich wohne seit fünf Jahren zur Miete in einer Zweizimmerwohnung in der Innenstadt. Das gefällt mir, weil ich flexibel bin: Wenn ich eine neue Stelle in einer anderen Stadt bekomme, kann ich einfach umziehen. Reparaturen bezahlt außerdem der Vermieter, zum Beispiel als letzten Winter die Heizung kaputt war. In meinem Heimatland wollen die meisten Menschen möglichst früh ein eigenes Haus bauen, oft zusammen mit der ganzen Familie. Ein eigenes Haus hat große Vorteile: Man kann den Garten gestalten, wie man will, und im Alter zahlt man keine Miete mehr. Aber ein Haus ist sehr teuer, und viele Menschen haben dreißig Jahre lang Schulden. Ich glaube, für junge Leute ist eine Mietwohnung besser. Später, wenn ich Kinder habe, möchte ich aber gern ein kleines Haus mit Garten kaufen. Zum Schluss: Man sollte nicht kaufen, nur weil es alle tun. Danke.',
       examinerQuestion: 'Prüferin: Haben Sie als Kind Taschengeld bekommen? Was haben Sie damit gemacht?'
     }
   }

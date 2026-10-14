@@ -1,38 +1,58 @@
 # B1 practice library — launch checklist
 
-> **Status:** 2026-10-14. Tracks what is built and tested for the original Klarweg B1 practice library (P1–P15) and
-> what still blocks real learner access. It records decisions; it makes none. Nothing here is deployed: the exam
-> Worker flags default to `off` (`exam-worker/wrangler.toml`), `EXAM_ROUTES` is off in klarweg-access, and no `exam/`
-> path is in `.github/pages-allowlist.txt`.
+> **Status:** 2026-10-14. It records evidence and decisions and makes no decisions. Test names refer to
+> `npm run test:exam` (Node built-ins only) unless the browser suite is named.
 
-## Done (evidence in the repository)
+## 1. Implemented and tested
 
-| Requirement | Evidence |
+| Area | Evidence |
 |---|---|
-| 15 original practice forms, full structure (Lesen 30, Hören 30, Schreiben 3, Sprechen 3) | `exam-content/tools/practice-forms.mjs`; `node exam-content/tools/validate.mjs` (all PASS) |
-| Clearly labelled as Klarweg practice, not an official exam; Hören as TEST AUDIO | `exam-content/test/practice-library.test.mjs` (labels, no provider names) |
-| Keys, one-sentence explanations, evidence spans verbatim in the item's own text or script | `buildPracticeForm` build-time check + library test |
-| Forms distinct from each other (no shared 8-word passage, long stem, topic or prompt) | library test |
-| Balanced answer keys; one length band per part across the library | library test (P1 Hören 1/2 shorter: documented exception) |
-| Keys, explanations and listening scripts stay server-side until the learner submits the module | `exam-worker/test/practice-form.test.mjs` (every form) |
-| Complete attempt per form: scoring, item review, two human ratings, final result with OD-45 wording | `practice-form.test.mjs` (every form) |
-| Least-attempted assignment; every form once before any repeat; idempotent replays | `exam-worker/test/assignment.test.mjs` |
-| Learner releases list forms explicitly; system-test form S0 refused; whole library builds as a learner release | `exam-content/test/release-purpose.test.mjs` |
-| Practice history on the start screen | PR #82; browser E2E |
-| Browser journey (autosave, timer, Hören playback, Schreiben, Sprechen recording, result, history, raters, mobile 390 px without horizontal scroll) | `KX_E2E_ONLY=practice KX_E2E_FORM=pN npm run test:exam:browser` (headless, muted): **PASS for all 15 forms** on 2026-10-14 (one P7 run hung with an idle browser and passed on re-run) |
-| Public-repository boundary (only registered synthetic content, no media, no stray keys) | `node exam-content/tools/check-public-boundary.mjs` |
+| Attempt lifecycle: create (idempotent), module order, submission, completion replay | `security.test` SESSION, `retry-overlap.test`, `lifecycle-concurrency.test`, `e2e-flow.test` |
+| Server timer, grace, auto-submit on close/disconnect, clock skew, accommodations | `e2e-flow.test` TIMER, `timer-recovery.test`, `frontend.test` TIMER (client) |
+| Autosave, lease/second tab, reload recovery, network retry with the same request id | `frontend.test` AUTOSAVE/API client, `timer-recovery.test` RECOVERY, `security.test` lease |
+| Navigation, review step before submit, progress per part | `frontend.test` NAVIGATION + REVIEW, SUBMIT, PROGRESS |
+| Scoring (official tables), item review after submission, rated feedback, results with OD-45 wording | `scoring.golden.test`, `item-review.test`, `rated-feedback.test`, `frontend.test` RESULTS |
+| Writing and speaking rating: two independent raters, round 3 lead, no own attempts | `rating-ui-api.test`, `security.test` rating rules, browser E2E rater flow |
+| Recordings: consent before storage, chunk idempotency, learner-own playback, rater playback rules | `speaking.test`, `learner-recording.test`, `rater-recording.test` |
+| Practice history | `attempt-history.test`, `frontend.test` HISTORY |
+| Least-attempted assignment across P1–P15; idempotent replays keep the form | `assignment.test` |
+| Learner release lists forms explicitly; S0 refused; the whole library builds as a learner release | `release-purpose.test` |
+| Confidentiality: keys, rules, scripts, explanations never in a package; review only after submission, owner only | `security.test`, `practice-form.test` (every form), `item-review.test` |
+| Authorization boundaries: entitlement, roles, media tokens, expired session | `security.test`, `listening-media.test` |
+| 15 forms: validator, originality between forms, balanced keys, length band, explanations that explain and agree with the key, instruction numbering, word targets | `validate.mjs`, `practice-library.test` |
+| Every script recordable as written; Teil 4 speakers = answer options | `audio-plan.test` (`tools/audio-plan.mjs`) |
+| Browser journey per form (Lesen autosave, Hören, Schreiben, Sprechen recording, result, history, two raters, mobile 390 px) | `KX_E2E_ONLY=practice KX_E2E_FORM=pN npm run test:exam:browser`: PASS on all 15 forms (2026-10-14) |
+| Accessibility and responsive basics: labelled controls, legends, skip link, focus ring, 44 px targets, reduced motion, no horizontal scroll on mobile | `frontend.test` ACCESSIBILITY / RESPONSIVE, browser E2E mobile checks |
+| Public-repository boundary | `check-public-boundary.mjs` |
 
-## Blockers — owner or external decisions
+## 2. Implemented, awaiting human review
 
-| Blocker | Needed before | Owner action |
-|---|---|---|
-| **OD-14 real Hören audio** (vendor, EX-06 licence, voice cast, MOS review) | Any learner-facing Hören | See `OD-14-AUDIO-VENDOR-RESEARCH.md` §5 (OD-14a–e) |
-| **Learner release set** | Building a learner release | Choose which practice forms go into it (mechanism ready; no default chosen) |
-| **Content review (EX-03 panel / native reviewers)** | Release of any form | Forms are engineering-authored and validated, but not yet reviewed by native B1 item writers |
-| **EX-01 privacy review** | Real recordings | External review |
-| **P-19 consent withdrawal** policy | Real recordings | Owner decision (OPEN) |
-| **P-20 / OD-21 retention**; PR #76 stays unmerged | Real recordings | Owner confirms P-20 scope; EX-01 |
-| **OD-19 rater/admin 2FA** | Pilot | Choose the second-factor method in klarweg-access; then enforce for rater/admin roles |
-| **EX-02 raters** | Rated Schreiben/Sprechen results | Recruit and train raters |
-| **D1 / Worker provisioning, flags, EXAM_ROUTES, secrets** | Any environment with learners | Owner-run operations (not done by engineering) |
-| **OD-20 same-site domain** | Pilot | Owner / infrastructure |
+| Item | What is missing |
+|---|---|
+| Content of P1–P15 (texts, items, keys, explanations, partner talks) | **EX-03** (panel not formed): review by native B1 item writers. Machine checks are not native-speaker validation. Plan per register §C.1: reviewers A and B (teachers) rate every item independently (verdict, ambiguity_risk, inference_demand, distractor_strength); C (native linguist) signs off key and distractors, originality and item accessibility; disagreements are revised or withdrawn (EX-03/O7), with no carry-forward (O6). Sheets: `node exam-content/tools/review-sheet.mjs <dir outside the repo> [p3 …]` (HTML to fill in plus a JSON record per form). Suggested start: P3, P8, P13, then the rest. |
+| Accessibility | Manual screen-reader and keyboard pass on the learner screens (automated checks only so far); EX-04 |
+| Sprechen Teil 3 partner talks | About 1.5 min each; OD-32 describes about 3 min for the mock. The owner/reviewers must accept the length for practice or ask for longer talks. |
+
+## 3. Blocked by owner or external decisions
+
+| Decision | Blocks |
+|---|---|
+| **OD-14a–e** vendor, licence (EX-06), voice cast, 10 raters, disclosure (see `OD-14-AUDIO-VENDOR-RESEARCH.md` §7) | Real Hören and Sprechen partner audio |
+| **Learner release set** (which forms) | Building a learner release |
+| **EX-01** privacy review; **P-19** consent withdrawal; **P-20** retention (PR #76 stays unmerged, retention off) | Real recordings |
+| **OD-19** rater/admin 2FA (method not chosen) | Pilot |
+| **EX-02** rater recruitment and training | Rated Schreiben/Sprechen results for learners |
+| **OD-20** same-site domain | Pilot |
+
+## 4. Not implemented
+
+| Item | Note |
+|---|---|
+| Real audio files | Waits for OD-14; files would live in the private content repository |
+| Rater/admin second factor | Needs an Access auth method (OD-19) |
+| Consent withdrawal flow | Policy P-19 open |
+| Partner talk matched to the learner's topic | The partner always presents topic 2, so a learner who chooses topic 2 hears the same topic, not "a different topic" (OD-32) |
+
+## 5. Not deployed
+Exam Worker flags all `off` (`exam-worker/wrangler.toml`); `EXAM_ROUTES` off in klarweg-access; no `exam/` path in
+`.github/pages-allowlist.txt`; engineering ran no remote D1, R2, Wrangler or secrets operations; no learner release built.

@@ -204,7 +204,7 @@ export const PRACTICE_FORM_P12 = buildPracticeForm({
     t2: { topics: ['Sollen Kinder schon mit einem Jahr in die Kita?', 'Im Urlaub für die Arbeit erreichbar sein?'] },
     t3: {
       partnerFemale: false,
-      partnerTalk: 'Partner präsentiert das Thema „Im Urlaub für die Arbeit erreichbar sein?“: Er liest im Urlaub keine E-Mails, weil er sich sonst nicht erholt. Seine Chefin akzeptiert das.',
+      partnerTalk: 'Partner: Heute geht es um Erreichbarkeit: Sollte man im Urlaub für die Arbeit erreichbar sein? Ich arbeite in einer Firma für Software, und früher habe ich im Urlaub jeden Tag meine E-Mails gelesen. Ich dachte, ohne mich funktioniert nichts. Nach einem Urlaub am Meer war ich trotzdem total müde, weil ich innerlich nie frei hatte. Seit zwei Jahren lese ich im Urlaub keine E-Mails mehr. Vorher übergebe ich alles an eine Kollegin, und meine Chefin akzeptiert das. In meinem Heimatland ist es normal, dass der Chef auch am Wochenende anruft, und viele Leute finden das in Ordnung. Für die Erreichbarkeit spricht, dass man bei einem echten Notfall helfen kann. Dagegen spricht, dass man sich nicht erholt und später schneller krank wird. Ich finde, Firmen sollten klare Regeln machen, zum Beispiel eine Vertretung für jeden Urlaub. Mein Fazit: Urlaub ist Urlaub, und eine gute Firma kann zwei Wochen ohne mich arbeiten. Vielen Dank fürs Zuhören.',
       examinerQuestion: 'Prüferin: Wie war das bei Ihnen oder in Ihrer Familie: Wann sind die Kinder in die Kita gekommen?'
     }
   }

@@ -210,7 +210,7 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
     t2: { topics: ['Allein reisen oder in einer Gruppe?', 'Kleidung aus zweiter Hand kaufen?'] },
     t3: {
       partnerFemale: true,
-      partnerTalk: 'Partnerin präsentiert das Thema „Kleidung aus zweiter Hand kaufen?“: Sie kauft viele Sachen auf Flohmärkten, weil das billiger ist und der Umwelt hilft. Neue Schuhe kauft sie aber lieber im Geschäft.',
+      partnerTalk: 'Partnerin: Ich spreche heute über Kleidung aus zweiter Hand. Seit ungefähr drei Jahren kaufe ich fast alles gebraucht, vor allem auf Flohmärkten und in einem kleinen Laden in meiner Straße. Angefangen hat das, als meine Tochter so schnell gewachsen ist, dass neue Hosen nach wenigen Monaten zu klein waren. In meinem Heimatland war gebrauchte Kleidung lange etwas für arme Leute, heute ist es bei jungen Menschen dagegen richtig modern. Der größte Vorteil ist der Preis: Für einen Wintermantel habe ich nur zwölf Euro bezahlt. Außerdem hilft es der Umwelt, wenn Kleidung länger getragen wird. Ein Nachteil ist, dass man viel Zeit zum Suchen braucht, und oft findet man nicht die richtige Größe. Schuhe und Unterwäsche kaufe ich deshalb immer neu im Geschäft. Ich finde, man sollte zuerst schauen, ob es etwas gebraucht gibt, bevor man neu kauft. Zum Schluss ein Tipp: Viele Städte haben Tauschpartys, dort bekommt man Kleidung sogar kostenlos. Danke schön.',
       examinerQuestion: 'Prüferin: Was ist für Sie auf einer Reise am wichtigsten – und warum?'
     }
   }

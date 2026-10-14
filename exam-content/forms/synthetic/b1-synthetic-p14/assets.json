@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p14-l1-text",
+    "kind": "text",
+    "label": "E-Mail",
+    "text": {
+      "lang": "de",
+      "body_md": "Liebe Fatou,\n\njetzt bin ich schon sechs Monate in Deutschland! In meiner Heimat habe ich als Krankenschwester gearbeitet, aber hier muss mein Abschluss erst anerkannt werden. Dafür brauche ich ein Sprachzertifikat auf B2-Niveau. Im Moment besuche ich einen Deutschkurs am Vormittag, und nachmittags arbeite ich als Pflegehelferin in einem Seniorenheim.\n\nDie Arbeit gefällt mir, auch wenn ich weniger Verantwortung habe als früher. Die Bewohnerinnen und Bewohner sind sehr geduldig mit meinem Deutsch, und eine alte Dame bringt mir sogar Lieder aus ihrer Jugend bei. Schwierig finde ich nur die vielen Dokumentationen am Computer.\n\nWenn alles klappt, mache ich im Mai die Prüfung. Danach kann ich hoffentlich wieder als Pflegefachkraft arbeiten. Drück mir die Daumen!\n\nDeine Amira"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Hörsaal für Seniorinnen und Senioren\n\nDie Hochschule Eichstein öffnet ab dem Wintersemester ausgewählte Vorlesungen für Menschen über 60. Zur Auswahl stehen Fächer wie Geschichte, Kunst und Biologie. Eine Prüfung müssen die Gasthörer nicht machen, einen Abschluss bekommen sie aber auch nicht. Die Gebühr beträgt 90 Euro pro Semester. Viele Professorinnen und Professoren freuen sich über die neuen Zuhörer, weil sie oft interessante Fragen stellen. Anmelden kann man sich bis Ende September im Studierendenbüro."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Der Laden gehört dem Dorf\n\nAls der letzte Supermarkt in Hollbach vor zwei Jahren schloss, mussten die Bewohner für jedes Brot sechs Kilometer fahren. Jetzt haben 230 Bürgerinnen und Bürger zusammen einen Dorfladen gegründet: Jeder hat mindestens 100 Euro gegeben und ist damit Mitbesitzer. Im Laden arbeiten zwei Angestellte und viele Ehrenamtliche. Es gibt Lebensmittel von Bauern aus der Gegend, aber auch Waschmittel und Zeitungen. Besonders beliebt ist die kleine Kaffee-Ecke, in der man sich zum Plaudern trifft."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Segeln lernen am Wochenende: Schnupperkurs für Erwachsene, Boote und Westen werden gestellt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bügelservice: Wir holen Ihre Hemden ab und bringen sie gebügelt zurück."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kinderkleidung von 0 bis 6 Jahren – Basar im Gemeindehaus, Sonntag 10–13 Uhr."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Klavierunterricht für Kinder ab 5 Jahren, bei Ihnen zu Hause."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Schuhmacher: Reparatur von Schuhen, Taschen und Gürteln – Express in 24 Stunden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gesprächskreis für Eltern von Kindern mit ADHS, einmal im Monat."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Englisch für die Reise – Online-Kurs am Abend für Senioren."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gartenhäuschen aus Holz, selbst abzubauen und abzuholen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Beratung für Existenzgründer: So machen Sie sich selbstständig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Biohof sucht Erntehelfer für die Kartoffelernte im September."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Larissa, 25: Elefanten und Löwen gehören nicht in einen Wagen, der jede Woche in eine andere Stadt fährt. Ich bin klar für ein Verbot."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Roberto, 54: Meine Familie hat seit vier Generationen einen Zirkus. Unsere Tiere werden gut versorgt und regelmäßig vom Tierarzt untersucht. Ein Verbot wäre unser Ende."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kerstin, 39: Meine Kinder haben einmal einen Tiger im Zirkus gesehen. Er lief die ganze Zeit hin und her. Das war traurig. Wilde Tiere sollten dort nicht mehr auftreten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Werner, 66: Für viele Kinder ist der Zirkus die einzige Möglichkeit, ein Zebra oder ein Kamel live zu sehen. Das sollte man nicht verbieten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Aylin, 31: Es gibt tolle Zirkusse nur mit Artisten und Clowns. Die zeigen, dass es auch ohne Tiere geht. Deshalb bin ich für das Verbot."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bruno, 47: Ich finde, man sollte genauer kontrollieren, statt alles zu verbieten. Schlechte Zirkusse müssen schließen, gute dürfen weitermachen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hanna, 19: Im Zoo haben die Tiere wenigstens große Gehege. Im Zirkus ist einfach zu wenig Platz. Ein Verbot ist überfällig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gisela, 58: Pferde und Hunde im Zirkus finde ich in Ordnung, die leben ja auch sonst mit Menschen. Bei Wildtieren bin ich unsicher, aber alle Tiere zu verbieten finde ich falsch."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hinweise für Besucherinnen und Besucher – Klinikum Eichstein\n\n1. Besuchszeiten: Besuche sind täglich von 14 bis 19 Uhr möglich. Auf der Intensivstation sprechen Sie die Zeit bitte vorher mit dem Personal ab.\n\n2. Anzahl: Pro Patient dürfen höchstens zwei Personen gleichzeitig im Zimmer sein. Kinder unter 12 Jahren sind nur in Begleitung erlaubt.\n\n3. Blumen: Topfpflanzen sind aus hygienischen Gründen nicht erlaubt. Schnittblumen dürfen Sie gern mitbringen, außer auf der Intensivstation.\n\n4. Parken: Besucher parken im Parkhaus P2. Die erste Stunde ist kostenlos."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage beim Sportfest: Liebe Eltern, der Staffellauf der Grundschulkinder beginnt in zehn Minuten auf dem großen Platz hinter der Turnhalle.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Änderungsschneiderei: Guten Tag, Herr Varga, hier ist die Schneiderei Nadelöhr. Ihre Hose ist fertig, wir haben sie um drei Zentimeter gekürzt. Sie können sie morgen ab zehn Uhr abholen. Wir haben dienstags bis samstags geöffnet.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiomeldung: Wegen des Weinfests ist die Altstadt von Eichstein am Wochenende für Autos gesperrt. Die Busse fahren eine Umleitung über die Ringstraße. Besucher werden gebeten, mit dem Zug oder dem Fahrrad anzureisen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage im Kaufhaus: Liebe Kunden, die Rolltreppe zwischen dem ersten und dem zweiten Stock ist leider defekt. Bitte benutzen Sie die Aufzüge neben dem Haupteingang oder das Treppenhaus.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht vom Sohn: Hallo Papa, hier ist Leon. Ich komme heute später nach Hause, weil wir nach der Schule noch für das Referat in der Bibliothek arbeiten. Ich esse bei Jakob, du musst also nicht für mich kochen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage der Theaterkasse: Sie haben die Theaterkasse Eichstein erreicht. Für die Vorstellung „Die Wanderin“ am Samstag gibt es nur noch Restkarten an der Abendkasse. Bestellte Karten können Sie bis eine halbe Stunde vor Beginn abholen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ahoi und herzlich willkommen beim Segelverein Eichsee! Heute Vormittag lernen Sie an Land die wichtigsten Begriffe und Knoten. Nach dem Mittagessen geht es dann aufs Wasser, immer zu dritt in einem Boot mit einem Trainer. Rettungswesten sind Pflicht, auch für gute Schwimmer. Handys lassen Sie bitte im Vereinsheim, im Boot werden sie schnell nass. Wer nach dem Kurs Mitglied wird, bekommt den Kurspreis zurück.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Lena: Jakob, wir müssen über den Putzplan reden. Das Bad war diese Woche schon wieder nicht sauber.\nJakob: Oh, das tut mir leid. Ich hatte drei Prüfungen und habe es total vergessen.\nLena: Verstehe ich. Aber dann sag doch Bescheid, dann tauschen wir.\nJakob: Du hast recht. Ich mache das Bad heute Abend und nächste Woche auch noch die Küche.\nLena: Okay, danke. Und noch etwas: Der Kühlschrank ist voll mit alten Sachen. Wem gehört der Käse ganz hinten?\nJakob: Der gehört Nils, glaube ich. Aber der ist seit zwei Wochen bei seinen Eltern.\nLena: Dann werfe ich ihn weg. Sollen wir für den Putzplan vielleicht eine App benutzen? Die erinnert einen automatisch.\nJakob: Gute Idee. Ich lade sie heute noch herunter.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderatorin: Guten Abend! Gurken in Folie, Äpfel in Plastikschalen – sollen Supermärkte auf Verpackungen aus Plastik verzichten? Ich spreche mit Herrn Brandl, er hat einen Laden für unverpackte Lebensmittel, und mit Frau Schmid, Mutter von drei Kindern.\nHerr Brandl: Bei mir bringen die Kunden ihre eigenen Gläser und Dosen mit. Am Anfang ist das ungewohnt, aber nach ein paar Wochen ist es ganz normal.\nFrau Schmid: Für eine große Familie ist das schwierig. Ich kaufe einmal pro Woche viel ein und kann nicht zwanzig Gläser mitnehmen.\nModeratorin: Ist Einkaufen ohne Verpackung nicht auch teurer?\nHerr Brandl: Nicht unbedingt. Man kauft nur so viel, wie man braucht, und wirft weniger weg.\nFrau Schmid: In unserem Supermarkt kostet loses Obst manchmal mehr als verpacktes. Das verstehe ich nicht.\nModeratorin: Gleich kommt eine Frage von einem Hörer.\nHerr Brandl: Ich wünsche mir, dass auch große Supermärkte Abfüllstationen für Nudeln und Reis anbieten.\nFrau Schmid: Und ich wünsche mir, dass die Politik klare Regeln macht, statt alles den Kunden zu überlassen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "In Ihre Wohngemeinschaft ist ein neuer Mitbewohner eingezogen. Ihre Schwester Elif möchte wissen, wie er ist. Schreiben Sie Elif eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Wer ist der neue Mitbewohner?\n– Begründen Sie: Was finden Sie gut, was nicht so gut?\n– Laden Sie Elif zu einem Besuch ein."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben im Radio eine Sendung zum Thema „Kinder im Sportverein“ gehört. Im Online-Gästebuch der Sendung finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thorsten: Mein Sohn hat jeden Tag Training, am Wochenende sind Spiele. Für Freunde und Hausaufgaben bleibt kaum Zeit. Ist das zu viel für ein Kind?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie ziehen in eine andere Stadt und möchten Ihre Mitgliedschaft im Sportverein kündigen. Schreiben Sie an Herrn Lorenz vom Verein. Nennen Sie den Grund und bitten Sie um eine Bestätigung (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir wollen doch für Frau Peters ein Abschiedsfest machen. Wo könnten wir feiern?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Schöne Idee. Was könnten wir ihr schenken?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gut. Und wer hält eine kleine Rede?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihre Nachbarin, Frau Peters, zieht nach 30 Jahren aus Ihrem Haus aus. Sie möchten mit den anderen Nachbarn ein kleines Abschiedsfest für sie organisieren.\n\n– Wann?\n– Wo?\n– Geschenk?\n– Essen?\n– Wer sagt ein paar Worte?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Tattoos – Kunst oder später ein Problem?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Das ganze Leben am selben Ort wohnen?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner präsentiert das Thema „Das ganze Leben am selben Ort wohnen?“: Er ist in seinem Leben schon sechsmal umgezogen. Er findet es spannend, aber seine alten Freunde fehlen ihm manchmal.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p14-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Was denken Sie: Würden Sie selbst ein Tattoo tragen? Warum oder warum nicht?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

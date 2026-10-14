@@ -16,14 +16,15 @@
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
    KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice runs one scenario). A fourth scenario runs one complete attempt on
-   the synthetic PRACTICE form P1 plus rating by two raters (see runPractice). Chrome always runs with --mute-audio. */
+   the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
+   Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { startDevServer } from './dev-server.mjs';
-import { call, rid, pkgFor, syntheticBuild } from './harness.mjs';
+import { call, rid, pkgFor, syntheticBuild, PRACTICE_LIBRARY } from './harness.mjs';
 import { post, start, submit, uploadChunk } from './flow.mjs';
 
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -441,13 +442,19 @@ async function runDefaultAutoplayHoeren(viewport) {
 
 const results = [];
 const ONLY = process.env.KX_E2E_ONLY || '';
-/* PRACTICE (form P1, realistic synthetic content): one complete attempt as learner, then rating as two raters, in one
+/* KX_E2E_FORM=p1…p15 picks the practice form for the practice scenario (default p1) */
+const PRACTICE = PRACTICE_LIBRARY.find((f) => f.name.toLowerCase() === (process.env.KX_E2E_FORM || 'p1').toLowerCase());
+if (!PRACTICE) { console.error(`unknown KX_E2E_FORM=${process.env.KX_E2E_FORM}`); process.exit(2); }
+const PRACTICE_ASSETS = JSON.parse(fs.readFileSync(path.join(PRACTICE.dir, 'assets.json'), 'utf8'));
+const PRACTICE_L1_START = PRACTICE_ASSETS.find((a) => a.id.endsWith('-l1-text')).text.body_md.split('\n')[0];
+const PRACTICE_H3_LAST = PRACTICE_ASSETS.find((a) => a.id.endsWith('-h3')).script_de.split('\n').pop();   // shown only in the post-submission review
+/* PRACTICE (form P1 or KX_E2E_FORM, realistic synthetic content): one complete attempt as learner, then rating as two raters, in one
    headless, muted browser. Proves: Lesen autosave; the item review is refused before and exact after submission; full
    Hören playback; Schreiben; Sprechen recording; result + review tables; outsider and learner refused on the rater
    screen and API; rater validation and keyboard reach; two raters → final scores on the learner's result; mobile
    layout without horizontal scroll; no uncaught errors. Users are the dev server's local test users (cookie). */
 async function runPractice() {
-  const dev = await startDevServer({ form: 'p1' });
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase() });
   const b = await launch();
   const { send } = b;
   try {
@@ -483,7 +490,7 @@ async function runPractice() {
     await click('[data-act="create"]');
     await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`); await click('[data-act="start"][data-module="lesen"]');
     await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
-    assert.match(await text(), /Lindenau/, 'realistic practice text is shown');
+    assert.ok((await text()).includes(PRACTICE_L1_START), `realistic practice text is shown: ${PRACTICE_L1_START}`);
     const attempt = (await dev.env.DB.prepare('SELECT id FROM attempts').first()).id;
     const lesen = (await dev.env.DB.prepare("SELECT item_id, display_no FROM items_index WHERE module = 'lesen' AND is_example = 0").all()).results;
     const wrong = (id) => { const k = keys[id]; return ['richtig', 'falsch'].includes(k) ? (k === 'richtig' ? 'falsch' : 'richtig') : ['ja', 'nein'].includes(k) ? (k === 'ja' ? 'nein' : 'ja') : k === 'a' ? 'b' : 'a'; };
@@ -542,7 +549,7 @@ async function runPractice() {
     assert.equal(await evaluate(`document.querySelectorAll('.kx-review-items')[0].querySelector('.kx-transcripts')`), null, 'no scripts for Lesen');
     await click('.kx-transcripts summary');
     assert.equal(await evaluate(`document.querySelectorAll('.kx-transcripts h3').length`), 8, 'Hören scripts after submission');
-    assert.match(await text(), /Nora: Am Samstag ja\. Am Sonntag besuche ich meine Eltern\./);
+    assert.ok((await text()).includes(PRACTICE_H3_LAST), `the Hören Teil 3 script is shown: ${PRACTICE_H3_LAST}`);
     // the learner's own recordings: listed after submission, loaded only on request, never autoplayed
     assert.ok(await evaluate(`document.querySelectorAll('[data-act="my-recording"]').length >= 1`), 'own recordings listed');
     await click('[data-act="my-recording"]');
@@ -655,7 +662,7 @@ async function runPractice() {
     assert.equal(final.length, 2);
     for (const f of final) assert.match(res, new RegExp(`${f.module === 'schreiben' ? 'Schreiben' : 'Sprechen'}\\s+${f.points} / 100`));
     const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
-    log('practice P1', 'PASS', { lesen: '10/10/10', hoeren: '30/30', ratings: 14, final: final.map((f) => `${f.module}:${f.points}`) });
+    log(`practice ${PRACTICE.name}`, 'PASS', { lesen: '10/10/10', hoeren: '30/30', ratings: 14, final: final.map((f) => `${f.module}:${f.points}`) });
     return exceptions;
   } finally { b.close(); dev.server.close(); }
 }
@@ -665,7 +672,7 @@ const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (def
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
-  if (name === 'practice') { results.push({ vp: 'practice P1 (desktop + mobile checks)', uncaught: await fn() }); continue; }
+  if (name === 'practice') { results.push({ vp: `practice ${PRACTICE.name} (desktop + mobile checks)`, uncaught: await fn() }); continue; }
   for (const vp of VIEWPORTS) results.push({ vp: vp.name + suffix, uncaught: await fn(vp) });
 }
 console.log(JSON.stringify(results));

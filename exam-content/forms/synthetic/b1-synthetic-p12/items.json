@@ -1,0 +1,5035 @@
+[
+  {
+    "id": "itm:b1:p12-l1-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:p12-l1",
+    "is_example": true,
+    "interaction": "binary_choice",
+    "stem": "Beispiel: Jonas besucht abends eine Schule.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "richtig"
+  },
+  {
+    "id": "itm:b1:p12-l1-01",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:p12-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "1. Jonas hat die Schule früher verlassen, weil er arbeiten wollte.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l1-text",
+        "start": 171,
+        "end": 211
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Jonas wollte mit 16 unbedingt Geld verdienen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l1-02",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:p12-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "2. Der Unterricht findet an fünf Abenden pro Woche statt.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l1-text",
+        "start": 274,
+        "end": 318
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Der Unterricht ist an vier Abenden, Montag bis Donnerstag."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l1-03",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:p12-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "3. Jonas hat seine Arbeit im Lager aufgegeben.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l1-text",
+        "start": 350,
+        "end": 386
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Jonas arbeitet weiter im Lager, nur weniger Stunden."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l1-04",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:p12-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "4. Jonas ist der älteste Schüler in seiner Klasse.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l1-text",
+        "start": 565,
+        "end": 595
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Jonas schreibt, dass er nicht der Älteste ist."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l1-05",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:p12-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "5. In Mathematik hat Jonas die meisten Probleme.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l1-text",
+        "start": 598,
+        "end": 639
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Mathematik ist für Jonas am schwierigsten."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l1-06",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:p12-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "6. Die Lerngruppe am Samstag kostet nichts.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l1-text",
+        "start": 658,
+        "end": 693
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die Lerngruppe am Samstag ist kostenlos."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l2-07",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:p12-l2a",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "7. Die Betriebe machen mit, weil sie …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "mehr Kunden wollen."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "neue Werkzeuge zeigen möchten."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Auszubildende suchen."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l2a-text",
+        "start": 236,
+        "end": 292
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Viele Betriebe finden keine Auszubildenden mehr."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l2-08",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:p12-l2a",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "8. Zwischen den Werkstätten …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "fährt ein Gratis-Bus."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "muss man zu Fuß gehen."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "kann man Fahrräder leihen."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l2a-text",
+        "start": 293,
+        "end": 359
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Ein kostenloser Bus fährt zwischen den Werkstätten."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l2-09",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:p12-l2a",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "9. Einen Kinogutschein bekommt man, wenn man …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "etwas kauft."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "fünf Stempel sammelt."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "sich für eine Ausbildung bewirbt."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l2a-text",
+        "start": 360,
+        "end": 414
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Für fünf Stempel gibt es einen Kinogutschein."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l2-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:p12-l2a",
+    "is_example": true,
+    "interaction": "mcq_single",
+    "stem": "Beispiel: Am Samstag kann man …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Werkstätten besuchen."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Werkzeuge kaufen."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "eine Prüfung machen."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "a"
+  },
+  {
+    "id": "itm:b1:p12-l2-10",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:p12-l2b",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "10. Im Café arbeiten …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "nur Menschen mit Behinderung."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Menschen mit und ohne Behinderung."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "nur Ehrenamtliche."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l2b-text",
+        "start": 76,
+        "end": 127
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Im Café arbeiten Menschen mit und ohne Behinderung zusammen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l2-11",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:p12-l2b",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "11. Die Gäste kommen vor allem, weil …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "der Kuchen gut ist."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "die Preise niedrig sind."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "das Café am Wasser liegt."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l2b-text",
+        "start": 325,
+        "end": 375
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die Gäste kommen vor allem wegen des Kuchens."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l2-12",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:p12-l2b",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "12. Im Sommer …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "schließt das Café."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "gibt es neue Mitarbeiter."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "soll es eine Terrasse geben."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l2b-text",
+        "start": 377,
+        "end": 427
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Im Sommer soll eine Terrasse dazukommen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l3-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:p12-l3",
+    "is_example": true,
+    "interaction": "matching_pool",
+    "stem": "Beispiel: Sie möchten mit Ihren Kindern einen Drachen bauen.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "a"
+  },
+  {
+    "id": "itm:b1:p12-l3-13",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:p12-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "13. Ihre Mutter sitzt im Rollstuhl, und Sie suchen eine passende Ferienunterkunft.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l3-ad-i",
+        "start": 0,
+        "end": 31
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die Ferienwohnung (i) ist rollstuhlgerecht und barrierefrei."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l3-14",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:p12-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "14. Viele Kollegen in Ihrer Firma haben Rückenschmerzen vom Sitzen.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l3-ad-b",
+        "start": 22,
+        "end": 53
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Bei der Rückenschule (b) kommt ein Trainer in die Firma."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l3-15",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:p12-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "15. Sie heiraten bald, möchten aber kein teures Kleid kaufen.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l3-ad-c",
+        "start": 0,
+        "end": 43
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Beim Verleih (c) kann man Brautkleider leihen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l3-16",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:p12-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "16. Sie fangen im Oktober an zu studieren und haben noch kein Zimmer.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l3-ad-f",
+        "start": 0,
+        "end": 43
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Das Studentenwerk (f) hilft Studierenden bei der Wohnungssuche."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l3-17",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:p12-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "17. Ihr Sohn ist sechs und will endlich ohne Hilfe Rad fahren.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l3-ad-j",
+        "start": 0,
+        "end": 40
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Der Kurs (j) bringt Kindern Radfahren ohne Stützräder bei."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l3-18",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:p12-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "18. Sie möchten zu Hause schöne Bilder von Ihrer Familie haben.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l3-ad-h",
+        "start": 0,
+        "end": 42
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Der Familienfotograf (h) kommt nach Hause."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l3-19",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:p12-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "19. Sie suchen günstige Gitarrenstunden für Ihre Tochter.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l3-ad-d",
+        "start": 0,
+        "end": 34
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Es gibt nur ein Klavier zu verschenken (d), keinen Gitarrenunterricht: 0."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l4-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:p12-l4",
+    "is_example": true,
+    "interaction": "binary_choice",
+    "stem": "Beispiel: Bianca, 42",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "ja"
+  },
+  {
+    "id": "itm:b1:p12-l4-20",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:p12-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "20. Tom, 35",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l4-c1",
+        "start": 110,
+        "end": 131
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Tom fühlt sich mit seinen Kindern ausgeschlossen und findet das unfair."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l4-21",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:p12-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "21. Erika, 69",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l4-c2",
+        "start": 42,
+        "end": 76
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Erika stört der Lärm von Kindern nicht."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l4-22",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:p12-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "22. Jannik, 30",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l4-c3",
+        "start": 111,
+        "end": 153
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Jannik findet ein Verbot für manche Lokale sinnvoll."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l4-23",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:p12-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "23. Sevda, 38",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l4-c4",
+        "start": 117,
+        "end": 146
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Sevda will die Eltern ansprechen statt Kinder auszuschließen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l4-24",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:p12-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "24. Konstantin, 52",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l4-c5",
+        "start": 135,
+        "end": 149
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Konstantin möchte, dass jeder Wirt selbst entscheiden darf."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l4-25",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:p12-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "25. Ilse, 74",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l4-c6",
+        "start": 93,
+        "end": 145
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Ilse versteht Wirte, die keine Kinder wollen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l4-26",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:p12-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "26. Rami, 28",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l4-c7",
+        "start": 103,
+        "end": 130
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Rami findet Lösungen wie eine Spielecke besser als ein Verbot."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l5-27",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 5,
+    "task_id": "tsk:b1:p12-l5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "27. Ein Erwachsener darf mit …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "höchstens zwei Kindern klettern."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "beliebig vielen Kindern klettern."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "keinem Kind klettern."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l5-text",
+        "start": 121,
+        "end": 172
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Regel 1: Ein Erwachsener darf höchstens zwei Kinder begleiten."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l5-28",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 5,
+    "task_id": "tsk:b1:p12-l5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "28. Vor dem Klettern muss man …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "einen Test machen."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "an einer Einweisung teilnehmen."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "ein Formular online ausfüllen."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l5-text",
+        "start": 189,
+        "end": 258
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Regel 2: Vor dem Klettern gibt es eine Einweisung für alle."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l5-29",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 5,
+    "task_id": "tsk:b1:p12-l5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "29. Wer lange Haare hat, …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "muss einen Helm kaufen."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "darf nicht klettern."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "muss sie zusammenbinden."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l5-text",
+        "start": 362,
+        "end": 405
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Regel 3: Lange Haare müssen zusammengebunden werden."
+    }
+  },
+  {
+    "id": "itm:b1:p12-l5-30",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 5,
+    "task_id": "tsk:b1:p12-l5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "30. Wenn der Park wegen Gewitter schließt, …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "bekommt man einen Gutschein."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "bekommt man Bargeld zurück."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "bekommt man nichts zurück."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-l5-text",
+        "start": 465,
+        "end": 517
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Regel 4: Das Eintrittsgeld wird als Gutschein erstattet."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-01",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-ex",
+    "is_example": true,
+    "interaction": "binary_choice",
+    "stem": "01 Beispiel: Das Spiel beginnt später.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "richtig"
+  },
+  {
+    "id": "itm:b1:p12-h1-02",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-ex",
+    "is_example": true,
+    "interaction": "mcq_single",
+    "stem": "02 Beispiel: Das Spiel beginnt um …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "15.30 Uhr."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "16 Uhr."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "16.30 Uhr."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "b"
+  },
+  {
+    "id": "itm:b1:p12-h1-01x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "1. Frau Sommer hat alle Unterlagen.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t1",
+        "start": 105,
+        "end": 137
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Ihr fehlt noch die Bescheinigung der Krankenkasse."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-02x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t1",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "2. Herr Aydın soll die Bescheinigung …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "persönlich bringen."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "per Post schicken."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "per E-Mail schicken."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t1",
+        "start": 211,
+        "end": 230
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Frau Sommer möchte die Bescheinigung am besten per Post."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-03x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t2",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "3. Im Sommer fehlen Blutspenden.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t2",
+        "start": 65,
+        "end": 108
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Im Sommer sind viele Spender im Urlaub."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-04x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "4. Blut spenden kann man …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "in der Stadthalle."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "im Krankenhaus."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "in der Schule."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t2",
+        "start": 149,
+        "end": 179
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Man spendet in der Stadthalle."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-05x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "5. Der Lesesaal ist heute bis 19 Uhr offen.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t3",
+        "start": 63,
+        "end": 132
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Der Lesesaal schließt heute schon um 17 Uhr."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-06x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t3",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "6. Bis 19 Uhr kann man …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "im Lesesaal lernen."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "die Veranstaltung besuchen."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Bücher ausleihen."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t3",
+        "start": 134,
+        "end": 194
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die Ausleihe ist bis 19 Uhr geöffnet."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-07x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "7. Das Training findet am Mittwoch statt.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t4",
+        "start": 93,
+        "end": 120
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Das Training ist auf Mittwoch verschoben."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-08x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t4",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "8. Der Grund für die Änderung ist …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "das Wetter."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "eine Arbeit am Platz."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "ein Spiel."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t4",
+        "start": 122,
+        "end": 154
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Der Platz wird neu markiert."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-09x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t5",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "9. Der Recyclinghof ist samstags bald länger offen.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t5",
+        "start": 92,
+        "end": 129
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Samstags ist der Hof ab November kürzer geöffnet."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h1-10x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:p12-h1-t5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "10. Kostenlos abgeben kann man …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Bauschutt."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Möbel."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Elektrogeräte."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h1-t5",
+        "start": 131,
+        "end": 168
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Elektrogeräte kann man kostenlos abgeben."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h2-11",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:p12-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "11. An der Schule lernen …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "etwa 1 800 Auszubildende."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "nur Köche."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "vierzehn Klassen."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h2",
+        "start": 63,
+        "end": 123
+      }
+    ],
+    "feedback": {
+      "explanation_de": "An der Schule lernen etwa 1 800 Auszubildende."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h2-12",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:p12-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "12. Geschlossen ist heute …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "die Mensa."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "die Schweißerei."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "die Aula."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h2",
+        "start": 173,
+        "end": 231
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die Schweißerei ist aus Sicherheitsgründen geschlossen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h2-13",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:p12-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "13. Das Mittagessen kochen …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Lehrer."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Eltern."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Auszubildende."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h2",
+        "start": 261,
+        "end": 315
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die angehenden Köche kochen das Mittagessen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h2-14",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:p12-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "14. Das Mittagessen …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "ist kostenlos."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "kostet drei Euro."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "gibt es nur für Schüler."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h2",
+        "start": 317,
+        "end": 337
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Das Mittagessen kostet drei Euro."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h2-15",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:p12-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "15. Um 14 Uhr informiert die Schule über …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "freie Ausbildungsplätze."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "die Prüfungen."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "neue Werkstätten."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h2",
+        "start": 369,
+        "end": 411
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Um 14 Uhr gibt es Informationen zu freien Ausbildungsplätzen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h3-16",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:p12-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "16. Der Hausmeister hat Frau Lindemann von dem Garten erzählt.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h3",
+        "start": 114,
+        "end": 151
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Der Hausmeister hat ihr vom Garten erzählt."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h3-17",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:p12-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "17. Die Beete sollen vor dem Haus entstehen.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h3",
+        "start": 153,
+        "end": 193
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die Beete entstehen hinter der Garage."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h3-18",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:p12-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "18. Die Hausverwaltung bezahlt das Material.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h3",
+        "start": 220,
+        "end": 269
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die Hausverwaltung bezahlt Erde und Holz."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h3-19",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:p12-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "19. Frau Lindemann hilft beim Bauen der Beete.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h3",
+        "start": 326,
+        "end": 381
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Wegen ihres Rückens kann Frau Lindemann nicht beim Bauen helfen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h3-20",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:p12-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "20. Das Treffen zum Bauen ist am Samstagvormittag.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h3",
+        "start": 460,
+        "end": 509
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Man trifft sich am Samstag um zehn Uhr."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h3-21",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:p12-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "21. Frau Novak möchte Kartoffeln anpflanzen.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h3",
+        "start": 634,
+        "end": 668
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Frau Novak möchte Tomaten und Kräuter, keine Kartoffeln."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h3-22",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:p12-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "22. Frau Lindemann bringt am Samstag etwas zu essen mit.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h3",
+        "start": 685,
+        "end": 724
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Frau Lindemann backt einen Kuchen für die Helfer."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h4-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:p12-h4",
+    "is_example": true,
+    "interaction": "speaker_assignment",
+    "stem": "Beispiel: Unser Thema: Brauchen wir mehr öffentliche Toiletten?",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderatorin"
+      },
+      {
+        "option_id": "b",
+        "label": "Herr Seidel"
+      },
+      {
+        "option_id": "c",
+        "label": "Frau Kurz"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "a"
+  },
+  {
+    "id": "itm:b1:p12-h4-23",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:p12-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "23. Manche Senioren bleiben deshalb lieber zu Hause.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderatorin"
+      },
+      {
+        "option_id": "b",
+        "label": "Herr Seidel"
+      },
+      {
+        "option_id": "c",
+        "label": "Frau Kurz"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h4",
+        "start": 275,
+        "end": 310
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Frau Kurz sagt, dass viele ältere Menschen nicht mehr in die Stadt gehen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h4-24",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:p12-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "24. Die Reinigung ist sehr teuer.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderatorin"
+      },
+      {
+        "option_id": "b",
+        "label": "Herr Seidel"
+      },
+      {
+        "option_id": "c",
+        "label": "Frau Kurz"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h4",
+        "start": 396,
+        "end": 484
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Herr Seidel nennt die hohen Kosten, vor allem für die Reinigung."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h4-25",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:p12-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "25. Geht das auch billiger?",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderatorin"
+      },
+      {
+        "option_id": "b",
+        "label": "Herr Seidel"
+      },
+      {
+        "option_id": "c",
+        "label": "Frau Kurz"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h4",
+        "start": 499,
+        "end": 532
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die Moderatorin fragt nach günstigeren Lösungen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h4-26",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:p12-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "26. Gaststätten öffnen ihre Toiletten für alle.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderatorin"
+      },
+      {
+        "option_id": "b",
+        "label": "Herr Seidel"
+      },
+      {
+        "option_id": "c",
+        "label": "Frau Kurz"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h4",
+        "start": 567,
+        "end": 620
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Herr Seidel erklärt, dass Restaurants ihre Toiletten auch für Nicht-Gäste öffnen."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h4-27",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:p12-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "27. Am Vormittag hilft diese Lösung oft nicht.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderatorin"
+      },
+      {
+        "option_id": "b",
+        "label": "Herr Seidel"
+      },
+      {
+        "option_id": "c",
+        "label": "Frau Kurz"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h4",
+        "start": 718,
+        "end": 767
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Frau Kurz sagt, dass die Restaurants morgens oft geschlossen sind."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h4-28",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:p12-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "28. Ein Zuhörer hat angerufen.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderatorin"
+      },
+      {
+        "option_id": "b",
+        "label": "Herr Seidel"
+      },
+      {
+        "option_id": "c",
+        "label": "Frau Kurz"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h4",
+        "start": 782,
+        "end": 822
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Die Moderatorin erwähnt den Anruf eines Hörers."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h4-29",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:p12-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "29. Auch Menschen im Rollstuhl müssen die Toiletten benutzen können.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderatorin"
+      },
+      {
+        "option_id": "b",
+        "label": "Herr Seidel"
+      },
+      {
+        "option_id": "c",
+        "label": "Frau Kurz"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h4",
+        "start": 852,
+        "end": 888
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Frau Kurz fordert barrierefreie Toiletten."
+    }
+  },
+  {
+    "id": "itm:b1:p12-h4-30",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:p12-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "30. Nächstes Jahr entstehen zwei neue Toiletten.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderatorin"
+      },
+      {
+        "option_id": "b",
+        "label": "Herr Seidel"
+      },
+      {
+        "option_id": "c",
+        "label": "Frau Kurz"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 2,
+      "distractor_strength": 2
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live",
+    "anchors": [
+      {
+        "kind": "text_span",
+        "asset_id": "ast:p12-h4",
+        "start": 950,
+        "end": 1028
+      }
+    ],
+    "feedback": {
+      "explanation_de": "Herr Seidel kündigt zwei neue Toiletten an."
+    }
+  },
+  {
+    "id": "itm:b1:p12-s1",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "schreiben",
+    "part": 1,
+    "task_id": "tsk:b1:p12-s1",
+    "is_example": false,
+    "interaction": "text_response",
+    "stem": "Schreiben Teil 1",
+    "response_spec": {
+      "type": "text",
+      "target_words": 80,
+      "min_words_target": 40,
+      "editor": "plain"
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:p12-s2",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "schreiben",
+    "part": 2,
+    "task_id": "tsk:b1:p12-s2",
+    "is_example": false,
+    "interaction": "text_response",
+    "stem": "Schreiben Teil 2",
+    "response_spec": {
+      "type": "text",
+      "target_words": 80,
+      "min_words_target": 40,
+      "editor": "plain"
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:p12-s3",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "schreiben",
+    "part": 3,
+    "task_id": "tsk:b1:p12-s3",
+    "is_example": false,
+    "interaction": "text_response",
+    "stem": "Schreiben Teil 3",
+    "response_spec": {
+      "type": "text",
+      "target_words": 40,
+      "min_words_target": 20,
+      "editor": "plain"
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:p12-sp1",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "sprechen",
+    "part": 1,
+    "task_id": "tsk:b1:p12-sp1",
+    "is_example": false,
+    "interaction": "spoken_response",
+    "stem": "Sprechen Teil 1",
+    "response_spec": {
+      "type": "audio",
+      "max_seconds": 210,
+      "turns": [
+        {
+          "turn": "t1",
+          "prompt_asset": "ast:p12-sp1-partner-1",
+          "seconds": 30
+        },
+        {
+          "turn": "t2",
+          "prompt_asset": "ast:p12-sp1-partner-2",
+          "seconds": 30
+        },
+        {
+          "turn": "t3",
+          "prompt_asset": "ast:p12-sp1-partner-3",
+          "seconds": 30
+        }
+      ]
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:p12-sp2-topic",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "sprechen",
+    "part": 2,
+    "task_id": "tsk:b1:p12-sp2",
+    "is_example": false,
+    "interaction": "topic_choice",
+    "stem": "Wählen Sie ein Thema (Thema 1 oder Thema 2).",
+    "options": [
+      {
+        "option_id": "t1",
+        "label": "Thema 1: Sollen Kinder schon mit einem Jahr in die Kita?"
+      },
+      {
+        "option_id": "t2",
+        "label": "Thema 2: Im Urlaub für die Arbeit erreichbar sein?"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:p12-sp2",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "sprechen",
+    "part": 2,
+    "task_id": "tsk:b1:p12-sp2",
+    "is_example": false,
+    "interaction": "spoken_response",
+    "stem": "Sprechen Teil 2",
+    "response_spec": {
+      "type": "audio",
+      "max_seconds": 240,
+      "turns": [
+        {
+          "turn": "t1",
+          "seconds": 240
+        }
+      ]
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:p12-sp3",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "sprechen",
+    "part": 3,
+    "task_id": "tsk:b1:p12-sp3",
+    "is_example": false,
+    "interaction": "spoken_response",
+    "stem": "Sprechen Teil 3",
+    "response_spec": {
+      "type": "audio",
+      "max_seconds": 150,
+      "turns": [
+        {
+          "turn": "t1",
+          "seconds": 60,
+          "prompt_asset": "ast:p12-sp3-partner-talk"
+        },
+        {
+          "turn": "t2",
+          "seconds": 45,
+          "prompt_asset": "ast:p12-sp3-examiner-q"
+        }
+      ]
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "practice"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-14",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-14"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic practice form — original Klarweg text, not exam content"
+      ]
+    },
+    "status": "live"
+  }
+]

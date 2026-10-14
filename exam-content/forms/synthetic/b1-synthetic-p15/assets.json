@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p15-l1-text",
+    "kind": "text",
+    "label": "Blog",
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Jahr mit Lucas aus Brasilien\n\nIm letzten August stand plötzlich ein großer, schüchterner Junge vor unserer Tür: Lucas, 16 Jahre alt, unser Austauschschüler aus Brasilien. Er hatte vorher nur ein halbes Jahr Deutsch gelernt. In den ersten Wochen haben wir viel mit Händen und Füßen gesprochen, und abends war er oft traurig, weil er seine Familie vermisst hat.\n\nNach Weihnachten wurde es besser. Lucas ist in den Fußballverein eingetreten und hat dort schnell Freunde gefunden. Unser Sohn Tim, der genauso alt ist, war zuerst eifersüchtig, aber inzwischen sind die beiden wie Brüder.\n\nGelernt haben auch wir: Lucas hat uns jeden Sonntag ein brasilianisches Gericht gekocht. Im Juli fliegt er zurück. Tim möchte ihn nächsten Sommer in São Paulo besuchen.\n\nFamilie Herzog"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Bücher kommen ins Haus\n\nDie Stadtbücherei Sonnenberg bringt Bücher jetzt auch zu Menschen, die nicht mehr selbst kommen können. Ehrenamtliche Helferinnen und Helfer fahren einmal im Monat mit dem Fahrrad zu älteren, kranken oder behinderten Lesern. Die Leser wählen ihre Bücher am Telefon aus; wer möchte, bekommt auch Hörbücher oder Zeitschriften. Der Service ist kostenlos, nur einen Leseausweis braucht man. Viele Kunden freuen sich nicht nur über die Bücher, sondern auch über ein kurzes Gespräch an der Tür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Milch vom Automaten\n\nAuf dem Hof der Familie Kerner am Ortsrand von Sonnenberg steht seit dem Frühjahr ein Milchautomat. Dort gibt es rund um die Uhr frische Milch direkt von den Kühen des Hofes. Die Kunden bringen ihre eigenen Flaschen mit oder kaufen eine Glasflasche am Automaten. Ein Liter kostet 1,50 Euro. Für die Familie Kerner lohnt sich der Verkauf, weil die Molkerei zu wenig für die Milch bezahlt. Am Wochenende bilden sich manchmal sogar Schlangen vor dem Automaten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kochwettbewerb für Hobbyköche: Melden Sie sich mit Ihrem Lieblingsrezept an – tolle Preise!"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Astronomie für Kinder: Sterne beobachten in der Sternwarte, freitags bei klarem Himmel."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wohnung tauschen: Wir suchen eine größere Wohnung und bieten 2 Zimmer in der Altstadt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Selbstverteidigung für Frauen: Kurs an vier Abenden, auch für Anfängerinnen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Autowerkstatt bietet Wintercheck für 29 Euro – Termin auch am Samstag."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nachbarschaftshilfe: Wir gehen für Sie einkaufen, wenn Sie krank sind."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bücherflohmarkt der Schule: Erlös für die neue Schulbibliothek."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gitarrengruppe für Seniorinnen und Senioren – Lieder zum Mitsingen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Teppichreinigung: Wir holen Ihren Teppich ab und bringen ihn sauber zurück."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Mietwagen für Umzüge – nur mit Führerschein der Klasse B seit mindestens drei Jahren."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Jörg, 51: Wer Kunden empfängt, sollte ordentlich aussehen. Eine klare Kleiderordnung hilft dabei. Ich halte sie für richtig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Mia, 26: Ich arbeite besser, wenn ich mich wohlfühle. In Jeans und Turnschuhen bin ich genauso professionell. Vorschriften brauche ich nicht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Selim, 44: In unserer Bank tragen alle Anzug oder Kostüm. So sieht man gleich, wer zum Team gehört. Ich finde das gut."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Petra, 59: Früher gab es bei uns strenge Regeln, heute nicht mehr. Seitdem ist die Stimmung lockerer und niemand arbeitet schlechter."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Dominik, 33: Ein paar Grundregeln finde ich sinnvoll, zum Beispiel keine Badelatschen und keine kurzen Hosen. Ganz ohne Regeln geht es nicht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Leonie, 30: Im Sommer ist es in unserem Büro sehr heiß. Ein Anzug wäre eine Qual. Jeder soll selbst entscheiden, was er anzieht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Frank, 62: Kleidung zeigt Respekt vor dem Kunden und vor der Arbeit. Deshalb bin ich für feste Regeln."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nuri, 37: Bei uns arbeiten fast alle im Homeoffice. Wer sieht da, was ich trage? Eine Kleiderordnung wäre einfach überflüssig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Fotowettbewerb „Mein Sonnenberg“ – Teilnahmebedingungen\n\n1. Teilnahme: Mitmachen können alle, die in Sonnenberg wohnen. Jede Person darf höchstens drei Fotos einreichen.\n\n2. Fotos: Die Bilder müssen in diesem Jahr in Sonnenberg aufgenommen worden sein. Sind Personen gut zu erkennen, brauchen Sie deren Erlaubnis.\n\n3. Einsendung: Schicken Sie Ihre Fotos bis zum 31. August per E-Mail. Ausdrucke auf Papier werden nicht angenommen.\n\n4. Preise: Die besten zwölf Fotos erscheinen im Stadtkalender. Die Gewinner werden im Oktober benachrichtigt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Freibad: Liebe Badegäste, das Wasser im Schwimmerbecken hat heute 23 Grad. Die Liegewiese hinter dem Kiosk ist wegen Bauarbeiten gesperrt.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht vom Möbelhaus: Guten Tag, Frau Lehmann, hier ist der Lieferservice von Wohnwelt. Ihr neuer Schrank wird am Donnerstag zwischen acht und zwölf Uhr geliefert. Bitte sorgen Sie dafür, dass jemand zu Hause ist.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiotipp: Am Sonntag lädt der Gärtnerhof Sonnenberg zum Kürbisfest ein. Kinder können Kürbisse schnitzen, und es gibt Kürbissuppe für alle. Wegen der wenigen Parkplätze fährt ab dem Bahnhof ein Sonderbus.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage in der U-Bahn-Station: Sehr geehrte Fahrgäste, der Aufzug zum Bahnsteig Richtung Stadtmitte ist bis Freitag außer Betrieb. Fahrgäste mit Kinderwagen oder Rollstuhl nutzen bitte die Haltestelle Marktplatz.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Tochter: Hallo Mama, hier ist Nele. Für die Klassenfahrt nach Hamburg brauche ich bis Montag noch die Unterschrift von dir oder Papa. Das Formular liegt auf dem Küchentisch. Und kannst du mir 30 Euro Taschengeld mitgeben?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage der Gemeinde: Hier ist die Gemeindeverwaltung Sonnenberg. Sperrmüll wird nur noch nach Anmeldung abgeholt. Bitte melden Sie sich mindestens zwei Wochen vorher an. Elektrogeräte gehören nicht zum Sperrmüll.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Guten Abend und willkommen in der Sternwarte Sonnenberg! Zuerst zeige ich Ihnen im Vortragsraum einen kurzen Film über unser Sonnensystem, er dauert zwanzig Minuten. Danach gehen wir in die Kuppel zum großen Fernrohr. Bitte nicht fotografieren mit Blitz, das stört die Beobachtung. Heute können wir den Mond und den Jupiter sehen, wenn keine Wolken kommen. Am Ende gibt es für die Kinder eine kleine Sternkarte zum Mitnehmen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Kathrin: Schau mal, Marco, das graue Sofa hier. Das ist doch schön!\nMarco: Ja, schön schon, aber 1 400 Euro? Das ist mehr, als wir ausgeben wollten.\nKathrin: Es ist im Angebot, normalerweise kostet es 1 900. Und es ist ein Schlafsofa – dann können deine Eltern bei uns übernachten.\nMarco: Das stimmt, das wäre praktisch. Passt es denn ins Wohnzimmer? Wir haben nur 2,20 Meter Platz.\nKathrin: Es ist zwei Meter breit, ich habe schon nachgemessen.\nMarco: Und wie bekommen wir es in den vierten Stock? Wir haben keinen Aufzug.\nKathrin: Das Geschäft liefert kostenlos und trägt es auch nach oben.\nMarco: Na gut, du hast mich überzeugt. Aber lass uns noch eine Nacht darüber schlafen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderator: Guten Abend! Jugendliche dürfen schon mit 17 Auto fahren, wenn ein Erwachsener daneben sitzt. Sollte das schon ab 16 möglich sein? Bei mir sind Frau Ritter, Fahrlehrerin, und Herr Baumann, Vater einer 16-jährigen Tochter.\nFrau Ritter: Aus meiner Erfahrung machen Jugendliche, die lange mit Begleitung fahren, später weniger Unfälle. Ein Jahr mehr Übung wäre also gut.\nHerr Baumann: Meine Tochter würde sich freuen. Aber ich weiß nicht, ob ich die Nerven habe, jeden Tag neben ihr zu sitzen.\nModerator: Und was kostet so ein Führerschein heute?\nFrau Ritter: Leider oft über 3 000 Euro. Das ist für viele Familien ein Problem.\nHerr Baumann: Auf dem Land braucht man trotzdem ein Auto. Bei uns fährt am Abend kein Bus mehr.\nModerator: Ein Hörer hat uns dazu eine Nachricht geschickt.\nFrau Ritter: Wichtig ist, dass die Begleiter selbst ruhig fahren. Kinder machen nach, was sie sehen.\nHerr Baumann: Ich würde vorher gern selbst noch einmal eine Fahrstunde nehmen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben am Samstag bei einem Kochwettbewerb mitgemacht. Ihr Freund Viktor möchte wissen, wie es war. Schreiben Sie Viktor eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Was haben Sie gekocht?\n– Begründen Sie: Waren Sie mit Ihrem Ergebnis zufrieden?\n– Machen Sie einen Vorschlag, zusammen zu kochen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben in einer Zeitschrift einen Artikel zum Thema „Allein ins Restaurant gehen“ gelesen. Im Online-Forum der Zeitschrift finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Renate: Seit ich allein lebe, gehe ich manchmal allein essen. Viele schauen komisch, aber ich genieße die Ruhe. Würden Sie allein in ein Restaurant gehen?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihre Tochter hat am Mittwoch um 11 Uhr einen Arzttermin und muss früher aus der Schule gehen. Schreiben Sie ihrem Klassenlehrer, Herrn Klein. Informieren Sie ihn und bitten Sie um Erlaubnis (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir wollen doch den Filmabend für den Kurs planen. Welchen Film könnten wir zeigen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gute Idee. Sollen wir den Film mit deutschen Untertiteln zeigen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Einverstanden. Und was gibt es zu essen und zu trinken?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihr Deutschkurs möchte am Freitag einen Filmabend im Kursraum machen. Sie planen den Abend zusammen.\n\n– Welcher Film?\n– Untertitel?\n– Essen und Getränke?\n– Technik?\n– Wer räumt auf?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Eine Fremdsprache im Ausland lernen?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Wie wichtig ist genug Schlaf?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin präsentiert das Thema „Wie wichtig ist genug Schlaf?“: Sie schläft nur sechs Stunden, weil sie zwei kleine Kinder hat. Am Wochenende versucht sie, am Nachmittag zu schlafen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p15-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Haben Sie schon einmal im Ausland eine Sprache gelernt? Wie war das?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

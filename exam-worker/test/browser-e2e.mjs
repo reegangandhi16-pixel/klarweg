@@ -445,7 +445,9 @@ const ONLY = process.env.KX_E2E_ONLY || '';
 /* KX_E2E_FORM=p1…p15 picks the practice form for the practice scenario (default p1) */
 const PRACTICE = PRACTICE_LIBRARY.find((f) => f.name.toLowerCase() === (process.env.KX_E2E_FORM || 'p1').toLowerCase());
 if (!PRACTICE) { console.error(`unknown KX_E2E_FORM=${process.env.KX_E2E_FORM}`); process.exit(2); }
-const PRACTICE_L1_START = JSON.parse(fs.readFileSync(path.join(PRACTICE.dir, 'assets.json'), 'utf8')).find((a) => a.id.endsWith('-l1-text')).text.body_md.split('\n')[0];
+const PRACTICE_ASSETS = JSON.parse(fs.readFileSync(path.join(PRACTICE.dir, 'assets.json'), 'utf8'));
+const PRACTICE_L1_START = PRACTICE_ASSETS.find((a) => a.id.endsWith('-l1-text')).text.body_md.split('\n')[0];
+const PRACTICE_H3_LAST = PRACTICE_ASSETS.find((a) => a.id.endsWith('-h3')).script_de.split('\n').pop();   // shown only in the post-submission review
 /* PRACTICE (form P1 or KX_E2E_FORM, realistic synthetic content): one complete attempt as learner, then rating as two raters, in one
    headless, muted browser. Proves: Lesen autosave; the item review is refused before and exact after submission; full
    Hören playback; Schreiben; Sprechen recording; result + review tables; outsider and learner refused on the rater
@@ -547,7 +549,7 @@ async function runPractice() {
     assert.equal(await evaluate(`document.querySelectorAll('.kx-review-items')[0].querySelector('.kx-transcripts')`), null, 'no scripts for Lesen');
     await click('.kx-transcripts summary');
     assert.equal(await evaluate(`document.querySelectorAll('.kx-transcripts h3').length`), 8, 'Hören scripts after submission');
-    assert.match(await text(), /Nora: Am Samstag ja\. Am Sonntag besuche ich meine Eltern\./);
+    assert.ok((await text()).includes(PRACTICE_H3_LAST), `the Hören Teil 3 script is shown: ${PRACTICE_H3_LAST}`);
     // the learner's own recordings: listed after submission, loaded only on request, never autoplayed
     assert.ok(await evaluate(`document.querySelectorAll('[data-act="my-recording"]').length >= 1`), 'own recordings listed');
     await click('[data-act="my-recording"]');

@@ -31,8 +31,8 @@ test('PILOT: P3 has 16 roles; the cast check needs every role, German voices, an
   assert.deepEqual(checkCast(plan, cast), []);
   const missing = { voices: { ...cast.voices } }; delete missing.voices.Elif;
   assert.match(checkCast(plan, missing).join(), /no voice for role "Elif"/);
-  assert.match(checkCast(plan, { voices: { ...cast.voices, Sabine: 'en-US-JennyNeural' } }).join(), /not a German/);
-  assert.match(checkCast(plan, { voices: { ...cast.voices, Elif: cast.voices.Sabine } }).join(), /Hören 3: two speakers share a voice/);
+  assert.match(checkCast(plan, { voices: { ...cast.voices, Sebastian: 'en-US-JennyNeural' } }).join(), /not a German/);
+  assert.match(checkCast(plan, { voices: { ...cast.voices, Elif: cast.voices.Sebastian } }).join(), /Hören 3: two speakers share a voice/);
 });
 
 test('PILOT: SSML speaks only the lines (no stage directions), one <voice> per line, XML-escaped', () => {

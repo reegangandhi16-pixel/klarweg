@@ -146,23 +146,23 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
       ]
     },
     t3: {
-      context: 'Sie sind in der Kantine und hören, wie sich zwei Kolleginnen unterhalten.',
-      script: 'Sabine: Na, Elif, wie läuft die Wohnungssuche?\n'
+      context: 'Sie sind in der Kantine und hören, wie sich eine Kollegin und ein Kollege unterhalten.',
+      script: 'Sebastian: Na, Elif, wie läuft die Wohnungssuche?\n'
         + 'Elif: Ach, frag nicht. Ich habe schon fünf Wohnungen angeschaut, aber entweder waren sie zu teuer oder zu weit weg von der Firma.\n'
-        + 'Sabine: Und die Wohnung in der Gartenstraße, von der du letzte Woche erzählt hast?\n'
+        + 'Sebastian: Und die Wohnung in der Gartenstraße, von der du letzte Woche erzählt hast?\n'
         + 'Elif: Die war eigentlich toll, mit Balkon und neuer Küche. Aber der Vermieter wollte keine Katzen, und meine Katze gebe ich nicht weg.\n'
-        + 'Sabine: Verstehe. Weißt du was? Im Haus meiner Eltern wird im Dezember eine Wohnung frei. Drei Zimmer, im zweiten Stock.\n'
+        + 'Sebastian: Verstehe. Weißt du was? Im Haus meiner Eltern wird im Dezember eine Wohnung frei. Drei Zimmer, im zweiten Stock.\n'
         + 'Elif: Wirklich? Ist das weit von hier?\n'
-        + 'Sabine: Mit dem Fahrrad zehn Minuten. Ich frage meine Mutter heute Abend, wer der Vermieter ist.\n'
+        + 'Sebastian: Mit dem Fahrrad zehn Minuten. Ich frage meine Mutter heute Abend, wer der Vermieter ist.\n'
         + 'Elif: Das wäre wunderbar. Ich lade dich dafür auf einen Kaffee ein!',
       items: [
         ['Elif hat noch keine Wohnung angeschaut.', 'falsch', 'Ich habe schon fünf Wohnungen angeschaut', 'Elif hat bereits fünf Wohnungen besichtigt, aber keine passende gefunden.'],
         ['Die Wohnungen waren zum Teil zu weit von Elifs Arbeit entfernt.', 'richtig', 'zu weit weg von der Firma', 'Einige Wohnungen waren zu weit weg von der Firma.'],
         ['Die Wohnung in der Gartenstraße hatte einen Balkon.', 'richtig', 'mit Balkon und neuer Küche', 'Die Wohnung in der Gartenstraße hatte einen Balkon und eine neue Küche.'],
         ['Elif möchte ihre Katze abgeben.', 'falsch', 'meine Katze gebe ich nicht weg', 'Elif sagt, dass sie ihre Katze nicht weggibt.'],
-        ['Im Haus von Sabines Eltern ist schon jetzt eine Wohnung frei.', 'falsch', 'wird im Dezember eine Wohnung frei', '„Schon jetzt“ stimmt nicht, denn Sabine kündigt die Wohnung erst für Dezember an.'],
-        ['Man fährt mit dem Fahrrad etwa zehn Minuten dorthin.', 'richtig', 'Mit dem Fahrrad zehn Minuten.', 'Sabine schätzt den Weg mit dem Rad auf zehn Minuten, die Aussage stimmt also.'],
-        ['Sabine fragt heute ihren Vater nach dem Vermieter.', 'falsch', 'Ich frage meine Mutter heute Abend', 'Sabine fragt ihre Mutter, nicht ihren Vater.']
+        ['Im Haus von Sebastians Eltern ist schon jetzt eine Wohnung frei.', 'falsch', 'wird im Dezember eine Wohnung frei', '„Schon jetzt“ stimmt nicht, denn Sebastian kündigt die Wohnung erst für Dezember an.'],
+        ['Man fährt mit dem Fahrrad etwa zehn Minuten dorthin.', 'richtig', 'Mit dem Fahrrad zehn Minuten.', 'Sebastian schätzt den Weg mit dem Rad auf zehn Minuten, die Aussage stimmt also.'],
+        ['Sebastian fragt heute seinen Vater nach dem Vermieter.', 'falsch', 'Ich frage meine Mutter heute Abend', 'Sebastian fragt seine Mutter, nicht seinen Vater.']
       ]
     },
     t4: {

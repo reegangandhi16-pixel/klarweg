@@ -142,16 +142,16 @@ export const PRACTICE_FORM_P13 = buildPracticeForm({
       ]
     },
     t3: {
-      context: 'Sie sind in der Kantine und hören, wie zwei Kollegen über den Weg zur Arbeit sprechen.',
-      script: 'Stefan: Mensch, Ali, du bist ja ganz nass! Bist du mit dem Rad gekommen?\n'
+      context: 'Sie sind in der Kantine und hören, wie eine Kollegin und ein Kollege über den Weg zur Arbeit sprechen.',
+      script: 'Stefanie: Mensch, Ali, du bist ja ganz nass! Bist du mit dem Rad gekommen?\n'
         + 'Ali: Ja, seit zwei Wochen fahre ich jeden Tag mit dem Fahrrad, fünfzehn Kilometer. Heute hat es leider geregnet.\n'
-        + 'Stefan: Fünfzehn Kilometer! Wie lange brauchst du denn?\n'
+        + 'Stefanie: Fünfzehn Kilometer! Wie lange brauchst du denn?\n'
         + 'Ali: Etwa vierzig Minuten. Mit dem Auto im Stau war es auch nicht viel schneller.\n'
-        + 'Stefan: Und wo duschst du hier?\n'
+        + 'Stefanie: Und wo duschst du hier?\n'
         + 'Ali: Im Keller gibt es eine Dusche für die Mitarbeiter. Das wissen viele gar nicht.\n'
-        + 'Stefan: Wirklich? Ich überlege schon lange, ob ich auch mit dem Rad komme. Aber im Winter ist mir das zu kalt.\n'
+        + 'Stefanie: Wirklich? Ich überlege schon lange, ob ich auch mit dem Rad komme. Aber im Winter ist mir das zu kalt.\n'
         + 'Ali: Das sehe ich auch so. Im Winter nehme ich wahrscheinlich die S-Bahn.\n'
-        + 'Stefan: Weißt du was, ich probiere es nächste Woche einmal aus. Fährst du mit mir die Strecke?\n'
+        + 'Stefanie: Weißt du was, ich probiere es nächste Woche einmal aus. Fährst du mit mir die Strecke?\n'
         + 'Ali: Klar, wir treffen uns am Montag an der Brücke.',
       items: [
         ['Ali fährt seit zwei Wochen mit dem Rad zur Arbeit.', 'richtig', 'seit zwei Wochen fahre ich jeden Tag mit dem Fahrrad', 'Ali fährt seit zwei Wochen mit dem Rad.'],
@@ -159,8 +159,8 @@ export const PRACTICE_FORM_P13 = buildPracticeForm({
         ['In der Firma kann man duschen.', 'richtig', 'Im Keller gibt es eine Dusche für die Mitarbeiter.', 'Für Mitarbeiter gibt es im Keller der Firma eine Dusche, die viele nicht kennen.'],
         ['Alle Mitarbeiter kennen die Dusche.', 'falsch', 'Das wissen viele gar nicht.', 'Viele wissen nicht, dass es die Dusche gibt.'],
         ['Ali möchte auch im Winter mit dem Rad fahren.', 'falsch', 'Im Winter nehme ich wahrscheinlich die S-Bahn.', 'Ali findet den Winter zum Radfahren zu kalt und will dann die S-Bahn nehmen.'],
-        ['Stefan will nächste Woche mit dem Fahrrad kommen.', 'richtig', 'ich probiere es nächste Woche einmal aus', 'Stefan will es nächste Woche ausprobieren.'],
-        ['Die beiden treffen sich am Montag an einer Brücke.', 'richtig', 'wir treffen uns am Montag an der Brücke', 'Ali und Stefan verabreden sich für Montag an der Brücke, um zusammen zu radeln.']
+        ['Stefanie will nächste Woche mit dem Fahrrad kommen.', 'richtig', 'ich probiere es nächste Woche einmal aus', 'Stefanie will es nächste Woche ausprobieren.'],
+        ['Die beiden treffen sich am Montag an einer Brücke.', 'richtig', 'wir treffen uns am Montag an der Brücke', 'Ali und Stefanie verabreden sich für Montag an der Brücke, um zusammen zu radeln.']
       ]
     },
     t4: {

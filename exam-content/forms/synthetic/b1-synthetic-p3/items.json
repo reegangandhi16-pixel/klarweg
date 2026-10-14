@@ -3701,8 +3701,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p3-h3",
-        "start": 70,
-        "end": 110
+        "start": 73,
+        "end": 113
       }
     ],
     "feedback": {
@@ -3765,8 +3765,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p3-h3",
-        "start": 150,
-        "end": 175
+        "start": 153,
+        "end": 178
       }
     ],
     "feedback": {
@@ -3829,8 +3829,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p3-h3",
-        "start": 291,
-        "end": 317
+        "start": 297,
+        "end": 323
       }
     ],
     "feedback": {
@@ -3893,8 +3893,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p3-h3",
-        "start": 363,
-        "end": 393
+        "start": 369,
+        "end": 399
       }
     ],
     "feedback": {
@@ -3911,7 +3911,7 @@
     "task_id": "tsk:b1:p3-h3",
     "is_example": false,
     "interaction": "binary_choice",
-    "stem": "20. Im Haus von Sabines Eltern ist schon jetzt eine Wohnung frei.",
+    "stem": "20. Im Haus von Sebastians Eltern ist schon jetzt eine Wohnung frei.",
     "options": [
       {
         "option_id": "richtig",
@@ -3957,12 +3957,12 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p3-h3",
-        "start": 449,
-        "end": 483
+        "start": 458,
+        "end": 492
       }
     ],
     "feedback": {
-      "explanation_de": "„Schon jetzt“ stimmt nicht, denn Sabine kündigt die Wohnung erst für Dezember an."
+      "explanation_de": "„Schon jetzt“ stimmt nicht, denn Sebastian kündigt die Wohnung erst für Dezember an."
     }
   },
   {
@@ -4021,12 +4021,12 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p3-h3",
-        "start": 563,
-        "end": 592
+        "start": 575,
+        "end": 604
       }
     ],
     "feedback": {
-      "explanation_de": "Sabine schätzt den Weg mit dem Rad auf zehn Minuten, die Aussage stimmt also."
+      "explanation_de": "Sebastian schätzt den Weg mit dem Rad auf zehn Minuten, die Aussage stimmt also."
     }
   },
   {
@@ -4039,7 +4039,7 @@
     "task_id": "tsk:b1:p3-h3",
     "is_example": false,
     "interaction": "binary_choice",
-    "stem": "22. Sabine fragt heute ihren Vater nach dem Vermieter.",
+    "stem": "22. Sebastian fragt heute seinen Vater nach dem Vermieter.",
     "options": [
       {
         "option_id": "richtig",
@@ -4085,12 +4085,12 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p3-h3",
-        "start": 593,
-        "end": 627
+        "start": 605,
+        "end": 639
       }
     ],
     "feedback": {
-      "explanation_de": "Sabine fragt ihre Mutter, nicht ihren Vater."
+      "explanation_de": "Sebastian fragt seine Mutter, nicht seinen Vater."
     }
   },
   {

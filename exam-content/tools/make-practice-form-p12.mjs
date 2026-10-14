@@ -140,14 +140,14 @@ export const PRACTICE_FORM_P12 = buildPracticeForm({
       ]
     },
     t3: {
-      context: 'Sie stehen im Hof Ihres Wohnhauses und hören, wie sich zwei Nachbarinnen unterhalten.',
-      script: 'Frau Novak: Guten Morgen, Frau Lindemann! Haben Sie schon von dem Gemeinschaftsgarten gehört?\n'
+      context: 'Sie stehen im Hof Ihres Wohnhauses und hören, wie sich eine Nachbarin und ein Nachbar unterhalten.',
+      script: 'Herr Novak: Guten Morgen, Frau Lindemann! Haben Sie schon von dem Gemeinschaftsgarten gehört?\n'
         + 'Frau Lindemann: Ja, der Hausmeister hat mir davon erzählt. Hinter der Garage sollen Beete entstehen, oder?\n'
-        + 'Frau Novak: Genau. Die Hausverwaltung bezahlt die Erde und das Holz. Wir müssen die Beete aber selbst bauen.\n'
+        + 'Herr Novak: Genau. Die Hausverwaltung bezahlt die Erde und das Holz. Wir müssen die Beete aber selbst bauen.\n'
         + 'Frau Lindemann: Das kann ich leider nicht, mein Rücken macht nicht mit. Aber ich kann gießen, wenn andere im Urlaub sind.\n'
-        + 'Frau Novak: Das hilft auch! Am Samstag treffen wir uns um zehn Uhr zum Bauen. Mein Sohn bringt Werkzeug mit.\n'
+        + 'Herr Novak: Das hilft auch! Am Samstag treffen wir uns um zehn Uhr zum Bauen. Mein Sohn bringt Werkzeug mit.\n'
         + 'Frau Lindemann: Und was wollen Sie anpflanzen?\n'
-        + 'Frau Novak: Ich denke an Tomaten und Kräuter. Kartoffeln brauchen zu viel Platz.\n'
+        + 'Herr Novak: Ich denke an Tomaten und Kräuter. Kartoffeln brauchen zu viel Platz.\n'
         + 'Frau Lindemann: Dann backe ich für Samstag einen Kuchen für die fleißigen Helfer.',
       items: [
         ['Der Hausmeister hat Frau Lindemann von dem Garten erzählt.', 'richtig', 'der Hausmeister hat mir davon erzählt', 'Frau Lindemann weiß vom Garten, weil der Hausmeister es ihr erzählt hat.'],
@@ -155,7 +155,7 @@ export const PRACTICE_FORM_P12 = buildPracticeForm({
         ['Die Hausverwaltung bezahlt das Material.', 'richtig', 'Die Hausverwaltung bezahlt die Erde und das Holz.', 'Erde und Holz sind das Material, und dafür zahlt die Hausverwaltung.'],
         ['Frau Lindemann hilft beim Bauen der Beete.', 'falsch', 'Das kann ich leider nicht, mein Rücken macht nicht mit.', 'Wegen ihres Rückens kann Frau Lindemann nicht beim Bauen helfen.'],
         ['Das Treffen zum Bauen ist am Samstagvormittag.', 'richtig', 'Am Samstag treffen wir uns um zehn Uhr zum Bauen.', 'Zehn Uhr am Samstag ist Vormittag, dann beginnt das Bauen der Beete.'],
-        ['Frau Novak möchte Kartoffeln anpflanzen.', 'falsch', 'Kartoffeln brauchen zu viel Platz.', 'Frau Novak möchte Tomaten und Kräuter, keine Kartoffeln.'],
+        ['Herr Novak möchte Kartoffeln anpflanzen.', 'falsch', 'Kartoffeln brauchen zu viel Platz.', 'Herr Novak möchte Tomaten und Kräuter, keine Kartoffeln.'],
         ['Frau Lindemann bringt am Samstag etwas zu essen mit.', 'richtig', 'Dann backe ich für Samstag einen Kuchen', 'Frau Lindemann backt einen Kuchen für die Helfer.']
       ]
     },

@@ -4,7 +4,8 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, esc, MODULE_LABELS } from './render.js';
+import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, esc, MODULE_LABELS } from './render.js';
+import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
 import { ChunkQueue, TurnRecorder } from './recorder.js';
@@ -409,6 +410,11 @@ async function showResult() {
   for (const m of r.result.modules) {
     if (!m.counts) continue;
     try { reviews.push(itemReview(m.module, await api.review(S.attempt.attempt_id, m.module))); } catch { /* not available */ }
+  }
+  for (const m of r.result.modules) {   // criterion feedback once a rated module is final
+    if ((m.module === 'schreiben' || m.module === 'sprechen') && m.status === 'final') {
+      try { reviews.push(ratedFeedback(m.module, await api.feedback(S.attempt.attempt_id, m.module), CRITERION_LABELS)); } catch { /* not available */ }
+    }
   }
   if (r.result.modules.some((m) => m.module === 'sprechen' && m.status !== 'not_taken')) {
     try { reviews.push(recordingsSection(await api.myRecordings(S.attempt.attempt_id))); } catch { /* not available */ }

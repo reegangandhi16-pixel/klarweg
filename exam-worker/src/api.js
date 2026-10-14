@@ -695,6 +695,41 @@ export async function moduleReview(env, userId, attemptId, module) {
     summary: { correct: count('correct'), incorrect: count('incorrect'), unanswered: count('unanswered'), total: items.length } };
 }
 
+/* ---------- rated feedback after a FINAL Schreiben/Sprechen score (SCORING §6 writing[]/speaking[] criteria) ----------
+   Owner only. Per rubric unit: the mean of the two counted ratings (rounds 1 and 2) per criterion and in total — the
+   same mean the final score is built from. Never a rater id, an individual band or an individual rater's total. A
+   rater's zero rule (Erfüllung E) counts as 0 for every criterion, so the criteria add up to the unit total. Not
+   available while ratings are pending, or when a third rating was involved (its combination is a separate rule). */
+export async function moduleFeedback(env, userId, attemptId, module) {
+  const attempt = await loadAttempt(env, attemptId, userId);
+  if (module !== 'schreiben' && module !== 'sprechen') fail(422, 'feedback_not_available', 'Only rated modules have criterion feedback.');
+  const score = await env.DB.prepare('SELECT status, points, max_points, rule_flags_json FROM module_scores WHERE attempt_id = ?1 AND module = ?2').bind(attempt.id, module).first();
+  if (!score || score.status !== 'final') fail(409, 'feedback_not_available', 'Criterion feedback opens when the module is finally rated.');
+  if (JSON.parse(score.rule_flags_json || '{}').third_rating_required) fail(409, 'feedback_not_available', 'Not available for a module with a third rating.');
+  const form = await formRow(env, attempt.form_id);
+  const cfg = await levelConfig(env, form.level_config_id);
+  const items = (await env.DB.prepare('SELECT item_id, part, rubric_id FROM items_index WHERE form_id = ?1 AND module = ?2').bind(attempt.form_id, module).all()).results;
+  const ratings = (await env.DB.prepare("SELECT item_id, round, points_json, total FROM ratings WHERE attempt_id = ?1 AND module = ?2 AND round IN (1, 2) AND rater_kind IN ('teacher', 'lead')")
+    .bind(attempt.id, module).all()).results;
+  const texts = module === 'schreiben' ? Object.fromEntries((await env.DB.prepare('SELECT item_id, text, words, target_words FROM writing_final WHERE attempt_id = ?1').bind(attempt.id).all()).results.map((w) => [w.item_id, w])) : {};
+  const half = (x) => Math.round(x * 100) / 100;
+  const units = rubricUnits(cfg, module, items).map((u) => {
+    const rubric = cfg.rubrics[u.rubric_id];
+    const rs = [1, 2].map((round) => ratings.find((r) => r.item_id === u.item_id && r.round === round));
+    if (rs.some((r) => !r)) fail(409, 'feedback_not_available');
+    const per = rs.map((r) => { const pts = JSON.parse(r.points_json); return r.total === 0 ? Object.fromEntries(Object.keys(pts).map((c) => [c, 0])) : pts; });
+    const w = texts[u.item_id];
+    return {
+      item_id: u.item_id, part: u.item_id === 'sprechen:pron' ? null : (items.find((i) => i.item_id === u.item_id) || {}).part ?? null,
+      total: half((rs[0].total + rs[1].total) / 2), max: Object.values(rubric.criteria).reduce((n, v) => n + v[0], 0),
+      zero_rule: rs.some((r, i) => r.total === 0 && Object.values(JSON.parse(r.points_json)).some((p) => p > 0)),
+      criteria: Object.entries(rubric.criteria).map(([c, values]) => ({ criterion: c, points: half((per[0][c] + per[1][c]) / 2), max: values[0] })),
+      ...(w ? { text: w.text, words: w.words, target_words: w.target_words } : {})
+    };
+  });
+  return { ok: true, attempt_id: attempt.id, module, points: score.points, max_points: score.max_points, units };
+}
+
 /* ---------- staff: ratings (two independent human raters are authoritative) ---------- */
 export async function submitRating(env, userId, request) {
   const body = await readJsonBody(request);

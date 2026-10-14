@@ -10,7 +10,7 @@ import { memoryStore } from '../js/store.js';
 import { createApi, ExamApiError } from '../js/api.js';
 import { phaseAt, phaseLabel } from '../js/hoeren.js';
 import { ChunkQueue, sha256Hex } from '../js/recorder.js';
-import { createRenderer, resultPage, header, moduleNav, reviewPanel, itemReview, testBanner, recordingsSection, esc, RESULT_TITLE, RESULT_DISCLAIMER } from '../js/render.js';
+import { createRenderer, resultPage, header, moduleNav, reviewPanel, itemReview, testBanner, recordingsSection, ratedFeedback, esc, RESULT_TITLE, RESULT_DISCLAIMER } from '../js/render.js';
 import { nextAction, assertSupported, unansweredCount, answerableItems, partProgress, isAnswered, itemNumber } from '../js/engine.js';
 import { countWords } from '../js/wordcount.js';
 import { speakingSchedule, speakingPhaseAt, prepEndsAt, partOfPhase, partForListenPhase, speakingItemsForPart, partnerAssetFor,
@@ -506,4 +506,18 @@ test('MY RECORDINGS render: one load button per available turn, no player until 
   assert.match(html, /Teil 3, Beitrag 2 · 4 s<\/span><span class="kx-meta">nicht mehr verfügbar/);
   assert.equal(/<audio/.test(html), false, 'nothing loads or plays before the learner asks');
   assert.match(recordingsSection({ recordings: [] }), /Es sind keine Aufnahmen verfügbar/);
+});
+
+test('RATED FEEDBACK render: per task and criterion with German decimals; own text collapsed; zero rule explained; per-part line in reviews', () => {
+  const html = ratedFeedback('schreiben', { units: [
+    { item_id: 'w1', part: 1, total: 35, max: 40, zero_rule: false, criteria: [{ criterion: 'erfuellung', points: 8.75, max: 10 }], text: 'Hallo <Tom>', words: 2, target_words: 80 },
+    { item_id: 'w3', part: 3, total: 10, max: 20, zero_rule: true, criteria: [{ criterion: 'erfuellung', points: 5, max: 10 }] }] }, { erfuellung: 'Erfüllung' });
+  assert.match(html, /Schreiben Teil 1: 35 \/ 40 Punkte/); assert.match(html, /<th scope="row">Erfüllung<\/th><td>8,75 \/ 10<\/td>/);
+  assert.match(html, /<summary>Ihr Text \(2 Wörter, Ziel ca\. 80\)<\/summary><p class="kx-written" lang="de">Hallo &lt;Tom&gt;<\/p>/);
+  assert.equal((html.match(/Erfüllung E/g) || []).length, 1, 'zero rule noted only where it applied');
+  assert.match(ratedFeedback('sprechen', { units: [{ item_id: 'sprechen:pron', part: null, total: 16, max: 16, criteria: [] }] }), /Aussprache \(ganze Prüfung\): 16 \/ 16 Punkte/);
+  const rv = itemReview('lesen', { summary: { correct: 2, incorrect: 1, unanswered: 0, total: 3 }, transcripts: [], items: [
+    { part: 1, display_no: '1', status: 'correct', points: 1, max_points: 1 }, { part: 1, display_no: '2', status: 'incorrect', points: 0, max_points: 1 },
+    { part: 2, display_no: '3', status: 'correct', points: 1, max_points: 1 }] });
+  assert.match(rv, /<p class="kx-meta kx-rv-parts">Teil 1: 1 von 2 · Teil 2: 1 von 1<\/p>/);
 });

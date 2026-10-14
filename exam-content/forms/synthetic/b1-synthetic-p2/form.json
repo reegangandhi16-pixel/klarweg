@@ -2,6 +2,7 @@
   "id": "frm:b1:synthetic-p2@1",
   "level_config": "lc:b1@1",
   "kind": "synthetic",
+  "purpose": "practice",
   "label": "Synthetische Übungsform P2 (Klarweg-Übung, kein Original)",
   "status": "live",
   "rev": 1,

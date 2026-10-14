@@ -7,6 +7,9 @@
 export const MODULES = Object.freeze(['lesen', 'hoeren', 'schreiben', 'sprechen']);
 export const LEVELS = Object.freeze(['A1', 'A2', 'B1', 'B2']);
 export const FORM_KINDS = Object.freeze(['synthetic', 'mock', 'set', 'anchor_form']);
+/* What a SYNTHETIC form is for: an engine/system-test fixture (never for learners) or original Klarweg practice.
+   Required on synthetic forms; a learner release (build-release --purpose learner) refuses system_test forms. */
+export const SYNTHETIC_PURPOSES = Object.freeze(['system_test', 'practice']);
 export const FORM_STATUS = Object.freeze(['draft', 'review', 'pilot', 'live', 'retired']);
 export const ITEM_STATUS = Object.freeze(['draft', 'reviewed', 'piloted', 'live', 'retired']);
 

@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  MODULES, FORM_KINDS, FORM_STATUS, ITEM_STATUS, ITEM_INTERACTIONS, STIMULUS_ROLES, ASSET_KINDS, LICENCE_KINDS, FRAMES,
+  MODULES, FORM_KINDS, SYNTHETIC_PURPOSES, FORM_STATUS, ITEM_STATUS, ITEM_INTERACTIONS, STIMULUS_ROLES, ASSET_KINDS, LICENCE_KINDS, FRAMES,
   TRAP_MECHANISMS, REFERENCE_USE, ID, FORBIDDEN_ITEM_FIELDS, TASK_INDICATORS, ITEM_INDICATORS_OBJECTIVE, REQUIRED, countWords
 } from '../schemas/content-model.mjs';
 import { loadForm, loadLevelConfig, hoerenPlan, speakingPlan, toneWav, sha256 } from './lib.mjs';
@@ -40,6 +40,8 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
   if (!Number.isInteger(form.rev) || form.rev < 1) E('bad_revision', `form.rev must be an integer ≥ 1 (got ${form.rev})`);
   else if (idRev !== form.rev) E('bad_revision', `form id revision @${idRev} ≠ form.rev ${form.rev}`);
   if (form.timing_overrides && form.kind !== 'synthetic') E('override_not_allowed', 'timing_overrides are allowed only for kind=synthetic');
+  if (form.kind === 'synthetic' && !SYNTHETIC_PURPOSES.includes(form.purpose)) E('synthetic_purpose', `synthetic form needs purpose ${SYNTHETIC_PURPOSES.join('|')} (got ${form.purpose})`);
+  if (form.kind !== 'synthetic' && 'purpose' in form) E('synthetic_purpose', 'purpose is declared only on synthetic forms');
   if (keys?.form_id !== form.id) E('key_form_mismatch', `keys.json form_id ${keys?.form_id} ≠ ${form.id}`);
 
   const levelConfig = loadLevelConfig(levelsDir, form.level_config);

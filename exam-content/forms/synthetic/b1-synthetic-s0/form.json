@@ -2,6 +2,7 @@
   "id": "frm:b1:synthetic-s0@1",
   "level_config": "lc:b1@1",
   "kind": "synthetic",
+  "purpose": "system_test",
   "label": "Synthetische Testform S0 (nur Systemtest)",
   "status": "live",
   "rev": 1,

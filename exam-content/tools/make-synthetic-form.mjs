@@ -233,7 +233,7 @@ const placement = (module, part) => {
   return { part, task_ids: ts.map((t) => t.id), item_order: order };
 };
 const form = {
-  id: FORM_ID, level_config: 'lc:b1@1', kind: 'synthetic', label: 'Synthetische Testform S0 (nur Systemtest)', status: 'live', rev: 1, release_note: 'TEST CONTENT ONLY',
+  id: FORM_ID, level_config: 'lc:b1@1', kind: 'synthetic', purpose: 'system_test', label: 'Synthetische Testform S0 (nur Systemtest)', status: 'live', rev: 1, release_note: 'TEST CONTENT ONLY',
   modules: [
     { module: 'lesen', parts: [1, 2, 3, 4, 5].map((p) => placement('lesen', p)) },
     { module: 'hoeren', parts: [1, 2, 3, 4].map((p) => (p === 2 ? { ...placement('hoeren', p), instruction_asset_id: h2Instr } : placement('hoeren', p))) },

@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p11-l1-text",
+    "kind": "text",
+    "label": "Blog",
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Jahr ohne eigenes Auto\n\nLetzten Herbst ist unser altes Auto kaputtgegangen. Die Reparatur hätte 2 000 Euro gekostet, und wir mussten entscheiden: ein neues Auto kaufen oder ganz ohne leben? Wir, das sind mein Mann, ich und unsere zwei Kinder, haben uns für einen Versuch ohne Auto entschieden.\n\nZur Arbeit fahren wir jetzt beide mit dem Fahrrad, bei Regen mit der Straßenbahn. Die Kinder gehen zu Fuß zur Schule – das machen sie sowieso lieber. Für den großen Einkauf am Samstag haben wir einen Fahrradanhänger gekauft. Nur zu meinen Eltern aufs Land ist es schwierig, weil der Bus am Wochenende kaum fährt. Dann leihen wir uns ein Auto beim Carsharing.\n\nNach einem Jahr haben wir ausgerechnet: Wir haben fast 3 000 Euro gespart. Ein neues Auto kaufen wir deshalb erst einmal nicht.\n\nSanja"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Markt auch am Abend\n\nDer Wochenmarkt auf dem Lindenplatz in Bergfeld bekommt Verstärkung: Ab Mai gibt es jeden Donnerstag zusätzlich einen Abendmarkt von 16 bis 21 Uhr. Neben Obst, Gemüse und Käse bieten mehrere Stände warmes Essen an, und auf einer kleinen Bühne spielen Musikgruppen aus der Region. Die Idee kam von Berufstätigen, die morgens keine Zeit für den Markt haben. Die Händler zahlen für den Abendmarkt weniger Standgebühr. Bei schlechtem Wetter findet der Markt trotzdem statt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Ruftaxi für die Nacht\n\nWer in Bergfeld nach Mitternacht nach Hause will, hat es bisher schwer: Die letzte Straßenbahn fährt um 0.30 Uhr. Seit Oktober testet die Stadt deshalb ein Ruftaxi. Man bestellt es mindestens 30 Minuten vorher per App oder Telefon und zahlt nur den normalen Bus-Preis. Das Taxi fährt nicht direkt nach Hause, sondern zu festen Haltestellen. Für Frauen, die allein unterwegs sind, gibt es eine Ausnahme: Sie dürfen sich bis vor die Haustür bringen lassen. Der Test läuft ein Jahr."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kinderchor sucht Sängerinnen und Sänger von 6 bis 10 Jahren – Probe montags nach der Schule."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Physiotherapie mit Hausbesuch – für Patienten, die nicht mehr gut laufen können."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Fotobuch-Workshop: Machen Sie aus Ihren Urlaubsbildern ein schönes Album."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Verkaufe Kinderbett mit Matratze, Holz, sehr guter Zustand."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Mathe-Nachhilfe für Erwachsene, die eine Prüfung im Beruf machen müssen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Schreibwerkstatt: Gemeinsam Geschichten und Gedichte schreiben, jeden ersten Samstag."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kostenlose Energieberatung: Wir zeigen Ihnen, wie Sie Strom und Heizkosten sparen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wanderung mit Kräuterführung: Pflanzen am Wegrand erkennen und sammeln."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Second-Hand-Laden für Sportkleidung und Fußballschuhe – Ankauf und Verkauf."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hotel sucht Zimmermädchen und Hausmeister in Vollzeit."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Miriam, 40: Meine Tochter hatte vor jeder Klassenarbeit Bauchschmerzen. Seit ihre Schule Berichte statt Noten schreibt, geht sie wieder gern hin. Ich bin dafür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Detlef, 55: Im Leben wird man auch bewertet. Kinder müssen lernen, mit guten und schlechten Noten umzugehen. Deshalb halte ich Noten für wichtig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nadja, 32: Ein Bericht sagt mir viel mehr als eine Drei. Ich erfahre, was mein Sohn gut kann und wo er noch üben muss. Das finde ich viel hilfreicher."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Volker, 47: Ohne Noten wissen Eltern nicht genau, wo ihr Kind steht. Die Berichte sind oft so freundlich formuliert, dass man Probleme gar nicht erkennt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Elena, 26: Als Lehrerin sehe ich: Kinder lernen besser, wenn sie keine Angst vor Fehlern haben. Ohne Noten trauen sie sich mehr."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Günther, 68: Ich habe als Kind Noten bekommen, meine Kinder auch. Eine Zwei war für uns ein schöner Erfolg. So etwas sollte man Kindern nicht wegnehmen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hamid, 44: Bis zur dritten Klasse brauchen Kinder keine Noten, später schon, wegen der Empfehlung für die weiterführende Schule. Ganz abschaffen würde ich sie nicht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Lotte, 15: In der Grundschule hatte ich keine Noten und habe trotzdem viel gelernt. Ich fand das super und würde es allen Kindern wünschen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nutzung der Grillplätze im Stadtpark Bergfeld\n\n1. Reservierung: Die drei Grillplätze können Sie online reservieren. Ohne Reservierung dürfen Sie nur grillen, wenn der Platz frei ist.\n\n2. Zeiten: Gegrillt werden darf von 10 bis 22 Uhr. Bei großer Trockenheit kann die Stadt das Grillen ganz verbieten.\n\n3. Grill: Benutzen Sie nur die fest eingebauten Grills. Eigene Grills sind auf der Wiese nicht erlaubt.\n\n4. Müll: Nehmen Sie Ihren Müll bitte wieder mit. Die heiße Asche gehört in die roten Metallbehälter neben den Grillplätzen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Einkaufszentrum: Liebe Kunden, unser Parkhaus schließt heute schon um 20 Uhr. Bitte holen Sie Ihr Auto rechtzeitig ab.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Physiotherapie: Hallo, Herr Schmitt, hier ist die Praxis Bewegung. Ihre Therapeutin ist nächste Woche im Urlaub. Ihre Termine am Dienstag und Donnerstag übernimmt ein Kollege. Die Uhrzeiten bleiben gleich.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiomeldung: Die Stadt Bergfeld sucht für den Sommer Rettungsschwimmer für die beiden Freibäder. Bewerben können sich alle ab 18 Jahren mit gültigem Rettungsschein. Die Bezahlung beträgt 16 Euro pro Stunde.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage im Fernbus: Liebe Fahrgäste, wir machen in zehn Minuten eine Pause von zwanzig Minuten an der Raststätte Hügelwald. Bitte seien Sie pünktlich zurück, der Bus wartet nicht.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht vom Bruder: Hey Lisa, hier ist Malte. Ich bin für Mamas Geburtstag zuständig und habe einen Tisch im Restaurant reserviert, für Sonntag um 13 Uhr. Kannst du die Blumen besorgen? Ich kümmere mich um die Torte.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage der Kinderarztpraxis: Sie haben die Praxis Dr. Wolf erreicht. Impftermine vergeben wir nur noch online über unsere Internetseite. In dringenden Fällen bleiben Sie bitte in der Leitung.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Herzlich willkommen im Rathaus Bergfeld! Das Gebäude ist über vierhundert Jahre alt, wurde aber vor zehn Jahren komplett renoviert. Wir beginnen im Ratssaal im ersten Stock, wo der Stadtrat jeden zweiten Mittwoch tagt. Diese Sitzungen sind übrigens öffentlich. Danach steigen wir auf den Turm – von oben sieht man bei gutem Wetter bis zu den Bergen. Bitte nehmen Sie die Treppe, einen Aufzug gibt es im Turm nicht.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Vera: Sag mal, Ines, ist das dein Hund?\nInes: Nein, das ist Bruno, der Hund meiner Nachbarin. Sie liegt im Krankenhaus, und ich gehe zweimal am Tag mit ihm raus.\nVera: Wie lieb von dir! Wolltest du nicht selbst einen Hund?\nInes: Doch, aber mein Freund hat eine Allergie. Bei Bruno ist es zum Glück nicht so schlimm, er ist ja nicht in unserer Wohnung.\nVera: Und wie lange musst du noch auf ihn aufpassen?\nInes: Noch etwa eine Woche. Dann kommt meine Nachbarin nach Hause, aber sie darf erst mal nicht lange laufen.\nVera: Dann brauchst du vielleicht Hilfe? Ich habe nachmittags oft Zeit.\nInes: Das wäre super! Vielleicht könntest du am Wochenende gehen, da besuche ich meine Oma.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderator: Guten Abend! In einigen Städten haben Supermärkte jetzt auch nachts geöffnet. Brauchen wir das? Meine Gäste sind Frau Huber, Kassiererin seit über zwanzig Jahren, und Herr Demir, Student und Kunde eines Nachtsupermarkts.\nFrau Huber: Für uns Angestellte ist Nachtarbeit sehr anstrengend. Viele Kolleginnen haben Kinder und schlafen dann zu wenig.\nHerr Demir: Ich arbeite abends in einem Restaurant und komme erst um Mitternacht nach Hause. Für mich ist der Nachtsupermarkt praktisch.\nModerator: Und wie viele Kunden kommen nachts wirklich?\nHerr Demir: Mehr, als man denkt. Pflegekräfte, Taxifahrer, Leute nach der Spätschicht.\nFrau Huber: Trotzdem lohnt es sich oft nicht. Manche Märkte haben nachts nur Automatenkassen, ganz ohne Personal.\nModerator: Dazu hat uns eine Hörerin eine Nachricht geschrieben.\nFrau Huber: Wenn schon Nachtarbeit, dann bitte mit deutlich mehr Lohn.\nHerr Demir: Ich wäre auch zufrieden, wenn die Läden nur bis ein Uhr offen wären.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie waren am Freitag im Konzert Ihrer Lieblingsband. Ihr Freund Lukas mag die Band auch, hatte aber keine Karte. Schreiben Sie Lukas eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Wie war das Konzert?\n– Begründen Sie: Welches Lied hat Ihnen am besten gefallen?\n– Machen Sie einen Vorschlag für das nächste Konzert."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben im Radio eine Sendung zum Thema „Selbst kochen oder Essen bestellen?“ gehört. Im Online-Gästebuch der Sendung finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Jana: Nach der Arbeit bin ich zu müde zum Kochen. Ich bestelle fast jeden Abend Essen über eine App. Das ist bequem, aber ziemlich teuer. Wie machen Sie das?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihr Nachbar, Herr Weiß, hat ein Paket für Sie angenommen. Sie sind bis morgen Abend verreist. Schreiben Sie Herrn Weiß. Bedanken Sie sich und sagen Sie, wann Sie das Paket abholen (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Maria kommt doch am Freitag. Wer holt sie vom Bahnhof ab?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gut. Was sollen wir ihr am Samstag zeigen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Schön. Und was machen wir, wenn es regnet?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Eine Freundin aus dem Ausland besucht Sie für ein Wochenende. Sie planen zusammen das Programm für den Besuch.\n\n– Abholen?\n– Was zeigen?\n– Wo essen?\n– Abendprogramm?\n– Was bei schlechtem Wetter?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Ist Mode wichtig?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Hausarbeit – sollen Männer und Frauen sie gleich teilen?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin präsentiert das Thema „Hausarbeit – sollen Männer und Frauen sie gleich teilen?“: Bei ihr zu Hause kocht ihr Mann und sie putzt. Mit einem Plan am Kühlschrank gibt es weniger Streit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p11-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Wie wichtig ist Ihnen Kleidung im Alltag? Erzählen Sie kurz.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

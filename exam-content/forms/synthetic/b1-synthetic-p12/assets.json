@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p12-l1-text",
+    "kind": "text",
+    "label": "E-Mail",
+    "text": {
+      "lang": "de",
+      "body_md": "Lieber Paolo,\n\nich habe eine Neuigkeit: Seit August gehe ich abends wieder zur Schule! Ich mache am Abendgymnasium mein Abitur nach. Mit 16 habe ich die Schule verlassen, weil ich unbedingt Geld verdienen wollte. Heute würde ich gern studieren, am liebsten Soziale Arbeit.\n\nDer Unterricht ist von Montag bis Donnerstag, jeweils von 18 bis 21.30 Uhr. Tagsüber arbeite ich weiter im Lager, aber nur noch 30 Stunden pro Woche. Das ist schon anstrengend, vor allem wenn ich am Wochenende noch für Tests lernen muss. Meine Mitschüler sind zwischen 19 und 45 Jahre alt – ich bin also nicht der Älteste.\n\nAm schwierigsten ist für mich Mathematik. Zum Glück gibt es samstags eine kostenlose Lerngruppe. In zweieinhalb Jahren bin ich hoffentlich fertig.\n\nViele Grüße\nJonas"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Handwerk zum Anfassen\n\nAm kommenden Samstag öffnen zwanzig Handwerksbetriebe in Rheinau ihre Werkstätten. Jugendliche und ihre Eltern können dort sehen, wie Tischler, Elektrikerinnen oder Bäcker arbeiten, und selbst etwas ausprobieren. Viele Betriebe finden nämlich keine Auszubildenden mehr. Ein kostenloser Bus fährt den ganzen Tag zwischen den Werkstätten. Wer an mindestens fünf Stationen einen Stempel sammelt, bekommt einen Gutschein für das Kino."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Café, in dem alle mitarbeiten\n\nIm „Café Miteinander“ am Rheinauer Hafen arbeiten Menschen mit und ohne Behinderung zusammen. Von den zwölf Mitarbeitenden haben acht eine Behinderung; sie backen Kuchen, bedienen die Gäste und kümmern sich um die Kasse. Das Café gehört einem Sozialverein. Die Preise sind ganz normal, und die Gäste kommen vor allem wegen des guten Kuchens. Im Sommer soll eine Terrasse am Wasser dazukommen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Drachenbau für Familien: An einem Nachmittag bauen Eltern und Kinder zusammen einen Drachen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Rückenschule im Büro: Ein Trainer kommt in Ihre Firma und zeigt Übungen am Arbeitsplatz."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Brautkleider und Anzüge leihen statt kaufen – große Auswahl, Termin nach Vereinbarung."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gebrauchtes Klavier zu verschenken – Abholung selbst organisieren."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Italienisch kochen mit einer Köchin aus Neapel, Kurs an zwei Abenden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hilfe bei der Wohnungssuche für Studierende – Beratung im Studentenwerk."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Verkauf von frischen Eiern direkt vom Hof, jeden Freitag auf dem Parkplatz am Rathaus."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Familienfotograf kommt zu Ihnen nach Hause – natürliche Bilder ohne Studio."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Rollstuhlgerechte Ferienwohnung am See, barrierefrei, mit großem Bad."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Fahrradfahren für Kinder ohne Stützräder – Kurs in den Osterferien."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bianca, 42: Einmal im Monat gehen mein Mann und ich schick essen. Dann möchten wir einfach Ruhe. Ein paar Restaurants ohne Kinder fände ich gut."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Tom, 35: Wir haben zwei kleine Kinder. Wenn Restaurants uns nicht mehr wollen, fühlen wir uns ausgeschlossen. Das finde ich unfair."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Erika, 69: Kinder gehören zum Leben dazu. Ein bisschen Lärm stört mich nicht, im Gegenteil: Ich freue mich, wenn ich Familien sehe."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Jannik, 30: Ich arbeite als Koch. Wenn Kinder zwischen den Tischen rennen, ist das für die Kellner gefährlich. Für manche Lokale ist ein Verbot sinnvoll."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sevda, 38: Das Problem sind nicht die Kinder, sondern Eltern, die nicht aufpassen. Man sollte die Eltern ansprechen, nicht die Kinder ausschließen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Konstantin, 52: Es gibt Hotels nur für Erwachsene, warum also nicht auch Restaurants? Jeder Wirt sollte das selbst entscheiden dürfen. Ich bin dafür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ilse, 74: Früher haben Kinder im Restaurant still gesessen. Heute erlauben die Eltern alles. Ich verstehe jeden Wirt, der keine Kinder mehr will."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Rami, 28: Mit Spielecke und Kindermenü kann ein Restaurant Familien und andere Gäste zufriedenstellen. Ein Verbot ist nicht nötig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sicherheitsregeln im Kletterpark Waldhöhe\n\n1. Alter: Kinder unter 10 Jahren klettern nur zusammen mit einem Erwachsenen. Pro Erwachsenem sind höchstens zwei Kinder erlaubt.\n\n2. Einweisung: Vor dem Klettern nehmen alle an einer Einweisung von 20 Minuten teil. Ohne Einweisung darf niemand in den Parcours.\n\n3. Kleidung: Tragen Sie feste Schuhe und Sportkleidung. Lange Haare müssen zusammengebunden werden.\n\n4. Wetter: Bei Gewitter wird der Park sofort geschlossen. Das Eintrittsgeld wird dann als Gutschein erstattet."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Stadion: Liebe Zuschauer, wegen eines Unwetters beginnt das Spiel heute eine halbe Stunde später, um 16 Uhr.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Steuerberaterin: Guten Tag, Herr Aydın, hier ist Frau Sommer. Für Ihre Steuererklärung fehlt mir noch die Bescheinigung von Ihrer Krankenkasse. Können Sie sie mir bis Ende des Monats schicken? Am besten per Post.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiomeldung: Die Blutspendezentrale bittet dringend um Spenden, weil im Sommer viele Spender im Urlaub sind. Am Mittwoch kann man von 14 bis 19 Uhr in der Stadthalle Blut spenden. Jeder Spender bekommt einen kleinen Imbiss.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage in der Bibliothek: Liebe Besucherinnen und Besucher, der Lesesaal schließt heute wegen einer Veranstaltung schon um 17 Uhr. Die Ausleihe im Erdgeschoss ist bis 19 Uhr für Sie geöffnet.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von einem Freund: Hallo Sebastian, hier ist Mario. Das Fußballtraining am Dienstag ist auf Mittwoch verschoben, weil der Platz neu markiert wird. Wir treffen uns wie immer um halb sieben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage des Recyclinghofs: Sie haben den Recyclinghof Rheinau erreicht. Ab November sind wir samstags nur noch bis 13 Uhr geöffnet. Elektrogeräte nehmen wir kostenlos an, für Bauschutt zahlen Sie eine Gebühr.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Guten Tag und herzlich willkommen an der Berufsschule Rheinau! Bei uns lernen etwa 1 800 Auszubildende in vierzehn Berufen. Heute können Sie in allen Werkstätten zuschauen, nur die Schweißerei ist aus Sicherheitsgründen geschlossen. In der Mensa im Erdgeschoss kochen unsere angehenden Köche ein Mittagessen für Sie, das kostet drei Euro. Um 14 Uhr gibt es in der Aula Informationen zu freien Ausbildungsplätzen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Frau Novak: Guten Morgen, Frau Lindemann! Haben Sie schon von dem Gemeinschaftsgarten gehört?\nFrau Lindemann: Ja, der Hausmeister hat mir davon erzählt. Hinter der Garage sollen Beete entstehen, oder?\nFrau Novak: Genau. Die Hausverwaltung bezahlt die Erde und das Holz. Wir müssen die Beete aber selbst bauen.\nFrau Lindemann: Das kann ich leider nicht, mein Rücken macht nicht mit. Aber ich kann gießen, wenn andere im Urlaub sind.\nFrau Novak: Das hilft auch! Am Samstag treffen wir uns um zehn Uhr zum Bauen. Mein Sohn bringt Werkzeug mit.\nFrau Lindemann: Und was wollen Sie anpflanzen?\nFrau Novak: Ich denke an Tomaten und Kräuter. Kartoffeln brauchen zu viel Platz.\nFrau Lindemann: Dann backe ich für Samstag einen Kuchen für die fleißigen Helfer.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderatorin: Guten Tag! Wer in der Innenstadt unterwegs ist, sucht oft lange eine Toilette. Brauchen wir mehr öffentliche Toiletten? Bei mir sind Herr Seidel vom Ordnungsamt und Frau Kurz vom Seniorenbeirat der Stadt.\nFrau Kurz: Für ältere Menschen ist das ein großes Thema. Viele gehen nicht mehr in die Stadt, weil sie Angst haben, keine Toilette zu finden.\nHerr Seidel: Das verstehe ich. Aber eine öffentliche Toilette kostet im Jahr bis zu 30 000 Euro, vor allem für die Reinigung.\nModeratorin: Gibt es denn günstigere Lösungen?\nHerr Seidel: Ja, zum Beispiel so: Restaurants lassen auch Nicht-Gäste auf ihre Toilette, und die Stadt bezahlt ihnen dafür einen kleinen Betrag.\nFrau Kurz: Das ist eine gute Idee, aber die Restaurants sind morgens oft noch geschlossen.\nModeratorin: Ein Hörer hat uns gerade dazu angerufen.\nFrau Kurz: Wichtig ist auch, dass die Toiletten barrierefrei sind, also für Menschen mit Rollator oder Rollstuhl.\nHerr Seidel: Im nächsten Jahr wollen wir zwei neue Toiletten am Bahnhof und am Markt bauen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben bei einem Gewinnspiel ein Wochenende in einem Hotel in den Bergen gewonnen. Ihre Freundin Anna möchte wissen, wie es war. Schreiben Sie Anna eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Was haben Sie dort gemacht?\n– Begründen Sie: Würden Sie wieder in dieses Hotel fahren?\n– Schlagen Sie vor, zusammen einen Ausflug zu machen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben in einer Zeitschrift einen Artikel zum Thema „Bewertungen im Internet“ gelesen. Im Online-Forum der Zeitschrift finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Holger: Bevor ich ein Restaurant oder ein Hotel buche, lese ich immer die Bewertungen im Internet. Meine Frau sagt, die sind oft gefälscht. Was meinen Sie?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie besuchen einen Kurs zur Prüfungsvorbereitung. Am Donnerstag kommen Sie wegen eines Arzttermins eine Stunde später. Schreiben Sie Ihrem Kursleiter, Herrn Ramos. Informieren Sie ihn und bitten Sie um die Arbeitsblätter (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir wollen doch die Überraschungsparty für Herrn Krüger planen. Wann ist ein guter Zeitpunkt?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Okay. Was schenken wir ihm – hast du eine Idee?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gut. Und wie sorgen wir dafür, dass er nichts merkt?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Kollege wird nächsten Monat 50 Jahre alt. Sie möchten für ihn eine Überraschungsparty im Büro organisieren.\n\n– Wann?\n– Wer wird eingeladen?\n– Essen und Getränke?\n– Geschenk?\n– Wie bleibt es eine Überraschung?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Sollen Kinder schon mit einem Jahr in die Kita?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Im Urlaub für die Arbeit erreichbar sein?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner präsentiert das Thema „Im Urlaub für die Arbeit erreichbar sein?“: Er liest im Urlaub keine E-Mails, weil er sich sonst nicht erholt. Seine Chefin akzeptiert das.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p12-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Wie war das bei Ihnen oder in Ihrer Familie: Wann sind die Kinder in die Kita gekommen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

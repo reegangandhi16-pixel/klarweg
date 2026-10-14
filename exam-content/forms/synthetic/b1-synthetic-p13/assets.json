@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p13-l1-text",
+    "kind": "text",
+    "label": "Blog",
+    "text": {
+      "lang": "de",
+      "body_md": "Warum ich Gebärdensprache lerne\n\nIm Frühling hat in unserer Abteilung eine neue Kollegin angefangen: Merve ist gehörlos. Am Anfang haben wir uns nur mit Zetteln und E-Mails verständigt. Das hat zwar funktioniert, aber in der Kaffeepause saß Merve meistens allein. Das fand ich schade.\n\nDeshalb habe ich mich bei der Volkshochschule für einen Kurs in Deutscher Gebärdensprache angemeldet. Der Kurs findet einmal pro Woche statt, und unsere Lehrerin ist selbst gehörlos. Im Unterricht wird kein Wort gesprochen – das war in der ersten Stunde sehr ungewohnt. Am schwierigsten finde ich, dass auch das Gesicht wichtig ist, nicht nur die Hände.\n\nInzwischen kann ich mich schon über einfache Dinge mit Merve unterhalten. Sie korrigiert mich geduldig und lacht, wenn ich Fehler mache. Zwei weitere Kollegen haben sich jetzt auch angemeldet.\n\nDennis"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Frisches Wasser für alle\n\nIn der Fußgängerzone von Seeburg stehen seit Juni vier Trinkbrunnen. Dort kann jeder kostenlos Leitungswasser trinken oder seine Flasche auffüllen. Die Stadt möchte damit vor allem älteren Menschen an heißen Tagen helfen, die oft zu wenig trinken. Außerdem sollen weniger Plastikflaschen verkauft werden. Das Wasser wird jede Woche kontrolliert. Im Winter werden die Brunnen abgestellt, damit die Leitungen nicht einfrieren. Viele Geschäfte in der Innenstadt machen zusätzlich mit und füllen Flaschen gratis auf."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Schüler erklären das Smartphone\n\nJeden Mittwochnachmittag wird es im Seniorentreff Seeburg laut und fröhlich: Schülerinnen und Schüler der Realschule erklären älteren Menschen ihr Smartphone. Sie zeigen zum Beispiel, wie man Fotos an die Enkel schickt oder eine Fahrkarte mit dem Handy kauft. Jeder Senior hat einen festen jungen „Lehrer“. Die Schüler bekommen dafür kein Geld, aber eine Bescheinigung für ihre Bewerbungen. Am meisten gelernt haben nach eigenen Worten beide Seiten: Die Jugendlichen hören viele Geschichten von früher."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gebärdensprache für Anfänger: Kurs für Familie und Freunde gehörloser Menschen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ehrenamtliche Begleitung für Arztbesuche älterer Menschen gesucht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Grillkurs für Männer und Frauen: Fleisch, Fisch und Gemüse richtig grillen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wir übersetzen Ihre Zeugnisse beglaubigt – Englisch, Arabisch, Türkisch."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Lauftraining für Kinder mit Übergewicht – Spaß an Bewegung, kleine Gruppen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Haushaltsauflösung: Bücher, Schallplatten und Bilder günstig abzugeben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Workshop „Fahrrad im Winter“: Licht, Reifen und Bremsen selbst prüfen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Aquarium mit Zubehör zu verkaufen, 120 Liter, ohne Fische."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Lerngruppe Führerschein-Theorie: zusammen für die Prüfung üben, kostenlos in der Bibliothek."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Seniorentanz am Nachmittag – keine Vorkenntnisse, auch ohne Partner."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sabine, 46: Ich fahre jeden Tag eine Stunde zur Arbeit und möchte lesen oder schlafen. Laute Telefonate nerven mich sehr. Ein Verbot wäre ein Segen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ole, 29: Im Zug arbeite ich, und dazu gehören Telefonate mit Kunden. Ich spreche leise, aber ein Verbot würde meine Arbeit unmöglich machen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Adelheid, 72: Früher hat man im Zug gelesen oder aus dem Fenster geschaut. Heute muss man sich die Probleme fremder Leute anhören. Ich bin für ein Verbot."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Marek, 37: Es gibt doch schon Ruhebereiche. Wer Ruhe will, kann sich dorthin setzen. Ein generelles Verbot finde ich übertrieben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Fenja, 21: Wenn ich meiner Mutter kurz sage, dass mein Zug Verspätung hat, stört das doch niemanden. Kurze Gespräche müssen erlaubt bleiben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Dr. Hüseyin, 58: Als Arzt muss ich im Notfall erreichbar sein. Deshalb kann ich ein Verbot nicht unterstützen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Corinna, 50: Einmal hat ein Mann neben mir eine halbe Stunde lang über seine Scheidung gesprochen. So etwas muss man verbieten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Benedikt, 33: In Flugzeugen darf man auch nicht telefonieren, und es funktioniert prima. Warum nicht im Zug? Ich wäre sofort dafür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hinweise des Fundbüros der Stadtwerke Seeburg\n\n1. Abgabe: Fundsachen aus Bussen und Bahnen kommen zwei Werktage später ins Fundbüro. Fragen Sie deshalb nicht am selben Tag nach.\n\n2. Suche: Sie können online eine Verlustmeldung ausfüllen. Wir melden uns, wenn wir Ihre Sache gefunden haben.\n\n3. Abholung: Bringen Sie einen Ausweis mit. Für die Aufbewahrung zahlen Sie eine Gebühr von drei Euro; Ausweise und Schlüssel geben wir kostenlos zurück.\n\n4. Aufbewahrung: Fundsachen bewahren wir sechs Monate auf. Danach werden sie versteigert oder gespendet."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Hotel: Liebe Gäste, wegen Renovierungsarbeiten servieren wir das Frühstück heute im Wintergarten.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Fahrschule: Hallo, Frau Okoro, hier ist die Fahrschule Spurwechsel. Ihr Termin für die praktische Prüfung steht fest: Montag, der 12., um 7.30 Uhr. Kommen Sie bitte eine Viertelstunde früher.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiotipp: Am Freitag hat im Stadttheater das neue Stück „Der Leuchtturm“ Premiere. Für Schülerinnen und Schüler gibt es Karten zum halben Preis. Nach der Vorstellung können die Zuschauer mit den Schauspielern sprechen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage am Bahnsteig: Achtung an Gleis 7: Der Regionalexpress nach Seeburg fährt heute in umgekehrter Wagenreihung. Die erste Klasse finden Sie am Anfang des Bahnsteigs, Wagen mit Fahrradplätzen am Ende.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von einer Kollegin: Hi Tanja, hier ist Ruth. Wegen der Firmenfeier am Freitag: Es ist doch kein schickes Fest, sondern ein Grillabend im Garten. Zieh also lieber etwas Bequemes an und bring eine Jacke mit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage des Internetanbieters: Willkommen beim Kundenservice von Netzwelle. Zurzeit gibt es im Raum Seeburg eine Störung. Wir arbeiten daran und erwarten, dass das Internet ab 18 Uhr wieder funktioniert.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Guten Tag, schön, dass Sie da sind! Die Wohnung hat drei Zimmer, Küche und Bad, insgesamt 78 Quadratmeter. Die Küche ist neu, die Geräte bleiben in der Wohnung. Die Kaltmiete beträgt 890 Euro, dazu kommen etwa 220 Euro Nebenkosten. Haustiere sind nach Absprache mit dem Vermieter erlaubt. Frei ist die Wohnung ab dem 1. März. Wenn Sie Interesse haben, schicken Sie mir bitte bis Freitag Ihre Unterlagen per E-Mail.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Stefan: Mensch, Ali, du bist ja ganz nass! Bist du mit dem Rad gekommen?\nAli: Ja, seit zwei Wochen fahre ich jeden Tag mit dem Fahrrad, fünfzehn Kilometer. Heute hat es leider geregnet.\nStefan: Fünfzehn Kilometer! Wie lange brauchst du denn?\nAli: Etwa vierzig Minuten. Mit dem Auto im Stau war es auch nicht viel schneller.\nStefan: Und wo duschst du hier?\nAli: Im Keller gibt es eine Dusche für die Mitarbeiter. Das wissen viele gar nicht.\nStefan: Wirklich? Ich überlege schon lange, ob ich auch mit dem Rad komme. Aber im Winter ist mir das zu kalt.\nAli: Das sehe ich auch so. Im Winter nehme ich wahrscheinlich die S-Bahn.\nStefan: Weißt du was, ich probiere es nächste Woche einmal aus. Fährst du mit mir die Strecke?\nAli: Klar, wir treffen uns am Montag an der Brücke.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderator: Guten Abend! Sollen alle Schülerinnen und Schüler ein Pflichtpraktikum in einem Pflegeheim, einem Krankenhaus oder einer Kita machen? Darüber diskutiere ich mit Frau Wagner, Lehrerin an einem Gymnasium, und Herrn Costa, Leiter eines Pflegeheims.\nHerr Costa: Wir haben jedes Jahr Praktikanten. Viele merken erst bei uns, wie schön es ist, für andere Menschen da zu sein.\nFrau Wagner: Das glaube ich. Aber ein Pflichtpraktikum muss gut vorbereitet sein. Sonst stehen die Jugendlichen nur herum.\nModerator: Wie lange sollte so ein Praktikum dauern?\nFrau Wagner: Zwei Wochen sind realistisch. Mehr Zeit haben wir im Schuljahr leider nicht.\nHerr Costa: Für uns ist das zu kurz. In zwei Wochen lernen die Bewohner die jungen Leute kaum kennen.\nModerator: Eine Hörerin hat uns dazu eine interessante Frage geschickt.\nHerr Costa: Vielleicht entscheidet sich der eine oder andere später für einen Beruf in der Pflege. Das wäre für uns ein großer Gewinn.\nFrau Wagner: Wichtig ist, dass die Schüler zwischen mehreren Bereichen wählen können.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben eine Woche Urlaub auf einer Insel gemacht. Ihre Kollegin Svenja plant auch einen Urlaub dort. Schreiben Sie Svenja eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Wo haben Sie gewohnt, und was haben Sie gemacht?\n– Begründen Sie: Was hat Ihnen nicht gefallen?\n– Geben Sie Svenja einen Tipp für ihre Reise."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben in einer Fernsehsendung eine Diskussion zum Thema „Leben ohne Fernseher“ gesehen. Im Online-Gästebuch der Sendung finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ulrike: Wir haben seit drei Jahren keinen Fernseher mehr. Filme schauen wir manchmal am Computer, sonst lesen wir oder spielen mit den Kindern. Könnten Sie sich das vorstellen?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Aus Ihrer Waschmaschine ist Wasser gelaufen, und an der Decke Ihrer Nachbarin unten ist jetzt ein Fleck. Schreiben Sie Ihrer Vermieterin, Frau Brenner. Informieren Sie sie und entschuldigen Sie sich (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir wollen doch mit der Mannschaft an den See fahren. Welcher Tag passt dir?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gut. Wie kommen wir mit zwanzig Kindern dorthin?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Okay. Brauchen wir noch Eltern, die mitkommen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie trainieren in Ihrem Sportverein eine Kindermannschaft. Sie möchten mit den Kindern einen Ausflug an einen See machen.\n\n– Wann?\n– Wie hinkommen?\n– Was mitnehmen?\n– Wer begleitet die Kinder?\n– Was kostet es?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Wie wichtig ist das gemeinsame Familienessen?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Mit dem Handy lernen – eine gute Idee?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin präsentiert das Thema „Mit dem Handy lernen – eine gute Idee?“: Sie lernt jeden Tag zehn Minuten Vokabeln mit einer App im Bus. Für Grammatik braucht sie aber ein Buch.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p13-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Wie oft isst Ihre Familie zusammen? Was ist dabei für Sie wichtig?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

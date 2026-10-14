@@ -43,10 +43,12 @@ for (const f of LIB) {
   test(`LIBRARY ${f.name}: every scored item has a one-sentence explanation and a verbatim evidence span in its own task`, () => {
     const objective = f.items.filter((it) => !it.is_example && OBJECTIVE.has(it.interaction));
     assert.equal(objective.length, 60);
+    const visible = JSON.stringify([f.assets.filter((a) => a.kind === 'text').map((a) => a.text.body_md), f.items.map((i) => [i.stem, i.options])]);
     for (const it of objective) {
       const e = it.feedback?.explanation_de || '';
       assert.match(e, /^\S.{8,}[.!?]$/, `${it.id}: explanation is a sentence`);
       assert.equal(/[^\d][.!?]\s+[A-ZÄÖÜ]/.test(e.slice(0, -1)), false, `${it.id}: explanation is ONE sentence: ${e}`);
+      assert.equal(visible.includes(e), false, `${it.id}: explanation is not a verbatim copy of a text, stem or option: ${e}`);
       assert.equal(it.anchors.length, 1);
       const [an] = it.anchors;
       const task = f.tasks.find((t) => t.id === it.task_id);

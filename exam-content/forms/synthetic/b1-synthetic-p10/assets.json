@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p10-l1-text",
+    "kind": "text",
+    "label": "E-Mail",
+    "text": {
+      "lang": "de",
+      "body_md": "Hallo Kerstin,\n\nentschuldige, dass ich mich so lange nicht gemeldet habe! Seit Juni bin ich in Elternzeit, und mit einem kleinen Baby hat der Tag einfach zu wenige Stunden. Meine Frau arbeitet wieder, und ich bleibe acht Monate mit Emil zu Hause.\n\nEhrlich gesagt hatte ich mir das ruhiger vorgestellt. Emil schläft nachts noch nicht durch, und tagsüber will er ständig getragen werden. Trotzdem genieße ich die Zeit sehr. Zweimal pro Woche gehe ich mit ihm in eine Krabbelgruppe. Dort bin ich meistens der einzige Vater, aber die anderen Eltern sind sehr nett.\n\nIn meiner Firma war man zuerst überrascht, dass ein Mann so lange Elternzeit nimmt. Mein Chef hat es aber sofort akzeptiert. Im Februar fange ich wieder an, zuerst nur mit 30 Stunden pro Woche.\n\nBesuch uns doch mal, Emil freut sich bestimmt!\nHenrik"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Jung und Alt unter einem Dach\n\nIn der Bahnhofstraße in Wiesental ist ein neues Wohnhaus fertig: Dort leben Studierende, Familien und ältere Menschen zusammen. Jede Partei hat eine eigene Wohnung, aber es gibt einen großen Gemeinschaftsraum und einen Garten für alle. Einmal im Monat kochen die Bewohner zusammen. Die Idee hatte eine Genossenschaft, die das Haus auch gebaut hat. Die Mieten sind günstiger als in der Umgebung, dafür sollen alle Bewohner sich gegenseitig helfen. Für die 24 Wohnungen gab es über 300 Bewerbungen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Lastenräder zum Ausleihen\n\nWer in Wiesental einen großen Einkauf oder eine Kiste Getränke transportieren muss, braucht dafür kein Auto mehr: Die Stadt verleiht seit April vier Lastenräder kostenlos. Man reserviert sie im Internet und holt sie dann im Rathaus oder in der Bücherei ab. Ein Rad kann man höchstens drei Tage behalten. Die Räder haben einen Elektromotor, deshalb sind auch Hügel kein Problem. Besonders junge Familien nutzen das Angebot, um ihre Kinder zu transportieren."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Töpferkurs am Abend: Tassen und Schalen selbst gestalten, Material inklusive."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wir suchen Zeitungsausträger für den frühen Morgen – ab 14 Jahren, Bezahlung pro Monat."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bergwandern für Familien: geführte Touren mit leichten Wegen, auch mit Kinderwagen möglich."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hochzeitskleid, Größe 38, nur einmal getragen, günstig abzugeben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Online-Kurs Buchhaltung für Selbstständige – lernen Sie in Ihrem Tempo."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hundeschule: Training für junge Hunde in kleinen Gruppen, samstags."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sprachtandem gesucht: Ich lerne Deutsch und biete Arabisch."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Babysitter-Kurs für Jugendliche – mit Zertifikat nach drei Nachmittagen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gartenhilfe gesucht: Wer mäht einmal pro Woche unseren Rasen?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Möbeltischlerei repariert alte Stühle und Tische – kostenloser Kostenvoranschlag."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Carina, 34: Ohne meine Mutter könnte ich gar nicht arbeiten. Zweimal pro Woche holt sie die Kinder vom Kindergarten ab. Für uns alle ist das ein Gewinn."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wilhelm, 67: Ich liebe meine Enkel, aber ich habe 45 Jahre gearbeitet. Jetzt möchte ich reisen und Zeit für mich haben. Feste Termine als Babysitter will ich nicht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Leyla, 29: Meine Kinder lernen bei ihrer Oma Dinge, die ich ihnen nicht beibringen kann, zum Beispiel Stricken und alte Lieder. Das finde ich wunderbar."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Petra, 63: Es gibt oft Streit, weil meine Tochter andere Regeln hat als ich, zum Beispiel bei Süßigkeiten. Deshalb passe ich nur noch im Notfall auf."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Jens, 41: Großeltern bleiben durch die Enkel fit und jung. Mein Vater sagt, die Nachmittage mit den Kindern sind das Beste in seiner Woche."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Agnieszka, 38: Meine Eltern wohnen 600 Kilometer entfernt. Ich finde, der Staat muss für genug Kita-Plätze sorgen, damit niemand von den Großeltern abhängig ist."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ruth, 70: Jeden Mittwoch sind die Enkel bei mir, und wir backen oder gehen in den Wald. Ich möchte das nicht mehr missen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sascha, 36: Meine Schwiegereltern sind schon über achtzig. Für sie wäre das zu anstrengend. Man sollte von Großeltern nicht zu viel erwarten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Regeln im Waschsalon Sauberzeit\n\n1. Bezahlung: Die Maschinen funktionieren nur mit der Kundenkarte. Die Karte bekommen Sie am Automaten am Eingang und laden sie dort mit Bargeld auf.\n\n2. Waschmittel: Waschmittel ist im Preis enthalten. Bitte füllen Sie kein eigenes Waschmittel in die Maschinen.\n\n3. Wäsche abholen: Holen Sie Ihre Wäsche bitte spätestens 15 Minuten nach Programmende ab. Danach dürfen andere Kunden die Wäsche in einen Korb legen.\n\n4. Öffnungszeiten: Der Salon ist täglich von 6 bis 22 Uhr geöffnet. Die letzte Wäsche muss um 20.30 Uhr starten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage in der Messehalle: Liebe Besucherinnen und Besucher, der Vortrag „Wohnen im Alter“ beginnt in fünf Minuten in Halle 3.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Bank: Guten Tag, Frau Hartmann, hier ist die Stadtbank Wiesental. Ihre neue Bankkarte ist da. Sie können sie ab Donnerstag in unserer Filiale abholen. Bitte bringen Sie Ihren Personalausweis mit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiotipp: Morgen Abend liest die Krimiautorin Hanna Feld in der Buchhandlung am Markt aus ihrem neuen Roman. Die Lesung beginnt um 19.30 Uhr. Karten gibt es nur im Vorverkauf in der Buchhandlung.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage am Bahnhof: Reisende mit Fahrrad nach Bergstadt beachten bitte: In der Regionalbahn um 8.15 Uhr ist der Fahrradwagen heute im letzten Teil des Zuges. Fahrräder sind dort nur mit Fahrradkarte erlaubt.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von einer Kollegin: Hi Jan, hier ist Simone. Ich habe heute Morgen meinen Büroschlüssel zu Hause vergessen. Kannst du mir die Tür aufmachen? Ich bin gegen halb neun da und warte am Seiteneingang.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Möbelhaus: Liebe Eltern, unser Kinderparadies im Erdgeschoss ist heute bis 19 Uhr geöffnet. Kinder ab drei Jahren können dort bis zu einer Stunde kostenlos spielen, während Sie in Ruhe einkaufen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Herzlich willkommen zum Töpferkurs! Der Kurs hat sechs Abende, wir treffen uns immer dienstags von 18 bis 20 Uhr. Heute machen wir eine einfache Schale mit der Hand, die Töpferscheibe benutzen wir erst ab dem dritten Abend. Tragen Sie bitte alte Kleidung, denn Ton macht schmutzig. Ihre Stücke müssen zwei Wochen trocknen, bevor wir sie brennen. Am letzten Abend dürfen Sie alles mit nach Hause nehmen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Felix: Und, Hanna, habt ihr euren Skiurlaub schon gebucht?\nHanna: Ja, wir fahren im Februar eine Woche nach Österreich. Diesmal in eine kleine Pension, nicht ins Hotel.\nFelix: Fahrt ihr wieder mit dem Auto?\nHanna: Nein, mit dem Zug. Mit Schnee auf der Autobahn hatten wir letztes Jahr viel Stress.\nFelix: Können eure Kinder schon Ski fahren?\nHanna: Die Große ja, der Kleine macht dieses Jahr seinen ersten Skikurs. Ich bin gespannt.\nFelix: Wir bleiben im Winter zu Hause. Dafür fahren wir im Sommer drei Wochen ans Meer.\nHanna: Auch schön. Und wer kümmert sich in der Zeit um euren Hund?\nFelix: Den nehmen wir mit. Die Ferienwohnung ist extra für Familien mit Hund.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderator: Guten Abend! Immer mehr Schülerinnen und Schüler bekommen Nachhilfe. Brauchen Kinder heute mehr Unterstützung als früher? Bei mir sind Frau Becker, sie gibt seit fünfzehn Jahren Nachhilfe, und Herr Ulrich, Leiter einer Gesamtschule.\nFrau Becker: Viele Eltern kommen schon in der dritten Klasse zu mir, weil sie Angst vor der Empfehlung für die weiterführende Schule haben.\nHerr Ulrich: Diese Angst verstehe ich. Aber gute Schulen sollten so unterrichten, dass Nachhilfe meistens nicht nötig ist.\nModerator: Wie teuer ist Nachhilfe denn?\nFrau Becker: Bei mir kostet eine Stunde 25 Euro. Viele Familien können sich das nicht leisten.\nHerr Ulrich: Deshalb bieten wir an unserer Schule kostenlose Lernzeiten am Nachmittag an, mit älteren Schülern als Helfern.\nModerator: Gleich lese ich noch die Nachricht einer Hörerin vor.\nFrau Becker: Oft geht es gar nicht um Mathe oder Englisch. Die Kinder brauchen einfach jemanden, der Zeit für sie hat.\nHerr Ulrich: Und manchmal hilft schon ein ruhiger Platz zum Lernen, den viele zu Hause nicht haben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben am Wochenende einen Kurs zum Brotbacken gemacht. Ihr Freund Kemal backt auch gern. Schreiben Sie Kemal eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Was haben Sie im Kurs gemacht?\n– Begründen Sie: Was war neu für Sie?\n– Machen Sie einen Vorschlag, zusammen zu backen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben im Fernsehen eine Sendung zum Thema „Urlaub zu Hause oder weit weg?“ gesehen. Im Online-Gästebuch der Sendung finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Marco: Wir fliegen jedes Jahr in ein anderes Land. Nur so lernt man wirklich etwas Neues kennen. Urlaub zu Hause ist doch langweilig. Wie sehen Sie das?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben ein Buch aus der Stadtbibliothek verloren. Schreiben Sie an die Bibliothek, Frau Neumeier. Entschuldigen Sie sich und fragen Sie, was Sie jetzt tun müssen (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir sollen doch das Grillfest für unsere Abteilung planen. Wo könnten wir grillen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gute Idee. Und was machen wir für die Kollegen, die kein Fleisch essen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Einverstanden. Was machen wir, wenn es an dem Tag regnet?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihre Abteilung möchte vor den Sommerferien ein Grillfest machen. Sie planen das Fest zusammen.\n\n– Wann und wo?\n– Essen und Getränke?\n– Vegetarisches Angebot?\n– Wer grillt?\n– Was bei Regen?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Sparen oder das Leben genießen?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Computerspiele für Kinder – gut oder schlecht?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner präsentiert das Thema „Computerspiele für Kinder – gut oder schlecht?“: Sein Sohn spielt am Wochenende eine Stunde am Computer. Er findet, dass manche Spiele beim Lernen helfen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p10-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Sparen Sie für etwas Bestimmtes? Wofür würden Sie gern Geld ausgeben?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

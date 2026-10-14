@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p8-l1-text",
+    "kind": "text",
+    "label": "E-Mail",
+    "text": {
+      "lang": "de",
+      "body_md": "Liebe Oksana,\n\ndu wolltest wissen, wie ich jetzt wohne. Also: Seit September lebe ich bei Frau Hildebrandt, einer 82-jährigen Dame. Das Projekt heißt „Wohnen für Hilfe“. Ich bezahle keine Miete, nur die Nebenkosten. Dafür helfe ich ihr ungefähr zehn Stunden im Monat: Ich trage die Getränkekisten, mache den Rasen und begleite sie manchmal zum Arzt.\n\nAm Anfang war ich unsicher, ob das gut geht, denn wir sind ja sehr verschieden. Aber Frau Hildebrandt ist offen und lustig. Sie hat früher als Lehrerin gearbeitet und korrigiert jetzt manchmal meine Hausarbeiten für die Uni – das hilft mir sehr.\n\nNur eine Regel ist streng: Nach 22 Uhr soll ich keinen Besuch mehr haben. Aber das ist für mich in Ordnung. Komm doch im Dezember vorbei, dann lernst du sie kennen!\n\nLiebe Grüße\nYusuf"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Bohrmaschine leihen statt kaufen\n\nIm Gemeindezentrum Südviertel hat eine „Bibliothek der Dinge“ eröffnet. Dort kann man Werkzeuge, Campingausrüstung oder eine Nähmaschine ausleihen, genauso wie Bücher in einer normalen Bibliothek. Die Idee: Viele Geräte braucht man nur ein paarmal im Jahr. Die Mitgliedschaft kostet zehn Euro im Jahr. Die meisten Dinge haben Bürgerinnen und Bürger gespendet. Am häufigsten wird bisher die Bohrmaschine ausgeliehen, gefolgt vom Zelt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Eine Bank zum Mitfahren\n\nIn Oberried steht seit dem Sommer eine gelbe „Mitfahrbank“ am Ortsausgang. Wer sich dort hinsetzt, zeigt den Autofahrern, dass er mitgenommen werden möchte. Mit einem Schild kann man das Ziel anzeigen, zum Beispiel den Nachbarort oder den Bahnhof. Die Idee kam von einer Jugendgruppe, weil abends kaum noch Busse fahren. Bisher hat es keine Probleme gegeben. Die Gemeinde empfiehlt trotzdem, dass Kinder die Bank nicht allein benutzen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Yoga für Schwangere: sanfte Übungen und Atemtechnik, montags 17 Uhr."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Tierarztpraxis sucht Aushilfe am Empfang, 15 Stunden pro Woche."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Repariere Waschmaschinen und Geschirrspüler – Anfahrt im Stadtgebiet kostenlos."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kostenlose Rechtsberatung für Mieter jeden zweiten Donnerstag im Bürgerhaus."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bauchtanz für Frauen jeden Alters, Probestunde gratis."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Schachclub sucht neue Mitglieder – Anfänger und Kinder willkommen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ferienbetreuung in den Sommerferien: Spiele, Ausflüge und Sport für Kinder von 6 bis 12."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Lieferservice für Bio-Gemüse: jede Woche eine Kiste direkt vor die Haustür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wir räumen Ihren Keller auf und bringen alles zum Wertstoffhof."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Motorradtouren am Wochenende – nur mit eigenem Motorrad."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sven, 31: In unserem Team duzen sich alle, auch der Chef. Das macht die Zusammenarbeit einfacher und schneller. Ich finde es gut."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Monika, 58: Das „Sie“ schafft eine gesunde Distanz. Wenn ich jemanden kritisieren muss, fällt mir das mit „Sie“ leichter. Ich bleibe lieber beim Sie."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ahmet, 27: Ich komme aus einer Firma, in der alle per Du waren. Seitdem fühle ich mich mit dem „Sie“ immer etwas fremd. Für mich ist das Du besser."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ursula, 49: Bei uns gibt es viele Kunden, die gesiezt werden wollen. Wenn wir uns intern duzen, sagen wir das schnell auch zum Kunden. Das ist peinlich."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Fynn, 23: Ich bin Azubi und war am ersten Tag froh, dass mir alle das Du angeboten haben. So habe ich mich sofort willkommen gefühlt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gerhard, 61: Ein Du ist für mich etwas Persönliches. Das biete ich Freunden an, nicht jedem Kollegen. Deshalb bin ich dagegen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Vanessa, 35: Ehrlich gesagt ist mir das egal. Wichtiger ist, dass man respektvoll miteinander umgeht, ob mit Du oder Sie. Eine Pflicht zum Du brauche ich nicht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kostas, 42: Seit wir uns duzen, fragen die Jüngeren viel öfter um Rat. Die Hemmung ist einfach weg. Das sehe ich positiv."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nutzungsbedingungen – Carsharing Südviertel e. V.\n\n1. Buchung: Autos buchen Sie in der App, höchstens 14 Tage im Voraus. Eine Buchung kann bis eine Stunde vor Beginn kostenlos storniert werden.\n\n2. Tanken: Ist der Tank weniger als ein Viertel voll, tanken Sie bitte. Die Tankkarte liegt im Handschuhfach, Sie zahlen nichts extra.\n\n3. Sauberkeit: Rauchen und Tiere ohne Transportbox sind im Auto nicht erlaubt.\n\n4. Verspätung: Wenn Sie das Auto später zurückbringen, informieren Sie uns bitte sofort telefonisch. Sonst kostet jede angefangene Stunde 15 Euro extra."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Kino: Liebe Gäste, wegen eines technischen Problems beginnt der Film in Saal 2 etwa zehn Minuten später.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Tierarztpraxis: Guten Tag, Herr Fischer, hier ist die Tierarztpraxis am Park. Die Blutwerte Ihrer Katze sind gut. Sie braucht keine Tabletten mehr, aber kommen Sie bitte in drei Monaten zur Kontrolle.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiomeldung: Die Kinderbuchmesse im Kongresszentrum war am Wochenende ein großer Erfolg. Mehr als 9 000 Besucher kamen, viele davon mit Schulklassen. Im nächsten Jahr soll die Messe drei statt zwei Tage dauern.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage am Hafen: Die Hafenrundfahrt um 14 Uhr ist leider ausgebucht. Für die Fahrt um 15.30 Uhr gibt es noch Plätze. Tickets bekommen Sie am Schalter oder direkt auf dem Schiff.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Mutter: Hallo Schatz, hier ist Mama. Papa und ich kommen am Sonntag doch erst zum Abendessen, nicht schon zum Mittagessen. Wir bringen den Salat mit, du musst also nichts vorbereiten.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage der Stadtwerke: Sie sind mit der Service-Hotline der Stadtwerke verbunden. Bei einem Stromausfall drücken Sie bitte die Eins. Für Fragen zu Ihrer Rechnung drücken Sie die Zwei. Alle anderen Anliegen schreiben Sie uns bitte per E-Mail.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Hallo zusammen und willkommen zur Radtour „Alte Mühlen am Fluss“! Die Tour ist zwanzig Kilometer lang und ziemlich flach, also auch für Anfänger gut. Wir fahren immer hintereinander, nie nebeneinander. Bitte setzen Sie alle einen Helm auf; wer keinen hat, bekommt einen von mir. In der zweiten Mühle gibt es eine Pause mit Kaffee und Kuchen, das ist im Preis enthalten. Gegen 17 Uhr sind wir wieder hier.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Paula: Hallo Ömer! Ich habe gehört, du warst letzte Woche nicht da?\nÖmer: Ja, meine Tochter hatte Windpocken. Ich bin drei Tage zu Hause geblieben, meine Frau die anderen zwei.\nPaula: Oh je. Geht es ihr wieder besser?\nÖmer: Ja, sie ist wieder im Kindergarten. Und du? Wie war deine Fortbildung in Leipzig?\nPaula: Ganz interessant. Es ging um Projektmanagement. Aber die Tage waren sehr lang, von acht bis sechs.\nÖmer: Kannst du uns im Team davon erzählen?\nPaula: Ja, ich soll am Montag in der Besprechung eine kurze Präsentation machen. Die bereite ich am Wochenende vor.\nÖmer: Wenn du willst, schaue ich sie mir vorher an.\nPaula: Gern, danke! Ich schicke sie dir am Sonntagabend.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderatorin: Herzlich willkommen! Immer mehr Menschen arbeiten weiter, obwohl sie schon Rente bekommen. Ist das eine gute Entwicklung? Ich spreche mit Herrn Vogt, 69 Jahre alt, er arbeitet in einem Baumarkt, und mit Frau Engel, Beraterin für ältere Arbeitnehmer.\nHerr Vogt: Ich arbeite drei Vormittage pro Woche in der Gartenabteilung. Zu Hause fiel mir einfach die Decke auf den Kopf.\nFrau Engel: Das ist ein guter Grund. Viele arbeiten aber, weil die Rente zum Leben nicht reicht. Das finde ich bedenklich.\nModeratorin: Was haben die Firmen davon?\nFrau Engel: Ältere Mitarbeiter haben viel Erfahrung. Sie können jungen Kollegen eine Menge beibringen.\nHerr Vogt: Die Kunden fragen oft extra nach mir, weil ich früher selbst Gärtner war.\nModeratorin: Wir haben dazu einen Anruf von einer Hörerin.\nHerr Vogt: Wichtig ist, dass man selbst entscheiden kann, wie viele Stunden man arbeitet.\nFrau Engel: Und die Gesundheit muss mitspielen. Körperlich schwere Arbeit ist im Alter oft nicht mehr möglich.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben seit zwei Wochen eine Katze aus dem Tierheim. Ihre Freundin Mira hat auch eine Katze. Schreiben Sie Mira eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Wie ist Ihre Katze?\n– Begründen Sie: Was ist noch schwierig?\n– Bitten Sie Mira um einen Tipp und schlagen Sie ein Treffen vor."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben in einer Zeitschrift einen Artikel zum Thema „Fitness-Apps und Smartwatches“ gelesen. Im Online-Forum der Zeitschrift finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bettina: Meine Uhr zählt jeden Schritt und erinnert mich, wenn ich zu lange sitze. Ohne sie würde ich mich viel weniger bewegen. Benutzen Sie auch so etwas?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Die Klasse Ihres Sohnes macht am Freitag einen Ausflug. Ihr Sohn ist krank und kann nicht mitfahren. Schreiben Sie seiner Lehrerin, Frau Stein. Entschuldigen Sie Ihren Sohn und fragen Sie, ob er das Geld für den Ausflug zurückbekommt (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir wollten doch einen Spieleabend für die Nachbarn machen. Wo könnten wir uns treffen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Prima. Welche Spiele sollen wir mitbringen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gut. Und wie laden wir die Nachbarn ein – mit einem Zettel im Treppenhaus?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie möchten in Ihrem Haus einen Spieleabend für die Nachbarn organisieren. Sie planen den Abend zusammen.\n\n– Wann?\n– Wo im Haus?\n– Welche Spiele?\n– Essen und Getränke?\n– Wie die Nachbarn einladen?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Soziale Netzwerke – mehr Vor- oder Nachteile?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Allein wohnen oder in einer Wohngemeinschaft?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner präsentiert das Thema „Allein wohnen oder in einer Wohngemeinschaft?“: Er hat fünf Jahre in einer WG gewohnt und nie allein gegessen. Jetzt wohnt er allein und genießt die Ruhe.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p8-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Welches soziale Netzwerk benutzen Sie am meisten, und wofür?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

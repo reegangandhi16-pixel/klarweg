@@ -4,19 +4,21 @@
    the role of the Access proxy. Local test users stand in for signed-in accounts: the default entitled learner, two
    raters and one outsider without any role. The dev-only cookie `kx-dev-as=<alias>` picks one of THESE users (it can
    never name any other user id); authorization is still decided by the exam Worker from the stored roles.
-   Usage: node exam-worker/test/dev-server.mjs [port] [s0|p1]  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
+   Usage: node exam-worker/test/dev-server.mjs [port] [s0|p1|p2|practice] (default practice = P1 + P2)  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
    Default form for the demo: p1 (synthetic practice). Tests default to s0 (system test). */
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import worker from '../src/index.js';
-import { makeEnv, grant, role, ROOT, PROXY_SECRET, FORM_DIR, PRACTICE_FORM_DIR } from './harness.mjs';
+import { makeEnv, grant, role, ROOT, PROXY_SECRET, FORM_DIR, PRACTICE_FORM_DIR, PRACTICE_P2_FORM_DIR } from './harness.mjs';
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8' };
 
 export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0' } = {}) {
-  const h = makeEnv({ formDirs: [form === 'p1' ? PRACTICE_FORM_DIR : FORM_DIR] });
+  const FORMS = { s0: [FORM_DIR], p1: [PRACTICE_FORM_DIR], p2: [PRACTICE_P2_FORM_DIR], practice: [PRACTICE_FORM_DIR, PRACTICE_P2_FORM_DIR] };
+  if (!FORMS[form]) throw new Error(`unknown form ${form} (s0|p1|p2|practice)`);
+  const h = makeEnv({ formDirs: FORMS[form] });
   await grant(h.env, user);
   const users = { learner: user, rater1: `usr_${crypto.randomUUID()}`, rater2: `usr_${crypto.randomUUID()}`, outsider: `usr_${crypto.randomUUID()}` };
   await role(h.env, users.rater1, 'rater'); await role(h.env, users.rater2, 'rater');
@@ -50,6 +52,6 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const s = await startDevServer({ port: Number(process.argv[2] || 8788), form: process.argv[3] || 'p1' });
+  const s = await startDevServer({ port: Number(process.argv[2] || 8788), form: process.argv[3] || 'practice' });
   console.log(`klarweg-exam dev server: http://127.0.0.1:${s.port}/exam/  (synthetic content only, form ${s.form}; rater screen /exam/rater.html with cookie kx-dev-as=rater1)`);
 }

@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p2-l1-text",
+    "kind": "text",
+    "label": "Blog",
+    "text": {
+      "lang": "de",
+      "body_md": "Hallo zusammen,\n\nvor einem Jahr habe ich mich endlich getraut: Ich singe jetzt im Chor „Stimmen am Fluss“ in Lindenbach. Am Anfang war ich sehr nervös, weil ich noch nie vor anderen Menschen gesungen hatte. Aber die Chorleiterin, Frau Brandt, hat mich sofort beruhigt. Sie sagt immer: „Man muss keine Noten lesen können, man muss nur gut zuhören.“\n\nWir proben jeden Mittwochabend im Gemeindehaus. Nach der Probe gehen viele noch zusammen etwas trinken – so habe ich in kurzer Zeit neue Freunde gefunden. Im Sommer hatten wir unser erstes Konzert im Stadtpark. Leider hat es den ganzen Nachmittag geregnet, deshalb kamen nur wenige Zuschauer. Trotzdem war es für mich ein wunderbarer Tag.\n\nIm Dezember singen wir in der Stadtkirche. Die Eintrittskarten sind kostenlos, aber man muss sie vorher in der Bücherei abholen. Wer Lust hat, kann auch einfach zu einer Probe kommen und mitsingen!\n\nEure Selin"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Neue Buslinie zum Klinikum\n\nSeit dem 1. September fährt die neue Linie 14 vom Hauptbahnhof direkt zum Klinikum Nord. Bisher mussten Patientinnen, Patienten und Besucher am Marktplatz umsteigen. Die Busse fahren werktags alle 15 Minuten, am Wochenende alle 30 Minuten. Die Stadtwerke haben dafür drei neue Elektrobusse gekauft. Viele Beschäftigte des Klinikums freuen sich: Sie können jetzt auch nach der Spätschicht mit dem Bus nach Hause fahren, denn der letzte Bus fährt erst um 23.40 Uhr."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Garten auf dem Schuldach\n\nAuf dem Dach der Gesamtschule Ostend wachsen seit dem Frühjahr Tomaten, Kräuter und Erdbeeren. Die Idee hatte eine Biologielehrerin, die mit ihrer Klasse etwas über gesunde Ernährung lernen wollte. Das Geld für Erde und Pflanzen kam von einem Sommerfest, das die Eltern organisiert haben. Jeden Freitag arbeiten die Schülerinnen und Schüler zwei Stunden im Garten. In den Ferien gießen Nachbarn aus dem Viertel die Pflanzen. Das Gemüse wird in der Schulkantine verwendet."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Klavierunterricht für Erwachsene – auch für Wiedereinsteiger, Termine nach Vereinbarung."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Schwimmkurs für Erwachsene, die nie schwimmen gelernt haben – samstags im Hallenbad, kleine Gruppen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kochabend „Küche der Welt“: Jeden Donnerstag kochen Teilnehmende Gerichte aus ihren Heimatländern und essen zusammen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Laufgruppe für Anfänger: dreimal pro Woche um 18 Uhr im Stadtpark, Treffpunkt am Brunnen, kostenlos."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hausaufgabenhilfe für Grundschulkinder, montags bis donnerstags von 14 bis 16 Uhr im Familienzentrum."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gebrauchte Kinderfahrräder günstig zu verkaufen – 16 und 20 Zoll, gut erhalten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bewerbungstraining: Wir prüfen Ihren Lebenslauf und üben Vorstellungsgespräche – auch auf Englisch."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hundesitter gesucht: Wer geht mittags mit unserem ruhigen Labrador spazieren? Bezahlung nach Absprache."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nähkurs: Kleidung reparieren und ändern statt wegwerfen – Nähmaschinen sind vorhanden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ferienwohnung an der Ostsee: 2 Zimmer, ruhige Lage, Haustiere leider nicht erlaubt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Lena, 27: Ich arbeite unter der Woche bis 19 Uhr. Wenn die Läden auch sonntags offen wären, könnte ich in Ruhe einkaufen. Ich bin klar dafür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wolfgang, 61: Der Sonntag gehört der Familie. Ich finde, wir brauchen einen Tag, an dem sich nicht alles ums Kaufen dreht. Deshalb bin ich dagegen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Aylin, 34: Als Verkäuferin arbeite ich schon sechs Tage pro Woche. Wenn Geschäfte am Sonntag öffnen, muss ich vielleicht auch noch sonntags arbeiten. Nein, danke!"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Theo, 19: In vielen anderen Ländern ist das ganz normal. Ich würde mich freuen, wenn ich auch am Sonntag shoppen gehen könnte."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Martina, 45: Für kleine Geschäfte ist das ein Problem: Sie haben nicht genug Personal. Am Ende gewinnen nur die großen Ketten. Ich halte nichts davon."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Jakob, 38: Warum nicht? Wer sonntags arbeitet, bekommt mehr Geld, und niemand muss am Sonntag einkaufen gehen. Ich finde die Idee gut."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Edith, 72: Ich gehe sonntags gern spazieren, und die Stadt ist dann schön ruhig. Diese Ruhe möchte ich behalten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Samir, 30: Ich bin Krankenpfleger und habe oft am Wochenende Dienst. Offene Geschäfte am Sonntag wären für Leute wie mich eine große Hilfe."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Teilnahmebedingungen der Volkshochschule Lindenbach\n\n1. Anmeldung: Sie können sich online, telefonisch oder persönlich im Servicebüro anmelden. Ihre Anmeldung ist erst gültig, wenn Sie die Kursgebühr bezahlt haben.\n\n2. Abmeldung: Bis sieben Tage vor Kursbeginn können Sie sich kostenlos abmelden. Danach müssen Sie die volle Gebühr bezahlen, außer jemand anderes übernimmt Ihren Platz.\n\n3. Ermäßigung: Schülerinnen, Schüler und Studierende zahlen die Hälfte. Bitte zeigen Sie dafür bei der Anmeldung einen gültigen Ausweis.\n\n4. Ausfall: Wenn eine Kursstunde ausfällt, informieren wir Sie per E-Mail. Die Stunde wird am Ende des Kurses nachgeholt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage am Flughafen: Der Flug nach Wien hat etwa vierzig Minuten Verspätung. Die neue Abflugzeit ist 15.20 Uhr.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht auf der Mailbox: Hallo Frau Krüger, hier ist Tim aus dem Büro. Die Teambesprechung morgen findet nicht um neun, sondern erst um elf Uhr statt. Bringen Sie bitte die Zahlen vom letzten Monat mit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Verkehrsfunk: Auf der A7 zwischen Nordstadt und Seeheim gibt es nach einem Unfall einen langen Stau. Die Polizei empfiehlt, über die Bundesstraße 3 zu fahren. Die Bahnstrecke ist nicht betroffen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage im Supermarkt: Liebe Kundinnen und Kunden, unser Markt schließt heute wegen einer Inventur bereits um 18 Uhr. Ab morgen sind wir wieder wie gewohnt bis 22 Uhr für Sie da.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Autowerkstatt: Guten Tag, Herr Yilmaz, hier ist die Werkstatt Becker. Ihr Auto ist fertig. Die Reparatur war etwas teurer, weil wir auch die Bremsen wechseln mussten. Sie können den Wagen heute bis 17 Uhr abholen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiotipp: Am Samstag findet auf dem Domplatz das Stadtfest statt. Es gibt Musik, Essen aus vielen Ländern und ein Programm für Kinder. Der Eintritt ist frei. Bei Regen wird das Fest auf Sonntag verschoben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Führung durch die Bäckerei Sonnenkorn: Herzlich willkommen! Ich zeige Ihnen heute, wie unser Brot entsteht. Bitte ziehen Sie zuerst die weißen Mäntel und die Haarnetze an. Wir beginnen in der Backstube, wo die Arbeit schon um drei Uhr nachts anfängt. Fotografieren dürfen Sie gern, aber bitte fassen Sie die Maschinen nicht an. Die Führung dauert ungefähr eine Stunde. Zum Schluss dürfen Sie im Laden ein frisches Brötchen probieren.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ben: Lisa! Schön, dich zu sehen. Wie war dein Urlaub in Portugal?\nLisa: Wunderbar, danke! Eigentlich wollte ich ja nach Spanien, aber die Flüge dorthin waren leider ausgebucht.\nBen: Und? Hast du viel gesehen?\nLisa: Ja, wir waren zwei Wochen in Lissabon und sind jeden Tag durch die Stadt gelaufen. Nur am Strand war ich kaum, das Wasser war mir zu kalt.\nBen: Bei mir war es dieses Jahr ruhiger. Ich habe meinen Urlaub zu Hause verbracht und endlich mein Zimmer gestrichen.\nLisa: Das klingt auch nicht schlecht. Sag mal, kommst du am Freitag zu Annas Geburtstag?\nBen: Leider nicht, ich habe Spätdienst. Aber ich rufe sie am Morgen an.\nLisa: Schade! Wenn du willst, bringe ich ihr dein Geschenk mit.\nBen: Das wäre super, danke!",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderator: Guten Abend! Heute geht es um die Frage, ob Kochen ein Schulfach werden soll. Bei mir sind Frau Hoffmann, sie ist Köchin, und Herr Okoye, Lehrer und Vater von zwei Kindern.\nFrau Hoffmann: In meiner Küche arbeiten junge Leute, die zum ersten Mal Kartoffeln schälen. Viele können nicht einmal ein einfaches Essen zubereiten.\nHerr Okoye: Die Idee ist gut, aber unsere Schüler haben schon jetzt so viele Stunden, dass kaum Zeit für ein neues Fach bleibt.\nModerator: Und wie stellen Sie sich das praktisch vor?\nFrau Hoffmann: Man könnte das mit anderen Fächern verbinden. Wer ein Rezept für zwanzig Personen umrechnet, übt Mathematik, und wer einkauft, muss planen.\nHerr Okoye: Das klingt schön, aber an unserer Schule gibt es nicht einmal eine Küche. Wer soll die bezahlen?\nModerator: Dazu hat uns eine Hörerin geschrieben. Ich lese ihre Frage gleich vor.\nFrau Hoffmann: Wer selbst kocht, isst gesünder und weniger Fertiggerichte. Das ist doch das Wichtigste.\nHerr Okoye: Ich finde, das ist zuerst die Aufgabe der Familie. Bei uns kochen die Kinder am Wochenende mit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie waren am Wochenende auf einem Stadtfest. Ihre Freundin Mara war krank und konnte nicht mitkommen. Schreiben Sie Mara eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Was haben Sie auf dem Fest erlebt?\n– Begründen Sie: Was hat Ihnen besonders gut gefallen?\n– Machen Sie einen Vorschlag für ein gemeinsames Treffen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben in einer Fernsehsendung eine Diskussion zum Thema „Lernen im Internet“ gesehen. Im Online-Gästebuch der Sendung finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Daniel: Mein Sprachkurs findet seit einem halben Jahr nur noch online statt. Ich spare den Weg, aber mir fehlt der Kontakt zu den anderen Teilnehmern. Wie sehen Sie das?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihr Nachbar, Herr Petersen, hat Sie zu seiner Geburtstagsfeier am Samstag eingeladen. Sie können leider nicht kommen. Schreiben Sie Herrn Petersen. Bedanken Sie sich für die Einladung und erklären Sie höflich, warum Sie nicht kommen können (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir sollen doch den Ausflug für unseren Deutschkurs planen. Wohin könnten wir fahren?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Das klingt gut. Und wie kommen wir dorthin – mit dem Zug oder mit dem Bus?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Einverstanden. Sollen wir ein Picknick mitnehmen oder lieber in ein Restaurant gehen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihr Deutschkurs möchte zum Kursende einen gemeinsamen Ausflug machen. Sie planen den Ausflug zusammen.\n\n– Wohin fahren?\n– Wann?\n– Wie hinkommen?\n– Essen und Trinken?\n– Was kostet es?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Ehrenamtlich arbeiten – eine gute Idee?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Haustiere in der Stadtwohnung?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner präsentiert das Thema „Haustiere in der Stadtwohnung?“: Er meint, ein Hund braucht viel Platz und Zeit, eine Katze passt besser in eine kleine Wohnung.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p2-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Sie haben gerade über Ihr Thema gesprochen. Welcher Punkt ist für Sie persönlich am wichtigsten, und warum?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

@@ -88,6 +88,8 @@ p { margin: 0 0 16px; }
 .kx-table th, .kx-table td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .kx-disclaimer { color: var(--ink-secondary); font-size: 14px; }
 .kx-review-items, .kx-my-recordings, .kx-rated { max-width: 680px; margin: 36px auto; }
+.kx-history { margin-top: 36px; }
+.kx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .kx-rated .kx-table-wrap { margin-top: 16px; }
 .kx-rater { max-width: 860px; margin: 24px auto; }
 .kx-queue { list-style: none; padding: 0; }

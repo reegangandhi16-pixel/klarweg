@@ -636,7 +636,13 @@ async function runPractice() {
 
     // ---- learner: final result reflects the ratings ----
     await as('learner', '');
-    await waitFor(`document.querySelector('[data-act="last-result"][data-attempt="${attempt}"]')`, 15000, 'last result link'); await click('[data-act="last-result"]');
+    await waitFor(`document.querySelector('[data-act="last-result"][data-attempt="${attempt}"]')`, 15000, 'last result link');
+    // the practice history on the start screen: this attempt with its final rated scores
+    await waitFor(`document.querySelectorAll('.kx-history tbody tr').length === 1`, 10000, 'practice history');
+    const hist = await evaluate(`[...document.querySelectorAll('.kx-history tbody td')].map((td) => td.textContent)`);
+    assert.deepEqual(hist.slice(3, 5), ['75 / 100', '75 / 100'], `Schreiben and Sprechen final in the history: ${JSON.stringify(hist)}`);
+    await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'start screen with history: no horizontal scroll on mobile'); await vp(1280, 800, false);
+    await click(`.kx-history [data-act="last-result"][data-attempt="${attempt}"]`);
     await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText)`, 15000, 'learner result');
     res = await text();
     assert.equal(/in Bewertung/.test(res), false, 'nothing awaits rating any more');

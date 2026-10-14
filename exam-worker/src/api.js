@@ -73,6 +73,20 @@ function requireRunning(m, t, { grace = true } = {}) {
   if (t > m.deadline_at + (grace ? SAVE_GRACE_MS : 0)) fail(409, 'deadline_passed');
 }
 
+/* ---------- the learner's own completed attempts (history) ----------
+   Newest first, at most 20, with the stored per-module result (rebuilt whenever a rating changes it). Filtered by the
+   session user, so nobody else's attempts can appear. No keys, answers, texts or recordings — those stay behind the
+   per-attempt result, review, feedback and recording endpoints with their own gating. */
+export async function myAttempts(env, userId) {
+  const rows = (await env.DB.prepare(`SELECT a.id, a.completed_at, f.label, f.kind, r.json FROM attempts a JOIN forms f ON f.id = a.form_id
+      LEFT JOIN results r ON r.attempt_id = a.id WHERE a.user_id = ?1 AND a.status = 'completed' ORDER BY a.completed_at DESC LIMIT 20`).bind(userId).all()).results;
+  return { ok: true, attempts: rows.map((r) => {
+    const res = r.json ? JSON.parse(r.json) : null;
+    return { attempt_id: r.id, completed_at: r.completed_at, form_label: r.label, test_content: r.kind === 'synthetic',
+      modules: res ? res.modules.map((m) => ({ module: m.module, status: m.status, points: m.points, max_points: m.max_points, pass: m.pass })) : null };
+  }) };
+}
+
 /* ---------- availability ---------- */
 export async function availability(env, userId) {
   const f = flags(env);

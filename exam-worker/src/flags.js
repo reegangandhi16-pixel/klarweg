@@ -3,7 +3,9 @@
      EXAM_SYNTHETIC_FORMS    synthetic engine-test forms may be assigned
      EXAM_MOCK_FORMS         Mock M0 forms may be assigned           (no content yet)
      EXAM_PRODUCTION_FORMS   production simulation sets may be assigned (no content yet)
-   EXAM_ROUTES lives in klarweg-access (the /exam/* proxy). */
+   EXAM_ROUTES lives in klarweg-access (the /exam/* proxy).
+   Not a flag: EXAM_RECORDING_RETENTION_DAYS — speaking-recording retention in days after the final rating
+   (register OD-21; 30 is the documented default). Unset = no recording is ever deleted (retention.js). */
 
 const on = (v) => v === 'on';
 

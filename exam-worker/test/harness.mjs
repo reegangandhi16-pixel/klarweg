@@ -50,6 +50,7 @@ export function makeBucket() {
   return {
     objects,
     async put(key, bytes, opts) { objects.set(key, { bytes: Buffer.from(bytes instanceof ArrayBuffer ? new Uint8Array(bytes) : bytes), opts }); },
+    async delete(keys) { for (const k of [].concat(keys)) objects.delete(k); },   // R2: one key or an array
     async get(key) {
       const o = objects.get(key);
       if (!o) return null;

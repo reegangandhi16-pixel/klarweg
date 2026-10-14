@@ -587,11 +587,48 @@ async function runPractice() {
         for (let i = 0; i < 40 && !reached; i++) { await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 }); await send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 }); reached = await evaluate(`document.activeElement && document.activeElement.matches('form.kx-rate select')`); }
         assert.ok(reached, 'band selects are reachable by keyboard');
       }
-      for (let i = 0; i < 7; i++) {
-        await evaluate(`(() => { const f = [...document.querySelectorAll('form.kx-rate')].find((x) => !x.querySelector('button[type=submit]').disabled);
-          f.querySelectorAll('select').forEach((s) => { s.value = 'B'; }); f.querySelector('button[type=submit]').click(); })()`);
-        await waitFor(`/Gespeichert: [\\d,]+ Punkte \\(Runde ${round}\\)/.test(document.body.innerText) && document.querySelectorAll('form.kx-rate button[type=submit]:not([disabled])').length === ${6 - i}`, 10000, `${alias} saved ${i + 1}`);
+      // Real completion of a save = a FRESH render (the old <main> is marked stale before the click) in which that unit's
+      // form shows as rated. The click disables the button at once and the previous "Gespeichert" text is still on the
+      // page, so those two alone can pass before the save has finished.
+      const saveUnits = (n) => evaluate(`(() => { document.querySelector('main').dataset.e2eStale = '1';
+        return [...document.querySelectorAll('form.kx-rate')].filter((x) => !x.querySelector('button[type=submit]').disabled).slice(0, ${n}).map((f) => {
+          f.querySelectorAll('select').forEach((s) => { s.value = 'B'; }); f.querySelector('button[type=submit]').click(); return f.dataset.unit; }); })()`);
+      // rated = its form is disabled, or gone (a module that became final shows no forms)
+      const savedFresh = (units) => `!document.querySelector('main').dataset.e2eStale && ${JSON.stringify(units)}.every((u) => { const b = document.querySelector('form.kx-rate[data-unit="' + u + '"] button[type=submit]'); return !b || b.disabled; })`;
+      for (let done = 0; done < 7;) {
+        let units;
+        if (round === 2 && done === 0) {
+          /* Deterministic overlap (regression for out-of-order re-renders): two saves at once; the re-render after the
+             FIRST save gets a response computed before the second rating existed, and we deliver it LAST. The page
+             must keep showing both units as rated. Requests are held with the DevTools Fetch domain. */
+          const from = b.events.length, handled = new Set();
+          const paused = async (re) => {
+            for (const t0 = Date.now(); Date.now() - t0 < 10000; await sleep(50)) {
+              const e = b.events.slice(from).find((x) => x.method === 'Fetch.requestPaused' && re.test(x.params.request.url) && !handled.has(x.params.requestId));
+              if (e) { handled.add(e.params.requestId); return e.params.requestId; }
+            }
+            throw new Error(`no paused request ${re}`);
+          };
+          const release = (requestId) => send('Fetch.continueRequest', { requestId });
+          await send('Fetch.enable', { patterns: [{ urlPattern: '*/exam/v1/admin/ratings', requestStage: 'Request' }, { urlPattern: '*/productive', requestStage: 'Response' }] });
+          units = await saveUnits(2);
+          const save1 = await paused(/\/admin\/ratings$/), save2 = await paused(/\/admin\/ratings$/);
+          await release(save1);
+          const stale = await paused(/\/productive$/);          // computed with only the first rating stored
+          await release(save2);
+          await release(await paused(/\/productive$/));         // fresh: both ratings stored
+          await waitFor(savedFresh(units), 10000, `${alias} saved ${units.join(', ')} (fresh render)`);
+          await release(stale); await sleep(1000);               // the stale response arrives last
+          await send('Fetch.disable');
+          assert.ok(await evaluate(savedFresh(units)), 'a late, older re-render must not show a rated unit as unrated');
+        } else {
+          units = await saveUnits(1);
+          await waitFor(savedFresh(units), 10000, `${alias} saved ${units.join(', ')}`);
+        }
+        done += units.length;
+        assert.equal(await evaluate(`document.querySelectorAll('form.kx-rate button[type=submit]:not([disabled])').length`), 7 - done);
       }
+      assert.match(await text(), new RegExp(`Gespeichert: [\\d,]+ Punkte \\(Runde ${round}\\)`));
       assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings WHERE round = ?1').bind(round).first()).n, 7);
       await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'rater screen: no horizontal scroll on mobile'); await vp(1280, 800, false);
     }

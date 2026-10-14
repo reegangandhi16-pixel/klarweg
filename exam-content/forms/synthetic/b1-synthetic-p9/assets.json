@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p9-l1-text",
+    "kind": "text",
+    "label": "Blog",
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Jahr ohne neue Kleidung\n\nLetzten Januar habe ich mir etwas vorgenommen: Zwölf Monate lang kaufe ich keine neue Kleidung. Der Grund war ein Film über Textilfabriken, den ich im Fernsehen gesehen hatte. Außerdem war mein Kleiderschrank so voll, dass die Tür nicht mehr richtig zuging.\n\nDie ersten Wochen waren leicht. Schwierig wurde es im Frühling, als mich eine Freundin zu ihrer Hochzeit eingeladen hat. Ich habe mir dann ein Kleid von meiner Schwester geliehen – und viele Komplimente bekommen. Einmal habe ich eine kaputte Jeans selbst genäht, zum ersten Mal in meinem Leben.\n\nGanz ohne Ausnahme ging es aber nicht: Im Herbst brauchte ich neue Arbeitsschuhe, weil die alten kaputt waren. Gelernt habe ich vor allem eins: Ich brauche viel weniger, als ich dachte. Im Dezember habe ich drei Säcke Kleidung zur Kleiderkammer gebracht.\n\nMarta"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Schulhöfe werden am Wochenende zu Spielplätzen\n\nIn Neustadt bleiben ab Mai fünf Schulhöfe auch am Samstag und Sonntag geöffnet. Familien aus Wohnungen ohne Garten sollen dort einen sicheren Platz zum Spielen haben. Ehrenamtliche Helfer schließen die Tore morgens auf und abends um 19 Uhr wieder ab. Hunde sind auf den Schulhöfen nicht erlaubt. Die Schulleitungen waren zuerst skeptisch, weil sie Müll und Schäden befürchteten. Nach einem Testjahr an einer Schule sind sie jetzt einverstanden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Kühlschrank für alle\n\nVor dem Stadtteilladen in der Mühlgasse steht seit drei Monaten ein öffentlicher Kühlschrank. Wer Lebensmittel übrig hat, kann sie dort hineinlegen, und jeder darf sich kostenlos etwas herausnehmen. Ein Team von zwölf Freiwilligen kontrolliert jeden Tag, ob alles noch frisch ist. Rohes Fleisch und Fisch dürfen nicht in den Kühlschrank. Besonders oft bringen Bäckereien am Abend Brot und Brötchen vorbei, die sie nicht verkauft haben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Zeichenkurs für Kinder ab 8: Comics zeichnen, freitags nach der Schule."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hauswirtschaftshilfe für ältere Menschen: Einkaufen, Putzen, Wäsche – stundenweise."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Lauftreff am Fluss: Anfänger trainieren für die ersten fünf Kilometer, zweimal pro Woche."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Elektrofahrrad zu verkaufen, zwei Jahre alt, neuer Akku."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Deutsch-Stammtisch für Fortgeschrittene: Wir diskutieren über Zeitungsartikel, jeden zweiten Dienstag."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kostüm-Verleih für Fasching und Theater – große Auswahl für Erwachsene und Kinder."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Klavierstimmer kommt ins Haus – auch alte Instrumente."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ferienwohnung auf dem Bauernhof: Kinder dürfen bei den Tieren helfen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bewerbungsmappe zu teuer? Wir drucken Lebenslauf und Zeugnisse günstig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Seminar „Endlich Nichtraucher“: drei Abende mit Ärztin und Gruppe."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Antje, 45: Mein Sohn ist morgens um halb acht kaum wach. Er würde viel besser lernen, wenn die Schule später anfängt. Ich bin dafür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Rainer, 50: Ich fange um sieben Uhr in der Fabrik an. Wenn die Schule erst um neun beginnt, wer bringt dann meine Kinder hin? Das passt nicht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Mina, 16: Wir hätten dann zwar morgens mehr Schlaf, aber auch nachmittags länger Unterricht. Mein Training im Verein würde ich dann verpassen. Nein danke."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Dr. Kowalczyk, 39: Als Kinderarzt weiß ich: Jugendliche werden abends später müde. Ein späterer Beginn wäre gut für ihre Gesundheit."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Tanja, 37: An unserer Schule gibt es seit einem Jahr eine „Gleitzeit“: Man darf zwischen acht und neun kommen. Das funktioniert prima. So sollte es überall sein."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Heinz, 71: Früher sind wir alle um acht in die Schule gegangen, und es hat uns nicht geschadet. Ich sehe keinen Grund für eine Änderung."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Jasmin, 17: In der ersten Stunde schlafen bei uns die halbe Klasse und manchmal auch der Lehrer. Später anfangen wäre für alle besser."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Frank, 44: Die Busse sind auf den Schulbeginn um acht geplant. Eine Änderung wäre teuer und kompliziert. Ich halte das für unrealistisch."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Unterrichtsbedingungen der Musikschule Neustadt\n\n1. Probestunde: Vor der Anmeldung können Sie eine kostenlose Probestunde machen. Bitte vereinbaren Sie dafür telefonisch einen Termin.\n\n2. Unterricht: Der Unterricht findet einmal pro Woche statt, nicht in den Schulferien. Fällt eine Stunde wegen Krankheit der Lehrkraft aus, wird sie nachgeholt.\n\n3. Instrumente: Für das erste Jahr kann man ein Instrument für 15 Euro im Monat mieten.\n\n4. Kündigung: Der Vertrag kann zum Ende eines Halbjahres gekündigt werden, schriftlich mit einer Frist von sechs Wochen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Bus: Liebe Fahrgäste, wegen einer Baustelle können wir die Haltestelle Lindenplatz heute nicht anfahren. Bitte steigen Sie am Rathaus aus.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht vom Hausmeister: Guten Tag, hier ist Herr Lehmann, der Hausmeister. Der Aufzug ist von Montag bis Mittwoch außer Betrieb, weil er gewartet wird. Wenn Sie Hilfe mit schweren Einkäufen brauchen, rufen Sie mich an.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiotipp: Diesen Freitag gibt es im Freibad ein Kino unter freiem Himmel. Gezeigt wird eine Familienkomödie. Bringen Sie eine Decke mit, Stühle gibt es nicht. Der Film beginnt, wenn es dunkel ist, ungefähr um 21 Uhr.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage im Supermarkt: Liebe Kunden, wir öffnen jetzt zusätzlich Kasse 5. Und denken Sie an unser Angebot: Erdbeeren aus der Region, heute nur 1,99 Euro pro Schale.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von einer Freundin: Hallo Elena, hier ist Bea. Kannst du am Samstagabend auf meine Kinder aufpassen? Wir sind auf einer Hochzeit eingeladen. Die Kinder gehen um acht ins Bett, du kannst also ganz in Ruhe einen Film schauen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Fitnessstudio: Liebe Mitglieder, über die Feiertage haben wir geänderte Öffnungszeiten. Am 24. und 31. Dezember schließen wir schon um 14 Uhr. Am 25. Dezember bleibt das Studio geschlossen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Guten Abend, meine Damen und Herren! Ich bin heute Ihr Nachtwächter und zeige Ihnen die Altstadt, wie sie vor dreihundert Jahren war. Die Führung dauert ungefähr neunzig Minuten. Wir beginnen am alten Stadttor und gehen dann durch die engen Gassen zum Marktplatz. Bitte bleiben Sie in der Nähe meiner Laterne, denn manche Wege sind dunkel. Am Ende bekommt jeder einen warmen Tee.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nico: Clara! Wir haben uns seit dem Abitur nicht gesehen. Was machst du jetzt?\nClara: Ich bin Krankenschwester in einer Kinderklinik. Und im Januar ziehe ich nach Freiburg, ich habe dort eine neue Stelle.\nNico: Freiburg! Da wohnt doch mein Bruder. Hast du schon eine Wohnung?\nClara: Noch nicht. Die ersten zwei Monate wohne ich bei einer Kollegin, die ein Zimmer frei hat.\nNico: Ich frage meinen Bruder, vielleicht kennt er jemanden. Und sonst? Spielst du noch Klavier?\nClara: Leider nur noch selten, mit den Schichten ist das schwer. Aber ich singe jetzt in einer Band.\nNico: Wirklich? Habt ihr bald ein Konzert?\nClara: Ja, am Samstag in drei Wochen, im Jugendhaus. Komm doch vorbei!\nNico: Gern, ich bringe meine Freundin mit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderatorin: Guten Abend! Viele Städte führen in Wohngebieten Tempo 30 ein. Ist das sinnvoll? Ich begrüße Herrn Peters, er fährt seit zwanzig Jahren Taxi, und Frau Albrecht, Anwohnerin und Mutter von zwei Kindern.\nHerr Peters: Für mich bedeutet Tempo 30, dass ich länger brauche. Die Fahrgäste beschweren sich dann bei mir, nicht bei der Stadt.\nFrau Albrecht: Seit in unserer Straße Tempo 30 gilt, ist es viel leiser. Die Kinder können auch wieder allein über die Straße gehen.\nModeratorin: Halten sich die Autofahrer denn an die Regel?\nFrau Albrecht: Leider nicht alle. Wir brauchen mehr Kontrollen, sonst bringt das Schild nichts.\nHerr Peters: Auf großen Straßen finde ich Tempo 30 übertrieben. In kleinen Wohnstraßen habe ich nichts dagegen.\nModeratorin: Ein Hörer hat uns dazu eine E-Mail geschrieben.\nHerr Peters: Ehrlich gesagt fahre ich mit Tempo 30 auch entspannter. Das hätte ich nicht gedacht.\nFrau Albrecht: Mein Wunsch wäre, dass auch vor allen Schulen und Kindergärten Tempo 30 gilt.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie waren am Sonntag auf einem großen Flohmarkt und haben etwas Besonderes gekauft. Ihre Freundin Nora geht auch gern auf Flohmärkte. Schreiben Sie Nora eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Was haben Sie gekauft?\n– Begründen Sie: Warum gefällt es Ihnen so gut?\n– Schlagen Sie vor, zusammen auf den nächsten Flohmarkt zu gehen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben im Radio eine Sendung zum Thema „Frühaufsteher oder Nachtmensch – wann lernt man am besten?“ gehört. Im Online-Gästebuch der Sendung finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Olga: Ich lerne am besten frühmorgens, wenn alle noch schlafen. Mein Mann lernt dagegen nur nachts. Wann lernen Sie am liebsten, und warum?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihre Kollegin, Frau Akın, geht in Rente und hat das Team am Freitag zu einem Abschiedsessen eingeladen. Sie können leider nicht kommen. Schreiben Sie Frau Akın. Entschuldigen Sie sich und wünschen Sie ihr alles Gute (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir wollen doch Tim beim Streichen helfen. Wann hast du Zeit?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gut. Welche Farbe würdest du für das Wohnzimmer vorschlagen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Okay. Was machen wir so lange mit den Möbeln?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Freund möchte sein Wohnzimmer neu streichen und renovieren. Sie helfen ihm und planen die Arbeit zusammen.\n\n– Wann?\n– Welche Farbe?\n– Was kaufen?\n– Wer hilft noch?\n– Möbel wohin?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Bücher lesen oder Hörbücher hören?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Sollte man jeden Tag Sport machen?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin präsentiert das Thema „Sollte man jeden Tag Sport machen?“: Sie geht jeden Morgen eine halbe Stunde joggen, weil sie dann besser schläft. Am Wochenende macht sie aber Pause.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p9-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Welches Buch oder Hörbuch hat Ihnen zuletzt gefallen? Warum?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

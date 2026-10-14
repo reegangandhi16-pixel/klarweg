@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p6-l1-text",
+    "kind": "text",
+    "label": "E-Mail",
+    "text": {
+      "lang": "de",
+      "body_md": "Hallo Benni,\n\nstell dir vor: Ich bin jetzt bei der Freiwilligen Feuerwehr in Talheim! Angefangen hat alles im Frühling, als bei unseren Nachbarn ein kleines Feuer in der Küche war. Die Feuerwehr war in fünf Minuten da, und ich habe gesehen, wie wichtig diese Leute sind.\n\nJetzt gehe ich jeden Donnerstagabend zur Übung. Zuerst musste ich einen Grundkurs machen, der vier Wochenenden gedauert hat. Das war anstrengend, aber ich habe viel gelernt, zum Beispiel wie man mit einem Atemschutzgerät arbeitet. Zu einem echten Einsatz darf ich erst nächstes Jahr mitfahren.\n\nDas Beste ist die Gemeinschaft: Wir sind Leute zwischen 18 und 60, Handwerker, Lehrerinnen und sogar ein Zahnarzt. Im August machen wir ein Sommerfest für das ganze Dorf. Hast du Lust, zu kommen?\n\nLiebe Grüße\nRafael"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Büro für das ganze Dorf\n\nIn der ehemaligen Bankfiliale von Talheim können Menschen seit Juni ihren Arbeitsplatz mieten. Das sogenannte Dorfbüro hat acht Schreibtische, schnelles Internet und eine kleine Küche. Viele Nutzer arbeiten sonst im Homeoffice, fühlen sich dort aber oft allein. Andere sparen sich so die lange Fahrt in die Stadt. Einen Schreibtisch kann man für einen Tag oder einen ganzen Monat buchen. Die Gemeinde hat den Umbau bezahlt, ein Verein kümmert sich um den Betrieb."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Bücher für alle an der Haltestelle\n\nAn der Bushaltestelle am Marktplatz steht seit dem Frühjahr ein offener Bücherschrank. Jeder kann dort Bücher hineinstellen oder mitnehmen, ohne etwas zu bezahlen. Gebaut hat den Schrank eine Schülergruppe im Technikunterricht. Ein Rentner aus der Nachbarschaft sieht jeden Morgen nach, ob alles in Ordnung ist, und sortiert alte oder kaputte Bücher aus. Besonders Kinderbücher und Krimis sind schnell weg. Zeitschriften dürfen nicht in den Schrank gestellt werden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Spanisch für Anfänger: Intensivkurs am Wochenende, ideal vor dem Urlaub."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hilfe beim Ausfüllen von Formularen und Anträgen – kostenlos im Bürgerzentrum, dienstags."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Reiterhof sucht Helfer für die Pferde am Wochenende – Reiten gegen Mithilfe."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Laptop, drei Jahre alt, sehr gut erhalten, mit Tasche – günstig abzugeben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Pilates am Abend: ruhiges Training für Rücken und Bauch, kleine Gruppe, keine Vorkenntnisse nötig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nachhilfe Deutsch für Grundschulkinder – Lesen und Schreiben üben mit Spaß."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Fotograf macht Bewerbungsfotos – schnell, freundlich, auch samstags."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Mitfahrgelegenheit nach Hamburg jeden Freitag, Rückfahrt sonntags, noch zwei Plätze frei."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Tauschbörse für Pflanzen: Bringen Sie Ableger und Samen mit und nehmen Sie neue mit nach Hause."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ferienhaus in den Bergen für Gruppen bis 12 Personen – Hunde willkommen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nicole, 36: Mein Hund liegt ruhig unter dem Tisch und stört niemanden. Ich gehe nur in Cafés, in denen er willkommen ist. Natürlich bin ich dafür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hasan, 50: Ich habe eine Allergie gegen Hundehaare. Wenn ein Hund im Lokal ist, muss ich wieder gehen. Ich finde, Tiere haben dort nichts zu suchen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Annegret, 63: Seit mein Mann gestorben ist, ist mein Hund meine Begleitung. Ohne ihn würde ich gar nicht mehr ausgehen. Für mich ist das wichtig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Jonas, 28: Ich arbeite als Kellner. Hunde bellen, betteln und laufen den Kollegen vor die Füße. Ehrlich gesagt bin ich dagegen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Priya, 33: In der Küche haben Tiere natürlich nichts verloren. Aber im Gastraum sehe ich kein Problem, wenn der Hund an der Leine bleibt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Georg, 45: Wir gehen mit unseren kleinen Kindern essen, und sie haben Angst vor großen Hunden. Das sollte jedes Restaurant verbieten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Lea, 22: Jedes Restaurant sollte selbst entscheiden. Aber ein paar mehr hundefreundliche Cafés würden mich freuen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Uwe, 57: Ein Restaurant ist ein Ort für gutes Essen und Hygiene. Hunde gehören nach Hause oder in den Park."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Teilnahmebedingungen – 10. Talheimer Stadtlauf\n\n1. Anmeldung: Die Anmeldung ist nur online bis zum 30. April möglich. Am Tag des Laufs gibt es keine Nachmeldung.\n\n2. Startnummer: Die Startnummer holen Sie am Freitag vor dem Lauf in der Stadthalle ab. Bringen Sie dafür Ihre Anmeldebestätigung mit.\n\n3. Kinder: Kinder unter 12 Jahren laufen nur die kurze Strecke über zwei Kilometer und brauchen die Unterschrift eines Elternteils.\n\n4. Absage: Bei starkem Unwetter kann der Lauf abgesagt werden. Die Startgebühr wird dann nicht zurückgezahlt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Baumarkt: Liebe Kunden, heute erhalten Sie in unserer Gartenabteilung alle Blumenerde zwei zum Preis von einer.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht vom Optiker: Guten Tag, Herr Lorenz, hier ist Optik Klarsicht. Ihre neue Brille ist fertig. Sie können sie ab morgen abholen. Bitte bringen Sie Ihre alte Brille mit, damit wir die Gläser vergleichen können.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiomeldung: Das Open-Air-Konzert im Schlosspark findet wegen des angekündigten Regens nicht am Samstag statt, sondern eine Woche später. Die Karten bleiben gültig. Wer am neuen Termin keine Zeit hat, bekommt sein Geld zurück.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage im Schwimmbad: Liebe Badegäste, das Sportbecken ist ab sofort wegen einer Reinigung für eine Stunde gesperrt. Das Nichtschwimmerbecken und die Rutsche können Sie weiter benutzen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Sprachschule: Hallo, Frau Ito, hier ist das Sekretariat der Sprachschule Wortwerk. Ihr Kurs am Mittwoch findet ausnahmsweise in Raum 12 im dritten Stock statt, weil in Ihrem Raum der Boden repariert wird.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Telefonansage der Stadtverwaltung: Sie haben das Bürgeramt Talheim erreicht. Unsere Öffnungszeiten sind Montag bis Freitag von acht bis zwölf Uhr, donnerstags zusätzlich von 14 bis 18 Uhr. Termine können Sie auch online buchen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Guten Morgen und willkommen zu unserer Tagesfahrt an den Bodensee! Wir fahren jetzt etwa zwei Stunden, nach einer Stunde machen wir eine kurze Pause an einer Raststätte. In Uferstadt haben Sie zuerst Zeit für einen eigenen Spaziergang. Um 13 Uhr treffen wir uns am Hafen für die Schifffahrt. Die Tickets für das Schiff habe ich schon, Sie bekommen sie dort von mir. Zurück fahren wir um 18 Uhr.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Herr Schulz: Guten Abend, Frau Pohl! Haben Sie gestern Abend den Lärm aus dem dritten Stock gehört?\nFrau Pohl: Ja, die neuen Mieter haben gefeiert. Aber sie haben vorher einen Zettel an die Haustür gehängt, das fand ich nett.\nHerr Schulz: Den habe ich nicht gesehen. Ich konnte bis zwei Uhr nicht schlafen.\nFrau Pohl: Oh, das tut mir leid. Ich habe zum Glück Ohrstöpsel.\nHerr Schulz: Ich will ja keinen Streit. Vielleicht spreche ich morgen ganz freundlich mit ihnen.\nFrau Pohl: Gute Idee. Übrigens, die beiden haben gefragt, ob sie im Hof ein Hochbeet bauen dürfen.\nHerr Schulz: Ein Hochbeet? Warum nicht. Ich habe noch Holz im Keller, das kann ich ihnen geben.\nFrau Pohl: Na, sehen Sie – dann haben Sie gleich einen guten Grund, mit ihnen zu reden.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderator: Guten Tag und willkommen! Heute fragen wir: Sollen Kinder schon im Kindergarten eine Fremdsprache lernen? Bei mir sind Frau Haas, Erzieherin in einem Kindergarten, und Herr Mendes, Vater von Zwillingen und Sprachlehrer.\nFrau Haas: Bei uns singen die Kinder einmal pro Woche englische Lieder. Sie haben viel Spaß dabei und lernen ganz nebenbei.\nHerr Mendes: Spaß ist gut, aber eine Stunde pro Woche ist zu wenig. Kinder lernen eine Sprache nur, wenn sie sie jeden Tag hören.\nModerator: Und was ist mit Kindern, die noch nicht gut Deutsch sprechen?\nFrau Haas: Für diese Kinder ist Deutsch am wichtigsten. Wir dürfen sie nicht überfordern.\nHerr Mendes: Meine Kinder wachsen mit Portugiesisch und Deutsch auf. Mehrere Sprachen sind für Kinder ganz normal.\nModerator: Eine Hörerin möchte wissen, ob das nicht zu viel Druck ist.\nFrau Haas: Es darf auf keinen Fall Noten oder Tests geben. Dann wäre es kein Spiel mehr.\nHerr Mendes: Leider fehlen in vielen Kindergärten Erzieherinnen, die eine Fremdsprache wirklich gut sprechen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben am Wochenende Ihren Geburtstag gefeiert. Ihre Freundin Petra war im Urlaub und konnte nicht kommen. Schreiben Sie Petra eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Wie haben Sie gefeiert?\n– Begründen Sie: Welches Geschenk hat Sie besonders gefreut?\n– Schlagen Sie vor, wann Sie zusammen nachfeiern."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben in einer Zeitschrift einen Artikel zum Thema „Freizeit ohne Handy“ gelesen. Im Online-Forum der Zeitschrift finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Katrin: Wir machen jeden Sonntag einen handyfreien Tag in der Familie. Am Anfang war es schwer, jetzt reden wir viel mehr miteinander. Wäre das auch etwas für Sie?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie besuchen einen Deutschkurs am Vormittag. Wegen Ihrer neuen Arbeit möchten Sie in den Abendkurs wechseln. Schreiben Sie Ihrer Kursleiterin, Frau Moreau. Bitten Sie höflich um den Wechsel und nennen Sie den Grund (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir wollen doch den internationalen Kochabend machen. Bei wem könnten wir kochen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gut. Und welche Gerichte sollen wir kochen? Jeder etwas aus seinem Land?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Klingt gut. Wer geht einkaufen – und wann?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie möchten mit Freunden aus verschiedenen Ländern einen Kochabend machen. Sie planen den Abend zusammen.\n\n– Wann?\n– Bei wem?\n– Welche Gerichte?\n– Einkaufen?\n– Getränke und Musik?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Sollte jedes Kind ein Instrument lernen?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Mit dem Zug statt mit dem Flugzeug reisen?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner präsentiert das Thema „Mit dem Zug statt mit dem Flugzeug reisen?“: Er fährt im Urlaub nur noch mit dem Zug, weil er unterwegs lesen kann. Für weite Reisen ist ihm der Zug aber zu langsam.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p6-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Haben Sie als Kind ein Instrument gelernt? Erzählen Sie kurz.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

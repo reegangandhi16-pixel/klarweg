@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p7-l1-text",
+    "kind": "text",
+    "label": "Blog",
+    "text": {
+      "lang": "de",
+      "body_md": "Von der Bank in den Garten\n\nZwölf Jahre lang habe ich in einer Bank gearbeitet. Der Job war sicher und gut bezahlt, aber ich saß den ganzen Tag vor dem Bildschirm. Abends hatte ich oft Kopfschmerzen. Am Wochenende war ich dagegen immer glücklich, wenn ich im Garten meiner Eltern arbeiten konnte.\n\nVor zwei Jahren habe ich mich dann getraut und eine Umschulung zur Gärtnerin begonnen. Meine Freunde fanden das mutig, meine Mutter eher verrückt. Die Ausbildung war nicht leicht: Ich musste viele lateinische Pflanzennamen lernen, und im Winter auf der Baustelle war es oft eiskalt.\n\nHeute arbeite ich in einem kleinen Betrieb, der Gärten für Privatleute plant und pflegt. Ich verdiene weniger als früher, aber das ist mir egal. Meine Kopfschmerzen sind verschwunden. Und meine Mutter? Sie hat mich letzten Monat gebeten, ihren Garten neu zu gestalten.\n\nLina"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Bürgerbus verbindet die Dörfer\n\nIn den Dörfern rund um Hohenberg fährt seit diesem Monat ein Bürgerbus. Am Steuer sitzen ehrenamtliche Fahrerinnen und Fahrer, die meisten sind schon in Rente. Der Kleinbus hat acht Plätze und fährt zweimal am Tag zum Ärztehaus und zum Supermarkt in Hohenberg. Eine Fahrt kostet zwei Euro, Kinder unter sechs Jahren fahren kostenlos. Wer mitfahren möchte, muss sich bis zum Vortag telefonisch anmelden. Der Verein sucht noch weitere Fahrer."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Kantine kocht mit Gemüse aus der Region\n\nDie Kantine der Firma Nordlicht Elektronik hat ihr Angebot umgestellt: Seit dem Sommer kommen Obst und Gemüse von drei Bauernhöfen aus der Umgebung. Fleisch gibt es nur noch zweimal pro Woche, an den anderen Tagen wird vegetarisch gekocht. Zuerst gab es Beschwerden, inzwischen essen aber mehr Mitarbeiter in der Kantine als vorher. Das Essen ist etwas teurer geworden; die Firma bezahlt deshalb einen Euro pro Mahlzeit dazu."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Salsa-Kurs für Singles: Partner nicht nötig, wir wechseln in jeder Stunde – mittwochs 19 Uhr."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ehrenamtliche Vorleser für das Seniorenheim gesucht, ein Nachmittag pro Woche."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kinderfahrrad-Flohmarkt im Hof der Grundschule – kaufen und verkaufen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Programmieren lernen für Jugendliche ab 12: erste eigene Spiele am Computer."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hochzeitsfotografin mit Erfahrung – Paketpreise, auch für kleine Feiern."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wohnungsauflösung: Möbel, Geschirr und Lampen gegen Abholung zu verschenken."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Erste Hilfe für Hundebesitzer: Was tun, wenn das Tier verletzt ist? Ein Samstag."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Steuerberatung für Rentnerinnen und Rentner – Hausbesuche möglich."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gitarrenreparatur und neue Saiten – schnell und günstig in unserer Werkstatt."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Studentin bietet Hilfe beim Umzug von Pflanzen und Blumen – auch Pflege im Urlaub."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ralf, 47: Jedes Jahr bekommt unser Hund an Silvester Panik und versteckt sich stundenlang. Ich wäre froh über ein Verbot."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Selma, 26: Silvester ohne Raketen kann ich mir nicht vorstellen. Das gehört einfach dazu, schon seit meiner Kindheit. Ein Verbot lehne ich ab."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Dr. Brückner, 55: Als Ärztin in der Notaufnahme sehe ich jedes Jahr schwere Verletzungen an Händen und Augen. Privates Feuerwerk sollte es nicht mehr geben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kai, 19: Man könnte ja Zonen machen, in denen man böllern darf. Ein komplettes Verbot geht mir aber zu weit."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hannelore, 74: Am Neujahrsmorgen liegt überall Müll auf der Straße, und die Luft ist schlecht. Ein großes Feuerwerk der Stadt reicht völlig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Mehmet, 41: Für meine Kinder ist das der schönste Abend im Jahr. Wir passen gut auf und machen hinterher sauber. Warum sollte man uns das verbieten?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Birte, 38: Ich arbeite bei der Feuerwehr. In der Silvesternacht haben wir dreimal so viele Einsätze wie sonst. Ich bin klar dafür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Anton, 63: Die Menschen sollen selbst entscheiden dürfen. Der Staat muss nicht alles regeln."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hausordnung der Jugendherberge Hohenberg\n\n1. Zimmer: Die Zimmer sind ab 15 Uhr bezugsfertig. Am Abreisetag verlassen Sie das Zimmer bitte bis 10 Uhr.\n\n2. Bettwäsche: Bettwäsche ist im Preis enthalten. Handtücher bringen Sie bitte selbst mit oder leihen sie an der Rezeption.\n\n3. Mahlzeiten: Frühstück gibt es von 7 bis 9 Uhr. Lunchpakete für Ausflüge bestellen Sie bitte bis 18 Uhr am Vortag.\n\n4. Ruhe: Ab 22 Uhr ist Nachtruhe. Gruppenleiter sind dafür verantwortlich, dass ihre Gruppe die Regeln beachtet."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Zoo: Liebe Besucher, um 15 Uhr füttern unsere Tierpfleger die Seelöwen. Kommen Sie zum großen Becken neben dem Spielplatz.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Autovermietung: Guten Tag, Frau Berger, hier ist die Autovermietung Mobilo. Das Auto, das Sie für Freitag reserviert haben, ist leider kaputt. Wir haben für Sie ein größeres Auto zum gleichen Preis.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Wettermeldung: Heute Nacht sinken die Temperaturen unter null Grad. Auf Brücken und Nebenstraßen kann es glatt werden. Autofahrer sollten morgen früh etwas mehr Zeit einplanen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage im Kaufhaus: Der kleine Leon, vier Jahre alt, sucht seine Eltern. Er trägt eine rote Jacke und wartet an der Information im Erdgeschoss.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von einem Nachbarn: Hallo Frau Diallo, hier ist Herr Kraus von nebenan. Ich bin ab Montag eine Woche verreist. Könnten Sie meine Post aus dem Briefkasten nehmen? Den Schlüssel werfe ich Ihnen heute Abend in den Briefkasten.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Information der Volkshochschule: Liebe Teilnehmende, der Italienischkurs am Dienstagabend fällt diese Woche aus, weil die Kursleiterin krank ist. Die Stunde wird in den Osterferien nachgeholt. Den genauen Termin schicken wir Ihnen per E-Mail.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Guten Morgen und willkommen zum Erste-Hilfe-Kurs! Der Kurs dauert heute bis 16 Uhr, mittags machen wir eine Stunde Pause. Am Vormittag lernen Sie, was man bei einem Unfall zuerst tun muss. Am Nachmittag üben wir an Puppen die Herz-Druck-Massage. Bitte ziehen Sie bequeme Kleidung an, wir arbeiten viel auf dem Boden. Ihre Bescheinigung bekommen Sie am Ende des Kurses.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Tobias: Ich habe am Samstag endlich ein Auto gekauft!\nMiriam: Wirklich? Ein neues?\nTobias: Nein, ein gebrauchtes, acht Jahre alt. Ein neues war mir zu teuer. Ich habe es von einem älteren Herrn gekauft, der nicht mehr Auto fahren darf.\nMiriam: Und hast du es vorher von einer Werkstatt prüfen lassen?\nTobias: Ja, mein Schwager ist Mechaniker, er hat alles angeschaut. Nur die Reifen muss ich vor dem Winter wechseln.\nMiriam: Wofür brauchst du das Auto denn? Du bist doch immer mit dem Rad gefahren.\nTobias: Zur Arbeit fahre ich weiter mit dem Rad. Aber meine Eltern wohnen auf dem Land, und mit dem Bus brauche ich drei Stunden zu ihnen.\nMiriam: Verstehe. Nimmst du mich mal mit, wenn du in die Richtung fährst?\nTobias: Klar, gern!",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderatorin: Guten Morgen! In unserer Sendung geht es heute um die Frage: Ab wann dürfen Kinder allein zur Schule gehen? Meine Gäste sind Herr Braun, Polizist und Verkehrserzieher, und Frau Okonkwo, Mutter von drei Kindern.\nHerr Braun: Ich empfehle, den Schulweg vorher mehrmals gemeinsam zu üben. Dann wissen die Kinder, wo die gefährlichen Stellen sind.\nFrau Okonkwo: Meine Älteste geht seit der ersten Klasse allein. Sie ist dadurch viel selbstständiger geworden.\nModeratorin: Viele Eltern bringen ihre Kinder aber mit dem Auto. Warum eigentlich?\nHerr Braun: Gerade diese Autos vor der Schule sind ein großes Problem. Morgens ist dort so viel Verkehr, dass es gefährlich wird.\nFrau Okonkwo: Viele Eltern haben einfach Angst. Das verstehe ich, aber man muss den Kindern auch etwas zutrauen.\nModeratorin: Dazu haben wir eine Frage von einem Hörer aus Hohenberg.\nHerr Braun: In manchen Städten gibt es Laufgruppen, in denen ein Erwachsener mehrere Kinder abholt. Das funktioniert sehr gut.\nFrau Okonkwo: Bei uns gehen die Kinder aus der Straße zusammen. In der Gruppe macht der Weg auch mehr Spaß.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben vor einem Monat einen Tanzkurs begonnen. Ihr Freund Sami möchte vielleicht auch mitmachen. Schreiben Sie Sami eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Wie läuft der Kurs ab?\n– Begründen Sie: Warum macht Ihnen der Kurs Spaß?\n– Machen Sie einen Vorschlag, wie Sami den Kurs ausprobieren kann."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben im Fernsehen eine Diskussion zum Thema „Vier-Tage-Woche“ gesehen. Im Online-Gästebuch der Sendung finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ingo: In meiner Firma arbeiten wir seit einem Jahr nur noch vier Tage pro Woche, dafür länger am Tag. Ich bin entspannter und habe mehr Zeit für meine Familie. Was halten Sie davon?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihr Nachbar, Herr Kraus, hat Ihnen am Wochenende beim Umzug Ihrer Waschmaschine geholfen. Schreiben Sie Herrn Kraus. Bedanken Sie sich und laden Sie ihn zu einem Kaffee ein (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir wollen doch Daniel beim Umzug helfen. Um wie viel Uhr sollen wir uns treffen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Okay. Und wie bekommen wir die Möbel in die neue Wohnung – wer besorgt einen Transporter?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gut. Sollen wir für die Helfer etwas zu essen machen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Freund von Ihnen zieht am Samstag in eine neue Wohnung. Sie möchten ihm zusammen beim Umzug helfen.\n\n– Wann treffen?\n– Transporter?\n– Wer hilft noch?\n– Essen für die Helfer?\n– Was ist sonst noch zu tun?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Taschengeld für Kinder – ab welchem Alter?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Ein eigenes Haus oder eine Mietwohnung?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin präsentiert das Thema „Ein eigenes Haus oder eine Mietwohnung?“: Sie wohnt zur Miete, weil sie flexibel bleiben will. Später möchte sie aber ein kleines Haus mit Garten kaufen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p7-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Haben Sie als Kind Taschengeld bekommen? Was haben Sie damit gemacht?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

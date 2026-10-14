@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -25,6 +25,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import { startDevServer } from './dev-server.mjs';
 import { call, rid, pkgFor, syntheticBuild, PRACTICE_LIBRARY } from './harness.mjs';
+import { speakingSchedule } from '../../exam/js/sprechen.js';
 import { post, start, submit, uploadChunk } from './flow.mjs';
 
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -746,11 +747,81 @@ async function runPractice() {
   } finally { clearInterval(dialogWatch); b.close(); dev.server.close(); }
 }
 
+/* SPRECHEN TOPIC (OD-32, practice form KX_E2E_FORM, default p1): for EACH Teil 2 topic choice, the page plays the
+   partner talk written for that choice (the one presenting the OTHER topic) and never the other talk; the locked choice
+   is shown; Teil 3 then records and the examiner asks the question about the learner's own topic. Lesen/Hören/Schreiben and Sprechen Teil 1/2 go through the in-process test Worker; the
+   module start is moved on the TEST server only, to just before the partner phase. */
+async function runSprechenTopic() {
+  const pkg = pkgFor(syntheticBuild([PRACTICE.dir]), 'sprechen');
+  const topicItem = pkg.parts.flatMap((p) => p.tasks.flatMap((t) => t.items)).find((i) => i.interaction === 'topic_choice');
+  const talks = pkg.parts.find((p) => p.part === 3).tasks.flatMap((t) => t.stimuli || []).filter((x) => x.role === 'partner_audio');
+  const partner = speakingSchedule(pkg.timing.plan).find((p) => p.kind === 'listen');
+  assert.deepEqual(talks.map((x) => x.for_topic), ['t1', 't2']);
+  const uncaught = [];
+  for (const choice of ['t1', 't2']) {
+    const dev = await startDevServer({ form: PRACTICE.name.toLowerCase() });
+    const b = await launch();
+    const { send } = b;
+    try {
+      const created = await call(dev.env, 'POST', '/exam/v1/attempts', { user: dev.user, body: { mode: 'synthetic_full', level: 'b1', request_id: rid(), device_id: 'dev_e2e_topic_000000000001' } });
+      const s = { env: dev.env, user: dev.user, attempt: created.json.attempt_id, lease: created.json.lease.lease_id };
+      for (const m of ['lesen', 'hoeren', 'schreiben']) { await start(s, m); if (m === 'hoeren') await post(s, '/hoeren/events', { type: 'ready' }); await submit(s, m); }
+      assert.equal((await post(s, '/sprechen/consent', { granted: true, version: 'rec-consent@1' })).status, 200);
+      await start(s, 'sprechen');
+      assert.equal((await post(s, '/modules/sprechen/answers', { answers: [{ item_id: topicItem.item_id, value: { option_id: choice }, seq: 1 }] })).status, 200);
+      for (const part of [1, 2]) for (const it of pkg.parts.find((p) => p.part === part).tasks.flatMap((t) => t.items).filter((i) => i.interaction === 'spoken_response')) {
+        for (const { turn } of it.response_spec.turns) {
+          assert.equal((await uploadChunk(s, it.item_id, turn, 0, Buffer.from(`pre-${it.item_id}-${turn}`))).status, 200);
+          assert.equal((await post(s, '/sprechen/turns', { item_id: it.item_id, turn, chunks: 1, duration_ms: 1000 })).status, 200);
+        }
+      }
+      const row = await dev.env.DB.prepare("SELECT started_at FROM attempt_modules WHERE module = 'sprechen'").first();
+      const delta = (Date.now() - (partner.start_ms - 3_000)) - row.started_at;   // TEST server only: 3 s before the partner phase
+      await dev.env.DB.prepare("UPDATE attempt_modules SET started_at = started_at + ?1, deadline_at = deadline_at + ?1 WHERE module = 'sprechen'").bind(delta).run();
+      await dev.env.DB.prepare('DELETE FROM attempt_leases').run();   // the page takes the attempt without a "Hier fortsetzen" click
+
+      await send('Runtime.enable'); await send('Page.enable');
+      await send('Page.addScriptToEvaluateOnNewDocument', { source: `window.__plays = []; { const play = HTMLMediaElement.prototype.play;
+        HTMLMediaElement.prototype.play = function () { window.__plays.push((this.dataset && this.dataset.asset) || ''); return play.apply(this, arguments); }; }` });
+      const evaluate = async (expr) => {
+        const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+        if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+        return r.result.value;
+      };
+      const waitFor = async (src, ms, label) => {
+        const t0 = Date.now();
+        while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+        throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+      };
+      await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+      const radios = `[...document.querySelectorAll('input[type=radio][data-item="${topicItem.item_id}"]')]`;
+      await waitFor(`${radios}.length === 2 && ${radios}.every((r) => r.disabled)`, 15000, 'locked topic choice rendered');
+      assert.deepEqual(await evaluate(`${radios}.filter((r) => r.checked).map((r) => r.value)`), [choice], 'the locked choice shows the learner\'s topic');
+      await waitFor(`/Präsentation Ihres Gesprächspartners/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'partner phase');
+      const mine = talks.find((x) => x.for_topic === choice).asset_id, other = talks.find((x) => x.for_topic !== choice).asset_id;
+      await waitFor(`window.__plays.includes(${JSON.stringify(mine)})`, 6000, `partner talk for ${choice}`);
+      await waitFor(`/^Teil 3: Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'Teil 3 recording');
+      for (const t0 = Date.now(); (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks WHERE part = 3').first()).n < 1; ) { if (Date.now() - t0 > 15000) throw new Error('no Teil 3 chunks'); await sleep(200); }
+      // the examiner's question (turn 2, after the 1-minute turn 1) is the one about the learner's own topic
+      const q = pkg.parts.find((p) => p.part === 3).tasks.flatMap((t) => t.items).find((i) => i.interaction === 'spoken_response').response_spec.turns[1].prompt_asset_by_topic;
+      await waitFor(`window.__plays.includes(${JSON.stringify(q[choice].asset_id)})`, 90000, `examiner question for ${choice}`);
+      const plays = await evaluate('window.__plays');
+      assert.equal(plays.some((a) => Object.values(q).some((x) => x.asset_id === a && a !== q[choice].asset_id)), false, `${choice}: no examiner question for the other topic: ${JSON.stringify(plays)}`);
+      assert.equal(plays.filter((a) => a === mine).length, 1, `${choice}: its partner talk played exactly once: ${JSON.stringify(plays)}`);
+      assert.equal(plays.includes(other), false, `${choice}: the other topic's talk is never played: ${JSON.stringify(plays)}`);
+      uncaught.push(...b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text));
+      log(`sprechen topic ${PRACTICE.name} ${choice}`, 'PASS', { partner: mine, plays });
+    } finally { b.close(); dev.server.close(); }
+  }
+  return uncaught;
+}
+
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'sprechen-topic') { results.push({ vp: `sprechen topic ${PRACTICE.name} (t1 + t2)`, uncaught: await fn() }); continue; }
   if (name === 'practice') { results.push({ vp: `practice ${PRACTICE.name} (desktop + mobile checks)`, uncaught: await fn() }); continue; }
   for (const vp of VIEWPORTS) results.push({ vp: vp.name + suffix, uncaught: await fn(vp) });
 }

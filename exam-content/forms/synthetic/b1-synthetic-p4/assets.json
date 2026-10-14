@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p4-l1-text",
+    "kind": "text",
+    "label": "E-Mail",
+    "text": {
+      "lang": "de",
+      "body_md": "Liebe Carla,\n\nwir sind gerade von unserem Urlaub auf einem Bauernhof zurück, und ich muss dir unbedingt davon erzählen! Eigentlich wollten wir ans Meer, aber die Ferienwohnungen dort waren viel zu teuer. Also sind wir eine Woche ins Hügelland gefahren, nur zwei Stunden von uns entfernt.\n\nDie Kinder waren jeden Morgen schon um sieben Uhr im Stall, weil sie beim Füttern der Kälber helfen durften. Mein Mann hat sogar gelernt, wie man Käse macht – der Bauer bietet dafür einmal pro Woche einen Kurs an. Ich selbst habe vor allem gelesen und lange Spaziergänge gemacht.\n\nNur das Wetter war nicht so schön: Es hat fast jeden Tag ein bisschen geregnet. Aber das hat niemanden gestört. Für die Herbstferien haben wir schon wieder gebucht, diesmal zusammen mit meinen Eltern.\n\nHerzliche Grüße\nAna"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "500 neue Bäume für die Innenstadt\n\nIn den nächsten drei Jahren will die Stadt Rosenfeld 500 Bäume in der Innenstadt pflanzen. Die Bäume sollen im Sommer Schatten geben und die Luft in den Straßen kühler machen. Die ersten 80 Bäume kommen schon im November auf den Bahnhofsplatz. Bürgerinnen und Bürger können außerdem eine Patenschaft für einen Baum übernehmen: Sie gießen ihn im Sommer regelmäßig und bekommen dafür ein kleines Schild mit ihrem Namen. Einige Geschäftsleute haben Sorge, dass dafür Parkplätze wegfallen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Lesepaten in der Kita\n\nIn der Kita „Sonnenblume“ kommen seit einem halben Jahr jeden Dienstag drei Seniorinnen und Senioren zum Vorlesen. Die Idee stammt von der Leiterin der Kita, die selbst gern mit ihrer Großmutter gelesen hat. Die Kinder hören in kleinen Gruppen zu und dürfen die Bücher selbst aussuchen. Besonders beliebt sind Geschichten über Tiere. Die Lesepaten bekommen kein Geld, aber jedes Jahr ein gemeinsames Fest. Weil die Nachfrage so groß ist, sucht die Kita noch weitere Freiwillige."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kletterhalle Nordwand: Schnupperkurs für Erwachsene ohne Erfahrung, Ausrüstung kann geliehen werden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Deutsch im Beruf: Abendkurs für Pflegekräfte – Gespräche mit Patienten und Dokumentation üben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Flohmarkt im Schulhof am 3. Mai: Standplätze für Privatleute noch frei, Anmeldung im Sekretariat."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Spieleabend im Café Würfel: Brettspiele für Erwachsene, jeden Mittwoch, Spiele sind vorhanden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Fahrgemeinschaft gesucht: Wer fährt werktags morgens von Rosenfeld nach Altstetten? Benzinkosten teilen wir."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "WG-Zimmer frei: 14 m², möbliert, in einer ruhigen Dreier-WG, nur für Nichtraucher."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Kinderturnen für Drei- bis Fünfjährige: Bewegung, Spiel und Spaß, samstagvormittags."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Malkurs Aquarell: Landschaften malen, für Anfänger und Fortgeschrittene, Material bitte mitbringen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Handy kaputt? Schnelle Reparatur von Displays und Akkus, oft in einer Stunde fertig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Nachhilfe Französisch für Schülerinnen und Schüler der Oberstufe, auch online."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Greta, 24: Als Studentin habe ich wenig Geld. Wenn Museen nichts kosten, gehe ich bestimmt öfter hin. Ich bin sehr dafür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Bernd, 58: Kunst und Geschichte gehören allen. Gerade Familien mit Kindern sollten nicht wegen des Preises zu Hause bleiben. Ich finde freien Eintritt richtig."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Yasemin, 41: Ich arbeite in einem kleinen Museum. Ohne die Eintrittsgelder könnten wir keine neuen Ausstellungen bezahlen. Deshalb bin ich dagegen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ole, 33: Was nichts kostet, ist auch nichts wert – so denken leider viele. Ich zahle gern ein paar Euro, dann schätze ich den Besuch mehr."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Helga, 70: Für Rentnerinnen wie mich gibt es schon Ermäßigungen. Aber wenn alle kostenlos hineinkommen, wird es sehr voll. Das gefällt mir nicht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Dariusz, 46: In meiner Heimat sind viele große Museen frei, und sie sind voller junger Leute. Das wünsche ich mir hier auch."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sophie, 19: Die Stadt hat für so etwas kein Geld, die Schwimmbäder sind ja schon kaputt. Zuerst sollte man diese Probleme lösen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Malik, 37: Ein kostenloser Sonntag im Monat wäre schon ein guter Anfang. So lernen auch Menschen das Museum kennen, die sonst nie hingehen würden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Mietbedingungen – Fahrradverleih am Seeufer\n\n1. Ausweis: Bei der Ausleihe hinterlegen Sie einen Personalausweis oder Reisepass. Sie bekommen ihn bei der Rückgabe zurück.\n\n2. Zeiten: Die Räder müssen bis 19 Uhr zurückgebracht werden. Wer später kommt, zahlt einen weiteren Tag.\n\n3. Schäden: Kleine Reparaturen wie einen Platten übernehmen wir. Für größere Schäden, die Sie verursacht haben, zahlen Sie selbst.\n\n4. Kinder: Kindersitze und Helme leihen wir kostenlos aus. Bitte reservieren Sie diese mindestens einen Tag vorher."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage auf der Fähre: Liebe Fahrgäste, wir erreichen in wenigen Minuten den Hafen von Seeburg. Bitte gehen Sie noch nicht zu Ihren Autos.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von der Kita: Guten Tag, Frau Neumann, hier ist Frau Heller aus der Kita. Der Elternabend findet nicht am Mittwoch, sondern schon am Dienstag um 19 Uhr statt. Bitte bringen Sie, wenn möglich, einen kleinen Kuchen mit.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Radiotipp: Am Sonntag gibt es in der Markthalle einen großen Flohmarkt für Kindersachen. Verkaufen dürfen nur Privatleute. Der Markt beginnt um zehn Uhr, und das Parkhaus nebenan ist an diesem Tag kostenlos.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Theater: Meine Damen und Herren, die Pause dauert heute zwanzig Minuten. Getränke bekommen Sie im Foyer im ersten Stock. Bitte denken Sie daran, Ihre Handys auch im zweiten Teil auszuschalten.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht vom Paketdienst: Hallo, Herr Adeyemi, wir konnten Ihr Paket heute leider nicht zustellen. Es liegt jetzt bei Ihrer Nachbarin, Frau Kowalski, im Erdgeschoss. Sie ist ab 16 Uhr zu Hause.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Verkehrsmeldung: Wegen Bauarbeiten fährt die Straßenbahnlinie 3 ab Montag zwei Wochen lang nicht bis zum Zoo. Zwischen Rathaus und Zoo fahren Ersatzbusse. Die Fahrt dauert dadurch etwa zehn Minuten länger.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Einführung im Tierheim Rosenfeld: Schön, dass Sie da sind! Neue Freiwillige beginnen bei uns immer mit den Hunden, die Katzen kommen erst später. Bevor Sie allein mit einem Hund spazieren gehen, machen Sie drei Spaziergänge mit einer erfahrenen Person. Bitte geben Sie den Tieren kein eigenes Futter. Unser Büro ist am Wochenende nur bis 14 Uhr besetzt. Und noch etwas: Einmal im Monat gibt es einen Abend, an dem wir über Tierpflege informieren.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moritz: Hey Aylin, du siehst müde aus. Alles in Ordnung?\nAylin: Ja, ich lerne nur gerade sehr viel. Nächste Woche habe ich meine Statistikprüfung, und ich verstehe immer noch nicht alles.\nMoritz: Statistik hatte ich letztes Semester. Wenn du willst, können wir am Donnerstag zusammen lernen.\nAylin: Das wäre toll! Aber am Donnerstag arbeite ich im Café, bis sechs. Geht es danach?\nMoritz: Klar, um sieben in der Bibliothek? Die ist bis zehn Uhr offen.\nAylin: Perfekt. Arbeitest du eigentlich noch im Supermarkt?\nMoritz: Nein, seit Oktober gebe ich Nachhilfe in Mathe. Das ist besser bezahlt, und ich kann mir die Zeit selbst einteilen.\nAylin: Klingt gut. Ich bringe am Donnerstag Kekse mit, versprochen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderator: Herzlich willkommen! Jeden Tag landen in Supermärkten Lebensmittel im Müll. Sollen Supermärkte gezwungen werden, sie zu spenden? Darüber spreche ich mit Frau Roth, die eine Lebensmittelausgabe für Bedürftige leitet, und mit Herrn Kaya, der einen Supermarkt führt.\nFrau Roth: Wir holen jeden Morgen Brot, Obst und Joghurt ab. Ohne diese Spenden könnten wir viele Familien nicht versorgen.\nHerr Kaya: Wir spenden schon heute freiwillig. Ein Gesetz bringt nur mehr Papierkram, und dafür haben kleine Läden keine Zeit.\nModerator: Was passiert denn mit Produkten, die das Datum überschritten haben?\nHerr Kaya: Viele Kunden wissen nicht, dass Joghurt oft noch Tage danach gut ist. Deshalb verkaufen wir solche Produkte billiger in einer extra Kiste.\nFrau Roth: Das Problem ist der Transport. Wir haben nur ehrenamtliche Fahrer und ein altes Auto.\nModerator: Wir haben eine Frage aus dem Publikum, ich gebe sie gleich weiter.\nFrau Roth: Ich wünsche mir, dass Supermärkte uns wenigstens einen Kühlwagen bezahlen.\nHerr Kaya: Am Ende entscheidet der Kunde. Wer nur perfekte Äpfel kauft, ist auch verantwortlich.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben am Wochenende mit Freunden eine Wanderung in den Bergen gemacht. Ihre Kollegin Lea wollte eigentlich mitkommen, war aber verhindert. Schreiben Sie Lea eine E-Mail (circa 80 Wörter).\n\n– Erzählen Sie: Wie war die Wanderung?\n– Begründen Sie: Was war schwierig?\n– Machen Sie einen Vorschlag für die nächste Wanderung."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben im Fernsehen eine Sendung zum Thema „Kinder und Hausarbeit“ gesehen. Im Online-Gästebuch der Sendung finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Corinna: Meine Kinder sind acht und zehn. Sie müssen jeden Tag den Tisch decken und ihr Zimmer aufräumen. Meine Nachbarin findet das zu streng. Wie sehen Sie das?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie ziehen nächste Woche um und brauchen am Freitag einen Tag Urlaub. Schreiben Sie Ihrer Chefin, Frau Lindqvist. Bitten Sie höflich um den freien Tag und erklären Sie den Grund (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir sollen doch den Flohmarkt für die Kita planen. Wann passt es dir am besten?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gut. Und wie machen wir Werbung, damit viele Leute kommen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Prima. Was machen wir am Ende mit dem Geld?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Die Kita Ihrer Kinder möchte einen Flohmarkt organisieren. Sie und Ihr Gesprächspartner planen den Flohmarkt.\n\n– Wann und wo?\n– Was verkaufen?\n– Werbung?\n– Kaffee und Kuchen?\n– Was mit dem Geld machen?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Leben auf dem Land oder in der Stadt?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Ein Jahr im Ausland arbeiten?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner präsentiert das Thema „Ein Jahr im Ausland arbeiten?“: Er hat ein Jahr in einem Hotel in Spanien gearbeitet und dort viel gelernt, aber seine Familie hat ihm sehr gefehlt.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p4-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Möchten Sie später lieber auf dem Land oder in der Stadt wohnen? Warum?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

@@ -1,0 +1,768 @@
+[
+  {
+    "id": "ast:p5-l1-text",
+    "kind": "text",
+    "label": "Blog",
+    "text": {
+      "lang": "de",
+      "body_md": "Mein erstes Jahr mit Bienen\n\nLetztes Jahr zu meinem 60. Geburtstag haben mir meine Kinder einen Kurs beim Imkerverein geschenkt. Ich war zuerst skeptisch, denn ich hatte immer etwas Angst vor Bienen. Aber schon nach dem zweiten Treffen war ich begeistert. Der Kurs ging über acht Samstage, und am Ende durfte ich ein eigenes Bienenvolk mit nach Hause nehmen.\n\nDie Bienen stehen jetzt hinten in unserem Garten. Meine Frau war am Anfang nicht glücklich darüber, inzwischen sitzt sie aber gern daneben und schaut zu. Gestochen wurde ich übrigens nur zweimal, beide Male, weil ich ohne Handschuhe gearbeitet habe.\n\nIm Juli habe ich zum ersten Mal Honig geerntet: elf Gläser! Verkaufen möchte ich ihn nicht, ich verschenke ihn lieber an Nachbarn und Freunde. Nächstes Jahr möchte ich ein zweites Volk aufstellen.\n\nIhr Konrad"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l2a-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Neues Jugendzentrum im alten Bahnhof\n\nDer alte Bahnhof in Kirchdorf steht seit Jahren leer. Ab Januar wird er zu einem Jugendzentrum. Die Jugendlichen haben die Räume selbst geplant: Es gibt einen Musikraum, eine Werkstatt und ein kleines Café, in dem sie auch selbst arbeiten können. Das Zentrum ist von Dienstag bis Samstag am Nachmittag und Abend geöffnet. Zwei Sozialarbeiter sind immer vor Ort. Einige Anwohner haben Angst vor Lärm, deshalb müssen die Musikproben um 21 Uhr enden."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l2b-text",
+    "kind": "text",
+    "label": "aus einer Lokalzeitung (erfunden)",
+    "text": {
+      "lang": "de",
+      "body_md": "Ein Sonntag ohne Autos\n\nAm vergangenen Sonntag war die Hauptstraße in Kirchdorf zum ersten Mal einen ganzen Tag lang für Autos gesperrt. Statt Verkehr gab es Tische mit Essen, Musik und Spiele für Kinder. Organisiert hatte den Tag ein Verein von Anwohnern. Nach Schätzungen der Polizei kamen rund 3 000 Besucher. Auch die Geschäfte waren zufrieden, obwohl sie an diesem Tag nicht öffnen durften: Viele Gäste haben sich die Schaufenster angesehen und wollen wiederkommen. Der Bürgermeister möchte den autofreien Sonntag jetzt zweimal im Jahr anbieten."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-a",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Chor sucht Männerstimmen – wir singen Pop und Volkslieder, Probe donnerstags."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-b",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Babyschwimmen für Eltern mit Kindern von 6 bis 18 Monaten, warmes Wasser, kleine Gruppen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-c",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gebrauchte Lehrbücher für die Berufsschule günstig zu verkaufen – Kfz und Elektrotechnik."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-d",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Fahrradkurs für Erwachsene: Sie haben nie Rad fahren gelernt? Bei uns klappt es in fünf Terminen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-e",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Englisch-Konversation für Reisende: Ein Abend pro Woche, Schwerpunkt Hotel, Flughafen, Restaurant."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-f",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Vegetarisch kochen leicht gemacht: Kochkurs mit einfachen Rezepten für jeden Tag."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-g",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Garage zu vermieten in der Lindenallee, ab sofort, 60 Euro im Monat."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-h",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Senioren-Fitness: sanfte Gymnastik am Vormittag, Einstieg jederzeit möglich."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-i",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Gitarre, Bass, Schlagzeug: Bandprobenraum stundenweise zu mieten, abends und am Wochenende."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l3-ad-j",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Wir suchen Aushilfen für unser Café am Wochenende – auch Studierende und Schüler ab 16."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l4-c0",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Johanna, 44: Bei uns gibt es jeden Morgen Streit, was meine Tochter anziehen soll. Mit einer Uniform wäre das vorbei. Ich bin dafür."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l4-c1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Emre, 16: Kleidung zeigt, wer ich bin. Wenn alle gleich aussehen, ist das langweilig. Ich will das nicht."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l4-c2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Brigitte, 52: Ich unterrichte an einer Schule mit Schulkleidung. Seitdem gibt es weniger Mobbing wegen teurer Marken. Das ist ein großer Vorteil."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l4-c3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Tarek, 39: Die Uniformen kosten viel Geld, und Kinder wachsen schnell. Für Familien mit wenig Geld wird das teuer. Deshalb halte ich nichts davon."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l4-c4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Lina, 15: Ehrlich gesagt fände ich es praktisch. Ich müsste morgens nicht lange überlegen und hätte mehr Zeit zum Schlafen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l4-c5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Walter, 68: Zu meiner Zeit gab es so etwas nicht, und wir haben trotzdem gut gelernt. Die Schule hat wichtigere Aufgaben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l4-c6",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Chiara, 31: In meiner Heimat tragen alle Kinder eine Uniform, und sie sind stolz auf ihre Schule. Das würde ich mir hier auch wünschen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l4-c7",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Felix, 27: Statt Uniform reicht doch ein T-Shirt mit dem Logo der Schule für Ausflüge. Eine komplette Uniform finde ich übertrieben."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-l5-text",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Hinweise der Hausarztpraxis Dr. Sander\n\n1. Termine: Termine vergeben wir telefonisch oder online. Ohne Termin kommen Sie bitte nur in die offene Sprechstunde am Montag von 8 bis 10 Uhr.\n\n2. Rezepte: Wiederholungsrezepte können Sie per E-Mail bestellen. Sie liegen nach zwei Werktagen an der Anmeldung für Sie bereit.\n\n3. Absagen: Wenn Sie einen Termin nicht wahrnehmen können, sagen Sie bitte mindestens 24 Stunden vorher ab.\n\n4. Infekte: Mit Fieber oder Husten melden Sie sich bitte zuerst am Telefon. Sie bekommen dann einen Termin in der Infektsprechstunde."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h1-ex",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Beispiel",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1.5,
+        "freq_hz": 440,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Ansage im Freizeitpark: Liebe Gäste, die Achterbahn ist wegen einer technischen Prüfung bis 13 Uhr geschlossen. Alle anderen Fahrgeschäfte sind geöffnet.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h1-t1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 500,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht vom Friseur: Hallo, Frau Petrović, hier ist der Salon Haarmonie. Ihre Friseurin ist morgen leider krank. Wir können Ihnen aber einen Termin am Samstag um zehn Uhr anbieten. Bitte sagen Sie uns kurz Bescheid.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h1-t2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 560,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht vom Vermieter: Guten Tag, hier spricht Herr Albrecht. Morgen zwischen acht und zwölf Uhr gibt es im ganzen Haus kein Wasser, weil eine Leitung repariert wird. Bitte füllen Sie sich vorher ein paar Flaschen ab.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h1-t3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 620,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Durchsage im Museum: Liebe Besucherinnen und Besucher, das Museum schließt in fünfzehn Minuten. Die Garderobe im Untergeschoss ist noch bis 18.30 Uhr geöffnet. Der Museumsladen hat bereits geschlossen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h1-t4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 680,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Nachricht von einem Kollegen: Hi Svenja, hier ist Ralf. Der Drucker im zweiten Stock ist schon wieder kaputt. Kannst du für die Präsentation morgen die Unterlagen im Copyshop drucken lassen? Die Rechnung bezahlt die Firma.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h1-t5",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 1 Text 5",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Werbung im Radio: Großer Umbau im Möbelhaus Holzwurm! Bis Samstag bekommen Sie auf alle Sofas dreißig Prozent Rabatt. Lieferung und Aufbau sind in diesen Tagen kostenlos. Wir freuen uns auf Ihren Besuch.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 520,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Willkommen auf dem Campingplatz Seewiese! Ihren Platz finden Sie auf dem Plan, den Sie gleich bekommen. Autos parken Sie bitte auf dem großen Parkplatz am Eingang, nicht neben dem Zelt. Frische Brötchen können Sie jeden Abend bis 20 Uhr für den nächsten Morgen bestellen. Von 22 Uhr bis 7 Uhr ist Nachtruhe. Bei Gewitter dürfen Sie nicht im See schwimmen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h2-instr",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 2 Anweisung",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 330,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 600,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Jana: Max, gut, dass ich dich hier treffe! Hast du schon mit Mama über Omas Geburtstag gesprochen?\nMax: Ja, gestern. Oma wird achtzig, und sie möchte keine große Feier. Nur die Familie, zu Hause bei ihr.\nJana: Schade, ich hätte gern ein Restaurant reserviert. Und was schenken wir ihr?\nMax: Mama meint, Oma wünscht sich ein Fotoalbum mit Bildern von uns allen. Ich kann die Fotos sammeln.\nJana: Super, dann kümmere ich mich um den Kuchen. Oma liebt doch Apfelkuchen.\nMax: Genau. Kommst du am Samstag mit dem Zug?\nJana: Nein, diesmal fahre ich mit dem Auto, dann kann ich auf dem Rückweg Tante Rosi mitnehmen.\nMax: Gute Idee. Ich bin schon am Freitag da und helfe Oma beim Aufräumen.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-h4",
+    "kind": "audio",
+    "label": "TEST AUDIO – Hören Teil 4",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 3,
+        "freq_hz": 660,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Moderatorin: Guten Abend! Immer mehr Menschen bezahlen mit Karte oder Handy. Brauchen wir überhaupt noch Bargeld? Meine Gäste sind Herr Weber, er hat eine Bäckerei, und Frau Lindner von einer Beratungsstelle für Verbraucher.\nHerr Weber: In meiner Bäckerei zahlen morgens fast alle bar. Für ein Brötchen holt niemand gern die Karte heraus.\nFrau Lindner: Das stimmt, aber für viele junge Leute ist das Handy schon die Geldbörse. Sie haben kaum noch Münzen dabei.\nModeratorin: Was ist denn mit der Sicherheit?\nFrau Lindner: Wer bar zahlt, hinterlässt keine Daten. Das ist für mich ein wichtiger Grund, Bargeld zu behalten.\nHerr Weber: Für mich ist das Bargeld aber auch Arbeit. Abends muss ich die Kasse zählen und das Geld zur Bank bringen.\nModeratorin: Zu diesem Thema hat uns eine Zuschauerin geschrieben.\nFrau Lindner: Ältere Menschen kommen mit Bargeld oft besser zurecht. Niemand darf ausgeschlossen werden.\nHerr Weber: Die Gebühren für Kartenzahlungen sind für kleine Geschäfte wie meins leider ziemlich hoch.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-s1-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie waren am Samstag auf der Hochzeit Ihrer Cousine. Ihr Freund Daniel kennt Ihre Cousine auch, konnte aber nicht kommen. Schreiben Sie Daniel eine E-Mail (circa 80 Wörter).\n\n– Beschreiben Sie: Wie war die Hochzeit?\n– Begründen Sie: Was war für Sie der schönste Moment?\n– Schlagen Sie vor, wann Sie zusammen die Fotos anschauen."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-s2-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie haben in einer Radiosendung eine Diskussion zum Thema „Werbung für Kinder“ gehört. Im Online-Gästebuch der Sendung finden Sie folgende Meinung. Schreiben Sie Ihre Meinung (circa 80 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-s2-post",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Stefan: Meine Kinder sehen im Fernsehen und im Internet ständig Werbung für Spielzeug und Süßigkeiten. Danach wollen sie alles haben. Werbung für Kinder sollte verboten werden. Was denken Sie?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-s3-prompt",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Sie möchten Ihr Fahrrad im Keller Ihres Wohnhauses abstellen. Schreiben Sie Ihrem Vermieter, Herrn Szabo. Fragen Sie höflich, ob das erlaubt ist, und erklären Sie, warum Sie das möchten (circa 40 Wörter)."
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp1-partner-1",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 1",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 740,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Hallo! Wir sollen doch den Sporttag für die Firma planen. Welche Sportarten könnten wir anbieten?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp1-partner-2",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 2",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: Gute Idee. Und wo könnten wir das machen – hast du einen Vorschlag?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp1-partner-3",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 1 Partner-Turn 3",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 820,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partner: In Ordnung. Sollen die Sieger einen Preis bekommen?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp1-card",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Ihre Firma möchte im Sommer einen Sporttag für alle Mitarbeiterinnen und Mitarbeiter machen. Sie planen den Tag zusammen.\n\n– Welcher Tag?\n– Welche Sportarten?\n– Wo?\n– Essen?\n– Preise für die Sieger?"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t1-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 1: Im Internet oder im Geschäft einkaufen?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t1-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t1-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t1-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t1-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 1 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t2-slide1",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 1: Frühstück – die wichtigste Mahlzeit des Tages?: Thema vorstellen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t2-slide2",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 2: Meine persönlichen Erfahrungen"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t2-slide3",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 3: Die Situation in meinem Heimatland"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t2-slide4",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 4: Vor- und Nachteile & meine Meinung"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp2-t2-slide5",
+    "kind": "text",
+    "label": null,
+    "text": {
+      "lang": "de",
+      "body_md": "Thema 2 – Folie 5: Abschluss & Dank"
+    },
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp3-partner-talk",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Partner-Präsentation",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 2,
+        "freq_hz": 780,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Partnerin präsentiert das Thema „Frühstück – die wichtigste Mahlzeit des Tages?“: Sie frühstückt jeden Tag mit der Familie, weil sie sonst keine Energie hat. Ihr Mann trinkt dagegen nur einen Kaffee.",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  },
+  {
+    "id": "ast:p5-sp3-examiner-q",
+    "kind": "audio",
+    "label": "TEST AUDIO – Sprechen Teil 3 Prüferfrage",
+    "audio": {
+      "generator": {
+        "type": "tone",
+        "seconds": 1,
+        "freq_hz": 840,
+        "beep_ms": 250
+      },
+      "plays": null
+    },
+    "script_de": "Prüferin: Was haben Sie zuletzt im Internet gekauft, und waren Sie zufrieden?",
+    "licence": {
+      "kind": "synthetic_test"
+    },
+    "creator": "klarweg-engineering"
+  }
+]

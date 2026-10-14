@@ -41,3 +41,10 @@ test('REVIEW SHEET: refuses to write inside the repository; writes HTML + JSON o
   assert.deepEqual(writeReviewSheets(dir, ['p3']), ['P3']);
   assert.deepEqual(fs.readdirSync(dir).sort(), ['P3-review.html', 'P3-review.json']);
 });
+
+test('REVIEW SHEET: the Teil 3 partner talks and examiner questions say which topic choice they belong to (OD-32)', () => {
+  for (const f of PRACTICE_FORMS) {
+    const html = reviewSheetHtml(f);
+    for (const role of ['partner_audio', 'examiner_audio']) for (const n of ['1', '2']) assert.ok(html.includes(`<b>${role} — für Lernende mit Thema ${n}</b>`), `${f.name}: ${role} for Thema ${n}`);
+  }
+});

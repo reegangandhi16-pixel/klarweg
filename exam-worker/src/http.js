@@ -20,7 +20,10 @@ export function json(body, status = 200, headers = {}) {
 }
 
 export function errorResponse(err) {
-  return json({ ok: false, error: err.code, ...(err.message && err.message !== err.code ? { message: err.message } : {}), ...(err.extra || {}) }, err.status);
+  // a retryable refusal (e.g. request_in_progress) also carries Retry-After; the body field is what the client reads,
+  // because Retry-After is not a CORS-safelisted response header
+  const retry = err.extra && Number.isFinite(err.extra.retry_after_s) ? { 'retry-after': String(err.extra.retry_after_s) } : {};
+  return json({ ok: false, error: err.code, ...(err.message && err.message !== err.code ? { message: err.message } : {}), ...(err.extra || {}) }, err.status, retry);
 }
 
 const MAX_JSON_BYTES = 256 * 1024;   // writing texts are small; anything bigger is refused

@@ -10,8 +10,8 @@ import { countWords } from './wordcount.js';
 import { BANDS, rubricTotal, rubricUnits } from './scoring.js';
 import { signMediaToken, MEDIA_TTL_MS } from './media.js';
 import {
-  loadAttempt, attemptModules, audit, requireRequestId, idempotent, acquireLease, requireLease,
-  computeDeadline, speakingPrepEnd, settle, submitModule, finalizeModule, scoreModule, buildResult, incident, SAVE_GRACE_MS, RESULT_LABEL
+  loadAttempt, attemptModules, audit, requireRequestId, idempotent, idempotentAtomic, acquireLease, requireLease,
+  computeDeadline, speakingPrepEnd, settle, submitModule, finalizeModule, scoreModule, buildResult, computeResult, resultUpsert, incident, SAVE_GRACE_MS, RESULT_LABEL
 } from './core.js';
 
 const MAX_TEXT_CHARS = 20_000;
@@ -213,7 +213,8 @@ export async function startModule(env, userId, attemptId, module, request) {
   const body = await readJsonBody(request);
   const requestId = requireRequestId(body.request_id);
   const { attempt } = await attemptCtx(env, userId, attemptId, body.lease_id);
-  return idempotent(env, attemptId, requestId, `start:${module}`, async () => {
+  // in-flight claim + one atomic batch (core.js idempotentAtomic)
+  const out = await idempotentAtomic(env, attemptId, requestId, `start:${module}`, async () => {
     const m = await moduleRow(env, attemptId, module);
     if (m.status === 'locked') fail(409, 'module_locked');
     if (m.status !== 'available') fail(409, 'invalid_transition', `Module is ${m.status}.`);
@@ -224,14 +225,21 @@ export async function startModule(env, userId, attemptId, module, request) {
     const pkg = await loadPackage(env, attempt.form_id, module);
     const t = now(env);
     const deadline = computeDeadline(cfg, moduleConfig(cfg, module), pkg, t, { multiplier: attempt.time_multiplier });
-    const r = await env.DB.prepare(`UPDATE attempt_modules SET status = 'running', started_at = ?3, deadline_at = ?4 WHERE attempt_id = ?1 AND module = ?2 AND status = 'available'`)
-      .bind(attemptId, module, t, deadline).run();
-    if (!r.meta.changes) fail(409, 'invalid_transition');
-    if (attempt.status === 'created') await env.DB.prepare("UPDATE attempts SET status = 'in_progress', started_at = ?2 WHERE id = ?1 AND status = 'created'").bind(attemptId, t).run();
-    await audit(env, userId, attemptId, 'module_started', { module });
-    log(env, 'module_started', { attempt: attemptId, module });
-    return { ok: true, module: moduleView(await moduleRow(env, attemptId, module), t), server_now: t };
+    return {
+      precondition: { sql: `EXISTS (SELECT 1 FROM attempt_modules WHERE attempt_id = ?4 AND module = ?5 AND status = 'available')
+          AND NOT EXISTS (SELECT 1 FROM attempt_modules WHERE attempt_id = ?4 AND status = 'running')`, binds: [attemptId, module] },
+      statements: [
+        env.DB.prepare(`UPDATE attempt_modules SET status = 'running', started_at = ?3, deadline_at = ?4 WHERE attempt_id = ?1 AND module = ?2 AND status = 'available'`)
+          .bind(attemptId, module, t, deadline),
+        env.DB.prepare("UPDATE attempts SET status = 'in_progress', started_at = ?2 WHERE id = ?1 AND status = 'created'").bind(attemptId, t),
+        env.DB.prepare('INSERT INTO audit_log (at, actor, attempt_id, action, detail_json) VALUES (?1, ?2, ?3, ?4, ?5)')
+          .bind(t, userId, attemptId, 'module_started', JSON.stringify({ module }))
+      ],
+      body: { ok: true, module: moduleView({ ...m, status: 'running', started_at: t, deadline_at: deadline }, t), server_now: t }
+    };
   });
+  if (!out.body.replayed) log(env, 'module_started', { attempt: attemptId, module });
+  return out;
 }
 
 export async function getPackage(env, userId, attemptId, module, url) {
@@ -402,7 +410,11 @@ export async function hoerenEvent(env, userId, attemptId, request) {
   const body = await readJsonBody(request);
   const requestId = requireRequestId(body.request_id);
   const { attempt } = await attemptCtx(env, userId, attemptId, body.lease_id);
-  return idempotent(env, attemptId, requestId, `hoeren:${body.type}:${body.phase_seq ?? ''}`, async () => {
+  const route = `hoeren:${body.type}:${body.phase_seq ?? ''}`;
+  // 'interrupted' commits through an in-flight claim + one atomic batch (handler returns a plan); the other event types
+  // keep the plain idempotent() path unchanged.
+  const atomic = body.type === 'interrupted';
+  const handler = async () => {
     const m = await moduleRow(env, attemptId, 'hoeren');
     const t = now(env);
     requireRunning(m, t, { grace: false });
@@ -474,6 +486,17 @@ export async function hoerenEvent(env, userId, attemptId, request) {
         const row = await env.DB.prepare("SELECT started_at, outcome FROM audio_plays WHERE attempt_id = ?1 AND phase_seq = ?2 AND kind = ?3").bind(attemptId, seq, kind).first();
         if (!row || row.outcome !== 'started') fail(409, 'play_not_started');
         if (t >= row.started_at + phase.ms) fail(409, 'play_already_finished', 'The recording had already finished playing.');
+        if (atomic) return {
+          precondition: { sql: `EXISTS (SELECT 1 FROM attempt_modules WHERE attempt_id = ?4 AND module = 'hoeren' AND status = 'running')
+              AND EXISTS (SELECT 1 FROM audio_plays WHERE attempt_id = ?4 AND phase_seq = ?5 AND kind = ?6 AND outcome = 'started')`, binds: [attemptId, seq, kind] },
+          statements: [
+            env.DB.prepare(`UPDATE audio_plays SET outcome = 'interrupted', ended_at = ?4 WHERE attempt_id = ?1 AND phase_seq = ?2 AND kind = ?3 AND outcome = 'started'`)
+              .bind(attemptId, seq, kind, t),
+            env.DB.prepare('INSERT INTO incidents (id, attempt_id, kind, detail_json, created_at) VALUES (?1, ?2, ?3, ?4, ?5)')
+              .bind(`inc_${crypto.randomUUID()}`, attemptId, 'listening_play_interrupted', JSON.stringify({ phase_seq: seq, kind }), t)
+          ],
+          body: { ok: true, phase_seq: seq, kind, outcome, server_now: t }
+        };
       }
       const r = await env.DB.prepare(`UPDATE audio_plays SET outcome = ?4, ended_at = ?5 WHERE attempt_id = ?1 AND phase_seq = ?2 AND kind = ?3 AND outcome = 'started'`)
         .bind(attemptId, seq, kind, outcome, t).run();
@@ -482,7 +505,8 @@ export async function hoerenEvent(env, userId, attemptId, request) {
       return { ok: true, phase_seq: seq, kind, outcome, server_now: t };
     }
     fail(422, 'invalid_event');
-  });
+  };
+  return atomic ? idempotentAtomic(env, attemptId, requestId, route, handler) : idempotent(env, attemptId, requestId, route, handler);
 }
 
 /* ---------- media tokens ---------- */
@@ -644,26 +668,36 @@ export async function completeAttempt(env, userId, attemptId, request) {
   const body = await readJsonBody(request);
   const requestId = requireRequestId(body.request_id);
   // Completion ends the lease, so the owner's retry of a completion whose response was lost can never pass the
-  // lease check: replay its stored response first (ownership is still verified; the result is the owner's anyway).
+  // lease check: replay its stored, COMPLETED response first (ownership is still verified; the result is the owner's
+  // anyway). A pending claim is not replayed: it falls through to the lease check and the claim (503 in progress).
   await loadAttempt(env, attemptId, userId);
-  const done = await env.DB.prepare("SELECT status, response_json FROM request_log WHERE attempt_id = ?1 AND request_id = ?2 AND route = 'complete'")
+  const done = await env.DB.prepare("SELECT status, response_json FROM request_log WHERE attempt_id = ?1 AND request_id = ?2 AND route = 'complete' AND state = 'completed'")
     .bind(attemptId, requestId).first();
   if (done) return { status: done.status, body: { ...JSON.parse(done.response_json), replayed: true } };
   const { attempt } = await attemptCtx(env, userId, attemptId, body.lease_id);
-  return idempotent(env, attemptId, requestId, 'complete', async () => {
+  // in-flight claim + one atomic batch: status, lease removal, result and audit commit with the completed response
+  const out = await idempotentAtomic(env, attemptId, requestId, 'complete', async () => {
     if (attempt.status === 'completed') fail(409, 'invalid_transition');
     const mods = await attemptModules(env, attemptId);
     const pending = mods.filter((m) => m.status !== 'submitted').map((m) => m.module);
     if (pending.length) fail(409, 'modules_pending', 'Every module must be submitted first.', { modules: pending });
     const t = now(env);
-    const r = await env.DB.prepare("UPDATE attempts SET status = 'completed', completed_at = ?2 WHERE id = ?1 AND status = 'in_progress'").bind(attemptId, t).run();
-    if (!r.meta.changes) fail(409, 'invalid_transition');
-    await env.DB.prepare('DELETE FROM attempt_leases WHERE attempt_id = ?1').bind(attemptId).run();
-    const result = await buildResult(env, await loadAttempt(env, attemptId, userId));
-    await audit(env, userId, attemptId, 'attempt_completed', {});
-    log(env, 'attempt_completed', { attempt: attemptId });
-    return { ok: true, attempt_id: attemptId, status: 'completed', result };
+    const result = await computeResult(env, await loadAttempt(env, attemptId, userId));
+    return {
+      precondition: { sql: `EXISTS (SELECT 1 FROM attempts WHERE id = ?4 AND status = 'in_progress')
+          AND NOT EXISTS (SELECT 1 FROM attempt_modules WHERE attempt_id = ?4 AND status <> 'submitted')`, binds: [attemptId] },
+      statements: [
+        env.DB.prepare("UPDATE attempts SET status = 'completed', completed_at = ?2 WHERE id = ?1 AND status = 'in_progress'").bind(attemptId, t),
+        env.DB.prepare('DELETE FROM attempt_leases WHERE attempt_id = ?1').bind(attemptId),
+        resultUpsert(env, attemptId, result, t),
+        env.DB.prepare('INSERT INTO audit_log (at, actor, attempt_id, action, detail_json) VALUES (?1, ?2, ?3, ?4, ?5)')
+          .bind(t, userId, attemptId, 'attempt_completed', '{}')
+      ],
+      body: { ok: true, attempt_id: attemptId, status: 'completed', result }
+    };
   });
+  if (!out.body.replayed) log(env, 'attempt_completed', { attempt: attemptId });
+  return out;
 }
 
 export async function getResult(env, userId, attemptId) {

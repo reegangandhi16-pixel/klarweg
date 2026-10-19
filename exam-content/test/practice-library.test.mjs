@@ -231,3 +231,32 @@ test('LIBRARY: no group-size phrase that can be read two ways ("zu dritt … mit
     }
   }
 });
+
+test('LIBRARY: no impersonal passive with a reflexive pronoun ("getroffen wird sich") in explanations or options', () => {
+  // internal audit 2026-10-19 found P4 Hören 3 item 19 explaining with "getroffen wird sich", which is not standard German;
+  // reflexive verbs have no impersonal passive, so "<Partizip> wird/werden sich" is always a wording defect
+  const REFLEXIVE_PASSIVE = /\bge\p{L}+(t|en) (wird|werden|wurde|wurden) sich\b/iu;
+  for (const f of PRACTICE_FORMS) {
+    for (const it of JSON.parse(f.files['items.json'])) {
+      const text = JSON.stringify(it);
+      assert.equal(REFLEXIVE_PASSIVE.test(text), false, `${f.name} ${it.id}: ${(REFLEXIVE_PASSIVE.exec(text) || [''])[0]}`);
+    }
+  }
+});
+
+test('LIBRARY: Lesen 3 — a keyed ad restricted to women or men never answers a situation addressed to the candidate ("Sie …")', () => {
+  // internal audit 2026-10-19 found P15 Lesen 3 item 15 keyed to "Selbstverteidigung für Frauen" for "Sie gehen abends …":
+  // a male candidate reading literally could choose 0; such situations must name the person who fits (e.g. "Ihre Schwester")
+  const RESTRICTED = /\bfür (Frauen|Männer)\b(?! und)/;
+  for (const f of PRACTICE_FORMS) {
+    const keys = JSON.parse(f.files['keys.json']).keys;
+    const ads = new Map(JSON.parse(f.files['assets.json']).map((a) => [a.id, (a.text && a.text.body_md) || '']));
+    for (const it of JSON.parse(f.files['items.json'])) {
+      if (it.module !== 'lesen' || it.part !== 3 || it.is_example) continue;
+      const key = keys[it.id] && keys[it.id].correct;
+      const ad = [...ads].find(([id]) => id.endsWith(`-l3-ad-${key}`));
+      if (!ad || !RESTRICTED.test(ad[1])) continue;
+      assert.equal(/^\d+\.\s+Sie\b/.test(it.stem), false, `${f.name} ${it.id}: "${it.stem}" keyed to "${ad[1]}"`);
+    }
+  }
+});

@@ -292,7 +292,7 @@ explain({
   'itm:b1:p2-l2-09': ['ast:p2-l2a-text', 'nach der Spätschicht', 'Der letzte Bus fährt erst um 23.40 Uhr, deshalb passt er auch nach der Spätschicht.'],
   'itm:b1:p2-l2-10': ['ast:p2-l2b-text', 'Die Idee hatte eine Biologielehrerin', 'Die Idee hatte eine Biologielehrerin; die Eltern haben nur das Sommerfest organisiert.'],
   'itm:b1:p2-l2-11': ['ast:p2-l2b-text', 'Das Geld für Erde und Pflanzen kam von einem Sommerfest', 'Das Geld kam von einem Sommerfest, das die Eltern organisiert haben.'],
-  'itm:b1:p2-l2-12': ['ast:p2-l2b-text', 'In den Ferien gießen Nachbarn aus dem Viertel die Pflanzen.', 'Wenn Nachbarn die Pflanzen gießen, kümmern sie sich in den Ferien um den Garten.'],
+  'itm:b1:p2-l2-12': ['ast:p2-l2b-text', 'In den Ferien gießen Nachbarn aus dem Viertel die Pflanzen.', 'In den Ferien gießen Nachbarn aus dem Viertel die Pflanzen, sie kümmern sich also um den Garten.'],
   'itm:b1:p2-l3-13': ['ast:p2-l3-ad-b', 'die nie schwimmen gelernt haben', 'Anzeige b richtet sich genau an Erwachsene ohne Schwimmkenntnisse, die es jetzt lernen wollen.'],
   'itm:b1:p2-l3-14': ['ast:p2-l3-ad-i', 'Kleidung reparieren und ändern statt wegwerfen', 'Im Nähkurs (i) lernt man, Kleidung selbst zu reparieren.'],
   'itm:b1:p2-l3-15': ['ast:p2-l3-ad-j', 'Haustiere leider nicht erlaubt', 'In der einzigen Ferienwohnung (j) sind Haustiere nicht erlaubt, deshalb passt keine Anzeige: 0.'],

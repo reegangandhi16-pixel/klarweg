@@ -370,7 +370,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Nur die Firma war überrascht, Henriks Chef hat die lange Elternzeit dagegen sofort akzeptiert."
+      "explanation_de": "In der Firma war man zuerst überrascht, aber Henriks Chef hat die lange Elternzeit sofort akzeptiert."
     }
   },
   {
@@ -1124,7 +1124,7 @@
     "task_id": "tsk:b1:p10-l3",
     "is_example": false,
     "interaction": "matching_pool",
-    "stem": "14. Sie haben einen jungen Hund, der nicht gut hört.",
+    "stem": "14. Sie haben einen jungen Hund, der noch nicht gut gehorcht.",
     "options": [
       {
         "option_id": "a",

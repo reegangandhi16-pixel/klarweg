@@ -154,7 +154,7 @@ export const PRACTICE_FORM_P8 = buildPracticeForm({
         ['Die Tochter geht wieder in den Kindergarten.', 'richtig', 'sie ist wieder im Kindergarten', 'Ömers Tochter ist gesund und besucht wieder den Kindergarten.'],
         ['Die Fortbildung war kurz und entspannt.', 'falsch', 'die Tage waren sehr lang, von acht bis sechs', 'Paula fand die Fortbildung interessant, aber die Tage von acht bis sechs Uhr waren lang.'],
         ['Paula hält am Montag eine Präsentation.', 'richtig', 'ich soll am Montag in der Besprechung eine kurze Präsentation machen', 'In der Besprechung am Montag stellt Paula ihre Fortbildung in einer kurzen Präsentation vor.'],
-        ['Paula bereitet die Präsentation im Büro vor.', 'falsch', 'Die bereite ich am Wochenende vor.', 'Paula arbeitet nicht im Büro an der Präsentation, sondern am Wochenende.'],
+        ['Paula bereitet die Präsentation unter der Woche vor.', 'falsch', 'Die bereite ich am Wochenende vor.', 'Paula bereitet die Präsentation am Wochenende vor, nicht unter der Woche.'],
         ['Ömer möchte die Präsentation vorher lesen.', 'richtig', 'schaue ich sie mir vorher an', 'Ömer bietet an, sich die Präsentation vorher anzuschauen.']
       ]
     },

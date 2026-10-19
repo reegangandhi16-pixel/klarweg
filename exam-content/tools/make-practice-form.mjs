@@ -56,7 +56,7 @@ task({ id: 'tsk:b1:p1-l2b', module: 'lesen', part: 2, interaction: 'mcq_single',
   items: [
     choice('itm:b1:p1-l2-10', L2, 'tsk:b1:p1-l2b', 'mcq_single', abc('neue Marktstände.', 'Pfandbecher und Pfandboxen.', 'kostenlose Suppe.'), '10. Auf dem Wochenmarkt gibt es seit Juni …', 'b'),
     choice('itm:b1:p1-l2-11', L2, 'tsk:b1:p1-l2b', 'mcq_single', abc('von Schülerinnen.', 'von den Händlern.', 'vom Stadtrat.'), '11. Die Idee kam …', 'a'),
-    choice('itm:b1:p1-l2-12', L2, 'tsk:b1:p1-l2b', 'mcq_single', abc('Alle Kunden finden das System einfach.', 'Die Händler wollen das System beenden.', 'Es gibt weniger Müll als vorher.'), '12. Nach drei Monaten …', 'c')
+    choice('itm:b1:p1-l2-12', L2, 'tsk:b1:p1-l2b', 'mcq_single', abc('finden alle Kunden das System einfach.', 'wollen die Händler das System beenden.', 'gibt es weniger Müll als vorher.'), '12. Nach drei Monaten …', 'c')
   ] });
 
 const L3 = { m: 'lesen', p: 3 };
@@ -278,7 +278,7 @@ task({ id: 'tsk:b1:p1-sp3', module: 'sprechen', part: 3, interaction: 'spoken_re
 const EXPLAIN = {
   'itm:b1:p1-l1-01': ['ast:p1-l1-text', 'Die Wohnung ist kleiner als meine alte', 'Mila schreibt, dass die neue Wohnung kleiner ist als die alte.'],
   'itm:b1:p1-l1-02': ['ast:p1-l1-text', 'Zur Arbeit fahre ich mit der Straßenbahn', 'Mila fährt jetzt mit der Straßenbahn; früher fuhr sie mit dem Auto.'],
-  'itm:b1:p1-l1-03': ['ast:p1-l1-text', 'Sie hat mir gezeigt, wo man am Samstag auf dem Markt frisches Gemüse kaufen kann', 'Mila schreibt, dass Frau Okafor ihr den Weg zum Samstagsmarkt mit frischem Gemüse erklärt hat, deshalb ist die Aussage richtig.'],
+  'itm:b1:p1-l1-03': ['ast:p1-l1-text', 'Sie hat mir gezeigt, wo man am Samstag auf dem Markt frisches Gemüse kaufen kann', 'Mila schreibt, dass Frau Okafor ihr gezeigt hat, wo man samstags auf dem Markt frisches Gemüse kaufen kann, deshalb ist die Aussage richtig.'],
   'itm:b1:p1-l1-04': ['ast:p1-l1-text', 'Leider kenne ich sonst noch kaum jemanden.', 'Außer ihrer Nachbarin kennt Mila noch kaum jemanden.'],
   'itm:b1:p1-l1-05': ['ast:p1-l1-text', 'Er beginnt erst im November, weil der Oktoberkurs schon voll war.', 'Nicht im Oktober: Weil dieser Kurs schon voll war, beginnt Milas Kochkurs erst im November.'],
   'itm:b1:p1-l1-06': ['ast:p1-l1-text', 'Du kannst bei mir übernachten', 'Mila bietet Jana an, bei ihr auf dem Sofa zu übernachten.'],
@@ -324,7 +324,7 @@ const EXPLAIN = {
   'itm:b1:p1-h3-16': ['ast:p1-h3', 'ich habe eine neue Stelle gefunden', 'Nora erzählt, dass sie eine neue Stelle gefunden hat, und „Stelle“ bedeutet hier „Arbeit“.'],
   'itm:b1:p1-h3-17': ['ast:p1-h3', 'das Café habe ich im Sommer verlassen', 'Nora hat früher im Café gearbeitet; jetzt arbeitet sie in einer Gärtnerei.'],
   'itm:b1:p1-h3-18': ['ast:p1-h3', 'arbeite ich nur vormittags', 'Nora arbeitet nur vormittags, weil sie nachmittags eine Weiterbildung macht.'],
-  'itm:b1:p1-h3-19': ['ast:p1-h3', 'weil ich nachmittags noch eine Weiterbildung mache', 'Die Weiterbildung macht Nora am Nachmittag, Paul spricht davon nicht über sich selbst.'],
+  'itm:b1:p1-h3-19': ['ast:p1-h3', 'weil ich nachmittags noch eine Weiterbildung mache', 'Die Weiterbildung macht Nora am Nachmittag; Paul sagt nicht, dass er selbst eine Weiterbildung macht.'],
   'itm:b1:p1-h3-20': ['ast:p1-h3', 'Ich ziehe im Frühling um', 'Paul sagt, dass er im Frühling in eine größere Wohnung zieht.'],
   'itm:b1:p1-h3-21': ['ast:p1-h3', 'Am Sonntag besuche ich meine Eltern.', 'Nora hilft am Samstag; am Sonntag besucht sie ihre Eltern.'],
   'itm:b1:p1-h3-22': ['ast:p1-h3', 'danach lade ich dich zum Essen ein', 'Paul lädt Nora nach dem Umzug zum Essen ein.'],

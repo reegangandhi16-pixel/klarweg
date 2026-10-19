@@ -40,6 +40,12 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     call,
     /* Second factor for raters/admins (OD-19), served by klarweg-access itself. Writes are never retried: a retried
        code would be refused as a replay. */
+    /* Third-party-cookie pre-flight (until the same-site domain, OD-20): true = cookies reach the exam server,
+       false = the browser blocks them, null = could not tell (no probe endpoint, offline). Never throws. */
+    async cookieCheck() {
+      try { await once('POST', '/auth/cookie-probe', { body: {} }); const r = await once('GET', '/auth/cookie-probe'); return r && typeof r.received === 'boolean' ? r.received : null; }
+      catch { return null; }
+    },
     mfaStatus: () => call('GET', '/auth/mfa/status'),
     mfaEnroll: () => once('POST', '/auth/mfa/enroll', { body: {} }),
     mfaConfirm: (code) => once('POST', '/auth/mfa/enroll/confirm', { body: { code } }),

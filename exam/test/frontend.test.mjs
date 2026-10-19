@@ -567,7 +567,8 @@ test('ERROR SCREENS: only a network or server failure is called an interrupted c
   }
   // every view is used through fail(): escaped buttons, no browser dialog
   const main = fs.readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
-  assert.match(main, /function fail\(e\) \{\s*const v = errorView\(e instanceof ExamApiError \? \{ code: e\.code, status: e\.status \} : \{ code: 'network' \}\);/);
+  assert.match(main, /function fail\(e\) \{\s*const code = e instanceof ExamApiError \? e\.code : 'network';\s*showError\(errorView\(e instanceof ExamApiError \? \{ code, status: e\.status \} : \{ code \}\)\);/);
+  assert.match(main, /function showError\(v\) \{ message\(v\.title, v\.body, v\.actions\.map\(\(a\) => `<button class="kx-btn" data-act="\$\{esc\(a\.act\)\}">\$\{esc\(a\.label\)\}<\/button>`\)\.join\(''\)\); \}/, 'buttons escaped');
   assert.equal(/Verbindung unterbrochen/.test(main), false, 'the copy lives in render.js only');
 });
 
@@ -589,4 +590,24 @@ test('LEASE EXPIRY (static): an expired lease is reacquired like a reload (no ta
   const leased = [...apiSrc.matchAll(/^\s+([a-zA-Z]+): \(id, leaseId\b/gm)].map((m) => m[1]).filter((n) => n !== 'heartbeat');
   assert.deepEqual([...list].sort(), [...leased].sort(), 'LEASED_CALLS covers every lease-carrying API method except heartbeat');
   assert.match(main, /return call\(id, S\.lease, \.\.\.rest\);/, 'retried once with the reacquired lease');
+});
+
+test('COOKIE PRE-FLIGHT (OD-20 interim): cookieCheck() true/false/null, never throws; "signed out" becomes "cookies blocked" only on a definite answer', async () => {
+  const fake = (received, { fail = false } = {}) => async (url, init) => {
+    if (fail) throw new TypeError('offline');
+    if (init.method === 'POST') return new Response('{"ok":true}', { status: 200 });
+    return new Response(JSON.stringify(received === undefined ? { ok: true } : { ok: true, received }), { status: 200 });
+  };
+  assert.equal(await createApi({ base: '', fetchImpl: fake(true) }).cookieCheck(), true);
+  assert.equal(await createApi({ base: '', fetchImpl: fake(false) }).cookieCheck(), false);
+  assert.equal(await createApi({ base: '', fetchImpl: fake(undefined) }).cookieCheck(), null, 'unexpected reply: unknown');
+  assert.equal(await createApi({ base: '', fetchImpl: fake(true, { fail: true }) }).cookieCheck(), null, 'offline: unknown, no throw');
+  const notFound = async () => new Response('{"ok":false,"error":"not_found"}', { status: 404 });
+  assert.equal(await createApi({ base: '', fetchImpl: notFound }).cookieCheck(), null, 'no probe endpoint (dev server): unknown');
+  const v = errorView({ code: 'cookies_blocked' });
+  assert.equal(v.title, 'Cookies blockiert'); assert.match(v.body, /Drittanbietern/); assert.deepEqual(v.actions, [{ act: 'reload', label: 'Erneut versuchen' }]);
+  const main = fs.readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
+  assert.match(main, /if \(code === 'auth_required'\) api\.cookieCheck\(\)\.then\(\(received\) => \{ if \(received === false\) showError\(errorView\(\{ code: 'cookies_blocked' \}\)\); \}\);/);
+  const rater = fs.readFileSync(new URL('../js/rater.js', import.meta.url), 'utf8');
+  assert.match(rater, /e\.code === 'auth_required' && \(await api\.cookieCheck\(\)\) === false\) e = new ExamApiError\(401, 'cookies_blocked'\)/);
 });

@@ -10,7 +10,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { PRACTICE_FORMS } from '../tools/practice-forms.mjs';
 import { reviewRecord, formFingerprint, itemFingerprints, RECORD_VERSION } from '../tools/review-sheet.mjs';
-import { reviewStatus, resolveRating, readRecords } from '../tools/review-status.mjs';
+import { reviewStatus, resolveRating, readRecords, summaryMarkdown } from '../tools/review-status.mjs';
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const P3 = PRACTICE_FORMS.find((f) => f.name === 'P3');
@@ -138,4 +138,16 @@ test('REVIEW STATUS CLI: reads a directory, reports unknown files, refuses to wr
   const md = execFileSync(process.execPath, [tool, dir, '--out', out], { encoding: 'utf8' });
   assert.match(md, /\| P3 \| in review \|/);
   assert.deepEqual(fs.readdirSync(out).sort(), ['ex03-status.json', 'ex03-status.md']);
+});
+
+test('REVIEW STATUS summary: reviewer ids with a pipe or a line break cannot break the Markdown table', () => {
+  const cells = (row) => row.replace(/\\\\/g, '').split(/(?<!\\)\|/).length - 2;   // count unescaped pipes only
+  const lines = (recs) => summaryMarkdown(reviewStatus(recs, ONLY)).split('\n');
+  const header = cells(lines([]).find((l) => l.startsWith('| Form')));
+  // the id appears in the records column, and (same person in two slots, EX-03/O1) in the problems column
+  const md = lines([filled('A', 'Dr. X | Uni'), filled('B', 'dr. x | uni'), filled('C', 'line\nbreak')]);
+  const row = md.find((l) => l.startsWith('| P3 '));
+  assert.equal(cells(row), header, row);
+  assert.ok(row.includes('Dr. X \\| Uni') && row.includes('line break'), row);
+  assert.equal(md.filter((l) => l.startsWith('|')).every((l) => cells(l) === header), true);
 });

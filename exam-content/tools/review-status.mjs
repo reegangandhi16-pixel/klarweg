@@ -137,10 +137,13 @@ export function readRecords(dir) {
   });
 }
 
+/* Reviewer ids and messages are free text: keep a pipe or line break from breaking the table. */
+const cell = (v) => String(v).replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\r?\n/g, ' ');
+
 export function summaryMarkdown(report) {
   const lines = ['# EX-03 review status (computed from returned records; not an approval)', '', `Generated ${report.generated_at}. Template ${report.record_version}.`, '',
     '| Form | Status | Records (slot: reviewer) | Approved / needs revision / in review | Ratings pending | Originality (C) | Stale | Problems |', '|---|---|---|---|---|---|---|---|'];
-  for (const f of report.forms) lines.push(`| ${f.form} | ${f.status} | ${f.records.map((r) => `${r.slot}: ${r.reviewer_id}${r.complete ? '' : ' (incomplete)'}${r.errors.length ? ` (${r.errors.length} errors)` : ''}`).join('; ') || '–'} | ${f.summary.total ? `${f.summary.approved} / ${f.summary.needs_revision} / ${f.summary.in_review}` : '–'} | ${f.summary.ratings_pending ?? '–'} | ${f.originality || '–'} | ${f.stale.length} | ${f.problems.join('; ') || '–'} |`);
+  for (const f of report.forms) lines.push(`| ${f.form} | ${f.status} | ${f.records.map((r) => `${r.slot}: ${cell(r.reviewer_id)}${r.complete ? '' : ' (incomplete)'}${r.errors.length ? ` (${r.errors.length} errors)` : ''}`).join('; ') || '–'} | ${f.summary.total ? `${f.summary.approved} / ${f.summary.needs_revision} / ${f.summary.in_review}` : '–'} | ${f.summary.ratings_pending ?? '–'} | ${f.originality || '–'} | ${f.stale.length} | ${cell(f.problems.join('; ')) || '–'} |`);
   if (report.unassigned.length) lines.push('', 'Not assigned to a form:', ...report.unassigned.map((u) => `- ${u.file}: ${u.reason}`));
   return lines.join('\n') + '\n';
 }

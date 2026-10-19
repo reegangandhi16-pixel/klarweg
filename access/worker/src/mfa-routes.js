@@ -104,6 +104,13 @@ export async function mfaEnroll(request, env) {
   return reply({ ok: true, secret: b32, otpauth_uri: otpauthUri({ secretB32: b32, account: ctx.user.email || ctx.user.id }) });
 }
 
+/* A stored secret that no longer decrypts (TOTP_ENC_KEY rotated, RUNBOOK-RATER-2FA §5) can never verify: answer
+   clearly instead of throwing, never count it as a wrong code, and audit it. The owner reset (§3) is the way back. */
+async function openSecret(env, userId, stored, what) {
+  try { return await decryptSecret(env, userId, stored); }
+  catch { await audit(env, userId, "secret_unreadable", { what }); return null; }
+}
+
 export async function mfaEnrollConfirm(request, env) {
   if (!hasEncKey(env)) return reply({ ok: false, error: "mfa_unavailable" }, 503);
   const ctx = await sessionContext(request, env);
@@ -114,7 +121,12 @@ export async function mfaEnrollConfirm(request, env) {
   const refused = await gate(request, env, ctx.user.id, row, t);
   if (refused) return refused;
   const { code } = await body(request);
-  const step = await verifyTotp(await decryptSecret(env, ctx.user.id, row.pending_secret_enc), code, t, 0);
+  const pending = await openSecret(env, ctx.user.id, row.pending_secret_enc, "pending");
+  if (!pending) {   // started under the old key: drop it so the rater can simply start again
+    await env.DB.prepare("UPDATE user_totp SET pending_secret_enc = NULL WHERE user_id = ?1 AND pending_secret_enc = ?2").bind(ctx.user.id, row.pending_secret_enc).run();
+    return reply({ ok: false, error: "mfa_no_pending_enrolment" }, 409);
+  }
+  const step = await verifyTotp(pending, code, t, 0);
   if (step === null) return wrongCode(request, env, ctx.user.id, t, "enrol");
   const done = await env.DB.prepare(`UPDATE user_totp SET secret_enc = pending_secret_enc, pending_secret_enc = NULL, confirmed_at = ?2,
       last_used_step = ?3, failed_count = 0, locked_until = 0 WHERE user_id = ?1 AND pending_secret_enc = ?4`)
@@ -147,7 +159,9 @@ export async function mfaVerify(request, env) {
     await audit(env, ctx.user.id, "recovery_used", { left: left.n });
     return reply({ ok: true, verified_at: t, recovery_codes_left: left.n });
   }
-  const step = await verifyTotp(await decryptSecret(env, ctx.user.id, row.secret_enc), b.code, t, row.last_used_step);
+  const secret = await openSecret(env, ctx.user.id, row.secret_enc, "secret");
+  if (!secret) return reply({ ok: false, error: "mfa_reset_required" }, 409);
+  const step = await verifyTotp(secret, b.code, t, row.last_used_step);
   if (step === null) return wrongCode(request, env, ctx.user.id, t, "code");
   // conditional: two requests with the same code cannot both pass
   const ok = await env.DB.prepare("UPDATE user_totp SET last_used_step = ?2, failed_count = 0 WHERE user_id = ?1 AND last_used_step < ?2").bind(ctx.user.id, step).run();

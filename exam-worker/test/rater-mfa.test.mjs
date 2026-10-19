@@ -53,3 +53,20 @@ test('RATER MFA: reading ANOTHER learner\'s result is staff work — it needs a 
   const rater = newUser(); await role(s.env, rater, 'rater');
   assert.equal((await call(s.env, 'GET', A(s, '/result'), { user: rater, mfa: false })).status, 404);
 });
+
+test('RATER MFA A4 row 10: X-KW-MFA-Unavailable from the proxy closes staff routes (503) whatever X-KW-MFA-At says; non-staff keep 403; learners unaffected', async () => {
+  const s = await setup();
+  const t = Math.floor(s.env.__clock() / 1000);
+  const down = { 'x-kw-mfa-unavailable': '1' };
+  for (const r of ['rater', 'lead_rater', 'exam_admin']) {
+    const u = newUser(); await role(s.env, u, r);
+    assert.notEqual((await call(s.env, 'GET', '/exam/v1/admin/rating-queue', { user: u, mfa: t })).status, 401, `${r}: fresh without the marker`);
+    const res = await call(s.env, 'GET', '/exam/v1/admin/rating-queue', { user: u, mfa: t, headers: down });
+    assert.equal(res.status, 503, r); assert.equal(res.json.error, 'mfa_unavailable', r);
+  }
+  const lead = newUser(); await role(s.env, lead, 'lead_rater');
+  const fr = await call(s.env, 'GET', A(s, '/result'), { user: lead, mfa: t, headers: down });
+  assert.equal(fr.status, 503); assert.equal(fr.json.result, undefined);
+  assert.equal((await call(s.env, 'GET', '/exam/v1/admin/rating-queue', { user: newUser(), mfa: t, headers: down })).status, 403);
+  assert.equal((await call(s.env, 'GET', `/exam/v1/attempts/${s.attempt}`, { user: s.user, mfa: false, headers: down })).status, 200);
+});

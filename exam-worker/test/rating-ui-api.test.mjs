@@ -101,9 +101,11 @@ test('RATER UI (OD-19): second-factor screens — labelled inputs, one-time-code
   const codes = Array.from({ length: 10 }, (_, i) => `aaaa${i}-bbbbb`);
   const cv = mfaCodesView(esc, codes);
   assert.equal((cv.match(/<li><code>/g) || []).length, 10); assert.match(cv, /nur jetzt/); assert.match(cv, /id="kx-mfa-saved" required/);
-  for (const c of ['cookies_blocked', 'mfa_required', 'mfa_invalid_code', 'mfa_rate_limited', 'mfa_locked', 'mfa_unavailable', 'mfa_not_enrolled', 'mfa_no_pending_enrolment']) assert.ok(ERROR_TEXT[c], c);
+  for (const c of ['cookies_blocked', 'mfa_required', 'mfa_invalid_code', 'mfa_rate_limited', 'mfa_locked', 'mfa_unavailable', 'mfa_not_enrolled', 'mfa_no_pending_enrolment', 'mfa_reset_required']) assert.ok(ERROR_TEXT[c], c);
   const rater = fs.readFileSync(new URL('../../exam/js/rater.js', import.meta.url), 'utf8');
   assert.equal((rater.match(/mfaNeeded\((e|err)\)/g) || []).length, 4, 'queue, attempt, rating and recording all route mfa_required to the second-factor screens');
+  assert.equal((rater.match(/mfaDown\((e|err)\)/g) || []).length, 4, 'queue, attempt, rating and recording all drop to the unavailable notice (A4 row 10)');
+  assert.match(rater, /function showUnavailable\(\) {\n  current = null; unsaved = null;/, 'nothing loaded stays on screen');
   const api = fs.readFileSync(new URL('../../exam/js/api.js', import.meta.url), 'utf8');
   assert.match(api, /mfaVerify: \(b\) => once\('POST', '\/auth\/mfa\/verify'/, 'a code is never sent twice by a retry');
   assert.match(api, /mfaConfirm: \(code\) => once\(/);

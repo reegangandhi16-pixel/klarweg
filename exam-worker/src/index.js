@@ -4,7 +4,7 @@
 import { ApiError, json, errorResponse, now, ATTEMPT_ID_RE } from './http.js';
 import { log } from './log.js';
 import { flags } from './flags.js';
-import { verifyProxy, requireUser, mfaFresh, hasRole, STAFF_ROLES } from './auth.js';
+import { verifyProxy, requireUser, mfaFresh, mfaUnavailable, hasRole, STAFF_ROLES } from './auth.js';
 import { streamMedia } from './media.js';
 import { settle } from './core.js';
 import * as api from './api.js';
@@ -33,7 +33,7 @@ const ROUTES = [
   ['GET', R(`/attempts/${A}/sprechen/status`), (c, m) => api.speakingStatus(c.env, c.user, m[1], c.url)],
   ['POST', R(`/attempts/${A}/complete`), (c, m) => api.completeAttempt(c.env, c.user, m[1], c.request)],
   // staff (lead_rater, exam_admin) may read other learners' results here, outside /admin/*: pass the OD-19 verdict along
-  ['GET', R(`/attempts/${A}/result`), (c, m) => api.getResult(c.env, c.user, m[1], { mfaFresh: mfaFresh(c.request, c.env) })],
+  ['GET', R(`/attempts/${A}/result`), (c, m) => api.getResult(c.env, c.user, m[1], { mfaFresh: mfaFresh(c.request, c.env), mfaUnavailable: mfaUnavailable(c.request) })],
   ['GET', R(`/attempts/${A}/modules/${MODULE}/review`), (c, m) => api.moduleReview(c.env, c.user, m[1], m[2])],
   ['GET', R(`/attempts/${A}/modules/${MODULE}/feedback`), (c, m) => api.moduleFeedback(c.env, c.user, m[1], m[2])],
   ['GET', R(`/attempts/${A}/sprechen/recordings`), (c, m) => api.myRecordings(c.env, c.user, m[1])],
@@ -62,8 +62,10 @@ async function route(request, env) {
     if (request.method !== method) continue;
     const user = requireUser(request);
     // staff routes: a staff member without a fresh second factor is sent to verify it (OD-19); everyone else still
-    // gets the handler's own refusal (403), so the check reveals nothing to non-staff
+    // gets the handler's own refusal (403), so the check reveals nothing to non-staff. Without the second-factor key
+    // (Access TOTP_ENC_KEY) no staff session gets through, however recently it verified (fail closed, A4 row 10).
     if (url.pathname.startsWith('/exam/v1/admin/') && !mfaFresh(request, env) && await hasRole(env, user, STAFF_ROLES)) {
+      if (mfaUnavailable(request)) return json({ ok: false, error: 'mfa_unavailable' }, 503);
       return json({ ok: false, error: 'mfa_required' }, 401);
     }
     const out = await handler({ env, request, url, user }, m);

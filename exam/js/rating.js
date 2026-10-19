@@ -22,6 +22,7 @@ export const ERROR_TEXT = {
   mfa_unavailable: 'Die Zwei-Faktor-Bestätigung ist zurzeit nicht verfügbar. Bitte wenden Sie sich an die Prüfungsleitung.',
   mfa_not_enrolled: 'Für Ihr Konto ist noch kein zweiter Faktor eingerichtet.',
   mfa_no_pending_enrolment: 'Die Einrichtung ist abgelaufen. Bitte neu beginnen.',
+  mfa_reset_required: 'Ihr zweiter Faktor kann nicht mehr geprüft werden und muss von der Prüfungsleitung zurückgesetzt werden. Ein Wiederherstellungscode funktioniert weiterhin.',
   rate_limited: 'Zu viele Anfragen in kurzer Zeit. Bitte in einer Minute erneut versuchen.',
   network: 'Keine Verbindung zum Server. Bitte die Seite neu laden; bereits gespeicherte Bewertungen werden dann angezeigt.'
 };

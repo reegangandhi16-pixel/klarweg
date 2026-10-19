@@ -19,7 +19,7 @@
   - 30-minute lock after 10 consecutive failures.
   - Codes are single use, with no replay inside the ±30 s window.
 - **Recovery codes:** 10 single-use codes, shown once, stored hashed. A new set invalidates the old one.
-- **Without `TOTP_ENC_KEY`:** every second-factor route answers `mfa_unavailable`, so staff routes stay closed. There is no weaker fallback.
+- **Without `TOTP_ENC_KEY`:** every second-factor route and every staff route answers `503 mfa_unavailable`, including sessions verified within the last 12 hours (the Access proxy attests nothing without the key). Learner routes are unaffected. There is no weaker fallback.
 
 ## 1. Provisioning (non-production first, D9)
 1. **Secret:** generate 32 random bytes, base64 (for example `openssl rand -base64 32`), and set it as the Worker secret
@@ -66,7 +66,7 @@ Only after every line passes: repeat §1 for production, and still keep exam rou
 4. **Review recent `mfa_audit` events** and the rater's ratings in the exam audit log.
 
 ## 5. Loss or rotation of `TOTP_ENC_KEY`
-Stored secrets can no longer be decrypted, so verification fails for everyone.
+Stored secrets can no longer be decrypted, so code verification answers `409 mfa_reset_required` for every enrolled rater (audited as `secret_unreadable`, not counted as a wrong code). Unused recovery codes still verify, because they are stored as hashes, not under the key; step 2 removes them as well.
 1. **Set a new key** (§1).
 2. **Clear the enrolments:**
    ```sql

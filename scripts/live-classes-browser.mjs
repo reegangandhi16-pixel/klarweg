@@ -22,6 +22,7 @@ import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CHROME = process.env.CHROME || (process.platform === 'darwin'
@@ -134,7 +135,17 @@ async function load(url, { drafts = false, edits = [], width = 1280, height = 90
 const q = (expr) => b.ev(expr);
 const L = `http://127.0.0.1:${PORT}/live-classes.html`;
 const R = `http://${ALIAS}:${PORT}/live-classes.html`;
-const DRAFT_RX = /\[Teacher|\[One-line|\[Verified|\[Specialism|\[Mock exams|Draft|Preview ·|Portrait pending|template/i;
+/* Expected counts come from the data file, so adding or removing a draft
+   teacher doesn't break the checks. Every draft teacher's name joins the
+   leak pattern: a real person's draft profile must never reach a deployed host. */
+const LIVE = (() => { const ctx = { window: {} }; vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'live-classes-data.js'), 'utf8'), ctx); return ctx.window.KWLive; })();
+const N_T = LIVE.teachers.length;
+const N_B1 = LIVE.teachers.filter((t) => t.levels.includes('B1')).length;
+const N_B1_DE = LIVE.teachers.filter((t) => t.levels.includes('B1') && t.teachesIn.includes('German')).length;
+const NAMED_DRAFT = LIVE.teachers.find((t) => t.draft && !/^\[/.test(t.name));
+const reEsc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const DRAFT_NAMES = LIVE.teachers.filter((t) => t.draft && !/^\[/.test(t.name)).map((t) => reEsc(t.name));
+const DRAFT_RX = new RegExp(['\\[Teacher', '\\[One-line', '\\[Verified', '\\[Specialism', '\\[Mock exams', '\\[Years', '\\[German level', '\\[Qualification', 'Draft', 'Preview ·', 'Portrait pending', 'template'].concat(DRAFT_NAMES).join('|'), 'i');
 const draftLeak = `(()=>{const t=document.body.innerText+' '+[...document.querySelectorAll('option')].map(o=>o.text).join(' ');const m=t.match(${DRAFT_RX});return m?m[0]:null})()`;
 const overflow = 'document.documentElement.scrollWidth - document.documentElement.clientWidth';
 const key = async (k, code, vk) => { for (const type of ['keyDown', 'keyUp']) await b.send('Input.dispatchKeyEvent', { type, key: k, code, windowsVirtualKeyCode: vk }); };
@@ -162,6 +173,12 @@ try {
   await load(L + '#teacher-teacher-1');
   ok('A deep link to a draft teacher opens no dialog', await q('!document.getElementById("t-dialog").open'));
   ok('A deep link hash falls back to #teachers', (await q('location.hash')) === '#teachers', await q('location.hash'));
+  if (NAMED_DRAFT) {
+    await load(L + '#teacher-' + NAMED_DRAFT.id);
+    ok('A deep link to a named draft profile opens no dialog and shows no name', (await q('!document.getElementById("t-dialog").open')) && (await q(draftLeak)) === null, await q(draftLeak));
+    await load(R + '#teacher-' + NAMED_DRAFT.id, { drafts: true });
+    ok('B named draft profile stays hidden on a non-local host even with drafts on', (await q('!document.getElementById("t-dialog").open')) && (await q(draftLeak)) === null && (await q('document.querySelectorAll(".t-card").length')) === 0, await q(draftLeak));
+  }
 
   // ---- B. host guard: showDrafts forced true on a non-local host ----
   await load(R, { drafts: true });
@@ -172,18 +189,18 @@ try {
 
   // ---- C. local preview (drafts on, localhost) ----
   await load(L, { drafts: true });
-  ok('C preview shows drafts + banner', await q('!document.getElementById("draft-banner").hidden && document.querySelectorAll(".t-card").length===3'));
-  ok('C teacher count', (await q('document.getElementById("t-count").textContent')) === '3 teachers');
+  ok('C preview shows drafts + banner', await q('!document.getElementById("draft-banner").hidden && document.querySelectorAll(".t-card").length===' + N_T));
+  ok('C teacher count', (await q('document.getElementById("t-count").textContent')) === N_T + ' teachers');
   ok('C with profiles, the hero and FAQ point to them', (await q('document.querySelector(".live-hero .btn-live").getAttribute("href")')) === '#teachers' && /Filter the teacher profiles/.test(await q('document.getElementById("fa3").textContent')));
-  ok('C levels taught are text for screen readers; the strip is hidden from them', await q('(()=>{const r=document.querySelector(".t-card .lvl-row");return r.querySelector(".vh").textContent==="Levels taught: A1, A2, B1"&&[...r.querySelectorAll(".lvl")].every(x=>x.getAttribute("aria-hidden")==="true")&&!r.hasAttribute("aria-label")})()'));
+  ok('C levels taught are text for screen readers; the strip is hidden from them', await q('(()=>{const r=document.querySelector(".t-card .lvl-row");return r.querySelector(".vh").textContent==="Levels taught: ' + LIVE.teachers[0].levels.join(', ') + '"&&[...r.querySelectorAll(".lvl")].every(x=>x.getAttribute("aria-hidden")==="true")&&!r.hasAttribute("aria-label")})()'));
   await q('document.querySelector("[data-tlevel=B1]").click()');
-  ok('C level filter B1', (await q('document.querySelectorAll(".t-card").length')) === 2 && (await q('document.querySelector("[data-tlevel=B1]").getAttribute("aria-pressed")')) === 'true');
+  ok('C level filter B1', (await q('document.querySelectorAll(".t-card").length')) === N_B1 && (await q('document.querySelector("[data-tlevel=B1]").getAttribute("aria-pressed")')) === 'true');
   await q('(()=>{const s=document.getElementById("t-lang");s.value="German";s.dispatchEvent(new Event("change"))})()');
-  ok('C B1 + teaches in German', (await q('document.querySelectorAll(".t-card").length')) === 1, await q('document.getElementById("t-count").textContent'));
+  ok('C B1 + teaches in German', (await q('document.querySelectorAll(".t-card").length')) === N_B1_DE, await q('document.getElementById("t-count").textContent'));
   await q('document.getElementById("t-exam").click()');
   ok('C + exam prep shows the no-match state', await q('!!document.getElementById("t-reset")'));
   await q('document.getElementById("t-reset").click()');
-  ok('C reset restores all filters and focuses "All"', (await q('document.querySelectorAll(".t-card").length')) === 3 && (await q('document.activeElement.getAttribute("data-tlevel")')) === ''
+  ok('C reset restores all filters and focuses "All"', (await q('document.querySelectorAll(".t-card").length')) === N_T && (await q('document.activeElement.getAttribute("data-tlevel")')) === ''
     && (await q('document.getElementById("t-lang").value')) === '' && (await q('document.getElementById("t-exam").getAttribute("aria-pressed")')) === 'false');
   await q('document.querySelector("[data-profile=teacher-2]").focus(); document.querySelector("[data-profile=teacher-2]").click()');
   ok('C profile opens as modal with #teacher- hash', (await q('document.getElementById("t-dialog").open')) && (await q('location.hash')) === '#teacher-teacher-2');

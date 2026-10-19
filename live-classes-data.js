@@ -73,8 +73,42 @@
       feeIncludes: null
     },
 
-    /* ---------- teachers ---------- */
+    /* ---------- teachers ----------
+       `unconfirmed` (optional) lists the fields still awaiting the
+       owner's confirmation: suggested wording or preliminary,
+       owner-provided information. A teacher cannot be published while it
+       lists anything (scripts/live-classes-readiness.mjs). It is never
+       shown on the page. */
     teachers: [
+      {
+        /* The owner's own profile, DRAFT. Confirmed by the owner
+           (2026-10-20): name, headline, German proficiency (C1 is the
+           stated level of German, not a certificate), levels taught,
+           teaching languages, exam-prep description, approach and
+           formats. Still open: experience and qualifications ([bracketed],
+           unknown) and specialisms (suggested wording). No certificate is
+           claimed: `goethe` stays empty until one is confirmed.
+           This repository is public: add education or certificate
+           details only once confirmed and approved for publication. */
+        id: 'reegan-gandhi',
+        draft: true,
+        name: 'Reegan Gandhi',
+        photo: null,
+        photoAlt: '',
+        headline: 'German grammar and Goethe exam preparation, explained in Hindi and English',
+        experience: '[Years to confirm] of teaching German',
+        proficiency: 'C1',
+        qualifications: ['[Qualification to confirm, as on the certificate]'],
+        goethe: [],
+        levels: ['A1', 'A2', 'B1', 'B2'],
+        teachesIn: ['Hindi', 'English'],
+        specialisms: ['German grammar', 'Structured learning for Hindi-speaking learners', 'Goethe exam preparation'],
+        examPrep: 'Goethe exam preparation at A1–B1',
+        approach: 'Every topic starts with a clear explanation of the grammar, in Hindi or English, followed by practical examples. You then practise with the structure yourself and get corrected as you go, one step at a time.',
+        formats: ['Group batch', 'One-to-one'],
+        availability: null,
+        unconfirmed: ['experience', 'qualifications', 'specialisms']
+      },
       {
         id: 'teacher-1',
         draft: true,

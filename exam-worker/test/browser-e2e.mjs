@@ -30,12 +30,15 @@ import { hotp, base32Decode, stepAt } from '../../access/worker/src/totp.js';
 import { post, start, submit, uploadChunk } from './flow.mjs';
 
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+/* CHROME_ARGS: extra flags for CI runners (e.g. --no-sandbox on Ubuntu 24.04, where unprivileged user namespaces are
+   restricted). Never needed locally. */
+const CHROME_ARGS = (process.env.CHROME_ARGS || '').split(/\s+/).filter(Boolean);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (...a) => console.log('[browser-e2e]', ...a);
 
 async function launch({ autoplayFlag = true } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-chrome-'));
-  const proc = spawn(CHROME, ['--headless=new', '--mute-audio', '--disable-gpu', '--no-first-run', '--no-default-browser-check', `--user-data-dir=${dir}`,
+  const proc = spawn(CHROME, [...CHROME_ARGS, '--headless=new', '--mute-audio', '--disable-gpu', '--no-first-run', '--no-default-browser-check', `--user-data-dir=${dir}`,
     '--remote-debugging-port=0', ...(autoplayFlag ? ['--autoplay-policy=no-user-gesture-required'] : []), '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream',
     'about:blank'], { stdio: 'ignore' });
   const portFile = path.join(dir, 'DevToolsActivePort');

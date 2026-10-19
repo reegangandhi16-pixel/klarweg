@@ -1,0 +1,58 @@
+name: Exam browser end-to-end
+
+# Real headless Chrome against the local dev server (exam Worker in-process, synthetic content, test tones, muted).
+# One job per scenario so they run in parallel. Deploys nothing, needs no secrets. Actions are pinned by commit SHA.
+
+on:
+  pull_request:
+    paths:
+      - 'package.json'
+      - 'exam-content/**'
+      - 'exam-worker/**'
+      - 'exam/**'
+      - 'access/worker/src/**'
+      - 'access/worker/test/**'
+      - 'access/worker/*.sql'
+      - '.github/workflows/exam-browser.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'package.json'
+      - 'exam-content/**'
+      - 'exam-worker/**'
+      - 'exam/**'
+      - 'access/worker/src/**'
+      - 'access/worker/test/**'
+      - 'access/worker/*.sql'
+      - '.github/workflows/exam-browser.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario: [flagged, autoplay, hoeren-autoplay, practice, sprechen-topic, lease-expiry, two-tabs, rater-2fa]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1   # v7.1.0
+        with:
+          node-version: '24'
+      - name: Chrome
+        run: |
+          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)"
+          echo "CHROME=$CHROME_BIN" >> "$GITHUB_ENV"
+          "$CHROME_BIN" --version
+      - name: Browser scenario ${{ matrix.scenario }}
+        env:
+          KX_E2E_ONLY: ${{ matrix.scenario }}
+          KX_E2E_FORM: p1
+          CHROME_ARGS: --no-sandbox
+        run: node exam-worker/test/browser-e2e.mjs

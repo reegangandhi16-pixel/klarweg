@@ -73,6 +73,8 @@ export function checkData(D, root = ROOT) {
     subset(w, 'levels', t.levels, LEVELS);
     subset(w, 'formats', t.formats || [], FORMATS);
     if (!Array.isArray(t.teachesIn)) err(w, 'teachesIn must be a list');
+    // a level of German is not a certificate: certificates go in `goethe`, and only once held
+    if (/goethe|zertifikat|certif|diploma|passed/i.test(t.proficiency || '')) err(w, 'proficiency states a level of German only; list certificates actually held in goethe');
     if (t.unconfirmed != null && !Array.isArray(t.unconfirmed)) err(w, 'unconfirmed must be a list of field names');
     for (const f of t.unconfirmed || []) if (!(f in t)) err(w, `unconfirmed names unknown field "${f}"`);
     if (t.draft) continue;

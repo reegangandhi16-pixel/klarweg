@@ -192,7 +192,7 @@ try {
   ok('C preview shows drafts + banner', await q('!document.getElementById("draft-banner").hidden && document.querySelectorAll(".t-card").length===' + N_T));
   ok('C teacher count', (await q('document.getElementById("t-count").textContent')) === N_T + ' teachers');
   ok('C with profiles, the hero and FAQ point to them', (await q('document.querySelector(".live-hero .btn-live").getAttribute("href")')) === '#teachers' && /Filter the teacher profiles/.test(await q('document.getElementById("fa3").textContent')));
-  ok('C levels taught are text for screen readers; the strip is hidden from them', await q('(()=>{const r=document.querySelector(".t-card .lvl-row");return r.querySelector(".vh").textContent==="Levels taught: A1, A2, B1"&&[...r.querySelectorAll(".lvl")].every(x=>x.getAttribute("aria-hidden")==="true")&&!r.hasAttribute("aria-label")})()'));
+  ok('C levels taught are text for screen readers; the strip is hidden from them', await q('(()=>{const r=document.querySelector(".t-card .lvl-row");return r.querySelector(".vh").textContent==="Levels taught: ' + LIVE.teachers[0].levels.join(', ') + '"&&[...r.querySelectorAll(".lvl")].every(x=>x.getAttribute("aria-hidden")==="true")&&!r.hasAttribute("aria-label")})()'));
   await q('document.querySelector("[data-tlevel=B1]").click()');
   ok('C level filter B1', (await q('document.querySelectorAll(".t-card").length')) === N_B1 && (await q('document.querySelector("[data-tlevel=B1]").getAttribute("aria-pressed")')) === 'true');
   await q('(()=>{const s=document.getElementById("t-lang");s.value="German";s.dispatchEvent(new Event("change"))})()');

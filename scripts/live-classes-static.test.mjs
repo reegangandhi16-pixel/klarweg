@@ -127,6 +127,7 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
   expectError((D) => { D.teachers.push({ ...realTeacher, unconfirmed: ['headline'] }); }, /still has unconfirmed fields: headline/, 'a published teacher with fields awaiting confirmation');
   expectError((D) => { D.teachers.push({ ...realTeacher, experience: '[Years to confirm] of teaching German' }); }, /placeholder text "\[Years to confirm\]/, 'a published teacher with placeholder text');
   assert.deepEqual(placeholders(realTeacher), [], 'list fields such as levels: [\'A1\'] are not placeholders');
+  expectError((D) => { D.teachers[0].proficiency = 'C1 (Goethe-Zertifikat)'; }, /proficiency states a level of German only/, 'a certificate claim inside proficiency');
   expectError((D) => { D.teachers[0].unconfirmed = ['nickname']; }, /unconfirmed names unknown field "nickname"/, 'unconfirmed must name real fields');
   expectError((D) => { D.teachers.push({ ...realTeacher, qualifications: [] }); }, /published teacher needs qualifications/, 'a published teacher without qualifications');
   expectError((D) => { D.teachers.push({ ...realTeacher, photo: 'public/teachers/missing.jpg', photoAlt: 'x' }); }, /photo public\/teachers\/missing\.jpg does not exist/, 'a missing photo file');

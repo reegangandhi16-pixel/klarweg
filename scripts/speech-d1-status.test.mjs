@@ -89,6 +89,11 @@ async function page(chapterId) {
   vm.runInContext(BLOCK + '\nthis.__t = { bodySpeaking };', ctx);
   const wrap = ctx.__t.bodySpeaking();
   const flush = async () => { for (let i = 0; i < 20; i++) await new Promise((r) => setImmediate(r)); };
+  // The status request runs through the real Worker (WebCrypto session hash + sqlite). WebCrypto completes off the
+  // event loop, so a fixed number of ticks was not always enough under a busy full `npm test` (the trace was read
+  // before the response: `actual: undefined`). Wait for the final speech.status entry instead, bounded at 2 s.
+  const settled = () => (ctx.KW_micTrace || []).some((r) => r.step === 'speech.status');
+  for (let t0 = Date.now(); !settled() && Date.now() - t0 < 2000;) await new Promise((r) => setTimeout(r, 5));
   await flush();
   return { ctx, C, wrap, fetches, recs, recorders, tutorCalls, flush,
     btns: wrap.findAll((n) => n._cls.has('mic-btn')), notes: wrap.findAll((n) => n._cls.has('kw-task-left')), results: wrap.findAll((n) => n._cls.has('speak-result')),

@@ -116,6 +116,33 @@ SELECT action, detail_json, at FROM audit_log WHERE attempt_id = ? ORDER BY at;
 SELECT item_id, seq, outcome, server_ts FROM response_events WHERE attempt_id = ? ORDER BY id;
 ```
 
+## 5a. Incident response (owner on call; no real learners until the pilot gates clear)
+| Severity | Examples | First action (within minutes) |
+|---|---|---|
+| **S1 — data exposure or integrity** | answer keys, explanations or scripts reach a learner before submission; one learner sees another's data; recordings reachable without authorisation; a staff route without 2FA | **Kill switch** §2 (`EXAM_ROUTES` off), then investigate |
+| **S2 — learners cannot work or lose work** | saves refused (`Speichern gestoppt` on many attempts), Hören playback broken, Sprechen uploads failing, mass `auth_required` / "Cookies blockiert" | Keep routes on if answers are still saved locally; otherwise kill switch. Check §4 metrics and §5 diagnosis |
+| **S3 — degraded / single learner** | one attempt stuck, one rater locked out (2FA) | Use the §5 queries; 2FA reset per `RUNBOOK-RATER-2FA.md` §3 |
+
+**Steps for S1/S2:**
+1. **Stop the harm:** use the kill switch, and take the time from the deploy log.
+2. **Preserve evidence before changing data:**
+   - D1 export (`wrangler d1 export … --output incident-<date>.sql`), stored outside the repo and access-restricted;
+   - the relevant `audit_log`, `incidents` and `mfa_audit` rows;
+   - Worker logs (they contain no answer content by design).
+3. **Scope:**
+   - which attempts and users;
+   - which data (answers, recordings, keys);
+   - which time window.
+4. **Fix:**
+   - code fix via the normal PR and CI path (browser end-to-end included);
+   - data repair only with a written plan and a fresh export first.
+5. **Notify** affected learners and authorities as the EX-01 privacy review requires. The deadlines differ by law (DPDP
+   Act / GDPR); record the decision.
+6. **Afterwards:**
+   - write the incident note (cause, timeline, fix, prevention);
+   - add a regression test;
+   - re-enable only after the fix is verified in the non-production environment (`NONPROD-SETUP.md`).
+
 ## 6. Backup and recovery
 
 - **D1.** Use Time Travel (`wrangler d1 time-travel restore klarweg-exam --timestamp …`) for point-in-time restore. Export before every migration: `wrangler d1 export klarweg-exam --remote --output kx-<date>.sql`.

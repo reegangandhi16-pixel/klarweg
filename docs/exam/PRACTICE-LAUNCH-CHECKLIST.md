@@ -42,7 +42,7 @@
 |---|---|
 | **OD-14a–e** vendor, licence (EX-06), voice cast, 10 raters, disclosure (see `OD-14-AUDIO-VENDOR-RESEARCH.md` §7) | Real Hören and Sprechen partner audio |
 | **Learner release set** (which forms) | Building a learner release |
-| **EX-01** privacy review; **P-19** consent withdrawal; **P-20** retention (PR #76 stays unmerged, retention off) | Real recordings |
+| **EX-01** privacy review; **P-19** consent withdrawal; **P-20** retention (PR #76 stays unmerged, retention off). Draft consent text, privacy notice and withdrawal workflow for the reviewer: `CONSENT-PRIVACY-DRAFT.md` (not in use; the Sprechen screen keeps its placeholder until approval) | Real recordings |
 | **OD-19** D9/D10: non-production end-to-end test and rehearsed runbook (`RUNBOOK-RATER-2FA.md`); provisioning `TOTP_ENC_KEY` + Access migration 011 (owner action) | Pilot |
 | **EX-02** rater recruitment and training | Rated Schreiben/Sprechen results for learners |
 | **OD-20** same-site domain | Pilot |
@@ -57,3 +57,5 @@
 ## 5. Not deployed
 Exam Worker flags all `off` (`exam-worker/wrangler.toml`); `EXAM_ROUTES` off in klarweg-access; no `exam/` path in
 `.github/pages-allowlist.txt`; engineering ran no remote D1, R2, Wrangler or secrets operations; no learner release built.
+Isolated non-production environment (setup, acceptance A1–A11, teardown): `NONPROD-SETUP.md`; not provisioned. Incident
+response: `RUNBOOK-EXAM-INFRA.md` §5a.

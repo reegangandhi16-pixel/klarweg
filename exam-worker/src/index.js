@@ -32,7 +32,8 @@ const ROUTES = [
   ['POST', R(`/attempts/${A}/sprechen/turns`), (c, m) => api.completeTurn(c.env, c.user, m[1], c.request)],
   ['GET', R(`/attempts/${A}/sprechen/status`), (c, m) => api.speakingStatus(c.env, c.user, m[1], c.url)],
   ['POST', R(`/attempts/${A}/complete`), (c, m) => api.completeAttempt(c.env, c.user, m[1], c.request)],
-  ['GET', R(`/attempts/${A}/result`), (c, m) => api.getResult(c.env, c.user, m[1])],
+  // staff (lead_rater, exam_admin) may read other learners' results here, outside /admin/*: pass the OD-19 verdict along
+  ['GET', R(`/attempts/${A}/result`), (c, m) => api.getResult(c.env, c.user, m[1], { mfaFresh: mfaFresh(c.request, c.env) })],
   ['GET', R(`/attempts/${A}/modules/${MODULE}/review`), (c, m) => api.moduleReview(c.env, c.user, m[1], m[2])],
   ['GET', R(`/attempts/${A}/modules/${MODULE}/feedback`), (c, m) => api.moduleFeedback(c.env, c.user, m[1], m[2])],
   ['GET', R(`/attempts/${A}/sprechen/recordings`), (c, m) => api.myRecordings(c.env, c.user, m[1])],

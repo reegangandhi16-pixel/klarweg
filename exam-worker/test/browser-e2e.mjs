@@ -626,6 +626,15 @@ async function runPractice() {
     await waitFor(`document.querySelectorAll('textarea').length === 3`, 15000, 'Schreiben');
     await a11y('Schreiben');
     await evaluate(`[...document.querySelectorAll('textarea')].forEach((t, i) => { t.value = 'Lieber Tom, meine neue Wohnung ist hell und ruhig. Ich bin umgezogen, weil ich näher an der Arbeit wohnen wollte. Treffen wir uns am Samstag? Viele Grüße ' + i; t.dispatchEvent(new Event('input', { bubbles: true })); })`);
+    // a real learner leaves each field: the browser then fires 'change' on the textarea (blur). That event must never
+    // replace the text answer (non-prod acceptance A3 lost every Schreiben answer this way).
+    await evaluate(`[...document.querySelectorAll('textarea')].forEach((t) => { t.focus(); t.blur(); t.dispatchEvent(new Event('change', { bubbles: true })); })`);
+    // wait for the SERVER rows, not the "Gespeichert" label: all three answers stored as text
+    for (const t0 = Date.now(); ; await sleep(200)) {
+      const rows = (await dev.env.DB.prepare("SELECT value_json FROM responses_current WHERE module = 'schreiben'").all()).results.map((r) => JSON.parse(r.value_json));
+      if (rows.length === 3 && rows.every((v) => typeof v.text === 'string' && v.text.startsWith('Lieber Tom') && !('option_id' in v))) break;
+      if (Date.now() - t0 > 15000) throw new Error('Schreiben answers not stored as text after blur/change: ' + JSON.stringify(rows).slice(0, 300));
+    }
     await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Schreiben autosaved');
     await submitModule();
 

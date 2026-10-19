@@ -106,6 +106,7 @@ test('RATER UI (OD-19): second-factor screens — labelled inputs, one-time-code
   assert.equal((rater.match(/mfaNeeded\((e|err)\)/g) || []).length, 4, 'queue, attempt, rating and recording all route mfa_required to the second-factor screens');
   assert.equal((rater.match(/mfaDown\((e|err)\)/g) || []).length, 4, 'queue, attempt, rating and recording all drop to the unavailable notice (A4 row 10)');
   assert.match(rater, /function showUnavailable\(\) {\n  current = null; unsaved = null;/, 'nothing loaded stays on screen');
+  assert.match(rater, /if \(st\.available === false\) return showUnavailable\(\);/, 'during a key outage the second-factor screen offers no form, only the notice');
   const api = fs.readFileSync(new URL('../../exam/js/api.js', import.meta.url), 'utf8');
   assert.match(api, /mfaVerify: \(b\) => once\('POST', '\/auth\/mfa\/verify'/, 'a code is never sent twice by a retry');
   assert.match(api, /mfaConfirm: \(code\) => once\(/);

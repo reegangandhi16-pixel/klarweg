@@ -19,7 +19,7 @@
   - 30-minute lock after 10 consecutive failures.
   - Codes are single use, with no replay inside the ±30 s window.
 - **Recovery codes:** 10 single-use codes, shown once, stored hashed. A new set invalidates the old one.
-- **Without `TOTP_ENC_KEY`:** every second-factor route and every staff route answers `503 mfa_unavailable`, including sessions verified within the last 12 hours (the Access proxy attests nothing without the key). Learner routes are unaffected. There is no weaker fallback.
+- **Without `TOTP_ENC_KEY`** (missing or unusable): every second-factor action (enrol, confirm, verify, recovery-code regeneration) and every staff route answers `503 mfa_unavailable`, including for sessions verified within the last 12 hours (the Access proxy attests nothing without the key). `/auth/mfa/status` answers with `available: false` and never `fresh: true`. No MFA state changes during the outage. Learner routes are unaffected. There is no weaker fallback.
 
 ## 1. Provisioning (non-production first, D9)
 1. **Secret:** generate 32 random bytes, base64 (for example `openssl rand -base64 32`), and set it as the Worker secret
@@ -28,8 +28,26 @@
    - Use a different key per environment.
 2. **Database:** apply `access/worker/migration-011-totp.sql` to the non-production Access D1.
    It is additive: three new tables and one nullable column on `sessions`.
-3. **Deploy:** deploy the Access Worker and the exam Worker of the same commit to non-production. Exam routes must stay off
-   in production.
+3. **Deploy, in this order** (non-production first; exam routes stay off in production):
+   1. **klarweg-access first.** It carries the fail-closed protection: without a usable `TOTP_ENC_KEY` it attests no
+      second factor and sends the internal marker `X-KW-MFA-Unavailable: 1`.
+   2. **Then klarweg-exam** of the same commit, which answers that marker with `503 mfa_unavailable`.
+   3. Check after each step: with the key removed, a freshly verified staff session gets 503 or 401 on
+      `/exam/v1/admin/rating-queue`, never 200 (§2 line 10).
+
+   **Why the order matters:** only the Access Worker knows whether the key is usable. The exam Worker learns it only
+   from the marker, so it cannot fail closed on its own.
+
+   | Access | Exam | Staff session verified < 12 h ago, key missing |
+   |---|---|---|
+   | new | new | `503 mfa_unavailable` (intended) |
+   | new | old | `401 mfa_required`: nothing is attested, still closed (safe interim state) |
+   | **old** | **new** | **`200`: the old proxy still attests the verification. This is the A4 row 10 bypass. Never run this mix.** |
+   | old | old | `200` (the behaviour before the fix) |
+
+   **Rollback, in reverse order:** roll back **klarweg-exam first**, then klarweg-access. Rolling back Access alone
+   produces the dangerous old/new mix above. If Access must be rolled back urgently, roll back the exam Worker first,
+   or keep the key in place and exam routes off until both are back on the same version.
 
 ## 2. End-to-end test in non-production (D9) — record date, tester, result per line
 | # | Step | Expected |
@@ -43,7 +61,7 @@
 | 7 | Set `sessions.mfa_verified_at` to 13 h ago for the test session | Rater screen asks for a code again |
 | 8 | A learner account | Exam unchanged, never asked for a code |
 | 9 | Browser devtools: send `X-KW-MFA-At` yourself | Still asked for a code |
-| 10 | Unset `TOTP_ENC_KEY` | `mfa_unavailable`; staff routes closed |
+| 10 | Unset `TOTP_ENC_KEY` | `mfa_unavailable`; staff routes closed, also for a session verified minutes ago; `/auth/mfa/status` shows `available: false, fresh: false`; regenerating recovery codes answers 503 and leaves the existing codes valid |
 | 11 | Owner reset (§3) | The rater can enrol again |
 
 Only after every line passes: repeat §1 for production, and still keep exam routes off until the pilot is approved.

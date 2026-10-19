@@ -35,6 +35,7 @@ let unsaved = null;     // { attempt_id, item_id, bands }
 async function showMfa(error = '', recovery = false) {
   let st;
   try { st = await api.mfaStatus(); } catch (e) { return screen(mfaEnrolStartView(esc, { error: errorText(e) }).replace('data-act="mfa-enrol"', 'data-act="mfa-retry"')); }
+  if (st.available === false) return showUnavailable();   // key outage: no code can be checked, so offer no form
   screen(st.enrolled ? mfaVerifyView(esc, { error, recovery }) : mfaEnrolStartView(esc, { error }));
 }
 

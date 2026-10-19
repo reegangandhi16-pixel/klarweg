@@ -2,7 +2,7 @@
    Any signed-in user may enrol; the exam Worker requires a FRESH second factor (D2: 12 h) only on rater/admin routes,
    using the time the Access proxy attests in X-KW-MFA-At (sessions.mfa_verified_at).
 
-   GET  /auth/mfa/status            { enrolled, pending, verified_at, fresh, recovery_codes_left, locked_until }
+   GET  /auth/mfa/status            { available, enrolled, pending, verified_at, fresh, recovery_codes_left, locked_until }
    POST /auth/mfa/enroll            start (or, with a fresh second factor, replace) enrolment → { secret, otpauth_uri }
    POST /auth/mfa/enroll/confirm    { code } → confirms, marks this session verified → { recovery_codes } (shown once)
    POST /auth/mfa/verify            { code } or { recovery_code } → marks this session verified
@@ -83,8 +83,11 @@ export async function mfaStatus(request, env) {
   const row = await totpRow(env, ctx.user.id);
   const left = await env.DB.prepare("SELECT COUNT(*) AS n FROM user_recovery_codes WHERE user_id = ?1 AND used_at IS NULL").bind(ctx.user.id).first();
   const t = nowSec();
-  return reply({ ok: true, enrolled: !!(row && row.confirmed_at && row.secret_enc), pending: !!(row && row.pending_secret_enc),
-    verified_at: ctx.user.mfaVerifiedAt ?? null, fresh: fresh(ctx.user.mfaVerifiedAt, t), fresh_seconds: MFA_FRESH_SECONDS,
+  /* Without a usable TOTP_ENC_KEY the second factor is unavailable (the proxy attests nothing, staff routes answer
+     503): say so explicitly and never report a verification as fresh. */
+  const available = hasEncKey(env);
+  return reply({ ok: true, available, enrolled: !!(row && row.confirmed_at && row.secret_enc), pending: !!(row && row.pending_secret_enc),
+    verified_at: ctx.user.mfaVerifiedAt ?? null, fresh: available && fresh(ctx.user.mfaVerifiedAt, t), fresh_seconds: MFA_FRESH_SECONDS,
     recovery_codes_left: left ? left.n : 0, locked_until: row && row.locked_until > t ? row.locked_until : null });
 }
 
@@ -172,6 +175,8 @@ export async function mfaVerify(request, env) {
 }
 
 export async function mfaRegenerateRecoveryCodes(request, env) {
+  // fail closed like every other second-factor operation: no new codes (and no change to the current set) during a key outage
+  if (!hasEncKey(env)) return reply({ ok: false, error: "mfa_unavailable" }, 503);
   const ctx = await sessionContext(request, env);
   if (!ctx) return reply({ ok: false, error: "auth_required" }, 401);
   const t = nowSec();

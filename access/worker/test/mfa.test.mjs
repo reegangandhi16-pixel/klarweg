@@ -247,3 +247,38 @@ test('OD-19 A4 row 10: without TOTP_ENC_KEY every staff route fails closed (503 
   await enrol(rotated, lead.cookie);
   assert.equal((await queue(rotated, lead.cookie)).status, 200);
 });
+
+test('OD-19 key outage: without TOTP_ENC_KEY, status reports unavailable (never fresh) and recovery-code regeneration fails closed without changing any state; with the key both work as before', async () => {
+  const { env } = makeEnv();
+  const u = await signup(env);
+  const { codes } = await enrol(env, u.cookie);   // enrolment verifies this session: fresh
+  const st = await req(env, 'GET', '/auth/mfa/status', { cookie: u.cookie });
+  assert.equal(st.json.available, true); assert.equal(st.json.fresh, true);
+  const hashes = async () => (await env.DB.prepare('SELECT code_hash FROM user_recovery_codes WHERE user_id = ?1 AND used_at IS NULL ORDER BY code_hash').bind(u.id).all()).results.map((r) => r.code_hash);
+  const before = await hashes();
+  assert.equal(before.length, 10);
+
+  // the same, freshly verified session during a key outage (missing or unusable key)
+  for (const bad of [undefined, '', 'not-base64!', Buffer.alloc(16, 1).toString('base64')]) {
+    const out = { ...env, TOTP_ENC_KEY: bad };
+    const s = await req(out, 'GET', '/auth/mfa/status', { cookie: u.cookie });
+    assert.equal(s.status, 200, `status answers (key ${JSON.stringify(bad)})`);
+    assert.equal(s.json.available, false, 'explicitly unavailable');
+    assert.equal(s.json.fresh, false, 'never reported fresh without the key');
+    const g = await req(out, 'POST', '/auth/mfa/recovery-codes', { cookie: u.cookie });
+    assert.equal(g.status, 503, `regeneration refused (key ${JSON.stringify(bad)})`);
+    assert.equal(g.json.error, 'mfa_unavailable');
+    assert.equal(g.json.recovery_codes, undefined, 'no codes issued');
+  }
+  assert.deepEqual(await hashes(), before, 'the existing recovery codes are untouched');
+  const audited = await env.DB.prepare("SELECT COUNT(*) AS n FROM mfa_audit WHERE user_id = ?1 AND event = 'codes_regenerated'").bind(u.id).first();
+  assert.equal(audited.n, 0, 'nothing was regenerated');
+
+  // key back: an old code still works, and regeneration works again and replaces the set
+  const v = await req(env, 'POST', '/auth/mfa/verify', { cookie: u.cookie, body: { recovery_code: codes[0] } });
+  assert.equal(v.status, 200, 'an existing recovery code still verifies once the key is back');
+  const g2 = await req(env, 'POST', '/auth/mfa/recovery-codes', { cookie: u.cookie });
+  assert.equal(g2.status, 200); assert.equal(g2.json.recovery_codes.length, 10);
+  const old = await req(env, 'POST', '/auth/mfa/verify', { cookie: u.cookie, body: { recovery_code: codes[1] } });
+  assert.equal(old.json.error, 'mfa_invalid_code', 'the new set replaced the old one');
+});

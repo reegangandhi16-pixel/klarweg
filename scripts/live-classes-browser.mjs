@@ -212,6 +212,15 @@ try {
   ok('C deep link opens that profile', await q('document.getElementById("t-dialog").open'));
   await q('document.getElementById("t-dialog-close").click()'); await sleep(100);
   ok('C closing a deep-linked profile focuses its card button', (await q('document.activeElement.getAttribute("data-profile")')) === 'teacher-3');
+  const DUP = LIVE.teachers.find((t) => (t.goethe || []).some((g) => (t.qualifications || []).includes(g)));
+  if (DUP) {
+    const cert = DUP.goethe.find((g) => DUP.qualifications.includes(g));
+    await load(L + '#teacher-' + DUP.id, { drafts: true });
+    const dl = await q('[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ")');
+    ok('C a certificate in both qualifications and goethe is shown once, under Goethe certificates',
+      dl.split(cert).length - 1 === 1 && dl.includes('Goethe certificates: ' + cert), dl);
+    await q('document.getElementById("t-dialog-close").click()'); await sleep(100);
+  }
   await q('document.querySelector("[data-cgroup=exam]").click()');
   ok('C course filter "Goethe prep"', (await q('document.querySelectorAll(".c-card").length')) === 1);
   await q('document.querySelector("[data-book-course=live-goethe]").click()'); await sleep(700);

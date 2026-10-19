@@ -227,7 +227,8 @@
       + '<dl class="profile-dl">'
       + row('Experience', t.experience)
       + row('German proficiency', t.proficiency)
-      + row('Qualifications', t.qualifications)
+      // a certificate listed under both shows once, under Goethe certificates
+      + row('Qualifications', (t.qualifications || []).filter(function (x) { return (t.goethe || []).indexOf(x) < 0; }))
       + row('Goethe certificates', t.goethe)
       + row('Levels taught', (t.levels || []).join(', '))
       + row('Teaches in', (t.teachesIn || []).join(', '))

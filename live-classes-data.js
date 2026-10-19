@@ -24,10 +24,12 @@
   if (global.KWLive) return;
 
   global.KWLive = {
-    /* true while the page is an unlisted preview. Set to false
-       before publishing: draft teachers / courses / testimonials
-       disappear and the honest empty states show instead. */
-    showDrafts: true,
+    /* false = production-safe: draft teachers / courses / testimonials
+       are never rendered and the honest empty states show instead.
+       To review the draft templates, set true LOCALLY only: kw-live.js
+       also ignores it on any host other than localhost / 127.0.0.1 /
+       file://, so a forgotten `true` can never reach the live site. */
+    showDrafts: false,
 
     contact: {
       email: 'hallo@klarweg.app',

@@ -28,8 +28,17 @@
    - Use a different key per environment.
 2. **Database:** apply `access/worker/migration-011-totp.sql` to the non-production Access D1.
    It is additive: three new tables and one nullable column on `sessions`.
-3. **Deploy:** deploy the Access Worker and the exam Worker of the same commit to non-production. Exam routes must stay off
-   in production.
+3. **Deploy, in this order:** deploy both Workers from the same commit to non-production. Exam routes must stay off in
+   production.
+   1. **Access Worker first.** Only the Access Worker can see whether `TOTP_ENC_KEY` is usable. The updated version stops
+      attesting `X-KW-MFA-At` and sends the internal `X-KW-MFA-Unavailable` marker when it is not. An older Access Worker
+      keeps attesting recent verifications even without the key, and an updated exam Worker cannot detect that.
+   2. **Then the exam Worker.** It turns the marker into `503 mfa_unavailable` for staff. Until it is deployed, the
+      updated Access Worker still keeps staff out, but they get `401 mfa_required` instead of the 503.
+   - Never deploy the exam Worker change alone, and never roll the Access Worker back while the exam Worker stays on
+     the new version: either way staff routes could stay open without the key.
+   - This order is for updating Workers that already exist. On a first-time setup the exam Worker has to exist before the
+     Access Worker's service binding can point at it (`NONPROD-SETUP.md` §3 step 6); exam routes are off until then.
 
 ## 2. End-to-end test in non-production (D9) — record date, tester, result per line
 | # | Step | Expected |

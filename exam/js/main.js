@@ -68,11 +68,52 @@ async function resume(attemptId, takeover = false) {
   }
 }
 
+/* An EXPIRED lease (no heartbeat for LEASE_TTL, e.g. after sleep, a throttled tab or a long network outage) is not a
+   takeover: nobody else holds the attempt. Reacquire it exactly as a page reload would (no takeover; the server audits it
+   as lease_reacquired), then resume saving the answers still queued locally. Single-flight: the heartbeat, autosave and
+   any user action may notice at the same time. Resolves to null, or to the error (lease_held = another tab took the
+   attempt meanwhile). staleLease: the lease the refused request carried; if it has already been replaced (a late
+   response after another path reacquired), nothing is reacquired again: a second request would meet our own new lease
+   and wrongly report lease_held. */
+let reacquiring = null;
+function reacquireLease(staleLease = null) {
+  if (staleLease && staleLease !== S.lease && !reacquiring) return Promise.resolve(null);
+  if (!reacquiring) reacquiring = (async () => {
+    try {
+      const r = await api.lease(S.attempt.attempt_id, deviceId(), false);
+      S.lease = r.lease.lease_id; rememberLease(S.attempt.attempt_id, S.lease);
+      if (S.autosave && S.autosave.hasPending()) S.autosave.schedule(0);
+      return null;
+    } catch (e) { return e; } finally { reacquiring = null; }
+  })();
+  return reacquiring;
+}
+/* Another tab holding the attempt now is the same situation as a superseded lease: offer "Hier fortsetzen". */
+const leaseLost = (e) => (e && e.code === 'lease_held' ? new ExamApiError(409, 'lease_superseded') : e);
+function onLeaseExpired(staleLease = null) { reacquireLease(staleLease).then((e) => { if (e) { clearInterval(S.hb); fail(leaseLost(e)); } }); }
+
+/* Every call that carries the lease (signature (attemptId, lease, …)) is retried ONCE with a reacquired lease when the
+   server says lease_expired. The refused request was not applied (the server stores only successful responses), so the
+   retry, even with the same request id, is applied once. */
+const LEASED_CALLS = ['pkg', 'answers', 'save', 'media', 'hoerenEvent', 'chunk', 'turn', 'speakingStatus', 'consent', 'start', 'submit', 'complete'];
+for (const name of LEASED_CALLS) {
+  const call = api[name];
+  api[name] = async (id, lease, ...rest) => {
+    try { return await call(id, lease, ...rest); } catch (e) {
+      if (!e || e.code !== 'lease_expired') throw e;
+      const err = await reacquireLease(lease);
+      if (err) throw leaseLost(err);
+      return call(id, S.lease, ...rest);
+    }
+  };
+}
+
 function startHeartbeat() {
   clearInterval(S.hb);
   S.hb = setInterval(async () => {
-    try { const r = await api.heartbeat(S.attempt.attempt_id, S.lease); const before = S.module; S.attempt = r; const m = r.modules.find((x) => x.module === before); if (before && m && m.status === 'submitted') route(); }
-    catch (e) { if (e.code === 'lease_superseded') { clearInterval(S.hb); fail(e); } }
+    const sent = S.lease;
+    try { const r = await api.heartbeat(S.attempt.attempt_id, sent); const before = S.module; S.attempt = r; const m = r.modules.find((x) => x.module === before); if (before && m && m.status === 'submitted') route(); }
+    catch (e) { if (e.code === 'lease_superseded') { clearInterval(S.hb); fail(e); } else if (e.code === 'lease_expired') onLeaseExpired(sent); }
   }, 15_000);
 }
 
@@ -106,7 +147,7 @@ async function openModule(module) {
   S.autosave = new Autosave({
     key: `answers:${id}:${module}`, store: S.store,
     send: (batch, requestId) => api.save(id, S.lease, module, batch, requestId),
-    onState: (st) => { const say = saveAnnouncement(S.saveState, st); S.saveState = st; if (say) announce(say); paintHeader(); }, onFatal: (code) => { if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else refresh(); },
+    onState: (st) => { const say = saveAnnouncement(S.saveState, st); S.saveState = st; if (say) announce(say); paintHeader(); }, onFatal: (code) => { console.warn('[kx-autosave]', 'stopped', { code }); if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else if (code === 'lease_expired') onLeaseExpired(); else refresh(); },
     onDropped: (code, batch) => syncFromServer(batch.map((b) => b.item_id)).then(() => {
       if (code === 'topic_locked') { announce('Die Themenwahl ist gesperrt. Ihre Änderung wurde nicht gespeichert.'); applyTopicLock(false); }
     }).catch(() => {})

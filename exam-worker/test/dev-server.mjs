@@ -18,6 +18,7 @@ import { makeEnv, grant, role, ROOT, PROXY_SECRET, FORM_DIR, PRACTICE_LIBRARY } 
 import accessWorker from '../../access/worker/src/index.js';
 import { createD1 } from '../../access/worker/test/d1-sqlite.mjs';
 import { hashSessionToken } from '../../access/worker/src/sessions.js';
+import { hasEncKey } from '../../access/worker/src/totp.js';
 
 /* mfa: true (opt-in) runs the real klarweg-access Worker in-process for /auth/mfa/* with an in-memory Access D1: every
    local test user gets an Access user + session, and the exam requests carry X-KW-MFA-At from that session exactly as
@@ -85,8 +86,12 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
         const chunks = []; for await (const c of req) chunks.push(c);
         // OD-19: with mfa (opt-in) the freshness comes from the in-process Access session; otherwise the local test users count as verified now
         const headers = { 'x-kw-proxy-auth': PROXY_SECRET, 'x-kw-user': userFor(req) };
-        const at = access ? await access.mfaAt(aliasFor(req)) : Math.floor(Date.now() / 1000);
-        if (at) headers['x-kw-mfa-at'] = String(at);
+        // as access/worker/src/exam-proxy.js: without a usable TOTP_ENC_KEY nothing is attested and staff routes fail closed
+        if (access && !hasEncKey(access.env)) headers['x-kw-mfa-unavailable'] = '1';
+        else {
+          const at = access ? await access.mfaAt(aliasFor(req)) : Math.floor(Date.now() / 1000);
+          if (at) headers['x-kw-mfa-at'] = String(at);
+        }
         if (req.headers['content-type']) headers['content-type'] = req.headers['content-type'];
         const r = await worker.fetch(new Request('https://klarweg-exam.internal' + url.pathname + url.search,
           { method: req.method, headers, body: ['GET', 'HEAD'].includes(req.method) ? undefined : Buffer.concat(chunks) }), h.env);

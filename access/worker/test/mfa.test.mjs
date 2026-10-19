@@ -201,7 +201,7 @@ test('OD-19 A4 row 10: without TOTP_ENC_KEY every staff route fails closed (503 
   const { env, exam, seen } = makeEnv();
   const lead = await signup(env), learner = await signup(env);
   await role(exam.env, lead.id, 'lead_rater'); await grant(exam.env, learner.id);
-  await enrol(env, lead.cookie);
+  const { secret } = await enrol(env, lead.cookie);
   // 1. key configured, freshly verified staff session → staff routes open
   assert.equal((await queue(env, lead.cookie)).status, 200);
   // a completed foreign attempt id is not needed: an unknown id must still be refused before any lookup reveals anything
@@ -230,7 +230,20 @@ test('OD-19 A4 row 10: without TOTP_ENC_KEY every staff route fails closed (503 
   const rotated = { ...env, TOTP_ENC_KEY: Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString('base64') };
   await env.DB.prepare('UPDATE sessions SET mfa_verified_at = 1 WHERE user_id = ?1').bind(lead.id).run();
   assert.equal((await queue(rotated, lead.cookie)).json.error, 'mfa_required');
-  const v = await req(rotated, 'POST', '/auth/mfa/verify', { cookie: lead.cookie, body: { code: '000000' } });
-  assert.notEqual(v.status, 200, 'no verification succeeds by accident after rotation');
+  const v = await req(rotated, 'POST', '/auth/mfa/verify', { cookie: lead.cookie, body: { code: await code(secret) } });
+  assert.equal(v.status, 409, 'the old secret cannot be read: a clear answer, not a server error'); assert.equal(v.json.error, 'mfa_reset_required');
   assert.equal((await queue(rotated, lead.cookie)).json.error, 'mfa_required');
+  const row = await env.DB.prepare('SELECT failed_count FROM user_totp WHERE user_id = ?1').bind(lead.id).first();
+  assert.equal(row.failed_count, 0, 'not counted as a wrong code');
+  assert.equal((await env.DB.prepare("SELECT COUNT(*) AS n FROM mfa_audit WHERE user_id = ?1 AND event = 'secret_unreadable'").bind(lead.id).first()).n, 1);
+  // a pending enrolment started under the old key is dropped, so enrolment can start again
+  const other = await signup(env); await role(exam.env, other.id, 'rater');
+  assert.equal((await req(env, 'POST', '/auth/mfa/enroll', { cookie: other.cookie })).status, 200);
+  const c = await req(rotated, 'POST', '/auth/mfa/enroll/confirm', { cookie: other.cookie, body: { code: '000000' } });
+  assert.equal(c.json.error, 'mfa_no_pending_enrolment');
+  assert.equal((await req(rotated, 'POST', '/auth/mfa/enroll', { cookie: other.cookie })).status, 200, 'a new enrolment under the new key');
+  // after the owner reset (RUNBOOK-RATER-2FA §3) the rater enrols again under the new key (A4 row 11)
+  for (const sql of ['DELETE FROM user_recovery_codes WHERE user_id = ?1', 'DELETE FROM user_totp WHERE user_id = ?1', 'UPDATE sessions SET mfa_verified_at = NULL WHERE user_id = ?1']) await env.DB.prepare(sql).bind(lead.id).run();
+  await enrol(rotated, lead.cookie);
+  assert.equal((await queue(rotated, lead.cookie)).status, 200);
 });

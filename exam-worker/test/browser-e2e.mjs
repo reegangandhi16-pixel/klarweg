@@ -1152,6 +1152,25 @@ async function runRater2fa() {
     await evaluate(`[...document.querySelectorAll('form.kx-rate')].find((x) => x.dataset.unit === ${JSON.stringify(unit)}).requestSubmit()`);
     await waitFor(`/Gespeichert: [\\d,]+ Punkte/.test(document.body.innerText)`, 10000, 'saved after the explicit click');
     assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings WHERE item_id = ?1').bind(unit).first()).n, 1);
+    // 7. TOTP_ENC_KEY removed on the server while this freshly verified rater has the attempt open (A4 row 10): the next
+    // save is refused, the loaded attempt disappears from the screen, a reload shows only the notice; learners carry on;
+    // with the key back the same fresh session works again
+    const savedKey = dev.access.env.TOTP_ENC_KEY;
+    const other = await evaluate(`(() => { const f = [...document.querySelectorAll('form.kx-rate')].find((x) => x.dataset.unit !== ${JSON.stringify(unit)}); for (const sel of f.querySelectorAll('select[data-crit]')) sel.value = sel.options[1].value; return f.dataset.unit; })()`);
+    delete dev.access.env.TOTP_ENC_KEY;
+    await evaluate(`[...document.querySelectorAll('form.kx-rate')].find((x) => x.dataset.unit === ${JSON.stringify(other)}).requestSubmit()`);
+    await waitFor(`/nicht verfügbar/.test(document.querySelector('.kx-error[role="alert"]')?.textContent || '')`, 10000, 'unavailable notice after a refused save');
+    assert.equal(await evaluate(`document.querySelectorAll('form.kx-rate, .kx-queue, audio').length`), 0, 'no attempt material left on screen');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings WHERE item_id = ?1').bind(other).first()).n, 0, 'nothing stored without the key');
+    await as('rater1', 'rater.html');
+    await waitFor(`/nicht verfügbar/.test(document.querySelector('.kx-error[role="alert"]')?.textContent || '')`, 10000, 'unavailable notice on reload');
+    assert.equal(await evaluate(`document.querySelectorAll('form.kx-rate, .kx-queue').length`), 0, 'no queue without the key');
+    await A.a11y('2FA: unavailable notice', { tabs: 3 });
+    await as('learner', '');
+    await waitFor(`document.querySelector('[data-act="create"]')`, 10000, 'learner start screen without the key');
+    dev.access.env.TOTP_ENC_KEY = savedKey;
+    await as('rater1', 'rater.html');
+    await waitFor(`document.querySelector('.kx-queue')`, 10000, 'queue again once the key is back');
     // 5. learners never see any of it
     await as('learner', '');
     await waitFor(`document.querySelector('[data-act="create"]')`, 10000, 'learner start screen');

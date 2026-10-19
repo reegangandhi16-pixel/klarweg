@@ -61,6 +61,85 @@ export async function idempotent(env, attemptId, requestId, route, fn) {
   return { status: 200, body };
 }
 
+/* ---------- in-flight claims: ABSENT → PENDING → COMPLETED (migration 0002) ----------
+   For routes whose business effect is a single D1 batch. Contract:
+   1. Claim: INSERT a pending row (unique (attempt, request id)) with a fresh claim token. Exactly one request wins.
+   2. A same-route duplicate of a PENDING claim gets 503 request_in_progress (Retry-After); of a COMPLETED one, the
+      stored response. Another route's id gets request_id_reused (as before).
+   3. prepare(): read-only. Validates (throwing the route's ApiError) and returns
+        { precondition: { sql, binds }, statements: [...], body }
+      `precondition.sql` is a boolean SQL expression; its placeholders start at ?4 (?1–?3 are the helper's).
+   4. Commit: ONE batch = [assertion, ...statements, flip to COMPLETED with the response, delete assertion]. The
+      assertion inserts ok = 1 only if this request still owns its pending claim AND the precondition holds; ok = 0
+      violates CHECK (ok = 1) and D1 rolls the whole batch back. Business effects and the completed response commit
+      together or not at all (D1 batch = transaction; must be confirmed on non-production D1, see the validation
+      plan). Effects outside this batch (none on the current routes) are NOT covered.
+   5. A refusal in prepare(), or a rolled-back batch, deletes only this request's own pending claim (token-guarded);
+      never another request's claim, never a completed record.
+   6. A PENDING claim older than CLAIM_TTL_MS may be taken over by compare-and-set on its token. This is safe only
+      because of (4): a pending claim proves that its batch has not committed. The previous owner's later batch then
+      fails its assertion and changes nothing. The TTL never authorizes replaying anything by itself. */
+export const CLAIM_TTL_MS = 60_000;
+export const CLAIM_RETRY_AFTER_S = 1;
+const inProgress = () => fail(503, 'request_in_progress', 'This request is still being processed — retry with the same request id.', { retry_after_s: CLAIM_RETRY_AFTER_S });
+const replayOf = (row) => ({ status: row.status, body: { ...JSON.parse(row.response_json), replayed: true } });
+
+async function readRecord(env, attemptId, requestId) {
+  return env.DB.prepare('SELECT route, state, status, response_json, claim_token, claimed_at FROM request_log WHERE attempt_id = ?1 AND request_id = ?2')
+    .bind(attemptId, requestId).first();
+}
+async function releaseClaim(env, attemptId, requestId, token) {
+  await env.DB.prepare("DELETE FROM request_log WHERE attempt_id = ?1 AND request_id = ?2 AND state = 'pending' AND claim_token = ?3")
+    .bind(attemptId, requestId, token).run();
+}
+/* The answer for a request that does not own a live claim: replay, request_id_reused, or in progress. */
+function answerExisting(row, route) {
+  if (row.route !== route) fail(409, 'request_id_reused');
+  if (row.state === 'completed') return replayOf(row);
+  inProgress();
+}
+
+export async function idempotentAtomic(env, attemptId, requestId, route, prepare) {
+  const token = `clm_${crypto.randomUUID()}`;
+  const t = now(env);
+  const claimed = await env.DB.prepare(`INSERT INTO request_log (attempt_id, request_id, route, status, response_json, created_at, state, claim_token, claimed_at)
+      VALUES (?1, ?2, ?3, 0, '{}', ?4, 'pending', ?5, ?4) ON CONFLICT (attempt_id, request_id) DO NOTHING`)
+    .bind(attemptId, requestId, route, t, token).run();
+  if (!claimed.meta.changes) {
+    const row = await readRecord(env, attemptId, requestId);
+    if (!row) inProgress();                                   // released between our insert and read: retry later
+    if (row.route !== route || row.state === 'completed' || t - row.claimed_at < CLAIM_TTL_MS) return answerExisting(row, route);
+    const took = await env.DB.prepare(`UPDATE request_log SET claim_token = ?3, claimed_at = ?4
+        WHERE attempt_id = ?1 AND request_id = ?2 AND state = 'pending' AND claim_token = ?5`)
+      .bind(attemptId, requestId, token, t, row.claim_token).run();
+    if (!took.meta.changes) return answerExisting((await readRecord(env, attemptId, requestId)) || { route, state: 'pending' }, route);
+    log(env, 'claim_takeover', { attempt: attemptId, route });
+  }
+
+  let plan;
+  try { plan = await prepare(); } catch (e) { await releaseClaim(env, attemptId, requestId, token); throw e; }
+
+  const pre = plan.precondition || { sql: '1', binds: [] };
+  const assertion = env.DB.prepare(`INSERT INTO idempotency_assertions (token, ok) SELECT ?1, CASE WHEN EXISTS (
+        SELECT 1 FROM request_log WHERE attempt_id = ?2 AND request_id = ?3 AND state = 'pending' AND claim_token = ?1) AND (${pre.sql}) THEN 1 ELSE 0 END`)
+    .bind(token, attemptId, requestId, ...pre.binds);
+  const complete = env.DB.prepare(`UPDATE request_log SET state = 'completed', status = 200, response_json = ?4, claim_token = NULL
+      WHERE attempt_id = ?1 AND request_id = ?2 AND state = 'pending' AND claim_token = ?3`)
+    .bind(attemptId, requestId, token, JSON.stringify(plan.body));
+  const cleanup = env.DB.prepare('DELETE FROM idempotency_assertions WHERE token = ?1').bind(token);
+  try {
+    await env.DB.batch([assertion, ...plan.statements, complete, cleanup]);
+  } catch (e) {
+    // rolled back: nothing of this batch applied. Lost the claim → someone else's answer; else re-validate.
+    const row = await readRecord(env, attemptId, requestId);
+    if (row && row.claim_token !== token) return answerExisting(row, route);
+    await releaseClaim(env, attemptId, requestId, token);
+    await prepare();                                          // throws the route's refusal for the state that won
+    fail(409, 'invalid_transition', 'The state changed while this request was processed.');
+  }
+  return { status: 200, body: plan.body };
+}
+
 /* ---------- device lease ---------- */
 export async function acquireLease(env, attempt, deviceId, takeover) {
   const t = now(env);
@@ -256,7 +335,8 @@ export async function scoreModule(env, attempt, module) {
 /* OD-45 (LOCKED): student-facing title and mandatory disclaimer; never "Goethe score / Goethe-Ergebnis". */
 export const RESULT_LABEL = 'Klarweg B1 Simulation – Ergebnis';
 
-export async function buildResult(env, attempt) {
+/* Result object only (read-only). buildResult() = computeResult + store; atomic callers store it via resultUpsert(). */
+export async function computeResult(env, attempt) {
   const form = await formRow(env, attempt.form_id);
   const rows = (await env.DB.prepare('SELECT * FROM module_scores WHERE attempt_id = ?1').bind(attempt.id).all()).results;
   const mods = await attemptModules(env, attempt.id);
@@ -284,7 +364,14 @@ export async function buildResult(env, attempt) {
       };
     })
   };
-  await env.DB.prepare('INSERT INTO results (attempt_id, json, computed_at) VALUES (?1, ?2, ?3) ON CONFLICT(attempt_id) DO UPDATE SET json = excluded.json, computed_at = excluded.computed_at')
-    .bind(attempt.id, JSON.stringify(result), now(env)).run();
+  return result;
+}
+export function resultUpsert(env, attemptId, result, t) {
+  return env.DB.prepare('INSERT INTO results (attempt_id, json, computed_at) VALUES (?1, ?2, ?3) ON CONFLICT(attempt_id) DO UPDATE SET json = excluded.json, computed_at = excluded.computed_at')
+    .bind(attemptId, JSON.stringify(result), t);
+}
+export async function buildResult(env, attempt) {
+  const result = await computeResult(env, attempt);
+  await resultUpsert(env, attempt.id, result, now(env)).run();
   return result;
 }

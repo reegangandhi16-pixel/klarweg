@@ -14,9 +14,12 @@ async function overlapRetry(s, path, body) {
   const DB = Object.create(s.env.DB);
   DB.prepare = (sql) => {
     const st = s.env.DB.prepare(sql);
-    if (!held && sql.startsWith('SELECT route, status, response_json FROM request_log')) {
+    // the retry's first idempotency access: the record lookup (idempotent) or the claim insert (idempotentAtomic)
+    if (!held && (sql.startsWith('SELECT route, status, response_json FROM request_log') || sql.startsWith('INSERT INTO request_log'))) {
       held = true;
-      return { bind: (...b) => { const x = st.bind(...b); return { ...x, first: async () => { const v = await x.first(); await gate; return v; } }; } };
+      return { bind: (...b) => { const x = st.bind(...b); return { ...x,
+        first: async () => { const v = await x.first(); await gate; return v; },
+        run: async () => { await gate; return x.run(); } }; } };   // a claim is attempted only after the original committed
     }
     return st;
   };

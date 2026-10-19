@@ -7,6 +7,8 @@ export class ExamApiError extends Error {
   constructor(status, code, body) { super(code); this.status = status; this.code = code; this.body = body || {}; }
 }
 
+const MAX_RETRY_AFTER_MS = 10_000;
+
 export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retries = 3, backoffMs = 400, sleep = (ms) => new Promise((r) => setTimeout(r, ms)) }) {
   async function once(method, path, { body, raw, contentType, keepalive } = {}) {
     const init = { method, credentials: 'include', headers: {} };
@@ -19,7 +21,14 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     let json = null;
     try { json = await res.json(); } catch { /* non-JSON */ }
     if (clock && json && Number.isFinite(json.server_now)) clock.sample(sent, received, json.server_now);
-    if (!res.ok) throw new ExamApiError(res.status, (json && json.error) || 'http_' + res.status, json);
+    if (!res.ok) {
+      const err = new ExamApiError(res.status, (json && json.error) || 'http_' + res.status, json);
+      // server-advised wait for a retryable refusal (503 request_in_progress): JSON body first (always readable),
+      // then the Retry-After header (readable only same-origin or when exposed)
+      const s = Number((json && json.retry_after_s) ?? (res.headers && res.headers.get && res.headers.get('retry-after')));
+      if (Number.isFinite(s) && s > 0) err.retryAfterMs = Math.min(s * 1000, MAX_RETRY_AFTER_MS);
+      throw err;
+    }
     return json;
   }
   async function call(method, path, opts = {}) {
@@ -29,7 +38,8 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
         last = e;
         const transient = !(e instanceof ExamApiError) || e.status >= 500 || e.status === 429;
         if (!transient || i === retries) throw e;
-        await sleep(backoffMs * 2 ** i);
+        // same request id on every retry; never sooner than the server advised
+        await sleep(Math.max(backoffMs * 2 ** i, e.retryAfterMs || 0));
       }
     }
     throw last;

@@ -1,0 +1,18 @@
+# Idempotency-claim probe — NON-PRODUCTION ONLY. Copy to wrangler.toml (gitignored) and bind a SEPARATE, freshly
+# created D1 database migrated with exam-worker/migrations/0001 + 0002. Never the exam database (`klarweg-exam`).
+name = "klarweg-exam-idem-probe"
+main = "worker.mjs"
+compatibility_date = "2024-11-06"
+workers_dev = true
+
+[vars]
+IDEM_PROBE = "off"                          # "on" only for the duration of a validation run
+IDEM_PROBE_LABEL = "nonprod-idem-probe-1"   # must equal the label of the marker row the OPERATOR inserts (README)
+# Secrets (never committed, never printed):
+#   IDEM_PROBE_TOKEN      request token (≥ 32 random characters)
+#   IDEM_PROBE_DB_NONCE   database qualification nonce; its sha256 is inserted into idem_probe_marker by the operator
+
+[[d1_databases]]
+binding = "DB"
+database_name = "klarweg-exam-idem-probe"
+database_id = "REPLACE_WITH_NON_PRODUCTION_PROBE_DATABASE_ID"

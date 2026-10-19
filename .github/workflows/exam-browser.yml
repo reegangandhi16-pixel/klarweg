@@ -38,12 +38,8 @@ jobs:
       fail-fast: false
       matrix:
         scenario: [flagged, autoplay, hoeren-autoplay, practice, sprechen-topic, lease-expiry, two-tabs, rater-2fa]
-        proxy: ['0']
-        # the same journeys through the real klarweg-access Worker in-process (session → /exam proxy → service binding)
-        include:
-          - { scenario: practice, proxy: '1' }
-          - { scenario: lease-expiry, proxy: '1' }
-          - { scenario: rater-2fa, proxy: '1' }
+        # '1' = the same journey through the real klarweg-access Worker in-process (session → /exam proxy → service binding)
+        proxy: ['0', '1']
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1
         with:
@@ -62,4 +58,5 @@ jobs:
           KX_E2E_ONLY: ${{ matrix.scenario }}
           KX_E2E_FORM: p1
           CHROME_ARGS: --no-sandbox
+          KX_E2E_VERBOSE: '1'   # step-by-step log in the job output, so a failure can be diagnosed from CI alone
         run: node exam-worker/test/browser-e2e.mjs

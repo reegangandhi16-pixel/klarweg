@@ -43,14 +43,33 @@ async function probe(evaluate, expr) {
   try { return await evaluate(expr); } catch (e) { if (NAVIGATING.test(String(e && e.message))) return false; throw e; }
 }
 
-async function launch({ autoplayFlag = true } = {}) {
+/* Chrome start-up on a cold CI runner has taken more than 10 s (DevToolsActivePort missing, run 39261898074). Wait up to
+   30 s, stop early if Chrome exits, and retry the start once: this is browser start-up, never a test assertion. */
+const LAUNCH_WAIT_MS = 30000;
+async function startChrome({ autoplayFlag }) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-chrome-'));
   const proc = spawn(CHROME, [...CHROME_ARGS, '--headless=new', '--mute-audio', '--disable-gpu', '--no-first-run', '--no-default-browser-check', `--user-data-dir=${dir}`,
     '--remote-debugging-port=0', ...(autoplayFlag ? ['--autoplay-policy=no-user-gesture-required'] : []), '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream',
-    'about:blank'], { stdio: 'ignore' });
+    'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] });
+  let stderr = ''; let exited = null;
+  proc.stderr.on('data', (d) => { stderr = (stderr + d).slice(-2000); });
+  proc.on('exit', (code, signal) => { exited = signal || code; });
   const portFile = path.join(dir, 'DevToolsActivePort');
-  for (let i = 0; i < 100 && !fs.existsSync(portFile); i++) await sleep(100);
-  const port = fs.readFileSync(portFile, 'utf8').split('\n')[0];
+  const t0 = Date.now();
+  // the port file is written in two lines; wait until the first line is a port number
+  const readPort = () => { try { const p = fs.readFileSync(portFile, 'utf8').split('\n')[0]; return /^\d+$/.test(p) ? p : null; } catch { return null; } };
+  let port = null;
+  while (!(port = readPort()) && exited === null && Date.now() - t0 < LAUNCH_WAIT_MS) await sleep(100);
+  if (port) return { proc, dir, port };
+  proc.kill();
+  throw new Error(`Chrome did not start within ${Date.now() - t0} ms (exit: ${exited}); stderr tail:\n${stderr}`);
+}
+
+async function launch({ autoplayFlag = true } = {}) {
+  let started;
+  try { started = await startChrome({ autoplayFlag }); }
+  catch (e) { console.log(`[e2e] ${e.message}\n[e2e] retrying Chrome start once`); started = await startChrome({ autoplayFlag }); }
+  const { proc, dir, port } = started;
   const targets = await (await fetch(`http://127.0.0.1:${port}/json`)).json();
   const page = targets.find((t) => t.type === 'page');
   const ws = new WebSocket(page.webSocketDebuggerUrl);

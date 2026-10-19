@@ -13,7 +13,9 @@ export const ERROR_TEXT = {
   recording_integrity: 'Die Aufnahme hat die Integritätsprüfung nicht bestanden.',
   invalid_bands: 'Ungültige Bänder.',
   not_rateable: 'Diese Aufgabe kann nicht bewertet werden.',
-  attempt_not_found: 'Versuch nicht gefunden.'
+  attempt_not_found: 'Versuch nicht gefunden.',
+  rate_limited: 'Zu viele Anfragen in kurzer Zeit. Bitte in einer Minute erneut versuchen.',
+  network: 'Keine Verbindung zum Server. Bitte die Seite neu laden; bereits gespeicherte Bewertungen werden dann angezeigt.'
 };
 /* The round this rater rates a module in: the round they already used for it (one rater, one round), else the lowest
    of rounds 1 and 2 still free for every unit of the module, else 3 (lead raters only; the server enforces that). */

@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { setup, call, newUser, role } from './harness.mjs';
 import { start, submit, answerObjective, runHoeren, runSchreiben, runSprechen, complete } from './flow.mjs';
-import { ratingRound, missingCriteria } from '../../exam/js/rating.js';
+import { ratingRound, missingCriteria, ERROR_TEXT } from '../../exam/js/rating.js';
 
 async function finishedAttempt() {
   const s = await setup();
@@ -76,4 +76,13 @@ test('RATER API: productive returns what the rating API validates; rounds are tr
   const by = Object.fromEntries(res.json.result.modules.map((m) => [m.module, m]));
   assert.equal(by.schreiben.status, 'final'); assert.equal(by.sprechen.status, 'final');
   assert.equal(by.schreiben.points, after.modules[0].points); assert.equal(by.sprechen.points, after.modules[1].points);
+});
+
+test('RATER UI: every refusal a rater can meet in normal use has a German message, incl. lost connection and rate limit', () => {
+  for (const code of ['auth_required', 'rater_role_required', 'cannot_rate_own_attempt', 'rater_not_independent', 'already_rated', 'lead_rater_required',
+    'module_not_submitted', 'recording_not_found', 'recording_unavailable', 'recording_integrity', 'attempt_not_found', 'rate_limited', 'network']) {
+    assert.ok(typeof ERROR_TEXT[code] === 'string' && ERROR_TEXT[code].length > 10, code);
+  }
+  // a rating is never retried, so a lost response may have been saved: the message must not claim otherwise
+  assert.equal(/nichts gespeichert|nicht gespeichert/.test(ERROR_TEXT.network), false);
 });

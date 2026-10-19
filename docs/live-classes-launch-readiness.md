@@ -63,21 +63,20 @@ Klarweg intends to offer teacher-led live German classes. This sets the directio
 - The brand foundation (`uploads/klarweg-os.md`) still describes a self-learning-only product and should be updated by the owner.
 
 **D2. Teachers.**
-*Status (2026-10-20):* the owner's own profile is drafted as `reegan-gandhi` and stays `draft: true`.
+*Status (2026-10-20):* the owner's own profile is drafted as `reegan-gandhi` and stays `draft: true`. It is not approved for publication.
 - **Confirmed by the owner:**
   - name;
   - headline;
-  - German proficiency C1 (a stated level of German, not a certificate);
+  - German proficiency C1 (the level of German);
+  - **5 years of teaching German**;
+  - **Goethe-Zertifikat C1** (listed under Goethe certificates; it is also the profile's only confirmed qualification and is shown once);
   - levels taught A1–B2;
   - teaches in Hindi and English;
   - exam preparation "Goethe exam preparation at A1–B1";
   - formats: group batch and one-to-one;
   - teaching approach.
-- **Still awaiting confirmation** (listed in `unconfirmed`):
-  - `experience`: no number of years supplied (`[bracketed]` placeholder);
-  - `qualifications`: no qualification confirmed (`[bracketed]` placeholder);
-  - `specialisms`: suggested wording, not yet approved.
-- **No Goethe certificate is claimed**; `goethe` stays empty until the owner confirms one they hold.
+- **Still awaiting confirmation** (listed in `unconfirmed`): `specialisms`, which is suggested wording not yet approved.
+- **Not claimed:** no university degree or separate teaching qualification.
 - Optional: photo, availability.
 
 The validator refuses to publish the profile while any field is unconfirmed or any placeholder remains.

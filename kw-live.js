@@ -56,8 +56,10 @@
       : '<div class="portrait-mono" aria-hidden="true"><span>' + esc(initials(t)) + '</span><small>Portrait pending</small></div>';
     return '<div class="portrait">' + inner + draftFlag(t) + '</div>';
   }
+  /* The six-level strip is visual only; screen readers get the list as text
+     (an aria-label on a plain div is not announced). */
   function levelRow(on) {
-    return '<div class="lvl-row" aria-label="Levels taught: ' + esc(on.join(', ')) + '">' + LEVELS.map(function (l) {
+    return '<div class="lvl-row"><span class="vh">Levels taught: ' + esc(on.join(', ')) + '</span>' + LEVELS.map(function (l) {
       return '<span class="lvl' + (on.indexOf(l) > -1 ? ' on' : '') + '" aria-hidden="true">' + l + '</span>';
     }).join('') + '</div>';
   }
@@ -70,11 +72,12 @@
     var c = D.consultation || {};
     document.querySelectorAll('[data-consult-fee]').forEach(function (el) { el.textContent = c.feeLabel; });
     document.querySelectorAll('[data-consult-days]').forEach(function (el) { el.textContent = c.adjustmentDays + ' days'; });
+    document.querySelectorAll('[data-consult-dayadj]').forEach(function (el) { el.textContent = c.adjustmentDays + '-day'; });
     var unit = [];
     if (c.durationMinutes) unit.push(c.durationMinutes + '-minute session');
     if (c.platform) unit.push('on ' + c.platform);
     if (unit.length && document.querySelector('[data-consult-unit]')) document.querySelector('[data-consult-unit]').textContent = unit.join(' ');
-    if ($('book-steps')) $('book-steps').innerHTML = (c.steps || []).map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
+    if ($('book-steps')) $('book-steps').innerHTML = (c.steps || []).map(function (s) { return '<li>' + esc(String(s).split('{fee}').join(c.feeLabel)) + '</li>'; }).join('');
 
     var email = D.contact && D.contact.email;
     document.querySelectorAll('[data-contact-email]').forEach(function (el) { el.textContent = email; });
@@ -96,6 +99,22 @@
       var life = P.get('LIFETIME');
       if (min && life) sp.textContent = 'From ' + min.label + ' per level, or ' + life.label + ' for Lifetime (all six)';
     }
+  }
+
+  /* Copy that only makes sense once teachers / courses are published
+     carries an honest alternative: data-none="teachers|courses" with
+     data-none-text (and data-none-href on links). On a button-style link
+     only the label changes, so its arrow icon stays. */
+  function initEmptyCopy() {
+    var none = { teachers: !teachers.length, courses: !courses.length };
+    document.querySelectorAll('[data-none]').forEach(function (el) {
+      if (!none[el.getAttribute('data-none')]) return;
+      if (el.hasAttribute('data-none-href')) el.setAttribute('href', el.getAttribute('data-none-href'));
+      var text = el.getAttribute('data-none-text');
+      var label = el.querySelector('.btn-arrow') && el.firstChild && el.firstChild.nodeType === 3 ? el.firstChild : null;
+      if (label) label.nodeValue = text + ' ';
+      else el.textContent = text;
+    });
   }
 
   /* ---------- teacher directory ---------- */
@@ -500,6 +519,7 @@
 
   function init() {
     initCopy();
+    initEmptyCopy();
     initTeacherFilters();
     renderTeachers();
     initDialog();

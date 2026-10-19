@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -26,6 +26,7 @@ import assert from 'node:assert/strict';
 import { startDevServer } from './dev-server.mjs';
 import { call, rid, pkgFor, syntheticBuild, PRACTICE_LIBRARY } from './harness.mjs';
 import { speakingSchedule } from '../../exam/js/sprechen.js';
+import { hotp, base32Decode, stepAt } from '../../access/worker/src/totp.js';
 import { post, start, submit, uploadChunk } from './flow.mjs';
 
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -844,6 +845,9 @@ async function runLeaseExpiry() {
     const radios = `[...document.querySelectorAll('input[type=radio]:not([disabled])')]`;
     const pick = (n) => evaluate(`(() => { const r = ${radios}.filter((x) => !x.closest('.kx-example'))[${n}]; r.click(); return r.dataset.item; })()`);
     const first = await pick(0);
+    for (const t0 = Date.now(); !(await dev.env.DB.prepare('SELECT 1 FROM responses_current WHERE item_id = ?1').bind(first).first()); await sleep(150)) {
+      if (Date.now() - t0 > 15000) throw new Error('the first answer never reached the server');   // "Gespeichert" alone shows before the save
+    }
     await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'first answer saved');
     const lease0 = (await dev.env.DB.prepare('SELECT lease_id, generation FROM attempt_leases').first());
     await dev.env.DB.prepare('UPDATE attempt_leases SET expires_at = 1').run();   // TEST server only: the lease has expired
@@ -934,6 +938,11 @@ async function runTwoTabs() {
     await a.waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'A intro'); await a.click('[data-act="start"][data-module="lesen"]');
     await a.waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'A Lesen');
     const item = await a.evaluate(`(() => { const r = [...document.querySelectorAll('input[type=radio]:not([disabled])')].filter((x) => !x.closest('.kx-example'))[0]; r.click(); return r.dataset.item + '|' + r.value; })()`);
+    // "Gespeichert" is already shown before the click, so wait for the SERVER to hold the answer (the save is debounced);
+    // otherwise B could take over before A's save was sent
+    for (const t0 = Date.now(); !(await dev.env.DB.prepare('SELECT 1 FROM responses_current WHERE item_id = ?1').bind(item.split('|')[0]).first()); await sleep(150)) {
+      if (Date.now() - t0 > 15000) throw new Error('A\'s answer never reached the server');
+    }
     await a.waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'A saved');
     // B: the same attempt is open in A
     await B.send('Page.navigate', { url });
@@ -993,11 +1002,96 @@ async function runLeaseExpirySprechen() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* RATER 2FA (OD-19) in a real browser: the dev server runs the real Access Worker in-process (mfa: true), so the rater
+   screen's enrolment, recovery codes, expiry, wrong code and recovery-code paths run against the real routes. The test
+   computes the TOTP from the key shown on the page, as an authenticator app would. */
+async function runRater2fa() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), mfa: true });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const text = () => evaluate('document.body.innerText');
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      throw new Error(`timeout: ${label}\n${(await text()).slice(0, 600)}`);
+    };
+    const h1 = (t) => waitFor(`document.querySelector('h1')?.textContent === ${JSON.stringify(t)}`, 10000, `h1 ${t}`);
+    const fill = (sel, v) => evaluate(`(() => { const i = document.querySelector(${JSON.stringify(sel)}); i.value = ${JSON.stringify(v)}; i.dispatchEvent(new Event('input', { bubbles: true })); return true; })()`);
+    const submit = (sel = 'form.kx-mfa') => evaluate(`document.querySelector(${JSON.stringify(sel)}).requestSubmit()`);
+    const base = `http://127.0.0.1:${dev.port}/exam/`;
+    const as = async (alias, page) => { await send('Page.navigate', { url: `${base}dev/as/${alias}` }); await sleep(300); if (page) await send('Page.navigate', { url: base + page }); };
+    const nowCode = (secret, off = 0) => hotp(base32Decode(secret), stepAt(Math.floor(Date.now() / 1000)) + off);
+    const expire = () => dev.access.env.DB.prepare('UPDATE sessions SET mfa_verified_at = 1 WHERE user_id = ?1').bind(dev.users.rater1).run();
+
+    // 1. not enrolled → enrolment; focus on the heading; key shown grouped; a link for apps on this device
+    await as('rater1', 'rater.html');
+    await h1('Zweiten Faktor einrichten');
+    assert.equal(await evaluate(`document.activeElement === document.querySelector('h1')`), true, 'focus on the heading');
+    await evaluate(`document.querySelector('[data-act="mfa-enrol"]').click()`);
+    await h1('Authenticator-App verbinden');
+    const secret = (await evaluate(`document.querySelector('.kx-mfa-secret').textContent`)).replace(/\s/g, '');
+    assert.match(secret, /^[A-Z2-7]{32}$/);
+    assert.match(await evaluate(`document.querySelector('a[href^="otpauth://totp/"]').getAttribute('href')`), /secret=[A-Z2-7]{32}&issuer=Klarweg/);
+    await fill('#kx-mfa-code', await nowCode(secret));
+    await submit();
+    // 2. recovery codes shown once; continuing requires the "saved" confirmation
+    await h1('Wiederherstellungscodes');
+    const codes = await evaluate(`[...document.querySelectorAll('.kx-mfa-codes code')].map((c) => c.textContent)`);
+    assert.equal(codes.length, 10);
+    await submit();
+    await waitFor(`/Bitte bestätigen Sie, dass Sie die Codes gespeichert haben/.test(document.querySelector('.kx-rate-msg').textContent)`, 3000, 'saved confirmation required');
+    await evaluate(`document.querySelector('#kx-mfa-saved').click()`); await submit();
+    await h1('Bewertung');
+    assert.match(await text(), /Zweiter Faktor eingerichtet und bestätigt/);
+    // 3. after 12 h (simulated): asked again; a wrong code is reported in the alert region and the field is cleared
+    await expire();
+    await as('rater1', 'rater.html');
+    await h1('Anmeldung bestätigen');
+    await fill('#kx-mfa-code', '000000'); await submit();
+    await waitFor(`/nicht gültig/.test(document.querySelector('.kx-rate-msg[role="alert"]').textContent)`, 5000, 'wrong code message');
+    assert.equal(await evaluate(`document.querySelector('#kx-mfa-code').value === '' && document.activeElement === document.querySelector('#kx-mfa-code')`), true);
+    await fill('#kx-mfa-code', await nowCode(secret, 1)); await submit();   // the enrolment used the current step
+    await h1('Bewertung');
+    assert.match(await text(), /Bestätigt\./);
+    // 4. recovery code path
+    await expire();
+    await as('rater1', 'rater.html');
+    await h1('Anmeldung bestätigen');
+    await evaluate(`document.querySelector('[data-act="mfa-use-recovery"]').click()`);
+    await waitFor(`document.querySelector('#kx-mfa-recovery')`, 3000, 'recovery field');
+    await fill('#kx-mfa-recovery', codes[0].toUpperCase()); await submit();
+    await h1('Bewertung');
+    assert.match(await text(), /Noch 9 Wiederherstellungscodes übrig/);
+    // mobile width: no horizontal scroll on the enrolment-type screens
+    await expire(); await as('rater1', 'rater.html'); await h1('Anmeldung bestätigen');
+    await send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true }); await sleep(300);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 390 px');
+    await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false });
+    // 5. learners never see any of it
+    await as('learner', '');
+    await waitFor(`document.querySelector('[data-act="create"]')`, 10000, 'learner start screen');
+    assert.equal(/zweiten Faktor|Anmeldung bestätigen/i.test(await text()), false);
+    const events = (await dev.access.env.DB.prepare('SELECT event FROM mfa_audit ORDER BY id').all()).results.map((e) => e.event);
+    assert.deepEqual(events, ['enrolled', 'verify_failed', 'verified', 'recovery_used']);
+    const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    log(`rater 2FA ${PRACTICE.name}`, 'PASS', { events });
+    return exceptions;
+  } finally { b.close(); dev.server.close(); }
+}
+
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'rater-2fa') { results.push({ vp: `rater 2FA ${PRACTICE.name}`, uncaught: await fn() }); continue; }
   if (name === 'two-tabs') { results.push({ vp: `two tabs ${PRACTICE.name}`, uncaught: await fn() }); continue; }
   if (name === 'lease-expiry') { results.push({ vp: `lease expiry ${PRACTICE.name}`, uncaught: await fn() }, { vp: `lease expiry Sprechen ${PRACTICE.name}`, uncaught: await runLeaseExpirySprechen() }); continue; }
   if (name === 'sprechen-topic') { results.push({ vp: `sprechen topic ${PRACTICE.name} (t1 + t2)`, uncaught: await fn() }); continue; }

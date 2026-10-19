@@ -14,25 +14,56 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import worker from '../src/index.js';
 import { makeEnv, grant, role, ROOT, PROXY_SECRET, FORM_DIR, PRACTICE_LIBRARY } from './harness.mjs';
+import accessWorker from '../../access/worker/src/index.js';
+import { createD1 } from '../../access/worker/test/d1-sqlite.mjs';
+import { hashSessionToken } from '../../access/worker/src/sessions.js';
+
+/* mfa: true (opt-in) runs the real klarweg-access Worker in-process for /auth/mfa/* with an in-memory Access D1: every
+   local test user gets an Access user + session, and the exam requests carry X-KW-MFA-At from that session exactly as
+   the Access proxy attests it. Default (false): the local test users count as verified (OD-19 is then not exercised). */
+async function makeAccess(users) {
+  const env = { DB: createD1(path.join(ROOT, 'access/worker')), RATE_SALT: 'dev-salt', TOTP_ENC_KEY: Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString('base64') };
+  const tokens = {}, t = Math.floor(Date.now() / 1000);
+  for (const [alias, id] of Object.entries(users)) {
+    await env.DB.prepare('INSERT INTO users (id, email, name, created_at, updated_at) VALUES (?1, ?2, ?3, ?4, ?4)').bind(id, `${alias}@dev.local`, alias, t).run();
+    tokens[alias] = crypto.randomUUID().replace(/-/g, '') + crypto.randomUUID().replace(/-/g, '');
+    await env.DB.prepare('INSERT INTO sessions (token_hash, user_id, created_at, expires_at) VALUES (?1, ?2, ?3, ?4)').bind(await hashSessionToken(tokens[alias]), id, t, t + 86400).run();
+  }
+  const mfaAt = async (alias) => { const r = await env.DB.prepare('SELECT mfa_verified_at FROM sessions WHERE token_hash = ?1').bind(await hashSessionToken(tokens[alias])).first(); return r && r.mfa_verified_at; };
+  return { env, tokens, mfaAt };
+}
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8' };
 
-export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0' } = {}) {
+export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0', mfa = false } = {}) {
   const FORMS = { s0: [FORM_DIR], ...Object.fromEntries(PRACTICE_LIBRARY.map((f) => [f.name.toLowerCase(), [f.dir]])), practice: PRACTICE_LIBRARY.map((f) => f.dir) };
   if (!FORMS[form]) throw new Error(`unknown form ${form} (${Object.keys(FORMS).join('|')})`);
   const h = makeEnv({ formDirs: FORMS[form] });
   await grant(h.env, user);
   const users = { learner: user, rater1: `usr_${crypto.randomUUID()}`, rater2: `usr_${crypto.randomUUID()}`, outsider: `usr_${crypto.randomUUID()}` };
   await role(h.env, users.rater1, 'rater'); await role(h.env, users.rater2, 'rater');
-  const userFor = (req) => { const m = /(?:^|;\s*)kx-dev-as=([a-z0-9]+)/.exec(req.headers.cookie || ''); return (m && users[m[1]]) || user; };
+  const aliasFor = (req) => { const m = /(?:^|;\s*)kx-dev-as=([a-z0-9]+)/.exec(req.headers.cookie || ''); return (m && users[m[1]]) ? m[1] : 'learner'; };
+  const userFor = (req) => users[aliasFor(req)];
+  const access = mfa ? await makeAccess(users) : null;
   delete h.env.__clock;                            // real time in the browser
   const server = http.createServer(async (req, res) => {
     try {
       const url = new URL(req.url, 'http://127.0.0.1');
+      if (access && url.pathname.startsWith('/auth/mfa/')) {   // the real Access routes, server-to-server (no Origin)
+        const chunks = []; for await (const c of req) chunks.push(c);
+        const headers = { cookie: `kw_session=${access.tokens[aliasFor(req)]}` };
+        if (req.headers['content-type']) headers['content-type'] = req.headers['content-type'];
+        const r = await accessWorker.fetch(new Request('https://klarweg-access.internal' + url.pathname, { method: req.method, headers, body: ['GET', 'HEAD'].includes(req.method) ? undefined : Buffer.concat(chunks) }), access.env, { waitUntil() {} });
+        res.writeHead(r.status, { 'content-type': r.headers.get('content-type') || 'application/json', 'cache-control': 'no-store' });
+        res.end(Buffer.from(await r.arrayBuffer()));
+        return;
+      }
       if (url.pathname.startsWith('/exam/v1/')) {
         const chunks = []; for await (const c of req) chunks.push(c);
-        // the local test users count as having passed the second factor just now (OD-19 is exercised by the Access tests)
-        const headers = { 'x-kw-proxy-auth': PROXY_SECRET, 'x-kw-user': userFor(req), 'x-kw-mfa-at': String(Math.floor(Date.now() / 1000)) };
+        // OD-19: with mfa (opt-in) the freshness comes from the in-process Access session; otherwise the local test users count as verified now
+        const headers = { 'x-kw-proxy-auth': PROXY_SECRET, 'x-kw-user': userFor(req) };
+        const at = access ? await access.mfaAt(aliasFor(req)) : Math.floor(Date.now() / 1000);
+        if (at) headers['x-kw-mfa-at'] = String(at);
         if (req.headers['content-type']) headers['content-type'] = req.headers['content-type'];
         const r = await worker.fetch(new Request('https://klarweg-exam.internal' + url.pathname + url.search,
           { method: req.method, headers, body: ['GET', 'HEAD'].includes(req.method) ? undefined : Buffer.concat(chunks) }), h.env);
@@ -57,7 +88,7 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
     }
   });
   await new Promise((r) => server.listen(port, '127.0.0.1', r));
-  return { server, port: server.address().port, env: h.env, user, users, form };
+  return { server, port: server.address().port, env: h.env, user, users, form, access };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

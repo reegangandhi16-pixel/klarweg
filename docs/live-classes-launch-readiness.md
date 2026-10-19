@@ -15,16 +15,17 @@ The launch gate in `scripts/live-classes-static.test.mjs` fails CI if the page i
 2. Live-class policies not written: missed class, cancellation/refund, scheduling, fee inclusions.
 3. No published teacher profile.
 4. No published live course.
-5. `index.html` says "No live classes" (visible FAQ and FAQPage structured data).
-6. `terms.html` covers only self-paced content.
-7. `privacy.html` does not describe the consultation request.
+5. `terms.html` covers only self-paced content.
+6. `privacy.html` does not describe the consultation request.
+
+The former blocker "`index.html` says No live classes" is cleared in the repository by the homepage FAQ change (Variant A, see D1). Clearing it in the repository is not the same as publishing it; see the D1 status below.
 
 The check also reports, when they occur:
 - a fee in the meta descriptions that differs from `consultation.feeLabel`;
 - a homepage FAQ whose FAQPage structured data differs from the visible answer;
 - a homepage FAQ that says enrolment is open while no published course is open.
 
-Proposed wording for blockers 5–7 (homepage FAQ, Terms, Privacy) is in **`docs/live-classes-review-drafts.md`**. It is a draft for review, not approved.
+Proposed wording for the homepage FAQ and for blockers 5–6 (Terms, Privacy) is in **`docs/live-classes-review-drafts.md`**. It is a draft for review, not approved.
 
 ---
 
@@ -38,8 +39,8 @@ Proposed wording for blockers 5–7 (homepage FAQ, Terms, Privacy) is in **`docs
 | 7-day money-back guarantee | `refund-policy.html` | Covers single-level and Lifetime purchases **only**. It does not cover live classes or consultations, and the page says so. |
 | The service is self-paced content; a level gives 2 years' access | `terms.html` §2, §4 | Live classes are not yet part of the Terms. |
 | Cashfree catalog has no live-course or consultation product | `kw-products.js`, `access/worker/src/products.js` | Nothing on the page takes payment; the form only prepares an email. |
-| Brand positioning: self-learning platform with Klarweg AI | `uploads/klarweg-os.md`, `index.html` FAQ | Superseded for live classes by D1 (2026-10-20); the homepage FAQ still has to change. |
-| Klarweg AI gives feedback on German the learner writes or says | `privacy.html` (Klarweg AI feedback) | Basis for the AI sentence in the proposed homepage FAQ. |
+| Brand positioning: self-learning platform with Klarweg AI | `uploads/klarweg-os.md`, `index.html` FAQ | Superseded for live classes by D1 (2026-10-20); the homepage FAQ now announces them (Variant A). |
+| Klarweg AI gives feedback on German the learner writes or says | `privacy.html` (Klarweg AI feedback) | Basis for the AI sentence in the homepage FAQ. |
 | The consultation form only opens the visitor's email app; nothing is sent or stored by the page | `kw-live.js`, static test "only hands off to email" | Basis for the proposed Privacy Policy row. |
 
 **Not found anywhere in the repository, git history or project documents:** teacher names, qualifications or photos; live course offerings, schedules, batch sizes, start dates, durations, fees or materials; consultation duration, platform or payment method; live-class policies; testimonials.
@@ -55,10 +56,11 @@ Each item is needed before launch unless marked otherwise. A recommendation is g
 **D1. Are live classes part of Klarweg? DECIDED: YES (owner, 2026-10-20).**
 Klarweg intends to offer teacher-led live German classes. This sets the direction only; it approves no teacher, course, schedule, fee, policy or date.
 *Follow-up:*
-- the homepage FAQ and its FAQPage structured data must change together (proposed: Variant A in `live-classes-review-drafts.md`);
-- the brand foundation (`uploads/klarweg-os.md`) still describes a self-learning-only product and should be updated by the owner.
-
-*Open:* approve the FAQ wording, and choose when it goes live. Variant A states only the intention, so it can go live before the page. It is still a public announcement.
+- **Homepage announcement (Variant A).** The two stages are separate:
+  - *Prepared:* the visible FAQ answer and the FAQPage structured data in `index.html` carry the Variant A wording, identical in both. A static test checks that it states the intention, says live classes are "not open for booking yet", has no link, fee, date or number, and matches its structured data.
+  - *Published:* only when that change is merged to `main` and the site is deployed. Until then the live homepage still says "No live classes". Merging needs the owner's review of the wording, because once merged it is a public announcement.
+- **Variant B** (with a link to the Live Classes page) replaces Variant A only as part of the launch checklist (D8).
+- The brand foundation (`uploads/klarweg-os.md`) still describes a self-learning-only product and should be updated by the owner.
 
 **D2. Teachers.**
 *Why it matters:* the page shows only facts a teacher actually holds; a profile is published only from their CV and certificates.
@@ -233,8 +235,8 @@ Terms/Privacy drafts approved (yes / with edits / lawyer review first):
 How live fees are collected (manual UPI/bank transfer / new online product):
 
 === HOMEPAGE FAQ (D1 follow-up) ===
-Variant A wording approved (yes / edits):
-Go live with Variant A before the page launches? (yes / only at launch):
+Variant A wording approved for publication (yes / edits):
+Publish it now, before the page launches? (yes / only at launch):
 ```
 
 ---

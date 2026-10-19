@@ -1,6 +1,6 @@
 # Live Classes — proposed wording for owner review
 
-**Status: PROPOSED. Not approved, not published.** Nothing in this document is live. The legal wording below is a starting point for the owner (and, if wanted, a lawyer). It is not legal advice and has not been reviewed by anyone. `index.html`, `terms.html` and `privacy.html` are unchanged.
+**Status: PROPOSED. Not approved, not published.** Nothing in this document is live. The legal wording below is a starting point for the owner (and, if wanted, a lawyer). It is not legal advice and has not been reviewed by anyone. Variant A of the homepage FAQ (§1) has been applied to `index.html` for review; it is published only once merged and deployed. `terms.html` and `privacy.html` are unchanged.
 
 Context: the owner decided on 2026-10-20 that Klarweg intends to offer teacher-led live German classes (decision D1 in `live-classes-launch-readiness.md`). That decision confirms the direction only. No teacher, course, batch, schedule, fee, policy or enrolment date is approved yet. Every wording below is written so that it stays true until those are approved.
 
@@ -10,7 +10,7 @@ Context: the owner decided on 2026-10-20 that Klarweg intends to offer teacher-l
 
 ## 1. Homepage FAQ (`index.html`)
 
-Today the visible FAQ (around line 6035) and the FAQPage structured data (around line 76) both say "No live classes… This is deliberate". Both must change together, with identical text: `npm run live:readiness` reports a mismatch between them.
+Before D1, the visible FAQ (around line 6035) and the FAQPage structured data (around line 76) both said "No live classes… This is deliberate". Both change together, with identical text: `npm run live:readiness` reports a mismatch between them.
 
 ### Variant A: before enrolment opens (can go live once approved)
 

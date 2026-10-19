@@ -24,7 +24,11 @@ export function requireUser(request) {
    through. Fresh = within 12 hours (D2), at most 60 s in the future (clock skew between the Workers). */
 export const STAFF_ROLES = ['rater', 'lead_rater', 'exam_admin'];
 export const MFA_FRESH_MS = 12 * 60 * 60 * 1000;
+/* The Access proxy holds TOTP_ENC_KEY; without it it sends X-KW-MFA-Unavailable and attests nothing. Staff work then
+   fails closed with 503 mfa_unavailable, whatever the session's last verification (A4 row 10). */
+export const mfaUnavailable = (request) => request.headers.get('x-kw-mfa-unavailable') === '1';
 export function mfaFresh(request, env) {
+  if (mfaUnavailable(request)) return false;
   const at = Number(request.headers.get('x-kw-mfa-at') || '');
   if (!Number.isFinite(at) || at <= 0) return false;
   const t = now(env);

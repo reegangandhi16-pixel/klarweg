@@ -196,3 +196,41 @@ test('OD-19: signed out → 401; no TOTP_ENC_KEY → mfa_unavailable (never a we
   assert.equal(e.status, 503); assert.equal(e.json.error, 'mfa_unavailable');
   assert.equal((await req(noKey.env, 'POST', '/auth/mfa/verify', { cookie: u.cookie, body: { code: '000000' } })).json.error, 'mfa_unavailable');
 });
+
+test('OD-19 A4 row 10: without TOTP_ENC_KEY every staff route fails closed (503 mfa_unavailable), even for a session verified minutes ago; learners unaffected; restoring the key grants nothing by itself', async () => {
+  const { env, exam, seen } = makeEnv();
+  const lead = await signup(env), learner = await signup(env);
+  await role(exam.env, lead.id, 'lead_rater'); await grant(exam.env, learner.id);
+  await enrol(env, lead.cookie);
+  // 1. key configured, freshly verified staff session → staff routes open
+  assert.equal((await queue(env, lead.cookie)).status, 200);
+  // a completed foreign attempt id is not needed: an unknown id must still be refused before any lookup reveals anything
+  const foreignResult = `/exam/v1/attempts/att_${crypto.randomUUID()}/result`;
+  // 2. the same session with the key removed (same DB, same session row, mfa_verified_at still fresh)
+  const noKey = { ...env, TOTP_ENC_KEY: undefined };
+  const fresh = await env.DB.prepare('SELECT mfa_verified_at AS t FROM sessions WHERE user_id = ?1 AND mfa_verified_at IS NOT NULL').bind(lead.id).first();
+  assert.ok(fresh.t > Math.floor(Date.now() / 1000) - 60, 'the session is inside the 12 h window');
+  for (const [m, p, body] of [['GET', '/exam/v1/admin/rating-queue'], ['GET', `/exam/v1/admin/attempts/att_${crypto.randomUUID()}/productive`],
+    ['POST', '/exam/v1/admin/ratings', {}], ['GET', `/exam/v1/admin/attempts/att_${crypto.randomUUID()}/recordings/1/t1`]]) {
+    const r = await req(noKey, m, p, { cookie: lead.cookie, body });
+    assert.equal(r.status, 503, `${m} ${p}`); assert.equal(r.json.error, 'mfa_unavailable', `${m} ${p}`);
+    assert.equal(seen.at(-1).mfa, null, 'no verification time is attested without the key');
+  }
+  // 3. a forged attestation header changes nothing
+  const forged = await req(noKey, 'GET', '/exam/v1/admin/rating-queue', { cookie: lead.cookie, headers: { 'x-kw-mfa-at': String(Math.floor(Date.now() / 1000)), 'x-kw-mfa-unavailable': '0' } });
+  assert.equal(forged.json.error, 'mfa_unavailable');
+  // 4. enrolment and verification are unavailable too
+  assert.equal((await req(noKey, 'POST', '/auth/mfa/enroll', { cookie: lead.cookie })).json.error, 'mfa_unavailable');
+  assert.equal((await req(noKey, 'POST', '/auth/mfa/verify', { cookie: lead.cookie, body: { code: '000000' } })).json.error, 'mfa_unavailable');
+  // 5. learners keep working; non-staff on staff routes keep their plain 403
+  assert.equal((await req(noKey, 'GET', '/exam/v1/availability', { cookie: learner.cookie })).status, 200);
+  assert.equal((await queue(noKey, learner.cookie)).status, 403);
+  assert.notEqual((await req(noKey, 'GET', foreignResult, { cookie: learner.cookie })).status, 503, 'learner result route is not a staff gate');
+  // 6. a NEW key (rotation) cannot decrypt the old enrolment: a stale session is asked to verify, never let through
+  const rotated = { ...env, TOTP_ENC_KEY: Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString('base64') };
+  await env.DB.prepare('UPDATE sessions SET mfa_verified_at = 1 WHERE user_id = ?1').bind(lead.id).run();
+  assert.equal((await queue(rotated, lead.cookie)).json.error, 'mfa_required');
+  const v = await req(rotated, 'POST', '/auth/mfa/verify', { cookie: lead.cookie, body: { code: '000000' } });
+  assert.notEqual(v.status, 200, 'no verification succeeds by accident after rotation');
+  assert.equal((await queue(rotated, lead.cookie)).json.error, 'mfa_required');
+});

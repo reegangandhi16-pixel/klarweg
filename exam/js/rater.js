@@ -19,6 +19,15 @@ function screen(html) { for (const u of audioUrls.splice(0)) URL.revokeObjectURL
 function errorText(e) { const code = e instanceof ExamApiError ? e.code : 'network'; return ERROR_TEXT[code] || `Fehler (${code}).`; }
 /* OD-19: staff routes answer mfa_required until this session has passed the second factor (valid 12 h). */
 const mfaNeeded = (e) => e instanceof ExamApiError && e.code === 'mfa_required';
+/* Without the server's second-factor key every staff route answers mfa_unavailable, even for a session verified a
+   minute ago (fail closed). Nothing already on screen stays visible: the page drops the loaded attempt and any unsaved
+   rating and shows only the notice. */
+const mfaDown = (e) => e instanceof ExamApiError && e.code === 'mfa_unavailable';
+function showUnavailable() {
+  current = null; unsaved = null; enrolment = null; renderSeq++;
+  screen(`<main class="kx-card"><h1>Bewertung</h1><p class="kx-error" role="alert">${esc(ERROR_TEXT.mfa_unavailable)}</p>`
+    + '<button type="button" class="kx-btn kx-btn-quiet" data-act="queue">Erneut versuchen</button></main>');
+}
 let enrolment = null;   // { secret, uri } while the authenticator app is being connected
 /* A rating that could not be saved because the second factor had expired: kept in memory only (never sent again on
    its own), restored into the form after verification so the rater can check it and save explicitly. */
@@ -33,6 +42,7 @@ async function showQueue(note = '') {
   let q;
   try { q = await api.ratingQueue(); } catch (e) {
     if (mfaNeeded(e)) return showMfa();
+    if (mfaDown(e)) return showUnavailable();
     if (e instanceof ExamApiError && e.code === 'auth_required' && (await api.cookieCheck()) === false) e = new ExamApiError(401, 'cookies_blocked');
     return screen(`<main class="kx-card"><h1>Bewertung</h1><p class="kx-error" role="alert">${esc(errorText(e))}</p></main>`); }
   const rows = q.attempts.map((a) => `<li class="kx-queue-row"><span class="kx-meta">${esc(a.attempt_id.slice(0, 12))}…</span> `
@@ -60,7 +70,7 @@ function unitForm(u, round, data) {
 async function showAttempt(attemptId, note = '') {
   const seq = ++renderSeq;
   let d;
-  try { d = await api.productive(attemptId); } catch (e) { if (seq === renderSeq) { if (mfaNeeded(e)) showMfa(); else showQueue(errorText(e)); } return; }
+  try { d = await api.productive(attemptId); } catch (e) { if (seq === renderSeq) { if (mfaNeeded(e)) showMfa(); else if (mfaDown(e)) showUnavailable(); else showQueue(errorText(e)); } return; }
   if (seq !== renderSeq) return;   // a later render has fresher data; never paint an older state over it
   current = d;
   const parts = d.modules.map((m) => {
@@ -109,7 +119,7 @@ app.addEventListener('submit', async (e) => {
   try {
     const r = await api.rate({ attempt_id: current.attempt_id, item_id: u.item_id, round: ratingRound(current, u.module), bands });
     await showAttempt(current.attempt_id, `Gespeichert: ${points(r.total)} Punkte (Runde ${r.round}).`);
-  } catch (err) { if (mfaNeeded(err)) { unsaved = { attempt_id: current.attempt_id, item_id: u.item_id, bands }; return showMfa('Ihre Bestätigung ist abgelaufen. Die Bewertung wurde noch nicht gespeichert; Ihre Auswahl bleibt erhalten.'); } msg.textContent = errorText(err); btn.disabled = false; }
+  } catch (err) { if (mfaNeeded(err)) { unsaved = { attempt_id: current.attempt_id, item_id: u.item_id, bands }; return showMfa('Ihre Bestätigung ist abgelaufen. Die Bewertung wurde noch nicht gespeichert; Ihre Auswahl bleibt erhalten.'); } if (mfaDown(err)) return showUnavailable(); msg.textContent = errorText(err); btn.disabled = false; }
 });
 app.addEventListener('click', (e) => {
   const b = e.target.closest('button'); if (!b) return;
@@ -157,7 +167,7 @@ async function loadRecording(b) {
     const blob = await api.recording(current.attempt_id, b.dataset.part, b.dataset.turn);
     const url = URL.createObjectURL(blob); audioUrls.push(url);
     cell.innerHTML = `<audio controls preload="metadata" src="${url}" aria-label="Aufnahme Teil ${esc(b.dataset.part)}, ${esc(b.dataset.turn)}"></audio>`;
-  } catch (err) { if (mfaNeeded(err)) return showMfa(); b.disabled = false; b.textContent = 'Aufnahme laden'; cell.insertAdjacentHTML('beforeend', `<p class="kx-rate-msg" role="status">${esc(errorText(err))}</p>`); }
+  } catch (err) { if (mfaNeeded(err)) return showMfa(); if (mfaDown(err)) return showUnavailable(); b.disabled = false; b.textContent = 'Aufnahme laden'; cell.insertAdjacentHTML('beforeend', `<p class="kx-rate-msg" role="status">${esc(errorText(err))}</p>`); }
 }
 
 showQueue();

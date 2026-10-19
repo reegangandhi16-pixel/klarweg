@@ -7,6 +7,7 @@
    capability-based (signed token), so it is forwarded without a session. */
 import { withCors } from "./cors.js";
 import { getSessionToken, findSessionUser } from "./sessions.js";
+import { hasEncKey } from "./totp.js";
 
 const MEDIA_RE = /^\/exam\/v1\/media\/[A-Za-z0-9_.-]{20,500}$/;
 const FORWARD_HEADERS = ["content-type", "content-length"];
@@ -63,8 +64,11 @@ export async function examProxy(request, env, url) {
     if (!user) return withCors(jsonError(401, "auth_required"), request);
     headers.set("x-kw-user", user.id);
     /* OD-19: when this session last passed the second factor (unix seconds). The exam Worker requires it to be fresh
-       on rater/admin routes. Browser-sent x-kw-* headers never reach here, so it cannot be asserted by a client. */
-    if (Number.isFinite(user.mfaVerifiedAt)) headers.set("x-kw-mfa-at", String(user.mfaVerifiedAt));
+       on rater/admin routes. Browser-sent x-kw-* headers never reach here, so it cannot be asserted by a client.
+       Fail closed (A4 row 10): without a usable TOTP_ENC_KEY nothing is attested, not even a verification still inside
+       the 12 h window, and the exam Worker is told the second factor is unavailable so staff get 503 mfa_unavailable. */
+    if (!hasEncKey(env)) headers.set("x-kw-mfa-unavailable", "1");
+    else if (Number.isFinite(user.mfaVerifiedAt)) headers.set("x-kw-mfa-at", String(user.mfaVerifiedAt));
   }
 
   const init = { method: request.method, headers };

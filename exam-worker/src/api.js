@@ -666,12 +666,13 @@ export async function completeAttempt(env, userId, attemptId, request) {
   });
 }
 
-export async function getResult(env, userId, attemptId, { mfaFresh = false } = {}) {
+export async function getResult(env, userId, attemptId, { mfaFresh = false, mfaUnavailable = false } = {}) {
   const isStaff = await hasRole(env, userId, ['lead_rater', 'exam_admin']);
   const attempt = await loadAttempt(env, attemptId, userId, { allowAdmin: isStaff });
   const foreign = attempt.user_id !== userId;
   // OD-19: reading another learner's result is staff work, so it needs the same fresh second factor as /admin/*.
   // Checked before anything about the attempt's state is revealed. A learner's own result needs no second factor.
+  if (foreign && mfaUnavailable) fail(503, 'mfa_unavailable');   // fail closed without the second-factor key
   if (foreign && !mfaFresh) fail(401, 'mfa_required');
   if (attempt.status !== 'completed') fail(409, 'result_not_ready');
   const row = await env.DB.prepare('SELECT json FROM results WHERE attempt_id = ?1').bind(attemptId).first();

@@ -31,8 +31,10 @@
        file://, so a forgotten `true` can never reach the live site. */
     showDrafts: false,
 
+    /* The site's documented address, as on contact.html, privacy.html
+       and terms.html (the old klarweg-domain inbox is retired). */
     contact: {
-      email: 'hallo@klarweg.app',
+      email: 'klarwegofficial@gmail.com',
       replyTime: 'within two working days, Monday to Friday'
     },
 
@@ -48,10 +50,10 @@
       platform: null,          // e.g. 'Google Meet' — shown only when set
       /* How a request becomes a booking. There is no scheduling or
          payment integration for consultations yet, so every request is
-         confirmed by a person over email. */
+         confirmed by a person over email. {fee} is replaced by feeLabel. */
       steps: [
         'You send a request with your level, goal and preferred times.',
-        'We reply by email with a confirmed time slot and how to pay the ₹100 fee.',
+        'We reply by email with a confirmed time slot and how to pay the {fee} fee.',
         'Once your payment is confirmed, we email you the joining link.',
         'You meet the teacher, who assesses your level and recommends a course.'
       ]

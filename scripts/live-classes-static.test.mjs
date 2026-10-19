@@ -73,3 +73,23 @@ test('LIVE: the consultation form only hands off to email (no form action, no fe
   assert.equal(/\bfetch\(|XMLHttpRequest|sendBeacon|cashfree|checkout/i.test(js), false);
   assert.match(js, /window\.location\.href = 'mailto:' \+ D\.contact\.email/);
 });
+
+test('LIVE: consultation requests go to the site\'s documented address (the one on contact.html), never the retired klarweg.app one', () => {
+  const contact = read('contact.html').match(/href="mailto:([^"?]+)"/);
+  assert.ok(contact, 'contact.html publishes a mailto address');
+  assert.equal(loadData().contact.email, contact[1]);
+  for (const f of FILES) assert.equal(read(f).includes('klarweg.app'), false, `${f} still mentions klarweg.app`);
+  for (const m of html.matchAll(/(?:data-contact-email>|mailto:)([^<"]+)/g)) assert.equal(m[1], contact[1], 'the no-JS fallback text matches too');
+});
+
+test('LIVE: the consultation fee and adjustment period are read from the data file, not typed into the page', () => {
+  // the publish checklist comment and the meta descriptions are static by nature (see checklist item 6)
+  const body = html.slice(html.indexOf('<body>')).replace(/<span[^>]*\bdata-consult-(?:fee|days|dayadj)\b[^>]*>[^<]*<\/span>/g, '');
+  assert.equal(/₹\s?\d/.test(body), false, 'a fee is typed into the page body');
+  assert.equal(/(?:within|after) \d+ days|\d+-day adjust/i.test(body), false, 'the adjustment period is typed into the page body');
+  const D = loadData();
+  assert.equal(D.consultation.steps.some((x) => /₹\s?\d/.test(x)), false, 'booking steps use {fee}, not a typed fee');
+  for (const [attr, want] of [['fee', D.consultation.feeLabel], ['days', D.consultation.adjustmentDays + ' days'], ['dayadj', D.consultation.adjustmentDays + '-day']]) {
+    for (const m of html.matchAll(new RegExp(`<span[^>]*\\bdata-consult-${attr}\\b[^>]*>([^<]*)</span>`, 'g'))) assert.equal(m[1], want, `no-JS fallback for data-consult-${attr}`);
+  }
+});

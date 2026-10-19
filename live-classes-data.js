@@ -73,8 +73,40 @@
       feeIncludes: null
     },
 
-    /* ---------- teachers ---------- */
+    /* ---------- teachers ----------
+       `unconfirmed` (optional) lists the fields still awaiting the
+       owner's confirmation: suggested wording or preliminary,
+       owner-provided information. A teacher cannot be published while it
+       lists anything (scripts/live-classes-readiness.mjs). It is never
+       shown on the page. */
     teachers: [
+      {
+        /* The owner's own profile, DRAFT (2026-10-20). Name, teaching
+           languages, levels and approach are preliminary owner-provided
+           information; headline, approach wording and specialisms are
+           suggestions. [Bracketed] fields are unknown: no years,
+           certificate or level is claimed until confirmed in writing.
+           This repository is public: add education or certificate
+           details only once confirmed and approved for publication. */
+        id: 'reegan-gandhi',
+        draft: true,
+        name: 'Reegan Gandhi',
+        photo: null,
+        photoAlt: '',
+        headline: 'German grammar and Goethe exam preparation, explained in Hindi and English',
+        experience: '[Years to confirm] of teaching German',
+        proficiency: '[German level to confirm]',
+        qualifications: ['[Qualification to confirm, as on the certificate]'],
+        goethe: [],
+        levels: ['A1', 'A2', 'B1'],
+        teachesIn: ['Hindi', 'English'],
+        specialisms: ['German grammar', 'Structured learning for Hindi-speaking learners', 'Goethe exam preparation'],
+        examPrep: 'Goethe exam preparation at A1–B1',
+        approach: 'Every topic starts with a clear explanation of the grammar, in Hindi or English, followed by practical examples. You then practise with the structure yourself and get corrected as you go, one step at a time.',
+        formats: [],
+        availability: null,
+        unconfirmed: ['headline', 'experience', 'proficiency', 'qualifications', 'levels', 'teachesIn', 'specialisms', 'examPrep', 'approach', 'formats']
+      },
       {
         id: 'teacher-1',
         draft: true,

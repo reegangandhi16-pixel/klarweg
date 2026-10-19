@@ -26,6 +26,13 @@ export const POLICIES = ['missedClass', 'cancellationRefund', 'scheduling', 'fee
 export const PAGE_FILES = ['live-classes.html', 'kw-live.js', 'live-classes-data.js'];
 
 const has = (v) => (Array.isArray(v) ? v.length > 0 : v != null && String(v).trim() !== '');
+/* [Bracketed] template text inside any string value of an entry. JSON
+   brackets don't count: `levels: ['A1']` is not a placeholder. */
+export function placeholders(x) {
+  if (typeof x === 'string') return /\[[^\]]+\]/.test(x) ? [x] : [];
+  if (x && typeof x === 'object') return Object.values(x).flatMap(placeholders);
+  return [];
+}
 const read = (root, f) => fs.readFileSync(path.join(root, f), 'utf8');
 
 export function loadData(root = ROOT) {
@@ -66,7 +73,11 @@ export function checkData(D, root = ROOT) {
     subset(w, 'levels', t.levels, LEVELS);
     subset(w, 'formats', t.formats || [], FORMATS);
     if (!Array.isArray(t.teachesIn)) err(w, 'teachesIn must be a list');
+    if (t.unconfirmed != null && !Array.isArray(t.unconfirmed)) err(w, 'unconfirmed must be a list of field names');
+    for (const f of t.unconfirmed || []) if (!(f in t)) err(w, `unconfirmed names unknown field "${f}"`);
     if (t.draft) continue;
+    if (has(t.unconfirmed)) err(w, `published teacher still has unconfirmed fields: ${t.unconfirmed.join(', ')}`);
+    for (const p of placeholders(t)) err(w, `published teacher still has placeholder text "${p}"`);
     for (const f of ['name', 'headline', 'experience', 'proficiency', 'qualifications', 'levels', 'teachesIn', 'formats']) if (!has(t[f])) err(w, `published teacher needs ${f}`);
     if (has(t.photo)) {
       if (!fs.existsSync(path.join(root, t.photo))) err(w, `photo ${t.photo} does not exist`);
@@ -83,6 +94,7 @@ export function checkData(D, root = ROOT) {
     subset(w, 'levels', k.levels, LEVELS);
     for (const id of k.teacherIds || []) if (!teacherById[id]) err(w, `teacherIds names unknown teacher "${id}"`);
     if (k.draft) continue;
+    for (const p of placeholders(k)) err(w, `published course still has placeholder text "${p}"`);
     if (!has(k.title) || !has(k.objectives) || !has(k.levels)) err(w, 'published course needs title, objectives and levels');
     // a draft teacher is never rendered on the live site, so the course would show no teacher
     for (const id of k.teacherIds || []) if (teacherById[id]?.draft) err(w, `published course names draft teacher "${id}"`);
@@ -93,6 +105,7 @@ export function checkData(D, root = ROOT) {
 
   for (const [i, q] of quotes.entries()) {
     if (q.draft) continue;
+    for (const p of placeholders(q)) err(`testimonial ${i + 1}`, `published testimonial still has placeholder text "${p}"`);
     for (const f of ['quote', 'name', 'permission']) if (!has(q[f])) err(`testimonial ${i + 1}`, `published testimonial needs ${f} (permission = how and when written consent was given)`);
   }
   return errors;

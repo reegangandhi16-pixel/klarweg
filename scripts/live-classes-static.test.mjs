@@ -13,7 +13,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import os from 'node:os';
-import { checkData, launchBlockers, isAllowlisted, homepageFaq, POLICIES } from './live-classes-readiness.mjs';
+import { checkData, launchBlockers, isAllowlisted, homepageFaq, placeholders, POLICIES } from './live-classes-readiness.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -47,7 +47,7 @@ test('LIVE: placeholder text ([…]) appears only in entries marked draft', () =
   for (const [name, list] of Object.entries(groups)) {
     for (const x of list) {
       if (x.draft) continue;
-      assert.equal(/\[[^\]]+\]/.test(JSON.stringify(x)), false, `${name} ${x.id || x.name}: published entry still has [placeholder] text`);
+      assert.deepEqual(placeholders(x), [], `${name} ${x.id || x.name}: published entry still has [placeholder] text`);
     }
   }
 });
@@ -103,6 +103,15 @@ test('LIVE DATA: the committed data file is well formed (drafts included)', () =
   assert.deepEqual(checkData(loadData()), []);
 });
 
+test('LIVE DATA: a named draft profile cannot go live by deleting draft: true alone', () => {
+  const D = loadData();
+  for (const t of D.teachers.filter((x) => x.draft && !/^\[/.test(x.name))) {
+    const flipped = { ...clone(D), teachers: D.teachers.map((x) => (x.id === t.id ? { ...clone(x), draft: false } : x)) };
+    const blocked = checkData(flipped).some((e) => e.startsWith(`teacher ${t.id}:`));
+    assert.ok(blocked, `${t.id}: nothing stops this draft from being published once draft: true is removed`);
+  }
+});
+
 test('LIVE DATA: published entries must be complete and consistent; drafts may stay incomplete', () => {
   const base = loadData();
   const expectError = (mutate, rx, why) => {
@@ -115,6 +124,10 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
   expectError((D) => { D.courses[0].draft = false; D.courses[0].title = 'A1'; }, /names draft teacher "teacher-1"/, 'a published course naming a draft teacher would show no teacher on the live site');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open' }); }, /enrolment "open" needs priceLabel/, 'open enrolment without a fee');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: '₹9,999' }); }, /needs nextBatch/, 'open enrolment without a start date');
+  expectError((D) => { D.teachers.push({ ...realTeacher, unconfirmed: ['headline'] }); }, /still has unconfirmed fields: headline/, 'a published teacher with fields awaiting confirmation');
+  expectError((D) => { D.teachers.push({ ...realTeacher, experience: '[Years to confirm] of teaching German' }); }, /placeholder text "\[Years to confirm\]/, 'a published teacher with placeholder text');
+  assert.deepEqual(placeholders(realTeacher), [], 'list fields such as levels: [\'A1\'] are not placeholders');
+  expectError((D) => { D.teachers[0].unconfirmed = ['nickname']; }, /unconfirmed names unknown field "nickname"/, 'unconfirmed must name real fields');
   expectError((D) => { D.teachers.push({ ...realTeacher, qualifications: [] }); }, /published teacher needs qualifications/, 'a published teacher without qualifications');
   expectError((D) => { D.teachers.push({ ...realTeacher, photo: 'public/teachers/missing.jpg', photoAlt: 'x' }); }, /photo public\/teachers\/missing\.jpg does not exist/, 'a missing photo file');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: '₹9,999', nextBatch: '1 Dec', frequency: '2×/week', sessionLength: '60 min', totalDuration: '12 weeks' }); }, /group batch needs batchSize/, 'an open group batch without a batch size');

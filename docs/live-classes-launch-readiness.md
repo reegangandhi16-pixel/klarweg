@@ -63,6 +63,8 @@ Klarweg intends to offer teacher-led live German classes. This sets the directio
 - The brand foundation (`uploads/klarweg-os.md`) still describes a self-learning-only product and should be updated by the owner.
 
 **D2. Teachers.**
+*Status (2026-10-20):* the owner's own profile is drafted as `reegan-gandhi` (`draft: true`). Its unconfirmed fields are listed in `unconfirmed`, and unknown facts are `[bracketed]`. The validator refuses to publish it until both are cleared.
+
 *Why it matters:* the page shows only facts a teacher actually holds; a profile is published only from their CV and certificates.
 *Needed per teacher:*
 - name;

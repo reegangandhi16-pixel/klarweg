@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+  LIVE CLASSES — UNLISTED PREVIEW
+  This page is deliberately NOT published yet: it is not in
+  .github/pages-allowlist.txt, sitemap.xml or the site nav, and it
+  carries noindex. To publish:
+    1. Replace the draft entries in live-classes-data.js with verified
+       teachers / courses (or set showDrafts: false).
+    2. Fill policies in live-classes-data.js (missed class, refunds…).
+    3. Add live-classes.html, kw-live.js and live-classes-data.js
+       (plus any teacher photos) to .github/pages-allowlist.txt.
+    4. Add the "Live Classes" nav link (desktop + mobile drawer) and
+       footer link to the other pages; add the URL to sitemap.xml.
+    5. Remove the robots noindex meta below and add a canonical link.
+-->
+<meta name="robots" content="noindex">
+<title>Live Classes · Klarweg — Learn German live with a teacher</title>
+<meta name="description" content="Live, teacher-led German classes from Klarweg — structured instruction, guided speaking and direct feedback, A1 to C2. Start with a ₹100 personal consultation.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Klarweg">
+<meta property="og:title" content="Live Classes · Klarweg — Learn German live with a teacher">
+<meta property="og:description" content="Live, teacher-led German classes — structured instruction, guided speaking and direct feedback. Start with a ₹100 personal consultation.">
+<meta property="og:image" content="https://reegangandhi16-pixel.github.io/klarweg/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0F172A">
+<style>
+  /* Live Classes is its own product surface: navy + gold is the single
+     accent here (no coral), on the canonical canvas, type and spacing. */
+  :root {
+    --live-navy: #0F172A;
+    --live-navy-2: #1E293B;
+    --live-navy-ink: #CBD5E1;
+    --live-gold: #FBBF24;
+    --live-gold-tint: #FEF6DD;
+    --live-gold-deep: #8A5A00;
+  }
+  :focus-visible { outline: 2px solid var(--live-navy); outline-offset: 2px; }
+  .on-navy :focus-visible { outline-color: var(--live-gold); }
+  section[id], [id="book-form"] { scroll-margin-top: 80px; }
+
+  .btn-live { background: var(--live-navy); color: #fff; }
+  .btn-live:hover { transform: translateY(-1px); box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 12px 28px rgba(15,23,42,0.22); }
+  .btn-gold { background: var(--live-gold); color: var(--live-navy); font-weight: 600; }
+  .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(251,191,36,0.22); }
+  .nav-cta.nav-cta-live { background: var(--live-navy); }
+  .nav-login, .nav-cta { white-space: nowrap; }
+  /* Small phones: the sticky bar + drawer carry the booking CTA. */
+  @media (max-width: 480px) { .nav-actions .nav-cta { display: none; } }
+  .rule-gold { display: block; width: 36px; height: 3px; border-radius: 2px; background: var(--live-gold); margin-bottom: 16px; }
+  .pill-live { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
+  .pill-live .pill-dot { background: var(--live-gold); }
+  .draft-flag {
+    display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: var(--r-xs);
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    background: repeating-linear-gradient(-45deg, var(--live-gold-tint), var(--live-gold-tint) 6px, #FFF 6px, #FFF 12px);
+    color: var(--live-gold-deep); border: 1px dashed rgba(138,90,0,0.4);
+  }
+  .draft-banner {
+    background: var(--live-gold-tint); border-bottom: 1px solid rgba(138,90,0,0.18);
+    font-size: 13px; color: var(--live-gold-deep); padding: 8px 0; text-align: center;
+  }
+  .draft-banner strong { font-weight: 600; }
+
+  /* ---------- hero ---------- */
+  .live-hero { padding: 80px 0 96px; }
+  .live-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 64px; align-items: center; }
+  .live-hero h1 { margin: 0 0 24px; }
+  .live-hero .lede { max-width: 560px; }
+  .hero-points { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 24px 0 0; padding: 0; list-style: none; font-size: 15px; color: var(--ink-secondary); }
+  .hero-points li { display: flex; align-items: center; gap: 8px; }
+  .hero-points li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--live-gold); box-shadow: 0 0 0 3px var(--live-gold-tint); }
+  @media (max-width: 980px) { .live-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
+  @media (max-width: 768px) { .live-hero { padding: 48px 0 64px; } }
+
+  .session-card {
+    background: var(--live-navy); color: #fff; border-radius: 24px; padding: 36px;
+    box-shadow: 0 2px 8px rgba(15,23,42,0.12), 0 24px 64px rgba(15,23,42,0.18); position: relative; overflow: hidden;
+  }
+  .session-card::after {
+    content: ''; position: absolute; right: -80px; top: -80px; width: 240px; height: 240px; border-radius: 50%;
+    border: 1px solid rgba(251,191,36,0.18); pointer-events: none;
+  }
+  .session-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .session-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--live-gold); display: flex; align-items: center; gap: 8px; }
+  .session-label::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--live-gold); }
+  .session-meta { font-size: 12px; color: var(--live-navy-ink); }
+  .bubble { border-radius: 16px; padding: 16px 16px; margin-bottom: 12px; max-width: 92%; }
+  .bubble-who { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .bubble-t { background: var(--live-navy-2); color: #F1F5F9; border-bottom-left-radius: 4px; }
+  .bubble-t .bubble-who { color: var(--live-gold); }
+  .bubble-s { background: rgba(255,255,255,0.06); color: #F1F5F9; margin-left: auto; border-bottom-right-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+  .bubble-s .bubble-who { color: var(--live-navy-ink); }
+  .bubble .de-italic { font-size: 19px; line-height: 1.4; }
+  .bubble del { text-decoration-color: var(--live-gold); text-decoration-thickness: 2px; opacity: 0.75; }
+  .correction { background: #FFF; color: var(--ink-primary); border-radius: 16px; padding: 16px 24px 16px; margin-top: 16px; }
+  .correction-head { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--live-gold-deep); margin-bottom: 8px; }
+  .correction .correction-sentence { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 24px; line-height: 1.35; margin: 0 0 8px; }
+  .correction p { margin: 0; font-size: 14px; color: var(--ink-secondary); line-height: 1.5; }
+  .session-steps { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; counter-reset: s; }
+  .session-steps li { counter-increment: s; font-size: 12px; color: var(--live-navy-ink); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--r-full); padding: 4px 12px; }
+  .session-steps li::before { content: counter(s) '  '; color: var(--live-gold); font-family: var(--font-mono); white-space: pre; }
+  .session-caption { font-size: 12px; color: var(--ink-tertiary); margin: 12px 0 0; text-align: center; }
+  @media (max-width: 480px) { .session-card { padding: 24px 16px; border-radius: 16px; } .correction { padding: 16px; } .correction .correction-sentence { font-size: 21px; } }
+
+  /* ---------- two ways ---------- */
+  .ways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .way { padding: 36px; display: flex; flex-direction: column; }
+  .way h3 { font-family: var(--font-display); font-weight: 600; font-size: 26px; letter-spacing: -0.02em; margin: 12px 0 8px; }
+  .way > p { margin: 0 0 24px; color: var(--ink-secondary); font-size: 16px; }
+  .way dl { margin: 0 0 24px; display: grid; grid-template-columns: 112px 1fr; gap: 12px 16px; font-size: 15px; }
+  .way dt { color: var(--ink-tertiary); font-size: 13px; padding-top: 2px; }
+  .way dd { margin: 0; color: var(--ink-primary); }
+  .way .btn { margin-top: auto; align-self: flex-start; }
+  .way-live { border-color: var(--live-navy); box-shadow: inset 0 3px 0 var(--live-gold); }
+  @media (max-width: 860px) { .ways { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 480px) { .way { padding: 24px; } .way dl { grid-template-columns: 1fr; gap: 4px; } .way dd { margin-bottom: 8px; } }
+
+  /* ---------- filters ---------- */
+  .filters { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; margin-bottom: 36px; }
+  .filters[hidden], .quotes[hidden] { display: none; }
+  .filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
+  .filter-label { font-size: 13px; font-weight: 600; color: var(--ink-tertiary); margin-right: 4px; }
+  .chip {
+    min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong);
+    background: var(--bg-surface); font-size: 14px; font-weight: 500; color: var(--ink-secondary);
+    transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  }
+  .chip:hover { border-color: var(--live-navy); color: var(--ink-primary); }
+  .chip[aria-pressed="true"] { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
+  .select-sm { min-height: 44px; font: inherit; font-size: 14px; padding: 8px 36px 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong); background: var(--bg-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%236F6F73' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center; appearance: none; -webkit-appearance: none; color: var(--ink-primary); }
+  .results-note { font-size: 14px; color: var(--ink-tertiary); margin: -16px 0 24px; }
+  @media (max-width: 680px) {
+    .filters { flex-direction: column; align-items: stretch; gap: 16px; min-width: 0; }
+    .filters > .filter-group { max-width: none; }
+    .filter-scroll { flex-wrap: nowrap; overflow-x: auto; width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px 4px; scrollbar-width: none; }
+    .filter-scroll::-webkit-scrollbar { display: none; }
+    .chip { flex: 0 0 auto; }
+  }
+
+  /* ---------- teacher cards ---------- */
+  .teacher-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  @media (max-width: 1080px) { .teacher-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .teacher-grid { grid-template-columns: minmax(0, 1fr); } }
+  .t-card { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column; transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease); }
+  .t-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); border-color: var(--hairline-strong); }
+  .portrait { position: relative; aspect-ratio: 4 / 3; background: var(--live-navy); overflow: hidden; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .portrait-mono { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--live-gold); }
+  .portrait-mono span { font-family: var(--font-display); font-size: 48px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
+  .portrait-mono small { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--live-navy-ink); }
+  .portrait .draft-flag { position: absolute; top: 12px; left: 12px; }
+  .t-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+  .t-name { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.02em; margin: 0 0 4px; overflow-wrap: anywhere; }
+  .t-headline { margin: 0 0 16px; font-size: 15px; color: var(--ink-secondary); line-height: 1.5; }
+  .t-facts { margin: 0 0 16px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: var(--ink-secondary); }
+  .t-facts li { display: flex; gap: 8px; align-items: flex-start; }
+  .t-facts svg { flex: 0 0 auto; margin-top: 3px; color: var(--live-gold-deep); }
+  .lvl-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+  .lvl { font-family: var(--font-mono); font-size: 12px; font-weight: 500; padding: 4px 8px; border-radius: var(--r-xs); background: var(--bg-elevated); color: var(--ink-tertiary); border: 1px solid transparent; }
+  .lvl.on { background: var(--live-navy); color: #fff; }
+  .t-actions { margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .t-actions .btn { padding: 12px 16px; font-size: 14px; flex: 1 1 auto; justify-content: center; }
+
+  .empty-state { border: 1px dashed var(--hairline-strong); border-radius: var(--r-lg); padding: 48px 24px; text-align: center; background: var(--bg-surface); }
+  .empty-state h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0 0 8px; }
+  .empty-state p { margin: 0 auto 24px; max-width: 520px; color: var(--ink-secondary); font-size: 16px; }
+
+  /* ---------- profile dialog ---------- */
+  .t-dialog { width: min(880px, calc(100% - 32px)); max-height: calc(100vh - 48px); padding: 0; border: 0; border-radius: 24px; background: var(--bg-surface); color: var(--ink-primary); box-shadow: var(--shadow-modal); overflow: hidden; }
+  #t-dialog-content { max-height: calc(100vh - 48px); overflow-y: auto; overscroll-behavior: contain; }
+  .t-dialog::backdrop { background: rgba(15,23,42,0.55); }
+  .t-dialog-grid { display: grid; grid-template-columns: 300px 1fr; }
+  .t-dialog .portrait { aspect-ratio: auto; min-height: 100%; }
+  .t-dialog-body { padding: 36px 64px 36px 36px; }
+  .t-dialog-close { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; background: var(--bg-elevated); font-size: 16px; color: var(--ink-secondary); z-index: 2; }
+  .t-dialog-close:hover { color: var(--ink-primary); }
+  .t-dialog h2 { font-family: var(--font-display); font-weight: 600; font-size: 32px; letter-spacing: -0.02em; margin: 0 0 8px; overflow-wrap: anywhere; }
+  .t-dialog .t-headline { font-size: 17px; }
+  .profile-dl { margin: 24px 0; display: grid; grid-template-columns: 160px 1fr; gap: 12px 24px; font-size: 15px; border-top: 1px solid var(--hairline-light); padding-top: 24px; }
+  .profile-dl dt { color: var(--ink-tertiary); font-size: 13px; padding-top: 2px; }
+  .profile-dl dd { margin: 0; }
+  .profile-dl ul { margin: 0; padding-left: 16px; }
+  .approach { background: var(--bg-warm); border-radius: var(--r-md); padding: 16px 24px; font-size: 16px; color: var(--ink-secondary); margin: 0 0 24px; }
+  .approach strong { display: block; color: var(--ink-primary); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  @media (max-width: 760px) {
+    .t-dialog { width: 100%; max-width: 100%; max-height: 92vh; margin: auto 0 0; border-radius: 24px 24px 0 0; }
+    #t-dialog-content { max-height: 92vh; }
+    .t-dialog-close { background: rgba(255,255,255,0.92); }
+    .t-dialog-grid { grid-template-columns: 1fr; }
+    .t-dialog .portrait { aspect-ratio: 16 / 9; min-height: 0; }
+    .t-dialog-body { padding: 24px 20px 36px; }
+    .t-dialog h2 { font-size: 26px; }
+    .profile-dl { grid-template-columns: 1fr; gap: 4px; }
+    .profile-dl dd { margin-bottom: 12px; }
+  }
+
+  /* ---------- courses ---------- */
+  .course-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  @media (max-width: 860px) { .course-grid { grid-template-columns: minmax(0, 1fr); } }
+  .c-card { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); padding: 36px; display: flex; flex-direction: column; }
+  .c-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .c-status { margin-left: auto; }
+  .c-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 16px; }
+  .c-obj { margin: 0 0 24px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .c-obj li { display: flex; gap: 12px; font-size: 15px; color: var(--ink-secondary); line-height: 1.5; }
+  .c-obj li::before { content: ''; flex: 0 0 auto; width: 12px; height: 2px; margin-top: 11px; background: var(--live-gold); }
+  .c-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 24px; margin: 0 0 24px; padding: 24px 0 0; border-top: 1px solid var(--hairline-light); }
+  .c-facts dt { font-size: 12px; color: var(--ink-tertiary); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+  .c-facts dd { margin: 0; font-size: 15px; color: var(--ink-primary); }
+  .c-facts .tba { color: var(--ink-tertiary); font-style: italic; }
+  .c-facts .c-tba { grid-column: 1 / -1; }
+  .c-price { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; padding: 16px 24px; border-radius: var(--r-md); background: var(--bg-elevated); margin-bottom: 24px; }
+  .c-price-label { font-size: 13px; color: var(--ink-tertiary); }
+  .c-price-val { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
+  .c-price-val.tba { font-family: var(--font-ui); font-size: 15px; font-weight: 500; color: var(--ink-secondary); }
+  .c-price-terms { flex-basis: 100%; font-size: 13px; color: var(--ink-tertiary); }
+  .c-card .btn { margin-top: auto; align-self: flex-start; }
+  .status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: var(--r-full); border: 1px solid var(--hairline); color: var(--ink-secondary); background: var(--bg-surface); }
+  .status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-quaternary); }
+  .status-open { color: var(--g-object); border-color: rgba(46,125,50,0.25); background: rgba(46,125,50,0.06); }
+  .status-open::before { background: var(--g-object); }
+  .status-waitlist { color: var(--live-gold-deep); border-color: rgba(138,90,0,0.25); background: var(--live-gold-tint); }
+  .status-waitlist::before { background: var(--live-gold); }
+  @media (max-width: 480px) { .c-card { padding: 24px; } .c-facts { grid-template-columns: 1fr; } .c-status { margin-left: 0; } .c-card .btn { align-self: stretch; justify-content: center; } }
+
+  /* ---------- journey ---------- */
+  .journey { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin: 0; padding: 0; list-style: none; counter-reset: j; }
+  .journey li { counter-increment: j; position: relative; padding-top: 48px; }
+  .journey li::before { content: counter(j, decimal-leading-zero); position: absolute; top: 0; left: 0; font-family: var(--font-mono); font-size: 13px; color: var(--live-navy); background: var(--live-gold); border-radius: var(--r-xs); padding: 4px 8px; }
+  .journey li::after { content: ''; position: absolute; top: 14px; left: 48px; right: -12px; height: 1px; background: var(--hairline-strong); }
+  .journey li:last-child::after { display: none; }
+  .journey h3 { font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; margin: 0 0 8px; }
+  .journey p { margin: 0; font-size: 15px; color: var(--ink-secondary); line-height: 1.55; }
+  @media (max-width: 980px) {
+    .journey { grid-template-columns: 1fr; gap: 0; }
+    .journey li { padding: 0 0 36px 64px; }
+    .journey li::after { top: 36px; left: 18px; right: auto; bottom: 8px; width: 1px; height: auto; }
+  }
+
+  /* ---------- method ---------- */
+  .method-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .method-grid .card { padding: 24px; }
+  .method-grid .card h3 { font-size: 19px; margin: 12px 0 8px; }
+  .method-grid .card p { font-size: 15px; }
+  .method-de { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 15px; color: var(--ink-primary); margin-top: 16px !important; padding-top: 12px; border-top: 1px solid var(--hairline-light); }
+  .method-feature { grid-column: span 2; background: var(--live-navy); color: #fff; border-color: var(--live-navy); }
+  .method-feature h3 { color: #fff; }
+  .method-feature p { color: var(--live-navy-ink) !important; }
+  .method-feature .card-num { color: var(--live-gold); }
+  .cefr-line { display: flex; gap: 4px; margin-top: 24px; }
+  .cefr-line span { flex: 1; text-align: center; font-family: var(--font-mono); font-size: 12px; padding: 8px 0; border-radius: var(--r-xs); background: rgba(255,255,255,0.08); color: #fff; }
+  .cefr-line span:nth-child(-n+2) { background: rgba(251,191,36,0.2); }
+  @media (max-width: 1080px) { .method-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .method-grid { grid-template-columns: 1fr; } .method-feature { grid-column: auto; } }
+
+  /* ---------- consultation ---------- */
+  .book { background: var(--live-navy); color: #fff; }
+  .book-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
+  .book .eyebrow { color: var(--live-gold); }
+  .book h2 { color: #fff; margin: 0 0 16px; }
+  .book .lede { color: var(--live-navy-ink); }
+  .fee { display: flex; align-items: baseline; gap: 16px; margin: 36px 0 8px; }
+  .fee-amt { font-family: var(--font-display); font-size: 64px; font-weight: 500; letter-spacing: -0.03em; color: var(--live-gold); line-height: 1; }
+  .fee-unit { font-size: 15px; color: var(--live-navy-ink); }
+  .fee-note { font-size: 16px; color: #fff; margin: 0 0 36px; max-width: 460px; }
+  .fee-note strong { color: var(--live-gold); font-weight: 600; }
+  .book-steps { margin: 0 0 36px; padding: 0; list-style: none; counter-reset: b; display: flex; flex-direction: column; gap: 16px; }
+  .book-steps li { counter-increment: b; display: flex; gap: 16px; font-size: 15px; color: var(--live-navy-ink); line-height: 1.5; }
+  .book-steps li::before { content: counter(b); flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(251,191,36,0.5); color: var(--live-gold); font-family: var(--font-mono); font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .conditions { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; font-size: 14px; color: var(--live-navy-ink); }
+  .conditions h3 { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; margin: 0 0 12px; font-weight: 600; }
+  .conditions ul { margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .conditions a { color: var(--live-gold); text-decoration: underline; text-underline-offset: 3px; }
+
+  .book-card { background: var(--bg-surface); color: var(--ink-primary); border-radius: 24px; padding: 36px; box-shadow: 0 24px 64px rgba(0,0,0,0.25); }
+  .book-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 4px; }
+  .book-card .sub { margin: 0 0 24px; font-size: 14px; color: var(--ink-tertiary); }
+  .form-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  .book-card .form-row { margin-bottom: 16px; }
+  .book-card .form-row input, .book-card .form-row select, .book-card .form-row textarea { width: 100%; min-height: 48px; }
+  .book-card .form-row textarea { min-height: 96px; }
+  .book-card .form-row input:focus, .book-card .form-row select:focus, .book-card .form-row textarea:focus { border-color: var(--live-navy); box-shadow: 0 0 0 3px rgba(15,23,42,0.12); }
+  .req { color: var(--live-gold-deep); }
+  .opt { font-weight: 400; color: var(--ink-tertiary); }
+  .field-err { font-size: 13px; color: #B42318; margin: 0; }
+  .form-row [aria-invalid="true"] { border-color: #B42318; }
+  fieldset.form-row { border: 0; padding: 0; margin: 0 0 16px; min-width: 0; }
+  fieldset.form-row legend { font-size: 13px; font-weight: 600; color: var(--ink-secondary); padding: 0; margin-bottom: 8px; }
+  .times { display: flex; flex-wrap: wrap; gap: 8px; }
+  .time-opt { position: relative; }
+  .time-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .time-opt span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong); font-size: 14px; color: var(--ink-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+  .time-opt input:checked + span { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
+  .time-opt input:focus-visible + span { outline: 2px solid var(--live-navy); outline-offset: 2px; }
+  .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink-secondary); margin: 8px 0 24px; }
+  .consent input { width: 20px; height: 20px; margin: 2px 0 0; flex: 0 0 auto; accent-color: var(--live-navy); }
+  .consent a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .book-card .btn { width: 100%; justify-content: center; }
+  .form-foot { font-size: 13px; color: var(--ink-tertiary); margin: 16px 0 0; text-align: center; }
+  .err-summary { background: #FEF3F2; border: 1px solid rgba(180,35,24,0.25); color: #B42318; border-radius: var(--r-md); padding: 12px 16px; font-size: 14px; margin-bottom: 16px; }
+  .err-summary:focus { outline: 2px solid #B42318; outline-offset: 2px; }
+  .done h3 { margin-bottom: 8px; }
+  .done p { margin: 0 0 16px; font-size: 15px; color: var(--ink-secondary); }
+  .done-notice { background: var(--live-gold-tint); border-radius: var(--r-md); padding: 16px; font-size: 14px; color: var(--ink-primary); margin-bottom: 24px; }
+  .done pre { white-space: pre-wrap; word-break: break-word; font-family: var(--font-mono); font-size: 12px; background: var(--bg-elevated); border-radius: var(--r-md); padding: 16px; margin: 0 0 16px; max-height: 220px; overflow: auto; }
+  .done-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .done-actions .btn { width: auto; flex: 1 1 auto; }
+  .done a.inline { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 980px) { .book-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
+  @media (max-width: 520px) { .book-card { padding: 24px 16px; border-radius: 16px; } .form-2 { grid-template-columns: 1fr; } .fee-amt { font-size: 52px; } }
+
+  /* ---------- trust ---------- */
+  .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .trust-grid .card a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 24px; }
+  .quote { margin: 0; }
+  .quote blockquote { margin: 0 0 16px; font-family: var(--font-display); font-size: 20px; line-height: 1.45; }
+  .quote figcaption { font-size: 14px; color: var(--ink-tertiary); }
+  .quote figcaption strong { color: var(--ink-primary); font-weight: 600; }
+  @media (max-width: 860px) { .trust-grid, .quotes { grid-template-columns: 1fr; } }
+
+  .faq-a-inner a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .faq-a-inner .link-btn { color: var(--ink-primary); }
+  .faq-q:focus-visible { outline-offset: -2px; }
+  .cta-band .lede a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------- mobile sticky CTA ---------- */
+  .sticky-book { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 16px; border-radius: var(--r-lg); background: var(--live-navy); color: #fff; box-shadow: 0 12px 36px rgba(15,23,42,0.3); transform: translateY(calc(100% + 24px)); transition: transform var(--dur-slow) var(--ease); }
+  .sticky-book.show { transform: none; }
+  .sticky-book p { margin: 0; font-size: 13px; line-height: 1.35; color: var(--live-navy-ink); }
+  .sticky-book p strong { color: #fff; display: block; font-size: 14px; }
+  .sticky-book .btn { padding: 12px 16px; font-size: 14px; flex: 0 0 auto; }
+  @media (max-width: 760px) { .sticky-book { display: flex; } }
+  @media (max-width: 340px) { .sticky-book p span { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="draft-banner" id="draft-banner" hidden><strong>Preview</strong> · Teacher profiles and course details marked “Draft” are templates, not real information.</div>
+
+<!-- ========== NAV (canonical + Live Classes) ========== -->
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Klarweg home">Klarweg</a>
+    <div class="nav-links">
+      <a href="courses.html">Courses</a>
+      <a href="live-classes.html" class="active" aria-current="page">Live Classes</a>
+      <a href="goethe-exam.html">Goethe Exam</a>
+      <a href="ausbildung.html">Ausbildung</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link">Log in</a><a href="#book" class="nav-cta nav-cta-live">Book a consultation</a></div>
+    <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay" hidden></div>
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-logo">Klarweg</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+  </div>
+  <nav class="mobile-nav-links" aria-label="Mobile navigation">
+    <a href="courses.html">Courses</a>
+    <a href="live-classes.html" class="active" aria-current="page">Live Classes</a>
+    <a href="goethe-exam.html">Goethe Exam</a>
+    <a href="ausbildung.html">Ausbildung</a>
+    <a href="resources.html">Resources</a>
+    <a href="about.html">About</a>
+  </nav>
+  <div class="mobile-nav-actions">
+    <a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile">Log in</a>
+    <a href="#book" class="nav-cta nav-cta-live">Book a consultation</a>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+
+<!-- ========== HERO ========== -->
+<section class="live-hero">
+  <div class="container live-hero-grid">
+    <div>
+      <div class="eyebrow-row" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px">
+        <span class="pill pill-live"><span class="pill-dot"></span> Live Classes</span>
+        <span class="eyebrow">Teacher-led · Online · A1 → C2</span>
+      </div>
+      <h1 class="display-xl">Learn German live. <span class="accent">Speak with confidence.</span></h1>
+      <p class="lede">Structured classes with a real teacher who explains the grammar, gets you speaking from the first session, and corrects you as you go. Goethe exam preparation is available where your level needs it.</p>
+      <div class="hero-ctas">
+        <a href="#teachers" class="btn btn-live">Explore our teachers
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#courses" class="btn btn-secondary">Explore live courses</a>
+      </div>
+      <ul class="hero-points">
+        <li>Start with a ₹100 consultation</li>
+        <li>Adjusted against your course fee within 7 days</li>
+      </ul>
+    </div>
+
+    <figure style="margin:0">
+      <div class="session-card on-navy" aria-label="Example of feedback in a live class">
+        <div class="session-top">
+          <span class="session-label">In a live class</span>
+          <span class="session-meta">A2 · Speaking</span>
+        </div>
+        <div class="bubble bubble-t">
+          <span class="bubble-who">Teacher</span>
+          <span class="de-italic" lang="de">Was hast du am Wochenende gemacht?</span>
+        </div>
+        <div class="bubble bubble-s">
+          <span class="bubble-who">You</span>
+          <span class="de-italic" lang="de">Ich <del>habe</del> ins Kino gegangen.</span>
+        </div>
+        <div class="correction">
+          <div class="correction-head">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Corrected in the moment
+          </div>
+          <p class="correction-sentence" lang="de"><span style="color:var(--g-subject)">Ich</span> <span style="color:var(--g-verb)">bin</span> <span style="color:var(--g-place)">ins Kino</span> <span style="color:var(--g-verb)">gegangen</span>.</p>
+          <p><em>gehen</em> is movement from one place to another, so its Perfekt takes <strong>sein</strong>, not <em>haben</em>. Now say it again.</p>
+        </div>
+        <ol class="session-steps" aria-label="Feedback loop">
+          <li>Speak</li><li>Get corrected</li><li>Understand why</li><li>Say it again</li>
+        </ol>
+      </div>
+      <figcaption class="session-caption">An illustration of how feedback works in a live class.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========== TWO WAYS TO LEARN ========== -->
+<section class="section-warm" id="compare" aria-labelledby="compare-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Two ways to learn with Klarweg</span>
+      <h2 class="display-md" id="compare-h">Self-paced or live. Different tools for different needs.</h2>
+      <p class="lede">Both follow the CEFR levels from A1 to C2. Choose the one that fits how you learn and how much time you have. You can also use both.</p>
+    </div>
+    <div class="ways">
+      <article class="card way">
+        <span class="eyebrow">Self-paced courses</span>
+        <h3>Learn on your own schedule</h3>
+        <p>Klarweg's existing chapter-based courses: colour-coded grammar, Hindi-first explanations, audio and exercises, available any time.</p>
+        <dl>
+          <dt>Best for</dt><dd>Flexible study at your own speed</dd>
+          <dt>Guidance</dt><dd>Built-in explanations, exercises and feedback</dd>
+          <dt>Pricing</dt><dd><span data-selfpaced-price>Per level, or Lifetime for all six</span></dd>
+          <dt>Try it</dt><dd>Chapter 1 free at every level</dd>
+        </dl>
+        <a href="courses.html" class="btn btn-secondary">See self-paced courses</a>
+      </article>
+      <article class="card way way-live">
+        <span class="eyebrow" style="color:var(--live-gold-deep)">Live teacher courses</span>
+        <h3>Learn with a teacher, on a timetable</h3>
+        <p>Scheduled online classes led by a teacher, with speaking time, direct correction and a fixed course structure.</p>
+        <dl>
+          <dt>Best for</dt><dd>Accountability, speaking practice and personal feedback</dd>
+          <dt>Guidance</dt><dd>A teacher who explains, corrects and tracks your progress</dd>
+          <dt>Pricing</dt><dd>Per course, shown on each course below</dd>
+          <dt>Try it</dt><dd>₹100 personal consultation with a teacher</dd>
+        </dl>
+        <a href="#book" class="btn btn-live">Book a consultation</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TEACHERS ========== -->
+<section id="teachers" aria-labelledby="teachers-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="rule-gold" aria-hidden="true"></span>
+      <span class="eyebrow">The teachers</span>
+      <h2 class="display-md" id="teachers-h">Find the teacher who fits your goal.</h2>
+      <p class="lede">Compare levels, teaching languages and exam experience, then open a profile for the full picture.</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter teachers">
+      <div class="filter-group filter-scroll" role="group" aria-label="Level taught">
+        <span class="filter-label">Level</span>
+        <button type="button" class="chip" data-tlevel="" aria-pressed="true">All</button>
+        <button type="button" class="chip" data-tlevel="A1" aria-pressed="false">A1</button>
+        <button type="button" class="chip" data-tlevel="A2" aria-pressed="false">A2</button>
+        <button type="button" class="chip" data-tlevel="B1" aria-pressed="false">B1</button>
+        <button type="button" class="chip" data-tlevel="B2" aria-pressed="false">B2</button>
+        <button type="button" class="chip" data-tlevel="C1" aria-pressed="false">C1</button>
+        <button type="button" class="chip" data-tlevel="C2" aria-pressed="false">C2</button>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="t-lang">Teaches in</label>
+        <select id="t-lang" class="select-sm"><option value="">Any language</option></select>
+      </div>
+      <div class="filter-group">
+        <button type="button" class="chip" id="t-exam" aria-pressed="false">Goethe exam prep</button>
+      </div>
+    </div>
+    <p class="results-note" id="t-count" aria-live="polite"></p>
+    <div class="teacher-grid" id="teacher-grid">
+      <noscript><p>Teacher profiles need JavaScript. You can still <a href="contact.html">contact us</a> to be matched with a teacher.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<dialog class="t-dialog" id="t-dialog" aria-labelledby="t-dialog-name">
+  <button type="button" class="t-dialog-close" id="t-dialog-close" aria-label="Close profile">✕</button>
+  <div id="t-dialog-content"></div>
+</dialog>
+
+<!-- ========== COURSES ========== -->
+<section class="section-elevated" id="courses" aria-labelledby="courses-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="rule-gold" aria-hidden="true"></span>
+      <span class="eyebrow">Live course catalogue</span>
+      <h2 class="display-md" id="courses-h">Courses with a clear structure.</h2>
+      <p class="lede">Each course lists its level, format, schedule and fee. Anything not yet confirmed is marked “to be announced”, never guessed.</p>
+    </div>
+    <div class="filters">
+      <div class="filter-group filter-scroll" role="group" aria-label="Filter courses">
+        <button type="button" class="chip" data-cgroup="" aria-pressed="true">All courses</button>
+        <button type="button" class="chip" data-cgroup="beginner" aria-pressed="false">Beginner · A1–A2</button>
+        <button type="button" class="chip" data-cgroup="intermediate" aria-pressed="false">Intermediate · B1–B2</button>
+        <button type="button" class="chip" data-cgroup="advanced" aria-pressed="false">Advanced · C1–C2</button>
+        <button type="button" class="chip" data-cgroup="exam" aria-pressed="false">Goethe prep</button>
+        <button type="button" class="chip" data-cgroup="speaking" aria-pressed="false">Speaking</button>
+      </div>
+    </div>
+    <p class="results-note" id="c-count" aria-live="polite"></p>
+    <div class="course-grid" id="course-grid"></div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section id="how" aria-labelledby="how-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How live classes work</span>
+      <h2 class="display-md" id="how-h">From first conversation to fluent progress.</h2>
+    </div>
+    <ol class="journey">
+      <li><h3>Choose a teacher and course</h3><p>Compare profiles and courses, or book a consultation and let a teacher assess your level.</p></li>
+      <li><h3>Understand the plan</h3><p>See the level, schedule, materials and fee before you commit to anything.</p></li>
+      <li><h3>Enrol</h3><p>We confirm your place and payment by email. Nothing is charged until you agree.</p></li>
+      <li><h3>Attend live online</h3><p>Join your scheduled classes with your teacher, from wherever you are.</p></li>
+      <li><h3>Practise and progress</h3><p>Speak, get corrected and practise again, moving through the course one level at a time.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ========== METHOD ========== -->
+<section class="section-warm" aria-labelledby="method-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Method</span>
+      <h2 class="display-md" id="method-h">What happens in a live class.</h2>
+      <p class="lede">Self-paced study is ideal for steady input on your own time. A live teacher adds what is hard to do alone: real conversation, immediate correction and someone who notices what you keep getting wrong.</p>
+    </div>
+    <div class="method-grid">
+      <div class="card"><div class="card-num">01</div><h3>Grammar, systematically</h3><p>Each structure explained step by step, with the reasons behind it.</p><p class="method-de" lang="de">weil ich Deutsch lerne</p></div>
+      <div class="card"><div class="card-num">02</div><h3>Guided speaking</h3><p>Build sentences out loud with prompts, then on your own.</p><p class="method-de" lang="de">Ich möchte einen Termin vereinbaren.</p></div>
+      <div class="card"><div class="card-num">03</div><h3>Vocabulary</h3><p>Words learned in context, with gender and plural, and used again in later sessions.</p><p class="method-de" lang="de">der Termin, die Termine</p></div>
+      <div class="card"><div class="card-num">04</div><h3>Listening &amp; pronunciation</h3><p>Hear it, say it, adjust: umlauts, word stress and sentence melody.</p><p class="method-de" lang="de">schön · Müller · Straße</p></div>
+      <div class="card"><div class="card-num">05</div><h3>Feedback &amp; correction</h3><p>Mistakes caught and explained while the sentence is still fresh.</p><p class="method-de" lang="de">Ich bin gegangen, nicht habe.</p></div>
+      <div class="card"><div class="card-num">06</div><h3>Goethe preparation</h3><p>Where relevant: exam format, timing and task types, practised module by module.</p><p class="method-de" lang="de">Lesen · Hören · Schreiben · Sprechen</p></div>
+      <div class="card method-feature on-navy"><div class="card-num">07</div><h3>Structured progress through CEFR levels</h3><p>Each course has a defined level and objectives, so you always know what you are working towards and what comes next.</p>
+        <div class="cefr-line" aria-label="CEFR levels A1 to C2"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONSULTATION ========== -->
+<section class="book on-navy" id="book" aria-labelledby="book-h">
+  <div class="container book-grid">
+    <div>
+      <span class="eyebrow">Personal consultation</span>
+      <h2 class="display-md" id="book-h">Talk to a teacher before you decide.</h2>
+      <p class="lede">A one-to-one conversation to assess your level, understand your goal and recommend the right course and teacher.</p>
+      <div class="fee"><span class="fee-amt" data-consult-fee>₹100</span><span class="fee-unit" data-consult-unit>per consultation</span></div>
+      <p class="fee-note">Enrol in a live course within <strong data-consult-days>7 days</strong> and the <span data-consult-fee>₹100</span> is adjusted against your course fee.</p>
+      <ol class="book-steps" id="book-steps"></ol>
+      <div class="conditions">
+        <h3>Good to know</h3>
+        <ul>
+          <li>Sending this form is a request, not a booking. Nothing is charged on this page.</li>
+          <li>Your joining link is only sent after your payment is confirmed.</li>
+          <li>The 7-day adjustment applies to live course fees, counted from the date of your consultation.</li>
+          <li>The current <a href="refund-policy.html">Refund Policy</a> covers self-paced purchases. Live-class terms are confirmed with you before you pay.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="book-card" id="book-form">
+      <form id="consult-form" novalidate>
+        <h3>Request a consultation</h3>
+        <p class="sub">Fields marked <span class="req">*</span> are required. We reply <span data-reply-time>within two working days</span>.</p>
+        <div class="err-summary" id="err-summary" role="alert" tabindex="-1" hidden></div>
+        <div class="form-2">
+          <div class="form-row">
+            <label for="bf-name">Name <span class="req">*</span></label>
+            <input id="bf-name" name="name" type="text" autocomplete="name" required aria-describedby="bf-name-err">
+            <p class="field-err" id="bf-name-err" hidden></p>
+          </div>
+          <div class="form-row">
+            <label for="bf-email">Email <span class="req">*</span></label>
+            <input id="bf-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="bf-email-err">
+            <p class="field-err" id="bf-email-err" hidden></p>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="bf-phone">WhatsApp / phone <span class="opt">(optional)</span></label>
+          <input id="bf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+        </div>
+        <div class="form-2">
+          <div class="form-row">
+            <label for="bf-level">Your current level <span class="req">*</span></label>
+            <select id="bf-level" name="level" required aria-describedby="bf-level-err">
+              <option value="">Select…</option>
+              <option>Complete beginner</option>
+              <option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option>
+              <option>Not sure</option>
+            </select>
+            <p class="field-err" id="bf-level-err" hidden></p>
+          </div>
+          <div class="form-row">
+            <label for="bf-goal">Main goal <span class="req">*</span></label>
+            <select id="bf-goal" name="goal" required aria-describedby="bf-goal-err">
+              <option value="">Select…</option>
+              <option>Goethe exam</option>
+              <option>Ausbildung</option>
+              <option>Study in Germany</option>
+              <option>Work / career</option>
+              <option>Family / visa</option>
+              <option>Speaking confidence</option>
+              <option>Other</option>
+            </select>
+            <p class="field-err" id="bf-goal-err" hidden></p>
+          </div>
+        </div>
+        <div class="form-2">
+          <div class="form-row">
+            <label for="bf-teacher">Preferred teacher</label>
+            <select id="bf-teacher" name="teacher"><option value="">Help me choose</option></select>
+          </div>
+          <div class="form-row">
+            <label for="bf-course">Course of interest</label>
+            <select id="bf-course" name="course"><option value="">Not sure yet</option></select>
+          </div>
+        </div>
+        <fieldset class="form-row">
+          <legend>Preferred times (IST) <span class="opt">(choose any)</span></legend>
+          <div class="times">
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekday mornings"><span>Weekday mornings</span></label>
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekday afternoons"><span>Weekday afternoons</span></label>
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekday evenings"><span>Weekday evenings</span></label>
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekends"><span>Weekends</span></label>
+          </div>
+        </fieldset>
+        <div class="form-row">
+          <label for="bf-msg">Anything else? <span class="opt">(optional)</span></label>
+          <textarea id="bf-msg" name="message" placeholder="Exam date, deadlines, what you find hardest…"></textarea>
+        </div>
+        <label class="consent"><input type="checkbox" id="bf-consent" required aria-describedby="bf-consent-err"><span>I agree that Klarweg may use these details to arrange my consultation, as described in the <a href="privacy.html">Privacy Policy</a>. <span class="req">*</span></span></label>
+        <p class="field-err" id="bf-consent-err" hidden style="margin:-16px 0 16px"></p>
+        <button type="submit" class="btn btn-live">Prepare my request
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="form-foot">Opens your email app with your request filled in, addressed to <span data-contact-email>hallo@klarweg.app</span>.</p>
+      </form>
+
+      <div class="done" id="consult-done" hidden tabindex="-1">
+        <h3>Your request is ready to send</h3>
+        <div class="done-notice"><strong>Not booked yet.</strong> Your email app should have opened with the request. It is only sent when you press Send there. We then reply with a time slot and payment details.</div>
+        <p>If your email app didn’t open, copy the request below and email it to <a class="inline" data-contact-mailto href="mailto:hallo@klarweg.app">hallo@klarweg.app</a>.</p>
+        <pre id="consult-preview"></pre>
+        <div class="done-actions">
+          <button type="button" class="btn btn-live" id="copy-request">Copy request</button>
+          <button type="button" class="btn btn-secondary" id="edit-request">Edit request</button>
+        </div>
+        <p class="form-foot" id="copy-status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TRUST ========== -->
+<section aria-labelledby="trust-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Trust</span>
+      <h2 class="display-md" id="trust-h">Clear information before you commit.</h2>
+    </div>
+    <div class="trust-grid">
+      <div class="card"><div class="card-num">Credentials</div><h3>Only what a teacher holds</h3><p>Profiles list only qualifications and certificates the teacher actually holds. If something isn’t confirmed, it isn’t shown.</p></div>
+      <div class="card"><div class="card-num">Terms</div><h3>Written down, in advance</h3><p>Course fees, schedules and live-class terms are confirmed in writing before you pay. See our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p></div>
+      <div class="card"><div class="card-num">People</div><h3>A real person replies</h3><p>Every request is read and answered by a member of the Klarweg team, usually within two working days. <a href="contact.html">Contact us</a> with any question.</p></div>
+    </div>
+    <div class="quotes" id="quotes"></div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="section-elevated" aria-labelledby="faq-h">
+  <div class="container-narrow">
+    <div class="section-head">
+      <span class="eyebrow">Questions</span>
+      <h2 class="display-md" id="faq-h">Before you book.</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="fa1">How do live courses differ from self-paced courses?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a" id="fa1"><div class="faq-a-inner">They are separate products. <a href="courses.html">Self-paced courses</a> are Klarweg's chapter-based lessons you work through on your own, any time. Live courses are scheduled online classes with a teacher, focused on speaking, correction and a fixed structure. Each is priced and purchased separately, and buying one doesn't include the other.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="fa2">Which German level should I start with?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a" id="fa2"><div class="faq-a-inner">If you've never studied German, start at A1. Otherwise, <button type="button" class="link-btn" data-kw-placement>take the 90-second level check</button>, or book a consultation and the teacher will assess your level with you.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="fa3">How do I choose a teacher?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a" id="fa3"><div class="faq-a-inner">Filter the <a href="#teachers">teacher profiles</a> by the level you need, the language you'd like explanations in, and exam experience. If you're unsure, choose “Help me choose” in the consultation form and we'll suggest a teacher based on your goal.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="fa4">What happens during the consultation?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a" id="fa4"><div class="faq-a-inner">You meet a teacher one-to-one online. They talk with you in German to gauge your level, ask about your goal and timeline, and recommend a course and format. You're under no obligation to enrol afterwards.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="fa5">How does the ₹100 consultation adjustment work?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a" id="fa5"><div class="faq-a-inner">The consultation costs ₹100. If you enrol in a live course within 7 days of your consultation, that ₹100 is deducted from your course fee. After 7 days the fee is not adjusted.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="fa6">What does the course fee include?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a" id="fa6"><div class="faq-a-inner" data-policy="feeIncludes">Each course card lists what is included: classes, materials and any exam preparation. Where an item is marked “to be announced”, it is confirmed with you in writing before you pay.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="fa7">How are classes scheduled?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a" id="fa7"><div class="faq-a-inner" data-policy="scheduling">Group batches run on a fixed timetable, published on the course card when enrolment opens. Tell us your preferred times in the consultation form and we'll match you to a suitable batch or teacher.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="fa8">What happens if I miss a class?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a" id="fa8"><div class="faq-a-inner" data-policy="missedClass">Our missed-class policy for live courses hasn't been published yet. It will be confirmed with you in writing before you enrol. Ask about it during your consultation.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="fa9">What are the cancellation and refund terms?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a" id="fa9"><div class="faq-a-inner" data-policy="cancellationRefund">Cancellation and refund terms for live courses haven't been published yet and will be confirmed in writing before you pay. The current <a href="refund-policy.html">Refund Policy</a>, including its 7-day money-back guarantee, applies to self-paced level and Lifetime purchases.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-band">
+  <div class="container">
+    <div class="inner">
+      <h2 class="display-md">Start with a conversation.</h2>
+      <p class="lede">Meet a teacher for ₹100, get an honest assessment of your level, and leave with a clear plan. Questions first? <a href="contact.html">Contact us</a>.</p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn btn-live">Request a consultation
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="courses.html" class="btn btn-secondary">Prefer self-paced? See courses</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="sticky-book" id="sticky-book" aria-hidden="true">
+  <p><strong>₹100 consultation</strong><span>Adjusted against your fee within 7 days</span></p>
+  <a href="#book" class="btn btn-gold" tabindex="-1">Book</a>
+</div>
+
+<!-- ========== FOOTER (canonical) ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Klarweg</a>
+        <p>The visual, Hindi-first way to learn German — from A1 to C2, aligned to the Goethe-Zertifikat.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Levels</h3>
+        <a href="a1.html">A1 · Foundations</a>
+        <a href="a2.html">A2 · Elementary</a>
+        <a href="b1.html">B1 · Intermediate</a>
+        <a href="b2.html">B2 · Upper-int.</a>
+        <a href="c1.html">C1 · Advanced</a>
+        <a href="c2.html">C2 · Mastery</a>
+      </div>
+      <div class="footer-col">
+        <h3>Learn</h3>
+        <a href="courses.html">Courses</a>
+        <a href="live-classes.html">Live Classes</a>
+        <a href="goethe-exam.html">Goethe Exam</a>
+        <a href="ausbildung.html">Ausbildung</a>
+        <a href="resources.html">Resources</a>
+      </div>
+      <div class="footer-col">
+        <h3>Company</h3>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="account/saved-words.html">Saved words</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-meta">© <span data-year>2026</span> Klarweg · German for Hindi-speaking learners</div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="resources.html">Resources</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refund-policy.html">Refund Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="live-classes-data.js"></script>
+<script src="kw-products.js"></script>
+<script src="kw-live.js"></script>
+<script src="site.js"></script>
+<script src="kw-placement.js"></script>
+<script src="kw-config.js"></script>
+<script src="kw-auth.js"></script>
+<script>
+/* Header login/account link (desktop + mobile-drawer copies). */
+(function () {
+  var links = document.querySelectorAll('.js-nav-login');
+  if (!links.length || !window.KWAuth) return;
+  function render(s) {
+    var label = (s && s.authenticated) ? 'My account' : 'Log in';
+    links.forEach(function (l) { l.textContent = label; });
+  }
+  render(KWAuth.getState());
+  KWAuth.onChange(render);
+  KWAuth.refresh();
+})();
+
+/* Mobile hamburger menu — identical to the other site pages. */
+(function () {
+  var btn = document.getElementById('nav-hamburger');
+  var panel = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-nav-overlay');
+  var closeBtn = document.getElementById('mobile-nav-close');
+  if (!btn || !panel || !overlay) return;
+  var lastFocused = null;
+
+  function focusable() {
+    return Array.prototype.slice.call(
+      panel.querySelectorAll('a[href], button:not([disabled])')
+    );
+  }
+  function openMenu() {
+    lastFocused = document.activeElement;
+    panel.hidden = false;
+    overlay.hidden = false;
+    document.body.classList.add('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'true');
+    var items = focusable();
+    if (items.length) items[0].focus();
+  }
+  function closeMenu() {
+    panel.hidden = true;
+    overlay.hidden = true;
+    document.body.classList.remove('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'false');
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+  btn.addEventListener('click', function () {
+    if (panel.hidden) openMenu(); else closeMenu();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  /* In-page links (#book) inside the drawer must close it first. */
+  panel.querySelectorAll('a[href^="#"]').forEach(function (a) { a.addEventListener('click', function () { lastFocused = null; closeMenu(); }); });
+  document.addEventListener('keydown', function (e) {
+    if (panel.hidden) return;
+    if (e.key === 'Escape') { closeMenu(); return; }
+    if (e.key === 'Tab') {
+      var items = focusable();
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (!panel.hidden && window.innerWidth > 860) closeMenu();
+  });
+})();
+</script>
+</body>
+</html>

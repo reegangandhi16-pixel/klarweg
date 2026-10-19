@@ -110,18 +110,21 @@ b.handlers.push(async (msg) => {
   }
   // an off-host request that completes means the resolver block failed
   if (msg.method === 'Network.loadingFinished' && offReq.has(msg.params.requestId)) offLoaded.add(offReq.get(msg.params.requestId));
-  if (msg.method === 'Fetch.requestPaused') {   // preview mode: serve the data file with showDrafts:true
+  if (msg.method === 'Fetch.requestPaused') {   // preview mode / changed terms: serve an edited data file
     const r = await b.send('Fetch.getResponseBody', { requestId: msg.params.requestId });
-    const body = (r.base64Encoded ? Buffer.from(r.body, 'base64').toString() : r.body).replace('showDrafts: false', 'showDrafts: true');
+    let body = r.base64Encoded ? Buffer.from(r.body, 'base64').toString() : r.body;
+    for (const [from, to] of dataEdits) body = body.replace(from, to);
     await b.send('Fetch.fulfillRequest', { requestId: msg.params.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'application/javascript' }], body: Buffer.from(body).toString('base64') });
   }
 });
 await b.send('Runtime.enable'); await b.send('Page.enable'); await b.send('Network.enable');
 
-async function load(url, { drafts = false, width = 1280, height = 900, mobile = false } = {}) {
+let dataEdits = [];
+async function load(url, { drafts = false, edits = [], width = 1280, height = 900, mobile = false } = {}) {
   await b.send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });
   await b.send('Fetch.disable');
-  if (drafts) await b.send('Fetch.enable', { patterns: [{ urlPattern: '*live-classes-data.js*', requestStage: 'Response' }] });
+  dataEdits = (drafts ? [['showDrafts: false', 'showDrafts: true']] : []).concat(edits);
+  if (dataEdits.length) await b.send('Fetch.enable', { patterns: [{ urlPattern: '*live-classes-data.js*', requestStage: 'Response' }] });
   // via about:blank so a hash-only change (#teacher-…) is a real load, not a same-document navigation
   await b.send('Page.navigate', { url: 'about:blank' }); await sleep(100);
   await b.send('Page.navigate', { url });
@@ -149,6 +152,12 @@ try {
     ok(`A${w} testimonials hidden`, await q('document.getElementById("quotes").hidden'));
     ok(`A${w} form selects only defaults`, await q('document.getElementById("bf-teacher").options.length===1&&document.getElementById("bf-course").options.length===1'));
     ok(`A${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
+    ok(`A${w} hero CTAs lead to the consultation and how it works, not to empty sections`,
+      (await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")')) === '#book Book a consultation | #how How live classes work',
+      await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")'));
+    ok(`A${w} primary hero CTA keeps its arrow`, await q('!!document.querySelector(".live-hero .btn-live .btn-arrow")'));
+    ok(`A${w} no copy invites filtering or opening profiles that do not exist`, !(await q('/open a profile|Filter the teacher profiles/.test(document.body.innerText + document.getElementById("fa3").textContent)')));
+    ok(`A${w} requests go to the documented address`, (await q('document.querySelector("[data-contact-email]").textContent')) === 'klarwegofficial@gmail.com');
   }
   await load(L + '#teacher-teacher-1');
   ok('A deep link to a draft teacher opens no dialog', await q('!document.getElementById("t-dialog").open'));
@@ -165,6 +174,8 @@ try {
   await load(L, { drafts: true });
   ok('C preview shows drafts + banner', await q('!document.getElementById("draft-banner").hidden && document.querySelectorAll(".t-card").length===3'));
   ok('C teacher count', (await q('document.getElementById("t-count").textContent')) === '3 teachers');
+  ok('C with profiles, the hero and FAQ point to them', (await q('document.querySelector(".live-hero .btn-live").getAttribute("href")')) === '#teachers' && /Filter the teacher profiles/.test(await q('document.getElementById("fa3").textContent')));
+  ok('C levels taught are text for screen readers; the strip is hidden from them', await q('(()=>{const r=document.querySelector(".t-card .lvl-row");return r.querySelector(".vh").textContent==="Levels taught: A1, A2, B1"&&[...r.querySelectorAll(".lvl")].every(x=>x.getAttribute("aria-hidden")==="true")&&!r.hasAttribute("aria-label")})()'));
   await q('document.querySelector("[data-tlevel=B1]").click()');
   ok('C level filter B1', (await q('document.querySelectorAll(".t-card").length')) === 2 && (await q('document.querySelector("[data-tlevel=B1]").getAttribute("aria-pressed")')) === 'true');
   await q('(()=>{const s=document.getElementById("t-lang");s.value="German";s.dispatchEvent(new Event("change"))})()');
@@ -207,12 +218,32 @@ try {
   await q('document.getElementById("edit-request").click()');
   ok('C "Edit request" returns to the form with values kept', (await q('!document.getElementById("consult-form").hidden && document.getElementById("bf-name").value')) === 'Test Person' && (await q('document.activeElement.id')) === 'bf-name');
 
+  // ---- C2. consultation terms come from the data file everywhere on the page ----
+  await load(L, { edits: [["feeLabel: '₹100'", "feeLabel: '₹150'"], ['adjustmentDays: 7,', 'adjustmentDays: 10,']] });
+  ok('C2 data file served with changed terms', (await q('window.KWLive.consultation.feeLabel')) === '₹150');
+  ok('C2 no old fee or period left on the page', !(await q('/₹100|within 7 days|after 7 days|7-day adjust/i.test(document.body.innerText + document.getElementById("sticky-book").textContent)')),
+    await q('(document.body.innerText.match(/.{0,30}(₹100|within 7 days|after 7 days|7-day adjust).{0,30}/i)||[""])[0]'));
+  ok('C2 bound values flow inside their sentence (never a separate item of a flex row)', (await q('[...document.querySelectorAll("[data-consult-fee],[data-consult-days],[data-consult-dayadj]")].filter(e=>!e.classList.contains("fee-amt")&&/flex/.test(getComputedStyle(e.parentElement).display)).length')) === 0,
+    await q('[...document.querySelectorAll("[data-consult-fee],[data-consult-days],[data-consult-dayadj]")].filter(e=>!e.classList.contains("fee-amt")&&/flex/.test(getComputedStyle(e.parentElement).display)).map(e=>e.parentElement.textContent.trim().slice(0,40)).join(" | ")'));
+  ok('C2 new fee and period shown in every bound place', (await q('[...document.querySelectorAll("[data-consult-fee]")].every(e=>e.textContent==="₹150") && document.querySelectorAll("[data-consult-fee]").length>=8 && [...document.querySelectorAll("[data-consult-days]")].every(e=>e.textContent==="10 days") && document.querySelector("[data-consult-dayadj]").textContent==="10-day"')));
+
+  // ---- E. tablet widths: no overflow, with and without published content ----
+  for (const [w, mob] of [[768, true], [1024, false]]) {
+    for (const drafts of [false, true]) {
+      await load(L, { drafts, width: w, height: 1024, mobile: mob });
+      ok(`E${w}${drafts ? ' preview' : ''} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
+      ok(`E${w}${drafts ? ' preview' : ''} no element wider than the viewport`, (await q('[...document.querySelectorAll("main *")].filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.right>innerWidth+0.5&&!e.closest(".filter-scroll")}).length')) === 0,
+        await q('[...document.querySelectorAll("main *")].filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.right>innerWidth+0.5&&!e.closest(".filter-scroll")}).slice(0,3).map(e=>e.tagName+"."+e.className).join(", ")'));
+    }
+  }
+
   // ---- D. mobile: layout, sticky CTA, dialog ----
   for (const w of [320, 375, 414]) {
     await load(L, { drafts: true, width: w, height: 760, mobile: true });
     ok(`D${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
     ok(`D${w} sticky CTA hidden and unfocusable at the top`, (await q('document.getElementById("sticky-book").getAttribute("aria-hidden")')) === 'true' && (await q('document.querySelector("#sticky-book a").tabIndex')) === -1);
     await q('window.scrollTo(0, document.getElementById("how").offsetTop)'); await sleep(700);
+    ok(`D${w} sticky CTA names the fee`, /₹100 consultation/.test(await q('document.querySelector("#sticky-book strong").innerText')), await q('document.querySelector("#sticky-book strong").innerText'));
     ok(`D${w} sticky CTA shown mid-page`, (await q('document.getElementById("sticky-book").classList.contains("show")')) && (await q('document.querySelector("#sticky-book a").tabIndex')) === 0);
     await q('window.scrollTo(0, document.body.scrollHeight)'); await sleep(700);
     ok(`D${w} sticky CTA hidden at the footer, aria + tab order in sync`, !(await q('document.getElementById("sticky-book").classList.contains("show")'))

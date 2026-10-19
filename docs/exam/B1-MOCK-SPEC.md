@@ -60,7 +60,7 @@
 | Gate | Test | Pass criterion |
 |---|---|---|
 | M-20 Objective scoring | Golden attempts (scoring spec §8) | 100 % match with hand scoring; all 31 table rows |
-| M-21 Rubric aggregation | Synthetic rating sets incl. the third-rating boundaries | Correct per spec; OD-07 and OD-30 decided and implemented |
+| M-21 Rubric aggregation | Synthetic rating sets incl. the third-rating boundaries | Correct per spec; OD-07 (half-up) and OD-30 (third rating replaces) implemented per the owner instruction of 2026-10-19 (register v1.6 DRAFT, PR #105, not yet signed; signed v1.5: UNRESOLVED) |
 | M-22 Result model | Learner + admin views | Disclaimer present; no Goethe-score wording; no keys before submission; feedback separated from status |
 | M-23 Security | Penetration test checklist: IDOR on attempts, replayed leases, forged seq, signed-URL tampering/expiry, CSRF, key exfiltration via package/API/logs | 0 high/critical findings |
 

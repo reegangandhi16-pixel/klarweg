@@ -12,7 +12,7 @@
 # file ever references a production Worker, database, bucket or payment app id,
 # enables AI / speech / payments, or contains a secret.
 #
-# NOTHING HERE IS PROVISIONED. Every remote step is an owner action.
+# Provisioned 2026-10-19 on the owner's Free-tier account (owner-authorised; NONPROD-SETUP.md §3).
 
 name = "klarweg-access-nonprod"
 main = "src/index.js"
@@ -39,12 +39,12 @@ CORS_EXTRA_ORIGINS = "http://localhost:8788"
 AI_ENABLED = "false"
 SPEECH_MODE = "off"
 
-# Its own Access database. Placeholder until
-# `npx wrangler d1 create klarweg-access-nonprod` (owner).
+# Its own Access database. Created 2026-10-19 with
+# `wrangler d1 create klarweg-access-nonprod` (APAC).
 [[d1_databases]]
 binding = "DB"
 database_name = "klarweg-access-nonprod"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "1970ead8-a643-4c88-8358-fa899bb49b6d"
 
 # Private exam Worker of this environment. Deploy klarweg-exam-nonprod FIRST:
 # a service binding to a Worker that does not exist fails the deploy.

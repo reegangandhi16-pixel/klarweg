@@ -472,7 +472,9 @@ async function showResult() {
 /* ---------- events ---------- */
 app.addEventListener('change', (e) => {
   const el = e.target;
-  if (!el.dataset || !el.dataset.item || !S.autosave) return;
+  // choices only: a textarea also fires 'change' when it loses focus, and its text is saved by the 'input' handler
+  // below; treating it as a choice replaced the essay with { option_id: <text> } and the save was refused (A3)
+  if (!el.dataset || !el.dataset.item || !S.autosave || el.tagName === 'TEXTAREA') return;
   const value = { option_id: el.value === '' ? null : el.value };
   S.answers[el.dataset.item] = value; S.autosave.set(el.dataset.item, value);
   updateProgress();

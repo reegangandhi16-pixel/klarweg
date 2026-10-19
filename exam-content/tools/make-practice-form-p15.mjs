@@ -68,7 +68,7 @@ export const PRACTICE_FORM_P15 = buildPracticeForm({
       situations: [
         ['Ihr Sohn interessiert sich für Planeten und Sterne.', 'b', 'Sterne beobachten in der Sternwarte', 'Planeten und Sterne beobachtet man in der Sternwarte, und Anzeige b ist ein Angebot für Kinder.'],
         ['Sie haben eine große Wohnung, aber die Kinder sind ausgezogen, und Sie wollen etwas Kleineres.', 'c', 'Wir suchen eine größere Wohnung und bieten 2 Zimmer', 'Beim Wohnungstausch (c) bietet jemand eine kleinere Wohnung an.'],
-        ['Sie gehen abends oft allein nach Hause und möchten sich sicherer fühlen.', 'd', 'Selbstverteidigung für Frauen', 'Ein Kurs in Selbstverteidigung (d) hilft Frauen, sich auf dem Heimweg sicherer zu fühlen.'],
+        ['Ihre Schwester geht abends oft allein nach Hause und möchte sich sicherer fühlen.', 'd', 'Selbstverteidigung für Frauen', 'Der Selbstverteidigungskurs für Frauen (d) hilft Ihrer Schwester, sich auf dem Heimweg sicherer zu fühlen.'],
         ['Bevor es kalt wird, möchten Sie Ihr Auto prüfen lassen.', 'e', 'Wintercheck für 29 Euro', 'Die Werkstatt (e) bietet einen Wintercheck an.'],
         ['Sie haben Grippe und können nicht einkaufen gehen.', 'f', 'Wir gehen für Sie einkaufen, wenn Sie krank sind.', 'Wer mit Grippe im Bett liegt, bekommt Hilfe von der Nachbarschaftshilfe (f), die für Kranke einkauft.'],
         ['Ihr Wohnzimmerteppich ist sehr schmutzig.', 'i', 'Wir holen Ihren Teppich ab und bringen ihn sauber zurück.', 'Einen schmutzigen Teppich holt die Teppichreinigung (i) ab und bringt ihn sauber zurück.'],

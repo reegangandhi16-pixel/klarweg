@@ -1224,7 +1224,7 @@
     "task_id": "tsk:b1:p15-l3",
     "is_example": false,
     "interaction": "matching_pool",
-    "stem": "15. Sie gehen abends oft allein nach Hause und möchten sich sicherer fühlen.",
+    "stem": "15. Ihre Schwester geht abends oft allein nach Hause und möchte sich sicherer fühlen.",
     "options": [
       {
         "option_id": "a",
@@ -1311,7 +1311,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Ein Kurs in Selbstverteidigung (d) hilft Frauen, sich auf dem Heimweg sicherer zu fühlen."
+      "explanation_de": "Der Selbstverteidigungskurs für Frauen (d) hilft Ihrer Schwester, sich auf dem Heimweg sicherer zu fühlen."
     }
   },
   {

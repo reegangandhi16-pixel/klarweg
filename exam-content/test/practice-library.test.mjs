@@ -243,3 +243,20 @@ test('LIBRARY: no impersonal passive with a reflexive pronoun ("getroffen wird s
     }
   }
 });
+
+test('LIBRARY: Lesen 3 — a keyed ad restricted to women or men never answers a situation addressed to the candidate ("Sie …")', () => {
+  // internal audit 2026-10-19 found P15 Lesen 3 item 15 keyed to "Selbstverteidigung für Frauen" for "Sie gehen abends …":
+  // a male candidate reading literally could choose 0; such situations must name the person who fits (e.g. "Ihre Schwester")
+  const RESTRICTED = /\bfür (Frauen|Männer)\b(?! und)/;
+  for (const f of PRACTICE_FORMS) {
+    const keys = JSON.parse(f.files['keys.json']).keys;
+    const ads = new Map(JSON.parse(f.files['assets.json']).map((a) => [a.id, (a.text && a.text.body_md) || '']));
+    for (const it of JSON.parse(f.files['items.json'])) {
+      if (it.module !== 'lesen' || it.part !== 3 || it.is_example) continue;
+      const key = keys[it.id] && keys[it.id].correct;
+      const ad = [...ads].find(([id]) => id.endsWith(`-l3-ad-${key}`));
+      if (!ad || !RESTRICTED.test(ad[1])) continue;
+      assert.equal(/^\d+\.\s+Sie\b/.test(it.stem), false, `${f.name} ${it.id}: "${it.stem}" keyed to "${ad[1]}"`);
+    }
+  }
+});

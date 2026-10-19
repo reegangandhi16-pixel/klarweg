@@ -23,7 +23,7 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
         ['Henrik findet die Zeit mit dem Baby anstrengender als erwartet.', 'richtig', 'Ehrlich gesagt hatte ich mir das ruhiger vorgestellt.', 'Henrik hatte sich die Zeit ruhiger vorgestellt.'],
         ['Emil schläft nachts schon ohne Pause.', 'falsch', 'Emil schläft nachts noch nicht durch', 'Henrik schreibt, dass das Baby in der Nacht immer wieder wach wird, also nicht ohne Pause schläft.'],
         ['In der Krabbelgruppe sind kaum andere Väter.', 'richtig', 'Dort bin ich meistens der einzige Vater', 'Henrik ist meistens der einzige Vater in der Gruppe.'],
-        ['Henriks Chef war gegen die lange Elternzeit.', 'falsch', 'Mein Chef hat es aber sofort akzeptiert.', 'Nur die Firma war überrascht, Henriks Chef hat die lange Elternzeit dagegen sofort akzeptiert.'],
+        ['Henriks Chef war gegen die lange Elternzeit.', 'falsch', 'Mein Chef hat es aber sofort akzeptiert.', 'In der Firma war man zuerst überrascht, aber Henriks Chef hat die lange Elternzeit sofort akzeptiert.'],
         ['Nach der Elternzeit arbeitet Henrik zuerst weniger Stunden.', 'richtig', 'zuerst nur mit 30 Stunden pro Woche', 'Henrik beginnt zuerst mit 30 Stunden pro Woche.']
       ]
     },
@@ -68,7 +68,7 @@ export const PRACTICE_FORM_P10 = buildPracticeForm({
       example: ['Sie möchten selbst Geschirr aus Ton machen.', 'a'],
       situations: [
         ['Ihre Tochter ist 15 und möchte vor der Schule etwas Geld verdienen.', 'b', 'ab 14 Jahren, Bezahlung pro Monat', 'Als Zeitungsausträgerin (b) kann man ab 14 morgens Geld verdienen.'],
-        ['Sie haben einen jungen Hund, der nicht gut hört.', 'f', 'Training für junge Hunde in kleinen Gruppen', 'Ein junger Hund, der nicht gehorcht, braucht Training, und die Hundeschule (f) bietet das in kleinen Gruppen an.'],
+        ['Sie haben einen jungen Hund, der noch nicht gut gehorcht.', 'f', 'Training für junge Hunde in kleinen Gruppen', 'Ein junger Hund, der nicht gehorcht, braucht Training, und die Hundeschule (f) bietet das in kleinen Gruppen an.'],
         ['Sie möchten Arabisch lernen und dafür jemandem mit Deutsch helfen.', 'g', 'Ich lerne Deutsch und biete Arabisch.', 'Das Sprachtandem (g) bietet Arabisch und sucht Deutsch.'],
         ['Ein Stuhl von Ihrer Großmutter ist kaputt, und Sie möchten ihn behalten.', 'j', 'repariert alte Stühle und Tische', 'Den Stuhl der Großmutter will man reparieren lassen statt wegwerfen, das macht die Tischlerei (j).'],
         ['Sie haben sich selbstständig gemacht und müssen Ihre Rechnungen selbst organisieren.', 'e', 'Online-Kurs Buchhaltung für Selbstständige', 'Rechnungen organisieren ist Buchhaltung, und der Online-Kurs (e) richtet sich an Selbstständige.'],

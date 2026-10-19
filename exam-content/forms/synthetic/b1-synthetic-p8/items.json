@@ -3975,7 +3975,7 @@
     "task_id": "tsk:b1:p8-h3",
     "is_example": false,
     "interaction": "binary_choice",
-    "stem": "21. Paula bereitet die Präsentation im Büro vor.",
+    "stem": "21. Paula bereitet die Präsentation unter der Woche vor.",
     "options": [
       {
         "option_id": "richtig",
@@ -4026,7 +4026,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Paula arbeitet nicht im Büro an der Präsentation, sondern am Wochenende."
+      "explanation_de": "Paula bereitet die Präsentation am Wochenende vor, nicht unter der Woche."
     }
   },
   {

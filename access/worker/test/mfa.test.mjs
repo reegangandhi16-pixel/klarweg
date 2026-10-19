@@ -247,3 +247,33 @@ test('OD-19 A4 row 10: without TOTP_ENC_KEY every staff route fails closed (503 
   await enrol(rotated, lead.cookie);
   assert.equal((await queue(rotated, lead.cookie)).status, 200);
 });
+
+test('OD-19 review of #130: without TOTP_ENC_KEY, recovery-code regeneration and the status route fail closed (503 mfa_unavailable) even for a session verified minutes ago; with the key both behave as before', async () => {
+  const { env, exam } = makeEnv();
+  const r = await signup(env); await role(exam.env, r.id, 'rater');
+  const { codes } = await enrol(env, r.cookie);
+  const hashes = async () => (await env.DB.prepare('SELECT code_hash FROM user_recovery_codes WHERE user_id = ?1 ORDER BY code_hash').bind(r.id).all()).results.map((x) => x.code_hash);
+  const before = await hashes();
+  const noKey = { ...env, TOTP_ENC_KEY: undefined };
+  const badKey = { ...env, TOTP_ENC_KEY: 'not-base64-32-bytes' };
+  for (const [label, e] of [['absent', noKey], ['unusable', badKey]]) {
+    const regen = await req(e, 'POST', '/auth/mfa/recovery-codes', { cookie: r.cookie, body: {} });
+    assert.equal(regen.status, 503, `regenerate, key ${label}`); assert.equal(regen.json.error, 'mfa_unavailable');
+    assert.equal(regen.json.recovery_codes, undefined, 'no codes issued');
+    const st = await req(e, 'GET', '/auth/mfa/status', { cookie: r.cookie });
+    assert.equal(st.status, 503, `status, key ${label}`); assert.equal(st.json.error, 'mfa_unavailable');
+    assert.equal(st.json.fresh, undefined, 'no freshness reported'); assert.equal(st.headers.get('cache-control'), 'no-store');
+  }
+  assert.deepEqual(await hashes(), before, 'the existing recovery codes are untouched');
+  assert.equal((await env.DB.prepare("SELECT COUNT(*) AS n FROM mfa_audit WHERE user_id = ?1 AND event = 'codes_regenerated'").bind(r.id).first()).n, 0);
+  // with the key: status reports the fresh session; regeneration issues a new set and the old set stops working (D5)
+  const st = await req(env, 'GET', '/auth/mfa/status', { cookie: r.cookie });
+  assert.equal(st.status, 200); assert.deepEqual([st.json.enrolled, st.json.fresh, st.json.recovery_codes_left], [true, true, 10]);
+  const regen = await req(env, 'POST', '/auth/mfa/recovery-codes', { cookie: r.cookie, body: {} });
+  assert.equal(regen.status, 200, JSON.stringify(regen.json)); assert.equal(regen.json.recovery_codes.length, 10);
+  assert.notDeepEqual(await hashes(), before);
+  const old = await req(env, 'POST', '/auth/mfa/verify', { cookie: r.cookie, body: { recovery_code: codes[0] } });
+  assert.equal(old.json.error, 'mfa_invalid_code', 'the old set no longer works');
+  // signed out stays 401 when the key is present
+  assert.equal((await req(env, 'GET', '/auth/mfa/status')).status, 401);
+});

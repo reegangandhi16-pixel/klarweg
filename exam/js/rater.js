@@ -34,7 +34,7 @@ let enrolment = null;   // { secret, uri } while the authenticator app is being 
 let unsaved = null;     // { attempt_id, item_id, bands }
 async function showMfa(error = '', recovery = false) {
   let st;
-  try { st = await api.mfaStatus(); } catch (e) { return screen(mfaEnrolStartView(esc, { error: errorText(e) }).replace('data-act="mfa-enrol"', 'data-act="mfa-retry"')); }
+  try { st = await api.mfaStatus(); } catch (e) { if (mfaDown(e)) return showUnavailable(); return screen(mfaEnrolStartView(esc, { error: errorText(e) }).replace('data-act="mfa-enrol"', 'data-act="mfa-retry"')); }
   screen(st.enrolled ? mfaVerifyView(esc, { error, recovery }) : mfaEnrolStartView(esc, { error }));
 }
 

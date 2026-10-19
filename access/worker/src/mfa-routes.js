@@ -7,6 +7,7 @@
    POST /auth/mfa/enroll/confirm    { code } → confirms, marks this session verified → { recovery_codes } (shown once)
    POST /auth/mfa/verify            { code } or { recovery_code } → marks this session verified
    POST /auth/mfa/recovery-codes    with a fresh second factor → a new set; the old set stops working (D5)
+   Without a usable TOTP_ENC_KEY every one of these answers 503 mfa_unavailable (fail closed; no state, no codes).
 
    Limits: D3 5 wrong codes per user / 20 per network per 15 min (rate_counters); D4 30 min lock after 10 consecutive
    failures (user_totp). An owner reset (D6) is an audited database procedure (runbook), not an endpoint. Every
@@ -78,6 +79,7 @@ async function wrongCode(request, env, userId, t, what) {
 }
 
 export async function mfaStatus(request, env) {
+  if (!hasEncKey(env)) return reply({ ok: false, error: "mfa_unavailable" }, 503);   // fail closed: no state or codes without the key
   const ctx = await sessionContext(request, env);
   if (!ctx) return reply({ ok: false, error: "auth_required" }, 401);
   const row = await totpRow(env, ctx.user.id);
@@ -172,6 +174,7 @@ export async function mfaVerify(request, env) {
 }
 
 export async function mfaRegenerateRecoveryCodes(request, env) {
+  if (!hasEncKey(env)) return reply({ ok: false, error: "mfa_unavailable" }, 503);   // fail closed: no state or codes without the key
   const ctx = await sessionContext(request, env);
   if (!ctx) return reply({ ok: false, error: "auth_required" }, 401);
   const t = nowSec();

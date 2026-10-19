@@ -37,6 +37,9 @@
       updated Access Worker still keeps staff out, but they get `401 mfa_required` instead of the 503.
    - Never deploy the exam Worker change alone, and never roll the Access Worker back while the exam Worker stays on
      the new version: either way staff routes could stay open without the key.
+   - **Rollback, in reverse order: the exam Worker first, then the Access Worker.** Rolling the exam Worker back first
+     leaves new Access with the old exam Worker, which stays closed (`401 mfa_required`). Then roll back Access. Check
+     after each step, as above.
    - This order is for updating Workers that already exist. On a first-time setup the exam Worker has to exist before the
      Access Worker's service binding can point at it (`NONPROD-SETUP.md` §3 step 6); exam routes are off until then.
 

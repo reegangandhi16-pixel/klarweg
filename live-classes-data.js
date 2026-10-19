@@ -88,8 +88,10 @@
            teaching German and the Goethe-Zertifikat C1 certificate (listed
            in `goethe`, and in `qualifications` as the only confirmed
            qualification; the profile shows it once). No degree or
-           separate teaching qualification is claimed. Still open:
-           specialisms (suggested wording, awaiting approval).
+           separate teaching qualification is claimed. The owner approved
+           the three specialisms as written on 2026-10-20. Every field is
+           now confirmed, but the profile is NOT approved for publication:
+           it stays draft until the launch go-ahead (D8).
            This repository is public: add education or certificate
            details only once confirmed and approved for publication. */
         id: 'reegan-gandhi',
@@ -109,7 +111,7 @@
         approach: 'Every topic starts with a clear explanation of the grammar, in Hindi or English, followed by practical examples. You then practise with the structure yourself and get corrected as you go, one step at a time.',
         formats: ['Group batch', 'One-to-one'],
         availability: null,
-        unconfirmed: ['specialisms']
+        unconfirmed: []
       },
       {
         id: 'teacher-1',

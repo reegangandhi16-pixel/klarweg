@@ -103,12 +103,17 @@ test('LIVE DATA: the committed data file is well formed (drafts included)', () =
   assert.deepEqual(checkData(loadData()), []);
 });
 
-test('LIVE DATA: a named draft profile cannot go live by deleting draft: true alone', () => {
+test('LIVE DATA: a named draft profile cannot reach the public site by deleting draft: true alone', () => {
   const D = loadData();
+  const flip = (data, id, extra = {}) => ({ ...clone(data), teachers: data.teachers.map((x) => (x.id === id ? { ...clone(x), ...extra, draft: false } : x)) });
   for (const t of D.teachers.filter((x) => x.draft && !/^\[/.test(x.name))) {
-    const flipped = { ...clone(D), teachers: D.teachers.map((x) => (x.id === t.id ? { ...clone(x), draft: false } : x)) };
-    const blocked = checkData(flipped).some((e) => e.startsWith(`teacher ${t.id}:`));
-    assert.ok(blocked, `${t.id}: nothing stops this draft from being published once draft: true is removed`);
+    // while anything is unconfirmed or still a placeholder, the validator refuses the entry
+    const blockedByData = (x) => checkData(flip(D, t.id, x)).some((e) => e.startsWith(`teacher ${t.id}:`));
+    if ((t.unconfirmed || []).length || placeholders(t).length) assert.ok(blockedByData({}), `${t.id}: incomplete, yet the validator accepts it once draft: true is removed`);
+    assert.ok(blockedByData({ unconfirmed: ['specialisms'] }), `${t.id}: an unconfirmed field must block publication`);
+    // fully confirmed or not, the page itself stays unpublished until the launch gate is clear
+    const rest = launchBlockers(flip(D, t.id));
+    assert.ok(rest.length > 0 && !isAllowlisted(), `${t.id}: removing draft: true alone would make the profile public`);
   }
 });
 

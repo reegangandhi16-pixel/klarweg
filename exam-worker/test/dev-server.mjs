@@ -36,7 +36,12 @@ async function makeAccess(users) {
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8' };
 
-export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0', mfa = false } = {}) {
+/* proxy: true (opt-in; KX_DEV_PROXY=1 for the browser tests) sends /exam/v1/* and /auth/* through the REAL klarweg-access
+   Worker in-process: session cookie → findSessionUser → /exam proxy (header allow-list, 512 KiB body cap, X-KW-* strip,
+   no-store, set-cookie removal) → service binding → exam Worker. It implies the in-process Access of `mfa`; without mfa
+   the local test users' sessions start verified. The browser's Origin is not forwarded (the CSRF guard is covered by the
+   Access tests; a same-origin dev page is not a cross-site write). */
+export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0', mfa = false, proxy = process.env.KX_DEV_PROXY === '1' } = {}) {
   const FORMS = { s0: [FORM_DIR], ...Object.fromEntries(PRACTICE_LIBRARY.map((f) => [f.name.toLowerCase(), [f.dir]])), practice: PRACTICE_LIBRARY.map((f) => f.dir) };
   if (!FORMS[form]) throw new Error(`unknown form ${form} (${Object.keys(FORMS).join('|')})`);
   const h = makeEnv({ formDirs: FORMS[form] });
@@ -45,11 +50,28 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
   await role(h.env, users.rater1, 'rater'); await role(h.env, users.rater2, 'rater');
   const aliasFor = (req) => { const m = /(?:^|;\s*)kx-dev-as=([a-z0-9]+)/.exec(req.headers.cookie || ''); return (m && users[m[1]]) ? m[1] : 'learner'; };
   const userFor = (req) => users[aliasFor(req)];
-  const access = mfa ? await makeAccess(users) : null;
+  const access = mfa || proxy ? await makeAccess(users) : null;
+  if (proxy) {
+    Object.assign(access.env, { EXAM_ROUTES: 'on', EXAM_PROXY_SECRET: PROXY_SECRET, EXAM: { fetch: (r) => worker.fetch(r, h.env) } });
+    if (!mfa) await access.env.DB.prepare('UPDATE sessions SET mfa_verified_at = ?1').bind(Math.floor(Date.now() / 1000)).run();
+  }
+  const viaAccess = async (req, url) => {   // the browser request, as the Access Worker would receive it
+    const chunks = []; for await (const c of req) chunks.push(c);
+    const headers = { cookie: `kw_session=${access.tokens[aliasFor(req)]}`, 'CF-Connecting-IP': '127.0.0.1' };
+    for (const k of ['content-type', 'content-length']) if (req.headers[k]) headers[k] = req.headers[k];
+    return accessWorker.fetch(new Request('https://klarweg-access.internal' + url.pathname + url.search, { method: req.method, headers, body: ['GET', 'HEAD'].includes(req.method) ? undefined : Buffer.concat(chunks) }), access.env, { waitUntil() {} });
+  };
   delete h.env.__clock;                            // real time in the browser
   const server = http.createServer(async (req, res) => {
     try {
       const url = new URL(req.url, 'http://127.0.0.1');
+      if (proxy && (url.pathname.startsWith('/exam/v1/') || url.pathname.startsWith('/auth/'))) {
+        const r = await viaAccess(req, url);
+        const out = Object.fromEntries([...r.headers].filter(([k]) => k !== 'set-cookie'));
+        res.writeHead(r.status, out);
+        res.end(Buffer.from(await r.arrayBuffer()));
+        return;
+      }
       if (access && url.pathname.startsWith('/auth/mfa/')) {   // the real Access routes, server-to-server (no Origin)
         const chunks = []; for await (const c of req) chunks.push(c);
         const headers = { cookie: `kw_session=${access.tokens[aliasFor(req)]}` };
@@ -89,18 +111,19 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
     }
   });
   await new Promise((r) => server.listen(port, '127.0.0.1', r));
-  return { server, port: server.address().port, env: h.env, user, users, form, access };
+  return { server, port: server.address().port, env: h.env, user, users, form, access, proxy };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   // --mfa: raters go through the real second-factor screens (OD-19) against an in-process Access Worker
   const mfa = process.argv.includes('--mfa');
+  const proxyMode = process.argv.includes('--proxy') || process.env.KX_DEV_PROXY === '1';
   const pos = process.argv.slice(2).filter((x) => !x.startsWith('--'));
-  const s = await startDevServer({ port: Number(pos[0] || 8788), form: pos[1] || 'practice', mfa });
+  const s = await startDevServer({ port: Number(pos[0] || 8788), form: pos[1] || 'practice', mfa, proxy: proxyMode });
   const u = `http://127.0.0.1:${s.port}/exam`;
   console.log(`klarweg-exam dev server (local only, synthetic content, TEST AUDIO tones — not real listening audio), form ${s.form}
   learner:   ${u}/dev/as/learner
   raters:    ${u}/dev/as/rater1   ${u}/dev/as/rater2
   no role:   ${u}/dev/as/outsider
-  ${mfa ? 'second factor: ON (raters enrol with an authenticator app on first visit; local in-memory data only)' : 'second factor: raters count as verified (start with --mfa to see the 2FA screens)'}`);
+  ${proxyMode ? 'requests: through the real Access Worker in-process (session, /exam proxy, service binding)\n  ' : ''}${mfa ? 'second factor: ON (raters enrol with an authenticator app on first visit; local in-memory data only)' : 'second factor: raters count as verified (start with --mfa to see the 2FA screens)'}`);
 }

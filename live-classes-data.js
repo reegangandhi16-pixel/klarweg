@@ -44,6 +44,10 @@
        been confirmed in writing. Confirm both (and how the fee is paid
        and refunded) before the page is published. */
     consultation: {
+      /* Set true only once the owner has confirmed fee, adjustment
+         period and payment method in writing. The launch check
+         (scripts/live-classes-readiness.mjs) blocks publishing until then. */
+      termsConfirmed: false,
       feeLabel: '₹100',
       adjustmentDays: 7,       // UNCONFIRMED — see above
       durationMinutes: null,   // e.g. 20 — shown only when set
@@ -75,7 +79,7 @@
         id: 'teacher-1',
         draft: true,
         name: '[Teacher 1 · full name]',
-        photo: null,               // e.g. 'public/teachers/anna-k.jpg' (approved portrait, 4:5)
+        photo: null,               // e.g. 'public/teachers/<id>.jpg': approved photo, 4:3 landscape, at least 800×600; cards crop around the upper third
         photoAlt: '',
         headline: '[One-line teaching focus, from the teacher]',
         experience: '[Verified years] of teaching German',
@@ -217,7 +221,9 @@
 
     /* ---------- testimonials ----------
        Only real students, quoted with their written permission.
-       { quote, name, detail (e.g. 'Passed Goethe B1, 2026'), draft } */
+       { quote, name, detail (e.g. 'Passed Goethe B1, 2026'),
+         permission (how and when consent was given, e.g.
+         'Email, 2026-11-02'; kept here, not shown), draft } */
     testimonials: []
   };
 })(window);

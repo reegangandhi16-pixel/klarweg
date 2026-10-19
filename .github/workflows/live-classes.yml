@@ -21,6 +21,11 @@ on:
       - 'sitemap.xml'
       - '.github/pages-allowlist.txt'
       - '.github/workflows/live-classes.yml'
+      # pages the address test and the launch gate read (scripts/live-classes-readiness.mjs)
+      - 'contact.html'
+      - 'index.html'
+      - 'terms.html'
+      - 'privacy.html'
   push:
     branches: [main]
     paths:
@@ -37,6 +42,11 @@ on:
       - 'sitemap.xml'
       - '.github/pages-allowlist.txt'
       - '.github/workflows/live-classes.yml'
+      # pages the address test and the launch gate read (scripts/live-classes-readiness.mjs)
+      - 'contact.html'
+      - 'index.html'
+      - 'terms.html'
+      - 'privacy.html'
   workflow_dispatch:
 
 permissions:
@@ -53,8 +63,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1   # v7.1.0
         with:
           node-version: '24'
-      - name: Static guards (drafts off, unpublished, links, scripts parse)
+      - name: Static guards (drafts off, unpublished, links, scripts parse, data valid, launch gate)
         run: node --test scripts/live-classes-static.test.mjs
+      - name: Launch readiness report (fails only on data errors, or if the page is allowlisted with blockers)
+        run: node scripts/live-classes-readiness.mjs
       - name: Chrome
         run: |
           CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)"

@@ -12,6 +12,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
+import os from 'node:os';
+import { checkData, launchBlockers, isAllowlisted, POLICIES } from './live-classes-readiness.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -92,4 +94,57 @@ test('LIVE: the consultation fee and adjustment period are read from the data fi
   for (const [attr, want] of [['fee', D.consultation.feeLabel], ['days', D.consultation.adjustmentDays + ' days'], ['dayadj', D.consultation.adjustmentDays + '-day']]) {
     for (const m of html.matchAll(new RegExp(`<span[^>]*\\bdata-consult-${attr}\\b[^>]*>([^<]*)</span>`, 'g'))) assert.equal(m[1], want, `no-JS fallback for data-consult-${attr}`);
   }
+});
+
+/* ---------- data validation and the launch gate (scripts/live-classes-readiness.mjs) ---------- */
+const clone = (x) => JSON.parse(JSON.stringify(x));
+
+test('LIVE DATA: the committed data file is well formed (drafts included)', () => {
+  assert.deepEqual(checkData(loadData()), []);
+});
+
+test('LIVE DATA: published entries must be complete and consistent; drafts may stay incomplete', () => {
+  const base = loadData();
+  const expectError = (mutate, rx, why) => {
+    const D = clone(base); mutate(D);
+    const errors = checkData(D);
+    assert.ok(errors.some((e) => rx.test(e)), `${why}: expected ${rx}, got ${JSON.stringify(errors)}`);
+  };
+  const realTeacher = { id: 'anna-k', draft: false, name: 'Anna K', photo: null, photoAlt: '', headline: 'Grammar first', experience: '5 years of teaching German',
+    proficiency: 'C2', qualifications: ['MA German'], goethe: [], levels: ['A1'], teachesIn: ['Hindi'], specialisms: [], examPrep: null, approach: 'x', formats: ['Group batch'], availability: null };
+  expectError((D) => { D.courses[0].draft = false; D.courses[0].title = 'A1'; }, /names draft teacher "teacher-1"/, 'a published course naming a draft teacher would show no teacher on the live site');
+  expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open' }); }, /enrolment "open" needs priceLabel/, 'open enrolment without a fee');
+  expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: '₹9,999' }); }, /needs nextBatch/, 'open enrolment without a start date');
+  expectError((D) => { D.teachers.push({ ...realTeacher, qualifications: [] }); }, /published teacher needs qualifications/, 'a published teacher without qualifications');
+  expectError((D) => { D.teachers.push({ ...realTeacher, photo: 'public/teachers/missing.jpg', photoAlt: 'x' }); }, /photo public\/teachers\/missing\.jpg does not exist/, 'a missing photo file');
+  expectError((D) => { D.testimonials.push({ quote: 'Great', name: 'R.', detail: '', draft: false }); }, /published testimonial needs permission/, 'a testimonial without recorded consent');
+  expectError((D) => { D.courses[1].id = D.courses[0].id; }, /duplicate id/, 'duplicate course ids');
+  expectError((D) => { D.courses[0].levels = ['A3']; }, /levels has "A3"/, 'an unknown level');
+  expectError((D) => { D.courses[0].teacherIds = ['nobody']; }, /unknown teacher "nobody"/, 'an unknown teacher id');
+  expectError((D) => { D.consultation.termsConfirmed = 'yes'; }, /termsConfirmed/, 'termsConfirmed must be a boolean');
+  expectError((D) => { delete D.policies.missedClass; }, /policies\.missedClass/, 'a policy key removed');
+  expectError((D) => { D.showDrafts = true; }, /showDrafts/, 'drafts switched on');
+});
+
+test('LIVE GATE: blockers are listed today, and the page cannot be allowlisted while any remain', () => {
+  const blockers = launchBlockers(loadData());
+  assert.ok(blockers.length > 0, 'the page is not ready today, so blockers must be reported');
+  if (isAllowlisted()) assert.deepEqual(blockers, [], 'live-classes is in the Pages allowlist but launch blockers remain');
+});
+
+test('LIVE GATE: the gate clears once every blocker is resolved (so it can actually be satisfied)', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kw-live-gate-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'live-classes.html'), html);
+    fs.writeFileSync(path.join(dir, 'index.html'), '<p>Live classes with a teacher are available.</p>');
+    fs.writeFileSync(path.join(dir, 'terms.html'), '<h2>Live classes</h2>');
+    fs.writeFileSync(path.join(dir, 'privacy.html'), '<h2>Consultation requests</h2>');
+    const D = clone(loadData());
+    D.consultation.termsConfirmed = true;
+    for (const k of POLICIES) D.policies[k] = 'Confirmed policy text.';
+    D.teachers[0].draft = false; D.courses[0].draft = false;
+    assert.deepEqual(launchBlockers(D, dir), []);
+    D.consultation.feeLabel = '₹150';
+    assert.ok(launchBlockers(D, dir).some((b) => /meta description/.test(b)), 'a changed fee with stale meta descriptions is a blocker');
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });

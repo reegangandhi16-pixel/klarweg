@@ -26,6 +26,7 @@
     "test:exam:browser": "node exam-worker/test/browser-e2e.mjs",
     "test:live": "node --test scripts/live-classes-static.test.mjs && node scripts/live-classes-browser.mjs",
     "test:live:browser": "node scripts/live-classes-browser.mjs",
+    "live:readiness": "node scripts/live-classes-readiness.mjs",
     "exam:demo": "node exam-worker/test/dev-server.mjs",
     "exam:validate": "node exam-content/tools/validate.mjs",
     "exam:build": "node exam-content/tools/build-release.mjs --release r000",

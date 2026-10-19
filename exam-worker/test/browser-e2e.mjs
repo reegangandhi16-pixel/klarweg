@@ -35,6 +35,13 @@ const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/M
 const CHROME_ARGS = (process.env.CHROME_ARGS || '').split(/\s+/).filter(Boolean);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (...a) => console.log('[browser-e2e]', ...a);
+/* waitFor polling only (read-only checks): a page that is navigating or reloading answers "target navigated or closed" /
+   "execution context destroyed" for a moment. That is "not yet", not a failure; poll again. Side-effecting evaluations
+   (clicks) never go through here, so nothing can run twice. */
+const NAVIGATING = /Inspected target navigated or closed|Execution context was destroyed|Cannot find context with specified id/;
+async function probe(evaluate, expr) {
+  try { return await evaluate(expr); } catch (e) { if (NAVIGATING.test(String(e && e.message))) return false; throw e; }
+}
 
 async function launch({ autoplayFlag = true } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-chrome-'));
@@ -74,7 +81,7 @@ async function run(viewport) {
     const text = () => evaluate('document.body.innerText');
     const waitFor = async (fnSrc, ms = 15000, label = fnSrc) => {
       const t0 = Date.now();
-      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${fnSrc}); } catch { return false; } })()`)) return; await sleep(200); }
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${fnSrc}); } catch { return false; } })()`)) return; await sleep(200); }
       throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 800)}\n--- console ---\n${b.events.filter((e) => e.method === 'Runtime.exceptionThrown' || e.method === 'Log.entryAdded' || (e.method === 'Runtime.consoleAPICalled' && e.params.type === 'error')).map((e) => JSON.stringify(e.params).slice(0, 300)).join('\n')}`);
     };
     const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
@@ -321,7 +328,7 @@ async function runDefaultAutoplay(viewport) {
     };
     const waitFor = async (src, ms, label) => {
       const t0 = Date.now();
-      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(100); }
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(100); }
       throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
     };
     const okPartner = () => evaluate(`window.__ok.filter((p) => p.asset === ${JSON.stringify(PARTNER)})`);
@@ -409,7 +416,7 @@ async function runDefaultAutoplayHoeren(viewport) {
     };
     const waitFor = async (src, ms, label) => {
       const t0 = Date.now();
-      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(100); }
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(100); }
       throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
     };
     await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
@@ -473,7 +480,7 @@ async function runPractice() {
     const text = () => evaluate('document.body.innerText');
     const waitFor = async (src, ms = 15000, label = src) => {
       const t0 = Date.now();
-      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
       throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
     };
     const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
@@ -796,7 +803,7 @@ async function runSprechenTopic() {
       };
       const waitFor = async (src, ms, label) => {
         const t0 = Date.now();
-        while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+        while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
         throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
       };
       await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
@@ -839,7 +846,7 @@ async function runLeaseExpiry() {
     };
     const waitFor = async (src, ms, label) => {
       const t0 = Date.now();
-      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
       throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
     };
     const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
@@ -930,7 +937,7 @@ async function runTwoTabs() {
     };
     const waitFor = async (src, ms, label) => {
       const t0 = Date.now();
-      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
       throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
     };
     return { evaluate, waitFor, click: (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`) };
@@ -1024,7 +1031,7 @@ async function runRater2fa() {
     const text = () => evaluate('document.body.innerText');
     const waitFor = async (src, ms, label) => {
       const t0 = Date.now();
-      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
       throw new Error(`timeout: ${label}\n${(await text()).slice(0, 600)}`);
     };
     const h1 = (t) => waitFor(`document.querySelector('h1')?.textContent === ${JSON.stringify(t)}`, 10000, `h1 ${t}`);

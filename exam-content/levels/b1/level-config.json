@@ -82,10 +82,10 @@
       "scoring": {
         "strategy": "rubric_double_rating",
         "max_points": 100,
-        "rounding": "unresolved",
-        "rounding_note": "Official text: 'auf volle Punkte auf- bzw. abgerundet' — threshold not published (register OD-07, U-01).",
-        "third_rating": { "trigger": "one_below_one_at_or_above_pass_and_mean_below_pass", "combination": "unresolved",
-          "note": "Combination rule not published (register OD-30, U-02)." }
+        "rounding": "half_up",
+        "rounding_note": "Owner decision OD-07 (2026-10-19): half-up (>= .5 up), the rule of the Durchführungsbestimmungen B1 §5 already used for Sprechen. Klarweg convention: the official Schreiben text only says 'auf volle Punkte auf- bzw. abgerundet' and publishes no threshold (U-01).",
+        "third_rating": { "trigger": "one_below_one_at_or_above_pass_and_mean_below_pass", "combination": "third_replaces",
+          "note": "Owner decision OD-30 (2026-10-19): the third (lead) rating replaces the two-rater mean (OD-13 adjudication). Klarweg convention: the official combination rule is not published (U-02)." }
       },
       "parts": [
         { "part": 1, "construct": "Persönliche Mitteilung zur Kontaktpflege", "interaction": "text_response", "item_count": 1, "example_count": 0, "advisory_seconds": 1200, "target_words": 80, "rubric": "rub:b1:schreiben:p1@1" },

@@ -100,7 +100,7 @@ crons = ["*/5 * * * *"]
 | A2 | Third-party cookies blocked in the browser | Screen "Cookies blockiert" (not "Bitte anmelden") |
 | A3 | Full learner journey on one practice form (Lesen, Hören, Schreiben, Sprechen with a real microphone, result, history) | Completes; result and own recording visible |
 | A4 | Rater journey with 2FA (`RUNBOOK-RATER-2FA.md` §2, all 11 rows) | All pass |
-| A5 | Two raters finish the attempt | Final Sprechen score; Schreiben final or `pending_rule` as configured (OD-07) |
+| A5 | Two raters finish the attempt; then a case that triggers a third rating | Final Sprechen and Schreiben scores (OD-07 half-up); with a third rating the lead's total, rounded half-up, is the result (OD-30) |
 | A6 | Lease: second browser takes over; laptop sleep > 60 s mid-Lesen | Takeover screen in the first browser; after sleep, answers are saved without reload |
 | A7 | Kill switch (`RUNBOOK-EXAM-INFRA.md` §2) | `EXAM_ROUTES` off → 404; `EXAM_ENABLED` off → 503 |
 | A8 | Cron sweep | Expired modules are closed (`audit_log`) |

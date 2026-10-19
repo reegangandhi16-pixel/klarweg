@@ -111,12 +111,23 @@ test('SCORING rubric module waits for both ratings; AI ratings never count', () 
   assert.deepEqual(s.rule_flags.awaiting_ratings, ['p1', 'p2', 'p3', 'sprechen:pron']);
 });
 
-test('SCORING Schreiben: integer mean is final; fractional mean stays pending_rule with raw stored (rounding unresolved)', () => {
+test('SCORING Schreiben (OD-07 decided 2026-10-19: half-up): integer mean final; a fractional mean is rounded half-up, raw kept', () => {
+  assert.equal(mc('schreiben').scoring.rounding, 'half_up');
   const fin = scoreRubricModule(cfg, mc('schreiben'), wUnits, [...rate(wUnits, 1, [30, 30, 10]), ...rate(wUnits, 2, [32.5, 27.5, 10])]);
   assert.equal(fin.status, 'final'); assert.equal(fin.points, 70);
-  const pend = scoreRubricModule(cfg, mc('schreiben'), wUnits, [...rate(wUnits, 1, [30, 30, 10]), ...rate(wUnits, 2, [30, 27.5, 10])]);
-  assert.equal(pend.status, 'pending_rule'); assert.equal(pend.points, null); assert.equal(pend.raw_unrounded, 68.75);
-  assert.equal(pend.rule_flags.unresolved, 'rounding');
+  const r = scoreRubricModule(cfg, mc('schreiben'), wUnits, [...rate(wUnits, 1, [30, 30, 10]), ...rate(wUnits, 2, [30, 27.5, 10])]);
+  assert.equal(r.status, 'final'); assert.equal(r.raw_unrounded, 68.75); assert.equal(r.points, 69);
+  const half = scoreRubricModule(cfg, mc('schreiben'), wUnits, [...rate(wUnits, 1, [30, 30, 10]), ...rate(wUnits, 2, [30, 29, 10])]);   // 70 / 69 → 69.5
+  assert.equal(half.raw_unrounded, 69.5); assert.equal(half.points, 70, '.5 goes up');
+});
+
+test('SCORING the "unresolved" mechanism still blocks when configured (both rules)', () => {
+  const unresolved = { ...mc('schreiben'), scoring: { ...mc('schreiben').scoring, rounding: 'unresolved', third_rating: { ...mc('schreiben').scoring.third_rating, combination: 'unresolved' } } };
+  const pend = scoreRubricModule(cfg, unresolved, wUnits, [...rate(wUnits, 1, [30, 30, 10]), ...rate(wUnits, 2, [30, 27.5, 10])]);
+  assert.equal(pend.status, 'pending_rule'); assert.equal(pend.points, null); assert.equal(pend.raw_unrounded, 68.75); assert.equal(pend.rule_flags.unresolved, 'rounding');
+  const r12 = [...rate(wUnits, 1, [25, 25, 7.5]), ...rate(wUnits, 2, [30, 25, 5])];
+  const s3 = scoreRubricModule(cfg, unresolved, wUnits, [...r12, ...rate(wUnits, 3, [30, 30, 10], 'lead')]);
+  assert.equal(s3.status, 'pending_rule'); assert.equal(s3.rule_flags.unresolved, 'third_rating_combination');
 });
 
 test('SCORING Schreiben third-rating trigger: one below / one at-or-above pass and mean below pass', () => {
@@ -124,7 +135,13 @@ test('SCORING Schreiben third-rating trigger: one below / one at-or-above pass a
   const s = scoreRubricModule(cfg, mc('schreiben'), wUnits, r12);
   assert.equal(s.status, 'pending_rating'); assert.equal(s.rule_flags.third_rating_required, true);
   const s3 = scoreRubricModule(cfg, mc('schreiben'), wUnits, [...r12, ...rate(wUnits, 3, [30, 30, 10], 'lead')]);
-  assert.equal(s3.status, 'pending_rule'); assert.equal(s3.rule_flags.unresolved, 'third_rating_combination'); assert.equal(s3.rule_flags.third_rater_total, 70);
+  // OD-30 decided 2026-10-19: the third (lead) rating replaces the two-rater mean
+  assert.equal(mc('schreiben').scoring.third_rating.combination, 'third_replaces');
+  assert.equal(s3.status, 'final'); assert.equal(s3.points, 70); assert.equal(s3.rule_flags.third_rater_total, 70); assert.equal(s3.rule_flags.combination, 'third_replaces');
+  const s3half = scoreRubricModule(cfg, mc('schreiben'), wUnits, [...r12, ...rate(wUnits, 3, [27.5, 30, 10], 'lead')]);   // third total 67.5 → 68 (half-up)
+  assert.equal(s3half.status, 'final'); assert.equal(s3half.raw_unrounded, 67.5); assert.equal(s3half.points, 68);
+  const s3fail = scoreRubricModule(cfg, mc('schreiben'), wUnits, [...r12, ...rate(wUnits, 3, [25, 25, 5], 'lead')]);   // third total 55 → fail
+  assert.equal(s3fail.points, 55); assert.equal(s3fail.pass, false);
   // not triggered: both below pass
   const both = scoreRubricModule(cfg, mc('schreiben'), wUnits, [...rate(wUnits, 1, [20, 20, 10]), ...rate(wUnits, 2, [25, 20, 5])]);
   assert.notEqual(both.rule_flags.third_rating_required, true);

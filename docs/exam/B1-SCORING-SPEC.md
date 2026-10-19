@@ -101,6 +101,7 @@ type Rating = {
 - **The rounding threshold is not specified for Schreiben** [UNKNOWN]. The Sprechen rule must not be assumed to apply.
 - **[OD-07]** Options: (a) half-up (as in Sprechen); (b) half-down; (c) banker's rounding.
 - Proposal (a), labelled as a Klarweg decision. Until the owner decides, the engine stores the unrounded mean and flags `rounding_rule: "pending_OD-07"`.
+- **Decided 2026-10-19 (owner): (a) half-up** (≥ .5 up), a Klarweg convention, not an official Goethe rule. Config `scoring.rounding = "half_up"` in `exam-content/levels/b1/level-config.json`; the unrounded mean stays stored (`raw_unrounded`). Register record: v1.6 (pending sign-off).
 
 Note: Schreiben criteria include half points (7.5, 2.5, 4.5, 1.5), so means can end in .25/.5/.75, which makes the rule material.
 
@@ -110,6 +111,7 @@ Note: Schreiben criteria include half points (7.5, 2.5, 4.5, 1.5), so means can 
 - **How the third rating combines** is not specified publicly [UNKNOWN].
 - **[OD-30]** Options: (a) the third rating replaces the mean; (b) the mean of the third and the closer rating; (c) the mean of all three.
 - Proposal (a) "Bewertung 3 entscheidet". Flagged until decided.
+- **Decided 2026-10-19 (owner): (a) the third (lead) rating replaces the mean**, then rounded as §4.2; a Klarweg convention. Config `third_rating.combination = "third_replaces"`; all three ratings stay stored. Register record: v1.6 (pending sign-off).
 - No third-rating rule is published for Sprechen [UNKNOWN]. Klarweg uses lead adjudication only for incidents (unratable audio).
 
 ### 4.4 Disagreement monitoring (not score-changing)

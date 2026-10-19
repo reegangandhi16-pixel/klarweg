@@ -191,7 +191,7 @@
     "task_id": "tsk:b1:p6-l1",
     "is_example": false,
     "interaction": "binary_choice",
-    "stem": "3. Der Grundkurs dauerte vier Wochen.",
+    "stem": "3. Der Grundkurs fand an Wochentagen statt.",
     "options": [
       {
         "option_id": "richtig",
@@ -242,7 +242,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Der Grundkurs dauerte vier Wochenenden, nicht vier Wochen."
+      "explanation_de": "Der Grundkurs fand an vier Wochenenden statt, nicht unter der Woche."
     }
   },
   {

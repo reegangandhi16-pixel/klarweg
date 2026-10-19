@@ -22,7 +22,7 @@ export const PRACTICE_FORM_P6 = buildPracticeForm({
       items: [
         ['Rafael hatte selbst einen Brand in seiner Küche.', 'falsch', 'bei unseren Nachbarn ein kleines Feuer in der Küche war', 'Rafael hat das kleine Küchenfeuer bei den Nachbarn erlebt, seine eigene Küche hat nicht gebrannt.'],
         ['Die Übungen finden einmal pro Woche statt.', 'richtig', 'Jetzt gehe ich jeden Donnerstagabend zur Übung.', 'Rafael geht jeden Donnerstagabend zur Übung.'],
-        ['Der Grundkurs dauerte vier Wochen.', 'falsch', 'der vier Wochenenden gedauert hat', 'Der Grundkurs dauerte vier Wochenenden, nicht vier Wochen.'],
+        ['Der Grundkurs fand an Wochentagen statt.', 'falsch', 'der vier Wochenenden gedauert hat', 'Der Grundkurs fand an vier Wochenenden statt, nicht unter der Woche.'],
         ['Rafael ist schon bei echten Einsätzen dabei.', 'falsch', 'Zu einem echten Einsatz darf ich erst nächstes Jahr mitfahren.', 'Rafael darf erst nächstes Jahr zu echten Einsätzen mitfahren.'],
         ['In der Feuerwehr arbeiten Menschen mit verschiedenen Berufen.', 'richtig', 'Handwerker, Lehrerinnen und sogar ein Zahnarzt', 'Handwerker, Lehrerinnen und ein Zahnarzt sind unterschiedliche Berufe, also stimmt die Aussage.'],
         ['Rafael lädt Benni zu einem Fest ein.', 'richtig', 'Hast du Lust, zu kommen?', 'Rafael fragt Benni, ob er zum Sommerfest kommen möchte.']

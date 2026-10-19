@@ -570,3 +570,23 @@ test('ERROR SCREENS: only a network or server failure is called an interrupted c
   assert.match(main, /function fail\(e\) \{\s*const v = errorView\(e instanceof ExamApiError \? \{ code: e\.code, status: e\.status \} : \{ code: 'network' \}\);/);
   assert.equal(/Verbindung unterbrochen/.test(main), false, 'the copy lives in render.js only');
 });
+
+test('LEASE EXPIRY (static): an expired lease is reacquired like a reload (no takeover) by the heartbeat, autosave and every leased call', () => {
+  const main = fs.readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
+  assert.match(main, /const r = await api\.lease\(S\.attempt\.attempt_id, deviceId\(\), false\);/, 'never a takeover');
+  assert.match(main, /if \(S\.autosave && S\.autosave\.hasPending\(\)\) S\.autosave\.schedule\(0\);/, 'queued answers are sent again');
+  assert.match(main, /else if \(e\.code === 'lease_expired'\) onLeaseExpired\(sent\);/, 'heartbeat path');
+  // a late lease_expired for a lease that was already replaced must not reacquire again (it would meet our own new
+  // lease and wrongly show the takeover screen)
+  assert.match(main, /if \(staleLease && staleLease !== S\.lease && !reacquiring\) return Promise\.resolve\(null\);/);
+  assert.match(main, /const err = await reacquireLease\(lease\);/);
+  assert.match(main, /else if \(code === 'lease_expired'\) onLeaseExpired\(\); else refresh\(\);/, 'autosave path');
+  assert.match(main, /if \(!reacquiring\) reacquiring = /, 'single-flight');
+  assert.match(main, /e\.code === 'lease_held' \? new ExamApiError\(409, 'lease_superseded'\)/, 'another tab took it meanwhile: the takeover screen');
+  // every api method that takes the lease is wrapped (one retry with the new lease)
+  const list = JSON.parse(/const LEASED_CALLS = (\[[^\]]*\]);/.exec(main)[1].replace(/'/g, '"'));
+  const apiSrc = fs.readFileSync(new URL('../js/api.js', import.meta.url), 'utf8');
+  const leased = [...apiSrc.matchAll(/^\s+([a-zA-Z]+): \(id, leaseId\b/gm)].map((m) => m[1]).filter((n) => n !== 'heartbeat');
+  assert.deepEqual([...list].sort(), [...leased].sort(), 'LEASED_CALLS covers every lease-carrying API method except heartbeat');
+  assert.match(main, /return call\(id, S\.lease, \.\.\.rest\);/, 'retried once with the reacquired lease');
+});

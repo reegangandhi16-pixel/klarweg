@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -816,11 +816,190 @@ async function runSprechenTopic() {
   return uncaught;
 }
 
+/* LEASE EXPIRY (no takeover): the page's lease expires on the TEST server, as after a long sleep or a throttled tab.
+   The next save gets lease_expired; the page must reacquire the lease like a reload would (audited lease_reacquired,
+   no incident), save the queued answer and keep the learner in the module, never leaving saving stopped. The heartbeat
+   recovers on its own, and a user action right after the expiry (submit) succeeds without an error screen. */
+async function runLeaseExpiry() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase() });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+    await waitFor(`document.querySelector('[data-act="create"]')`, 15000, 'start screen'); await click('[data-act="create"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'Lesen intro'); await click('[data-act="start"][data-module="lesen"]');
+    await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
+    const radios = `[...document.querySelectorAll('input[type=radio]:not([disabled])')]`;
+    const pick = (n) => evaluate(`(() => { const r = ${radios}.filter((x) => !x.closest('.kx-example'))[${n}]; r.click(); return r.dataset.item; })()`);
+    const first = await pick(0);
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'first answer saved');
+    const lease0 = (await dev.env.DB.prepare('SELECT lease_id, generation FROM attempt_leases').first());
+    await dev.env.DB.prepare('UPDATE attempt_leases SET expires_at = 1').run();   // TEST server only: the lease has expired
+    const second = await pick(4);
+    assert.notEqual(second, first);
+    for (const t0 = Date.now(); ; await sleep(200)) {
+      const row = await dev.env.DB.prepare('SELECT 1 AS ok FROM responses_current WHERE item_id = ?1').bind(second).first();
+      if (row) break;
+      if (Date.now() - t0 > 20000) throw new Error('the answer given after the lease expired never reached the server: ' + (await evaluate(`document.querySelector('.kx-save')?.textContent`)));
+    }
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'saved again after reacquiring');
+    const lease1 = await dev.env.DB.prepare('SELECT lease_id, generation FROM attempt_leases').first();
+    assert.notEqual(lease1.lease_id, lease0.lease_id); assert.equal(lease1.generation, lease0.generation + 1);
+    assert.ok(await dev.env.DB.prepare("SELECT 1 FROM audit_log WHERE action = 'lease_reacquired'").first(), 'audited as lease_reacquired');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM incidents').first()).n, 0, 'an expiry is not a takeover incident');
+    assert.equal(await evaluate(`document.querySelectorAll('input[type=radio]').length > 20 && !document.querySelector('[data-act="takeover"]')`), true, 'still in the module, no takeover screen');
+    // the heartbeat path too: expire again and wait for the next heartbeat (15 s) to reacquire on its own
+    await dev.env.DB.prepare('UPDATE attempt_leases SET expires_at = 1').run();
+    for (const t0 = Date.now(); ; await sleep(500)) {
+      const l = await dev.env.DB.prepare('SELECT generation, expires_at FROM attempt_leases').first();
+      if (l.generation === lease1.generation + 1 && l.expires_at > Date.now()) break;
+      if (Date.now() - t0 > 25000) throw new Error('the heartbeat did not reacquire the expired lease');
+    }
+    // RACE: a late lease_expired for an already replaced lease must not trigger a second reacquire (it would meet our own
+    // new lease, get lease_held and wrongly show the takeover screen). Hold the refused save's response at the network
+    // layer until the heartbeat has reacquired, then release it.
+    await dev.env.DB.prepare('UPDATE attempt_leases SET expires_at = 1').run();
+    const genBefore = (await dev.env.DB.prepare('SELECT generation FROM attempt_leases').first()).generation;
+    await send('Fetch.enable', { patterns: [{ urlPattern: '*/modules/lesen/answers', requestStage: 'Response' }] });
+    const fromEv = b.events.length;
+    const third = await pick(8);
+    let held = null;
+    for (const t0 = Date.now(); !held; await sleep(50)) {
+      held = b.events.slice(fromEv).find((x) => x.method === 'Fetch.requestPaused' && x.params.request.method === 'POST' && x.params.responseStatusCode === 409);
+      if (Date.now() - t0 > 10000) throw new Error('the refused save was not observed');
+    }
+    for (const t0 = Date.now(); ; await sleep(250)) {      // the heartbeat reacquires meanwhile (≤ 15 s)
+      if ((await dev.env.DB.prepare('SELECT generation FROM attempt_leases').first()).generation === genBefore + 1) break;
+      if (Date.now() - t0 > 25000) throw new Error('the heartbeat did not reacquire while the save response was held');
+    }
+    await send('Fetch.continueRequest', { requestId: held.params.requestId });   // the late lease_expired arrives now
+    for (const t0 = Date.now(); ; await sleep(200)) {      // other paused requests (the retry) pass straight through
+      for (const e of b.events.slice(fromEv)) if (e.method === 'Fetch.requestPaused' && e.params.requestId !== held.params.requestId && !e.__done) { e.__done = true; send('Fetch.continueRequest', { requestId: e.params.requestId }).catch(() => {}); }
+      if (await dev.env.DB.prepare('SELECT 1 FROM responses_current WHERE item_id = ?1').bind(third).first()) break;
+      if (Date.now() - t0 > 20000) throw new Error('the answer whose refusal arrived late was never saved');
+    }
+    await send('Fetch.disable');
+    await sleep(1000);
+    assert.equal((await dev.env.DB.prepare('SELECT generation FROM attempt_leases').first()).generation, genBefore + 1, 'no second reacquire for the stale lease');
+    assert.equal(await evaluate(`!document.querySelector('[data-act="takeover"]') && !/In einem anderen Fenster/.test(document.body.innerText)`), true, 'no false takeover screen');
+    // a user action right after the expiry (before any heartbeat): submitting Lesen must still work
+    await dev.env.DB.prepare('UPDATE attempt_leases SET expires_at = 1').run();
+    await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review step');
+    await click('[data-act="submit-confirm"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Lesen submitted after the lease expired');
+    assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'lesen'").first()).status, 'submitted');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM incidents').first()).n, 0);
+    const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    log(`lease expiry ${PRACTICE.name}`, 'PASS', { autosave: 'reacquired + saved', heartbeat: 'reacquired', late_stale_refusal: 'retried, no second reacquire', submit: 'reacquired + submitted' });
+    return exceptions;
+  } finally { b.close(); dev.server.close(); }
+}
+
+/* TWO TABS (takeover, the case the lease_expired retry must NOT touch): tab A answers Lesen; tab B (a second browser
+   on the same account) is told the attempt is open elsewhere and takes it over with "Hier fortsetzen", seeing A's saved
+   answers; A then shows "In einem anderen Fenster geöffnet" instead of saving silently, and the takeover is an incident. */
+async function runTwoTabs() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase() });
+  const A = await launch(), B = await launch();
+  const tools = (b) => {
+    const evaluate = async (expr) => {
+      const r = await b.send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await evaluate(`(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+    };
+    return { evaluate, waitFor, click: (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`) };
+  };
+  try {
+    for (const b of [A, B]) { await b.send('Runtime.enable'); await b.send('Page.enable'); }
+    const a = tools(A), bb = tools(B), url = `http://127.0.0.1:${dev.port}/exam/`;
+    await A.send('Page.navigate', { url });
+    await a.waitFor(`document.querySelector('[data-act="create"]')`, 15000, 'A start'); await a.click('[data-act="create"]');
+    await a.waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'A intro'); await a.click('[data-act="start"][data-module="lesen"]');
+    await a.waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'A Lesen');
+    const item = await a.evaluate(`(() => { const r = [...document.querySelectorAll('input[type=radio]:not([disabled])')].filter((x) => !x.closest('.kx-example'))[0]; r.click(); return r.dataset.item + '|' + r.value; })()`);
+    await a.waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'A saved');
+    // B: the same attempt is open in A
+    await B.send('Page.navigate', { url });
+    await bb.waitFor(`/Bereits geöffnet/.test(document.body.innerText) && document.querySelector('[data-act="takeover"]')`, 15000, 'B told the attempt is open elsewhere');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM incidents').first()).n, 0, 'nothing happens before B decides');
+    await bb.click('[data-act="takeover"]');
+    await bb.waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'B in Lesen');
+    const [id, value] = item.split('|');
+    assert.equal(await bb.evaluate(`!!document.querySelector('input[data-item="${id}"][value="${value}"]:checked')`), true, 'B sees the answer A saved');
+    assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM incidents WHERE kind = 'lease_takeover'").first()).n, 1, 'the takeover is recorded');
+    // A: its next save (or heartbeat) is refused and A says so; no silent retry with a new lease
+    await a.evaluate(`(() => { const r = [...document.querySelectorAll('input[type=radio]:not([disabled])')].filter((x) => !x.closest('.kx-example'))[5]; r.click(); return true; })()`);
+    await a.waitFor(`/In einem anderen Fenster geöffnet/.test(document.body.innerText) && document.querySelector('[data-act="takeover"]')`, 20000, 'A shows the takeover screen');
+    const gen = (await dev.env.DB.prepare('SELECT generation FROM attempt_leases').first()).generation;
+    assert.equal(gen, 2, 'A did not grab the attempt back on its own');
+    const exceptions = [A, B].flatMap((b) => b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text));
+    log(`two tabs ${PRACTICE.name}`, 'PASS', { takeover: 'B', a: 'superseded screen', incidents: 1 });
+    return exceptions;
+  } finally { A.close(); B.close(); dev.server.close(); }
+}
+
+/* LEASE EXPIRY during Sprechen recording: chunks recorded while the lease is expired stay queued locally and reach the
+   server under the reacquired lease; no incident, no error screen. Earlier modules go through the test Worker; the
+   module start is moved on the TEST server only. */
+async function runLeaseExpirySprechen() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase() });
+  const b = await launch();
+  const { send } = b;
+  try {
+    const pkg = pkgFor(syntheticBuild([PRACTICE.dir]), 'sprechen');
+    const created = await call(dev.env, 'POST', '/exam/v1/attempts', { user: dev.user, body: { mode: 'synthetic_full', level: 'b1', request_id: rid(), device_id: 'dev_e2e_leasesp_000000001' } });
+    const s0 = { env: dev.env, user: dev.user, attempt: created.json.attempt_id, lease: created.json.lease.lease_id };
+    for (const m of ['lesen', 'hoeren', 'schreiben']) { await start(s0, m); if (m === 'hoeren') await post(s0, '/hoeren/events', { type: 'ready' }); await submit(s0, m); }
+    assert.equal((await post(s0, '/sprechen/consent', { granted: true, version: 'rec-consent@1' })).status, 200);
+    await start(s0, 'sprechen');
+    const teil1 = speakingSchedule(pkg.timing.plan).find((p) => p.id === 'teil1');
+    const row = await dev.env.DB.prepare("SELECT started_at FROM attempt_modules WHERE module = 'sprechen'").first();
+    const delta = (Date.now() - (teil1.start_ms + 1_000)) - row.started_at;   // TEST server only: 1 s into Teil 1
+    await dev.env.DB.prepare("UPDATE attempt_modules SET started_at = started_at + ?1, deadline_at = deadline_at + ?1 WHERE module = 'sprechen'").bind(delta).run();
+    await dev.env.DB.prepare('DELETE FROM attempt_leases').run();
+    await send('Runtime.enable'); await send('Page.enable');
+    const evaluate = async (expr) => (await send('Runtime.evaluate', { expression: expr, returnByValue: true })).result.value;
+    await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+    const chunks = async () => (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks').first()).n;
+    for (const t0 = Date.now(); (await chunks()) < 2; await sleep(250)) if (Date.now() - t0 > 40000) throw new Error('no Teil 1 recording: ' + (await evaluate('document.body.innerText')).slice(0, 300));
+    const gen0 = (await dev.env.DB.prepare('SELECT generation FROM attempt_leases').first()).generation;
+    await dev.env.DB.prepare('UPDATE attempt_leases SET expires_at = 1').run();   // TEST server only: the lease expires mid-recording
+    const n0 = await chunks();
+    for (const t0 = Date.now(); (await chunks()) < n0 + 3; await sleep(250)) if (Date.now() - t0 > 30000) throw new Error(`recording stopped reaching the server after the lease expired (${await chunks()} chunks)`);
+    const l = await dev.env.DB.prepare('SELECT generation, expires_at FROM attempt_leases').first();
+    assert.ok(l.generation === gen0 + 1 && l.expires_at > Date.now(), 'reacquired once, valid lease');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM incidents').first()).n, 0);
+    assert.equal(await evaluate(`/Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '') && !document.querySelector('[data-act="takeover"]')`), true, 'still recording, no error screen');
+    const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    log(`lease expiry Sprechen ${PRACTICE.name}`, 'PASS', { chunks_before: n0, chunks_after: await chunks(), generation: l.generation });
+    return exceptions;
+  } finally { b.close(); dev.server.close(); }
+}
+
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'two-tabs') { results.push({ vp: `two tabs ${PRACTICE.name}`, uncaught: await fn() }); continue; }
+  if (name === 'lease-expiry') { results.push({ vp: `lease expiry ${PRACTICE.name}`, uncaught: await fn() }, { vp: `lease expiry Sprechen ${PRACTICE.name}`, uncaught: await runLeaseExpirySprechen() }); continue; }
   if (name === 'sprechen-topic') { results.push({ vp: `sprechen topic ${PRACTICE.name} (t1 + t2)`, uncaught: await fn() }); continue; }
   if (name === 'practice') { results.push({ vp: `practice ${PRACTICE.name} (desktop + mobile checks)`, uncaught: await fn() }); continue; }
   for (const vp of VIEWPORTS) results.push({ vp: vp.name + suffix, uncaught: await fn(vp) });

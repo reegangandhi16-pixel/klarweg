@@ -9,7 +9,7 @@
 |---|---|
 | Attempt lifecycle: create (idempotent), module order, submission, completion replay | `security.test` SESSION, `retry-overlap.test`, `lifecycle-concurrency.test`, `e2e-flow.test` |
 | Server timer, grace, auto-submit on close/disconnect, clock skew, accommodations | `e2e-flow.test` TIMER, `timer-recovery.test`, `frontend.test` TIMER (client) |
-| Autosave, lease/second tab, reload recovery, network retry with the same request id | `frontend.test` AUTOSAVE/API client, `timer-recovery.test` RECOVERY, `security.test` lease |
+| Autosave, lease/second tab, reload recovery, network retry with the same request id; an EXPIRED lease (sleep, throttled tab, long outage) is reacquired like a reload and the request retried once, incl. Sprechen uploads | `frontend.test` AUTOSAVE/API client + LEASE EXPIRY, `timer-recovery.test` RECOVERY, `security.test` lease; browser `KX_E2E_ONLY=lease-expiry` (autosave, heartbeat, late stale refusal, submit, Sprechen recording) and `two-tabs` (takeover) |
 | Navigation, review step before submit, progress per part | `frontend.test` NAVIGATION + REVIEW, SUBMIT, PROGRESS |
 | Scoring (official tables), item review after submission, rated feedback, results with OD-45 wording | `scoring.golden.test`, `item-review.test`, `rated-feedback.test`, `frontend.test` RESULTS |
 | Writing and speaking rating: two independent raters, round 3 lead, no own attempts | `rating-ui-api.test`, `security.test` rating rules, browser E2E rater flow |

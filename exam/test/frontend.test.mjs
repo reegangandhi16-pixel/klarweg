@@ -549,7 +549,7 @@ test('ACCESSIBILITY (live regions): the redrawn header is not a live region; sav
 });
 
 test('ERROR SCREENS: only a network or server failure is called an interrupted connection; terminal states say what happened', () => {
-  for (const e of [{ code: 'network' }, { code: 'internal', status: 500 }, { code: 'content_unavailable', status: 503 }]) {
+  for (const e of [{ code: 'network' }, { code: 'internal', status: 500 }, { code: 'content_unavailable', status: 503 }, { code: 'lease_expired', status: 409 }]) {
     const v = errorView(e);
     assert.equal(v.title, 'Verbindung unterbrochen'); assert.match(v.body, /lokal gesichert/); assert.deepEqual(v.actions, [{ act: 'reload', label: 'Erneut verbinden' }]);
   }

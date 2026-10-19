@@ -42,6 +42,9 @@ export async function examProxy(request, env, url) {
     const user = await findSessionUser(env.DB, getSessionToken(request));
     if (!user) return withCors(jsonError(401, "auth_required"), request);
     headers.set("x-kw-user", user.id);
+    /* OD-19: when this session last passed the second factor (unix seconds). The exam Worker requires it to be fresh
+       on rater/admin routes. Browser-sent x-kw-* headers never reach here, so it cannot be asserted by a client. */
+    if (Number.isFinite(user.mfaVerifiedAt)) headers.set("x-kw-mfa-at", String(user.mfaVerifiedAt));
   }
 
   const init = { method: request.method, headers };

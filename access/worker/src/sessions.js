@@ -65,7 +65,8 @@ export async function findSessionUser(db, token) {
         u.email,
         u.name,
         u.phone,
-        s.expires_at
+        s.expires_at,
+        s.mfa_verified_at
       FROM sessions s
       INNER JOIN users u
         ON u.id = s.user_id
@@ -83,7 +84,9 @@ export async function findSessionUser(db, token) {
     email: result.email,
     name: result.name,
     phone: result.phone,
-    expiresAt: result.expires_at
+    expiresAt: result.expires_at,
+    /* when this session last passed the second factor (OD-19), unix seconds, or null */
+    mfaVerifiedAt: result.mfa_verified_at ?? null
   };
 }
 export async function revokeSession(db, token) {

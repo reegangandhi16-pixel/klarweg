@@ -97,10 +97,13 @@ export async function role(env, userId, r) {
   await env.DB.prepare('INSERT INTO exam_roles (user_id, role, granted_at) VALUES (?1, ?2, ?3)').bind(userId, r, env.__clock()).run();
 }
 
-export async function call(env, method, p, { user, body, raw, contentType, proxyAuth = PROXY_SECRET, headers = {} } = {}) {
+/* mfa: like the Access proxy, a signed-in session that passed the second factor just now (default); false = never
+   passed it; a number = unix seconds when it was passed (OD-19 freshness tests). */
+export async function call(env, method, p, { user, body, raw, contentType, proxyAuth = PROXY_SECRET, headers = {}, mfa = true } = {}) {
   const h = { ...headers };
   if (proxyAuth) h['x-kw-proxy-auth'] = proxyAuth;
   if (user) h['x-kw-user'] = user;
+  if (user && mfa !== false) h['x-kw-mfa-at'] = String(mfa === true ? Math.floor((typeof env.__clock === 'function' ? env.__clock() : Date.now()) / 1000) : mfa);
   let payload;
   if (raw) { payload = raw; h['content-type'] = contentType || 'audio/webm'; }
   else if (body !== undefined) { payload = JSON.stringify(body); h['content-type'] = 'application/json'; }

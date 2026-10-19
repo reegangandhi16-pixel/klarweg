@@ -14,6 +14,13 @@ export const ERROR_TEXT = {
   invalid_bands: 'Ungültige Bänder.',
   not_rateable: 'Diese Aufgabe kann nicht bewertet werden.',
   attempt_not_found: 'Versuch nicht gefunden.',
+  mfa_required: 'Bitte bestätigen Sie die Anmeldung mit Ihrem zweiten Faktor.',
+  mfa_invalid_code: 'Der Code ist nicht gültig oder wurde schon verwendet. Bitte den aktuellen Code eingeben.',
+  mfa_rate_limited: 'Zu viele falsche Codes. Bitte warten Sie einige Minuten.',
+  mfa_locked: 'Nach zu vielen falschen Codes ist die Bestätigung 30 Minuten gesperrt.',
+  mfa_unavailable: 'Die Zwei-Faktor-Bestätigung ist zurzeit nicht verfügbar. Bitte wenden Sie sich an die Prüfungsleitung.',
+  mfa_not_enrolled: 'Für Ihr Konto ist noch kein zweiter Faktor eingerichtet.',
+  mfa_no_pending_enrolment: 'Die Einrichtung ist abgelaufen. Bitte neu beginnen.',
   rate_limited: 'Zu viele Anfragen in kurzer Zeit. Bitte in einer Minute erneut versuchen.',
   network: 'Keine Verbindung zum Server. Bitte die Seite neu laden; bereits gespeicherte Bewertungen werden dann angezeigt.'
 };
@@ -29,3 +36,38 @@ export function ratingRound(data, module) {
 }
 export const unitRatedByMe = (u, round) => u.rounds_taken.some((r) => r.mine && r.round === round);
 export const missingCriteria = (u, bands) => Object.keys(u.criteria).filter((c) => !bands[c]);
+
+/* ---------- second factor (OD-19) — pure renderers; esc is passed in to keep this module DOM-free ---------- */
+const MFA_INPUT = (id, label, extra) => `<div class="kx-item"><label for="${id}">${label}</label><input id="${id}" name="${id}" ${extra} required></div>`;
+export function mfaVerifyView(esc, { error = '', recovery = false } = {}) {
+  const field = recovery
+    ? MFA_INPUT('kx-mfa-recovery', 'Wiederherstellungscode', 'type="text" autocomplete="off" spellcheck="false" autocapitalize="off"')
+    : MFA_INPUT('kx-mfa-code', '6-stelliger Code aus Ihrer Authenticator-App', 'type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6"');
+  return `<main class="kx-card"><p class="kx-eyebrow">Nur für Bewertende</p><h1>Anmeldung bestätigen</h1>`
+    + `<p>Für die Bewertung ist ein zweiter Faktor nötig. Die Bestätigung gilt 12 Stunden für diese Anmeldung.</p>`
+    + `<form class="kx-mfa" data-mfa="${recovery ? 'recovery' : 'verify'}" novalidate>${field}`
+    + `<p class="kx-rate-msg" role="alert">${esc(error)}</p>`
+    + `<div class="kx-actions"><button type="submit" class="kx-btn">Bestätigen</button>`
+    + `<button type="button" class="kx-btn kx-btn-quiet" data-act="mfa-${recovery ? 'use-code' : 'use-recovery'}">${recovery ? 'Code aus der App verwenden' : 'Wiederherstellungscode verwenden'}</button></div></form></main>`;
+}
+export function mfaEnrolStartView(esc, { error = '' } = {}) {
+  return `<main class="kx-card"><p class="kx-eyebrow">Nur für Bewertende</p><h1>Zweiten Faktor einrichten</h1>`
+    + `<p>Für die Bewertung brauchen Sie eine Authenticator-App (zum Beispiel auf dem Smartphone). Sie richten sie einmal ein und geben danach höchstens alle 12 Stunden einen 6-stelligen Code ein.</p>`
+    + `<p class="kx-rate-msg" role="alert">${esc(error)}</p><div class="kx-actions"><button type="button" class="kx-btn" data-act="mfa-enrol">Einrichtung beginnen</button></div></main>`;
+}
+export function mfaEnrolView(esc, { secret, uri, error = '' }) {
+  const grouped = String(secret).replace(/(.{4})/g, '$1 ').trim();
+  return `<main class="kx-card"><p class="kx-eyebrow">Nur für Bewertende</p><h1>Authenticator-App verbinden</h1>`
+    + `<ol><li>Öffnen Sie Ihre Authenticator-App und fügen Sie ein Konto hinzu.</li>`
+    + `<li>Geben Sie diesen Schlüssel ein (Zeitbasiert, 6 Stellen) oder öffnen Sie auf diesem Gerät den <a href="${esc(uri)}">Einrichtungslink</a>:<br><code class="kx-mfa-secret" aria-label="Schlüssel">${esc(grouped)}</code></li>`
+    + `<li>Geben Sie den Code ein, den die App jetzt anzeigt.</li></ol>`
+    + `<form class="kx-mfa" data-mfa="confirm" novalidate>${MFA_INPUT('kx-mfa-code', '6-stelliger Code', 'type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6"')}`
+    + `<p class="kx-rate-msg" role="alert">${esc(error)}</p><div class="kx-actions"><button type="submit" class="kx-btn">Einrichtung abschließen</button></div></form></main>`;
+}
+export function mfaCodesView(esc, codes) {
+  return `<main class="kx-card"><p class="kx-eyebrow">Nur für Bewertende</p><h1>Wiederherstellungscodes</h1>`
+    + `<p>Der zweite Faktor ist eingerichtet. Diese 10 Codes werden <strong>nur jetzt</strong> angezeigt. Jeder Code funktioniert einmal, falls Sie keinen Zugriff auf Ihre App haben. Bewahren Sie sie sicher auf (nicht per E-Mail versenden).</p>`
+    + `<ul class="kx-mfa-codes">${codes.map((c) => `<li><code>${esc(c)}</code></li>`).join('')}</ul>`
+    + `<form class="kx-mfa" data-mfa="codes-saved" novalidate><div class="kx-item"><label><input type="checkbox" id="kx-mfa-saved" required> Ich habe die Codes sicher gespeichert.</label></div>`
+    + `<p class="kx-rate-msg" role="alert"></p><div class="kx-actions"><button type="submit" class="kx-btn">Weiter zur Bewertung</button></div></form></main>`;
+}

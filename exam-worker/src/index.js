@@ -4,7 +4,7 @@
 import { ApiError, json, errorResponse, now, ATTEMPT_ID_RE } from './http.js';
 import { log } from './log.js';
 import { flags } from './flags.js';
-import { verifyProxy, requireUser } from './auth.js';
+import { verifyProxy, requireUser, mfaFresh, hasRole, STAFF_ROLES } from './auth.js';
 import { streamMedia } from './media.js';
 import { settle } from './core.js';
 import * as api from './api.js';
@@ -60,6 +60,11 @@ async function route(request, env) {
     pathKnown = true;
     if (request.method !== method) continue;
     const user = requireUser(request);
+    // staff routes: a staff member without a fresh second factor is sent to verify it (OD-19); everyone else still
+    // gets the handler's own refusal (403), so the check reveals nothing to non-staff
+    if (url.pathname.startsWith('/exam/v1/admin/') && !mfaFresh(request, env) && await hasRole(env, user, STAFF_ROLES)) {
+      return json({ ok: false, error: 'mfa_required' }, 401);
+    }
     const out = await handler({ env, request, url, user }, m);
     if (out instanceof Response) return out;   // binary (rater recording playback)
     if (out && typeof out.status === 'number' && out.body) return json(out.body, out.status);   // idempotent() envelope

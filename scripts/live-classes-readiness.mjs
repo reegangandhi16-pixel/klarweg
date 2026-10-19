@@ -88,6 +88,7 @@ export function checkData(D, root = ROOT) {
     for (const id of k.teacherIds || []) if (teacherById[id]?.draft) err(w, `published course names draft teacher "${id}"`);
     if (k.enrolment !== 'not-open' && !has(k.priceLabel)) err(w, `enrolment "${k.enrolment}" needs priceLabel: students must see the fee before they enrol`);
     if (k.enrolment === 'open') for (const f of ['nextBatch', 'frequency', 'sessionLength', 'totalDuration']) if (!has(k[f])) err(w, `enrolment "open" needs ${f}`);
+    if (k.enrolment === 'open' && k.format === 'Group batch' && !has(k.batchSize)) err(w, 'enrolment "open" for a group batch needs batchSize');
   }
 
   for (const [i, q] of quotes.entries()) {
@@ -110,10 +111,33 @@ export function launchBlockers(D, root = ROOT) {
   for (const m of page.matchAll(/<meta (?:name="description"|property="og:description") content="([^"]*)"/g)) {
     if (/₹\s?\d/.test(m[1]) && !m[1].includes(D.consultation?.feeLabel)) b.push(`A meta description still names a different fee than consultation.feeLabel: "${m[1].slice(0, 60)}…".`);
   }
-  if (/No live classes/i.test(read(root, 'index.html'))) b.push('index.html says "No live classes" (visible FAQ and FAQPage structured data).');
+  const index = read(root, 'index.html');
+  if (/No live classes/i.test(index)) b.push('index.html says "No live classes" (visible FAQ and FAQPage structured data).');
+  const faq = homepageFaq(index);
+  const differ = Object.keys(faq.structured).filter((q) => faq.visible[q] !== faq.structured[q]);
+  if (differ.length) b.push(`index.html FAQ: the FAQPage structured data does not match the visible answer for: ${differ.join(' | ')}.`);
+  // the homepage must not promise open enrolment that the page does not show
+  const openCourse = published(D.courses).some((k) => k.enrolment === 'open');
+  const liveAnswers = Object.entries(faq.visible).filter(([q]) => /live class|teacher/i.test(q)).map(([, a]) => a).join(' ');
+  if (!openCourse && /\benrol(?:l)?ment (?:is )?open\b|\benrol now\b|\bnow enrolling\b|\bbook (?:your|a) (?:seat|place)\b|\bjoin (?:the|our) next batch\b/i.test(liveAnswers)) b.push('index.html FAQ says enrolment is open, but no published live course has enrolment "open".');
   if (!/live class|live course/i.test(read(root, 'terms.html'))) b.push('terms.html describes only self-paced content; it does not cover live classes or consultations.');
   if (!/live class|consultation/i.test(read(root, 'privacy.html'))) b.push('privacy.html does not describe the consultation request (level, goal, optional phone, preferred times sent by email), yet the form\'s consent refers to it.');
   return b;
+}
+
+/* The homepage FAQ, visible and structured. Google expects FAQPage
+   markup to match the visible answers, so both are compared. */
+const plain = (h) => h.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&mdash;/g, '—').replace(/&rsquo;/g, '’').replace(/\s+/g, ' ').trim();
+export function homepageFaq(indexHtml) {
+  const visible = {};
+  for (const m of indexHtml.matchAll(/<span class="faq-q-text">([\s\S]*?)<\/span>[\s\S]*?<div class="faq-answer">([\s\S]*?)<\/div>/g)) visible[plain(m[1])] = plain(m[2]);
+  const structured = {};
+  for (const m of indexHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    let j; try { j = JSON.parse(m[1]); } catch { continue; }
+    if (j['@type'] !== 'FAQPage') continue;
+    for (const q of j.mainEntity || []) structured[plain(q.name)] = plain(q.acceptedAnswer?.text || '');
+  }
+  return { visible, structured };
 }
 
 export function isAllowlisted(root = ROOT) {

@@ -433,8 +433,10 @@ async function runDefaultAutoplayHoeren(viewport) {
     // 2. one click: the owed recovery replay plays first, then the next normal plays follow without overlapping it
     await evaluate(`document.querySelector('[data-act="audio-start"]').click()`, true);
     await waitFor(`!document.querySelector('[data-act="audio-start"]')`, 4000, 'prompt disappears after the click');
-    for (const t1 = Date.now(); !(await plays()).some((p) => p.phase_seq === T2PLAY.seq && p.kind === 'normal'); ) {
-      if (Date.now() - t1 > 15000) throw new Error('Teil 2 text never played: ' + JSON.stringify(await plays()));
+    // the Teil 2 preread of the synthetic plan is only 2 s: on a slow runner the page may arrive after the Teil 2 text has
+    // started, so the next normal play is the then-current one — Teil 2 text or later, never anything from Teil 1
+    for (const t1 = Date.now(); !(await plays()).slice(before).some((p) => p.kind === 'normal' && p.phase_seq >= T2PLAY.seq); ) {
+      if (Date.now() - t1 > 15000) throw new Error('no normal play at or after the Teil 2 text: ' + JSON.stringify(await plays()));
       await sleep(200);
     }
     const after = (await plays()).slice(before);
@@ -443,6 +445,7 @@ async function runDefaultAutoplayHoeren(viewport) {
     assert.equal(after[0].kind, 'recovery', 'the recovery replay is the first play after the click');
     const nextNormal = after.find((p) => p.kind === 'normal');
     assert.ok(rec.ended_at !== null && nextNormal.started_at >= rec.ended_at, 'the next normal play starts after the replay ended');
+    assert.ok(nextNormal.phase_seq >= T2PLAY.seq, `no Teil 1 phase is played again after the click: ${JSON.stringify(after)}`);
     assert.equal(after.filter((p) => p.kind === 'recovery').length, 1);
     const uncaught = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
     log(viewport.name, 'DEFAULT autoplay HÖREN PASS', { after_click: after.map((p) => `${p.kind}:${p.phase_seq}`) });
@@ -450,6 +453,59 @@ async function runDefaultAutoplayHoeren(viewport) {
   } finally {
     b.close(); dev.server.close();
   }
+}
+
+/* Automated accessibility audit of the screen as rendered (EX-04 is the manual audit; this does not replace it): every
+   interactive node in Chrome's accessibility tree has a name; no duplicate ids; lang set; one h1; and real Tab key
+   presses land on elements that show a visible focus indicator. Findings are collected; the caller asserts them. */
+function makeA11y({ send, evaluate }) {
+  const a11yFindings = [], a11yScreens = [];
+  const INTERACTIVE = new Set(['button', 'link', 'textbox', 'radio', 'checkbox', 'combobox', 'slider', 'spinbutton', 'searchbox', 'listbox', 'switch', 'tab', 'menuitem']);
+  const within = (p, ms, what) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(`a11y step timed out: ${what}`)), ms))]);
+  const a11y = async (label, opts = {}) => {
+    if (process.env.KX_E2E_NO_A11Y) return;
+    try { await within(a11yScreen(label, opts), 30000, label); } catch (e) { a11yFindings.push(`${label}: ${e.message}`); }
+    // leave nothing behind: an enabled Accessibility domain makes Chrome rebuild the tree on every DOM change (the
+    // ticking Sprechen screen then stalls), and Tab presses may have moved focus out of the page
+    await within(send('Accessibility.disable'), 5000, 'Accessibility.disable').catch(() => {});
+    await evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur(), window.focus(), true').catch(() => {});
+    if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] a11y findings so far', JSON.stringify(a11yFindings));
+    if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] a11y done', label, new Date().toISOString());
+  };
+  /* The audit must be able to fail: inject an unnamed button and a duplicate id, require both findings, remove them. */
+  const a11ySelfCheck = async () => {
+    await evaluate(`(() => { const d = document.createElement('div'); d.id = 'kx-a11y-probe';
+      d.innerHTML = '<button type="button"></button><span id="kx-probe-dup"></span><span id="kx-probe-dup"></span>'; document.body.appendChild(d); return true; })()`);
+    const before = a11yFindings.length;
+    await a11y('self-check', { tabs: 0 });
+    const got = a11yFindings.splice(before);
+    a11yScreens.splice(a11yScreens.indexOf('self-check'), 1);
+    await evaluate(`(document.getElementById('kx-a11y-probe').remove(), true)`);
+    assert.ok(got.some((f) => /button without an accessible name/.test(f)) && got.some((f) => /duplicate id "kx-probe-dup"/.test(f)), `a11y audit self-check failed: ${JSON.stringify(got)}`);
+  };
+  const a11yScreen = async (label, { tabs = 12 } = {}) => {
+    a11yScreens.push(label);
+    if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] a11y', label, new Date().toISOString());
+    await within(send('Accessibility.enable'), 5000, 'Accessibility.enable');
+    const { nodes } = await within(send('Accessibility.getFullAXTree'), 5000, 'getFullAXTree');
+    for (const n of nodes) {
+      if (n.ignored || !INTERACTIVE.has(n.role?.value)) continue;
+      if (!String(n.name?.value || '').trim()) a11yFindings.push(`${label}: ${n.role.value} without an accessible name`);
+    }
+    const page = await evaluate(`(() => { const ids = [...document.querySelectorAll('[id]')].map((e) => e.id);
+      return { lang: document.documentElement.lang, dup: [...new Set(ids.filter((x, i) => ids.indexOf(x) !== i))], h1: document.querySelectorAll('h1').length }; })()`);
+    if (!page.lang) a11yFindings.push(`${label}: no lang on <html>`);
+    for (const d of page.dup) a11yFindings.push(`${label}: duplicate id "${d}"`);
+    if (page.h1 !== 1) a11yFindings.push(`${label}: ${page.h1} h1 elements`);
+    await evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur()');
+    for (let i = 0; i < tabs; i++) {
+      for (const type of ['keyDown', 'keyUp']) await within(send('Input.dispatchKeyEvent', { type, key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 }), 5000, `Tab ${i + 1} ${type}`);
+      const f = await evaluate(`(() => { const e = document.activeElement; if (!e || e === document.body) return null; const st = getComputedStyle(e);
+        return { what: e.tagName.toLowerCase() + (e.dataset.act ? '[' + e.dataset.act + ']' : '') + (e.type ? ':' + e.type : ''), visible: (st.outlineStyle !== 'none' && parseFloat(st.outlineWidth) > 0) || st.boxShadow !== 'none' }; })()`);
+      if (f && !f.visible) a11yFindings.push(`${label}: keyboard focus on ${f.what} is not visible`);
+    }
+  };
+  return { a11y, selfCheck: a11ySelfCheck, findings: a11yFindings, screens: a11yScreens };
 }
 
 const results = [];
@@ -491,7 +547,6 @@ async function runPractice() {
     /* Automated accessibility audit of the screen as rendered (EX-04 is the manual audit; this does not replace it):
        every interactive node in Chrome's accessibility tree has a name; no duplicate ids; lang set; one h1; and real
        Tab key presses land on elements that show a visible focus indicator. Findings are collected and asserted at the end. */
-    const a11yFindings = [], a11yScreens = [];
     /* JavaScript dialogs (e.g. the leave warning) block CDP navigation; record and accept them instead of hanging. */
     const dialogs = [];
     let seenEvents = 0;
@@ -504,51 +559,7 @@ async function runPractice() {
         send('Page.handleJavaScriptDialog', { accept: true }).catch(() => {});
       }
     }, 100);
-    const INTERACTIVE = new Set(['button', 'link', 'textbox', 'radio', 'checkbox', 'combobox', 'slider', 'spinbutton', 'searchbox', 'listbox', 'switch', 'tab', 'menuitem']);
-    const within = (p, ms, what) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(`a11y step timed out: ${what}`)), ms))]);
-    const a11y = async (label, opts = {}) => {
-      if (process.env.KX_E2E_NO_A11Y) return;
-      try { await within(a11yScreen(label, opts), 30000, label); } catch (e) { a11yFindings.push(`${label}: ${e.message}`); }
-      // leave nothing behind: an enabled Accessibility domain makes Chrome rebuild the tree on every DOM change (the
-      // ticking Sprechen screen then stalls), and Tab presses may have moved focus out of the page
-      await within(send('Accessibility.disable'), 5000, 'Accessibility.disable').catch(() => {});
-      await evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur(), window.focus(), true').catch(() => {});
-      if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] a11y findings so far', JSON.stringify(a11yFindings));
-      if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] a11y done', label, new Date().toISOString());
-    };
-    /* The audit must be able to fail: inject an unnamed button and a duplicate id, require both findings, remove them. */
-    const a11ySelfCheck = async () => {
-      await evaluate(`(() => { const d = document.createElement('div'); d.id = 'kx-a11y-probe';
-        d.innerHTML = '<button type="button"></button><span id="kx-probe-dup"></span><span id="kx-probe-dup"></span>'; document.body.appendChild(d); return true; })()`);
-      const before = a11yFindings.length;
-      await a11y('self-check', { tabs: 0 });
-      const got = a11yFindings.splice(before);
-      a11yScreens.splice(a11yScreens.indexOf('self-check'), 1);
-      await evaluate(`(document.getElementById('kx-a11y-probe').remove(), true)`);
-      assert.ok(got.some((f) => /button without an accessible name/.test(f)) && got.some((f) => /duplicate id "kx-probe-dup"/.test(f)), `a11y audit self-check failed: ${JSON.stringify(got)}`);
-    };
-    const a11yScreen = async (label, { tabs = 12 } = {}) => {
-      a11yScreens.push(label);
-      if (process.env.KX_E2E_VERBOSE) console.log('[browser-e2e] a11y', label, new Date().toISOString());
-      await within(send('Accessibility.enable'), 5000, 'Accessibility.enable');
-      const { nodes } = await within(send('Accessibility.getFullAXTree'), 5000, 'getFullAXTree');
-      for (const n of nodes) {
-        if (n.ignored || !INTERACTIVE.has(n.role?.value)) continue;
-        if (!String(n.name?.value || '').trim()) a11yFindings.push(`${label}: ${n.role.value} without an accessible name`);
-      }
-      const page = await evaluate(`(() => { const ids = [...document.querySelectorAll('[id]')].map((e) => e.id);
-        return { lang: document.documentElement.lang, dup: [...new Set(ids.filter((x, i) => ids.indexOf(x) !== i))], h1: document.querySelectorAll('h1').length }; })()`);
-      if (!page.lang) a11yFindings.push(`${label}: no lang on <html>`);
-      for (const d of page.dup) a11yFindings.push(`${label}: duplicate id "${d}"`);
-      if (page.h1 !== 1) a11yFindings.push(`${label}: ${page.h1} h1 elements`);
-      await evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur()');
-      for (let i = 0; i < tabs; i++) {
-        for (const type of ['keyDown', 'keyUp']) await within(send('Input.dispatchKeyEvent', { type, key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 }), 5000, `Tab ${i + 1} ${type}`);
-        const f = await evaluate(`(() => { const e = document.activeElement; if (!e || e === document.body) return null; const st = getComputedStyle(e);
-          return { what: e.tagName.toLowerCase() + (e.dataset.act ? '[' + e.dataset.act + ']' : '') + (e.type ? ':' + e.type : ''), visible: (st.outlineStyle !== 'none' && parseFloat(st.outlineWidth) > 0) || st.boxShadow !== 'none' }; })()`);
-        if (f && !f.visible) a11yFindings.push(`${label}: keyboard focus on ${f.what} is not visible`);
-      }
-    };
+    const { a11y, selfCheck: a11ySelfCheck, findings: a11yFindings, screens: a11yScreens } = makeA11y({ send, evaluate });
     const keys = Object.fromEntries((await dev.env.DB.prepare('SELECT item_id, key_json FROM item_keys').all()).results.map((r) => [r.item_id, JSON.parse(r.key_json).correct]));
     const answerAll = (plan) => evaluate(`(() => { const plan = ${JSON.stringify(plan)};
       for (const [id, v] of Object.entries(plan)) { const el = document.querySelector('[data-item="' + id + '"][value="' + v + '"]');
@@ -1040,16 +1051,20 @@ async function runRater2fa() {
     const base = `http://127.0.0.1:${dev.port}/exam/`;
     const as = async (alias, page) => { await send('Page.navigate', { url: `${base}dev/as/${alias}` }); await sleep(300); if (page) await send('Page.navigate', { url: base + page }); };
     const nowCode = (secret, off = 0) => hotp(base32Decode(secret), stepAt(Math.floor(Date.now() / 1000)) + off);
+    const A = makeA11y({ send, evaluate });   // automated accessibility audit of every 2FA screen
     const expire = () => dev.access.env.DB.prepare('UPDATE sessions SET mfa_verified_at = 1 WHERE user_id = ?1').bind(dev.users.rater1).run();
 
     // 1. not enrolled → enrolment; focus on the heading; key shown grouped; a link for apps on this device
     await as('rater1', 'rater.html');
     await h1('Zweiten Faktor einrichten');
     assert.equal(await evaluate(`document.activeElement === document.querySelector('h1')`), true, 'focus on the heading');
+    if (!process.env.KX_E2E_NO_A11Y) await A.selfCheck();
+    await A.a11y('2FA: enrolment start', { tabs: 4 });
     await evaluate(`document.querySelector('[data-act="mfa-enrol"]').click()`);
     await h1('Authenticator-App verbinden');
     const secret = (await evaluate(`document.querySelector('.kx-mfa-secret').textContent`)).replace(/\s/g, '');
     assert.match(secret, /^[A-Z2-7]{32}$/);
+    await A.a11y('2FA: connect the app', { tabs: 6 });
     assert.match(await evaluate(`document.querySelector('a[href^="otpauth://totp/"]').getAttribute('href')`), /secret=[A-Z2-7]{32}&issuer=Klarweg/);
     await fill('#kx-mfa-code', await nowCode(secret));
     await submit();
@@ -1057,6 +1072,7 @@ async function runRater2fa() {
     await h1('Wiederherstellungscodes');
     const codes = await evaluate(`[...document.querySelectorAll('.kx-mfa-codes code')].map((c) => c.textContent)`);
     assert.equal(codes.length, 10);
+    await A.a11y('2FA: recovery codes', { tabs: 4 });
     await submit();
     await waitFor(`/Bitte bestätigen Sie, dass Sie die Codes gespeichert haben/.test(document.querySelector('.kx-rate-msg').textContent)`, 3000, 'saved confirmation required');
     await evaluate(`document.querySelector('#kx-mfa-saved').click()`); await submit();
@@ -1066,6 +1082,7 @@ async function runRater2fa() {
     await expire();
     await as('rater1', 'rater.html');
     await h1('Anmeldung bestätigen');
+    await A.a11y('2FA: verify with code', { tabs: 5 });
     await fill('#kx-mfa-code', '000000'); await submit();
     await waitFor(`/nicht gültig/.test(document.querySelector('.kx-rate-msg[role="alert"]').textContent)`, 5000, 'wrong code message');
     assert.equal(await evaluate(`document.querySelector('#kx-mfa-code').value === '' && document.activeElement === document.querySelector('#kx-mfa-code')`), true);
@@ -1078,6 +1095,7 @@ async function runRater2fa() {
     await h1('Anmeldung bestätigen');
     await evaluate(`document.querySelector('[data-act="mfa-use-recovery"]').click()`);
     await waitFor(`document.querySelector('#kx-mfa-recovery')`, 3000, 'recovery field');
+    await A.a11y('2FA: verify with recovery code', { tabs: 5 });
     await fill('#kx-mfa-recovery', codes[0].toUpperCase()); await submit();
     await h1('Bewertung');
     assert.match(await text(), /Noch 9 Wiederherstellungscodes übrig/);
@@ -1119,6 +1137,7 @@ async function runRater2fa() {
     await as('learner', '');
     await waitFor(`document.querySelector('[data-act="create"]')`, 10000, 'learner start screen');
     assert.equal(/zweiten Faktor|Anmeldung bestätigen/i.test(await text()), false);
+    assert.deepEqual(A.findings, [], `automated accessibility findings on ${A.screens.join(', ')}`);
     const events = (await dev.access.env.DB.prepare('SELECT event FROM mfa_audit ORDER BY id').all()).results.map((e) => e.event);
     assert.deepEqual(events, ['enrolled', 'verify_failed', 'verified', 'recovery_used', 'recovery_used']);
     const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);

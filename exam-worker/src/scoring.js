@@ -99,6 +99,9 @@ export function scoreRubricModule(cfg, moduleCfg, units, ratings) {
     flags.third_rater_total = C;
     if (tr.combination === 'unresolved') return { status: 'pending_rule', raw: null, raw_unrounded: mean, raw_max: max, points: null, max_points: moduleCfg.scoring.max_points, pass: null, predikat: null,
       rule_flags: { ...flags, unresolved: 'third_rating_combination' } };
+    if (tr.combination === 'third_replaces') {   // OD-30 owner decision (2026-10-19): the third (lead) rating decides; Klarweg convention (U-02)
+      return finishRounded(cfg, moduleCfg, C, max, { ...flags, combined_with_third: C, combination: 'third_replaces' });
+    }
     if (tr.combination === 'third_replaces_lower') {   // configurable option, not an official rule
       const m2 = (Math.max(A, B) + C) / 2;
       return finishRounded(cfg, moduleCfg, m2, max, { ...flags, combined_with_third: m2 });

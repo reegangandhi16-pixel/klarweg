@@ -110,25 +110,30 @@ sets it, and the guard refuses it in `wrangler.toml`. Tests: `access/worker/test
 | A10 | Non-prod D1 validation runbook | Run and recorded (gate for draft PRs #71/#73) |
 | A11 | Confidentiality spot check in the browser (DevTools network tab during Lesen/Hören) | No key, explanation or script reaches the page before submission |
 
-### Acceptance record (blank — fill in only from real runs)
-Environment build: commit `________` · Access Worker version `________` · exam Worker version `________`
-Browser(s) and version(s): `________`
+### Acceptance record (filled from real runs only; full evidence in the comment on PR #131)
+Environment build: commit `bebfacb` (= main `b1cdb72` for `access/`, `exam-worker/`, `exam/`) · deployed Access first ·
+Access Worker version `b7fa8c2d` · exam Worker version `8b2392cb` (both from `bebfacb`, standard non-prod config)
+Browser(s) and version(s): headless Google Chrome on macOS (version not captured at run time; 156.0.8078.35 installed on
+2026-10-20) on the built non-prod site; API checks with Node 24
+Tester: engineering session (Claude), with the owner's authorization for non-production only. Synthetic `@example.com`
+accounts. `TOTP_ENC_KEY` source of record: the owner's macOS Keychain (`klarweg-nonprod-TOTP_ENC_KEY`), never in the repo.
 
 | # | Date | Tester | Result (pass / fail / not run) | Evidence (screenshot, log, audit_log row) | Notes |
 |---|---|---|---|---|---|
-| A1 | | | not run | | |
-| A2 | | | not run | | |
-| A3 | | | not run | | |
-| A4 | | | not run | | |
-| A5 | | | not run | | |
-| A6 | | | not run | | |
-| A7 | | | not run | | |
-| A8 | | | not run | | |
-| A9 | | | not run | | |
-| A10 | | | not run | | |
-| A11 | | | not run | | |
+| A1 | 2026-10-19 | engineering (Claude) | pass | API + real browser: no grant → `no_access`/403; sign-in on the non-prod site sets the cross-site cookie | — |
+| A2 | 2026-10-19 | engineering (Claude) | pass (Chrome only) | Chrome `--test-third-party-cookie-phaseout`: "Cookies blockiert", not "Bitte anmelden" | **Safari / real user settings: manual, not run** |
+| A3 | 2026-10-19 | engineering (Claude) | pass, except Sprechen with a real microphone | Lesen 30, Hören real time (16 plays, 30 answers, signed media `private, no-store`), Schreiben 3 texts frozen, Sprechen synthetic chunks, result, history, own playback. Essay fix #134 in a real browser: server rows hold the text (checked in D1, not the UI label) | **Real microphone: manual, not run** |
+| A4 | 2026-10-19/20 | engineering (Claude) | pass (rows 1–11) | RUNBOOK-RATER-2FA §2 incl. row 5 lock, row 10 on the corrected code (staff 503, no state change), rollback rehearsal (exam back first → 401), row 11 reset; key lifecycle 2026-10-20 (§5 rotation, re-enrol, remove → 503, restore same key → verifies) | — |
+| A5 | 2026-10-19 | engineering (Claude) | pass | Sprechen 75/50 → 63 half-up; Schreiben 75/25 → third rating; lead 75 replaces (OD-30); lead read audited | — |
+| A6 | 2026-10-19 | engineering (Claude) | pass (API level) | takeover: `lease_held` / `lease_superseded`; idle > 60 s: `lease_expired`, reacquired, save lands | **Real laptop sleep: manual, not run** |
+| A7 | 2026-10-19 | engineering (Claude) | pass | `EXAM_ROUTES` off → 404; `EXAM_ENABLED` off → 503 `exam_disabled`; restored → 200 | — |
+| A8 | 2026-10-19 | engineering (Claude) | pass | expired Lesen closed by the cron alone after 239 s (`module_submitted`) | — |
+| A9 | 2026-10-19 | engineering (Claude) | pass | both D1 exported (private); Time Travel restore to a bookmark removed a marker change; A1 re-checked | — |
+| A10 | — | engineering (Claude) | not run | — | Gate for the protected draft PRs #71/#73; needs their documented approval first |
+| A11 | 2026-10-19 | engineering (Claude) | pass (API level) | no key, explanation, evidence or script in any response before submission; control: present after submission | DevTools spot check in a browser: manual equivalent |
 
-Accepted by (owner): `________` Date: `________` — unsigned until every row passes.
+Accepted by (owner): `________` Date: `________` — **unsigned**: A10 is not run, and A2 (Safari), A3 (real microphone) and A6
+(real sleep) still need their manual checks. Invalid runs (test-side mistakes, each diagnosed and re-run) are listed in the PR #131 record.
 
 ## 5. Teardown or reset
 - **Reset data:** drop and recreate both non-prod D1 databases, then repeat §3 step 3 onward.

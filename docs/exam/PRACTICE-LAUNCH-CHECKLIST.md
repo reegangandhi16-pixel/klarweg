@@ -20,12 +20,12 @@ an approval that has not been given.
 - All 8 browser scenarios run directly and through the in-process klarweg-access proxy (`exam-browser.yml`).
 - Practice library P1–P15: structure, validation and content regression tests. Internal checks only, not EX-03.
 
-**B. Tested locally or in-process, not on real infrastructure**
-- Real Cloudflare service binding Access → exam Worker, real D1 and R2 (tests use sqlite and in-memory fakes).
-- The cross-site session cookie on real browsers (github.io → workers.dev), including browsers that block third-party cookies.
-- TOTP with a provisioned `TOTP_ENC_KEY` and Access migration 011 (OD-19 D9), and the rehearsed runbook (D10).
-- Recording upload and playback against real R2; retention jobs (PR #76, unmerged).
-- The acceptance steps A1–A11 in `NONPROD-SETUP.md` have not been run.
+**B. Verified on the isolated non-production environment (2026-10-19/20, `bebfacb`; record: `NONPROD-SETUP.md` §4, PR #131)**
+- Real service binding Access → exam Worker, real D1 and R2, cross-site cookie from the test site (Chrome).
+- A1, A3 (except a real microphone), A4 rows 1–11 incl. the fail-closed row 10 and a rollback rehearsal, A5, A6 (API level),
+  A7, A8, A9 and A11 (API level) pass. OD-19 D9 (non-prod end-to-end) is met; D10 (runbook) was exercised (§2, §3, §5).
+- **Still open here:** A10 not run (gate for protected #71/#73); manual checks: A2 in Safari, A3 with a real microphone,
+  A6 real laptop sleep, A11 DevTools spot check. Retention jobs (PR #76, unmerged) not tested. Production: nothing.
 
 **C. Engineering work remaining (each waits for a decision listed in D, E or F)**
 - Consent-withdrawal flow (F4/P-19, EX-01). Design draft: `CONSENT-PRIVACY-DRAFT.md` §4a.
@@ -46,8 +46,8 @@ an approval that has not been given.
 - EX-01 privacy (incl. the consent, privacy-notice and withdrawal drafts); EX-04 accessibility; EX-05 security / penetration test; EX-02 raters (≥ 2 + a lead); EX-06 audio licences; EX-07 trademark; EX-08 accommodation evidence.
 
 **F. Provisioning and deployment prerequisites (owner actions; none performed by engineering)**
-- The isolated non-production environment (`NONPROD-SETUP.md`); its acceptance run A1–A11.
-- Secrets and data: `EXAM_PROXY_SECRET`, `EXAM_MEDIA_SECRET`, `TOTP_ENC_KEY`; Access migration 011; the exam D1 database (`database_id` is still a placeholder) and the R2 buckets.
+- The isolated non-production environment is provisioned (PR #128) and accepted except A10 and the manual checks (B).
+- **Production** secrets and data: `EXAM_PROXY_SECRET`, `EXAM_MEDIA_SECRET`, `TOTP_ENC_KEY` (store a copy offline first); Access migration 011; the production exam D1 database (`database_id` is still a placeholder) and the R2 buckets.
 - OD-20: a production same-site domain for the site and API (register: required before the pilot).
 - Production switches, all currently off: `EXAM_ROUTES` and the `EXAM` binding in klarweg-access, `EXAM_ENABLED`, `EXAM_SYNTHETIC_FORMS`, `EXAM_MOCK_FORMS` and `EXAM_PRODUCTION_FORMS` in the exam Worker, `exam/` in `.github/pages-allowlist.txt`, `EXAM_RECORDING_RETENTION_DAYS`.
 
@@ -99,7 +99,7 @@ Ready-to-send briefs for every external review (scope, accounts, material, deliv
 | **OD-14a–e** vendor, licence (EX-06), voice cast, 10 raters, disclosure (see `OD-14-AUDIO-VENDOR-RESEARCH.md` §7) | Real Hören and Sprechen partner audio |
 | **Learner release set** (which forms) | Building a learner release |
 | **EX-01** privacy review; **P-19** consent withdrawal; **P-20** retention (PR #76 stays unmerged, retention off). Draft consent text, privacy notice and withdrawal workflow for the reviewer: `CONSENT-PRIVACY-DRAFT.md` (not in use; the Sprechen screen keeps its placeholder until approval) | Real recordings |
-| **OD-19** D9/D10: non-production end-to-end test and rehearsed runbook (`RUNBOOK-RATER-2FA.md`); provisioning `TOTP_ENC_KEY` + Access migration 011 (owner action) | Pilot |
+| **OD-19** D9 met on non-production (A4 rows 1–11, 2026-10-19/20); D10 runbook exercised there; **production**: provisioning `TOTP_ENC_KEY` + Access migration 011 (owner action) | Pilot |
 | **EX-02** rater recruitment and training | Rated Schreiben/Sprechen results for learners |
 | **OD-20** same-site domain | Pilot |
 
@@ -112,7 +112,8 @@ Ready-to-send briefs for every external review (scope, accounts, material, deliv
 
 ## 5. Not deployed
 Exam Worker flags all `off` (`exam-worker/wrangler.toml`); `EXAM_ROUTES` off in klarweg-access; no `exam/` path in
-`.github/pages-allowlist.txt`; engineering ran no remote D1, R2, Wrangler or secrets operations; no learner release built.
+`.github/pages-allowlist.txt`; no learner release built. Engineering ran remote D1, Wrangler and secret operations on
+the **non-production** Workers and databases only, with the owner's authorization (2026-10-19/20); none on production.
 Isolated non-production environment (setup, acceptance A1–A11, teardown): `NONPROD-SETUP.md`; config files
-(`wrangler.nonprod.toml` for both Workers) and the site build tool are in the repo; not provisioned. Incident
+(`wrangler.nonprod.toml` for both Workers) and the site build tool are in the repo; provisioned 2026-10-19 (owner-authorized). Incident
 response: `RUNBOOK-EXAM-INFRA.md` §5a.

@@ -242,7 +242,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Mila schreibt, dass Frau Okafor ihr den Weg zum Samstagsmarkt mit frischem Gemüse erklärt hat, deshalb ist die Aussage richtig."
+      "explanation_de": "Mila schreibt, dass Frau Okafor ihr gezeigt hat, wo man samstags auf dem Markt frisches Gemüse kaufen kann, deshalb ist die Aussage richtig."
     }
   },
   {
@@ -868,17 +868,17 @@
       {
         "option_id": "a",
         "label": "a",
-        "text": "Alle Kunden finden das System einfach."
+        "text": "finden alle Kunden das System einfach."
       },
       {
         "option_id": "b",
         "label": "b",
-        "text": "Die Händler wollen das System beenden."
+        "text": "wollen die Händler das System beenden."
       },
       {
         "option_id": "c",
         "label": "c",
-        "text": "Es gibt weniger Müll als vorher."
+        "text": "gibt es weniger Müll als vorher."
       }
     ],
     "response_spec": {
@@ -3898,7 +3898,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Die Weiterbildung macht Nora am Nachmittag, Paul spricht davon nicht über sich selbst."
+      "explanation_de": "Die Weiterbildung macht Nora am Nachmittag; Paul sagt nicht, dass er selbst eine Weiterbildung macht."
     }
   },
   {

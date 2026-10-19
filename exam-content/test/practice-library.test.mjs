@@ -231,3 +231,15 @@ test('LIBRARY: no group-size phrase that can be read two ways ("zu dritt … mit
     }
   }
 });
+
+test('LIBRARY: no impersonal passive with a reflexive pronoun ("getroffen wird sich") in explanations or options', () => {
+  // internal audit 2026-10-19 found P4 Hören 3 item 19 explaining with "getroffen wird sich", which is not standard German;
+  // reflexive verbs have no impersonal passive, so "<Partizip> wird/werden sich" is always a wording defect
+  const REFLEXIVE_PASSIVE = /\bge\p{L}+(t|en) (wird|werden|wurde|wurden) sich\b/iu;
+  for (const f of PRACTICE_FORMS) {
+    for (const it of JSON.parse(f.files['items.json'])) {
+      const text = JSON.stringify(it);
+      assert.equal(REFLEXIVE_PASSIVE.test(text), false, `${f.name} ${it.id}: ${(REFLEXIVE_PASSIVE.exec(text) || [''])[0]}`);
+    }
+  }
+});

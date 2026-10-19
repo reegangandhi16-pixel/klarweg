@@ -157,7 +157,7 @@ export const PRACTICE_FORM_P4 = buildPracticeForm({
         ['Aylin hat nächste Woche eine Prüfung.', 'richtig', 'Nächste Woche habe ich meine Statistikprüfung', 'Aylin lernt so viel, weil ihre Statistikprüfung schon in der nächsten Woche ist.'],
         ['Moritz hatte Statistik noch nicht.', 'falsch', 'Statistik hatte ich letztes Semester.', 'Moritz kennt das Fach bereits aus dem letzten Semester und bietet deshalb seine Hilfe an.'],
         ['Am Donnerstag arbeitet Aylin bis sechs Uhr.', 'richtig', 'am Donnerstag arbeite ich im Café, bis sechs', 'Aylin kann erst nach ihrer Arbeit im Café lernen, die am Donnerstag um sechs endet.'],
-        ['Die beiden treffen sich in einem Café.', 'falsch', 'um sieben in der Bibliothek', 'Das Café ist Aylins Arbeitsplatz, getroffen wird sich aber um sieben in der Bibliothek.'],
+        ['Die beiden treffen sich in einem Café.', 'falsch', 'um sieben in der Bibliothek', 'Das Café ist Aylins Arbeitsplatz; die beiden treffen sich aber um sieben in der Bibliothek.'],
         ['Die Bibliothek ist abends bis zehn Uhr geöffnet.', 'richtig', 'Die ist bis zehn Uhr offen.', 'Moritz schlägt die Bibliothek vor, weil sie abends bis zehn Uhr offen hat.'],
         ['Moritz arbeitet immer noch im Supermarkt.', 'falsch', 'seit Oktober gebe ich Nachhilfe in Mathe', 'Moritz gibt seit Oktober Nachhilfe und arbeitet nicht mehr im Supermarkt.'],
         ['Moritz verdient mit der Nachhilfe weniger als vorher.', 'falsch', 'Das ist besser bezahlt', 'Moritz hat zur Nachhilfe gewechselt, weil er dort mehr verdient, nicht weniger.']

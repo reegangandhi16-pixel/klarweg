@@ -8,7 +8,8 @@
 
 ## What it does
 - **Who needs it:** raters, lead raters and exam admins (`exam_roles`). They need a *fresh* second factor (TOTP, at most
-  12 h old) on every `/exam/v1/admin/*` route. Learners are not affected.
+  12 h old) on every `/exam/v1/admin/*` route, and when a lead rater or exam admin opens another learner's result
+  (`/exam/v1/attempts/{id}/result`; audited as `result_viewed_by_staff`). Learners are not affected.
 - **Where the check happens:**
   - The Access Worker attests the time of the last successful code per session (`sessions.mfa_verified_at`) in `X-KW-MFA-At`.
   - The exam Worker enforces freshness (`exam-worker/src/auth.js` `mfaFresh`).

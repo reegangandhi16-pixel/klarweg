@@ -67,7 +67,7 @@ klarweg-exam Worker (NEW, workers_dev=false)
    └── service binding TUTOR ──► klarweg-tutor (new exam actions: transcribe_long, rate_writing_b1, rate_speaking_b1)
    
 Authoring (offline): private repo klarweg-exam-content ──CI validate+compile──► R2 release rNNN ──► D1 form registry
-Raters/admins: /exam/v1/admin/* (role-gated, same session + fresh TOTP second factor ≤ 12 h) [OD-19, decided 2026-10-19]
+Raters/admins: /exam/v1/admin/* (role-gated, same session + fresh TOTP second factor ≤ 12 h) [OD-19, decided 2026-10-19]; the same fresh second factor (and an audit entry) applies when a lead_rater or exam_admin reads another learner's result via /exam/v1/attempts/{id}/result
 ```
 
 **Why proxy through Access rather than expose a new public Worker [DESIGN]:**

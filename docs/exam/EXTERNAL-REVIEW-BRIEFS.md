@@ -61,7 +61,8 @@ Common facts for every reviewer:
 - **Already covered by automated tests (not a substitute):**
   - `security.test` and `access-matrix.test` (all 20 attempt routes, other learner and rater → 404);
   - `mfa.test`, `cookie-probe.test`, CSP test;
-  - 11 browser jobs in CI, 3 of them through the real proxy path.
+  - 16 browser jobs in CI: all 8 scenarios run once directly and once through the real klarweg-access proxy path
+    (in-process, not real Cloudflare).
 - **Out of scope:** Cloudflare's own platform; payment flows; chapter (non-exam) pages.
 - **Deliverable:** report with severity per finding; re-test after fixes.
 

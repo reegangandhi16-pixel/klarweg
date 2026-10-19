@@ -32,6 +32,24 @@ export function saveAnnouncement(prev, next) {
   return null;
 }
 
+/* What the learner is told when an action fails ({ code, status } from ExamApiError; no status = network). Only a
+   network or server failure is described as an interrupted connection, because only then can answers still be waiting
+   in the local queue. States that end the attempt here (finished elsewhere, voided, no access) say so plainly instead of
+   offering a reconnect that cannot succeed. actions: [{ act, label }]. */
+export function errorView({ code = 'network', status = 0 } = {}) {
+  const overview = { act: 'reload', label: 'Zur Übersicht' };
+  switch (code) {
+    case 'lease_superseded': return { title: 'In einem anderen Fenster geöffnet', body: 'Diese Prüfung wird in einem anderen Tab oder auf einem anderen Gerät fortgesetzt.', actions: [{ act: 'takeover', label: 'Hier fortsetzen' }] };
+    case 'auth_required': return { title: 'Bitte anmelden', body: 'Melden Sie sich bei Klarweg an, um fortzufahren.', actions: [] };
+    case 'attempt_closed': return { title: 'Prüfung bereits abgeschlossen', body: 'Diese Prüfung wurde bereits abgeschlossen, zum Beispiel in einem anderen Tab. Das Ergebnis finden Sie in der Übersicht.', actions: [overview] };
+    case 'attempt_voided': return { title: 'Versuch ungültig', body: 'Dieser Versuch wurde für ungültig erklärt und kann nicht fortgesetzt werden.', actions: [overview] };
+    case 'exam_access_required': case 'mode_disabled': return { title: 'Nicht verfügbar', body: 'Der Prüfungsbereich ist für Ihr Konto derzeit nicht freigeschaltet.', actions: [overview] };
+    case 'rate_limited': return { title: 'Bitte kurz warten', body: 'Es wurden in kurzer Zeit zu viele Anfragen gesendet. Bereits gespeicherte Antworten bleiben erhalten. Versuchen Sie es in einer Minute erneut.', actions: [{ act: 'reload', label: 'Erneut versuchen' }] };
+  }
+  if (code === 'network' || !status || status >= 500) return { title: 'Verbindung unterbrochen', body: `Ihre Antworten sind gespeichert oder lokal gesichert. (${code})`, actions: [{ act: 'reload', label: 'Erneut verbinden' }] };
+  return { title: 'Aktion nicht möglich', body: `Diese Aktion konnte nicht ausgeführt werden. Bereits gespeicherte Antworten bleiben erhalten. (${code})`, actions: [{ act: 'reload', label: 'Seite neu laden' }] };
+}
+
 export function header({ module, remainingMs, saveState, progress = null }) {
   const save = { saved: 'Gespeichert', pending: 'Änderungen …', saving: 'Speichert …', offline: 'Offline — wird erneut versucht', stopped: 'Speichern gestoppt' }[saveState] || '';
   const total = progress ? progress.reduce((n, p) => n + p.total, 0) : 0;

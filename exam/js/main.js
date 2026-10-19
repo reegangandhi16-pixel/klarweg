@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement } from './render.js';
+import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -33,10 +33,8 @@ function rememberLease(id, l) { try { sessionStorage.setItem(leaseKey(id), l); }
 function screen(html) { app.innerHTML = html; const h = app.querySelector('h1, h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
 function message(title, body, actions = '') { screen(`<main class="kx-card"><h1>${esc(title)}</h1><p>${esc(body)}</p><div class="kx-actions">${actions}</div></main>`); }
 function fail(e) {
-  const code = e instanceof ExamApiError ? e.code : 'network';
-  if (code === 'lease_superseded') return message('In einem anderen Fenster geöffnet', 'Diese Prüfung wird in einem anderen Tab oder auf einem anderen Gerät fortgesetzt.', '<button class="kx-btn" data-act="takeover">Hier fortsetzen</button>');
-  if (code === 'auth_required') return message('Bitte anmelden', 'Melden Sie sich bei Klarweg an, um fortzufahren.');
-  message('Verbindung unterbrochen', `Ihre Antworten sind gespeichert oder lokal gesichert. (${code})`, '<button class="kx-btn" data-act="reload">Erneut verbinden</button>');
+  const v = errorView(e instanceof ExamApiError ? { code: e.code, status: e.status } : { code: 'network' });
+  message(v.title, v.body, v.actions.map((a) => `<button class="kx-btn" data-act="${esc(a.act)}">${esc(a.label)}</button>`).join(''));
 }
 
 async function boot() {

@@ -10,7 +10,7 @@ import { memoryStore } from '../js/store.js';
 import { createApi, ExamApiError } from '../js/api.js';
 import { phaseAt, phaseLabel } from '../js/hoeren.js';
 import { ChunkQueue, sha256Hex } from '../js/recorder.js';
-import { createRenderer, resultPage, header, moduleNav, reviewPanel, itemReview, testBanner, recordingsSection, ratedFeedback, esc, RESULT_TITLE, RESULT_DISCLAIMER } from '../js/render.js';
+import { createRenderer, resultPage, header, moduleNav, reviewPanel, itemReview, testBanner, recordingsSection, ratedFeedback, esc, RESULT_TITLE, RESULT_DISCLAIMER, errorView } from '../js/render.js';
 import { nextAction, assertSupported, unansweredCount, answerableItems, partProgress, isAnswered, itemNumber } from '../js/engine.js';
 import { countWords } from '../js/wordcount.js';
 import { speakingSchedule, speakingPhaseAt, prepEndsAt, partOfPhase, partForListenPhase, speakingItemsForPart, partnerAssetFor,
@@ -546,4 +546,27 @@ test('ACCESSIBILITY (live regions): the redrawn header is not a live region; sav
   const main = fs.readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
   assert.match(main, /onState: \(st\) => \{ const say = saveAnnouncement\(S\.saveState, st\); S\.saveState = st; if \(say\) announce\(say\);/);
   assert.match(main, /id="kx-announce" role="status"/);
+});
+
+test('ERROR SCREENS: only a network or server failure is called an interrupted connection; terminal states say what happened', () => {
+  for (const e of [{ code: 'network' }, { code: 'internal', status: 500 }, { code: 'content_unavailable', status: 503 }]) {
+    const v = errorView(e);
+    assert.equal(v.title, 'Verbindung unterbrochen'); assert.match(v.body, /lokal gesichert/); assert.deepEqual(v.actions, [{ act: 'reload', label: 'Erneut verbinden' }]);
+  }
+  const closed = errorView({ code: 'attempt_closed', status: 409 });
+  assert.equal(closed.title, 'Prüfung bereits abgeschlossen'); assert.deepEqual(closed.actions, [{ act: 'reload', label: 'Zur Übersicht' }]);
+  assert.equal(errorView({ code: 'attempt_voided', status: 409 }).title, 'Versuch ungültig');
+  assert.equal(errorView({ code: 'exam_access_required', status: 403 }).title, 'Nicht verfügbar');
+  assert.equal(errorView({ code: 'rate_limited', status: 429 }).title, 'Bitte kurz warten');
+  assert.deepEqual(errorView({ code: 'lease_superseded', status: 409 }).actions, [{ act: 'takeover', label: 'Hier fortsetzen' }]);
+  assert.deepEqual(errorView({ code: 'auth_required', status: 401 }).actions, []);
+  // any other refusal: no claim about a lost connection or a local queue
+  for (const code of ['module_locked', 'another_module_running', 'review_not_available', 'some_new_code']) {
+    const v = errorView({ code, status: 409 });
+    assert.equal(v.title, 'Aktion nicht möglich', code); assert.equal(/Verbindung|lokal gesichert/.test(v.body), false, code); assert.ok(v.body.includes(`(${code})`));
+  }
+  // every view is used through fail(): escaped buttons, no browser dialog
+  const main = fs.readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
+  assert.match(main, /function fail\(e\) \{\s*const v = errorView\(e instanceof ExamApiError \? \{ code: e\.code, status: e\.status \} : \{ code: 'network' \}\);/);
+  assert.equal(/Verbindung unterbrochen/.test(main), false, 'the copy lives in render.js only');
 });

@@ -8,8 +8,14 @@
    The sheets contain keys, explanations and listening scripts, so they are written ONLY outside this repository
    (the public-repository boundary forbids answer-key-shaped data in it).
 
+   TRACEABILITY (EX-03/O6, no carry-forward): every record carries the form's content fingerprint and one fingerprint per
+   item/task (item + key + its task + the task's stimuli). tools/review-status.mjs only counts a returned record whose
+   fingerprint matches the current content; a record of an older revision is stale. Slot C also records the item-level
+   accessibility verdict (EX-03/O4) per item and task.
+
    Usage: node exam-content/tools/review-sheet.mjs <out-dir outside the repo> [p3 …] */
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PRACTICE_FORMS } from './practice-forms.mjs';
@@ -19,12 +25,34 @@ const OBJECTIVE = new Set(['binary_choice', 'mcq_single', 'matching_pool', 'spea
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const MODULE = { lesen: 'Lesen', hoeren: 'Hören', schreiben: 'Schreiben', sprechen: 'Sprechen' };
 
+export const RECORD_VERSION = 'ex03-review@2';
+const sha = (s) => crypto.createHash('sha256').update(s).digest('hex');
+
+/* Fingerprint of everything a reviewer judges on the sheet: all form files, in a fixed order. */
+export function formFingerprint(form) {
+  return sha(Object.keys(form.files).sort().map((n) => `${n}\n${form.files[n]}`).join('\n\u0000\n'));
+}
+
+/* Per item/task: the item, its key, the task it sits in and that task's stimuli (texts, scripts). */
+export function itemFingerprints(form) {
+  const j = (n) => JSON.parse(form.files[n]);
+  const items = j('items.json'), tasks = j('tasks.json'), assets = j('assets.json'), keys = j('keys.json').keys;
+  const out = {};
+  for (const it of items) {
+    const task = tasks.find((t) => t.items.includes(it.id));
+    const stim = task ? task.stimuli.map((s) => assets.find((a) => a.id === s.asset_id) || null) : [];
+    out[it.id] = sha(JSON.stringify([it, keys[it.id] ?? null, task ?? null, stim]));
+  }
+  return out;
+}
+
 export function reviewRecord(form) {
-  const items = JSON.parse(form.files['items.json']);
+  const items = JSON.parse(form.files['items.json']), fp = itemFingerprints(form);
   return {
-    form_id: form.form_id, reviewer: { slot: '', reviewer_id: '', role: '', native_german: null, date: '' },
-    items: items.filter((it) => !it.is_example && OBJECTIVE.has(it.interaction)).map((it) => ({ item_id: it.id, verdict: '', ambiguity_risk: null, inference_demand: null, distractor_strength: null, notes: '' })),
-    tasks: items.filter((it) => ['text_response', 'spoken_response'].includes(it.interaction)).map((it) => ({ item_id: it.id, verdict: '', notes: '' })),
+    record_version: RECORD_VERSION, form_id: form.form_id, content_sha256: formFingerprint(form),
+    reviewer: { slot: '', reviewer_id: '', role: '', native_german: null, date: '' },
+    items: items.filter((it) => !it.is_example && OBJECTIVE.has(it.interaction)).map((it) => ({ item_id: it.id, item_sha256: fp[it.id], verdict: '', ambiguity_risk: null, inference_demand: null, distractor_strength: null, accessibility: '', notes: '' })),
+    tasks: items.filter((it) => ['text_response', 'spoken_response'].includes(it.interaction)).map((it) => ({ item_id: it.id, item_sha256: fp[it.id], verdict: '', accessibility: '', notes: '' })),
     originality_signoff: { slot_c_only: true, verdict: '', notes: '' }
   };
 }
@@ -45,7 +73,8 @@ td,th{border:1px solid #bbb;padding:4px;vertical-align:top}.box{display:inline-b
 <h1>EX-03 Review — ${esc(form.name)} (${esc(form.form_id)})</h1>
 <p>Klarweg synthetic practice, not an official exam. CONFIDENTIAL review material (keys, explanations, listening scripts). Do not share.</p>
 <p>Reviewer slot (A/B/C): <span class="box"></span> Reviewer id: <span class="box"></span> Role (content/language/teacher/originality/accessibility): <span class="box"></span> Native German speaker (yes/no): <span class="box"></span> Date: <span class="box"></span></p>
-<p>Per item: verdict <b>approve / revise / reject</b>; ambiguity_risk <b>0</b> none · <b>1</b> minor · <b>2</b> must fix; inference_demand and distractor_strength <b>1–5</b> (anchors: GOETHE-B1-DIFFICULTY-BENCHMARK §2.2).</p>`];
+<p>Content fingerprint: <code>${formFingerprint(form)}</code> — copy it unchanged into your record; a review of another version does not count (EX-03/O6).</p>
+<p>Per item: verdict <b>approve / revise / reject</b>; ambiguity_risk <b>0</b> none · <b>1</b> minor · <b>2</b> must fix; inference_demand and distractor_strength <b>1–5</b> (anchors: GOETHE-B1-DIFFICULTY-BENCHMARK §2.2). Slot C also gives the item-level accessibility verdict (EX-03/O4).</p>`];
   for (const m of ['lesen', 'hoeren', 'schreiben', 'sprechen']) {
     for (const t of tasks.filter((x) => x.module === m)) {
       out.push(`<h2>${MODULE[m]} Teil ${t.part} — ${esc(t.id)}</h2><p>${esc(t.instructions.text_de)}</p>${t.context_line ? `<p><i>${esc(t.context_line)}</i></p>` : ''}`);
@@ -56,10 +85,10 @@ td,th{border:1px solid #bbb;padding:4px;vertical-align:top}.box{display:inline-b
         if (OBJECTIVE.has(it.interaction)) {
           const k = keys[id].correct, an = it.anchors[0];
           const opts = it.options.map((o) => `${o.option_id === k ? '<span class="key">' : ''}${esc(o.label)}${o.text ? ' ' + esc(o.text) : ''}${o.option_id === k ? ' ✔</span>' : ''}`).join(' · ');
-          out.push(`<table><tr><th colspan="5">${esc(it.stem)}</th></tr><tr><td colspan="5">${opts}</td></tr>
-<tr><td colspan="5">Erklärung: ${esc(it.feedback.explanation_de)}<br>Beleg: „${esc(sourceOf(asset(an.asset_id)).slice(an.start, an.end))}“</td></tr>
-<tr><td>verdict ☐ approve ☐ revise ☐ reject</td><td>ambiguity_risk ☐0 ☐1 ☐2</td><td>inference_demand ___</td><td>distractor_strength ___</td><td>notes</td></tr></table>`);
-        } else if (it.interaction !== 'topic_choice') out.push(`<table><tr><th>${esc(it.stem)} (${esc(keys[id].rubric_id)})</th></tr><tr><td>verdict ☐ approve ☐ revise ☐ reject · notes:</td></tr></table>`);
+          out.push(`<table><tr><th colspan="6">${esc(it.stem)}</th></tr><tr><td colspan="6">${opts}</td></tr>
+<tr><td colspan="6">Erklärung: ${esc(it.feedback.explanation_de)}<br>Beleg: „${esc(sourceOf(asset(an.asset_id)).slice(an.start, an.end))}“</td></tr>
+<tr><td>verdict ☐ approve ☐ revise ☐ reject</td><td>ambiguity_risk ☐0 ☐1 ☐2</td><td>inference_demand ___</td><td>distractor_strength ___</td><td>accessibility (C) ☐ approve ☐ revise ☐ reject</td><td>notes</td></tr></table>`);
+        } else if (it.interaction !== 'topic_choice') out.push(`<table><tr><th>${esc(it.stem)} (${esc(keys[id].rubric_id)})</th></tr><tr><td>verdict ☐ approve ☐ revise ☐ reject · accessibility (C) ☐ approve ☐ revise ☐ reject · notes:</td></tr></table>`);
       }
     }
   }

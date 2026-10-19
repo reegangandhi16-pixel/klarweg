@@ -1,0 +1,67 @@
+name: Live classes page checks
+
+# Static guards (drafts off, page still unpublished, links resolve) and real headless Chrome against a local static
+# server for live-classes.html. Hermetic: every non-local host is blocked, so no auth, checkout or email request can
+# leave the runner. Deploys nothing, needs no secrets. Actions are pinned by commit SHA.
+
+on:
+  pull_request:
+    paths:
+      - 'live-classes.html'
+      - 'kw-live.js'
+      - 'live-classes-data.js'
+      - 'scripts/live-classes-*.mjs'
+      # shared assets the page loads, and the files the "still unpublished" guard reads
+      - 'site.css'
+      - 'site.js'
+      - 'kw-products.js'
+      - 'kw-placement.js'
+      - 'kw-config.js'
+      - 'kw-auth.js'
+      - 'sitemap.xml'
+      - '.github/pages-allowlist.txt'
+      - '.github/workflows/live-classes.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'live-classes.html'
+      - 'kw-live.js'
+      - 'live-classes-data.js'
+      - 'scripts/live-classes-*.mjs'
+      - 'site.css'
+      - 'site.js'
+      - 'kw-products.js'
+      - 'kw-placement.js'
+      - 'kw-config.js'
+      - 'kw-auth.js'
+      - 'sitemap.xml'
+      - '.github/pages-allowlist.txt'
+      - '.github/workflows/live-classes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-classes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1   # v7.1.0
+        with:
+          node-version: '24'
+      - name: Static guards (drafts off, unpublished, links, scripts parse)
+        run: node --test scripts/live-classes-static.test.mjs
+      - name: Chrome
+        run: |
+          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)"
+          echo "CHROME=$CHROME_BIN" >> "$GITHUB_ENV"
+          "$CHROME_BIN" --version
+      - name: Browser checks (production default, host guard, preview, form, mobile)
+        env:
+          CHROME_ARGS: --no-sandbox
+          LIVE_E2E_VERBOSE: '1'   # every check in the job log, so a failure can be diagnosed from CI alone
+        run: node scripts/live-classes-browser.mjs

@@ -52,7 +52,8 @@ gains non-prod settings.
 
 **CORS for the test site.** The production allow-list in `access/worker/src/cors.js` is unchanged. The Access Worker
 also accepts the origins in `CORS_EXTRA_ORIGINS` — exact origins only (`https://host[:port]` or
-`http://localhost|127.0.0.1[:port]`); one invalid entry makes the whole value ignored (fails closed). Production never
+`http://localhost|127.0.0.1[:port]`, port 1–65535 and never the default port; no credentials, path, query or
+fragment); one invalid entry makes the whole value ignored (fails closed). Production never
 sets it, and the guard refuses it in `wrangler.toml`. Tests: `access/worker/test/cors-extra-origins.test.mjs`.
 
 ## 3. Provisioning (owner, in this order)

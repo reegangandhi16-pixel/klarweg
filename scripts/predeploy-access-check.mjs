@@ -88,8 +88,10 @@ if (ai === 'true' && !allowAi) fail('AI_ENABLED="true" in wrangler.toml. Enable 
 /* Non-production settings stay in wrangler.nonprod.toml (docs/exam/NONPROD-SETUP.md).
    An [env.*] section here would put a second set of vars in this file, which the
    first-match reads above could pick up; CORS_EXTRA_ORIGINS widens CORS/CSRF. */
-if (/^\s*\[\[?env\./m.test(toml)) fail('wrangler.toml contains an [env.*] section. Non-production settings belong in access/worker/wrangler.nonprod.toml, never in the production file.');
-if (/^\s*CORS_EXTRA_ORIGINS\s*=/m.test(toml)) fail('wrangler.toml sets CORS_EXTRA_ORIGINS. Extra CORS origins are for the isolated non-production Worker only (wrangler.nonprod.toml).');
+/* Matched outside comments and in any TOML spelling: [ env.x ], ["env".x], "CORS_EXTRA_ORIGINS" = …, vars.CORS_EXTRA_ORIGINS = … */
+const tomlCode = toml.replace(/#.*$/gm, '');
+if (/^\s*\[\[?\s*["']?env["']?\s*\./m.test(tomlCode)) fail('wrangler.toml contains an [env.*] section. Non-production settings belong in access/worker/wrangler.nonprod.toml, never in the production file.');
+if (/CORS_EXTRA_ORIGINS["']?\s*=/.test(tomlCode)) fail('wrangler.toml sets CORS_EXTRA_ORIGINS. Extra CORS origins are for the isolated non-production Worker only (wrangler.nonprod.toml).');
 
 let live;
 try {

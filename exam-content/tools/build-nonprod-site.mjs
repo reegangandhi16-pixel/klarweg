@@ -18,6 +18,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isExactOrigin } from '../../access/worker/src/cors.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const PAGES = ['index.html', 'rater.html'];
@@ -25,13 +26,19 @@ const API_META = /<meta name="kw-exam-api" content="[^"]*">/;
 /* One line only: the CSP explanation comment above the meta also says "connect-src". */
 const CONNECT_SRC = /connect-src [^;"\n]*;/;
 
-/* An exact origin: https anywhere, http only for localhost / 127.0.0.1. */
+/* An exact origin by the same rule as the Access Worker's CORS_EXTRA_ORIGINS
+   (https://host[:port], http only for localhost / 127.0.0.1, valid port, no
+   default port, path, credentials or query), and never production: not the
+   klarweg-access Worker on workers.dev, nor one of its preview URLs
+   (<version>-klarweg-access.<sub>.workers.dev), nor klarweg.in. */
 export function checkApiOrigin(api) {
   if (typeof api !== 'string') return 'missing --api';
-  if (!/^(https:\/\/[a-z0-9-]+(\.[a-z0-9-]+)*|http:\/\/(localhost|127\.0\.0\.1))(:[0-9]{1,5})?$/.test(api)) {
+  if (!isExactOrigin(api)) {
     return '--api must be an exact origin (https://host[:port], or http://localhost[:port]), no path or trailing slash';
   }
-  if (/^https:\/\/klarweg-access\.[a-z0-9-]+\.workers\.dev$/.test(api) || /(^|\.)klarweg\.in$/.test(new URL(api).hostname)) {
+  const host = new URL(api).hostname;
+  const workerLabel = /\.workers\.dev$/.test(host) ? host.split('.')[0] : '';
+  if (workerLabel === 'klarweg-access' || workerLabel.endsWith('-klarweg-access') || /(^|\.)klarweg\.in$/.test(host)) {
     return '--api points at the PRODUCTION Access Worker or domain; the non-prod site must use klarweg-access-nonprod';
   }
   return null;
@@ -46,12 +53,25 @@ export function rewritePage(html, api, name = 'page') {
     .replace(CONNECT_SRC, `connect-src 'self' blob: ${api};`);
 }
 
+/* Real path of `p`, or of its nearest existing ancestor plus the rest, so a
+   symlink anywhere on the way cannot lead back into the repository. */
+function realish(p) {
+  const rest = [];
+  let cur = path.resolve(p);
+  while (!fs.existsSync(cur)) { rest.unshift(path.basename(cur)); cur = path.dirname(cur); }
+  return path.join(fs.realpathSync(cur), ...rest);
+}
+
 export function checkOutDir(out, root = ROOT) {
   if (typeof out !== 'string' || out === '') return 'missing --out';
   const abs = path.resolve(out);
-  const rel = path.relative(root, abs);
-  if (rel === '' || (!rel.startsWith('..') && !path.isAbsolute(rel))) return '--out must be OUTSIDE the repository';
-  if (fs.existsSync(abs) && fs.readdirSync(abs).length) return '--out must be empty or not exist yet';
+  const rel = path.relative(fs.realpathSync(root), realish(abs));
+  const outside = rel === '..' || rel.startsWith('..' + path.sep) || path.isAbsolute(rel);
+  if (!outside) return '--out must be OUTSIDE the repository';
+  if (fs.existsSync(abs)) {
+    if (!fs.lstatSync(abs).isDirectory()) return '--out must be a directory (not a file or symlink)';
+    if (fs.readdirSync(abs).length) return '--out must be empty or not exist yet';
+  }
   return null;
 }
 

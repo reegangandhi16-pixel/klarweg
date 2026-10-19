@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import worker from '../src/index.js';
-import { parseExtraOrigins } from '../src/cors.js';
+import { parseExtraOrigins, isExactOrigin } from '../src/cors.js';
 import { createD1 } from './d1-sqlite.mjs';
 
 const WORKER_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -45,6 +45,46 @@ test('CORS EXTRA: unset, empty or any invalid entry yields no extra origins (fai
     'https://*.example.com', 'localhost:8788', 'https://EXAMPLE.com', 'http://localhost:8788,*', 'http://localhost:8788, http://evil.example',
     'javascript:alert(1)', 'https://example.com:999999', 'https://exa mple.com']) {
     assert.deepEqual(parseExtraOrigins(bad), [], `must reject ${JSON.stringify(bad)}`);
+  }
+});
+
+test('CORS EXTRA: port boundaries — 1 and 65535 accepted; 0, 65536, 99999, leading zero, default port and empty port rejected', () => {
+  for (const ok of ['http://localhost:1', 'http://localhost:65535', 'https://a.example.com:65535', 'http://127.0.0.1:8788', 'https://a.example.com:8443']) {
+    assert.deepEqual(parseExtraOrigins(ok), [ok], `accepts ${ok}`);
+  }
+  for (const bad of ['http://localhost:0', 'http://localhost:65536', 'http://localhost:99999', 'https://a.example.com:65536', 'https://a.example.com:99999',
+    'http://localhost:08788', 'http://localhost:00', 'http://localhost:', 'https://a.example.com:', 'https://a.example.com:443', 'http://localhost:80',
+    'http://localhost:+8788', 'http://localhost:87 88', 'http://localhost:0x1f']) {
+    assert.deepEqual(parseExtraOrigins(bad), [], `rejects ${bad}`);
+  }
+});
+
+test('CORS EXTRA: credentials, path, query, fragment, malformed hosts and wrong schemes are rejected', () => {
+  for (const bad of [
+    'https://user:pass@a.example.com', 'https://user@a.example.com', 'http://user@localhost:8788', 'http://localhost@evil.example',
+    'https://a.example.com/', 'https://a.example.com/x', 'https://a.example.com?x=1', 'https://a.example.com#x', 'http://localhost:8788/',
+    'https://a..example.com', 'https://.example.com', 'https://example.com.', 'https://-a.example.com', 'https://a-.example.com',
+    'https://a_b.example.com', 'https://' + 'a'.repeat(64) + '.example.com', 'https://' + Array(64).fill('abc').join('.') + '.com',
+    'https://1.2.3.4', 'https://127.0.0.1', 'https://[::1]', 'http://[::1]:8788', 'https://a.example.com\nhttps://b.example.com',
+    'http://localhost.evil.example', 'http://127.0.0.1.evil.example', 'http://127.0.0.2:8788', 'http://localhost8788',
+    'http://a.example.com', 'ftp://a.example.com', 'HTTPS://a.example.com', 'https:/a.example.com', '//a.example.com', 'https://',
+    'http://localhost:8788,', ',http://localhost:8788', 'http://localhost:8788,,https://a.example.com', 'http://localhost:8788;https://a.example.com',
+    'https://a.example.com\thttps://b.example.com'
+  ]) {
+    assert.deepEqual(parseExtraOrigins(bad), [], `rejects ${JSON.stringify(bad)}`);
+  }
+  for (const bad of ['http://localhost:8788\n', ' http://localhost:8788', 'http://localhost:8788 ', undefined, null, 8788]) {
+    assert.equal(isExactOrigin(bad), false, `isExactOrigin rejects ${JSON.stringify(bad)}`);
+  }
+});
+
+test('CORS EXTRA: legitimate origins are preserved exactly; one bad entry rejects the whole list', () => {
+  const good = ['http://localhost:8788', 'http://localhost', 'http://127.0.0.1', 'https://exam-test.example.com', 'https://xn--bcher-kva.example.com', 'https://a1.b2.example.co.uk:8443'];
+  assert.deepEqual(parseExtraOrigins(good.join(',')), good);
+  assert.deepEqual(parseExtraOrigins(good.join(' , ')), good);
+  assert.ok(isExactOrigin('https://' + ['a'.repeat(63), 'b'.repeat(63), 'c'.repeat(63), 'd'.repeat(57)].join('.')), '253-char host accepted');
+  for (const bad of ['http://localhost:65536', 'https://a.example.com/', 'https://u@a.example.com']) {
+    assert.deepEqual(parseExtraOrigins([...good, bad].join(',')), [], `whole list rejected because of ${bad}`);
   }
 });
 

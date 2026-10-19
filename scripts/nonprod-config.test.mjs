@@ -103,7 +103,7 @@ test('NONPROD: no secrets; database ids are UUIDs (placeholder until provisioned
 test('PRODUCTION: wrangler.toml files carry no non-prod settings; exam flags all off', () => {
   for (const [file, t] of [['exam-worker', PROD_EXAM], ['access/worker', PROD_ACCESS]]) {
     assert.ok(!/^\s*\[\[?env\./m.test(t), `${file}/wrangler.toml: no [env.*] sections`);
-    assert.ok(!/^\s*CORS_EXTRA_ORIGINS\s*=/m.test(t), `${file}/wrangler.toml: no CORS_EXTRA_ORIGINS`);
+    assert.ok(!/CORS_EXTRA_ORIGINS/.test(strip(t)), `${file}/wrangler.toml: no CORS_EXTRA_ORIGINS`);
   }
   for (const k of ['EXAM_ENABLED', 'EXAM_SYNTHETIC_FORMS', 'EXAM_MOCK_FORMS', 'EXAM_PRODUCTION_FORMS']) assert.equal(val(PROD_EXAM, k), 'off', `production ${k}`);
   assert.equal(val(PROD_ACCESS, 'EXAM_ROUTES'), null, 'production Access has no EXAM_ROUTES (exam proxy off)');
@@ -132,4 +132,13 @@ test('PREDEPLOY GUARD: refuses a production wrangler.toml with CORS_EXTRA_ORIGIN
   assert.ok(!/CORS_EXTRA_ORIGINS|\[env\.\*\] section/.test(control), 'control: the unmodified production file does not trip the new rules');
   assert.match(runGuard('\nCORS_EXTRA_ORIGINS = "http://localhost:8788"\n'), /sets CORS_EXTRA_ORIGINS/);
   assert.match(runGuard('\n[env.nonprod]\nname = "klarweg-access-nonprod"\n'), /contains an \[env\.\*\] section/);
+  for (const spelling of ['\n"CORS_EXTRA_ORIGINS" = "http://localhost:8788"\n', "\n  'CORS_EXTRA_ORIGINS'='http://localhost:8788'\n",
+    '\nvars.CORS_EXTRA_ORIGINS = "http://localhost:8788"\n', '\n[other]\nx = { CORS_EXTRA_ORIGINS = "http://localhost:8788" }\n']) {
+    assert.match(runGuard(spelling), /sets CORS_EXTRA_ORIGINS/, `refuses ${JSON.stringify(spelling)}`);
+  }
+  for (const header of ['\n[ env.nonprod ]\n', '\n[["env".nonprod.d1_databases]]\n', "\n['env'.nonprod.vars]\n", '\n[[env.nonprod.services]]\n']) {
+    assert.match(runGuard(header), /contains an \[env\.\*\] section/, `refuses ${JSON.stringify(header)}`);
+  }
+  assert.ok(!/CORS_EXTRA_ORIGINS|\[env\.\*\] section/.test(runGuard('\n# CORS_EXTRA_ORIGINS = "x" and [env.nonprod] are only mentioned in this comment\n')),
+    'a comment does not trip the rules');
 });

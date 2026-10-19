@@ -33,7 +33,13 @@ test('NONPROD SITE: API origin must be exact and must not be production', () => 
   for (const bad of [undefined, '', 'klarweg-access-nonprod.x.workers.dev', API + '/', API + '/exam', 'http://example.com', "https://x.example.com; connect-src *"]) {
     assert.match(String(checkApiOrigin(bad)), /missing|exact origin/, `rejects ${JSON.stringify(bad)}`);
   }
-  for (const prod of ['https://klarweg-access.klarweg-issue-reports-2026.workers.dev', 'https://klarweg.in', 'https://api.klarweg.in']) {
+  for (const bad of [API + ':443', API + ':65536', API + ':99999', API + ':0', 'https://u:p@klarweg-access-nonprod.x.workers.dev', API + '?x', API + '#x']) {
+    assert.match(String(checkApiOrigin(bad)), /exact origin/, `rejects ${bad}`);
+  }
+  assert.equal(checkApiOrigin(API + ':8443'), null);
+  for (const prod of ['https://klarweg-access.klarweg-issue-reports-2026.workers.dev', 'https://klarweg-access.klarweg-issue-reports-2026.workers.dev:8443',
+    'https://abc123-klarweg-access.klarweg-issue-reports-2026.workers.dev', 'https://klarweg-access.other-sub.workers.dev',
+    'https://klarweg.in', 'https://api.klarweg.in', 'https://klarweg.in:8443']) {
     assert.match(String(checkApiOrigin(prod)), /PRODUCTION/, `refuses ${prod}`);
   }
 });
@@ -64,8 +70,20 @@ test('NONPROD SITE: --out must be outside the repository and empty', () => {
   assert.match(String(checkOutDir(path.join(REPO, 'nonprod-out'), REPO)), /OUTSIDE/);
   assert.match(String(checkOutDir('', REPO)), /missing/);
   const d = tmp();
+  assert.match(String(checkOutDir(path.join(REPO, '..nonprod-out'), REPO)), /OUTSIDE/, 'a "..name" folder inside the repo is inside');
+  assert.match(String(checkOutDir(path.join(REPO, 'exam', '..', '..', path.basename(REPO), 'x'), REPO)), /OUTSIDE/, 'dot-dot back into the repo');
   try {
     assert.equal(checkOutDir(d, REPO), null, 'empty temp dir is fine');
+    assert.equal(checkOutDir(path.join(d, 'new', 'site'), REPO), null, 'a not-yet-existing dir outside is fine');
+    fs.symlinkSync(REPO, path.join(d, 'link-to-repo'));
+    assert.match(String(checkOutDir(path.join(d, 'link-to-repo', 'nonprod-out'), REPO)), /OUTSIDE/, 'a path through a symlink into the repo is inside');
+    fs.mkdirSync(path.join(d, 'empty'));
+    fs.symlinkSync(path.join(d, 'empty'), path.join(d, 'link-to-empty'));
+    assert.match(String(checkOutDir(path.join(d, 'link-to-empty'), REPO)), /directory/, 'the output itself must not be a symlink');
+    fs.writeFileSync(path.join(d, 'afile'), '');
+    assert.match(String(checkOutDir(path.join(d, 'afile'), REPO)), /directory/, 'a file is refused');
+    fs.rmSync(path.join(d, 'afile'));
+    fs.rmSync(path.join(d, 'link-to-empty')); fs.rmSync(path.join(d, 'link-to-repo')); fs.rmSync(path.join(d, 'empty'), { recursive: true });
     fs.writeFileSync(path.join(d, 'x'), '');
     assert.match(String(checkOutDir(d, REPO)), /empty/);
   } finally { fs.rmSync(d, { recursive: true, force: true }); }

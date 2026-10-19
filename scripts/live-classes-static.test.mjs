@@ -13,7 +13,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import os from 'node:os';
-import { checkData, launchBlockers, isAllowlisted, POLICIES } from './live-classes-readiness.mjs';
+import { checkData, launchBlockers, isAllowlisted, homepageFaq, POLICIES } from './live-classes-readiness.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -117,6 +117,7 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: '₹9,999' }); }, /needs nextBatch/, 'open enrolment without a start date');
   expectError((D) => { D.teachers.push({ ...realTeacher, qualifications: [] }); }, /published teacher needs qualifications/, 'a published teacher without qualifications');
   expectError((D) => { D.teachers.push({ ...realTeacher, photo: 'public/teachers/missing.jpg', photoAlt: 'x' }); }, /photo public\/teachers\/missing\.jpg does not exist/, 'a missing photo file');
+  expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: '₹9,999', nextBatch: '1 Dec', frequency: '2×/week', sessionLength: '60 min', totalDuration: '12 weeks' }); }, /group batch needs batchSize/, 'an open group batch without a batch size');
   expectError((D) => { D.testimonials.push({ quote: 'Great', name: 'R.', detail: '', draft: false }); }, /published testimonial needs permission/, 'a testimonial without recorded consent');
   expectError((D) => { D.courses[1].id = D.courses[0].id; }, /duplicate id/, 'duplicate course ids');
   expectError((D) => { D.courses[0].levels = ['A3']; }, /levels has "A3"/, 'an unknown level');
@@ -132,6 +133,12 @@ test('LIVE GATE: blockers are listed today, and the page cannot be allowlisted w
   if (isAllowlisted()) assert.deepEqual(blockers, [], 'live-classes is in the Pages allowlist but launch blockers remain');
 });
 
+test('LIVE GATE: the homepage FAQ structured data matches the visible answers', () => {
+  const { visible, structured } = homepageFaq(read('index.html'));
+  assert.ok(Object.keys(structured).length > 0, 'FAQPage structured data found');
+  assert.deepEqual(structured, Object.fromEntries(Object.keys(structured).map((q) => [q, visible[q]])));
+});
+
 test('LIVE GATE: the gate clears once every blocker is resolved (so it can actually be satisfied)', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kw-live-gate-'));
   try {
@@ -144,6 +151,17 @@ test('LIVE GATE: the gate clears once every blocker is resolved (so it can actua
     for (const k of POLICIES) D.policies[k] = 'Confirmed policy text.';
     D.teachers[0].draft = false; D.courses[0].draft = false;
     assert.deepEqual(launchBlockers(D, dir), []);
+    const faqPage = (answer) => `<script type="application/ld+json">{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are there live classes or teachers?","acceptedAnswer":{"@type":"Answer","text":"${answer}"}}]}</script>
+      <span class="faq-q-text">Are there live classes or teachers?</span><span class="faq-toggle"></span></button><div class="faq-answer">${answer}</div>`;
+    fs.writeFileSync(path.join(dir, 'index.html'), faqPage('Enrolment is open for the next batch.'));
+    assert.ok(launchBlockers(D, dir).some((b) => /says enrolment is open/.test(b)), 'the homepage cannot claim open enrolment while no course is open');
+    D.courses[0].enrolment = 'open';
+    assert.deepEqual(launchBlockers(D, dir), [], 'the claim is fine once a published course is open');
+    D.courses[0].enrolment = 'not-open';
+    fs.writeFileSync(path.join(dir, 'index.html'), faqPage('Teacher-led classes are coming.').replace('<div class="faq-answer">Teacher-led', '<div class="faq-answer">Live'));
+    assert.ok(launchBlockers(D, dir).some((b) => /does not match the visible answer/.test(b)), 'visible and structured FAQ answers must match');
+    fs.writeFileSync(path.join(dir, 'index.html'), faqPage('Fees will be announced before enrolment opens; live classes are not open for booking yet.'));
+    assert.deepEqual(launchBlockers(D, dir), [], 'announcing that enrolment will open later is not a claim that it is open');
     D.consultation.feeLabel = '₹150';
     assert.ok(launchBlockers(D, dir).some((b) => /meta description/.test(b)), 'a changed fee with stale meta descriptions is a blocker');
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }

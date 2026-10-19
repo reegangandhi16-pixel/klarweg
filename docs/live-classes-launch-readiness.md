@@ -1,6 +1,6 @@
 # Live Classes — launch readiness
 
-**Status (2026-10-20):** `live-classes.html` is an unlisted preview. It is `noindex`, not in `.github/pages-allowlist.txt`, `sitemap.xml` or any nav, and every teacher and course entry is a draft that never renders on a deployed host. **It is not ready to launch:** the repository contains no verified teacher, course, schedule, fee or policy information.
+**Status (2026-10-20):** decision D1 is made: Klarweg intends to offer teacher-led live classes. No teacher, course, batch, schedule, fee, policy or enrolment date is approved yet. `live-classes.html` is an unlisted preview. It is `noindex`, not in `.github/pages-allowlist.txt`, `sitemap.xml` or any nav, and every teacher and course entry is a draft that never renders on a deployed host. **It is not ready to launch:** the repository contains no verified teacher, course, schedule, fee or policy information.
 
 Check the current state at any time:
 
@@ -19,6 +19,13 @@ The launch gate in `scripts/live-classes-static.test.mjs` fails CI if the page i
 6. `terms.html` covers only self-paced content.
 7. `privacy.html` does not describe the consultation request.
 
+The check also reports, when they occur:
+- a fee in the meta descriptions that differs from `consultation.feeLabel`;
+- a homepage FAQ whose FAQPage structured data differs from the visible answer;
+- a homepage FAQ that says enrolment is open while no published course is open.
+
+Proposed wording for blockers 5–7 (homepage FAQ, Terms, Privacy) is in **`docs/live-classes-review-drafts.md`**. It is a draft for review, not approved.
+
 ---
 
 ## 1. Verified information already in the repository
@@ -31,7 +38,9 @@ The launch gate in `scripts/live-classes-static.test.mjs` fails CI if the page i
 | 7-day money-back guarantee | `refund-policy.html` | Covers single-level and Lifetime purchases **only**. It does not cover live classes or consultations, and the page says so. |
 | The service is self-paced content; a level gives 2 years' access | `terms.html` §2, §4 | Live classes are not yet part of the Terms. |
 | Cashfree catalog has no live-course or consultation product | `kw-products.js`, `access/worker/src/products.js` | Nothing on the page takes payment; the form only prepares an email. |
-| Brand positioning: self-learning platform with Klarweg AI | `uploads/klarweg-os.md`, `index.html` FAQ | Conflicts with launching live classes (decision D1). |
+| Brand positioning: self-learning platform with Klarweg AI | `uploads/klarweg-os.md`, `index.html` FAQ | Superseded for live classes by D1 (2026-10-20); the homepage FAQ still has to change. |
+| Klarweg AI gives feedback on German the learner writes or says | `privacy.html` (Klarweg AI feedback) | Basis for the AI sentence in the proposed homepage FAQ. |
+| The consultation form only opens the visitor's email app; nothing is sent or stored by the page | `kw-live.js`, static test "only hands off to email" | Basis for the proposed Privacy Policy row. |
 
 **Not found anywhere in the repository, git history or project documents:** teacher names, qualifications or photos; live course offerings, schedules, batch sizes, start dates, durations, fees or materials; consultation duration, platform or payment method; live-class policies; testimonials.
 
@@ -43,9 +52,13 @@ The launch gate in `scripts/live-classes-static.test.mjs` fails CI if the page i
 
 Each item is needed before launch unless marked otherwise. A recommendation is given only where the repository supports one.
 
-**D1. Are live classes part of Klarweg?**
-*Why it matters:* the homepage tells visitors, and search engines through structured data, "No live classes. … This is deliberate". The brand foundation (`uploads/klarweg-os.md`) defines the product as self-learning plus Klarweg AI. Publishing the page without resolving this contradicts the main site.
-*If yes:* the homepage FAQ answer and its FAQPage JSON-LD must change in the same release as the page; the wording is yours to approve. No recommendation on the decision itself.
+**D1. Are live classes part of Klarweg? DECIDED: YES (owner, 2026-10-20).**
+Klarweg intends to offer teacher-led live German classes. This sets the direction only; it approves no teacher, course, schedule, fee, policy or date.
+*Follow-up:*
+- the homepage FAQ and its FAQPage structured data must change together (proposed: Variant A in `live-classes-review-drafts.md`);
+- the brand foundation (`uploads/klarweg-os.md`) still describes a self-learning-only product and should be updated by the owner.
+
+*Open:* approve the FAQ wording, and choose when it goes live. Variant A states only the intention, so it can go live before the page. It is still a public announcement.
 
 **D2. Teachers.**
 *Why it matters:* the page shows only facts a teacher actually holds; a profile is published only from their CV and certificates.
@@ -99,7 +112,7 @@ Then set `consultation.termsConfirmed: true`. If the fee changes, also update th
 
 Each is one sentence or paragraph in `policies` in `live-classes-data.js`.
 
-**D6. Terms of Service and Privacy Policy.**
+**D6. Terms of Service and Privacy Policy.** Proposed changes, with every business gap marked `[OWNER: …]`, are in `live-classes-review-drafts.md`.
 *Why it matters:*
 - `terms.html` §2 defines the service as self-paced only.
 - `privacy.html` describes what the systems store "exactly", and says a phone number is collected only at checkout.
@@ -124,6 +137,108 @@ Do it only after D1–D7. The tests that keep the page unpublished must then be 
 
 ---
 
+## 2A. Minimum verified information for the first teacher and the first course
+
+This is the smallest set the validator (`checkData`) and the page need. Everything must come from the teacher's own documents or the owner's written decision. **Nothing in the repository can be reused for these fields.**
+- The draft course titles and objectives in `live-classes-data.js` are generic CEFR-level descriptions written as templates. Keep them only if the teacher confirms they describe the course.
+- Self-paced prices are never live fees.
+
+**First teacher (required to publish a profile):**
+- full name;
+- one-line teaching focus;
+- years teaching German;
+- German level;
+- at least one qualification, as on the certificate;
+- levels taught (A1–C2);
+- language(s) of instruction;
+- formats (Group batch / One-to-one);
+- **written consent to be shown on the site**.
+
+Optional: Goethe certificates, specialisms, exam-prep experience, approach, availability, a photo (4:3, at least 800×600, with consent).
+
+**First course, by the enrolment status you want to show:**
+
+| Status shown | Minimum needed |
+|---|---|
+| "Not open yet" (`not-open`) | title, objectives, level(s), a published teacher, format |
+| "Join the waitlist" (`waitlist`) | the above plus the fee |
+| "Enrolment open" (`open`) | the above plus start date, classes per week, session length, total duration, and batch size for a group batch |
+
+The fee and payment terms should also be settled.
+
+*Recommendation:* launch the first course as `waitlist` or `open` only after D4, D5 and D7 are settled, because a student who sees a fee will ask how to pay and what happens if they miss a class.
+
+The whole launch also needs, regardless of course status: D4 (consultation terms), D5 (four policies), D6 (Terms and Privacy approved), D7 (payment method).
+
+## 2B. Owner input template
+
+Copy, fill in, and send back. Leave a line blank if it is not decided. Nothing blank will be published.
+
+```
+=== TEACHER 1 ===
+Full name:
+Consent to publish profile (yes / date given):
+One-line teaching focus:
+Years teaching German:
+German level (e.g. C2, native):
+Qualifications (exactly as on certificate):
+Goethe certificates held (or "none"):
+Levels taught (A1 A2 B1 B2 C1 C2):
+Languages of instruction (e.g. Hindi, English, German):
+Formats (Group batch / One-to-one):
+Exam-prep experience (optional):
+Teaching approach, 2–3 sentences (optional):
+Availability, e.g. "Weekday evenings IST" (optional):
+Photo approved for the site (yes/no; file to follow):
+
+=== COURSE 1 ===
+Title:
+Level(s):
+Teacher:
+What students will be able to do (3 points):
+Format (Group batch / One-to-one):
+Batch size (group only):
+Classes per week:
+Session length:
+Total duration (e.g. 12 weeks):
+Next start date:
+Materials included:
+Fee (₹):
+Payment terms (e.g. full upfront / instalments):
+Status to show (not open yet / waitlist / open):
+
+=== CONSULTATION (D4) ===
+Fee (confirm ₹100 or new amount):
+Adjusted against course fee if enrolling within __ days (confirm 7 or new):
+Length (minutes):
+Platform (e.g. Google Meet):
+How the fee is paid:
+Refunded if Klarweg cancels? (yes/no):
+
+=== POLICIES (D5), one sentence or paragraph each ===
+Missed classes:
+Cancellation and refunds (student cancels before start / after start; Klarweg cancels):
+How classes are scheduled:
+What the course fee includes:
+
+=== LEGAL / PRIVACY (D6), see docs/live-classes-review-drafts.md ===
+Are classes recorded? (no / yes: who keeps it, for how long):
+Are teachers Klarweg itself or independent tutors?:
+How long are consultation emails kept?:
+Does a live course include self-paced access? (yes/no):
+Removed for disruption: refund or not?:
+Terms/Privacy drafts approved (yes / with edits / lawyer review first):
+
+=== PAYMENT (D7) ===
+How live fees are collected (manual UPI/bank transfer / new online product):
+
+=== HOMEPAGE FAQ (D1 follow-up) ===
+Variant A wording approved (yes / edits):
+Go live with Variant A before the page launches? (yes / only at launch):
+```
+
+---
+
 ## 3. Optional improvements after launch
 
 - Online consultation booking and payment, replacing the email hand-off. This needs a scheduling tool and a payment product (see D7).
@@ -136,7 +251,7 @@ Do it only after D1–D7. The tests that keep the page unpublished must then be 
 
 - The data structure, draft handling and production-safety guard (drafts never render on a deployed host).
 - Validation of every entry: ids, levels, groups, formats, enrolment status, teacher references, completeness of published entries, photo files, testimonial consent.
-- The launch gate in CI.
+- The launch gate in CI, including homepage FAQ ↔ structured-data parity and no "enrolment open" claim without an open course.
 - The contact address and reply time match `contact.html`.
 - All consultation terms on the page read from one data field.
 - Honest empty states and copy while nothing is published.

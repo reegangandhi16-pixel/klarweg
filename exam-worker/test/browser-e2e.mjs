@@ -464,7 +464,7 @@ async function runPractice() {
   const { send } = b;
   let dialogWatch = null;
   try {
-    await send('Runtime.enable'); await send('Page.enable');
+    await send('Runtime.enable'); await send('Page.enable'); await send('Log.enable');   // Log: CSP violations are reported there
     const evaluate = async (expr) => {
       const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
       if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
@@ -739,6 +739,8 @@ async function runPractice() {
     await a11y('final result with rated feedback');
     assert.deepEqual(a11yFindings, [], `automated accessibility findings on ${a11yScreens.join(', ')}`);
     assert.deepEqual(dialogs, [], 'no leave warning or other dialog appeared while everything was saved');
+    const cspViolations = b.events.filter((e) => e.method === 'Log.entryAdded' && /Content Security Policy/i.test(e.params.entry.text || '')).map((e) => e.params.entry.text);
+    assert.deepEqual(cspViolations, [], 'the Content-Security-Policy blocked nothing on the learner or rater pages');
     assert.equal(await evaluate(`document.querySelectorAll('.kx-rated table').length`), 7, '3 Schreiben tasks + 3 Sprechen parts + Aussprache');
     assert.match(await text(), /Teil 1: 10 von 10 · Teil 2: 5 von 5/i, 'Hören per-part line (shown in uppercase metadata style)');
     await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'final result: no horizontal scroll on mobile'); await vp(1280, 800, false);

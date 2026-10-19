@@ -611,3 +611,23 @@ test('COOKIE PRE-FLIGHT (OD-20 interim): cookieCheck() true/false/null, never th
   const rater = fs.readFileSync(new URL('../js/rater.js', import.meta.url), 'utf8');
   assert.match(rater, /e\.code === 'auth_required' && \(await api\.cookieCheck\(\)\) === false\) e = new ExamApiError\(401, 'cookies_blocked'\)/);
 });
+
+test('CSP: both exam pages carry a strict Content-Security-Policy and contain nothing it would have to allow', () => {
+  for (const page of ['../index.html', '../rater.html']) {
+    const html = fs.readFileSync(new URL(page, import.meta.url), 'utf8');
+    const m = /<meta http-equiv="Content-Security-Policy" content="([^"]+)">/.exec(html);
+    assert.ok(m, `${page}: CSP present`);
+    const csp = Object.fromEntries(m[1].split(';').map((d) => d.trim().split(/\s+/)).map(([k, ...v]) => [k, v]));
+    assert.deepEqual(csp['default-src'], ["'none'"]); assert.deepEqual(csp['script-src'], ["'self'"]);
+    assert.deepEqual(csp['object-src'], ["'none'"]); assert.deepEqual(csp['base-uri'], ["'none'"]); assert.deepEqual(csp['form-action'], ["'none'"]);
+    assert.equal(/unsafe-inline|unsafe-eval|\*(?!\.klarweg\.in)/.test(m[1]), false, `${page}: no unsafe-* and no bare wildcard`);
+    assert.ok(csp['media-src'].includes('blob:'), 'recordings and test tones play from blob: URLs');
+    // nothing inline that the policy would block
+    assert.equal(/<script(?![^>]*\bsrc=)/.test(html), false, `${page}: no inline script`);
+    assert.equal(/<style\b|\sstyle="|\son[a-z]+="/.test(html), false, `${page}: no inline style or handler`);
+  }
+  for (const f of fs.readdirSync(new URL('../js/', import.meta.url))) {
+    const src = fs.readFileSync(new URL(`../js/${f}`, import.meta.url), 'utf8');
+    assert.equal(/\sstyle=\\?["']|\son(click|load|error|change|input|submit)=|eval\(|new Function\(/.test(src), false, `${f}: no inline style/handler/eval in rendered HTML`);
+  }
+});

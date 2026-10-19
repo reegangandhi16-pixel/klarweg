@@ -19,6 +19,18 @@ export function requireUser(request) {
   return id;
 }
 
+/* OD-19 (owner decisions D1–D8): staff routes need a FRESH second factor. The Access proxy attests when this session
+   last passed TOTP in X-KW-MFA-At (unix seconds, sessions.mfa_verified_at); browser-sent X-KW-* headers never get
+   through. Fresh = within 12 hours (D2), at most 60 s in the future (clock skew between the Workers). */
+export const STAFF_ROLES = ['rater', 'lead_rater', 'exam_admin'];
+export const MFA_FRESH_MS = 12 * 60 * 60 * 1000;
+export function mfaFresh(request, env) {
+  const at = Number(request.headers.get('x-kw-mfa-at') || '');
+  if (!Number.isFinite(at) || at <= 0) return false;
+  const t = now(env);
+  return at * 1000 > t - MFA_FRESH_MS && at * 1000 <= t + 60_000;
+}
+
 export async function hasRole(env, userId, roles) {
   const r = await env.DB.prepare(`SELECT role FROM exam_roles WHERE user_id = ?1 AND role IN (${roles.map((_, i) => `?${i + 2}`).join(',')}) LIMIT 1`)
     .bind(userId, ...roles).first();

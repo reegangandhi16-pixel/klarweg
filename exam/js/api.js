@@ -38,6 +38,12 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
   const rq = (body = {}) => ({ request_id: body.request_id || randomId('rq'), ...body });
   return {
     call,
+    /* Second factor for raters/admins (OD-19), served by klarweg-access itself. Writes are never retried: a retried
+       code would be refused as a replay. */
+    mfaStatus: () => call('GET', '/auth/mfa/status'),
+    mfaEnroll: () => once('POST', '/auth/mfa/enroll', { body: {} }),
+    mfaConfirm: (code) => once('POST', '/auth/mfa/enroll/confirm', { body: { code } }),
+    mfaVerify: (b) => once('POST', '/auth/mfa/verify', { body: b }),
     availability: () => call('GET', '/exam/v1/availability'),
     createAttempt: (b) => call('POST', '/exam/v1/attempts', { body: rq(b) }),
     getAttempt: (id) => call('GET', att(id)),

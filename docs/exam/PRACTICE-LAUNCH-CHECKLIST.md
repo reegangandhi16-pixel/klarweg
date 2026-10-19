@@ -26,6 +26,7 @@
 | Accessibility and responsive basics: labelled controls, legends, skip link, focus ring, 44 px targets, reduced motion, no horizontal scroll on mobile | `frontend.test` ACCESSIBILITY / RESPONSIVE, browser E2E mobile checks |
 | Automated accessibility audit in the real browser: every interactive element in Chrome's accessibility tree has a name; no duplicate ids; `lang` set; one h1; real Tab key presses show a visible focus indicator. Covers Lesen, Schreiben, Sprechen preparation, result + item review, rater forms, start screen with history, final result | Browser practice journey (`a11y()` in `browser-e2e.mjs`), self-checked against injected defects each run; 0 findings on P3 (2026-10-14) |
 | Public-repository boundary | `check-public-boundary.mjs` |
+| Rater/admin second factor (OD-19, owner decisions D1–D8 of 2026-10-19): TOTP, 12 h freshness on every staff route, 5 wrong codes / 15 min, 30 min lock after 10, 10 hashed single-use recovery codes, secrets AES-GCM under `TOTP_ENC_KEY`, proxy-attested `X-KW-MFA-At` (browser cannot forge it); learners unaffected | `access/worker/test/mfa.test.mjs` (RFC 6238 vectors, enrolment, replay, limits, lock, recovery codes, freshness, forged header, missing key), `exam-worker/test/rater-mfa.test.mjs`, `rating-ui-api.test` RATER UI (OD-19). Not provisioned; see `RUNBOOK-RATER-2FA.md` |
 
 ## 2. Implemented, awaiting human review
 
@@ -42,7 +43,7 @@
 | **OD-14a–e** vendor, licence (EX-06), voice cast, 10 raters, disclosure (see `OD-14-AUDIO-VENDOR-RESEARCH.md` §7) | Real Hören and Sprechen partner audio |
 | **Learner release set** (which forms) | Building a learner release |
 | **EX-01** privacy review; **P-19** consent withdrawal; **P-20** retention (PR #76 stays unmerged, retention off) | Real recordings |
-| **OD-19** rater/admin 2FA (method not chosen) | Pilot |
+| **OD-19** D9/D10: non-production end-to-end test and rehearsed runbook (`RUNBOOK-RATER-2FA.md`); provisioning `TOTP_ENC_KEY` + Access migration 011 (owner action) | Pilot |
 | **EX-02** rater recruitment and training | Rated Schreiben/Sprechen results for learners |
 | **OD-20** same-site domain | Pilot |
 
@@ -51,7 +52,6 @@
 | Item | Note |
 |---|---|
 | Real audio files | Waits for OD-14; files would live in the private content repository |
-| Rater/admin second factor | Needs an Access auth method (OD-19) |
 | Consent withdrawal flow | Policy P-19 open |
 
 ## 5. Not deployed

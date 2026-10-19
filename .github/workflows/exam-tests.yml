@@ -15,6 +15,7 @@ on:
       - 'exam/**'
       - 'access/worker/src/**'
       - 'access/worker/test/**'
+      - 'access/worker/*.sql'
       - '.github/workflows/exam-tests.yml'
   push:
     branches: [main]
@@ -25,6 +26,7 @@ on:
       - 'exam/**'
       - 'access/worker/src/**'
       - 'access/worker/test/**'
+      - 'access/worker/*.sql'
       - '.github/workflows/exam-tests.yml'
   workflow_dispatch:
 

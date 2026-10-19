@@ -31,7 +31,8 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
       const url = new URL(req.url, 'http://127.0.0.1');
       if (url.pathname.startsWith('/exam/v1/')) {
         const chunks = []; for await (const c of req) chunks.push(c);
-        const headers = { 'x-kw-proxy-auth': PROXY_SECRET, 'x-kw-user': userFor(req) };
+        // the local test users count as having passed the second factor just now (OD-19 is exercised by the Access tests)
+        const headers = { 'x-kw-proxy-auth': PROXY_SECRET, 'x-kw-user': userFor(req), 'x-kw-mfa-at': String(Math.floor(Date.now() / 1000)) };
         if (req.headers['content-type']) headers['content-type'] = req.headers['content-type'];
         const r = await worker.fetch(new Request('https://klarweg-exam.internal' + url.pathname + url.search,
           { method: req.method, headers, body: ['GET', 'HEAD'].includes(req.method) ? undefined : Buffer.concat(chunks) }), h.env);

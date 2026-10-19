@@ -6,6 +6,7 @@ import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
 import { examProxy } from "./exam-proxy.js";
+import { mfaStatus, mfaEnroll, mfaEnrollConfirm, mfaVerify, mfaRegenerateRecoveryCodes } from "./mfa-routes.js";
 import {
   listSavedWords,
   createSavedWord,
@@ -104,6 +105,17 @@ async function route(request, env, ctx) {
 if (request.method === "GET" && url.pathname === "/auth/me") {
   return withCors(await me(request, env), request);
 }
+
+    if (url.pathname.startsWith("/auth/mfa/")) {
+      const handler = {
+        "GET /auth/mfa/status": mfaStatus,
+        "POST /auth/mfa/enroll": mfaEnroll,
+        "POST /auth/mfa/enroll/confirm": mfaEnrollConfirm,
+        "POST /auth/mfa/verify": mfaVerify,
+        "POST /auth/mfa/recovery-codes": mfaRegenerateRecoveryCodes
+      }[`${request.method} ${url.pathname}`];
+      if (handler) return withCors(await handler(request, env), request);
+    }
 
     if (request.method === "POST" && url.pathname === "/auth/phone") {
       return withCors(await updatePhone(request, env), request);

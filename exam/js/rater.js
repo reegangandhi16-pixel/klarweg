@@ -3,7 +3,7 @@
    validates every band. This page only renders what /admin/… returns and posts one rating per rubric unit. */
 import { createApi, ExamApiError } from './api.js';
 import { esc } from './render.js';
-import { ratingRound, unitRatedByMe, missingCriteria, CRITERION_LABELS, ERROR_TEXT } from './rating.js';
+import { ratingRound, unitRatedByMe, missingCriteria, CRITERION_LABELS, ERROR_TEXT, mfaVerifyView, mfaEnrolStartView, mfaEnrolView, mfaCodesView } from './rating.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const app = $('#kx-app');
@@ -17,10 +17,18 @@ let renderSeq = 0;   // overlapping saves re-render out of order: only the lates
 const audioUrls = [];   // object URLs of loaded recordings, released on every re-render
 function screen(html) { for (const u of audioUrls.splice(0)) URL.revokeObjectURL(u); app.innerHTML = html; const h = app.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
 function errorText(e) { const code = e instanceof ExamApiError ? e.code : 'network'; return ERROR_TEXT[code] || `Fehler (${code}).`; }
+/* OD-19: staff routes answer mfa_required until this session has passed the second factor (valid 12 h). */
+const mfaNeeded = (e) => e instanceof ExamApiError && e.code === 'mfa_required';
+let enrolment = null;   // { secret, uri } while the authenticator app is being connected
+async function showMfa(error = '', recovery = false) {
+  let st;
+  try { st = await api.mfaStatus(); } catch (e) { return screen(mfaEnrolStartView(esc, { error: errorText(e) }).replace('data-act="mfa-enrol"', 'data-act="mfa-retry"')); }
+  screen(st.enrolled ? mfaVerifyView(esc, { error, recovery }) : mfaEnrolStartView(esc, { error }));
+}
 
 async function showQueue(note = '') {
   let q;
-  try { q = await api.ratingQueue(); } catch (e) { return screen(`<main class="kx-card"><h1>Bewertung</h1><p class="kx-error" role="alert">${esc(errorText(e))}</p></main>`); }
+  try { q = await api.ratingQueue(); } catch (e) { if (mfaNeeded(e)) return showMfa(); return screen(`<main class="kx-card"><h1>Bewertung</h1><p class="kx-error" role="alert">${esc(errorText(e))}</p></main>`); }
   const rows = q.attempts.map((a) => `<li class="kx-queue-row"><span class="kx-meta">${esc(a.attempt_id.slice(0, 12))}…</span> `
     + a.modules.map((m) => `${esc(MODULE_LABELS[m.module])}: ${esc(STATUS[m.score_status] || m.score_status)}${m.my_rounds.length ? ` (Sie: Runde ${esc(m.my_rounds.join(', '))})` : ''}`).join(' · ')
     + ` <button type="button" class="kx-btn kx-btn-quiet" data-act="open" data-attempt="${esc(a.attempt_id)}">Öffnen</button></li>`).join('');
@@ -46,7 +54,7 @@ function unitForm(u, round, data) {
 async function showAttempt(attemptId, note = '') {
   const seq = ++renderSeq;
   let d;
-  try { d = await api.productive(attemptId); } catch (e) { if (seq === renderSeq) showQueue(errorText(e)); return; }
+  try { d = await api.productive(attemptId); } catch (e) { if (seq === renderSeq) { if (mfaNeeded(e)) showMfa(); else showQueue(errorText(e)); } return; }
   if (seq !== renderSeq) return;   // a later render has fresher data; never paint an older state over it
   current = d;
   const parts = d.modules.map((m) => {
@@ -84,13 +92,45 @@ app.addEventListener('submit', async (e) => {
   try {
     const r = await api.rate({ attempt_id: current.attempt_id, item_id: u.item_id, round: ratingRound(current, u.module), bands });
     await showAttempt(current.attempt_id, `Gespeichert: ${points(r.total)} Punkte (Runde ${r.round}).`);
-  } catch (err) { msg.textContent = errorText(err); btn.disabled = false; }
+  } catch (err) { if (mfaNeeded(err)) return showMfa('Ihre Bestätigung ist abgelaufen. Die Bewertung wurde nicht gespeichert; bitte nach der Bestätigung erneut eingeben.'); msg.textContent = errorText(err); btn.disabled = false; }
 });
 app.addEventListener('click', (e) => {
   const b = e.target.closest('button'); if (!b) return;
   if (b.dataset.act === 'open') return showAttempt(b.dataset.attempt);
   if (b.dataset.act === 'queue') return showQueue();
   if (b.dataset.act === 'play') return loadRecording(b);
+  if (b.dataset.act === 'mfa-retry') return showMfa();
+  if (b.dataset.act === 'mfa-use-recovery') return screen(mfaVerifyView(esc, { recovery: true }));
+  if (b.dataset.act === 'mfa-use-code') return screen(mfaVerifyView(esc, { recovery: false }));
+  if (b.dataset.act === 'mfa-enrol') return startEnrolment(b);
+});
+
+async function startEnrolment(b) {
+  b.disabled = true;
+  try { const r = await api.mfaEnroll(); enrolment = { secret: r.secret, uri: r.otpauth_uri }; screen(mfaEnrolView(esc, enrolment)); }
+  catch (e) { screen(mfaEnrolStartView(esc, { error: errorText(e) })); }
+}
+
+app.addEventListener('submit', async (e) => {
+  const f = e.target.closest('form.kx-mfa'); if (!f) return;
+  e.preventDefault();
+  const msg = f.querySelector('.kx-rate-msg'), btn = f.querySelector('button[type=submit]');
+  const kind = f.dataset.mfa;
+  if (kind === 'codes-saved') {
+    if (!f.querySelector('#kx-mfa-saved').checked) { msg.textContent = 'Bitte bestätigen Sie, dass Sie die Codes gespeichert haben.'; f.querySelector('#kx-mfa-saved').focus(); return; }
+    return showQueue('Zweiter Faktor eingerichtet und bestätigt.');
+  }
+  const input = f.querySelector('input'), value = input.value.trim();
+  if (!value) { msg.textContent = 'Bitte den Code eingeben.'; input.focus(); return; }
+  btn.disabled = true;
+  try {
+    if (kind === 'confirm') { const r = await api.mfaConfirm(value); enrolment = null; return screen(mfaCodesView(esc, r.recovery_codes)); }
+    const r = await api.mfaVerify(kind === 'recovery' ? { recovery_code: value } : { code: value });
+    return showQueue(kind === 'recovery' ? `Bestätigt. Noch ${r.recovery_codes_left} Wiederherstellungscodes übrig.` : 'Bestätigt.');
+  } catch (err) {
+    if (kind === 'confirm' && err instanceof ExamApiError && err.code === 'mfa_no_pending_enrolment') return showMfa(errorText(err));
+    msg.textContent = errorText(err); btn.disabled = false; input.value = ''; input.focus();
+  }
 });
 
 async function loadRecording(b) {
@@ -100,7 +140,7 @@ async function loadRecording(b) {
     const blob = await api.recording(current.attempt_id, b.dataset.part, b.dataset.turn);
     const url = URL.createObjectURL(blob); audioUrls.push(url);
     cell.innerHTML = `<audio controls preload="metadata" src="${url}" aria-label="Aufnahme Teil ${esc(b.dataset.part)}, ${esc(b.dataset.turn)}"></audio>`;
-  } catch (err) { b.disabled = false; b.textContent = 'Aufnahme laden'; cell.insertAdjacentHTML('beforeend', `<p class="kx-rate-msg" role="status">${esc(errorText(err))}</p>`); }
+  } catch (err) { if (mfaNeeded(err)) return showMfa(); b.disabled = false; b.textContent = 'Aufnahme laden'; cell.insertAdjacentHTML('beforeend', `<p class="kx-rate-msg" role="status">${esc(errorText(err))}</p>`); }
 }
 
 showQueue();

@@ -5,7 +5,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { setup, call, newUser, role } from './harness.mjs';
 import { start, submit, answerObjective, runHoeren, runSchreiben, runSprechen, complete } from './flow.mjs';
-import { ratingRound, missingCriteria, ERROR_TEXT } from '../../exam/js/rating.js';
+import { ratingRound, missingCriteria, ERROR_TEXT, mfaVerifyView, mfaEnrolStartView, mfaEnrolView, mfaCodesView } from '../../exam/js/rating.js';
+import { esc } from '../../exam/js/render.js';
+import fs from 'node:fs';
 
 async function finishedAttempt() {
   const s = await setup();
@@ -85,4 +87,24 @@ test('RATER UI: every refusal a rater can meet in normal use has a German messag
   }
   // a rating is never retried, so a lost response may have been saved: the message must not claim otherwise
   assert.equal(/nichts gespeichert|nicht gespeichert/.test(ERROR_TEXT.network), false);
+});
+
+test('RATER UI (OD-19): second-factor screens — labelled inputs, one-time-code autofill, escaping, codes shown once with a confirmation, every staff call routes mfa_required to them', () => {
+  const v = mfaVerifyView(esc, { error: '<b>x</b>' });
+  assert.match(v, /<label for="kx-mfa-code">/); assert.match(v, /id="kx-mfa-code"[^>]*autocomplete="one-time-code"/); assert.match(v, /inputmode="numeric"/);
+  assert.match(v, /role="alert">&lt;b&gt;x&lt;\/b&gt;</); assert.match(v, /data-act="mfa-use-recovery"/);
+  const rv = mfaVerifyView(esc, { recovery: true });
+  assert.match(rv, /<label for="kx-mfa-recovery">Wiederherstellungscode<\/label>/); assert.match(rv, /data-mfa="recovery"/);
+  assert.match(mfaEnrolStartView(esc), /data-act="mfa-enrol"/);
+  const ev = mfaEnrolView(esc, { secret: 'ABCDEFGHIJKLMNOP', uri: 'otpauth://totp/Klarweg:a"b?secret=X' });
+  assert.match(ev, /ABCD EFGH IJKL MNOP/); assert.ok(ev.includes('href="otpauth://totp/Klarweg:a&quot;b?secret=X"'), 'the link is escaped');
+  const codes = Array.from({ length: 10 }, (_, i) => `aaaa${i}-bbbbb`);
+  const cv = mfaCodesView(esc, codes);
+  assert.equal((cv.match(/<li><code>/g) || []).length, 10); assert.match(cv, /nur jetzt/); assert.match(cv, /id="kx-mfa-saved" required/);
+  for (const c of ['mfa_required', 'mfa_invalid_code', 'mfa_rate_limited', 'mfa_locked', 'mfa_unavailable', 'mfa_not_enrolled', 'mfa_no_pending_enrolment']) assert.ok(ERROR_TEXT[c], c);
+  const rater = fs.readFileSync(new URL('../../exam/js/rater.js', import.meta.url), 'utf8');
+  assert.equal((rater.match(/mfaNeeded\((e|err)\)/g) || []).length, 4, 'queue, attempt, rating and recording all route mfa_required to the second-factor screens');
+  const api = fs.readFileSync(new URL('../../exam/js/api.js', import.meta.url), 'utf8');
+  assert.match(api, /mfaVerify: \(b\) => once\('POST', '\/auth\/mfa\/verify'/, 'a code is never sent twice by a retry');
+  assert.match(api, /mfaConfirm: \(code\) => once\(/);
 });

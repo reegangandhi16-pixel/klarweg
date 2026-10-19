@@ -4,7 +4,8 @@
    the role of the Access proxy. Local test users stand in for signed-in accounts: the default entitled learner, two
    raters and one outsider without any role. The dev-only cookie `kx-dev-as=<alias>` picks one of THESE users (it can
    never name any other user id); authorization is still decided by the exam Worker from the stored roles.
-   Usage: node exam-worker/test/dev-server.mjs [port] [s0|p1|p2|…|practice] (practice = every registered practice form)  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
+   Usage: node exam-worker/test/dev-server.mjs [port] [s0|p1|p2|…|practice] [--mfa] (practice = every registered practice form;
+   --mfa = real rater 2FA screens via an in-process Access Worker)  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
    Default for the demo: practice (every practice form; each new attempt gets the least-attempted one). Tests default to s0.
    Switching user in the demo: open /exam/dev/as/<alias> (learner, rater1, rater2, outsider); it sets the dev cookie and
    goes to the matching screen. Only these local test users exist. */
@@ -92,10 +93,14 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const s = await startDevServer({ port: Number(process.argv[2] || 8788), form: process.argv[3] || 'practice' });
+  // --mfa: raters go through the real second-factor screens (OD-19) against an in-process Access Worker
+  const mfa = process.argv.includes('--mfa');
+  const pos = process.argv.slice(2).filter((x) => !x.startsWith('--'));
+  const s = await startDevServer({ port: Number(pos[0] || 8788), form: pos[1] || 'practice', mfa });
   const u = `http://127.0.0.1:${s.port}/exam`;
   console.log(`klarweg-exam dev server (local only, synthetic content, TEST AUDIO tones — not real listening audio), form ${s.form}
   learner:   ${u}/dev/as/learner
   raters:    ${u}/dev/as/rater1   ${u}/dev/as/rater2
-  no role:   ${u}/dev/as/outsider`);
+  no role:   ${u}/dev/as/outsider
+  ${mfa ? 'second factor: ON (raters enrol with an authenticator app on first visit; local in-memory data only)' : 'second factor: raters count as verified (start with --mfa to see the 2FA screens)'}`);
 }

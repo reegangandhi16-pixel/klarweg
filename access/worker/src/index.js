@@ -1,4 +1,4 @@
-import { corsHeaders, withCors, isForeignOriginWrite } from "./cors.js";
+import { corsHeaders, withCors, isForeignOriginWrite, configureCors } from "./cors.js";
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
@@ -38,6 +38,7 @@ export default {
      page, which the browser could only report as a CORS/network failure.
      It never replaces fixing the cause. Logs carry the error class only. */
   async fetch(request, env, ctx) {
+    configureCors(env);
     try {
       return await route(request, env, ctx);
     } catch (err) {

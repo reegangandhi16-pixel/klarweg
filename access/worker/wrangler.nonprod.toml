@@ -1,0 +1,58 @@
+# NON-PRODUCTION Access Worker — isolated test environment (docs/exam/NONPROD-SETUP.md).
+#
+# A separate file, not an [env.nonprod] section of wrangler.toml: the
+# production deploy (npm run deploy:access → scripts/predeploy-access-check.mjs)
+# reads wrangler.toml with first-match regexes, so a second set of vars in that
+# file could silently change what the production safety checks see. This file is
+# never read by production tooling. Use it only with an explicit flag:
+#   npx wrangler deploy --config wrangler.nonprod.toml
+#   npx wrangler d1 execute klarweg-access-nonprod --config wrangler.nonprod.toml --remote --file <sql>
+#
+# Every name ends in -nonprod. scripts/nonprod-config.test.mjs fails if this
+# file ever references a production Worker, database, bucket or payment app id,
+# enables AI / speech / payments, or contains a secret.
+#
+# NOTHING HERE IS PROVISIONED. Every remote step is an owner action.
+
+name = "klarweg-access-nonprod"
+main = "src/index.js"
+compatibility_date = "2024-11-06"
+
+# Needed: the non-prod site (a local static server) calls this Worker cross-site,
+# which is exactly the cookie path acceptance check A2 tests.
+workers_dev = true
+
+[vars]
+# Exam proxy ON here (production: absent = off).
+EXAM_ROUTES = "on"
+
+# Extra CORS/CSRF origins for THIS environment only (src/cors.js). Exact
+# origins, comma-separated; http is accepted for localhost / 127.0.0.1 only.
+# Production must never set this (enforced by scripts/predeploy-access-check.mjs).
+CORS_EXTRA_ORIGINS = "http://localhost:8788"
+
+# Everything that costs money or touches third parties stays OFF:
+# no TUTOR binding → AI and speech transcription are off (src/ai.js, src/speech.js);
+# no RESOURCES binding → chapter PDFs are off (src/resources.js);
+# no CASHFREE_* / GOOGLE_CLIENT_ID → checkout and Google sign-in are unavailable.
+# Test accounts use email sign-up (/auth/signup).
+AI_ENABLED = "false"
+SPEECH_MODE = "off"
+
+# Its own Access database. Placeholder until
+# `npx wrangler d1 create klarweg-access-nonprod` (owner).
+[[d1_databases]]
+binding = "DB"
+database_name = "klarweg-access-nonprod"
+database_id = "00000000-0000-0000-0000-000000000000"
+
+# Private exam Worker of this environment. Deploy klarweg-exam-nonprod FIRST:
+# a service binding to a Worker that does not exist fails the deploy.
+[[services]]
+binding = "EXAM"
+service = "klarweg-exam-nonprod"
+
+# Secrets (npx wrangler secret put <NAME> --config wrangler.nonprod.toml), never here:
+#   EXAM_PROXY_SECRET   the SAME value as on klarweg-exam-nonprod (>= 32 chars)
+#   TOTP_ENC_KEY        32 random bytes, base64 (rater/admin 2FA, OD-19)
+#   RATE_SALT           login rate-limit salt

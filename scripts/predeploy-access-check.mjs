@@ -26,6 +26,8 @@
         --allow-speech-scope=list when only the explicit list is wider.
      6. SPEECH_TASK_DAILY_CHECKS (checks per Speaking task per day) may
         only be 1, 2 or 3.
+     7. No [env.*] sections and no CORS_EXTRA_ORIGINS: non-production
+        settings live in access/worker/wrangler.nonprod.toml only.
 
    Usage (from the repo root):
      node scripts/predeploy-access-check.mjs
@@ -83,6 +85,11 @@ if (wider && allowScope !== scopeKey) fail(`the speech scope is wider than A1·0
 const taskCap = varOf(toml, 'SPEECH_TASK_DAILY_CHECKS');
 if (taskCap !== null && !/^[1-3]$/.test(taskCap)) fail(`SPEECH_TASK_DAILY_CHECKS="${taskCap}" — the per-task daily cap must be 1, 2 or 3.`);
 if (ai === 'true' && !allowAi) fail('AI_ENABLED="true" in wrangler.toml. Enable Klarweg AI deliberately with --allow-ai-enabled once the provider is chosen and the tutor Worker has its key.');
+/* Non-production settings stay in wrangler.nonprod.toml (docs/exam/NONPROD-SETUP.md).
+   An [env.*] section here would put a second set of vars in this file, which the
+   first-match reads above could pick up; CORS_EXTRA_ORIGINS widens CORS/CSRF. */
+if (/^\s*\[\[?env\./m.test(toml)) fail('wrangler.toml contains an [env.*] section. Non-production settings belong in access/worker/wrangler.nonprod.toml, never in the production file.');
+if (/^\s*CORS_EXTRA_ORIGINS\s*=/m.test(toml)) fail('wrangler.toml sets CORS_EXTRA_ORIGINS. Extra CORS origins are for the isolated non-production Worker only (wrangler.nonprod.toml).');
 
 let live;
 try {

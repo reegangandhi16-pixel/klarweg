@@ -1,0 +1,51 @@
+# NON-PRODUCTION exam Worker — isolated test environment (docs/exam/NONPROD-SETUP.md).
+#
+# A separate file, not an [env.nonprod] section of wrangler.toml, so the
+# production configuration is never edited and no production tooling can
+# read these values by mistake. Use it only with an explicit flag:
+#   npx wrangler deploy --config wrangler.nonprod.toml
+#   npx wrangler d1 migrations apply klarweg-exam-nonprod --config wrangler.nonprod.toml --remote
+#
+# Every name ends in -nonprod. scripts/nonprod-config.test.mjs fails if this
+# file ever references a production Worker, database or bucket, enables mock
+# or production forms, or contains a secret.
+#
+# NOTHING HERE IS PROVISIONED. Every remote step is an owner action.
+
+name = "klarweg-exam-nonprod"
+main = "src/index.js"
+compatibility_date = "2024-11-06"
+
+# Private: reachable only through klarweg-access-nonprod's /exam/* proxy.
+workers_dev = false
+preview_urls = false
+
+# Synthetic forms only. Mock and production forms stay OFF in this environment.
+[vars]
+EXAM_ENABLED = "on"
+EXAM_SYNTHETIC_FORMS = "on"
+EXAM_MOCK_FORMS = "off"
+EXAM_PRODUCTION_FORMS = "off"
+# Secrets (npx wrangler secret put <NAME> --config wrangler.nonprod.toml), never here:
+#   EXAM_PROXY_SECRET   the SAME value as on klarweg-access-nonprod (>= 32 chars)
+#   EXAM_MEDIA_SECRET   HMAC key for attempt-scoped media tokens (>= 32 chars)
+
+# Placeholder until `npx wrangler d1 create klarweg-exam-nonprod` (owner).
+[[d1_databases]]
+binding = "DB"
+database_name = "klarweg-exam-nonprod"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+# Private buckets: no public domain, no r2.dev.
+[[r2_buckets]]
+binding = "CONTENT"
+bucket_name = "klarweg-exam-content-nonprod"
+
+[[r2_buckets]]
+binding = "RECORDINGS"
+bucket_name = "klarweg-exam-recordings-nonprod"
+
+# Deadline sweep, as in production (acceptance check A8).
+[triggers]
+crons = ["*/5 * * * *"]

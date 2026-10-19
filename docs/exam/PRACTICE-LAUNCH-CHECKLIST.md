@@ -65,5 +65,6 @@ Ready-to-send briefs for every external review (scope, accounts, material, deliv
 ## 5. Not deployed
 Exam Worker flags all `off` (`exam-worker/wrangler.toml`); `EXAM_ROUTES` off in klarweg-access; no `exam/` path in
 `.github/pages-allowlist.txt`; engineering ran no remote D1, R2, Wrangler or secrets operations; no learner release built.
-Isolated non-production environment (setup, acceptance A1–A11, teardown): `NONPROD-SETUP.md`; not provisioned. Incident
+Isolated non-production environment (setup, acceptance A1–A11, teardown): `NONPROD-SETUP.md`; config files
+(`wrangler.nonprod.toml` for both Workers) and the site build tool are in the repo; not provisioned. Incident
 response: `RUNBOOK-EXAM-INFRA.md` §5a.

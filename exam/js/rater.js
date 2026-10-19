@@ -28,7 +28,10 @@ async function showMfa(error = '', recovery = false) {
 
 async function showQueue(note = '') {
   let q;
-  try { q = await api.ratingQueue(); } catch (e) { if (mfaNeeded(e)) return showMfa(); return screen(`<main class="kx-card"><h1>Bewertung</h1><p class="kx-error" role="alert">${esc(errorText(e))}</p></main>`); }
+  try { q = await api.ratingQueue(); } catch (e) {
+    if (mfaNeeded(e)) return showMfa();
+    if (e instanceof ExamApiError && e.code === 'auth_required' && (await api.cookieCheck()) === false) e = new ExamApiError(401, 'cookies_blocked');
+    return screen(`<main class="kx-card"><h1>Bewertung</h1><p class="kx-error" role="alert">${esc(errorText(e))}</p></main>`); }
   const rows = q.attempts.map((a) => `<li class="kx-queue-row"><span class="kx-meta">${esc(a.attempt_id.slice(0, 12))}…</span> `
     + a.modules.map((m) => `${esc(MODULE_LABELS[m.module])}: ${esc(STATUS[m.score_status] || m.score_status)}${m.my_rounds.length ? ` (Sie: Runde ${esc(m.my_rounds.join(', '))})` : ''}`).join(' · ')
     + ` <button type="button" class="kx-btn kx-btn-quiet" data-act="open" data-attempt="${esc(a.attempt_id)}">Öffnen</button></li>`).join('');

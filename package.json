@@ -22,7 +22,7 @@
     "deploy:tutor": "cd tutor/worker && npx wrangler deploy",
     "deploy:access": "node scripts/deploy-access.mjs",
     "check:generated": "node scripts/build-grammar-index.mjs --check && node scripts/seo-chapter-meta.mjs --check",
-    "test:exam": "node exam-content/tools/check-public-boundary.mjs && node exam-content/tools/validate.mjs && node --test exam-content/test/*.test.mjs exam-worker/test/*.test.mjs exam/test/*.test.mjs access/worker/test/exam-proxy.test.mjs access/worker/test/mfa.test.mjs",
+    "test:exam": "node exam-content/tools/check-public-boundary.mjs && node exam-content/tools/validate.mjs && node --test exam-content/test/*.test.mjs exam-worker/test/*.test.mjs exam/test/*.test.mjs access/worker/test/exam-proxy.test.mjs access/worker/test/mfa.test.mjs access/worker/test/cookie-probe.test.mjs",
     "test:exam:browser": "node exam-worker/test/browser-e2e.mjs",
     "exam:demo": "node exam-worker/test/dev-server.mjs",
     "exam:validate": "node exam-content/tools/validate.mjs",

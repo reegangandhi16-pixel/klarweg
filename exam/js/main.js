@@ -32,9 +32,12 @@ function rememberLease(id, l) { try { sessionStorage.setItem(leaseKey(id), l); }
 
 function screen(html) { app.innerHTML = html; const h = app.querySelector('h1, h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
 function message(title, body, actions = '') { screen(`<main class="kx-card"><h1>${esc(title)}</h1><p>${esc(body)}</p><div class="kx-actions">${actions}</div></main>`); }
+function showError(v) { message(v.title, v.body, v.actions.map((a) => `<button class="kx-btn" data-act="${esc(a.act)}">${esc(a.label)}</button>`).join('')); }
 function fail(e) {
-  const v = errorView(e instanceof ExamApiError ? { code: e.code, status: e.status } : { code: 'network' });
-  message(v.title, v.body, v.actions.map((a) => `<button class="kx-btn" data-act="${esc(a.act)}">${esc(a.label)}</button>`).join(''));
+  const code = e instanceof ExamApiError ? e.code : 'network';
+  showError(errorView(e instanceof ExamApiError ? { code, status: e.status } : { code }));
+  // "signed out" may really be a blocked third-party cookie (until OD-20): only a definite answer replaces the screen
+  if (code === 'auth_required') api.cookieCheck().then((received) => { if (received === false) showError(errorView({ code: 'cookies_blocked' })); });
 }
 
 async function boot() {

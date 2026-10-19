@@ -7,6 +7,7 @@ import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
 import { examProxy } from "./exam-proxy.js";
 import { mfaStatus, mfaEnroll, mfaEnrollConfirm, mfaVerify, mfaRegenerateRecoveryCodes } from "./mfa-routes.js";
+import { cookieProbeSet, cookieProbeCheck } from "./cookie-probe.js";
 import {
   listSavedWords,
   createSavedWord,
@@ -105,6 +106,11 @@ async function route(request, env, ctx) {
 if (request.method === "GET" && url.pathname === "/auth/me") {
   return withCors(await me(request, env), request);
 }
+
+    if (url.pathname === "/auth/cookie-probe") {
+      if (request.method === "POST") return withCors(cookieProbeSet(), request);
+      if (request.method === "GET") return withCors(cookieProbeCheck(request), request);
+    }
 
     if (url.pathname.startsWith("/auth/mfa/")) {
       const handler = {

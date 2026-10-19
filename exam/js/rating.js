@@ -14,6 +14,7 @@ export const ERROR_TEXT = {
   invalid_bands: 'Ungültige Bänder.',
   not_rateable: 'Diese Aufgabe kann nicht bewertet werden.',
   attempt_not_found: 'Versuch nicht gefunden.',
+  cookies_blocked: 'Ihr Browser blockiert die Cookies, die für die Anmeldung beim Prüfungsserver nötig sind (Cookies von Drittanbietern). Bitte Cookies für Klarweg erlauben oder einen anderen Browser verwenden und die Seite neu laden.',
   mfa_required: 'Bitte bestätigen Sie die Anmeldung mit Ihrem zweiten Faktor.',
   mfa_invalid_code: 'Der Code ist nicht gültig oder wurde schon verwendet. Bitte den aktuellen Code eingeben.',
   mfa_rate_limited: 'Zu viele falsche Codes. Bitte warten Sie einige Minuten.',

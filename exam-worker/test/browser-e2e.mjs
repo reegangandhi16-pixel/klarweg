@@ -27,7 +27,7 @@ import { startDevServer } from './dev-server.mjs';
 import { call, rid, pkgFor, syntheticBuild, PRACTICE_LIBRARY } from './harness.mjs';
 import { speakingSchedule } from '../../exam/js/sprechen.js';
 import { hotp, base32Decode, stepAt } from '../../access/worker/src/totp.js';
-import { post, start, submit, uploadChunk } from './flow.mjs';
+import { post, start, submit, submit as apiSubmit, uploadChunk, runSchreiben, runSprechen, complete } from './flow.mjs';
 
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 /* CHROME_ARGS: extra flags for CI runners (e.g. --no-sandbox on Ubuntu 24.04, where unprivileged user namespaces are
@@ -1077,12 +1077,41 @@ async function runRater2fa() {
     await send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true }); await sleep(300);
     assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 390 px');
     await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false });
+    // 6. a rating interrupted by an expired second factor: the selection survives verification and is saved explicitly
+    const created = await call(dev.env, 'POST', '/exam/v1/attempts', { user: dev.user, body: { mode: 'synthetic_full', level: 'b1', request_id: rid(), device_id: 'dev_e2e_rater2fa_00000001' } });
+    const sx = { env: dev.env, user: dev.user, attempt: created.json.attempt_id, lease: created.json.lease.lease_id, build: syntheticBuild([PRACTICE.dir]) };
+    for (const m of ['lesen', 'hoeren']) { await start(sx, m); if (m === 'hoeren') await post(sx, '/hoeren/events', { type: 'ready' }); await apiSubmit(sx, m); }
+    await runSchreiben(sx); await apiSubmit(sx, 'schreiben');
+    await runSprechen(sx); await apiSubmit(sx, 'sprechen');
+    await complete(sx);
+    await dev.access.env.DB.prepare('UPDATE sessions SET mfa_verified_at = ?2 WHERE user_id = ?1').bind(dev.users.rater1, Math.floor(Date.now() / 1000)).run();
+    await as('rater1', 'rater.html');
+    await waitFor(`document.querySelector('[data-act="open"][data-attempt="${sx.attempt}"]')`, 10000, 'attempt in the queue');
+    await evaluate(`document.querySelector('[data-act="open"][data-attempt="${sx.attempt}"]').click()`);
+    await waitFor(`document.querySelector('form.kx-rate')`, 10000, 'rating forms');
+    const unit = await evaluate(`document.querySelector('form.kx-rate').dataset.unit`);
+    const chosen = await evaluate(`(() => { const f = document.querySelector('form.kx-rate'); const out = {}; for (const sel of f.querySelectorAll('select[data-crit]')) { sel.value = sel.options[2].value; out[sel.dataset.crit] = sel.value; } return out; })()`);
+    await expire();
+    await evaluate(`document.querySelector('form.kx-rate').requestSubmit()`);
+    await h1('Anmeldung bestätigen');
+    assert.match(await text(), /Auswahl bleibt erhalten/);
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings').first()).n, 0, 'nothing stored without a fresh second factor');
+    await evaluate(`document.querySelector('[data-act="mfa-use-recovery"]').click()`);
+    await waitFor(`document.querySelector('#kx-mfa-recovery')`, 3000, 'recovery field');
+    await fill('#kx-mfa-recovery', codes[1]); await submit();
+    await waitFor(`/Ihre Auswahl wurde wiederhergestellt/.test(document.body.innerText)`, 10000, 'back on the attempt with the selection');
+    const restored = await evaluate(`(() => { const f = [...document.querySelectorAll('form.kx-rate')].find((x) => x.dataset.unit === ${JSON.stringify(unit)}); return Object.fromEntries([...f.querySelectorAll('select[data-crit]')].map((s) => [s.dataset.crit, s.value])); })()`);
+    assert.deepEqual(restored, chosen, 'every band restored');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings').first()).n, 0, 'restored, not sent on its own');
+    await evaluate(`[...document.querySelectorAll('form.kx-rate')].find((x) => x.dataset.unit === ${JSON.stringify(unit)}).requestSubmit()`);
+    await waitFor(`/Gespeichert: [\\d,]+ Punkte/.test(document.body.innerText)`, 10000, 'saved after the explicit click');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings WHERE item_id = ?1').bind(unit).first()).n, 1);
     // 5. learners never see any of it
     await as('learner', '');
     await waitFor(`document.querySelector('[data-act="create"]')`, 10000, 'learner start screen');
     assert.equal(/zweiten Faktor|Anmeldung bestätigen/i.test(await text()), false);
     const events = (await dev.access.env.DB.prepare('SELECT event FROM mfa_audit ORDER BY id').all()).results.map((e) => e.event);
-    assert.deepEqual(events, ['enrolled', 'verify_failed', 'verified', 'recovery_used']);
+    assert.deepEqual(events, ['enrolled', 'verify_failed', 'verified', 'recovery_used', 'recovery_used']);
     const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
     log(`rater 2FA ${PRACTICE.name}`, 'PASS', { events });
     return exceptions;

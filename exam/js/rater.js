@@ -20,6 +20,9 @@ function errorText(e) { const code = e instanceof ExamApiError ? e.code : 'netwo
 /* OD-19: staff routes answer mfa_required until this session has passed the second factor (valid 12 h). */
 const mfaNeeded = (e) => e instanceof ExamApiError && e.code === 'mfa_required';
 let enrolment = null;   // { secret, uri } while the authenticator app is being connected
+/* A rating that could not be saved because the second factor had expired: kept in memory only (never sent again on
+   its own), restored into the form after verification so the rater can check it and save explicitly. */
+let unsaved = null;     // { attempt_id, item_id, bands }
 async function showMfa(error = '', recovery = false) {
   let st;
   try { st = await api.mfaStatus(); } catch (e) { return screen(mfaEnrolStartView(esc, { error: errorText(e) }).replace('data-act="mfa-enrol"', 'data-act="mfa-retry"')); }
@@ -81,7 +84,18 @@ async function showAttempt(attemptId, note = '') {
   screen(`<main class="kx-rater"><p class="kx-eyebrow">Versuch ${esc(d.attempt_id.slice(0, 12))}… · synthetisch</p><h1>Bewertung</h1>`
     + (note ? `<p class="kx-announce" role="status">${esc(note)}</p>` : '')
     + `${parts}<div class="kx-actions"><button type="button" class="kx-btn kx-btn-quiet" data-act="queue">Zur Liste</button></div></main>`);
+  if (unsaved && unsaved.attempt_id === d.attempt_id) {
+    const f = [...app.querySelectorAll('form.kx-rate')].find((x) => x.dataset.unit === unsaved.item_id);
+    if (f && !f.querySelector('button[type=submit]').disabled) {
+      for (const [c, v] of Object.entries(unsaved.bands)) { const sel = f.querySelector(`select[data-crit="${CSS.escape(c)}"]`); if (sel) sel.value = v; }
+      f.querySelector('.kx-rate-msg').textContent = 'Ihre Auswahl wurde wiederhergestellt. Bitte prüfen und speichern.';
+      f.querySelector('button[type=submit]').focus();
+    }
+    unsaved = null;
+  }
 }
+/* after a successful second factor: back to the interrupted rating if there is one, else the queue */
+const afterMfa = (note) => (unsaved ? showAttempt(unsaved.attempt_id, note) : showQueue(note));
 
 app.addEventListener('submit', async (e) => {
   const f = e.target.closest('form.kx-rate'); if (!f) return;
@@ -95,7 +109,7 @@ app.addEventListener('submit', async (e) => {
   try {
     const r = await api.rate({ attempt_id: current.attempt_id, item_id: u.item_id, round: ratingRound(current, u.module), bands });
     await showAttempt(current.attempt_id, `Gespeichert: ${points(r.total)} Punkte (Runde ${r.round}).`);
-  } catch (err) { if (mfaNeeded(err)) return showMfa('Ihre Bestätigung ist abgelaufen. Die Bewertung wurde nicht gespeichert; bitte nach der Bestätigung erneut eingeben.'); msg.textContent = errorText(err); btn.disabled = false; }
+  } catch (err) { if (mfaNeeded(err)) { unsaved = { attempt_id: current.attempt_id, item_id: u.item_id, bands }; return showMfa('Ihre Bestätigung ist abgelaufen. Die Bewertung wurde noch nicht gespeichert; Ihre Auswahl bleibt erhalten.'); } msg.textContent = errorText(err); btn.disabled = false; }
 });
 app.addEventListener('click', (e) => {
   const b = e.target.closest('button'); if (!b) return;
@@ -121,7 +135,7 @@ app.addEventListener('submit', async (e) => {
   const kind = f.dataset.mfa;
   if (kind === 'codes-saved') {
     if (!f.querySelector('#kx-mfa-saved').checked) { msg.textContent = 'Bitte bestätigen Sie, dass Sie die Codes gespeichert haben.'; f.querySelector('#kx-mfa-saved').focus(); return; }
-    return showQueue('Zweiter Faktor eingerichtet und bestätigt.');
+    return afterMfa('Zweiter Faktor eingerichtet und bestätigt.');
   }
   const input = f.querySelector('input'), value = input.value.trim();
   if (!value) { msg.textContent = 'Bitte den Code eingeben.'; input.focus(); return; }
@@ -129,7 +143,7 @@ app.addEventListener('submit', async (e) => {
   try {
     if (kind === 'confirm') { const r = await api.mfaConfirm(value); enrolment = null; return screen(mfaCodesView(esc, r.recovery_codes)); }
     const r = await api.mfaVerify(kind === 'recovery' ? { recovery_code: value } : { code: value });
-    return showQueue(kind === 'recovery' ? `Bestätigt. Noch ${r.recovery_codes_left} Wiederherstellungscodes übrig.` : 'Bestätigt.');
+    return afterMfa(kind === 'recovery' ? `Bestätigt. Noch ${r.recovery_codes_left} Wiederherstellungscodes übrig.` : 'Bestätigt.');
   } catch (err) {
     if (kind === 'confirm' && err instanceof ExamApiError && err.code === 'mfa_no_pending_enrolment') return showMfa(errorText(err));
     msg.textContent = errorText(err); btn.disabled = false; input.value = ''; input.focus();

@@ -43,6 +43,8 @@
 | Sprechen Teil 3 partner talks (two per form, one per topic) | About 1.5 min each; OD-32 describes about 3 min for the mock. The owner/reviewers must accept the length for practice or ask for longer talks. |
 
 ## 3. Blocked by owner or external decisions
+Ready-to-send briefs for every external review (scope, accounts, material, deliverable): `EXTERNAL-REVIEW-BRIEFS.md`.
+
 
 | Decision | Blocks |
 |---|---|

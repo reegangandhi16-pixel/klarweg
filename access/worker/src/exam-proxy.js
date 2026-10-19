@@ -19,6 +19,26 @@ function jsonError(status, error) {
   });
 }
 
+/* Reads at most `max` bytes. A body without content-length (chunked) is never buffered whole: reading stops and the
+   stream is cancelled as soon as the cap is passed. Returns null when the body is too large. */
+async function readCapped(request, max) {
+  if (!request.body) return new ArrayBuffer(0);
+  const reader = request.body.getReader();
+  const parts = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > max) { try { await reader.cancel(); } catch {} return null; }
+    parts.push(value);
+  }
+  const out = new Uint8Array(size);
+  let at = 0;
+  for (const p of parts) { out.set(p, at); at += p.byteLength; }
+  return out.buffer;
+}
+
 export function examRoutesEnabled(env) {
   return env.EXAM_ROUTES === "on" && !!env.EXAM && typeof env.EXAM.fetch === "function";
 }
@@ -52,8 +72,8 @@ export async function examProxy(request, env, url) {
     /* Buffered (bounded): exam bodies are small JSON or one ≤ 256 KiB audio chunk. */
     const declared = Number(request.headers.get("content-length") || 0);
     if (declared > MAX_BODY_BYTES) return withCors(jsonError(413, "body_too_large"), request);
-    const body = await request.arrayBuffer();
-    if (body.byteLength > MAX_BODY_BYTES) return withCors(jsonError(413, "body_too_large"), request);
+    const body = await readCapped(request, MAX_BODY_BYTES);
+    if (body === null) return withCors(jsonError(413, "body_too_large"), request);
     init.body = body;
     headers.delete("content-length");
   }

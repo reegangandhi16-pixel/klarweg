@@ -139,3 +139,29 @@ test('EXAM PROXY: existing routes are untouched when exam routes are on', async 
   assert.equal((await req(env, 'GET', '/examples')).status, 404);   // prefix match is /exam/ only
   assert.equal(seen.length, 0);
 });
+
+test('EXAM PROXY: a streamed body without content-length is capped at 512 KiB while reading (never buffered whole)', async () => {
+  const { env, seen } = makeEnv();
+  const u = await signup(env);
+  const PIECE = 64 * 1024;
+  const streamed = (pieces) => {
+    let pulled = 0;
+    const body = new ReadableStream({ pull(c) { if (pulled >= pieces) { c.close(); return; } pulled++; c.enqueue(new Uint8Array(PIECE).fill(32)); } });
+    return { body, pulled: () => pulled };
+  };
+  const send = (body) => worker.fetch(new Request(API + '/exam/v1/attempts', { method: 'POST', duplex: 'half', body,
+    headers: { cookie: u.cookie, origin: SITE, 'content-type': 'application/json', 'CF-Connecting-IP': '203.0.113.9' } }), env, ctx);
+
+  const big = streamed(32);   // 2 MiB, no content-length header
+  const before = seen.length;
+  const res = await send(big.body);
+  assert.equal(res.status, 413);
+  assert.equal((await res.json()).error, 'body_too_large');
+  assert.equal(seen.length, before, 'nothing forwarded to the exam Worker');
+  assert.ok(big.pulled() <= 10, `reading stopped at the cap (pulled ${big.pulled()} of 32 pieces)`);
+
+  const small = streamed(2);  // 128 KiB, within the cap: forwarded with the full body
+  const ok = await send(small.body);
+  assert.equal(seen.length, before + 1, 'a body within the cap is forwarded');
+  assert.notEqual(ok.status, 413);
+});

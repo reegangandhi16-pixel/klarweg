@@ -60,6 +60,23 @@ Secrets (`wrangler secret put`), each ≥ 32 characters:
 
 **Third-party cookies:** the session cookie is cross-site (github.io → workers.dev). Browsers that block third-party cookies will get `401 auth_required`. The exam was designed for same-site `/exam/` (register D3). Resolve the domain or cookie set-up before real learners use it.
 
+## 3a. Staff roles (raters, lead raters, admins). Owner only, every change audited.
+Roles live in the exam D1 (`exam_roles`: `rater`, `lead_rater`, `content_admin`, `exam_admin`). A person needs their
+Klarweg user id (`usr_…`), an EX-02 qualification for rating roles, and, before any staff route works, an enrolled and
+fresh second factor (OD-19; `RUNBOOK-RATER-2FA.md`). Times in `exam_roles.granted_at` and `audit_log.at` are milliseconds.
+```sql
+-- grant (recorded with the granting owner's user id)
+INSERT INTO exam_roles (user_id, role, granted_by, granted_at) VALUES ('<usr_…>', 'rater', '<owner usr_…>', CAST(strftime('%s','now') AS INTEGER) * 1000);
+INSERT INTO audit_log (at, actor, attempt_id, action, detail_json) VALUES (CAST(strftime('%s','now') AS INTEGER) * 1000, '<owner usr_…>', NULL, 'role_granted', '{"user":"<usr_…>","role":"rater"}');
+-- revoke (takes effect on the next request; the person's earlier ratings stay as recorded)
+DELETE FROM exam_roles WHERE user_id = '<usr_…>' AND role = 'rater';
+INSERT INTO audit_log (at, actor, attempt_id, action, detail_json) VALUES (CAST(strftime('%s','now') AS INTEGER) * 1000, '<owner usr_…>', NULL, 'role_revoked', '{"user":"<usr_…>","role":"rater"}');
+-- who holds which role
+SELECT user_id, role, granted_by, granted_at FROM exam_roles ORDER BY role, granted_at;
+```
+A rater must never rate their own attempt (the server refuses it), and one person never fills two EX-03 review slots
+(a separate process, `review-status.mjs` checks it). Suspected account compromise: `RUNBOOK-RATER-2FA.md` §4.
+
 ## 4. Monitoring
 
 Every request writes one JSON log line: `svc: "klarweg-exam"`, `evt: "request"`, `method`, `path`, `status`, `ms`.
@@ -124,7 +141,7 @@ The chapter/Access DB is never touched by exam migrations.
 - Real exam audio (`audio.file`) is measured from the file and checked against the declared `audio.duration_ms` (± 50 ms); supported formats, error codes and the opt-in real-encoder tests (`KW_FFMPEG`) are documented in `EXAM-AUDIO-DURATION-VALIDATION.md`. CI: `.github/workflows/exam-tests.yml`.
 - Q11 signal measurements (loudness, true peak, channels, master sample rate and bit depth) are **evidence only**, not a gate: `node exam-content/tools/measure-audio.mjs [--ffmpeg PATH] FILE...`. Requirements matrix, open questions and the measurement pathway: `EXAM-AUDIO-Q11-PLAN.md`.
 - `npm run test:exam:browser` is an opt-in headless Chrome run (about 4–6 min, real time). It uses a local dev server with the exam Worker in-process and synthetic content only.
-- `npm test` is the existing suite. It also picks up `access/worker/test/exam-proxy.test.mjs`.
+- `npm test` is the existing suite. It also picks up `access/worker/test/exam-proxy.test.mjs` and `access/worker/test/mfa.test.mjs` (rater/admin second factor; both are also part of `npm run test:exam`).
 - `npm run exam:check-public` checks the **public-repo boundary**. It also runs first in `npm test` and `npm run test:exam`. It fails on:
   - any exam form that is not byte-identical to the synthetic generator output
   - answer-key data, exam media or symlinks

@@ -139,6 +139,23 @@ test('LIVE GATE: the homepage FAQ structured data matches the visible answers', 
   assert.deepEqual(structured, Object.fromEntries(Object.keys(structured).map((q) => [q, visible[q]])));
 });
 
+test('LIVE: the homepage FAQ announces live classes (D1) without claiming anything is bookable', () => {
+  const Q = 'Are there live classes or teachers?';
+  const { visible, structured } = homepageFaq(read('index.html'));
+  assert.ok(visible[Q] && structured[Q], 'the question is in the visible FAQ and the FAQPage data');
+  assert.equal(visible[Q], structured[Q]);
+  const a = visible[Q];
+  assert.match(a, /preparing teacher-led live German classes/, 'states the D1 direction');
+  assert.match(a, /not open for booking yet/, 'says plainly that nothing is bookable');
+  assert.equal(/No live classes|deliberate|things a teacher would/i.test(a), false, 'the pre-D1 wording is gone');
+  // no link to the unlisted page, and no confirmed teacher, date or fee
+  assert.equal(/live-classes|href=|₹|\d/.test(a), false, 'no link, fee, date or number in the announcement');
+  const D = loadData();
+  if (!D.courses.some((k) => !k.draft && k.enrolment === 'open')) {
+    assert.equal(launchBlockers(D).some((b) => /index\.html/.test(b)), false, 'the homepage raises no launch blocker');
+  }
+});
+
 test('LIVE GATE: the gate clears once every blocker is resolved (so it can actually be satisfied)', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kw-live-gate-'));
   try {

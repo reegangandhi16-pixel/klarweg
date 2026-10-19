@@ -83,6 +83,23 @@
 | Technical | Mark `consents.withdrawn_at`; delete R2 objects and `recording_chunks`/`recording_turns` rows in one audited job (same mechanism as PR #76 retention) | Deletion deadline (e.g. within 24 h)? |
 | Proof | Audit entry `consent_withdrawn` + `recordings_deleted` with counts, no content | – |
 
+## 4a. Technical design for withdrawal (proposal; implement only after P-19 and EX-01)
+Reuses the deletion path of PR #76: `deleteAttemptRecordings` (R2 multi-key delete; audit and row deletion in one D1 batch;
+retry with backoff; `EXAM_ENABLED` kill switch respected), so there is one tested deletion code path, not two.
+
+| Part | Design |
+|---|---|
+| API | `POST /exam/v1/attempts/:id/sprechen/consent/withdraw` with `{ request_id }`; owner of the attempt only (404 for anyone else, like every attempt route); idempotent via `request_log` |
+| Effect | `consents.withdrawn_at = now` (the column exists); while a Sprechen module is running, its recording stops (client) and uploads are refused (`consent_required`, already enforced) |
+| Deletion | Same request queues the attempt for `deleteAttemptRecordings` (deadline from EX-01, e.g. within 24 h). Recordings of a not-yet-rated attempt are deleted; per §4, the score stays or Sprechen is voided — **owner decision** |
+| Rater side | `productive` / recording routes return "recording withdrawn" for that attempt; a pending rating round is closed with `rule_flags.consent_withdrawn` |
+| Audit | `consent_withdrawn` (who, when, version) and `recordings_deleted` (counts, no content) |
+| UI | Result page: "Aufnahme-Zustimmung widerrufen", with confirmation dialog (no browser `confirm`), live-region announcement, keyboard reachable |
+| Flag | `EXAM_CONSENT_WITHDRAWAL` default `off`, like every exam capability |
+| Tests | Owner-only and idempotency (API); deletion on R2 and D1 including retry (reuse of the PR #76 tests); rater refusal; browser: withdraw → own recording no longer playable → rater sees "withdrawn" |
+
+Dependencies: P-19 (effects in §4), P-20/EX-01 (PR #76 must merge first, because withdrawal reuses its deletion code).
+
 ## 5. Questions for the EX-01 reviewer
 1. Legal basis and controller details for India (DPDP Act 2023) and, if applicable, the EU (GDPR).
 2. Retention for recordings (confirm 30 days after final rating, F4/P-20), for answers and results, and for audit logs.

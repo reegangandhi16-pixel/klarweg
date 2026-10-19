@@ -219,3 +219,15 @@ test('LIBRARY: consistent difficulty — text and script lengths stay within one
   }
   assert.deepEqual(out, []);
 });
+
+test('LIBRARY: no group-size phrase that can be read two ways ("zu dritt … mit einem Trainer": 3 incl. or plus the trainer?)', () => {
+  // internal audit 2026-10-19 found P14 Hören 2 item 12 answerable two ways; the wording "zu zweit/dritt/viert … mit
+  // einem/einer …" leaves open whether the extra person is counted in the group
+  const AMBIGUOUS = /\bzu (zweit|dritt|viert|fünft|sechst)\b[^.!?]{0,60}\bmit (einem|einer)\b/i;
+  for (const f of PRACTICE_FORMS) {
+    for (const a of JSON.parse(f.files['assets.json'])) {
+      const text = a.script_de || (a.text && a.text.body_md) || '';
+      assert.equal(AMBIGUOUS.test(text), false, `${f.name} ${a.id}: ${(AMBIGUOUS.exec(text) || [''])[0]}`);
+    }
+  }
+});

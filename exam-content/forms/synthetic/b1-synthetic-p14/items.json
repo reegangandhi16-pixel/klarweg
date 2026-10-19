@@ -3425,11 +3425,11 @@
         "kind": "text_span",
         "asset_id": "ast:p14-h2",
         "start": 174,
-        "end": 220
+        "end": 225
       }
     ],
     "feedback": {
-      "explanation_de": "In jedem Boot sind drei Teilnehmer mit einem Trainer."
+      "explanation_de": "In jedem Boot sitzen drei Kursteilnehmer, dazu kommt ein Trainer: vier Personen insgesamt."
     }
   },
   {
@@ -3495,8 +3495,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p14-h2",
-        "start": 222,
-        "end": 275
+        "start": 227,
+        "end": 280
       }
     ],
     "feedback": {
@@ -3566,8 +3566,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p14-h2",
-        "start": 276,
-        "end": 314
+        "start": 281,
+        "end": 319
       }
     ],
     "feedback": {
@@ -3637,8 +3637,8 @@
       {
         "kind": "text_span",
         "asset_id": "ast:p14-h2",
-        "start": 382,
-        "end": 410
+        "start": 387,
+        "end": 415
       }
     ],
     "feedback": {

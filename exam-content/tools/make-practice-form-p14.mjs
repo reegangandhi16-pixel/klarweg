@@ -129,12 +129,12 @@ export const PRACTICE_FORM_P14 = buildPracticeForm({
     t2: {
       context: 'Sie machen einen Schnupperkurs in einem Segelverein und hören die Begrüßung.',
       script: 'Ahoi und herzlich willkommen beim Segelverein Eichsee! Heute Vormittag lernen Sie an Land die wichtigsten Begriffe und Knoten. '
-        + 'Nach dem Mittagessen geht es dann aufs Wasser, immer zu dritt in einem Boot mit einem Trainer. '
+        + 'Nach dem Mittagessen geht es dann aufs Wasser: In jedem Boot sitzen drei von Ihnen und ein Trainer. '
         + 'Rettungswesten sind Pflicht, auch für gute Schwimmer. Handys lassen Sie bitte im Vereinsheim, im Boot werden sie schnell nass. '
         + 'Wer nach dem Kurs Mitglied wird, bekommt den Kurspreis zurück.',
       items: [
         ['Am Vormittag …', ['segeln die Teilnehmer schon.', 'lernen sie an Land.', 'gibt es eine Prüfung.'], 'b', 'Heute Vormittag lernen Sie an Land die wichtigsten Begriffe und Knoten.', 'Vormittags werden an Land Begriffe und Knoten gelernt, aufs Wasser geht es erst nachmittags.'],
-        ['In jedem Boot sitzen …', ['drei Teilnehmer und ein Trainer.', 'zwei Teilnehmer.', 'zehn Personen.'], 'a', 'immer zu dritt in einem Boot mit einem Trainer', 'In jedem Boot sind drei Teilnehmer mit einem Trainer.'],
+        ['In jedem Boot sitzen …', ['drei Teilnehmer und ein Trainer.', 'zwei Teilnehmer.', 'zehn Personen.'], 'a', 'In jedem Boot sitzen drei von Ihnen und ein Trainer', 'In jedem Boot sitzen drei Kursteilnehmer, dazu kommt ein Trainer: vier Personen insgesamt.'],
         ['Eine Rettungsweste …', ['brauchen nur Nichtschwimmer.', 'kann man ausleihen.', 'müssen alle tragen.'], 'c', 'Rettungswesten sind Pflicht, auch für gute Schwimmer.', 'Rettungswesten tragen alle, auch Teilnehmer, die sehr gut schwimmen können.'],
         ['Die Handys …', ['bleiben im Vereinsheim.', 'nimmt man mit ins Boot.', 'gibt man dem Trainer.'], 'a', 'Handys lassen Sie bitte im Vereinsheim', 'Damit sie nicht nass werden, bleiben die Handys im Vereinsheim.'],
         ['Wer Mitglied wird, …', ['bekommt ein Boot.', 'zahlt weniger Beitrag.', 'bekommt das Geld für den Kurs zurück.'], 'c', 'bekommt den Kurspreis zurück', 'Neue Mitglieder bekommen den Kurspreis zurück.']

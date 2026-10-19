@@ -433,8 +433,10 @@ async function runDefaultAutoplayHoeren(viewport) {
     // 2. one click: the owed recovery replay plays first, then the next normal plays follow without overlapping it
     await evaluate(`document.querySelector('[data-act="audio-start"]').click()`, true);
     await waitFor(`!document.querySelector('[data-act="audio-start"]')`, 4000, 'prompt disappears after the click');
-    for (const t1 = Date.now(); !(await plays()).some((p) => p.phase_seq === T2PLAY.seq && p.kind === 'normal'); ) {
-      if (Date.now() - t1 > 15000) throw new Error('Teil 2 text never played: ' + JSON.stringify(await plays()));
+    // the Teil 2 preread of the synthetic plan is only 2 s: on a slow runner the page may arrive after the Teil 2 text has
+    // started, so the next normal play is the then-current one — Teil 2 text or later, never anything from Teil 1
+    for (const t1 = Date.now(); !(await plays()).slice(before).some((p) => p.kind === 'normal' && p.phase_seq >= T2PLAY.seq); ) {
+      if (Date.now() - t1 > 15000) throw new Error('no normal play at or after the Teil 2 text: ' + JSON.stringify(await plays()));
       await sleep(200);
     }
     const after = (await plays()).slice(before);
@@ -443,6 +445,7 @@ async function runDefaultAutoplayHoeren(viewport) {
     assert.equal(after[0].kind, 'recovery', 'the recovery replay is the first play after the click');
     const nextNormal = after.find((p) => p.kind === 'normal');
     assert.ok(rec.ended_at !== null && nextNormal.started_at >= rec.ended_at, 'the next normal play starts after the replay ended');
+    assert.ok(nextNormal.phase_seq >= T2PLAY.seq, `no Teil 1 phase is played again after the click: ${JSON.stringify(after)}`);
     assert.equal(after.filter((p) => p.kind === 'recovery').length, 1);
     const uncaught = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
     log(viewport.name, 'DEFAULT autoplay HÖREN PASS', { after_click: after.map((p) => `${p.kind}:${p.phase_seq}`) });

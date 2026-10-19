@@ -10,7 +10,7 @@
 # file ever references a production Worker, database or bucket, enables mock
 # or production forms, or contains a secret.
 #
-# NOTHING HERE IS PROVISIONED. Every remote step is an owner action.
+# Provisioned 2026-10-19 on the owner's Free-tier account (owner-authorised; NONPROD-SETUP.md §3).
 
 name = "klarweg-exam-nonprod"
 main = "src/index.js"
@@ -30,11 +30,11 @@ EXAM_PRODUCTION_FORMS = "off"
 #   EXAM_PROXY_SECRET   the SAME value as on klarweg-access-nonprod (>= 32 chars)
 #   EXAM_MEDIA_SECRET   HMAC key for attempt-scoped media tokens (>= 32 chars)
 
-# Placeholder until `npx wrangler d1 create klarweg-exam-nonprod` (owner).
+# Created 2026-10-19 with `wrangler d1 create klarweg-exam-nonprod` (APAC).
 [[d1_databases]]
 binding = "DB"
 database_name = "klarweg-exam-nonprod"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "309e3ca3-ffcb-4079-bb8a-cba5665eaccc"
 migrations_dir = "migrations"
 
 # Private buckets: no public domain, no r2.dev.

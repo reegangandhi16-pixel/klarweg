@@ -1,7 +1,55 @@
 # B1 practice library — launch checklist
 
-> **Status:** 2026-10-14. It records evidence and decisions and makes no decisions. Test names refer to
+> **Status:** 2026-10-14; §0 reconciled 2026-10-20. It records evidence and decisions and makes no decisions. Test names refer to
 > `npm run test:exam` (Node built-ins only) unless the browser suite is named.
+
+## 0. Launch readiness at a glance (reconciled 2026-10-20 against the signed register v1.5, main `70d3962`)
+
+Source of truth for gate IDs and decision statuses: `B1-FINAL-DECISION-REGISTER.md` **v1.5 (signed)**. External gates
+(register §C): **EX-01** privacy · **EX-02** rater recruitment, training and certification · **EX-03** native-speaker
+content panel · **EX-04** accessibility audit · **EX-05** security review / penetration test · **EX-06** voice-talent
+or neural-voice licences · **EX-07** trademark review · **EX-08** accommodation evidence process. Nothing below records
+an approval that has not been given.
+
+**A. Completed and automatically verified** (CI green on `70d3962`: exam toolchain tests, 16 browser jobs, site tests)
+- Attempt lifecycle, server timers, autosave, lease and second-tab recovery, idempotent retries (§1 below).
+- Answer-key and scoring-rule protection, cross-learner isolation on all attempt routes (`security.test`, `access-matrix.test`).
+- Scoring per the configured rules, golden-tested, including the OD-07/OD-30 configuration (`scoring.golden.test`).
+- Rater/admin second factor enforced on every staff route and on staff reads of another learner's result (`rater-mfa.test`); Access side: enrolment, replay, limits, recovery codes, header attestation (`mfa.test`).
+- Access proxy: identity headers stripped, body cap enforced while streaming (`exam-proxy.test`); cookie pre-flight; CSP on the exam pages.
+- All 8 browser scenarios run directly and through the in-process klarweg-access proxy (`exam-browser.yml`).
+- Practice library P1–P15: structure, validation and content regression tests. Internal checks only, not EX-03.
+
+**B. Tested locally or in-process, not on real infrastructure**
+- Real Cloudflare service binding Access → exam Worker, real D1 and R2 (tests use sqlite and in-memory fakes).
+- The cross-site session cookie on real browsers (github.io → workers.dev), including browsers that block third-party cookies.
+- TOTP with a provisioned `TOTP_ENC_KEY` and Access migration 011 (OD-19 D9), and the rehearsed runbook (D10).
+- Recording upload and playback against real R2; retention jobs (PR #76, unmerged).
+- The acceptance steps A1–A11 in `NONPROD-SETUP.md` have not been run.
+
+**C. Engineering work remaining (each waits for a decision listed in D, E or F)**
+- Consent-withdrawal flow (F4/P-19, EX-01). Design draft: `CONSENT-PRIVACY-DRAFT.md` §4a.
+- Recording retention: merge and configure PR #76 (F4/P-20, EX-01). Off until then.
+- F4 reservation-abandonment bound (F4/P-25, OPEN) before the F4 recording-grant work proceeds.
+- Real Hören/Sprechen audio integration (OD-14, EX-06). Audio is paused; practice forms carry test tones only.
+- Learner release build for the chosen form set; production same-site routing once the OD-20 domain exists.
+
+**D. Owner decisions and sign-offs**
+- **Sign register v1.6 (draft PR #105).** OD-19 (D1–D8), OD-07 (half-up) and OD-30 (third rating replaces) are implemented on the owner's written instructions of 2026-10-19, but the signed v1.5 still lists OD-19 CONFIGURABLE and OD-07/OD-30 UNRESOLVED.
+- F4/P-19 consent withdrawal, F4/P-20 retention scope, F4/P-25 abandonment bound (all OPEN in v1.5 §B.2).
+- OD-41 accommodations policy (CONFIGURABLE; evidence process EX-08).
+- Learner release set; acceptance of the ~1.5 min Sprechen Teil 3 partner talks (§2); OD-14a–e audio choices; OD-35 pilot sample sizes.
+- OD-53 stays CONDITIONAL: AI-assisted drafts only; it authorises no acceptance or release.
+
+**E. External review and certification (none started; no reviewer appointed)**
+- EX-03 content panel for every form (P1–P15) and the M-27/M-28 sign-offs; OD-08 legal clearance.
+- EX-01 privacy (incl. the consent, privacy-notice and withdrawal drafts); EX-04 accessibility; EX-05 security / penetration test; EX-02 raters (≥ 2 + a lead); EX-06 audio licences; EX-07 trademark; EX-08 accommodation evidence.
+
+**F. Provisioning and deployment prerequisites (owner actions; none performed by engineering)**
+- The isolated non-production environment (`NONPROD-SETUP.md`); its acceptance run A1–A11.
+- Secrets and data: `EXAM_PROXY_SECRET`, `EXAM_MEDIA_SECRET`, `TOTP_ENC_KEY`; Access migration 011; the exam D1 database (`database_id` is still a placeholder) and the R2 buckets.
+- OD-20: a production same-site domain for the site and API (register: required before the pilot).
+- Production switches, all currently off: `EXAM_ROUTES` and the `EXAM` binding in klarweg-access, `EXAM_ENABLED`, `EXAM_SYNTHETIC_FORMS`, `EXAM_MOCK_FORMS` and `EXAM_PRODUCTION_FORMS` in the exam Worker, `exam/` in `.github/pages-allowlist.txt`, `EXAM_RECORDING_RETENTION_DAYS`.
 
 ## 1. Implemented and tested
 
@@ -32,7 +80,7 @@
 | Internal content audits (not EX-03): heuristics, key-vs-evidence, numbers, richtig/falsch polarity over P1–P15; two items with two defensible answers fixed (P14 Hören 2/12, P6 Lesen 1/3) | PR #111; `practice-library.test` group-size wording; private audit record |
 | Automated accessibility audit in the real browser: every interactive element in Chrome's accessibility tree has a name; no duplicate ids; `lang` set; one h1; real Tab key presses show a visible focus indicator. Covers Lesen, Schreiben, Sprechen preparation, result + item review, rater forms, start screen with history, final result | Browser practice journey (`a11y()` in `browser-e2e.mjs`), self-checked against injected defects each run; 0 findings on P3 (2026-10-14) |
 | Public-repository boundary | `check-public-boundary.mjs` |
-| Rater/admin second factor (OD-19, owner decisions D1–D8 of 2026-10-19): TOTP, 12 h freshness on every staff route, 5 wrong codes / 15 min, 30 min lock after 10, 10 hashed single-use recovery codes, secrets AES-GCM under `TOTP_ENC_KEY`, proxy-attested `X-KW-MFA-At` (browser cannot forge it); learners unaffected | `access/worker/test/mfa.test.mjs` (RFC 6238 vectors, enrolment, replay, limits, lock, recovery codes, freshness, forged header, missing key), `exam-worker/test/rater-mfa.test.mjs`, `rating-ui-api.test` RATER UI (OD-19); browser `KX_E2E_ONLY=rater-2fa` (real Access Worker in-process: enrolment, recovery codes, expiry, wrong code, recovery code, learner unaffected). Not provisioned; see `RUNBOOK-RATER-2FA.md` |
+| Rater/admin second factor (OD-19, owner instruction D1–D8 of 2026-10-19; register v1.6 DRAFT, PR #105, not yet signed): TOTP, 12 h freshness on every staff route, 5 wrong codes / 15 min, 30 min lock after 10, 10 hashed single-use recovery codes, secrets AES-GCM under `TOTP_ENC_KEY`, proxy-attested `X-KW-MFA-At` (browser cannot forge it); learners unaffected | `access/worker/test/mfa.test.mjs` (RFC 6238 vectors, enrolment, replay, limits, lock, recovery codes, freshness, forged header, missing key), `exam-worker/test/rater-mfa.test.mjs`, `rating-ui-api.test` RATER UI (OD-19); browser `KX_E2E_ONLY=rater-2fa` (real Access Worker in-process: enrolment, recovery codes, expiry, wrong code, recovery code, learner unaffected). Not provisioned; see `RUNBOOK-RATER-2FA.md` |
 
 ## 2. Implemented, awaiting human review
 

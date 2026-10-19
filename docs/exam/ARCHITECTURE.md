@@ -67,7 +67,7 @@ klarweg-exam Worker (NEW, workers_dev=false)
    └── service binding TUTOR ──► klarweg-tutor (new exam actions: transcribe_long, rate_writing_b1, rate_speaking_b1)
    
 Authoring (offline): private repo klarweg-exam-content ──CI validate+compile──► R2 release rNNN ──► D1 form registry
-Raters/admins: /exam/v1/admin/* (role-gated, same session + fresh TOTP second factor ≤ 12 h) [OD-19, decided 2026-10-19]; the same fresh second factor (and an audit entry) applies when a lead_rater or exam_admin reads another learner's result via /exam/v1/attempts/{id}/result
+Raters/admins: /exam/v1/admin/* (role-gated, same session + fresh TOTP second factor ≤ 12 h) [OD-19: owner instruction 2026-10-19, D1–D8; register v1.6 DRAFT, PR #105, not yet signed; the signed register v1.5 still lists OD-19 CONFIGURABLE]; the same fresh second factor (and an audit entry) applies when a lead_rater or exam_admin reads another learner's result via /exam/v1/attempts/{id}/result
 ```
 
 **Why proxy through Access rather than expose a new public Worker [DESIGN]:**
@@ -249,7 +249,7 @@ CALIBRATION (pilot statistics · rater agreement · equating)
 |---|---|---|
 | OD-17 | New Worker vs routes inside Access | New private `klarweg-exam` behind an Access proxy (this doc) |
 | OD-18 | Exam entitlement | B1 level or LIFETIME grants B1 exam access; Mock free or paid? |
-| OD-19 | Rater/admin authentication | Same user session + `exam_roles`; TOTP second factor for rater/lead/admin (owner decision 2026-10-19, D1–D8; `RUNBOOK-RATER-2FA.md`; not provisioned) |
+| OD-19 | Rater/admin authentication | Same user session + `exam_roles`; TOTP second factor for rater/lead/admin (owner instruction 2026-10-19, D1–D8; register v1.6 DRAFT, PR #105, not yet signed; `RUNBOOK-RATER-2FA.md`; not provisioned) |
 | OD-20 | Same-site domain before launch | `klarweg.in` + `api.klarweg.in` |
 | OD-21 | Data retention (texts, results, recordings) | Results indefinite (user-deletable); recordings ≤ 90 days after final rating; texts 2 years |
 | OD-22 | Attempt limits | Mock 1 graded attempt + practice; Sets 1 attempt each, repeat after all used |
@@ -260,7 +260,7 @@ CALIBRATION (pilot statistics · rater agreement · equating)
 | OD-27 | Mobile Sprechen support in Mock | Desktop/tablet required for full Simulation; mobile allowed for practice |
 | OD-28 | Abandonment of remaining modules after a break | Not returned within 24 h → `auto_abandon` (not taken, not 0) |
 | OD-29 | Module order in full simulation | Fixed L→H→S→Sp (official recommended order) |
-| OD-30 | How a Schreiben third rating combines | Bewertung 3 replaces the mean (official text silent) |
+| OD-30 | How a Schreiben third rating combines | Bewertung 3 replaces the mean (official text silent; owner instruction 2026-10-19; register v1.6 DRAFT, PR #105, not yet signed; signed v1.5: UNRESOLVED) |
 | OD-31 | Re-scoring after key corrections | Versioned re-score + learner notification |
 | OD-32 | Sprechen Teil 3 construct for solo learners | Simulated pair with a pre-recorded partner presentation |
 | OD-33 | Re-take of a technically failed speaking part | Allowed once, new attempt slot, logged |

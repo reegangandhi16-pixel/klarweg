@@ -31,7 +31,10 @@
     });
   }
   function has(v) { return Array.isArray(v) ? v.length > 0 : (v != null && String(v).trim() !== ''); }
-  function visible(list) { return (list || []).filter(function (x) { return D.showDrafts || !x.draft; }); }
+  /* Drafts render only when showDrafts is true AND the page runs
+     locally; on any deployed host they are dropped regardless. */
+  var SHOW_DRAFTS = D.showDrafts === true && /^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname);
+  function visible(list) { return (list || []).filter(function (x) { return SHOW_DRAFTS || !x.draft; }); }
   function draftFlag(x) { return x.draft ? '<span class="draft-flag">Draft</span>' : ''; }
 
   var teachers = visible(D.teachers);
@@ -180,7 +183,8 @@
 
   /* ---------- profile dialog ---------- */
   var dlg = $('t-dialog');
-  var dlgOpener = null;
+  var dlgOpener = null;   // the element to refocus on close, or 'deeplink'
+  var lastProfileId = null;
   var closeProfile = function () {};
 
   function row(label, val) {
@@ -216,7 +220,8 @@
       + '</dl>'
       + '<a href="#book" class="btn btn-live" data-book-teacher="' + esc(t.id) + '">Request a consultation with ' + esc(t.draft ? 'this teacher' : t.name.split(' ')[0]) + ' ' + ARROW + '</a>'
       + '</div></div>';
-    dlgOpener = opener || document.activeElement;
+    lastProfileId = id;
+    dlgOpener = opener || 'deeplink';
     if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
     document.body.style.overflow = 'hidden';
     if (history.replaceState) history.replaceState(null, '', '#teacher-' + id);
@@ -235,7 +240,11 @@
       document.body.style.overflow = '';
       if (location.hash.indexOf('#teacher-') === 0 && history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#teachers');
       var o = dlgOpener; dlgOpener = null;
-      if (o && document.contains(o) && typeof o.focus === 'function') o.focus();
+      if (o && o.nodeType === 1 && document.contains(o)) o.focus();
+      else if (o === 'deeplink' && lastProfileId) {
+        var btn = document.querySelector('[data-profile="' + lastProfileId + '"]');
+        if (btn) btn.focus();
+      }
     }
     closeProfile = function () { if (dlg.open) dlg.close(); cleanup(); };
     $('t-dialog-close').addEventListener('click', closeProfile);
@@ -249,6 +258,7 @@
     dlg.addEventListener('close', cleanup);
     var m = location.hash.match(/^#teacher-(.+)$/);
     if (m && teacherById[m[1]]) openProfile(m[1], null);
+    else if (m && history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#teachers');
   }
 
   /* ---------- course catalogue ---------- */
@@ -457,10 +467,10 @@
     var box = $('quotes');
     if (!box) return;
     if (!quotes.length) {
-      box.innerHTML = D.showDrafts
+      box.innerHTML = SHOW_DRAFTS
         ? '<div class="empty-state" style="grid-column:1/-1"><span class="draft-flag">Draft slot</span><h3 style="margin-top:12px">Student testimonials go here</h3><p>Add real, permission-given quotes in live-classes-data.js. This slot disappears when there are none and drafts are off.</p></div>'
         : '';
-      if (!D.showDrafts) box.hidden = true;
+      if (!SHOW_DRAFTS) box.hidden = true;
       return;
     }
     box.innerHTML = quotes.map(function (q) {
@@ -475,9 +485,9 @@
     var hero = document.querySelector('.live-hero');
     var book = $('book');
     if (!bar || !hero || !book || !('IntersectionObserver' in window)) return;
-    var pastHero = false, atBook = false;
+    var pastHero = false, atBook = false, atFooter = false;
     function sync() {
-      var show = pastHero && !atBook;
+      var show = pastHero && !atBook && !atFooter;
       bar.classList.toggle('show', show);
       bar.setAttribute('aria-hidden', show ? 'false' : 'true');
       bar.querySelector('a').tabIndex = show ? 0 : -1;
@@ -485,7 +495,7 @@
     new IntersectionObserver(function (en) { pastHero = !en[0].isIntersecting && en[0].boundingClientRect.top < 0; sync(); }).observe(hero);
     new IntersectionObserver(function (en) { atBook = en[0].isIntersecting; sync(); }, { threshold: 0.05 }).observe(book);
     var footer = document.querySelector('footer');
-    if (footer) new IntersectionObserver(function (en) { if (en[0].isIntersecting) { bar.classList.remove('show'); } else sync(); }).observe(footer);
+    if (footer) new IntersectionObserver(function (en) { atFooter = en[0].isIntersecting; sync(); }).observe(footer);
   }
 
   function init() {

@@ -24,20 +24,26 @@
   if (global.KWLive) return;
 
   global.KWLive = {
-    /* true while the page is an unlisted preview. Set to false
-       before publishing: draft teachers / courses / testimonials
-       disappear and the honest empty states show instead. */
-    showDrafts: true,
+    /* false = production-safe: draft teachers / courses / testimonials
+       are never rendered and the honest empty states show instead.
+       To review the draft templates, set true LOCALLY only: kw-live.js
+       also ignores it on any host other than localhost / 127.0.0.1 /
+       file://, so a forgotten `true` can never reach the live site. */
+    showDrafts: false,
 
     contact: {
       email: 'hallo@klarweg.app',
       replyTime: 'within two working days, Monday to Friday'
     },
 
-    /* ---------- ₹100 personal consultation (owner decision) ---------- */
+    /* ---------- ₹100 personal consultation ----------
+       UNCONFIRMED: the ₹100 fee and the 7-day adjustment against a
+       live course fee come from the original page brief and have not
+       been confirmed in writing. Confirm both (and how the fee is paid
+       and refunded) before the page is published. */
     consultation: {
       feeLabel: '₹100',
-      adjustmentDays: 7,
+      adjustmentDays: 7,       // UNCONFIRMED — see above
       durationMinutes: null,   // e.g. 20 — shown only when set
       platform: null,          // e.g. 'Google Meet' — shown only when set
       /* How a request becomes a booking. There is no scheduling or

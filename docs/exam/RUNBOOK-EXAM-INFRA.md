@@ -45,6 +45,11 @@ Secrets (`wrangler secret put`), each ≥ 32 characters:
 4. Build the release: `npm run exam:build -- --out /tmp/kx-r000`.
    - The release goes outside the repo.
    - Upload every file under `releases/` to `klarweg-exam-content` with the same keys.
+   - **Learner releases:** first run the read-only preflight. Export the five tables with the commands from
+     `node exam-content/tools/registry-preflight.mjs --export-commands klarweg-exam`, then run
+     `node exam-content/tools/registry-preflight.mjs --forms <names> --existing <export dir>`. Import only on
+     "PREFLIGHT OK". A learner `registry.sql` uses plain `INSERT`, so it can never replace rows that attempts reference;
+     an existing id aborts the whole import. Changed content needs a new revision (SCHEMA §2).
    - Run `/tmp/kx-r000/registry.sql` against D1 (`wrangler d1 execute klarweg-exam --remote --file …`).
 5. Set the secrets (section 2).
 6. Deploy klarweg-exam with all flags still OFF.

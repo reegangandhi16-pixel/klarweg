@@ -85,6 +85,10 @@ Data the exam Worker stores for a Lesen-only attempt. Verified against `exam-wor
 - **Same request surface as the full portal**, minus the routes Lesen-only cannot reach. Target: the non-production
   environment only (`NONPROD-SETUP.md`). The tester can switch it to the reviewed configuration with a command-line
   var. That is an owner-authorised non-prod deploy: `wrangler deploy --config wrangler.nonprod.toml --var EXAM_MODULE_ONLY:lesen --var EXAM_RELEASE_FORMS:<ids>`.
+- **Content note:** non-production still serves the pre-PR #152 wording of four explanations and one stem (keys
+  identical; `NONPROD-SETUP.md` §4 N1). It is not the content under review. Before testing starts, engineering deploys
+  non-production in the reviewed configuration (`EXAM_MODULE_ONLY=lesen`, `EXAM_RELEASE_FORMS` = the candidate forms),
+  and restores the default afterwards, as in runs M1/M2.
 - **New in this scope, for the tester to probe:**
   - creating full or other-module attempts while `EXAM_MODULE_ONLY=lesen`;
   - mixing `mode`/`module` values;

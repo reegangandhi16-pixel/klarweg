@@ -58,21 +58,23 @@ These were decided by the owner on 2026-10-20; see [the decision sheet](live-cla
 
 A spreadsheet the owner can keep, with one row per payment or refund. Adjust the columns once questions 1–10 are answered.
 
-| Column | Example |
+The example column is **illustrative only**: it is not a real learner or payment. It shows one first instalment for the approved A1 fee. Dates are left for the real entries, because no start date is set. The consultation adjustment is left open, because the rule for applying it is not decided (question 9).
+
+| Column | Illustrative example (not a real payment) |
 |---|---|
-| Date received | 2026-11-02 |
+| Date received | [enter the date the money shows on the statement] |
 | Learner name · email | A. Learner · a@example.com |
-| Batch | A1 · [start date] |
-| Item | Consultation · Full fee · Instalment 1 · Instalment 2 · Refund |
+| Batch | A1 · [start date, once approved] |
+| Item | Consultation · Full fee · Instalment 1 · Instalment 2 · Refund (here: Instalment 1) |
 | Amount due (₹) | 4,000 |
 | Amount received (₹) | 4,000 (negative for a refund) |
 | Method | UPI · Bank transfer |
 | UPI / bank reference | the transaction ID from the bank statement |
-| Consultation adjustment (₹) | 100, if deducted |
+| Consultation adjustment (₹) | [blank until the accountant and owner decide which payment it reduces] |
 | Receipt / invoice no. | per the accountant's numbering |
-| Balance outstanding (₹) | 3,899 |
-| Next due | before week 7 |
-| Place confirmed by email (date) | 2026-11-02 |
+| Balance outstanding (₹) | 3,999 before any consultation adjustment (₹7,999 − ₹4,000) |
+| Next due | Instalment 2, before week 7 |
+| Place confirmed by email (date) | [enter the actual confirmation date] |
 | Notes | |
 
 **Procedure:**

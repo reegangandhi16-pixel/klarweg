@@ -212,6 +212,8 @@ This is the smallest set the validator (`checkData`) and the page need. Everythi
 - The draft course titles and objectives in `live-classes-data.js` are generic CEFR-level descriptions written as templates. Keep them only if the teacher confirms they describe the course.
 - Self-paced prices are never live fees.
 
+**Additional teachers:** use [`live-classes-teacher-intake.md`](live-classes-teacher-intake.md), which lists every field, the evidence and consent needed, and what the validator enforces.
+
 **First teacher (required to publish a profile):**
 - full name;
 - one-line teaching focus;

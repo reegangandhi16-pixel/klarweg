@@ -83,9 +83,16 @@ export function checkData(D, root = ROOT) {
     if (has(t.unconfirmed)) err(w, `published teacher still has unconfirmed fields: ${t.unconfirmed.join(', ')}`);
     for (const p of placeholders(t)) err(w, `published teacher still has placeholder text "${p}"`);
     for (const f of ['name', 'headline', 'experience', 'proficiency', 'qualifications', 'levels', 'teachesIn', 'formats']) if (!has(t[f])) err(w, `published teacher needs ${f}`);
+    // a public profile needs the teacher's own approval on record (how and when; never shown)
+    if (!has(t.consent)) err(w, 'published teacher needs consent (how and when the teacher approved publishing this profile)');
+    // credentials in a recognisable, checkable form only
+    if (has(t.proficiency) && !/^(?:[ABC][12]|Native speaker)$/i.test(t.proficiency)) err(w, `proficiency "${t.proficiency}" must be a CEFR level (A1–C2) or "Native speaker"`);
+    for (const g of t.goethe || []) if (!/^Goethe-Zertifikat (?:A1|A2|B1|B2|C1|C2)\b/.test(g)) err(w, `goethe lists "${g}": name the certificate as issued, e.g. "Goethe-Zertifikat B2"`);
+    for (const q of t.qualifications || []) if (/goethe/i.test(q) && !(t.goethe || []).includes(q)) err(w, `qualification "${q}" names a Goethe certificate that is not listed in goethe`);
     if (has(t.photo)) {
       if (!fs.existsSync(path.join(root, t.photo))) err(w, `photo ${t.photo} does not exist`);
       if (!has(t.photoAlt)) err(w, 'a photo needs photoAlt');
+      if (!has(t.photoConsent)) err(w, 'a photo needs photoConsent (how and when the teacher approved showing it)');
     }
   }
 

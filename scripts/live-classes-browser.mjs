@@ -11,7 +11,8 @@
    launch, with only the owner's profile and live-a1 published, (B) the host
    guard (showDrafts forced true on a non-local host), (C) the local
    preview: filters, profile dialog, deep links, prefill, validation,
-   hand-off, and (D) mobile layout + sticky CTA.
+   hand-off, (M) several published teachers (test-only data edits),
+   and (D) mobile layout + sticky CTA.
 
    Usage:  npm run test:live:browser
    Env:    CHROME=<binary>   CHROME_ARGS="--no-sandbox"   (CI on Linux)
@@ -358,6 +359,50 @@ try {
     ok('F2 structured data: the published course with its published instructor, nothing else', !!jF2 && jF2.faqOk && jF2.courses.join() === LIVE.courses[0].title && jF2.instructors.join() === OWNER.name && !/\[[^\]]+\]|Draft/.test(jF2.text), JSON.stringify(jF2 && { c: jF2.courses, i: jF2.instructors }));
     ok('F2 no price or start date is invented in the structured data', !jF2.keys.some((k) => /price|offers|startDate|courseSchedule|hasCourseInstance/i.test(k)), jF2.keys.join());
   }
+
+  // ---- M. several published teachers (test-only data edits: a fictional second teacher replaces the teacher-2 template) ----
+  {
+    const src = fs.readFileSync(path.join(ROOT, 'live-classes-data.js'), 'utf8');
+    const start = src.indexOf("{\n        id: 'teacher-2',"), end = src.indexOf('\n      }', start) + '\n      }'.length;
+    const two = "{ id: 'test-two', name: 'Test Teacher Two', photo: null, photoAlt: '', headline: 'Test headline', experience: '3 years of teaching German', proficiency: 'C2', qualifications: ['Test qualification'], goethe: [], levels: ['A1', 'A2'], teachesIn: ['English', 'German'], specialisms: ['Test specialism'], examPrep: null, approach: 'Test approach.', formats: ['One-to-one'], availability: null, consent: 'test', photoConsent: null, unconfirmed: [] }";
+    const multi = [[src.slice(start, end), two], ["teacherIds: ['reegan-gandhi'],", "teacherIds: ['reegan-gandhi', 'test-two'],"]];
+    for (const [w, mob] of [[375, true], [1280, false]]) {
+      await load(L, { edits: multi, width: w, mobile: mob });
+      ok(`M${w} two teacher cards in a directory layout, with filters and a count`, await q('document.querySelectorAll(".t-card").length===2 && !document.getElementById("teacher-grid").classList.contains("single") && !document.querySelector("#teachers .filters").hidden')
+        && (await q('document.getElementById("t-count").textContent')) === '2 teachers', await q('document.getElementById("t-count").textContent'));
+      ok(`M${w} directory copy, not single-teacher copy`, (await q('document.getElementById("teachers-h").textContent')) === 'Find the teacher who fits your goal.');
+      ok(`M${w} level chips only for levels a teacher covers`, (await q('[...document.querySelectorAll("[data-tlevel]")].filter(b=>!b.hidden&&b.offsetParent!==null).map(b=>b.textContent).join()')) === 'All,A1,A2,B1,B2',
+        await q('[...document.querySelectorAll("[data-tlevel]")].filter(b=>!b.hidden&&b.offsetParent!==null).map(b=>b.textContent).join()'));
+      ok(`M${w} language filter lists the teachers' languages; the exam filter stays (one teacher prepares for Goethe)`, (await q('[...document.getElementById("t-lang").options].map(o=>o.text).join("|")')) === 'Any language|Hindi|English|German'
+        && await q('document.getElementById("t-exam").offsetParent!==null'));
+      ok(`M${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
+      ok(`M${w} accessibility audit with several teachers`, (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
+      ok(`M${w} no draft or template text`, (await q(draftLeak)) === null, await q(draftLeak));
+    }
+    await q('document.querySelector("[data-tlevel=A2]").click()');
+    ok('M level A2 narrows the list to the teachers who teach it', (await q('[...document.querySelectorAll(".t-card .t-name")].map(n=>n.textContent).join("|")')) === OWNER.name + '|Test Teacher Two' && (await q('document.getElementById("t-count").textContent')) === '2 teachers');
+    await q('(()=>{const s=document.getElementById("t-lang");s.value="German";s.dispatchEvent(new Event("change"))})()');
+    ok('M + teaches in German leaves one teacher', (await q('[...document.querySelectorAll(".t-card .t-name")].map(n=>n.textContent).join("|")')) === 'Test Teacher Two' && (await q('document.getElementById("t-count").textContent')) === '1 of 2 teachers match', await q('document.getElementById("t-count").textContent'));
+    await q('document.getElementById("t-exam").click()');
+    ok('M + Goethe exam prep: no match, with a reset that restores everything', await q('!!document.getElementById("t-reset")'));
+    await q('document.getElementById("t-reset").click()');
+    ok('M reset shows both teachers again', (await q('document.querySelectorAll(".t-card").length')) === 2);
+    const cardT = await q('(()=>{const d=[...document.querySelectorAll(".c-card dt")].find(x=>/^Teachers?$/.test(x.textContent));return d?d.textContent+": "+d.nextElementSibling.textContent:null})()');
+    ok('M the course card names both teachers as profile links', cardT === 'Teachers: ' + OWNER.name + ', Test Teacher Two' && (await q('document.querySelectorAll(".c-card .t-link").length')) === 2, cardT);
+    await q('document.querySelectorAll(".c-card .t-link")[1].focus(); document.querySelectorAll(".c-card .t-link")[1].click()'); await sleep(200);
+    ok('M a course-card teacher link opens that teacher\'s profile, labelled, with focus inside', (await q('document.getElementById("t-dialog").open')) && (await q('location.hash')) === '#teacher-test-two'
+      && (await q('document.getElementById("t-dialog-name").textContent')) === 'Test Teacher Two' && await q('document.getElementById("t-dialog").contains(document.activeElement)'));
+    ok('M the profile lists the course the teacher is assigned to', /Live courses: Beginner German · A1/.test(await q('[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ")')));
+    await key('Escape', 'Escape', 27); await sleep(200);
+    ok('M Escape closes and returns focus to the course-card link', (await q('!document.getElementById("t-dialog").open')) && await q('document.activeElement.classList.contains("t-link")'));
+    const jM = await q(jsonld);
+    ok('M structured data: the course lists both published instructors, no template', !!jM && jM.instructors.join('|') === OWNER.name + '|Test Teacher Two' && !/\[[^\]]+\]|Draft/.test(jM.text), JSON.stringify(jM && jM.instructors));
+    ok('M the form offers both published teachers', (await q('[...document.getElementById("bf-teacher").options].map(o=>o.text).join("|")')) === 'Help me choose|' + OWNER.name + '|Test Teacher Two');
+  }
+
+  // ---- production: one teacher, so no teacher filter of any kind is shown ----
+  await load(L);
+  ok('P one published teacher: no level, language or exam filter is visible', await q('[...document.querySelectorAll("[data-tlevel],#t-lang,#t-exam")].every(e=>e.offsetParent===null)'));
 
   // ---- N. without JavaScript: readable FAQ, no dead controls, an email route ----
   for (const [w, mob] of [[375, true], [1280, false]]) {

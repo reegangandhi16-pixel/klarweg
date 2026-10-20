@@ -79,14 +79,19 @@
     },
 
     /* ---------- teachers ----------
+       Fill a profile from docs/live-classes-teacher-intake.md only.
        `unconfirmed` (optional) lists the fields still awaiting the
-       owner's confirmation: suggested wording or preliminary,
-       owner-provided information. A teacher cannot be published while it
-       lists anything (scripts/live-classes-readiness.mjs). It is never
-       shown on the page. */
+       owner's confirmation: suggested wording, preliminary information,
+       or a template value that only looks real. A teacher cannot be
+       published while it lists anything.
+       `consent` records how and when the teacher approved publishing
+       this profile; `photoConsent` the same for the photo. Both are
+       required for a published teacher (photoConsent only with a photo)
+       and are never shown on the page.
+       Checked by scripts/live-classes-readiness.mjs. */
     teachers: [
       {
-        /* The owner's own profile, DRAFT. Confirmed by the owner
+        /* The owner's own profile, PUBLISHED. Confirmed by the owner
            (2026-10-20): name, headline, German proficiency C1 (the level
            of German), levels taught, teaching languages, exam-prep
            description, approach and formats. Confirmed later: 5 years of
@@ -115,6 +120,8 @@
         approach: 'Every topic starts with a clear explanation of the grammar, in Hindi or English, followed by practical examples. You then practise with the structure yourself and get corrected as you go, one step at a time.',
         formats: ['Group batch', 'One-to-one'],
         availability: null,
+        consent: 'Own profile: approved for publication by the owner on 2026-10-20 (decision sheet D2, D8)',
+        photoConsent: null,
         unconfirmed: []
       },
       {
@@ -134,7 +141,10 @@
         examPrep: '[Exam preparation experience, in the teacher\'s words]',
         approach: '[Two or three sentences on how this teacher runs a class.]',
         formats: ['Group batch', 'One-to-one'],
-        availability: null         // e.g. 'Weekday evenings (IST)' — only if confirmed
+        availability: null,         // e.g. 'Weekday evenings (IST)' — only if confirmed
+        consent: null,             // how and when the teacher approved publication (required to publish)
+        photoConsent: null,        // the same for the photo (required with a photo)
+        unconfirmed: ['levels', 'teachesIn', 'formats']   // template values to replace with the teacher's own; empty this list only once each is confirmed
       },
       {
         id: 'teacher-2',
@@ -153,7 +163,10 @@
         examPrep: null,
         approach: '[Two or three sentences on how this teacher runs a class.]',
         formats: ['Group batch'],
-        availability: null
+        availability: null,
+        consent: null,             // how and when the teacher approved publication (required to publish)
+        photoConsent: null,        // the same for the photo (required with a photo)
+        unconfirmed: ['levels', 'teachesIn', 'formats', 'goethe', 'examPrep']   // template values to replace with the teacher's own; empty this list only once each is confirmed
       },
       {
         id: 'teacher-3',
@@ -172,7 +185,10 @@
         examPrep: '[Exam preparation experience]',
         approach: '[Two or three sentences on how this teacher runs a class.]',
         formats: ['One-to-one'],
-        availability: null
+        availability: null,
+        consent: null,             // how and when the teacher approved publication (required to publish)
+        photoConsent: null,        // the same for the photo (required with a photo)
+        unconfirmed: ['levels', 'teachesIn', 'formats']   // template values to replace with the teacher's own; empty this list only once each is confirmed
       }
     ],
 

@@ -172,6 +172,35 @@ explanations. The account had seen no form, so all forms were equally likely. No
 No code change was needed. **Consequence for a release:** build the learner release with only the approved forms; never
 reuse the test release.
 
+### Release-set record M2 (PR #150, 2026-10-20; filled from real runs only)
+Build: main `bdd7653`. Migration `0003_form_purpose.sql` applied; Time Travel bookmark before it
+`0000007d-00000000-0000510a-1c303545386ce8c755e1667ae09436c2`. Purpose backfilled for the 16 rows imported before 0003,
+from the forms' own `form.json` (`UPDATE … WHERE purpose IS NULL`; 15 `practice`, 1 `system_test` = S0). Exam Worker
+versions in order: `e1194bcf` (unset) → `cb040316` (`lesen` + P3,P8,P13) → `9d60ad27` (`lesen`, no set) → `e2d09473`
+(`lesen` + P3,S0) → `be7a02a0` (unset) → `0f5b02fa` (`lesen` + P3,P8,P13, re-run) → **`9e524be6` (unset; current)**.
+Vars passed on the command line only. Script: `~/klarweg-work/qa-live/nonprod/m2-release-forms.mjs`; log `m2.log`, `acceptance.log`.
+P3, P8 and P13 are **candidate** forms used for the test; listing them approves nothing.
+
+| # | Setting | Check | Result |
+|---|---|---|---|
+| M2.0 | all | `forms.purpose` recorded: 15 practice, 1 system_test | pass |
+| M2.1 | `lesen` + P3,P8,P13 | 4 Lesen attempts on a fresh account → P3, P8, P13, P13: only listed forms, all three before a repeat, never S0 | pass (re-run, see below) |
+| M2.2 | same | full attempt → 403 `mode_disabled` | pass |
+| M2.3 | same | an open attempt on unlisted P12 → 403 `form_not_in_release` on start | pass |
+| M2.5–2.7 | `lesen`, no set | Lesen create → 503 `release_unconfigured`; nothing available; no attempt row | pass |
+| M2.5–2.7 | `lesen` + P3,S0 | Lesen create → 503 `release_misconfigured`; nothing available; no attempt row (P3 not used as a fallback) | pass |
+| M2.4 | unset | full attempt works unchanged (4 modules) | pass (re-run, see below) |
+| M1.12 | unset | full mode available, single-module disabled | pass |
+
+**Failures and invalid runs:**
+- **M2.1, first run:** aborted by a client network error (`fetch failed`, `ECONNRESET`) after M2.0. Before the abort
+  it had created two attempts, P8 (completed) and P3 (in progress). Both are in the set. The re-run passed.
+- **M1.13, re-run on the restored config:** `409 invalid_transition`. This came from the test, not the code: that
+  attempt's Hören had been started by the first M1.13 at 08:27 and was auto-submitted by the cron at its deadline
+  (`audit_log`). The response is correct. M1.13 cannot be repeated on the same attempt; its 08:27 pass stands.
+- **M2.4, first run on the restored config:** `409 attempt_open`. Also from the test: the account already held the open
+  full attempt this script had created at 09:15. The script now uses a fresh account; the re-run passed.
+
 ## 5. Teardown or reset
 - **Reset data:** drop and recreate both non-prod D1 databases, then repeat §3 step 3 onward.
 - **Remove everything:**

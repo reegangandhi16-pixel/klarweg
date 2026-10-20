@@ -121,8 +121,9 @@ b.handlers.push(async (msg) => {
 await b.send('Runtime.enable'); await b.send('Page.enable'); await b.send('Network.enable');
 
 let dataEdits = [];
-async function load(url, { drafts = false, edits = [], width = 1280, height = 900, mobile = false } = {}) {
+async function load(url, { drafts = false, edits = [], width = 1280, height = 900, mobile = false, nojs = false } = {}) {
   await b.send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });
+  await b.send('Emulation.setScriptExecutionDisabled', { value: nojs });
   await b.send('Fetch.disable');
   dataEdits = (drafts ? [['showDrafts: false', 'showDrafts: true']] : []).concat(edits);
   if (dataEdits.length) await b.send('Fetch.enable', { patterns: [{ urlPattern: '*live-classes-data.js*', requestStage: 'Response' }] });
@@ -333,6 +334,17 @@ try {
     const jF2 = await q(jsonld);
     ok('F2 structured data: the published course with its published instructor, nothing else', !!jF2 && jF2.faqOk && jF2.courses.join() === LIVE.courses[0].title && jF2.instructors.join() === OWNER.name && !/\[[^\]]+\]|Draft/.test(jF2.text), JSON.stringify(jF2 && { c: jF2.courses, i: jF2.instructors }));
     ok('F2 no price or start date is invented in the structured data', !jF2.keys.some((k) => /price|offers|startDate|courseSchedule|hasCourseInstance/i.test(k)), jF2.keys.join());
+  }
+
+  // ---- N. without JavaScript: readable FAQ, no dead controls, an email route ----
+  for (const [w, mob] of [[375, true], [1280, false]]) {
+    await load(L, { nojs: true, width: w, mobile: mob });
+    ok(`N${w} scripts really are off`, (await q('typeof window.KWLive')) === 'undefined');
+    ok(`N${w} every FAQ answer is readable`, await q('[...document.querySelectorAll(".faq-a-inner")].every(a=>a.getBoundingClientRect().height>0&&a.closest(".faq-a").getBoundingClientRect().height>=a.getBoundingClientRect().height-1)'));
+    ok(`N${w} no filters or form controls that would do nothing`, await q('[...document.querySelectorAll("main .filters, #consult-form")].every(e=>e.offsetParent===null)'));
+    const nj = await q('(()=>{const n=document.querySelector(".nojs-request");if(!n||!n.offsetParent)return null;const a=n.querySelector("a[href^=mailto]");return {href:a&&a.getAttribute("href"),text:n.innerText}})()');
+    ok(`N${w} an email route replaces the form, to the documented address and reply time`, !!nj && nj.href === 'mailto:' + LIVE.contact.email && nj.text.includes(LIVE.contact.replyTime), JSON.stringify(nj));
+    ok(`N${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
   }
 
   // ---- E. tablet widths: no overflow, with and without published content ----

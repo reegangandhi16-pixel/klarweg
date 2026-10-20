@@ -263,6 +263,11 @@ Superseded by the reply template in [`live-classes-owner-decisions.md`](live-cla
   - a paid consultation;
   - free "tell me when a course opens" interest.
   "Register interest" on a course that isn't open never leads to a paid request, and the email and confirmation text match the chosen type.
+- **Works without JavaScript:**
+  - every FAQ answer is open and readable;
+  - filters and the request form, which need `kw-live.js`, are hidden;
+  - a plain email route to the documented address replaces the form.
+  The browser suite checks this with scripts disabled.
 - **A structural accessibility audit** in the browser suite: control names, labels, unique ids, heading order, image alt text, radio groups. It runs in the production default, the preview and the launch simulation.
 - **Structured data, built at runtime:**
   - a FAQPage identical to the visible FAQ;

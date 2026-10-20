@@ -293,7 +293,8 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
     assert.ok(errors.some((e) => rx.test(e)), `${why}: expected ${rx}, got ${JSON.stringify(errors)}`);
   };
   const realTeacher = { id: 'anna-k', draft: false, name: 'Anna K', photo: null, photoAlt: '', headline: 'Grammar first', experience: '5 years of teaching German',
-    proficiency: 'C2', qualifications: ['MA German'], goethe: [], levels: ['A1'], teachesIn: ['Hindi'], specialisms: [], examPrep: null, approach: 'x', formats: ['Group batch'], availability: null };
+    proficiency: 'C2', qualifications: ['MA German'], goethe: [], levels: ['A1'], teachesIn: ['Hindi'], specialisms: [], examPrep: null, approach: 'x', formats: ['Group batch'], availability: null, consent: 'Email, 2026-11-02', photoConsent: null };
+  assert.deepEqual(checkData({ ...clone(base), teachers: [...clone(base.teachers), realTeacher] }), [], 'the fixture itself is a complete, publishable teacher');
   expectError((D) => { D.teachers.find((t) => t.id === D.courses[0].teacherIds[0]).draft = true; }, new RegExp(`names draft teacher "${base.courses[0].teacherIds[0]}"`), 'a published course naming a draft teacher would show no teacher on the live site');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: null }); }, /enrolment "open" needs priceLabel/, 'open enrolment without a fee');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: '₹9,999' }); }, /needs nextBatch/, 'open enrolment without a start date');
@@ -313,6 +314,31 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
   expectError((D) => { D.consultation.termsConfirmed = 'yes'; }, /termsConfirmed/, 'termsConfirmed must be a boolean');
   expectError((D) => { delete D.policies.missedClass; }, /policies\.missedClass/, 'a policy key removed');
   expectError((D) => { D.showDrafts = true; }, /showDrafts/, 'drafts switched on');
+  // consent and credentials (docs/live-classes-teacher-intake.md)
+  expectError((D) => { D.teachers.push({ ...realTeacher, consent: null }); }, /anna-k: published teacher needs consent/, 'a published teacher without recorded consent');
+  expectError((D) => { D.teachers.push({ ...realTeacher, photo: 'favicon.svg', photoAlt: 'Portrait of Anna K' }); }, /a photo needs photoConsent/, 'a photo without recorded consent');
+  expectError((D) => { D.teachers.push({ ...realTeacher, proficiency: 'Fluent' }); }, /proficiency "Fluent" must be a CEFR level/, 'a vague proficiency claim');
+  expectError((D) => { D.teachers.push({ ...realTeacher, goethe: ['Goethe certified trainer'] }); }, /name the certificate as issued/, 'a certificate not named as issued');
+  expectError((D) => { D.teachers.push({ ...realTeacher, qualifications: ['Goethe-Zertifikat C2'] }); }, /names a Goethe certificate that is not listed in goethe/, 'a Goethe certificate claimed only under qualifications');
+});
+
+test('LIVE DATA: a teacher template cannot be published by filling its [brackets] alone', () => {
+  const D = loadData();
+  const templates = D.teachers.filter((t) => t.draft && /^\[/.test(t.name));
+  assert.deepEqual([...templates.map((t) => t.id)], ['teacher-1', 'teacher-2', 'teacher-3'], 'the three templates are still drafts');
+  const fill = (x) => (typeof x === 'string' ? x.replace(/\[[^\]]+\]/g, 'Filled') : Array.isArray(x) ? x.map(fill) : x);
+  for (const t of templates) {
+    assert.ok(t.unconfirmed.length > 0, `${t.id}: its template values are marked unconfirmed`);
+    // brackets replaced, draft removed, consent recorded: the template guesses (levels, languages, formats …) still block it
+    const filled = { ...Object.fromEntries(Object.entries(clone(t)).map(([k, v]) => [k, fill(v)])), draft: false, consent: 'Email, 2026-11-02', proficiency: 'C1', goethe: [], qualifications: ['MA German'] };
+    const errs = checkData({ ...clone(D), teachers: [...clone(D.teachers.filter((x) => x.id !== t.id)), filled] }).filter((e) => e.startsWith(`teacher ${t.id}:`));
+    assert.deepEqual(errs, [`teacher ${t.id}: published teacher still has unconfirmed fields: ${t.unconfirmed.join(', ')}`], `${t.id}: only the unconfirmed guard should remain`);
+    assert.equal(t.consent, null, `${t.id}: no consent is recorded for a template`);
+  }
+  // the intake document covers every field a teacher entry has
+  const intake = read('docs/live-classes-teacher-intake.md');
+  for (const k of new Set(D.teachers.flatMap((t) => Object.keys(t)))) if (k !== 'draft') assert.ok(intake.includes(`\`${k}\``), `the intake document describes ${k}`);
+  assert.equal(read('docs/templates/live-classes-teacher-intake.csv').trim().split(/\r?\n/).every((l) => /^[^,]+,,/.test(l) || l.startsWith('Data field,')), true, 'the intake sheet template holds headings only, no values');
 });
 
 test('LIVE GATE: the page is allowlisted, so no blocker may remain', () => {

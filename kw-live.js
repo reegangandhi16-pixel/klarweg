@@ -196,7 +196,15 @@
       sel.insertAdjacentHTML('beforeend', langs.map(function (l) { return '<option>' + esc(l) + '</option>'; }).join(''));
       sel.addEventListener('change', function () { tFilter.lang = sel.value; renderTeachers(); });
     }
+    /* Offer only choices that match at least one visible teacher: a level
+       chip, the language list (when there are two or more languages) and
+       the exam filter would otherwise lead to an empty result. */
+    if (sel && langs.length < 2) sel.closest('.filter-group').hidden = true;
     var levelBtns = document.querySelectorAll('[data-tlevel]');
+    levelBtns.forEach(function (b) {
+      var l = b.getAttribute('data-tlevel');
+      if (l && !teachers.some(function (t) { return (t.levels || []).indexOf(l) > -1; })) b.hidden = true;
+    });
     levelBtns.forEach(function (b) {
       b.addEventListener('click', function () {
         tFilter.level = b.getAttribute('data-tlevel');
@@ -205,6 +213,7 @@
       });
     });
     var exam = $('t-exam');
+    if (exam && !teachers.some(function (t) { return has(t.goethe) || has(t.examPrep); })) exam.closest('.filter-group').hidden = true;
     if (exam) exam.addEventListener('click', function () {
       tFilter.exam = !tFilter.exam;
       exam.setAttribute('aria-pressed', tFilter.exam ? 'true' : 'false');

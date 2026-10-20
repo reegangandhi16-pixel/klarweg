@@ -63,7 +63,7 @@
     "task_id": "tsk:b1:p3-l1",
     "is_example": false,
     "interaction": "binary_choice",
-    "stem": "1. Tomasz fährt jeden Tag mit dem Bus zur Arbeit.",
+    "stem": "1. Tomasz braucht mit dem Bus über eine Stunde zur Arbeit.",
     "options": [
       {
         "option_id": "richtig",
@@ -114,7 +114,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Bisher fährt Tomasz jeden Morgen mit zwei Bussen zur Arbeit."
+      "explanation_de": "Mit den zwei Bussen dauert der Weg zur Arbeit für Tomasz über eine Stunde."
     }
   },
   {
@@ -178,7 +178,7 @@
       }
     ],
     "feedback": {
-      "explanation_de": "Tomasz hat abends allein mit einer App geübt, nicht in einem Kurs."
+      "explanation_de": "Im Text steht nur, dass Tomasz abends mit einer App geübt hat; von einem Kurs ist keine Rede."
     }
   },
   {

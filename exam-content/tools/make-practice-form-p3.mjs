@@ -20,8 +20,8 @@ export const PRACTICE_FORM_P3 = buildPracticeForm({
         + 'Tomasz',
       example: ['Tomasz hat erst mit 34 Jahren den Führerschein gemacht.', 'richtig'],
       items: [
-        ['Tomasz fährt jeden Tag mit dem Bus zur Arbeit.', 'richtig', 'fahre ich jeden Morgen über eine Stunde mit zwei Bussen', 'Bisher fährt Tomasz jeden Morgen mit zwei Bussen zur Arbeit.'],
-        ['Für die Theorieprüfung hat Tomasz einen Kurs am Abend besucht.', 'falsch', 'Ich habe abends mit einer App geübt', 'Tomasz hat abends allein mit einer App geübt, nicht in einem Kurs.'],
+        ['Tomasz braucht mit dem Bus über eine Stunde zur Arbeit.', 'richtig', 'fahre ich jeden Morgen über eine Stunde mit zwei Bussen', 'Mit den zwei Bussen dauert der Weg zur Arbeit für Tomasz über eine Stunde.'],
+        ['Für die Theorieprüfung hat Tomasz einen Kurs am Abend besucht.', 'falsch', 'Ich habe abends mit einer App geübt', 'Im Text steht nur, dass Tomasz abends mit einer App geübt hat; von einem Kurs ist keine Rede.'],
         ['Das Einparken war für Tomasz schwierig.', 'richtig', 'beim Einparken war ich oft verzweifelt', 'Tomasz war beim Einparken oft verzweifelt, das zeigt, wie schwer es ihm fiel.'],
         ['Tomasz hat weniger Fahrstunden gebraucht als geplant.', 'falsch', 'mehr, als ich geplant hatte', 'Er hat 28 Fahrstunden gebraucht, also mehr als geplant.'],
         ['In der Prüfung hat Tomasz zuerst den Gurt vergessen.', 'richtig', 'dass ich zuerst vergessen habe, den Sicherheitsgurt anzulegen', 'Vor Nervosität hat er zuerst vergessen, den Gurt anzulegen.'],

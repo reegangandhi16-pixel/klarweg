@@ -1,8 +1,9 @@
 # Non-production environment — setup, acceptance and teardown (exam portal)
 
-**Status:** the configuration files and the site build tool are in the repo (§2, §3 step 8); nothing has been
-provisioned. **Every command here is an owner action** on the owner's
-Cloudflare account; automation never runs them.
+**Status (updated 2026-10-20):** the configuration files and the site build tool are in the repo (§2, §3 step 8). The
+environment **was provisioned on 2026-10-19 with the owner's authorization** (PR #128). Engineering ran the
+non-production deploys, migrations and acceptance runs recorded in §4 under that authorization, on the non-production
+Workers and databases only. Provisioning, teardown and anything touching production remain owner actions.
 
 Unlike `RUNBOOK-EXAM-INFRA.md` §3 (staging behind the *production* Access Worker), this environment is **fully
 isolated**:

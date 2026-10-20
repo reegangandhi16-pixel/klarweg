@@ -43,7 +43,7 @@ export const PRACTICE_FORM_P8 = buildPracticeForm({
           + 'Mit einem Schild kann man das Ziel anzeigen, zum Beispiel den Nachbarort oder den Bahnhof. Die Idee kam von einer Jugendgruppe, weil abends kaum noch Busse fahren. '
           + 'Bisher hat es keine Probleme gegeben. Die Gemeinde empfiehlt trotzdem, dass Kinder die Bank nicht allein benutzen.',
         items: [
-          ['Auf dem Schild an der Bank …', ['steht der Busfahrplan.', 'kann man das Ziel zeigen.', 'stehen die Regeln der Gemeinde.'], 'b', 'Mit einem Schild kann man das Ziel anzeigen', 'Wer auf der Bank sitzt, hält ein Schild hoch, auf dem man das Fahrtziel angeben kann.'],
+          ['Auf dem Schild an der Bank …', ['steht der Busfahrplan.', 'kann man das Ziel zeigen.', 'stehen die Regeln der Gemeinde.'], 'b', 'Mit einem Schild kann man das Ziel anzeigen', 'Mit dem Schild kann man zeigen, wohin man fahren möchte, zum Beispiel in den Nachbarort oder zum Bahnhof.'],
           ['Die Bank gibt es, weil …', ['am Abend wenige Busse fahren.', 'der Bahnhof geschlossen ist.', 'viele Autofahrer allein fahren.'], 'a', 'weil abends kaum noch Busse fahren', 'Die Jugendgruppe erfand die Mitfahrbank, weil am Abend fast keine Busse mehr unterwegs sind.'],
           ['Für Kinder gilt: Sie sollen …', ['einen Ausweis zeigen.', 'nur zum Bahnhof fahren.', 'nicht allein auf der Bank warten.'], 'c', 'dass Kinder die Bank nicht allein benutzen', 'Die Gemeinde empfiehlt, dass Kinder die Bank nicht allein benutzen.']
         ]

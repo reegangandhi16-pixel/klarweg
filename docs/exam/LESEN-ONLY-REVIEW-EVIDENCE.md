@@ -20,12 +20,20 @@ exam Worker: EXAM_ENABLED=on  EXAM_SYNTHETIC_FORMS=on  EXAM_MODULE_ONLY=lesen  (
 
 ## EX-03 — content (Lesen items of the candidate forms)
 - **Packet, ready to send (outside the repository, because it contains keys):**
-  `~/Downloads/klarweg-review-packets/EX-03-LESEN-479bd0e/`. It contains Lesen-only sheets for P3, P8 and P13
-  (30 items each), the full-form JSON record templates and a README with the content fingerprints. The fingerprints
-  match the full-form packet `EX-03-821cfb0`, so a Lesen review still counts if the full review follows.
+  `~/Downloads/klarweg-review-packets/EX-03-LESEN-RC-2026-10-20/`. It contains:
+  - Lesen-only sheets for P3, P8 and P13 (30 items each);
+  - the JSON response templates;
+  - a self-contained README (roles, instructions, approval criteria, return procedure, four items flagged for an
+    explicit verdict, content fingerprints);
+  - an assignment sheet;
+  - full-form sheets of the same forms for a later review.
+
+  It supersedes `EX-03-LESEN-479bd0e`, which is stale after the internal fixes. The fingerprints are those of main
+  after PR #152.
 - **Status after return:** `node exam-content/tools/review-status.mjs <returned dir>` reports `lesen: approved` only
   when A, B and C approved every Lesen item, C approved each item's accessibility, the ratings are resolved and C
   signed originality (register §C.1, O1–O10). This is a report, not a release decision.
+- **Internal engineering review of all 90 candidate Lesen items (2026-10-20, not EX-03):** `INTERNAL-LESEN-REVIEW-2026-10-20.md`. No wrong key; four wording defects fixed, keys unchanged; four items flagged for the panel.
 - **Internal checks, which do not count as EX-03:** validator, `practice-library.test`, and the internal audit of
   2026-10-19 (P1–P15). The fixes in PRs #111 and #118 changed stems and explanations only.
 

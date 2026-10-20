@@ -81,8 +81,13 @@ govern Schreiben only; Lesen uses the official conversion table.
 ```
 exam Worker:  EXAM_ENABLED=on  EXAM_SYNTHETIC_FORMS=on  EXAM_MODULE_ONLY=lesen   (MOCK/PRODUCTION_FORMS stay off)
               EXAM_RELEASE_FORMS=<ids of the forms whose Lesen items passed EX-03, comma-separated>   (required)
+              (both values are written by the release tool below; never typed by hand)
 Access:       EXAM_ROUTES=on + EXAM service binding
-Content:      a learner release with only the approved forms (build-release --purpose learner <dirs>)
+Content:      node exam-content/tools/release-candidate.mjs --forms <names> --module lesen --release <rNNN>
+                --approved <returned EX-03 records> --out <dir outside the repo>
+              → a learner release of exactly those forms + worker-settings.env + candidate.json. It refuses S0,
+                unknown/duplicate/empty lists and any form whose Lesen is not "approved" in the records.
+                (--internal-candidate builds a NOT APPROVED copy for non-production testing only.)
 Site:         exam/ in .github/pages-allowlist.txt
 Kill switch:  RUNBOOK-EXAM-INFRA.md §2 (EXAM_ROUTES or EXAM_ENABLED off)
 ```

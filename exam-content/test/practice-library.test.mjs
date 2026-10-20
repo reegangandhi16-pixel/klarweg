@@ -260,3 +260,33 @@ test('LIBRARY: Lesen 3 — a keyed ad restricted to women or men never answers a
     }
   }
 });
+
+test('LIBRARY: a "richtig"/"ja" statement never claims a frequency or totality ("jeden Tag", "immer", "alle" …) that its text does not state', () => {
+  // internal Lesen review 2026-10-20 (candidate forms P3/P8/P13): P3 Lesen 1 item 1 said "jeden Tag mit dem Bus" for a
+  // text saying "jeden Morgen … mit zwei Bussen" that later mentions borrowing a car, so "falsch" was defensible
+  const SAME = { täglich: /\btäglich\b|\bam Tag\b|\bjeden Tag\b/i };
+  const UNIV = /\b(jeden Tag|jede Woche|jeden Morgen|jeden Abend|immer|nie|niemals|alle|alles|täglich)\b/gi;
+  for (const f of LIB) {
+    for (const it of f.items) {
+      if (it.is_example || !it.anchors || !['richtig', 'ja'].includes(keyOf(f, it))) continue;
+      const text = sourceOf(f.assets.find((a) => a.id === it.anchors[0].asset_id));
+      for (const w of it.stem.match(UNIV) || []) {
+        const re = SAME[w.toLowerCase()] || new RegExp(`\\b${w}\\b`, 'i');
+        assert.ok(re.test(text), `${f.name} ${it.id}: "${w}" in "${it.stem}" is not in its text`);
+      }
+    }
+  }
+});
+
+test('LIBRARY: internal Lesen review 2026-10-20 (P3, P8, P13) — fixed wording stays fixed', () => {
+  // not an EX-03 review: engineering's own reading of the 90 candidate Lesen items; four defects, keys unchanged
+  const get = (name, id) => { const f = LIB.find((x) => x.name === name); return { f, it: f.items.find((x) => x.id === id) }; };
+  let { f, it } = get('P3', 'itm:b1:p3-l1-01');
+  assert.match(it.stem, /braucht mit dem Bus über eine Stunde zur Arbeit/); assert.equal(keyOf(f, it), 'richtig');
+  ({ f, it } = get('P3', 'itm:b1:p3-l1-02'));
+  assert.equal(/\ballein\b/.test(it.feedback.explanation_de), false, 'no unsupported "allein"'); assert.equal(keyOf(f, it), 'falsch');
+  ({ f, it } = get('P8', 'itm:b1:p8-l2-10'));
+  assert.equal(/hoch/.test(it.feedback.explanation_de), false, 'the text never says the sign is held up'); assert.equal(keyOf(f, it), 'b');
+  ({ f, it } = get('P13', 'itm:b1:p13-l3-16'));
+  assert.equal(/reichen ein paar Stunden/.test(it.feedback.explanation_de), false, 'the ad states no time'); assert.equal(keyOf(f, it), 'b');
+});

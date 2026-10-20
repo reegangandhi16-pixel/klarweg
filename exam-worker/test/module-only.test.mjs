@@ -10,7 +10,7 @@ import { moduleOnly, modeBlock, MODES } from '../src/flags.js';
 const create = (env, user, body) => call(env, 'POST', '/exam/v1/attempts', { user, body: { level: 'b1', request_id: rid(), device_id: dev(), ...body } });
 
 async function lesenOnly(flags = {}) {
-  const h = makeEnv({ formDirs: [PRACTICE_FORM_DIR], flags: { EXAM_MODULE_ONLY: 'lesen', ...flags } });
+  const h = makeEnv({ formDirs: [PRACTICE_FORM_DIR], flags: { EXAM_MODULE_ONLY: 'lesen', EXAM_RELEASE_FORMS: 'frm:b1:synthetic-p1@1', ...flags } });
   const user = newUser();
   await grant(h.env, user);
   return { ...h, user };
@@ -133,12 +133,12 @@ test('MODULE ONLY: a full attempt opened before the switch can still finish Lese
   const c = await create(h.env, user, { mode: 'synthetic_full' });
   assert.equal(c.status, 200);
   const s = { ...h, user, attempt: c.json.attempt_id, lease: c.json.lease.lease_id };
-  h.env.EXAM_MODULE_ONLY = 'lesen';
+  h.env.EXAM_MODULE_ONLY = 'lesen'; h.env.EXAM_RELEASE_FORMS = 'frm:b1:synthetic-p1@1';
   await start(s, 'lesen'); await answerObjective(s, 'lesen'); await submit(s, 'lesen');
   const r = await post(s, '/modules/hoeren/start', {});
   assert.equal(r.status, 403); assert.equal(r.json.error, 'module_disabled');
   h.env.EXAM_MODULE_ONLY = 'lesen,bogus';   // misconfigured: nothing starts
   assert.equal((await post(s, '/modules/hoeren/start', {})).json.error, 'module_disabled');
-  delete h.env.EXAM_MODULE_ONLY;            // unset again: the attempt continues as before
+  delete h.env.EXAM_MODULE_ONLY; delete h.env.EXAM_RELEASE_FORMS;   // unset again: the attempt continues as before
   assert.equal((await post(s, '/modules/hoeren/start', {})).status, 200);
 });

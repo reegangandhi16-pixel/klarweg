@@ -6,6 +6,11 @@
      EXAM_MODULE_ONLY        unset (default): full attempts only, single-module attempts refused.
                              A comma list of modules (e.g. "lesen"): ONLY single-module attempts of those modules;
                              full four-module attempts are refused. Any unknown entry disables every mode (fail closed).
+                             Requires EXAM_RELEASE_FORMS.
+     EXAM_RELEASE_FORMS      unset (default): every live form of the mode's kinds may be assigned (test/dev releases).
+                             A comma list of form ids: ONLY those forms may be assigned or continued. Every listed id
+                             must be a live form, and a synthetic one must have purpose 'practice' (never a system-test
+                             fixture such as S0); otherwise nothing is assigned (fail closed, release_misconfigured).
    EXAM_ROUTES lives in klarweg-access (the /exam/* proxy). */
 
 const on = (v) => v === 'on';
@@ -17,6 +22,17 @@ export function flags(env) {
     mock: on(env.EXAM_MOCK_FORMS),
     production: on(env.EXAM_PRODUCTION_FORMS)
   };
+}
+
+const FORM_ID_RE = /^frm:(a1|a2|b1|b2):[a-z0-9-]+@([1-9][0-9]*)$/;
+
+/* EXAM_RELEASE_FORMS → null (unset) | { ok: true, ids } | { ok: false } (malformed or duplicate ids) */
+export function releaseForms(env) {
+  const raw = env.EXAM_RELEASE_FORMS;
+  if (raw === undefined || raw === null || String(raw).trim() === '') return null;
+  const ids = String(raw).split(',').map((x) => x.trim()).filter(Boolean);
+  if (!ids.length || ids.some((id) => !FORM_ID_RE.test(id)) || new Set(ids).size !== ids.length) return { ok: false, ids: [] };
+  return { ok: true, ids };
 }
 
 export const EXAM_MODULES = Object.freeze(['lesen', 'hoeren', 'schreiben', 'sprechen']);

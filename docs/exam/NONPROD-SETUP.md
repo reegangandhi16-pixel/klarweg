@@ -63,6 +63,8 @@ sets it, and the guard refuses it in `wrangler.toml`. Tests: `access/worker/test
    - exam: `cd exam-worker && npx wrangler d1 migrations apply klarweg-exam-nonprod --config wrangler.nonprod.toml --remote`
      (applies every pending migration; a Worker built after `0002_attempt_module_scope.sql` needs it applied **before**
      its deploy, or creating attempts fails);
+     after `0003_form_purpose.sql`, rows imported earlier have `purpose` NULL and are refused by `EXAM_RELEASE_FORMS`
+     until their registry is re-imported or their recorded purpose is backfilled from the release manifest;
    - Access: `access/worker/schema.sql`, then every `access/worker/migration-*.sql` in order, **including
      `migration-011-totp.sql`**, against `klarweg-access-nonprod` with `npx wrangler d1 execute klarweg-access-nonprod --config wrangler.nonprod.toml --remote --file <file>` (from `access/worker`).
 4. **Content:**

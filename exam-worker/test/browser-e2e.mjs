@@ -1197,7 +1197,7 @@ async function runRater2fa() {
    that the other modules are unavailable; a full attempt is refused; one Lesen attempt runs to a result with one module
    row and its item review; no other module can be started; desktop + mobile without horizontal scroll; a11y audit. */
 async function runLesenOnly() {
-  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), flags: { EXAM_MODULE_ONLY: 'lesen' } });
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), flags: { EXAM_MODULE_ONLY: 'lesen', EXAM_RELEASE_FORMS: PRACTICE.id } });
   const b = await launch();
   const { send } = b;
   try {

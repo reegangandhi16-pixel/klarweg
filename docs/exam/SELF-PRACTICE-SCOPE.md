@@ -49,6 +49,11 @@ Schreiben and Sprechen from the critical path while staying inside the existing 
 Try it locally: `npm run exam:demo -- <free port> practice --module-only=lesen`, then open
 `http://127.0.0.1:<port>/exam/dev/as/learner`.
 
+**Release set (added after M1, PR #RELEASE_PR).** Assignment uses only the forms listed in `EXAM_RELEASE_FORMS`. With
+`EXAM_MODULE_ONLY` set, a missing list fails closed. A listed system-test fixture (S0), unknown, non-live or
+non-practice form disables assignment altogether. Nothing is substituted. Listing a form is an operator action; it
+records no approval.
+
 ## 3. Gates that still apply to a Lesen-only release (none is met today)
 
 Narrowing the scope shrinks these gates. It does not remove them.
@@ -75,6 +80,7 @@ govern Schreiben only; Lesen uses the official conversion table.
 
 ```
 exam Worker:  EXAM_ENABLED=on  EXAM_SYNTHETIC_FORMS=on  EXAM_MODULE_ONLY=lesen   (MOCK/PRODUCTION_FORMS stay off)
+              EXAM_RELEASE_FORMS=<ids of the forms whose Lesen items passed EX-03, comma-separated>   (required)
 Access:       EXAM_ROUTES=on + EXAM service binding
 Content:      a learner release with only the approved forms (build-release --purpose learner <dirs>)
 Site:         exam/ in .github/pages-allowlist.txt

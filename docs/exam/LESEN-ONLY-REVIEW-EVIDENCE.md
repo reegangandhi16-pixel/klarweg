@@ -10,6 +10,7 @@ review to what a Lesen-only release actually uses, and points to the evidence th
 ## What is switched on in the reviewed configuration
 ```
 exam Worker: EXAM_ENABLED=on  EXAM_SYNTHETIC_FORMS=on  EXAM_MODULE_ONLY=lesen  (MOCK/PRODUCTION_FORMS off)
+             EXAM_RELEASE_FORMS=<candidate form ids>   (required; only these forms are ever assigned)
 ```
 - Learners can create single-module **Lesen** attempts only. Full attempts and the other modules are refused
   (`403 mode_disabled` / `module_disabled`). Routes of modules the attempt does not contain answer `404 module_not_found`.
@@ -75,13 +76,16 @@ Data the exam Worker stores for a Lesen-only attempt. Verified against `exam-wor
 ## EX-05 — security
 - **Same request surface as the full portal**, minus the routes Lesen-only cannot reach. Target: the non-production
   environment only (`NONPROD-SETUP.md`). The tester can switch it to the reviewed configuration with a command-line
-  var. That is an owner-authorised non-prod deploy: `wrangler deploy --config wrangler.nonprod.toml --var EXAM_MODULE_ONLY:lesen`.
+  var. That is an owner-authorised non-prod deploy: `wrangler deploy --config wrangler.nonprod.toml --var EXAM_MODULE_ONLY:lesen --var EXAM_RELEASE_FORMS:<ids>`.
 - **New in this scope, for the tester to probe:**
   - creating full or other-module attempts while `EXAM_MODULE_ONLY=lesen`;
   - mixing `mode`/`module` values;
   - starting another module in an attempt opened before the switch;
-  - malformed `EXAM_MODULE_ONLY` values (expected: everything refused).
-- **Automated evidence:** `module-only.test` (6 tests), `security.test`, `access-matrix.test`, and the browser scenario
+  - malformed `EXAM_MODULE_ONLY` values (expected: everything refused);
+  - `EXAM_RELEASE_FORMS` missing, empty, malformed, or listing S0 / an unknown / a retired form (expected:
+    `503 release_unconfigured` / `release_misconfigured`, no attempt created, no other form substituted);
+  - an open attempt whose form is no longer listed (expected: `403 form_not_in_release` on start and package).
+- **Automated evidence:** `module-only.test` (6 tests), `release-forms.test` (10 tests), `security.test`, `access-matrix.test`, and the browser scenario
   `lesen-only` direct and via the Access proxy. The non-production run M1 is recorded in `NONPROD-SETUP.md` §4.
 
 ## EX-07, OD-08, OD-41, OD-20

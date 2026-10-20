@@ -34,6 +34,7 @@ an approval that has not been given.
   Tests: `module-only.test`, frontend START SCREEN, review tooling, and the browser scenario `lesen-only` (direct and proxy).
 - Removes from the critical path: EX-02, OD-14/EX-06, recording consent, F4/P-19/P-20/P-25, PR #76, v1.6 signature (OD-07/OD-30 are Schreiben-only).
 - Merged in PR #145 (`0c9563b`). **Non-production run M1, 2026-10-20** (`NONPROD-SETUP.md` §4): migration 0002 applied. All checks pass with the setting unset, `lesen` and an invalid value, plus a full four-module journey afterwards; one first-run fail had a cause outside the code (S0 test fixture assigned from the `purpose=test` release). Reviewer evidence: `LESEN-ONLY-REVIEW-EVIDENCE.md`.
+- Release set (PR #RELEASE_PR): `EXAM_RELEASE_FORMS` lists the forms that may be assigned. It is required with `EXAM_MODULE_ONLY`; S0, unknown, non-live and non-practice ids fail closed, and nothing is substituted. Migration 0003 stores `forms.purpose`. Tests: `release-forms.test` (10).
 - Still required: owner scope + form-set choice, EX-03 for the Lesen items of those forms, OD-08 confirmation, EX-01 (no recordings), EX-04 (Lesen screens), EX-05, EX-07, OD-41 policy, OD-20 domain, production provisioning.
 
 **C. Engineering work remaining (each waits for a decision listed in D, E or F)**

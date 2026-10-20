@@ -1,6 +1,6 @@
 # Content revisions: the contract (SCHEMA §2), enforced from the first learner release
 
-> **Status:** 2026-10-20, engineering (PR #158). It implements SCHEMA §2 ("IDs are immutable; editing content creates a
+> **Status:** 2026-10-20, engineering (PR #159). It implements SCHEMA §2 ("IDs are immutable; editing content creates a
 > new revision"), which earlier corrections did not follow: #111, #118 and #152 edited revision-1 forms in place. That
 > was harmless only because no learner release exists.
 

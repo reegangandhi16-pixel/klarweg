@@ -1,6 +1,6 @@
 # Lesen-only release: every remaining blocker, in order
 
-> **Status:** 2026-10-20, verified on main `45d3423` (PR #157), updated by PR #158. Nothing
+> **Status:** 2026-10-20, verified on main `45d3423` (PR #157), updated by PR #159. Nothing
 > here is satisfied unless it says so with evidence. The public learner portal stays unavailable until every row in
 > A–D is closed. Production today: exam Worker flags all `off`; no `EXAM` binding or `EXAM_ROUTES` in klarweg-access;
 > no `exam/` in the Pages allowlist.
@@ -32,7 +32,7 @@ Order = what unblocks the most, soonest. "Who" is the only party that can close 
 | Attempt-data retention job | D7 is answered | Off until configured, like PR #76 for recordings |
 | Production learner release build | EX-03 records say `approved` | `release-candidate.mjs --approved <records>`, never `--internal-candidate`; then add its `released_forms_entries` to `exam-content/released-forms.json` (PR) |
 | Non-production content refresh | **Not done, by design** (`NONPROD-SETUP.md` §4 N1) | Verified read-only: exactly the five PR #152 texts differ, and all keys are identical. A refresh would rewrite the history of 7 attempts and 6 results (global item ids), so it is not performed. EX-04 uses the local demo; EX-05 tests behaviour |
-| Content revision contract | **Done (PR #158)**, `CONTENT-REVISIONS.md` | `released-forms.json` lock + `revise-form.mjs` (new form id and new item ids) + validator `revision_ids` + insert-only registry and preflight (#157). Proven end to end: a revision-1 attempt stays byte-identical next to revision 2, and bad imports are atomic. Conditional leftover: adding a revision of a *generated* practice form to the library registry, needed only when a released form must change |
+| Content revision contract | **Done (PR #159)**, `CONTENT-REVISIONS.md` | `released-forms.json` lock + `revise-form.mjs` (new form id and new item ids) + validator `revision_ids` + insert-only registry and preflight (#157). Proven end to end: a revision-1 attempt stays byte-identical next to revision 2, and bad imports are atomic. Conditional leftover: adding a revision of a *generated* practice form to the library registry, needed only when a released form must change |
 
 Done and evidenced (not blockers):
 - the learner registry is insert-only, and the read-only `registry-preflight.mjs` (PR #157) checks an import against the target database: run against non-production it reports P3/P8/P13 as conflicts, P14 as identical;

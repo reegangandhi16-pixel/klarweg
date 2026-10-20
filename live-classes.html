@@ -344,7 +344,8 @@
   .done pre { white-space: pre-wrap; word-break: break-word; font-family: var(--font-mono); font-size: 12px; background: var(--bg-elevated); border-radius: var(--r-md); padding: 16px; margin: 0 0 16px; max-height: 220px; overflow: auto; }
   .done-actions { display: flex; flex-wrap: wrap; gap: 8px; }
   .done-actions .btn { width: auto; flex: 1 1 auto; }
-  .done a.inline { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .done a.inline, .nojs-request a.inline { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .nojs-request p { margin: 8px 0 0; font-size: 15px; color: var(--ink-secondary); line-height: 1.55; }
   @media (max-width: 980px) { .book-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
   @media (max-width: 520px) { .book-card { padding: 24px 16px; border-radius: 16px; } .form-2 { grid-template-columns: 1fr; } .fee-amt { font-size: 52px; } }
 
@@ -372,6 +373,14 @@
   @media (max-width: 760px) { .sticky-book { display: flex; } }
   @media (max-width: 340px) { .sticky-book p > span { display: none; } }
 </style>
+<!-- Without JavaScript: FAQ answers open, and controls that need kw-live.js
+     (filters, the request form) are hidden; a plain email link replaces the form. -->
+<noscript><style>
+  .js-only { display: none !important; }
+  .faq-a { max-height: none !important; }
+  .faq-q { cursor: default; }
+  .faq-q .chev { display: none; }
+</style></noscript>
 </head>
 <body>
 
@@ -521,7 +530,7 @@
       <p class="lede" data-none="teachers" data-none-text="Each profile will show the levels, teaching languages and exam experience a teacher actually has. Profiles are published only once those details are confirmed." data-one-text="Levels taught, teaching languages, certificates and exam experience, exactly as the teacher has confirmed them. Open the profile for the full picture.">Compare levels, teaching languages and exam experience, then open a profile for the full picture.</p>
     </div>
 
-    <div class="filters" role="group" aria-label="Filter teachers">
+    <div class="filters js-only" role="group" aria-label="Filter teachers">
       <div class="filter-group filter-scroll" role="group" aria-label="Level taught">
         <span class="filter-label">Level</span>
         <button type="button" class="chip" data-tlevel="" aria-pressed="true">All</button>
@@ -561,7 +570,7 @@
       <h2 class="display-md" id="courses-h">Courses with a clear structure.</h2>
       <p class="lede">Each course lists its level, format, schedule and fee. Anything not yet confirmed is marked “to be announced”, never guessed.</p>
     </div>
-    <div class="filters">
+    <div class="filters js-only">
       <div class="filter-group filter-scroll" role="group" aria-label="Filter courses">
         <button type="button" class="chip" data-cgroup="" aria-pressed="true">All courses</button>
         <button type="button" class="chip" data-cgroup="beginner" aria-pressed="false">Beginner · A1–A2</button>
@@ -639,7 +648,13 @@
     </div>
 
     <div class="book-card" id="book-form">
-      <form id="consult-form" novalidate>
+      <noscript>
+        <div class="nojs-request">
+          <h3>Request a consultation by email</h3>
+          <p>This form needs JavaScript. Email <a class="inline" href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a> instead, with your name, current level, goal and preferred times (IST). Say whether you want a consultation or only want to hear when a course opens. We reply within two working days, Monday to Friday.</p>
+        </div>
+      </noscript>
+      <form id="consult-form" class="js-only" novalidate>
         <h3 id="form-title">Request a consultation</h3>
         <p class="sub">Fields marked <span class="req">*</span> are required. We reply <span data-reply-time>within two working days</span>.</p>
         <div class="err-summary" id="err-summary" role="alert" tabindex="-1" hidden></div>

@@ -2,6 +2,7 @@ import { corsHeaders, withCors, isForeignOriginWrite, configureCors } from "./co
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
+import { consultAvailability, createConsultBooking, getConsultBooking, listConsultBookings } from "./consultations.js";
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
@@ -76,6 +77,23 @@ async function route(request, env, ctx) {
     const orderMatch = url.pathname.match(/^\/orders\/(ord_[0-9a-f-]{36})$/);
     if (request.method === "GET" && orderMatch) {
       return withCors(await getOrder(request, env, orderMatch[1]), request);
+    }
+
+    /* Same-day ₹100 consultation booking (consultations.js). Off unless
+       CONSULT_BOOKING is "sandbox"/"live" and matches CASHFREE_ENV. Its
+       own table and order ids; it never grants a course. */
+    if (request.method === "GET" && url.pathname === "/consult/availability") {
+      return withCors(await consultAvailability(request, env), request);
+    }
+
+    if (url.pathname === "/consult/bookings") {
+      if (request.method === "POST") return withCors(await createConsultBooking(request, env), request);
+      if (request.method === "GET") return withCors(await listConsultBookings(request, env), request);
+    }
+
+    const consultMatch = url.pathname.match(/^\/consult\/bookings\/(KWC-[2-9A-HJ-NP-Z]{8})$/);
+    if (request.method === "GET" && consultMatch) {
+      return withCors(await getConsultBooking(request, env, consultMatch[1]), request);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/signup") {

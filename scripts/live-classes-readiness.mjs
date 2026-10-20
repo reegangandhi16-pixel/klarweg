@@ -64,6 +64,15 @@ export function checkData(D, root = ROOT) {
   if (c.termsConfirmed === true) for (const f of ['durationMinutes', 'platform', 'cancellation']) if (!has(c[f])) err(`consultation.${f}`, 'missing although termsConfirmed is true');
   if (!Array.isArray(c.steps) || !c.steps.length) err('consultation.steps', 'missing');
   for (const k of POLICIES) if (!(k in (D.policies || {}))) err(`policies.${k}`, 'key missing (use null while unpublished)');
+  // online booking with payment is an owner decision with legal consequences: never on by default
+  const ob = c.onlineBooking;
+  if (!ob || typeof ob.enabled !== 'boolean') err('consultation.onlineBooking', 'must be an object with enabled: true or false');
+  else if (ob.enabled) {
+    if (c.termsConfirmed !== true) err('consultation.onlineBooking', 'enabled needs confirmed consultation terms');
+    if (!has(ob.ownerApproval)) err('consultation.onlineBooking', 'enabled needs ownerApproval (how and when the owner approved online booking)');
+    if (ob.legalTermsUpdated !== true) err('consultation.onlineBooking', 'enabled needs legalTermsUpdated: Terms §4A, Privacy §4A and the page copy still describe email + UPI only');
+    if (!has(ob.joiningDetails)) err('consultation.onlineBooking', 'enabled needs joiningDetails (how the learner receives the Google Meet link)');
+  }
 
   const teachers = D.teachers || [], courses = D.courses || [], quotes = D.testimonials || [];
   unique('teacher', teachers); unique('course', courses);
@@ -117,11 +126,68 @@ export function checkData(D, root = ROOT) {
     if (k.enrolment === 'open' && k.format === 'Group batch' && !has(k.batchSize)) err(w, 'enrolment "open" for a group batch needs batchSize');
   }
 
+  if (!Array.isArray(D.reviews)) err('reviews', 'must be a list (empty until a genuine review exists)');
+  for (const [i, r] of (D.reviews || []).entries()) {
+    const w = `review ${i + 1}`;
+    if (!teacherById[r.teacherId]) err(w, `teacherId names unknown teacher "${r.teacherId}"`);
+    if (!Number.isInteger(r.rating) || r.rating < 1 || r.rating > 5) err(w, 'rating must be a whole number from 1 to 5');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(r.date || '')) err(w, 'date must be YYYY-MM-DD');
+    if (r.draft) continue;
+    if (teacherById[r.teacherId]?.draft) err(w, `published review names draft teacher "${r.teacherId}"`);
+    for (const p of placeholders(r)) err(w, `published review still has placeholder text "${p}"`);
+    for (const f of ['evidence', 'permission']) if (!has(r[f])) err(w, `published review needs ${f} (evidence = the booking reference or batch that shows the learner was taught; permission = how and when they agreed)`);
+  }
+
   for (const [i, q] of quotes.entries()) {
     if (q.draft) continue;
     for (const p of placeholders(q)) err(`testimonial ${i + 1}`, `published testimonial still has placeholder text "${p}"`);
     for (const f of ['quote', 'name', 'permission']) if (!has(q[f])) err(`testimonial ${i + 1}`, `published testimonial needs ${f} (permission = how and when written consent was given)`);
   }
+  return errors;
+}
+
+/* The rating shown for a teacher: computed from genuine, published,
+   evidenced reviews only (kw-live.js reviewSummary() is the same rule;
+   a static test keeps them in step). null = "No reviews yet". */
+export function reviewSummary(reviews, teacherId) {
+  const ok = (reviews || []).filter((r) => !r.draft && r.teacherId === teacherId && Number.isInteger(r.rating) && r.rating >= 1 && r.rating <= 5 && has(r.evidence) && has(r.permission));
+  if (!ok.length) return null;
+  return { count: ok.length, average: Math.round((ok.reduce((a, r) => a + r.rating, 0) / ok.length) * 10) / 10 };
+}
+
+export function publishedTeacherIds(root = ROOT) {
+  return (loadData(root).teachers || []).filter((t) => !t.draft).map((t) => t.id);
+}
+
+/* docs/live-classes-candidates.json: the 11 people the owner named on
+   2026-10-20, under opaque ids (names live in a private roster outside
+   this public repository). A draft candidate carries no facts at all. */
+export const CANDIDATE_DRAFT_KEYS = ['id', 'status', 'bookingEligible', 'profile', 'consent', 'photoConsent', 'availability', 'reviews'];
+export function loadCandidates(root = ROOT) {
+  return JSON.parse(read(root, 'docs/live-classes-candidates.json')).candidates;
+}
+export function checkCandidates(list, D, eligible) {
+  const errors = [];
+  const err = (where, msg) => errors.push(`${where}: ${msg}`);
+  const teacherById = Object.fromEntries((D.teachers || []).map((t) => [t.id, t]));
+  if (list.length !== 11) err('candidates', `expected the 11 people named on 2026-10-20, found ${list.length}`);
+  const ids = list.map((c) => c.id);
+  if (new Set(ids).size !== ids.length) err('candidates', 'duplicate id');
+  for (const c of list) {
+    const w = `candidate ${c.id}`;
+    if (c.status === 'draft') {
+      if (!/^candidate-\d{2}$/.test(c.id)) err(w, 'a draft candidate keeps an opaque id (candidate-NN) until published');
+      for (const k of Object.keys(c)) if (!CANDIDATE_DRAFT_KEYS.includes(k)) err(w, `draft candidate carries "${k}": no facts until verified (intake document)`);
+      for (const k of ['profile', 'consent', 'photoConsent', 'availability']) if (c[k] != null) err(w, `draft candidate has ${k} set`);
+      if (has(c.reviews)) err(w, 'draft candidate has reviews');
+      if (teacherById[c.id] && !teacherById[c.id].draft) err(w, 'is published in live-classes-data.js but still marked draft here');
+    } else if (c.status === 'published') {
+      const t = teacherById[c.id];
+      if (!t || t.draft) err(w, 'status "published" but no published teacher with this id in live-classes-data.js');
+    } else err(w, `status "${c.status}" (allowed: draft, published)`);
+  }
+  const elig = list.filter((c) => c.bookingEligible === true).map((c) => c.id).sort();
+  if (JSON.stringify(elig) !== JSON.stringify([...eligible].sort())) err('candidates', `bookingEligible (${elig.join(', ')}) must match ELIGIBLE_TEACHERS in consultations.js (${eligible.join(', ')})`);
   return errors;
 }
 
@@ -189,7 +255,8 @@ export function isAllowlisted(root = ROOT) {
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   const D = loadData();
-  const errors = checkData(D);
+  const { ELIGIBLE_TEACHERS } = await import('../access/worker/src/consultations.js');
+  const errors = checkData(D).concat(checkCandidates(loadCandidates(), D, ELIGIBLE_TEACHERS));
   const blockers = launchBlockers(D);
   console.log(`Live Classes readiness — page ${isAllowlisted() ? 'ALLOWLISTED (public)' : 'unpublished (not in the Pages allowlist)'}`);
   console.log(`\nData errors: ${errors.length ? '' : 'none'}`);

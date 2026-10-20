@@ -32,6 +32,9 @@
    validates the product id itself, so no catalog lookup is needed here. */
 import { grantProduct } from './entitlements.js';
 import { cashfreeBaseUrl, cashfreeConfigProblem } from './cashfree-config.js';
+/* Consultation orders ("cons_…") settle in consultations.js, which never
+   grants a product: a consultation payment cannot unlock a course. */
+import { isConsultOrderId, consultWebhook } from './consultations.js';
 
 const REPLAY_WINDOW_SECONDS = 300;          // 5 minutes
 const API_VERSION = '2023-08-01';
@@ -127,6 +130,12 @@ export async function cashfreeWebhook(request, env) {
   if (!claimedOrderId) return jsonResponse({ ok: true, ignored: true, reason: 'no-order-id' });
   if (claimedStatus !== 'SUCCESS') {
     return jsonResponse({ ok: true, ignored: true, reason: 'payment-not-success' });
+  }
+
+  /* 10a. A consultation booking, not a self-paced order: handled
+          entirely by consultations.js (own table, no grantProduct). */
+  if (isConsultOrderId(claimedOrderId)) {
+    return consultWebhook(env, claimedOrderId, claimedPaymentId);
   }
 
   /* 11. Local order, matched on the Cashfree order id we stored. */

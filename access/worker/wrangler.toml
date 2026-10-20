@@ -20,6 +20,19 @@ CASHFREE_ENV = "sandbox"
 CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
 
+# Same-day ₹100 consultation booking (src/consultations.js). OFF.
+#   "off"      no online booking; the Live Classes page keeps the email request
+#   "sandbox"  Cashfree TEST payments only (needs CASHFREE_ENV = "sandbox")
+#   "live"     real payments (needs CASHFREE_ENV = "production")
+# Anything but "off" needs `npm run deploy:access -- --allow-consult-booking=<mode>`,
+# and "live" also needs the owner decisions and launch checklist in
+# docs/live-classes-consultation-booking.md. CONSULT_TEACHERS lists the
+# bookable teacher ids: only "reegan-gandhi" and "candidate-01" are ever
+# accepted, and each must be published on the Live Classes page. A teacher
+# is bookable only on dates with a confirmed consult_availability row.
+CONSULT_BOOKING = "off"
+CONSULT_TEACHERS = ""
+
 # Klarweg AI (see src/ai.js). ON. Chapter AI: with the Chapter-1 preview at 0,
 # only accounts holding a level entitlement qualify. Homepage chat: buyers, plus
 # a few free questions a day for signed-out visitors (AI_ANON_* below).

@@ -4,6 +4,8 @@
 
 Use this document when a real teacher agrees to teach for Klarweg.
 
+The 10 further people the owner named on 2026-10-20 are recorded only as fact-free drafts with opaque ids in [`live-classes-candidates.json`](live-classes-candidates.json); their names are in a private roster outside the repository. Publish any of them only through this process. Reviews and same-day booking: see [`live-classes-consultation-booking.md`](live-classes-consultation-booking.md).
+
 **Keep the filled-in intake private.** The repository is public. Use [`templates/live-classes-teacher-intake.csv`](templates/live-classes-teacher-intake.csv) (headings only) as a spreadsheet, kept outside every Git folder. Only the fields the teacher approved for publication go into `live-classes-data.js`. Certificates, CVs, contracts, phone numbers and IDs never enter the repository.
 
 Don't announce new teachers, recruitment or "more teachers joining soon" on the site or in marketing until the owner approves that plan.

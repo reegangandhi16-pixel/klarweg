@@ -29,7 +29,7 @@ exam Worker: EXAM_ENABLED=on  EXAM_SYNTHETIC_FORMS=on  EXAM_MODULE_ONLY=lesen  (
   - full-form sheets of the same forms for a later review.
 
   It supersedes `EX-03-LESEN-479bd0e`, which is stale after the internal fixes. The fingerprints are those of main
-  after PR #RC_PR.
+  after PR #152.
 - **Status after return:** `node exam-content/tools/review-status.mjs <returned dir>` reports `lesen: approved` only
   when A, B and C approved every Lesen item, C approved each item's accessibility, the ratings are resolved and C
   signed originality (register §C.1, O1–O10). This is a report, not a release decision.

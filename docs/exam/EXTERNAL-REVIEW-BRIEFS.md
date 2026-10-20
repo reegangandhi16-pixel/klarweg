@@ -3,6 +3,10 @@
 **Purpose:** one page per external review, so the owner can commission each one without further preparation. Nothing
 here is a result. Each review stays **open** until the reviewer's own signed deliverable exists (register §C).
 
+**Lesen-only first release (proposal, not chosen by the owner):** if the owner adopts it, use
+`LESEN-ONLY-REVIEW-EVIDENCE.md` with these briefs. It narrows EX-03, EX-04, EX-01 and EX-05 to what that release uses
+and lists the existing evidence.
+
 Common facts for every reviewer:
 - **What it is:** a Goethe-style B1 *practice* simulation by Klarweg. It is not an official exam, and every result says so
   (OD-45).

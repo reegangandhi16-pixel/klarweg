@@ -15,6 +15,9 @@
      than 2; the recorded value is the mean of the agreeing pair. If A and B disagree, C's rating decides only when it
      agrees with exactly one of them; otherwise (neither or both) A and B must re-rate.
    Form status: not started · in review · needs revision · approved (everything above satisfied, nothing pending).
+   Module status (modules.lesen etc.): the same rules over that module's items and tasks only, plus the form's
+   originality sign-off (O3) and three usable slots — what a single-module release (EXAM_MODULE_ONLY) would rely on.
+   A module status is reported, never an approval of the module for release (that remains the owner's decision).
 
    Usage: node exam-content/tools/review-status.mjs <returned-records-dir> [--out <report-dir outside the repo>] */
 import fs from 'node:fs';
@@ -25,6 +28,7 @@ import { reviewRecord, RECORD_VERSION } from './review-sheet.mjs';
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SLOTS = ['A', 'B', 'C'];
+const MODULES = ['lesen', 'hoeren', 'schreiben', 'sprechen'];
 const VERDICTS = new Set(['approve', 'revise', 'reject']);
 const RATINGS = ['inference_demand', 'distractor_strength'];
 const isInt = (v, lo, hi) => Number.isInteger(v) && v >= lo && v <= hi;
@@ -83,8 +87,10 @@ export function reviewStatus(records, forms = PRACTICE_FORMS) {
   for (const { file, record, error } of records) if (error || !record || !forms.some((f) => f.form_id === record.form_id)) report.unassigned.push({ file, reason: error || `unknown form_id ${record && JSON.stringify(record.form_id)}` });
   for (const form of forms) {
     const template = reviewRecord(form);
+    const moduleOf = Object.fromEntries(JSON.parse(form.files['items.json']).map((it) => [it.id, it.module]));
     const mine = records.filter((r) => r.record && r.record.form_id === form.form_id);
-    const fr = { form: form.name, form_id: form.form_id, content_sha256: template.content_sha256, status: 'not started', records: [], stale: [], problems: [], items: [], tasks: [], originality: null, summary: {} };
+    const fr = { form: form.name, form_id: form.form_id, content_sha256: template.content_sha256, status: 'not started', records: [], stale: [], problems: [], items: [], tasks: [], originality: null, summary: {},
+      modules: Object.fromEntries(MODULES.map((m) => [m, 'not started'])) };
     const current = [];
     for (const { file, record } of mine) {
       if (record.record_version !== RECORD_VERSION) { fr.stale.push({ file, reason: `template version ${JSON.stringify(record.record_version)} has no content fingerprint` }); continue; }
@@ -122,10 +128,15 @@ export function reviewStatus(records, forms = PRACTICE_FORMS) {
     const all = [...fr.items, ...fr.tasks];
     const ratingsPending = fr.items.filter((i) => RATINGS.some((r) => i.ratings[r].pending)).length;
     fr.summary = { approved: all.filter((u) => u.status === 'approved').length, needs_revision: all.filter((u) => u.status === 'needs revision').length, in_review: all.filter((u) => u.status === 'in review').length, total: all.length, ratings_pending: ratingsPending };
-    if (fr.problems.length) fr.status = 'in review';
-    else if (fr.summary.needs_revision || (fr.originality && fr.originality !== 'approve')) fr.status = 'needs revision';
-    else if (fr.summary.approved === all.length && fr.originality === 'approve' && !ratingsPending && SLOTS.every((s) => usable[s])) fr.status = 'approved';
-    else fr.status = 'in review';
+    const statusOf = (units) => {
+      const pending = units.filter((i) => i.ratings && RATINGS.some((r) => i.ratings[r].pending)).length;
+      if (fr.problems.length) return 'in review';
+      if (units.some((u) => u.status === 'needs revision') || (fr.originality && fr.originality !== 'approve')) return 'needs revision';
+      if (units.length && units.every((u) => u.status === 'approved') && fr.originality === 'approve' && !pending && SLOTS.every((s) => usable[s])) return 'approved';
+      return 'in review';
+    };
+    fr.status = statusOf(all);
+    for (const m of MODULES) fr.modules[m] = statusOf(all.filter((u) => moduleOf[u.item_id] === m));
     report.forms.push(fr);
   }
   return report;
@@ -142,8 +153,8 @@ const cell = (v) => String(v).replace(/\\/g, '\\\\').replace(/\|/g, '\\|').repla
 
 export function summaryMarkdown(report) {
   const lines = ['# EX-03 review status (computed from returned records; not an approval)', '', `Generated ${report.generated_at}. Template ${report.record_version}.`, '',
-    '| Form | Status | Records (slot: reviewer) | Approved / needs revision / in review | Ratings pending | Originality (C) | Stale | Problems |', '|---|---|---|---|---|---|---|---|'];
-  for (const f of report.forms) lines.push(`| ${f.form} | ${f.status} | ${f.records.map((r) => `${r.slot}: ${cell(r.reviewer_id)}${r.complete ? '' : ' (incomplete)'}${r.errors.length ? ` (${r.errors.length} errors)` : ''}`).join('; ') || '–'} | ${f.summary.total ? `${f.summary.approved} / ${f.summary.needs_revision} / ${f.summary.in_review}` : '–'} | ${f.summary.ratings_pending ?? '–'} | ${f.originality || '–'} | ${f.stale.length} | ${cell(f.problems.join('; ')) || '–'} |`);
+    '| Form | Status | Lesen · Hören · Schreiben · Sprechen | Records (slot: reviewer) | Approved / needs revision / in review | Ratings pending | Originality (C) | Stale | Problems |', '|---|---|---|---|---|---|---|---|---|'];
+  for (const f of report.forms) lines.push(`| ${f.form} | ${f.status} | ${MODULES.map((m) => f.modules[m]).join(' · ')} | ${f.records.map((r) => `${r.slot}: ${cell(r.reviewer_id)}${r.complete ? '' : ' (incomplete)'}${r.errors.length ? ` (${r.errors.length} errors)` : ''}`).join('; ') || '–'} | ${f.summary.total ? `${f.summary.approved} / ${f.summary.needs_revision} / ${f.summary.in_review}` : '–'} | ${f.summary.ratings_pending ?? '–'} | ${f.originality || '–'} | ${f.stale.length} | ${cell(f.problems.join('; ')) || '–'} |`);
   if (report.unassigned.length) lines.push('', 'Not assigned to a form:', ...report.unassigned.map((u) => `- ${u.file}: ${u.reason}`));
   return lines.join('\n') + '\n';
 }

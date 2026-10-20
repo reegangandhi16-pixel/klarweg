@@ -151,3 +151,29 @@ test('REVIEW STATUS summary: reviewer ids with a pipe or a line break cannot bre
   assert.ok(row.includes('Dr. X \\| Uni') && row.includes('line break'), row);
   assert.equal(md.filter((l) => l.startsWith('|')).every((l) => cells(l) === header), true);
 });
+
+test('REVIEW STATUS per module: Lesen can be approved while the other modules are unreviewed; the form stays in review', () => {
+  const items = JSON.parse(P3.files['items.json']);
+  const moduleOf = Object.fromEntries(items.map((it) => [it.id, it.module]));
+  const lesenOnly = (slot, id, opts = {}) => filled(slot, id, { ...opts, edit: (r) => {
+    for (const x of [...r.items, ...r.tasks]) if (moduleOf[x.item_id] !== 'lesen') { x.verdict = ''; x.accessibility = ''; x.inference_demand = null; x.distractor_strength = null; x.ambiguity_risk = null; }
+    if (opts.edit) opts.edit(r);
+  } });
+  let f = status(lesenOnly('A', 'rev-a'), lesenOnly('B', 'rev-b'), lesenOnly('C', 'rev-c'));
+  assert.equal(f.status, 'in review');
+  assert.deepEqual(f.modules, { lesen: 'approved', hoeren: 'in review', schreiben: 'in review', sprechen: 'in review' });
+  // one Lesen revise → Lesen needs revision; a Hören reject never touches Lesen's status but does the form's
+  f = status(lesenOnly('A', 'rev-a'), lesenOnly('B', 'rev-b', { edit: (r) => { r.items.find((x) => moduleOf[x.item_id] === 'lesen').verdict = 'revise'; } }), lesenOnly('C', 'rev-c'));
+  assert.equal(f.modules.lesen, 'needs revision');
+  f = status(lesenOnly('A', 'rev-a'), lesenOnly('B', 'rev-b', { edit: (r) => { r.items.find((x) => moduleOf[x.item_id] === 'hoeren').verdict = 'reject'; } }), lesenOnly('C', 'rev-c'));
+  assert.deepEqual([f.status, f.modules.lesen, f.modules.hoeren], ['needs revision', 'approved', 'needs revision']);
+  // the form-wide originality sign-off (O3) and three usable slots (O1) still gate the module
+  assert.equal(status(lesenOnly('A', 'rev-a'), lesenOnly('B', 'rev-b'), lesenOnly('C', 'rev-c', { edit: (r) => { r.originality_signoff.verdict = ''; } })).modules.lesen, 'in review');
+  assert.equal(status(lesenOnly('A', 'rev-a'), lesenOnly('B', 'rev-b')).modules.lesen, 'in review');
+  assert.equal(status(lesenOnly('A', 'same'), lesenOnly('B', 'rev-b'), lesenOnly('C', 'same')).modules.lesen, 'in review');
+  // unresolved Lesen ratings keep it in review
+  assert.equal(status(lesenOnly('A', 'rev-a', { rating: 1 }), lesenOnly('B', 'rev-b', { rating: 5 }), lesenOnly('C', 'rev-c')).modules.lesen, 'in review');
+  // a full approval approves every module
+  assert.deepEqual(Object.values(status(filled('A', 'rev-a'), filled('B', 'rev-b'), filled('C', 'rev-c')).modules), ['approved', 'approved', 'approved', 'approved']);
+  assert.match(summaryMarkdown(reviewStatus([lesenOnly('A', 'rev-a'), lesenOnly('B', 'rev-b'), lesenOnly('C', 'rev-c')], ONLY)), /\| P3 \| in review \| approved · in review · in review · in review \|/);
+});

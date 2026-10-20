@@ -13,7 +13,11 @@
    fingerprint matches the current content; a record of an older revision is stale. Slot C also records the item-level
    accessibility verdict (EX-03/O4) per item and task.
 
-   Usage: node exam-content/tools/review-sheet.mjs <out-dir outside the repo> [p3 …] */
+   MODULE SCOPE (--module lesen): the HTML sheet shows only that module's tasks, for a single-module release
+   (EXAM_MODULE_ONLY). The JSON record stays the full-form template, so a later full review needs no new record; the
+   other modules' entries stay blank, and review-status.mjs reports each module's status separately.
+
+   Usage: node exam-content/tools/review-sheet.mjs <out-dir outside the repo> [--module lesen] [p3 …] */
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import path from 'node:path';
@@ -57,7 +61,9 @@ export function reviewRecord(form) {
   };
 }
 
-export function reviewSheetHtml(form) {
+export const REVIEW_MODULES = Object.freeze(Object.keys(MODULE));
+
+export function reviewSheetHtml(form, { modules = REVIEW_MODULES } = {}) {
   const j = (n) => JSON.parse(form.files[n]);
   const items = j('items.json'), tasks = j('tasks.json'), assets = j('assets.json'), keys = j('keys.json').keys;
   const asset = (id) => assets.find((a) => a.id === id);
@@ -70,12 +76,12 @@ export function reviewSheetHtml(form) {
 <style>body{font:14px/1.45 system-ui,sans-serif;margin:24px;color:#111}h1{font-size:20px}h2{margin-top:28px;border-bottom:1px solid #999}
 .stim{white-space:pre-wrap;background:#f4f4f0;padding:8px;margin:6px 0}.key{font-weight:600}table{border-collapse:collapse;width:100%;margin:6px 0}
 td,th{border:1px solid #bbb;padding:4px;vertical-align:top}.box{display:inline-block;min-width:110px;border-bottom:1px solid #000}@media print{h2{break-before:page}}</style></head><body>
-<h1>EX-03 Review — ${esc(form.name)} (${esc(form.form_id)})</h1>
+<h1>EX-03 Review — ${esc(form.name)} (${esc(form.form_id)})${modules.length < REVIEW_MODULES.length ? ` — nur ${esc(modules.map((m) => MODULE[m]).join(', '))}` : ''}</h1>${modules.length < REVIEW_MODULES.length ? `<p><b>Scope: ${esc(modules.map((m) => MODULE[m]).join(', '))} only.</b> Record verdicts and ratings for these items only and leave the other entries of the JSON record blank. The originality sign-off (slot C) still covers the whole form.</p>` : ''}
 <p>Klarweg synthetic practice, not an official exam. CONFIDENTIAL review material (keys, explanations, listening scripts). Do not share.</p>
 <p>Reviewer slot (A/B/C): <span class="box"></span> Reviewer id: <span class="box"></span> Role (content/language/teacher/originality/accessibility): <span class="box"></span> Native German speaker (yes/no): <span class="box"></span> Date: <span class="box"></span></p>
 <p>Content fingerprint: <code>${formFingerprint(form)}</code> — copy it unchanged into your record; a review of another version does not count (EX-03/O6).</p>
 <p>Per item: verdict <b>approve / revise / reject</b>; ambiguity_risk <b>0</b> none · <b>1</b> minor · <b>2</b> must fix; inference_demand and distractor_strength <b>1–5</b> (anchors: GOETHE-B1-DIFFICULTY-BENCHMARK §2.2). Slot C also gives the item-level accessibility verdict (EX-03/O4).</p>`];
-  for (const m of ['lesen', 'hoeren', 'schreiben', 'sprechen']) {
+  for (const m of REVIEW_MODULES.filter((x) => modules.includes(x))) {
     for (const t of tasks.filter((x) => x.module === m)) {
       out.push(`<h2>${MODULE[m]} Teil ${t.part} — ${esc(t.id)}</h2><p>${esc(t.instructions.text_de)}</p>${t.context_line ? `<p><i>${esc(t.context_line)}</i></p>` : ''}`);
       for (const s of t.stimuli) { const a = asset(s.asset_id); const src = sourceOf(a); if (src) out.push(`<div class="stim"><b>${esc(s.label || s.role)}${esc(topicNote(s))}</b>${a.kind === 'audio' ? ' (script; audio is TEST AUDIO)' : ''}\n${esc(src)}</div>`); }
@@ -96,20 +102,24 @@ td,th{border:1px solid #bbb;padding:4px;vertical-align:top}.box{display:inline-b
   return out.join('\n');
 }
 
-export function writeReviewSheets(outDir, names = []) {
+export function writeReviewSheets(outDir, names = [], { modules = REVIEW_MODULES } = {}) {
+  if (!modules.length || modules.some((m) => !REVIEW_MODULES.includes(m))) throw new Error(`unknown module in ${modules.join(',')} (${REVIEW_MODULES.join('|')})`);
   const dir = path.resolve(outDir);
   if (dir === REPO || dir.startsWith(REPO + path.sep)) throw new Error('refusing to write review sheets inside the repository (they contain keys)');
   fs.mkdirSync(dir, { recursive: true });
   const forms = PRACTICE_FORMS.filter((f) => !names.length || names.includes(f.name.toLowerCase()));
   for (const f of forms) {
-    fs.writeFileSync(path.join(dir, `${f.name}-review.html`), reviewSheetHtml(f));
+    fs.writeFileSync(path.join(dir, `${f.name}-review${modules.length < REVIEW_MODULES.length ? `-${modules.join('-')}` : ''}.html`), reviewSheetHtml(f, { modules }));
     fs.writeFileSync(path.join(dir, `${f.name}-review.json`), JSON.stringify(reviewRecord(f), null, 2) + '\n');
   }
   return forms.map((f) => f.name);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const [out, ...names] = process.argv.slice(2);
-  if (!out) { console.error('usage: review-sheet.mjs <out-dir outside the repo> [p3 …]'); process.exit(2); }
-  console.log(JSON.stringify({ written: writeReviewSheets(out, names.map((n) => n.toLowerCase())), dir: path.resolve(out) }));
+  const a = process.argv.slice(2);
+  const mi = a.indexOf('--module');
+  const modules = mi >= 0 ? String(a[mi + 1] || '').split(',').filter(Boolean) : REVIEW_MODULES;
+  const [out, ...names] = a.filter((x, i) => !(mi >= 0 && (i === mi || i === mi + 1)));
+  if (!out || out.startsWith('--')) { console.error('usage: review-sheet.mjs <out-dir outside the repo> [--module lesen] [p3 …]'); process.exit(2); }
+  console.log(JSON.stringify({ written: writeReviewSheets(out, names.map((n) => n.toLowerCase()), { modules }), modules, dir: path.resolve(out) }));
 }

@@ -60,7 +60,9 @@ sets it, and the guard refuses it in `wrangler.toml`. Tests: `access/worker/test
 1. `wrangler d1 create klarweg-exam-nonprod` and `wrangler d1 create klarweg-access-nonprod`; copy each id into the `database_id` of the matching `wrangler.nonprod.toml` (ids are not secrets; commit them through a reviewed PR — `scripts/nonprod-config.test.mjs` rejects a production id. Never edit `wrangler.toml`).
 2. Create both R2 buckets. Keep them **private**: no public domain, no r2.dev.
 3. **Schemas:**
-   - exam: `cd exam-worker && npx wrangler d1 migrations apply klarweg-exam-nonprod --config wrangler.nonprod.toml --remote`;
+   - exam: `cd exam-worker && npx wrangler d1 migrations apply klarweg-exam-nonprod --config wrangler.nonprod.toml --remote`
+     (applies every pending migration; a Worker built after `0002_attempt_module_scope.sql` needs it applied **before**
+     its deploy, or creating attempts fails);
    - Access: `access/worker/schema.sql`, then every `access/worker/migration-*.sql` in order, **including
      `migration-011-totp.sql`**, against `klarweg-access-nonprod` with `npx wrangler d1 execute klarweg-access-nonprod --config wrangler.nonprod.toml --remote --file <file>` (from `access/worker`).
 4. **Content:**

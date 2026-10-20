@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView } from './render.js';
+import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -46,11 +46,11 @@ async function boot() {
     const av = await api.availability();
     const open = av.open_attempts[0];
     if (open) return resume(open.attempt_id);
-    const mode = av.modes.find((m) => m.mode === 'synthetic_full' && m.available);
-    if (!mode) return message('Nicht verfügbar', 'Der Prüfungsbereich ist für Ihr Konto noch nicht freigeschaltet.');
+    const choice = startChoice(av);
+    if (!choice) return message('Nicht verfügbar', 'Der Prüfungsbereich ist für Ihr Konto noch nicht freigeschaltet.');
     let history = '';
     if (av.last_completed) { try { history = attemptHistory(await api.myAttempts()); } catch { /* the start screen works without it */ } }
-    screen(`<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create">Übung starten</button>${av.last_completed ? `<button class="kx-btn-quiet" data-act="last-result" data-attempt="${esc(av.last_completed)}">Letztes Ergebnis ansehen</button>` : ''}</div>${history}</main>`);
+    screen(startScreen(choice, { lastCompleted: av.last_completed, history }));
   } catch (e) { fail(e); }
 }
 
@@ -125,7 +125,7 @@ async function route() {
   const a = nextAction(S.attempt);
   if (a.kind === 'start') return intro(a.module);
   if (a.kind === 'resume') return openModule(a.module);
-  if (a.kind === 'complete') return screen('<main class="kx-card"><h1>Alle Module abgegeben</h1><p>Schließen Sie die Übung ab, um das Ergebnis zu sehen.</p><div class="kx-actions"><button class="kx-btn" data-act="complete">Abschließen</button></div></main>');
+  if (a.kind === 'complete') return screen(`<main class="kx-card"><h1>${S.attempt.module_scope ? 'Modul abgegeben' : 'Alle Module abgegeben'}</h1><p>Schließen Sie die Übung ab, um das Ergebnis zu sehen.</p><div class="kx-actions"><button class="kx-btn" data-act="complete">Abschließen</button></div></main>`);
   if (a.kind === 'result') return showResult();
   if (a.kind === 'wait') return message('Abgabe wird abgeschlossen', 'Ihre Abgabe ist gespeichert und wird gerade abgeschlossen.', '<button class="kx-btn" data-act="reload">Erneut prüfen</button>');
 }
@@ -507,7 +507,7 @@ app.addEventListener('click', async (e) => {
       } catch { b.disabled = false; b.textContent = 'Erneut versuchen'; }
       return;
     }
-    if (act === 'create') { const r = await api.createAttempt({ mode: 'synthetic_full', level: 'b1', device_id: deviceId() }); S.lease = r.lease.lease_id; rememberLease(r.attempt_id, S.lease); S.attempt = r; return route(); }
+    if (act === 'create') { const r = await api.createAttempt({ mode: b.dataset.mode || 'synthetic_full', level: 'b1', ...(b.dataset.module ? { module: b.dataset.module } : {}), device_id: deviceId() }); S.lease = r.lease.lease_id; rememberLease(r.attempt_id, S.lease); S.attempt = r; return route(); }
     if (act === 'takeover') return resume(b.dataset.attempt || S.attempt.attempt_id, true);
     if (act === 'start') {
       b.disabled = true;

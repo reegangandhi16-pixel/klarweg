@@ -48,3 +48,22 @@ test('REVIEW SHEET: the Teil 3 partner talks and examiner questions say which to
     for (const role of ['partner_audio', 'examiner_audio']) for (const n of ['1', '2']) assert.ok(html.includes(`<b>${role} — für Lernende mit Thema ${n}</b>`), `${f.name}: ${role} for Thema ${n}`);
   }
 });
+
+test('REVIEW SHEET --module lesen: only the Lesen tasks, a scope note, the full JSON template; unknown modules refused', () => {
+  const p3 = PRACTICE_FORMS.find((f) => f.name === 'P3');
+  const html = reviewSheetHtml(p3, { modules: ['lesen'] });
+  assert.match(html, /nur Lesen/); assert.match(html, /Scope: Lesen only/);
+  assert.ok(html.includes('<h2>Lesen Teil 1'));
+  assert.equal(/<h2>(Hören|Schreiben|Sprechen) Teil/.test(html), false);
+  assert.match(html, /Originality sign-off/);
+  const full = reviewSheetHtml(p3);
+  assert.equal(/Scope:/.test(full), false); assert.ok(full.includes('<h2>Sprechen Teil'));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-sheet-mod-'));
+  try {
+    assert.deepEqual(writeReviewSheets(dir, ['p3'], { modules: ['lesen'] }), ['P3']);
+    assert.deepEqual(fs.readdirSync(dir).sort(), ['P3-review-lesen.html', 'P3-review.json']);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(dir, 'P3-review.json'), 'utf8')), reviewRecord(p3));
+    assert.throws(() => writeReviewSheets(dir, ['p3'], { modules: ['lessen'] }), /unknown module/);
+    assert.throws(() => writeReviewSheets(dir, ['p3'], { modules: [] }), /unknown module/);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});

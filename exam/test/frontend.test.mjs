@@ -10,7 +10,7 @@ import { memoryStore } from '../js/store.js';
 import { createApi, ExamApiError } from '../js/api.js';
 import { phaseAt, phaseLabel } from '../js/hoeren.js';
 import { ChunkQueue, sha256Hex } from '../js/recorder.js';
-import { createRenderer, resultPage, header, moduleNav, reviewPanel, itemReview, testBanner, recordingsSection, ratedFeedback, esc, RESULT_TITLE, RESULT_DISCLAIMER, errorView } from '../js/render.js';
+import { createRenderer, resultPage, header, moduleNav, reviewPanel, itemReview, testBanner, recordingsSection, ratedFeedback, esc, RESULT_TITLE, RESULT_DISCLAIMER, errorView, startChoice, startScreen } from '../js/render.js';
 import { nextAction, assertSupported, unansweredCount, answerableItems, partProgress, isAnswered, itemNumber } from '../js/engine.js';
 import { countWords } from '../js/wordcount.js';
 import { speakingSchedule, speakingPhaseAt, prepEndsAt, partOfPhase, partForListenPhase, speakingItemsForPart, partnerAssetFor,
@@ -630,4 +630,26 @@ test('CSP: both exam pages carry a strict Content-Security-Policy and contain no
     const src = fs.readFileSync(new URL(`../js/${f}`, import.meta.url), 'utf8');
     assert.equal(/\sstyle=\\?["']|\son(click|load|error|change|input|submit)=|eval\(|new Function\(/.test(src), false, `${f}: no inline style/handler/eval in rendered HTML`);
   }
+});
+
+test('START SCREEN: full simulation when available, else the single available module (Lesen-only self-practice), else nothing', () => {
+  const m = (mode, available, extra = {}) => ({ mode, level: 'b1', available, reason: available ? null : 'disabled', ...extra });
+  assert.equal(startChoice({ modes: [] }), null);
+  assert.equal(startChoice({ modes: [m('synthetic_full', false), m('synthetic_module', false, { module: null })] }), null);
+  assert.deepEqual(startChoice({ modes: [m('synthetic_full', true), m('synthetic_module', true, { module: 'lesen' })] }), { mode: 'synthetic_full', module: null });
+  const lesen = startChoice({ modes: [m('synthetic_full', false), m('synthetic_module', true, { module: 'lesen' })] });
+  assert.deepEqual(lesen, { mode: 'synthetic_module', module: 'lesen' });
+  assert.equal(startChoice({ modes: [m('synthetic_module', true, { module: 'nope' })] }), null);
+  assert.equal(startChoice({ modes: [{ ...m('synthetic_module', true, { module: 'lesen' }), level: 'b2' }] }), null);
+
+  const one = startScreen(lesen, { lastCompleted: 'att_1' });
+  assert.match(one, /data-act="create" data-mode="synthetic_module" data-module="lesen"/);
+  assert.match(one, /Hören, Schreiben und Sprechen sind in dieser Version nicht verfügbar/);
+  assert.match(one, /kein Prüfungsergebnis und keine Vorhersage/);
+  assert.match(one, /data-act="last-result" data-attempt="att_1"/);
+  assert.equal(/allen vier Modulen|Goethe|bestehen Sie|garantiert/i.test(one), false);
+  const full = startScreen({ mode: 'synthetic_full', module: null });
+  assert.match(full, /allen vier Modulen/); assert.match(full, /data-act="create" data-mode="synthetic_full">/);
+  assert.equal(/data-module=/.test(full), false);
+  assert.equal(/<h1>/.test(one) && (one.match(/<h1/g) || []).length, 1);
 });

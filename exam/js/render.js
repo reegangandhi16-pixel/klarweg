@@ -168,8 +168,32 @@ export function reviewPanel(progress) {
 /* Item review after submission (server data only: GET …/modules/<m>/review). Numbers as shown in the test. */
 const REVIEW_STATUS = { correct: 'richtig', incorrect: 'falsch', unanswered: 'ohne Antwort' };
 const answerText = (a) => (a ? `${a.label}${a.text ? ` – ${a.text}` : ''}` : '–');
-/* The learner's completed practices, newest first: date, form, per-module result, and a way back into each result. */
 const MODULE_ORDER = ['lesen', 'hoeren', 'schreiben', 'sprechen'];
+/* Which attempt the start screen offers: the full simulation when available, else the first available single module
+   (a Lesen-only self-practice release, EXAM_MODULE_ONLY). null = nothing available for this account. */
+export function startChoice(av) {
+  const ok = (av && av.modes || []).filter((m) => m.available && m.level === 'b1');
+  const full = ok.find((m) => m.mode === 'synthetic_full');
+  if (full) return { mode: full.mode, module: null };
+  const one = ok.find((m) => m.mode === 'synthetic_module' && MODULE_LABELS[m.module]);
+  return one ? { mode: one.mode, module: one.module } : null;
+}
+
+export function startScreen(choice, { lastCompleted = null, history = '' } = {}) {
+  const last = lastCompleted ? `<button class="kx-btn-quiet" data-act="last-result" data-attempt="${esc(lastCompleted)}">Letztes Ergebnis ansehen</button>` : '';
+  if (!choice.module) {
+    return `<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}">Übung starten</button>${last}</div>${history}</main>`;
+  }
+  const label = MODULE_LABELS[choice.module];
+  const others = MODULE_ORDER.filter((m) => m !== choice.module).map((m) => MODULE_LABELS[m]);
+  const tail = `${others.slice(0, -1).join(', ')} und ${others[others.length - 1]}`;
+  return `<main class="kx-card"><p class="kx-eyebrow">Selbstlernübung · nur ${esc(label)} · synthetische Inhalte</p><h1>Klarweg B1 ${esc(label)} – Übung</h1>`
+    + `<p>Eine Übung nur zum Modul ${esc(label)}, mit Prüfungszeit. Die Zeit läuft auf dem Server. ${esc(tail)} sind in dieser Version nicht verfügbar.</p>`
+    + `<p>Nach der Abgabe sehen Sie Ihre Punkte für dieses Modul und jede Aufgabe mit Lösung und Erklärung. Das ist eine Übungsauswertung, kein Prüfungsergebnis und keine Vorhersage für die Prüfung.</p>`
+    + `<div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}" data-module="${esc(choice.module)}">${esc(label)} üben</button>${last}</div>${history}</main>`;
+}
+
+/* The learner's completed practices, newest first: date, form, per-module result, and a way back into each result. */
 export function attemptHistory(list, formatDate = (ms) => new Date(ms).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })) {
   const rows = (list.attempts || []).map((a) => {
     const cell = (mod) => {

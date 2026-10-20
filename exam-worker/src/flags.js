@@ -3,6 +3,9 @@
      EXAM_SYNTHETIC_FORMS    synthetic engine-test forms may be assigned
      EXAM_MOCK_FORMS         Mock M0 forms may be assigned           (no content yet)
      EXAM_PRODUCTION_FORMS   production simulation sets may be assigned (no content yet)
+     EXAM_MODULE_ONLY        unset (default): full attempts only, single-module attempts refused.
+                             A comma list of modules (e.g. "lesen"): ONLY single-module attempts of those modules;
+                             full four-module attempts are refused. Any unknown entry disables every mode (fail closed).
    EXAM_ROUTES lives in klarweg-access (the /exam/* proxy). */
 
 const on = (v) => v === 'on';
@@ -16,9 +19,42 @@ export function flags(env) {
   };
 }
 
-/* mode → which form kinds may be assigned and which flag gates it */
+export const EXAM_MODULES = Object.freeze(['lesen', 'hoeren', 'schreiben', 'sprechen']);
+
+/* EXAM_MODULE_ONLY → null (unset: full attempts as before) | { ok: true, modules } | { ok: false } (misconfigured) */
+export function moduleOnly(env) {
+  const raw = env.EXAM_MODULE_ONLY;
+  if (raw === undefined || raw === null || String(raw).trim() === '') return null;
+  const list = String(raw).split(',').map((x) => x.trim()).filter(Boolean);
+  if (!list.length || list.some((m) => !EXAM_MODULES.includes(m))) return { ok: false, modules: [] };
+  return { ok: true, modules: EXAM_MODULES.filter((m) => list.includes(m)) };
+}
+
+/* API mode → which form kinds may be assigned and which flag gates it. A single-module mode (ENGINE §2
+   simulation_module) assigns a form exactly like its full family and keeps only the chosen module; it is stored with
+   the family's mode (attempts.mode) plus attempts.module_scope, so one practice attempt per family is open at a time. */
 export const MODES = {
   synthetic_full: { kinds: ['synthetic'], flag: 'synthetic', access_scope: 'synthetic' },
   mock_m0: { kinds: ['mock'], flag: 'mock', access_scope: 'mock' },
-  simulation_full: { kinds: ['set'], flag: 'production', access_scope: 'sets' }
+  simulation_full: { kinds: ['set'], flag: 'production', access_scope: 'sets' },
+  synthetic_module: { kinds: ['synthetic'], flag: 'synthetic', access_scope: 'synthetic', family: 'synthetic_full', single_module: true },
+  simulation_module: { kinds: ['set'], flag: 'production', access_scope: 'sets', family: 'simulation_full', single_module: true }
 };
+
+/* the API mode of a stored attempt */
+export function apiMode(attempt) {
+  if (!attempt.module_scope) return attempt.mode;
+  const m = Object.entries(MODES).find(([, d]) => d.single_module && d.family === attempt.mode);
+  return m ? m[0] : attempt.mode;
+}
+
+/* why a mode (and, for a single-module mode, a module) may not be used now; null = allowed */
+export function modeBlock(env, def, module = null) {
+  if (!flags(env)[def.flag]) return 'disabled';
+  const only = moduleOnly(env);
+  if (only && !only.ok) return 'misconfigured';
+  if (!def.single_module) return only ? 'module_only' : null;
+  if (!only) return 'disabled';
+  if (module !== null && !only.modules.includes(module)) return 'module_disabled';
+  return null;
+}

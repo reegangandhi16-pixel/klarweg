@@ -33,3 +33,32 @@ line, for example by replying "D1 yes, D2 P3+P8+P13, …".
 
 They matter only when Schreiben, Sprechen or Hören are added. Staff routes stay protected by the second factor, whose
 production key is part of D9.
+
+## Reply template: answer everything in one message
+Copy the block, replace each `[…]` with your choice, and send it back. Anything left as `[…]` stays undecided. Engineering
+records only what is written, quotes it in the relevant document, and does nothing that a blank item would require.
+
+```
+Lesen-only decisions — [date]
+D1 Lesen-only as first learner release: [yes / no]
+D2 Candidate forms for review: [P3+P8+P13 / other: …]
+D3 EX-03 organiser (sends packet, receives records): [name or role] ; engineering runs the record checks: [yes / no]
+D4 OD-08 instruction wording: [paraphrase is enough for this release / legal clearance first]
+D5 OD-41 accommodations at first release: [none at first / extra time on documented request (admin-granted, 25–100 %) / other: …]
+D6 External reviews to commission: EX-01 [who/when] · EX-04 [who/when] · EX-05 [who/when] · EX-07 [who/when]
+D7 Attempt-data retention: [delete N months after completion: N = … / keep until account deletion / decide with EX-01]
+D8 Production same-site domain for site + API: [domain / later]
+D9 Production authorisation: [not yet / yes, after all gates]
+```
+
+| # | Safe answers (none is a recommendation to skip a gate) | Consequence of each answer |
+|---|---|---|
+| D1 | yes / no | **yes:** EX-03 can start on Lesen only. **no:** nothing changes; the full four-module gates stay on the critical path |
+| D2 | prepared set / other | Prepared set: the packet is ready now. Another set: engineering regenerates the packet; no review effort is lost, because none has started |
+| D3 | a named person | Until named, the packet cannot be sent. "Engineering runs the record checks" means the organiser only forwards the returned files |
+| D4 | paraphrase / clearance | Paraphrase: no new dependency. Clearance: the release waits for counsel. Neither changes code |
+| D5 | none at first / extra time on request / other | **None at first:** no evidence process is needed (EX-08), but learners who need extra time cannot use the timed module fairly; the accessibility reviewer may flag this. **Extra time on request:** an admin grants it per learner and the EX-08 evidence process applies. The engine supports both |
+| D6 | names + timing per review | Each brief and e-mail draft is ready (`EXTERNAL-REVIEW-OUTREACH.md`). Fees and contracts are the owner's decisions |
+| D7 | a period / until account deletion / with EX-01 | **A period:** engineering builds the deletion job (off until configured, tested). **Until account deletion:** note that klarweg-access has **no account-deletion route today**, so this option also needs an account-deletion process (defined with EX-01), which engineering would then build to include exam data. **With EX-01:** nothing is built until the reviewer's opinion |
+| D8 | a domain / later | **Later:** no learner launch, because the register requires the same-site domain before the pilot and launch (§G.1, §G.2) |
+| D9 | not yet / yes after gates | **Not yet:** nothing in production changes. **Yes:** engineering follows `RUNBOOK-EXAM-INFRA.md` §3 step by step, only after D1–D8 and all external deliverables exist |

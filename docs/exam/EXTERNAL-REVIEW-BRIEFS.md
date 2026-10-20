@@ -3,6 +3,8 @@
 **Purpose:** one page per external review, so the owner can commission each one without further preparation. Nothing
 here is a result. Each review stays **open** until the reviewer's own signed deliverable exists (register §C).
 
+**Ready-to-send outreach (role requirements, independence rules, e-mail drafts; nothing sent):** `EXTERNAL-REVIEW-OUTREACH.md`.
+
 **Lesen-only first release (proposal, not chosen by the owner):** if the owner adopts it, use
 `LESEN-ONLY-REVIEW-EVIDENCE.md` with these briefs. It narrows EX-03, EX-04, EX-01 and EX-05 to what that release uses
 and lists the existing evidence.
@@ -92,7 +94,7 @@ Common facts for every reviewer:
 - **Exam portal:** "Goethe" appears only in the mandatory result disclaimer "Klarweg-Simulation – kein offizielles Ergebnis
   des Goethe-Instituts" (`exam/js/render.js`, OD-45).
 - **Main Klarweg site (outside the exam portal, please include):**
-  - 57 HTML pages mention "Goethe", most often "Goethe Mini" (≈ 108), "Goethe-Zertifikat" (≈ 78), "Goethe-style" (≈ 63),
+  - 57 HTML pages (58 at main `5f06359`) mention "Goethe", most often "Goethe Mini" (≈ 108), "Goethe-Zertifikat" (≈ 78), "Goethe-style" (≈ 63),
     "Goethe Exam" (≈ 42), "Goethe-aligned" (≈ 32);
   - count: `git grep -c "Goethe" -- '*.html'`.
 - **Questions:**

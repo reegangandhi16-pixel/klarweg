@@ -45,6 +45,8 @@ an approval that has not been given.
   Owner decisions on one page: `LESEN-ONLY-OWNER-DECISIONS.md`.
 - Still required: owner scope + form-set choice, EX-03 for the Lesen items of those forms, OD-08 confirmation, EX-01 (no recordings), EX-04 (Lesen screens), EX-05, EX-07, OD-41 policy, OD-20 domain, production provisioning.
 
+**A3. One prioritized list of every remaining Lesen-only blocker:** `LESEN-ONLY-BLOCKERS.md`. Outreach drafts for all external reviews: `EXTERNAL-REVIEW-OUTREACH.md`. Owner reply template: `LESEN-ONLY-OWNER-DECISIONS.md`.
+
 **C. Engineering work remaining (each waits for a decision listed in D, E or F)**
 - Consent-withdrawal flow (F4/P-19, EX-01). Design draft: `CONSENT-PRIVACY-DRAFT.md` §4a.
 - Recording retention: merge and configure PR #76 (F4/P-20, EX-01). Off until then.

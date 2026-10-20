@@ -2,10 +2,10 @@
 
 The teaching and delivery system for the first live A1 group batch (`live-a1`). It is for the teacher, Reegan Gandhi.
 
-**Status:** course design only. The course is approved (D3, [decision sheet](live-classes-owner-decisions.md)), but the **launch is on hold**:
+**Status:** course design only. The course is approved (D3, [decision sheet](live-classes-owner-decisions.md)), and published on the Live Classes page as a **waitlist** (D8, 2026-10-20); paid enrolment is not open:
 - no start date is set;
-- `live-a1` and the teacher profile stay drafts;
-- the legal and accounting reviews are pending.
+- `live-a1` and the teacher profile are published; every other course stays a draft;
+- the business rules and the accounting follow-up are pending, and no lawyer has reviewed the published wording.
 
 Nothing here opens enrolment or promises an exam result.
 

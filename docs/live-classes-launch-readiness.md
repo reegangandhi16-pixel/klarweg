@@ -7,13 +7,15 @@
   - the four live-class policies;
   - the product and privacy choices;
   - manual UPI or bank-transfer payment.
-- **On hold:** D8, the launch. The teacher and `live-a1` stay `draft: true`, and the A1 start date is not set.
-- **Pending:**
-  - the legal review of the Terms and Privacy wording;
-  - the accounting follow-up for manual payments.
-- **Page status:** `live-classes.html` is an unlisted preview. It is `noindex` and not in `.github/pages-allowlist.txt`, `sitemap.xml` or any nav. Every teacher and course entry is a draft that never renders on a deployed host.
+- **D8, waitlist launch (owner-approved 2026-10-20):** the page is public. Only `reegan-gandhi` and `live-a1` are published; `live-a1` is a **waitlist** with no start date, and no course fees are accepted. Every other teacher and course stays a draft that never renders on a deployed host.
+- **Pending before paid enrolment:**
+  - the A1 start date;
+  - the business rules (instalment refunds, a missed second instalment, the consultation deduction, minors);
+  - the accounting follow-up for manual payments;
+  - a lawyer's review of the published Terms, Privacy and Refund Policy wording (owner-approved; not reviewed by a lawyer).
+- **Page status:** `live-classes.html` is indexed, has a canonical link, and is in `.github/pages-allowlist.txt`, `sitemap.xml`, the site nav and footer.
 
-**It is not ready to launch.**
+**Waitlist: live. Paid enrolment: not open.**
 
 Check the current state at any time:
 
@@ -22,14 +24,9 @@ npm run live:readiness      # data errors + launch blockers (scripts/live-classe
 npm run test:live           # static guards incl. the launch gate, then the headless-Chrome checks
 ```
 
-The launch gate in `scripts/live-classes-static.test.mjs` fails CI if the page is added to the Pages allowlist while any blocker below is open. Blockers reported today:
+The launch gate in `scripts/live-classes-static.test.mjs` fails CI if the page is in the Pages allowlist while any blocker is open. **Blockers reported today: none.**
 
-1. No published teacher profile. *(Removing `draft: true` is part of D8.)*
-2. No published live course. *(The same; it also needs a start date before enrolment can open.)*
-3. `terms.html` covers only self-paced content. *(It waits for the legal review.)*
-4. `privacy.html` does not describe the consultation request. *(It waits for the legal review.)*
-
-Cleared on 2026-10-20 by the approved decisions: consultation terms (`termsConfirmed: true`, D4) and the four live-class policies (D5).
+Cleared on 2026-10-20: consultation terms (`termsConfirmed: true`, D4) and the four live-class policies (D5) by the approved decisions; the published teacher, the published course, Terms and Privacy by the waitlist launch (D8). The gate also blocks a legal page that still carries an `[OWNER …]`/`[LEGAL …]` marker, a Refund Policy whose guarantee reads as covering live classes, and Terms that still say enrolment is closed once a published course is open.
 
 ### Owner checklist
 
@@ -196,14 +193,14 @@ Each is one sentence or paragraph in `policies` in `live-classes-data.js`.
 *Why it matters:* the Cashfree catalog and checkout know only self-paced products, so live fees need either a manual process or a new payment product. A new product changes the payment backend, which is a separate project.
 The decision: manual for the first batch. A static test keeps live products out of the Cashfree catalogue, because `grantProduct()` would unlock self-paced content.
 
-**D8. Launch go-ahead. ON HOLD (owner, 2026-10-20).**
+**D8. Launch go-ahead. DONE as a waitlist launch (owner, 2026-10-20).**
 Publishing means the checklist at the top of `live-classes.html`:
 - allowlist the three files and any photos;
 - add nav and footer links on the other pages;
 - add the page to `sitemap.xml`;
 - remove `noindex` and add a canonical link.
 
-Do it only after D1–D7. The tests that keep the page unpublished must then be updated deliberately.
+Done on 2026-10-20 with the waitlist-launch PR; the static tests now assert the published state. Opening paid enrolment is a separate step (part B of the decision sheet).
 
 *Optional:* **testimonials.** Only from real students, with written permission recorded in the `permission` field. The validator requires that field for every published testimonial.
 

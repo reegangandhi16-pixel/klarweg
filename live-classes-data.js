@@ -95,12 +95,11 @@
            qualification; the profile shows it once). No degree or
            separate teaching qualification is claimed. The owner approved
            the three specialisms as written on 2026-10-20. Every field is
-           now confirmed, but the profile is NOT approved for publication:
-           it stays draft until the launch go-ahead (D8).
+           now confirmed, and the owner approved the profile for
+           publication on 2026-10-20 (D8, waitlist launch).
            This repository is public: add education or certificate
            details only once confirmed and approved for publication. */
         id: 'reegan-gandhi',
-        draft: true,
         name: 'Reegan Gandhi',
         photo: null,
         photoAlt: '',
@@ -183,11 +182,12 @@
        enrolment: 'open' | 'waitlist' | 'not-open'
        Any null field shows as "To be announced" on the card.
        live-a1 is the first course, APPROVED by the owner on 2026-10-20
-       (D3). It stays a draft: the launch is on hold (D8) and no start
-       date is set, so enrolment is "waitlist", never "open". */
+       (D3), and published as a WAITLIST on 2026-10-20 (D8). No start
+       date is set, so enrolment stays "waitlist", never "open"; the
+       other courses below stay drafts. */
     courses: [
       {
-        id: 'live-a1', draft: true, group: 'beginner', levels: ['A1'],
+        id: 'live-a1', group: 'beginner', levels: ['A1'],
         title: 'Beginner German · A1',
         objectives: ['Introduce yourself and talk about daily routines', 'Build present-tense sentences with correct word order', 'Handle simple everyday situations in speech and writing'],
         teacherIds: ['reegan-gandhi'],

@@ -151,6 +151,11 @@ export function launchBlockers(D, root = ROOT) {
   if (!openCourse && /\benrol(?:l)?ment (?:is )?open\b|\benrol now\b|\bnow enrolling\b|\bbook (?:your|a) (?:seat|place)\b|\bjoin (?:the|our) next batch\b/i.test(liveAnswers)) b.push('index.html FAQ says enrolment is open, but no published live course has enrolment "open".');
   if (!/live class|live course/i.test(read(root, 'terms.html'))) b.push('terms.html describes only self-paced content; it does not cover live classes or consultations.');
   if (!/live class|consultation/i.test(read(root, 'privacy.html'))) b.push('privacy.html does not describe the consultation request (level, goal, optional phone, preferred times sent by email), yet the form\'s consent refers to it.');
+  // customer-facing legal pages never carry review markers, and the self-paced guarantee must not read as covering live classes
+  for (const f of ['terms.html', 'privacy.html', 'refund-policy.html']) if (/\[(?:OWNER|LEGAL)\b/.test(read(root, f))) b.push(`${f} still contains an [OWNER …] or [LEGAL …] review marker.`);
+  if (!/live class/i.test(read(root, 'refund-policy.html'))) b.push('refund-policy.html does not say that its 7-day guarantee excludes live classes and consultations.');
+  // the Terms must state the same enrolment status as the published courses
+  if (openCourse && /enrolment in live courses is (?:<[^>]+>)?not open yet/i.test(read(root, 'terms.html'))) b.push('terms.html says live-course enrolment is not open, but a published course has enrolment "open".');
   return b;
 }
 

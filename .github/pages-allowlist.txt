@@ -34,6 +34,9 @@ privacy.html
 terms.html
 refund-policy.html
 german-grammar.html
+# Live Classes (waitlist launch, owner-approved 2026-10-20): the page
+# and the two scripts it loads. The data file holds display text only.
+live-classes.html
 
 # ---------------------------------------------------------------
 # Root-level frontend runtime (calls the Worker's public HTTPS API;
@@ -48,6 +51,8 @@ kw-products.js
 kw-roadmap-progress.js
 kw-nav-auth.js
 kw-ai-chat.js
+kw-live.js
+live-classes-data.js
 site.css
 site.js
 

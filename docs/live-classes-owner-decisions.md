@@ -2,7 +2,9 @@
 
 The single record of the owner's Live Classes decisions. Part A is **settled**: approved by the owner on 2026-10-20 and implemented in `live-classes-data.js`. Part B is **still pending**.
 
-**The launch is on hold (D8).** The teacher profile and the first course stay `draft: true`, and the page stays `noindex` and off the Pages allowlist, sitemap and navigation. `npm run live:readiness` lists what still blocks it.
+**D8: waitlist launch, approved by the owner on 2026-10-20.** The page is public: the teacher profile `reegan-gandhi` and the course `live-a1` are published, `live-a1` as a **waitlist** (no start date; enrolment not open; no course fees accepted). Every other teacher and course stays `draft: true`. Terms §4A, Privacy §4A and the Refund Policy describe the live service. `npm run live:readiness` must show no blockers while the page is allowlisted.
+
+**Paid course enrolment is not authorised.** It needs a real start date and complete payment arrangements; see part B.
 
 Settled earlier:
 - **D1:** live classes, yes.
@@ -60,12 +62,8 @@ Payment is by **manual UPI or bank transfer**, on a payment request sent by emai
 
 ## B. Still pending
 
-- [ ] **Legal review of the Terms, Privacy and Refund Policy wording.** [`live-classes-review-drafts.md`](live-classes-review-drafts.md) is the lawyer's package:
-  - a brief, with the changes needed in each document and questions Q1–Q15;
-  - the drafts;
-  - a copy-ready email and the list of documents to send.
-  The drafts reflect every decision above, but the wording is **not approved for publication**. A review by a qualified lawyer is recommended. Until it is approved, `terms.html`, `privacy.html` and `refund-policy.html` stay unchanged (a static test checks this while the status line below says pending).
-  `Legal review status: pending`
+- [ ] **Legal review of the published Terms, Privacy and Refund Policy wording.** The owner approved publishing the live-class wording on 2026-10-20 (D8). It is based on [`live-classes-review-drafts.md`](live-classes-review-drafts.md), with every undecided point left out rather than invented: the published Terms say these are set out in the written course terms before anyone pays, and no course fee is accepted until then. **No lawyer has reviewed it.** A review by a qualified lawyer is still recommended before paid enrolment opens; the review drafts hold the brief, questions Q1–Q15 and a copy-ready email.
+  `Legal review status: owner-approved for publication on 2026-10-20; not reviewed by a lawyer`
 - [ ] **Accounting follow-up for manual payments.** [`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md) is the accountant's package:
   - the facts;
   - the questions: receipts or invoices, GST, payment-record retention, instalments;
@@ -77,14 +75,19 @@ Payment is by **manual UPI or bank transfer**, on a payment request sent by emai
   - What happens if the second instalment is not paid before week 7.
   - Which payment the ₹100 consultation deduction reduces, and whether it is refundable if the learner then cancels.
   - Whether minors may join live classes, and with what consent.
-- [ ] **A1 start date.** Set it at least 3 weeks ahead once the launch is approved. Then `nextBatch` gets the date and enrolment can become "open".
-- [ ] **D8 launch go-ahead (on hold).** After the legal review, launching is mechanical:
-  1. apply the approved Terms/Privacy text;
-  2. remove `draft: true` from `reegan-gandhi` and `live-a1`;
-  3. `npm run live:readiness` must show no blockers;
-  4. add the three files to `.github/pages-allowlist.txt`, add the nav/footer links and the sitemap entry, remove `noindex`, and add a canonical link;
-  5. switch the homepage FAQ to Variant B.
-  Merging that PR deploys the page.
+- [ ] **A1 start date.** Not set. Set it at least 3 weeks ahead. Then `nextBatch` gets the date.
+- [x] **D8 launch go-ahead: waitlist launch (2026-10-20).** Done in one PR:
+  1. Terms §1, §2, §4A, §5; Privacy §1, §2, §4, §4A, §8, §9, §11; Refund Policy "How it works" and "What's covered";
+  2. `draft: true` removed from `reegan-gandhi` and `live-a1` only;
+  3. `npm run live:readiness` shows no blockers;
+  4. the three files in `.github/pages-allowlist.txt`, nav/footer links, the sitemap entry, `noindex` removed, canonical link added;
+  5. the homepage FAQ names the A1 waitlist (enrolment not open, start date not announced).
+- [ ] **Opening paid enrolment for `live-a1` (not authorised yet).** Needs all of:
+  1. a real start date in `nextBatch`;
+  2. the business rules above settled and added to the written course terms;
+  3. the accounting follow-up (receipts or invoices, tax, record retention);
+  4. the UPI ID or bank details to put on payment requests;
+  5. `enrolment: 'open'`, then update the homepage FAQ and Terms §4A ("Enrolment … is not open yet"); the readiness check flags both if they still say it is closed or claim it is open.
 - [ ] *Optional:* a teacher photo (4:3, at least 800×600) and an availability line.
 
 ## Reply template (pending items only)
@@ -94,6 +97,6 @@ Legal review: approved as drafted / approved with edits: … / lawyer review fir
 Accounting (receipts, tax, record keeping): handled by: …
 Instalment refunds / missed 2nd instalment / consultation deduction / minors: …
 A1 start date: …
-D8 launch: not yet / go
+Open paid enrolment for A1: not yet / go (start date: …)
 Photo / availability (optional):
 ```

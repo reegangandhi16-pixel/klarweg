@@ -4,34 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--
-  LIVE CLASSES — UNLISTED PREVIEW
-  This page is deliberately NOT published yet: it is not in
-  .github/pages-allowlist.txt, sitemap.xml or the site nav, and it
-  carries noindex. To publish:
+  LIVE CLASSES — PUBLIC (waitlist launch, owner-approved 2026-10-20, D8)
+  Published: the teacher profile reegan-gandhi and the course live-a1
+  as a WAITLIST (enrolment "waitlist", nextBatch null: no start date
+  is set). Every other teacher and course in live-classes-data.js
+  stays draft: true and is never rendered on a deployed host.
+  The page is in .github/pages-allowlist.txt, sitemap.xml, the site
+  nav and footer, and has a canonical link.
+  To publish more, or to open enrolment:
     1. Add verified teachers / courses to live-classes-data.js as
-       non-draft entries. showDrafts stays false; draft entries are
-       never rendered on a deployed host (see kw-live.js).
-    2. Policies and consultation terms in live-classes-data.js are
-       owner-approved (2026-10-20); keep them current.
-    3. Add live-classes.html, kw-live.js and live-classes-data.js
-       (plus any teacher photos) to .github/pages-allowlist.txt.
-    4. Add the "Live Classes" nav link (desktop + mobile drawer) and
-       footer link to the other pages; add the URL to sitemap.xml.
-    5. Remove the robots noindex meta below and add a canonical link.
-    6. If the consultation fee changes, update the two meta descriptions
+       non-draft entries; showDrafts stays false.
+    2. Open enrolment only with a real nextBatch date AND complete
+       payment arrangements (see docs/live-classes-owner-decisions.md,
+       part B); then update the homepage FAQ and terms.html §4A.
+    3. If the consultation fee changes, update the two meta descriptions
        below by hand; the visible page copy reads it from the data file.
        Name a level range there only if published teachers and courses
        cover it (the hero range is computed from the data).
     `npm run live:readiness` checks all of the above; see
     docs/live-classes-launch-readiness.md.
 -->
-<meta name="robots" content="noindex">
 <title>Live Classes · Klarweg — Learn German live with a teacher</title>
-<meta name="description" content="Live, teacher-led German classes from Klarweg — structured instruction, guided speaking and direct feedback. Start with a ₹100 personal consultation.">
+<meta name="description" content="Live, teacher-led German classes from Klarweg. Join the free waitlist for Beginner German (A1), taught in Hindi and English; the start date is still to be announced. Or start with a ₹100 personal consultation.">
+<link rel="canonical" href="https://reegangandhi16-pixel.github.io/klarweg/live-classes.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Klarweg">
 <meta property="og:title" content="Live Classes · Klarweg — Learn German live with a teacher">
-<meta property="og:description" content="Live, teacher-led German classes — structured instruction, guided speaking and direct feedback. Start with a ₹100 personal consultation.">
+<meta property="og:description" content="Live, teacher-led German classes. Join the free waitlist for Beginner German (A1); the start date is still to be announced. Or start with a ₹100 personal consultation.">
+<meta property="og:url" content="https://reegangandhi16-pixel.github.io/klarweg/live-classes.html">
 <meta property="og:image" content="https://reegangandhi16-pixel.github.io/klarweg/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -232,6 +232,7 @@
 
   /* ---------- courses ---------- */
   .course-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .course-grid.single { grid-template-columns: minmax(0, 760px); }
   @media (max-width: 860px) { .course-grid { grid-template-columns: minmax(0, 1fr); } }
   .c-card { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); padding: 36px; display: flex; flex-direction: column; }
   .c-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; }
@@ -252,6 +253,7 @@
   .c-price-val { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
   .c-price-val.tba { font-family: var(--font-ui); font-size: 15px; font-weight: 500; color: var(--ink-secondary); }
   .c-price-terms { flex-basis: 100%; font-size: 13px; color: var(--ink-tertiary); }
+  .c-note { margin: 0 0 24px; padding: 10px 12px; border-left: 3px solid var(--live-gold); background: var(--live-gold-tint); border-radius: 0 8px 8px 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-secondary); }
   .c-card .btn { margin-top: auto; align-self: flex-start; }
   .status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: var(--r-full); border: 1px solid var(--hairline); color: var(--ink-secondary); background: var(--bg-surface); }
   .status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-quaternary); }
@@ -455,7 +457,7 @@
       <div class="session-card on-navy" aria-label="Example of feedback in a live class">
         <div class="session-top">
           <span class="session-label">In a live class</span>
-          <span class="session-meta">A2 · Speaking</span>
+          <span class="session-meta">Example</span>
         </div>
         <div class="bubble bubble-t">
           <span class="bubble-who">Teacher</span>
@@ -581,7 +583,7 @@
     </div>
     <p class="results-note" id="c-count" aria-live="polite"></p>
     <div class="course-grid" id="course-grid">
-      <noscript><p>The course list needs JavaScript. You can still <a href="contact.html">contact us</a> about live courses.</p></noscript>
+      <noscript><p data-nojs-course><strong>Beginner German · A1</strong> with Reegan Gandhi: waitlist only. The start date is still to be announced and enrolment is not open. Joining the waitlist is free and is not a booking. The full course details need JavaScript; you can also <a href="contact.html">contact us</a> about live courses.</p></noscript>
     </div>
   </div>
 </section>

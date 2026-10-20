@@ -1,9 +1,12 @@
 /* Live Classes (live-classes.html) — fast checks without a browser.
-   Guards the two things that must not regress silently:
-   1. the page stays an unlisted preview until real content and policies
-      exist (noindex; not in the Pages allowlist, sitemap or any other
-      page's links), and
-   2. draft data is off by default and placeholder text only ever lives
+   Guards the things that must not regress silently:
+   1. the page is public as a WAITLIST launch (owner-approved 2026-10-20,
+      D8): only the teacher reegan-gandhi and the course live-a1 are
+      published, live-a1 has no start date and enrolment "waitlist", and
+      the page is allowlisted only while the launch gate shows no blocker;
+   2. Terms, Privacy and Refund Policy disclose the live service and
+      agree with the page; and
+   3. draft data is off by default and placeholder text only ever lives
       in entries marked draft.
    The interactive behaviour is covered by scripts/live-classes-browser.mjs. */
 import test from 'node:test';
@@ -52,14 +55,25 @@ test('LIVE: placeholder text ([…]) appears only in entries marked draft', () =
   }
 });
 
-test('LIVE: the page stays unpublished (noindex; not allowlisted, in the sitemap or linked from other pages)', () => {
-  assert.match(html, /<meta name="robots" content="noindex">/);
-  assert.equal(/<link rel="canonical"/.test(html), false, 'no canonical link until the page is published');
+test('LIVE: the page is published (indexed, canonical, allowlisted, in the sitemap, nav and footer) with no launch blocker', () => {
+  const URL = 'https://reegangandhi16-pixel.github.io/klarweg/live-classes.html';
+  assert.equal(/<meta name="robots"[^>]*noindex/.test(html), false, 'noindex is removed');
+  assert.match(html, new RegExp(`<link rel="canonical" href="${URL}">`));
+  assert.match(html, new RegExp(`<meta property="og:url" content="${URL}">`));
   const allow = read('.github/pages-allowlist.txt').split('\n').map((l) => l.trim());
-  for (const f of FILES) assert.equal(allow.includes(f), false, `${f} must not be in .github/pages-allowlist.txt yet`);
-  assert.equal(read('sitemap.xml').includes('live-classes'), false, 'sitemap.xml must not list the page yet');
-  const linking = fs.readdirSync(ROOT).filter((f) => f.endsWith('.html') && f !== PAGE && read(f).includes('live-classes.html'));
-  assert.deepEqual(linking, [], 'no other page may link to live-classes.html yet');
+  for (const f of FILES) assert.ok(allow.includes(f), `${f} is in .github/pages-allowlist.txt`);
+  assert.ok(read('sitemap.xml').includes(`<loc>${URL}</loc>`), 'sitemap.xml lists the canonical URL');
+  // every page with the shared site footer links the page there; pages with the shared nav also link it in the desktop nav and mobile drawer
+  const pages = fs.readdirSync(ROOT).filter((f) => f.endsWith('.html') && f !== PAGE && /<a href="courses.html"[^>]*>Courses<\/a>/.test(read(f)));
+  assert.ok(pages.includes('index.html') && pages.length >= 17, `found the pages with site navigation (${pages.length})`);
+  for (const f of pages) {
+    const s = read(f);
+    const after = [...s.matchAll(/<a href="courses.html"[^>]*>Courses<\/a>(?:<\/li>)?\n\s*(?:<li>)?<a href="live-classes.html">Live Classes<\/a>/g)].length;
+    const courses = [...s.matchAll(/<a href="courses.html"(?: class="active")?>Courses<\/a>(?:<\/li>)?\s*$/gm)].length;
+    assert.equal(after, courses, `${f}: every nav/footer "Courses" link is followed by "Live Classes"`);
+  }
+  assert.ok(/class="nav-links">[\s\S]*?href="live-classes.html"[\s\S]*?<\/div>/.test(read('index.html')), 'the homepage nav links the page');
+  assert.deepEqual(launchBlockers(loadData()), [], 'an allowlisted page must have no launch blocker');
 });
 
 test('LIVE: every local link, script and stylesheet on the page exists', () => {
@@ -88,7 +102,7 @@ test('LIVE: the page states no level range or live-course term that is not confi
   const body = html.slice(html.indexOf('<body'));
   assert.equal(/A1 (?:→|to) C2/.test(html.match(/<meta name="description" content="([^"]*)"/)[1]), false, 'the meta description names no blanket level range');
   assert.match(body, /<span data-live-levels><\/span>/, 'the hero level range is computed from the data');
-  assert.equal(/doesn.t include the other|includes? self-paced access/i.test(body), false, 'D6 (no self-paced access) is stated in the Terms after legal review, not on this page');
+  assert.equal(/doesn.t include the other|includes? self-paced access/i.test(body), false, 'D6 (no self-paced access) is stated in the Terms §4A, not claimed otherwise on this page');
 });
 
 test('LIVE: every amount on the page and in its data is an owner-approved amount (decision sheet, part A)', () => {
@@ -101,11 +115,27 @@ test('LIVE: every amount on the page and in its data is an owner-approved amount
 });
 
 /* ---------- owner-approved decisions (2026-10-20, docs/live-classes-owner-decisions.md) ---------- */
-test('LIVE D3: the first course is the approved A1 group batch, still a draft with no invented start date', () => {
+test('LIVE D8: only the owner\'s profile and the A1 waitlist course are published', () => {
+  const D = loadData();
+  assert.deepEqual([...D.teachers.filter((x) => !x.draft).map((x) => x.id)], ['reegan-gandhi'], 'no other teacher is published');
+  assert.deepEqual([...D.courses.filter((x) => !x.draft).map((x) => x.id)], ['live-a1'], 'no other course is published');
+  assert.deepEqual([...D.testimonials.filter((x) => !x.draft)], [], 'no testimonial is published');
+  for (const k of D.courses.filter((x) => !x.draft)) assert.notEqual(k.enrolment, 'open', `${k.id}: enrolment cannot open without a start date and payment arrangements`);
+  // the card and the no-JS fallback say the start date is to be announced and the waitlist is free and not a booking
+  const js = read('kw-live.js');
+  assert.match(js, /c\.enrolment === 'waitlist' \? '<p class="c-note">' \+ \(has\(c\.nextBatch\) \? '' : 'The start date is still to be announced\. '\)/);
+  assert.match(js, /Enrolment is not open yet\. Joining the waitlist is free and is not a booking: nothing is charged\./);
+  const nojs = html.match(/<p data-nojs-course>([\s\S]*?)<\/p>/);
+  assert.ok(nojs, 'the no-JS course summary exists');
+  const a1 = D.courses.find((c) => c.id === 'live-a1');
+  assert.ok(nojs[1].includes(`<strong>${a1.title}</strong> with Reegan Gandhi: waitlist only. The start date is still to be announced and enrolment is not open. Joining the waitlist is free and is not a booking.`));
+});
+
+test('LIVE D3: the first course is the approved A1 group batch, published as a waitlist with no invented start date', () => {
   const D = loadData();
   const a1 = D.courses.find((c) => c.id === 'live-a1');
   assert.ok(a1, 'live-a1 exists');
-  assert.equal(a1.draft, true, 'launch is on hold (D8): live-a1 stays a draft');
+  assert.equal(a1.draft, undefined, 'live-a1 is published (D8 waitlist launch)');
   assert.equal(a1.nextBatch, null, 'no start date has been set; never invent one');
   assert.equal(a1.enrolment, 'waitlist', 'without a start date enrolment cannot be open');
   assert.deepEqual([...a1.teacherIds], ['reegan-gandhi']);
@@ -120,7 +150,11 @@ test('LIVE D3: the first course is the approved A1 group batch, still a draft wi
   assert.match(a1.materials, /class notes and PDF worksheets; homework with written feedback/i);
   assert.match(a1.examPrep, /Goethe-Zertifikat A1: Start Deutsch 1 \(exam fee not included\)/);
   const t = D.teachers.find((x) => x.id === 'reegan-gandhi');
-  assert.ok(t && t.draft === true, 'the teacher profile stays a draft until launch');
+  assert.ok(t && t.draft === undefined, 'the teacher profile is published');
+  assert.deepEqual({ experience: t.experience, proficiency: t.proficiency, qualifications: [...t.qualifications], goethe: [...t.goethe], levels: [...t.levels], teachesIn: [...t.teachesIn], specialisms: [...t.specialisms], examPrep: t.examPrep, formats: [...t.formats], photo: t.photo, availability: t.availability }, {
+    experience: '5 years of teaching German', proficiency: 'C1', qualifications: ['Goethe-Zertifikat C1'], goethe: ['Goethe-Zertifikat C1'], levels: ['A1', 'A2', 'B1', 'B2'], teachesIn: ['Hindi', 'English'],
+    specialisms: ['German grammar', 'Structured learning for Hindi-speaking learners', 'Goethe exam preparation'], examPrep: 'Goethe exam preparation at A1–B1', formats: ['Group batch', 'One-to-one'], photo: null, availability: null
+  }, 'only the confirmed facts: no photo, availability or other claims');
   assert.ok(t.levels.includes('A1') && t.formats.includes('Group batch'), 'the teacher teaches this course');
 });
 
@@ -159,11 +193,46 @@ test('LIVE D7: live fees cannot reach the self-paced Cashfree checkout (grantPro
   for (const c of loadData().courses) assert.equal('productId' in c, false, `${c.id} has no checkout product`);
 });
 
-test('LIVE LEGAL: Terms, Privacy and Refund Policy stay unchanged while the legal review is pending', () => {
+test('LIVE LEGAL: Terms, Privacy and Refund Policy disclose the live service as published, without review markers or claimed sign-off', () => {
   const sheet = read('docs/live-classes-owner-decisions.md');
-  if (!/Legal review status: pending/.test(sheet)) return; // once approved, the launch PR applies the reviewed text
-  for (const f of ['terms.html', 'privacy.html', 'refund-policy.html']) assert.equal(/live class|live course|consultation/i.test(read(f)), false, `${f} carries live-class wording before the legal review is approved`);
-  assert.match(read('docs/live-classes-review-drafts.md'), /awaiting (?:final )?legal review/i, 'the review drafts say they await legal review');
+  // the owner approved publication; nobody claims a lawyer or accountant reviewed the text
+  assert.match(sheet, /Legal review status: owner-approved for publication on 2026-10-20; not reviewed by a lawyer/);
+  const text = (f) => read(f).replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
+  const [terms, privacy, refund] = ['terms.html', 'privacy.html', 'refund-policy.html'].map(text);
+  for (const [f, s] of [['terms.html', terms], ['privacy.html', privacy], ['refund-policy.html', refund]]) {
+    assert.equal(/\[(?:OWNER|LEGAL)\b|\[[A-Z][^\]]*\]/.test(read(f)), false, `${f}: no [OWNER]/[LEGAL] or bracketed placeholder`);
+    assert.equal(/lawyer|solicitor|advocate|accountant|legally reviewed|legal review|chartered/i.test(s), false, `${f}: claims no professional review`);
+    assert.match(read(f), /Last updated: 20 October 2026/, `${f}: the date is updated`);
+  }
+  const D = loadData(), c = D.consultation;
+  // Terms §4A: separate service, enrolment closed, the approved consultation and policies verbatim, manual payment
+  assert.match(terms, /Live classes are a separate service from the self-paced courses: buying a self-paced level does not include live classes, and a live course does not include access to the self-paced courses\./);
+  assert.match(terms, /Enrolment in live courses is not open yet, and Klarweg does not accept live-course fees until it is\./);
+  assert.match(terms, /Registering interest is not a booking, does not reserve a place and commits you to nothing/);
+  assert.ok(terms.includes(`A personal consultation costs ${c.feeLabel} and lasts ${c.durationMinutes} minutes on ${c.platform}.`));
+  assert.ok(terms.includes(`within ${c.adjustmentDays} days of your consultation, the consultation fee is deducted from the course fee`));
+  assert.ok(terms.includes(c.cancellation), 'the consultation cancellation terms');
+  for (const k of POLICIES) assert.ok(terms.includes(D.policies[k]), `Terms §4A quotes policy ${k} verbatim`);
+  assert.match(terms, /paid by UPI or bank transfer, on a payment request we send you by email\. A person at Klarweg checks each payment/);
+  assert.match(terms, /The Klarweg website does not take live-class or consultation payments/);
+  assert.match(terms, /Classes and consultations are not recorded\. In a group class, the other learners in your batch can see your name and see and hear you/);
+  assert.match(terms, /No minimum age has been set for live classes or consultations\./, 'states the age position actually applied: none');
+  assert.match(terms, /Live classes and consultations are not covered by the 7-day guarantee/);
+  // unresolved rules (instalment refunds, a missed instalment, the deduction's target, removal) are not invented
+  assert.equal(/₹7,999 ÷|per class at|if the second instalment is not paid|we may remove/i.test(terms), false, 'no undecided business rule is stated as settled');
+  // Privacy: the request flow and its data, retention, Meet, group visibility, payments, third parties
+  assert.match(privacy, /your own email app sends us the details you entered: your name, email address, optional WhatsApp or phone number, current level, main goal, preferred teacher and course, preferred times and your message/);
+  assert.match(privacy, /Nothing reaches us unless you press Send in your email app/);
+  assert.match(privacy, /kept for 12 months after our last contact with you, then deleted from our inbox by hand\. This is a manual practice, not an automatic process\./);
+  assert.match(privacy, /take place on Google Meet[\s\S]*Classes and consultations are not recorded\./);
+  assert.match(privacy, /other learners in your batch can see your name and see and hear you/);
+  assert.match(privacy, /You pay by UPI or bank transfer on a payment request we email you\. A person at Klarweg checks each payment/);
+  assert.match(privacy, /Gmail, which holds live-class requests[\s\S]*Google Meet, which hosts live classes/);
+  assert.match(privacy, /No minimum age has been set for live classes or consultations\./);
+  // Refund Policy: the self-paced guarantee is unchanged and excludes live classes
+  assert.match(refund, /It covers self-paced purchases only\. It does not cover live classes or consultations/);
+  assert.match(read('refund-policy.html'), /href="terms.html#live-classes"/);
+  assert.match(refund, /7-day money-back guarantee on any paid level or the Lifetime bundle/);
 });
 
 test('LIVE: a course enquiry can be free; only a consultation names a fee', () => {
@@ -213,9 +282,6 @@ test('LIVE DATA: a named draft profile cannot reach the public site by deleting 
     const blockedByData = (x) => checkData(flip(D, t.id, x)).some((e) => e.startsWith(`teacher ${t.id}:`));
     if ((t.unconfirmed || []).length || placeholders(t).length) assert.ok(blockedByData({}), `${t.id}: incomplete, yet the validator accepts it once draft: true is removed`);
     assert.ok(blockedByData({ unconfirmed: ['specialisms'] }), `${t.id}: an unconfirmed field must block publication`);
-    // fully confirmed or not, the page itself stays unpublished until the launch gate is clear
-    const rest = launchBlockers(flip(D, t.id));
-    assert.ok(rest.length > 0 && !isAllowlisted(), `${t.id}: removing draft: true alone would make the profile public`);
   }
 });
 
@@ -228,7 +294,7 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
   };
   const realTeacher = { id: 'anna-k', draft: false, name: 'Anna K', photo: null, photoAlt: '', headline: 'Grammar first', experience: '5 years of teaching German',
     proficiency: 'C2', qualifications: ['MA German'], goethe: [], levels: ['A1'], teachesIn: ['Hindi'], specialisms: [], examPrep: null, approach: 'x', formats: ['Group batch'], availability: null };
-  expectError((D) => { D.courses[0].draft = false; D.courses[0].title = 'A1'; }, new RegExp(`names draft teacher "${base.courses[0].teacherIds[0]}"`), 'a published course naming a draft teacher would show no teacher on the live site');
+  expectError((D) => { D.teachers.find((t) => t.id === D.courses[0].teacherIds[0]).draft = true; }, new RegExp(`names draft teacher "${base.courses[0].teacherIds[0]}"`), 'a published course naming a draft teacher would show no teacher on the live site');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: null }); }, /enrolment "open" needs priceLabel/, 'open enrolment without a fee');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: '₹9,999' }); }, /needs nextBatch/, 'open enrolment without a start date');
   expectError((D) => { D.teachers.push({ ...realTeacher, unconfirmed: ['headline'] }); }, /still has unconfirmed fields: headline/, 'a published teacher with fields awaiting confirmation');
@@ -249,13 +315,15 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
   expectError((D) => { D.showDrafts = true; }, /showDrafts/, 'drafts switched on');
 });
 
-test('LIVE GATE: blockers are listed today, and the page cannot be allowlisted while any remain', () => {
+test('LIVE GATE: the page is allowlisted, so no blocker may remain', () => {
   const blockers = launchBlockers(loadData());
-  assert.ok(blockers.length > 0, 'the page is not ready today, so blockers must be reported');
-  // D8: launch is on hold. Nothing is published, and Terms/Privacy await the legal review.
-  for (const rx of [/No published teacher profile/, /No published live course/, /terms\.html/, /privacy\.html/]) assert.ok(blockers.some((b) => rx.test(b)), `expected a blocker matching ${rx}`);
-  assert.equal(isAllowlisted(), false);
+  // D8: waitlist launch. The owner and live-a1 are published, and Terms/Privacy/Refund cover the live service.
+  assert.equal(isAllowlisted(), true);
   if (isAllowlisted()) assert.deepEqual(blockers, [], 'live-classes is in the Pages allowlist but launch blockers remain');
+  // the gate still bites: un-publishing the teacher or the course brings its blocker back
+  const D = clone(loadData());
+  D.teachers.forEach((t) => { t.draft = true; }); D.courses.forEach((k) => { k.draft = true; });
+  for (const rx of [/No published teacher profile/, /No published live course/]) assert.ok(launchBlockers(D).some((b) => rx.test(b)), `expected a blocker matching ${rx}`);
 });
 
 test('LIVE GATE: the homepage FAQ structured data matches the visible answers', () => {
@@ -264,18 +332,20 @@ test('LIVE GATE: the homepage FAQ structured data matches the visible answers', 
   assert.deepEqual(structured, Object.fromEntries(Object.keys(structured).map((q) => [q, visible[q]])));
 });
 
-test('LIVE: the homepage FAQ announces live classes (D1) without claiming anything is bookable', () => {
+test('LIVE: the homepage FAQ names the A1 waitlist without claiming enrolment is open (D8)', () => {
   const Q = 'Are there live classes or teachers?';
   const { visible, structured } = homepageFaq(read('index.html'));
   assert.ok(visible[Q] && structured[Q], 'the question is in the visible FAQ and the FAQPage data');
-  assert.equal(visible[Q], structured[Q]);
+  assert.equal(visible[Q], structured[Q], 'identical text in the visible FAQ and the structured data');
   const a = visible[Q];
-  assert.match(a, /preparing teacher-led live German classes/, 'states the D1 direction');
-  assert.match(a, /not open for booking yet/, 'says plainly that nothing is bookable');
+  assert.match(a, /The first course, Beginner German \(A1\), is taking free waitlist registrations: enrolment is not open yet and the start date has not been announced\./);
   assert.equal(/No live classes|deliberate|things a teacher would/i.test(a), false, 'the pre-D1 wording is gone');
-  // no link to the unlisted page, and no confirmed teacher, date or fee
-  assert.equal(/live-classes|href=|₹|\d/.test(a), false, 'no link, fee, date or number in the announcement');
   const D = loadData();
+  // no date or other number: only the level name and the approved consultation fee
+  assert.equal(/\d/.test(a.replace('A1', '').replace(D.consultation.feeLabel, '')), false, 'no date, other fee or number in the answer');
+  assert.ok(a.includes(`request a ${D.consultation.feeLabel} personal consultation`));
+  const raw = read('index.html');
+  assert.match(raw, /<div class="faq-answer">\s*Yes\. Alongside[\s\S]*?<a href="live-classes.html">Live Classes<\/a> page\.\s*<\/div>/, 'the visible answer links the page');
   if (!D.courses.some((k) => !k.draft && k.enrolment === 'open')) {
     assert.equal(launchBlockers(D).some((b) => /index\.html/.test(b)), false, 'the homepage raises no launch blocker');
   }
@@ -288,6 +358,7 @@ test('LIVE GATE: the gate clears once every blocker is resolved (so it can actua
     fs.writeFileSync(path.join(dir, 'index.html'), '<p>Live classes with a teacher are available.</p>');
     fs.writeFileSync(path.join(dir, 'terms.html'), '<h2>Live classes</h2>');
     fs.writeFileSync(path.join(dir, 'privacy.html'), '<h2>Consultation requests</h2>');
+    fs.writeFileSync(path.join(dir, 'refund-policy.html'), '<p>This guarantee does not cover live classes.</p>');
     const D = clone(loadData());
     D.consultation.termsConfirmed = true;
     for (const k of POLICIES) D.policies[k] = 'Confirmed policy text.';
@@ -310,6 +381,18 @@ test('LIVE GATE: the gate clears once every blocker is resolved (so it can actua
     fs.writeFileSync(path.join(dir, 'live-classes.html'), meta(`Live German classes, ${D.teachers[0].levels[0]} to ${D.teachers[0].levels.at(-1)}.`));
     assert.equal(launchBlockers(D, dir).some((b) => /claims levels/.test(b)), false, 'a range covered by the published teacher is fine');
     fs.writeFileSync(path.join(dir, 'live-classes.html'), html);
+    // legal pages: review markers, a guarantee that reads as covering live classes, a stale "not open" statement
+    fs.writeFileSync(path.join(dir, 'terms.html'), '<h2>Live classes</h2><p>[OWNER: instalment rule]</p>');
+    assert.ok(launchBlockers(D, dir).some((b) => /terms\.html still contains an \[OWNER/.test(b)), 'a review marker on a legal page is a blocker');
+    fs.writeFileSync(path.join(dir, 'terms.html'), '<h2>Live classes</h2>');
+    fs.writeFileSync(path.join(dir, 'refund-policy.html'), '<p>7-day refund on any purchase.</p>');
+    assert.ok(launchBlockers(D, dir).some((b) => /refund-policy\.html does not say/.test(b)), 'the guarantee must exclude live classes');
+    fs.writeFileSync(path.join(dir, 'refund-policy.html'), '<p>This guarantee does not cover live classes.</p>');
+    fs.writeFileSync(path.join(dir, 'terms.html'), '<h2>Live classes</h2><p>Enrolment in live courses is <strong>not open yet</strong>.</p>');
+    assert.deepEqual(launchBlockers(D, dir), [], 'fine while no published course is open');
+    D.courses[0].enrolment = 'open';
+    assert.ok(launchBlockers(D, dir).some((b) => /terms\.html says live-course enrolment is not open/.test(b)), 'the Terms must not contradict an open course');
+    D.courses[0].enrolment = 'not-open';
     D.consultation.feeLabel = '₹150';
     assert.ok(launchBlockers(D, dir).some((b) => /meta description/.test(b)), 'a changed fee with stale meta descriptions is a blocker');
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }

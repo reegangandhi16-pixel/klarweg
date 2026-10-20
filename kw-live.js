@@ -53,7 +53,7 @@
   function portrait(t) {
     var inner = t.photo
       ? '<img src="' + esc(t.photo) + '" alt="' + esc(t.photoAlt || ('Portrait of ' + t.name)) + '" loading="lazy" decoding="async" width="800" height="600">'
-      : '<div class="portrait-mono" aria-hidden="true"><span>' + esc(initials(t)) + '</span><small>Portrait pending</small></div>';
+      : '<div class="portrait-mono" aria-hidden="true"><span>' + esc(initials(t)) + '</span>' + (t.draft ? '<small>Portrait pending</small>' : '') + '</div>';
     return '<div class="portrait">' + inner + draftFlag(t) + '</div>';
   }
   /* The six-level strip is visual only; screen readers get the list as text
@@ -348,6 +348,9 @@
       + (has(c.priceLabel) ? '<span class="c-price-val">' + esc(c.priceLabel) + '</span>' : '<span class="c-price-val tba">To be announced</span>')
       + (has(c.paymentTerms) ? '<span class="c-price-terms">' + esc(c.paymentTerms) + '</span>' : '')
       + '</div>'
+      /* A waitlist course says plainly that nothing is booked or charged. */
+      + (c.enrolment === 'waitlist' ? '<p class="c-note">' + (has(c.nextBatch) ? '' : 'The start date is still to be announced. ')
+        + 'Enrolment is not open yet. Joining the waitlist is free and is not a booking: nothing is charged.</p>' : '')
       + '<a href="#book" class="btn ' + (c.enrolment === 'open' ? 'btn-live' : 'btn-secondary') + '" data-book-course="' + esc(c.id) + '">' + esc(st.cta) + ' ' + ARROW + '</a>'
       + '</article>';
   }
@@ -362,6 +365,11 @@
       document.querySelectorAll('#courses .filters').forEach(function (f) { f.hidden = true; });
       return;
     }
+    /* As with teachers: filters only help when there is something to narrow down. */
+    var few = courses.length < 2;
+    document.querySelectorAll('#courses .filters').forEach(function (f) { f.hidden = few; });
+    grid.classList.toggle('single', few);
+    if (few) { $('c-count').textContent = ''; grid.innerHTML = courses.map(courseCard).join(''); return; }
     var list = courses.filter(function (c) { return !cGroup || c.group === cGroup; });
     $('c-count').textContent = list.length + (list.length === 1 ? ' course' : ' courses') + (cGroup ? ' in ' + GROUP_LABEL[cGroup] : '');
     grid.innerHTML = list.length ? list.map(courseCard).join('')

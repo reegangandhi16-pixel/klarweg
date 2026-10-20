@@ -7,7 +7,8 @@
    can never reach the Access Worker, checkout or an email service, and
    the consultation form only produces its mailto: hand-off.
 
-   Covers (A) the production default (showDrafts:false), (B) the host
+   Covers (A) the production default (showDrafts:false): the D8 waitlist
+   launch, with only the owner's profile and live-a1 published, (B) the host
    guard (showDrafts forced true on a non-local host), (C) the local
    preview: filters, profile dialog, deep links, prefill, validation,
    hand-off, and (D) mobile layout + sticky CTA.
@@ -160,7 +161,6 @@ const OWNER = LIVE.teachers.find((t) => t.id === 'reegan-gandhi');
 const A1 = LIVE.courses.find((c) => c.id === 'live-a1');
 const POLICY_TEXTS = Object.values(LIVE.policies);
 const policiesShown = `Object.entries(${JSON.stringify(LIVE.policies)}).every(([k,t])=>document.querySelector('[data-policy="'+k+'"]').textContent===t)`;
-const a1Leak = `(()=>{const m=(document.body.innerText+' '+[...document.querySelectorAll('option')].map(o=>o.text).join(' ')).match(/${A1.priceLabel}|${A1.title}|Waitlist|Mon, Wed, Fri/);return m?m[0]:null})()`;
 /* A small structural accessibility audit of the rendered page (no
    dependency): every visible control has a name, labels exist, ids are
    unique, one h1 and no skipped heading levels, images have alt text,
@@ -180,34 +180,50 @@ const key = async (k, code, vk) => { for (const type of ['keyDown', 'keyUp']) aw
 const submit = () => q('document.querySelector("#consult-form button[type=submit]").click()');
 
 try {
-  // ---- A. production default (showDrafts:false) ----
+  // ---- A. production default (showDrafts:false): the D8 waitlist launch ----
+  // Published: the owner's profile and live-a1 as a waitlist. Nothing else, no start date, no payment.
+  const OTHER_TITLES = LIVE.courses.filter((c) => c.draft).map((c) => c.title);
   for (const [w, mob] of [[375, true], [1280, false]]) {
     await load(L, { width: w, mobile: mob });
     ok(`A${w} no draft text in DOM or options`, (await q(draftLeak)) === null, await q(draftLeak));
     ok(`A${w} draft banner hidden`, await q('document.getElementById("draft-banner").hidden'));
-    ok(`A${w} honest teacher empty state`, await q('/being finalised/.test(document.getElementById("teacher-grid").innerText)'));
-    ok(`A${w} honest course empty state`, await q('/being scheduled/.test(document.getElementById("course-grid").innerText)'));
-    ok(`A${w} filters hidden`, await q('[...document.querySelectorAll(".filters")].every(f=>f.hidden&&f.offsetParent===null)'));
+    ok(`A${w} exactly one teacher card: the owner, featured, no filters or count`, await q('document.querySelectorAll(".t-card").length===1 && document.getElementById("teacher-grid").classList.contains("single") && [...document.querySelectorAll("#teachers .filters")].every(f=>f.hidden) && document.getElementById("t-count").textContent===""')
+      && (await q('document.querySelector(".t-card .t-name").textContent')) === OWNER.name);
+    ok(`A${w} exactly one course card: Beginner German · A1, no filters or count`, (await q('[...document.querySelectorAll(".c-card h3")].map(h=>h.textContent).join("|")')) === A1.title
+      && await q('[...document.querySelectorAll("#courses .filters")].every(f=>f.hidden&&f.offsetParent===null) && document.getElementById("c-count").textContent===""'));
+    ok(`A${w} no other (draft) course in the catalogue or the form`, !(await q(`(()=>{const t=document.getElementById("course-grid").innerText+' '+[...document.querySelectorAll('option')].map(o=>o.text).join(' ');return ${JSON.stringify(OTHER_TITLES)}.some(x=>t.includes(x))})()`)));
+    const card = await q('document.querySelector(".c-card").innerText');
+    ok(`A${w} the A1 card: approved fee, terms and schedule, "Waitlist", next batch to be announced`, [A1.priceLabel, A1.paymentTerms, A1.frequency, A1.sessionLength, A1.totalDuration, A1.batchSize, 'Waitlist'].every((x) => card.includes(x)) && /to be announced[\s\S]*next batch/i.test(card), card);
+    ok(`A${w} the A1 card says the start date is to be announced and the waitlist is free and not a booking`, card.includes('The start date is still to be announced. Enrolment is not open yet. Joining the waitlist is free and is not a booking: nothing is charged.'));
+    ok(`A${w} the A1 CTA is "Join the waitlist" (secondary), never an enrol or pay button`, (await q('(()=>{const a=document.querySelector("[data-book-course=live-a1]");return a.textContent.trim().startsWith("Join the waitlist")&&a.classList.contains("btn-secondary")&&a.getAttribute("href")==="#book"})()'))
+      && !/enrol now|pay now|buy now|book your (?:seat|place)/i.test(await q('document.body.innerText')));
     ok(`A${w} testimonials hidden`, await q('document.getElementById("quotes").hidden'));
-    ok(`A${w} form selects only defaults`, await q('document.getElementById("bf-teacher").options.length===1&&document.getElementById("bf-course").options.length===1'));
+    ok(`A${w} form selects offer only the published teacher and course`, (await q('[...document.getElementById("bf-teacher").options].map(o=>o.value).join("|")')) === '|reegan-gandhi'
+      && (await q('[...document.getElementById("bf-course").options].map(o=>o.value).join("|")')) === '|live-a1', await q('[...document.getElementById("bf-course").options].map(o=>o.value).join("|")'));
     ok(`A${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
-    ok(`A${w} hero CTAs lead to the consultation and how it works, not to empty sections`,
-      (await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")')) === '#book Book a consultation | #how How live classes work',
+    ok(`A${w} hero CTAs lead to the teacher and the course`,
+      (await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")')) === '#teachers Meet your teacher | #courses Explore live courses',
       await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")'));
     ok(`A${w} primary hero CTA keeps its arrow`, await q('!!document.querySelector(".live-hero .btn-live .btn-arrow")'));
-    ok(`A${w} no copy invites filtering or opening profiles that do not exist`, !(await q('/open a profile|Filter the teacher profiles/.test(document.body.innerText + document.getElementById("fa3").textContent)')));
     ok(`A${w} accessibility audit: names, labels, unique ids, heading order`, (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
-    ok(`A${w} hero names no level range while nothing is published`, (await q('document.querySelector("[data-live-levels]").textContent')) === '');
+    ok(`A${w} hero level range comes from what is published`, (await q('document.querySelector("[data-live-levels]").textContent')) === ' · ' + OWNER.levels[0] + ' → ' + OWNER.levels.at(-1), await q('document.querySelector("[data-live-levels]").textContent'));
     const jA = await q(jsonld);
-    ok(`A${w} structured data: FAQPage matches the visible FAQ, no Course`, !!jA && jA.faqOk && jA.courses.length === 0, JSON.stringify(jA && { faqOk: jA.faqOk, courses: jA.courses }));
+    ok(`A${w} structured data: FAQPage matches, one Course with its instructor, no price or date`, !!jA && jA.faqOk && jA.courses.join() === A1.title && jA.instructors.join() === OWNER.name
+      && !jA.keys.some((k) => /price|offers|startDate|courseSchedule|hasCourseInstance/i.test(k)), JSON.stringify(jA && { faqOk: jA.faqOk, courses: jA.courses, keys: jA.keys }));
     ok(`A${w} requests go to the documented address`, (await q('document.querySelector("[data-contact-email]").textContent')) === 'klarwegofficial@gmail.com');
     ok(`A${w} the four approved policies are shown in the FAQ and its structured data`, (await q(policiesShown)) && POLICY_TEXTS.every((t) => jA.text.includes(t)), await q(policiesShown));
     ok(`A${w} consultation terms from the data: length, platform and cancellation`, (await q('document.querySelector("[data-consult-unit]").textContent')) === LIVE.consultation.durationMinutes + '-minute session on ' + LIVE.consultation.platform
       && (await q('(()=>{const e=document.querySelector("[data-consult-cancel]");return !e.hidden&&e.offsetParent!==null&&e.textContent})()')) === LIVE.consultation.cancellation);
-    ok(`A${w} the draft A1 course (fee, schedule, waitlist) does not leak to production`, !(await q(a1Leak)) && !/7,999|Beginner German/.test(jA.text), await q(a1Leak));
   }
-  await q('document.querySelector("#course-grid [data-request=interest]").click()'); await sleep(700);
-  ok('A "Register interest" (no course yet) switches the form to a free interest request', (await q('document.querySelector("input[name=rtype]:checked").value')) === 'interest' && (await q('document.getElementById("form-title").textContent')) === 'Register your interest');
+  // the waitlist CTA prefills a free interest request for A1; the hand-off says nothing is booked or charged
+  await q('document.querySelector("[data-book-course=live-a1]").click()'); await sleep(700);
+  ok('A "Join the waitlist" switches the form to a free interest request for A1', (await q('document.querySelector("input[name=rtype]:checked").value')) === 'interest'
+    && (await q('document.getElementById("form-title").textContent')) === 'Register your interest' && (await q('document.getElementById("bf-course").value')) === 'live-a1');
+  await q('(()=>{const s=(id,v)=>{const e=document.getElementById(id);e.value=v;e.dispatchEvent(new Event("change"))};s("bf-name","Test Person");s("bf-email","test@example.com");s("bf-level","A1");s("bf-goal","Other");const c=document.getElementById("bf-consent");c.checked=true;c.dispatchEvent(new Event("change"))})()');
+  await submit(); await sleep(500);
+  const prevA = await q('document.getElementById("consult-preview").textContent');
+  ok('A waitlist request: "Nothing booked or charged", no fee, names the A1 course', /Nothing booked or charged/.test(await q('document.getElementById("done-notice").innerText'))
+    && /^Live course interest \(no consultation requested, nothing to pay\)/.test(prevA) && !/₹/.test(prevA) && prevA.includes('Course of interest: ' + A1.title), prevA);
   await load(L + '#teacher-teacher-1');
   ok('A deep link to a draft teacher opens no dialog', await q('!document.getElementById("t-dialog").open'));
   ok('A deep link hash falls back to #teachers', (await q('location.hash')) === '#teachers', await q('location.hash'));
@@ -230,7 +246,7 @@ try {
   ok('C preview shows drafts + banner', await q('!document.getElementById("draft-banner").hidden && document.querySelectorAll(".t-card").length===' + N_T));
   ok('C teacher count', (await q('document.getElementById("t-count").textContent')) === N_T + ' teachers');
   const jC = await q(jsonld);
-  ok('C structured data never includes draft courses or teachers, even in the preview', !!jC && jC.faqOk && jC.courses.length === 0 && !new RegExp(DRAFT_RX.source + '|\\[[^\\]]+\\]', 'i').test(jC.text), jC && (jC.text.match(new RegExp('.{0,40}(' + DRAFT_RX.source + '|\\[[^\\]]+\\]).{0,40}', 'i')) || [''])[0]);
+  ok('C structured data never includes draft courses or teachers, even in the preview', !!jC && jC.faqOk && jC.courses.join() === A1.title && jC.instructors.join() === OWNER.name && !new RegExp(DRAFT_RX.source + '|\\[[^\\]]+\\]', 'i').test(jC.text), jC && (jC.text.match(new RegExp('.{0,40}(' + DRAFT_RX.source + '|\\[[^\\]]+\\]).{0,40}', 'i')) || [''])[0]);
   const a1Card = await q(`(()=>{const c=document.getElementById("cn-live-a1");return c?c.closest(".c-card").innerText:null})()`);
   ok('C preview: the A1 card shows the approved fee, payment terms, schedule and waitlist status, with no start date', !!a1Card && [A1.priceLabel, A1.paymentTerms, A1.frequency, A1.sessionLength, A1.totalDuration, A1.batchSize, 'Waitlist'].every((x) => a1Card.includes(x)) && /to be announced[\s\S]*next batch/i.test(a1Card), a1Card);
   ok('C several teachers: filters shown, directory layout', await q('!document.querySelector("#teachers .filters").hidden && !document.getElementById("teacher-grid").classList.contains("single")'));
@@ -312,10 +328,9 @@ try {
     await q('[...document.querySelectorAll("[data-consult-fee],[data-consult-days],[data-consult-dayadj]")].filter(e=>!e.classList.contains("fee-amt")&&/flex/.test(getComputedStyle(e.parentElement).display)).map(e=>e.parentElement.textContent.trim().slice(0,40)).join(" | ")'));
   ok('C2 new fee and period shown in every bound place', (await q('[...document.querySelectorAll("[data-consult-fee]")].every(e=>e.textContent==="₹150") && document.querySelectorAll("[data-consult-fee]").length>=8 && [...document.querySelectorAll("[data-consult-days]")].every(e=>e.textContent==="10 days") && document.querySelector("[data-consult-dayadj]").textContent==="10-day"')));
 
-  // ---- F. launch simulation: the owner's profile published, no drafts ----
-  // (test-only edits to the served data; the committed file stays draft)
+  // ---- F. the launch state in detail: the committed data, no test-only edits ----
   if (OWNER) {
-    const pub = [["id: 'reegan-gandhi',\n        draft: true,", "id: 'reegan-gandhi',\n        draft: false,"]];
+    const pub = [];
     const lo = OWNER.levels[0], hi = OWNER.levels.at(-1);
     for (const [w, mob] of [[375, true], [1280, false]]) {
       await load(L, { edits: pub, width: w, mobile: mob });
@@ -336,10 +351,8 @@ try {
     await key('Escape', 'Escape', 27); await sleep(200);
     ok('F the form offers the published teacher by name', (await q('[...document.getElementById("bf-teacher").options].map(o=>o.text).join("|")')) === 'Help me choose|' + OWNER.name);
     const jF = await q(jsonld);
-    ok('F structured data: FAQPage matches, still no Course (none published)', !!jF && jF.faqOk && jF.courses.length === 0, JSON.stringify(jF && jF.courses));
-    // with a course published too (test-only): its card links the teacher, and it enters the structured data
-    const a1 = LIVE.courses.find((c) => c.id === 'live-a1');
-    await load(L, { edits: pub.concat([["id: 'live-a1', draft: true,", "id: 'live-a1', draft: false,"]], a1.teacherIds.includes(OWNER.id) ? [] : [["teacherIds: ['" + a1.teacherIds[0] + "'],", "teacherIds: ['reegan-gandhi'],"]]) });
+    ok('F structured data: FAQPage matches, and the only Course is A1', !!jF && jF.faqOk && jF.courses.join() === A1.title, JSON.stringify(jF && jF.courses));
+    await load(L);
     ok('F2 the published course names its teacher as a profile link', (await q('document.querySelector(".c-card .t-link").textContent')) === OWNER.name);
     const jF2 = await q(jsonld);
     ok('F2 structured data: the published course with its published instructor, nothing else', !!jF2 && jF2.faqOk && jF2.courses.join() === LIVE.courses[0].title && jF2.instructors.join() === OWNER.name && !/\[[^\]]+\]|Draft/.test(jF2.text), JSON.stringify(jF2 && { c: jF2.courses, i: jF2.instructors }));
@@ -356,6 +369,8 @@ try {
     ok(`N${w} an email route replaces the form, to the documented address and reply time`, !!nj && nj.href === 'mailto:' + LIVE.contact.email && nj.text.includes(LIVE.contact.replyTime), JSON.stringify(nj));
     ok(`N${w} the approved policies and consultation terms are readable without JavaScript`, (await q(policiesShown)) && (await q('document.body.innerText')).includes(LIVE.consultation.cancellation));
     ok(`N${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
+    const nc = await q('(()=>{const p=document.querySelector("[data-nojs-course]");return p&&p.offsetParent?p.innerText:null})()');
+    ok(`N${w} the A1 waitlist is described without JavaScript: start date to be announced, free, not a booking`, !!nc && nc.includes(A1.title) && nc.includes(OWNER.name) && /waitlist only/.test(nc) && /start date is still to be announced/.test(nc) && /free and is not a booking/.test(nc), nc);
   }
 
   // ---- E. tablet widths: no overflow, with and without published content ----

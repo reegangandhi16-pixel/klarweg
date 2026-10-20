@@ -1,6 +1,6 @@
 # Live Classes — accountant handoff
 
-**Status: awaiting an accountant's advice.** Nothing here is tax or accounting advice. Part 1 lists facts. Part 2 lists questions only the accountant can answer. Part 3 is a working register and procedure for the owner to adjust once those answers are in. The live service is **not launched** (D8, on hold), and no live-class money has been taken.
+**Status: awaiting an accountant's advice.** Nothing here is tax or accounting advice. Part 1 lists facts. Part 2 lists questions only the accountant can answer. Part 3 is a working register and procedure for the owner to adjust once those answers are in. The Live Classes page is public as a **waitlist** (D8, 2026-10-20): course enrolment is not open and no course fee is accepted until it is.
 
 ## 1. Facts
 

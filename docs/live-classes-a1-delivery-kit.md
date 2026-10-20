@@ -62,7 +62,12 @@ Verified on 2026-10-20 against the Goethe-Institut's official pages:
 Sources:
 - the [Durchführungsbestimmungen](https://www.goethe.de/pro/relaunch/prf/en/Durchfuehrungsbestimmungen_A1_Start_Deutsch_1.pdf);
 - the [Modellsatz](https://www.goethe.de/pro/relaunch/prf/materialien/A1_sd1/sd_1_modellsatz.pdf);
-- [Goethe-Institut Max Mueller Bhavan](https://www.goethe.de/ins/in/en/spr/prf/gzsd1.cfm).
+- [Goethe-Institut Max Mueller Bhavan](https://www.goethe.de/ins/in/en/spr/prf/gzsd1.cfm);
+- the official online sample tasks for [Schreiben](https://bfu.goethe.de/a1_sd1/schreiben.php) and [Sprechen](https://bfu.goethe.de/a1_sd1/sprechen.php), which show:
+  - the form with 5 gaps;
+  - the message of about 30 words covering 3 points, with a greeting and a closing;
+  - the 7 prompts for Sprechen Teil 1;
+  - the cards for Teile 2 and 3, mostly pictures for Teil 3.
 
 **Re-check these pages before week 10**, because formats can change. This kit's worksheets are "Goethe-style" practice that follows the format above. They are not official material, and they do not claim to match the exam's difficulty or marking. Session 35 uses the official free Modellsatz for the timed mock.
 

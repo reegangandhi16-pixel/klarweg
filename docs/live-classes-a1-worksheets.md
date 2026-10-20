@@ -678,7 +678,7 @@ Use WS-T6 prompts P1–P3, with the rubric and model answers.
 
 Prompt words on screen: **Name? · Alter? · Land? · Wohnort? · Sprachen? · Beruf? · Hobby?**
 
-The teacher can also ask the candidate to spell their name or say a number.
+These seven prompts are the official ones (see the kit, §1). *Klarweg addition, not part of the official prompt list:* the teacher may also ask the candidate to spell their name or say a number, for extra practice.
 
 *Model:*
 > Ich heiße Arjun. Ich bin 24 Jahre alt. Ich komme aus Indien und wohne in Pune. Ich spreche Hindi, Marathi, Englisch und ein bisschen Deutsch. Ich bin Student. Mein Hobby ist Fotografieren.
@@ -698,7 +698,7 @@ Candidates draw a word card, ask a partner a question with it, and the partner a
 
 ### Sprechen, part 3 style: requests and responses (S33, S36)
 
-The official exam uses picture cards. Here word cards replace them:
+The official cards mostly show pictures of everyday objects, and a few show words. Here word cards replace them:
 
 das Fenster (aufmachen) · ein Stift · ein Glas Wasser · langsam sprechen · die Tür (zumachen) · ein Wörterbuch
 

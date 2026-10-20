@@ -46,6 +46,8 @@ export function errorView({ code = 'network', status = 0 } = {}) {
     case 'attempt_closed': return { title: 'Prüfung bereits abgeschlossen', body: 'Diese Prüfung wurde bereits abgeschlossen, zum Beispiel in einem anderen Tab. Das Ergebnis finden Sie in der Übersicht.', actions: [overview] };
     case 'attempt_voided': return { title: 'Versuch ungültig', body: 'Dieser Versuch wurde für ungültig erklärt und kann nicht fortgesetzt werden.', actions: [overview] };
     case 'exam_access_required': case 'mode_disabled': return { title: 'Nicht verfügbar', body: 'Der Prüfungsbereich ist für Ihr Konto derzeit nicht freigeschaltet.', actions: [overview] };
+    case 'release_unconfigured': case 'release_misconfigured': return { title: 'Vorübergehend nicht verfügbar', body: 'Die Übungen sind gerade nicht verfügbar. Bereits gespeicherte Antworten bleiben erhalten. Bitte versuchen Sie es später erneut.', actions: [{ act: 'reload', label: 'Erneut versuchen' }] };
+    case 'form_not_in_release': return { title: 'Übung nicht mehr verfügbar', body: 'Diese Übungsform ist nicht mehr freigegeben und kann nicht fortgesetzt werden. Bereits abgeschlossene Ergebnisse bleiben in der Übersicht.', actions: [overview] };
     case 'rate_limited': return { title: 'Bitte kurz warten', body: 'Es wurden in kurzer Zeit zu viele Anfragen gesendet. Bereits gespeicherte Antworten bleiben erhalten. Versuchen Sie es in einer Minute erneut.', actions: [{ act: 'reload', label: 'Erneut versuchen' }] };
   }
   // an expired lease that could not be renewed automatically (e.g. no connection meanwhile): a reload renews it

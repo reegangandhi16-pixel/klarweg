@@ -154,7 +154,7 @@ export function buildRelease({ release, formDirs, purpose = 'test', levelsDir = 
       modules: modulesOut, keys_key: keysKey, assets: formAssets.length });
 
     /* registry SQL */
-    sql.push(`INSERT OR REPLACE INTO forms (id, level_config_id, kind, label, status, rev, release, created_at) VALUES (${q(form.id)}, ${q(form.level_config)}, ${q(form.kind)}, ${q(form.label)}, ${q(form.status)}, ${q(form.rev)}, ${q(release)}, ${q(builtAt)});`);
+    sql.push(`INSERT OR REPLACE INTO forms (id, level_config_id, kind, purpose, label, status, rev, release, created_at) VALUES (${q(form.id)}, ${q(form.level_config)}, ${q(form.kind)}, ${q(form.purpose || null)}, ${q(form.label)}, ${q(form.status)}, ${q(form.rev)}, ${q(release)}, ${q(builtAt)});`);   // purpose: migration 0003
     for (const [m, o] of Object.entries(modulesOut)) {
       const order = lcMod(m).order;
       sql.push(`INSERT OR REPLACE INTO form_modules (form_id, module, module_order, package_key, package_sha256) VALUES (${q(form.id)}, ${q(m)}, ${order}, ${q(o.key)}, ${q(o.sha256)});`);

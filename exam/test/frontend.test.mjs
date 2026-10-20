@@ -653,3 +653,13 @@ test('START SCREEN: full simulation when available, else the single available mo
   assert.equal(/data-module=/.test(full), false);
   assert.equal(/<h1>/.test(one) && (one.match(/<h1/g) || []).length, 1);
 });
+
+test('ERRORS (release set): a missing/invalid release or a withdrawn form gets its own message, not "Verbindung unterbrochen"', () => {
+  for (const code of ['release_unconfigured', 'release_misconfigured']) {
+    const v = errorView({ code, status: 503 });
+    assert.equal(v.title, 'Vorübergehend nicht verfügbar', code);
+    assert.equal(/Verbindung|EXAM_|frm:/.test(v.body), false, code);   // no operator detail for learners
+  }
+  const w = errorView({ code: 'form_not_in_release', status: 403 });
+  assert.equal(w.title, 'Übung nicht mehr verfügbar');
+});

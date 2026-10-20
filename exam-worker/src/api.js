@@ -5,6 +5,7 @@ import { fail, now, readJsonBody, sha256Hex, DEVICE_ID_RE } from './http.js';
 import { log } from './log.js';
 import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly } from './flags.js';
 import { hasExamAccess, hasRole } from './auth.js';
+import { releaseSet, RELEASE_MESSAGES } from './release.js';
 import { formRow, levelConfig, moduleConfig, loadPackage } from './content.js';
 import { countWords } from './wordcount.js';
 import { BANDS, rubricTotal, rubricUnits } from './scoring.js';
@@ -91,16 +92,18 @@ export async function myAttempts(env, userId) {
 export async function availability(env, userId) {
   const out = [];
   const only = moduleOnly(env);
+  const rs = await releaseSet(env);
   for (const [mode, def] of Object.entries(MODES)) {
     // a single-module mode is listed once per enabled module; while EXAM_MODULE_ONLY is unset it is listed as disabled
     const modules = def.single_module ? (only && only.ok ? only.modules : [null]) : [undefined];
     for (const [lvlKey, lvl] of Object.entries(LEVELS)) {
-      let reason = modeBlock(env, def);
+      let reason = modeBlock(env, def) || rs.block;
       if (!reason && !(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) reason = 'no_access';
       if (!reason) {
-        const forms = await env.DB.prepare(`SELECT COUNT(*) AS n FROM forms f JOIN level_configs l ON l.id = f.level_config_id
-            WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).first();
-        if (!forms.n) reason = 'no_forms';
+        const forms = (await env.DB.prepare(`SELECT f.id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
+            WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
+          .filter((f) => !rs.ids || rs.ids.includes(f.id));
+        if (!forms.length) reason = 'no_forms';
       }
       for (const module of modules) out.push({ mode, level: lvlKey, ...(module === undefined ? {} : { module }), available: !reason, reason });
     }
@@ -110,6 +113,14 @@ export async function availability(env, userId) {
   const last = await env.DB.prepare("SELECT id FROM attempts WHERE user_id = ?1 AND status = 'completed' ORDER BY completed_at DESC LIMIT 1").bind(userId).first();
   return { ok: true, server_now: now(env), modes: out,
     open_attempts: open.map((a) => ({ attempt_id: a.id, mode: apiMode(a), ...(a.module_scope ? { module: a.module_scope } : {}) })), last_completed: last ? last.id : null };
+}
+
+/* An attempt keeps its form; while a release set is active, an attempt on a form outside it cannot start a module or
+   load content (e.g. opened before the set was narrowed). Fail closed while the set itself is missing or invalid. */
+async function requireReleased(env, attempt) {
+  const rs = await releaseSet(env);
+  if (rs.block) fail(503, rs.block, RELEASE_MESSAGES[rs.block]);
+  if (rs.ids && !rs.ids.includes(attempt.form_id)) fail(403, 'form_not_in_release', 'This practice form is not part of the current release.');
 }
 
 /* ---------- create attempt (server-side, immutable form assignment) ---------- */
@@ -136,6 +147,8 @@ export async function createAttempt(env, userId, request) {
   const block = modeBlock(env, def, scope);
   if (block === 'module_disabled') fail(403, 'module_disabled');
   if (block) fail(403, 'mode_disabled');
+  const rs = await releaseSet(env);
+  if (rs.block) fail(503, rs.block, RELEASE_MESSAGES[rs.block]);
   const storedMode = def.family || body.mode;
   if (!(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) fail(403, 'exam_access_required');
 
@@ -152,7 +165,8 @@ export async function createAttempt(env, userId, request) {
   }
 
   const forms = (await env.DB.prepare(`SELECT f.id, f.release, f.level_config_id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
-      WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')}) ORDER BY f.id`).bind(lvl, ...def.kinds).all()).results;
+      WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')}) ORDER BY f.id`).bind(lvl, ...def.kinds).all()).results
+    .filter((f) => !rs.ids || rs.ids.includes(f.id));   // a release set narrows the pool; it never adds a form
   if (!forms.length) fail(409, 'no_forms_available');
   /* ENGINE §7.3 repeat-avoidance: among the forms THIS user has attempted least often (never attempted = 0, so unseen
      forms always win), choose uniformly with the server CSPRNG. Other learners' attempts play no part. */
@@ -229,6 +243,7 @@ export async function startModule(env, userId, attemptId, module, request) {
     // EXAM_MODULE_ONLY also holds for attempts opened before it was set: no other module can start (fail closed)
     const only = moduleOnly(env);
     if (only && !(only.ok && only.modules.includes(module))) fail(403, 'module_disabled');
+    await requireReleased(env, attempt);
     if (m.status === 'locked') fail(409, 'module_locked');
     if (m.status !== 'available') fail(409, 'invalid_transition', `Module is ${m.status}.`);
     const running = (await attemptModules(env, attemptId)).find((x) => x.status === 'running');
@@ -253,6 +268,7 @@ export async function getPackage(env, userId, attemptId, module, url) {
   const m = await moduleRow(env, attemptId, module);
   const t = now(env);
   requireRunning(m, t, { grace: false });
+  await requireReleased(env, attempt);
   const pkg = await loadPackage(env, attempt.form_id, module);
   if (module !== 'hoeren') return { ok: true, server_now: t, module: moduleView(m, t), package: pkg.data };
   const readinessMs = await hoerenReadinessMs(env, attempt);

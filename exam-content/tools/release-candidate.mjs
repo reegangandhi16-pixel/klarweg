@@ -55,7 +55,7 @@ export function approvalOf(forms, module, records) {
   });
 }
 
-export function releaseCandidate({ forms: list, module, release, approvedDir = null, internalCandidate = false, builtAt, gitSha = null }) {
+export function releaseCandidate({ forms: list, module, release, approvedDir = null, internalCandidate = false, builtAt, gitSha = null, releasedForms = null }) {
   if (!MODULES.includes(module)) throw new Error(`unknown module ${module} (${MODULES.join('|')})`);
   const forms = selectForms(list);
   if (approvedDir && internalCandidate) throw new Error('--approved and --internal-candidate exclude each other');
@@ -64,6 +64,9 @@ export function releaseCandidate({ forms: list, module, release, approvedDir = n
   if (unapproved.length && !internalCandidate) {
     throw new Error(`refusing a learner release: ${module} not approved for ${unapproved.map((a) => `${a.name} (${a.status}${a.problems.length ? `: ${a.problems.join(' | ')}` : ''})`).join(', ')}`);
   }
+  // released content is immutable: a form already in released-forms.json must still have its released fingerprint
+  const locked = releasedForms || JSON.parse(fs.readFileSync(path.join(ROOT, 'released-forms.json'), 'utf8')).forms;
+  for (const f of forms) { const l = locked.find((x) => x.id === f.id); if (l && l.content_sha256 !== f.sha) throw new Error(`${f.name} (${f.id}) was released with different content; create a new revision (tools/revise-form.mjs) instead of editing it`); }
   const build = buildRelease({ release, purpose: 'learner', formDirs: forms.map((f) => f.dir), builtAt });
   const built = build.manifest.forms.map((f) => f.id);
   if (JSON.stringify(built) !== JSON.stringify(forms.map((f) => f.id))) throw new Error(`release contains ${built.join(',')}, expected exactly ${forms.map((f) => f.id).join(',')}`);
@@ -74,7 +77,9 @@ export function releaseCandidate({ forms: list, module, release, approvedDir = n
     status: approved ? 'EX-03 module approval recorded for every form (see approval); other release gates are not checked here'
       : 'INTERNAL CANDIDATE — NOT APPROVED. Not for learners. EX-03 has not approved these forms.',
     forms: forms.map((f) => ({ name: f.name, id: f.id, content_sha256: f.sha })),
-    approval, settings
+    approval, settings,
+    // after a real (approved) learner release, add these to exam-content/released-forms.json
+    released_forms_entries: approved ? forms.map((f) => ({ id: f.id, content_sha256: f.sha, release })) : []
   };
   return { build, record, settings, approved };
 }

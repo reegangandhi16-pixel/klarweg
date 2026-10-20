@@ -43,6 +43,10 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
   if (form.kind === 'synthetic' && !SYNTHETIC_PURPOSES.includes(form.purpose)) E('synthetic_purpose', `synthetic form needs purpose ${SYNTHETIC_PURPOSES.join('|')} (got ${form.purpose})`);
   if (form.kind !== 'synthetic' && 'purpose' in form) E('synthetic_purpose', 'purpose is declared only on synthetic forms');
   if (keys?.form_id !== form.id) E('key_form_mismatch', `keys.json form_id ${keys?.form_id} ≠ ${form.id}`);
+  if (form.rev > 1) {
+    const [base, sup] = [(form.id || '').split('@')[0], form.supersedes || ''];
+    if (sup.split('@')[0] !== base || !(Number(sup.split('@')[1]) < form.rev)) E('revision_ids', `form ${form.id}: supersedes must name an earlier revision of ${base} (got ${form.supersedes})`);
+  } else if (form.supersedes) E('revision_ids', `form ${form.id}: a revision-1 form supersedes nothing`);
 
   const levelConfig = loadLevelConfig(levelsDir, form.level_config);
   if (!levelConfig) { E('level_config', `unknown level config ${form.level_config}`); return { ok: false, errors, warnings, stats: {} }; }
@@ -113,6 +117,15 @@ export function validateForm(formDir, { levelsDir = path.join(ROOT, 'levels') } 
     if (!ITEM_STATUS.includes(it.status)) E('bad_enum', `item ${it.id} status ${it.status}`);
     if (!Number.isInteger(it.rev) || it.rev < 1 || !Number.isInteger(it.meta_version) || it.meta_version < 1) E('bad_revision', `item ${it.id} rev/meta_version`);
     if (it.supersedes && !ID.item.test(it.supersedes)) E('bad_revision', `item ${it.id} supersedes ${it.supersedes}`);
+    /* SCHEMA §2 revision contract (tools/revise-form.mjs): item ids are global in D1, so a form revision N > 1 gives
+       every item a new id ending in -r<N> that supersedes its predecessor; revision 1 ids never carry a suffix */
+    const sfx = /-r(\d+)$/.exec(it.id || '');
+    if (form.rev === 1 && sfx) E('revision_ids', `item ${it.id}: revision suffix on a revision-1 form`);
+    if (form.rev > 1) {
+      if (!sfx || Number(sfx[1]) !== form.rev) E('revision_ids', `item ${it.id}: a revision-${form.rev} form needs item ids ending in -r${form.rev} (tools/revise-form.mjs)`);
+      if (it.rev !== form.rev) E('revision_ids', `item ${it.id}: rev ${it.rev} ≠ form rev ${form.rev}`);
+      if (!it.supersedes) E('revision_ids', `item ${it.id}: supersedes (the item it replaces) is required in a revision`);
+    }
     for (const f of FORBIDDEN_ITEM_FIELDS) if (f in it) E('key_in_item', `item ${it.id} contains forbidden field "${f}" (keys belong in keys.json)`);
     if (!tasksById[it.task_id]) E('orphan_item', `item ${it.id} task ${it.task_id} unknown`);
     else if (!tasksById[it.task_id].items.includes(it.id)) E('orphan_item', `task ${it.task_id} does not list item ${it.id}`);

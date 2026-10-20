@@ -52,12 +52,18 @@ test('PREFLIGHT: same form id with changed content → conflict (explanation in 
   } finally { fs.rmSync(expl, { recursive: true, force: true }); fs.rmSync(stem, { recursive: true, force: true }); }
 });
 
-test('PREFLIGHT: a new form revision that reuses item ids of another form → conflict (items_index.item_id is global)', () => {
+test('PREFLIGHT: a new form revision that reuses item ids of another form → refused by the builder, and a conflict for the preflight', () => {
   const db = createExamD1();
   db.raw.exec(learner([P3]).sql);
-  const rev2 = variant((d) => { editJson(d, 'form.json', (f) => { f.id = 'frm:b1:synthetic-p3@2'; f.rev = 2; }); editJson(d, 'keys.json', (k) => { k.form_id = 'frm:b1:synthetic-p3@2'; }); });
+  const rev2 = variant((d) => { editJson(d, 'form.json', (f) => { f.id = 'frm:b1:synthetic-p3@2'; f.rev = 2; f.supersedes = 'frm:b1:synthetic-p3@1'; }); editJson(d, 'keys.json', (k) => { k.form_id = 'frm:b1:synthetic-p3@2'; }); });
   try {
-    const r = preflight(learner([rev2]), exportOf(db));
+    // layer 1: the revision contract in the validator (tools/revise-form.mjs gives new item ids)
+    assert.throws(() => learner([rev2]), /revision_ids/);
+    // layer 2: registry rows produced any other way are still caught before an import (items_index.item_id is global)
+    const b = learner([P3], 'r102');
+    const re = (id) => (id === 'frm:b1:synthetic-p3@1' ? 'frm:b1:synthetic-p3@2' : id);
+    const rows = { ...b.rows, forms: b.rows.forms.map((f) => ({ id: re(f.id) })), form_modules: b.rows.form_modules.map((m) => ({ ...m, form_id: re(m.form_id) })), items_index: b.rows.items_index.map((i) => ({ ...i, form_id: re(i.form_id) })) };
+    const r = preflight({ rows }, exportOf(db));
     assert.equal(r.forms[0].verdict, 'conflict');
     assert.match(r.forms[0].reasons[0], /item id\(s\) already belong to another form \(e\.g\. itm:b1:p3-[a-z0-9-]+ → frm:b1:synthetic-p3@1\)/);
   } finally { fs.rmSync(rev2, { recursive: true, force: true }); }

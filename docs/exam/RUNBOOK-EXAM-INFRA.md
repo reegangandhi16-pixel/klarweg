@@ -49,7 +49,9 @@ Secrets (`wrangler secret put`), each ≥ 32 characters:
      `node exam-content/tools/registry-preflight.mjs --export-commands klarweg-exam`, then run
      `node exam-content/tools/registry-preflight.mjs --forms <names> --existing <export dir>`. Import only on
      "PREFLIGHT OK". A learner `registry.sql` uses plain `INSERT`, so it can never replace rows that attempts reference;
-     an existing id aborts the whole import. Changed content needs a new revision (SCHEMA §2).
+     an existing id aborts the whole import. Changed content needs a new revision (SCHEMA §2, `CONTENT-REVISIONS.md`: `tools/revise-form.mjs`).
+   - After a learner release: add the release tool's `released_forms_entries` to `exam-content/released-forms.json`,
+     so CI keeps that content immutable.
    - Run `/tmp/kx-r000/registry.sql` against D1 (`wrangler d1 execute klarweg-exam --remote --file …`).
 5. Set the secrets (section 2).
 6. Deploy klarweg-exam with all flags still OFF.

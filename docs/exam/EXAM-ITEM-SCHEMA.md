@@ -38,6 +38,9 @@ Shared: Asset (text, image, audio, transcript) · Key · ScoringRule · Rubric �
 | Release | `r<NNN>` | `r004` |
 
 - IDs are **immutable**. Editing an item's *content* creates a new revision (`rev`, plus a `supersedes` link). Metadata-only fixes keep the ID and increment `meta_version`.
+  - **Implementation (2026-10-20, `CONTENT-REVISIONS.md`):** D1 keys items globally (`items_index.item_id`), so a form
+    revision N > 1 gives every item a new id with the suffix `-r<N>` (`tools/revise-form.mjs`; validator
+    `revision_ids`). Released forms are listed in `exam-content/released-forms.json` and never change.
 - **Display numbers** (1–30, 0 for examples) are presentation attributes on the Part/Item placement, never identity.
 
 ---

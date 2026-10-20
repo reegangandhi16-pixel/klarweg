@@ -43,7 +43,8 @@ const ALLOWED_LAYOUT = [
   /^exam-content\/schemas\/[a-z0-9-]+\.mjs$/,
   /^exam-content\/tools\/[a-z0-9-]+\.mjs$/,
   /^exam-content\/test\/[a-z0-9-]+\.test\.mjs$/,
-  /^exam-content\/forms\/synthetic\/[a-z0-9-]+\/(form|tasks|items|keys|assets)\.json$/
+  /^exam-content\/forms\/synthetic\/[a-z0-9-]+\/(form|tasks|items|keys|assets)\.json$/,
+  /^exam-content\/released-forms\.json$/   // ids + fingerprints of released forms only (shape checked below)
 ];
 
 function walk(root, rel, out) {
@@ -75,6 +76,11 @@ export function checkPublicBoundary({ repoRoot = DEFAULT_ROOT, registered = SYNT
       if (f.symlink) { E('symlink', f.rel, 'symbolic links are not allowed in exam trees (could point at private/external content)'); continue; }
       if (MEDIA_EXT.test(f.rel)) E('media_file', f.rel, 'exam media must not be committed (TEST AUDIO is generated at build time; real media lives in the private content repo)');
       if (tree === 'exam-content' && !ALLOWED_LAYOUT.some((re) => re.test(f.rel))) E('unexpected_file', f.rel, 'not part of the allowed public exam-content layout');
+      if (f.rel === 'exam-content/released-forms.json') {
+        let j = null; try { j = JSON.parse(fs.readFileSync(path.join(repoRoot, f.rel), 'utf8')); } catch { E('bad_json', f.rel, 'not valid JSON'); }
+        const okEntry = (e) => e && typeof e === 'object' && Object.keys(e).every((k) => ['id', 'content_sha256', 'release'].includes(k));
+        if (j && (Object.keys(j).some((k) => !['note', 'forms'].includes(k)) || !Array.isArray(j.forms) || !j.forms.every(okEntry))) E('released_forms_shape', f.rel, 'only { note, forms: [{ id, content_sha256, release }] } is allowed (no content, no keys)');
+      }
     }
   }
 

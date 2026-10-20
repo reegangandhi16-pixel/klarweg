@@ -53,7 +53,7 @@
 >
 > Guten Tag [Anrede Name],
 >
-> Klarweg entwickelt eine Online-Übungsplattform für Deutschlernende (Vorbereitung auf das Goethe-Zertifikat B1).
+> Klarweg entwickelt eine Online-Übungsplattform für Deutschlernende (Prüfungsvorbereitung auf Niveau B1 des GER).
 > Bevor Lernende die ersten Leseübungen nutzen, prüfen drei unabhängige Fachleute (zwei B1-Lehrkräfte, eine
 > muttersprachliche Linguistin bzw. ein Linguist) jede Aufgabe. Wir suchen eine unabhängige Person, die diese Prüfung
 > koordiniert:
@@ -120,17 +120,130 @@ scope in `EXTERNAL-REVIEW-OUTREACH.md`.
 - **Effort:** about 0.5–1 day.
 - **Contract points:** a fixed fee for a written opinion and a list of wording changes; confidentiality.
 
-## 4. The smallest choices needed to proceed
-Engineering cannot do either of these: they need a person or a spending authorisation.
+## 4. Owner choices C1 and C2: answered 2026-10-20
+- **C1:** "Prepare the independent coordinator role description as a short, public-safe recruitment post and a separate
+  direct-invitation message. I will review and publish the post through a professional channel myself. Do not publish,
+  contact candidates or appoint anyone." The materials are in §5 and §6. The owner reviews and publishes them;
+  engineering publishes nothing.
+- **C2:** "Quotes first, with no commitment until I approve each engagement in writing. This applies to the independent
+  coordinator and EX-03, EX-01, EX-04, EX-05 and EX-07." The quote request is in §7 and the approval rule in §8.
+- **Owner conditions:**
+  - EX-01 waits for D7 (retention);
+  - EX-05 needs the owner's explicit written authorisation, limited to non-production (§9 draft, unsigned);
+  - nobody begins paid work before the owner's written approval.
 
-```
-C1 Coordinator search: [I will approach: name / I will post the coordinator description myself via: channel]
-C2 Fees: [quotes first, no commitment until I approve each one / budget cap per review: EX-03 … · EX-01 … · EX-04 … · EX-05 … · EX-07 …]
-```
-- **C1:** without a coordinator, no EX-03 reviewer can be approached. The owner (not engineering) sends the e-mail in
-  §2 or posts the role.
-- **C2:** "quotes first" commits nothing, and each quote then needs a yes/no from the owner. A cap lets the
-  coordinator or reviewers proceed within it. Either way, nothing starts without the owner's written yes.
+## 5. Recruitment post (public-safe; for the owner to review and publish)
+Contains no material, answer keys, security details, internal paths or product names under trademark review.
+"Goethe" is deliberately absent until EX-07 has given its opinion.
 
-Everything else is ready: the briefs, the e-mail drafts, the packet, the checks, and the non-production environment for
-EX-05.
+**German**
+> **Unabhängige Koordination einer Fachprüfung von Deutsch-Leseaufgaben (B1, freiberuflich, ca. 6–10 Stunden)**
+>
+> Klarweg, eine Online-Lernplattform für Deutsch, lässt Leseübungen auf Niveau B1 (GER) von drei unabhängigen
+> Fachleuten prüfen, bevor Lernende sie nutzen. Wir suchen eine unabhängige Person, die diese Prüfung koordiniert:
+> - drei Fachleute gewinnen (zwei B1-Lehrkräfte, eine muttersprachliche Linguistin bzw. ein Linguist);
+> - ihnen vertrauliche Unterlagen übergeben;
+> - auf unabhängiges Arbeiten achten;
+> - die Ergebnisse einsammeln.
+>
+> Sie prüfen selbst keine Aufgaben.
+>
+> **Sie bringen mit:** keine Verbindung zu Klarweg; Zuverlässigkeit im Umgang mit vertraulichen Unterlagen; Deutsch
+> und Englisch; idealerweise Kontakte im Bereich Deutsch als Fremdsprache.
+> **Umfang:** etwa 6–10 Stunden über einige Wochen, remote.
+>
+> Bitte senden Sie ein unverbindliches Angebot (Stundenzahl, Gesamthonorar mit Währung, Zeitraum) an
+> [Kontakt, vom Owner einzusetzen]. Eine Beauftragung erfolgt erst nach schriftlicher Bestätigung.
+
+**English**
+> **Independent coordinator for an expert review of German reading exercises (B1, freelance, approx. 6–10 hours)**
+>
+> Klarweg, an online German-learning platform, has its B1 (CEFR) reading exercises checked by three independent
+> experts before learners use them. We are looking for an independent person to coordinate that review:
+> - recruit three experts (two B1 teachers, one native-speaker linguist);
+> - hand them confidential material;
+> - make sure they work independently;
+> - collect the results.
+>
+> You do not review the exercises yourself.
+>
+> **You bring:** no connection to Klarweg; reliability with confidential material; German and English; ideally
+> contacts in German-as-a-foreign-language teaching.
+> **Scope:** about 6–10 hours over a few weeks, remote.
+>
+> Please send a non-binding quote (hours, total fee with currency, timeframe) to [contact, set by the owner]. No
+> engagement exists until it is confirmed in writing.
+
+## 6. Direct invitation (for a person the owner already knows)
+> **Betreff:** Anfrage: unabhängige Koordination einer Fachprüfung von B1-Leseaufgaben
+>
+> Guten Tag [Anrede Name],
+>
+> ich möchte Sie fragen, ob Sie die Koordination einer unabhängigen Fachprüfung für Klarweg übernehmen würden. Drei
+> Fachleute (zwei B1-Lehrkräfte, eine muttersprachliche Linguistin bzw. ein Linguist) prüfen 90 Leseaufgaben auf
+> Niveau B1, jede Person unabhängig. Ihre Aufgabe wäre:
+> - die drei Fachleute zu gewinnen;
+> - ihnen die vertraulichen Unterlagen zu übergeben;
+> - darauf zu achten, dass niemand vor Abgabe aller Urteile über die Aufgaben spricht;
+> - die ausgefüllten Prüfbögen einzusammeln und an uns weiterzuleiten.
+>
+> Sie prüfen selbst keine Aufgaben. Wir schätzen den Aufwand auf 6–10 Stunden über einige Wochen.
+>
+> Voraussetzung ist, dass Sie keine Verbindung zu unserem Team haben und an den Aufgaben nicht mitgewirkt haben. Vor
+> Beginn bitten wir um eine kurze Unabhängigkeits- und Vertraulichkeitserklärung.
+>
+> Wenn Sie grundsätzlich Interesse haben, senden Sie mir bitte ein unverbindliches Angebot (siehe unten). Eine
+> Beauftragung entsteht erst mit meiner schriftlichen Bestätigung; vorher beginnt keine bezahlte Arbeit.
+>
+> Mit freundlichen Grüßen
+> [Name, Funktion, Klarweg]
+>
+> *(Attach the quote request in §7.)*
+
+## 7. Quote request (one template for all six engagements)
+Send it with every e-mail draft (`EXTERNAL-REVIEW-OUTREACH.md` §1–§5) and with §5/§6.
+
+> **Angebot / Quote — please include:**
+> 1. **Scope** as you understand it, in your own words. *(Engagement: coordinator / EX-03 slot A, B or C / EX-01
+>    privacy / EX-04 accessibility / EX-05 security / EX-07 trademark.)*
+> 2. **Estimated hours.**
+> 3. **Total fee and currency**, fixed price or hourly rate with a cap, and whether VAT is included.
+> 4. **Timeline:** earliest start, duration, delivery date.
+> 5. **Deliverables:** what you hand over, and in which form.
+> 6. **Re-test or follow-up:** is one included, and what does an additional one cost? *(EX-03: a fresh review of a revised
+>    item; EX-04/EX-05: a re-test of fixed findings; EX-01/EX-07: a review of the corrected text.)*
+> 7. **Additional expenses** (travel, tools, licences), or "none".
+> 8. **Conflicts of interest**, or "none".
+> 9. **Validity** of the quote.
+>
+> This is a request for a non-binding quote. No engagement exists, and no paid work may begin, until Klarweg confirms
+> in writing.
+
+## 8. Approval rule (C2)
+- Nobody starts paid work without the owner's written approval of that specific engagement.
+- Engineering and the coordinator may collect and compare quotes. Neither accepts one.
+- **Approval record** (written by the owner, kept with the quotes):
+  > I approve [engagement] by [name/company] per quote dated [date]: total [fee, currency], timeline [..], re-test
+  > terms [..]. [Date, owner.]
+- Engineering keeps a status list (not contacted → quote received → approved by owner → started → delivered → accepted),
+  in the private review folder, never in the public repository.
+- **Order constraints set by the owner:**
+  - EX-01 is requested only after D7 is answered;
+  - EX-05 starts only after the §9 authorisation is signed.
+
+## 9. EX-05 test authorisation (DRAFT, unsigned; for the owner to complete and sign before any security test)
+> **Authorisation for security testing (non-production only).**
+> Klarweg ([legal entity, address]) authorises [tester name / company] to perform security testing between [start date
+> and time] and [end date and time] ([time zone]) on the following systems **only**: the Klarweg non-production exam
+> environment (non-production sign-in Worker and exam Worker, host names given separately and privately). Production
+> systems, the main website, payment systems and third-party platforms are out of scope.
+> - **Not permitted:** denial-of-service or load testing, social engineering, physical access, testing outside the
+>   window, and accessing or keeping data beyond the provided synthetic test accounts.
+> - **Findings:** reported privately to [contact] only, and not disclosed to third parties.
+> - **Afterwards:** the tester deletes the test credentials and any copied data.
+> - **Stopping:** this authorisation can be withdrawn at any time in writing.
+>
+> [Place, date, name, signature of an authorised Klarweg representative]
+
+Engineering gives the tester the host names and synthetic accounts only after this is signed, and only for the stated
+window.

@@ -13,7 +13,10 @@
      · lets a signed-in learner pick a bookable teacher and slot, then
        pays the ₹100 fee in Cashfree's checkout;
      · on return, asks the Worker for the booking's status and shows the
-       confirmation and booking reference on the page.
+       confirmation and booking reference on the page;
+     · for a CONFIRMED booking only, asks the Worker for the joining link
+       (GET /consult/bookings/:ref/join). The link lives in a Worker secret;
+       it is never in this file, the page or its data.
 
    What it never does:
      · decide that a payment succeeded. Only the Worker's status, which
@@ -203,13 +206,15 @@
     var when = esc(niceDate(b.date)) + ', ' + esc(b.slotStart) + '–' + esc(b.slotEnd) + ' IST';
     var contact = esc((D.contact && D.contact.email) || 'klarwegofficial@gmail.com');
     if (b.status === 'confirmed') {
-      return show('<div class="kwcb-done" tabindex="-1" id="kwcb-done"><h3>Your consultation is booked</h3>'
+      show('<div class="kwcb-done" tabindex="-1" id="kwcb-done"><h3>Your consultation is booked</h3>'
         + (b.testMode ? '<span class="kwcb-test">TEST MODE · no real payment</span>' : '')
         + '<p>Booking reference</p><p class="kwcb-ref">' + esc(b.ref) + '</p>'
         + '<p>' + esc(teacherName(b.teacherId)) + ' · ' + when + ' · ' + esc(b.durationMinutes) + ' minutes on Google Meet</p>'
-        + '<p class="kwcb-note">' + esc(OB.joiningDetails) + '</p>'
+        + '<div id="kwcb-join"><p class="kwcb-note">Checking your joining link…</p></div>'
         + '<p class="kwcb-note">Keep this reference: take a screenshot or print this page. You can see it again here whenever you are signed in.</p>'
         + '<button type="button" class="btn btn-secondary" id="kwcb-print">Print</button></div>');
+      loadJoin(b.ref);
+      return;
     }
     if (b.status === 'pending') {
       return show('<h3>Payment not confirmed yet</h3><p class="kwcb-note">Booking <span class="kwcb-ref">' + esc(b.ref) + '</span> is held for you while the payment completes. If you closed the payment page, this time is released automatically after 20 minutes.</p>'
@@ -220,6 +225,23 @@
     }
     show('<h3>This booking was not completed</h3><p class="kwcb-note">Booking <span class="kwcb-ref">' + esc(b.ref) + '</span> was not paid in time, so the slot was released. If money left your account for it, email ' + contact + ' with the reference.</p>'
       + '<button type="button" class="btn btn-secondary" id="kwcb-again">Choose a time</button>');
+  }
+
+  /* Joining link: only from the Worker, only for the signed-in owner of a
+     confirmed booking. Never claims a link that isn't configured. */
+  var MEET_RE = /^https:\/\/meet\.google\.com\/[a-z]{3}-[a-z]{4}-[a-z]{3}$/;
+  function loadJoin(ref) {
+    var box = function (html) { var el = doc.getElementById('kwcb-join'); if (el) el.innerHTML = html; };
+    var contact = esc((D.contact && D.contact.email) || 'klarwegofficial@gmail.com');
+    auth().request('/consult/bookings/' + encodeURIComponent(ref) + '/join').then(function (r) {
+      if (r.joinUrl && MEET_RE.test(r.joinUrl)) {
+        return box('<p><a class="btn btn-live" href="' + esc(r.joinUrl) + '" target="_blank" rel="noopener noreferrer">Join on Google Meet</a></p>'
+          + '<p class="kwcb-note">This link is for your booking only. Please don’t share it.</p>');
+      }
+      box('<p class="kwcb-note">The joining link for this consultation has not been set up yet. Please email ' + contact + ' with your booking reference.</p>');
+    }, function () {
+      box('<p class="kwcb-note">We could not load your joining link just now. Reload this page in a minute, or email ' + contact + ' with your booking reference.</p>');
+    });
   }
 
   doc.addEventListener('click', function (e) {

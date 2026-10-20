@@ -7,6 +7,11 @@
      GET  /consult/bookings          signed in: my booking references
      GET  /consult/bookings/:ref     signed in: one booking; reconciles a
                                      pending payment with Cashfree
+     GET  /consult/bookings/:ref/join
+                                     signed in, own CONFIRMED booking only:
+                                     the Google Meet link, read from the
+                                     CONSULT_JOIN_LINKS secret (never from
+                                     any file the browser can download)
    Settlement of PAYMENT_SUCCESS webhooks for consultation orders
    (order ids "cons_…") is consultWebhook() below, called from
    webhooks-cashfree.js before the self-paced order lookup.
@@ -69,7 +74,12 @@ export const ELIGIBLE_TEACHERS = Object.freeze(["reegan-gandhi", "candidate-01"]
 
 /* The gateway order expires before the hold does, so no payment can
    start after the slot is released. A payment that still lands late is
-   handled in settle() (confirmed if the slot is free, else review). */
+   handled in settle() (confirmed if the slot is free, else review).
+   Cashfree PG Create Order (x-api-version 2023-08-01, checked 2026-10-20):
+   order_expiry_time is an ISO 8601 string; "We store timestamps in IST, but
+   you can provide them in a valid ISO 8601 time format", e.g.
+   2021-07-02T10:20:12+05:30. No minimum or maximum is documented, so the
+   value Cashfree returns is re-checked against the hold (createConsultBooking). */
 export const HOLD_SECONDS = 20 * 60;
 export const GATEWAY_EXPIRY_SECONDS = 16 * 60;
 /* Booking attempts per learner per IST day (each creates a gateway order). */
@@ -80,6 +90,44 @@ const BOOKING_ID_RE = /^cons_[0-9a-f-]{36}$/;
 export const BOOKING_REF_RE = /^KWC-[2-9A-HJ-NP-Z]{8}$/;
 
 const nowSeconds = () => Math.floor(Date.now() / 1000);
+
+/* Unix seconds → "YYYY-MM-DDTHH:MM:SS+05:30" (IST, Cashfree's own example
+   format). Seconds precision; no milliseconds. */
+export function cashfreeExpiryTime(unixSec) {
+  const ist = new Date((unixSec + IST_OFFSET_MINUTES * 60) * 1000).toISOString();
+  return ist.slice(0, 19) + "+05:30";
+}
+export const CASHFREE_TIME_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})$/;
+/* An ISO 8601 timestamp WITH an explicit offset → unix seconds, else null.
+   (A bare local time would be read in the Worker's own zone: refused.) */
+export function parseGatewayTime(value) {
+  if (typeof value !== "string" || !CASHFREE_TIME_RE.test(value)) return null;
+  const ms = Date.parse(value);
+  return Number.isFinite(ms) ? Math.floor(ms / 1000) : null;
+}
+
+/* HH:MM in IST for a unix time (for learner-facing messages). */
+function istTimeOf(unixSec) {
+  return new Date((unixSec + IST_OFFSET_MINUTES * 60) * 1000).toISOString().slice(11, 16);
+}
+
+/* Google Meet links per teacher, from the CONSULT_JOIN_LINKS secret:
+   {"reegan-gandhi":"https://meet.google.com/abc-defg-hij"}. Only a
+   well-formed Meet link for an eligible teacher counts; anything else is
+   treated as not configured (and logged without the value). */
+const MEET_LINK_RE = /^https:\/\/meet\.google\.com\/[a-z]{3}-[a-z]{4}-[a-z]{3}$/;
+export function joinLinkFor(env, teacherId) {
+  if (!env.CONSULT_JOIN_LINKS) return null;
+  let map;
+  try { map = JSON.parse(env.CONSULT_JOIN_LINKS); } catch { console.error("consult: CONSULT_JOIN_LINKS is not valid JSON"); return null; }
+  const link = map && typeof map === "object" ? map[teacherId] : null;
+  if (link == null) return null;
+  if (!ELIGIBLE_TEACHERS.includes(teacherId) || typeof link !== "string" || !MEET_LINK_RE.test(link)) {
+    console.error("consult: CONSULT_JOIN_LINKS entry refused for", teacherId);
+    return null;
+  }
+  return link;
+}
 
 function json(data, status = 200) {
   return Response.json(data, { status, headers: { "cache-control": "no-store" } });
@@ -149,6 +197,11 @@ function newRef() {
 }
 
 const isUniqueViolation = (e) => /UNIQUE constraint failed/i.test(String(e && e.message));
+/* Which partial UNIQUE index refused the row: the learner's own second
+   pending hold (consult_bookings_one_pending_per_user → user_id), or the
+   slot itself (teacher_id, date, slot_start). */
+const isOwnPendingViolation = (e) => /UNIQUE constraint failed:[^\n]*\buser_id\b/i.test(String(e && e.message))
+  && !/slot_start/i.test(String(e && e.message));
 
 /* Pending holds whose time ran out stop holding their slot. */
 async function sweepExpiredHolds(db, nowSec) {
@@ -346,14 +399,29 @@ export async function createConsultBooking(request, env) {
 
   await sweepExpiredHolds(env.DB, clock.nowSec);
 
-  /* One pending hold per learner: resume it for the same slot, release it
-     for a different one (a late payment on it is recovered in settle()). */
+  /* One pending hold per learner. The same slot again resumes it (same
+     Cashfree order). A different slot never touches it until the new slot
+     is secured: see the atomic swap below. */
   const pending = await env.DB.prepare(
     "SELECT * FROM consult_bookings WHERE user_id = ?1 AND status = 'pending'"
   ).bind(user.id).first();
   if (pending && pending.teacher_id === teacherId && pending.date === clock.date && pending.slot_start === slot && pending.payment_session_id) {
     return json({ ok: true, resumed: true, booking: publicBooking(pending, cfg.mode), paymentSessionId: pending.payment_session_id, checkout: { mode: cashfreeMode(env) } });
   }
+
+  /* Truthful refusals that say which hold the learner has right now
+     (their earlier one, or one a parallel request of theirs just took). */
+  const keptHold = async () => env.DB.prepare(
+    "SELECT * FROM consult_bookings WHERE user_id = ?1 AND status = 'pending' AND hold_expires_at > ?2"
+  ).bind(user.id, nowSeconds()).first();
+  const refuse = async (status, code, lead) => {
+    const kept = await keptHold();
+    const tail = kept
+      ? ` You still hold ${kept.slot_start} IST until ${istTimeOf(kept.hold_expires_at)} IST: you can pay for it, or choose another time.`
+      : " Nothing has been charged. Please choose another time.";
+    return json({ ok: false, code, error: lead + tail, keptBooking: kept ? publicBooking(kept, cfg.mode) : null }, status);
+  };
+  const slotTaken = () => refuse(409, "slot-taken", `Sorry, ${slot} IST has just been taken by someone else.`);
 
   const attempts = (await env.DB.prepare(
     "SELECT COUNT(*) AS n FROM consult_bookings WHERE user_id = ?1 AND date = ?2"
@@ -362,35 +430,20 @@ export async function createConsultBooking(request, env) {
     return json({ ok: false, error: "Too many booking attempts today. Please try again tomorrow.", code: "rate-limited" }, 429);
   }
 
-  if (pending) {
-    await env.DB.prepare(
-      "UPDATE consult_bookings SET status = 'released', updated_at = ?1 WHERE id = ?2 AND status = 'pending'"
-    ).bind(clock.nowSec, pending.id).run();
-  }
+  /* Cheap pre-check, so a visibly taken slot never creates a gateway
+     order. Not relied on: the UNIQUE index decides atomically below. */
+  if ((await heldSlots(env.DB, teacherId, clock.date)).has(slot)) return slotTaken();
 
   const id = `cons_${crypto.randomUUID()}`;
   const ref = newRef();
   const holdUntil = clock.nowSec + HOLD_SECONDS;
-  try {
-    await env.DB.prepare(
-      `INSERT INTO consult_bookings
-         (id, ref, user_id, teacher_id, date, slot_start, status, amount_paise, currency,
-          cashfree_order_id, hold_expires_at, created_at, updated_at)
-       VALUES (?1, ?2, ?3, ?4, ?5, ?6, 'pending', ?7, 'INR', ?1, ?8, ?9, ?9)`
-    ).bind(id, ref, user.id, teacherId, clock.date, slot, FEE_PAISE, holdUntil, clock.nowSec).run();
-  } catch (e) {
-    if (!isUniqueViolation(e)) throw e;
-    return json({ ok: false, error: "Someone has just taken this time. Please choose another.", code: "slot-taken" }, 409);
-  }
+  const gatewayExpiry = clock.nowSec + GATEWAY_EXPIRY_SECONDS;
 
-  const fail = async (status, message) => {
-    await env.DB.prepare(
-      "UPDATE consult_bookings SET status = 'failed', updated_at = ?1 WHERE id = ?2 AND status = 'pending'"
-    ).bind(nowSeconds(), id).run();
-    return json({ ok: false, error: message }, status);
-  };
-
+  /* 1. A NEW Cashfree order for this slot (never another slot's order).
+        Nothing in the database changes yet, so a gateway failure leaves
+        any existing hold exactly as it was. */
   const amount = FEE_PAISE / 100;
+  const gatewayFailed = () => refuse(502, "payment-unavailable", "The payment could not be started.");
   let res, data;
   try {
     res = await fetch(`${cashfreeBaseUrl(env)}/orders`, {
@@ -406,7 +459,7 @@ export async function createConsultBooking(request, env) {
         order_id: id,
         order_amount: amount,
         order_currency: "INR",
-        order_expiry_time: new Date((clock.nowSec + GATEWAY_EXPIRY_SECONDS) * 1000).toISOString(),
+        order_expiry_time: cashfreeExpiryTime(gatewayExpiry),
         customer_details: {
           customer_id: user.id,
           customer_email: user.email,
@@ -423,27 +476,90 @@ export async function createConsultBooking(request, env) {
     });
     data = await readJson(res);
   } catch {
-    return fail(502, "Unable to start the payment. Please try again.");
+    return gatewayFailed();
   }
-  if (!res.ok || !data) return fail(502, "Unable to start the payment. Please try again.");
-  if (data.order_id !== id || Math.round(Number(data.order_amount) * 100) !== FEE_PAISE || data.order_currency !== "INR") {
-    return fail(502, "Payment order validation failed.");
-  }
-  if (typeof data.payment_session_id !== "string" || !data.payment_session_id) {
-    return fail(502, "The payment provider did not return a payment session.");
+  if (!res.ok || !data) return gatewayFailed();
+  const returnedExpiry = parseGatewayTime(data.order_expiry_time);
+  if (data.order_id !== id || Math.round(Number(data.order_amount) * 100) !== FEE_PAISE || data.order_currency !== "INR"
+      || typeof data.payment_session_id !== "string" || !data.payment_session_id
+      /* the gateway must not accept payment after our hold ends */
+      || returnedExpiry === null || returnedExpiry > holdUntil || returnedExpiry <= clock.nowSec) {
+    console.error("consult: gateway order refused", ref, returnedExpiry === null ? "expiry-missing" : "validation");
+    await recordUnusedOrder(env.DB, { id, ref, user, teacherId, date: clock.date, slot, holdUntil, now: clock.nowSec, reason: "gateway-validation" });
+    return gatewayFailed();
   }
 
-  await env.DB.prepare(
-    "UPDATE consult_bookings SET payment_session_id = ?1 WHERE id = ?2"
-  ).bind(data.payment_session_id, id).run();
+  /* 2. Atomic swap, one transaction: release the old hold (if any) and
+        hold the new slot. If the slot was taken in the meantime, or another
+        request of this learner won, the whole batch rolls back and the old
+        hold stays pending with its own order. */
+  const stmts = [];
+  if (pending) {
+    stmts.push(env.DB.prepare(
+      "UPDATE consult_bookings SET status = 'released', updated_at = ?1 WHERE id = ?2 AND status = 'pending'"
+    ).bind(clock.nowSec, pending.id));
+  }
+  stmts.push(env.DB.prepare(
+    `INSERT INTO consult_bookings
+       (id, ref, user_id, teacher_id, date, slot_start, status, amount_paise, currency,
+        cashfree_order_id, payment_session_id, hold_expires_at, created_at, updated_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, 'pending', ?7, 'INR', ?1, ?8, ?9, ?10, ?10)`
+  ).bind(id, ref, user.id, teacherId, clock.date, slot, FEE_PAISE, data.payment_session_id, holdUntil, clock.nowSec));
+  try {
+    await env.DB.batch(stmts);
+  } catch (e) {
+    if (!isUniqueViolation(e)) throw e;
+    /* The unused gateway order is kept on record (status failed, never
+       shown to the browser); it expires unpaid at the gateway. */
+    await recordUnusedOrder(env.DB, { id, ref, user, teacherId, date: clock.date, slot, holdUntil, now: clock.nowSec, reason: isOwnPendingViolation(e) ? "concurrent-request" : "slot-taken" });
+    if (isOwnPendingViolation(e)) {
+      return refuse(409, "booking-in-progress", "Another booking request from your account was being processed at the same moment.");
+    }
+    return slotTaken();
+  }
+
   const row = await env.DB.prepare("SELECT * FROM consult_bookings WHERE id = ?1").bind(id).first();
-
   return json({
     ok: true,
     booking: publicBooking(row, cfg.mode),
+    released: pending ? pending.ref : null,
     paymentSessionId: data.payment_session_id,
     checkout: { mode: cashfreeMode(env) }
   });
+}
+
+/* A gateway order that never became a hold: kept as a failed row so the
+   owner can trace it (and settle() can still recover a payment on it,
+   which cannot happen in practice because its session is never shown). */
+async function recordUnusedOrder(db, { id, ref, user, teacherId, date, slot, holdUntil, now, reason }) {
+  await db.prepare(
+    `INSERT INTO consult_bookings
+       (id, ref, user_id, teacher_id, date, slot_start, status, amount_paise, currency,
+        cashfree_order_id, hold_expires_at, review_reason, created_at, updated_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, 'failed', ?7, 'INR', ?1, ?8, ?9, ?10, ?10)`
+  ).bind(id, ref, user.id, teacherId, date, slot, FEE_PAISE, holdUntil, reason, now).run();
+}
+
+/* GET /consult/bookings/:ref/join — the joining link, only for the signed-in
+   owner of a CONFIRMED (Cashfree-verified) booking, only from server-side
+   configuration. Never stored in the database, the page or its data. */
+export async function getConsultJoin(request, env, ref) {
+  const user = await sessionUser(request, env);
+  if (!user) return json({ ok: false, error: "Authentication required." }, 401);
+  if (!BOOKING_REF_RE.test(ref)) return json({ ok: false, error: "Invalid booking reference." }, 400);
+  const row = await env.DB.prepare(
+    "SELECT ref, teacher_id, status FROM consult_bookings WHERE ref = ?1 AND user_id = ?2"
+  ).bind(ref, user.id).first();
+  if (!row) return json({ ok: false, error: "Booking not found." }, 404);
+  if (row.status !== "confirmed") {
+    return json({ ok: false, code: "not-confirmed", error: "Joining details are available only once your payment is confirmed." }, 409);
+  }
+  const joinUrl = joinLinkFor(env, row.teacher_id);
+  if (!joinUrl) {
+    return json({ ok: true, ref: row.ref, joinUrl: null, code: "not-configured",
+      message: "The joining link for this consultation has not been set up yet. Please email Klarweg with your booking reference." });
+  }
+  return json({ ok: true, ref: row.ref, joinUrl });
 }
 
 export async function getConsultBooking(request, env, ref) {

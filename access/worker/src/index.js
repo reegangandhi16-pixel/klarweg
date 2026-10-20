@@ -2,7 +2,7 @@ import { corsHeaders, withCors, isForeignOriginWrite, configureCors } from "./co
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
-import { consultAvailability, createConsultBooking, getConsultBooking, listConsultBookings } from "./consultations.js";
+import { consultAvailability, createConsultBooking, getConsultBooking, getConsultJoin, listConsultBookings } from "./consultations.js";
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
@@ -89,6 +89,11 @@ async function route(request, env, ctx) {
     if (url.pathname === "/consult/bookings") {
       if (request.method === "POST") return withCors(await createConsultBooking(request, env), request);
       if (request.method === "GET") return withCors(await listConsultBookings(request, env), request);
+    }
+
+    const consultJoinMatch = url.pathname.match(/^\/consult\/bookings\/(KWC-[2-9A-HJ-NP-Z]{8})\/join$/);
+    if (request.method === "GET" && consultJoinMatch) {
+      return withCors(await getConsultJoin(request, env, consultJoinMatch[1]), request);
     }
 
     const consultMatch = url.pathname.match(/^\/consult\/bookings\/(KWC-[2-9A-HJ-NP-Z]{8})$/);

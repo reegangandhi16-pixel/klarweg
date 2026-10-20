@@ -43,7 +43,11 @@ globalThis.fetch = async (input, init = {}) => {
     if (cashfree.failCreate) return new Response('<html>gateway down</html>', { status: 502 });
     const b = JSON.parse(init.body);
     cashfree.orders.set(b.order_id, { order_id: b.order_id, order_amount: b.order_amount, order_currency: 'INR', order_status: 'ACTIVE' });
-    return Response.json({ order_id: b.order_id, order_amount: b.order_amount, order_currency: 'INR', payment_session_id: 'session_' + b.order_id, order_status: 'ACTIVE' });
+    // Cashfree echoes the expiry it stored (IST); cashfree.expiryOverride simulates it storing another value
+    const expiry = cashfree.expiryOverride !== undefined ? cashfree.expiryOverride : b.order_expiry_time;
+    const reply = { order_id: b.order_id, order_amount: b.order_amount, order_currency: 'INR', payment_session_id: 'session_' + b.order_id, order_status: 'ACTIVE' };
+    if (expiry !== null) reply.order_expiry_time = expiry;
+    return Response.json(reply);
   }
   const o = cashfree.orders.get(decodeURIComponent(m[2]));
   if (!o) return Response.json({ message: 'order not found' }, { status: 404 });
@@ -112,7 +116,7 @@ async function noCourseAccess(env, u) {
   assert.notEqual(me.json.hasFullAccess, true);
 }
 
-test.beforeEach(() => { at(`${DAY} 10:00`); cashfree.failCreate = false; });
+test.beforeEach(() => { at(`${DAY} 10:00`); cashfree.failCreate = false; cashfree.expiryOverride = undefined; });
 test.after(() => { Date.now = REAL_NOW; });
 
 /* ================= time rules (pure) ================= */
@@ -308,16 +312,253 @@ test('attempts are capped per learner per day', async () => {
   assert.equal((await book(env, u.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).status, 429);
 });
 
-test('gateway failure: no booking, the hold is released at once', async () => {
+test('gateway failure: no hold is taken and nothing is recorded as booked', async () => {
   const env = makeEnv();
   await confirmDay(env, 'reegan-gandhi');
   const u = await user(env);
   cashfree.failCreate = true;
   const r = await book(env, u.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' });
   assert.equal(r.status, 502);
-  assert.equal((await env.DB.prepare('SELECT status FROM consult_bookings').first()).status, 'failed');
+  assert.equal(r.json.code, 'payment-unavailable');
+  assert.match(r.json.error, /Nothing has been charged/);
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM consult_bookings').first()).n, 0);
   cashfree.failCreate = false;
   assert.equal((await req(env, 'GET', '/consult/availability')).json.teachers[0].slots[0].start, '15:00');
+});
+
+/* ================= slot switching keeps a valid hold ================= */
+const pendingOf = (env, userId) => env.DB.prepare("SELECT * FROM consult_bookings WHERE user_id = ?1 AND status = 'pending'").bind(userId).first();
+
+test('switch to an occupied slot: refused truthfully, the existing hold and its order are untouched, no gateway order', async () => {
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env), b = await user(env);
+  const held = (await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).json;
+  assert.equal((await book(env, b.cookie, { teacher_id: 'reegan-gandhi', slot: '15:20' })).status, 200);
+  const calls = cashfree.calls.length;
+  const r = await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:20' });
+  assert.equal(r.status, 409);
+  assert.equal(r.json.code, 'slot-taken');
+  assert.equal(r.json.error, 'Sorry, 15:20 IST has just been taken by someone else. You still hold 15:00 IST until 10:20 IST: you can pay for it, or choose another time.');
+  assert.equal(r.json.keptBooking.ref, held.booking.ref);
+  assert.equal(cashfree.calls.length, calls, 'a visibly taken slot creates no gateway order');
+  const p = await pendingOf(env, a.id);
+  assert.equal(p.ref, held.booking.ref);
+  assert.equal(p.payment_session_id, held.paymentSessionId, 'same order, same session');
+  // and resuming the kept slot still works with that same order
+  const resume = await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' });
+  assert.equal(resume.json.resumed, true);
+  assert.equal(resume.json.paymentSessionId, held.paymentSessionId);
+});
+
+test('switch race: the slot is taken between the pre-check and the hold — atomic rollback keeps the old hold', async () => {
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env), b = await user(env);
+  const held = (await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).json.booking;
+  // b's hold lands while a's request is at the gateway (after a's pre-check)
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (input, init) => {
+    globalThis.fetch = realFetch;
+    assert.equal((await book(env, b.cookie, { teacher_id: 'reegan-gandhi', slot: '15:40' })).status, 200);
+    return realFetch(input, init);
+  };
+  const r = await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:40' });
+  globalThis.fetch = realFetch;
+  assert.equal(r.status, 409);
+  assert.equal(r.json.code, 'slot-taken');
+  assert.equal(r.json.keptBooking.ref, held.ref);
+  assert.equal((await pendingOf(env, a.id)).ref, held.ref, 'old hold still pending');
+  const unused = await env.DB.prepare("SELECT status, review_reason, payment_session_id FROM consult_bookings WHERE user_id = ?1 AND status = 'failed'").bind(a.id).first();
+  assert.deepEqual({ ...unused }, { status: 'failed', review_reason: 'slot-taken', payment_session_id: null }, 'the unused gateway order is recorded, its session never stored or shown');
+  assert.equal((await env.DB.prepare("SELECT COUNT(*) AS n FROM consult_bookings WHERE slot_start = '15:40' AND status IN ('pending','confirmed')").first()).n, 1);
+});
+
+test('switch with a gateway failure: the existing hold is untouched', async () => {
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env);
+  const held = (await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).json.booking;
+  cashfree.failCreate = true;
+  const r = await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:20' });
+  assert.equal(r.status, 502);
+  assert.match(r.json.error, /^The payment could not be started\. You still hold 15:00 IST until 10:20 IST/);
+  assert.equal((await pendingOf(env, a.id)).ref, held.ref);
+  assert.ok((await req(env, 'GET', '/consult/availability')).json.teachers[0].slots.some((s) => s.start === '15:20'), 'the new slot was never held');
+});
+
+test('switch with an invalid gateway order (expiry later than the hold): refused, old hold kept', async () => {
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env);
+  const held = (await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).json.booking;
+  cashfree.expiryOverride = '2026-11-20T10:00:00+05:30'; // e.g. a 30-day default instead of ours
+  const r = await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:20' });
+  assert.equal(r.status, 502);
+  assert.equal((await pendingOf(env, a.id)).ref, held.ref);
+  assert.equal((await env.DB.prepare("SELECT review_reason FROM consult_bookings WHERE user_id = ?1 AND status = 'failed'").bind(a.id).first()).review_reason, 'gateway-validation');
+});
+
+test('simultaneous slot changes by one learner: always exactly one hold, every refusal truthful', async () => {
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env);
+  await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' });
+  const rs = await Promise.all([
+    book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:20' }),
+    book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:40' })
+  ]);
+  for (const r of rs.filter((x) => x.status !== 200)) assert.ok(['booking-in-progress', 'slot-taken'].includes(r.json.code), JSON.stringify(r.json));
+  const pend = (await env.DB.prepare("SELECT ref FROM consult_bookings WHERE user_id = ?1 AND status = 'pending'").bind(a.id).all()).results;
+  assert.equal(pend.length, 1, 'exactly one hold');
+  const won = rs.filter((r) => r.status === 200).map((r) => r.json.booking.ref);
+  assert.ok(won.includes(pend[0].ref), 'the remaining hold is one the learner was told about');
+});
+
+test('overlapping requests of one learner (both read the same old hold): the second is refused and the first hold survives', async () => {
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env);
+  await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' });
+  // request 1 (15:20) reads the 15:00 hold, then waits at the gateway while request 2 (15:40) completes
+  const realFetch = globalThis.fetch;
+  let inner = null;
+  globalThis.fetch = async (input, init) => {
+    globalThis.fetch = realFetch;
+    inner = await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:40' });
+    return realFetch(input, init);
+  };
+  const outer = await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:20' });
+  globalThis.fetch = realFetch;
+  assert.equal(inner.status, 200);
+  assert.equal(outer.status, 409);
+  assert.equal(outer.json.code, 'booking-in-progress');
+  assert.equal(outer.json.keptBooking.ref, inner.json.booking.ref, 'points to the hold the learner now has');
+  assert.equal(outer.json.error, 'Another booking request from your account was being processed at the same moment. You still hold 15:40 IST until 10:20 IST: you can pay for it, or choose another time.');
+  const pend = (await env.DB.prepare("SELECT ref, slot_start FROM consult_bookings WHERE user_id = ?1 AND status = 'pending'").bind(a.id).all()).results;
+  assert.deepEqual(pend.map((p) => p.slot_start), ['15:40']);
+  assert.equal(pend[0].ref, inner.json.booking.ref);
+  assert.ok((await req(env, 'GET', '/consult/availability')).json.teachers[0].slots.some((s) => s.start === '15:20'), '15:20 never held');
+});
+
+test('a successful switch releases the old hold; a late payment on it is recovered or reviewed, never double-booked', async () => {
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env), b = await user(env);
+  const first = (await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).json.booking;
+  const moved = await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:20' });
+  assert.equal(moved.status, 200);
+  assert.equal(moved.json.released, first.ref);
+  assert.equal((await row(env, first.ref)).status, 'released');
+  // the learner pays the first (released) order in another tab while 15:00 is still free → recovered
+  const o1 = await orderIdOf(env, first.ref);
+  gatewayPays(o1);
+  assert.equal((await webhook(env, success(o1))).status, 200);
+  assert.equal((await row(env, first.ref)).status, 'confirmed');
+  // b's attempt on 15:00 is now refused: it is booked
+  assert.equal((await book(env, b.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).json.code, 'slot-taken');
+  assert.equal((await env.DB.prepare("SELECT COUNT(*) AS n FROM consult_bookings WHERE slot_start = '15:00' AND status IN ('pending','confirmed')").first()).n, 1);
+});
+
+test('released hold, slot taken by someone else, then a late payment → review (manual refund), not two bookings', async () => {
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env), b = await user(env);
+  const first = (await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).json.booking;
+  assert.equal((await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:20' })).status, 200);
+  assert.equal((await book(env, b.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).status, 200);
+  const o1 = await orderIdOf(env, first.ref);
+  gatewayPays(o1);
+  assert.equal((await webhook(env, success(o1))).status, 200);
+  const r = await row(env, first.ref);
+  assert.deepEqual([r.status, r.review_reason], ['review', 'late-payment-slot-taken']);
+});
+
+/* ================= Cashfree order_expiry_time ================= */
+test('order expiry: ISO 8601 with the IST offset, 16 minutes ahead, before the hold ends', async () => {
+  const { cashfreeExpiryTime, parseGatewayTime, GATEWAY_EXPIRY_SECONDS } = await import('../src/consultations.js');
+  // 2026-10-21 10:00 IST = 04:30 UTC
+  const t = Math.floor(ist(`${DAY} 10:00`) / 1000);
+  assert.equal(cashfreeExpiryTime(t), '2026-10-21T10:00:00+05:30');
+  assert.equal(cashfreeExpiryTime(t + GATEWAY_EXPIRY_SECONDS), '2026-10-21T10:16:00+05:30');
+  // across midnight UTC/IST boundaries
+  assert.equal(cashfreeExpiryTime(Date.UTC(2026, 9, 20, 18, 45) / 1000), '2026-10-21T00:15:00+05:30');
+  assert.equal(parseGatewayTime('2026-10-21T10:16:00+05:30'), t + 16 * 60);
+  assert.equal(parseGatewayTime('2026-10-21T04:46:00Z'), t + 16 * 60, 'UTC form means the same instant');
+  assert.equal(parseGatewayTime('2026-10-21T04:46:00.000Z'), t + 16 * 60);
+  for (const bad of ['2026-10-21T10:16:00', '2026-10-21 10:16:00+05:30', '21/10/2026', '', null, 1761025560]) assert.equal(parseGatewayTime(bad), null, String(bad));
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const u = await user(env);
+  const r = await book(env, u.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' });
+  const sent = cashfree.calls.at(-1).body.order_expiry_time;
+  assert.equal(sent, '2026-10-21T10:16:00+05:30');
+  assert.ok(parseGatewayTime(sent) < (await row(env, r.json.booking.ref)).hold_expires_at);
+});
+
+test('order expiry: a gateway reply without a readable expiry, or one already past, is refused', async () => {
+  const env = makeEnv();
+  await confirmDay(env, 'reegan-gandhi');
+  const u = await user(env);
+  for (const bad of [null, '2026-10-21T10:16:00', '2026-10-21T09:59:00+05:30']) {
+    cashfree.expiryOverride = bad;
+    const r = await book(env, u.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' });
+    assert.equal(r.status, 502, String(bad));
+  }
+  assert.equal((await env.DB.prepare("SELECT COUNT(*) AS n FROM consult_bookings WHERE status = 'pending'").first()).n, 0);
+});
+
+/* ================= joining link (server-side only) ================= */
+const MEET = 'https://meet.google.com/abc-defg-hij';
+const join = (env, cookie, ref) => req(env, 'GET', `/consult/bookings/${ref}/join`, { cookie });
+
+test('join link: only the signed-in owner of a confirmed booking gets it, from the server secret', async () => {
+  const env = makeEnv({ CONSULT_JOIN_LINKS: JSON.stringify({ 'reegan-gandhi': MEET }) });
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env), b = await user(env);
+  const { booking } = (await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).json;
+  assert.equal((await join(env, null, booking.ref)).status, 401, 'unauthenticated');
+  const pending = await join(env, a.cookie, booking.ref);
+  assert.equal(pending.status, 409, 'unpaid/pending');
+  assert.equal(pending.json.code, 'not-confirmed');
+  assert.equal(JSON.stringify(pending.json).includes('meet.google.com'), false);
+  gatewayPays(await orderIdOf(env, booking.ref));
+  assert.equal((await webhook(env, success(await orderIdOf(env, booking.ref)))).status, 200);
+  assert.equal((await join(env, b.cookie, booking.ref)).status, 404, "another user's booking");
+  const ok = await join(env, a.cookie, booking.ref);
+  assert.equal(ok.status, 200);
+  assert.equal(ok.json.joinUrl, MEET);
+  // never in the booking itself, the list or availability
+  for (const r of [await view(env, a.cookie, booking.ref), await req(env, 'GET', '/consult/bookings', { cookie: a.cookie }), await req(env, 'GET', '/consult/availability')]) {
+    assert.equal(JSON.stringify(r.json).includes('meet.google.com'), false);
+  }
+});
+
+test('join link: review, expired and released bookings get no link', async () => {
+  const env = makeEnv({ CONSULT_JOIN_LINKS: JSON.stringify({ 'reegan-gandhi': MEET }) });
+  await confirmDay(env, 'reegan-gandhi');
+  const a = await user(env);
+  const { booking } = (await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:00' })).json;
+  gatewayPays(await orderIdOf(env, booking.ref), 1); // wrong amount → review
+  await webhook(env, success(await orderIdOf(env, booking.ref)));
+  assert.equal((await row(env, booking.ref)).status, 'review');
+  assert.equal((await join(env, a.cookie, booking.ref)).json.code, 'not-confirmed');
+});
+
+test('join link: not configured (or malformed) → an honest "not set up yet" answer, no link claimed', async () => {
+  for (const links of [undefined, '{', JSON.stringify({ 'reegan-gandhi': 'https://example.com/x' }), JSON.stringify({ 'candidate-01': MEET })]) {
+    const env = makeEnv(links === undefined ? {} : { CONSULT_JOIN_LINKS: links });
+    await confirmDay(env, 'reegan-gandhi');
+    const a = await user(env);
+    const { booking } = (await book(env, a.cookie, { teacher_id: 'reegan-gandhi', slot: '15:20' })).json;
+    gatewayPays(await orderIdOf(env, booking.ref));
+    await webhook(env, success(await orderIdOf(env, booking.ref)));
+    const r = await join(env, a.cookie, booking.ref);
+    assert.equal(r.status, 200, String(links));
+    assert.equal(r.json.joinUrl, null);
+    assert.equal(r.json.code, 'not-configured');
+    assert.match(r.json.message, /has not been set up yet/);
+  }
 });
 
 /* ================= payment verification ================= */

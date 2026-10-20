@@ -70,12 +70,16 @@
          Enabling it is an owner decision (docs/live-classes-consultation-
          booking.md): the validator refuses enabled: true until all three
          fields below are recorded. Turning on payments also needs the
-         Worker's CONSULT_BOOKING switch, which is separate and off. */
+         Worker's CONSULT_BOOKING switch, which is separate and off.
+         NEVER put a Google Meet link (or any other private joining detail)
+         in this file or the page: everything here is public. Links live in
+         the Worker secret CONSULT_JOIN_LINKS and are shown only to the
+         signed-in learner of a confirmed booking. */
       onlineBooking: {
         enabled: false,
         ownerApproval: null,        // how and when the owner approved online booking
         legalTermsUpdated: false,   // Terms §4A, Privacy §4A and this page's copy rewritten for online booking
-        joiningDetails: null        // how the learner receives the Google Meet link, shown on the confirmation
+        joinLinksConfigured: false  // true once the owner has set the CONSULT_JOIN_LINKS Worker secret for every bookable teacher
       }
     },
 

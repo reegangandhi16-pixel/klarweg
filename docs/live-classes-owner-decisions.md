@@ -60,13 +60,23 @@ Payment is by **manual UPI or bank transfer**, on a payment request sent by emai
 
 ## B. Still pending
 
-- [ ] **Legal review of the Terms and Privacy wording.** The drafts in [`live-classes-review-drafts.md`](live-classes-review-drafts.md) now reflect every decision above, but the wording is **not approved for publication**. A review by a qualified lawyer is recommended. Until it is approved, `terms.html`, `privacy.html` and `refund-policy.html` stay unchanged (a static test checks this while the status line below says pending).
+- [ ] **Legal review of the Terms, Privacy and Refund Policy wording.** [`live-classes-review-drafts.md`](live-classes-review-drafts.md) is the lawyer's package:
+  - a brief, with the changes needed in each document and questions Q1–Q15;
+  - the drafts;
+  - a copy-ready email and the list of documents to send.
+  The drafts reflect every decision above, but the wording is **not approved for publication**. A review by a qualified lawyer is recommended. Until it is approved, `terms.html`, `privacy.html` and `refund-policy.html` stay unchanged (a static test checks this while the status line below says pending).
   `Legal review status: pending`
-- [ ] **Accounting follow-up for manual payments.** Decide with an accountant:
-  - receipts or invoices;
-  - tax treatment;
-  - how long payment records are kept.
+- [ ] **Accounting follow-up for manual payments.** [`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md) is the accountant's package:
+  - the facts;
+  - the questions: receipts or invoices, GST, payment-record retention, instalments;
+  - a draft payment register with a reconciliation procedure;
+  - a copy-ready email.
   Nothing on the site claims these are settled.
+- [ ] **Business rules not yet decided.** Settle these with the lawyer and the accountant; they are Q3–Q5 and Q9 in the review drafts.
+  - How "the classes still to come" is refunded in the first two weeks, including for instalment payers.
+  - What happens if the second instalment is not paid before week 7.
+  - Which payment the ₹100 consultation deduction reduces, and whether it is refundable if the learner then cancels.
+  - Whether minors may join live classes, and with what consent.
 - [ ] **A1 start date.** Set it at least 3 weeks ahead once the launch is approved. Then `nextBatch` gets the date and enrolment can become "open".
 - [ ] **D8 launch go-ahead (on hold).** After the legal review, launching is mechanical:
   1. apply the approved Terms/Privacy text;
@@ -82,6 +92,7 @@ Payment is by **manual UPI or bank transfer**, on a payment request sent by emai
 ```
 Legal review: approved as drafted / approved with edits: … / lawyer review first
 Accounting (receipts, tax, record keeping): handled by: …
+Instalment refunds / missed 2nd instalment / consultation deduction / minors: …
 A1 start date: …
 D8 launch: not yet / go
 Photo / availability (optional):

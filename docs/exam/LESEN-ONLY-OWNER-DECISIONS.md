@@ -62,3 +62,13 @@ D9 Production authorisation: [not yet / yes, after all gates]
 | D7 | a period / until account deletion / with EX-01 | **A period:** engineering builds the deletion job (off until configured, tested). **Until account deletion:** note that klarweg-access has **no account-deletion route today**, so this option also needs an account-deletion process (defined with EX-01), which engineering would then build to include exam data. **With EX-01:** nothing is built until the reviewer's opinion |
 | D8 | a domain / later | **Later:** no learner launch, because the register requires the same-site domain before the pilot and launch (§G.1, §G.2) |
 | D9 | not yet / yes after gates | **Not yet:** nothing in production changes. **Yes:** engineering follows `RUNBOOK-EXAM-INFRA.md` §3 step by step, only after D1–D8 and all external deliverables exist |
+
+## Answers received 2026-10-20 (quoted as given; nothing beyond them is recorded)
+| # | Owner's answer | What it means in practice | Still open |
+|---|---|---|---|
+| D1 | "Yes, subject to all required approvals and release gates." | Lesen-only is the first-release target. No gate is relaxed | — |
+| D2 | "P3 + P8 + P13." | The prepared packet `EX-03-LESEN-RC-2026-10-20` is the review material. The forms remain candidates until EX-03 approves them | — |
+| D3 | "I want an independent coordinator to manage reviewer communications and collect the completed records. The coordinator has not yet been appointed. Engineering should run the record checks: Yes." | An independent coordinator, not engineering and not the owner, handles reviewer contact and records. Engineering runs `review-status.mjs --check` and the status on the forwarded files | **C1:** who will find or approach the coordinator (`REVIEW-APPOINTMENT-PLAN.md` §4) |
+| D6 | "EX-01 Privacy, EX-04 Accessibility, EX-05 Security and EX-07 Trademark reviewers are not yet appointed. Prepare a practical appointment plan …" | The plan is in `REVIEW-APPOINTMENT-PLAN.md`. Nobody is contacted, no funds are committed, no review counts as done | **C2:** fee approach (quotes first, or caps) |
+
+Not yet answered: D4, D5, D7, D8, D9.

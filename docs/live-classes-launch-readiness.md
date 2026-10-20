@@ -41,6 +41,12 @@ Cleared on 2026-10-20 by the approved decisions: consultation terms (`termsConfi
 - the D8 launch go-ahead;
 - optionally, a photo and an availability line.
 
+### Teaching materials
+
+The A1 course's delivery kit is ready for the teacher; it is course design only, and launches nothing:
+- [`live-classes-a1-delivery-kit.md`](live-classes-a1-delivery-kit.md): the 36-session plan, the lesson template, progress records and email templates;
+- [`live-classes-a1-worksheets.md`](live-classes-a1-worksheets.md): worksheets, quizzes and answer keys.
+
 ### Preview locally
 
 ```

@@ -74,12 +74,17 @@ Klarweg intends to offer teacher-led live German classes. This sets the directio
   - teaches in Hindi and English;
   - exam preparation "Goethe exam preparation at A1–B1";
   - formats: group batch and one-to-one;
-  - teaching approach.
-- **Still awaiting confirmation** (listed in `unconfirmed`): `specialisms`, which is suggested wording not yet approved.
+  - teaching approach;
+  - specialisms, approved as written on 2026-10-20: "German grammar", "Structured learning for Hindi-speaking learners", "Goethe exam preparation".
+- No profile field is awaiting confirmation (`unconfirmed: []`).
 - **Not claimed:** no university degree or separate teaching qualification.
-- Optional: photo, availability.
+- Optional, not required for launch: photo, availability.
 
-The validator refuses to publish the profile while any field is unconfirmed or any placeholder remains.
+The validator would refuse to publish the profile if any field became unconfirmed or held a placeholder. Two things still keep the profile off the public site:
+- `draft: true`: drafts never render on a deployed host;
+- the launch gate: the page cannot be allowlisted while blockers remain.
+
+Publishing the profile is part of the launch go-ahead (D8).
 
 *Why it matters:* the page shows only facts a teacher actually holds; a profile is published only from their CV and certificates.
 *Needed per teacher:*

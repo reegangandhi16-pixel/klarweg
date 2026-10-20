@@ -137,6 +137,39 @@ accounts. `TOTP_ENC_KEY` source of record: the owner's macOS Keychain (`klarweg-
 Accepted by (owner): `________` Date: `________` — **unsigned**: A10 is not run, and A2 (Safari), A3 (real microphone) and A6
 (real sleep) still need their manual checks. Invalid runs (test-side mistakes, each diagnosed and re-run) are listed in the PR #131 record.
 
+### Lesen-only record M1 (PR #145, 2026-10-20; filled from real runs only)
+Build: main `0c9563b` (PR #145 merged). Exam D1 `klarweg-exam-nonprod` (`309e3ca3-…`): migration
+`0002_attempt_module_scope.sql` applied 2026-10-20 before 08:23 UTC (first M1 check), Time Travel bookmark before it
+`0000007a-00000000-0000510a-4e70a894554fca70c927cae9ecfd8904`. Exam Worker versions: before `8b2392cb` →
+`2c8d75cc` (setting unset) → `97c53ce3` (`--var EXAM_MODULE_ONLY:lesen`) → `a350dc8a` (`--var EXAM_MODULE_ONLY:lessen`)
+→ **`97e733d6` (setting unset again; current)**. Access unchanged (`b7fa8c2d`). The var was passed on the command line
+only, and `wrangler.nonprod.toml` is unchanged. Tester: engineering (Claude), non-production only, synthetic
+`@example.com` accounts. Script and logs: `~/klarweg-work/qa-live/nonprod/m1-*.mjs`, `m1-*.log`, `acceptance.log`.
+
+| # | Setting | Check | Result |
+|---|---|---|---|
+| M1.0 | all | `attempts.module_scope` exists after 0002 | pass |
+| M1.1–1.3 | unset | single-module mode listed `disabled`; Lesen create → 403 `mode_disabled`; full mode available | pass |
+| M1.4–1.5 | unset | full attempt: 4 modules (Lesen available, others locked), mode `synthetic_full`, no scope; Lesen submit unlocks Hören | pass |
+| M1.1–1.3 | `lesen` | only `synthetic_module`/`lesen` available; full → 403 `mode_disabled`; Hören → 403 `module_disabled` | pass |
+| M1.4–1.6 | `lesen` | Lesen attempt with one module, stored as `synthetic_full` + `lesen`; Hören/Schreiben/Sprechen start → 404 `module_not_found` | pass |
+| M1.6b | `lesen` | server deadline at start = 3 900 s (65 min) | pass |
+| M1.6c | `lesen` | autosave: 30/30 answers read back from the server | pass |
+| M1.7–1.8 | `lesen` | submit, complete; result has one Lesen row, 100/100 | pass |
+| M1.9 | `lesen` | item review with an explanation for every item | **fail on the first run**, pass on the re-run |
+| M1.10 | `lesen` | practice history lists the attempt with Lesen only | pass |
+| M1.11 | `lesen` | a full attempt opened **before** the switch cannot start Hören (403 `module_disabled`) | pass |
+| M1.1–1.2 | `lessen` (invalid) | nothing available (`misconfigured`); full and Lesen creates → 403 `mode_disabled` | pass |
+| M1.12–1.13 | unset again | full mode available, single-module disabled; the pre-switch attempt continues (Hören starts) | pass |
+| A3 + A11 | unset again | full four-module journey on a fresh account (Lesen 30, Hören real time 16 plays, Schreiben 3 texts frozen, Sprechen 6 synthetic turns, result, history, own playback); confidentiality scan before submission, plus a control after it | pass |
+
+**M1.9 first run:** the server assigned `frm:b1:synthetic-s0@1`, the system-test fixture S0, which has no
+explanations. The account had seen no form, so all forms were equally likely. Non-prod release `r000` is a
+`purpose=test` build in which S0 is live next to P1–P15. A learner release cannot contain S0: `build-release
+--purpose learner` refuses it (`release-purpose.test`). The re-run assigned P14, and all 30 items had explanations.
+No code change was needed. **Consequence for a release:** build the learner release with only the approved forms; never
+reuse the test release.
+
 ## 5. Teardown or reset
 - **Reset data:** drop and recreate both non-prod D1 databases, then repeat §3 step 3 onward.
 - **Remove everything:**

@@ -65,7 +65,7 @@ Narrowing the scope shrinks these gates. It does not remove them.
 | **OD-41 / EX-08** accommodations (F4/P-18: "before any pilot or learner access") | Owner to decide the policy for the first release (for example: extra time on documented request only) | Owner |
 | **OD-20** same-site production domain | Unchanged: without it, Safari and other browsers that block third-party cookies see "Cookies blockiert" | Owner (domain) |
 | **Production provisioning** | D1 + migrations 0001 and 0002, R2 content bucket, `EXAM_PROXY_SECRET`, `EXAM_MEDIA_SECRET`, `TOTP_ENC_KEY` + Access migration 011 (staff routes fail closed without it), Pages allowlist `exam/` | Owner |
-| **Non-production check** of this build | Apply 0002 to `klarweg-exam-nonprod`, deploy, rerun A1/A5 with `EXAM_MODULE_ONLY=lesen` | Engineering, after the owner authorises the nonprod deploy |
+| **Non-production check** of this build | **Done 2026-10-20** (run M1, `NONPROD-SETUP.md` §4): 0002 applied; unset / `lesen` / invalid all as specified; full journey intact. The learner release must contain only the approved forms (S0 was live in the test release) | Engineering |
 
 The scope **removes** from the critical path: EX-02 raters, OD-14/EX-06 audio, the recording consent text,
 F4/P-19/P-20/P-25, PR #76, the ~1.5 min partner-talk question, and signing register v1.6 for OD-07/OD-30. Those two

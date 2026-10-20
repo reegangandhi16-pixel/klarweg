@@ -10,8 +10,8 @@ Order = what unblocks the most, soonest. "Who" is the only party that can close 
 ## A. Owner decisions (one reply: `LESEN-ONLY-OWNER-DECISIONS.md`, reply template)
 | Prio | Item | Who | Blocks |
 |---|---|---|---|
-| 1 | D1 adopt Lesen-only scope · D2 candidate forms | Owner | Sending the EX-03 packet |
-| 2 | D3 EX-03 organiser · D6 who and when for EX-01/04/05/07, plus terms | Owner | Every external review (§B) |
+| 1 | ~~D1 adopt Lesen-only scope · D2 candidate forms~~ **answered 2026-10-20** (yes, subject to all gates; P3+P8+P13) | Owner | — |
+| 2 | D3/D6 answered in principle (independent coordinator; engineering runs the record checks; reviewers not yet appointed). **Open: C1 (who approaches the coordinator), C2 (fee approach)** (`REVIEW-APPOINTMENT-PLAN.md` §4) | Owner | Every external review (§B) |
 | 3 | D7 attempt-data retention | Owner (with EX-01) | EX-01 sign-off; the deletion job (§C) |
 | 4 | D4 OD-08 wording · D5 OD-41 accommodations | Owner | Release decision |
 | 5 | D8 OD-20 same-site domain | Owner | Pilot and launch (register §G.1/§G.2) |
@@ -50,6 +50,6 @@ Done and evidenced (not blockers):
 | Switch on: `EXAM_ENABLED`, `EXAM_SYNTHETIC_FORMS`, `EXAM_MODULE_ONLY` + `EXAM_RELEASE_FORMS` (from `worker-settings.env`), `EXAM_ROUTES` + binding, `exam/` allowlist | `SELF-PRACTICE-SCOPE.md` §4; kill switch RUNBOOK §2 |
 
 ## Smallest set of owner actions to get moving
-1. Send the D1–D9 reply (D1, D2, D3, D6 are enough to start).
-2. Send the EX-03 e-mails yourself, or name who does.
+1. ~~Send the D1–D9 reply~~: D1, D2, D3 and D6 answered on 2026-10-20.
+2. Answer C1 and C2 (`REVIEW-APPOINTMENT-PLAN.md` §4). Then you, not engineering, send the coordinator e-mail.
 3. Later, after the deliverables: D9.

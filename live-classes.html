@@ -328,7 +328,7 @@
   .times { display: flex; flex-wrap: wrap; gap: 8px; }
   .time-opt { position: relative; }
   .time-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-  .time-opt span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong); font-size: 14px; color: var(--ink-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+  .time-opt > span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong); font-size: 14px; color: var(--ink-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
   .time-opt input:checked + span { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
   .time-opt input:focus-visible + span { outline: 2px solid var(--live-navy); outline-offset: 2px; }
   .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink-secondary); margin: 8px 0 24px; }
@@ -640,9 +640,17 @@
 
     <div class="book-card" id="book-form">
       <form id="consult-form" novalidate>
-        <h3>Request a consultation</h3>
+        <h3 id="form-title">Request a consultation</h3>
         <p class="sub">Fields marked <span class="req">*</span> are required. We reply <span data-reply-time>within two working days</span>.</p>
         <div class="err-summary" id="err-summary" role="alert" tabindex="-1" hidden></div>
+        <!-- A course that is not open yet only needs an interest note, never a paid consultation. -->
+        <fieldset class="form-row">
+          <legend>What would you like?</legend>
+          <div class="times">
+            <label class="time-opt"><input type="radio" name="rtype" value="consult" checked><span><span>A personal consultation (<span data-consult-fee>₹100</span>)</span></span></label>
+            <label class="time-opt"><input type="radio" name="rtype" value="interest"><span><span>Tell me when a course opens (free)</span></span></label>
+          </div>
+        </fieldset>
         <div class="form-2">
           <div class="form-row">
             <label for="bf-name">Name <span class="req">*</span></label>
@@ -708,7 +716,7 @@
           <label for="bf-msg">Anything else? <span class="opt">(optional)</span></label>
           <textarea id="bf-msg" name="message" maxlength="1000" placeholder="Exam date, deadlines, what you find hardest…"></textarea>
         </div>
-        <label class="consent"><input type="checkbox" id="bf-consent" required aria-describedby="bf-consent-err"><span>I agree that Klarweg may use these details to arrange my consultation, as described in the <a href="privacy.html">Privacy Policy</a>. <span class="req">*</span></span></label>
+        <label class="consent"><input type="checkbox" id="bf-consent" required aria-describedby="bf-consent-err"><span>I agree that Klarweg may use these details to respond to my request, as described in the <a href="privacy.html">Privacy Policy</a>. <span class="req">*</span></span></label>
         <p class="field-err" id="bf-consent-err" hidden style="margin:-16px 0 16px"></p>
         <button type="submit" class="btn btn-live">Prepare my request
           <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -718,7 +726,7 @@
 
       <div class="done" id="consult-done" hidden tabindex="-1">
         <h3>Your request is ready to send</h3>
-        <div class="done-notice"><strong>Not booked yet.</strong> Your email app should have opened with the request. It is only sent when you press Send there. We then reply with a time slot and payment details.</div>
+        <div class="done-notice" id="done-notice" data-interest-html="<strong>Nothing booked or charged.</strong> Your email app should have opened with the request. It is only sent when you press Send there. We reply to confirm we have noted your interest, and write again if a suitable course opens."><strong>Not booked yet.</strong> Your email app should have opened with the request. It is only sent when you press Send there. We then reply with a time slot and payment details.</div>
         <p>If your email app didn’t open, copy the request below and email it to <a class="inline" data-contact-mailto href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a>.</p>
         <pre id="consult-preview"></pre>
         <div class="done-actions">

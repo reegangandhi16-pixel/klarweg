@@ -156,6 +156,21 @@ const jsonld = `(()=>{const el=document.getElementById("live-jsonld");if(!el)ret
   const strs=[],keys=[];(function walk(v){if(typeof v==="string")strs.push(v);else if(v&&typeof v==="object")for(const k in v){keys.push(k);walk(v[k])}})(j);
   return {faqOk,courses:g.filter(x=>x["@type"]==="Course").map(x=>x.name),instructors:g.filter(x=>x["@type"]==="Course").flatMap(x=>(x.instructor||[]).map(p=>p.name)),text:strs.join("\\n"),keys}})()`;
 const OWNER = LIVE.teachers.find((t) => t.id === 'reegan-gandhi');
+/* A small structural accessibility audit of the rendered page (no
+   dependency): every visible control has a name, labels exist, ids are
+   unique, one h1 and no skipped heading levels, images have alt text,
+   radio groups sit in a fieldset with a legend. Returns a list of problems. */
+const a11y = `(()=>{const p=[];const vis=e=>!!(e.offsetWidth||e.offsetHeight||e.getClientRects().length)||e.type==="radio"||e.type==="checkbox";
+  const name=e=>(e.getAttribute("aria-label")||(e.getAttribute("aria-labelledby")||"").split(" ").map(i=>document.getElementById(i)?.textContent||"").join(" ")||e.textContent||e.getAttribute("title")||"").trim();
+  for(const e of document.querySelectorAll("a[href],button"))if(vis(e)&&!name(e))p.push("unnamed "+e.tagName+" "+(e.id||e.className));
+  for(const e of document.querySelectorAll("input,select,textarea"))if(e.type!=="hidden"&&vis(e)&&!(e.labels&&e.labels.length)&&!e.getAttribute("aria-label")&&!e.getAttribute("aria-labelledby"))p.push("unlabelled "+(e.id||e.name));
+  const ids={};for(const e of document.querySelectorAll("[id]"))ids[e.id]=(ids[e.id]||0)+1;for(const k in ids)if(ids[k]>1)p.push("duplicate id "+k);
+  const hs=[...document.querySelectorAll("main h1,main h2,main h3,main h4")].filter(vis).map(h=>+h.tagName[1]);if(hs.filter(x=>x===1).length!==1)p.push("h1 count "+hs.filter(x=>x===1).length);
+  hs.forEach((h,i)=>{if(i&&h>hs[i-1]+1)p.push("heading skips h"+hs[i-1]+"→h"+h)});
+  for(const i of document.querySelectorAll("img"))if(!i.hasAttribute("alt"))p.push("img without alt");
+  for(const r of document.querySelectorAll("input[type=radio]")){const f=r.closest("fieldset");if(!f||!f.querySelector("legend"))p.push("radio outside a fieldset with legend: "+r.name)}
+  for(const e of document.querySelectorAll("[aria-describedby]"))for(const i of e.getAttribute("aria-describedby").split(" "))if(!document.getElementById(i))p.push("aria-describedby points nowhere: "+i);
+  return p})()`;
 const key = async (k, code, vk) => { for (const type of ['keyDown', 'keyUp']) await b.send('Input.dispatchKeyEvent', { type, key: k, code, windowsVirtualKeyCode: vk }); };
 const submit = () => q('document.querySelector("#consult-form button[type=submit]").click()');
 
@@ -176,11 +191,14 @@ try {
       await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")'));
     ok(`A${w} primary hero CTA keeps its arrow`, await q('!!document.querySelector(".live-hero .btn-live .btn-arrow")'));
     ok(`A${w} no copy invites filtering or opening profiles that do not exist`, !(await q('/open a profile|Filter the teacher profiles/.test(document.body.innerText + document.getElementById("fa3").textContent)')));
+    ok(`A${w} accessibility audit: names, labels, unique ids, heading order`, (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
     ok(`A${w} hero names no level range while nothing is published`, (await q('document.querySelector("[data-live-levels]").textContent')) === '');
     const jA = await q(jsonld);
     ok(`A${w} structured data: FAQPage matches the visible FAQ, no Course`, !!jA && jA.faqOk && jA.courses.length === 0, JSON.stringify(jA && { faqOk: jA.faqOk, courses: jA.courses }));
     ok(`A${w} requests go to the documented address`, (await q('document.querySelector("[data-contact-email]").textContent')) === 'klarwegofficial@gmail.com');
   }
+  await q('document.querySelector("#course-grid [data-request=interest]").click()'); await sleep(700);
+  ok('A "Register interest" (no course yet) switches the form to a free interest request', (await q('document.querySelector("input[name=rtype]:checked").value')) === 'interest' && (await q('document.getElementById("form-title").textContent')) === 'Register your interest');
   await load(L + '#teacher-teacher-1');
   ok('A deep link to a draft teacher opens no dialog', await q('!document.getElementById("t-dialog").open'));
   ok('A deep link hash falls back to #teachers', (await q('location.hash')) === '#teachers', await q('location.hash'));
@@ -242,8 +260,11 @@ try {
   ok('C course filter "Goethe prep"', (await q('document.querySelectorAll(".c-card").length')) === 1);
   await q('document.querySelector("[data-book-course=live-goethe]").click()'); await sleep(700);
   ok('C course CTA prefills the course and focuses Name', (await q('document.getElementById("bf-course").value')) === 'live-goethe' && (await q('document.activeElement.id')) === 'bf-name');
+  ok('C a course that is not open asks for interest, not a paid consultation', (await q('document.querySelector("input[name=rtype]:checked").value')) === 'interest' && (await q('document.getElementById("form-title").textContent')) === 'Register your interest');
+  ok('C preview accessibility audit', (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
   await q('document.querySelector("[data-profile=teacher-1]").click()'); await q('document.querySelector("#t-dialog [data-book-teacher]").click()'); await sleep(700);
   ok('C profile CTA closes the dialog and prefills the teacher', (await q('!document.getElementById("t-dialog").open')) && (await q('document.getElementById("bf-teacher").value')) === 'teacher-1');
+  ok('C a teacher CTA asks for a consultation', (await q('document.querySelector("input[name=rtype]:checked").value')) === 'consult' && (await q('document.getElementById("form-title").textContent')) === 'Request a consultation');
 
   // validation + hand-off
   await q('(()=>{for(const id of ["bf-name","bf-email","bf-msg"])document.getElementById(id).value="";document.getElementById("bf-consent").checked=false;document.getElementById("bf-level").value="";document.getElementById("bf-goal").value=""})()');
@@ -258,6 +279,16 @@ try {
   await submit(); await sleep(500);
   ok('C valid submit: confirmation focused and says "Not booked yet"', (await q('!document.getElementById("consult-done").hidden && document.activeElement.id==="consult-done"')) && /Not booked yet/.test(await q('document.getElementById("consult-done").innerText')));
   ok('C request text carries the form fields', /Name: Test Person[\s\S]*Course of interest: Goethe exam preparation/.test(await q('document.getElementById("consult-preview").textContent')));
+  ok('C consultation request names the fee in the email', new RegExp('^Live class consultation request \\(' + LIVE.consultation.feeLabel).test(await q('document.getElementById("consult-preview").textContent')));
+  await q('document.getElementById("edit-request").click()');
+  await q('document.querySelector("input[name=rtype][value=interest]").click()');
+  await submit(); await sleep(500);
+  ok('C interest request: says nothing is booked or charged, and the email asks for no consultation', /Nothing booked or charged/.test(await q('document.getElementById("done-notice").innerText')) && !/Not booked yet/.test(await q('document.getElementById("done-notice").innerText'))
+    && /^Live course interest \(no consultation requested, nothing to pay\)/.test(await q('document.getElementById("consult-preview").textContent')) && !/₹/.test(await q('document.getElementById("consult-preview").textContent')));
+  await q('document.getElementById("edit-request").click()');
+  await q('document.querySelector("input[name=rtype][value=consult]").click()');
+  await submit(); await sleep(500);
+  ok('C switching back restores the consultation notice', /Not booked yet/.test(await q('document.getElementById("done-notice").innerText')));
   await q('document.getElementById("edit-request").click()');
   ok('C "Edit request" returns to the form with values kept', (await q('!document.getElementById("consult-form").hidden && document.getElementById("bf-name").value')) === 'Test Person' && (await q('document.activeElement.id')) === 'bf-name');
 
@@ -283,6 +314,7 @@ try {
       ok(`F${w} copy speaks of one teacher`, (await q('document.getElementById("teachers-h").textContent')) === 'Meet your teacher.' && /Meet your teacher/.test(await q('document.querySelector(".live-hero .btn-live").textContent')) && /currently taught by one teacher/.test(await q('document.getElementById("fa3").textContent')));
       ok(`F${w} hero level range comes from the published profile`, (await q('document.querySelector("[data-live-levels]").textContent')) === ' · ' + lo + ' → ' + hi, await q('document.querySelector("[data-live-levels]").textContent'));
       ok(`F${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
+      ok(`F${w} accessibility audit in the launch state`, (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
       ok(`F${w} portrait and details sit side by side on desktop, stacked on phones`, await q('(()=>{const p=document.querySelector(".t-card .portrait").getBoundingClientRect(),b=document.querySelector(".t-card .t-body").getBoundingClientRect();return innerWidth>720?b.left>=p.right-1:b.top>=p.bottom-1})()'));
     }
     await q('document.querySelector(".t-card [data-profile]").click()'); await sleep(200);
@@ -295,7 +327,8 @@ try {
     const jF = await q(jsonld);
     ok('F structured data: FAQPage matches, still no Course (none published)', !!jF && jF.faqOk && jF.courses.length === 0, JSON.stringify(jF && jF.courses));
     // with a course published too (test-only): its card links the teacher, and it enters the structured data
-    await load(L, { edits: pub.concat([["id: 'live-a1', draft: true,", "id: 'live-a1', draft: false,"], ["teacherIds: ['teacher-1'],", "teacherIds: ['reegan-gandhi'],"]]) });
+    const a1 = LIVE.courses.find((c) => c.id === 'live-a1');
+    await load(L, { edits: pub.concat([["id: 'live-a1', draft: true,", "id: 'live-a1', draft: false,"]], a1.teacherIds.includes(OWNER.id) ? [] : [["teacherIds: ['" + a1.teacherIds[0] + "'],", "teacherIds: ['reegan-gandhi'],"]]) });
     ok('F2 the published course names its teacher as a profile link', (await q('document.querySelector(".c-card .t-link").textContent')) === OWNER.name);
     const jF2 = await q(jsonld);
     ok('F2 structured data: the published course with its published instructor, nothing else', !!jF2 && jF2.faqOk && jF2.courses.join() === LIVE.courses[0].title && jF2.instructors.join() === OWNER.name && !/\[[^\]]+\]|Draft/.test(jF2.text), JSON.stringify(jF2 && { c: jF2.courses, i: jF2.instructors }));

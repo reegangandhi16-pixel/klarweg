@@ -356,7 +356,7 @@
     if (!courses.length) {
       grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><h3>The first live courses are being scheduled</h3>'
         + '<p>Dates, batch sizes and fees will appear here as soon as they are confirmed. Book a consultation or tell us what you need, and we’ll let you know when a suitable course opens.</p>'
-        + '<a href="#book" class="btn btn-live">Register interest ' + ARROW + '</a></div>';
+        + '<a href="#book" class="btn btn-live" data-request="interest">Register interest ' + ARROW + '</a></div>';
       document.querySelectorAll('#courses .filters').forEach(function (f) { f.hidden = true; });
       return;
     }
@@ -365,7 +365,7 @@
     grid.innerHTML = list.length ? list.map(courseCard).join('')
       : '<div class="empty-state" style="grid-column:1/-1"><h3>No ' + esc(GROUP_LABEL[cGroup] || '') + ' course yet</h3>'
         + '<p>We don’t run this course yet. Tell us you’re interested and we’ll let you know if it opens.</p>'
-        + '<a href="#book" class="btn btn-secondary">Register interest</a></div>';
+        + '<a href="#book" class="btn btn-secondary" data-request="interest">Register interest</a></div>';
   }
 
   function initCourseFilters() {
@@ -394,11 +394,14 @@
      the form; the anchor itself scrolls to #book. */
   function initPrefill() {
     document.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('[data-book-teacher],[data-book-course]');
+      var a = e.target.closest && e.target.closest('[data-book-teacher],[data-book-course],[data-request]');
       if (!a) return;
       var tid = a.getAttribute('data-book-teacher'), cid = a.getAttribute('data-book-course');
       if (dlg && dlg.open) { dlgOpener = null; closeProfile(); }
       showForm();
+      /* A course that is not open yet asks for interest, not a paid consultation. */
+      var course = cid && courses.filter(function (x) { return x.id === cid; })[0];
+      setRequestType(a.getAttribute('data-request') || (course && course.enrolment !== 'open' ? 'interest' : 'consult'));
       if (tid && $('bf-teacher')) $('bf-teacher').value = tid;
       if (cid && $('bf-course')) {
         $('bf-course').value = cid;
@@ -411,6 +414,18 @@
       target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
       setTimeout(function () { $('bf-name').focus({ preventScroll: true }); }, reduce ? 0 : 450);
     });
+  }
+
+  function requestType() {
+    var r = form && form.querySelector('input[name="rtype"]:checked');
+    return r ? r.value : 'consult';
+  }
+  function setRequestType(v) {
+    var r = form && form.querySelector('input[name="rtype"][value="' + v + '"]');
+    if (r) { r.checked = true; syncRequestType(); }
+  }
+  function syncRequestType() {
+    if ($('form-title')) $('form-title').textContent = requestType() === 'interest' ? 'Register your interest' : 'Request a consultation';
   }
 
   function setErr(input, errEl, msg) {
@@ -430,7 +445,7 @@
       [$('bf-email'), $('bf-email-err'), !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('bf-email').value.trim()) ? 'Please enter a valid email address, like name@example.com.' : ''],
       [$('bf-level'), $('bf-level-err'), !$('bf-level').value ? 'Please choose your current level, or “Not sure”.' : ''],
       [$('bf-goal'), $('bf-goal-err'), !$('bf-goal').value ? 'Please choose your main goal.' : ''],
-      [$('bf-consent'), $('bf-consent-err'), !$('bf-consent').checked ? 'Please agree so we can use your details to arrange the consultation.' : '']
+      [$('bf-consent'), $('bf-consent-err'), !$('bf-consent').checked ? 'Please agree so we can use your details to respond to your request.' : '']
     ];
     var bad = checks.filter(function (c) { return !setErr(c[0], c[1], c[2]); });
     var sum = $('err-summary');
@@ -448,7 +463,9 @@
     var tSel = $('bf-teacher'), cSel = $('bf-course');
     var times = Array.prototype.slice.call(form.querySelectorAll('input[name="times"]:checked')).map(function (i) { return i.value; });
     return [
-      'Live class consultation request (' + D.consultation.feeLabel + ')',
+      requestType() === 'interest'
+        ? 'Live course interest (no consultation requested, nothing to pay)'
+        : 'Live class consultation request (' + D.consultation.feeLabel + ')',
       '',
       'Name: ' + $('bf-name').value.trim(),
       'Email: ' + $('bf-email').value.trim(),
@@ -471,6 +488,7 @@
 
   function initForm() {
     if (!form) return;
+    Array.prototype.forEach.call(form.querySelectorAll('input[name="rtype"]'), function (r) { r.addEventListener('change', syncRequestType); });
     ['bf-name', 'bf-email', 'bf-level', 'bf-goal', 'bf-consent'].forEach(function (id) {
       var el = $(id);
       el.addEventListener('change', function () {
@@ -481,7 +499,13 @@
       e.preventDefault();
       if (!validate(true)) return;
       lastBody = buildBody();
-      var subject = 'Klarweg — Live class consultation request (' + $('bf-name').value.trim() + ')';
+      var interest = requestType() === 'interest';
+      var subject = 'Klarweg — ' + (interest ? 'Live course interest' : 'Live class consultation request') + ' (' + $('bf-name').value.trim() + ')';
+      var note = $('done-notice');
+      if (note) {
+        if (!note.hasAttribute('data-consult-html')) note.setAttribute('data-consult-html', note.innerHTML);
+        note.innerHTML = note.getAttribute(interest ? 'data-interest-html' : 'data-consult-html');
+      }
       $('consult-preview').textContent = lastBody;
       form.hidden = true; done.hidden = false;
       $('copy-status').textContent = '';

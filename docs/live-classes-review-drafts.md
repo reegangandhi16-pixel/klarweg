@@ -4,7 +4,110 @@
 
 Variant A of the homepage FAQ (§1) is already live on `index.html`. Variant B waits for the launch (D8, on hold).
 
-`[OWNER: …]` marks one point that still needs a decision: the accounting follow-up for payment records. `[LEGAL: …]` marks questions for the reviewer. Do not publish a section while it contains either.
+`[OWNER: …]` marks a business point still to be decided, mostly with the accountant ([`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md)). `[LEGAL: …]` marks questions for the reviewer, numbered Q1–Q15 in §0. Do not publish a section while it contains either.
+
+**For the lawyer:** read §0 (the brief), then §2–§4 (the proposed wording). §1 is the homepage FAQ, which is marketing text and needs review only for the launch sentence (Variant B). §5 holds a copy-ready email and the documents to send.
+
+---
+
+## 0. Brief for the legal reviewer
+
+### What Klarweg is today
+
+- Klarweg is a German-language education brand **operated by an individual**, not a registered company. It has no published business address, and its only contact is `klarwegofficial@gmail.com` (Terms §1, Privacy §1).
+- It sells **self-paced** online courses (levels A1–C2) through a Cashfree checkout:
+  - a single level gives 2 years' access; a Lifetime bundle covers all levels;
+  - every self-paced purchase carries a **7-day, no-questions-asked full refund** (`refund-policy.html`, Terms §5).
+- The live Terms, Privacy Policy and Refund Policy describe the self-paced service only.
+
+### What is proposed: teacher-led live classes (not launched)
+
+All of this was decided by the owner on 2026-10-20 ([decision sheet](live-classes-owner-decisions.md), part A). None of it is published.
+
+- **The teacher** is the owner (Reegan Gandhi). No other teachers are engaged.
+- **First course: Beginner German · A1, a group batch:**
+  - 4 to 8 learners: it runs with at least 4 and takes at most 8;
+  - Mon, Wed and Fri, 7:30–9:00 pm IST; 12 weeks, 36 classes of 90 minutes, 54 teaching hours;
+  - on Google Meet; class notes, PDF worksheets and written homework feedback;
+  - prepares for Goethe-Zertifikat A1: Start Deutsch 1, with the exam fee not included;
+  - no start date set yet.
+- **Fee:** ₹7,999, paid either before the first class, or in two instalments: ₹4,000 before the start and ₹3,999 before week 7.
+- **Consultation:**
+  - ₹100 for 20 minutes on Google Meet;
+  - paid by UPI after the time is confirmed by email; the joining link follows payment;
+  - deducted from the course fee if the learner enrols within 7 days;
+  - if Klarweg cancels: the learner chooses a full refund or a new time;
+  - the learner may reschedule once, free, with at least 12 hours' notice; a no-show is not refunded.
+- **The four live-class policies**, quoted in §2 §4A:
+  - missed classes: group classes are not recorded, and a missed class is neither refunded nor repeated;
+  - cancellation and refunds: a full refund up to 48 hours before the first class, then a refund of the classes still to come during the first two weeks, then no refund; if Klarweg cancels or postpones, everything not delivered is refunded;
+  - scheduling: a fixed IST timetable, with 24 hours' notice and a replacement class if one moves;
+  - what the fee includes.
+- **Payment:**
+  - manual UPI or bank transfer, on a payment request sent by email;
+  - a person confirms each place by email once the money arrives;
+  - live classes do **not** use the Cashfree checkout, and the Live Classes page takes no money.
+- **Separate products:**
+  - a live course gives no self-paced access, and a self-paced purchase includes no live classes;
+  - the self-paced 7-day guarantee **does not apply** to live classes or consultations.
+- **Recording and retention:**
+  - classes are not recorded;
+  - consultation and course-interest emails are kept for 12 months after the last contact, then **deleted by hand** from Gmail. There is no automatic deletion.
+
+### How a request reaches Klarweg (verified in `kw-live.js` and `live-classes.html`)
+
+- The Live Classes page has **no form submission, no `fetch` and no checkout**, and saves nothing in the browser. A static test enforces the first three.
+- When the visitor presses "Prepare my request", the page shows a preview and opens the visitor's **own email app** with a pre-filled message to `klarwegofficial@gmail.com`. **Nothing reaches Klarweg unless the visitor sends that email.** A "copy the request" button offers the same text for pasting.
+- The message contains:
+  - the request type: a ₹100 consultation, or free interest in a course;
+  - name and email (required);
+  - WhatsApp/phone (optional);
+  - current level and main goal (required);
+  - preferred teacher and course of interest;
+  - preferred times (IST);
+  - a free-text message.
+- A required consent box says: "I agree that Klarweg may use these details to respond to my request, as described in the Privacy Policy." That policy does not yet describe this request; it is a launch blocker.
+- Like every Klarweg page, the page loads Google Fonts and checks the visitor's existing Klarweg sign-in state. Both are already covered by the Privacy Policy.
+
+### Changes needed, by document
+
+| Document · section | Purpose | Proposed wording | Questions for the reviewer |
+|---|---|---|---|
+| Terms §1 Who we are | Name live classes as part of the service | §2 below | — |
+| Terms §2 The service | Live classes and consultations are separate from self-paced access | §2 below | Q1 |
+| Terms **new §4A** | Course terms, consultations, payment and instalments, missed classes, cancellations and refunds, scheduling, changes, conduct, recordings | §2 below | Q2–Q6, Q10 |
+| Terms §5 Refunds | Limit the 7-day guarantee to self-paced purchases | §2 below | Q2 |
+| Terms §8, §10 | Price changes and the liability cap ("the course or bundle") as they apply to a live course | not drafted; check only | Q7 |
+| Privacy §1 | Name live classes | §3 below | — |
+| Privacy §2 table | Add consultation and course-interest requests; widen the phone-number row (it says "only when you begin a purchase") | §3 below | Q8 |
+| Privacy **new §4A** | Classes on Google Meet, group visibility, no recording, payments by UPI or bank | §3 below | Q8, Q9, Q11 |
+| Privacy §8 | Add Gmail, Google Meet and the bank or UPI app as processors | §3 below | Q8, Q12 |
+| Privacy §9 | 12-month manual retention of request emails; payment records after the accounting review | §3 below | Q13 |
+| Privacy §11 Minors | No minimum age today; live classes are group video calls | §3 below | Q9 |
+| Privacy §13 Contact | It says "no separately designated grievance officer" | not drafted | Q14 |
+| Refund Policy | Say the guarantee covers self-paced purchases only and point to Terms §4A | §4 below | Q2 |
+
+### Material questions the reviewer should decide
+
+Nothing in these drafts claims compliance with any law. These are questions, not conclusions.
+
+1. **Separate services.** Is it clear enough that a live course and a self-paced purchase are separate, each with its own refund terms?
+2. **Consumer and refund terms.** Are the live-course rules fair and enforceable for consumers in India, and does anything have to be disclosed before payment? The rules are: a full refund up to 48 hours before the start, a refund of the remaining classes during the first two weeks, no refund afterwards, and no refund for a consultation missed without notice. Consider, for example, the Consumer Protection Act 2019 and the Consumer Protection (E-Commerce) Rules 2020, if they apply to this service.
+3. **Refunds for instalment payers.** These are not yet decided. The owner and the accountant should settle the business choice; the reviewer should check that the wording is clear.
+   - How is "the classes still to come" calculated, for example per class at ₹7,999 ÷ 36?
+   - How does that apply to someone who has paid only the first instalment?
+4. **A missed second instalment.** What happens if ₹3,999 is not paid before week 7? This is not decided yet, and the terms need a rule.
+5. **The consultation deduction.** Which payment does the ₹100 reduce: the first instalment, or the full fee? Is it refundable if the learner then cancels the course? Not decided yet.
+6. **The minimum batch.** If fewer than 4 learners enrol, is "Klarweg cancels or postpones … we refund everything not yet delivered" enough, or must the 4-learner minimum be stated as a condition before payment?
+7. **The liability cap and price changes.** Do Terms §8 ("pricing may change") and §10 (liability limited to "the course or bundle") work for a fixed-fee live course that has already been paid?
+8. **Privacy notice and consent.** Personal data arrives by email and is handled in Gmail, and possibly on WhatsApp if the learner gives a number and is contacted there. What must the notice contain, is the consent box adequate, and should WhatsApp be named? Consider, for example, the Digital Personal Data Protection Act 2023 and its Rules, if they apply.
+9. **Minors.** Klarweg sets no minimum age (Privacy §11), and group classes show each learner's name, voice and video to the others. Is a minimum age or parent/guardian consent needed for live classes?
+10. **Conduct and removal.** Should a learner removed for disruptive behaviour get a refund of the classes not yet held?
+11. **Teacher status.** The owner teaches today. If other teachers are engaged later, what agreement is needed, and what must the policies say about sharing learners' data with them?
+12. **Third parties and transfers.** Google (Gmail, Meet), the bank and the UPI app process learners' data, possibly outside India. Does any of them need to be named, or need a transfer disclosure?
+13. **Retention.** Is a 12-month manual retention period for request emails appropriate, and how should it be worded so it matches what is done by hand? The retention period for payment records waits for the accountant.
+14. **Grievance contact and seller details.** Does offering paid live classes make it necessary to designate a grievance officer, or to publish a postal address or other operator details? Privacy §13 currently says there is none.
+15. **Governing law and disputes.** Terms §11 says only "the laws of India". Is a jurisdiction or dispute clause advisable?
 
 ---
 
@@ -59,17 +162,19 @@ The rest of §1 is unchanged.
 >
 > **Course interest.** Registering interest in a course is free and commits you to nothing.
 >
-> **Payment.** Live-course and consultation fees are paid by UPI or bank transfer, on a payment request we send by email. A course fee is paid in full before the first class or, where the course terms offer it, in instalments (for Beginner German · A1: ₹4,000 before the start and ₹3,999 before week 7). A place in a batch is confirmed only once payment is received. (D3, D7)
+> **Payment.** Live-course and consultation fees are paid by UPI or bank transfer, on a payment request we send by email. A course fee is paid in full before the first class or, where the course terms offer it, in instalments (for Beginner German · A1: ₹4,000 before the start and ₹3,999 before week 7). A place in a batch is confirmed only once payment is received. (D3, D7) [OWNER + LEGAL: what happens if the second instalment is not paid before week 7 (Q4), and which payment the consultation deduction reduces (Q5).]
 >
-> **Missed classes.** Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up. One-to-one lessons can be moved free of charge with at least 24 hours' notice. (D5)
+> **Missed classes.** Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up, and you can bring questions to the next class. One-to-one lessons can be moved free of charge with at least 24 hours' notice. (D5)
 >
-> **Cancellations and refunds.** If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don't suit you, we refund everything not yet delivered. The 7-day guarantee in section 5 covers self-paced purchases only, not live classes or consultations. (D5)
+> **Cancellations and refunds.** If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don't suit you, we refund everything not yet delivered. The 7-day guarantee in section 5 covers self-paced purchases only, not live classes or consultations. (D5) [OWNER + LEGAL: how "the classes still to come" is calculated, including for instalment payers (Q3).]
 >
-> **Scheduling.** Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. (D5)
+> **Scheduling.** Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. One-to-one lessons are scheduled directly with your teacher. (D5)
+>
+> **What the fee includes.** The course fee covers every live class in the course, the teacher's class notes and worksheets, and written feedback on your homework. Goethe exam fees are not included. (D5)
 >
 > **Changes by Klarweg.** If your teacher becomes unavailable, we reschedule the affected classes and tell you in advance. If the new dates don't suit you, the cancellation and refund terms above apply. (Klarweg's only teacher today is its owner, D6, so this clause does not promise a substitute teacher.)
 >
-> **Conduct in class.** Be respectful to the teacher and other students. Do not record, share or redistribute classes or class materials without permission. We may remove a participant who disrupts a class. [LEGAL: whether to refund the classes not yet held in that case.]
+> **Conduct in class.** Be respectful to the teacher and other students. Do not record, share or redistribute classes or class materials without permission. We may remove a participant who disrupts a class. [LEGAL: whether to refund the classes not yet held in that case (Q10).]
 >
 > **Recordings.** Classes are not recorded. (D6)
 
@@ -81,7 +186,7 @@ The Refund Policy page (`refund-policy.html`) needs a matching sentence that liv
 
 ### §9 and §10
 
-No change is needed. "We don't guarantee any particular learning outcome, exam result…" already covers live classes. §10 limits liability to "the course or bundle", which a live course falls under.
+Not drafted. §9 ("We don't guarantee any particular learning outcome, exam result…") appears to cover live classes as written. Whether §8 ("pricing may change") and §10 (liability limited to "the course or bundle") work for a live course is Q7.
 
 ---
 
@@ -89,19 +194,7 @@ No change is needed. "We don't guarantee any particular learning outcome, exam r
 
 Current: §1 says self-paced only. §2 claims to reflect "exactly what the Klarweg systems store today" and says the phone number is collected "only when you begin a purchase". The live-classes consultation form asks for an optional phone number, and its consent box points to this policy.
 
-Verified facts about the form (from `kw-live.js` and the static test "the consultation form only hands off to email"):
-- The page has no form action, no `fetch` and no checkout.
-- On submit it opens the visitor's own email app with a pre-filled message to `klarwegofficial@gmail.com`.
-- Nothing is sent or stored unless the visitor sends that email.
-- The message contains:
-  - the request type: a consultation, or free interest in a course;
-  - name and email;
-  - WhatsApp/phone (optional);
-  - current level and main goal;
-  - preferred teacher and course of interest;
-  - preferred times (IST);
-  - a free-text message.
-- The consent box covers both request types: "to respond to my request, as described in the Privacy Policy".
+How the request form works, verified in the code, is described in §0 ("How a request reaches Klarweg").
 
 ### §1 Who we are: proposed change
 
@@ -123,9 +216,17 @@ The same change as Terms §1: "… self-paced online courses … and teacher-led
 >
 > **Paying for a live course or consultation.** You pay by UPI or bank transfer (D7). Your payment reaches us through our bank, which shows us your name and UPI ID or account reference. [OWNER: how payment records are kept and for how long, after the accounting follow-up. Do not publish a retention period for them before then.]
 
+### §4A addition: group classes (Q9)
+
+> In a group class, the other learners in your batch can see your name and, if you turn them on, your camera and microphone. Please don't record or share them.
+
+### §11 Children and minors: decision needed (Q9)
+
+> [LEGAL: a minimum age for live classes, or how a parent or guardian consents for a learner under 18.]
+
 ### §8 Third-party services: add
 
-> Google (Gmail and Google Meet): receives consultation and course-interest requests and our replies, and hosts live classes and consultations. Our bank processes UPI and bank-transfer payments for live fees. [LEGAL: whether to name the bank.]
+> Google (Gmail and Google Meet): receives consultation and course-interest requests and our replies, and hosts live classes and consultations. Our bank processes UPI and bank-transfer payments for live fees. [LEGAL: whether to name the bank and the UPI app (Q12), and whether to name WhatsApp if learners are contacted there (Q8).]
 
 ### §9 How long we keep data: add
 
@@ -137,3 +238,54 @@ The same change as Terms §1: "… self-paced online courses … and teacher-led
 - The policy names no grievance officer (§13). Whether one is needed, for example under India's DPDP Act, is a question for a lawyer, not something decided here.
 - The 12-month retention of request emails is a manual practice (deleted by hand in Gmail). Word it as a commitment Klarweg follows, not an automatic process.
 - Nothing in these drafts claims compliance with any law. The reviewer decides whether any such statement belongs in the final text.
+
+---
+
+## 4. Refund Policy (`refund-policy.html`)
+
+Today the page offers a 7-day refund on "any paid level or the Lifetime bundle". It also says "If a Klarweg purchase doesn't work for you…", which a learner could read as covering a live course.
+
+### "What's covered": add
+
+> This guarantee covers self-paced purchases only: single levels and the Lifetime bundle. It does not cover live classes or consultations. Their cancellation and refund terms are in section 4A of our <a href="terms.html">Terms of Service</a>.
+
+### "How it works": change the first sentence
+
+> If a self-paced Klarweg purchase doesn't work for you, …
+
+The guarantee itself does not change.
+
+---
+
+## 5. Sending this to a lawyer
+
+### Copy-ready email
+
+> **Subject:** Legal review: Terms, Privacy and Refund Policy updates for live German classes (Klarweg)
+>
+> Hello [name],
+>
+> I run Klarweg (klarweg.in), a German-language learning site that I operate as an individual. Today it sells self-paced online courses through a Cashfree checkout, with a 7-day money-back guarantee.
+>
+> I plan to add teacher-led live classes, taught by me on Google Meet. The first is a 12-week A1 group course: 4–8 learners, 36 classes, ₹7,999, payable in full or in two instalments. I would also offer a ₹100, 20-minute consultation. Both would be paid by UPI or bank transfer on a payment request I email, not through the website. Requests reach me by email: the website only opens the visitor's own email app with a pre-filled message.
+>
+> Before launching, I would like you to review:
+> 1. the proposed changes to my Terms of Service, Privacy Policy and Refund Policy (attached, with the current pages);
+> 2. the questions listed in the brief, in particular consumer and refund terms, privacy notice and consent, minors in group video classes, grievance contact requirements, and how to word the separation from the self-paced refund guarantee.
+>
+> I am not asking for a general compliance audit, only for this change. Could you let me know your fee and timeline?
+>
+> Thank you,
+> Reegan Gandhi
+> klarwegofficial@gmail.com
+
+### Documents and facts to send
+
+- [ ] This document, `live-classes-review-drafts.md` (the brief, the drafts and the questions).
+- [ ] The current pages as PDF or links: `terms.html`, `privacy.html`, `refund-policy.html`.
+- [ ] Screenshots of the Live Classes page from a local preview: the course card, the consultation section with "Good to know", the FAQ and the request form with its consent box. The page itself is not public.
+- [ ] The four policy texts and the consultation terms. They are quoted in §2; the source is `live-classes-data.js`.
+- [ ] Your answers, or your preference, on Q3–Q5 (instalment refunds, a missed second instalment, the consultation deduction), so the lawyer can word them.
+- [ ] Your legal status: an individual, any GST registration, and the address you would be willing to publish, if one is required.
+- [ ] Whether you contact learners on WhatsApp, and which bank and UPI app receive payments.
+- [ ] Whether minors may join, and from what age.

@@ -34,8 +34,9 @@ Cleared on 2026-10-20 by the approved decisions: consultation terms (`termsConfi
 ### Owner checklist
 
 **Everything still open is in part B of [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md):**
-- the legal review of the Terms/Privacy drafts (a lawyer is recommended);
-- the accounting follow-up (receipts or invoices, tax, payment-record keeping);
+- the legal review of the Terms/Privacy/Refund drafts. The lawyer's package is [`live-classes-review-drafts.md`](live-classes-review-drafts.md);
+- the accounting follow-up. The accountant's package is [`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md);
+- four business rules raised by the handoff: instalment refunds, a missed second instalment, the consultation deduction, and minors;
 - the A1 start date;
 - the D8 launch go-ahead;
 - optionally, a photo and an availability line.

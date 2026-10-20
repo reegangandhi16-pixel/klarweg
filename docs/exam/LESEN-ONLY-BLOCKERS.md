@@ -1,6 +1,6 @@
 # Lesen-only release: every remaining blocker, in order
 
-> **Status:** 2026-10-20, verified on main `5f06359` (exam code unchanged since `1b91880`; CI green on both). Nothing
+> **Status:** 2026-10-20, verified on main `e126dfe` (exam code unchanged since `1b91880` until PR #157). Nothing
 > here is satisfied unless it says so with evidence. The public learner portal stays unavailable until every row in
 > A–D is closed. Production today: exam Worker flags all `off`; no `EXAM` binding or `EXAM_ROUTES` in klarweg-access;
 > no `exam/` in the Pages allowlist.
@@ -31,9 +31,11 @@ Order = what unblocks the most, soonest. "Who" is the only party that can close 
 | Fix findings from EX-03/04/05/01/07 | A finding is delivered | Each fix goes through tests and CI; a revised EX-03 item is reviewed again from scratch (O6) |
 | Attempt-data retention job | D7 is answered | Off until configured, like PR #76 for recordings |
 | Production learner release build | EX-03 records say `approved` | `release-candidate.mjs --approved <records>`, never `--internal-candidate` |
-| Non-production refresh to the current content | Before EX-05/EX-04 test there, if wanted | Non-prod `r000` still has the wording before PR #152 (four explanation and stem fixes; keys identical). Security behaviour is unaffected |
+| Non-production content refresh | **Not done, by design** (`NONPROD-SETUP.md` §4 N1) | Verified read-only: exactly the five PR #152 texts differ, and all keys are identical. A refresh would rewrite the history of 7 attempts and 6 results (global item ids), so it is not performed. EX-04 uses the local demo; EX-05 tests behaviour |
+| Content revision scheme for **released** forms | Only when a form that learners have used must change | All corrections so far (#111, #118, #152) edited `@1` in place. That is acceptable only because no learner release exists. SCHEMA §2 requires a new revision, and items_index has global item ids, so a released form's correction needs new item ids. From the first learner release on, the insert-only learner registry and `registry-preflight.mjs` refuse any overwrite (PR #157) |
 
 Done and evidenced (not blockers):
+- the learner registry is insert-only, and the read-only `registry-preflight.mjs` (PR #157) checks an import against the target database: run against non-production it reports P3/P8/P13 as conflicts, P14 as identical;
 - single-module Lesen mode, the release set and system-test exclusion (#145, #150; non-prod M1/M2);
 - the release-candidate tool and the internal review of the 90 items (#152);
 - the self-service review form, record check and summary (#154);

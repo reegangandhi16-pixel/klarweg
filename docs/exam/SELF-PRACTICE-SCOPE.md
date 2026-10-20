@@ -87,6 +87,7 @@ exam Worker:  EXAM_ENABLED=on  EXAM_SYNTHETIC_FORMS=on  EXAM_MODULE_ONLY=lesen  
 Access:       EXAM_ROUTES=on + EXAM service binding
 Content:      node exam-content/tools/release-candidate.mjs --forms <names> --module lesen --release <rNNN>
                 --approved <returned EX-03 records> --out <dir outside the repo>
+              then: registry-preflight.mjs --forms <names> --existing <export of the target D1>   (must say OK)
               → a learner release of exactly those forms + worker-settings.env + candidate.json. It refuses S0,
                 unknown/duplicate/empty lists and any form whose Lesen is not "approved" in the records.
                 (--internal-candidate builds a NOT APPROVED copy for non-production testing only.)

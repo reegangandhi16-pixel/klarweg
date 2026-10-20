@@ -202,6 +202,33 @@ P3, P8 and P13 are **candidate** forms used for the test; listing them approves 
 - **M2.4, first run on the restored config:** `409 attempt_open`. Also from the test: the account already held the open
   full attempt this script had created at 09:15. The script now uses a fresh account; the re-run passed.
 
+### Content status N1 (2026-10-20; read-only, nothing was changed)
+Compared at main `e126dfe` with the non-prod exam D1 and R2 (release `r000`, imported 2026-10-19). Scripts:
+`~/klarweg-work/qa-live/nonprod/np-content-compare*.mjs`, outputs `np-content-compare*.json`; registry export and
+preflight `np-registry-export/`.
+- **Keys and explanations:** all 1 184 item keys and explanations (D1) checked. **Every answer key is identical.**
+  - **Exactly four records differ**, the four corrections of PR #152: P3 Lesen 1 items 1 and 2, P8 Lesen 2 item 10, and
+    P13 Lesen 3 item 16 (the explanations).
+- **Lesen packages:** every stem and option (R2, all 16 forms) checked. Only the P3 Lesen 1 item 1 stem differs (also
+  PR #152). Hören, Schreiben and Sprechen package texts were not compared.
+- **Preflight** (`registry-preflight.mjs`, read-only): P3, P8 and P13 are a conflict (P3: Lesen package and 2 key
+  records; P8: 1; P13: 1). P14 is identical. This is the same result, by an independent method.
+- **Data on these forms:**
+  - 7 attempts: P3 2 (1 completed, 1 still open from the aborted M2 run), P8 3 completed, P13 2 completed;
+  - 6 results, 10 module scores, 64 saved answers with 64 answer events, 55 audit rows;
+  - database totals: 20 attempts, 11 results, 168 audit rows.
+- **Decision: no refresh.** An in-place import cannot keep this history intact:
+  - `items_index.item_id` is a global key, so corrected rows would replace or re-point the `@1` rows that these
+    attempts' item reviews read;
+  - replacing a referenced form row breaks foreign keys;
+  - a new form revision cannot reuse the item ids;
+  - a separate database would be new infrastructure.
+
+  The planned reviews do not need the corrected wording. EX-05 tests behaviour, and EX-04 uses the local demo, which
+  serves the canonical content.
+- **For reviewers:** non-production shows the pre-PR #152 wording for those five texts. It is not the content under
+  EX-03 review.
+
 ## 5. Teardown or reset
 - **Reset data:** drop and recreate both non-prod D1 databases, then repeat §3 step 3 onward.
 - **Remove everything:**

@@ -10,7 +10,7 @@ exam content, no real audio and no learner data.
 |---|---|---|
 | Content source + tools | `exam-content/` (level config, schema, synthetic form, validator, release builder) | repo only |
 | Exam Worker `klarweg-exam` | `exam-worker/` (`workers_dev = false`; no public route) | **not created** |
-| Exam DB (D1 `klarweg-exam`) | `exam-worker/migrations/0001_exam_init.sql` | **not created** (placeholder `database_id`) |
+| Exam DB (D1 `klarweg-exam`) | `exam-worker/migrations/0001_exam_init.sql`, `0002_attempt_module_scope.sql` (additive column) | **not created** (placeholder `database_id`) |
 | Private R2 `klarweg-exam-content` / `klarweg-exam-recordings` | binding `CONTENT` / `RECORDINGS` | **not created** |
 | Access proxy `/exam/*` | `access/worker/src/exam-proxy.js` + one hook in `index.js` | code is inert: needs `EXAM_ROUTES = "on"` **and** an `EXAM` service binding, and neither exists |
 | Frontend shell | `exam/` | **not published**: not in `.github/pages-allowlist.txt` |
@@ -24,6 +24,7 @@ exam content, no real audio and no learner data.
 | `EXAM_SYNTHETIC_FORMS` | klarweg-exam | mode `synthetic_full` may be assigned |
 | `EXAM_MOCK_FORMS` | klarweg-exam | mode `mock_m0` (no forms exist yet) |
 | `EXAM_PRODUCTION_FORMS` | klarweg-exam | mode `simulation_full` (no forms exist yet) |
+| `EXAM_MODULE_ONLY` | klarweg-exam | **unset (default):** full attempts only; single-module modes (`synthetic_module`, `simulation_module`) refused. **A comma list of modules** (e.g. `lesen`): only single-module attempts of those modules; full attempts refused. Any unknown entry disables every mode (fail closed). Still needs the family flag above (`EXAM_SYNTHETIC_FORMS` for `synthetic_module`). Scope and gates: `SELF-PRACTICE-SCOPE.md` |
 
 Secrets (`wrangler secret put`), each ≥ 32 characters:
 - `EXAM_PROXY_SECRET`, set on **both** Workers with the same value.
@@ -37,7 +38,9 @@ Secrets (`wrangler secret put`), each ≥ 32 characters:
 
 1. `wrangler d1 create klarweg-exam`, then put the id into `exam-worker/wrangler.toml`.
 2. `wrangler r2 bucket create klarweg-exam-content` and `wrangler r2 bucket create klarweg-exam-recordings`. Both buckets stay private: no public domain and no r2.dev access.
-3. Apply the migration: `cd exam-worker && npx wrangler d1 migrations apply klarweg-exam --remote`.
+3. Apply the migrations: `cd exam-worker && npx wrangler d1 migrations apply klarweg-exam --remote`. **Order:** a Worker
+   version that knows `attempts.module_scope` (since 0002) needs migration 0002 applied first, or creating any attempt
+   fails; apply migrations before deploying the Worker.
 4. Build the release: `npm run exam:build -- --out /tmp/kx-r000`.
    - The release goes outside the repo.
    - Upload every file under `releases/` to `klarweg-exam-content` with the same keys.

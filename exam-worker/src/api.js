@@ -3,7 +3,7 @@
    → server deadline. Invalid state transitions are rejected with 409. */
 import { fail, now, readJsonBody, sha256Hex, DEVICE_ID_RE } from './http.js';
 import { log } from './log.js';
-import { flags, MODES } from './flags.js';
+import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly } from './flags.js';
 import { hasExamAccess, hasRole } from './auth.js';
 import { formRow, levelConfig, moduleConfig, loadPackage } from './content.js';
 import { countWords } from './wordcount.js';
@@ -49,7 +49,7 @@ async function attemptView(env, attempt) {
   const form = await formRow(env, attempt.form_id);
   const mods = await attemptModules(env, attempt.id);
   return {
-    attempt_id: attempt.id, mode: attempt.mode, level: attempt.level, status: attempt.status,
+    attempt_id: attempt.id, mode: apiMode(attempt), module_scope: attempt.module_scope || null, level: attempt.level, status: attempt.status,
     form: { label: form.label, kind: form.kind, test_content: form.kind === 'synthetic' },   // form id never needed client-side
     time_multiplier: attempt.time_multiplier,
     server_now: t, save_grace_ms: SAVE_GRACE_MS,
@@ -89,28 +89,31 @@ export async function myAttempts(env, userId) {
 
 /* ---------- availability ---------- */
 export async function availability(env, userId) {
-  const f = flags(env);
   const out = [];
+  const only = moduleOnly(env);
   for (const [mode, def] of Object.entries(MODES)) {
+    // a single-module mode is listed once per enabled module; while EXAM_MODULE_ONLY is unset it is listed as disabled
+    const modules = def.single_module ? (only && only.ok ? only.modules : [null]) : [undefined];
     for (const [lvlKey, lvl] of Object.entries(LEVELS)) {
-      let reason = null;
-      if (!f[def.flag]) reason = 'disabled';
-      else if (!(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) reason = 'no_access';
-      else {
+      let reason = modeBlock(env, def);
+      if (!reason && !(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) reason = 'no_access';
+      if (!reason) {
         const forms = await env.DB.prepare(`SELECT COUNT(*) AS n FROM forms f JOIN level_configs l ON l.id = f.level_config_id
             WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).first();
         if (!forms.n) reason = 'no_forms';
       }
-      out.push({ mode, level: lvlKey, available: !reason, reason });
+      for (const module of modules) out.push({ mode, level: lvlKey, ...(module === undefined ? {} : { module }), available: !reason, reason });
     }
   }
-  const open = (await env.DB.prepare("SELECT id, mode FROM attempts WHERE user_id = ?1 AND status IN ('created','in_progress')").bind(userId).all()).results;
+  const open = (await env.DB.prepare("SELECT id, mode, module_scope FROM attempts WHERE user_id = ?1 AND status IN ('created','in_progress')").bind(userId).all()).results;
   // the learner's most recent completed attempt, so its result (and later ratings) can be opened again
   const last = await env.DB.prepare("SELECT id FROM attempts WHERE user_id = ?1 AND status = 'completed' ORDER BY completed_at DESC LIMIT 1").bind(userId).first();
-  return { ok: true, server_now: now(env), modes: out, open_attempts: open.map((a) => ({ attempt_id: a.id, mode: a.mode })), last_completed: last ? last.id : null };
+  return { ok: true, server_now: now(env), modes: out,
+    open_attempts: open.map((a) => ({ attempt_id: a.id, mode: apiMode(a), ...(a.module_scope ? { module: a.module_scope } : {}) })), last_completed: last ? last.id : null };
 }
 
 /* ---------- create attempt (server-side, immutable form assignment) ---------- */
+const EXAM_MODULE_SET = new Set(EXAM_MODULES);
 function csprngIndex(n) {
   if (n <= 0) throw new Error('empty');
   const lim = Math.floor(0x1_0000_0000 / n) * n;     // rejection sampling: no modulo bias
@@ -127,7 +130,13 @@ export async function createAttempt(env, userId, request) {
   if (!def || !lvl) fail(400, 'invalid_mode_or_level');
   // anything the client says about the form is ignored — assignment is server-side only
   if ('form_id' in body || 'form' in body) await audit(env, userId, null, 'form_selection_ignored', { mode: body.mode });
-  if (!flags(env)[def.flag]) fail(403, 'mode_disabled');
+  // single-module modes name exactly one module; full modes take none
+  const scope = def.single_module ? body.module : null;
+  if (def.single_module ? !EXAM_MODULE_SET.has(scope) : 'module' in body && body.module !== null && body.module !== undefined) fail(400, 'invalid_module');
+  const block = modeBlock(env, def, scope);
+  if (block === 'module_disabled') fail(403, 'module_disabled');
+  if (block) fail(403, 'mode_disabled');
+  const storedMode = def.family || body.mode;
   if (!(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) fail(403, 'exam_access_required');
 
   // a retried create (same request id) replays the attempt it created
@@ -135,7 +144,7 @@ export async function createAttempt(env, userId, request) {
   const replay = async (a) => ({ ...(await attemptView(env, a)), lease: await acquireLease(env, a, body.device_id, true), replayed: true });
   const same = await findSame();
   if (same) return replay(same);
-  const open = await env.DB.prepare("SELECT id FROM attempts WHERE user_id = ?1 AND mode = ?2 AND status IN ('created','in_progress')").bind(userId, body.mode).first();
+  const open = await env.DB.prepare("SELECT id FROM attempts WHERE user_id = ?1 AND mode = ?2 AND status IN ('created','in_progress')").bind(userId, storedMode).first();
   if (open) {
     const sameNow = await findSame();   // the original of this retry may have committed since the lookup above
     if (sameNow) return replay(sameNow);
@@ -162,12 +171,14 @@ export async function createAttempt(env, userId, request) {
   const mods = (await env.DB.prepare('SELECT module, module_order FROM form_modules WHERE form_id = ?1 ORDER BY module_order').bind(form.id).all()).results;
   const cfg = await levelConfig(env, form.level_config_id);
   if (mods.length !== cfg.modules.length) fail(503, 'form_incomplete');
+  const kept = scope ? mods.filter((m) => m.module === scope) : mods;
+  if (!kept.length) fail(503, 'form_incomplete');
   try {
     await env.DB.batch([
-      env.DB.prepare(`INSERT INTO attempts (id, user_id, mode, level, form_id, release, status, time_multiplier, client_request_id, assignment_reason, assignment_seed, created_at)
-          VALUES (?1, ?2, ?3, ?4, ?5, ?6, 'created', ?7, ?8, ?9, ?10, ?11)`)
-        .bind(attemptId, userId, body.mode, lvl, form.id, form.release, acc ? acc.time_multiplier : 1.0, requestId, reason, seed, t),
-      ...mods.map((m, i) => env.DB.prepare(`INSERT INTO attempt_modules (attempt_id, module, module_order, status) VALUES (?1, ?2, ?3, ?4)`)
+      env.DB.prepare(`INSERT INTO attempts (id, user_id, mode, module_scope, level, form_id, release, status, time_multiplier, client_request_id, assignment_reason, assignment_seed, created_at)
+          VALUES (?1, ?2, ?3, ?12, ?4, ?5, ?6, 'created', ?7, ?8, ?9, ?10, ?11)`)
+        .bind(attemptId, userId, storedMode, lvl, form.id, form.release, acc ? acc.time_multiplier : 1.0, requestId, reason, seed, t, scope),
+      ...kept.map((m, i) => env.DB.prepare(`INSERT INTO attempt_modules (attempt_id, module, module_order, status) VALUES (?1, ?2, ?3, ?4)`)
         .bind(attemptId, m.module, m.module_order, i === 0 ? 'available' : 'locked'))
     ]);
   } catch (e) {
@@ -175,13 +186,13 @@ export async function createAttempt(env, userId, request) {
     // (a retry racing the original), replay it like a sequential retry
     const sameWinner = await findSame();
     if (sameWinner) return replay(sameWinner);
-    const winner = await env.DB.prepare("SELECT id FROM attempts WHERE user_id = ?1 AND mode = ?2 AND status IN ('created','in_progress')").bind(userId, body.mode).first();
+    const winner = await env.DB.prepare("SELECT id FROM attempts WHERE user_id = ?1 AND mode = ?2 AND status IN ('created','in_progress')").bind(userId, storedMode).first();
     if (winner) fail(409, 'attempt_open', 'An attempt of this kind is already open.', { attempt_id: winner.id });
     throw e;
   }
   const attempt = await loadAttempt(env, attemptId, userId);
-  await audit(env, userId, attemptId, 'attempt_created', { mode: body.mode, reason });
-  log(env, 'attempt_created', { attempt: attemptId, mode: body.mode, reason });
+  await audit(env, userId, attemptId, 'attempt_created', { mode: body.mode, ...(scope ? { module: scope } : {}), reason });
+  log(env, 'attempt_created', { attempt: attemptId, mode: body.mode, ...(scope ? { module: scope } : {}), reason });
   // takeover: the attempt is new, so the only possible holder is a concurrent replay of this same request
   return { ok: true, ...(await attemptView(env, attempt)), lease: await acquireLease(env, attempt, body.device_id, true) };
 }
@@ -215,6 +226,9 @@ export async function startModule(env, userId, attemptId, module, request) {
   const { attempt } = await attemptCtx(env, userId, attemptId, body.lease_id);
   return idempotent(env, attemptId, requestId, `start:${module}`, async () => {
     const m = await moduleRow(env, attemptId, module);
+    // EXAM_MODULE_ONLY also holds for attempts opened before it was set: no other module can start (fail closed)
+    const only = moduleOnly(env);
+    if (only && !(only.ok && only.modules.includes(module))) fail(403, 'module_disabled');
     if (m.status === 'locked') fail(409, 'module_locked');
     if (m.status !== 'available') fail(409, 'invalid_transition', `Module is ${m.status}.`);
     const running = (await attemptModules(env, attemptId)).find((x) => x.status === 'running');

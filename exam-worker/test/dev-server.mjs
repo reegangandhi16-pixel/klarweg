@@ -5,7 +5,8 @@
    raters and one outsider without any role. The dev-only cookie `kx-dev-as=<alias>` picks one of THESE users (it can
    never name any other user id); authorization is still decided by the exam Worker from the stored roles.
    Usage: node exam-worker/test/dev-server.mjs [port] [s0|p1|p2|…|practice] [--mfa] (practice = every registered practice form;
-   --mfa = real rater 2FA screens via an in-process Access Worker)  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
+   --mfa = real rater 2FA screens via an in-process Access Worker; --module-only=lesen = the Lesen-only self-practice
+   configuration, EXAM_MODULE_ONLY)  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
    Default for the demo: practice (every practice form; each new attempt gets the least-attempted one). Tests default to s0.
    Switching user in the demo: open /exam/dev/as/<alias> (learner, rater1, rater2, outsider); it sets the dev cookie and
    goes to the matching screen. Only these local test users exist. */
@@ -42,10 +43,10 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; ch
    no-store, set-cookie removal) → service binding → exam Worker. It implies the in-process Access of `mfa`; without mfa
    the local test users' sessions start verified. The browser's Origin is not forwarded (the CSRF guard is covered by the
    Access tests; a same-origin dev page is not a cross-site write). */
-export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0', mfa = false, proxy = process.env.KX_DEV_PROXY === '1' } = {}) {
+export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0', mfa = false, proxy = process.env.KX_DEV_PROXY === '1', flags = {} } = {}) {
   const FORMS = { s0: [FORM_DIR], ...Object.fromEntries(PRACTICE_LIBRARY.map((f) => [f.name.toLowerCase(), [f.dir]])), practice: PRACTICE_LIBRARY.map((f) => f.dir) };
   if (!FORMS[form]) throw new Error(`unknown form ${form} (${Object.keys(FORMS).join('|')})`);
-  const h = makeEnv({ formDirs: FORMS[form] });
+  const h = makeEnv({ formDirs: FORMS[form], flags });   // flags: Worker vars on top of the test defaults, e.g. EXAM_MODULE_ONLY
   await grant(h.env, user);
   const users = { learner: user, rater1: `usr_${crypto.randomUUID()}`, rater2: `usr_${crypto.randomUUID()}`, outsider: `usr_${crypto.randomUUID()}` };
   await role(h.env, users.rater1, 'rater'); await role(h.env, users.rater2, 'rater');
@@ -123,12 +124,13 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   // --mfa: raters go through the real second-factor screens (OD-19) against an in-process Access Worker
   const mfa = process.argv.includes('--mfa');
   const proxyMode = process.argv.includes('--proxy') || process.env.KX_DEV_PROXY === '1';
+  const moduleOnly = (process.argv.find((x) => x.startsWith('--module-only=')) || '').slice('--module-only='.length);
   const pos = process.argv.slice(2).filter((x) => !x.startsWith('--'));
-  const s = await startDevServer({ port: Number(pos[0] || 8788), form: pos[1] || 'practice', mfa, proxy: proxyMode });
+  const s = await startDevServer({ port: Number(pos[0] || 8788), form: pos[1] || 'practice', mfa, proxy: proxyMode, flags: moduleOnly ? { EXAM_MODULE_ONLY: moduleOnly } : {} });
   const u = `http://127.0.0.1:${s.port}/exam`;
   console.log(`klarweg-exam dev server (local only, synthetic content, TEST AUDIO tones — not real listening audio), form ${s.form}
   learner:   ${u}/dev/as/learner
   raters:    ${u}/dev/as/rater1   ${u}/dev/as/rater2
   no role:   ${u}/dev/as/outsider
-  ${proxyMode ? 'requests: through the real Access Worker in-process (session, /exam proxy, service binding)\n  ' : ''}${mfa ? 'second factor: ON (raters enrol with an authenticator app on first visit; local in-memory data only)' : 'second factor: raters count as verified (start with --mfa to see the 2FA screens)'}`);
+  ${moduleOnly ? `EXAM_MODULE_ONLY=${moduleOnly}: single-module attempts only\n  ` : ''}${proxyMode ? 'requests: through the real Access Worker in-process (session, /exam proxy, service binding)\n  ' : ''}${mfa ? 'second factor: ON (raters enrol with an authenticator app on first visit; local in-memory data only)' : 'second factor: raters count as verified (start with --mfa to see the 2FA screens)'}`);
 }

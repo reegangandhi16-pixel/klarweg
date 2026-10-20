@@ -48,6 +48,13 @@ See `B1-SPEAKING-SPEC.md`. Phases: `consent → device_check → prep (15 min) �
 | `mock_m0` | Mock form only | Hard | Fixed: Mock M0 (never one of Sets 01–10) |
 | `practice_part` | One part | Soft/none | Practice pool (never live forms) |
 
+**Implementation note (2026-10-20).** `simulation_module` is implemented as an API mode with `module` in the create
+request, plus `synthetic_module` for the synthetic practice library. The attempt is stored under its family's mode
+(`simulation_full` / `synthetic_full`) with `attempts.module_scope` = the module, so one practice attempt per family is
+open at a time; the attempt contains only that module, and every other module's routes answer `404 module_not_found`.
+Single-module modes are off unless `EXAM_MODULE_ONLY` lists the module; while it is set, full attempts are refused
+(`SELF-PRACTICE-SCOPE.md`). `practice_part` is not implemented.
+
 Accommodations: `time_multiplier ∈ {1.0, 1.25, 1.5, 1.75, 2.0}` per user per attempt, admin-granted only [OFFICIAL S8: 25–100 %], applied to module and phase durations (Hören audio itself is not slowed).
 
 ---

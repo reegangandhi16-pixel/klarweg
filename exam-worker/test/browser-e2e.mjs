@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -1193,11 +1193,95 @@ async function runRater2fa() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* LESEN-ONLY (EXAM_MODULE_ONLY=lesen, the self-practice configuration): the start screen offers only Lesen and says
+   that the other modules are unavailable; a full attempt is refused; one Lesen attempt runs to a result with one module
+   row and its item review; no other module can be started; desktop + mobile without horizontal scroll; a11y audit. */
+async function runLesenOnly() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), flags: { EXAM_MODULE_ONLY: 'lesen' } });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable'); await send('Log.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const text = () => evaluate('document.body.innerText');
+    const waitFor = async (src, ms = 15000, label = src) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
+    const apiFetch = (method, p, body) => evaluate(`fetch(${JSON.stringify('/exam/v1' + p)}, { method: ${JSON.stringify(method)}, credentials: 'include', headers: { 'content-type': 'application/json' }${body ? `, body: ${JSON.stringify(JSON.stringify(body))}` : ''} }).then(async (r) => ({ status: r.status, json: await r.json().catch(() => null) }))`);
+    const A = makeA11y({ send, evaluate });
+    const base = `http://127.0.0.1:${dev.port}/exam/`;
+    const keys = Object.fromEntries((await dev.env.DB.prepare('SELECT item_id, key_json FROM item_keys').all()).results.map((r) => [r.item_id, JSON.parse(r.key_json).correct]));
+
+    await vp(390, 844, true);
+    await send('Page.navigate', { url: base });
+    await waitFor(`document.querySelector('[data-act="create"][data-module="lesen"]')`, 15000, 'Lesen-only start screen');
+    let t = await text();
+    assert.match(t, /nur Lesen/i);
+    assert.match(t, /Hören, Schreiben und Sprechen sind in dieser Version nicht verfügbar/);
+    assert.match(t, /kein Prüfungsergebnis/);
+    assert.equal(/Übung starten|allen vier Modulen/.test(t), false, 'the full simulation is not offered');
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 390 px');
+    await A.a11y('Lesen-only start (mobile)');
+    await vp(1280, 800, false);
+    const full = await apiFetch('POST', '/attempts', { mode: 'synthetic_full', level: 'b1', request_id: 'rq_e2e_lesenonly_full_0001', device_id: 'dev_e2e_lesenonly_00000001' });
+    assert.equal(full.status, 403); assert.equal(full.json.error, 'mode_disabled');
+
+    await click('[data-act="create"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'Lesen intro');
+    await click('[data-act="start"][data-module="lesen"]');
+    await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
+    const attempt = (await dev.env.DB.prepare('SELECT id, mode, module_scope FROM attempts').first());
+    assert.deepEqual([attempt.mode, attempt.module_scope], ['synthetic_full', 'lesen']);
+    const lease = await evaluate(`sessionStorage.getItem('kx-lease:${attempt.id}')`);
+    for (const module of ['hoeren', 'schreiben', 'sprechen']) {
+      const r = await apiFetch('GET', `/attempts/${attempt.id}/modules/${module}/package?lease_id=${lease}`);
+      assert.equal(r.status, 404, `${module} unreachable: ${JSON.stringify(r.json)}`); assert.equal(r.json.error, 'module_not_found');
+    }
+    const lesen = (await dev.env.DB.prepare("SELECT item_id FROM items_index WHERE module = 'lesen' AND is_example = 0").all()).results;
+    await evaluate(`(() => { const plan = ${JSON.stringify(Object.fromEntries(lesen.map((r) => [r.item_id, keys[r.item_id]])))};
+      for (const [id, v] of Object.entries(plan)) { const el = document.querySelector('[data-item="' + id + '"][value="' + v + '"]');
+        if (el) { el.click(); continue; } const sel = document.querySelector('select[data-item="' + id + '"]'); if (sel) { sel.value = v; sel.dispatchEvent(new Event('change', { bubbles: true })); } } })()`);
+    for (const t0 = Date.now(); (await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM responses_current WHERE module = 'lesen'").first()).n < lesen.length; await sleep(200)) {
+      if (Date.now() - t0 > 15000) throw new Error('Lesen answers not stored');
+    }
+    await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]');
+    await waitFor(`document.querySelector('[data-act="complete"]')`, 15000, 'complete screen');
+    assert.match(await text(), /Modul abgegeben/);
+    await click('[data-act="complete"]');
+    await waitFor(`document.querySelector('.kx-result table')`, 15000, 'result');
+    const rows = await evaluate(`[...document.querySelectorAll('.kx-result table tbody tr th')].map((x) => x.textContent)`);
+    assert.deepEqual(rows, ['Lesen']);
+    t = await text();
+    assert.match(t, /100 \/ 100/); assert.match(t, /kein Gesamtergebnis/);
+    await A.a11y('Lesen-only result');
+    const review = await apiFetch('GET', `/attempts/${attempt.id}/modules/lesen/review`);
+    assert.equal(review.status, 200); assert.equal(review.json.summary.correct, lesen.length);
+    // back to the start: Lesen again, with the history row
+    await send('Page.navigate', { url: base });
+    await waitFor(`document.querySelector('[data-act="create"][data-module="lesen"]') && document.querySelector('.kx-history')`, 15000, 'start screen with history');
+    assert.deepEqual(A.findings, [], `automated accessibility findings on ${A.screens.join(', ')}`);
+    const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    const csp = b.events.filter((e) => e.method === 'Log.entryAdded' && /Content Security Policy/i.test(e.params.entry.text || '')).map((e) => e.params.entry.text);
+    assert.deepEqual(csp, [], 'no CSP violations');
+    log(`lesen-only ${PRACTICE.name}`, 'PASS', {});
+    return exceptions;
+  } finally { b.close(); dev.server.close(); }
+}
+
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'lesen-only') { results.push({ vp: `lesen-only ${PRACTICE.name} (mobile start + desktop)`, uncaught: await fn() }); continue; }
   if (name === 'rater-2fa') { results.push({ vp: `rater 2FA ${PRACTICE.name}`, uncaught: await fn() }); continue; }
   if (name === 'two-tabs') { results.push({ vp: `two tabs ${PRACTICE.name}`, uncaught: await fn() }); continue; }
   if (name === 'lease-expiry') { results.push({ vp: `lease expiry ${PRACTICE.name}`, uncaught: await fn() }, { vp: `lease expiry Sprechen ${PRACTICE.name}`, uncaught: await runLeaseExpirySprechen() }); continue; }

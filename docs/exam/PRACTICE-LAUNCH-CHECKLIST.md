@@ -27,6 +27,14 @@ an approval that has not been given.
 - **Still open here:** A10 not run (gate for protected #71/#73); manual checks: A2 in Safari, A3 with a real microphone,
   A6 real laptop sleep, A11 DevTools spot check. Retention jobs (PR #76, unmerged) not tested. Production: nothing.
 
+**A2. Smallest usable release: Lesen only (proposal, 2026-10-20; owner has not chosen it).** `SELF-PRACTICE-SCOPE.md`
+- Built and tested, off by default: `EXAM_MODULE_ONLY=lesen` lets learners take single-module Lesen attempts and
+  refuses full attempts. Migration 0002 adds `attempts.module_scope`. The start screen is labelled
+  "Selbstlernübung · nur Lesen". EX-03 sheets and status can be scoped per module (`--module lesen`, per-module status).
+  Tests: `module-only.test`, frontend START SCREEN, review tooling, and the browser scenario `lesen-only` (direct and proxy).
+- Removes from the critical path: EX-02, OD-14/EX-06, recording consent, F4/P-19/P-20/P-25, PR #76, v1.6 signature (OD-07/OD-30 are Schreiben-only).
+- Still required: owner scope + form-set choice, EX-03 for the Lesen items of those forms, OD-08 confirmation, EX-01 (no recordings), EX-04 (Lesen screens), EX-05, EX-07, OD-41 policy, OD-20 domain, production provisioning, and a nonprod rerun with migration 0002.
+
 **C. Engineering work remaining (each waits for a decision listed in D, E or F)**
 - Consent-withdrawal flow (F4/P-19, EX-01). Design draft: `CONSENT-PRIVACY-DRAFT.md` §4a.
 - Recording retention: merge and configure PR #76 (F4/P-20, EX-01). Off until then.

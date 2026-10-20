@@ -1,10 +1,10 @@
-# Live Classes — proposed wording for owner review
+# Live Classes — Terms and Privacy wording for legal review
 
-**Status: PROPOSED. Not approved, not published.** Nothing in this document is live. The legal wording below is a starting point for the owner (and, if wanted, a lawyer). It is not legal advice and has not been reviewed by anyone. Variant A of the homepage FAQ (§1) has been applied to `index.html` for review; it is published only once merged and deployed. `terms.html` and `privacy.html` are unchanged.
+**Status: awaiting final legal review. Not published.** The business facts in §2 and §3 are the owner's decisions of 2026-10-20 (D3–D7, part A of [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md)). The *legal wording* around them is a draft: it is not legal advice and nobody has reviewed it. A review by a qualified lawyer is recommended. Until the wording is approved, `terms.html`, `privacy.html` and `refund-policy.html` stay unchanged; a static test enforces this while the sheet says `Legal review status: pending`.
 
-Context: the owner decided on 2026-10-20 that Klarweg intends to offer teacher-led live German classes (decision D1 in `live-classes-launch-readiness.md`). That decision confirms the direction only. No teacher, course, batch, schedule, fee, policy or enrolment date is approved yet. Every wording below is written so that it stays true until those are approved.
+Variant A of the homepage FAQ (§1) is already live on `index.html`. Variant B waits for the launch (D8, on hold).
 
-`[OWNER: …]` marks text that cannot be written without a business decision. `[PROPOSED …]` shows the default suggested in [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md); it is still unapproved. Do not publish a section while it contains either.
+`[OWNER: …]` marks one point that still needs a decision: the accounting follow-up for payment records. `[LEGAL: …]` marks questions for the reviewer. Do not publish a section while it contains either.
 
 ---
 
@@ -31,7 +31,7 @@ Structured data: use the same answer text as the `"text"` value of the existing 
 
 ### Variant B: at launch (only together with the launch checklist, D8)
 
-> Yes. Alongside the self-paced courses, Klarweg offers teacher-led live German classes. [OWNER: one line on formats, e.g. "small group batches and one-to-one lessons", only what is actually offered.] See the teachers, current courses and how to book a consultation on the <a href="live-classes.html">Live Classes</a> page.
+> Yes. Alongside the self-paced courses, Klarweg offers teacher-led live German classes. The first course is a small-group Beginner German (A1) batch. [At launch, name only the courses actually published.] See the teachers, current courses and how to book a consultation on the <a href="live-classes.html">Live Classes</a> page.
 
 The structured-data copy should keep the sentence but drop the link markup.
 
@@ -49,33 +49,35 @@ The rest of §1 is unchanged.
 
 ### §2 The service: add a paragraph
 
-> Klarweg also offers teacher-led live German classes and paid personal consultations, described in section 4A. Live classes are a separate service from the self-paced courses: buying a self-paced level does not include live classes, and a live course does not include self-paced access unless its course terms say so. [OWNER: D6. PROPOSED: a live course does not include self-paced access.]
+> Klarweg also offers teacher-led live German classes and paid personal consultations, described in section 4A. Live classes are a separate service from the self-paced courses: buying a self-paced level does not include live classes, and a live course does not include access to the self-paced courses. (D6)
 
 ### New §4A Live classes and consultations
 
 > **Course terms in writing.** Before you pay for a live course, we confirm its terms to you in writing: the teacher, level, format (group batch or one-to-one), number and length of sessions, schedule (in Indian Standard Time), start date, platform, materials and fee. Those course terms form part of these Terms.
 >
-> **Consultations.** A personal consultation costs [PROPOSED ₹100] and lasts [PROPOSED 20 minutes] on [PROPOSED Google Meet]. We confirm a time slot by email and tell you how to pay. If you enrol in a live course within [PROPOSED 7] days of your consultation, the consultation fee is deducted from the course fee. If Klarweg cancels a consultation, we refund it or offer a new time. You can move it once, free of charge, with at least 12 hours' notice; a consultation missed without notice is not refunded. [PROPOSED, D4]
+> **Consultations.** A personal consultation costs ₹100 and lasts 20 minutes on Google Meet. We confirm a time slot by email, then ask you to pay by UPI; the joining link follows payment. If you enrol in a live course within 7 days of your consultation, the consultation fee is deducted from the course fee. If Klarweg cancels a consultation, you choose a full refund or a new time. You can move it once, free of charge, with at least 12 hours' notice; a consultation missed without notice is not refunded. (D4)
 >
 > **Course interest.** Registering interest in a course is free and commits you to nothing.
 >
-> **Payment.** Live-course and consultation fees are paid by [PROPOSED: UPI or bank transfer, on a payment request we send by email, D7]. A place in a batch is confirmed only once payment is received.
+> **Payment.** Live-course and consultation fees are paid by UPI or bank transfer, on a payment request we send by email. A course fee is paid in full before the first class or, where the course terms offer it, in instalments (for Beginner German · A1: ₹4,000 before the start and ₹3,999 before week 7). A place in a batch is confirmed only once payment is received. (D3, D7)
 >
-> **Missed classes.** [PROPOSED, D5:] the missed-class text in the decision sheet.
+> **Missed classes.** Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up. One-to-one lessons can be moved free of charge with at least 24 hours' notice. (D5)
 >
-> **Cancellations and refunds.** [PROPOSED, D5:] the cancellation and refund text in the decision sheet. It covers cancelling before the start and during the first two weeks, Klarweg cancelling or postponing, and states that the self-paced 7-day guarantee does not apply.
+> **Cancellations and refunds.** If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don't suit you, we refund everything not yet delivered. The 7-day guarantee in section 5 covers self-paced purchases only, not live classes or consultations. (D5)
 >
-> **Changes by Klarweg.** If a teacher becomes unavailable, we may assign another qualified teacher or reschedule, and we will tell you in advance. [OWNER: confirm, and say what the student may do if they do not accept the change.]
+> **Scheduling.** Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. (D5)
 >
-> **Conduct in class.** Be respectful to the teacher and other students. Do not record, share or redistribute classes or class materials without permission. We may remove a participant who disrupts a class [PROPOSED: refunding the classes not yet held, D6].
+> **Changes by Klarweg.** If your teacher becomes unavailable, we reschedule the affected classes and tell you in advance. If the new dates don't suit you, the cancellation and refund terms above apply. (Klarweg's only teacher today is its owner, D6, so this clause does not promise a substitute teacher.)
 >
-> **Recordings.** [PROPOSED, D5:] Classes are not recorded.
+> **Conduct in class.** Be respectful to the teacher and other students. Do not record, share or redistribute classes or class materials without permission. We may remove a participant who disrupts a class. [LEGAL: whether to refund the classes not yet held in that case.]
+>
+> **Recordings.** Classes are not recorded. (D6)
 
 ### §5 Refunds: proposed change
 
 > **Self-paced courses:** Klarweg offers a 7-day refund on single-level and Lifetime purchases: … (current text). **Live classes and consultations** have their own refund terms in section 4A.
 
-The Refund Policy page (`refund-policy.html`) would need a matching sentence that live classes and consultations are covered by section 4A. Its wording is the owner's to approve.
+The Refund Policy page (`refund-policy.html`) needs a matching sentence that live classes and consultations are covered by section 4A of the Terms. Its self-paced guarantee itself does not change.
 
 ### §9 and §10
 
@@ -117,19 +119,21 @@ The same change as Terms §1: "… self-paced online courses … and teacher-led
 
 ### New §4A Live classes
 
-> To run a live class we share your name and email with your teacher. Classes and consultations take place on [PROPOSED Google Meet], which processes your name, voice and video as part of the call under Google's privacy policy. Classes are not recorded [PROPOSED, D5]. [OWNER: if teachers other than Klarweg itself are added, say so here.] [OWNER: attendance or progress notes, if any are kept, and where.]
+> Live classes and consultations are taught by Klarweg's owner. They take place on Google Meet, which processes your name, voice and video as part of the call under Google's privacy policy. Classes are not recorded. (D4, D6) [LEGAL: if other teachers are ever engaged, this section must say how their data is shared before they teach.] [LEGAL: attendance or progress notes, if any are kept, and where.]
 >
-> **Paying for a live course or consultation.** If you pay by UPI or bank transfer [PROPOSED, D7], we receive the payment confirmation from our bank, including your name and UPI ID or account reference, and keep it as a record of your payment.
+> **Paying for a live course or consultation.** You pay by UPI or bank transfer (D7). Your payment reaches us through our bank, which shows us your name and UPI ID or account reference. [OWNER: how payment records are kept and for how long, after the accounting follow-up. Do not publish a retention period for them before then.]
 
 ### §8 Third-party services: add
 
-> Google (Gmail and Google Meet): receives consultation and course-interest requests and our replies, and hosts live classes and consultations [PROPOSED]. [OWNER: the bank or payment service for live fees, D7.]
+> Google (Gmail and Google Meet): receives consultation and course-interest requests and our replies, and hosts live classes and consultations. Our bank processes UPI and bank-transfer payments for live fees. [LEGAL: whether to name the bank.]
 
 ### §9 How long we keep data: add
 
-> Consultation requests and related emails are kept for [PROPOSED 12 months after the last contact] and then deleted from the inbox by hand, unless you ask us to delete them earlier. Payment records are kept as long as accounting rules require. [OWNER: confirm with an accountant.]
+> Consultation and course-interest requests and related emails are kept for 12 months after our last contact with you, then deleted from the inbox by hand, unless you ask us to delete them earlier. (D6) [OWNER: payment records, after the accounting follow-up.]
 
-### Notes for the owner
+### Notes for the legal reviewer
 
 - The table's opening line says "exactly what the Klarweg systems store today". Once a live-class process exists (attendance, payments for live courses, recordings), each new kind of data needs its own row before launch.
 - The policy names no grievance officer (§13). Whether one is needed, for example under India's DPDP Act, is a question for a lawyer, not something decided here.
+- The 12-month retention of request emails is a manual practice (deleted by hand in Gmail). Word it as a commitment Klarweg follows, not an automatic process.
+- Nothing in these drafts claims compliance with any law. The reviewer decides whether any such statement belongs in the final text.

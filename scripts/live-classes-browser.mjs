@@ -157,6 +157,10 @@ const jsonld = `(()=>{const el=document.getElementById("live-jsonld");if(!el)ret
   const strs=[],keys=[];(function walk(v){if(typeof v==="string")strs.push(v);else if(v&&typeof v==="object")for(const k in v){keys.push(k);walk(v[k])}})(j);
   return {faqOk,courses:g.filter(x=>x["@type"]==="Course").map(x=>x.name),instructors:g.filter(x=>x["@type"]==="Course").flatMap(x=>(x.instructor||[]).map(p=>p.name)),text:strs.join("\\n"),keys}})()`;
 const OWNER = LIVE.teachers.find((t) => t.id === 'reegan-gandhi');
+const A1 = LIVE.courses.find((c) => c.id === 'live-a1');
+const POLICY_TEXTS = Object.values(LIVE.policies);
+const policiesShown = `Object.entries(${JSON.stringify(LIVE.policies)}).every(([k,t])=>document.querySelector('[data-policy="'+k+'"]').textContent===t)`;
+const a1Leak = `(()=>{const m=(document.body.innerText+' '+[...document.querySelectorAll('option')].map(o=>o.text).join(' ')).match(/${A1.priceLabel}|${A1.title}|Waitlist|Mon, Wed, Fri/);return m?m[0]:null})()`;
 /* A small structural accessibility audit of the rendered page (no
    dependency): every visible control has a name, labels exist, ids are
    unique, one h1 and no skipped heading levels, images have alt text,
@@ -197,6 +201,10 @@ try {
     const jA = await q(jsonld);
     ok(`A${w} structured data: FAQPage matches the visible FAQ, no Course`, !!jA && jA.faqOk && jA.courses.length === 0, JSON.stringify(jA && { faqOk: jA.faqOk, courses: jA.courses }));
     ok(`A${w} requests go to the documented address`, (await q('document.querySelector("[data-contact-email]").textContent')) === 'klarwegofficial@gmail.com');
+    ok(`A${w} the four approved policies are shown in the FAQ and its structured data`, (await q(policiesShown)) && POLICY_TEXTS.every((t) => jA.text.includes(t)), await q(policiesShown));
+    ok(`A${w} consultation terms from the data: length, platform and cancellation`, (await q('document.querySelector("[data-consult-unit]").textContent')) === LIVE.consultation.durationMinutes + '-minute session on ' + LIVE.consultation.platform
+      && (await q('(()=>{const e=document.querySelector("[data-consult-cancel]");return !e.hidden&&e.offsetParent!==null&&e.textContent})()')) === LIVE.consultation.cancellation);
+    ok(`A${w} the draft A1 course (fee, schedule, waitlist) does not leak to production`, !(await q(a1Leak)) && !/7,999|Beginner German/.test(jA.text), await q(a1Leak));
   }
   await q('document.querySelector("#course-grid [data-request=interest]").click()'); await sleep(700);
   ok('A "Register interest" (no course yet) switches the form to a free interest request', (await q('document.querySelector("input[name=rtype]:checked").value')) === 'interest' && (await q('document.getElementById("form-title").textContent')) === 'Register your interest');
@@ -223,6 +231,8 @@ try {
   ok('C teacher count', (await q('document.getElementById("t-count").textContent')) === N_T + ' teachers');
   const jC = await q(jsonld);
   ok('C structured data never includes draft courses or teachers, even in the preview', !!jC && jC.faqOk && jC.courses.length === 0 && !new RegExp(DRAFT_RX.source + '|\\[[^\\]]+\\]', 'i').test(jC.text), jC && (jC.text.match(new RegExp('.{0,40}(' + DRAFT_RX.source + '|\\[[^\\]]+\\]).{0,40}', 'i')) || [''])[0]);
+  const a1Card = await q(`(()=>{const c=document.getElementById("cn-live-a1");return c?c.closest(".c-card").innerText:null})()`);
+  ok('C preview: the A1 card shows the approved fee, payment terms, schedule and waitlist status, with no start date', !!a1Card && [A1.priceLabel, A1.paymentTerms, A1.frequency, A1.sessionLength, A1.totalDuration, A1.batchSize, 'Waitlist'].every((x) => a1Card.includes(x)) && /to be announced[\s\S]*next batch/i.test(a1Card), a1Card);
   ok('C several teachers: filters shown, directory layout', await q('!document.querySelector("#teachers .filters").hidden && !document.getElementById("teacher-grid").classList.contains("single")'));
   await q('document.querySelector(".c-card .t-link").click()'); await sleep(200);
   ok('C a teacher named on a course card opens that profile', (await q('document.getElementById("t-dialog").open')) && (await q('location.hash')) === '#teacher-' + LIVE.courses[0].teacherIds[0], await q('location.hash'));
@@ -344,6 +354,7 @@ try {
     ok(`N${w} no filters or form controls that would do nothing`, await q('[...document.querySelectorAll("main .filters, #consult-form")].every(e=>e.offsetParent===null)'));
     const nj = await q('(()=>{const n=document.querySelector(".nojs-request");if(!n||!n.offsetParent)return null;const a=n.querySelector("a[href^=mailto]");return {href:a&&a.getAttribute("href"),text:n.innerText}})()');
     ok(`N${w} an email route replaces the form, to the documented address and reply time`, !!nj && nj.href === 'mailto:' + LIVE.contact.email && nj.text.includes(LIVE.contact.replyTime), JSON.stringify(nj));
+    ok(`N${w} the approved policies and consultation terms are readable without JavaScript`, (await q(policiesShown)) && (await q('document.body.innerText')).includes(LIVE.consultation.cancellation));
     ok(`N${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
   }
 

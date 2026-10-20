@@ -38,39 +38,44 @@
       replyTime: 'within two working days, Monday to Friday'
     },
 
-    /* ---------- ₹100 personal consultation ----------
-       UNCONFIRMED: the ₹100 fee and the 7-day adjustment against a
-       live course fee come from the original page brief and have not
-       been confirmed in writing. Confirm both (and how the fee is paid
-       and refunded) before the page is published. */
+    /* ---------- personal consultation ----------
+       CONFIRMED by the owner on 2026-10-20 (D4 in
+       docs/live-classes-owner-decisions.md): ₹100, 20 minutes on Google
+       Meet, paid by UPI after the time is confirmed by email, deducted
+       from a live course fee if the learner enrols within 7 days. */
     consultation: {
-      /* Set true only once the owner has confirmed fee, adjustment
-         period and payment method in writing. The launch check
-         (scripts/live-classes-readiness.mjs) blocks publishing until then. */
-      termsConfirmed: false,
+      /* true only once the owner has confirmed fee, adjustment period and
+         payment method in writing; the launch check blocks publishing
+         while it is false. Confirmed 2026-10-20. */
+      termsConfirmed: true,
       feeLabel: '₹100',
-      adjustmentDays: 7,       // UNCONFIRMED — see above
-      durationMinutes: null,   // e.g. 20 — shown only when set
-      platform: null,          // e.g. 'Google Meet' — shown only when set
+      adjustmentDays: 7,
+      durationMinutes: 20,
+      platform: 'Google Meet',
+      /* Shown under "Good to know"; null hides the line. */
+      cancellation: 'If we have to cancel, you choose a full refund or a new time. You can move your consultation once, free of charge, with at least 12 hours’ notice; a consultation missed without notice is not refunded.',
       /* How a request becomes a booking. There is no scheduling or
          payment integration for consultations yet, so every request is
          confirmed by a person over email. {fee} is replaced by feeLabel. */
       steps: [
         'You send a request with your level, goal and preferred times.',
-        'We reply by email with a confirmed time slot and how to pay the {fee} fee.',
+        'We reply by email with a confirmed time slot and UPI details to pay the {fee} fee.',
         'Once your payment is confirmed, we email you the joining link.',
         'You meet the teacher, who assesses your level and recommends a course.'
       ]
     },
 
     /* ---------- live-class policies ----------
-       null = not yet published. The FAQ then says so plainly instead
-       of inventing a policy. Write the final text as a full sentence. */
+       Approved by the owner on 2026-10-20 (D5). Shown in the page FAQ;
+       each text is also the FAQ's no-JavaScript fallback in
+       live-classes.html, and a static test keeps the two identical.
+       They cover live classes only; the self-paced Refund Policy is
+       separate and unchanged. */
     policies: {
-      missedClass: null,
-      cancellationRefund: null,
-      scheduling: null,
-      feeIncludes: null
+      missedClass: 'Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up, and you can bring questions to the next class. One-to-one lessons can be moved free of charge with at least 24 hours’ notice.',
+      cancellationRefund: 'If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don’t suit you, we refund everything not yet delivered. The 7-day guarantee in our Refund Policy covers self-paced purchases only, not live classes.',
+      scheduling: 'Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. One-to-one lessons are scheduled directly with your teacher.',
+      feeIncludes: 'The course fee covers every live class in the course, the teacher’s class notes and worksheets, and written feedback on your homework. Goethe exam fees are not included.'
     },
 
     /* ---------- teachers ----------
@@ -177,21 +182,23 @@
        format: 'Group batch' | 'One-to-one'
        enrolment: 'open' | 'waitlist' | 'not-open'
        Any null field shows as "To be announced" on the card.
-       live-a1 is the PROPOSED first course (see
-       docs/live-classes-owner-decisions.md): linked to the confirmed
-       teacher, but every schedule, fee and date field stays null until
-       the owner approves them. */
+       live-a1 is the first course, APPROVED by the owner on 2026-10-20
+       (D3). It stays a draft: the launch is on hold (D8) and no start
+       date is set, so enrolment is "waitlist", never "open". */
     courses: [
       {
         id: 'live-a1', draft: true, group: 'beginner', levels: ['A1'],
         title: 'Beginner German · A1',
         objectives: ['Introduce yourself and talk about daily routines', 'Build present-tense sentences with correct word order', 'Handle simple everyday situations in speech and writing'],
         teacherIds: ['reegan-gandhi'],
-        format: 'Group batch', batchSize: null,
-        frequency: null, sessionLength: null, totalDuration: null,
-        nextBatch: null, materials: null, examPrep: null,
-        priceLabel: null, paymentTerms: null,
-        enrolment: 'not-open'
+        format: 'Group batch', batchSize: 'Up to 8 learners; runs with at least 4',
+        frequency: '3 classes a week · Mon, Wed, Fri, 7:30–9:00 pm IST', sessionLength: '90 minutes', totalDuration: '12 weeks · 36 classes · 54 hours',
+        nextBatch: null,   // no start date set yet: never invent one
+        materials: 'Class notes and PDF worksheets; homework with written feedback',
+        examPrep: 'Prepares for Goethe-Zertifikat A1: Start Deutsch 1 (exam fee not included)',
+        priceLabel: '₹7,999',
+        paymentTerms: '₹7,999 before the first class, or two instalments: ₹4,000 before the start and ₹3,999 before week 7. Paid by UPI or bank transfer on a payment request we email you.',
+        enrolment: 'waitlist'
       },
       {
         id: 'live-a2', draft: true, group: 'beginner', levels: ['A2'],

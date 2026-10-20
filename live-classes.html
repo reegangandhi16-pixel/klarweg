@@ -11,9 +11,8 @@
     1. Add verified teachers / courses to live-classes-data.js as
        non-draft entries. showDrafts stays false; draft entries are
        never rendered on a deployed host (see kw-live.js).
-    2. Fill policies in live-classes-data.js (missed class, refunds…)
-       and confirm in writing the consultation terms marked
-       UNCONFIRMED there (₹100 fee, 7-day adjustment, payment).
+    2. Policies and consultation terms in live-classes-data.js are
+       owner-approved (2026-10-20); keep them current.
     3. Add live-classes.html, kw-live.js and live-classes-data.js
        (plus any teacher photos) to .github/pages-allowlist.txt.
     4. Add the "Live Classes" nav link (desktop + mobile drawer) and
@@ -633,7 +632,7 @@
       <span class="eyebrow">Personal consultation</span>
       <h2 class="display-md" id="book-h">Talk to a teacher before you decide.</h2>
       <p class="lede">A one-to-one conversation to assess your level, understand your goal and recommend the right course and teacher.</p>
-      <div class="fee"><span class="fee-amt" data-consult-fee>₹100</span><span class="fee-unit" data-consult-unit>per consultation</span></div>
+      <div class="fee"><span class="fee-amt" data-consult-fee>₹100</span><span class="fee-unit" data-consult-unit>20-minute session on Google Meet</span></div>
       <p class="fee-note">Enrol in a live course within <strong data-consult-days>7 days</strong> and the <span data-consult-fee>₹100</span> is adjusted against your course fee.</p>
       <ol class="book-steps" id="book-steps"></ol>
       <div class="conditions">
@@ -641,6 +640,7 @@
         <ul>
           <li>Sending this form is a request, not a booking. Nothing is charged on this page.</li>
           <li>Your joining link is only sent after your payment is confirmed.</li>
+          <li data-consult-cancel>If we have to cancel, you choose a full refund or a new time. You can move your consultation once, free of charge, with at least 12 hours’ notice; a consultation missed without notice is not refunded.</li>
           <li>The <span data-consult-dayadj>7-day</span> adjustment applies to live course fees, counted from the date of your consultation.</li>
           <li>The current <a href="refund-policy.html">Refund Policy</a> covers self-paced purchases. Live-class terms are confirmed with you before you pay.</li>
         </ul>
@@ -800,19 +800,19 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="fa6">What does the course fee include?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa6"><div class="faq-a-inner" data-policy="feeIncludes">What a course fee includes (classes, materials and any exam preparation) is shown on the course once it is published, and confirmed with you in writing before you pay. Anything not yet confirmed is marked “to be announced”.</div></div>
+        <div class="faq-a" id="fa6"><div class="faq-a-inner" data-policy="feeIncludes">The course fee covers every live class in the course, the teacher’s class notes and worksheets, and written feedback on your homework. Goethe exam fees are not included.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="fa7">How are classes scheduled?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa7"><div class="faq-a-inner" data-policy="scheduling">Group batches run on a fixed timetable, published on the course card when enrolment opens. Tell us your preferred times in the consultation form and we'll match you to a suitable batch or teacher.</div></div>
+        <div class="faq-a" id="fa7"><div class="faq-a-inner" data-policy="scheduling">Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. One-to-one lessons are scheduled directly with your teacher.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="fa8">What happens if I miss a class?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa8"><div class="faq-a-inner" data-policy="missedClass">Our missed-class policy for live courses hasn't been published yet. It will be confirmed with you in writing before you enrol. Ask about it during your consultation.</div></div>
+        <div class="faq-a" id="fa8"><div class="faq-a-inner" data-policy="missedClass">Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up, and you can bring questions to the next class. One-to-one lessons can be moved free of charge with at least 24 hours’ notice.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="fa9">What are the cancellation and refund terms?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa9"><div class="faq-a-inner" data-policy="cancellationRefund">Cancellation and refund terms for live courses haven't been published yet and will be confirmed in writing before you pay. The current <a href="refund-policy.html">Refund Policy</a>, including its 7-day money-back guarantee, applies to self-paced level and Lifetime purchases.</div></div>
+        <div class="faq-a" id="fa9"><div class="faq-a-inner" data-policy="cancellationRefund">If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don’t suit you, we refund everything not yet delivered. The 7-day guarantee in our Refund Policy covers self-paced purchases only, not live classes.</div></div>
       </div>
     </div>
   </div>

@@ -11,7 +11,7 @@ Order = what unblocks the most, soonest. "Who" is the only party that can close 
 | Prio | Item | Who | Blocks |
 |---|---|---|---|
 | 1 | ~~D1 adopt Lesen-only scope · D2 candidate forms~~ **answered 2026-10-20** (yes, subject to all gates; P3+P8+P13) | Owner | — |
-| 2 | D3/D6 answered in principle (independent coordinator; engineering runs the record checks; reviewers not yet appointed). **Open: C1 (who approaches the coordinator), C2 (fee approach)** (`REVIEW-APPOINTMENT-PLAN.md` §4) | Owner | Every external review (§B) |
+| 2 | D3/D6 answered in principle (independent coordinator; engineering runs the record checks; reviewers not yet appointed). C1 and C2 answered 2026-10-20: the owner publishes the coordinator post; quotes first, written approval per engagement (`REVIEW-APPOINTMENT-PLAN.md` §4–§8). **Open: the owner publishes the post, then approves each quote in writing** | Owner | Every external review (§B) |
 | 3 | D7 attempt-data retention | Owner (with EX-01) | EX-01 sign-off; the deletion job (§C) |
 | 4 | D4 OD-08 wording · D5 OD-41 accommodations | Owner | Release decision |
 | 5 | D8 OD-20 same-site domain | Owner | Pilot and launch (register §G.1/§G.2) |
@@ -51,5 +51,6 @@ Done and evidenced (not blockers):
 
 ## Smallest set of owner actions to get moving
 1. ~~Send the D1–D9 reply~~: D1, D2, D3 and D6 answered on 2026-10-20.
-2. Answer C1 and C2 (`REVIEW-APPOINTMENT-PLAN.md` §4). Then you, not engineering, send the coordinator e-mail.
-3. Later, after the deliverables: D9.
+2. ~~Answer C1 and C2~~ (done). Review and publish the coordinator post (`REVIEW-APPOINTMENT-PLAN.md` §5), and send the quote request with each invitation.
+3. Approve each quote in writing (§8). EX-01 waits for D7; EX-05 also needs the signed authorisation (§9).
+4. Later, after the deliverables: D9.

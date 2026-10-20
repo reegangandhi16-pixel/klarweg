@@ -4,7 +4,7 @@
 
 Context: the owner decided on 2026-10-20 that Klarweg intends to offer teacher-led live German classes (decision D1 in `live-classes-launch-readiness.md`). That decision confirms the direction only. No teacher, course, batch, schedule, fee, policy or enrolment date is approved yet. Every wording below is written so that it stays true until those are approved.
 
-`[OWNER: …]` marks text that cannot be written without a business decision. Do not publish a section while it still contains one.
+`[OWNER: …]` marks text that cannot be written without a business decision. `[PROPOSED …]` shows the default suggested in [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md); it is still unapproved. Do not publish a section while it contains either.
 
 ---
 
@@ -49,25 +49,27 @@ The rest of §1 is unchanged.
 
 ### §2 The service: add a paragraph
 
-> Klarweg also offers teacher-led live German classes and paid personal consultations, described in section 4A. Live classes are a separate service from the self-paced courses: buying a self-paced level does not include live classes, and a live course does not include self-paced access unless its course terms say so. [OWNER: confirm both halves of the last sentence.]
+> Klarweg also offers teacher-led live German classes and paid personal consultations, described in section 4A. Live classes are a separate service from the self-paced courses: buying a self-paced level does not include live classes, and a live course does not include self-paced access unless its course terms say so. [OWNER: D6. PROPOSED: a live course does not include self-paced access.]
 
 ### New §4A Live classes and consultations
 
 > **Course terms in writing.** Before you pay for a live course, we confirm its terms to you in writing: the teacher, level, format (group batch or one-to-one), number and length of sessions, schedule (in Indian Standard Time), start date, platform, materials and fee. Those course terms form part of these Terms.
 >
-> **Consultations.** A personal consultation costs [OWNER: fee] and lasts [OWNER: minutes] on [OWNER: platform]. We confirm a time slot by email and tell you how to pay. If you enrol in a live course within [OWNER: days] days of your consultation, the consultation fee is [OWNER: adjusted against / deducted from] the course fee.
+> **Consultations.** A personal consultation costs [PROPOSED ₹100] and lasts [PROPOSED 20 minutes] on [PROPOSED Google Meet]. We confirm a time slot by email and tell you how to pay. If you enrol in a live course within [PROPOSED 7] days of your consultation, the consultation fee is deducted from the course fee. If Klarweg cancels a consultation, we refund it or offer a new time. You can move it once, free of charge, with at least 12 hours' notice; a consultation missed without notice is not refunded. [PROPOSED, D4]
 >
-> **Payment.** Live-course and consultation fees are paid by [OWNER: method, see D7]. A place in a batch is confirmed only once payment is received.
+> **Course interest.** Registering interest in a course is free and commits you to nothing.
 >
-> **Missed classes.** [OWNER: policy text, D5.]
+> **Payment.** Live-course and consultation fees are paid by [PROPOSED: UPI or bank transfer, on a payment request we send by email, D7]. A place in a batch is confirmed only once payment is received.
 >
-> **Cancellations and refunds.** [OWNER: policy text, D5. It must cover: the student cancels before the start, after the start, and mid-course; Klarweg cancels or reschedules; and consultation refunds.]
+> **Missed classes.** [PROPOSED, D5:] the missed-class text in the decision sheet.
+>
+> **Cancellations and refunds.** [PROPOSED, D5:] the cancellation and refund text in the decision sheet. It covers cancelling before the start and during the first two weeks, Klarweg cancelling or postponing, and states that the self-paced 7-day guarantee does not apply.
 >
 > **Changes by Klarweg.** If a teacher becomes unavailable, we may assign another qualified teacher or reschedule, and we will tell you in advance. [OWNER: confirm, and say what the student may do if they do not accept the change.]
 >
-> **Conduct in class.** Be respectful to the teacher and other students. Do not record, share or redistribute classes or class materials without permission. We may remove a participant who disrupts a class [OWNER: with or without a refund].
+> **Conduct in class.** Be respectful to the teacher and other students. Do not record, share or redistribute classes or class materials without permission. We may remove a participant who disrupts a class [PROPOSED: refunding the classes not yet held, D6].
 >
-> **Recordings.** [OWNER: either "Classes are not recorded." or say who records them, who receives the recording and for how long it is kept. This also has to appear in the Privacy Policy.]
+> **Recordings.** [PROPOSED, D5:] Classes are not recorded.
 
 ### §5 Refunds: proposed change
 
@@ -89,7 +91,15 @@ Verified facts about the form (from `kw-live.js` and the static test "the consul
 - The page has no form action, no `fetch` and no checkout.
 - On submit it opens the visitor's own email app with a pre-filled message to `klarwegofficial@gmail.com`.
 - Nothing is sent or stored unless the visitor sends that email.
-- The message contains: name, email, WhatsApp/phone (optional), current level, main goal, preferred teacher, course of interest, preferred times (IST) and a free-text message.
+- The message contains:
+  - the request type: a consultation, or free interest in a course;
+  - name and email;
+  - WhatsApp/phone (optional);
+  - current level and main goal;
+  - preferred teacher and course of interest;
+  - preferred times (IST);
+  - a free-text message.
+- The consent box covers both request types: "to respond to my request, as described in the Privacy Policy".
 
 ### §1 Who we are: proposed change
 
@@ -99,23 +109,25 @@ The same change as Terms §1: "… self-paced online courses … and teacher-led
 
 | Data | Why we collect it |
 |---|---|
-| Consultation and live-class requests | If you send a consultation request from the Live Classes page, your own email app sends us the details you entered: name, email, optional WhatsApp/phone number, current level, goal, preferred teacher and course, preferred times and your message. We use them only to arrange your consultation and recommend a course. The request is not stored on Klarweg's servers; it arrives as an email in our inbox, which is hosted by Google (Gmail). |
+| Consultation requests and course interest | If you send a request from the Live Classes page (a consultation, or interest in a course), your own email app sends us the details you entered: name, email, optional WhatsApp/phone number, current level, goal, preferred teacher and course, preferred times and your message. We use them only to answer your request, arrange a consultation and tell you about a suitable course. The page itself does not send or store anything: the request reaches us only if you send the email, and it is kept in our inbox, which is hosted by Google (Gmail), not on Klarweg's servers. |
 
 ### §2 "Phone number" row: proposed change
 
-> Required by our payment processor, Cashfree, to create an order, collected when you begin a purchase. You may also choose to include a WhatsApp or phone number in a consultation request so we can reach you about it.
+> Required by our payment processor, Cashfree, to create an order, collected when you begin a purchase. You may also choose to include a WhatsApp or phone number in a consultation or course-interest request so we can reach you about it.
 
 ### New §4A Live classes
 
-> To run a live class we share your name [OWNER: and email?] with your teacher. Classes take place on [OWNER: platform], which processes your name, voice and video as part of the call under its own privacy policy. [OWNER: recordings: none, or what is recorded, who can see it, how long it is kept.] [OWNER: if teachers are not Klarweg itself, say so: e.g. "Teachers are independent tutors who use your details only to teach your class."] [OWNER: attendance or progress notes, if any are kept, and where.]
+> To run a live class we share your name and email with your teacher. Classes and consultations take place on [PROPOSED Google Meet], which processes your name, voice and video as part of the call under Google's privacy policy. Classes are not recorded [PROPOSED, D5]. [OWNER: if teachers other than Klarweg itself are added, say so here.] [OWNER: attendance or progress notes, if any are kept, and where.]
+>
+> **Paying for a live course or consultation.** If you pay by UPI or bank transfer [PROPOSED, D7], we receive the payment confirmation from our bank, including your name and UPI ID or account reference, and keep it as a record of your payment.
 
 ### §8 Third-party services: add
 
-> Google (Gmail): receives consultation requests and our email replies. [OWNER: the video platform used for classes and consultations.] [OWNER: the payment method for live fees, if it is not Cashfree, D7.]
+> Google (Gmail and Google Meet): receives consultation and course-interest requests and our replies, and hosts live classes and consultations [PROPOSED]. [OWNER: the bank or payment service for live fees, D7.]
 
 ### §9 How long we keep data: add
 
-> Consultation requests and related emails are kept for [OWNER: period, e.g. "12 months after the last contact"], unless you ask us to delete them earlier.
+> Consultation requests and related emails are kept for [PROPOSED 12 months after the last contact] and then deleted from the inbox by hand, unless you ask us to delete them earlier. Payment records are kept as long as accounting rules require. [OWNER: confirm with an accountant.]
 
 ### Notes for the owner
 

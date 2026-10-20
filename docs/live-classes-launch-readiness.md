@@ -24,17 +24,15 @@ The launch gate in `scripts/live-classes-static.test.mjs` fails CI if the page i
 5. `terms.html` covers only self-paced content.
 6. `privacy.html` does not describe the consultation request.
 
-### Owner checklist (everything that still needs a decision)
+### Owner checklist
 
-- [ ] **D3** First course: title, level(s) within A1–B2, format, schedule, length, start date, materials, fee, enrolment status.
-- [ ] **D4** Consultation terms: confirm ₹100 and 7 days, how it is paid, refund if Klarweg cancels.
-- [ ] **D5** Four policies: missed classes, cancellation/refunds, scheduling, what the fee includes.
-- [ ] **D6** Approve the Terms and Privacy drafts (`live-classes-review-drafts.md`), including whether a live course includes self-paced access.
-- [ ] **D7** How live fees are collected (manual or a new payment product).
-- [ ] **D8** Launch go-ahead, which also publishes the teacher profile.
-- [ ] *Optional:* teacher photo, availability, the brand document update (D1 follow-up).
-
-The template in §2B collects all of these at once.
+**Everything that still needs the owner is in one place: [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md).** It holds a proposed, unapproved default for each item and a short reply template:
+- **D3** first course (A1 group batch);
+- **D4** consultation terms;
+- **D5** the four policies, with ready-to-use wording;
+- **D6** Terms/Privacy choices;
+- **D7** payment method, with the repository evidence;
+- **D8** launch steps.
 
 ### Preview locally
 
@@ -231,52 +229,9 @@ The fee and payment terms should also be settled.
 
 The whole launch also needs, regardless of course status: D4 (consultation terms), D5 (four policies), D6 (Terms and Privacy approved), D7 (payment method).
 
-## 2B. Owner input template
+## 2B. Owner input
 
-Copy, fill in, and send back. Leave a line blank if it is not decided. Nothing blank will be published. The teacher profile (D2) and the homepage FAQ (D1) are already settled, so they are no longer in it.
-
-```
-=== COURSE 1 (D3) ===
-Title:
-Level(s) (A1–B2 with the current teacher):
-Teacher (Reegan Gandhi unless another teacher is confirmed):
-What students will be able to do (3 points):
-Format (Group batch / One-to-one):
-Batch size (group only):
-Classes per week:
-Session length:
-Total duration (e.g. 12 weeks):
-Next start date:
-Materials included:
-Fee (₹):
-Payment terms (e.g. full upfront / instalments):
-Status to show (not open yet / waitlist / open):
-
-=== CONSULTATION (D4) ===
-Fee (confirm ₹100 or new amount):
-Adjusted against course fee if enrolling within __ days (confirm 7 or new):
-Length (minutes):
-Platform (e.g. Google Meet):
-How the fee is paid:
-Refunded if Klarweg cancels? (yes/no):
-
-=== POLICIES (D5), one sentence or paragraph each ===
-Missed classes:
-Cancellation and refunds (student cancels before start / after start; Klarweg cancels):
-How classes are scheduled:
-What the course fee includes:
-
-=== LEGAL / PRIVACY (D6), see docs/live-classes-review-drafts.md ===
-Are classes recorded? (no / yes: who keeps it, for how long):
-Are teachers Klarweg itself or independent tutors?:
-How long are consultation emails kept?:
-Does a live course include self-paced access? (yes/no):
-Removed for disruption: refund or not?:
-Terms/Privacy drafts approved (yes / with edits / lawyer review first):
-
-=== PAYMENT (D7) ===
-How live fees are collected (manual UPI/bank transfer / new online product):
-```
+Superseded by the reply template in [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md), which offers a proposed default for each item instead of blank fields.
 
 ---
 
@@ -304,6 +259,11 @@ How live fees are collected (manual UPI/bank transfer / new online product):
   - the hero level range computed from published data.
   The browser suite simulates the launch with the owner's profile published.
 - Course cards link each teacher's name to their profile.
+- **Two request types in the form:**
+  - a paid consultation;
+  - free "tell me when a course opens" interest.
+  "Register interest" on a course that isn't open never leads to a paid request, and the email and confirmation text match the chosen type.
+- **A structural accessibility audit** in the browser suite: control names, labels, unique ids, heading order, image alt text, radio groups. It runs in the production default, the preview and the launch simulation.
 - **Structured data, built at runtime:**
   - a FAQPage identical to the visible FAQ;
   - a `Course` entry for each **published** course, with its published instructor;

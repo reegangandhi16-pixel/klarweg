@@ -91,6 +91,22 @@ test('LIVE: the page states no level range or live-course term that is not confi
   assert.equal(/doesn.t include the other|includes? self-paced access/i.test(body), false, 'whether a live course includes self-paced access is an owner decision (D6)');
 });
 
+test('LIVE: proposed (unapproved) amounts in the owner decision sheet stay out of the page and its data', () => {
+  const sheet = read('docs/live-classes-owner-decisions.md');
+  const fee = loadData().consultation.feeLabel;
+  const proposed = [...new Set(sheet.match(/₹[\d,]+/g) || [])].filter((x) => x !== fee && !/^₹1,999$/.test(x)); // ₹1,999 = the self-paced A1 price, quoted for reference
+  assert.ok(proposed.length > 0, 'the sheet proposes at least one amount');
+  for (const f of FILES) for (const x of proposed) assert.equal(read(f).includes(x), false, `${f} contains the proposed amount ${x} before it is approved`);
+});
+
+test('LIVE: a course enquiry can be free; only a consultation names a fee', () => {
+  assert.match(html, /name="rtype" value="consult" checked/, 'consultation is the default request');
+  assert.match(html, /name="rtype" value="interest"/, 'a free "tell me when a course opens" request exists');
+  assert.equal(/arrange my consultation/.test(html), false, 'consent covers both kinds of request');
+  const js = read('kw-live.js');
+  assert.match(js, /enrolment !== 'open' \? 'interest' : 'consult'/, 'a course that is not open prefills an interest request');
+});
+
 test('LIVE: the consultation fee and adjustment period are read from the data file, not typed into the page', () => {
   // the publish checklist comment and the meta descriptions are static by nature (see checklist item 6)
   const body = html.slice(html.indexOf('<body>')).replace(/<span[^>]*\bdata-consult-(?:fee|days|dayadj)\b[^>]*>[^<]*<\/span>/g, '');
@@ -133,7 +149,7 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
   };
   const realTeacher = { id: 'anna-k', draft: false, name: 'Anna K', photo: null, photoAlt: '', headline: 'Grammar first', experience: '5 years of teaching German',
     proficiency: 'C2', qualifications: ['MA German'], goethe: [], levels: ['A1'], teachesIn: ['Hindi'], specialisms: [], examPrep: null, approach: 'x', formats: ['Group batch'], availability: null };
-  expectError((D) => { D.courses[0].draft = false; D.courses[0].title = 'A1'; }, /names draft teacher "teacher-1"/, 'a published course naming a draft teacher would show no teacher on the live site');
+  expectError((D) => { D.courses[0].draft = false; D.courses[0].title = 'A1'; }, new RegExp(`names draft teacher "${base.courses[0].teacherIds[0]}"`), 'a published course naming a draft teacher would show no teacher on the live site');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open' }); }, /enrolment "open" needs priceLabel/, 'open enrolment without a fee');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: '₹9,999' }); }, /needs nextBatch/, 'open enrolment without a start date');
   expectError((D) => { D.teachers.push({ ...realTeacher, unconfirmed: ['headline'] }); }, /still has unconfirmed fields: headline/, 'a published teacher with fields awaiting confirmation');

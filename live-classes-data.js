@@ -176,13 +176,17 @@
        group: 'beginner' | 'intermediate' | 'advanced' | 'exam' | 'speaking'
        format: 'Group batch' | 'One-to-one'
        enrolment: 'open' | 'waitlist' | 'not-open'
-       Any null field shows as "To be announced" on the card. */
+       Any null field shows as "To be announced" on the card.
+       live-a1 is the PROPOSED first course (see
+       docs/live-classes-owner-decisions.md): linked to the confirmed
+       teacher, but every schedule, fee and date field stays null until
+       the owner approves them. */
     courses: [
       {
         id: 'live-a1', draft: true, group: 'beginner', levels: ['A1'],
         title: 'Beginner German · A1',
         objectives: ['Introduce yourself and talk about daily routines', 'Build present-tense sentences with correct word order', 'Handle simple everyday situations in speech and writing'],
-        teacherIds: ['teacher-1'],
+        teacherIds: ['reegan-gandhi'],
         format: 'Group batch', batchSize: null,
         frequency: null, sessionLength: null, totalDuration: null,
         nextBatch: null, materials: null, examPrep: null,

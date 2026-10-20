@@ -1,9 +1,16 @@
 # Live Classes — launch readiness
 
 **Status (2026-10-20):**
-- **Decided:** D1, Klarweg intends to offer teacher-led live classes.
-- **Teacher:** the owner's profile (`reegan-gandhi`) is fully confirmed but stays a draft until the launch go-ahead.
-- **Not approved yet:** any course, batch, schedule, fee, policy or enrolment date.
+- **Decided:** D1 (live classes, yes), D2 (the owner's teacher profile `reegan-gandhi`, fully confirmed), and D3–D7, approved by the owner on 2026-10-20 and recorded in [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md):
+  - the first course, Beginner German · A1 at ₹7,999;
+  - the ₹100 consultation terms;
+  - the four live-class policies;
+  - the product and privacy choices;
+  - manual UPI or bank-transfer payment.
+- **On hold:** D8, the launch. The teacher and `live-a1` stay `draft: true`, and the A1 start date is not set.
+- **Pending:**
+  - the legal review of the Terms and Privacy wording;
+  - the accounting follow-up for manual payments.
 - **Page status:** `live-classes.html` is an unlisted preview. It is `noindex` and not in `.github/pages-allowlist.txt`, `sitemap.xml` or any nav. Every teacher and course entry is a draft that never renders on a deployed host.
 
 **It is not ready to launch.**
@@ -17,22 +24,21 @@ npm run test:live           # static guards incl. the launch gate, then the head
 
 The launch gate in `scripts/live-classes-static.test.mjs` fails CI if the page is added to the Pages allowlist while any blocker below is open. Blockers reported today:
 
-1. Consultation terms not confirmed (`consultation.termsConfirmed` is `false`).
-2. Live-class policies not written: missed class, cancellation/refund, scheduling, fee inclusions.
-3. No published teacher profile.
-4. No published live course.
-5. `terms.html` covers only self-paced content.
-6. `privacy.html` does not describe the consultation request.
+1. No published teacher profile. *(Removing `draft: true` is part of D8.)*
+2. No published live course. *(The same; it also needs a start date before enrolment can open.)*
+3. `terms.html` covers only self-paced content. *(It waits for the legal review.)*
+4. `privacy.html` does not describe the consultation request. *(It waits for the legal review.)*
+
+Cleared on 2026-10-20 by the approved decisions: consultation terms (`termsConfirmed: true`, D4) and the four live-class policies (D5).
 
 ### Owner checklist
 
-**Everything that still needs the owner is in one place: [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md).** It holds a proposed, unapproved default for each item and a short reply template:
-- **D3** first course (A1 group batch);
-- **D4** consultation terms;
-- **D5** the four policies, with ready-to-use wording;
-- **D6** Terms/Privacy choices;
-- **D7** payment method, with the repository evidence;
-- **D8** launch steps.
+**Everything still open is in part B of [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md):**
+- the legal review of the Terms/Privacy drafts (a lawyer is recommended);
+- the accounting follow-up (receipts or invoices, tax, payment-record keeping);
+- the A1 start date;
+- the D8 launch go-ahead;
+- optionally, a photo and an availability line.
 
 ### Preview locally
 
@@ -55,7 +61,7 @@ The check also reports, when they occur:
 
 As data errors it also reports a published course offered at a level its teachers don't teach.
 
-Proposed wording for the homepage FAQ and for blockers 5–6 (Terms, Privacy) is in **`docs/live-classes-review-drafts.md`**. It is a draft for review, not approved.
+The wording for the homepage FAQ and for blockers 3–4 (Terms, Privacy) is in **`docs/live-classes-review-drafts.md`**. It carries the approved business decisions, but the legal wording awaits review and is not approved for publication. `terms.html`, `privacy.html` and `refund-policy.html` stay unchanged until then (a static test enforces this).
 
 ---
 
@@ -71,11 +77,11 @@ Proposed wording for the homepage FAQ and for blockers 5–6 (Terms, Privacy) is
 | Cashfree catalog has no live-course or consultation product | `kw-products.js`, `access/worker/src/products.js` | Nothing on the page takes payment; the form only prepares an email. |
 | Brand positioning: self-learning platform with Klarweg AI | `uploads/klarweg-os.md`, `index.html` FAQ | Superseded for live classes by D1 (2026-10-20); the homepage FAQ now announces them (Variant A). |
 | Klarweg AI gives feedback on German the learner writes or says | `privacy.html` (Klarweg AI feedback) | Basis for the AI sentence in the homepage FAQ. |
-| The consultation form only opens the visitor's email app; nothing is sent or stored by the page | `kw-live.js`, static test "only hands off to email" | Basis for the proposed Privacy Policy row. |
+| The consultation form only opens the visitor's email app; nothing is sent or stored by the page | `kw-live.js`, static test "only hands off to email" | Basis for the drafted Privacy Policy row. |
 
-**Not found anywhere in the repository, git history or project documents:** teacher names, qualifications or photos; live course offerings, schedules, batch sizes, start dates, durations, fees or materials; consultation duration, platform or payment method; live-class policies; testimonials.
+**Confirmed by the owner on 2026-10-20 (not from repository evidence):** the teacher profile (D2), the A1 course and its ₹7,999 fee (D3), the consultation terms, including the ₹100 fee and 7-day adjustment from the original brief (D4), the policies (D5), and the payment method (D7). See the decision sheet.
 
-**From the original page brief only, not confirmed in writing:** the ₹100 consultation fee and the 7-day adjustment against a course fee. They are marked UNCONFIRMED in `live-classes-data.js`.
+**Still unknown:** the A1 start date; testimonials (none exist).
 
 ---
 
@@ -131,7 +137,7 @@ Publishing the profile is part of the launch go-ahead (D8).
 - optionally, an approved photo (4:3, at least 800×600) and their availability;
 - their consent to publish.
 
-**D3. Launch courses.**
+**D3. Launch courses. DECIDED (2026-10-20):** Beginner German · A1, `live-a1`; see the decision sheet. Start date still open.
 *Why it matters:* a course card shows level, format, schedule, length, next batch, materials, fee and enrolment status. Anything unknown shows "To be announced". The validator refuses open enrolment without a fee, start date and schedule.
 *Needed per course:*
 - title and objectives;
@@ -151,7 +157,7 @@ Publishing the profile is part of the launch go-ahead (D8).
 
 Today the only confirmed teacher teaches A1–B2 (Goethe preparation A1–B1). So the first course should sit in that range. The C1–C2 draft course and the template teachers `teacher-1`, `teacher-2` and `teacher-3` remain templates until real teachers exist.
 
-**D4. Consultation terms.**
+**D4. Consultation terms. DECIDED (2026-10-20):** ₹100, 20 minutes, Google Meet, UPI after the time is confirmed, 7-day adjustment; `termsConfirmed: true`.
 *Why it matters:* the fee and adjustment period appear in 16 places on the page (all read from the data file) and in the booking email. The reply email has to tell the student how to pay.
 *Needed:*
 - confirm or change the ₹100 fee and the 7-day adjustment;
@@ -161,7 +167,7 @@ Today the only confirmed teacher teaches A1–B2 (Goethe preparation A1–B1). S
 
 Then set `consultation.termsConfirmed: true`. If the fee changes, also update the two meta descriptions (checklist item 6 in `live-classes.html`); the gate reports it if you forget.
 
-**D5. Live-class policies.**
+**D5. Live-class policies. DECIDED (2026-10-20):** the four texts are in `policies` and shown in the page FAQ.
 *Why it matters:* the FAQ currently says these are not published. The existing Refund Policy covers self-paced purchases only.
 *Needed:* final text for
 - missed classes;
@@ -171,7 +177,7 @@ Then set `consultation.termsConfirmed: true`. If the fee changes, also update th
 
 Each is one sentence or paragraph in `policies` in `live-classes-data.js`.
 
-**D6. Terms of Service and Privacy Policy.** Proposed changes, with every business gap marked `[OWNER: …]`, are in `live-classes-review-drafts.md`.
+**D6. Terms of Service and Privacy Policy.** Business choices DECIDED (2026-10-20): a live course does not include self-paced access; request emails are kept 12 months after the last contact and deleted by hand; classes are not recorded; the owner is the only teacher. The legal wording in `live-classes-review-drafts.md` **awaits legal review**.
 *Why it matters:*
 - `terms.html` §2 defines the service as self-paced only.
 - `privacy.html` describes what the systems store "exactly", and says a phone number is collected only at checkout.
@@ -179,11 +185,11 @@ Each is one sentence or paragraph in `policies` in `live-classes-data.js`.
 
 *Recommendation:* update both pages to cover live classes and consultation requests before launch. The legal wording is yours to approve.
 
-**D7. How live-course fees are collected.**
+**D7. How live-course fees are collected. DECIDED (2026-10-20):** manual UPI or bank transfer on an emailed payment request; no Cashfree product and no new backend. The accounting follow-up is still open.
 *Why it matters:* the Cashfree catalog and checkout know only self-paced products, so live fees need either a manual process or a new payment product. A new product changes the payment backend, which is a separate project.
-No recommendation without your preference on manual versus automated payment.
+The decision: manual for the first batch. A static test keeps live products out of the Cashfree catalogue, because `grantProduct()` would unlock self-paced content.
 
-**D8. Launch go-ahead.**
+**D8. Launch go-ahead. ON HOLD (owner, 2026-10-20).**
 Publishing means the checklist at the top of `live-classes.html`:
 - allowlist the three files and any photos;
 - add nav and footer links on the other pages;
@@ -231,7 +237,7 @@ The whole launch also needs, regardless of course status: D4 (consultation terms
 
 ## 2B. Owner input
 
-Superseded by the reply template in [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md), which offers a proposed default for each item instead of blank fields.
+Superseded by the reply template for the pending items in [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md).
 
 ---
 

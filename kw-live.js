@@ -77,6 +77,8 @@
     if (c.durationMinutes) unit.push(c.durationMinutes + '-minute session');
     if (c.platform) unit.push('on ' + c.platform);
     if (unit.length && document.querySelector('[data-consult-unit]')) document.querySelector('[data-consult-unit]').textContent = unit.join(' ');
+    var cancel = document.querySelector('[data-consult-cancel]');
+    if (cancel) { if (has(c.cancellation)) cancel.textContent = c.cancellation; else cancel.hidden = true; }
     if ($('book-steps')) $('book-steps').innerHTML = (c.steps || []).map(function (s) { return '<li>' + esc(String(s).split('{fee}').join(c.feeLabel)) + '</li>'; }).join('');
 
     var email = D.contact && D.contact.email;

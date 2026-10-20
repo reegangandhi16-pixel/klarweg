@@ -60,6 +60,8 @@ export function checkData(D, root = ROOT) {
   if (!has(c.feeLabel)) err('consultation.feeLabel', 'missing');
   if (!Number.isInteger(c.adjustmentDays) || c.adjustmentDays < 0) err('consultation.adjustmentDays', 'must be a whole number of days');
   if (typeof c.termsConfirmed !== 'boolean') err('consultation.termsConfirmed', 'must be true or false');
+  // confirmed terms are complete terms: length, platform and the cancellation rule are part of them
+  if (c.termsConfirmed === true) for (const f of ['durationMinutes', 'platform', 'cancellation']) if (!has(c[f])) err(`consultation.${f}`, 'missing although termsConfirmed is true');
   if (!Array.isArray(c.steps) || !c.steps.length) err('consultation.steps', 'missing');
   for (const k of POLICIES) if (!(k in (D.policies || {}))) err(`policies.${k}`, 'key missing (use null while unpublished)');
 

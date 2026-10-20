@@ -16,7 +16,7 @@ Common facts for every reviewer:
   and rater pages (`exam/`).
 - **Environment:**
   - local demo: `npm run exam:demo` (add `--proxy` for the real request path, `--mfa` for rater 2FA);
-  - the isolated non-production environment (`NONPROD-SETUP.md`) once the owner provisions it.
+  - the isolated non-production environment (`NONPROD-SETUP.md`), provisioned 2026-10-19 with the owner's authorization.
   - Nothing is deployed.
 
 ---
@@ -28,7 +28,14 @@ Common facts for every reviewer:
   `AUTOMATED-FLAGS.md`). It contains answer keys, so share it only directly with named reviewers.
 - **Rules:** register §C.1 (O1–O10). Three different people; no tie-break; no carry-forward; no use of the commercial
   reference book.
-- **Deliverable:** one filled JSON record per reviewer and form. The organiser runs `node exam-content/tools/review-status.mjs`.
+- **Deliverable:** one filled JSON record per reviewer and form.
+- **Self-service tools for reviewers and the organiser** (Lesen-only packet `EX-03-LESEN-RC-2026-10-20`):
+  - `Pn-review-form-lesen.html`: an offline fillable form; it keeps progress in the browser, shows what is missing and
+    downloads the finished record;
+  - `node exam-content/tools/review-status.mjs --check <record.json> --module lesen`: plain-language check before
+    returning ("must fix" / "still empty");
+  - `node exam-content/tools/review-status.mjs <returned dir> --module lesen --out <dir>`: status per form and module,
+    plus a plain summary of what is approved and what is outstanding (`ex03-summary.txt`).
 - **Effort:** about 2–3 h per form per reviewer. Suggested first batch: P3, P8, P13.
 - **Already done internally (not a substitute):**
   - validator, originality and key-balance checks;

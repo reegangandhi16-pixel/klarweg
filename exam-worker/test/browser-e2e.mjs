@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|review-form runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -28,6 +28,8 @@ import { call, rid, pkgFor, syntheticBuild, PRACTICE_LIBRARY } from './harness.m
 import { speakingSchedule } from '../../exam/js/sprechen.js';
 import { hotp, base32Decode, stepAt } from '../../access/worker/src/totp.js';
 import { post, start, submit, submit as apiSubmit, uploadChunk, runSchreiben, runSprechen, complete } from './flow.mjs';
+import { writeReviewForms } from '../../exam-content/tools/review-form.mjs';
+import { checkFile } from '../../exam-content/tools/review-status.mjs';
 
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 /* CHROME_ARGS: extra flags for CI runners (e.g. --no-sandbox on Ubuntu 24.04, where unprivileged user namespaces are
@@ -1276,11 +1278,69 @@ async function runLesenOnly() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* REVIEW-FORM: the offline EX-03 review form (exam-content/tools/review-form.mjs) in a real browser, opened from a file
+   like a reviewer would. Fill slot A for every Lesen item through the page, then check: the counter reaches complete;
+   the record kept in the browser passes the same checker the organiser uses; a reload restores it; slot C shows only
+   C's fields; no script errors; automated a11y audit. Synthetic answers only — nothing is approved. */
+async function runReviewForm() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-review-form-'));
+  writeReviewForms(dir, [PRACTICE.name.toLowerCase()], { modules: ['lesen'] });
+  const url = 'file://' + path.join(dir, `${PRACTICE.name}-review-form-lesen.html`);
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable'); await send('Log.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const text = () => evaluate('document.body.innerText');
+    const waitFor = async (src, ms = 10000, label = src) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(200); }
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+    };
+    const A = makeA11y({ send, evaluate });
+    await send('Page.navigate', { url });
+    await waitFor(`document.querySelector('#kx-progress')?.textContent.includes('0 of 30')`, 10000, 'form loaded');
+    await A.a11y('review form (empty)');
+    await evaluate(`(() => {
+      const set = (sel, v) => { const el = document.querySelector(sel); el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })); };
+      set('[name="reviewer::slot"]', 'A'); set('[name="reviewer::native_german"]', 'true');
+      const id = document.querySelector('[name="reviewer::reviewer_id"]'); id.value = 'e2e-A'; id.dispatchEvent(new Event('input', { bubbles: true }));
+      set('[name="reviewer::date"]', '2026-10-20');
+      for (const fs of document.querySelectorAll('fieldset.item')) {
+        fs.querySelector('input[value="approve"][name$="::verdict"]').click();
+        fs.querySelector('input[value="0"][name$="::ambiguity_risk"]').click();
+        for (const s of fs.querySelectorAll('select')) { s.value = '3'; s.dispatchEvent(new Event('change', { bubbles: true })); }
+      }
+    })()`);
+    await waitFor(`document.querySelector('#kx-progress').textContent.startsWith('Complete: 30 of 30')`, 10000, 'complete');
+    assert.equal(await evaluate(`getComputedStyle(document.querySelector('.row.c')).display`), 'none', 'slot A does not see the C fields');
+    const saved = JSON.parse(await evaluate(`localStorage.getItem(Object.keys(localStorage).find((k) => k.startsWith('kx-ex03:')))`));
+    const verdict = checkFile(saved, { module: 'lesen' });
+    assert.equal(verdict.ok, true, JSON.stringify(verdict));
+    await send('Page.reload');
+    await waitFor(`document.querySelector('#kx-progress')?.textContent.startsWith('Complete: 30 of 30')`, 10000, 'restored after reload');
+    await evaluate(`(() => { const s = document.querySelector('[name="reviewer::slot"]'); s.value = 'C'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+    await waitFor(`document.body.className === 'slot-C'`);
+    assert.equal(await evaluate(`getComputedStyle(document.querySelector('.row.ab')).display`), 'none', 'slot C does not see the A/B ratings');
+    assert.match(await evaluate(`document.querySelector('#kx-progress').textContent`), /originality sign-off/);
+    await A.a11y('review form (slot C)');
+    assert.deepEqual(A.findings, [], `automated accessibility findings on ${A.screens.join(', ')}`);
+    const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    log(`review-form ${PRACTICE.name}`, 'PASS', { entries: 30 });
+    return exceptions;
+  } finally { b.close(); fs.rmSync(dir, { recursive: true, force: true }); }
+}
+
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['review-form', runReviewForm, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'review-form') { results.push({ vp: `review form ${PRACTICE.name} (Lesen, file://)`, uncaught: await fn() }); continue; }
   if (name === 'lesen-only') { results.push({ vp: `lesen-only ${PRACTICE.name} (mobile start + desktop)`, uncaught: await fn() }); continue; }
   if (name === 'rater-2fa') { results.push({ vp: `rater 2FA ${PRACTICE.name}`, uncaught: await fn() }); continue; }
   if (name === 'two-tabs') { results.push({ vp: `two tabs ${PRACTICE.name}`, uncaught: await fn() }); continue; }

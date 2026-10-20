@@ -88,3 +88,27 @@ test('RELEASE CANDIDATE CLI: writes release + candidate.json + worker-settings.e
     assert.doesNotMatch(fs.readFileSync(path.join(out, 'registry.sql'), 'utf8'), /synthetic-s0/);
   } finally { fs.rmSync(out, { recursive: true, force: true }); }
 });
+
+test('RELEASE CANDIDATE: fails closed on stale, malformed, unassigned or inconsistent records, even next to valid approvals', () => {
+  const cases = {
+    'stale record (older revision)': (dir) => { const r = JSON.parse(fs.readFileSync(path.join(dir, 'P3-A.json'))); r.content_sha256 = '0'.repeat(64); fs.writeFileSync(path.join(dir, 'P3-old.json'), JSON.stringify(r)); },
+    'unreadable JSON': (dir) => fs.writeFileSync(path.join(dir, 'broken.json'), '{ not json'),
+    'record for an unknown form': (dir) => fs.writeFileSync(path.join(dir, 'x.json'), JSON.stringify({ form_id: 'frm:b1:synthetic-p99@1' })),
+    'record with an invalid verdict': (dir) => { const r = JSON.parse(fs.readFileSync(path.join(dir, 'P3-B.json'))); r.items[0].verdict = 'ok'; fs.writeFileSync(path.join(dir, 'P3-B.json'), JSON.stringify(r)); },
+    'tampered item fingerprint': (dir) => { const r = JSON.parse(fs.readFileSync(path.join(dir, 'P3-C.json'))); r.items[0].item_sha256 = 'f'.repeat(64); fs.writeFileSync(path.join(dir, 'P3-C.json'), JSON.stringify(r)); },
+    'same person in two slots (O1)': (dir) => { const r = JSON.parse(fs.readFileSync(path.join(dir, 'P3-B.json'))); r.reviewer.reviewer_id = 'test-A'; fs.writeFileSync(path.join(dir, 'P3-B.json'), JSON.stringify(r)); },
+    'two records for one slot (O1)': (dir) => fs.copyFileSync(path.join(dir, 'P3-A.json'), path.join(dir, 'P3-A2.json')),
+    'originality not signed by C': (dir) => { const r = JSON.parse(fs.readFileSync(path.join(dir, 'P3-C.json'))); r.originality_signoff.verdict = ''; fs.writeFileSync(path.join(dir, 'P3-C.json'), JSON.stringify(r)); },
+    'one Lesen item revised': (dir) => { const r = JSON.parse(fs.readFileSync(path.join(dir, 'P3-A.json'))); r.items[0].verdict = 'revise'; r.items[0].notes = 'x'; fs.writeFileSync(path.join(dir, 'P3-A.json'), JSON.stringify(r)); },
+    'slot C missing': (dir) => fs.rmSync(path.join(dir, 'P3-C.json'))
+  };
+  for (const [name, spoil] of Object.entries(cases)) {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-rc-bad-'));
+    try {
+      lesenApprovedRecords(dir, 'P3');
+      assert.equal(releaseCandidate({ forms: 'p3', module: 'lesen', release: 'r101', approvedDir: dir, builtAt }).approved, true, `control before: ${name}`);
+      spoil(dir);
+      assert.throws(() => releaseCandidate({ forms: 'p3', module: 'lesen', release: 'r101', approvedDir: dir, builtAt }), /refusing a learner release/, name);
+    } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+  }
+});

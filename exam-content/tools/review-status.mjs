@@ -19,7 +19,9 @@
    originality sign-off (O3) and three usable slots — what a single-module release (EXAM_MODULE_ONLY) would rely on.
    A module status is reported, never an approval of the module for release (that remains the owner's decision).
 
-   Usage: node exam-content/tools/review-status.mjs <returned-records-dir> [--out <report-dir outside the repo>] */
+   Usage: node exam-content/tools/review-status.mjs <returned-records-dir> [--module lesen] [--out <report-dir outside the repo>]
+          node exam-content/tools/review-status.mjs --check <record.json> … [--module lesen]   (plain-language check
+          of filled records before they are returned: what must be fixed, what is still empty) */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -148,6 +150,78 @@ export function readRecords(dir) {
   });
 }
 
+/* ---------- self-service: plain-language check of one filled record, and a plain summary ---------- */
+const MODULE_DE = { lesen: 'Lesen', hoeren: 'Hören', schreiben: 'Schreiben', sprechen: 'Sprechen' };
+/* "Lesen Teil 1, Nr. 1" for an item id of a practice form */
+export function itemLabel(form, itemId) {
+  const it = JSON.parse(form.files['items.json']).find((x) => x.id === itemId);
+  if (!it) return itemId;
+  const no = (/^(\d+)\./.exec(it.stem || '') || [])[1];
+  return `${MODULE_DE[it.module] || it.module} Teil ${it.part}${no ? `, Nr. ${no}` : ''}`;
+}
+
+/* One returned record, judged before it is handed in: { form, ok, errors[], missing[], warnings[] } in plain words.
+   module limits "missing" to that module's entries (a Lesen-only review leaves the rest blank on purpose). */
+export function checkFile(record, { module = null, forms = PRACTICE_FORMS } = {}) {
+  const form = forms.find((f) => f.form_id === (record && record.form_id));
+  if (!form) return { form: null, ok: false, errors: [`unknown form_id ${JSON.stringify(record && record.form_id)}: use the template of this packet unchanged`], missing: [], warnings: [] };
+  const template = reviewRecord(form);
+  const errors = [], missing = [], warnings = [];
+  if (record.record_version !== RECORD_VERSION) errors.push(`template version ${JSON.stringify(record.record_version)}: use the ${RECORD_VERSION} template of this packet`);
+  if (record.content_sha256 !== template.content_sha256) errors.push('this record belongs to a different version of the form (content_sha256 changed or outdated): it would not count (EX-03/O6). Use the template of the current packet');
+  const chk = checkRecord(record, template);
+  errors.push(...chk.errors.map((e) => e.replace(/^(\S+?): /, (m, id) => (id.startsWith('itm:') ? `${itemLabel(form, id)} (${id}): ` : m))));
+  warnings.push(...chk.warnings);
+  const slot = record.reviewer && record.reviewer.slot;
+  const moduleOf = Object.fromEntries(JSON.parse(form.files['items.json']).map((it) => [it.id, it.module]));
+  const inScope = (id) => !module || moduleOf[id] === module;
+  for (const it of record.items || []) {
+    if (!inScope(it.item_id)) continue;
+    const need = [];
+    if (!it.verdict) need.push('verdict');
+    if (slot !== 'C') for (const r of ['ambiguity_risk', ...RATINGS]) if (it[r] == null) need.push(r);
+    if (slot === 'C' && !it.accessibility) need.push('accessibility');
+    if (need.length) missing.push(`${itemLabel(form, it.item_id)}: ${need.join(', ')}`);
+  }
+  for (const t of record.tasks || []) if (inScope(t.item_id) && (!t.verdict || (slot === 'C' && !t.accessibility))) missing.push(`${itemLabel(form, t.item_id)} (task): ${!t.verdict ? 'verdict' : 'accessibility'}`);
+  if (slot === 'C' && !(record.originality_signoff && record.originality_signoff.verdict)) missing.push('originality sign-off (slot C, whole form)');
+  return { form: form.name, slot: slot || null, ok: errors.length === 0 && missing.length === 0, errors, missing, warnings };
+}
+
+/* What is approved and what is outstanding, per form and module, in plain words (computed, never an approval). */
+export function plainSummary(report, { modules = MODULES, forms = PRACTICE_FORMS } = {}) {
+  const lines = ['EX-03 review: what is approved and what is outstanding (computed from returned records; it approves nothing)', ''];
+  for (const fr of report.forms) {
+    const form = forms.find((f) => f.form_id === fr.form_id);
+    const moduleOf = Object.fromEntries(JSON.parse(form.files['items.json']).map((it) => [it.id, it.module]));
+    for (const m of modules) {
+      const st = fr.modules[m];
+      const have = fr.records.filter((r) => !r.errors.length).map((r) => r.slot);
+      const waiting = SLOTS.filter((x) => !have.includes(x));
+      let why = '';
+      if (fr.problems.length) why = `fix the record folder first: ${fr.problems.join('; ')}`;
+      else if (st === 'needs revision') {
+        const units = [...fr.items, ...fr.tasks].filter((u) => moduleOf[u.item_id] === m && u.status === 'needs revision');
+        why = `revise and review again from scratch: ${units.map((u) => `${itemLabel(form, u.item_id)} (${Object.entries(u.verdicts).filter(([, v]) => v && v !== 'approve').map(([k, v]) => `${k}: ${v}`).join(', ') || 'accessibility'})`).join('; ')}`;
+        if (fr.originality && fr.originality !== 'approve') why += `${why ? '; ' : ''}originality: ${fr.originality}`;
+      } else if (st !== 'approved') {
+        const parts = [];
+        if (waiting.length) parts.push(`waiting for slot ${waiting.join(', ')}`);
+        const open = [...fr.items, ...fr.tasks].filter((u) => moduleOf[u.item_id] === m && u.status === 'in review').length;
+        if (open && !waiting.length) parts.push(`${open} item(s) without three verdicts`);
+        const pending = fr.items.filter((u) => moduleOf[u.item_id] === m && u.ratings && RATINGS.some((r) => u.ratings[r].pending)).length;
+        if (pending && !waiting.length) parts.push(`${pending} rating(s) unresolved (third rating or re-rate)`);
+        if (!fr.originality) parts.push('originality sign-off (C) missing');
+        why = parts.join('; ');
+      }
+      lines.push(`${fr.form} ${MODULE_DE[m]}: ${st === 'approved' ? 'APPROVED (EX-03 rules met)' : st.toUpperCase()}${why ? ` — ${why}` : ''}`);
+    }
+    if (fr.stale.length) lines.push(`${fr.form}: ${fr.stale.length} stale record(s) ignored and blocking a release until removed: ${fr.stale.map((x) => x.file).join(', ')}`);
+  }
+  if (report.unassigned.length) lines.push('', 'Files that are not valid records (blocking a release until removed):', ...report.unassigned.map((u) => `- ${u.file}: ${u.reason}`));
+  return lines.join('\n') + '\n';
+}
+
 /* Reviewer ids and messages are free text: keep a pipe or line break from breaking the table. */
 const cell = (v) => String(v).replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\r?\n/g, ' ');
 
@@ -161,9 +235,29 @@ export function summaryMarkdown(report) {
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const a = process.argv.slice(2), arg = (k) => { const i = a.indexOf(k); return i >= 0 ? a[i + 1] : null; };
+  const module = arg('--module');
+  if (module && !MODULES.includes(module)) { console.error(`unknown module ${module} (${MODULES.join('|')})`); process.exit(2); }
+  // --check <file.json> …: a reviewer (or the organiser) checks filled records before they count
+  if (a[0] === '--check') {
+    const files = a.slice(1).filter((x, i, all) => !x.startsWith('--') && all[i - 1] !== '--module');
+    if (!files.length) { console.error('usage: review-status.mjs --check <record.json> … [--module lesen]'); process.exit(2); }
+    let bad = 0;
+    for (const f of files) {
+      let rec; try { rec = JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) { console.log(`${f}: NOT VALID JSON (${e.message})`); bad++; continue; }
+      const r = checkFile(rec, { module });
+      if (!r.ok) bad++;
+      console.log(`${f}: ${r.ok ? 'READY TO RETURN' : 'NOT READY'}${r.form ? ` (${r.form}${r.slot ? `, slot ${r.slot}` : ''}${module ? `, ${module}` : ''})` : ''}`);
+      for (const e of r.errors) console.log(`  must fix: ${e}`);
+      for (const m of r.missing.slice(0, 40)) console.log(`  still empty: ${m}`);
+      if (r.missing.length > 40) console.log(`  … and ${r.missing.length - 40} more empty entries`);
+      for (const w of r.warnings) console.log(`  note: ${w}`);
+    }
+    process.exit(bad ? 1 : 0);
+  }
   const dir = a[0];
-  if (!dir || dir.startsWith('--')) { console.error('usage: review-status.mjs <returned-records-dir> [--out <report-dir outside the repo>]'); process.exit(2); }
+  if (!dir || dir.startsWith('--')) { console.error('usage: review-status.mjs <returned-records-dir> [--module lesen] [--out <report-dir outside the repo>]\n       review-status.mjs --check <record.json> … [--module lesen]'); process.exit(2); }
   const report = reviewStatus(readRecords(dir));
+  const plain = plainSummary(report, { modules: module ? [module] : MODULES });
   const out = arg('--out');
   if (out) {
     const d = path.resolve(out);
@@ -171,6 +265,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     fs.mkdirSync(d, { recursive: true });
     fs.writeFileSync(path.join(d, 'ex03-status.json'), JSON.stringify(report, null, 2) + '\n');
     fs.writeFileSync(path.join(d, 'ex03-status.md'), summaryMarkdown(report));
+    fs.writeFileSync(path.join(d, 'ex03-summary.txt'), plain);
   }
-  process.stdout.write(summaryMarkdown(report));
+  process.stdout.write(summaryMarkdown(report) + '\n' + plain);
 }

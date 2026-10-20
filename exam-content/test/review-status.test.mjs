@@ -137,7 +137,8 @@ test('REVIEW STATUS CLI: reads a directory, reports unknown files, refuses to wr
   const out = path.join(dir, 'report');
   const md = execFileSync(process.execPath, [tool, dir, '--out', out], { encoding: 'utf8' });
   assert.match(md, /\| P3 \| in review \|/);
-  assert.deepEqual(fs.readdirSync(out).sort(), ['ex03-status.json', 'ex03-status.md']);
+  assert.deepEqual(fs.readdirSync(out).sort(), ['ex03-status.json', 'ex03-status.md', 'ex03-summary.txt']);
+  assert.match(fs.readFileSync(path.join(out, 'ex03-summary.txt'), 'utf8'), /P3 Lesen: IN REVIEW/);
 });
 
 test('REVIEW STATUS summary: reviewer ids with a pipe or a line break cannot break the Markdown table', () => {

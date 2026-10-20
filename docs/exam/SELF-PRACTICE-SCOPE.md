@@ -54,6 +54,8 @@ Try it locally: `npm run exam:demo -- <free port> practice --module-only=lesen`,
 non-practice form disables assignment altogether. Nothing is substituted. Listing a form is an operator action; it
 records no approval.
 
+Owner decisions for this scope, answerable in one pass: `LESEN-ONLY-OWNER-DECISIONS.md`.
+
 ## 3. Gates that still apply to a Lesen-only release (none is met today)
 
 Narrowing the scope shrinks these gates. It does not remove them.

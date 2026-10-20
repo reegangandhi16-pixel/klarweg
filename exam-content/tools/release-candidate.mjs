@@ -5,7 +5,8 @@
    - an empty, malformed or duplicated form list, an unknown form, or a form that is not purpose "practice" (S0);
    - an unknown module;
    - any form whose module is not "approved" in the EX-03 review records given with --approved <dir>
-     (tools/review-status.mjs rules, register §C.1). Without --approved it builds only with --internal-candidate, and the
+     (tools/review-status.mjs rules, register §C.1), and any form while the folder holds an unreadable, unassigned,
+     stale or erroneous record or an O1 conflict for it (fail closed; the folder must be clean). Without --approved it builds only with --internal-candidate, and the
      record then says NOT APPROVED in so many words. Nothing here approves anything.
    Output goes outside the repository only (the release contains keys).
 
@@ -37,10 +38,21 @@ export function selectForms(list) {
   });
 }
 
-/* records: [{file, record}] from readRecords, or null. → [{ name, status }] per form for the module */
+/* records: [{file, record}] from readRecords, or null. → [{ name, status, problems }] per form for the module.
+   Fail closed on the record folder itself: an unreadable file, a record for an unknown form, a stale record (older
+   revision), a record with errors, or an EX-03/O1 conflict for a selected form makes that form (or, for unreadable or
+   unassigned files, every form) "records invalid", whatever the computed status says. The organiser must clean the
+   folder; nothing is silently ignored. */
 export function approvalOf(forms, module, records) {
-  const report = records ? reviewStatus(records, forms.map((f) => f.entry)) : null;
-  return forms.map((f) => ({ name: f.name, id: f.id, status: report ? report.forms.find((x) => x.form_id === f.id).modules[module] : 'no review records' }));
+  if (!records) return forms.map((f) => ({ name: f.name, id: f.id, status: 'no review records', problems: [] }));
+  const report = reviewStatus(records, PRACTICE_FORMS);
+  const folder = report.unassigned.map((u) => `${u.file}: ${u.reason}`);
+  return forms.map((f) => {
+    const fr = report.forms.find((x) => x.form_id === f.id);
+    const problems = [...folder, ...fr.stale.map((x) => `${x.file}: stale (${x.reason})`),
+      ...fr.records.filter((r) => r.errors.length).map((r) => `${r.file}: ${r.errors.join('; ')}`), ...fr.problems];
+    return { name: f.name, id: f.id, status: problems.length ? 'records invalid' : fr.modules[module], problems };
+  });
 }
 
 export function releaseCandidate({ forms: list, module, release, approvedDir = null, internalCandidate = false, builtAt, gitSha = null }) {
@@ -50,7 +62,7 @@ export function releaseCandidate({ forms: list, module, release, approvedDir = n
   const approval = approvalOf(forms, module, approvedDir ? readRecords(approvedDir) : null);
   const unapproved = approval.filter((a) => a.status !== 'approved');
   if (unapproved.length && !internalCandidate) {
-    throw new Error(`refusing a learner release: ${module} not approved for ${unapproved.map((a) => `${a.name} (${a.status})`).join(', ')}`);
+    throw new Error(`refusing a learner release: ${module} not approved for ${unapproved.map((a) => `${a.name} (${a.status}${a.problems.length ? `: ${a.problems.join(' | ')}` : ''})`).join(', ')}`);
   }
   const build = buildRelease({ release, purpose: 'learner', formDirs: forms.map((f) => f.dir), builtAt });
   const built = build.manifest.forms.map((f) => f.id);

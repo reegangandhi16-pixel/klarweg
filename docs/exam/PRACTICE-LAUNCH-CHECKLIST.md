@@ -36,7 +36,7 @@ an approval that has not been given.
 - Merged in PR #145 (`0c9563b`). **Non-production run M1, 2026-10-20** (`NONPROD-SETUP.md` §4): migration 0002 applied. All checks pass with the setting unset, `lesen` and an invalid value, plus a full four-module journey afterwards; one first-run fail had a cause outside the code (S0 test fixture assigned from the `purpose=test` release). Reviewer evidence: `LESEN-ONLY-REVIEW-EVIDENCE.md`.
 - Release set (PR #150): `EXAM_RELEASE_FORMS` lists the forms that may be assigned. It is required with `EXAM_MODULE_ONLY`; S0, unknown, non-live and non-practice ids fail closed, and nothing is substituted. Migration 0003 stores `forms.purpose`. Tests: `release-forms.test` (10). Non-production run M2 (2026-10-20, `NONPROD-SETUP.md` §4): passes; only listed candidate forms are assigned, and a missing set or listed S0 fails closed.
 - Release candidate (PR #152): `release-candidate.mjs` builds a learner release of exactly the named forms and the matching Worker settings. It refuses S0, bad lists and forms without EX-03 Lesen approval in returned records; `--internal-candidate` builds a copy marked NOT APPROVED for non-production use only. Internal review of the 90 candidate Lesen items: no wrong key, 4 wording fixes (`INTERNAL-LESEN-REVIEW-2026-10-20.md`). Lesen EX-03 packet: `EX-03-LESEN-RC-2026-10-20` (ready, not sent).
-- Self-service review (PR #REVIEW_PR):
+- Self-service review (PR #154):
   - an offline fillable review form per form and module;
   - a plain-language record check (`review-status.mjs --check`);
   - a plain approved/outstanding summary;

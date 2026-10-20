@@ -148,6 +148,14 @@ const DRAFT_NAMES = LIVE.teachers.filter((t) => t.draft && !/^\[/.test(t.name)).
 const DRAFT_RX = new RegExp(['\\[Teacher', '\\[One-line', '\\[Verified', '\\[Specialism', '\\[Mock exams', '\\[Years', '\\[German level', '\\[Qualification', 'Draft', 'Preview ·', 'Portrait pending', 'template'].concat(DRAFT_NAMES).join('|'), 'i');
 const draftLeak = `(()=>{const t=document.body.innerText+' '+[...document.querySelectorAll('option')].map(o=>o.text).join(' ');const m=t.match(${DRAFT_RX});return m?m[0]:null})()`;
 const overflow = 'document.documentElement.scrollWidth - document.documentElement.clientWidth';
+/* The JSON-LD the page builds: FAQPage must equal the visible FAQ; returns
+   { faqOk, courses: [names], text } so each scenario can assert on it. */
+const jsonld = `(()=>{const el=document.getElementById("live-jsonld");if(!el)return null;const j=JSON.parse(el.textContent);const g=j["@graph"];
+  const f=g.find(x=>x["@type"]==="FAQPage");const items=[...document.querySelectorAll(".faq-item")];const n=t=>t.replace(/\\s+/g," ").trim();
+  const faqOk=!!f&&f.mainEntity.length===items.length&&f.mainEntity.every((m,i)=>m.name===n(items[i].querySelector(".faq-q").textContent)&&m.acceptedAnswer.text===n(items[i].querySelector(".faq-a-inner").textContent));
+  const strs=[],keys=[];(function walk(v){if(typeof v==="string")strs.push(v);else if(v&&typeof v==="object")for(const k in v){keys.push(k);walk(v[k])}})(j);
+  return {faqOk,courses:g.filter(x=>x["@type"]==="Course").map(x=>x.name),instructors:g.filter(x=>x["@type"]==="Course").flatMap(x=>(x.instructor||[]).map(p=>p.name)),text:strs.join("\\n"),keys}})()`;
+const OWNER = LIVE.teachers.find((t) => t.id === 'reegan-gandhi');
 const key = async (k, code, vk) => { for (const type of ['keyDown', 'keyUp']) await b.send('Input.dispatchKeyEvent', { type, key: k, code, windowsVirtualKeyCode: vk }); };
 const submit = () => q('document.querySelector("#consult-form button[type=submit]").click()');
 
@@ -168,6 +176,9 @@ try {
       await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")'));
     ok(`A${w} primary hero CTA keeps its arrow`, await q('!!document.querySelector(".live-hero .btn-live .btn-arrow")'));
     ok(`A${w} no copy invites filtering or opening profiles that do not exist`, !(await q('/open a profile|Filter the teacher profiles/.test(document.body.innerText + document.getElementById("fa3").textContent)')));
+    ok(`A${w} hero names no level range while nothing is published`, (await q('document.querySelector("[data-live-levels]").textContent')) === '');
+    const jA = await q(jsonld);
+    ok(`A${w} structured data: FAQPage matches the visible FAQ, no Course`, !!jA && jA.faqOk && jA.courses.length === 0, JSON.stringify(jA && { faqOk: jA.faqOk, courses: jA.courses }));
     ok(`A${w} requests go to the documented address`, (await q('document.querySelector("[data-contact-email]").textContent')) === 'klarwegofficial@gmail.com');
   }
   await load(L + '#teacher-teacher-1');
@@ -191,6 +202,12 @@ try {
   await load(L, { drafts: true });
   ok('C preview shows drafts + banner', await q('!document.getElementById("draft-banner").hidden && document.querySelectorAll(".t-card").length===' + N_T));
   ok('C teacher count', (await q('document.getElementById("t-count").textContent')) === N_T + ' teachers');
+  const jC = await q(jsonld);
+  ok('C structured data never includes draft courses or teachers, even in the preview', !!jC && jC.faqOk && jC.courses.length === 0 && !new RegExp(DRAFT_RX.source + '|\\[[^\\]]+\\]', 'i').test(jC.text), jC && (jC.text.match(new RegExp('.{0,40}(' + DRAFT_RX.source + '|\\[[^\\]]+\\]).{0,40}', 'i')) || [''])[0]);
+  ok('C several teachers: filters shown, directory layout', await q('!document.querySelector("#teachers .filters").hidden && !document.getElementById("teacher-grid").classList.contains("single")'));
+  await q('document.querySelector(".c-card .t-link").click()'); await sleep(200);
+  ok('C a teacher named on a course card opens that profile', (await q('document.getElementById("t-dialog").open')) && (await q('location.hash')) === '#teacher-' + LIVE.courses[0].teacherIds[0], await q('location.hash'));
+  ok('C closing it returns focus to the course card link', await (async () => { await key('Escape', 'Escape', 27); await sleep(200); return q('document.activeElement.classList.contains("t-link")'); })());
   ok('C with profiles, the hero and FAQ point to them', (await q('document.querySelector(".live-hero .btn-live").getAttribute("href")')) === '#teachers' && /Filter the teacher profiles/.test(await q('document.getElementById("fa3").textContent')));
   ok('C levels taught are text for screen readers; the strip is hidden from them', await q('(()=>{const r=document.querySelector(".t-card .lvl-row");return r.querySelector(".vh").textContent==="Levels taught: ' + LIVE.teachers[0].levels.join(', ') + '"&&[...r.querySelectorAll(".lvl")].every(x=>x.getAttribute("aria-hidden")==="true")&&!r.hasAttribute("aria-label")})()'));
   await q('document.querySelector("[data-tlevel=B1]").click()');
@@ -252,6 +269,38 @@ try {
   ok('C2 bound values flow inside their sentence (never a separate item of a flex row)', (await q('[...document.querySelectorAll("[data-consult-fee],[data-consult-days],[data-consult-dayadj]")].filter(e=>!e.classList.contains("fee-amt")&&/flex/.test(getComputedStyle(e.parentElement).display)).length')) === 0,
     await q('[...document.querySelectorAll("[data-consult-fee],[data-consult-days],[data-consult-dayadj]")].filter(e=>!e.classList.contains("fee-amt")&&/flex/.test(getComputedStyle(e.parentElement).display)).map(e=>e.parentElement.textContent.trim().slice(0,40)).join(" | ")'));
   ok('C2 new fee and period shown in every bound place', (await q('[...document.querySelectorAll("[data-consult-fee]")].every(e=>e.textContent==="₹150") && document.querySelectorAll("[data-consult-fee]").length>=8 && [...document.querySelectorAll("[data-consult-days]")].every(e=>e.textContent==="10 days") && document.querySelector("[data-consult-dayadj]").textContent==="10-day"')));
+
+  // ---- F. launch simulation: the owner's profile published, no drafts ----
+  // (test-only edits to the served data; the committed file stays draft)
+  if (OWNER) {
+    const pub = [["id: 'reegan-gandhi',\n        draft: true,", "id: 'reegan-gandhi',\n        draft: false,"]];
+    const lo = OWNER.levels[0], hi = OWNER.levels.at(-1);
+    for (const [w, mob] of [[375, true], [1280, false]]) {
+      await load(L, { edits: pub, width: w, mobile: mob });
+      ok(`F${w} served data publishes only the owner's profile`, (await q('window.KWLive.teachers.filter(t=>!t.draft).map(t=>t.id).join()')) === 'reegan-gandhi');
+      ok(`F${w} one featured profile, no filters, no count, no draft banner`, await q('document.querySelectorAll(".t-card").length===1 && document.getElementById("teacher-grid").classList.contains("single") && [...document.querySelectorAll("#teachers .filters")].every(f=>f.hidden) && document.getElementById("t-count").textContent==="" && document.getElementById("draft-banner").hidden'));
+      ok(`F${w} the card shows the real name and no draft or placeholder text`, (await q('document.querySelector(".t-card .t-name").textContent')) === OWNER.name && !(await q('/Draft|\\[|Portrait pending/.test(document.querySelector(".t-card .t-body").innerText)')));
+      ok(`F${w} copy speaks of one teacher`, (await q('document.getElementById("teachers-h").textContent')) === 'Meet your teacher.' && /Meet your teacher/.test(await q('document.querySelector(".live-hero .btn-live").textContent')) && /currently taught by one teacher/.test(await q('document.getElementById("fa3").textContent')));
+      ok(`F${w} hero level range comes from the published profile`, (await q('document.querySelector("[data-live-levels]").textContent')) === ' · ' + lo + ' → ' + hi, await q('document.querySelector("[data-live-levels]").textContent'));
+      ok(`F${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
+      ok(`F${w} portrait and details sit side by side on desktop, stacked on phones`, await q('(()=>{const p=document.querySelector(".t-card .portrait").getBoundingClientRect(),b=document.querySelector(".t-card .t-body").getBoundingClientRect();return innerWidth>720?b.left>=p.right-1:b.top>=p.bottom-1})()'));
+    }
+    await q('document.querySelector(".t-card [data-profile]").click()'); await sleep(200);
+    const dlF = await q('[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ")');
+    ok('F profile dialog: every confirmed field, certificate once, no placeholder', OWNER.specialisms.every((x) => dlF.includes(x)) && dlF.includes('Experience: ' + OWNER.experience) && dlF.includes('German proficiency: ' + OWNER.proficiency)
+      && dlF.split(OWNER.goethe[0]).length - 1 === 1 && !/\[/.test(dlF), dlF);
+    ok('F profile CTA names the teacher', /Request a consultation with Reegan/.test(await q('document.querySelector("#t-dialog [data-book-teacher]").textContent')));
+    await key('Escape', 'Escape', 27); await sleep(200);
+    ok('F the form offers the published teacher by name', (await q('[...document.getElementById("bf-teacher").options].map(o=>o.text).join("|")')) === 'Help me choose|' + OWNER.name);
+    const jF = await q(jsonld);
+    ok('F structured data: FAQPage matches, still no Course (none published)', !!jF && jF.faqOk && jF.courses.length === 0, JSON.stringify(jF && jF.courses));
+    // with a course published too (test-only): its card links the teacher, and it enters the structured data
+    await load(L, { edits: pub.concat([["id: 'live-a1', draft: true,", "id: 'live-a1', draft: false,"], ["teacherIds: ['teacher-1'],", "teacherIds: ['reegan-gandhi'],"]]) });
+    ok('F2 the published course names its teacher as a profile link', (await q('document.querySelector(".c-card .t-link").textContent')) === OWNER.name);
+    const jF2 = await q(jsonld);
+    ok('F2 structured data: the published course with its published instructor, nothing else', !!jF2 && jF2.faqOk && jF2.courses.join() === LIVE.courses[0].title && jF2.instructors.join() === OWNER.name && !/\[[^\]]+\]|Draft/.test(jF2.text), JSON.stringify(jF2 && { c: jF2.courses, i: jF2.instructors }));
+    ok('F2 no price or start date is invented in the structured data', !jF2.keys.some((k) => /price|offers|startDate|courseSchedule|hasCourseInstance/i.test(k)), jF2.keys.join());
+  }
 
   // ---- E. tablet widths: no overflow, with and without published content ----
   for (const [w, mob] of [[768, true], [1024, false]]) {

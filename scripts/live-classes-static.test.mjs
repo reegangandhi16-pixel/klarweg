@@ -84,6 +84,13 @@ test('LIVE: consultation requests go to the site\'s documented address (the one 
   for (const m of html.matchAll(/(?:data-contact-email>|mailto:)([^<"]+)/g)) assert.equal(m[1], contact[1], 'the no-JS fallback text matches too');
 });
 
+test('LIVE: the page states no level range or live-course term that is not confirmed', () => {
+  const body = html.slice(html.indexOf('<body'));
+  assert.equal(/A1 (?:→|to) C2/.test(html.match(/<meta name="description" content="([^"]*)"/)[1]), false, 'the meta description names no blanket level range');
+  assert.match(body, /<span data-live-levels><\/span>/, 'the hero level range is computed from the data');
+  assert.equal(/doesn.t include the other|includes? self-paced access/i.test(body), false, 'whether a live course includes self-paced access is an owner decision (D6)');
+});
+
 test('LIVE: the consultation fee and adjustment period are read from the data file, not typed into the page', () => {
   // the publish checklist comment and the meta descriptions are static by nature (see checklist item 6)
   const body = html.slice(html.indexOf('<body>')).replace(/<span[^>]*\bdata-consult-(?:fee|days|dayadj)\b[^>]*>[^<]*<\/span>/g, '');
@@ -134,6 +141,7 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
   assert.deepEqual(placeholders(realTeacher), [], 'list fields such as levels: [\'A1\'] are not placeholders');
   expectError((D) => { D.teachers[0].proficiency = 'C1 (Goethe-Zertifikat)'; }, /proficiency states a level of German only/, 'a certificate claim inside proficiency');
   expectError((D) => { D.teachers[0].unconfirmed = ['nickname']; }, /unconfirmed names unknown field "nickname"/, 'unconfirmed must name real fields');
+  expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], levels: ['A1', 'B2'] }); }, /level B2 is not taught by its teacher/, 'a course offered at a level its teacher does not teach');
   expectError((D) => { D.teachers.push({ ...realTeacher, qualifications: [] }); }, /published teacher needs qualifications/, 'a published teacher without qualifications');
   expectError((D) => { D.teachers.push({ ...realTeacher, photo: 'public/teachers/missing.jpg', photoAlt: 'x' }); }, /photo public\/teachers\/missing\.jpg does not exist/, 'a missing photo file');
   expectError((D) => { D.teachers.push(realTeacher); Object.assign(D.courses[0], { draft: false, teacherIds: ['anna-k'], enrolment: 'open', priceLabel: '₹9,999', nextBatch: '1 Dec', frequency: '2×/week', sessionLength: '60 min', totalDuration: '12 weeks' }); }, /group batch needs batchSize/, 'an open group batch without a batch size');
@@ -198,6 +206,12 @@ test('LIVE GATE: the gate clears once every blocker is resolved (so it can actua
     assert.ok(launchBlockers(D, dir).some((b) => /does not match the visible answer/.test(b)), 'visible and structured FAQ answers must match');
     fs.writeFileSync(path.join(dir, 'index.html'), faqPage('Fees will be announced before enrolment opens; live classes are not open for booking yet.'));
     assert.deepEqual(launchBlockers(D, dir), [], 'announcing that enrolment will open later is not a claim that it is open');
+    const meta = (desc) => html.replace(/(<meta name="description" content=")[^"]*/, `$1${desc}`);
+    fs.writeFileSync(path.join(dir, 'live-classes.html'), meta('Live German classes, A1 to C2.'));
+    assert.ok(launchBlockers(D, dir).some((b) => /claims levels A1–C2/.test(b)), 'a level range nobody published is a blocker');
+    fs.writeFileSync(path.join(dir, 'live-classes.html'), meta(`Live German classes, ${D.teachers[0].levels[0]} to ${D.teachers[0].levels.at(-1)}.`));
+    assert.equal(launchBlockers(D, dir).some((b) => /claims levels/.test(b)), false, 'a range covered by the published teacher is fine');
+    fs.writeFileSync(path.join(dir, 'live-classes.html'), html);
     D.consultation.feeLabel = '₹150';
     assert.ok(launchBlockers(D, dir).some((b) => /meta description/.test(b)), 'a changed fee with stale meta descriptions is a blocker');
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }

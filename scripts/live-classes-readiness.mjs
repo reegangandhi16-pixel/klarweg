@@ -100,6 +100,9 @@ export function checkData(D, root = ROOT) {
     if (!has(k.title) || !has(k.objectives) || !has(k.levels)) err(w, 'published course needs title, objectives and levels');
     // a draft teacher is never rendered on the live site, so the course would show no teacher
     for (const id of k.teacherIds || []) if (teacherById[id]?.draft) err(w, `published course names draft teacher "${id}"`);
+    // a course may only be offered at levels its teachers actually teach
+    const taught = new Set((k.teacherIds || []).flatMap((id) => teacherById[id]?.levels || []));
+    if (taught.size) for (const l of k.levels || []) if (!taught.has(l)) err(w, `level ${l} is not taught by its teacher(s) (${[...taught].join(', ')})`);
     if (k.enrolment !== 'not-open' && !has(k.priceLabel)) err(w, `enrolment "${k.enrolment}" needs priceLabel: students must see the fee before they enrol`);
     if (k.enrolment === 'open') for (const f of ['nextBatch', 'frequency', 'sessionLength', 'totalDuration']) if (!has(k[f])) err(w, `enrolment "open" needs ${f}`);
     if (k.enrolment === 'open' && k.format === 'Group batch' && !has(k.batchSize)) err(w, 'enrolment "open" for a group batch needs batchSize');
@@ -127,6 +130,15 @@ export function launchBlockers(D, root = ROOT) {
     if (/₹\s?\d/.test(m[1]) && !m[1].includes(D.consultation?.feeLabel)) b.push(`A meta description still names a different fee than consultation.feeLabel: "${m[1].slice(0, 60)}…".`);
   }
   const index = read(root, 'index.html');
+  // a level range in the meta descriptions must be covered by what is published
+  const covered = new Set([...published(D.teachers), ...published(D.courses)].flatMap((x) => x.levels || []));
+  for (const m of page.matchAll(/<meta (?:name="description"|property="og:description") content="([^"]*)"/g)) {
+    for (const r of m[1].matchAll(/\b([ABC][12])\s*(?:to|–|-|→)\s*([ABC][12])\b/g)) {
+      const span = LEVELS.slice(LEVELS.indexOf(r[1]), LEVELS.indexOf(r[2]) + 1);
+      const missing = span.filter((l) => !covered.has(l));
+      if (missing.length) b.push(`A meta description claims levels ${r[1]}–${r[2]}, but no published teacher or course covers ${missing.join(', ')}.`);
+    }
+  }
   if (/No live classes/i.test(index)) b.push('index.html says "No live classes" (visible FAQ and FAQPage structured data).');
   const faq = homepageFaq(index);
   const differ = Object.keys(faq.structured).filter((q) => faq.visible[q] !== faq.structured[q]);

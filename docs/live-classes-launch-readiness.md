@@ -1,6 +1,12 @@
 # Live Classes — launch readiness
 
-**Status (2026-10-20):** decision D1 is made: Klarweg intends to offer teacher-led live classes. No teacher, course, batch, schedule, fee, policy or enrolment date is approved yet. `live-classes.html` is an unlisted preview. It is `noindex`, not in `.github/pages-allowlist.txt`, `sitemap.xml` or any nav, and every teacher and course entry is a draft that never renders on a deployed host. **It is not ready to launch:** the repository contains no verified teacher, course, schedule, fee or policy information.
+**Status (2026-10-20):**
+- **Decided:** D1, Klarweg intends to offer teacher-led live classes.
+- **Teacher:** the owner's profile (`reegan-gandhi`) is fully confirmed but stays a draft until the launch go-ahead.
+- **Not approved yet:** any course, batch, schedule, fee, policy or enrolment date.
+- **Page status:** `live-classes.html` is an unlisted preview. It is `noindex` and not in `.github/pages-allowlist.txt`, `sitemap.xml` or any nav. Every teacher and course entry is a draft that never renders on a deployed host.
+
+**It is not ready to launch.**
 
 Check the current state at any time:
 
@@ -18,12 +24,38 @@ The launch gate in `scripts/live-classes-static.test.mjs` fails CI if the page i
 5. `terms.html` covers only self-paced content.
 6. `privacy.html` does not describe the consultation request.
 
+### Owner checklist (everything that still needs a decision)
+
+- [ ] **D3** First course: title, level(s) within A1–B2, format, schedule, length, start date, materials, fee, enrolment status.
+- [ ] **D4** Consultation terms: confirm ₹100 and 7 days, how it is paid, refund if Klarweg cancels.
+- [ ] **D5** Four policies: missed classes, cancellation/refunds, scheduling, what the fee includes.
+- [ ] **D6** Approve the Terms and Privacy drafts (`live-classes-review-drafts.md`), including whether a live course includes self-paced access.
+- [ ] **D7** How live fees are collected (manual or a new payment product).
+- [ ] **D8** Launch go-ahead, which also publishes the teacher profile.
+- [ ] *Optional:* teacher photo, availability, the brand document update (D1 follow-up).
+
+The template in §2B collects all of these at once.
+
+### Preview locally
+
+```
+# in live-classes-data.js set showDrafts: true (never commit it; the static tests reject it)
+python3 -m http.server 8000      # from the repository root
+# open http://localhost:8000/live-classes.html
+```
+
+- Drafts render only on `localhost`, `127.0.0.1` or `file://`.
+- To see the page as it would launch, set `draft: false` on an entry **locally**. The validator (`npm run live:readiness`) shows what that entry still needs.
+
 The former blocker "`index.html` says No live classes" is cleared in the repository by the homepage FAQ change (Variant A, see D1). Clearing it in the repository is not the same as publishing it; see the D1 status below.
 
 The check also reports, when they occur:
 - a fee in the meta descriptions that differs from `consultation.feeLabel`;
 - a homepage FAQ whose FAQPage structured data differs from the visible answer;
-- a homepage FAQ that says enrolment is open while no published course is open.
+- a homepage FAQ that says enrolment is open while no published course is open;
+- a level range in the meta descriptions (e.g. "A1 to C2") that the published teachers and courses do not cover. The hero's range is computed from the data.
+
+As data errors it also reports a published course offered at a level its teachers don't teach.
 
 Proposed wording for the homepage FAQ and for blockers 5–6 (Terms, Privacy) is in **`docs/live-classes-review-drafts.md`**. It is a draft for review, not approved.
 
@@ -115,7 +147,11 @@ Publishing the profile is part of the launch go-ahead (D8).
 - fee and payment terms;
 - enrolment status.
 
-*Recommendation:* publish only courses that have a confirmed teacher. The validator already rejects a published course whose teacher is still a draft, because that teacher would be invisible on the live site.
+*Recommendation:* publish only courses that have a confirmed teacher. The validator rejects:
+- a published course whose teacher is still a draft, because that teacher would be invisible on the live site;
+- a published course offered at a level its teacher doesn't teach.
+
+Today the only confirmed teacher teaches A1–B2 (Goethe preparation A1–B1). So the first course should sit in that range. The C1–C2 draft course and the template teachers `teacher-1`, `teacher-2` and `teacher-3` remain templates until real teachers exist.
 
 **D4. Consultation terms.**
 *Why it matters:* the fee and adjustment period appear in 16 places on the page (all read from the data file) and in the booking email. The reply email has to tell the student how to pay.
@@ -197,29 +233,13 @@ The whole launch also needs, regardless of course status: D4 (consultation terms
 
 ## 2B. Owner input template
 
-Copy, fill in, and send back. Leave a line blank if it is not decided. Nothing blank will be published.
+Copy, fill in, and send back. Leave a line blank if it is not decided. Nothing blank will be published. The teacher profile (D2) and the homepage FAQ (D1) are already settled, so they are no longer in it.
 
 ```
-=== TEACHER 1 ===
-Full name:
-Consent to publish profile (yes / date given):
-One-line teaching focus:
-Years teaching German:
-German level (e.g. C2, native):
-Qualifications (exactly as on certificate):
-Goethe certificates held (or "none"):
-Levels taught (A1 A2 B1 B2 C1 C2):
-Languages of instruction (e.g. Hindi, English, German):
-Formats (Group batch / One-to-one):
-Exam-prep experience (optional):
-Teaching approach, 2–3 sentences (optional):
-Availability, e.g. "Weekday evenings IST" (optional):
-Photo approved for the site (yes/no; file to follow):
-
-=== COURSE 1 ===
+=== COURSE 1 (D3) ===
 Title:
-Level(s):
-Teacher:
+Level(s) (A1–B2 with the current teacher):
+Teacher (Reegan Gandhi unless another teacher is confirmed):
 What students will be able to do (3 points):
 Format (Group batch / One-to-one):
 Batch size (group only):
@@ -256,10 +276,6 @@ Terms/Privacy drafts approved (yes / with edits / lawyer review first):
 
 === PAYMENT (D7) ===
 How live fees are collected (manual UPI/bank transfer / new online product):
-
-=== HOMEPAGE FAQ (D1 follow-up) ===
-Variant A wording approved for publication (yes / edits):
-Publish it now, before the page launches? (yes / only at launch):
 ```
 
 ---
@@ -267,7 +283,6 @@ Publish it now, before the page launches? (yes / only at launch):
 ## 3. Optional improvements after launch
 
 - Online consultation booking and payment, replacing the email hand-off. This needs a scheduling tool and a payment product (see D7).
-- Course structured data (schema.org `Course`) once real courses are public.
 - Teacher photos for every profile; the page works with initials until then.
 - A waitlist or "notify me" list per course instead of free-text interest requests.
 - Real screen-reader (VoiceOver/NVDA) and physical-device testing. The automated checks cover headless Chrome at 320–1280 px.
@@ -282,3 +297,14 @@ Publish it now, before the page launches? (yes / only at launch):
 - Honest empty states and copy while nothing is published.
 - Accessibility of filters, the profile dialog and the form.
 - Layout at phone, tablet and desktop widths.
+- **One-teacher experience:**
+  - a featured profile layout;
+  - copy that speaks of one teacher;
+  - filters only when there are two or more teachers;
+  - the hero level range computed from published data.
+  The browser suite simulates the launch with the owner's profile published.
+- Course cards link each teacher's name to their profile.
+- **Structured data, built at runtime:**
+  - a FAQPage identical to the visible FAQ;
+  - a `Course` entry for each **published** course, with its published instructor;
+  - no price, date or draft data ever enters it.

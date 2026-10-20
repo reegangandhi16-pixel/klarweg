@@ -6,10 +6,26 @@
 
    The consultation form has no backend: like the contact page it
    hands off to a pre-filled mailto: and says so plainly. It never
-   claims a booking or payment happened.
+   claims a booking or payment happened. Online booking lives in a
+   separate script (kw-consult.js), loaded only when the owner has
+   enabled it in the data file.
    ============================================================ */
 (function () {
   'use strict';
+
+  /* A teacher's rating, computed from genuine, published, evidenced
+     reviews only; null means "No reviews yet". Same rule as
+     reviewSummary() in scripts/live-classes-readiness.mjs. */
+  function reviewSummary(reviews, teacherId) {
+    var ok = (reviews || []).filter(function (r) {
+      return !r.draft && r.teacherId === teacherId && typeof r.rating === 'number' && r.rating % 1 === 0 && r.rating >= 1 && r.rating <= 5
+        && r.evidence != null && String(r.evidence).trim() !== '' && r.permission != null && String(r.permission).trim() !== '';
+    });
+    if (!ok.length) return null;
+    var sum = ok.reduce(function (a, r) { return a + r.rating; }, 0);
+    return { count: ok.length, average: Math.round((sum / ok.length) * 10) / 10 };
+  }
+  window.KWLiveReviews = { summary: reviewSummary };
 
   var D = window.KWLive;
   if (!D) return;
@@ -137,6 +153,29 @@
   /* ---------- teacher directory ---------- */
   var tFilter = { level: '', lang: '', exam: false };
 
+  function reviewText(t) {
+    var r = reviewSummary(D.reviews, t.id);
+    return r ? r.average.toFixed(1) + ' out of 5 · ' + r.count + (r.count === 1 ? ' review' : ' reviews') : 'No reviews yet';
+  }
+
+  /* Same-day consultation availability, as reported by the booking
+     service (kw-consult.js calls applyAvailability). null = not known:
+     no label is shown and the data order is kept. */
+  var availability = null;
+  function availLabel(t) {
+    if (!availability || t.draft) return '';
+    var on = !!(availability[t.id] && availability[t.id].availableToday);
+    return '<p class="t-avail' + (on ? ' on' : '') + '" data-avail="' + (on ? 'today' : 'unavailable') + '">'
+      + (on ? 'Available today' : 'Currently unavailable') + '<span class="t-avail-what"> · same-day consultation</span></p>';
+  }
+  /* Bookable teachers first; otherwise the data order. No other ranking. */
+  function byAvailability(list) {
+    if (!availability) return list;
+    return list.map(function (t, i) { return { t: t, i: i, on: !!(availability[t.id] && availability[t.id].availableToday) }; })
+      .sort(function (a, b) { return (b.on - a.on) || (a.i - b.i); })
+      .map(function (x) { return x.t; });
+  }
+
   function teacherCard(t) {
     var facts = [];
     if (has(t.experience)) facts.push(t.experience);
@@ -149,6 +188,8 @@
       + '<div class="t-body">'
       + '<h3 class="t-name" id="tn-' + esc(t.id) + '">' + esc(t.name) + '</h3>'
       + (has(t.headline) ? '<p class="t-headline">' + esc(t.headline) + '</p>' : '')
+      + availLabel(t)
+      + '<p class="t-reviews">' + esc(reviewText(t)) + '</p>'
       + (has(t.levels) ? levelRow(t.levels) : '')
       + '<ul class="t-facts">' + facts.map(function (f) { return '<li>' + DOT + '<span>' + esc(f) + '</span></li>'; }).join('') + '</ul>'
       + '<div class="t-actions">'
@@ -173,7 +214,7 @@
     document.querySelectorAll('#teachers .filters').forEach(function (f) { f.hidden = few; });
     grid.classList.toggle('single', few);
     if (few) { $('t-count').textContent = ''; grid.innerHTML = teachers.map(teacherCard).join(''); return; }
-    var list = teachers.filter(function (t) {
+    var list = byAvailability(teachers).filter(function (t) {
       if (tFilter.level && (t.levels || []).indexOf(tFilter.level) < 0) return false;
       if (tFilter.lang && (t.teachesIn || []).indexOf(tFilter.lang) < 0) return false;
       if (tFilter.exam && !has(t.goethe) && !has(t.examPrep)) return false;
@@ -267,6 +308,7 @@
       + row('Exam preparation', t.examPrep)
       + row('Formats', (t.formats || []).join(', '))
       + row('Availability', t.availability)
+      + row('Reviews', reviewText(t))
       + row('Live courses', teaches)
       + '</dl>'
       + '<a href="#book" class="btn btn-live" data-book-teacher="' + esc(t.id) + '">Request a consultation with ' + esc(t.draft ? 'this teacher' : t.name.split(' ')[0]) + ' ' + ARROW + '</a>'
@@ -618,6 +660,21 @@
     if (footer) new IntersectionObserver(function (en) { atFooter = en[0].isIntersecting; sync(); }).observe(footer);
   }
 
+  /* Online booking (kw-consult.js) — loaded only once the owner has
+     enabled it in live-classes-data.js; until then nothing extra loads. */
+  window.KWLiveUI = {
+    applyAvailability: function (map) { availability = map || null; renderTeachers(); },
+    teachers: function () { return teachers.filter(function (t) { return !t.draft; }); }
+  };
+  function initOnlineBooking() {
+    var ob = (D.consultation || {}).onlineBooking;
+    if (!ob || ob.enabled !== true) return;
+    var s = document.createElement('script');
+    s.src = 'kw-consult.js';
+    s.defer = true;
+    document.body.appendChild(s);
+  }
+
   function init() {
     initCopy();
     initEmptyCopy();
@@ -632,6 +689,7 @@
     renderQuotes();
     initStructuredData();
     initSticky();
+    initOnlineBooking();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

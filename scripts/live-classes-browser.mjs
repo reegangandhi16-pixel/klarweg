@@ -398,11 +398,26 @@ try {
     const jM = await q(jsonld);
     ok('M structured data: the course lists both published instructors, no template', !!jM && jM.instructors.join('|') === OWNER.name + '|Test Teacher Two' && !/\[[^\]]+\]|Draft/.test(jM.text), JSON.stringify(jM && jM.instructors));
     ok('M the form offers both published teachers', (await q('[...document.getElementById("bf-teacher").options].map(o=>o.text).join("|")')) === 'Help me choose|' + OWNER.name + '|Test Teacher Two');
+    // availability as the booking service would report it: bookable teachers first, factual labels, nothing else re-ranked
+    const names = 'document.querySelectorAll(".t-card .t-name").length && [...document.querySelectorAll(".t-card .t-name")].map(n=>n.textContent).join("|")';
+    ok('M no availability label before the booking service reports', await q('document.querySelectorAll(".t-avail").length===0'));
+    await q('window.KWLiveUI.applyAvailability({"test-two":{availableToday:true}})');
+    ok('M an available teacher sorts first, labelled "Available today"; the other "Currently unavailable"', (await q(names)) === 'Test Teacher Two|' + OWNER.name
+      && (await q('[...document.querySelectorAll(".t-card .t-avail")].map(a=>a.firstChild.textContent).join("|")')) === 'Available today|Currently unavailable', await q(names));
+    await q('window.KWLiveUI.applyAvailability({})');
+    ok('M nobody available: data order kept, every card "Currently unavailable"', (await q(names)) === OWNER.name + '|Test Teacher Two' && (await q('[...document.querySelectorAll(".t-avail")].every(a=>a.dataset.avail==="unavailable")')));
+    ok('M every card states "No reviews yet"', (await q('[...document.querySelectorAll(".t-card .t-reviews")].map(r=>r.textContent).join("|")')) === 'No reviews yet|No reviews yet');
   }
 
   // ---- production: one teacher, so no teacher filter of any kind is shown ----
   await load(L);
   ok('P one published teacher: no level, language or exam filter is visible', await q('[...document.querySelectorAll("[data-tlevel],#t-lang,#t-exam")].every(e=>e.offsetParent===null)'));
+  ok('R the published card says "No reviews yet" and shows no rating or availability label', (await q('document.querySelector(".t-card .t-reviews").textContent')) === 'No reviews yet' && await q('document.querySelectorAll(".t-avail").length===0'));
+  ok('R online booking is off: no booking script, panel or payment SDK loads', await q('![...document.scripts].some(s=>/kw-consult|cashfree/.test(s.src)) && !document.getElementById("consult-online") && !window.KWConsult && !window.Cashfree'));
+  ok('R the profile dialog lists "Reviews: No reviews yet"', await q('(()=>{document.querySelector("[data-profile=reegan-gandhi]").click();const t=[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ");document.getElementById("t-dialog").close();return /Reviews: No reviews yet/.test(t)})()'));
+  // the owner switch loads the booking script (served data edited in the test only; the Worker is not reached here)
+  await load(L, { edits: [['enabled: false,', 'enabled: true,']] });
+  ok('R with onlineBooking.enabled the page loads kw-consult.js', await q('[...document.scripts].some(s=>/kw-consult\\.js$/.test(s.src))'));
 
   // ---- N. without JavaScript: readable FAQ, no dead controls, an email route ----
   for (const [w, mob] of [[375, true], [1280, false]]) {

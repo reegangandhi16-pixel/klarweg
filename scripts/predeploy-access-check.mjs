@@ -28,6 +28,11 @@
         only be 1, 2 or 3.
      7. No [env.*] sections and no CORS_EXTRA_ORIGINS: non-production
         settings live in access/worker/wrangler.nonprod.toml only.
+     8. CONSULT_BOOKING (same-day consultation booking) must be "off"
+        unless --allow-consult-booking=<sandbox|live> names the mode;
+        "sandbox" needs CASHFREE_ENV="sandbox", "live" needs "production".
+        CONSULT_TEACHERS may only name eligible teachers who are published
+        on the Live Classes page (live-classes-data.js).
 
    Usage (from the repo root):
      node scripts/predeploy-access-check.mjs
@@ -45,6 +50,7 @@ const args = process.argv.slice(2);
 const allowEnv = (args.find((a) => a.startsWith('--allow-cashfree-env-change=')) || '').split('=')[1] || null;
 const allowAi = args.includes('--allow-ai-enabled');
 const allowSpeech = (args.find((a) => a.startsWith('--allow-speech=')) || '').split('=')[1] || null;
+const allowConsult = (args.find((a) => a.startsWith('--allow-consult-booking=')) || '').split('=')[1] || null;
 const allowScope = (args.find((a) => a.startsWith('--allow-speech-scope=')) || '').split('=')[1] || null;
 
 function varOf(toml, name) {
@@ -85,6 +91,18 @@ if (wider && allowScope !== scopeKey) fail(`the speech scope is wider than A1·0
 const taskCap = varOf(toml, 'SPEECH_TASK_DAILY_CHECKS');
 if (taskCap !== null && !/^[1-3]$/.test(taskCap)) fail(`SPEECH_TASK_DAILY_CHECKS="${taskCap}" — the per-task daily cap must be 1, 2 or 3.`);
 if (ai === 'true' && !allowAi) fail('AI_ENABLED="true" in wrangler.toml. Enable Klarweg AI deliberately with --allow-ai-enabled once the provider is chosen and the tutor Worker has its key.');
+const consult = (varOf(toml, 'CONSULT_BOOKING') || 'off').toLowerCase();
+const consultTeachers = String(varOf(toml, 'CONSULT_TEACHERS') || '').split(',').map((x) => x.trim()).filter(Boolean);
+if (!['off', 'sandbox', 'live'].includes(consult)) fail(`CONSULT_BOOKING in wrangler.toml is "${consult}" — must be "off", "sandbox" or "live".`);
+if (consult !== 'off' && allowConsult !== consult) fail(`CONSULT_BOOKING="${consult}" in wrangler.toml. Enable consultation booking deliberately with --allow-consult-booking=${consult}.`);
+if (consult === 'sandbox' && env !== 'sandbox') fail('CONSULT_BOOKING="sandbox" needs CASHFREE_ENV="sandbox".');
+if (consult === 'live' && env !== 'production') fail('CONSULT_BOOKING="live" needs CASHFREE_ENV="production" — never take live bookings through sandbox.');
+if (consultTeachers.length) {
+  const { ELIGIBLE_TEACHERS } = await import('../access/worker/src/consultations.js');
+  const published = await import('./live-classes-readiness.mjs').then((m) => m.publishedTeacherIds());
+  const bad = consultTeachers.filter((id) => !ELIGIBLE_TEACHERS.includes(id) || !published.includes(id));
+  if (bad.length) fail(`CONSULT_TEACHERS names ${bad.join(', ')}: only eligible teachers (${ELIGIBLE_TEACHERS.join(', ')}) whose profile is published may be bookable.`);
+}
 /* Non-production settings stay in wrangler.nonprod.toml (docs/exam/NONPROD-SETUP.md).
    An [env.*] section here would put a second set of vars in this file, which the
    first-match reads above could pick up; CORS_EXTRA_ORIGINS widens CORS/CSRF. */
@@ -109,4 +127,4 @@ if (live !== env) {
   console.warn(`! Cashfree environment will change: ${live} → ${env} (explicitly allowed).`);
 }
 
-console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech}, scope "${speechScope.join(',')}" + ${speechChapters.length} listed − ${speechExclude.length} excluded.`);
+console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech}, CONSULT_BOOKING=${consult}, scope "${speechScope.join(',')}" + ${speechChapters.length} listed − ${speechExclude.length} excluded.`);

@@ -62,7 +62,21 @@
         'We reply by email with a confirmed time slot and UPI details to pay the {fee} fee.',
         'Once your payment is confirmed, we email you the joining link.',
         'You meet the teacher, who assesses your level and recommends a course.'
-      ]
+      ],
+      /* Same-day online booking with a ₹100 Cashfree payment
+         (kw-consult.js + the access Worker's /consult routes). OFF: while
+         enabled is false the page loads no booking script and the email
+         request above stays the only way to ask for a consultation.
+         Enabling it is an owner decision (docs/live-classes-consultation-
+         booking.md): the validator refuses enabled: true until all three
+         fields below are recorded. Turning on payments also needs the
+         Worker's CONSULT_BOOKING switch, which is separate and off. */
+      onlineBooking: {
+        enabled: false,
+        ownerApproval: null,        // how and when the owner approved online booking
+        legalTermsUpdated: false,   // Terms §4A, Privacy §4A and this page's copy rewritten for online booking
+        joiningDetails: null        // how the learner receives the Google Meet link, shown on the confirmation
+      }
     },
 
     /* ---------- live-class policies ----------
@@ -289,6 +303,19 @@
        { quote, name, detail (e.g. 'Passed Goethe B1, 2026'),
          permission (how and when consent was given, e.g.
          'Email, 2026-11-02'; kept here, not shown), draft } */
-    testimonials: []
+    testimonials: [],
+
+    /* ---------- reviews ----------
+       Only genuine ratings from real learners of a PUBLISHED teacher,
+       each one traceable to a real consultation or class. The page shows
+       "No reviews yet" until one exists, and otherwise the average and
+       count computed from these entries only: never a typed-in rating,
+       count or badge.
+       { teacherId, rating (whole number 1–5), date ('YYYY-MM-DD'),
+         evidence (the booking reference or batch that proves the learner
+         was taught; kept here, not shown),
+         permission (how and when the learner agreed to publication;
+         not shown), quote (optional), draft } */
+    reviews: []
   };
 })(window);

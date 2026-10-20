@@ -1,0 +1,117 @@
+{
+  "_comment": [
+    "Live Classes teacher candidates named by the owner on 2026-10-20 (11 people, including the owner).",
+    "This repository is PUBLIC. Names and every other personal detail stay in the private roster outside the repository; this file holds opaque ids only.",
+    "A draft candidate carries NO facts: no name, qualification, experience, certificate, language, specialism, photo, bio, review, availability or consent. None was provided, and none may be invented.",
+    "To publish a candidate: follow docs/live-classes-teacher-intake.md (verified details, recorded consent, photoConsent for a photo), add a teacher entry to live-classes-data.js under the teacher's own id, and set status to 'published' with profile pointing at it.",
+    "bookingEligible: only reegan-gandhi and candidate-01 (owner instruction, 2026-10-20). Must match ELIGIBLE_TEACHERS in access/worker/src/consultations.js. Eligible is not bookable: see docs/live-classes-consultation-booking.md."
+  ],
+  "candidates": [
+    {
+      "id": "reegan-gandhi",
+      "status": "published",
+      "bookingEligible": true,
+      "profile": "live-classes-data.js teachers[reegan-gandhi]"
+    },
+    {
+      "id": "candidate-01",
+      "status": "draft",
+      "bookingEligible": true,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    },
+    {
+      "id": "candidate-02",
+      "status": "draft",
+      "bookingEligible": false,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    },
+    {
+      "id": "candidate-03",
+      "status": "draft",
+      "bookingEligible": false,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    },
+    {
+      "id": "candidate-04",
+      "status": "draft",
+      "bookingEligible": false,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    },
+    {
+      "id": "candidate-05",
+      "status": "draft",
+      "bookingEligible": false,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    },
+    {
+      "id": "candidate-06",
+      "status": "draft",
+      "bookingEligible": false,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    },
+    {
+      "id": "candidate-07",
+      "status": "draft",
+      "bookingEligible": false,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    },
+    {
+      "id": "candidate-08",
+      "status": "draft",
+      "bookingEligible": false,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    },
+    {
+      "id": "candidate-09",
+      "status": "draft",
+      "bookingEligible": false,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    },
+    {
+      "id": "candidate-10",
+      "status": "draft",
+      "bookingEligible": false,
+      "profile": null,
+      "consent": null,
+      "photoConsent": null,
+      "availability": null,
+      "reviews": []
+    }
+  ]
+}

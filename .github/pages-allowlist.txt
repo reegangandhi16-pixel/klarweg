@@ -45,6 +45,7 @@ live-classes.html
 kw-access.js
 kw-auth.js
 kw-checkout.js
+kw-consult.js
 kw-config.js
 kw-placement.js
 kw-products.js

@@ -105,15 +105,30 @@
      carries an honest alternative: data-none="teachers|courses" with
      data-none-text (and data-none-href on links). On a button-style link
      only the label changes, so its arrow icon stays. */
+  function swapCopy(el, text, href) {
+    if (href) el.setAttribute('href', href);
+    var label = el.querySelector('.btn-arrow') && el.firstChild && el.firstChild.nodeType === 3 ? el.firstChild : null;
+    if (label) label.nodeValue = text + ' ';
+    else el.textContent = text;
+  }
   function initEmptyCopy() {
     var none = { teachers: !teachers.length, courses: !courses.length };
     document.querySelectorAll('[data-none]').forEach(function (el) {
-      if (!none[el.getAttribute('data-none')]) return;
-      if (el.hasAttribute('data-none-href')) el.setAttribute('href', el.getAttribute('data-none-href'));
-      var text = el.getAttribute('data-none-text');
-      var label = el.querySelector('.btn-arrow') && el.firstChild && el.firstChild.nodeType === 3 ? el.firstChild : null;
-      if (label) label.nodeValue = text + ' ';
-      else el.textContent = text;
+      if (none[el.getAttribute('data-none')]) swapCopy(el, el.getAttribute('data-none-text'), el.getAttribute('data-none-href'));
+    });
+    /* Exactly one teacher: copy written for a directory ("our teachers",
+       "filter the profiles") switches to its data-one-text. */
+    if (teachers.length === 1) document.querySelectorAll('[data-one-text]').forEach(function (el) {
+      swapCopy(el, el.getAttribute('data-one-text'), el.getAttribute('data-one-href'));
+    });
+    /* The hero names only the levels actually covered by the teachers and
+       courses on the page, never a blanket A1–C2. */
+    var lv = [];
+    teachers.concat(courses).forEach(function (x) { (x.levels || []).forEach(function (l) { if (lv.indexOf(l) < 0) lv.push(l); }); });
+    lv = LEVELS.filter(function (l) { return lv.indexOf(l) > -1; });
+    var contiguous = lv.length && LEVELS.indexOf(lv[lv.length - 1]) - LEVELS.indexOf(lv[0]) === lv.length - 1;
+    document.querySelectorAll('[data-live-levels]').forEach(function (el) {
+      el.textContent = !lv.length ? '' : ' · ' + (lv.length === 1 ? lv[0] : contiguous ? lv[0] + ' → ' + lv[lv.length - 1] : lv.join(', '));
     });
   }
 
@@ -151,6 +166,11 @@
       document.querySelectorAll('#teachers .filters').forEach(function (f) { f.hidden = true; });
       return;
     }
+    /* Filters only help when there is something to narrow down. */
+    var few = teachers.length < 2;
+    document.querySelectorAll('#teachers .filters').forEach(function (f) { f.hidden = few; });
+    grid.classList.toggle('single', few);
+    if (few) { $('t-count').textContent = ''; grid.innerHTML = teachers.map(teacherCard).join(''); return; }
     var list = teachers.filter(function (t) {
       if (tFilter.level && (t.levels || []).indexOf(tFilter.level) < 0) return false;
       if (tFilter.lang && (t.teachesIn || []).indexOf(tFilter.lang) < 0) return false;
@@ -286,19 +306,22 @@
 
   /* Known facts render as a definition list; required-but-unknown
      ones collapse into a single "still to be announced" line so a
-     not-yet-scheduled course stays readable. */
+     not-yet-scheduled course stays readable. f[3] marks a value that is
+     already escaped HTML (the teacher profile links). */
   function facts(list) {
     var known = list.filter(function (f) { return has(f[1]); });
     var tba = list.filter(function (f) { return !has(f[1]) && f[2]; }).map(function (f) { return f[0].toLowerCase(); });
     return '<dl class="c-facts">'
-      + known.map(function (f) { return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join('')
+      + known.map(function (f) { return '<div><dt>' + esc(f[0]) + '</dt><dd>' + (f[3] ? f[1] : esc(f[1])) + '</dd></div>'; }).join('')
       + (tba.length ? '<div class="c-tba"><dt>Still to be announced</dt><dd class="tba">' + esc(tba.join(' · ')) + '</dd></div>' : '')
       + '</dl>';
   }
 
   function courseCard(c) {
     var st = STATUS[c.enrolment] || STATUS['not-open'];
-    var tNames = (c.teacherIds || []).map(function (id) { return teacherById[id]; }).filter(Boolean).map(teacherLabel);
+    var tLinks = (c.teacherIds || []).map(function (id) { return teacherById[id]; }).filter(Boolean).map(function (t) {
+      return '<button type="button" class="t-link" data-profile="' + esc(t.id) + '">' + esc(teacherLabel(t)) + '</button>';
+    });
     var schedule = [c.frequency, c.sessionLength].filter(has).join(' · ');
     return '<article class="c-card" aria-labelledby="cn-' + esc(c.id) + '">'
       + '<div class="c-top">'
@@ -310,7 +333,7 @@
       + '<h3 id="cn-' + esc(c.id) + '">' + esc(c.title) + '</h3>'
       + (has(c.objectives) ? '<ul class="c-obj" aria-label="Learning objectives">' + c.objectives.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join('') + '</ul>' : '')
       + facts([
-        [tNames.length > 1 ? 'Teachers' : 'Teacher', tNames.join(', '), true],
+        [tLinks.length > 1 ? 'Teachers' : 'Teacher', tLinks.join(', '), true, true],
         ['Format', c.format, true],
         ['Batch size', c.batchSize, c.format !== 'One-to-one'],
         ['Classes', schedule, true],
@@ -499,6 +522,40 @@
     }).join('');
   }
 
+  /* ---------- structured data ----------
+     Built after the copy is final, from what the page actually shows:
+     the FAQ exactly as rendered (so the markup always matches the visible
+     answers), and a Course entry for each PUBLISHED course only. Drafts
+     never enter it, even in a local preview. No price or date is added
+     here: a course card is the only place those appear. */
+  function initStructuredData() {
+    var norm = function (t) { return String(t || '').replace(/\s+/g, ' ').trim(); };
+    var graph = [];
+    var faq = Array.prototype.slice.call(document.querySelectorAll('.faq-item')).map(function (it) {
+      var q = it.querySelector('.faq-q'), a = it.querySelector('.faq-a-inner');
+      return q && a ? { '@type': 'Question', name: norm(q.textContent), acceptedAnswer: { '@type': 'Answer', text: norm(a.textContent) } } : null;
+    }).filter(function (x) { return x && x.name && x.acceptedAnswer.text; });
+    if (faq.length) graph.push({ '@type': 'FAQPage', mainEntity: faq });
+    var home = new URL('index.html', location.href).href;
+    courses.filter(function (c) { return !c.draft; }).forEach(function (c) {
+      var course = {
+        '@type': 'Course', name: c.title,
+        description: (c.objectives || []).join(' '),
+        educationalLevel: (c.levels || []).join(', '),
+        provider: { '@type': 'Organization', name: 'Klarweg', url: home }
+      };
+      var who = (c.teacherIds || []).map(function (id) { return teacherById[id]; }).filter(function (t) { return t && !t.draft; });
+      if (who.length) course.instructor = who.map(function (t) { return { '@type': 'Person', name: t.name }; });
+      graph.push(course);
+    });
+    if (!graph.length) return;
+    var el = document.createElement('script');
+    el.type = 'application/ld+json';
+    el.id = 'live-jsonld';
+    el.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+    document.head.appendChild(el);
+  }
+
   /* ---------- mobile sticky CTA: after the hero, hidden over #book ---------- */
   function initSticky() {
     var bar = $('sticky-book');
@@ -530,6 +587,7 @@
     initPrefill();
     initForm();
     renderQuotes();
+    initStructuredData();
     initSticky();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

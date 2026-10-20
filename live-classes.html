@@ -21,10 +21,14 @@
     5. Remove the robots noindex meta below and add a canonical link.
     6. If the consultation fee changes, update the two meta descriptions
        below by hand; the visible page copy reads it from the data file.
+       Name a level range there only if published teachers and courses
+       cover it (the hero range is computed from the data).
+    `npm run live:readiness` checks all of the above; see
+    docs/live-classes-launch-readiness.md.
 -->
 <meta name="robots" content="noindex">
 <title>Live Classes · Klarweg — Learn German live with a teacher</title>
-<meta name="description" content="Live, teacher-led German classes from Klarweg — structured instruction, guided speaking and direct feedback, A1 to C2. Start with a ₹100 personal consultation.">
+<meta name="description" content="Live, teacher-led German classes from Klarweg — structured instruction, guided speaking and direct feedback. Start with a ₹100 personal consultation.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Klarweg">
 <meta property="og:title" content="Live Classes · Klarweg — Learn German live with a teacher">
@@ -157,6 +161,23 @@
   .teacher-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
   @media (max-width: 1080px) { .teacher-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 640px) { .teacher-grid { grid-template-columns: minmax(0, 1fr); } }
+  /* One teacher: a featured profile, portrait beside the details. */
+  .teacher-grid.single { grid-template-columns: minmax(0, 1fr); max-width: 880px; }
+  .teacher-grid.single .t-card { flex-direction: row; }
+  .teacher-grid.single .portrait { flex: 0 0 42%; aspect-ratio: auto; min-height: 320px; }
+  .teacher-grid.single .t-body { padding: 36px; }
+  .teacher-grid.single .t-name { font-size: 28px; }
+  .teacher-grid.single .t-actions { flex-wrap: nowrap; }
+  .teacher-grid.single .t-actions .btn { flex: 0 0 auto; }
+  @media (max-width: 720px) {
+    .teacher-grid.single .t-card { flex-direction: column; }
+    .teacher-grid.single .portrait { flex: none; aspect-ratio: 4 / 3; min-height: 0; }
+    /* no photo yet: a short monogram band instead of a tall empty block */
+    .teacher-grid.single .portrait:not(:has(img)) { aspect-ratio: 16 / 7; }
+    .teacher-grid.single .t-body { padding: 24px; }
+    .teacher-grid.single .t-actions { flex-wrap: wrap; }
+    .teacher-grid.single .t-actions .btn { flex: 1 1 auto; }
+  }
   .t-card { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column; transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease); }
   .t-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); border-color: var(--hairline-strong); }
   .portrait { position: relative; aspect-ratio: 4 / 3; background: var(--live-navy); overflow: hidden; }
@@ -225,6 +246,8 @@
   .c-facts dd { margin: 0; font-size: 15px; color: var(--ink-primary); }
   .c-facts .tba { color: var(--ink-tertiary); font-style: italic; }
   .c-facts .c-tba { grid-column: 1 / -1; }
+  .c-facts .t-link { font: inherit; color: var(--ink-primary); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--live-gold); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .c-facts .t-link:hover { color: var(--live-gold-deep); }
   .c-price { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; padding: 16px 24px; border-radius: var(--r-md); background: var(--bg-elevated); margin-bottom: 24px; }
   .c-price-label { font-size: 13px; color: var(--ink-tertiary); }
   .c-price-val { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
@@ -404,12 +427,12 @@
     <div>
       <div class="eyebrow-row" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px">
         <span class="pill pill-live"><span class="pill-dot"></span> Live Classes</span>
-        <span class="eyebrow">Teacher-led · Online · A1 → C2</span>
+        <span class="eyebrow">Teacher-led · Online<span data-live-levels></span></span>
       </div>
       <h1 class="display-xl">Learn German live. <span class="accent">Speak with confidence.</span></h1>
       <p class="lede">Structured classes with a real teacher who explains the grammar, gets you speaking from the first session, and corrects you as you go. Goethe exam preparation is available where your level needs it.</p>
       <div class="hero-ctas">
-        <a href="#teachers" class="btn btn-live" data-none="teachers" data-none-href="#book" data-none-text="Book a consultation">Explore our teachers
+        <a href="#teachers" class="btn btn-live" data-none="teachers" data-none-href="#book" data-none-text="Book a consultation" data-one-text="Meet your teacher">Explore our teachers
           <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="#courses" class="btn btn-secondary" data-none="courses" data-none-href="#how" data-none-text="How live classes work">Explore live courses</a>
@@ -457,7 +480,7 @@
     <div class="section-head">
       <span class="eyebrow">Two ways to learn with Klarweg</span>
       <h2 class="display-md" id="compare-h">Self-paced or live. Different tools for different needs.</h2>
-      <p class="lede">Both follow the CEFR levels from A1 to C2. Choose the one that fits how you learn and how much time you have. You can also use both.</p>
+      <p class="lede">Both are organised by CEFR level. Self-paced courses cover A1 to C2; each live course lists its own level. Choose the one that fits how you learn and how much time you have. You can also use both.</p>
     </div>
     <div class="ways">
       <article class="card way">
@@ -493,9 +516,9 @@
   <div class="container">
     <div class="section-head">
       <span class="rule-gold" aria-hidden="true"></span>
-      <span class="eyebrow">The teachers</span>
-      <h2 class="display-md" id="teachers-h">Find the teacher who fits your goal.</h2>
-      <p class="lede" data-none="teachers" data-none-text="Each profile will show the levels, teaching languages and exam experience a teacher actually has. Profiles are published only once those details are confirmed.">Compare levels, teaching languages and exam experience, then open a profile for the full picture.</p>
+      <span class="eyebrow" data-one-text="Your teacher">The teachers</span>
+      <h2 class="display-md" id="teachers-h" data-one-text="Meet your teacher.">Find the teacher who fits your goal.</h2>
+      <p class="lede" data-none="teachers" data-none-text="Each profile will show the levels, teaching languages and exam experience a teacher actually has. Profiles are published only once those details are confirmed." data-one-text="Levels taught, teaching languages, certificates and exam experience, exactly as the teacher has confirmed them. Open the profile for the full picture.">Compare levels, teaching languages and exam experience, then open a profile for the full picture.</p>
     </div>
 
     <div class="filters" role="group" aria-label="Filter teachers">
@@ -734,7 +757,7 @@
     <div class="faq">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="fa1">How do live courses differ from self-paced courses?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa1"><div class="faq-a-inner">They are separate products. <a href="courses.html">Self-paced courses</a> are Klarweg's chapter-based lessons you work through on your own, any time. Live courses are scheduled online classes with a teacher, focused on speaking, correction and a fixed structure. Each is priced and purchased separately, and buying one doesn't include the other.</div></div>
+        <div class="faq-a" id="fa1"><div class="faq-a-inner">They are separate products. <a href="courses.html">Self-paced courses</a> are Klarweg's chapter-based lessons you work through on your own, any time. Live courses are scheduled online classes with a teacher, focused on speaking, correction and a fixed structure. Each is priced separately, and what a live course includes is confirmed with you in writing before you pay.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="fa2">Which German level should I start with?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -742,7 +765,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="fa3">How do I choose a teacher?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa3"><div class="faq-a-inner" data-none="teachers" data-none-text="Teacher profiles appear on this page once each teacher’s qualifications are confirmed. Until then, book a consultation and tell us your goal, level and preferred times, and we’ll suggest a suitable teacher.">Filter the <a href="#teachers">teacher profiles</a> by the level you need, the language you'd like explanations in, and exam experience. If you're unsure, choose “Help me choose” in the consultation form and we'll suggest a teacher based on your goal.</div></div>
+        <div class="faq-a" id="fa3"><div class="faq-a-inner" data-none="teachers" data-none-text="Teacher profiles appear on this page once each teacher’s qualifications are confirmed. Until then, book a consultation and tell us your goal, level and preferred times, and we’ll suggest a suitable teacher." data-one-text="Live classes are currently taught by one teacher, whose profile is above: the levels taught, teaching languages and exam experience are all listed there. If you’re unsure whether the classes fit your goal, request a consultation and talk it through first.">Filter the <a href="#teachers">teacher profiles</a> by the level you need, the language you'd like explanations in, and exam experience. If you're unsure, choose “Help me choose” in the consultation form and we'll suggest a teacher based on your goal.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="fa4">What happens during the consultation?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>

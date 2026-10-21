@@ -58,6 +58,28 @@ Payment is by **manual UPI or bank transfer**, on a payment request sent by emai
 - Live fees **do not** use the Cashfree checkout. Every paid Cashfree order is fulfilled by `grantProduct()`, which unlocks self-paced content. A static test keeps live products out of that catalogue.
 - No payment backend is built for the first batch.
 
+### D9 · A1 course fee per teacher (owner, 2026-10-21)
+
+The fee for the A1 course with each teacher, shown on that teacher's row of the Live Classes page. It is set in one place, `coursePricing` in `live-classes-data.js`.
+
+| Teacher (id in `live-classes-data.js`) | A1 course fee |
+|---|---|
+| `reegan-gandhi` | ₹7,999 |
+| `geetika-dhawan` | ₹7,999 |
+| `priyanshi-verma` | ₹15,000 |
+| `sunidhi-jain` | ₹14,000 |
+| `mansi-kapoor` | ₹13,000 |
+| `gaurav-singhal` | ₹12,000 |
+| `kanika-taneja` | ₹14,000 |
+| `trisha-khanna` | ₹13,000 |
+| `rashi-gupta` | ₹12,000 |
+| `deepika-agarwal` | ₹13,000 |
+| `sahil-arora` | ₹15,000 |
+
+- **No crossed-out price is shown.** For `reegan-gandhi` and `geetika-dhawan` the owner also named an "original price" of 15000. The page shows only ₹7,999. A struck-through reference price is shown only once the owner confirms the course was actually sold at that price; otherwise it would be an invented discount.
+- Enrolment rules are unchanged: `live-a1` is a waitlist, and no course fee is taken on the page (D7).
+- The validator requires `reegan-gandhi`'s fee to equal the published `live-a1` fee.
+
 ---
 
 ## B. Still pending

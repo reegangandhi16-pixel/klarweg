@@ -30,6 +30,10 @@
        also ignores it on any host other than localhost / 127.0.0.1 /
        file://, so a forgotten `true` can never reach the live site. */
     showDrafts: false,
+    /* true shows the SAMPLE ratings in live-classes-sample-data.js, and
+       only on localhost: a design preview, never genuine reviews. The
+       sample file is not published (not in the Pages allowlist). */
+    previewSampleRatings: false,
 
     /* The site's documented address, as on contact.html, privacy.html
        and terms.html (the old klarweg-domain inbox is retired). */
@@ -107,6 +111,28 @@
        required for a published teacher (photoConsent only with a photo)
        and are never shown on the page.
        Checked by scripts/live-classes-readiness.mjs. */
+    /* ---------- A1 course fee per teacher (decision sheet D9) ----------
+       The one place these prices are set; each teacher's row and
+       profile read them from here. Only the current fee is shown: no
+       discount or crossed-out "original" price (D9). Checked by
+       scripts/live-classes-readiness.mjs. */
+    coursePricing: {
+      label: 'A1 course',
+      teachers: {
+        'reegan-gandhi': '₹7,999',
+        'geetika-dhawan': '₹7,999',
+        'priyanshi-verma': '₹15,000',
+        'sunidhi-jain': '₹14,000',
+        'mansi-kapoor': '₹13,000',
+        'gaurav-singhal': '₹12,000',
+        'kanika-taneja': '₹14,000',
+        'trisha-khanna': '₹13,000',
+        'rashi-gupta': '₹12,000',
+        'deepika-agarwal': '₹13,000',
+        'sahil-arora': '₹15,000'
+      }
+    },
+
     teachers: [
       {
         /* The owner's own profile, PUBLISHED. Confirmed by the owner

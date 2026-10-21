@@ -26,6 +26,7 @@ Don't announce new teachers, recruitment or "more teachers joining soon" on the 
 - A listed card shows only the name, the title "German Language Teacher", "No reviews yet", and levels where the owner stated them (`candidate-01`: A1–B1). It has a monogram, no photo, no profile dialog and no booking or consultation action, and the teacher is not offered in the consultation form.
 - The validator (`LISTED_KEYS` in `scripts/live-classes-readiness.mjs`) refuses anything else on a listed card: experience, qualifications, certificates, headline, languages, formats, ratings or availability.
 - To upgrade a listed teacher to a full profile, run this guide's intake under the same id. The intake script accepts a listed id.
+- **Prices and ratings (2026-10-21).** Each row shows the A1 course fee from `coursePricing` in `live-classes-data.js` (decision sheet D9; no crossed-out price). Ratings come only from genuine, permission-backed `reviews`. Otherwise the row says "No reviews yet". The owner's sample ratings are in `live-classes-sample-data.js`: they appear only on localhost with `previewSampleRatings: true`, are flagged "Sample data · preview only", and the file is never published.
 - **Legal pages not yet updated:** Terms §4A ("Live classes and consultations are taught online by Klarweg's owner") and Privacy §4A ("Live classes and consultations are taught by Klarweg's owner…") now contradict the listed teachers. They need owner-approved wording; this change does not edit them.
 
 

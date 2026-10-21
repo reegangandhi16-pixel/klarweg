@@ -1,6 +1,7 @@
 # Lesen-only release: every remaining blocker, in order
 
-> **Status:** 2026-10-20, verified on main `45d3423` (PR #157), updated by PR #159. Nothing
+> **Status:** 2026-10-20, verified on main `45d3423` (PR #157), updated by PR #159; re-verified 2026-10-21 on main
+> `cf73039` (exam suite 523 pass / 0 fail / 3 opt-in skips; release tool still refuses P3/P8/P13). Nothing
 > here is satisfied unless it says so with evidence. The public learner portal stays unavailable until every row in
 > A–D is closed. Production today: exam Worker flags all `off`; no `EXAM` binding or `EXAM_ROUTES` in klarweg-access;
 > no `exam/` in the Pages allowlist.
@@ -11,12 +12,17 @@ Order = what unblocks the most, soonest. "Who" is the only party that can close 
 | Prio | Item | Who | Blocks |
 |---|---|---|---|
 | 1 | ~~D1 adopt Lesen-only scope · D2 candidate forms~~ **answered 2026-10-20** (yes, subject to all gates; P3+P8+P13) | Owner | — |
-| 2 | D3/D6 answered in principle (independent coordinator; engineering runs the record checks; reviewers not yet appointed). C1 and C2 answered 2026-10-20: the owner publishes the coordinator post; quotes first, written approval per engagement (`REVIEW-APPOINTMENT-PLAN.md` §4–§8). **Open: the owner publishes the post, then approves each quote in writing** | Owner | Every external review (§B) |
+| 2 | D3/D6: **coordinator withdrawn 2026-10-21**; Claude organises within `REVIEW-APPOINTMENT-PLAN.md` §10. C2 unchanged: quotes first, written approval per engagement (§8). **Open: the owner approves each quote in writing** | Owner | Every external review (§B) |
 | 3 | D7 attempt-data retention | Owner (with EX-01) | EX-01 sign-off; the deletion job (§C) |
 | 4 | D4 OD-08 wording · D5 OD-41 accommodations | Owner | Release decision |
 | 5 | D8 OD-20 same-site domain | Owner | Pilot and launch (register §G.1/§G.2) |
 
-## B. Independent external reviews (drafts: `EXTERNAL-REVIEW-OUTREACH.md`; none contacted)
+## B. Independent external reviews (drafts: `EXTERNAL-REVIEW-OUTREACH.md`)
+Status 2026-10-21: non-binding quote requests sent for EX-03 (one A/B candidate and two slot C candidates), EX-04, EX-05
+(quote only; no testing authorised), EX-07 (India only) and EX-01 (scope advice only). Candidates and replies are tracked
+privately, never here. **Nobody is appointed, no quote is accepted and no review has started.** EX-03 slot A/B needs at
+least one more candidate from a different organisation.
+
 | Prio | Review | Deliverable that closes it | Blocks |
 |---|---|---|---|
 | 1 | EX-03 content: three people (A, B teachers; C native linguist), 90 Lesen items of P3/P8/P13 | Three valid records per form with `lesen: approved` (`review-status.mjs`) | Every learner form. The release tool refuses without these records |
@@ -51,6 +57,6 @@ Done and evidenced (not blockers):
 
 ## Smallest set of owner actions to get moving
 1. ~~Send the D1–D9 reply~~: D1, D2, D3 and D6 answered on 2026-10-20.
-2. ~~Answer C1 and C2~~ (done). Review and publish the coordinator post (`REVIEW-APPOINTMENT-PLAN.md` §5), and send the quote request with each invitation.
+2. ~~Answer C1 and C2~~ (done). ~~Publish the coordinator post~~ (withdrawn 2026-10-21; quote requests sent by Claude).
 3. Approve each quote in writing (§8). EX-01 waits for D7; EX-05 also needs the signed authorisation (§9).
 4. Later, after the deliverables: D9.

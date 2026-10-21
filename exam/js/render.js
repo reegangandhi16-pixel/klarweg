@@ -312,11 +312,12 @@ export function resultPage(result) {
     const verdict = m.status === 'final' ? (m.pass ? 'bestanden' : 'nicht bestanden') : m.status === 'not_taken' ? 'nicht abgelegt' : 'in Bewertung';
     const band = m.status === 'final' && m.predikat && m.predikat !== verdict ? ` · ${esc(m.predikat)}` : '';
     const counts = m.counts ? `richtig ${esc(m.counts.correct)} · falsch ${esc(m.counts.incorrect)} · ohne Antwort ${esc(m.counts.unanswered)}` : '';
-    const note = RESULT_NOTES[m.status] || '';
+    const note = [RESULT_NOTES[m.status] || '', m.submit_kind === 'auto_deadline' ? 'Zeit abgelaufen – automatisch abgegeben.' : ''].filter(Boolean).join(' ');
     return `<tr><th scope="row">${esc(MODULE_LABELS[m.module] || m.module)}</th><td>${pts}</td><td>${esc(verdict)}${band}</td><td>${[counts, esc(note)].filter(Boolean).join('<br>')}</td></tr>`;
   }).join('');
   return `<main class="kx-result" aria-labelledby="kx-result-title"><p class="kx-eyebrow">${result.test_content ? 'Übung · synthetische Inhalte' : 'Simulation'}</p>`
     + `<h1 id="kx-result-title">${esc(RESULT_TITLE)}</h1>`
     + `<table class="kx-table"><caption>Ergebnisse je Modul (kein Gesamtergebnis)</caption><thead><tr><th scope="col">Modul</th><th scope="col">Punkte</th><th scope="col">Status</th><th scope="col">Details</th></tr></thead><tbody>${rows}</tbody></table>`
+    + (result.pass_points ? `<p class="kx-result-pass">Bestanden ab ${esc(result.pass_points)} Punkten je Modul.</p>` : '')
     + `<p class="kx-disclaimer">${esc(RESULT_DISCLAIMER)} Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.</p></main>`;
 }

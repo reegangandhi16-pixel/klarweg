@@ -54,6 +54,9 @@ export class Autosave {
         this.inflight = null;
         const code = e && e.code;
         if (['lease_superseded', 'lease_expired', 'module_submitted', 'deadline_passed', 'module_not_running'].includes(code)) { this.setState('stopped'); this.onFatal(code); return; }
+        // signed out (session expired, ENGINE §8): retrying cannot help; the queued answers stay persisted on this device
+        // and are sent after the learner signs in again and resumes
+        if (code === 'auth_required' || code === 'exam_access_required') { this.setState('stopped'); this.onFatal(code); return; }
         if (DROP_CODES.includes(code)) {
           for (const b of batch) if (this.pending[b.item_id] && this.pending[b.item_id].seq === b.seq) delete this.pending[b.item_id];
           await this.persist();

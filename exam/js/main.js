@@ -33,7 +33,10 @@ function rememberLease(id, l) { try { sessionStorage.setItem(leaseKey(id), l); }
 
 function screen(html) { app.innerHTML = html; const h = app.querySelector('h1, h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
 function message(title, body, actions = '') { screen(`<main class="kx-card"><h1>${esc(title)}</h1><p>${esc(body)}</p><div class="kx-actions">${actions}</div></main>`); }
-function showError(v) { message(v.title, v.body, v.actions.map((a) => `<button class="kx-btn" data-act="${esc(a.act)}">${esc(a.label)}</button>`).join('')); }
+function showError(v) {
+  const links = (v.links || []).map((l) => `<a class="kx-btn kx-btn-quiet" href="${esc(l.href)}"${l.newTab ? ' target="_blank" rel="noopener"' : ''}>${esc(l.label)}</a>`).join('');
+  message(v.title, v.body, links + v.actions.map((a) => `<button class="kx-btn" data-act="${esc(a.act)}">${esc(a.label)}</button>`).join(''));
+}
 function fail(e) {
   const code = e instanceof ExamApiError ? e.code : 'network';
   showError(errorView(e instanceof ExamApiError ? { code, status: e.status } : { code }));
@@ -118,7 +121,7 @@ function startHeartbeat() {
   S.hb = setInterval(async () => {
     const sent = S.lease;
     try { const r = await api.heartbeat(S.attempt.attempt_id, sent); const before = S.module; S.attempt = r; const m = r.modules.find((x) => x.module === before); if (before && m && m.status === 'submitted') route(); }
-    catch (e) { if (e.code === 'lease_superseded') { clearInterval(S.hb); fail(e); } else if (e.code === 'lease_expired') onLeaseExpired(sent); }
+    catch (e) { if (e.code === 'lease_superseded' || e.code === 'auth_required' || e.code === 'exam_access_required') { clearInterval(S.hb); clearInterval(S.timer); fail(e); } else if (e.code === 'lease_expired') onLeaseExpired(sent); }
   }, 15_000);
 }
 
@@ -166,7 +169,8 @@ async function openModule(module) {
   S.autosave = new Autosave({
     key: `answers:${id}:${module}`, store: S.store,
     send: (batch, requestId) => api.save(id, S.lease, module, batch, requestId),
-    onState: (st) => { const say = saveAnnouncement(S.saveState, st); S.saveState = st; if (say) announce(say); paintHeader(); }, onFatal: (code) => { console.warn('[kx-autosave]', 'stopped', { code }); if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else if (code === 'lease_expired') onLeaseExpired(); else refresh(); },
+    onState: (st) => { const say = saveAnnouncement(S.saveState, st); S.saveState = st; if (say) announce(say); paintHeader(); }, onFatal: (code) => { console.warn('[kx-autosave]', 'stopped', { code }); if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else if (code === 'lease_expired') onLeaseExpired();
+      else if (code === 'auth_required' || code === 'exam_access_required') { clearInterval(S.hb); clearInterval(S.timer); fail(new ExamApiError(code === 'auth_required' ? 401 : 403, code)); } else refresh(); },
     onDropped: (code, batch) => syncFromServer(batch.map((b) => b.item_id)).then(() => {
       if (code === 'topic_locked') { announce('Die Themenwahl ist gesperrt. Ihre Änderung wurde nicht gespeichert.'); applyTopicLock(false); }
     }).catch(() => {})

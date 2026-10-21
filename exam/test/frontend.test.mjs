@@ -565,7 +565,11 @@ test('ERROR SCREENS: only a network or server failure is called an interrupted c
   assert.equal(errorView({ code: 'exam_access_required', status: 403 }).title, 'Nicht verfügbar');
   assert.equal(errorView({ code: 'rate_limited', status: 429 }).title, 'Bitte kurz warten');
   assert.deepEqual(errorView({ code: 'lease_superseded', status: 409 }).actions, [{ act: 'takeover', label: 'Hier fortsetzen' }]);
-  assert.deepEqual(errorView({ code: 'auth_required', status: 401 }).actions, []);
+  // ENGINE §8: sign in again in a new tab, then continue in this tab
+  const auth = errorView({ code: 'auth_required', status: 401 });
+  assert.deepEqual(auth.actions, [{ act: 'reload', label: 'Weiter' }]);
+  assert.deepEqual(auth.links, [{ href: '../account/index.html', label: 'In neuem Tab anmelden', newTab: true }]);
+  assert.match(auth.body, /Gespeicherte Antworten bleiben erhalten/);
   // any other refusal: no claim about a lost connection or a local queue
   for (const code of ['module_locked', 'another_module_running', 'review_not_available', 'some_new_code']) {
     const v = errorView({ code, status: 409 });
@@ -574,7 +578,8 @@ test('ERROR SCREENS: only a network or server failure is called an interrupted c
   // every view is used through fail(): escaped buttons, no browser dialog
   const main = fs.readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
   assert.match(main, /function fail\(e\) \{\s*const code = e instanceof ExamApiError \? e\.code : 'network';\s*showError\(errorView\(e instanceof ExamApiError \? \{ code, status: e\.status \} : \{ code \}\)\);/);
-  assert.match(main, /function showError\(v\) \{ message\(v\.title, v\.body, v\.actions\.map\(\(a\) => `<button class="kx-btn" data-act="\$\{esc\(a\.act\)\}">\$\{esc\(a\.label\)\}<\/button>`\)\.join\(''\)\); \}/, 'buttons escaped');
+  assert.match(main, /<button class="kx-btn" data-act="\$\{esc\(a\.act\)\}">\$\{esc\(a\.label\)\}<\/button>/, 'buttons escaped');
+  assert.match(main, /<a class="kx-btn kx-btn-quiet" href="\$\{esc\(l\.href\)\}"\$\{l\.newTab \? ' target="_blank" rel="noopener"' : ''\}>\$\{esc\(l\.label\)\}<\/a>/, 'links escaped, new tab with noopener');
   assert.equal(/Verbindung unterbrochen/.test(main), false, 'the copy lives in render.js only');
 });
 
@@ -587,7 +592,8 @@ test('LEASE EXPIRY (static): an expired lease is reacquired like a reload (no ta
   // lease and wrongly show the takeover screen)
   assert.match(main, /if \(staleLease && staleLease !== S\.lease && !reacquiring\) return Promise\.resolve\(null\);/);
   assert.match(main, /const err = await reacquireLease\(lease\);/);
-  assert.match(main, /else if \(code === 'lease_expired'\) onLeaseExpired\(\); else refresh\(\);/, 'autosave path');
+  assert.match(main, /else if \(code === 'lease_expired'\) onLeaseExpired\(\);/, 'autosave path');
+  assert.match(main, /else if \(code === 'auth_required' \|\| code === 'exam_access_required'\) \{ clearInterval\(S\.hb\); clearInterval\(S\.timer\); fail\(/, 'signed out: the sign-in screen, not a retry loop');
   assert.match(main, /if \(!reacquiring\) reacquiring = /, 'single-flight');
   assert.match(main, /e\.code === 'lease_held' \? new ExamApiError\(409, 'lease_superseded'\)/, 'another tab took it meanwhile: the takeover screen');
   // every api method that takes the lease is wrapped (one retry with the new lease)
@@ -823,4 +829,24 @@ test('PRE-CHECKS (ENGINE §10): environment notes only when needed; microphone c
   const main = read('exam/js/main.js');
   assert.match(main, /b\.dataset\.module === 'hoeren' && \$\('#kx-tone-heard'\) && !\$\('#kx-tone-heard'\)\.checked/, 'no Hören start before the audio check');
   assert.match(main, /b\.dataset\.module === 'sprechen' && \$\('#kx-mic-msg'\) && !S\.micOk/, 'no Sprechen start before the microphone check');
+});
+
+test('AUTOSAVE signed out (ENGINE §8): auth_required stops retrying, keeps the queued answer on the device and hands over to the sign-in screen', async () => {
+  const store = memoryStore(); const fatal = []; const timers = [];
+  const a = new Autosave({ key: 'k', store, debounceMs: 0, send: async () => { throw new ExamApiError(401, 'auth_required'); },
+    onFatal: (c) => fatal.push(c), setTimer: (fn, ms) => { timers.push(ms); return 1; }, clearTimer: () => {} });
+  await a.load([]);
+  await a.set('itm:x', { option_id: 'a' });
+  timers.length = 0;
+  await a.flush();
+  assert.deepEqual(fatal, ['auth_required']);
+  assert.equal(a.state, 'stopped');
+  assert.deepEqual(timers, [], 'no retry loop while signed out');
+  assert.deepEqual(Object.keys((await store.get('k')).pending), ['itm:x'], 'the answer stays queued for after the sign-in');
+  // a fresh queue after resuming sends it
+  const sent = [];
+  const b = new Autosave({ key: 'k', store, debounceMs: 0, send: async (batch) => { sent.push(...batch); return { results: batch.map((x) => ({ item_id: x.item_id, current_seq: x.seq })) }; } });
+  await b.load([]); await b.flush();
+  assert.deepEqual(sent.map((x) => [x.item_id, x.value.option_id]), [['itm:x', 'a']]);
+  assert.equal(b.hasPending(), false);
 });

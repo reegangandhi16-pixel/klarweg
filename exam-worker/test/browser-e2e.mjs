@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|review-form runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|review-form runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -1395,6 +1395,74 @@ async function runPartPractice() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* ACCESS-ADMIN (OD-18): an exam_admin grants a user without access, the user can then start a practice, the admin
+   revokes it and the user is refused again; a learner opening the admin screen is refused by the server. */
+async function runAccessAdmin() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase() });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable'); await send('Log.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const text = () => evaluate('document.body.innerText');
+    const waitFor = async (src, ms = 15000, label = src) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+    };
+    const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
+    const A = makeA11y({ send, evaluate });
+    const base = `http://127.0.0.1:${dev.port}/exam/`;
+    const as = async (alias, page) => { await send('Page.navigate', { url: `${base}dev/as/${alias}` }); await sleep(300); if (page) await send('Page.navigate', { url: base + page }); };
+    const target = dev.users.outsider;
+
+    await vp(1280, 800, false);
+    // a learner on the admin screen: the server refuses, the page says so
+    await as('learner', `admin.html?user=${target}`);
+    await waitFor(`/Nur die Prüfungsverwaltung/.test(document.body.innerText)`, 15000, 'learner refused');
+    // the user has no access yet
+    await as('outsider');
+    await waitFor(`/nicht freigeschaltet/.test(document.body.innerText)`, 15000, 'no access before the grant');
+    // grant
+    await as('access', `admin.html?user=${target}`);
+    await waitFor(`document.querySelector('form[data-form="grant"]')`, 15000, 'admin screen');
+    assert.match(await text(), /Noch kein Zugang erteilt/);
+    await A.a11y('access admin (empty)');
+    await evaluate(`(() => { const f = document.querySelector('form[data-form="grant"]'); f.querySelector('#kx-scope').value = 'synthetic'; f.querySelector('#kx-reason').value = 'E2E Pilot'; f.requestSubmit(); })()`);
+    await waitFor(`/Zugang erteilt\./.test(document.body.innerText) && document.querySelector('form[data-form="revoke"]')`, 15000, 'granted');
+    assert.match(await text(), /Wirksam: B1: Übungen \(synthetisch\)/);
+    const row = await dev.env.DB.prepare('SELECT granted_by, reason, revoked_at FROM exam_access WHERE user_id = ?1').bind(target).first();
+    assert.deepEqual([row.granted_by, row.reason, row.revoked_at], [dev.users.access, 'E2E Pilot', null]);
+    await A.a11y('access admin (granted)');
+    // the user can now start
+    await as('outsider');
+    await waitFor(`document.querySelector('[data-act="create"]')`, 15000, 'start screen after the grant');
+    // revoke
+    await as('access', `admin.html?user=${target}`);
+    await waitFor(`document.querySelector('form[data-form="revoke"]')`, 15000, 'revoke form');
+    await evaluate(`(() => { const f = document.querySelector('form[data-form="revoke"]'); f.querySelector('input[name="reason"]').value = 'E2E Ende'; f.requestSubmit(); })()`);
+    await waitFor(`/Zugang widerrufen\./.test(document.body.innerText) && !document.querySelector('form[data-form="revoke"]')`, 15000, 'revoked');
+    assert.match(await text(), /widerrufen .*E2E Ende/);
+    assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action IN ('access_granted', 'access_revoked')").first()).n, 2);
+    await vp(390, 844, true); await sleep(200);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'admin screen: no horizontal scroll at 390 px');
+    await A.a11y('access admin (mobile)');
+    await vp(1280, 800, false);
+    await as('outsider');
+    await waitFor(`/nicht freigeschaltet/.test(document.body.innerText)`, 15000, 'refused after revocation');
+    assert.deepEqual(A.findings, [], `automated accessibility findings on ${A.screens.join(', ')}`);
+    const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    const csp = b.events.filter((e) => e.method === 'Log.entryAdded' && /Content Security Policy/i.test(e.params.entry.text || '')).map((e) => e.params.entry.text);
+    assert.deepEqual(csp, [], 'no CSP violations');
+    log('access-admin', 'PASS', {});
+    return exceptions;
+  } finally { b.close(); dev.server.close(); }
+}
+
 /* REVIEW-FORM: the offline EX-03 review form (exam-content/tools/review-form.mjs) in a real browser, opened from a file
    like a reviewer would. Fill slot A for every Lesen item through the page, then check: the counter reaches complete;
    the record kept in the browser passes the same checker the organiser uses; a reload restores it; slot C shows only
@@ -1453,12 +1521,13 @@ async function runReviewForm() {
 }
 
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['review-form', runReviewForm, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['review-form', runReviewForm, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
   if (name === 'review-form') { results.push({ vp: `review form ${PRACTICE.name} (Lesen, file://)`, uncaught: await fn() }); continue; }
   if (name === 'lesen-only') { results.push({ vp: `lesen-only ${PRACTICE.name} (mobile start + desktop)`, uncaught: await fn() }); continue; }
+  if (name === 'access-admin') { results.push({ vp: 'access-admin (grant, use, revoke)', uncaught: await fn() }); continue; }
   if (name === 'part-practice') { results.push({ vp: 'part-practice (mobile start + desktop result)', uncaught: await fn() }); continue; }
   if (name === 'rater-2fa') { results.push({ vp: `rater 2FA ${PRACTICE.name}`, uncaught: await fn() }); continue; }
   if (name === 'two-tabs') { results.push({ vp: `two tabs ${PRACTICE.name}`, uncaught: await fn() }); continue; }

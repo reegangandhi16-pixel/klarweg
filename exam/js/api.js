@@ -50,6 +50,11 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     mfaEnroll: () => once('POST', '/auth/mfa/enroll', { body: {} }),
     mfaConfirm: (code) => once('POST', '/auth/mfa/enroll/confirm', { body: { code } }),
     mfaVerify: (b) => once('POST', '/auth/mfa/verify', { body: b }),
+    /* exam-access management (exam_admin, OD-18). Writes are never retried automatically: the server refuses a
+       duplicate grant / second revoke (409), and the page reloads the list instead. */
+    accessInspect: (userId) => call('GET', `/exam/v1/admin/access?user_id=${encodeURIComponent(userId)}`),
+    accessGrant: (b) => once('POST', '/exam/v1/admin/access/grants', { body: b }),
+    accessRevoke: (grantId, reason) => once('POST', `/exam/v1/admin/access/grants/${encodeURIComponent(grantId)}/revoke`, { body: { reason } }),
     availability: () => call('GET', '/exam/v1/availability'),
     createAttempt: (b) => call('POST', '/exam/v1/attempts', { body: rq(b) }),
     getAttempt: (id) => call('GET', att(id)),

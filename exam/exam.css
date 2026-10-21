@@ -109,6 +109,16 @@ p { margin: 0 0 16px; }
 .kx-part-construct { font-weight: 400; font-size: 14px; color: var(--ink-secondary); }
 .kx-part-result-title { font: 500 22px/1.3 var(--font-display); margin-bottom: 8px; }
 .kx-part-result-score { font: 600 28px/1.2 var(--font-ui); font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+.kx-admin form { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin: 16px 0; }
+.kx-admin label { display: block; width: 100%; font-weight: 500; }
+.kx-admin input, .kx-admin select { min-height: 44px; font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); max-width: 100%; }
+/* form fields always show focus (a date field focuses its inner segments, which :focus-visible on the field misses) */
+.kx-admin input:focus, .kx-admin input:focus-within, .kx-admin select:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+.kx-admin .kx-admin-lookup input { flex: 1 1 320px; font-family: var(--font-mono); }
+.kx-admin-grant label { width: auto; flex: 1 1 100%; }
+.kx-admin-revoke { margin: 0; flex-wrap: nowrap; }
+.kx-admin-audit { padding-left: 24px; }
+.kx-error[hidden] { display: none; }
 .kx-result-actions { max-width: 680px; margin: 0 auto 36px; }
 .kx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .kx-rated .kx-table-wrap { margin-top: 16px; }

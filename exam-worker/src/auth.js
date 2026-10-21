@@ -5,7 +5,7 @@
    the browser sent, so a client cannot assert an identity. */
 import { fail, timingSafeEqualStr, now } from './http.js';
 
-const USER_RE = /^usr_[0-9a-f-]{36}$/;
+export const USER_RE = /^usr_[0-9a-f-]{36}$/;
 
 export function verifyProxy(request, env) {
   const secret = env.EXAM_PROXY_SECRET;

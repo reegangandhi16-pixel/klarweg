@@ -10,7 +10,7 @@ exam content, no real audio and no learner data.
 |---|---|---|
 | Content source + tools | `exam-content/` (level config, schema, synthetic form, validator, release builder) | repo only |
 | Exam Worker `klarweg-exam` | `exam-worker/` (`workers_dev = false`; no public route) | **not created** |
-| Exam DB (D1 `klarweg-exam`) | `exam-worker/migrations/0001_exam_init.sql`, `0002_attempt_module_scope.sql`, `0003_form_purpose.sql`, `0004_attempt_part_scope.sql` (additive columns) | **not created** (placeholder `database_id`) |
+| Exam DB (D1 `klarweg-exam`) | `exam-worker/migrations/0001_exam_init.sql`, `0002_attempt_module_scope.sql`, `0003_form_purpose.sql`, `0004_attempt_part_scope.sql`, `0005_exam_access_audit.sql` (additive columns) | **not created** (placeholder `database_id`) |
 | Private R2 `klarweg-exam-content` / `klarweg-exam-recordings` | binding `CONTENT` / `RECORDINGS` | **not created** |
 | Access proxy `/exam/*` | `access/worker/src/exam-proxy.js` + one hook in `index.js` | code is inert: needs `EXAM_ROUTES = "on"` **and** an `EXAM` service binding, and neither exists |
 | Frontend shell | `exam/` | **not published**: not in `.github/pages-allowlist.txt` |
@@ -66,10 +66,17 @@ Secrets (`wrangler secret put`), each ≥ 32 characters:
    service = "klarweg-exam"
    ```
    Keep `EXAM_ROUTES = "off"` and deploy Access through `npm run deploy:access`.
-8. Grant access to the owner only:
+8. Grant access to the owner only. The one manual step is bootstrapping the first administrator role (nobody can grant
+   it through the API):
    ```sql
-   INSERT INTO exam_access (id, user_id, level, scope, source, granted_at) VALUES ('xa_owner', '<usr_…>', 'B1', 'synthetic', 'admin_grant', strftime('%s','now'));
+   INSERT INTO exam_roles (user_id, role, granted_by, granted_at) VALUES ('<usr_…>', 'exam_admin', 'bootstrap', strftime('%s','now'));
    ```
+   Every individual exam-access grant after that goes through the access-management screen `/exam/admin.html`
+   (exam_admin, fresh second factor). It records the reason, administrator and time, and an audit row for every grant
+   and revocation (API `GET /exam/v1/admin/access?user_id=`, `POST /exam/v1/admin/access/grants`,
+   `POST /exam/v1/admin/access/grants/<id>/revoke`). Nothing grants access automatically. Mapping orders or sign-ups to
+   access is the open commercial rule OD-42. A grant inserted by hand still works and shows "nicht erfasst" for the
+   reason.
 9. Turn on `EXAM_ENABLED`, `EXAM_SYNTHETIC_FORMS` and `EXAM_ROUTES`.
 10. Publishing `exam/` requires a separate, reviewed allowlist change. It is not part of Phase 5A.
 

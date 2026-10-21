@@ -677,7 +677,10 @@ test('MODULE INTRO render: time, parts and tasks before the start; the rules say
   assert.match(html, /läuft auf dem Server weiter/); assert.match(html, /automatisch gespeichert/); assert.match(html, /automatisch abgegeben/);
   assert.match(moduleIntro('hoeren', { minutes: null, parts: 4, items: 30 }), /4 Teile · 30 Aufgaben/);
   assert.equal(/Minuten/.test(moduleIntro('hoeren', { minutes: null, parts: 4, items: 30 })), false, 'no promised time for a phase-planned module');
-  assert.equal(/<ul/.test(moduleIntro('sprechen', { minutes: null, parts: 3, items: 4 })), false, 'Sprechen keeps its own consent screen');
+  const sp = moduleIntro('sprechen', { minutes: null, approx_minutes: 9, parts: 3, items: 4, prep_minutes: 15, partner_listen: true });
+  assert.match(sp, /ca\. 9 Minuten · 3 Teile/); assert.match(sp, /15 Minuten Vorbereitungszeit/); assert.match(sp, /danach ist die Wahl gesperrt/);
+  assert.match(sp, /Mikrofon wird erst vor der ersten Aufnahme angefragt/); assert.match(sp, /hören Sie einmal; dabei wird nicht aufgenommen/);
+  assert.equal(/Gesprächspartners/.test(moduleIntro('sprechen', { parts: 3, items: 4, prep_minutes: 1, partner_listen: false })), false);
   assert.equal(moduleIntro('lesen', undefined).includes('Minuten'), false, 'an older server without intro data still renders');
 });
 

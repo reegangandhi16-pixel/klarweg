@@ -59,7 +59,7 @@ crons = ["*/15 * * * *"]
 [[d1_databases]]
 binding = "DB"
 database_name = "klarweg-access-payments-nonprod"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "c86b0f00-61c4-49c9-a1ac-6047851ea09c"
 
 # Secrets (npx wrangler secret put <NAME> --config wrangler.payments-sandbox.toml),
 # typed at the prompt, never here, never in a log or a commit:

@@ -10,7 +10,10 @@ const fmtMs = (ms) => (ms ? new Date(ms).toISOString().replace('T', ' ').slice(0
 export function lookupForm(userId = '', error = '') {
   return '<main class="kx-card kx-admin"><p class="kx-eyebrow">Verwaltung</p><h1>Prüfungszugang</h1>'
     + '<p>Zugang wird einzeln erteilt und widerrufen, immer mit Begründung. Jede Änderung wird protokolliert. Es gibt keine automatische Freischaltung.</p>'
-    + '<form class="kx-admin-lookup" data-form="lookup"><label for="kx-user">Nutzer-ID</label>'
+    + '<form class="kx-admin-lookup" data-form="email"><label for="kx-email">E-Mail-Adresse der lernenden Person</label>'
+    + '<input id="kx-email" name="email" type="email" required maxlength="254" autocomplete="off" spellcheck="false" placeholder="name@beispiel.de">'
+    + '<button class="kx-btn" type="submit">Suchen</button></form>'
+    + '<form class="kx-admin-lookup" data-form="lookup"><label for="kx-user">Oder Nutzer-ID</label>'
     + `<input id="kx-user" name="user_id" required pattern="usr_[0-9a-f-]{36}" autocomplete="off" spellcheck="false" value="${esc(userId)}" placeholder="usr_…">`
     + '<button class="kx-btn" type="submit">Anzeigen</button></form>'
     + `<p class="kx-error" role="alert"${error ? '' : ' hidden'}>${esc(error)}</p></main>`;
@@ -55,7 +58,18 @@ export function accommodationSection(a) {
     + `<h3>Protokoll</h3>${audit ? `<ul class="kx-admin-audit">${audit}</ul>` : '<p>Keine Einträge.</p>'}</section>`;
 }
 
+const fmtDate = (sec) => (sec ? new Date(sec * 1000).toISOString().slice(0, 10) : 'unbekannt');
+/* The match for an email search: shown for confirmation before anything is managed (only email, account date, id). */
+export function lookupResult(email, r) {
+  return '<section class="kx-card kx-admin" aria-labelledby="kx-found-title"><h2 id="kx-found-title">Konto gefunden</h2>'
+    + `<p>${esc(email)} · Konto seit ${esc(fmtDate(r.account_created))}</p><p class="kx-meta">${esc(r.user_id)}</p>`
+    + `<div class="kx-actions"><button class="kx-btn" type="button" data-act="manage" data-user="${esc(r.user_id)}">Zugang dieser Person verwalten</button></div></section>`;
+}
+
 export const ADMIN_ERRORS = {
+  invalid_email: 'Bitte eine gültige E-Mail-Adresse eingeben.',
+  user_not_found: 'Kein Klarweg-Konto mit dieser E-Mail-Adresse.',
+  rate_limited: 'Zu viele Suchen in kurzer Zeit. Bitte in einigen Minuten erneut versuchen.',
   invalid_time_multiplier: 'Bitte eine der angebotenen Zeitverlängerungen wählen.',
   accommodation_not_found: 'Es besteht kein Nachteilsausgleich.',
   exam_admin_required: 'Nur die Prüfungsverwaltung darf Zugänge verwalten.',

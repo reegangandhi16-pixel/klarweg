@@ -121,3 +121,11 @@ test('ACCESS ADMIN (revocation mid-attempt): an open attempt stops at once; the 
   await grant(h, h.admin, G(h, { reason: 'Wieder freigeschaltet' }));
   assert.equal((await call(h.env, 'GET', `/exam/v1/attempts/${att}/modules/lesen/package?lease_id=${lease}`, { user: h.learner })).status, 200);
 });
+
+test('ACCESS ADMIN (lookup, exam side): without the sign-in service’s resolution header the lookup refuses; the role is checked first', async () => {
+  const h = await setup();
+  const r = await call(h.env, 'POST', `${T}/lookup`, { user: h.admin, body: { email: 'x@example.com' } });
+  assert.equal(r.status, 400); assert.equal(r.json.error, 'lookup_unavailable');
+  assert.equal((await call(h.env, 'POST', `${T}/lookup`, { user: h.learner, body: {} })).json.error, 'exam_admin_required');
+  assert.equal((await h.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'access_lookup'").first()).n, 0);
+});

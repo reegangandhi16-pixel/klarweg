@@ -1523,9 +1523,18 @@ async function runAccessAdmin() {
     // the user has no access yet
     await as('outsider');
     await waitFor(`/nicht freigeschaltet/.test(document.body.innerText)`, 15000, 'no access before the grant');
-    // grant
-    await as('access', `admin.html?user=${target}`);
+    // find the learner by email (resolved by the sign-in service), confirm, then manage
+    await as('access', 'admin.html');
+    await waitFor(`document.querySelector('form[data-form="email"]')`, 15000, 'admin search');
+    await evaluate(`(() => { const f = document.querySelector('form[data-form="email"]'); f.querySelector('#kx-email').value = 'nobody@dev.local'; f.requestSubmit(); })()`);
+    await waitFor(`/Kein Klarweg-Konto mit dieser E-Mail-Adresse/.test(document.body.innerText)`, 15000, 'unknown email');
+    await evaluate(`(() => { const f = document.querySelector('form[data-form="email"]'); f.querySelector('#kx-email').value = '  OUTSIDER@dev.local '; f.requestSubmit(); })()`);
+    await waitFor(`document.querySelector('[data-act="manage"]')`, 15000, 'match shown');
+    assert.equal(await evaluate(`document.querySelector('[data-act="manage"]').dataset.user`), target, 'the email resolves to that learner');
+    await A.a11y('access admin (email match)');
+    await evaluate(`document.querySelector('[data-act="manage"]').click()`);
     await waitFor(`document.querySelector('form[data-form="grant"]')`, 15000, 'admin screen');
+    assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'access_lookup'").first()).n, 2, 'both searches audited');
     assert.match(await text(), /Noch kein Zugang erteilt/);
     await A.a11y('access admin (empty)');
     await evaluate(`(() => { const f = document.querySelector('form[data-form="grant"]'); f.querySelector('#kx-scope').value = 'synthetic'; f.querySelector('#kx-reason').value = 'E2E Pilot'; f.requestSubmit(); })()`);

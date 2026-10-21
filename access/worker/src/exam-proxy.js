@@ -8,8 +8,15 @@
 import { withCors } from "./cors.js";
 import { getSessionToken, findSessionUser } from "./sessions.js";
 import { hasEncKey } from "./totp.js";
+import { normalizeEmail } from "./auth.js";
 
 const MEDIA_RE = /^\/exam\/v1\/media\/[A-Za-z0-9_.-]{20,500}$/;
+/* Admin lookup by learner email (exam access management). Emails live only here, so this Worker resolves the address
+   and forwards the RESULT (user id + account creation time) in trusted headers with an empty body: the email itself never
+   reaches the exam Worker. Whether the caller may look anyone up (exam_admin, fresh second factor, rate limit, audit)
+   is decided by the exam Worker, which refuses non-admins before it reads the result, so a non-admin learns nothing. */
+const LOOKUP_PATH = "/exam/v1/admin/access/lookup";
+const EMAIL_SHAPE = /^[^\s@]{1,64}@[^\s@]{1,253}\.[^\s@]{1,63}$/;
 const FORWARD_HEADERS = ["content-type", "content-length"];
 const MAX_BODY_BYTES = 512 * 1024;
 
@@ -69,6 +76,28 @@ export async function examProxy(request, env, url) {
        the 12 h window, and the exam Worker is told the second factor is unavailable so staff get 503 mfa_unavailable. */
     if (!hasEncKey(env)) headers.set("x-kw-mfa-unavailable", "1");
     else if (Number.isFinite(user.mfaVerifiedAt)) headers.set("x-kw-mfa-at", String(user.mfaVerifiedAt));
+  }
+
+  if (request.method === "POST" && url.pathname === LOOKUP_PATH) {
+    const raw = await readCapped(request, 4096);
+    let email = "";
+    try { email = normalizeEmail(JSON.parse(new TextDecoder().decode(raw || new ArrayBuffer(0))).email).normalize("NFC"); } catch { email = ""; }
+    if (!email || email.length > 254 || !EMAIL_SHAPE.test(email)) return withCors(jsonError(400, "invalid_email"), request);
+    const row = await env.DB.prepare("SELECT id, created_at FROM users WHERE email = ?1 LIMIT 1").bind(email).first();
+    headers.set("x-kw-lookup-user", row ? row.id : "none");
+    if (row && Number.isFinite(row.created_at)) headers.set("x-kw-lookup-created", String(row.created_at));
+    headers.set("content-type", "application/json");
+    let res;
+    try {
+      res = await env.EXAM.fetch(new Request("https://klarweg-exam.internal" + url.pathname, { method: "POST", headers, body: "{}" }));
+    } catch (err) {
+      console.log(JSON.stringify({ svc: "klarweg-access", evt: "exam_proxy_error", error: (err && err.name) || "Error" }));
+      return withCors(jsonError(502, "exam_unavailable"), request);
+    }
+    const out = new Headers(res.headers);
+    out.set("cache-control", "no-store");
+    out.delete("set-cookie");
+    return withCors(new Response(res.body, { status: res.status, headers: out }), request);
   }
 
   const init = { method: request.method, headers };

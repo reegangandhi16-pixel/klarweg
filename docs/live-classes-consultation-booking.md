@@ -13,10 +13,11 @@ Turning it on is a set of owner decisions, listed in §4. Don't publish the lega
 | Slots | 15:00, 15:20, 15:40 IST: three non-overlapping 20-minute slots in the 15:00–16:00 window. Past and held slots are never offered. | same |
 | Who is bookable | Only `reegan-gandhi` and `candidate-01`, and only when listed in `CONSULT_TEACHERS`, published on the page, and confirmed for the date. | `ELIGIBLE_TEACHERS`, `wrangler.toml`, predeploy check |
 | Sign-in | The learner signs in (existing Klarweg account) and adds a phone number, which Cashfree requires. | `kw-consult.js` |
-| Hold | Picking a slot holds it for 20 minutes. The database allows one pending or confirmed booking per teacher, date and slot, so two learners can't book the same time. One pending hold per learner; at most 6 attempts a day. | `migration-013-consultations.sql` |
-| Payment | A Cashfree order for exactly ₹100.00, fixed by the server. The order expires after 16 minutes, before the hold does. | `consultations.js` |
+| Hold | Picking a slot holds it for 20 minutes. The database allows one pending or confirmed booking per teacher, date and slot, so two learners can't book the same time. One pending hold per learner; at most 6 attempts a day. **Changing slot never loses the current hold:** the new Cashfree order is created first, then the old hold is released and the new slot held in one database transaction. If the new slot was taken meanwhile, or the gateway fails, the old hold (and its own order) stays exactly as it was, and the learner is told which time they still hold and until when. An order for the same slot is resumed, never reused for another slot. | `migration-013-consultations.sql`, `createConsultBooking()` |
+| Payment | A Cashfree order for exactly ₹100.00, fixed by the server. `order_expiry_time` is sent as ISO 8601 in IST (`2026-10-21T10:16:00+05:30`), 16 minutes ahead; the expiry Cashfree returns must be readable, in the future and no later than the hold, or the order is not used. | `consultations.js` |
 | Confirmation | Only when Cashfree's own order API says PAID for ₹100.00 INR (webhook, or the learner's status check). The return redirect proves nothing. | `settle()` |
 | Reference | The page shows the booking reference (`KWC-XXXXXXXX`), teacher, date and time. The learner can see it again whenever they are signed in. | `GET /consult/bookings` |
+| Joining link | Shown only to the signed-in learner who owns a **confirmed** booking, from `GET /consult/bookings/:ref/join`. The links are a Worker secret (`CONSULT_JOIN_LINKS`), never in the page, its data, the repository or the database. Without a configured link the page says it "has not been set up yet" and asks the learner to email the reference. | `getConsultJoin()`, `kw-consult.js` |
 | Separate from courses | Consultation orders start `cons_`, live in their own table and never call `grantProduct()`. A consultation never unlocks a self-paced course. | tests |
 | No emails | The booking flow sends no email or message. Cashfree's own payment receipt is unaffected. | tests |
 
@@ -31,9 +32,10 @@ Turning it on is a set of owner decisions, listed in §4. Don't publish the lega
 
 | Switch | Now | Turns on when |
 |---|---|---|
-| `consultation.onlineBooking.enabled` in `live-classes-data.js` | `false`: the page loads no booking script | The validator refuses `true` until `ownerApproval`, `legalTermsUpdated: true` and `joiningDetails` are recorded |
+| `consultation.onlineBooking.enabled` in `live-classes-data.js` | `false`: the page loads no booking script | The validator refuses `true` until `ownerApproval`, `legalTermsUpdated: true` and `joinLinksConfigured: true` are recorded |
 | `CONSULT_BOOKING` in `access/worker/wrangler.toml` | `"off"` | `"sandbox"` (test payments, needs `CASHFREE_ENV = "sandbox"`) or `"live"` (needs `CASHFREE_ENV = "production"`); deploying either needs `--allow-consult-booking=<mode>` |
 | `CONSULT_TEACHERS` | `""` | Eligible, published teacher ids only; the predeploy check refuses anything else |
+| `CONSULT_JOIN_LINKS` (Worker **secret**) | not set | `wrangler secret put CONSULT_JOIN_LINKS` with `{"reegan-gandhi":"https://meet.google.com/xxx-xxxx-xxx"}`. Only well-formed Meet links for eligible teachers are used. Never in `wrangler.toml` (the predeploy check refuses it) or any committed file. |
 | `CASHFREE_ENV` | `"sandbox"` (TEST app id) | Going live is a separate, existing procedure (comment in `wrangler.toml`) |
 
 The Worker refuses "live" through sandbox, and "sandbox" through production credentials.
@@ -58,7 +60,7 @@ Today's published text describes email requests, UPI payment and email confirmat
 
 - [ ] **D-C1** Approve online booking and payment for consultations (supersedes D7 for consultations only).
 - [ ] **D-C2** Confirm ₹100, 20 minutes, Google Meet and the 7-day course adjustment still apply to online bookings.
-- [ ] **D-C3** How the learner gets the Google Meet link, given that the flow sends no email. Options: a fixed per-teacher Meet link shown on the confirmation; or a person sends it by hand. This becomes `joiningDetails`.
+- [ ] **D-C3** How the learner gets the Google Meet link, given that the flow sends no email. Built: a per-teacher link in the `CONSULT_JOIN_LINKS` Worker secret, shown on the page to the confirmed booking's owner only. Decide whether a fixed per-teacher link is acceptable (anyone who once received it could reuse it), or whether a person sends a fresh link instead. Then record `joinLinksConfigured: true` once the secret is set.
 - [ ] **D-C4** Reschedule and cancellation rule for same-day bookings (C3), and what happens if the teacher can't attend.
 - [ ] **D-C5** Refunds: who refunds `review` bookings and how fast. Cashfree refunds are made in the Cashfree dashboard.
 - [ ] **D-C6** Retention period for booking records (C6); ask the accountant about invoices/receipts for ₹100 payments.
@@ -69,7 +71,7 @@ Today's published text describes email requests, UPI payment and email confirmat
 ## 5. Launch checklist (before a real customer can pay)
 
 1. Decisions D-C1 to D-C8 recorded.
-2. Legal PR: Terms §4A, Privacy (C1–C6), page copy (C7), `onlineBooking.ownerApproval`, `legalTermsUpdated: true`, `joiningDetails`. Reviewed, merged.
+2. Legal PR: Terms §4A, Privacy (C1–C6), page copy (C7), `onlineBooking.ownerApproval`, `legalTermsUpdated: true`, `joinLinksConfigured: true`. Reviewed, merged.
 3. Cashfree production: account activated (KYC), live app id and secret, webhook URL `https://<worker>/webhooks/cashfree` added and webhook secret set (`wrangler secret put CASHFREE_WEBHOOK_SECRET`), the live Klarweg domain whitelisted for the checkout. Today none of this exists in the repository and the Worker runs sandbox only.
 4. Database: `wrangler d1 execute klarweg-access --remote --file access/worker/migration-013-consultations.sql`.
 5. Worker config: `CONSULT_BOOKING = "live"`, `CASHFREE_ENV = "production"` + live app id (one reviewed commit), `CONSULT_TEACHERS = "reegan-gandhi"` (add `candidate-01` only after their profile is published with consent, under their own id: rename it in `ELIGIBLE_TEACHERS`, `docs/live-classes-candidates.json` and the tests in the same PR). Deploy with `npm run deploy:access -- --allow-consult-booking=live --allow-cashfree-env-change=production` plus the existing flags.
@@ -77,6 +79,13 @@ Today's published text describes email requests, UPI payment and email confirmat
    `wrangler d1 execute klarweg-access --remote --command "INSERT INTO consult_availability (teacher_id, date, confirmed_by, confirmed_at) VALUES ('reegan-gandhi', '2026-11-02', 'owner', strftime('%s','now'))"`
    Remove a day: `DELETE FROM consult_availability WHERE teacher_id = '…' AND date = '…'` (existing bookings stay).
 7. One real ₹100 booking end to end, then a refund, before announcing it.
+
+**Not yet verified against Cashfree itself** (no sandbox credentials were available when this was built; every test uses a local mock of the API):
+- that the 2023-08-01 Create Order API accepts `order_expiry_time` in the `+05:30` form we send, and returns `order_expiry_time` in its response (the Worker refuses an order whose returned expiry is missing or later than the hold);
+- that a 16-minute expiry is accepted (Cashfree's reference documents no minimum or maximum);
+- the webhook signature and `PAYMENT_SUCCESS_WEBHOOK` payload for a `cons_` order.
+
+Check these in **sandbox only** (`CONSULT_BOOKING = "sandbox"` on a non-production Worker, TEST credentials), before step 5. Never test with a live payment.
 
 ## 6. Teachers named on 2026-10-20
 

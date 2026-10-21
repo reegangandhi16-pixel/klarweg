@@ -12,7 +12,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { execFileSync } from 'node:child_process';
 import {
-  ROOT, loadData, checkData, reviewSummary, loadCandidates, checkCandidates, CANDIDATE_DRAFT_KEYS
+  ROOT, loadData, checkData, reviewSummary, loadCandidates, checkCandidates, CANDIDATE_DRAFT_KEYS, PRIVATE_LINK_RE
 } from './live-classes-readiness.mjs';
 import { ELIGIBLE_TEACHERS } from '../access/worker/src/consultations.js';
 
@@ -158,8 +158,8 @@ test('BOOKING: enabling online booking is refused until the owner decisions and 
   const on = (extra) => { const D = clone(base); Object.assign(D.consultation.onlineBooking, { enabled: true }, extra); return checkData(D); };
   assert.ok(on({}).some((e) => /ownerApproval/.test(e)));
   assert.ok(on({}).some((e) => /legalTermsUpdated/.test(e)));
-  assert.ok(on({}).some((e) => /joiningDetails/.test(e)));
-  assert.deepEqual(on({ ownerApproval: 'Owner, email 2026-11-01', legalTermsUpdated: true, joiningDetails: 'Your Google Meet link is shown here from 14:45 IST.' }), [], 'satisfiable once decided');
+  assert.ok(on({}).some((e) => /joinLinksConfigured/.test(e)));
+  assert.deepEqual(on({ ownerApproval: 'Owner, email 2026-11-01', legalTermsUpdated: true, joinLinksConfigured: true }), [], 'satisfiable once decided');
   const D = clone(base); delete D.consultation.onlineBooking;
   assert.ok(checkData(D).some((e) => /onlineBooking/.test(e)));
 });
@@ -183,6 +183,66 @@ test('AVAILABILITY: labels are factual ("Available today" / "Currently unavailab
   assert.match(js, /if \(!availability \|\| t\.draft\) return '';/, 'no label until availability is known');
   assert.match(js, /\(b\.on - a\.on\) \|\| \(a\.i - b\.i\)/, 'stable: availability first, then the data order');
   assert.equal(/\bfetch\(|XMLHttpRequest|cashfree|checkout/i.test(js), false, 'kw-live.js itself still has no network or payment code');
+});
+
+/* ================= joining links stay server-side ================= */
+/* Every file GitHub Pages publishes (exact names and GLOB: entries in the
+   allowlist), plus the public JSON under docs/. */
+function publishedFiles() {
+  const out = [];
+  for (const raw of read('.github/pages-allowlist.txt').split('\n')) {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) continue;
+    if (line.startsWith('GLOB:')) {
+      const [dir, pat] = [path.dirname(line.slice(5)), path.basename(line.slice(5))];
+      const re = new RegExp('^' + pat.replace(/[.+^${}()|]/g, '\\$&').replace(/\*/g, '.*') + '$');
+      if (fs.existsSync(path.join(ROOT, dir))) for (const f of fs.readdirSync(path.join(ROOT, dir))) if (re.test(f)) out.push(path.join(dir, f));
+    } else if (fs.existsSync(path.join(ROOT, line)) && fs.statSync(path.join(ROOT, line)).isFile()) out.push(line);
+  }
+  return out.concat(fs.readdirSync(path.join(ROOT, 'docs')).filter((f) => f.endsWith('.json')).map((f) => 'docs/' + f));
+}
+
+test('JOIN LINKS: no meeting link in any published file, the page data or public JSON', () => {
+  const files = publishedFiles();
+  assert.ok(files.includes('live-classes-data.js') && files.includes('kw-consult.js') && files.includes('live-classes.html'), 'the scan covers the Live Classes files');
+  for (const f of files) {
+    if (/\.(png|jpe?g|webp|gif|ico|mp3|ogg|wav|pdf|woff2?)$/i.test(f)) continue;
+    const m = read(f).match(PRIVATE_LINK_RE);
+    assert.equal(m, null, `${f} contains a meeting link: ${m && m[0]}`);
+  }
+});
+
+test('JOIN LINKS: the validator refuses a meeting link anywhere in the page data', () => {
+  const base = loadData();
+  for (const put of [
+    (D) => { D.consultation.onlineBooking.joinLinksConfigured = 'https://meet.google.com/abc-defg-hij'; },
+    (D) => { D.consultation.steps.push('Join at meet.google.com/abc-defg-hij'); },
+    (D) => { D.teachers[0].availability = 'https://zoom.us/j/1234567890'; }
+  ]) {
+    const D = clone(base); put(D);
+    assert.ok(checkData(D).some((e) => /private meeting link/.test(e)), checkData(D).join(' | '));
+  }
+});
+
+test('JOIN LINKS: the page asks the Worker for the link of a confirmed booking only, and never claims one it did not get', () => {
+  const js = read('kw-consult.js');
+  assert.equal(/joiningDetails/.test(js), false);
+  assert.match(js, /'\/consult\/bookings\/' \+ encodeURIComponent\(ref\) \+ '\/join'/);
+  assert.match(js, /The joining link for this consultation has not been set up yet\./);
+  const confirmed = js.slice(js.indexOf("if (b.status === 'confirmed')"), js.indexOf("if (b.status === 'pending')"));
+  assert.match(confirmed, /loadJoin\(b\.ref\)/, 'loaded only in the confirmed branch');
+  assert.equal((js.match(/loadJoin\(/g) || []).length, 2, 'defined once, called once');
+  const D = loadData();
+  assert.equal(D.consultation.onlineBooking.joinLinksConfigured, false);
+  assert.equal('joiningDetails' in D.consultation.onlineBooking, false);
+});
+
+test('JOIN LINKS: wrangler.toml never carries them (a Worker secret only), and the predeploy check refuses it', () => {
+  const toml = read('access/worker/wrangler.toml').replace(/#.*$/gm, '');
+  assert.equal(/CONSULT_JOIN_LINKS\s*=/.test(toml), false);
+  assert.equal(PRIVATE_LINK_RE.test(toml), false);
+  const guard = read('scripts/predeploy-access-check.mjs');
+  assert.match(guard, /CONSULT_JOIN_LINKS/);
 });
 
 /* ================= unrelated features untouched ================= */

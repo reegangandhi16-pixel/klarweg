@@ -33,6 +33,8 @@
         "sandbox" needs CASHFREE_ENV="sandbox", "live" needs "production".
         CONSULT_TEACHERS may only name eligible teachers who are published
         on the Live Classes page (live-classes-data.js).
+        CONSULT_JOIN_LINKS (Google Meet links) is a Worker SECRET only: it
+        may never be a [vars] entry, and no meeting link may be in the file.
 
    Usage (from the repo root):
      node scripts/predeploy-access-check.mjs
@@ -97,6 +99,7 @@ if (!['off', 'sandbox', 'live'].includes(consult)) fail(`CONSULT_BOOKING in wran
 if (consult !== 'off' && allowConsult !== consult) fail(`CONSULT_BOOKING="${consult}" in wrangler.toml. Enable consultation booking deliberately with --allow-consult-booking=${consult}.`);
 if (consult === 'sandbox' && env !== 'sandbox') fail('CONSULT_BOOKING="sandbox" needs CASHFREE_ENV="sandbox".');
 if (consult === 'live' && env !== 'production') fail('CONSULT_BOOKING="live" needs CASHFREE_ENV="production" — never take live bookings through sandbox.');
+if (/CONSULT_JOIN_LINKS["']?\s*=/.test(toml.replace(/#.*$/gm, '')) || /meet\.google\.com\/[a-z0-9-]+/i.test(toml)) fail('wrangler.toml carries CONSULT_JOIN_LINKS or a Google Meet link. Joining links are private: set them with `wrangler secret put CONSULT_JOIN_LINKS`, never in this file.');
 if (consultTeachers.length) {
   const { ELIGIBLE_TEACHERS } = await import('../access/worker/src/consultations.js');
   const published = await import('./live-classes-readiness.mjs').then((m) => m.publishedTeacherIds());

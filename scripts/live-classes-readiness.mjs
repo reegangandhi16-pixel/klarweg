@@ -26,6 +26,14 @@ export const POLICIES = ['missedClass', 'cancellationRefund', 'scheduling', 'fee
 export const PAGE_FILES = ['live-classes.html', 'kw-live.js', 'live-classes-data.js'];
 
 const has = (v) => (Array.isArray(v) ? v.length > 0 : v != null && String(v).trim() !== '');
+/* Meeting links that must never ship in a public file: Google Meet room
+   codes (and other common meeting hosts). */
+export const PRIVATE_LINK_RE = /(?:meet\.google\.com\/(?!$)[a-z0-9-]+|zoom\.us\/j\/\d+|teams\.microsoft\.com\/l\/meetup-join)/i;
+export function privateLinks(x) {
+  if (typeof x === 'string') return PRIVATE_LINK_RE.test(x) ? [x] : [];
+  if (x && typeof x === 'object') return Object.values(x).flatMap(privateLinks);
+  return [];
+}
 /* [Bracketed] template text inside any string value of an entry. JSON
    brackets don't count: `levels: ['A1']` is not a placeholder. */
 export function placeholders(x) {
@@ -71,8 +79,10 @@ export function checkData(D, root = ROOT) {
     if (c.termsConfirmed !== true) err('consultation.onlineBooking', 'enabled needs confirmed consultation terms');
     if (!has(ob.ownerApproval)) err('consultation.onlineBooking', 'enabled needs ownerApproval (how and when the owner approved online booking)');
     if (ob.legalTermsUpdated !== true) err('consultation.onlineBooking', 'enabled needs legalTermsUpdated: Terms §4A, Privacy §4A and the page copy still describe email + UPI only');
-    if (!has(ob.joiningDetails)) err('consultation.onlineBooking', 'enabled needs joiningDetails (how the learner receives the Google Meet link)');
+    if (ob.joinLinksConfigured !== true) err('consultation.onlineBooking', 'enabled needs joinLinksConfigured: the CONSULT_JOIN_LINKS Worker secret must hold each bookable teacher\'s Google Meet link');
   }
+  // public data: a private joining link must never be in it (it belongs in a Worker secret)
+  for (const p of privateLinks(D)) err('live-classes-data.js', `contains a private meeting link (${p.slice(0, 40)}…): joining links belong in the CONSULT_JOIN_LINKS Worker secret only`);
 
   const teachers = D.teachers || [], courses = D.courses || [], quotes = D.testimonials || [];
   unique('teacher', teachers); unique('course', courses);

@@ -37,7 +37,27 @@ export function accessView(v, { message = '' } = {}) {
     + `<h3>Protokoll</h3>${audit ? `<ul class="kx-admin-audit">${audit}</ul>` : '<p>Keine Einträge.</p>'}</section>`;
 }
 
+const pct = (m) => `+${Math.round((m - 1) * 100)} %`;
+/* Accommodations (OD-41): extra time per user, copied into attempts created afterwards. */
+export function accommodationSection(a) {
+  const cur = a.accommodation;
+  const audit = a.audit.map((x) => `<li>${esc(fmtMs(x.at))} · ${x.action === 'accommodation_set' ? 'gesetzt' : 'entfernt'} · ${esc(pct(x.detail.time_multiplier))} · ${esc(x.actor)}: ${esc(x.detail.reason || '')}</li>`).join('');
+  return `<section class="kx-card kx-admin" aria-labelledby="kx-acc-title"><h2 id="kx-acc-title">Nachteilsausgleich (Zeitverlängerung)</h2>`
+    + '<p>Gilt für Versuche, die danach begonnen werden; laufende Versuche behalten ihre Zeit. Nachweise selbst werden hier nicht gespeichert.</p>'
+    + (cur ? `<p class="kx-admin-effective">Aktuell: ${esc(pct(cur.time_multiplier))} · ${esc(cur.status === 'active' ? 'aktiv' : 'abgelaufen')} · gültig bis ${esc(cur.valid_until ? fmt(cur.valid_until) : 'unbegrenzt')} · ${esc(cur.reason || 'nicht erfasst')}</p>`
+      + '<form class="kx-admin-revoke" data-form="acc-remove"><label class="kx-sr" for="kx-acc-rm">Begründung für das Entfernen</label><input id="kx-acc-rm" name="reason" required minlength="3" maxlength="500" placeholder="Begründung"><button class="kx-btn kx-btn-quiet" type="submit">Entfernen</button></form>'
+      : '<p>Kein Nachteilsausgleich.</p>')
+    + '<form class="kx-admin-grant" data-form="acc-set"><label for="kx-acc-m">Zeitverlängerung</label><select id="kx-acc-m" name="time_multiplier">'
+    + a.allowed_multipliers.map((m) => `<option value="${esc(m)}">${esc(pct(m))}</option>`).join('') + '</select>'
+    + '<label for="kx-acc-until">Gültig bis (optional)</label><input id="kx-acc-until" name="valid_until" type="date">'
+    + '<label for="kx-acc-reason">Begründung (z. B. Nachweis geprüft, Referenz)</label><input id="kx-acc-reason" name="reason" required minlength="3" maxlength="500">'
+    + `<button class="kx-btn" type="submit">${cur ? 'Ersetzen' : 'Setzen'}</button></form>`
+    + `<h3>Protokoll</h3>${audit ? `<ul class="kx-admin-audit">${audit}</ul>` : '<p>Keine Einträge.</p>'}</section>`;
+}
+
 export const ADMIN_ERRORS = {
+  invalid_time_multiplier: 'Bitte eine der angebotenen Zeitverlängerungen wählen.',
+  accommodation_not_found: 'Es besteht kein Nachteilsausgleich.',
   exam_admin_required: 'Nur die Prüfungsverwaltung darf Zugänge verwalten.',
   invalid_user_id: 'Bitte eine gültige Nutzer-ID eingeben (usr_…).',
   reason_required: 'Bitte eine Begründung angeben (3–500 Zeichen).',

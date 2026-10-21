@@ -564,7 +564,7 @@ async function runPractice() {
     const waitFor = async (src, ms = 15000, label = src) => {
       const t0 = Date.now();
       while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
-      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, process.env.KX_E2E_PAGE_CHARS ? Number(process.env.KX_E2E_PAGE_CHARS) : 600)}`);
     };
     const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
     const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
@@ -1219,7 +1219,7 @@ async function runLesenOnly() {
     const waitFor = async (src, ms = 15000, label = src) => {
       const t0 = Date.now();
       while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
-      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, process.env.KX_E2E_PAGE_CHARS ? Number(process.env.KX_E2E_PAGE_CHARS) : 600)}`);
     };
     const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
     const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
@@ -1335,7 +1335,7 @@ async function runPartPractice() {
     const waitFor = async (src, ms = 15000, label = src) => {
       const t0 = Date.now();
       while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
-      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, process.env.KX_E2E_PAGE_CHARS ? Number(process.env.KX_E2E_PAGE_CHARS) : 600)}`);
     };
     const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
     const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
@@ -1412,7 +1412,7 @@ async function runAccessAdmin() {
     const waitFor = async (src, ms = 15000, label = src) => {
       const t0 = Date.now();
       while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
-      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, process.env.KX_E2E_PAGE_CHARS ? Number(process.env.KX_E2E_PAGE_CHARS) : 600)}`);
     };
     const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
     const A = makeA11y({ send, evaluate });
@@ -1441,6 +1441,19 @@ async function runAccessAdmin() {
     // the user can now start
     await as('outsider');
     await waitFor(`document.querySelector('[data-act="create"]')`, 15000, 'start screen after the grant');
+    // extra time (OD-41): +50 % for attempts created afterwards
+    await as('access', `admin.html?user=${target}`);
+    await waitFor(`document.querySelector('form[data-form="acc-set"]')`, 15000, 'accommodation form');
+    await evaluate(`(() => { const f = document.querySelector('form[data-form="acc-set"]'); f.querySelector('#kx-acc-m').value = '1.5'; f.querySelector('#kx-acc-reason').value = 'Nachweis geprüft (E2E)'; f.requestSubmit(); })()`);
+    await waitFor(`document.body.innerText.includes('Nachteilsausgleich gesetzt.') && document.body.innerText.includes('Aktuell: +50 %')`, 15000, 'accommodation set');
+    await A.a11y('access admin (accommodation)');
+    await as('outsider');
+    await waitFor(`document.querySelector('[data-act="create"]')`, 15000, 'start screen');
+    await evaluate(`document.querySelector('[data-act="create"]').click()`);
+    await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'Lesen intro with extra time');
+    const lesenMin = Math.round((pkgFor(syntheticBuild([PRACTICE.dir]), 'lesen').timing.seconds * 1.5) / 60);
+    assert.match(await text(), new RegExp(`${lesenMin} Minuten · 5 Teile`), 'the intro shows the extended time');
+    assert.equal((await dev.env.DB.prepare('SELECT time_multiplier FROM attempts WHERE user_id = ?1').bind(target).first()).time_multiplier, 1.5);
     // revoke
     await as('access', `admin.html?user=${target}`);
     await waitFor(`document.querySelector('form[data-form="revoke"]')`, 15000, 'revoke form');
@@ -1452,8 +1465,9 @@ async function runAccessAdmin() {
     assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'admin screen: no horizontal scroll at 390 px');
     await A.a11y('access admin (mobile)');
     await vp(1280, 800, false);
+    // revocation stops the open attempt too
     await as('outsider');
-    await waitFor(`/nicht freigeschaltet/.test(document.body.innerText)`, 15000, 'refused after revocation');
+    await waitFor(`/nicht freigeschaltet/.test(document.body.innerText)`, 15000, 'refused after revocation (open attempt)');
     assert.deepEqual(A.findings, [], `automated accessibility findings on ${A.screens.join(', ')}`);
     const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
     const csp = b.events.filter((e) => e.method === 'Log.entryAdded' && /Content Security Policy/i.test(e.params.entry.text || '')).map((e) => e.params.entry.text);
@@ -1484,7 +1498,7 @@ async function runReviewForm() {
     const waitFor = async (src, ms = 10000, label = src) => {
       const t0 = Date.now();
       while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(200); }
-      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, process.env.KX_E2E_PAGE_CHARS ? Number(process.env.KX_E2E_PAGE_CHARS) : 600)}`);
     };
     const A = makeA11y({ send, evaluate });
     await send('Page.navigate', { url });

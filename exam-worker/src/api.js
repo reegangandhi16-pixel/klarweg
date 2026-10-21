@@ -83,9 +83,19 @@ async function moduleIntro(env, attempt, m) {
 }
 
 /* Load the attempt, refresh deadlines, and validate the lease. */
+/* A revoked or expired exam access stops an attempt in progress at once (OD-18), not only new attempts. The learner's
+   own finished results stay readable (result/review/history do not go through here). */
+async function requireAttemptAccess(env, attempt) {
+  const def = MODES[attempt.mode];
+  if (def && (await hasExamAccess(env, attempt.user_id, attempt.level, def.access_scope))) return;
+  if (await hasRole(env, attempt.user_id, ['exam_admin'])) return;
+  fail(403, 'exam_access_required');
+}
+
 async function attemptCtx(env, userId, attemptId, leaseId, { renew = true } = {}) {
   let attempt = await loadAttempt(env, attemptId, userId);
   if (attempt.status === 'voided') fail(409, 'attempt_voided');
+  await requireAttemptAccess(env, attempt);
   await settle(env, attempt);
   const lease = await requireLease(env, attempt, leaseId, { renew });
   attempt = await loadAttempt(env, attemptId, userId);
@@ -305,6 +315,7 @@ export async function lease(env, userId, attemptId, request) {
   if (!DEVICE_ID_RE.test(body.device_id || '')) fail(400, 'device_id_required');
   const attempt = await loadAttempt(env, attemptId, userId);
   if (attempt.status === 'completed' || attempt.status === 'voided') fail(409, 'attempt_closed');
+  await requireAttemptAccess(env, attempt);
   await settle(env, attempt);
   const l = await acquireLease(env, attempt, body.device_id, body.takeover === true);
   return { ok: true, lease: l, ...(await attemptView(env, await loadAttempt(env, attemptId, userId))) };

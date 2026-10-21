@@ -98,3 +98,66 @@ export async function revokeAccess(env, adminId, grantId, request) {
   if (after.revoked_by !== adminId || after.revoked_at !== t) fail(409, 'already_revoked');   // a concurrent revoke won
   return { ok: true, grant: view(after, t) };
 }
+
+/* ---------- accommodations (OD-41: CONFIGURABLE, admin-granted only; ENGINE §2) ----------
+   Extra time as a time multiplier, per user. It is copied into each attempt WHEN THE ATTEMPT IS CREATED, so a change
+   never alters a running or finished attempt. The reason field states the basis (e.g. "evidence checked per EX-08,
+   ref …"); evidence documents themselves are never stored here. Whether and how accommodations are offered is the
+   owner's policy decision (D5); this mechanism enables nothing on its own. */
+export const MULTIPLIERS = [1.25, 1.5, 1.75, 2.0];
+const accView = (a, tSec) => (a ? { time_multiplier: a.time_multiplier, granted_by: a.granted_by ?? null, granted_at: a.granted_at, valid_until: a.valid_until ?? null,
+  reason: a.reason ?? null, status: a.valid_until !== null && a.valid_until !== undefined && a.valid_until <= tSec ? 'expired' : 'active' } : null);
+
+export async function inspectAccommodation(env, adminId, url) {
+  await requireExamAdmin(env, adminId);
+  const userId = url.searchParams.get('user_id') || '';
+  if (!USER_RE.test(userId)) fail(400, 'invalid_user_id');
+  const t = Math.floor(now(env) / 1000);
+  const a = await env.DB.prepare('SELECT * FROM accommodations WHERE user_id = ?1').bind(userId).first();
+  const audit = (await env.DB.prepare(`SELECT at, actor, action, detail_json FROM audit_log WHERE action IN ('accommodation_set', 'accommodation_removed')
+      AND json_extract(detail_json, '$.user_id') = ?1 ORDER BY at DESC, id DESC LIMIT 100`).bind(userId).all()).results
+    .map((r) => ({ at: r.at, actor: r.actor, action: r.action, detail: JSON.parse(r.detail_json) }));
+  return { ok: true, user_id: userId, accommodation: accView(a, t), audit, allowed_multipliers: MULTIPLIERS };
+}
+
+/* POST /admin/accommodations { user_id, time_multiplier, reason, valid_until? } — sets (or replaces) the accommodation. */
+export async function setAccommodation(env, adminId, request) {
+  await requireExamAdmin(env, adminId);
+  const body = await readJsonBody(request);
+  if (!USER_RE.test(body.user_id || '')) fail(400, 'invalid_user_id');
+  if (!MULTIPLIERS.includes(body.time_multiplier)) fail(422, 'invalid_time_multiplier', `time_multiplier must be one of ${MULTIPLIERS.join(', ')}.`);
+  const reason = reasonText(body.reason);
+  const t = Math.floor(now(env) / 1000);
+  let validUntil = null;
+  if (body.valid_until !== undefined && body.valid_until !== null) {
+    if (!Number.isInteger(body.valid_until) || body.valid_until <= t) fail(422, 'invalid_valid_until', 'valid_until must be a future time in unix seconds.');
+    validUntil = body.valid_until;
+  }
+  const before = await env.DB.prepare('SELECT time_multiplier FROM accommodations WHERE user_id = ?1').bind(body.user_id).first();
+  const detail = { user_id: body.user_id, time_multiplier: body.time_multiplier, valid_until: validUntil, reason, replaced: before ? before.time_multiplier : null };
+  await env.DB.batch([
+    env.DB.prepare(`INSERT INTO accommodations (user_id, time_multiplier, granted_by, granted_at, valid_until, reason) VALUES (?1, ?2, ?3, ?4, ?5, ?6)
+        ON CONFLICT(user_id) DO UPDATE SET time_multiplier = excluded.time_multiplier, granted_by = excluded.granted_by, granted_at = excluded.granted_at,
+          valid_until = excluded.valid_until, reason = excluded.reason`).bind(body.user_id, body.time_multiplier, adminId, t, validUntil, reason),
+    env.DB.prepare(`INSERT INTO audit_log (at, actor, attempt_id, action, detail_json) VALUES (?1, ?2, NULL, 'accommodation_set', ?3)`)
+      .bind(now(env), adminId, JSON.stringify(detail))
+  ]);
+  return { ok: true, accommodation: accView(await env.DB.prepare('SELECT * FROM accommodations WHERE user_id = ?1').bind(body.user_id).first(), t) };
+}
+
+/* POST /admin/accommodations/remove { user_id, reason } */
+export async function removeAccommodation(env, adminId, request) {
+  await requireExamAdmin(env, adminId);
+  const body = await readJsonBody(request);
+  if (!USER_RE.test(body.user_id || '')) fail(400, 'invalid_user_id');
+  const reason = reasonText(body.reason);
+  const cur = await env.DB.prepare('SELECT time_multiplier FROM accommodations WHERE user_id = ?1').bind(body.user_id).first();
+  if (!cur) fail(404, 'accommodation_not_found');
+  const detail = { user_id: body.user_id, time_multiplier: cur.time_multiplier, reason };
+  await env.DB.batch([
+    env.DB.prepare(`INSERT INTO audit_log (at, actor, attempt_id, action, detail_json) SELECT ?1, ?2, NULL, 'accommodation_removed', ?3
+        WHERE EXISTS (SELECT 1 FROM accommodations WHERE user_id = ?4)`).bind(now(env), adminId, JSON.stringify(detail), body.user_id),
+    env.DB.prepare('DELETE FROM accommodations WHERE user_id = ?1').bind(body.user_id)
+  ]);
+  return { ok: true, accommodation: null };
+}

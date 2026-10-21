@@ -54,6 +54,9 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
        duplicate grant / second revoke (409), and the page reloads the list instead. */
     accessInspect: (userId) => call('GET', `/exam/v1/admin/access?user_id=${encodeURIComponent(userId)}`),
     accessGrant: (b) => once('POST', '/exam/v1/admin/access/grants', { body: b }),
+    accommodationInspect: (userId) => call('GET', `/exam/v1/admin/accommodations?user_id=${encodeURIComponent(userId)}`),
+    accommodationSet: (b) => once('POST', '/exam/v1/admin/accommodations', { body: b }),
+    accommodationRemove: (userId, reason) => once('POST', '/exam/v1/admin/accommodations/remove', { body: { user_id: userId, reason } }),
     accessRevoke: (grantId, reason) => once('POST', `/exam/v1/admin/access/grants/${encodeURIComponent(grantId)}/revoke`, { body: { reason } }),
     availability: () => call('GET', '/exam/v1/availability'),
     createAttempt: (b) => call('POST', '/exam/v1/attempts', { body: rq(b) }),

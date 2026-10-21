@@ -1,7 +1,7 @@
 /* Exam-access management screen (exam_admin). DOM wiring only: every rule — role, fresh second factor, validation,
    audit — is enforced by the exam Worker; this page only shows what the server answers. */
 import { createApi, ExamApiError } from './api.js';
-import { lookupForm, accessView, ADMIN_ERRORS } from './admin-render.js';
+import { lookupForm, accessView, accommodationSection, ADMIN_ERRORS } from './admin-render.js';
 
 const app = document.getElementById('kx-app');
 const base = (document.querySelector('meta[name="kw-exam-api"]') || {}).content || '';
@@ -14,7 +14,7 @@ function mfaScreen() {
     + '<div class="kx-actions"><a class="kx-btn" href="rater.html">Zweiten Faktor bestätigen</a><button class="kx-btn kx-btn-quiet" type="button" data-act="reload">Danach hier neu laden</button></div></main>');
 }
 async function show(userId, message = '') {
-  try { screen(accessView(await api.accessInspect(userId), { message })); }
+  try { const [access, acc] = await Promise.all([api.accessInspect(userId), api.accommodationInspect(userId)]); screen(accessView(access, { message }) + accommodationSection(acc)); }
   catch (e) {
     if (e instanceof ExamApiError && e.code === 'mfa_required') return mfaScreen();
     screen(lookupForm(userId, text(e)));
@@ -35,6 +35,12 @@ app.addEventListener('submit', async (e) => {
       return await show(userId, 'Zugang erteilt.');
     }
     if (f.dataset.form === 'revoke') { await api.accessRevoke(f.dataset.grant, data.reason); return await show(userId, 'Zugang widerrufen.'); }
+    if (f.dataset.form === 'acc-set') {
+      const until = data.valid_until ? Math.floor(Date.parse(`${data.valid_until}T23:59:59Z`) / 1000) : null;
+      await api.accommodationSet({ user_id: userId, time_multiplier: Number(data.time_multiplier), reason: data.reason, ...(until ? { valid_until: until } : {}) });
+      return await show(userId, 'Nachteilsausgleich gesetzt.');
+    }
+    if (f.dataset.form === 'acc-remove') { await api.accommodationRemove(userId, data.reason); return await show(userId, 'Nachteilsausgleich entfernt.'); }
   } catch (err) {
     if (err instanceof ExamApiError && err.code === 'mfa_required') return mfaScreen();
     await show(userId, text(err));

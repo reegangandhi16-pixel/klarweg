@@ -101,3 +101,23 @@ test('ACCESS ADMIN (inspect): every grant with its status, effective access per 
   // another learner's view shows nothing of this one
   assert.deepEqual((await inspect(h, h.admin, h.outsider)).json.grants, []);
 });
+
+test('ACCESS ADMIN (revocation mid-attempt): an open attempt stops at once; the learner’s finished results stay readable', async () => {
+  const h = await setup();
+  const g = (await grant(h, h.admin, G(h))).json.grant;
+  const c = await createAttempt(h, h.learner); assert.equal(c.status, 200);
+  const att = c.json.attempt_id, lease = c.json.lease.lease_id;
+  const st = await call(h.env, 'POST', `/exam/v1/attempts/${att}/modules/lesen/start`, { user: h.learner, body: { lease_id: lease, request_id: rid() } });
+  assert.equal(st.status, 200);
+  await revoke(h, h.admin, g.grant_id, { reason: 'Zugang beendet' });
+  const pkg = await call(h.env, 'GET', `/exam/v1/attempts/${att}/modules/lesen/package?lease_id=${lease}`, { user: h.learner });
+  assert.equal(pkg.status, 403); assert.equal(pkg.json.error, 'exam_access_required');
+  const hb = await call(h.env, 'POST', `/exam/v1/attempts/${att}/heartbeat`, { user: h.learner, body: { lease_id: lease } });
+  assert.equal(hb.json.error, 'exam_access_required');
+  const l = await call(h.env, 'POST', `/exam/v1/attempts/${att}/lease`, { user: h.learner, body: { device_id: dev() } });
+  assert.equal(l.json.error, 'exam_access_required');
+  // history stays readable (own data), and a renewed grant lets the learner continue
+  assert.equal((await call(h.env, 'GET', '/exam/v1/attempts', { user: h.learner })).status, 200);
+  await grant(h, h.admin, G(h, { reason: 'Wieder freigeschaltet' }));
+  assert.equal((await call(h.env, 'GET', `/exam/v1/attempts/${att}/modules/lesen/package?lease_id=${lease}`, { user: h.learner })).status, 200);
+});

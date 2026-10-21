@@ -738,7 +738,7 @@ async function runPractice() {
     await waitFor(`(() => { const a = document.querySelector('.kx-my-recordings audio'); return a && a.src.startsWith('blob:') && a.readyState >= 1; })()`, 15000, 'own recording loaded');
     assert.deepEqual(await evaluate(`(() => { const a = document.querySelector('.kx-my-recordings audio'); return [a.paused, a.autoplay]; })()`), [true, false]);
     assert.match(res, /Schreiben\s+–\s+in Bewertung/); assert.match(res, /Sprechen\s+–\s+in Bewertung/);
-    await vp(390, 844, true); await sleep(300);
+    await vp(360, 640, true); await sleep(300);
     assert.equal(await noHScroll(), true, 'result + review: no horizontal scroll on mobile'); await vp(1280, 800, false);
 
     // ---- unauthorized: an outsider and the learner on the rater screen and the API ----
@@ -820,7 +820,7 @@ async function runPractice() {
       }
       assert.match(await text(), new RegExp(`Gespeichert: [\\d,]+ Punkte \\(Runde ${round}\\)`));
       assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM ratings WHERE round = ?1').bind(round).first()).n, 7);
-      await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'rater screen: no horizontal scroll on mobile'); await vp(1280, 800, false);
+      await vp(360, 640, true); await sleep(300); assert.equal(await noHScroll(), true, 'rater screen: no horizontal scroll on mobile'); await vp(1280, 800, false);
     }
     await as('rater2', 'rater.html'); await waitFor(`!/data-attempt="${attempt}"/.test(document.body.innerHTML) && /Keine Versuche warten/.test(document.body.innerText)`, 10000, 'queue empty after final');
 
@@ -832,7 +832,7 @@ async function runPractice() {
     await a11y('start screen with history', { tabs: 6 });
     const hist = await evaluate(`[...document.querySelectorAll('.kx-history tbody td')].map((td) => td.textContent)`);
     assert.deepEqual(hist.slice(3, 5), ['75 / 100', '75 / 100'], `Schreiben and Sprechen final in the history: ${JSON.stringify(hist)}`);
-    await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'start screen with history: no horizontal scroll on mobile'); await vp(1280, 800, false);
+    await vp(360, 640, true); await sleep(300); assert.equal(await noHScroll(), true, 'start screen with history: no horizontal scroll on mobile'); await vp(1280, 800, false);
     await click(`.kx-history [data-act="last-result"][data-attempt="${attempt}"]`);
     await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText)`, 15000, 'learner result');
     res = await text();
@@ -846,7 +846,7 @@ async function runPractice() {
     assert.deepEqual(cspViolations, [], 'the Content-Security-Policy blocked nothing on the learner or rater pages');
     assert.equal(await evaluate(`document.querySelectorAll('.kx-rated table').length`), 7, '3 Schreiben tasks + 3 Sprechen parts + Aussprache');
     assert.match(await text(), /Teil 1: 10 von 10 · Teil 2: 5 von 5/i, 'Hören per-part line (shown in uppercase metadata style)');
-    await vp(390, 844, true); await sleep(300); assert.equal(await noHScroll(), true, 'final result: no horizontal scroll on mobile'); await vp(1280, 800, false);
+    await vp(360, 640, true); await sleep(300); assert.equal(await noHScroll(), true, 'final result: no horizontal scroll on mobile'); await vp(1280, 800, false);
     const final = (await dev.env.DB.prepare("SELECT module, points FROM module_scores WHERE module IN ('schreiben','sprechen') AND status = 'final' ORDER BY module").all()).results;
     assert.equal(final.length, 2);
     for (const f of final) assert.match(res, new RegExp(`${f.module === 'schreiben' ? 'Schreiben' : 'Sprechen'}\\s+${f.points} / 100`));
@@ -1187,8 +1187,8 @@ async function runRater2fa() {
     assert.match(await text(), /Noch 9 Wiederherstellungscodes übrig/);
     // mobile width: no horizontal scroll on the enrolment-type screens
     await expire(); await as('rater1', 'rater.html'); await h1('Anmeldung bestätigen');
-    await send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true }); await sleep(300);
-    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 390 px');
+    await send('Emulation.setDeviceMetricsOverride', { width: 360, height: 640, deviceScaleFactor: 1, mobile: true }); await sleep(300);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 360 px');
     await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false });
     // 6. a rating interrupted by an expired second factor: the selection survives verification and is saved explicitly
     const created = await call(dev.env, 'POST', '/exam/v1/attempts', { user: dev.user, body: { mode: 'synthetic_full', level: 'b1', request_id: rid(), device_id: 'dev_e2e_rater2fa_00000001' } });
@@ -1278,7 +1278,7 @@ async function runLesenOnly() {
     const base = `http://127.0.0.1:${dev.port}/exam/`;
     const keys = Object.fromEntries((await dev.env.DB.prepare('SELECT item_id, key_json FROM item_keys').all()).results.map((r) => [r.item_id, JSON.parse(r.key_json).correct]));
 
-    await vp(390, 844, true);
+    await vp(360, 640, true);
     await send('Page.navigate', { url: base });
     await waitFor(`document.querySelector('[data-act="create"][data-module="lesen"]')`, 15000, 'Lesen-only start screen');
     let t = await text();
@@ -1286,7 +1286,7 @@ async function runLesenOnly() {
     assert.match(t, /Hören, Schreiben und Sprechen sind in dieser Version nicht verfügbar/);
     assert.match(t, /kein Prüfungsergebnis/);
     assert.equal(/Übung starten|allen vier Modulen/.test(t), false, 'the full simulation is not offered');
-    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 390 px');
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 360 px');
     await A.a11y('Lesen-only start (mobile)');
     await vp(1280, 800, false);
     const full = await apiFetch('POST', '/attempts', { mode: 'synthetic_full', level: 'b1', request_id: 'rq_e2e_lesenonly_full_0001', device_id: 'dev_e2e_lesenonly_00000001' });
@@ -1306,7 +1306,7 @@ async function runLesenOnly() {
     const bar = await evaluate(`(() => { const r = document.querySelector('.kx-bar').getBoundingClientRect(); const tm = document.querySelector('.kx-timer').getBoundingClientRect(); return { top: Math.round(r.top), timerVisible: tm.top >= 0 && tm.bottom <= innerHeight, nav: !!document.querySelector('.kx-bar .kx-nav') }; })()`);
     assert.deepEqual(bar, { top: 0, timerVisible: true, nav: true }, 'sticky bar with timer and part navigation');
     // a part jump lands the "Teil n" heading below the sticky bar, at desktop and phone width
-    for (const [w, h, mobile] of [[1280, 800, false], [390, 844, true]]) {
+    for (const [w, h, mobile] of [[1280, 800, false], [360, 640, true]]) {
       await vp(w, h, mobile); await evaluate(`window.scrollTo(0, 0)`); await sleep(100);
       await evaluate(`document.querySelector('.kx-nav a[href="#part-4"]').click()`); await sleep(400);
       const pos = await evaluate(`({ bar: document.querySelector('.kx-bar').getBoundingClientRect().bottom, head: document.getElementById('part-4').getBoundingClientRect().top, noHScroll: document.documentElement.scrollWidth <= innerWidth + 1 })`);
@@ -1358,8 +1358,8 @@ async function runLesenOnly() {
     assert.deepEqual(signIn, { href: '../account/index.html', target: '_blank', rel: 'noopener' });
     assert.match(await text(), /Prüfungszeit läuft auf dem Server weiter/);
     await A.a11y('session expired');
-    await vp(390, 844, true); await sleep(200);
-    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'session screen: no horizontal scroll at 390 px');
+    await vp(360, 640, true); await sleep(200);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'session screen: no horizontal scroll at 360 px');
     await A.a11y('session expired (mobile)');
     await vp(1280, 800, false);
     clearInterval(fulfil401); await send('Fetch.disable');
@@ -1390,10 +1390,10 @@ async function runLesenOnly() {
     assert.match(t, /100 \/ 100/); assert.match(t, /kein Gesamtergebnis/);
     await A.a11y('Lesen-only result');
     // the result and item review on a phone: no page-level horizontal scroll, every table readable
-    await vp(390, 844, true); await sleep(200);
+    await vp(360, 640, true); await sleep(200);
     const phone = await evaluate(`({ page: document.documentElement.scrollWidth, vw: innerWidth, tables: [...document.querySelectorAll('.kx-result table, .kx-review-items table')].map((t) => ({ w: Math.round(t.getBoundingClientRect().width), sw: t.scrollWidth })) })`);
-    if (process.env.KX_E2E_SHOTS) { fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, 'lesen-result-390.png'), Buffer.from((await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true })).data, 'base64')); fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, 'lesen-result-390.json'), JSON.stringify(phone)); }
-    assert.ok(phone.page <= phone.vw + 1, `no horizontal page scroll on the result at 390 px: ${JSON.stringify(phone)}`);
+    if (process.env.KX_E2E_SHOTS) { fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, 'lesen-result-360.png'), Buffer.from((await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true })).data, 'base64')); fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, 'lesen-result-360.json'), JSON.stringify(phone)); }
+    assert.ok(phone.page <= phone.vw + 1, `no horizontal page scroll on the result at 360 px: ${JSON.stringify(phone)}`);
     for (const t of phone.tables) assert.ok(t.sw <= t.w + 1 && t.w <= phone.vw, `result/review tables fit a phone without sideways scrolling: ${JSON.stringify(phone)}`);
     await vp(1280, 800, false);
     const review = await apiFetch('GET', `/attempts/${attempt.id}/modules/lesen/review`);
@@ -1439,13 +1439,13 @@ async function runPartPractice() {
     const base = `http://127.0.0.1:${dev.port}/exam/`;
     const keys = Object.fromEntries((await dev.env.DB.prepare('SELECT item_id, key_json FROM item_keys').all()).results.map((r) => [r.item_id, JSON.parse(r.key_json).correct]));
 
-    await vp(390, 844, true);
+    await vp(360, 640, true);
     await send('Page.navigate', { url: base });
     await waitFor(`document.querySelector('[data-act="create"][data-mode="synthetic_part"][data-part="3"]')`, 15000, 'part practice on the start screen');
     let t = await text();
     assert.match(t, /einzelne Teile üben/); assert.match(t, /Ohne Zeitlimit/);
     assert.equal(await evaluate(`document.querySelectorAll('[data-act="create"][data-mode="synthetic_part"]').length`), 5);
-    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 390 px');
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 360 px');
     await A.a11y('start with part practice (mobile)');
     await click('[data-act="create"][data-mode="synthetic_part"][data-part="3"]');
     await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'part intro');
@@ -1557,8 +1557,8 @@ async function runAccessAdmin() {
     await waitFor(`/Zugang widerrufen\./.test(document.body.innerText) && !document.querySelector('form[data-form="revoke"]')`, 15000, 'revoked');
     assert.match(await text(), /widerrufen .*E2E Ende/);
     assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action IN ('access_granted', 'access_revoked')").first()).n, 2);
-    await vp(390, 844, true); await sleep(200);
-    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'admin screen: no horizontal scroll at 390 px');
+    await vp(360, 640, true); await sleep(200);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'admin screen: no horizontal scroll at 360 px');
     await A.a11y('access admin (mobile)');
     await vp(1280, 800, false);
     // revocation stops the open attempt too
@@ -1622,8 +1622,8 @@ async function runPrecheck() {
     assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n, 1, 'no duplicate attempt');
     assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM responses_current WHERE module = 'lesen'").first()).n, 1, 'the saved Lesen answer is kept');
     assert.equal(await evaluate(`document.querySelector('#kx-tone-heard').checked`), false, 'the confirmation is asked again after a reload');
-    await vp(390, 844, true); await sleep(200);
-    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'Hören check: no horizontal scroll at 390 px');
+    await vp(360, 640, true); await sleep(200);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'Hören check: no horizontal scroll at 360 px');
     await A.a11y('Hören audio check (mobile)');
     await vp(1280, 800, false);
     await click('[data-act="tone-play"]');
@@ -1647,7 +1647,7 @@ async function runPrecheck() {
     await waitFor(`/Bitte testen Sie zuerst Ihr Mikrofon/.test(document.querySelector('#kx-mic-msg').textContent)`, 5000, 'Sprechen start refused');
     assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'sprechen'").first()).status, 'available', 'Sprechen did not start');
     assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks').first()).n, 0, 'nothing recorded');
-    await vp(390, 844, true); await sleep(200);
+    await vp(360, 640, true); await sleep(200);
     await A.a11y('Sprechen microphone check, denied (mobile)', { tabs: 6 });
     await vp(1280, 800, false);
     await evaluate(`(navigator.mediaDevices.getUserMedia = window.__realGum, true)`);   // the learner allows the microphone
@@ -1723,7 +1723,8 @@ async function runReviewForm() {
   } finally { b.close(); fs.rmSync(dir, { recursive: true, force: true }); }
 }
 
-const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
+/* ENGINE §10 / MOCK M-25: the smallest supported viewport is 360×640 */
+const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 360×640', w: 360, h: 640, mobile: true }];
 const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {

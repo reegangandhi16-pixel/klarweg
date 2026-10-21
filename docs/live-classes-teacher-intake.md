@@ -10,7 +10,19 @@ The 10 further people the owner named on 2026-10-20 are recorded only as fact-fr
 
 Don't announce new teachers, recruitment or "more teachers joining soon" on the site or in marketing until the owner approves that plan.
 
-## 1. Intake fields
+## 0. Fast path and current status
+
+1. Send the teacher the [details and consent request](templates/live-classes-teacher-consent-request.md) yourself.
+2. Record the reply in their private intake sheet: value, evidence seen, and your confirmation date for each field.
+3. Run `node scripts/live-classes-intake.mjs <private sheet>`. It refuses a sheet inside this repository. It lists exactly what is still missing, or prints a profile entry that the site's own validator already accepts. Evidence and notes never appear in its output.
+4. Publish in one PR (§4).
+
+**Status, 2026-10-21.** All local Klarweg material was searched for the 10 people named on 2026-10-20 (`candidate-01` … `candidate-10`): the project worktrees, `~/Documents`, `~/Downloads`, `~/Desktop`, a Spotlight full-text search of the home folder, and this repository's issues and PRs.
+- No qualification, teaching experience, level, language, specialism, approach, format, photo, availability, teaching agreement or **publication consent** was found for any of them.
+- None is publishable. Each stays a fact-free draft, and every field in §1 is still missing for each.
+- Only `reegan-gandhi` is published.
+
+
 
 Every published field must come from the teacher's own documents or their written statement, and the owner must confirm it.
 

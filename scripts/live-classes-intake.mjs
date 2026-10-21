@@ -94,7 +94,8 @@ export function intakeToTeacher(text, D = loadData()) {
   }
   if (t.id && !/^[a-z0-9-]+$/.test(t.id)) errors.push(`id "${t.id}" must be lower-case letters, digits and hyphens`);
   if (t.id && /^candidate-\d{2}$/.test(t.id)) errors.push('id: use the teacher\'s own id (e.g. their name), not the opaque candidate id');
-  if (t.id && D.teachers.some((x) => x.id === t.id && !x.draft)) errors.push(`id "${t.id}" is already a published teacher`);
+  // a listed teacher (name and title only) may be upgraded to a full profile under the same id
+  if (t.id && D.teachers.some((x) => x.id === t.id && !x.draft && x.tier !== 'listed')) errors.push(`id "${t.id}" is already a published teacher`);
 
   const complete = missing.length === 0 && errors.length === 0;
   let teacher = null;

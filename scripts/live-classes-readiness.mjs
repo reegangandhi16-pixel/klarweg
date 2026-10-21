@@ -91,14 +91,17 @@ export function checkData(D, root = ROOT) {
   for (const t of teachers) {
     const w = `teacher ${t.id}`;
     if (!/^[a-z0-9-]+$/.test(t.id || '')) err(w, 'id must be lower-case letters, digits and hyphens (it is used in #teacher-<id> links)');
-    subset(w, 'levels', t.levels, LEVELS);
+    // a listed teacher shows levels only where the owner stated them
+    if (!(t.tier === 'listed' && t.levels === undefined)) subset(w, 'levels', t.levels, LEVELS);
     subset(w, 'formats', t.formats || [], FORMATS);
-    if (!Array.isArray(t.teachesIn)) err(w, 'teachesIn must be a list');
+    if (t.tier !== 'listed' && !Array.isArray(t.teachesIn)) err(w, 'teachesIn must be a list');
     // a level of German is not a certificate: certificates go in `goethe`, and only once held
     if (/goethe|zertifikat|certif|diploma|passed/i.test(t.proficiency || '')) err(w, 'proficiency states a level of German only; list certificates actually held in goethe');
     if (t.unconfirmed != null && !Array.isArray(t.unconfirmed)) err(w, 'unconfirmed must be a list of field names');
     for (const f of t.unconfirmed || []) if (!(f in t)) err(w, `unconfirmed names unknown field "${f}"`);
     if (t.draft) continue;
+    if (t.tier != null && t.tier !== 'listed') err(w, `tier "${t.tier}" (allowed: listed, or none for a full profile)`);
+    if (t.tier === 'listed') { checkListed(t, w, err, root); continue; }
     if (has(t.unconfirmed)) err(w, `published teacher still has unconfirmed fields: ${t.unconfirmed.join(', ')}`);
     for (const p of placeholders(t)) err(w, `published teacher still has placeholder text "${p}"`);
     for (const f of ['name', 'headline', 'experience', 'proficiency', 'qualifications', 'levels', 'teachesIn', 'formats']) if (!has(t[f])) err(w, `published teacher needs ${f}`);
@@ -128,6 +131,7 @@ export function checkData(D, root = ROOT) {
     if (!has(k.title) || !has(k.objectives) || !has(k.levels)) err(w, 'published course needs title, objectives and levels');
     // a draft teacher is never rendered on the live site, so the course would show no teacher
     for (const id of k.teacherIds || []) if (teacherById[id]?.draft) err(w, `published course names draft teacher "${id}"`);
+    for (const id of k.teacherIds || []) if (teacherById[id]?.tier === 'listed') err(w, `published course names listed teacher "${id}": a course needs a teacher with a full profile`);
     // a course may only be offered at levels its teachers actually teach
     const taught = new Set((k.teacherIds || []).flatMap((id) => teacherById[id]?.levels || []));
     if (taught.size) for (const l of k.levels || []) if (!taught.has(l)) err(w, `level ${l} is not taught by its teacher(s) (${[...taught].join(', ')})`);
@@ -156,6 +160,26 @@ export function checkData(D, root = ROOT) {
   return errors;
 }
 
+/* A LISTED teacher (tier: 'listed'): name and title only, on the
+   owner's instruction, with the teacher's consent on record. Nothing
+   else may be claimed: no experience, qualification, certificate,
+   headline, language, rating or availability, and no booking (booking
+   needs a full profile). Levels only where the owner has stated them. */
+export const LISTED_KEYS = ['id', 'tier', 'name', 'title', 'levels', 'photo', 'photoAlt', 'consent', 'photoConsent'];
+export const LISTED_TITLES = ['German Language Teacher'];
+function checkListed(t, w, err, root) {
+  for (const k of Object.keys(t)) if (!LISTED_KEYS.includes(k)) err(w, `listed teacher carries "${k}": a listed card shows name and title only (a full profile goes through the intake document)`);
+  if (!has(t.name)) err(w, 'listed teacher needs name');
+  if (!LISTED_TITLES.includes(t.title)) err(w, `listed teacher title "${t.title}" (allowed: ${LISTED_TITLES.join(', ')})`);
+  if (!has(t.consent)) err(w, 'listed teacher needs consent (how and when the teacher agreed to be listed)');
+  for (const p of placeholders(t)) err(w, `listed teacher still has placeholder text "${p}"`);
+  if (has(t.photo)) {
+    if (!fs.existsSync(path.join(root, t.photo))) err(w, `photo ${t.photo} does not exist`);
+    if (!has(t.photoAlt)) err(w, 'a photo needs photoAlt');
+    if (!has(t.photoConsent)) err(w, 'a photo needs photoConsent (how and when the teacher approved showing it)');
+  }
+}
+
 /* The rating shown for a teacher: computed from genuine, published,
    evidenced reviews only (kw-live.js reviewSummary() is the same rule;
    a static test keeps them in step). null = "No reviews yet". */
@@ -165,14 +189,17 @@ export function reviewSummary(reviews, teacherId) {
   return { count: ok.length, average: Math.round((ok.reduce((a, r) => a + r.rating, 0) / ok.length) * 10) / 10 };
 }
 
+/* Teachers with a full, published profile: the only ones booking may name.
+   A listed teacher is shown but never bookable. */
 export function publishedTeacherIds(root = ROOT) {
-  return (loadData(root).teachers || []).filter((t) => !t.draft).map((t) => t.id);
+  return (loadData(root).teachers || []).filter((t) => !t.draft && t.tier !== 'listed').map((t) => t.id);
 }
 
 /* docs/live-classes-candidates.json: the 11 people the owner named on
    2026-10-20, under opaque ids (names live in a private roster outside
    this public repository). A draft candidate carries no facts at all. */
 export const CANDIDATE_DRAFT_KEYS = ['id', 'status', 'bookingEligible', 'profile', 'consent', 'photoConsent', 'availability', 'reviews'];
+export const CANDIDATE_LISTED_KEYS = ['id', 'status', 'bookingEligible', 'listedAs'];
 export function loadCandidates(root = ROOT) {
   return JSON.parse(read(root, 'docs/live-classes-candidates.json')).candidates;
 }
@@ -193,8 +220,13 @@ export function checkCandidates(list, D, eligible) {
       if (teacherById[c.id] && !teacherById[c.id].draft) err(w, 'is published in live-classes-data.js but still marked draft here');
     } else if (c.status === 'published') {
       const t = teacherById[c.id];
-      if (!t || t.draft) err(w, 'status "published" but no published teacher with this id in live-classes-data.js');
-    } else err(w, `status "${c.status}" (allowed: draft, published)`);
+      if (!t || t.draft || t.tier === 'listed') err(w, 'status "published" but no published teacher with a full profile under this id in live-classes-data.js');
+    } else if (c.status === 'listed') {
+      // the opaque id stays (it is the Worker's booking id); listedAs names the card
+      for (const k of Object.keys(c)) if (!CANDIDATE_LISTED_KEYS.includes(k)) err(w, `listed candidate carries "${k}": the card's facts live in live-classes-data.js`);
+      const t = teacherById[c.listedAs];
+      if (!t || t.draft || t.tier !== 'listed') err(w, `status "listed" but listedAs "${c.listedAs}" is not a listed teacher in live-classes-data.js`);
+    } else err(w, `status "${c.status}" (allowed: draft, listed, published)`);
   }
   const elig = list.filter((c) => c.bookingEligible === true).map((c) => c.id).sort();
   if (JSON.stringify(elig) !== JSON.stringify([...eligible].sort())) err('candidates', `bookingEligible (${elig.join(', ')}) must match ELIGIBLE_TEACHERS in consultations.js (${eligible.join(', ')})`);

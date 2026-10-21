@@ -177,6 +177,24 @@
     .teacher-grid.single .t-actions { flex-wrap: wrap; }
     .teacher-grid.single .t-actions .btn { flex: 1 1 auto; }
   }
+  /* One full profile among listed teachers: featured across the grid. */
+  .t-card.t-featured { grid-column: 1 / -1; flex-direction: row; }
+  .t-card.t-featured .portrait { flex: 0 0 38%; aspect-ratio: auto; min-height: 300px; }
+  .t-card.t-featured .t-body { padding: 36px; }
+  .t-card.t-featured .t-name { font-size: 28px; }
+  @media (max-width: 720px) {
+    .t-card.t-featured { flex-direction: column; }
+    .t-card.t-featured .portrait { flex: none; aspect-ratio: 4 / 3; min-height: 0; }
+    .t-card.t-featured .portrait:not(:has(img)) { aspect-ratio: 16 / 7; }
+    .t-card.t-featured .t-body { padding: 24px; }
+  }
+  /* Listed teachers: a shorter monogram band, name and title. */
+  .t-listed .portrait { aspect-ratio: 16 / 9; }
+  @media (max-width: 640px) { .t-listed .portrait:not(:has(img)) { aspect-ratio: 16 / 7; } }
+  .t-listed .portrait-mono span { font-size: 40px; }
+  .t-listed .t-body { padding: 20px 24px 24px; }
+  .t-listed .t-reviews, .t-listed .lvl-row { margin-bottom: 0; }
+  .t-listed .lvl-row { margin-top: 14px; }
   .t-card { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column; transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease); }
   .t-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); border-color: var(--hairline-strong); }
   .portrait { position: relative; aspect-ratio: 4 / 3; background: var(--live-navy); overflow: hidden; }

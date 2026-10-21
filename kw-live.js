@@ -58,6 +58,11 @@
   var quotes = visible(D.testimonials);
   var teacherById = {};
   teachers.forEach(function (t) { teacherById[t.id] = t; });
+  /* tier 'listed': name, title and (only if confirmed) levels. No
+     profile, no booking, no consultation preselect: only teachers with
+     a full, verified profile take part in those. */
+  function listed(t) { return t.tier === 'listed'; }
+  var fullTeachers = teachers.filter(function (t) { return !listed(t); });
 
   function teacherLabel(t) {
     return t.draft ? 'Draft profile ' + (teachers.indexOf(t) + 1) : t.name;
@@ -163,7 +168,7 @@
      no label is shown and the data order is kept. */
   var availability = null;
   function availLabel(t) {
-    if (!availability || t.draft) return '';
+    if (!availability || t.draft || listed(t)) return '';
     var on = !!(availability[t.id] && availability[t.id].availableToday);
     return '<p class="t-avail' + (on ? ' on' : '') + '" data-avail="' + (on ? 'today' : 'unavailable') + '">'
       + (on ? 'Available today' : 'Currently unavailable') + '<span class="t-avail-what"> · same-day consultation</span></p>';
@@ -176,14 +181,29 @@
       .map(function (x) { return x.t; });
   }
 
+  /* A listed teacher: the same card, with only what the owner confirmed. */
+  function listedCard(t) {
+    return '<article class="t-card t-listed" aria-labelledby="tn-' + esc(t.id) + '">'
+      + portrait(t)
+      + '<div class="t-body">'
+      + '<h3 class="t-name" id="tn-' + esc(t.id) + '">' + esc(t.name) + '</h3>'
+      + '<p class="t-headline">' + esc(t.title) + '</p>'
+      + '<p class="t-reviews">' + esc(reviewText(t)) + '</p>'
+      + (has(t.levels) ? levelRow(t.levels) : '')
+      + '</div></article>';
+  }
+
   function teacherCard(t) {
+    if (listed(t)) return listedCard(t);
     var facts = [];
     if (has(t.experience)) facts.push(t.experience);
     if (has(t.proficiency)) facts.push('German: ' + t.proficiency);
     if (has(t.teachesIn)) facts.push('Teaches in ' + t.teachesIn.join(', '));
     if (has(t.formats)) facts.push(t.formats.join(' · '));
     if (has(t.goethe)) facts.push('Goethe: ' + t.goethe.join(', '));
-    return '<article class="t-card" aria-labelledby="tn-' + esc(t.id) + '">'
+    /* the one full profile among listed teachers leads the grid, full width */
+    var featured = fullTeachers.length === 1 && teachers.length > 1;
+    return '<article class="t-card' + (featured ? ' t-featured' : '') + '" aria-labelledby="tn-' + esc(t.id) + '">'
       + portrait(t)
       + '<div class="t-body">'
       + '<h3 class="t-name" id="tn-' + esc(t.id) + '">' + esc(t.name) + '</h3>'
@@ -288,7 +308,7 @@
 
   function openProfile(id, opener) {
     var t = teacherById[id];
-    if (!t || !dlg) return;
+    if (!t || !dlg || listed(t)) return;
     var teaches = courses.filter(function (c) { return (c.teacherIds || []).indexOf(id) > -1; }).map(function (c) { return c.title; });
     $('t-dialog-content').innerHTML = '<div class="t-dialog-grid">' + portrait(t)
       + '<div class="t-dialog-body">'
@@ -350,7 +370,7 @@
     });
     dlg.addEventListener('close', cleanup);
     var m = location.hash.match(/^#teacher-(.+)$/);
-    if (m && teacherById[m[1]]) openProfile(m[1], null);
+    if (m && teacherById[m[1]] && !listed(teacherById[m[1]])) openProfile(m[1], null);
     else if (m && history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#teachers');
   }
 
@@ -447,7 +467,7 @@
 
   function fillSelects() {
     var ts = $('bf-teacher'), cs = $('bf-course');
-    if (ts) ts.insertAdjacentHTML('beforeend', teachers.map(function (t) { return '<option value="' + esc(t.id) + '">' + esc(teacherLabel(t)) + '</option>'; }).join(''));
+    if (ts) ts.insertAdjacentHTML('beforeend', fullTeachers.map(function (t) { return '<option value="' + esc(t.id) + '">' + esc(teacherLabel(t)) + '</option>'; }).join(''));
     if (cs) cs.insertAdjacentHTML('beforeend', courses.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.title + (c.draft ? ' (draft)' : '')) + '</option>'; }).join(''));
   }
 
@@ -664,7 +684,7 @@
      enabled it in live-classes-data.js; until then nothing extra loads. */
   window.KWLiveUI = {
     applyAvailability: function (map) { availability = map || null; renderTeachers(); },
-    teachers: function () { return teachers.filter(function (t) { return !t.draft; }); }
+    teachers: function () { return fullTeachers.filter(function (t) { return !t.draft; }); }
   };
   function initOnlineBooking() {
     var ob = (D.consultation || {}).onlineBooking;

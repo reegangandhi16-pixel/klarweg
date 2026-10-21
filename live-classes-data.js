@@ -142,6 +142,98 @@
         photoConsent: null,
         unconfirmed: []
       },
+      /* ---------- listed teachers (tier: 'listed') ----------
+         Named by the owner (2026-10-20) and listed on the owner's
+         instruction (2026-10-21): name and the title "German Language
+         Teacher" only. No experience, qualifications, certificates,
+         ratings or photo: none is confirmed yet, and none may be added
+         here. Geetika Dhawan's levels A1–B1 are the owner's statement
+         (2026-10-21); no other levels are known. A listed teacher has
+         no profile dialog, is not offered in the consultation form and
+         is never bookable: booking needs a full profile through
+         docs/live-classes-teacher-intake.md. Validator: LISTED_KEYS in
+         scripts/live-classes-readiness.mjs. */
+      {
+        id: 'geetika-dhawan',
+        tier: 'listed',
+        name: 'Geetika Dhawan',
+        title: 'German Language Teacher',
+        levels: ['A1', 'A2', 'B1'],
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
+      {
+        id: 'priyanshi-verma',
+        tier: 'listed',
+        name: 'Priyanshi Verma',
+        title: 'German Language Teacher',
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
+      {
+        id: 'sunidhi-jain',
+        tier: 'listed',
+        name: 'Sunidhi Jain',
+        title: 'German Language Teacher',
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
+      {
+        id: 'mansi-kapoor',
+        tier: 'listed',
+        name: 'Mansi Kapoor',
+        title: 'German Language Teacher',
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
+      {
+        id: 'gaurav-singhal',
+        tier: 'listed',
+        name: 'Gaurav Singhal',
+        title: 'German Language Teacher',
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
+      {
+        id: 'kanika-taneja',
+        tier: 'listed',
+        name: 'Kanika Taneja',
+        title: 'German Language Teacher',
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
+      {
+        id: 'trisha-khanna',
+        tier: 'listed',
+        name: 'Trisha Khanna',
+        title: 'German Language Teacher',
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
+      {
+        id: 'rashi-gupta',
+        tier: 'listed',
+        name: 'Rashi Gupta',
+        title: 'German Language Teacher',
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
+      {
+        id: 'deepika-agarwal',
+        tier: 'listed',
+        name: 'Deepika Agarwal',
+        title: 'German Language Teacher',
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
+      {
+        id: 'sahil-arora',
+        tier: 'listed',
+        name: 'Sahil Arora',
+        title: 'German Language Teacher',
+        photo: null,
+        consent: 'Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title'
+      },
       {
         id: 'teacher-1',
         draft: true,

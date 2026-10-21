@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, moduleIntro, matchUsage, USED_SUFFIX, RESULT_ACTIONS } from './render.js';
+import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, moduleIntro, matchUsage, USED_SUFFIX, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -47,10 +47,11 @@ async function boot() {
     const open = av.open_attempts[0];
     if (open) return resume(open.attempt_id);
     const choice = startChoice(av);
-    if (!choice) return message('Nicht verfügbar', 'Der Prüfungsbereich ist für Ihr Konto noch nicht freigeschaltet.');
+    const parts = partPracticeSection(partChoices(av));
+    if (!choice && !parts) return message('Nicht verfügbar', 'Der Prüfungsbereich ist für Ihr Konto noch nicht freigeschaltet.');
     let history = '';
     if (av.last_completed) { try { history = attemptHistory(await api.myAttempts()); } catch { /* the start screen works without it */ } }
-    screen(startScreen(choice, { lastCompleted: av.last_completed, history }));
+    screen(startScreen(choice, { lastCompleted: av.last_completed, history, parts }));
   } catch (e) { fail(e); }
 }
 
@@ -187,7 +188,7 @@ function progress() { return S.pkg && S.module !== 'sprechen' ? partProgress(S.p
 function paintHeader() {
   const m = S.module && moduleState();
   const h = $('#kx-head');
-  if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state, progress: progress() });
+  if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state, progress: progress(), untimed: S.attempt.part_scope != null });
 }
 function paintNav() { const n = $('#kx-nav-slot'); if (n) n.innerHTML = S.module === 'sprechen' ? '' : moduleNav(progress(), S.currentPart); }
 /* The part on screen (the last one whose heading has passed the sticky bar) is marked in the part navigation. */
@@ -269,7 +270,7 @@ function tick() {
     const at = speakingPhaseAt(S.sprechen.plan, S.sprechen.startedAt, clock.serverNow(), S.sprechen.multiplier);
     const pt = $('#kx-phase-time'); if (pt) pt.textContent = at.state === 'running' ? `Diese Phase: noch ${formatRemaining(at.remaining_ms)}` : '';
   }
-  for (const mark of [300_000, 60_000]) if (rem <= mark && !announced[mark]) { announced[mark] = true; const ph = $('#kx-announce'); if (ph) ph.textContent = `Noch ${mark / 60_000} Minute${mark > 60_000 ? 'n' : ''}.`; }
+  if (S.attempt.part_scope == null) for (const mark of [300_000, 60_000]) if (rem <= mark && !announced[mark]) { announced[mark] = true; const ph = $('#kx-announce'); if (ph) ph.textContent = `Noch ${mark / 60_000} Minute${mark > 60_000 ? 'n' : ''}.`; }
   if (rem === 0) { clearInterval(S.timer); setTimeout(refresh, 11_000); }   // server auto-submits after its grace
 }
 async function refresh() { try { S.attempt = await api.getAttempt(S.attempt.attempt_id); S.module = null; route(); } catch (e) { fail(e); } }
@@ -562,7 +563,7 @@ app.addEventListener('click', async (e) => {
       } catch { b.disabled = false; b.textContent = 'Erneut versuchen'; }
       return;
     }
-    if (act === 'create') { const r = await api.createAttempt({ mode: b.dataset.mode || 'synthetic_full', level: 'b1', ...(b.dataset.module ? { module: b.dataset.module } : {}), device_id: deviceId() }); S.lease = r.lease.lease_id; rememberLease(r.attempt_id, S.lease); S.attempt = r; return route(); }
+    if (act === 'create') { const r = await api.createAttempt({ mode: b.dataset.mode || 'synthetic_full', level: 'b1', ...(b.dataset.module ? { module: b.dataset.module } : {}), ...(b.dataset.part ? { part: Number(b.dataset.part) } : {}), device_id: deviceId() }); S.lease = r.lease.lease_id; rememberLease(r.attempt_id, S.lease); S.attempt = r; return route(); }
     if (act === 'takeover') return resume(b.dataset.attempt || S.attempt.attempt_id, true);
     if (act === 'start') {
       b.disabled = true;

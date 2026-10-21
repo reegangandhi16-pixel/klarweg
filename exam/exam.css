@@ -102,6 +102,13 @@ p { margin: 0 0 16px; }
 .kx-intro-facts { font: 500 14px/1.4 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-secondary); }
 .kx-intro-rules { margin: 0 0 16px; padding-left: 24px; }
 .kx-intro-rules li { margin-bottom: 8px; }
+.kx-untimed { margin: 0; font: 500 14px/1.4 var(--font-mono); color: var(--ink-secondary); }
+.kx-part-practice { margin-top: 36px; }
+.kx-part-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.kx-part-list .kx-btn { width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; text-align: left; line-height: 1.4; }
+.kx-part-construct { font-weight: 400; font-size: 14px; color: var(--ink-secondary); }
+.kx-part-result-title { font: 500 22px/1.3 var(--font-display); margin-bottom: 8px; }
+.kx-part-result-score { font: 600 28px/1.2 var(--font-ui); font-variant-numeric: tabular-nums; margin-bottom: 8px; }
 .kx-result-actions { max-width: 680px; margin: 0 auto 36px; }
 .kx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .kx-rated .kx-table-wrap { margin-top: 16px; }

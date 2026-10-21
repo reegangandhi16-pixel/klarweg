@@ -51,7 +51,7 @@ Done and evidenced (not blockers):
 | Step | Reference |
 |---|---|
 | Create the production D1 + R2; set `EXAM_PROXY_SECRET`, `EXAM_MEDIA_SECRET`, `TOTP_ENC_KEY` (offline copy first); Access migration 011 | `RUNBOOK-EXAM-INFRA.md` §3, `RUNBOOK-RATER-2FA.md` |
-| Apply exam migrations 0001–0003 **before** deploying the Worker | RUNBOOK §3 step 3 |
+| Apply exam migrations 0001–0004 **before** deploying the Worker | RUNBOOK §3 step 3 |
 | Upload the learner release built from the approved records; deploy with every flag off | `SELF-PRACTICE-SCOPE.md` §4 |
 | Switch on: `EXAM_ENABLED`, `EXAM_SYNTHETIC_FORMS`, `EXAM_MODULE_ONLY` + `EXAM_RELEASE_FORMS` (from `worker-settings.env`), `EXAM_ROUTES` + binding, `exam/` allowlist | `SELF-PRACTICE-SCOPE.md` §4; kill switch RUNBOOK §2 |
 

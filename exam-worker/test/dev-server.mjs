@@ -6,7 +6,9 @@
    never name any other user id); authorization is still decided by the exam Worker from the stored roles.
    Usage: node exam-worker/test/dev-server.mjs [port] [s0|p1|p2|…|practice] [--mfa] (practice = every registered practice form;
    --mfa = real rater 2FA screens via an in-process Access Worker; --module-only=lesen = the Lesen-only self-practice
-   configuration, EXAM_MODULE_ONLY; --release-forms=<ids> = EXAM_RELEASE_FORMS, default the practice forms loaded)  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
+   configuration, EXAM_MODULE_ONLY; --release-forms=<ids> = EXAM_RELEASE_FORMS, default the practice forms loaded;
+   --practice-parts=lesen = single-part practice, EXAM_PRACTICE_PARTS; --practice-pool=<ids> = EXAM_PRACTICE_PART_FORMS.
+   With --practice-parts and the default library the demo splits it so the two never overlap: release P1–P10, pool P11–P15)  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
    Default for the demo: practice (every practice form; each new attempt gets the least-attempted one). Tests default to s0.
    Switching user in the demo: open /exam/dev/as/<alias> (learner, rater1, rater2, outsider); it sets the dev cookie and
    goes to the matching screen. Only these local test users exist. */
@@ -129,11 +131,18 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const releaseForms = (process.argv.find((x) => x.startsWith('--release-forms=')) || '').slice('--release-forms='.length);
   const demoReleaseSet = (form) => (form === 'practice' ? PRACTICE_LIBRARY : PRACTICE_LIBRARY.filter((f) => f.name.toLowerCase() === form)).map((f) => f.id).join(',');
   const pos = process.argv.slice(2).filter((x) => !x.startsWith('--'));
-  const s = await startDevServer({ port: Number(pos[0] || 8788), form: pos[1] || 'practice', mfa, proxy: proxyMode, flags: moduleOnly ? { EXAM_MODULE_ONLY: moduleOnly, EXAM_RELEASE_FORMS: releaseForms || demoReleaseSet(pos[1] || 'practice') } : {} });
+  const arg = (name) => (process.argv.find((x) => x.startsWith(`--${name}=`)) || '').slice(name.length + 3);
+  const practiceParts = arg('practice-parts');
+  const split = practiceParts && (pos[1] || 'practice') === 'practice';
+  const release = releaseForms || (split ? PRACTICE_LIBRARY.slice(0, 10).map((f) => f.id).join(',') : demoReleaseSet(pos[1] || 'practice'));
+  const pool = arg('practice-pool') || (split ? PRACTICE_LIBRARY.slice(10).map((f) => f.id).join(',') : '');
+  const flags = { ...(moduleOnly ? { EXAM_MODULE_ONLY: moduleOnly, EXAM_RELEASE_FORMS: release } : {}),
+    ...(practiceParts ? { EXAM_PRACTICE_PARTS: practiceParts, EXAM_PRACTICE_PART_FORMS: pool } : {}) };
+  const s = await startDevServer({ port: Number(pos[0] || 8788), form: pos[1] || 'practice', mfa, proxy: proxyMode, flags });
   const u = `http://127.0.0.1:${s.port}/exam`;
   console.log(`klarweg-exam dev server (local only, synthetic content, TEST AUDIO tones — not real listening audio), form ${s.form}
   learner:   ${u}/dev/as/learner
   raters:    ${u}/dev/as/rater1   ${u}/dev/as/rater2
   no role:   ${u}/dev/as/outsider
-  ${moduleOnly ? `EXAM_MODULE_ONLY=${moduleOnly}: single-module attempts only; EXAM_RELEASE_FORMS=${releaseForms || demoReleaseSet(pos[1] || 'practice') || '(none: fails closed)'}\n  ` : ''}${proxyMode ? 'requests: through the real Access Worker in-process (session, /exam proxy, service binding)\n  ' : ''}${mfa ? 'second factor: ON (raters enrol with an authenticator app on first visit; local in-memory data only)' : 'second factor: raters count as verified (start with --mfa to see the 2FA screens)'}`);
+  ${moduleOnly ? `EXAM_MODULE_ONLY=${moduleOnly}: single-module attempts only; EXAM_RELEASE_FORMS=${release || '(none: fails closed)'}\n  ` : ''}${practiceParts ? `EXAM_PRACTICE_PARTS=${practiceParts}: single-part practice from the pool EXAM_PRACTICE_PART_FORMS=${pool || '(none: fails closed)'}\n  ` : ''}${proxyMode ? 'requests: through the real Access Worker in-process (session, /exam proxy, service binding)\n  ' : ''}${mfa ? 'second factor: ON (raters enrol with an authenticator app on first visit; local in-memory data only)' : 'second factor: raters count as verified (start with --mfa to see the 2FA screens)'}`);
 }

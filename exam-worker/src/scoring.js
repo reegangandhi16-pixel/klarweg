@@ -57,6 +57,15 @@ export function scoreObjectiveModule(cfg, moduleCfg, items, keys, responses) {
     ...grade(cfg, points), rule_flags: { correct: r.correct, incorrect: r.incorrect, unanswered: r.unanswered } };
 }
 
+/* A single-part practice (ENGINE §2 practice_part): correct answers out of the part's scored items. No official
+   conversion exists for one part, so there are no module points, no pass and no grade. */
+export function scoreObjectivePart(items, keys, responses, part) {
+  const r = objectiveRaw(items, keys, responses);
+  if (!r.scored_items) throw new Error(`part ${part} has no scored items`);
+  return { status: 'final', raw: r.raw, raw_unrounded: r.raw, raw_max: r.scored_items, points: null, max_points: r.scored_items, pass: null, predikat: null,
+    rule_flags: { correct: r.correct, incorrect: r.incorrect, unanswered: r.unanswered, part } };
+}
+
 /* One rating of one rubric: bands {criterion: 'A'..'E'} → points per criterion. */
 export function rubricTotal(rubric, bands) {
   const points = {};

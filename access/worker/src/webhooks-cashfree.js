@@ -35,6 +35,9 @@ import { cashfreeBaseUrl, cashfreeConfigProblem } from './cashfree-config.js';
 /* Consultation orders ("cons_…") settle in consultations.js, which never
    grants a product: a consultation payment cannot unlock a course. */
 import { isConsultOrderId, consultWebhook } from './consultations.js';
+/* Live-course enrolment payments ("enrp_…") settle in enrolments.js, which
+   never grants a product either. */
+import { isEnrolOrderId, enrolWebhook } from './enrolments.js';
 
 const REPLAY_WINDOW_SECONDS = 300;          // 5 minutes
 const API_VERSION = '2023-08-01';
@@ -136,6 +139,9 @@ export async function cashfreeWebhook(request, env) {
           entirely by consultations.js (own table, no grantProduct). */
   if (isConsultOrderId(claimedOrderId)) {
     return consultWebhook(env, claimedOrderId, claimedPaymentId);
+  }
+  if (isEnrolOrderId(claimedOrderId)) {
+    return enrolWebhook(env, claimedOrderId, claimedPaymentId);
   }
 
   /* 11. Local order, matched on the Cashfree order id we stored. */

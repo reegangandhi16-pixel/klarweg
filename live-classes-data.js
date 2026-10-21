@@ -87,6 +87,26 @@
       }
     },
 
+    /* ---------- online course enrolment ----------
+       Pay a live course's fee on this page (kw-enrol.js + the access
+       Worker's /enrol routes), in full or in the published instalments.
+       OFF: while enabled is false the page loads no enrolment script and
+       the course cards keep their waitlist / consultation buttons. The
+       Worker computes every amount from its own copy of the published fee
+       (LIVE_COURSES in access/worker/src/enrolments.js; a test keeps the
+       two identical) and confirms a place only after verifying the
+       payment with Cashfree. Enabling it is an owner decision
+       (docs/live-classes-online-payments.md): the validator refuses
+       enabled: true until both fields below are recorded and at least one
+       published course has enrolment "open" with payment terms that no
+       longer describe an emailed payment request. The Worker's
+       ENROL_PAYMENTS switch is separate and off. */
+    liveEnrolment: {
+      enabled: false,
+      ownerApproval: null,        // how and when the owner approved online course payments
+      legalTermsUpdated: false    // Terms, Privacy and the course payment terms rewritten for online payment
+    },
+
     /* ---------- live-class policies ----------
        Approved by the owner on 2026-10-20 (D5). Shown in the page FAQ;
        each text is also the FAQ's no-JavaScript fallback in

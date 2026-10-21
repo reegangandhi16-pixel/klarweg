@@ -623,3 +623,22 @@ export async function consultWebhook(env, cashfreeOrderId, paymentId) {
   if (out.result === "review") return json({ ok: false, error: "verification-failed", reason: out.reason, duplicate: !!out.duplicate }, out.reason === "amount" || out.reason === "currency" || out.reason === "order-id" ? 400 : 200);
   return json({ ok: true, status: out.result });
 }
+
+/* Cron reconciliation (index.js scheduled()): re-checks recent bookings
+   still pending, or expired/released after an order was opened, so a paid
+   booking whose webhook and return were both lost is still settled. */
+export async function reconcileRecentConsultBookings(env, { sinceSeconds = 2 * 86400, limit = 50 } = {}) {
+  if (cashfreeConfigProblem(env)) return { checked: 0, skipped: "cashfree-not-configured" };
+  const now = nowSeconds();
+  await sweepExpiredHolds(env.DB, now);
+  const { results } = await env.DB.prepare(
+    "SELECT * FROM consult_bookings WHERE status IN ('pending', 'expired', 'released') AND payment_session_id IS NOT NULL AND created_at >= ?1 ORDER BY created_at LIMIT ?2"
+  ).bind(now - sinceSeconds, limit).all();
+  const tally = {};
+  for (const b of results) {
+    const remote = await fetchGatewayOrder(env, b.cashfree_order_id);
+    const r = remote ? (await settle(env, b, remote, null)).result : "unavailable";
+    tally[r] = (tally[r] || 0) + 1;
+  }
+  return { checked: results.length, ...tally };
+}

@@ -30,6 +30,8 @@
   var D = window.KWLive;
   if (!D) return;
 
+  /* Online course enrolment with payment: off until the owner enables it (kw-enrol.js). */
+  var ENROL_ON = !!(D.liveEnrolment && D.liveEnrolment.enabled === true);
   var LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
   var GROUP_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced', exam: 'Goethe prep', speaking: 'Speaking' };
   var STATUS = {
@@ -450,7 +452,10 @@
       /* A waitlist course says plainly that nothing is booked or charged. */
       + (c.enrolment === 'waitlist' ? '<p class="c-note">' + (has(c.nextBatch) ? '' : 'The start date is still to be announced. ')
         + 'Enrolment is not open yet. Joining the waitlist is free and is not a booking: nothing is charged.</p>' : '')
-      + '<a href="#book" class="btn ' + (c.enrolment === 'open' ? 'btn-live' : 'btn-secondary') + '" data-book-course="' + esc(c.id) + '">' + esc(st.cta) + ' ' + ARROW + '</a>'
+      + (ENROL_ON && c.enrolment === 'open' && !c.draft
+        /* Online enrolment (kw-enrol.js): pay the fee on this page; the place is confirmed only by the Worker's verified payment. */
+        ? '<a href="#enrol" class="btn btn-live" data-enrol-course="' + esc(c.id) + '">Enrol and pay online ' + ARROW + '</a>'
+        : '<a href="#book" class="btn ' + (c.enrolment === 'open' ? 'btn-live' : 'btn-secondary') + '" data-book-course="' + esc(c.id) + '">' + esc(st.cta) + ' ' + ARROW + '</a>')
       + '</article>';
   }
 
@@ -714,13 +719,25 @@
     applyAvailability: function (map) { availability = map || null; renderTeachers(); },
     teachers: function () { return fullTeachers.filter(function (t) { return !t.draft; }); }
   };
-  function initOnlineBooking() {
-    var ob = (D.consultation || {}).onlineBooking;
-    if (!ob || ob.enabled !== true) return;
+  function loadScript(src) {
     var s = document.createElement('script');
-    s.src = 'kw-consult.js';
+    s.src = src;
     s.defer = true;
     document.body.appendChild(s);
+  }
+  function initOnlineBooking() {
+    if (ENROL_ON) loadScript('kw-enrol.js');
+    var ob = (D.consultation || {}).onlineBooking;
+    if (!ob || ob.enabled !== true) return;
+    /* With online booking on, a consultation is booked and paid online
+       only: the emailed consultation request goes, the free
+       "tell me when a course opens" request stays. */
+    var emailConsult = form && form.querySelector('input[name="rtype"][value="consult"]');
+    if (emailConsult) {
+      emailConsult.closest('label').remove();
+      setRequestType('interest');
+    }
+    loadScript('kw-consult.js');
   }
 
   function init() {

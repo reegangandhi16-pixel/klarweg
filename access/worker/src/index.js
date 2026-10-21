@@ -2,7 +2,8 @@ import { corsHeaders, withCors, isForeignOriginWrite, configureCors } from "./co
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
-import { consultAvailability, createConsultBooking, getConsultBooking, getConsultJoin, listConsultBookings } from "./consultations.js";
+import { consultAvailability, createConsultBooking, getConsultBooking, getConsultJoin, listConsultBookings, reconcileRecentConsultBookings } from "./consultations.js";
+import { enrolCatalog, enrolQuote, createEnrolCheckout, getEnrolment, listEnrolments, payNextPart, reconcileRecentPayments } from "./enrolments.js";
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
@@ -48,6 +49,19 @@ export default {
       console.log(JSON.stringify({ svc: "klarweg-access", evt: "unhandled", path, error: (err && err.name) || "Error" }));
       return withCors(json({ ok: false, error: "server_error" }, 500), request);
     }
+  },
+
+  /* Payment reconciliation, run by a Cron Trigger once one is configured
+     (docs/live-classes-online-payments.md). Asks Cashfree for the status of
+     recent open orders, so a payment whose webhook and return were both
+     lost is still settled. Never charges, refunds or sends anything. */
+  async scheduled(event, env, ctx) {
+    const work = (async () => {
+      const consult = await reconcileRecentConsultBookings(env).catch((e) => ({ error: (e && e.name) || "Error" }));
+      const enrol = await reconcileRecentPayments(env).catch((e) => ({ error: (e && e.name) || "Error" }));
+      console.log(JSON.stringify({ svc: "klarweg-access", evt: "reconcile", consult, enrol }));
+    })();
+    if (ctx && ctx.waitUntil) ctx.waitUntil(work); else await work;
   }
 };
 
@@ -99,6 +113,30 @@ async function route(request, env, ctx) {
     const consultMatch = url.pathname.match(/^\/consult\/bookings\/(KWC-[2-9A-HJ-NP-Z]{8})$/);
     if (request.method === "GET" && consultMatch) {
       return withCors(await getConsultBooking(request, env, consultMatch[1]), request);
+    }
+
+    /* Live-course enrolment with online payment (enrolments.js). Off unless
+       ENROL_PAYMENTS is "sandbox" or "live" and the course is listed in
+       ENROL_COURSES. */
+    if (request.method === "GET" && url.pathname === "/enrol/catalog") {
+      return withCors(await enrolCatalog(request, env), request);
+    }
+    if (request.method === "GET" && url.pathname === "/enrol/quote") {
+      return withCors(await enrolQuote(request, env), request);
+    }
+    if (request.method === "POST" && url.pathname === "/enrol/checkout") {
+      return withCors(await createEnrolCheckout(request, env), request);
+    }
+    if (request.method === "GET" && url.pathname === "/enrol/enrolments") {
+      return withCors(await listEnrolments(request, env), request);
+    }
+    const enrolPayMatch = url.pathname.match(/^\/enrol\/enrolments\/(KWE-[2-9A-HJ-NP-Z]{8})\/pay$/);
+    if (request.method === "POST" && enrolPayMatch) {
+      return withCors(await payNextPart(request, env, enrolPayMatch[1]), request);
+    }
+    const enrolMatch = url.pathname.match(/^\/enrol\/enrolments\/(KWE-[2-9A-HJ-NP-Z]{8})$/);
+    if (request.method === "GET" && enrolMatch) {
+      return withCors(await getEnrolment(request, env, enrolMatch[1]), request);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/signup") {

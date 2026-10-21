@@ -133,7 +133,7 @@
     }).join('') + '</ul>';
   }
   function statusWord(s) {
-    return { confirmed: 'confirmed', pending: 'awaiting payment', review: 'being checked by Klarweg' }[s] || s;
+    return { confirmed: 'confirmed', pending: 'awaiting payment', review: 'being checked by Klarweg', cancelled: 'cancelled by Klarweg' }[s] || s;
   }
 
   /* ---------- booking ---------- */
@@ -185,17 +185,23 @@
   }
 
   /* ---------- return from Cashfree: the Worker's verified status only ---------- */
+  /* The first answer is shown at once (a failed or cancelled payment
+     offers Continue payment straight away); while still pending, it keeps
+     checking quietly and re-renders only when the status changes. */
+  var trackId = 0;
   function track(ref) {
     rememberRef(ref);
-    var tries = 0;
+    var my = ++trackId, tries = 0, shown = null;
     show('<p class="kwcb-note">Confirming your payment with Cashfree… Booking reference <span class="kwcb-ref">' + esc(ref) + '</span></p>');
     (function tick() {
       tries++;
       auth().request('/consult/bookings/' + encodeURIComponent(ref)).then(function (r) {
+        if (my !== trackId) return;
         var b = r.booking;
-        if (b.status === 'pending' && tries < POLL_TRIES) return setTimeout(tick, POLL_MS);
-        renderResult(b);
+        if (b.status !== shown) { shown = b.status; renderResult(b); }
+        if (b.status === 'pending' && tries < POLL_TRIES) setTimeout(tick, POLL_MS);
       }, function (e) {
+        if (my !== trackId) return;
         if (e && e.code === 'unauthorized') return show('<p class="kwcb-note">Sign in to see booking <span class="kwcb-ref">' + esc(ref) + '</span>.</p>');
         if (tries < POLL_TRIES) return setTimeout(tick, POLL_MS);
         show('<p class="kwcb-note">We could not check booking <span class="kwcb-ref">' + esc(ref) + '</span> just now. Reload this page in a minute.</p>');
@@ -217,11 +223,18 @@
       return;
     }
     if (b.status === 'pending') {
-      return show('<h3>Payment not confirmed yet</h3><p class="kwcb-note">Booking <span class="kwcb-ref">' + esc(b.ref) + '</span> is held for you while the payment completes. If you closed the payment page, this time is released automatically after 20 minutes.</p>'
-        + '<button type="button" class="btn btn-secondary" id="kwcb-again">Check again</button>');
+      /* Continue payment posts the same teacher and slot: the Worker returns
+         the SAME open Cashfree order, so a retry never creates a second charge. */
+      pendingBooking = b;
+      return show('<h3>Payment not completed yet</h3><p class="kwcb-note">Booking <span class="kwcb-ref">' + esc(b.ref) + '</span> (' + when + ') is held for you. If the payment failed or you cancelled it, nothing was charged and you can try again. If you did pay, it can take a minute to be confirmed. An unpaid hold is released automatically after 20 minutes.</p>'
+        + '<p style="display:flex;flex-wrap:wrap;gap:10px"><button type="button" class="btn btn-live" id="kwcb-resume">Continue payment</button>'
+        + '<button type="button" class="btn btn-secondary" id="kwcb-again">Check again</button></p>');
     }
     if (b.status === 'review') {
       return show('<h3>Your payment is being checked</h3><p class="kwcb-note">We received a payment for booking <span class="kwcb-ref">' + esc(b.ref) + '</span> but could not confirm the time automatically. A person at Klarweg checks it. Please email ' + contact + ' with your reference.</p>');
+    }
+    if (b.status === 'cancelled') {
+      return show('<h3>This booking was cancelled</h3><p class="kwcb-note">Booking <span class="kwcb-ref">' + esc(b.ref) + '</span> was cancelled by Klarweg. For questions about the refund, email ' + contact + ' with the reference.</p>');
     }
     show('<h3>This booking was not completed</h3><p class="kwcb-note">Booking <span class="kwcb-ref">' + esc(b.ref) + '</span> was not paid in time, so the slot was released. If money left your account for it, email ' + contact + ' with the reference.</p>'
       + '<button type="button" class="btn btn-secondary" id="kwcb-again">Choose a time</button>');
@@ -244,8 +257,11 @@
     });
   }
 
+  var pendingBooking = null;
   doc.addEventListener('click', function (e) {
     if (e.target && e.target.id === 'kwcb-print') return global.print();
+    if (e.target && /^kwcb-(resume|again)$/.test(e.target.id)) trackId++;   // any action stops a quiet status check
+    if (e.target && e.target.id === 'kwcb-resume' && pendingBooking) return create(pendingBooking.teacherId, pendingBooking.slotStart);
     if (e.target && e.target.id === 'kwcb-again') {
       var ref = new URLSearchParams(global.location.search).get('consult_ref');
       if (ref && /^KWC-[2-9A-HJ-NP-Z]{8}$/.test(ref) && e.target.textContent === 'Check again') return track(ref);

@@ -81,6 +81,16 @@ export function checkData(D, root = ROOT) {
     if (ob.legalTermsUpdated !== true) err('consultation.onlineBooking', 'enabled needs legalTermsUpdated: Terms §4A, Privacy §4A and the page copy still describe email + UPI only');
     if (ob.joinLinksConfigured !== true) err('consultation.onlineBooking', 'enabled needs joinLinksConfigured: the CONSULT_JOIN_LINKS Worker secret must hold each bookable teacher\'s Google Meet link');
   }
+  // online course payments: an owner decision with legal consequences, never on by default
+  const le = D.liveEnrolment;
+  if (!le || typeof le.enabled !== 'boolean') err('liveEnrolment', 'must be an object with enabled: true or false');
+  else if (le.enabled) {
+    if (!has(le.ownerApproval)) err('liveEnrolment', 'enabled needs ownerApproval (how and when the owner approved online course payments)');
+    if (le.legalTermsUpdated !== true) err('liveEnrolment', 'enabled needs legalTermsUpdated: the Terms, Privacy Policy and course payment terms must describe online payment');
+    const open = (D.courses || []).filter((k) => !k.draft && k.enrolment === 'open');
+    if (!open.length) err('liveEnrolment', 'enabled needs at least one published course with enrolment "open"');
+    for (const k of open) if (/\bemail|payment request/i.test(k.paymentTerms || '')) err(`course ${k.id}`, 'paymentTerms still describe an emailed payment request; rewrite them for online payment before enabling liveEnrolment');
+  }
   // public data: a private joining link must never be in it (it belongs in a Worker secret)
   for (const p of privateLinks(D)) err('live-classes-data.js', `contains a private meeting link (${p.slice(0, 40)}…): joining links belong in the CONSULT_JOIN_LINKS Worker secret only`);
 

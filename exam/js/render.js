@@ -285,8 +285,8 @@ export function ratedFeedback(module, fb, criterionLabels = {}) {
 
 export function itemReview(module, review) {
   const s = review.summary;
-  const rows = review.items.map((it) => `<tr class="kx-rv-${esc(it.status)}"><th scope="row">${esc(it.display_no)}</th><td>${esc(answerText(it.your_answer))}</td>`
-    + `<td>${esc(answerText(it.correct_answer))}</td><td><span class="kx-rv-status">${esc(REVIEW_STATUS[it.status] || it.status)}</span></td>`
+  const rows = review.items.map((it) => `<tr class="kx-rv-${esc(it.status)}"><th scope="row">${esc(it.display_no)}</th><td data-label="Ihre Antwort">${esc(answerText(it.your_answer))}</td>`
+    + `<td data-label="Lösung">${esc(answerText(it.correct_answer))}</td><td><span class="kx-rv-status">${esc(REVIEW_STATUS[it.status] || it.status)}</span></td>`
     + `<td>${esc(it.points)} / ${esc(it.max_points)}</td></tr>`
     + (it.explanation ? `<tr class="kx-rv-explain"><td colspan="5">${esc(it.explanation)}${(it.evidence || []).map((e) => ` <q>${esc(e.text)}</q>`).join('')}</td></tr>` : '')).join('');
   const label = MODULE_LABELS[module] || module;

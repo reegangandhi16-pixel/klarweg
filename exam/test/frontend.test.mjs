@@ -737,3 +737,13 @@ test('PART NAV: the part on screen is marked aria-current (and styled), nothing 
   assert.equal(/aria-current/.test(moduleNav(prog)), false);
   assert.match(read('exam/exam.css'), /\.kx-nav a\[aria-current="true"\] {[^}]*border-color: var\(--accent\)/);
 });
+
+test('ITEM REVIEW on a phone: answer and solution cells carry their labels; the table stacks into one card per task', () => {
+  const html = itemReview('lesen', { summary: { correct: 1, incorrect: 0, unanswered: 0, total: 1 }, items: [{ display_no: 1, part: 1, status: 'correct', points: 1, max_points: 1,
+    your_answer: { label: 'a' }, correct_answer: { label: 'a' }, explanation: 'Weil …' }] });
+  assert.match(html, /<td data-label="Ihre Antwort">a<\/td><td data-label="Lösung">a<\/td>/);
+  const css = read('exam/exam.css');
+  const mobile = css.slice(css.indexOf('@media (max-width: 720px)'));
+  assert.match(mobile, /\.kx-review-items tr:not\(\.kx-rv-explain\) { display: grid;/);
+  assert.match(mobile, /\.kx-review-items td\[data-label\]::before { content: attr\(data-label\) ": "/);
+});

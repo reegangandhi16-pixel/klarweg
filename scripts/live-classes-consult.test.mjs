@@ -187,8 +187,10 @@ test('BOOKING: online booking is off — the page loads no booking script, says 
   const D = loadData();
   const ob = D.consultation.onlineBooking;
   assert.equal(ob.enabled, false);
-  assert.equal(ob.legalTermsUpdated, false);
-  assert.equal(ob.ownerApproval, null);
+  assert.equal(ob.legalTermsUpdated, true, 'the owner reviewed and merged the online-booking wording (PR #183)');
+  assert.equal(ob.ownerApproval, null, 'no LAUNCH approval: reviewing legal wording is not approval to take bookings');
+  assert.match(read('live-classes-data.js'), /onlineBooking: \{\s*enabled: false,\s*ownerApproval: null, +\/\/ LAUNCH approval only[^\n]*\n\s*legalTermsUpdated: true, +\/\/ legal copy only: [^\n]*PR #183 \(merge 237f3486\), 2026-10-21/);
+  assert.equal(ob.joinLinksConfigured, false, 'no joining link is configured');
   const html = read('live-classes.html');
   assert.equal(/kw-consult\.js|kw-checkout\.js|cashfree/i.test(html), false, 'not referenced by the page itself');
   assert.match(read('kw-live.js'), /if \(!BOOK_ON\) return;/);
@@ -209,10 +211,16 @@ test('BOOKING: online booking is off — the page loads no booking script, says 
 test('BOOKING: enabling online booking is refused until the owner decisions and legal updates are recorded', () => {
   const base = loadData();
   const on = (extra) => { const D = clone(base); Object.assign(D.consultation.onlineBooking, { enabled: true }, extra); return checkData(D); };
-  assert.ok(on({}).some((e) => /ownerApproval/.test(e)));
-  assert.ok(on({}).some((e) => /legalTermsUpdated/.test(e)));
-  assert.ok(on({}).some((e) => /joinLinksConfigured/.test(e)));
-  assert.deepEqual(on({ ownerApproval: 'Owner, email 2026-11-01', legalTermsUpdated: true, joinLinksConfigured: true }), [], 'satisfiable once decided');
+  assert.ok(on({}).some((e) => /enabled needs ownerApproval/.test(e)), 'refused: no launch approval is recorded');
+  assert.equal(on({}).some((e) => /legalTermsUpdated/.test(e)), false, 'the legal wording is recorded');
+  assert.ok(on({}).some((e) => /joinLinksConfigured/.test(e)), 'still refused: no joining links configured');
+  // a legal-copy-only note can never stand in for the launch approval
+  for (const note of ['Owner reviewed the Terms §4A and Privacy wording and merged PR #183 (merge 237f3486), 2026-10-21. Legal copy only: this does not enable the switch.', 'Legal copy only (PR #183)', 'Owner reviewed the legal wording', 'Merged PR #183, 2026-10-21', 'Noted; this does not enable booking']) {
+    assert.ok(on({ ownerApproval: note, joinLinksConfigured: true }).some((e) => /ownerApproval records a legal-copy review, not approval to launch paid booking/.test(e)), note);
+  }
+  assert.ok(on({ ownerApproval: null }).some((e) => /ownerApproval/.test(e)));
+  assert.ok(on({ legalTermsUpdated: false }).some((e) => /legalTermsUpdated/.test(e)));
+  assert.deepEqual(on({ ownerApproval: 'Owner approved launching paid consultation booking, email 2026-11-01', legalTermsUpdated: true, joinLinksConfigured: true }), [], 'satisfiable once the launch is explicitly approved');
   const D = clone(base); delete D.consultation.onlineBooking;
   assert.ok(checkData(D).some((e) => /onlineBooking/.test(e)));
 });

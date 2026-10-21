@@ -12,6 +12,8 @@
    instead of silently charging against the wrong environment.
    ============================================================ */
 
+import { parseExtraOrigins } from "./cors.js";
+
 export function cashfreeMode(env) {
   return env.CASHFREE_ENV === "production" ? "production" : "sandbox";
 }
@@ -54,6 +56,10 @@ const SITE_BASE_BY_ORIGIN = {
 export function siteBaseUrl(env, request) {
   const origin = request && request.headers ? request.headers.get("Origin") : null;
   if (origin && SITE_BASE_BY_ORIGIN[origin]) return SITE_BASE_BY_ORIGIN[origin];
+  /* A non-production test page (an exact local origin in CORS_EXTRA_ORIGINS,
+     which production may never set) gets the learner back to itself, and
+     only against Cashfree's sandbox. */
+  if (origin && env.CASHFREE_ENV === "sandbox" && parseExtraOrigins(env.CORS_EXTRA_ORIGINS).includes(origin)) return origin;
   return env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL;
 }
 

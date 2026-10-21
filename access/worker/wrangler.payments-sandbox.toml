@@ -1,0 +1,69 @@
+# PAYMENT SANDBOX Access Worker — Cashfree SANDBOX verification only
+# (docs/live-classes-payments-sandbox.md).
+#
+# A third, separate config, never read by production tooling:
+#   · not wrangler.toml (production; scripts/predeploy-access-check.mjs reads it);
+#   · not wrangler.nonprod.toml (the exam/QA non-prod Worker, which keeps every
+#     payment integration OFF and must stay that way).
+# Use it only with the explicit flag, from access/worker:
+#   npx wrangler deploy --config wrangler.payments-sandbox.toml
+#   npx wrangler d1 execute klarweg-access-payments-nonprod --config wrangler.payments-sandbox.toml --remote --file <sql>
+#
+# scripts/payments-sandbox-config.test.mjs fails if this file ever names a
+# production Worker, database or app id, leaves Cashfree's sandbox, turns a
+# switch to "live", widens CORS beyond the local test page, or holds a secret.
+# It holds NO real learners: test accounts and synthetic data only.
+
+name = "klarweg-access-payments-nonprod"
+main = "src/index.js"
+compatibility_date = "2024-11-06"
+
+# Public HTTPS endpoint, needed for Cashfree's sandbox webhooks:
+#   https://klarweg-access-payments-nonprod.klarweg-issue-reports-2026.workers.dev
+workers_dev = true
+
+[vars]
+# Cashfree SANDBOX only (no real money). The TEST app id and the sandbox secret
+# key are Worker SECRETS (see below), never values in this file.
+CASHFREE_ENV = "sandbox"
+CASHFREE_NOTIFY_URL = "https://klarweg-access-payments-nonprod.klarweg-issue-reports-2026.workers.dev/webhooks/cashfree"
+
+# The local test page served by scripts/payments-sandbox-site.mjs. The Worker
+# sends Cashfree's return redirect back to it (sandbox only; src/cashfree-config.js).
+CORS_EXTRA_ORIGINS = "http://localhost:8789"
+
+# ₹100 same-day consultation booking, sandbox mode. Only the owner's profile.
+CONSULT_BOOKING = "sandbox"
+CONSULT_TEACHERS = "reegan-gandhi"
+
+# Full-payment A1 enrolment, sandbox mode. The batch date is SYNTHETIC: a
+# far-future placeholder that exists only in this test environment so the
+# Worker treats the course as open. It is not a start date, is never shown on
+# the public site, and must never be copied to wrangler.toml or the page data.
+ENROL_PAYMENTS = "sandbox"
+ENROL_COURSES = '{"live-a1":{"batch":"2099-01-05"}}'
+ENROL_CONSULT_CREDIT = "course-fee"
+
+# Nothing else that costs money or touches third parties: no AI, speech,
+# chapter PDFs, exam proxy or Google sign-in (test accounts use /auth/signup).
+AI_ENABLED = "false"
+SPEECH_MODE = "off"
+
+# Reconciliation (expired holds, lost webhooks) runs here as it would at launch.
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Its OWN database: never klarweg-access, never klarweg-access-nonprod.
+# Create it, then replace the placeholder with the id wrangler prints:
+#   npx wrangler d1 create klarweg-access-payments-nonprod
+[[d1_databases]]
+binding = "DB"
+database_name = "klarweg-access-payments-nonprod"
+database_id = "00000000-0000-0000-0000-000000000000"
+
+# Secrets (npx wrangler secret put <NAME> --config wrangler.payments-sandbox.toml),
+# typed at the prompt, never here, never in a log or a commit:
+#   CASHFREE_APP_ID       the Cashfree SANDBOX app id (starts with TEST)
+#   CASHFREE_SECRET_KEY   the matching sandbox secret key (also signs webhooks)
+#   RATE_SALT             login rate-limit salt (any random string)
+#   CONSULT_JOIN_LINKS    optional: {"reegan-gandhi":"<a throwaway Meet link the owner creates for testing>"}

@@ -22,6 +22,10 @@ const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 const GROUPS = ['beginner', 'intermediate', 'advanced', 'exam', 'speaking'];
 const FORMATS = ['Group batch', 'One-to-one'];
 const ENROLMENT = ['open', 'waitlist', 'not-open'];
+/* A launch approval names the decision to take payments. Reviewing or merging
+   the legal wording (recorded as legalTermsUpdated) is not one, so a note that
+   only describes that review never satisfies the gate. */
+const LEGAL_ONLY = /legal[- ]?(?:copy|wording|text)[^.]*\bonly\b|does not enable|\bnot (?:a )?launch\b|merged PR #183|reviewed (?:the )?(?:Terms|Privacy|legal)/i;
 export const POLICIES = ['missedClass', 'cancellationRefund', 'scheduling', 'feeIncludes'];
 export const PAGE_FILES = ['live-classes.html', 'kw-live.js', 'live-classes-data.js'];
 
@@ -80,6 +84,7 @@ export function checkData(D, root = ROOT) {
   else if (ob.enabled) {
     if (c.termsConfirmed !== true) err('consultation.onlineBooking', 'enabled needs confirmed consultation terms');
     if (!has(ob.ownerApproval)) err('consultation.onlineBooking', 'enabled needs ownerApproval (how and when the owner approved online booking)');
+    else if (LEGAL_ONLY.test(ob.ownerApproval)) err('consultation.onlineBooking', 'ownerApproval records a legal-copy review, not approval to launch paid booking');
     if (ob.legalTermsUpdated !== true) err('consultation.onlineBooking', 'enabled needs legalTermsUpdated: the owner must approve Terms §4A, Privacy §4A and the page copy for online booking');
     if (ob.joinLinksConfigured !== true) err('consultation.onlineBooking', 'enabled needs joinLinksConfigured: the CONSULT_JOIN_LINKS Worker secret must hold each bookable teacher\'s Google Meet link');
   }
@@ -88,6 +93,7 @@ export function checkData(D, root = ROOT) {
   if (!le || typeof le.enabled !== 'boolean') err('liveEnrolment', 'must be an object with enabled: true or false');
   else if (le.enabled) {
     if (!has(le.ownerApproval)) err('liveEnrolment', 'enabled needs ownerApproval (how and when the owner approved online course payments)');
+    else if (LEGAL_ONLY.test(le.ownerApproval)) err('liveEnrolment', 'ownerApproval records a legal-copy review, not approval to launch course payments');
     if (le.legalTermsUpdated !== true) err('liveEnrolment', 'enabled needs legalTermsUpdated: the Terms, Privacy Policy and course payment terms must describe online payment');
     const open = (D.courses || []).filter((k) => !k.draft && k.enrolment === 'open');
     if (!open.length) err('liveEnrolment', 'enabled needs at least one published course with enrolment "open"');

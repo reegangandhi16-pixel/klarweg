@@ -75,7 +75,8 @@ A live-course payment never grants self-paced access. It never calls `grantProdu
   - `enrolment: 'open'`;
   - `paymentTerms` without "once enrolment opens" (today: "₹7,999 in full, in one payment, before the first class. Paid online on this page once enrolment opens.");
   - the homepage FAQ and Terms §4A updated. The readiness check flags them.
-- [ ] **P5 · Legal text.** Terms §4A and Privacy §2/§4/§4A/§8/§9 were rewritten on 2026-10-21 for online-only payment (D11), with "not open yet" wording while the switches are off. The owner reviews that wording before the PR is merged; then `legalTermsUpdated` can be set. The self-paced Refund Policy is unchanged. A lawyer review is still recommended.
+- [x] **P5 · Legal text.** Terms §4A and Privacy §2/§4/§4A/§8/§9 were rewritten on 2026-10-21 for online-only payment (D11). The owner reviewed the wording and merged PR #183 (merge 237f3486); `legalTermsUpdated: true` is recorded for both switches. The self-paced Refund Policy is unchanged. A lawyer review is still recommended.
+- [ ] **P9 · Launch approval (separate from P5).** `ownerApproval` stays `null` for both switches. Reviewing legal wording is not approval to take payments; the validator refuses an `ownerApproval` that only describes a legal-copy review ("legal copy only", "does not enable", "merged PR #183", "reviewed the Terms/Privacy").
 - [x] **P6 · Instalment rules.** Settled by D10 (2026-10-21): full payment only, so there is no instalment refund rule and no missed second instalment. The refund of "classes still to come" remains part of the legal review (P5).
 - [ ] **P7 · Courses for the other teachers.** D9 shows per-teacher A1 prices, but no course record (schedule, batch, capacity) exists for them. Nothing is sold for them, and the Worker sells only `live-a1`. Each new course needs its details from the owner, then an entry in both files.
 - [ ] **P8 · Receipts / GST / record retention** for online payments (accountant).
@@ -124,14 +125,14 @@ A learner's status screen also re-checks an order with Cashfree every time it is
 
 ## 6. Production setup checklist (not done; each needs the owner)
 
-1. Decisions P1–P6 recorded (P1–P3 and P6 done). Legal PR reviewed by the owner and merged; `legalTermsUpdated` set in both switches' records.
-2. **Sandbox verification with real Cashfree sandbox credentials** on the non-production Worker (`wrangler.nonprod.toml`, TEST app id and secret):
+1. Decisions P1–P6 recorded (P1–P3, P5 and P6 done; P4 open). Legal wording approved (PR #183): `legalTermsUpdated` set. Launch approval (P9) recorded separately as `ownerApproval`, still `null`.
+2. **Sandbox verification with real Cashfree sandbox credentials** on the dedicated payment-sandbox Worker (`wrangler.payments-sandbox.toml`, its own database; the exam/QA `wrangler.nonprod.toml` keeps payments off). The runbook, verifier and local test page are in [`live-classes-payments-sandbox.md`](live-classes-payments-sandbox.md):
    - Create Order accepts `order_expiry_time` in `+05:30` form and returns it;
    - a 16-minute (consultation) and 26-minute (course) expiry are accepted;
    - real `PAYMENT_SUCCESS_WEBHOOK` / `PAYMENT_FAILED_WEBHOOK` / `PAYMENT_USER_DROPPED_WEBHOOK` payloads and signatures for `cons_` and `enrp_` orders;
    - a sandbox refund.
 
-   Not done: the sandbox secret key is not available in this repository or on this machine. Every test uses a local mock.
+   Not done: the sandbox app id and secret key are not available in this repository or on this machine, and the sandbox database and Worker are not created yet. Every test so far uses a local mock or the local rehearsal (`node scripts/cashfree-sandbox-verify.mjs --rehearse`), which is not a sandbox proof.
 3. Cashfree production:
    - account activated (KYC);
    - live app id and secret set as Worker secrets (`wrangler secret put CASHFREE_SECRET_KEY`);

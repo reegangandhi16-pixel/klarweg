@@ -110,6 +110,17 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
   3. the accounting follow-up (receipts or invoices, tax, record retention);
   4. the UPI ID or bank details to put on payment requests;
   5. `enrolment: 'open'`, then update the homepage FAQ and Terms §4A ("Enrolment … is not open yet"); the readiness check flags both if they still say it is closed or claim it is open.
+- [ ] **Online payments (built 2026-10-21, every switch off).** The ₹100 demo booking and the A1 course fee can now be paid on the page through Cashfree, confirmed only after the Worker verifies the payment. The decisions are P1–P8 in [`live-classes-online-payments.md`](live-classes-online-payments.md) §4:
+  - P1: whether and how the ₹100 is deducted;
+  - P2: replacing D7's manual UPI with online payment for live-a1;
+  - P3: D4's payment line for consultations;
+  - P4: opening the course;
+  - P5: legal text;
+  - P6: instalment rules;
+  - P7: courses for the other teachers;
+  - P8: receipts and tax.
+
+  The production setup is §6 of that file.
 - [ ] *Optional:* a teacher photo (4:3, at least 800×600) and an availability line.
 
 ## Reply template (pending items only)
@@ -120,5 +131,6 @@ Accounting (receipts, tax, record keeping): handled by: …
 Instalment refunds / missed 2nd instalment / consultation deduction / minors: …
 A1 start date: …
 Open paid enrolment for A1: not yet / go (start date: …)
+Online payments (P1 ₹100 deduction: off / first payment · P2 replace D7 manual UPI: yes / no): …
 Photo / availability (optional):
 ```

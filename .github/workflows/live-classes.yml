@@ -1,7 +1,8 @@
 name: Live classes page checks
 
 # Static guards (drafts off, page still unpublished, links resolve) and real headless Chrome against a local static
-# server for live-classes.html. Hermetic: every non-local host is blocked, so no auth, checkout or email request can
+# server for live-classes.html, and the ₹100 booking and course payment flows against the real access Worker with a
+# local mock of Cashfree. Hermetic: every non-local host is blocked, so no auth, checkout or email request can
 # leave the runner. Deploys nothing, needs no secrets. Actions are pinned by commit SHA.
 
 on:
@@ -9,8 +10,18 @@ on:
     paths:
       - 'live-classes.html'
       - 'kw-live.js'
+      - 'kw-consult.js'
+      - 'kw-enrol.js'
       - 'live-classes-data.js'
       - 'scripts/live-classes-*.mjs'
+      - 'scripts/live-enrol.test.mjs'
+      - 'scripts/live-payments-demo.mjs'
+      - 'scripts/predeploy-access-check.mjs'
+      # the access Worker that takes the ₹100 booking and course payments
+      - 'access/worker/src/**'
+      - 'access/worker/migration-*.sql'
+      - 'access/worker/schema.sql'
+      - 'access/worker/wrangler.toml'
       # shared assets the page loads, and the files the "still unpublished" guard reads
       - 'site.css'
       - 'site.js'
@@ -31,8 +42,18 @@ on:
     paths:
       - 'live-classes.html'
       - 'kw-live.js'
+      - 'kw-consult.js'
+      - 'kw-enrol.js'
       - 'live-classes-data.js'
       - 'scripts/live-classes-*.mjs'
+      - 'scripts/live-enrol.test.mjs'
+      - 'scripts/live-payments-demo.mjs'
+      - 'scripts/predeploy-access-check.mjs'
+      # the access Worker that takes the ₹100 booking and course payments
+      - 'access/worker/src/**'
+      - 'access/worker/migration-*.sql'
+      - 'access/worker/schema.sql'
+      - 'access/worker/wrangler.toml'
       - 'site.css'
       - 'site.js'
       - 'kw-products.js'
@@ -65,6 +86,8 @@ jobs:
           node-version: '24'
       - name: Static guards (drafts off, unpublished, links, scripts parse, data valid, launch gate)
         run: node --test scripts/live-classes-static.test.mjs
+      - name: Online payment guards (switches off, validator, browser rules, predeploy guard)
+        run: node --test scripts/live-enrol.test.mjs
       - name: Launch readiness report (fails only on data errors, or if the page is allowlisted with blockers)
         run: node scripts/live-classes-readiness.mjs
       - name: Chrome
@@ -77,3 +100,7 @@ jobs:
           CHROME_ARGS: --no-sandbox
           LIVE_E2E_VERBOSE: '1'   # every check in the job log, so a failure can be diagnosed from CI alone
         run: node scripts/live-classes-browser.mjs
+      - name: Payment flows end to end (real Worker, in-memory database, MOCK Cashfree, local only)
+        env:
+          CHROME_ARGS: --no-sandbox
+        run: node scripts/live-payments-demo.mjs --e2e

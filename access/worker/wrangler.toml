@@ -33,6 +33,21 @@ GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleuse
 CONSULT_BOOKING = "off"
 CONSULT_TEACHERS = ""
 
+# Live-course enrolment with online payment (src/enrolments.js). OFF.
+#   "off"      no online course payments (default)
+#   "sandbox"  Cashfree TEST payments only (needs CASHFREE_ENV = "sandbox")
+#   "live"     real payments (needs CASHFREE_ENV = "production")
+# Deploying anything but "off" needs --allow-enrol-payments=<mode>; see
+# docs/live-classes-online-payments.md. ENROL_COURSES lists the courses open
+# for online enrolment with the batch being sold, e.g.
+#   {"live-a1":{"batch":"2026-11-02"}}
+# (each must be published with enrolment "open" on the Live Classes page).
+# ENROL_CONSULT_CREDIT: "off" or "first-payment" (whether a confirmed ₹100
+# consultation from the last 7 days reduces the first payment): an owner
+# decision, required before payments are switched on.
+ENROL_PAYMENTS = "off"
+ENROL_COURSES = ""
+
 # Klarweg AI (see src/ai.js). ON. Chapter AI: with the Chapter-1 preview at 0,
 # only accounts holding a level entitlement qualify. Homepage chat: buyers, plus
 # a few free questions a day for signed-out visitors (AI_ANON_* below).

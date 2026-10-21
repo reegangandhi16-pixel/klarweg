@@ -23,6 +23,8 @@
 --         review    paid but not confirmable (amount/currency mismatch,
 --                   or a late payment for a slot someone else now holds):
 --                   the owner checks it and refunds by hand
+--         cancelled cancelled by Klarweg, e.g. after a refund (set by hand,
+--                   docs/live-classes-online-payments.md §5); frees the slot
 CREATE TABLE IF NOT EXISTS consult_availability (
   teacher_id   TEXT NOT NULL,
   date         TEXT NOT NULL,           -- YYYY-MM-DD, Asia/Kolkata
@@ -38,7 +40,7 @@ CREATE TABLE IF NOT EXISTS consult_bookings (
   teacher_id         TEXT NOT NULL,
   date               TEXT NOT NULL,                   -- YYYY-MM-DD, Asia/Kolkata
   slot_start         TEXT NOT NULL,                   -- HH:MM, Asia/Kolkata
-  status             TEXT NOT NULL CHECK (status IN ('pending','confirmed','expired','released','failed','review')),
+  status             TEXT NOT NULL CHECK (status IN ('pending','confirmed','expired','released','failed','review','cancelled')),
   amount_paise       INTEGER NOT NULL CHECK (amount_paise = 10000),
   currency           TEXT NOT NULL DEFAULT 'INR' CHECK (currency = 'INR'),
   cashfree_order_id  TEXT NOT NULL UNIQUE,

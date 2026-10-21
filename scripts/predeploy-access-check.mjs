@@ -35,6 +35,13 @@
         on the Live Classes page (live-classes-data.js).
         CONSULT_JOIN_LINKS (Google Meet links) is a Worker SECRET only: it
         may never be a [vars] entry, and no meeting link may be in the file.
+     9. ENROL_PAYMENTS (live-course enrolment with online payment) must be
+        "off" unless --allow-enrol-payments=<sandbox|live> names the mode,
+        with the same CASHFREE_ENV pairing. ENROL_COURSES may only name
+        courses the Worker knows (LIVE_COURSES) that are published with
+        enrolment "open" on the Live Classes page, each with a batch date.
+        ENROL_CONSULT_CREDIT must be "off" or "first-payment"; enabling
+        payments needs it set explicitly (an owner decision).
 
    Usage (from the repo root):
      node scripts/predeploy-access-check.mjs
@@ -53,6 +60,7 @@ const allowEnv = (args.find((a) => a.startsWith('--allow-cashfree-env-change='))
 const allowAi = args.includes('--allow-ai-enabled');
 const allowSpeech = (args.find((a) => a.startsWith('--allow-speech=')) || '').split('=')[1] || null;
 const allowConsult = (args.find((a) => a.startsWith('--allow-consult-booking=')) || '').split('=')[1] || null;
+const allowEnrol = (args.find((a) => a.startsWith('--allow-enrol-payments=')) || '').split('=')[1] || null;
 const allowScope = (args.find((a) => a.startsWith('--allow-speech-scope=')) || '').split('=')[1] || null;
 
 function varOf(toml, name) {
@@ -106,6 +114,32 @@ if (consultTeachers.length) {
   const bad = consultTeachers.filter((id) => !ELIGIBLE_TEACHERS.includes(id) || !published.includes(id));
   if (bad.length) fail(`CONSULT_TEACHERS names ${bad.join(', ')}: only eligible teachers (${ELIGIBLE_TEACHERS.join(', ')}) whose profile is published may be bookable.`);
 }
+const enrol = (varOf(toml, 'ENROL_PAYMENTS') || 'off').toLowerCase();
+const enrolCredit = varOf(toml, 'ENROL_CONSULT_CREDIT');
+if (!['off', 'sandbox', 'live'].includes(enrol)) fail(`ENROL_PAYMENTS in wrangler.toml is "${enrol}" — must be "off", "sandbox" or "live".`);
+if (enrol !== 'off' && allowEnrol !== enrol) fail(`ENROL_PAYMENTS="${enrol}" in wrangler.toml. Enable online course payments deliberately with --allow-enrol-payments=${enrol}.`);
+if (enrol === 'sandbox' && env !== 'sandbox') fail('ENROL_PAYMENTS="sandbox" needs CASHFREE_ENV="sandbox".');
+if (enrol === 'live' && env !== 'production') fail('ENROL_PAYMENTS="live" needs CASHFREE_ENV="production" — never take live course fees through sandbox.');
+if (enrolCredit != null && !['off', 'first-payment'].includes(enrolCredit)) fail(`ENROL_CONSULT_CREDIT is "${enrolCredit}" — must be "off" or "first-payment".`);
+if (enrol !== 'off' && enrolCredit == null) fail('ENROL_PAYMENTS is on but ENROL_CONSULT_CREDIT is not set. Record the owner decision on the ₹100 consultation adjustment ("off" or "first-payment") first.');
+/* JSON needs a TOML literal string ('…'); read either quoting. Any other
+   spelling is refused rather than skipped. */
+const enrolLine = (toml.replace(/#.*$/gm, '').match(/^\s*["']?ENROL_COURSES["']?\s*=\s*(.*)$/m) || [])[1];
+const enrolQuoted = enrolLine == null ? null : enrolLine.trim().match(/^(?:"((?:[^"\\]|\\.)*)"|'([^']*)')$/);
+if (enrolLine != null && !enrolQuoted) fail('ENROL_COURSES must be a quoted TOML string, e.g. ENROL_COURSES = \'{"live-a1":{"batch":"2026-11-02"}}\'.');
+const enrolCoursesRaw = enrolQuoted ? (enrolQuoted[2] != null ? enrolQuoted[2] : enrolQuoted[1].replace(/\\"/g, '"')) : null;
+if (enrolCoursesRaw) {
+  let courses = null;
+  try { courses = JSON.parse(enrolCoursesRaw); } catch { fail('ENROL_COURSES is not valid JSON, e.g. {"live-a1":{"batch":"2026-11-02"}}.'); }
+  const { LIVE_COURSES } = await import('../access/worker/src/enrolments.js');
+  const { loadData } = await import('./live-classes-readiness.mjs');
+  const pub = Object.fromEntries((loadData().courses || []).filter((c) => !c.draft).map((c) => [c.id, c]));
+  for (const [id, v] of Object.entries(courses || {})) {
+    if (!LIVE_COURSES[id]) fail(`ENROL_COURSES names "${id}", which the Worker does not sell (LIVE_COURSES in enrolments.js).`);
+    if (!pub[id] || pub[id].enrolment !== 'open') fail(`ENROL_COURSES names "${id}", which is not published with enrolment "open" on the Live Classes page.`);
+    if (!v || !/^\d{4}-\d{2}-\d{2}$/.test(v.batch || '')) fail(`ENROL_COURSES "${id}" needs a batch start date, e.g. {"batch":"2026-11-02"}.`);
+  }
+}
 /* Non-production settings stay in wrangler.nonprod.toml (docs/exam/NONPROD-SETUP.md).
    An [env.*] section here would put a second set of vars in this file, which the
    first-match reads above could pick up; CORS_EXTRA_ORIGINS widens CORS/CSRF. */
@@ -130,4 +164,4 @@ if (live !== env) {
   console.warn(`! Cashfree environment will change: ${live} → ${env} (explicitly allowed).`);
 }
 
-console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech}, CONSULT_BOOKING=${consult}, scope "${speechScope.join(',')}" + ${speechChapters.length} listed − ${speechExclude.length} excluded.`);
+console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech}, CONSULT_BOOKING=${consult}, ENROL_PAYMENTS=${enrol}, scope "${speechScope.join(',')}" + ${speechChapters.length} listed − ${speechExclude.length} excluded.`);

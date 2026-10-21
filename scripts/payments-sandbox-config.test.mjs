@@ -34,7 +34,8 @@ test('SANDBOX CONFIG: its own Worker and database, named -payments-nonprod, neve
   const id = val(PAY, 'database_id');
   assert.match(id, /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);
   const taken = [PROD, NP, PROD_EXAM, read('exam-worker/wrangler.nonprod.toml')].flatMap((t) => vals(t, 'database_id')).filter((x) => x !== PLACEHOLDER);
-  assert.ok(id === PLACEHOLDER || !taken.includes(id), 'never the production or the exam/QA non-prod database');
+  assert.notEqual(id, PLACEHOLDER, 'the real id of the dedicated database (created 2026-10-21), not the placeholder');
+  assert.ok(!taken.includes(id), 'never the production or the exam/QA non-prod database');
   for (const other of [PROD, NP]) {
     for (const k of ['name', 'database_name']) for (const v of vals(other, k)) assert.ok(!vals(PAY, k).includes(v), `${k} "${v}" belongs to another Worker`);
     for (const v of vals(other, 'CASHFREE_APP_ID')) assert.ok(!strip(PAY).includes(v), 'no production app id');

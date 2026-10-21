@@ -1,6 +1,12 @@
 # Live Classes — real Cashfree SANDBOX verification
 
-**Status (2026-10-21): prepared, not yet run.** No Cashfree sandbox app id or secret key is available on this machine or in this repository, and the dedicated sandbox database and Worker have not been created. Every result so far comes from local mocks and a local rehearsal. **No real sandbox transaction has been made yet.**
+**Status (2026-10-21): infrastructure ready, no Cashfree credentials, not yet run.**
+
+- **Created:** the D1 database `klarweg-access-payments-nonprod`, id `c86b0f00-61c4-49c9-a1ac-6047851ea09c`.
+  - `schema.sql` and migrations 001–014 were applied once each, in order. The result is 16 tables, the same columns as the test schema.
+- **Deployed:** the Worker `klarweg-access-payments-nonprod`, using this config only, with the 15-minute cron, at `https://klarweg-access-payments-nonprod.klarweg-issue-reports-2026.workers.dev`.
+- **No secrets are set.** The Worker fails closed: booking and enrolment report `enabled: false`, and webhooks get 503 `not-configured`, until the Cashfree TEST app id and secret are entered (§3 step 4).
+- Every payment result so far comes from local mocks and local rehearsals. **No real sandbox transaction has been made yet.**
 
 This sets up an isolated test environment. It proves the ₹100 consultation and the full-payment A1 enrolment against **Cashfree's real sandbox** (test money only). It never touches production. All payment switches on the public site and the production Worker stay **off**.
 
@@ -24,12 +30,14 @@ The guard tests are in `scripts/payments-sandbox-config.test.mjs`. They check th
 
 The existing `scripts/nonprod-config.test.mjs` still checks that the exam/QA Worker has no payments.
 
+**CORS, as deployed:** the Worker code always allows the two public site origins (`https://klarweg.in`, `https://reegangandhi16-pixel.github.io`; `src/cors.js`), so the sandbox Worker accepts those as well as `http://localhost:8789`. It refuses other origins, including the exam/QA page on `localhost:8788`. No public page calls it: `kw-config.js` points at the production Worker, and the guard tests fail if any public file names the sandbox Worker. Narrowing the sandbox to `localhost:8789` alone would need a Worker code change, which is deliberately not part of this setup.
+
 **Synthetic data only.** The A1 batch `2099-01-05` exists only in the sandbox config, so the Worker treats the course as open. It is not a start date. The consultation availability row is a fixture written into the sandbox database by the verifier (`confirmed_by = 'sandbox-verification-fixture'`); it is not real availability. Joining links are optional and must be a throwaway Meet link the owner creates for testing.
 
 ## 2. Missing prerequisites (owner)
 
-1. **Cashfree sandbox credentials.** In the Cashfree merchant dashboard, switch to **Test** mode, then go to *Developers → API Keys*. You need the **app id** (it starts with `TEST`) and the **secret key**. Never paste them into chat, a file or a commit.
-2. **Authorisation to create two free-tier Cloudflare resources** on the owner's account: the D1 database `klarweg-access-payments-nonprod` and the Worker `klarweg-access-payments-nonprod`. wrangler is already logged in on this machine.
+1. **Cashfree sandbox credentials (still missing).** In the Cashfree merchant dashboard, switch to **Test** mode, then go to *Developers → API Keys*. You need the **app id** (it starts with `TEST`) and the **secret key**. Never paste them into chat, a file or a commit.
+2. ~~Authorisation to create the two Cloudflare resources.~~ Done 2026-10-21 (see Status). Steps 1–3 of §3 below are complete; only step 4 (secrets) remains.
 3. *Optional:* a throwaway Google Meet link for the joining-link check.
 4. **A person at a browser** during the run, to complete three payments in Cashfree's hosted sandbox checkout (see §4). Not needed only if Cashfree confirms the S2S flag on the TEST account (see "Payment route").
 

@@ -142,6 +142,18 @@ p { margin: 0 0 16px; }
   .kx-opt { width: 100%; }
   .kx-table th, .kx-table td { padding: 8px; }
   h1 { font-size: 24px; }
+  /* item review on a phone: one card per task (number · result · points, then answer, solution, explanation) instead of
+     a five-column table that only scrolled sideways */
+  .kx-review-items thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .kx-review-items table, .kx-review-items tbody, .kx-review-items tr { display: block; }
+  .kx-review-items tr:not(.kx-rv-explain) { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; padding: 12px 0 8px; border-top: 1px solid var(--line); }
+  .kx-review-items tr > * { display: block; padding: 0; border: 0; }
+  .kx-review-items tr > th { grid-column: 1; grid-row: 1; }
+  .kx-review-items tr > td:nth-of-type(3) { grid-column: 2; grid-row: 1; }
+  .kx-review-items tr > td:nth-of-type(4) { grid-column: 3; grid-row: 1; font-variant-numeric: tabular-nums; }
+  .kx-review-items tr > td[data-label] { grid-column: 1 / -1; }
+  .kx-review-items td[data-label]::before { content: attr(data-label) ": "; color: var(--ink-secondary); font-size: 14px; }
+  .kx-review-items .kx-rv-explain td { padding: 0 0 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }

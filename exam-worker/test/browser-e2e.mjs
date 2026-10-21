@@ -1287,6 +1287,13 @@ async function runLesenOnly() {
     t = await text();
     assert.match(t, /100 \/ 100/); assert.match(t, /kein Gesamtergebnis/);
     await A.a11y('Lesen-only result');
+    // the result and item review on a phone: no page-level horizontal scroll, every table readable
+    await vp(390, 844, true); await sleep(200);
+    const phone = await evaluate(`({ page: document.documentElement.scrollWidth, vw: innerWidth, tables: [...document.querySelectorAll('.kx-result table, .kx-review-items table')].map((t) => ({ w: Math.round(t.getBoundingClientRect().width), sw: t.scrollWidth })) })`);
+    if (process.env.KX_E2E_SHOTS) { fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, 'lesen-result-390.png'), Buffer.from((await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true })).data, 'base64')); fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, 'lesen-result-390.json'), JSON.stringify(phone)); }
+    assert.ok(phone.page <= phone.vw + 1, `no horizontal page scroll on the result at 390 px: ${JSON.stringify(phone)}`);
+    for (const t of phone.tables) assert.ok(t.sw <= t.w + 1 && t.w <= phone.vw, `result/review tables fit a phone without sideways scrolling: ${JSON.stringify(phone)}`);
+    await vp(1280, 800, false);
     const review = await apiFetch('GET', `/attempts/${attempt.id}/modules/lesen/review`);
     assert.equal(review.status, 200); assert.equal(review.json.summary.correct, lesen.length);
     // back to the start from the result page itself: Lesen again, with the history row (Lesen column only)

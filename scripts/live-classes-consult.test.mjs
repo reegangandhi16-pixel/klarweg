@@ -300,3 +300,59 @@ test('SCOPE: this branch changes no Exam Portal, audio, legal or self-paced chec
   const forbidden = changed.filter((f) => /^(exam|exam-content|exam-worker|audio|public\/audio)\/|audio|^terms\.html$|^privacy\.html$|^refund-policy\.html$|^kw-checkout\.js$|^kw-products\.js$|^access\/worker\/src\/(orders|entitlements|products|exam-proxy)\.js$/i.test(f));
   assert.deepEqual(forbidden, []);
 });
+
+/* ================= A1 course fees (decision sheet D9) ================= */
+test('PRICING: every shown teacher has the A1 fee the owner set in D9, from one central config', () => {
+  const D = loadData();
+  const sheet = read('docs/live-classes-owner-decisions.md');
+  const d9 = sheet.slice(sheet.indexOf('### D9'), sheet.indexOf('\n---\n', sheet.indexOf('### D9')));
+  const table = Object.fromEntries([...d9.matchAll(/^\| `([a-z-]+)` \| (₹[\d,]+) \|$/gm)].map((m) => [m[1], m[2]]));
+  const shown = D.teachers.filter((t) => !t.draft);
+  assert.equal(Object.keys(table).length, shown.length, 'D9 lists every shown teacher');
+  for (const t of shown) assert.equal(D.coursePricing.teachers[t.id], table[t.id], `${t.id}: D9 fee`);
+  assert.deepEqual([...Object.keys(D.coursePricing.teachers)], [...shown.map((t) => t.id)], 'priced in the page order, nobody else');
+  assert.equal(D.coursePricing.teachers['reegan-gandhi'], D.courses.find((c) => c.id === 'live-a1').priceLabel);
+  // only the current fee: no crossed-out "original" price is rendered or configured
+  assert.equal(/original|strike|<s>|<del>|line-through|was ₹/i.test(read('kw-live.js') + JSON.stringify(D.coursePricing)), false);
+});
+
+test('PRICING: the validator refuses a fee for an unknown teacher, a non-amount, or one that contradicts the published course', () => {
+  const D = loadData();
+  const errs = (edit) => { const d = clone(D); edit(d.coursePricing.teachers); return checkData(d); };
+  assert.ok(errs((p) => { p.nobody = '₹1,000'; }).some((e) => /coursePricing nobody: names no published teacher/.test(e)));
+  assert.ok(errs((p) => { p['sahil-arora'] = '₹15,000 → ₹9,999'; }).some((e) => /must be a rupee amount/.test(e)));
+  assert.ok(errs((p) => { p['sahil-arora'] = 'from ₹12,000'; }).some((e) => /must be a rupee amount/.test(e)));
+  assert.ok(errs((p) => { p['reegan-gandhi'] = '₹15,000'; }).some((e) => /differs from the published live-a1 fee/.test(e)));
+});
+
+/* ================= sample ratings: a local design preview only ================= */
+test('SAMPLE: the sample ratings are labelled, in range, never published, and off in the committed data', () => {
+  const ctx = { window: {} };
+  vm.runInNewContext(read('live-classes-sample-data.js'), ctx);
+  const S = ctx.window.KWLiveSample;
+  assert.equal(S.isSampleData, true);
+  assert.match(read('live-classes-sample-data.js'), /SAMPLE DATA · NOT GENUINE REVIEWS/);
+  const D = loadData();
+  const shown = D.teachers.filter((t) => !t.draft).map((t) => t.id);
+  assert.deepEqual([...Object.keys(S.ratings)], [...shown]);
+  for (const id of ['reegan-gandhi', 'geetika-dhawan']) assert.deepEqual({ ...S.ratings[id] }, { stars: 4.8, countLabel: '100+' });
+  for (const id of shown.slice(2)) {
+    assert.equal(S.ratings[id].stars, 3.5, id);
+    assert.ok(Number.isInteger(S.ratings[id].count) && S.ratings[id].count >= 20 && S.ratings[id].count <= 40, `${id}: count 20–40`);
+  }
+  // never deployed: not in the Pages allowlist (exact or by glob), and no page loads it statically
+  const allow = read('.github/pages-allowlist.txt').split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
+  assert.equal(allow.includes('live-classes-sample-data.js'), false);
+  for (const g of allow.filter((l) => l.startsWith('GLOB:'))) {
+    const rx = new RegExp('^' + g.slice(5).trim().replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*\*/g, '§').replace(/\*/g, '[^/]*').replace(/§/g, '.*').replace(/\?/g, '.') + '$');
+    assert.equal(rx.test('live-classes-sample-data.js'), false, `${g} would publish the sample file`);
+  }
+  assert.equal(/live-classes-sample-data/.test(read('live-classes.html')), false);
+  // only kw-live.js loads it, only on localhost, only with the switch on; the committed switch is off
+  const js = read('kw-live.js');
+  assert.match(js, /var SAMPLE_PREVIEW = D\.previewSampleRatings === true && \/\^\(localhost\|127\\\.0\\\.0\\\.1\|\\\[::1\\\]\|\)\$\/\.test\(location\.hostname\);/);
+  assert.equal((js.match(/\.src = 'live-classes-sample-data\.js'/g) || []).length, 1, 'loaded in exactly one place');
+  assert.match(js, /if \(SAMPLE_PREVIEW\) \{/);
+  assert.equal(D.previewSampleRatings, false);
+  assert.match(js, /Sample data · preview only/);
+});

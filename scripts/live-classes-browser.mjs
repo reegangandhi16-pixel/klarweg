@@ -196,10 +196,14 @@ try {
     await load(L, { width: w, mobile: mob });
     ok(`A${w} no draft text in DOM or options`, (await q(draftLeak)) === null, await q(draftLeak));
     ok(`A${w} draft banner hidden`, await q('document.getElementById("draft-banner").hidden'));
-    ok(`A${w} the owner first and featured, then every listed teacher in the owner's order, with filters and a count`, (await q(cardNames('.t-card'))) === SHOWN.map((t) => t.name).join('|')
-      && await q('document.querySelector(".t-card").classList.contains("t-featured") && document.querySelectorAll(".t-featured").length===1 && !document.getElementById("teacher-grid").classList.contains("single") && !document.querySelector("#teachers .filters").hidden')
+    ok(`A${w} the owner first (full profile), then every listed teacher in the owner's order, with filters and a count`, (await q(cardNames('.t-card'))) === SHOWN.map((t) => t.name).join('|')
+      && await q('!document.querySelector(".t-card").classList.contains("t-listed") && document.querySelectorAll(".t-card:not(.t-listed)").length===1 && !document.getElementById("teacher-grid").classList.contains("single") && !document.querySelector("#teachers .filters").hidden')
       && (await q('document.getElementById("t-count").textContent')) === SHOWN.length + ' teachers', await q(cardNames('.t-card')));
     ok(`A${w} listed cards: name, "German Language Teacher", "No reviews yet", stated levels only, no action`, (await q(listedOk)) === listedWant, await q(listedOk));
+    ok(`A${w} each row shows its A1 course fee from coursePricing`, (await q('[...document.querySelectorAll(".t-card")].map(c=>c.querySelector(".t-price-label").textContent+" "+c.querySelector(".t-price-value").textContent).join("|")')) === SHOWN.map((t) => LIVE.coursePricing.label + ' ' + LIVE.coursePricing.teachers[t.id]).join('|'));
+    ok(`A${w} rows: full width, thin light-grey rules between them, no card boxes, on a white page`, await q('(()=>{const g=document.getElementById("teacher-grid"),gr=g.getBoundingClientRect(),rows=[...g.querySelectorAll(".t-card")];return rows.every(r=>{const b=r.getBoundingClientRect(),cs=getComputedStyle(r);return Math.abs(b.width-gr.width)<2&&cs.borderBottomWidth==="1px"&&cs.borderBottomColor==="rgb(229, 231, 235)"&&cs.borderLeftWidth==="0px"&&cs.backgroundColor==="rgba(0, 0, 0, 0)"})&&getComputedStyle(document.body).backgroundColor==="rgb(255, 255, 255)"})()'));
+    ok(`A${w} monogram avatars (no photo is approved), navy with gold initials`, await q('[...document.querySelectorAll(".t-avatar")].every(a=>!a.querySelector("img")&&/^[A-Z]{2}$/.test(a.textContent)&&getComputedStyle(a).backgroundColor==="rgb(15, 23, 42)"&&getComputedStyle(a).color==="rgb(251, 191, 36)")'));
+    ok(`A${w} no sample rating on the page (the switch is off)`, await q('!document.querySelector(".t-sample,.sample-flag") && !document.querySelector("script[src*=sample-data]")'));
     ok(`A${w} no experience, rating or booking claim on any listed card`, !/years|★|rating|book|available|consult/i.test(await q('[...document.querySelectorAll(".t-listed")].map(c=>c.innerText).join(" ")')));
     ok(`A${w} exactly one course card: Beginner German · A1, no filters or count`, (await q('[...document.querySelectorAll(".c-card h3")].map(h=>h.textContent).join("|")')) === A1.title
       && await q('[...document.querySelectorAll("#courses .filters")].every(f=>f.hidden&&f.offsetParent===null) && document.getElementById("c-count").textContent===""'));
@@ -348,16 +352,16 @@ try {
       await load(L, { edits: pub, width: w, mobile: mob });
       ok(`F${w} served data: one full profile (the owner), the rest listed`, (await q('window.KWLive.teachers.filter(t=>!t.draft&&t.tier!=="listed").map(t=>t.id).join()')) === 'reegan-gandhi'
         && (await q('window.KWLive.teachers.filter(t=>!t.draft&&t.tier==="listed").length')) === LISTED.length);
-      ok(`F${w} one featured full profile, then the listed cards; no draft banner`, await q('document.querySelectorAll(".t-card.t-featured").length===1 && document.querySelectorAll(".t-card").length===' + SHOWN.length + ' && document.getElementById("draft-banner").hidden'));
-      ok(`F${w} the featured card shows the real name and no draft or placeholder text`, (await q('document.querySelector(".t-featured .t-name").textContent')) === OWNER.name && !(await q('/Draft|\\[|Portrait pending/.test(document.querySelector(".t-featured .t-body").innerText)')));
+      ok(`F${w} one full-profile row, then the listed rows; no draft banner`, await q('document.querySelectorAll(".t-card:not(.t-listed)").length===1 && document.querySelectorAll(".t-card").length===' + SHOWN.length + ' && document.getElementById("draft-banner").hidden'));
+      ok(`F${w} the full-profile row shows the real name and no draft or placeholder text`, (await q('document.querySelector(".t-card:not(.t-listed) .t-name").textContent')) === OWNER.name && !(await q('/Draft|\\[|Portrait pending/.test(document.querySelector(".t-card:not(.t-listed) .t-body").innerText)')));
       ok(`F${w} directory copy, not single-teacher copy`, (await q('document.getElementById("teachers-h").textContent')) === 'Find the teacher who fits your goal.' && !/currently taught by one teacher/.test(await q('document.getElementById("fa3").textContent')));
-      ok(`F${w} listed cards line up in the grid, the featured card spans it`, await q('(()=>{const f=document.querySelector(".t-featured").getBoundingClientRect(),g=document.getElementById("teacher-grid").getBoundingClientRect(),l=[...document.querySelectorAll(".t-listed")].map(c=>Math.round(c.getBoundingClientRect().width));return Math.abs(f.width-g.width)<2&&l.every(x=>x===l[0])})()'));
+      ok(`F${w} the rows stack in one column, each below the previous`, await q('(()=>{const r=[...document.querySelectorAll(".t-card")].map(c=>c.getBoundingClientRect());return r.every((b,i)=>!i||b.top>=r[i-1].bottom-1)})()'));
       ok(`F${w} hero level range comes from the published profile`, (await q('document.querySelector("[data-live-levels]").textContent')) === ' · ' + lo + ' → ' + hi, await q('document.querySelector("[data-live-levels]").textContent'));
       ok(`F${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
       ok(`F${w} accessibility audit in the launch state`, (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
-      ok(`F${w} portrait and details sit side by side on desktop, stacked on phones`, await q('(()=>{const p=document.querySelector(".t-featured .portrait").getBoundingClientRect(),b=document.querySelector(".t-featured .t-body").getBoundingClientRect();return innerWidth>720?b.left>=p.right-1:b.top>=p.bottom-1})()'));
+      ok(`F${w} avatar beside the details; the fee sits right on desktop and below the details on phones`, await q('(()=>{const c=document.querySelector(".t-card"),a=c.querySelector(".t-avatar").getBoundingClientRect(),b=c.querySelector(".t-body").getBoundingClientRect(),s=c.querySelector(".t-side").getBoundingClientRect();return b.left>=a.right-1&&(innerWidth>760?s.left>=b.right-1:s.top>=b.bottom-1)})()'));
     }
-    await q('document.querySelector(".t-featured [data-profile]").click()'); await sleep(200);
+    await q('document.querySelector(".t-card:not(.t-listed) [data-profile]").click()'); await sleep(200);
     const dlF = await q('[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ")');
     ok('F profile dialog: every confirmed field, certificate once, no placeholder', OWNER.specialisms.every((x) => dlF.includes(x)) && dlF.includes('Experience: ' + OWNER.experience) && dlF.includes('German proficiency: ' + OWNER.proficiency)
       && dlF.split(OWNER.goethe[0]).length - 1 === 1 && !/\[/.test(dlF), dlF);
@@ -439,6 +443,16 @@ try {
   ok('R every card says "No reviews yet" and shows no rating or availability label', await q('[...document.querySelectorAll(".t-card .t-reviews")].every(r=>r.textContent==="No reviews yet") && document.querySelectorAll(".t-card .t-reviews").length===' + SHOWN.length + ' && document.querySelectorAll(".t-avail").length===0'));
   ok('R online booking is off: no booking script, panel or payment SDK loads', await q('![...document.scripts].some(s=>/kw-consult|cashfree/.test(s.src)) && !document.getElementById("consult-online") && !window.KWConsult && !window.Cashfree'));
   ok('R the profile dialog lists "Reviews: No reviews yet"', await q('(()=>{document.querySelector("[data-profile=reegan-gandhi]").click();const t=[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ");document.getElementById("t-dialog").close();return /Reviews: No reviews yet/.test(t)})()'));
+  // sample ratings: a flagged local preview only; a deployed host never loads them, whatever the switch says
+  const sampleOn = [['previewSampleRatings: false,', 'previewSampleRatings: true,']];
+  await load(L, { edits: sampleOn }); await sleep(400);
+  ok('S local preview with the switch on: every row shows a sample rating, each flagged "Sample data · preview only"', await q('(()=>{const r=[...document.querySelectorAll(".t-card .t-reviews")];return r.length===' + SHOWN.length + '&&r.every(x=>x.classList.contains("t-sample")&&x.querySelector(".sample-flag").textContent==="Sample data · preview only")})()'),
+    await q('[...document.querySelectorAll(".t-card .t-reviews")].map(r=>r.textContent).join(" | ")'));
+  ok('S the sample values: 4.8 · 100+ for the first two, 3.5 for the rest', await q('(()=>{const r=[...document.querySelectorAll(".t-card .t-reviews")].map(x=>x.textContent);return r.slice(0,2).every(t=>/4\\.8 · 100\\+ ratings/.test(t))&&r.slice(2).every(t=>/3\\.5 · (?:[23]\\d|40) ratings/.test(t))})()'));
+  ok('S no rating reaches structured data, even in the preview', !/ratingValue|aggregateRating|reviewCount|"Review"/.test(JSON.stringify(await q(jsonld))));
+  await load(R, { edits: sampleOn }); await sleep(400);
+  ok('S a deployed host ignores the switch: no sample script, every row "No reviews yet"', await q('!document.querySelector("script[src*=sample-data]") && !window.KWLiveSample && [...document.querySelectorAll(".t-card .t-reviews")].every(r=>r.textContent==="No reviews yet")'));
+
   // the owner switch loads the booking script (served data edited in the test only; the Worker is not reached here)
   await load(L, { edits: [['enabled: false,', 'enabled: true,']] });
   ok('R with onlineBooking.enabled the page loads kw-consult.js', await q('[...document.scripts].some(s=>/kw-consult\\.js$/.test(s.src))'));

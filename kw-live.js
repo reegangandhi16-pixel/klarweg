@@ -51,6 +51,13 @@
      locally; on any deployed host they are dropped regardless. */
   var SHOW_DRAFTS = D.showDrafts === true && /^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname);
   function visible(list) { return (list || []).filter(function (x) { return SHOW_DRAFTS || !x.draft; }); }
+  /* SAMPLE ratings (live-classes-sample-data.js) are a design preview:
+     loaded only when previewSampleRatings is true AND the page runs
+     locally. The file is never published (it is not in the Pages
+     allowlist), so the deployed site shows genuine reviews only, or
+     "No reviews yet". */
+  var SAMPLE_PREVIEW = D.previewSampleRatings === true && /^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname);
+  var sample = null;
   function draftFlag(x) { return x.draft ? '<span class="draft-flag">Draft</span>' : ''; }
 
   var teachers = visible(D.teachers);
@@ -181,41 +188,61 @@
       .map(function (x) { return x.t; });
   }
 
-  /* A listed teacher: the same card, with only what the owner confirmed. */
-  function listedCard(t) {
-    return '<article class="t-card t-listed" aria-labelledby="tn-' + esc(t.id) + '">'
-      + portrait(t)
-      + '<div class="t-body">'
-      + '<h3 class="t-name" id="tn-' + esc(t.id) + '">' + esc(t.name) + '</h3>'
-      + '<p class="t-headline">' + esc(t.title) + '</p>'
-      + '<p class="t-reviews">' + esc(reviewText(t)) + '</p>'
-      + (has(t.levels) ? levelRow(t.levels) : '')
-      + '</div></article>';
+  /* Rating line: genuine reviews first; otherwise, in a local preview
+     only, the clearly flagged sample; otherwise "No reviews yet". */
+  function ratingHtml(t) {
+    var r = reviewSummary(D.reviews, t.id);
+    var x = !r && sample && !t.draft ? sample[t.id] : null;
+    if (!x) return '<p class="t-reviews">' + esc(reviewText(t)) + '</p>';
+    var count = has(x.countLabel) ? x.countLabel : String(x.count);
+    return '<p class="t-reviews t-sample"><span class="t-star" aria-hidden="true">★</span> ' + esc(x.stars.toFixed(1)) + ' · ' + esc(count) + ' ratings'
+      + ' <span class="sample-flag">Sample data · preview only</span></p>';
+  }
+  /* The A1 course fee with this teacher, from coursePricing (one place). */
+  function priceOf(t) {
+    var P = D.coursePricing || {};
+    return (P.teachers || {})[t.id] || null;
+  }
+  function priceHtml(t) {
+    var p = priceOf(t);
+    if (!p) return '';
+    return '<p class="t-price"><span class="t-price-label">' + esc(D.coursePricing.label) + '</span><span class="t-price-value">' + esc(p) + '</span></p>';
+  }
+  function avatar(t) {
+    var inner = t.photo
+      ? '<img src="' + esc(t.photo) + '" alt="' + esc(t.photoAlt || ('Portrait of ' + t.name)) + '" loading="lazy" decoding="async" width="160" height="160">'
+      : '<span aria-hidden="true">' + esc(initials(t)) + '</span>';
+    return '<div class="t-avatar">' + inner + '</div>';
   }
 
+  /* One row of the directory. A listed teacher: name, title, rating line,
+     stated levels and the course fee; no profile, booking or other action. */
   function teacherCard(t) {
-    if (listed(t)) return listedCard(t);
+    var isListed = listed(t);
     var facts = [];
-    if (has(t.experience)) facts.push(t.experience);
-    if (has(t.proficiency)) facts.push('German: ' + t.proficiency);
-    if (has(t.teachesIn)) facts.push('Teaches in ' + t.teachesIn.join(', '));
-    if (has(t.formats)) facts.push(t.formats.join(' · '));
-    if (has(t.goethe)) facts.push('Goethe: ' + t.goethe.join(', '));
-    /* the one full profile among listed teachers leads the grid, full width */
-    var featured = fullTeachers.length === 1 && teachers.length > 1;
-    return '<article class="t-card' + (featured ? ' t-featured' : '') + '" aria-labelledby="tn-' + esc(t.id) + '">'
-      + portrait(t)
+    if (!isListed) {
+      if (has(t.experience)) facts.push(t.experience);
+      if (has(t.proficiency)) facts.push('German: ' + t.proficiency);
+      if (has(t.teachesIn)) facts.push('Teaches in ' + t.teachesIn.join(', '));
+      if (has(t.formats)) facts.push(t.formats.join(' · '));
+      if (has(t.goethe)) facts.push('Goethe: ' + t.goethe.join(', '));
+    }
+    return '<article class="t-card t-row' + (isListed ? ' t-listed' : '') + '" aria-labelledby="tn-' + esc(t.id) + '">'
+      + avatar(t)
       + '<div class="t-body">'
-      + '<h3 class="t-name" id="tn-' + esc(t.id) + '">' + esc(t.name) + '</h3>'
-      + (has(t.headline) ? '<p class="t-headline">' + esc(t.headline) + '</p>' : '')
+      + '<h3 class="t-name" id="tn-' + esc(t.id) + '">' + esc(t.name) + draftFlag(t) + '</h3>'
+      + '<p class="t-headline">' + esc(isListed ? t.title : t.headline) + '</p>'
       + availLabel(t)
-      + '<p class="t-reviews">' + esc(reviewText(t)) + '</p>'
+      + ratingHtml(t)
       + (has(t.levels) ? levelRow(t.levels) : '')
-      + '<ul class="t-facts">' + facts.map(function (f) { return '<li>' + DOT + '<span>' + esc(f) + '</span></li>'; }).join('') + '</ul>'
-      + '<div class="t-actions">'
-      + '<button type="button" class="btn btn-secondary" data-profile="' + esc(t.id) + '">View profile</button>'
-      + '<a href="#book" class="btn btn-live" data-book-teacher="' + esc(t.id) + '">Consultation</a>'
-      + '</div></div></article>';
+      + (facts.length ? '<ul class="t-facts">' + facts.map(function (f) { return '<li>' + DOT + '<span>' + esc(f) + '</span></li>'; }).join('') + '</ul>' : '')
+      + '</div>'
+      + '<div class="t-side">' + priceHtml(t)
+      + (isListed ? '' : '<div class="t-actions">'
+        + '<button type="button" class="btn btn-secondary" data-profile="' + esc(t.id) + '">View profile</button>'
+        + '<a href="#book" class="btn btn-live" data-book-teacher="' + esc(t.id) + '">Consultation</a>'
+        + '</div>')
+      + '</div></article>';
   }
 
   function renderTeachers() {
@@ -327,6 +354,7 @@
       + row('Specialisms', t.specialisms)
       + row('Exam preparation', t.examPrep)
       + row('Formats', (t.formats || []).join(', '))
+      + row((D.coursePricing || {}).label ? D.coursePricing.label + ' fee' : 'Course fee', priceOf(t))
       + row('Availability', t.availability)
       + row('Reviews', reviewText(t))
       + row('Live courses', teaches)
@@ -699,6 +727,15 @@
     initCopy();
     initEmptyCopy();
     initTeacherFilters();
+    if (SAMPLE_PREVIEW) {
+      var sx = document.createElement('script');
+      sx.src = 'live-classes-sample-data.js';
+      sx.onload = function () {
+        var S = window.KWLiveSample;
+        if (S && S.isSampleData === true) { sample = S.ratings || {}; renderTeachers(); }
+      };
+      document.head.appendChild(sx);
+    }
     renderTeachers();
     initDialog();
     initCourseFilters();

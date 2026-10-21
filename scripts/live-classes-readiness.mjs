@@ -140,6 +140,25 @@ export function checkData(D, root = ROOT) {
     if (k.enrolment === 'open' && k.format === 'Group batch' && !has(k.batchSize)) err(w, 'enrolment "open" for a group batch needs batchSize');
   }
 
+  // A1 course fee per teacher (decision sheet D9): one place, real teachers only, the published course's own fee
+  const P = D.coursePricing;
+  if (P != null) {
+    if (!has(P.label)) err('coursePricing', 'needs label (e.g. "A1 course")');
+    for (const [id, price] of Object.entries(P.teachers || {})) {
+      const w = `coursePricing ${id}`;
+      if (!teacherById[id] || teacherById[id].draft) err(w, 'names no published teacher');
+      if (!/^₹\d{1,3}(?:,\d{3})*$/.test(price || '')) err(w, `price "${price}" must be a rupee amount like ₹7,999 (current fee only; no ranges, discounts or crossed-out prices)`);
+    }
+    for (const k of courses.filter((c) => !c.draft && (c.levels || []).join() === 'A1')) {
+      for (const id of k.teacherIds || []) {
+        const price = (P.teachers || {})[id];
+        if (price != null && price !== k.priceLabel) err(`coursePricing ${id}`, `${price} differs from the published ${k.id} fee ${k.priceLabel}`);
+      }
+    }
+  }
+  // sample ratings are a local design preview only (kw-live.js SAMPLE_PREVIEW)
+  if (D.previewSampleRatings != null && typeof D.previewSampleRatings !== 'boolean') err('previewSampleRatings', 'must be true or false');
+
   if (!Array.isArray(D.reviews)) err('reviews', 'must be a list (empty until a genuine review exists)');
   for (const [i, r] of (D.reviews || []).entries()) {
     const w = `review ${i + 1}`;

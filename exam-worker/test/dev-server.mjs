@@ -10,7 +10,8 @@
    --practice-parts=lesen = single-part practice, EXAM_PRACTICE_PARTS; --practice-pool=<ids> = EXAM_PRACTICE_PART_FORMS.
    With --practice-parts and the default library the demo splits it so the two never overlap: release P1–P10, pool P11–P15)  →  http://127.0.0.1:<port>/exam/  (rater screen: /exam/rater.html)
    Default for the demo: practice (every practice form; each new attempt gets the least-attempted one). Tests default to s0.
-   Switching user in the demo: open /exam/dev/as/<alias> (learner, rater1, rater2, outsider); it sets the dev cookie and
+   Switching user in the demo: open /exam/dev/as/<alias> (learner, rater1, rater2, outsider, access = exam_admin on the
+   access-management screen); it sets the dev cookie and
    goes to the matching screen. Only these local test users exist. */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -50,8 +51,8 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
   if (!FORMS[form]) throw new Error(`unknown form ${form} (${Object.keys(FORMS).join('|')})`);
   const h = makeEnv({ formDirs: FORMS[form], flags });   // flags: Worker vars on top of the test defaults, e.g. EXAM_MODULE_ONLY
   await grant(h.env, user);
-  const users = { learner: user, rater1: `usr_${crypto.randomUUID()}`, rater2: `usr_${crypto.randomUUID()}`, outsider: `usr_${crypto.randomUUID()}` };
-  await role(h.env, users.rater1, 'rater'); await role(h.env, users.rater2, 'rater');
+  const users = { learner: user, rater1: `usr_${crypto.randomUUID()}`, rater2: `usr_${crypto.randomUUID()}`, outsider: `usr_${crypto.randomUUID()}`, access: `usr_${crypto.randomUUID()}` };
+  await role(h.env, users.rater1, 'rater'); await role(h.env, users.rater2, 'rater'); await role(h.env, users.access, 'exam_admin');
   const aliasFor = (req) => { const m = /(?:^|;\s*)kx-dev-as=([a-z0-9]+)/.exec(req.headers.cookie || ''); return (m && users[m[1]]) ? m[1] : 'learner'; };
   const userFor = (req) => users[aliasFor(req)];
   const access = mfa || proxy ? await makeAccess(users) : null;
@@ -105,7 +106,7 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
       const as = /^\/exam\/dev\/as\/([a-z0-9]+)$/.exec(url.pathname);
       if (as) {   // demo convenience: pick one of the local test users (never any other user id)
         if (!users[as[1]]) { res.writeHead(404); res.end('unknown test user'); return; }
-        res.writeHead(302, { 'set-cookie': `kx-dev-as=${as[1]}; Path=/; SameSite=Lax`, location: /^rater/.test(as[1]) ? '/exam/rater.html' : '/exam/', 'cache-control': 'no-store' });
+        res.writeHead(302, { 'set-cookie': `kx-dev-as=${as[1]}; Path=/; SameSite=Lax`, location: /^rater/.test(as[1]) ? '/exam/rater.html' : as[1] === 'access' ? `/exam/admin.html?user=${users.learner}` : '/exam/', 'cache-control': 'no-store' });
         res.end(); return;
       }
       let p = url.pathname === '/exam/' || url.pathname === '/exam' ? '/exam/index.html' : url.pathname;
@@ -144,5 +145,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   learner:   ${u}/dev/as/learner
   raters:    ${u}/dev/as/rater1   ${u}/dev/as/rater2
   no role:   ${u}/dev/as/outsider
+  access:    ${u}/dev/as/access  (exam_admin: grant, inspect, revoke exam access)
   ${moduleOnly ? `EXAM_MODULE_ONLY=${moduleOnly}: single-module attempts only; EXAM_RELEASE_FORMS=${release || '(none: fails closed)'}\n  ` : ''}${practiceParts ? `EXAM_PRACTICE_PARTS=${practiceParts}: single-part practice from the pool EXAM_PRACTICE_PART_FORMS=${pool || '(none: fails closed)'}\n  ` : ''}${proxyMode ? 'requests: through the real Access Worker in-process (session, /exam proxy, service binding)\n  ' : ''}${mfa ? 'second factor: ON (raters enrol with an authenticator app on first visit; local in-memory data only)' : 'second factor: raters count as verified (start with --mfa to see the 2FA screens)'}`);
 }

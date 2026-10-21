@@ -752,3 +752,23 @@ test('ITEM REVIEW on a phone: answer and solution cells carry their labels; the 
   assert.match(mobile, /\.kx-review-items tr:not\(\.kx-rv-explain\) { display: grid;/);
   assert.match(mobile, /\.kx-review-items td\[data-label\]::before { content: attr\(data-label\) ": "/);
 });
+
+test('ACCESS ADMIN screen: escaped values, revoke only for active grants, effective access, audit; page has the same CSP/noindex as the rater page', async () => {
+  const { accessView, lookupForm } = await import('../js/admin-render.js');
+  const v = { user_id: 'usr_00000000-0000-0000-0000-000000000001', is_exam_admin: false, effective: { B1: { synthetic: true, mock: false, sets: false } },
+    grants: [{ grant_id: 'xa_1', level: 'B1', scope: 'synthetic', status: 'active', granted_at: 1, granted_by: 'usr_admin', valid_until: null, reason: '<b>Pilot</b>' },
+      { grant_id: 'xa_0', level: 'B1', scope: 'mock', status: 'revoked', granted_at: 1, granted_by: null, valid_until: null, reason: null, revoked_at: 2, revoke_reason: 'Ende' }],
+    audit: [{ at: 2000, actor: 'usr_admin', action: 'access_granted', detail: { level: 'B1', scope: 'synthetic', reason: 'Pilot' } }] };
+  const html = accessView(v);
+  assert.match(html, /&lt;b&gt;Pilot&lt;\/b&gt;/); assert.equal(/<b>Pilot/.test(html), false);
+  assert.equal((html.match(/data-form="revoke"/g) || []).length, 1, 'only the active grant can be revoked');
+  assert.match(html, /data-grant="xa_1"/);
+  assert.match(html, /Wirksam: B1: Übungen \(synthetisch\)/);
+  assert.match(html, /nicht erfasst/, 'a hand-made grant without reason or administrator says so');
+  assert.match(html, /Zugang erteilt · B1 Übungen/);
+  assert.match(lookupForm('', 'Fehler'), /role="alert">Fehler/);
+  const admin = read('exam/admin.html'), rater = read('exam/rater.html');
+  const csp = (h) => /http-equiv="Content-Security-Policy" content="([^"]+)"/.exec(h)[1];
+  assert.equal(csp(admin), csp(rater)); assert.match(admin, /name="robots" content="noindex, nofollow"/); assert.match(admin, /<html lang="de">/);
+  assert.match(read('exam/js/api.js'), /accessGrant: \(b\) => once\('POST'/, 'grant writes are never retried automatically');
+});

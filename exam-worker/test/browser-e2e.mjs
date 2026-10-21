@@ -1559,8 +1559,8 @@ async function runPrecheck() {
     await click('[data-act="start"][data-module="hoeren"]');
     await waitFor(`/bestätigen Sie, dass Sie ihn gehört haben/.test(document.querySelector('#kx-tone-msg').textContent)`, 5000, 'Hören start refused');
     assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'hoeren'").first()).status, 'available', 'Hören did not start');
-    await send('Page.reload');
-    await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Hören intro after reload');
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');   // wait for the NEW document, not the old one
+    await waitFor(`!window.__beforeReload && document.querySelector('[data-act="start"][data-module="hoeren"]') && document.querySelector('#kx-tone-heard')`, 15000, 'Hören intro after reload');
     assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n, 1, 'no duplicate attempt');
     assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM responses_current WHERE module = 'lesen'").first()).n, 1, 'the saved Lesen answer is kept');
     assert.equal(await evaluate(`document.querySelector('#kx-tone-heard').checked`), false, 'the confirmation is asked again after a reload');

@@ -800,3 +800,27 @@ test('ADVISORY TIMES + LENGTH RULE + WARNINGS (ENGINE §9/§10): per-part adviso
   assert.match(main, /for \(const mark of \[600_000, 60_000\]\)/);
   assert.match(main, /total > mark && rem <= mark/, 'a module shorter than the mark never starts with a warning');
 });
+
+test('PRE-CHECKS (ENGINE §10): environment notes only when needed; microphone check passes on a live track and fails with a guided reason; the tone plays once and closes its context', async () => {
+  const { environmentNotes, testMicrophone, playTestTone, MIC_FIX, AUDIO_CHECK, MIC_CHECK } = await import('../js/precheck.js');
+  assert.deepEqual(environmentNotes({ storageKind: 'indexeddb', offsetMs: 1000, rttMs: 200 }), []);
+  assert.deepEqual(environmentNotes({ storageKind: 'memory', offsetMs: -300000, rttMs: 4000 }).map((n) => n.kind), ['storage', 'clock', 'connection']);
+  const track = (state) => ({ readyState: state, stop() { this.stopped = true; } });
+  const live = track('live');
+  const ok = await testMicrophone({ getUserMedia: async () => ({ getAudioTracks: () => [live], getTracks: () => [live] }), createContext: () => { throw new Error('no audio'); }, ms: 0 });
+  assert.equal(ok.ok, true); assert.equal(live.stopped, true, 'the stream is released after the test');
+  const denied = await testMicrophone({ getUserMedia: async () => { const e = new Error('x'); e.name = 'NotAllowedError'; throw e; } });
+  assert.deepEqual(denied, { ok: false, error: 'NotAllowedError' }); assert.ok(MIC_FIX.NotAllowedError);
+  const dead = track('ended');
+  assert.deepEqual(await testMicrophone({ getUserMedia: async () => ({ getAudioTracks: () => [dead], getTracks: () => [dead] }), ms: 0 }), { ok: false, error: 'NotReadableError' });
+  let closed = false, started = 0;
+  const param = { setValueAtTime() {}, linearRampToValueAtTime() {} };
+  await playTestTone(() => ({ state: 'running', currentTime: 0, destination: {}, async close() { closed = true; },
+    createGain: () => ({ gain: param, connect: (d) => d }),
+    createOscillator: () => { const o = { frequency: {}, connect: (g) => ({ connect: () => {} }), start() { started++; }, stop() { setTimeout(() => o.onended(), 0); } }; return o; } }));
+  assert.equal(started, 1); assert.equal(closed, true);
+  assert.match(AUDIO_CHECK, /id="kx-tone-heard"/); assert.match(MIC_CHECK, /data-act="mic-test"/);
+  const main = read('exam/js/main.js');
+  assert.match(main, /b\.dataset\.module === 'hoeren' && \$\('#kx-tone-heard'\) && !\$\('#kx-tone-heard'\)\.checked/, 'no Hören start before the audio check');
+  assert.match(main, /b\.dataset\.module === 'sprechen' && \$\('#kx-mic-msg'\) && !S\.micOk/, 'no Sprechen start before the microphone check');
+});

@@ -3,9 +3,9 @@
    → server deadline. Invalid state transitions are rejected with 409. */
 import { fail, now, readJsonBody, sha256Hex, DEVICE_ID_RE } from './http.js';
 import { log } from './log.js';
-import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly } from './flags.js';
+import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly, practiceParts } from './flags.js';
 import { hasExamAccess, hasRole } from './auth.js';
-import { releaseSet, RELEASE_MESSAGES } from './release.js';
+import { releaseSet, practicePool, RELEASE_MESSAGES } from './release.js';
 import { formRow, levelConfig, moduleConfig, loadPackage } from './content.js';
 import { countWords } from './wordcount.js';
 import { BANDS, rubricTotal, rubricUnits } from './scoring.js';
@@ -50,7 +50,7 @@ async function attemptView(env, attempt) {
   const form = await formRow(env, attempt.form_id);
   const mods = await attemptModules(env, attempt.id);
   return {
-    attempt_id: attempt.id, mode: apiMode(attempt), module_scope: attempt.module_scope || null, level: attempt.level, status: attempt.status,
+    attempt_id: attempt.id, mode: apiMode(attempt), module_scope: attempt.module_scope || null, part_scope: partScope(attempt), level: attempt.level, status: attempt.status,
     form: { label: form.label, kind: form.kind, test_content: form.kind === 'synthetic' },   // form id never needed client-side
     time_multiplier: attempt.time_multiplier,
     server_now: t, save_grace_ms: SAVE_GRACE_MS,
@@ -65,6 +65,11 @@ async function moduleIntro(env, attempt, m) {
   if (m.status !== 'locked' && m.status !== 'available') return {};
   let pkg;
   try { pkg = await loadPackage(env, attempt.form_id, m.module); } catch { return {}; }   // informational only: never fail the attempt view
+  const part = partScope(attempt);
+  if (part !== null) {   // a single-part practice: that part only, and no clock
+    const p = pkg.data.parts.find((x) => x.part === part);
+    return { intro: { minutes: null, approx_minutes: null, untimed: true, parts: 1, part, items: p ? p.tasks.reduce((k, task) => k + task.items.filter((it) => !it.is_example).length, 0) : 0 } };
+  }
   const tm = pkg.data.timing;
   const items = pkg.data.parts.reduce((n, p) => n + p.tasks.reduce((k, task) => k + task.items.filter((it) => !it.is_example).length, 0), 0);
   return { intro: {
@@ -93,17 +98,30 @@ function requireRunning(m, t, { grace = true } = {}) {
   if (t > m.deadline_at + (grace ? SAVE_GRACE_MS : 0)) fail(409, 'deadline_passed');
 }
 
+/* ---------- single-part practice (ENGINE §2 practice_part) ---------- */
+export const PRACTICE_PART_WINDOW_MS = 24 * 60 * 60 * 1000;   // no countdown; an abandoned practice closes after a day
+const partScope = (attempt) => (attempt.part_scope === null || attempt.part_scope === undefined ? null : attempt.part_scope);
+/* the module package as a part attempt sees it: only its part (everything else stays on the server) */
+const scopedPackage = (attempt, data) => (partScope(attempt) === null ? data : { ...data, parts: data.parts.filter((p) => p.part === partScope(attempt)) });
+/* parts of a module that can be practised alone: the level config's parts with scored items */
+function practisableParts(cfg, module) {
+  const mc = moduleConfig(cfg, module);
+  return mc ? mc.parts.filter((p) => p.item_count > 0 && p.points_per_item > 0).map((p) => ({ part: p.part, construct: p.construct, items: p.item_count })) : [];
+}
+
 /* ---------- the learner's own completed attempts (history) ----------
    Newest first, at most 20, with the stored per-module result (rebuilt whenever a rating changes it). Filtered by the
    session user, so nobody else's attempts can appear. No keys, answers, texts or recordings — those stay behind the
    per-attempt result, review, feedback and recording endpoints with their own gating. */
 export async function myAttempts(env, userId) {
-  const rows = (await env.DB.prepare(`SELECT a.id, a.completed_at, f.label, f.kind, r.json FROM attempts a JOIN forms f ON f.id = a.form_id
+  const rows = (await env.DB.prepare(`SELECT a.id, a.completed_at, a.module_scope, a.part_scope, f.label, f.kind, r.json FROM attempts a JOIN forms f ON f.id = a.form_id
       LEFT JOIN results r ON r.attempt_id = a.id WHERE a.user_id = ?1 AND a.status = 'completed' ORDER BY a.completed_at DESC LIMIT 20`).bind(userId).all()).results;
   return { ok: true, attempts: rows.map((r) => {
     const res = r.json ? JSON.parse(r.json) : null;
     return { attempt_id: r.id, completed_at: r.completed_at, form_label: r.label, test_content: r.kind === 'synthetic',
-      modules: res ? res.modules.map((m) => ({ module: m.module, status: m.status, points: m.points, max_points: m.max_points, pass: m.pass })) : null };
+      ...(partScope(r) !== null ? { practice_part: { module: r.module_scope, part: r.part_scope } } : {}),
+      modules: res ? res.modules.map((m) => ({ module: m.module, status: m.status, points: m.points, max_points: m.max_points, pass: m.pass,
+        ...(partScope(r) !== null && m.counts ? { counts: m.counts } : {}) })) : null };   // a part practice is reported as a count
   }) };
 }
 
@@ -112,7 +130,9 @@ export async function availability(env, userId) {
   const out = [];
   const only = moduleOnly(env);
   const rs = await releaseSet(env);
+  const pp = practiceParts(env);
   for (const [mode, def] of Object.entries(MODES)) {
+    if (def.single_part) { out.push(...(await partAvailability(env, userId, mode, def, pp))); continue; }
     // a single-module mode is listed once per enabled module; while EXAM_MODULE_ONLY is unset it is listed as disabled
     const modules = def.single_module ? (only && only.ok ? only.modules : [null]) : [undefined];
     for (const [lvlKey, lvl] of Object.entries(LEVELS)) {
@@ -134,9 +154,39 @@ export async function availability(env, userId) {
     open_attempts: open.map((a) => ({ attempt_id: a.id, mode: apiMode(a), ...(a.module_scope ? { module: a.module_scope } : {}) })), last_completed: last ? last.id : null };
 }
 
+/* single-part practice availability: one entry per enabled module, with the practisable parts; the pool, never the
+   release set, decides whether forms exist */
+async function partAvailability(env, userId, mode, def, pp) {
+  const out = [];
+  const pool = await practicePool(env);
+  for (const [lvlKey, lvl] of Object.entries(LEVELS)) {
+    for (const module of pp && pp.ok ? pp.modules : [null]) {
+      let reason = modeBlock(env, def, module);
+      if (!reason && pool.block) reason = pool.block;
+      if (!reason && !(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) reason = 'no_access';
+      let parts = [];
+      if (!reason) {
+        const forms = (await env.DB.prepare(`SELECT f.id, f.level_config_id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
+            WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
+          .filter((f) => pool.ids.includes(f.id));
+        if (!forms.length) reason = 'no_forms';
+        else parts = practisableParts(await levelConfig(env, forms[0].level_config_id), module);
+      }
+      out.push({ mode, level: lvlKey, module, ...(parts.length ? { parts } : {}), available: !reason, reason });
+    }
+  }
+  return out;
+}
+
 /* An attempt keeps its form; while a release set is active, an attempt on a form outside it cannot start a module or
    load content (e.g. opened before the set was narrowed). Fail closed while the set itself is missing or invalid. */
 async function requireReleased(env, attempt) {
+  if (partScope(attempt) !== null) {   // a part practice belongs to the practice pool, never to the release set
+    const pool = await practicePool(env);
+    if (pool.block) fail(503, pool.block, RELEASE_MESSAGES[pool.block]);
+    if (!pool.ids.includes(attempt.form_id)) fail(403, 'form_not_in_pool', 'This practice form is no longer in the practice pool.');
+    return;
+  }
   const rs = await releaseSet(env);
   if (rs.block) fail(503, rs.block, RELEASE_MESSAGES[rs.block]);
   if (rs.ids && !rs.ids.includes(attempt.form_id)) fail(403, 'form_not_in_release', 'This practice form is not part of the current release.');
@@ -166,7 +216,10 @@ export async function createAttempt(env, userId, request) {
   const block = modeBlock(env, def, scope);
   if (block === 'module_disabled') fail(403, 'module_disabled');
   if (block) fail(403, 'mode_disabled');
-  const rs = await releaseSet(env);
+  // single-part practice names exactly one part; every other mode takes none
+  const partScopeReq = def.single_part ? body.part : null;
+  if (def.single_part ? !(Number.isInteger(partScopeReq) && partScopeReq >= 1 && partScopeReq <= 9) : 'part' in body && body.part !== null && body.part !== undefined) fail(400, 'invalid_part');
+  const rs = def.single_part ? await practicePool(env) : await releaseSet(env);
   if (rs.block) fail(503, rs.block, RELEASE_MESSAGES[rs.block]);
   const storedMode = def.family || body.mode;
   if (!(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) fail(403, 'exam_access_required');
@@ -189,7 +242,10 @@ export async function createAttempt(env, userId, request) {
   if (!forms.length) fail(409, 'no_forms_available');
   /* ENGINE §7.3 repeat-avoidance: among the forms THIS user has attempted least often (never attempted = 0, so unseen
      forms always win), choose uniformly with the server CSPRNG. Other learners' attempts play no part. */
-  const times = Object.fromEntries((await env.DB.prepare('SELECT form_id, COUNT(*) AS n FROM attempts WHERE user_id = ?1 GROUP BY form_id').bind(userId).all())
+  // a part practice avoids repeating the same part of the same form; everything else counts whole attempts
+  const times = Object.fromEntries((await (def.single_part
+    ? env.DB.prepare('SELECT form_id, COUNT(*) AS n FROM attempts WHERE user_id = ?1 AND module_scope = ?2 AND part_scope = ?3 GROUP BY form_id').bind(userId, scope, partScopeReq)
+    : env.DB.prepare('SELECT form_id, COUNT(*) AS n FROM attempts WHERE user_id = ?1 GROUP BY form_id').bind(userId)).all())
     .results.map((r) => [r.form_id, r.n]));
   const least = Math.min(...forms.map((f) => times[f.id] || 0));
   const pool = forms.filter((f) => (times[f.id] || 0) === least);
@@ -206,11 +262,18 @@ export async function createAttempt(env, userId, request) {
   if (mods.length !== cfg.modules.length) fail(503, 'form_incomplete');
   const kept = scope ? mods.filter((m) => m.module === scope) : mods;
   if (!kept.length) fail(503, 'form_incomplete');
+  if (def.single_part && !practisableParts(cfg, scope).some((p) => p.part === partScopeReq)) fail(400, 'invalid_part');
+  // the part_scope column is named only for part attempts, so every other create works before migration 0004 too
+  const insertAttempt = def.single_part
+    ? env.DB.prepare(`INSERT INTO attempts (id, user_id, mode, module_scope, part_scope, level, form_id, release, status, time_multiplier, client_request_id, assignment_reason, assignment_seed, created_at)
+          VALUES (?1, ?2, ?3, ?12, ?13, ?4, ?5, ?6, 'created', ?7, ?8, ?9, ?10, ?11)`)
+      .bind(attemptId, userId, storedMode, lvl, form.id, form.release, acc ? acc.time_multiplier : 1.0, requestId, reason, seed, t, scope, partScopeReq)
+    : env.DB.prepare(`INSERT INTO attempts (id, user_id, mode, module_scope, level, form_id, release, status, time_multiplier, client_request_id, assignment_reason, assignment_seed, created_at)
+          VALUES (?1, ?2, ?3, ?12, ?4, ?5, ?6, 'created', ?7, ?8, ?9, ?10, ?11)`)
+      .bind(attemptId, userId, storedMode, lvl, form.id, form.release, acc ? acc.time_multiplier : 1.0, requestId, reason, seed, t, scope);
   try {
     await env.DB.batch([
-      env.DB.prepare(`INSERT INTO attempts (id, user_id, mode, module_scope, level, form_id, release, status, time_multiplier, client_request_id, assignment_reason, assignment_seed, created_at)
-          VALUES (?1, ?2, ?3, ?12, ?4, ?5, ?6, 'created', ?7, ?8, ?9, ?10, ?11)`)
-        .bind(attemptId, userId, storedMode, lvl, form.id, form.release, acc ? acc.time_multiplier : 1.0, requestId, reason, seed, t, scope),
+      insertAttempt,
       ...kept.map((m, i) => env.DB.prepare(`INSERT INTO attempt_modules (attempt_id, module, module_order, status) VALUES (?1, ?2, ?3, ?4)`)
         .bind(attemptId, m.module, m.module_order, i === 0 ? 'available' : 'locked'))
     ]);
@@ -224,8 +287,9 @@ export async function createAttempt(env, userId, request) {
     throw e;
   }
   const attempt = await loadAttempt(env, attemptId, userId);
-  await audit(env, userId, attemptId, 'attempt_created', { mode: body.mode, ...(scope ? { module: scope } : {}), reason });
-  log(env, 'attempt_created', { attempt: attemptId, mode: body.mode, ...(scope ? { module: scope } : {}), reason });
+  const scopeDetail = { ...(scope ? { module: scope } : {}), ...(def.single_part ? { part: partScopeReq } : {}) };
+  await audit(env, userId, attemptId, 'attempt_created', { mode: body.mode, ...scopeDetail, reason });
+  log(env, 'attempt_created', { attempt: attemptId, mode: body.mode, ...scopeDetail, reason });
   // takeover: the attempt is new, so the only possible holder is a concurrent replay of this same request
   return { ok: true, ...(await attemptView(env, attempt)), lease: await acquireLease(env, attempt, body.device_id, true) };
 }
@@ -260,8 +324,13 @@ export async function startModule(env, userId, attemptId, module, request) {
   return idempotent(env, attemptId, requestId, `start:${module}`, async () => {
     const m = await moduleRow(env, attemptId, module);
     // EXAM_MODULE_ONLY also holds for attempts opened before it was set: no other module can start (fail closed)
-    const only = moduleOnly(env);
-    if (only && !(only.ok && only.modules.includes(module))) fail(403, 'module_disabled');
+    if (partScope(attempt) !== null) {   // part practice: its own switch (EXAM_PRACTICE_PARTS), not EXAM_MODULE_ONLY
+      const pp = practiceParts(env);
+      if (!(pp && pp.ok && pp.modules.includes(module))) fail(403, 'module_disabled');
+    } else {
+      const only = moduleOnly(env);
+      if (only && !(only.ok && only.modules.includes(module))) fail(403, 'module_disabled');
+    }
     await requireReleased(env, attempt);
     if (m.status === 'locked') fail(409, 'module_locked');
     if (m.status !== 'available') fail(409, 'invalid_transition', `Module is ${m.status}.`);
@@ -271,7 +340,9 @@ export async function startModule(env, userId, attemptId, module, request) {
     const cfg = await levelConfig(env, form.level_config_id);
     const pkg = await loadPackage(env, attempt.form_id, module);
     const t = now(env);
-    const deadline = computeDeadline(cfg, moduleConfig(cfg, module), pkg, t, { multiplier: attempt.time_multiplier });
+    // part practice has no countdown: the module only closes itself after PRACTICE_PART_WINDOW_MS (abandoned practice)
+    const deadline = partScope(attempt) !== null ? t + PRACTICE_PART_WINDOW_MS
+      : computeDeadline(cfg, moduleConfig(cfg, module), pkg, t, { multiplier: attempt.time_multiplier });
     const r = await env.DB.prepare(`UPDATE attempt_modules SET status = 'running', started_at = ?3, deadline_at = ?4 WHERE attempt_id = ?1 AND module = ?2 AND status = 'available'`)
       .bind(attemptId, module, t, deadline).run();
     if (!r.meta.changes) fail(409, 'invalid_transition');
@@ -289,7 +360,7 @@ export async function getPackage(env, userId, attemptId, module, url) {
   requireRunning(m, t, { grace: false });
   await requireReleased(env, attempt);
   const pkg = await loadPackage(env, attempt.form_id, module);
-  if (module !== 'hoeren') return { ok: true, server_now: t, module: moduleView(m, t), package: pkg.data };
+  if (module !== 'hoeren') return { ok: true, server_now: t, module: moduleView(m, t), package: scopedPackage(attempt, pkg.data) };
   const readinessMs = await hoerenReadinessMs(env, attempt);
   const pos = hoerenPosition(pkg.data.timing.plan, m, t, readinessMs, PART_LEAD_MS);
   return { ok: true, server_now: t, module: moduleView(m, t), package: hoerenView(pkg.data, pos.openPart),
@@ -354,6 +425,7 @@ export async function saveAnswers(env, userId, attemptId, module, request) {
       if (!item) fail(422, 'unknown_item');
       if (item.is_example) fail(422, 'item_is_example', item.item_id);
       if (item.part > openPart) fail(409, 'part_not_open', item.item_id);   // OD-02: future Hören parts stay closed
+      if (partScope(attempt) !== null && item.part !== partScope(attempt)) fail(422, 'item_not_in_part', item.item_id);   // part practice: that part only
       if (item.interaction === 'topic_choice' && t > topicLockAt) fail(409, 'topic_locked', item.item_id);
       if (!Number.isInteger(a.seq) || a.seq < 1 || a.seq > 1e9) fail(422, 'invalid_seq', item.item_id);
       return { a, item, value: validateValue(item, a.value) };
@@ -749,7 +821,7 @@ export async function moduleReview(env, userId, attemptId, module) {
     .bind(attempt.id, module).all()).results.map((r) => [r.item_id, JSON.parse(r.value_json)]));
   const option = (it, id) => { const o = (it.options || []).find((x) => x.option_id === id); return o ? { option_id: o.option_id, label: o.label, text: o.text || null } : (id ? { option_id: id, label: id, text: null } : null); };
   const items = [], transcripts = [];   // listening scripts: released with the key, never before
-  for (const p of pkg.parts) for (const t of p.tasks) for (const it of t.items) {
+  for (const p of scopedPackage(attempt, pkg).parts) for (const t of p.tasks) for (const it of t.items) {
     const ix = index[it.item_id];
     if (!ix || ix.is_example || !ix.points) continue;   // examples and unscored items are not reviewed
     const key = keys[it.item_id], v = resp[it.item_id];

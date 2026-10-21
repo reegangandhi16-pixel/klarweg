@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|review-form runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|review-form runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -1315,6 +1315,86 @@ async function runLesenOnly() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* PART-PRACTICE (ENGINE §2 practice_part): Lesen Teil 3 alone, untimed, from a practice pool that is disjoint from the
+   Lesen-only release set. Phone start screen lists the parts; the intro says "ohne Zeitlimit"; only Teil 3 is on the page
+   and the header shows no clock; answers survive a reload; submit goes straight to a counted result (no points, no
+   pass line) and a Teil-3-only review; "Zur Übersicht" shows the practice in history, labelled as a part practice. */
+async function runPartPractice() {
+  const pool = PRACTICE_LIBRARY.find((f) => f.id !== PRACTICE.id);
+  const dev = await startDevServer({ form: 'practice', flags: { EXAM_MODULE_ONLY: 'lesen', EXAM_RELEASE_FORMS: PRACTICE.id, EXAM_PRACTICE_PARTS: 'lesen', EXAM_PRACTICE_PART_FORMS: pool.id } });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable'); await send('Log.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const text = () => evaluate('document.body.innerText');
+    const waitFor = async (src, ms = 15000, label = src) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
+    const A = makeA11y({ send, evaluate });
+    const base = `http://127.0.0.1:${dev.port}/exam/`;
+    const keys = Object.fromEntries((await dev.env.DB.prepare('SELECT item_id, key_json FROM item_keys').all()).results.map((r) => [r.item_id, JSON.parse(r.key_json).correct]));
+
+    await vp(390, 844, true);
+    await send('Page.navigate', { url: base });
+    await waitFor(`document.querySelector('[data-act="create"][data-mode="synthetic_part"][data-part="3"]')`, 15000, 'part practice on the start screen');
+    let t = await text();
+    assert.match(t, /einzelne Teile üben/); assert.match(t, /Ohne Zeitlimit/);
+    assert.equal(await evaluate(`document.querySelectorAll('[data-act="create"][data-mode="synthetic_part"]').length`), 5);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'no horizontal scroll at 390 px');
+    await A.a11y('start with part practice (mobile)');
+    await click('[data-act="create"][data-mode="synthetic_part"][data-part="3"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'part intro');
+    t = await text();
+    assert.match(t, /Teil 3 · 7 Aufgaben · ohne Zeitlimit/);
+    const attempt = await dev.env.DB.prepare('SELECT id, form_id, part_scope FROM attempts').first();
+    assert.equal(attempt.form_id, pool.id, 'assigned from the practice pool, not the release set'); assert.equal(attempt.part_scope, 3);
+    await click('[data-act="start"][data-module="lesen"]');
+    await waitFor(`document.querySelector('#kx-main .kx-part')`, 15000, 'Teil 3 rendered');
+    assert.deepEqual(await evaluate(`[...document.querySelectorAll('#kx-main .kx-part')].map((p) => p.dataset.part)`), ['3'], 'only the practised part is on the page');
+    assert.equal(await evaluate(`!!document.querySelector('.kx-timer')`), false, 'no clock');
+    assert.match(await evaluate(`document.querySelector('.kx-head').textContent`), /Ohne Zeitlimit/);
+    await A.a11y('part practice module (mobile)');
+    const items = (await dev.env.DB.prepare("SELECT item_id FROM items_index WHERE form_id = ?1 AND module = 'lesen' AND part = 3 AND is_example = 0").bind(pool.id).all()).results.map((r) => r.item_id);
+    assert.equal(items.length, 7);
+    // 6 correct, the last one left open
+    await evaluate(`(() => { const plan = ${JSON.stringify(Object.fromEntries(items.slice(0, 6).map((id) => [id, keys[id]])))};
+      for (const [id, v] of Object.entries(plan)) { const sel = document.querySelector('select[data-item="' + id + '"]'); if (sel) { sel.value = v; sel.dispatchEvent(new Event('change', { bubbles: true })); continue; }
+        const el = document.querySelector('[data-item="' + id + '"][value="' + v + '"]'); if (el) el.click(); } })()`);
+    for (const t0 = Date.now(); (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM responses_current WHERE attempt_id = ?1').bind(attempt.id).first()).n < 6; await sleep(200)) {
+      if (Date.now() - t0 > 15000) throw new Error('part answers not stored');
+    }
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
+    await waitFor(`!window.__beforeReload && document.querySelector('#kx-main .kx-part')`, 15000, 'reloaded into the part');
+    assert.match(await evaluate(`document.querySelector('.kx-progress').textContent`), /6 von 7 beantwortet/, 'answers restored after a reload');
+    await vp(1280, 800, false);
+    await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review panel'); await click('[data-act="submit-confirm"]');
+    await waitFor(`document.querySelector('.kx-part-result-score')`, 15000, 'part result');
+    t = await text();
+    assert.match(t, /Lesen Teil 3/); assert.match(t, /6 von 7 richtig/); assert.match(t, /ohne Antwort 1/);
+    assert.equal(/Bestanden ab|nicht bestanden|\/ 100/.test(t), false, 'no module points or pass line for a part');
+    assert.equal(await evaluate(`document.querySelectorAll('.kx-review-items tbody tr:not(.kx-rv-explain)').length`), 7, 'review of Teil 3 only');
+    await A.a11y('part practice result');
+    await click('[data-act="home"]');
+    await waitFor(`document.querySelector('.kx-history')`, 15000, 'history');
+    assert.match(await evaluate(`document.querySelector('.kx-history tbody tr').textContent`), /Teilübung · Lesen Teil 3.*6 \/ 7 richtig/s);
+    assert.deepEqual(A.findings, [], `automated accessibility findings on ${A.screens.join(', ')}`);
+    const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    const csp = b.events.filter((e) => e.method === 'Log.entryAdded' && /Content Security Policy/i.test(e.params.entry.text || '')).map((e) => e.params.entry.text);
+    assert.deepEqual(csp, [], 'no CSP violations');
+    log(`part-practice ${pool.name}`, 'PASS', {});
+    return exceptions;
+  } finally { b.close(); dev.server.close(); }
+}
+
 /* REVIEW-FORM: the offline EX-03 review form (exam-content/tools/review-form.mjs) in a real browser, opened from a file
    like a reviewer would. Fill slot A for every Lesen item through the page, then check: the counter reaches complete;
    the record kept in the browser passes the same checker the organiser uses; a reload restores it; slot C shows only
@@ -1373,12 +1453,13 @@ async function runReviewForm() {
 }
 
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['review-form', runReviewForm, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['review-form', runReviewForm, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
   if (name === 'review-form') { results.push({ vp: `review form ${PRACTICE.name} (Lesen, file://)`, uncaught: await fn() }); continue; }
   if (name === 'lesen-only') { results.push({ vp: `lesen-only ${PRACTICE.name} (mobile start + desktop)`, uncaught: await fn() }); continue; }
+  if (name === 'part-practice') { results.push({ vp: 'part-practice (mobile start + desktop result)', uncaught: await fn() }); continue; }
   if (name === 'rater-2fa') { results.push({ vp: `rater 2FA ${PRACTICE.name}`, uncaught: await fn() }); continue; }
   if (name === 'two-tabs') { results.push({ vp: `two tabs ${PRACTICE.name}`, uncaught: await fn() }); continue; }
   if (name === 'lease-expiry') { results.push({ vp: `lease expiry ${PRACTICE.name}`, uncaught: await fn() }, { vp: `lease expiry Sprechen ${PRACTICE.name}`, uncaught: await runLeaseExpirySprechen() }); continue; }

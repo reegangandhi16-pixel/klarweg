@@ -10,7 +10,7 @@ exam content, no real audio and no learner data.
 |---|---|---|
 | Content source + tools | `exam-content/` (level config, schema, synthetic form, validator, release builder) | repo only |
 | Exam Worker `klarweg-exam` | `exam-worker/` (`workers_dev = false`; no public route) | **not created** |
-| Exam DB (D1 `klarweg-exam`) | `exam-worker/migrations/0001_exam_init.sql`, `0002_attempt_module_scope.sql`, `0003_form_purpose.sql` (additive columns) | **not created** (placeholder `database_id`) |
+| Exam DB (D1 `klarweg-exam`) | `exam-worker/migrations/0001_exam_init.sql`, `0002_attempt_module_scope.sql`, `0003_form_purpose.sql`, `0004_attempt_part_scope.sql` (additive columns) | **not created** (placeholder `database_id`) |
 | Private R2 `klarweg-exam-content` / `klarweg-exam-recordings` | binding `CONTENT` / `RECORDINGS` | **not created** |
 | Access proxy `/exam/*` | `access/worker/src/exam-proxy.js` + one hook in `index.js` | code is inert: needs `EXAM_ROUTES = "on"` **and** an `EXAM` service binding, and neither exists |
 | Frontend shell | `exam/` | **not published**: not in `.github/pages-allowlist.txt` |
@@ -24,6 +24,8 @@ exam content, no real audio and no learner data.
 | `EXAM_SYNTHETIC_FORMS` | klarweg-exam | mode `synthetic_full` may be assigned |
 | `EXAM_MOCK_FORMS` | klarweg-exam | mode `mock_m0` (no forms exist yet) |
 | `EXAM_PRODUCTION_FORMS` | klarweg-exam | mode `simulation_full` (no forms exist yet) |
+| `EXAM_PRACTICE_PARTS` | klarweg-exam | **unset (default): off.** A comma list of modules whose parts can be practised one at a time, untimed (ENGINE §2 `practice_part`). Only `lesen` is supported; any other entry disables it (fail closed). Needs `EXAM_PRACTICE_PART_FORMS` and migration 0004 |
+| `EXAM_PRACTICE_PART_FORMS` | klarweg-exam | **The practice pool**, an explicit comma list of form ids used only for part practice. Every id must be a live form (synthetic: purpose `practice`) and **none may be in `EXAM_RELEASE_FORMS`**; otherwise `503 pool_misconfigured` (logged). Unset with part practice on → `503 pool_unconfigured`. A part attempt whose form leaves the pool gets `403 form_not_in_pool`. Learner-facing pool content needs the same independent content review as any learner form |
 | `EXAM_RELEASE_FORMS` | klarweg-exam | **unset (default):** every live form of a mode's kinds may be assigned (test/dev releases, incl. S0). **A comma list of form ids:** only those forms are assigned or continued (an open attempt on another form gets `403 form_not_in_release` on start/package). Every id must be a live form, and a synthetic one must have purpose `practice` (migration 0003), so S0 can never be listed; any malformed, duplicate, unknown, non-live or non-practice id disables assignment (`503 release_misconfigured`, logged with the ids). **Required** when `EXAM_MODULE_ONLY` is set (`503 release_unconfigured` otherwise). It never adds or substitutes a form |
 | `EXAM_MODULE_ONLY` | klarweg-exam | **unset (default):** full attempts only; single-module modes (`synthetic_module`, `simulation_module`) refused. **A comma list of modules** (e.g. `lesen`): only single-module attempts of those modules; full attempts refused. Any unknown entry disables every mode (fail closed). Still needs the family flag above (`EXAM_SYNTHETIC_FORMS` for `synthetic_module`). Scope and gates: `SELF-PRACTICE-SCOPE.md` |
 
@@ -41,7 +43,9 @@ Secrets (`wrangler secret put`), each ≥ 32 characters:
 2. `wrangler r2 bucket create klarweg-exam-content` and `wrangler r2 bucket create klarweg-exam-recordings`. Both buckets stay private: no public domain and no r2.dev access.
 3. Apply the migrations: `cd exam-worker && npx wrangler d1 migrations apply klarweg-exam --remote`. **Order:** a Worker
    version that knows `attempts.module_scope` (since 0002) or `forms.purpose` (since 0003) needs those migrations applied first, or creating any attempt
-   fails; apply migrations before deploying the Worker.
+   fails; apply migrations before deploying the Worker. `attempts.part_scope` (0004) is written only by part-practice
+   creates, so without 0004 every other attempt still works and part practice fails; apply it anyway before enabling
+   `EXAM_PRACTICE_PARTS`.
 4. Build the release: `npm run exam:build -- --out /tmp/kx-r000`.
    - The release goes outside the repo.
    - Upload every file under `releases/` to `klarweg-exam-content` with the same keys.

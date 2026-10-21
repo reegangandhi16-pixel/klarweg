@@ -37,7 +37,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scenario: [flagged, autoplay, hoeren-autoplay, practice, sprechen-topic, lease-expiry, two-tabs, rater-2fa, lesen-only, review-form]
+        scenario: [flagged, autoplay, hoeren-autoplay, practice, sprechen-topic, lease-expiry, two-tabs, rater-2fa, lesen-only, part-practice, review-form]
         # '1' = the same journey through the real klarweg-access Worker in-process (session → /exam proxy → service binding)
         proxy: ['0', '1']
     steps:

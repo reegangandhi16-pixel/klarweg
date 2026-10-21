@@ -11,6 +11,14 @@
                              A comma list of form ids: ONLY those forms may be assigned or continued. Every listed id
                              must be a live form, and a synthetic one must have purpose 'practice' (never a system-test
                              fixture such as S0); otherwise nothing is assigned (fail closed, release_misconfigured).
+     EXAM_PRACTICE_PARTS     unset (default): no single-part practice (ENGINE §2 practice_part). A comma list of modules
+                             whose parts may be practised one at a time, untimed. Only "lesen" is supported (Hören parts
+                             share one audio plan; Schreiben/Sprechen are rated). Any other entry disables it (fail
+                             closed). Requires EXAM_PRACTICE_PART_FORMS. Independent of EXAM_MODULE_ONLY.
+     EXAM_PRACTICE_PART_FORMS the PRACTICE POOL: a comma list of form ids used only for single-part practice. Every listed
+                             id must be a live form, synthetic ones with purpose 'practice', and NONE may be in
+                             EXAM_RELEASE_FORMS (live simulation forms never enter the pool). Otherwise no part practice
+                             is assigned or continued (fail closed, pool_misconfigured).
    EXAM_ROUTES lives in klarweg-access (the /exam/* proxy). */
 
 const on = (v) => v === 'on';
@@ -26,13 +34,25 @@ export function flags(env) {
 
 const FORM_ID_RE = /^frm:(a1|a2|b1|b2):[a-z0-9-]+@([1-9][0-9]*)$/;
 
-/* EXAM_RELEASE_FORMS → null (unset) | { ok: true, ids } | { ok: false } (malformed or duplicate ids) */
-export function releaseForms(env) {
-  const raw = env.EXAM_RELEASE_FORMS;
+/* a comma list of form ids → null (unset) | { ok: true, ids } | { ok: false } (malformed or duplicate ids) */
+function formList(raw) {
   if (raw === undefined || raw === null || String(raw).trim() === '') return null;
   const ids = String(raw).split(',').map((x) => x.trim()).filter(Boolean);
   if (!ids.length || ids.some((id) => !FORM_ID_RE.test(id)) || new Set(ids).size !== ids.length) return { ok: false, ids: [] };
   return { ok: true, ids };
+}
+export const releaseForms = (env) => formList(env.EXAM_RELEASE_FORMS);
+export const practicePartForms = (env) => formList(env.EXAM_PRACTICE_PART_FORMS);
+
+/* modules whose parts can be practised one at a time (ENGINE §2 practice_part) */
+export const PART_PRACTICE_MODULES = Object.freeze(['lesen']);
+/* EXAM_PRACTICE_PARTS → null (unset: off) | { ok: true, modules } | { ok: false } (misconfigured) */
+export function practiceParts(env) {
+  const raw = env.EXAM_PRACTICE_PARTS;
+  if (raw === undefined || raw === null || String(raw).trim() === '') return null;
+  const list = String(raw).split(',').map((x) => x.trim()).filter(Boolean);
+  if (!list.length || list.some((m) => !PART_PRACTICE_MODULES.includes(m))) return { ok: false, modules: [] };
+  return { ok: true, modules: PART_PRACTICE_MODULES.filter((m) => list.includes(m)) };
 }
 
 export const EXAM_MODULES = Object.freeze(['lesen', 'hoeren', 'schreiben', 'sprechen']);
@@ -54,19 +74,33 @@ export const MODES = {
   mock_m0: { kinds: ['mock'], flag: 'mock', access_scope: 'mock' },
   simulation_full: { kinds: ['set'], flag: 'production', access_scope: 'sets' },
   synthetic_module: { kinds: ['synthetic'], flag: 'synthetic', access_scope: 'synthetic', family: 'synthetic_full', single_module: true },
-  simulation_module: { kinds: ['set'], flag: 'production', access_scope: 'sets', family: 'simulation_full', single_module: true }
+  simulation_module: { kinds: ['set'], flag: 'production', access_scope: 'sets', family: 'simulation_full', single_module: true },
+  /* ENGINE §2 practice_part: one part of one module, untimed, from the practice pool (EXAM_PRACTICE_PART_FORMS), never
+     from the learner release set. Stored like a single-module attempt plus attempts.part_scope. */
+  synthetic_part: { kinds: ['synthetic'], flag: 'synthetic', access_scope: 'synthetic', family: 'synthetic_full', single_module: true, single_part: true },
+  practice_part: { kinds: ['set'], flag: 'production', access_scope: 'sets', family: 'simulation_full', single_module: true, single_part: true }
 };
 
 /* the API mode of a stored attempt */
 export function apiMode(attempt) {
   if (!attempt.module_scope) return attempt.mode;
-  const m = Object.entries(MODES).find(([, d]) => d.single_module && d.family === attempt.mode);
+  const part = attempt.part_scope !== null && attempt.part_scope !== undefined;
+  const m = Object.entries(MODES).find(([, d]) => d.single_module && !!d.single_part === part && d.family === attempt.mode);
   return m ? m[0] : attempt.mode;
 }
 
 /* why a mode (and, for a single-module mode, a module) may not be used now; null = allowed */
 export function modeBlock(env, def, module = null) {
   if (!flags(env)[def.flag]) return 'disabled';
+  if (def.single_part) {   // its own switch and its own form pool; a misconfigured EXAM_MODULE_ONLY still disables it (fail closed)
+    const mo = moduleOnly(env);
+    if (mo && !mo.ok) return 'misconfigured';
+    const pp = practiceParts(env);
+    if (!pp) return 'disabled';
+    if (!pp.ok) return 'misconfigured';
+    if (module !== null && !pp.modules.includes(module)) return 'module_disabled';
+    return null;
+  }
   const only = moduleOnly(env);
   if (only && !only.ok) return 'misconfigured';
   if (!def.single_module) return only ? 'module_only' : null;

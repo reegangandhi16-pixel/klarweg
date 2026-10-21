@@ -5,7 +5,7 @@
 import { fail, now, sha256Hex, LEASE_ID_RE, REQUEST_ID_RE } from './http.js';
 import { log } from './log.js';
 import { formRow, levelConfig, moduleConfig, loadPackage } from './content.js';
-import { scoreObjectiveModule, scoreRubricModule, rubricUnits, SCORING_VERSION } from './scoring.js';
+import { scoreObjectiveModule, scoreObjectivePart, scoreRubricModule, rubricUnits, SCORING_VERSION } from './scoring.js';
 import { countWords } from './wordcount.js';
 
 export const LEASE_TTL_MS = 60_000;
@@ -221,14 +221,16 @@ async function computeScore(env, attempt, module) {
   const cfg = await levelConfig(env, form.level_config_id);
   const mc = moduleConfig(cfg, module);
   if (!mc) throw new Error(`no module config for ${module}`);
-  const items = (await env.DB.prepare('SELECT item_id, points, rubric_id, is_example FROM items_index WHERE form_id = ?1 AND module = ?2')
-    .bind(attempt.form_id, module).all()).results;
+  const part = attempt.part_scope === null || attempt.part_scope === undefined ? null : attempt.part_scope;
+  const items = (await env.DB.prepare('SELECT item_id, points, rubric_id, is_example, part FROM items_index WHERE form_id = ?1 AND module = ?2')
+    .bind(attempt.form_id, module).all()).results.filter((it) => part === null || it.part === part);
   if (mc.scoring.strategy === 'objective_table') {
     const keys = Object.fromEntries((await env.DB.prepare('SELECT k.item_id, k.key_json FROM item_keys k JOIN items_index i ON i.item_id = k.item_id WHERE k.form_id = ?1 AND i.module = ?2')
       .bind(attempt.form_id, module).all()).results.map((r) => [r.item_id, JSON.parse(r.key_json)]));
     const resp = Object.fromEntries((await env.DB.prepare('SELECT item_id, value_json FROM responses_current WHERE attempt_id = ?1 AND module = ?2')
       .bind(attempt.id, module).all()).results.map((r) => [r.item_id, JSON.parse(r.value_json)]));
-    return scoreObjectiveModule(cfg, mc, items, keys, resp);
+    // a single part has no official points table: it is reported as a count of correct answers, never as module points
+    return part === null ? scoreObjectiveModule(cfg, mc, items, keys, resp) : scoreObjectivePart(items, keys, resp, part);
   }
   const ratings = (await env.DB.prepare('SELECT item_id, rubric_id, round, rater_kind, total FROM ratings WHERE attempt_id = ?1 AND module = ?2')
     .bind(attempt.id, module).all()).results;
@@ -265,6 +267,7 @@ export async function buildResult(env, attempt) {
     level: attempt.level,
     form_kind: form.kind,
     test_content: form.kind === 'synthetic',
+    ...(attempt.part_scope !== null && attempt.part_scope !== undefined ? { practice_part: { module: attempt.module_scope, part: attempt.part_scope } } : {}),
     pass_points: (await levelConfig(env, form.level_config_id)).pass_threshold_points ?? null,   // per module (no total)
     disclaimer: 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.',
     modules: mods.map((m) => {
@@ -277,7 +280,7 @@ export async function buildResult(env, attempt) {
         status: s ? s.status : 'not_taken',
         points: s && s.status === 'final' ? s.points : null,
         max_points: s ? s.max_points : 100,
-        pass: s && s.status === 'final' ? !!s.pass : null,
+        pass: s && s.status === 'final' && s.pass !== null ? !!s.pass : null,   // a part practice has no pass/fail
         predikat: s && s.status === 'final' ? s.predikat : null,
         counts: s && 'correct' in flags ? { correct: flags.correct, incorrect: flags.incorrect, unanswered: flags.unanswered } : null,
         note: !s ? null : s.status === 'pending_rating' ? 'Wartet auf zwei unabhängige Bewertungen.'

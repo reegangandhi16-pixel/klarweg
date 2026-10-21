@@ -27,6 +27,13 @@ export function testBanner(pkg) {
    Rules state what the engine really does: server time that keeps running, autosave, free navigation, review. */
 export function moduleIntro(module, intro) {
   const facts = [];
+  if (intro && intro.untimed) {   // single-part practice
+    const f = [`Teil ${intro.part}`, `${intro.items} Aufgaben`, 'ohne Zeitlimit'];
+    const rules = ['Es läuft keine Uhr. Sie können unterbrechen und später weitermachen; nach 24 Stunden wird die Übung automatisch abgegeben.',
+      'Ihre Antworten werden automatisch gespeichert. Sie können sie bis zur Abgabe ändern.',
+      'Nach der Abgabe sehen Sie jede Aufgabe mit Lösung und Erklärung. Eine Teilübung hat keine Modulpunkte.'];
+    return `<p class="kx-intro-facts">${esc(f.join(' · '))}</p><ul class="kx-intro-rules">${rules.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
+  }
   if (intro && intro.minutes) facts.push(`${intro.minutes} Minuten`);
   else if (intro && intro.approx_minutes) facts.push(`ca. ${intro.approx_minutes} ${intro.approx_minutes === 1 ? 'Minute' : 'Minuten'}`);
   if (intro && intro.parts) facts.push(`${intro.parts} ${intro.parts === 1 ? 'Teil' : 'Teile'}`);
@@ -98,14 +105,14 @@ export function errorView({ code = 'network', status = 0 } = {}) {
   return { title: 'Aktion nicht möglich', body: `Diese Aktion konnte nicht ausgeführt werden. Bereits gespeicherte Antworten bleiben erhalten. (${code})`, actions: [{ act: 'reload', label: 'Seite neu laden' }] };
 }
 
-export function header({ module, remainingMs, saveState, progress = null }) {
+export function header({ module, remainingMs, saveState, progress = null, untimed = false }) {
   const save = { saved: 'Gespeichert', pending: 'Änderungen …', saving: 'Speichert …', offline: 'Offline — wird erneut versucht', stopped: 'Speichern gestoppt' }[saveState] || '';
   const total = progress ? progress.reduce((n, p) => n + p.total, 0) : 0;
   const done = progress ? progress.reduce((n, p) => n + p.answered, 0) : 0;
   return `<header class="kx-head"><h1 class="kx-title">${esc(MODULE_LABELS[module] || module)}</h1>`
     + (total ? `<p class="kx-progress" data-progress-total>${done} von ${total} beantwortet</p>` : '')
     + `<p class="kx-save">${esc(save)}</p>`   // visual only: the header is redrawn, so problems are announced via #kx-announce (saveAnnouncement)
-    + `<p class="kx-timer" role="timer" aria-label="Verbleibende Zeit">${esc(formatRemaining(remainingMs))}</p></header>`;
+    + (untimed ? '<p class="kx-untimed">Ohne Zeitlimit</p>' : `<p class="kx-timer" role="timer" aria-label="Verbleibende Zeit">${esc(formatRemaining(remainingMs))}</p>`) + '</header>';
 }
 
 /* Example items already get a visible "Beispiel" label, so a leading "Beispiel:" in their stem is dropped to avoid
@@ -235,10 +242,27 @@ export function startChoice(av) {
   return one ? { mode: one.mode, module: one.module } : null;
 }
 
-export function startScreen(choice, { lastCompleted = null, history = '' } = {}) {
+/* Single-part practice offered on the start screen: the available synthetic_part / practice_part entries with parts. */
+export function partChoices(av) {
+  return (av && av.modes || []).filter((m) => (m.mode === 'synthetic_part' || m.mode === 'practice_part') && m.available && m.level === 'b1' && MODULE_LABELS[m.module] && (m.parts || []).length);
+}
+export function partPracticeSection(choices) {
+  if (!choices || !choices.length) return '';
+  return choices.map((c) => `<section class="kx-part-practice" aria-labelledby="kx-pp-${esc(c.module)}"><h2 id="kx-pp-${esc(c.module)}">${esc(MODULE_LABELS[c.module])}: einzelne Teile üben</h2>`
+    + '<p>Ohne Zeitlimit, mit Lösung und Erklärung zu jeder Aufgabe. Eine Teilübung hat keine Modulpunkte.</p><ul class="kx-part-list">'
+    + c.parts.map((p) => `<li><button type="button" class="kx-btn kx-btn-quiet" data-act="create" data-mode="${esc(c.mode)}" data-module="${esc(c.module)}" data-part="${esc(p.part)}">`
+      + `Teil ${esc(p.part)}<span class="kx-part-construct">${esc(p.construct || '')} · ${esc(p.items)} Aufgaben</span></button></li>`).join('')
+    + '</ul></section>').join('');
+}
+
+export function startScreen(choice, { lastCompleted = null, history = '', parts = '' } = {}) {
+  if (!choice) {   // only part practice is offered
+    const last = lastCompleted ? `<div class="kx-actions"><button class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(lastCompleted)}">Letztes Ergebnis ansehen</button></div>` : '';
+    return `<main class="kx-card"><p class="kx-eyebrow">Teilübungen</p><h1>Klarweg B1 – Teilübungen</h1>${parts}${last}${history}</main>`;
+  }
   const last = lastCompleted ? `<button class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(lastCompleted)}">Letztes Ergebnis ansehen</button>` : '';
   if (!choice.module) {
-    return `<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}">Übung starten</button>${last}</div>${history}</main>`;
+    return `<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}">Übung starten</button>${last}</div>${parts}${history}</main>`;
   }
   const label = MODULE_LABELS[choice.module];
   const others = MODULE_ORDER.filter((m) => m !== choice.module).map((m) => MODULE_LABELS[m]);
@@ -246,7 +270,7 @@ export function startScreen(choice, { lastCompleted = null, history = '' } = {})
   return `<main class="kx-card"><p class="kx-eyebrow">Selbstlernübung · nur ${esc(label)} · synthetische Inhalte</p><h1>Klarweg B1 ${esc(label)} – Übung</h1>`
     + `<p>Eine Übung nur zum Modul ${esc(label)}, mit Prüfungszeit. Die Zeit läuft auf dem Server. ${esc(tail)} sind in dieser Version nicht verfügbar.</p>`
     + `<p>Nach der Abgabe sehen Sie Ihre Punkte für dieses Modul und jede Aufgabe mit Lösung und Erklärung. Das ist eine Übungsauswertung, kein Prüfungsergebnis und keine Vorhersage für die Prüfung.</p>`
-    + `<div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}" data-module="${esc(choice.module)}">${esc(label)} üben</button>${last}</div>${history}</main>`;
+    + `<div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}" data-module="${esc(choice.module)}">${esc(label)} üben</button>${last}</div>${parts}${history}</main>`;
 }
 
 /* The learner's completed practices, newest first: date, form, per-module result, and a way back into each result. */
@@ -258,9 +282,10 @@ export function attemptHistory(list, formatDate = (ms) => new Date(ms).toLocaleD
     const cell = (mod) => {
       const m = (a.modules || []).find((x) => x.module === mod);
       if (!m || m.status === 'not_taken') return '–';
+      if (a.practice_part && m.counts && m.status === 'final') return `${esc(m.counts.correct)} / ${esc(m.max_points)} richtig`;
       return m.status === 'final' ? `${esc(m.points)} / ${esc(m.max_points)}` : 'in Bewertung';
     };
-    return `<tr><th scope="row">${esc(formatDate(a.completed_at))}</th><td>${esc(a.form_label)}</td>${cols.map((mod) => `<td>${cell(mod)}</td>`).join('')}`
+    return `<tr><th scope="row">${esc(formatDate(a.completed_at))}</th><td>${a.practice_part ? `Teilübung · ${esc(MODULE_LABELS[a.practice_part.module] || a.practice_part.module)} Teil ${esc(a.practice_part.part)}<br>` : ''}${esc(a.form_label)}</td>${cols.map((mod) => `<td>${cell(mod)}</td>`).join('')}`
       + `<td><button type="button" class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(a.attempt_id)}">Ergebnis ansehen</button></td></tr>`;
   }).join('');
   if (!rows) return '';
@@ -320,7 +345,23 @@ export function itemReview(module, review) {
 }
 
 const RESULT_NOTES = { pending_rating: 'Wartet auf zwei unabhängige Bewertungen.', pending_rule: 'Bewertet; die Punkteregel ist noch nicht festgelegt.' };
+/* A single-part practice (ENGINE §2 practice_part): correct answers out of the part's tasks. There is no official
+   conversion for one part, so no points, no pass line and no grade are shown — those exist only for a whole module. */
+function partResultPage(result) {
+  const pp = result.practice_part;
+  const m = result.modules.find((x) => x.module === pp.module) || {};
+  const c = m.counts || { correct: 0, incorrect: 0, unanswered: 0 };
+  return `<main class="kx-result" aria-labelledby="kx-result-title"><p class="kx-eyebrow">Teilübung${result.test_content ? ' · synthetische Inhalte' : ''}</p>`
+    + `<h1 id="kx-result-title">${esc(RESULT_TITLE)}</h1>`
+    + `<p class="kx-part-result-title">${esc(MODULE_LABELS[pp.module] || pp.module)} Teil ${esc(pp.part)}</p>`
+    + `<p class="kx-part-result-score">${esc(c.correct)} von ${esc(m.max_points ?? c.correct + c.incorrect + c.unanswered)} richtig</p>`
+    + `<p>falsch ${esc(c.incorrect)} · ohne Antwort ${esc(c.unanswered)}</p>`
+    + '<p class="kx-meta">Eine Teilübung hat keine Modulpunkte und kein Bestehen. Punkte gibt es nur für ein ganzes Modul.</p>'
+    + `<p class="kx-disclaimer">${esc(RESULT_DISCLAIMER)}</p></main>`;
+}
+
 export function resultPage(result) {
+  if (result.practice_part) return partResultPage(result);
   const rows = result.modules.map((m) => {
     const pts = m.status === 'final' ? `${esc(m.points)} / ${esc(m.max_points)}` : '–';
     const verdict = m.status === 'final' ? (m.pass ? 'bestanden' : 'nicht bestanden') : m.status === 'not_taken' ? 'nicht abgelegt' : 'in Bewertung';

@@ -53,7 +53,16 @@ request, plus `synthetic_module` for the synthetic practice library. The attempt
 (`simulation_full` / `synthetic_full`) with `attempts.module_scope` = the module, so one practice attempt per family is
 open at a time; the attempt contains only that module, and every other module's routes answer `404 module_not_found`.
 Single-module modes are off unless `EXAM_MODULE_ONLY` lists the module; while it is set, full attempts are refused
-(`SELF-PRACTICE-SCOPE.md`). `practice_part` is not implemented.
+(`SELF-PRACTICE-SCOPE.md`).
+
+**Implementation note (2026-10-21): `practice_part`.** API modes `synthetic_part` / `practice_part` with `module` and
+`part` in the create request, stored like a single-module attempt plus `attempts.part_scope` (migration 0004). Off
+unless `EXAM_PRACTICE_PARTS` lists the module (only `lesen`: Hören parts share one audio plan, Schreiben/Sprechen are
+rated). Forms come only from the explicit practice pool `EXAM_PRACTICE_PART_FORMS`, which must be disjoint from
+`EXAM_RELEASE_FORMS` (fail closed otherwise). The package, saves and review are limited to that part. There is no countdown: the module closes itself after
+24 h (abandoned practice). The result is a count of correct answers out of the part's tasks: no module points, no
+pass, no grade, because no official conversion exists for one part. History labels the attempt as a part practice.
+Repeat avoidance counts earlier practices of the same part. One open attempt per family (as for single modules).
 
 Accommodations: `time_multiplier ∈ {1.0, 1.25, 1.5, 1.75, 2.0}` per user per attempt, admin-granted only [OFFICIAL S8: 25–100 %], applied to module and phase durations (Hören audio itself is not slowed).
 

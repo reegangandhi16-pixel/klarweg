@@ -10,7 +10,7 @@ exam content, no real audio and no learner data.
 |---|---|---|
 | Content source + tools | `exam-content/` (level config, schema, synthetic form, validator, release builder) | repo only |
 | Exam Worker `klarweg-exam` | `exam-worker/` (`workers_dev = false`; no public route) | **not created** |
-| Exam DB (D1 `klarweg-exam`) | `exam-worker/migrations/0001_exam_init.sql`, `0002_attempt_module_scope.sql`, `0003_form_purpose.sql`, `0004_attempt_part_scope.sql`, `0005_exam_access_audit.sql` (additive columns) | **not created** (placeholder `database_id`) |
+| Exam DB (D1 `klarweg-exam`) | `exam-worker/migrations/0001_exam_init.sql`, `0002_attempt_module_scope.sql`, `0003_form_purpose.sql`, `0004_attempt_part_scope.sql`, `0005_exam_access_audit.sql`, `0006_accommodation_reason.sql` (additive columns) | **not created** (placeholder `database_id`) |
 | Private R2 `klarweg-exam-content` / `klarweg-exam-recordings` | binding `CONTENT` / `RECORDINGS` | **not created** |
 | Access proxy `/exam/*` | `access/worker/src/exam-proxy.js` + one hook in `index.js` | code is inert: needs `EXAM_ROUTES = "on"` **and** an `EXAM` service binding, and neither exists |
 | Frontend shell | `exam/` | **not published**: not in `.github/pages-allowlist.txt` |
@@ -76,7 +76,10 @@ Secrets (`wrangler secret put`), each ≥ 32 characters:
    and revocation (API `GET /exam/v1/admin/access?user_id=`, `POST /exam/v1/admin/access/grants`,
    `POST /exam/v1/admin/access/grants/<id>/revoke`). Nothing grants access automatically. Mapping orders or sign-ups to
    access is the open commercial rule OD-42. A grant inserted by hand still works and shows "nicht erfasst" for the
-   reason.
+   reason. Revoking (or expiry) also stops an attempt in progress at once; the learner's finished results stay readable.
+   The same screen sets accommodations (OD-41, admin-granted extra time +25/50/75/100 %, with a reason and an optional end
+   date; `GET/POST /exam/v1/admin/accommodations`, `POST …/remove`). They apply to attempts created afterwards, never
+   to a running one. Whether accommodations are offered at all is the owner's decision (D5).
 9. Turn on `EXAM_ENABLED`, `EXAM_SYNTHETIC_FORMS` and `EXAM_ROUTES`.
 10. Publishing `exam/` requires a separate, reviewed allowlist change. It is not part of Phase 5A.
 

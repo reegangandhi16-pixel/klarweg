@@ -772,3 +772,13 @@ test('ACCESS ADMIN screen: escaped values, revoke only for active grants, effect
   assert.equal(csp(admin), csp(rater)); assert.match(admin, /name="robots" content="noindex, nofollow"/); assert.match(admin, /<html lang="de">/);
   assert.match(read('exam/js/api.js'), /accessGrant: \(b\) => once\('POST'/, 'grant writes are never retried automatically');
 });
+
+test('ACCOMMODATIONS screen: current extra time, remove only when one exists, allowed values from the server, escaped reason', async () => {
+  const { accommodationSection } = await import('../js/admin-render.js');
+  const none = accommodationSection({ accommodation: null, audit: [], allowed_multipliers: [1.25, 1.5, 1.75, 2] });
+  assert.match(none, /Kein Nachteilsausgleich/); assert.equal(/data-form="acc-remove"/.test(none), false);
+  assert.deepEqual([...none.matchAll(/<option value="([^"]+)">([^<]+)</g)].map((m) => [m[1], m[2]]), [['1.25', '+25 %'], ['1.5', '+50 %'], ['1.75', '+75 %'], ['2', '+100 %']]);
+  const one = accommodationSection({ accommodation: { time_multiplier: 1.5, status: 'active', valid_until: null, reason: '<x>' }, audit: [{ at: 1, actor: 'usr_a', action: 'accommodation_set', detail: { time_multiplier: 1.5, reason: 'r' } }], allowed_multipliers: [1.5] });
+  assert.match(one, /Aktuell: \+50 % · aktiv · gültig bis unbegrenzt · &lt;x&gt;/); assert.match(one, /data-form="acc-remove"/); assert.match(one, />Ersetzen</);
+  assert.match(one, /gesetzt · \+50 % · usr_a: r/);
+});

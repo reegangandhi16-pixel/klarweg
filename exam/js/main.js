@@ -121,7 +121,7 @@ function startHeartbeat() {
   S.hb = setInterval(async () => {
     const sent = S.lease;
     try { const r = await api.heartbeat(S.attempt.attempt_id, sent); const before = S.module; S.attempt = r; const m = r.modules.find((x) => x.module === before); if (before && m && m.status === 'submitted') route(); }
-    catch (e) { if (e.code === 'lease_superseded') { clearInterval(S.hb); fail(e); } else if (e.code === 'lease_expired') onLeaseExpired(sent); }
+    catch (e) { if (e.code === 'lease_superseded' || e.code === 'auth_required' || e.code === 'exam_access_required') { clearInterval(S.hb); clearInterval(S.timer); fail(e); } else if (e.code === 'lease_expired') onLeaseExpired(sent); }
   }, 15_000);
 }
 
@@ -169,7 +169,8 @@ async function openModule(module) {
   S.autosave = new Autosave({
     key: `answers:${id}:${module}`, store: S.store,
     send: (batch, requestId) => api.save(id, S.lease, module, batch, requestId),
-    onState: (st) => { const say = saveAnnouncement(S.saveState, st); S.saveState = st; if (say) announce(say); paintHeader(); }, onFatal: (code) => { console.warn('[kx-autosave]', 'stopped', { code }); if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else if (code === 'lease_expired') onLeaseExpired(); else refresh(); },
+    onState: (st) => { const say = saveAnnouncement(S.saveState, st); S.saveState = st; if (say) announce(say); paintHeader(); }, onFatal: (code) => { console.warn('[kx-autosave]', 'stopped', { code }); if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else if (code === 'lease_expired') onLeaseExpired();
+      else if (code === 'auth_required' || code === 'exam_access_required') { clearInterval(S.hb); clearInterval(S.timer); fail(new ExamApiError(code === 'auth_required' ? 401 : 403, code)); } else refresh(); },
     onDropped: (code, batch) => syncFromServer(batch.map((b) => b.item_id)).then(() => {
       if (code === 'topic_locked') { announce('Die Themenwahl ist gesperrt. Ihre Änderung wurde nicht gespeichert.'); applyTopicLock(false); }
     }).catch(() => {})

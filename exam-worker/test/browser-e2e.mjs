@@ -1321,23 +1321,48 @@ async function runLesenOnly() {
     for (const t0 = Date.now(); (await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM responses_current WHERE module = 'lesen'").first()).n < lesen.length; await sleep(200)) {
       if (Date.now() - t0 > 15000) throw new Error('Lesen answers not stored');
     }
-    // ENGINE §8: the session expires mid-module → "Bitte erneut anmelden" with a sign-in link (new tab) and "Weiter";
-    // after signing in, "Weiter" resumes the same attempt with every answer
+    // ENGINE §8: the session expires mid-module. An answer changed now is queued on the device; the screen offers sign-in in a
+    // new tab and "Weiter". Signing in as SOMEONE ELSE shows that user's own state (identity is checked again, the attempt
+    // stays hidden); signing in as the learner resumes the SAME attempt, sends the queued answer, keeps the deadline.
+    const lesenRow = () => dev.env.DB.prepare("SELECT deadline_at FROM attempt_modules WHERE attempt_id = ?1 AND module = 'lesen'").bind(attempt.id).first();
+    const deadlineBefore = (await lesenRow()).deadline_at;
+    const probeItem = (await dev.env.DB.prepare("SELECT item_id FROM items_index WHERE module = 'lesen' AND is_example = 0 AND interaction = 'binary_choice' LIMIT 1").first()).item_id;
+    const stored = async () => JSON.parse((await dev.env.DB.prepare('SELECT value_json FROM responses_current WHERE item_id = ?1').bind(probeItem).first()).value_json).option_id;
+    const correctOpt = await stored();
     await send('Fetch.enable', { patterns: [{ urlPattern: '*/exam/v1/*', requestStage: 'Request' }] });
     const expiredFrom = b.events.length;
     const fulfil401 = setInterval(() => { for (const e of b.events.slice(expiredFrom)) if (e.method === 'Fetch.requestPaused' && !e.__done) { e.__done = true;
       send('Fetch.fulfillRequest', { requestId: e.params.requestId, responseCode: 401, responseHeaders: [{ name: 'content-type', value: 'application/json' }],
         body: Buffer.from(JSON.stringify({ ok: false, error: 'auth_required' })).toString('base64') }).catch(() => {}); } }, 50);
-    await evaluate('window.__beforeReload = true'); await send('Page.reload');
-    await waitFor(`!window.__beforeReload && /Bitte erneut anmelden/.test(document.body.innerText)`, 15000, 'session expired screen');
+    const changedTo = await evaluate(`(() => { const r = [...document.querySelectorAll('input[type=radio][data-item="${probeItem}"]')].find((x) => !x.checked); r.click(); return r.value; })()`);
+    assert.notEqual(changedTo, correctOpt);
+    await waitFor(`/Bitte erneut anmelden/.test(document.body.innerText)`, 20000, 'session expired screen');
+    assert.equal(await stored(), correctOpt, 'the server still holds the old answer while signed out');
     const signIn = await evaluate(`(() => { const a = [...document.querySelectorAll('a')].find((x) => /In neuem Tab anmelden/.test(x.textContent)); return a && { href: a.getAttribute('href'), target: a.target, rel: a.rel }; })()`);
     assert.deepEqual(signIn, { href: '../account/index.html', target: '_blank', rel: 'noopener' });
+    assert.match(await text(), /Prüfungszeit läuft auf dem Server weiter/);
     await A.a11y('session expired');
-    clearInterval(fulfil401); await send('Fetch.disable');   // signed in again in the other tab
+    await vp(390, 844, true); await sleep(200);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'session screen: no horizontal scroll at 390 px');
+    await A.a11y('session expired (mobile)');
+    await vp(1280, 800, false);
+    clearInterval(fulfil401); await send('Fetch.disable');
+    // signed in as a different account in the other tab: this tab now shows THAT account's own state
+    await evaluate(`document.cookie = 'kx-dev-as=outsider; path=/'`);
     await evaluate('window.__beforeReload = true'); await click('[data-act="reload"]');
+    await waitFor(`!window.__beforeReload && /nicht freigeschaltet/.test(document.body.innerText)`, 15000, 'another identity sees its own state');
+    assert.equal(await evaluate(`document.querySelectorAll('input[type=radio]').length`), 0, 'the learner’s attempt is not shown to another account');
+    // signed in as the learner again: the same attempt resumes and the queued answer is sent
+    await evaluate(`document.cookie = 'kx-dev-as=learner; path=/'`);
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
     await waitFor(`!window.__beforeReload && document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'resumed after signing in');
-    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n, 1, 'the same attempt continues');
+    for (const t0 = Date.now(); (await stored()) !== changedTo; await sleep(200)) if (Date.now() - t0 > 15000) throw new Error('queued answer not sent after resume');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n, 1, 'the same attempt continues (no duplicate)');
+    assert.equal((await lesenRow()).deadline_at, deadlineBefore, 'signing in again never moves the deadline');
     assert.match(await evaluate(`document.querySelector('.kx-progress').textContent`), new RegExp(`${lesen.length} von ${lesen.length} beantwortet`), 'every answer is still there');
+    // back to the correct answer for the score check below
+    await evaluate(`document.querySelector('input[type=radio][data-item="${probeItem}"][value="${correctOpt}"]').click()`);
+    for (const t0 = Date.now(); (await stored()) !== correctOpt; await sleep(200)) if (Date.now() - t0 > 15000) throw new Error('answer not restored');
     await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]');
     // a single-module attempt goes straight from the confirmed submission to its result (no extra "Abschließen" step)
     await waitFor(`document.querySelector('.kx-result table')`, 15000, 'result');

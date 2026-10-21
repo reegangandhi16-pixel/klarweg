@@ -592,7 +592,8 @@ test('LEASE EXPIRY (static): an expired lease is reacquired like a reload (no ta
   // lease and wrongly show the takeover screen)
   assert.match(main, /if \(staleLease && staleLease !== S\.lease && !reacquiring\) return Promise\.resolve\(null\);/);
   assert.match(main, /const err = await reacquireLease\(lease\);/);
-  assert.match(main, /else if \(code === 'lease_expired'\) onLeaseExpired\(\); else refresh\(\);/, 'autosave path');
+  assert.match(main, /else if \(code === 'lease_expired'\) onLeaseExpired\(\);/, 'autosave path');
+  assert.match(main, /else if \(code === 'auth_required' \|\| code === 'exam_access_required'\) \{ clearInterval\(S\.hb\); clearInterval\(S\.timer\); fail\(/, 'signed out: the sign-in screen, not a retry loop');
   assert.match(main, /if \(!reacquiring\) reacquiring = /, 'single-flight');
   assert.match(main, /e\.code === 'lease_held' \? new ExamApiError\(409, 'lease_superseded'\)/, 'another tab took it meanwhile: the takeover screen');
   // every api method that takes the lease is wrapped (one retry with the new lease)
@@ -828,4 +829,24 @@ test('PRE-CHECKS (ENGINE §10): environment notes only when needed; microphone c
   const main = read('exam/js/main.js');
   assert.match(main, /b\.dataset\.module === 'hoeren' && \$\('#kx-tone-heard'\) && !\$\('#kx-tone-heard'\)\.checked/, 'no Hören start before the audio check');
   assert.match(main, /b\.dataset\.module === 'sprechen' && \$\('#kx-mic-msg'\) && !S\.micOk/, 'no Sprechen start before the microphone check');
+});
+
+test('AUTOSAVE signed out (ENGINE §8): auth_required stops retrying, keeps the queued answer on the device and hands over to the sign-in screen', async () => {
+  const store = memoryStore(); const fatal = []; const timers = [];
+  const a = new Autosave({ key: 'k', store, debounceMs: 0, send: async () => { throw new ExamApiError(401, 'auth_required'); },
+    onFatal: (c) => fatal.push(c), setTimer: (fn, ms) => { timers.push(ms); return 1; }, clearTimer: () => {} });
+  await a.load([]);
+  await a.set('itm:x', { option_id: 'a' });
+  timers.length = 0;
+  await a.flush();
+  assert.deepEqual(fatal, ['auth_required']);
+  assert.equal(a.state, 'stopped');
+  assert.deepEqual(timers, [], 'no retry loop while signed out');
+  assert.deepEqual(Object.keys((await store.get('k')).pending), ['itm:x'], 'the answer stays queued for after the sign-in');
+  // a fresh queue after resuming sends it
+  const sent = [];
+  const b = new Autosave({ key: 'k', store, debounceMs: 0, send: async (batch) => { sent.push(...batch); return { results: batch.map((x) => ({ item_id: x.item_id, current_seq: x.seq })) }; } });
+  await b.load([]); await b.flush();
+  assert.deepEqual(sent.map((x) => [x.item_id, x.value.option_id]), [['itm:x', 'a']]);
+  assert.equal(b.hasPending(), false);
 });

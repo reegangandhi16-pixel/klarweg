@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|review-form runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -79,10 +79,21 @@ async function launch({ autoplayFlag = true } = {}) {
   let id = 0; const pending = new Map(); const events = [];
   ws.addEventListener('message', (m) => {
     const msg = JSON.parse(m.data);
-    if (msg.id && pending.has(msg.id)) { const { resolve, reject } = pending.get(msg.id); pending.delete(msg.id); msg.error ? reject(new Error(msg.error.message)) : resolve(msg.result); }
-    else if (msg.method) events.push(msg);
+    if (msg.id && pending.has(msg.id)) { const { resolve, reject, timer } = pending.get(msg.id); clearTimeout(timer); pending.delete(msg.id); msg.error ? reject(new Error(msg.error.message)) : resolve(msg.result); }
+    else if (msg.method) {
+      events.push(msg);
+      // a JavaScript dialog (e.g. the leave warning while an answer is still being saved) blocks every further CDP
+      // navigation; accept it in every scenario instead of hanging until the CI job times out (still recorded in events)
+      if (msg.method === 'Page.javascriptDialogOpening') ws.send(JSON.stringify({ id: ++id, method: 'Page.handleJavaScriptDialog', params: { accept: true } }));
+    }
   });
-  const send = (method, params = {}) => new Promise((resolve, reject) => { const i = ++id; pending.set(i, { resolve, reject }); ws.send(JSON.stringify({ id: i, method, params })); });
+  /* every CDP call fails after SEND_TIMEOUT_MS with its method name: a stuck browser is a clear failure, not a hang */
+  const SEND_TIMEOUT_MS = Number(process.env.KX_E2E_SEND_TIMEOUT_MS || 120_000);
+  const send = (method, params = {}) => new Promise((resolve, reject) => {
+    const i = ++id;
+    const timer = setTimeout(() => { if (pending.delete(i)) reject(new Error(`CDP ${method} did not answer within ${SEND_TIMEOUT_MS} ms`)); }, SEND_TIMEOUT_MS);
+    pending.set(i, { resolve, reject, timer }); ws.send(JSON.stringify({ id: i, method, params }));
+  });
   return { proc, dir, send, events, close: () => { try { ws.close(); } catch {} proc.kill(); } };
 }
 
@@ -1504,6 +1515,99 @@ async function runAccessAdmin() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* PRECHECK (ENGINE §10): the audio and microphone checks gate the Hören and Sprechen starts and recover after a fix;
+   a reload on a check screen keeps the same attempt and the saved answers; environment notes appear only for a real
+   problem and never block. */
+async function runPrecheck() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase() });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable'); await send('Log.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const text = () => evaluate('document.body.innerText');
+    const waitFor = async (src, ms = 15000, label = src) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 800)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
+    const A = makeA11y({ send, evaluate });
+    const base = `http://127.0.0.1:${dev.port}/exam/`;
+    const submitUi = async () => { await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]'); };
+
+    await vp(1280, 800, false);
+    await send('Page.navigate', { url: base });
+    await waitFor(`document.querySelector('[data-act="create"]')`, 15000, 'start screen');
+    await click('[data-act="create"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'Lesen intro');
+    await click('[data-act="start"][data-module="lesen"]');
+    await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen');
+    await evaluate(`document.querySelector('#kx-main input[type=radio]:not([disabled])').click()`);
+    for (const t0 = Date.now(); !(await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM responses_current').first()).n; await sleep(200)) if (Date.now() - t0 > 10000) throw new Error('answer not saved');
+    await submitUi();
+
+    // HÖREN: refused before the audio check; a reload keeps the same attempt and the saved answer
+    await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Hören intro');
+    // notes reflect the real checks: device and server clocks agree here, so no clock note (the skewed case is unit-tested)
+    assert.equal(/weicht von der Serverzeit ab/.test(await text()), false, 'no clock note without a real offset');
+    await click('[data-act="start"][data-module="hoeren"]');
+    await waitFor(`/bestätigen Sie, dass Sie ihn gehört haben/.test(document.querySelector('#kx-tone-msg').textContent)`, 5000, 'Hören start refused');
+    assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'hoeren'").first()).status, 'available', 'Hören did not start');
+    await send('Page.reload');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Hören intro after reload');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n, 1, 'no duplicate attempt');
+    assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM responses_current WHERE module = 'lesen'").first()).n, 1, 'the saved Lesen answer is kept');
+    assert.equal(await evaluate(`document.querySelector('#kx-tone-heard').checked`), false, 'the confirmation is asked again after a reload');
+    await vp(390, 844, true); await sleep(200);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'Hören check: no horizontal scroll at 390 px');
+    await A.a11y('Hören audio check (mobile)');
+    await vp(1280, 800, false);
+    await click('[data-act="tone-play"]');
+    await waitFor(`/Testton abgespielt/.test(document.querySelector('#kx-tone-msg').textContent)`, 15000, 'tone played');
+    await click('#kx-tone-heard'); await click('[data-act="start"][data-module="hoeren"]');
+    await waitFor(`document.querySelector('#kx-main .kx-part')`, 20000, 'Hören started');
+    await submitUi();
+    await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`, 15000, 'Schreiben intro');
+    await click('[data-act="start"][data-module="schreiben"]');
+    await waitFor(`document.querySelector('textarea')`, 15000, 'Schreiben');
+    await submitUi();
+
+    // SPRECHEN: microphone denied → guided fix, start refused, nothing recorded; granted → passes and starts
+    await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`, 15000, 'Sprechen intro');
+    // the browser refuses the microphone exactly as after a denied prompt (Chrome's fake-media flag would grant it)
+    await evaluate(`(() => { window.__realGum = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+      navigator.mediaDevices.getUserMedia = async () => { const e = new Error('Permission denied'); e.name = 'NotAllowedError'; throw e; }; return true; })()`);
+    await click('[data-act="mic-test"]');
+    await waitFor(`/Kein Zugriff auf das Mikrofon/.test(document.querySelector('#kx-mic-msg').textContent)`, 15000, 'denied microphone explained');
+    await click('#kx-consent'); await click('[data-act="start"][data-module="sprechen"]');
+    await waitFor(`/Bitte testen Sie zuerst Ihr Mikrofon/.test(document.querySelector('#kx-mic-msg').textContent)`, 5000, 'Sprechen start refused');
+    assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'sprechen'").first()).status, 'available', 'Sprechen did not start');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks').first()).n, 0, 'nothing recorded');
+    await vp(390, 844, true); await sleep(200);
+    await A.a11y('Sprechen microphone check, denied (mobile)', { tabs: 6 });
+    await vp(1280, 800, false);
+    await evaluate(`(navigator.mediaDevices.getUserMedia = window.__realGum, true)`);   // the learner allows the microphone
+    await click('[data-act="mic-test"]');
+    await waitFor(`/Mikrofon funktioniert/.test(document.querySelector('#kx-mic-msg').textContent)`, 15000, 'microphone works after the fix');
+    await click('[data-act="start"][data-module="sprechen"]');
+    await waitFor(`/Vorbereitung/.test(document.querySelector('#kx-phase')?.textContent || '')`, 20000, 'Sprechen started (preparation)');
+    assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'sprechen'").first()).status, 'running');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n, 1);
+    assert.deepEqual(A.findings, [], `automated accessibility findings on ${A.screens.join(', ')}`);
+    const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+    const csp = b.events.filter((e) => e.method === 'Log.entryAdded' && /Content Security Policy/i.test(e.params.entry.text || '')).map((e) => e.params.entry.text);
+    assert.deepEqual(csp, [], 'no CSP violations');
+    log('precheck', 'PASS', {});
+    return exceptions;
+  } finally { b.close(); dev.server.close(); }
+}
+
 /* REVIEW-FORM: the offline EX-03 review form (exam-content/tools/review-form.mjs) in a real browser, opened from a file
    like a reviewer would. Fill slot A for every Lesen item through the page, then check: the counter reaches complete;
    the record kept in the browser passes the same checker the organiser uses; a reload restores it; slot C shows only
@@ -1562,12 +1666,13 @@ async function runReviewForm() {
 }
 
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 390×844', w: 390, h: 844, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['review-form', runReviewForm, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
   if (name === 'review-form') { results.push({ vp: `review form ${PRACTICE.name} (Lesen, file://)`, uncaught: await fn() }); continue; }
   if (name === 'lesen-only') { results.push({ vp: `lesen-only ${PRACTICE.name} (mobile start + desktop)`, uncaught: await fn() }); continue; }
+  if (name === 'precheck') { results.push({ vp: 'precheck (audio + microphone gates, denied → fixed, reload)', uncaught: await fn() }); continue; }
   if (name === 'access-admin') { results.push({ vp: 'access-admin (grant, use, revoke)', uncaught: await fn() }); continue; }
   if (name === 'part-practice') { results.push({ vp: 'part-practice (mobile start + desktop result)', uncaught: await fn() }); continue; }
   if (name === 'rater-2fa') { results.push({ vp: `rater 2FA ${PRACTICE.name}`, uncaught: await fn() }); continue; }

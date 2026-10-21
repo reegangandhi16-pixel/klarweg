@@ -283,6 +283,14 @@ async function run(viewport) {
 
     // 5. PARTNER PRESENTATION: played once, nothing recorded
     await waitFor(`/Präsentation Ihres Gesprächspartners/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'partner phase');
+    // the Teil 2 recording's last chunk may still be uploading when the partner phase begins: count only once that turn
+    // is finalised, so a late Teil 2 chunk is never mistaken for a recording during the presentation
+    for (const t2 = Date.now(); ; ) {
+      const open = (await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM recording_turns WHERE part = 2 AND status != 'complete'").first()).n;
+      if (!open) break;
+      if (Date.now() - t2 > 10000) throw new Error('Teil 2 turn not finalised before the partner presentation');
+      await sleep(200);
+    }
     const chunksAtPartner = await chunkCount();
     await waitFor(`window.__plays.includes(${JSON.stringify(PARTNER)})`, 5000, 'partner presentation started');
     await sleep(3000);

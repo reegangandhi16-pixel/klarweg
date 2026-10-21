@@ -52,6 +52,7 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     mfaVerify: (b) => once('POST', '/auth/mfa/verify', { body: b }),
     /* exam-access management (exam_admin, OD-18). Writes are never retried automatically: the server refuses a
        duplicate grant / second revoke (409), and the page reloads the list instead. */
+    accessLookup: (email) => once('POST', '/exam/v1/admin/access/lookup', { body: { email } }),   // resolved by klarweg-access; not retried (rate-limited)
     accessInspect: (userId) => call('GET', `/exam/v1/admin/access?user_id=${encodeURIComponent(userId)}`),
     accessGrant: (b) => once('POST', '/exam/v1/admin/access/grants', { body: b }),
     accommodationInspect: (userId) => call('GET', `/exam/v1/admin/accommodations?user_id=${encodeURIComponent(userId)}`),

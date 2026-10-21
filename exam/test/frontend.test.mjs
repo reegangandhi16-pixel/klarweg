@@ -857,3 +857,15 @@ test('TAKEOVER WARNING (ENGINE §8): both the "open elsewhere" and the "supersed
   assert.ok(errorView({ code: 'lease_superseded', status: 409 }).body.includes(TAKEOVER_NOTE));
   assert.match(read('exam/js/main.js'), /message\('Bereits geöffnet', `Diese Prüfung ist in einem anderen Tab oder auf einem anderen Gerät geöffnet\. \$\{TAKEOVER_NOTE\}`/);
 });
+
+test('ADMIN LOOKUP screen: email search first, user id as fallback; the match is shown for confirmation (escaped) before anything is managed', async () => {
+  const { lookupForm, lookupResult, ADMIN_ERRORS } = await import('../js/admin-render.js');
+  const f = lookupForm();
+  assert.ok(f.indexOf('data-form="email"') < f.indexOf('data-form="lookup"'), 'email search before the id fallback');
+  assert.match(f, /<input id="kx-email" name="email" type="email" required maxlength="254"/);
+  const r = lookupResult('<x>@example.com', { user_id: 'usr_00000000-0000-0000-0000-000000000001', account_created: 0 });
+  assert.match(r, /&lt;x&gt;@example\.com · Konto seit unbekannt/);
+  assert.match(r, /data-act="manage" data-user="usr_00000000-0000-0000-0000-000000000001"/);
+  for (const k of ['invalid_email', 'user_not_found', 'rate_limited']) assert.ok(ADMIN_ERRORS[k], k);
+  assert.match(read('exam/js/api.js'), /accessLookup: \(email\) => once\('POST', '\/exam\/v1\/admin\/access\/lookup'/);
+});

@@ -161,3 +161,29 @@ export async function removeAccommodation(env, adminId, request) {
   ]);
   return { ok: true, accommodation: null };
 }
+
+/* ---------- lookup by learner email (POST /admin/access/lookup) ----------
+   klarweg-access resolves the email (it alone stores emails) and forwards only the result in trusted headers
+   (x-kw-lookup-user = usr_… | none, x-kw-lookup-created = unix seconds); the browser cannot set x-kw-* headers. The role
+   is checked FIRST, so a non-admin gets the same refusal whether or not the address exists. Rate-limited per
+   administrator; audited without the email (found + user id only). Returns just what is needed to confirm the person and
+   continue with the audited grant/revoke flow. */
+export const LOOKUP_LIMIT = 20, LOOKUP_WINDOW_MS = 10 * 60 * 1000;
+export async function lookupUser(env, adminId, request) {
+  await requireExamAdmin(env, adminId);
+  const t = now(env);
+  const windowEnd = Math.ceil(t / LOOKUP_WINDOW_MS) * LOOKUP_WINDOW_MS;
+  await env.DB.prepare('INSERT INTO rate_counters (bucket, window_end, hits) VALUES (?1, ?2, 1) ON CONFLICT(bucket, window_end) DO UPDATE SET hits = hits + 1')
+    .bind(`lookup:${adminId}`, windowEnd).run();
+  const hits = (await env.DB.prepare('SELECT hits FROM rate_counters WHERE bucket = ?1 AND window_end = ?2').bind(`lookup:${adminId}`, windowEnd).first()).hits;
+  if (hits > LOOKUP_LIMIT) fail(429, 'rate_limited');
+  const found = request.headers.get('x-kw-lookup-user');
+  if (found === null) fail(400, 'lookup_unavailable', 'Lookups are resolved by the sign-in service.');
+  const userId = found === 'none' ? null : found;
+  if (userId !== null && !USER_RE.test(userId)) fail(502, 'lookup_unavailable');
+  await env.DB.prepare(`INSERT INTO audit_log (at, actor, attempt_id, action, detail_json) VALUES (?1, ?2, NULL, 'access_lookup', ?3)`)
+    .bind(t, adminId, JSON.stringify(userId ? { found: true, user_id: userId } : { found: false })).run();
+  if (!userId) fail(404, 'user_not_found', 'No Klarweg account uses this email address.');
+  const created = Number(request.headers.get('x-kw-lookup-created'));
+  return { ok: true, user_id: userId, account_created: Number.isFinite(created) && created > 0 ? created : null };
+}

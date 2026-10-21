@@ -8,7 +8,7 @@ import { verifyProxy, requireUser, mfaFresh, mfaUnavailable, hasRole, STAFF_ROLE
 import { streamMedia } from './media.js';
 import { settle } from './core.js';
 import * as api from './api.js';
-import { inspectAccess, grantAccess, revokeAccess, inspectAccommodation, setAccommodation, removeAccommodation } from './access-admin.js';
+import { inspectAccess, grantAccess, revokeAccess, inspectAccommodation, setAccommodation, removeAccommodation, lookupUser } from './access-admin.js';
 
 const MODULE = '(lesen|hoeren|schreiben|sprechen)';
 const A = '(att_[0-9a-f-]{36})';
@@ -46,6 +46,7 @@ const ROUTES = [
   ['GET', R(`/admin/attempts/${A}/recordings/([1-3])/(t[1-9])`), (c, m) => api.recordingForRating(c.env, c.user, m[1], m[2], m[3])],
   // exam-access management (OD-18): exam_admin only, fresh second factor like every /admin/* route
   ['GET', R('/admin/access'), (c) => inspectAccess(c.env, c.user, c.url)],
+  ['POST', R('/admin/access/lookup'), (c) => lookupUser(c.env, c.user, c.request)],   // email resolved by klarweg-access
   ['POST', R('/admin/access/grants'), (c) => grantAccess(c.env, c.user, c.request)],
   ['POST', R('/admin/access/grants/([A-Za-z0-9_:-]{1,80})/revoke'), (c, m) => revokeAccess(c.env, c.user, m[1], c.request)],
   // accommodations (OD-41: admin-granted only): applied to attempts created afterwards, never to running ones

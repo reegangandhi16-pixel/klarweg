@@ -97,8 +97,18 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
           if (at) headers['x-kw-mfa-at'] = String(at);
         }
         if (req.headers['content-type']) headers['content-type'] = req.headers['content-type'];
+        let body = ['GET', 'HEAD'].includes(req.method) ? undefined : Buffer.concat(chunks);
+        // admin lookup by email: resolved here as klarweg-access does (only the local test users, <alias>@dev.local)
+        if (req.method === 'POST' && url.pathname === '/exam/v1/admin/access/lookup') {
+          let email = ''; try { email = String(JSON.parse(body.toString('utf8')).email || '').trim().toLowerCase(); } catch {}
+          if (!/^[^\s@]{1,64}@[^\s@]{1,253}\.[^\s@]{1,63}$/.test(email)) { res.writeHead(400, { 'content-type': 'application/json' }); res.end(JSON.stringify({ ok: false, error: 'invalid_email' })); return; }
+          const alias = Object.keys(users).find((a) => `${a}@dev.local` === email);
+          headers['x-kw-lookup-user'] = alias ? users[alias] : 'none';
+          if (alias) headers['x-kw-lookup-created'] = String(Math.floor(Date.now() / 1000));
+          body = Buffer.from('{}');
+        }
         const r = await worker.fetch(new Request('https://klarweg-exam.internal' + url.pathname + url.search,
-          { method: req.method, headers, body: ['GET', 'HEAD'].includes(req.method) ? undefined : Buffer.concat(chunks) }), h.env);
+          { method: req.method, headers, body }), h.env);
         res.writeHead(r.status, Object.fromEntries(r.headers));
         res.end(Buffer.from(await r.arrayBuffer()));
         return;

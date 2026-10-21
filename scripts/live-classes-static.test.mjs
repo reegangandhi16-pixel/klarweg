@@ -1,8 +1,9 @@
 /* Live Classes (live-classes.html) — fast checks without a browser.
    Guards the things that must not regress silently:
    1. the page is public as a WAITLIST launch (owner-approved 2026-10-20,
-      D8): only the teacher reegan-gandhi and the course live-a1 are
-      published, live-a1 has no start date and enrolment "waitlist", and
+      D8): only the teacher reegan-gandhi has a full profile (the other
+      teachers are listed by name and title only, 2026-10-21) and only the
+      course live-a1 is published, live-a1 has no start date and enrolment "waitlist", and
       the page is allowlisted only while the launch gate shows no blocker;
    2. Terms, Privacy and Refund Policy disclose the live service and
       agree with the page; and
@@ -115,9 +116,10 @@ test('LIVE: every amount on the page and in its data is an owner-approved amount
 });
 
 /* ---------- owner-approved decisions (2026-10-20, docs/live-classes-owner-decisions.md) ---------- */
-test('LIVE D8: only the owner\'s profile and the A1 waitlist course are published', () => {
+test('LIVE D8: only the owner\'s full profile and the A1 waitlist course are published', () => {
   const D = loadData();
-  assert.deepEqual([...D.teachers.filter((x) => !x.draft).map((x) => x.id)], ['reegan-gandhi'], 'no other teacher is published');
+  assert.deepEqual([...D.teachers.filter((x) => !x.draft && x.tier !== 'listed').map((x) => x.id)], ['reegan-gandhi'], 'no other teacher has a full profile');
+  assert.ok(D.teachers.filter((x) => !x.draft && x.tier === 'listed').every((x) => x.title === 'German Language Teacher' && !('experience' in x)), 'other teachers are listed by name and title only');
   assert.deepEqual([...D.courses.filter((x) => !x.draft).map((x) => x.id)], ['live-a1'], 'no other course is published');
   assert.deepEqual([...D.testimonials.filter((x) => !x.draft)], [], 'no testimonial is published');
   for (const k of D.courses.filter((x) => !x.draft)) assert.notEqual(k.enrolment, 'open', `${k.id}: enrolment cannot open without a start date and payment arrangements`);

@@ -2,8 +2,10 @@
    labels and the online-booking switch. node --test
 
    The 11 people the owner named on 2026-10-20 are kept in
-   docs/live-classes-candidates.json under opaque ids. Their names stay in
-   a private roster outside this public repository; set
+   docs/live-classes-candidates.json under opaque ids. On 2026-10-21 the
+   owner listed the other 10 by name and title, with their consent
+   (status "listed", listedAs = the card in live-classes-data.js). The
+   private roster stays outside this public repository; set
    KW_CANDIDATE_ROSTER=<path to candidate-roster.csv> to check it too. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,7 +14,8 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { execFileSync } from 'node:child_process';
 import {
-  ROOT, loadData, checkData, reviewSummary, loadCandidates, checkCandidates, CANDIDATE_DRAFT_KEYS, PRIVATE_LINK_RE
+  ROOT, loadData, checkData, reviewSummary, loadCandidates, checkCandidates, CANDIDATE_DRAFT_KEYS, CANDIDATE_LISTED_KEYS,
+  LISTED_KEYS, publishedTeacherIds, PRIVATE_LINK_RE
 } from './live-classes-readiness.mjs';
 import { ELIGIBLE_TEACHERS } from '../access/worker/src/consultations.js';
 
@@ -28,59 +31,104 @@ function kwLiveSummary() {
 }
 
 /* ================= candidates ================= */
-test('CANDIDATES: all 11 named people are represented — the owner published, 10 as fact-free drafts', () => {
+const OPAQUE = Array.from({ length: 10 }, (_, i) => `candidate-${String(i + 1).padStart(2, '0')}`);
+const asDraft = (c) => ({ id: c.id, status: 'draft', bookingEligible: c.bookingEligible, profile: null, consent: null, photoConsent: null, availability: null, reviews: [] });
+
+test('CANDIDATES: all 11 named people are represented — the owner published, the other 10 listed by name and title only', () => {
   const list = loadCandidates();
   assert.equal(list.length, 11);
   assert.deepEqual(list.filter((c) => c.status === 'published').map((c) => c.id), ['reegan-gandhi']);
-  const drafts = list.filter((c) => c.status === 'draft');
-  assert.deepEqual(drafts.map((c) => c.id), Array.from({ length: 10 }, (_, i) => `candidate-${String(i + 1).padStart(2, '0')}`));
-  for (const c of drafts) {
-    for (const k of Object.keys(c)) assert.ok(CANDIDATE_DRAFT_KEYS.includes(k), `${c.id} carries ${k}`);
-    for (const k of ['profile', 'consent', 'photoConsent', 'availability']) assert.equal(c[k], null, `${c.id}.${k}`);
-    assert.deepEqual(c.reviews, [], `${c.id} has no reviews`);
-  }
+  const listed = list.filter((c) => c.status === 'listed');
+  assert.deepEqual(listed.map((c) => c.id), OPAQUE, 'the opaque ids stay: they are the booking ids in the Worker');
+  for (const c of listed) for (const k of Object.keys(c)) assert.ok(CANDIDATE_LISTED_KEYS.includes(k), `${c.id} carries ${k}`);
+  for (const c of list.filter((x) => x.status === 'draft')) for (const k of ['profile', 'consent', 'photoConsent', 'availability']) assert.equal(c[k], null, `${c.id}.${k}`);
   assert.deepEqual(checkCandidates(list, loadData(), ELIGIBLE_TEACHERS), []);
 });
 
-test('CANDIDATES: no invented fact can be added to a draft, and none can be shown as published without a published profile', () => {
+test('CANDIDATES: no invented fact can be added, and nobody is shown as published without a full profile', () => {
   const D = loadData();
   const base = loadCandidates();
   const bad = (edit, re) => {
     const list = clone(base); edit(list);
     assert.ok(checkCandidates(list, D, ELIGIBLE_TEACHERS).some((e) => re.test(e)), re.source);
   };
-  for (const k of ['name', 'qualifications', 'experience', 'goethe', 'teachesIn', 'specialisms', 'photo', 'bio', 'rating']) bad((l) => { l[1][k] = 'x'; }, new RegExp(`carries "${k}"`));
-  bad((l) => { l[2].consent = 'Email, 2026-11-01'; }, /consent set/);
-  bad((l) => { l[3].availability = 'Weekdays'; }, /availability set/);
-  bad((l) => { l[4].reviews = [{ rating: 5 }]; }, /has reviews/);
-  bad((l) => { l[5].status = 'published'; }, /no published teacher/);
+  for (const k of ['name', 'qualifications', 'experience', 'goethe', 'teachesIn', 'specialisms', 'photo', 'bio', 'rating']) {
+    bad((l) => { l[1][k] = 'x'; }, new RegExp(`listed candidate carries "${k}"`));
+    bad((l) => { l[1] = { ...asDraft(l[1]), [k]: 'x' }; }, new RegExp(`draft candidate carries "${k}"`));
+  }
+  bad((l) => { l[2] = { ...asDraft(l[2]), consent: 'Email, 2026-11-01' }; }, /consent set/);
+  bad((l) => { l[3] = { ...asDraft(l[3]), availability: 'Weekdays' }; }, /availability set/);
+  bad((l) => { l[4] = { ...asDraft(l[4]), reviews: [{ rating: 5 }] }; }, /has reviews/);
+  bad((l) => { l[5].status = 'published'; }, /no published teacher with a full profile/);
+  bad((l) => { l[5].listedAs = 'nobody'; }, /is not a listed teacher/);
+  bad((l) => { l[5].listedAs = 'reegan-gandhi'; }, /is not a listed teacher/);
   bad((l) => { l[6].bookingEligible = true; }, /must match ELIGIBLE_TEACHERS/);
   bad((l) => { l.pop(); }, /expected the 11 people/);
+  bad((l) => { l[7].status = 'bookable'; }, /allowed: draft, listed, published/);
 });
 
-test('CANDIDATES: no candidate becomes a teacher on the page — the published teachers are unchanged', () => {
+test('CANDIDATES: the page shows the owner first, then the 10 listed teachers in the owner\'s order — name and title only', () => {
   const D = loadData();
-  assert.deepEqual([...D.teachers.filter((t) => !t.draft).map((t) => t.id)], ['reegan-gandhi']);
+  const shown = D.teachers.filter((t) => !t.draft);
+  const listedAs = loadCandidates().filter((c) => c.status === 'listed').map((c) => c.listedAs);
+  assert.deepEqual([...shown.map((t) => t.id)], ['reegan-gandhi', ...listedAs], 'Reegan first, then candidate-01 … candidate-10 in order');
   assert.equal(D.teachers.some((t) => /^candidate-/.test(t.id)), false);
+  for (const t of shown.slice(1)) {
+    assert.equal(t.tier, 'listed', t.id);
+    for (const k of Object.keys(t)) assert.ok(LISTED_KEYS.includes(k), `${t.id} carries ${k}`);
+    assert.equal(t.title, 'German Language Teacher');
+    assert.equal(t.photo, null, `${t.id}: no photo without photo consent`);
+    assert.match(t.consent, /^Owner confirmed on 2026-10-21 that the teacher agreed to be listed by name and title$/);
+  }
+  // levels only where the owner stated them: candidate-01, A1–B1
+  assert.deepEqual([...shown[1].levels], ['A1', 'A2', 'B1']);
+  for (const t of shown.slice(2)) assert.equal(t.levels, undefined, `${t.id} has no stated levels`);
+  // booking may only ever name full profiles
+  assert.deepEqual([...publishedTeacherIds()], ['reegan-gandhi']);
 });
 
 test('CANDIDATES: only the owner and candidate-01 are booking-eligible, in the data and in the Worker', () => {
   assert.deepEqual(loadCandidates().filter((c) => c.bookingEligible).map((c) => c.id), [...ELIGIBLE_TEACHERS]);
 });
 
+test('LISTED tier: the validator refuses anything beyond name, title, stated levels and consent', () => {
+  const D = loadData();
+  const one = { id: 'test-listed', tier: 'listed', name: 'Test Listed', title: 'German Language Teacher', photo: null, consent: 'Owner confirmed, 2026-11-01' };
+  const errs = (t, extra = (x) => x) => checkData(extra({ ...clone(D), teachers: clone(D.teachers).concat(t) }));
+  assert.deepEqual(errs(one), []);
+  assert.deepEqual(errs({ ...one, levels: ['A1'] }), []);
+  for (const k of ['experience', 'headline', 'qualifications', 'goethe', 'proficiency', 'teachesIn', 'formats', 'specialisms', 'availability', 'rating']) {
+    assert.ok(errs({ ...one, [k]: 'x' }).some((e) => e.includes(`carries "${k}"`)), k);
+  }
+  assert.ok(errs({ ...one, title: 'Senior German Trainer' }).some((e) => /title/.test(e)));
+  assert.ok(errs({ ...one, consent: null }).some((e) => /needs consent/.test(e)));
+  assert.ok(errs({ ...one, name: '' }).some((e) => /needs name/.test(e)));
+  assert.ok(errs({ ...one, levels: ['A9'] }).some((e) => /levels/.test(e)));
+  assert.ok(errs({ ...one, photo: 'public/teachers/none.jpg', photoAlt: 'x' }).some((e) => /does not exist|photoConsent/.test(e)));
+  assert.ok(errs({ ...one, tier: 'featured' }).some((e) => /tier "featured"/.test(e)));
+  assert.ok(errs(one, (d) => { d.courses.find((c) => !c.draft).teacherIds.push('test-listed'); return d; }).some((e) => /names listed teacher/.test(e)));
+});
+
 const ROSTER = process.env.KW_CANDIDATE_ROSTER;
-test('PRIVATE ROSTER: the 11 names map to the repository ids and appear in no tracked file', { skip: !ROSTER && 'KW_CANDIDATE_ROSTER not set (the roster is private and never in CI)' }, () => {
+test('PRIVATE ROSTER: the 11 names map to the repository ids; a listed name appears only on its card', { skip: !ROSTER && 'KW_CANDIDATE_ROSTER not set (the roster is private and never in CI)' }, () => {
   const rows = fs.readFileSync(ROSTER, 'utf8').trim().split('\n').slice(1).map((l) => l.match(/^([^,]+),([^,]+),/)).map((m) => ({ id: m[1], name: m[2] }));
   assert.equal(rows.length, 11);
   assert.deepEqual(rows.map((r) => r.id).sort(), loadCandidates().map((c) => c.id).sort());
-  assert.equal(rows.find((r) => r.id === 'reegan-gandhi').name, loadData().teachers.find((t) => t.id === 'reegan-gandhi').name);
+  const D = loadData();
+  assert.equal(rows.find((r) => r.id === 'reegan-gandhi').name, D.teachers.find((t) => t.id === 'reegan-gandhi').name);
+  const byId = Object.fromEntries(loadCandidates().map((c) => [c.id, c]));
   const files = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter((f) => f && !/\.(png|jpe?g|webp|gif|ico|mp3|ogg|wav|pdf|woff2?)$/i.test(f));
   for (const r of rows.filter((x) => x.id !== 'reegan-gandhi')) {
+    const c = byId[r.id];
+    // the owner listed this person: the name is on their card and nowhere else in the repository
+    const allowed = c.status === 'listed' ? ['live-classes-data.js'] : [];
+    if (c.status === 'listed') assert.equal(D.teachers.find((t) => t.id === c.listedAs)?.name, r.name, `${r.id} is listed under the roster name`);
     const first = r.name.split(' ')[0];
     for (const f of files) {
+      if (allowed.includes(f)) continue;
       let txt; try { txt = fs.readFileSync(path.join(ROOT, f), 'utf8'); } catch { continue; }
       assert.equal(txt.includes(r.name), false, `${r.id}'s name appears in ${f}`);
-      assert.equal(new RegExp(`\\b${first}\\b`).test(txt) && /live|teacher|consult/i.test(f), false, `${r.id}'s first name appears in ${f}`);
+      if (c.status !== 'listed') assert.equal(new RegExp(`\\b${first}\\b`).test(txt) && /live|teacher|consult/i.test(f), false, `${r.id}'s first name appears in ${f}`);
     }
   }
 });
@@ -180,7 +228,7 @@ test('BOOKING: kw-consult.js sends only a teacher and a slot, trusts only the Wo
 test('AVAILABILITY: labels are factual ("Available today" / "Currently unavailable"), shown only from the Worker\'s report; sorting only puts bookable teachers first', () => {
   const js = read('kw-live.js');
   assert.match(js, /'Available today' : 'Currently unavailable'/);
-  assert.match(js, /if \(!availability \|\| t\.draft\) return '';/, 'no label until availability is known');
+  assert.match(js, /if \(!availability \|\| t\.draft \|\| listed\(t\)\) return '';/, 'no label until availability is known, and never on a listed (non-bookable) teacher');
   assert.match(js, /\(b\.on - a\.on\) \|\| \(a\.i - b\.i\)/, 'stable: availability first, then the data order');
   assert.equal(/\bfetch\(|XMLHttpRequest|cashfree|checkout/i.test(js), false, 'kw-live.js itself still has no network or payment code');
 });

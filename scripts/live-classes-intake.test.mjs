@@ -110,7 +110,7 @@ test('INTAKE CLI: refuses a sheet inside the repository; reports a blank sheet a
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
-test('INTAKE: the repository still publishes only the owner, and no candidate became a teacher', () => {
+test('INTAKE: only the owner has a full profile; listed teachers carry no profile facts', () => {
   const D = loadData();
-  assert.deepEqual([...D.teachers.filter((t) => !t.draft).map((t) => t.id)], ['reegan-gandhi']);
+  assert.deepEqual([...D.teachers.filter((t) => !t.draft && t.tier !== 'listed').map((t) => t.id)], ['reegan-gandhi']);
 });

@@ -19,8 +19,14 @@ Don't announce new teachers, recruitment or "more teachers joining soon" on the 
 
 **Status, 2026-10-21.** All local Klarweg material was searched for the 10 people named on 2026-10-20 (`candidate-01` … `candidate-10`): the project worktrees, `~/Documents`, `~/Downloads`, `~/Desktop`, a Spotlight full-text search of the home folder, and this repository's issues and PRs.
 - No qualification, teaching experience, level, language, specialism, approach, format, photo, availability, teaching agreement or **publication consent** was found for any of them.
-- None is publishable. Each stays a fact-free draft, and every field in §1 is still missing for each.
-- Only `reegan-gandhi` is published.
+- None has a full profile, and every field in §1 is still missing for each.
+- Only `reegan-gandhi` has a full profile.
+
+**Listed teachers, 2026-10-21.** On the owner's instruction, and with each teacher's agreement as confirmed by the owner, the 10 are now **listed** on the page (`tier: 'listed'` in `live-classes-data.js`; `status: "listed"` with `listedAs` in `docs/live-classes-candidates.json`).
+- A listed card shows only the name, the title "German Language Teacher", "No reviews yet", and levels where the owner stated them (`candidate-01`: A1–B1). It has a monogram, no photo, no profile dialog and no booking or consultation action, and the teacher is not offered in the consultation form.
+- The validator (`LISTED_KEYS` in `scripts/live-classes-readiness.mjs`) refuses anything else on a listed card: experience, qualifications, certificates, headline, languages, formats, ratings or availability.
+- To upgrade a listed teacher to a full profile, run this guide's intake under the same id. The intake script accepts a listed id.
+- **Legal pages not yet updated:** Terms §4A ("Live classes and consultations are taught online by Klarweg's owner") and Privacy §4A ("Live classes and consultations are taught by Klarweg's owner…") now contradict the listed teachers. They need owner-approved wording; this change does not edit them.
 
 
 
@@ -46,6 +52,8 @@ Every published field must come from the teacher's own documents or their writte
 | `consent` | **no** | how and when the teacher approved publishing the profile, e.g. "Email, 2026-11-02" | the email or signed form |
 | `photoConsent` | **no** | the same for the photo | the email or signed form |
 | `unconfirmed` | **no** | fields still awaiting confirmation; must be empty to publish | — |
+| `tier` | **no** | `listed` only for a name-and-title card (see §0); leave it out for a full profile | — |
+| `title` | yes, listed cards only | exactly "German Language Teacher" | owner instruction |
 
 **Also agree before publishing (not page fields):**
 - the teaching agreement;

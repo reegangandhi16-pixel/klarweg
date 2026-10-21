@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, moduleIntro, matchUsage, USED_SUFFIX, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
+import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, matchUsage, USED_SUFFIX, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -166,8 +166,23 @@ function intro(module) {
   const notesHtml = notes.length ? `<ul class="kx-precheck-notes">${notes.map((n) => `<li data-note="${esc(n.kind)}">${esc(n.text)}</li>`).join('')}</ul>` : '';
   const check = module === 'hoeren' ? AUDIO_CHECK + CONNECTION_CHECK : module === 'sprechen' ? MIC_CHECK : '';
   const extra = module === 'sprechen' ? '<p>Für dieses Modul werden Ihre Antworten aufgenommen und privat gespeichert. Ohne Ihre Zustimmung kann das Modul nicht beginnen.</p><label class="kx-consent"><input type="checkbox" id="kx-consent"> Ich stimme der Aufnahme zu.</label>' : '';
-  screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1>${info}${notesHtml}${check}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
+  screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1><div id="kx-break-slot"></div>${info}${notesHtml}${check}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
   if (module === 'hoeren') runConnectionCheck().catch(() => {});
+  // OD-04 optional break: counted from the previous written module's submission (server time); never starts anything
+  const since = breakApplies(S.attempt, module);
+  clearInterval(S.breakTimer);
+  if (since != null) {
+    let last = null;
+    const paint = () => {
+      const slot = $('#kx-break-slot'); if (!slot) { clearInterval(S.breakTimer); return; }
+      const rem = Math.max(0, since + BREAK_MS - clock.serverNow());
+      const state = rem > 0 ? 'on' : 'over';
+      if (state !== last) { slot.innerHTML = breakPanel(rem); last = state; }   // the region is rewritten only when its meaning changes
+      else { const t = slot.querySelector('.kx-break-time'); if (t) t.textContent = formatRemaining(rem); }
+      if (state === 'over') clearInterval(S.breakTimer);
+    };
+    paint(); S.breakTimer = setInterval(paint, 1000);
+  }
 }
 
 async function openModule(module) {

@@ -22,7 +22,10 @@ const errorsOf = (D) => checkData(D).join('\n');
 /* ================= the switch ================= */
 test('SWITCH: online course enrolment is OFF in the committed data, and the page loads no enrolment script', () => {
   const D = loadData();
-  assert.deepEqual({ ...D.liveEnrolment }, { enabled: false, ownerApproval: null, legalTermsUpdated: false });
+  assert.equal(D.liveEnrolment.enabled, false, 'recording the legal approval does not open enrolment');
+  assert.equal(D.liveEnrolment.legalTermsUpdated, true, 'the owner approved the online-payment wording (PR #183)');
+  assert.match(D.liveEnrolment.ownerApproval, /merged PR #183 \(merge 237f3486\), 2026-10-21\. Legal copy only: this does not enable the switch\./);
+  assert.deepEqual(Object.keys(D.liveEnrolment).sort(), ['enabled', 'legalTermsUpdated', 'ownerApproval']);
   const live = read('kw-live.js');
   assert.match(live, /var ENROL_ON = !!\(D\.liveEnrolment && D\.liveEnrolment\.enabled === true\);/);
   assert.match(live, /if \(ENROL_ON\) loadScript\('kw-enrol\.js'\);/, 'kw-enrol.js is loaded only behind the switch');
@@ -36,9 +39,12 @@ test('VALIDATOR: enabling needs owner approval, updated legal text, an open publ
   assert.equal(errorsOf(D), '', 'the committed data is clean');
   D.liveEnrolment.enabled = true;
   let e = errorsOf(D);
-  assert.match(e, /ownerApproval/);
-  assert.match(e, /legalTermsUpdated/);
-  assert.match(e, /at least one published course with enrolment "open"/);
+  assert.equal(/ownerApproval|legalTermsUpdated/.test(e), false, 'the approval and legal update are recorded');
+  assert.match(e, /at least one published course with enrolment "open"/, 'still refused: A1 is a waitlist with no start date');
+  for (const [k, v] of [['ownerApproval', null], ['legalTermsUpdated', false]]) {
+    const X = clone(D); X.liveEnrolment[k] = v;
+    assert.match(errorsOf(X), new RegExp(k), `without ${k} it is refused`);
+  }
   D.liveEnrolment.ownerApproval = 'test';
   D.liveEnrolment.legalTermsUpdated = true;
   const a1 = D.courses.find((c) => c.id === 'live-a1');

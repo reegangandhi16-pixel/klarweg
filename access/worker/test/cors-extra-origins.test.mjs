@@ -126,3 +126,19 @@ test('CORS EXTRA: the setting does not leak into a request served with an env th
   assert.equal((await preflight(env(LOCAL), LOCAL)).status, 204);
   assert.equal((await preflight(env(), LOCAL)).status, 403);
 });
+
+/* Cashfree return URL (src/cashfree-config.js siteBaseUrl): the isolated
+   payment-sandbox Worker sends the learner back to its local test page, but
+   only for an origin it lists, and only against Cashfree's sandbox. */
+test('CORS EXTRA: the Cashfree return URL goes back to a listed local origin only in sandbox mode', async () => {
+  const { siteBaseUrl } = await import('../src/cashfree-config.js');
+  const req = (origin) => new Request(API + '/consult/bookings', { method: 'POST', headers: origin ? { Origin: origin } : {} });
+  const SITE = 'https://reegangandhi16-pixel.github.io/klarweg';
+  const PAY = 'http://localhost:8789';
+  assert.equal(siteBaseUrl({ CASHFREE_ENV: 'sandbox', CORS_EXTRA_ORIGINS: PAY }, req(PAY)), PAY, 'listed local origin, sandbox');
+  assert.equal(siteBaseUrl({ CASHFREE_ENV: 'production', CORS_EXTRA_ORIGINS: PAY }, req(PAY)), SITE, 'never against production Cashfree');
+  assert.equal(siteBaseUrl({ CASHFREE_ENV: 'sandbox' }, req(PAY)), SITE, 'unset (production config) → the public site');
+  assert.equal(siteBaseUrl({ CASHFREE_ENV: 'sandbox', CORS_EXTRA_ORIGINS: PAY }, req('http://localhost:9999')), SITE, 'an unlisted origin is ignored');
+  assert.equal(siteBaseUrl({ CASHFREE_ENV: 'sandbox', CORS_EXTRA_ORIGINS: PAY + ',ftp://x' }, req(PAY)), SITE, 'an invalid list fails closed');
+  assert.equal(siteBaseUrl({ CASHFREE_ENV: 'sandbox', CORS_EXTRA_ORIGINS: PAY }, req('https://klarweg.in')), 'https://klarweg.in', 'production origins unchanged');
+});

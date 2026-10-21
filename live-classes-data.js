@@ -83,8 +83,8 @@
          signed-in learner of a confirmed booking. */
       onlineBooking: {
         enabled: false,
-        ownerApproval: null,        // how and when the owner approved online booking
-        legalTermsUpdated: false,   // Terms §4A, Privacy §4A and this page's copy rewritten for online booking
+        ownerApproval: 'Owner reviewed the Terms §4A and Privacy wording and merged PR #183 (merge 237f3486), 2026-10-21. Legal copy only: this does not enable the switch.',
+        legalTermsUpdated: true,    // Terms §4A, Privacy §4A and this page's copy rewritten for online booking (PR #183)
         joinLinksConfigured: false  // true once the owner has set the CONSULT_JOIN_LINKS Worker secret for every bookable teacher
       }
     },
@@ -108,8 +108,8 @@
        ENROL_PAYMENTS switch is separate and off. */
     liveEnrolment: {
       enabled: false,
-      ownerApproval: null,        // how and when the owner approved online course payments
-      legalTermsUpdated: false    // Terms, Privacy and the course payment terms rewritten for online payment
+      ownerApproval: 'Owner reviewed the Terms §4A and Privacy wording and merged PR #183 (merge 237f3486), 2026-10-21. Legal copy only: this does not enable the switch.',
+      legalTermsUpdated: true     // Terms, Privacy and the course payment terms rewritten for online payment (PR #183)
     },
 
     /* ---------- live-class policies ----------

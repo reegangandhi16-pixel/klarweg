@@ -117,12 +117,10 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascr
 function demoData() {
   const edits = [
     [/(onlineBooking: \{\s*enabled: )false/, '$1true'],
-    [/(onlineBooking: \{[\s\S]*?ownerApproval: )null/, "$1'LOCAL DEMO ONLY'"],
-    [/(onlineBooking: \{[\s\S]*?legalTermsUpdated: )false/, '$1true'],
+    [/(onlineBooking: \{[\s\S]*?legalTermsUpdated: )true/, '$1true'],
     [/(onlineBooking: \{[\s\S]*?joinLinksConfigured: )false/, '$1true'],
     [/(liveEnrolment: \{\s*enabled: )false/, '$1true'],
-    [/(liveEnrolment: \{[\s\S]*?ownerApproval: )null/, "$1'LOCAL DEMO ONLY'"],
-    [/(liveEnrolment: \{[\s\S]*?legalTermsUpdated: )false/, '$1true'],
+    [/(liveEnrolment: \{[\s\S]*?legalTermsUpdated: )true/, '$1true'],
     [/nextBatch: null,(\s*\/\/ no start date)/, "nextBatch: 'Monday 2 November 2026',$1"],
     [/(paymentTerms: '₹7,999 in full, in one payment, before the first class\.) Paid online on this page once enrolment opens\.'/, "$1 Paid online through Cashfree.'"],
     [/(title: 'Beginner German · A1',[\s\S]*?enrolment: )'waitlist'/, "$1'open'"]

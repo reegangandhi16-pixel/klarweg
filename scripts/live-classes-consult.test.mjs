@@ -187,8 +187,9 @@ test('BOOKING: online booking is off — the page loads no booking script, says 
   const D = loadData();
   const ob = D.consultation.onlineBooking;
   assert.equal(ob.enabled, false);
-  assert.equal(ob.legalTermsUpdated, false);
-  assert.equal(ob.ownerApproval, null);
+  assert.equal(ob.legalTermsUpdated, true, 'the owner approved the online-booking wording (PR #183)');
+  assert.match(ob.ownerApproval, /merged PR #183 \(merge 237f3486\), 2026-10-21\. Legal copy only: this does not enable the switch\./);
+  assert.equal(ob.joinLinksConfigured, false, 'no joining link is configured');
   const html = read('live-classes.html');
   assert.equal(/kw-consult\.js|kw-checkout\.js|cashfree/i.test(html), false, 'not referenced by the page itself');
   assert.match(read('kw-live.js'), /if \(!BOOK_ON\) return;/);
@@ -209,9 +210,10 @@ test('BOOKING: online booking is off — the page loads no booking script, says 
 test('BOOKING: enabling online booking is refused until the owner decisions and legal updates are recorded', () => {
   const base = loadData();
   const on = (extra) => { const D = clone(base); Object.assign(D.consultation.onlineBooking, { enabled: true }, extra); return checkData(D); };
-  assert.ok(on({}).some((e) => /ownerApproval/.test(e)));
-  assert.ok(on({}).some((e) => /legalTermsUpdated/.test(e)));
-  assert.ok(on({}).some((e) => /joinLinksConfigured/.test(e)));
+  assert.equal(on({}).some((e) => /ownerApproval|legalTermsUpdated/.test(e)), false, 'approval and legal wording are recorded');
+  assert.ok(on({}).some((e) => /joinLinksConfigured/.test(e)), 'still refused: no joining links configured');
+  assert.ok(on({ ownerApproval: null }).some((e) => /ownerApproval/.test(e)));
+  assert.ok(on({ legalTermsUpdated: false }).some((e) => /legalTermsUpdated/.test(e)));
   assert.deepEqual(on({ ownerApproval: 'Owner, email 2026-11-01', legalTermsUpdated: true, joinLinksConfigured: true }), [], 'satisfiable once decided');
   const D = clone(base); delete D.consultation.onlineBooking;
   assert.ok(checkData(D).some((e) => /onlineBooking/.test(e)));

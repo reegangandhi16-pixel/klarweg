@@ -122,6 +122,10 @@ export async function cashfreeWebhook(request, env) {
   /* 9. Event routing. Anything else is acknowledged and ignored, so
         Cashfree does not retry events we do not act on. */
   const type = String(payload.type || payload.event || '');
+  /* Evidence that a genuinely signed event arrived (wrangler tail / logs):
+     the event type and the kind of order only, never an id, amount or key. */
+  const kind = String(payload?.data?.order?.order_id || '').split('_')[0].replace(/[^a-z]/g, '').slice(0, 8) || 'none';
+  console.log('cashfree-webhook: signature verified', type.replace(/[^A-Z_]/g, '').slice(0, 40) || 'unknown', kind);
   if (type !== 'PAYMENT_SUCCESS_WEBHOOK') {
     return jsonResponse({ ok: true, ignored: true, type });
   }

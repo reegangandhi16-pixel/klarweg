@@ -102,7 +102,7 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
 
 - [ ] **Legal review of the published Terms, Privacy and Refund Policy wording.** The owner approved publishing the live-class wording on 2026-10-20 (D8). It is based on [`live-classes-review-drafts.md`](live-classes-review-drafts.md), with every undecided point left out rather than invented: the published Terms say these are set out in the written course terms before anyone pays, and no course fee is accepted until then. **No lawyer has reviewed it.** A review by a qualified lawyer is still recommended before paid enrolment opens; the review drafts hold the brief, questions Q1–Q15 and a copy-ready email.
   `Legal review status: owner-approved for publication on 2026-10-20; not reviewed by a lawyer`
-  The 2026-10-21 rewrite for online-only payment (D11) is awaiting the owner's review before it is merged.
+  The 2026-10-21 rewrite for online-only payment (D11) was reviewed and approved by the owner, who merged PR #183 (merge 237f3486). This is recorded as `ownerApproval` / `legalTermsUpdated: true` in `live-classes-data.js`. Both switches stay off.
 - [ ] **Accounting follow-up for online payments.** [`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md) is the accountant's package:
   - the facts;
   - the questions: receipts or invoices, GST, payment-record retention;
@@ -127,11 +127,12 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
   4. the Cashfree production setup in §6 of the online-payments guide (KYC, live keys, webhook secret, migrations 013 and 014, cron);
   5. `enrolment: 'open'` and `paymentTerms` without "once enrolment opens", then update the homepage FAQ and Terms §4A ("Enrolment … is not open yet"); the readiness check flags both if they still say it is closed or claim it is open.
 - [ ] **Online payments (built 2026-10-21, every switch off).** The ₹100 demo booking and the A1 course fee can now be paid on the page through Cashfree, confirmed only after the Worker verifies the payment. The decisions are P1–P8 in [`live-classes-online-payments.md`](live-classes-online-payments.md) §4:
+  - Real Cashfree sandbox verification: prepared, not yet run; see [`live-classes-payments-sandbox.md`](live-classes-payments-sandbox.md);
   - P1: settled by D11 (`course-fee`);
   - P2: settled by D11 (D7 superseded: online payment only);
   - P3: settled by D11 (consultations booked and paid online);
   - P4: opening the course;
-  - P5: legal text;
+  - P5: settled (legal wording approved, PR #183);
   - P6: settled by D10 (full payment only, no instalments);
   - P7: courses for the other teachers;
   - P8: receipts and tax.

@@ -765,6 +765,13 @@ async function runPractice() {
       await waitFor(`document.querySelectorAll('form.kx-rate').length === 7`, 10000, `${alias} rating forms`);
       if (alias === 'rater1') await a11y('rater forms');
       assert.match(await text(), new RegExp(`Ihre Runde: ${round}`)); assert.match(await text(), /Lieber Tom/, 'the writing is shown to the rater');
+      // Schreiben: each text sits in one pair with its own criteria form — side by side at 1280, stacked on a phone
+      const pairs = async () => evaluate(`[...document.querySelectorAll('.kx-rate-pair')].map((p) => { const a = p.querySelector('.kx-written'), f = p.querySelector('form.kx-rate'); const ar = p.firstElementChild.getBoundingClientRect(), fr = f.getBoundingClientRect(); return { unit: f.dataset.unit, text: !!a, side: fr.left >= ar.right - 1, stacked: fr.top >= ar.bottom - 1 }; })`);
+      const wide = await pairs();
+      assert.ok(wide.length === 3 && wide.every((x) => x.text && x.side), `Schreiben pairs side by side: ${JSON.stringify(wide)}`);
+      await vp(360, 640, true); await sleep(300);
+      const narrow = await pairs(); await vp(1280, 800, false); await sleep(200);
+      assert.ok(narrow.length === 3 && narrow.every((x) => x.stacked), `Schreiben pairs stacked on a phone: ${JSON.stringify(narrow)}`);
       // the recording: loaded on request through the rater's own session, playable, no autoplay
       await click('[data-act="play"][data-part="1"][data-turn="t1"]');
       await waitFor(`(() => { const a = document.querySelector('.kx-play-cell audio'); return a && a.src.startsWith('blob:') && a.readyState >= 1; })()`, 15000, `${alias} recording loaded`);

@@ -71,7 +71,9 @@ async function moduleIntro(env, attempt, m) {
     minutes: tm.kind === 'fixed' ? Math.round((tm.seconds * (attempt.time_multiplier || 1)) / 60) : null,
     // phase-planned modules (Hören, Sprechen): the playback/speaking plan's own length, shown as "ca."
     approx_minutes: tm.kind !== 'fixed' && tm.plan && tm.plan.total_ms > 0 ? Math.ceil(tm.plan.total_ms / 60000) : null,
-    parts: pkg.data.parts.length, items
+    parts: pkg.data.parts.length, items,
+    ...(tm.kind === 'speaking_phases' ? { prep_minutes: Math.max(1, Math.round((tm.plan.prep_ms * (attempt.time_multiplier || 1)) / 60000)),
+      partner_listen: tm.plan.phases.some((p) => p.listen_only) } : {})
   } };
 }
 

@@ -38,6 +38,13 @@ export function moduleIntro(module, intro) {
       'Ihre Antworten werden automatisch gespeichert. Sie können sie bis zur Abgabe ändern.'];
     return head + `<ul class="kx-intro-rules">${hr.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
   }
+  if (module === 'sprechen') {
+    const sr = [intro && intro.prep_minutes ? `Zuerst haben Sie ${intro.prep_minutes} ${intro.prep_minutes === 1 ? 'Minute' : 'Minuten'} Vorbereitungszeit. Wählen Sie darin Ihr Thema für Teil 2; danach ist die Wahl gesperrt.` : 'Zuerst haben Sie Vorbereitungszeit. Wählen Sie darin Ihr Thema für Teil 2; danach ist die Wahl gesperrt.',
+      'Danach laufen die Teile automatisch nach Zeitplan. Ihr Mikrofon wird erst vor der ersten Aufnahme angefragt.',
+      ...(intro && intro.partner_listen ? ['Die Präsentation Ihres Gesprächspartners hören Sie einmal; dabei wird nicht aufgenommen.'] : []),
+      'Wenn Sie die Seite neu laden, geht es an derselben Stelle weiter.'];
+    return head + `<ul class="kx-intro-rules">${sr.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
+  }
   if (module !== 'lesen' && module !== 'schreiben') return head;
   const rules = ['Die Zeit beginnt, sobald Sie „Modul starten“ wählen. Sie läuft auf dem Server weiter, auch wenn Sie die Seite schließen oder neu laden.',
     'Ihre Antworten werden automatisch gespeichert.',

@@ -19,6 +19,10 @@ test('MODULE INTRO: not-started modules report minutes, parts and scored tasks f
   const hoeren = pkgFor(syntheticBuild([PRACTICE_FORM_DIR]), 'hoeren');
   assert.equal(intro(before, 'hoeren').approx_minutes, Math.ceil(hoeren.timing.plan.total_ms / 60000), 'Hören: the plan length, shown as "ca."');
   assert.equal(intro(before, 'lesen').approx_minutes, null);
+  const sp = pkgFor(syntheticBuild([PRACTICE_FORM_DIR]), 'sprechen');
+  assert.equal(intro(before, 'sprechen').prep_minutes, Math.max(1, Math.round(sp.timing.plan.prep_ms / 60000)));
+  assert.equal(intro(before, 'sprechen').partner_listen, true);
+  assert.equal('prep_minutes' in intro(before, 'lesen'), false);
 
   await start(s, 'lesen');
   const after = (await get(s, '')).json;

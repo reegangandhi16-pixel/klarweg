@@ -31,6 +31,7 @@ The existing `scripts/nonprod-config.test.mjs` still checks that the exam/QA Wor
 1. **Cashfree sandbox credentials.** In the Cashfree merchant dashboard, switch to **Test** mode, then go to *Developers → API Keys*. You need the **app id** (it starts with `TEST`) and the **secret key**. Never paste them into chat, a file or a commit.
 2. **Authorisation to create two free-tier Cloudflare resources** on the owner's account: the D1 database `klarweg-access-payments-nonprod` and the Worker `klarweg-access-payments-nonprod`. wrangler is already logged in on this machine.
 3. *Optional:* a throwaway Google Meet link for the joining-link check.
+4. **A person at a browser** during the run, to complete three payments in Cashfree's hosted sandbox checkout (see §4). Not needed only if Cashfree confirms the S2S flag on the TEST account (see "Payment route").
 
 ## 3. Setup commands (run from `access/worker`)
 
@@ -60,16 +61,28 @@ Each order carries its own `notify_url`, so Cashfree sends sandbox webhooks to `
 
 Same-day consultations can be booked only between **09:00 and 12:00 IST**.
 
+### Payment route: hosted checkout by default, because Order Pay needs S2S
+
+Cashfree's Order Pay API reference (`POST /pg/orders/sessions`) says the API works only after Cashfree support enables the **S2S flag** for the account. It also lists extra conditions for live use (PCI DSS for cards; a GST turnover condition for other methods) and asks for `x-client-*` device headers on UPI collect. It does not say whether the sandbox is exempt. No one has confirmed S2S for the Klarweg TEST account, so:
+
+- **Default (no S2S needed):** for each of the three test payments, the script prints a `http://localhost:8789/sandbox-checkout.html#session=…` link. That page exists only in `scripts/payments-sandbox-site.mjs`. It loads Cashfree's hosted JS checkout (`https://sdk.cashfree.com/js/v3/cashfree.js`, `Cashfree({ mode: 'sandbox' })`, `checkout({ paymentSessionId, redirectTarget: '_modal' })`). A person completes the payment with Cashfree's published **sandbox test** details: two successful payments (₹100 consultation, then ₹7,899 A1) and one deliberately failed payment. The script waits up to 15 minutes for each, then checks the result independently through Cashfree's payments API and the sandbox database, exactly as in the automated route.
+- **`--order-pay` (only after Cashfree confirms S2S on the TEST account):** fully automated with `testsuccess@gocash` / `testfailure@gocash`. If Cashfree refuses the call, the check fails with Cashfree's message and a hint to rerun without `--order-pay`.
+
 ```sh
 # Terminal 1: watch the Worker. Verified webhooks log "cashfree-webhook: signature verified <TYPE> <cons|enrp>".
 cd access/worker && npx wrangler tail --config wrangler.payments-sandbox.toml
 
-# Terminal 2: credentials into the environment without echo or history, then run.
+# Terminal 2: the local test page (needed for the hosted route).
+SANDBOX_WORKER_URL=https://klarweg-access-payments-nonprod.klarweg-issue-reports-2026.workers.dev node scripts/payments-sandbox-site.mjs
+
+# Terminal 3: credentials into the environment without echo or history, then run.
 read -r  CASHFREE_SANDBOX_APP_ID
 read -rs CASHFREE_SANDBOX_SECRET_KEY
 export CASHFREE_SANDBOX_APP_ID CASHFREE_SANDBOX_SECRET_KEY
 export SANDBOX_WORKER_URL=https://klarweg-access-payments-nonprod.klarweg-issue-reports-2026.workers.dev
-node scripts/cashfree-sandbox-verify.mjs --out=/tmp/kw-sandbox-report.json
+node scripts/cashfree-sandbox-verify.mjs --out=/tmp/kw-sandbox-report.json   # opens each payment via a printed link
+# or, only once Cashfree has confirmed S2S on the TEST account:
+# node scripts/cashfree-sandbox-verify.mjs --order-pay --out=/tmp/kw-sandbox-report.json
 # at least 31 minutes later (the A1 seat hold is 30 minutes):
 node scripts/cashfree-sandbox-verify.mjs --check-expired
 unset CASHFREE_SANDBOX_APP_ID CASHFREE_SANDBOX_SECRET_KEY
@@ -79,12 +92,12 @@ What `scripts/cashfree-sandbox-verify.mjs` checks. Each check is made through th
 
 - **₹100 consultation:**
   - The server creates the order for exactly ₹100.00; a browser-sent amount is ignored.
-  - Payment uses Cashfree's test UPI `testsuccess@gocash` (Order Pay API).
+  - A person pays in Cashfree's hosted sandbox checkout (or, with `--order-pay`, the Order Pay API pays with `testsuccess@gocash`).
   - The slot is confirmed by the signed success webhook: the database changes before any status call.
   - Cashfree's payments API shows one SUCCESS payment of ₹100.
   - The joining details go only to the signed-in owner of the booking (another learner gets 404, signed out gets 401).
   - Webhooks: a duplicate is acknowledged; a wrong signature or a stale timestamp gets 401.
-  - A `testfailure@gocash` payment stays unconfirmed, and Cashfree shows it as FAILED.
+  - A failed sandbox payment (the person picks the failure outcome; with `--order-pay`, `testfailure@gocash`) stays unconfirmed, and Cashfree shows it as FAILED.
 - **A1 in full:**
   - The quote is ₹7,999 less the ₹100 credit from today's confirmed consultation, so ₹7,899.
   - `plan: instalments` gets 400.
@@ -96,26 +109,20 @@ What `scripts/cashfree-sandbox-verify.mjs` checks. Each check is made through th
   - No self-paced entitlement or order is created.
   - An unpaid hold expires and frees its place (`--check-expired`).
 
-**Manual checks** (the script marks them MANUAL), done on the local test page:
-
-```sh
-SANDBOX_WORKER_URL=https://klarweg-access-payments-nonprod.klarweg-issue-reports-2026.workers.dev node scripts/payments-sandbox-site.mjs
-# open http://localhost:8789/live-classes.html (banner: SANDBOX TEST PAGE)
-```
+**Manual checks** (the script marks them MANUAL), done on the local test page `http://localhost:8789/live-classes.html` (banner: SANDBOX TEST PAGE), served by the command in Terminal 2:
 
 - **User dropped:** start a booking, close Cashfree's checkout without paying. `wrangler tail` should show `signature verified PAYMENT_USER_DROPPED_WEBHOOK cons`, and the booking should stay pending.
 - **Failed and dropped webhook deliveries:** the Cashfree sandbox dashboard, under *Developers → Webhooks → Logs*, should show 200 responses.
 - **Hosted checkout and return:** pay with one of Cashfree's published sandbox test cards or UPI ids. Cashfree should send you back to `http://localhost:8789/live-classes.html?...`, and the page should show the Worker-verified status.
 - **Joining link:** only if `CONSULT_JOIN_LINKS` is set.
 
-**What counts as proof:** a real run with **0 FAIL**, the `--check-expired` result, and the manual checks above. Record the date, the counts and the references (never a key) in §6 below. `--rehearse` runs the same checks locally against the real Worker code and an emulation of Cashfree. It shows that the script and the Worker agree; it is **not** proof of the sandbox.
+**What counts as proof:** a real run (either route) with **0 FAIL**, the `--check-expired` result, and the manual checks above. Record the date, the counts and the references (never a key) in §6 below. `--rehearse` (Order Pay route) and `--rehearse --hosted` (the person is emulated) run the same checks locally against the real Worker code and an emulation of Cashfree. They show that the script and the Worker agree; they are **not** proof of the sandbox, and neither are the mocked Cashfree responses in the unit tests.
 
 **Unverified assumptions, which the real run will settle:**
 
-- Cashfree's sandbox accepts an `http://localhost:8789` return URL. Only the browser check depends on this; the scripted run does not use the redirect.
-- The Order Pay API (`POST /pg/orders/sessions`, UPI collect) settles `testsuccess@gocash` and `testfailure@gocash` automatically in the sandbox.
-
-If either is refused, the scripted run reports it as FAIL with Cashfree's message. Complete those payments by hand on the test page instead.
+- Cashfree's hosted JS checkout opens in sandbox mode from `http://localhost:8789`. Cashfree's web-checkout guide says to whitelist your domain first. Its whitelisting page accepts only `https://` domains without custom ports, and does not say whether sandbox checks this. If the checkout refuses to open, the fallback is to serve the same two pages from an `https://` tunnel or test domain whitelisted in the **Test** dashboard. That needs the owner's approval, and the tunnel origin must be added to `CORS_EXTRA_ORIGINS` in the sandbox config only.
+- Cashfree's sandbox accepts an `http://localhost:8789` return URL. Only the full-page return in the browser check depends on this; the `_modal` checkout and the scripted run do not.
+- `--order-pay` only: the S2S flag is enabled on the TEST account, and Order Pay settles `testsuccess@gocash` / `testfailure@gocash` automatically. If this is not confirmed, use the default hosted route.
 
 ## 5. Clean up afterwards (optional)
 
@@ -131,4 +138,5 @@ Rotate the sandbox secret key in the Cashfree dashboard if it was ever exposed.
 | Date | Mode | Pass | Fail | Manual | Notes |
 |---|---|---|---|---|---|
 | 2026-10-21 | rehearsal (local emulation) | 37 | 0 | 1 | Not a sandbox proof. Manual: no joining link configured. |
+| 2026-10-21 | rehearsal, hosted route (person emulated) | 37 | 0 | 1 | Not a sandbox proof. |
 | — | **real sandbox** | — | — | — | Not run: no sandbox credentials or sandbox resources yet. |

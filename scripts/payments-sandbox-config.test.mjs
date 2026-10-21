@@ -114,6 +114,13 @@ test('SANDBOX SITE: the local test page talks only to the sandbox Worker, in mem
     assert.match(data, /nextBatch: 'SANDBOX TEST BATCH · not a real start date'/);
     assert.match(await get('live-classes.html'), /SANDBOX TEST PAGE · Cashfree test mode · no real payment/);
     assert.equal((await fetch('http://localhost:8789/access/worker/wrangler.payments-sandbox.toml')).status, 404, 'no Worker or config files served');
+    const co = await get('sandbox-checkout.html');
+    assert.match(co, /<script src="https:\/\/sdk\.cashfree\.com\/js\/v3\/cashfree\.js"><\/script>/, "Cashfree's hosted JS checkout SDK");
+    assert.match(co, /Cashfree\(\{ mode: 'sandbox' \}\)/, 'always sandbox mode');
+    assert.equal(/mode: 'production'|api\.cashfree\.com/.test(co), false);
+    assert.match(co, /location\.hash/, 'the session id comes in the fragment, never a query string');
+    assert.match(co, /SANDBOX TEST PAGE/);
+    assert.equal(fs.existsSync(path.join(ROOT, 'sandbox-checkout.html')), false, 'served from memory only, not a committed public page');
     assert.match(read('live-classes-data.js'), /onlineBooking: \{\s*enabled: false,/, 'the committed file is unchanged');
   } finally { child.kill(); }
 });

@@ -23,8 +23,9 @@ const errorsOf = (D) => checkData(D).join('\n');
 test('SWITCH: online course enrolment is OFF in the committed data, and the page loads no enrolment script', () => {
   const D = loadData();
   assert.equal(D.liveEnrolment.enabled, false, 'recording the legal approval does not open enrolment');
-  assert.equal(D.liveEnrolment.legalTermsUpdated, true, 'the owner approved the online-payment wording (PR #183)');
-  assert.match(D.liveEnrolment.ownerApproval, /merged PR #183 \(merge 237f3486\), 2026-10-21\. Legal copy only: this does not enable the switch\./);
+  assert.equal(D.liveEnrolment.legalTermsUpdated, true, 'the owner reviewed and merged the online-payment wording (PR #183)');
+  assert.equal(D.liveEnrolment.ownerApproval, null, 'no LAUNCH approval: reviewing legal wording is not approval to take payments');
+  assert.match(read('live-classes-data.js'), /liveEnrolment: \{\s*enabled: false,\s*ownerApproval: null, +\/\/ LAUNCH approval only[^\n]*\n\s*legalTermsUpdated: true +\/\/ legal copy only: [^\n]*PR #183 \(merge 237f3486\), 2026-10-21/);
   assert.deepEqual(Object.keys(D.liveEnrolment).sort(), ['enabled', 'legalTermsUpdated', 'ownerApproval']);
   const live = read('kw-live.js');
   assert.match(live, /var ENROL_ON = !!\(D\.liveEnrolment && D\.liveEnrolment\.enabled === true\);/);
@@ -39,13 +40,17 @@ test('VALIDATOR: enabling needs owner approval, updated legal text, an open publ
   assert.equal(errorsOf(D), '', 'the committed data is clean');
   D.liveEnrolment.enabled = true;
   let e = errorsOf(D);
-  assert.equal(/ownerApproval|legalTermsUpdated/.test(e), false, 'the approval and legal update are recorded');
+  assert.match(e, /liveEnrolment: enabled needs ownerApproval/, 'refused: no launch approval is recorded');
+  assert.equal(/legalTermsUpdated/.test(e), false, 'the legal wording is recorded');
   assert.match(e, /at least one published course with enrolment "open"/, 'still refused: A1 is a waitlist with no start date');
-  for (const [k, v] of [['ownerApproval', null], ['legalTermsUpdated', false]]) {
-    const X = clone(D); X.liveEnrolment[k] = v;
-    assert.match(errorsOf(X), new RegExp(k), `without ${k} it is refused`);
+  const X = clone(D); X.liveEnrolment.legalTermsUpdated = false;
+  assert.match(errorsOf(X), /legalTermsUpdated/, 'without the legal update it is refused');
+  // a legal-copy-only note can never stand in for the launch approval
+  for (const note of ['Owner reviewed the Terms §4A and Privacy wording and merged PR #183 (merge 237f3486), 2026-10-21. Legal copy only: this does not enable the switch.', 'Legal wording only, reviewed 2026-10-21', 'Owner reviewed the Terms and Privacy', 'Merged PR #183', 'Approved, but this does not enable payments']) {
+    const L = clone(D); L.liveEnrolment.ownerApproval = note;
+    assert.match(errorsOf(L), /liveEnrolment: ownerApproval records a legal-copy review, not approval to launch course payments/, note);
   }
-  D.liveEnrolment.ownerApproval = 'test';
+  D.liveEnrolment.ownerApproval = 'Owner approved launching A1 online payments, email 2026-11-01';
   D.liveEnrolment.legalTermsUpdated = true;
   const a1 = D.courses.find((c) => c.id === 'live-a1');
   Object.assign(a1, { enrolment: 'open', nextBatch: '2 November 2026' });

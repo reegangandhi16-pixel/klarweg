@@ -21,6 +21,20 @@
        node scripts/cashfree-sandbox-verify.mjs
        node scripts/cashfree-sandbox-verify.mjs --check-expired   (≥ 31 min later: the seat hold is 30 min)
 
+   How each test payment is made (real mode):
+     default      HOSTED CHECKOUT, completed by a person. For each payment the
+                  script prints a http://localhost:8789/sandbox-checkout.html
+                  link (served by scripts/payments-sandbox-site.mjs). It opens
+                  Cashfree's hosted JS checkout in sandbox mode; the person
+                  pays (or fails) with Cashfree's published sandbox test
+                  details. The script then waits for Cashfree's payments API
+                  and the sandbox database, as it does in every route.
+     --order-pay  Cashfree's Order Pay API (POST /pg/orders/sessions, UPI
+                  collect, testsuccess@gocash / testfailure@gocash), with no
+                  person involved. Cashfree documents that this API needs the
+                  S2S flag enabled for the account by Cashfree support. Use it
+                  only once Cashfree has confirmed S2S on the TEST account.
+
    REHEARSAL (not a proof). --rehearse runs the real Worker code in this
    process against an in-memory D1 and a local emulation of Cashfree's
    sandbox (orders, payments, the test-UPI "Order Pay" call, signed
@@ -41,6 +55,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WORKER_DIR = path.join(ROOT, 'access', 'worker');
 const REHEARSE = process.argv.includes('--rehearse');
 const CHECK_EXPIRED = process.argv.includes('--check-expired');
+/* hosted: a person completes Cashfree's hosted sandbox checkout (no S2S needed). order-pay: Cashfree's S2S Order Pay API. */
+const ROUTE = process.argv.includes('--order-pay') || (REHEARSE && !process.argv.includes('--hosted')) ? 'order-pay' : 'hosted';
+const HUMAN_WAIT_MS = 15 * 60000;
 const OUT = (process.argv.find((a) => a.startsWith('--out=')) || '').slice(6) || path.join(os.tmpdir(), `kw-cashfree-sandbox-${REHEARSE ? 'rehearsal' : 'real'}.json`);
 const STATE = path.join(os.tmpdir(), 'kw-cashfree-sandbox-pending.json');
 const CF_BASE = 'https://sandbox.cashfree.com/pg';
@@ -86,6 +103,19 @@ async function learner(tag) {
   if (!(s.status === 201 && cookie && p.status === 200 && id)) throw new Error(`sandbox learner ${tag} could not be created (${s.status}/${p.status})`);
   return { cookie, id };
 }
+/* One sandbox test payment on the order behind sessionId, by the chosen route.
+   Whatever the route, success is judged afterwards from Cashfree's payments API
+   and the Worker's database, never from this step's own answer. */
+async function pay(sessionId, orderId, outcome) {
+  if (ROUTE === 'order-pay') return ops.cfPay(sessionId, outcome === 'success' ? 'testsuccess@gocash' : 'testfailure@gocash');
+  const link = `${ORIGIN}/sandbox-checkout.html#${new URLSearchParams({ session: sessionId, outcome })}`;
+  console.log(`\n>>> PERSON NEEDED (${outcome === 'success' ? 'PAY SUCCESSFULLY' : 'MAKE THE PAYMENT FAIL'}) within 15 minutes:\n    ${link}\n    In Cashfree's sandbox checkout use Cashfree's published test details for a ${outcome === 'success' ? 'successful' : 'failed'} payment. Never a real card or UPI id.\n`);
+  if (ops.humanCheckout) await ops.humanCheckout(sessionId, outcome);
+  const want = outcome === 'success' ? 'SUCCESS' : 'FAILED';
+  const p = await waitFor(async () => (await ops.cfPayments(orderId)).find((x) => x.payment_status === want), HUMAN_WAIT_MS, 5000);
+  return { ok: !!p, failed: outcome === 'failure' && !!p, body: p ? { payment_status: p.payment_status } : `no ${want} payment on the order within 15 minutes` };
+}
+const ROUTE_LABEL = ROUTE === 'order-pay' ? "Order Pay API, Cashfree's test UPI" : "Cashfree's hosted checkout, completed by a person";
 const one = async (sql) => (await ops.sql(sql))[0] || null;
 async function waitFor(fn, ms = 120000, every = 3000) {
   const end = Date.now() + ms;
@@ -94,7 +124,8 @@ async function waitFor(fn, ms = 120000, every = 3000) {
 
 /* ================= the checks ================= */
 async function verify() {
-  console.log(REHEARSE ? '\nREHEARSAL — local Worker + local Cashfree emulation. NOT a real sandbox transaction.\n' : '\nREAL CASHFREE SANDBOX — test money only.\n');
+  console.log((REHEARSE ? '\nREHEARSAL — local Worker + local Cashfree emulation. NOT a real sandbox transaction.' : '\nREAL CASHFREE SANDBOX — test money only.') + ` Payments: ${ROUTE_LABEL}.\n`);
+  if (!REHEARSE && ROUTE === 'hosted') console.log(`Keep the local test page running: SANDBOX_WORKER_URL=<the sandbox Worker> node scripts/payments-sandbox-site.mjs\n`);
 
   /* 0. the Worker is the sandbox one, in sandbox mode */
   const avail = await ops.api('GET', '/consult/availability');
@@ -122,8 +153,8 @@ async function verify() {
   ok('consult: Cashfree holds a server-side order for exactly ₹100.00 INR', Number(order.order_amount) === 100 && order.order_currency === 'INR' && row.amount_paise === 10000, order);
   ok('consult: before payment the slot is only held (pending), and no joining link is given', row.status === 'pending' && (await ops.api('GET', `/consult/bookings/${ref}/join`, { cookie: A.cookie })).status === 409);
 
-  const paid = await ops.cfPay(bk.json.paymentSessionId, 'testsuccess@gocash');
-  ok('consult: sandbox checkout completed with Cashfree\'s test UPI (testsuccess@gocash)', paid.ok, paid.body);
+  const paid = await pay(bk.json.paymentSessionId, row.cashfree_order_id, 'success');
+  ok(`consult: sandbox payment completed (${ROUTE_LABEL})`, paid.ok, paid.body);
   /* Only the webhook (or the 15-minute cron) can change the row: the status endpoint is not called first. */
   const confirmed = await waitFor(async () => (await one(`SELECT status FROM consult_bookings WHERE ref = '${ref}'`)).status === 'confirmed');
   ok('consult: Cashfree\'s signed success webhook confirmed the slot (database changed before any status call)', confirmed);
@@ -153,7 +184,7 @@ async function verify() {
   const ref2 = bk2.json && bk2.json.booking && bk2.json.booking.ref;
   if (REF.test(ref2 || '')) {
     const row2 = await one(`SELECT cashfree_order_id FROM consult_bookings WHERE ref = '${ref2}'`);
-    const failed = await ops.cfPay(bk2.json.paymentSessionId, 'testfailure@gocash');
+    const failed = await pay(bk2.json.paymentSessionId, row2.cashfree_order_id, 'failure');
     ok('consult: a failed sandbox payment is accepted by Cashfree as a failure', failed.ok || failed.failed, failed.body);
     await waitFor(async () => (await ops.cfPayments(row2.cashfree_order_id)).some((p) => p.payment_status === 'FAILED'), 60000);
     ok('consult: Cashfree independently records the payment as FAILED', (await ops.cfPayments(row2.cashfree_order_id)).some((p) => p.payment_status === 'FAILED'));
@@ -182,8 +213,8 @@ async function verify() {
   const retry = await ops.api('POST', '/enrol/checkout', { cookie: A.cookie, body: { course_id: 'live-a1', expected_amount_paise: 789900 } });
   ok('enrol: a retry resumes the SAME Cashfree order (no second order, no second seat)', retry.status === 200 && retry.json.resumed === true && retry.json.paymentSessionId === co.json.paymentSessionId
     && (await one(`SELECT COUNT(*) AS n FROM live_payments p JOIN live_enrolments e ON e.id = p.enrolment_id WHERE e.user_id = '${A.id}'`)).n === before + 1, retry.json);
-  const epaid = await ops.cfPay(co.json.paymentSessionId, 'testsuccess@gocash');
-  ok('enrol: sandbox checkout completed with Cashfree\'s test UPI', epaid.ok, epaid.body);
+  const epaid = await pay(co.json.paymentSessionId, pay1.id, 'success');
+  ok(`enrol: sandbox payment completed (${ROUTE_LABEL})`, epaid.ok, epaid.body);
   const enrolled = await waitFor(async () => (await one(`SELECT status FROM live_enrolments WHERE ref = '${eref}'`)).status === 'enrolled');
   ok('enrol: Cashfree\'s signed success webhook enrolled the learner only after verifying the exact amount', enrolled);
   const ep = await ops.cfPayments(pay1.id);
@@ -254,11 +285,13 @@ function realOps() {
     },
     async cfOrder(id) { return (await cf('/orders/' + encodeURIComponent(id))).body || {}; },
     async cfPayments(id) { const r = await cf('/orders/' + encodeURIComponent(id) + '/payments'); return Array.isArray(r.body) ? r.body : []; },
-    /* Cashfree "Order Pay" with the sandbox's documented test UPI ids. */
+    /* Cashfree "Order Pay" (--order-pay only) with the sandbox's test UPI ids.
+       Cashfree enables this API per account (the S2S flag); without it the call is refused. */
     async cfPay(sessionId, vpa) {
       const res = await fetch(CF_BASE + '/orders/sessions', { method: 'POST', headers: { 'x-api-version': CF_VERSION, 'content-type': 'application/json', accept: 'application/json' }, body: JSON.stringify({ payment_session_id: sessionId, payment_method: { upi: { channel: 'collect', upi_id: vpa } } }) });
       const b = await res.json().catch(() => null);
-      return { ok: res.ok, failed: /failure/.test(vpa) && res.ok, body: b };
+      if (!res.ok) return { ok: false, failed: false, body: { status: res.status, cashfree: b, hint: 'Order Pay needs the S2S flag on the Cashfree TEST account. Run again without --order-pay to use the hosted checkout.' } };
+      return { ok: true, failed: /failure/.test(vpa), body: b };
     },
     async sql(query) {
       if (!/^\s*(SELECT|INSERT OR IGNORE INTO consult_availability)\b/i.test(query)) throw new Error('verify: only reads and the availability fixture are allowed');
@@ -345,6 +378,8 @@ async function rehearsalOps() {
     async cfOrder(id) { const o = orders.get(id); if (o && o.order_status === 'ACTIVE' && Date.now() > o.expires) o.order_status = 'EXPIRED'; return o ? { ...o } : {}; },
     async cfPayments(id) { return orders.get(id) ? [...orders.get(id).payments] : []; },
     async cfPay(sessionId, vpa) { const r = await globalThis.fetch(CF_BASE + '/orders/sessions', { method: 'POST', body: JSON.stringify({ payment_session_id: sessionId, payment_method: { upi: { channel: 'collect', upi_id: vpa } } }) }); return { ok: r.ok, failed: /failure/.test(vpa), body: await r.json() }; },
+    /* --rehearse --hosted: stands in for the person at the hosted checkout. */
+    async humanCheckout(sessionId, outcome) { await this.cfPay(sessionId, outcome === 'success' ? 'testsuccess@gocash' : 'testfailure@gocash'); },
     async sql(query) { return (await env.DB.prepare(query).all()).results; },
     async webhookEvidence(type, sessionId) {
       if (type === 'PAYMENT_USER_DROPPED_WEBHOOK') {
@@ -372,7 +407,7 @@ try {
   record('FAIL', 'the verification ran to completion', String(e && e.stack || e));
 }
 const counts = results.reduce((a, r) => ({ ...a, [r.status]: (a[r.status] || 0) + 1 }), {});
-const report = { mode: REHEARSE ? 'rehearsal (local emulation, NOT a real Cashfree sandbox transaction)' : 'real Cashfree sandbox', when: new Date().toISOString(), counts, results };
+const report = { mode: REHEARSE ? 'rehearsal (local emulation, NOT a real Cashfree sandbox transaction)' : 'real Cashfree sandbox', route: ROUTE === 'order-pay' ? 'order-pay (S2S API)' : (REHEARSE ? 'hosted checkout (person emulated)' : 'hosted checkout (completed by a person)'), when: new Date().toISOString(), counts, results };
 fs.writeFileSync(OUT, scrub(JSON.stringify(report, null, 2)), { mode: 0o600 });
 console.log(`\n${report.mode}: ${counts.PASS || 0} passed, ${counts.FAIL || 0} failed, ${counts.MANUAL || 0} manual · report: ${OUT}`);
 process.exit(counts.FAIL ? 1 : 0);

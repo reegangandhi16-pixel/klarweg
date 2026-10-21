@@ -102,7 +102,7 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
 
 - [ ] **Legal review of the published Terms, Privacy and Refund Policy wording.** The owner approved publishing the live-class wording on 2026-10-20 (D8). It is based on [`live-classes-review-drafts.md`](live-classes-review-drafts.md), with every undecided point left out rather than invented: the published Terms say these are set out in the written course terms before anyone pays, and no course fee is accepted until then. **No lawyer has reviewed it.** A review by a qualified lawyer is still recommended before paid enrolment opens; the review drafts hold the brief, questions Q1–Q15 and a copy-ready email.
   `Legal review status: owner-approved for publication on 2026-10-20; not reviewed by a lawyer`
-  The 2026-10-21 rewrite for online-only payment (D11) was reviewed and approved by the owner, who merged PR #183 (merge 237f3486). This is recorded as `ownerApproval` / `legalTermsUpdated: true` in `live-classes-data.js`. Both switches stay off.
+  The 2026-10-21 rewrite for online-only payment (D11) was reviewed and approved by the owner, who merged PR #183 (merge 237f3486). This is recorded as `legalTermsUpdated: true` in `live-classes-data.js`. It is **not** a launch approval: `ownerApproval` stays `null` for both switches until the owner separately approves taking paid bookings or course payments, and the validator refuses a legal-copy note in its place. Both switches stay off.
 - [ ] **Accounting follow-up for online payments.** [`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md) is the accountant's package:
   - the facts;
   - the questions: receipts or invoices, GST, payment-record retention;

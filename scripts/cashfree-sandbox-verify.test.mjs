@@ -45,6 +45,27 @@ test('VERIFY: only Cashfree\'s sandbox, only reads and the availability fixture 
   assert.equal(/console\.(log|error)\([^)]*\b(secret|appId)\b/.test(SRC), false, 'never logs a credential');
 });
 
+test('VERIFY: real runs default to the hosted checkout (a person pays); the S2S Order Pay API only with --order-pay', () => {
+  assert.match(SRC, /const ROUTE = process\.argv\.includes\('--order-pay'\) \|\| \(REHEARSE && !process\.argv\.includes\('--hosted'\)\) \? 'order-pay' : 'hosted';/);
+  assert.match(SRC, /\$\{ORIGIN\}\/sandbox-checkout\.html#/, 'the checkout link uses the fragment');
+  assert.match(SRC, /S2S flag/, 'an Order Pay refusal names the S2S requirement');
+  assert.equal(/ops\.cfPay\(/.test(SRC.slice(SRC.indexOf('async function verify()'), SRC.indexOf('async function checkExpired'))), false, 'every check pays through pay(), never Order Pay directly');
+});
+
+test('VERIFY: the hosted-checkout route, rehearsed (person emulated), passes the same checks and is labelled not a proof', () => {
+  const out = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'kw-verify-')), 'report.json');
+  const r = run(['--rehearse', '--hosted', '--out=' + out]);
+  assert.equal(r.status, 0, r.stdout.split('\n').filter((l) => /^FAIL/.test(l)).join('\n') || r.stderr);
+  assert.match(r.stdout, /PERSON NEEDED \(PAY SUCCESSFULLY\)[\s\S]*http:\/\/localhost:8789\/sandbox-checkout\.html#session=session_[^&\s]+&outcome=success/);
+  assert.match(r.stdout, /PERSON NEEDED \(MAKE THE PAYMENT FAIL\)[\s\S]*outcome=failure/);
+  const rep = JSON.parse(fs.readFileSync(out, 'utf8'));
+  assert.match(rep.mode, /NOT a real Cashfree sandbox transaction/);
+  assert.equal(rep.route, 'hosted checkout (person emulated)');
+  assert.equal(rep.counts.FAIL || 0, 0);
+  assert.ok(rep.counts.PASS >= 35, JSON.stringify(rep.counts));
+  assert.ok(rep.results.some((x) => x.status === 'PASS' && x.name.includes("hosted checkout, completed by a person")));
+});
+
 test('VERIFY: the rehearsal runs every check against the real Worker code and passes; its report says it is not a real sandbox proof', () => {
   const out = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'kw-verify-')), 'report.json');
   const r = run(['--rehearse', '--out=' + out]);

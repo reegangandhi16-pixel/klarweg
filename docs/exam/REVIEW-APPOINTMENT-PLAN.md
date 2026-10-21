@@ -5,17 +5,21 @@
 > is set here. Rates and contracts are the owner's decisions. The reviewer e-mail drafts, role requirements and
 > independence rules are in `EXTERNAL-REVIEW-OUTREACH.md` and are not repeated; this plan adds the coordinator, the
 > order of appointments and what each engagement needs to contain.
+>
+> **Changed 2026-10-21:** the owner withdrew the independent coordinator (revised D3 in `LESEN-ONLY-OWNER-DECISIONS.md`).
+> Claude (engineering) organises the reviews within the limits in §10. §2, §5 and §6 and the C1 answer in §4 are kept for the
+> record only; they are superseded and the post is not to be published.
 
 ## 1. Order of appointments
 | Step | Appointment | Why first | Needs from the owner |
 |---|---|---|---|
-| 1 | **EX-03 coordinator** (independent; D3) | EX-03 is the longest path, and every reviewer contact and record goes through this person | C1 + C2 below |
-| 2 | **EX-03 reviewers A, B, C**, recruited by the coordinator | Blocks every learner form | Fee approval for the quotes the coordinator collects |
+| ~~1~~ | ~~**EX-03 coordinator**~~ (withdrawn 2026-10-21; Claude organises, §10) | — | — |
+| 2 | **EX-03 reviewers A, B, C**, researched and invited by Claude (§10) | Blocks every learner form | Fee approval for the quotes the coordinator collects |
 | 3 | **EX-05 security** and **EX-04 accessibility**, in parallel | They test the current build; findings may need engineering fixes | C2; for EX-05 also the signed test authorisation (§3.4) |
 | 4 | **EX-01 privacy** | Should see the final data handling, so after D7 (retention) | C2 and D7 |
 | 5 | **EX-07 trademark** | Independent of the others; also covers the main site | C2 |
 
-## 2. The EX-03 coordinator (new role, D3)
+## 2. The EX-03 coordinator (SUPERSEDED 2026-10-21; kept for the record, see §10)
 - **Task:**
   - recruits three different reviewers (two B1 teachers, one native linguist) and checks their independence
     declarations;
@@ -120,7 +124,7 @@ scope in `EXTERNAL-REVIEW-OUTREACH.md`.
 - **Effort:** about 0.5–1 day.
 - **Contract points:** a fixed fee for a written opinion and a list of wording changes; confidentiality.
 
-## 4. Owner choices C1 and C2: answered 2026-10-20
+## 4. Owner choices C1 and C2: answered 2026-10-20 (C1 superseded 2026-10-21; C2 still applies)
 - **C1:** "Prepare the independent coordinator role description as a short, public-safe recruitment post and a separate
   direct-invitation message. I will review and publish the post through a professional channel myself. Do not publish,
   contact candidates or appoint anyone." The materials are in §5 and §6. The owner reviews and publishes them;
@@ -132,7 +136,7 @@ scope in `EXTERNAL-REVIEW-OUTREACH.md`.
   - EX-05 needs the owner's explicit written authorisation, limited to non-production (§9 draft, unsigned);
   - nobody begins paid work before the owner's written approval.
 
-## 5. Recruitment post (public-safe; for the owner to review and publish)
+## 5. Recruitment post (SUPERSEDED 2026-10-21: not to be published; kept for the record)
 Contains no material, answer keys, security details, internal paths or product names under trademark review.
 "Goethe" is deliberately absent until EX-07 has given its opinion.
 
@@ -174,7 +178,7 @@ Contains no material, answer keys, security details, internal paths or product n
 > Please send a non-binding quote (hours, total fee with currency, timeframe) to [contact, set by the owner]. No
 > engagement exists until it is confirmed in writing.
 
-## 6. Direct invitation (for a person the owner already knows)
+## 6. Direct invitation to a coordinator (SUPERSEDED 2026-10-21; kept for the record)
 > **Betreff:** Anfrage: unabhängige Koordination einer Fachprüfung von B1-Leseaufgaben
 >
 > Guten Tag [Anrede Name],
@@ -201,7 +205,7 @@ Contains no material, answer keys, security details, internal paths or product n
 > *(Attach the quote request in §7.)*
 
 ## 7. Quote request (one template for all six engagements)
-Send it with every e-mail draft (`EXTERNAL-REVIEW-OUTREACH.md` §1–§5) and with §5/§6.
+Send it with every e-mail draft (`EXTERNAL-REVIEW-OUTREACH.md` §1–§5).
 
 > **Angebot / Quote — please include:**
 > 1. **Scope** as you understand it, in your own words. *(Engagement: coordinator / EX-03 slot A, B or C / EX-01
@@ -221,7 +225,7 @@ Send it with every e-mail draft (`EXTERNAL-REVIEW-OUTREACH.md` §1–§5) and wi
 
 ## 8. Approval rule (C2)
 - Nobody starts paid work without the owner's written approval of that specific engagement.
-- Engineering and the coordinator may collect and compare quotes. Neither accepts one.
+- Engineering (Claude) may request, collect and compare non-binding quotes. It never accepts one.
 - **Approval record** (written by the owner, kept with the quotes):
   > I approve [engagement] by [name/company] per quote dated [date]: total [fee, currency], timeline [..], re-test
   > terms [..]. [Date, owner.]
@@ -247,3 +251,27 @@ Send it with every e-mail draft (`EXTERNAL-REVIEW-OUTREACH.md` §1–§5) and wi
 
 Engineering gives the tester the host names and synthetic accounts only after this is signed, and only for the stated
 window.
+
+## 10. Claude as organiser (owner's revised D3, 2026-10-21)
+**Claude does:**
+- researches candidates for EX-03 slots A, B and C and for EX-01, EX-04, EX-05 and EX-07 from public professional
+  sources, and records their stated qualifications, public business contact channel and any visible conflict. This is
+  a desk check of what candidates publish about themselves, not a verification of credentials. The candidate's written
+  independence declaration (`EXTERNAL-REVIEW-OUTREACH.md` §7) remains the evidence;
+- drafts the invitations and the §7 quote request, saying plainly that an invitation is not an engagement or contract;
+- keeps the engagement tracker and the candidate list in the private review folder, never in this repository;
+- compares quotes (fee, timeline, deliverables, conflicts, re-test terms) for the owner's decision;
+- after an engagement is approved, prepares the hand-over and runs `review-status.mjs --check` on every returned record.
+
+**Claude does not and may not:**
+- review, rate or comment on any item for a reviewer, show a reviewer the internal or AI pre-review, or discuss items
+  with reviewers. Its analysis never counts as EX-03, EX-01, EX-04, EX-05 or EX-07 evidence;
+- change a returned record. Records are fingerprinted and the check fails on any edit. Reviewers return them to the
+  owner's mailbox, so the owner always holds the originals;
+- accept a quote, commit a fee, sign anything or start paid work (C2);
+- authorise or start security testing (§9);
+- send anything without a channel the owner has authorised. Claude has no e-mail account of its own, so every message
+  goes out from an account the owner names. The owner approves each batch of messages before it is sent.
+
+**Data:** candidate names and business contacts are personal data. They stay in the private folder, are used only for
+this request, and are deleted for candidates who decline or are not chosen.

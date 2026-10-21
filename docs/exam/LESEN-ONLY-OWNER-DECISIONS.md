@@ -68,7 +68,24 @@ D9 Production authorisation: [not yet / yes, after all gates]
 |---|---|---|---|
 | D1 | "Yes, subject to all required approvals and release gates." | Lesen-only is the first-release target. No gate is relaxed | — |
 | D2 | "P3 + P8 + P13." | The prepared packet `EX-03-LESEN-RC-2026-10-20` is the review material. The forms remain candidates until EX-03 approves them | — |
-| D3 | "I want an independent coordinator to manage reviewer communications and collect the completed records. The coordinator has not yet been appointed. Engineering should run the record checks: Yes." | An independent coordinator, not engineering and not the owner, handles reviewer contact and records. Engineering runs `review-status.mjs --check` and the status on the forwarded files | **C1:** who will find or approach the coordinator (`REVIEW-APPOINTMENT-PLAN.md` §4) |
+| D3 | "I want an independent coordinator to manage reviewer communications and collect the completed records. The coordinator has not yet been appointed. Engineering should run the record checks: Yes." | An independent coordinator, not engineering and not the owner, handles reviewer contact and records. Engineering runs `review-status.mjs --check` and the status on the forwarded files. **Superseded on 2026-10-21 (below)** | ~~**C1:** who will find or approach the coordinator~~ (C1 superseded 2026-10-21) |
 | D6 | "EX-01 Privacy, EX-04 Accessibility, EX-05 Security and EX-07 Trademark reviewers are not yet appointed. Prepare a practical appointment plan …" | The plan is in `REVIEW-APPOINTMENT-PLAN.md`. Nobody is contacted, no funds are committed, no review counts as done | **C2:** fee approach (quotes first, or caps) |
 
 Not yet answered: D4, D5, D7, D8, D9.
+
+## Change received 2026-10-21: D3 revised (supersedes the independent coordinator)
+The 2026-10-20 answer to D3 and the owner's answer to C1 (`REVIEW-APPOINTMENT-PLAN.md` §4) are kept above for the
+record. They no longer apply.
+
+| # | Owner's answer | What it means in practice |
+|---|---|---|
+| D3 (revised) | "I do not want to recruit or pay a separate independent coordinator. I want Claude to handle as much of the remaining work itself as its actual tools and permissions allow, with minimal involvement from me." Also: "Remove the independent coordinator as a required appointment." | Engineering (Claude, an AI assistant working for the owner) is the EX-03 organiser and handles the administration of every external review. The coordinator recruitment post and invitation (plan §5, §6) are withdrawn and are not to be published. What Claude does and may not do is in `REVIEW-APPOINTMENT-PLAN.md` §10 |
+
+**Unchanged by this change:**
+- C2: quotes first. No engagement, fee, contract or paid work exists without the owner's written approval of that
+  specific engagement.
+- Every independent human review stays required: EX-03 (three different people), EX-01, EX-04, EX-05 and EX-07. Claude's
+  own analysis is never a review and never counts towards any of them.
+- EX-05 testing needs the owner's signed written authorisation naming the tester, the non-production targets and a
+  fixed time window (plan §9).
+- D4, D5, D7, D8 and D9 stay open. Production stays disabled.

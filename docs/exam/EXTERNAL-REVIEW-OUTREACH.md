@@ -241,9 +241,9 @@ Effort figures are engineering estimates for planning, not quotes.
 > [Name, Funktion, Klarweg]
 
 ## 6. Sending order (suggested; the owner decides, D6)
-Owner's answers of 2026-10-20: an **independent coordinator** handles EX-03 reviewer communication, and engineering
-runs the record checks. Appointment order, the coordinator role and its e-mail draft, and the contract points per
-review are in `REVIEW-APPOINTMENT-PLAN.md`.
+Owner's answers of 2026-10-20 named an independent coordinator. **Changed 2026-10-21:** there is no coordinator;
+Claude (engineering) organises the reviews and runs the record checks, within the limits in `REVIEW-APPOINTMENT-PLAN.md`
+§10. Appointment order and the contract points per review are in that plan.
 
 1. **EX-03** (all three slots at once). It is the longest path and blocks every learner form.
 2. **EX-05 and EX-04** in parallel. Both work on the current build, and their findings may need engineering fixes.

@@ -166,6 +166,8 @@ async function run(viewport) {
     await click('[data-act="submit-confirm"]');
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Hören intro');
+    // OD-04: an optional break of up to 15 minutes between written modules, counting down, never starting anything
+    await waitFor(`document.body.innerText.includes('Pause (freiwillig)') && /^1[45]:[0-9][0-9]$/.test(document.querySelector('.kx-break-time')?.textContent || '')`, 5000, 'break before Hören');
     { const intro = await text(); assert.match(intro, /ca\. \d+ Minuten? · 4 Teile · \d+ Aufgaben/); assert.match(intro, /Die Teile erscheinen nacheinander/); }
     // ENGINE §10: no Hören start before the audio check; then the tone is played and confirmed
     await click('[data-act="start"][data-module="hoeren"]');
@@ -229,6 +231,7 @@ async function run(viewport) {
     await submitModule();
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`, 15000, 'Schreiben intro');
+    assert.match(await text(), /Pause \(freiwillig\)/, 'break before Schreiben');
     await click('[data-act="start"][data-module="schreiben"]');
     await waitFor(`document.querySelector('textarea')`, 15000, 'editor');
     await evaluate(`(() => { const t = document.querySelector('textarea'); t.focus(); t.value = 'Liebe Grüße aus der Straße '; t.dispatchEvent(new Event('input', { bubbles: true })); })()`);
@@ -260,6 +263,7 @@ async function run(viewport) {
     await submitModule();
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`, 15000, 'Sprechen intro');
+    assert.equal(/Pause \(freiwillig\)/.test(await text()), false, 'no break before the oral module');
     // ENGINE §10: no Sprechen start before the microphone check; the fake microphone passes it
     await click('#kx-consent'); await click('[data-act="start"][data-module="sprechen"]');
     await waitFor(`/Bitte testen Sie zuerst Ihr Mikrofon/.test(document.querySelector('#kx-mic-msg')?.textContent || '')`, 5000, 'start refused before the microphone check');

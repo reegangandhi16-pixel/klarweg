@@ -893,3 +893,18 @@ test('CONNECTION PRE-CHECK (ENGINE §10): timed 1 MiB download → ok / slow / f
   assert.match(main, /if \(module === 'hoeren'\) runConnectionCheck\(\)/);
   assert.match(main, /sessionStorage\.setItem\(key, JSON\.stringify\(r\)\)/, 'measured once per attempt in this tab');
 });
+
+test('BREAK (OD-04): optional ≤ 15-min break only between written modules of a full attempt; counted from the last submission; never starts anything', async () => {
+  const { breakApplies, breakPanel, BREAK_MS } = await import('../js/render.js');
+  const full = (mods) => ({ module_scope: null, part_scope: null, modules: mods });
+  const sub = (module, at) => ({ module, status: 'submitted', submitted_at: at });
+  assert.equal(breakApplies(full([{ module: 'lesen', status: 'available' }]), 'lesen'), null, 'nothing to rest from before the first module');
+  assert.equal(breakApplies(full([sub('lesen', 1000)]), 'hoeren'), 1000);
+  assert.equal(breakApplies(full([sub('lesen', 1000), sub('hoeren', 5000)]), 'schreiben'), 5000);
+  assert.equal(breakApplies(full([sub('lesen', 1), sub('hoeren', 2), sub('schreiben', 3)]), 'sprechen'), null, 'not before the oral module');
+  assert.equal(breakApplies({ ...full([sub('lesen', 1)]), module_scope: 'lesen' }, 'hoeren'), null, 'single-module attempts have no break');
+  assert.equal(BREAK_MS, 900000);
+  assert.match(breakPanel(600000), /Pausenzeit zählt nicht zur Prüfungszeit[\s\S]*10:00/);
+  assert.match(breakPanel(0), /Die empfohlene Pause ist vorbei/);
+  assert.match(breakPanel(1), /mindestens 15 Minuten Pause/, 'labelled as a simulation deviation');
+});

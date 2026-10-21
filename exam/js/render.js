@@ -89,6 +89,23 @@ export function saveAnnouncement(prev, next) {
 /* ENGINE §8 (device change): warned BEFORE a takeover. Tabs of the same browser share the local queue, so only answers not
    yet sent from another device can be lost. */
 export const TAKEOVER_NOTE = 'Wenn Sie hier fortsetzen, wird die Prüfung im anderen Fenster oder auf dem anderen Gerät beendet. Antworten, die auf einem anderen Gerät noch nicht übertragen wurden, gehen dabei verloren; alles bereits Gespeicherte bleibt erhalten.';
+/* OD-04 / ENGINE §4: between the written modules of a full simulation an optional break of up to 15 minutes. Break time
+   is not exam time and the next module starts only on the learner's action; a deviation from the official minimum. */
+export const BREAK_MS = 15 * 60 * 1000;
+const WRITTEN = ['lesen', 'hoeren', 'schreiben'];
+export function breakApplies(attempt, nextModule) {
+  if (!attempt || attempt.module_scope || attempt.part_scope != null || !WRITTEN.includes(nextModule)) return null;
+  const done = (attempt.modules || []).filter((m) => m.status === 'submitted' && m.submitted_at != null && WRITTEN.includes(m.module));
+  if (!done.length) return null;   // before the first module there is nothing to rest from
+  return Math.max(...done.map((m) => m.submitted_at));
+}
+export function breakPanel(remainingMs) {
+  const head = '<section class="kx-break" aria-labelledby="kx-break-title"><h2 id="kx-break-title">Pause (freiwillig)</h2>';
+  const body = remainingMs > 0
+    ? `<p>Sie können bis zu 15 Minuten Pause machen. Die Pausenzeit zählt nicht zur Prüfungszeit; das nächste Modul beginnt erst, wenn Sie „Modul starten“ wählen.</p><p class="kx-break-time" role="timer" aria-label="Verbleibende Pause">${esc(formatRemaining(remainingMs))}</p>`
+    : '<p>Die empfohlene Pause ist vorbei. Starten Sie das nächste Modul, wenn Sie bereit sind.</p>';
+  return head + body + '<p class="kx-meta">In der offiziellen Prüfung gibt es mindestens 15 Minuten Pause; diese Simulation lässt Sie früher weitermachen.</p></section>';
+}
 export const SIGN_IN_URL = '../account/index.html';   // the site's sign-in page, relative to /exam/
 export function errorView({ code = 'network', status = 0 } = {}) {
   const overview = { act: 'reload', label: 'Zur Übersicht' };

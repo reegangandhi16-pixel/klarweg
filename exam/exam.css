@@ -91,6 +91,9 @@ p { margin: 0 0 16px; }
 .kx-disclaimer { color: var(--ink-secondary); font-size: 14px; }
 .kx-review-items, .kx-my-recordings, .kx-rated { max-width: 680px; margin: 36px auto; }
 .kx-history { margin-top: 36px; }
+.kx-break { margin: 0 0 24px; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--warm); }
+.kx-break h2 { font-size: 18px; margin-bottom: 8px; }
+.kx-break-time { font: 500 20px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
 .kx-precheck { margin: 24px 0; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--elevated); }
 .kx-precheck h2 { font-size: 18px; margin-bottom: 8px; }
 .kx-precheck .kx-actions { margin-top: 12px; }

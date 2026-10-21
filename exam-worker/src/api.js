@@ -371,6 +371,11 @@ export async function getPackage(env, userId, attemptId, module, url) {
   requireRunning(m, t, { grace: false });
   await requireReleased(env, attempt);
   const pkg = await loadPackage(env, attempt.form_id, module);
+  if (module === 'schreiben') {   // OD-06: the paste policy travels next to the package (content files stay byte-identical)
+    const form = await formRow(env, attempt.form_id);
+    const policy = moduleConfig(await levelConfig(env, form.level_config_id), 'schreiben')?.paste_policy;
+    return { ok: true, server_now: t, module: moduleView(m, t), package: scopedPackage(attempt, pkg.data), paste_policy: PASTE_POLICIES.includes(policy) ? policy : 'internal_only' };
+  }
   if (module !== 'hoeren') return { ok: true, server_now: t, module: moduleView(m, t), package: scopedPackage(attempt, pkg.data) };
   const readinessMs = await hoerenReadinessMs(env, attempt);
   const pos = hoerenPosition(pkg.data.timing.plan, m, t, readinessMs, PART_LEAD_MS);
@@ -464,6 +469,26 @@ export async function saveAnswers(env, userId, attemptId, module, request) {
     await env.DB.prepare('UPDATE attempt_modules SET seq_high = MAX(seq_high, ?3) WHERE attempt_id = ?1 AND module = ?2').bind(attemptId, module, high).run();
     return { ok: true, server_now: t, deadline_at: m.deadline_at, results };
   });
+}
+
+/* ---------- Schreiben integrity events (OD-06) ----------
+   A refused paste or drop is logged for integrity analytics, never penalised and never stored as text: type, item and
+   length only. Lease-checked, module must be running, rate-limited per attempt. */
+const PASTE_POLICIES = ['allow', 'internal_only', 'block'];
+const INTEGRITY_EVENTS = ['paste_blocked', 'drop_blocked'];
+export async function integrityEvent(env, userId, attemptId, request) {
+  const body = await readJsonBody(request);
+  const { attempt } = await attemptCtx(env, userId, attemptId, body.lease_id);
+  await rateLimit(env, `integrity:${attemptId}`, 30, 60_000);
+  if (!INTEGRITY_EVENTS.includes(body.type)) fail(400, 'invalid_event');
+  const m = await moduleRow(env, attemptId, 'schreiben');
+  if (m.status !== 'running') fail(409, 'module_not_running');
+  const pkg = await loadPackage(env, attempt.form_id, 'schreiben');
+  const item = pkg.items.get(body.item_id);
+  if (!item || item.interaction !== 'text_response') fail(422, 'unknown_item');
+  const length = Number.isInteger(body.length) && body.length >= 0 ? Math.min(body.length, 1_000_000) : null;
+  await audit(env, userId, attemptId, 'writing_integrity', { type: body.type, item_id: item.item_id, length });
+  return { ok: true };
 }
 
 export async function submit(env, userId, attemptId, module, request) {

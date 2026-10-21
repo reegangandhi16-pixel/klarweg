@@ -43,7 +43,7 @@ section or `CORS_EXTRA_ORIGINS`.
 
 | File | Worker | What it sets |
 |---|---|---|
-| `exam-worker/wrangler.nonprod.toml` | `klarweg-exam-nonprod` | `workers_dev = false` (reachable only through the service binding); `EXAM_ENABLED` and `EXAM_SYNTHETIC_FORMS` on, mock and production forms **off**; D1 `klarweg-exam-nonprod`; private R2 `klarweg-exam-content-nonprod` / `klarweg-exam-recordings-nonprod`; Cron `*/5 * * * *` |
+| `exam-worker/wrangler.nonprod.toml` | `klarweg-exam-nonprod` | `workers_dev = false` (reachable only through the service binding); `EXAM_ENABLED` and `EXAM_SYNTHETIC_FORMS` on, mock and production forms **off**; D1 `klarweg-exam-nonprod`; private R2 `klarweg-exam-content-nonprod` / `klarweg-exam-recordings-nonprod`; Cron `* * * * *` (every minute, ENGINE §8) |
 | `access/worker/wrangler.nonprod.toml` | `klarweg-access-nonprod` | D1 `klarweg-access-nonprod`; `EXAM_ROUTES = "on"`; service binding `EXAM` → `klarweg-exam-nonprod`; `CORS_EXTRA_ORIGINS = "http://localhost:8788"`; `AI_ENABLED = "false"`, `SPEECH_MODE = "off"`; **no** TUTOR / RESOURCES bindings, **no** Cashfree or Google vars (email sign-up only) |
 
 Both files carry a placeholder `database_id` (`00000000-…`) until §3 step 1. `scripts/nonprod-config.test.mjs`

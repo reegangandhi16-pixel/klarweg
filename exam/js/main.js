@@ -14,6 +14,7 @@ import { createSpeakingDriver } from './sprechen-driver.js';
 import { createSpeakingAudio } from './speaking-audio.js';
 import { countWords } from './wordcount.js';
 import { randomId } from './ids.js';
+import { pasteAllowed, PASTE_REFUSED, DEFAULT_PASTE_POLICY } from './paste.js';
 import { environmentNotes, playTestTone, testMicrophone, MIC_FIX, AUDIO_CHECK, MIC_CHECK } from './precheck.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -103,7 +104,7 @@ function onLeaseExpired(staleLease = null) { reacquireLease(staleLease).then((e)
 /* Every call that carries the lease (signature (attemptId, lease, …)) is retried ONCE with a reacquired lease when the
    server says lease_expired. The refused request was not applied (the server stores only successful responses), so the
    retry, even with the same request id, is applied once. */
-const LEASED_CALLS = ['pkg', 'answers', 'save', 'media', 'hoerenEvent', 'chunk', 'turn', 'speakingStatus', 'consent', 'start', 'submit', 'complete'];
+const LEASED_CALLS = ['pkg', 'answers', 'save', 'media', 'hoerenEvent', 'chunk', 'turn', 'speakingStatus', 'consent', 'start', 'submit', 'complete', 'integrity'];
 for (const name of LEASED_CALLS) {
   const call = api[name];
   api[name] = async (id, lease, ...rest) => {
@@ -162,6 +163,7 @@ async function openModule(module) {
   announced = {};
   const p = await api.pkg(id, S.lease, module);
   S.pkg = p.package;
+  S.pastePolicy = p.paste_policy || DEFAULT_PASTE_POLICY;
   assertSupported(S.pkg, renderer.registry);
   const saved = await api.answers(id, S.lease, module);
   S.answers = Object.fromEntries(saved.answers.map((a) => [a.item_id, a.value]));
@@ -628,6 +630,31 @@ app.addEventListener('click', async (e) => {
     }
     if (act === 'complete') { await api.complete(S.attempt.attempt_id, S.lease); S.attempt = await api.getAttempt(S.attempt.attempt_id); return showResult(); }
   } catch (err) { fail(err); }
+});
+/* Schreiben paste policy (OD-06): text copied or cut inside the exam editor may be pasted back; anything else is refused
+   (with a calm note) and reported for integrity analytics, never penalised. Drag-and-drop into the editor is disabled. */
+const isEditor = (el) => el && el.tagName === 'TEXTAREA' && el.dataset && el.dataset.item;
+function rememberCopy(e) {
+  const t = e.target; if (!isEditor(t)) return;
+  S.internalClip = t.value.slice(t.selectionStart, t.selectionEnd);
+}
+function reportIntegrity(type, el, length) {
+  if (S.module !== 'schreiben' || !S.attempt) return;
+  api.integrity(S.attempt.attempt_id, S.lease, { type, item_id: el.dataset.item, length, request_id: randomId('rq') }).catch(() => {});
+}
+app.addEventListener('copy', rememberCopy);
+app.addEventListener('cut', rememberCopy);
+app.addEventListener('paste', (e) => {
+  const t = e.target; if (!isEditor(t)) return;
+  const text = (e.clipboardData && e.clipboardData.getData('text/plain')) || '';
+  if (pasteAllowed(S.pastePolicy, text, S.internalClip)) return;
+  e.preventDefault(); announce(PASTE_REFUSED); reportIntegrity('paste_blocked', t, text.length);
+});
+app.addEventListener('dragover', (e) => { if (isEditor(e.target) && S.pastePolicy !== 'allow') e.preventDefault(); });
+app.addEventListener('drop', (e) => {
+  const t = e.target; if (!isEditor(t) || S.pastePolicy === 'allow') return;
+  e.preventDefault(); announce(PASTE_REFUSED);
+  reportIntegrity('drop_blocked', t, ((e.dataTransfer && e.dataTransfer.getData('text/plain')) || '').length);
 });
 window.addEventListener('beforeunload', (e) => { if (S.autosave && S.autosave.hasPending()) { S.autosave.flush(); e.preventDefault(); } });
 window.addEventListener('online', () => S.autosave && S.autosave.flush());

@@ -76,6 +76,7 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     chunk: (id, leaseId, q, bytes, mime) => call('POST', att(id, `/sprechen/chunks?${new URLSearchParams({ lease_id: leaseId, ...q })}`), { raw: bytes, contentType: mime }),
     turn: (id, leaseId, b) => call('POST', att(id, '/sprechen/turns'), { body: rq({ lease_id: leaseId, ...b }) }),
     speakingStatus: (id, leaseId) => call('GET', att(id, `/sprechen/status?lease_id=${encodeURIComponent(leaseId)}`)),
+    integrity: (id, leaseId, b) => once('POST', att(id, '/schreiben/integrity'), { body: { lease_id: leaseId, ...b } }),   // best effort, never retried
     complete: (id, leaseId) => call('POST', att(id, '/complete'), { body: rq({ lease_id: leaseId }) }),
     result: (id) => call('GET', att(id, '/result')),
     review: (id, module) => call('GET', att(id, `/modules/${module}/review`)),

@@ -39,4 +39,4 @@ bucket_name = "klarweg-exam-recordings"
 
 # Deadline sweep (auto-submits abandoned modules).
 [triggers]
-crons = ["*/5 * * * *"]
+crons = ["* * * * *"]   # ENGINE §8: the deadline sweep runs every minute

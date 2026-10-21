@@ -234,6 +234,18 @@ async function run(viewport) {
     await evaluate(`(() => { const t = document.querySelector('textarea'); t.focus(); t.value = 'Liebe Grüße aus der Straße '; t.dispatchEvent(new Event('input', { bubbles: true })); })()`);
     await click('.kx-char[data-insert="ä"]');
     await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Schreiben autosaved');
+    // OD-06 paste policy (internal_only): an outside paste is refused with a note and logged (no text); a paste of text
+    // copied inside the editor goes through
+    const pasteRes = await evaluate(`(() => { const t = document.querySelector('textarea'); const before = t.value;
+      const paste = (txt) => { const dt = new DataTransfer(); dt.setData('text/plain', txt); const ev = new ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true }); t.dispatchEvent(ev); return ev.defaultPrevented; };
+      const outside = paste('Text aus dem Internet');
+      t.focus(); t.setSelectionRange(0, 5); t.dispatchEvent(new ClipboardEvent('copy', { bubbles: true, cancelable: true }));
+      const inside = paste(before.slice(0, 5));
+      return { outside, inside, unchanged: t.value === before, note: document.querySelector('#kx-announce').textContent }; })()`);
+    assert.deepEqual([pasteRes.outside, pasteRes.inside, pasteRes.unchanged], [true, false, true], JSON.stringify(pasteRes));
+    assert.match(pasteRes.note, /Einfügen von außerhalb der Prüfung ist hier nicht möglich/);
+    for (const t0 = Date.now(); !(await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'writing_integrity'").first()).n; await sleep(200)) if (Date.now() - t0 > 10000) throw new Error('paste attempt not logged');
+    assert.deepEqual(JSON.parse((await dev.env.DB.prepare("SELECT detail_json FROM audit_log WHERE action = 'writing_integrity'").first()).detail_json).length, 21, 'only the length is logged');
     // recovery: reload the tab mid-module
     await evaluate('window.__beforeReload = true');
     await send('Page.reload');

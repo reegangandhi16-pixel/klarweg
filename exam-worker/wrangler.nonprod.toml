@@ -48,4 +48,4 @@ bucket_name = "klarweg-exam-recordings-nonprod"
 
 # Deadline sweep, as in production (acceptance check A8).
 [triggers]
-crons = ["*/5 * * * *"]
+crons = ["* * * * *"]   # ENGINE §8: the deadline sweep runs every minute

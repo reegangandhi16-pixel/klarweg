@@ -850,3 +850,10 @@ test('AUTOSAVE signed out (ENGINE §8): auth_required stops retrying, keeps the 
   assert.deepEqual(sent.map((x) => [x.item_id, x.value.option_id]), [['itm:x', 'a']]);
   assert.equal(b.hasPending(), false);
 });
+
+test('TAKEOVER WARNING (ENGINE §8): both the "open elsewhere" and the "superseded" screens warn before taking over', async () => {
+  const { TAKEOVER_NOTE } = await import('../js/render.js');
+  assert.match(TAKEOVER_NOTE, /auf einem anderen Gerät noch nicht übertragen wurden, gehen dabei verloren/);
+  assert.ok(errorView({ code: 'lease_superseded', status: 409 }).body.includes(TAKEOVER_NOTE));
+  assert.match(read('exam/js/main.js'), /message\('Bereits geöffnet', `Diese Prüfung ist in einem anderen Tab oder auf einem anderen Gerät geöffnet\. \$\{TAKEOVER_NOTE\}`/);
+});

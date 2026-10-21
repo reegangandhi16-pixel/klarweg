@@ -90,6 +90,14 @@ p { margin: 0 0 16px; }
 .kx-disclaimer { color: var(--ink-secondary); font-size: 14px; }
 .kx-review-items, .kx-my-recordings, .kx-rated { max-width: 680px; margin: 36px auto; }
 .kx-history { margin-top: 36px; }
+.kx-nav a[aria-current="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+/* Lesen: texts beside the tasks on wide screens; the texts column scrolls on its own below the sticky bar */
+@media (min-width: 1024px) {
+  .kx-split-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+  .kx-task-texts { position: sticky; top: 120px; max-height: calc(100vh - 144px); overflow-y: auto; padding-right: 8px; }
+  .kx-task-texts .kx-stim:last-child { margin-bottom: 0; }
+  .kx-task-items .kx-item:first-child { border-top: 0; padding-top: 0; }
+}
 .kx-intro-facts { font: 500 14px/1.4 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-secondary); }
 .kx-intro-rules { margin: 0 0 16px; padding-left: 24px; }
 .kx-intro-rules li { margin-bottom: 8px; }

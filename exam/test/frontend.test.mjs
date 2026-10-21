@@ -715,3 +715,25 @@ test('STICKY BAR: header (timer, progress, save state) and part navigation share
   // part-navigation targets (the "Teil n" headings, id part-n) land below the sticky bar, not under it
   assert.ok([...css.matchAll(/\[id\^="part-"\] { scroll-margin-top: 120px; }/g)].length >= 1);
 });
+
+test('LESEN LAYOUT: texts and tasks are split into two columns (scrollable, labelled, focusable text region); other modules unchanged', async () => {
+  const { createRenderer } = await import('../js/render.js');
+  const r = createRenderer();
+  const lesen = r.module(pkgFor(build, 'lesen'), {}, {});
+  assert.ok((lesen.match(/class="kx-task kx-split"/g) || []).length >= 4, 'Lesen tasks with texts are split');
+  assert.match(lesen, /<div class="kx-task-texts" role="region" tabindex="0" aria-label="Texte zu Teil 1">/);
+  assert.equal(/kx-split/.test(r.module(pkgFor(build, 'schreiben'), {}, {})), false);
+  assert.equal(/kx-split/.test(r.module(pkgFor(build, 'lesen'), {}, { split: false })), false, 'can be turned off');
+  const css = read('exam/exam.css');
+  assert.match(css, /@media \(min-width: 1024px\) {\s*\.kx-split-grid { display: grid;/);
+  assert.match(css, /\.kx-task-texts { position: sticky; top: 120px; max-height: calc\(100vh - 144px\); overflow-y: auto;/);
+});
+
+test('PART NAV: the part on screen is marked aria-current (and styled), nothing else', () => {
+  const prog = [{ part: 1, answered: 0, total: 6 }, { part: 2, answered: 1, total: 6 }];
+  const html = moduleNav(prog, 2);
+  assert.match(html, /<a href="#part-2" aria-current="true">Teil 2/);
+  assert.equal((html.match(/aria-current/g) || []).length, 1);
+  assert.equal(/aria-current/.test(moduleNav(prog)), false);
+  assert.match(read('exam/exam.css'), /\.kx-nav a\[aria-current="true"\] {[^}]*border-color: var\(--accent\)/);
+});

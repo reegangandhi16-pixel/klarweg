@@ -154,24 +154,35 @@ export function createRenderer(extra = {}) {
     if (s.kind === 'image') return `<p class="kx-meta">${esc(s.label || 'Bild')}</p>`;
     return '';
   }
+  /* ctx.split (Lesen): texts and tasks side by side on wide screens — the texts scroll in their own column, so the
+     learner keeps the text (or the ten ads of Teil 3) in view while answering. Narrow screens stack them (CSS). */
+  function task(t, p, answers, ctx) {
+    const instr = t.instructions ? `<div class="kx-instr">${paragraphs(t.instructions)}</div>` : '';
+    const texts = t.stimuli.filter((s) => !(s.kind === 'text' && t.instructions && String(s.text || '').trim() === t.instructions.trim())).map(stimulus).join('');
+    const items = t.items.map((it) => item(it, answers, ctx)).join('');
+    if (ctx.split && texts && items && t.stimuli.some((s) => s.kind === 'text')) {
+      return `<div class="kx-task kx-split">${instr}<div class="kx-split-grid"><div class="kx-task-texts" role="region" tabindex="0" aria-label="Texte zu Teil ${esc(p.part)}">${texts}</div>`
+        + `<div class="kx-task-items">${items}</div></div></div>`;
+    }
+    return `<div class="kx-task">${instr}${texts}${items}</div>`;
+  }
   function part(p, answers = {}, ctx = {}) {
     return `<section class="kx-part" data-part="${esc(p.part)}" aria-labelledby="part-${esc(p.part)}"><h2 id="part-${esc(p.part)}">Teil ${esc(p.part)}</h2>`
-      + p.tasks.map((t) => `<div class="kx-task">${t.instructions ? `<div class="kx-instr">${paragraphs(t.instructions)}</div>` : ''}`
-        + t.stimuli.filter((s) => !(s.kind === 'text' && t.instructions && String(s.text || '').trim() === t.instructions.trim())).map(stimulus).join('') + t.items.map((it) => item(it, answers, ctx)).join('') + '</div>').join('')
-      + '</section>';
+      + p.tasks.map((t) => task(t, p, answers, ctx)).join('') + '</section>';
   }
   /* Renders only the parts present in the package. For Hören the server sends
      only the parts that have opened (OD-02), so future parts never reach the DOM. */
   function module(pkg, answers = {}, ctx = {}) {
-    return testBanner(pkg) + pkg.parts.map((p) => part(p, answers, ctx)).join('');
+    const c = { ...ctx, split: ctx.split ?? pkg.module === 'lesen' };
+    return testBanner(pkg) + pkg.parts.map((p) => part(p, answers, c)).join('');
   }
   return { module, part, item, registry };
 }
 
 /* Part navigation for a module page: one link per part present, with its answered count. */
-export function moduleNav(progress) {
+export function moduleNav(progress, current = null) {
   if (!progress || progress.length < 2 || !progress.some((p) => p.total)) return '';
-  return `<nav class="kx-nav" aria-label="Teile dieses Moduls"><ol>${progress.map((p) => `<li><a href="#part-${esc(p.part)}">Teil ${esc(p.part)}`
+  return `<nav class="kx-nav" aria-label="Teile dieses Moduls"><ol>${progress.map((p) => `<li><a href="#part-${esc(p.part)}"${p.part === current ? ' aria-current="true"' : ''}>Teil ${esc(p.part)}`
     + (p.total ? ` <span class="kx-nav-count" data-progress-part="${esc(p.part)}">${p.answered}/${p.total}</span>` : '') + '</a></li>').join('')}</ol></nav>`;
 }
 

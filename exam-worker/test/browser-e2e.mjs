@@ -1256,6 +1256,9 @@ async function runLesenOnly() {
       assert.ok(pos.head >= pos.bar - 1, `Teil 4 heading visible below the bar at ${w}px: ${JSON.stringify(pos)}`);
       assert.ok(pos.noHScroll, `no horizontal scroll at ${w}px`);
       assert.ok(pos.bar <= 120, `the sticky bar stays compact at ${w}px (${pos.bar} px)`);
+      assert.equal(await evaluate(`document.querySelector('.kx-nav a[aria-current="true"]')?.getAttribute('href')`), '#part-4', `current part marked at ${w}px`);
+      const cols = await evaluate(`(() => { const t = document.querySelector('#kx-main .kx-split .kx-task-texts').getBoundingClientRect(), i = document.querySelector('#kx-main .kx-split .kx-task-items').getBoundingClientRect(); return { sideBySide: t.right <= i.left + 1 && Math.abs(t.top - i.top) < 400, stacked: t.bottom <= i.top + 1 }; })()`);
+      assert.equal(mobile ? cols.stacked : cols.sideBySide, true, `Lesen texts ${mobile ? 'above' : 'beside'} the tasks at ${w}px: ${JSON.stringify(cols)}`);
       if (process.env.KX_E2E_SHOTS) fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, `lesen-bar-${w}.png`), Buffer.from((await send('Page.captureScreenshot', { format: 'png' })).data, 'base64'));
     }
     await vp(1280, 800, false);

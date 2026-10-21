@@ -68,3 +68,37 @@ export const MIC_CHECK = '<section class="kx-precheck" aria-labelledby="kx-pc-mi
   + '<p>Für dieses Modul brauchen Sie ein funktionierendes Mikrofon. Testen Sie es vor dem Start.</p>'
   + '<div class="kx-actions"><button class="kx-btn kx-btn-quiet" type="button" data-act="mic-test">Mikrofon testen</button></div>'
   + '<p class="kx-precheck-msg" id="kx-mic-msg" role="status"></p></section>';
+
+/* ENGINE §10 connection quality: time a 1 MiB download once per attempt (Hören), on top of the RTT already sampled.
+   Never blocks. Skipped when the browser asks to save data. Resolves to { state, mbps? }:
+   'ok' | 'slow' (below SLOW_MBPS) | 'failed' | 'timeout' | 'skipped'. */
+export const SLOW_MBPS = 2;
+export const DOWNLOAD_TIMEOUT_MS = 20_000;
+export async function measureDownload({ fetchImpl, url, now = () => performance.now(), saveData = false, timeoutMs = DOWNLOAD_TIMEOUT_MS, expectBytes = 1024 * 1024 } = {}) {
+  if (saveData) return { state: 'skipped' };
+  const ctl = typeof AbortController === 'function' ? new AbortController() : null;
+  const timer = setTimeout(() => ctl && ctl.abort(), timeoutMs);
+  const t0 = now();
+  try {
+    const res = await fetchImpl(url, { credentials: 'include', cache: 'no-store', signal: ctl && ctl.signal });
+    if (!res.ok) return { state: 'failed' };
+    const bytes = (await res.arrayBuffer()).byteLength;
+    if (bytes < expectBytes * 0.9) return { state: 'failed' };
+    const secs = Math.max((now() - t0) / 1000, 0.001);
+    const mbps = Math.round(((bytes * 8) / 1e6 / secs) * 10) / 10;
+    return { state: mbps < SLOW_MBPS ? 'slow' : 'ok', mbps };
+  } catch (e) {
+    return { state: e && e.name === 'AbortError' ? 'timeout' : 'failed' };
+  } finally { clearTimeout(timer); }
+}
+export function downloadNote(r) {
+  switch (r && r.state) {
+    case 'ok': return `Verbindung geprüft: etwa ${String(r.mbps).replace('.', ',')} Mbit/s. Die Prüftöne werden zügig geladen.`;
+    case 'slow': return `Ihre Verbindung ist langsam (etwa ${String(r.mbps).replace('.', ',')} Mbit/s). Das Laden der Prüftöne kann länger dauern; die Hörzeit beginnt erst danach. Eine stabilere Verbindung (z. B. WLAN) wird empfohlen.`;
+    case 'timeout': return 'Der Verbindungstest hat zu lange gedauert. Das Laden der Prüftöne kann länger dauern; die Hörzeit beginnt erst danach. Wechseln Sie wenn möglich in ein stabileres Netz.';
+    case 'failed': return 'Der Verbindungstest war nicht möglich. Sie können trotzdem beginnen; die Prüftöne werden vor dem Start vollständig geladen.';
+    case 'skipped': return 'Datensparmodus aktiv: Der Verbindungstest wurde übersprungen.';
+    default: return '';
+  }
+}
+export const CONNECTION_CHECK = '<p class="kx-precheck-msg" id="kx-conn-msg" role="status">Verbindung wird geprüft …</p>';

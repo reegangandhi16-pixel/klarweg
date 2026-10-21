@@ -869,3 +869,27 @@ test('ADMIN LOOKUP screen: email search first, user id as fallback; the match is
   for (const k of ['invalid_email', 'user_not_found', 'rate_limited']) assert.ok(ADMIN_ERRORS[k], k);
   assert.match(read('exam/js/api.js'), /accessLookup: \(email\) => once\('POST', '\/exam\/v1\/admin\/access\/lookup'/);
 });
+
+test('CONNECTION PRE-CHECK (ENGINE §10): timed 1 MiB download → ok / slow / failed / timeout / skipped (save-data), with guidance; never blocks', async () => {
+  const { measureDownload, downloadNote, SLOW_MBPS } = await import('../js/precheck.js');
+  const MiB = 1024 * 1024;
+  const clock = (ms) => { let t = 0; return () => { const v = t; t += ms; return v; }; };   // first call = start, second = end
+  const ok = (bytes) => async () => ({ ok: true, arrayBuffer: async () => new ArrayBuffer(bytes) });
+  const fast = await measureDownload({ fetchImpl: ok(MiB), url: 'u', now: clock(500) });   // 8.4 Mbit in 0.5 s
+  assert.deepEqual(fast, { state: 'ok', mbps: 16.8 });
+  const slow = await measureDownload({ fetchImpl: ok(MiB), url: 'u', now: clock(10_000) });
+  assert.equal(slow.state, 'slow'); assert.ok(slow.mbps < SLOW_MBPS);
+  assert.deepEqual(await measureDownload({ fetchImpl: async () => ({ ok: false }), url: 'u' }), { state: 'failed' });
+  assert.deepEqual(await measureDownload({ fetchImpl: ok(1000), url: 'u' }), { state: 'failed' }, 'a truncated body is not a measurement');
+  assert.deepEqual(await measureDownload({ fetchImpl: async () => { throw new TypeError('network'); }, url: 'u' }), { state: 'failed' });
+  const hang = (u, o) => new Promise((_, rej) => o.signal.addEventListener('abort', () => { const e = new Error('aborted'); e.name = 'AbortError'; rej(e); }));
+  assert.deepEqual(await measureDownload({ fetchImpl: hang, url: 'u', timeoutMs: 20 }), { state: 'timeout' });
+  let called = false;
+  assert.deepEqual(await measureDownload({ fetchImpl: async () => { called = true; }, url: 'u', saveData: true }), { state: 'skipped' });
+  assert.equal(called, false, 'no download in data-saver mode');
+  assert.match(downloadNote(fast), /16,8 Mbit\/s/); assert.match(downloadNote(slow), /langsam.*Hörzeit beginnt erst danach/);
+  for (const st of ['failed', 'timeout', 'skipped']) assert.ok(downloadNote({ state: st }).length > 20, st);
+  const main = read('exam/js/main.js');
+  assert.match(main, /if \(module === 'hoeren'\) runConnectionCheck\(\)/);
+  assert.match(main, /sessionStorage\.setItem\(key, JSON\.stringify\(r\)\)/, 'measured once per attempt in this tab');
+});

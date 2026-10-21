@@ -15,7 +15,7 @@ import { createSpeakingAudio } from './speaking-audio.js';
 import { countWords } from './wordcount.js';
 import { randomId } from './ids.js';
 import { pasteAllowed, PASTE_REFUSED, DEFAULT_PASTE_POLICY } from './paste.js';
-import { environmentNotes, playTestTone, testMicrophone, MIC_FIX, AUDIO_CHECK, MIC_CHECK } from './precheck.js';
+import { environmentNotes, playTestTone, testMicrophone, MIC_FIX, AUDIO_CHECK, MIC_CHECK, CONNECTION_CHECK, measureDownload, downloadNote } from './precheck.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const app = $('#kx-app');
@@ -146,14 +146,28 @@ async function completeAndShow() {
 /* median round trip of the requests so far (connection-quality note) */
 function medianRtt() { const r = (clock.samples || []).map((x) => x.rtt).sort((a, b) => a - b); return r.length ? r[Math.floor(r.length / 2)] : NaN; }
 
+/* ENGINE §10 connection quality before Hören: a 1 MiB download, once per attempt (the result is kept for this tab). */
+async function runConnectionCheck() {
+  const el = () => $('#kx-conn-msg');
+  const key = `kx-conn:${S.attempt.attempt_id}`;
+  let r = null; try { r = JSON.parse(sessionStorage.getItem(key) || 'null'); } catch {}
+  if (!r) {
+    r = await measureDownload({ fetchImpl: (u, o) => fetch(u, o), url: `${base}/exam/v1/attempts/${encodeURIComponent(S.attempt.attempt_id)}/precheck/download?lease_id=${encodeURIComponent(S.lease)}`,
+      saveData: !!(navigator.connection && navigator.connection.saveData) });
+    if (r.state !== 'failed') { try { sessionStorage.setItem(key, JSON.stringify(r)); } catch {} }
+  }
+  if (el()) el().textContent = downloadNote(r);
+}
+
 function intro(module) {
   const info = moduleIntro(module, (moduleState(module) || {}).intro);
   S.micOk = false;
   const notes = environmentNotes({ storageKind: S.store && S.store.kind, offsetMs: clock.offset, rttMs: medianRtt() });
   const notesHtml = notes.length ? `<ul class="kx-precheck-notes">${notes.map((n) => `<li data-note="${esc(n.kind)}">${esc(n.text)}</li>`).join('')}</ul>` : '';
-  const check = module === 'hoeren' ? AUDIO_CHECK : module === 'sprechen' ? MIC_CHECK : '';
+  const check = module === 'hoeren' ? AUDIO_CHECK + CONNECTION_CHECK : module === 'sprechen' ? MIC_CHECK : '';
   const extra = module === 'sprechen' ? '<p>Für dieses Modul werden Ihre Antworten aufgenommen und privat gespeichert. Ohne Ihre Zustimmung kann das Modul nicht beginnen.</p><label class="kx-consent"><input type="checkbox" id="kx-consent"> Ich stimme der Aufnahme zu.</label>' : '';
   screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1>${info}${notesHtml}${check}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
+  if (module === 'hoeren') runConnectionCheck().catch(() => {});
 }
 
 async function openModule(module) {

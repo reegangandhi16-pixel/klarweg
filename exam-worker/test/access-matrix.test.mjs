@@ -16,6 +16,7 @@ const LEARNER_ROUTES = [
   ['POST', '/hoeren/events'], ['POST', '/media'],
   ['POST', '/sprechen/consent'], ['POST', '/sprechen/chunks'], ['POST', '/sprechen/turns'], ['GET', '/sprechen/status'],
   ['POST', '/schreiben/integrity'],
+  ['GET', '/precheck/download'],
   ['POST', '/complete'], ['GET', '/result'], ['GET', '/modules/lesen/review'], ['GET', '/modules/schreiben/feedback'],
   ['GET', '/sprechen/recordings'], ['GET', '/sprechen/recordings/1/t1']
 ];

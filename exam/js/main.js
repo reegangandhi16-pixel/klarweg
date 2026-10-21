@@ -14,6 +14,7 @@ import { createSpeakingDriver } from './sprechen-driver.js';
 import { createSpeakingAudio } from './speaking-audio.js';
 import { countWords } from './wordcount.js';
 import { randomId } from './ids.js';
+import { environmentNotes, playTestTone, testMicrophone, MIC_FIX, AUDIO_CHECK, MIC_CHECK } from './precheck.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const app = $('#kx-app');
@@ -138,10 +139,17 @@ async function completeAndShow() {
   catch (e) { fail(e); }
 }
 
+/* median round trip of the requests so far (connection-quality note) */
+function medianRtt() { const r = (clock.samples || []).map((x) => x.rtt).sort((a, b) => a - b); return r.length ? r[Math.floor(r.length / 2)] : NaN; }
+
 function intro(module) {
   const info = moduleIntro(module, (moduleState(module) || {}).intro);
+  S.micOk = false;
+  const notes = environmentNotes({ storageKind: S.store && S.store.kind, offsetMs: clock.offset, rttMs: medianRtt() });
+  const notesHtml = notes.length ? `<ul class="kx-precheck-notes">${notes.map((n) => `<li data-note="${esc(n.kind)}">${esc(n.text)}</li>`).join('')}</ul>` : '';
+  const check = module === 'hoeren' ? AUDIO_CHECK : module === 'sprechen' ? MIC_CHECK : '';
   const extra = module === 'sprechen' ? '<p>Für dieses Modul werden Ihre Antworten aufgenommen und privat gespeichert. Ohne Ihre Zustimmung kann das Modul nicht beginnen.</p><label class="kx-consent"><input type="checkbox" id="kx-consent"> Ich stimme der Aufnahme zu.</label>' : '';
-  screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1>${info}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
+  screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1>${info}${notesHtml}${check}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
 }
 
 async function openModule(module) {
@@ -567,7 +575,29 @@ app.addEventListener('click', async (e) => {
     }
     if (act === 'create') { const r = await api.createAttempt({ mode: b.dataset.mode || 'synthetic_full', level: 'b1', ...(b.dataset.module ? { module: b.dataset.module } : {}), ...(b.dataset.part ? { part: Number(b.dataset.part) } : {}), device_id: deviceId() }); S.lease = r.lease.lease_id; rememberLease(r.attempt_id, S.lease); S.attempt = r; return route(); }
     if (act === 'takeover') return resume(b.dataset.attempt || S.attempt.attempt_id, true);
+    if (act === 'tone-play') {
+      b.disabled = true; const msg = $('#kx-tone-msg');
+      try { await playTestTone(); if (msg) msg.textContent = 'Testton abgespielt. Haben Sie ihn gehört? Dann bestätigen Sie das unten.'; }
+      catch { if (msg) msg.textContent = 'Der Testton konnte nicht abgespielt werden. Prüfen Sie die Audio-Ausgabe und versuchen Sie es erneut.'; }
+      finally { b.disabled = false; }
+      return;
+    }
+    if (act === 'mic-test') {
+      b.disabled = true; const msg = $('#kx-mic-msg'); if (msg) msg.textContent = 'Mikrofon wird getestet … bitte kurz sprechen.';
+      const r = await testMicrophone(); S.micOk = r.ok; b.disabled = false;
+      if (msg) msg.textContent = r.ok ? 'Mikrofon funktioniert.' : (MIC_FIX[r.error] || 'Das Mikrofon konnte nicht gestartet werden. Prüfen Sie das Gerät und testen Sie erneut.');
+      return;
+    }
     if (act === 'start') {
+      // ENGINE §10 pre-checks: a failed audio/microphone check leads to its fix, never to the start
+      if (b.dataset.module === 'hoeren' && $('#kx-tone-heard') && !$('#kx-tone-heard').checked) {
+        const msg = $('#kx-tone-msg'); if (msg) msg.textContent = 'Bitte spielen Sie den Testton ab und bestätigen Sie, dass Sie ihn gehört haben.';
+        $('#kx-tone-heard').focus(); return;
+      }
+      if (b.dataset.module === 'sprechen' && $('#kx-mic-msg') && !S.micOk) {
+        const msg = $('#kx-mic-msg'); if (msg) msg.textContent = 'Bitte testen Sie zuerst Ihr Mikrofon.';
+        const t = $('[data-act="mic-test"]'); if (t) t.focus(); return;
+      }
       b.disabled = true;
       if (b.dataset.module === 'sprechen') {
         if (!$('#kx-consent').checked) { b.disabled = false; $('#kx-consent').focus(); return; }

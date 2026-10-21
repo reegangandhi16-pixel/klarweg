@@ -5,6 +5,7 @@
 export function memoryStore() {
   const m = new Map();
   return {
+    kind: 'memory',
     async get(k) { return m.has(k) ? structuredClone(m.get(k)) : undefined; },
     async set(k, v) { m.set(k, structuredClone(v)); },
     async del(k) { m.delete(k); },
@@ -26,6 +27,7 @@ export async function idbStore(name = 'klarweg-exam') {
       t.oncomplete = () => resolve(req && req.result); t.onerror = () => reject(t.error);
     });
     return {
+      kind: 'indexeddb',
       get: (k) => tx('readonly', (s) => s.get(k)),
       set: (k, v) => tx('readwrite', (s) => s.put(v, k)),
       del: (k) => tx('readwrite', (s) => s.delete(k)),

@@ -156,6 +156,11 @@ async function run(viewport) {
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Hören intro');
     { const intro = await text(); assert.match(intro, /ca\. \d+ Minuten? · 4 Teile · \d+ Aufgaben/); assert.match(intro, /Die Teile erscheinen nacheinander/); }
+    // ENGINE §10: no Hören start before the audio check; then the tone is played and confirmed
+    await click('[data-act="start"][data-module="hoeren"]');
+    await waitFor(`/bestätigen Sie, dass Sie ihn gehört haben/.test(document.querySelector('#kx-tone-msg')?.textContent || '')`, 5000, 'start refused before the audio check');
+    assert.equal(await evaluate(`document.querySelector('[data-act="start"][data-module="hoeren"]') !== null`), true, 'still on the intro');
+    await click('[data-act="tone-play"]'); await waitFor(`/Testton abgespielt/.test(document.querySelector('#kx-tone-msg')?.textContent || '')`, 15000, 'test tone'); await click('#kx-tone-heard');
     await click('[data-act="start"][data-module="hoeren"]');
     await waitFor(`/Sie hören den Text|Lesen Sie die Aufgaben/.test(document.querySelector('#kx-phase')?.textContent || '')`, 30000, 'Hören schedule running');
     // F2: only Teil 1 is in the DOM; future parts' items/text are absent (not merely hidden)
@@ -232,7 +237,10 @@ async function run(viewport) {
     await submitModule();
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`, 15000, 'Sprechen intro');
-    await click('#kx-consent');
+    // ENGINE §10: no Sprechen start before the microphone check; the fake microphone passes it
+    await click('#kx-consent'); await click('[data-act="start"][data-module="sprechen"]');
+    await waitFor(`/Bitte testen Sie zuerst Ihr Mikrofon/.test(document.querySelector('#kx-mic-msg')?.textContent || '')`, 5000, 'start refused before the microphone check');
+    await click('[data-act="mic-test"]'); await waitFor(`/Mikrofon funktioniert/.test(document.querySelector('#kx-mic-msg')?.textContent || '')`, 15000, 'microphone check');
     await click('[data-act="start"][data-module="sprechen"]');
     const TOPIC = 'itm:b1:syn-sp2-topic', PARTNER = 'ast:syn-sp3-partner-talk';
     const topicRadios = `[...document.querySelectorAll('input[type=radio][data-item="${TOPIC}"]')]`;
@@ -633,6 +641,8 @@ async function runPractice() {
     assert.equal(r.status, 200, 'item review after submission'); assert.deepEqual(r.json.summary, { correct: 10, incorrect: 10, unanswered: 10, total: 30 });
 
     // ---- Hören: full real-time plan, then all answers correct ----
+    await a11y('Hören intro with audio check');
+    await click('[data-act="tone-play"]'); await waitFor(`/Testton abgespielt/.test(document.querySelector('#kx-tone-msg')?.textContent || '')`, 15000, 'test tone'); await click('#kx-tone-heard');
     await click('[data-act="start"][data-module="hoeren"]');
     await waitFor(`/Verkürzte Übungszeiten – nicht die Zeiten der Prüfung/.test(document.querySelector('.kx-banner')?.textContent || '')`, 15000, 'practice timing labelled');
     r = await apiFetch('GET', `/attempts/${attempt}/modules/hoeren/review`);
@@ -662,6 +672,8 @@ async function runPractice() {
 
     // ---- Sprechen: consent, preparation, skip to Teil 1 (test server time), record, submit ----
     await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`);
+    await a11y('Sprechen intro with microphone check', { tabs: 6 });
+    await click('[data-act="mic-test"]'); await waitFor(`/Mikrofon funktioniert/.test(document.querySelector('#kx-mic-msg')?.textContent || '')`, 15000, 'microphone check');
     await click('#kx-consent'); await click('[data-act="start"][data-module="sprechen"]');
     await waitFor(`/^Vorbereitung/.test(document.querySelector('#kx-phase')?.textContent || '')`, 30000, 'preparation');
     await a11y('Sprechen preparation', { tabs: 6 });

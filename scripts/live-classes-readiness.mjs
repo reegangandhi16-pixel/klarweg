@@ -146,6 +146,8 @@ export function checkData(D, root = ROOT) {
     const taught = new Set((k.teacherIds || []).flatMap((id) => teacherById[id]?.levels || []));
     if (taught.size) for (const l of k.levels || []) if (!taught.has(l)) err(w, `level ${l} is not taught by its teacher(s) (${[...taught].join(', ')})`);
     if (k.enrolment !== 'not-open' && !has(k.priceLabel)) err(w, `enrolment "${k.enrolment}" needs priceLabel: students must see the fee before they enrol`);
+    // full payment only (owner decision, 2026-10-21): no course offers instalments
+    if (/instal+ment/i.test(String(k.paymentTerms || ''))) err(w, 'paymentTerms mention instalments: live courses are paid in full only');
     if (k.enrolment === 'open') for (const f of ['nextBatch', 'frequency', 'sessionLength', 'totalDuration']) if (!has(k[f])) err(w, `enrolment "open" needs ${f}`);
     if (k.enrolment === 'open' && k.format === 'Group batch' && !has(k.batchSize)) err(w, 'enrolment "open" for a group batch needs batchSize');
   }

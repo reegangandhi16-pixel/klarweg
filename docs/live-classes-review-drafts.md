@@ -31,7 +31,7 @@ All of this was decided by the owner on 2026-10-20 ([decision sheet](live-classe
   - on Google Meet; class notes, PDF worksheets and written homework feedback;
   - prepares for Goethe-Zertifikat A1: Start Deutsch 1, with the exam fee not included;
   - no start date set yet.
-- **Fee:** ₹7,999, paid either before the first class, or in two instalments: ₹4,000 before the start and ₹3,999 before week 7.
+- **Fee:** ₹7,999, paid in full, in one payment, before the first class. There are no instalments (owner decision D10, 2026-10-21).
 - **Consultation:**
   - ₹100 for 20 minutes on Google Meet;
   - paid by UPI after the time is confirmed by email; the joining link follows payment;
@@ -75,7 +75,7 @@ All of this was decided by the owner on 2026-10-20 ([decision sheet](live-classe
 |---|---|---|---|
 | Terms §1 Who we are | Name live classes as part of the service | §2 below | — |
 | Terms §2 The service | Live classes and consultations are separate from self-paced access | §2 below | Q1 |
-| Terms **new §4A** | Course terms, consultations, payment and instalments, missed classes, cancellations and refunds, scheduling, changes, conduct, recordings | §2 below | Q2–Q6, Q10 |
+| Terms **new §4A** | Course terms, consultations, payment, missed classes, cancellations and refunds, scheduling, changes, conduct, recordings | §2 below | Q2–Q6, Q10 |
 | Terms §5 Refunds | Limit the 7-day guarantee to self-paced purchases | §2 below | Q2 |
 | Terms §8, §10 | Price changes and the liability cap ("the course or bundle") as they apply to a live course | not drafted; check only | Q7 |
 | Privacy §1 | Name live classes | §3 below | — |
@@ -93,11 +93,10 @@ Nothing in these drafts claims compliance with any law. These are questions, not
 
 1. **Separate services.** Is it clear enough that a live course and a self-paced purchase are separate, each with its own refund terms?
 2. **Consumer and refund terms.** Are the live-course rules fair and enforceable for consumers in India, and does anything have to be disclosed before payment? The rules are: a full refund up to 48 hours before the start, a refund of the remaining classes during the first two weeks, no refund afterwards, and no refund for a consultation missed without notice. Consider, for example, the Consumer Protection Act 2019 and the Consumer Protection (E-Commerce) Rules 2020, if they apply to this service.
-3. **Refunds for instalment payers.** These are not yet decided. The owner and the accountant should settle the business choice; the reviewer should check that the wording is clear.
-   - How is "the classes still to come" calculated, for example per class at ₹7,999 ÷ 36?
-   - How does that apply to someone who has paid only the first instalment?
-4. **A missed second instalment.** What happens if ₹3,999 is not paid before week 7? This is not decided yet, and the terms need a rule.
-5. **The consultation deduction.** Which payment does the ₹100 reduce: the first instalment, or the full fee? Is it refundable if the learner then cancels the course? Not decided yet.
+3. **Refunds of the classes still to come.** Not yet decided. The owner and the accountant should settle the business choice; the reviewer should check that the wording is clear.
+   - How is "the classes still to come" calculated, for example per class at ₹7,999 ÷ 36? Every learner pays the full fee in one payment (D10).
+4. **A missed second instalment.** No longer applies: instalments were withdrawn on 2026-10-21 (D10), and every course is paid in full before the first class.
+5. **The consultation deduction.** Is the ₹100 deducted from the course fee, and is it refundable if the learner then cancels the course? Not decided yet.
 6. **The minimum batch.** If fewer than 4 learners enrol, is "Klarweg cancels or postpones … we refund everything not yet delivered" enough, or must the 4-learner minimum be stated as a condition before payment?
 7. **The liability cap and price changes.** Do Terms §8 ("pricing may change") and §10 (liability limited to "the course or bundle") work for a fixed-fee live course that has already been paid?
 8. **Privacy notice and consent.** Personal data arrives by email and is handled in Gmail, and possibly on WhatsApp if the learner gives a number and is contacted there. What must the notice contain, is the consent box adequate, and should WhatsApp be named? Consider, for example, the Digital Personal Data Protection Act 2023 and its Rules, if they apply.
@@ -162,11 +161,11 @@ The rest of §1 is unchanged.
 >
 > **Course interest.** Registering interest in a course is free and commits you to nothing.
 >
-> **Payment.** Live-course and consultation fees are paid by UPI or bank transfer, on a payment request we send by email. A course fee is paid in full before the first class or, where the course terms offer it, in instalments (for Beginner German · A1: ₹4,000 before the start and ₹3,999 before week 7). A place in a batch is confirmed only once payment is received. (D3, D7) [OWNER + LEGAL: what happens if the second instalment is not paid before week 7 (Q4), and which payment the consultation deduction reduces (Q5).]
+> **Payment.** Live-course and consultation fees are paid by UPI or bank transfer, on a payment request we send by email. A course fee is paid in full, in one payment, before the first class; there are no instalments. A place in a batch is confirmed only once payment is received. (D3, D7, D10) [OWNER + LEGAL: whether the consultation deduction applies and is refundable (Q5).]
 >
 > **Missed classes.** Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up, and you can bring questions to the next class. One-to-one lessons can be moved free of charge with at least 24 hours' notice. (D5)
 >
-> **Cancellations and refunds.** If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don't suit you, we refund everything not yet delivered. The 7-day guarantee in section 5 covers self-paced purchases only, not live classes or consultations. (D5) [OWNER + LEGAL: how "the classes still to come" is calculated, including for instalment payers (Q3).]
+> **Cancellations and refunds.** If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don't suit you, we refund everything not yet delivered. The 7-day guarantee in section 5 covers self-paced purchases only, not live classes or consultations. (D5) [OWNER + LEGAL: how "the classes still to come" is calculated (Q3).]
 >
 > **Scheduling.** Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. One-to-one lessons are scheduled directly with your teacher. (D5)
 >
@@ -267,7 +266,7 @@ The guarantee itself does not change.
 >
 > I run Klarweg (klarweg.in), a German-language learning site that I operate as an individual. Today it sells self-paced online courses through a Cashfree checkout, with a 7-day money-back guarantee.
 >
-> I plan to add teacher-led live classes, taught by me on Google Meet. The first is a 12-week A1 group course: 4–8 learners, 36 classes, ₹7,999, payable in full or in two instalments. I would also offer a ₹100, 20-minute consultation. Both would be paid by UPI or bank transfer on a payment request I email, not through the website. Requests reach me by email: the website only opens the visitor's own email app with a pre-filled message.
+> I plan to add teacher-led live classes, taught by me on Google Meet. The first is a 12-week A1 group course: 4–8 learners, 36 classes, ₹7,999, paid in full before the start. I would also offer a ₹100, 20-minute consultation. Both would be paid by UPI or bank transfer on a payment request I email, not through the website. Requests reach me by email: the website only opens the visitor's own email app with a pre-filled message.
 >
 > Before launching, I would like you to review:
 > 1. the proposed changes to my Terms of Service, Privacy Policy and Refund Policy (attached, with the current pages);
@@ -285,7 +284,7 @@ The guarantee itself does not change.
 - [ ] The current pages as PDF or links: `terms.html`, `privacy.html`, `refund-policy.html`.
 - [ ] Screenshots of the Live Classes page from a local preview: the course card, the consultation section with "Good to know", the FAQ and the request form with its consent box. The page itself is not public.
 - [ ] The four policy texts and the consultation terms. They are quoted in §2; the source is `live-classes-data.js`.
-- [ ] Your answers, or your preference, on Q3–Q5 (instalment refunds, a missed second instalment, the consultation deduction), so the lawyer can word them.
+- [ ] Your answers, or your preference, on Q3 and Q5 (refunds of the classes still to come, the consultation deduction), so the lawyer can word them. Q4 no longer applies (full payment only, D10).
 - [ ] Your legal status: an individual, any GST registration, and the address you would be willing to publish, if one is required.
 - [ ] Whether you contact learners on WhatsApp, and which bank and UPI app receive payments.
 - [ ] Whether minors may join, and from what age.

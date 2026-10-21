@@ -42,8 +42,8 @@ CONSULT_TEACHERS = ""
 # for online enrolment with the batch being sold, e.g.
 #   {"live-a1":{"batch":"2026-11-02"}}
 # (each must be published with enrolment "open" on the Live Classes page).
-# ENROL_CONSULT_CREDIT: "off" or "first-payment" (whether a confirmed ₹100
-# consultation from the last 7 days reduces the first payment): an owner
+# ENROL_CONSULT_CREDIT: "off" or "course-fee" (whether a confirmed ₹100
+# consultation from the last 7 days reduces the course fee): an owner
 # decision, required before payments are switched on.
 ENROL_PAYMENTS = "off"
 ENROL_COURSES = ""

@@ -40,7 +40,7 @@
         with the same CASHFREE_ENV pairing. ENROL_COURSES may only name
         courses the Worker knows (LIVE_COURSES) that are published with
         enrolment "open" on the Live Classes page, each with a batch date.
-        ENROL_CONSULT_CREDIT must be "off" or "first-payment"; enabling
+        ENROL_CONSULT_CREDIT must be "off" or "course-fee"; enabling
         payments needs it set explicitly (an owner decision).
 
    Usage (from the repo root):
@@ -120,8 +120,8 @@ if (!['off', 'sandbox', 'live'].includes(enrol)) fail(`ENROL_PAYMENTS in wrangle
 if (enrol !== 'off' && allowEnrol !== enrol) fail(`ENROL_PAYMENTS="${enrol}" in wrangler.toml. Enable online course payments deliberately with --allow-enrol-payments=${enrol}.`);
 if (enrol === 'sandbox' && env !== 'sandbox') fail('ENROL_PAYMENTS="sandbox" needs CASHFREE_ENV="sandbox".');
 if (enrol === 'live' && env !== 'production') fail('ENROL_PAYMENTS="live" needs CASHFREE_ENV="production" — never take live course fees through sandbox.');
-if (enrolCredit != null && !['off', 'first-payment'].includes(enrolCredit)) fail(`ENROL_CONSULT_CREDIT is "${enrolCredit}" — must be "off" or "first-payment".`);
-if (enrol !== 'off' && enrolCredit == null) fail('ENROL_PAYMENTS is on but ENROL_CONSULT_CREDIT is not set. Record the owner decision on the ₹100 consultation adjustment ("off" or "first-payment") first.');
+if (enrolCredit != null && !['off', 'course-fee'].includes(enrolCredit)) fail(`ENROL_CONSULT_CREDIT is "${enrolCredit}" — must be "off" or "course-fee".`);
+if (enrol !== 'off' && enrolCredit == null) fail('ENROL_PAYMENTS is on but ENROL_CONSULT_CREDIT is not set. Record the owner decision on the ₹100 consultation adjustment ("off" or "course-fee") first.');
 /* JSON needs a TOML literal string ('…'); read either quoting. Any other
    spelling is refused rather than skipped. */
 const enrolLine = (toml.replace(/#.*$/gm, '').match(/^\s*["']?ENROL_COURSES["']?\s*=\s*(.*)$/m) || [])[1];

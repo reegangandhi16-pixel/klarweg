@@ -1083,10 +1083,10 @@ Never state a pass probability. The learner decides whether and when to book the
 > - **Platform:** Google Meet. Classes are not recorded.
 > - **Materials:** class notes, PDF worksheets, homework with written feedback.
 > - **Exam:** preparation for Goethe-Zertifikat A1: Start Deutsch 1. The exam fee is not included, and you book the exam yourself.
-> - **Fee:** ₹7,999. Pay the full amount before the first class, or in two instalments: ₹4,000 before the start and ₹3,999 before week 7. [If a consultation adjustment applies: apply it as the published terms set out.]
+> - **Fee:** ₹7,999, paid in full before the first class. [If a consultation adjustment applies: apply it as the published terms set out.]
 > - **Policies:** missed classes, cancellations and refunds, scheduling, and what the fee includes are set out in [link to the published terms].
 >
-> To take a place, reply "I'd like to join" and tell me whether you'll pay in full or in instalments. I'll then send a payment request. Your place is confirmed once your payment is received.
+> To take a place, reply "I'd like to join". I'll then send a payment request. Your place is confirmed once your payment is received.
 >
 > Viele Grüße
 > Reegan Gandhi · Klarweg
@@ -1098,8 +1098,8 @@ Never state a pass probability. The learner decides whether and when to book the
 > Hallo [first name],
 >
 > Thank you for choosing to join. To take your place, please pay:
-> - **Amount:** ₹[amount due]. This is [the full fee of ₹7,999 / the first instalment of ₹4,000 / the second instalment of ₹3,999] [less any consultation adjustment that applies under the published terms].
-> - **Due by:** [date: before the first class, or before week 7].
+> - **Amount:** ₹[amount due]. This is the full course fee of ₹7,999 [less any consultation adjustment that applies under the published terms].
+> - **Due by:** [date: before the first class].
 > - **UPI ID:** [Klarweg's UPI ID] — **or bank transfer:** [account name, account number, IFSC]
 > - **Reference:** please write "A1 [batch] [your first name]" in the payment note.
 >
@@ -1116,7 +1116,6 @@ Never state a pass probability. The learner decides whether and when to book the
 >
 > I've received your payment of ₹[amount received] (reference [transaction reference]) on [date]. **Your place in the A1 batch starting [start date] is confirmed.**
 >
-> [If paying in instalments: the second instalment of ₹3,999 is due by [date]. I'll send a reminder.]
 > [Receipt or invoice, as the accountant advises.]
 >
 > I'll send the joining details and a short preparation note a few days before the first class.

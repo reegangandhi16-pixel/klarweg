@@ -44,21 +44,23 @@ test('VALIDATOR: enabling needs owner approval, updated legal text, an open publ
   const a1 = D.courses.find((c) => c.id === 'live-a1');
   Object.assign(a1, { enrolment: 'open', nextBatch: '2 November 2026' });
   assert.match(errorsOf(D), /course live-a1: paymentTerms still describe an emailed payment request/, 'today\'s terms promise an emailed payment request');
-  a1.paymentTerms = '₹7,999 before the first class, or two instalments: ₹4,000 before the start and ₹3,999 before week 7. Paid online through Cashfree.';
+  a1.paymentTerms = '₹7,999 in full before the first class. Paid online through Cashfree.';
   assert.equal(errorsOf(D), '');
+  a1.paymentTerms = '₹7,999 before the first class, or two instalments: ₹4,000 now and ₹3,999 later. Paid online through Cashfree.';
+  assert.match(errorsOf(D), /course live-a1: paymentTerms mention instalments: live courses are paid in full only/);
   D.liveEnrolment = { enabled: 'yes' };
   assert.match(errorsOf(D), /liveEnrolment: must be an object with enabled: true or false/);
 });
 
 /* ================= the browser never sets the price or decides success ================= */
-test('KW-ENROL: sends only course, plan and the amount it was shown; never the gateway amount', () => {
+test('KW-ENROL: sends only the course and the amount it was shown; never a plan or the gateway amount', () => {
   const js = code(read('kw-enrol.js'));
   const bodies = js.match(/body: \{[^}]*\}/g);
   assert.deepEqual(bodies, [
-    'body: { course_id: q.courseId, plan: q.plan, expected_amount_paise: q.dueNowPaise }',
-    'body: {}',
-    'body: { course_id: e.courseId, plan: e.plan }'
+    'body: { course_id: q.courseId, expected_amount_paise: q.dueNowPaise }',
+    'body: { course_id: e.courseId }'
   ]);
+  assert.equal(/plan|instal|\/pay'|parts|dueBefore/i.test(js), false, 'full payment only: no plan, instalment or second-payment code');
   assert.match(js, /expected_amount_paise: q\.dueNowPaise/, 'the expected amount comes from the Worker\'s quote');
   assert.equal(/order_amount|amount_paise\s*:|amount\s*:/.test(js.replace('expected_amount_paise: q.dueNowPaise', '')), false);
   assert.equal(/order_status|payment_status|\bPAID\b|SUCCESS/.test(js), false, 'never reads the gateway status itself');
@@ -73,10 +75,11 @@ test('KW-ENROL: sends only course, plan and the amount it was shown; never the g
 test('KW-ENROL: every outcome has a screen — enrolled, pending with Continue payment, review, not completed, cancelled', () => {
   const js = read('kw-enrol.js');
   for (const s of ['You are enrolled', 'Payment not completed yet', 'Your payment is being checked', 'This enrolment was not completed', 'This enrolment was cancelled',
-    'Continue payment', 'Check again', 'Pay second instalment', 'Start again', 'If the payment failed or you cancelled it, nothing was charged']) {
+    'Continue payment', 'Check again', 'Start again', 'Nothing more is due', 'If the payment failed or you cancelled it, nothing was charged']) {
     assert.ok(js.includes(s), `has "${s}"`);
   }
-  assert.match(js, /'<div class="kwen-due"><dt>Due now<\/dt><dd>' \+ rupees\(s\.amountPaise\)/, 'the amount due now is shown before payment');
+  assert.equal(js.includes('Pay second instalment'), false);
+  assert.match(js, /'<div class="kwen-due"><dt>Due now, in full<\/dt><dd>' \+ rupees\(q\.dueNowPaise\)/, 'the full amount due is shown before payment');
   assert.match(js, /id="kwen-pay" disabled>Pay ' \+ rupees\(q\.dueNowPaise\)/, 'the pay button names the exact amount and waits for the terms box');
   assert.match(js, /TEST MODE · no real payment/);
 });
@@ -85,6 +88,24 @@ test('KW-LIVE: an open course gets "Enrol and pay online" only when enrolment is
   const live = read('kw-live.js');
   assert.match(live, /ENROL_ON && c\.enrolment === 'open' && !c\.draft\s*\n/);
   assert.match(live, /data-enrol-course="' \+ esc\(c\.id\) \+ '">Enrol and pay online/);
+});
+
+/* ================= teacher prices: unchanged, display only ================= */
+test('PRICES: every listed teacher\'s A1 price is exactly the approved one, and none of them is sold except through a configured course', async () => {
+  const D = loadData();
+  assert.deepEqual({ ...D.coursePricing.teachers }, {
+    'reegan-gandhi': '₹7,999', 'geetika-dhawan': '₹7,999', 'priyanshi-verma': '₹15,000', 'sunidhi-jain': '₹14,000',
+    'mansi-kapoor': '₹13,000', 'gaurav-singhal': '₹12,000', 'kanika-taneja': '₹14,000', 'trisha-khanna': '₹13,000',
+    'rashi-gupta': '₹12,000', 'deepika-agarwal': '₹13,000', 'sahil-arora': '₹15,000'
+  });
+  const shown = [...D.teachers.filter((t) => !t.draft).map((t) => t.id)].sort();
+  assert.deepEqual([...Object.keys(D.coursePricing.teachers)].sort(), shown, 'one price per published teacher, no more, no fewer');
+  const { LIVE_COURSES } = await import('../access/worker/src/enrolments.js');
+  assert.deepEqual(Object.keys(LIVE_COURSES), ['live-a1'], 'the Worker sells only the configured A1 course');
+  assert.equal(LIVE_COURSES['live-a1'].feePaise, 799900);
+  const a1 = D.courses.find((c) => c.id === 'live-a1');
+  assert.deepEqual([...a1.teacherIds], ['reegan-gandhi']);
+  assert.equal('₹' + (LIVE_COURSES['live-a1'].feePaise / 100).toLocaleString('en-IN'), D.coursePricing.teachers['reegan-gandhi'], 'the A1 fee equals its teacher\'s displayed price');
 });
 
 /* ================= demo booking: email is not the booking mechanism ================= */
@@ -143,7 +164,7 @@ test('GUARD: payments on need the explicit flag, the matching Cashfree environme
   assert.match(guard({ toml: set('ENROL_PAYMENTS', '"live"'), flags: ['--allow-enrol-payments=live'] }), /ENROL_PAYMENTS="live" needs CASHFREE_ENV="production"/);
   assert.match(guard({ toml: set('ENROL_PAYMENTS', '"sandbox"'), flags: ['--allow-enrol-payments=sandbox'] }), /ENROL_CONSULT_CREDIT is not set/);
   const on = set('ENROL_PAYMENTS', '"sandbox"') + '\nENROL_CONSULT_CREDIT = "sometimes"\n';
-  assert.match(guard({ toml: on, flags: ['--allow-enrol-payments=sandbox'] }), /must be "off" or "first-payment"/);
+  assert.match(guard({ toml: on, flags: ['--allow-enrol-payments=sandbox'] }), /must be "off" or "course-fee"/);
   const ok = set('ENROL_PAYMENTS', '"sandbox"') + '\nENROL_CONSULT_CREDIT = "off"\n';
   assert.match(guard({ toml: ok, flags: ['--allow-enrol-payments=sandbox'] }), /could not read the live Worker/);
 });

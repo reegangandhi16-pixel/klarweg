@@ -5,6 +5,9 @@
 -- consult_bookings, and an enrolment payment never calls grantProduct().
 -- Additive: no existing table is touched.
 --
+-- Full payment only (owner decision, 2026-10-21): an enrolment is paid by
+-- one payment of the whole course fee. There are no instalments.
+--
 -- live_enrolments  one row per enrolment attempt in one course batch.
 --                  A seat is held by a row whose status is pending (while the
 --                  learner pays) or enrolled. The Worker inserts a pending row
@@ -13,15 +16,15 @@
 --                  seat), and a learner holds at most one active row per
 --                  course batch (partial unique index below).
 -- live_payments    one row per Cashfree order (id = Cashfree order id,
---                  "enrp_…"). part 1 = the first (or only) payment, part 2 =
---                  the second instalment. At most one pending or paid row per
---                  enrolment part, so a part cannot be charged twice.
+--                  "enrp_…") for an enrolment's course fee. A retry after an
+--                  order lapses opens a new row; at most one pending or paid
+--                  row per enrolment, so the fee cannot be charged twice.
 --
 -- live_enrolments.status:
---   pending   seat held while part 1 is paid (until hold_expires_at)
---   enrolled  part 1 verified with Cashfree's API; seat taken
---   expired   hold ran out before part 1 was paid
---   released  the learner started a different plan instead
+--   pending   seat held while the fee is paid (until hold_expires_at)
+--   enrolled  the fee verified with Cashfree's API; seat taken
+--   expired   hold ran out before the fee was paid
+--   released  replaced by a new attempt after its order lapsed
 --   failed    the gateway order could not be created
 --   review    paid but not confirmable (late payment with no seat left, or a
 --             second active enrolment): a person checks it and refunds
@@ -39,7 +42,6 @@ CREATE TABLE IF NOT EXISTS live_enrolments (
   user_id            TEXT NOT NULL,
   course_id          TEXT NOT NULL,                    -- e.g. live-a1
   batch              TEXT NOT NULL,                    -- batch start date, YYYY-MM-DD (IST)
-  plan               TEXT NOT NULL CHECK (plan IN ('full', 'instalments')),
   status             TEXT NOT NULL CHECK (status IN ('pending','enrolled','expired','released','failed','review','cancelled')),
   total_paise        INTEGER NOT NULL CHECK (total_paise > 0),
   credit_paise       INTEGER NOT NULL DEFAULT 0 CHECK (credit_paise >= 0),
@@ -64,7 +66,6 @@ CREATE INDEX IF NOT EXISTS live_enrolments_user_idx ON live_enrolments (user_id,
 CREATE TABLE IF NOT EXISTS live_payments (
   id                 TEXT PRIMARY KEY,                 -- enrp_<uuid>; also the Cashfree order id
   enrolment_id       TEXT NOT NULL,
-  part               INTEGER NOT NULL CHECK (part IN (1, 2)),
   amount_paise       INTEGER NOT NULL CHECK (amount_paise > 0),
   currency           TEXT NOT NULL DEFAULT 'INR' CHECK (currency = 'INR'),
   status             TEXT NOT NULL CHECK (status IN ('pending','paid','expired','failed','review','refunded')),
@@ -76,8 +77,8 @@ CREATE TABLE IF NOT EXISTS live_payments (
   updated_at         INTEGER NOT NULL
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS live_payments_one_open_per_part
-  ON live_payments (enrolment_id, part)
+CREATE UNIQUE INDEX IF NOT EXISTS live_payments_one_open_per_enrolment
+  ON live_payments (enrolment_id)
   WHERE status IN ('pending', 'paid');
 
 CREATE INDEX IF NOT EXISTS live_payments_enrolment_idx ON live_payments (enrolment_id);

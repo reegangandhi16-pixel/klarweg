@@ -23,15 +23,13 @@ Related: [`live-classes-consultation-booking.md`](live-classes-consultation-book
 ### Full course payment (`kw-enrol.js`, `/enrol/*`, `enrp_…` orders)
 
 1. The course card shows the fee (₹7,999 for Beginner German · A1) and an **Enrol and pay online** button.
-2. The learner chooses the course and a plan. Both come from the Worker:
-   - **Full payment**: ₹7,999.
-   - **Two instalments**: ₹4,000 now and ₹3,999 before week 7. For a batch starting Mon 2 Nov 2026, that is before Mon 14 Dec 2026.
+2. The learner chooses the course; the list and the fee come from the Worker. The fee is paid **in full, in one payment** (₹7,999 for A1). There are no instalments (owner decision D10): the Worker refuses any other plan with `400 bad-plan` and has no route for a second payment.
 
-   The Worker's catalogue (`LIVE_COURSES` in `access/worker/src/enrolments.js`) is a copy of the published fee and payment terms. A test fails if the two differ. The instalments add up exactly to the full fee, so there is no surcharge and no discount.
-3. After sign-in and a phone number, the page shows the server's quote: course fee, **due now**, and the later instalment. The learner ticks that they have read the course details, the cancellation and refund terms, and the Terms, then pays.
+   The Worker's catalogue (`LIVE_COURSES` in `access/worker/src/enrolments.js`) is a copy of the published fee. A test fails if the two differ. The Worker charges only for a course in that catalogue that is also open in `ENROL_COURSES` with a batch date; the per-teacher prices in `coursePricing` are display prices and sell nothing by themselves.
+3. After sign-in and a phone number, the page shows the server's quote: course fee, any consultation adjustment, and **due now, in full**. The learner ticks that they have read the course details, the cancellation and refund terms, and the Terms, then pays.
 4. The Worker holds a place for 30 minutes and creates the Cashfree order. The batch has 8 places; the last place goes to exactly one learner.
 5. The learner returns to `live-classes.html?enrol_ref=KWE-…#enrol`. The page shows the Worker's verified status:
-   - **You are enrolled**: reference, amount paid, any instalment due, with a **Pay second instalment** button;
+   - **You are enrolled**: reference and amount paid in full; nothing more is due;
    - **Payment not completed yet**, with **Continue payment**;
    - **Being checked**;
    - **Not completed**.
@@ -46,8 +44,8 @@ A live-course payment never grants self-paced access. It never calls `grantProdu
 | Amount built on the server | The Worker computes every amount from `LIVE_COURSES` and `FEE_PAISE`. Any amount the browser sends is ignored. The browser sends only `expected_amount_paise` (the amount it showed); a mismatch is refused with `409 amount-changed` and a fresh quote, before any order is created. |
 | Confirm only after verified payment | A booking or enrolment is confirmed only when Cashfree's **Get Order API** reports `PAID` for exactly the order's amount in INR. The return redirect and the webhook body are treated as hints only. |
 | Signed webhooks | HMAC-SHA256 over `timestamp + raw body`, compared in constant time, with a 5-minute replay window. A bad or stale signature gets `401` and nothing is read. |
-| Duplicate webhooks, refresh, retry, back | The same course and plan, or the same slot, resumes the **same** Cashfree order (`x-idempotency-key` = order id). A paid payment is never applied twice. Partial unique indexes allow one open or paid payment per enrolment part and one active enrolment per learner and batch. |
-| Duplicate charge | If a second order for the same part is paid, it is recorded as `review` / `duplicate-payment-for-part` for a refund. It is never counted towards the fee. |
+| Duplicate webhooks, refresh, retry, back | The same course, or the same slot, resumes the **same** Cashfree order (`x-idempotency-key` = order id). If that order has lapsed while the place is still held, the old attempt is released and a new order is opened for the same seat. A paid payment is never applied twice. Partial unique indexes allow one open or paid payment per enrolment and one active enrolment per learner and batch. |
+| Duplicate charge | If a second order for the same enrolment is paid, it is recorded as `review` / `duplicate-payment` for a refund (an old order paid after the learner re-enrolled is `late-payment-already-enrolled`). It is never counted towards the fee. |
 | Failed, cancelled, expired | Failure and drop webhooks change nothing; the order stays retryable until it expires. An expired hold releases the place. |
 | Late payment | A payment that arrives after the hold lapsed takes a free place if one exists. If the batch filled or started, it goes to `review` for a refund. |
 | Amount or currency mismatch | The payment goes to `review` and is never counted. |
@@ -64,14 +62,14 @@ A live-course payment never grants self-paced access. It never calls `grantProdu
 | `wrangler.toml` | `CONSULT_BOOKING` | `"off"` |
 | `wrangler.toml` | `ENROL_PAYMENTS` | `"off"` |
 | `wrangler.toml` | `ENROL_COURSES` | `""`, e.g. `'{"live-a1":{"batch":"2026-11-02"}}'`. The guard checks that the course is sold by the Worker, published as `open`, and has a date. |
-| `wrangler.toml` | `ENROL_CONSULT_CREDIT` | not set. It must be set (`"off"` or `"first-payment"`) before payments go on; see decision P1. |
+| `wrangler.toml` | `ENROL_CONSULT_CREDIT` | not set. It must be set (`"off"` or `"course-fee"`) before payments go on; see decision P1. |
 | `wrangler.toml` | `CASHFREE_ENV` | `"sandbox"` (TEST app id) |
 
 ## 4. Owner decisions needed
 
 - [ ] **P1 · The ₹100 consultation and the course fee.**
-  - D4 says the fee "is deducted from a live course fee if the learner enrols within 7 days". It does not say which payment it reduces, or whether it is refundable after a cancellation (pending item Q5).
-  - Built: `ENROL_CONSULT_CREDIT = "first-payment"` takes ₹100 off the first payment, for a confirmed consultation dated within the last 7 days. Each consultation can be used once. The page shows this as a line in the quote.
+  - D4 says the fee "is deducted from a live course fee if the learner enrols within 7 days". It does not say whether it is refundable after a cancellation (pending item Q5).
+  - Built: `ENROL_CONSULT_CREDIT = "course-fee"` takes ₹100 off the course fee, for a confirmed consultation dated within the last 7 days. Each consultation can be used once. The page shows this as a line in the quote.
   - Default `"off"`: no deduction. The guard refuses to turn on payments until one of the two is chosen.
 - [ ] **P2 · Supersede D7 for live-a1.** D7 says the first batch is paid by manual UPI or bank transfer on an emailed request. Online payment needs D7 replaced.
   - The technical reason behind D7 is solved: live fees no longer go through `grantProduct()`.
@@ -82,9 +80,7 @@ A live-course payment never grants self-paced access. It never calls `grantProdu
   - rewritten `paymentTerms`;
   - the homepage FAQ and Terms §4A updated. The readiness check flags them.
 - [ ] **P5 · Legal text.** Terms, Privacy (payment data, Cashfree as processor) and the Refund Policy for online live-course payments; lawyer review recommended. Terms §4A and Privacy §4A were **not** changed in this work.
-- [ ] **P6 · Business rules still open** (decision sheet, part B):
-  - the refund of "classes still to come" for instalment payers;
-  - what happens if instalment 2 is not paid before week 7. The Worker does not cancel automatically; it shows the instalment as due.
+- [x] **P6 · Instalment rules.** Settled by D10 (2026-10-21): full payment only, so there is no instalment refund rule and no missed second instalment. The refund of "classes still to come" remains part of the legal review (P5).
 - [ ] **P7 · Courses for the other teachers.** D9 shows per-teacher A1 prices, but no course record (schedule, batch, capacity) exists for them. Nothing is sold for them, and the Worker sells only `live-a1`. Each new course needs its details from the owner, then an entry in both files.
 - [ ] **P8 · Receipts / GST / record retention** for online payments (accountant).
 
@@ -101,12 +97,12 @@ crons = ["*/15 * * * *"]
 
 ```sql
 -- anything needing a person (refund or manual confirmation)
-SELECT e.ref, e.status, e.review_reason, p.id AS order_id, p.part, p.amount_paise, p.status AS pay_status, p.review_reason AS pay_reason
+SELECT e.ref, e.status, e.review_reason, p.id AS order_id, p.amount_paise, p.status AS pay_status, p.review_reason AS pay_reason
 FROM live_enrolments e JOIN live_payments p ON p.enrolment_id = e.id
 WHERE e.status = 'review' OR p.status = 'review';
 SELECT ref, status, review_reason, cashfree_order_id, amount_paise FROM consult_bookings WHERE status = 'review';
 -- enrolled learners and what they have paid
-SELECT e.ref, e.course_id, e.batch, e.plan, SUM(CASE WHEN p.status='paid' THEN p.amount_paise END) AS paid_paise
+SELECT e.ref, e.course_id, e.batch, SUM(CASE WHEN p.status='paid' THEN p.amount_paise END) AS paid_paise
 FROM live_enrolments e LEFT JOIN live_payments p ON p.enrolment_id = e.id WHERE e.status = 'enrolled' GROUP BY e.id;
 ```
 
@@ -175,7 +171,7 @@ A learner's status screen also re-checks an order with Cashfree every time it is
   - amount mismatch;
   - capacity and the last-place race;
   - late payment;
-  - instalments and a duplicate charge;
+  - instalments refused (`bad-plan`), a lapsed order replaced, and a duplicate charge;
   - ownership;
   - the consultation adjustment;
   - separation from self-paced access;

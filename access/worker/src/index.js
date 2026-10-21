@@ -3,7 +3,7 @@ import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, m
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
 import { consultAvailability, createConsultBooking, getConsultBooking, getConsultJoin, listConsultBookings, reconcileRecentConsultBookings } from "./consultations.js";
-import { enrolCatalog, enrolQuote, createEnrolCheckout, getEnrolment, listEnrolments, payNextPart, reconcileRecentPayments } from "./enrolments.js";
+import { enrolCatalog, enrolQuote, createEnrolCheckout, getEnrolment, listEnrolments, reconcileRecentPayments } from "./enrolments.js";
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
@@ -129,10 +129,6 @@ async function route(request, env, ctx) {
     }
     if (request.method === "GET" && url.pathname === "/enrol/enrolments") {
       return withCors(await listEnrolments(request, env), request);
-    }
-    const enrolPayMatch = url.pathname.match(/^\/enrol\/enrolments\/(KWE-[2-9A-HJ-NP-Z]{8})\/pay$/);
-    if (request.method === "POST" && enrolPayMatch) {
-      return withCors(await payNextPart(request, env, enrolPayMatch[1]), request);
     }
     const enrolMatch = url.pathname.match(/^\/enrol\/enrolments\/(KWE-[2-9A-HJ-NP-Z]{8})$/);
     if (request.method === "GET" && enrolMatch) {

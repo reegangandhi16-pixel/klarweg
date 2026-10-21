@@ -62,24 +62,20 @@ A live-course payment never grants self-paced access. It never calls `grantProdu
 | `wrangler.toml` | `CONSULT_BOOKING` | `"off"` |
 | `wrangler.toml` | `ENROL_PAYMENTS` | `"off"` |
 | `wrangler.toml` | `ENROL_COURSES` | `""`, e.g. `'{"live-a1":{"batch":"2026-11-02"}}'`. The guard checks that the course is sold by the Worker, published as `open`, and has a date. |
-| `wrangler.toml` | `ENROL_CONSULT_CREDIT` | not set. It must be set (`"off"` or `"course-fee"`) before payments go on; see decision P1. |
+| `wrangler.toml` | `ENROL_CONSULT_CREDIT` | `"course-fee"` (owner decision D11, P1). It changes nothing while `ENROL_PAYMENTS` is off. |
 | `wrangler.toml` | `CASHFREE_ENV` | `"sandbox"` (TEST app id) |
 
 ## 4. Owner decisions needed
 
-- [ ] **P1 · The ₹100 consultation and the course fee.**
-  - D4 says the fee "is deducted from a live course fee if the learner enrols within 7 days". It does not say whether it is refundable after a cancellation (pending item Q5).
-  - Built: `ENROL_CONSULT_CREDIT = "course-fee"` takes ₹100 off the course fee, for a confirmed consultation dated within the last 7 days. Each consultation can be used once. The page shows this as a line in the quote.
-  - Default `"off"`: no deduction. The guard refuses to turn on payments until one of the two is chosen.
-- [ ] **P2 · Supersede D7 for live-a1.** D7 says the first batch is paid by manual UPI or bank transfer on an emailed request. Online payment needs D7 replaced.
-  - The technical reason behind D7 is solved: live fees no longer go through `grantProduct()`.
-- [ ] **P3 · Supersede D4's payment line for consultations** ("by UPI, after the time is confirmed by email"). This is D-C1 in the booking doc.
+- [x] **P1 · The ₹100 consultation and the course fee.** Settled by D11 (2026-10-21): `ENROL_CONSULT_CREDIT = "course-fee"` takes ₹100 off the course fee, for a confirmed consultation dated within the last 7 days, as approved in D4. Each consultation can be used once. The page shows this as a line in the quote. Still open: whether the credit is refunded after a cancellation (pending item Q5).
+- [x] **P2 · Supersede D7 for live-a1.** Settled by D11: online payment only; no manual UPI, bank transfer or emailed payment request.
+- [x] **P3 · Supersede D4's payment line for consultations.** Settled by D11: consultations are booked and paid online only. While booking is off, the page says "Online demo booking is not open yet" and offers only the free waitlist.
 - [ ] **P4 · Open the course.** Requires:
   - a real start date (`nextBatch` and `ENROL_COURSES` batch);
   - `enrolment: 'open'`;
-  - rewritten `paymentTerms`;
+  - `paymentTerms` without "once enrolment opens" (today: "₹7,999 in full, in one payment, before the first class. Paid online on this page once enrolment opens.");
   - the homepage FAQ and Terms §4A updated. The readiness check flags them.
-- [ ] **P5 · Legal text.** Terms, Privacy (payment data, Cashfree as processor) and the Refund Policy for online live-course payments; lawyer review recommended. Terms §4A and Privacy §4A were **not** changed in this work.
+- [ ] **P5 · Legal text.** Terms §4A and Privacy §2/§4/§4A/§8/§9 were rewritten on 2026-10-21 for online-only payment (D11), with "not open yet" wording while the switches are off. The owner reviews that wording before the PR is merged; then `legalTermsUpdated` can be set. The self-paced Refund Policy is unchanged. A lawyer review is still recommended.
 - [x] **P6 · Instalment rules.** Settled by D10 (2026-10-21): full payment only, so there is no instalment refund rule and no missed second instalment. The refund of "classes still to come" remains part of the legal review (P5).
 - [ ] **P7 · Courses for the other teachers.** D9 shows per-teacher A1 prices, but no course record (schedule, batch, capacity) exists for them. Nothing is sold for them, and the Worker sells only `live-a1`. Each new course needs its details from the owner, then an entry in both files.
 - [ ] **P8 · Receipts / GST / record retention** for online payments (accountant).
@@ -128,7 +124,7 @@ A learner's status screen also re-checks an order with Cashfree every time it is
 
 ## 6. Production setup checklist (not done; each needs the owner)
 
-1. Decisions P1–P6 recorded. Legal PR merged.
+1. Decisions P1–P6 recorded (P1–P3 and P6 done). Legal PR reviewed by the owner and merged; `legalTermsUpdated` set in both switches' records.
 2. **Sandbox verification with real Cashfree sandbox credentials** on the non-production Worker (`wrangler.nonprod.toml`, TEST app id and secret):
    - Create Order accepts `order_expiry_time` in `+05:30` form and returns it;
    - a 16-minute (consultation) and 26-minute (course) expiry are accepted;

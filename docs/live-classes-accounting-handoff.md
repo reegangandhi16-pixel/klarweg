@@ -1,6 +1,6 @@
 # Live Classes — accountant handoff
 
-**Status: awaiting an accountant's advice.** Nothing here is tax or accounting advice. Part 1 lists facts. Part 2 lists questions only the accountant can answer. Part 3 is a working register and procedure for the owner to adjust once those answers are in. The Live Classes page is public as a **waitlist** (D8, 2026-10-20): course enrolment is not open and no course fee is accepted until it is.
+**Status: awaiting an accountant's advice.** Updated 2026-10-21 for owner decision D11: live-course and consultation fees are paid **online through Cashfree only**, never by manual UPI, bank transfer or emailed payment request. Nothing here is tax or accounting advice. Part 1 lists facts. Part 2 lists questions only the accountant can answer. Part 3 is a working register and procedure for the owner to adjust once those answers are in. The Live Classes page is public as a **waitlist** (D8, 2026-10-20): course enrolment is not open and no course fee is accepted until it is.
 
 ## 1. Facts
 
@@ -10,11 +10,11 @@ These were decided by the owner on 2026-10-20; see [the decision sheet](live-cla
 - **Existing income:** self-paced courses are already sold through Cashfree. Each order is recorded with its amount, status and Cashfree reference, and refunds are made by hand within 7 days.
 - **New income (not started):**
   - **A1 group course:** ₹7,999 per learner, for 4–8 learners per batch and 12 weeks. Paid in full, in one payment, before the first class. There are no instalments (owner decision D10, 2026-10-21).
-  - **Consultation:** ₹100 for 20 minutes. If the learner enrols in a course within 7 days, the ₹100 is deducted from the course fee.
+  - **Consultation:** ₹100 for 20 minutes. If the learner enrols in a course within 7 days, the ₹100 is deducted from the course fee (recorded on the enrolment as a credit).
 - **How the money arrives:**
-  - by UPI or bank transfer, on a payment request the owner emails;
-  - not through Cashfree or the website;
-  - the owner confirms each payment by hand.
+  - online through Cashfree on the Live Classes page (D11), the same gateway as the self-paced sales, under separate order prefixes (`cons_` consultations, `enrp_` course fees);
+  - each booking or place is confirmed automatically only after the Worker verifies the payment with Cashfree, and is recorded with its amount, status and Cashfree references;
+  - refunds are made by hand in the Cashfree dashboard.
 - **Refunds:**
   - a full refund up to 48 hours before the first class;
   - a refund of "the classes still to come" during the first two weeks;
@@ -34,15 +34,14 @@ These were decided by the owner on 2026-10-20; see [the decision sheet](live-cla
 3. Are live-class fees and consultation fees taxable supplies for GST?
    - Do the registration rules apply to Klarweg's combined income: self-paced sales plus live classes?
    - Does any exemption apply to this kind of coaching?
-4. If GST applies, is ₹7,999 tax-inclusive, and what must the payment request and invoice show? Learners outside India may join online; does that change anything?
+4. If GST applies, is ₹7,999 tax-inclusive, and what must the checkout page and invoice show? Learners outside India may join online; does that change anything?
 5. How should this income be reported for income tax? Should it be combined with the self-paced Cashfree income, or kept as a separate line?
 
 **Records and retention**
 
-6. For each UPI or bank payment, what records should be kept? For example:
-   - the bank statement line;
-   - the UPI transaction reference;
-   - the payment-request email;
+6. For each online payment, what records should be kept? For example:
+   - the Cashfree order and payment references and the settlement report;
+   - the booking or enrolment record (reference, amount, any ₹100 credit);
    - the receipt.
 7. How long must payment and accounting records be kept? This period will go into the Privacy Policy, so it needs a source.
 
@@ -52,7 +51,7 @@ These were decided by the owner on 2026-10-20; see [the decision sheet](live-cla
 9. How should the ₹100 consultation deduction be recorded when the learner later enrols?
 10. How should a partial refund in the first two weeks be calculated and booked? One option is per class, at ₹7,999 ÷ 36. The owner and the lawyer still have to settle the rule; you advise on recording it.
 
-## 3. Manual payment register and reconciliation (draft)
+## 3. Payment register and reconciliation (draft)
 
 A spreadsheet the owner can keep, with one row per payment or refund. Adjust the columns once questions 1–10 are answered.
 
@@ -60,30 +59,29 @@ The example column is **illustrative only**: it is not a real learner or payment
 
 | Column | Illustrative example (not a real payment) |
 |---|---|
-| Date received | [enter the date the money shows on the statement] |
+| Date received | [the date Cashfree reports the payment] |
 | Learner name · email | A. Learner · a@example.com |
 | Batch | A1 · [start date, once approved] |
 | Item | Consultation · Course fee · Refund (here: Course fee) |
 | Amount due (₹) | 7,999 |
 | Amount received (₹) | 7,999 (negative for a refund) |
-| Method | UPI · Bank transfer |
-| UPI / bank reference | the transaction ID from the bank statement |
-| Consultation adjustment (₹) | [blank until the accountant and owner decide whether and how it applies] |
+| Method | Cashfree (online) |
+| Cashfree order / payment reference | e.g. `enrp_…` and the Cashfree payment ID |
+| Consultation adjustment (₹) | 100 when the enrolment used a consultation credit (D11), otherwise 0 |
 | Receipt / invoice no. | per the accountant's numbering |
 | Balance outstanding (₹) | 0 (the course fee is paid in full) |
-| Place confirmed by email (date) | [enter the actual confirmation date] |
+| Place confirmed (date) | the date the Worker marked the enrolment `enrolled` |
 | Notes | |
 
 **Procedure:**
-1. **Payment request.** Email it with the amount, what it is for and the due date. Note "due" in the register.
-2. **Payment received.** Match the bank or UPI statement line to the learner by amount and reference, and record the reference.
-   - Confirm the place by email only after the money shows on the statement, not on a screenshot.
+1. **Payment received.** Copy each paid consultation booking and enrolment from the Worker's records (§5 of the online-payments guide) with its Cashfree references. There is no payment request to send: the learner pays on the page.
+2. **Check anything in review.** Rows marked `review` (paid but not confirmed, or a duplicate charge) need a refund or a manual decision.
 3. **Receipt or invoice.** Issue one as the accountant advises, and note its number.
-4. **Weekly.** Compare the register's total received with the bank statement for the week, and list unpaid or unmatched items.
-5. **Refunds.** Pay back to the original UPI or bank account, record a negative row with its reference, and issue the document the accountant advises.
-6. **Month end.** Export the bank statement, keep it with the register, and store both as the accountant advises (question 7).
+4. **Weekly.** Compare the register's total with the Cashfree settlement report for the week, and list unmatched items.
+5. **Refunds.** Refund in the Cashfree dashboard, record a negative row with its reference, and issue the document the accountant advises.
+6. **Month end.** Export the Cashfree settlement report, keep it with the register, and store both as the accountant advises (question 7).
 
-Never record full bank account numbers or UPI PINs in the register. A transaction reference is enough.
+Never record card numbers, bank account numbers or UPI PINs in the register; Klarweg never receives them. A Cashfree reference is enough.
 
 ## 4. Sending this to an accountant
 
@@ -95,7 +93,7 @@ Never record full bank account numbers or UPI PINs in the register. A transactio
 >
 > I run Klarweg (klarweg.in) as an individual. It currently sells self-paced German courses online through Cashfree.
 >
-> I plan to add live online German classes that I teach myself. The first is a 12-week A1 group course at ₹7,999 per learner, paid in full before the start. There would also be a ₹100 consultation, which is deducted from the course fee if the learner enrols within 7 days. Learners would pay by UPI or bank transfer on a payment request I email; I confirm payments by hand. There are partial refunds in the first two weeks.
+> I plan to add live online German classes that I teach myself. The first is a 12-week A1 group course at ₹7,999 per learner, paid in full before the start. There would also be a ₹100 consultation, which is deducted from the course fee if the learner enrols within 7 days. Learners would pay online through Cashfree, the same gateway I use for the self-paced courses; bookings are confirmed automatically once the payment is verified. There are partial refunds in the first two weeks.
 >
 > Before launching, I would like your advice on:
 > - receipts and invoices;
@@ -115,6 +113,6 @@ Never record full bank account numbers or UPI PINs in the register. A transactio
 - [ ] This document (parts 1–3).
 - [ ] Last financial year's income from self-paced sales: a Cashfree settlement report or bank statements.
 - [ ] Any existing GST registration, PAN-based business details, or your current tax-filing approach.
-- [ ] The bank account and UPI ID that would receive live-class payments.
+- [ ] The Cashfree account and the bank account it settles to.
 - [ ] The current `refund-policy.html` (the self-paced refund guarantee) and the live-course refund rules (part 1).
 - [ ] Whether you expect learners outside India.

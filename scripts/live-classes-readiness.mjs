@@ -71,6 +71,8 @@ export function checkData(D, root = ROOT) {
   // confirmed terms are complete terms: length, platform and the cancellation rule are part of them
   if (c.termsConfirmed === true) for (const f of ['durationMinutes', 'platform', 'cancellation']) if (!has(c[f])) err(`consultation.${f}`, 'missing although termsConfirmed is true');
   if (!Array.isArray(c.steps) || !c.steps.length) err('consultation.steps', 'missing');
+  // booked and paid online only (owner decision D11, 2026-10-21): never by email or manual UPI
+  else if (c.steps.some((x) => /\bemail|\bUPI\b|bank transfer/i.test(String(x)))) err('consultation.steps', 'describe booking or paying by email or manual UPI: consultations are booked and paid online only');
   for (const k of POLICIES) if (!(k in (D.policies || {}))) err(`policies.${k}`, 'key missing (use null while unpublished)');
   // online booking with payment is an owner decision with legal consequences: never on by default
   const ob = c.onlineBooking;
@@ -78,7 +80,7 @@ export function checkData(D, root = ROOT) {
   else if (ob.enabled) {
     if (c.termsConfirmed !== true) err('consultation.onlineBooking', 'enabled needs confirmed consultation terms');
     if (!has(ob.ownerApproval)) err('consultation.onlineBooking', 'enabled needs ownerApproval (how and when the owner approved online booking)');
-    if (ob.legalTermsUpdated !== true) err('consultation.onlineBooking', 'enabled needs legalTermsUpdated: Terms §4A, Privacy §4A and the page copy still describe email + UPI only');
+    if (ob.legalTermsUpdated !== true) err('consultation.onlineBooking', 'enabled needs legalTermsUpdated: the owner must approve Terms §4A, Privacy §4A and the page copy for online booking');
     if (ob.joinLinksConfigured !== true) err('consultation.onlineBooking', 'enabled needs joinLinksConfigured: the CONSULT_JOIN_LINKS Worker secret must hold each bookable teacher\'s Google Meet link');
   }
   // online course payments: an owner decision with legal consequences, never on by default
@@ -148,6 +150,8 @@ export function checkData(D, root = ROOT) {
     if (k.enrolment !== 'not-open' && !has(k.priceLabel)) err(w, `enrolment "${k.enrolment}" needs priceLabel: students must see the fee before they enrol`);
     // full payment only (owner decision, 2026-10-21): no course offers instalments
     if (/instal+ment/i.test(String(k.paymentTerms || ''))) err(w, 'paymentTerms mention instalments: live courses are paid in full only');
+    // paid online only (owner decision D11, 2026-10-21): no manual UPI, bank transfer or emailed payment request
+    if (/\bUPI\b|bank transfer|payment request|\bemail/i.test(String(k.paymentTerms || ''))) err(w, 'paymentTerms describe a manual or emailed payment: live courses are paid online only');
     if (k.enrolment === 'open') for (const f of ['nextBatch', 'frequency', 'sessionLength', 'totalDuration']) if (!has(k[f])) err(w, `enrolment "open" needs ${f}`);
     if (k.enrolment === 'open' && k.format === 'Group batch' && !has(k.batchSize)) err(w, 'enrolment "open" for a group batch needs batchSize');
   }

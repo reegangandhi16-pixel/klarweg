@@ -228,13 +228,19 @@ try {
       && !jA.keys.some((k) => /price|offers|startDate|courseSchedule|hasCourseInstance/i.test(k)), JSON.stringify(jA && { faqOk: jA.faqOk, courses: jA.courses, keys: jA.keys }));
     ok(`A${w} requests go to the documented address`, (await q('document.querySelector("[data-contact-email]").textContent')) === 'klarwegofficial@gmail.com');
     ok(`A${w} the four approved policies are shown in the FAQ and its structured data`, (await q(policiesShown)) && POLICY_TEXTS.every((t) => jA.text.includes(t)), await q(policiesShown));
+    ok(`A${w} booking is off: an honest "Online demo booking is not open yet" notice, no booking script or panel, no "Book a consultation" button`,
+      (await q('(()=>{const n=document.getElementById("consult-closed");return !!n&&!n.hidden&&n.offsetParent!==null&&n.querySelector("h3").textContent})()')) === 'Online demo booking is not open yet'
+      && await q('!document.querySelector("script[src*=kw-consult],script[src*=cashfree],#consult-online")')
+      && await q('![...document.querySelectorAll("a,button")].some(a=>a.offsetParent!==null&&/book a consultation|request a consultation|^book$/i.test(a.textContent.trim()))'),
+      await q('[...document.querySelectorAll("a,button")].filter(a=>a.offsetParent!==null&&/consultation|^book$/i.test(a.textContent.trim())).map(a=>a.textContent.trim()).join(" | ")'));
+    ok(`A${w} no learner is told to book or pay by email or manual UPI`, !/send a request by email|UPI details|bank transfer|payment request we email|time slot and payment details/i.test(await q('document.body.innerText')));
     ok(`A${w} consultation terms from the data: length, platform and cancellation`, (await q('document.querySelector("[data-consult-unit]").textContent')) === LIVE.consultation.durationMinutes + '-minute session on ' + LIVE.consultation.platform
       && (await q('(()=>{const e=document.querySelector("[data-consult-cancel]");return !e.hidden&&e.offsetParent!==null&&e.textContent})()')) === LIVE.consultation.cancellation);
   }
   // the waitlist CTA prefills a free interest request for A1; the hand-off says nothing is booked or charged
   await q('document.querySelector("[data-book-course=live-a1]").click()'); await sleep(700);
-  ok('A "Join the waitlist" switches the form to a free interest request for A1', (await q('document.querySelector("input[name=rtype]:checked").value')) === 'interest'
-    && (await q('document.getElementById("form-title").textContent')) === 'Register your interest' && (await q('document.getElementById("bf-course").value')) === 'live-a1');
+  ok('A "Join the waitlist" prefills the free waitlist request for A1 (the form has no consultation option)', (await q('!document.querySelector("input[name=rtype]")'))
+    && (await q('document.getElementById("form-title").textContent')) === 'Join the course waitlist' && (await q('document.getElementById("bf-course").value')) === 'live-a1');
   await q('(()=>{const s=(id,v)=>{const e=document.getElementById(id);e.value=v;e.dispatchEvent(new Event("change"))};s("bf-name","Test Person");s("bf-email","test@example.com");s("bf-level","A1");s("bf-goal","Other");const c=document.getElementById("bf-consent");c.checked=true;c.dispatchEvent(new Event("change"))})()');
   await submit(); await sleep(500);
   const prevA = await q('document.getElementById("consult-preview").textContent');
@@ -303,11 +309,11 @@ try {
   ok('C course filter "Goethe prep"', (await q('document.querySelectorAll(".c-card").length')) === 1);
   await q('document.querySelector("[data-book-course=live-goethe]").click()'); await sleep(700);
   ok('C course CTA prefills the course and focuses Name', (await q('document.getElementById("bf-course").value')) === 'live-goethe' && (await q('document.activeElement.id')) === 'bf-name');
-  ok('C a course that is not open asks for interest, not a paid consultation', (await q('document.querySelector("input[name=rtype]:checked").value')) === 'interest' && (await q('document.getElementById("form-title").textContent')) === 'Register your interest');
+  ok('C a course that is not open asks for interest, not a paid consultation', (await q('document.getElementById("form-title").textContent')) === 'Join the course waitlist');
   ok('C preview accessibility audit', (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
   await q('document.querySelector("[data-profile=teacher-1]").click()'); await q('document.querySelector("#t-dialog [data-book-teacher]").click()'); await sleep(700);
   ok('C profile CTA closes the dialog and prefills the teacher', (await q('!document.getElementById("t-dialog").open')) && (await q('document.getElementById("bf-teacher").value')) === 'teacher-1');
-  ok('C a teacher CTA asks for a consultation', (await q('document.querySelector("input[name=rtype]:checked").value')) === 'consult' && (await q('document.getElementById("form-title").textContent')) === 'Request a consultation');
+  ok('C with booking off, a teacher CTA joins the free waitlist, never an emailed consultation request', (await q('document.getElementById("form-title").textContent')) === 'Join the course waitlist');
 
   // validation + hand-off
   await q('(()=>{for(const id of ["bf-name","bf-email","bf-msg"])document.getElementById(id).value="";document.getElementById("bf-consent").checked=false;document.getElementById("bf-level").value="";document.getElementById("bf-goal").value=""})()');
@@ -320,18 +326,10 @@ try {
   ok('C maxlength on free-text fields', await q('document.getElementById("bf-msg").maxLength===1000 && document.getElementById("bf-name").maxLength===100 && document.getElementById("bf-email").maxLength===254 && document.getElementById("bf-phone").maxLength===30'));
   await q('document.getElementById("bf-email").value="test@example.com"');
   await submit(); await sleep(500);
-  ok('C valid submit: confirmation focused and says "Not booked yet"', (await q('!document.getElementById("consult-done").hidden && document.activeElement.id==="consult-done"')) && /Not booked yet/.test(await q('document.getElementById("consult-done").innerText')));
+  ok('C valid submit: confirmation focused and says "Nothing booked or charged"', (await q('!document.getElementById("consult-done").hidden && document.activeElement.id==="consult-done"')) && /Nothing booked or charged/.test(await q('document.getElementById("consult-done").innerText')));
   ok('C request text carries the form fields', /Name: Test Person[\s\S]*Course of interest: Goethe exam preparation/.test(await q('document.getElementById("consult-preview").textContent')));
-  ok('C consultation request names the fee in the email', new RegExp('^Live class consultation request \\(' + LIVE.consultation.feeLabel).test(await q('document.getElementById("consult-preview").textContent')));
-  await q('document.getElementById("edit-request").click()');
-  await q('document.querySelector("input[name=rtype][value=interest]").click()');
-  await submit(); await sleep(500);
-  ok('C interest request: says nothing is booked or charged, and the email asks for no consultation', /Nothing booked or charged/.test(await q('document.getElementById("done-notice").innerText')) && !/Not booked yet/.test(await q('document.getElementById("done-notice").innerText'))
-    && /^Live course interest \(no consultation requested, nothing to pay\)/.test(await q('document.getElementById("consult-preview").textContent')) && !/₹/.test(await q('document.getElementById("consult-preview").textContent')));
-  await q('document.getElementById("edit-request").click()');
-  await q('document.querySelector("input[name=rtype][value=consult]").click()');
-  await submit(); await sleep(500);
-  ok('C switching back restores the consultation notice', /Not booked yet/.test(await q('document.getElementById("done-notice").innerText')));
+  ok('C the email is a free interest request: no consultation, no fee, no payment details', /^Live course interest \(no consultation requested, nothing to pay\)/.test(await q('document.getElementById("consult-preview").textContent'))
+    && !/₹|consultation request|UPI/i.test(await q('document.getElementById("consult-preview").textContent').then((t) => t.replace('no consultation requested', ''))) && !/time slot and payment details/.test(await q('document.getElementById("done-notice").innerText')));
   await q('document.getElementById("edit-request").click()');
   ok('C "Edit request" returns to the form with values kept', (await q('!document.getElementById("consult-form").hidden && document.getElementById("bf-name").value')) === 'Test Person' && (await q('document.activeElement.id')) === 'bf-name');
 
@@ -365,7 +363,9 @@ try {
     const dlF = await q('[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ")');
     ok('F profile dialog: every confirmed field, certificate once, no placeholder', OWNER.specialisms.every((x) => dlF.includes(x)) && dlF.includes('Experience: ' + OWNER.experience) && dlF.includes('German proficiency: ' + OWNER.proficiency)
       && dlF.split(OWNER.goethe[0]).length - 1 === 1 && !/\[/.test(dlF), dlF);
-    ok('F profile CTA names the teacher', /Request a consultation with Reegan/.test(await q('document.querySelector("#t-dialog [data-book-teacher]").textContent')));
+    ok('F with booking off the profile CTA is the free waitlist (prefilled with the teacher), not a consultation request', /^Join the waitlist/.test(await q('document.querySelector("#t-dialog [data-book-teacher]").textContent.trim()'))
+      && (await q('document.querySelector("#t-dialog [data-book-teacher]").getAttribute("data-request")')) === 'interest');
+    ok('F with booking off the full-profile row offers no consultation button', await q('!document.querySelector(".t-card [data-book-teacher]")'));
     await key('Escape', 'Escape', 27); await sleep(200);
     ok('F the form offers the published teacher by name', (await q('[...document.getElementById("bf-teacher").options].map(o=>o.text).join("|")')) === 'Help me choose|' + OWNER.name);
     const jF = await q(jsonld);

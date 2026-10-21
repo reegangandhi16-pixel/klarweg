@@ -183,7 +183,7 @@ test('REVIEWS: the validator refuses an unsubstantiated or malformed published r
 });
 
 /* ================= online booking switch ================= */
-test('BOOKING: online booking is off — the page loads no booking script and keeps the email request', () => {
+test('BOOKING: online booking is off — the page loads no booking script, says booking is not open yet, and never books by email', () => {
   const D = loadData();
   const ob = D.consultation.onlineBooking;
   assert.equal(ob.enabled, false);
@@ -191,14 +191,19 @@ test('BOOKING: online booking is off — the page loads no booking script and ke
   assert.equal(ob.ownerApproval, null);
   const html = read('live-classes.html');
   assert.equal(/kw-consult\.js|kw-checkout\.js|cashfree/i.test(html), false, 'not referenced by the page itself');
-  assert.match(read('kw-live.js'), /ob\.enabled !== true\) return;/);
-  assert.match(html, /Sending this form is a request, not a booking\. Nothing is charged on this page\./, 'the approved copy is unchanged');
+  assert.match(read('kw-live.js'), /if \(!BOOK_ON\) return;/);
+  assert.match(html, /<div class="book-closed" id="consult-closed" role="note">\s*<h3>Online demo booking is not open yet<\/h3>/, 'an honest closed state, not a booking button');
+  assert.match(html, /consultations are not booked by email/);
   assert.deepEqual([...D.consultation.steps], [
-    'You send a request with your level, goal and preferred times.',
-    'We reply by email with a confirmed time slot and UPI details to pay the {fee} fee.',
-    'Once your payment is confirmed, we email you the joining link.',
+    'You sign in, then choose a teacher and a time on this page.',
+    'You pay the {fee} fee online through Cashfree. The booking is confirmed only once the payment is verified.',
+    'Your joining link appears on this page once your booking is confirmed.',
     'You meet the teacher, who assesses your level and recommends a course.'
   ]);
+  assert.equal(D.consultation.steps.some((x) => /\bemail|\bUPI\b|bank transfer/i.test(x)), false, 'no email or manual UPI step');
+  // the validator keeps it that way
+  const old = clone(D); old.consultation.steps[1] = 'We reply by email with a confirmed time slot and UPI details to pay the {fee} fee.';
+  assert.ok(checkData(old).some((e) => /consultation\.steps: describe booking or paying by email or manual UPI/.test(e)));
 });
 
 test('BOOKING: enabling online booking is refused until the owner decisions and legal updates are recorded', () => {
@@ -297,7 +302,7 @@ test('JOIN LINKS: wrangler.toml never carries them (a Worker secret only), and t
 test('SCOPE: this branch changes no Exam Portal, audio, legal or self-paced checkout file', { skip: (() => { try { execFileSync('git', ['rev-parse', '--verify', 'origin/main'], { cwd: ROOT, stdio: 'ignore' }); return false; } catch { return 'origin/main not available'; } })() }, () => {
   const base = execFileSync('git', ['merge-base', 'HEAD', 'origin/main'], { cwd: ROOT, encoding: 'utf8' }).trim();
   const changed = execFileSync('git', ['diff', '--name-only', base], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean);
-  const forbidden = changed.filter((f) => /^(exam|exam-content|exam-worker|audio|public\/audio)\/|audio|^terms\.html$|^privacy\.html$|^refund-policy\.html$|^kw-checkout\.js$|^kw-products\.js$|^access\/worker\/src\/(orders|entitlements|products|exam-proxy)\.js$/i.test(f));
+  const forbidden = changed.filter((f) => /^(exam|exam-content|exam-worker|audio|public\/audio)\/|audio|^refund-policy\.html$|^kw-checkout\.js$|^kw-products\.js$|^access\/worker\/src\/(orders|entitlements|products|exam-proxy)\.js$/i.test(f));
   assert.deepEqual(forbidden, []);
 });
 

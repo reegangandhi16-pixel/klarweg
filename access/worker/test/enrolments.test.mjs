@@ -530,7 +530,7 @@ test('the Worker\'s course catalogue matches the published course (full fee, cap
   assert.equal(c.title, a1.title);
   assert.equal(rupees(c.feePaise), a1.priceLabel);
   assert.equal(a1.priceLabel, '₹7,999');
-  assert.equal(a1.paymentTerms.startsWith(`${rupees(c.feePaise)} in full before the first class`), true, a1.paymentTerms);
+  assert.equal(a1.paymentTerms.startsWith(`${rupees(c.feePaise)} in full, in one payment, before the first class`), true, a1.paymentTerms);
   assert.equal(/instal/i.test(a1.paymentTerms), false, 'the published terms offer no instalments');
   assert.deepEqual(Object.keys(c).sort(), ['capacity', 'feePaise', 'title'], 'no plans or parts in the Worker catalogue');
   assert.match(a1.batchSize, new RegExp(`Up to ${c.capacity} learners`));

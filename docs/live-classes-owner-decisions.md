@@ -33,7 +33,7 @@ Settled earlier:
 ### D4 · Consultation
 
 - **Price and format:** ₹100 for 20 minutes on Google Meet.
-- **Payment:** by UPI, after the time is confirmed by email; the joining link follows payment.
+- **Payment:** ~~by UPI, after the time is confirmed by email~~. Superseded by D11: booked and paid online through Cashfree; the joining link is shown on the page once the payment is verified.
 - **Adjustment:** the fee is deducted from a live course fee if the learner enrols within 7 days.
 - **Klarweg cancels:** the learner chooses a full refund or a new time.
 - **Learner cancels:** one free reschedule with at least 12 hours' notice. A consultation missed without notice is not refunded.
@@ -53,7 +53,7 @@ The four texts for missed classes, cancellation and refunds, scheduling, and wha
 
 ### D7 · Payment for the first batch
 
-Payment is by **manual UPI or bank transfer**, on a payment request sent by email; places are confirmed by email once payment is received.
+**Superseded by D11 (2026-10-21).** Kept as a record of the 2026-10-20 decision. Payment was to be by **manual UPI or bank transfer**, on a payment request sent by email; places are confirmed by email once payment is received.
 - The Live Classes page takes no money.
 - Live fees **do not** use the Cashfree checkout. Every paid Cashfree order is fulfilled by `grantProduct()`, which unlocks self-paced content. A static test keeps live products out of that catalogue.
 - No payment backend is built for the first batch.
@@ -82,10 +82,19 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
 
 ### D10 · Full payment only (owner, 2026-10-21)
 
-- Every live-course enrolment is paid **in full, in one payment**. The two-instalment option approved in D3 on 2026-10-20 is withdrawn. This applies to manual payment (D7) and to online payment alike.
+- Every live-course enrolment is paid **in full, in one payment**. The two-instalment option approved in D3 on 2026-10-20 is withdrawn. This applies to every payment, which is online only (D11).
 - `live-a1` stays at **₹7,999**, paid in full.
 - The D9 fees above are unchanged. They are the approved **display** prices on each teacher's row. A displayed price sells nothing by itself: the Worker charges only for a course that is configured in `LIVE_COURSES`, published with enrolment "open" and given a batch start date in `ENROL_COURSES`. Today that could only ever be `live-a1`, and it is still a waitlist with no start date.
 - The validator refuses any course whose `paymentTerms` mention instalments. The Worker refuses any request for another payment plan.
+
+### D11 · Online booking and payment only (owner, 2026-10-21)
+
+- The ₹100 demo consultation is **booked and paid online** through Cashfree on the Live Classes page. A live course is **paid online in one full payment** (D10). This supersedes D7 and D4's payment line (P2 and P3 in the online-payments guide).
+- Email is **not** a booking or payment mechanism: no consultation requests by email, no UPI details or payment requests sent by email, no manual UPI or bank transfer. Email remains for support, and for the free course waitlist, which is neither a booking nor a payment.
+- The ₹100 is credited against the course fee if the learner enrols within 7 days of a confirmed consultation, as approved in D4: `ENROL_CONSULT_CREDIT = "course-fee"` (P1). Whether the credit is refunded if the learner later cancels is still open (Q5).
+- Every teacher price in D9 is unchanged.
+- **Until the switches are on, the page says so.** `onlineBooking.enabled`, `liveEnrolment.enabled`, `ENROL_PAYMENTS` and `CONSULT_BOOKING` stay off and `ENROL_COURSES` stays empty. The page shows "Online demo booking is not open yet" instead of a booking button; the free waitlist stays; A1 stays a waitlist with no start date.
+- Terms §4A and Privacy §2, §4, §4A, §8, §9 are rewritten for online-only payment (pending the owner's review of that wording). The validator refuses consultation steps or course `paymentTerms` that describe email, UPI or bank-transfer payment.
 
 ---
 
@@ -93,7 +102,8 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
 
 - [ ] **Legal review of the published Terms, Privacy and Refund Policy wording.** The owner approved publishing the live-class wording on 2026-10-20 (D8). It is based on [`live-classes-review-drafts.md`](live-classes-review-drafts.md), with every undecided point left out rather than invented: the published Terms say these are set out in the written course terms before anyone pays, and no course fee is accepted until then. **No lawyer has reviewed it.** A review by a qualified lawyer is still recommended before paid enrolment opens; the review drafts hold the brief, questions Q1–Q15 and a copy-ready email.
   `Legal review status: owner-approved for publication on 2026-10-20; not reviewed by a lawyer`
-- [ ] **Accounting follow-up for manual payments.** [`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md) is the accountant's package:
+  The 2026-10-21 rewrite for online-only payment (D11) is awaiting the owner's review before it is merged.
+- [ ] **Accounting follow-up for online payments.** [`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md) is the accountant's package:
   - the facts;
   - the questions: receipts or invoices, GST, payment-record retention;
   - a draft payment register with a reconciliation procedure;
@@ -101,7 +111,7 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
   Nothing on the site claims these are settled.
 - [ ] **Business rules not yet decided.** Settle these with the lawyer and the accountant; they are Q3–Q5 and Q9 in the review drafts.
   - How "the classes still to come" is refunded in the first two weeks.
-  - Whether the ₹100 consultation is deducted from the course fee when paying online (`ENROL_CONSULT_CREDIT`), and whether it is refundable if the learner then cancels.
+  - Whether the ₹100 consultation credit is refundable if the learner then cancels (the credit itself is decided: D11).
   - Whether minors may join live classes, and with what consent.
 - [ ] **A1 start date.** Not set. Set it at least 3 weeks ahead. Then `nextBatch` gets the date.
 - [x] **D8 launch go-ahead: waitlist launch (2026-10-20).** Done in one PR:
@@ -114,12 +124,12 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
   1. a real start date in `nextBatch`;
   2. the business rules above settled and added to the written course terms;
   3. the accounting follow-up (receipts or invoices, tax, record retention);
-  4. the UPI ID or bank details to put on payment requests;
-  5. `enrolment: 'open'`, then update the homepage FAQ and Terms §4A ("Enrolment … is not open yet"); the readiness check flags both if they still say it is closed or claim it is open.
+  4. the Cashfree production setup in §6 of the online-payments guide (KYC, live keys, webhook secret, migrations 013 and 014, cron);
+  5. `enrolment: 'open'` and `paymentTerms` without "once enrolment opens", then update the homepage FAQ and Terms §4A ("Enrolment … is not open yet"); the readiness check flags both if they still say it is closed or claim it is open.
 - [ ] **Online payments (built 2026-10-21, every switch off).** The ₹100 demo booking and the A1 course fee can now be paid on the page through Cashfree, confirmed only after the Worker verifies the payment. The decisions are P1–P8 in [`live-classes-online-payments.md`](live-classes-online-payments.md) §4:
-  - P1: whether and how the ₹100 is deducted;
-  - P2: replacing D7's manual UPI with online payment for live-a1;
-  - P3: D4's payment line for consultations;
+  - P1: settled by D11 (`course-fee`);
+  - P2: settled by D11 (D7 superseded: online payment only);
+  - P3: settled by D11 (consultations booked and paid online);
   - P4: opening the course;
   - P5: legal text;
   - P6: settled by D10 (full payment only, no instalments);
@@ -137,6 +147,6 @@ Accounting (receipts, tax, record keeping): handled by: …
 Refunds in the first two weeks / consultation deduction / minors: …
 A1 start date: …
 Open paid enrolment for A1: not yet / go (start date: …)
-Online payments (P1 ₹100 deduction: off / first payment · P2 replace D7 manual UPI: yes / no): …
+Online payments (P4 open A1 / P5 legal wording approved / P7 other teachers' courses): …
 Photo / availability (optional):
 ```

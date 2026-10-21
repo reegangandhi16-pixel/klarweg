@@ -43,10 +43,12 @@ CONSULT_TEACHERS = ""
 #   {"live-a1":{"batch":"2026-11-02"}}
 # (each must be published with enrolment "open" on the Live Classes page).
 # ENROL_CONSULT_CREDIT: "off" or "course-fee" (whether a confirmed ₹100
-# consultation from the last 7 days reduces the course fee): an owner
-# decision, required before payments are switched on.
+# consultation from the last 7 days reduces the course fee). Owner decision
+# D11 (2026-10-21): "course-fee", as approved in D4. It changes nothing
+# while ENROL_PAYMENTS is "off".
 ENROL_PAYMENTS = "off"
 ENROL_COURSES = ""
+ENROL_CONSULT_CREDIT = "course-fee"
 
 # Klarweg AI (see src/ai.js). ON. Chapter AI: with the Chapter-1 preview at 0,
 # only accounts holding a level entitlement qualify. Homepage chat: buyers, plus

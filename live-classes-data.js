@@ -45,8 +45,9 @@
     /* ---------- personal consultation ----------
        CONFIRMED by the owner on 2026-10-20 (D4 in
        docs/live-classes-owner-decisions.md): ₹100, 20 minutes on Google
-       Meet, paid by UPI after the time is confirmed by email, deducted
-       from a live course fee if the learner enrols within 7 days. */
+       Meet, deducted from a live course fee if the learner enrols within
+       7 days. Booked and paid online only, never by email or manual UPI
+       (D11, 2026-10-21); online booking is not open yet. */
     consultation: {
       /* true only once the owner has confirmed fee, adjustment period and
          payment method in writing; the launch check blocks publishing
@@ -58,19 +59,20 @@
       platform: 'Google Meet',
       /* Shown under "Good to know"; null hides the line. */
       cancellation: 'If we have to cancel, you choose a full refund or a new time. You can move your consultation once, free of charge, with at least 12 hours’ notice; a consultation missed without notice is not refunded.',
-      /* How a request becomes a booking. There is no scheduling or
-         payment integration for consultations yet, so every request is
-         confirmed by a person over email. {fee} is replaced by feeLabel. */
+      /* How online booking works (kw-consult.js). Until onlineBooking is
+         enabled the page shows "Online demo booking is not open yet"
+         beside these steps. {fee} is replaced by feeLabel. */
       steps: [
-        'You send a request with your level, goal and preferred times.',
-        'We reply by email with a confirmed time slot and UPI details to pay the {fee} fee.',
-        'Once your payment is confirmed, we email you the joining link.',
+        'You sign in, then choose a teacher and a time on this page.',
+        'You pay the {fee} fee online through Cashfree. The booking is confirmed only once the payment is verified.',
+        'Your joining link appears on this page once your booking is confirmed.',
         'You meet the teacher, who assesses your level and recommends a course.'
       ],
       /* Same-day online booking with a ₹100 Cashfree payment
          (kw-consult.js + the access Worker's /consult routes). OFF: while
-         enabled is false the page loads no booking script and the email
-         request above stays the only way to ask for a consultation.
+         enabled is false the page loads no booking script and says
+         plainly that online booking is not open yet; there is no email
+         booking. The free course waitlist works either way.
          Enabling it is an owner decision (docs/live-classes-consultation-
          booking.md): the validator refuses enabled: true until all three
          fields below are recorded. Turning on payments also needs the
@@ -372,7 +374,7 @@
         materials: 'Class notes and PDF worksheets; homework with written feedback',
         examPrep: 'Prepares for Goethe-Zertifikat A1: Start Deutsch 1 (exam fee not included)',
         priceLabel: '₹7,999',
-        paymentTerms: '₹7,999 in full before the first class. Paid by UPI or bank transfer on a payment request we email you.',
+        paymentTerms: '₹7,999 in full, in one payment, before the first class. Paid online on this page once enrolment opens.',
         enrolment: 'waitlist'
       },
       {

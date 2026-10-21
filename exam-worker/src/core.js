@@ -265,6 +265,7 @@ export async function buildResult(env, attempt) {
     level: attempt.level,
     form_kind: form.kind,
     test_content: form.kind === 'synthetic',
+    pass_points: (await levelConfig(env, form.level_config_id)).pass_threshold_points ?? null,   // per module (no total)
     disclaimer: 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.',
     modules: mods.map((m) => {
       const s = rows.find((r) => r.module === m.module);

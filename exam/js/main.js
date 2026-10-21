@@ -190,7 +190,26 @@ function paintHeader() {
   const h = $('#kx-head');
   if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state, progress: progress() });
 }
-function paintNav() { const n = $('#kx-nav-slot'); if (n) n.innerHTML = S.module === 'sprechen' ? '' : moduleNav(progress()); }
+function paintNav() { const n = $('#kx-nav-slot'); if (n) n.innerHTML = S.module === 'sprechen' ? '' : moduleNav(progress(), S.currentPart); }
+/* The part on screen (the last one whose heading has passed the sticky bar) is marked in the part navigation. */
+let partFrame = 0;
+function trackCurrentPart() {
+  if (partFrame) return;
+  partFrame = requestAnimationFrame(() => {
+    partFrame = 0;
+    const bar = $('.kx-bar'); const parts = [...document.querySelectorAll('#kx-main .kx-part')]; if (!bar || !parts.length) return;
+    const line = bar.getBoundingClientRect().bottom + 24;   // a part jump lands its heading at the 120 px scroll margin
+    let cur = Number(parts[0].dataset.part);
+    for (const p of parts) if (p.getBoundingClientRect().top <= line) cur = Number(p.dataset.part);
+    if (cur === S.currentPart) return;
+    S.currentPart = cur;
+    for (const a of document.querySelectorAll('.kx-nav a')) {
+      const on = a.getAttribute('href') === `#part-${cur}`;
+      if (on) { a.setAttribute('aria-current', 'true'); a.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } else a.removeAttribute('aria-current');
+    }
+  });
+}
+window.addEventListener('scroll', trackCurrentPart, { passive: true });
 /* An open review is redrawn whenever its counts or parts change. Focus moves only if it was inside the review, and then
    to the equivalent control (same button, or the same item link), else to the review title if that control is gone. */
 function refreshReview() {
@@ -213,8 +232,10 @@ function paint() {
     : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
   screen(`<div class="kx-bar"><div id="kx-head"></div><div id="kx-nav-slot"></div></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
     + `<div id="kx-review-slot"></div><footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
+  S.currentPart = null;
   updateProgress();
   markUsedOptions();
+  trackCurrentPart();
 }
 /* Matching tasks: mark options already chosen in another select of the same task (never blocks a choice). */
 function markUsedOptions(scope = document) {

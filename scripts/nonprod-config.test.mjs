@@ -136,6 +136,10 @@ test('PREDEPLOY GUARD: refuses a production wrangler.toml with CORS_EXTRA_ORIGIN
     '\nvars.CORS_EXTRA_ORIGINS = "http://localhost:8788"\n', '\n[other]\nx = { CORS_EXTRA_ORIGINS = "http://localhost:8788" }\n']) {
     assert.match(runGuard(spelling), /sets CORS_EXTRA_ORIGINS/, `refuses ${JSON.stringify(spelling)}`);
   }
+  for (const spelling of ['\nCORS_PUBLIC_SITE_ORIGINS = "deny"\n', '\n"CORS_PUBLIC_SITE_ORIGINS" = "allow"\n', '\nvars.CORS_PUBLIC_SITE_ORIGINS = "deny"\n']) {
+    assert.match(runGuard(spelling), /sets CORS_PUBLIC_SITE_ORIGINS/, `refuses ${JSON.stringify(spelling)}`);
+  }
+  assert.ok(!/CORS_PUBLIC_SITE_ORIGINS/.test(control), 'control: the unmodified production file does not set it');
   for (const header of ['\n[ env.nonprod ]\n', '\n[["env".nonprod.d1_databases]]\n', "\n['env'.nonprod.vars]\n", '\n[[env.nonprod.services]]\n']) {
     assert.match(runGuard(header), /contains an \[env\.\*\] section/, `refuses ${JSON.stringify(header)}`);
   }

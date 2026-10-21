@@ -12,7 +12,7 @@
    instead of silently charging against the wrong environment.
    ============================================================ */
 
-import { parseExtraOrigins } from "./cors.js";
+import { parseExtraOrigins, publicSiteOriginsAllowed } from "./cors.js";
 
 export function cashfreeMode(env) {
   return env.CASHFREE_ENV === "production" ? "production" : "sandbox";
@@ -55,11 +55,15 @@ const SITE_BASE_BY_ORIGIN = {
 
 export function siteBaseUrl(env, request) {
   const origin = request && request.headers ? request.headers.get("Origin") : null;
-  if (origin && SITE_BASE_BY_ORIGIN[origin]) return SITE_BASE_BY_ORIGIN[origin];
+  if (origin && SITE_BASE_BY_ORIGIN[origin] && publicSiteOriginsAllowed(env)) return SITE_BASE_BY_ORIGIN[origin];
   /* A non-production test page (an exact local origin in CORS_EXTRA_ORIGINS,
      which production may never set) gets the learner back to itself, and
      only against Cashfree's sandbox. */
-  if (origin && env.CASHFREE_ENV === "sandbox" && parseExtraOrigins(env.CORS_EXTRA_ORIGINS).includes(origin)) return origin;
+  const extra = env.CASHFREE_ENV === "sandbox" ? parseExtraOrigins(env.CORS_EXTRA_ORIGINS) : [];
+  if (origin && extra.includes(origin)) return origin;
+  /* A Worker that does not trust the public site (CORS_PUBLIC_SITE_ORIGINS)
+     never sends a learner there either: its own first listed test page. */
+  if (!publicSiteOriginsAllowed(env) && extra.length) return extra[0];
   return env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL;
 }
 

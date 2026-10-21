@@ -31,6 +31,10 @@ CASHFREE_NOTIFY_URL = "https://klarweg-access-payments-nonprod.klarweg-issue-rep
 # The local test page served by scripts/payments-sandbox-site.mjs. The Worker
 # sends Cashfree's return redirect back to it (sandbox only; src/cashfree-config.js).
 CORS_EXTRA_ORIGINS = "http://localhost:8789"
+# ...and ONLY it: the public Klarweg site origins (hard-coded in src/cors.js
+# for production) are not trusted here, for CORS, preflight or the CSRF
+# write guard. Production never sets this (scripts/predeploy-access-check.mjs).
+CORS_PUBLIC_SITE_ORIGINS = "deny"
 
 # ₹100 same-day consultation booking, sandbox mode. Only the owner's profile.
 CONSULT_BOOKING = "sandbox"

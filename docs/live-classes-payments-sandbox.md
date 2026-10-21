@@ -4,7 +4,7 @@
 
 - **Created:** the D1 database `klarweg-access-payments-nonprod`, id `c86b0f00-61c4-49c9-a1ac-6047851ea09c`.
   - `schema.sql` and migrations 001–014 were applied once each, in order. The result is 16 tables, the same columns as the test schema.
-- **Deployed:** the Worker `klarweg-access-payments-nonprod`, using this config only, with the 15-minute cron, at `https://klarweg-access-payments-nonprod.klarweg-issue-reports-2026.workers.dev`.
+- **Deployed:** the Worker `klarweg-access-payments-nonprod`, using this config only, with the 15-minute cron (current version `179ba508`, with the public-origin restriction), at `https://klarweg-access-payments-nonprod.klarweg-issue-reports-2026.workers.dev`.
 - **No secrets are set.** The Worker fails closed: booking and enrolment report `enabled: false`, and webhooks get 503 `not-configured`, until the Cashfree TEST app id and secret are entered (§3 step 4).
 - Every payment result so far comes from local mocks and local rehearsals. **No real sandbox transaction has been made yet.**
 
@@ -30,7 +30,12 @@ The guard tests are in `scripts/payments-sandbox-config.test.mjs`. They check th
 
 The existing `scripts/nonprod-config.test.mjs` still checks that the exam/QA Worker has no payments.
 
-**CORS, as deployed:** the Worker code always allows the two public site origins (`https://klarweg.in`, `https://reegangandhi16-pixel.github.io`; `src/cors.js`), so the sandbox Worker accepts those as well as `http://localhost:8789`. It refuses other origins, including the exam/QA page on `localhost:8788`. No public page calls it: `kw-config.js` points at the production Worker, and the guard tests fail if any public file names the sandbox Worker. Narrowing the sandbox to `localhost:8789` alone would need a Worker code change, which is deliberately not part of this setup.
+**CORS and CSRF, as deployed:** the sandbox sets `CORS_PUBLIC_SITE_ORIGINS = "deny"`, so it trusts **only** `http://localhost:8789`.
+- The two public site origins that the Worker code trusts by default (`https://klarweg.in`, `https://reegangandhi16-pixel.github.io`; `src/cors.js`) get no CORS headers and a 403 on preflight.
+- Their state-changing requests are refused by the CSRF guard (403 "Cross-site request refused."), and Cashfree's return URL never points at them.
+- `localhost:8788` (the exam/QA page) and unknown origins are refused too.
+- Production and exam/QA do not set the variable and keep their behaviour; `scripts/predeploy-access-check.mjs` refuses a production `wrangler.toml` that sets it. Any value other than `"allow"` fails closed.
+- Tests: `access/worker/test/cors-public-origins.test.mjs` and `scripts/payments-sandbox-config.test.mjs`.
 
 **Synthetic data only.** The A1 batch `2099-01-05` exists only in the sandbox config, so the Worker treats the course as open. It is not a start date. The consultation availability row is a fixture written into the sandbox database by the verifier (`confirmed_by = 'sandbox-verification-fixture'`); it is not real availability. Joining links are optional and must be a throwaway Meet link the owner creates for testing.
 

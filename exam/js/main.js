@@ -140,8 +140,7 @@ async function completeAndShow() {
 function intro(module) {
   const info = moduleIntro(module, (moduleState(module) || {}).intro);
   const extra = module === 'sprechen' ? '<p>Für dieses Modul werden Ihre Antworten aufgenommen und privat gespeichert. Ohne Ihre Zustimmung kann das Modul nicht beginnen.</p><label class="kx-consent"><input type="checkbox" id="kx-consent"> Ich stimme der Aufnahme zu.</label>' : '';
-  const hoeren = module === 'hoeren' ? '<p>Die Prüftöne werden zuerst vollständig geladen. Wiedergabe ohne Pause, Vor- oder Zurückspulen.</p>' : '';
-  screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1>${info}${hoeren}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
+  screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1>${info}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
 }
 
 async function openModule(module) {
@@ -192,6 +191,15 @@ function paintHeader() {
 }
 function paintNav() { const n = $('#kx-nav-slot'); if (n) n.innerHTML = S.module === 'sprechen' ? '' : moduleNav(progress(), S.currentPart); }
 /* The part on screen (the last one whose heading has passed the sticky bar) is marked in the part navigation. */
+/* The sticky bar's real height (it grows with a status line or an alert) drives where part jumps land and where the Lesen
+   texts column sticks (CSS var --kx-bar-h). */
+let barObserver = null;
+function watchBar() {
+  const bar = $('.kx-bar'); if (!bar || typeof ResizeObserver === 'undefined') return;
+  if (barObserver) barObserver.disconnect();
+  barObserver = new ResizeObserver(() => document.documentElement.style.setProperty('--kx-bar-h', `${Math.ceil(bar.getBoundingClientRect().height)}px`));
+  barObserver.observe(bar);
+}
 let partFrame = 0;
 function trackCurrentPart() {
   if (partFrame) return;
@@ -230,9 +238,12 @@ function closeReview(focusSubmit = true) {
 function paint() {
   const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p><div class="kx-alerts" id="kx-alerts"></div>'
     : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
-  screen(`<div class="kx-bar"><div id="kx-head"></div><div id="kx-nav-slot"></div></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
+  // live status (Hören/Sprechen phase, "Audio starten", time warnings) lives in the sticky bar: it must stay visible
+  // while the learner is scrolled down to the questions; empty elements take no space
+  screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
     + `<div id="kx-review-slot"></div><footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
   S.currentPart = null;
+  watchBar();
   updateProgress();
   markUsedOptions();
   trackCurrentPart();

@@ -708,12 +708,14 @@ test('RESULT: a way back to the overview (start screen with history and a new pr
 
 test('STICKY BAR: header (timer, progress, save state) and part navigation share one sticky container', () => {
   const css = read('exam/exam.css'); const main = read('exam/js/main.js');
-  assert.match(main, /<div class="kx-bar"><div id="kx-head"><\/div><div id="kx-nav-slot"><\/div><\/div>/);
+  assert.match(main, /<div class="kx-bar"><div id="kx-head"><\/div><p class="kx-phase" id="kx-phase"[^>]*><\/p>\$\{phaseTime\}<p class="kx-announce" id="kx-announce"[^>]*><\/p><div id="kx-nav-slot"><\/div><\/div>/, 'live status (phase, alerts, warnings) sits in the sticky bar');
+  assert.match(css, /\.kx-phase:empty { display: none; }/);
+  assert.match(main, /setProperty\('--kx-bar-h'/, 'jump targets follow the bar\'s real height');
   assert.match(css, /\.kx-bar\s*{[^}]*position: sticky;[^}]*top: 0/);
   // sticky on .kx-head itself never stuck: its parent #kx-head is exactly as tall as the header
   assert.equal(/\.kx-head\s*{[^}]*position: sticky/.test(css), false);
   // part-navigation targets (the "Teil n" headings, id part-n) land below the sticky bar, not under it
-  assert.ok([...css.matchAll(/\[id\^="part-"\] { scroll-margin-top: 120px; }/g)].length >= 1);
+  assert.ok([...css.matchAll(/\[id\^="part-"\] { scroll-margin-top: calc\(var\(--kx-bar-h, 120px\) \+ 8px\); }/g)].length >= 1);
 });
 
 test('LESEN LAYOUT: texts and tasks are split into two columns (scrollable, labelled, focusable text region); other modules unchanged', async () => {
@@ -726,7 +728,7 @@ test('LESEN LAYOUT: texts and tasks are split into two columns (scrollable, labe
   assert.equal(/kx-split/.test(r.module(pkgFor(build, 'lesen'), {}, { split: false })), false, 'can be turned off');
   const css = read('exam/exam.css');
   assert.match(css, /@media \(min-width: 1024px\) {\s*\.kx-split-grid { display: grid;/);
-  assert.match(css, /\.kx-task-texts { position: sticky; top: 120px; max-height: calc\(100vh - 144px\); overflow-y: auto;/);
+  assert.match(css, /\.kx-task-texts { position: sticky; top: calc\(var\(--kx-bar-h, 120px\) \+ 8px\); max-height: calc\(100vh - var\(--kx-bar-h, 120px\) - 24px\); overflow-y: auto;/);
 });
 
 test('PART NAV: the part on screen is marked aria-current (and styled), nothing else', () => {

@@ -28,9 +28,16 @@ export function testBanner(pkg) {
 export function moduleIntro(module, intro) {
   const facts = [];
   if (intro && intro.minutes) facts.push(`${intro.minutes} Minuten`);
+  else if (intro && intro.approx_minutes) facts.push(`ca. ${intro.approx_minutes} ${intro.approx_minutes === 1 ? 'Minute' : 'Minuten'}`);
   if (intro && intro.parts) facts.push(`${intro.parts} ${intro.parts === 1 ? 'Teil' : 'Teile'}`);
   if (intro && intro.items) facts.push(`${intro.items} Aufgaben`);
   const head = facts.length ? `<p class="kx-intro-facts">${esc(facts.join(' · '))}</p>` : '';
+  if (module === 'hoeren') {
+    const hr = ['Die Prüftöne werden zuerst vollständig geladen. Danach läuft die Wiedergabe automatisch, ohne Pause, Vor- oder Zurückspulen.',
+      'Die Teile erscheinen nacheinander, passend zur Wiedergabe. Wie oft Sie einen Text hören, steht in der Aufgabe.',
+      'Ihre Antworten werden automatisch gespeichert. Sie können sie bis zur Abgabe ändern.'];
+    return head + `<ul class="kx-intro-rules">${hr.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
+  }
   if (module !== 'lesen' && module !== 'schreiben') return head;
   const rules = ['Die Zeit beginnt, sobald Sie „Modul starten“ wählen. Sie läuft auf dem Server weiter, auch wenn Sie die Seite schließen oder neu laden.',
     'Ihre Antworten werden automatisch gespeichert.',

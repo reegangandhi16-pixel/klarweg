@@ -13,9 +13,12 @@ test('MODULE INTRO: not-started modules report minutes, parts and scored tasks f
   const intro = (view, m) => view.modules.find((x) => x.module === m).intro;
 
   const before = s.created;
-  assert.deepEqual(intro(before, 'lesen'), { minutes: Math.round(lesen.timing.seconds / 60), parts: lesen.parts.length, items: scored(lesen) });
+  assert.deepEqual(intro(before, 'lesen'), { minutes: Math.round(lesen.timing.seconds / 60), approx_minutes: null, parts: lesen.parts.length, items: scored(lesen) });
   assert.equal(intro(before, 'lesen').items, 30);   // B1 Lesen: 30 scored tasks, examples excluded
   assert.equal(intro(before, 'hoeren').minutes, null);   // phase-planned module: no fixed time to promise
+  const hoeren = pkgFor(syntheticBuild([PRACTICE_FORM_DIR]), 'hoeren');
+  assert.equal(intro(before, 'hoeren').approx_minutes, Math.ceil(hoeren.timing.plan.total_ms / 60000), 'Hören: the plan length, shown as "ca."');
+  assert.equal(intro(before, 'lesen').approx_minutes, null);
 
   await start(s, 'lesen');
   const after = (await get(s, '')).json;

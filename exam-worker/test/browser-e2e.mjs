@@ -155,12 +155,18 @@ async function run(viewport) {
     await click('[data-act="submit-confirm"]');
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Hören intro');
+    { const intro = await text(); assert.match(intro, /ca\. \d+ Minuten? · 4 Teile · \d+ Aufgaben/); assert.match(intro, /Die Teile erscheinen nacheinander/); }
     await click('[data-act="start"][data-module="hoeren"]');
     await waitFor(`/Sie hören den Text|Lesen Sie die Aufgaben/.test(document.querySelector('#kx-phase')?.textContent || '')`, 30000, 'Hören schedule running');
     // F2: only Teil 1 is in the DOM; future parts' items/text are absent (not merely hidden)
     await waitFor(`document.querySelectorAll('#kx-main .kx-part').length === 1`, 10000, 'Teil 1 rendered');
     const dom = await evaluate('document.documentElement.outerHTML');
     assert.equal(/syn-h[234]-|data-part="[234]"/.test(dom), false, 'future Hören parts must not be in the DOM');
+    // the playback status stays in view while the learner is scrolled down to the questions (sticky bar)
+    await evaluate(`window.scrollTo(0, document.body.scrollHeight)`); await sleep(300);
+    const live = await evaluate(`(() => { const p = document.getElementById('kx-phase'); const r = p.getBoundingClientRect(); return { inBar: !!p.closest('.kx-bar'), text: p.textContent.trim().length > 0, visible: r.top >= 0 && r.bottom <= innerHeight }; })()`);
+    assert.deepEqual(live, { inBar: true, text: true, visible: true }, `Hören status visible while scrolled (${viewport.name})`);
+    await evaluate(`window.scrollTo(0, 0)`);
     log(viewport.name, 'Hören running (real-time synthetic plan); future parts absent from DOM');
     // F1: genuine interruption — reload the page while a LAST allowed play (P1 text 1, play 2/2) is playing
     const lastPlaySeq = 5;

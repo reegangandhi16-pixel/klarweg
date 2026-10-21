@@ -69,6 +69,8 @@ async function moduleIntro(env, attempt, m) {
   const items = pkg.data.parts.reduce((n, p) => n + p.tasks.reduce((k, task) => k + task.items.filter((it) => !it.is_example).length, 0), 0);
   return { intro: {
     minutes: tm.kind === 'fixed' ? Math.round((tm.seconds * (attempt.time_multiplier || 1)) / 60) : null,
+    // phase-planned modules (Hören, Sprechen): the playback/speaking plan's own length, shown as "ca."
+    approx_minutes: tm.kind !== 'fixed' && tm.plan && tm.plan.total_ms > 0 ? Math.ceil(tm.plan.total_ms / 60000) : null,
     parts: pkg.data.parts.length, items
   } };
 }

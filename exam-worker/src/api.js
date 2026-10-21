@@ -54,8 +54,23 @@ async function attemptView(env, attempt) {
     form: { label: form.label, kind: form.kind, test_content: form.kind === 'synthetic' },   // form id never needed client-side
     time_multiplier: attempt.time_multiplier,
     server_now: t, save_grace_ms: SAVE_GRACE_MS,
-    modules: mods.map((m) => moduleView(m, t))
+    modules: await Promise.all(mods.map(async (m) => ({ ...moduleView(m, t), ...(await moduleIntro(env, attempt, m)) })))
   };
+}
+
+/* What the learner needs to know before starting a module: its time (fixed-time modules, with the attempt's time
+   multiplier), parts and scored tasks, from the form's own package (synthetic forms may override timing). Only for modules
+   not yet started, so heartbeats of a running module never load packages. */
+async function moduleIntro(env, attempt, m) {
+  if (m.status !== 'locked' && m.status !== 'available') return {};
+  let pkg;
+  try { pkg = await loadPackage(env, attempt.form_id, m.module); } catch { return {}; }   // informational only: never fail the attempt view
+  const tm = pkg.data.timing;
+  const items = pkg.data.parts.reduce((n, p) => n + p.tasks.reduce((k, task) => k + task.items.filter((it) => !it.is_example).length, 0), 0);
+  return { intro: {
+    minutes: tm.kind === 'fixed' ? Math.round((tm.seconds * (attempt.time_multiplier || 1)) / 60) : null,
+    parts: pkg.data.parts.length, items
+  } };
 }
 
 /* Load the attempt, refresh deadlines, and validate the lease. */

@@ -782,3 +782,21 @@ test('ACCOMMODATIONS screen: current extra time, remove only when one exists, al
   assert.match(one, /Aktuell: \+50 % · aktiv · gültig bis unbegrenzt · &lt;x&gt;/); assert.match(one, /data-form="acc-remove"/); assert.match(one, />Ersetzen</);
   assert.match(one, /gesetzt · \+50 % · usr_a: r/);
 });
+
+test('ADVISORY TIMES + LENGTH RULE + WARNINGS (ENGINE §9/§10): per-part advisory time, scaled by an accommodation; <50 % word-count warning in the review; 10/1-minute warnings', async () => {
+  const { advisory, belowHalf, LENGTH_RULE_NOTE, createRenderer } = await import('../js/render.js');
+  assert.equal(advisory({ advisory_seconds: 600 }), '<p class="kx-advisory">Empfohlene Zeit: ca. 10 Minuten</p>');
+  assert.match(advisory({ advisory_seconds: 600 }, { multiplier: 1.5 }), /ca\. 15 Minuten/);
+  assert.equal(advisory({ advisory_seconds: 0 }), ''); assert.equal(advisory({}), '');
+  const lesen = createRenderer().module(pkgFor(build, 'lesen'), {}, {});
+  assert.equal((lesen.match(/class="kx-advisory"/g) || []).length, pkgFor(build, 'lesen').parts.filter((p) => p.advisory_seconds > 0).length);
+  assert.equal(/kx-advisory/.test(createRenderer().module(pkgFor(build, 'hoeren'), {}, {})), false, 'Hören has no advisory times');
+  assert.equal(belowHalf(39, 80), true); assert.equal(belowHalf(40, 80), false); assert.equal(belowHalf(10, null), false);
+  const review = reviewPanel([{ part: 1, answered: 1, total: 1, items: [{ item_id: 'w1', no: 1, answered: true, interaction: 'text_response', words: 30, target_words: 80 }] },
+    { part: 2, answered: 1, total: 1, items: [{ item_id: 'w2', no: 2, answered: true, interaction: 'text_response', words: 90, target_words: 100 }] }]);
+  assert.equal((review.match(/class="kx-review-warn"/g) || []).length, 1);
+  assert.ok(review.includes(LENGTH_RULE_NOTE));
+  const main = read('exam/js/main.js');
+  assert.match(main, /for \(const mark of \[600_000, 60_000\]\)/);
+  assert.match(main, /total > mark && rem <= mark/, 'a module shorter than the mark never starts with a warning');
+});

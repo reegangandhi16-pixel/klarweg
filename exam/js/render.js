@@ -160,6 +160,17 @@ function speaking(it, _value, _disabled, ctx = {}) {
 
 const DEFAULT_RENDERERS = { binary_choice: choice, mcq_single: choice, speaker_assignment: choice, topic_choice: choice, matching_pool: matching, text_response: writing, spoken_response: speaking };
 
+/* ENGINE §9: advisory time per part (level config advisory_seconds, scaled by an accommodation). A recommendation only:
+   nothing ends a part; the module timer stays the only limit. */
+export function advisory(p, ctx = {}) {
+  if (!p || !(p.advisory_seconds > 0)) return '';
+  const min = Math.max(1, Math.round((p.advisory_seconds * (ctx.multiplier || 1)) / 60));
+  return `<p class="kx-advisory">Empfohlene Zeit: ca. ${esc(min)} ${min === 1 ? 'Minute' : 'Minuten'}</p>`;
+}
+/* Schreiben: a text under half the target length is scored 0 for the task (official criterion, ENGINE §9) */
+export const LENGTH_RULE_NOTE = 'Hinweis: Unter 50 % der Wortzahl wird die Aufgabe mit 0 Punkten bewertet.';
+export const belowHalf = (words, target) => !!(target && words * 2 < target);
+
 export function createRenderer(extra = {}) {
   const registry = { ...DEFAULT_RENDERERS, ...extra };
   /* ctx.locked: Set of item ids that are read-only now (e.g. the Sprechen topic choice after the preparation). */
@@ -188,7 +199,7 @@ export function createRenderer(extra = {}) {
     return `<div class="kx-task">${instr}${texts}${items}</div>`;
   }
   function part(p, answers = {}, ctx = {}) {
-    return `<section class="kx-part" data-part="${esc(p.part)}" aria-labelledby="part-${esc(p.part)}"><h2 id="part-${esc(p.part)}">Teil ${esc(p.part)}</h2>`
+    return `<section class="kx-part" data-part="${esc(p.part)}" aria-labelledby="part-${esc(p.part)}"><h2 id="part-${esc(p.part)}">Teil ${esc(p.part)}</h2>${advisory(p, ctx)}`
       + p.tasks.map((t) => task(t, p, answers, ctx)).join('') + '</section>';
   }
   /* Renders only the parts present in the package. For Hören the server sends
@@ -216,7 +227,8 @@ export function reviewPanel(progress) {
   const parts = progress.filter((p) => p.total).map((p) => {
     const missing = p.items.filter((r) => !r.answered);
     const writing = p.items.filter((r) => r.interaction === 'text_response')
-      .map((r) => `<li>Text: ${esc(r.words)} Wörter${r.target_words ? ` (Ziel ca. ${esc(r.target_words)})` : ''}</li>`).join('');
+      .map((r) => `<li${belowHalf(r.words, r.target_words) ? ' class="kx-review-warn"' : ''}>Text: ${esc(r.words)} Wörter${r.target_words ? ` (Ziel ca. ${esc(r.target_words)})` : ''}`
+        + `${belowHalf(r.words, r.target_words) ? ` – weniger als die Hälfte. ${esc(LENGTH_RULE_NOTE)}` : ''}</li>`).join('');
     return `<li><span class="kx-review-part">Teil ${esc(p.part)}: ${p.answered} von ${p.total} beantwortet</span>`
       + (missing.length ? `<span class="kx-review-open"> · ohne Antwort: ${missing.map((r) => `<a href="#item-${idSafe(r.item_id)}" data-review-jump>Aufgabe ${esc(r.no)}</a>`).join(', ')}</span>` : '')
       + (writing ? `<ul class="kx-review-words">${writing}</ul>` : '') + '</li>';

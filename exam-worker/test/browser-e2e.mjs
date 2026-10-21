@@ -1043,6 +1043,7 @@ async function runTwoTabs() {
     // B: the same attempt is open in A
     await B.send('Page.navigate', { url });
     await bb.waitFor(`/Bereits geöffnet/.test(document.body.innerText) && document.querySelector('[data-act="takeover"]')`, 15000, 'B told the attempt is open elsewhere');
+    assert.match(await bb.evaluate('document.body.innerText'), /auf einem anderen Gerät noch nicht übertragen wurden, gehen dabei verloren/, 'B is warned before taking over (ENGINE §8)');
     assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM incidents').first()).n, 0, 'nothing happens before B decides');
     await bb.click('[data-act="takeover"]');
     await bb.waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'B in Lesen');

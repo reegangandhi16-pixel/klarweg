@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, moduleIntro, matchUsage, USED_SUFFIX, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
+import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, moduleIntro, matchUsage, USED_SUFFIX, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -71,7 +71,7 @@ async function resume(attemptId, takeover = false) {
     const r = await api.lease(attemptId, deviceId(), takeover);
     S.lease = r.lease.lease_id; rememberLease(attemptId, S.lease); S.attempt = r; route();
   } catch (e) {
-    if (e.code === 'lease_held') return message('Bereits geöffnet', 'Diese Prüfung ist in einem anderen Tab oder auf einem anderen Gerät geöffnet.', `<button class="kx-btn" data-act="takeover" data-attempt="${esc(attemptId)}">Hier fortsetzen</button>`);
+    if (e.code === 'lease_held') return message('Bereits geöffnet', `Diese Prüfung ist in einem anderen Tab oder auf einem anderen Gerät geöffnet. ${TAKEOVER_NOTE}`, `<button class="kx-btn" data-act="takeover" data-attempt="${esc(attemptId)}">Hier fortsetzen</button>`);
     fail(e);
   }
 }

@@ -86,11 +86,14 @@ export function saveAnnouncement(prev, next) {
    network or server failure is described as an interrupted connection, because only then can answers still be waiting
    in the local queue. States that end the attempt here (finished elsewhere, voided, no access) say so plainly instead of
    offering a reconnect that cannot succeed. actions: [{ act, label }]. */
+/* ENGINE §8 (device change): warned BEFORE a takeover. Tabs of the same browser share the local queue, so only answers not
+   yet sent from another device can be lost. */
+export const TAKEOVER_NOTE = 'Wenn Sie hier fortsetzen, wird die Prüfung im anderen Fenster oder auf dem anderen Gerät beendet. Antworten, die auf einem anderen Gerät noch nicht übertragen wurden, gehen dabei verloren; alles bereits Gespeicherte bleibt erhalten.';
 export const SIGN_IN_URL = '../account/index.html';   // the site's sign-in page, relative to /exam/
 export function errorView({ code = 'network', status = 0 } = {}) {
   const overview = { act: 'reload', label: 'Zur Übersicht' };
   switch (code) {
-    case 'lease_superseded': return { title: 'In einem anderen Fenster geöffnet', body: 'Diese Prüfung wird in einem anderen Tab oder auf einem anderen Gerät fortgesetzt.', actions: [{ act: 'takeover', label: 'Hier fortsetzen' }] };
+    case 'lease_superseded': return { title: 'In einem anderen Fenster geöffnet', body: `Diese Prüfung wird in einem anderen Tab oder auf einem anderen Gerät fortgesetzt. ${TAKEOVER_NOTE}`, actions: [{ act: 'takeover', label: 'Hier fortsetzen' }] };
     // ENGINE §8 (session cookie expired): sign in again in a new tab, then continue here — the exam tab stays open,
     // unsent answers stay queued on this device and the server time keeps running
     case 'auth_required': return { title: 'Bitte erneut anmelden', body: 'Ihre Anmeldung ist abgelaufen oder fehlt. Gespeicherte Antworten bleiben erhalten, und eine laufende Prüfungszeit läuft auf dem Server weiter. Melden Sie sich in einem neuen Tab an und wählen Sie dann „Weiter“.', actions: [{ act: 'reload', label: 'Weiter' }], links: [{ href: SIGN_IN_URL, label: 'In neuem Tab anmelden', newTab: true }] };

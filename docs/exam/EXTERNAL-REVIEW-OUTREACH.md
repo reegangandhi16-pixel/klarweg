@@ -87,7 +87,8 @@ Effort figures are engineering estimates for planning, not quotes.
 > [Name, Funktion, Klarweg]
 
 ## 2. EX-01 — privacy review (no recordings in this scope)
-- **Profile:** data-protection lawyer or certified DPO with GDPR experience in online education or consumer apps.
+- **Profile:** data-protection lawyer or certified DPO with **India DPDP Act 2023** experience (learners are mainly in
+  India), and GDPR where it applies (register EX-01), ideally in online education or consumer apps.
 - **Scope:**
   - the processing for the Lesen-only release: account (existing klarweg-access), exam attempts, answers with
     timestamps, results, audit log, Worker logs;

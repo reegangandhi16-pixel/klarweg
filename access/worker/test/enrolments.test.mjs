@@ -3,8 +3,8 @@
    migration), with Cashfree mocked at fetch() like consultations.test.mjs.
    Covers: server-side amounts, success, failure, cancel/expiry, pending,
    duplicate requests and webhooks, signature checks, amount mismatch,
-   capacity, late payments, instalments, the consultation adjustment and
-   the separation from self-paced access. */
+   capacity, late payments, full payment only (no instalments), the
+   consultation adjustment and the separation from self-paced access. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
@@ -88,7 +88,7 @@ const checkout = (env, cookie, body) => req(env, 'POST', '/enrol/checkout', { co
 const view = (env, cookie, ref) => req(env, 'GET', '/enrol/enrolments/' + ref, { cookie });
 const payments = async (env, ref) => (await env.DB.prepare('SELECT p.* FROM live_payments p JOIN live_enrolments e ON e.id = p.enrolment_id WHERE e.ref = ?1 ORDER BY p.created_at').bind(ref).all()).results;
 const enrolmentRow = (env, ref) => env.DB.prepare('SELECT * FROM live_enrolments WHERE ref = ?1').bind(ref).first();
-const openOrderId = async (env, ref, part = 1) => (await payments(env, ref)).find((p) => p.part === part && p.status === 'pending').id;
+const openOrderId = async (env, ref) => (await payments(env, ref)).find((p) => p.status === 'pending').id;
 function gatewayPays(orderId, amount) {
   const o = cashfree.orders.get(orderId);
   o.order_status = 'PAID';
@@ -133,7 +133,7 @@ test('interlocks: "live" needs production Cashfree, "sandbox" needs sandbox; bad
 });
 
 /* ================= catalogue and quote: amounts from the server ================= */
-test('catalogue: the published fee and plans, in paise, with seats left; a started batch is closed', async () => {
+test('catalogue: the published full course fee, in paise, with seats left; no plans; a started batch is closed', async () => {
   const env = makeEnv();
   const cat = (await req(env, 'GET', '/enrol/catalog')).json;
   assert.equal(cat.enabled, true);
@@ -141,10 +141,8 @@ test('catalogue: the published fee and plans, in paise, with seats left; a start
   assert.equal(cat.courses.length, 1);
   const c = cat.courses[0];
   assert.deepEqual({ id: c.id, batch: c.batch, capacity: c.capacity, seatsLeft: c.seatsLeft }, { id: 'live-a1', batch: BATCH, capacity: 8, seatsLeft: 8 });
-  assert.deepEqual(c.plans.map((p) => [p.id, p.totalPaise, p.schedule.map((s) => [s.part, s.amountPaise, s.due, s.dueBefore])]), [
-    ['full', 799900, [[1, 799900, 'now', null]]],
-    ['instalments', 799900, [[1, 400000, 'now', null], [2, 399900, 'before week 7', '2026-12-14']]]
-  ]);
+  assert.equal(c.feePaise, 799900);
+  assert.equal('plans' in c, false, 'full payment only: no payment plans are offered');
   at('2026-11-02 08:00');
   assert.deepEqual((await req(env, 'GET', '/enrol/catalog')).json.courses, [], 'the batch has started');
 });
@@ -155,9 +153,14 @@ test('quote: signed-in only; the amount due now is computed on the server', asyn
   const u = await user(env);
   const full = (await req(env, 'GET', '/enrol/quote?course_id=live-a1&plan=full', { cookie: u.cookie })).json.quote;
   assert.deepEqual({ due: full.dueNowPaise, total: full.totalPaise, credit: full.creditPaise }, { due: 799900, total: 799900, credit: 0 });
-  const inst = (await req(env, 'GET', '/enrol/quote?course_id=live-a1&plan=instalments', { cookie: u.cookie })).json.quote;
-  assert.equal(inst.dueNowPaise, 400000);
-  assert.equal((await req(env, 'GET', '/enrol/quote?course_id=live-a1&plan=monthly', { cookie: u.cookie })).status, 400);
+  assert.equal('schedule' in full, false, 'one payment: no schedule');
+  const noPlan = (await req(env, 'GET', '/enrol/quote?course_id=live-a1', { cookie: u.cookie })).json.quote;
+  assert.equal(noPlan.dueNowPaise, 799900, 'the plan may be omitted');
+  for (const plan of ['instalments', 'monthly']) {
+    const r = await req(env, 'GET', `/enrol/quote?course_id=live-a1&plan=${plan}`, { cookie: u.cookie });
+    assert.equal(r.status, 400);
+    assert.equal(r.json.code, 'bad-plan');
+  }
   assert.equal((await req(env, 'GET', '/enrol/quote?course_id=live-b2&plan=full', { cookie: u.cookie })).status, 409);
 });
 
@@ -194,7 +197,7 @@ test('checkout: refuses when the amount shown is no longer the amount due — be
   assert.equal(creates().length, 0);
 });
 
-test('refresh / retry / back: the same plan resumes the same order — one gateway order, one seat', async () => {
+test('refresh / retry / back: a held enrolment resumes the same order — one gateway order, one seat', async () => {
   const env = makeEnv();
   const u = await user(env);
   const a = await checkout(env, u.cookie, { course_id: 'live-a1', plan: 'full' });
@@ -207,15 +210,31 @@ test('refresh / retry / back: the same plan resumes the same order — one gatew
   assert.equal((await req(env, 'GET', '/enrol/catalog')).json.courses[0].seatsLeft, 7);
 });
 
-test('changing plan releases the old hold atomically and opens one new order', async () => {
+test('instalments are refused: an old page asking for them gets 400 before any hold or gateway order', async () => {
   const env = makeEnv();
   const u = await user(env);
-  const a = await checkout(env, u.cookie, { course_id: 'live-a1', plan: 'full' });
-  const b = await checkout(env, u.cookie, { course_id: 'live-a1', plan: 'instalments' });
+  for (const body of [{ course_id: 'live-a1', plan: 'instalments' }, { course_id: 'live-a1', plan: 'instalments', expected_amount_paise: 400000 }]) {
+    const r = await checkout(env, u.cookie, body);
+    assert.equal(r.status, 400);
+    assert.equal(r.json.code, 'bad-plan');
+  }
+  assert.equal(creates().length, 0);
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM live_enrolments').first()).n, 0);
+  assert.equal((await req(env, 'POST', '/enrol/enrolments/KWE-ABCDEFGH/pay', { cookie: u.cookie })).status, 404, 'the second-instalment route is gone');
+});
+
+test('the order lapses while the place is still held: a retry opens one new order for the same full fee, still one seat', async () => {
+  const env = makeEnv();
+  const u = await user(env);
+  const a = await checkout(env, u.cookie, { course_id: 'live-a1' });
+  const first = await openOrderId(env, a.json.enrolment.ref);
+  cashfree.orders.get(first).order_status = 'EXPIRED';
+  advance(27 * 60);                                  // the order expired; the 30-minute hold has not
+  const b = await checkout(env, u.cookie, { course_id: 'live-a1' });
   assert.equal(b.status, 200);
   assert.equal(b.json.released, a.json.enrolment.ref);
-  assert.equal((await enrolmentRow(env, a.json.enrolment.ref)).status, 'released');
-  assert.equal(creates().at(-1).body.order_amount, 4000);
+  assert.equal(creates().length, 2);
+  assert.equal(creates().at(-1).body.order_amount, 7999);
   assert.equal((await req(env, 'GET', '/enrol/catalog')).json.courses[0].seatsLeft, 7, 'still one seat');
 });
 
@@ -244,7 +263,9 @@ test('SUCCESS: the return redirect alone proves nothing; Cashfree PAID confirms 
   const v = (await view(env, u.cookie, ref)).json.enrolment;
   assert.equal(v.status, 'enrolled');
   assert.equal(v.paidPaise, 799900);
-  assert.deepEqual(v.parts.map((p) => p.status), ['paid']);
+  assert.equal(v.paymentStatus, 'paid');
+  assert.equal(v.amountDuePaise, 799900);
+  assert.equal('parts' in v, false, 'one payment: nothing further is ever due');
   // duplicate deliveries and polls: acknowledged, nothing changes
   const w2 = await webhook(env, success(orderId, 'cfpay_1'));
   assert.equal(w2.json.duplicate, true);
@@ -377,59 +398,46 @@ test('late payment after the hold lapsed: re-takes a free seat; with no seat lef
   assert.equal((await payments(env2, ref2))[0].status, 'paid', 'the money is recorded, for the refund');
 });
 
-/* ================= instalments ================= */
-test('instalments: ₹4,000 enrols; ₹3,999 is paid later through its own single order; no third charge', async () => {
+/* ================= duplicate charge ================= */
+test('a second paid order for the same enrolment is a duplicate charge: recorded for refund, never counted twice', async () => {
   const env = makeEnv();
   const u = await user(env);
-  const ref = (await checkout(env, u.cookie, { course_id: 'live-a1', plan: 'instalments', expected_amount_paise: 400000 })).json.enrolment.ref;
-  const o1 = await openOrderId(env, ref);
-  assert.equal(cashfree.orders.get(o1).order_amount, 4000);
-  // part 2 cannot be paid before enrolment
-  assert.equal((await req(env, 'POST', `/enrol/enrolments/${ref}/pay`, { cookie: u.cookie })).json.code, 'nothing-due');
-  gatewayPays(o1);
-  await webhook(env, success(o1));
-  let v = (await view(env, u.cookie, ref)).json.enrolment;
-  assert.equal(v.status, 'enrolled');
-  assert.deepEqual(v.parts.map((p) => [p.part, p.amountPaise, p.status, p.dueBefore]), [[1, 400000, 'paid', null], [2, 399900, 'due', '2026-12-14']]);
-  const p2 = await req(env, 'POST', `/enrol/enrolments/${ref}/pay`, { cookie: u.cookie });
-  assert.equal(p2.status, 200);
-  const p2again = await req(env, 'POST', `/enrol/enrolments/${ref}/pay`, { cookie: u.cookie });
-  assert.equal(p2again.json.resumed, true);
-  assert.equal(p2again.json.paymentSessionId, p2.json.paymentSessionId);
-  const o2 = await openOrderId(env, ref, 2);
-  assert.equal(cashfree.orders.get(o2).order_amount, 3999);
-  gatewayPays(o2);
-  await webhook(env, success(o2));
-  v = (await view(env, u.cookie, ref)).json.enrolment;
-  assert.equal(v.paidPaise, 799900);
-  assert.deepEqual(v.parts.map((p) => p.status), ['paid', 'paid']);
-  assert.equal((await req(env, 'POST', `/enrol/enrolments/${ref}/pay`, { cookie: u.cookie })).json.code, 'nothing-due');
-  await noCourseAccess(env, u);
-});
-
-test('a second paid order for the same part is a duplicate charge: recorded for refund, never counted twice', async () => {
-  const env = makeEnv();
-  const u = await user(env);
-  const ref = (await checkout(env, u.cookie, { course_id: 'live-a1', plan: 'instalments' })).json.enrolment.ref;
-  const o1 = await openOrderId(env, ref);
-  gatewayPays(o1); await webhook(env, success(o1));
-  await req(env, 'POST', `/enrol/enrolments/${ref}/pay`, { cookie: u.cookie });
-  const o2a = await openOrderId(env, ref, 2);
-  // that order expires unpaid; a new one is opened and paid
-  cashfree.orders.get(o2a).order_status = 'EXPIRED';
+  const ref = (await checkout(env, u.cookie, { course_id: 'live-a1' })).json.enrolment.ref;
+  const oa = await openOrderId(env, ref);
+  // that order expires unpaid; the learner retries within the hold and pays the new one
+  cashfree.orders.get(oa).order_status = 'EXPIRED';
   advance(27 * 60);
-  await view(env, u.cookie, ref);
-  await req(env, 'POST', `/enrol/enrolments/${ref}/pay`, { cookie: u.cookie });
-  const o2b = await openOrderId(env, ref, 2);
-  gatewayPays(o2b); await webhook(env, success(o2b, 'cf_b'));
-  // the old order is paid late (e.g. a bank delay)
-  gatewayPays(o2a);
-  const w = await webhook(env, success(o2a, 'cf_a'));
-  assert.equal(w.json.reason, 'duplicate-payment-for-part');
-  const ps = await payments(env, ref);
-  assert.equal(ps.filter((p) => p.part === 2 && p.status === 'paid').length, 1);
-  assert.equal(ps.find((p) => p.id === o2a).status, 'review');
-  assert.equal((await view(env, u.cookie, ref)).json.enrolment.paidPaise, 799900);
+  await checkout(env, u.cookie, { course_id: 'live-a1' });
+  const ref2 = (await env.DB.prepare("SELECT ref FROM live_enrolments WHERE status = 'pending'").first()).ref;
+  const ob = await openOrderId(env, ref2);
+  gatewayPays(ob); await webhook(env, success(ob, 'cf_b'));
+  assert.equal((await enrolmentRow(env, ref2)).status, 'enrolled');
+  // the old order is paid late (e.g. a bank delay): never a second seat or a second counted payment
+  gatewayPays(oa);
+  const w = await webhook(env, success(oa, 'cf_a'));
+  assert.equal(w.json.reason, 'late-payment-already-enrolled');
+  const paid = (await env.DB.prepare("SELECT COUNT(*) AS n FROM live_payments WHERE status = 'paid'").first()).n;
+  assert.equal((await view(env, u.cookie, ref2)).json.enrolment.paidPaise, 799900);
+  assert.equal((await env.DB.prepare("SELECT COUNT(*) AS n FROM live_enrolments WHERE status = 'enrolled'").first()).n, 1, 'one seat');
+  assert.equal(paid, 2, 'both payments are recorded, the late one for refund');
+  assert.equal((await enrolmentRow(env, ref)).status, 'review');
+
+  // two paid orders on ONE enrolment (e.g. Cashfree retried): the second goes to review
+  const env2 = makeEnv();
+  const v2 = await user(env2);
+  const r = (await checkout(env2, v2.cookie, { course_id: 'live-a1' })).json.enrolment.ref;
+  const o1 = await openOrderId(env2, r);
+  const enr = await enrolmentRow(env2, r);
+  await env2.DB.prepare("UPDATE live_payments SET status = 'expired' WHERE id = ?1").bind(o1).run();
+  const o2 = 'enrp_' + crypto.randomUUID();
+  await env2.DB.prepare("INSERT INTO live_payments (id, enrolment_id, amount_paise, currency, status, expires_at, created_at, updated_at) VALUES (?1, ?2, 799900, 'INR', 'pending', 9999999999, 0, 0)").bind(o2, enr.id).run();
+  cashfree.orders.set(o2, { order_id: o2, order_amount: 7999, order_currency: 'INR', order_status: 'PAID' });
+  await webhook(env2, success(o2, 'cf_2'));
+  gatewayPays(o1);
+  const dup = await webhook(env2, success(o1, 'cf_1'));
+  assert.equal(dup.json.reason, 'duplicate-payment');
+  assert.equal((await view(env2, v2.cookie, r)).json.enrolment.paidPaise, 799900, 'counted once');
+  assert.equal((await payments(env2, r)).find((p) => p.id === o1).status, 'review');
 });
 
 /* ================= authorisation ================= */
@@ -470,24 +478,27 @@ test('consultation adjustment OFF (default): a recent ₹100 consultation does n
   assert.equal(q.dueNowPaise, 799900);
 });
 
-test('consultation adjustment "first-payment": ₹100 off the first payment, within 7 days, used once', async () => {
-  const env = makeEnv({ ENROL_CONSULT_CREDIT: 'first-payment' });
+test('consultation adjustment "course-fee": ₹100 off the course fee, within 7 days, used once', async () => {
+  const env = makeEnv({ ENROL_CONSULT_CREDIT: 'course-fee' });
   const u = await user(env);
   const old = await user(env);
   await confirmedConsult(env, old, '2026-10-10');
   assert.equal((await req(env, 'GET', '/enrol/quote?course_id=live-a1&plan=full', { cookie: old.cookie })).json.quote.creditPaise, 0, 'older than 7 days');
   const cref = await confirmedConsult(env, u, '2026-10-16');
-  const q = (await req(env, 'GET', '/enrol/quote?course_id=live-a1&plan=instalments', { cookie: u.cookie })).json.quote;
-  assert.deepEqual({ credit: q.creditPaise, ref: q.creditConsultRef, due: q.dueNowPaise, total: q.totalPaise }, { credit: 10000, ref: cref, due: 390000, total: 799900 });
-  const r = await checkout(env, u.cookie, { course_id: 'live-a1', plan: 'instalments', expected_amount_paise: 390000 });
+  const q = (await req(env, 'GET', '/enrol/quote?course_id=live-a1', { cookie: u.cookie })).json.quote;
+  assert.deepEqual({ credit: q.creditPaise, ref: q.creditConsultRef, due: q.dueNowPaise, total: q.totalPaise }, { credit: 10000, ref: cref, due: 789900, total: 799900 });
+  const r = await checkout(env, u.cookie, { course_id: 'live-a1', expected_amount_paise: 789900 });
   assert.equal(r.status, 200);
-  assert.equal(creates().at(-1).body.order_amount, 3900);
+  assert.equal(creates().at(-1).body.order_amount, 7899);
   const o = await openOrderId(env, r.json.enrolment.ref);
   gatewayPays(o); await webhook(env, success(o));
   const v = (await view(env, u.cookie, r.json.enrolment.ref)).json.enrolment;
   assert.equal(v.status, 'enrolled');
   assert.equal(v.creditPaise, 10000);
-  assert.equal(v.parts[1].amountPaise, 399900, 'the second instalment is unchanged');
+  assert.deepEqual({ paid: v.paidPaise, due: v.amountDuePaise, total: v.totalPaise }, { paid: 789900, due: 789900, total: 799900 });
+  const u2 = await user(env);
+  await env.DB.prepare('UPDATE consult_bookings SET user_id = ?1 WHERE ref = ?2').bind(u2.id, cref).run();
+  assert.equal((await req(env, 'GET', '/enrol/quote?course_id=live-a1', { cookie: u2.cookie })).json.quote.creditPaise, 0, 'used once');
 });
 
 /* ================= separation and reconciliation ================= */
@@ -508,7 +519,7 @@ test('scheduled reconciliation settles a paid order whose webhook and return wer
   assert.equal((await enrolmentRow(env, ref)).status, 'enrolled');
 });
 
-test('the Worker\'s course catalogue matches the published course (fees, plans, capacity)', async () => {
+test('the Worker\'s course catalogue matches the published course (full fee, capacity); no instalments anywhere', async () => {
   const fs = await import('node:fs');
   const src = fs.readFileSync(path.join(WORKER_DIR, '..', '..', 'live-classes-data.js'), 'utf8');
   const window = {};
@@ -517,10 +528,11 @@ test('the Worker\'s course catalogue matches the published course (fees, plans, 
   const rupees = (p) => '₹' + (p / 100).toLocaleString('en-IN');
   const c = LIVE_COURSES['live-a1'];
   assert.equal(c.title, a1.title);
-  assert.equal(rupees(c.plans.full.parts[0]), a1.priceLabel);
-  assert.equal(a1.paymentTerms.includes(`${rupees(c.plans.full.parts[0])} before the first class`), true);
-  assert.equal(a1.paymentTerms.includes(`${rupees(c.plans.instalments.parts[0])} before the start and ${rupees(c.plans.instalments.parts[1])} before week ${c.plans.instalments.secondDueWeek}`), true);
-  assert.equal(c.plans.instalments.parts.reduce((x, y) => x + y, 0), c.plans.full.parts[0], 'instalments add up to the fee: no hidden surcharge or discount');
+  assert.equal(rupees(c.feePaise), a1.priceLabel);
+  assert.equal(a1.priceLabel, '₹7,999');
+  assert.equal(a1.paymentTerms.startsWith(`${rupees(c.feePaise)} in full before the first class`), true, a1.paymentTerms);
+  assert.equal(/instal/i.test(a1.paymentTerms), false, 'the published terms offer no instalments');
+  assert.deepEqual(Object.keys(c).sort(), ['capacity', 'feePaise', 'title'], 'no plans or parts in the Worker catalogue');
   assert.match(a1.batchSize, new RegExp(`Up to ${c.capacity} learners`));
 });
 

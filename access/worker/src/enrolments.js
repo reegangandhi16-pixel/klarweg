@@ -3,15 +3,16 @@
    ------------------------------------------------------------
    Routes (wired in index.js):
      GET  /enrol/catalog               public: courses open for online
-                                       enrolment, fees, plans, seats left
-     GET  /enrol/quote?course_id=&plan= signed in: the amount due now and
-                                       later, computed here
+                                       enrolment, fees, seats left
+     GET  /enrol/quote?course_id=      signed in: the amount due, computed
+                                       here
      POST /enrol/checkout              signed in: hold a seat + Cashfree
-                                       order for the first (or only) payment
+                                       order for the full course fee
      GET  /enrol/enrolments            signed in: my enrolments
      GET  /enrol/enrolments/:ref       signed in: one enrolment; reconciles
                                        open payments with Cashfree
-     POST /enrol/enrolments/:ref/pay   signed in: pay the second instalment
+   Full payment only (owner decision, 2026-10-21): one enrolment is paid by
+   one payment of the whole course fee. There are no instalments.
    Settlement of PAYMENT_SUCCESS webhooks for enrolment orders
    ("enrp_…") is enrolWebhook() below, called from webhooks-cashfree.js.
 
@@ -25,7 +26,7 @@
 
    Trust model:
      · Fees come from LIVE_COURSES below (the published course data, kept in
-       step by a test). The browser sends a course id and a plan only; any
+       step by a test). The browser sends a course id only; any
        amount it sends is ignored, except that POST /enrol/checkout refuses
        to start if the amount the learner was shown is no longer the amount
        due (expected_amount_paise), so nobody pays a figure they didn't see.
@@ -34,7 +35,7 @@
        redirect. A webhook only names an order.
      · Seats: one conditional INSERT takes a seat only while fewer than the
        course capacity are held; a learner holds at most one active
-       enrolment per batch; each payment part has at most one open or paid
+       enrolment per batch; an enrolment has at most one open or paid
        order (migration-014). Duplicate webhooks, polls and refreshes
        resume or acknowledge; they never charge or enrol twice.
      · No email or message is sent from this module.
@@ -47,9 +48,9 @@
      ENROL_COURSES  = JSON {"live-a1":{"batch":"2026-11-02"}}: the courses
        open for online enrolment and the start date of the batch being
        sold. A course not listed, or whose batch has started, is closed.
-     ENROL_CONSULT_CREDIT = "off" (default) | "first-payment": whether a
-       confirmed ₹100 consultation from the last 7 days reduces the first
-       payment (an owner decision; see docs/live-classes-online-payments.md).
+     ENROL_CONSULT_CREDIT = "off" (default) | "course-fee": whether a
+       confirmed ₹100 consultation from the last 7 days reduces the course
+       fee (an owner decision; see docs/live-classes-online-payments.md).
    ============================================================ */
 import { isValidPhone } from "./auth.js";
 import { getSessionToken, findSessionUser } from "./sessions.js";
@@ -65,20 +66,20 @@ import { cashfreeExpiryTime, parseGatewayTime, istClock, FEE_PAISE as CONSULT_FE
 
 const CASHFREE_API_VERSION = "2023-08-01";
 
-/* The published live courses that may be sold online, with their fees in
-   paise. Mirrors live-classes-data.js and the decision sheet (D3): a static
-   test fails if a fee, plan or capacity here differs from the page. */
+/* The published live courses that may be sold online, with the full
+   course fee in paise. Mirrors live-classes-data.js and the decision sheet
+   (D3): a test fails if a fee or capacity here differs from the page. Only
+   a course listed here AND open in ENROL_COURSES with a future batch can
+   be charged; a teacher's displayed price alone sells nothing. */
 export const LIVE_COURSES = Object.freeze({
   "live-a1": Object.freeze({
     title: "Beginner German · A1",
     capacity: 8,                                   // "Up to 8 learners"
-    plans: Object.freeze({
-      full: Object.freeze({ label: "Full payment", parts: Object.freeze([799900]) }),
-      instalments: Object.freeze({ label: "Two instalments", parts: Object.freeze([400000, 399900]), secondDueWeek: 7 })
-    })
+    feePaise: 799900                               // ₹7,999, paid in full
   })
 });
-export const PLANS = Object.freeze(["full", "instalments"]);
+/* The only payment plan. A request naming any other plan is refused. */
+export const PLAN = "full";
 /* The consultation adjustment period (decision sheet D4: 7 days). */
 export const CONSULT_CREDIT_DAYS = 7;
 
@@ -125,7 +126,7 @@ export function configuredCourses(env) {
 }
 
 export function creditMode(env) {
-  return String(env.ENROL_CONSULT_CREDIT || "off") === "first-payment" ? "first-payment" : "off";
+  return String(env.ENROL_CONSULT_CREDIT || "off") === "course-fee" ? "course-fee" : "off";
 }
 
 /* A course is open for online enrolment today: configured, and its batch
@@ -140,18 +141,6 @@ function openCourse(env, courseId, clock = istClock()) {
 function addDays(date, days) {
   const [y, m, d] = date.split("-").map(Number);
   return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
-}
-
-/* The schedule of payments for a plan, without any adjustment. */
-export function planSchedule(course, planId) {
-  const plan = course.plans[planId];
-  if (!plan) return null;
-  return plan.parts.map((amountPaise, i) => ({
-    part: i + 1,
-    amountPaise,
-    due: i === 0 ? "now" : `before week ${plan.secondDueWeek}`,
-    dueBefore: i === 0 ? null : addDays(course.batch, (plan.secondDueWeek - 1) * 7)
-  }));
 }
 
 /* ---------------- storage helpers ---------------- */
@@ -176,37 +165,26 @@ async function seatsHeld(db, courseId, batch) {
 
 async function paymentsOf(db, enrolmentId) {
   const { results } = await db.prepare(
-    "SELECT * FROM live_payments WHERE enrolment_id = ?1 ORDER BY part, created_at"
+    "SELECT * FROM live_payments WHERE enrolment_id = ?1 ORDER BY created_at"
   ).bind(enrolmentId).all();
   return results;
 }
 
 export function publicEnrolment(row, payments, mode) {
   const course = LIVE_COURSES[row.course_id];
-  const plan = course ? course.plans[row.plan] : null;
-  const paidParts = new Set(payments.filter((p) => p.status === "paid").map((p) => p.part));
-  const parts = (plan ? plan.parts : []).map((amountPaise, i) => {
-    const part = i + 1;
-    const due = part === 1 ? amountPaise - row.credit_paise : amountPaise;
-    const open = payments.find((p) => p.part === part && p.status === "pending");
-    return {
-      part,
-      amountPaise: due,
-      dueBefore: part === 1 || !plan ? null : addDays(row.batch, (plan.secondDueWeek - 1) * 7),
-      status: paidParts.has(part) ? "paid" : open ? "pending" : "due"
-    };
-  });
+  const paid = payments.some((p) => p.status === "paid");
+  const open = payments.some((p) => p.status === "pending");
   return {
     ref: row.ref,
     courseId: row.course_id,
     courseTitle: course ? course.title : row.course_id,
     batch: row.batch,
-    plan: row.plan,
     status: row.status,
     totalPaise: row.total_paise,
     creditPaise: row.credit_paise,
     creditConsultRef: row.credit_consult_ref || null,
-    parts,
+    amountDuePaise: row.total_paise - row.credit_paise,
+    paymentStatus: paid ? "paid" : open ? "pending" : "due",
     paidPaise: payments.filter((p) => p.status === "paid").reduce((a, p) => a + p.amount_paise, 0),
     holdExpiresAt: row.status === "pending" ? row.hold_expires_at : null,
     testMode: mode === "sandbox"
@@ -217,7 +195,7 @@ export function publicEnrolment(row, payments, mode) {
    most recent CONFIRMED consultation dated within the last 7 days, not
    already used by another active enrolment. */
 async function consultCredit(env, userId, clock) {
-  if (creditMode(env) !== "first-payment") return null;
+  if (creditMode(env) !== "course-fee") return null;
   const since = addDays(clock.date, -CONSULT_CREDIT_DAYS);
   let row;
   try {
@@ -231,21 +209,19 @@ async function consultCredit(env, userId, clock) {
   return row ? { ref: row.ref, amountPaise: CONSULT_FEE_PAISE } : null;
 }
 
-async function quoteFor(env, user, course, planId, clock) {
-  const schedule = planSchedule(course, planId);
-  if (!schedule) return null;
+/* The amount due: the full course fee, less the consultation adjustment
+   when that is switched on and applies. */
+async function quoteFor(env, user, course, clock) {
   const credit = user ? await consultCredit(env, user.id, clock) : null;
-  const creditPaise = credit ? Math.min(credit.amountPaise, schedule[0].amountPaise - 100) : 0;
+  const creditPaise = credit ? Math.min(credit.amountPaise, course.feePaise - 100) : 0;
   return {
     courseId: course.id,
     courseTitle: course.title,
     batch: course.batch,
-    plan: planId,
-    totalPaise: schedule.reduce((a, p) => a + p.amountPaise, 0),
+    totalPaise: course.feePaise,
     creditPaise,
     creditConsultRef: credit ? credit.ref : null,
-    dueNowPaise: schedule[0].amountPaise - creditPaise,
-    schedule: schedule.map((p, i) => (i === 0 ? { ...p, amountPaise: p.amountPaise - creditPaise } : p)),
+    dueNowPaise: course.feePaise - creditPaise,
     currency: "INR"
   };
 }
@@ -268,9 +244,9 @@ async function fetchGatewayOrder(env, orderId) {
   }
 }
 
-/* Creates a Cashfree order for one payment part. Returns
+/* Creates the Cashfree order for an enrolment's course fee. Returns
    { ok, paymentSessionId, expiresAt } or { ok: false }. Nothing is written. */
-async function createGatewayOrder(env, request, { id, ref, user, amountPaise, part, courseTitle, now }) {
+async function createGatewayOrder(env, request, { id, ref, user, amountPaise, courseTitle, now }) {
   const expiresAt = now + GATEWAY_EXPIRY_SECONDS;
   let res, data;
   try {
@@ -294,8 +270,8 @@ async function createGatewayOrder(env, request, { id, ref, user, amountPaise, pa
           customer_phone: user.phone,
           customer_name: user.name || "Klarweg Customer"
         },
-        order_note: `Klarweg ${courseTitle} ${ref} payment ${part}`,
-        order_tags: { kind: "live-enrolment", ref, part: String(part) },
+        order_note: `Klarweg ${courseTitle} ${ref}`,
+        order_tags: { kind: "live-enrolment", ref },
         order_meta: {
           return_url: siteBaseUrl(env, request) + "/live-classes.html?enrol_ref=" + ref + "#enrol",
           notify_url: notifyUrl(env)
@@ -353,10 +329,10 @@ export async function settlePayment(env, payment, remote, paymentId) {
     return { result: "not-paid" };
   }
 
-  /* Paid. Record the money first: the payment row becomes 'paid' (its
-     part can then never be charged again). A second paid order for the
-     same part violates the unique index: that is a duplicate charge, kept
-     for a person to refund. */
+  /* Paid. Record the money first: the payment row becomes 'paid' (the
+     enrolment can then never be charged again). A second paid order for
+     the same enrolment violates the unique index: that is a duplicate
+     charge, kept for a person to refund. */
   try {
     const r = await db.prepare(
       "UPDATE live_payments SET status = 'paid', payment_id = COALESCE(?1, payment_id), updated_at = ?2 WHERE id = ?3 AND status IN ('pending', 'expired', 'failed')"
@@ -367,12 +343,10 @@ export async function settlePayment(env, payment, remote, paymentId) {
     }
   } catch (e) {
     if (!isUniqueViolation(e)) throw e;
-    return paymentToReview("duplicate-payment-for-part");
+    return paymentToReview("duplicate-payment");
   }
 
-  if (payment.part !== 1) return { result: "paid" };
-
-  /* Part 1 paid: the enrolment is confirmed. Normal case: still pending. */
+  /* Paid: the enrolment is confirmed. Normal case: still pending. */
   const enrolment = await db.prepare("SELECT * FROM live_enrolments WHERE id = ?1").bind(payment.enrolment_id).first();
   if (!enrolment) return { result: "paid" };
   if (enrolment.status === "enrolled") return { result: "paid" };
@@ -428,17 +402,20 @@ export async function enrolCatalog(request, env) {
     courses.push({
       id, title: course.title, batch: course.batch, capacity: course.capacity,
       seatsLeft: Math.max(0, course.capacity - held),
-      plans: PLANS.map((p) => ({ id: p, label: course.plans[p].label, totalPaise: course.plans[p].parts.reduce((a, x) => a + x, 0), schedule: planSchedule(course, p) }))
+      feePaise: course.feePaise
     });
   }
   return json({ ...base, courses });
 }
 
-function readCoursePlan(source) {
+/* course_id, and the plan if one is named: only "full" is accepted
+   (an old page asking for instalments is refused, never charged). */
+function readCourse(source) {
   const courseId = typeof source.course_id === "string" ? source.course_id.trim() : "";
-  const plan = typeof source.plan === "string" ? source.plan.trim() : "";
-  return { courseId, plan };
+  const planOk = source.plan == null || source.plan === "" || source.plan === PLAN;
+  return { courseId, planOk };
 }
+const badPlan = () => json({ ok: false, error: "Only full payment of the course fee is available.", code: "bad-plan" }, 400);
 
 export async function enrolQuote(request, env) {
   const user = await sessionUser(request, env);
@@ -446,12 +423,12 @@ export async function enrolQuote(request, env) {
   const cfg = enrolMode(env);
   if (!cfg.enabled) return json({ ok: false, error: "Online enrolment is not available." }, 503);
   const url = new URL(request.url);
-  const { courseId, plan } = readCoursePlan(Object.fromEntries(url.searchParams));
+  const { courseId, planOk } = readCourse(Object.fromEntries(url.searchParams));
+  if (!planOk) return badPlan();
   const clock = istClock();
   const course = openCourse(env, courseId, clock);
   if (!course) return json({ ok: false, error: "This course is not open for online enrolment.", code: "course-closed" }, 409);
-  if (!PLANS.includes(plan)) return json({ ok: false, error: "Choose a payment plan.", code: "bad-plan" }, 400);
-  return json({ ok: true, quote: await quoteFor(env, user, course, plan, clock), testMode: cfg.mode === "sandbox" });
+  return json({ ok: true, quote: await quoteFor(env, user, course, clock), testMode: cfg.mode === "sandbox" });
 }
 
 export async function createEnrolCheckout(request, env) {
@@ -464,11 +441,11 @@ export async function createEnrolCheckout(request, env) {
   }
   let body;
   try { body = await request.json(); } catch { return json({ ok: false, error: "Invalid JSON body." }, 400); }
-  const { courseId, plan } = readCoursePlan(body || {});
+  const { courseId, planOk } = readCourse(body || {});
+  if (!planOk) return badPlan();
   const clock = istClock();
   const course = openCourse(env, courseId, clock);
   if (!course) return json({ ok: false, error: "This course is not open for online enrolment.", code: "course-closed" }, 409);
-  if (!PLANS.includes(plan)) return json({ ok: false, error: "Choose a payment plan.", code: "bad-plan" }, 400);
   if (!isValidPhone(user.phone)) {
     return json({ ok: false, error: "A valid phone number is required before payment. Please add one to your account.", code: "phone-required" }, 400);
   }
@@ -481,17 +458,17 @@ export async function createEnrolCheckout(request, env) {
   if (active && active.status === "enrolled") {
     return json({ ok: false, code: "already-enrolled", error: "You are already enrolled in this batch.", enrolment: publicEnrolment(active, await paymentsOf(env.DB, active.id), cfg.mode) }, 409);
   }
-  /* Refresh / retry / back button: the same plan resumes the same order. */
-  if (active && active.plan === plan) {
+  /* Refresh / retry / back button: a held enrolment resumes its open order. */
+  if (active) {
     const open = await env.DB.prepare(
-      "SELECT * FROM live_payments WHERE enrolment_id = ?1 AND part = 1 AND status = 'pending'"
+      "SELECT * FROM live_payments WHERE enrolment_id = ?1 AND status = 'pending'"
     ).bind(active.id).first();
     if (open && open.payment_session_id) {
       return json({ ok: true, resumed: true, enrolment: publicEnrolment(active, await paymentsOf(env.DB, active.id), cfg.mode), paymentSessionId: open.payment_session_id, checkout: { mode: cashfreeMode(env) } });
     }
   }
 
-  const quote = await quoteFor(env, user, course, plan, clock);
+  const quote = await quoteFor(env, user, course, clock);
   /* The learner must have seen this exact amount. */
   if (body.expected_amount_paise != null && Number(body.expected_amount_paise) !== quote.dueNowPaise) {
     return json({ ok: false, code: "amount-changed", error: "The amount due has changed. Please review it before paying.", quote }, 409);
@@ -513,10 +490,11 @@ export async function createEnrolCheckout(request, env) {
   const holdUntil = clock.nowSec + HOLD_SECONDS;
 
   /* 1. The gateway order first; nothing in the database changes yet. */
-  const gw = await createGatewayOrder(env, request, { id: paymentId, ref, user, amountPaise: quote.dueNowPaise, part: 1, courseTitle: course.title, now: clock.nowSec });
+  const gw = await createGatewayOrder(env, request, { id: paymentId, ref, user, amountPaise: quote.dueNowPaise, courseTitle: course.title, now: clock.nowSec });
   if (!gw.ok) return json({ ok: false, code: "payment-unavailable", error: "The payment could not be started. Nothing has been charged. Please try again." }, 502);
 
-  /* 2. One transaction: release the learner's other pending plan (if any),
+  /* 2. One transaction: release the learner's earlier hold whose order
+        lapsed (if any),
         take a seat only while one is free, and open the payment. If the
         seat insert takes nothing, the payment insert takes nothing too. */
   const stmts = [];
@@ -525,13 +503,13 @@ export async function createEnrolCheckout(request, env) {
   }
   stmts.push(env.DB.prepare(
     `INSERT INTO live_enrolments
-       (id, ref, user_id, course_id, batch, plan, status, total_paise, credit_paise, credit_consult_ref, hold_expires_at, created_at, updated_at)
-     SELECT ?1, ?2, ?3, ?4, ?5, ?6, 'pending', ?7, ?8, ?9, ?10, ?11, ?11
-      WHERE (SELECT COUNT(*) FROM live_enrolments WHERE course_id = ?4 AND batch = ?5 AND status IN ('pending', 'enrolled')) < ?12`
-  ).bind(enrolmentId, ref, user.id, courseId, course.batch, plan, quote.totalPaise, quote.creditPaise, quote.creditConsultRef, holdUntil, clock.nowSec, course.capacity));
+       (id, ref, user_id, course_id, batch, status, total_paise, credit_paise, credit_consult_ref, hold_expires_at, created_at, updated_at)
+     SELECT ?1, ?2, ?3, ?4, ?5, 'pending', ?6, ?7, ?8, ?9, ?10, ?10
+      WHERE (SELECT COUNT(*) FROM live_enrolments WHERE course_id = ?4 AND batch = ?5 AND status IN ('pending', 'enrolled')) < ?11`
+  ).bind(enrolmentId, ref, user.id, courseId, course.batch, quote.totalPaise, quote.creditPaise, quote.creditConsultRef, holdUntil, clock.nowSec, course.capacity));
   stmts.push(env.DB.prepare(
-    `INSERT INTO live_payments (id, enrolment_id, part, amount_paise, currency, status, payment_session_id, expires_at, created_at, updated_at)
-     SELECT ?1, ?2, 1, ?3, 'INR', 'pending', ?4, ?5, ?6, ?6
+    `INSERT INTO live_payments (id, enrolment_id, amount_paise, currency, status, payment_session_id, expires_at, created_at, updated_at)
+     SELECT ?1, ?2, ?3, 'INR', 'pending', ?4, ?5, ?6, ?6
       WHERE EXISTS (SELECT 1 FROM live_enrolments WHERE id = ?2)`
   ).bind(paymentId, enrolmentId, quote.dueNowPaise, gw.paymentSessionId, gw.expiresAt, clock.nowSec));
   try {
@@ -559,52 +537,9 @@ export async function createEnrolCheckout(request, env) {
    can be traced (and settlePayment() would send a payment on it to review). */
 async function recordUnusedPayment(db, { paymentId, enrolmentId, amountPaise, now, reason }) {
   await db.prepare(
-    `INSERT INTO live_payments (id, enrolment_id, part, amount_paise, currency, status, expires_at, review_reason, created_at, updated_at)
-     VALUES (?1, ?2, 1, ?3, 'INR', 'failed', ?4, ?5, ?4, ?4)`
+    `INSERT INTO live_payments (id, enrolment_id, amount_paise, currency, status, expires_at, review_reason, created_at, updated_at)
+     VALUES (?1, ?2, ?3, 'INR', 'failed', ?4, ?5, ?4, ?4)`
   ).bind(paymentId, enrolmentId, amountPaise, now, reason).run();
-}
-
-/* POST /enrol/enrolments/:ref/pay — the second instalment of an enrolled
-   instalment plan. Resumes an open order; never opens a second one. */
-export async function payNextPart(request, env, ref) {
-  const user = await sessionUser(request, env);
-  if (!user) return json({ ok: false, error: "Authentication required." }, 401);
-  if (!ENROL_REF_RE.test(ref)) return json({ ok: false, error: "Invalid enrolment reference." }, 400);
-  const cfg = enrolMode(env);
-  if (!cfg.enabled) return json({ ok: false, error: "Online payment is not available." }, 503);
-  const row = await env.DB.prepare("SELECT * FROM live_enrolments WHERE ref = ?1 AND user_id = ?2").bind(ref, user.id).first();
-  if (!row) return json({ ok: false, error: "Enrolment not found." }, 404);
-  const course = LIVE_COURSES[row.course_id];
-  if (row.status !== "enrolled" || row.plan !== "instalments" || !course) {
-    return json({ ok: false, code: "nothing-due", error: "Nothing is due on this enrolment." }, 409);
-  }
-  if (!isValidPhone(user.phone)) {
-    return json({ ok: false, error: "A valid phone number is required before payment. Please add one to your account.", code: "phone-required" }, 400);
-  }
-  const now = nowSeconds();
-  await sweep(env.DB, now);
-  const payments = await paymentsOf(env.DB, row.id);
-  if (payments.some((p) => p.part === 2 && p.status === "paid")) {
-    return json({ ok: false, code: "nothing-due", error: "This enrolment is fully paid." }, 409);
-  }
-  const open = payments.find((p) => p.part === 2 && p.status === "pending");
-  if (open && open.payment_session_id) {
-    return json({ ok: true, resumed: true, enrolment: publicEnrolment(row, payments, cfg.mode), paymentSessionId: open.payment_session_id, checkout: { mode: cashfreeMode(env) } });
-  }
-  const amountPaise = course.plans.instalments.parts[1];
-  const paymentId = `enrp_${crypto.randomUUID()}`;
-  const gw = await createGatewayOrder(env, request, { id: paymentId, ref: row.ref, user, amountPaise, part: 2, courseTitle: course.title, now });
-  if (!gw.ok) return json({ ok: false, code: "payment-unavailable", error: "The payment could not be started. Nothing has been charged. Please try again." }, 502);
-  try {
-    await env.DB.prepare(
-      `INSERT INTO live_payments (id, enrolment_id, part, amount_paise, currency, status, payment_session_id, expires_at, created_at, updated_at)
-       VALUES (?1, ?2, 2, ?3, 'INR', 'pending', ?4, ?5, ?6, ?6)`
-    ).bind(paymentId, row.id, amountPaise, gw.paymentSessionId, gw.expiresAt, now).run();
-  } catch (e) {
-    if (!isUniqueViolation(e)) throw e;
-    return json({ ok: false, code: "payment-in-progress", error: "A payment for this instalment is already in progress. Please reload." }, 409);
-  }
-  return json({ ok: true, enrolment: publicEnrolment(row, await paymentsOf(env.DB, row.id), cfg.mode), paymentSessionId: gw.paymentSessionId, checkout: { mode: cashfreeMode(env) } });
 }
 
 /* Reconciles every not-yet-final payment of one enrolment with Cashfree. */

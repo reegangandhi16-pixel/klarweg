@@ -124,7 +124,7 @@ function demoData() {
     [/(liveEnrolment: \{[\s\S]*?ownerApproval: )null/, "$1'LOCAL DEMO ONLY'"],
     [/(liveEnrolment: \{[\s\S]*?legalTermsUpdated: )false/, '$1true'],
     [/nextBatch: null,(\s*\/\/ no start date)/, "nextBatch: 'Monday 2 November 2026',$1"],
-    [/(paymentTerms: '₹7,999 before the first class, or two instalments: ₹4,000 before the start and ₹3,999 before week 7\.) Paid by UPI or bank transfer on a payment request we email you\.'/, "$1 Paid online through Cashfree.'"],
+    [/(paymentTerms: '₹7,999 in full before the first class\.) Paid by UPI or bank transfer on a payment request we email you\.'/, "$1 Paid online through Cashfree.'"],
     [/(title: 'Beginner German · A1',[\s\S]*?enrolment: )'waitlist'/, "$1'open'"]
   ];
   let s = fs.readFileSync(path.join(ROOT, 'live-classes-data.js'), 'utf8');
@@ -303,48 +303,44 @@ async function runE2E() {
   await go(SITE + '/live-classes.html#courses');
   ok('course: the open A1 course card says "Enrol and pay online" and shows ₹7,999',
     await waitFor('document.querySelector("[data-enrol-course=live-a1]")') && /₹7,999/.test(await text('#course-grid')));
-  ok('course: the enrolment panel lists the course, seats left and both plans with totals',
-    await waitFor('document.querySelector("#enrol #kwen-next")') && /8 of 8 places left/.test(await text('#enrol')) && /Full payment · ₹7,999/.test(await text('#enrol')) && /Two instalments · ₹7,999/.test(await text('#enrol')), await text('#enrol'));
+  ok('course: the enrolment panel lists the course with its full fee and seats left; no payment-plan choice',
+    await waitFor('document.querySelector("#enrol #kwen-next")') && /Beginner German · A1 · ₹7,999/.test(await text('#enrol')) && /8 of 8 places left/.test(await text('#enrol'))
+      && !/instal|payment plan/i.test(await text('#enrol')) && !(await ev('!!document.querySelector("input[name=kwen-plan]")')), await text('#enrol'));
   await snap('course-1-card', '.c-card');
   await click('[data-enrol-course=live-a1]');
-  await sleep(300); await snap('course-2-choose-plan', '#enrol');
-  await click('input[name=kwen-plan][value=instalments]');
+  await sleep(300); await snap('course-2-choose-course', '#enrol');
   await click('#kwen-next');
-  ok('course: the review screen shows the amount due now (₹4,000) and the second instalment (₹3,999, before 14 December 2026)',
-    await waitFor('/Due now/.test(document.querySelector("#enrol").innerText)') && /Due now\s*₹4,000/.test(await text('#enrol')) && /Second instalment, due before Monday, 14 December 2026\s*₹3,999/.test(await text('#enrol')), await text('#enrol'));
+  ok('course: the review screen shows the course fee and the full amount due (₹7,999), and no instalment',
+    await waitFor('/Due now, in full/.test(document.querySelector("#enrol").innerText)') && /Course fee\s*₹7,999/.test(await text('#enrol')) && /Due now, in full\s*₹7,999/.test(await text('#enrol')) && !/instal/i.test(await text('#enrol')), await text('#enrol'));
   ok('course: Pay is disabled until the terms box is ticked', await ev('document.querySelector("#kwen-pay").disabled === true'));
   await snap('course-3-review-amount', '#enrol');
   await click('#kwen-agree'); await click('#kwen-pay');
-  ok('course: checkout opens for a ₹4,000 Worker-created order', await waitFor('location.pathname === "/__mock_cashfree/pay"') && (await text('#mock-amount')) === '₹4,000');
-  const part1 = await text('#mock-order');
+  ok('course: checkout opens for a ₹7,999 Worker-created order', await waitFor('location.pathname === "/__mock_cashfree/pay"') && (await text('#mock-amount')) === '₹7,999');
+  const order1 = await text('#mock-order');
   await click('#mock-cancelled');
   ok('course: a CANCELLED payment returns to "Payment not completed yet", place held, Continue payment offered',
     await waitFor('/Payment not completed yet/.test(document.body.innerText) && document.querySelector("[data-kwen-resume]")', 45000), await text('#enrol'));
   ok('course: still pending in the database; nothing confirmed by the redirect', (await row('SELECT status FROM live_enrolments ORDER BY created_at DESC LIMIT 1')).status === 'pending');
   await snap('course-4-cancelled-retry', '#enrol');
   await click('[data-kwen-resume]');
-  ok('course: Continue payment re-opens the SAME order', await waitFor('location.pathname === "/__mock_cashfree/pay"') && (await text('#mock-order')) === part1 && cf.creates.filter((x) => x.startsWith('enrp_')).length === 1);
+  ok('course: Continue payment re-opens the SAME order', await waitFor('location.pathname === "/__mock_cashfree/pay"') && (await text('#mock-order')) === order1 && cf.creates.filter((x) => x.startsWith('enrp_')).length === 1);
   await click('#mock-delayed');
   ok('course: paid but not yet confirmed by the bank → the page keeps saying it is not confirmed (no false success)',
     await waitFor('/Payment not completed yet/.test(document.body.innerText)', 45000) && !/You are enrolled/.test(await text('#enrol')));
   await snap('course-5-pending-delayed', '#enrol');
-  cf.orders.get(part1).order_status = 'PAID'; cf.orders.get(part1).payments++;   // the bank confirms; no webhook arrives
+  cf.orders.get(order1).order_status = 'PAID'; cf.orders.get(order1).payments++;   // the bank confirms; no webhook arrives
   await click('[data-kwen-check]');
   ok('course: "Check again" reconciles with Cashfree (no webhook needed) → "You are enrolled"', await waitFor('/You are enrolled/.test(document.body.innerText)', 45000), await text('#enrol'));
-  ok('course: confirmation shows reference, ₹4,000 paid, ₹3,999 due and a Pay second instalment button',
-    /KWE-[2-9A-HJ-NP-Z]{8}/.test(await text('#enrol')) && /Paid so far: ₹4,000/.test(await text('#enrol')) && /Pay second instalment · ₹3,999/.test(await text('#enrol')), await text('#enrol'));
-  await snap('course-6-enrolled-instalment-due', '#enrol');
-  await clickText('[data-kwen-resume]', 'Pay second instalment');
-  ok('course: the second instalment opens its own ₹3,999 order', await waitFor('location.pathname === "/__mock_cashfree/pay"') && (await text('#mock-amount')) === '₹3,999');
-  await click('#mock-duplicate');
-  ok('course: after the second payment (notification sent twice) the enrolment is fully paid',
-    await waitFor('/Paid so far: ₹7,999/.test(document.body.innerText) && !document.querySelector("[data-kwen-resume]")', 45000), await text('#enrol'));
-  await snap('course-7-fully-paid', '#enrol');
+  ok('course: confirmation shows the reference and ₹7,999 paid in full; nothing more due, no further payment button',
+    /KWE-[2-9A-HJ-NP-Z]{8}/.test(await text('#enrol')) && /Paid: ₹7,999/.test(await text('#enrol')) && /Nothing more is due/.test(await text('#enrol'))
+      && !(await ev('!!document.querySelector("#enrol [data-kwen-resume]")')) && !/instal/i.test(await text('#enrol')), await text('#enrol'));
+  await snap('course-6-enrolled-paid-in-full', '#enrol');
+  webhookLog.push([order1, 'success-again', await webhook('PAYMENT_SUCCESS_WEBHOOK', order1)]);   // a late, repeated notification
   const enrolledUrl = await ev('location.href');
-  await go(enrolledUrl); await waitFor('/Paid so far: ₹7,999/.test(document.body.innerText)', 45000);
-  const pays = await rows("SELECT part, status, amount_paise FROM live_payments ORDER BY created_at");
-  ok('course: refresh + duplicate webhook → two paid parts (₹4,000 + ₹3,999), one order each, no extra order',
-    JSON.stringify(pays) === JSON.stringify([{ part: 1, status: 'paid', amount_paise: 400000 }, { part: 2, status: 'paid', amount_paise: 399900 }]) && cf.creates.filter((x) => x.startsWith('enrp_')).length === 2, pays);
+  await go(enrolledUrl); await waitFor('/You are enrolled/.test(document.body.innerText)', 45000);
+  const pays = await rows("SELECT status, amount_paise FROM live_payments ORDER BY created_at");
+  ok('course: refresh + duplicate webhook → one paid ₹7,999 payment, one order, no extra order',
+    JSON.stringify(pays) === JSON.stringify([{ status: 'paid', amount_paise: 799900 }]) && cf.creates.filter((x) => x.startsWith('enrp_')).length === 1, pays);
   ok('course: the duplicate notification was acknowledged as a duplicate', webhookLog.some(([, k, r]) => k === 'success-again' && r.body && r.body.duplicate === true), webhookLog.map(([o, k, r]) => [k, r.status, r.body]));
   const ent = await row("SELECT COUNT(*) AS n FROM user_entitlements");
   ok('course: no self-paced access was granted by either payment', ent.n === 0);
@@ -368,10 +364,12 @@ async function runE2E() {
 
   /* ============ server-side amount, signatures ============ */
   const tamper = await ev(`(async()=>{const o={method:'POST',credentials:'include',headers:{'content-type':'application/json'}};
-    const a=await fetch(${JSON.stringify(API)}+'/enrol/checkout',{...o,body:JSON.stringify({course_id:'live-a1',plan:'full',expected_amount_paise:100})});
-    const b=await fetch(${JSON.stringify(API)}+'/enrol/checkout',{...o,body:JSON.stringify({course_id:'live-a1',plan:'full',amount:1,order_amount:1,amount_paise:100})});
-    return [a.status,(await a.json()).code,b.status,(await b.json()).enrolment.ref]})()`);
+    const i=await fetch(${JSON.stringify(API)}+'/enrol/checkout',{...o,body:JSON.stringify({course_id:'live-a1',plan:'instalments'})});
+    const a=await fetch(${JSON.stringify(API)}+'/enrol/checkout',{...o,body:JSON.stringify({course_id:'live-a1',expected_amount_paise:100})});
+    const b=await fetch(${JSON.stringify(API)}+'/enrol/checkout',{...o,body:JSON.stringify({course_id:'live-a1',amount:1,order_amount:1,amount_paise:100})});
+    return [a.status,(await a.json()).code,b.status,(await b.json()).enrolment.ref,i.status,(await i.json()).code]})()`);
   const lastOrder = cf.orders.get(cf.creates.at(-1));
+  ok('security: an instalment plan is refused (400 bad-plan): full payment only', tamper[4] === 400 && tamper[5] === 'bad-plan', tamper);
   ok('security: a wrong expected amount is refused (409 amount-changed) before any order', tamper[0] === 409 && tamper[1] === 'amount-changed', tamper);
   ok('security: amounts sent by the browser are ignored — the gateway order is ₹7,999', tamper[2] === 200 && lastOrder.order_amount === 7999, { tamper, amount: lastOrder.order_amount });
   const forged = await webhook('PAYMENT_SUCCESS_WEBHOOK', lastOrder.order_id, { secret: 'not-the-secret' });

@@ -8,11 +8,12 @@
 
    What it does:
      · reads the courses open for online enrolment from the access
-       Worker (GET /enrol/catalog): fee, payment plans, seats left;
-     · shows the signed-in learner the amount due now and later, as
-       quoted by the Worker (GET /enrol/quote), before any payment;
+       Worker (GET /enrol/catalog): the full course fee and seats left;
+     · shows the signed-in learner the amount due, as quoted by the
+       Worker (GET /enrol/quote), before any payment. A course is paid in
+       full, in one payment: there are no instalments;
      · opens Cashfree's checkout for the order the Worker created
-       (POST /enrol/checkout, POST /enrol/enrolments/:ref/pay);
+       (POST /enrol/checkout);
      · on return, asks the Worker for the enrolment's status and shows
        the confirmation and enrolment reference on the page.
 
@@ -112,8 +113,8 @@
     mount().scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   }
 
-  /* ---------- 1 · choose course and plan ---------- */
-  var catalog = null, mine = [], choice = { course: null, plan: 'full' };
+  /* ---------- 1 · choose the course ---------- */
+  var catalog = null, mine = [], choice = { course: null };
   function loadCatalog() { return call('/enrol/catalog').then(function (c) { catalog = c; return c; }); }
   function loadMine() {
     return auth().refresh().then(function (s) {
@@ -122,12 +123,6 @@
     }, function () {});
   }
   function course(id) { return ((catalog && catalog.courses) || []).filter(function (c) { return c.id === id; })[0] || null; }
-  function scheduleText(plan) {
-    return plan.schedule.map(function (s) {
-      return rupees(s.amountPaise) + (s.part === 1 ? ' now' : ' before ' + niceDate(s.dueBefore));
-    }).join(' + ');
-  }
-
   function renderPicker(error) {
     var c = catalog;
     var head = '<h3>Enrol and pay online</h3>' + testBadge(c && c.testMode);
@@ -135,34 +130,25 @@
     if (!c.courses.length) return show(head + '<p class="kwen-note">No course is open for online enrolment right now. Courses on the waitlist open here once their start date is confirmed.</p>' + mineHtml());
     if (!course(choice.course)) choice.course = c.courses[0].id;
     var sel = course(choice.course);
-    if (!sel.plans.some(function (p) { return p.id === choice.plan; })) choice.plan = sel.plans[0].id;
     var courseOpts = c.courses.map(function (x) {
       return '<label><input type="radio" name="kwen-course" value="' + esc(x.id) + '"' + (x.id === sel.id ? ' checked' : '') + (x.seatsLeft ? '' : ' disabled') + '>'
-        + '<span><strong>' + esc(x.title) + '</strong><small>Starts ' + esc(niceDate(x.batch)) + ' · '
+        + '<span><strong>' + esc(x.title) + ' · ' + rupees(x.feePaise) + '</strong><small>Starts ' + esc(niceDate(x.batch)) + ' · '
         + (x.seatsLeft ? esc(x.seatsLeft) + ' of ' + esc(x.capacity) + ' places left' : 'Full') + '</small></span></label>';
     }).join('');
-    var planOpts = sel.plans.map(function (p) {
-      return '<label><input type="radio" name="kwen-plan" value="' + esc(p.id) + '"' + (p.id === choice.plan ? ' checked' : '') + '>'
-        + '<span><strong>' + esc(p.label) + ' · ' + rupees(p.totalPaise) + '</strong><small>' + esc(scheduleText(p)) + '</small></span></label>';
-    }).join('');
     show(head
-      + '<p class="kwen-note">Choose your course and how you want to pay. You see the exact amount before paying, and you pay securely through Cashfree (UPI, cards, net banking). Your place is confirmed on this page as soon as Cashfree confirms the payment.</p>'
+      + '<p class="kwen-note">Choose your course. The course fee is paid in full, in one payment, securely through Cashfree (UPI, cards, net banking). You see the exact amount before paying, and your place is confirmed on this page as soon as Cashfree confirms the payment.</p>'
       + '<fieldset><legend>Course</legend><div class="kwen-opts">' + courseOpts + '</div></fieldset>'
-      + '<fieldset><legend>Payment plan</legend><div class="kwen-opts">' + planOpts + '</div></fieldset>'
       + '<button type="button" class="btn btn-live" id="kwen-next"' + (sel.seatsLeft ? '' : ' disabled') + '>Review amount</button>'
       + (error ? '<p class="kwen-err" role="alert">' + esc(error) + '</p>' : '')
       + mineHtml());
     panel.querySelectorAll('input[name=kwen-course]').forEach(function (r) {
       r.addEventListener('change', function () { choice.course = r.value; renderPicker(); });
     });
-    panel.querySelectorAll('input[name=kwen-plan]').forEach(function (r) {
-      r.addEventListener('change', function () { choice.plan = r.value; });
-    });
     doc.getElementById('kwen-next').addEventListener('click', function () { begin(); });
   }
 
   function statusWord(e) {
-    if (e.status === 'enrolled') return e.parts.some(function (p) { return p.status !== 'paid'; }) ? 'enrolled · instalment due' : 'enrolled · fully paid';
+    if (e.status === 'enrolled') return 'enrolled · paid';
     return { pending: 'awaiting payment', review: 'being checked by Klarweg', expired: 'not completed', released: 'replaced by a newer attempt', failed: 'not completed', cancelled: 'cancelled' }[e.status] || e.status;
   }
   function mineHtml() {
@@ -199,18 +185,14 @@
   /* ---------- 3 · amount due, from the Worker ---------- */
   function quote(notice) {
     show('<p class="kwen-note">Calculating the amount due…</p>');
-    call('/enrol/quote?course_id=' + encodeURIComponent(choice.course) + '&plan=' + encodeURIComponent(choice.plan)).then(function (r) {
+    call('/enrol/quote?course_id=' + encodeURIComponent(choice.course)).then(function (r) {
       renderQuote(r.quote, r.testMode, notice);
     }, function (e) { refresh(e.message); });
   }
   function renderQuote(q, testMode, notice) {
     var rows = '<div><dt>Course fee</dt><dd>' + rupees(q.totalPaise) + '</dd></div>';
     if (q.creditPaise) rows += '<div><dt>Consultation ' + esc(q.creditConsultRef) + ' adjusted</dt><dd>− ' + rupees(q.creditPaise) + '</dd></div>';
-    q.schedule.forEach(function (s) {
-      rows += s.part === 1
-        ? '<div class="kwen-due"><dt>Due now</dt><dd>' + rupees(s.amountPaise) + '</dd></div>'
-        : '<div><dt>Second instalment, due before ' + esc(niceDate(s.dueBefore)) + '</dt><dd>' + rupees(s.amountPaise) + '</dd></div>';
-    });
+    rows += '<div class="kwen-due"><dt>Due now, in full</dt><dd>' + rupees(q.dueNowPaise) + '</dd></div>';
     var policy = (D.policies && D.policies.cancellationRefund) || '';
     show('<h3>Review and pay</h3>' + testBadge(testMode)
       + '<p class="kwen-note"><strong>' + esc(q.courseTitle) + '</strong> · starts ' + esc(niceDate(q.batch)) + '</p>'
@@ -230,7 +212,7 @@
   /* ---------- 4 · Worker order → Cashfree checkout ---------- */
   function checkout(q) {
     show('<p class="kwen-note">Holding your place and opening the secure payment…</p>');
-    call('/enrol/checkout', { method: 'POST', body: { course_id: q.courseId, plan: q.plan, expected_amount_paise: q.dueNowPaise } })
+    call('/enrol/checkout', { method: 'POST', body: { course_id: q.courseId, expected_amount_paise: q.dueNowPaise } })
       .then(pay, function (e) {
         if (e.code === 'amount-changed' && e.data.quote) return renderQuote(e.data.quote, catalog && catalog.testMode, e.message);
         if (e.code === 'already-enrolled' && e.data.enrolment) return renderResult(e.data.enrolment);
@@ -248,12 +230,10 @@
     });
   }
   function resume(e) {
-    /* Same course and plan → the Worker returns the SAME open order
-       (no second order, no second seat). An instalment uses its own route. */
-    var part2 = e.status === 'enrolled';
+    /* A held enrolment → the Worker returns the SAME open order (no second
+       order, no second seat). */
     show('<p class="kwen-note">Opening the secure payment…</p>');
-    (part2 ? call('/enrol/enrolments/' + encodeURIComponent(e.ref) + '/pay', { method: 'POST', body: {} })
-      : call('/enrol/checkout', { method: 'POST', body: { course_id: e.courseId, plan: e.plan } }))
+    call('/enrol/checkout', { method: 'POST', body: { course_id: e.courseId } })
       .then(pay, function (err) {
         if (err.code === 'already-enrolled' && err.data.enrolment) return renderResult(err.data.enrolment);
         track(e.ref, err.message);
@@ -276,7 +256,7 @@
 
   /* ---------- 5 · return from Cashfree: the Worker's verified status only ---------- */
   var current = null;
-  function waiting(e) { return e.status === 'pending' || (e.status === 'enrolled' && e.parts.some(function (p) { return p.status === 'pending'; })); }
+  function waiting(e) { return e.status === 'pending'; }
   /* The first answer is shown at once (a failed or cancelled payment
      offers Continue payment straight away); while a payment is still
      open, it keeps checking quietly and re-renders only on a change. */
@@ -288,7 +268,7 @@
       tries++;
       call('/enrol/enrolments/' + encodeURIComponent(ref)).then(function (r) {
         if (my !== trackId) return;
-        var e = r.enrolment, key = e.status + ':' + e.parts.map(function (p) { return p.status; }).join(',');
+        var e = r.enrolment, key = e.status + ':' + e.paymentStatus;
         if (key !== shown) { shown = key; renderResult(e, notice); }
         if (waiting(e) && tries < POLL_TRIES) setTimeout(tick, POLL_MS);
       }, function (e) {
@@ -305,27 +285,22 @@
     })();
   }
 
-  function partsHtml(e) {
-    return '<dl class="kwen-sum">' + e.parts.map(function (p) {
-      var label = e.parts.length === 1 ? 'Course fee' : (p.part === 1 ? 'First instalment' : 'Second instalment, due before ' + niceDate(p.dueBefore));
-      var st = { paid: 'paid', pending: 'payment in progress', due: 'due' }[p.status];
-      return '<div><dt>' + esc(label) + '</dt><dd>' + rupees(p.amountPaise) + ' · ' + esc(st) + '</dd></div>';
-    }).join('') + (e.creditPaise ? '<div><dt>Consultation ' + esc(e.creditConsultRef) + ' adjusted</dt><dd>− ' + rupees(e.creditPaise) + '</dd></div>' : '') + '</dl>';
+  function amountHtml(e) {
+    var st = { paid: 'paid', pending: 'payment in progress', due: 'not paid yet' }[e.paymentStatus];
+    return '<dl class="kwen-sum"><div><dt>Course fee</dt><dd>' + rupees(e.totalPaise) + '</dd></div>'
+      + (e.creditPaise ? '<div><dt>Consultation ' + esc(e.creditConsultRef) + ' adjusted</dt><dd>− ' + rupees(e.creditPaise) + '</dd></div>' : '')
+      + '<div class="kwen-due"><dt>' + (e.paymentStatus === 'paid' ? 'Paid in full' : 'Due in full') + '</dt><dd>' + rupees(e.amountDuePaise) + ' · ' + esc(st) + '</dd></div></dl>';
   }
   function renderResult(e, notice) {
     current = e;
     var err = notice ? '<p class="kwen-err" role="alert">' + esc(notice) + '</p>' : '';
     if (e.status === 'enrolled') {
-      var next = e.parts.filter(function (p) { return p.status !== 'paid'; })[0];
       return show('<div class="kwen-done"><h3>You are enrolled</h3>' + testBadge(e.testMode)
         + '<p>Enrolment reference</p><p class="kwen-ref">' + esc(e.ref) + '</p>'
         + '<p><strong>' + esc(e.courseTitle) + '</strong> · starts ' + esc(niceDate(e.batch)) + '</p>'
-        + partsHtml(e) + err
-        + '<p class="kwen-note">Paid so far: <strong>' + rupees(e.paidPaise) + '</strong>. Keep this reference: take a screenshot or print this page. You can see it again here whenever you are signed in.</p>'
-        + '<div class="kwen-actions">'
-        + (next ? '<button type="button" class="btn btn-live" data-kwen-resume>' + (next.status === 'pending' ? 'Continue payment of ' : 'Pay second instalment · ') + rupees(next.amountPaise) + '</button>' : '')
-        + (next && next.status === 'pending' ? '<button type="button" class="btn btn-secondary" data-kwen-check="' + esc(e.ref) + '">Check again</button>' : '')
-        + '<button type="button" class="btn btn-secondary" data-kwen-print>Print</button></div></div>', true);
+        + amountHtml(e) + err
+        + '<p class="kwen-note">Paid: <strong>' + rupees(e.paidPaise) + '</strong>. Nothing more is due. Keep this reference: take a screenshot or print this page. You can see it again here whenever you are signed in.</p>'
+        + '<div class="kwen-actions"><button type="button" class="btn btn-secondary" data-kwen-print>Print</button></div></div>', true);
     }
     if (e.status === 'pending') return renderPending(e, notice);
     if (e.status === 'review') {
@@ -343,7 +318,7 @@
     show('<h3>Payment not completed yet</h3>' + testBadge(e.testMode)
       + '<p class="kwen-note">Your place in <strong>' + esc(e.courseTitle) + '</strong> is held until ' + esc(until) + ' under reference <span class="kwen-ref" style="font-size:16px">' + esc(e.ref) + '</span>. If the payment failed or you cancelled it, nothing was charged and you can try again. If you did pay, it can take a minute to be confirmed.</p>'
       + (notice ? '<p class="kwen-err" role="alert">' + esc(notice) + '</p>' : '')
-      + partsHtml(e)
+      + amountHtml(e)
       + '<div class="kwen-actions"><button type="button" class="btn btn-live" data-kwen-resume>Continue payment</button>'
       + '<button type="button" class="btn btn-secondary" data-kwen-check="' + esc(e.ref) + '">Check again</button></div>', true);
   }

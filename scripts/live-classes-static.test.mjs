@@ -111,7 +111,9 @@ test('LIVE: every amount on the page and in its data is an owner-approved amount
   const settled = sheet.slice(sheet.indexOf('## A. Settled'), sheet.indexOf('## B. Still pending'));
   assert.ok(settled.length > 0, 'the sheet separates settled decisions from pending ones');
   const approved = new Set(settled.match(/₹\d+(?:,\d{3})*/g) || []);
-  for (const x of ['₹100', '₹7,999', '₹4,000', '₹3,999']) assert.ok(approved.has(x), `${x} is recorded as approved`);
+  for (const x of ['₹100', '₹7,999']) assert.ok(approved.has(x), `${x} is recorded as approved`);
+  // D10: full payment only; the withdrawn instalment amounts appear nowhere on the page
+  for (const f of FILES) for (const x of ['₹4,000', '₹3,999']) assert.equal(read(f).includes(x), false, `${f} names the withdrawn instalment amount ${x}`);
   for (const f of FILES) for (const x of new Set(read(f).match(/₹\d+(?:,\d{3})*/g) || [])) assert.ok(approved.has(x), `${f} names ${x}, which is not an approved amount in the decision sheet`);
 });
 
@@ -148,7 +150,8 @@ test('LIVE D3: the first course is the approved A1 group batch, published as a w
   assert.equal(a1.sessionLength, '90 minutes');
   assert.equal(a1.totalDuration, '12 weeks · 36 classes · 54 hours');
   assert.equal(a1.priceLabel, '₹7,999');
-  assert.match(a1.paymentTerms, /₹7,999 before the first class, or two instalments: ₹4,000 before the start and ₹3,999 before week 7/);
+  assert.match(a1.paymentTerms, /^₹7,999 in full before the first class\./, 'full payment only (owner decision, 2026-10-21)');
+  assert.equal(/instal/i.test(a1.paymentTerms), false, 'no instalments are offered');
   assert.match(a1.materials, /class notes and PDF worksheets; homework with written feedback/i);
   assert.match(a1.examPrep, /Goethe-Zertifikat A1: Start Deutsch 1 \(exam fee not included\)/);
   const t = D.teachers.find((x) => x.id === 'reegan-gandhi');

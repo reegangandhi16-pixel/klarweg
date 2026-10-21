@@ -27,7 +27,7 @@ Settled earlier:
 | Materials | the teacher's class notes and PDF worksheets; homework with written feedback |
 | Exam | prepares for Goethe-Zertifikat A1: Start Deutsch 1; exam fee not included |
 | Fee | **₹7,999** for the complete course |
-| Payment terms | ₹7,999 before the first class, **or** two instalments: ₹4,000 before the start and ₹3,999 before week 7 |
+| Payment terms | **₹7,999 in full** before the first class, in one payment. No instalments (D10). |
 | Start date | **not set.** Enrolment shows "Waitlist" until a date is set; the validator refuses "open" without one. |
 
 ### D4 · Consultation
@@ -80,6 +80,13 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
 - Enrolment rules are unchanged: `live-a1` is a waitlist, and no course fee is taken on the page (D7).
 - The validator requires `reegan-gandhi`'s fee to equal the published `live-a1` fee.
 
+### D10 · Full payment only (owner, 2026-10-21)
+
+- Every live-course enrolment is paid **in full, in one payment**. The two-instalment option approved in D3 on 2026-10-20 is withdrawn. This applies to manual payment (D7) and to online payment alike.
+- `live-a1` stays at **₹7,999**, paid in full.
+- The D9 fees above are unchanged. They are the approved **display** prices on each teacher's row. A displayed price sells nothing by itself: the Worker charges only for a course that is configured in `LIVE_COURSES`, published with enrolment "open" and given a batch start date in `ENROL_COURSES`. Today that could only ever be `live-a1`, and it is still a waitlist with no start date.
+- The validator refuses any course whose `paymentTerms` mention instalments. The Worker refuses any request for another payment plan.
+
 ---
 
 ## B. Still pending
@@ -88,14 +95,13 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
   `Legal review status: owner-approved for publication on 2026-10-20; not reviewed by a lawyer`
 - [ ] **Accounting follow-up for manual payments.** [`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md) is the accountant's package:
   - the facts;
-  - the questions: receipts or invoices, GST, payment-record retention, instalments;
+  - the questions: receipts or invoices, GST, payment-record retention;
   - a draft payment register with a reconciliation procedure;
   - a copy-ready email.
   Nothing on the site claims these are settled.
 - [ ] **Business rules not yet decided.** Settle these with the lawyer and the accountant; they are Q3–Q5 and Q9 in the review drafts.
-  - How "the classes still to come" is refunded in the first two weeks, including for instalment payers.
-  - What happens if the second instalment is not paid before week 7.
-  - Which payment the ₹100 consultation deduction reduces, and whether it is refundable if the learner then cancels.
+  - How "the classes still to come" is refunded in the first two weeks.
+  - Whether the ₹100 consultation is deducted from the course fee when paying online (`ENROL_CONSULT_CREDIT`), and whether it is refundable if the learner then cancels.
   - Whether minors may join live classes, and with what consent.
 - [ ] **A1 start date.** Not set. Set it at least 3 weeks ahead. Then `nextBatch` gets the date.
 - [x] **D8 launch go-ahead: waitlist launch (2026-10-20).** Done in one PR:
@@ -116,7 +122,7 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
   - P3: D4's payment line for consultations;
   - P4: opening the course;
   - P5: legal text;
-  - P6: instalment rules;
+  - P6: settled by D10 (full payment only, no instalments);
   - P7: courses for the other teachers;
   - P8: receipts and tax.
 
@@ -128,7 +134,7 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
 ```
 Legal review: approved as drafted / approved with edits: … / lawyer review first
 Accounting (receipts, tax, record keeping): handled by: …
-Instalment refunds / missed 2nd instalment / consultation deduction / minors: …
+Refunds in the first two weeks / consultation deduction / minors: …
 A1 start date: …
 Open paid enrolment for A1: not yet / go (start date: …)
 Online payments (P1 ₹100 deduction: off / first payment · P2 replace D7 manual UPI: yes / no): …

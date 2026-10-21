@@ -10,7 +10,7 @@
 - **D8, waitlist launch (owner-approved 2026-10-20):** the page is public. Only `reegan-gandhi` and `live-a1` are published; `live-a1` is a **waitlist** with no start date, and no course fees are accepted. Every other teacher and course stays a draft that never renders on a deployed host.
 - **Pending before paid enrolment:**
   - the A1 start date;
-  - the business rules (instalment refunds, a missed second instalment, the consultation deduction, minors);
+  - the business rules (refunds of the classes still to come, the consultation deduction, minors);
   - the accounting follow-up for manual payments;
   - a lawyer's review of the published Terms, Privacy and Refund Policy wording (owner-approved; not reviewed by a lawyer).
 - **Page status:** `live-classes.html` is indexed, has a canonical link, and is in `.github/pages-allowlist.txt`, `sitemap.xml`, the site nav and footer.
@@ -33,7 +33,7 @@ Cleared on 2026-10-20: consultation terms (`termsConfirmed: true`, D4) and the f
 **Everything still open is in part B of [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md):**
 - the legal review of the Terms/Privacy/Refund drafts. The lawyer's package is [`live-classes-review-drafts.md`](live-classes-review-drafts.md);
 - the accounting follow-up. The accountant's package is [`live-classes-accounting-handoff.md`](live-classes-accounting-handoff.md);
-- four business rules raised by the handoff: instalment refunds, a missed second instalment, the consultation deduction, and minors;
+- three business rules raised by the handoff: refunds of the classes still to come, the consultation deduction, and minors (instalments were withdrawn on 2026-10-21, D10);
 - the A1 start date;
 - the D8 launch go-ahead;
 - optionally, a photo and an availability line.

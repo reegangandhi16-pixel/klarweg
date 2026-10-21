@@ -89,13 +89,16 @@
 
     /* ---------- online course enrolment ----------
        Pay a live course's fee on this page (kw-enrol.js + the access
-       Worker's /enrol routes), in full or in the published instalments.
+       Worker's /enrol routes): the full course fee in one payment. There
+       are no instalments (owner decision, 2026-10-21).
        OFF: while enabled is false the page loads no enrolment script and
        the course cards keep their waitlist / consultation buttons. The
        Worker computes every amount from its own copy of the published fee
        (LIVE_COURSES in access/worker/src/enrolments.js; a test keeps the
        two identical) and confirms a place only after verifying the
-       payment with Cashfree. Enabling it is an owner decision
+       payment with Cashfree. A teacher's displayed price (coursePricing)
+       sells nothing by itself: only a course configured in the Worker and
+       open with a batch date can be paid for. Enabling it is an owner decision
        (docs/live-classes-online-payments.md): the validator refuses
        enabled: true until both fields below are recorded and at least one
        published course has enrolment "open" with payment terms that no
@@ -369,7 +372,7 @@
         materials: 'Class notes and PDF worksheets; homework with written feedback',
         examPrep: 'Prepares for Goethe-Zertifikat A1: Start Deutsch 1 (exam fee not included)',
         priceLabel: '₹7,999',
-        paymentTerms: '₹7,999 before the first class, or two instalments: ₹4,000 before the start and ₹3,999 before week 7. Paid by UPI or bank transfer on a payment request we email you.',
+        paymentTerms: '₹7,999 in full before the first class. Paid by UPI or bank transfer on a payment request we email you.',
         enrolment: 'waitlist'
       },
       {

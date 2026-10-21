@@ -86,11 +86,14 @@ export function saveAnnouncement(prev, next) {
    network or server failure is described as an interrupted connection, because only then can answers still be waiting
    in the local queue. States that end the attempt here (finished elsewhere, voided, no access) say so plainly instead of
    offering a reconnect that cannot succeed. actions: [{ act, label }]. */
+export const SIGN_IN_URL = '../account/index.html';   // the site's sign-in page, relative to /exam/
 export function errorView({ code = 'network', status = 0 } = {}) {
   const overview = { act: 'reload', label: 'Zur Übersicht' };
   switch (code) {
     case 'lease_superseded': return { title: 'In einem anderen Fenster geöffnet', body: 'Diese Prüfung wird in einem anderen Tab oder auf einem anderen Gerät fortgesetzt.', actions: [{ act: 'takeover', label: 'Hier fortsetzen' }] };
-    case 'auth_required': return { title: 'Bitte anmelden', body: 'Melden Sie sich bei Klarweg an, um fortzufahren.', actions: [] };
+    // ENGINE §8 (session cookie expired): sign in again in a new tab, then continue here — the exam tab stays open,
+    // unsent answers stay queued on this device and the server time keeps running
+    case 'auth_required': return { title: 'Bitte erneut anmelden', body: 'Ihre Anmeldung ist abgelaufen oder fehlt. Gespeicherte Antworten bleiben erhalten, und eine laufende Prüfungszeit läuft auf dem Server weiter. Melden Sie sich in einem neuen Tab an und wählen Sie dann „Weiter“.', actions: [{ act: 'reload', label: 'Weiter' }], links: [{ href: SIGN_IN_URL, label: 'In neuem Tab anmelden', newTab: true }] };
     // the probe showed that the browser does not send the sign-in cookie to the exam server (third-party cookies blocked)
     case 'cookies_blocked': return { title: 'Cookies blockiert', body: 'Ihr Browser blockiert die Cookies, die der Prüfungsbereich für die Anmeldung braucht (Cookies von Drittanbietern). Erlauben Sie in den Browser-Einstellungen Cookies für Klarweg oder verwenden Sie einen anderen Browser, und laden Sie die Seite dann neu.', actions: [{ act: 'reload', label: 'Erneut versuchen' }] };
     case 'attempt_closed': return { title: 'Prüfung bereits abgeschlossen', body: 'Diese Prüfung wurde bereits abgeschlossen, zum Beispiel in einem anderen Tab. Das Ergebnis finden Sie in der Übersicht.', actions: [overview] };

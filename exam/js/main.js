@@ -33,7 +33,10 @@ function rememberLease(id, l) { try { sessionStorage.setItem(leaseKey(id), l); }
 
 function screen(html) { app.innerHTML = html; const h = app.querySelector('h1, h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
 function message(title, body, actions = '') { screen(`<main class="kx-card"><h1>${esc(title)}</h1><p>${esc(body)}</p><div class="kx-actions">${actions}</div></main>`); }
-function showError(v) { message(v.title, v.body, v.actions.map((a) => `<button class="kx-btn" data-act="${esc(a.act)}">${esc(a.label)}</button>`).join('')); }
+function showError(v) {
+  const links = (v.links || []).map((l) => `<a class="kx-btn kx-btn-quiet" href="${esc(l.href)}"${l.newTab ? ' target="_blank" rel="noopener"' : ''}>${esc(l.label)}</a>`).join('');
+  message(v.title, v.body, links + v.actions.map((a) => `<button class="kx-btn" data-act="${esc(a.act)}">${esc(a.label)}</button>`).join(''));
+}
 function fail(e) {
   const code = e instanceof ExamApiError ? e.code : 'network';
   showError(errorView(e instanceof ExamApiError ? { code, status: e.status } : { code }));

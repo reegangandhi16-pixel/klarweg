@@ -1321,6 +1321,23 @@ async function runLesenOnly() {
     for (const t0 = Date.now(); (await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM responses_current WHERE module = 'lesen'").first()).n < lesen.length; await sleep(200)) {
       if (Date.now() - t0 > 15000) throw new Error('Lesen answers not stored');
     }
+    // ENGINE §8: the session expires mid-module → "Bitte erneut anmelden" with a sign-in link (new tab) and "Weiter";
+    // after signing in, "Weiter" resumes the same attempt with every answer
+    await send('Fetch.enable', { patterns: [{ urlPattern: '*/exam/v1/*', requestStage: 'Request' }] });
+    const expiredFrom = b.events.length;
+    const fulfil401 = setInterval(() => { for (const e of b.events.slice(expiredFrom)) if (e.method === 'Fetch.requestPaused' && !e.__done) { e.__done = true;
+      send('Fetch.fulfillRequest', { requestId: e.params.requestId, responseCode: 401, responseHeaders: [{ name: 'content-type', value: 'application/json' }],
+        body: Buffer.from(JSON.stringify({ ok: false, error: 'auth_required' })).toString('base64') }).catch(() => {}); } }, 50);
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
+    await waitFor(`!window.__beforeReload && /Bitte erneut anmelden/.test(document.body.innerText)`, 15000, 'session expired screen');
+    const signIn = await evaluate(`(() => { const a = [...document.querySelectorAll('a')].find((x) => /In neuem Tab anmelden/.test(x.textContent)); return a && { href: a.getAttribute('href'), target: a.target, rel: a.rel }; })()`);
+    assert.deepEqual(signIn, { href: '../account/index.html', target: '_blank', rel: 'noopener' });
+    await A.a11y('session expired');
+    clearInterval(fulfil401); await send('Fetch.disable');   // signed in again in the other tab
+    await evaluate('window.__beforeReload = true'); await click('[data-act="reload"]');
+    await waitFor(`!window.__beforeReload && document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'resumed after signing in');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n, 1, 'the same attempt continues');
+    assert.match(await evaluate(`document.querySelector('.kx-progress').textContent`), new RegExp(`${lesen.length} von ${lesen.length} beantwortet`), 'every answer is still there');
     await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]');
     // a single-module attempt goes straight from the confirmed submission to its result (no extra "Abschließen" step)
     await waitFor(`document.querySelector('.kx-result table')`, 15000, 'result');

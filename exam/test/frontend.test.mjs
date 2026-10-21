@@ -565,7 +565,11 @@ test('ERROR SCREENS: only a network or server failure is called an interrupted c
   assert.equal(errorView({ code: 'exam_access_required', status: 403 }).title, 'Nicht verfügbar');
   assert.equal(errorView({ code: 'rate_limited', status: 429 }).title, 'Bitte kurz warten');
   assert.deepEqual(errorView({ code: 'lease_superseded', status: 409 }).actions, [{ act: 'takeover', label: 'Hier fortsetzen' }]);
-  assert.deepEqual(errorView({ code: 'auth_required', status: 401 }).actions, []);
+  // ENGINE §8: sign in again in a new tab, then continue in this tab
+  const auth = errorView({ code: 'auth_required', status: 401 });
+  assert.deepEqual(auth.actions, [{ act: 'reload', label: 'Weiter' }]);
+  assert.deepEqual(auth.links, [{ href: '../account/index.html', label: 'In neuem Tab anmelden', newTab: true }]);
+  assert.match(auth.body, /Gespeicherte Antworten bleiben erhalten/);
   // any other refusal: no claim about a lost connection or a local queue
   for (const code of ['module_locked', 'another_module_running', 'review_not_available', 'some_new_code']) {
     const v = errorView({ code, status: 409 });
@@ -574,7 +578,8 @@ test('ERROR SCREENS: only a network or server failure is called an interrupted c
   // every view is used through fail(): escaped buttons, no browser dialog
   const main = fs.readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
   assert.match(main, /function fail\(e\) \{\s*const code = e instanceof ExamApiError \? e\.code : 'network';\s*showError\(errorView\(e instanceof ExamApiError \? \{ code, status: e\.status \} : \{ code \}\)\);/);
-  assert.match(main, /function showError\(v\) \{ message\(v\.title, v\.body, v\.actions\.map\(\(a\) => `<button class="kx-btn" data-act="\$\{esc\(a\.act\)\}">\$\{esc\(a\.label\)\}<\/button>`\)\.join\(''\)\); \}/, 'buttons escaped');
+  assert.match(main, /<button class="kx-btn" data-act="\$\{esc\(a\.act\)\}">\$\{esc\(a\.label\)\}<\/button>/, 'buttons escaped');
+  assert.match(main, /<a class="kx-btn kx-btn-quiet" href="\$\{esc\(l\.href\)\}"\$\{l\.newTab \? ' target="_blank" rel="noopener"' : ''\}>\$\{esc\(l\.label\)\}<\/a>/, 'links escaped, new tab with noopener');
   assert.equal(/Verbindung unterbrochen/.test(main), false, 'the copy lives in render.js only');
 });
 

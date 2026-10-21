@@ -1329,11 +1329,14 @@ async function runLesenOnly() {
     const probeItem = (await dev.env.DB.prepare("SELECT item_id FROM items_index WHERE module = 'lesen' AND is_example = 0 AND interaction = 'binary_choice' LIMIT 1").first()).item_id;
     const stored = async () => JSON.parse((await dev.env.DB.prepare('SELECT value_json FROM responses_current WHERE item_id = ?1').bind(probeItem).first()).value_json).option_id;
     const correctOpt = await stored();
-    await send('Fetch.enable', { patterns: [{ urlPattern: '*/exam/v1/*', requestStage: 'Request' }] });
+    // an expired session: every exam call answers 401, while cookies still reach the server (the cookie pre-flight says
+    // "received"; through the dev proxy on plain http the real probe cookie is Secure and would be dropped by Chrome)
+    await send('Fetch.enable', { patterns: [{ urlPattern: '*/exam/v1/*', requestStage: 'Request' }, { urlPattern: '*/auth/cookie-probe*', requestStage: 'Request' }] });
     const expiredFrom = b.events.length;
+    const json = (o) => ({ responseHeaders: [{ name: 'content-type', value: 'application/json' }], body: Buffer.from(JSON.stringify(o)).toString('base64') });
     const fulfil401 = setInterval(() => { for (const e of b.events.slice(expiredFrom)) if (e.method === 'Fetch.requestPaused' && !e.__done) { e.__done = true;
-      send('Fetch.fulfillRequest', { requestId: e.params.requestId, responseCode: 401, responseHeaders: [{ name: 'content-type', value: 'application/json' }],
-        body: Buffer.from(JSON.stringify({ ok: false, error: 'auth_required' })).toString('base64') }).catch(() => {}); } }, 50);
+      const probe = /\/auth\/cookie-probe/.test(e.params.request.url);
+      send('Fetch.fulfillRequest', { requestId: e.params.requestId, responseCode: probe ? 200 : 401, ...json(probe ? { ok: true, received: true } : { ok: false, error: 'auth_required' }) }).catch(() => {}); } }, 50);
     const changedTo = await evaluate(`(() => { const r = [...document.querySelectorAll('input[type=radio][data-item="${probeItem}"]')].find((x) => !x.checked); r.click(); return r.value; })()`);
     assert.notEqual(changedTo, correctOpt);
     await waitFor(`/Bitte erneut anmelden/.test(document.body.innerText)`, 20000, 'session expired screen');

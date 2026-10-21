@@ -1238,8 +1238,28 @@ async function runLesenOnly() {
 
     await click('[data-act="create"]');
     await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'Lesen intro');
+    t = await text();
+    assert.match(t, /\d+ Minuten · 5 Teile · 30 Aufgaben/, 'the intro states time, parts and tasks before the clock starts');
+    assert.match(t, /läuft auf dem Server weiter/);
+    await A.a11y('Lesen intro');
     await click('[data-act="start"][data-module="lesen"]');
     await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
+    // the timer and part navigation stay visible while the learner scrolls through the module
+    await evaluate(`window.scrollTo(0, document.body.scrollHeight / 2)`); await sleep(200);
+    const bar = await evaluate(`(() => { const r = document.querySelector('.kx-bar').getBoundingClientRect(); const tm = document.querySelector('.kx-timer').getBoundingClientRect(); return { top: Math.round(r.top), timerVisible: tm.top >= 0 && tm.bottom <= innerHeight, nav: !!document.querySelector('.kx-bar .kx-nav') }; })()`);
+    assert.deepEqual(bar, { top: 0, timerVisible: true, nav: true }, 'sticky bar with timer and part navigation');
+    // a part jump lands the "Teil n" heading below the sticky bar, at desktop and phone width
+    for (const [w, h, mobile] of [[1280, 800, false], [390, 844, true]]) {
+      await vp(w, h, mobile); await evaluate(`window.scrollTo(0, 0)`); await sleep(100);
+      await evaluate(`document.querySelector('.kx-nav a[href="#part-4"]').click()`); await sleep(400);
+      const pos = await evaluate(`({ bar: document.querySelector('.kx-bar').getBoundingClientRect().bottom, head: document.getElementById('part-4').getBoundingClientRect().top, noHScroll: document.documentElement.scrollWidth <= innerWidth + 1 })`);
+      assert.ok(pos.head >= pos.bar - 1, `Teil 4 heading visible below the bar at ${w}px: ${JSON.stringify(pos)}`);
+      assert.ok(pos.noHScroll, `no horizontal scroll at ${w}px`);
+      assert.ok(pos.bar <= 120, `the sticky bar stays compact at ${w}px (${pos.bar} px)`);
+      if (process.env.KX_E2E_SHOTS) fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, `lesen-bar-${w}.png`), Buffer.from((await send('Page.captureScreenshot', { format: 'png' })).data, 'base64'));
+    }
+    await vp(1280, 800, false);
+    await evaluate(`window.scrollTo(0, 0)`);
     const attempt = (await dev.env.DB.prepare('SELECT id, mode, module_scope FROM attempts').first());
     assert.deepEqual([attempt.mode, attempt.module_scope], ['synthetic_full', 'lesen']);
     const lease = await evaluate(`sessionStorage.getItem('kx-lease:${attempt.id}')`);
@@ -1255,10 +1275,10 @@ async function runLesenOnly() {
       if (Date.now() - t0 > 15000) throw new Error('Lesen answers not stored');
     }
     await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]');
-    await waitFor(`document.querySelector('[data-act="complete"]')`, 15000, 'complete screen');
-    assert.match(await text(), /Modul abgegeben/);
-    await click('[data-act="complete"]');
+    // a single-module attempt goes straight from the confirmed submission to its result (no extra "Abschließen" step)
     await waitFor(`document.querySelector('.kx-result table')`, 15000, 'result');
+    assert.equal(await evaluate(`!!document.querySelector('[data-act="complete"]')`), false);
+    assert.equal((await dev.env.DB.prepare('SELECT status FROM attempts WHERE id = ?1').bind(attempt.id).first()).status, 'completed');
     const rows = await evaluate(`[...document.querySelectorAll('.kx-result table tbody tr th')].map((x) => x.textContent)`);
     assert.deepEqual(rows, ['Lesen']);
     t = await text();
@@ -1266,9 +1286,10 @@ async function runLesenOnly() {
     await A.a11y('Lesen-only result');
     const review = await apiFetch('GET', `/attempts/${attempt.id}/modules/lesen/review`);
     assert.equal(review.status, 200); assert.equal(review.json.summary.correct, lesen.length);
-    // back to the start: Lesen again, with the history row
-    await send('Page.navigate', { url: base });
+    // back to the start from the result page itself: Lesen again, with the history row (Lesen column only)
+    await click('[data-act="home"]');
     await waitFor(`document.querySelector('[data-act="create"][data-module="lesen"]') && document.querySelector('.kx-history')`, 15000, 'start screen with history');
+    assert.deepEqual(await evaluate(`[...document.querySelectorAll('.kx-history thead th')].map((x) => x.textContent)`), ['Datum', 'Übung', 'Lesen', 'Aktion']);
     assert.deepEqual(A.findings, [], `automated accessibility findings on ${A.screens.join(', ')}`);
     const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
     const csp = b.events.filter((e) => e.method === 'Log.entryAdded' && /Content Security Policy/i.test(e.params.entry.text || '')).map((e) => e.params.entry.text);

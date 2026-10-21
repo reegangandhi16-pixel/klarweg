@@ -19,8 +19,37 @@ export function paragraphs(md) {
 export function testBanner(pkg) {
   if (!pkg || !pkg.test_content) return '';
   const adjusted = pkg.timing && pkg.timing.adjusted ? ' Verkürzte Übungszeiten – nicht die Zeiten der Prüfung.' : '';
-  return `<p class="kx-banner" role="note">SYNTHETISCHE ÜBUNGSINHALTE — keine echte Prüfung. Hörtexte werden als Prüftöne abgespielt.${adjusted}</p>`;
+  const tones = pkg.module === 'hoeren' || pkg.module === 'sprechen' ? ' Hörtexte werden als Prüftöne abgespielt.' : '';
+  return `<p class="kx-banner" role="note">SYNTHETISCHE ÜBUNGSINHALTE — keine echte Prüfung.${tones}${adjusted}</p>`;
 }
+
+/* The facts a learner needs before pressing "Modul starten" (attempt view: modules[].intro from the form's package).
+   Rules state what the engine really does: server time that keeps running, autosave, free navigation, review. */
+export function moduleIntro(module, intro) {
+  const facts = [];
+  if (intro && intro.minutes) facts.push(`${intro.minutes} Minuten`);
+  if (intro && intro.parts) facts.push(`${intro.parts} ${intro.parts === 1 ? 'Teil' : 'Teile'}`);
+  if (intro && intro.items) facts.push(`${intro.items} Aufgaben`);
+  const head = facts.length ? `<p class="kx-intro-facts">${esc(facts.join(' · '))}</p>` : '';
+  if (module !== 'lesen' && module !== 'schreiben') return head;
+  const rules = ['Die Zeit beginnt, sobald Sie „Modul starten“ wählen. Sie läuft auf dem Server weiter, auch wenn Sie die Seite schließen oder neu laden.',
+    'Ihre Antworten werden automatisch gespeichert.',
+    'Sie können frei zwischen den Teilen wechseln und Antworten bis zur Abgabe ändern.',
+    'Vor der Abgabe sehen Sie, welche Aufgaben noch ohne Antwort sind. Wenn die Zeit abläuft, wird das Modul automatisch abgegeben.'];
+  return head + `<ul class="kx-intro-rules">${rules.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
+}
+
+/* Lesen Teil 3 style matching: which options are already chosen in another select of the same task (examples count).
+   selects: [{ id, value }] → Map(option_id → number of OTHER selects using it), per select id. Nothing is ever blocked:
+   the learner may still choose a used option; it is only marked. */
+export function matchUsage(selects) {
+  const count = new Map();
+  for (const s of selects) if (s.value) count.set(s.value, (count.get(s.value) || 0) + 1);
+  return new Map(selects.map((s) => [s.id, new Map([...count].map(([v, n]) => [v, n - (s.value === v ? 1 : 0)]).filter(([, n]) => n > 0))]));
+}
+export const USED_SUFFIX = ' (schon gewählt)';
+
+export const RESULT_ACTIONS = '<div class="kx-actions kx-result-actions"><button type="button" class="kx-btn" data-act="home">Zur Übersicht</button></div>';
 
 /* What a screen reader should hear about saving: only trouble and the recovery from it, never the routine
    "Speichert … / Gespeichert" after each pause. Announced in the persistent #kx-announce status region. */
@@ -85,7 +114,7 @@ function choice(it, value, disabled) {
 
 function matching(it, value, disabled) {
   const id = `i_${idSafe(it.item_id)}`;
-  const opts = ['<option value="">– bitte wählen –</option>'].concat((it.options || []).map((o) => `<option value="${esc(o.option_id)}"${value && value.option_id === o.option_id ? ' selected' : ''}>${esc(o.label)}</option>`)).join('');
+  const opts = ['<option value="">– bitte wählen –</option>'].concat((it.options || []).map((o) => `<option value="${esc(o.option_id)}" data-label="${esc(o.label)}"${value && value.option_id === o.option_id ? ' selected' : ''}>${esc(o.label)}</option>`)).join('');
   return `<div class="kx-item kx-match${it.is_example ? ' kx-example' : ''}" id="item-${idSafe(it.item_id)}"><label for="${id}">${it.is_example ? '<span class="kx-ex">Beispiel</span> ' : ''}${esc(displayStem(it))}</label>`
     + `<select id="${id}" data-item="${esc(it.item_id)}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
 }
@@ -182,7 +211,7 @@ export function startChoice(av) {
 }
 
 export function startScreen(choice, { lastCompleted = null, history = '' } = {}) {
-  const last = lastCompleted ? `<button class="kx-btn-quiet" data-act="last-result" data-attempt="${esc(lastCompleted)}">Letztes Ergebnis ansehen</button>` : '';
+  const last = lastCompleted ? `<button class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(lastCompleted)}">Letztes Ergebnis ansehen</button>` : '';
   if (!choice.module) {
     return `<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}">Übung starten</button>${last}</div>${history}</main>`;
   }
@@ -197,19 +226,22 @@ export function startScreen(choice, { lastCompleted = null, history = '' } = {})
 
 /* The learner's completed practices, newest first: date, form, per-module result, and a way back into each result. */
 export function attemptHistory(list, formatDate = (ms) => new Date(ms).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })) {
+  // only modules someone actually took get a column (a Lesen-only history shows no empty Hören/Schreiben/Sprechen columns)
+  const taken = MODULE_ORDER.filter((mod) => (list.attempts || []).some((a) => (a.modules || []).some((m) => m.module === mod && m.status !== 'not_taken')));
+  const cols = taken.length ? taken : MODULE_ORDER;
   const rows = (list.attempts || []).map((a) => {
     const cell = (mod) => {
       const m = (a.modules || []).find((x) => x.module === mod);
       if (!m || m.status === 'not_taken') return '–';
       return m.status === 'final' ? `${esc(m.points)} / ${esc(m.max_points)}` : 'in Bewertung';
     };
-    return `<tr><th scope="row">${esc(formatDate(a.completed_at))}</th><td>${esc(a.form_label)}</td>${MODULE_ORDER.map((mod) => `<td>${cell(mod)}</td>`).join('')}`
-      + `<td><button type="button" class="kx-btn-quiet" data-act="last-result" data-attempt="${esc(a.attempt_id)}">Ergebnis ansehen</button></td></tr>`;
+    return `<tr><th scope="row">${esc(formatDate(a.completed_at))}</th><td>${esc(a.form_label)}</td>${cols.map((mod) => `<td>${cell(mod)}</td>`).join('')}`
+      + `<td><button type="button" class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(a.attempt_id)}">Ergebnis ansehen</button></td></tr>`;
   }).join('');
   if (!rows) return '';
   return '<section class="kx-history" aria-labelledby="kx-history-title"><h2 id="kx-history-title">Ihre bisherigen Übungen</h2>'
     + `<div class="kx-table-wrap"><table class="kx-table"><caption>Abgeschlossene Übungen (neueste zuerst)</caption><thead><tr><th scope="col">Datum</th><th scope="col">Übung</th>`
-    + MODULE_ORDER.map((mod) => `<th scope="col">${esc(MODULE_LABELS[mod])}</th>`).join('') + '<th scope="col"><span class="kx-sr">Aktion</span></th></tr></thead>'
+    + cols.map((mod) => `<th scope="col">${esc(MODULE_LABELS[mod])}</th>`).join('') + '<th scope="col"><span class="kx-sr">Aktion</span></th></tr></thead>'
     + `<tbody>${rows}</tbody></table></div></section>`;
 }
 

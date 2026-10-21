@@ -527,9 +527,15 @@ test('HISTORY render: a row per practice with each module result and a way back 
   const html = attemptHistory({ attempts: [{ attempt_id: 'att_x', completed_at: 0, form_label: 'Übung <P1>', modules: [
     { module: 'lesen', status: 'final', points: 70, max_points: 100 }, { module: 'hoeren', status: 'final', points: 100, max_points: 100 },
     { module: 'schreiben', status: 'pending_rating', points: null, max_points: 100 }, { module: 'sprechen', status: 'not_taken', points: null, max_points: 100 }] }] }, () => '14.10.2026');
-  assert.match(html, /<th scope="row">14\.10\.2026<\/th><td>Übung &lt;P1&gt;<\/td><td>70 \/ 100<\/td><td>100 \/ 100<\/td><td>in Bewertung<\/td><td>–<\/td>/);
+  assert.match(html, /<th scope="row">14\.10\.2026<\/th><td>Übung &lt;P1&gt;<\/td><td>70 \/ 100<\/td><td>100 \/ 100<\/td><td>in Bewertung<\/td><td><button/);   // Sprechen (not taken by anyone) has no column
   assert.match(html, /data-act="last-result" data-attempt="att_x">Ergebnis ansehen/);
   assert.equal(attemptHistory({ attempts: [] }), '');
+  // a Lesen-only history: no empty columns for modules nobody took
+  const lesenOnly = attemptHistory({ attempts: [{ attempt_id: 'att_l', completed_at: 0, form_label: 'P3', modules: [{ module: 'lesen', status: 'final', points: 80, max_points: 100 },
+    ...['hoeren', 'schreiben', 'sprechen'].map((m) => ({ module: m, status: 'not_taken', points: null, max_points: 100 }))] }] }, () => '21.10.2026');
+  assert.match(lesenOnly, /<th scope="col">Lesen<\/th><th scope="col"><span class="kx-sr">Aktion/);
+  assert.equal(/Hören|Schreiben|Sprechen/.test(lesenOnly), false);
+  assert.match(lesenOnly, /class="kx-btn kx-btn-quiet" data-act="last-result"/, 'a full-size (44px) button');
 });
 
 test('ACCESSIBILITY (live regions): the redrawn header is not a live region; saving problems and the recovery are announced in the persistent status region; the word count is read with the textarea, not on every keystroke', async () => {
@@ -662,4 +668,50 @@ test('ERRORS (release set): a missing/invalid release or a withdrawn form gets i
   }
   const w = errorView({ code: 'form_not_in_release', status: 403 });
   assert.equal(w.title, 'Übung nicht mehr verfügbar');
+});
+
+test('MODULE INTRO render: time, parts and tasks before the start; the rules say what the engine really does', async () => {
+  const { moduleIntro } = await import('../js/render.js');
+  const html = moduleIntro('lesen', { minutes: 65, parts: 5, items: 30 });
+  assert.match(html, /65 Minuten · 5 Teile · 30 Aufgaben/);
+  assert.match(html, /läuft auf dem Server weiter/); assert.match(html, /automatisch gespeichert/); assert.match(html, /automatisch abgegeben/);
+  assert.match(moduleIntro('hoeren', { minutes: null, parts: 4, items: 30 }), /4 Teile · 30 Aufgaben/);
+  assert.equal(/Minuten/.test(moduleIntro('hoeren', { minutes: null, parts: 4, items: 30 })), false, 'no promised time for a phase-planned module');
+  assert.equal(/<ul/.test(moduleIntro('sprechen', { minutes: null, parts: 3, items: 4 })), false, 'Sprechen keeps its own consent screen');
+  assert.equal(moduleIntro('lesen', undefined).includes('Minuten'), false, 'an older server without intro data still renders');
+});
+
+test('MATCHING (Lesen Teil 3): options chosen in another select are marked, never blocked; the own choice is not marked', async () => {
+  const { matchUsage, createRenderer } = await import('../js/render.js');
+  const u = matchUsage([{ id: 'ex', value: 'a' }, { id: 's13', value: 'c' }, { id: 's14', value: '' }, { id: 's15', value: 'c' }]);
+  assert.deepEqual([...u.get('s14')].sort(), [['a', 1], ['c', 2]]);
+  assert.deepEqual([...u.get('s13')], [['a', 1], ['c', 1]]);   // c is also used by s15
+  assert.deepEqual([...u.get('ex')], [['c', 2]]);
+  const pkg = pkgFor(build, 'lesen');
+  const html = createRenderer().module(pkg, {}, {});
+  assert.match(html, /<option value="[^"]+" data-label="[^"]+"/, 'options carry their original label for re-marking');
+});
+
+test('BANNER: the Prüftöne note appears only where audio is played (Hören, Sprechen)', () => {
+  const b = syntheticBuild();
+  for (const m of ['lesen', 'schreiben']) assert.equal(/Prüftöne/.test(testBanner(pkgFor(b, m))), false, m);
+  for (const m of ['hoeren', 'sprechen']) assert.match(testBanner(pkgFor(b, m)), /Prüftöne/, m);
+});
+
+test('RESULT: a way back to the overview (start screen with history and a new practice)', async () => {
+  const { RESULT_ACTIONS } = await import('../js/render.js');
+  assert.match(RESULT_ACTIONS, /<button type="button" class="kx-btn" data-act="home">Zur Übersicht<\/button>/);
+  const main = read('exam/js/main.js');
+  assert.match(main, /if \(act === 'home'\)/);
+  assert.match(main, /screen\(resultPage\(r\.result\) \+ RESULT_ACTIONS/);
+});
+
+test('STICKY BAR: header (timer, progress, save state) and part navigation share one sticky container', () => {
+  const css = read('exam/exam.css'); const main = read('exam/js/main.js');
+  assert.match(main, /<div class="kx-bar"><div id="kx-head"><\/div><div id="kx-nav-slot"><\/div><\/div>/);
+  assert.match(css, /\.kx-bar\s*{[^}]*position: sticky;[^}]*top: 0/);
+  // sticky on .kx-head itself never stuck: its parent #kx-head is exactly as tall as the header
+  assert.equal(/\.kx-head\s*{[^}]*position: sticky/.test(css), false);
+  // part-navigation targets (the "Teil n" headings, id part-n) land below the sticky bar, not under it
+  assert.ok([...css.matchAll(/\[id\^="part-"\] { scroll-margin-top: 120px; }/g)].length >= 1);
 });

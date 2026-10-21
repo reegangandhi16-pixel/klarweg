@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView } from './render.js';
+import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, moduleIntro, matchUsage, USED_SUFFIX, RESULT_ACTIONS } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -125,15 +125,23 @@ async function route() {
   const a = nextAction(S.attempt);
   if (a.kind === 'start') return intro(a.module);
   if (a.kind === 'resume') return openModule(a.module);
+  // a single-module attempt has nothing left after its only module: the learner already confirmed the submission
+  if (a.kind === 'complete' && S.attempt.module_scope) return completeAndShow();
   if (a.kind === 'complete') return screen(`<main class="kx-card"><h1>${S.attempt.module_scope ? 'Modul abgegeben' : 'Alle Module abgegeben'}</h1><p>Schließen Sie die Übung ab, um das Ergebnis zu sehen.</p><div class="kx-actions"><button class="kx-btn" data-act="complete">Abschließen</button></div></main>`);
   if (a.kind === 'result') return showResult();
   if (a.kind === 'wait') return message('Abgabe wird abgeschlossen', 'Ihre Abgabe ist gespeichert und wird gerade abgeschlossen.', '<button class="kx-btn" data-act="reload">Erneut prüfen</button>');
 }
 
+async function completeAndShow() {
+  try { await api.complete(S.attempt.attempt_id, S.lease); S.attempt = await api.getAttempt(S.attempt.attempt_id); return showResult(); }
+  catch (e) { fail(e); }
+}
+
 function intro(module) {
+  const info = moduleIntro(module, (moduleState(module) || {}).intro);
   const extra = module === 'sprechen' ? '<p>Für dieses Modul werden Ihre Antworten aufgenommen und privat gespeichert. Ohne Ihre Zustimmung kann das Modul nicht beginnen.</p><label class="kx-consent"><input type="checkbox" id="kx-consent"> Ich stimme der Aufnahme zu.</label>' : '';
   const hoeren = module === 'hoeren' ? '<p>Die Prüftöne werden zuerst vollständig geladen. Wiedergabe ohne Pause, Vor- oder Zurückspulen.</p>' : '';
-  screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1>${hoeren}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
+  screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1>${info}${hoeren}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
 }
 
 async function openModule(module) {
@@ -174,7 +182,7 @@ async function openModule(module) {
   if (module === 'sprechen') runSprechen().catch(guard);
 }
 
-function moduleState() { return S.attempt.modules.find((m) => m.module === S.module); }
+function moduleState(module = S.module) { return S.attempt.modules.find((m) => m.module === module); }
 /* Progress counts only for the item-based modules; Sprechen is phase-driven and has no navigation. */
 function progress() { return S.pkg && S.module !== 'sprechen' ? partProgress(S.pkg, S.answers) : null; }
 function paintHeader() {
@@ -203,9 +211,22 @@ function closeReview(focusSubmit = true) {
 function paint() {
   const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p><div class="kx-alerts" id="kx-alerts"></div>'
     : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
-  screen(`<div id="kx-head"></div><div id="kx-nav-slot"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
+  screen(`<div class="kx-bar"><div id="kx-head"></div><div id="kx-nav-slot"></div></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
     + `<div id="kx-review-slot"></div><footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
   updateProgress();
+  markUsedOptions();
+}
+/* Matching tasks: mark options already chosen in another select of the same task (never blocks a choice). */
+function markUsedOptions(scope = document) {
+  for (const task of scope.querySelectorAll('.kx-task')) {
+    const selects = [...task.querySelectorAll('.kx-match select')];
+    if (selects.length < 2) continue;
+    const usage = matchUsage(selects.map((el) => ({ id: el.id, value: el.value })));
+    for (const el of selects) {
+      const used = usage.get(el.id);
+      for (const o of el.options) if (o.dataset.label !== undefined) o.textContent = o.dataset.label + (used.has(o.value) ? USED_SUFFIX : '');
+    }
+  }
 }
 let announced = {};   // time warnings go to #kx-announce so they never overwrite the phase text
 function tick() {
@@ -466,7 +487,7 @@ async function showResult() {
     try { reviews.push(recordingsSection(await api.myRecordings(S.attempt.attempt_id))); } catch { /* not available */ }
   }
   for (const u of S.recordingUrls.splice(0)) URL.revokeObjectURL(u);
-  screen(resultPage(r.result) + reviews.join(''));
+  screen(resultPage(r.result) + RESULT_ACTIONS + reviews.join('') + (reviews.length ? RESULT_ACTIONS : ''));
 }
 
 /* ---------- events ---------- */
@@ -478,6 +499,7 @@ app.addEventListener('change', (e) => {
   const value = { option_id: el.value === '' ? null : el.value };
   S.answers[el.dataset.item] = value; S.autosave.set(el.dataset.item, value);
   updateProgress();
+  if (el.tagName === 'SELECT') { const task = el.closest('.kx-task'); if (task) markUsedOptions(task.parentElement || document); }
 });
 app.addEventListener('input', (e) => {
   const el = e.target;
@@ -496,6 +518,7 @@ app.addEventListener('click', async (e) => {
       ta.dispatchEvent(new Event('input', { bubbles: true })); return;
     }
     if (act === 'reload') return location.reload();
+    if (act === 'home') { S.attempt = null; S.module = null; S.pkg = null; clearInterval(S.hb); clearInterval(S.timer); return boot(); }
     if (act === 'audio-start') { if (S.gestureResolve) S.gestureResolve(); return; }
     if (act === 'mic-retry') { await getMic(); return; }
     if (act === 'last-result') { S.attempt = { attempt_id: b.dataset.attempt }; return showResult(); }

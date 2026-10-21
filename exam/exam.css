@@ -27,8 +27,9 @@ p { margin: 0 0 16px; }
   font: 600 16px/1 var(--font-ui); cursor: pointer; transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease); }
 .kx-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(14, 14, 16, 0.12); }
 .kx-btn:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
-.kx-head { position: sticky; top: 0; z-index: 5; display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 16px;
-  background: var(--canvas); border-bottom: 1px solid var(--line); padding: 12px 0; }
+.kx-bar { position: sticky; top: 0; z-index: 5; background: var(--canvas); border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.kx-head { display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 16px;
+  padding: 12px 0 0; }
 .kx-title { margin: 0; font-size: 22px; }
 .kx-save { margin: 0; color: var(--ink-secondary); font-size: 14px; }
 .kx-timer { margin: 0; font: 500 20px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
@@ -65,9 +66,9 @@ p { margin: 0 0 16px; }
 .kx-consent input { width: 20px; height: 20px; accent-color: var(--accent); }
 .kx-foot { position: sticky; bottom: 0; display: flex; justify-content: flex-end; padding: 16px 0; background: var(--canvas); border-top: 1px solid var(--line); }
 /* part navigation, progress and the in-page review (spacing scale only; teal accent; no decoration colours) */
-.kx-part, .kx-item, .kx-review { scroll-margin-top: 96px; }
+.kx-part, .kx-item, .kx-review, [id^="part-"] { scroll-margin-top: 120px; }
 .kx-progress { margin: 0; color: var(--ink-secondary); font: 500 12px/1.4 var(--font-mono); font-variant-numeric: tabular-nums; }
-.kx-nav { margin: 16px 0 0; }
+.kx-nav { margin: 12px 0 0; }
 .kx-nav ol { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
 .kx-nav a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 8px;
   background: var(--surface); color: var(--ink-primary); text-decoration: none; font-weight: 500; transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease); }
@@ -89,6 +90,10 @@ p { margin: 0 0 16px; }
 .kx-disclaimer { color: var(--ink-secondary); font-size: 14px; }
 .kx-review-items, .kx-my-recordings, .kx-rated { max-width: 680px; margin: 36px auto; }
 .kx-history { margin-top: 36px; }
+.kx-intro-facts { font: 500 14px/1.4 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-secondary); }
+.kx-intro-rules { margin: 0 0 16px; padding-left: 24px; }
+.kx-intro-rules li { margin-bottom: 8px; }
+.kx-result-actions { max-width: 680px; margin: 0 auto 36px; }
 .kx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .kx-rated .kx-table-wrap { margin-top: 16px; }
 .kx-rater { max-width: 860px; margin: 24px auto; }
@@ -112,11 +117,19 @@ p { margin: 0 0 16px; }
   .kx-app { padding: 16px 16px 96px; }
   .kx-card { padding: 24px 16px; margin: 24px auto; }
   .kx-task { padding: 16px; }
-  .kx-head { grid-template-columns: 1fr auto; }
-  .kx-save, .kx-progress { grid-column: 1 / -1; order: 3; }
+  /* compact sticky bar on a phone (≈ 116 px): title + timer, then progress + save state, then one row of part links */
+  .kx-bar { padding-bottom: 8px; }
+  .kx-head { grid-template-columns: 1fr auto; gap: 8px 16px; padding-top: 8px; }
+  .kx-title { font-size: 18px; }
+  .kx-progress { grid-column: 1; order: 3; }
+  .kx-save { grid-column: 2; order: 4; font-size: 12px; line-height: 1.4; text-align: right; }
+  .kx-nav { margin-top: 8px; }
   .kx-review { padding: 16px; }
   .kx-review .kx-actions .kx-btn { flex: 1 1 100%; }
-  .kx-part, .kx-item, .kx-review { scroll-margin-top: 120px; }
+  .kx-part, .kx-item, .kx-review, [id^="part-"] { scroll-margin-top: 120px; }
+  /* one scrollable row of part links, so the sticky bar stays short on a phone */
+  .kx-nav ol { flex-wrap: nowrap; overflow-x: auto; }
+  .kx-nav li { flex: 0 0 auto; }
   .kx-opts { flex-direction: column; }
   .kx-opt { width: 100%; }
   .kx-table th, .kx-table td { padding: 8px; }

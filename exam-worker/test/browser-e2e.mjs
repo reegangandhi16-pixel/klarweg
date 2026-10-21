@@ -223,6 +223,12 @@ async function run(viewport) {
     await send('Page.reload');
     await waitFor(`!window.__beforeReload && document.querySelector('[data-wc-for]') && document.querySelector('textarea') && document.querySelector('textarea').value.startsWith('Liebe Grüße aus der Straße ä')`, 15000, 'text recovered after reload');
     assert.match(await evaluate(`document.querySelector('[data-wc-for]').textContent`), /^[56]$/);
+    // the submission review flags a text under half the target length with the official 0-points note (ENGINE §9)
+    await click('[data-act="submit"]'); await waitFor(`document.querySelector('.kx-review')`, 5000, 'Schreiben review');
+    assert.ok((await evaluate(`document.querySelectorAll('.kx-review-warn').length`)) >= 1, 'short text flagged');
+    assert.match(await evaluate(`document.querySelector('.kx-review').textContent`), /Unter 50 % der Wortzahl wird die Aufgabe mit 0 Punkten bewertet/);
+    assert.match(await text(), /Empfohlene Zeit: ca\. \d+ Minuten/, 'Schreiben shows the advisory time per part');
+    await click('[data-act="review-close"]');
     await submitModule();
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="sprechen"]')`, 15000, 'Sprechen intro');
@@ -1258,6 +1264,7 @@ async function runLesenOnly() {
     await A.a11y('Lesen intro');
     await click('[data-act="start"][data-module="lesen"]');
     await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
+    assert.equal(await evaluate(`document.querySelector('#part-1 + .kx-advisory')?.textContent`), 'Empfohlene Zeit: ca. 10 Minuten', 'advisory time under the part heading');
     // the timer and part navigation stay visible while the learner scrolls through the module
     await evaluate(`window.scrollTo(0, document.body.scrollHeight / 2)`); await sleep(200);
     const bar = await evaluate(`(() => { const r = document.querySelector('.kx-bar').getBoundingClientRect(); const tm = document.querySelector('.kx-timer').getBoundingClientRect(); return { top: Math.round(r.top), timerVisible: tm.top >= 0 && tm.bottom <= innerHeight, nav: !!document.querySelector('.kx-bar .kx-nav') }; })()`);

@@ -241,7 +241,7 @@ function paint() {
     : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
   // live status (Hören/Sprechen phase, "Audio starten", time warnings) lives in the sticky bar: it must stay visible
   // while the learner is scrolled down to the questions; empty elements take no space
-  screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked })}</main>`
+  screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked, multiplier: S.attempt.time_multiplier || 1 })}</main>`
     + `<div id="kx-review-slot"></div><footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
   S.currentPart = null;
   watchBar();
@@ -270,7 +270,9 @@ function tick() {
     const at = speakingPhaseAt(S.sprechen.plan, S.sprechen.startedAt, clock.serverNow(), S.sprechen.multiplier);
     const pt = $('#kx-phase-time'); if (pt) pt.textContent = at.state === 'running' ? `Diese Phase: noch ${formatRemaining(at.remaining_ms)}` : '';
   }
-  if (S.attempt.part_scope == null) for (const mark of [300_000, 60_000]) if (rem <= mark && !announced[mark]) { announced[mark] = true; const ph = $('#kx-announce'); if (ph) ph.textContent = `Noch ${mark / 60_000} Minute${mark > 60_000 ? 'n' : ''}.`; }
+  // ENGINE §10: 10- and 1-minute warnings — only for a module longer than the mark (a short module never starts with one)
+  const total = m.deadline_at != null && m.started_at != null ? m.deadline_at - m.started_at : Infinity;
+  if (S.attempt.part_scope == null) for (const mark of [600_000, 60_000]) if (total > mark && rem <= mark && !announced[mark]) { announced[mark] = true; const ph = $('#kx-announce'); if (ph) ph.textContent = `Noch ${mark / 60_000} Minute${mark > 60_000 ? 'n' : ''}.`; }
   if (rem === 0) { clearInterval(S.timer); setTimeout(refresh, 11_000); }   // server auto-submits after its grace
 }
 async function refresh() { try { S.attempt = await api.getAttempt(S.attempt.attempt_id); S.module = null; route(); } catch (e) { fail(e); } }

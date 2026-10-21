@@ -23,6 +23,20 @@ const ALLOWED_ORIGINS = [
 const EXTRA_ORIGIN_RE = /^(?:(https):\/\/([a-z0-9.-]+)|(http):\/\/(localhost|127\.0\.0\.1))(?::([0-9]+))?$/;
 const DNS_LABEL_RE = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 let extraOrigins = [];
+let publicSiteOrigins = true;
+
+/* CORS_PUBLIC_SITE_ORIGINS: whether this deployment trusts the public Klarweg
+   site origins above. Unset means "allow", which is production's behaviour
+   and must stay its default (scripts/predeploy-access-check.mjs refuses a
+   production wrangler.toml that sets it). "deny" removes them, for an
+   isolated test Worker that must answer only its CORS_EXTRA_ORIGINS (the
+   payment sandbox, wrangler.payments-sandbox.toml). Any other value fails
+   closed, as "deny". It governs response CORS, preflight, the CSRF write
+   guard and the Cashfree return URL alike. */
+export function publicSiteOriginsAllowed(env) {
+  const v = env ? env.CORS_PUBLIC_SITE_ORIGINS : undefined;
+  return v === undefined || v === null || v === "allow";
+}
 
 export function isExactOrigin(origin) {
   const m = typeof origin === "string" ? origin.match(EXTRA_ORIGIN_RE) : null;
@@ -50,10 +64,11 @@ export function parseExtraOrigins(value) {
 
 export function configureCors(env) {
   extraOrigins = parseExtraOrigins(env && env.CORS_EXTRA_ORIGINS);
+  publicSiteOrigins = publicSiteOriginsAllowed(env);
 }
 
 function isAllowedOrigin(origin) {
-  return origin !== null && (ALLOWED_ORIGINS.includes(origin) || extraOrigins.includes(origin));
+  return origin !== null && ((publicSiteOrigins && ALLOWED_ORIGINS.includes(origin)) || extraOrigins.includes(origin));
 }
 
 export function corsHeaders(request) {

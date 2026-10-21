@@ -26,7 +26,8 @@
         --allow-speech-scope=list when only the explicit list is wider.
      6. SPEECH_TASK_DAILY_CHECKS (checks per Speaking task per day) may
         only be 1, 2 or 3.
-     7. No [env.*] sections and no CORS_EXTRA_ORIGINS: non-production
+     7. No [env.*] sections, no CORS_EXTRA_ORIGINS and no
+        CORS_PUBLIC_SITE_ORIGINS: non-production
         settings live in access/worker/wrangler.nonprod.toml only.
      8. CONSULT_BOOKING (same-day consultation booking) must be "off"
         unless --allow-consult-booking=<sandbox|live> names the mode;
@@ -147,6 +148,7 @@ if (enrolCoursesRaw) {
 const tomlCode = toml.replace(/#.*$/gm, '');
 if (/^\s*\[\[?\s*["']?env["']?\s*\./m.test(tomlCode)) fail('wrangler.toml contains an [env.*] section. Non-production settings belong in access/worker/wrangler.nonprod.toml, never in the production file.');
 if (/CORS_EXTRA_ORIGINS["']?\s*=/.test(tomlCode)) fail('wrangler.toml sets CORS_EXTRA_ORIGINS. Extra CORS origins are for the isolated non-production Worker only (wrangler.nonprod.toml).');
+if (/CORS_PUBLIC_SITE_ORIGINS["']?\s*=/.test(tomlCode)) fail('wrangler.toml sets CORS_PUBLIC_SITE_ORIGINS. Production always trusts the public site origins; the setting is for an isolated non-production Worker only.');
 
 let live;
 try {

@@ -151,6 +151,9 @@ async function verify() {
   const row = await one(`SELECT cashfree_order_id, status, amount_paise FROM consult_bookings WHERE ref = '${ref}'`);
   const order = await ops.cfOrder(row.cashfree_order_id);
   ok('consult: Cashfree holds a server-side order for exactly ₹100.00 INR', Number(order.order_amount) === 100 && order.order_currency === 'INR' && row.amount_paise === 10000, order);
+  ok('consult: Cashfree returns the learner to the local sandbox page only (never the public site)', String(order.order_meta && order.order_meta.return_url).startsWith(ORIGIN + '/live-classes.html?consult_ref=' + ref), order.order_meta);
+  const pub = await ops.api('POST', '/consult/bookings', { cookie: A.cookie, body: { teacher_id: 'reegan-gandhi', slot: free[1] }, headers: { origin: 'https://klarweg.in' } });
+  ok('isolation: a booking sent from the public site origin is refused by the sandbox Worker (403)', pub.status === 403, { status: pub.status });
   ok('consult: before payment the slot is only held (pending), and no joining link is given', row.status === 'pending' && (await ops.api('GET', `/consult/bookings/${ref}/join`, { cookie: A.cookie })).status === 409);
 
   const paid = await pay(bk.json.paymentSessionId, row.cashfree_order_id, 'success');
@@ -210,6 +213,7 @@ async function verify() {
   const pay1 = await one(`SELECT p.id, p.amount_paise FROM live_payments p JOIN live_enrolments e ON e.id = p.enrolment_id WHERE e.ref = '${eref}' AND p.status = 'pending'`);
   const eo = await ops.cfOrder(pay1.id);
   ok('enrol: Cashfree holds a server-side order for exactly ₹7,899.00 INR (full fee less the credit)', Number(eo.order_amount) === 7899 && eo.order_currency === 'INR' && pay1.amount_paise === 789900, eo);
+  ok('enrol: Cashfree returns the learner to the local sandbox page only', String(eo.order_meta && eo.order_meta.return_url).startsWith(ORIGIN + '/live-classes.html?enrol_ref=' + eref), eo.order_meta);
   const retry = await ops.api('POST', '/enrol/checkout', { cookie: A.cookie, body: { course_id: 'live-a1', expected_amount_paise: 789900 } });
   ok('enrol: a retry resumes the SAME Cashfree order (no second order, no second seat)', retry.status === 200 && retry.json.resumed === true && retry.json.paymentSessionId === co.json.paymentSessionId
     && (await one(`SELECT COUNT(*) AS n FROM live_payments p JOIN live_enrolments e ON e.id = p.enrolment_id WHERE e.user_id = '${A.id}'`)).n === before + 1, retry.json);
@@ -318,7 +322,7 @@ async function rehearsalOps() {
   const env = {
     DB: createD1(WORKER_DIR), CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST_REHEARSAL', CASHFREE_SECRET_KEY: SECRET, RATE_SALT: 'rehearsal',
     CONSULT_BOOKING: 'sandbox', CONSULT_TEACHERS: 'reegan-gandhi', ENROL_PAYMENTS: 'sandbox', ENROL_COURSES: JSON.stringify({ 'live-a1': { batch: '2099-01-05' } }),
-    ENROL_CONSULT_CREDIT: 'course-fee', CORS_EXTRA_ORIGINS: ORIGIN, CASHFREE_NOTIFY_URL: API + '/webhooks/cashfree'
+    ENROL_CONSULT_CREDIT: 'course-fee', CORS_EXTRA_ORIGINS: ORIGIN, CORS_PUBLIC_SITE_ORIGINS: 'deny', CASHFREE_NOTIFY_URL: API + '/webhooks/cashfree'
   };
   const ctx = { waitUntil() {} };
   const orders = new Map(), hooks = [];
@@ -359,7 +363,7 @@ async function rehearsalOps() {
     }
     if (method === 'POST' && !m[1]) {
       const b = JSON.parse(init.body);
-      const o = { order_id: b.order_id, order_amount: b.order_amount, order_currency: b.order_currency, order_status: 'ACTIVE', payment_session_id: 'session_' + b.order_id, expires: Date.parse(b.order_expiry_time), payments: [] };
+      const o = { order_id: b.order_id, order_amount: b.order_amount, order_currency: b.order_currency, order_status: 'ACTIVE', order_meta: b.order_meta, payment_session_id: 'session_' + b.order_id, expires: Date.parse(b.order_expiry_time), payments: [] };
       orders.set(b.order_id, o);
       return Response.json({ order_id: o.order_id, order_amount: o.order_amount, order_currency: o.order_currency, payment_session_id: o.payment_session_id, order_status: 'ACTIVE', order_expiry_time: b.order_expiry_time });
     }
@@ -367,7 +371,7 @@ async function rehearsalOps() {
     if (!o) return Response.json({ message: 'order not found' }, { status: 404 });
     if (o.order_status === 'ACTIVE' && Date.now() > o.expires) o.order_status = 'EXPIRED';
     if (m[2]) return Response.json(o.payments);
-    return Response.json({ order_id: o.order_id, order_amount: o.order_amount, order_currency: o.order_currency, order_status: o.order_status });
+    return Response.json({ order_id: o.order_id, order_amount: o.order_amount, order_currency: o.order_currency, order_status: o.order_status, order_meta: o.order_meta });
   };
   void realFetch;
   return {

@@ -9,7 +9,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseExtraOrigins } from '../access/worker/src/cors.js';
+import { parseExtraOrigins, publicSiteOriginsAllowed } from '../access/worker/src/cors.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
@@ -64,10 +64,15 @@ test('SANDBOX CONFIG: no secrets, no app id value, no Google or site override; w
   assert.equal(val(PAY, 'CASHFREE_NOTIFY_URL'), `https://${NAME}.${sub}.workers.dev/webhooks/cashfree`, 'its own workers.dev endpoint');
 });
 
-test('SANDBOX CONFIG: CORS and the return redirect reach only the local sandbox test page, not the exam/QA page', () => {
+test('SANDBOX CONFIG: CORS, the CSRF guard and the return redirect reach only the local sandbox test page, not the exam/QA page or the public site', () => {
   const list = parseExtraOrigins(val(PAY, 'CORS_EXTRA_ORIGINS'));
   assert.deepEqual(list, ['http://localhost:8789']);
   assert.ok(!parseExtraOrigins(val(NP, 'CORS_EXTRA_ORIGINS')).includes('http://localhost:8789'), 'a different port from the exam/QA non-prod page');
+  assert.equal(val(PAY, 'CORS_PUBLIC_SITE_ORIGINS'), 'deny', 'the public Klarweg site origins are not trusted by the sandbox (CORS, preflight, CSRF guard, return URL)');
+  assert.equal(publicSiteOriginsAllowed({ CORS_PUBLIC_SITE_ORIGINS: val(PAY, 'CORS_PUBLIC_SITE_ORIGINS') }), false);
+  for (const [name, t] of [['wrangler.toml', PROD], ['wrangler.nonprod.toml', NP], ['exam-worker/wrangler.toml', PROD_EXAM]]) {
+    assert.equal(/CORS_PUBLIC_SITE_ORIGINS/.test(strip(t)), false, `${name} keeps the default (public origins trusted): no CORS_PUBLIC_SITE_ORIGINS`);
+  }
 });
 
 test('ISOLATION: production and the exam/QA non-prod Worker are unchanged, and no production tool reads the sandbox file', () => {

@@ -82,7 +82,7 @@ const env = {
   CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST_LOCAL_DEMO', CASHFREE_SECRET_KEY: SECRET,
   GOOGLE_CLIENT_ID: 'local-demo.apps.googleusercontent.com', RATE_SALT: 'local-demo',
   CONSULT_BOOKING: 'sandbox', CONSULT_TEACHERS: 'reegan-gandhi',
-  ENROL_PAYMENTS: 'sandbox', ENROL_COURSES: JSON.stringify({ 'live-a1': { batch: '2026-11-02' } }), ENROL_CONSULT_CREDIT: 'off',
+  ENROL_PAYMENTS: 'sandbox', ENROL_COURSES: JSON.stringify({ 'live-a1': { batch: '2026-11-02' } }), ENROL_CONSULT_CREDIT: 'course-fee',
   CORS_EXTRA_ORIGINS: SITE
 };
 const today = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
@@ -124,7 +124,7 @@ function demoData() {
     [/(liveEnrolment: \{[\s\S]*?ownerApproval: )null/, "$1'LOCAL DEMO ONLY'"],
     [/(liveEnrolment: \{[\s\S]*?legalTermsUpdated: )false/, '$1true'],
     [/nextBatch: null,(\s*\/\/ no start date)/, "nextBatch: 'Monday 2 November 2026',$1"],
-    [/(paymentTerms: '₹7,999 in full before the first class\.) Paid by UPI or bank transfer on a payment request we email you\.'/, "$1 Paid online through Cashfree.'"],
+    [/(paymentTerms: '₹7,999 in full, in one payment, before the first class\.) Paid online on this page once enrolment opens\.'/, "$1 Paid online through Cashfree.'"],
     [/(title: 'Beginner German · A1',[\s\S]*?enrolment: )'waitlist'/, "$1'open'"]
   ];
   let s = fs.readFileSync(path.join(ROOT, 'live-classes-data.js'), 'utf8');
@@ -269,8 +269,8 @@ async function runE2E() {
   await go(SITE + '/live-classes.html#book');
   ok('booking: the online booking panel loads, in TEST MODE', await waitFor('document.querySelector("#consult-online #kwcb-pay")'), await text('#consult-online'));
   ok('booking: the panel shows the ₹100 fee', /Fee: ₹100/.test(await text('#consult-online')) && /Pay ₹100 and book/.test(await text('#kwcb-pay')));
-  ok('booking: the emailed consultation request is gone; the free interest request stays',
-    await ev('!document.querySelector(\'input[name="rtype"][value="consult"]\') && !!document.querySelector(\'input[name="rtype"][value="interest"]:checked\')'));
+  ok('booking: with booking on, the "not open yet" notice is gone, the CTAs say "Book a consultation", and the form stays the free waitlist only',
+    await ev('document.getElementById("consult-closed").hidden && !document.querySelector(\'input[name="rtype"]\') && document.getElementById("form-title").textContent === "Join the course waitlist" && /^Book a consultation/.test(document.querySelector(".nav-cta-live").textContent.trim())'));
   await snap('booking-1-choose-slot', '#book-form');
   await click('#kwcb-pay');
   ok('booking: Pay opens the (mock) checkout for a Worker-created ₹100 order', await waitFor('location.pathname === "/__mock_cashfree/pay"') && (await text('#mock-amount')) === '₹100');

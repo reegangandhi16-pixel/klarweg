@@ -1,5 +1,7 @@
 # Live Classes — Terms and Privacy wording for legal review
 
+> **Update 2026-10-21 (owner decision D11).** The manual payment flow described below (consultation requests by email, UPI or bank transfer on an emailed payment request, D7) is **withdrawn**: consultations are booked and paid online, and course fees are paid online in one full payment, through Cashfree only. `terms.html` §4A and `privacy.html` §2, §4, §4A, §8 and §9 have been rewritten for that (pending the owner's review). For a lawyer review, start from those published pages. The draft clauses and the email below are kept as the 2026-10-20 record; their UPI and email-payment lines no longer apply.
+
 **Status: published as owner-approved wording on 2026-10-20 (D8, waitlist launch); not reviewed by a lawyer.** The live `terms.html` §4A, `privacy.html` §4A and `refund-policy.html` are based on this draft, with every `[OWNER]`/`[LEGAL]` point left out rather than decided: the Terms say those details are confirmed in writing before anyone pays, and no course fee is accepted until enrolment opens. A lawyer's review is still recommended before paid enrolment opens. The rest of this document is the original review brief, kept for that review. The business facts in §2 and §3 are the owner's decisions of 2026-10-20 (D3–D7, part A of [`live-classes-owner-decisions.md`](live-classes-owner-decisions.md)). The *legal wording* around them is a draft: it is not legal advice and nobody has reviewed it. A review by a qualified lawyer is recommended. Until the wording is approved, `terms.html`, `privacy.html` and `refund-policy.html` stay unchanged; a static test enforces this while the sheet says `Legal review status: pending`.
 
 The homepage FAQ now uses a waitlist version of Variant B (§1): it names the A1 waitlist, says enrolment is not open and the start date is not announced.
@@ -266,7 +268,7 @@ The guarantee itself does not change.
 >
 > I run Klarweg (klarweg.in), a German-language learning site that I operate as an individual. Today it sells self-paced online courses through a Cashfree checkout, with a 7-day money-back guarantee.
 >
-> I plan to add teacher-led live classes, taught by me on Google Meet. The first is a 12-week A1 group course: 4–8 learners, 36 classes, ₹7,999, paid in full before the start. I would also offer a ₹100, 20-minute consultation. Both would be paid by UPI or bank transfer on a payment request I email, not through the website. Requests reach me by email: the website only opens the visitor's own email app with a pre-filled message.
+> I plan to add teacher-led live classes, taught by me on Google Meet. The first is a 12-week A1 group course: 4–8 learners, 36 classes, ₹7,999, paid in full before the start. I would also offer a ₹100, 20-minute consultation. Both would be booked and paid online on my website through the payment gateway Cashfree, which I already use for my self-paced courses; nothing is paid by email or manual transfer. People can also join a free waitlist, which opens their own email app with a pre-filled message.
 >
 > Before launching, I would like you to review:
 > 1. the proposed changes to my Terms of Service, Privacy Policy and Refund Policy (attached, with the current pages);

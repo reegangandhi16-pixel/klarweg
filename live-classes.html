@@ -25,12 +25,12 @@
     docs/live-classes-launch-readiness.md.
 -->
 <title>Live Classes · Klarweg — Learn German live with a teacher</title>
-<meta name="description" content="Live, teacher-led German classes from Klarweg. Join the free waitlist for Beginner German (A1), taught in Hindi and English; the start date is still to be announced. Or start with a ₹100 personal consultation.">
+<meta name="description" content="Live, teacher-led German classes from Klarweg. Join the free waitlist for Beginner German (A1), taught in Hindi and English; the start date is still to be announced. Online booking for the ₹100 personal consultation is not open yet.">
 <link rel="canonical" href="https://reegangandhi16-pixel.github.io/klarweg/live-classes.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Klarweg">
 <meta property="og:title" content="Live Classes · Klarweg — Learn German live with a teacher">
-<meta property="og:description" content="Live, teacher-led German classes. Join the free waitlist for Beginner German (A1); the start date is still to be announced. Or start with a ₹100 personal consultation.">
+<meta property="og:description" content="Live, teacher-led German classes. Join the free waitlist for Beginner German (A1); the start date is still to be announced. Online booking for the ₹100 personal consultation is not open yet.">
 <meta property="og:url" content="https://reegangandhi16-pixel.github.io/klarweg/live-classes.html">
 <meta property="og:image" content="https://reegangandhi16-pixel.github.io/klarweg/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -350,6 +350,9 @@
   .err-summary:focus { outline: 2px solid #B42318; outline-offset: 2px; }
   .done h3 { margin-bottom: 8px; }
   .done p { margin: 0 0 16px; font-size: 15px; color: var(--ink-secondary); }
+  .book-closed { background: var(--live-gold-tint); border-radius: var(--r-md); padding: 16px; margin-bottom: 24px; color: var(--ink-primary); }
+  .book-closed h3 { margin: 0 0 6px; font-size: 17px; }
+  .book-closed p { margin: 0; font-size: 14px; line-height: 1.5; }
   .done-notice { background: var(--live-gold-tint); border-radius: var(--r-md); padding: 16px; font-size: 14px; color: var(--ink-primary); margin-bottom: 24px; }
   .done pre { white-space: pre-wrap; word-break: break-word; font-family: var(--font-mono); font-size: 12px; background: var(--bg-elevated); border-radius: var(--r-md); padding: 16px; margin: 0 0 16px; max-height: 220px; overflow: auto; }
   .done-actions { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -410,7 +413,7 @@
       <a href="resources.html">Resources</a>
       <a href="about.html">About</a>
     </div>
-    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link">Log in</a><a href="#book" class="nav-cta nav-cta-live">Book a consultation</a></div>
+    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link">Log in</a><a href="#book" class="nav-cta nav-cta-live" data-book-open="Book a consultation">Join the waitlist</a></div>
     <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
       <span class="nav-hamburger-bar"></span>
       <span class="nav-hamburger-bar"></span>
@@ -434,7 +437,7 @@
   </nav>
   <div class="mobile-nav-actions">
     <a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile">Log in</a>
-    <a href="#book" class="nav-cta nav-cta-live">Book a consultation</a>
+    <a href="#book" class="nav-cta nav-cta-live" data-book-open="Book a consultation">Join the waitlist</a>
   </div>
 </div>
 
@@ -451,13 +454,13 @@
       <h1 class="display-xl">Learn German live. <span class="accent">Speak with confidence.</span></h1>
       <p class="lede">Structured classes with a real teacher who explains the grammar, gets you speaking from the first session, and corrects you as you go. Goethe exam preparation is available where your level needs it.</p>
       <div class="hero-ctas">
-        <a href="#teachers" class="btn btn-live" data-none="teachers" data-none-href="#book" data-none-text="Book a consultation" data-one-text="Meet your teacher">Explore our teachers
+        <a href="#teachers" class="btn btn-live" data-none="teachers" data-none-href="#book" data-none-text="Join the waitlist" data-one-text="Meet your teacher">Explore our teachers
           <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="#courses" class="btn btn-secondary" data-none="courses" data-none-href="#how" data-none-text="How live classes work">Explore live courses</a>
       </div>
       <ul class="hero-points">
-        <li><span>Start with a <span data-consult-fee>₹100</span> consultation</span></li>
+        <li><span><span data-consult-fee>₹100</span> consultation, booked and paid online</span></li>
         <li><span>Adjusted against your course fee within <span data-consult-days>7 days</span></span></li>
       </ul>
     </div>
@@ -521,10 +524,10 @@
         <dl>
           <dt>Best for</dt><dd>Accountability, speaking practice and personal feedback</dd>
           <dt>Guidance</dt><dd>A teacher who explains, corrects and tracks your progress</dd>
-          <dt>Pricing</dt><dd>Per course, confirmed in writing before you pay</dd>
+          <dt>Pricing</dt><dd>Per course, shown in full before you pay, in one payment</dd>
           <dt>Try it</dt><dd><span data-consult-fee>₹100</span> personal consultation with a teacher</dd>
         </dl>
-        <a href="#book" class="btn btn-live">Book a consultation</a>
+        <a href="#book" class="btn btn-live" data-request="interest" data-book-open="Book a consultation">Join the waitlist</a>
       </article>
     </div>
   </div>
@@ -607,7 +610,7 @@
     <ol class="journey">
       <li><h3>Choose a teacher and course</h3><p>Compare profiles and courses, or book a consultation and let a teacher assess your level.</p></li>
       <li><h3>Understand the plan</h3><p>See the level, schedule, materials and fee before you commit to anything.</p></li>
-      <li><h3>Enrol</h3><p>We confirm your place and payment by email. Nothing is charged until you agree.</p></li>
+      <li><h3>Enrol</h3><p>Pay the course fee online, in full and in one payment. Your place is confirmed only once the payment is verified.</p></li>
       <li><h3>Attend live online</h3><p>Join your scheduled classes with your teacher, from wherever you are.</p></li>
       <li><h3>Practise and progress</h3><p>Speak, get corrected and practise again, moving through the course one level at a time.</p></li>
     </ol>
@@ -649,8 +652,8 @@
       <div class="conditions">
         <h3>Good to know</h3>
         <ul>
-          <li>Sending this form is a request, not a booking. Nothing is charged on this page.</li>
-          <li>Your joining link is only sent after your payment is confirmed.</li>
+          <li>Consultations are booked and paid online on this page, never by email. A booking is confirmed only once the payment is verified.</li>
+          <li>Your joining link is shown on this page, when you are signed in, only once your booking is confirmed.</li>
           <li data-consult-cancel>If we have to cancel, you choose a full refund or a new time. You can move your consultation once, free of charge, with at least 12 hours’ notice; a consultation missed without notice is not refunded.</li>
           <li>The <span data-consult-dayadj>7-day</span> adjustment applies to live course fees, counted from the date of your consultation.</li>
           <li>The current <a href="refund-policy.html">Refund Policy</a> covers self-paced purchases. Live-class terms are confirmed with you before you pay.</li>
@@ -661,22 +664,19 @@
     <div class="book-card" id="book-form">
       <noscript>
         <div class="nojs-request">
-          <h3>Request a consultation by email</h3>
-          <p>This form needs JavaScript. Email <a class="inline" href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a> instead, with your name, current level, goal and preferred times (IST). Say whether you want a consultation or only want to hear when a course opens. We reply within two working days, Monday to Friday.</p>
+          <h3>Online demo booking is not open yet</h3>
+          <p>Nothing can be booked or paid on this page yet, and consultations are not booked by email. To join the free waitlist for a live course, email <a class="inline" href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a> with your name, current level, goal and preferred times (IST). Joining the waitlist is free and is not a booking. We reply within two working days, Monday to Friday.</p>
         </div>
       </noscript>
+      <!-- Honest closed state: hidden by kw-live.js only when online booking is enabled (the booking script then shows its panel here). -->
+      <div class="book-closed" id="consult-closed" role="note">
+        <h3>Online demo booking is not open yet</h3>
+        <p>When it opens, you will choose a time and pay the <span data-consult-fee>₹100</span> fee online here. Until then, nothing can be booked or paid on this page, and consultations are not booked by email. You can still join the free waitlist below.</p>
+      </div>
       <form id="consult-form" class="js-only" novalidate>
-        <h3 id="form-title">Request a consultation</h3>
-        <p class="sub">Fields marked <span class="req">*</span> are required. We reply <span data-reply-time>within two working days</span>.</p>
+        <h3 id="form-title">Join the course waitlist</h3>
+        <p class="sub">Free, and not a booking: we tell you when a suitable course opens. Nothing is charged. Fields marked <span class="req">*</span> are required. We reply <span data-reply-time>within two working days</span>.</p>
         <div class="err-summary" id="err-summary" role="alert" tabindex="-1" hidden></div>
-        <!-- A course that is not open yet only needs an interest note, never a paid consultation. -->
-        <fieldset class="form-row">
-          <legend>What would you like?</legend>
-          <div class="times">
-            <label class="time-opt"><input type="radio" name="rtype" value="consult" checked><span><span>A personal consultation (<span data-consult-fee>₹100</span>)</span></span></label>
-            <label class="time-opt"><input type="radio" name="rtype" value="interest"><span><span>Tell me when a course opens (free)</span></span></label>
-          </div>
-        </fieldset>
         <div class="form-2">
           <div class="form-row">
             <label for="bf-name">Name <span class="req">*</span></label>
@@ -752,7 +752,7 @@
 
       <div class="done" id="consult-done" hidden tabindex="-1">
         <h3>Your request is ready to send</h3>
-        <div class="done-notice" id="done-notice" data-interest-html="<strong>Nothing booked or charged.</strong> Your email app should have opened with the request. It is only sent when you press Send there. We reply to confirm we have noted your interest, and write again if a suitable course opens."><strong>Not booked yet.</strong> Your email app should have opened with the request. It is only sent when you press Send there. We then reply with a time slot and payment details.</div>
+        <div class="done-notice" id="done-notice"><strong>Nothing booked or charged.</strong> Your email app should have opened with the request. It is only sent when you press Send there. We reply to confirm we have noted your interest, and write again if a suitable course opens.</div>
         <p>If your email app didn’t open, copy the request below and email it to <a class="inline" data-contact-mailto href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a>.</p>
         <pre id="consult-preview"></pre>
         <div class="done-actions">
@@ -834,9 +834,9 @@
   <div class="container">
     <div class="inner">
       <h2 class="display-md">Start with a conversation.</h2>
-      <p class="lede">Meet a teacher for <span data-consult-fee>₹100</span>, get an honest assessment of your level, and leave with a clear plan. Questions first? <a href="contact.html">Contact us</a>.</p>
+      <p class="lede">Meet a teacher for <span data-consult-fee>₹100</span>, get an honest assessment of your level, and leave with a clear plan. <span data-book-closed>Online booking is not open yet; join the free waitlist to hear when a course opens.</span> Questions first? <a href="contact.html">Contact us</a>.</p>
       <div class="hero-ctas">
-        <a href="#book" class="btn btn-live">Request a consultation
+        <a href="#book" class="btn btn-live" data-request="interest" data-book-open="Book a consultation">Join the waitlist
           <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="courses.html" class="btn btn-secondary">Prefer self-paced? See courses</a>
@@ -848,8 +848,8 @@
 </main>
 
 <div class="sticky-book" id="sticky-book" aria-hidden="true">
-  <p><strong><span data-consult-fee>₹100</span> consultation</strong><span>Adjusted against your fee within <span data-consult-days>7 days</span></span></p>
-  <a href="#book" class="btn btn-gold" tabindex="-1">Book</a>
+  <p><strong><span data-consult-fee>₹100</span> consultation</strong><span data-book-closed>Online booking is not open yet</span><span data-book-only hidden>Adjusted against your fee within <span data-consult-days>7 days</span></span></p>
+  <a href="#book" class="btn btn-gold" tabindex="-1" data-request="interest" data-book-open="Book">Waitlist</a>
 </div>
 
 <!-- ========== FOOTER (canonical) ========== -->

@@ -43,7 +43,9 @@ test('VALIDATOR: enabling needs owner approval, updated legal text, an open publ
   D.liveEnrolment.legalTermsUpdated = true;
   const a1 = D.courses.find((c) => c.id === 'live-a1');
   Object.assign(a1, { enrolment: 'open', nextBatch: '2 November 2026' });
-  assert.match(errorsOf(D), /course live-a1: paymentTerms still describe an emailed payment request/, 'today\'s terms promise an emailed payment request');
+  a1.paymentTerms = '₹7,999 in full before the first class. Paid by UPI or bank transfer on a payment request we email you.';
+  assert.match(errorsOf(D), /course live-a1: paymentTerms still describe an emailed payment request/, 'old manual terms are refused at enable time');
+  assert.match(errorsOf(D), /course live-a1: paymentTerms describe a manual or emailed payment: live courses are paid online only/);
   a1.paymentTerms = '₹7,999 in full before the first class. Paid online through Cashfree.';
   assert.equal(errorsOf(D), '');
   a1.paymentTerms = '₹7,999 before the first class, or two instalments: ₹4,000 now and ₹3,999 later. Paid online through Cashfree.';
@@ -109,11 +111,12 @@ test('PRICES: every listed teacher\'s A1 price is exactly the approved one, and 
 });
 
 /* ================= demo booking: email is not the booking mechanism ================= */
-test('DEMO BOOKING: with online booking on, the emailed consultation request is removed; the free interest request stays', () => {
-  const live = read('kw-live.js');
+test('DEMO BOOKING: there is no emailed consultation request in either state; with booking on the closed notice goes and kw-consult.js loads', () => {
+  const live = read('kw-live.js'), html = read('live-classes.html');
+  assert.equal(/name="rtype"|value="consult"/.test(html), false, 'the request form is the free waitlist only');
+  assert.equal(/Live class consultation request|requestType|setRequestType/.test(live), false, 'no emailed consultation request is ever prepared');
   const fn = live.slice(live.indexOf('function initOnlineBooking'), live.indexOf('function init()'));
-  assert.match(fn, /if \(!ob \|\| ob\.enabled !== true\) return;[\s\S]*input\[name="rtype"\]\[value="consult"\][\s\S]*\.closest\('label'\)\.remove\(\);[\s\S]*setRequestType\('interest'\);[\s\S]*loadScript\('kw-consult\.js'\)/);
-  assert.match(read('live-classes.html'), /<input type="radio" name="rtype" value="interest">/);
+  assert.match(fn, /if \(!BOOK_ON\) return;[\s\S]*consult-closed'\)\.hidden = true;[\s\S]*loadScript\('kw-consult\.js'\)/);
 });
 
 test('DEMO BOOKING: a pending booking offers Continue payment, which re-posts the same slot (the Worker resumes the same order)', () => {
@@ -153,6 +156,7 @@ test('GUARD: the committed config passes every enrolment rule (payments off)', (
   assert.equal(tomlVal('ENROL_PAYMENTS'), 'off');
   assert.equal(tomlVal('ENROL_COURSES'), '');
   assert.equal(tomlVal('CASHFREE_ENV'), 'sandbox');
+  assert.equal(tomlVal('ENROL_CONSULT_CREDIT'), 'course-fee', 'owner decision D11: the ₹100 consultation is credited against the course fee');
   const out = guard();
   assert.match(out, /could not read the live Worker/, out);
   assert.equal(/ENROL_/.test(out), false, out);
@@ -162,11 +166,10 @@ test('GUARD: payments on need the explicit flag, the matching Cashfree environme
   assert.match(guard({ toml: set('ENROL_PAYMENTS', '"maybe"') }), /must be "off", "sandbox" or "live"/);
   assert.match(guard({ toml: set('ENROL_PAYMENTS', '"sandbox"') }), /--allow-enrol-payments=sandbox/);
   assert.match(guard({ toml: set('ENROL_PAYMENTS', '"live"'), flags: ['--allow-enrol-payments=live'] }), /ENROL_PAYMENTS="live" needs CASHFREE_ENV="production"/);
-  assert.match(guard({ toml: set('ENROL_PAYMENTS', '"sandbox"'), flags: ['--allow-enrol-payments=sandbox'] }), /ENROL_CONSULT_CREDIT is not set/);
-  const on = set('ENROL_PAYMENTS', '"sandbox"') + '\nENROL_CONSULT_CREDIT = "sometimes"\n';
-  assert.match(guard({ toml: on, flags: ['--allow-enrol-payments=sandbox'] }), /must be "off" or "course-fee"/);
-  const ok = set('ENROL_PAYMENTS', '"sandbox"') + '\nENROL_CONSULT_CREDIT = "off"\n';
-  assert.match(guard({ toml: ok, flags: ['--allow-enrol-payments=sandbox'] }), /could not read the live Worker/);
+  const credit = (v) => set('ENROL_PAYMENTS', '"sandbox"').replace(/^ENROL_CONSULT_CREDIT = .*\n/m, v == null ? '' : `ENROL_CONSULT_CREDIT = ${v}\n`);
+  assert.match(guard({ toml: credit(null), flags: ['--allow-enrol-payments=sandbox'] }), /ENROL_CONSULT_CREDIT is not set/);
+  assert.match(guard({ toml: credit('"sometimes"'), flags: ['--allow-enrol-payments=sandbox'] }), /must be "off" or "course-fee"/);
+  for (const v of ['"off"', '"course-fee"']) assert.match(guard({ toml: credit(v), flags: ['--allow-enrol-payments=sandbox'] }), /could not read the live Worker/, v);
 });
 
 test('GUARD: ENROL_COURSES must name a course the Worker sells and the page shows as open, with a batch date', () => {
@@ -185,6 +188,6 @@ test('GUARD: ENROL_COURSES must name a course the Worker sells and the page show
 test('SCOPE: no Exam Portal, audio, legal, or self-paced checkout file changes on this branch', { skip: (() => { try { execFileSync('git', ['rev-parse', '--verify', 'origin/main'], { cwd: ROOT, stdio: 'ignore' }); return false; } catch { return 'origin/main not available'; } })() }, () => {
   const base = execFileSync('git', ['merge-base', 'HEAD', 'origin/main'], { cwd: ROOT, encoding: 'utf8' }).trim();
   const changed = execFileSync('git', ['diff', '--name-only', base], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean);
-  const forbidden = changed.filter((f) => /^(exam|exam-content|exam-worker|audio|public\/audio)\/|audio|^terms\.html$|^privacy\.html$|^refund-policy\.html$|^kw-checkout\.js$|^kw-products\.js$|^kw-auth\.js$|^access\/worker\/src\/(orders|entitlements|products|exam-proxy)\.js$/i.test(f));
+  const forbidden = changed.filter((f) => /^(exam|exam-content|exam-worker|audio|public\/audio)\/|audio|^refund-policy\.html$|^kw-checkout\.js$|^kw-products\.js$|^kw-auth\.js$|^access\/worker\/src\/(orders|entitlements|products|exam-proxy)\.js$/i.test(f));
   assert.deepEqual(forbidden, []);
 });

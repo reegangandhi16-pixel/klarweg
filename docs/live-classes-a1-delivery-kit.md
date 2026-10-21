@@ -1083,38 +1083,27 @@ Never state a pass probability. The learner decides whether and when to book the
 > - **Platform:** Google Meet. Classes are not recorded.
 > - **Materials:** class notes, PDF worksheets, homework with written feedback.
 > - **Exam:** preparation for Goethe-Zertifikat A1: Start Deutsch 1. The exam fee is not included, and you book the exam yourself.
-> - **Fee:** ₹7,999, paid in full before the first class. [If a consultation adjustment applies: apply it as the published terms set out.]
+> - **Fee:** ₹7,999, paid in full, in one payment, online on the Live Classes page before the first class. If you had a Klarweg consultation in the 7 days before you enrol, its ₹100 is taken off automatically.
 > - **Policies:** missed classes, cancellations and refunds, scheduling, and what the fee includes are set out in [link to the published terms].
 >
-> To take a place, reply "I'd like to join". I'll then send a payment request. Your place is confirmed once your payment is received.
+> To take a place, sign in and choose **Enrol and pay online** on the course at [link to live-classes.html#courses]. Your place is confirmed on that page as soon as the payment is verified. Please don't send payment details or money by email: we never ask for them.
 >
 > Viele Grüße
 > Reegan Gandhi · Klarweg
 
-### Template 4 — payment request (manual UPI or bank transfer)
+### Template 4 — retired (owner decision D11, 2026-10-21)
 
-> **Subject:** Payment request: Beginner German · A1, [batch start date]
+The manual payment request (UPI ID or bank details sent by email) is withdrawn. Live-course fees and consultations are paid online on the Live Classes page only. If a learner asks how to pay, point them to the course's **Enrol and pay online** button; never send UPI or bank details.
+
+### Template 5 — welcome note (optional; only for an enrolment the Worker shows as `enrolled`)
+
+The page already confirms the place once the Worker has verified the payment with Cashfree. This note is a personal welcome, not the confirmation; send it only for an enrolment whose status is `enrolled` (§5 of the online-payments guide), never on a learner's screenshot.
+
+> **Subject:** Welcome to Beginner German · A1, [batch start date]
 >
 > Hallo [first name],
 >
-> Thank you for choosing to join. To take your place, please pay:
-> - **Amount:** ₹[amount due]. This is the full course fee of ₹7,999 [less any consultation adjustment that applies under the published terms].
-> - **Due by:** [date: before the first class].
-> - **UPI ID:** [Klarweg's UPI ID] — **or bank transfer:** [account name, account number, IFSC]
-> - **Reference:** please write "A1 [batch] [your first name]" in the payment note.
->
-> Your place is confirmed only once the payment shows in our account. I'll email you then. Please don't send screenshots of your UPI PIN or bank login. A payment reference is all I need.
->
-> Viele Grüße
-> Reegan Gandhi · Klarweg
-
-### Template 5 — place confirmation (only after the payment is verified on the bank or UPI statement)
-
-> **Subject:** Your place is confirmed: Beginner German · A1, [batch start date]
->
-> Hallo [first name],
->
-> I've received your payment of ₹[amount received] (reference [transaction reference]) on [date]. **Your place in the A1 batch starting [start date] is confirmed.**
+> Thank you for enrolling (reference [KWE-…]). **Your place in the A1 batch starting [start date] is confirmed.**
 >
 > [Receipt or invoice, as the accountant advises.]
 >

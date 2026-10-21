@@ -42,7 +42,9 @@ The Worker refuses "live" through sandbox, and "sandbox" through production cred
 
 ## 3. Conflicts with what is published today
 
-Today's published text describes email requests, UPI payment and email confirmation. Online booking contradicts it in these places. **Proposed wording only; nothing below has been published.**
+**Update 2026-10-21 (D11):** applied in a revised form. Terms §4A and Privacy §4A now describe online booking and payment only, with "not open yet" wording while the switches are off; the page no longer offers an emailed consultation request. The table below is the earlier proposal, kept as a record.
+
+Before that, the published text described email requests, UPI payment and email confirmation. Online booking contradicted it in these places.
 
 | # | Where | Today | Proposed (if online booking is approved) |
 |---|---|---|---|

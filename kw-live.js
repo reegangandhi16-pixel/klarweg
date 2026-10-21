@@ -4,11 +4,13 @@
    directory + profile dialog, course catalogue, consultation
    request form, mobile sticky CTA. Vanilla, no dependencies.
 
-   The consultation form has no backend: like the contact page it
-   hands off to a pre-filled mailto: and says so plainly. It never
-   claims a booking or payment happened. Online booking lives in a
-   separate script (kw-consult.js), loaded only when the owner has
-   enabled it in the data file.
+   The request form is the free course waitlist only. It has no backend:
+   like the contact page it hands off to a pre-filled mailto: and says so
+   plainly. It never books or charges anything, and consultations are
+   never requested by email. A consultation is booked and paid online
+   by a separate script (kw-consult.js), loaded only when the owner has
+   enabled it in the data file; until then the page says plainly that
+   online booking is not open yet.
    ============================================================ */
 (function () {
   'use strict';
@@ -32,10 +34,12 @@
 
   /* Online course enrolment with payment: off until the owner enables it (kw-enrol.js). */
   var ENROL_ON = !!(D.liveEnrolment && D.liveEnrolment.enabled === true);
+  /* Online consultation booking with payment: off until the owner enables it (kw-consult.js). */
+  var BOOK_ON = !!(D.consultation && D.consultation.onlineBooking && D.consultation.onlineBooking.enabled === true);
   var LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
   var GROUP_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced', exam: 'Goethe prep', speaking: 'Speaking' };
   var STATUS = {
-    open: { cls: 'status-open', label: 'Enrolment open', cta: 'Book a consultation to enrol' },
+    open: { cls: 'status-open', label: 'Enrolment open', cta: BOOK_ON ? 'Book a consultation to enrol' : 'Register interest' },
     waitlist: { cls: 'status-waitlist', label: 'Waitlist', cta: 'Join the waitlist' },
     'not-open': { cls: '', label: 'Enrolment not open yet', cta: 'Register interest' }
   };
@@ -242,7 +246,7 @@
       + '<div class="t-side">' + priceHtml(t)
       + (isListed ? '' : '<div class="t-actions">'
         + '<button type="button" class="btn btn-secondary" data-profile="' + esc(t.id) + '">View profile</button>'
-        + '<a href="#book" class="btn btn-live" data-book-teacher="' + esc(t.id) + '">Consultation</a>'
+        + (BOOK_ON ? '<a href="#book" class="btn btn-live" data-book-teacher="' + esc(t.id) + '">Consultation</a>' : '')
         + '</div>')
       + '</div></article>';
   }
@@ -252,8 +256,11 @@
     if (!grid) return;
     if (!teachers.length) {
       grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><h3>Teacher profiles are being finalised</h3>'
-        + '<p>We publish a profile only once the teacher’s qualifications are confirmed. You can still book a consultation now and we’ll match you with a suitable teacher.</p>'
-        + '<a href="#book" class="btn btn-live">Book a consultation ' + ARROW + '</a></div>';
+        + (BOOK_ON
+          ? '<p>We publish a profile only once the teacher’s qualifications are confirmed. You can still book a consultation now and we’ll match you with a suitable teacher.</p>'
+            + '<a href="#book" class="btn btn-live">Book a consultation ' + ARROW + '</a></div>'
+          : '<p>We publish a profile only once the teacher’s qualifications are confirmed. Join the free waitlist and we’ll tell you when a suitable course opens.</p>'
+            + '<a href="#book" class="btn btn-live" data-request="interest">Join the waitlist ' + ARROW + '</a></div>');
       $('t-count').textContent = '';
       document.querySelectorAll('#teachers .filters').forEach(function (f) { f.hidden = true; });
       return;
@@ -361,7 +368,9 @@
       + row('Reviews', reviewText(t))
       + row('Live courses', teaches)
       + '</dl>'
-      + '<a href="#book" class="btn btn-live" data-book-teacher="' + esc(t.id) + '">Request a consultation with ' + esc(t.draft ? 'this teacher' : t.name.split(' ')[0]) + ' ' + ARROW + '</a>'
+      + (BOOK_ON
+        ? '<a href="#book" class="btn btn-live" data-book-teacher="' + esc(t.id) + '">Request a consultation with ' + esc(t.draft ? 'this teacher' : t.name.split(' ')[0]) + ' ' + ARROW + '</a>'
+        : '<a href="#book" class="btn btn-live" data-book-teacher="' + esc(t.id) + '" data-request="interest">Join the waitlist ' + ARROW + '</a>')
       + '</div></div>';
     lastProfileId = id;
     dlgOpener = opener || 'deeplink';
@@ -464,7 +473,7 @@
     if (!grid) return;
     if (!courses.length) {
       grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><h3>The first live courses are being scheduled</h3>'
-        + '<p>Dates, batch sizes and fees will appear here as soon as they are confirmed. Book a consultation or tell us what you need, and we’ll let you know when a suitable course opens.</p>'
+        + '<p>Dates, batch sizes and fees will appear here as soon as they are confirmed. Join the free waitlist and we’ll let you know when a suitable course opens.</p>'
         + '<a href="#book" class="btn btn-live" data-request="interest">Register interest ' + ARROW + '</a></div>';
       document.querySelectorAll('#courses .filters').forEach(function (f) { f.hidden = true; });
       return;
@@ -513,9 +522,6 @@
       var tid = a.getAttribute('data-book-teacher'), cid = a.getAttribute('data-book-course');
       if (dlg && dlg.open) { dlgOpener = null; closeProfile(); }
       showForm();
-      /* A course that is not open yet asks for interest, not a paid consultation. */
-      var course = cid && courses.filter(function (x) { return x.id === cid; })[0];
-      setRequestType(a.getAttribute('data-request') || (course && course.enrolment !== 'open' ? 'interest' : 'consult'));
       if (tid && $('bf-teacher')) $('bf-teacher').value = tid;
       if (cid && $('bf-course')) {
         $('bf-course').value = cid;
@@ -528,18 +534,6 @@
       target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
       setTimeout(function () { $('bf-name').focus({ preventScroll: true }); }, reduce ? 0 : 450);
     });
-  }
-
-  function requestType() {
-    var r = form && form.querySelector('input[name="rtype"]:checked');
-    return r ? r.value : 'consult';
-  }
-  function setRequestType(v) {
-    var r = form && form.querySelector('input[name="rtype"][value="' + v + '"]');
-    if (r) { r.checked = true; syncRequestType(); }
-  }
-  function syncRequestType() {
-    if ($('form-title')) $('form-title').textContent = requestType() === 'interest' ? 'Register your interest' : 'Request a consultation';
   }
 
   function setErr(input, errEl, msg) {
@@ -577,9 +571,7 @@
     var tSel = $('bf-teacher'), cSel = $('bf-course');
     var times = Array.prototype.slice.call(form.querySelectorAll('input[name="times"]:checked')).map(function (i) { return i.value; });
     return [
-      requestType() === 'interest'
-        ? 'Live course interest (no consultation requested, nothing to pay)'
-        : 'Live class consultation request (' + D.consultation.feeLabel + ')',
+      'Live course interest (no consultation requested, nothing to pay)',
       '',
       'Name: ' + $('bf-name').value.trim(),
       'Email: ' + $('bf-email').value.trim(),
@@ -602,7 +594,6 @@
 
   function initForm() {
     if (!form) return;
-    Array.prototype.forEach.call(form.querySelectorAll('input[name="rtype"]'), function (r) { r.addEventListener('change', syncRequestType); });
     ['bf-name', 'bf-email', 'bf-level', 'bf-goal', 'bf-consent'].forEach(function (id) {
       var el = $(id);
       el.addEventListener('change', function () {
@@ -613,13 +604,7 @@
       e.preventDefault();
       if (!validate(true)) return;
       lastBody = buildBody();
-      var interest = requestType() === 'interest';
-      var subject = 'Klarweg — ' + (interest ? 'Live course interest' : 'Live class consultation request') + ' (' + $('bf-name').value.trim() + ')';
-      var note = $('done-notice');
-      if (note) {
-        if (!note.hasAttribute('data-consult-html')) note.setAttribute('data-consult-html', note.innerHTML);
-        note.innerHTML = note.getAttribute(interest ? 'data-interest-html' : 'data-consult-html');
-      }
+      var subject = 'Klarweg — Live course interest (' + $('bf-name').value.trim() + ')';
       $('consult-preview').textContent = lastBody;
       form.hidden = true; done.hidden = false;
       $('copy-status').textContent = '';
@@ -727,16 +712,16 @@
   }
   function initOnlineBooking() {
     if (ENROL_ON) loadScript('kw-enrol.js');
-    var ob = (D.consultation || {}).onlineBooking;
-    if (!ob || ob.enabled !== true) return;
-    /* With online booking on, a consultation is booked and paid online
-       only: the emailed consultation request goes, the free
-       "tell me when a course opens" request stays. */
-    var emailConsult = form && form.querySelector('input[name="rtype"][value="consult"]');
-    if (emailConsult) {
-      emailConsult.closest('label').remove();
-      setRequestType('interest');
-    }
+    if (!BOOK_ON) return;
+    /* With online booking on, the "not open yet" notice goes and the
+       booking CTAs get their booking labels; the free waitlist stays. */
+    if ($('consult-closed')) $('consult-closed').hidden = true;
+    document.querySelectorAll('[data-book-closed]').forEach(function (el) { el.hidden = true; });
+    document.querySelectorAll('[data-book-only]').forEach(function (el) { el.hidden = false; });
+    document.querySelectorAll('[data-book-open]').forEach(function (el) {
+      el.removeAttribute('data-request');
+      swapCopy(el, el.getAttribute('data-book-open'));
+    });
     loadScript('kw-consult.js');
   }
 

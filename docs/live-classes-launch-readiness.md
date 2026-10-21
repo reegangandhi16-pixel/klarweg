@@ -6,12 +6,15 @@
   - the ₹100 consultation terms;
   - the four live-class policies;
   - the product and privacy choices;
-  - manual UPI or bank-transfer payment.
+  - manual UPI or bank-transfer payment (D7, **superseded on 2026-10-21 by D11**: consultations and course fees are booked and paid online through Cashfree only; email is never a booking or payment mechanism).
+- **D10 and D11 (2026-10-21):** full payment only; online booking and payment only, with the ₹100 credited against the course fee within 7 days. Every switch is still off, so the page shows "Online demo booking is not open yet" and the free waitlist.
 - **D8, waitlist launch (owner-approved 2026-10-20):** the page is public. Only `reegan-gandhi` and `live-a1` are published; `live-a1` is a **waitlist** with no start date, and no course fees are accepted. Every other teacher and course stays a draft that never renders on a deployed host.
 - **Pending before paid enrolment:**
   - the A1 start date;
-  - the business rules (refunds of the classes still to come, the consultation deduction, minors);
-  - the accounting follow-up for manual payments;
+  - the business rules (refunds of the classes still to come, whether the consultation credit is refunded after a cancellation, minors);
+  - the accounting follow-up for online payments;
+  - the owner's review of the 2026-10-21 Terms §4A and Privacy rewrite for online-only payment;
+  - the Cashfree production setup in [`live-classes-online-payments.md`](live-classes-online-payments.md) §6;
   - a lawyer's review of the published Terms, Privacy and Refund Policy wording (owner-approved; not reviewed by a lawyer).
 - **Page status:** `live-classes.html` is indexed, has a canonical link, and is in `.github/pages-allowlist.txt`, `sitemap.xml`, the site nav and footer.
 
@@ -161,7 +164,7 @@ Publishing the profile is part of the launch go-ahead (D8).
 
 Today the only confirmed teacher teaches A1–B2 (Goethe preparation A1–B1). So the first course should sit in that range. The C1–C2 draft course and the template teachers `teacher-1`, `teacher-2` and `teacher-3` remain templates until real teachers exist.
 
-**D4. Consultation terms. DECIDED (2026-10-20):** ₹100, 20 minutes, Google Meet, UPI after the time is confirmed, 7-day adjustment; `termsConfirmed: true`.
+**D4. Consultation terms. DECIDED (2026-10-20):** ₹100, 20 minutes, Google Meet, UPI after the time is confirmed (payment line superseded by D11: booked and paid online), 7-day adjustment; `termsConfirmed: true`.
 *Why it matters:* the fee and adjustment period appear in 16 places on the page (all read from the data file) and in the booking email. The reply email has to tell the student how to pay.
 *Needed:*
 - confirm or change the ₹100 fee and the 7-day adjustment;
@@ -189,7 +192,7 @@ Each is one sentence or paragraph in `policies` in `live-classes-data.js`.
 
 *Recommendation:* update both pages to cover live classes and consultation requests before launch. The legal wording is yours to approve.
 
-**D7. How live-course fees are collected. DECIDED (2026-10-20):** manual UPI or bank transfer on an emailed payment request; no Cashfree product and no new backend. The accounting follow-up is still open.
+**D7. How live-course fees are collected. DECIDED (2026-10-20), SUPERSEDED (2026-10-21, D11):** was manual UPI or bank transfer on an emailed payment request. Now online through Cashfree only, through the separate live-course Worker routes (never the self-paced product catalogue). The accounting follow-up is still open.
 *Why it matters:* the Cashfree catalog and checkout know only self-paced products, so live fees need either a manual process or a new payment product. A new product changes the payment backend, which is a separate project.
 The decision: manual for the first batch. A static test keeps live products out of the Cashfree catalogue, because `grantProduct()` would unlock self-paced content.
 

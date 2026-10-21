@@ -150,7 +150,8 @@ test('LIVE D3: the first course is the approved A1 group batch, published as a w
   assert.equal(a1.sessionLength, '90 minutes');
   assert.equal(a1.totalDuration, '12 weeks · 36 classes · 54 hours');
   assert.equal(a1.priceLabel, '₹7,999');
-  assert.match(a1.paymentTerms, /^₹7,999 in full before the first class\./, 'full payment only (owner decision, 2026-10-21)');
+  assert.match(a1.paymentTerms, /^₹7,999 in full, in one payment, before the first class\. Paid online on this page once enrolment opens\.$/, 'full payment only, online only (D10, D11)');
+  assert.equal(/\bUPI\b|bank transfer|\bemail/i.test(a1.paymentTerms), false, 'no manual or emailed payment');
   assert.equal(/instal/i.test(a1.paymentTerms), false, 'no instalments are offered');
   assert.match(a1.materials, /class notes and PDF worksheets; homework with written feedback/i);
   assert.match(a1.examPrep, /Goethe-Zertifikat A1: Start Deutsch 1 \(exam fee not included\)/);
@@ -173,8 +174,8 @@ test('LIVE D4: the consultation terms are the approved ones', () => {
   assert.match(c.cancellation, /full refund or a new time/);
   assert.match(c.cancellation, /once, free of charge, with at least 12 hours’ notice/);
   assert.match(c.cancellation, /missed without notice is not refunded/);
-  assert.ok(c.steps.some((x) => /UPI/.test(x) && /confirmed time slot/.test(x)), 'UPI is requested only after the time is confirmed by email');
-  assert.match(html, /Sending this form is a request, not a booking\. Nothing is charged on this page\./, 'the page says requests go by email and it takes no payment');
+  assert.ok(c.steps.some((x) => /online through Cashfree/.test(x) && /confirmed only once the payment is verified/.test(x)), 'booked and paid online (D11)');
+  assert.match(html, /Consultations are booked and paid online on this page, never by email\./);
 });
 
 test('LIVE D5: the four live-class policies hold the approved texts; the self-paced guarantee is not extended', () => {
@@ -207,10 +208,10 @@ test('LIVE LEGAL: Terms, Privacy and Refund Policy disclose the live service as 
   for (const [f, s] of [['terms.html', terms], ['privacy.html', privacy], ['refund-policy.html', refund]]) {
     assert.equal(/\[(?:OWNER|LEGAL)\b|\[[A-Z][^\]]*\]/.test(read(f)), false, `${f}: no [OWNER]/[LEGAL] or bracketed placeholder`);
     assert.equal(/lawyer|solicitor|advocate|accountant|legally reviewed|legal review|chartered/i.test(s), false, `${f}: claims no professional review`);
-    assert.match(read(f), /Last updated: 20 October 2026/, `${f}: the date is updated`);
+    assert.match(read(f), f === 'refund-policy.html' ? /Last updated: 20 October 2026/ : /Last updated: 21 October 2026/, `${f}: the date is updated`);
   }
   const D = loadData(), c = D.consultation;
-  // Terms §4A: separate service, enrolment closed, the approved consultation and policies verbatim, manual payment
+  // Terms §4A: separate service, enrolment and booking closed, the approved consultation and policies verbatim, online payment only (D10, D11)
   assert.match(terms, /Live classes are a separate service from the self-paced courses: buying a self-paced level does not include live classes, and a live course does not include access to the self-paced courses\./);
   assert.match(terms, /Enrolment in live courses is not open yet, and Klarweg does not accept live-course fees until it is\./);
   assert.match(terms, /Registering interest is not a booking, does not reserve a place and commits you to nothing/);
@@ -218,21 +219,29 @@ test('LIVE LEGAL: Terms, Privacy and Refund Policy disclose the live service as 
   assert.ok(terms.includes(`within ${c.adjustmentDays} days of your consultation, the consultation fee is deducted from the course fee`));
   assert.ok(terms.includes(c.cancellation), 'the consultation cancellation terms');
   for (const k of POLICIES) assert.ok(terms.includes(D.policies[k]), `Terms §4A quotes policy ${k} verbatim`);
-  assert.match(terms, /paid by UPI or bank transfer, on a payment request we send you by email\. A person at Klarweg checks each payment/);
-  assert.match(terms, /The Klarweg website does not take live-class or consultation payments/);
+  assert.match(terms, /Online booking of consultations is not open yet either, and Klarweg does not accept consultation fees until it is\./);
+  assert.match(terms, /The course fee is paid in full, in one payment, before the first class\./);
+  assert.match(terms, /Consultation and live-course fees are paid online on the Klarweg website, in Indian rupees, through our payment processor Cashfree\./);
+  assert.match(terms, /confirmed only once Klarweg has verified the payment with Cashfree; returning from the payment page does not by itself confirm it\./);
+  assert.match(terms, /Klarweg does not take live-class or consultation fees by manual UPI, bank transfer or a payment request sent by email/);
+  assert.match(terms, /Until online booking and enrolment open, Klarweg takes no live-class or consultation payments at all\./);
+  assert.equal(/instal|send a request by email|UPI details|paid by UPI or bank transfer/i.test(terms.slice(terms.indexOf('4A. Live classes'), terms.indexOf('5. Refunds'))), false, 'no instalment, email-booking or manual-payment wording in §4A');
   assert.match(terms, /Classes and consultations are not recorded\. In a group class, the other learners in your batch can see your name and see and hear you/);
   assert.match(terms, /No minimum age has been set for live classes or consultations\./, 'states the age position actually applied: none');
   assert.match(terms, /Live classes and consultations are not covered by the 7-day guarantee/);
   // unresolved rules (instalment refunds, a missed instalment, the deduction's target, removal) are not invented
   assert.equal(/₹7,999 ÷|per class at|if the second instalment is not paid|we may remove/i.test(terms), false, 'no undecided business rule is stated as settled');
-  // Privacy: the request flow and its data, retention, Meet, group visibility, payments, third parties
+  // Privacy: the waitlist request and its data, online bookings, retention, Meet, group visibility, Cashfree, third parties
   assert.match(privacy, /your own email app sends us the details you entered: your name, email address, optional WhatsApp or phone number, current level, main goal, preferred teacher and course, preferred times and your message/);
   assert.match(privacy, /Nothing reaches us unless you press Send in your email app/);
   assert.match(privacy, /kept for 12 months after our last contact with you, then deleted from our inbox by hand\. This is a manual practice, not an automatic process\./);
   assert.match(privacy, /take place on Google Meet[\s\S]*Classes and consultations are not recorded\./);
   assert.match(privacy, /other learners in your batch can see your name and see and hear you/);
-  assert.match(privacy, /You pay by UPI or bank transfer on a payment request we email you\. A person at Klarweg checks each payment/);
-  assert.match(privacy, /Gmail, which holds live-class requests[\s\S]*Google Meet, which hosts live classes/);
+  assert.match(privacy, /consultation and live-course fees are paid, online on the Live Classes page through Cashfree, never by email, manual UPI or bank transfer/);
+  assert.match(privacy, /Consultation bookings and live-course enrolments\s*Once online booking and enrolment open:/);
+  assert.match(privacy, /Paying for a consultation or a live course never grants access to the self-paced courses\./);
+  assert.equal(/Banks and UPI apps|You pay by UPI or bank transfer|bank statement/i.test(privacy), false, 'no manual-payment processing is described');
+  assert.match(privacy, /Gmail, which holds live-course waitlist requests[\s\S]*Google Meet, which hosts live classes/);
   assert.match(privacy, /No minimum age has been set for live classes or consultations\./);
   // Refund Policy: the self-paced guarantee is unchanged and excludes live classes
   assert.match(refund, /It covers self-paced purchases only\. It does not cover live classes or consultations/);
@@ -240,12 +249,14 @@ test('LIVE LEGAL: Terms, Privacy and Refund Policy disclose the live service as 
   assert.match(refund, /7-day money-back guarantee on any paid level or the Lifetime bundle/);
 });
 
-test('LIVE: a course enquiry can be free; only a consultation names a fee', () => {
-  assert.match(html, /name="rtype" value="consult" checked/, 'consultation is the default request');
-  assert.match(html, /name="rtype" value="interest"/, 'a free "tell me when a course opens" request exists');
-  assert.equal(/arrange my consultation/.test(html), false, 'consent covers both kinds of request');
+test('LIVE: the request form is the free course waitlist only; a consultation is never requested by email', () => {
+  assert.equal(/name="rtype"/.test(html), false, 'no consultation-or-interest choice');
+  assert.match(html, /<h3 id="form-title">Join the course waitlist<\/h3>/);
+  assert.match(html, /Free, and not a booking: we tell you when a suitable course opens\. Nothing is charged\./);
+  assert.equal(/arrange my consultation|Request a consultation by email|We then reply with a time slot and payment details/.test(html), false, 'no email booking or emailed payment details');
   const js = read('kw-live.js');
-  assert.match(js, /enrolment !== 'open' \? 'interest' : 'consult'/, 'a course that is not open prefills an interest request');
+  assert.match(js, /'Live course interest \(no consultation requested, nothing to pay\)',/);
+  assert.equal(/Live class consultation request/.test(js), false);
 });
 
 test('LIVE: the consultation fee and adjustment period are read from the data file, not typed into the page', () => {
@@ -374,7 +385,8 @@ test('LIVE: the homepage FAQ names the A1 waitlist without claiming enrolment is
   const D = loadData();
   // no date or other number: only the level name and the approved consultation fee
   assert.equal(/\d/.test(a.replace('A1', '').replace(D.consultation.feeLabel, '')), false, 'no date, other fee or number in the answer');
-  assert.ok(a.includes(`request a ${D.consultation.feeLabel} personal consultation`));
+  assert.ok(a.includes(`Online booking for a ${D.consultation.feeLabel} personal consultation is not open yet.`));
+  assert.equal(/request a .{0,10}consultation/i.test(a), false, 'no request-by-email wording');
   const raw = read('index.html');
   assert.match(raw, /<div class="faq-answer">\s*Yes\. Alongside[\s\S]*?<a href="live-classes.html">Live Classes<\/a> page\.\s*<\/div>/, 'the visible answer links the page');
   if (!D.courses.some((k) => !k.draft && k.enrolment === 'open')) {

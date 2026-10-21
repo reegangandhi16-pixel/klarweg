@@ -491,6 +491,25 @@ export async function integrityEvent(env, userId, attemptId, request) {
   return { ok: true };
 }
 
+/* ---------- connection pre-check (ENGINE §10: RTT + 1 MB download) ----------
+   1 MiB of non-compressible bytes for the client to time. Lease-checked like any attempt call, never cached, at most
+   3 per attempt per 10 min (the page runs it once per attempt). Nothing is stored. */
+export const DOWNLOAD_TEST_BYTES = 1024 * 1024;
+let testPayload = null;
+function downloadPayload() {
+  if (!testPayload) {   // xorshift32: incompressible enough that transport compression cannot flatter the result
+    testPayload = new Uint8Array(DOWNLOAD_TEST_BYTES);
+    let x = 0x9e3779b9;
+    for (let i = 0; i < testPayload.length; i++) { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; testPayload[i] = x & 0xff; }
+  }
+  return testPayload;
+}
+export async function connectionTest(env, userId, attemptId, url) {
+  await attemptCtx(env, userId, attemptId, url.searchParams.get('lease_id'));
+  await rateLimit(env, `dltest:${attemptId}`, 3, 600_000);
+  return new Response(downloadPayload(), { status: 200, headers: { 'content-type': 'application/octet-stream', 'content-length': String(DOWNLOAD_TEST_BYTES), 'cache-control': 'no-store' } });
+}
+
 export async function submit(env, userId, attemptId, module, request) {
   const body = await readJsonBody(request);
   const requestId = requireRequestId(body.request_id);

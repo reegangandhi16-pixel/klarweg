@@ -1621,6 +1621,21 @@ async function runPrecheck() {
 
     // HÖREN: refused before the audio check; a reload keeps the same attempt and the saved answer
     await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Hören intro');
+    // ENGINE §10 connection check: a timed 1 MiB download, once per attempt, guidance only (never blocks)
+    await waitFor(`/Verbindung geprüft|Verbindung ist langsam/.test(document.querySelector('#kx-conn-msg')?.textContent || '')`, 25000, 'connection result');
+    const dlHits = async () => ((await dev.env.DB.prepare("SELECT SUM(hits) AS n FROM rate_counters WHERE bucket LIKE 'dltest:%'").first()).n || 0);
+    assert.equal(await dlHits(), 1);
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
+    await waitFor(`!window.__beforeReload && /Verbindung geprüft|Verbindung ist langsam/.test(document.querySelector('#kx-conn-msg')?.textContent || '')`, 15000, 'cached connection result after reload');
+    assert.equal(await dlHits(), 1, 'a reload does not download again');
+    // a failed test explains itself and does not block
+    await evaluate(`(Object.keys(sessionStorage).filter((k) => k.startsWith('kx-conn:')).forEach((k) => sessionStorage.removeItem(k)), true)`);
+    await send('Fetch.enable', { patterns: [{ urlPattern: '*/precheck/download*', requestStage: 'Request' }] });
+    const failFrom = b.events.length;
+    const failer = setInterval(() => { for (const e of b.events.slice(failFrom)) if (e.method === 'Fetch.requestPaused' && !e.__done) { e.__done = true; send('Fetch.failRequest', { requestId: e.params.requestId, errorReason: 'ConnectionReset' }).catch(() => {}); } }, 50);
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
+    await waitFor(`!window.__beforeReload && /Verbindungstest war nicht möglich/.test(document.querySelector('#kx-conn-msg')?.textContent || '')`, 15000, 'failed connection test explained');
+    clearInterval(failer); await send('Fetch.disable');
     // notes reflect the real checks: device and server clocks agree here, so no clock note (the skewed case is unit-tested)
     assert.equal(/weicht von der Serverzeit ab/.test(await text()), false, 'no clock note without a real offset');
     await click('[data-act="start"][data-module="hoeren"]');

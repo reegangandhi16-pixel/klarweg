@@ -1094,3 +1094,16 @@ test('HÖREN VOLUME (AUDIO-SPEC A4): master gain between every play and the spea
   const h = main.slice(main.indexOf("el.matches('[data-volume]')"), main.indexOf("el.matches('[data-volume]')") + 500);
   assert.equal(/autosave|S\.answers|\.stop\(|currentTime|playbackRate/.test(h), false, 'volume never saves, stops or seeks');
 });
+
+test('HÖREN PRELOAD (AUDIO-SPEC A3): each download has a timeout; a media failure is reported once and offered for retry in the page; session/lease errors keep their screens', () => {
+  const main = read('exam/js/main.js');
+  const fn = main.slice(main.indexOf('async function preloadHoeren'), main.indexOf('const HOEREN_PRELOAD_FAILED'));
+  assert.match(fn, /const PRELOAD_TIMEOUT_MS = 30_000;|setTimeout\(\(\) => ctl\.abort\(\), PRELOAD_TIMEOUT_MS\)/);
+  assert.match(main, /const PRELOAD_TIMEOUT_MS = 30_000;/);
+  assert.match(fn, /if \(player\.isReady\(\[a\]\)\) continue;/, 'a retry loads only what is missing');
+  assert.match(fn, /if \(e instanceof ExamApiError && !\/\^media_\/\.test\(e\.code\)\) throw e;/);
+  assert.match(fn, /api\.hoerenEvent\(id, S\.lease, \{ type: 'preload_failed', reason: failed \}\)\.catch\(\(\) => \{\}\);/);
+  assert.match(fn, /showAlert\('preload', HOEREN_PRELOAD_FAILED, \{ act: 'hoeren-reload', label: 'Erneut laden' \}\)/);
+  assert.match(main, /const HOEREN_PRELOAD_FAILED = 'Die Hördateien konnten nicht vollständig geladen werden\.[^']*Ihre Antworten bleiben erhalten\. Hinweis: Der Hörteil beginnt nach einer kurzen Ladezeit auch dann, wenn noch nicht alle Dateien geladen sind\.';/);
+  assert.match(read('exam/js/api.js'), /mediaBytes: async \(url, \{ signal \} = \{\}\) => \{\s*const res = await fetchImpl\(base \+ url, \{ credentials: 'omit', \.\.\.\(signal \? \{ signal \} : \{\}\) \}\);/);
+});

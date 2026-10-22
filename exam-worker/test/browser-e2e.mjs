@@ -508,7 +508,24 @@ async function runDefaultAutoplayHoeren(viewport) {
     };
     await send('Page.addScriptToEvaluateOnNewDocument', { source: `window.__gains = []; { const cg = (window.AudioContext || window.webkitAudioContext).prototype.createGain;
       (window.AudioContext || window.webkitAudioContext).prototype.createGain = function () { const g = cg.apply(this, arguments); window.__gains.push(g); return g; }; }` });
+    // AUDIO-SPEC A3: the first audio download fails → a retry is offered in the page (no error screen); "Erneut laden"
+    // loads only what is missing and the module continues. (The schedule already runs here, so no incident is expected.)
+    const fromEv = b.events.length; let failedOnce = false;
+    await send('Fetch.enable', { patterns: [{ urlPattern: '*/exam/v1/media/*', requestStage: 'Request' }] });
+    const pump = setInterval(() => { for (const e of b.events.slice(fromEv)) if (e.method === 'Fetch.requestPaused' && !e.__done) {
+      e.__done = true;
+      if (!failedOnce) { failedOnce = true; send('Fetch.failRequest', { requestId: e.params.requestId, errorReason: 'ConnectionFailed' }).catch(() => {}); }
+      else send('Fetch.continueRequest', { requestId: e.params.requestId }).catch(() => {});
+    } }, 50);
     await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+    await waitFor(`document.querySelector('[data-act="hoeren-reload"]')`, 20000, '"Erneut laden" offered after a failed download');
+    const pre = await evaluate(`({ phase: document.querySelector('#kx-phase').textContent, alert: document.querySelector('#kx-alerts [data-kind="preload"]').getAttribute('role'),
+      text: document.querySelector('#kx-alerts [data-kind="preload"] p').textContent, focus: document.activeElement && document.activeElement.dataset.act, error: !!document.querySelector('.kx-error') })`);
+    assert.ok(pre.phase === 'Die Hördateien konnten nicht geladen werden.' && pre.alert === 'alert' && /Ihre Antworten bleiben erhalten/.test(pre.text) && pre.focus === 'hoeren-reload' && !pre.error, `${viewport.name}: preload retry offered ${JSON.stringify(pre)}`);
+    await evaluate(`document.querySelector('[data-act="hoeren-reload"]').click()`);
+    await waitFor(`!document.querySelector('#kx-alerts [data-kind="preload"]')`, 20000, 'preload alert cleared after the retry');
+    clearInterval(pump); await send('Fetch.disable');
+    assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM incidents WHERE kind = 'listening_preload_failed'").first()).n, 0, 'no incident once the schedule runs');
 
     // 1. blocked audio does not block the module: prompt shown, Teil 2 opens, answers save, nothing is played
     await waitFor(`document.querySelector('[data-act="audio-start"]')`, 15000, '"Audio starten" offered (Hören)');

@@ -574,6 +574,7 @@ function phaseOffset(plan, seq) {
   return null;
 }
 
+const PRELOAD_INCIDENT_CAP = 5;
 export async function hoerenEvent(env, userId, attemptId, request) {
   const body = await readJsonBody(request);
   const requestId = requireRequestId(body.request_id);
@@ -587,6 +588,16 @@ export async function hoerenEvent(env, userId, attemptId, request) {
     const modCfg = moduleConfig(cfg, 'hoeren');
     const pkg = await loadPackage(env, attempt.form_id, 'hoeren');
     const plan = pkg.data.timing.plan;
+
+    /* AUDIO-SPEC A3: the client could not load the Hören audio (failed or stalled download). Recorded as an incident
+       while the schedule has not started (later failures do not change it); at most PRELOAD_INCIDENT_CAP per attempt. */
+    if (body.type === 'preload_failed') {
+      if (m.plan_started_at === null) {
+        const n = await env.DB.prepare("SELECT COUNT(*) AS n FROM incidents WHERE attempt_id = ?1 AND kind = 'listening_preload_failed'").bind(attemptId).first();
+        if ((n ? n.n : 0) < PRELOAD_INCIDENT_CAP) await incident(env, attemptId, 'listening_preload_failed', { reason: String(body.reason || 'unknown').replace(/[^a-z0-9_]/gi, '').slice(0, 40) || 'unknown' });
+      }
+      return { ok: true, plan_started_at: m.plan_started_at, server_now: t };
+    }
 
     if (body.type === 'ready') {
       if (m.plan_started_at !== null) return { ok: true, plan_started_at: m.plan_started_at, deadline_at: m.deadline_at, plan_shift_ms: m.plan_shift_ms,

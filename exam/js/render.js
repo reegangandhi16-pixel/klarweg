@@ -359,7 +359,7 @@ export function itemPalette(progress, flags = new Set()) {
 
 /* In-page review before the final module submission (replaces a browser confirm dialog). The module page stays in
    place underneath — the timer and, in Hören, the playback keep running. */
-export function reviewPanel(progress, flags = new Set()) {
+export function reviewPanel(progress, flags = new Set(), remainingMs = null) {
   const total = progress.reduce((n, p) => n + p.total, 0), done = progress.reduce((n, p) => n + p.answered, 0), open = total - done;
   const summary = !total ? 'In diesem Modul gibt es keine Aufgaben zum Ankreuzen.'
     : open ? `${open} von ${total} Aufgaben sind noch ohne Antwort.` : `Alle ${total} Aufgaben sind beantwortet.`;
@@ -376,6 +376,8 @@ export function reviewPanel(progress, flags = new Set()) {
   }).join('');
   return `<section class="kx-review" id="kx-review" aria-labelledby="kx-review-title"><h2 id="kx-review-title" tabindex="-1">Abgabe prüfen</h2>`
     + `<p class="kx-review-summary">${esc(summary)}${marked ? ` ${esc(marked === 1 ? '1 Aufgabe ist' : `${marked} Aufgaben sind`)} zur Kontrolle markiert.` : ''}</p>${parts ? `<ul class="kx-review-list">${parts}</ul>` : ''}`
+    // GOETHE-B1-DIGITAL §10: the confirmation shows the time remaining (kept current by the timer tick); untimed: none
+    + (remainingMs != null ? `<p class="kx-review-time">Verbleibende Zeit: <span data-review-remaining>${esc(formatRemaining(remainingMs))}</span></p>` : '')
     + '<p class="kx-meta">Nach der Abgabe sind keine Änderungen mehr möglich. Die Zeit läuft weiter.</p>'
     + '<div class="kx-actions"><button type="button" class="kx-btn kx-btn-quiet" data-act="review-close">Weiter bearbeiten</button>'
     + '<button type="button" class="kx-btn" data-act="submit-confirm">Endgültig abgeben</button></div></section>';

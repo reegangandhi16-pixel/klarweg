@@ -690,15 +690,44 @@ test('MODULE INTRO render: time, parts and tasks before the start; the rules say
   assert.equal(moduleIntro('lesen', undefined).includes('Minuten'), false, 'an older server without intro data still renders');
 });
 
-test('MATCHING (Lesen Teil 3): options chosen in another select are marked, never blocked; the own choice is not marked', async () => {
-  const { matchUsage, createRenderer } = await import('../js/render.js');
-  const u = matchUsage([{ id: 'ex', value: 'a' }, { id: 's13', value: 'c' }, { id: 's14', value: '' }, { id: 's15', value: 'c' }]);
-  assert.deepEqual([...u.get('s14')].sort(), [['a', 1], ['c', 2]]);
-  assert.deepEqual([...u.get('s13')], [['a', 1], ['c', 1]]);   // c is also used by s15
-  assert.deepEqual([...u.get('ex')], [['c', 2]]);
-  const pkg = pkgFor(build, 'lesen');
-  const html = createRenderer().module(pkg, {}, {});
+test('MATCHING (Lesen Teil 3): usage by situation number ("verwendet bei 15"), never blocked; item numbers; accent-insensitive ad filter', async () => {
+  const { adUsage, usedText, itemNo, adMatches, foldText } = await import('../js/render.js');
+  const u = adUsage([{ no: 'Beispiel', value: 'a' }, { no: '13', value: 'c' }, { no: '14', value: '' }, { no: '15', value: 'c' }]);
+  assert.deepEqual([...u], [['a', ['Beispiel']], ['c', ['13', '15']]]);
+  assert.equal(usedText(['13', '15']), 'verwendet bei 13, 15'); assert.equal(usedText([]), ''); assert.equal(usedText(['Beispiel']), 'verwendet im Beispiel'); assert.equal(usedText(['Beispiel', '13']), 'verwendet im Beispiel und bei 13');
+  assert.equal(itemNo({ is_example: true, stem: 'Beispiel: x' }), 'Beispiel'); assert.equal(itemNo({ stem: '13. Sie möchten …' }), '13'); assert.equal(itemNo({ stem: 'x', display_no: 7 }), '7');
+  assert.equal(foldText('Möbel  Straße'), 'mobel strasse');
+  assert.ok(adMatches('Gebrauchte Möbel günstig', 'mobel')); assert.ok(adMatches('Fußball', 'FUSSBALL')); assert.ok(adMatches('x', '  ')); assert.equal(adMatches('Yoga', 'gitarre'), false);
+  const html = createRenderer().module(pkgFor(build, 'lesen'), {}, {});
   assert.match(html, /<option value="[^"]+" data-label="[^"]+"/, 'options carry their original label for re-marking');
+});
+
+test('LESEN TEIL 3 ADS (ENGINE §9.1 L3): only the ad-pool task of every practice form renders ad cards (10, one per letter) with a usage line, a phone filter and numbered selects', async () => {
+  const r = createRenderer();
+  for (let n = 1; n <= 15; n++) {
+    const pkg = pkgFor(syntheticBuild([path.join(ROOT, `exam-content/forms/synthetic/b1-synthetic-p${n}`)]), 'lesen');
+    for (const p of pkg.parts) {
+      const html = r.part(p, {}, { split: true });
+      const cards = [...html.matchAll(/<article class="kx-stim kx-ad" id="kx-ad-[^"]+" data-ad="([^"]+)"><h3 class="kx-stim-label"><span class="kx-sr">Anzeige <\/span>\1<\/h3>[\s\S]*?<p class="kx-ad-used" data-ad-status><\/p><\/article>/g)];
+      if (p.part !== 3) { assert.equal(cards.length, 0, `P${n} Teil ${p.part}: no ad cards`); assert.equal(/kx-ad-filter/.test(html), false); continue; }
+      assert.deepEqual(cards.map((c) => c[1]), 'abcdefghij'.split(''), `P${n}: ads a–j`);
+      assert.match(html, /<div class="kx-ad-filter" role="group" aria-label="Anzeigen filtern"><label for="(kx-adq-[^"]+)">Anzeigen durchsuchen<\/label><input type="search" id="\1" data-ad-filter/);
+      assert.match(html, /<p class="kx-ad-count" data-ad-count data-total="10" role="status"><\/p>/);
+      const nos = [...html.matchAll(/<select id="[^"]+" data-item="[^"]+" data-no="([^"]+)"/g)].map((m) => m[1]);
+      assert.deepEqual(nos, ['Beispiel', ...Array.from({ length: nos.length - 1 }, (_, i) => String(13 + i))], `P${n}: select numbers`);
+    }
+  }
+  const css = read('exam/exam.css');
+  assert.match(css, /@media \(min-width: 768px\) {\s*\.kx-ads-list { display: grid; grid-template-columns: repeat\(auto-fill, minmax\(200px, 1fr\)\);/);
+  assert.match(css, /\.kx-ad-filter { display: none; }/);
+  const phone = css.slice(css.indexOf('@media (max-width: 767px) {\n  .kx-ad-filter'));
+  assert.match(phone, /\.kx-ad\.kx-ad-out { display: none; }/, 'the filter hides cards only on phones');
+  assert.match(phone, /input\[type="search"\] { min-height: 44px;/); assert.match(phone, /\.kx-ad-unused { display: flex; align-items: center; gap: 8px; min-height: 44px;/);
+  const main = read('exam/js/main.js');
+  assert.match(main, /if \(el\.matches && el\.matches\('\[data-ad-unused\]'\)\) \{ applyAdFilter\(el\.closest\('\.kx-task'\)\); return; \}/, 'the filter checkbox is never saved as an answer');
+  assert.match(main, /if \(el\.matches && el\.matches\('\[data-ad-filter\]'\)\) \{ applyAdFilter\(el\.closest\('\.kx-task'\)\); return; \}/);
+  const mark = main.slice(main.indexOf('function markUsedOptions'), main.indexOf('function applyAdFilter'));
+  assert.equal(/\.value\s*=(?!=)|autosave|S\.answers/.test(mark), false, 'marking never changes an answer');
 });
 
 test('BANNER: the Prüftöne note appears only where audio is played (Hören, Sprechen)', () => {

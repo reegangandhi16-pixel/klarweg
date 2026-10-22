@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, matchUsage, USED_SUFFIX, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
+import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, adUsage, usedText, adMatches, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -308,17 +308,39 @@ function paint() {
   markUsedOptions();
   trackCurrentPart();
 }
-/* Matching tasks: mark options already chosen in another select of the same task (never blocks a choice). */
+/* Matching tasks (ENGINE §9.1 L3): each option and each ad card says which situations use it ("verwendet bei 15");
+   nothing is blocked and no answer is ever changed here. A phone ad filter is re-applied after a change. */
 function markUsedOptions(scope = document) {
   for (const task of scope.querySelectorAll('.kx-task')) {
     const selects = [...task.querySelectorAll('.kx-match select')];
     if (selects.length < 2) continue;
-    const usage = matchUsage(selects.map((el) => ({ id: el.id, value: el.value })));
+    const usage = adUsage(selects.map((el) => ({ no: el.dataset.no || '', value: el.value })));
     for (const el of selects) {
-      const used = usage.get(el.id);
-      for (const o of el.options) if (o.dataset.label !== undefined) o.textContent = o.dataset.label + (used.has(o.value) ? USED_SUFFIX : '');
+      for (const o of el.options) {
+        if (o.dataset.label === undefined) continue;
+        const others = (usage.get(o.value) || []).filter((no) => !(el.value === o.value && no === (el.dataset.no || '')));
+        o.textContent = o.dataset.label + (others.length ? ` (${usedText(others)})` : '');
+      }
     }
+    for (const card of task.querySelectorAll('.kx-ad')) {
+      const nos = usage.get(card.dataset.ad) || [];
+      card.classList.toggle('kx-ad-is-used', nos.length > 0); card.classList.toggle('kx-ad-multi', nos.length > 1);
+      card.querySelector('[data-ad-status]').textContent = usedText(nos) + (nos.length > 1 ? ' – jede Anzeige darf nur einmal gewählt werden' : '');
+    }
+    applyAdFilter(task);
   }
+}
+function applyAdFilter(task) {
+  const box = task.querySelector('.kx-ad-filter'); if (!box) return;
+  const q = box.querySelector('[data-ad-filter]').value, unused = box.querySelector('[data-ad-unused]').checked;
+  let shown = 0; const cards = [...task.querySelectorAll('.kx-ad')];
+  for (const card of cards) {
+    const status = card.querySelector('[data-ad-status]').textContent;
+    const ok = adMatches(card.textContent.replace(status, ''), q) && !(unused && card.classList.contains('kx-ad-is-used'));
+    card.classList.toggle('kx-ad-out', !ok); if (ok) shown++;
+  }
+  box.querySelector('[data-ad-count]').textContent = !q.trim() && !unused ? ''
+    : shown ? `${shown} von ${cards.length} Anzeigen` : 'Keine Anzeige passt zum Filter. Ihre Antworten bleiben unverändert.';
 }
 let announced = {};   // time warnings go to #kx-announce so they never overwrite the phase text
 function tick() {
@@ -587,6 +609,7 @@ async function showResult() {
 /* ---------- events ---------- */
 app.addEventListener('change', (e) => {
   const el = e.target;
+  if (el.matches && el.matches('[data-ad-unused]')) { applyAdFilter(el.closest('.kx-task')); return; }   // a view filter, never an answer
   // choices only: a textarea also fires 'change' when it loses focus, and its text is saved by the 'input' handler
   // below; treating it as a choice replaced the essay with { option_id: <text> } and the save was refused (A3)
   if (!el.dataset || !el.dataset.item || !S.autosave || el.tagName === 'TEXTAREA') return;
@@ -597,6 +620,7 @@ app.addEventListener('change', (e) => {
 });
 app.addEventListener('input', (e) => {
   const el = e.target;
+  if (el.matches && el.matches('[data-ad-filter]')) { applyAdFilter(el.closest('.kx-task')); return; }
   if (el.tagName !== 'TEXTAREA' || !S.autosave) return;
   const wc = document.querySelector(`[data-wc-for="${CSS.escape(el.id)}"]`); if (wc) wc.textContent = countWords(el.value);
   S.answers[el.dataset.item] = { text: el.value }; S.autosave.set(el.dataset.item, { text: el.value });

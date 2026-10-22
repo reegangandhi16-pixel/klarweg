@@ -1204,3 +1204,16 @@ test('PART TABS (GOETHE-B1-DIGITAL §2.3/§4): Lesen/Schreiben parts as an ARIA 
   assert.equal(/autosave|S\.answers|\.value\s*=|innerHTML/.test(show), false, 'switching never touches answers or re-renders parts');
   assert.match(read('exam/exam.css'), /\.kx-part\[hidden\] \{ display: none; \}/);
 });
+
+test('BACK GUARD (GOETHE-B1-DIGITAL §4 Global): while a module runs, Back opens a modal "Prüfung verlassen? Die Zeit läuft weiter."; only a return to the marked exam entry counts (not in-page #links); stay keeps the guard; leave flushes and goes home', () => {
+  const main = read('exam/js/main.js');
+  assert.match(main, /paint\(\);\n  guardBack\(\);/, 'guarded when the module page is drawn');
+  assert.match(main, /history\.replaceState\(\{ kxBase: true \}, '', location\.href\); history\.pushState\(\{ kxGuard: true \}, '', location\.href\);/);
+  assert.match(main, /if \(leaving \|\| !\(e\.state && e\.state\.kxBase\) \|\| !moduleRunning\(\) \|\| !\$\('#kx-main'\)\) return;/, 'fragment navigations (state null) and non-running pages are ignored');
+  assert.match(main, /history\.pushState\(\{ kxGuard: true \}, '', location\.href\);   \/\/ stay until the learner decides/);
+  assert.match(main, /if \(!d\.open\) d\.showModal\(\);/, 'a native modal dialog (focus trapped, Escape = stay)');
+  assert.match(main, /if \(S\.autosave\) await S\.autosave\.flush\(\)\.catch\(\(\) => \{\}\);\n  \/\/ an explicit destination[^\n]*\n  location\.assign\('\.\.\/'\);/);
+  assert.match(main, /<dialog class="kx-leave" id="kx-leave" aria-labelledby="kx-leave-title" aria-describedby="kx-leave-text">/);
+  assert.match(main, /<h2 id="kx-leave-title">Prüfung verlassen\?<\/h2><p id="kx-leave-text">Die Zeit läuft weiter/);
+  assert.match(main, /data-leave="stay">In der Prüfung bleiben<\/button><button type="button" class="kx-btn kx-btn-quiet" data-leave="go">Prüfung verlassen<\/button>/, 'staying is the primary action');
+});

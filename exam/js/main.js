@@ -397,6 +397,35 @@ function tick() {
 async function refresh() { try { S.attempt = await api.getAttempt(S.attempt.attempt_id); S.module = null; route(); } catch (e) { fail(e); } }
 
 /* ---------- Hören ---------- */
+/* AUDIO-SPEC A3: download and decode every Hören file before the schedule starts. A failed or stalled download (no
+   answer within PRELOAD_TIMEOUT_MS) is reported once as an incident and offered for retry; only missing files are
+   loaded again. The server starts the schedule after its readiness allowance even without the client — said plainly. */
+const PRELOAD_TIMEOUT_MS = 30_000;
+async function preloadHoeren(id, player, assets) {
+  for (;;) {
+    let failed = null;
+    for (const a of assets) {
+      if (player.isReady([a])) continue;
+      const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), PRELOAD_TIMEOUT_MS);
+      try { const m = await api.media(id, S.lease, a); await player.preload(a, await api.mediaBytes(m.url, { signal: ctl.signal })); }
+      catch (e) {
+        if (e instanceof ExamApiError && !/^media_/.test(e.code)) throw e;   // session, lease, access: the usual error screens
+        failed = ctl.signal.aborted ? 'timeout' : (e instanceof ExamApiError ? e.code : 'network'); break;
+      } finally { clearTimeout(timer); }
+    }
+    if (!failed) { clearAlert('preload'); return; }
+    if (S.module !== 'hoeren') throw new Error('left_module');
+    api.hoerenEvent(id, S.lease, { type: 'preload_failed', reason: failed }).catch(() => {});
+    $('#kx-phase').textContent = 'Die Hördateien konnten nicht geladen werden.';
+    await new Promise((resolve) => {
+      const el = showAlert('preload', HOEREN_PRELOAD_FAILED, { act: 'hoeren-reload', label: 'Erneut laden' });
+      const btn = el && el.querySelector('button'); if (btn) btn.focus({ preventScroll: true });
+      S.preloadRetry = () => { S.preloadRetry = null; resolve(); };
+    });
+    $('#kx-phase').textContent = 'Prüftöne werden geladen …';
+  }
+}
+const HOEREN_PRELOAD_FAILED = 'Die Hördateien konnten nicht vollständig geladen werden. Prüfen Sie Ihre Internetverbindung und wählen Sie „Erneut laden“. Ihre Antworten bleiben erhalten. Hinweis: Der Hörteil beginnt nach einer kurzen Ladezeit auch dann, wenn noch nicht alle Dateien geladen sind.';
 function savedVolume() { try { const v = localStorage.getItem(VOLUME_KEY); return v == null ? 1 : clampVolume(v); } catch { return 1; } }
 async function runHoeren() {
   const id = S.attempt.attempt_id;
@@ -409,7 +438,7 @@ async function runHoeren() {
   const ph = $('#kx-phase');
   const rendered = new Set([...document.querySelectorAll('#kx-main .kx-part')].map((el) => Number(el.dataset.part)));
   ph.textContent = 'Prüftöne werden geladen …';
-  for (const a of assets) { const m = await api.media(id, S.lease, a); await player.preload(a, await api.mediaBytes(m.url)); }
+  await preloadHoeren(id, player, assets);
   /* Autoplay policy: a reloaded page has no user gesture, so the AudioContext can stay suspended and resume() may never
      settle. The module never waits on it: parts, answers and the schedule continue, and plays wait for one click on
      "Audio starten", then continue from their scheduled position. A blocked play is never reported as played. */
@@ -714,6 +743,7 @@ app.addEventListener('click', async (e) => {
   const act = b.dataset.act;
   try {
     if (act === 'slide-prev' || act === 'slide-next') { stepSlide(b.closest('.kx-deck'), act === 'slide-next' ? 1 : -1); return; }
+    if (act === 'hoeren-reload') { if (S.preloadRetry) S.preloadRetry(); return; }
     if (act === 'toggle-texts') { const split = b.closest('.kx-split'); setTextsExpanded(split, split.classList.contains('kx-collapsed')); return; }
     if (b.dataset.flag) {   // "Zur Kontrolle markieren": local reminder only, nothing is sent
       const on = !S.flags.has(b.dataset.flag);

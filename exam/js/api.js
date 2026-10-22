@@ -98,8 +98,8 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
       return res.blob();
     },
     rate: (body) => once('POST', '/exam/v1/admin/ratings', { body }),   // not retried: a lost response must not turn into a second rating
-    mediaBytes: async (url) => {
-      const res = await fetchImpl(base + url, { credentials: 'omit' });
+    mediaBytes: async (url, { signal } = {}) => {
+      const res = await fetchImpl(base + url, { credentials: 'omit', ...(signal ? { signal } : {}) });
       if (!res.ok) throw new ExamApiError(res.status, 'media_' + res.status);
       return res.arrayBuffer();
     }

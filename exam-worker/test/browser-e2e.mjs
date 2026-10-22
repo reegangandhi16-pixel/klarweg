@@ -48,14 +48,22 @@ async function probe(evaluate, expr) {
 /* Chrome start-up on a cold CI runner has taken more than 10 s (DevToolsActivePort missing, run 39261898074). Wait up to
    30 s, stop early if Chrome exits, and retry the start once: this is browser start-up, never a test assertion. */
 const LAUNCH_WAIT_MS = 30000;
+/* Every Chrome gets a throw-away profile (~30 MB). It is removed when that Chrome exits, and any profile still left when
+   this run ends — crash, failed assertion or normal end — is removed then: 730 leftover profiles once filled a disk. */
+const PROFILES = new Set(), CHROMES = new Set();
+const removeProfile = (dir) => { try { fs.rmSync(dir, { recursive: true, force: true }); } catch { /* best effort */ } PROFILES.delete(dir); };
+// a crashed run must not leave headless Chromes behind either
+process.on('exit', () => { for (const p of CHROMES) { try { p.kill('SIGKILL'); } catch { /* gone */ } } for (const d of [...PROFILES]) removeProfile(d); });
 async function startChrome({ autoplayFlag }) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-chrome-'));
+  PROFILES.add(dir);
   const proc = spawn(CHROME, [...CHROME_ARGS, '--headless=new', '--mute-audio', '--disable-gpu', '--no-first-run', '--no-default-browser-check', `--user-data-dir=${dir}`,
     '--remote-debugging-port=0', ...(autoplayFlag ? ['--autoplay-policy=no-user-gesture-required'] : []), '--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream',
     'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] });
   let stderr = ''; let exited = null;
   proc.stderr.on('data', (d) => { stderr = (stderr + d).slice(-2000); });
-  proc.on('exit', (code, signal) => { exited = signal || code; });
+  CHROMES.add(proc);
+  proc.on('exit', (code, signal) => { exited = signal || code; CHROMES.delete(proc); removeProfile(dir); });
   const portFile = path.join(dir, 'DevToolsActivePort');
   const t0 = Date.now();
   // the port file is written in two lines; wait until the first line is a port number

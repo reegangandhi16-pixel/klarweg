@@ -952,6 +952,11 @@ async function runSprechenTopic() {
         const v = await evaluate(`(() => { const n = document.querySelector('.kx-notes'); const r = n.getBoundingClientRect(), bar = document.querySelector('.kx-bar').getBoundingClientRect().bottom;
           return { top: Math.round(r.top), bottom: Math.round(r.bottom), bar: Math.round(bar), vh: innerHeight, scrolled: scrollY > 0, value: n.querySelector('textarea').value }; })()`);
         assert.ok(v.scrolled && v.top >= v.bar - 1 && v.top <= v.bar + 16 && v.bottom <= v.vh + 1 && v.value.endsWith('Nachteile: Kosten'), `notes stay stuck below the bar, whole panel visible, while speaking (Teil 3): ${JSON.stringify(v)}`);
+        // SPEAKING §4: a level meter in the sticky bar while the turn records (Chrome's fake microphone plays a tone)
+        let peak = 0;
+        for (const t0 = Date.now(); Date.now() - t0 < 5000 && peak === 0; await sleep(100)) peak = await evaluate(`(() => { const m = document.getElementById('kx-level'); return m && !m.hidden ? parseFloat(m.querySelector('.kx-level-fill').style.width) || 0 : 0; })()`);
+        const lv = await evaluate(`(() => { const m = document.getElementById('kx-level'); return { shown: !m.hidden, ariaHidden: m.getAttribute('aria-hidden'), inBar: !!m.closest('.kx-bar'), hint: document.getElementById('kx-silence').textContent }; })()`);
+        assert.ok(peak > 0 && lv.shown && lv.ariaHidden === 'true' && lv.inBar && lv.hint === '', `level meter while recording: ${JSON.stringify({ peak, ...lv })}`);
       }
       for (const t0 = Date.now(); (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks WHERE part = 3').first()).n < 1; ) { if (Date.now() - t0 > 15000) throw new Error('no Teil 3 chunks'); await sleep(200); }
       // the examiner's question (turn 2, after the 1-minute turn 1) is the one about the learner's own topic

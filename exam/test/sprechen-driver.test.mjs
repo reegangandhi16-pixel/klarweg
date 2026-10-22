@@ -130,7 +130,7 @@ test('AUDIO (F2): slow loading → the offset is recomputed after loading; not l
 function harness({ startAt = AT.teil2 - 4000, upload, complete, status = { turns: [], chunks: [] }, audioOpts = {}, mic = true, finalizeRetries = 3, local = [] } = {}) {
   const clock = fakeTime(startAt);
   const store = memoryStore();
-  const calls = { uploads: [], completes: [], recStarts: [], micAt: [], ui: [], alerts: [], logs: [], locks: [] };
+  const calls = { uploads: [], completes: [], recStarts: [], micAt: [], ui: [], alerts: [], logs: [], locks: [], monitor: [] };
   const queue = new ChunkQueue({
     attemptId: 'att_driver_test', store, sleep: clock.sleep, maxRetries: 2,
     upload: async (q) => { calls.uploads.push({ ...q, at: clock.now() }); return upload ? upload(q, clock) : { ok: true }; },
@@ -148,7 +148,7 @@ function harness({ startAt = AT.teil2 - 4000, upload, complete, status = { turns
         return { chunks: 2, duration_ms: clock.now() - this.t0 };
       }
     }),
-    ui: { phase: (t) => calls.ui.push({ at: clock.now(), t }), turn: (k, t) => calls.ui.push({ at: clock.now(), k, t }), alert: (kind, t) => calls.alerts.push({ kind, t, at: clock.now() }), clear: () => {}, lockTopics: () => calls.locks.push(clock.now()) },
+    ui: { recording: (on, { part, stream } = {}) => calls.monitor.push({ on, part, stream: !!stream, at: clock.now() }), phase: (t) => calls.ui.push({ at: clock.now(), t }), turn: (k, t) => calls.ui.push({ at: clock.now(), k, t }), alert: (kind, t) => calls.alerts.push({ kind, t, at: clock.now() }), clear: () => {}, lockTopics: () => calls.locks.push(clock.now()) },
     log: (e, d) => calls.logs.push({ e, d }), finalizeRetries, finalizeBackoffMs: () => 2000
   });
   for (const c of local) store.set(queue.key(c, c.seq), { ...c, mime: 'audio/webm', sha256: 'f'.repeat(64), bytes: new Uint8Array([c.seq]) });
@@ -327,4 +327,20 @@ test('SPRECHEN (client ↔ worker): unsent chunks of another attempt on the same
   assert.equal(turnB, null, 'attempt B\'s turn was not completed with attempt A\'s audio');
   assert.equal(driver.done.has('itm:b1:syn-sp1:t1'), false, 'the turn is still to be recorded in attempt B');
   assert.deepEqual((await qa.pending(turn)).length, 2, 'attempt A\'s chunks stay in its own queue (recoverable there)');
+});
+
+test('DRIVER (SPEAKING §4 monitor): the level meter runs exactly while a turn records — on after start with the mic stream and the part, off before stop', async () => {
+  const h = harness();
+  h.driver.run();
+  await h.clock.run(AT.teil3 + 120_000);
+  h.stop();
+  const m = h.calls.monitor;
+  assert.ok(m.length >= 2 && m.length % 2 === 0, `paired on/off: ${JSON.stringify(m)}`);
+  for (let i = 0; i < m.length; i += 2) {
+    assert.ok(m[i].on && m[i].stream && m[i].part != null && !m[i + 1].on, `pair ${i / 2}: ${JSON.stringify(m.slice(i, i + 2))}`);
+    assert.ok(m[i + 1].at >= m[i].at);
+  }
+  const starts = h.calls.recStarts;
+  assert.equal(m.filter((x) => x.on).length, starts.length, 'one meter session per recorded turn');
+  assert.ok(m.some((x) => x.on && x.part === 2), 'Teil 2 (where the silence hint applies) is monitored');
 });

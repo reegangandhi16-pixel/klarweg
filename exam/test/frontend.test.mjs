@@ -908,3 +908,15 @@ test('BREAK (OD-04): optional ≤ 15-min break only between written modules of a
   assert.match(breakPanel(0), /Die empfohlene Pause ist vorbei/);
   assert.match(breakPanel(1), /mindestens 15 Minuten Pause/, 'labelled as a simulation deviation');
 });
+
+test('SCHREIBEN EDITOR (ENGINE §9.4): plain textarea without browser writing aids; the character row has umlauts, ß, „ “ – € with spoken names', async () => {
+  const { createRenderer, UMLAUTS } = await import('../js/render.js');
+  assert.deepEqual(UMLAUTS, ['ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', 'ß', '„', '“', '–', '€']);
+  const pkg = { module: 'schreiben', parts: [{ part: 1, tasks: [{ task_id: 't', instructions: 'x', stimuli: [], items: [{ item_id: 'itm:b1:x-s1', interaction: 'text_response', stem: 'Schreiben Teil 1', response_spec: { type: 'text', target_words: 80 } }] }] }] };
+  const html = createRenderer().module(pkg, {}, {});
+  const ta = html.match(/<textarea[^>]*>/)[0];
+  for (const a of ['lang="de"', 'spellcheck="false"', 'autocomplete="off"', 'autocorrect="off"', 'autocapitalize="off"']) assert.ok(ta.includes(a), a);
+  for (const c of UMLAUTS) assert.ok(html.includes(`data-insert="${c}"`), c);
+  assert.match(html, /aria-label="Anführungszeichen unten einfügen">„</); assert.match(html, /aria-label="Eurozeichen einfügen">€</);
+  assert.match(html, /aria-label="ä einfügen">ä</);
+});

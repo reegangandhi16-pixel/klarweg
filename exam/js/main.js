@@ -245,7 +245,7 @@ async function openModule(module) {
   S.saveState = 'saved'; S.saveTrouble = null;   // a new module starts with nothing unsaved (no stale "offline" from the previous one)
   S.autosave = new Autosave({
     key: `answers:${id}:${module}`, store: S.store,
-    send: (batch, requestId) => api.save(id, S.lease, module, batch, requestId),
+    send: (batch, requestId, opts) => api.save(id, S.lease, module, batch, requestId, opts),
     onState: (st) => {
       /* autosave goes offline → saving → saved; remembering the trouble until the next save keeps "Wieder verbunden"
          (and avoids repeating "Offline" on every failed retry) */
@@ -315,6 +315,7 @@ function showPart(n, { focus = false, quiet = false } = {}) {
   const changed = S.currentPart !== n;
   for (const s of secs) s.hidden = Number(s.dataset.part) !== n;
   S.currentPart = n;
+  if (changed) flushSoon();   // §5: saved on part change
   try { localStorage.setItem(tabKey(), String(n)); } catch { /* this page only */ }
   paintNav();
   if (changed && !quiet) window.scrollTo(0, 0);
@@ -977,6 +978,11 @@ const LEAVE_DIALOG = '<dialog class="kx-leave" id="kx-leave" aria-labelledby="kx
 
 window.addEventListener('beforeunload', (e) => { if (S.autosave && S.autosave.hasPending()) { S.autosave.flush(); e.preventDefault(); } });
 window.addEventListener('online', () => S.autosave && S.autosave.flush());
-window.addEventListener('pagehide', () => { if (S.onPageHide) S.onPageHide(); });
+/* GOETHE-B1-DIGITAL §5: answers go to the server not only after the debounce but also when the page is hidden (phones
+   often end a hidden tab), on pagehide (a keepalive request that survives unload) and on every part change. Everything
+   unsent also stays in IndexedDB and is sent on the next load. */
+const flushSoon = (opts) => { if (S.autosave && S.autosave.hasPending()) S.autosave.flush(opts).catch(() => {}); };
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSoon(); });
+window.addEventListener('pagehide', () => { flushSoon({ keepalive: true }); if (S.onPageHide) S.onPageHide(); });
 
 boot();

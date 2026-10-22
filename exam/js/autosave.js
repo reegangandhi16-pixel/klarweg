@@ -32,7 +32,8 @@ export class Autosave {
   }
   schedule(ms) { if (this.timer) this.clearTimer(this.timer); this.timer = this.setTimer(() => { this.timer = null; this.flush().catch(() => this.setState('offline')); }, ms); }
   setState(s) { if (s !== this.state) { this.state = s; try { this.onState(s); } catch { /* UI callback must not break saving */ } } }
-  async flush() {
+  /* opts.keepalive: a request that survives page unload (pagehide); passed to send() */
+  async flush(opts = {}) {
     if (this.inflight) return this.inflight;
     const batch = Object.values(this.pending).slice(0, 20);
     if (!batch.length) { this.setState('saved'); return; }
@@ -40,7 +41,7 @@ export class Autosave {
     this.setState('saving');
     this.inflight = (async () => {
       try {
-        const r = await this.send(batch, requestId);
+        const r = await this.send(batch, requestId, opts);
         for (const res of r.results || []) {
           const p = this.pending[res.item_id];
           if (p && p.seq <= res.current_seq) delete this.pending[res.item_id];

@@ -221,9 +221,10 @@ export function createRenderer(extra = {}) {
       /* narrow screens (< 1024 px) stack texts above tasks: a sticky "Text / Aufgaben" pair jumps between them
          (ENGINE §9.1; plain links, hidden on wide screens where both are side by side) */
       const k = idSafe(t.task_id || `${p.part}`);
-      return `<div class="kx-task kx-split">${instr}<div class="kx-split-grid"><div class="kx-task-texts" id="kx-texts-${k}" role="region" tabindex="0" aria-label="Texte zu Teil ${esc(p.part)}">${texts}</div>`
+      const w = ctx.module === 'schreiben';
+      return `<div class="kx-task kx-split">${instr}<div class="kx-split-grid"><div class="kx-task-texts" id="kx-texts-${k}" role="region" tabindex="0" aria-label="${w ? 'Beitrag' : 'Texte'} zu Teil ${esc(p.part)}">${texts}</div>`
         + `<div class="kx-task-items" id="kx-items-${k}">${items}</div></div>`
-        + `<nav class="kx-split-toggle" aria-label="Teil ${esc(p.part)}: Texte und Aufgaben"><a href="#kx-texts-${k}">Text</a><a href="#kx-items-${k}">Aufgaben</a></nav></div>`;
+        + `<nav class="kx-split-toggle" aria-label="Teil ${esc(p.part)}: ${w ? 'Beitrag und Ihr Text' : 'Texte und Aufgaben'}"><a href="#kx-texts-${k}">${w ? 'Beitrag' : 'Text'}</a><a href="#kx-items-${k}">${w ? 'Ihr Text' : 'Aufgaben'}</a></nav></div>`;
     }
     return `<div class="kx-task">${instr}${texts}${items}</div>`;
   }
@@ -234,7 +235,8 @@ export function createRenderer(extra = {}) {
   /* Renders only the parts present in the package. For Hören the server sends
      only the parts that have opened (OD-02), so future parts never reach the DOM. */
   function module(pkg, answers = {}, ctx = {}) {
-    const c = { ...ctx, split: ctx.split ?? pkg.module === 'lesen' };
+    /* Lesen texts, and the Schreiben Teil 2 forum post (ENGINE §9.4: pinned next to the editor, stacked above on mobile) */
+    const c = { ...ctx, module: pkg.module, split: ctx.split ?? (pkg.module === 'lesen' || pkg.module === 'schreiben') };
     return testBanner(pkg) + pkg.parts.map((p) => part(p, answers, c)).join('');
   }
   return { module, part, item, registry };

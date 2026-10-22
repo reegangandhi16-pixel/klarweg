@@ -683,6 +683,15 @@ async function runPractice() {
     // ---- Schreiben: three texts ----
     await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`); await click('[data-act="start"][data-module="schreiben"]');
     await waitFor(`document.querySelectorAll('textarea').length === 3`, 15000, 'Schreiben');
+    // ENGINE §9.4: the Teil 2 forum post sits beside its editor at 1280 and above it on a phone (no horizontal scroll)
+    const post = () => evaluate(`(() => { const sp = document.querySelectorAll('#kx-main .kx-split'); const s = sp[0]; if (!s) return { n: 0 };
+      const t = s.querySelector('.kx-task-texts').getBoundingClientRect(), e = s.querySelector('textarea').getBoundingClientRect();
+      return { n: sp.length, part: s.closest('.kx-part').dataset.part, beside: t.right <= e.left + 1, above: t.bottom <= e.top + 1, noH: document.documentElement.scrollWidth <= innerWidth + 1 }; })()`);
+    const wideP = await post();
+    assert.ok(wideP.n === 1 && wideP.part === '2' && wideP.beside && wideP.noH, `Schreiben post beside the editor: ${JSON.stringify(wideP)}`);
+    await vp(360, 640, true); await sleep(300);
+    const narrowP = await post(); await vp(1280, 800, false); await sleep(200);
+    assert.ok(narrowP.above && narrowP.noH, `Schreiben post above the editor on a phone: ${JSON.stringify(narrowP)}`);
     await a11y('Schreiben');
     await evaluate(`[...document.querySelectorAll('textarea')].forEach((t, i) => { t.value = 'Lieber Tom, meine neue Wohnung ist hell und ruhig. Ich bin umgezogen, weil ich näher an der Arbeit wohnen wollte. Treffen wir uns am Samstag? Viele Grüße ' + i; t.dispatchEvent(new Event('input', { bubbles: true })); })`);
     // a real learner leaves each field: the browser then fires 'change' on the textarea (blur). That event must never

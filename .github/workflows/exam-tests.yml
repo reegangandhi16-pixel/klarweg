@@ -59,8 +59,13 @@ jobs:
         run: |
           APT_OPTS="-o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30"
           sudo apt-get $APT_OPTS update -q
-          sudo apt-get $APT_OPTS install -y -q ffmpeg
+          # --no-install-recommends: the codecs come with ffmpeg's hard dependencies; the recommended extras (e.g. speech
+          # models, GPU drivers) only added downloads that, on a slow mirror, pushed the install past the job timeout
+          sudo apt-get $APT_OPTS install -y -q --no-install-recommends ffmpeg
           ffmpeg -hide_banner -version | head -1
+          # fail fast (before the tests) if anything the real-encoder checks in audio-duration.test.mjs use is missing
+          for e in aac libopus libvorbis alac pcm_s24le; do ffmpeg -hide_banner -encoders | grep -qw "$e" || { echo "::error::ffmpeg encoder missing: $e"; exit 1; }; done
+          ffmpeg -hide_banner -filters | grep -qw sine || { echo "::error::ffmpeg lavfi source missing: sine"; exit 1; }
       - name: Exam tests (boundary check, validator, unit and integration tests)
         env:
           KW_FFMPEG: /usr/bin/ffmpeg

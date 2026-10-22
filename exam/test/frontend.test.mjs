@@ -1136,3 +1136,17 @@ test('RESUME POSITION (GOETHE-B1-DIGITAL §10): Lesen/Schreiben remember the las
   assert.match(fn, /announce\(`Weiter in Teil \$\{part\.dataset\.part\}, bei der zuletzt bearbeiteten Aufgabe\.`\)/);
   assert.match(main, /markTopicDecks\(S\.locked\.size > 0\);\n  trackCurrentPart\(\);\n  restorePosition\(\);\n\}/, 'restored once, when the module page is drawn');
 });
+
+test('RESULT SUMMARY (SCORING §5): "n von m bewerteten Modulen bestanden (Klarweg-Simulation)" from final modules only; open ratings named; no sum of points; nothing for single parts or when nothing is final', async () => {
+  const { resultSummary, resultPage } = await import('../js/render.js');
+  const M = (module, status, pass, points) => ({ module, status, pass, points, max_points: 100 });
+  assert.equal(resultSummary([M('lesen', 'final', true, 80), M('hoeren', 'final', false, 50), M('schreiben', 'pending_rating'), M('sprechen', 'not_taken')]),
+    '<p class="kx-result-summary">1 von 2 bewerteten Modulen bestanden (Klarweg-Simulation) · 1 Modul noch in Bewertung.</p>');
+  assert.equal(resultSummary([M('lesen', 'final', true, 90)]), '<p class="kx-result-summary">1 von 1 bewerteten Modul bestanden (Klarweg-Simulation).</p>');
+  assert.equal(resultSummary([M('lesen', 'final', true, 1), M('hoeren', 'final', true, 1), M('schreiben', 'final', true, 1), M('sprechen', 'final', true, 1)]),
+    '<p class="kx-result-summary">4 von 4 bewerteten Modulen bestanden (Klarweg-Simulation).</p>');
+  assert.equal(resultSummary([M('lesen', 'pending_rating'), M('hoeren', 'not_taken')]), '');
+  const page = resultPage({ modules: [M('lesen', 'final', true, 80), M('hoeren', 'final', true, 70)], pass_points: 60 });
+  assert.match(page, /2 von 2 bewerteten Modulen bestanden/); assert.equal(/150|Gesamtpunkt/.test(page), false, 'no summed points');
+  assert.equal(/kx-result-summary/.test(resultPage({ practice_part: { module: 'lesen', part: 1 }, modules: [{ module: 'lesen', counts: { correct: 1, incorrect: 0, unanswered: 0 } }] })), false);
+});

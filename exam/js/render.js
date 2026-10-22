@@ -485,6 +485,17 @@ function partResultPage(result) {
     + `<p class="kx-disclaimer">${esc(RESULT_DISCLAIMER)}</p></main>`;
 }
 
+/* SCORING §5 [DESIGN]: a count of passed modules as the only summary — never a sum of points, never an overall pass.
+   Only finally scored modules count; modules still being rated are named, not guessed. */
+export function resultSummary(modules) {
+  const taken = (modules || []).filter((m) => m.status !== 'not_taken');
+  const final = taken.filter((m) => m.status === 'final');
+  if (!final.length) return '';
+  const passed = final.filter((m) => m.pass).length, open = taken.length - final.length;
+  return `<p class="kx-result-summary">${esc(passed)} von ${esc(final.length)} bewerteten Modul${final.length === 1 ? '' : 'en'} bestanden (Klarweg-Simulation)`
+    + `${open ? ` · ${esc(open)} Modul${open === 1 ? '' : 'e'} noch in Bewertung` : ''}.</p>`;
+}
+
 export function resultPage(result) {
   if (result.practice_part) return partResultPage(result);
   const rows = result.modules.map((m) => {
@@ -498,6 +509,7 @@ export function resultPage(result) {
   return `<main class="kx-result" aria-labelledby="kx-result-title"><p class="kx-eyebrow">${result.test_content ? 'Übung · synthetische Inhalte' : 'Simulation'}</p>`
     + `<h1 id="kx-result-title">${esc(RESULT_TITLE)}</h1>`
     + `<table class="kx-table"><caption>Ergebnisse je Modul (kein Gesamtergebnis)</caption><thead><tr><th scope="col">Modul</th><th scope="col">Punkte</th><th scope="col">Status</th><th scope="col">Details</th></tr></thead><tbody>${rows}</tbody></table>`
+    + resultSummary(result.modules)
     + (result.pass_points ? `<p class="kx-result-pass">Bestanden ab ${esc(result.pass_points)} Punkten je Modul.</p>` : '')
     + `<p class="kx-disclaimer">${esc(RESULT_DISCLAIMER)} Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.</p></main>`;
 }

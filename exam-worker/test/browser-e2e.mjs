@@ -894,6 +894,7 @@ async function runPractice() {
     await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText)`, 15000, 'learner result');
     res = await text();
     assert.equal(/in Bewertung/.test(res), false, 'nothing awaits rating any more');
+    assert.match(res, /3 von 4 bewerteten Modulen bestanden \(Klarweg-Simulation\)\./, 'summary: modules passed (Lesen is answered 10/10/10 here and fails), never a sum of points');
     // rated feedback per task and criterion, and per-part lines in the reviews
     await waitFor(`document.querySelectorAll('.kx-rated').length === 2`, 10000, 'rated feedback for Schreiben and Sprechen');
     await a11y('final result with rated feedback');
@@ -1633,6 +1634,7 @@ async function runLesenOnly() {
     assert.deepEqual(rows, ['Lesen']);
     t = await text();
     assert.match(t, /100 \/ 100/); assert.match(t, /kein Gesamtergebnis/);
+    assert.match(t, /1 von 1 bewerteten Modul bestanden \(Klarweg-Simulation\)\./, 'summary counts modules, never points');
     await A.a11y('Lesen-only result');
     // the result and item review on a phone: no page-level horizontal scroll, every table readable
     await vp(360, 640, true); await sleep(200);

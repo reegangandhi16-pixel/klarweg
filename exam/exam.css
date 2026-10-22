@@ -102,6 +102,7 @@ p { margin: 0 0 16px; }
 .kx-precheck-notes { margin: 0 0 16px; padding-left: 24px; color: var(--ink-secondary); }
 .kx-advisory { margin: -8px 0 16px; font: 500 12px/1.4 var(--font-mono); color: var(--ink-secondary); }
 .kx-review-warn { font-weight: 600; }
+.kx-result-summary { font: 500 18px/1.4 var(--font-ui); margin: 16px 0 8px; }
 /* Hören master volume (AUDIO-SPEC A4) in the sticky bar */
 .kx-volume { display: flex; align-items: center; gap: 12px; margin: 4px 0 0; font-size: 14px; }
 .kx-volume label { font-weight: 500; }

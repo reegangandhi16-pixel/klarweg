@@ -279,6 +279,17 @@ async function run(viewport) {
     await waitFor(`/^Vorbereitung/.test(document.querySelector('#kx-phase')?.textContent || '')`, 20000, 'preparation phase');
     assert.equal(await evaluate(`${topicRadios}.length`), 2);
     assert.equal(await evaluate(`${topicRadios}.some((r) => r.disabled)`), false, 'topic choice open during the preparation');
+    // SPEAKING §2 Teil 2 slides: one deck per topic, one slide at a time, advanced by the learner (S0 options are not
+    // "Thema n: …", so its decks are not linked to a topic and both stay)
+    const deck = (n) => evaluate(`(() => { const d = document.querySelectorAll('.kx-deck')[${n}]; return { shown: !d.hidden, pos: d.querySelector('.kx-deck-pos').textContent, visible: [...d.querySelectorAll('.kx-slide')].filter((x) => !x.hidden).length,
+      prev: d.querySelector('[data-act="slide-prev"]').disabled, next: d.querySelector('[data-act="slide-next"]').disabled, focus: (document.activeElement && document.activeElement.dataset.act) || null }; })()`);
+    assert.equal(await evaluate(`document.querySelectorAll('.kx-deck').length`), 2, 'two slide decks');
+    assert.deepEqual(await deck(0), { shown: true, pos: 'Folie 1 von 5', visible: 1, prev: true, next: false, focus: null });
+    for (let i = 0; i < 4; i++) { await evaluate(`(() => { const b = document.querySelectorAll('.kx-deck')[0].querySelector('[data-act="slide-next"]'); b.focus(); b.click(); })()`); }
+    const end = await deck(0);
+    assert.deepEqual(end, { shown: true, pos: 'Folie 5 von 5', visible: 1, prev: false, next: true, focus: 'slide-prev' }, 'last slide: forward disabled, focus moved to back');
+    await evaluate(`document.activeElement.click()`);
+    assert.equal((await deck(0)).pos, 'Folie 4 von 5');
     await evaluate(`${topicRadios}.find((r) => r.value === 't1').click()`);
     await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'topic autosaved');
     assert.equal(await chunkCount(), 0, 'nothing is recorded during the preparation');
@@ -929,6 +940,10 @@ async function runSprechenTopic() {
       const radios = `[...document.querySelectorAll('input[type=radio][data-item="${topicItem.item_id}"]')]`;
       await waitFor(`${radios}.length === 2 && ${radios}.every((r) => r.disabled)`, 15000, 'locked topic choice rendered');
       assert.deepEqual(await evaluate(`${radios}.filter((r) => r.checked).map((r) => r.value)`), [choice], 'the locked choice shows the learner\'s topic');
+      // after the lock only the chosen topic's slide deck stays, marked "Ihr Thema" (practice options are "Thema n: …")
+      const decks = await evaluate(`[...document.querySelectorAll('.kx-deck')].map((d) => ({ topic: d.dataset.topic, shown: !d.hidden, mine: !d.querySelector('.kx-deck-mine').hidden, title: d.querySelector('h3').textContent }))`);
+      assert.ok(decks.length === 2 && decks.filter((d) => d.shown).length === 1 && decks.find((d) => d.shown).topic === choice && decks.find((d) => d.shown).mine
+        && decks.find((d) => d.shown).title.startsWith(choice === 't1' ? 'Thema 1: ' : 'Thema 2: '), `${choice}: only the chosen deck after the lock ${JSON.stringify(decks)}`);
       if (choice === 't1') {
         const notes = () => evaluate(`(() => { const n = document.querySelector('.kx-notes'), t = n.querySelector('textarea'), r = n.getBoundingClientRect(), m = document.getElementById('kx-main').getBoundingClientRect();
           return { value: t.value, beside: r.left >= m.right - 1, inView: r.top >= document.querySelector('.kx-bar').getBoundingClientRect().bottom - 1 && r.top < innerHeight - 100, stored: localStorage.getItem('kx-notes:${s.attempt}'),

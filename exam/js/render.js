@@ -236,6 +236,23 @@ export function createRenderer(extra = {}) {
     const html = fn(it, value, locked, ctx);
     return ctx.flags && !locked && FLAGGABLE.has(it.interaction) ? html.replace(/<\/(fieldset|div)>$/, `${flagButton(it.item_id, ctx.flags.has(it.item_id))}</$1>`) : html;
   }
+  /* Sprechen Teil 2 (SPEAKING §2 "presents along 5 slides; advances slides"): one deck per topic, one slide at a time.
+     A deck belongs to the topic option whose label starts with the deck label ("Thema 1: …"); unmatched decks still work. */
+  function slideDecks(slides, items, tk) {
+    const groups = [];
+    for (const sl of slides) { const key = String(sl.label || '').trim(); let g = groups.find((x) => x.key === key); if (!g) groups.push(g = { key, slides: [] }); g.slides.push(sl); }
+    const opts = (items.find((it) => it.interaction === 'topic_choice') || {}).options || [];
+    return groups.map((g, n) => {
+      const opt = g.key ? opts.find((o) => String(o.label || '').startsWith(`${g.key}:`)) : null;
+      const id = `kx-deck-${tk}-${n}`, total = g.slides.length;
+      return `<section class="kx-deck" id="${id}" data-deck${opt ? ` data-topic="${esc(opt.option_id)}"` : ''} aria-labelledby="${id}-title">`
+        + `<h3 id="${id}-title">${esc(opt ? opt.label : (g.key || 'Folien'))}<span class="kx-deck-mine" hidden> · Ihr Thema</span></h3>`
+        + `<ol class="kx-slides">${g.slides.map((sl, i) => `<li class="kx-slide${i === 0 ? ' kx-current' : ''}" data-slide="${i}"${i === 0 ? '' : ' hidden'}>${paragraphs(sl.text)}</li>`).join('')}</ol>`
+        + `<div class="kx-deck-nav"><button type="button" class="kx-btn kx-btn-quiet" data-act="slide-prev" aria-controls="${id}" disabled>Vorherige Folie</button>`
+        + `<span class="kx-deck-pos" aria-live="polite">Folie 1 von ${total}</span>`
+        + `<button type="button" class="kx-btn kx-btn-quiet" data-act="slide-next" aria-controls="${id}"${total < 2 ? ' disabled' : ''}>Nächste Folie</button></div></section>`;
+    }).join('');
+  }
   function adCard(s, tk) {
     const a = s.label.trim();
     return `<article class="kx-stim kx-ad" id="kx-ad-${tk}-${idSafe(a)}" data-ad="${esc(a)}"><h3 class="kx-stim-label"><span class="kx-sr">Anzeige </span>${esc(a)}</h3>`
@@ -274,6 +291,8 @@ export function createRenderer(extra = {}) {
       : shown.map((s, n) => stimulus(s, linked && s.kind === 'text' && s.label && byLabel.get(s.label.trim()) === n ? `kx-stim-${tk}-${n}` : null)).join('');
     const items = t.items.map((it) => { const html = item(it, answers, ctx), to = linked && jumpTo(it); return to
       ? html.replace('</legend>', `</legend><a class="kx-stim-jump" href="#${to}" aria-label="Zum Text von ${esc(displayStem(it).replace(/^\s*\d+\.\s*/, ''))}">Zum Text</a>`) : html; }).join('');
+    const slides = shown.filter((s) => s.role === 'slide' && s.kind === 'text');
+    if (slides.length) return `<div class="kx-task">${instr}${shown.filter((s) => s.role !== 'slide').map((s) => stimulus(s)).join('')}${slideDecks(slides, t.items, tk)}${items}</div>`;
     if (ctx.split && texts && items && t.stimuli.some((s) => s.kind === 'text')) {
       /* phones (< 768 px) stack texts above tasks: a sticky "Text / Aufgaben" pair jumps between them; tablets get a
          collapsible texts column (ENGINE §9.1) */

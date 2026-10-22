@@ -102,6 +102,17 @@ p { margin: 0 0 16px; }
 .kx-precheck-notes { margin: 0 0 16px; padding-left: 24px; color: var(--ink-secondary); }
 .kx-advisory { margin: -8px 0 16px; font: 500 12px/1.4 var(--font-mono); color: var(--ink-secondary); }
 .kx-review-warn { font-weight: 600; }
+/* Sprechen Teil 2 slide decks: one slide at a time, the learner advances; the chosen topic is marked in words + teal edge */
+.kx-deck { margin: 0 0 16px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.kx-deck[hidden] { display: none; }
+.kx-deck h3 { font-size: 16px; margin: 0 0 12px; }
+.kx-deck-chosen { box-shadow: inset 4px 0 0 var(--accent); }
+.kx-deck-mine { font-weight: 600; }
+.kx-slides { list-style: none; margin: 0 0 12px; padding: 24px; min-height: 120px; border-radius: 8px; background: var(--elevated); font: 500 18px/1.5 var(--font-ui); }
+.kx-slide[hidden] { display: none; }
+.kx-slide p { margin: 0; }
+.kx-deck-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.kx-deck-pos { font: 500 13px/1.4 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-secondary); }
 /* Sprechen recording monitor in the sticky bar: level bar (visual only) and a polite silence hint (Teil 2) */
 .kx-level { display: flex; align-items: center; gap: 8px; margin: 4px 0 0; font: 500 12px/1.2 var(--font-mono); color: var(--ink-secondary); }
 .kx-level[hidden] { display: none; }

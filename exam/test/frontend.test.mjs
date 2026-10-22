@@ -1051,3 +1051,23 @@ test('SPRECHEN NOTES (SPEAKING §2): a labelled plain field with the "frei sprec
   assert.match(css, /@media \(min-width: 768px\) {\s*\.kx-speak-layout { display: grid; grid-template-columns: minmax\(0, 1fr\) minmax\(240px, 300px\);[^}]*}\s*\.kx-speak-layout \.kx-notes { margin: 0; position: sticky; top: calc\(var\(--kx-bar-h, 120px\) \+ 8px\); }/);
   assert.match(css, /\.kx-speak-layout \.kx-notes textarea { min-height: 120px; height: calc\(100vh - var\(--kx-bar-h, 120px\) - 360px\); max-height: 480px; }/);
 });
+
+test('SPRECHEN TEIL 2 SLIDES (SPEAKING §2): every practice form renders one deck per topic (5 slides, first shown), linked to its topic option by the "Thema n:" label; S0 decks stay unlinked; prev/next controls', async () => {
+  const r = createRenderer();
+  for (let n = 1; n <= 15; n++) {
+    const pkg = pkgFor(syntheticBuild([path.join(ROOT, `exam-content/forms/synthetic/b1-synthetic-p${n}`)]), 'sprechen');
+    const html = r.part(pkg.parts.find((p) => p.part === 2), {}, {});
+    const decks = [...html.matchAll(/<section class="kx-deck" id="(kx-deck-[^"]+)" data-deck data-topic="(t[12])" aria-labelledby="\1-title"><h3 id="\1-title">(Thema [12]: [^<]+)<span class="kx-deck-mine" hidden> · Ihr Thema<\/span><\/h3><ol class="kx-slides">([\s\S]*?)<\/ol>/g)];
+    assert.deepEqual(decks.map((d) => d[2]), ['t1', 't2'], `P${n}: decks t1, t2`);
+    for (const d of decks) {
+      assert.ok(d[3].startsWith(d[2] === 't1' ? 'Thema 1: ' : 'Thema 2: '), d[3]);
+      assert.equal((d[4].match(/<li class="kx-slide/g) || []).length, 5); assert.equal((d[4].match(/ hidden>/g) || []).length, 4, 'one slide shown');
+    }
+    assert.match(html, /data-act="slide-prev" aria-controls="kx-deck-[^"]+" disabled>Vorherige Folie<\/button><span class="kx-deck-pos" aria-live="polite">Folie 1 von 5<\/span><button type="button" class="kx-btn kx-btn-quiet" data-act="slide-next" aria-controls="kx-deck-[^"]+">Nächste Folie<\/button>/);
+    assert.equal((html.match(/class="kx-stim"/g) || []).length, 0, `P${n}: no slide as a loose text block`);
+  }
+  const s0 = r.part(pkgFor(build, 'sprechen').parts.find((p) => p.part === 2), {}, {});
+  assert.equal((s0.match(/<section class="kx-deck"/g) || []).length, 2); assert.equal(/data-topic=/.test(s0), false, 'unmatched labels link nothing');
+  const main = read('exam/js/main.js');
+  assert.match(main, /d\.hidden = locked && !!chosen && !mine;/, 'after the lock only the chosen deck stays (none chosen → all)');
+});

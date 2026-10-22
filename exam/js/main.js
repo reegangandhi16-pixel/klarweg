@@ -192,6 +192,29 @@ const notesKey = (attemptId) => `kx-notes:${attemptId}`;
 function loadNotes(attemptId) { try { return localStorage.getItem(notesKey(attemptId)) || ''; } catch { return ''; } }
 function saveNotes(attemptId, text) { try { if (text) localStorage.setItem(notesKey(attemptId), text); else localStorage.removeItem(notesKey(attemptId)); } catch { /* this page only */ } }
 
+/* Sprechen Teil 2 slide decks: one slide at a time; focus stays on the pressed control (or moves to the other one at an end) */
+function stepSlide(deck, dir) {
+  const slides = [...deck.querySelectorAll('.kx-slide')];
+  const cur = slides.findIndex((x) => x.classList.contains('kx-current'));
+  const next = Math.max(0, Math.min(slides.length - 1, cur + dir));
+  if (next === cur) return;
+  slides.forEach((x, i) => { x.classList.toggle('kx-current', i === next); x.hidden = i !== next; });
+  deck.querySelector('.kx-deck-pos').textContent = `Folie ${next + 1} von ${slides.length}`;
+  const prev = deck.querySelector('[data-act="slide-prev"]'), fwd = deck.querySelector('[data-act="slide-next"]');
+  prev.disabled = next === 0; fwd.disabled = next === slides.length - 1;
+  if (document.activeElement && document.activeElement.disabled) (next === 0 ? fwd : prev).focus();
+}
+/* the deck of the chosen topic is marked "Ihr Thema"; once the choice is locked only that deck stays (none chosen → both) */
+function markTopicDecks(locked = false) {
+  const decks = [...document.querySelectorAll('.kx-deck[data-topic]')]; if (!decks.length) return;
+  const chosen = topicItems(S.pkg || { parts: [] }).map((it) => S.answers[it.item_id] && S.answers[it.item_id].option_id).find(Boolean) || null;
+  for (const d of decks) {
+    const mine = !!chosen && d.dataset.topic === chosen;
+    d.classList.toggle('kx-deck-chosen', mine); d.querySelector('.kx-deck-mine').hidden = !mine;
+    d.hidden = locked && !!chosen && !mine;
+  }
+}
+
 /* tablet split pane: collapse or expand the texts column of one task (CSS applies it only at 768–1023 px) */
 function setTextsExpanded(split, expanded) {
   split.classList.toggle('kx-collapsed', !expanded);
@@ -315,6 +338,7 @@ function paint() {
   watchBar();
   updateProgress();
   markUsedOptions();
+  markTopicDecks(S.locked.size > 0);
   trackCurrentPart();
 }
 /* Matching tasks (ENGINE §9.1 L3): each option and each ad card says which situations use it ("verwendet bei 15");
@@ -512,6 +536,7 @@ function applyTopicLock(withAnnouncement) {
     }
     if (withAnnouncement) announce(`Die Vorbereitung ist beendet. ${text}`);
   }
+  markTopicDecks(true);
   if (S.autosave) S.autosave.flush().catch(() => {});   // send a last-second choice now (the server allows the save grace)
 }
 
@@ -652,6 +677,7 @@ app.addEventListener('change', (e) => {
   S.answers[el.dataset.item] = value; S.autosave.set(el.dataset.item, value);
   updateProgress();
   if (el.tagName === 'SELECT') { const task = el.closest('.kx-task'); if (task) markUsedOptions(task.parentElement || document); }
+  if (S.module === 'sprechen') markTopicDecks(S.locked.size > 0);
 });
 app.addEventListener('input', (e) => {
   const el = e.target;
@@ -674,6 +700,7 @@ app.addEventListener('click', async (e) => {
   const b = e.target.closest('button'); if (!b) return;
   const act = b.dataset.act;
   try {
+    if (act === 'slide-prev' || act === 'slide-next') { stepSlide(b.closest('.kx-deck'), act === 'slide-next' ? 1 : -1); return; }
     if (act === 'toggle-texts') { const split = b.closest('.kx-split'); setTextsExpanded(split, split.classList.contains('kx-collapsed')); return; }
     if (b.dataset.flag) {   // "Zur Kontrolle markieren": local reminder only, nothing is sent
       const on = !S.flags.has(b.dataset.flag);

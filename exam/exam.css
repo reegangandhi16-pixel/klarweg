@@ -102,6 +102,19 @@ p { margin: 0 0 16px; }
 .kx-precheck-notes { margin: 0 0 16px; padding-left: 24px; color: var(--ink-secondary); }
 .kx-advisory { margin: -8px 0 16px; font: 500 12px/1.4 var(--font-mono); color: var(--ink-secondary); }
 .kx-review-warn { font-weight: 600; }
+/* Sprechen notes: beside the module from 768 px (sticky below the bar, so they stay visible while speaking); below on phones */
+.kx-notes { margin: 24px 0; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.kx-notes h2 { font-size: 18px; margin: 0 0 8px; }
+.kx-notes-rule { margin: 0 0 12px; font: 500 13px/1.4 var(--font-mono); color: var(--ink-secondary); }
+.kx-notes textarea { width: 100%; min-height: 160px; font: 400 16px/1.5 var(--font-ui); padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--canvas); resize: vertical; }
+.kx-notes .kx-meta { margin: 8px 0 0; }
+@media (min-width: 768px) {
+  .kx-speak-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 300px); gap: 24px; align-items: start; }
+  .kx-speak-layout .kx-notes { margin: 0; position: sticky; top: calc(var(--kx-bar-h, 120px) + 8px); }
+  /* the whole panel fits between the sticky bar and the submit bar, even at the end of the page (a sticky box cannot
+     leave its container, so a taller panel would slide under the bar) */
+  .kx-speak-layout .kx-notes textarea { min-height: 120px; height: calc(100vh - var(--kx-bar-h, 120px) - 360px); max-height: 480px; }
+}
 /* item flag: quiet text button under the item; pressed = teal outline + marker bar, never colour alone */
 .kx-flag { display: flex; width: fit-content; align-items: center; gap: 8px; min-height: 44px; margin-top: 8px; margin-left: -8px; padding: 0 8px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--ink-secondary); font: 500 14px/1.2 var(--font-ui); cursor: pointer; }
 .kx-flag::before { content: ""; width: 4px; height: 16px; border-radius: 2px; background: var(--line); }

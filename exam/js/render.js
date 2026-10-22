@@ -202,6 +202,16 @@ function speaking(it, _value, _disabled, ctx = {}) {
     + '</ol></section>';
 }
 
+/* Sprechen notes panel: a plain field (no writing aids, no rich text), with the official reminder to speak freely */
+export const NOTES_MAX = 4000;
+export function notesPanel(text = '') {
+  return '<aside class="kx-notes" aria-labelledby="kx-notes-title"><h2 id="kx-notes-title">Ihre Notizen</h2>'
+    + '<p class="kx-notes-rule">Frei sprechen – nicht ablesen.</p>'
+    + '<label for="kx-notes-text" class="kx-sr">Ihre Notizen</label>'
+    + `<textarea id="kx-notes-text" data-notes lang="de" rows="10" maxlength="${NOTES_MAX}" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-describedby="kx-notes-hint">${esc(text)}</textarea>`
+    + '<p class="kx-meta" id="kx-notes-hint">Nur auf diesem Gerät gespeichert, nicht bewertet. Die Notizen bleiben während des Sprechens sichtbar.</p></aside>';
+}
+
 const DEFAULT_RENDERERS = { binary_choice: choice, mcq_single: choice, speaker_assignment: choice, topic_choice: choice, matching_pool: matching, text_response: writing, spoken_response: speaking };
 
 /* ENGINE §9: advisory time per part (level config advisory_seconds, scaled by an accommodation). A recommendation only:

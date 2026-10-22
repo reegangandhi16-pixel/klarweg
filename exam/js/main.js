@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, adUsage, usedText, adMatches, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
+import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, adUsage, usedText, adMatches, notesPanel, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
@@ -185,6 +185,12 @@ function intro(module) {
   }
 }
 
+/* Sprechen notes (SPEAKING §2, official: notes allowed and usable while speaking): one plain field beside the module,
+   kept per attempt on this device only — never sent, never rated (server storage waits on the retention decision D7) */
+const notesKey = (attemptId) => `kx-notes:${attemptId}`;
+function loadNotes(attemptId) { try { return localStorage.getItem(notesKey(attemptId)) || ''; } catch { return ''; } }
+function saveNotes(attemptId, text) { try { if (text) localStorage.setItem(notesKey(attemptId), text); else localStorage.removeItem(notesKey(attemptId)); } catch { /* this page only */ } }
+
 /* tablet split pane: collapse or expand the texts column of one task (CSS applies it only at 768–1023 px) */
 function setTextsExpanded(split, expanded) {
   split.classList.toggle('kx-collapsed', !expanded);
@@ -300,7 +306,7 @@ function paint() {
     : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
   // live status (Hören/Sprechen phase, "Audio starten", time warnings) lives in the sticky bar: it must stay visible
   // while the learner is scrolled down to the questions; empty elements take no space
-  screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked, flags: S.flags, multiplier: S.attempt.time_multiplier || 1 })}</main>`
+  screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div>${S.module === 'sprechen' ? '<div class="kx-speak-layout">' : ''}<main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked, flags: S.flags, multiplier: S.attempt.time_multiplier || 1 })}</main>${S.module === 'sprechen' ? notesPanel(loadNotes(S.attempt.attempt_id)) + '</div>' : ''}`
     + `<div id="kx-review-slot"></div><footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
   S.currentPart = null;
   watchBar();
@@ -621,6 +627,7 @@ app.addEventListener('change', (e) => {
 app.addEventListener('input', (e) => {
   const el = e.target;
   if (el.matches && el.matches('[data-ad-filter]')) { applyAdFilter(el.closest('.kx-task')); return; }
+  if (el.matches && el.matches('[data-notes]')) { saveNotes(S.attempt.attempt_id, el.value); return; }   // notes are never an answer
   if (el.tagName !== 'TEXTAREA' || !S.autosave) return;
   const wc = document.querySelector(`[data-wc-for="${CSS.escape(el.id)}"]`); if (wc) wc.textContent = countWords(el.value);
   S.answers[el.dataset.item] = { text: el.value }; S.autosave.set(el.dataset.item, { text: el.value });

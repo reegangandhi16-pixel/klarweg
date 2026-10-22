@@ -922,14 +922,37 @@ async function runSprechenTopic() {
         while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
         throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
       };
+      // SPEAKING §2 notes: kept on this device per attempt — seeded here as if typed during preparation before a reload
+      if (choice === 't1') await send('Page.addScriptToEvaluateOnNewDocument', { source: `try { if (!localStorage.getItem('kx-notes:${s.attempt}')) localStorage.setItem('kx-notes:${s.attempt}', 'Teil 2: Erfahrung, Vorteile'); } catch {}` });
+      await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false });
       await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
       const radios = `[...document.querySelectorAll('input[type=radio][data-item="${topicItem.item_id}"]')]`;
       await waitFor(`${radios}.length === 2 && ${radios}.every((r) => r.disabled)`, 15000, 'locked topic choice rendered');
       assert.deepEqual(await evaluate(`${radios}.filter((r) => r.checked).map((r) => r.value)`), [choice], 'the locked choice shows the learner\'s topic');
+      if (choice === 't1') {
+        const notes = () => evaluate(`(() => { const n = document.querySelector('.kx-notes'), t = n.querySelector('textarea'), r = n.getBoundingClientRect(), m = document.getElementById('kx-main').getBoundingClientRect();
+          return { value: t.value, beside: r.left >= m.right - 1, inView: r.top >= document.querySelector('.kx-bar').getBoundingClientRect().bottom - 1 && r.top < innerHeight - 100, stored: localStorage.getItem('kx-notes:${s.attempt}'),
+            rule: n.querySelector('.kx-notes-rule').textContent, label: t.labels[0].textContent, aids: ['spellcheck', 'autocorrect', 'autocapitalize'].map((a) => t.getAttribute(a)).join(','), item: t.dataset.item || null, noH: document.documentElement.scrollWidth <= innerWidth + 1 }; })()`);
+        let n = await notes();
+        assert.ok(n.value === 'Teil 2: Erfahrung, Vorteile' && n.beside && n.inView && n.rule === 'Frei sprechen – nicht ablesen.' && n.label === 'Ihre Notizen' && n.aids === 'false,off,off' && n.item === null && n.noH, `notes restored beside the module: ${JSON.stringify(n)}`);
+        const rows = async () => JSON.stringify((await dev.env.DB.prepare("SELECT item_id, value_json, seq FROM responses_current WHERE module = 'sprechen' ORDER BY item_id").all()).results);
+        const before = await rows();
+        await evaluate(`(() => { const t = document.querySelector('.kx-notes textarea'); t.focus(); t.value += '; Nachteile: Kosten'; t.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+        await sleep(1500); n = await notes();
+        assert.equal(n.stored, 'Teil 2: Erfahrung, Vorteile; Nachteile: Kosten', 'typed notes kept on the device');
+        assert.equal(await rows(), before, 'notes are never sent as an answer');
+        await evaluate(`document.activeElement && document.activeElement.blur()`);
+      }
       await waitFor(`/Präsentation Ihres Gesprächspartners/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'partner phase');
       const mine = talks.find((x) => x.for_topic === choice).asset_id, other = talks.find((x) => x.for_topic !== choice).asset_id;
       await waitFor(`window.__plays.includes(${JSON.stringify(mine)})`, 6000, `partner talk for ${choice}`);
       await waitFor(`/^Teil 3: Aufnahme läuft/.test(document.querySelector('#kx-phase')?.textContent || '')`, 15000, 'Teil 3 recording');
+      if (choice === 't1') {
+        await evaluate('window.scrollTo(0, document.body.scrollHeight)'); await sleep(200);
+        const v = await evaluate(`(() => { const n = document.querySelector('.kx-notes'); const r = n.getBoundingClientRect(), bar = document.querySelector('.kx-bar').getBoundingClientRect().bottom;
+          return { top: Math.round(r.top), bottom: Math.round(r.bottom), bar: Math.round(bar), vh: innerHeight, scrolled: scrollY > 0, value: n.querySelector('textarea').value }; })()`);
+        assert.ok(v.scrolled && v.top >= v.bar - 1 && v.top <= v.bar + 16 && v.bottom <= v.vh + 1 && v.value.endsWith('Nachteile: Kosten'), `notes stay stuck below the bar, whole panel visible, while speaking (Teil 3): ${JSON.stringify(v)}`);
+      }
       for (const t0 = Date.now(); (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks WHERE part = 3').first()).n < 1; ) { if (Date.now() - t0 > 15000) throw new Error('no Teil 3 chunks'); await sleep(200); }
       // the examiner's question (turn 2, after the 1-minute turn 1) is the one about the learner's own topic
       const q = pkg.parts.find((p) => p.part === 3).tasks.flatMap((t) => t.items).find((i) => i.interaction === 'spoken_response').response_spec.turns[1].prompt_asset_by_topic;

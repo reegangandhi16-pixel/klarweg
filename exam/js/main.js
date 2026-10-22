@@ -471,7 +471,7 @@ function tick() {
   // ENGINE §10: 10- and 1-minute warnings — only for a module longer than the mark (a short module never starts with one)
   const total = m.deadline_at != null && m.started_at != null ? m.deadline_at - m.started_at : Infinity;
   if (S.attempt.part_scope == null) for (const mark of [600_000, 60_000]) if (total > mark && rem <= mark && !announced[mark]) { announced[mark] = true; const ph = $('#kx-announce'); if (ph) ph.textContent = `Noch ${mark / 60_000} Minute${mark > 60_000 ? 'n' : ''}.`; }
-  if (rem === 0) { clearInterval(S.timer); setTimeout(refresh, 11_000); }   // server auto-submits after its grace
+  if (rem === 0) { clearInterval(S.timer); flushSoon(); setTimeout(refresh, 11_000); }   // §3 "at 0: autosave + auto-submit": unsent answers go now, inside the 10 s grace; the server auto-submits
 }
 async function refresh() { try { S.attempt = await api.getAttempt(S.attempt.attempt_id); S.module = null; route(); } catch (e) { fail(e); } }
 

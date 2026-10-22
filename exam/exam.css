@@ -46,6 +46,10 @@ p { margin: 0 0 16px; }
 .kx-announce:empty { display: none; }
 .kx-part { margin: 36px 0; }
 .kx-task { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
+/* exam texts (ENGINE §9.2 "Inter ≥ 17 px, line-height 1.55"; §9.3 "min 16 px mobile / 17 px desktop body"; register OD-39
+   default — only the typeface choice is deferred): the whole module page, phones keep 16 px */
+.kx-module { line-height: 1.55; }
+@media (min-width: 768px) { .kx-module { font-size: 17px; } }
 .kx-stim, .kx-instr { max-width: 680px; }
 .kx-stim { background: var(--elevated); border-radius: 8px; padding: 16px 24px; margin-bottom: 16px; }
 .kx-item { border: 0; margin: 0 0 16px; padding: 16px 0 0; border-top: 1px solid var(--line); }

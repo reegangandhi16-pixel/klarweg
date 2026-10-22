@@ -40,7 +40,8 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # 25: a slow Ubuntu mirror has taken > 15 min to deliver ffmpeg and cancelled the job before any test ran
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
@@ -53,7 +54,13 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install ffmpeg (real-encoder audio checks)
-        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg && ffmpeg -hide_banner -version | head -1
+        # bounded APT retries and per-request HTTP/HTTPS timeouts: a stalled mirror connection is retried instead of
+        # hanging until the job timeout
+        run: |
+          APT_OPTS="-o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30"
+          sudo apt-get $APT_OPTS update -q
+          sudo apt-get $APT_OPTS install -y -q ffmpeg
+          ffmpeg -hide_banner -version | head -1
       - name: Exam tests (boundary check, validator, unit and integration tests)
         env:
           KW_FFMPEG: /usr/bin/ffmpeg

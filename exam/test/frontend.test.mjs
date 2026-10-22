@@ -542,7 +542,7 @@ test('ACCESSIBILITY (live regions): the redrawn header is not a live region; sav
   const { header, saveAnnouncement, createRenderer } = await import('../js/render.js');
   for (const st of ['saved', 'pending', 'saving', 'offline', 'stopped']) assert.equal(/aria-live/.test(header({ module: 'lesen', remainingMs: 60000, saveState: st })), false, `header (${st})`);
   assert.equal(saveAnnouncement('saved', 'pending'), null); assert.equal(saveAnnouncement('pending', 'saving'), null); assert.equal(saveAnnouncement('saving', 'saved'), null);
-  assert.match(saveAnnouncement('saving', 'offline'), /nicht möglich/); assert.match(saveAnnouncement('offline', 'saved'), /Wieder verbunden/);
+  assert.match(saveAnnouncement('saving', 'offline'), /^Offline – Ihre Antworten bleiben auf diesem Gerät gespeichert und werden automatisch gesendet/); assert.match(saveAnnouncement('saving', 'offline', 'memory'), /^Offline – Ihre Antworten sind nur in diesem Fenster gespeichert\. Bitte schließen Sie die Seite nicht/); assert.match(saveAnnouncement('saving', 'offline', 'indexeddb'), /auf diesem Gerät/); assert.match(saveAnnouncement('offline', 'saved'), /Wieder verbunden/);
   assert.match(saveAnnouncement('saving', 'stopped'), /gestoppt/); assert.equal(saveAnnouncement('offline', 'offline'), null);
   const pkg = { module: 'schreiben', parts: [{ part: 1, tasks: [{ task_id: 't', instructions: 'x', stimuli: [], items: [{ item_id: 'itm:b1:x-s1', interaction: 'text_response', stem: 'Schreiben Teil 1', response_spec: { type: 'text', target_words: 80 } }] }] }] };
   const html = createRenderer().module(pkg, {}, {});
@@ -550,7 +550,11 @@ test('ACCESSIBILITY (live regions): the redrawn header is not a live region; sav
   assert.ok(ta, 'the textarea is described by its word count');
   assert.match(html, new RegExp(`<p class="kx-wc" id="${ta[1]}">`)); assert.equal(/class="kx-wc"[^>]*aria-live/.test(html), false);
   const main = fs.readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
-  assert.match(main, /onState: \(st\) => \{ const say = saveAnnouncement\(S\.saveState, st\); S\.saveState = st; if \(say\) announce\(say\);/);
+  assert.match(main, /const prev = S\.saveTrouble \|\| S\.saveState;\s*if \(st === 'offline'\) S\.saveTrouble = 'offline'; else if \(st === 'saved' \|\| st === 'stopped'\) S\.saveTrouble = null;\s*const say = saveAnnouncement\(prev, st, S\.store && S\.store\.kind\); S\.saveState = st; if \(say\) announce\(say\);/);
+  // the real sequence: offline → saving (retry) → offline (retry failed: not repeated) → saving → saved (recovery announced)
+  let trouble = null, state = 'saving'; const heard = [];
+  for (const st of ['offline', 'saving', 'offline', 'saving', 'saved']) { const prev = trouble || state; if (st === 'offline') trouble = 'offline'; else if (st === 'saved' || st === 'stopped') trouble = null; const say = saveAnnouncement(prev, st); state = st; if (say) heard.push(say.split(' – ')[0].split('.')[0]); }
+  assert.deepEqual(heard, ['Offline', 'Wieder verbunden']);
   assert.match(main, /id="kx-announce" role="status"/);
 });
 

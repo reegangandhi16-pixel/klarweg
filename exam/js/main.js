@@ -234,7 +234,7 @@ function saveFlags(attemptId, flags) {
 async function openModule(module) {
   const id = S.attempt.attempt_id;
   S.module = module;
-  S.locked = new Set(); S.sprechen = null; S.flags = loadFlags(id);
+  S.locked = new Set(); S.sprechen = null; S.flags = loadFlags(id); S.paletteOpen = false;
   announced = {};
   const p = await api.pkg(id, S.lease, module);
   S.pkg = p.package;
@@ -284,7 +284,7 @@ function paintHeader() {
   const h = $('#kx-head');
   if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state, progress: progress(), untimed: S.attempt.part_scope != null });
 }
-function paintNav() { const n = $('#kx-nav-slot'); if (n) n.innerHTML = S.module === 'sprechen' ? '' : moduleNav(progress(), S.currentPart); }
+function paintNav() { const n = $('#kx-nav-slot'); if (n) n.innerHTML = S.module === 'sprechen' ? '' : moduleNav(progress(), S.currentPart, { palette: !!S.paletteOpen, flags: S.flags }); }
 /* The part on screen (the last one whose heading has passed the sticky bar) is marked in the part navigation. */
 /* The sticky bar's real height (it grows with a status line or an alert) drives where part jumps land and where the Lesen
    texts column sticks (CSS var --kx-bar-h). */
@@ -765,17 +765,27 @@ app.addEventListener('click', async (e) => {
     if (split) setTextsExpanded(split, true);
     return;
   }
+  /* item palette jump: close the palette, bring the item below the bar and put focus on its first control */
+  const pj = e.target.closest('a[data-palette-jump]');
+  if (pj) {
+    e.preventDefault();
+    const item = document.getElementById(pj.getAttribute('href').slice(1));
+    S.paletteOpen = false; paintNav();
+    if (item) { item.scrollIntoView({ block: 'start' }); const c = item.querySelector('input:not([disabled]), select:not([disabled]), textarea:not([disabled])'); if (c) c.focus({ preventScroll: true }); }
+    return;
+  }
   const b = e.target.closest('button'); if (!b) return;
   const act = b.dataset.act;
   try {
     if (act === 'slide-prev' || act === 'slide-next') { stepSlide(b.closest('.kx-deck'), act === 'slide-next' ? 1 : -1); return; }
     if (act === 'hoeren-reload') { if (S.preloadRetry) S.preloadRetry(); return; }
+    if (act === 'palette') { S.paletteOpen = !S.paletteOpen; paintNav(); const tg = $('.kx-palette-toggle'); if (tg) tg.focus(); return; }
     if (act === 'toggle-texts') { const split = b.closest('.kx-split'); setTextsExpanded(split, split.classList.contains('kx-collapsed')); return; }
     if (b.dataset.flag) {   // "Zur Kontrolle markieren": local reminder only, nothing is sent
       const on = !S.flags.has(b.dataset.flag);
       if (on) S.flags.add(b.dataset.flag); else S.flags.delete(b.dataset.flag);
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      saveFlags(S.attempt.attempt_id, S.flags); refreshReview(); return;
+      saveFlags(S.attempt.attempt_id, S.flags); refreshReview(); if (S.paletteOpen) paintNav(); return;
     }
     if (b.dataset.insert) {
       const ta = document.getElementById(b.dataset.target); const { selectionStart: s, selectionEnd: en, value } = ta;

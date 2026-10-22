@@ -1647,6 +1647,29 @@ async function runLesenOnly() {
     assert.match(await evaluate(`document.querySelector('#kx-review').innerText`), /1 Aufgabe ist zur Kontrolle markiert[\s\S]*markiert: Aufgabe \d+/, 'the review lists the marked item');
     await A.a11y('Lesen review with a marked item');
     await click('[data-act="review-close"]'); await waitFor(`!document.querySelector('#kx-review')`, 5000, 'review closed');
+    // ENGINE §9.1 item palette: every item with its state in words; a jump closes it and focuses the item's control
+    {
+      const pal = () => evaluate(`(() => { const b = document.querySelector('.kx-palette-toggle'); const p = document.getElementById('kx-palette');
+        return { expanded: b.getAttribute('aria-expanded'), open: !!p, links: p ? p.querySelectorAll('a[data-palette-jump]').length : 0, sum: p ? p.querySelector('.kx-palette-sum').textContent : '',
+          flagged: p ? [...p.querySelectorAll('.is-flagged')].map((a) => a.textContent) : [], bar: Math.round(document.querySelector('.kx-bar').getBoundingClientRect().height), noH: document.documentElement.scrollWidth <= innerWidth + 1 }; })()`);
+      let v = await pal();
+      assert.deepEqual([v.expanded, v.open], ['false', false]);
+      await evaluate(`document.querySelector('.kx-palette-toggle').click()`); await sleep(150); v = await pal();
+      assert.ok(v.expanded === 'true' && v.open && v.links === 30 && v.sum === '30 beantwortet · 0 offen · 1 markiert' && v.flagged.length === 1 && /markiert/.test(v.flagged[0]) && v.noH, `palette open ${JSON.stringify(v)}`);
+      assert.equal(await evaluate(`document.activeElement && document.activeElement.classList.contains('kx-palette-toggle')`), true, 'focus stays on the toggle');
+      await A.a11y('Lesen item palette');
+      const target = await evaluate(`(() => { const a = [...document.querySelectorAll('#kx-palette a[data-palette-jump]')][20]; const id = a.getAttribute('href').slice(1); a.click(); return id; })()`);
+      await sleep(400);
+      const land = await evaluate(`(() => { const it = document.getElementById(${JSON.stringify(target)}); const r = it.getBoundingClientRect(); return { closed: !document.getElementById('kx-palette') && document.querySelector('.kx-palette-toggle').getAttribute('aria-expanded') === 'false',
+        focusIn: it.contains(document.activeElement), top: Math.round(r.top), bar: Math.round(document.querySelector('.kx-bar').getBoundingClientRect().bottom) }; })()`);
+      assert.ok(land.closed && land.focusIn && land.top >= land.bar - 1, `palette jump ${JSON.stringify(land)}`);
+      await vp(360, 640, true); await sleep(200);
+      await evaluate(`document.querySelector('.kx-palette-toggle').click()`); await sleep(150); v = await pal();
+      const scrolls = await evaluate(`(() => { const p = document.getElementById('kx-palette'); return p.scrollHeight > p.clientHeight && getComputedStyle(p).overflowY === 'auto'; })()`);
+      // on a phone the open overview takes most of the screen (it closes on a jump); it scrolls on its own and leaves content below
+      assert.ok(v.open && v.noH && v.bar <= 640 - 100 && scrolls, `palette on a phone ${JSON.stringify({ ...v, scrolls })}`);
+      await evaluate(`document.querySelector('.kx-palette-toggle').click()`); await vp(1280, 800, false); await sleep(200);
+    }
     await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]');
     // a single-module attempt goes straight from the confirmed submission to its result (no extra "Abschließen" step)
     await waitFor(`document.querySelector('.kx-result table')`, 15000, 'result');

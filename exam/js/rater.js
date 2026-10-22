@@ -67,6 +67,12 @@ function unitForm(u, round, data) {
     + `<div class="kx-actions"><button type="submit" class="kx-btn"${mine ? ' disabled' : ''}>Bewertung speichern</button></div></fieldset></form>`;
 }
 
+function writingArticle(w, units) {
+  return `<article class="kx-stim"><h3 class="kx-stim-label">${esc((units.find((u) => u.item_id === w.item_id) || {}).stem || w.item_id)}</h3>`
+    + `<p class="kx-meta">${esc(w.words)} Wörter${w.target_words ? ` (Ziel ca. ${esc(w.target_words)})` : ''}${w.below_half_target ? ' · unter der Hälfte des Ziels' : ''}</p>`
+    + `<p class="kx-written" lang="de">${esc(w.text).replace(/\n/g, '<br>')}</p></article>`;
+}
+
 async function showAttempt(attemptId, note = '') {
   const seq = ++renderSeq;
   let d;
@@ -77,17 +83,25 @@ async function showAttempt(attemptId, note = '') {
     const units = d.units.filter((u) => u.module === m.module);
     const round = ratingRound(d, m.module);
     const status = m.status !== 'submitted' ? 'noch nicht abgegeben' : STATUS[m.score_status] || 'wartet auf Bewertung';
-    const material = m.module === 'schreiben'
-      ? d.writing.map((w) => `<article class="kx-stim"><h3 class="kx-stim-label">${esc((units.find((u) => u.item_id === w.item_id) || {}).stem || w.item_id)}</h3>`
-        + `<p class="kx-meta">${esc(w.words)} Wörter${w.target_words ? ` (Ziel ca. ${esc(w.target_words)})` : ''}${w.below_half_target ? ' · unter der Hälfte des Ziels' : ''}</p>`
-        + `<p class="kx-written" lang="de">${esc(w.text).replace(/\n/g, '<br>')}</p></article>`).join('') || '<p>Kein Text abgegeben.</p>'
+    const rating = m.status === 'submitted' && m.score_status !== 'final';
+    /* Schreiben while rating: each text sits beside its own criteria (side by side on wide screens), so the rater never
+       scrolls between a long text and the bands */
+    const paired = rating && m.module === 'schreiben';
+    const material = paired ? ''
+      : m.module === 'schreiben'
+      ? d.writing.map((w) => writingArticle(w, units)).join('') || '<p>Kein Text abgegeben.</p>'
       : (d.topic ? `<p class="kx-meta">Teil 2 – gewähltes Thema: <strong>${d.topic.label ? esc(d.topic.label) : 'kein Thema gewählt'}</strong>.${d.topic.label ? ' In Teil 3 präsentierte der Partner das andere Thema.' : ''}</p>` : '')
         + `<div class="kx-table-wrap"><table class="kx-table"><caption>Aufnahmen</caption><thead><tr><th scope="col">Teil</th><th scope="col">Beitrag</th><th scope="col">Status</th><th scope="col">Dauer</th><th scope="col">Anhören</th></tr></thead><tbody>`
         + d.recordings.map((r) => `<tr><td>${esc(r.part)}</td><td>${esc(r.turn)}</td><td>${esc(r.status)}</td><td>${r.duration_ms ? esc(Math.round(r.duration_ms / 1000)) + ' s' : '–'}</td>`
           + `<td class="kx-play-cell">${m.status === 'submitted' && r.chunks > 0 ? `<button type="button" class="kx-btn kx-btn-quiet" data-act="play" data-part="${esc(r.part)}" data-turn="${esc(r.turn)}">Aufnahme laden</button>` : '–'}</td></tr>`).join('')
         + '</tbody></table></div><p class="kx-meta">Fehlende Teile einer Aufnahme sind technische Lücken, kein Schweigen.</p>';
-    const forms = m.status === 'submitted' && m.score_status !== 'final'
-      ? `<p>Ihre Runde: <strong>${esc(round)}</strong></p>${units.map((u) => unitForm(u, round, d)).join('')}` : '';
+    const forms = !rating ? ''
+      : `<p>Ihre Runde: <strong>${esc(round)}</strong></p>` + (paired
+        ? units.map((u) => {
+          const w = d.writing.find((x) => x.item_id === u.item_id);
+          return `<div class="kx-rate-pair">${w ? writingArticle(w, units) : `<article class="kx-stim"><h3 class="kx-stim-label">${esc(u.stem || u.item_id)}</h3><p>Kein Text abgegeben.</p></article>`}${unitForm(u, round, d)}</div>`;
+        }).join('') + d.writing.filter((w) => !units.some((u) => u.item_id === w.item_id)).map((w) => writingArticle(w, units)).join('')
+        : units.map((u) => unitForm(u, round, d)).join(''));
     return `<section class="kx-part" data-module="${esc(m.module)}"><h2>${esc(MODULE_LABELS[m.module])}</h2><p class="kx-rate-status">Status: ${esc(status)}`
       + `${m.points != null ? ` · ${esc(m.points)} / ${esc(m.max_points)} Punkte` : ''}</p>${material}${forms}</section>`;
   }).join('');

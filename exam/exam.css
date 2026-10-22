@@ -133,7 +133,15 @@ p { margin: 0 0 16px; }
 .kx-result-actions { max-width: 680px; margin: 0 auto 36px; }
 .kx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .kx-rated .kx-table-wrap { margin-top: 16px; }
-.kx-rater { max-width: 860px; margin: 24px auto; }
+.kx-rater { max-width: 1080px; margin: 24px auto; }
+.kx-rater > h1, .kx-rater .kx-rate-status, .kx-rater .kx-table-wrap { max-width: 860px; }
+.kx-rate-pair { margin-bottom: 24px; }
+/* Schreiben rating: the learner's text beside its criteria on wide screens; a long text scrolls in its own column */
+@media (min-width: 1024px) {
+  .kx-rate-pair { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 24px; align-items: start; }
+  .kx-rate-pair > .kx-stim { margin-bottom: 0; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; }
+  .kx-rate-pair > .kx-rate .kx-item:first-child { margin-top: 0; }
+}
 .kx-queue { list-style: none; padding: 0; }
 .kx-queue-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
 .kx-written { white-space: normal; }

@@ -7,7 +7,7 @@ import { Autosave } from './autosave.js';
 import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, adUsage, usedText, adMatches, notesPanel, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
-import { phaseAt, phaseLabel, ControlledPlayer } from './hoeren.js';
+import { phaseAt, phaseLabel, ControlledPlayer, volumeControl, clampVolume, VOLUME_KEY } from './hoeren.js';
 import { ChunkQueue, TurnRecorder } from './recorder.js';
 import { speakingPhaseAt, prepEndsAt, topicItems, chosenTopic } from './sprechen.js';
 import { createSpeakingDriver } from './sprechen-driver.js';
@@ -334,7 +334,7 @@ function paint() {
   const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p>'
     + '<div class="kx-level" id="kx-level" hidden aria-hidden="true"><span class="kx-level-label">Mikrofon</span><span class="kx-level-bar"><span class="kx-level-fill"></span></span></div>'
     + '<p class="kx-silence" id="kx-silence" role="status" aria-live="polite"></p><div class="kx-alerts" id="kx-alerts"></div>'
-    : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
+    : S.module === 'hoeren' ? volumeControl(savedVolume() * 100) + '<div class="kx-alerts" id="kx-alerts"></div>' : '';
   // live status (Hören/Sprechen phase, "Audio starten", time warnings) lives in the sticky bar: it must stay visible
   // while the learner is scrolled down to the questions; empty elements take no space
   screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div>${S.module === 'sprechen' ? '<div class="kx-speak-layout">' : ''}<main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked, flags: S.flags, multiplier: S.attempt.time_multiplier || 1 })}</main>${S.module === 'sprechen' ? notesPanel(loadNotes(S.attempt.attempt_id)) + '</div>' : ''}`
@@ -397,13 +397,15 @@ function tick() {
 async function refresh() { try { S.attempt = await api.getAttempt(S.attempt.attempt_id); S.module = null; route(); } catch (e) { fail(e); } }
 
 /* ---------- Hören ---------- */
+function savedVolume() { try { const v = localStorage.getItem(VOLUME_KEY); return v == null ? 1 : clampVolume(v); } catch { return 1; } }
 async function runHoeren() {
   const id = S.attempt.attempt_id;
   const plan = S.pkg.timing.plan;
   const lastPart = Math.max(...plan.phases.map((p) => p.part || 0));
   const assets = [...new Set(plan.phases.filter((p) => p.kind === 'play').map((p) => p.asset_id))];
   const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const player = new ControlledPlayer(ctx);
+  const player = new ControlledPlayer(ctx, savedVolume());
+  S.player = player;
   const ph = $('#kx-phase');
   const rendered = new Set([...document.querySelectorAll('#kx-main .kx-part')].map((el) => Number(el.dataset.part)));
   ph.textContent = 'Prüftöne werden geladen …';
@@ -472,7 +474,7 @@ async function runHoeren() {
 
   let lastIndex = -2;
   const loop = async () => {
-    if (S.module !== 'hoeren') { player.stop(); S.onPageHide = null; S.gestureResolve = null; return; }
+    if (S.module !== 'hoeren') { player.stop(); S.player = null; S.onPageHide = null; S.gestureResolve = null; return; }
     m = moduleState();
     const at = phaseAt(plan, m.plan_started_at, clock.serverNow(), m.plan_shift_ms || 0);
     const wanted = at.state === 'finished' ? lastPart : at.phase ? (at.phase.part ?? lastPart) : 0;
@@ -687,6 +689,12 @@ app.addEventListener('change', (e) => {
 app.addEventListener('input', (e) => {
   const el = e.target;
   if (el.matches && el.matches('[data-ad-filter]')) { applyAdFilter(el.closest('.kx-task')); return; }
+  if (el.matches && el.matches('[data-volume]')) {   // Hören master volume: never an answer, never a pause or seek
+    const v = clampVolume(el.value / 100); if (S.player) S.player.setVolume(v);
+    el.setAttribute('aria-valuetext', `${el.value} %`); const out = el.parentElement.querySelector('.kx-volume-val'); if (out) out.textContent = `${el.value} %`;
+    try { localStorage.setItem(VOLUME_KEY, String(v)); } catch { /* this page only */ }
+    return;
+  }
   if (el.matches && el.matches('[data-notes]')) { saveNotes(S.attempt.attempt_id, el.value); return; }   // notes are never an answer
   if (el.tagName !== 'TEXTAREA' || !S.autosave) return;
   const wc = document.querySelector(`[data-wc-for="${CSS.escape(el.id)}"]`); if (wc) wc.textContent = countWords(el.value);

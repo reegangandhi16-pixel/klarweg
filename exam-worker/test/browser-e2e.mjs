@@ -506,10 +506,19 @@ async function runDefaultAutoplayHoeren(viewport) {
       while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(100); }
       throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
     };
+    await send('Page.addScriptToEvaluateOnNewDocument', { source: `window.__gains = []; { const cg = (window.AudioContext || window.webkitAudioContext).prototype.createGain;
+      (window.AudioContext || window.webkitAudioContext).prototype.createGain = function () { const g = cg.apply(this, arguments); window.__gains.push(g); return g; }; }` });
     await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
 
     // 1. blocked audio does not block the module: prompt shown, Teil 2 opens, answers save, nothing is played
     await waitFor(`document.querySelector('[data-act="audio-start"]')`, 15000, '"Audio starten" offered (Hören)');
+    // AUDIO-SPEC A4: the only control is a master volume in the sticky bar; it changes the gain, nothing else
+    const vol = await evaluate(`(() => { const r = document.getElementById('kx-volume'); const before = { value: r.value, inBar: !!r.closest('.kx-bar'), label: r.labels[0].textContent, text: r.getAttribute('aria-valuetext') };
+      r.value = '40'; r.dispatchEvent(new Event('input', { bubbles: true }));
+      return { before, text: r.getAttribute('aria-valuetext'), shown: r.parentElement.querySelector('.kx-volume-val').textContent, stored: localStorage.getItem('kx-volume'),
+        gains: window.__gains.map((g) => Math.round(g.gain.value * 100) / 100), noH: document.documentElement.scrollWidth <= innerWidth + 1 }; })()`);
+    assert.ok(vol.before.value === '100' && vol.before.inBar && vol.before.label === 'Lautstärke' && vol.before.text === '100 %' && vol.text === '40 %' && vol.shown === '40 %'
+      && vol.stored === '0.4' && vol.gains.includes(0.4) && vol.noH, `${viewport.name}: Hören volume ${JSON.stringify(vol)}`);
     await waitFor(`document.querySelector('.kx-part[data-part="2"]')`, 8000, 'Teil 2 rendered without a click');
     assert.equal(await evaluate(`document.querySelector('[data-act="audio-start"]').closest('[role="alert"]') !== null`), true, 'accessible alert');
     assert.equal(await evaluate(`document.activeElement && document.activeElement.dataset.act`), 'audio-start', 'the action receives focus');

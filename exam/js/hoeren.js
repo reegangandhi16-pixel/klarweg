@@ -31,10 +31,22 @@ export function phaseLabel(p) {
   }
 }
 
+export const clampVolume = (v) => (Number.isFinite(Number(v)) ? Math.min(1, Math.max(0, Number(v))) : 1);
+export const VOLUME_KEY = 'kx-volume';   // a per-device convenience, like a system volume; not exam data
+export function volumeControl(percent) {
+  const p = Math.round(clampVolume(percent / 100) * 100);
+  return `<div class="kx-volume"><label for="kx-volume">Lautstärke</label><input type="range" id="kx-volume" data-volume min="0" max="100" step="5" value="${p}" aria-valuetext="${p} %"><span class="kx-volume-val" aria-hidden="true">${p} %</span></div>`;
+}
+
 /* Browser-only controlled player: decodes bytes once, plays a phase exactly
    once from the start, no UI controls. Returns a promise for completion. */
 export class ControlledPlayer {
-  constructor(ctx) { this.ctx = ctx; this.buffers = new Map(); this.current = null; }
+  constructor(ctx, volume = 1) {
+    this.ctx = ctx; this.buffers = new Map(); this.current = null;
+    /* AUDIO-SPEC A4: a master gain is the learner's only control (no pause, seek or speed) */
+    this.gain = ctx.createGain(); this.gain.gain.value = clampVolume(volume); this.gain.connect(ctx.destination);
+  }
+  setVolume(v) { this.gain.gain.value = clampVolume(v); }
   async preload(assetId, bytes) { this.buffers.set(assetId, await this.ctx.decodeAudioData(bytes.slice(0))); }
   isReady(ids) { return ids.every((id) => this.buffers.has(id)); }
   play(assetId, offsetMs = 0) {
@@ -43,7 +55,7 @@ export class ControlledPlayer {
     this.stop();
     const src = this.ctx.createBufferSource();
     src.buffer = buf; src.playbackRate.value = 1;
-    src.connect(this.ctx.destination);
+    src.connect(this.gain);
     this.current = src;
     return new Promise((resolve) => { src.onended = () => { if (this.current === src) this.current = null; resolve(); }; src.start(0, Math.max(0, offsetMs) / 1000); });
   }

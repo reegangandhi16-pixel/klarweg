@@ -116,16 +116,27 @@ p { margin: 0 0 16px; }
 .kx-stim[id]:target { box-shadow: inset 4px 0 0 var(--accent); }
 .kx-stim-jump { display: inline-flex; align-items: center; min-height: 44px; margin: -8px 0 4px; font: 500 14px/1.2 var(--font-ui); color: var(--accent); }
 .kx-task-texts, .kx-task-items { scroll-margin-top: calc(var(--kx-bar-h, 120px) + 8px); }
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .kx-split-toggle { position: sticky; bottom: 96px; display: flex; justify-content: center; gap: 8px; margin-top: 16px; pointer-events: none; }
   .kx-split-toggle a { pointer-events: auto; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); color: var(--ink-primary); font-weight: 500; text-decoration: none; box-shadow: 0 1px 2px rgba(14, 14, 16, 0.06), 0 4px 12px rgba(14, 14, 16, 0.08); }
 }
-/* Lesen: texts beside the tasks on wide screens; the texts column scrolls on its own below the sticky bar */
-@media (min-width: 1024px) {
+/* split tasks (Lesen texts, Schreiben post) beside the tasks from 768 px; the texts column scrolls on its own below the sticky bar */
+@media (min-width: 768px) {
   .kx-split-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
   .kx-task-texts { position: sticky; top: calc(var(--kx-bar-h, 120px) + 8px); max-height: calc(100vh - var(--kx-bar-h, 120px) - 24px); overflow-y: auto; padding-right: 8px; }
   .kx-task-texts .kx-stim:last-child { margin-bottom: 0; }
   .kx-task-items .kx-item:first-child { border-top: 0; padding-top: 0; }
+}
+/* tablet (768–1023 px, ENGINE §9.1): split pane like desktop, and the texts column can be collapsed so the tasks get
+   the full width; the collapse control exists only at this width (desktop always shows both, phones stack) */
+.kx-split-collapse { display: none; }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .kx-split-collapse { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin: 0 0 16px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink-primary); font: 500 14px/1.2 var(--font-ui); cursor: pointer; }
+  .kx-split-collapse::after { content: "· eingeblendet"; content: "· eingeblendet" / ""; color: var(--ink-secondary); }
+  .kx-split-collapse[aria-expanded="false"]::after { content: "· ausgeblendet"; content: "· ausgeblendet" / ""; }
+  .kx-split-grid { gap: 16px; }
+  .kx-split.kx-collapsed .kx-split-grid { grid-template-columns: minmax(0, 1fr); }
+  .kx-split.kx-collapsed .kx-task-texts { display: none; }
 }
 .kx-intro-facts { font: 500 14px/1.4 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-secondary); }
 .kx-intro-rules { margin: 0 0 16px; padding-left: 24px; }

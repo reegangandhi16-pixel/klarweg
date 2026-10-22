@@ -185,6 +185,12 @@ function intro(module) {
   }
 }
 
+/* tablet split pane: collapse or expand the texts column of one task (CSS applies it only at 768–1023 px) */
+function setTextsExpanded(split, expanded) {
+  split.classList.toggle('kx-collapsed', !expanded);
+  const b = split.querySelector('.kx-split-collapse'); if (b) b.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
+
 /* item flags live on this device only (per attempt); storage may be unavailable (private mode), then they last
    for this page only */
 const flagKey = (attemptId) => `kx-flags:${attemptId}`;
@@ -597,9 +603,18 @@ app.addEventListener('input', (e) => {
   updateProgress();
 });
 app.addEventListener('click', async (e) => {
+  /* a jump to a text inside a collapsed tablet panel opens the panel first (the default scroll then finds it) */
+  const jump = e.target.closest('a[href^="#kx-"]');
+  if (jump) {
+    const target = document.getElementById(jump.getAttribute('href').slice(1));
+    const split = target && target.closest('.kx-task-texts') && target.closest('.kx-split.kx-collapsed');
+    if (split) setTextsExpanded(split, true);
+    return;
+  }
   const b = e.target.closest('button'); if (!b) return;
   const act = b.dataset.act;
   try {
+    if (act === 'toggle-texts') { const split = b.closest('.kx-split'); setTextsExpanded(split, split.classList.contains('kx-collapsed')); return; }
     if (b.dataset.flag) {   // "Zur Kontrolle markieren": local reminder only, nothing is sent
       const on = !S.flags.has(b.dataset.flag);
       if (on) S.flags.add(b.dataset.flag); else S.flags.delete(b.dataset.flag);

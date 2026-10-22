@@ -740,7 +740,7 @@ test('LESEN LAYOUT: texts and tasks are split into two columns (scrollable, labe
   assert.equal(/kx-split/.test(r.module(pkgFor(build, 'hoeren'), {}, {})), false, 'Hören is never split');
   assert.equal(/kx-split/.test(r.module(pkgFor(build, 'lesen'), {}, { split: false })), false, 'can be turned off');
   const css = read('exam/exam.css');
-  assert.match(css, /@media \(min-width: 1024px\) {\s*\.kx-split-grid { display: grid;/);
+  assert.match(css, /@media \(min-width: 768px\) {\s*\.kx-split-grid { display: grid;/);
   assert.match(css, /\.kx-task-texts { position: sticky; top: calc\(var\(--kx-bar-h, 120px\) \+ 8px\); max-height: calc\(100vh - var\(--kx-bar-h, 120px\) - 24px\); overflow-y: auto;/);
 });
 
@@ -925,7 +925,7 @@ test('SCHREIBEN EDITOR (ENGINE §9.4): plain textarea without browser writing ai
   assert.match(html, /aria-label="ä einfügen">ä</);
 });
 
-test('LESEN SPLIT (ENGINE §9.1): each split task has a Text / Aufgaben link pair to its own columns; CSS shows it only below 1024 px, sticky', async () => {
+test('LESEN SPLIT (ENGINE §9.1): each split task has a Text / Aufgaben link pair to its own columns; CSS shows it only below 768 px, sticky', async () => {
   const { createRenderer } = await import('../js/render.js');
   const pkg = { module: 'lesen', parts: [{ part: 1, tasks: [{ task_id: 'tsk:b1:x-l1', instructions: 'Lesen Sie.', stimuli: [{ kind: 'text', text: 'Ein Text.' }],
     items: [{ item_id: 'itm:b1:x-l1-1', interaction: 'binary_choice', stem: 'Richtig?', options: [{ option_id: 'r', label: 'Richtig' }, { option_id: 'f', label: 'Falsch' }] }] }] }] };
@@ -934,7 +934,7 @@ test('LESEN SPLIT (ENGINE §9.1): each split task has a Text / Aufgaben link pai
   assert.match(html, /<nav class="kx-split-toggle" aria-label="Teil 1: Texte und Aufgaben"><a href="#kx-texts-tsk_b1_x-l1">Text<\/a><a href="#kx-items-tsk_b1_x-l1">Aufgaben<\/a><\/nav><\/div>/);
   const css = read('exam/exam.css');
   assert.match(css, /\.kx-split-toggle { display: none; }/);
-  assert.match(css, /@media \(max-width: 1023px\) {\s*\.kx-split-toggle { position: sticky; bottom: 96px; display: flex;/);
+  assert.match(css, /@media \(max-width: 767px\) {\s*\.kx-split-toggle { position: sticky; bottom: 96px; display: flex;/);
   assert.match(css, /\.kx-split-toggle a { pointer-events: auto;[^}]*min-height: 44px/);
 });
 
@@ -985,4 +985,23 @@ test('LESEN TEIL 4 (ENGINE §9.1): every item name links to its own comment in a
   const twin = { module: 'lesen', parts: [{ part: 4, tasks: [{ task_id: 't', instructions: 'x', stimuli: [{ kind: 'text', label: 'Anna, 30', text: 'a' }, { kind: 'text', label: 'Anna, 30', text: 'b' }],
     items: [{ item_id: 'i', interaction: 'binary_choice', stem: '20. Anna, 30', options: opts }] }] }] };
   assert.equal(/kx-stim-jump|kx-stim" id=/.test(r.module(twin, {}, {})), false, 'an ambiguous name links nowhere');
+});
+
+test('TABLET SPLIT (ENGINE §9.1): 768–1023 px split pane with a collapsible texts column — disclosure button (fixed label, aria-expanded, aria-controls), CSS only at tablet width, jumps open a collapsed panel', async () => {
+  const { createRenderer: cr } = await import('../js/render.js');
+  const html = cr().module(pkgFor(build, 'lesen'), {}, {});
+  const buttons = [...html.matchAll(/<button type="button" class="kx-split-collapse" data-act="toggle-texts" aria-expanded="true" aria-controls="(kx-texts-[^"]+)">Texte zu Teil (\d)<\/button><div class="kx-split-grid">/g)];
+  assert.equal(buttons.length, (html.match(/class="kx-task kx-split"/g) || []).length, 'one collapse control per split task');
+  for (const [, id] of buttons) assert.ok(html.includes(`<div class="kx-task-texts" id="${id}"`), `controls ${id}`);
+  const sw = cr().module(pkgFor(build, 'schreiben'), {}, {});
+  assert.match(sw, /aria-controls="kx-texts-[^"]+">Beitrag zu Teil 2<\/button>/);
+  const css = read('exam/exam.css');
+  assert.match(css, /\.kx-split-collapse { display: none; }/);
+  const tablet = css.slice(css.indexOf('@media (min-width: 768px) and (max-width: 1023px) {'));
+  assert.match(tablet, /^@media \(min-width: 768px\) and \(max-width: 1023px\) {\s*\.kx-split-collapse { display: inline-flex;[^}]*min-height: 44px/);
+  assert.match(tablet, /\.kx-split\.kx-collapsed \.kx-split-grid { grid-template-columns: minmax\(0, 1fr\); }\s*\.kx-split\.kx-collapsed \.kx-task-texts { display: none; }\s*}/);
+  assert.ok(css.indexOf('@media (min-width: 768px) {\n  .kx-split-grid') < css.indexOf('@media (min-width: 768px) and (max-width: 1023px)'), 'tablet rules come after the general split rules');
+  const main = read('exam/js/main.js');
+  assert.match(main, /if \(act === 'toggle-texts'\) \{ const split = b\.closest\('\.kx-split'\); setTextsExpanded\(split, split\.classList\.contains\('kx-collapsed'\)\); return; \}/);
+  assert.match(main, /const split = target && target\.closest\('\.kx-task-texts'\) && target\.closest\('\.kx-split\.kx-collapsed'\);\s*if \(split\) setTextsExpanded\(split, true\);/);
 });

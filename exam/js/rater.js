@@ -3,7 +3,7 @@
    validates every band. This page only renders what /admin/… returns and posts one rating per rubric unit. */
 import { createApi, ExamApiError } from './api.js';
 import { esc } from './render.js';
-import { ratingRound, unitRatedByMe, missingCriteria, CRITERION_LABELS, ERROR_TEXT, mfaVerifyView, mfaEnrolStartView, mfaEnrolView, mfaCodesView } from './rating.js';
+import { ratingRound, unitRatedByMe, missingCriteria, CRITERION_LABELS, ERROR_TEXT, mfaVerifyView, mfaEnrolStartView, mfaEnrolView, mfaCodesView, disagreementSection } from './rating.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const app = $('#kx-app');
@@ -50,8 +50,19 @@ async function showQueue(note = '') {
     + ` <button type="button" class="kx-btn kx-btn-quiet" data-act="open" data-attempt="${esc(a.attempt_id)}">Öffnen</button></li>`).join('');
   screen(`<main class="kx-rater"><p class="kx-eyebrow">Nur für Bewertende · synthetische Versuche</p><h1>Bewertung</h1>`
     + (note ? `<p class="kx-announce" role="status">${esc(note)}</p>` : '')
-    + (rows ? `<ul class="kx-queue">${rows}</ul>` : '<p>Keine Versuche warten auf Bewertung.</p>') + '</main>');
+    + (rows ? `<ul class="kx-queue">${rows}</ul>` : '<p>Keine Versuche warten auf Bewertung.</p>') + '<div id="kx-lead-slot"></div></main>');
+  /* lead raters / exam admins also see disagreements to review; everyone else gets 403 and sees nothing */
+  try { const d = await api.ratingDisagreements(); const slot = app.querySelector('#kx-lead-slot'); if (slot) slot.innerHTML = disagreementSection(d, esc); } catch { /* not a lead */ }
 }
+app.addEventListener('submit', async (e) => {
+  const f = e.target.closest('form.kx-flag-review'); if (!f) return;
+  e.preventDefault();
+  const msg = f.querySelector('.kx-rate-msg'), btn = f.querySelector('button[type=submit]'), note = f.querySelector('input[name="note"]').value.trim();
+  if (note.length < 3) { msg.textContent = 'Bitte eine Notiz (mindestens 3 Zeichen) eingeben.'; f.querySelector('input').focus(); return; }
+  btn.disabled = true;
+  try { await api.reviewDisagreement(f.dataset.key, note); await showQueue('Abweichung als geprüft markiert.'); }
+  catch (err) { if (mfaNeeded(err)) return showMfa(); if (mfaDown(err)) return showUnavailable(); msg.textContent = errorText(err); btn.disabled = false; }
+});
 
 function unitForm(u, round, data) {
   const mine = unitRatedByMe(u, round);

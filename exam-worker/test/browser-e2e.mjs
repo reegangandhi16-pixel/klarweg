@@ -895,6 +895,27 @@ async function runPractice() {
     res = await text();
     assert.equal(/in Bewertung/.test(res), false, 'nothing awaits rating any more');
     assert.match(res, /3 von 4 bewerteten Modulen bestanden \(Klarweg-Simulation\)\./, 'summary: modules passed (Lesen is answered 10/10/10 here and fails), never a sum of points');
+    // SCORING §4.4 lead review: a 2-band disagreement (planted in the stored round-2 bands after scoring; the score is
+    // computed already) appears only for the lead rater, needs a note, is audited and then leaves the list
+    {
+      const row = await dev.env.DB.prepare("SELECT id, bands_json FROM ratings WHERE attempt_id = ?1 AND item_id = 'sprechen:pron' AND round = 2").bind(attempt).first();
+      const r1b = JSON.parse((await dev.env.DB.prepare("SELECT bands_json FROM ratings WHERE attempt_id = ?1 AND item_id = 'sprechen:pron' AND round = 1").bind(attempt).first()).bands_json).aussprache;
+      const BANDS5 = ['A', 'B', 'C', 'D', 'E'], i1 = BANDS5.indexOf(r1b), far = BANDS5[i1 + 2 <= 4 ? i1 + 2 : i1 - 2];   // two bands away
+      await dev.env.DB.prepare('UPDATE ratings SET bands_json = ?2 WHERE id = ?1').bind(row.id, JSON.stringify({ aussprache: far })).run();
+      await as('rater1', 'rater.html'); await waitFor(`/Keine Versuche warten|Öffnen/.test(document.body.innerText)`, 10000, 'rater queue');
+      await sleep(500); assert.equal(await evaluate(`!!document.querySelector('.kx-lead-review')`), false, 'a plain rater sees no lead review');
+      await as('lead', 'rater.html');
+      await waitFor(`document.querySelector('.kx-lead-review form.kx-flag-review')`, 15000, 'lead review listed');
+      assert.match(await evaluate(`document.querySelector('.kx-lead-review').innerText`), new RegExp(`Aussprache · Sprechen · Aussprache \\(ganzes Modul\\) · Runde 1: ${r1b}, Runde 2: ${far} \\(2 Bänder\\)`));
+      await a11y('lead review of a rating disagreement');
+      await evaluate(`document.querySelector('form.kx-flag-review button').click()`);
+      await waitFor(`/mindestens 3 Zeichen/.test(document.querySelector('form.kx-flag-review .kx-rate-msg').textContent)`, 5000, 'note required');
+      await evaluate(`(() => { const f = document.querySelector('form.kx-flag-review'); f.querySelector('input').value = 'Rückmeldung an Rater 2'; f.requestSubmit(); })()`);
+      await waitFor(`/Abweichung als geprüft markiert\./.test(document.body.innerText) && /Keine offenen Abweichungen\./.test(document.body.innerText)`, 15000, 'reviewed');
+      assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'disagreement_reviewed'").first()).n, 1);
+      await as('learner', ''); await click(`.kx-history [data-act="last-result"][data-attempt="${attempt}"]`);
+      await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText)`, 15000, 'learner result again');
+    }
     // rated feedback per task and criterion, and per-part lines in the reviews
     await waitFor(`document.querySelectorAll('.kx-rated').length === 2`, 10000, 'rated feedback for Schreiben and Sprechen');
     await a11y('final result with rated feedback');

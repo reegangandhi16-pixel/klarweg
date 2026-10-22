@@ -234,6 +234,10 @@ p { margin: 0 0 16px; }
   .kx-rate-pair > .kx-rate .kx-item:first-child { margin-top: 0; }
 }
 .kx-queue { list-style: none; padding: 0; }
+.kx-lead-review { margin-top: 36px; }
+.kx-flag-review { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; width: 100%; }
+.kx-flag-review label { width: 100%; font-weight: 500; }
+.kx-flag-review input { flex: 1 1 240px; min-height: 44px; font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
 .kx-queue-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
 .kx-written { white-space: normal; }
 .kx-rate select { min-height: 44px; font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); max-width: 100%; }

@@ -73,3 +73,16 @@ export function mfaCodesView(esc, codes) {
     + `<form class="kx-mfa" data-mfa="codes-saved" novalidate><div class="kx-item"><label><input type="checkbox" id="kx-mfa-saved" required> Ich habe die Codes sicher gespeichert.</label></div>`
     + `<p class="kx-rate-msg" role="alert"></p><div class="kx-actions"><button type="submit" class="kx-btn">Weiter zur Bewertung</button></div></form></main>`;
 }
+
+/* Lead review of rating disagreements (SCORING §4.4): shown only to lead raters / exam admins (the server decides). */
+export function disagreementSection(d, esc) {
+  if (!d || !d.flags) return '';
+  const rows = d.flags.map((f) => `<li class="kx-queue-row kx-flag-row"><span><strong>${esc(CRITERION_LABELS[f.criterion] || f.criterion)}</strong> · ${esc(f.module === 'sprechen' ? 'Sprechen' : 'Schreiben')} · ${esc(f.item_id === 'sprechen:pron' ? 'Aussprache (ganzes Modul)' : f.item_id)}`
+    + ` · Runde 1: ${esc(f.r1)}, Runde 2: ${esc(f.r2)} (${esc(f.diff)} Bänder) <span class="kx-meta">${esc(f.attempt_id.slice(0, 12))}…</span></span>`
+    + `<form class="kx-flag-review" data-key="${esc(f.key)}"><label for="kx-fr-${esc(f.key.replace(/[^A-Za-z0-9_-]/g, '_'))}">Notiz zur Prüfung</label>`
+    + `<input id="kx-fr-${esc(f.key.replace(/[^A-Za-z0-9_-]/g, '_'))}" name="note" required minlength="3" maxlength="500"><button type="submit" class="kx-btn kx-btn-quiet">Als geprüft markieren</button>`
+    + '<p class="kx-rate-msg" role="status"></p></form></li>').join('');
+  return `<section class="kx-lead-review" aria-labelledby="kx-lead-title"><h2 id="kx-lead-title">Bewertungsabweichungen (Lead-Prüfung)</h2>`
+    + `<p>Kriterien, bei denen die beiden Bewertungen um mindestens ${esc(d.threshold)} Bänder abweichen. Nur zur Qualitätssicherung: das Ergebnis folgt immer der offiziellen Verrechnung. Erst nach der endgültigen Wertung sichtbar.</p>`
+    + (rows ? `<ul class="kx-queue">${rows}</ul>` : '<p>Keine offenen Abweichungen.</p>') + (d.more ? '<p class="kx-meta">Weitere Abweichungen nach der Prüfung dieser Einträge.</p>' : '') + '</section>';
+}

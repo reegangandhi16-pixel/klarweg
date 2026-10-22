@@ -51,8 +51,8 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
   if (!FORMS[form]) throw new Error(`unknown form ${form} (${Object.keys(FORMS).join('|')})`);
   const h = makeEnv({ formDirs: FORMS[form], flags });   // flags: Worker vars on top of the test defaults, e.g. EXAM_MODULE_ONLY
   await grant(h.env, user);
-  const users = { learner: user, rater1: `usr_${crypto.randomUUID()}`, rater2: `usr_${crypto.randomUUID()}`, outsider: `usr_${crypto.randomUUID()}`, access: `usr_${crypto.randomUUID()}` };
-  await role(h.env, users.rater1, 'rater'); await role(h.env, users.rater2, 'rater'); await role(h.env, users.access, 'exam_admin');
+  const users = { learner: user, rater1: `usr_${crypto.randomUUID()}`, rater2: `usr_${crypto.randomUUID()}`, outsider: `usr_${crypto.randomUUID()}`, access: `usr_${crypto.randomUUID()}`, lead: `usr_${crypto.randomUUID()}` };
+  await role(h.env, users.rater1, 'rater'); await role(h.env, users.rater2, 'rater'); await role(h.env, users.access, 'exam_admin'); await role(h.env, users.lead, 'lead_rater');
   const aliasFor = (req) => { const m = /(?:^|;\s*)kx-dev-as=([a-z0-9]+)/.exec(req.headers.cookie || ''); return (m && users[m[1]]) ? m[1] : 'learner'; };
   const userFor = (req) => users[aliasFor(req)];
   const access = mfa || proxy ? await makeAccess(users) : null;

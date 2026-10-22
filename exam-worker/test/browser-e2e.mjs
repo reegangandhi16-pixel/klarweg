@@ -1713,6 +1713,32 @@ async function runLesenOnly() {
       assert.ok(v.open && v.noH && v.bar <= 640 - 100 && scrolls, `palette on a phone ${JSON.stringify({ ...v, scrolls })}`);
       await evaluate(`document.querySelector('.kx-palette-toggle').click()`); await vp(1280, 800, false); await sleep(200);
     }
+    // GOETHE-B1-DIGITAL §4: Browser Back does not leave the running exam silently — a modal asks; staying keeps
+    // everything, leaving really leaves, and coming back resumes the same running attempt
+    {
+      const dlg = () => evaluate(`(() => { const d = document.getElementById('kx-leave'); return { open: !!d && d.open, focus: document.activeElement && document.activeElement.dataset.leave || null, text: d ? d.innerText : '', main: !!document.getElementById('kx-main') }; })()`);
+      assert.equal(await evaluate(`!!document.querySelector('dialog[open]')`), false, 'in-page # links (fragment navigations) never opened the dialog');
+      // Back walks through the in-page #link entries first (normal browser history); the dialog appears when Back would
+      // leave the exam page
+      for (let i = 0; i < 40 && !(await evaluate(`!!document.getElementById('kx-leave')?.open`)); i++) { await evaluate('history.back()'); await sleep(150); }
+      await waitFor(`document.getElementById('kx-leave')?.open`, 5000, 'leave dialog on Back');
+      let d = await dlg();
+      assert.ok(d.open && d.focus === 'stay' && /Prüfung verlassen\?/.test(d.text) && /Die Zeit läuft weiter/.test(d.text) && d.main, `leave dialog ${JSON.stringify(d)}`);
+      await A.a11y('leave dialog');
+      await evaluate(`document.querySelector('#kx-leave [data-leave="stay"]').click()`); await sleep(200);
+      d = await dlg(); assert.ok(!d.open && d.main, 'stay keeps the exam open');
+      await evaluate('history.back()'); await waitFor(`document.getElementById('kx-leave')?.open`, 5000, 'leave dialog again');
+      for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
+      await sleep(200); d = await dlg(); assert.ok(!d.open && d.main, 'Escape stays too');
+      assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'lesen'").first()).status, 'running');
+      await evaluate('history.back()'); await waitFor(`document.getElementById('kx-leave')?.open`, 5000, 'leave dialog a third time');
+      // leaving really navigates away (here the earlier history entry is the exam URL itself, so a new document loads)
+      await evaluate(`window.__beforeLeave = true; document.querySelector('#kx-leave [data-leave="go"]').click()`);
+      await waitFor(`!window.__beforeLeave`, 10000, 'left the exam page (new document)');
+      await send('Page.navigate', { url: base });
+      await waitFor(`document.querySelector('[role="tab"]') && document.getElementById('kx-main')`, 15000, 'the running attempt resumes');
+      assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'lesen'").first()).status, 'running', 'leaving submitted nothing');
+    }
     await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]');
     // a single-module attempt goes straight from the confirmed submission to its result (no extra "Abschließen" step)
     await waitFor(`document.querySelector('.kx-result table')`, 15000, 'result');

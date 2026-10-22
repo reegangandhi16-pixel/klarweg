@@ -268,6 +268,7 @@ async function openModule(module) {
   const local = (await S.store.get(`answers:${id}:${module}`)) || {};
   for (const v of Object.values(local.pending || {})) if (!S.locked.has(v.item_id)) S.answers[v.item_id] = v.value;
   paint();
+  guardBack();
   if (S.locked.size) applyTopicLock(false);
   clearInterval(S.timer);
   S.timer = setInterval(tick, 250);
@@ -941,6 +942,39 @@ app.addEventListener('drop', (e) => {
   e.preventDefault(); announce(PASTE_REFUSED);
   reportIntegrity('drop_blocked', t, ((e.dataTransfer && e.dataTransfer.getData('text/plain')) || '').length);
 });
+/* GOETHE-B1-DIGITAL §4 (Global): "Browser Back MUST NOT leave the exam silently: intercept and show 'Leave the exam?
+   Time keeps running.'" While a module runs, one history entry guards the page; Back opens a modal dialog. Staying
+   restores the guard; leaving sends pending answers first and then opens the Klarweg home page. Nothing changes outside
+   a running module. */
+const moduleRunning = () => { const m = S.module && S.attempt && moduleState(); return !!m && m.status === 'running'; };
+function guardBack() {
+  if (!moduleRunning()) return;
+  // the exam page's own entry is marked kxBase and a guard entry is pushed above it; in-page #links (fragment
+  // navigations, which also fire popstate) add unmarked entries in between and are never mistaken for leaving
+  if (!(history.state && history.state.kxGuard)) { history.replaceState({ kxBase: true }, '', location.href); history.pushState({ kxGuard: true }, '', location.href); }
+}
+let leaving = false;
+window.addEventListener('popstate', (e) => {
+  if (leaving || !(e.state && e.state.kxBase) || !moduleRunning() || !$('#kx-main')) return;
+  history.pushState({ kxGuard: true }, '', location.href);   // stay until the learner decides
+  let d = document.getElementById('kx-leave');
+  if (!d) { document.body.insertAdjacentHTML('beforeend', LEAVE_DIALOG); d = document.getElementById('kx-leave'); }
+  if (!d.open) d.showModal();
+  const stay = d.querySelector('[data-leave="stay"]'); if (stay) stay.focus();
+});
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest && e.target.closest('#kx-leave [data-leave]'); if (!b) return;
+  const d = document.getElementById('kx-leave');
+  if (b.dataset.leave === 'stay') { d.close(); return; }
+  leaving = true; d.close();
+  if (S.autosave) await S.autosave.flush().catch(() => {});
+  // an explicit destination: counting history entries is unreliable after reloads and in-page #links
+  location.assign('../');
+});
+const LEAVE_DIALOG = '<dialog class="kx-leave" id="kx-leave" aria-labelledby="kx-leave-title" aria-describedby="kx-leave-text">'
+  + '<h2 id="kx-leave-title">Prüfung verlassen?</h2><p id="kx-leave-text">Die Zeit läuft weiter, auch wenn Sie die Seite verlassen. Ihre Antworten bleiben gespeichert; Sie können später hier fortsetzen.</p>'
+  + '<div class="kx-actions"><button type="button" class="kx-btn" data-leave="stay">In der Prüfung bleiben</button><button type="button" class="kx-btn kx-btn-quiet" data-leave="go">Prüfung verlassen</button></div></dialog>';
+
 window.addEventListener('beforeunload', (e) => { if (S.autosave && S.autosave.hasPending()) { S.autosave.flush(); e.preventDefault(); } });
 window.addEventListener('online', () => S.autosave && S.autosave.flush());
 window.addEventListener('pagehide', () => { if (S.onPageHide) S.onPageHide(); });

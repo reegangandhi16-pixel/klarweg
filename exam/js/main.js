@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, adUsage, usedText, adMatches, notesPanel, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
+import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, submittedNote, previousModule, adUsage, usedText, adMatches, notesPanel, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer, volumeControl, clampVolume, VOLUME_KEY } from './hoeren.js';
@@ -160,6 +160,12 @@ async function runConnectionCheck() {
   if (el()) el().textContent = downloadNote(r);
 }
 
+/* the module submitted just before this one (counts only when it was submitted in this page) */
+function prevNote(module) {
+  const before = previousModule(module); const m = before && moduleState(before);
+  if (!m || m.status !== 'submitted') return '';
+  return submittedNote(S.lastSubmitted && S.lastSubmitted.module === before ? S.lastSubmitted : { module: before });
+}
 function intro(module) {
   const info = moduleIntro(module, (moduleState(module) || {}).intro);
   S.micOk = false;
@@ -167,7 +173,7 @@ function intro(module) {
   const notesHtml = notes.length ? `<ul class="kx-precheck-notes">${notes.map((n) => `<li data-note="${esc(n.kind)}">${esc(n.text)}</li>`).join('')}</ul>` : '';
   const check = module === 'hoeren' ? AUDIO_CHECK + CONNECTION_CHECK : module === 'sprechen' ? MIC_CHECK : '';
   const extra = module === 'sprechen' ? '<p>Für dieses Modul werden Ihre Antworten aufgenommen und privat gespeichert. Ohne Ihre Zustimmung kann das Modul nicht beginnen.</p><label class="kx-consent"><input type="checkbox" id="kx-consent"> Ich stimme der Aufnahme zu.</label>' : '';
-  screen(`<main class="kx-card"><p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1><div id="kx-break-slot"></div>${info}${notesHtml}${check}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
+  screen(`<main class="kx-card">${prevNote(module)}<p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1><div id="kx-break-slot"></div>${info}${notesHtml}${check}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
   if (module === 'hoeren') runConnectionCheck().catch(() => {});
   // OD-04 optional break: counted from the previous written module's submission (server time); never starts anything
   const since = breakApplies(S.attempt, module);
@@ -913,6 +919,8 @@ app.addEventListener('click', async (e) => {
     if (act === 'review-close') return closeReview();
     if (act === 'submit-confirm') {
       b.disabled = true;
+      const pg = progress();   // for the interstitial on the next module's intro (§2.2)
+      S.lastSubmitted = pg ? { module: S.module, answered: pg.reduce((n, x) => n + x.answered, 0), total: pg.reduce((n, x) => n + x.total, 0) } : { module: S.module };
       await S.autosave.flush();
       await api.submit(S.attempt.attempt_id, S.lease, S.module);
       clearInterval(S.timer); S.module = null;

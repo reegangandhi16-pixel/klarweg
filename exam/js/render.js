@@ -387,6 +387,17 @@ export function reviewPanel(progress, flags = new Set(), remainingMs = null) {
 const REVIEW_STATUS = { correct: 'richtig', incorrect: 'falsch', unanswered: 'ohne Antwort' };
 const answerText = (a) => (a ? `${a.label}${a.text ? ` – ${a.text}` : ''}` : '–');
 const MODULE_ORDER = ['lesen', 'hoeren', 'schreiben', 'sprechen'];
+/* GOETHE-B1-DIGITAL §2.2 "Between modules: an interstitial 'Lesen submitted · 30 / 30 answered' with the next module's
+   rules". prev = { module, answered?, total? } of the module submitted just before; without counts (e.g. after a reload)
+   only the submission itself is stated. */
+export function submittedNote(prev) {
+  if (!prev || !MODULE_LABELS[prev.module]) return '';
+  const unit = prev.module === 'schreiben' ? 'Texten' : 'Aufgaben';   // dative plural after "von"
+  const counts = Number.isInteger(prev.answered) && Number.isInteger(prev.total) && prev.total > 0
+    ? ` · ${esc(prev.answered)} von ${esc(prev.total)} ${unit} ${prev.module === 'schreiben' ? 'geschrieben' : 'beantwortet'}` : '';
+  return `<p class="kx-interstitial" role="status">${esc(MODULE_LABELS[prev.module])} abgegeben${counts}.</p>`;
+}
+export const previousModule = (module) => MODULE_ORDER[MODULE_ORDER.indexOf(module) - 1] || null;
 /* Which attempt the start screen offers: the full simulation when available, else the first available single module
    (a Lesen-only self-practice release, EXAM_MODULE_ONLY). null = nothing available for this account. */
 export function startChoice(av) {

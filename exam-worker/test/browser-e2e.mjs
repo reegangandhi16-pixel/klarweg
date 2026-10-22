@@ -716,6 +716,7 @@ async function runPractice() {
     assert.equal(r.status, 409, 'no item review while Lesen is running'); assert.equal(/correct|explanation|evidence|transcript/.test(JSON.stringify(r.json)), false);
     await submitModule();
     await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Lesen submitted');
+    assert.equal(await evaluate(`document.querySelector('.kx-interstitial')?.textContent`), 'Lesen abgegeben · 20 von 30 Aufgaben beantwortet.', 'interstitial between modules (§2.2)');
     r = await apiFetch('GET', `/attempts/${attempt}/modules/lesen/review`);
     assert.equal(r.status, 200, 'item review after submission'); assert.deepEqual(r.json.summary, { correct: 10, incorrect: 10, unanswered: 10, total: 30 });
 

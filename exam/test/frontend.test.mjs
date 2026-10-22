@@ -238,7 +238,7 @@ test('SUBMIT (static): the shell submits only from the review step; no browser c
   const main = read('exam/js/main.js');
   assert.equal(/\bconfirm\(/.test(main), false);
   assert.ok(/act === 'submit'\)[\s\S]{0,200}reviewPanel/.test(main), 'the first click opens the review');
-  assert.ok(/act === 'submit-confirm'\)[\s\S]{0,200}api\.submit\(/.test(main), 'only the confirmation submits');
+  assert.ok(/act === 'submit-confirm'\)[\s\S]{0,500}api\.submit\(/.test(main), 'only the confirmation submits');
 });
 
 test('WRITING: browser, worker and content-model word counts are the same function', () => {
@@ -1247,4 +1247,17 @@ test('SUBMIT REVIEW TIME (GOETHE-B1-DIGITAL §10): the confirmation shows the ti
   assert.match(main, /const rv = \$\('\[data-review-remaining\]'\); if \(rv\) rv\.textContent = formatRemaining\(rem\);/);
   assert.match(main, /function reviewRemaining\(\) \{ const m = moduleState\(\); return !m \|\| S\.attempt\.part_scope != null \|\| !m\.deadline_at \? null : clock\.remaining\(m\.deadline_at\); \}/);
   assert.equal((main.match(/reviewPanel\(progress\(\) \|\| \[\], S\.flags, reviewRemaining\(\)\)/g) || []).length, 2, 'both the first draw and every redraw');
+});
+
+test('INTERSTITIAL (GOETHE-B1-DIGITAL §2.2): the next module intro states the module just submitted with its answered count; without counts only the submission; announced', async () => {
+  const { submittedNote, previousModule } = await import('../js/render.js');
+  assert.equal(submittedNote({ module: 'lesen', answered: 28, total: 30 }), '<p class="kx-interstitial" role="status">Lesen abgegeben · 28 von 30 Aufgaben beantwortet.</p>');
+  assert.equal(submittedNote({ module: 'schreiben', answered: 3, total: 3 }), '<p class="kx-interstitial" role="status">Schreiben abgegeben · 3 von 3 Texten geschrieben.</p>');
+  assert.equal(submittedNote({ module: 'hoeren' }), '<p class="kx-interstitial" role="status">Hören abgegeben.</p>');
+  assert.equal(submittedNote(null), ''); assert.equal(submittedNote({ module: 'x' }), '');
+  assert.deepEqual(['lesen', 'hoeren', 'schreiben', 'sprechen'].map(previousModule), [null, 'lesen', 'hoeren', 'schreiben']);
+  const main = read('exam/js/main.js');
+  assert.match(main, /S\.lastSubmitted = pg \? \{ module: S\.module, answered: pg\.reduce/);
+  assert.match(main, /<main class="kx-card">\$\{prevNote\(module\)\}<p class="kx-eyebrow">Nächstes Modul<\/p>/);
+  assert.match(main, /if \(!m \|\| m\.status !== 'submitted'\) return '';/);
 });

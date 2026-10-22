@@ -732,7 +732,7 @@ test('LESEN LAYOUT: texts and tasks are split into two columns (scrollable, labe
   const r = createRenderer();
   const lesen = r.module(pkgFor(build, 'lesen'), {}, {});
   assert.ok((lesen.match(/class="kx-task kx-split"/g) || []).length >= 4, 'Lesen tasks with texts are split');
-  assert.match(lesen, /<div class="kx-task-texts" role="region" tabindex="0" aria-label="Texte zu Teil 1">/);
+  assert.match(lesen, /<div class="kx-task-texts" id="kx-texts-[^"]+" role="region" tabindex="0" aria-label="Texte zu Teil 1">/);
   assert.equal(/kx-split/.test(r.module(pkgFor(build, 'schreiben'), {}, {})), false);
   assert.equal(/kx-split/.test(r.module(pkgFor(build, 'lesen'), {}, { split: false })), false, 'can be turned off');
   const css = read('exam/exam.css');
@@ -919,4 +919,17 @@ test('SCHREIBEN EDITOR (ENGINE §9.4): plain textarea without browser writing ai
   for (const c of UMLAUTS) assert.ok(html.includes(`data-insert="${c}"`), c);
   assert.match(html, /aria-label="Anführungszeichen unten einfügen">„</); assert.match(html, /aria-label="Eurozeichen einfügen">€</);
   assert.match(html, /aria-label="ä einfügen">ä</);
+});
+
+test('LESEN SPLIT (ENGINE §9.1): each split task has a Text / Aufgaben link pair to its own columns; CSS shows it only below 1024 px, sticky', async () => {
+  const { createRenderer } = await import('../js/render.js');
+  const pkg = { module: 'lesen', parts: [{ part: 1, tasks: [{ task_id: 'tsk:b1:x-l1', instructions: 'Lesen Sie.', stimuli: [{ kind: 'text', text: 'Ein Text.' }],
+    items: [{ item_id: 'itm:b1:x-l1-1', interaction: 'binary_choice', stem: 'Richtig?', options: [{ option_id: 'r', label: 'Richtig' }, { option_id: 'f', label: 'Falsch' }] }] }] }] };
+  const html = createRenderer().module(pkg, {}, { split: true });
+  assert.match(html, /<div class="kx-task-texts" id="kx-texts-tsk_b1_x-l1"/); assert.match(html, /<div class="kx-task-items" id="kx-items-tsk_b1_x-l1">/);
+  assert.match(html, /<nav class="kx-split-toggle" aria-label="Teil 1: Texte und Aufgaben"><a href="#kx-texts-tsk_b1_x-l1">Text<\/a><a href="#kx-items-tsk_b1_x-l1">Aufgaben<\/a><\/nav><\/div>/);
+  const css = read('exam/exam.css');
+  assert.match(css, /\.kx-split-toggle { display: none; }/);
+  assert.match(css, /@media \(max-width: 1023px\) {\s*\.kx-split-toggle { position: sticky; bottom: 96px; display: flex;/);
+  assert.match(css, /\.kx-split-toggle a { pointer-events: auto;[^}]*min-height: 44px/);
 });

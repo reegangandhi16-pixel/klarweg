@@ -1283,3 +1283,12 @@ test('PRE-EXAM CHECKS (GOETHE-B1-DIGITAL §2.1): browser support by features per
   assert.match(main, /missing: missingFeatures\(module\)/);
   assert.match(main, /if \(el\.matches && el\.matches\('\[data-kbd-test\]'\)\) \{ const msg = \$\('#kx-kbd-msg'\); if \(msg\) msg\.textContent = keyboardNote\(el\.value\); return; \}/);
 });
+
+test('BACK GUARD RELEASE: once no module runs, the guard entry is taken off (one Back leaves); never during a resume; the page owns its scroll position', () => {
+  const main = read('exam/js/main.js');
+  assert.match(main, /if \(a\.kind !== 'resume'\) releaseBackGuard\(\);/);
+  assert.match(main, /function releaseBackGuard\(\) \{ if \(history\.state && history\.state\.kxGuard && !moduleRunning\(\)\) history\.back\(\); \}/);
+  assert.match(main, /if \('scrollRestoration' in history\) history\.scrollRestoration = 'manual';/);
+  // the release steps onto the kxBase entry while nothing runs: the popstate handler must ignore it
+  assert.match(main, /if \(leaving \|\| !\(e\.state && e\.state\.kxBase\) \|\| !moduleRunning\(\) \|\| !\$\('#kx-main'\)\) return;/);
+});

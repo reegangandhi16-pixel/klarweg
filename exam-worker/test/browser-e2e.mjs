@@ -1669,8 +1669,11 @@ async function runLesenOnly() {
     assert.equal((await lesenRow()).deadline_at, deadlineBefore, 'signing in again never moves the deadline');
     assert.match(await evaluate(`document.querySelector('.kx-progress').textContent`), new RegExp(`${lesen.length} von ${lesen.length} beantwortet`), 'every answer is still there');
     // resume at the same part and item: the item changed last before the reload is back in view below the bar
-    const pos = await evaluate(`(() => { const it = document.querySelector('input[data-item="${probeItem}"]').closest('[id^="item-"]'); const r = it.getBoundingClientRect(), bar = document.querySelector('.kx-bar').getBoundingClientRect().bottom;
+    const posNow = () => evaluate(`(() => { const it = document.querySelector('input[data-item="${probeItem}"]').closest('[id^="item-"]'); const r = it.getBoundingClientRect(), bar = document.querySelector('.kx-bar').getBoundingClientRect().bottom;
       return { top: Math.round(r.top), bar: Math.round(bar), vh: innerHeight, scrolled: scrollY > 0, said: document.querySelector('#kx-announce').textContent, part: it.closest('.kx-part').dataset.part, stored: localStorage.getItem('kx-pos:${attempt.id}:lesen') === it.id }; })()`);
+    // the restore runs after the module page is drawn (next frame / 100 ms fallback): wait for it, same conditions
+    let pos = await posNow();
+    for (const t0 = Date.now(); !(pos.scrolled && pos.top >= pos.bar - 1 && pos.top < pos.vh - 40) && Date.now() - t0 < 5000; await sleep(100)) pos = await posNow();
     assert.deepEqual((await tabState()).selected, [pos.part], 'the resumed tab is the part of the last item');
     assert.ok(pos.stored && pos.scrolled && pos.top >= pos.bar - 1 && pos.top < pos.vh - 40 && pos.said === `Weiter in Teil ${pos.part}, bei der zuletzt bearbeiteten Aufgabe.`, `resume position ${JSON.stringify(pos)}`);
     // ENGINE §8 network loss: offline, an answer change stays on the device (IndexedDB queue) and the learner is told so;
@@ -1785,6 +1788,11 @@ async function runLesenOnly() {
     await click('[data-act="home"]');
     await waitFor(`document.querySelector('[data-act="create"][data-module="lesen"]') && document.querySelector('.kx-history')`, 15000, 'start screen with history');
     assert.deepEqual(await evaluate(`[...document.querySelectorAll('.kx-history thead th')].map((x) => x.textContent)`), ['Datum', 'Übung', 'Lesen', 'Aktion']);
+    // the Back guard is released once no module runs (start screen after the result): a single Back leaves the page
+    assert.equal(await evaluate(`!!(history.state && history.state.kxGuard)`), false, 'no guard entry on top after the module ended');
+    assert.equal(await evaluate(`!!document.querySelector('dialog[open]')`), false);
+    await evaluate('window.__beforeBack = true; history.back()');
+    await waitFor(`!window.__beforeBack`, 10000, 'one Back leaves after the module ended');
     assert.deepEqual(A.findings, [], `automated accessibility findings on ${A.screens.join(', ')}`);
     const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
     const csp = b.events.filter((e) => e.method === 'Log.entryAdded' && /Content Security Policy/i.test(e.params.entry.text || '')).map((e) => e.params.entry.text);

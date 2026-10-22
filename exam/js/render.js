@@ -218,8 +218,12 @@ export function createRenderer(extra = {}) {
     const texts = t.stimuli.filter((s) => !(s.kind === 'text' && t.instructions && String(s.text || '').trim() === t.instructions.trim())).map(stimulus).join('');
     const items = t.items.map((it) => item(it, answers, ctx)).join('');
     if (ctx.split && texts && items && t.stimuli.some((s) => s.kind === 'text')) {
-      return `<div class="kx-task kx-split">${instr}<div class="kx-split-grid"><div class="kx-task-texts" role="region" tabindex="0" aria-label="Texte zu Teil ${esc(p.part)}">${texts}</div>`
-        + `<div class="kx-task-items">${items}</div></div></div>`;
+      /* narrow screens (< 1024 px) stack texts above tasks: a sticky "Text / Aufgaben" pair jumps between them
+         (ENGINE §9.1; plain links, hidden on wide screens where both are side by side) */
+      const k = idSafe(t.task_id || `${p.part}`);
+      return `<div class="kx-task kx-split">${instr}<div class="kx-split-grid"><div class="kx-task-texts" id="kx-texts-${k}" role="region" tabindex="0" aria-label="Texte zu Teil ${esc(p.part)}">${texts}</div>`
+        + `<div class="kx-task-items" id="kx-items-${k}">${items}</div></div>`
+        + `<nav class="kx-split-toggle" aria-label="Teil ${esc(p.part)}: Texte und Aufgaben"><a href="#kx-texts-${k}">Text</a><a href="#kx-items-${k}">Aufgaben</a></nav></div>`;
     }
     return `<div class="kx-task">${instr}${texts}${items}</div>`;
   }

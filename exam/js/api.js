@@ -68,7 +68,7 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     start: (id, leaseId, module) => call('POST', att(id, `/modules/${module}/start`), { body: rq({ lease_id: leaseId }) }),
     pkg: (id, leaseId, module) => call('GET', att(id, `/modules/${module}/package?lease_id=${encodeURIComponent(leaseId)}`)),
     answers: (id, leaseId, module) => call('GET', att(id, `/modules/${module}/answers?lease_id=${encodeURIComponent(leaseId)}`)),
-    save: (id, leaseId, module, answers, requestId) => call('POST', att(id, `/modules/${module}/answers`), { body: rq({ lease_id: leaseId, answers, request_id: requestId }) }),
+    save: (id, leaseId, module, answers, requestId, { keepalive = false } = {}) => call('POST', att(id, `/modules/${module}/answers`), { body: rq({ lease_id: leaseId, answers, request_id: requestId }), keepalive }),
     submit: (id, leaseId, module) => call('POST', att(id, `/modules/${module}/submit`), { body: rq({ lease_id: leaseId }) }),
     hoerenEvent: (id, leaseId, ev, { keepalive = false } = {}) => keepalive
       ? once('POST', att(id, '/hoeren/events'), { body: rq({ lease_id: leaseId, ...ev }), keepalive: true })

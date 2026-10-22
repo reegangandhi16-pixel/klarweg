@@ -1462,6 +1462,11 @@ async function runLesenOnly() {
     ts = await tabState();
     assert.deepEqual([ts.selected, ts.focusable, ts.shown, ts.focus, ts.said], [['5'], ['5'], ['5'], 'part-5', 'Teil 5 geöffnet.'], `Enter opens Teil 5, focus on its heading, announced: ${JSON.stringify(ts)}`);
     await A.a11y('Lesen part tabs');
+    // GOETHE-B1-DIGITAL §5: a part change sends pending answers at once (not after the debounce)
+    const st = await evaluate(`(() => { const r = document.querySelector('#kx-main .kx-part:not([hidden]) input[type=radio]:not([disabled])'); r.click();
+      const before = document.querySelector('.kx-save').textContent; document.querySelector('[role="tab"][data-tab="1"]').click(); return { before, after: document.querySelector('.kx-save').textContent, item: r.dataset.item }; })()`);
+    assert.equal(st.after, 'Speichert …', `sending starts with the part change, before the 800 ms debounce: ${JSON.stringify(st)}`);
+    for (const t0 = Date.now(); !(await dev.env.DB.prepare('SELECT 1 AS x FROM responses_current WHERE item_id = ?1').bind(st.item).first()); await sleep(100)) if (Date.now() - t0 > 10000) throw new Error('part-change save not stored');
     for (const [w, h, mobile] of [[1280, 800, false], [800, 1024, true], [360, 640, true]]) {
       await vp(w, h, mobile); await evaluate(`window.scrollTo(0, 0)`); await sleep(100);
       await openTab(4);
@@ -1670,9 +1675,9 @@ async function runLesenOnly() {
       await send('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
       const other = await evaluate(`(() => { const r = [...document.querySelectorAll('input[type=radio][data-item="${probeItem}"]')].find((x) => !x.checked); r.click(); return r.value; })()`);
       await waitFor(`/^Offline – Ihre Antworten bleiben auf diesem Gerät gespeichert/.test(document.querySelector('#kx-announce')?.textContent || '')`, 20000, 'offline announcement');
-      await openTab(3); await openTab(1);   // switching parts while offline keeps the unsent answer
-      assert.equal(await evaluate(`document.querySelector('input[data-item="${probeItem}"]:checked')?.value`), other, 'the offline answer survives tab switches');
       assert.match(await evaluate(`document.querySelector('.kx-save').textContent`), /^Offline/);
+      await openTab(3); await openTab(1);   // switching parts while offline keeps the unsent answer (each switch retries sending)
+      assert.equal(await evaluate(`document.querySelector('input[data-item="${probeItem}"]:checked')?.value`), other, 'the offline answer survives tab switches');
       assert.notEqual(await stored(), other, 'nothing reached the server while offline');
       await send('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
       await evaluate(`window.dispatchEvent(new Event('online'))`);

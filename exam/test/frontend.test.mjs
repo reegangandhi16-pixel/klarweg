@@ -1217,3 +1217,22 @@ test('BACK GUARD (GOETHE-B1-DIGITAL §4 Global): while a module runs, Back opens
   assert.match(main, /<h2 id="kx-leave-title">Prüfung verlassen\?<\/h2><p id="kx-leave-text">Die Zeit läuft weiter/);
   assert.match(main, /data-leave="stay">In der Prüfung bleiben<\/button><button type="button" class="kx-btn kx-btn-quiet" data-leave="go">Prüfung verlassen<\/button>/, 'staying is the primary action');
 });
+
+test('SAVE TRIGGERS (GOETHE-B1-DIGITAL §5): flush options reach send (keepalive on pagehide); flush when hidden, on pagehide and on every part change', async () => {
+  const sent = [];
+  const a = new Autosave({ send: async (batch, requestId, opts) => { sent.push({ n: batch.length, opts }); return { results: batch.map((b) => ({ item_id: b.item_id, current_seq: b.seq })) }; },
+    store: memoryStore(), key: 'k', debounceMs: 60_000, setTimer: () => 1, clearTimer: () => {} });
+  await a.init?.();
+  a.set('itm:a', { option_id: 'x' });
+  await a.flush({ keepalive: true });
+  assert.deepEqual(sent, [{ n: 1, opts: { keepalive: true } }]);
+  a.set('itm:b', { option_id: 'y' }); await a.flush();
+  assert.deepEqual(sent[1].opts, {});
+  const main = read('exam/js/main.js');
+  assert.match(main, /const flushSoon = \(opts\) => \{ if \(S\.autosave && S\.autosave\.hasPending\(\)\) S\.autosave\.flush\(opts\)\.catch\(\(\) => \{\}\); \};/);
+  assert.match(main, /document\.addEventListener\('visibilitychange', \(\) => \{ if \(document\.visibilityState === 'hidden'\) flushSoon\(\); \}\);/);
+  assert.match(main, /window\.addEventListener\('pagehide', \(\) => \{ flushSoon\(\{ keepalive: true \}\); if \(S\.onPageHide\) S\.onPageHide\(\); \}\);/);
+  assert.match(main, /if \(changed\) flushSoon\(\);   \/\/ §5: saved on part change/);
+  assert.match(main, /send: \(batch, requestId, opts\) => api\.save\(id, S\.lease, module, batch, requestId, opts\),/);
+  assert.match(read('exam/js/api.js'), /save: \(id, leaseId, module, answers, requestId, \{ keepalive = false \} = \{\}\) => call\('POST', att\(id, `\/modules\/\$\{module\}\/answers`\), \{ body: rq\(\{ lease_id: leaseId, answers, request_id: requestId \}\), keepalive \}\),/);
+});

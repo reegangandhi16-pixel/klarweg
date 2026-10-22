@@ -219,11 +219,16 @@ async function openModule(module) {
   assertSupported(S.pkg, renderer.registry);
   const saved = await api.answers(id, S.lease, module);
   S.answers = Object.fromEntries(saved.answers.map((a) => [a.item_id, a.value]));
-  S.saveState = 'saved';   // a new module starts with nothing unsaved (no stale "offline" from the previous one)
+  S.saveState = 'saved'; S.saveTrouble = null;   // a new module starts with nothing unsaved (no stale "offline" from the previous one)
   S.autosave = new Autosave({
     key: `answers:${id}:${module}`, store: S.store,
     send: (batch, requestId) => api.save(id, S.lease, module, batch, requestId),
-    onState: (st) => { const say = saveAnnouncement(S.saveState, st); S.saveState = st; if (say) announce(say); paintHeader(); }, onFatal: (code) => { console.warn('[kx-autosave]', 'stopped', { code }); if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else if (code === 'lease_expired') onLeaseExpired();
+    onState: (st) => {
+      /* autosave goes offline → saving → saved; remembering the trouble until the next save keeps "Wieder verbunden"
+         (and avoids repeating "Offline" on every failed retry) */
+      const prev = S.saveTrouble || S.saveState;
+      if (st === 'offline') S.saveTrouble = 'offline'; else if (st === 'saved' || st === 'stopped') S.saveTrouble = null;
+      const say = saveAnnouncement(prev, st, S.store && S.store.kind); S.saveState = st; if (say) announce(say); paintHeader(); }, onFatal: (code) => { console.warn('[kx-autosave]', 'stopped', { code }); if (code === 'lease_superseded') fail(new ExamApiError(409, code)); else if (code === 'lease_expired') onLeaseExpired();
       else if (code === 'auth_required' || code === 'exam_access_required') { clearInterval(S.hb); clearInterval(S.timer); fail(new ExamApiError(code === 'auth_required' ? 401 : 403, code)); } else refresh(); },
     onDropped: (code, batch) => syncFromServer(batch.map((b) => b.item_id)).then(() => {
       if (code === 'topic_locked') { announce('Die Themenwahl ist gesperrt. Ihre Änderung wurde nicht gespeichert.'); applyTopicLock(false); }

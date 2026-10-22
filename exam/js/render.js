@@ -90,9 +90,13 @@ export const RESULT_ACTIONS = '<div class="kx-actions kx-result-actions"><button
 
 /* What a screen reader should hear about saving: only trouble and the recovery from it, never the routine
    "Speichert … / Gespeichert" after each pause. Announced in the persistent #kx-announce status region. */
-export function saveAnnouncement(prev, next) {
+export function saveAnnouncement(prev, next, storeKind = 'indexeddb') {
   if (next === prev) return null;
-  if (next === 'offline') return 'Speichern zurzeit nicht möglich. Es wird automatisch erneut versucht.';
+  /* ENGINE §8 network loss: say truthfully where unsent answers are: on the device (IndexedDB queue), or — when the
+     browser allows no local storage, e.g. a private window — only in this open page */
+  if (next === 'offline') return storeKind === 'memory'
+    ? 'Offline – Ihre Antworten sind nur in diesem Fenster gespeichert. Bitte schließen Sie die Seite nicht; es wird automatisch erneut gesendet.'
+    : 'Offline – Ihre Antworten bleiben auf diesem Gerät gespeichert und werden automatisch gesendet, sobald die Verbindung zurück ist.';
   if (next === 'stopped') return 'Speichern gestoppt. Ihre letzten Änderungen wurden nicht gespeichert.';
   if (next === 'saved' && prev === 'offline') return 'Wieder verbunden. Alle Antworten sind gespeichert.';
   return null;

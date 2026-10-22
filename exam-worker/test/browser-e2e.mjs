@@ -1546,6 +1546,20 @@ async function runLesenOnly() {
     assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n, 1, 'the same attempt continues (no duplicate)');
     assert.equal((await lesenRow()).deadline_at, deadlineBefore, 'signing in again never moves the deadline');
     assert.match(await evaluate(`document.querySelector('.kx-progress').textContent`), new RegExp(`${lesen.length} von ${lesen.length} beantwortet`), 'every answer is still there');
+    // ENGINE §8 network loss: offline, an answer change stays on the device (IndexedDB queue) and the learner is told so;
+    // back online it is sent and the recovery is announced
+    {
+      await send('Network.enable');
+      await send('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+      const other = await evaluate(`(() => { const r = [...document.querySelectorAll('input[type=radio][data-item="${probeItem}"]')].find((x) => !x.checked); r.click(); return r.value; })()`);
+      await waitFor(`/^Offline – Ihre Antworten bleiben auf diesem Gerät gespeichert/.test(document.querySelector('#kx-announce')?.textContent || '')`, 20000, 'offline announcement');
+      assert.match(await evaluate(`document.querySelector('.kx-save').textContent`), /^Offline/);
+      assert.notEqual(await stored(), other, 'nothing reached the server while offline');
+      await send('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+      await evaluate(`window.dispatchEvent(new Event('online'))`);
+      for (const t0 = Date.now(); (await stored()) !== other; await sleep(200)) if (Date.now() - t0 > 30000) throw new Error('queued answer not sent after reconnect');
+      await waitFor(`/^Wieder verbunden\. Alle Antworten sind gespeichert\./.test(document.querySelector('#kx-announce')?.textContent || '')`, 20000, 'recovery announced');
+    }
     // back to the correct answer for the score check below
     await evaluate(`document.querySelector('input[type=radio][data-item="${probeItem}"][value="${correctOpt}"]').click()`);
     for (const t0 = Date.now(); (await stored()) !== correctOpt; await sleep(200)) if (Date.now() - t0 > 15000) throw new Error('answer not restored');

@@ -151,7 +151,9 @@ export function createSpeakingDriver(deps) {
       ui.turn(key, 'Aufnahme …');
       const rec = deps.recorder(t, mic);
       rec.start();
+      if (ui.recording) ui.recording(true, { part, stream: mic });   // level meter (and the Teil 2 silence hint) while recording
       await waitUntil(now() + windowMs);
+      if (ui.recording) ui.recording(false, { part });
       const res = await rec.stop();
       if (res.chunks > 0) { done.add(key); ui.turn(key, 'wird hochgeladen …'); finalize(t, res.chunks, res.duration_ms); }
       else ui.turn(key, 'offen');

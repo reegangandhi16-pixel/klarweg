@@ -16,6 +16,7 @@ import { countWords } from './wordcount.js';
 import { randomId } from './ids.js';
 import { pasteAllowed, PASTE_REFUSED, DEFAULT_PASTE_POLICY } from './paste.js';
 import { environmentNotes, playTestTone, testMicrophone, MIC_FIX, AUDIO_CHECK, MIC_CHECK, CONNECTION_CHECK, measureDownload, downloadNote } from './precheck.js';
+import { framePeak, levelPercent, createSilenceWatch, SILENCE_HINT } from './level.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const app = $('#kx-app');
@@ -302,7 +303,9 @@ function closeReview(focusSubmit = true) {
   if (focusSubmit) { const b = $('[data-act="submit"]'); if (b) b.focus(); }
 }
 function paint() {
-  const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p><div class="kx-alerts" id="kx-alerts"></div>'
+  const phaseTime = S.sprechen ? '<p class="kx-phase-time" id="kx-phase-time"></p>'
+    + '<div class="kx-level" id="kx-level" hidden aria-hidden="true"><span class="kx-level-label">Mikrofon</span><span class="kx-level-bar"><span class="kx-level-fill"></span></span></div>'
+    + '<p class="kx-silence" id="kx-silence" role="status" aria-live="polite"></p><div class="kx-alerts" id="kx-alerts"></div>'
     : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
   // live status (Hören/Sprechen phase, "Audio starten", time warnings) lives in the sticky bar: it must stay visible
   // while the learner is scrolled down to the questions; empty elements take no space
@@ -557,6 +560,31 @@ async function getMic() {
     return null;
   }
 }
+/* recording monitor: a level bar while a turn records; in Teil 2 (continuous talk) a polite hint after 15 s of silence.
+   It only reads the microphone through an analyser — the recording itself is untouched. */
+let meter = null;
+function startLevelMeter(stream, watchSilence) {
+  stopLevelMeter();
+  const box = $('#kx-level'); if (!box || !stream) return;
+  let ctx;
+  try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch { return; }
+  const an = ctx.createAnalyser(); an.fftSize = 512;
+  try { ctx.createMediaStreamSource(stream).connect(an); } catch { ctx.close().catch(() => {}); return; }
+  const buf = new Uint8Array(an.fftSize), silence = createSilenceWatch(), fill = box.querySelector('.kx-level-fill'), hint = $('#kx-silence');
+  box.hidden = false;
+  const timer = setInterval(() => {
+    an.getByteTimeDomainData(buf);
+    const peak = framePeak(buf);
+    fill.style.width = `${levelPercent(peak)}%`;
+    if (watchSilence && hint) { const quiet = silence.update(peak, Date.now()); if (quiet && !hint.textContent) hint.textContent = SILENCE_HINT; else if (!quiet && hint.textContent) hint.textContent = ''; }
+  }, 100);
+  meter = { ctx, timer };
+}
+function stopLevelMeter() {
+  if (meter) { clearInterval(meter.timer); meter.ctx.close().catch(() => {}); meter = null; }
+  const box = $('#kx-level'); if (box) { box.hidden = true; const f = box.querySelector('.kx-level-fill'); if (f) f.style.width = '0%'; }
+  const hint = $('#kx-silence'); if (hint) hint.textContent = '';
+}
 function releaseMic() { if (S.micStream) { S.micStream.getTracks().forEach((tr) => tr.stop()); S.micStream = null; } }
 
 /* Phase-driven Sprechen (sprechen-driver.js): the server plan and server time decide the phase; a refresh lands in
@@ -583,12 +611,13 @@ async function runSprechen() {
     ui: {
       phase: (text) => { const el = $('#kx-phase'); if (el) el.textContent = text; },
       turn: label, alert: (kind, text) => showAlert(kind, text), clear: clearAlert,
-      lockTopics: () => applyTopicLock(true)
+      lockTopics: () => applyTopicLock(true),
+      recording: (on, { part, stream } = {}) => (on ? startLevelMeter(stream, part === 2) : stopLevelMeter())
     },
     topic: () => chosenTopic(S.pkg, S.answers),
     log: (event, detail) => console.warn('[kx-sprechen]', event, detail)
   });
-  try { await driver.run(); } finally { releaseMic(); }
+  try { await driver.run(); } finally { stopLevelMeter(); releaseMic(); }
 }
 
 async function showResult() {

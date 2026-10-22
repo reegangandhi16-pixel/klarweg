@@ -92,6 +92,8 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     },
     // staff (rater / lead_rater): authorization is enforced by the server; the browser carries no token or secret
     ratingQueue: () => call('GET', '/exam/v1/admin/rating-queue'),
+    ratingDisagreements: () => call('GET', '/exam/v1/admin/rating-disagreements'),
+    reviewDisagreement: (key, note) => once('POST', '/exam/v1/admin/rating-disagreements/review', { body: { key, note } }),
     productive: (id) => call('GET', `/exam/v1/admin/attempts/${id}/productive`),
     async recording(id, part, turn) {   // rater playback: audio bytes, session-bound (no URL token)
       const res = await fetchImpl(`${base}/exam/v1/admin/attempts/${id}/recordings/${part}/${turn}`, { credentials: 'include' });

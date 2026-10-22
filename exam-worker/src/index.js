@@ -8,6 +8,7 @@ import { verifyProxy, requireUser, mfaFresh, mfaUnavailable, hasRole, STAFF_ROLE
 import { streamMedia } from './media.js';
 import { settle } from './core.js';
 import * as api from './api.js';
+import { listDisagreements, reviewDisagreement } from './rating-review.js';
 import { inspectAccess, grantAccess, revokeAccess, inspectAccommodation, setAccommodation, removeAccommodation, lookupUser, listAttempts } from './access-admin.js';
 
 const MODULE = '(lesen|hoeren|schreiben|sprechen)';
@@ -44,6 +45,9 @@ const ROUTES = [
   ['POST', R('/admin/ratings'), (c) => api.submitRating(c.env, c.user, c.request)],
   ['GET', R(`/admin/attempts/${A}/productive`), (c, m) => api.productiveForRating(c.env, c.user, m[1])],
   ['GET', R('/admin/rating-queue'), (c) => api.ratingQueue(c.env, c.user)],
+  // rating quality (SCORING §4.4): criterion disagreements ≥ 2 bands for lead review, after the score is final
+  ['GET', R('/admin/rating-disagreements'), (c) => listDisagreements(c.env, c.user)],
+  ['POST', R('/admin/rating-disagreements/review'), (c) => reviewDisagreement(c.env, c.user, c.request)],
   ['GET', R(`/admin/attempts/${A}/recordings/([1-3])/(t[1-9])`), (c, m) => api.recordingForRating(c.env, c.user, m[1], m[2], m[3])],
   // exam-access management (OD-18): exam_admin only, fresh second factor like every /admin/* route
   ['GET', R('/admin/access'), (c) => inspectAccess(c.env, c.user, c.url)],

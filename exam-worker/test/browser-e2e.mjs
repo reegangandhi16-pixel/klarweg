@@ -913,7 +913,8 @@ async function runPractice() {
       await evaluate(`(() => { const f = document.querySelector('form.kx-flag-review'); f.querySelector('input').value = 'Rückmeldung an Rater 2'; f.requestSubmit(); })()`);
       await waitFor(`/Abweichung als geprüft markiert\./.test(document.body.innerText) && /Keine offenen Abweichungen\./.test(document.body.innerText)`, 15000, 'reviewed');
       assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'disagreement_reviewed'").first()).n, 1);
-      await as('learner', ''); await click(`.kx-history [data-act="last-result"][data-attempt="${attempt}"]`);
+      await as('learner', ''); await waitFor(`document.querySelector('.kx-history [data-act="last-result"][data-attempt="${attempt}"]')`, 15000, 'last result link again');
+      await click(`.kx-history [data-act="last-result"][data-attempt="${attempt}"]`);
       await waitFor(`/Klarweg B1 Simulation – Ergebnis/.test(document.body.innerText)`, 15000, 'learner result again');
     }
     // rated feedback per task and criterion, and per-part lines in the reviews

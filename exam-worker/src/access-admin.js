@@ -187,3 +187,29 @@ export async function lookupUser(env, adminId, request) {
   const created = Number(request.headers.get('x-kw-lookup-created'));
   return { ok: true, user_id: userId, account_created: Number.isFinite(created) && created > 0 ? created : null };
 }
+
+/* GET /admin/attempts?user_id= — support view (exam_admin, fresh second factor via the router): the user's latest
+   attempts with per-module status and their incidents (interruptions, takeovers, failed downloads …). Read-only and
+   minimal: no answers, recordings, scores or texts. Every view is audited (attempts_viewed). */
+export const ATTEMPTS_VIEW_LIMIT = 20, INCIDENTS_PER_ATTEMPT = 50;
+export async function listAttempts(env, adminId, url) {
+  await requireExamAdmin(env, adminId);
+  const userId = url.searchParams.get('user_id') || '';
+  if (!USER_RE.test(userId)) fail(400, 'invalid_user_id');
+  const rows = (await env.DB.prepare(`SELECT id, mode, level, module_scope, part_scope, status, time_multiplier, created_at, started_at, completed_at
+      FROM attempts WHERE user_id = ?1 ORDER BY created_at DESC, id LIMIT ?2`).bind(userId, ATTEMPTS_VIEW_LIMIT).all()).results;
+  const attempts = [];
+  for (const a of rows) {
+    const modules = (await env.DB.prepare(`SELECT module, status, started_at, submitted_at, submit_kind, recovery_used FROM attempt_modules
+        WHERE attempt_id = ?1 ORDER BY module_order`).bind(a.id).all()).results
+      .map((m) => ({ module: m.module, status: m.status, started_at: m.started_at, submitted_at: m.submitted_at, submit_kind: m.submit_kind, recovery_used: !!m.recovery_used }));
+    const incidents = (await env.DB.prepare(`SELECT kind, detail_json, created_at FROM incidents WHERE attempt_id = ?1 ORDER BY created_at, id LIMIT ?2`)
+      .bind(a.id, INCIDENTS_PER_ATTEMPT).all()).results.map((i) => ({ kind: i.kind, at: i.created_at, detail: safeJson(i.detail_json) }));
+    attempts.push({ attempt_id: a.id, mode: a.mode, level: a.level, module_scope: a.module_scope, part_scope: a.part_scope, status: a.status,
+      time_multiplier: a.time_multiplier, created_at: a.created_at, started_at: a.started_at, completed_at: a.completed_at, modules, incidents });
+  }
+  await env.DB.prepare(`INSERT INTO audit_log (at, actor, attempt_id, action, detail_json) VALUES (?1, ?2, NULL, 'attempts_viewed', ?3)`)
+    .bind(now(env), adminId, JSON.stringify({ user_id: userId, attempts: attempts.length })).run();
+  return { ok: true, server_now: now(env), user_id: userId, attempts, limit: ATTEMPTS_VIEW_LIMIT };
+}
+function safeJson(s) { try { const v = JSON.parse(s); return v && typeof v === 'object' ? v : {}; } catch { return {}; } }

@@ -1800,8 +1800,19 @@ async function runAccessAdmin() {
     const lesenMin = Math.round((pkgFor(syntheticBuild([PRACTICE.dir]), 'lesen').timing.seconds * 1.5) / 60);
     assert.match(await text(), new RegExp(`${lesenMin} Minuten · 5 Teile`), 'the intro shows the extended time');
     assert.equal((await dev.env.DB.prepare('SELECT time_multiplier FROM attempts WHERE user_id = ?1').bind(target).first()).time_multiplier, 1.5);
-    // revoke
+    // support view: the learner's attempts, module status and incidents — on request, audited, no answers
     await as('access', `admin.html?user=${target}`);
+    await waitFor(`document.querySelector('[data-act="attempts"]')`, 15000, 'attempts button');
+    const att = (await dev.env.DB.prepare('SELECT id FROM attempts WHERE user_id = ?1').bind(target).first()).id;
+    await dev.env.DB.prepare("INSERT INTO incidents (id, attempt_id, kind, detail_json, created_at) VALUES ('inc_e2e', ?1, 'lease_takeover', '{\"generation\":2,\"same_device\":false}', ?2)").bind(att, Date.now()).run();
+    assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'attempts_viewed'").first()).n, 0, 'nothing read before the click');
+    await evaluate(`document.querySelector('[data-act="attempts"]').click()`);
+    await waitFor(`document.querySelector('#kx-att-slot .kx-admin-attempt')`, 15000, 'attempts listed');
+    const sv = await evaluate(`(() => { const t = document.getElementById('kx-att-slot').innerText; return { t, id: document.querySelector('.kx-admin-attempt h3').textContent }; })()`);
+    assert.ok(sv.id === att && /1 Versuch \(neueste zuerst/.test(sv.t) && /Lesen/.test(sv.t) && /Auf anderem Gerät\/Tab übernommen/.test(sv.t) && /\(generation: 2, same_device: false\)/.test(sv.t) && /nicht begonnen/.test(sv.t) && /Zeit \+50 %/.test(sv.t), `support view ${JSON.stringify(sv)}`);
+    assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'attempts_viewed'").first()).n, 1, 'the view is audited');
+    await A.a11y('access admin (attempts and incidents)');
+    // revoke
     await waitFor(`document.querySelector('form[data-form="revoke"]')`, 15000, 'revoke form');
     await evaluate(`(() => { const f = document.querySelector('form[data-form="revoke"]'); f.querySelector('input[name="reason"]').value = 'E2E Ende'; f.requestSubmit(); })()`);
     await waitFor(`/Zugang widerrufen\./.test(document.body.innerText) && !document.querySelector('form[data-form="revoke"]')`, 15000, 'revoked');

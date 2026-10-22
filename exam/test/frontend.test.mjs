@@ -1107,3 +1107,18 @@ test('HÖREN PRELOAD (AUDIO-SPEC A3): each download has a timeout; a media failu
   assert.match(main, /const HOEREN_PRELOAD_FAILED = 'Die Hördateien konnten nicht vollständig geladen werden\.[^']*Ihre Antworten bleiben erhalten\. Hinweis: Der Hörteil beginnt nach einer kurzen Ladezeit auch dann, wenn noch nicht alle Dateien geladen sind\.';/);
   assert.match(read('exam/js/api.js'), /mediaBytes: async \(url, \{ signal \} = \{\}\) => \{\s*const res = await fetchImpl\(base \+ url, \{ credentials: 'omit', \.\.\.\(signal \? \{ signal \} : \{\}\) \}\);/);
 });
+
+test('ADMIN ATTEMPTS VIEW: on-request button (audited note); attempts with module table and labelled incidents; values escaped; no answer fields rendered', async () => {
+  const { attemptsButton, attemptsList, INCIDENT_LABELS } = await import('../js/admin-render.js');
+  assert.match(attemptsButton(), /<button class="kx-btn kx-btn-quiet" type="button" data-act="attempts">Versuche und Vorfälle anzeigen<\/button><\/div><div id="kx-att-slot"><\/div>/);
+  assert.match(attemptsButton(), /ohne Antworten oder Ergebnisse\. Jeder Abruf wird protokolliert\./);
+  assert.deepEqual(Object.keys(INCIDENT_LABELS).sort(), ['lease_takeover', 'listening_play_interrupted', 'listening_preload_failed', 'listening_recovery_replay']);
+  const html = attemptsList({ limit: 20, attempts: [{ attempt_id: 'att_<x>', mode: 'synthetic_full', level: 'b1', module_scope: 'lesen', part_scope: null, status: 'in_progress', time_multiplier: 1.5, created_at: 0, started_at: null, completed_at: null,
+    modules: [{ module: 'lesen', status: 'submitted', started_at: 1000, submitted_at: 2000, submit_kind: 'auto_deadline', recovery_used: false }],
+    incidents: [{ kind: 'lease_takeover', at: 3000, detail: { generation: 2, note: '<b>' } }, { kind: 'mystery_kind', at: 4000, detail: {} }] }] });
+  assert.match(html, /<h3>att_&lt;x&gt;<\/h3>/); assert.match(html, /läuft · angelegt – · nur Lesen · Zeit \+50 %/);
+  assert.match(html, /<th scope="row">Lesen<\/th><td>abgegeben<\/td><td>1970-01-01 00:00 UTC<\/td><td>1970-01-01 00:00 UTC \(Zeitablauf\)<\/td><td>–<\/td>/);
+  assert.match(html, /Auf anderem Gerät\/Tab übernommen <span class="kx-admin-detail">\(generation: 2, note: &lt;b&gt;\)<\/span>/);
+  assert.match(html, /mystery_kind/, 'unknown kinds are shown as they are');
+  assert.equal(attemptsList({ limit: 20, attempts: [] }), '<p role="status">Keine Versuche.</p>');
+});

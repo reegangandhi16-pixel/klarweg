@@ -55,6 +55,7 @@ export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retr
     accessLookup: (email) => once('POST', '/exam/v1/admin/access/lookup', { body: { email } }),   // resolved by klarweg-access; not retried (rate-limited)
     accessInspect: (userId) => call('GET', `/exam/v1/admin/access?user_id=${encodeURIComponent(userId)}`),
     accessGrant: (b) => once('POST', '/exam/v1/admin/access/grants', { body: b }),
+    adminAttempts: (userId) => call('GET', `/exam/v1/admin/attempts?user_id=${encodeURIComponent(userId)}`),   // read-only; audited per call
     accommodationInspect: (userId) => call('GET', `/exam/v1/admin/accommodations?user_id=${encodeURIComponent(userId)}`),
     accommodationSet: (b) => once('POST', '/exam/v1/admin/accommodations', { body: b }),
     accommodationRemove: (userId, reason) => once('POST', '/exam/v1/admin/accommodations/remove', { body: { user_id: userId, reason } }),

@@ -1,7 +1,7 @@
 /* Exam-access management screen (exam_admin). DOM wiring only: every rule — role, fresh second factor, validation,
    audit — is enforced by the exam Worker; this page only shows what the server answers. */
 import { createApi, ExamApiError } from './api.js';
-import { lookupForm, lookupResult, accessView, accommodationSection, ADMIN_ERRORS } from './admin-render.js';
+import { lookupForm, lookupResult, accessView, accommodationSection, attemptsButton, attemptsList, ADMIN_ERRORS } from './admin-render.js';
 
 const app = document.getElementById('kx-app');
 const base = (document.querySelector('meta[name="kw-exam-api"]') || {}).content || '';
@@ -14,7 +14,7 @@ function mfaScreen() {
     + '<div class="kx-actions"><a class="kx-btn" href="rater.html">Zweiten Faktor bestätigen</a><button class="kx-btn kx-btn-quiet" type="button" data-act="reload">Danach hier neu laden</button></div></main>');
 }
 async function show(userId, message = '') {
-  try { const [access, acc] = await Promise.all([api.accessInspect(userId), api.accommodationInspect(userId)]); screen(accessView(access, { message }) + accommodationSection(acc)); }
+  try { const [access, acc] = await Promise.all([api.accessInspect(userId), api.accommodationInspect(userId)]); screen(accessView(access, { message }) + accommodationSection(acc) + attemptsButton()); }
   catch (e) {
     if (e instanceof ExamApiError && e.code === 'mfa_required') return mfaScreen();
     screen(lookupForm(userId, text(e)));
@@ -56,7 +56,16 @@ app.addEventListener('click', (e) => {
   const b = e.target.closest('[data-act]'); if (!b) return;
   if (b.dataset.act === 'reload') location.reload();
   if (b.dataset.act === 'manage') show(b.dataset.user);
+  if (b.dataset.act === 'attempts') showAttempts(b);
 });
+/* loaded only on request: each call is audited server-side */
+async function showAttempts(b) {
+  const slot = app.querySelector('#kx-att-slot'); const userId = (app.querySelector('#kx-user') || {}).value || '';
+  b.disabled = true;
+  try { slot.innerHTML = attemptsList(await api.adminAttempts(userId)); }
+  catch (e) { if (e instanceof ExamApiError && e.code === 'mfa_required') return mfaScreen(); slot.innerHTML = `<p role="status">${text(e).replace(/[<>&]/g, '')}</p>`; }
+  finally { if (b.isConnected) b.disabled = false; }
+}
 
 const q = new URLSearchParams(location.search).get('user');
 if (q) show(q); else screen(lookupForm());

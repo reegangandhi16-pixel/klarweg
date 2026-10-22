@@ -81,3 +81,29 @@ export const ADMIN_ERRORS = {
   grant_not_found: 'Dieser Zugang wurde nicht gefunden.',
   mfa_unavailable: 'Die Zwei-Faktor-Bestätigung ist zurzeit nicht verfügbar.'
 };
+
+/* Support view (GET /admin/attempts): a user's latest attempts, module status and incidents — no answers or scores. */
+export const INCIDENT_LABELS = { lease_takeover: 'Auf anderem Gerät/Tab übernommen', listening_play_interrupted: 'Hören: Wiedergabe unterbrochen',
+  listening_recovery_replay: 'Hören: Wiederholung nach Unterbrechung', listening_preload_failed: 'Hören: Hördateien nicht geladen' };
+const MODULE_DE = { lesen: 'Lesen', hoeren: 'Hören', schreiben: 'Schreiben', sprechen: 'Sprechen' };
+const MOD_STATUS = { locked: 'gesperrt', available: 'bereit', running: 'läuft', submitting: 'wird abgegeben', submitted: 'abgegeben' };
+const ATT_STATUS = { created: 'nicht begonnen', in_progress: 'läuft', completed: 'abgeschlossen', voided: 'ungültig' };
+const SUBMIT_DE = { manual: 'selbst', auto_deadline: 'Zeitablauf', admin: 'Verwaltung' };
+const detailText = (d) => Object.entries(d || {}).filter(([, v]) => ['string', 'number', 'boolean'].includes(typeof v)).map(([k, v]) => `${k}: ${v}`).join(', ');
+export function attemptsButton() {
+  return '<section class="kx-card kx-admin" aria-labelledby="kx-att-title"><h2 id="kx-att-title">Versuche und Vorfälle</h2>'
+    + '<p>Zeigt die letzten Versuche mit Status der Module und technischen Vorfällen – ohne Antworten oder Ergebnisse. Jeder Abruf wird protokolliert.</p>'
+    + '<div class="kx-actions"><button class="kx-btn kx-btn-quiet" type="button" data-act="attempts">Versuche und Vorfälle anzeigen</button></div><div id="kx-att-slot"></div></section>';
+}
+export function attemptsList(v) {
+  if (!v.attempts.length) return '<p role="status">Keine Versuche.</p>';
+  return `<p role="status">${v.attempts.length} Versuch${v.attempts.length === 1 ? '' : 'e'} (neueste zuerst, höchstens ${esc(v.limit)}).</p>` + v.attempts.map((a) => {
+    const scope = [a.module_scope ? `nur ${MODULE_DE[a.module_scope] || a.module_scope}` : '', a.part_scope != null ? `Teil ${a.part_scope}` : '', a.time_multiplier > 1 ? `Zeit +${Math.round((a.time_multiplier - 1) * 100)} %` : ''].filter(Boolean).join(' · ');
+    const mods = a.modules.map((m) => `<tr><th scope="row">${esc(MODULE_DE[m.module] || m.module)}</th><td>${esc(MOD_STATUS[m.status] || m.status)}</td><td>${esc(fmtMs(m.started_at))}</td>`
+      + `<td>${esc(fmtMs(m.submitted_at))}${m.submit_kind ? ` (${esc(SUBMIT_DE[m.submit_kind] || m.submit_kind)})` : ''}</td><td>${m.recovery_used ? 'ja' : '–'}</td></tr>`).join('');
+    const inc = a.incidents.map((i) => `<li>${esc(fmtMs(i.at))} · ${esc(INCIDENT_LABELS[i.kind] || i.kind)}${detailText(i.detail) ? ` <span class="kx-admin-detail">(${esc(detailText(i.detail))})</span>` : ''}</li>`).join('');
+    return `<article class="kx-admin-attempt"><h3>${esc(a.attempt_id)}</h3><p class="kx-admin-detail">${esc(a.mode)} · ${esc(a.level)} · ${esc(ATT_STATUS[a.status] || a.status)} · angelegt ${esc(fmtMs(a.created_at))}${scope ? ` · ${esc(scope)}` : ''}</p>`
+      + (mods ? `<div class="kx-table-wrap"><table class="kx-table"><caption>Module</caption><thead><tr><th scope="col">Modul</th><th scope="col">Status</th><th scope="col">Begonnen</th><th scope="col">Abgegeben</th><th scope="col">Hören-Wiederholung</th></tr></thead><tbody>${mods}</tbody></table></div>` : '')
+      + `<h4>Vorfälle</h4>${inc ? `<ul class="kx-admin-audit">${inc}</ul>` : '<p>Keine.</p>'}</article>`;
+  }).join('');
+}

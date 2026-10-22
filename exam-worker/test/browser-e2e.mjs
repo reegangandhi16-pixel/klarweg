@@ -1327,6 +1327,22 @@ async function runLesenOnly() {
       assert.equal(await evaluate(`document.querySelector('.kx-nav a[aria-current="true"]')?.getAttribute('href')`), '#part-4', `current part marked at ${w}px`);
       const cols = await evaluate(`(() => { const t = document.querySelector('#kx-main .kx-split .kx-task-texts').getBoundingClientRect(), i = document.querySelector('#kx-main .kx-split .kx-task-items').getBoundingClientRect(); return { sideBySide: t.right <= i.left + 1 && Math.abs(t.top - i.top) < 400, stacked: t.bottom <= i.top + 1 }; })()`);
       assert.equal(mobile ? cols.stacked : cols.sideBySide, true, `Lesen texts ${mobile ? 'above' : 'beside'} the tasks at ${w}px: ${JSON.stringify(cols)}`);
+      // ENGINE §9.1: on a phone a sticky "Text / Aufgaben" pair (above the submit bar) jumps between the stacked columns;
+      // hidden on wide screens where both are side by side
+      const tog = () => evaluate(`(() => { const split = [...document.querySelectorAll('#kx-main .kx-split')].find((x) => { const r = x.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }) || document.querySelector('#kx-main .kx-split');
+        const n = split.querySelector('.kx-split-toggle'); const st = getComputedStyle(n); const r = n.getBoundingClientRect(); const foot = document.querySelector('.kx-foot').getBoundingClientRect();
+        return { shown: st.display !== 'none', inView: r.top >= 0 && r.bottom <= innerHeight, aboveFoot: r.bottom <= foot.top + 1, links: [...n.querySelectorAll('a')].map((a) => a.getAttribute('href')) }; })()`);
+      if (!mobile) assert.equal((await tog()).shown, false, 'no Text/Aufgaben toggle beside side-by-side columns');
+      else {
+        await evaluate(`document.querySelector('#kx-main .kx-split .kx-task-items .kx-item:last-child').scrollIntoView({ block: 'center' })`); await sleep(300);
+        const t = await tog();
+        assert.ok(t.shown && t.inView && t.aboveFoot && t.links.length === 2, `sticky toggle on a phone: ${JSON.stringify(t)}`);
+        for (const [i, which] of [[0, 'texts'], [1, 'items']]) {
+          await evaluate(`[...document.querySelectorAll('#kx-main .kx-split .kx-split-toggle')].find((n) => { const r = n.getBoundingClientRect(); return r.top >= 0 && r.bottom <= innerHeight; }).querySelectorAll('a')[${i}].click()`); await sleep(400);
+          const land = await evaluate(`(() => { const el = document.querySelector(location.hash); const r = el.getBoundingClientRect(); return { hash: location.hash, top: r.top, bar: document.querySelector('.kx-bar').getBoundingClientRect().bottom }; })()`);
+          assert.ok(land.hash.startsWith(`#kx-${which}-`) && land.top >= land.bar - 1 && land.top < land.bar + 40, `toggle → ${which} lands below the bar: ${JSON.stringify(land)}`);
+        }
+      }
       if (process.env.KX_E2E_SHOTS) fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, `lesen-bar-${w}.png`), Buffer.from((await send('Page.captureScreenshot', { format: 'png' })).data, 'base64'));
     }
     await vp(1280, 800, false);

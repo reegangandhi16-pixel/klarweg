@@ -15,7 +15,7 @@ import { createSpeakingAudio } from './speaking-audio.js';
 import { countWords } from './wordcount.js';
 import { randomId } from './ids.js';
 import { pasteAllowed, PASTE_REFUSED, DEFAULT_PASTE_POLICY } from './paste.js';
-import { environmentNotes, playTestTone, testMicrophone, MIC_FIX, AUDIO_CHECK, MIC_CHECK, CONNECTION_CHECK, measureDownload, downloadNote } from './precheck.js';
+import { environmentNotes, missingFeatures, KEYBOARD_CHECK, keyboardNote, playTestTone, testMicrophone, MIC_FIX, AUDIO_CHECK, MIC_CHECK, CONNECTION_CHECK, measureDownload, downloadNote } from './precheck.js';
 import { framePeak, levelPercent, createSilenceWatch, SILENCE_HINT } from './level.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -169,9 +169,9 @@ function prevNote(module) {
 function intro(module) {
   const info = moduleIntro(module, (moduleState(module) || {}).intro);
   S.micOk = false;
-  const notes = environmentNotes({ storageKind: S.store && S.store.kind, offsetMs: clock.offset, rttMs: medianRtt() });
+  const notes = environmentNotes({ storageKind: S.store && S.store.kind, offsetMs: clock.offset, rttMs: medianRtt(), missing: missingFeatures(module) });
   const notesHtml = notes.length ? `<ul class="kx-precheck-notes">${notes.map((n) => `<li data-note="${esc(n.kind)}">${esc(n.text)}</li>`).join('')}</ul>` : '';
-  const check = module === 'hoeren' ? AUDIO_CHECK + CONNECTION_CHECK : module === 'sprechen' ? MIC_CHECK : '';
+  const check = module === 'hoeren' ? AUDIO_CHECK + CONNECTION_CHECK : module === 'sprechen' ? MIC_CHECK : module === 'schreiben' ? KEYBOARD_CHECK : '';
   const extra = module === 'sprechen' ? '<p>Für dieses Modul werden Ihre Antworten aufgenommen und privat gespeichert. Ohne Ihre Zustimmung kann das Modul nicht beginnen.</p><label class="kx-consent"><input type="checkbox" id="kx-consent"> Ich stimme der Aufnahme zu.</label>' : '';
   screen(`<main class="kx-card">${prevNote(module)}<p class="kx-eyebrow">Nächstes Modul</p><h1>${esc(MODULE_LABELS[module] || module)}</h1><div id="kx-break-slot"></div>${info}${notesHtml}${check}${extra}<div class="kx-actions"><button class="kx-btn" data-act="start" data-module="${module}">Modul starten</button></div></main>`);
   if (module === 'hoeren') runConnectionCheck().catch(() => {});
@@ -799,6 +799,7 @@ app.addEventListener('change', (e) => {
 app.addEventListener('input', (e) => {
   const el = e.target;
   if (el.matches && el.matches('[data-ad-filter]')) { applyAdFilter(el.closest('.kx-task')); return; }
+  if (el.matches && el.matches('[data-kbd-test]')) { const msg = $('#kx-kbd-msg'); if (msg) msg.textContent = keyboardNote(el.value); return; }   // a practice field, never an answer
   if (el.matches && el.matches('[data-volume]')) {   // Hören master volume: never an answer, never a pause or seek
     const v = clampVolume(el.value / 100); if (S.player) S.player.setVolume(v);
     el.setAttribute('aria-valuetext', `${el.value} %`); const out = el.parentElement.querySelector('.kx-volume-val'); if (out) out.textContent = `${el.value} %`;

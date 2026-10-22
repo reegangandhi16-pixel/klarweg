@@ -246,6 +246,10 @@ async function run(viewport) {
     await submitModule();
 
     await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`, 15000, 'Schreiben intro');
+    // §2.1 keyboard check before Schreiben (informational) and no browser-support note in a current Chrome
+    await evaluate(`document.getElementById('kx-kbd-test').focus()`); await send('Input.insertText', { text: 'äöüß' }); await sleep(150);
+    assert.equal(await evaluate(`document.getElementById('kx-kbd-msg').textContent`), 'Ihre Tastatur kann Umlaute und ß eingeben.');
+    assert.equal(await evaluate(`!!document.querySelector('[data-note="browser"]')`), false, 'no browser-support note in Chrome');
     assert.match(await text(), /Pause \(freiwillig\)/, 'break before Schreiben');
     await click('[data-act="start"][data-module="schreiben"]');
     await waitFor(`document.querySelector('textarea')`, 15000, 'editor');
@@ -2011,6 +2015,7 @@ async function runPrecheck() {
 
     // HÖREN: refused before the audio check; a reload keeps the same attempt and the saved answer
     await waitFor(`document.querySelector('[data-act="start"][data-module="hoeren"]')`, 15000, 'Hören intro');
+    assert.equal(await evaluate(`!!document.querySelector('[data-note="browser"]')`), false, 'a current Chrome has every feature Hören needs (§2.1)');
     // ENGINE §10 connection check: a timed 1 MiB download, once per attempt, guidance only (never blocks)
     await waitFor(`/Verbindung geprüft|Verbindung ist langsam/.test(document.querySelector('#kx-conn-msg')?.textContent || '')`, 25000, 'connection result');
     const dlHits = async () => ((await dev.env.DB.prepare("SELECT SUM(hits) AS n FROM rate_counters WHERE bucket LIKE 'dltest:%'").first()).n || 0);

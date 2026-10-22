@@ -130,6 +130,7 @@ function startHeartbeat() {
 async function route() {
   startHeartbeat();
   const a = nextAction(S.attempt);
+  if (a.kind !== 'resume') releaseBackGuard();   // no module runs on these screens: Back behaves normally again
   if (a.kind === 'start') return intro(a.module);
   if (a.kind === 'resume') return openModule(a.module);
   // a single-module attempt has nothing left after its only module: the learner already confirmed the submission
@@ -966,6 +967,13 @@ function guardBack() {
   // navigations, which also fire popstate) add unmarked entries in between and are never mistaken for leaving
   if (!(history.state && history.state.kxGuard)) { history.replaceState({ kxBase: true }, '', location.href); history.pushState({ kxGuard: true }, '', location.href); }
 }
+/* once no module is running (submitted, time up), the guard entry is taken off again by stepping back onto the exam
+   page's own entry (same document; the popstate handler ignores it because nothing is running), so a later Back leaves
+   with one press. Only from the guard entry itself, never during a resume. */
+// the page places the view itself (resume position, part tabs): a same-document history step (guard release, in-page
+// #links) must not restore an old scroll position over it
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+function releaseBackGuard() { if (history.state && history.state.kxGuard && !moduleRunning()) history.back(); }
 let leaving = false;
 window.addEventListener('popstate', (e) => {
   if (leaving || !(e.state && e.state.kxBase) || !moduleRunning() || !$('#kx-main')) return;

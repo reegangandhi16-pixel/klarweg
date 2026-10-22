@@ -1480,6 +1480,9 @@ async function runLesenOnly() {
       assert.ok(pos.noHScroll, `no horizontal scroll at ${w}px`);
       assert.ok(pos.barH <= 120, `the sticky bar stays compact at ${w}px (${pos.barH} px)`);
       ts = await tabState(); assert.deepEqual([ts.selected, ts.shown, ts.focus], [['4'], ['4'], 'part-4'], `Teil 4 open and focused at ${w}px: ${JSON.stringify(ts)}`);
+      // exam text size (ENGINE §9.2/§9.3): 17 px from 768 px, 16 px on a phone; line-height 1.55
+      const ty = await evaluate(`(() => { const p = document.querySelector('#kx-main .kx-part:not([hidden]) .kx-stim p'); const cs = getComputedStyle(p); return { size: parseFloat(cs.fontSize), lh: Math.round(parseFloat(cs.lineHeight) / parseFloat(cs.fontSize) * 100) / 100, family: cs.fontFamily }; })()`);
+      assert.ok(ty.size === (w >= 768 ? 17 : 16) && ty.lh === 1.55 && /Inter/.test(ty.family), `exam text at ${w}px: ${JSON.stringify(ty)}`);
       const tabVis = await evaluate(`(() => { const t = document.querySelector('[role="tab"][data-tab="4"]'), row = t.closest('ol'); const r = t.getBoundingClientRect(), rr = row.getBoundingClientRect(); return r.left >= rr.left - 1 && r.right <= rr.right + 1; })()`);
       assert.equal(tabVis, true, `the open part's tab is visible in the tab row at ${w}px`);
       const cols = await evaluate(`(() => { const t = document.querySelector('#kx-main .kx-part:not([hidden]) .kx-split .kx-task-texts').getBoundingClientRect(), i = document.querySelector('#kx-main .kx-part:not([hidden]) .kx-split .kx-task-items').getBoundingClientRect(); return { sideBySide: t.right <= i.left + 1 && t.top < i.bottom && t.bottom > i.top,   /* beside = no horizontal overlap, shared rows (the texts column is sticky, so tops differ) */ stacked: t.bottom <= i.top + 1 }; })()`);

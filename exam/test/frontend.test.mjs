@@ -1292,3 +1292,10 @@ test('BACK GUARD RELEASE: once no module runs, the guard entry is taken off (one
   // the release steps onto the kxBase entry while nothing runs: the popstate handler must ignore it
   assert.match(main, /if \(leaving \|\| !\(e\.state && e\.state\.kxBase\) \|\| !moduleRunning\(\) \|\| !\$\('#kx-main'\)\) return;/);
 });
+
+test('EXAM TEXT + TIMER ZERO: module text 17 px from 768 px (16 on phones), line-height 1.55 (ENGINE §9.2/§9.3, OD-39 default); unsent answers are sent the moment the timer reaches zero', () => {
+  const css = read('exam/exam.css');
+  assert.match(css, /\.kx-module \{ line-height: 1\.55; \}\n@media \(min-width: 768px\) \{ \.kx-module \{ font-size: 17px; \} \}/);
+  assert.match(css, /body \{[^}]*font: 400 16px\/1\.6 var\(--font-ui\);/, 'other pages unchanged');
+  assert.match(read('exam/js/main.js'), /if \(rem === 0\) \{ clearInterval\(S\.timer\); flushSoon\(\); setTimeout\(refresh, 11_000\); \}/);
+});

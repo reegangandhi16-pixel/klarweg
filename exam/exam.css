@@ -102,6 +102,18 @@ p { margin: 0 0 16px; }
 .kx-precheck-notes { margin: 0 0 16px; padding-left: 24px; color: var(--ink-secondary); }
 .kx-advisory { margin: -8px 0 16px; font: 500 12px/1.4 var(--font-mono); color: var(--ink-secondary); }
 .kx-review-warn { font-weight: 600; }
+/* item palette (ENGINE §9.1): in the sticky bar, scrolls on its own; states by fill / dashed outline / bar + words for AT */
+.kx-palette-toggle { min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font: 500 14px/1.2 var(--font-ui); color: var(--ink-primary); cursor: pointer; white-space: nowrap; }
+.kx-palette-toggle[aria-expanded="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.kx-palette { max-height: 40vh; overflow-y: auto; margin-top: 8px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.kx-palette-sum { margin: 0 0 8px; font: 500 13px/1.4 var(--font-mono); color: var(--ink-secondary); }
+.kx-palette-part { margin-bottom: 8px; }
+.kx-palette-title { margin: 0 0 4px; font-weight: 600; font-size: 14px; }
+.kx-palette ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.kx-pal { display: inline-flex; align-items: center; justify-content: center; position: relative; min-width: 44px; min-height: 44px; border-radius: 8px; font: 500 14px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-primary); text-decoration: none; }
+.kx-pal.is-answered { background: var(--elevated); border: 1px solid var(--line); }
+.kx-pal.is-open { border: 1px dashed var(--ink-tertiary); background: var(--surface); }
+.kx-pal.is-flagged::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: 4px; height: 3px; border-radius: 2px; background: var(--accent); }
 .kx-result-summary { font: 500 18px/1.4 var(--font-ui); margin: 16px 0 8px; }
 /* Hören master volume (AUDIO-SPEC A4) in the sticky bar */
 .kx-volume { display: flex; align-items: center; gap: 12px; margin: 4px 0 0; font-size: 14px; }

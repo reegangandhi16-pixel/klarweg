@@ -1163,3 +1163,22 @@ test('LEAD REVIEW (SCORING §4.4): disagreement list with criterion, rounds and 
   assert.equal(disagreementSection(null, esc), '');
   assert.match(disagreementSection({ threshold: 2, flags: [{ key, attempt_id: 'att_x', module: 'schreiben', item_id: 'itm:<b>', criterion: 'x"y', r1: 'A', r2: 'C', diff: 2 }] }, esc), /itm:&lt;b&gt;/);
 });
+
+test('ITEM PALETTE (ENGINE §9.1): toggle in the part navigation (aria-expanded/controls); every item as a jump with its state in words; summary; closed by default', async () => {
+  const { moduleNav, itemPalette } = await import('../js/render.js');
+  const progress = [{ part: 1, answered: 1, total: 2, items: [{ item_id: 'itm:a', no: '1', answered: true }, { item_id: 'itm:b', no: '2', answered: false }] },
+    { part: 2, answered: 0, total: 1, items: [{ item_id: 'itm:c', no: '3', answered: false }] }];
+  const closed = moduleNav(progress, 1);
+  assert.match(closed, /<li><button type="button" class="kx-palette-toggle" data-act="palette" aria-expanded="false" aria-controls="kx-palette">Übersicht<\/button><\/li><\/ol><\/nav>$/);
+  const open = moduleNav(progress, 1, { palette: true, flags: new Set(['itm:b']) });
+  assert.match(open, /aria-expanded="true"/);
+  assert.match(open, /<div class="kx-palette" id="kx-palette" role="region" aria-label="Aufgabenübersicht"><p class="kx-palette-sum">1 beantwortet · 2 offen · 1 markiert<\/p>/);
+  assert.match(open, /<a href="#item-itm_a" data-palette-jump class="kx-pal is-answered">1<span class="kx-sr">: beantwortet<\/span><\/a>/);
+  assert.match(open, /<a href="#item-itm_b" data-palette-jump class="kx-pal is-open is-flagged">2<span class="kx-sr">: offen, markiert<\/span><\/a>/);
+  assert.match(itemPalette(progress), /1 beantwortet · 2 offen<\/p>/, 'no "markiert" without flags');
+  const main = read('exam/js/main.js');
+  assert.match(main, /moduleNav\(progress\(\), S\.currentPart, \{ palette: !!S\.paletteOpen, flags: S\.flags \}\)/);
+  assert.match(main, /S\.paletteOpen = false; paintNav\(\);\s*if \(item\) \{ item\.scrollIntoView\(\{ block: 'start' \}\); const c = item\.querySelector/);
+  const css = read('exam/exam.css');
+  assert.match(css, /\.kx-pal \{[^}]*min-width: 44px; min-height: 44px;/); assert.match(css, /\.kx-palette \{ max-height: 40vh; overflow-y: auto;/);
+});

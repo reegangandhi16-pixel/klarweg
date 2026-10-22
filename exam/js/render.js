@@ -323,10 +323,24 @@ export function createRenderer(extra = {}) {
 }
 
 /* Part navigation for a module page: one link per part present, with its answered count. */
-export function moduleNav(progress, current = null) {
+export function moduleNav(progress, current = null, { palette = false, flags = new Set() } = {}) {
   if (!progress || progress.length < 2 || !progress.some((p) => p.total)) return '';
   return `<nav class="kx-nav" aria-label="Teile dieses Moduls"><ol>${progress.map((p) => `<li><a href="#part-${esc(p.part)}"${p.part === current ? ' aria-current="true"' : ''}>Teil ${esc(p.part)}`
-    + (p.total ? ` <span class="kx-nav-count" data-progress-part="${esc(p.part)}">${p.answered}/${p.total}</span>` : '') + '</a></li>').join('')}</ol></nav>`;
+    + (p.total ? ` <span class="kx-nav-count" data-progress-part="${esc(p.part)}">${p.answered}/${p.total}</span>` : '') + '</a></li>').join('')}`
+    + `<li><button type="button" class="kx-palette-toggle" data-act="palette" aria-expanded="${palette ? 'true' : 'false'}" aria-controls="kx-palette">Übersicht</button></li></ol></nav>`
+    + (palette ? itemPalette(progress, flags) : '');
+}
+
+/* ENGINE §9.1 item palette: every item of the module with its state in words (beantwortet / offen / markiert) and a
+   jump to it; state is also shown without colour (fill, dashed outline, bar). */
+const PAL_STATE = (r, flags) => [r.answered ? 'beantwortet' : 'offen', flags.has(r.item_id) ? 'markiert' : ''].filter(Boolean);
+export function itemPalette(progress, flags = new Set()) {
+  const parts = progress.filter((p) => p.total).map((p) => `<div class="kx-palette-part"><p class="kx-palette-title">Teil ${esc(p.part)}</p><ol>`
+    + p.items.map((r) => { const st = PAL_STATE(r, flags);
+      return `<li><a href="#item-${idSafe(r.item_id)}" data-palette-jump class="kx-pal${r.answered ? ' is-answered' : ' is-open'}${flags.has(r.item_id) ? ' is-flagged' : ''}">${esc(r.no)}<span class="kx-sr">: ${esc(st.join(', '))}</span></a></li>`; }).join('')
+    + '</ol></div>').join('');
+  const all = progress.flatMap((p) => p.items), open = all.filter((r) => !r.answered).length, marked = all.filter((r) => flags.has(r.item_id)).length;
+  return `<div class="kx-palette" id="kx-palette" role="region" aria-label="Aufgabenübersicht"><p class="kx-palette-sum">${esc(all.length - open)} beantwortet · ${esc(open)} offen${marked ? ` · ${esc(marked)} markiert` : ''}</p>${parts}</div>`;
 }
 
 /* In-page review before the final module submission (replaces a browser confirm dialog). The module page stays in

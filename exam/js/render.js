@@ -62,15 +62,29 @@ export function moduleIntro(module, intro) {
   return head + `<ul class="kx-intro-rules">${rules.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
 }
 
-/* Lesen Teil 3 style matching: which options are already chosen in another select of the same task (examples count).
-   selects: [{ id, value }] → Map(option_id → number of OTHER selects using it), per select id. Nothing is ever blocked:
-   the learner may still choose a used option; it is only marked. */
-export function matchUsage(selects) {
-  const count = new Map();
-  for (const s of selects) if (s.value) count.set(s.value, (count.get(s.value) || 0) + 1);
-  return new Map(selects.map((s) => [s.id, new Map([...count].map(([v, n]) => [v, n - (s.value === v ? 1 : 0)]).filter(([, n]) => n > 0))]));
+/* Lesen Teil 3 style matching (ENGINE §9.1 L3): which situation uses which option. selects: [{ no, value }] (no = the
+   item number shown, "Beispiel" for the example) → Map(option_id → [numbers]). Nothing is ever blocked or reset: a learner
+   may still choose a used ad; it is only marked ("verwendet bei 15"). */
+export function adUsage(selects) {
+  const by = new Map();
+  for (const sel of selects) if (sel.value) { if (!by.has(sel.value)) by.set(sel.value, []); by.get(sel.value).push(sel.no); }
+  return by;
 }
-export const USED_SUFFIX = ' (schon gewählt)';
+export function usedText(nos) {
+  if (!nos || !nos.length) return '';
+  const rest = nos.filter((n) => n !== 'Beispiel');
+  return `verwendet ${[nos.includes('Beispiel') ? 'im Beispiel' : '', rest.length ? `bei ${rest.join(', ')}` : ''].filter(Boolean).join(' und ')}`;
+}
+/* the number shown for an item: display_no, else the leading "13." of its stem; "Beispiel" for the example */
+export function itemNo(it) {
+  if (it.is_example) return 'Beispiel';
+  if (it.display_no != null && String(it.display_no).trim() !== '') return String(it.display_no);
+  const m = /^\s*(\d{1,3})[.)]\s/.exec(String(it.stem || ''));
+  return m ? m[1] : '';
+}
+/* phone ad filter: case-, accent- and ß-insensitive substring search */
+export const foldText = (t) => String(t || '').toLowerCase().replace(/ß/g, 'ss').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').trim();
+export const adMatches = (text, query) => !foldText(query) || foldText(text).includes(foldText(query));
 
 export const RESULT_ACTIONS = '<div class="kx-actions kx-result-actions"><button type="button" class="kx-btn" data-act="home">Zur Übersicht</button></div>';
 
@@ -167,7 +181,7 @@ function matching(it, value, disabled) {
   const id = `i_${idSafe(it.item_id)}`;
   const opts = ['<option value="">– bitte wählen –</option>'].concat((it.options || []).map((o) => `<option value="${esc(o.option_id)}" data-label="${esc(o.label)}"${value && value.option_id === o.option_id ? ' selected' : ''}>${esc(o.label)}</option>`)).join('');
   return `<div class="kx-item kx-match${it.is_example ? ' kx-example' : ''}" id="item-${idSafe(it.item_id)}"><label for="${id}">${it.is_example ? '<span class="kx-ex">Beispiel</span> ' : ''}${esc(displayStem(it))}</label>`
-    + `<select id="${id}" data-item="${esc(it.item_id)}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
+    + `<select id="${id}" data-item="${esc(it.item_id)}" data-no="${esc(itemNo(it))}"${disabled ? ' disabled' : ''}>${opts}</select></div>`;
 }
 
 function writing(it, value) {
@@ -212,6 +226,17 @@ export function createRenderer(extra = {}) {
     const html = fn(it, value, locked, ctx);
     return ctx.flags && !locked && FLAGGABLE.has(it.interaction) ? html.replace(/<\/(fieldset|div)>$/, `${flagButton(it.item_id, ctx.flags.has(it.item_id))}</$1>`) : html;
   }
+  function adCard(s, tk) {
+    const a = s.label.trim();
+    return `<article class="kx-stim kx-ad" id="kx-ad-${tk}-${idSafe(a)}" data-ad="${esc(a)}"><h3 class="kx-stim-label"><span class="kx-sr">Anzeige </span>${esc(a)}</h3>`
+      + `${paragraphs(s.text)}<p class="kx-ad-used" data-ad-status></p></article>`;
+  }
+  function adFilter(tk, total) {
+    return `<div class="kx-ad-filter" role="group" aria-label="Anzeigen filtern"><label for="kx-adq-${tk}">Anzeigen durchsuchen</label>`
+      + `<input type="search" id="kx-adq-${tk}" data-ad-filter autocomplete="off" spellcheck="false" lang="de">`
+      + `<label class="kx-ad-unused"><input type="checkbox" data-ad-unused> Nur noch nicht verwendete Anzeigen</label>`
+      + `<p class="kx-ad-count" data-ad-count data-total="${total}" role="status"></p></div>`;
+  }
   function stimulus(s, id = null) {
     if (s.kind === 'text') return `<article class="kx-stim"${id ? ` id="${id}" tabindex="-1"` : ''}>${s.label ? `<h3 class="kx-stim-label">${esc(s.label)}</h3>` : ''}${paragraphs(s.text)}</article>`;
     if (s.kind === 'audio') return `<p class="kx-audio-label"><span class="kx-meta">${esc(s.label || 'Audio')}</span></p>`;
@@ -230,12 +255,18 @@ export function createRenderer(extra = {}) {
     shown.forEach((s, n) => { if (s.kind === 'text' && s.label) byLabel.set(s.label.trim(), byLabel.has(s.label.trim()) ? null : n); });
     const jumpTo = (it) => { const n = byLabel.get(displayStem(it).replace(/^\s*\d+\.\s*/, '').trim()); return n == null ? null : `kx-stim-${tk}-${n}`; };
     const linked = ctx.split && shown.length > 1 && t.items.some((it) => jumpTo(it));
-    const texts = shown.map((s, n) => stimulus(s, linked && s.kind === 'text' && s.label && byLabel.get(s.label.trim()) === n ? `kx-stim-${tk}-${n}` : null)).join('');
+    /* Lesen Teil 3 style: every item picks from one pool and every text is one lettered ad of that pool → ad cards (a grid
+       from 768 px) with their usage, and a search/"unused" filter on phones that only hides cards, never answers */
+    const pool = t.items.length && t.items.every((it) => it.interaction === 'matching_pool') ? new Set((t.items[0].options || []).map((o) => o.option_id)) : null;
+    const textStims = shown.filter((s) => s.kind === 'text');
+    const adMode = !!ctx.split && !!pool && textStims.length >= 2 && textStims.length === shown.length && textStims.every((s) => s.label && pool.has(s.label.trim()));
+    const texts = adMode ? adFilter(tk, textStims.length) + `<div class="kx-ads-list">${textStims.map((s) => adCard(s, tk)).join('')}</div>`
+      : shown.map((s, n) => stimulus(s, linked && s.kind === 'text' && s.label && byLabel.get(s.label.trim()) === n ? `kx-stim-${tk}-${n}` : null)).join('');
     const items = t.items.map((it) => { const html = item(it, answers, ctx), to = linked && jumpTo(it); return to
       ? html.replace('</legend>', `</legend><a class="kx-stim-jump" href="#${to}" aria-label="Zum Text von ${esc(displayStem(it).replace(/^\s*\d+\.\s*/, ''))}">Zum Text</a>`) : html; }).join('');
     if (ctx.split && texts && items && t.stimuli.some((s) => s.kind === 'text')) {
-      /* narrow screens (< 1024 px) stack texts above tasks: a sticky "Text / Aufgaben" pair jumps between them
-         (ENGINE §9.1; plain links, hidden on wide screens where both are side by side) */
+      /* phones (< 768 px) stack texts above tasks: a sticky "Text / Aufgaben" pair jumps between them; tablets get a
+         collapsible texts column (ENGINE §9.1) */
       const k = tk;
       const w = ctx.module === 'schreiben';
       return `<div class="kx-task kx-split">${instr}<button type="button" class="kx-split-collapse" data-act="toggle-texts" aria-expanded="true" aria-controls="kx-texts-${k}">${w ? 'Beitrag' : 'Texte'} zu Teil ${esc(p.part)}</button><div class="kx-split-grid"><div class="kx-task-texts" id="kx-texts-${k}" role="region" tabindex="0" aria-label="${w ? 'Beitrag' : 'Texte'} zu Teil ${esc(p.part)}">${texts}</div>`

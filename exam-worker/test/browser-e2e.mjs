@@ -1415,6 +1415,60 @@ async function runLesenOnly() {
       const r = await apiFetch('GET', `/attempts/${attempt.id}/modules/${module}/package?lease_id=${lease}`);
       assert.equal(r.status, 404, `${module} unreachable: ${JSON.stringify(r.json)}`); assert.equal(r.json.error, 'module_not_found');
     }
+    // ENGINE §9.1 L3: ads as equal cards (grid from 768 px) that say where they are used; options say "verwendet bei n";
+    // choosing an ad twice is marked, never blocked or reset; the phone filter only hides cards
+    {
+      const t3 = '[data-part="3"]';
+      const sel = (no) => `${t3} select[data-no="${no}"]`;
+      const choose = (no, v) => evaluate(`(() => { const s = document.querySelector('${sel(no)}'); s.value = '${v}'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+      const view = () => evaluate(`(() => { const cards = [...document.querySelectorAll('${t3} .kx-ad')]; const vis = cards.filter((c) => getComputedStyle(c).display !== 'none');
+        const rects = vis.map((c) => c.getBoundingClientRect()); const lefts = [...new Set(rects.map((r) => Math.round(r.left)))];
+        const c = document.querySelector('${t3} .kx-ad[data-ad="c"]');
+        return { n: cards.length, visible: vis.map((x) => x.dataset.ad).join(''), cols: lefts.length, widths: [...new Set(rects.map((r) => Math.round(r.width)))].length,
+          grid: getComputedStyle(document.querySelector('${t3} .kx-ads-list')).display, cStatus: c.querySelector('[data-ad-status]').textContent, cUsed: c.classList.contains('kx-ad-is-used'), cEdge: getComputedStyle(c).boxShadow !== 'none',
+          opt14c: [...document.querySelector('${sel(14)}').options].find((o) => o.value === 'c').textContent, filterShown: getComputedStyle(document.querySelector('${t3} .kx-ad-filter')).display !== 'none',
+          count: document.querySelector('${t3} [data-ad-count]').textContent, values: [...document.querySelectorAll('${t3} select[data-item]')].map((s) => s.value).join(','), noH: document.documentElement.scrollWidth <= innerWidth + 1 }; })()`);
+      const shot3 = async (name) => { if (!process.env.KX_E2E_SHOTS) return; await evaluate(`document.querySelector('${t3} .kx-ads-list').scrollIntoView({ block: 'start' }); window.scrollBy(0, -140)`); await sleep(200); fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, `lesen-ads-${name}.png`), Buffer.from((await send('Page.captureScreenshot', { format: 'png' })).data, 'base64')); };
+      const t3Rows = async () => JSON.stringify((await dev.env.DB.prepare("SELECT r.item_id, r.value_json FROM responses_current r JOIN items_index i ON i.item_id = r.item_id WHERE i.module = 'lesen' AND i.part = 3 ORDER BY r.item_id").all()).results);
+      await vp(1280, 800, false); await sleep(200);
+      let v = await view();
+      assert.ok(v.n === 10 && v.visible === 'abcdefghij' && v.grid === 'grid' && v.cols === 2 && v.widths === 1 && !v.filterShown && v.cStatus === '' && v.opt14c === 'c' && v.noH, `L3 desktop grid ${JSON.stringify(v)}`);
+      await choose(13, 'c'); await sleep(200); v = await view();
+      assert.ok(v.cStatus === 'verwendet bei 13' && v.cUsed && v.cEdge && v.opt14c === 'c (verwendet bei 13)', `L3 used ad marked ${JSON.stringify(v)}`);
+      await choose(14, 'c'); await sleep(200); v = await view();
+      assert.ok(v.cStatus === 'verwendet bei 13, 14 – jede Anzeige darf nur einmal gewählt werden' && /^Beispiel|,c,c,/.test(v.values), `L3 a second use is marked, not blocked ${JSON.stringify(v)}`);
+      await shot3('1280');
+      const usesOf = async (opt) => JSON.parse(await t3Rows()).filter((r) => JSON.parse(r.value_json).option_id === opt).length;
+      for (const t0 = Date.now(); (await usesOf('c')) !== 2; await sleep(200)) if (Date.now() - t0 > 15000) throw new Error(`both uses of ad c stored: ${await t3Rows()}`);
+      await vp(800, 1024, true); await sleep(200); v = await view();
+      assert.ok(v.grid === 'grid' && v.visible === 'abcdefghij' && !v.filterShown && v.noH, `L3 tablet ${JSON.stringify(v)}`);
+      // phone: filter by text and by "unused"; answers and server rows never change
+      await vp(360, 640, true); await sleep(200);
+      const before = { values: (await view()).values, rows: await t3Rows() };
+      v = await view(); assert.ok(v.filterShown && v.visible === 'abcdefghij' && v.count === '' && v.noH, `L3 phone filter ${JSON.stringify(v)}`);
+      const typeQ = (q) => evaluate(`(() => { const i = document.querySelector('${t3} [data-ad-filter]'); i.value = ${JSON.stringify('')} + ${JSON.stringify(q)}; i.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+      await typeQ('zzzz'); await sleep(200); v = await view();
+      assert.ok(v.visible === '' && v.count === 'Keine Anzeige passt zum Filter. Ihre Antworten bleiben unverändert.', `L3 empty filter ${JSON.stringify(v)}`);
+      const word = await evaluate(`document.querySelector('${t3} .kx-ad[data-ad="j"] p').textContent.split(/\\s+/).find((w) => w.length > 6)`);
+      await typeQ(word.toUpperCase()); await sleep(200); v = await view();
+      assert.ok(v.visible.includes('j') && /^\d+ von 10 Anzeigen$/.test(v.count), `L3 text filter "${word}" ${JSON.stringify(v)}`);
+      await typeQ(''); await evaluate(`document.querySelector('${t3} [data-ad-unused]').click()`); await sleep(200); v = await view();
+      assert.ok(v.visible === 'bdefghij' && v.count === '8 von 10 Anzeigen', `L3 unused filter hides the used ads (a: example, c) ${JSON.stringify(v)}`);
+      await shot3('360-unused');
+      await choose(13, 'd'); await sleep(200); v = await view();
+      assert.ok(!v.visible.includes('d') && v.visible.includes('c') === false && v.cStatus === 'verwendet bei 14', `L3 filter follows a new choice ${JSON.stringify(v)}`);
+      await choose(13, 'c'); await sleep(200);
+      await A.a11y('Lesen Teil 3 phone filter');
+      v = await view(); assert.equal(v.values, before.values, 'filtering changed no answer'); assert.ok(v.noH);
+      for (const t0 = Date.now(); (await t3Rows()) !== before.rows; await sleep(200)) if (Date.now() - t0 > 15000) throw new Error(`server rows after filtering differ`);
+      // an active phone filter never hides cards on wider screens
+      await vp(1280, 800, false); await sleep(200); v = await view();
+      assert.ok(v.visible === 'abcdefghij', `L3 desktop ignores the phone filter ${JSON.stringify(v)}`);
+      await vp(360, 640, true); await sleep(200);
+      await evaluate(`document.querySelector('${t3} [data-ad-unused]').click()`); await sleep(100);
+      await vp(1280, 800, false); await sleep(200);
+      await choose(14, ''); await sleep(200);
+    }
     const lesen = (await dev.env.DB.prepare("SELECT item_id FROM items_index WHERE module = 'lesen' AND is_example = 0").all()).results;
     await evaluate(`(() => { const plan = ${JSON.stringify(Object.fromEntries(lesen.map((r) => [r.item_id, keys[r.item_id]])))};
       for (const [id, v] of Object.entries(plan)) { const el = document.querySelector('[data-item="' + id + '"][value="' + v + '"]');

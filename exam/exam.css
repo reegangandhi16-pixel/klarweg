@@ -102,6 +102,12 @@ p { margin: 0 0 16px; }
 .kx-precheck-notes { margin: 0 0 16px; padding-left: 24px; color: var(--ink-secondary); }
 .kx-advisory { margin: -8px 0 16px; font: 500 12px/1.4 var(--font-mono); color: var(--ink-secondary); }
 .kx-review-warn { font-weight: 600; }
+/* item flag: quiet text button under the item; pressed = teal outline + marker bar, never colour alone */
+.kx-flag { display: flex; width: fit-content; align-items: center; gap: 8px; min-height: 44px; margin-top: 8px; margin-left: -8px; padding: 0 8px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--ink-secondary); font: 500 14px/1.2 var(--font-ui); cursor: pointer; }
+.kx-flag::before { content: ""; width: 4px; height: 16px; border-radius: 2px; background: var(--line); }
+.kx-flag[aria-pressed="true"] { border-color: var(--accent); color: var(--ink-primary); box-shadow: inset 0 0 0 1px var(--accent); }
+.kx-flag[aria-pressed="true"]::before { background: var(--accent); }
+.kx-flag[aria-pressed="true"]::after { content: "· markiert"; content: "· markiert" / ""; font-weight: 600; }   /* visible state word, not part of the accessible name (aria-pressed is) */
 .kx-nav a[aria-current="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
 /* Lesen on narrow screens: a sticky Text / Aufgaben pair (above the sticky submit bar) while the task is in view */
 .kx-split-toggle { display: none; }

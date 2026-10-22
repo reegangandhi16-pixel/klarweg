@@ -147,6 +147,11 @@ export function displayStem(it) {
   return it.is_example ? stem.replace(/^\s*Beispiel:\s*/, '') : stem;
 }
 
+/* "Zur Kontrolle markieren" (ENGINE §9.1): a learner's own reminder on a choice item. Kept on this device only, never
+   sent or scored; the submit review lists marked items. The label stays fixed; aria-pressed carries the state. */
+export const FLAGGABLE = new Set(['binary_choice', 'mcq_single', 'speaker_assignment', 'matching_pool']);
+export const flagButton = (itemId, on) => `<button type="button" class="kx-flag" data-flag="${esc(itemId)}" aria-pressed="${on ? 'true' : 'false'}">Zur Kontrolle markieren</button>`;
+
 function choice(it, value, disabled) {
   const name = `i_${idSafe(it.item_id)}`;
   const opts = (it.options || []).map((o) => {
@@ -203,7 +208,9 @@ export function createRenderer(extra = {}) {
     const fn = registry[it.interaction];
     if (!fn) return `<p class="kx-error">Nicht unterstützter Aufgabentyp: ${esc(it.interaction)}</p>`;
     const value = it.is_example ? { option_id: it.example_answer } : answers[it.item_id];
-    return fn(it, value, !!it.is_example || !!(ctx.locked && ctx.locked.has(it.item_id)), ctx);
+    const locked = !!it.is_example || !!(ctx.locked && ctx.locked.has(it.item_id));
+    const html = fn(it, value, locked, ctx);
+    return ctx.flags && !locked && FLAGGABLE.has(it.interaction) ? html.replace(/<\/(fieldset|div)>$/, `${flagButton(it.item_id, ctx.flags.has(it.item_id))}</$1>`) : html;
   }
   function stimulus(s) {
     if (s.kind === 'text') return `<article class="kx-stim">${s.label ? `<h3 class="kx-stim-label">${esc(s.label)}</h3>` : ''}${paragraphs(s.text)}</article>`;
@@ -251,10 +258,11 @@ export function moduleNav(progress, current = null) {
 
 /* In-page review before the final module submission (replaces a browser confirm dialog). The module page stays in
    place underneath — the timer and, in Hören, the playback keep running. */
-export function reviewPanel(progress) {
+export function reviewPanel(progress, flags = new Set()) {
   const total = progress.reduce((n, p) => n + p.total, 0), done = progress.reduce((n, p) => n + p.answered, 0), open = total - done;
   const summary = !total ? 'In diesem Modul gibt es keine Aufgaben zum Ankreuzen.'
     : open ? `${open} von ${total} Aufgaben sind noch ohne Antwort.` : `Alle ${total} Aufgaben sind beantwortet.`;
+  const marked = progress.reduce((n, p) => n + p.items.filter((r) => flags.has(r.item_id)).length, 0);
   const parts = progress.filter((p) => p.total).map((p) => {
     const missing = p.items.filter((r) => !r.answered);
     const writing = p.items.filter((r) => r.interaction === 'text_response')
@@ -262,10 +270,11 @@ export function reviewPanel(progress) {
         + `${belowHalf(r.words, r.target_words) ? ` – weniger als die Hälfte. ${esc(LENGTH_RULE_NOTE)}` : ''}</li>`).join('');
     return `<li><span class="kx-review-part">Teil ${esc(p.part)}: ${p.answered} von ${p.total} beantwortet</span>`
       + (missing.length ? `<span class="kx-review-open"> · ohne Antwort: ${missing.map((r) => `<a href="#item-${idSafe(r.item_id)}" data-review-jump>Aufgabe ${esc(r.no)}</a>`).join(', ')}</span>` : '')
+      + (p.items.some((r) => flags.has(r.item_id)) ? `<span class="kx-review-marked"> · markiert: ${p.items.filter((r) => flags.has(r.item_id)).map((r) => `<a href="#item-${idSafe(r.item_id)}" data-review-jump>Aufgabe ${esc(r.no)}</a>`).join(', ')}</span>` : '')
       + (writing ? `<ul class="kx-review-words">${writing}</ul>` : '') + '</li>';
   }).join('');
   return `<section class="kx-review" id="kx-review" aria-labelledby="kx-review-title"><h2 id="kx-review-title" tabindex="-1">Abgabe prüfen</h2>`
-    + `<p class="kx-review-summary">${esc(summary)}</p>${parts ? `<ul class="kx-review-list">${parts}</ul>` : ''}`
+    + `<p class="kx-review-summary">${esc(summary)}${marked ? ` ${esc(marked === 1 ? '1 Aufgabe ist' : `${marked} Aufgaben sind`)} zur Kontrolle markiert.` : ''}</p>${parts ? `<ul class="kx-review-list">${parts}</ul>` : ''}`
     + '<p class="kx-meta">Nach der Abgabe sind keine Änderungen mehr möglich. Die Zeit läuft weiter.</p>'
     + '<div class="kx-actions"><button type="button" class="kx-btn kx-btn-quiet" data-act="review-close">Weiter bearbeiten</button>'
     + '<button type="button" class="kx-btn" data-act="submit-confirm">Endgültig abgeben</button></div></section>';

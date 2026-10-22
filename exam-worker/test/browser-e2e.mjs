@@ -1334,7 +1334,7 @@ async function runLesenOnly() {
       assert.ok(pos.noHScroll, `no horizontal scroll at ${w}px`);
       assert.ok(pos.bar <= 120, `the sticky bar stays compact at ${w}px (${pos.bar} px)`);
       assert.equal(await evaluate(`document.querySelector('.kx-nav a[aria-current="true"]')?.getAttribute('href')`), '#part-4', `current part marked at ${w}px`);
-      const cols = await evaluate(`(() => { const t = document.querySelector('#kx-main .kx-split .kx-task-texts').getBoundingClientRect(), i = document.querySelector('#kx-main .kx-split .kx-task-items').getBoundingClientRect(); return { sideBySide: t.right <= i.left + 1 && Math.abs(t.top - i.top) < 400, stacked: t.bottom <= i.top + 1 }; })()`);
+      const cols = await evaluate(`(() => { const t = document.querySelector('#kx-main .kx-split .kx-task-texts').getBoundingClientRect(), i = document.querySelector('#kx-main .kx-split .kx-task-items').getBoundingClientRect(); return { sideBySide: t.right <= i.left + 1 && t.top < i.bottom && t.bottom > i.top,   /* beside = no horizontal overlap, shared rows (the texts column is sticky, so tops differ) */ stacked: t.bottom <= i.top + 1 }; })()`);
       assert.equal(mobile ? cols.stacked : cols.sideBySide, true, `Lesen texts ${mobile ? 'above' : 'beside'} the tasks at ${w}px: ${JSON.stringify(cols)}`);
       // ENGINE §9.1: on a phone a sticky "Text / Aufgaben" pair (above the submit bar) jumps between the stacked columns;
       // hidden on wide screens where both are side by side
@@ -1415,6 +1415,22 @@ async function runLesenOnly() {
     // back to the correct answer for the score check below
     await evaluate(`document.querySelector('input[type=radio][data-item="${probeItem}"][value="${correctOpt}"]').click()`);
     for (const t0 = Date.now(); (await stored()) !== correctOpt; await sleep(200)) if (Date.now() - t0 > 15000) throw new Error('answer not restored');
+    // ENGINE §9.1 item flag: a local reminder — survives a reload, listed in the submit review, never sent to the server
+    const serverRows = async () => JSON.stringify((await dev.env.DB.prepare("SELECT item_id, value_json, seq FROM responses_current WHERE module = 'lesen' ORDER BY item_id").all()).results);
+    await sleep(1500); const rowsBefore = await serverRows();
+    const flagSel = `.kx-flag[data-flag="${probeItem}"]`;
+    assert.equal(await evaluate(`document.querySelector('${flagSel}').getAttribute('aria-pressed')`), 'false');
+    await click(flagSel);
+    assert.equal(await evaluate(`document.querySelector('${flagSel}').getAttribute('aria-pressed')`), 'true', 'flag pressed');
+    assert.deepEqual(await evaluate(`JSON.parse(localStorage.getItem('kx-flags:${attempt.id}'))`), [probeItem], 'flag kept on the device');
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
+    await waitFor(`!window.__beforeReload && document.querySelector('${flagSel}')?.getAttribute('aria-pressed') === 'true'`, 15000, 'flag restored after reload');
+    await sleep(1500);
+    assert.equal(await serverRows(), rowsBefore, 'flagging changed nothing on the server');
+    await click('[data-act="submit"]'); await waitFor(`document.querySelector('#kx-review')`, 5000, 'review with flags');
+    assert.match(await evaluate(`document.querySelector('#kx-review').innerText`), /1 Aufgabe ist zur Kontrolle markiert[\s\S]*markiert: Aufgabe \d+/, 'the review lists the marked item');
+    await A.a11y('Lesen review with a marked item');
+    await click('[data-act="review-close"]'); await waitFor(`!document.querySelector('#kx-review')`, 5000, 'review closed');
     await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]');
     // a single-module attempt goes straight from the confirmed submission to its result (no extra "Abschließen" step)
     await waitFor(`document.querySelector('.kx-result table')`, 15000, 'result');

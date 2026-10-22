@@ -296,6 +296,30 @@ function watchBar() {
   barObserver.observe(bar);
 }
 let partFrame = 0;
+/* "Resume at the same part and item" (GOETHE-B1-DIGITAL §10 refresh/crash, Lesen + Schreiben): the last item the learner
+   answered or focused is kept per attempt and module on this device; after a reload it is brought back into view below
+   the sticky bar (not focused: that would open a phone keyboard) and the part is announced. */
+const POS_MODULES = ['lesen', 'schreiben'];
+const posKey = () => `kx-pos:${S.attempt && S.attempt.attempt_id}:${S.module}`;
+function rememberPosition(el) {
+  if (!S.attempt || !POS_MODULES.includes(S.module)) return;
+  const item = el && el.closest && el.closest('[id^="item-"]'); if (!item) return;
+  try { localStorage.setItem(posKey(), item.id); } catch { /* this page only */ }
+}
+function restorePosition() {
+  if (!S.attempt || !POS_MODULES.includes(S.module)) return;
+  let id = null; try { id = localStorage.getItem(posKey()); } catch { return; }
+  const item = id && document.getElementById(id); if (!item) return;
+  // measured, not via scroll-margin: the bar-height variable is set by a ResizeObserver that may not have run yet
+  // after layout: the next frame, or a short timer when frames are throttled (once either way)
+  let done = false;
+  const go = () => { if (done) return; done = true; const bar = $('.kx-bar'); const below = bar ? bar.getBoundingClientRect().bottom + 8 : 0; window.scrollTo(0, Math.max(0, window.scrollY + item.getBoundingClientRect().top - below)); };
+  requestAnimationFrame(go); setTimeout(go, 100);
+  const part = item.closest('.kx-part');
+  if (part) announce(`Weiter in Teil ${part.dataset.part}, bei der zuletzt bearbeiteten Aufgabe.`);
+}
+app.addEventListener('focusin', (e) => rememberPosition(e.target));
+
 function trackCurrentPart() {
   if (partFrame) return;
   partFrame = requestAnimationFrame(() => {
@@ -345,6 +369,7 @@ function paint() {
   markUsedOptions();
   markTopicDecks(S.locked.size > 0);
   trackCurrentPart();
+  restorePosition();
 }
 /* Matching tasks (ENGINE §9.1 L3): each option and each ad card says which situations use it ("verwendet bei 15");
    nothing is blocked and no answer is ever changed here. A phone ad filter is re-applied after a change. */
@@ -709,6 +734,7 @@ app.addEventListener('change', (e) => {
   // choices only: a textarea also fires 'change' when it loses focus, and its text is saved by the 'input' handler
   // below; treating it as a choice replaced the essay with { option_id: <text> } and the save was refused (A3)
   if (!el.dataset || !el.dataset.item || !S.autosave || el.tagName === 'TEXTAREA') return;
+  rememberPosition(el);
   const value = { option_id: el.value === '' ? null : el.value };
   S.answers[el.dataset.item] = value; S.autosave.set(el.dataset.item, value);
   updateProgress();

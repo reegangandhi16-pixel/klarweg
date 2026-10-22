@@ -1326,7 +1326,7 @@ async function runLesenOnly() {
     const bar = await evaluate(`(() => { const r = document.querySelector('.kx-bar').getBoundingClientRect(); const tm = document.querySelector('.kx-timer').getBoundingClientRect(); return { top: Math.round(r.top), timerVisible: tm.top >= 0 && tm.bottom <= innerHeight, nav: !!document.querySelector('.kx-bar .kx-nav') }; })()`);
     assert.deepEqual(bar, { top: 0, timerVisible: true, nav: true }, 'sticky bar with timer and part navigation');
     // a part jump lands the "Teil n" heading below the sticky bar, at desktop and phone width
-    for (const [w, h, mobile] of [[1280, 800, false], [360, 640, true]]) {
+    for (const [w, h, mobile] of [[1280, 800, false], [800, 1024, true], [360, 640, true]]) {
       await vp(w, h, mobile); await evaluate(`window.scrollTo(0, 0)`); await sleep(100);
       await evaluate(`document.querySelector('.kx-nav a[href="#part-4"]').click()`); await sleep(400);
       const pos = await evaluate(`({ bar: document.querySelector('.kx-bar').getBoundingClientRect().bottom, head: document.getElementById('part-4').getBoundingClientRect().top, noHScroll: document.documentElement.scrollWidth <= innerWidth + 1 })`);
@@ -1335,13 +1335,14 @@ async function runLesenOnly() {
       assert.ok(pos.bar <= 120, `the sticky bar stays compact at ${w}px (${pos.bar} px)`);
       assert.equal(await evaluate(`document.querySelector('.kx-nav a[aria-current="true"]')?.getAttribute('href')`), '#part-4', `current part marked at ${w}px`);
       const cols = await evaluate(`(() => { const t = document.querySelector('#kx-main .kx-split .kx-task-texts').getBoundingClientRect(), i = document.querySelector('#kx-main .kx-split .kx-task-items').getBoundingClientRect(); return { sideBySide: t.right <= i.left + 1 && t.top < i.bottom && t.bottom > i.top,   /* beside = no horizontal overlap, shared rows (the texts column is sticky, so tops differ) */ stacked: t.bottom <= i.top + 1 }; })()`);
-      assert.equal(mobile ? cols.stacked : cols.sideBySide, true, `Lesen texts ${mobile ? 'above' : 'beside'} the tasks at ${w}px: ${JSON.stringify(cols)}`);
+      assert.equal(w < 768 ? cols.stacked : cols.sideBySide, true, `Lesen texts ${w < 768 ? 'above' : 'beside'} the tasks at ${w}px: ${JSON.stringify(cols)}`);
       // ENGINE §9.1: on a phone a sticky "Text / Aufgaben" pair (above the submit bar) jumps between the stacked columns;
       // hidden on wide screens where both are side by side
       const tog = () => evaluate(`(() => { const split = [...document.querySelectorAll('#kx-main .kx-split')].find((x) => { const r = x.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }) || document.querySelector('#kx-main .kx-split');
         const n = split.querySelector('.kx-split-toggle'); const st = getComputedStyle(n); const r = n.getBoundingClientRect(); const foot = document.querySelector('.kx-foot').getBoundingClientRect();
         return { shown: st.display !== 'none', inView: r.top >= 0 && r.bottom <= innerHeight, aboveFoot: r.bottom <= foot.top + 1, links: [...n.querySelectorAll('a')].map((a) => a.getAttribute('href')) }; })()`);
-      if (!mobile) assert.equal((await tog()).shown, false, 'no Text/Aufgaben toggle beside side-by-side columns');
+      assert.equal(await evaluate(`[...document.querySelectorAll('.kx-split-collapse')].some((b) => getComputedStyle(b).display !== 'none')`), w >= 768 && w < 1024, `collapse control only at tablet width (${w}px)`);
+      if (w >= 768) assert.equal((await tog()).shown, false, `no Text/Aufgaben toggle beside side-by-side columns (${w}px)`);
       else {
         await evaluate(`document.querySelector('#kx-main .kx-split .kx-task-items .kx-item:last-child').scrollIntoView({ block: 'center' })`); await sleep(300);
         const t = await tog();
@@ -1364,6 +1365,46 @@ async function runLesenOnly() {
         const col = t.closest('.kx-task-texts').getBoundingClientRect(); const top = Math.max(bar, col.top);
         return { hash: location.hash, label: t.querySelector('.kx-stim-label').textContent, visible: r.top >= top - 1 && r.top < Math.min(innerHeight, col.bottom) - 40 }; })()`);
       assert.ok(jump.endsWith(seen.label) && seen.visible, `Teil 4 jump at ${w}px: ${jump} → ${JSON.stringify(seen)}`);
+    }
+    // ENGINE §9.1 tablet (768–1023 px): split pane with a collapsible texts column — keyboard, focus, labels, layout
+    {
+      await vp(800, 1024, true); await evaluate(`window.scrollTo(0, 0)`); await sleep(200);
+      const key = async (k, code, vk, text) => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: k, code, windowsVirtualKeyCode: vk, ...(text && type === 'keyDown' ? { text } : {}) }); await sleep(150); };
+      const state = (part) => evaluate(`(() => { const sp = document.querySelector('[data-part="${part}"] .kx-split'); const b = sp.querySelector('.kx-split-collapse'); const r = b.getBoundingClientRect();
+        const texts = document.getElementById(b.getAttribute('aria-controls')); const items = sp.querySelector('.kx-task-items').getBoundingClientRect(), grid = sp.querySelector('.kx-split-grid').getBoundingClientRect();
+        return { name: b.textContent, expanded: b.getAttribute('aria-expanded'), h: Math.round(r.height), textsShown: getComputedStyle(texts).display !== 'none', itemsFull: Math.abs(items.width - grid.width) < 2,
+          focused: document.activeElement === b, ring: b.matches(':focus-visible') && getComputedStyle(b).outlineStyle !== 'none' && parseFloat(getComputedStyle(b).outlineWidth) >= 2,
+          noH: document.documentElement.scrollWidth <= innerWidth + 1 }; })()`);
+      let st = await state(1);
+      assert.ok(st.name === 'Texte zu Teil 1' && st.expanded === 'true' && st.h >= 44 && st.textsShown && !st.itemsFull && st.noH, `tablet: expanded by default ${JSON.stringify(st)}`);
+      await evaluate(`document.querySelector('[data-part="1"] .kx-split-collapse').focus()`);
+      await key('Enter', 'Enter', 13, '\r'); st = await state(1);
+      assert.ok(st.expanded === 'false' && !st.textsShown && st.itemsFull && st.focused && st.ring && st.noH, `tablet: Enter collapses, focus stays with a visible ring ${JSON.stringify(st)}`);
+      await A.a11y('Lesen tablet, texts collapsed');   // the audit tabs through the page: focus the control again
+      await evaluate(`document.querySelector('[data-part="1"] .kx-split-collapse').focus()`);
+      await key(' ', 'Space', 32, ' '); st = await state(1);
+      assert.ok(st.expanded === 'true' && st.textsShown && !st.itemsFull && st.focused && st.noH, `tablet: Space expands ${JSON.stringify(st)}`);
+      // part navigation still lands below the bar while a panel is collapsed
+      await evaluate(`document.querySelector('[data-part="1"] .kx-split-collapse').click()`);
+      await evaluate(`document.querySelector('.kx-nav a[href="#part-3"]').click()`); await sleep(400);
+      const nav = await evaluate(`({ bar: document.querySelector('.kx-bar').getBoundingClientRect().bottom, head: document.getElementById('part-3').getBoundingClientRect().top, noH: document.documentElement.scrollWidth <= innerWidth + 1 })`);
+      assert.ok(nav.head >= nav.bar - 1 && nav.noH, `tablet: part jump with a collapsed panel ${JSON.stringify(nav)}`);
+      // a Teil 4 "Zum Text" jump into a collapsed panel opens it and shows that comment
+      await evaluate(`document.querySelector('[data-part="4"] .kx-split-collapse').click()`);
+      assert.equal((await state(4)).textsShown, false);
+      const label = await evaluate(`(() => { const a = [...document.querySelectorAll('[data-part="4"] .kx-stim-jump')].at(-1); a.scrollIntoView({ block: 'center' }); a.click(); return a.getAttribute('aria-label'); })()`);
+      await sleep(500); st = await state(4);
+      const seen = await evaluate(`(() => { const t = document.querySelector(location.hash); const r = t.getBoundingClientRect(); return { label: t.querySelector('.kx-stim-label').textContent, inView: r.top >= 0 && r.top < innerHeight - 40 }; })()`);
+      assert.ok(st.expanded === 'true' && st.textsShown && label.endsWith(seen.label) && seen.inView, `tablet: jump opens the collapsed panel ${JSON.stringify({ st, seen, label })}`);
+      // the collapsed state never leaks into desktop or phone layouts
+      await evaluate(`document.querySelector('[data-part="1"] .kx-split') .classList.contains('kx-collapsed') || document.querySelector('[data-part="1"] .kx-split-collapse').click()`);
+      for (const [w, h, m] of [[1280, 800, false], [360, 640, true]]) {
+        await vp(w, h, m); await sleep(200);
+        const v = await evaluate(`(() => { const sp = document.querySelector('[data-part="1"] .kx-split'); return { collapsedClass: sp.classList.contains('kx-collapsed'), textsShown: getComputedStyle(sp.querySelector('.kx-task-texts')).display !== 'none', noH: document.documentElement.scrollWidth <= innerWidth + 1 }; })()`);
+        assert.ok(v.collapsedClass && v.textsShown && v.noH, `a tablet-collapsed panel still shows its texts at ${w}px: ${JSON.stringify(v)}`);
+      }
+      await vp(800, 1024, true); await sleep(200);
+      await evaluate(`document.querySelector('[data-part="1"] .kx-split-collapse').click()`);   // back to expanded
     }
     await vp(1280, 800, false);
     await evaluate(`window.scrollTo(0, 0)`);

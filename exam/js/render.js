@@ -238,7 +238,7 @@ export function createRenderer(extra = {}) {
          (ENGINE §9.1; plain links, hidden on wide screens where both are side by side) */
       const k = tk;
       const w = ctx.module === 'schreiben';
-      return `<div class="kx-task kx-split">${instr}<div class="kx-split-grid"><div class="kx-task-texts" id="kx-texts-${k}" role="region" tabindex="0" aria-label="${w ? 'Beitrag' : 'Texte'} zu Teil ${esc(p.part)}">${texts}</div>`
+      return `<div class="kx-task kx-split">${instr}<button type="button" class="kx-split-collapse" data-act="toggle-texts" aria-expanded="true" aria-controls="kx-texts-${k}">${w ? 'Beitrag' : 'Texte'} zu Teil ${esc(p.part)}</button><div class="kx-split-grid"><div class="kx-task-texts" id="kx-texts-${k}" role="region" tabindex="0" aria-label="${w ? 'Beitrag' : 'Texte'} zu Teil ${esc(p.part)}">${texts}</div>`
         + `<div class="kx-task-items" id="kx-items-${k}">${items}</div></div>`
         + `<nav class="kx-split-toggle" aria-label="Teil ${esc(p.part)}: ${w ? 'Beitrag und Ihr Text' : 'Texte und Aufgaben'}"><a href="#kx-texts-${k}">${w ? 'Beitrag' : 'Text'}</a><a href="#kx-items-${k}">${w ? 'Ihr Text' : 'Aufgaben'}</a></nav></div>`;
     }

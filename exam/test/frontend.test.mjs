@@ -995,7 +995,7 @@ test('ITEM FLAGS (ENGINE §9.1): choice and matching items get a fixed-label tog
   assert.match(reviewPanel(progress, new Set(['itm:a'])), /1 Aufgabe ist zur Kontrolle markiert\./);
   assert.equal(/markiert/.test(reviewPanel(progress)), false, 'nothing marked → no mention');
   const main = read('exam/js/main.js');
-  assert.match(main, /localStorage\.getItem\(flagKey\(attemptId\)\)/); assert.match(main, /reviewPanel\(progress\(\) \|\| \[\], S\.flags\)/);
+  assert.match(main, /localStorage\.getItem\(flagKey\(attemptId\)\)/); assert.match(main, /reviewPanel\(progress\(\) \|\| \[\], S\.flags, reviewRemaining\(\)\)/);
   const handler = main.slice(main.indexOf('if (b.dataset.flag) {'), main.indexOf('if (b.dataset.insert) {'));
   assert.ok(handler.length > 50 && handler.includes('saveFlags('), 'flag handler found');
   assert.equal(/\bapi\.|autosave|fetch\(/i.test(handler), false, 'toggling a flag sends nothing');
@@ -1235,4 +1235,16 @@ test('SAVE TRIGGERS (GOETHE-B1-DIGITAL §5): flush options reach send (keepalive
   assert.match(main, /if \(changed\) flushSoon\(\);   \/\/ §5: saved on part change/);
   assert.match(main, /send: \(batch, requestId, opts\) => api\.save\(id, S\.lease, module, batch, requestId, opts\),/);
   assert.match(read('exam/js/api.js'), /save: \(id, leaseId, module, answers, requestId, \{ keepalive = false \} = \{\}\) => call\('POST', att\(id, `\/modules\/\$\{module\}\/answers`\), \{ body: rq\(\{ lease_id: leaseId, answers, request_id: requestId \}\), keepalive \}\),/);
+});
+
+test('SUBMIT REVIEW TIME (GOETHE-B1-DIGITAL §10): the confirmation shows the time remaining, kept current by the timer tick; none when untimed', async () => {
+  const { reviewPanel } = await import('../js/render.js');
+  const progress = [{ part: 1, answered: 0, total: 1, items: [{ item_id: 'itm:a', no: '1', answered: false }] }];
+  assert.match(reviewPanel(progress, new Set(), 754_000), /<p class="kx-review-time">Verbleibende Zeit: <span data-review-remaining>12:34<\/span><\/p>/);
+  assert.equal(/kx-review-time/.test(reviewPanel(progress, new Set(), null)), false, 'untimed: no time line');
+  assert.equal(/kx-review-time/.test(reviewPanel(progress)), false);
+  const main = read('exam/js/main.js');
+  assert.match(main, /const rv = \$\('\[data-review-remaining\]'\); if \(rv\) rv\.textContent = formatRemaining\(rem\);/);
+  assert.match(main, /function reviewRemaining\(\) \{ const m = moduleState\(\); return !m \|\| S\.attempt\.part_scope != null \|\| !m\.deadline_at \? null : clock\.remaining\(m\.deadline_at\); \}/);
+  assert.equal((main.match(/reviewPanel\(progress\(\) \|\| \[\], S\.flags, reviewRemaining\(\)\)/g) || []).length, 2, 'both the first draw and every redraw');
 });

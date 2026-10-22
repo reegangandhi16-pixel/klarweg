@@ -1701,6 +1701,10 @@ async function runLesenOnly() {
     assert.equal(await serverRows(), rowsBefore, 'flagging changed nothing on the server');
     await click('[data-act="submit"]'); await waitFor(`document.querySelector('#kx-review')`, 5000, 'review with flags');
     assert.match(await evaluate(`document.querySelector('#kx-review').innerText`), /1 Aufgabe ist zur Kontrolle markiert[\s\S]*markiert: Aufgabe \d+/, 'the review lists the marked item');
+    const t1 = await evaluate(`document.querySelector('[data-review-remaining]')?.textContent`);
+    assert.match(t1 || '', /^\d{1,2}:\d{2}(:\d{2})?$/, `the review shows the time remaining: ${t1}`);
+    await sleep(2200);
+    assert.notEqual(await evaluate(`document.querySelector('[data-review-remaining]').textContent`), t1, 'and keeps it current');
     await A.a11y('Lesen review with a marked item');
     await click('[data-act="review-close"]'); await waitFor(`!document.querySelector('#kx-review')`, 5000, 'review closed');
     // ENGINE §9.1 item palette: every item with its state in words; a jump closes it and focuses the item's control

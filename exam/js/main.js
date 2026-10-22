@@ -383,13 +383,15 @@ function trackCurrentPart() {
 window.addEventListener('scroll', trackCurrentPart, { passive: true });
 /* An open review is redrawn whenever its counts or parts change. Focus moves only if it was inside the review, and then
    to the equivalent control (same button, or the same item link), else to the review title if that control is gone. */
+/* time left for the submit review; none for an untimed single-part practice */
+function reviewRemaining() { const m = moduleState(); return !m || S.attempt.part_scope != null || !m.deadline_at ? null : clock.remaining(m.deadline_at); }
 function refreshReview() {
   const slot = $('#kx-review-slot'); if (!slot || !slot.innerHTML) return;
   const active = document.activeElement;
   const inside = !!active && active !== document.body && slot.contains(active);
   const key = !inside ? null : active.dataset.act ? `[data-act="${active.dataset.act}"]`
     : active.matches('a[data-review-jump]') ? `a[data-review-jump][href="${CSS.escape(active.getAttribute('href'))}"]` : null;
-  slot.innerHTML = reviewPanel(progress() || [], S.flags);
+  slot.innerHTML = reviewPanel(progress() || [], S.flags, reviewRemaining());
   if (inside) { const t = (key && slot.querySelector(key)) || $('#kx-review-title'); if (t) t.focus({ preventScroll: true }); }
 }
 function updateProgress() { paintHeader(); paintNav(); refreshReview(); }
@@ -454,6 +456,7 @@ function tick() {
   const m = moduleState(); if (!m) return;
   const rem = clock.remaining(m.deadline_at);
   const t = $('.kx-timer'); if (t) t.textContent = formatRemaining(rem);
+  const rv = $('[data-review-remaining]'); if (rv) rv.textContent = formatRemaining(rem);
   if (S.sprechen) {   // time left in the current Sprechen phase (server time)
     const at = speakingPhaseAt(S.sprechen.plan, S.sprechen.startedAt, clock.serverNow(), S.sprechen.multiplier);
     const pt = $('#kx-phase-time'); if (pt) pt.textContent = at.state === 'running' ? `Diese Phase: noch ${formatRemaining(at.remaining_ms)}` : '';
@@ -902,7 +905,7 @@ app.addEventListener('click', async (e) => {
     }
     if (act === 'submit') {   // first step: an in-page review; nothing is submitted yet
       const slot = $('#kx-review-slot'); if (!slot) return;
-      slot.innerHTML = reviewPanel(progress() || [], S.flags);
+      slot.innerHTML = reviewPanel(progress() || [], S.flags, reviewRemaining());
       const foot = $('.kx-foot'); if (foot) foot.hidden = true;
       const h = $('#kx-review-title'); if (h) { h.scrollIntoView({ block: 'start' }); h.focus({ preventScroll: true }); }
       return;

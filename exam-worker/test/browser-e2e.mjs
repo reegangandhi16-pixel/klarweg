@@ -1587,6 +1587,10 @@ async function runLesenOnly() {
     assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM attempts').first()).n, 1, 'the same attempt continues (no duplicate)');
     assert.equal((await lesenRow()).deadline_at, deadlineBefore, 'signing in again never moves the deadline');
     assert.match(await evaluate(`document.querySelector('.kx-progress').textContent`), new RegExp(`${lesen.length} von ${lesen.length} beantwortet`), 'every answer is still there');
+    // resume at the same part and item: the item changed last before the reload is back in view below the bar
+    const pos = await evaluate(`(() => { const it = document.querySelector('input[data-item="${probeItem}"]').closest('[id^="item-"]'); const r = it.getBoundingClientRect(), bar = document.querySelector('.kx-bar').getBoundingClientRect().bottom;
+      return { top: Math.round(r.top), bar: Math.round(bar), vh: innerHeight, scrolled: scrollY > 0, said: document.querySelector('#kx-announce').textContent, part: it.closest('.kx-part').dataset.part, stored: localStorage.getItem('kx-pos:${attempt.id}:lesen') === it.id }; })()`);
+    assert.ok(pos.stored && pos.scrolled && pos.top >= pos.bar - 1 && pos.top < pos.vh - 40 && pos.said === `Weiter in Teil ${pos.part}, bei der zuletzt bearbeiteten Aufgabe.`, `resume position ${JSON.stringify(pos)}`);
     // ENGINE §8 network loss: offline, an answer change stays on the device (IndexedDB queue) and the learner is told so;
     // back online it is sent and the recovery is announced
     {

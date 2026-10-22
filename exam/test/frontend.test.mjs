@@ -1122,3 +1122,17 @@ test('ADMIN ATTEMPTS VIEW: on-request button (audited note); attempts with modul
   assert.match(html, /mystery_kind/, 'unknown kinds are shown as they are');
   assert.equal(attemptsList({ limit: 20, attempts: [] }), '<p role="status">Keine Versuche.</p>');
 });
+
+test('RESUME POSITION (GOETHE-B1-DIGITAL §10): Lesen/Schreiben remember the last answered or focused item per attempt+module on this device and bring it back below the measured bar after a reload, without focusing it', () => {
+  const main = read('exam/js/main.js');
+  assert.match(main, /const POS_MODULES = \['lesen', 'schreiben'\];/);
+  assert.match(main, /const posKey = \(\) => `kx-pos:\$\{S\.attempt && S\.attempt\.attempt_id\}:\$\{S\.module\}`;/);
+  assert.match(main, /app\.addEventListener\('focusin', \(e\) => rememberPosition\(e\.target\)\);/);
+  assert.match(main, /rememberPosition\(el\);\n  const value = \{ option_id:/, 'an answer change also records the position');
+  const fn = main.slice(main.indexOf('function restorePosition'), main.indexOf("app.addEventListener('focusin'"));
+  assert.equal(/\.focus\(/.test(fn), false, 'never focuses (no phone keyboard)');
+  assert.match(fn, /requestAnimationFrame\(go\); setTimeout\(go, 100\);/); assert.match(fn, /if \(done\) return; done = true;/);
+  assert.match(fn, /bar\.getBoundingClientRect\(\)\.bottom \+ 8/, 'measured bar, not the possibly stale --kx-bar-h');
+  assert.match(fn, /announce\(`Weiter in Teil \$\{part\.dataset\.part\}, bei der zuletzt bearbeiteten Aufgabe\.`\)/);
+  assert.match(main, /markTopicDecks\(S\.locked\.size > 0\);\n  trackCurrentPart\(\);\n  restorePosition\(\);\n\}/, 'restored once, when the module page is drawn');
+});

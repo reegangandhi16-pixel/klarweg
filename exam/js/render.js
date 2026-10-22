@@ -7,7 +7,9 @@ export const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&a
 const idSafe = (s) => String(s).replace(/[^a-zA-Z0-9_-]/g, '_');
 
 export const MODULE_LABELS = { lesen: 'Lesen', hoeren: 'Hören', schreiben: 'Schreiben', sprechen: 'Sprechen' };
-export const UMLAUTS = ['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'];
+/* the Schreiben character row (ENGINE §9.4): umlauts, ß, German quotation marks, dash and euro sign; inserted at the caret */
+export const UMLAUTS = ['ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', 'ß', '„', '“', '–', '€'];
+const CHAR_NAMES = { '„': 'Anführungszeichen unten', '“': 'Anführungszeichen oben', '–': 'Gedankenstrich', '€': 'Eurozeichen' };
 /* OD-45 (LOCKED): student-facing title and mandatory disclaimer; never "Goethe score / Goethe-Ergebnis". */
 export const RESULT_TITLE = 'Klarweg B1 Simulation – Ergebnis';
 export const RESULT_DISCLAIMER = 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts.';
@@ -168,8 +170,8 @@ function writing(it, value) {
   const text = (value && value.text) || '';
   const target = it.response_spec && it.response_spec.target_words;
   return `<div class="kx-item kx-writing" id="item-${idSafe(it.item_id)}"><label for="${id}" class="kx-wlabel">${esc(it.stem)}${target ? ` <span class="kx-meta">(ca. ${esc(target)} Wörter)</span>` : ''}</label>`
-    + `<div class="kx-chars" role="group" aria-label="Sonderzeichen einfügen">${UMLAUTS.map((c) => `<button type="button" class="kx-char" data-insert="${c}" data-target="${id}" aria-label="${c} einfügen">${c}</button>`).join('')}</div>`
-    + `<textarea id="${id}" data-item="${esc(it.item_id)}" lang="de" spellcheck="false" autocomplete="off" autocapitalize="sentences" rows="10" aria-describedby="${id}_wc">${esc(text)}</textarea>`
+    + `<div class="kx-chars" role="group" aria-label="Sonderzeichen einfügen">${UMLAUTS.map((c) => `<button type="button" class="kx-char" data-insert="${c}" data-target="${id}" aria-label="${CHAR_NAMES[c] || c} einfügen">${c}</button>`).join('')}</div>`
+    + `<textarea id="${id}" data-item="${esc(it.item_id)}" lang="de" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" rows="10" aria-describedby="${id}_wc">${esc(text)}</textarea>`
     + `<p class="kx-wc" id="${id}_wc"><span data-wc-for="${id}">${countWords(text)}</span> Wörter</p></div>`;   // read with the textarea (aria-describedby), not on every keystroke
 }
 

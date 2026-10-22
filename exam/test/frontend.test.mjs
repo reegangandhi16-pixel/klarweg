@@ -937,3 +937,33 @@ test('LESEN SPLIT (ENGINE §9.1): each split task has a Text / Aufgaben link pai
   assert.match(css, /@media \(max-width: 1023px\) {\s*\.kx-split-toggle { position: sticky; bottom: 96px; display: flex;/);
   assert.match(css, /\.kx-split-toggle a { pointer-events: auto;[^}]*min-height: 44px/);
 });
+
+test('ITEM FLAGS (ENGINE §9.1): choice and matching items get a fixed-label toggle (aria-pressed); examples, locked, writing and speaking items do not; the review lists marked items with jump links', async () => {
+  const { createRenderer, reviewPanel, FLAGGABLE } = await import('../js/render.js');
+  assert.deepEqual([...FLAGGABLE].sort(), ['binary_choice', 'matching_pool', 'mcq_single', 'speaker_assignment']);
+  const opts = [{ option_id: 'r', label: 'Richtig' }, { option_id: 'f', label: 'Falsch' }];
+  const pkg = { module: 'lesen', parts: [{ part: 1, tasks: [{ task_id: 't', instructions: 'x', stimuli: [], items: [
+    { item_id: 'itm:ex', interaction: 'binary_choice', stem: 'Bsp', is_example: true, example_answer: 'r', options: opts },
+    { item_id: 'itm:a', interaction: 'binary_choice', stem: 'A', options: opts },
+    { item_id: 'itm:b', interaction: 'matching_pool', stem: 'B', options: opts },
+    { item_id: 'itm:c', interaction: 'binary_choice', stem: 'C', options: opts }] }] }] };
+  const r = createRenderer();
+  const html = r.module(pkg, {}, { flags: new Set(['itm:b']), locked: new Set(['itm:c']) });
+  assert.match(html, /<button type="button" class="kx-flag" data-flag="itm:a" aria-pressed="false">Zur Kontrolle markieren<\/button><\/fieldset>/);
+  assert.match(html, /<button type="button" class="kx-flag" data-flag="itm:b" aria-pressed="true">Zur Kontrolle markieren<\/button><\/div>/);
+  assert.equal(/data-flag="itm:ex"/.test(html), false, 'no flag on an example'); assert.equal(/data-flag="itm:c"/.test(html), false, 'no flag on a locked item');
+  assert.equal(/kx-flag/.test(r.module(pkg, {}, {})), false, 'no flags without a flag set (e.g. read-only views)');
+  const w = r.module({ module: 'schreiben', parts: [{ part: 1, tasks: [{ task_id: 't', instructions: 'x', stimuli: [], items: [{ item_id: 'itm:w', interaction: 'text_response', stem: 'W', response_spec: { type: 'text' } }] }] }] }, {}, { flags: new Set() });
+  assert.equal(/kx-flag/.test(w), false, 'no flag on a writing task');
+  const progress = [{ part: 1, answered: 1, total: 2, items: [{ item_id: 'itm:a', no: '1', answered: true }, { item_id: 'itm:b', no: '2', answered: false }] }];
+  const rv = reviewPanel(progress, new Set(['itm:a', 'itm:b']));
+  assert.match(rv, /1 von 2 Aufgaben sind noch ohne Antwort\. 2 Aufgaben sind zur Kontrolle markiert\./);
+  assert.match(rv, /<span class="kx-review-marked"> · markiert: <a href="#item-itm_a" data-review-jump>Aufgabe 1<\/a>, <a href="#item-itm_b" data-review-jump>Aufgabe 2<\/a><\/span>/);
+  assert.match(reviewPanel(progress, new Set(['itm:a'])), /1 Aufgabe ist zur Kontrolle markiert\./);
+  assert.equal(/markiert/.test(reviewPanel(progress)), false, 'nothing marked → no mention');
+  const main = read('exam/js/main.js');
+  assert.match(main, /localStorage\.getItem\(flagKey\(attemptId\)\)/); assert.match(main, /reviewPanel\(progress\(\) \|\| \[\], S\.flags\)/);
+  const handler = main.slice(main.indexOf('if (b.dataset.flag) {'), main.indexOf('if (b.dataset.insert) {'));
+  assert.ok(handler.length > 50 && handler.includes('saveFlags('), 'flag handler found');
+  assert.equal(/\bapi\.|autosave|fetch\(/i.test(handler), false, 'toggling a flag sends nothing');
+});

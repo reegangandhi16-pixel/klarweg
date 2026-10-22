@@ -23,7 +23,7 @@ const base = (document.querySelector('meta[name="kw-exam-api"]') || {}).content 
 const clock = new ServerClock();
 const api = createApi({ base, clock });
 const renderer = createRenderer();
-const S = { attempt: null, lease: null, pkg: null, answers: {}, autosave: null, module: null, timer: null, hb: null, store: null, locked: new Set(), sprechen: null, recordingUrls: [] };
+const S = { attempt: null, lease: null, pkg: null, answers: {}, autosave: null, module: null, timer: null, hb: null, store: null, locked: new Set(), flags: new Set(), sprechen: null, recordingUrls: [] };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function deviceId() {
@@ -185,10 +185,20 @@ function intro(module) {
   }
 }
 
+/* item flags live on this device only (per attempt); storage may be unavailable (private mode), then they last
+   for this page only */
+const flagKey = (attemptId) => `kx-flags:${attemptId}`;
+function loadFlags(attemptId) {
+  try { const v = JSON.parse(localStorage.getItem(flagKey(attemptId)) || '[]'); return new Set(Array.isArray(v) ? v.filter((x) => typeof x === 'string') : []); } catch { return new Set(); }
+}
+function saveFlags(attemptId, flags) {
+  try { if (flags.size) localStorage.setItem(flagKey(attemptId), JSON.stringify([...flags])); else localStorage.removeItem(flagKey(attemptId)); } catch { /* kept in memory */ }
+}
+
 async function openModule(module) {
   const id = S.attempt.attempt_id;
   S.module = module;
-  S.locked = new Set(); S.sprechen = null;
+  S.locked = new Set(); S.sprechen = null; S.flags = loadFlags(id);
   announced = {};
   const p = await api.pkg(id, S.lease, module);
   S.pkg = p.package;
@@ -270,7 +280,7 @@ function refreshReview() {
   const inside = !!active && active !== document.body && slot.contains(active);
   const key = !inside ? null : active.dataset.act ? `[data-act="${active.dataset.act}"]`
     : active.matches('a[data-review-jump]') ? `a[data-review-jump][href="${CSS.escape(active.getAttribute('href'))}"]` : null;
-  slot.innerHTML = reviewPanel(progress() || []);
+  slot.innerHTML = reviewPanel(progress() || [], S.flags);
   if (inside) { const t = (key && slot.querySelector(key)) || $('#kx-review-title'); if (t) t.focus({ preventScroll: true }); }
 }
 function updateProgress() { paintHeader(); paintNav(); refreshReview(); }
@@ -284,7 +294,7 @@ function paint() {
     : S.module === 'hoeren' ? '<div class="kx-alerts" id="kx-alerts"></div>' : '';
   // live status (Hören/Sprechen phase, "Audio starten", time warnings) lives in the sticky bar: it must stay visible
   // while the learner is scrolled down to the questions; empty elements take no space
-  screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked, multiplier: S.attempt.time_multiplier || 1 })}</main>`
+  screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div><main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked, flags: S.flags, multiplier: S.attempt.time_multiplier || 1 })}</main>`
     + `<div id="kx-review-slot"></div><footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
   S.currentPart = null;
   watchBar();
@@ -368,7 +378,7 @@ async function runHoeren() {
     for (const part of S.pkg.parts) {
       if (rendered.has(part.part)) continue;
       rendered.add(part.part);
-      main.insertAdjacentHTML('beforeend', renderer.part(part, S.answers));
+      main.insertAdjacentHTML('beforeend', renderer.part(part, S.answers, { flags: S.flags }));
     }
     updateProgress();   // also redraws an open review with the parts that are open now
   };
@@ -590,6 +600,12 @@ app.addEventListener('click', async (e) => {
   const b = e.target.closest('button'); if (!b) return;
   const act = b.dataset.act;
   try {
+    if (b.dataset.flag) {   // "Zur Kontrolle markieren": local reminder only, nothing is sent
+      const on = !S.flags.has(b.dataset.flag);
+      if (on) S.flags.add(b.dataset.flag); else S.flags.delete(b.dataset.flag);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      saveFlags(S.attempt.attempt_id, S.flags); refreshReview(); return;
+    }
     if (b.dataset.insert) {
       const ta = document.getElementById(b.dataset.target); const { selectionStart: s, selectionEnd: en, value } = ta;
       ta.value = value.slice(0, s) + b.dataset.insert + value.slice(en); ta.selectionStart = ta.selectionEnd = s + 1; ta.focus();
@@ -644,7 +660,7 @@ app.addEventListener('click', async (e) => {
     }
     if (act === 'submit') {   // first step: an in-page review; nothing is submitted yet
       const slot = $('#kx-review-slot'); if (!slot) return;
-      slot.innerHTML = reviewPanel(progress() || []);
+      slot.innerHTML = reviewPanel(progress() || [], S.flags);
       const foot = $('.kx-foot'); if (foot) foot.hidden = true;
       const h = $('#kx-review-title'); if (h) { h.scrollIntoView({ block: 'start' }); h.focus({ preventScroll: true }); }
       return;

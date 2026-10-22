@@ -967,3 +967,22 @@ test('ITEM FLAGS (ENGINE §9.1): choice and matching items get a fixed-label tog
   assert.ok(handler.length > 50 && handler.includes('saveFlags('), 'flag handler found');
   assert.equal(/\bapi\.|autosave|fetch\(/i.test(handler), false, 'toggling a flag sends nothing');
 });
+
+test('LESEN TEIL 4 (ENGINE §9.1): every item name links to its own comment in all 15 practice forms; no other part gets links; repeated labels link nothing', async () => {
+  const { createRenderer: cr } = await import('../js/render.js');
+  const r = cr();
+  for (let n = 1; n <= 15; n++) {
+    const pkg = pkgFor(syntheticBuild([path.join(ROOT, `exam-content/forms/synthetic/b1-synthetic-p${n}`)]), 'lesen');
+    for (const p of pkg.parts) {
+      const html = r.part(p, {}, { split: true });
+      const jumps = [...html.matchAll(/<a class="kx-stim-jump" href="#([^"]+)" aria-label="Zum Text von ([^"]+)">Zum Text<\/a>/g)];
+      if (p.part !== 4) { assert.equal(jumps.length, 0, `P${n} Teil ${p.part}: no links`); continue; }
+      assert.equal(jumps.length, p.tasks.flatMap((t) => t.items).length, `P${n} Teil 4: one link per item`);
+      for (const [, id, name] of jumps) assert.match(html, new RegExp(`<article class="kx-stim" id="${id}" tabindex="-1"><h3 class="kx-stim-label">${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</h3>`), `P${n}: ${name} → its own comment`);
+    }
+  }
+  const opts = [{ option_id: 'j', label: 'Ja' }, { option_id: 'n', label: 'Nein' }];
+  const twin = { module: 'lesen', parts: [{ part: 4, tasks: [{ task_id: 't', instructions: 'x', stimuli: [{ kind: 'text', label: 'Anna, 30', text: 'a' }, { kind: 'text', label: 'Anna, 30', text: 'b' }],
+    items: [{ item_id: 'i', interaction: 'binary_choice', stem: '20. Anna, 30', options: opts }] }] }] };
+  assert.equal(/kx-stim-jump|kx-stim" id=/.test(r.module(twin, {}, {})), false, 'an ambiguous name links nowhere');
+});

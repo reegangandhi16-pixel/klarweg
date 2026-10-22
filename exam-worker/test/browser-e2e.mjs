@@ -1354,6 +1354,17 @@ async function runLesenOnly() {
       }
       if (process.env.KX_E2E_SHOTS) fs.writeFileSync(path.join(process.env.KX_E2E_SHOTS, `lesen-bar-${w}.png`), Buffer.from((await send('Page.captureScreenshot', { format: 'png' })).data, 'base64'));
     }
+    // ENGINE §9.1 Teil 4: "Zum Text" beside a name brings that person's comment into view (own scroll column on desktop,
+    // stacked page on a phone), below the sticky bar
+    for (const [w, h, mobile] of [[1280, 800, false], [360, 640, true]]) {
+      await vp(w, h, mobile); await sleep(200);
+      const jump = await evaluate(`(() => { const a = [...document.querySelectorAll('#part-4 ~ .kx-task .kx-stim-jump, [data-part="4"] .kx-stim-jump')].at(-1); a.scrollIntoView({ block: 'center' }); a.click(); return a.getAttribute('aria-label'); })()`);
+      await sleep(500);
+      const seen = await evaluate(`(() => { const t = document.querySelector(location.hash); const r = t.getBoundingClientRect(), bar = document.querySelector('.kx-bar').getBoundingClientRect().bottom;
+        const col = t.closest('.kx-task-texts').getBoundingClientRect(); const top = Math.max(bar, col.top);
+        return { hash: location.hash, label: t.querySelector('.kx-stim-label').textContent, visible: r.top >= top - 1 && r.top < Math.min(innerHeight, col.bottom) - 40 }; })()`);
+      assert.ok(jump.endsWith(seen.label) && seen.visible, `Teil 4 jump at ${w}px: ${jump} → ${JSON.stringify(seen)}`);
+    }
     await vp(1280, 800, false);
     await evaluate(`window.scrollTo(0, 0)`);
     const attempt = (await dev.env.DB.prepare('SELECT id, mode, module_scope FROM attempts').first());

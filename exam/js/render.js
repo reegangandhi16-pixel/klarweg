@@ -212,8 +212,8 @@ export function createRenderer(extra = {}) {
     const html = fn(it, value, locked, ctx);
     return ctx.flags && !locked && FLAGGABLE.has(it.interaction) ? html.replace(/<\/(fieldset|div)>$/, `${flagButton(it.item_id, ctx.flags.has(it.item_id))}</$1>`) : html;
   }
-  function stimulus(s) {
-    if (s.kind === 'text') return `<article class="kx-stim">${s.label ? `<h3 class="kx-stim-label">${esc(s.label)}</h3>` : ''}${paragraphs(s.text)}</article>`;
+  function stimulus(s, id = null) {
+    if (s.kind === 'text') return `<article class="kx-stim"${id ? ` id="${id}" tabindex="-1"` : ''}>${s.label ? `<h3 class="kx-stim-label">${esc(s.label)}</h3>` : ''}${paragraphs(s.text)}</article>`;
     if (s.kind === 'audio') return `<p class="kx-audio-label"><span class="kx-meta">${esc(s.label || 'Audio')}</span></p>`;
     if (s.kind === 'image') return `<p class="kx-meta">${esc(s.label || 'Bild')}</p>`;
     return '';
@@ -222,12 +222,21 @@ export function createRenderer(extra = {}) {
      learner keeps the text (or the ten ads of Teil 3) in view while answering. Narrow screens stack them (CSS). */
   function task(t, p, answers, ctx) {
     const instr = t.instructions ? `<div class="kx-instr">${paragraphs(t.instructions)}</div>` : '';
-    const texts = t.stimuli.filter((s) => !(s.kind === 'text' && t.instructions && String(s.text || '').trim() === t.instructions.trim())).map(stimulus).join('');
-    const items = t.items.map((it) => item(it, answers, ctx)).join('');
+    const shown = t.stimuli.filter((s) => !(s.kind === 'text' && t.instructions && String(s.text || '').trim() === t.instructions.trim()));
+    /* Lesen Teil 4 style (ENGINE §9.1 "names list with a jump to the comment"): an item whose name is exactly the label
+       of one text gets a link to that text; nothing is guessed when names repeat or differ */
+    const tk = idSafe(t.task_id || `${p.part}`);
+    const byLabel = new Map();
+    shown.forEach((s, n) => { if (s.kind === 'text' && s.label) byLabel.set(s.label.trim(), byLabel.has(s.label.trim()) ? null : n); });
+    const jumpTo = (it) => { const n = byLabel.get(displayStem(it).replace(/^\s*\d+\.\s*/, '').trim()); return n == null ? null : `kx-stim-${tk}-${n}`; };
+    const linked = ctx.split && shown.length > 1 && t.items.some((it) => jumpTo(it));
+    const texts = shown.map((s, n) => stimulus(s, linked && s.kind === 'text' && s.label && byLabel.get(s.label.trim()) === n ? `kx-stim-${tk}-${n}` : null)).join('');
+    const items = t.items.map((it) => { const html = item(it, answers, ctx), to = linked && jumpTo(it); return to
+      ? html.replace('</legend>', `</legend><a class="kx-stim-jump" href="#${to}" aria-label="Zum Text von ${esc(displayStem(it).replace(/^\s*\d+\.\s*/, ''))}">Zum Text</a>`) : html; }).join('');
     if (ctx.split && texts && items && t.stimuli.some((s) => s.kind === 'text')) {
       /* narrow screens (< 1024 px) stack texts above tasks: a sticky "Text / Aufgaben" pair jumps between them
          (ENGINE §9.1; plain links, hidden on wide screens where both are side by side) */
-      const k = idSafe(t.task_id || `${p.part}`);
+      const k = tk;
       const w = ctx.module === 'schreiben';
       return `<div class="kx-task kx-split">${instr}<div class="kx-split-grid"><div class="kx-task-texts" id="kx-texts-${k}" role="region" tabindex="0" aria-label="${w ? 'Beitrag' : 'Texte'} zu Teil ${esc(p.part)}">${texts}</div>`
         + `<div class="kx-task-items" id="kx-items-${k}">${items}</div></div>`

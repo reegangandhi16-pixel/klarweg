@@ -1034,3 +1034,20 @@ test('TABLET SPLIT (ENGINE §9.1): 768–1023 px split pane with a collapsible t
   assert.match(main, /if \(act === 'toggle-texts'\) \{ const split = b\.closest\('\.kx-split'\); setTextsExpanded\(split, split\.classList\.contains\('kx-collapsed'\)\); return; \}/);
   assert.match(main, /const split = target && target\.closest\('\.kx-task-texts'\) && target\.closest\('\.kx-split\.kx-collapsed'\);\s*if \(split\) setTextsExpanded\(split, true\);/);
 });
+
+test('SPRECHEN NOTES (SPEAKING §2): a labelled plain field with the "frei sprechen" rule, escaped, no answer id; device-only storage; never saved as an answer; sticky panel that fits between the bars', async () => {
+  const { notesPanel, NOTES_MAX } = await import('../js/render.js');
+  const html = notesPanel('a <b> & "c"');
+  assert.match(html, /^<aside class="kx-notes" aria-labelledby="kx-notes-title"><h2 id="kx-notes-title">Ihre Notizen<\/h2><p class="kx-notes-rule">Frei sprechen – nicht ablesen\.<\/p>/);
+  assert.match(html, /<label for="kx-notes-text" class="kx-sr">Ihre Notizen<\/label><textarea id="kx-notes-text" data-notes lang="de" rows="10" maxlength="4000" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-describedby="kx-notes-hint">a &lt;b&gt; &amp; &quot;c&quot;<\/textarea>/);
+  assert.equal(NOTES_MAX, 4000); assert.equal(/data-item/.test(html), false, 'not an answer field (autosave and paste policy ignore it)');
+  assert.match(html, /Nur auf diesem Gerät gespeichert, nicht bewertet\./);
+  const main = read('exam/js/main.js');
+  assert.match(main, /if \(el\.matches && el\.matches\('\[data-notes\]'\)\) \{ saveNotes\(S\.attempt\.attempt_id, el\.value\); return; \}/);
+  assert.ok(main.indexOf("matches('[data-notes]')") < main.indexOf("if (el.tagName !== 'TEXTAREA' || !S.autosave) return;"), 'notes handled before the answer textarea path');
+  assert.match(main, /localStorage\.getItem\(notesKey\(attemptId\)\)/);
+  assert.match(main, /S\.module === 'sprechen' \? notesPanel\(loadNotes\(S\.attempt\.attempt_id\)\) \+ '<\/div>' : ''/);
+  const css = read('exam/exam.css');
+  assert.match(css, /@media \(min-width: 768px\) {\s*\.kx-speak-layout { display: grid; grid-template-columns: minmax\(0, 1fr\) minmax\(240px, 300px\);[^}]*}\s*\.kx-speak-layout \.kx-notes { margin: 0; position: sticky; top: calc\(var\(--kx-bar-h, 120px\) \+ 8px\); }/);
+  assert.match(css, /\.kx-speak-layout \.kx-notes textarea { min-height: 120px; height: calc\(100vh - var\(--kx-bar-h, 120px\) - 360px\); max-height: 480px; }/);
+});

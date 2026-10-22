@@ -102,6 +102,11 @@ p { margin: 0 0 16px; }
 .kx-precheck-notes { margin: 0 0 16px; padding-left: 24px; color: var(--ink-secondary); }
 .kx-advisory { margin: -8px 0 16px; font: 500 12px/1.4 var(--font-mono); color: var(--ink-secondary); }
 .kx-review-warn { font-weight: 600; }
+/* Hören master volume (AUDIO-SPEC A4) in the sticky bar */
+.kx-volume { display: flex; align-items: center; gap: 12px; margin: 4px 0 0; font-size: 14px; }
+.kx-volume label { font-weight: 500; }
+.kx-volume input[type="range"] { width: 160px; min-height: 44px; accent-color: var(--accent); }
+.kx-volume-val { font: 500 13px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-secondary); min-width: 48px; }
 /* Sprechen Teil 2 slide decks: one slide at a time, the learner advances; the chosen topic is marked in words + teal edge */
 .kx-deck { margin: 0 0 16px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
 .kx-deck[hidden] { display: none; }

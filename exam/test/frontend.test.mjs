@@ -1075,3 +1075,22 @@ test('SPRECHEN TEIL 2 SLIDES (SPEAKING §2): every practice form renders one dec
   const main = read('exam/js/main.js');
   assert.match(main, /d\.hidden = locked && !!chosen && !mine;/, 'after the lock only the chosen deck stays (none chosen → all)');
 });
+
+test('HÖREN VOLUME (AUDIO-SPEC A4): master gain between every play and the speakers; clamped 0–1; labelled range in the bar; never an answer', async () => {
+  const { ControlledPlayer, clampVolume, volumeControl } = await import('../js/hoeren.js');
+  const made = [];
+  const ctx = { destination: { name: 'out' }, createGain() { const g = { gain: { value: 1 }, connect(d) { g.to = d; return d; } }; made.push(g); return g; },
+    createBufferSource() { const s = { playbackRate: { value: 1 }, connect(d) { s.to = d; }, start() { setTimeout(() => s.onended && s.onended(), 0); }, stop() {} }; made.push(s); return s; },
+    async decodeAudioData(b) { return { b }; } };
+  const p = new ControlledPlayer(ctx, 0.5);
+  assert.equal(p.gain.gain.value, 0.5); assert.equal(p.gain.to, ctx.destination);
+  await p.preload('a', new ArrayBuffer(4)); await p.play('a');
+  assert.equal(made.find((x) => x.playbackRate).to, p.gain, 'plays go through the master gain');
+  p.setVolume(2); assert.equal(p.gain.gain.value, 1); p.setVolume(-1); assert.equal(p.gain.gain.value, 0); p.setVolume('x'); assert.equal(p.gain.gain.value, 1);
+  assert.equal(clampVolume(0.35), 0.35);
+  assert.equal(volumeControl(40), '<div class="kx-volume"><label for="kx-volume">Lautstärke</label><input type="range" id="kx-volume" data-volume min="0" max="100" step="5" value="40" aria-valuetext="40 %"><span class="kx-volume-val" aria-hidden="true">40 %</span></div>');
+  const main = read('exam/js/main.js');
+  assert.match(main, /S\.module === 'hoeren' \? volumeControl\(savedVolume\(\) \* 100\)/);
+  const h = main.slice(main.indexOf("el.matches('[data-volume]')"), main.indexOf("el.matches('[data-volume]')") + 500);
+  assert.equal(/autosave|S\.answers|\.stop\(|currentTime|playbackRate/.test(h), false, 'volume never saves, stops or seeks');
+});

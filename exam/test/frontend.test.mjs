@@ -1261,3 +1261,25 @@ test('INTERSTITIAL (GOETHE-B1-DIGITAL §2.2): the next module intro states the m
   assert.match(main, /<main class="kx-card">\$\{prevNote\(module\)\}<p class="kx-eyebrow">Nächstes Modul<\/p>/);
   assert.match(main, /if \(!m \|\| m\.status !== 'submitted'\) return '';/);
 });
+
+test('PRE-EXAM CHECKS (GOETHE-B1-DIGITAL §2.1): browser support by features per module; keyboard (umlaut) check before Schreiben, informational, never an answer', async () => {
+  const { missingFeatures, keyboardNote, KEYBOARD_CHECK, environmentNotes } = await import('../js/precheck.js');
+  const full = { fetch() {}, AbortController: function () {}, HTMLDialogElement: function () {}, AudioContext: function () {}, MediaRecorder: function () {}, navigator: { mediaDevices: { getUserMedia() {} } } };
+  for (const m of ['lesen', 'hoeren', 'schreiben', 'sprechen']) assert.deepEqual(missingFeatures(m, full), [], m);
+  assert.deepEqual(missingFeatures('lesen', { ...full, HTMLDialogElement: undefined }), ['Dialogfenster']);
+  assert.deepEqual(missingFeatures('hoeren', { ...full, AudioContext: undefined }), ['Audiowiedergabe (Web Audio)']);
+  assert.deepEqual(missingFeatures('hoeren', { ...full, AudioContext: undefined, webkitAudioContext: function () {} }), [], 'Safari prefix accepted');
+  assert.deepEqual(missingFeatures('sprechen', { ...full, MediaRecorder: undefined, navigator: {} }), ['Mikrofonzugriff', 'Aufnahme (MediaRecorder)']);
+  assert.deepEqual(missingFeatures('lesen', { ...full, MediaRecorder: undefined }), [], 'only what the module needs');
+  assert.match(environmentNotes({ missing: ['Dialogfenster'] })[0].text, /^Ihr Browser unterstützt nicht alles, was dieses Modul braucht \(Dialogfenster\)\. Bitte verwenden Sie eine aktuelle Version von Chrome, Edge, Firefox oder Safari\.$/);
+  assert.deepEqual(environmentNotes({}), []);
+  assert.equal(keyboardNote(''), ''); assert.equal(keyboardNote('äöüß'), 'Ihre Tastatur kann Umlaute und ß eingeben.');
+  assert.match(keyboardNote('ae oe'), /^Noch nicht alle Zeichen \(ä ö ü ß\)\. Kein Problem: Im Editor gibt es eine Zeichenleiste/);
+  assert.match(keyboardNote('ä ö ü'), /\(ß\)/);
+  assert.match(KEYBOARD_CHECK, /<label for="kx-kbd-test">Tippen Sie zur Probe: ä ö ü ß<\/label><input id="kx-kbd-test" data-kbd-test type="text" lang="de"/);
+  assert.equal(/data-item/.test(KEYBOARD_CHECK), false, 'never an answer field');
+  const main = read('exam/js/main.js');
+  assert.match(main, /module === 'schreiben' \? KEYBOARD_CHECK : ''/);
+  assert.match(main, /missing: missingFeatures\(module\)/);
+  assert.match(main, /if \(el\.matches && el\.matches\('\[data-kbd-test\]'\)\) \{ const msg = \$\('#kx-kbd-msg'\); if \(msg\) msg\.textContent = keyboardNote\(el\.value\); return; \}/);
+});

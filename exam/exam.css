@@ -105,6 +105,7 @@ p { margin: 0 0 16px; }
 .kx-precheck h2 { font-size: 18px; margin-bottom: 8px; }
 .kx-precheck .kx-actions { margin-top: 12px; }
 .kx-precheck-msg:empty { display: none; }
+.kx-precheck input[data-kbd-test] { display: block; width: 100%; max-width: 320px; min-height: 44px; margin: 8px 0 0; font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
 .kx-precheck-msg { margin: 8px 0 0; font-weight: 500; }
 .kx-precheck-notes { margin: 0 0 16px; padding-left: 24px; color: var(--ink-secondary); }
 .kx-advisory { margin: -8px 0 16px; font: 500 12px/1.4 var(--font-mono); color: var(--ink-secondary); }

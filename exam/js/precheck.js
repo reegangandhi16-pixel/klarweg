@@ -7,12 +7,38 @@ export const CLOCK_SKEW_NOTE_MS = 120_000;
 export const SLOW_RTT_MS = 1500;
 
 /* → [{ kind, text }] informational notes; empty when everything looks fine */
-export function environmentNotes({ storageKind, offsetMs, rttMs } = {}) {
+export function environmentNotes({ storageKind, offsetMs, rttMs, missing = [] } = {}) {
   const out = [];
+  if (missing.length) out.push({ kind: 'browser', text: `Ihr Browser unterstützt nicht alles, was dieses Modul braucht (${missing.join(', ')}). Bitte verwenden Sie eine aktuelle Version von Chrome, Edge, Firefox oder Safari.` });
   if (storageKind === 'memory') out.push({ kind: 'storage', text: 'Ihr Browser erlaubt keine lokale Zwischenspeicherung (z. B. im privaten Modus). Antworten werden trotzdem auf dem Server gespeichert; bei einem Verbindungsabbruch können noch nicht übertragene Antworten verloren gehen.' });
   if (Number.isFinite(offsetMs) && Math.abs(offsetMs) > CLOCK_SKEW_NOTE_MS) out.push({ kind: 'clock', text: 'Die Uhr Ihres Geräts weicht von der Serverzeit ab. Das ist unbedenklich: Die Prüfungszeit läuft nach der Serverzeit.' });
   if (Number.isFinite(rttMs) && rttMs > SLOW_RTT_MS) out.push({ kind: 'connection', text: 'Ihre Verbindung ist langsam. Antworten werden automatisch erneut gesendet; eine stabile Verbindung wird empfohlen.' });
   return out;
+}
+
+/* GOETHE-B1-DIGITAL §2.1 browser support check, by features (not by browser name): what this module needs.
+   g = the global object (window); → German names of the missing features, [] when all are there. */
+export function missingFeatures(module, g = globalThis) {
+  const need = [['fetch', () => typeof g.fetch === 'function'], ['Abbruch von Anfragen', () => typeof g.AbortController === 'function'],
+    ['Dialogfenster', () => typeof g.HTMLDialogElement === 'function']];
+  if (module === 'hoeren') need.push(['Audiowiedergabe (Web Audio)', () => typeof (g.AudioContext || g.webkitAudioContext) === 'function']);
+  if (module === 'sprechen') need.push(['Mikrofonzugriff', () => !!(g.navigator && g.navigator.mediaDevices && typeof g.navigator.mediaDevices.getUserMedia === 'function')],
+    ['Aufnahme (MediaRecorder)', () => typeof g.MediaRecorder === 'function']);
+  return need.filter(([, ok]) => { try { return !ok(); } catch { return true; } }).map(([name]) => name);
+}
+
+/* GOETHE-B1-DIGITAL §2.1 keyboard check (umlaut entry), shown before Schreiben: informational only — the editor has an
+   on-screen row for ä ö ü Ä Ö Ü ß „ “ – € */
+export const KEYBOARD_CHECK = '<section class="kx-precheck" aria-labelledby="kx-pc-kbd"><h2 id="kx-pc-kbd">Tastaturtest</h2>'
+  + '<label for="kx-kbd-test">Tippen Sie zur Probe: ä ö ü ß</label>'
+  + '<input id="kx-kbd-test" data-kbd-test type="text" lang="de" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">'
+  + '<p class="kx-precheck-msg" id="kx-kbd-msg" role="status"></p></section>';
+export function keyboardNote(text) {
+  const t = String(text || '');
+  if (!t.trim()) return '';
+  const got = ['ä', 'ö', 'ü', 'ß'].filter((c) => t.includes(c));
+  return got.length === 4 ? 'Ihre Tastatur kann Umlaute und ß eingeben.'
+    : `Noch nicht alle Zeichen (${['ä', 'ö', 'ü', 'ß'].filter((c) => !got.includes(c)).join(' ')}). Kein Problem: Im Editor gibt es eine Zeichenleiste mit ä ö ü Ä Ö Ü ß „ “ – €.`;
 }
 
 /* one second of a quiet 440 Hz tone with a soft envelope; resolves when it has finished */

@@ -323,11 +323,25 @@ export function createRenderer(extra = {}) {
 }
 
 /* Part navigation for a module page: one link per part present, with its answered count. */
-export function moduleNav(progress, current = null, { palette = false, flags = new Set() } = {}) {
+export function moduleNav(progress, current = null, { palette = false, flags = new Set(), tabs = false } = {}) {
   if (!progress || progress.length < 2 || !progress.some((p) => p.total)) return '';
+  if (tabs) return partTabs(progress, current, { palette, flags });
   return `<nav class="kx-nav" aria-label="Teile dieses Moduls"><ol>${progress.map((p) => `<li><a href="#part-${esc(p.part)}"${p.part === current ? ' aria-current="true"' : ''}>Teil ${esc(p.part)}`
     + (p.total ? ` <span class="kx-nav-count" data-progress-part="${esc(p.part)}">${p.answered}/${p.total}</span>` : '') + '</a></li>').join('')}`
     + `<li><button type="button" class="kx-palette-toggle" data-act="palette" aria-expanded="${palette ? 'true' : 'false'}" aria-controls="kx-palette">Übersicht</button></li></ol></nav>`
+    + (palette ? itemPalette(progress, flags) : '');
+}
+
+/* Lesen and Schreiben (GOETHE-B1-DIGITAL §2.3 "parts are tabs within one module timer", §4 "Tab bar Teil 1–5"): an ARIA
+   tablist with manual activation — arrow keys / Home / End move focus, Enter / Space / click open the part. The selected
+   tab is the only one in the Tab order (roving tabindex). The overview toggle sits beside the tablist, not inside it. */
+export function partTabs(progress, current, { palette = false, flags = new Set() } = {}) {
+  const sel = progress.some((p) => p.part === current) ? current : progress[0].part;
+  const tabs = progress.map((p) => { const on = p.part === sel;
+    return `<li role="presentation"><button type="button" role="tab" class="kx-tab" id="tab-part-${esc(p.part)}" data-tab="${esc(p.part)}" aria-controls="panel-part-${esc(p.part)}" aria-selected="${on ? 'true' : 'false'}" tabindex="${on ? '0' : '-1'}">Teil ${esc(p.part)}`
+      + (p.total ? ` <span class="kx-nav-count" data-progress-part="${esc(p.part)}">${p.answered}/${p.total}</span>` : '') + '</button></li>'; }).join('');
+  return `<nav class="kx-nav" aria-label="Teile dieses Moduls"><div class="kx-nav-row"><ol role="tablist" aria-label="Teile">${tabs}</ol>`
+    + `<button type="button" class="kx-palette-toggle" data-act="palette" aria-expanded="${palette ? 'true' : 'false'}" aria-controls="kx-palette">Übersicht</button></div></nav>`
     + (palette ? itemPalette(progress, flags) : '');
 }
 

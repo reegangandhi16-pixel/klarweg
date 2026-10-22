@@ -134,9 +134,11 @@ async function run(viewport) {
     assert.match(await text(), /SYNTHETISCHE ÜBUNGSINHALTE/);
     // answer: first option of each non-example radio group, first real option of each select
     // part navigation and progress: one link per part, every target present, nothing answered yet
-    const navLinks = await evaluate(`[...document.querySelectorAll('.kx-nav a')].map((a) => a.getAttribute('href'))`);
-    assert.ok(navLinks.length >= 2, 'part navigation shown');
-    assert.equal(await evaluate(`${JSON.stringify(navLinks)}.every((h) => document.querySelector(h))`), true, 'every part link has a target');
+    // Lesen parts are tabs (GOETHE-B1-DIGITAL §4): one tab per part, each controlling an existing panel; Teil 1 open
+    const navLinks = await evaluate(`[...document.querySelectorAll('[role="tab"]')].map((t) => '#' + t.getAttribute('aria-controls'))`);
+    assert.ok(navLinks.length >= 2, 'part tabs shown');
+    assert.equal(await evaluate(`${JSON.stringify(navLinks)}.every((h) => document.querySelector(h)?.getAttribute('role') === 'tabpanel')`), true, 'every tab controls a panel');
+    assert.equal(await evaluate(`[...document.querySelectorAll('#kx-main .kx-part')].filter((p) => !p.hidden).length`), 1, 'one part shown at a time');
     const total = Number(/von (\d+) beantwortet/.exec(await evaluate(`document.querySelector('.kx-progress').textContent`))[1]);
     assert.match(await evaluate(`document.querySelector('.kx-progress').textContent`), /^0 von \d+ beantwortet$/);
     // the first "Modul abgeben" opens the review — nothing is submitted; it lists the unanswered items with working links
@@ -145,6 +147,11 @@ async function run(viewport) {
     assert.equal(await evaluate(`document.activeElement && document.activeElement.id`), 'kx-review-title', 'focus moves to the review');
     assert.match(await evaluate(`document.querySelector('.kx-review-summary').textContent`), new RegExp(`^${total} von ${total} Aufgaben sind noch ohne Antwort`));
     assert.equal(await evaluate(`[...document.querySelectorAll('#kx-review a[data-review-jump]')].every((a) => document.querySelector(a.getAttribute('href')))`), true);
+    // a review link into another part opens that part (tab) and lands on the item
+    const jumped = await evaluate(`(() => { const a = [...document.querySelectorAll('#kx-review a[data-review-jump]')].at(-1); const it = document.querySelector(a.getAttribute('href')); a.click();
+      const part = it.closest('.kx-part'); return { part: part.dataset.part, shown: !part.hidden, selected: document.querySelector('[role="tab"][aria-selected="true"]').dataset.tab }; })()`);
+    assert.ok(jumped.shown && jumped.selected === jumped.part && jumped.part !== '1', `review jump opens its part: ${JSON.stringify(jumped)}`);
+    await click('[role="tab"][data-tab="1"]'); await sleep(200);
     assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'lesen'").first()).status, 'running', 'opening the review submits nothing');
     // answering while the review is open refreshes the review (not only the header); focus stays where the learner is
     await evaluate(`(() => { const r = document.querySelector('input[type=radio]:not([disabled])'); r.focus(); r.click(); })()`);   // as a pointer/keyboard user does
@@ -720,6 +727,10 @@ async function runPractice() {
     // ---- Schreiben: three texts ----
     await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`); await click('[data-act="start"][data-module="schreiben"]');
     await waitFor(`document.querySelectorAll('textarea').length === 3`, 15000, 'Schreiben');
+    // Schreiben tasks are tabs (GOETHE-B1-DIGITAL §4 "Three task tabs"): Teil 1 open first; open Teil 2 for its post
+    assert.deepEqual(await evaluate(`[...document.querySelectorAll('[role="tab"]')].map((t) => t.dataset.tab + ':' + t.getAttribute('aria-selected'))`), ['1:true', '2:false', '3:false']);
+    await click('[role="tab"][data-tab="2"]'); await sleep(300);
+    assert.equal(await evaluate(`document.activeElement && document.activeElement.id`), 'part-2', 'focus on the Teil 2 heading');
     // ENGINE §9.4: the Teil 2 forum post sits beside its editor at 1280 and above it on a phone (no horizontal scroll)
     const post = () => evaluate(`(() => { const sp = document.querySelectorAll('#kx-main .kx-split'); const s = sp[0]; if (!s) return { n: 0 };
       const t = s.querySelector('.kx-task-texts').getBoundingClientRect(), e = s.querySelector('textarea').getBoundingClientRect();
@@ -741,6 +752,11 @@ async function runPractice() {
       if (Date.now() - t0 > 15000) throw new Error('Schreiben answers not stored as text after blur/change: ' + JSON.stringify(rows).slice(0, 300));
     }
     await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Schreiben autosaved');
+    // switching task tabs never touches the texts
+    const texts = () => evaluate(`[...document.querySelectorAll('textarea')].map((t) => t.value)`);
+    const before = await texts();
+    for (const n of [3, 1, 2]) { await click(`[role="tab"][data-tab="${n}"]`); await sleep(200); }
+    assert.deepEqual(await texts(), before, 'texts unchanged after switching tabs');
     await submitModule();
 
     // ---- Sprechen: consent, preparation, skip to Teil 1 (test server time), record, submit ----
@@ -1417,30 +1433,52 @@ async function runLesenOnly() {
     await evaluate(`window.scrollTo(0, document.body.scrollHeight / 2)`); await sleep(200);
     const bar = await evaluate(`(() => { const r = document.querySelector('.kx-bar').getBoundingClientRect(); const tm = document.querySelector('.kx-timer').getBoundingClientRect(); return { top: Math.round(r.top), timerVisible: tm.top >= 0 && tm.bottom <= innerHeight, nav: !!document.querySelector('.kx-bar .kx-nav') }; })()`);
     assert.deepEqual(bar, { top: 0, timerVisible: true, nav: true }, 'sticky bar with timer and part navigation');
-    // a part jump lands the "Teil n" heading below the sticky bar, at desktop and phone width
+    // part tabs (GOETHE-B1-DIGITAL §2.3/§4): one part at a time; opening a tab shows its heading below the sticky bar
+    // with focus on it, at desktop, tablet and phone width
+    const tabState = () => evaluate(`(() => { const tabs = [...document.querySelectorAll('[role="tab"]')]; return { selected: tabs.filter((t) => t.getAttribute('aria-selected') === 'true').map((t) => t.dataset.tab),
+      focusable: tabs.filter((t) => t.tabIndex === 0).map((t) => t.dataset.tab), shown: [...document.querySelectorAll('#kx-main .kx-part')].filter((p) => !p.hidden).map((p) => p.dataset.part),
+      panels: [...document.querySelectorAll('#kx-main .kx-part')].every((p) => p.getAttribute('role') === 'tabpanel' && p.getAttribute('aria-labelledby') === 'tab-part-' + p.dataset.part && p.id === 'panel-part-' + p.dataset.part),
+      focus: document.activeElement && (document.activeElement.dataset.tab ? 'tab-' + document.activeElement.dataset.tab : document.activeElement.id), said: document.querySelector('#kx-sr-announce').textContent }; })()`);
+    const openTab = async (n) => { await evaluate(`document.querySelector('[role="tab"][data-tab="${n}"]').click()`); await sleep(300); };
+    let ts = await tabState();
+    assert.deepEqual([ts.selected, ts.focusable, ts.shown, ts.panels], [['1'], ['1'], ['1'], true], `first part open, one tab in the Tab order: ${JSON.stringify(ts)}`);
+    // keyboard (manual activation): arrows move focus without opening; Enter opens and moves focus to the heading
+    await evaluate(`document.querySelector('[role="tab"][data-tab="1"]').focus()`);
+    const key = async (k, code, vk) => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: k, code, windowsVirtualKeyCode: vk }); await sleep(120); };
+    await key('ArrowRight', 'ArrowRight', 39); ts = await tabState();
+    assert.deepEqual([ts.focus, ts.selected, ts.shown], ['tab-2', ['1'], ['1']], `ArrowRight moves focus only: ${JSON.stringify(ts)}`);
+    assert.equal(await evaluate(`document.activeElement.matches(':focus-visible') && parseFloat(getComputedStyle(document.activeElement).outlineWidth) >= 2`), true, 'visible focus ring on the tab');
+    await key('End', 'End', 35); assert.equal((await tabState()).focus, 'tab-5'); await key('ArrowRight', 'ArrowRight', 39); assert.equal((await tabState()).focus, 'tab-1', 'wraps around');
+    await key('Home', 'Home', 36); await key('ArrowLeft', 'ArrowLeft', 37); assert.equal((await tabState()).focus, 'tab-5');
+    await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, text: '\r' }); await send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 }); await sleep(300);
+    ts = await tabState();
+    assert.deepEqual([ts.selected, ts.focusable, ts.shown, ts.focus, ts.said], [['5'], ['5'], ['5'], 'part-5', 'Teil 5 geöffnet.'], `Enter opens Teil 5, focus on its heading, announced: ${JSON.stringify(ts)}`);
+    await A.a11y('Lesen part tabs');
     for (const [w, h, mobile] of [[1280, 800, false], [800, 1024, true], [360, 640, true]]) {
       await vp(w, h, mobile); await evaluate(`window.scrollTo(0, 0)`); await sleep(100);
-      await evaluate(`document.querySelector('.kx-nav a[href="#part-4"]').click()`); await sleep(400);
-      const pos = await evaluate(`({ bar: document.querySelector('.kx-bar').getBoundingClientRect().bottom, head: document.getElementById('part-4').getBoundingClientRect().top, noHScroll: document.documentElement.scrollWidth <= innerWidth + 1 })`);
+      await openTab(4);
+      const pos = await evaluate(`({ bar: document.querySelector('.kx-bar').getBoundingClientRect().bottom, barH: document.querySelector('.kx-bar').getBoundingClientRect().height, head: document.getElementById('part-4').getBoundingClientRect().top, noHScroll: document.documentElement.scrollWidth <= innerWidth + 1 })`);
       assert.ok(pos.head >= pos.bar - 1, `Teil 4 heading visible below the bar at ${w}px: ${JSON.stringify(pos)}`);
       assert.ok(pos.noHScroll, `no horizontal scroll at ${w}px`);
-      assert.ok(pos.bar <= 120, `the sticky bar stays compact at ${w}px (${pos.bar} px)`);
-      assert.equal(await evaluate(`document.querySelector('.kx-nav a[aria-current="true"]')?.getAttribute('href')`), '#part-4', `current part marked at ${w}px`);
-      const cols = await evaluate(`(() => { const t = document.querySelector('#kx-main .kx-split .kx-task-texts').getBoundingClientRect(), i = document.querySelector('#kx-main .kx-split .kx-task-items').getBoundingClientRect(); return { sideBySide: t.right <= i.left + 1 && t.top < i.bottom && t.bottom > i.top,   /* beside = no horizontal overlap, shared rows (the texts column is sticky, so tops differ) */ stacked: t.bottom <= i.top + 1 }; })()`);
+      assert.ok(pos.barH <= 120, `the sticky bar stays compact at ${w}px (${pos.barH} px)`);
+      ts = await tabState(); assert.deepEqual([ts.selected, ts.shown, ts.focus], [['4'], ['4'], 'part-4'], `Teil 4 open and focused at ${w}px: ${JSON.stringify(ts)}`);
+      const tabVis = await evaluate(`(() => { const t = document.querySelector('[role="tab"][data-tab="4"]'), row = t.closest('ol'); const r = t.getBoundingClientRect(), rr = row.getBoundingClientRect(); return r.left >= rr.left - 1 && r.right <= rr.right + 1; })()`);
+      assert.equal(tabVis, true, `the open part's tab is visible in the tab row at ${w}px`);
+      const cols = await evaluate(`(() => { const t = document.querySelector('#kx-main .kx-part:not([hidden]) .kx-split .kx-task-texts').getBoundingClientRect(), i = document.querySelector('#kx-main .kx-part:not([hidden]) .kx-split .kx-task-items').getBoundingClientRect(); return { sideBySide: t.right <= i.left + 1 && t.top < i.bottom && t.bottom > i.top,   /* beside = no horizontal overlap, shared rows (the texts column is sticky, so tops differ) */ stacked: t.bottom <= i.top + 1 }; })()`);
       assert.equal(w < 768 ? cols.stacked : cols.sideBySide, true, `Lesen texts ${w < 768 ? 'above' : 'beside'} the tasks at ${w}px: ${JSON.stringify(cols)}`);
       // ENGINE §9.1: on a phone a sticky "Text / Aufgaben" pair (above the submit bar) jumps between the stacked columns;
       // hidden on wide screens where both are side by side
-      const tog = () => evaluate(`(() => { const split = [...document.querySelectorAll('#kx-main .kx-split')].find((x) => { const r = x.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }) || document.querySelector('#kx-main .kx-split');
+      const tog = () => evaluate(`(() => { const split = [...document.querySelectorAll('#kx-main .kx-part:not([hidden]) .kx-split')].find((x) => { const r = x.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }) || document.querySelector('#kx-main .kx-part:not([hidden]) .kx-split');
         const n = split.querySelector('.kx-split-toggle'); const st = getComputedStyle(n); const r = n.getBoundingClientRect(); const foot = document.querySelector('.kx-foot').getBoundingClientRect();
         return { shown: st.display !== 'none', inView: r.top >= 0 && r.bottom <= innerHeight, aboveFoot: r.bottom <= foot.top + 1, links: [...n.querySelectorAll('a')].map((a) => a.getAttribute('href')) }; })()`);
       assert.equal(await evaluate(`[...document.querySelectorAll('.kx-split-collapse')].some((b) => getComputedStyle(b).display !== 'none')`), w >= 768 && w < 1024, `collapse control only at tablet width (${w}px)`);
       if (w >= 768) assert.equal((await tog()).shown, false, `no Text/Aufgaben toggle beside side-by-side columns (${w}px)`);
       else {
-        await evaluate(`document.querySelector('#kx-main .kx-split .kx-task-items .kx-item:last-child').scrollIntoView({ block: 'center' })`); await sleep(300);
+        await evaluate(`document.querySelector('#kx-main .kx-part:not([hidden]) .kx-split .kx-task-items .kx-item:last-child').scrollIntoView({ block: 'center' })`); await sleep(300);
         const t = await tog();
         assert.ok(t.shown && t.inView && t.aboveFoot && t.links.length === 2, `sticky toggle on a phone: ${JSON.stringify(t)}`);
         for (const [i, which] of [[0, 'texts'], [1, 'items']]) {
-          await evaluate(`[...document.querySelectorAll('#kx-main .kx-split .kx-split-toggle')].find((n) => { const r = n.getBoundingClientRect(); return r.top >= 0 && r.bottom <= innerHeight; }).querySelectorAll('a')[${i}].click()`); await sleep(400);
+          await evaluate(`[...document.querySelectorAll('#kx-main .kx-part:not([hidden]) .kx-split .kx-split-toggle')].find((n) => { const r = n.getBoundingClientRect(); return r.top >= 0 && r.bottom <= innerHeight; }).querySelectorAll('a')[${i}].click()`); await sleep(400);
           const land = await evaluate(`(() => { const el = document.querySelector(location.hash); const r = el.getBoundingClientRect(); return { hash: location.hash, top: r.top, bar: document.querySelector('.kx-bar').getBoundingClientRect().bottom }; })()`);
           assert.ok(land.hash.startsWith(`#kx-${which}-`) && land.top >= land.bar - 1 && land.top < land.bar + 40, `toggle → ${which} lands below the bar: ${JSON.stringify(land)}`);
         }
@@ -1461,7 +1499,8 @@ async function runLesenOnly() {
     // ENGINE §9.1 tablet (768–1023 px): split pane with a collapsible texts column — keyboard, focus, labels, layout
     {
       await vp(800, 1024, true); await evaluate(`window.scrollTo(0, 0)`); await sleep(200);
-      const key = async (k, code, vk, text) => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: k, code, windowsVirtualKeyCode: vk, ...(text && type === 'keyDown' ? { text } : {}) }); await sleep(150); };
+      await openTab(1);
+      const key2 = async (k, code, vk, text) => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: k, code, windowsVirtualKeyCode: vk, ...(text && type === 'keyDown' ? { text } : {}) }); await sleep(150); };
       const state = (part) => evaluate(`(() => { const sp = document.querySelector('[data-part="${part}"] .kx-split'); const b = sp.querySelector('.kx-split-collapse'); const r = b.getBoundingClientRect();
         const texts = document.getElementById(b.getAttribute('aria-controls')); const items = sp.querySelector('.kx-task-items').getBoundingClientRect(), grid = sp.querySelector('.kx-split-grid').getBoundingClientRect();
         return { name: b.textContent, expanded: b.getAttribute('aria-expanded'), h: Math.round(r.height), textsShown: getComputedStyle(texts).display !== 'none', itemsFull: Math.abs(items.width - grid.width) < 2,
@@ -1470,26 +1509,26 @@ async function runLesenOnly() {
       let st = await state(1);
       assert.ok(st.name === 'Texte zu Teil 1' && st.expanded === 'true' && st.h >= 44 && st.textsShown && !st.itemsFull && st.noH, `tablet: expanded by default ${JSON.stringify(st)}`);
       await evaluate(`document.querySelector('[data-part="1"] .kx-split-collapse').focus()`);
-      await key('Enter', 'Enter', 13, '\r'); st = await state(1);
+      await key2('Enter', 'Enter', 13, '\r'); st = await state(1);
       assert.ok(st.expanded === 'false' && !st.textsShown && st.itemsFull && st.focused && st.ring && st.noH, `tablet: Enter collapses, focus stays with a visible ring ${JSON.stringify(st)}`);
       await A.a11y('Lesen tablet, texts collapsed');   // the audit tabs through the page: focus the control again
       await evaluate(`document.querySelector('[data-part="1"] .kx-split-collapse').focus()`);
-      await key(' ', 'Space', 32, ' '); st = await state(1);
+      await key2(' ', 'Space', 32, ' '); st = await state(1);
       assert.ok(st.expanded === 'true' && st.textsShown && !st.itemsFull && st.focused && st.noH, `tablet: Space expands ${JSON.stringify(st)}`);
       // part navigation still lands below the bar while a panel is collapsed
       await evaluate(`document.querySelector('[data-part="1"] .kx-split-collapse').click()`);
-      await evaluate(`document.querySelector('.kx-nav a[href="#part-3"]').click()`); await sleep(400);
+      await openTab(3);
       const nav = await evaluate(`({ bar: document.querySelector('.kx-bar').getBoundingClientRect().bottom, head: document.getElementById('part-3').getBoundingClientRect().top, noH: document.documentElement.scrollWidth <= innerWidth + 1 })`);
       assert.ok(nav.head >= nav.bar - 1 && nav.noH, `tablet: part jump with a collapsed panel ${JSON.stringify(nav)}`);
       // a Teil 4 "Zum Text" jump into a collapsed panel opens it and shows that comment
-      await evaluate(`document.querySelector('[data-part="4"] .kx-split-collapse').click()`);
+      await openTab(4); await evaluate(`document.querySelector('[data-part="4"] .kx-split-collapse').click()`);
       assert.equal((await state(4)).textsShown, false);
       const label = await evaluate(`(() => { const a = [...document.querySelectorAll('[data-part="4"] .kx-stim-jump')].at(-1); a.scrollIntoView({ block: 'center' }); a.click(); return a.getAttribute('aria-label'); })()`);
       await sleep(500); st = await state(4);
       const seen = await evaluate(`(() => { const t = document.querySelector(location.hash); const r = t.getBoundingClientRect(); return { label: t.querySelector('.kx-stim-label').textContent, inView: r.top >= 0 && r.top < innerHeight - 40 }; })()`);
       assert.ok(st.expanded === 'true' && st.textsShown && label.endsWith(seen.label) && seen.inView, `tablet: jump opens the collapsed panel ${JSON.stringify({ st, seen, label })}`);
       // the collapsed state never leaks into desktop or phone layouts
-      await evaluate(`document.querySelector('[data-part="1"] .kx-split') .classList.contains('kx-collapsed') || document.querySelector('[data-part="1"] .kx-split-collapse').click()`);
+      await openTab(1); await evaluate(`document.querySelector('[data-part="1"] .kx-split') .classList.contains('kx-collapsed') || document.querySelector('[data-part="1"] .kx-split-collapse').click()`);
       for (const [w, h, m] of [[1280, 800, false], [360, 640, true]]) {
         await vp(w, h, m); await sleep(200);
         const v = await evaluate(`(() => { const sp = document.querySelector('[data-part="1"] .kx-split'); return { collapsedClass: sp.classList.contains('kx-collapsed'), textsShown: getComputedStyle(sp.querySelector('.kx-task-texts')).display !== 'none', noH: document.documentElement.scrollWidth <= innerWidth + 1 }; })()`);
@@ -1511,6 +1550,7 @@ async function runLesenOnly() {
     // choosing an ad twice is marked, never blocked or reset; the phone filter only hides cards
     {
       const t3 = '[data-part="3"]';
+      await openTab(3);
       const sel = (no) => `${t3} select[data-no="${no}"]`;
       const choose = (no, v) => evaluate(`(() => { const s = document.querySelector('${sel(no)}'); s.value = '${v}'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
       const view = () => evaluate(`(() => { const cards = [...document.querySelectorAll('${t3} .kx-ad')]; const vis = cards.filter((c) => getComputedStyle(c).display !== 'none');
@@ -1613,6 +1653,7 @@ async function runLesenOnly() {
     // resume at the same part and item: the item changed last before the reload is back in view below the bar
     const pos = await evaluate(`(() => { const it = document.querySelector('input[data-item="${probeItem}"]').closest('[id^="item-"]'); const r = it.getBoundingClientRect(), bar = document.querySelector('.kx-bar').getBoundingClientRect().bottom;
       return { top: Math.round(r.top), bar: Math.round(bar), vh: innerHeight, scrolled: scrollY > 0, said: document.querySelector('#kx-announce').textContent, part: it.closest('.kx-part').dataset.part, stored: localStorage.getItem('kx-pos:${attempt.id}:lesen') === it.id }; })()`);
+    assert.deepEqual((await tabState()).selected, [pos.part], 'the resumed tab is the part of the last item');
     assert.ok(pos.stored && pos.scrolled && pos.top >= pos.bar - 1 && pos.top < pos.vh - 40 && pos.said === `Weiter in Teil ${pos.part}, bei der zuletzt bearbeiteten Aufgabe.`, `resume position ${JSON.stringify(pos)}`);
     // ENGINE §8 network loss: offline, an answer change stays on the device (IndexedDB queue) and the learner is told so;
     // back online it is sent and the recovery is announced
@@ -1621,6 +1662,8 @@ async function runLesenOnly() {
       await send('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
       const other = await evaluate(`(() => { const r = [...document.querySelectorAll('input[type=radio][data-item="${probeItem}"]')].find((x) => !x.checked); r.click(); return r.value; })()`);
       await waitFor(`/^Offline – Ihre Antworten bleiben auf diesem Gerät gespeichert/.test(document.querySelector('#kx-announce')?.textContent || '')`, 20000, 'offline announcement');
+      await openTab(3); await openTab(1);   // switching parts while offline keeps the unsent answer
+      assert.equal(await evaluate(`document.querySelector('input[data-item="${probeItem}"]:checked')?.value`), other, 'the offline answer survives tab switches');
       assert.match(await evaluate(`document.querySelector('.kx-save').textContent`), /^Offline/);
       assert.notEqual(await stored(), other, 'nothing reached the server while offline');
       await send('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });

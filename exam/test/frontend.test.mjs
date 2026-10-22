@@ -750,7 +750,7 @@ test('RESULT: a way back to the overview (start screen with history and a new pr
 
 test('STICKY BAR: header (timer, progress, save state) and part navigation share one sticky container', () => {
   const css = read('exam/exam.css'); const main = read('exam/js/main.js');
-  assert.match(main, /<div class="kx-bar"><div id="kx-head"><\/div><p class="kx-phase" id="kx-phase"[^>]*><\/p>\$\{phaseTime\}<p class="kx-announce" id="kx-announce"[^>]*><\/p><div id="kx-nav-slot"><\/div><\/div>/, 'live status (phase, alerts, warnings) sits in the sticky bar');
+  assert.match(main, /<div class="kx-bar"><div id="kx-head"><\/div><p class="kx-phase" id="kx-phase"[^>]*><\/p>\$\{phaseTime\}<p class="kx-announce" id="kx-announce"[^>]*><\/p><p class="kx-sr" id="kx-sr-announce"[^>]*><\/p><div id="kx-nav-slot"><\/div><\/div>/, 'live status (phase, alerts, warnings) sits in the sticky bar');
   assert.match(css, /\.kx-phase:empty { display: none; }/);
   assert.match(main, /setProperty\('--kx-bar-h'/, 'jump targets follow the bar\'s real height');
   assert.match(css, /\.kx-bar\s*{[^}]*position: sticky;[^}]*top: 0/);
@@ -1134,7 +1134,7 @@ test('RESUME POSITION (GOETHE-B1-DIGITAL §10): Lesen/Schreiben remember the las
   assert.match(fn, /requestAnimationFrame\(go\); setTimeout\(go, 100\);/); assert.match(fn, /if \(done\) return; done = true;/);
   assert.match(fn, /bar\.getBoundingClientRect\(\)\.bottom \+ 8/, 'measured bar, not the possibly stale --kx-bar-h');
   assert.match(fn, /announce\(`Weiter in Teil \$\{part\.dataset\.part\}, bei der zuletzt bearbeiteten Aufgabe\.`\)/);
-  assert.match(main, /markTopicDecks\(S\.locked\.size > 0\);\n  trackCurrentPart\(\);\n  restorePosition\(\);\n\}/, 'restored once, when the module page is drawn');
+  assert.match(main, /markTopicDecks\(S\.locked\.size > 0\);\n  if \(!setupTabs\(\)\) trackCurrentPart\(\);\n  restorePosition\(\);\n\}/, 'restored once, when the module page is drawn (after the tabs are set up)');
 });
 
 test('RESULT SUMMARY (SCORING §5): "n von m bewerteten Modulen bestanden (Klarweg-Simulation)" from final modules only; open ratings named; no sum of points; nothing for single parts or when nothing is final', async () => {
@@ -1177,8 +1177,30 @@ test('ITEM PALETTE (ENGINE §9.1): toggle in the part navigation (aria-expanded/
   assert.match(open, /<a href="#item-itm_b" data-palette-jump class="kx-pal is-open is-flagged">2<span class="kx-sr">: offen, markiert<\/span><\/a>/);
   assert.match(itemPalette(progress), /1 beantwortet · 2 offen<\/p>/, 'no "markiert" without flags');
   const main = read('exam/js/main.js');
-  assert.match(main, /moduleNav\(progress\(\), S\.currentPart, \{ palette: !!S\.paletteOpen, flags: S\.flags \}\)/);
-  assert.match(main, /S\.paletteOpen = false; paintNav\(\);\s*if \(item\) \{ item\.scrollIntoView\(\{ block: 'start' \}\); const c = item\.querySelector/);
+  assert.match(main, /moduleNav\(progress\(\), S\.currentPart, \{ palette: !!S\.paletteOpen, flags: S\.flags, tabs: tabsMode\(\) \}\)/);
+  assert.match(main, /S\.paletteOpen = false; if \(item\) revealPart\(item\); paintNav\(\);\s*if \(item\) \{ item\.scrollIntoView\(\{ block: 'start' \}\); const c = item\.querySelector/);
   const css = read('exam/exam.css');
   assert.match(css, /\.kx-pal \{[^}]*min-width: 44px; min-height: 44px;/); assert.match(css, /\.kx-palette \{ max-height: 40vh; overflow-y: auto;/);
+});
+
+test('PART TABS (GOETHE-B1-DIGITAL §2.3/§4): Lesen/Schreiben parts as an ARIA tablist — roving tabindex, aria-selected/controls, overview beside (not in) the tablist; Hören keeps links', async () => {
+  const { moduleNav, partTabs } = await import('../js/render.js');
+  const progress = [{ part: 1, answered: 1, total: 2, items: [] }, { part: 2, answered: 0, total: 3, items: [] }];
+  const html = moduleNav(progress, 2, { tabs: true });
+  assert.match(html, /^<nav class="kx-nav" aria-label="Teile dieses Moduls"><div class="kx-nav-row"><ol role="tablist" aria-label="Teile">/);
+  assert.match(html, /<li role="presentation"><button type="button" role="tab" class="kx-tab" id="tab-part-1" data-tab="1" aria-controls="panel-part-1" aria-selected="false" tabindex="-1">Teil 1 <span class="kx-nav-count" data-progress-part="1">1\/2<\/span><\/button><\/li>/);
+  assert.match(html, /id="tab-part-2" data-tab="2" aria-controls="panel-part-2" aria-selected="true" tabindex="0">Teil 2/);
+  assert.match(html, /<\/ol><button type="button" class="kx-palette-toggle" data-act="palette" aria-expanded="false" aria-controls="kx-palette">Übersicht<\/button><\/div><\/nav>$/, 'the overview toggle is outside the tablist');
+  assert.match(partTabs(progress, 99), /id="tab-part-1"[^>]*aria-selected="true" tabindex="0"/, 'an unknown part selects the first tab');
+  assert.match(moduleNav(progress, 1), /<a href="#part-1"/, 'without tabs (Hören): part links as before');
+  const main = read('exam/js/main.js');
+  assert.match(main, /const TAB_MODULES = \['lesen', 'schreiben'\];/);
+  assert.match(main, /const tabsMode = \(\) => TAB_MODULES\.includes\(S\.module\) && document\.querySelectorAll\('#kx-main \.kx-part'\)\.length > 1;/);
+  assert.match(main, /sec\.setAttribute\('role', 'tabpanel'\); sec\.setAttribute\('aria-labelledby', `tab-part-\$\{n\}`\);/);
+  assert.match(main, /if \(focus\) \{ const h = document\.getElementById\(`part-\$\{n\}`\); if \(h\) \{ h\.setAttribute\('tabindex', '-1'\); h\.focus/, 'activation moves focus to the part heading');
+  assert.match(main, /if \(changed && !quiet\) announceSr\(`Teil \$\{n\} geöffnet\.`\);/); assert.match(main, /<p class="kx-sr" id="kx-sr-announce" role="status" aria-live="polite"><\/p>/);
+  assert.match(main, /const to = \{ ArrowRight: i \+ 1, ArrowLeft: i - 1, Home: 0, End: tabs\.length - 1 \}\[e\.key\];/);
+  const show = main.slice(main.indexOf('function showPart'), main.indexOf('function revealPart'));
+  assert.equal(/autosave|S\.answers|\.value\s*=|innerHTML/.test(show), false, 'switching never touches answers or re-renders parts');
+  assert.match(read('exam/exam.css'), /\.kx-part\[hidden\] \{ display: none; \}/);
 });

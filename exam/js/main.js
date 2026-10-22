@@ -284,7 +284,48 @@ function paintHeader() {
   const h = $('#kx-head');
   if (h && m) h.innerHTML = header({ module: S.module, remainingMs: clock.remaining(m.deadline_at), saveState: S.autosave && S.autosave.state, progress: progress(), untimed: S.attempt.part_scope != null });
 }
-function paintNav() { const n = $('#kx-nav-slot'); if (n) n.innerHTML = S.module === 'sprechen' ? '' : moduleNav(progress(), S.currentPart, { palette: !!S.paletteOpen, flags: S.flags }); }
+function paintNav() {
+  const n = $('#kx-nav-slot'); if (!n) return;
+  // a redraw (answer counts) must not drop keyboard focus from a part tab
+  const focusedTab = document.activeElement && n.contains(document.activeElement) ? document.activeElement.dataset.tab : null;
+  n.innerHTML = S.module === 'sprechen' ? '' : moduleNav(progress(), S.currentPart, { palette: !!S.paletteOpen, flags: S.flags, tabs: tabsMode() });
+  if (focusedTab) { const tb = n.querySelector(`[data-tab="${CSS.escape(focusedTab)}"]`); if (tb) tb.focus({ preventScroll: true }); }
+  // a phone shows the tabs as one scrollable row: keep the open part's tab in view (horizontally only)
+  const sel = n.querySelector('[role="tab"][aria-selected="true"]'); const row = sel && sel.closest('ol');
+  if (row && row.scrollWidth > row.clientWidth) { const r = sel.getBoundingClientRect(), rr = row.getBoundingClientRect(); if (r.left < rr.left || r.right > rr.right) row.scrollLeft += r.left - rr.left - 8; }
+}
+/* Part tabs (GOETHE-B1-DIGITAL §2.3, §4): Lesen and Schreiben with two or more parts show one part at a time. Every part
+   stays in the page (hidden), so answers, autosave, the offline queue, flags and usage marks are untouched by switching.
+   A switch moves focus to the part heading and is announced (§2.4); the open part is kept per attempt on this device. */
+const TAB_MODULES = ['lesen', 'schreiben'];
+const tabsMode = () => TAB_MODULES.includes(S.module) && document.querySelectorAll('#kx-main .kx-part').length > 1;
+const tabKey = () => `kx-tab:${S.attempt && S.attempt.attempt_id}:${S.module}`;
+function setupTabs() {
+  if (!tabsMode()) return false;
+  const secs = [...document.querySelectorAll('#kx-main .kx-part')];
+  for (const sec of secs) { const n = sec.dataset.part; sec.id = `panel-part-${n}`; sec.setAttribute('role', 'tabpanel'); sec.setAttribute('aria-labelledby', `tab-part-${n}`); }
+  let saved = null; try { saved = Number(localStorage.getItem(tabKey())) || null; } catch { /* first part */ }
+  showPart(saved && secs.some((s) => Number(s.dataset.part) === saved) ? saved : Number(secs[0].dataset.part), { quiet: true });
+  return true;
+}
+function showPart(n, { focus = false, quiet = false } = {}) {
+  const secs = [...document.querySelectorAll('#kx-main .kx-part')];
+  if (!secs.some((s) => Number(s.dataset.part) === n)) return;
+  const changed = S.currentPart !== n;
+  for (const s of secs) s.hidden = Number(s.dataset.part) !== n;
+  S.currentPart = n;
+  try { localStorage.setItem(tabKey(), String(n)); } catch { /* this page only */ }
+  paintNav();
+  if (changed && !quiet) window.scrollTo(0, 0);
+  if (focus) { const h = document.getElementById(`part-${n}`); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+  if (changed && !quiet) announceSr(`Teil ${n} geöffnet.`);
+}
+/* any jump to something inside a hidden part (overview, review list, resume) opens that part first */
+function revealPart(el) {
+  if (!tabsMode()) return;
+  const sec = el && el.closest && el.closest('#kx-main .kx-part');
+  if (sec && sec.hidden) { showPart(Number(sec.dataset.part), { quiet: true }); announceSr(`Teil ${sec.dataset.part} geöffnet.`); }
+}
 /* The part on screen (the last one whose heading has passed the sticky bar) is marked in the part navigation. */
 /* The sticky bar's real height (it grows with a status line or an alert) drives where part jumps land and where the Lesen
    texts column sticks (CSS var --kx-bar-h). */
@@ -310,6 +351,7 @@ function restorePosition() {
   if (!S.attempt || !POS_MODULES.includes(S.module)) return;
   let id = null; try { id = localStorage.getItem(posKey()); } catch { return; }
   const item = id && document.getElementById(id); if (!item) return;
+  if (tabsMode()) { const sec = item.closest('.kx-part'); if (sec) showPart(Number(sec.dataset.part), { quiet: true }); }
   // measured, not via scroll-margin: the bar-height variable is set by a ResizeObserver that may not have run yet
   // after layout: the next frame, or a short timer when frames are throttled (once either way)
   let done = false;
@@ -321,7 +363,7 @@ function restorePosition() {
 app.addEventListener('focusin', (e) => rememberPosition(e.target));
 
 function trackCurrentPart() {
-  if (partFrame) return;
+  if (partFrame || tabsMode()) return;
   partFrame = requestAnimationFrame(() => {
     partFrame = 0;
     const bar = $('.kx-bar'); const parts = [...document.querySelectorAll('#kx-main .kx-part')]; if (!bar || !parts.length) return;
@@ -361,14 +403,14 @@ function paint() {
     : S.module === 'hoeren' ? volumeControl(savedVolume() * 100) + '<div class="kx-alerts" id="kx-alerts"></div>' : '';
   // live status (Hören/Sprechen phase, "Audio starten", time warnings) lives in the sticky bar: it must stay visible
   // while the learner is scrolled down to the questions; empty elements take no space
-  screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div>${S.module === 'sprechen' ? '<div class="kx-speak-layout">' : ''}<main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked, flags: S.flags, multiplier: S.attempt.time_multiplier || 1 })}</main>${S.module === 'sprechen' ? notesPanel(loadNotes(S.attempt.attempt_id)) + '</div>' : ''}`
+  screen(`<div class="kx-bar"><div id="kx-head"></div><p class="kx-phase" id="kx-phase" aria-live="polite"></p>${phaseTime}<p class="kx-announce" id="kx-announce" role="status" aria-live="polite"></p><p class="kx-sr" id="kx-sr-announce" role="status" aria-live="polite"></p><div id="kx-nav-slot"></div></div>${S.module === 'sprechen' ? '<div class="kx-speak-layout">' : ''}<main class="kx-module" id="kx-main">${renderer.module(S.pkg, S.answers, { locked: S.locked, flags: S.flags, multiplier: S.attempt.time_multiplier || 1 })}</main>${S.module === 'sprechen' ? notesPanel(loadNotes(S.attempt.attempt_id)) + '</div>' : ''}`
     + `<div id="kx-review-slot"></div><footer class="kx-foot"><button class="kx-btn" data-act="submit">Modul abgeben</button></footer>`);
   S.currentPart = null;
   watchBar();
   updateProgress();
   markUsedOptions();
   markTopicDecks(S.locked.size > 0);
-  trackCurrentPart();
+  if (!setupTabs()) trackCurrentPart();
   restorePosition();
 }
 /* Matching tasks (ENGINE §9.1 L3): each option and each ad card says which situations use it ("verwendet bei 15");
@@ -560,6 +602,8 @@ async function runHoeren() {
 }
 
 /* ---------- Sprechen (SPEAKING-SPEC §2, §5) ---------- */
+/* screen-reader-only status (part switches): focus already moves to the heading, so nothing visible is added to the bar */
+const announceSr = (text) => { const el = $('#kx-sr-announce'); if (el) el.textContent = text; };
 const announce = (text) => { const el = $('#kx-announce'); if (el) el.textContent = text; };
 const safeId = (s) => String(s).replace(/[^a-zA-Z0-9_-]/g, '_');
 
@@ -756,7 +800,21 @@ app.addEventListener('input', (e) => {
   S.answers[el.dataset.item] = { text: el.value }; S.autosave.set(el.dataset.item, { text: el.value });
   updateProgress();
 });
+/* tablist keyboard (manual activation): arrows / Home / End move focus between part tabs; Enter / Space activate */
+app.addEventListener('keydown', (e) => {
+  const tab = e.target.closest && e.target.closest('[role="tab"]'); if (!tab) return;
+  const tabs = [...tab.closest('[role="tablist"]').querySelectorAll('[role="tab"]')];
+  const i = tabs.indexOf(tab);
+  const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+  if (to === undefined) return;
+  e.preventDefault();
+  const next = tabs[(to + tabs.length) % tabs.length];
+  for (const x of tabs) x.tabIndex = x === next ? 0 : -1;
+  next.focus();
+});
 app.addEventListener('click', async (e) => {
+  const anyJump = e.target.closest('a[href^="#"]');
+  if (anyJump && anyJump.getAttribute('href').length > 1) { const target = document.getElementById(anyJump.getAttribute('href').slice(1)); if (target) revealPart(target); }
   /* a jump to a text inside a collapsed tablet panel opens the panel first (the default scroll then finds it) */
   const jump = e.target.closest('a[href^="#kx-"]');
   if (jump) {
@@ -770,11 +828,12 @@ app.addEventListener('click', async (e) => {
   if (pj) {
     e.preventDefault();
     const item = document.getElementById(pj.getAttribute('href').slice(1));
-    S.paletteOpen = false; paintNav();
+    S.paletteOpen = false; if (item) revealPart(item); paintNav();
     if (item) { item.scrollIntoView({ block: 'start' }); const c = item.querySelector('input:not([disabled]), select:not([disabled]), textarea:not([disabled])'); if (c) c.focus({ preventScroll: true }); }
     return;
   }
   const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.tab) { showPart(Number(b.dataset.tab), { focus: true }); return; }
   const act = b.dataset.act;
   try {
     if (act === 'slide-prev' || act === 'slide-next') { stepSlide(b.closest('.kx-deck'), act === 'slide-next' ? 1 : -1); return; }

@@ -733,7 +733,11 @@ test('LESEN LAYOUT: texts and tasks are split into two columns (scrollable, labe
   const lesen = r.module(pkgFor(build, 'lesen'), {}, {});
   assert.ok((lesen.match(/class="kx-task kx-split"/g) || []).length >= 4, 'Lesen tasks with texts are split');
   assert.match(lesen, /<div class="kx-task-texts" id="kx-texts-[^"]+" role="region" tabindex="0" aria-label="Texte zu Teil 1">/);
-  assert.equal(/kx-split/.test(r.module(pkgFor(build, 'schreiben'), {}, {})), false);
+  // Schreiben: only Teil 2 has a stimulus beyond its instructions (the forum post), pinned beside the editor (ENGINE §9.4)
+  const schreiben = r.module(pkgFor(build, 'schreiben'), {}, {});
+  assert.equal((schreiben.match(/class="kx-task kx-split"/g) || []).length, 1, 'only the Schreiben task with a post is split');
+  assert.match(schreiben, /data-part="2"[\s\S]*class="kx-task kx-split"[\s\S]*aria-label="Beitrag zu Teil 2"[\s\S]*<textarea[\s\S]*<a href="#kx-texts-[^"]+">Beitrag<\/a><a href="#kx-items-[^"]+">Ihr Text<\/a>/);
+  assert.equal(/kx-split/.test(r.module(pkgFor(build, 'hoeren'), {}, {})), false, 'Hören is never split');
   assert.equal(/kx-split/.test(r.module(pkgFor(build, 'lesen'), {}, { split: false })), false, 'can be turned off');
   const css = read('exam/exam.css');
   assert.match(css, /@media \(min-width: 1024px\) {\s*\.kx-split-grid { display: grid;/);

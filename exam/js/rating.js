@@ -79,7 +79,7 @@ export function disagreementSection(d, esc) {
   if (!d || !d.flags) return '';
   const rows = d.flags.map((f) => `<li class="kx-queue-row kx-flag-row"><span><strong>${esc(CRITERION_LABELS[f.criterion] || f.criterion)}</strong> · ${esc(f.module === 'sprechen' ? 'Sprechen' : 'Schreiben')} · ${esc(f.item_id === 'sprechen:pron' ? 'Aussprache (ganzes Modul)' : f.item_id)}`
     + ` · Runde 1: ${esc(f.r1)}, Runde 2: ${esc(f.r2)} (${esc(f.diff)} Bänder) <span class="kx-meta">${esc(f.attempt_id.slice(0, 12))}…</span></span>`
-    + `<form class="kx-flag-review" data-key="${esc(f.key)}"><label for="kx-fr-${esc(f.key.replace(/[^A-Za-z0-9_-]/g, '_'))}">Notiz zur Prüfung</label>`
+    + `<form class="kx-flag-review" data-key="${esc(f.key)}" novalidate><label for="kx-fr-${esc(f.key.replace(/[^A-Za-z0-9_-]/g, '_'))}">Notiz zur Prüfung</label>`
     + `<input id="kx-fr-${esc(f.key.replace(/[^A-Za-z0-9_-]/g, '_'))}" name="note" required minlength="3" maxlength="500"><button type="submit" class="kx-btn kx-btn-quiet">Als geprüft markieren</button>`
     + '<p class="kx-rate-msg" role="status"></p></form></li>').join('');
   return `<section class="kx-lead-review" aria-labelledby="kx-lead-title"><h2 id="kx-lead-title">Bewertungsabweichungen (Lead-Prüfung)</h2>`

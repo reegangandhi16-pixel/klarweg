@@ -1158,7 +1158,7 @@ test('LEAD REVIEW (SCORING §4.4): disagreement list with criterion, rounds and 
   assert.match(html, /<h2 id="kx-lead-title">Bewertungsabweichungen \(Lead-Prüfung\)<\/h2>/);
   assert.match(html, /das Ergebnis folgt immer der offiziellen Verrechnung\. Erst nach der endgültigen Wertung sichtbar\./);
   assert.match(html, /<strong>Aussprache<\/strong> · Sprechen · Aussprache \(ganzes Modul\) · Runde 1: B, Runde 2: D \(2 Bänder\)/);
-  assert.match(html, /<form class="kx-flag-review" data-key="att_00000000-0000-4000-8000-000000000000:sprechen:pron:aussprache"><label for="(kx-fr-[A-Za-z0-9_-]+)">Notiz zur Prüfung<\/label><input id="\1" name="note" required minlength="3" maxlength="500">/);
+  assert.match(html, /<form class="kx-flag-review" data-key="att_00000000-0000-4000-8000-000000000000:sprechen:pron:aussprache" novalidate><label for="(kx-fr-[A-Za-z0-9_-]+)">Notiz zur Prüfung<\/label><input id="\1" name="note" required minlength="3" maxlength="500">/);
   assert.equal(disagreementSection({ threshold: 2, flags: [] }, esc).includes('Keine offenen Abweichungen.'), true);
   assert.equal(disagreementSection(null, esc), '');
   assert.match(disagreementSection({ threshold: 2, flags: [{ key, attempt_id: 'att_x', module: 'schreiben', item_id: 'itm:<b>', criterion: 'x"y', r1: 'A', r2: 'C', diff: 2 }] }, esc), /itm:&lt;b&gt;/);

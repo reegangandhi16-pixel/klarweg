@@ -56,8 +56,8 @@ Found and fixed during this audit:
 | Item | Why it matters | Status |
 |---|---|---|
 | Non-production re-verification of the current build | Non-prod last verified on `bebfacb` (2026-10-20), before #197–#222 | Needs authorisation to deploy to non-production; not done |
-| Manual non-prod checks A2 (Safari), A6 (real laptop sleep), A11 (DevTools) | Real devices / browsers | `PRACTICE-LAUNCH-CHECKLIST.md` §0 B; open |
-| Admin form registry / analytics views (ENGINE §7.6, §12) | Operational visibility of form use | Not built; data is in D1. Optional for a Lesen-only pilot |
+| Manual non-prod checks A2 (Safari), A6 (real laptop sleep), A11 (DevTools) | Real devices / browsers | Open; reproducible procedures in `LESEN-ONLY-RELEASE-READINESS.md` §6 (local parts need no deploy) |
+| Admin form registry / analytics views (ENGINE §7.6, §12) | Operational visibility of form use | **Done 2026-10-23: #227** (per-form assignment counts, release-set / pool marks; exam_admin, audited) |
 
 ## 4. External reviews, owner/policy decisions, other non-engineering blockers (Lesen-only)
 

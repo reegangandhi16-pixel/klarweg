@@ -4,7 +4,8 @@
 > `cf73039` (exam suite 523 pass / 0 fail / 3 opt-in skips; release tool still refuses P3/P8/P13); re-verified
 > 2026-10-22 on main `6083e259` with a full specification audit (`SPEC-AUDIT-2026-10-22.md`: no open engineering
 > blocker; release tool refuses P3/P8/P13 as "not started"; flags off, no `EXAM` binding, no `exam/` allowlist). Nothing
-> here is satisfied unless it says so with evidence. The public learner portal stays unavailable until every row in
+> here is satisfied unless it says so with evidence. Internal readiness checklist and manual QA procedures:
+> `LESEN-ONLY-RELEASE-READINESS.md` (2026-10-23, main `4a354acb`). The public learner portal stays unavailable until every row in
 > A–D is closed. Production today: exam Worker flags all `off`; no `EXAM` binding or `EXAM_ROUTES` in klarweg-access;
 > no `exam/` in the Pages allowlist.
 

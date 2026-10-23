@@ -9,7 +9,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { checkApiOrigin, rewritePage, checkOutDir, build } from '../tools/build-nonprod-site.mjs';
+import { checkApiOrigin, rewritePage, checkOutDir, build, pagesOf, prodHostIn } from '../tools/build-nonprod-site.mjs';
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const TOOL = path.join(REPO, 'exam-content', 'tools', 'build-nonprod-site.mjs');
@@ -44,8 +44,24 @@ test('NONPROD SITE: API origin must be exact and must not be production', () => 
   }
 });
 
+test('NONPROD SITE: every top-level exam page is rewritten (admin.html included)', () => {
+  const pages = pagesOf(REPO);
+  assert.deepEqual(pages, fs.readdirSync(path.join(REPO, 'exam')).filter((f) => f.endsWith('.html')).sort());
+  for (const p of ['index.html', 'rater.html', 'admin.html']) assert.ok(pages.includes(p), `${p} is a rewritten page`);
+});
+
+test('NONPROD SITE: a production host left outside comments is detected; comments are ignored', () => {
+  assert.equal(prodHostIn('<!-- the klarweg.in domain -->x'), null);
+  assert.equal(prodHostIn(`<a href="${API}">`), null, 'the non-prod Access Worker is not production');
+  assert.equal(prodHostIn('fetch("https://klarweg.in/x")'), 'klarweg.in');
+  assert.equal(prodHostIn('"https://klarweg-access.klarweg-issue-reports-2026.workers.dev"'), 'klarweg-access.klarweg-issue-reports-2026.workers.dev');
+  assert.match(String(prodHostIn('https://abc-klarweg-access.sub.workers.dev')), /klarweg-access/);
+  const meta = '<meta name="kw-exam-api" content="">';
+  assert.throws(() => rewritePage(`${meta} connect-src x; <link href="https://api.klarweg.in/a">`, API, 'x'), /production host/);
+});
+
 test('NONPROD SITE: the real pages rewrite to the non-prod API and drop every production host from connect-src', () => {
-  for (const page of ['index.html', 'rater.html']) {
+  for (const page of pagesOf(REPO)) {
     const src = fs.readFileSync(path.join(REPO, 'exam', page), 'utf8');
     const out = rewritePage(src, API, page);
     assert.match(out, new RegExp(`<meta name="kw-exam-api" content="${API.replace(/\./g, '\\.')}">`));
@@ -99,9 +115,9 @@ test('NONPROD SITE: a real build writes a full copy outside the repo and leaves 
     for (const f of fs.readdirSync(path.join(REPO, 'exam', 'js'))) {
       assert.ok(fs.readFileSync(path.join(out, 'js', f)).equals(fs.readFileSync(path.join(REPO, 'exam', 'js', f))), `js/${f} copied byte-for-byte`);
     }
-    for (const page of ['index.html', 'rater.html']) {
+    for (const page of pagesOf(REPO)) {
       const html = fs.readFileSync(path.join(out, page), 'utf8');
-      assert.ok(html.includes(`content="${API}"`) && !cspOf(html).includes('klarweg.in'), `${page} rewritten`);
+      assert.ok(html.includes(`content="${API}"`) && !cspOf(html).includes('klarweg.in') && prodHostIn(html) === null, `${page} rewritten`);
     }
   } finally { fs.rmSync(d, { recursive: true, force: true }); }
   assert.equal(hashTree(path.join(REPO, 'exam')), before, 'repository exam/ unchanged');

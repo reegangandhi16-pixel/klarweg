@@ -92,9 +92,10 @@ sets it, and the guard refuses it in `wrangler.toml`. Tests: `access/worker/test
    python3 -m http.server 8788 -d <that dir>        # or: npx http-server <that dir> -p 8788
    ```
    - The tool sets `<meta name="kw-exam-api">` and rewrites the CSP `connect-src` to `'self' blob: <api>` (production
-     hosts removed). It refuses the production Access Worker or klarweg.in, an output inside the repo, or a non-empty
+     hosts removed) in every top-level `exam/*.html` page, and refuses if a page still names a production host outside a
+     comment. It refuses the production Access Worker or klarweg.in, an output inside the repo, or a non-empty
      output directory. The repository's `exam/` is never modified (`exam-content/test/nonprod-site.test.mjs`).
-   - Open `http://localhost:8788/index.html` (learner) and `/rater.html` (rater). The page (localhost) and the API
+   - Open `http://localhost:8788/index.html` (learner), `/rater.html` (rater) and `/admin.html` (access admin). The page (localhost) and the API
      (workers.dev) are different sites, so the session cookie is the same cross-site `SameSite=None; Secure` cookie the
      production site uses — this is the path A1–A4 must prove.
    - To serve from a different origin, change `CORS_EXTRA_ORIGINS` in `access/worker/wrangler.nonprod.toml` and

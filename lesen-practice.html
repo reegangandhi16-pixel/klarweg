@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- UNPUBLISHED DRAFT: the questions in lesen-practice-data.js have not had their content review yet.
+     Keep noindex, and keep this page out of sitemap.xml, the nav and the footer until review + launch sign-off. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Lesen Practice · Klarweg</title>
+<meta name="description" content="Free German reading practice from A1 to C2: short Klarweg texts, comprehension questions, instant feedback and an explanation for every answer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .lp-wrap { max-width: 760px; }
+  .lp-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); margin: 0 0 12px; }
+  .lp-lede { font-size: 17px; line-height: 1.7; color: var(--ink-secondary); margin: 16px 0 0; max-width: 680px; }
+  .lp-note { background: var(--bg-warm); border: 1px solid var(--hairline); border-radius: var(--r-md); padding: 16px 24px; margin: 24px 0 0; font-size: 14px; line-height: 1.65; color: var(--ink-secondary); }
+  .lp-note strong { color: var(--ink-primary); }
+
+  .lp-levels { display: flex; flex-wrap: wrap; gap: 8px; margin: 36px 0 24px; }
+  .lp-level { font-family: var(--font-ui); font-weight: 600; font-size: 14px; min-width: 56px; min-height: 44px; padding: 0 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong); background: var(--bg-surface); color: var(--ink-secondary); cursor: pointer; transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+  .lp-level:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+  .lp-level[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .lp-level:focus-visible, .lp-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .lp-card { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); box-shadow: var(--shadow-soft); padding: 24px; margin: 0 0 24px; }
+  .lp-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-tertiary); margin: 0 0 8px; }
+  .lp-title { font-family: var(--font-display); font-weight: 600; font-size: 26px; letter-spacing: -0.01em; margin: 0; }
+  .lp-title-en { font-size: 14.5px; color: var(--ink-tertiary); margin: 4px 0 0; }
+  .lp-passage { margin: 24px 0 0; }
+  .lp-passage p { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 18px; line-height: 1.75; color: var(--ink-primary); margin: 0 0 16px; }
+  .lp-passage p:last-child { margin-bottom: 0; }
+  .lp-passage mark { background: var(--bg-warm); color: inherit; border-bottom: 2px solid var(--hairline-strong); padding: 0 2px; }
+  .lp-passage mark sup { font-family: var(--font-mono); font-style: normal; font-size: 11px; color: var(--ink-tertiary); margin-left: 2px; }
+
+  .lp-q { border: 0; margin: 0; padding: 24px 0; border-top: 1px solid var(--hairline); }
+  .lp-q:first-of-type { border-top: 0; padding-top: 0; }
+  .lp-q legend { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 17px; line-height: 1.5; padding: 0; margin: 0 0 12px; }
+  .lp-q legend .lp-qn { font-family: var(--font-mono); font-style: normal; font-size: 12px; color: var(--ink-tertiary); margin-right: 8px; }
+  .lp-opt { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 8px 16px; margin: 0 0 8px; border: 1px solid var(--hairline-strong); border-radius: var(--r-md); cursor: pointer; font-size: 15.5px; transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+  .lp-opt:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+  .lp-opt input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); flex: none; }
+  .lp-opt.is-correct { border-color: var(--g-object); background: #EAF3DE; }
+  .lp-opt.is-wrong { border-color: var(--coral); background: #FCEDE9; }
+  .lp-checked .lp-opt { cursor: default; }
+  .lp-checked .lp-opt:hover { transform: none; box-shadow: none; }
+  .lp-fb { margin: 12px 0 0; font-size: 14.5px; line-height: 1.65; color: var(--ink-secondary); }
+  .lp-fb[hidden] { display: none; }
+  .lp-fb .lp-verdict { font-weight: 700; margin-right: 4px; }
+  .lp-fb .ok { color: var(--g-object); }
+  .lp-fb .no { color: var(--coral-text); }
+  .lp-fb .lp-quote { display: block; margin-top: 4px; font-family: var(--font-german); font-style: italic; color: var(--ink-primary); }
+
+  .lp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 24px 0 0; }
+  .lp-btn { font-family: var(--font-ui); font-weight: 600; font-size: 15px; min-height: 44px; padding: 0 24px; border-radius: var(--r-full); border: 1px solid var(--accent); cursor: pointer; transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+  .lp-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+  .lp-btn-primary { background: var(--accent); color: #fff; }
+  .lp-btn-quiet { background: var(--bg-surface); color: var(--accent); }
+  .lp-btn[hidden] { display: none; }
+  .lp-result { font-size: 15px; color: var(--ink-secondary); margin: 0; }
+  .lp-result strong { color: var(--ink-primary); }
+  .lp-source { font-size: 14px; color: var(--ink-tertiary); margin: 16px 0 0; }
+  .lp-source a { color: var(--accent); font-weight: 600; }
+
+  @media (max-width: 640px) {
+    .lp-card { padding: 16px; }
+    .lp-title { font-size: 22px; }
+    .lp-passage p { font-size: 17px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lp-level, .lp-opt, .lp-btn { transition: none; }
+    .lp-level:hover, .lp-opt:hover, .lp-btn:hover { transform: none; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#E55A3F">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Klarweg home">Klarweg</a>
+    <div class="nav-links">
+      <a href="courses.html">Courses</a>
+      <a href="live-classes.html">Live Classes</a>
+      <a href="goethe-exam.html">Goethe Exam</a>
+      <a href="ausbildung.html">Ausbildung</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="nav-actions"><a href="account/index.html" class="nav-login">Login</a><a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Try Chapter 1 free</a></div>
+    <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay" hidden></div>
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-logo">Klarweg</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+  </div>
+  <nav class="mobile-nav-links" aria-label="Mobile navigation">
+    <a href="courses.html">Courses</a>
+    <a href="live-classes.html">Live Classes</a>
+    <a href="goethe-exam.html">Goethe Exam</a>
+    <a href="ausbildung.html">Ausbildung</a>
+    <a href="resources.html">Resources</a>
+    <a href="about.html">About</a>
+  </nav>
+  <div class="mobile-nav-actions">
+    <a href="account/index.html" class="nav-login">Login</a>
+    <a href="chapter/chapter-a1-1-alphabet.html" class="nav-cta">Try Chapter 1 free</a>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+
+<section class="page-hero" style="padding-bottom:24px">
+  <div class="container lp-wrap">
+    <p class="lp-eyebrow">Lesen · Reading practice</p>
+    <h1 class="display-md">Read a short text. Answer. See why.</h1>
+    <p class="lp-lede">One Klarweg text for each level from A1 to C2. Answer the questions, check them, and every answer comes with the sentence that proves it and a short explanation.</p>
+    <div class="lp-note" id="lp-notice">
+      <strong>Practice, not an exam.</strong> This is independent Klarweg study material. It is not an official examination, it does not lead to a grade or certificate, and it is not affiliated with any examination provider.
+      Your answers are checked in this browser only; nothing is saved or sent.
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container lp-wrap">
+    <div class="lp-levels" role="tablist" aria-label="Level" id="lp-levels"></div>
+    <div id="lp-panel" role="tabpanel" tabindex="-1"></div>
+    <noscript><p class="lp-note">This practice page needs JavaScript to check your answers.</p></noscript>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Klarweg</a>
+        <p>The visual, Hindi-first way to learn German — from A1 to C2.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Levels</h3>
+        <a href="a1.html">A1 · Foundations</a>
+        <a href="a2.html">A2 · Elementary</a>
+        <a href="b1.html">B1 · Intermediate</a>
+        <a href="b2.html">B2 · Upper-int.</a>
+        <a href="c1.html">C1 · Advanced</a>
+        <a href="c2.html">C2 · Mastery</a>
+      </div>
+      <div class="footer-col">
+        <h3>Learn</h3>
+        <a href="courses.html">Courses</a>
+        <a href="live-classes.html">Live Classes</a>
+        <a href="goethe-exam.html">Goethe Exam</a>
+        <a href="ausbildung.html">Ausbildung</a>
+        <a href="resources.html">Resources</a>
+      </div>
+      <div class="footer-col">
+        <h3>Company</h3>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="account/saved-words.html">Saved words</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-meta">© <span data-year>2026</span> Klarweg · German for Hindi-speaking learners</div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="resources.html">Resources</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refund-policy.html">Refund Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script src="lesen-practice-data.js"></script>
+<script>
+/* Lesen practice: render one set per level, check answers locally.
+   No network, no storage — the answer key is part of the page by design. */
+(function () {
+  var DATA = window.LESEN_PRACTICE || (typeof LESEN_PRACTICE !== 'undefined' ? LESEN_PRACTICE : null);
+  var levelsEl = document.getElementById('lp-levels');
+  var panel = document.getElementById('lp-panel');
+  if (!DATA || !levelsEl || !panel) return;
+  var sets = DATA.sets;
+  var RF = [['richtig', 'Richtig'], ['falsch', 'Falsch']];
+
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      if (k === 'text') n.textContent = attrs[k];
+      else if (k === 'class') n.className = attrs[k];
+      else n.setAttribute(k, attrs[k]);
+    }
+    (kids || []).forEach(function (c) { if (c != null) n.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return n;
+  }
+  function wordCount(set) { return set.passage.join(' ').split(/\s+/).filter(function (w) { return /[A-Za-zÄÖÜäöüß]/.test(w); }).length; }
+  function correctValue(q) { return q.type === 'rf' ? q.answer : String(q.answer); }
+  function optionLabel(q, value) { if (q.type === 'rf') return value === 'richtig' ? 'Richtig' : 'Falsch'; return q.options[+value]; }
+
+  // Paragraph with each question's evidence wrapped in a numbered <mark>.
+  function passageParagraph(text, set, showEvidence) {
+    var p = el('p', { lang: 'de' });
+    var spans = [];
+    if (showEvidence) set.questions.forEach(function (q, i) {
+      var at = text.indexOf(q.evidence);
+      if (at >= 0) spans.push({ start: at, end: at + q.evidence.length, n: i + 1 });
+    });
+    spans.sort(function (a, b) { return a.start - b.start; });
+    var pos = 0;
+    spans.forEach(function (s) {
+      if (s.start < pos) return;
+      p.appendChild(document.createTextNode(text.slice(pos, s.start)));
+      p.appendChild(el('mark', null, [text.slice(s.start, s.end), el('sup', { text: String(s.n) })]));
+      pos = s.end;
+    });
+    p.appendChild(document.createTextNode(text.slice(pos)));
+    return p;
+  }
+
+  function renderSet(set) {
+    var checked = false;
+    panel.textContent = '';
+    panel.setAttribute('aria-labelledby', 'lp-tab-' + set.id);
+
+    var passageBox = el('div', { class: 'lp-passage' });
+    function drawPassage() {
+      passageBox.textContent = '';
+      set.passage.forEach(function (t) { passageBox.appendChild(passageParagraph(t, set, checked)); });
+    }
+    drawPassage();
+    panel.appendChild(el('article', { class: 'lp-card' }, [
+      el('p', { class: 'lp-meta', text: set.level + ' · ' + wordCount(set) + ' words · ' + set.questions.length + ' questions' }),
+      el('h2', { class: 'lp-title', lang: 'de', text: set.title }),
+      el('p', { class: 'lp-title-en', text: set.titleEn }),
+      passageBox
+    ]));
+
+    var form = el('form', { class: 'lp-card', novalidate: '' });
+    var feedbacks = [];
+    set.questions.forEach(function (q, i) {
+      var name = set.id + '-q' + i;
+      var fs = el('fieldset', { class: 'lp-q' }, [el('legend', { lang: 'de' }, [el('span', { class: 'lp-qn', text: (i + 1) + '.' }), q.q])]);
+      var values = q.type === 'rf' ? RF.map(function (r) { return r[0]; }) : q.options.map(function (_, oi) { return String(oi); });
+      values.forEach(function (v) {
+        fs.appendChild(el('label', { class: 'lp-opt', lang: 'de' }, [el('input', { type: 'radio', name: name, value: v }), optionLabel(q, v)]));
+      });
+      var fb = el('p', { class: 'lp-fb', hidden: '' });
+      fs.appendChild(fb);
+      feedbacks.push(fb);
+      form.appendChild(fs);
+    });
+
+    var result = el('p', { class: 'lp-result', role: 'status', 'aria-live': 'polite' });
+    var checkBtn = el('button', { type: 'submit', class: 'lp-btn lp-btn-primary', text: 'Check answers' });
+    var retryBtn = el('button', { type: 'button', class: 'lp-btn lp-btn-quiet', text: 'Try again', hidden: '' });
+    form.appendChild(el('div', { class: 'lp-actions' }, [checkBtn, retryBtn, result]));
+    form.appendChild(el('p', { class: 'lp-source' }, [
+      'Text from ' + set.source.chapter + '. ',
+      el('a', { href: set.source.href, text: 'Study it word by word in the chapter' })
+    ]));
+    panel.appendChild(form);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (checked) return;
+      var score = 0, unanswered = 0;
+      set.questions.forEach(function (q, i) {
+        var picked = form.querySelector('input[name="' + set.id + '-q' + i + '"]:checked');
+        var right = correctValue(q);
+        form.querySelectorAll('input[name="' + set.id + '-q' + i + '"]').forEach(function (inp) {
+          inp.disabled = true;
+          if (inp.value === right) inp.parentNode.classList.add('is-correct');
+          else if (picked && inp === picked) inp.parentNode.classList.add('is-wrong');
+        });
+        var ok = !!picked && picked.value === right;
+        if (ok) score++;
+        if (!picked) unanswered++;
+        var fb = feedbacks[i];
+        fb.textContent = '';
+        fb.appendChild(el('span', { class: 'lp-verdict ' + (ok ? 'ok' : 'no'), text: ok ? 'Correct.' : (picked ? 'Not quite.' : 'Not answered.') }));
+        if (!ok) { var label = optionLabel(q, right); fb.appendChild(document.createTextNode('Answer: ' + label + (/[.!?]$/.test(label) ? ' ' : '. '))); }
+        fb.appendChild(document.createTextNode(q.explain));
+        fb.appendChild(el('span', { class: 'lp-quote', lang: 'de', text: '„' + q.evidence + '“ (' + (i + 1) + ' in the text)' }));
+        fb.hidden = false;
+      });
+      checked = true;
+      form.classList.add('lp-checked');
+      drawPassage();
+      result.textContent = '';
+      result.appendChild(el('strong', { text: score + ' of ' + set.questions.length }));
+      result.appendChild(document.createTextNode(' correct' + (unanswered ? ' · ' + unanswered + ' not answered' : '') + '. The proof for each answer is marked in the text.'));
+      checkBtn.hidden = true;
+      retryBtn.hidden = false;
+      retryBtn.focus();
+    });
+    retryBtn.addEventListener('click', function () { renderSet(set); panel.focus(); });
+  }
+
+  var tabs = sets.map(function (set, i) {
+    var b = el('button', { type: 'button', role: 'tab', class: 'lp-level', id: 'lp-tab-' + set.id, 'aria-controls': 'lp-panel', 'aria-selected': 'false', tabindex: '-1', text: set.level });
+    b.addEventListener('click', function () { select(i, true); });
+    b.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = (i + d + sets.length) % sets.length;
+      tabs[n].focus();
+      select(n, true);
+    });
+    levelsEl.appendChild(b);
+    return b;
+  });
+
+  function select(i, fromUser) {
+    tabs.forEach(function (t, j) { t.setAttribute('aria-selected', String(i === j)); t.tabIndex = i === j ? 0 : -1; });
+    renderSet(sets[i]);
+    if (fromUser && history.replaceState) history.replaceState(null, '', '#' + sets[i].level.toLowerCase());
+  }
+
+  function indexFromHash() { return sets.findIndex(function (s) { return '#' + s.level.toLowerCase() === location.hash.toLowerCase(); }); }
+  window.addEventListener('hashchange', function () { var i = indexFromHash(); if (i >= 0) select(i, false); });
+  var fromHash = indexFromHash();
+  select(fromHash >= 0 ? fromHash : 0, false);
+})();
+</script>
+<script>
+/* Mobile nav drawer — same behaviour as the other static pages. */
+(function () {
+  var btn = document.getElementById('nav-hamburger');
+  var panel = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-nav-overlay');
+  var closeBtn = document.getElementById('mobile-nav-close');
+  if (!btn || !panel || !overlay) return;
+  var lastFocused = null;
+
+  function focusable() {
+    return Array.prototype.slice.call(
+      panel.querySelectorAll('a[href], button:not([disabled])')
+    );
+  }
+  function openMenu() {
+    lastFocused = document.activeElement;
+    panel.hidden = false;
+    overlay.hidden = false;
+    document.body.classList.add('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'true');
+    var items = focusable();
+    if (items.length) items[0].focus();
+  }
+  function closeMenu() {
+    panel.hidden = true;
+    overlay.hidden = true;
+    document.body.classList.remove('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'false');
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+  btn.addEventListener('click', function () {
+    if (panel.hidden) openMenu(); else closeMenu();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function (e) {
+    if (panel.hidden) return;
+    if (e.key === 'Escape') { closeMenu(); return; }
+    if (e.key === 'Tab') {
+      var items = focusable();
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (!panel.hidden && window.innerWidth > 860) closeMenu();
+  });
+})();
+</script>
+</body>
+</html>

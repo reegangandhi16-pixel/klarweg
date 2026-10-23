@@ -1,5 +1,5 @@
 /* ============================================================
-   KLARWEG LESEN PRACTICE — practice sets (DRAFT, NOT REVIEWED)
+   KLARWEG LESEN PRACTICE — practice sets (PUBLISHED)
    Self-study reading practice. Not an exam: the answer key ships
    with the page on purpose, and nothing the learner chooses
    leaves the browser.
@@ -8,14 +8,21 @@
    free Chapter 1 of each level (source.file). Any wording that
    differs from the chapter is listed in `edits` and must be
    fixed in the chapter too. Questions, explanations and
-   evidence quotes are new and still need a human content
-   review before this page is published — see `review`.
+   evidence quotes are new. They were checked in-house by Claude
+   (PR #231, #232); no independent German reviewer has reviewed
+   them. Publication was authorised by the owner — see `review`.
 
    Every `evidence` string must appear verbatim in the passage;
    scripts/lesen-practice.test.mjs enforces that.
 ============================================================ */
 const LESEN_PRACTICE = {
-  review: { status: 'draft', reviewedBy: null, reviewedOn: null },
+  review: {
+    status: 'published',
+    publishedOn: '2026-10-24',
+    authorisedBy: 'owner',
+    contentCheck: 'in-house (Claude), PR #231 and #232',
+    independentReview: null
+  },
   sets: [
     {
       id: 'a1-schule',
@@ -174,9 +181,9 @@ const LESEN_PRACTICE = {
         'Es ist kurz nach neunzehn Uhr, als ein Politbüromitglied sich verspricht. Von diesem Moment an erzählt dieser Essay die Ereignisse im Präsens. Tausende strömen noch in derselben Nacht zu den Grenzübergängen. Was damals wie ein Missverständnis wirkte, gilt heute als einer der folgenreichsten Versprecher der Geschichte.'
       ],
       questions: [
-        { type: 'mc', q: 'Was löst die Ereignisse dieser Nacht aus?', options: ['Ein Versprecher eines Politbüromitglieds.', 'Ein Beschluss des Parlaments.', 'Eine Demonstration am Nachmittag.'], answer: 0,
-          evidence: 'als ein Politbüromitglied sich verspricht',
-          explain: '„sich versprechen“ means to misspeak; „jemandem etwas versprechen“ would be to promise. The noun is „der Versprecher“.' },
+        { type: 'mc', q: 'Was geschieht laut Text kurz nach neunzehn Uhr?', options: ['Ein Politbüromitglied gibt öffentlich ein Versprechen ab.', 'Einem Politbüromitglied unterläuft ein Versprecher.', 'Ein Politbüromitglied widerruft eine frühere Aussage.'], answer: 1,
+          evidence: 'Es ist kurz nach neunzehn Uhr, als ein Politbüromitglied sich verspricht.',
+          explain: 'The first sentence says it directly: „als ein Politbüromitglied sich verspricht“. Reflexive „sich versprechen“ means to misspeak (der Versprecher); „etwas versprechen“ without „sich“ would be to promise. Nothing is withdrawn.' },
         { type: 'rf', q: 'Der Essay erzählt die ganze Geschichte im Präteritum.', answer: 'falsch',
           evidence: 'Von diesem Moment an erzählt dieser Essay die Ereignisse im Präsens.',
           explain: 'From that moment on the essay tells the events in the present tense. Only the closing look back uses the past („wirkte“).' },

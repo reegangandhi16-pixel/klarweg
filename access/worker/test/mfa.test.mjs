@@ -46,9 +46,12 @@ const queue = (env, cookie) => req(env, 'GET', '/exam/v1/admin/rating-queue', { 
 async function enrol(env, cookie) {
   const s = await req(env, 'POST', '/auth/mfa/enroll', { cookie });
   assert.equal(s.status, 200, JSON.stringify(s.json));
-  const c = await req(env, 'POST', '/auth/mfa/enroll/confirm', { cookie, body: { code: await code(s.json.secret) } });
+  // the step whose code confirmed the enrolment: tests that replay "the same code" use it, never the clock again
+  // (a 30 s boundary between two Date.now() calls would otherwise turn the replay into the next, unused code)
+  const step = stepAt(Math.floor(Date.now() / 1000));
+  const c = await req(env, 'POST', '/auth/mfa/enroll/confirm', { cookie, body: { code: await hotp(base32Decode(s.json.secret), step) } });
   assert.equal(c.status, 200, JSON.stringify(c.json));
-  return { secret: s.json.secret, codes: c.json.recovery_codes };
+  return { secret: s.json.secret, codes: c.json.recovery_codes, step };
 }
 
 test('TOTP core: RFC 6238 SHA-1 reference values, base32 round trip, ±1 step, replay refused', async () => {
@@ -112,15 +115,15 @@ test('OD-19: a rater is refused on every staff route until enrolled; after enrol
 test('OD-19 D2: a verification older than 12 hours is not fresh; a new session must verify again (code from the next step)', async () => {
   const { env, exam } = makeEnv();
   const r = await signup(env); await role(exam.env, r.id, 'rater');
-  const { secret } = await enrol(env, r.cookie);
+  const { secret, step } = await enrol(env, r.cookie);
   const old = Math.floor(Date.now() / 1000) - MFA_FRESH_SECONDS - 5;
   await env.DB.prepare('UPDATE sessions SET mfa_verified_at = ?1 WHERE user_id = ?2').bind(old, r.id).run();
   assert.equal((await queue(env, r.cookie)).json.error, 'mfa_required');
   assert.equal((await req(env, 'GET', '/auth/mfa/status', { cookie: r.cookie })).json.fresh, false);
   // the code just used for enrolment cannot be replayed; the next step's code is accepted
-  const replay = await req(env, 'POST', '/auth/mfa/verify', { cookie: r.cookie, body: { code: await code(secret) } });
+  const replay = await req(env, 'POST', '/auth/mfa/verify', { cookie: r.cookie, body: { code: await hotp(base32Decode(secret), step) } });
   assert.equal(replay.status, 422); assert.equal(replay.json.error, 'mfa_invalid_code');
-  const ok = await req(env, 'POST', '/auth/mfa/verify', { cookie: r.cookie, body: { code: await code(secret, 1) } });
+  const ok = await req(env, 'POST', '/auth/mfa/verify', { cookie: r.cookie, body: { code: await hotp(base32Decode(secret), step + 1) } });
   assert.equal(ok.status, 200, JSON.stringify(ok.json));
   assert.equal((await queue(env, r.cookie)).status, 200);
   // a second, unverified session of the same rater is not covered by the first one

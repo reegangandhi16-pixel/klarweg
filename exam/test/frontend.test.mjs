@@ -1299,3 +1299,16 @@ test('EXAM TEXT + TIMER ZERO: module text 17 px from 768 px (16 on phones), line
   assert.match(css, /body \{[^}]*font: 400 16px\/1\.6 var\(--font-ui\);/, 'other pages unchanged');
   assert.match(read('exam/js/main.js'), /if \(rem === 0\) \{ clearInterval\(S\.timer\); flushSoon\(\); setTimeout\(refresh, 11_000\); \}/);
 });
+
+test('FORM USAGE VIEW (ENGINE §7.6): on-request button with the audit note; table per form with release/pool marks, counts and last assignment; escaped', async () => {
+  const { formUsageButton, formUsageTable } = await import('../js/admin-render.js');
+  assert.match(formUsageButton(), /data-act="form-usage">Formularnutzung anzeigen<\/button><\/div><div id="kx-fu-slot"><\/div>/);
+  assert.match(formUsageButton(), /nur Zahlen, keine Lernenden\. Jeder Abruf wird protokolliert\./);
+  const f = { form_id: 'frm:b1:<x>@1', label: 'P3 <Lesen>', status: 'live', in_release_set: true, in_practice_pool: false, attempts: 5,
+    by_status: { in_progress: 2, completed: 3 }, by_kind: { full: 1, module: 4, part: 0 }, by_assignment: { unseen: 4, least_seen: 1, other: 0 }, learners: 4, last_assigned_at: 1000 };
+  const html = formUsageTable({ release_set: { ids: ['frm:b1:<x>@1'] }, practice_pool: { block: 'pool_unconfigured' }, forms: [f] });
+  assert.match(html, /<p role="status">1 Formulare · Lernfreigabe: 1 Formular\(e\)<\/p>/);
+  assert.match(html, /<th scope="row">P3 &lt;Lesen&gt;<br><span class="kx-admin-detail">frm:b1:&lt;x&gt;@1<\/span><\/th><td>aktiv<\/td><td>ja<\/td><td>–<\/td><td>5<\/td><td>2 \/ 3<\/td><td>1 \/ 4 \/ 0<\/td><td>4 \/ 1<\/td><td>4<\/td><td>1970-01-01 00:00 UTC<\/td>/);
+  assert.match(formUsageTable({ release_set: { block: null }, practice_pool: {}, forms: [] }), /Lernfreigabe: keine \(nicht gesetzt\)/);
+  assert.match(read('exam/js/admin.js'), /if \(q\) show\(q\); else screen\(lookupForm\(\) \+ formUsageButton\(\)\);/);
+});

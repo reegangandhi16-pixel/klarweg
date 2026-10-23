@@ -1920,6 +1920,17 @@ async function runAccessAdmin() {
     // find the learner by email (resolved by the sign-in service), confirm, then manage
     await as('access', 'admin.html');
     await waitFor(`document.querySelector('form[data-form="email"]')`, 15000, 'admin search');
+    // ENGINE §7.6 form usage: on request, aggregates only, audited
+    assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'form_usage_viewed'").first()).n, 0, 'nothing read before the click');
+    await evaluate(`document.querySelector('[data-act="form-usage"]').click()`);
+    await waitFor(`document.querySelector('#kx-fu-slot table')`, 15000, 'form usage table');
+    const fu = await evaluate(`(() => { const t = document.querySelector('#kx-fu-slot table'); return { rows: t.querySelectorAll('tbody tr').length, head: [...t.querySelectorAll('thead th')].map((x) => x.textContent), text: document.getElementById('kx-fu-slot').innerText }; })()`);
+    assert.ok(fu.rows >= 1 && fu.head[0] === 'Formular' && fu.head.includes('neu / wiederholt') && /Formulare · Lernfreigabe/.test(fu.text), `form usage ${JSON.stringify(fu).slice(0, 300)}`);
+    assert.equal((await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'form_usage_viewed'").first()).n, 1, 'the view is audited');
+    await A.a11y('access admin (form usage)');
+    await vp(360, 640, true); await sleep(200);
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'), true, 'form usage: the table scrolls inside its wrapper, not the page');
+    await vp(1280, 800, false); await sleep(100);
     await evaluate(`(() => { const f = document.querySelector('form[data-form="email"]'); f.querySelector('#kx-email').value = 'nobody@dev.local'; f.requestSubmit(); })()`);
     await waitFor(`/Kein Klarweg-Konto mit dieser E-Mail-Adresse/.test(document.body.innerText)`, 15000, 'unknown email');
     await evaluate(`(() => { const f = document.querySelector('form[data-form="email"]'); f.querySelector('#kx-email').value = '  OUTSIDER@dev.local '; f.requestSubmit(); })()`);

@@ -4,6 +4,7 @@
    commercial rule (OD-42) is not decided. Every grant and revocation writes an audit_log row in the same transaction. */
 import { fail, now, readJsonBody } from './http.js';
 import { hasRole, USER_RE } from './auth.js';
+import { releaseSet, practicePool } from './release.js';
 
 const LEVELS = { b1: 'B1' };
 const SCOPES = ['synthetic', 'mock', 'sets'];
@@ -213,3 +214,35 @@ export async function listAttempts(env, adminId, url) {
   return { ok: true, server_now: now(env), user_id: userId, attempts, limit: ATTEMPTS_VIEW_LIMIT };
 }
 function safeJson(s) { try { const v = JSON.parse(s); return v && typeof v === 'object' ? v : {}; } catch { return {}; } }
+
+/* GET /admin/forms/usage — ENGINE §7.6 "Admin visibility: assignment log and per-form counts in the admin dashboard".
+   exam_admin only (fresh second factor via the router). Aggregates per form — no learner identities, answers or
+   scores: attempts by status and kind (full / one module / one part), how they were assigned (unseen vs least-seen),
+   the number of distinct learners, the last assignment, and whether the form is in the active learner release set or
+   the single-part practice pool. Every view is audited (form_usage_viewed). */
+export async function formUsage(env, adminId) {
+  await requireExamAdmin(env, adminId);
+  const forms = (await env.DB.prepare('SELECT id, label, kind, purpose, status, rev, release FROM forms ORDER BY kind, id').all()).results;
+  const rows = (await env.DB.prepare(`SELECT form_id, status, module_scope IS NOT NULL AS one_module, part_scope IS NOT NULL AS one_part,
+      CASE WHEN assignment_reason LIKE 'csprng_uniform_unseen%' THEN 'unseen' WHEN assignment_reason LIKE 'csprng_uniform_least_seen%' THEN 'least_seen' ELSE 'other' END AS how,
+      COUNT(*) AS n, MAX(created_at) AS last_at
+      FROM attempts GROUP BY form_id, status, one_module, one_part, how`).all()).results;
+  const learners = Object.fromEntries((await env.DB.prepare('SELECT form_id, COUNT(DISTINCT user_id) AS n FROM attempts GROUP BY form_id').all()).results.map((r) => [r.form_id, r.n]));
+  const rel = await releaseSet(env), pool = await practicePool(env);
+  const blank = () => ({ attempts: 0, by_status: {}, by_kind: { full: 0, module: 0, part: 0 }, by_assignment: { unseen: 0, least_seen: 0, other: 0 }, learners: 0, last_assigned_at: null });
+  const usage = Object.fromEntries(forms.map((f) => [f.id, blank()]));
+  for (const r of rows) {
+    const u = usage[r.form_id] || (usage[r.form_id] = blank());
+    u.attempts += r.n;
+    u.by_status[r.status] = (u.by_status[r.status] || 0) + r.n;
+    u.by_kind[r.one_part ? 'part' : r.one_module ? 'module' : 'full'] += r.n;
+    u.by_assignment[r.how] += r.n;
+    u.last_assigned_at = Math.max(u.last_assigned_at || 0, r.last_at);
+  }
+  for (const [id, n] of Object.entries(learners)) if (usage[id]) usage[id].learners = n;
+  const out = forms.map((f) => ({ form_id: f.id, label: f.label, kind: f.kind, purpose: f.purpose, status: f.status, rev: f.rev, release: f.release,
+    in_release_set: !!(rel.ids && rel.ids.includes(f.id)), in_practice_pool: !!(pool.ids && pool.ids.includes(f.id)), ...usage[f.id] }));
+  await env.DB.prepare(`INSERT INTO audit_log (at, actor, attempt_id, action, detail_json) VALUES (?1, ?2, NULL, 'form_usage_viewed', ?3)`)
+    .bind(now(env), adminId, JSON.stringify({ forms: out.length })).run();
+  return { ok: true, server_now: now(env), release_set: rel.ids ? { ids: rel.ids } : { block: rel.block }, practice_pool: pool.ids ? { ids: pool.ids } : { block: pool.block }, forms: out };
+}

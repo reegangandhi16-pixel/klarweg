@@ -522,7 +522,12 @@ body.mobile-nav-open { overflow: hidden; }
   .nav-cta .btn { padding: 8px 14px; font-size: 13px; min-height: 44px; box-sizing: border-box; }
   .nav-hamburger { display: flex; }
 }
-@media (min-width: 861px) {
+/* Seven top-level links no longer fit on one row below ~1120px: use the drawer there. */
+@media (max-width: 1120px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+}
+@media (min-width: 1121px) {
   .mobile-nav-overlay, .mobile-nav { display: none !important; }
 }
 /* Narrow phones: the top-bar buttons (fixed-width, no further shrink) must
@@ -4736,6 +4741,7 @@ body {
       <a href="courses.html">Courses</a>
       <a href="live-classes.html">Live Classes</a>
       <a href="goethe-exam.html">Goethe Exam</a>
+      <a href="lesen-practice.html">Lesen Practice</a>
       <a href="ausbildung.html">Ausbildung</a>
       <a href="resources.html">Resources</a>
       <a href="#pricing">Pricing</a>
@@ -4761,6 +4767,7 @@ body {
     <a href="courses.html">Courses</a>
     <a href="live-classes.html">Live Classes</a>
     <a href="goethe-exam.html">Goethe Exam</a>
+    <a href="lesen-practice.html">Lesen Practice</a>
     <a href="ausbildung.html">Ausbildung</a>
     <a href="resources.html">Resources</a>
     <a href="#pricing">Pricing</a>
@@ -6092,6 +6099,7 @@ body {
         <ul>
           <li><a href="#how">How it works</a></li>
           <li><a href="goethe-exam.html">Goethe Exam</a></li>
+          <li><a href="lesen-practice.html">Lesen Practice</a></li>
           <li><a href="ausbildung.html">Ausbildung</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="resources.html">Resources</a></li>

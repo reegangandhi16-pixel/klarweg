@@ -37,6 +37,10 @@ german-grammar.html
 # Live Classes (waitlist launch, owner-approved 2026-10-20): the page
 # and the two scripts it loads. The data file holds display text only.
 live-classes.html
+# Lesen Practice (free self-study reading page, owner-authorised publication
+# 2026-10-24): the page and the data file it loads. Static, no network calls.
+lesen-practice.html
+lesen-practice-data.js
 
 # ---------------------------------------------------------------
 # Root-level frontend runtime (calls the Worker's public HTTPS API;

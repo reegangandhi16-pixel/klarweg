@@ -1,5 +1,5 @@
 /* ============================================================
-   KLARWEG LESEN PRACTICE — practice sets (DRAFT, NOT REVIEWED)
+   KLARWEG LESEN PRACTICE — practice sets (PUBLISHED)
    Self-study reading practice. Not an exam: the answer key ships
    with the page on purpose, and nothing the learner chooses
    leaves the browser.
@@ -8,14 +8,21 @@
    free Chapter 1 of each level (source.file). Any wording that
    differs from the chapter is listed in `edits` and must be
    fixed in the chapter too. Questions, explanations and
-   evidence quotes are new and still need a human content
-   review before this page is published — see `review`.
+   evidence quotes are new. They were checked in-house by Claude
+   (PR #231, #232); no independent German reviewer has reviewed
+   them. Publication was authorised by the owner — see `review`.
 
    Every `evidence` string must appear verbatim in the passage;
    scripts/lesen-practice.test.mjs enforces that.
 ============================================================ */
 const LESEN_PRACTICE = {
-  review: { status: 'draft', reviewedBy: null, reviewedOn: null },
+  review: {
+    status: 'published',
+    publishedOn: '2026-10-24',
+    authorisedBy: 'owner',
+    contentCheck: 'in-house (Claude), PR #231 and #232',
+    independentReview: null
+  },
   sets: [
     {
       id: 'a1-schule',

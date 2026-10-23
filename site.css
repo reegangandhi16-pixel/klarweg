@@ -211,7 +211,12 @@ body.mobile-nav-open { overflow: hidden; }
   .nav-hamburger { display: flex; }
   .nav-actions a { min-height: 44px; display: inline-flex; align-items: center; box-sizing: border-box; }
 }
-@media (min-width: 861px) {
+/* Seven top-level links no longer fit on one row below ~1120px: use the drawer there. */
+@media (max-width: 1120px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+}
+@media (min-width: 1121px) {
   .mobile-nav-overlay, .mobile-nav { display: none !important; }
 }
 

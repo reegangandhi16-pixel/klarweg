@@ -53,11 +53,26 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1   # v7.1.0
         with:
           node-version: ${{ matrix.node }}
+      # Downloaded .deb files are kept between runs: some runners reach the Ubuntu mirror at ~40 kB/s (62.8 MB took
+      # 24 min on 2026-10-22, while another runner needed 2 s). Bounded: ffmpeg and its dependencies only, outdated
+      # versions removed (autoclean) before saving, a new key each ISO week (fallback: the previous one). apt still
+      # checks every cached file against the signed package lists of the fresh `apt-get update` and downloads anything
+      # missing or newer, so a cold or stale cache only costs a normal download.
+      - name: Cache week
+        id: aptweek
+        run: echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+      - name: APT package cache (ffmpeg)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9   # v6.1.0
+        with:
+          path: ~/apt-archives
+          key: apt-ffmpeg-${{ runner.os }}-${{ runner.arch }}-${{ steps.aptweek.outputs.week }}
+          restore-keys: apt-ffmpeg-${{ runner.os }}-${{ runner.arch }}-
       - name: Install ffmpeg (real-encoder audio checks)
         # bounded APT retries and per-request HTTP/HTTPS timeouts: a stalled mirror connection is retried instead of
         # hanging until the job timeout
         run: |
-          APT_OPTS="-o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30"
+          mkdir -p ~/apt-archives/partial
+          APT_OPTS="-o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 -o Dir::Cache::Archives=$HOME/apt-archives/ -o APT::Keep-Downloaded-Packages=true"
           sudo apt-get $APT_OPTS update -q
           # --no-install-recommends: the codecs come with ffmpeg's hard dependencies; the recommended extras (e.g. speech
           # models, GPU drivers) only added downloads that, on a slow mirror, pushed the install past the job timeout
@@ -66,6 +81,10 @@ jobs:
           # fail fast (before the tests) if anything the real-encoder checks in audio-duration.test.mjs use is missing
           for e in aac libopus libvorbis alac pcm_s24le; do ffmpeg -hide_banner -encoders | grep -qw "$e" || { echo "::error::ffmpeg encoder missing: $e"; exit 1; }; done
           ffmpeg -hide_banner -filters | grep -qw sine || { echo "::error::ffmpeg lavfi source missing: sine"; exit 1; }
+          # keep the cache bounded and readable for the save step (apt writes as root)
+          sudo apt-get $APT_OPTS autoclean -q
+          sudo chown -R "$(id -u):$(id -g)" ~/apt-archives
+          du -sh ~/apt-archives
       - name: Exam tests (boundary check, validator, unit and integration tests)
         env:
           KW_FFMPEG: /usr/bin/ffmpeg

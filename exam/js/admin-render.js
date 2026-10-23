@@ -107,3 +107,23 @@ export function attemptsList(v) {
       + `<h4>Vorfälle</h4>${inc ? `<ul class="kx-admin-audit">${inc}</ul>` : '<p>Keine.</p>'}</article>`;
   }).join('');
 }
+
+/* ENGINE §7.6 form usage (GET /admin/forms/usage): aggregates per form, loaded on request (audited) */
+export function formUsageButton() {
+  return '<section class="kx-card kx-admin" aria-labelledby="kx-fu-title"><h2 id="kx-fu-title">Formularnutzung</h2>'
+    + '<p>Wie oft jedes Formular zugewiesen wurde – nur Zahlen, keine Lernenden. Jeder Abruf wird protokolliert.</p>'
+    + '<div class="kx-actions"><button class="kx-btn kx-btn-quiet" type="button" data-act="form-usage">Formularnutzung anzeigen</button></div><div id="kx-fu-slot"></div></section>';
+}
+const FORM_STATUS = { draft: 'Entwurf', review: 'in Prüfung', pilot: 'Pilot', live: 'aktiv', retired: 'zurückgezogen' };
+export function formUsageTable(v) {
+  const set = v.release_set && v.release_set.ids ? `Lernfreigabe: ${v.release_set.ids.length} Formular(e)` : `Lernfreigabe: keine (${esc((v.release_set && v.release_set.block) || 'nicht gesetzt')})`;
+  const rows = v.forms.map((f) => `<tr><th scope="row">${esc(f.label)}<br><span class="kx-admin-detail">${esc(f.form_id)}</span></th>`
+    + `<td>${esc(FORM_STATUS[f.status] || f.status)}</td><td>${f.in_release_set ? 'ja' : '–'}</td><td>${f.in_practice_pool ? 'ja' : '–'}</td>`
+    + `<td>${esc(f.attempts)}</td><td>${esc(f.by_status.in_progress || 0)} / ${esc(f.by_status.completed || 0)}</td>`
+    + `<td>${esc(f.by_kind.full)} / ${esc(f.by_kind.module)} / ${esc(f.by_kind.part)}</td><td>${esc(f.by_assignment.unseen)} / ${esc(f.by_assignment.least_seen)}</td>`
+    + `<td>${esc(f.learners)}</td><td>${esc(fmtMs(f.last_assigned_at))}</td></tr>`).join('');
+  return `<p role="status">${esc(v.forms.length)} Formulare · ${esc(set)}</p><div class="kx-table-wrap"><table class="kx-table"><caption>Zuweisungen je Formular</caption>`
+    + '<thead><tr><th scope="col">Formular</th><th scope="col">Status</th><th scope="col">Lernfreigabe</th><th scope="col">Teilübungs-Pool</th><th scope="col">Versuche</th>'
+    + '<th scope="col">laufend / abgeschlossen</th><th scope="col">ganz / Modul / Teil</th><th scope="col">neu / wiederholt</th><th scope="col">Lernende</th><th scope="col">Zuletzt</th></tr></thead>'
+    + `<tbody>${rows}</tbody></table></div>`;
+}

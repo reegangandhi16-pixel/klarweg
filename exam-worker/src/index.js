@@ -9,7 +9,7 @@ import { streamMedia } from './media.js';
 import { settle } from './core.js';
 import * as api from './api.js';
 import { listDisagreements, reviewDisagreement } from './rating-review.js';
-import { inspectAccess, grantAccess, revokeAccess, inspectAccommodation, setAccommodation, removeAccommodation, lookupUser, listAttempts } from './access-admin.js';
+import { inspectAccess, grantAccess, revokeAccess, inspectAccommodation, setAccommodation, removeAccommodation, lookupUser, listAttempts, formUsage } from './access-admin.js';
 
 const MODULE = '(lesen|hoeren|schreiben|sprechen)';
 const A = '(att_[0-9a-f-]{36})';
@@ -59,7 +59,9 @@ const ROUTES = [
   ['POST', R('/admin/accommodations'), (c) => setAccommodation(c.env, c.user, c.request)],
   ['POST', R('/admin/accommodations/remove'), (c) => removeAccommodation(c.env, c.user, c.request)],
   // support view: a user's attempts, module status and incidents (exam_admin; no answers; audited)
-  ['GET', R('/admin/attempts'), (c) => listAttempts(c.env, c.user, c.url)]
+  ['GET', R('/admin/attempts'), (c) => listAttempts(c.env, c.user, c.url)],
+  // ENGINE §7.6: per-form assignment counts (aggregates only; exam_admin; audited)
+  ['GET', R('/admin/forms/usage'), (c) => formUsage(c.env, c.user)]
 ];
 const MEDIA = R('/media/([A-Za-z0-9_.-]{20,500})');
 

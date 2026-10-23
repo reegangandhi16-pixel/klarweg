@@ -12,7 +12,10 @@
    Then serve <dir> on the origin listed in CORS_EXTRA_ORIGINS
    (access/worker/wrangler.nonprod.toml), e.g.:
      npx http-server <dir> -p 8788      or      python3 -m http.server 8788 -d <dir>
-   and open http://localhost:8788/index.html (learner) / rater.html (rater).
+   and open http://localhost:8788/index.html (learner) / rater.html (rater) / admin.html (access admin).
+   Every top-level exam/*.html page is rewritten (a page added later cannot keep
+   the production API), and the build refuses if any written page still names a
+   production host outside an HTML comment.
 
    Exit 0 = built, 1 = refused (reason printed). */
 import fs from 'node:fs';
@@ -21,7 +24,16 @@ import { fileURLToPath } from 'node:url';
 import { isExactOrigin } from '../../access/worker/src/cors.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
-const PAGES = ['index.html', 'rater.html'];
+/* Every top-level page of exam/, so a new page is never left pointing at production. */
+export function pagesOf(root = ROOT) {
+  return fs.readdirSync(path.join(root, 'exam')).filter((f) => f.endsWith('.html')).sort();
+}
+const PROD_HOST = /klarweg\.in|(^|[^a-z0-9-])klarweg-access\.[a-z0-9-]+\.workers\.dev|-klarweg-access\.[a-z0-9-]+\.workers\.dev/;
+/* A production host anywhere outside HTML comments (comments carry explanations only). */
+export function prodHostIn(html) {
+  const m = html.replace(/<!--[\s\S]*?-->/g, '').match(PROD_HOST);
+  return m ? m[0].replace(/^[^a-z0-9]/, '') : null;
+}
 const API_META = /<meta name="kw-exam-api" content="[^"]*">/;
 /* One line only: the CSP explanation comment above the meta also says "connect-src". */
 const CONNECT_SRC = /connect-src [^;"\n]*;/;
@@ -48,9 +60,12 @@ export function checkApiOrigin(api) {
 export function rewritePage(html, api, name = 'page') {
   if ((html.match(new RegExp(API_META.source, 'g')) || []).length !== 1) throw new Error(`${name}: expected exactly one kw-exam-api meta`);
   if ((html.match(new RegExp(CONNECT_SRC.source, 'g')) || []).length !== 1) throw new Error(`${name}: expected exactly one CSP connect-src directive`);
-  return html
+  const out = html
     .replace(API_META, `<meta name="kw-exam-api" content="${api}">`)
     .replace(CONNECT_SRC, `connect-src 'self' blob: ${api};`);
+  const left = prodHostIn(out);
+  if (left) throw new Error(`${name}: still names the production host ${left} after the rewrite`);
+  return out;
 }
 
 /* Real path of `p`, or of its nearest existing ancestor plus the rest, so a
@@ -88,7 +103,7 @@ export function build({ api, out, root = ROOT }) {
   const err = checkApiOrigin(api) || checkOutDir(out, root);
   if (err) throw new Error(err);
   const dst = path.resolve(out);
-  const pages = PAGES.map((p) => [p, rewritePage(fs.readFileSync(path.join(root, 'exam', p), 'utf8'), api, p)]);
+  const pages = pagesOf(root).map((p) => [p, rewritePage(fs.readFileSync(path.join(root, 'exam', p), 'utf8'), api, p)]);
   copyTree(path.join(root, 'exam'), dst);
   for (const [p, html] of pages) fs.writeFileSync(path.join(dst, p), html);
   return dst;

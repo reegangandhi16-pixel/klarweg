@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -2164,12 +2164,114 @@ async function runReviewForm() {
   } finally { b.close(); fs.rmSync(dir, { recursive: true, force: true }); }
 }
 
+/* LESEN-ONLY-RELEASE-READINESS Q4a (A11), automated in Chrome: while Lesen runs, no answer key, explanation, evidence
+   record or transcript reaches the browser — in any network response (every body is captured over CDP, static files
+   included), in Web Storage or in the DOM. Field names are checked structurally in every /exam/v1 JSON body (static
+   JS legitimately contains words like "explanation"); the form's explanation TEXTS are searched in every body. The
+   package is fetched twice (start + reload). After the submission the item review must carry the same fields and
+   texts: that control proves the capture and the search work. */
+async function runConfidentiality() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), flags: { EXAM_MODULE_ONLY: 'lesen', EXAM_RELEASE_FORMS: PRACTICE.id } });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable');
+    await send('Network.enable', { maxTotalBufferSize: 200e6, maxResourceBufferSize: 50e6 });
+    await send('Network.setCacheDisabled', { cacheDisabled: true });   // every package/script fetch reaches the wire and is captured
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const text = () => evaluate('document.body.innerText');
+    const waitFor = async (src, ms = 15000, label = src) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(250); }
+      throw new Error(`timeout: ${label}\n--- page ---\n${(await text()).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    // every response body, fetched as soon as it has finished loading (a reload may evict earlier buffers)
+    const urls = new Map(), bodies = []; let seen = 0; const inflight = new Set();
+    const pump = () => { for (; seen < b.events.length; seen++) { const e = b.events[seen];
+      if (e.method === 'Network.responseReceived') urls.set(e.params.requestId, { url: e.params.response.url, status: e.params.response.status });
+      else if (e.method === 'Network.loadingFinished' && urls.has(e.params.requestId)) { const meta = urls.get(e.params.requestId);
+        const p = send('Network.getResponseBody', { requestId: e.params.requestId }).then((r) => { bodies.push({ ...meta, body: r.base64Encoded ? Buffer.from(r.body, 'base64').toString('utf8') : r.body }); })
+          .catch((err) => { bodies.push({ ...meta, body: null, err: String(err.message) }); }).finally(() => inflight.delete(p));
+        inflight.add(p); } } };
+    const pumping = setInterval(pump, 50);
+    const settle = async () => { await sleep(300); pump(); while (inflight.size) await Promise.all([...inflight]); };
+    // markers: every explanation text and every transcript of the whole form (all modules), from the server-only keys
+    const keyRows = (await dev.env.DB.prepare('SELECT item_id, key_json FROM item_keys').all()).results.map((r) => [r.item_id, JSON.parse(r.key_json)]);
+    const keys = Object.fromEntries(keyRows.map(([id, k]) => [id, k.correct]));
+    const markers = [...new Set(keyRows.flatMap(([, k]) => [k.review?.explanation_de, ...(k.review?.transcripts || []).map((t) => t.text)]).filter((s) => typeof s === 'string' && s.length >= 20))];
+    assert.ok(markers.length >= 30, `explanation markers from item_keys (${markers.length})`);
+    const FORBIDDEN = new Set(['correct', 'correct_answer', 'key', 'keys', 'key_json', 'explanation', 'explanation_de', 'evidence', 'transcript', 'transcripts', 'scoring_key']);
+    const fieldsIn = (v, out = new Set()) => { if (Array.isArray(v)) v.forEach((x) => fieldsIn(x, out)); else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) { out.add(k); fieldsIn(x, out); } return out; };
+    const scan = (list) => {
+      const leaks = [];
+      for (const r of list) {
+        if (r.body === null) continue;
+        const hit = markers.find((m) => r.body.includes(m)); if (hit) leaks.push(`${r.url}: explanation/transcript text "${hit.slice(0, 40)}…"`);
+        if (/\/exam\/v1\//.test(r.url)) { let j = null; try { j = JSON.parse(r.body); } catch { /* not JSON */ }
+          const bad = j ? [...fieldsIn(j)].filter((f) => FORBIDDEN.has(f)) : []; if (bad.length) leaks.push(`${r.url}: fields ${bad.join(', ')}`); }
+      }
+      return leaks;
+    };
+    const base = `http://127.0.0.1:${dev.port}/exam/`;
+    await send('Page.navigate', { url: base });
+    await waitFor(`document.querySelector('[data-act="create"][data-module="lesen"]')`, 15000, 'Lesen-only start screen');
+    await click('[data-act="create"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'Lesen intro');
+    await click('[data-act="start"][data-module="lesen"]');
+    await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
+    const attempt = await dev.env.DB.prepare('SELECT id FROM attempts').first();
+    // answer every item (all parts), then reload: the package is fetched again and answers come back from the server
+    const lesen = (await dev.env.DB.prepare("SELECT item_id FROM items_index WHERE module = 'lesen' AND is_example = 0").all()).results;
+    await evaluate(`(() => { const plan = ${JSON.stringify(Object.fromEntries(lesen.map((r) => [r.item_id, keys[r.item_id]])))};
+      for (const [id, v] of Object.entries(plan)) { const el = document.querySelector('[data-item="' + id + '"][value="' + v + '"]');
+        if (el) { el.click(); continue; } const sel = document.querySelector('select[data-item="' + id + '"]'); if (sel) { sel.value = v; sel.dispatchEvent(new Event('change', { bubbles: true })); } } })()`);
+    for (const t0 = Date.now(); (await dev.env.DB.prepare("SELECT COUNT(*) AS n FROM responses_current WHERE module = 'lesen'").first()).n < lesen.length; await sleep(200)) {
+      if (Date.now() - t0 > 15000) throw new Error('Lesen answers not stored');
+    }
+    await settle();
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
+    await waitFor(`!window.__beforeReload && document.querySelectorAll('input[type=radio]:checked').length > 10`, 15000, 'answers restored after reload');
+    // the review endpoint refuses while Lesen runs (A11 step 3)
+    const early = await evaluate(`fetch('/exam/v1/attempts/${attempt.id}/modules/lesen/review', { credentials: 'include' }).then(async (r) => ({ status: r.status, body: await r.text() }))`);
+    assert.equal(early.status, 409, 'no item review while Lesen runs');
+    await settle();
+    const running = bodies.slice();
+    const api = running.filter((r) => /\/exam\/v1\//.test(r.url));
+    const pkgs = api.filter((r) => /\/modules\/lesen\/package/.test(r.url) && r.status === 200 && r.body);
+    assert.equal(pkgs.length, 2, `the Lesen package was captured at start and after the reload (${pkgs.length})`);
+    assert.ok(api.some((r) => /\/modules\/lesen\/answers/.test(r.url) && r.status === 200), 'answer saves were captured');
+    assert.ok(running.some((r) => /\/exam\/js\/render\.js/.test(r.url) && r.body), 'static scripts were captured too');
+    assert.equal(running.filter((r) => r.body === null && /\/exam\//.test(r.url)).length, 0, `every exam response body was readable: ${JSON.stringify(running.filter((r) => r.body === null).map((r) => [r.url, r.err]))}`);
+    assert.deepEqual(scan(running), [], 'no key, explanation, evidence or transcript in any response while Lesen runs');
+    const local = await evaluate(`JSON.stringify({ l: Object.entries(localStorage), s: Object.entries(sessionStorage), dom: document.documentElement.outerHTML })`);
+    assert.equal(markers.find((m) => local.includes(m)) || null, null, 'no explanation text in Web Storage or the DOM while Lesen runs');
+    assert.equal(/"(correct|correct_answer|explanation_de|key_json)"/.test(local), false, 'no key fields in Web Storage or the DOM while Lesen runs');
+    // control: after the submission the item review carries exactly those fields and texts
+    await click('[data-act="submit"]'); await waitFor(`document.querySelector('[data-act="submit-confirm"]')`, 5000, 'review'); await click('[data-act="submit-confirm"]');
+    await waitFor(`document.querySelector('.kx-result table') && document.querySelectorAll('.kx-review-items .kx-rv-explain').length === 30`, 20000, 'result with item review');
+    await settle();
+    const after = bodies.slice(running.length);
+    const leaks = scan(after);
+    assert.ok(leaks.some((l) => /\/modules\/lesen\/review: explanation/.test(l)) && leaks.some((l) => /\/modules\/lesen\/review: fields .*correct_answer.*explanation/.test(l)),
+      `control: the released review is detected by the same scan (${JSON.stringify(leaks)})`);
+    clearInterval(pumping);
+    log('confidentiality', 'PASS', { responses: running.length, api: api.length, packages: pkgs.length, markers: markers.length, controlHits: leaks.length });
+    return b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+  } finally { b.close(); dev.server.close(); }
+}
+
 /* ENGINE §10 / MOCK M-25: the smallest supported viewport is 360×640 */
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 360×640', w: 360, h: 640, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'confidentiality') { results.push({ vp: `confidentiality ${PRACTICE.name} (Lesen-only, Q4a)`, uncaught: await fn() }); continue; }
   if (name === 'review-form') { results.push({ vp: `review form ${PRACTICE.name} (Lesen, file://)`, uncaught: await fn() }); continue; }
   if (name === 'lesen-only') { results.push({ vp: `lesen-only ${PRACTICE.name} (mobile start + desktop)`, uncaught: await fn() }); continue; }
   if (name === 'precheck') { results.push({ vp: 'precheck (audio + microphone gates, denied → fixed, reload)', uncaught: await fn() }); continue; }

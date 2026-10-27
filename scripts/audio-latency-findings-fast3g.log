@@ -1,0 +1,20 @@
+STAGE load event: +12831ms
+STAGE listen-control enabled: +13166ms
+
+=== FIRST PLAY (cold urlCache, throttled Fast-3G) ===
+  click -> settle wall-clock: 418ms
+  click -> play-start (page performance.now() delta): 403.1ms
+  click -> play-error: n/ams
+  event timeline (tp relative to click, ms): [{"type":"stop","dMs":0},{"type":"request","text":"der Apfel","dMs":0},{"type":"preload","dMs":7},{"type":"play-start","url":"https://cdn.jsdelivr.net/gh/reegangandhi16-pixel/klarweg-audio@main/public/audio/words/female/ffb93ae3703c904b.mp3","dMs":403}]
+  mp3: https://cdn.jsdelivr.net/gh/reegangandhi16-pixel/klarweg-audio@main/public/audio/words/female/ffb93ae3703c904b.mp3
+  mp3 timing (ms): {"requestTime":2420070.718182,"proxyStart":-1,"proxyEnd":-1,"dnsStart":0.11,"dnsEnd":0.124,"connectStart":0.81,"connectEnd":14.217,"sslStart":0.81,"sslEnd":14.217,"workerStart":-1,"workerReady":-1,"workerFetchStart":-1,"workerRespondWithSettled":-1,"sendStart":14.342,"sendEnd":14.4,"pushStart":0,"pushEnd":0,"receiveHeadersStart":32.332,"receiveHeadersEnd":199.096}
+  mp3 total download: 314.0ms
+
+=== SECOND PLAY (warm urlCache, same word, throttled Fast-3G) ===
+  click -> settle wall-clock: 10052ms
+  click -> play-start (page performance.now() delta): n/ams
+  click -> play-error: n/ams
+  event timeline (tp relative to click, ms): [{"type":"stop","dMs":0}]
+  mp3: https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/public/audio/forms/f70566b20cbc1881.mp3
+  mp3 timing (ms): {"requestTime":2420072.163776,"proxyStart":-1,"proxyEnd":-1,"dnsStart":-1,"dnsEnd":-1,"connectStart":-1,"connectEnd":-1,"sslStart":-1,"sslEnd":-1,"workerStart":-1,"workerReady":-1,"workerFetchStart":-1,"workerRespondWithSettled":-1,"sendStart":0.317,"sendEnd":0.386,"pushStart":0,"pushEnd":0,"receiveHeadersStart":561.066,"receiveHeadersEnd":562.689}
+  mp3 total download: 928.4ms

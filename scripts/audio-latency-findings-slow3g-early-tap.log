@@ -1,0 +1,6 @@
+vocab card + Listen control first existed at +23323ms (disabled=unknown until click)
+clicked at +23331ms since navigation (this is the "early tap" instant)
+
+click -> settle wall-clock: 1028ms
+click -> play-start (perf delta): 1015.4ms
+event timeline (ms since click): [{"type":"stop","dMs":0},{"type":"request","text":"der Apfel","dMs":0},{"type":"canon-collision","dMs":654},{"type":"canon-collision","dMs":657},{"type":"canon-collision","dMs":657},{"type":"canon-collision","dMs":682},{"type":"canon-collision","dMs":682},{"type":"canon-collision","dMs":690},{"type":"canon-collision","dMs":690},{"type":"canon-collision","dMs":693},{"type":"canon-collision","dMs":693},{"type":"canon-collision","dMs":694},{"type":"canon-collision","dMs":694},{"type":"canon-collision","dMs":694},{"type":"canon-collision","dMs":694},{"type":"canon-collision","dMs":694},{"type":"canon-collision","dMs":694},{"type":"canon-collision","dMs":694},{"type":"manifest-loaded","entries":5747,"source":"https://reegangandhi16-pixel.github.io/klarweg/public/audio/manifest.json","dMs":695},{"type":"preload","dMs":696},{"type":"play-start","source":"vocab-female","dMs":1015}]

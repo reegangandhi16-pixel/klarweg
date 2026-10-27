@@ -294,6 +294,7 @@
 
   /* ── Exact word-form audio (comparison / declension / number forms) ─────── */
   var wordFormManifestPromise = null;
+  var wordFormReady = false;   // true once the fetch above has settled (hit or miss) — lets speak() skip waiting when it's already safe to read WORD_FORM_MAP
   var WORD_FORM_CDN_BASE =
     'https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/';
   var WORD_FORM_MANIFEST_URL =
@@ -327,7 +328,7 @@
 
       WORD_FORM_MAP = Object.create(null);
       return WORD_FORM_MAP;
-    });
+    }).then(function (map) { wordFormReady = true; return map; });
 
     return wordFormManifestPromise;
   }
@@ -358,15 +359,6 @@ function wordFormUrl(text) {
       : undefined;
   }
 
-  function wordFormUrlAsync(text) {
-    var sync = wordFormUrl(text);
-    if (sync) return Promise.resolve(sync);
-
-    return ensureWordFormManifest().then(function () {
-      return wordFormUrl(text);
-    });
-  }
-
   // TEMP DEBUG: expose word-form resolver state for browser verification.
   window.KW_wordFormDebug = function (text) {
     return {
@@ -380,6 +372,7 @@ function wordFormUrl(text) {
 
   /* ── Exact conjugation-form audio ─────────────────────────────────────── */
   var conjugationManifestPromise = null;
+  var conjugationReady = false;   // true once the fetch below has settled (hit or miss) — lets speak() skip waiting when it's already safe to read CONJUGATION_MAP
   var CONJUGATION_CDN_BASE =
     'https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/';
   var CONJUGATION_MANIFEST_URL =
@@ -413,7 +406,7 @@ function wordFormUrl(text) {
 
       CONJUGATION_MAP = Object.create(null);
       return CONJUGATION_MAP;
-    });
+    }).then(function (map) { conjugationReady = true; return map; });
 
     return conjugationManifestPromise;
   }
@@ -431,15 +424,6 @@ function wordFormUrl(text) {
         ? rel
         : CONJUGATION_CDN_BASE + rel.replace(/^\/+/, ''))
       : undefined;
-  }
-
-  function conjugationUrlAsync(text) {
-    var sync = conjugationUrl(text);
-    if (sync) return Promise.resolve(sync);
-
-    return ensureConjugationManifest().then(function () {
-      return conjugationUrl(text);
-    });
   }
 
   /* ── A1 dual-voice vocab lookup (female / male) ───────────────────────── */
@@ -952,101 +936,76 @@ function wordFormUrl(text) {
      synthesis layer (hosted TTS / browser TTS), where the string spoken aloud
      is chosen — which is where a displayed form and its spoken form legitimately
      differ. A caller that passes no spokenAs takes exactly the previous path. */
+  /* True once every manifest a lookup with this `gender` would need has
+     actually settled (hit or miss) — only then is it safe to read a miss
+     from resolveLookup() as final, rather than "just not loaded yet". */
+  function lookupIsWarm(gender) {
+    return conjugationReady && wordFormReady && (!gender || a1Ready);
+  }
+
+  /* Synchronous precedence check — conjugation > word-form > (gendered)
+     vocab > the sentence/dialogue manifest — identical order and identical
+     `_src`/result values to the chain this replaces. Only call once every
+     manifest it reads has settled (lookupIsWarm(), or after awaiting their
+     ensure*() calls below): reading an unloaded manifest as "no entry" would
+     let a layer that happens to load faster win a lookup that a slower,
+     higher-precedence layer would otherwise have answered. Returns
+     { url, src, result } for the first hit, or null. */
+  function resolveLookup(text, gender) {
+    var conj = conjugationUrl(text);
+    if (conj) return { url: conj, src: 'conjugation', result: 'conjugation' };
+    var wf = wordFormUrl(text);
+    if (wf) return { url: wf, src: 'word-form', result: 'word-form' };
+    if (gender) {
+      var v = vocabUrl(text, gender);
+      if (v) return { url: v, src: 'vocab-' + gender, result: 'manifest' };
+    }
+    var m = audioUrl(text);
+    if (m) return { url: m, src: 'manifest', result: 'manifest' };
+    return null;
+  }
+
+  function playResolved(resolved, text, key, opts, notify) {
+    notify('playing');
+    return playUrl(resolved.url, Object.assign({ _src: resolved.src }, opts)).then(function (ok) {
+      return ok ? resolved.result : fallbackChain(text, key, opts, notify);
+    });
+  }
+
   function speak(text, opts) {
     opts = opts || {};
     var key = normalize(text);
     emit('request', { text: key });
     var notify = function (s) { if (typeof opts.onState === 'function') opts.onState(s); };
 
-    // 0. Exact authored conjugation-form audio.
-    //    This must win over vocabulary lemma audio and generic TTS.
-    var conjSync = conjugationUrl(text);
-    if (conjSync) {
-      notify('playing');
-      return playUrl(
-        conjSync,
-        Object.assign({ _src: 'conjugation' }, opts)
-      ).then(function (ok) {
-        return ok
-          ? 'conjugation'
-          : fallbackChain(text, key, opts, notify);
-      });
+    // Fast path: every manifest this lookup needs is already warm (the
+    // common case once the page has been open a moment) — decide and play
+    // with no extra network wait.
+    if (lookupIsWarm(opts.gender)) {
+      var fast = resolveLookup(text, opts.gender);
+      return fast ? playResolved(fast, text, key, opts, notify) : fallbackChain(text, key, opts, notify);
     }
 
-    // Lazy-load conjugation manifest before falling through to vocabulary.
-    return conjugationUrlAsync(text).then(function (conjUrl) {
-      if (conjUrl) {
-        notify('playing');
-        return playUrl(
-          conjUrl,
-          Object.assign({ _src: 'conjugation' }, opts)
-        ).then(function (ok) {
-          return ok
-            ? 'conjugation'
-            : speakAfterConjugation(text, key, opts, notify);
-        });
-      }
-
-      return speakAfterConjugation(text, key, opts, notify);
+    // Slow path: at least one manifest this lookup needs hasn't settled yet.
+    // The previous version awaited conjugation, then word-form, then vocab,
+    // ONE AT A TIME — so a request that only ends up needing (say) the vocab
+    // manifest still paid the conjugation and word-form round-trips first,
+    // serially, even though neither of those fetches could change which
+    // asset the vocab-only request plays. ensureConjugationManifest(),
+    // ensureWordFormManifest() and ensureA1Loaded() are each memoized and
+    // already in flight from the page-load warm-up (loadManifests(), above),
+    // so waiting on the ones this lookup actually needs TOGETHER costs only
+    // the slowest of them, not their sum. Precedence is still decided only
+    // once every needed manifest has settled (resolveLookup reruns the exact
+    // same ordered checks as the fast path), so a slow conjugation fetch can
+    // never be skipped in favour of a faster vocab hit — this never becomes
+    // "play whichever manifest answers first".
+    var waits = [ensureConjugationManifest(), ensureWordFormManifest()];
+    if (opts.gender) waits.push(ensureA1Loaded());
+    return Promise.all(waits).then(function () {
+      var resolved = resolveLookup(text, opts.gender);
+      return resolved ? playResolved(resolved, text, key, opts, notify) : fallbackChain(text, key, opts, notify);
     });
-  }
-
-  function speakAfterConjugation(text, key, opts, notify) {
-    // 1. Exact word-form audio — comparison / declension / number forms.
-    //    This sits after authored conjugation audio and before vocabulary lemma
-    //    audio, so an exact form such as "größer" uses its authored form asset.
-    var wfSync = wordFormUrl(text);
-    if (wfSync) {
-      notify('playing');
-      return playUrl(
-        wfSync,
-        Object.assign({ _src: 'word-form' }, opts)
-      ).then(function (ok) {
-        return ok
-          ? 'word-form'
-          : speakAfterWordForm(text, key, opts, notify);
-      });
-    }
-
-    // Lazy-load the word-form manifest before falling through to vocabulary.
-    return wordFormUrlAsync(text).then(function (wfUrl) {
-      if (wfUrl) {
-        notify('playing');
-        return playUrl(
-          wfUrl,
-          Object.assign({ _src: 'word-form' }, opts)
-        ).then(function (ok) {
-          return ok
-            ? 'word-form'
-            : speakAfterWordForm(text, key, opts, notify);
-        });
-      }
-
-      return speakAfterWordForm(text, key, opts, notify);
-    });
-  }
-
-  function speakAfterWordForm(text, key, opts, notify) {
-    // 2. Dual-voice vocab fast path — if a gender is requested, ensure the A1
-    //    manifest is loaded (lazy/robust), then play that voice from the CDN.
-    if (opts.gender) {
-      var vSync = vocabUrl(text, opts.gender);
-      if (vSync) { notify('playing'); return playUrl(vSync, Object.assign({ _src: 'vocab-' + opts.gender }, opts)).then(function (ok) { return ok ? 'manifest' : fallbackChain(text, key, opts, notify); }); }
-      // Not in A1MAP yet → lazy-load, then retry; only after that fall through.
-      return vocabUrlAsync(text, opts.gender).then(function (vUrl) {
-        if (vUrl) { notify('playing'); return playUrl(vUrl, Object.assign({ _src: 'vocab-' + opts.gender }, opts)).then(function (ok) { return ok ? 'manifest' : fallbackChain(text, key, opts, notify); }); }
-        var mU = audioUrl(text);
-        if (mU) { notify('playing'); return playUrl(mU, Object.assign({ _src: 'manifest' }, opts)).then(function (ok) { return ok ? 'manifest' : fallbackChain(text, key, opts, notify); }); }
-        return fallbackChain(text, key, opts, notify);
-      });
-    }
-
-    // 1. Manifest fast path
-    var mUrl = audioUrl(text);
-    if (mUrl) { notify('playing'); return playUrl(mUrl, Object.assign({ _src: 'manifest' }, opts)).then(function (ok) { return ok ? 'manifest' : fallbackChain(text, key, opts, notify); }); }
-
-    // 2/3/4
-    return fallbackChain(text, key, opts, notify);
   }
 
   function fallbackChain(text, key, opts, notify) {

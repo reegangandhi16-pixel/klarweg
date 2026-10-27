@@ -37,11 +37,11 @@ The release is blocked until every row in §1–§4 is closed. A row closes only
 
 | ID | Check | Where | Needs |
 |---|---|---|---|
-| Q1 | Safari (macOS; iOS optional): Lesen-only journey, tabs, flags, overview, submit, result | Local demo | Nothing (runs on a Mac) |
+| Q1 | Safari (macOS; iOS optional): Lesen-only journey, tabs, flags, overview, submit, result | Local demo | Nothing (runs on a Mac). **macOS Safari is automated** by `exam-worker/test/safari-qa.mjs` (WebDriver, local only, not in CI); iOS Safari not run |
 | Q2 | Safari with its default cross-site cookie blocking → "Cookies blockiert", not "Bitte anmelden" (`NONPROD-SETUP.md` A2) | Non-production site | O8 (the current build deployed) |
 | Q3a | Laptop sleep > 60 s mid-Lesen: answers still save after wake, without a reload | Local demo | Nothing. **Approximated in CI** by the browser scenario `KX_E2E_ONLY=sleep-wake` (offline + frozen page + expired lease); a real OS sleep still needs the manual §6.3 run |
 | Q3b | Same on the real non-production stack (`NONPROD-SETUP.md` A6) | Non-production site | O8 |
-| Q4a | DevTools confidentiality: no key, explanation or evidence reaches the browser before submission (A11) | Local demo (Chrome and Safari Web Inspector) | Nothing. **Chrome is automated** by the browser scenario `KX_E2E_ONLY=confidentiality` (CI, direct and via the Access proxy); Safari still needs the manual §6.4 run |
+| Q4a | DevTools confidentiality: no key, explanation or evidence reaches the browser before submission (A11) | Local demo (Chrome and Safari Web Inspector) | Nothing. **Chrome is automated** by the browser scenario `KX_E2E_ONLY=confidentiality` (CI, direct and via the Access proxy); Safari is automated by `exam-worker/test/safari-qa.mjs` (server-side capture of every response sent to Safari + Safari's DOM/storage) |
 | Q4b | Same against the non-production Worker | Non-production site | O8 |
 
 ## 4. Engineering work that is authorised once its input exists (nothing else is open; see the audit)
@@ -76,6 +76,10 @@ stored outside the process. Use a fresh private window per run, or reset the sit
 flags, notes and positions do not carry over.
 
 ### 6.1 Q1 — Safari (macOS Safari, current version; iOS Safari optional via the Mac's IP on the same network)
+Automated on macOS Safari (steps 1–7, plus Q4a): `node exam-worker/test/safari-qa.mjs` (`KX_SAFARI_FORM=p3|p8|p13`,
+`KX_DEV_PROXY=1`, `KX_SAFARI_OUT=<dir>` for screenshots and a JSON record). Needs Safari → Develop → "Allow Remote
+Automation" and `safaridriver --enable` once; local only (CI has no Safari). The manual steps below remain the reference.
+
 1. Start the demo (§6.0), open the learner link in Safari, start Lesen.
 2. **Tabs:** Teil 1 is open. Tab key reaches the tab bar; ←/→ move focus only; Enter opens the part; focus lands on
    the "Teil n" heading. In Safari's settings "Press Tab to highlight each item" must be on for keyboard tests.
@@ -118,11 +122,11 @@ the real Workers.)
 
 | ID | Date | Tester | Browser / OS / build | Result | Notes / evidence |
 |---|---|---|---|---|---|
-| Q1 | | | | | |
+| Q1 (macOS Safari) | 2026-10-27 | Claude, automated (`safari-qa.mjs`) | Safari 26.5.2 (macOS 26.5.2, build 25F84) via safaridriver, local dev server, branch `test/exam-safari-q1-q4a` on main `473834ab`, Lesen-only, forms P3 (direct and `KX_DEV_PROXY=1`), P8 and P13 (direct) | PASS (4 of 4 final runs; steps 1–7) | Native WebDriver clicks and keys. 2: Tab from the page start reached the tab bar; ←/→/End move focus only (wraps); Enter opened Teil 3 with focus on its heading, announced "Teil 3 geöffnet.". 3: one ad chosen twice → card "verwendet bei 13, 14 – jede Anzeige darf nur einmal gewählt werden", option "c (verwendet bei 13)"; one item flagged; Übersicht "13 beantwortet · 17 offen · 1 markiert", 30 links, a jump closes it and focuses the item below the bar. 4: reload → same part, "Weiter in Teil 4, bei der zuletzt bearbeiteten Aufgabe.", last item in view, answers and flag kept. 5: Back → "Prüfung verlassen?" (focus on stay); staying keeps the module running. 7: window 800 px → collapse control, 360 px (real innerWidth 360) → Text/Aufgaben pair, no horizontal scroll at either. 6: review "17 von 30 Aufgaben sind noch ohne Antwort. 1 Aufgabe ist zur Kontrolle markiert." + per-part lists + remaining time → submit → result with 30 explanations. Screenshots + JSON record kept outside the repo. Harness notes: Safari WebDriver dropped the first click on a freshly drawn screen in 2 of ~12 development runs (probe: button inserted once, never replaced, no request sent → not an app re-render); the harness diagnoses and retries once and records it — 0 retries in the 4 final runs. Not covered: iOS Safari, the "Press Tab to highlight each item" setting (Safari's default Tab order skips the answer radios, so whether a keyboard-focused answer can be hidden by the sticky footer is left to EX-04), Responsive Design Mode as such (real window sizes used). |
 | Q2 | | | | | |
 | Q3a (simulated) | 2026-10-27 | Claude, automated (`browser-e2e.mjs` scenario `sleep-wake`) | Chrome 156.0.8078.48 headless, macOS, branch `test/exam-q3a-sleep-wake` on main `c179fb4f`, form P1, direct and `KX_DEV_PROXY=1` | PASS | Network offline with one answer queued, page frozen 8 s (CDP `Page.setWebLifecycleState`; a 100 ms ticker shows an 8.7 s gap, so no timer ran) while the lease expired on the server; after waking, without a reload, the queued answer and a new one were stored, lease generation 1 → 2 (`lease_reacquired` audited), no incident, no takeover, no "Speichern gestoppt", timer 3899 s → 3889 s. Mutation check: a broken lease reacquire fails the scenario. Not covered: a real OS suspend (the local server sleeping too, a real 60 s TTL). |
 | Q3a (real sleep) | | | | | |
 | Q3b | | | | | |
 | Q4a (Chrome) | 2026-10-27 | Claude, automated (`browser-e2e.mjs` scenario `confidentiality`) | Chrome 156.0.8078.48 headless, macOS, branch `test/exam-q4a-confidentiality` on main `1eac88b2`, form P1, direct and `KX_DEV_PROXY=1` | PASS | 62 response bodies captured over CDP (13 `/exam/v1`, package twice: start + reload); no `/exam/v1` JSON field in {correct, correct_answer, key, keys, key_json, explanation, explanation_de, evidence, transcript, transcripts, scoring_key}; none of the form's 68 explanation/transcript texts in any body, in Web Storage or in the DOM; review answers 409 while Lesen runs. Control: after submission the same scan finds them in the item review. Mutation checks: a leaked explanation text and a leaked `correct` field in the package both fail the scenario. |
-| Q4a (Safari) | | | | | |
+| Q4a (Safari) | 2026-10-27 | Claude, automated (`safari-qa.mjs`) | Safari 26.5.2 (macOS 26.5.2, build 25F84) via safaridriver, local dev server, branch `test/exam-safari-q1-q4a` on main `473834ab`, Lesen-only, forms P3 (direct and `KX_DEV_PROXY=1`), P8 and P13 (direct) | PASS (4 of 4) | WebDriver has no network inspector, so every response body the server sent to Safari was captured server-side (55 responses, 13 `/exam/v1`, Lesen package twice: start + reload). No `/exam/v1` JSON field in {correct, correct_answer, key, keys, key_json, explanation, explanation_de, evidence, transcript, transcripts, scoring_key}; none of the form's 68 explanation/transcript texts in any body, in Safari's DOM, localStorage or sessionStorage; Safari's own `GET …/modules/lesen/review` answered 409 while Lesen ran. Control: after submission the same scan finds the released review. Mutation check: an explanation text leaked into the package response fails the run. |
 | Q4b | | | | | |

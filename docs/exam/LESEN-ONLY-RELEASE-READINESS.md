@@ -41,7 +41,7 @@ The release is blocked until every row in §1–§4 is closed. A row closes only
 | Q2 | Safari with its default cross-site cookie blocking → "Cookies blockiert", not "Bitte anmelden" (`NONPROD-SETUP.md` A2) | Non-production site | O8 (the current build deployed) |
 | Q3a | Laptop sleep > 60 s mid-Lesen: answers still save after wake, without a reload | Local demo | Nothing |
 | Q3b | Same on the real non-production stack (`NONPROD-SETUP.md` A6) | Non-production site | O8 |
-| Q4a | DevTools confidentiality: no key, explanation or evidence reaches the browser before submission (A11) | Local demo (Chrome and Safari Web Inspector) | Nothing |
+| Q4a | DevTools confidentiality: no key, explanation or evidence reaches the browser before submission (A11) | Local demo (Chrome and Safari Web Inspector) | Nothing. **Chrome is automated** by the browser scenario `KX_E2E_ONLY=confidentiality` (CI, direct and via the Access proxy); Safari still needs the manual §6.4 run |
 | Q4b | Same against the non-production Worker | Non-production site | O8 |
 
 ## 4. Engineering work that is authorised once its input exists (nothing else is open; see the audit)
@@ -122,5 +122,6 @@ the real Workers.)
 | Q2 | | | | | |
 | Q3a | | | | | |
 | Q3b | | | | | |
-| Q4a | | | | | |
+| Q4a (Chrome) | 2026-10-27 | Claude, automated (`browser-e2e.mjs` scenario `confidentiality`) | Chrome 156.0.8078.48 headless, macOS, branch `test/exam-q4a-confidentiality` on main `1eac88b2`, form P1, direct and `KX_DEV_PROXY=1` | PASS | 62 response bodies captured over CDP (13 `/exam/v1`, package twice: start + reload); no `/exam/v1` JSON field in {correct, correct_answer, key, keys, key_json, explanation, explanation_de, evidence, transcript, transcripts, scoring_key}; none of the form's 68 explanation/transcript texts in any body, in Web Storage or in the DOM; review answers 409 while Lesen runs. Control: after submission the same scan finds them in the item review. Mutation checks: a leaked explanation text and a leaked `correct` field in the package both fail the scenario. |
+| Q4a (Safari) | | | | | |
 | Q4b | | | | | |

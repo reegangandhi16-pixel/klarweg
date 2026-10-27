@@ -1,6 +1,6 @@
 # Non-production environment — setup, acceptance and teardown (exam portal)
 
-**Status (updated 2026-10-20):** the configuration files and the site build tool are in the repo (§2, §3 step 8). The
+**Status (updated 2026-10-27):** O8 non-production deploy of main `5ca66e6b` and acceptance re-run on 2026-10-27 (record O8 in §4). Earlier:  the configuration files and the site build tool are in the repo (§2, §3 step 8). The
 environment **was provisioned on 2026-10-19 with the owner's authorization** (PR #128). Engineering ran the
 non-production deploys, migrations and acceptance runs recorded in §4 under that authorization, on the non-production
 Workers and databases only. Provisioning, teardown and anything touching production remain owner actions.
@@ -140,6 +140,35 @@ accounts. `TOTP_ENC_KEY` source of record: the owner's macOS Keychain (`klarweg-
 
 Accepted by (owner): `________` Date: `________` — **unsigned**: A10 is not run, and A2 (Safari), A3 (real microphone) and A6
 (real sleep) still need their manual checks. Invalid runs (test-side mistakes, each diagnosed and re-run) are listed in the PR #131 record.
+
+### Acceptance record O8 (2026-10-27; filled from real runs only; owner authorisation O8, non-production only)
+Build: main `5ca66e6b` (no Worker, schema, migration or content change since `7e155af1`; frontend #237 and site tool #230).
+Rollback points `bb13b0e3` (exam) / `f0a8a7f6` (Access); both D1 exported and Time Travel bookmarks taken before any change.
+Final versions (100%, plain non-prod config): exam `e28d2241`, Access `6508fb11`. During the run the Access Worker
+temporarily also allowed `http://localhost:8792` (§3 step 8), because a stale local server held port 8788; removed at the
+end and checked by preflight. Production was not touched. Tester: engineering session (Claude), synthetic `@example.com`
+accounts created for this run. Browsers: Chrome 156.0.8078.48 headless; Safari 26.5.2 (macOS 26.5.2) over WebDriver.
+
+| # | Date | Result | Evidence | Notes |
+|---|---|---|---|---|
+| A1 | 2026-10-27 | pass | sign-in sets the cross-site cookie; no grant: availability `no_access`, create attempt 403 `exam_access_required`; granted: 200 | — |
+| A2 | 2026-10-27 | pass (Safari default settings) | Safari settles on "Cookies blockiert"; its own cookie probe `received: false`; Chrome control signed in | readiness Q2 |
+| A3 | 2026-10-27 | pass, except real microphone | Lesen 30, Hören real time (16 plays, signed media `private, no-store`), Schreiben 3 frozen, Sprechen synthetic chunks, result, history, own playback | runs 1–3 failed test-side: the old script awaited `play_end` before the next `play_start` and missed the 1 s Teil 2 instruction window (`play_window_closed`); run 2 also hit a local network outage. Run 4 sends events on the server-clock schedule like the client |
+| A4 | 2026-10-27 | pass (rows 1–9) | fresh rater: enrol, replay refused, recovery code once, 13 h freshness, learner unaffected, spoofed headers ignored, 5 wrong codes → rate limited + audited | rows 10–11 not re-run (they remove/restore `TOTP_ENC_KEY`; Worker code unchanged since they passed) |
+| A5 | 2026-10-27 | pass | Sprechen 75/50 → 63 half-up; Schreiben 75/25 → third rating, plain rater 403, lead 75 replaces (OD-30); result + feedback; lead read audited | — |
+| A6 | 2026-10-27 | pass (API + simulated sleep in Chrome) | takeover `lease_held` / `lease_superseded`; idle 75 s → `lease_expired`, reacquired, save 200; Chrome frozen 77 s → saves after wake without reload (readiness Q3b) | first A6 save hit the read-only example (422 `item_is_example`, test-side); re-checked with a scored item. Real laptop sleep: manual |
+| A7 | 2026-10-27 | pass | `EXAM_ROUTES` off → 404; `EXAM_ENABLED` off → 503; restored → 200 | — |
+| A8 | 2026-10-27 | pass | expired Lesen closed by the cron alone after 197 s (`module_submitted`) | — |
+| A9 | 2026-10-27 | pass | both D1 exported (private); Time Travel restore removed a marker, attempts unchanged; A1 re-checked | — |
+| A10 | — | not run | — | gate of draft PRs #71/#73; needs their documented approval |
+| A11 | 2026-10-27 | pass (API level + Chrome) | no key, explanation, evidence or transcript before submission (API scan and every Chrome response); control after submission | Safari cannot sign in cross-site (A2), so no Safari run on non-prod |
+
+Observations (not changed): autosave treats an unlisted 422 as offline and retries the same batch, so one invalid answer
+(reachable only by tampering or a client bug) blocks the batch; the Hören client starts audio only after the `play_start`
+reply, so request latency (2–3 s from the test machine) delays short plays; Safari shows the sign-in screen briefly before
+"Cookies blockiert".
+
+Accepted by (owner): `________` Date: `________` — **unsigned**.
 
 ### Lesen-only record M1 (PR #145, 2026-10-20; filled from real runs only)
 Build: main `0c9563b` (PR #145 merged). Exam D1 `klarweg-exam-nonprod` (`309e3ca3-…`): migration

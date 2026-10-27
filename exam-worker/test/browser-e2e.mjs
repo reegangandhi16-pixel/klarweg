@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality|sleep-wake runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -2265,12 +2265,90 @@ async function runConfidentiality() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* LESEN-ONLY-RELEASE-READINESS Q3a (laptop sleep), as close as a headless browser gets: the network drops with an answer
+   still unsent, the page is FROZEN (CDP Page.setWebLifecycleState: no timers, no heartbeat, no autosave retries) while
+   the device lease expires, then the page wakes and the network returns. Without a reload the queued answer and a new
+   answer must reach the server (lease reacquired, never a takeover or "Speichern gestoppt"), and the timer must show the
+   sleep as elapsed time (the clock is wall-clock + server offset, so a monotonic clock paused during sleep cannot add
+   time). What this cannot reproduce — real OS suspend, the local server sleeping too — stays in the manual §6.3 run. */
+async function runSleepWake() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), flags: { EXAM_MODULE_ONLY: 'lesen', EXAM_RELEASE_FORMS: PRACTICE.id } });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable'); await send('Network.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const stored = (item) => dev.env.DB.prepare('SELECT value_json FROM responses_current WHERE item_id = ?1').bind(item).first();
+    const untilStored = async (item, value, label) => { for (const t0 = Date.now(); ; await sleep(150)) {
+      const r = await stored(item); if (r && JSON.parse(r.value_json).option_id === value) return;
+      if (Date.now() - t0 > 20000) throw new Error(`${label} never reached the server; save state: ${await evaluate(`document.querySelector('.kx-save')?.textContent`)}`); } };
+    const network = (offline) => send('Network.emulateNetworkConditions', { offline, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+    const secondsLeft = async () => { const t = await evaluate(`document.querySelector('.kx-timer')?.textContent || ''`); const p = t.match(/(\d+):(\d{2})(?::(\d{2}))?/);
+      assert.ok(p, `timer text: ${t}`); return p[3] ? (+p[1]) * 3600 + (+p[2]) * 60 + (+p[3]) : (+p[1]) * 60 + (+p[2]); };
+    await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+    await waitFor(`document.querySelector('[data-act="create"]')`, 15000, 'start screen'); await click('[data-act="create"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'Lesen intro'); await click('[data-act="start"][data-module="lesen"]');
+    await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
+    const pick = (n) => evaluate(`(() => { const r = [...document.querySelectorAll('#kx-main .kx-part:not([hidden]) input[type=radio]:not([disabled])')].filter((x) => !x.closest('.kx-example'))[${n}]; r.click(); return { item: r.dataset.item, value: r.value }; })()`);
+    const a1 = await pick(0);
+    await untilStored(a1.item, a1.value, 'the first answer');
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'first answer saved');
+    const lease0 = await dev.env.DB.prepare('SELECT lease_id, generation FROM attempt_leases').first();
+    // the lid closes right after a click: the network is gone first, so this answer is only queued on the device
+    await network(true);
+    const a2 = await pick(3);
+    await waitFor(`/Offline|Speichert/.test(document.querySelector('.kx-save')?.textContent || '')`, 10000, 'answer queued while offline');
+    assert.equal(await stored(a2.item), null, 'nothing reached the server while offline');
+    const before = await secondsLeft();
+    // proof that the page really sleeps: a 100 ms ticker must show one gap as long as the freeze
+    await evaluate(`window.__ticks = [Date.now()]; setInterval(() => window.__ticks.push(Date.now()), 100)`);
+    // sleep: page frozen, lease expired on the server meanwhile (TEST server only; the real TTL is 60 s)
+    await send('Page.setWebLifecycleState', { state: 'frozen' });
+    const SLEEP_MS = 8000;
+    await sleep(SLEEP_MS / 2);
+    await dev.env.DB.prepare('UPDATE attempt_leases SET expires_at = 1').run();
+    await sleep(SLEEP_MS / 2);
+    assert.equal(await stored(a2.item), null, 'a frozen page sends nothing');
+    // wake: page active, then the network returns (Wi-Fi reconnects after the CPU resumes)
+    await send('Page.setWebLifecycleState', { state: 'active' });
+    await network(false);
+    await untilStored(a2.item, a2.value, 'the answer queued before the sleep');
+    const a3 = await pick(6);
+    await untilStored(a3.item, a3.value, 'an answer given after waking');
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Gespeichert after waking');
+    const gap = await evaluate(`Math.max(...window.__ticks.slice(1).map((t, i) => t - window.__ticks[i]))`);
+    assert.ok(gap >= SLEEP_MS - 1000, `the page was frozen: no timer ran for ${gap} ms`);
+    const lease1 = await dev.env.DB.prepare('SELECT lease_id, generation FROM attempt_leases').first();
+    assert.ok(lease1.lease_id !== lease0.lease_id && lease1.generation === lease0.generation + 1, `lease reacquired once: ${JSON.stringify({ lease0, lease1 })}`);
+    assert.ok(await dev.env.DB.prepare("SELECT 1 FROM audit_log WHERE action = 'lease_reacquired'").first(), 'audited as lease_reacquired');
+    assert.equal((await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM incidents').first()).n, 0, 'a sleep is not a takeover incident');
+    const page = await evaluate(`({ takeover: !!document.querySelector('[data-act="takeover"]'), stopped: /Speichern gestoppt/.test(document.body.innerText), inModule: document.querySelectorAll('input[type=radio]').length > 20 })`);
+    assert.deepEqual(page, { takeover: false, stopped: false, inModule: true }, 'still in the module after waking');
+    const after = await secondsLeft();
+    assert.ok(before - after >= SLEEP_MS / 1000 - 1, `the timer counted the sleep: ${before}s → ${after}s`);
+    assert.equal((await dev.env.DB.prepare("SELECT status FROM attempt_modules WHERE module = 'lesen'").first()).status, 'running');
+    log('sleep-wake', 'PASS', { slept_s: SLEEP_MS / 1000, frozen_gap_ms: gap, timer: [before, after], lease_generation: [lease0.generation, lease1.generation] });
+    return b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+  } finally { b.close(); dev.server.close(); }
+}
+
 /* ENGINE §10 / MOCK M-25: the smallest supported viewport is 360×640 */
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 360×640', w: 360, h: 640, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, ''], ['sleep-wake', runSleepWake, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'sleep-wake') { results.push({ vp: `sleep-wake ${PRACTICE.name} (Lesen-only, Q3a)`, uncaught: await fn() }); continue; }
   if (name === 'confidentiality') { results.push({ vp: `confidentiality ${PRACTICE.name} (Lesen-only, Q4a)`, uncaught: await fn() }); continue; }
   if (name === 'review-form') { results.push({ vp: `review form ${PRACTICE.name} (Lesen, file://)`, uncaught: await fn() }); continue; }
   if (name === 'lesen-only') { results.push({ vp: `lesen-only ${PRACTICE.name} (mobile start + desktop)`, uncaught: await fn() }); continue; }

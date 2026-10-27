@@ -4,7 +4,7 @@ import { createApi, ExamApiError } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
-import { createRenderer, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, submittedNote, previousModule, adUsage, usedText, adMatches, notesPanel, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
+import { createRenderer, itemNo, rejectedNotice, startChoice, startScreen, header, resultPage, moduleNav, reviewPanel, itemReview, recordingsSection, ratedFeedback, attemptHistory, esc, MODULE_LABELS, saveAnnouncement, errorView, TAKEOVER_NOTE, breakApplies, breakPanel, BREAK_MS, moduleIntro, submittedNote, previousModule, adUsage, usedText, adMatches, notesPanel, RESULT_ACTIONS, partChoices, partPracticeSection } from './render.js';
 import { CRITERION_LABELS } from './rating.js';
 import { nextAction, assertSupported, partProgress } from './engine.js';
 import { phaseAt, phaseLabel, ControlledPlayer, volumeControl, clampVolume, VOLUME_KEY } from './hoeren.js';
@@ -262,7 +262,15 @@ async function openModule(module) {
       else if (code === 'auth_required' || code === 'exam_access_required') { clearInterval(S.hb); clearInterval(S.timer); fail(new ExamApiError(code === 'auth_required' ? 401 : 403, code)); } else refresh(); },
     onDropped: (code, batch) => syncFromServer(batch.map((b) => b.item_id)).then(() => {
       if (code === 'topic_locked') { announce('Die Themenwahl ist gesperrt. Ihre Änderung wurde nicht gespeichert.'); applyTopicLock(false); }
-    }).catch(() => {})
+    }).catch(() => {}),
+    /* one answer the server will never accept (autosave REJECT_CODES): the other answers are saved; this one is held back
+       and the learner is told. A text stays as typed (to be shortened); a choice shows its saved value again. */
+    onRejected: (code, entry) => {
+      console.warn('[kx-autosave]', 'answer not accepted', { code, item: entry.item_id });
+      const it = itemById(entry.item_id);
+      const say = () => announce(rejectedNotice(code, it ? itemNo(it) : ''));
+      if (entry.value && typeof entry.value.text === 'string') say(); else syncFromServer([entry.item_id]).then(say, say);
+    }
   });
   await S.autosave.load(saved.answers);
   if (module === 'sprechen' && S.pkg.timing.kind === 'speaking_phases') {
@@ -274,8 +282,12 @@ async function openModule(module) {
   // unsent local answers are shown again — except for locked items, whose server value is authoritative
   const local = (await S.store.get(`answers:${id}:${module}`)) || {};
   for (const v of Object.values(local.pending || {})) if (!S.locked.has(v.item_id)) S.answers[v.item_id] = v.value;
+  // a text held back as too long (autosave REJECT_CODES) is shown again as typed, so it can be shortened, not lost
+  const held = Object.values(local.rejected || {}).filter((v) => v.value && typeof v.value.text === 'string' && !(local.pending || {})[v.item_id] && !S.locked.has(v.item_id));
+  for (const v of held) S.answers[v.item_id] = v.value;
   paint();
   guardBack();
+  if (held.length) { const it = itemById(held[0].item_id); announce(rejectedNotice(held[0].code, it ? itemNo(it) : '')); }
   if (S.locked.size) applyTopicLock(false);
   clearInterval(S.timer);
   S.timer = setInterval(tick, 250);
@@ -625,6 +637,7 @@ const announce = (text) => { const el = $('#kx-announce'); if (el) el.textConten
 const safeId = (s) => String(s).replace(/[^a-zA-Z0-9_-]/g, '_');
 
 /* Server answers for these items replace the local ones (after a refused save, e.g. topic_locked). */
+const itemById = (itemId) => S.pkg.parts.flatMap((p) => p.tasks.flatMap((t) => t.items)).find((i) => i.item_id === itemId);
 async function syncFromServer(itemIds) {
   const saved = await api.answers(S.attempt.attempt_id, S.lease, S.module);
   for (const id of itemIds) {

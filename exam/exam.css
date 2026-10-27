@@ -72,6 +72,8 @@ p { margin: 0 0 16px; }
 .kx-foot { position: sticky; bottom: 0; display: flex; justify-content: flex-end; padding: 16px 0; background: var(--canvas); border-top: 1px solid var(--line); }
 /* part navigation, progress and the in-page review (spacing scale only; teal accent; no decoration colours) */
 .kx-part, .kx-item, .kx-review, [id^="part-"] { scroll-margin-top: calc(var(--kx-bar-h, 120px) + 8px); }
+/* WCAG 2.2 SC 2.4.11: a control that receives keyboard focus is scrolled clear of the sticky bar and the sticky footer */
+#kx-main :is(input, select, textarea, button, a[href], [tabindex]) { scroll-margin-top: calc(var(--kx-bar-h, 120px) + 8px); scroll-margin-bottom: calc(var(--kx-foot-h, 80px) + 8px); }
 .kx-progress { margin: 0; color: var(--ink-secondary); font: 500 12px/1.4 var(--font-mono); font-variant-numeric: tabular-nums; }
 .kx-nav { margin: 12px 0 0; }
 .kx-nav ol { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }

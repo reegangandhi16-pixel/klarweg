@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality|sleep-wake runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality|sleep-wake|focus-not-obscured runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -2342,12 +2342,77 @@ async function runSleepWake() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* WCAG 2.2 SC 2.4.11 Focus Not Obscured (Minimum): while Lesen runs, every keyboard focus stop in the module (Tab forward
+   from the first answer, Shift+Tab back from the last) is scrolled into view at least partly clear of the sticky bar and
+   the sticky "Modul abgeben" footer — never entirely behind either. At 1280×800 and 360×640, every part. Controls that
+   live in the bar or footer themselves are the sticky elements, not obscured content; an element taller than the space
+   between them may be partly covered (the SC asks for "not entirely hidden"). Found in Safari (flag buttons focused
+   behind the footer) and fixed by the scroll-margin in exam.css + --kx-foot-h. */
+async function runFocusNotObscured() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), flags: { EXAM_MODULE_ONLY: 'lesen', EXAM_RELEASE_FORMS: PRACTICE.id } });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const vp = (w, h, mobile) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile });
+    const tab = async (shift) => {
+      for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9, modifiers: shift ? 8 : 0 });
+      await sleep(60);
+    };
+    const where = () => evaluate(`(() => { const a = document.activeElement; if (!a || a === document.body || !a.closest('#kx-main')) return null;
+      const r = a.getBoundingClientRect(), bar = document.querySelector('.kx-bar').getBoundingClientRect(), foot = document.querySelector('.kx-foot').getBoundingClientRect();
+      const top = Math.max(bar.bottom, 0), bottom = Math.min(foot.hidden ? innerHeight : foot.top, innerHeight);
+      return { id: (a.dataset.item || a.dataset.flag || a.id || a.className || a.tagName).toString().slice(-24), tag: a.tagName, top: Math.round(r.top), bottom: Math.round(r.bottom),
+        space: [Math.round(top), Math.round(bottom)], hidden: r.bottom <= top || r.top >= bottom }; })()`);
+    await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+    await waitFor(`document.querySelector('[data-act="create"]')`, 15000, 'start screen'); await click('[data-act="create"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="lesen"]')`, 15000, 'Lesen intro'); await click('[data-act="start"][data-module="lesen"]');
+    await waitFor(`document.querySelectorAll('input[type=radio]').length > 20`, 15000, 'Lesen rendered');
+    const report = {};
+    for (const [w, h, mobile] of [[1280, 800, false], [360, 640, true]]) {
+      await vp(w, h, mobile); await sleep(300);
+      for (let part = 1; part <= 5; part++) {
+        await evaluate(`document.querySelector('[role="tab"][data-tab="${part}"]').click()`); await sleep(300);
+        for (const shift of [false, true]) {
+          // start at the first (Tab) or last (Shift+Tab) control of the open part, scrolled to the far end so focus must travel
+          await evaluate(`(() => { const c = [...document.querySelectorAll('#kx-main .kx-part:not([hidden]) :is(input, select, textarea, button, a[href])')].filter((x) => !x.disabled && x.offsetParent);
+            window.scrollTo(0, ${shift} ? document.body.scrollHeight : 0); (${shift} ? c[c.length - 1] : c[0]).focus({ preventScroll: true }); return c.length; })()`);
+          const seen = new Set(), bad = [];
+          for (let i = 0; i < 80; i++) {
+            await tab(shift);
+            const f = await where(); if (!f) break;      // left the module (bar, footer or outside): this direction is done
+            if (seen.has(f.id + f.top)) continue; seen.add(f.id + f.top);
+            if (f.hidden) bad.push(f);
+          }
+          report[`${w} Teil ${part} ${shift ? 'Shift+Tab' : 'Tab'}`] = seen.size;
+          assert.deepEqual(bad, [], `focus entirely hidden behind the sticky bar/footer at ${w}px, Teil ${part}, ${shift ? 'Shift+Tab' : 'Tab'}`);
+        }
+      }
+    }
+    assert.ok(Object.values(report).reduce((a, n) => a + n, 0) >= 100, `enough focus stops checked ${JSON.stringify(report)}`);
+    log('focus-not-obscured', 'PASS', report);
+    return b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+  } finally { b.close(); dev.server.close(); }
+}
+
 /* ENGINE §10 / MOCK M-25: the smallest supported viewport is 360×640 */
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 360×640', w: 360, h: 640, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, ''], ['sleep-wake', runSleepWake, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, ''], ['sleep-wake', runSleepWake, ''], ['focus-not-obscured', runFocusNotObscured, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'focus-not-obscured') { results.push({ vp: `focus-not-obscured ${PRACTICE.name} (Lesen-only, 1280 + 360)`, uncaught: await fn() }); continue; }
   if (name === 'sleep-wake') { results.push({ vp: `sleep-wake ${PRACTICE.name} (Lesen-only, Q3a)`, uncaught: await fn() }); continue; }
   if (name === 'confidentiality') { results.push({ vp: `confidentiality ${PRACTICE.name} (Lesen-only, Q4a)`, uncaught: await fn() }); continue; }
   if (name === 'review-form') { results.push({ vp: `review form ${PRACTICE.name} (Lesen, file://)`, uncaught: await fn() }); continue; }

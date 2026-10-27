@@ -337,13 +337,18 @@ function revealPart(el) {
 }
 /* The part on screen (the last one whose heading has passed the sticky bar) is marked in the part navigation. */
 /* The sticky bar's real height (it grows with a status line or an alert) drives where part jumps land and where the Lesen
-   texts column sticks (CSS var --kx-bar-h). */
+   texts column sticks (CSS var --kx-bar-h). The sticky "Modul abgeben" footer's height (--kx-foot-h, 0 while hidden) keeps
+   a keyboard-focused control from being scrolled in behind it (WCAG 2.2 SC 2.4.11; see the scroll-margin in exam.css). */
 let barObserver = null;
 function watchBar() {
   const bar = $('.kx-bar'); if (!bar || typeof ResizeObserver === 'undefined') return;
   if (barObserver) barObserver.disconnect();
-  barObserver = new ResizeObserver(() => document.documentElement.style.setProperty('--kx-bar-h', `${Math.ceil(bar.getBoundingClientRect().height)}px`));
-  barObserver.observe(bar);
+  const foot = $('.kx-foot');
+  barObserver = new ResizeObserver(() => {
+    document.documentElement.style.setProperty('--kx-bar-h', `${Math.ceil(bar.getBoundingClientRect().height)}px`);
+    document.documentElement.style.setProperty('--kx-foot-h', `${foot ? Math.ceil(foot.getBoundingClientRect().height) : 0}px`);
+  });
+  barObserver.observe(bar); if (foot) barObserver.observe(foot);
 }
 let partFrame = 0;
 /* "Resume at the same part and item" (GOETHE-B1-DIGITAL §10 refresh/crash, Lesen + Schreiben): the last item the learner

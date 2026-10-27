@@ -16,7 +16,7 @@
     "build-coverage": "tsx scripts/build-coverage-json.ts",
     "generate:chapter-pdfs": "node scripts/generate-chapter-resources.mjs",
     "prebuild": "npm run verify-audio-coverage",
-    "test": "node exam-content/tools/check-public-boundary.mjs && node scripts/build-tutor-registry.mjs && node --test access/worker/test/*.test.mjs tutor/worker/test/*.test.mjs tutor/eval/*.test.mjs scripts/*.test.mjs && npm run check:generated",
+    "test": "node exam-content/tools/check-public-boundary.mjs && node scripts/build-tutor-registry.mjs && node --test access/worker/test/*.test.mjs tutor/worker/test/*.test.mjs tutor/eval/*.test.mjs scripts/*.test.mjs public/audio/*.test.mjs && npm run check:generated",
     "build:tutor-registry": "node scripts/build-tutor-registry.mjs",
     "tutor:eval": "node tutor/eval/run-eval.mjs",
     "deploy:tutor": "cd tutor/worker && npx wrangler deploy",

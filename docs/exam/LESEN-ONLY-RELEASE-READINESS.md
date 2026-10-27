@@ -39,7 +39,7 @@ The release is blocked until every row in §1–§4 is closed. A row closes only
 |---|---|---|---|
 | Q1 | Safari (macOS; iOS optional): Lesen-only journey, tabs, flags, overview, submit, result | Local demo | Nothing (runs on a Mac) |
 | Q2 | Safari with its default cross-site cookie blocking → "Cookies blockiert", not "Bitte anmelden" (`NONPROD-SETUP.md` A2) | Non-production site | O8 (the current build deployed) |
-| Q3a | Laptop sleep > 60 s mid-Lesen: answers still save after wake, without a reload | Local demo | Nothing |
+| Q3a | Laptop sleep > 60 s mid-Lesen: answers still save after wake, without a reload | Local demo | Nothing. **Approximated in CI** by the browser scenario `KX_E2E_ONLY=sleep-wake` (offline + frozen page + expired lease); a real OS sleep still needs the manual §6.3 run |
 | Q3b | Same on the real non-production stack (`NONPROD-SETUP.md` A6) | Non-production site | O8 |
 | Q4a | DevTools confidentiality: no key, explanation or evidence reaches the browser before submission (A11) | Local demo (Chrome and Safari Web Inspector) | Nothing. **Chrome is automated** by the browser scenario `KX_E2E_ONLY=confidentiality` (CI, direct and via the Access proxy); Safari still needs the manual §6.4 run |
 | Q4b | Same against the non-production Worker | Non-production site | O8 |
@@ -120,7 +120,8 @@ the real Workers.)
 |---|---|---|---|---|---|
 | Q1 | | | | | |
 | Q2 | | | | | |
-| Q3a | | | | | |
+| Q3a (simulated) | 2026-10-27 | Claude, automated (`browser-e2e.mjs` scenario `sleep-wake`) | Chrome 156.0.8078.48 headless, macOS, branch `test/exam-q3a-sleep-wake` on main `c179fb4f`, form P1, direct and `KX_DEV_PROXY=1` | PASS | Network offline with one answer queued, page frozen 8 s (CDP `Page.setWebLifecycleState`; a 100 ms ticker shows an 8.7 s gap, so no timer ran) while the lease expired on the server; after waking, without a reload, the queued answer and a new one were stored, lease generation 1 → 2 (`lease_reacquired` audited), no incident, no takeover, no "Speichern gestoppt", timer 3899 s → 3889 s. Mutation check: a broken lease reacquire fails the scenario. Not covered: a real OS suspend (the local server sleeping too, a real 60 s TTL). |
+| Q3a (real sleep) | | | | | |
 | Q3b | | | | | |
 | Q4a (Chrome) | 2026-10-27 | Claude, automated (`browser-e2e.mjs` scenario `confidentiality`) | Chrome 156.0.8078.48 headless, macOS, branch `test/exam-q4a-confidentiality` on main `1eac88b2`, form P1, direct and `KX_DEV_PROXY=1` | PASS | 62 response bodies captured over CDP (13 `/exam/v1`, package twice: start + reload); no `/exam/v1` JSON field in {correct, correct_answer, key, keys, key_json, explanation, explanation_de, evidence, transcript, transcripts, scoring_key}; none of the form's 68 explanation/transcript texts in any body, in Web Storage or in the DOM; review answers 409 while Lesen runs. Control: after submission the same scan finds them in the item review. Mutation checks: a leaked explanation text and a leaked `correct` field in the package both fail the scenario. |
 | Q4a (Safari) | | | | | |

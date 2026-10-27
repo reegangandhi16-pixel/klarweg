@@ -1,6 +1,6 @@
 // Static guards for the Lesen practice page (lesen-practice.html + lesen-practice-data.js).
-// The page is PUBLISHED (owner-authorised 2026-10-24; no independent German review yet). These tests
-// keep it published and linked, keep it offline (no network, no storage), and keep the content honest:
+// The page is an UNPUBLISHED draft again (public 2026-10-24 to 2026-10-27, hidden by the owner). These tests
+// keep it unpublished and unlinked, keep it offline (no network, no storage), and keep the content honest:
 // every passage matches its source chapter text except the edits it declares, and every
 // evidence quote appears verbatim in the passage.
 import { test } from 'node:test';
@@ -21,36 +21,27 @@ function chapterReadingText(file) {
   return text.trim();
 }
 
-const URL_LIVE = 'https://reegangandhi16-pixel.github.io/klarweg/lesen-practice.html';
-
-test('PUBLISHED: indexed, canonical, allowlisted for Pages, in the sitemap; review record is honest', () => {
-  assert.equal(DATA.review.status, 'published');
-  assert.equal(DATA.review.authorisedBy, 'owner');
+test('UNPUBLISHED: not allowlisted for Pages, noindex, no canonical, not in the sitemap; review record is honest', () => {
+  // Hidden again 2026-10-27 (owner: not working well enough). Pages deploys only what
+  // .github/pages-allowlist.txt lists, so leaving it out is what stops the URL being served.
+  assert.equal(DATA.review.status, 'unpublished');
+  assert.equal(DATA.review.unpublishedOn, '2026-10-27');
   assert.equal(DATA.review.independentReview, null, 'no independent review is claimed until one happens');
-  assert.equal(/<meta name="robots"[^>]*noindex/.test(html), false, 'noindex is removed');
-  assert.equal(/UNPUBLISHED/.test(html), false, 'draft comment is removed');
-  assert.match(html, new RegExp(`<link rel="canonical" href="${URL_LIVE}">`));
-  assert.match(html, new RegExp(`<meta property="og:url" content="${URL_LIVE}">`));
   const allow = read('.github/pages-allowlist.txt').split('\n').map((l) => l.trim());
-  for (const f of ['lesen-practice.html', 'lesen-practice-data.js']) assert.ok(allow.includes(f), `${f} is in .github/pages-allowlist.txt`);
-  const sitemap = read('sitemap.xml');
-  assert.equal(sitemap.split(`<loc>${URL_LIVE}</loc>`).length - 1, 1, 'sitemap lists the URL exactly once');
+  for (const f of ['lesen-practice.html', 'lesen-practice-data.js']) assert.equal(allow.includes(f), false, `${f} is NOT in .github/pages-allowlist.txt`);
+  assert.equal(allow.some((l) => l.startsWith('GLOB:') && !l.startsWith('GLOB:chapter/') && !l.startsWith('GLOB:audio-timing/')), false,
+    'no root-level glob that could pull the draft back into the Pages artifact');
+  assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
+  assert.match(html, /UNPUBLISHED DRAFT/);
+  assert.equal(/rel="canonical"|og:url|twitter:card/.test(html), false, 'no canonical or share metadata while unpublished');
+  assert.equal(read('sitemap.xml').includes('lesen-practice'), false, 'not in sitemap.xml');
 });
 
-test('LINKED: every page with the shared nav/footer links the page once per nav, drawer and footer', () => {
-  const link = /<a href="lesen-practice\.html"(?: class="active" aria-current="page")?>Lesen Practice<\/a>/g;
-  const goethe = /<a href="goethe-exam\.html"(?: class="active")?>Goethe Exam<\/a>/g;
-  // refund-policy.html is a protected legal page (scripts/live-*.test.mjs SCOPE guards), so it is left unchanged.
-  const pages = readdirSync(new URL('.', root)).filter((f) => f.endsWith('.html') && f !== 'refund-policy.html' && goethe.test(read(f)) && !(goethe.lastIndex = 0));
-  assert.ok(pages.includes('index.html') && pages.length >= 18, `found the pages with site navigation (${pages.length})`);
-  for (const f of pages) {
-    const s = read(f);
-    const g = [...s.matchAll(goethe)].length, l = [...s.matchAll(link)].length;
-    assert.equal(l, g, `${f}: one "Lesen Practice" link beside each nav/footer "Goethe Exam" link`);
-    assert.equal([...s.matchAll(/<a [^>]*href="[^"]*lesen-practice\.html"/g)].length, l, `${f}: no other or nested-path variants`);
-  }
-  const navs = [...html.matchAll(/<a href="lesen-practice\.html" class="active" aria-current="page">/g)].length;
-  assert.equal(navs, 2, 'the page marks itself active in the desktop nav and the drawer only');
+test('UNLINKED: no page and no site script links the draft', () => {
+  const files = readdirSync(new URL('.', root)).filter((f) => (f.endsWith('.html') || f === 'site.js') && f !== 'lesen-practice.html');
+  assert.ok(files.includes('index.html') && files.length >= 18, `scanned the root pages (${files.length})`);
+  for (const f of files) assert.equal(read(f).includes('lesen-practice'), false, `${f} does not link the draft`);
+  assert.equal(/href="lesen-practice\.html"/.test(html), false, 'the draft does not link itself in its nav');
 });
 
 test('the page is offline: no fetch, XHR, beacons, storage, auth or analytics scripts', () => {

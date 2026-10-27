@@ -1,5 +1,5 @@
 /* ============================================================
-   KLARWEG LESEN PRACTICE — practice sets (PUBLISHED)
+   KLARWEG LESEN PRACTICE — practice sets (UNPUBLISHED DRAFT)
    Self-study reading practice. Not an exam: the answer key ships
    with the page on purpose, and nothing the learner chooses
    leaves the browser.
@@ -10,15 +10,20 @@
    fixed in the chapter too. Questions, explanations and
    evidence quotes are new. They were checked in-house by Claude
    (PR #231, #232); no independent German reviewer has reviewed
-   them. Publication was authorised by the owner — see `review`.
+   them. Published 2026-10-24 on the owner's authority, then hidden
+   again on 2026-10-27 because it was not working well enough —
+   see `review`. It must not be republished without a fix,
+   review and a new owner sign-off.
 
    Every `evidence` string must appear verbatim in the passage;
    scripts/lesen-practice.test.mjs enforces that.
 ============================================================ */
 const LESEN_PRACTICE = {
   review: {
-    status: 'published',
+    status: 'unpublished',
     publishedOn: '2026-10-24',
+    unpublishedOn: '2026-10-27',
+    unpublishedReason: 'owner: not working well enough; hidden pending rework',
     authorisedBy: 'owner',
     contentCheck: 'in-house (Claude), PR #231 and #232',
     independentReview: null

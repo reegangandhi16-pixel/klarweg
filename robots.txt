@@ -15,4 +15,4 @@ Disallow: /audio-manifests/
 Disallow: /content/
 Disallow: /screenshots/
 
-Sitemap: https://reegangandhi16-pixel.github.io/klarweg/sitemap.xml
+Sitemap: https://klarweg.in/sitemap.xml

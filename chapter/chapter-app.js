@@ -5,7 +5,15 @@
    Runs BEFORE chapter-story.js so GSAP sees a populated DOM.
 ============================================================ */
 (function () {
-  const C = window.CHAPTER;
+  // POPUP-ONLY HOST (the homepage). A page that is not a chapter but shows
+  // word popups sets window.KW_WORD_POP_HOST = { lexiconSrc } before loading
+  // this file. It then gets the SAME popup (renderWordPop) through the SAME
+  // lookup pipeline, audio and dismissal as every chapter, via
+  // window.KW_WordPop.open(el, token) — and nothing else: no dashboard, no
+  // access gate, no auto-linkify of the host's own markup. Chapter pages
+  // never set it, so for them nothing below changes.
+  const POP_HOST = window.KW_WORD_POP_HOST || null;
+  const C = window.CHAPTER || (POP_HOST ? { id: 'popup-host', sections: [], vocab: [], quiz: [], xp: 0 } : null);
   if (!C) { console.error('CHAPTER data missing'); return; }
 
   // Sentence X-Ray is paused as of the "pause" decision: the full
@@ -28,12 +36,18 @@
      HTML file references global-lexicon.js directly. Fires immediately on
      script execution (in parallel with the rest of page render); by the
      time a learner actually clicks a word the fetch has long resolved. */
+  // Popup-only host: the lexicon is requested once the host page has loaded
+  // and gone idle (it is ~0.7 MB gzipped), or at the first popup, whichever
+  // comes first. Chapters keep loading it immediately, as below.
+  let loadHostLexicon = function () {};
   (function loadGlobalLexicon() {
     if (window.KW_GLOBAL_LEXICON || document.getElementById('kw-global-lexicon')) return;
     const s = document.createElement('script');
     s.id = 'kw-global-lexicon';
-    s.src = 'global-lexicon.js';
+    s.src = POP_HOST ? POP_HOST.lexiconSrc : 'global-lexicon.js';
     s.onload = function () {
+      // A popup-only host has no chapter markup to re-sweep.
+      if (POP_HOST) return;
       // DO NOT add `WORDIDX = null` here. Tried TWICE and reverted both times.
       //
       // The race it targets is real: buildWordIndex() is lazy, classConflict()
@@ -79,6 +93,12 @@
         wrapWordsIn(elDe);
       });
     };
+    if (POP_HOST) {
+      loadHostLexicon = function () { if (!s.isConnected) document.head.appendChild(s); };
+      const idle = function () { if ('requestIdleCallback' in window) requestIdleCallback(loadHostLexicon, { timeout: 4000 }); else setTimeout(loadHostLexicon, 1500); };
+      if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
+      return;
+    }
     document.head.appendChild(s);
   })();
 
@@ -227,7 +247,8 @@
       for (const name of pref) { const m = all.find(v => (v.name || '').toLowerCase().includes(name)); if (m) { voice = m; return; } }
       voice = all[0] || null;
     }
-    if ('speechSynthesis' in window) { pick(); speechSynthesis.onvoiceschanged = pick; }
+    // A popup-only host keeps its own onvoiceschanged handler — listen, don't overwrite.
+    if ('speechSynthesis' in window) { pick(); if (POP_HOST) speechSynthesis.addEventListener('voiceschanged', pick); else speechSynthesis.onvoiceschanged = pick; }
     function speakTTS(text, rate, onend) {
       if (!('speechSynthesis' in window)) { onend && onend(); return; }
       speechSynthesis.cancel();
@@ -2130,10 +2151,15 @@
   }
 
   let wordPop, wordPopBackdrop, wpHistory = [], wpIndex = -1;
+  // Keyboard focus: the word that opened the popup gets focus back on close.
+  let wpOpener = null;
   function closeWordPop() {
+    const wasOpen = !!(wordPop && wordPop.classList.contains('is-open'));
     if (wordPop) wordPop.classList.remove('is-open');
     if (wordPopBackdrop) wordPopBackdrop.classList.remove('is-open');
     wpHistory = []; wpIndex = -1;
+    const opener = wpOpener; wpOpener = null;
+    if (wasOpen && opener && opener.isConnected && typeof opener.focus === 'function') opener.focus({ preventScroll: true });
   }
   // openWordPop = a fresh entry point (click from the page): starts a new
   // history/breadcrumb trail. navigateToWord = a click INSIDE an already-open
@@ -2153,6 +2179,8 @@
     return t;
   }
   function openWordPop(e, t, siblingTokens) {
+    const src = e && (e.currentTarget || e.target || (e.nodeType === 1 && e));
+    if (src && src.nodeType === 1 && !(wordPop && wordPop.contains(src))) wpOpener = src;
     wpHistory = [resolveFullEntry(withOccurrenceRole(t, e), siblingTokens)]; wpIndex = 0;
     renderWordPop(wpHistory[0]);
   }
@@ -2829,10 +2857,20 @@
   function renderWordPop(t) {
     if (!wordPop) {
       wordPopBackdrop = el('div', { class: 'word-pop-backdrop' });
-      wordPop = el('div', { class: 'word-pop', role: 'dialog', 'aria-modal': 'true' });
+      wordPop = el('div', { class: 'word-pop', role: 'dialog', 'aria-modal': 'true', tabindex: '-1' });
       document.body.append(wordPopBackdrop, wordPop);
       wordPopBackdrop.addEventListener('click', closeWordPop);
       document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') closeWordPop(); });
+      // Modal dialog: Tab cycles inside the open popup instead of reaching the
+      // page behind the backdrop.
+      wordPop.addEventListener('keydown', (ev) => {
+        if (ev.key !== 'Tab') return;
+        const f = $$('button:not([disabled]), summary, [tabindex="0"]', wordPop).filter((n) => n.offsetParent !== null);
+        if (!f.length) { ev.preventDefault(); return; }
+        const first = f[0], last = f[f.length - 1];
+        if (ev.shiftKey && (document.activeElement === first || document.activeElement === wordPop)) { ev.preventDefault(); last.focus(); }
+        else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+      });
     }
     // Not every inline .r-* role maps to a --g-* grammar-color var — a few
     // (conjunction/name/letter) are deliberately styled with plain ink tones
@@ -2878,6 +2916,7 @@
     wordPop.style.setProperty('--pop-tint', tint);
     wordPop.style.setProperty('--pop-deep', deep);
     wordPop.innerHTML = '';
+    wordPop.setAttribute('aria-label', t.w);   // the dialog is named by its headword
 
     // Close button
     const closeBtn = el('button', { class: 'wp-close', type: 'button', 'aria-label': 'Close', html: '&#10005;' });
@@ -3267,6 +3306,9 @@
     requestAnimationFrame(() => {
       wordPopBackdrop.classList.add('is-open');
       wordPop.classList.add('is-open');
+      // Focus moves into the dialog (also after in-popup navigation, which
+      // rebuilds its content) so the keyboard continues from here.
+      if (!wordPop.contains(document.activeElement)) wordPop.focus({ preventScroll: true });
     });
   }
 
@@ -3881,6 +3923,7 @@
         const span = document.createElement('span');
         span.className = ('de-link ' + roleFor(word, null, isSentenceInitial(txt, m.index, node))).trim();
         span.textContent = word;
+        span.dataset.noPopup = '1';   // colour only: never a keyboard word trigger
         frag.appendChild(span);
         last = m.index + word.length;
       }
@@ -6553,7 +6596,63 @@
       .observe(document.body, { childList: true, subtree: true });
   }
 
+  /* ---------- Word triggers: keyboard access (chapters + popup hosts) ----------
+     Every word that opens the popup is an inline span with a click handler
+     (.de-link: auto-linked and in-popup words; .rw: authored story / reading /
+     example / listening tokens). Each becomes a button for the keyboard —
+     tabindex 0, role=button — without changing its inline look; Enter / Space
+     fire the SAME click, so there is no second way to open a popup. A word
+     inside another control is left alone (never a nested interactive
+     element). A host page names its own triggers (KW_WORD_POP_HOST.triggers). */
+  const WORD_TRIGGERS = POP_HOST
+    ? [POP_HOST.triggers, '.word-pop .de-link'].filter(Boolean).join(', ')
+    : '.de-link, .rw';
+  const IN_CONTROL = 'button, a[href], summary, label, select, textarea, input, [role="button"], [contenteditable="true"]';
+  function markWordTriggers(root) {
+    if (!root || root.nodeType !== 1) return;
+    const list = root.matches(WORD_TRIGGERS) ? [root] : [];
+    root.querySelectorAll(WORD_TRIGGERS).forEach((n) => list.push(n));
+    list.forEach((n) => {
+      if (n.hasAttribute('tabindex') || n.dataset.noPopup || (n.parentElement && n.parentElement.closest(IN_CONTROL))) return;
+      n.tabIndex = 0;
+      n.setAttribute('role', 'button');
+      n.setAttribute('aria-haspopup', 'dialog');
+    });
+  }
+  function watchWordTriggers() {
+    markWordTriggers(document.body);
+    if (typeof MutationObserver === 'function') {
+      new MutationObserver((list) => list.forEach((m) => m.addedNodes.forEach(markWordTriggers)))
+        .observe(document.body, { childList: true, subtree: true });
+    }
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key !== 'Enter' && ev.key !== ' ') return;
+      const t = ev.target;
+      if (!t || t.nodeType !== 1 || t.getAttribute('role') !== 'button' || !t.matches(WORD_TRIGGERS)) return;
+      ev.preventDefault();
+      t.click();
+    });
+  }
+
   function init() {
+    watchWordTriggers();
+    if (POP_HOST) {
+      // el: the clicked host element (its r-* class colours the headword, as
+      // on a chapter page); token: that occurrence's own authored data in the
+      // chapter token shape ({ w, en, hi, type, case, why, ex, … }).
+      window.KW_WordPop = {
+        open: function (el, token) { loadHostLexicon(); openWordPop(el, token); },
+        close: closeWordPop
+      };
+      // The same lang="de" marking a chapter gives its pop-ups, limited to the
+      // popup: the host's own markup is not this file's to change.
+      if (typeof MutationObserver === 'function') {
+        new MutationObserver((list) => list.forEach((m) => m.addedNodes.forEach((n) => { if (n.nodeType === 1 && n.closest('.word-pop')) markGerman(n); })))
+          .observe(document.body, { childList: true, subtree: true });
+      }
+      document.dispatchEvent(new CustomEvent('kw-wordpop-ready'));
+      return;
+    }
     watchGerman();
     if (window.KWAccess && typeof window.KWAccess.ready === 'function') {
       window.KWAccess.ready().then(function () {

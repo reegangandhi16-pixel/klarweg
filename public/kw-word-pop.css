@@ -1,0 +1,325 @@
+/* ============================================================
+   KLARWEG WORD POPUP — shared stylesheet
+   The ONE stylesheet for the word popup (.word-pop), its recursive
+   in-popup word links (.de-link), and the long-press audio speed menu.
+   Loaded by every chapter page (after chapter.css) and by the homepage,
+   so both render the identical popup from chapter-app.js renderWordPop().
+   Moved verbatim from chapter.css — edit here, never fork per page.
+============================================================ */
+
+/* Layer: chapters use the default (backdrop 80 · popup 81 · speed menu 85).
+   A host page whose own chrome sits higher sets --kw-word-pop-z on :root. */
+
+/* Course grammar-colour tokens a popup can show but a host page may lack or
+   define differently (the homepage has no --g-pronoun or B1+ role tokens and
+   its own --g-superlative). Values = chapter.css :root; the parity test keeps them equal. */
+:where(.word-pop) {
+  --g-pronoun: #185FA5;
+  --g-futur: #0E7490;
+  --g-comparative: #D97706;
+  --g-superlative: #9A3412;
+  --g-nnoun: #4338CA;
+  --g-purpose: #0F766E;
+  --g-prep-rel: #7C2D12;
+  --g-plusq: #6D28D9;
+  --g-temporal: #B45309;
+  --g-brauchen: #BE185D;
+  --g-reflexiv-akk: #0369A1;
+  --g-reflexiv-dat: #C2410C;
+  --g-connector: #4D7C0F;
+}
+
+/* German text inside the popup: the course's own .de rule (chapter.css),
+   repeated here at the same specificity so a host page without chapter.css
+   (the homepage) renders it identically. Popup rules below override it. */
+:where(.word-pop) .de { font-family: var(--font-german); font-weight: 500; }
+/* Role colours of the popup's own word links (headword parts, forms, examples):
+   the course map from chapter.css "Grammar word coloring", scoped to the popup at
+   the same specificity. scripts/word-popup-parity.test.mjs keeps the two identical. */
+:where(.word-pop) .r-subject, :where(.word-pop) .r-pronoun { color: var(--g-subject); }
+:where(.word-pop) .r-rhema { color: var(--g-object); font-weight: 700; }
+:where(.word-pop) .r-verb { color: var(--g-verb); }
+:where(.word-pop) .r-object { color: var(--g-object); }
+:where(.word-pop) .r-time { color: var(--g-time); }
+:where(.word-pop) .r-place { color: var(--g-place); }
+:where(.word-pop) .r-preposition { color: var(--g-preposition); }
+:where(.word-pop) .r-article { color: var(--g-article); }
+:where(.word-pop) .r-adjective { color: var(--g-adjective); }
+:where(.word-pop) .r-adverb { color: var(--g-adverb); }
+:where(.word-pop) .r-negation { color: var(--g-negation); }
+:where(.word-pop) .r-akkusativ { color: var(--g-akkusativ); }
+:where(.word-pop) .r-dativ { color: var(--g-dativ); }
+:where(.word-pop) .r-genitiv { color: var(--g-genitiv); }
+:where(.word-pop) .r-auxiliary { color: var(--g-auxiliary); }
+:where(.word-pop) .r-possessive { color: var(--g-possessive); }
+:where(.word-pop) .r-question { color: var(--g-question); }
+:where(.word-pop) .r-modalverb { color: var(--g-modalverb, #9F1239); }
+:where(.word-pop) .r-futur { color: var(--g-futur); }
+:where(.word-pop) .r-comparative { color: var(--g-comparative); }
+:where(.word-pop) .r-superlative { color: var(--g-superlative); }
+:where(.word-pop) .r-nnoun { color: var(--g-nnoun); }
+:where(.word-pop) .r-purpose { color: var(--g-purpose); }
+:where(.word-pop) .r-prep-rel { color: var(--g-prep-rel); }
+:where(.word-pop) .r-plusq { color: var(--g-plusq); }
+:where(.word-pop) .r-temporal { color: var(--g-temporal); }
+:where(.word-pop) .r-brauchen { color: var(--g-brauchen); }
+:where(.word-pop) .r-reflexiv-akk { color: var(--g-reflexiv-akk); }
+:where(.word-pop) .r-reflexiv-dat { color: var(--g-reflexiv-dat); }
+:where(.word-pop) .r-connector { color: var(--g-connector); }
+:where(.word-pop) .r-conjunction { color: var(--ink-secondary); }
+:where(.word-pop) .r-name { color: var(--ink-secondary); font-style: italic; }
+:where(.word-pop) .r-letter { color: var(--ink-secondary); font-family: var(--font-mono); font-weight: 600; }
+
+/* Auto-linked German words outside the reading passage — subtle until hover */
+.de-link {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0 1px; margin: 0 -1px;
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease);
+}
+.de-link:hover {
+  background: rgba(31,78,74,0.10);
+}
+.de-link:focus {
+  text-decoration: none;
+  outline: none;
+}
+/* Keyboard focus on a word-popup trigger (chapter-app.js makes every .de-link /
+   .rw a tabbable button): a visible ring, keyboard only — mouse and touch
+   focus stay unmarked, so the inline text looks exactly as before. */
+.de-link:focus-visible,
+.rw:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* The dialog itself takes focus when it opens; its frame is the indicator. */
+.word-pop:focus { outline: none; }
+/* Precedence rule: inside an active paradigm cell, the paradigm's own
+   active-state color always wins over recursive-navigation blue. Clicking
+   still works (cursor/handler untouched) — only the link color is
+   suppressed to inherit the paradigm's semantic color. One shared rule via
+   renderParadigmGrid()/wp-compare-cell — applies identically to every
+   paradigm type (Conjugation, Declension, Comparison, Article, Pronoun). */
+.wp-compare-cell.is-current .de-link { color: inherit; }
+.wp-compare-cell.is-current .de-link:hover { background: rgba(0,0,0,0.06); }
+/* Word Popup headword: the resolved semantic color (set inline on
+   .word-pop-de by renderWordPop) must win over the recursive link's own
+   independently-resolved role class (e.g. .r-name/.r-letter/.r-conjunction
+   set their own color) — same precedence rule as the paradigm active-cell
+   fix above, applied to the headword. */
+.word-pop-de .de-link { color: inherit; }
+
+.word-pop {
+  position: fixed; z-index: calc(var(--kw-word-pop-z, 80) + 1);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -45%) scale(0.97);
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(32px) saturate(1.3);
+  -webkit-backdrop-filter: blur(32px) saturate(1.3);
+  border: 1px solid rgba(255,255,255,0.8);
+  width: min(440px, calc(100vw - 32px));
+  max-height: 86vh; overflow-y: auto;
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lift);
+  padding: 52px 32px 30px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+}
+.word-pop.is-open { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
+
+/* Backdrop */
+.word-pop-backdrop {
+  position: fixed; inset: 0; z-index: var(--kw-word-pop-z, 80);
+  background: rgba(14,14,16,0.32);
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease);
+}
+.word-pop-backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+/* Close */
+.wp-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 14px; color: var(--ink-tertiary);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.wp-close:hover { background: rgba(14,14,16,0.06); color: var(--ink-secondary); }
+
+/* Fragment emphasis inside an active paradigm cell: secondary signal only
+   (weight, no color) — the active-cell ring/tint is the primary signal. */
+.wp-compare-fragment { font-weight: 700; }
+
+/* Back/forward + breadcrumb trail (recursive navigation within one popup) */
+.wp-nav { display: flex; align-items: center; gap: 4px; margin: -6px -4px 18px; padding-right: 34px; }
+.wp-nav-btn {
+  flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 17px; line-height: 1;
+  color: var(--ink-secondary); transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.wp-nav-btn:hover:not(:disabled) { background: var(--bg-elevated); }
+.wp-nav-btn:disabled { color: var(--ink-quaternary, var(--ink-tertiary)); opacity: 0.4; cursor: default; }
+.wp-breadcrumbs { display: flex; align-items: center; gap: 5px; overflow-x: auto; scrollbar-width: none; white-space: nowrap; font-size: 13px; }
+.wp-breadcrumbs::-webkit-scrollbar { display: none; }
+.wp-crumb { color: var(--ink-tertiary); cursor: pointer; padding: 2px 3px; border-radius: 4px; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+.wp-crumb:hover { background: var(--bg-elevated); color: var(--ink-secondary); }
+.wp-crumb.is-current { color: var(--ink-primary); font-weight: 600; cursor: default; }
+.wp-crumb.is-current:hover { background: none; }
+.wp-crumb-sep { color: var(--ink-quaternary, var(--ink-tertiary)); font-size: 12px; }
+.wp-crumb-ellipsis { color: var(--ink-tertiary); margin-right: 2px; }
+
+/* Header — word + pron on left, big circular audio on right */
+.wp-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.wp-word-block { min-width: 0; flex: 1; }
+.word-pop-de {
+  font-family: var(--font-german); font-size: 40px; font-weight: 500; line-height: 1.05;
+  letter-spacing: -0.01em; word-break: break-word; margin-bottom: 8px;
+}
+.wp-pron { font-family: var(--font-ui); font-size: 14px; color: var(--ink-tertiary); line-height: 1.4; }
+.wp-pron em { font-style: normal; color: var(--ink-secondary); font-weight: 500; }
+.wp-ipa { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-tertiary); }
+.wp-audio {
+  flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%;
+  background: var(--bg-surface); border: 1px solid var(--hairline);
+  display: grid; place-items: center; cursor: pointer; color: var(--ink-primary);
+  transition: transform var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease), background var(--dur-base) var(--ease);
+  -webkit-tap-highlight-color: transparent; user-select: none;
+}
+.wp-audio:hover { transform: translateY(-1px); border-color: var(--hairline-strong); }
+.wp-audio.is-playing { background: var(--accent); border-color: var(--accent); color: #fff; }
+.wp-audio svg { width: 17px; height: 17px; }
+/* Popup word speaker state (PILOT: A1·01 only — data-state and the
+   .wp-glyph markup exist only where chapter-app.js WordAudio is enabled).
+   Size and position unchanged (52px); teal like every chapter audio control. */
+.wp-audio[data-state] { color: var(--ink-primary); transition: transform var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease), background var(--dur-base) var(--ease), color var(--dur-base) var(--ease); }
+@media (hover: hover) {
+  .wp-audio[data-state]:hover { background: var(--accent-tint); border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .wp-audio[data-state="loading"]:hover, .wp-audio[data-state="playing"]:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; transform: translateY(0); }
+}
+.wp-audio[data-state]:active { transform: translateY(0); }
+.wp-audio[data-state]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wp-audio[data-state="loading"], .wp-audio[data-state="playing"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.wp-glyph { position: relative; width: 20px; height: 20px; display: block; }
+.wp-glyph > span { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity var(--dur-fast) var(--ease); }
+.wp-glyph svg { width: 20px; height: 20px; }
+.wp-g-stop svg { width: 20px; height: 20px; }
+.wp-g-spin { width: 16px; height: 16px; margin: auto; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.4); border-top-color: #fff; animation: kw-sb-spin 0.7s linear infinite; }
+.wp-audio[data-state="idle"] .wp-g-speaker, .kw-wa[data-state="idle"] .wp-g-speaker { opacity: 1; }
+.wp-audio[data-state="playing"] .wp-g-stop, .kw-wa[data-state="playing"] .wp-g-stop { opacity: 1; }
+.wp-audio[data-state="loading"] .wp-g-spin, .kw-wa[data-state="loading"] .wp-g-spin { opacity: 1; transition-delay: 150ms; }
+@media (prefers-reduced-motion: reduce) {
+  .wp-audio[data-state] { transition: none; }
+  .wp-audio[data-state]:hover { transform: none; }
+}
+
+/* Big meaning + Hindi */
+.wp-meaning { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 4px; }
+.wp-hi { font-family: var(--font-hindi); font-size: 17px; color: var(--ink-secondary); }
+/* No-data fallback — a clickable word the dictionary has no entry for states
+   that plainly instead of rendering an empty popup. */
+.wp-nodata { font-family: var(--font-ui); font-size: 15px; line-height: 1.5; color: var(--ink-tertiary); }
+.wp-nodata-hi { font-family: var(--font-hindi); font-size: 14px; line-height: 1.5; color: var(--ink-tertiary); margin-top: 4px; }
+.wp-divider { height: 1px; background: var(--hairline-light); margin: 22px 0; }
+
+/* Role / case badges */
+.wp-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.wp-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: -0.005em;
+  padding: 7px 13px; border-radius: var(--r-full);
+  background: var(--bg-elevated); color: var(--ink-secondary); border: 1px solid var(--hairline-light);
+}
+.wp-badge .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.wp-badge.role { background: var(--pop-tint, var(--bg-elevated)); color: var(--pop-deep, var(--ink-primary)); border-color: transparent; }
+
+/* Sections (Why / Example) */
+.wp-section { margin-top: 20px; }
+.wp-section-title { font-family: var(--font-ui); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 10px; }
+.wp-why {
+  font-size: 14.5px; line-height: 1.55; color: var(--ink-primary);
+  padding: 13px 15px; border-radius: var(--r-md);
+  background: var(--pop-tint, var(--coral-tint)); color: var(--pop-deep, var(--coral-deep));
+}
+.word-pop-ex {
+  font-family: var(--font-german); font-size: 18px; line-height: 1.5; color: var(--ink-primary);
+  padding: 14px 16px; border-radius: var(--r-md) var(--r-md) 0 0;
+  background: var(--bg-elevated);
+}
+.wp-example-item { border-radius: var(--r-md); overflow: hidden; }
+.wp-example-item + .wp-example-item { margin-top: 12px; }
+.wp-ex-hi {
+  font-family: var(--font-hindi); font-size: 13.5px; color: var(--ink-tertiary);
+  padding: 0 16px 11px; background: var(--bg-elevated);
+}
+.wp-ex-en {
+  font-family: var(--font-ui); font-size: 13.5px; color: var(--ink-secondary);
+  padding: 11px 16px;
+  background: var(--bg-elevated); border-top: 1px solid var(--hairline-light);
+}
+.word-pop-audio { display: none; }
+
+/* Shared paradigm-grid label hint (used inside .wp-compare-label by every paradigm type) */
+.wp-conj-hint { font-family: var(--font-ui); font-size: 10.5px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-tertiary); }
+.wp-mini-audio, .wp-compare-cell .wp-mini-audio { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: var(--ink-tertiary); transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+.wp-mini-audio:hover { background: var(--pop-tint, var(--bg-surface)); color: var(--pop-deep, var(--ink-primary)); }
+.wp-mini-audio svg { width: 13px; height: 13px; }
+
+/* Shared morphology paradigm grid — used identically by Comparison,
+   Conjugation, Number, and Declension. One component, one set of rules;
+   never overridden per paradigm type. */
+.wp-compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 8px; align-items: stretch; }
+.wp-compare-cell { text-align: center; padding: 14px 8px; min-height: 88px; background: var(--bg-elevated); border: 1px solid var(--hairline-light); border-radius: var(--r-md); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+.wp-compare-cell:hover { border-color: var(--pop-color, var(--hairline-strong)); transform: translateY(-1px); }
+.wp-compare-cell.is-current { border-color: var(--pop-color, var(--ink-primary)); background: color-mix(in srgb, var(--pop-tint, var(--bg-elevated)) 60%, var(--bg-elevated)); }
+.wp-compare-label { font-family: var(--font-ui); font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-tertiary); }
+.wp-compare-cell.is-current .wp-compare-label { color: var(--pop-deep, var(--ink-primary)); }
+/* Active cell's word text carries the paradigm's semantic colour too — the
+   .de-link { color: inherit } precedence rule above resolves against THIS,
+   so without it the clicked form renders plain ink instead of its grammar
+   colour. Same token as the label rule above; no new visual language. */
+.wp-compare-cell.is-current .wp-compare-form { color: var(--pop-deep, var(--ink-primary)); }
+.wp-compare-word-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; max-width: 100%; }
+.wp-compare-form { font-family: var(--font-german); font-size: 18px; font-weight: 500; text-align: center; overflow-wrap: anywhere; word-break: break-word; line-height: 1.25; }
+
+/* Advanced (collapsible) */
+.wp-advanced { border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; }
+.wp-advanced-summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink-secondary); background: var(--bg-surface); transition: background var(--dur-fast) var(--ease); }
+.wp-advanced-summary::-webkit-details-marker { display: none; }
+.wp-advanced-summary:hover { background: var(--bg-elevated); }
+.wp-advanced-chevron { width: 16px; height: 16px; color: var(--ink-tertiary); transition: transform var(--dur-base) var(--ease); }
+.wp-advanced[open] .wp-advanced-chevron { transform: rotate(180deg); }
+.wp-advanced-inner { padding: 4px 16px 16px; display: grid; gap: 14px; }
+.wp-adv-block { display: grid; gap: 7px; }
+.wp-adv-label { font-family: var(--font-ui); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); }
+.wp-adv-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.wp-adv-chip { font-family: var(--font-ui); font-size: 13px; color: var(--ink-primary); background: var(--bg-elevated); border: 1px solid var(--hairline-light); border-radius: var(--r-full); padding: 5px 12px; }
+.wp-adv-chip.de { font-family: var(--font-german); font-size: 14px; }
+
+.audio-speed-menu .asm-rate { font-family: var(--font-mono); font-size: 11px; color: var(--ink-quaternary); margin-left: auto; }
+@media (max-width: 540px) {
+  .word-pop { width: calc(100vw - 24px); padding: 48px 22px 26px; }
+  .word-pop-de { font-size: 34px; }
+}
+
+/* ---- Long-press audio speed menu (spec 5.3) ---- */
+.audio-speed-menu {
+  position: fixed; z-index: calc(var(--kw-word-pop-z, 80) + 5);
+  background: var(--ink-primary); color: var(--bg-canvas);
+  border-radius: var(--r-md); box-shadow: var(--shadow-lift);
+  padding: 6px; display: flex; flex-direction: column; gap: 2px;
+  opacity: 0; transform: translateY(6px) scale(0.96); pointer-events: none;
+  transition: opacity 160ms var(--ease), transform 160ms var(--ease);
+}
+.audio-speed-menu.is-open { opacity: 1; transform: none; pointer-events: auto; }
+.audio-speed-menu button {
+  font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: var(--bg-canvas);
+  padding: 9px 18px 9px 14px; border-radius: var(--r-sm); text-align: left; white-space: nowrap;
+  display: flex; align-items: center; gap: 10px;
+}
+.audio-speed-menu button:hover { background: rgba(255,255,255,0.12); }
+.audio-speed-menu .asm-rate { font-family: var(--font-mono); font-size: 11px; color: var(--ink-quaternary); margin-left: auto; }
+.word-pop-audio { cursor: pointer; user-select: none; }
+.word-pop-audio.is-playing { color: var(--accent); }

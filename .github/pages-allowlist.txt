@@ -97,6 +97,9 @@ public/audio/b1-words-manifest.json
 public/audio/kw-word-sync.js
 public/audio/kw-reading-exceptions.js
 public/audio/kw-story-exceptions.js
+# Word popup stylesheet shared by every chapter page and the homepage
+# (chapter-app.js renderWordPop; homepage uses it in popup-only host mode).
+public/kw-word-pop.css
 GLOB:audio-timing/[0-9a-f]*.json
 
 # ---------------------------------------------------------------

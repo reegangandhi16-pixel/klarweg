@@ -223,7 +223,9 @@ test('German marking: German text gets lang="de"; English/Hindi/UI text does not
 
 test('German marking also covers content added later (pop-ups, AI answers) and runs before rendering', () => {
   assert.match(APP, /new MutationObserver\(\(list\) => list\.forEach\(\(m\) => m\.addedNodes\.forEach\(markGerman\)\)\)\s*\.observe\(document\.body, \{ childList: true, subtree: true \}\);/);
-  assert.match(APP, /function init\(\) \{\s*watchGerman\(\);/);
+  // Chapter pages: marking starts before anything renders. (The popup-only host
+  // branch returns first and marks its pop-ups only — see word-popup-parity.test.mjs.)
+  assert.match(APP, /function init\(\) \{\s*watchWordTriggers\(\);\s*if \(POP_HOST\) \{[\s\S]*?\n      return;\n    \}\n    watchGerman\(\);/);
 });
 
 test('258 chapter pages load the new asset versions and nothing else changed in their markup', () => {
@@ -231,7 +233,8 @@ test('258 chapter pages load the new asset versions and nothing else changed in 
   assert.equal(pages.length, 258);
   for (const f of pages) {
     const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
-    assert.ok(h.includes('href="chapter.css?v=19"') && h.includes('src="chapter-app.js?v=29"'), f);
+    assert.ok(h.includes('href="chapter.css?v=20"') && h.includes('src="chapter-app.js?v=30"'), f);
+    assert.ok(!h.includes('href="chapter.css?v=19"') && !h.includes('src="chapter-app.js?v=29"'), f);
     assert.ok(!h.includes('href="chapter.css?v=14"') && !h.includes('href="chapter.css?v=17"') && !h.includes('src="chapter-app.js?v=16"') && !h.includes('src="chapter-app.js?v=21"') && !h.includes('src="chapter-app.js?v=22"') && !h.includes('src="chapter-app.js?v=23"') && !h.includes('src="chapter-app.js?v=24"') && !h.includes('src="chapter-app.js?v=25"') && !h.includes('src="chapter-app.js?v=26"') && !h.includes('src="chapter-app.js?v=27"') && !h.includes('src="chapter-app.js?v=28"') && !h.includes('href="chapter.css?v=18"'), f);
   }
 });

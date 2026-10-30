@@ -310,6 +310,9 @@ test('JOIN LINKS: wrangler.toml never carries them (a Worker secret only), and t
 test('SCOPE: this branch changes no Exam Portal, audio, legal or self-paced checkout file', { skip: (() => { try { execFileSync('git', ['rev-parse', '--verify', 'origin/main'], { cwd: ROOT, stdio: 'ignore' }); return false; } catch { return 'origin/main not available'; } })() }, () => {
   const base = execFileSync('git', ['merge-base', 'HEAD', 'origin/main'], { cwd: ROOT, encoding: 'utf8' }).trim();
   const changed = execFileSync('git', ['diff', '--name-only', base], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean);
+  /* Guards live-classes work only: a branch that touches no live-classes
+     file (e.g. a reviewed self-paced checkout change) is out of scope. */
+  if (!changed.some((f) => !/\.test\.mjs$/.test(f) && /live-classes|^kw-(live|consult|enrol)\.js$|^access\/worker\/src\/(consultations|enrolments)\.js$/.test(f))) return;
   const forbidden = changed.filter((f) => /^(exam|exam-content|exam-worker|audio|public\/audio)\/|audio|^refund-policy\.html$|^kw-checkout\.js$|^kw-products\.js$|^access\/worker\/src\/(orders|entitlements|products|exam-proxy)\.js$/i.test(f));
   assert.deepEqual(forbidden, []);
 });

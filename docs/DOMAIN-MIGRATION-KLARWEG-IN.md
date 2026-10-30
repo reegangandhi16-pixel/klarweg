@@ -4,9 +4,12 @@ Status (2026-10-30): repository side prepared on branch `feat/klarweg-in-domain`
 External changes so far:
 - Reports Worker accepts `klarweg.in` (owner-approved deploy 2026-10-30, version `60e4f1fb`).
 - DNS moved from AWS Route 53 to **Hostinger** with the GitHub Pages records in
-  place (done by the owner, 2026-10-30 07:07 UTC; see §3).
+  place (done by the owner, 2026-10-30 07:07 UTC); TTLs lowered to 300 (§3).
+- Google OAuth: `klarweg.in` added as an authorized domain and JavaScript
+  origin (done by the owner, 2026-10-30; §3a).
+- Domain renewed to 2027-12-01.
 
-No GitHub Pages setting, Access Worker, OAuth or payment configuration has been
+No GitHub Pages setting, Access Worker or payment configuration has been
 changed. Hosting stays on GitHub Pages; no Hostinger
 web-hosting plan is needed (the site is static; nothing in the audit requires
 server-side hosting).
@@ -17,7 +20,7 @@ every published declaration of it and reads the current value from that file,
 so the same command rolls back. `scripts/set-site-origin.test.mjs` keeps the
 tree consistent with it.
 
-## 1. Facts found in the audit (read-only checks, 2026-10-29)
+## 1. Facts found in the audit (read-only checks, 2026-10-29; dated updates 2026-10-30)
 
 | Fact | Evidence |
 |---|---|
@@ -53,7 +56,7 @@ tree consistent with it.
 | Access Worker CORS | `klarweg.in` allowed (live) | none. `www` not needed: GitHub redirects `www` → apex | — | preflight above |
 | Access Worker `ACCOUNT_RETURN_URL` (iOS Google redirect sign-in) | default github.io account page | `https://klarweg.in/account/index.html` | Owner-approved Worker change, after cutover | expected to work without it via GitHub's 301 (path + query — confirm in §6), so cleanup, not a blocker |
 | Access Worker `SITE_BASE_URL` (Cashfree `return_url` fallback) | default github.io | `https://klarweg.in` | same | `return_url` already follows the request Origin for `klarweg.in` in the deployed code |
-| Reports Worker `ALLOWED_ORIGINS` | no `klarweg.in` (live 403) | `https://klarweg.in` added in `report/worker/wrangler.toml` (this PR) | **DONE 2026-10-30** (owner-approved): version `60e4f1fb-718c-4861-8423-5aa998b22ea7`; rollback `wrangler rollback 4a920e47-230f-4c47-a524-eb4c2181c38b` | `OPTIONS` from `https://klarweg.in` → 204 (verified); github.io 204; unknown origin 403 |
+| Reports Worker `ALLOWED_ORIGINS` | allows `klarweg.in` since 2026-10-30 (was 403 before) | `https://klarweg.in` added in `report/worker/wrangler.toml` (this PR) | **DONE 2026-10-30** (owner-approved): version `60e4f1fb-718c-4861-8423-5aa998b22ea7`; rollback `wrangler rollback 4a920e47-230f-4c47-a524-eb4c2181c38b` | `OPTIONS` from `https://klarweg.in` → 204 (verified); github.io 204; unknown origin 403 |
 | Reports Worker `SITE_BASE_URL` (admin "open" links) | github.io | `https://klarweg.in` | after cutover (github.io redirects anyway) | admin dashboard link |
 | Turnstile | no site key configured on the page | none now; add `klarweg.in` to the widget hostnames if one is configured later | — | — |
 | Google OAuth client | origins unknown to the repo | add `https://klarweg.in` to **Authorized JavaScript origins** (keep github.io). Redirect URI is the Worker's `/auth/google/redirect` — unchanged | **DONE 2026-10-30** (owner-confirmed; Google console not visible to Claude) — steps in §3a | Google button renders and signs in on klarweg.in |
@@ -92,7 +95,7 @@ unaffected.
 
 **Owner actions:**
 
-1. **Confirm verification now (no user impact).** GitHub → your *profile*
+1. **Domain verification — done; `klarweg.in` showed Verified on 2026-10-30.** GitHub → your *profile*
    Settings → Pages → *Verified domains*: `klarweg.in` must show **Verified**
    (click *Verify* if pending — the TXT record is live). While DNS points at
    GitHub and no repository claims the domain, verification is what stops
@@ -105,10 +108,25 @@ unaffected.
    one edit changed all four A (and all four AAAA) records. Saving may show a
    "Web Apps hosting" upsell — decline with *No thanks, point my domain*.
    - A/AAAA were served at 300 consistently right away.
-   - `www` is stored at 300, but Hostinger's nameservers were still syncing
-     at 08:32 UTC (mixed 300/14400 answers, two SOA serials). It converges on
-     its own. Before cutover, confirm `dig www.klarweg.in CNAME` shows 300,
-     and allow 4 h after the change so caches holding the old 14400 expire.
+   - `www` was stored at 300 at once, but Hostinger's nameservers were slow
+     to sync. Read-only audits (20 queries per nameserver; `www` TTL 300 / old
+     SOA serial `2026103011` seen):
+
+     | UTC | ns1 `www` 300 | ns2 `www` 300 | old serial ns1 / ns2 |
+     |---|---|---|---|
+     | 08:41 | 3/20 | 8/20 | split / split |
+     | 08:53 | 7/20 | 10/20 | 9 / 9 |
+     | 09:33 | 18/20 | 14/20 | 3 / 0 |
+     | 09:41 | 18/20 | 16/20 | 2 / 0 — stalled; Google cached a fresh 14400 `www` (expires 13:41 UTC); support ticket drafted |
+     | 09:50 | **20/20** | **20/20** | 0 / 1 |
+
+     At 09:50 `www` was clean on both nameservers; the support ticket was not
+     needed. All values were correct in every answer throughout. Public
+     resolver caches holding the old `www` TTL expire by **13:41 UTC**; until
+     then only the speed of a *future* `www` DNS change is affected (the
+     cutover itself changes no DNS). Before cutover, re-run the §3 `dig`
+     checks; if Hostinger again serves 14400 or serial `2026103011`
+     repeatedly, contact Hostinger support with that evidence.
 
 **Do not:** use Hostinger's "reset DNS records" (restores parking defaults
 and drops the GitHub records); add wildcard records (takeover risk); add a
@@ -129,8 +147,8 @@ zone (~$0.50/month) and the EC2 instance at `3.6.224.232` no longer serve
 
 ## 3a. Google OAuth client (owner action — not done by Claude)
 
-Additive; the github.io entries stay, so current sign-in keeps working. Do it
-any time before cutover.
+**Done by the owner on 2026-10-30** (kept here for reference and rollback).
+Additive; the github.io entries stay, so current sign-in keeps working.
 
 **What the site uses** (`account/index.html`, `kw-config.js`):
 
@@ -208,7 +226,7 @@ Prerequisites (any order, all additive, nothing breaks the github.io site):
 - [x] **Renew the domain** — done; `whois` shows expiry 2027-12-01 (checked 2026-10-30).
 - [x] DNS records for GitHub Pages in the Hostinger zone (owner, 2026-10-30; §3).
 - [x] Confirm `klarweg.in` shows **Verified** under profile Settings → Pages (§3, step 1) — confirmed 2026-10-30 (keep the TXT record).
-- [x] Lower the A/AAAA/`www` TTLs to 300 in Hostinger (§3, step 2) — done 2026-10-30; confirm `www` shows 300 and 4 h have passed before cutover.
+- [x] Lower the A/AAAA/`www` TTLs to 300 in Hostinger (§3, step 2) — done 2026-10-30; `www` clean (300, 40/40) at 09:50 UTC; old-TTL resolver caches gone by 13:41 UTC. Not a cutover gate (cutover changes no DNS); re-run the §3 `dig` checks before starting.
 - [x] Google Cloud console: add `klarweg.in` as an authorized domain and `https://klarweg.in` as an Authorized JavaScript origin (§3a) — done 2026-10-30 (owner-confirmed). Sign-in on klarweg.in itself is verified after cutover (§6).
 - [x] Deploy the Reports Worker with the updated `ALLOWED_ORIGINS` — done 2026-10-30, version `60e4f1fb` (rollback point `4a920e47`).
 - [ ] Review and approve this PR (do not merge yet).

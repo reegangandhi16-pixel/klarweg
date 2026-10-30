@@ -51,7 +51,7 @@ globalThis.fetch = async (input, init = {}) => {
   if (m) {
     const host = m[1] === 'sandbox' ? 'sandbox' : 'production';
     const headers = init.headers || {};
-    cashfree.calls.push({ host, method, path: url.replace(/^https:\/\/[^/]+/, ''), appId: headers['x-client-id'], body: init.body ? JSON.parse(init.body) : null });
+    cashfree.calls.push({ host, method, path: url.replace(/^https:\/\/[^/]+/, ''), appId: headers['x-client-id'], apiVersion: headers['x-api-version'], body: init.body ? JSON.parse(init.body) : null });
     if (method === 'POST' && !m[2]) {
       if (cashfree.failCreate) return new Response('<html>gateway down</html>', { status: 502 });
       const b = JSON.parse(init.body);
@@ -1180,4 +1180,89 @@ test('AI preview at 0 (production): a signed-in non-owner is NOT eligible on Cha
   assert.equal(own.eligible, true);
   assert.equal(own.tier, 'chat');
   assert.deepEqual(own.remaining, { day: 20, month: 100 });
+});
+
+test('price integrity: coupon, discount and amount fields from the browser are ignored; Cashfree gets the catalogue price', async () => {
+  /* Discounts, if any, are Cashfree offers the learner applies on Cashfree's
+     own checkout. Klarweg's order is always created at the catalogue price. */
+  const env = makeEnv();
+  const forged = { coupon: 'KLARWEGFREE1', amount: 1, amount_paise: 100, order_amount: 1, discount: 4998, payable: 1 };
+  for (const [product, rupees] of [['LIFETIME', 4999], ['B2', 4999], ['A1', 1999]]) {
+    const { cookie } = await signupUser(env);
+    await withPhone(env, cookie);
+    const before = cashfree.calls.length;
+    const r = await req(env, 'POST', '/orders', { cookie, body: { product_id: product, ...forged } });
+    assert.equal(r.status, 200, product);
+    assert.equal(r.json.order.amountPaise, rupees * 100, product);
+    const create = cashfree.calls.slice(before).find((c) => c.method === 'POST');
+    assert.equal(create.body.order_amount, rupees, product);
+    assert.equal(create.body.cart_details.cart_items[0].item_original_unit_price, rupees, product);
+    assert.equal('item_discounted_unit_price' in create.body.cart_details.cart_items[0], false, product);
+  }
+});
+
+/* ================= Lifetime-only Cashfree offers ================= */
+test('offer filter: Lifetime-only offers are denied on every other order; Lifetime and unset config send Create Order as before', async () => {
+  const env = makeEnv({ CASHFREE_LIFETIME_ONLY_OFFERS: ' KLARWEGFREE1 , 3f2a9c1e-offer-id ' });
+  const createFor = async (product, e = env) => {
+    const { cookie } = await signupUser(e);
+    await withPhone(e, cookie);
+    const before = cashfree.calls.length;
+    const r = await req(e, 'POST', '/orders', { cookie, body: { product_id: product } });
+    assert.equal(r.status, 200, product + ' ' + JSON.stringify(r.json));
+    return cashfree.calls.slice(before).find((c) => c.method === 'POST');
+  };
+  for (const product of ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']) {
+    const c = await createFor(product);
+    assert.deepEqual(c.body.order_meta.offer_filters, { action: 'DENY', values: ['KLARWEGFREE1', '3f2a9c1e-offer-id'] }, product);
+    assert.equal(c.apiVersion, '2026-01-01', product);
+    assert.equal(c.body.order_amount * 100, (await import('../src/products.js')).getProduct(product).amountPaise, product + ': catalogue price');
+  }
+  const lifetime = await createFor('LIFETIME');
+  assert.equal('offer_filters' in lifetime.body.order_meta, false, 'Lifetime may use the offer');
+  assert.equal(lifetime.apiVersion, '2023-08-01');
+  assert.equal(lifetime.body.order_amount, 4999, 'the order is still created at ₹4,999; Cashfree applies the offer at payment');
+  for (const v of [undefined, '', '   ']) {
+    const c = await createFor('B2', makeEnv({ CASHFREE_LIFETIME_ONLY_OFFERS: v }));
+    assert.equal('offer_filters' in c.body.order_meta, false, `unset (${JSON.stringify(v)}): unchanged request`);
+    assert.equal(c.apiVersion, '2023-08-01');
+  }
+  // order and payment reads stay on the existing version
+  const { cookie } = await signupUser(env);
+  await withPhone(env, cookie);
+  const { order } = await buy(env, cookie, 'B2');
+  const before = cashfree.calls.length;
+  await req(env, 'GET', `/orders/${order.id}`, { cookie });
+  assert.ok(cashfree.calls.slice(before).every((c) => c.apiVersion === '2023-08-01'));
+});
+
+test('offer filter: a malformed list refuses checkout instead of letting an offer through', async () => {
+  for (const bad of ['KLARWEG FREE1', 'A,,B', 'x'.repeat(51), Array.from({ length: 26 }, (_, i) => 'O' + i).join(','), 'KLARWEG;FREE1']) {
+    const env = makeEnv({ CASHFREE_LIFETIME_ONLY_OFFERS: bad });
+    assert.match(cashfreeConfigProblem(env) || '', /CASHFREE_LIFETIME_ONLY_OFFERS/, bad);
+    const { cookie } = await signupUser(env);
+    await withPhone(env, cookie);
+    const before = cashfree.calls.length;
+    const r = await req(env, 'POST', '/orders', { cookie, body: { product_id: 'B2' } });
+    assert.equal(r.status, 503, bad);
+    assert.equal(cashfree.calls.length, before, 'no Cashfree call');
+  }
+});
+
+test('offer filter: a ₹1 offer payment on a ₹4,999 Lifetime order verifies against the order amount and grants Lifetime once', async () => {
+  /* Cashfree keeps order_amount at the order price and reports the
+     discounted payment_amount separately (payment webhook docs). */
+  const env = makeEnv({ CASHFREE_LIFETIME_ONLY_OFFERS: 'KLARWEGFREE1' });
+  const { cookie, id } = await signupUser(env);
+  await withPhone(env, cookie);
+  const { order } = await buy(env, cookie, 'LIFETIME');
+  gatewayPays(order.id);
+  cashfree.orders.get(order.id).payments[0].payment_amount = 1;
+  const payload = successPayload(order.id);
+  payload.data.order.order_amount = 4999;
+  payload.data.payment.payment_amount = 1;
+  payload.data.payment_offers = [{ offer_meta: { offer_code: 'KLARWEGFREE1' }, offer_redemption: { discount_amount: 4998 } }];
+  for (let i = 0; i < 2; i++) assert.equal((await signedWebhook(env, payload)).status, 200);
+  const rows = await env.DB.prepare('SELECT product_id FROM user_entitlements WHERE user_id = ?1 ORDER BY product_id').bind(id).all();
+  assert.deepEqual(rows.results.map((r) => r.product_id), ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'LIFETIME']);
 });

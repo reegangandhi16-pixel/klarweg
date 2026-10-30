@@ -19,6 +19,12 @@ workers_dev = true
 CASHFREE_ENV = "sandbox"
 CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
+# Cashfree offers only Klarweg Lifetime orders may use (src/cashfree-config.js):
+# every other order denies them via offer_filters. Comma-separated offer
+# codes and/or offer ids. Empty = no filter (Create Order unchanged). Must be
+# set BEFORE a Lifetime-only offer (e.g. KLARWEGFREE1) goes live in Cashfree
+# Production, or that offer would apply to B2/C1/C2 too.
+CASHFREE_LIFETIME_ONLY_OFFERS = ""
 
 # Klarweg AI (see src/ai.js). ON. Chapter AI: with the Chapter-1 preview at 0,
 # only accounts holding a level entitlement qualify. Homepage chat: buyers, plus

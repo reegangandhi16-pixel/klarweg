@@ -37,6 +37,7 @@ export function cashfreeConfigProblem(env) {
   const secretEnv = (String(env.CASHFREE_SECRET_KEY).match(/^cfsk_ma_(test|prod)_/) || [])[1];
   if (secretEnv === "test" && declared === "production") return "production mode with a sandbox (test) secret key";
   if (secretEnv === "prod" && declared === "sandbox") return "sandbox mode with a production secret key";
+  if (lifetimeOnlyOffers(env) === null) return "CASHFREE_LIFETIME_ONLY_OFFERS must be a comma-separated list of up to 25 offer codes/ids (letters, digits, _ and -)";
   if (env.CASHFREE_NOTIFY_URL && !/^https:\/\/[^/]+\/webhooks\/cashfree$/.test(env.CASHFREE_NOTIFY_URL)) return "CASHFREE_NOTIFY_URL must be https://<host>/webhooks/cashfree";
   if (env.SITE_BASE_URL && !/^https:\/\/[^/]+(\/[a-z0-9-]+)?$/i.test(env.SITE_BASE_URL)) return "SITE_BASE_URL must be an https origin (optionally with one path segment), no trailing slash";
   return null;
@@ -66,4 +67,32 @@ export function notifyUrl(env) {
 /* Cashfree error bodies are usually JSON but not guaranteed. */
 export async function readJson(res) {
   try { return await res.json(); } catch { return null; }
+}
+
+/* Cashfree offers (dashboard: Offers & Recovery → Offers) that only Klarweg
+   Lifetime orders may use, e.g. the hidden coupon KLARWEGFREE1 the learner
+   types on Cashfree's own checkout. Cashfree offers cannot target a product,
+   so every OTHER order denies them per order (order_meta.offer_filters,
+   Create Order API 2026-01-01). The docs call the values "offer
+   identifiers" without saying code or id, so the list may hold both.
+     CASHFREE_LIFETIME_ONLY_OFFERS = "KLARWEGFREE1,<offer_id>"
+   Unset or empty: no filter, and Create Order is sent exactly as before.
+   Returns the list, [] when unset, or null when malformed (refused by
+   cashfreeConfigProblem, so a typo can never let an offer through). */
+export const OFFER_FILTER_API_VERSION = "2026-01-01";
+const LIFETIME_PRODUCT_ID = "LIFETIME";
+
+export function lifetimeOnlyOffers(env) {
+  const raw = String(env.CASHFREE_LIFETIME_ONLY_OFFERS || "").trim();
+  if (!raw) return [];
+  const values = raw.split(",").map((v) => v.trim());
+  if (values.length > 25 || values.some((v) => !/^[A-Za-z0-9_-]{1,50}$/.test(v))) return null;
+  return [...new Set(values)];
+}
+
+/* order_meta.offer_filters for a self-paced order, or null for none. */
+export function offerFiltersFor(env, productId) {
+  if (productId === LIFETIME_PRODUCT_ID) return null;
+  const values = lifetimeOnlyOffers(env);
+  return values && values.length ? { action: "DENY", values } : null;
 }

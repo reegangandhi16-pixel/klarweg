@@ -210,6 +210,14 @@ test('every paid page loads from the Worker, every free page keeps its static fi
   assert.deepEqual(Object.keys(index.chapters).sort(), chapters.map((c) => c.id).sort());
 });
 
+test('the Pages allowlist publishes no paid chapter data', () => {
+  const lines = fs.readFileSync(path.join(ROOT, '.github', 'pages-allowlist.txt'), 'utf8').split('\n').map((l) => l.trim());
+  const data = lines.filter((l) => /-data\.js$/.test(l) && l.startsWith('chapter/'));
+  const free = loadChapters().filter((c) => c.number === 1).map((c) => 'chapter/' + c.file).sort();
+  assert.deepEqual(data.sort(), free);
+  assert.ok(!lines.some((l) => l.startsWith('GLOB:') && /chapter\/.*data/.test(l)), 'no glob over chapter data');
+});
+
 /* ---------- browser guard on what the Worker actually sent ---------- */
 function loadAccess({ authed = false, levels = {} } = {}) {
   const appended = [];

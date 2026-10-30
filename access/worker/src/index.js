@@ -5,6 +5,7 @@ import { cashfreeWebhook } from "./webhooks-cashfree.js";
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
+import { chapterScript, CHAPTER_ROUTE } from "./chapters.js";
 import {
   listSavedWords,
   createSavedWord,
@@ -157,6 +158,14 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
 
     if (request.method === "POST" && url.pathname === "/speech/task-check") {
       return withCors(await speechTaskCheck(request, env), request);
+    }
+
+    /* Paid chapter content (chapters.js) — loaded by a classic <script>
+       tag, so it carries no CORS headers; locked or signed-out learners get
+       a metadata-only stub. */
+    const chapterMatch = url.pathname.match(CHAPTER_ROUTE);
+    if (request.method === "GET" && chapterMatch) {
+      return chapterScript(request, env, chapterMatch[1]);
     }
 
     /* Chapter resource PDFs — private R2, signed short-lived links

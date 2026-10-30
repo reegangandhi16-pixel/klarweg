@@ -6,7 +6,7 @@ const ALLOWED_ORIGINS = [
   "https://klarweg.in"
 ];
 
-function isAllowedOrigin(origin) {
+export function isAllowedOrigin(origin) {
   return origin !== null && ALLOWED_ORIGINS.includes(origin);
 }
 

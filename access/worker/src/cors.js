@@ -67,7 +67,7 @@ export function configureCors(env) {
   publicSiteOrigins = publicSiteOriginsAllowed(env);
 }
 
-function isAllowedOrigin(origin) {
+export function isAllowedOrigin(origin) {
   return origin !== null && ((publicSiteOrigins && ALLOWED_ORIGINS.includes(origin)) || extraOrigins.includes(origin));
 }
 

@@ -10,6 +10,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { dataFileFor } from './chapter-lock.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const APP = fs.readFileSync(path.join(ROOT, 'chapter/chapter-app.js'), 'utf8');
@@ -211,8 +212,7 @@ const BY = new Map(), CANON = new Map();
 for (const [k, v] of Object.entries(MANIFEST)) if (v && typeof v === 'object') { BY.set(N(k), v); CANON.set(canon(k), v); }
 const lookup = (t) => BY.get(N(t)) || CANON.get(canon(t)) || null;
 function chapterData(page) {
-  const html = fs.readFileSync(path.join(ROOT, 'chapter', page), 'utf8');
-  const src = html.match(/<script src="([^"]*data[^"]*\.js)[^"]*"/)[1].split('?')[0];
+  const src = dataFileFor(page);
   const c = { console: { log() {}, warn() {} } }; c.window = c; vm.createContext(c);
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'chapter', src), 'utf8') + '\n;this.__C = CHAPTER;', c);
   return c.__C;

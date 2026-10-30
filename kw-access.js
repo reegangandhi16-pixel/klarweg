@@ -366,6 +366,7 @@
     var num = normNumber(opts.number);
     var prefix = opts.prefix == null ? '' : opts.prefix;
     var eyebrow = LVL + (num ? ' · Chapter ' + String(num).padStart(2, '0') : '');
+    var unavailable = opts.reason === 'unavailable';
 
     var el = document.createElement('main');
     el.id = 'story-stage';
@@ -376,15 +377,17 @@
       '<div class="kwlock-inner">' +
         '<div class="kwlock-mark">' + LOCK_ICON + '</div>' +
         '<p class="kwlock-eyebrow">' + esc(eyebrow) + '</p>' +
-        '<h1 class="kwlock-title">Chapter Locked</h1>' +
+        '<h1 class="kwlock-title">' + (unavailable ? 'Chapter Unavailable' : 'Chapter Locked') + '</h1>' +
         (opts.title ? '<p class="kwlock-chapter">' + esc(opts.title) + '</p>' : '') +
-        '<p class="kwlock-lede">This chapter is part of the ' + esc(LVL) + ' course. Chapter 1 of every level, A1 through C2, stays open to read.</p>' +
+        (unavailable
+          ? '<p class="kwlock-lede">This chapter could not be loaded just now. Please reload the page in a minute. If it keeps happening, email klarwegofficial@gmail.com with the chapter name.</p>'
+          : '<p class="kwlock-lede">This chapter is part of the ' + esc(LVL) + ' course. Chapter 1 of every level, A1 through C2, stays open to read.</p>' +
         '<div class="kwlock-actions">' +
           '<button type="button" class="kwlock-cta" data-kw-unlock="' + esc(LVL) + '">Unlock ' + esc(LVL) + ' — ' + esc(priceLabel(LVL)) + '</button>' +
           '<p class="kwlock-sub">One payment opens every ' + esc(LVL) + ' chapter.</p>' +
           '<button type="button" class="kwlock-cta secondary" data-kw-unlock="LIFETIME">Unlock everything — ' + esc(priceLabel('LIFETIME')) + '</button>' +
           '<p class="kwlock-sub">All six levels, A1 through C2.</p>' +
-        '</div>' +
+        '</div>') +
         '<div class="kwlock-foot">' +
           (state.authenticated
             ? '<span>Bought it on a different account? <a href="' + esc(prefix) + 'account/index.html">View your access</a></span>'
@@ -414,11 +417,16 @@
   function guardChapterPage(chapterData, options) {
     options = options || {};
     var ref = parseChapterRef(chapterData);
+    /* Paid chapters come from the Access Worker (/chapters/<id>.js). When it
+       refused, window.CHAPTER is a metadata-only stub carrying kwLocked
+       ("signed_out" | "not_entitled" | "unavailable"): there is no content
+       to render, whatever this page believes about entitlement. */
+    var serverLock = chapterData && typeof chapterData.kwLocked === 'string' ? chapterData.kwLocked : null;
     // Fail CLOSED, not open: a chapter we cannot identify is a chapter we
     // cannot prove is free or entitled. renderLockedChapter() below
     // tolerates a missing level/number (falls back to 'a1' / omits the
     // chapter number in the eyebrow), so this stays visually safe.
-    if (ref.level && ref.number && canAccessChapter(ref.level, ref.number)) return true;
+    if (!serverLock && ref.level && ref.number && canAccessChapter(ref.level, ref.number)) return true;
 
     var prefix = options.prefix == null ? '../' : options.prefix;
     var removeSelectors = options.remove || ['#story-stage', '#dashboard'];
@@ -427,21 +435,38 @@
     });
 
     var screen = renderLockedChapter({
-      level: ref.level, number: ref.number, title: ref.title, prefix: prefix
+      level: ref.level, number: ref.number, title: ref.title, prefix: prefix, reason: serverLock
     });
     document.body.appendChild(screen);
-    document.title = 'Chapter Locked · Klarweg';
+    document.title = (serverLock === 'unavailable' ? 'Chapter Unavailable' : 'Chapter Locked') + ' · Klarweg';
     global.KW_CHAPTER_LOCKED = true;
 
     /* The learner may hold this entitlement already (a new device, a
        just-completed purchase). Re-ask the server, and if the answer
-       comes back positive, reload into the real chapter. */
-    if (entitlementSource) {
+       comes back positive, reload into the real chapter. Once per chapter
+       per two minutes: when the Worker still refuses (a blocked cookie,
+       an outage) the page must settle on this screen, not loop. */
+    if (entitlementSource && serverLock !== 'unavailable') {
       refresh().then(function (s) {
-        if (s.hasFullAccess || s.levels[ref.level]) global.location.reload();
+        if ((s.hasFullAccess || s.levels[ref.level]) && claimReload(ref.id || ref.level + '-' + ref.number)) {
+          global.location.reload();
+        }
       });
     }
     return false;
+  }
+
+  function claimReload(key) {
+    var k = 'kw-lock-reload:' + key;
+    var now = Date.now();
+    try {
+      var last = Number(global.sessionStorage.getItem(k)) || 0;
+      if (now - last < 2 * 60 * 1000) return false;
+      global.sessionStorage.setItem(k, String(now));
+      return true;
+    } catch (e) {
+      return false;   // no storage: never risk a reload loop
+    }
   }
 
   /* ============================================================

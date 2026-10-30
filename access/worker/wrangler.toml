@@ -130,6 +130,13 @@ SPEECH_MAX_SECONDS = "30"
 # Secret (wrangler secret put): RESOURCE_URL_SECRET — HMAC key for links.
 RESOURCE_RELEASE = "r2"
 
+# Paid chapter content (src/chapters.js). Same PRIVATE bucket, under
+# chapters/<CHAPTER_RELEASE>/ — built by scripts/build-chapter-release.mjs and
+# uploaded BEFORE this var points at it. Chapter pages 2+ load their payload
+# from GET /chapters/<id>.js; without a valid release every paid chapter
+# shows "unavailable", so never deploy the pages ahead of the upload.
+CHAPTER_RELEASE = "r1"
+
 [[r2_buckets]]
 binding = "RESOURCES"
 bucket_name = "klarweg-resources"

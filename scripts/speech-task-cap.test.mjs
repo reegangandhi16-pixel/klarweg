@@ -11,6 +11,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { speakingCounts, render } from './build-speech-tasks.mjs';
+import { dataFileFor } from './chapter-lock.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const APP = fs.readFileSync(path.join(ROOT, 'chapter/chapter-app.js'), 'utf8');
@@ -264,8 +265,7 @@ test('the transcribe URL now always names the task; the dev pilot endpoint path 
 /* ---------- all 258 chapters, real data ---------- */
 const PAGES = fs.readdirSync(path.join(ROOT, 'chapter')).filter((f) => /^chapter-[a-c][0-9]-.*\.html$/.test(f)).sort();
 function chapterData(page) {
-  const html = fs.readFileSync(path.join(ROOT, 'chapter', page), 'utf8');
-  const src = html.match(/<script src="([^"]*data[^"]*\.js)[^"]*"/)[1].split('?')[0];
+  const src = dataFileFor(page);
   const c = { console: { log() {}, warn() {} } }; c.window = c; vm.createContext(c);
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'chapter', src), 'utf8') + '\n;this.__C = CHAPTER;', c);
   return c.__C;

@@ -20,6 +20,15 @@ CASHFREE_ENV = "sandbox"
 CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
 
+# Public site origin (klarweg.in since 2026-10-30; docs/DOMAIN-MIGRATION-KLARWEG-IN.md).
+# ACCOUNT_RETURN_URL: where the iOS Google redirect sign-in lands
+# (src/auth-routes.js). SITE_BASE_URL: Cashfree return_url fallback when the
+# request Origin is not a known site origin (src/cashfree-config.js). Both
+# were set on the live Worker from the dashboard; keeping them here stops a
+# `wrangler deploy` (no keep_vars) from silently removing them.
+ACCOUNT_RETURN_URL = "https://klarweg.in/account/index.html"
+SITE_BASE_URL = "https://klarweg.in"
+
 # Same-day ₹100 consultation booking (src/consultations.js). OFF.
 #   "off"      no online booking; the Live Classes page keeps the email request
 #   "sandbox"  Cashfree TEST payments only (needs CASHFREE_ENV = "sandbox")

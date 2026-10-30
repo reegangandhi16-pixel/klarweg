@@ -57,7 +57,7 @@ test('LIVE: placeholder text ([…]) appears only in entries marked draft', () =
 });
 
 test('LIVE: the page is published (indexed, canonical, allowlisted, in the sitemap, nav and footer) with no launch blocker', () => {
-  const URL = 'https://reegangandhi16-pixel.github.io/klarweg/live-classes.html';
+  const URL = 'https://klarweg.in/live-classes.html';
   assert.equal(/<meta name="robots"[^>]*noindex/.test(html), false, 'noindex is removed');
   assert.match(html, new RegExp(`<link rel="canonical" href="${URL}">`));
   assert.match(html, new RegExp(`<meta property="og:url" content="${URL}">`));

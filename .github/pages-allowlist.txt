@@ -63,6 +63,11 @@ site.js
 # ---------------------------------------------------------------
 robots.txt
 sitemap.xml
+# Custom domain marker. The site deploys through a custom Actions
+# workflow, so GitHub ignores this file: the live custom domain is the
+# repository's Settings → Pages value. It is published anyway so the
+# artifact states its intended origin (tests keep it equal to SITE_BASE).
+CNAME
 manifest.json
 favicon.svg
 apple-touch-icon.png

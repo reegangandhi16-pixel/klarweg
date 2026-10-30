@@ -436,7 +436,7 @@ test('Hinglish box uses the teal tint and teal label; semantic grammar colours a
 
 test('every PDF ends with one clickable chapter link built only from SITE_BASE', async () => {
   const { SITE_BASE } = await import('./site-origin.mjs');
-  assert.equal(SITE_BASE, 'https://reegangandhi16-pixel.github.io/klarweg', 'domain unchanged for now');
+  assert.equal(SITE_BASE, 'https://klarweg.in', 'PDF links follow the site origin');
   for (const [id, p] of plans) for (const [type, r] of Object.entries(p.resources)) {
     const want = `${ctx.siteBase}/chapter/chapter-${id}.html`;
     const anchors = [...r.html.matchAll(/<a href="([^"]*)">([^<]*)<\/a>/g)];

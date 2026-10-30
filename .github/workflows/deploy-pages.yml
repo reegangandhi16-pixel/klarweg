@@ -128,7 +128,10 @@ jobs:
               case "$base" in
                 chapter-app.js|chapter.css|chapter-tutor.js) ;;
                 story-lexicon.js|tokenizer.js|chapter-story.js|global-lexicon.js) ;;
-                chapter-*-data.js) ;;
+                # Free Chapter 1 payloads only - paid chapter content
+                # is served by the Access Worker, never by Pages.
+                chapter-a1-1-data.js|chapter-a2-1-genitiv-data.js|chapter-b1-1-infinitiv-mit-zu-data.js) ;;
+                chapter-b2-01-erweiterte-satzklammer-data.js|chapter-c1-01-tempusgebrauch-stilistische-tempuswahl-data.js|chapter-c2-01-zeitformen-der-verben-data.js) ;;
                 chapter-*.html) ;;
                 *)
                   echo "::error::UNEXPECTED FILE IN chapter/ ARTIFACT: $f"

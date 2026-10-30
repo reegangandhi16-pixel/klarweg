@@ -108,24 +108,32 @@ public/kw-word-pop.css
 GLOB:audio-timing/[0-9a-f]*.json
 
 # ---------------------------------------------------------------
-# Chapter system: two glob patterns, PROVEN this session to match
-# exactly the legitimate files and nothing else.
+# Chapter system.
 #
 #   chapter/chapter-*.html   -> matches exactly the 258 pages linked
 #                                from a1.html-c2.html's own hrefs
 #                                (diffed byte-for-byte against disk;
 #                                zero extra, zero missing matches)
-#   chapter/chapter-*-data.js -> matches exactly the 258 corresponding
-#                                data files (same proof)
 #
-# These are glob patterns, not literal lines, because 516 files is
-# impractical to hand-list and the glob is provably exact against the
-# CURRENT repo. The workflow's own post-build assertion step (see
-# deploy-pages.yml) is the safety net against a FUTURE internal file
-# accidentally matching one of these patterns.
+# A glob, not literal lines, because 258 files is impractical to
+# hand-list and the glob is provably exact against the CURRENT repo.
+# The workflow's post-build assertion step (see deploy-pages.yml) is
+# the safety net against a FUTURE internal file matching it.
+#
+# Chapter DATA: only the 6 free Chapter 1 payloads are published.
+# Every other chapter's content is served by the Access Worker to
+# learners who own that level (access/worker/src/chapters.js; pages
+# rewritten by scripts/chapter-lock.mjs). Adding a paid data file
+# here would publish paid content to everyone, and the workflow
+# assertion refuses any data file not named below.
 # ---------------------------------------------------------------
 GLOB:chapter/chapter-*.html
-GLOB:chapter/chapter-*-data.js
+chapter/chapter-a1-1-data.js
+chapter/chapter-a2-1-genitiv-data.js
+chapter/chapter-b1-1-infinitiv-mit-zu-data.js
+chapter/chapter-b2-01-erweiterte-satzklammer-data.js
+chapter/chapter-c1-01-tempusgebrauch-stilistische-tempuswahl-data.js
+chapter/chapter-c2-01-zeitformen-der-verben-data.js
 
 # Exactly 7 named shared runtime files chapter pages depend on.
 # (The other ~140 files in chapter/ - CLICKABILITY-AUDIT.md,

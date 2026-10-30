@@ -1,18 +1,25 @@
 # klarweg.in domain migration — inventory, DNS, cutover, rollback
 
-Status (2026-10-30): repository side prepared on branch `feat/klarweg-in-domain`.
-External changes so far:
-- Reports Worker accepts `klarweg.in` (owner-approved deploy 2026-10-30, version `60e4f1fb`).
-- DNS moved from AWS Route 53 to **Hostinger** with the GitHub Pages records in
-  place (done by the owner, 2026-10-30 07:07 UTC); TTLs lowered to 300 (§3).
-- Google OAuth: `klarweg.in` added as an authorized domain and JavaScript
-  origin (done by the owner, 2026-10-30; §3a).
-- Domain renewed to 2027-12-01.
+Status (2026-10-30): **LIVE on https://klarweg.in.** Hosting stays on GitHub
+Pages; no Hostinger web-hosting plan is needed (the site is static).
 
-No GitHub Pages setting, Access Worker or payment configuration has been
-changed. Hosting stays on GitHub Pages; no Hostinger
-web-hosting plan is needed (the site is static; nothing in the audit requires
-server-side hosting).
+Done on 2026-10-30 (each step owner-approved):
+- DNS moved from AWS Route 53 to **Hostinger** with the GitHub Pages records;
+  TTLs lowered to 300 (§3). Domain renewed to 2027-12-01.
+- Google OAuth: `klarweg.in` authorized domain + JavaScript origin (§3a).
+- Reports Worker CORS for `klarweg.in` (version `60e4f1fb`), then
+  `SITE_BASE_URL=https://klarweg.in` (version `1c28c085`, PR #245).
+- GitHub Pages custom domain `klarweg.in` set 09:54 UTC; Let's Encrypt
+  certificate issued at once (expires 2027-01-28); Enforce HTTPS on.
+- PR #243 merged (`09cdf9df`): canonical / sitemap / robots / CNAME on klarweg.in.
+- Access Worker `ACCOUNT_RETURN_URL` + `SITE_BASE_URL` set from the dashboard
+  (version `940c61af`, code byte-identical to `e9e85b17`); recorded in
+  `wrangler.toml` by PR #244.
+- Search Console: Domain property `klarweg.in` verified (TXT
+  `google-site-verification=…` on `@`, keep it); sitemap processed, 24 URLs.
+- Desktop Chrome verification passed (§6). iPhone Safari still to run (§6).
+
+No payment configuration has been changed (Cashfree is still sandbox).
 
 The one authority for the public origin is `scripts/site-origin.mjs`
 (`SITE_BASE`). `scripts/set-site-origin.mjs --to <origin> [--write]` rewrites
@@ -229,19 +236,21 @@ Prerequisites (any order, all additive, nothing breaks the github.io site):
 - [x] Lower the A/AAAA/`www` TTLs to 300 in Hostinger (§3, step 2) — done 2026-10-30; `www` clean (300, 40/40) at 09:50 UTC; old-TTL resolver caches gone by 13:41 UTC. Not a cutover gate (cutover changes no DNS); re-run the §3 `dig` checks before starting.
 - [x] Google Cloud console: add `klarweg.in` as an authorized domain and `https://klarweg.in` as an Authorized JavaScript origin (§3a) — done 2026-10-30 (owner-confirmed). Sign-in on klarweg.in itself is verified after cutover (§6).
 - [x] Deploy the Reports Worker with the updated `ALLOWED_ORIGINS` — done 2026-10-30, version `60e4f1fb` (rollback point `4a920e47`).
-- [ ] Review and approve this PR (do not merge yet).
+- [x] Review and approve this PR — PR #243 merged 2026-10-30 (`09cdf9df`).
 
 Cutover (low-traffic window):
 
-1. DNS is already in place (§3). Re-run the §3 `dig` checks immediately before starting.
-2. Repo Settings → Pages → Custom domain `klarweg.in` → Save. From this moment github.io URLs 301 to klarweg.in.
-3. Wait for the certificate (usually minutes, up to 24 h), then tick **Enforce HTTPS**. Until then `https://klarweg.in` may show a certificate warning — do steps 1–3 close together.
-4. Merge this PR (Pages workflow deploys canonical/sitemap/CNAME). Confirm with `cmp` of live files vs `origin/main`.
-5. Live checks: §6.
-6. Afterwards (owner-approved Worker change): Access Worker vars `ACCOUNT_RETURN_URL=https://klarweg.in/account/index.html`, `SITE_BASE_URL=https://klarweg.in`; Reports `SITE_BASE_URL`. Note: redeploying Access from `main` would also ship code merged after 2026-10-03 — review that diff, or change only the vars.
-7. Search Console: add `https://klarweg.in`, submit `/sitemap.xml`.
+1. DNS is already in place (§3). Re-run the §3 `dig` checks immediately before starting. — **done** 09:54 UTC.
+2. Repo Settings → Pages → Custom domain `klarweg.in` → Save. From this moment github.io URLs 301 to klarweg.in. — **done** 09:54 UTC (verified domain; certificate approved immediately).
+3. Wait for the certificate (usually minutes, up to 24 h), then tick **Enforce HTTPS**. Until then `https://klarweg.in` may show a certificate warning — do steps 1–3 close together. — **done** 09:56 UTC.
+4. Merge this PR (Pages workflow deploys canonical/sitemap/CNAME). Confirm with `cmp` of live files vs `origin/main`. — **done**: merged `09cdf9df` ~10:10 UTC, Pages run 41038778911 green, sampled live files == `main`; the deploy also cleared a stale GitHub CDN 404 on `http://klarweg.in/`.
+5. Live checks: §6. — **desktop done; iPhone pending.**
+6. Afterwards (owner-approved Worker change): Access Worker vars `ACCOUNT_RETURN_URL=https://klarweg.in/account/index.html`, `SITE_BASE_URL=https://klarweg.in`; Reports `SITE_BASE_URL`. Note: redeploying Access from `main` would also ship code merged after 2026-10-03 — review that diff, or change only the vars. — **done**: Access vars via dashboard (version `940c61af`, 10:32 UTC; PR #244), Reports `SITE_BASE_URL` (version `1c28c085`, 10:43 UTC; PR #245).
+7. Search Console: add `https://klarweg.in`, submit `/sitemap.xml`. — **done**: existing Domain property verified ~11:07 UTC; sitemap Success, 24 URLs. Pages report (0 indexed / 17 not indexed) is all historical WordPress URLs from before Klarweg.
 
-## 6. Live verification after cutover (not possible yet)
+## 6. Live verification after cutover
+
+Checklist (kept for re-runs):
 
 - `curl -I http://klarweg.in/` → 301 to `https://`; `https://klarweg.in/` → 200, valid certificate.
 - `https://www.klarweg.in/` → 301 to `https://klarweg.in/`.
@@ -249,7 +258,56 @@ Cutover (low-traffic window):
 - Chrome + Safari (macOS and iOS), desktop and 375 px: homepage, a1.html → Chapter 1, word popup, audio play, Klarweg AI status, sign-up, log-in, Google sign-in (popup on desktop, redirect on iOS), log-out, saved words, a sandbox checkout returning to klarweg.in, live-classes waitlist, "Report an issue" submit.
 - Safari: expect the cookie-probe message, as on github.io today.
 
+### 6a. Desktop Chrome results (2026-10-30, ~11:18–12:00 UTC)
+
+Run on the live domain in the owner's Chrome. Read-only: no account
+created, no purchase, no report submitted, no data changed. Audio was
+confirmed in a separate headless Chrome against the same live site (each MP3
+reached `playing`), because the automation tab is a background tab
+(`document.hidden`) and Chrome does not start media there.
+
+| # | Test | Result | Evidence |
+|---|---|---|---|
+| 1 | HTTP → HTTPS | PASS | `http://klarweg.in/…` → 301 → `https://klarweg.in/…`, one hop, valid certificate |
+| 2 | www → apex | PASS | `http(s)://www.klarweg.in/…` → `https://klarweg.in/…`, one hop; github.io links keep path + query |
+| 3 | Homepage | PASS | Fraunces / Inter / JetBrains Mono loaded, `#FAFAF7` canvas, no broken images, no horizontal scroll, canonical `https://klarweg.in/`, no console errors |
+| 4 | Word popup | PASS | "Mann": all fields (pronunciation, EN/HI, Noun/Nominativ, why, singular/plural, example), inside the viewport |
+| 5 | Word audio | PASS (headless) | github.io audio CDN MP3s played to `ended` (0.70 s / 0.77 s); hero "Listen" sentence from jsDelivr (1.82 s) |
+| 6 | A1 page + free Chapter 1 | PASS | A1: 47 chapters, "Try Chapter 1 free"; Chapter 1 opens for a Guest, 9 sections, 163 words, 31 sentence players |
+| 7 | Reading / Listening audio | PASS (headless) | Popup word + vocabulary word played to `ended`; Reading "Play passage" and Listening "Play dialogue" (line 1 → line 2) played; stop/resume worked |
+| 8 | Sign-in screen | PASS | Google button (`accounts.google.com/gsi/button`), email/password, no `origin_mismatch` |
+| 9 | Google sign-in (popup) | PASS | Owner signed in; `/auth/me` 200 `authenticated: true`, `hasFullAccess: true`; header shows "My Account" |
+| 10 | Paid chapter | PASS | Signed out: A1·2 shows "Chapter Locked" (`noindex`). Signed in: A1·2 unlocked (12 sections) |
+| 11 | Saved words | PASS | Signed out → `/account/index.html?mode=login&next=/account/saved-words.html`; signed in → page loads (7 words) |
+| 12 | Klarweg AI status | PASS | `/ai/status` 200; `signedIn` false → true after sign-in; `enabled: true` (`eligible: false` for the owner account; not domain-related) |
+| 13 | Live classes | PASS | Loads, canonical on klarweg.in, waitlist form, no console errors |
+| 14 | 404 + navigation | PASS | Nested missing path → Klarweg 404 with working links; 21 header/nav/footer pages all 200; no `/klarweg/` hrefs |
+| 15 | Report form | PASS (cancelled) | "Found something wrong?" opens with the section label; posts to the Reports Worker, which accepts klarweg.in (204) |
+| 16 | Admin "open" links | PASS (config) | Live Reports `SITE_BASE_URL = https://klarweg.in`; dashboard UI not opened (admin sign-in) |
+
+Signed-in session: account → saved words → home → A1·2 → `c2.html`; all 14
+Access Worker calls 200 (`/auth/me`, `/saved-words`, `/saved-words/counts`,
+`/ai/status`, `/speech/status`, `/resources/…`); no console errors.
+
+Findings: no failures. Low, pre-existing and unrelated to the domain:
+jsDelivr returns 404 for `b1-words-manifest.json`; the engine falls back to
+the `klarweg.in` copy (200). Note: GitHub Pages sends no HSTS header for
+custom domains; Enforce HTTPS redirects all HTTP.
+
+### 6b. iPhone Safari — pending (owner)
+
+Default settings, then Private Browsing: redirects; audio (silent switch
+off, popup speaker, long-press slow, Reading / Listening, lock-screen
+behaviour); email sign-in (expect the cookie-blocked message under
+tracking protection); Google redirect sign-in must land on
+`https://klarweg.in/account/index.html` (any `authError=` code is a
+failure); `next=` return to Chapter 1; A1·2 locked when signed out; optional
+retry with "Prevent Cross-Site Tracking" off to confirm the known
+third-party-cookie limit (§4).
+
 ## 7. Rollback
+
+Rollback points recorded at cutover: `main` `e45e250a` (before #243); Access `e9e85b17`; Reports `4a920e47` (before the CORS change) / `60e4f1fb` (before the `SITE_BASE_URL` change).
 
 - **Before the PR is merged:** Settings → Pages → remove the custom domain. github.io serves directly again within minutes. DNS can stay as it is — nothing else uses the domain.
 - **After merge:** remove the custom domain *and* revert the merge commit (or `node scripts/set-site-origin.mjs --to https://reegangandhi16-pixel.github.io/klarweg --write`, delete `CNAME` + its allowlist line, open a PR). The rollback path is rehearsed byte-for-byte in `set-site-origin.test.mjs`.

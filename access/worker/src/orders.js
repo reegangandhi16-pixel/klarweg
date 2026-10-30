@@ -7,7 +7,9 @@ import {
   cashfreeConfigProblem,
   siteBaseUrl,
   notifyUrl,
-  readJson
+  readJson,
+  offerFiltersFor,
+  OFFER_FILTER_API_VERSION
 } from "./cashfree-config.js";
 import {
   getSessionToken,
@@ -122,13 +124,19 @@ export async function createOrder(request, env) {
     );
   }
 
+  /* Lifetime-only Cashfree offers are denied on every other order
+     (cashfree-config.js). offer_filters exists only from API 2026-01-01, so
+     only a filtered Create Order uses that version; order and payment
+     reads stay on CASHFREE_API_VERSION. */
+  const offerFilters = offerFiltersFor(env, product.id);
+
   const cashfreeResponse = await fetch(
     `${cashfreeBaseUrl(env)}/orders`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-version": CASHFREE_API_VERSION,
+        "x-api-version": offerFilters ? OFFER_FILTER_API_VERSION : CASHFREE_API_VERSION,
         "x-client-id": env.CASHFREE_APP_ID,
         "x-client-secret": env.CASHFREE_SECRET_KEY,
         "x-idempotency-key": crypto.randomUUID()
@@ -167,7 +175,8 @@ export async function createOrder(request, env) {
           // not a static dashboard URL) — without this field Cashfree
           // never calls webhooks-cashfree.js and grantProduct() is
           // never reached.
-          notify_url: notifyUrl(env)
+          notify_url: notifyUrl(env),
+          ...(offerFilters ? { offer_filters: offerFilters } : {})
         }
       })
     }

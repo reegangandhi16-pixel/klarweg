@@ -19,6 +19,12 @@ workers_dev = true
 CASHFREE_ENV = "production"
 CASHFREE_APP_ID = "115666718bafaa0ac9e7b68c1c37666511"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
+# Cashfree offers only Klarweg Lifetime orders may use (src/cashfree-config.js):
+# every other order denies them via offer_filters. Comma-separated offer
+# codes and/or offer ids. Empty = no filter (Create Order unchanged). Must be
+# set BEFORE a Lifetime-only offer (e.g. KLARWEGFREE1) goes live in Cashfree
+# Production, or that offer would apply to B2/C1/C2 too.
+CASHFREE_LIFETIME_ONLY_OFFERS = ""
 
 # Public site origin (klarweg.in since 2026-10-30; docs/DOMAIN-MIGRATION-KLARWEG-IN.md).
 # ACCOUNT_RETURN_URL: where the iOS Google redirect sign-in lands

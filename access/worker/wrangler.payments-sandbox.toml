@@ -27,6 +27,10 @@ workers_dev = true
 # key are Worker SECRETS (see below), never values in this file.
 CASHFREE_ENV = "sandbox"
 CASHFREE_NOTIFY_URL = "https://klarweg-access-payments-nonprod.klarweg-issue-reports-2026.workers.dev/webhooks/cashfree"
+# Lifetime-only Cashfree offers (src/cashfree-config.js): the SANDBOX test
+# offer KLARWEGFREE1 (offer id efef5953-…, Test environment, created
+# 2026-10-30). Every non-Lifetime order denies it via offer_filters.
+CASHFREE_LIFETIME_ONLY_OFFERS = "KLARWEGFREE1,efef5953-c0f0-4a54-b974-862e15a195e9"
 
 # The local test page served by scripts/payments-sandbox-site.mjs. The Worker
 # sends Cashfree's return redirect back to it (sandbox only; src/cashfree-config.js).

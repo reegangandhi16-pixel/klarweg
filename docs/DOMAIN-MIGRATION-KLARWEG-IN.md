@@ -25,7 +25,7 @@ tree consistent with it.
 | In that mode GitHub **ignores the `CNAME` file**; the custom domain is the Settings → Pages value | GitHub docs, "Managing a custom domain for your GitHub Pages site" |
 | *(2026-10-29, superseded)* Hostinger was only the **registrar**; DNS was delegated to **AWS Route 53** (`ns-695.awsdns-22.net`, `ns-350.awsdns-43.com`, `ns-1854.awsdns-39.co.uk`, `ns-1362.awsdns-42.org`) | `whois`, `dig NS` |
 | *(2026-10-29, superseded)* Apex was `A 3.6.224.232` (EC2 ap-south-1) + `AAAA 2406:da1a:1247:aa00:66fe:464f:25b8:709a`; no HTTP/HTTPS answer; no MX, TXT, CAA or `www` publicly visible | `dig`, `curl` |
-| **Registration expires 2026-12-01** | `whois` |
+| Registration was due to expire 2026-12-01; **renewed — now expires 2027-12-01** (checked 2026-10-30) | `whois` (`Registry Expiry Date: 2027-12-01T06:33:25Z`) |
 | Live Access Worker = version `e9e85b17` (2026-10-03); allows `https://klarweg.in` with credentials; refuses `https://www.klarweg.in` | `wrangler deployments list`; `OPTIONS /auth/me` → `204`, `Access-Control-Allow-Origin: https://klarweg.in`, `…-Credentials: true` |
 | Live Access Worker sets no `SITE_BASE_URL`, `ACCOUNT_RETURN_URL` or CORS vars (code defaults apply); `CASHFREE_ENV = sandbox` | `wrangler versions view` (var names/values; secrets by name only) |
 | **2026-10-30:** nameservers switched to Hostinger (`ns1.dns-parking.com`, `ns2.dns-parking.com`) at 07:07 UTC; the Hostinger zone holds the GitHub Pages A/AAAA, `www` CNAME and verification TXT records (§3) | `.in` registry delegation, `whois` (updated 07:07:57 UTC), `dig @ns1.dns-parking.com`, Google/Cloudflare/Quad9 resolvers |
@@ -56,7 +56,7 @@ tree consistent with it.
 | Reports Worker `ALLOWED_ORIGINS` | no `klarweg.in` (live 403) | `https://klarweg.in` added in `report/worker/wrangler.toml` (this PR) | **DONE 2026-10-30** (owner-approved): version `60e4f1fb-718c-4861-8423-5aa998b22ea7`; rollback `wrangler rollback 4a920e47-230f-4c47-a524-eb4c2181c38b` | `OPTIONS` from `https://klarweg.in` → 204 (verified); github.io 204; unknown origin 403 |
 | Reports Worker `SITE_BASE_URL` (admin "open" links) | github.io | `https://klarweg.in` | after cutover (github.io redirects anyway) | admin dashboard link |
 | Turnstile | no site key configured on the page | none now; add `klarweg.in` to the widget hostnames if one is configured later | — | — |
-| Google OAuth client | origins unknown to the repo | add `https://klarweg.in` to **Authorized JavaScript origins** (keep github.io). Redirect URI is the Worker's `/auth/google/redirect` — unchanged | Owner, Google Cloud console, **before cutover** — steps in §3a | Google button renders and signs in on klarweg.in |
+| Google OAuth client | origins unknown to the repo | add `https://klarweg.in` to **Authorized JavaScript origins** (keep github.io). Redirect URI is the Worker's `/auth/google/redirect` — unchanged | **DONE 2026-10-30** (owner-confirmed; Google console not visible to Claude) — steps in §3a | Google button renders and signs in on klarweg.in |
 | Cashfree | sandbox (live var) | when production goes live: whitelist `klarweg.in` | Owner, Cashfree dashboard | sandbox checkout returns to `klarweg.in` |
 | Session cookie (`SameSite=None` on `workers.dev`) | third-party from github.io | **still third-party from klarweg.in** — same behaviour, no regression, no fix | — | §4 |
 | Exam Portal | Worker-proxied; not part of the Pages allowlist | none | — | — |
@@ -205,11 +205,11 @@ move.
 
 Prerequisites (any order, all additive, nothing breaks the github.io site):
 
-- [ ] **Renew the domain** (expires 2026-12-01).
+- [x] **Renew the domain** — done; `whois` shows expiry 2027-12-01 (checked 2026-10-30).
 - [x] DNS records for GitHub Pages in the Hostinger zone (owner, 2026-10-30; §3).
 - [x] Confirm `klarweg.in` shows **Verified** under profile Settings → Pages (§3, step 1) — confirmed 2026-10-30 (keep the TXT record).
 - [x] Lower the A/AAAA/`www` TTLs to 300 in Hostinger (§3, step 2) — done 2026-10-30; confirm `www` shows 300 and 4 h have passed before cutover.
-- [ ] Google Cloud console: add `klarweg.in` as an authorized domain and `https://klarweg.in` as an Authorized JavaScript origin (§3a).
+- [x] Google Cloud console: add `klarweg.in` as an authorized domain and `https://klarweg.in` as an Authorized JavaScript origin (§3a) — done 2026-10-30 (owner-confirmed). Sign-in on klarweg.in itself is verified after cutover (§6).
 - [x] Deploy the Reports Worker with the updated `ALLOWED_ORIGINS` — done 2026-10-30, version `60e4f1fb` (rollback point `4a920e47`).
 - [ ] Review and approve this PR (do not merge yet).
 

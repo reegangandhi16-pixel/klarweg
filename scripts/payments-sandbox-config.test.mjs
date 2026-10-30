@@ -76,7 +76,8 @@ test('SANDBOX CONFIG: CORS, the CSRF guard and the return redirect reach only th
 });
 
 test('ISOLATION: production and the exam/QA non-prod Worker are unchanged, and no production tool reads the sandbox file', () => {
-  assert.equal(val(PROD, 'CASHFREE_ENV'), 'sandbox');
+  assert.equal(val(PROD, 'CASHFREE_ENV'), 'production', 'production takes live course payments (docs/CASHFREE-PRODUCTION.md)');
+  assert.equal(/^TEST/i.test(val(PROD, 'CASHFREE_APP_ID')), false, 'with a live app id');
   assert.equal(val(PROD, 'CONSULT_BOOKING'), 'off');
   assert.equal(val(PROD, 'ENROL_PAYMENTS'), 'off');
   assert.equal(val(PROD, 'ENROL_COURSES'), '');

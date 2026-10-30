@@ -160,13 +160,18 @@ function guard({ toml = PROD_TOML, data = null, flags = [] } = {}) {
     return (r.stdout || '') + (r.stderr || '');
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 }
-const set = (k, v) => PROD_TOML.replace(new RegExp(`^${k} = .*$`, 'm'), `${k} = ${v}`);
+const setIn = (toml, k, v) => toml.replace(new RegExp(`^${k} = .*$`, 'm'), `${k} = ${v}`);
+const set = (k, v) => setIn(PROD_TOML, k, v);
+/* Production takes live payments; the sandbox-only rules are exercised on a
+   copy switched back to Cashfree's sandbox (as wrangler.payments-sandbox.toml is). */
+const SANDBOX_TOML = setIn(setIn(PROD_TOML, 'CASHFREE_ENV', '"sandbox"'), 'CASHFREE_APP_ID', '"TEST0000000000"');
+const setSandbox = (k, v) => setIn(SANDBOX_TOML, k, v);
 const OPEN_DATA = read('live-classes-data.js').replace("enrolment: 'waitlist'", "enrolment: 'open'");
 
 test('GUARD: the committed config passes every enrolment rule (payments off)', () => {
   assert.equal(tomlVal('ENROL_PAYMENTS'), 'off');
   assert.equal(tomlVal('ENROL_COURSES'), '');
-  assert.equal(tomlVal('CASHFREE_ENV'), 'sandbox');
+  assert.equal(tomlVal('CASHFREE_ENV'), 'production');
   assert.equal(tomlVal('ENROL_CONSULT_CREDIT'), 'course-fee', 'owner decision D11: the ₹100 consultation is credited against the course fee');
   const out = guard();
   assert.match(out, /could not read the live Worker/, out);
@@ -176,8 +181,9 @@ test('GUARD: the committed config passes every enrolment rule (payments off)', (
 test('GUARD: payments on need the explicit flag, the matching Cashfree environment and a recorded ₹100 decision', () => {
   assert.match(guard({ toml: set('ENROL_PAYMENTS', '"maybe"') }), /must be "off", "sandbox" or "live"/);
   assert.match(guard({ toml: set('ENROL_PAYMENTS', '"sandbox"') }), /--allow-enrol-payments=sandbox/);
-  assert.match(guard({ toml: set('ENROL_PAYMENTS', '"live"'), flags: ['--allow-enrol-payments=live'] }), /ENROL_PAYMENTS="live" needs CASHFREE_ENV="production"/);
-  const credit = (v) => set('ENROL_PAYMENTS', '"sandbox"').replace(/^ENROL_CONSULT_CREDIT = .*\n/m, v == null ? '' : `ENROL_CONSULT_CREDIT = ${v}\n`);
+  assert.match(guard({ toml: set('ENROL_PAYMENTS', '"sandbox"'), flags: ['--allow-enrol-payments=sandbox'] }), /ENROL_PAYMENTS="sandbox" needs CASHFREE_ENV="sandbox"/);
+  assert.match(guard({ toml: setSandbox('ENROL_PAYMENTS', '"live"'), flags: ['--allow-enrol-payments=live'] }), /ENROL_PAYMENTS="live" needs CASHFREE_ENV="production"/);
+  const credit = (v) => setSandbox('ENROL_PAYMENTS', '"sandbox"').replace(/^ENROL_CONSULT_CREDIT = .*\n/m, v == null ? '' : `ENROL_CONSULT_CREDIT = ${v}\n`);
   assert.match(guard({ toml: credit(null), flags: ['--allow-enrol-payments=sandbox'] }), /ENROL_CONSULT_CREDIT is not set/);
   assert.match(guard({ toml: credit('"sometimes"'), flags: ['--allow-enrol-payments=sandbox'] }), /must be "off" or "course-fee"/);
   for (const v of ['"off"', '"course-fee"']) assert.match(guard({ toml: credit(v), flags: ['--allow-enrol-payments=sandbox'] }), /could not read the live Worker/, v);

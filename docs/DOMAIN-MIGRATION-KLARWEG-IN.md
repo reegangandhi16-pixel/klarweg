@@ -49,7 +49,7 @@ tree consistent with it.
 | Chapter resource PDFs (R2) | footer link built from `SITE_BASE`; existing PDFs say github.io | future builds say klarweg.in; existing ones redirect via GitHub after cutover. No regeneration needed | — | `chapter-resources.test.mjs` |
 | Audio (`klarweg-audio-cdn`) | separate Pages origin | none | — | test asserts the CDN URL is unchanged |
 | **GitHub Pages custom domain** | unset | `klarweg.in`, then Enforce HTTPS | Owner, Settings → Pages, at cutover | `GET /pages` → `cname: klarweg.in`; `curl -I https://reegangandhi16-pixel.github.io/klarweg/a1.html` → 301 to `https://klarweg.in/a1.html` |
-| **DNS** (Hostinger zone) | GitHub Pages records in place since 2026-10-30 | none required; optionally lower TTLs (§3) | Owner, done | `dig` checks in §3 |
+| **DNS** (Hostinger zone) | GitHub Pages records in place since 2026-10-30 | none required; TTLs lowered to 300 on 2026-10-30 (§3) | Owner, done | `dig` checks in §3 |
 | Access Worker CORS | `klarweg.in` allowed (live) | none. `www` not needed: GitHub redirects `www` → apex | — | preflight above |
 | Access Worker `ACCOUNT_RETURN_URL` (iOS Google redirect sign-in) | default github.io account page | `https://klarweg.in/account/index.html` | Owner-approved Worker change, after cutover | expected to work without it via GitHub's 301 (path + query — confirm in §6), so cleanup, not a blocker |
 | Access Worker `SITE_BASE_URL` (Cashfree `return_url` fallback) | default github.io | `https://klarweg.in` | same | `return_url` already follows the request Origin for `klarweg.in` in the deployed code |
@@ -72,15 +72,15 @@ Domains → `klarweg.in` → DNS / Nameservers). The old AWS Route 53 hosted zon
 still answers if queried directly, but the registry no longer delegates to it:
 **do not edit Route 53** — changes there have no effect.
 
-**Current Hostinger zone (checked 2026-10-30)** — matches the GitHub Pages
+**Current Hostinger zone (checked 2026-10-30, after the TTL change)** — matches the GitHub Pages
 requirements; nothing needs adding:
 
 | Type | Name | Value | TTL |
 |---|---|---|---|
-| A | `@` (`klarweg.in`) | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` | 14400 |
-| AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` | 14400 |
-| CNAME | `www` | `reegangandhi16-pixel.github.io` (no repo name) | 14400 |
-| TXT | `_github-pages-challenge-reegangandhi16-pixel` | GitHub verification value | — |
+| A | `@` (`klarweg.in`) | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` | 300 |
+| AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` | 300 |
+| CNAME | `www` | `reegangandhi16-pixel.github.io` (no repo name) | 300 (see note) |
+| TXT | `_github-pages-challenge-reegangandhi16-pixel` | GitHub verification value | 14400 (left as is) |
 | NS | `@` | `ns1.dns-parking.com`, `ns2.dns-parking.com` | 86400 |
 
 No MX (no email on the domain), no TXT on the apex, no CAA (so Let's Encrypt —
@@ -98,9 +98,17 @@ unaffected.
    GitHub and no repository claims the domain, verification is what stops
    another account from attaching `klarweg.in` to its own Pages site. Keep
    the TXT record after verifying.
-2. **Optional, before cutover: lower TTLs.** In the Hostinger DNS editor set
-   the TTL of the A, AAAA and `www` records to `300`, so a rollback reaches
-   everyone in minutes rather than up to 4 h. Edit only the TTL fields.
+2. **TTLs lowered — done 2026-10-30 (before 08:30 UTC), at the owner's request.**
+   A, AAAA and `www` are at `300` (were `14400`), so a later DNS change
+   reaches everyone in minutes rather than up to 4 h. Only the TTL fields
+   were edited; values unchanged. Hostinger keeps one TTL per name+type, so
+   one edit changed all four A (and all four AAAA) records. Saving may show a
+   "Web Apps hosting" upsell — decline with *No thanks, point my domain*.
+   - A/AAAA were served at 300 consistently right away.
+   - `www` is stored at 300, but Hostinger's nameservers were still syncing
+     at 08:32 UTC (mixed 300/14400 answers, two SOA serials). It converges on
+     its own. Before cutover, confirm `dig www.klarweg.in CNAME` shows 300,
+     and allow 4 h after the change so caches holding the old 14400 expire.
 
 **Do not:** use Hostinger's "reset DNS records" (restores parking defaults
 and drops the GitHub records); add wildcard records (takeover risk); add a
@@ -200,7 +208,7 @@ Prerequisites (any order, all additive, nothing breaks the github.io site):
 - [ ] **Renew the domain** (expires 2026-12-01).
 - [x] DNS records for GitHub Pages in the Hostinger zone (owner, 2026-10-30; §3).
 - [x] Confirm `klarweg.in` shows **Verified** under profile Settings → Pages (§3, step 1) — confirmed 2026-10-30 (keep the TXT record).
-- [ ] Optional: lower the A/AAAA/`www` TTLs to 300 in Hostinger (§3, step 2).
+- [x] Lower the A/AAAA/`www` TTLs to 300 in Hostinger (§3, step 2) — done 2026-10-30; confirm `www` shows 300 and 4 h have passed before cutover.
 - [ ] Google Cloud console: add `klarweg.in` as an authorized domain and `https://klarweg.in` as an Authorized JavaScript origin (§3a).
 - [x] Deploy the Reports Worker with the updated `ALLOWED_ORIGINS` — done 2026-10-30, version `60e4f1fb` (rollback point `4a920e47`).
 - [ ] Review and approve this PR (do not merge yet).
@@ -228,4 +236,4 @@ Cutover (low-traffic window):
 - **Before the PR is merged:** Settings → Pages → remove the custom domain. github.io serves directly again within minutes. DNS can stay as it is — nothing else uses the domain.
 - **After merge:** remove the custom domain *and* revert the merge commit (or `node scripts/set-site-origin.mjs --to https://reegangandhi16-pixel.github.io/klarweg --write`, delete `CNAME` + its allowlist line, open a PR). The rollback path is rehearsed byte-for-byte in `set-site-origin.test.mjs`.
 - **Workers:** roll back to the recorded version (`wrangler rollback <version>`); additive CORS entries can stay.
-- If the TTLs were lowered to 300 (§3), keep them there for a week after cutover so any DNS change propagates fast.
+- Keep the TTLs at 300 (§3) for a week after cutover so any DNS change propagates fast.

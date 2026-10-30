@@ -199,7 +199,7 @@ Prerequisites (any order, all additive, nothing breaks the github.io site):
 
 - [ ] **Renew the domain** (expires 2026-12-01).
 - [x] DNS records for GitHub Pages in the Hostinger zone (owner, 2026-10-30; §3).
-- [ ] Confirm `klarweg.in` shows **Verified** under profile Settings → Pages (§3, step 1).
+- [x] Confirm `klarweg.in` shows **Verified** under profile Settings → Pages (§3, step 1) — confirmed 2026-10-30 (keep the TXT record).
 - [ ] Optional: lower the A/AAAA/`www` TTLs to 300 in Hostinger (§3, step 2).
 - [ ] Google Cloud console: add `klarweg.in` as an authorized domain and `https://klarweg.in` as an Authorized JavaScript origin (§3a).
 - [x] Deploy the Reports Worker with the updated `ALLOWED_ORIGINS` — done 2026-10-30, version `60e4f1fb` (rollback point `4a920e47`).

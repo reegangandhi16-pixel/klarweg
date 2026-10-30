@@ -9,7 +9,7 @@ workers_dev = true
 ALLOWED_ORIGINS = "https://klarweg.in,https://klarweg.com,https://www.klarweg.com,https://reegangandhi16-pixel.github.io"
 TURNSTILE_SITE_KEY = ""
 MAX_UPLOAD_BYTES = "2097152"
-SITE_BASE_URL = "https://reegangandhi16-pixel.github.io/klarweg"
+SITE_BASE_URL = "https://klarweg.in"
 
 [[d1_databases]]
 binding = "DB"

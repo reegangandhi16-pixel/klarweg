@@ -10,15 +10,23 @@ workers_dev = true
 # scripts/predeploy-access-check.mjs first, which refuses to deploy if
 # these [vars] would silently change the live Cashfree environment.
 #
-# Cashfree: production is currently SANDBOX. To go live, change BOTH
-# CASHFREE_ENV and CASHFREE_APP_ID here in one reviewed commit, set the
-# live secret with `wrangler secret put CASHFREE_SECRET_KEY`, and deploy
-# with --allow-cashfree-env-change=production. The Worker itself refuses
-# checkout when the two values disagree (src/cashfree-config.js).
+# Cashfree: PRODUCTION (live payments) since 2026-10-30 (live version
+# 608453a5). CASHFREE_SECRET_KEY is a Worker secret, never in this file.
+# See docs/CASHFREE-PRODUCTION.md on main.
 [vars]
-CASHFREE_ENV = "sandbox"
-CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
+CASHFREE_ENV = "production"
+CASHFREE_APP_ID = "115666718bafaa0ac9e7b68c1c37666511"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
+
+# Set on the live Worker from the dashboard (klarweg.in cutover); kept here
+# so this deploy does not remove them.
+ACCOUNT_RETURN_URL = "https://klarweg.in/account/index.html"
+SITE_BASE_URL = "https://klarweg.in"
+
+# Coupon KLARWEGFREE1 (src/coupons.js): ₹4,998 off Klarweg Lifetime only
+# (₹4,999 → ₹1). No expiry, no redemption limit (owner decision 2026-10-30).
+# Kill switch: set "off" in the Cloudflare dashboard.
+COUPON_KLARWEGFREE1 = "on"
 
 # Klarweg AI (see src/ai.js). ON. Chapter AI: with the Chapter-1 preview at 0,
 # only accounts holding a level entitlement qualify. Homepage chat: buyers, plus

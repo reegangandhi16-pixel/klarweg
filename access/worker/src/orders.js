@@ -1,6 +1,7 @@
 import { getProduct } from "./products.js";
 import { isValidPhone } from "./auth.js";
 import { grantProduct } from "./entitlements.js";
+import { priceWithCoupon } from "./coupons.js";
 import {
   cashfreeMode,
   cashfreeBaseUrl,
@@ -78,9 +79,22 @@ export async function createOrder(request, env) {
     );
   }
 
+  /* The payable amount is computed here, from the catalogue price and
+     an optional coupon code (coupons.js). Any amount or discount the
+     browser sends is never read. */
+  const priced = priceWithCoupon(env, product, body?.coupon);
+
+  if (!priced.ok) {
+    return json(
+      { ok: false, error: priced.message, code: priced.error },
+      400
+    );
+  }
+
+  const quote = priced.quote;
   const orderId = createOrderId();
   const now = Math.floor(Date.now() / 1000);
-  const amount = rupeesFromPaise(product.amountPaise);
+  const amount = rupeesFromPaise(quote.payablePaise);
 
   /* An expired single-level entitlement (expires_at in the past) must
      not block re-purchasing that same level - only a still-active
@@ -150,7 +164,8 @@ export async function createOrder(request, env) {
               item_id: product.id,
               item_name: product.name,
               item_quantity: 1,
-              item_original_unit_price: amount,
+              item_original_unit_price: rupeesFromPaise(quote.originalPaise),
+              ...(quote.couponCode ? { item_discounted_unit_price: amount } : {}),
               item_currency: "INR"
             }
           ]
@@ -192,7 +207,7 @@ export async function createOrder(request, env) {
 
   if (
     cashfreeData.order_id !== orderId ||
-    returnedAmountPaise !== product.amountPaise ||
+    returnedAmountPaise !== quote.payablePaise ||
     cashfreeData.order_currency !== "INR"
   ) {
     return json(
@@ -229,16 +244,22 @@ export async function createOrder(request, env) {
         payment_id,
         created_at,
         updated_at,
-        product_id
-      ) VALUES (?1, ?2, ?3, ?4, 'INR', 'created', NULL, ?5, ?5, ?6)`
+        product_id,
+        original_amount_paise,
+        discount_paise,
+        coupon_code
+      ) VALUES (?1, ?2, ?3, ?4, 'INR', 'created', NULL, ?5, ?5, ?6, ?7, ?8, ?9)`
     )
     .bind(
       orderId,
       user.id,
       orderId,
-      product.amountPaise,
+      quote.payablePaise,
       now,
-      product.id
+      product.id,
+      quote.originalPaise,
+      quote.discountPaise,
+      quote.couponCode
     )
     .run();
 
@@ -247,7 +268,10 @@ export async function createOrder(request, env) {
     order: {
       id: orderId,
       productId: product.id,
-      amountPaise: product.amountPaise,
+      amountPaise: quote.payablePaise,
+      originalAmountPaise: quote.originalPaise,
+      discountPaise: quote.discountPaise,
+      couponCode: quote.couponCode,
       currency: "INR",
       status: "created"
     },
@@ -257,6 +281,52 @@ export async function createOrder(request, env) {
        authority — kw-checkout.js never guesses. */
     checkout: { mode: cashfreeMode(env) }
   });
+}
+
+/* POST /coupons/quote { product_id, coupon } → the server's price for the
+   checkout dialog. Display only: POST /orders recomputes it independently,
+   so a quote can never be replayed or edited into a cheaper order. */
+export async function quoteOrder(request, env) {
+  const token = getSessionToken(request);
+  const user = await findSessionUser(env.DB, token);
+
+  if (!user) {
+    return json(
+      { ok: false, error: "Authentication required." },
+      401
+    );
+  }
+
+  let body;
+
+  try {
+    body = await request.json();
+  } catch {
+    return json(
+      { ok: false, error: "Invalid JSON body." },
+      400
+    );
+  }
+
+  const product = getProduct(body?.product_id);
+
+  if (!product) {
+    return json(
+      { ok: false, error: "Invalid product." },
+      400
+    );
+  }
+
+  const priced = priceWithCoupon(env, product, body?.coupon);
+
+  if (!priced.ok) {
+    return json(
+      { ok: false, error: priced.message, code: priced.error },
+      400
+    );
+  }
+
+  return json({ ok: true, quote: { ...priced.quote, currency: "INR" } });
 }
 
 export async function getOrder(request, env, orderId) {

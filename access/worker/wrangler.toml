@@ -29,6 +29,12 @@ GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleuse
 ACCOUNT_RETURN_URL = "https://klarweg.in/account/index.html"
 SITE_BASE_URL = "https://klarweg.in"
 
+# Coupon KLARWEGFREE1 (src/coupons.js): ₹4,998 off Klarweg Lifetime only
+# (₹4,999 → ₹1). No expiry, no redemption limit (owner decision 2026-10-30).
+# Kill switch: set "off" in the Cloudflare dashboard (takes effect without a
+# code deploy); a later `wrangler deploy` re-applies this value.
+COUPON_KLARWEGFREE1 = "on"
+
 # Same-day ₹100 consultation booking (src/consultations.js). OFF.
 #   "off"      no online booking; the Live Classes page keeps the email request
 #   "sandbox"  Cashfree TEST payments only (needs CASHFREE_ENV = "sandbox")

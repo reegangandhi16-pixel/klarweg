@@ -165,7 +165,10 @@ test('the committed wrangler.toml keeps consultation booking off, with no bookab
   const toml = fs.readFileSync(path.join(WORKER_DIR, 'wrangler.toml'), 'utf8');
   assert.match(toml, /^CONSULT_BOOKING = "off"$/m);
   assert.match(toml, /^CONSULT_TEACHERS = ""$/m);
-  assert.match(toml, /^CASHFREE_ENV = "sandbox"$/m);
+  /* Production takes live course payments (CASHFREE_ENV = "production"),
+     which is exactly why booking must stay "off" until its own go-live. */
+  assert.match(toml, /^CASHFREE_ENV = "production"$/m);
+  assert.doesNotMatch(toml, /^CONSULT_BOOKING = "(sandbox|live)"$/m);
 });
 
 test('bookable teachers: only the owner and candidate-01, and only when configured', () => {

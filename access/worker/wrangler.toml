@@ -10,14 +10,14 @@ workers_dev = true
 # scripts/predeploy-access-check.mjs first, which refuses to deploy if
 # these [vars] would silently change the live Cashfree environment.
 #
-# Cashfree: production is currently SANDBOX. To go live, change BOTH
-# CASHFREE_ENV and CASHFREE_APP_ID here in one reviewed commit, set the
-# live secret with `wrangler secret put CASHFREE_SECRET_KEY`, and deploy
-# with --allow-cashfree-env-change=production. The Worker itself refuses
-# checkout when the two values disagree (src/cashfree-config.js).
+# Cashfree: PRODUCTION (live payments) since 2026-10-30. CASHFREE_ENV and
+# CASHFREE_APP_ID change together, in one reviewed commit, with the matching
+# CASHFREE_SECRET_KEY secret (never in this file). The Worker refuses
+# checkout when they disagree (src/cashfree-config.js). Go-live, rollback and
+# the sandbox keys' home: docs/CASHFREE-PRODUCTION.md.
 [vars]
-CASHFREE_ENV = "sandbox"
-CASHFREE_APP_ID = "TEST109236435b63e20d77f9296f28d234632901"
+CASHFREE_ENV = "production"
+CASHFREE_APP_ID = "115666718bafaa0ac9e7b68c1c37666511"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
 
 # Public site origin (klarweg.in since 2026-10-30; docs/DOMAIN-MIGRATION-KLARWEG-IN.md).

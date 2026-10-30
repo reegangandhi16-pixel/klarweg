@@ -10,7 +10,7 @@
      chapters/<CHAPTER_RELEASE>/index.json       { chapters: { <id>: { title } } }
      chapters/<CHAPTER_RELEASE>/<chapter-id>.js  the chapter-*-data.js file, byte for byte
 
-   built by scripts/build-chapter-release.mjs.
+   built by `scripts/chapter-lock.mjs release`.
 
    Access = the chapter is free (Chapter 1 of every level) or the signed-in
    user holds the level entitlement (resources.js canAccessChapterResources,

@@ -66,7 +66,6 @@
     '.kwco-title{font-family:var(--font-display,Fraunces,Georgia,serif);font-weight:500;font-size:26px;line-height:1.18;letter-spacing:-.02em;color:var(--ink-primary,#0E0E10);margin:0}',
     '.kwco-body{font-size:15px;line-height:1.6;color:var(--ink-secondary,#5A5A60);margin:12px 0 0;text-wrap:pretty}',
     '.kwco-line{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-top:24px;padding-top:16px;border-top:1px solid rgba(14,14,16,.08);font-size:14px;color:var(--ink-secondary,#5A5A60)}',
-    '.kwco-line + .kwco-line{margin-top:8px;padding-top:8px}',
     '.kwco-amount{font-family:var(--font-display,Fraunces,Georgia,serif);font-size:24px;font-weight:500;color:var(--ink-primary,#0E0E10)}',
     '.kwco-field{margin-top:20px}',
     '.kwco-field label{display:block;font-size:13px;font-weight:600;color:var(--ink-primary,#0E0E10);margin-bottom:6px}',
@@ -161,7 +160,6 @@
   }
 
   /* view: { eyebrow, title, body, mark, amount, amountLabel, error, note,
-            lines:[{label, value, strong}] (replaces the single amount line),
             field:{id,label,type,placeholder,autocomplete,value},
             actions:[{label, kind, onClick, href}], busy, dismissible } */
   function render(view) {
@@ -172,12 +170,7 @@
     if (view.eyebrow) html += '<p class="kwco-eyebrow">' + esc(view.eyebrow) + '</p>';
     html += '<h2 class="kwco-title" id="kwco-title">' + esc(view.title) + '</h2>';
     if (view.body) html += '<p class="kwco-body">' + esc(view.body) + '</p>';
-    if (view.lines) {
-      html += view.lines.map(function (l) {
-        return '<div class="kwco-line"><span>' + esc(l.label) + '</span>' +
-               '<span' + (l.strong ? ' class="kwco-amount"' : '') + '>' + esc(l.value) + '</span></div>';
-      }).join('');
-    } else if (view.amountLabel) {
+    if (view.amountLabel) {
       html += '<div class="kwco-line"><span>' + esc(view.amountFor || 'One-time payment') + '</span>' +
               '<span class="kwco-amount">' + esc(view.amountLabel) + '</span></div>';
     }
@@ -235,15 +228,8 @@
   /* ============================================================
      FLOW
      ============================================================ */
-  /* Only a product id and the code the learner typed are sent. The
-     Worker prices the order itself (products.js + coupons.js). */
-  function createOrder(productId, coupon) {
-    var body = { product_id: productId };
-    if (coupon) body.coupon = coupon;
-    return auth().request('/orders', { method: 'POST', body: body });
-  }
-  function quoteCoupon(productId, coupon) {
-    return auth().request('/coupons/quote', { method: 'POST', body: { product_id: productId, coupon: coupon } });
+  function createOrder(productId) {
+    return auth().request('/orders', { method: 'POST', body: { product_id: productId } });
   }
   function readOrder(orderId) {
     return auth().request('/orders/' + encodeURIComponent(orderId));
@@ -392,91 +378,20 @@
     if (global.KWAccess) global.KWAccess.refresh();
   }
 
-  /* Plans with a coupon field. Display only: the Worker decides whether a
-     code applies (coupons.js), and the field never names a code. */
-  var COUPON_PRODUCTS = { LIFETIME: true };
-
-  function money(paise) {
-    return '₹' + (paise / 100).toLocaleString('en-IN', { maximumFractionDigits: 2 });
-  }
-
-  /* opts: { quote } — a server-validated coupon price, shown as
-           price / discount / payable; or { code, error } after a
-           refused code, to keep what the learner typed. */
-  function confirmPurchase(product, ctx, opts) {
-    opts = opts || {};
-    var quote = opts.quote || null;
-    var couponable = !!COUPON_PRODUCTS[product.id];
-    var cashfreeNote = 'Payment is handled by Cashfree. Klarweg never sees your card details.';
-    var view = {
+  function confirmPurchase(product, ctx) {
+    render({
       eyebrow: product.tier,
       title: product.name,
       body: product.kind === 'bundle'
         ? 'One payment opens every chapter of A1, A2, B1, B2, C1 and C2, including chapters added later.'
         : 'One payment opens every chapter of ' + product.id + '. No subscription, no renewal.',
-      note: cashfreeNote
-    };
-
-    if (quote) {
-      view.lines = [
-        { label: 'Price', value: money(quote.originalPaise) },
-        { label: 'Coupon ' + quote.couponCode, value: '−' + money(quote.discountPaise) },
-        { label: 'You pay', value: money(quote.payablePaise), strong: true }
-      ];
-      view.note = 'Coupon ' + quote.couponCode + ' applies to ' + product.name + ' only. ' + cashfreeNote;
-      view.actions = [
-        { label: 'Continue to payment', kind: 'primary', onClick: function () { begin(product, ctx, quote.couponCode); } },
-        { label: 'Remove coupon', onClick: function () { confirmPurchase(product, ctx); } },
+      amountFor: product.blurb,
+      amountLabel: product.label,
+      note: 'Payment is handled by Cashfree. Klarweg never sees your card details.',
+      actions: [
+        { label: 'Continue to payment', kind: 'primary', onClick: function () { begin(product, ctx); } },
         { label: 'Cancel', onClick: close }
-      ];
-      return render(view);
-    }
-
-    view.amountFor = product.blurb;
-    view.amountLabel = product.label;
-    view.actions = [
-      { label: 'Continue to payment', kind: 'primary', onClick: function () {
-        var code = couponTyped();
-        if (code) applyCoupon(product, ctx, code); else begin(product, ctx, null);
-      } }
-    ];
-    if (couponable) {
-      view.field = { id: 'kwco-coupon', label: 'Coupon code (optional)', type: 'text', autocomplete: 'off', value: opts.code || '' };
-      view.error = opts.error || null;
-      view.actions.push({ label: 'Apply coupon', onClick: function () { applyCoupon(product, ctx, couponTyped()); } });
-    }
-    view.actions.push({ label: 'Cancel', onClick: close });
-    render(view);
-  }
-
-  function couponTyped() {
-    var input = doc.getElementById('kwco-coupon');
-    return input ? input.value.trim() : '';
-  }
-
-  /* Asks the Worker to price the code. What is shown afterwards is the
-     Worker's answer; the order itself is priced again when created. */
-  function applyCoupon(product, ctx, code) {
-    if (!code) return confirmPurchase(product, ctx, { error: 'Enter a coupon code.' });
-    render({
-      eyebrow: product.tier,
-      title: product.name,
-      body: 'Checking your coupon code.',
-      busy: 'One moment',
-      dismissible: false
-    });
-    quoteCoupon(product.id, code).then(function (data) {
-      var q = data && data.quote;
-      if (!q || q.productId !== product.id || !q.couponCode) throw new Error('This coupon code is not valid.');
-      confirmPurchase(product, ctx, { quote: q });
-    }).catch(function (e) {
-      if (e && e.code === 'unauthorized') return sessionExpired(product);
-      confirmPurchase(product, ctx, {
-        code: code,
-        error: e && e.code === 'network'
-          ? 'We could not reach Klarweg to check this code. Try again.'
-          : (e && e.message) || 'This coupon code is not valid.'
-      });
+      ]
     });
   }
 
@@ -486,13 +401,13 @@
      may still have none on file. Gate here, once, right before the
      order is actually created; accounts that already have a valid
      phone see no extra step. */
-  function begin(product, ctx, coupon) {
+  function begin(product, ctx) {
     var A = auth();
-    if (!A.hasPhone()) return collectPhone(product, null, ctx, coupon);
-    beginOrder(product, ctx, coupon);
+    if (!A.hasPhone()) return collectPhone(product, null, ctx);
+    beginOrder(product, ctx);
   }
 
-  function collectPhone(product, fieldError, ctx, coupon) {
+  function collectPhone(product, fieldError, ctx) {
     render({
       eyebrow: product.tier,
       title: 'Add a phone number',
@@ -507,19 +422,19 @@
       },
       error: fieldError || null,
       actions: [
-        { label: 'Continue to payment', kind: 'primary', onClick: function () { submitPhone(product, ctx, coupon); } },
+        { label: 'Continue to payment', kind: 'primary', onClick: function () { submitPhone(product, ctx); } },
         { label: 'Cancel', onClick: close }
       ],
       dismissible: true
     });
   }
 
-  function submitPhone(product, ctx, coupon) {
+  function submitPhone(product, ctx) {
     var A = auth();
     var input = doc.getElementById('kwco-phone');
     var phone = input ? input.value : '';
     var v = A.validatePhone({ phone: phone });
-    if (v) return collectPhone(product, v.message, ctx, coupon);
+    if (v) return collectPhone(product, v.message, ctx);
 
     render({
       eyebrow: product.tier,
@@ -530,13 +445,13 @@
     });
 
     A.updatePhone(phone).then(function () {
-      beginOrder(product, ctx, coupon);
+      beginOrder(product, ctx);
     }).catch(function (e) {
-      collectPhone(product, e && e.message ? e.message : 'Could not save your phone number.', ctx, coupon);
+      collectPhone(product, e && e.message ? e.message : 'Could not save your phone number.', ctx);
     });
   }
 
-  function beginOrder(product, ctx, coupon) {
+  function beginOrder(product, ctx) {
     render({
       eyebrow: product.tier,
       title: product.name,
@@ -546,7 +461,7 @@
     });
 
     var order = null;
-    createOrder(product.id, coupon).then(function (data) {
+    createOrder(product.id).then(function (data) {
       order = { id: readOrderId(data) };
       var session = readSession(data);
       if (!session || !order.id) throw new Error('no-session');

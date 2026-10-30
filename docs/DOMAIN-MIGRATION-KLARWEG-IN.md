@@ -1,8 +1,10 @@
 # klarweg.in domain migration — inventory, DNS, cutover, rollback
 
-Status (2026-10-29): repository side prepared on branch `feat/klarweg-in-domain`.
-**Nothing external has been changed** — no DNS, GitHub Pages setting, Worker,
-OAuth or payment configuration. Hosting stays on GitHub Pages; no Hostinger
+Status (2026-10-30): repository side prepared on branch `feat/klarweg-in-domain`.
+The only external change so far: the Reports Worker now accepts
+`klarweg.in` (owner-approved deploy 2026-10-30, version `60e4f1fb`). No DNS,
+GitHub Pages setting, Access Worker, OAuth or payment configuration has been
+changed. Hosting stays on GitHub Pages; no Hostinger
 web-hosting plan is needed (the site is static; nothing in the audit requires
 server-side hosting).
 
@@ -23,7 +25,7 @@ tree consistent with it.
 | **Registration expires 2026-12-01** | `whois` |
 | Live Access Worker = version `e9e85b17` (2026-10-03); allows `https://klarweg.in` with credentials; refuses `https://www.klarweg.in` | `wrangler deployments list`; `OPTIONS /auth/me` → `204`, `Access-Control-Allow-Origin: https://klarweg.in`, `…-Credentials: true` |
 | Live Access Worker sets no `SITE_BASE_URL`, `ACCOUNT_RETURN_URL` or CORS vars (code defaults apply); `CASHFREE_ENV = sandbox` | `wrangler versions view` (var names/values; secrets by name only) |
-| Live Reports Worker **refuses `https://klarweg.in`** | `OPTIONS` → `403` |
+| Live Reports Worker refused `https://klarweg.in` (`4a920e47`, 2026-09-19). **Fixed 2026-10-30:** version `60e4f1fb` deployed with `klarweg.in` allowed | `OPTIONS` → `403` before, `204` after |
 | Audio is served from a separate Pages site `…github.io/klarweg-audio-cdn/` (`Access-Control-Allow-Origin: *`); there is no user-site repo, so a custom domain on `klarweg` does not move it | `curl -I`; `GET /repos/…/reegangandhi16-pixel.github.io` → 404 |
 
 ## 2. Migration inventory
@@ -47,10 +49,10 @@ tree consistent with it.
 | Access Worker CORS | `klarweg.in` allowed (live) | none. `www` not needed: GitHub redirects `www` → apex | — | preflight above |
 | Access Worker `ACCOUNT_RETURN_URL` (iOS Google redirect sign-in) | default github.io account page | `https://klarweg.in/account/index.html` | Owner-approved Worker change, after cutover | expected to work without it via GitHub's 301 (path + query — confirm in §6), so cleanup, not a blocker |
 | Access Worker `SITE_BASE_URL` (Cashfree `return_url` fallback) | default github.io | `https://klarweg.in` | same | `return_url` already follows the request Origin for `klarweg.in` in the deployed code |
-| Reports Worker `ALLOWED_ORIGINS` | no `klarweg.in` (live 403) | `https://klarweg.in` added in `report/worker/wrangler.toml` (**this PR, source only**) | **Deploy before cutover** (additive) | `OPTIONS` from `https://klarweg.in` → 204 |
+| Reports Worker `ALLOWED_ORIGINS` | no `klarweg.in` (live 403) | `https://klarweg.in` added in `report/worker/wrangler.toml` (this PR) | **DONE 2026-10-30** (owner-approved): version `60e4f1fb-718c-4861-8423-5aa998b22ea7`; rollback `wrangler rollback 4a920e47-230f-4c47-a524-eb4c2181c38b` | `OPTIONS` from `https://klarweg.in` → 204 (verified); github.io 204; unknown origin 403 |
 | Reports Worker `SITE_BASE_URL` (admin "open" links) | github.io | `https://klarweg.in` | after cutover (github.io redirects anyway) | admin dashboard link |
 | Turnstile | no site key configured on the page | none now; add `klarweg.in` to the widget hostnames if one is configured later | — | — |
-| Google OAuth client | origins unknown to the repo | add `https://klarweg.in` to **Authorized JavaScript origins** (keep github.io). Redirect URI is the Worker's `/auth/google/redirect` — unchanged | Owner, Google Cloud console, **before cutover** | Google button renders and signs in on klarweg.in |
+| Google OAuth client | origins unknown to the repo | add `https://klarweg.in` to **Authorized JavaScript origins** (keep github.io). Redirect URI is the Worker's `/auth/google/redirect` — unchanged | Owner, Google Cloud console, **before cutover** — steps in §3a | Google button renders and signs in on klarweg.in |
 | Cashfree | sandbox (live var) | when production goes live: whitelist `klarweg.in` | Owner, Cashfree dashboard | sandbox checkout returns to `klarweg.in` |
 | Session cookie (`SameSite=None` on `workers.dev`) | third-party from github.io | **still third-party from klarweg.in** — same behaviour, no regression, no fix | — | §4 |
 | Exam Portal | Worker-proxied; not part of the Pages allowlist | none | — | — |
@@ -97,6 +99,60 @@ nameservers back to Hostinger's (a nameserver change — your decision; create
 the records above in Hostinger's zone first, then switch, and allow up to
 24–48 h). Not required for this migration.
 
+## 3a. Google OAuth client (owner action — not done by Claude)
+
+Additive; the github.io entries stay, so current sign-in keeps working. Do it
+any time before cutover.
+
+**What the site uses** (`account/index.html`, `kw-config.js`):
+
+- Client ID `584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com`.
+- Desktop / Android: popup flow. Google checks the **page origin** against
+  *Authorized JavaScript origins* — this is what must gain `https://klarweg.in`.
+- iOS: redirect flow (`ux_mode: 'redirect'`). Google POSTs to
+  `login_uri = https://klarweg-access.klarweg-issue-reports-2026.workers.dev/auth/google/redirect`
+  — the Worker's address, which **does not change**. The page origin is
+  checked here too, so the new origin covers iOS as well.
+
+**Steps** — [console.cloud.google.com](https://console.cloud.google.com),
+signed in as the project owner, project containing the client above:
+
+1. **Authorized domain first.** Google Auth Platform → **Branding** →
+   *Authorized domains*: add `klarweg.in` if absent (Google requires every
+   domain used in client settings to be registered here first). If ownership
+   proof is requested, verify `klarweg.in` in Google Search Console with a DNS
+   TXT record — in the **Route 53** zone (§3). Leave existing entries alone.
+2. **JavaScript origin.** Google Auth Platform → **Clients** → the client
+   ending `…kdmjg0h79716s4tl65g0p1mlurshih3i` → *Authorized JavaScript
+   origins* → *Add URI*: `https://klarweg.in` — exactly that: `https`, no
+   trailing slash, no path, no `www`.
+   - **Keep** `https://reegangandhi16-pixel.github.io` (needed until cutover and for rollback).
+   - `www` is not needed: GitHub redirects `www.klarweg.in` to the apex before any page loads.
+3. **Redirect URIs — unchanged.** Only confirm the list contains
+   `https://klarweg-access.klarweg-issue-reports-2026.workers.dev/auth/google/redirect`.
+   If it is missing, iOS sign-in is already broken today, independent of this migration.
+4. **Save.** Google notes changes can take a few minutes (occasionally longer) to apply.
+5. **Branding links — not yet.** If homepage / privacy / terms links point at
+   github.io, leave them until after cutover: changing app URLs on a verified
+   brand can trigger re-verification, and the github.io links redirect anyway.
+
+**Do not change:** the client ID or secret (`kw-config.js` and the Access
+Worker's `GOOGLE_CLIENT_ID` must keep matching), the publishing status or
+scopes, or existing origins / redirect URIs.
+
+**Verify:**
+
+- Right after saving: Google sign-in on
+  `https://reegangandhi16-pixel.github.io/klarweg/account/index.html`
+  (desktop) still works.
+- After cutover, on `https://klarweg.in/account/index.html`:
+  - Desktop Chrome: the button renders and the popup signs you in. A failure
+    shows as `origin_mismatch` / "The given origin is not allowed for the given
+    client ID".
+  - iPhone Safari: the redirect returns signed in — or, if Safari blocks the
+    `workers.dev` cookie, the existing "your browser blocks cookies" message,
+    as on github.io today (§4).
+
 ## 4. Cookies, Safari and `api.klarweg.in`
 
 The site calls `https://klarweg-access…workers.dev` with
@@ -124,8 +180,8 @@ Prerequisites (any order, all additive, nothing breaks the github.io site):
 - [ ] **Renew the domain** (expires 2026-12-01).
 - [ ] Confirm access to the Route 53 zone and that the EC2 apex target is unused.
 - [ ] Verify `klarweg.in` for GitHub Pages (§3.1).
-- [ ] Google Cloud console: add `https://klarweg.in` to Authorized JavaScript origins.
-- [ ] Deploy the Reports Worker with the updated `ALLOWED_ORIGINS` (record the live version first as rollback).
+- [ ] Google Cloud console: add `klarweg.in` as an authorized domain and `https://klarweg.in` as an Authorized JavaScript origin (§3a).
+- [x] Deploy the Reports Worker with the updated `ALLOWED_ORIGINS` — done 2026-10-30, version `60e4f1fb` (rollback point `4a920e47`).
 - [ ] Review and approve this PR (do not merge yet).
 
 Cutover (low-traffic window):

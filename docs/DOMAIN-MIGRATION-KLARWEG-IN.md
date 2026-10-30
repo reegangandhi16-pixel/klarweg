@@ -1,9 +1,12 @@
 # klarweg.in domain migration — inventory, DNS, cutover, rollback
 
 Status (2026-10-30): repository side prepared on branch `feat/klarweg-in-domain`.
-The only external change so far: the Reports Worker now accepts
-`klarweg.in` (owner-approved deploy 2026-10-30, version `60e4f1fb`). No DNS,
-GitHub Pages setting, Access Worker, OAuth or payment configuration has been
+External changes so far:
+- Reports Worker accepts `klarweg.in` (owner-approved deploy 2026-10-30, version `60e4f1fb`).
+- DNS moved from AWS Route 53 to **Hostinger** with the GitHub Pages records in
+  place (done by the owner, 2026-10-30 07:07 UTC; see §3).
+
+No GitHub Pages setting, Access Worker, OAuth or payment configuration has been
 changed. Hosting stays on GitHub Pages; no Hostinger
 web-hosting plan is needed (the site is static; nothing in the audit requires
 server-side hosting).
@@ -20,11 +23,12 @@ tree consistent with it.
 |---|---|
 | Pages deploys from a **custom Actions workflow** (`build_type: workflow`), custom domain unset | `GET /repos/…/klarweg/pages` → `cname: null`, `https_enforced: true` |
 | In that mode GitHub **ignores the `CNAME` file**; the custom domain is the Settings → Pages value | GitHub docs, "Managing a custom domain for your GitHub Pages site" |
-| Hostinger is only the **registrar**. DNS is delegated to **AWS Route 53** (`ns-695.awsdns-22.net`, `ns-350.awsdns-43.com`, `ns-1854.awsdns-39.co.uk`, `ns-1362.awsdns-42.org`) | `whois`, `dig NS` |
-| Apex currently `A 3.6.224.232` (EC2 ap-south-1) + `AAAA 2406:da1a:1247:aa00:66fe:464f:25b8:709a`; no HTTP/HTTPS answer; no MX, TXT, CAA or `www` publicly visible | `dig`, `curl` |
+| *(2026-10-29, superseded)* Hostinger was only the **registrar**; DNS was delegated to **AWS Route 53** (`ns-695.awsdns-22.net`, `ns-350.awsdns-43.com`, `ns-1854.awsdns-39.co.uk`, `ns-1362.awsdns-42.org`) | `whois`, `dig NS` |
+| *(2026-10-29, superseded)* Apex was `A 3.6.224.232` (EC2 ap-south-1) + `AAAA 2406:da1a:1247:aa00:66fe:464f:25b8:709a`; no HTTP/HTTPS answer; no MX, TXT, CAA or `www` publicly visible | `dig`, `curl` |
 | **Registration expires 2026-12-01** | `whois` |
 | Live Access Worker = version `e9e85b17` (2026-10-03); allows `https://klarweg.in` with credentials; refuses `https://www.klarweg.in` | `wrangler deployments list`; `OPTIONS /auth/me` → `204`, `Access-Control-Allow-Origin: https://klarweg.in`, `…-Credentials: true` |
 | Live Access Worker sets no `SITE_BASE_URL`, `ACCOUNT_RETURN_URL` or CORS vars (code defaults apply); `CASHFREE_ENV = sandbox` | `wrangler versions view` (var names/values; secrets by name only) |
+| **2026-10-30:** nameservers switched to Hostinger (`ns1.dns-parking.com`, `ns2.dns-parking.com`) at 07:07 UTC; the Hostinger zone holds the GitHub Pages A/AAAA, `www` CNAME and verification TXT records (§3) | `.in` registry delegation, `whois` (updated 07:07:57 UTC), `dig @ns1.dns-parking.com`, Google/Cloudflare/Quad9 resolvers |
 | Live Reports Worker refused `https://klarweg.in` (`4a920e47`, 2026-09-19). **Fixed 2026-10-30:** version `60e4f1fb` deployed with `klarweg.in` allowed | `OPTIONS` → `403` before, `204` after |
 | Audio is served from a separate Pages site `…github.io/klarweg-audio-cdn/` (`Access-Control-Allow-Origin: *`); there is no user-site repo, so a custom domain on `klarweg` does not move it | `curl -I`; `GET /repos/…/reegangandhi16-pixel.github.io` → 404 |
 
@@ -45,7 +49,7 @@ tree consistent with it.
 | Chapter resource PDFs (R2) | footer link built from `SITE_BASE`; existing PDFs say github.io | future builds say klarweg.in; existing ones redirect via GitHub after cutover. No regeneration needed | — | `chapter-resources.test.mjs` |
 | Audio (`klarweg-audio-cdn`) | separate Pages origin | none | — | test asserts the CDN URL is unchanged |
 | **GitHub Pages custom domain** | unset | `klarweg.in`, then Enforce HTTPS | Owner, Settings → Pages, at cutover | `GET /pages` → `cname: klarweg.in`; `curl -I https://reegangandhi16-pixel.github.io/klarweg/a1.html` → 301 to `https://klarweg.in/a1.html` |
-| **DNS** (Route 53 zone) | apex → EC2 | see §3 | Owner | §5 |
+| **DNS** (Hostinger zone) | GitHub Pages records in place since 2026-10-30 | none required; optionally lower TTLs (§3) | Owner, done | `dig` checks in §3 |
 | Access Worker CORS | `klarweg.in` allowed (live) | none. `www` not needed: GitHub redirects `www` → apex | — | preflight above |
 | Access Worker `ACCOUNT_RETURN_URL` (iOS Google redirect sign-in) | default github.io account page | `https://klarweg.in/account/index.html` | Owner-approved Worker change, after cutover | expected to work without it via GitHub's 301 (path + query — confirm in §6), so cleanup, not a blocker |
 | Access Worker `SITE_BASE_URL` (Cashfree `return_url` fallback) | default github.io | `https://klarweg.in` | same | `return_url` already follows the request Origin for `klarweg.in` in the deployed code |
@@ -60,44 +64,60 @@ tree consistent with it.
 
 Docs that still mention github.io (`deployment/*.md`, `docs/exam/*`, `docs/live-classes-*`) are historical/reference text and are intentionally unchanged. Worker defaults in `access/worker/src/*.js` stay on github.io on purpose: they are dual-origin by design and change only with a reviewed Worker deployment.
 
-## 3. DNS records (owner action — not done by Claude)
+## 3. DNS records (Hostinger — in place; owner-managed, not done by Claude)
 
-**Where:** the records must go in the zone that is actually authoritative: the
-**AWS Route 53 hosted zone for `klarweg.in`**. Records added in Hostinger's
-DNS editor have no effect while the nameservers point at AWS. Confirm who
-controls that AWS account before cutover.
+**Where:** since 2026-10-30 07:07 UTC the authoritative DNS for `klarweg.in`
+is **Hostinger** (`ns1.dns-parking.com`, `ns2.dns-parking.com`; hPanel →
+Domains → `klarweg.in` → DNS / Nameservers). The old AWS Route 53 hosted zone
+still answers if queried directly, but the registry no longer delegates to it:
+**do not edit Route 53** — changes there have no effect.
 
-Do **not** change nameservers, delete the zone, or touch `NS`/`SOA`. Before
-editing, export/screenshot the full Route 53 record list (it may hold
-subdomains a public lookup cannot see) and keep everything that is not listed
-below.
+**Current Hostinger zone (checked 2026-10-30)** — matches the GitHub Pages
+requirements; nothing needs adding:
 
-1. **Domain verification (do first, any time — no user impact).**
-   GitHub → your *profile* Settings → Pages → *Add a domain* → `klarweg.in`.
-   GitHub shows a TXT record:
+| Type | Name | Value | TTL |
+|---|---|---|---|
+| A | `@` (`klarweg.in`) | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` | 14400 |
+| AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` | 14400 |
+| CNAME | `www` | `reegangandhi16-pixel.github.io` (no repo name) | 14400 |
+| TXT | `_github-pages-challenge-reegangandhi16-pixel` | GitHub verification value | — |
+| NS | `@` | `ns1.dns-parking.com`, `ns2.dns-parking.com` | 86400 |
 
-   | Type | Name | Value | TTL |
-   |---|---|---|---|
-   | TXT | `_github-pages-challenge-reegangandhi16-pixel` | *(value shown by GitHub)* | 300 |
+No MX (no email on the domain), no TXT on the apex, no CAA (so Let's Encrypt —
+GitHub's certificate issuer — is not blocked), no wildcard.
 
-   Click *Verify* once it resolves.
+Until the Pages custom domain is set, `http://klarweg.in` shows GitHub's
+"Site not found" page and HTTPS has no certificate. The github.io site is
+unaffected.
 
-2. **Site records (cutover).** Lower TTLs to 300 a day before if they are long.
+**Owner actions:**
 
-   | Type | Name | Value | TTL | Action |
-   |---|---|---|---|---|
-   | A | `klarweg.in` (apex) | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` | 300 | **replace** `3.6.224.232` (confirm the EC2 host is unused first) |
-   | AAAA | `klarweg.in` (apex) | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` | 300 | **replace** `2406:da1a:1247:aa00:66fe:464f:25b8:709a` |
-   | CNAME | `www` | `reegangandhi16-pixel.github.io` (no repo name) | 300 | add |
+1. **Confirm verification now (no user impact).** GitHub → your *profile*
+   Settings → Pages → *Verified domains*: `klarweg.in` must show **Verified**
+   (click *Verify* if pending — the TXT record is live). While DNS points at
+   GitHub and no repository claims the domain, verification is what stops
+   another account from attaching `klarweg.in` to its own Pages site. Keep
+   the TXT record after verifying.
+2. **Optional, before cutover: lower TTLs.** In the Hostinger DNS editor set
+   the TTL of the A, AAAA and `www` records to `300`, so a rollback reaches
+   everyone in minutes rather than up to 4 h. Edit only the TTL fields.
 
-   No wildcard records (domain-takeover risk). No CAA exists; if one is added
-   later it must allow `letsencrypt.org`, or the HTTPS certificate fails.
-   No MX exists, so email is unaffected.
+**Do not:** use Hostinger's "reset DNS records" (restores parking defaults
+and drops the GitHub records); add wildcard records (takeover risk); add a
+CAA record that omits `letsencrypt.org`; change the nameservers again without
+recreating these records first.
 
-**If you would rather manage DNS in Hostinger:** that means switching the
-nameservers back to Hostinger's (a nameserver change — your decision; create
-the records above in Hostinger's zone first, then switch, and allow up to
-24–48 h). Not required for this migration.
+**Check from any machine:**
+```
+dig +short NS klarweg.in        # ns1.dns-parking.com. ns2.dns-parking.com.
+dig +short A klarweg.in         # the four 185.199.10x.153 addresses
+dig +short AAAA klarweg.in      # the four 2606:50c0:800x::153 addresses
+dig +short CNAME www.klarweg.in # reegangandhi16-pixel.github.io.
+```
+
+**Leftovers in AWS (optional cleanup, no site impact):** the Route 53 hosted
+zone (~$0.50/month) and the EC2 instance at `3.6.224.232` no longer serve
+`klarweg.in`. Delete them only if nothing else uses them.
 
 ## 3a. Google OAuth client (owner action — not done by Claude)
 
@@ -121,7 +141,7 @@ signed in as the project owner, project containing the client above:
    *Authorized domains*: add `klarweg.in` if absent (Google requires every
    domain used in client settings to be registered here first). If ownership
    proof is requested, verify `klarweg.in` in Google Search Console with a DNS
-   TXT record — in the **Route 53** zone (§3). Leave existing entries alone.
+   TXT record — in the **Hostinger** DNS zone (§3). Leave existing entries alone.
 2. **JavaScript origin.** Google Auth Platform → **Clients** → the client
    ending `…kdmjg0h79716s4tl65g0p1mlurshih3i` → *Authorized JavaScript
    origins* → *Add URI*: `https://klarweg.in` — exactly that: `https`, no
@@ -167,7 +187,7 @@ A same-site API (`api.klarweg.in`, also the Exam Portal's OD-20 launch
 condition) is the fix, but it is **not** a DNS-only change: a Worker custom
 domain requires the `klarweg.in` zone to be on Cloudflare (nameservers moved
 to Cloudflare, Pages A/AAAA/`www` records recreated there as DNS-only), or a
-paid partial (CNAME) setup. A CNAME from Route 53/Hostinger straight to
+paid partial (CNAME) setup. A CNAME from Hostinger DNS straight to
 `workers.dev` does not work. Then: Worker custom domain, `kw-config.js`
 API origin, CORS, cookie attributes, Cashfree notify URL, Google redirect URI.
 Recommended as a **separate, later project**; not a prerequisite for this
@@ -178,15 +198,16 @@ move.
 Prerequisites (any order, all additive, nothing breaks the github.io site):
 
 - [ ] **Renew the domain** (expires 2026-12-01).
-- [ ] Confirm access to the Route 53 zone and that the EC2 apex target is unused.
-- [ ] Verify `klarweg.in` for GitHub Pages (§3.1).
+- [x] DNS records for GitHub Pages in the Hostinger zone (owner, 2026-10-30; §3).
+- [ ] Confirm `klarweg.in` shows **Verified** under profile Settings → Pages (§3, step 1).
+- [ ] Optional: lower the A/AAAA/`www` TTLs to 300 in Hostinger (§3, step 2).
 - [ ] Google Cloud console: add `klarweg.in` as an authorized domain and `https://klarweg.in` as an Authorized JavaScript origin (§3a).
 - [x] Deploy the Reports Worker with the updated `ALLOWED_ORIGINS` — done 2026-10-30, version `60e4f1fb` (rollback point `4a920e47`).
 - [ ] Review and approve this PR (do not merge yet).
 
 Cutover (low-traffic window):
 
-1. Route 53: apply §3.2. Wait until `dig +short klarweg.in A` shows the four GitHub IPs from a public resolver.
+1. DNS is already in place (§3). Re-run the §3 `dig` checks immediately before starting.
 2. Repo Settings → Pages → Custom domain `klarweg.in` → Save. From this moment github.io URLs 301 to klarweg.in.
 3. Wait for the certificate (usually minutes, up to 24 h), then tick **Enforce HTTPS**. Until then `https://klarweg.in` may show a certificate warning — do steps 1–3 close together.
 4. Merge this PR (Pages workflow deploys canonical/sitemap/CNAME). Confirm with `cmp` of live files vs `origin/main`.
@@ -204,7 +225,7 @@ Cutover (low-traffic window):
 
 ## 7. Rollback
 
-- **Before the PR is merged:** Settings → Pages → remove the custom domain. github.io serves directly again within minutes. DNS can stay or be reverted to the saved records.
+- **Before the PR is merged:** Settings → Pages → remove the custom domain. github.io serves directly again within minutes. DNS can stay as it is — nothing else uses the domain.
 - **After merge:** remove the custom domain *and* revert the merge commit (or `node scripts/set-site-origin.mjs --to https://reegangandhi16-pixel.github.io/klarweg --write`, delete `CNAME` + its allowlist line, open a PR). The rollback path is rehearsed byte-for-byte in `set-site-origin.test.mjs`.
 - **Workers:** roll back to the recorded version (`wrangler rollback <version>`); additive CORS entries can stay.
-- Keep DNS TTLs at 300 for a week after cutover so any revert propagates fast.
+- If the TTLs were lowered to 300 (§3), keep them there for a week after cutover so any DNS change propagates fast.

@@ -1181,3 +1181,22 @@ test('AI preview at 0 (production): a signed-in non-owner is NOT eligible on Cha
   assert.equal(own.tier, 'chat');
   assert.deepEqual(own.remaining, { day: 20, month: 100 });
 });
+
+test('price integrity: coupon, discount and amount fields from the browser are ignored; Cashfree gets the catalogue price', async () => {
+  /* Discounts, if any, are Cashfree offers the learner applies on Cashfree's
+     own checkout. Klarweg's order is always created at the catalogue price. */
+  const env = makeEnv();
+  const forged = { coupon: 'KLARWEGFREE1', amount: 1, amount_paise: 100, order_amount: 1, discount: 4998, payable: 1 };
+  for (const [product, rupees] of [['LIFETIME', 4999], ['B2', 4999], ['A1', 1999]]) {
+    const { cookie } = await signupUser(env);
+    await withPhone(env, cookie);
+    const before = cashfree.calls.length;
+    const r = await req(env, 'POST', '/orders', { cookie, body: { product_id: product, ...forged } });
+    assert.equal(r.status, 200, product);
+    assert.equal(r.json.order.amountPaise, rupees * 100, product);
+    const create = cashfree.calls.slice(before).find((c) => c.method === 'POST');
+    assert.equal(create.body.order_amount, rupees, product);
+    assert.equal(create.body.cart_details.cart_items[0].item_original_unit_price, rupees, product);
+    assert.equal('item_discounted_unit_price' in create.body.cart_details.cart_items[0], false, product);
+  }
+});

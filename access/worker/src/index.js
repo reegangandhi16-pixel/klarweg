@@ -1,6 +1,6 @@
 import { corsHeaders, withCors, isForeignOriginWrite, configureCors } from "./cors.js";
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
-import { createOrder, getOrder, quoteOrder } from "./orders.js";
+import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
 import { consultAvailability, createConsultBooking, getConsultBooking, getConsultJoin, listConsultBookings, reconcileRecentConsultBookings } from "./consultations.js";
 import { enrolCatalog, enrolQuote, createEnrolCheckout, getEnrolment, listEnrolments, reconcileRecentPayments } from "./enrolments.js";
@@ -86,10 +86,6 @@ async function route(request, env, ctx) {
 
     if (request.method === "POST" && url.pathname === "/orders") {
       return withCors(await createOrder(request, env), request);
-    }
-
-    if (request.method === "POST" && url.pathname === "/coupons/quote") {
-      return withCors(await quoteOrder(request, env), request);
     }
 
     const orderMatch = url.pathname.match(/^\/orders\/(ord_[0-9a-f-]{36})$/);

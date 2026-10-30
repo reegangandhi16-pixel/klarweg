@@ -831,10 +831,12 @@ function wordFormUrl(text) {
             settled = true;
             emit('play-error', { url: url, name: err && err.name });
             // Only a source that cannot be loaded, and is still the current
-            // clip, is retried elsewhere; a stop (AbortError) or an autoplay
-            // block (NotAllowedError) is not.
+            // clip, is retried elsewhere. AbortError means pause()/stop or a
+            // new clip interrupted loading: settled as handled, so a pause
+            // never turns into browser speech. An autoplay block
+            // (NotAllowedError) keeps the old cache/TTS chain.
             if (err && err.name === 'NotSupportedError') resolve(current === a ? retryLegacy(url, opts, err.name) : true);
-            else resolve(false);
+            else resolve(!!(err && err.name === 'AbortError'));
           }
         });
       } else {

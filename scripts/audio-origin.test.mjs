@@ -140,11 +140,13 @@ test('the site copies of the vocab manifests are published (allowlisted)', () =>
   for (const f of Object.keys(MANIFESTS)) JSON.parse(read('public/audio/' + f));
 });
 
-test('a stop/abort is not retried on another host', async () => {
-  const { w, played } = load({ abort: true });
+test('a stop/abort is not retried on another host and never falls through to cache/TTS', async () => {
+  const { w, played, events } = load({ abort: true });
   await w.KW_ensureVocab();
-  await w.KW_speak('der Apfel', { gender: 'female' });
+  const res = await w.KW_speak('der Apfel', { gender: 'female' });
   assert.equal(played.filter((u) => u.startsWith(GHIO)).length, 0, 'no legacy retry after AbortError');
+  assert.notEqual(res, 'error');
+  assert.ok(!events.some((e) => e.type === 'cache-miss' || e.type === 'cache-hit'), 'fallback chain not entered after a pause/stop');
 });
 
 test('a Worker manifest answer of 403/404/429/5xx falls back to the old host', async () => {

@@ -129,7 +129,7 @@ SPEECH_MAX_SECONDS = "30"
 # by this Worker after a signed-link check. RESOURCE_RELEASE selects the
 # immutable release prefix ("r1/…"); switching releases is this one line.
 # Secret (wrangler secret put): RESOURCE_URL_SECRET — HMAC key for links.
-RESOURCE_RELEASE = "r2"
+RESOURCE_RELEASE = "r5"
 
 [[r2_buckets]]
 binding = "RESOURCES"

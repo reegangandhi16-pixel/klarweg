@@ -3,6 +3,7 @@ main = "src/index.js"
 compatibility_date = "2024-11-06"
 # workers.dev host for now; a custom domain can be added later without code changes.
 workers_dev = true
+preview_urls = false
 
 [vars]
 # Origins allowed to POST /api/reports. Admin routes are same-origin only.

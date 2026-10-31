@@ -5,6 +5,7 @@ compatibility_date = "2024-11-06"
 # no custom domain and no edge cache (the Cache API is a no-op on workers.dev).
 # Browser caching comes from the Cache-Control headers set in src/index.js.
 workers_dev = true
+preview_urls = false
 
 [vars]
 # Origins allowed to read audio/manifests cross-origin (fetch() needs CORS;

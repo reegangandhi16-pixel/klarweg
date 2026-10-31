@@ -266,7 +266,7 @@ export async function signup(request, env, ctx) {
       status: 201,
       headers: {
         "Content-Type": "application/json",
-        "Set-Cookie": sessionCookie(token, SESSION_COOKIE_MAX_AGE)
+        "Set-Cookie": sessionCookie(token, SESSION_COOKIE_MAX_AGE, request)
       }
     }
   );
@@ -346,7 +346,7 @@ export async function login(request, env, ctx) {
       status: 200,
       headers: {
         "Content-Type": "application/json",
-        "Set-Cookie": sessionCookie(token, SESSION_COOKIE_MAX_AGE)
+        "Set-Cookie": sessionCookie(token, SESSION_COOKIE_MAX_AGE, request)
       }
     }
   );
@@ -409,7 +409,7 @@ export async function googleLogin(request, env) {
       status: 200,
       headers: {
         "Content-Type": "application/json",
-        "Set-Cookie": sessionCookie(token, SESSION_COOKIE_MAX_AGE)
+        "Set-Cookie": sessionCookie(token, SESSION_COOKIE_MAX_AGE, request)
       }
     }
   );
@@ -549,7 +549,7 @@ export async function googleLoginRedirect(request, env) {
     status: 303,
     headers: {
       Location: dest.toString(),
-      "Set-Cookie": sessionCookie(token, SESSION_COOKIE_MAX_AGE)
+      "Set-Cookie": sessionCookie(token, SESSION_COOKIE_MAX_AGE, request)
     }
   });
 }
@@ -565,7 +565,7 @@ export async function logout(request, env) {
       status: 200,
       headers: {
         "Content-Type": "application/json",
-        "Set-Cookie": clearSessionCookie()
+        "Set-Cookie": clearSessionCookie(request)
       }
     }
   );

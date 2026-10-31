@@ -1,4 +1,5 @@
 import { corsHeaders, withCors, isForeignOriginWrite } from "./cors.js";
+import { isSameOriginApi, API_PREFIX } from "./same-origin.js";
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
@@ -48,6 +49,18 @@ export default {
 };
 
 async function route(request, env, ctx) {
+    /* On klarweg.in (route klarweg.in/api/*) strip the /api prefix so
+       every handler below sees the same paths as on workers.dev. Any
+       other path on that host is not this Worker's. */
+    if (isSameOriginApi(request)) {
+      const stripped = new URL(request.url);
+      if (!stripped.pathname.startsWith(API_PREFIX + "/")) {
+        return json({ ok: false, error: "Not found." }, 404);
+      }
+      stripped.pathname = stripped.pathname.slice(API_PREFIX.length);
+      request = new Request(stripped.toString(), request);
+    }
+
     const url = new URL(request.url);
 
     if (request.method === "OPTIONS") {

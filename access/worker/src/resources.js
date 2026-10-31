@@ -28,6 +28,7 @@ import { getSessionToken, findSessionUser } from "./sessions.js";
 import { readEntitlements } from "./entitlements.js";
 import { parseChapterId } from "./ai.js";
 import { networkOf } from "./ratelimit.js";
+import { apiPrefix } from "./same-origin.js";
 
 export const FREE_CHAPTER_NUMBER = 1;
 export const LINK_TTL_SECONDS = 5 * 60;
@@ -184,7 +185,8 @@ export async function createResourceLink(request, env, chapterId, type) {
 
   const expires = Math.floor(Date.now() / 1000) + LINK_TTL_SECONDS;
   const signature = await signLink(env, user.id, chapterId, type, expires);
-  const url = new URL(`/resources/file/${chapterId}/${type}`, request.url);
+  // Keeps the /api prefix when reached via klarweg.in/api/* (same-origin.js).
+  const url = new URL(`${apiPrefix(request)}/resources/file/${chapterId}/${type}`, request.url);
   url.searchParams.set("u", user.id);
   url.searchParams.set("e", String(expires));
   url.searchParams.set("s", signature);

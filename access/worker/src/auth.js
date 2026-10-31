@@ -1,3 +1,5 @@
+import { isSameOriginApi, API_PREFIX } from "./same-origin.js";
+
 const PBKDF2_ITERATIONS = 100000;
 const PASSWORD_KEY_LENGTH = 256;
 const SESSION_TOKEN_BYTES = 32;
@@ -106,24 +108,28 @@ export function isValidPhone(phone) {
   return PHONE_RE.test(phone);
 }
 
-export function sessionCookie(token, maxAgeSeconds) {
+/* workers.dev: cross-site from the site, so SameSite=None on Path=/.
+   klarweg.in (same-origin /api route): first-party, SameSite=Lax, and
+   Path=/api so the cookie never rides along on page requests (which the
+   proxy forwards to GitHub Pages). Host-only in both cases — no Domain. */
+function sessionCookieScope(request) {
+  return isSameOriginApi(request)
+    ? [`Path=${API_PREFIX}`, "HttpOnly", "Secure", "SameSite=Lax"]
+    : ["Path=/", "HttpOnly", "Secure", "SameSite=None"];
+}
+
+export function sessionCookie(token, maxAgeSeconds, request) {
   return [
     `kw_session=${token}`,
-    "Path=/",
-    "HttpOnly",
-    "Secure",
-    "SameSite=None",
+    ...sessionCookieScope(request),
     `Max-Age=${maxAgeSeconds}`
   ].join("; ");
 }
 
-export function clearSessionCookie() {
+export function clearSessionCookie(request) {
   return [
     "kw_session=",
-    "Path=/",
-    "HttpOnly",
-    "Secure",
-    "SameSite=None",
+    ...sessionCookieScope(request),
     "Max-Age=0"
   ].join("; ");
 }

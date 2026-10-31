@@ -1,0 +1,19 @@
+name = "klarweg-audio"
+main = "src/index.js"
+compatibility_date = "2024-11-06"
+# Served on workers.dev only: klarweg.in is not a Cloudflare zone, so there is
+# no custom domain and no edge cache (the Cache API is a no-op on workers.dev).
+# Browser caching comes from the Cache-Control headers set in src/index.js.
+workers_dev = true
+
+[vars]
+# Origins allowed to read audio/manifests cross-origin (fetch() needs CORS;
+# <audio> playback does not). Comma-separated, exact match.
+ALLOWED_ORIGINS = "https://klarweg.in"
+
+# Private bucket holding both audio repos with their original paths:
+#   klarweg-audio      public/audio/<p>  ->  <p>
+#   klarweg-audio-cdn  <p>               ->  vocab/<p>
+[[r2_buckets]]
+binding = "AUDIO"
+bucket_name = "klarweg-audio"

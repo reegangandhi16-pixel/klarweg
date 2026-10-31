@@ -110,6 +110,7 @@ jobs:
             "app"
             "screenshots"
             "tutor"
+            "audio"
           )
           for prefix in "${PROHIBITED_PREFIXES[@]}"; do
             if [ -e "$ARTIFACT_DIR/$prefix" ]; then

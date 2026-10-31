@@ -126,6 +126,30 @@ test('level owner — full content; other levels stay locked', async () => {
   assertStub(await script(env, OTHER_LEVEL, { cookie: u.cookie }), OTHER_LEVEL, 'not_entitled');
 });
 
+test('same-origin klarweg.in/api — level owner gets full content with the Path=/api Lax cookie; signed out gets the stub; bare path 404', async () => {
+  const env = makeEnv();
+  const res = await worker.fetch(new Request(SITE + '/api/auth/signup', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', origin: SITE, 'CF-Connecting-IP': '198.51.100.' + Math.floor(Math.random() * 200) },
+    body: JSON.stringify({ email: `u${Math.random().toString(36).slice(2)}@example.com`, password: 'correct-horse-9', name: 'Test' }),
+  }), env, ctx);
+  const body = await res.json();
+  assert.equal(res.status, 201, JSON.stringify(body));
+  const sc = res.headers.get('set-cookie');
+  assert.match(sc, /; Path=\/api; HttpOnly; Secure; SameSite=Lax; /);
+  await grant(env, body.user.id, 'A1');
+  const viaApi = async (pathname, cookie) => {
+    const h = { 'CF-Connecting-IP': '203.0.113.' + Math.floor(Math.random() * 200), referer: SITE + '/chapter/chapter-' + PAID + '.html' };
+    if (cookie) h.cookie = cookie;
+    const r = await worker.fetch(new Request(SITE + pathname, { headers: h }), env, ctx);
+    const buf = Buffer.from(await r.arrayBuffer());
+    return { status: r.status, headers: r.headers, buf, text: buf.toString('utf8') };
+  };
+  assertContent(await viaApi(`/api/chapters/${PAID}.js`, sc.split(';')[0]), PAID);
+  assertStub(await viaApi(`/api/chapters/${PAID}.js`), PAID, 'signed_out');
+  assert.equal((await viaApi(`/chapters/${PAID}.js`, sc.split(';')[0])).status, 404);
+});
+
 test('Lifetime — every level', async () => {
   const env = makeEnv();
   const u = await signupUser(env);

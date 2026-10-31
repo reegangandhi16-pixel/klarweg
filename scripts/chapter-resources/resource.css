@@ -41,7 +41,11 @@
   size: A4;
   margin: 18mm 18mm 20mm;
   @bottom-left { font: 400 7pt 'JetBrains Mono', 'Inter', monospace; color: #9A9AA0; vertical-align: top; padding-top: 5mm; }
-  @bottom-right { content: counter(page) " / " counter(pages); font: 400 7pt 'JetBrains Mono', 'Inter', monospace; color: #9A9AA0; vertical-align: top; padding-top: 5mm; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 400 7pt/1.5 'JetBrains Mono', 'Inter', monospace; color: #9A9AA0; vertical-align: top; padding-top: 5mm;
+    /* Chapter QR (set per document): 12 mm at the right content edge, 3 mm into
+       the 20 mm bottom margin, so 5 mm stays clear of the paper edge. The page
+       number and its label sit 3 mm to its left. */
+    white-space: pre; padding-right: 15mm; background: no-repeat right 0 top 3mm / 12mm 12mm; }
 }
 
 * { box-sizing: border-box; }

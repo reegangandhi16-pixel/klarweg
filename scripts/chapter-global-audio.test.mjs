@@ -10,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
+import { dataFileFor } from './chapter-lock.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const APP = fs.readFileSync(path.join(ROOT, 'chapter/chapter-app.js'), 'utf8');
@@ -63,8 +64,7 @@ function el(tag, props = {}, ...kids) {
 
 /* Load one chapter's data file the way the page does (const CHAPTER = …). */
 function chapterData(page) {
-  const html = fs.readFileSync(path.join(ROOT, 'chapter', page), 'utf8');
-  const src = html.match(/<script src="([^"]*data[^"]*\.js)[^"]*"/)[1].split('?')[0];
+  const src = dataFileFor(page);
   const ctx = { console: { log() {}, warn() {} } }; ctx.window = ctx; vm.createContext(ctx);
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'chapter', src), 'utf8') + '\n;this.__C = CHAPTER;', ctx);
   return ctx.__C;

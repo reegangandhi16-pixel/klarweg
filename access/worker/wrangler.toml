@@ -5,6 +5,7 @@ main = "src/index.js"
 compatibility_date = "2024-11-06"
 
 workers_dev = true
+preview_urls = false
 
 # DEPLOY WITH `npm run deploy:access` (repo root). It runs
 # scripts/predeploy-access-check.mjs first, which refuses to deploy if

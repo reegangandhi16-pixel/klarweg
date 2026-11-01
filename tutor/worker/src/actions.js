@@ -64,6 +64,15 @@ async function runModel(env, req) {
       return { parsed, usage, provider: res.provider, model: res.model };
     } catch (err) {
       lastErr = err;
+      // Log why the provider failed (HTTP status + start of its error body),
+      // so an outage can be diagnosed from `wrangler tail`. Never the prompt;
+      // anything shaped like an API key is masked.
+      console.error(JSON.stringify({
+        svc: 'klarweg-tutor', event: 'provider_failure', try: tryNo, schema: schemaName,
+        code: (err && err.code) || (err && err.name) || 'error',
+        status: err && err.status,
+        error: String((err && err.message) || err).replace(/\b(sk|key)-[A-Za-z0-9_*-]{6,}/g, '$1-[redacted]').slice(0, 300),
+      }));
       // ai_unconfigured is raised before any network request, so it is not a call.
       if (err instanceof ProviderError && err.code !== 'ai_unconfigured') {
         usage.failedCalls++;

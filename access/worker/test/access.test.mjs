@@ -1186,7 +1186,7 @@ test('price integrity: coupon, discount and amount fields from the browser are i
   /* Discounts, if any, are Cashfree offers the learner applies on Cashfree's
      own checkout. Klarweg's order is always created at the catalogue price. */
   const env = makeEnv();
-  const forged = { coupon: 'KLARWEGFREE1', amount: 1, amount_paise: 100, order_amount: 1, discount: 4998, payable: 1 };
+  const forged = { coupon: 'EXAMPLEOFFER1', amount: 1, amount_paise: 100, order_amount: 1, discount: 4998, payable: 1 };
   for (const [product, rupees] of [['LIFETIME', 4999], ['B2', 4999], ['A1', 1999]]) {
     const { cookie } = await signupUser(env);
     await withPhone(env, cookie);

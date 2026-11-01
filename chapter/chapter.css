@@ -1692,7 +1692,17 @@ img { max-width: 100%; display: block; }
 .story-play-line.is-playing { background: var(--accent); color: #fff; border-color: var(--accent); }
 .story-play-line svg { width: 15px; height: 15px; }
 
-.story-controls { display: flex; align-items: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+.story-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+/* Above the conversation and pinned under the section tabs while the
+   conversation is on screen (sticky inside .story-right, so it releases at
+   the end of the Story). Canvas background + hairline so lines pass under it. */
+.story-controls {
+  position: sticky; top: var(--story-pin-top, calc(var(--topbar-h) + var(--dash-nav-h))); z-index: 5;
+  margin: 0 0 24px; padding: 12px 0;
+  background: var(--bg-canvas); border-bottom: 1px solid var(--hairline-light);
+}
+.story-play-all .spa-short, .story-trans-toggle .stt-short { display: none; }
+.story-trans-toggle[aria-pressed="true"] { border-color: var(--ink-tertiary); color: var(--ink-primary); }
 .story-play-all {
   display: inline-flex; align-items: center; gap: 9px;
   padding: 13px 24px; border-radius: var(--r-full);
@@ -1723,7 +1733,18 @@ img { max-width: 100%; display: block; }
   .story-card { max-width: 94%; }
   .story-line { font-size: 20px; }
   .story-trans-toggle { margin-left: 0; }
+  /* Narrow screens: in the page flow above the first line until the
+     conversation plays, then pinned (top bar + tabs + controls) so Stop and
+     speed stay in reach. One compact row: short labels, same 44px targets. */
+  .story-controls { position: static; gap: 8px; flex-wrap: nowrap; }
+  .story-controls.is-playing { position: sticky; }
+  .story-play-all { padding: 12px 16px; font-size: 14px; gap: 8px; }
+  .story-play-all .spa-long, .story-trans-toggle .stt-long { display: none; }
+  .story-play-all .spa-short, .story-trans-toggle .stt-short { display: inline; }
+  .story-speed button { padding: 8px 4px; }
+  .story-trans-toggle { margin-left: auto; padding: 12px 12px; }
 }
+@media (max-width: 340px) { .story-controls { flex-wrap: wrap; } }
 
 /* Comprehension English glosses — hidden until "Show transcript & translation". */
 .exercise-q-en, .mcq-en { display: none; }

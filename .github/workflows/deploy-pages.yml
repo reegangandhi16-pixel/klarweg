@@ -163,6 +163,21 @@ jobs:
             done < <(find "$ARTIFACT_DIR/report" -type f)
           fi
 
+          # Paid lesson text: the full audio manifest and any timing sidecar
+          # not named in the allowlist's generated block must never ship.
+          if [ -e "$ARTIFACT_DIR/public/audio/manifest.json" ]; then
+            echo "::error::FULL AUDIO MANIFEST (paid lesson text) IN ARTIFACT"
+            FAIL=1
+          fi
+          if [ -d "$ARTIFACT_DIR/audio-timing" ]; then
+            allowed_timing="$(grep -c '^audio-timing/' "$ALLOWLIST")"
+            shipped_timing="$(find "$ARTIFACT_DIR/audio-timing" -type f | wc -l | tr -d ' ')"
+            if [ "$shipped_timing" -gt "$allowed_timing" ]; then
+              echo "::error::audio-timing: $shipped_timing files shipped, only $allowed_timing are public"
+              FAIL=1
+            fi
+          fi
+
           # No dotfiles or .env-shaped files should ever be in the
           # artifact - the allowlist should never have listed one, but
           # assert it explicitly rather than relying on that.

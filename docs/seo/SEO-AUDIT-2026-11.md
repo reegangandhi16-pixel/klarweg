@@ -156,8 +156,8 @@ No popups, countdowns or urgency.
 ## 9. Roadmap
 **30 days:** owner fixes access-term copy (#1). Verify GSC and submit sitemap. Merge this
 branch. Measure CWV. Add free-chapter → roadmap link. Make share images. Review
-`lesen-practice.html` for publishing. Write and review the first 4 `/grammar/` pages
-(der/die/das, Akkusativ, Dativ, Akkusativ vs Dativ).
+`lesen-practice.html` for publishing. First 3 `/grammar/` pages (der/die/das,
+Akkusativ, Dativ) built in Sprint 1, see `SPRINT-1-2026-11.md`.
 
 **90 days:** 12–15 grammar pages. 6 Goethe exam guides. Grammar hub links to them. First YouTube
 lessons embedded. Re-titles based on GSC queries. Course structured data if pricing copy is

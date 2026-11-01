@@ -101,8 +101,18 @@ function assertContent(r, id) {
   assert.equal(r.headers.get('content-type'), 'text/javascript; charset=utf-8');
   assert.equal(r.headers.get('cache-control'), 'private, no-store');
   assert.equal(r.headers.get('x-content-type-options'), 'nosniff');
-  assert.ok(r.buf.equals(dataFile(id)), 'byte-for-byte the chapter data file');
+  const data = dataFile(id);
+  assert.ok(r.buf.subarray(0, data.length).equals(data), 'starts with the chapter data file, byte for byte');
   assert.equal(evalChapter(r.text).id, id);
+  const sandbox = { window: {} };
+  vm.runInNewContext(r.text, sandbox);
+  const A = sandbox.window.KW_CHAPTER_AUDIO;
+  if (/^[abc][12]-0?1-/.test(id)) {
+    assert.ok(r.buf.equals(data), 'a free chapter is the data file only');
+  } else {
+    assert.equal(A.chapter, id, 'paid chapter carries its own audio lines');
+    for (const v of Object.values(A.entries)) assert.equal(v.chapter, id, 'and only its own');
+  }
 }
 
 /* ---------- access ---------- */

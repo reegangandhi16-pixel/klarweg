@@ -17,7 +17,19 @@
        DIR/chapters/rN/<chapter-id>.js   the data file, byte for byte
      --upload puts every object into the klarweg-resources bucket with
      wrangler (needs `wrangler login`). A release prefix is immutable: change
-     content, bump N, upload, then set CHAPTER_RELEASE to the new rN. */
+     content, bump N, upload, then set CHAPTER_RELEASE to the new rN.
+     Each PAID chapter object is the data file followed by that chapter's
+     audio lines and word timing (window.KW_CHAPTER_AUDIO), so transcripts
+     of paid lessons are delivered only with the gated chapter.
+
+   node scripts/chapter-lock.mjs audio [--check]
+     Derives the PUBLIC audio files from public/audio/manifest.json (the
+     full corpus, never published) and audio-timing/:
+       public/audio/manifest-public.json   free Chapter 1, homepage and
+                                           legacy entries only
+       .github/pages-allowlist.txt         the generated audio-timing block:
+                                           free Chapter 1 + homepage files only
+     --check: change nothing, exit 1 if either is stale. */
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
@@ -66,6 +78,82 @@ export function dataFileFor(pageOrId) {
 }
 
 const isFree = (c) => c.number === FREE_CHAPTER_NUMBER;
+
+/* ---------- audio lines + word timing of paid chapters ---------- */
+const MANIFEST = path.join(ROOT, "public", "audio", "manifest.json");
+const PUBLIC_MANIFEST = path.join(ROOT, "public", "audio", "manifest-public.json");
+const TIMING_DIR = path.join(ROOT, "audio-timing");
+const ALLOWLIST = path.join(ROOT, ".github", "pages-allowlist.txt");
+const TIMING_BEGIN = "# BEGIN generated: public audio-timing (scripts/chapter-lock.mjs audio) - do not edit";
+const TIMING_END = "# END generated: public audio-timing";
+const freeId = (id) => { const m = /^(a1|a2|b1|b2|c1|c2)-([0-9]{1,2})-/.exec(id); return !!m && Number(m[2]) === FREE_CHAPTER_NUMBER; };
+
+/* Splits the full manifest: what may be public, and per paid chapter its
+   entries and timing sidecars. A timing file belongs to the entry whose
+   contentHash names it; files no entry names (homepage demos) are public. */
+export function splitAudio() {
+  const full = JSON.parse(fs.readFileSync(MANIFEST, "utf8"));
+  const { counts, ...meta } = full;
+  const pub = { ...meta, publicSubset: "Free Chapter 1, homepage and legacy entries only. Paid chapter lines are delivered with each chapter by the Access Worker (scripts/chapter-lock.mjs).", entries: {} };
+  const paid = new Map();
+  const paidHashes = new Set();
+  const pubHashes = new Set();
+  for (const [text, v] of Object.entries(full.entries)) {
+    const ch = v && typeof v === "object" && typeof v.chapter === "string" ? v.chapter : null;
+    if (ch && !freeId(ch)) {
+      if (!paid.has(ch)) paid.set(ch, { entries: {}, timing: {} });
+      paid.get(ch).entries[text] = v;
+      if (v.contentHash) paidHashes.add(v.contentHash);
+    } else {
+      pub.entries[text] = v;
+      if (v && typeof v === "object" && v.contentHash) pubHashes.add(v.contentHash);
+    }
+  }
+  for (const h of paidHashes) if (pubHashes.has(h)) throw new Error(`timing ${h} is shared by a free and a paid line`);
+  const timingFiles = fs.readdirSync(TIMING_DIR).filter((f) => /^[0-9a-f]+\.json$/.test(f)).sort();
+  for (const [, c] of paid) {
+    for (const v of Object.values(c.entries)) {
+      const f = v.contentHash && path.join(TIMING_DIR, v.contentHash + ".json");
+      if (f && fs.existsSync(f)) c.timing[v.contentHash] = JSON.parse(fs.readFileSync(f, "utf8"));
+    }
+  }
+  const publicTiming = timingFiles.filter((f) => !paidHashes.has(f.slice(0, -5)));
+  return { pub, paid, publicTiming, paidTimingCount: timingFiles.length - publicTiming.length };
+}
+
+let split = null;
+const audioSplit = () => (split ||= splitAudio());
+
+// "<", U+2028 and U+2029 escaped so the literal is inert in any JS context.
+const literal = (v) => JSON.stringify(v).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
+
+/* What the Worker serves for a chapter: the data file, and for a paid
+   chapter its audio appendix. Free chapters stay byte-identical. */
+export function releasePayload(c) {
+  const data = fs.readFileSync(path.join(CHAPTER_DIR, c.file));
+  if (isFree(c)) return data;
+  const a = audioSplit().paid.get(c.id) || { entries: {}, timing: {} };
+  const tail = "\n/* Audio lines and word timing for this chapter: delivered only with the gated chapter. */\n" +
+    "window.KW_CHAPTER_AUDIO = " + literal({ chapter: c.id, entries: a.entries, timing: a.timing }) + ";\n";
+  return Buffer.concat([data, Buffer.from(tail, "utf8")]);
+}
+
+export function publicAudio({ check = false } = {}) {
+  const { pub, publicTiming, paidTimingCount } = audioSplit();
+  const problems = [];
+  const json = JSON.stringify(pub, null, 2) + "\n";
+  const cur = fs.existsSync(PUBLIC_MANIFEST) ? fs.readFileSync(PUBLIC_MANIFEST, "utf8") : null;
+  if (cur !== json) { if (check) problems.push("public/audio/manifest-public.json is stale (run: node scripts/chapter-lock.mjs audio)"); else fs.writeFileSync(PUBLIC_MANIFEST, json); }
+  const allow = fs.readFileSync(ALLOWLIST, "utf8");
+  const block = [TIMING_BEGIN, ...publicTiming.map((f) => "audio-timing/" + f), TIMING_END].join("\n");
+  const re = new RegExp(TIMING_BEGIN.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "[\\s\\S]*?" + TIMING_END.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  let next;
+  if (re.test(allow)) next = allow.replace(re, block);
+  else if (allow.includes("GLOB:audio-timing/[0-9a-f]*.json")) next = allow.replace("GLOB:audio-timing/[0-9a-f]*.json", block);
+  else { problems.push("pages-allowlist.txt: audio-timing block not found"); next = allow; }
+  if (next !== allow) { if (check) problems.push("pages-allowlist.txt audio-timing block is stale (run: node scripts/chapter-lock.mjs audio)"); else fs.writeFileSync(ALLOWLIST, next); }
+  return { problems, publicEntries: Object.keys(pub.entries).length, publicTiming: publicTiming.length, paidTimingCount };
+}
 const workerTag = (api, id) => `<script src="${api}/chapters/${id}.js"></script>`;
 
 export function lockPages({ check = false } = {}) {
@@ -103,7 +191,7 @@ export function buildRelease({ release, out }) {
   const files = [];
   for (const c of loadChapters()) {
     chapters[c.id] = { title: c.title };
-    fs.copyFileSync(path.join(CHAPTER_DIR, c.file), path.join(dir, `${c.id}.js`));
+    fs.writeFileSync(path.join(dir, `${c.id}.js`), releasePayload(c));
     files.push(`${c.id}.js`);
   }
   fs.writeFileSync(path.join(dir, "index.json"), JSON.stringify({ release, chapters }) + "\n");
@@ -147,13 +235,19 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     for (const p of problems) console.error("✖ " + p);
     if (problems.length) process.exit(1);
     console.log(check ? "chapter pages: paid content loads from the Access Worker ✓" : `chapter pages: ${changed} rewritten`);
+  } else if (cmd === "audio") {
+    const check = process.argv.includes("--check");
+    const r = publicAudio({ check });
+    for (const p of r.problems) console.error("✖ " + p);
+    if (r.problems.length) process.exit(1);
+    console.log(`public audio: ${r.publicEntries} manifest entries, ${r.publicTiming} timing files public; ${r.paidTimingCount} paid timing files Worker-only ✓`);
   } else if (cmd === "release") {
     const release = arg("--release") || "";
     const built = buildRelease({ release, out: path.resolve(arg("--out") || path.join(ROOT, "chapter-release-out")) });
     console.log(`Built ${built.files.length} objects in ${built.dir}`);
     if (process.argv.includes("--upload")) upload(built, release);
   } else {
-    console.error("usage: chapter-lock.mjs pages [--check] | release --release rN [--out DIR] [--upload]");
+    console.error("usage: chapter-lock.mjs pages [--check] | audio [--check] | release --release rN [--out DIR] [--upload]");
     process.exit(2);
   }
 }

@@ -27,4 +27,5 @@ tutor/eval/results/
 
 # ── Chapter resource PDFs (never committed; releases live in the private R2 bucket) ──
 chapter-resources-out/
+combined-resources-out/
 scripts/chapter-resources/.build/

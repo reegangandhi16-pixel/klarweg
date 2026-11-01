@@ -2592,6 +2592,17 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
   color: var(--ink-quaternary);
   font-weight: 300;
 }
+/* Desktop/tablet: keep the three steps on one row; a longer subline
+   wraps inside its own step instead of pushing step 03 to a new row. */
+@media (min-width: 769px) {
+  .pricing-flow { flex-wrap: nowrap; }
+  .pflow-step { flex: 1 1 0; min-width: 0; }
+}
+@media (min-width: 1024px) {
+  .pflow-step { flex: 0 0 auto; }
+  .pflow-step:last-child { flex: 0 1 auto; }
+  .pflow-step:last-child .pflow-sub { max-width: 240px; }
+}
 @media (max-width: 768px) {
   .pricing-flow {
     border-radius: var(--r-xl);
@@ -3872,22 +3883,14 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
 .cv-score { font-size: 10px; color: var(--green-deep); font-weight: 600; }
 .cv-line { font-family: var(--font-german); font-size: 13px; }
 .cv-line-sub { font-size: 10px; color: var(--ink-tertiary); margin-top: 2px; }
-.cv-seal {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: #fff;
-  background: linear-gradient(135deg, var(--amber), var(--amber-bright));
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  box-shadow: 0 6px 18px -6px rgba(186,117,23,0.5);
-  margin: 0 auto;
+.cv-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--hairline);
+  border-radius: var(--r-full);
+  overflow: hidden;
 }
-.cv-seal span { font-size: 8px; opacity: 0.85; margin-top: -2px; }
+.cv-progress span { display: block; height: 100%; background: var(--coral); border-radius: inherit; }
 
 .chapter-flow-footer {
   margin-top: 48px;
@@ -5410,7 +5413,7 @@ body {
       <div class="cstep">
         <div class="cstep-num">02</div>
         <div class="cstep-title">Story scene</div>
-        <div class="cstep-body">Two characters in a real situation. Every word clickable. Native audio.</div>
+        <div class="cstep-body">Two characters in a real situation. Every word clickable. German pronunciation audio.</div>
         <div class="cstep-visual cv-story">
           <div class="cv-bubble cv-bubble-left">Anna: Was möchten Sie?</div>
           <div class="cv-bubble cv-bubble-right">Einen Kaffee.</div>
@@ -5476,8 +5479,10 @@ body {
         <div class="cstep-num">08</div>
         <div class="cstep-title">Chapter check</div>
         <div class="cstep-body">Finish with the chapter quiz. When you are signed in, your progress is saved to your account and picks up on any device.</div>
-        <div class="cstep-visual cv-cert">
-          <div class="cv-seal">A1<span>·03</span></div>
+        <div class="cstep-visual cv-check">
+          <div class="cv-frame"><span>A1 · Chapter 3</span></div>
+          <div class="cv-progress" aria-hidden="true"><span style="width: 100%;"></span></div>
+          <div class="cv-line-sub">Quiz 8 / 8 · progress saved</div>
         </div>
       </div>
 
@@ -5830,7 +5835,7 @@ body {
           <li><span class="check-icon">✓</span> All 6 levels: A1 · A2 · B1 · B2 · C1 · C2</li>
           <li><span class="check-icon">✓</span> Every chapter, every lesson, forever</li>
           <li><span class="check-icon">✓</span> Klarweg AI feedback on writing &amp; speaking</li>
-          <li><span class="check-icon">✓</span> Stories, dialogues, native audio</li>
+          <li><span class="check-icon">✓</span> Stories, dialogues, German audio</li>
           <li><span class="check-icon">✓</span> Homework PDFs and smart revision</li>
           <li><span class="check-icon">✓</span> All future content and features included</li>
           <li><span class="check-icon">✓</span> 7-day money-back guarantee</li>

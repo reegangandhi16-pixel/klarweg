@@ -1691,6 +1691,12 @@
 
   // ---- Vocabulary ----
   let vocabFilter = 'all', vocabQuery = '';
+  // Long word lists (43 chapters have 60+ words, B1·07 has 173) open with the
+  // first VOCAB_FIRST cards and a "Show all N words" control instead of every
+  // card at once. Short lists (≤ VOCAB_FIRST + 8) are shown whole. Search and
+  // the filters work on the full list; the cap applies to whatever matches.
+  const VOCAB_FIRST = 24;
+  let vocabExpanded = false;
   // Checkpoint chapters author their vocabulary section as a review quiz
   // (`vocabularyReview`: {q, options, answer, ref}) instead of word cards, so
   // the word-card path below would render an empty grid with a misleading
@@ -1701,7 +1707,7 @@
     const toolbar = el('div', { class: 'vocab-toolbar' });
     const search = el('div', { class: 'search-box' },
       el('span', { html: ICON.search }),
-      el('input', { type: 'text', placeholder: 'Search 12 words…', 'aria-label': 'Search vocabulary' }));
+      el('input', { type: 'text', placeholder: 'Search ' + C.vocab.length + (C.vocab.length === 1 ? ' word…' : ' words…'), 'aria-label': 'Search vocabulary' }));
     search.querySelector('input').addEventListener('input', (e) => { vocabQuery = e.target.value.toLowerCase().trim(); drawVocab(); });
     const filters = el('div', { class: 'filter-group' });
     [['all', 'All'], ['m', 'der (m)'], ['f', 'die (f)'], ['n', 'das (n)'], ['learned', 'Learned']].forEach(([k, lbl]) => {
@@ -1711,7 +1717,8 @@
     });
     toolbar.append(search, filters);
     const grid = el('div', { class: 'vocab-grid', id: 'vocab-grid' });
-    wrap.append(toolbar, grid);
+    const more = el('div', { class: 'vocab-more', id: 'vocab-more', hidden: true });
+    wrap.append(toolbar, grid, more);
     setTimeout(drawVocab, 0);
     return wrap;
   }
@@ -1726,8 +1733,28 @@
       if (vocabQuery && !(w.de.toLowerCase().includes(vocabQuery) || w.en.toLowerCase().includes(vocabQuery) || w.hi.includes(vocabQuery))) return false;
       return true;
     });
+    const more = $('#vocab-more');
+    if (more) { more.innerHTML = ''; more.hidden = true; }
     if (!list.length) { grid.appendChild(el('div', { class: 'vocab-empty' }, 'No words match. Try another filter.')); return; }
-    list.forEach(w => grid.appendChild(vocabCard(w)));
+    const capped = !vocabExpanded && list.length > VOCAB_FIRST + 8;
+    (capped ? list.slice(0, VOCAB_FIRST) : list).forEach(w => grid.appendChild(vocabCard(w)));
+    if (more && list.length > VOCAB_FIRST + 8) {
+      more.hidden = false;
+      const filtered = vocabFilter !== 'all' || !!vocabQuery;
+      more.append(
+        el('span', { class: 'vocab-more-count muted' }, capped ? 'Showing ' + VOCAB_FIRST + ' of ' + list.length + (filtered ? ' matching words' : ' words') : 'All ' + list.length + (filtered ? ' matching words' : ' words')),
+        el('button', { class: 'btn btn-soft btn-small', type: 'button', 'aria-controls': 'vocab-grid', 'aria-expanded': capped ? 'false' : 'true', onclick: () => {
+          // Show all: the new cards appear right where the control was, so the
+          // learner reads on from word 25 (no scroll). Show fewer: keep the
+          // control where it is on screen while the list above it shrinks, so
+          // the learner is not thrown to a random place in the page.
+          const y0 = more.getBoundingClientRect().top;
+          vocabExpanded = capped; drawVocab();
+          if (!vocabExpanded) window.scrollBy(0, more.getBoundingClientRect().top - y0);
+          const btn = more.querySelector('button');
+          if (btn) btn.focus({ preventScroll: true });
+        } }, capped ? 'Show all ' + list.length + ' words' : 'Show fewer'));
+    }
     linkifyDe(grid); // keep example sentences clickable after every re-draw
     linkifyGated(grid);
   }
@@ -4148,6 +4175,18 @@
   }
 
   // reusable MCQ block
+  /* Display order for multiple-choice options: a fresh shuffle each time a
+     question is shown, so the correct answer's position carries no signal
+     (the authored data puts it first or second in most items). Every index
+     stays the AUTHORED one — scoring, q.answer, q.optionsEn and the AI quiz
+     review (chosen = authored index) are unchanged; only the on-screen order
+     and the A/B/C/D letters (by position) differ. */
+  function shuffledOrder(n) {
+    const a = Array.from({ length: n }, (_, i) => i);
+    for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+
   function mcqBlock(q, key, glossSink) {
     const block = el('div', { class: 'exercise-block' });
     block.appendChild(el('div', { class: 'exercise-q', html: q.q }));
@@ -4163,9 +4202,10 @@
     const opts = el('div', { class: 'mcq-options' });
     const feedback = el('div', { class: 'exercise-feedback' });
     let answered = false;
-    q.options.forEach((opt, oi) => {
-      const b = el('button', { class: 'mcq-option', type: 'button' },
-        el('span', { class: 'mcq-key' }, String.fromCharCode(65 + oi)),
+    shuffledOrder(q.options.length).forEach((oi, pos) => {
+      const opt = q.options[oi];
+      const b = el('button', { class: 'mcq-option', type: 'button', dataset: { oi: String(oi) } },
+        el('span', { class: 'mcq-key' }, String.fromCharCode(65 + pos)),
         el('span', { html: optionIsGerman(opt) ? '<span class="de">' + opt + '</span>' : opt }));
       colorWordsIn(b.querySelector('.de'));
       if (glossSink && q.optionsEn && q.optionsEn[oi]) {
@@ -4177,7 +4217,7 @@
         if (answered) return; answered = true;
         $$('.mcq-option', opts).forEach(x => x.disabled = true);
         if (oi === q.answer) { b.classList.add('is-correct'); feedback.className = 'exercise-feedback ok'; feedback.textContent = '✓ ' + (q.explain || 'Correct!'); }
-        else { b.classList.add('is-wrong'); opts.children[q.answer].classList.add('is-correct'); feedback.className = 'exercise-feedback no'; feedback.textContent = '✗ ' + (q.explain || 'Not quite.'); }
+        else { b.classList.add('is-wrong'); opts.querySelector('[data-oi="' + q.answer + '"]').classList.add('is-correct'); feedback.className = 'exercise-feedback no'; feedback.textContent = '✗ ' + (q.explain || 'Not quite.'); }
       });
       opts.appendChild(b);
     });
@@ -5737,9 +5777,10 @@
       const opts = el('div', { class: 'mcq-options' });
       const fb = el('div', { class: 'exercise-feedback' });
       let answered = false;
-      q.options.forEach((opt, oi) => {
-        const b = el('button', { class: 'mcq-option', type: 'button' },
-          el('span', { class: 'mcq-key' }, String.fromCharCode(65 + oi)),
+      shuffledOrder(q.options.length).forEach((oi, pos) => {
+        const opt = q.options[oi];
+        const b = el('button', { class: 'mcq-option', type: 'button', dataset: { oi: String(oi) } },
+          el('span', { class: 'mcq-key' }, String.fromCharCode(65 + pos)),
           el('span', { html: optionIsGerman(opt) ? '<span class="de">' + opt + '</span>' : opt }));
         colorWordsIn(b.querySelector('.de'));
         b.addEventListener('click', () => {
@@ -5747,7 +5788,7 @@
           chosen[idx] = oi;
           $$('.mcq-option', opts).forEach(x => x.disabled = true);
           if (oi === q.answer) { b.classList.add('is-correct'); score++; fb.className = 'exercise-feedback ok'; fb.textContent = '✓ ' + q.explain; }
-          else { b.classList.add('is-wrong'); opts.children[q.answer].classList.add('is-correct'); fb.className = 'exercise-feedback no'; fb.textContent = '✗ ' + q.explain; }
+          else { b.classList.add('is-wrong'); opts.querySelector('[data-oi="' + q.answer + '"]').classList.add('is-correct'); fb.className = 'exercise-feedback no'; fb.textContent = '✗ ' + q.explain; }
           setTimeout(() => { nextBtn.style.display = 'inline-flex'; }, 300);
         });
         opts.appendChild(b);

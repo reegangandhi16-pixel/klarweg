@@ -199,7 +199,7 @@ test('scorer and Speaking/Story code unchanged by this rollout', () => {
   same('  function bodyStory() {', '    // Controls\n');
   same('    function clearActive() {', '    let storyRun = null, storyOwn = false;');
   same('    if (SentencePlay.enabled && window.KW_onAudioEvent) {', '    function playAll() {');
-  same("    playAllBtn.addEventListener('click', playAll);", '  function bodyVocabulary() {');
+  same("    playAllBtn.addEventListener('click', playAll);", '  // ---- Vocabulary ----');
   const FOLLOW = /^ {8}followLine\(i\);$/;
   const playAll = cut(APP, '    function playAll() {', "    playAllBtn.addEventListener('click', playAll);").split('\n').filter((l) => !FOLLOW.test(l)).join('\n')
     .replace('seqStop = false; followOff = false; setPlayAllLabel(true);', 'seqStop = false; setPlayAllLabel(true);');

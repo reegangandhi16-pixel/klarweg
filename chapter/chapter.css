@@ -687,6 +687,10 @@ img { max-width: 100%; display: block; }
 .vword-btn svg { width: 14px; height: 14px; }
 .vword-btn.is-on { background: var(--g-object); color: #fff; }
 .vword-btn.save-on { color: var(--coral-text); }
+.vocab-more { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
+.vocab-more[hidden] { display: none; }
+.vocab-more .btn { min-height: 44px; }
+.vocab-more-count { font-size: 14px; }
 .vocab-empty { text-align: center; color: var(--ink-tertiary); padding: 40px; font-size: 15px; }
 
 /* Accordion (grammar) */

@@ -121,6 +121,7 @@ test('the origin switch is reversible (rollback rehearsal in a temp copy)', () =
     execFileSync(process.execPath, [path.join(dir, 'scripts/build-grammar-index.mjs'), '--check']);
     execFileSync(process.execPath, [path.join(dir, 'scripts/seo-chapter-meta.mjs'), '--check']);
     execFileSync(process.execPath, [path.join(dir, 'scripts/seo-structured-data.mjs'), '--check']);
+    execFileSync(process.execPath, [path.join(dir, 'scripts/build-grammar-guides.mjs'), '--check']);
 
     run(SITE_BASE, true);
     for (const f of new Set(files)) {

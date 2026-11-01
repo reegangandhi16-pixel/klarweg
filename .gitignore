@@ -27,4 +27,6 @@ tutor/eval/results/
 
 # ── Chapter resource PDFs (never committed; releases live in the private R2 bucket) ──
 chapter-resources-out/
+# Paid chapter content release (uploaded to the private R2 bucket, never committed)
+chapter-release-out/
 scripts/chapter-resources/.build/

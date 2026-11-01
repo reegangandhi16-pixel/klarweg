@@ -20,6 +20,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { SITE_BASE } from './site-origin.mjs';
+import { dataFileFor } from './chapter-lock.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CH = path.join(ROOT, 'chapter');
@@ -46,13 +47,11 @@ function load(file) {
   return ctx.__C;
 }
 
-/* page ↔ data file, from each chapter page's own <script src>. */
+/* page ↔ data file (scripts/chapter-lock.mjs): a paid page's <script src>
+   is the Access Worker, so the mapping never comes from the page itself. */
 const chapters = [];
 for (const page of fs.readdirSync(CH).filter((f) => /^chapter-[abc][12]-.*\.html$/.test(f))) {
-  const html = fs.readFileSync(path.join(CH, page), 'utf8');
-  const m = html.match(/<script src="(chapter-[^"]+-data\.js)(?:\?[^"]*)?"><\/script>/);
-  if (!m) continue;
-  const C = load(path.join(CH, m[1]));
+  const C = load(path.join(CH, dataFileFor(page)));
   chapters.push({ page, C });
 }
 

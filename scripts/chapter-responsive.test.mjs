@@ -233,7 +233,8 @@ test('258 chapter pages load the new asset versions and nothing else changed in 
   assert.equal(pages.length, 258);
   for (const f of pages) {
     const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
-    assert.ok(h.includes('href="chapter.css?v=22"') && h.includes('src="chapter-app.js?v=33"'), f);
+    assert.ok(h.includes('href="chapter.css?v=22"') && h.includes('src="chapter-app.js?v=34"'), f);
+    assert.ok(!h.includes('src="chapter-app.js?v=33"'), f);
     assert.ok(!h.includes('href="chapter.css?v=21"') && !h.includes('src="chapter-app.js?v=32"'), f);
     assert.ok(!h.includes('src="chapter-app.js?v=31"'), f);
     assert.ok(!h.includes('href="chapter.css?v=19"') && !h.includes('src="chapter-app.js?v=29"'), f);

@@ -435,6 +435,7 @@ export function buildResource(C, resource, { css, roleCss, chapterUrl }) {
 
   const footer = `<footer class="doc-end">${footerNote ? `<p>${esc(footerNote)}</p>` : ''}<p class="url"><a href="${esc(chapterUrl)}">${esc(chapterUrl)}</a></p></footer>`;
   const running = `Klarweg · ${tag} ${C.title} · ${title}`;
+  const body = `${masthead}<main>${S.render(footer)}</main>`;
 
   const doc = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
@@ -444,6 +445,6 @@ ${roleCss}
 @page { @bottom-left { content: ${cssString(running)}; }
   @bottom-right { content: counter(page) " / " counter(pages) "\\A " ${cssString(QR_LABEL)}; background-image: url("${qrDataUri(chapterUrl)}"); } }
 </style></head>
-<body>${masthead}<main>${S.render(footer)}</main></body></html>`;
-  return { html: doc, sections: S.titles };
+<body>${body}</body></html>`;
+  return { html: doc, sections: S.titles, body, running };
 }

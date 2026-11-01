@@ -151,6 +151,38 @@
     // — can show Begin / Continue / Completed from the same numbers.
     try { state.xpEarned = earnedXP(); state.xpMax = C.xp; } catch (e) {}
     try { localStorage.setItem(SKEY, JSON.stringify(state)); } catch (e) {}
+    if (progressSync) progressSync.schedule();
+  }
+  // Signed-in learners also keep this record on their account, so progress
+  // follows them across devices (kw-progress-sync.js; GET/POST /progress on
+  // the access Worker). Loaded only after KWAccess.ready() says signed in;
+  // signed out, offline or without the endpoint the page stays local-only.
+  let progressSync = null;
+  function startProgressSync() {
+    if (POP_HOST || !window.KWAccess || typeof KWAccess.ready !== 'function') return;
+    KWAccess.ready().then((snap) => {
+      if (!snap && typeof KWAccess.getAccessState === 'function') snap = KWAccess.getAccessState();
+      if (!snap || !snap.authenticated) return;
+      const go = () => {
+        if (!window.KWProgressSync || progressSync) return;
+        progressSync = KWProgressSync.attach({
+          id: SKEY.slice('kw-ch-'.length),
+          read: () => state,
+          apply: (rec) => {
+            const saved = state.saved;            // account saved words sync on their own
+            state = normalizeState(rec); state.saved = saved;
+            save();
+            if (chapterRendered) refreshProgressUI();
+          }
+        });
+      };
+      if (window.KWProgressSync) return go();
+      const sc = document.createElement('script');
+      sc.src = '../kw-progress-sync.js?v=1';
+      sc.async = true;
+      sc.onload = go;
+      document.head.appendChild(sc);
+    }).catch(() => {});
   }
 
   const completable = C.sections.filter(s => !s.auto).map(s => s.id); // 8 sections incl. quiz
@@ -191,6 +223,7 @@
     try { state = normalizeState(JSON.parse(localStorage.getItem(SKEY) || '{}')); } catch (err) { return; }
     if (chapterRendered) refreshProgressUI();
   });
+  startProgressSync();
   function refreshProgressUI() {
     [refreshNavTicks, updateRing, updateStats, renderSummary, drawVocab, refreshSavedCount].forEach(fn => { try { fn(); } catch (e) {} });
     $$('.dash-section').forEach(sec => {
@@ -1878,6 +1911,7 @@
       el('span', { html: ICON.check }), el('span', {}, on ? 'Learned' : 'Mark learned'));
     b.addEventListener('click', () => {
       if (state.learned[w.de]) delete state.learned[w.de]; else state.learned[w.de] = true;
+      state.learnedAt = Date.now();
       save(); drawVocab();
     });
     return b;
@@ -6206,7 +6240,10 @@
     });
     $('#act-restart').addEventListener('click', () => {
       if (!confirm('Reset all progress for this chapter?')) return;
-      state = { done: {}, learned: {}, saved: {}, quizScore: null }; save();
+      // resetAt tells the account copy (and other devices) about the reset,
+      // so older progress there does not merge back in.
+      state = { done: {}, learned: {}, saved: {}, quizScore: null, resetAt: Date.now() }; save();
+      if (progressSync) progressSync.flush(true);
       location.reload();
     });
     $('#act-complete').addEventListener('click', () => {

@@ -164,3 +164,30 @@ export async function sweepRateCounters(env, now = Date.now()) {
     await env.DB.prepare("DELETE FROM rate_counters WHERE window_end < ?1").bind(now).run();
   } catch { /* housekeeping only */ }
 }
+
+/* GET /auth/google/nonce is unauthenticated and writes one D1 row per call.
+   Budget per network (pseudonymous daily hash; IPv6 grouped by /64) so a
+   script cannot fill google_login_nonces. Generous for shared/CGNAT networks:
+   a real sign-in needs one nonce. Every call counts. */
+export const NONCE_LIMIT = { max: 120, win: 15 * 60 * 1000 };
+
+export async function takeNonceBudget(env, request, now = Date.now()) {
+  const net = networkOf(request.headers.get("CF-Connecting-IP")) || "unknown";
+  const day = new Date(now).toISOString().slice(0, 10);
+  const key = "gn:" + await hmacHex(env.RATE_SALT || "dev-salt", "nonce|" + net + "|" + day);
+  const end = windowEnd(now, NONCE_LIMIT.win);
+  const row = await env.DB.prepare(
+    "INSERT INTO rate_counters (bucket, window_end, hits) VALUES (?1, ?2, 1) " +
+    "ON CONFLICT(bucket, window_end) DO UPDATE SET hits = hits + 1 RETURNING hits"
+  ).bind(key, end).first();
+  return !row || row.hits <= NONCE_LIMIT.max
+    ? { ok: true }
+    : { ok: false, retryAfter: Math.max(1, Math.ceil((end - now) / 1000)) };
+}
+
+/* Expired Google nonces are never read again; delete them opportunistically. */
+export async function sweepGoogleNonces(env, nowSeconds = Math.floor(Date.now() / 1000)) {
+  try {
+    await env.DB.prepare("DELETE FROM google_login_nonces WHERE expires_at <= ?1").bind(nowSeconds).run();
+  } catch { /* housekeeping only */ }
+}

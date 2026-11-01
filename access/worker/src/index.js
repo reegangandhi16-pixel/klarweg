@@ -1,3 +1,4 @@
+import { withSecurityHeaders } from "./security-headers.js";
 import { corsHeaders, withCors, isForeignOriginWrite } from "./cors.js";
 import { isSameOriginApi, API_PREFIX } from "./same-origin.js";
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
@@ -39,12 +40,12 @@ export default {
      It never replaces fixing the cause. Logs carry the error class only. */
   async fetch(request, env, ctx) {
     try {
-      return await route(request, env, ctx);
+      return withSecurityHeaders(await route(request, env, ctx));
     } catch (err) {
       let path = "";
       try { path = new URL(request.url).pathname; } catch {}
       console.log(JSON.stringify({ svc: "klarweg-access", evt: "unhandled", path, error: (err && err.name) || "Error" }));
-      return withCors(json({ ok: false, error: "server_error" }, 500), request);
+      return withSecurityHeaders(withCors(json({ ok: false, error: "server_error" }, 500), request));
     }
   }
 };
@@ -102,7 +103,7 @@ async function route(request, env, ctx) {
     }
 
     if (request.method === "GET" && url.pathname === "/auth/google/nonce") {
-      return withCors(await googleNonce(request, env), request);
+      return withCors(await googleNonce(request, env, ctx), request);
     }
 
     /* Google POSTs here directly as a top-level, cross-origin,

@@ -499,7 +499,7 @@ try {
   ok('no uncaught page errors', pageErrors.length === 0, pageErrors.join(' | '));
   // the page itself asks for fonts and the login state; the resolver rules must make every such request fail
   ok('every off-host request was blocked (none completed)', offLoaded.size === 0, [...offLoaded].join(', '));
-  ok('off-host requests are only fonts and the login-state lookup', [...offHost].every((h) => /fonts\.(googleapis|gstatic)\.com$|workers\.dev$/.test(h)), [...offHost].join(', '));
+  ok('off-host requests are only fonts and the login-state lookup', [...offHost].every((h) => /fonts\.(googleapis|gstatic)\.com$|^klarweg\.in$/.test(h)), [...offHost].join(', '));
 } catch (e) {
   ok('suite ran to completion', false, e.stack || String(e));
 }

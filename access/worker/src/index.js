@@ -18,6 +18,7 @@ import {
   deleteSavedWord,
   reviewSavedWord
 } from "./saved-words.js";
+import { listProgress, saveProgress } from "./progress.js";
 function json(data, status = 200) {
   return Response.json(data, { status });
 }
@@ -206,6 +207,16 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
     const savedWordReviewMatch = url.pathname.match(/^\/saved-words\/(sw_[0-9a-f-]{36})\/review$/);
     if (request.method === "PATCH" && savedWordReviewMatch) {
       return withCors(await reviewSavedWord(request, env, savedWordReviewMatch[1]), request);
+    }
+
+    /* Chapter progress, account-backed (progress.js; client:
+       kw-progress-sync.js). Session-derived user only. */
+    if (request.method === "GET" && url.pathname === "/progress") {
+      return withCors(await listProgress(request, env), request);
+    }
+    const progressMatch = url.pathname.match(/^\/progress\/([a-z0-9-]{3,100})$/);
+    if (request.method === "POST" && progressMatch) {
+      return withCors(await saveProgress(request, env, progressMatch[1]), request);
     }
 
     /* Klarweg AI — auth, entitlement, quotas and the kill switch are

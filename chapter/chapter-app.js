@@ -151,6 +151,38 @@
     // — can show Begin / Continue / Completed from the same numbers.
     try { state.xpEarned = earnedXP(); state.xpMax = C.xp; } catch (e) {}
     try { localStorage.setItem(SKEY, JSON.stringify(state)); } catch (e) {}
+    if (progressSync) progressSync.schedule();
+  }
+  // Signed-in learners also keep this record on their account, so progress
+  // follows them across devices (kw-progress-sync.js; GET/POST /progress on
+  // the access Worker). Loaded only after KWAccess.ready() says signed in;
+  // signed out, offline or without the endpoint the page stays local-only.
+  let progressSync = null;
+  function startProgressSync() {
+    if (POP_HOST || !window.KWAccess || typeof KWAccess.ready !== 'function') return;
+    KWAccess.ready().then((snap) => {
+      if (!snap && typeof KWAccess.getAccessState === 'function') snap = KWAccess.getAccessState();
+      if (!snap || !snap.authenticated) return;
+      const go = () => {
+        if (!window.KWProgressSync || progressSync) return;
+        progressSync = KWProgressSync.attach({
+          id: SKEY.slice('kw-ch-'.length),
+          read: () => state,
+          apply: (rec) => {
+            const saved = state.saved;            // account saved words sync on their own
+            state = normalizeState(rec); state.saved = saved;
+            save();
+            if (chapterRendered) refreshProgressUI();
+          }
+        });
+      };
+      if (window.KWProgressSync) return go();
+      const sc = document.createElement('script');
+      sc.src = '../kw-progress-sync.js?v=1';
+      sc.async = true;
+      sc.onload = go;
+      document.head.appendChild(sc);
+    }).catch(() => {});
   }
 
   const completable = C.sections.filter(s => !s.auto).map(s => s.id); // 8 sections incl. quiz
@@ -191,6 +223,7 @@
     try { state = normalizeState(JSON.parse(localStorage.getItem(SKEY) || '{}')); } catch (err) { return; }
     if (chapterRendered) refreshProgressUI();
   });
+  startProgressSync();
   function refreshProgressUI() {
     [refreshNavTicks, updateRing, updateStats, renderSummary, drawVocab, refreshSavedCount].forEach(fn => { try { fn(); } catch (e) {} });
     $$('.dash-section').forEach(sec => {
@@ -1526,20 +1559,63 @@
 
     // Controls
     let rate = 1, seqPlaying = false, seqStop = false;
-    const playAllBtn = el('button', { class: 'story-play-all' + (SentencePlay.enabled ? ' kw-play-all' : ''), type: 'button' }, el('span', { html: ICON.play }), el('span', {}, 'Play conversation'));
+    // Long label on desktop, short label on narrow screens (CSS picks one);
+    // the aria-label always carries the full action.
+    const playAllBtn = el('button', { class: 'story-play-all' + (SentencePlay.enabled ? ' kw-play-all' : ''), type: 'button', 'aria-label': 'Play conversation' },
+      el('span', { html: ICON.play }), el('span', { class: 'spa-long', 'aria-hidden': 'true' }, 'Play conversation'), el('span', { class: 'spa-short', 'aria-hidden': 'true' }, 'Play'));
     const speed = el('div', { class: 'story-speed' });
     [['1×', 1], ['0.75×', 0.75], ['0.5×', 0.5]].forEach(([lbl, v], i) => {
       const b = el('button', { type: 'button', class: i === 0 ? 'is-active' : '' }, lbl);
       b.addEventListener('click', () => { rate = v; $$('.story-speed button', speed).forEach(x => x.classList.toggle('is-active', x === b)); });
       speed.append(b);
     });
-    const transToggle = el('button', { class: 'story-trans-toggle', type: 'button' }, 'Show translation');
+    const transToggle = el('button', { class: 'story-trans-toggle', type: 'button', 'aria-pressed': 'false' },
+      el('span', { class: 'stt-long' }, 'Show translation'), el('span', { class: 'stt-short' }, 'Translation'));
     transToggle.addEventListener('click', () => {
       const on = thread.classList.toggle('show-trans');
-      transToggle.textContent = on ? 'Hide translation' : 'Show translation';
+      transToggle.querySelector('.stt-long').textContent = on ? 'Hide translation' : 'Show translation';
+      transToggle.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
+    // The controls sit ABOVE the conversation (start listening where reading
+    // starts) and stay pinned under the section tabs while the conversation
+    // is on screen (CSS sticky inside .story-right; on narrow screens only
+    // while the conversation plays — .is-playing).
     const controls = el('div', { class: 'story-controls' }, playAllBtn, speed, transToggle);
-    right.append(controls);
+    right.insertBefore(controls, right.firstChild);
+    // Pin flush under the measured top bar + tabs (their real height can
+    // differ from the CSS tokens by a few px); the CSS token sum is the fallback.
+    const setPinTop = () => controls.style.setProperty('--story-pin-top', (stickyOffset() - 8) + 'px');
+    requestAnimationFrame(setPinTop);
+    window.addEventListener('resize', setPinTop, { passive: true });
+
+    /* Follow the conversation: while "Play conversation" runs, the line that
+       starts is scrolled into view if it is not fully visible below the
+       pinned controls. Only during Play conversation (never for a single
+       line), never when already visible, instant under reduced motion, and
+       it stops for the rest of the run once the learner scrolls by hand. */
+    let followOff = false;
+    const reduceMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+    const manualScroll = () => { if (seqPlaying) followOff = true; };
+    window.addEventListener('wheel', manualScroll, { passive: true });
+    window.addEventListener('touchmove', manualScroll, { passive: true });
+    window.addEventListener('keydown', (e) => {
+      if (['PageUp', 'PageDown', 'ArrowUp', 'ArrowDown', 'Home', 'End'].indexOf(e.key) >= 0) manualScroll();
+    });
+    function followLine(i) {
+      const c = cards[i];
+      if (!c || followOff) return;
+      const r = c.card.getBoundingClientRect();
+      const top = Math.max(stickyOffset(), controls.getBoundingClientRect().bottom + 12);
+      const bottom = window.innerHeight - 16;
+      // Above the view: align under the controls. Below it: bring it to about
+      // a third of the free height, so the previous line stays in view as
+      // context and the next lines need fewer scrolls.
+      let dy = 0;
+      if (r.top < top) dy = r.top - top;
+      else if (r.bottom > bottom) dy = Math.min(r.top - (top + (bottom - top) * 0.3), r.top - top);
+      if (Math.abs(dy) < 2) return;
+      window.scrollBy({ top: dy, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    }
 
     function clearActive() {
       if (SentencePlay.enabled) { storyRun = null; cards.forEach(c => { c.card.classList.remove('is-active'); SentencePlay.state(c.playBtn, 'idle'); }); return; }
@@ -1557,7 +1633,10 @@
     const own = (f) => { storyOwn = true; try { return f(); } finally { storyOwn = false; } };
     function endConversation() { if (!seqPlaying) return; seqStop = true; seqPlaying = false; setPlayAllLabel(false); }
     function setPlayAllLabel(on) {
-      playAllBtn.querySelector('span:last-child').textContent = on ? 'Stop' : 'Play conversation';
+      playAllBtn.querySelector('.spa-long').textContent = on ? 'Stop' : 'Play conversation';
+      playAllBtn.querySelector('.spa-short').textContent = on ? 'Stop' : 'Play';
+      playAllBtn.setAttribute('aria-label', on ? 'Stop conversation' : 'Play conversation');
+      controls.classList.toggle('is-playing', on);
       if (SentencePlay.enabled) playAllBtn.firstChild.innerHTML = on ? ICON.stop : ICON.play;
     }
     if (SentencePlay.enabled && window.KW_onAudioEvent) {
@@ -1628,10 +1707,11 @@
     }
     function playAll() {
       if (seqPlaying) { seqStop = true; seqPlaying = false; own(() => { try { Audio.stop(); } catch (_) {} }); clearActive(); setPlayAllLabel(false); return; }
-      seqPlaying = true; seqStop = false; setPlayAllLabel(true);
+      seqPlaying = true; seqStop = false; followOff = false; setPlayAllLabel(true);
       let i = 0;
       const next = () => {
         if (seqStop || i >= cards.length) { seqPlaying = false; seqStop = false; clearActive(); setPlayAllLabel(false); return; }
+        followLine(i);
         playLine(i++, next);
       };
       next();
@@ -1644,6 +1724,12 @@
 
   // ---- Vocabulary ----
   let vocabFilter = 'all', vocabQuery = '';
+  // Long word lists (43 chapters have 60+ words, B1·07 has 173) open with the
+  // first VOCAB_FIRST cards and a "Show all N words" control instead of every
+  // card at once. Short lists (≤ VOCAB_FIRST + 8) are shown whole. Search and
+  // the filters work on the full list; the cap applies to whatever matches.
+  const VOCAB_FIRST = 24;
+  let vocabExpanded = false;
   // Checkpoint chapters author their vocabulary section as a review quiz
   // (`vocabularyReview`: {q, options, answer, ref}) instead of word cards, so
   // the word-card path below would render an empty grid with a misleading
@@ -1654,7 +1740,7 @@
     const toolbar = el('div', { class: 'vocab-toolbar' });
     const search = el('div', { class: 'search-box' },
       el('span', { html: ICON.search }),
-      el('input', { type: 'text', placeholder: 'Search 12 words…', 'aria-label': 'Search vocabulary' }));
+      el('input', { type: 'text', placeholder: 'Search ' + C.vocab.length + (C.vocab.length === 1 ? ' word…' : ' words…'), 'aria-label': 'Search vocabulary' }));
     search.querySelector('input').addEventListener('input', (e) => { vocabQuery = e.target.value.toLowerCase().trim(); drawVocab(); });
     const filters = el('div', { class: 'filter-group' });
     [['all', 'All'], ['m', 'der (m)'], ['f', 'die (f)'], ['n', 'das (n)'], ['learned', 'Learned']].forEach(([k, lbl]) => {
@@ -1664,7 +1750,8 @@
     });
     toolbar.append(search, filters);
     const grid = el('div', { class: 'vocab-grid', id: 'vocab-grid' });
-    wrap.append(toolbar, grid);
+    const more = el('div', { class: 'vocab-more', id: 'vocab-more', hidden: true });
+    wrap.append(toolbar, grid, more);
     setTimeout(drawVocab, 0);
     return wrap;
   }
@@ -1679,8 +1766,28 @@
       if (vocabQuery && !(w.de.toLowerCase().includes(vocabQuery) || w.en.toLowerCase().includes(vocabQuery) || w.hi.includes(vocabQuery))) return false;
       return true;
     });
+    const more = $('#vocab-more');
+    if (more) { more.innerHTML = ''; more.hidden = true; }
     if (!list.length) { grid.appendChild(el('div', { class: 'vocab-empty' }, 'No words match. Try another filter.')); return; }
-    list.forEach(w => grid.appendChild(vocabCard(w)));
+    const capped = !vocabExpanded && list.length > VOCAB_FIRST + 8;
+    (capped ? list.slice(0, VOCAB_FIRST) : list).forEach(w => grid.appendChild(vocabCard(w)));
+    if (more && list.length > VOCAB_FIRST + 8) {
+      more.hidden = false;
+      const filtered = vocabFilter !== 'all' || !!vocabQuery;
+      more.append(
+        el('span', { class: 'vocab-more-count muted' }, capped ? 'Showing ' + VOCAB_FIRST + ' of ' + list.length + (filtered ? ' matching words' : ' words') : 'All ' + list.length + (filtered ? ' matching words' : ' words')),
+        el('button', { class: 'btn btn-soft btn-small', type: 'button', 'aria-controls': 'vocab-grid', 'aria-expanded': capped ? 'false' : 'true', onclick: () => {
+          // Show all: the new cards appear right where the control was, so the
+          // learner reads on from word 25 (no scroll). Show fewer: keep the
+          // control where it is on screen while the list above it shrinks, so
+          // the learner is not thrown to a random place in the page.
+          const y0 = more.getBoundingClientRect().top;
+          vocabExpanded = capped; drawVocab();
+          if (!vocabExpanded) window.scrollBy(0, more.getBoundingClientRect().top - y0);
+          const btn = more.querySelector('button');
+          if (btn) btn.focus({ preventScroll: true });
+        } }, capped ? 'Show all ' + list.length + ' words' : 'Show fewer'));
+    }
     linkifyDe(grid); // keep example sentences clickable after every re-draw
     linkifyGated(grid);
   }
@@ -1804,6 +1911,7 @@
       el('span', { html: ICON.check }), el('span', {}, on ? 'Learned' : 'Mark learned'));
     b.addEventListener('click', () => {
       if (state.learned[w.de]) delete state.learned[w.de]; else state.learned[w.de] = true;
+      state.learnedAt = Date.now();
       save(); drawVocab();
     });
     return b;
@@ -4101,6 +4209,18 @@
   }
 
   // reusable MCQ block
+  /* Display order for multiple-choice options: a fresh shuffle each time a
+     question is shown, so the correct answer's position carries no signal
+     (the authored data puts it first or second in most items). Every index
+     stays the AUTHORED one — scoring, q.answer, q.optionsEn and the AI quiz
+     review (chosen = authored index) are unchanged; only the on-screen order
+     and the A/B/C/D letters (by position) differ. */
+  function shuffledOrder(n) {
+    const a = Array.from({ length: n }, (_, i) => i);
+    for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+
   function mcqBlock(q, key, glossSink) {
     const block = el('div', { class: 'exercise-block' });
     block.appendChild(el('div', { class: 'exercise-q', html: q.q }));
@@ -4116,9 +4236,10 @@
     const opts = el('div', { class: 'mcq-options' });
     const feedback = el('div', { class: 'exercise-feedback' });
     let answered = false;
-    q.options.forEach((opt, oi) => {
-      const b = el('button', { class: 'mcq-option', type: 'button' },
-        el('span', { class: 'mcq-key' }, String.fromCharCode(65 + oi)),
+    shuffledOrder(q.options.length).forEach((oi, pos) => {
+      const opt = q.options[oi];
+      const b = el('button', { class: 'mcq-option', type: 'button', dataset: { oi: String(oi) } },
+        el('span', { class: 'mcq-key' }, String.fromCharCode(65 + pos)),
         el('span', { html: optionIsGerman(opt) ? '<span class="de">' + opt + '</span>' : opt }));
       colorWordsIn(b.querySelector('.de'));
       if (glossSink && q.optionsEn && q.optionsEn[oi]) {
@@ -4130,7 +4251,7 @@
         if (answered) return; answered = true;
         $$('.mcq-option', opts).forEach(x => x.disabled = true);
         if (oi === q.answer) { b.classList.add('is-correct'); feedback.className = 'exercise-feedback ok'; feedback.textContent = '✓ ' + (q.explain || 'Correct!'); }
-        else { b.classList.add('is-wrong'); opts.children[q.answer].classList.add('is-correct'); feedback.className = 'exercise-feedback no'; feedback.textContent = '✗ ' + (q.explain || 'Not quite.'); }
+        else { b.classList.add('is-wrong'); opts.querySelector('[data-oi="' + q.answer + '"]').classList.add('is-correct'); feedback.className = 'exercise-feedback no'; feedback.textContent = '✗ ' + (q.explain || 'Not quite.'); }
       });
       opts.appendChild(b);
     });
@@ -5690,9 +5811,10 @@
       const opts = el('div', { class: 'mcq-options' });
       const fb = el('div', { class: 'exercise-feedback' });
       let answered = false;
-      q.options.forEach((opt, oi) => {
-        const b = el('button', { class: 'mcq-option', type: 'button' },
-          el('span', { class: 'mcq-key' }, String.fromCharCode(65 + oi)),
+      shuffledOrder(q.options.length).forEach((oi, pos) => {
+        const opt = q.options[oi];
+        const b = el('button', { class: 'mcq-option', type: 'button', dataset: { oi: String(oi) } },
+          el('span', { class: 'mcq-key' }, String.fromCharCode(65 + pos)),
           el('span', { html: optionIsGerman(opt) ? '<span class="de">' + opt + '</span>' : opt }));
         colorWordsIn(b.querySelector('.de'));
         b.addEventListener('click', () => {
@@ -5700,7 +5822,7 @@
           chosen[idx] = oi;
           $$('.mcq-option', opts).forEach(x => x.disabled = true);
           if (oi === q.answer) { b.classList.add('is-correct'); score++; fb.className = 'exercise-feedback ok'; fb.textContent = '✓ ' + q.explain; }
-          else { b.classList.add('is-wrong'); opts.children[q.answer].classList.add('is-correct'); fb.className = 'exercise-feedback no'; fb.textContent = '✗ ' + q.explain; }
+          else { b.classList.add('is-wrong'); opts.querySelector('[data-oi="' + q.answer + '"]').classList.add('is-correct'); fb.className = 'exercise-feedback no'; fb.textContent = '✗ ' + q.explain; }
           setTimeout(() => { nextBtn.style.display = 'inline-flex'; }, 300);
         });
         opts.appendChild(b);
@@ -6118,7 +6240,10 @@
     });
     $('#act-restart').addEventListener('click', () => {
       if (!confirm('Reset all progress for this chapter?')) return;
-      state = { done: {}, learned: {}, saved: {}, quizScore: null }; save();
+      // resetAt tells the account copy (and other devices) about the reset,
+      // so older progress there does not merge back in.
+      state = { done: {}, learned: {}, saved: {}, quizScore: null, resetAt: Date.now() }; save();
+      if (progressSync) progressSync.flush(true);
       location.reload();
     });
     $('#act-complete').addEventListener('click', () => {

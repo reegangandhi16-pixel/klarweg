@@ -192,7 +192,18 @@ test('scorer and Speaking/Story code unchanged by this rollout', () => {
   try { base = execFileSync('git', ['show', 'e66604c:chapter/chapter-app.js'], { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 << 20 }); } catch { return; }
   const same = (a, b) => assert.equal(cut(APP, a, b), cut(base, a, b), a);
   same('  // ---- Word Match scorer (deterministic) ----', '  // ---- end Word Match scorer ----');
-  same('  function bodyStory() {', '  function bodyVocabulary() {');
+  // Story: the controls row moved above the conversation (pinned while it is
+  // on screen) and Play conversation follows the active line. Everything that
+  // renders lines or plays audio stays byte-identical; playAll differs only
+  // by the follow reset + followLine(i) call.
+  same('  function bodyStory() {', '    // Controls\n');
+  same('    function clearActive() {', '    let storyRun = null, storyOwn = false;');
+  same('    if (SentencePlay.enabled && window.KW_onAudioEvent) {', '    function playAll() {');
+  same("    playAllBtn.addEventListener('click', playAll);", '  function bodyVocabulary() {');
+  const FOLLOW = /^ {8}followLine\(i\);$/;
+  const playAll = cut(APP, '    function playAll() {', "    playAllBtn.addEventListener('click', playAll);").split('\n').filter((l) => !FOLLOW.test(l)).join('\n')
+    .replace('seqStop = false; followOff = false; setPlayAllLabel(true);', 'seqStop = false; setPlayAllLabel(true);');
+  assert.equal(playAll, cut(base, '    function playAll() {', "    playAllBtn.addEventListener('click', playAll);"), 'Play conversation: only the follow-the-line call was added');
   // The Speaking cards changed only by the per-task daily cap (the note under
   // Record & check and the locked-click guard; scripts/speech-task-cap.test.mjs).
   const TASK_CAP_LINES = /^ {6}\/\/ Per-task daily cap|^ {6}const note = el\('p', \{ class: 'muted kw-task-left'|^ {6}note\.hidden = true;$|^ {6}micBtn\.setAttribute\('aria-describedby', note\.id\);$|^ {6}taskUI\[i\] = |^ {6}paintTask\(i\);$|^ {8}if \(taskState\(i\)\.locked && !micBtn\._kwSession\)/;

@@ -1526,20 +1526,63 @@
 
     // Controls
     let rate = 1, seqPlaying = false, seqStop = false;
-    const playAllBtn = el('button', { class: 'story-play-all' + (SentencePlay.enabled ? ' kw-play-all' : ''), type: 'button' }, el('span', { html: ICON.play }), el('span', {}, 'Play conversation'));
+    // Long label on desktop, short label on narrow screens (CSS picks one);
+    // the aria-label always carries the full action.
+    const playAllBtn = el('button', { class: 'story-play-all' + (SentencePlay.enabled ? ' kw-play-all' : ''), type: 'button', 'aria-label': 'Play conversation' },
+      el('span', { html: ICON.play }), el('span', { class: 'spa-long', 'aria-hidden': 'true' }, 'Play conversation'), el('span', { class: 'spa-short', 'aria-hidden': 'true' }, 'Play'));
     const speed = el('div', { class: 'story-speed' });
     [['1×', 1], ['0.75×', 0.75], ['0.5×', 0.5]].forEach(([lbl, v], i) => {
       const b = el('button', { type: 'button', class: i === 0 ? 'is-active' : '' }, lbl);
       b.addEventListener('click', () => { rate = v; $$('.story-speed button', speed).forEach(x => x.classList.toggle('is-active', x === b)); });
       speed.append(b);
     });
-    const transToggle = el('button', { class: 'story-trans-toggle', type: 'button' }, 'Show translation');
+    const transToggle = el('button', { class: 'story-trans-toggle', type: 'button', 'aria-pressed': 'false' },
+      el('span', { class: 'stt-long' }, 'Show translation'), el('span', { class: 'stt-short' }, 'Translation'));
     transToggle.addEventListener('click', () => {
       const on = thread.classList.toggle('show-trans');
-      transToggle.textContent = on ? 'Hide translation' : 'Show translation';
+      transToggle.querySelector('.stt-long').textContent = on ? 'Hide translation' : 'Show translation';
+      transToggle.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
+    // The controls sit ABOVE the conversation (start listening where reading
+    // starts) and stay pinned under the section tabs while the conversation
+    // is on screen (CSS sticky inside .story-right; on narrow screens only
+    // while the conversation plays — .is-playing).
     const controls = el('div', { class: 'story-controls' }, playAllBtn, speed, transToggle);
-    right.append(controls);
+    right.insertBefore(controls, right.firstChild);
+    // Pin flush under the measured top bar + tabs (their real height can
+    // differ from the CSS tokens by a few px); the CSS token sum is the fallback.
+    const setPinTop = () => controls.style.setProperty('--story-pin-top', (stickyOffset() - 8) + 'px');
+    requestAnimationFrame(setPinTop);
+    window.addEventListener('resize', setPinTop, { passive: true });
+
+    /* Follow the conversation: while "Play conversation" runs, the line that
+       starts is scrolled into view if it is not fully visible below the
+       pinned controls. Only during Play conversation (never for a single
+       line), never when already visible, instant under reduced motion, and
+       it stops for the rest of the run once the learner scrolls by hand. */
+    let followOff = false;
+    const reduceMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+    const manualScroll = () => { if (seqPlaying) followOff = true; };
+    window.addEventListener('wheel', manualScroll, { passive: true });
+    window.addEventListener('touchmove', manualScroll, { passive: true });
+    window.addEventListener('keydown', (e) => {
+      if (['PageUp', 'PageDown', 'ArrowUp', 'ArrowDown', 'Home', 'End'].indexOf(e.key) >= 0) manualScroll();
+    });
+    function followLine(i) {
+      const c = cards[i];
+      if (!c || followOff) return;
+      const r = c.card.getBoundingClientRect();
+      const top = Math.max(stickyOffset(), controls.getBoundingClientRect().bottom + 12);
+      const bottom = window.innerHeight - 16;
+      // Above the view: align under the controls. Below it: bring it to about
+      // a third of the free height, so the previous line stays in view as
+      // context and the next lines need fewer scrolls.
+      let dy = 0;
+      if (r.top < top) dy = r.top - top;
+      else if (r.bottom > bottom) dy = Math.min(r.top - (top + (bottom - top) * 0.3), r.top - top);
+      if (Math.abs(dy) < 2) return;
+      window.scrollBy({ top: dy, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    }
 
     function clearActive() {
       if (SentencePlay.enabled) { storyRun = null; cards.forEach(c => { c.card.classList.remove('is-active'); SentencePlay.state(c.playBtn, 'idle'); }); return; }
@@ -1557,7 +1600,10 @@
     const own = (f) => { storyOwn = true; try { return f(); } finally { storyOwn = false; } };
     function endConversation() { if (!seqPlaying) return; seqStop = true; seqPlaying = false; setPlayAllLabel(false); }
     function setPlayAllLabel(on) {
-      playAllBtn.querySelector('span:last-child').textContent = on ? 'Stop' : 'Play conversation';
+      playAllBtn.querySelector('.spa-long').textContent = on ? 'Stop' : 'Play conversation';
+      playAllBtn.querySelector('.spa-short').textContent = on ? 'Stop' : 'Play';
+      playAllBtn.setAttribute('aria-label', on ? 'Stop conversation' : 'Play conversation');
+      controls.classList.toggle('is-playing', on);
       if (SentencePlay.enabled) playAllBtn.firstChild.innerHTML = on ? ICON.stop : ICON.play;
     }
     if (SentencePlay.enabled && window.KW_onAudioEvent) {
@@ -1628,10 +1674,11 @@
     }
     function playAll() {
       if (seqPlaying) { seqStop = true; seqPlaying = false; own(() => { try { Audio.stop(); } catch (_) {} }); clearActive(); setPlayAllLabel(false); return; }
-      seqPlaying = true; seqStop = false; setPlayAllLabel(true);
+      seqPlaying = true; seqStop = false; followOff = false; setPlayAllLabel(true);
       let i = 0;
       const next = () => {
         if (seqStop || i >= cards.length) { seqPlaying = false; seqStop = false; clearActive(); setPlayAllLabel(false); return; }
+        followLine(i);
         playLine(i++, next);
       };
       next();

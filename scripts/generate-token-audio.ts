@@ -59,7 +59,7 @@ const APPROVALS = resolve(ROOT, 'audio-manifests/approved-renders.json');
    public/audio/words/ is empty here — so local filesystem existence is NOT
    evidence about the published state. */
 const CDN_BASE = process.env.KW_AUDIO_CDN
-  ?? 'https://cdn.jsdelivr.net/gh/reegangandhi16-pixel/klarweg-audio@main/public/audio/';
+  ?? 'https://klarweg-audio.klarweg-issue-reports-2026.workers.dev/';
 
 const API_KEY = process.env.GOOGLE_TTS_API_KEY ?? '';
 const LANG = 'de-DE';

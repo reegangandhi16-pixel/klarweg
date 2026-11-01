@@ -7,9 +7,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadAllChapters } from './chapter-resources/load.mjs';
 import { listResources, DERIVED_RESOURCES, resourceFile, resourceTypeOf, parseId, stableShuffle, joinTokens, isWellFormedGap, esc, cssString } from './chapter-resources/common.mjs';
-import { buildResource, vocabExamples, stackOptions, writingLines, WRITING, KEEP_TABLE_MAX_ROWS, stripChapterHint, CHAPTER_HINT } from './chapter-resources/templates.mjs';
+import { buildResource, QR_LABEL, qrDataUri, vocabExamples, stackOptions, writingLines, WRITING, KEEP_TABLE_MAX_ROWS, stripChapterHint, CHAPTER_HINT } from './chapter-resources/templates.mjs';
 import { planChapter, roleCssFrom, contentHash } from './chapter-resources/plan.mjs';
 import { findChrome, launchChrome } from './chapter-resources/chrome-pdf.mjs';
+import { qrMatrix, qrSvg } from './chapter-resources/qr.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const chapters = loadAllChapters(path.join(ROOT, 'chapter'));
@@ -456,4 +457,36 @@ test('every PDF ends with one clickable chapter link built only from SITE_BASE',
     const src = fs.readFileSync(path.join(ROOT, 'scripts', 'chapter-resources', f), 'utf8');
     assert.ok(!/github\.io|klarweg\.in|https?:\/\/[a-z]/i.test(src.replace(/\/\*[\s\S]*?\*\//g, '')), f);
   }
+});
+
+test('QR encoder: version, size and fixed patterns for a chapter URL', () => {
+  const m = qrMatrix('https://klarweg.in/chapter/chapter-a1-1-alphabet.html');
+  assert.equal(m.version, 4);
+  assert.equal(m.size, 33);
+  // finder rings in three corners, timing pattern between them, dark module
+  for (const [cx, cy] of [[3, 3], [29, 3], [3, 29]]) {
+    assert.equal(m.modules[cy][cx], true);
+    assert.equal(m.modules[cy][cx + 2], false);
+    assert.equal(m.modules[cy][cx + 3], true);
+  }
+  for (let i = 8; i < 25; i++) assert.equal(m.modules[6][i], i % 2 === 0);
+  assert.equal(m.modules[33 - 8][8], true);
+  assert.throws(() => qrMatrix('x'.repeat(214)), /too long/);
+  // version 1-M, mask 0 for "a": row 9 as produced by the qrcode npm package
+  assert.equal(qrMatrix('a', { mask: 0 }).modules[9].map(Number).join(''), '011001011110001000110');
+});
+
+test('every page carries the chapter QR in the bottom-right margin box, with its label; the closing footer stays text-only', () => {
+  for (const [id, p] of plans) for (const [type, r] of Object.entries(p.resources)) {
+    const want = `${ctx.siteBase}/chapter/chapter-${id}.html`;
+    const rule = `@bottom-right { content: counter(page) " / " counter(pages) "\\A " ${cssString(QR_LABEL)}; background-image: url("${qrDataUri(want)}"); }`;
+    assert.ok(r.html.includes(rule), `${id}/${type}: per-page QR rule`);
+    assert.ok(!/class="qr/.test(r.html), `${id}/${type}: no second QR in the body`);
+  }
+  // the data URI is exactly the encoder's SVG of the chapter URL, without its own quiet zone
+  const url = 'https://klarweg.in/chapter/chapter-a1-1-alphabet.html';
+  assert.equal(decodeURIComponent(qrDataUri(url).replace('data:image/svg+xml,', '')), qrSvg(url, { quiet: 0 }));
+  // geometry lives once in resource.css: 12 mm QR, 3 mm into the 20 mm bottom margin, text 3 mm to its left
+  assert.match(ctx.css, /@bottom-right \{[^}]*padding-right: 15mm; background: no-repeat right 0 top 3mm \/ 12mm 12mm; \}/);
+  assert.match(ctx.css, /size: A4;\s*margin: 18mm 18mm 20mm;/);
 });

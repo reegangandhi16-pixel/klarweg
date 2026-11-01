@@ -5,6 +5,7 @@ main = "src/index.js"
 compatibility_date = "2024-11-06"
 
 workers_dev = true
+preview_urls = false
 
 # DEPLOY WITH `npm run deploy:access` (repo root). It runs
 # scripts/predeploy-access-check.mjs first, which refuses to deploy if
@@ -128,10 +129,10 @@ SPEECH_MAX_SECONDS = "30"
 # by this Worker after a signed-link check. RESOURCE_RELEASE selects the
 # immutable release prefix ("r1/…"); switching releases is this one line.
 # Secret (wrangler secret put): RESOURCE_URL_SECRET — HMAC key for links.
-RESOURCE_RELEASE = "r2"
+RESOURCE_RELEASE = "r5"
 
 # Paid chapter content (src/chapters.js). Same PRIVATE bucket, under
-# chapters/<CHAPTER_RELEASE>/ — built by scripts/build-chapter-release.mjs and
+# chapters/<CHAPTER_RELEASE>/ — built by `scripts/chapter-lock.mjs release` and
 # uploaded BEFORE this var points at it. Chapter pages 2+ load their payload
 # from GET /chapters/<id>.js; without a valid release every paid chapter
 # shows "unavailable", so never deploy the pages ahead of the upload.

@@ -8,9 +8,17 @@ import {
   esc, html, cssString, nonEmpty, parseId, chapterTag, isInternalBlock, isWellFormedGap,
   joinTokens, stableShuffle, isAssessmentKind,
 } from './common.mjs';
+import { qrSvg } from './qr.mjs';
 
 // Bump when layout or content rules change so every PDF regenerates.
-export const TEMPLATE_VERSION = 12;
+export const TEMPLATE_VERSION = 14;
+
+export const QR_LABEL = 'Scan to open this chapter online';
+
+/* The page-corner QR (every page, in the bottom-right margin box): the chapter
+   URL as an SVG data URI. No quiet zone in the image — the margin around it is
+   blank, which supplies the clear space. */
+export const qrDataUri = (url) => 'data:image/svg+xml,' + encodeURIComponent(qrSvg(url, { quiet: 0 }));
 
 const label = (t) => `<div class="lbl">${esc(t)}</div>`;
 // Wrong/right marks are drawn, not typed: ✕/✓ exist in none of the embedded
@@ -433,7 +441,8 @@ export function buildResource(C, resource, { css, roleCss, chapterUrl }) {
 <title>${esc(`${tag} ${C.title} — ${title}`)}</title>
 <style>${css}
 ${roleCss}
-@page { @bottom-left { content: ${cssString(running)}; } }
+@page { @bottom-left { content: ${cssString(running)}; }
+  @bottom-right { content: counter(page) " / " counter(pages) "\\A " ${cssString(QR_LABEL)}; background-image: url("${qrDataUri(chapterUrl)}"); } }
 </style></head>
 <body>${masthead}<main>${S.render(footer)}</main></body></html>`;
   return { html: doc, sections: S.titles };

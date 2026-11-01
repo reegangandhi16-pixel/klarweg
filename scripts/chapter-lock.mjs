@@ -114,9 +114,21 @@ function upload({ dir, files }, release) {
   for (const f of files) {
     const key = `${BUCKET}/chapters/${release}/${f}`;
     const type = f.endsWith(".json") ? "application/json" : "text/javascript; charset=utf-8";
-    execFileSync("npx", ["wrangler", "r2", "object", "put", key, "--file", path.join(dir, f), "--content-type", type, "--remote"], {
-      cwd: path.join(ROOT, "access", "worker"), stdio: ["ignore", "ignore", "inherit"]
-    });
+    /* A dropped connection must not abort a 259-object upload: re-putting
+       the same bytes is harmless, and index.json goes last, so the Worker
+       never serves a release that is only partly uploaded. */
+    for (let attempt = 1; ; attempt++) {
+      try {
+        execFileSync("npx", ["wrangler", "r2", "object", "put", key, "--file", path.join(dir, f), "--content-type", type, "--remote"], {
+          cwd: path.join(ROOT, "access", "worker"), stdio: ["ignore", "ignore", attempt < 4 ? "ignore" : "inherit"]
+        });
+        break;
+      } catch (err) {
+        if (attempt >= 4) throw err;
+        process.stdout.write(`(retry ${f})`);
+        execFileSync("sleep", [String(attempt * 5)]);
+      }
+    }
     process.stdout.write(".");
   }
   process.stdout.write(`\nUploaded ${files.length} objects to ${BUCKET}/chapters/${release}/\n`);

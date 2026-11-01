@@ -95,7 +95,7 @@ test('ISOLATION: the public site is never routed to the sandbox Worker, and its 
     const p = path.join(ROOT, f);
     if (fs.existsSync(p) && fs.statSync(p).isFile()) assert.equal(read(f).includes('payments-nonprod'), false, `${f} must not mention the sandbox Worker`);
   }
-  assert.match(read('kw-config.js'), /KW_ACCESS_API = 'https:\/\/klarweg-access\.[a-z0-9-]+\.workers\.dev'/);
+  assert.match(read('kw-config.js'), /KW_ACCESS_API = 'https:\/\/klarweg\.in\/api'/);
   const data = read('live-classes-data.js');
   assert.match(data, /onlineBooking: \{\s*enabled: false,/);
   assert.match(data, /liveEnrolment: \{\s*enabled: false,/);

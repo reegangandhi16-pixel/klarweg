@@ -51,6 +51,7 @@ kw-config.js
 kw-placement.js
 kw-products.js
 kw-roadmap-progress.js
+kw-progress-sync.js
 kw-nav-auth.js
 kw-ai-chat.js
 kw-live.js
@@ -99,6 +100,12 @@ public/audio/manifest.json
 public/audio/a1-words-manifest.json
 public/audio/a2-words-manifest.json
 public/audio/b1-words-manifest.json
+# Vocab / word-form / conjugation manifests, byte-identical copies of the
+# klarweg-audio-cdn originals. The engine reads every manifest from the site
+# (free to re-validate) and plays the MP3s from the klarweg-audio Worker.
+public/audio/vocab/manifest.json
+public/audio/vocab/manifest-word-form.json
+public/audio/vocab/manifest-conjugation.json
 public/audio/kw-word-sync.js
 public/audio/kw-reading-exceptions.js
 public/audio/kw-story-exceptions.js

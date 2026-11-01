@@ -80,12 +80,12 @@ export async function readJson(res) {
 }
 
 /* Cashfree offers (dashboard: Offers & Recovery → Offers) that only Klarweg
-   Lifetime orders may use, e.g. the hidden coupon KLARWEGFREE1 the learner
+   Lifetime orders may use, e.g. a hidden coupon code the learner
    types on Cashfree's own checkout. Cashfree offers cannot target a product,
    so every OTHER order denies them per order (order_meta.offer_filters,
    Create Order API 2026-01-01). The docs call the values "offer
    identifiers" without saying code or id, so the list may hold both.
-     CASHFREE_LIFETIME_ONLY_OFFERS = "KLARWEGFREE1,<offer_id>"
+     CASHFREE_LIFETIME_ONLY_OFFERS = "EXAMPLEOFFER1,<offer_id>"
    Unset or empty: no filter, and Create Order is sent exactly as before.
    Returns the list, [] when unset, or null when malformed (refused by
    cashfreeConfigProblem, so a typo can never let an offer through). */

@@ -159,6 +159,9 @@
   // signed out, offline or without the endpoint the page stays local-only.
   let progressSync = null;
   function startProgressSync() {
+    // A server lock stub (window.CHAPTER.kwLocked) has no content: syncing it
+    // would overwrite this browser's record with empty values.
+    if (C.kwLocked) return;
     if (POP_HOST || !window.KWAccess || typeof KWAccess.ready !== 'function') return;
     KWAccess.ready().then((snap) => {
       if (!snap && typeof KWAccess.getAccessState === 'function') snap = KWAccess.getAccessState();

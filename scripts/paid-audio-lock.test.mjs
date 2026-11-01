@@ -112,3 +112,10 @@ test('word-sync: a chapter\'s own timing needs no request', async () => {
   await win.KW_wordSync.loadTiming('0011223344556677');
   assert.deepEqual(fetched, ['/audio-timing/0011223344556677.json']);
 });
+
+test('a server lock stub never starts progress sync (would blank this browser\'s record)', () => {
+  const app = read('chapter/chapter-app.js');
+  const body = app.slice(app.indexOf('function startProgressSync()'), app.indexOf('function startProgressSync()') + 400);
+  assert.match(body, /if \(C\.kwLocked\) return;/);
+  assert.ok(body.indexOf('C.kwLocked') < body.indexOf('KWAccess.ready'), 'checked before any sync starts');
+});

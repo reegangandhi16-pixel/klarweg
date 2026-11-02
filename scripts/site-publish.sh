@@ -34,7 +34,7 @@ cp -R "$ART"/. .
 # with NO CNAME (e.g. before the domain moves to this repo).
 rm -f CNAME
 SITE_CNAME="${SITE_CNAME-klarweg.in}"
-[ -n "$SITE_CNAME" ] && printf '%s\n' "$SITE_CNAME" > CNAME
+if [ -n "$SITE_CNAME" ]; then printf '%s\n' "$SITE_CNAME" > CNAME; fi
 : > .nojekyll
 
 # Second, independent check on exactly what will be pushed.

@@ -88,6 +88,9 @@ test('shards hold the whole lexicon exactly once (protected review lookup)', () 
 test('published pages load only the public dictionary files', () => {
   const allow = read('.github/pages-allowlist.txt').split('\n').map((l) => l.trim());
   for (const f of [PUBLIC_GLOBAL, PUBLIC_STORY]) assert.ok(allow.includes(f), f);
+  for (const f of ['chapter/global-lexicon.js', 'chapter/story-lexicon.js']) assert.ok(!allow.includes(f), f + ' (full dictionary) must not be published');
+  const wf = read('.github/workflows/deploy-pages.yml');
+  assert.ok(!/[|( ]global-lexicon\.js[|)]/.test(wf) && !/[|( ]story-lexicon\.js[|)]/.test(wf), 'deploy workflow does not accept the full dictionary');
   assert.match(read('chapter/chapter-app.js'), /'global-lexicon-public\.js'/);
   assert.ok(read('account/review.html').includes('../chapter/global-lexicon-public.js'));
   assert.ok(read('account/review.html').includes("'/saved-words/lexicon'"));

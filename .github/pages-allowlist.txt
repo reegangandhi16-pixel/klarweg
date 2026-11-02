@@ -249,14 +249,12 @@ chapter/chapter-tutor.js
 # Their absence broke tap-any-word, vocabulary-card rendering, and
 # story/dialogue rendering site-wide. Verified via grep across all
 # 258 chapter-*.html files before adding these lines.
-chapter/story-lexicon.js
 chapter/tokenizer.js
 chapter/chapter-story.js
-chapter/global-lexicon.js
 # Lexicon split (scripts/lexicon-split.mjs): the PUBLIC dictionary is only the
 # free pages' entries; each paid chapter's entries travel with its gated
-# payload. The two full files above stay published for ONE cache window
-# (pages cached before the switch still load them) and are then removed.
+# payload. The full chapter/global-lexicon.js and chapter/story-lexicon.js are
+# sources only and are NOT published (pages load the -public files below).
 chapter/global-lexicon-public.js
 chapter/story-lexicon-public.js
 

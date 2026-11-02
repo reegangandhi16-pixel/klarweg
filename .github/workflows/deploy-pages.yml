@@ -87,6 +87,7 @@ jobs:
         run: |
           set -euo pipefail
           ARTIFACT_DIR="_site"
+          ALLOWLIST=".github/pages-allowlist.txt"
           FAIL=0
 
           # Directories that must never appear in the artifact at all.

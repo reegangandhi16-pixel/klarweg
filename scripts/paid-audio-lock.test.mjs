@@ -29,6 +29,14 @@ test('the full manifest is never published', () => {
   assert.ok(allow.includes('public/audio/manifest-public.json'));
   assert.ok(!allow.some((l) => l.startsWith('GLOB:audio-timing')), 'no glob over audio-timing');
   assert.match(read('.github/workflows/deploy-pages.yml'), /public\/audio\/manifest\.json/);
+  /* Each workflow step is its own shell: a variable the assertion step uses
+     must be set in that step (set -u would otherwise fail the deploy). */
+  const wf = read('.github/workflows/deploy-pages.yml');
+  const assertStep = wf.slice(wf.indexOf('- name: Assert no prohibited private paths in artifact'), wf.indexOf('- name: Upload artifact'));
+  for (const v of new Set([...assertStep.matchAll(/\$\{?([A-Z_]+)\}?/g)].map((m) => m[1]))) {
+    if (['GITHUB_OUTPUT', 'GITHUB_ENV', 'GITHUB_STEP_SUMMARY'].includes(v)) continue;
+    assert.match(assertStep, new RegExp('(^|\\s)' + v + '='), 'assertion step uses $' + v + ' without setting it');
+  }
 });
 
 test('only free Chapter 1 and homepage timing sidecars are public', () => {

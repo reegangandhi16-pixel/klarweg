@@ -33,7 +33,8 @@
      session revoked elsewhere,
        refund, or expiry        ≤ 600 s (PASS_TTL_SECONDS) for new requests,
                                  plus the browser cache of files already
-                                 received (MEDIA_PAID_MAX_AGE; 0 = none)
+                                 received: none — MEDIA_PAID_MAX_AGE = "0"
+                                 (private, no-store; owner decision 2026-11-02)
 
    Only klarweg.in is served (the cookie is first-party there); workers.dev
    answers 404. A Referer from a foreign site is refused; a missing one is

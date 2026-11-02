@@ -109,8 +109,8 @@ RESOURCE_RELEASE = "r5"
 CHAPTER_RELEASE = "r3"
 # Media access policy release in klarweg-resources (media-policy/<release>/) — media.js.
 MEDIA_POLICY_RELEASE = "m1"
-# Browser cache for PAID audio: "0" = private, no-store; "3600" = private, max-age=3600.
-# OWNER DECISION PENDING (see Stage 1 report); local default below.
+# Browser cache for PAID audio. OWNER DECISION 2026-11-02: "0" = private, no-store
+# (nothing paid is kept in the browser cache). media.js also falls back to no-store.
 MEDIA_PAID_MAX_AGE = "0"
 
 [[r2_buckets]]

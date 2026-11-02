@@ -74,6 +74,12 @@ favicon.svg
 apple-touch-icon.png
 icon-192.png
 icon-512.png
+favicon.ico
+favicon-16x16.png
+favicon-32x32.png
+favicon-48x48.png
+site-icon-192.png
+site-icon-512.png
 
 # ---------------------------------------------------------------
 # Account pages + runtime

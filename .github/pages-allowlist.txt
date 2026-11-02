@@ -71,6 +71,8 @@ site.js
 # ---------------------------------------------------------------
 robots.txt
 sitemap.xml
+# Homepage social share image (1200×630)
+og-image.png
 # Custom domain marker. The site deploys through a custom Actions
 # workflow, so GitHub ignores this file: the live custom domain is the
 # repository's Settings → Pages value. It is published anyway so the

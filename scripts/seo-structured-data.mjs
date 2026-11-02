@@ -29,7 +29,7 @@ const org = {
       '@id': `${SITE_BASE}/#organization`,
       name: 'Klarweg',
       url: `${SITE_BASE}/`,
-      logo: `${SITE_BASE}/icon-512.png`,
+      logo: `${SITE_BASE}/site-icon-512.png`, // the brand logo (#276); icon-512.png stays the coral-dot chapter share image
       email: 'klarwegofficial@gmail.com',
       description: 'German courses from A1 to C2 for Hindi-speaking learners, with color-coded grammar and Goethe exam preparation.',
     },

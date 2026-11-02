@@ -35,6 +35,7 @@ import path from "node:path";
 import vm from "node:vm";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { chapterData, chapterLexiconTail, lexiconShards } from "./lexicon-split.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CHAPTER_DIR = path.join(ROOT, "chapter");
@@ -128,13 +129,15 @@ const audioSplit = () => (split ||= splitAudio());
 const literal = (v) => JSON.stringify(v).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
 
 /* What the Worker serves for a chapter: the data file, and for a paid
-   chapter its audio appendix. Free chapters stay byte-identical. */
+   chapter its audio appendix and its word-popup dictionary slice
+   (scripts/lexicon-split.mjs). Free chapters stay byte-identical. */
 export function releasePayload(c) {
   const data = fs.readFileSync(path.join(CHAPTER_DIR, c.file));
   if (isFree(c)) return data;
   const a = audioSplit().paid.get(c.id) || { entries: {}, timing: {} };
   const tail = "\n/* Audio lines and word timing for this chapter: delivered only with the gated chapter. */\n" +
-    "window.KW_CHAPTER_AUDIO = " + literal({ chapter: c.id, entries: a.entries, timing: a.timing }) + ";\n";
+    "window.KW_CHAPTER_AUDIO = " + literal({ chapter: c.id, entries: a.entries, timing: a.timing }) + ";\n" +
+    chapterLexiconTail(chapterData(c.file));
   return Buffer.concat([data, Buffer.from(tail, "utf8")]);
 }
 
@@ -194,6 +197,14 @@ export function buildRelease({ release, out }) {
     fs.writeFileSync(path.join(dir, `${c.id}.js`), releasePayload(c));
     files.push(`${c.id}.js`);
   }
+  /* The full dictionary in 64 shards, for the review page's protected lookup
+     (access Worker GET /saved-words/lexicon; scripts/lexicon-split.mjs). */
+  fs.mkdirSync(path.join(dir, "lexicon"), { recursive: true });
+  lexiconShards().forEach((s, i) => {
+    const f = `lexicon/${String(i).padStart(2, "0")}.json`;
+    fs.writeFileSync(path.join(dir, f), JSON.stringify(s));
+    files.push(f);
+  });
   fs.writeFileSync(path.join(dir, "index.json"), JSON.stringify({ release, chapters }) + "\n");
   return { dir, files: [...files, "index.json"] };
 }

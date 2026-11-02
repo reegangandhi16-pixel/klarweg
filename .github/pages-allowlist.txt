@@ -253,6 +253,12 @@ chapter/story-lexicon.js
 chapter/tokenizer.js
 chapter/chapter-story.js
 chapter/global-lexicon.js
+# Lexicon split (scripts/lexicon-split.mjs): the PUBLIC dictionary is only the
+# free pages' entries; each paid chapter's entries travel with its gated
+# payload. The two full files above stay published for ONE cache window
+# (pages cached before the switch still load them) and are then removed.
+chapter/global-lexicon-public.js
+chapter/story-lexicon-public.js
 
 # ---------------------------------------------------------------
 # Issue reporting: exactly 2 files out of the whole report/ directory.

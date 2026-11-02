@@ -38,12 +38,12 @@ if [ -n "$SITE_CNAME" ]; then printf '%s\n' "$SITE_CNAME" > CNAME; fi
 : > .nojekyll
 
 # Second, independent check on exactly what will be pushed.
+git add -A
 TREE="$WORK/tree"; mkdir -p "$TREE"
-git ls-files --others --cached --exclude-standard -z | (cd "$WORK/site" && xargs -0 -I{} sh -c 'mkdir -p "$1/$(dirname "$2")" && cp "$2" "$1/$2"' _ "$TREE" {})
+git ls-files --cached -z | (cd "$WORK/site" && xargs -0 -I{} sh -c 'mkdir -p "$1/$(dirname "$2")" && cp "$2" "$1/$2"' _ "$TREE" {})
 rm -f "$TREE/CNAME" "$TREE/.nojekyll"
 (cd "$ROOT" && node scripts/site-leak-check.mjs "$TREE")
 
-git add -A
 if git diff --cached --quiet; then echo "site unchanged (klarweg@${SRC_SHA:0:12})"; exit 0; fi
 git -c user.name="klarweg-deploy" -c user.email="deploy@klarweg.in" commit --quiet -m "Deploy klarweg@${SRC_SHA:0:12}"
 git push --quiet origin main

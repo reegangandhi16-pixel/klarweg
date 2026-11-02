@@ -82,7 +82,7 @@ test('the homepage loads the course popup engine, stylesheet and lexicon — sam
     assert.ok(tag(src) > host, src + ' is loaded (deferred) after the host config');
   }
   assert.ok(tag('chapter/tokenizer.js') < tag('chapter/chapter-app.js?v=' + appV) && tag('chapter/story-lexicon.js') < tag('chapter/chapter-app.js?v=' + appV), 'chapter load order');
-  assert.ok(HOME.indexOf('<script src="public/audio/kw-audio-engine.js?v=2" defer></script>') < tag('chapter/chapter-app.js?v=' + appV), 'audio engine first, as on chapters');
+  assert.ok(HOME.indexOf('<script src="public/audio/kw-audio-engine.js?v=3" defer></script>') < tag('chapter/chapter-app.js?v=' + appV), 'audio engine first, as on chapters');
   assert.ok(fs.existsSync(path.join(ROOT, 'chapter/global-lexicon.js')));
   const allow = read('.github/pages-allowlist.txt').split('\n');
   for (const f of ['public/kw-word-pop.css', 'chapter/chapter-app.js', 'chapter/tokenizer.js', 'chapter/story-lexicon.js', 'chapter/global-lexicon.js', 'index.html']) {

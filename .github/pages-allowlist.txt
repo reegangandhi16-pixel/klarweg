@@ -91,22 +91,23 @@ account/kw-account.js
 # empty .gitkeep placeholders are deliberately excluded — none are
 # referenced by any page; verified via grep this session. The
 # actual MP3 audio files are gitignored in this repo and served
-# from the separate klarweg-audio-cdn repo/Pages site, so there is
-# nothing to copy for them here.)
+# only by the protected route klarweg.in/api/media/ (access Worker,
+# private R2), so there is nothing to copy for them here.)
 # ---------------------------------------------------------------
 public/audio/kw-audio-engine.js
 public/audio/kw-tts-config.js
 # Public subset of the audio manifest (free Chapter 1, homepage, legacy
-# lines), read by kw-audio-engine.js?v=2. The full corpus
+# lines), read by kw-audio-engine.js?v=3. The full corpus
 # public/audio/manifest.json holds paid lesson text and is NEVER
 # published (deploy-pages.yml asserts it).
 public/audio/manifest-public.json
 public/audio/a1-words-manifest.json
 public/audio/a2-words-manifest.json
 public/audio/b1-words-manifest.json
-# Vocab / word-form / conjugation manifests, byte-identical copies of the
-# klarweg-audio-cdn originals. The engine reads every manifest from the site
-# (free to re-validate) and plays the MP3s from the klarweg-audio Worker.
+# Word / vocab / word-form / conjugation manifests: file names only, no audio.
+# Keep byte-identical to the copies in the private R2 bucket klarweg-audio
+# (the access Worker serves an MP3 only if its manifest lists it). The engine
+# reads every manifest from the site and plays the MP3s from /api/media/.
 public/audio/vocab/manifest.json
 public/audio/vocab/manifest-word-form.json
 public/audio/vocab/manifest-conjugation.json

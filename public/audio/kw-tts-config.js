@@ -12,10 +12,9 @@
 
 // ── CDN base for all audio assets (manifests + MP3s) ──────────────────────
 // Must be defined BEFORE the engine reads it. Set to null to use local files.
-// klarweg-audio Worker (private R2, original paths). Keep identical to
-// AUDIO_ORIGIN in kw-audio-engine.js, which also holds the legacy fallback.
-window.KW_AUDIO_BASE =
-  'https://klarweg-audio.klarweg-issue-reports-2026.workers.dev/';
+// The protected same-origin route klarweg.in/api/media/ (access Worker).
+// Keep identical to AUDIO_ORIGIN in kw-audio-engine.js.
+window.KW_AUDIO_BASE = '/api/media/';
 
 (function () {
   if (!window.KW_TTS) return;

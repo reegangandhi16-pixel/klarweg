@@ -139,25 +139,15 @@
   // regenerated. Each source keeps its OWN base, because their paths differ:
   // (1) stores CDN-relative "audio/female/die_Chancengleichheit.mp3", while
   // (2)/(3) store root-relative "/audio/words/female/<sha16>.mp3".
-  // All recorded audio is served by the klarweg-audio Worker (private R2
-  // bucket, original paths): klarweg-audio's public/audio/<p> at <origin><p>
-  // and klarweg-audio-cdn's <p> at <origin>vocab/<p>. The previous public
-  // hosts stay as an automatic per-request fallback (legacyUrl below), so a
-  // Worker outage or quota error degrades to the old CDNs, not to browser TTS.
-  var AUDIO_ORIGIN = 'https://klarweg-audio.klarweg-issue-reports-2026.workers.dev/';
-  var LEGACY_AUDIO_HOSTS = [
-    { from: AUDIO_ORIGIN + 'vocab/', to: 'https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/' },
-    { from: AUDIO_ORIGIN, to: 'https://cdn.jsdelivr.net/gh/reegangandhi16-pixel/klarweg-audio@main/public/audio/' }
-  ];
-  /* Same object on the previous host, or null when the URL is not ours. */
-  function legacyUrl(url) {
-    if (typeof url !== 'string') return null;
-    for (var i = 0; i < LEGACY_AUDIO_HOSTS.length; i++) {
-      var m = LEGACY_AUDIO_HOSTS[i];
-      if (url.indexOf(m.from) === 0) return m.to + url.slice(m.from.length);
-    }
-    return null;
-  }
+  // All recorded audio is served by the site's own protected route
+  // klarweg.in/api/media/<key> (access Worker, private R2 bucket, original
+  // paths): free audio for anyone, paid audio only with a session that holds
+  // the purchase. It is same-origin, so the session cookie (Path=/api) is sent
+  // with every <audio> and fetch request. There is deliberately NO fallback
+  // to any other host: the old public copies are closed. A failed file falls
+  // through to the existing cache / TTS chain.
+  var AUDIO_ORIGIN = '/api/media/';
+  function legacyUrl() { return null; }
   var VOCAB_CDN_BASE = AUDIO_ORIGIN + 'vocab/';
   // The per-level word manifests and their MP3s are published here. This base
   // is DECLARED rather than read from window.KW_AUDIO_BASE on purpose: the
@@ -197,8 +187,9 @@
   // CDN base: when window.KW_AUDIO_BASE is set, ALL audio (manifests + MP3s)
   // resolve against it — so no MP3 files need to live in this project.
   function audioBase() {
-    var b = global.KW_AUDIO_BASE;
-    if (b) return b.charAt(b.length - 1) === '/' ? b : b + '/';
+    // Any configured audio base means "production audio": always the one
+    // protected origin (a stale cached config naming an old host is ignored).
+    if (global.KW_AUDIO_BASE) return AUDIO_ORIGIN;
     return manifestBase;   // fall back to the script-relative folder
   }
 
@@ -600,7 +591,10 @@ function wordFormUrl(text) {
     // Root-relative "/audio/words/…" paths belong to the a1/a2/b1 manifests and
     // resolve against KW_AUDIO_BASE; CDN-relative "audio/female/…" paths belong
     // to the vocab CDN and resolve against its own base.
-    if (rel.charAt(0) === '/') return rel.replace(/^\/audio\//, (entryBase || audioBase()));
+    // Root-relative "/audio/words/…" files live at the origin root
+    // (words/…), also when listed in the vocab CDN manifest — never under
+    // vocab/ (that was the old "vocab/words/…" 404).
+    if (rel.charAt(0) === '/') return rel.replace(/^\/audio\//, AUDIO_ORIGIN);
     return (entryBase || VOCAB_CDN_BASE) + rel;
   }
   /** Voiced vocab URL for a term + gender ('female'|'male'), or undefined (sync). */

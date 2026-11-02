@@ -79,7 +79,7 @@ function browser(own) {
   const timers = [];
   const win = {
     KW_CHAPTER_AUDIO: own,
-    document: { currentScript: { src: 'https://klarweg.in/public/audio/kw-audio-engine.js?v=2' }, addEventListener() {}, querySelectorAll: () => [], createElement: () => ({ style: {}, setAttribute() {}, addEventListener() {} }) },
+    document: { currentScript: { src: 'https://klarweg.in/public/audio/kw-audio-engine.js?v=3' }, addEventListener() {}, querySelectorAll: () => [], createElement: () => ({ style: {}, setAttribute() {}, addEventListener() {} }) },
     location: { origin: 'https://klarweg.in', href: 'https://klarweg.in/chapter/x.html' },
     navigator: { userAgent: 'node' },
     setTimeout: (f) => { timers.push(f); return timers.length; }, clearTimeout() {},

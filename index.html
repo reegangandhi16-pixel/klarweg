@@ -5,19 +5,23 @@
 <script src="public/audio/kw-audio-engine.js?v=3" defer></script>
 <script src="public/audio/kw-tts-config.js?v=3" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Klarweg — See German clearly. A1 to C2, the visual way.</title>
-<meta name="description" content="The visual, Hindi-first way to clear every Goethe level — A1 to C2. Color-coded grammar, clickable German, AI tutor, and stories. Chapter 1 free at every level.">
+<title>Learn German A1–C2 for Hindi Speakers · Goethe Prep — Klarweg</title>
+<meta name="description" content="Klarweg is the Hindi-first way to learn German from A1 to C2: color-coded grammar, clickable words with audio, an AI tutor and Goethe exam preparation.">
 <link rel="canonical" href="https://klarweg.in/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Klarweg">
-<meta property="og:title" content="Klarweg — See German clearly. A1 to C2, the visual way.">
-<meta property="og:description" content="The visual, Hindi-first way to clear every Goethe level — A1 to C2. Color-coded grammar, clickable German, AI tutor, and stories. Chapter 1 free at every level.">
+<meta property="og:title" content="Learn German A1–C2 for Hindi Speakers · Goethe Prep — Klarweg">
+<meta property="og:description" content="Klarweg is the Hindi-first way to learn German from A1 to C2: color-coded grammar, clickable words with audio, an AI tutor and Goethe exam preparation.">
 <meta property="og:url" content="https://klarweg.in/">
-<meta property="og:image" content="https://klarweg.in/icon-512.png">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Klarweg — See German clearly. A1 to C2, the visual way.">
-<meta name="twitter:description" content="The visual, Hindi-first way to clear every Goethe level — A1 to C2. Color-coded grammar, clickable German, AI tutor, and stories. Chapter 1 free at every level.">
-<meta name="twitter:image" content="https://klarweg.in/icon-512.png">
+<meta property="og:image" content="https://klarweg.in/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Klarweg logo with the text: See German clearly. German A1 to C2 for Hindi speakers, with Goethe exam preparation.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Learn German A1–C2 for Hindi Speakers · Goethe Prep — Klarweg">
+<meta name="twitter:description" content="Klarweg is the Hindi-first way to learn German from A1 to C2: color-coded grammar, clickable words with audio, an AI tutor and Goethe exam preparation.">
+<meta name="twitter:image" content="https://klarweg.in/og-image.png">
+<meta name="twitter:image:alt" content="Klarweg logo with the text: See German clearly. German A1 to C2 for Hindi speakers, with Goethe exam preparation.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -2592,6 +2596,17 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
   color: var(--ink-quaternary);
   font-weight: 300;
 }
+/* Desktop/tablet: keep the three steps on one row; a longer subline
+   wraps inside its own step instead of pushing step 03 to a new row. */
+@media (min-width: 769px) {
+  .pricing-flow { flex-wrap: nowrap; }
+  .pflow-step { flex: 1 1 0; min-width: 0; }
+}
+@media (min-width: 1024px) {
+  .pflow-step { flex: 0 0 auto; }
+  .pflow-step:last-child { flex: 0 1 auto; }
+  .pflow-step:last-child .pflow-sub { max-width: 240px; }
+}
 @media (max-width: 768px) {
   .pricing-flow {
     border-radius: var(--r-xl);
@@ -3872,22 +3887,14 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
 .cv-score { font-size: 10px; color: var(--green-deep); font-weight: 600; }
 .cv-line { font-family: var(--font-german); font-size: 13px; }
 .cv-line-sub { font-size: 10px; color: var(--ink-tertiary); margin-top: 2px; }
-.cv-seal {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: #fff;
-  background: linear-gradient(135deg, var(--amber), var(--amber-bright));
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  box-shadow: 0 6px 18px -6px rgba(186,117,23,0.5);
-  margin: 0 auto;
+.cv-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--hairline);
+  border-radius: var(--r-full);
+  overflow: hidden;
 }
-.cv-seal span { font-size: 8px; opacity: 0.85; margin-top: -2px; }
+.cv-progress span { display: block; height: 100%; background: var(--coral); border-radius: inherit; }
 
 .chapter-flow-footer {
   margin-top: 48px;
@@ -4587,6 +4594,34 @@ body {
 <meta name="theme-color" content="#E55A3F">
 <!-- Word popup: the course popup's own stylesheet (shared with every chapter page). -->
 <link rel="stylesheet" href="public/kw-word-pop.css?v=1">
+<!-- KW-LD:start (scripts/seo-ld.mjs) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://klarweg.in/#organization",
+      "name": "Klarweg",
+      "url": "https://klarweg.in/",
+      "logo": "https://klarweg.in/site-icon-512.png",
+      "email": "klarwegofficial@gmail.com",
+      "description": "German courses from A1 to C2 for Hindi-speaking learners, with color-coded grammar and Goethe exam preparation."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://klarweg.in/#website",
+      "name": "Klarweg",
+      "url": "https://klarweg.in/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://klarweg.in/#organization"
+      }
+    }
+  ]
+}
+</script>
+<!-- KW-LD:end -->
 </head>
 <body>
 
@@ -5382,7 +5417,7 @@ body {
       <div class="cstep">
         <div class="cstep-num">02</div>
         <div class="cstep-title">Story scene</div>
-        <div class="cstep-body">Two characters in a real situation. Every word clickable. Native audio.</div>
+        <div class="cstep-body">Two characters in a real situation. Every word clickable. German pronunciation audio.</div>
         <div class="cstep-visual cv-story">
           <div class="cv-bubble cv-bubble-left">Anna: Was möchten Sie?</div>
           <div class="cv-bubble cv-bubble-right">Einen Kaffee.</div>
@@ -5446,10 +5481,12 @@ body {
 
       <div class="cstep">
         <div class="cstep-num">08</div>
-        <div class="cstep-title">Certificate</div>
-        <div class="cstep-body">Pass the end-of-chapter mini-exam and earn a Klarweg seal. Shareable on LinkedIn.</div>
-        <div class="cstep-visual cv-cert">
-          <div class="cv-seal">A1<span>·03</span></div>
+        <div class="cstep-title">Chapter check</div>
+        <div class="cstep-body">Finish with the chapter quiz. When you are signed in, your progress is saved to your account and picks up on any device.</div>
+        <div class="cstep-visual cv-check">
+          <div class="cv-frame"><span>A1 · Chapter 3</span></div>
+          <div class="cv-progress" aria-hidden="true"><span style="width: 100%;"></span></div>
+          <div class="cv-line-sub">Quiz 8 / 8 · progress saved</div>
         </div>
       </div>
 
@@ -5733,7 +5770,7 @@ body {
     <div class="section-header">
       <span class="eyebrow">Premium access</span>
       <h2 class="display display-md">One price for one level.<br>Or one price for <em style="font-family:var(--font-german);font-style:italic;font-weight:500;">everything.</em></h2>
-      <p class="lede">No subscription. No monthly bills. Pay once, learn forever.</p>
+      <p class="lede">Pay once: get 2 years of access to each level, or lifetime access to every level with Klarweg Lifetime.</p>
     </div>
 
     <!-- How it works: 3-step flow makes the conversion path obvious -->
@@ -5758,7 +5795,7 @@ body {
         <span class="pflow-num">03</span>
         <div>
           <div class="pflow-title">Unlock everything</div>
-          <div class="pflow-sub">One level, or every level forever.</div>
+          <div class="pflow-sub">Choose one level for 2 years, or get every level with Lifetime access.</div>
         </div>
       </div>
     </div>
@@ -5779,7 +5816,7 @@ body {
           <li><a href="c2.html#pricing" class="price-tier-row" data-kw-buy="C2" aria-label="Unlock C2 for ₹8,999"><span class="tier">C2</span><span class="amt">₹8,999 <span class="arrow" aria-hidden="true">→</span></span></a></li>
         </ul>
 
-        <p style="font-size: 13px; color: var(--ink-tertiary); margin-bottom: 20px;">All levels include AI tutor, certificates, homework PDFs, and stories. Chapter 1 free at every level.</p>
+        <p style="font-size: 13px; color: var(--ink-tertiary); margin-bottom: 20px;">All levels include AI tutor, homework PDFs, and stories. Chapter 1 free at every level.</p>
 
       </div>
 
@@ -5802,8 +5839,7 @@ body {
           <li><span class="check-icon">✓</span> All 6 levels: A1 · A2 · B1 · B2 · C1 · C2</li>
           <li><span class="check-icon">✓</span> Every chapter, every lesson, forever</li>
           <li><span class="check-icon">✓</span> Klarweg AI feedback on writing &amp; speaking</li>
-          <li><span class="check-icon">✓</span> Stories, dialogues, native audio</li>
-          <li><span class="check-icon">✓</span> Klarweg certificates at every level</li>
+          <li><span class="check-icon">✓</span> Stories, dialogues, German audio</li>
           <li><span class="check-icon">✓</span> Homework PDFs and smart revision</li>
           <li><span class="check-icon">✓</span> All future content and features included</li>
           <li><span class="check-icon">✓</span> 7-day money-back guarantee</li>
@@ -5971,6 +6007,7 @@ body {
           <li><a href="ausbildung.html">Ausbildung</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="resources.html">Resources</a></li>
+          <li><a href="german-grammar.html">German Grammar</a></li>
         </ul>
       </div>
 

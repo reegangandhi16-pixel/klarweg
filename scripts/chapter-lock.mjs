@@ -35,7 +35,7 @@ import path from "node:path";
 import vm from "node:vm";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { chapterData, chapterLexiconTail } from "./lexicon-split.mjs";
+import { chapterData, chapterLexiconTail, lexiconShards } from "./lexicon-split.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CHAPTER_DIR = path.join(ROOT, "chapter");
@@ -197,6 +197,14 @@ export function buildRelease({ release, out }) {
     fs.writeFileSync(path.join(dir, `${c.id}.js`), releasePayload(c));
     files.push(`${c.id}.js`);
   }
+  /* The full dictionary in 64 shards, for the review page's protected lookup
+     (access Worker GET /saved-words/lexicon; scripts/lexicon-split.mjs). */
+  fs.mkdirSync(path.join(dir, "lexicon"), { recursive: true });
+  lexiconShards().forEach((s, i) => {
+    const f = `lexicon/${String(i).padStart(2, "0")}.json`;
+    fs.writeFileSync(path.join(dir, f), JSON.stringify(s));
+    files.push(f);
+  });
   fs.writeFileSync(path.join(dir, "index.json"), JSON.stringify({ release, chapters }) + "\n");
   return { dir, files: [...files, "index.json"] };
 }

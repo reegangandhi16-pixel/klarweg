@@ -96,3 +96,17 @@ test('published pages load only the public dictionary files', () => {
     assert.ok(!h.includes('src="story-lexicon.js"') && !h.includes('global-lexicon.js"'), f);
   }
 });
+
+test('a release carries the 64 lexicon shards, written before index.json', async () => {
+  const { buildRelease } = await import('./chapter-lock.mjs');
+  const os = await import('node:os');
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'kw-rel-'));
+  try {
+    const b = buildRelease({ release: 'r999', out });
+    const lex = b.files.filter((f) => f.startsWith('lexicon/'));
+    assert.equal(lex.length, SHARDS);
+    assert.equal(b.files[b.files.length - 1], 'index.json');
+    const s = JSON.parse(fs.readFileSync(path.join(b.dir, 'lexicon', String(shardOf('apfel')).padStart(2, '0') + '.json'), 'utf8'));
+    assert.equal(JSON.stringify(s.G.apfel), JSON.stringify(L.G.apfel));
+  } finally { fs.rmSync(out, { recursive: true, force: true }); }
+});

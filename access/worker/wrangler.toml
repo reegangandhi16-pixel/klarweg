@@ -107,10 +107,21 @@ RESOURCE_RELEASE = "r5"
 # from GET /chapters/<id>.js; without a valid release every paid chapter
 # shows "unavailable", so never deploy the pages ahead of the upload.
 CHAPTER_RELEASE = "r3"
+# Media access policy release in klarweg-resources (media-policy/<release>/) — media.js.
+MEDIA_POLICY_RELEASE = "m1"
+# Browser cache for PAID audio: "0" = private, no-store; "3600" = private, max-age=3600.
+# OWNER DECISION PENDING (see Stage 1 report); local default below.
+MEDIA_PAID_MAX_AGE = "0"
 
 [[r2_buckets]]
 binding = "RESOURCES"
 bucket_name = "klarweg-resources"
+
+# Lesson and word audio, read-only by code (media.js calls get/head only).
+# MEDIA_PASS_SECRET is a Worker secret (not in this file).
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "klarweg-audio"
 
 [[d1_databases]]
 binding = "DB"

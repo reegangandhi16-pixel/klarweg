@@ -7,6 +7,7 @@ import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
 import { chapterScript, CHAPTER_ROUTE } from "./chapters.js";
+import { mediaFile, MEDIA_ROUTE } from "./media.js";
 import {
   listSavedWords,
   createSavedWord,
@@ -190,6 +191,13 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
     const chapterMatch = url.pathname.match(CHAPTER_ROUTE);
     if (request.method === "GET" && chapterMatch) {
       return chapterScript(request, env, chapterMatch[1]);
+    }
+
+    /* Lesson and word audio (media.js) — klarweg.in only, loaded by
+       <audio>/new Audio() on the site's own origin, so no CORS headers. */
+    const mediaMatch = url.pathname.match(MEDIA_ROUTE);
+    if ((request.method === "GET" || request.method === "HEAD") && mediaMatch) {
+      return mediaFile(request, env, mediaMatch[1]);
     }
 
     /* Chapter resource PDFs — private R2, signed short-lived links

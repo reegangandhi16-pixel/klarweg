@@ -15,12 +15,41 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const FULL = JSON.parse(read('public/audio/manifest.json')).entries;
 const PUB = JSON.parse(read('public/audio/manifest-public.json')).entries;
+const allow = read('.github/pages-allowlist.txt').split('\n').map((l) => l.trim());
 const isPaidChapter = (id) => typeof id === 'string' && !/^(a1|a2|b1|b2|c1|c2)-0?1-/.test(id);
 
 test('the public manifest holds no paid chapter line', () => {
   for (const [text, v] of Object.entries(PUB)) assert.ok(!(v && isPaidChapter(v.chapter)), 'paid line public: ' + text.slice(0, 60));
   const freeOrHome = Object.entries(FULL).filter(([, v]) => !(v && isPaidChapter(v.chapter)));
   assert.equal(Object.keys(PUB).length, freeOrHome.length, 'every free, homepage and legacy line is still public');
+});
+
+test('the full manifest is never published', () => {
+  assert.ok(!allow.includes('public/audio/manifest.json'));
+  assert.ok(allow.includes('public/audio/manifest-public.json'));
+  assert.ok(!allow.some((l) => l.startsWith('GLOB:audio-timing')), 'no glob over audio-timing');
+  assert.match(read('.github/workflows/deploy-pages.yml'), /public\/audio\/manifest\.json/);
+  /* Each workflow step is its own shell: a variable the assertion step uses
+     must be set in that step (set -u would otherwise fail the deploy). */
+  const wf = read('.github/workflows/deploy-pages.yml');
+  const assertStep = wf.slice(wf.indexOf('- name: Assert no prohibited private paths in artifact'), wf.indexOf('- name: Upload artifact'));
+  for (const v of new Set([...assertStep.matchAll(/\$\{?([A-Z_]+)\}?/g)].map((m) => m[1]))) {
+    if (['GITHUB_OUTPUT', 'GITHUB_ENV', 'GITHUB_STEP_SUMMARY'].includes(v)) continue;
+    assert.match(assertStep, new RegExp('(^|\\s)' + v + '='), 'assertion step uses $' + v + ' without setting it');
+  }
+});
+
+test('only free Chapter 1 and homepage timing sidecars are public', () => {
+  const paidHashes = new Set(Object.values(FULL).filter((v) => v && isPaidChapter(v.chapter) && v.contentHash).map((v) => v.contentHash));
+  const listed = allow.filter((l) => l.startsWith('audio-timing/'));
+  assert.ok(listed.length > 0 && listed.length < 200);
+  for (const l of listed) {
+    assert.ok(fs.existsSync(path.join(ROOT, l)), l + ' exists');
+    assert.ok(!paidHashes.has(path.basename(l, '.json')), 'paid timing public: ' + l);
+    const side = JSON.parse(read(l));
+    const m = /^(A1|A2|B1|B2|C1|C2)_(\d+)_/.exec(side.id);
+    assert.ok(!m || Number(m[2]) === 1, 'paid timing id ' + side.id);
+  }
 });
 
 test('every paid line and timing file is delivered with its chapter', () => {

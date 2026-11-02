@@ -9,7 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import worker from '../src/index.js';
 import { createD1 } from './d1-sqlite.mjs';
-import { parseRange, classify, _resetMediaCache } from '../src/media.js';
+import { parseRange, classify, _resetMediaCache, MANIFESTS } from '../src/media.js';
 import { FREE_MEDIA } from '../src/media-free.js';
 
 const WORKER_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -63,7 +63,7 @@ function audioBucket() {
     async head(k) { if (k.endsWith('.mp3')) calls.push(['head', k]); const v = AUDIO[k]; return v == null ? null : { size: Buffer.byteLength(v), httpEtag: etag(k) }; },
     async get(k, opts) {
       const v = AUDIO[k];
-      if (k.endsWith('.json')) return v == null ? null : { async text() { return v; } };
+      if (k.endsWith('.json')) return v == null ? null : { async text() { return v; }, body: new Blob([Buffer.from(v)]).stream() };
       calls.push(['get', k, opts]); if (v == null) return null;
       let b = Buffer.from(v);
       if (opts && opts.range) b = b.subarray(opts.range.offset, opts.range.offset + opts.range.length);
@@ -275,6 +275,62 @@ test('used-files list unreadable → 503 (fail closed), never served', async () 
   const b = await signup(noPayload);
   await grant(noPayload, b.id, 'LIFETIME');
   assert.equal((await media(noPayload, 'story/A1_017_S003.mp3', { cookie: b.cookie })).status, 503);
+});
+
+test('the six word manifests: public JSON for anyone on klarweg.in, like the old audio Worker', async () => {
+  const env = makeEnv();
+  assert.equal(MANIFESTS.size, 6);
+  for (const f of MANIFESTS) {
+    const r = await media(env, f, { referer: null });
+    assert.equal(r.status, 200, f);
+    assert.equal(r.text, AUDIO[f]);
+    assert.equal(r.h.get('content-type'), 'application/json; charset=utf-8');
+    assert.equal(r.h.get('cache-control'), 'public, max-age=300');
+    assert.equal(r.h.get('cross-origin-resource-policy'), 'same-origin');
+  }
+  const h = await media(env, 'vocab/manifest.json', { method: 'HEAD' });
+  assert.equal(h.status, 200);
+  assert.equal(h.text, '');
+  assert.equal((await media(env, 'a1-words-manifest.json', { referer: 'https://evil.example/' })).status, 403);
+  // only those six names: no other JSON, no path tricks
+  for (const k of ['manifest.json', 'manifest-public.json', 'a1-words-manifest.json.bak', 'vocab%2F..%2Fa1-words-manifest.json', '..%2Fa1-words-manifest.json', 'vocab%2Fmanifest.json', 'A1-words-manifest.json', 'c1-words-manifest.json']) {
+    assert.equal((await media(env, k)).status, 404, k);
+  }
+  assert.equal((await media(makeEnv({ MEDIA: undefined }), 'vocab/manifest.json')).status, 503);
+});
+
+test('production domain enforces authorization; direct workers.dev cannot bypass it', async () => {
+  const env = makeEnv();
+  const u = await signup(env);
+  await grant(env, u.id, 'LIFETIME');
+  const PAID = ['story/A1_017_S003.mp3', 'speaking/B2_009_P001.mp3', 'words/female/bbbb000000000002.mp3', 'vocab/audio/female/caf%C3%A9.mp3'];
+  // klarweg.in/api/media: signed out → 401, signed-in buyer → 200
+  for (const k of PAID) {
+    assert.equal((await media(env, k)).status, 401, 'signed out ' + k);
+    assert.equal((await media(env, k, { cookie: u.cookie })).status, 200, 'buyer ' + k);
+  }
+  // Any other host — the Worker's workers.dev URL (with or without /api), www, a look-alike —
+  // answers 404 for every media file, even with a valid buyer cookie, and never touches the bucket.
+  env.MEDIA.calls.length = 0;
+  const token = u.cookie.split('=').slice(1).join('=');
+  const bases = [
+    'https://klarweg-access.klarweg-issue-reports-2026.workers.dev/media/',
+    'https://klarweg-access.klarweg-issue-reports-2026.workers.dev/api/media/',
+    'https://www.klarweg.in/api/media/',
+    'https://klarweg.in.evil.example/api/media/',
+  ];
+  for (const base of bases) {
+    for (const k of [...PAID, FREE_CH1, 'story/A1_017_S099.mp3', 'vocab/manifest.json']) {
+      for (const cookie of [undefined, u.cookie, 'kw_session_x=' + token]) {
+        const r = await media(env, k, { base, cookie });
+        assert.equal(r.status, 404, base + k);
+        assert.notEqual(r.h.get('content-type'), 'audio/mpeg');
+      }
+      const auth = await media(env, k, { base, headers: { authorization: 'Bearer ' + token } });
+      assert.equal(auth.status, 404, 'bearer ' + base + k);
+    }
+  }
+  assert.equal(env.MEDIA.calls.length, 0, 'no audio object read for any other host');
 });
 
 test('media.js never writes, deletes or lists the bucket', () => {

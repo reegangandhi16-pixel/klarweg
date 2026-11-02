@@ -10,6 +10,8 @@
      lesson clip <kind>/<LEVEL>_<NNN>_<LINE>.mp3 → signed in + that level
                  (readEntitlements: expiry honoured, Lifetime = every level)
      word audio  word / form / conjugation files → signed in + any active level
+     word lists  the six word-manifest JSON files the player loads (MANIFESTS):
+                 public, as on the old audio Worker (file names only, no audio)
      anything else → 404
 
    USED FILES ONLY (owner decision 2026-11-02: unused recordings are refused to
@@ -34,6 +36,14 @@ import { FREE_MEDIA } from "./media-free.js";
 export const MEDIA_ROUTE = /^\/media\/(.{1,600})$/;
 const KEY = /^[A-Za-z0-9][A-Za-z0-9_.\-/é]{0,200}\.mp3$/;
 const LESSON = /^(story|listening|reading|speaking)\/([ABC][12])_(\d{3})_[A-Z]+\d+(?:_v\d+)?\.mp3$/;
+/* The word manifests the player loads (kw-audio-engine.js) — served publicly,
+   like the old audio Worker did; media.js also reads them to decide "used". */
+export const MANIFESTS = new Set([
+  "a1-words-manifest.json", "a2-words-manifest.json", "b1-words-manifest.json",
+  "vocab/manifest.json", "vocab/manifest-word-form.json", "vocab/manifest-conjugation.json"
+]);
+const MANIFEST_CACHE = "public, max-age=300";
+
 /* Word prefix → the manifests (in this bucket) the player resolves it from,
    and how that manifest writes the path. */
 const WORDS_MANIFESTS = ["a1-words-manifest.json", "a2-words-manifest.json", "b1-words-manifest.json", "vocab/manifest.json"];
@@ -134,11 +144,11 @@ function refusal(status) {
   const text = { 401: "sign_in_required\n", 403: "purchase_required\n", 404: "not_found\n", 503: "media_unavailable\n" }[status];
   return new Response(text, { status, headers: h });
 }
-async function deliver(request, env, key, cacheControl) {
+async function deliver(request, env, key, cacheControl, contentType = "audio/mpeg") {
   const head = await env.MEDIA.head(key);
   if (!head) return refusal(404);
   const h = baseHeaders(cacheControl);
-  h.set("Content-Type", "audio/mpeg");
+  h.set("Content-Type", contentType);
   h.set("Accept-Ranges", "bytes");
   if (head.httpEtag) h.set("ETag", head.httpEtag);
   if (etagMatches(request.headers.get("If-None-Match"), head.httpEtag)) return new Response(null, { status: 304, headers: h });
@@ -174,6 +184,11 @@ function foreignReferer(request) {
 /* GET|HEAD /media/<key>  (request already stripped of /api by index.js; the host is kept) */
 export async function mediaFile(request, env, rawKey) {
   if (!isSameOriginApi(request)) return refusal(404);
+  if (MANIFESTS.has(rawKey)) {
+    if (!env.MEDIA || typeof env.MEDIA.get !== "function") return refusal(503);
+    if (foreignReferer(request)) return refusal(403);
+    return deliver(request, env, rawKey, MANIFEST_CACHE, "application/json; charset=utf-8");
+  }
   const key = keyFromPath(rawKey);
   const rule = key && classify(key);
   if (!rule) return refusal(404);

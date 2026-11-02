@@ -76,16 +76,16 @@ test('the homepage loads the course popup engine, stylesheet and lexicon — sam
   const tag = (src) => HOME.indexOf('<script src="' + src + '" defer></script>');
   assert.ok(HOME.indexOf('<link rel="stylesheet" href="public/kw-word-pop.css?v=1">') > HOME.indexOf('</style>'),
     'shared stylesheet loads after the homepage <style>, as it loads after chapter.css on chapters');
-  const host = HOME.indexOf("<script>window.KW_WORD_POP_HOST = { lexiconSrc: 'chapter/global-lexicon.js', triggers: '.de[data-word]' };</script>");
+  const host = HOME.indexOf("<script>window.KW_WORD_POP_HOST = { lexiconSrc: 'chapter/global-lexicon-public.js', triggers: '.de[data-word]' };</script>");
   assert.ok(host !== -1, 'host config');
-  for (const src of ['chapter/story-lexicon.js', 'chapter/tokenizer.js', 'chapter/chapter-app.js?v=' + appV]) {
+  for (const src of ['chapter/story-lexicon-public.js', 'chapter/tokenizer.js', 'chapter/chapter-app.js?v=' + appV]) {
     assert.ok(tag(src) > host, src + ' is loaded (deferred) after the host config');
   }
-  assert.ok(tag('chapter/tokenizer.js') < tag('chapter/chapter-app.js?v=' + appV) && tag('chapter/story-lexicon.js') < tag('chapter/chapter-app.js?v=' + appV), 'chapter load order');
-  assert.ok(HOME.indexOf('<script src="public/audio/kw-audio-engine.js" defer></script>') < tag('chapter/chapter-app.js?v=' + appV), 'audio engine first, as on chapters');
+  assert.ok(tag('chapter/tokenizer.js') < tag('chapter/chapter-app.js?v=' + appV) && tag('chapter/story-lexicon-public.js') < tag('chapter/chapter-app.js?v=' + appV), 'chapter load order');
+  assert.ok(HOME.indexOf('<script src="public/audio/kw-audio-engine.js?v=3" defer></script>') < tag('chapter/chapter-app.js?v=' + appV), 'audio engine first, as on chapters');
   assert.ok(fs.existsSync(path.join(ROOT, 'chapter/global-lexicon.js')));
   const allow = read('.github/pages-allowlist.txt').split('\n');
-  for (const f of ['public/kw-word-pop.css', 'chapter/chapter-app.js', 'chapter/tokenizer.js', 'chapter/story-lexicon.js', 'chapter/global-lexicon.js', 'index.html']) {
+  for (const f of ['public/kw-word-pop.css', 'chapter/chapter-app.js', 'chapter/tokenizer.js', 'chapter/story-lexicon-public.js', 'chapter/global-lexicon-public.js', 'index.html']) {
     assert.ok(allow.includes(f), f + ' is published');
   }
 });
@@ -112,7 +112,7 @@ test('popup-only host mode is isolated: chapters never take it, the host never g
   assert.equal((APP.match(/window\.KW_WordPop\s*=/g) || []).length, 1, 'KW_WordPop is only exposed by the host branch');
   // The lexicon's re-sweep of the page is chapter-only; the host page's own markup is never linkified.
   assert.match(APP, /s\.onload = function \(\) \{\n      \/\/ A popup-only host has no chapter markup to re-sweep\.\n      if \(POP_HOST\) return;/);
-  assert.match(APP, /s\.src = POP_HOST \? POP_HOST\.lexiconSrc : 'global-lexicon\.js';/);
+  assert.match(APP, /s\.src = POP_HOST \? POP_HOST\.lexiconSrc : 'global-lexicon-public\.js';/);
   assert.match(APP, /if \(POP_HOST\) speechSynthesis\.addEventListener\('voiceschanged', pick\); else speechSynthesis\.onvoiceschanged = pick;/);
 });
 

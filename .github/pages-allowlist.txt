@@ -83,6 +83,12 @@ favicon.svg
 apple-touch-icon.png
 icon-192.png
 icon-512.png
+favicon.ico
+favicon-16x16.png
+favicon-32x32.png
+favicon-48x48.png
+site-icon-192.png
+site-icon-512.png
 
 # ---------------------------------------------------------------
 # Account pages + runtime
@@ -100,18 +106,23 @@ account/kw-account.js
 # empty .gitkeep placeholders are deliberately excluded — none are
 # referenced by any page; verified via grep this session. The
 # actual MP3 audio files are gitignored in this repo and served
-# from the separate klarweg-audio-cdn repo/Pages site, so there is
-# nothing to copy for them here.)
+# only by the protected route klarweg.in/api/media/ (access Worker,
+# private R2), so there is nothing to copy for them here.)
 # ---------------------------------------------------------------
 public/audio/kw-audio-engine.js
 public/audio/kw-tts-config.js
-public/audio/manifest.json
+# Public subset of the audio manifest (free Chapter 1, homepage, legacy
+# lines), read by kw-audio-engine.js?v=3. The full corpus
+# public/audio/manifest.json holds paid lesson text and is NEVER
+# published (deploy-pages.yml asserts it).
+public/audio/manifest-public.json
 public/audio/a1-words-manifest.json
 public/audio/a2-words-manifest.json
 public/audio/b1-words-manifest.json
-# Vocab / word-form / conjugation manifests, byte-identical copies of the
-# klarweg-audio-cdn originals. The engine reads every manifest from the site
-# (free to re-validate) and plays the MP3s from the klarweg-audio Worker.
+# Word / vocab / word-form / conjugation manifests: file names only, no audio.
+# Keep byte-identical to the copies in the private R2 bucket klarweg-audio
+# (the access Worker serves an MP3 only if its manifest lists it). The engine
+# reads every manifest from the site and plays the MP3s from /api/media/.
 public/audio/vocab/manifest.json
 public/audio/vocab/manifest-word-form.json
 public/audio/vocab/manifest-conjugation.json
@@ -121,27 +132,120 @@ public/audio/kw-story-exceptions.js
 # Word popup stylesheet shared by every chapter page and the homepage
 # (chapter-app.js renderWordPop; homepage uses it in popup-only host mode).
 public/kw-word-pop.css
-GLOB:audio-timing/[0-9a-f]*.json
+# BEGIN generated: public audio-timing (scripts/chapter-lock.mjs audio) - do not edit
+audio-timing/00d474b350531f00.json
+audio-timing/06b36c5d56b99258.json
+audio-timing/07c00bec2d518472.json
+audio-timing/0f12a4c655930d84.json
+audio-timing/12f4693913d1acb8.json
+audio-timing/134d1ac7ed5297c2.json
+audio-timing/19132597c1eed08a.json
+audio-timing/1953e500573f5f55.json
+audio-timing/1adb743e8e8b798b.json
+audio-timing/1ccc3d8d4135895f.json
+audio-timing/1dd2cfb7687f41d1.json
+audio-timing/1f1d1a75d6f3b622.json
+audio-timing/2079ca117fda3fd9.json
+audio-timing/212b0d8051f60251.json
+audio-timing/289f7d1085b1502c.json
+audio-timing/2bb30aa59c4dd0e6.json
+audio-timing/32598b6139e3dda4.json
+audio-timing/3d7b92f30a29d94f.json
+audio-timing/3ed2f282d6e57867.json
+audio-timing/3f0fd16573950fc3.json
+audio-timing/41e23ced38e7ccd4.json
+audio-timing/4e261eecdb1a3f10.json
+audio-timing/5247894de1a8c8f3.json
+audio-timing/53e47d7d35e3c515.json
+audio-timing/56c89914ecf497ae.json
+audio-timing/5c65adc7d14c5b9f.json
+audio-timing/5cac362ced29a160.json
+audio-timing/630ad6af6121881c.json
+audio-timing/64389c32d7e6e910.json
+audio-timing/68090ac1454fe863.json
+audio-timing/69c01cb79d2331b5.json
+audio-timing/6bc9bab3614ef511.json
+audio-timing/7632e9f59b1faf35.json
+audio-timing/7646f4fcf3de137c.json
+audio-timing/7719d6bf66f5321b.json
+audio-timing/79cb658864a1bd7e.json
+audio-timing/7f1531642c878271.json
+audio-timing/80ed9526e01ca348.json
+audio-timing/8a0507eb39b9c6f8.json
+audio-timing/8ab269cfdd0ad0b9.json
+audio-timing/91f3c821deab3948.json
+audio-timing/920ddaedcfa8f116.json
+audio-timing/923c7a762a1abf4e.json
+audio-timing/94c1b013c6de40ae.json
+audio-timing/958c9ed26addd822.json
+audio-timing/97f52f3bdffceb89.json
+audio-timing/a1bae83ede0c8727.json
+audio-timing/a1dbdacb532c6dd2.json
+audio-timing/a7b82dcb90fc4c84.json
+audio-timing/aabbe400909cb863.json
+audio-timing/ab0f00014fab57e8.json
+audio-timing/ab735bea40ad0b48.json
+audio-timing/abdeb23bffdc8b41.json
+audio-timing/adc6d67a1dcfd7a7.json
+audio-timing/aea12053f89dfee4.json
+audio-timing/aeb2476394641199.json
+audio-timing/afe8dbd84a55e119.json
+audio-timing/b4adf4c59077ee71.json
+audio-timing/b7735745502e94db.json
+audio-timing/bd7f32b89d38efe1.json
+audio-timing/c2ab3c39a984ebe0.json
+audio-timing/cd24d1a32b900fcf.json
+audio-timing/cd6dfbdcea346d08.json
+audio-timing/cf6fafe23faf4ea9.json
+audio-timing/d0cf01737eded0a1.json
+audio-timing/d1a7d01bec55f212.json
+audio-timing/d38ef8e7fa8ae26c.json
+audio-timing/d46a3719de7fe93f.json
+audio-timing/d9020718844783d0.json
+audio-timing/dad8f0883c0c68b9.json
+audio-timing/db4363476693a0d2.json
+audio-timing/dc66a174fd40d12f.json
+audio-timing/e1ebfff6e670ebab.json
+audio-timing/e5ff9213e30b3397.json
+audio-timing/e727f4cdd53b3028.json
+audio-timing/eb1833344ecd1d7e.json
+audio-timing/eb6de4844fc91115.json
+audio-timing/f19be2bdc8124c5a.json
+audio-timing/f2648cac92251285.json
+audio-timing/f4020a2026323952.json
+audio-timing/f9fc5d7ccd6fd5c2.json
+audio-timing/fb5cba77369e7559.json
+audio-timing/fbb63beda12fbf0c.json
+audio-timing/ffcead299f59b45f.json
+# END generated: public audio-timing
 
 # ---------------------------------------------------------------
-# Chapter system: two glob patterns, PROVEN this session to match
-# exactly the legitimate files and nothing else.
+# Chapter system.
 #
 #   chapter/chapter-*.html   -> matches exactly the 258 pages linked
 #                                from a1.html-c2.html's own hrefs
 #                                (diffed byte-for-byte against disk;
 #                                zero extra, zero missing matches)
-#   chapter/chapter-*-data.js -> matches exactly the 258 corresponding
-#                                data files (same proof)
 #
-# These are glob patterns, not literal lines, because 516 files is
-# impractical to hand-list and the glob is provably exact against the
-# CURRENT repo. The workflow's own post-build assertion step (see
-# deploy-pages.yml) is the safety net against a FUTURE internal file
-# accidentally matching one of these patterns.
+# A glob, not literal lines, because 258 files is impractical to
+# hand-list and the glob is provably exact against the CURRENT repo.
+# The workflow's post-build assertion step (see deploy-pages.yml) is
+# the safety net against a FUTURE internal file matching it.
+#
+# Chapter DATA: only the 6 free Chapter 1 payloads are published.
+# Every other chapter's content is served by the Access Worker to
+# learners who own that level (access/worker/src/chapters.js; pages
+# rewritten by scripts/chapter-lock.mjs). Adding a paid data file
+# here would publish paid content to everyone, and the workflow
+# assertion refuses any data file not named below.
 # ---------------------------------------------------------------
 GLOB:chapter/chapter-*.html
-GLOB:chapter/chapter-*-data.js
+chapter/chapter-a1-1-data.js
+chapter/chapter-a2-1-genitiv-data.js
+chapter/chapter-b1-1-infinitiv-mit-zu-data.js
+chapter/chapter-b2-01-erweiterte-satzklammer-data.js
+chapter/chapter-c1-01-tempusgebrauch-stilistische-tempuswahl-data.js
+chapter/chapter-c2-01-zeitformen-der-verben-data.js
 
 # Exactly 7 named shared runtime files chapter pages depend on.
 # (The other ~140 files in chapter/ - CLICKABILITY-AUDIT.md,
@@ -160,10 +264,14 @@ chapter/chapter-tutor.js
 # Their absence broke tap-any-word, vocabulary-card rendering, and
 # story/dialogue rendering site-wide. Verified via grep across all
 # 258 chapter-*.html files before adding these lines.
-chapter/story-lexicon.js
 chapter/tokenizer.js
 chapter/chapter-story.js
-chapter/global-lexicon.js
+# Lexicon split (scripts/lexicon-split.mjs): the PUBLIC dictionary is only the
+# free pages' entries; each paid chapter's entries travel with its gated
+# payload. The full chapter/global-lexicon.js and chapter/story-lexicon.js are
+# sources only and are NOT published (pages load the -public files below).
+chapter/global-lexicon-public.js
+chapter/story-lexicon-public.js
 
 # ---------------------------------------------------------------
 # Issue reporting: exactly 2 files out of the whole report/ directory.

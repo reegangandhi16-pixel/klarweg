@@ -46,6 +46,10 @@
   var cache = {};
   function loadTiming(hash) {
     if (!hash || !/^[0-9a-f]{8,64}$/.test(hash)) return Promise.resolve(null);
+    // A paid chapter's sidecars come with its gated payload; only free
+    // Chapter 1 and homepage sidecars are public files.
+    var own = global.KW_CHAPTER_AUDIO && global.KW_CHAPTER_AUDIO.timing;
+    if (own && Object.prototype.hasOwnProperty.call(own, hash)) return Promise.resolve(own[hash]);
     if (!cache[hash]) {
       // 'no-cache' revalidates with the server (cheap 304 when unchanged), so a
       // 404 cached before a timing file was published can never hide it later.

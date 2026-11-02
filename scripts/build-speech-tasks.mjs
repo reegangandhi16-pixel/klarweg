@@ -13,6 +13,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
+import { dataFileFor } from './chapter-lock.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const OUT = path.join(ROOT, 'access/worker/src/speech-tasks.js');
@@ -22,8 +23,7 @@ export function speakingCounts() {
   const pages = fs.readdirSync(dir).filter((f) => /^chapter-[a-c][0-9]-.*\.html$/.test(f)).sort();
   const out = {};
   for (const page of pages) {
-    const html = fs.readFileSync(path.join(dir, page), 'utf8');
-    const src = html.match(/<script src="([^"]*data[^"]*\.js)[^"]*"/)[1].split('?')[0];
+    const src = dataFileFor(page);
     const ctx = { console: { log() {}, warn() {} } }; ctx.window = ctx; vm.createContext(ctx);
     vm.runInContext(fs.readFileSync(path.join(dir, src), 'utf8') + '\n;this.__C = CHAPTER;', ctx);
     const C = ctx.__C;

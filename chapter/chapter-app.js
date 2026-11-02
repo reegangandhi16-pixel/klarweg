@@ -33,7 +33,9 @@
   /* ---------- Global Lexicon (single shared-runtime load point) ----------
      chapter-app.js IS the shared runtime every chapter already loads, so it
      is the one place the cross-chapter dictionary gets loaded — no chapter
-     HTML file references global-lexicon.js directly. Fires immediately on
+     HTML file references it directly. Only the PUBLIC subset is published
+     (global-lexicon-public.js); a paid chapter's own entries arrive with its
+     gated payload (scripts/lexicon-split.mjs). Fires immediately on
      script execution (in parallel with the rest of page render); by the
      time a learner actually clicks a word the fetch has long resolved. */
   // Popup-only host: the lexicon is requested once the host page has loaded

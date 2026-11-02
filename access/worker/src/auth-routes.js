@@ -23,8 +23,6 @@ import { verifyGoogleIdToken } from "./google-auth.js";
 import { readEntitlements } from "./entitlements.js";
 import { createUserId } from "./user-id.js";
 import { checkLoginLimit, recordLoginFailure, checkSignupLimit, recordSignupAttempt, sweepRateCounters } from "./ratelimit.js";
-import { isSameOriginApi } from "./same-origin.js";
-import { clearPassCookie } from "./media.js";
 
 const SESSION_COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 const GOOGLE_NONCE_TTL_SECONDS = 60 * 5;
@@ -561,14 +559,16 @@ export async function logout(request, env) {
 
   await revokeSession(env.DB, token);
 
-  const headers = new Headers({
-    "Content-Type": "application/json",
-    "Set-Cookie": clearSessionCookie(request)
-  });
-  // The media pass (media.js) is only ever set on klarweg.in/api/media.
-  if (isSameOriginApi(request)) headers.append("Set-Cookie", clearPassCookie());
-
-  return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
+  return new Response(
+    JSON.stringify({ ok: true }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Set-Cookie": clearSessionCookie(request)
+      }
+    }
+  );
 }
 
 export async function me(request, env) {

@@ -93,8 +93,7 @@ async function req(env, method, url, { body, form, cookie, origin = SITE } = {})
   try { json = JSON.parse(buf.toString('utf8')); } catch {}
   return { status: res.status, json, headers: res.headers, buf, text: buf.toString('utf8') };
 }
-/* The kw_session Set-Cookie (logout on klarweg.in also clears the media pass). */
-const setCookie = (r) => (r.headers.getSetCookie ? r.headers.getSetCookie() : [r.headers.get('set-cookie')]).find((c) => c && c.startsWith('kw_session=')) || null;
+const setCookie = (r) => r.headers.get('set-cookie');
 const cookieOf = (r) => { const c = setCookie(r); return c ? c.split(';')[0] : null; };
 const attrs = (c) => c.split(';').slice(1).map((s) => s.trim());
 const email = () => `u${Math.random().toString(36).slice(2)}@example.com`;
@@ -168,8 +167,6 @@ test('klarweg.in: signup/me/logout under /api; cookie is Path=/api; SameSite=Lax
   const out = await req(env, 'POST', SAME_ORIGIN + '/auth/logout', { cookie: cookieOf(r) });
   assert.equal(out.status, 200);
   assert.deepEqual(attrs(setCookie(out)), ['Path=/api', 'HttpOnly', 'Secure', 'SameSite=Lax', 'Max-Age=0']);
-  const media = out.headers.getSetCookie().find((c) => c.startsWith('kw_media='));
-  assert.deepEqual(attrs(media), ['Path=/api/media', 'HttpOnly', 'Secure', 'SameSite=Lax', 'Max-Age=0']);
   assert.equal((await req(env, 'GET', SAME_ORIGIN + '/auth/me', { cookie: cookieOf(r) })).status, 401);
 });
 

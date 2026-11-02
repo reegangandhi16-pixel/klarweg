@@ -1,44 +1,65 @@
 name: Exam browser end-to-end
 
 # Real headless Chrome against the local dev server (exam Worker in-process, synthetic content, test tones, muted).
-# One job per scenario so they run in parallel. Deploys nothing, needs no secrets. Actions are pinned by commit SHA.
+# Deploys nothing, needs no secrets. Actions are pinned by commit SHA.
+#
+# FULL suite: every scenario, once directly and once through the real klarweg-access Worker in-process.
+# Runs when exam code changes (PR and main), weekly on main, and on manual dispatch.
+# Access Worker / package.json changes that are NOT exam code run the fast proxy subset in
+# exam-browser-smoke.yml instead; the access Worker unit and integration tests run on every PR in
+# the required npm-test check (site-tests.yml) and in exam-tests.yml.
+#
+# Jobs are grouped (the three long scenarios alone, the rest sequentially in one job) because
+# Actions bills each job rounded up to a whole minute: 32 short jobs cost ~58 billed minutes for
+# ~45 minutes of work.
 
 on:
   pull_request:
     paths:
-      - 'package.json'
       - 'exam-content/**'
       - 'exam-worker/**'
       - 'exam/**'
-      - 'access/worker/src/**'
-      - 'access/worker/test/**'
+      - 'access/worker/src/exam-proxy.js'
+      - 'access/worker/src/mfa-routes.js'
+      - 'access/worker/src/totp.js'
+      - 'access/worker/test/exam-proxy.test.mjs'
+      - 'access/worker/test/mfa.test.mjs'
       - 'access/worker/*.sql'
       - '.github/workflows/exam-browser.yml'
   push:
     branches: [main]
     paths:
-      - 'package.json'
       - 'exam-content/**'
       - 'exam-worker/**'
       - 'exam/**'
-      - 'access/worker/src/**'
-      - 'access/worker/test/**'
+      - 'access/worker/src/exam-proxy.js'
+      - 'access/worker/src/mfa-routes.js'
+      - 'access/worker/src/totp.js'
+      - 'access/worker/test/exam-proxy.test.mjs'
+      - 'access/worker/test/mfa.test.mjs'
       - 'access/worker/*.sql'
       - '.github/workflows/exam-browser.yml'
+  schedule:
+    - cron: '17 3 * * 1'   # Mondays 03:17 UTC, on main: full coverage for access/package changes that only ran the subset
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# A newer push to the same PR cancels the superseded run; main, schedule and dispatch runs are never cancelled.
+concurrency:
+  group: exam-browser-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   browser:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        scenario: [flagged, autoplay, hoeren-autoplay, practice, sprechen-topic, lease-expiry, two-tabs, rater-2fa, lesen-only, part-practice, access-admin, precheck, review-form, confidentiality, sleep-wake, focus-not-obscured]
-        # '1' = the same journey through the real klarweg-access Worker in-process (session → /exam proxy → service binding)
+        group: [practice, flagged, sprechen-topic, rest]
+        # '1' = the same journeys through the real klarweg-access Worker in-process (session → /exam proxy → service binding)
         proxy: ['0', '1']
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1
@@ -52,11 +73,11 @@ jobs:
           CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)"
           echo "CHROME=$CHROME_BIN" >> "$GITHUB_ENV"
           "$CHROME_BIN" --version
-      - name: Browser scenario ${{ matrix.scenario }}${{ matrix.proxy == '1' && ' (via Access proxy)' || '' }}
+      - name: Browser scenarios ${{ matrix.group }}${{ matrix.proxy == '1' && ' (via Access proxy)' || '' }}
         env:
           KX_DEV_PROXY: ${{ matrix.proxy }}
-          KX_E2E_ONLY: ${{ matrix.scenario }}
           KX_E2E_FORM: p1
           CHROME_ARGS: --no-sandbox
           KX_E2E_VERBOSE: '1'   # step-by-step log in the job output, so a failure can be diagnosed from CI alone
-        run: node exam-worker/test/browser-e2e.mjs
+          GROUP: ${{ matrix.group }}
+        run: bash exam-worker/test/run-browser-scenarios.sh

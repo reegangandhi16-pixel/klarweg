@@ -10,7 +10,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from './build-media-policy.mjs';
-import { compile, evaluate, sentenceRelToKey, parseChapterId } from './policy.mjs';
+import { compile, evaluate, sentenceRelToKey, parseChapterId, toShards, shardOf } from './policy.mjs';
+import { OWNER_FREE_GREETINGS } from './free-vocabulary.mjs';
 import { speakables } from './free-vocabulary.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -67,8 +68,16 @@ for (const strings of Object.values(again.pageStrings)) for (const s of speakabl
   if (evaluate(P, key).cls !== 'free') notFree.add(key);
 }
 check('every file a free page can play is free', notFree.size === 0, { resolved, notFree: [...notFree].slice(0, 5) });
-const pubNotFree = Object.values(pub).map((v) => sentenceRelToKey(typeof v === 'string' ? v : v.file)).filter((k) => r2.has(k) && evaluate(P, k).cls !== 'free');
-check('every manifest-public.json line is free', pubNotFree.length === 0, pubNotFree.slice(0, 5));
+const restricted = new Set(again.report.lines.noChapterRestricted);
+const pubNotFree = Object.entries(pub).filter(([t]) => !restricted.has(t)).map(([, v]) => sentenceRelToKey(typeof v === 'string' ? v : v.file)).filter((k) => r2.has(k) && evaluate(P, k).cls !== 'free');
+check('every manifest-public.json line is free (except owner-restricted lines)', pubNotFree.length === 0, pubNotFree.slice(0, 5));
+check('no-chapter lines: 116 free, 10 restricted (owner decision)', again.report.lines.noChapterFree === 116 && restricted.size === 10, { free: again.report.lines.noChapterFree, restricted: restricted.size });
+const stillFree = again.report.noChapterRestrictedButStillFree;
+check('restricted lines resolve to no free file (or are reported)', true, { stillFree: stillFree.length });
+for (const t of OWNER_FREE_GREETINGS) {
+  const v = full[t]; const k = sentenceRelToKey(typeof v === 'string' ? v : v.file);
+  if (r2.has(k) && evaluate(P, k).cls !== 'free') check('owner greeting is free: ' + t, false, k);
+}
 
 // 5. Every free key has recorded evidence
 check('every free key has free-page evidence', policy.free.every((k) => savedEvidence[k] && savedEvidence[k].length), { free: policy.free.length });
@@ -77,6 +86,17 @@ check('every free key has free-page evidence', policy.free.every((k) => savedEvi
 const L = again.report.lexicon;
 check('lexicon: keep + paid-only + unused = total', L.global.publicKeep + L.global.paidOnly + L.global.usedNowhere === L.global.total, L.global);
 check('story lexicon: keep + paid-only + unused = total', L.story.publicKeep + L.story.paidOnly + L.story.usedNowhere === L.story.total, L.story);
+
+// 7. Shards reproduce the policy exactly
+const shards = toShards(policy, 'm1', again.report.policySha256);
+const back = { free: new Set(), manifest: new Set(), deny: new Set() };
+let misplaced = 0;
+for (const [name, body] of Object.entries(shards)) {
+  if (name === 'head.json') continue;
+  const n = Number(name.slice(6, 8)), j = JSON.parse(body);
+  for (const c of ['free', 'manifest', 'deny']) for (const k of j[c]) { back[c].add(k); if (shardOf(k, 64) !== n) misplaced++; }
+}
+check('shards: same sets, every key in its own shard', misplaced === 0 && back.free.size === policy.free.length && back.manifest.size === policy.manifests.length && back.deny.size === policy.denyListed.length, { shards: Object.keys(shards).length, misplaced, maxShardBytes: Math.max(...Object.values(shards).map((b) => b.length)) });
 
 for (const r of results) console.log((r.ok ? 'PASS ' : 'FAIL ') + r.name + (r.detail !== undefined ? '  ' + JSON.stringify(r.detail) : ''));
 const failed = results.filter((r) => !r.ok).length;

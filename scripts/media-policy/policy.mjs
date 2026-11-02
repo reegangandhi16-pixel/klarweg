@@ -87,3 +87,23 @@ export function evaluate(compiled, key) {
   if (WORD_PREFIXES.some((p) => key.startsWith(p))) return { cls: 'word' };
   return { cls: 'deny', reason: 'default' };
 }
+
+/* FNV-1a 32-bit over the UTF-8 bytes → shard number. Must equal
+   access/worker/src/media.js shardOf() (both test the same vectors). */
+export function shardOf(key, shards) {
+  let h = 0x811c9dc5;
+  for (const b of new TextEncoder().encode(key)) { h ^= b; h = Math.imul(h, 0x01000193) >>> 0; }
+  return h % shards;
+}
+export const SHARDS = 64;
+/* The R2 layout read by media.js: head.json + shard-NN.json. */
+export function toShards(policy, release, policySha256, shards = SHARDS) {
+  const files = {};
+  files['head.json'] = JSON.stringify({ schema: 1, release, shards, policySha256, chapters: policy.chapters, freeChapters: policy.freeChapters });
+  const buckets = Array.from({ length: shards }, () => ({ free: [], manifest: [], deny: [] }));
+  for (const k of policy.free) buckets[shardOf(k, shards)].free.push(k);
+  for (const k of policy.manifests) buckets[shardOf(k, shards)].manifest.push(k);
+  for (const k of policy.denyListed) buckets[shardOf(k, shards)].deny.push(k);
+  buckets.forEach((b, i) => { files['shard-' + String(i).padStart(2, '0') + '.json'] = JSON.stringify(b); });
+  return files;
+}

@@ -8,9 +8,10 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
   compile, evaluate, sentenceRelToKey, vocabRelToKey, formRelToKey, wordsRelToKey, urlToKey,
-  parseChapterId, chapterPrefixOfKey, AUDIO_ORIGIN,
+  parseChapterId, chapterPrefixOfKey, AUDIO_ORIGIN, shardOf, toShards,
 } from './media-policy/policy.mjs';
-import { chapterGermanStrings, homepageGermanStrings, speakables, lexiconNeeds, normWord } from './media-policy/free-vocabulary.mjs';
+import { chapterGermanStrings, homepageGermanStrings, speakables, lexiconNeeds, normWord, OWNER_HOMEPAGE_WORDS, OWNER_FREE_GREETINGS, visibleText, words } from './media-policy/free-vocabulary.mjs';
+import fs from 'node:fs';
 import { enginePlayer, freeDataFiles, loadChapterFile } from './media-policy/build-media-policy.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -112,4 +113,29 @@ test('player resolver: free Chapter 1 audio resolves on the audio origin', async
 test('builder refuses to write its outputs inside the repository', () => {
   assert.throws(() => execFileSync(process.execPath, ['scripts/media-policy/build-media-policy.mjs', '--listing', 'x.json', '--out', 'tmp-out'], { cwd: ROOT, stdio: 'pipe' }),
     (e) => e.status === 2 && /inside the repository/.test(String(e.stderr)));
+});
+
+test('shardOf matches access/worker media.js on the same fixed vectors', () => {
+  assert.equal(shardOf('', 64), 0x811c9dc5 % 64);
+  assert.equal(shardOf('story/A1_017_S003.mp3', 64), 25);
+  assert.equal(shardOf('vocab/audio/female/caf\u00e9.mp3', 64), 27);
+});
+
+test('toShards: head + 64 shards, every key once, in its own shard', () => {
+  const policy = { free: ['a.mp3', 'b.mp3'], manifests: ['m.json'], denyListed: ['words/female/x.mp3'], chapters: { A1_017: 'a1-17-x' }, freeChapters: ['a1-1-alphabet'] };
+  const files = toShards(policy, 'm1', 'abc');
+  assert.equal(Object.keys(files).length, 65);
+  const head = JSON.parse(files['head.json']);
+  assert.deepEqual([head.schema, head.release, head.shards, head.policySha256], [1, 'm1', 64, 'abc']);
+  const seen = [];
+  for (const [n, b] of Object.entries(files)) if (n !== 'head.json') { const j = JSON.parse(b); for (const k of [...j.free, ...j.manifest, ...j.deny]) { seen.push(k); assert.equal(shardOf(k, 64), Number(n.slice(6, 8))); } }
+  assert.deepEqual(seen.sort(), ['a.mp3', 'b.mp3', 'm.json', 'words/female/x.mp3']);
+});
+
+test('owner decisions: exactly 11 homepage words, all visible on the homepage; 11 greetings', () => {
+  assert.deepEqual([...OWNER_HOMEPAGE_WORDS], ['Hören', 'Lesen', 'Schreiben', 'Sprechen', 'Akkusativ', 'Dativ', 'Nominativ', 'geben', 'gerne', 'trinke', 'Stück']);
+  for (const w of ['Im', 'Start', 'Fit', 'Diplom', 'Adverb', 'See', 'Live']) assert.ok(!OWNER_HOMEPAGE_WORDS.includes(w), w);
+  const vis = new Set(words(visibleText(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'))));
+  for (const w of OWNER_HOMEPAGE_WORDS) assert.ok(vis.has(w), w);
+  assert.equal(OWNER_FREE_GREETINGS.length, 11);
 });

@@ -19,9 +19,9 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
   AUDIO_ORIGIN, WORD_PREFIXES, sentenceRelToKey, vocabRelToKey, formRelToKey, wordsRelToKey, urlToKey,
-  parseChapterId, chapterPrefixOfKey, compile, evaluate,
+  parseChapterId, chapterPrefixOfKey, compile, evaluate, toShards,
 } from './policy.mjs';
-import { chapterGermanStrings, homepageGermanStrings, visibleText, speakables, words, lexiconNeeds } from './free-vocabulary.mjs';
+import { chapterGermanStrings, homepageGermanStrings, visibleText, speakables, words, lexiconNeeds, OWNER_HOMEPAGE_WORDS, OWNER_FREE_GREETINGS } from './free-vocabulary.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
@@ -124,7 +124,7 @@ export async function build({ listing }) {
     const key = sentenceRelToKey(rel);
     ref(key, 'sentence');
     const chapter = typeof v === 'object' ? v.chapter : null;
-    if (!chapter) { lines.noChapter++; noChapter.push({ text, key }); addFree(key, { source: 'homepage/no-chapter line', text, layer: 'manifest' }); continue; }
+    if (!chapter) { lines.noChapter++; noChapter.push({ text, key }); continue; }   // decided after the homepage is read
     if (freeChapterSet.has(chapter)) { lines.freeChapter++; addFree(key, { source: chapter, text, layer: 'manifest' }); continue; }
     lines.paid++;
     const c = chapterPrefixOfKey(key), p = parseChapterId(chapter);
@@ -171,7 +171,20 @@ export async function build({ listing }) {
   }
   const html = read('index.html');
   const hp = homepageGermanStrings(html, noChapter.map((x) => x.text));
-  pageStrings['index.html'] = hp.strings;
+  /* No-chapter lines: free when the homepage shows them or the owner listed them. */
+  const hpShown = new Set(hp.noChapterFound), greet = new Set(OWNER_FREE_GREETINGS);
+  const missingGreetings = OWNER_FREE_GREETINGS.filter((t) => !noChapter.some((x) => x.text === t));
+  if (missingGreetings.length) throw new Error('owner greeting not in the manifest: ' + missingGreetings.join(', '));
+  lines.noChapterFree = 0; lines.noChapterRestricted = [];
+  for (const x of noChapter) {
+    if (hpShown.has(x.text) || greet.has(x.text)) { lines.noChapterFree++; addFree(x.key, { source: hpShown.has(x.text) ? 'homepage line' : 'owner greeting', text: x.text, layer: 'manifest' }); }
+    else lines.noChapterRestricted.push(x.text);
+  }
+  /* Owner-approved homepage copy words: each must really be on the homepage. */
+  const vis = new Set(words(visibleText(html)));
+  const absent = OWNER_HOMEPAGE_WORDS.filter((w) => !vis.has(w));
+  if (absent.length) throw new Error('owner homepage word not on the homepage: ' + absent.join(', '));
+  pageStrings['index.html'] = [...hp.strings, ...OWNER_HOMEPAGE_WORDS];
   pages.unshift({ page: 'index.html', status: 'free (homepage)' });
 
   const resolvedFromFree = new Set();
@@ -311,6 +324,7 @@ export async function build({ listing }) {
       otherUnclassified: objects.map((o) => o.key).filter((k) => !referenced.has(k) && !freeEvidence.has(k) && !k.endsWith('.json') && !denyListed.includes(k)),
     },
     noChapterLinesNotOnHomepage: noChapterFlags,
+    noChapterRestrictedButStillFree: noChapter.filter((x) => lines.noChapterRestricted.includes(x.text) && freeEvidence.has(x.key)).map((x) => ({ text: x.text, key: x.key, evidence: freeEvidence.get(x.key).slice(0, 2) })),
     homepageEnglishCopyFlagged: flaggedCopy,
     pages: pageList,
     lexicon,
@@ -328,12 +342,22 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   if (!listingPath || !out) { console.error('usage: --listing <file> --out <dir>'); process.exit(2); }
   if (path.resolve(out).startsWith(ROOT + path.sep)) { console.error('refusing to write outputs inside the repository'); process.exit(2); }
   fs.mkdirSync(out, { recursive: true });
-  const { policyJson, report, freeWordRows, evidence } = await build({ listing: JSON.parse(fs.readFileSync(listingPath, 'utf8')) });
+  const { policy, policyJson, report, freeWordRows, evidence } = await build({ listing: JSON.parse(fs.readFileSync(listingPath, 'utf8')) });
   fs.writeFileSync(path.join(out, 'policy.json'), policyJson);
   fs.writeFileSync(path.join(out, 'free-evidence.json'), JSON.stringify(evidence));
   fs.writeFileSync(path.join(out, 'report.json'), JSON.stringify(report, null, 2));
   fs.writeFileSync(path.join(out, 'free-words.tsv'), 'text\tlayer\tkey\tpage\n' + [...new Map(freeWordRows.map((r) => [r.join('\t'), r])).values()].map((r) => r.join('\t')).sort().join('\n') + '\n');
   fs.writeFileSync(path.join(out, 'free-pages.tsv'), 'page\tpublished\tstatus\n' + report.pages.map((p) => [p.page, p.published, p.status].join('\t')).join('\n') + '\n');
   fs.writeFileSync(path.join(out, 'lexicon-dryrun.json'), JSON.stringify({ summary: report.lexicon, perChapter: report.lexiconPerChapter }, null, 2));
+  const shardRelease = arg('--shards');
+  if (shardRelease) {
+    if (!/^m[0-9]{1,4}$/.test(shardRelease)) { console.error('--shards <release> must look like m1'); process.exit(2); }
+    const dir = path.join(out, 'media-policy', shardRelease);
+    fs.mkdirSync(dir, { recursive: true });
+    const files = toShards(policy, shardRelease, report.policySha256);
+    const sums = [];
+    for (const [name, body] of Object.entries(files)) { fs.writeFileSync(path.join(dir, name), body); sums.push(crypto.createHash('sha256').update(body).digest('hex') + '  ' + name); }
+    fs.writeFileSync(path.join(out, 'media-policy-' + shardRelease + '.SHA256SUMS'), sums.join('\n') + '\n');
+  }
   console.log(JSON.stringify({ policySha256: report.policySha256, classCounts: report.classCounts, freeKeys: report.freeKeys }, null, 1));
 }

@@ -100,3 +100,18 @@ export function lexiconNeeds(strings, { G, I, CAPS, S }) {
   }
   return { g, inf, caps, story };
 }
+
+/* OWNER DECISION 2026-11-02 (Stage 0 review): German words that appear only in
+   the homepage's visible copy and whose audio is free. Exactly these 11; Im,
+   Start, Fit, Diplom and all English words / single letters stay restricted. */
+export const OWNER_HOMEPAGE_WORDS = Object.freeze([
+  'Hören', 'Lesen', 'Schreiben', 'Sprechen', 'Akkusativ', 'Dativ', 'Nominativ',
+  'geben', 'gerne', 'trinke', 'Stück',
+]);
+/* OWNER DECISION 2026-11-02: homepage/no-chapter audio lines are free when the
+   homepage shows them, plus these common greetings (also used in paid chapters).
+   Every other no-chapter line is restricted. */
+export const OWNER_FREE_GREETINGS = Object.freeze([
+  'Bitte', 'Danke', 'Guten Abend', 'Guten Morgen', 'Guten Tag', 'Hallo', 'Ja', 'Nein',
+  'Tschüss', 'Wie geht es Ihnen?', 'Woher kommen Sie?',
+]);

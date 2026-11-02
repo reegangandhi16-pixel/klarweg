@@ -10,7 +10,7 @@
 #   Manual: scripts/site-artifact.sh /tmp/kw-site &&
 #           scripts/site-publish.sh /tmp/kw-site https://github.com/reegangandhi16-pixel/klarweg-site.git
 #
-# The site repo tree = artifact + CNAME (klarweg.in) + .nojekyll. Files no
+# The site repo tree = artifact + CNAME (SITE_CNAME, default klarweg.in) + .nojekyll. Files no
 # longer in the artifact are deleted from the site. The leak check runs again
 # on the exact tree being pushed. Prints file names/counts only.
 set -euo pipefail
@@ -30,7 +30,11 @@ git checkout --quiet -B main
 # Replace the tree with the artifact (keep .git only).
 find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 cp -R "$ART"/. .
-printf 'klarweg.in\n' > CNAME
+# Custom domain file: SITE_CNAME (default klarweg.in). SITE_CNAME="" publishes
+# with NO CNAME (e.g. before the domain moves to this repo).
+rm -f CNAME
+SITE_CNAME="${SITE_CNAME-klarweg.in}"
+[ -n "$SITE_CNAME" ] && printf '%s\n' "$SITE_CNAME" > CNAME
 : > .nojekyll
 
 # Second, independent check on exactly what will be pushed.

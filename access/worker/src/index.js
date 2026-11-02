@@ -16,6 +16,7 @@ import {
   reviewSavedWord
 } from "./saved-words.js";
 import { listProgress, saveProgress } from "./progress.js";
+import { savedWordsLexicon } from "./saved-lexicon.js";
 function json(data, status = 200) {
   return Response.json(data, { status });
 }
@@ -130,6 +131,10 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
 
     if (request.method === "POST" && url.pathname === "/saved-words") {
       return withCors(await createSavedWord(request, env), request);
+    }
+
+    if (request.method === "GET" && url.pathname === "/saved-words/lexicon") {
+      return withCors(await savedWordsLexicon(request, env), request);
     }
 
     if (request.method === "GET" && url.pathname === "/saved-words/counts") {

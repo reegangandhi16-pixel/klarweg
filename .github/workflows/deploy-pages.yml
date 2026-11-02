@@ -129,7 +129,7 @@ jobs:
               base="$(basename "$f")"
               case "$base" in
                 chapter-app.js|chapter.css|chapter-tutor.js) ;;
-                story-lexicon.js|tokenizer.js|chapter-story.js|global-lexicon.js) ;;
+                tokenizer.js|chapter-story.js) ;;
                 global-lexicon-public.js|story-lexicon-public.js) ;;
                 # Free Chapter 1 payloads only - paid chapter content
                 # is served by the Access Worker, never by Pages.

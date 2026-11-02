@@ -96,6 +96,11 @@ account/kw-account.js
 # ---------------------------------------------------------------
 public/audio/kw-audio-engine.js
 public/audio/kw-tts-config.js
+# Public subset of the audio manifest (free Chapter 1, homepage, legacy
+# lines), read by kw-audio-engine.js?v=2.
+public/audio/manifest-public.json
+# TRANSITION ONLY: the full corpus stays published until pages cached
+# before this deploy have expired; removed by the follow-up PR.
 public/audio/manifest.json
 public/audio/a1-words-manifest.json
 public/audio/a2-words-manifest.json
@@ -112,6 +117,94 @@ public/audio/kw-story-exceptions.js
 # Word popup stylesheet shared by every chapter page and the homepage
 # (chapter-app.js renderWordPop; homepage uses it in popup-only host mode).
 public/kw-word-pop.css
+# BEGIN generated: public audio-timing (scripts/chapter-lock.mjs audio) - do not edit
+audio-timing/00d474b350531f00.json
+audio-timing/06b36c5d56b99258.json
+audio-timing/07c00bec2d518472.json
+audio-timing/0f12a4c655930d84.json
+audio-timing/12f4693913d1acb8.json
+audio-timing/134d1ac7ed5297c2.json
+audio-timing/19132597c1eed08a.json
+audio-timing/1953e500573f5f55.json
+audio-timing/1adb743e8e8b798b.json
+audio-timing/1ccc3d8d4135895f.json
+audio-timing/1dd2cfb7687f41d1.json
+audio-timing/1f1d1a75d6f3b622.json
+audio-timing/2079ca117fda3fd9.json
+audio-timing/212b0d8051f60251.json
+audio-timing/289f7d1085b1502c.json
+audio-timing/2bb30aa59c4dd0e6.json
+audio-timing/32598b6139e3dda4.json
+audio-timing/3d7b92f30a29d94f.json
+audio-timing/3ed2f282d6e57867.json
+audio-timing/3f0fd16573950fc3.json
+audio-timing/41e23ced38e7ccd4.json
+audio-timing/4e261eecdb1a3f10.json
+audio-timing/5247894de1a8c8f3.json
+audio-timing/53e47d7d35e3c515.json
+audio-timing/56c89914ecf497ae.json
+audio-timing/5c65adc7d14c5b9f.json
+audio-timing/5cac362ced29a160.json
+audio-timing/630ad6af6121881c.json
+audio-timing/64389c32d7e6e910.json
+audio-timing/68090ac1454fe863.json
+audio-timing/69c01cb79d2331b5.json
+audio-timing/6bc9bab3614ef511.json
+audio-timing/7632e9f59b1faf35.json
+audio-timing/7646f4fcf3de137c.json
+audio-timing/7719d6bf66f5321b.json
+audio-timing/79cb658864a1bd7e.json
+audio-timing/7f1531642c878271.json
+audio-timing/80ed9526e01ca348.json
+audio-timing/8a0507eb39b9c6f8.json
+audio-timing/8ab269cfdd0ad0b9.json
+audio-timing/91f3c821deab3948.json
+audio-timing/920ddaedcfa8f116.json
+audio-timing/923c7a762a1abf4e.json
+audio-timing/94c1b013c6de40ae.json
+audio-timing/958c9ed26addd822.json
+audio-timing/97f52f3bdffceb89.json
+audio-timing/a1bae83ede0c8727.json
+audio-timing/a1dbdacb532c6dd2.json
+audio-timing/a7b82dcb90fc4c84.json
+audio-timing/aabbe400909cb863.json
+audio-timing/ab0f00014fab57e8.json
+audio-timing/ab735bea40ad0b48.json
+audio-timing/abdeb23bffdc8b41.json
+audio-timing/adc6d67a1dcfd7a7.json
+audio-timing/aea12053f89dfee4.json
+audio-timing/aeb2476394641199.json
+audio-timing/afe8dbd84a55e119.json
+audio-timing/b4adf4c59077ee71.json
+audio-timing/b7735745502e94db.json
+audio-timing/bd7f32b89d38efe1.json
+audio-timing/c2ab3c39a984ebe0.json
+audio-timing/cd24d1a32b900fcf.json
+audio-timing/cd6dfbdcea346d08.json
+audio-timing/cf6fafe23faf4ea9.json
+audio-timing/d0cf01737eded0a1.json
+audio-timing/d1a7d01bec55f212.json
+audio-timing/d38ef8e7fa8ae26c.json
+audio-timing/d46a3719de7fe93f.json
+audio-timing/d9020718844783d0.json
+audio-timing/dad8f0883c0c68b9.json
+audio-timing/db4363476693a0d2.json
+audio-timing/dc66a174fd40d12f.json
+audio-timing/e1ebfff6e670ebab.json
+audio-timing/e5ff9213e30b3397.json
+audio-timing/e727f4cdd53b3028.json
+audio-timing/eb1833344ecd1d7e.json
+audio-timing/eb6de4844fc91115.json
+audio-timing/f19be2bdc8124c5a.json
+audio-timing/f2648cac92251285.json
+audio-timing/f4020a2026323952.json
+audio-timing/f9fc5d7ccd6fd5c2.json
+audio-timing/fb5cba77369e7559.json
+audio-timing/fbb63beda12fbf0c.json
+audio-timing/ffcead299f59b45f.json
+# END generated: public audio-timing
+# TRANSITION ONLY: every sidecar stays published until cached pages
+# expire; the follow-up PR removes this glob.
 GLOB:audio-timing/[0-9a-f]*.json
 
 # ---------------------------------------------------------------

@@ -118,6 +118,11 @@
      1. MANIFEST (optional fast path)
      ════════════════════════════════════════════════════════════════════ */
   var MAP = {}, MAP_LC = {}, MAP_CANON = {}, MAP_SENT = {}, manifestReady = false, manifestBase = '/audio/';
+  /* A paid chapter's own lines (window.KW_CHAPTER_AUDIO) come from its gated
+     payload, a <script> that can finish AFTER the public manifest has loaded.
+     mergeChapterAudio() runs on every lookup and merges that payload once;
+     a manifest (re)load clears the marker so the lines are merged again. */
+  var mergedChapterAudio = null, mergeChapterAudio = function () {};
   var A1MAP = {}, A1MAP_LC = {}, A1MAP_CANON = {}, a1Ready = false;   // dual-voice vocab map (all levels merged)
   var vocabSourceStats = [];
   // Dual-voice vocabulary is spread over MORE THAN ONE published manifest and
@@ -213,10 +218,39 @@
     // manifest is fetched from the wrong (local) path and never loads.
     setTimeout(startLoading, 0);
 
+    function indexEntry(k, v) {
+      MAP_LC[normalize(k).toLowerCase()] = v;
+      canonAdd(MAP_CANON, k, v);
+      // A stored line that is ONE sentence can safely answer that
+      // sentence's request. A stored line made of SEVERAL sentences
+      // cannot: the player asks for one sentence at a time and would
+      // replay the whole line per sentence, so it is left unmapped
+      // and reported as genuinely missing instead.
+      var parts = splitSentences(k);
+      if (parts.length === 1) canonAdd(MAP_SENT, parts[0], v);
+    }
+    /* A paid chapter's own lines, delivered with its gated payload. Public
+       entries win on a clash, exactly as the single manifest did. */
+    function addEntries(entries) {
+      for (var k in entries) if (Object.prototype.hasOwnProperty.call(entries, k) && !Object.prototype.hasOwnProperty.call(MAP, k)) {
+        MAP[k] = entries[k];
+        indexEntry(k, entries[k]);
+      }
+    }
+    mergeChapterAudio = function () {
+      var own = global.KW_CHAPTER_AUDIO;
+      if (!own || !own.entries || own === mergedChapterAudio) return;
+      mergedChapterAudio = own;
+      addEntries(own.entries);
+    };
+
     function startLoading() {
       var ab = audioBase();
       // Prefer the CDN copy of each manifest first, then local fallbacks.
-      var candidates = [base + 'manifest.json', '/audio/manifest.json', ab + 'manifest.json', 'public/audio/manifest.json'];
+      // manifest-public.json: free Chapter 1, homepage and legacy lines only.
+      // A paid chapter's own lines arrive with its gated payload
+      // (window.KW_CHAPTER_AUDIO, merged below), never from a public file.
+      var candidates = [base + 'manifest-public.json', '/audio/manifest.json', ab + 'manifest.json', 'public/audio/manifest-public.json'];
       var i = 0;
       (function next() {
         if (i >= candidates.length) { manifestReady = true; emit('manifest-loaded', { entries: 0, source: 'none' }); return; }
@@ -225,17 +259,9 @@
           .then(function (json) {
             MAP = (json && json.entries) ? json.entries : (json || {});
             MAP_LC = {}; MAP_CANON = {}; MAP_SENT = {};
-            for (var k in MAP) if (Object.prototype.hasOwnProperty.call(MAP, k)) {
-              MAP_LC[normalize(k).toLowerCase()] = MAP[k];
-              canonAdd(MAP_CANON, k, MAP[k]);
-              // A stored line that is ONE sentence can safely answer that
-              // sentence's request. A stored line made of SEVERAL sentences
-              // cannot: the player asks for one sentence at a time and would
-              // replay the whole line per sentence, so it is left unmapped
-              // and reported as genuinely missing instead.
-              var parts = splitSentences(k);
-              if (parts.length === 1) canonAdd(MAP_SENT, parts[0], MAP[k]);
-            }
+            for (var k in MAP) if (Object.prototype.hasOwnProperty.call(MAP, k)) indexEntry(k, MAP[k]);
+            mergedChapterAudio = null;
+            mergeChapterAudio();
             manifestReady = true;
             emit('manifest-loaded', { entries: Object.keys(MAP).length, source: candidates[i] });
           })
@@ -267,6 +293,7 @@
   })();
 
   function manifestEntry(text) {
+    mergeChapterAudio();
     var n = normalize(text);
     return MAP[n]
         || MAP_LC[n.toLowerCase()]

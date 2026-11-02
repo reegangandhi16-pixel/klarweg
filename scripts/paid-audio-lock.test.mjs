@@ -78,7 +78,7 @@ function browser(own) {
     addEventListener() {}, dispatchEvent() {}, CustomEvent: function () {},
     localStorage: { getItem: () => null, setItem() {} }, sessionStorage: { getItem: () => null, setItem() {} },
     AbortController: globalThis.AbortController, URL, Promise, console,
-    fetch: (u) => { fetched.push(String(u)); const ok = /manifest-public\.json$/.test(u); return Promise.resolve({ ok, status: ok ? 200 : 404, json: () => Promise.resolve(ok ? { entries: PUB } : {}) }); },
+    fetch: (u) => { fetched.push(String(u)); const ok = /manifest-public\.json$/.test(u); return Promise.resolve({ ok, status: ok ? 200 : 404, json: () => Promise.resolve(ok ? { entries: { ...PUB } } : {}) }); },
   };
   win.window = win;
   return { win, fetched, timers };
@@ -99,6 +99,24 @@ test('engine: loads the public manifest and merges the chapter\'s own lines', as
   assert.equal(typeof win.audioUrl, 'function');
   assert.ok(win.audioUrl(text), 'paid line resolves from the gated payload');
   assert.ok(win.audioUrl(Object.keys(PUB).find((k) => PUB[k] && PUB[k].chapter)), 'public line still resolves');
+});
+
+test('engine: a chapter payload that arrives AFTER the public manifest still resolves', async () => {
+  /* Page order: the engine script runs, then <script src=".../api/chapters/<id>.js">.
+     The public manifest can finish loading before that Worker response arrives. */
+  const c = loadChapters().find((x) => x.number === 17 && x.id.startsWith('a1-'));
+  const sb = { window: {} };
+  vm.runInNewContext(releasePayload(c).toString('utf8'), sb);
+  const own = sb.window.KW_CHAPTER_AUDIO;
+  const [text] = Object.keys(own.entries);
+  const { win, timers } = browser(undefined);
+  loadEngine(win);
+  while (timers.length) timers.shift()();
+  for (let i = 0; i < 20; i++) await new Promise((r) => setImmediate(r));
+  assert.equal(win.audioUrl(text), undefined, 'not resolvable before the payload exists');
+  win.KW_CHAPTER_AUDIO = own;                       // the gated payload executes now
+  assert.ok(win.audioUrl(text), 'paid line resolves once the payload has run');
+  assert.ok(win.audioUrl(Object.keys(PUB).find((k) => PUB[k] && PUB[k].chapter)), 'public lines unaffected');
 });
 
 test('word-sync: a chapter\'s own timing needs no request', async () => {

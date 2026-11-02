@@ -118,6 +118,11 @@
      1. MANIFEST (optional fast path)
      ════════════════════════════════════════════════════════════════════ */
   var MAP = {}, MAP_LC = {}, MAP_CANON = {}, MAP_SENT = {}, manifestReady = false, manifestBase = '/audio/';
+  /* A paid chapter's own lines (window.KW_CHAPTER_AUDIO) come from its gated
+     payload, a <script> that can finish AFTER the public manifest has loaded.
+     mergeChapterAudio() runs on every lookup and merges that payload once;
+     a manifest (re)load clears the marker so the lines are merged again. */
+  var mergedChapterAudio = null, mergeChapterAudio = function () {};
   var A1MAP = {}, A1MAP_LC = {}, A1MAP_CANON = {}, a1Ready = false;   // dual-voice vocab map (all levels merged)
   var vocabSourceStats = [];
   // Dual-voice vocabulary is spread over MORE THAN ONE published manifest and
@@ -232,6 +237,12 @@
         indexEntry(k, entries[k]);
       }
     }
+    mergeChapterAudio = function () {
+      var own = global.KW_CHAPTER_AUDIO;
+      if (!own || !own.entries || own === mergedChapterAudio) return;
+      mergedChapterAudio = own;
+      addEntries(own.entries);
+    };
 
     function startLoading() {
       var ab = audioBase();
@@ -249,8 +260,8 @@
             MAP = (json && json.entries) ? json.entries : (json || {});
             MAP_LC = {}; MAP_CANON = {}; MAP_SENT = {};
             for (var k in MAP) if (Object.prototype.hasOwnProperty.call(MAP, k)) indexEntry(k, MAP[k]);
-            var own = global.KW_CHAPTER_AUDIO;
-            if (own && own.entries) addEntries(own.entries);
+            mergedChapterAudio = null;
+            mergeChapterAudio();
             manifestReady = true;
             emit('manifest-loaded', { entries: Object.keys(MAP).length, source: candidates[i] });
           })
@@ -282,6 +293,7 @@
   })();
 
   function manifestEntry(text) {
+    mergeChapterAudio();
     var n = normalize(text);
     return MAP[n]
         || MAP_LC[n.toLowerCase()]

@@ -1,6 +1,7 @@
 /* media.js — klarweg.in/api/media/<key>: key validation, free vs paid, the
-   existing session + purchase check on every paid request, Range/HEAD/304,
-   cache headers, and that nothing outside klarweg.in is served. */
+   existing session + purchase check on every paid request, used-files-only
+   (chapter payload / word manifest), Range/HEAD/304, cache headers, and that
+   nothing outside klarweg.in is served. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -8,7 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import worker from '../src/index.js';
 import { createD1 } from './d1-sqlite.mjs';
-import { parseRange, classify } from '../src/media.js';
+import { parseRange, classify, _resetMediaCache } from '../src/media.js';
 import { FREE_MEDIA } from '../src/media-free.js';
 
 const WORKER_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -19,24 +20,51 @@ const ctx = { waitUntil() {} };
 /* Real keys from media-free.js, plus paid fixtures. */
 const FREE_WORD = [...FREE_MEDIA].find((k) => k.startsWith('words/'));
 const FREE_OTHER = [...FREE_MEDIA].find((k) => k.startsWith('dialogues/'));
+const FREE_CH1 = [...FREE_MEDIA].find((k) => /^story\/A1_001_/.test(k));
+const J = (o) => JSON.stringify(o);
 const AUDIO = {
-  'story/A1_001_S001.mp3': 'free-a1-chapter-1',
+  [FREE_CH1]: 'free-a1-chapter-1',
   [FREE_WORD]: 'free-word',
   [FREE_OTHER]: 'free-line',
   'story/A1_017_S003.mp3': 'paid-a1-17-' + 'x'.repeat(1000),
   'speaking/B2_009_P001.mp3': 'paid-b2-9',
   'words/female/bbbb000000000002.mp3': 'paid-word',
+  'words/male/bbbb000000000002.mp3': 'paid-word-male',
   'vocab/audio/female/café.mp3': 'paid-word-accent',
   'dialogues/not-on-free-list.mp3': 'restricted-line',
+  /* Unused recordings: in the bucket, but no page plays them. */
+  'story/A1_017_S099.mp3': 'unused-lesson',
+  'story/A1_001_S999.mp3': 'unused-chapter-1',
+  'words/female/cccc000000000003.mp3': 'unused-word',
+  'vocab/audio/male/unbenutzt.mp3': 'unused-vocab',
+  /* The word manifests the player loads from this bucket. */
+  'a1-words-manifest.json': J({ Haus: { female: '/audio/words/female/bbbb000000000002.mp3', male: '/audio/words/male/bbbb000000000002.mp3' } }),
+  'a2-words-manifest.json': '{}',
+  'b1-words-manifest.json': '{}',
+  'vocab/manifest.json': J({ 'Café': { female: 'audio/female/café.mp3', male: 'audio/male/café.mp3' } }),
+  'vocab/manifest-word-form.json': '{}',
+  'vocab/manifest-conjugation.json': '{}',
 };
+/* Gated chapter payloads (klarweg-resources chapters/<release>/), as chapter-lock builds them. */
+function chapterBucket(release = 'r3') {
+  const o = new Map([
+    [`chapters/${release}/index.json`, J({ chapters: { 'a1-1-alphabet': { title: 'A' }, 'a1-17-goethe2': { title: 'G' }, 'b2-09-passiv': { title: 'P' } } })],
+    [`chapters/${release}/a1-1-alphabet.js`, 'window.CHAPTER = {};\n'],
+    [`chapters/${release}/a1-17-goethe2.js`, 'window.CHAPTER = {};\nwindow.KW_CHAPTER_AUDIO = ' + J({ chapter: 'a1-17-goethe2', entries: { 'Satz.': { id: 'A1_017_S003', file: 'audio/story/A1_017_S003.mp3' } }, timing: {} }) + ';\n'],
+    [`chapters/${release}/b2-09-passiv.js`, 'window.CHAPTER = {};\nwindow.KW_CHAPTER_AUDIO = ' + J({ chapter: 'b2-09-passiv', entries: { 'X.': { file: 'audio/speaking/B2_009_P001.mp3' } }, timing: {} }) + ';\n'],
+  ]);
+  return { async get(k) { const v = o.get(k); return v == null ? null : { async text() { return v; }, async json() { return JSON.parse(v); } }; } };
+}
 function audioBucket() {
   const calls = [];
   const etag = (k) => '"' + Buffer.from(k).toString('hex').slice(0, 16) + '"';
   return {
     calls,
-    async head(k) { calls.push(['head', k]); const v = AUDIO[k]; return v == null ? null : { size: Buffer.byteLength(v), httpEtag: etag(k) }; },
+    async head(k) { if (k.endsWith('.mp3')) calls.push(['head', k]); const v = AUDIO[k]; return v == null ? null : { size: Buffer.byteLength(v), httpEtag: etag(k) }; },
     async get(k, opts) {
-      calls.push(['get', k, opts]); const v = AUDIO[k]; if (v == null) return null;
+      const v = AUDIO[k];
+      if (k.endsWith('.json')) return v == null ? null : { async text() { return v; } };
+      calls.push(['get', k, opts]); if (v == null) return null;
       let b = Buffer.from(v);
       if (opts && opts.range) b = b.subarray(opts.range.offset, opts.range.offset + opts.range.length);
       return { body: new Blob([b]).stream() };
@@ -44,10 +72,11 @@ function audioBucket() {
   };
 }
 function makeEnv(over = {}) {
+  _resetMediaCache();
   return {
     DB: createD1(WORKER_DIR),
     CASHFREE_ENV: 'sandbox', CASHFREE_APP_ID: 'TEST1234567890', CASHFREE_SECRET_KEY: 'cfsk_test', RATE_SALT: 'test-salt',
-    MEDIA: audioBucket(),
+    MEDIA: audioBucket(), RESOURCES: chapterBucket(), CHAPTER_RELEASE: 'r3',
     ...over,
   };
 }
@@ -75,10 +104,13 @@ async function media(env, key, { cookie, method = 'GET', headers = {}, base = ME
 
 test('classify: free list, Chapter 1 by rule, paid lesson by level, word prefixes, else 404', () => {
   assert.deepEqual(classify(FREE_WORD), { free: true });
-  assert.deepEqual(classify('story/A1_001_S050.mp3'), { free: true });
-  assert.deepEqual(classify('story/A1_017_S003.mp3'), { level: 'A1' });
-  assert.deepEqual(classify('speaking/B2_009_P001.mp3'), { level: 'B2' });
-  assert.deepEqual(classify('vocab/audio/conjugation/x.mp3'), { level: 'any' });
+  assert.deepEqual(classify(FREE_CH1), { free: true });
+  assert.deepEqual(classify('story/A1_001_S999.mp3'), { level: 'A1', number: 1 });   // Chapter 1 is free only if listed
+  assert.deepEqual(classify('story/A1_017_S003.mp3'), { level: 'A1', number: 17 });
+  assert.deepEqual(classify('speaking/B2_009_P001.mp3'), { level: 'B2', number: 9 });
+  assert.equal(classify('vocab/audio/conjugation/x.mp3').level, 'any');
+  assert.equal(classify('vocab/audio/conjugation/x.mp3').needle, '"audio/conjugation/x.mp3"');
+  assert.equal(classify('words/male/x.mp3').needle, '"/audio/words/male/x.mp3"');
   assert.equal(classify('dialogues/not-on-free-list.mp3'), null);
   assert.equal(classify('a1-words-manifest.json'), null);
 });
@@ -101,7 +133,7 @@ test('parseRange (ported from the audio Worker)', () => {
 
 test('only klarweg.in: workers.dev answers 404', async () => {
   const env = makeEnv();
-  const r = await media(env, 'story/A1_001_S001.mp3', { base: 'https://klarweg-access.example.workers.dev/media/' });
+  const r = await media(env, FREE_CH1, { base: 'https://klarweg-access.example.workers.dev/media/' });
   assert.equal(r.status, 404);
   assert.equal(env.MEDIA.calls.length, 0);
 });
@@ -115,12 +147,12 @@ test('malformed keys → 404 before any read', async () => {
 });
 
 test('no MEDIA binding → 503', async () => {
-  assert.equal((await media(makeEnv({ MEDIA: undefined }), 'story/A1_001_S001.mp3')).status, 503);
+  assert.equal((await media(makeEnv({ MEDIA: undefined }), FREE_CH1)).status, 503);
 });
 
 test('free audio: anyone, public cache times', async () => {
   const env = makeEnv();
-  const a = await media(env, 'story/A1_001_S001.mp3');
+  const a = await media(env, FREE_CH1);
   assert.equal(a.status, 200);
   assert.equal(a.text, 'free-a1-chapter-1');
   assert.equal(a.h.get('cache-control'), 'public, max-age=86400');
@@ -133,24 +165,24 @@ test('free audio: anyone, public cache times', async () => {
 
 test('Range → 206, invalid → 416, HEAD reads no body, If-None-Match → 304', async () => {
   const env = makeEnv();
-  const r = await media(env, 'story/A1_001_S001.mp3', { headers: { range: 'bytes=0-3' } });
+  const r = await media(env, FREE_CH1, { headers: { range: 'bytes=0-3' } });
   assert.equal(r.status, 206);
   assert.equal(r.text, 'free');
   assert.equal(r.h.get('content-range'), 'bytes 0-3/17');
-  assert.equal((await media(env, 'story/A1_001_S001.mp3', { headers: { range: 'bytes=99-' } })).status, 416);
+  assert.equal((await media(env, FREE_CH1, { headers: { range: 'bytes=99-' } })).status, 416);
   const before = env.MEDIA.calls.filter((c) => c[0] === 'get').length;
-  const h = await media(env, 'story/A1_001_S001.mp3', { method: 'HEAD' });
+  const h = await media(env, FREE_CH1, { method: 'HEAD' });
   assert.equal(h.status, 200);
   assert.equal(h.h.get('content-length'), '17');
   assert.equal(env.MEDIA.calls.filter((c) => c[0] === 'get').length, before);
-  const etag = (await media(env, 'story/A1_001_S001.mp3')).h.get('etag');
-  assert.equal((await media(env, 'story/A1_001_S001.mp3', { headers: { 'if-none-match': etag } })).status, 304);
+  const etag = (await media(env, FREE_CH1)).h.get('etag');
+  assert.equal((await media(env, FREE_CH1, { headers: { 'if-none-match': etag } })).status, 304);
 });
 
 test('foreign Referer → 403; missing Referer allowed', async () => {
   const env = makeEnv();
-  assert.equal((await media(env, 'story/A1_001_S001.mp3', { referer: 'https://evil.example/' })).status, 403);
-  assert.equal((await media(env, 'story/A1_001_S001.mp3', { referer: null })).status, 200);
+  assert.equal((await media(env, FREE_CH1, { referer: 'https://evil.example/' })).status, 403);
+  assert.equal((await media(env, FREE_CH1, { referer: null })).status, 200);
 });
 
 test('restricted non-chapter lines and unknown keys → 404 for everyone', async () => {
@@ -217,6 +249,32 @@ test('after logout the same cookie → 401 (checked on every request)', async ()
   const out = await worker.fetch(new Request(SITE + '/api/auth/logout', { method: 'POST', headers: { origin: SITE, cookie: u.cookie } }), env, ctx);
   assert.equal(out.status, 200);
   assert.equal((await media(env, 'story/A1_017_S003.mp3', { cookie: u.cookie })).status, 401);
+});
+
+test('unused recordings → 404 for everyone, Lifetime buyers included', async () => {
+  const env = makeEnv();
+  const u = await signup(env);
+  await grant(env, u.id, 'LIFETIME');
+  for (const k of ['story/A1_017_S099.mp3', 'story/A1_001_S999.mp3', 'words/female/cccc000000000003.mp3', 'vocab/audio/male/unbenutzt.mp3']) {
+    const r = await media(env, k, { cookie: u.cookie });
+    assert.equal(r.status, 404, k);
+    assert.equal(r.h.get('cache-control'), 'private, no-store');
+  }
+  assert.equal(env.MEDIA.calls.length, 0, 'no audio object was even looked up');
+  // …while the used files next to them are served
+  assert.equal((await media(env, 'story/A1_017_S003.mp3', { cookie: u.cookie })).status, 200);
+  assert.equal((await media(env, 'words/male/bbbb000000000002.mp3', { cookie: u.cookie })).status, 200);
+});
+
+test('used-files list unreadable → 503 (fail closed), never served', async () => {
+  const noManifest = makeEnv({ MEDIA: { ...audioBucket(), async get(k, o) { return k.endsWith('.json') ? null : audioBucket().get(k, o); } } });
+  const a = await signup(noManifest);
+  await grant(noManifest, a.id, 'LIFETIME');
+  assert.equal((await media(noManifest, 'words/female/bbbb000000000002.mp3', { cookie: a.cookie })).status, 503);
+  const noPayload = makeEnv({ CHAPTER_RELEASE: 'r9' });
+  const b = await signup(noPayload);
+  await grant(noPayload, b.id, 'LIFETIME');
+  assert.equal((await media(noPayload, 'story/A1_017_S003.mp3', { cookie: b.cookie })).status, 503);
 });
 
 test('media.js never writes, deletes or lists the bucket', () => {

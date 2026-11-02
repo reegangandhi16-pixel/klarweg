@@ -6,12 +6,18 @@
    under the same keys the old public audio Worker used. Access uses the SAME
    session and purchase checks as the paid chapter route (chapters.js):
 
-     free        Chapter 1 lesson clips (same rule as isFreeChapter), and the
-                 files listed in media-free.js (homepage + Chapter 1 audio)
+     free        only the files listed in media-free.js (homepage + Chapter 1)
      lesson clip <kind>/<LEVEL>_<NNN>_<LINE>.mp3 → signed in + that level
                  (readEntitlements: expiry honoured, Lifetime = every level)
      word audio  word / form / conjugation files → signed in + any active level
      anything else → 404
+
+   USED FILES ONLY (owner decision 2026-11-02: unused recordings are refused to
+   everyone, buyers included). A paid file is served only if the site really
+   plays it: a lesson clip must be a line of its chapter's gated payload
+   (chapters.js chapterAudioKeys), a word file must appear in the word manifest
+   the player loads for it (read from this same bucket, once per isolate).
+   Otherwise 404. If that list cannot be read: 503 (fail closed).
 
    Paid answers are `private, no-store` (owner decision) and are never cached
    at Cloudflare (Worker responses are not edge-cached). Free answers keep the
@@ -20,7 +26,7 @@
    from a foreign site is refused. This module only READS the bucket. */
 import { getSessionToken, findSessionUser } from "./sessions.js";
 import { readEntitlements } from "./entitlements.js";
-import { isFreeChapter } from "./resources.js";
+import { chapterAudioKeys } from "./chapters.js";
 import { isAllowedOrigin } from "./cors.js";
 import { isSameOriginApi } from "./same-origin.js";
 import { FREE_MEDIA } from "./media-free.js";
@@ -28,10 +34,16 @@ import { FREE_MEDIA } from "./media-free.js";
 export const MEDIA_ROUTE = /^\/media\/(.{1,600})$/;
 const KEY = /^[A-Za-z0-9][A-Za-z0-9_.\-/é]{0,200}\.mp3$/;
 const LESSON = /^(story|listening|reading|speaking)\/([ABC][12])_(\d{3})_[A-Z]+\d+(?:_v\d+)?\.mp3$/;
-const WORD_PREFIXES = [
-  "words/female/", "words/male/",
-  "vocab/audio/female/", "vocab/audio/male/",
-  "vocab/public/audio/forms/", "vocab/audio/conjugation/"
+/* Word prefix → the manifests (in this bucket) the player resolves it from,
+   and how that manifest writes the path. */
+const WORDS_MANIFESTS = ["a1-words-manifest.json", "a2-words-manifest.json", "b1-words-manifest.json", "vocab/manifest.json"];
+const WORD_RULES = [
+  ["words/female/", WORDS_MANIFESTS, (k) => `"/audio/${k}"`],
+  ["words/male/", WORDS_MANIFESTS, (k) => `"/audio/${k}"`],
+  ["vocab/audio/female/", ["vocab/manifest.json"], (k) => `"${k.slice(6)}"`],
+  ["vocab/audio/male/", ["vocab/manifest.json"], (k) => `"${k.slice(6)}"`],
+  ["vocab/public/audio/forms/", ["vocab/manifest-word-form.json"], (k) => `"${k.slice(6)}"`],
+  ["vocab/audio/conjugation/", ["vocab/manifest-conjugation.json"], (k) => `"${k.slice(6)}"`]
 ];
 const LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const PAID_CACHE = "private, no-store";
@@ -43,13 +55,40 @@ export function keyFromPath(raw) {
   return key;
 }
 
-/* → { free: true } | { level: "A1".."C2" } | { level: "any" } | null (404) */
+/* → { free: true } | { level, number } (lesson) | { level: "any", manifests, needle } (word) | null (404) */
 export function classify(key) {
   if (FREE_MEDIA.has(key)) return { free: true };
   const m = LESSON.exec(key);
-  if (m) return isFreeChapter({ number: Number(m[3]) }) ? { free: true } : { level: m[2] };
-  if (WORD_PREFIXES.some((p) => key.startsWith(p))) return { level: "any" };
+  if (m) return { level: m[2], number: Number(m[3]) };
+  const w = WORD_RULES.find(([p]) => key.startsWith(p));
+  if (w) return { level: "any", manifests: w[1], needle: w[2](key) };
   return null;
+}
+
+/* Manifest text, once per isolate; a failed read is never cached. */
+const manifestCache = new Map();
+async function manifestText(env, file) {
+  if (manifestCache.has(file)) return manifestCache.get(file);
+  const obj = await env.MEDIA.get(file);
+  if (!obj) return null;
+  const text = await obj.text();
+  manifestCache.set(file, text);
+  return text;
+}
+export function _resetMediaCache() { manifestCache.clear(); }
+
+/* Is this paid file really used by the site? true | false | null (cannot tell → 503). */
+async function isUsed(env, key, rule) {
+  if (rule.manifests) {
+    for (const file of rule.manifests) {
+      const text = await manifestText(env, file);
+      if (text == null) return null;
+      if (text.includes(rule.needle)) return true;
+    }
+    return false;
+  }
+  const keys = await chapterAudioKeys(env, rule.level, rule.number);
+  return keys == null ? null : keys.has(key);
 }
 
 export function freeCacheControl(key) {
@@ -147,5 +186,8 @@ export async function mediaFile(request, env, rawKey) {
   const ent = await readEntitlements(env.DB, user.id);
   const allowed = rule.level === "any" ? LEVELS.some((l) => ent[l] === true) : ent[rule.level] === true;
   if (!allowed) return refusal(403);
+  const used = await isUsed(env, key, rule);
+  if (used == null) return refusal(503);
+  if (!used) return refusal(404);
   return deliver(request, env, key, PAID_CACHE);
 }

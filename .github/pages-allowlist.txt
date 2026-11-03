@@ -300,3 +300,15 @@ chapter/story-lexicon-public.js
 # ---------------------------------------------------------------
 report/kw-report.js
 report/kw-report.css
+
+# Goethe SEO batch 2 — 10 new free, indexable guides
+goethe/c1-exam-preparation.html
+goethe/c2-exam-preparation.html
+goethe/b1-schreiben.html
+goethe/b2-schreiben.html
+goethe/b1-sprechen.html
+goethe/b2-sprechen.html
+goethe/exam-modules-retake.html
+goethe/paper-vs-digital-exam.html
+german-certificate-ausbildung.html
+german-certificate-study-germany.html

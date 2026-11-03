@@ -41,6 +41,9 @@ german-grammar.html
 grammar/der-die-das.html
 grammar/akkusativ.html
 grammar/dativ.html
+# Goethe exam guides (free, indexable preparation content)
+goethe/a1-exam.html
+
 # Live Classes (waitlist launch, owner-approved 2026-10-20): the page
 # and the two scripts it loads. The data file holds display text only.
 live-classes.html

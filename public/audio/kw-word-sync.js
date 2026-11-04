@@ -63,6 +63,11 @@
     return cache[hash];
   }
 
+  function absUrl(u) {
+    u = String(u || '');
+    try { return new URL(u, global.location && global.location.href).href; } catch (e) { return u; }
+  }
+
   function norm(s) {
     return String(s || '').normalize('NFC').replace(/[^\p{L}\p{N}]/gu, '').toLowerCase();
   }
@@ -176,11 +181,14 @@
     audio.addEventListener('emptied', detach);
     // Channel change: any explicit stop, or another clip starting, ends this sync.
     if (global.KW_onAudioEvent) {
-      var mySrc = audio.currentSrc || audio.src;
+      var mySrc = absUrl(audio.currentSrc || audio.src);
       offEngine = global.KW_onAudioEvent(function (ev) {
         if (!ev) return;
         if (ev.type === 'stop') detach();
-        else if (ev.type === 'play-start' && ev.url && ev.url !== mySrc) detach();
+        // The engine reports the URL it asked for ('/api/media/…', same-origin
+        // relative); the element reports it resolved. Compare both absolute,
+        // or this clip's own play-start would end its own highlighting.
+        else if (ev.type === 'play-start' && ev.url && absUrl(ev.url) !== mySrc) detach();
       });
     }
     if (!audio.paused) onPlay(); else tick();

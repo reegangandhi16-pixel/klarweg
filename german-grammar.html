@@ -39,9 +39,40 @@ a.gi-title { text-decoration: underline; text-decoration-thickness: 1px; text-un
 .gi-en { font-family: var(--font-ui); font-size: 14px; font-weight: 400; color: var(--ink-secondary); }
 .gi-tag { font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--hairline); color: var(--ink-secondary); white-space: nowrap; }
 .gi-free { color: var(--g-object); border-color: currentColor; }
+.gi-guides { margin: 24px 0 0; font-size: 15px; color: var(--ink-secondary); }
+.gi-guides a, .gi-guide a { color: var(--ink-primary); text-decoration: underline; text-decoration-color: var(--ink-tertiary); text-underline-offset: 3px; }
+.gi-guide { margin: 8px 0 0; font-size: 14px; }
 .gi-desc { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-secondary); max-width: 680px; }
 @media (max-width: 560px) { .gi-item { grid-template-columns: 1fr; gap: 4px; } }
 </style>
+<!-- KW-LD:start (scripts/seo-ld.mjs) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Klarweg",
+      "item": "https://klarweg.in/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Courses",
+      "item": "https://klarweg.in/courses.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "German grammar A1–C2",
+      "item": "https://klarweg.in/german-grammar.html"
+    }
+  ]
+}
+</script>
+<!-- KW-LD:end -->
 </head>
 <body>
 
@@ -98,6 +129,7 @@ a.gi-title { text-decoration: underline; text-decoration-thickness: 1px; text-un
     </div>
     <h1 class="display-xl">German grammar, <span class="accent">A1 to C2.</span></h1>
     <p class="lede">Every grammar topic in the Klarweg course, in the order you learn it — from the alphabet and the nominative case to Nominalstil and C2 register. Each chapter teaches one topic with colour-coded grammar, clickable German, audio, practice and a quiz. Chapter 1 of every level is free.</p>
+    <p class="gi-guides">Free guides, no signup: <a href="grammar/der-die-das.html">Der, die, das explained</a> · <a href="grammar/akkusativ.html">Akkusativ explained</a> · <a href="grammar/dativ.html">Dativ explained</a></p>
     <nav class="gi-jump" aria-label="Jump to level">
       <a href="#a1">A1 · 47</a>
       <a href="#a2">A2 · 35</a>
@@ -187,6 +219,7 @@ a.gi-title { text-decoration: underline; text-decoration-thickness: 1px; text-un
         <div class="gi-body">
           <h3 class="gi-h"><span class="gi-title" lang="de">Der / Die / Das</span> <span class="gi-en">Articles &amp; Gender</span> </h3>
           <p class="gi-desc">Every German noun has a gender — der (m), die (f) or das (n) — and the article is part of the word. Learn the patterns that hint at gender, the one habit that saves you years of mistakes, and how plural turns almost everything into die.</p>
+          <p class="gi-guide"><a href="grammar/der-die-das.html">Free guide: Der, die, das explained →</a></p>
         </div>
       </li>
       <li class="gi-item">
@@ -201,6 +234,7 @@ a.gi-title { text-decoration: underline; text-decoration-thickness: 1px; text-un
         <div class="gi-body">
           <h3 class="gi-h"><span class="gi-title" lang="de">Akkusativ</span> <span class="gi-en">The Accusative Case</span> </h3>
           <p class="gi-desc">The accusative is the case of the direct object — the thing a verb acts on. The good news: only one thing changes. Masculine der becomes den (and ein becomes einen); die, das and plural die stay exactly the same.</p>
+          <p class="gi-guide"><a href="grammar/akkusativ.html">Free guide: Akkusativ explained →</a></p>
         </div>
       </li>
       <li class="gi-item">
@@ -372,6 +406,7 @@ a.gi-title { text-decoration: underline; text-decoration-thickness: 1px; text-un
         <div class="gi-body">
           <h3 class="gi-h"><span class="gi-title" lang="de">Dativ Einführung</span> <span class="gi-en">The Dative Case</span> </h3>
           <p class="gi-desc">Meet the second case. The dative marks the receiver — the person you give, help, or say something to. The articles shift: der→dem, die→der, das→dem, die(pl)→den. Ich gebe dem Mann das Buch. Ask &quot;to whom?&quot; with wem.</p>
+          <p class="gi-guide"><a href="grammar/dativ.html">Free guide: Dativ explained →</a></p>
         </div>
       </li>
       <li class="gi-item">
@@ -2041,6 +2076,7 @@ a.gi-title { text-decoration: underline; text-decoration-thickness: 1px; text-un
         <a href="goethe-exam.html">Goethe Exam</a>
         <a href="ausbildung.html">Ausbildung</a>
         <a href="resources.html">Resources</a>
+        <a href="german-grammar.html">German Grammar</a>
       </div>
       <div class="footer-col">
         <h3>Company</h3>

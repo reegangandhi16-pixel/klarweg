@@ -19,6 +19,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE_BASE } from './site-origin.mjs';
+import { ldScript, breadcrumb, HOME, COURSES, levelCrumb } from './seo-ld.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CH = path.join(ROOT, 'chapter');
@@ -38,6 +39,9 @@ for (const f of fs.readdirSync(CH).filter((x) => /^chapter-[abc][12]-.*\.html$/.
   const anchor = /(<meta name="description" content="[^"]*"\s*\/?>\n?)/;
   if (!html.includes(START) && !anchor.test(html)) { console.error('no description meta to anchor on: ' + f); process.exit(1); }
   const url = `${SITE_BASE}/chapter/${f}`;
+  const level = f.slice(8, 10);
+  const h1 = ((html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || '').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+  if (num === 1 && !h1) { console.error('free chapter has no static <h1>: ' + f); process.exit(1); }
   const block = num === 1
     ? [START,
        `<link rel="canonical" href="${url}">`,
@@ -48,6 +52,7 @@ for (const f of fs.readdirSync(CH).filter((x) => /^chapter-[abc][12]-.*\.html$/.
        `<meta property="og:url" content="${url}">`,
        `<meta property="og:image" content="${SITE_BASE}/icon-512.png">`,
        '<meta name="twitter:card" content="summary">',
+       ldScript(breadcrumb([HOME, COURSES, levelCrumb(level), [h1, `chapter/${f}`]])),
        END].join('\n')
     : [START, '<meta name="robots" content="noindex, follow">', END].join('\n');
   num === 1 ? free++ : paid++;

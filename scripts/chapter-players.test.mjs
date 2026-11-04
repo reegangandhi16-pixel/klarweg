@@ -10,6 +10,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { dataFileFor } from './chapter-lock.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const APP = fs.readFileSync(path.join(ROOT, 'chapter/chapter-app.js'), 'utf8');
@@ -221,9 +222,12 @@ const canon = (t) => String(t || '').normalize('NFC').replace(/[\u2013\u2014]/g,
 const BY = new Map(), CANON = new Map();
 for (const [k, v] of Object.entries(MANIFEST)) if (v && typeof v === 'object') { BY.set(N(k), v); CANON.set(canon(k), v); }
 const lookup = (t) => BY.get(N(t)) || CANON.get(canon(t)) || null;
+/* What the gated payload gives a paid page (window.KW_CHAPTER_AUDIO): that
+   chapter's lines; free pages have none. */
+const chapterAudio = (C) => /^[a-c][12]-0?1-/.test(C.id) ? undefined
+  : { chapter: C.id, entries: Object.fromEntries(Object.entries(MANIFEST).filter(([, v]) => v && v.chapter === C.id)) };
 function chapterData(page) {
-  const html = fs.readFileSync(path.join(ROOT, 'chapter', page), 'utf8');
-  const src = html.match(/<script src="([^"]*data[^"]*\.js)[^"]*"/)[1].split('?')[0];
+  const src = dataFileFor(page);
   const c = { console: { log() {}, warn() {} } }; c.window = c; vm.createContext(c);
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'chapter', src), 'utf8') + '\n;this.__C = CHAPTER;', c);
   return c.__C;
@@ -240,7 +244,7 @@ function readingRequest(page, C, displayed) {
   if (/kw-reading-exceptions\.js/.test(html)) scripts.push(READING_EXC);
   for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) if (/displayedKey/.test(m[1])) scripts.push(m[1]);
   let asked = null;
-  const g = { CHAPTER: C, KW_canonKey: canon, requestAnimationFrame: () => 0, cancelAnimationFrame() {},
+  const g = { CHAPTER: C, KW_CHAPTER_AUDIO: chapterAudio(C), KW_canonKey: canon, requestAnimationFrame: () => 0, cancelAnimationFrame() {},
     KW_resolveInfo: (t) => { const e = lookup(t); return e ? { url: 'https://cdn.example/audio/' + e.file.replace(/^audio\//, '') } : null; },
     KW_speak: function (t) { asked = t; return Promise.resolve('manifest'); }, console: { log() {}, warn() {} } };
   g.window = g; vm.createContext(g);
@@ -331,7 +335,7 @@ test('Reading alias pages (81): the exception tags the recording with its author
     if (/kw-reading-exceptions\.js/.test(html)) scripts.push(READING_EXC);
     for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) if (/displayedKey/.test(m[1])) scripts.push(m[1]);
     let url = null, onAudio = null;
-    const g = { CHAPTER: C, KW_canonKey: canon, requestAnimationFrame: () => 0, cancelAnimationFrame() {},
+    const g = { CHAPTER: C, KW_CHAPTER_AUDIO: chapterAudio(C), KW_canonKey: canon, requestAnimationFrame: () => 0, cancelAnimationFrame() {},
       KW_resolveInfo: (t) => { const e = lookup(t); return e ? { url: 'https://cdn.example/audio/' + e.file.replace(/^audio\//, '') } : null; },
       KW_speak: function (t, o) { const e = lookup(t); url = e ? 'https://cdn.example/audio/' + e.file.replace(/^audio\//, '') : null; onAudio = o && o.onAudio; return Promise.resolve('manifest'); },
       console: { log() {}, warn() {} } };
@@ -350,5 +354,12 @@ test('Reading alias pages (81): the exception tags the recording with its author
   let base;
   try { base = execFileSync('git', ['show', 'c622798:public/audio/kw-reading-exceptions.js'], { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 << 20 }); } catch { return; }
   const table = (s) => cut(s, '  var EXCEPTIONS = {', '  var speak = global.KW_speak;');
-  assert.equal(table(READING_EXC), table(base), 'exception table (files, stale tails, endAt) byte-identical');
+  // Paid chapters' stale tails (their transcript text) left the public file:
+  // the runtime now derives the recorded text from the gated payload. The
+  // table is otherwise unchanged (files, endAt, the free chapter's tail).
+  const FREE_TAIL = 'c1-01-tempusgebrauch-stilistische-tempuswahl';
+  const strip = (s) => table(s).split(/(?=\n {6}"[a-c][12]-)/)
+    .map((p) => p.includes('"' + FREE_TAIL + '"') ? p : p.replace(/\n {10}"staleTail": .*,(?=\n)/, '')).join('');
+  assert.equal(table(READING_EXC), strip(base), 'exception table: only paid stale tails removed');
+  assert.equal((table(READING_EXC).match(/"staleTail"/g) || []).length, 1, 'only the free chapter keeps its tail');
 });

@@ -101,8 +101,11 @@ test('published runtime JS has no /klarweg/ path assumptions; audio CDN unchange
     // Block comments may still describe the old "/klarweg/…" paths; code may not.
     assert.ok(!/["'`]\/klarweg\//.test(src.replace(/\/\*[\s\S]*?\*\//g, '')), `${rel} has a /klarweg/ path literal`);
   }
-  // The audio CDN is a separate repo/Pages site; the domain move leaves it alone.
-  assert.ok(read('public/audio/kw-audio-engine.js').includes(AUDIO_CDN));
+  // Audio is served same-origin (/api/media/), so a domain move needs no audio change
+  // and the old separate audio CDN is no longer referenced at all.
+  const engine = read('public/audio/kw-audio-engine.js');
+  assert.ok(engine.includes("var AUDIO_ORIGIN = '/api/media/';"));
+  assert.ok(!engine.includes(AUDIO_CDN));
 });
 
 test('the origin switch is reversible (rollback rehearsal in a temp copy)', () => {
@@ -120,6 +123,8 @@ test('the origin switch is reversible (rollback rehearsal in a temp copy)', () =
     assert.match(read('robots.txt', dir), /^Sitemap: https:\/\/reegangandhi16-pixel\.github\.io\/klarweg\/sitemap\.xml$/m);
     execFileSync(process.execPath, [path.join(dir, 'scripts/build-grammar-index.mjs'), '--check']);
     execFileSync(process.execPath, [path.join(dir, 'scripts/seo-chapter-meta.mjs'), '--check']);
+    execFileSync(process.execPath, [path.join(dir, 'scripts/seo-structured-data.mjs'), '--check']);
+    execFileSync(process.execPath, [path.join(dir, 'scripts/build-grammar-guides.mjs'), '--check']);
 
     run(SITE_BASE, true);
     for (const f of new Set(files)) {

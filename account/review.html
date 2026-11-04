@@ -108,7 +108,7 @@ a:hover{color:var(--accent-deep)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);z-index:90;background:var(--ink-primary);color:var(--bg-canvas);font-size:14px;font-weight:500;padding:12px 20px;border-radius:var(--r-full);box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:all var(--dur-base) var(--ease);display:flex;align-items:center;gap:10px}
 .toast.show{opacity:1;transform:translateX(-50%)}
 </style>
-<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" href="../favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="manifest" href="../manifest.json">
 <meta name="theme-color" content="#E55A3F">
@@ -182,10 +182,10 @@ a:hover{color:var(--accent-deep)}
 <div class="toast" id="toast"></div>
 
 <script src="../kw-config.js"></script>
-<script src="../public/audio/kw-audio-engine.js"></script>
-<script src="../public/audio/kw-tts-config.js"></script>
+<script src="../public/audio/kw-audio-engine.js?v=3"></script>
+<script src="../public/audio/kw-tts-config.js?v=3"></script>
 <script src="kw-account.js"></script>
-<script src="../chapter/global-lexicon.js"></script>
+<script src="../chapter/global-lexicon-public.js"></script>
 <script>
 var Saved = KW_Account.Saved;
 function $(s){return document.querySelector(s)}
@@ -197,7 +197,22 @@ function speak(t){ if(window.KW_speak){ window.KW_speak(t); return; } if('speech
 var LVL_COLOR={A1:'var(--lvl-a1)',A2:'var(--lvl-a2)',B1:'var(--lvl-b1)',B2:'var(--lvl-b2)',C1:'var(--lvl-c1)',C2:'var(--lvl-c2)'};
 
 /* The chapter lexicon is READ here so review shows the same entry the Word
-   Popup shows — no second dictionary. Missing entries simply show less. */
+   Popup shows — no second dictionary. Missing entries simply show less.
+   The public file carries only the free pages' entries; the entries for the
+   learner's OWN saved words come from the protected lookup (signed in, with
+   an active purchase) and are merged in before the first card is painted. */
+function loadSavedLexicon(){
+  var base=String(window.KW_ACCESS_API||'').replace(/\/+$/,'');
+  if(!base||!window.fetch)return Promise.resolve();
+  return fetch(base+'/saved-words/lexicon',{credentials:'include',mode:'cors'})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(j){
+      if(!j||!j.entries||typeof j.entries!=='object')return;
+      var G=window.KW_GLOBAL_LEXICON=window.KW_GLOBAL_LEXICON||{};
+      Object.keys(j.entries).forEach(function(k){if(!Object.prototype.hasOwnProperty.call(G,k))G[k]=j.entries[k];});
+    })
+    .catch(function(){});
+}
 function lex(de){
   var G=window.KW_GLOBAL_LEXICON||{},I=window.KW_INFLECTIONS||{};
   var k=String(de||'').toLowerCase().replace(/^(der|die|das)\s+/,'').replace(/[.,!?;:]/g,'').trim();
@@ -228,7 +243,8 @@ function toast(html){
 }
 
 function start(){
-  Saved.dueNow().then(function(res){
+  Promise.all([Saved.dueNow(),loadSavedLexicon()]).then(function(all){
+    var res=all[0];
     if(res.reason==='unauthenticated'){redirectToLogin();return;}
     if(!res.ok){
       $('#empty').hidden=false;

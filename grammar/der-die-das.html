@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Der, Die, Das: German Articles and Noun Gender Explained — Klarweg</title>
+<meta name="description" content="When does German use der, die or das? The three genders, reliable noun-ending patterns, why Hindi gender does not carry over, common mistakes, and exercises with answers.">
+<link rel="canonical" href="https://klarweg.in/grammar/der-die-das.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Klarweg">
+<meta property="og:title" content="Der, Die, Das: German Articles and Noun Gender Explained — Klarweg">
+<meta property="og:description" content="When does German use der, die or das? The three genders, reliable noun-ending patterns, why Hindi gender does not carry over, common mistakes, and exercises with answers.">
+<meta property="og:url" content="https://klarweg.in/grammar/der-die-das.html">
+<meta property="og:image" content="https://klarweg.in/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Der, Die, Das: German Articles and Noun Gender Explained — Klarweg">
+<meta name="twitter:description" content="When does German use der, die or das? The three genders, reliable noun-ending patterns, why Hindi gender does not carry over, common mistakes, and exercises with answers.">
+<meta name="twitter:image" content="https://klarweg.in/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site.css">
+<link rel="icon" href="../favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#E55A3F">
+<style>
+.gg-crumbs { font-family: var(--font-mono); font-size: 12px; color: var(--ink-tertiary); margin-bottom: 24px; }
+.gg-crumbs a { color: var(--ink-secondary); text-decoration: underline; text-decoration-color: var(--hairline-strong); text-underline-offset: 3px; }
+.gg-crumbs span[aria-hidden] { margin: 0 8px; }
+.gg-body { padding: 0 0 96px; }
+.gg-prose { max-width: 680px; }
+.gg-prose > h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 4vw, 36px); line-height: 1.2; letter-spacing: -0.02em; margin: 64px 0 16px; scroll-margin-top: 80px; }
+.gg-prose > h3 { font-family: var(--font-ui); font-size: 18px; font-weight: 600; margin: 36px 0 12px; }
+.gg-prose p, .gg-prose li { font-size: 17px; line-height: 1.65; color: var(--ink-secondary); }
+.gg-prose p { margin: 0 0 16px; }
+.gg-prose ul, .gg-prose ol { padding-left: 24px; margin: 0 0 16px; }
+.gg-prose li { margin-bottom: 8px; }
+.gg-prose strong { color: var(--ink-primary); font-weight: 600; }
+.gg-prose a { color: var(--ink-primary); text-decoration: underline; text-decoration-color: var(--ink-tertiary); text-underline-offset: 3px; }
+.gg-toc { margin: 36px 0 0; padding: 24px; border: 1px solid var(--hairline); border-radius: var(--r-lg); background: var(--bg-surface); }
+.gg-toc h2 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-tertiary); font-weight: 500; margin: 0 0 12px; }
+.gg-toc ol { margin: 0; padding-left: 24px; columns: 2; column-gap: 36px; }
+.gg-toc li { font-size: 15px; margin-bottom: 8px; break-inside: avoid; }
+.gg-summary { margin: 24px 0; padding: 24px; border-radius: var(--r-lg); background: var(--bg-warm); border: 1px solid var(--hairline-light); }
+.gg-summary p:last-child, .gg-note p:last-child { margin-bottom: 0; }
+.gg-note { margin: 24px 0; padding: 16px 24px; border-left: 3px solid var(--hairline-strong); background: var(--bg-elevated); border-radius: 0 var(--r-md) var(--r-md) 0; }
+.gg-note .gg-label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 8px; }
+.de { font-family: var(--font-german); font-style: italic; font-weight: 500; color: var(--ink-primary); }
+.hi { font-family: 'Noto Sans Devanagari', var(--font-ui); font-style: normal; color: var(--ink-primary); }
+.rom { font-size: 0.9em; color: var(--ink-tertiary); }
+.ex-list { list-style: none; padding: 0 !important; margin: 16px 0 24px !important; }
+.ex-list li { padding: 12px 0; border-bottom: 1px solid var(--hairline-light); margin: 0 !important; }
+.ex-list .de { display: block; font-size: 20px; line-height: 1.4; }
+.ex-list .tr { display: block; font-size: 15px; color: var(--ink-tertiary); margin-top: 4px; }
+/* Grammar colours (spec): meaning only. Case-coloured words are also
+   underlined so the case never depends on colour alone. */
+.g-nom { color: var(--g-subject); }
+.g-verb { color: var(--g-verb); }
+.g-akk { color: var(--g-akkusativ); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.g-dat { color: var(--g-dativ); text-decoration: underline; text-decoration-style: double; text-underline-offset: 4px; }
+.g-art { color: #B45309; }
+.g-prep { color: #CA8A04; }
+.gg-key { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 16px 0 0; padding: 0; list-style: none; font-size: 13px; color: var(--ink-tertiary); }
+.gg-key li { margin: 0 !important; font-size: 13px !important; }
+.gg-key .de { font-size: 15px; }
+.gg-table-wrap { overflow-x: auto; margin: 16px 0 24px; border: 1px solid var(--hairline); border-radius: var(--r-md); background: var(--bg-surface); }
+.gg-table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 480px; }
+.gg-table caption { text-align: left; padding: 12px 16px 0; font-size: 13px; color: var(--ink-tertiary); }
+.gg-table th, .gg-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--hairline-light); vertical-align: top; }
+.gg-table thead th { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); }
+.gg-table tbody th { font-weight: 600; color: var(--ink-primary); white-space: nowrap; }
+.gg-table tr:last-child th, .gg-table tr:last-child td { border-bottom: 0; }
+.gg-table td .de { font-size: 17px; }
+.gg-table .chg { font-weight: 700; }
+.mistakes { list-style: none; padding: 0 !important; counter-reset: m; }
+.mistakes > li { counter-increment: m; padding: 16px 0 16px 36px !important; position: relative; border-bottom: 1px solid var(--hairline-light); }
+.mistakes > li::before { content: counter(m); position: absolute; left: 0; top: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-tertiary); }
+.mistakes .no, .mistakes .yes { display: block; }
+.mistakes .no .de { text-decoration: line-through; text-decoration-color: var(--ink-tertiary); color: var(--ink-tertiary); }
+.mistakes .tag { display: inline-block; min-width: 40px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); }
+.mistakes .why { display: block; font-size: 15px; margin-top: 8px; }
+.exercises { padding-left: 24px !important; }
+.exercises > li { padding: 8px 0; }
+.exercises .q { font-size: 18px; }
+.exercises details { margin-top: 8px; }
+.exercises summary { cursor: pointer; font-size: 14px; color: var(--ink-tertiary); min-height: 44px; display: inline-flex; align-items: center; }
+.exercises summary:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; border-radius: var(--r-xs); }
+.exercises details p { margin: 4px 0 0; font-size: 15px; }
+.gap { display: inline-block; min-width: 64px; border-bottom: 1px solid var(--ink-tertiary); }
+.gg-next { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 24px 0; }
+.gg-next a { display: block; padding: 24px; border: 1px solid var(--hairline); border-radius: var(--r-lg); background: var(--bg-surface); text-decoration: none !important; transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.gg-next a:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+.gg-next .k { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 8px; }
+.gg-next .t { display: block; font-family: var(--font-display); font-size: 20px; color: var(--ink-primary); }
+.gg-course { margin: 64px 0 0; padding: 36px; border-radius: var(--r-lg); background: var(--bg-warm); border: 1px solid var(--hairline-light); }
+.gg-course h2 { font-family: var(--font-display); font-weight: 500; font-size: 28px; margin: 0 0 12px; }
+.gg-course .hero-ctas { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 640px) {
+  .gg-table { min-width: 0; font-size: 14px; }
+  .gg-table th, .gg-table td { padding: 12px 8px; }
+  .gg-table td .de { font-size: 16px; }
+  .gg-table thead th { letter-spacing: 0.04em; }
+  .gg-toc ol { columns: 1; }
+  .gg-course { padding: 24px; }
+  .gg-prose p, .gg-prose li { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .gg-next a { transition: none; } }
+</style>
+<!-- KW-LD:start (scripts/seo-ld.mjs) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Klarweg",
+      "item": "https://klarweg.in/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "German grammar A1–C2",
+      "item": "https://klarweg.in/german-grammar.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Der, die, das",
+      "item": "https://klarweg.in/grammar/der-die-das.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Der, Die, Das: German Articles and Noun Gender Explained",
+  "description": "When does German use der, die or das? The three genders, reliable noun-ending patterns, why Hindi gender does not carry over, common mistakes, and exercises with answers.",
+  "url": "https://klarweg.in/grammar/der-die-das.html",
+  "mainEntityOfPage": "https://klarweg.in/grammar/der-die-das.html",
+  "inLanguage": "en",
+  "image": "https://klarweg.in/icon-512.png",
+  "educationalLevel": "CEFR A1",
+  "teaches": "German definite and indefinite articles and grammatical gender (der, die, das)",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Klarweg",
+    "url": "https://klarweg.in/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Klarweg",
+    "url": "https://klarweg.in/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://klarweg.in/icon-512.png"
+    }
+  }
+}
+</script>
+<!-- KW-LD:end -->
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ========== NAV (canonical) ========== -->
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo" aria-label="Klarweg home">Klarweg</a>
+    <div class="nav-links">
+      <a href="../courses.html">Courses</a>
+      <a href="../live-classes.html">Live Classes</a>
+      <a href="../goethe-exam.html">Goethe Exam</a>
+      <a href="../ausbildung.html">Ausbildung</a>
+      <a href="../resources.html">Resources</a>
+      <a href="../about.html">About</a>
+    </div>
+    <div class="nav-actions"><a href="../account/index.html" class="nav-login js-nav-login" id="nav-login-link" data-auth-pending>Login</a><a href="../chapter/chapter-a1-1-alphabet.html" class="nav-cta js-nav-cta" data-auth-pending>Try Chapter 1 free</a></div>
+    <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay" hidden></div>
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-logo">Klarweg</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+  </div>
+  <nav class="mobile-nav-links" aria-label="Mobile navigation">
+    <a href="../courses.html">Courses</a>
+    <a href="../live-classes.html">Live Classes</a>
+    <a href="../goethe-exam.html">Goethe Exam</a>
+    <a href="../ausbildung.html">Ausbildung</a>
+    <a href="../resources.html">Resources</a>
+    <a href="../about.html">About</a>
+  </nav>
+  <div class="mobile-nav-actions">
+    <a href="../account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile" data-auth-pending>Login</a>
+    <a href="../chapter/chapter-a1-1-alphabet.html" class="nav-cta js-nav-cta" data-auth-pending>Try Chapter 1 free</a>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+<!-- GENERATED by scripts/build-grammar-guides.mjs from scripts/grammar-guides/der-die-das.html — edit the source, not this file. -->
+<section class="page-hero">
+  <div class="container">
+    <nav class="gg-crumbs" aria-label="Breadcrumb"><a href="../index.html">Klarweg</a><span aria-hidden="true">/</span><a href="../german-grammar.html">German grammar</a><span aria-hidden="true">/</span><span aria-current="page">Der, die, das</span></nav>
+    <div class="eyebrow-row">
+      <span class="eyebrow">Free grammar guide · A1</span>
+      <span class="pill"><span class="pill-dot"></span> Exercises with answers</span>
+    </div>
+    <h1 class="display-lg">Der, die, das — German articles, made clear.</h1>
+    <p class="lede">Every German noun has a gender, and the article tells you which one. This guide shows you the three genders, the noun endings that predict them, why your Hindi instinct for gender will mislead you, and how to learn articles so they stick.</p>
+  </div>
+</section>
+
+<div class="container gg-body">
+<article class="gg-prose">
+
+<div class="gg-summary">
+  <p><strong>In 30 seconds</strong></p>
+  <ul>
+    <li><span class="de g-art" lang="de">der</span> = masculine: <span class="de" lang="de"><span class="g-art">der</span> Tisch</span> (the table)</li>
+    <li><span class="de g-art" lang="de">die</span> = feminine: <span class="de" lang="de"><span class="g-art">die</span> Lampe</span> (the lamp)</li>
+    <li><span class="de g-art" lang="de">das</span> = neuter: <span class="de" lang="de"><span class="g-art">das</span> Buch</span> (the book)</li>
+    <li><span class="de g-art" lang="de">die</span> = every plural, whatever the gender: <span class="de" lang="de"><span class="g-art">die</span> Bücher</span> (the books)</li>
+  </ul>
+  <p>Learn every noun together with its article, as one unit: not <span class="de" lang="de">Tisch</span> but <span class="de" lang="de">der Tisch</span>.</p>
+</div>
+
+<nav class="gg-toc" aria-label="On this page">
+  <h2>On this page</h2>
+  <ol>
+    <li><a href="#what">What der, die, das are</a></li>
+    <li><a href="#hindi">Hindi gender vs German gender</a></li>
+    <li><a href="#table">The article table</a></li>
+    <li><a href="#patterns">Endings that predict gender</a></li>
+    <li><a href="#compounds">Compound nouns</a></li>
+    <li><a href="#meaning">Same word, different gender</a></li>
+    <li><a href="#learn">How to learn articles</a></li>
+    <li><a href="#mistakes">Common mistakes</a></li>
+    <li><a href="#exercises">Exercises</a></li>
+  </ol>
+</nav>
+
+<h2 id="what">What der, die and das are</h2>
+<p>German has three grammatical genders: <strong>masculine</strong>, <strong>feminine</strong> and <strong>neuter</strong>. The word for “the” changes with the gender of the noun:</p>
+<ul class="ex-list">
+  <li><span class="de" lang="de"><span class="g-art">Der</span> Kaffee ist heiß.</span><span class="tr">The coffee is hot. (masculine)</span></li>
+  <li><span class="de" lang="de"><span class="g-art">Die</span> Tür ist offen.</span><span class="tr">The door is open. (feminine)</span></li>
+  <li><span class="de" lang="de"><span class="g-art">Das</span> Fenster ist zu.</span><span class="tr">The window is closed. (neuter)</span></li>
+</ul>
+<p>Gender here is a property of the <em>word</em>, not of the thing. A table is not “male” in any real sense; <span class="de" lang="de">Tisch</span> simply belongs to the masculine group. That is why <span class="de" lang="de">das Mädchen</span> (the girl) is neuter: every noun ending in <span class="de" lang="de">-chen</span> is neuter, even when it describes a person.</p>
+<p>The article matters because it changes the words around it. Adjective endings, pronouns (<span class="de" lang="de">er, sie, es</span>) and the case forms you learn next (<span class="de" lang="de">den</span>, <span class="de" lang="de">dem</span>) all depend on knowing the gender first.</p>
+
+<h2 id="hindi">Hindi gender vs German gender</h2>
+<p>If Hindi is your first language, you already think in grammatical gender: <span class="hi" lang="hi">लड़का</span> <span class="rom">(laṛkā)</span> is masculine and <span class="hi" lang="hi">किताब</span> <span class="rom">(kitāb)</span> is feminine. That is a real advantage over English speakers. But there are two differences:</p>
+<ol>
+  <li>Hindi has <strong>two</strong> genders. German has <strong>three</strong>; the neuter group has no Hindi equivalent.</li>
+  <li>The gender of a word <strong>does not carry over</strong>. The same object often has a different gender in each language.</li>
+</ol>
+<div class="gg-table-wrap">
+<table class="gg-table">
+  <caption>Same meaning, different gender</caption>
+  <thead><tr><th scope="col">English</th><th scope="col">Hindi</th><th scope="col">German</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">book</th><td><span class="hi" lang="hi">किताब</span> · feminine</td><td><span class="de" lang="de"><span class="g-art">das</span> Buch</span> · neuter</td></tr>
+    <tr><th scope="row">table</th><td><span class="hi" lang="hi">मेज़</span> · feminine</td><td><span class="de" lang="de"><span class="g-art">der</span> Tisch</span> · masculine</td></tr>
+    <tr><th scope="row">sun</th><td><span class="hi" lang="hi">सूरज</span> · masculine</td><td><span class="de" lang="de"><span class="g-art">die</span> Sonne</span> · feminine</td></tr>
+    <tr><th scope="row">girl</th><td><span class="hi" lang="hi">लड़की</span> · feminine</td><td><span class="de" lang="de"><span class="g-art">das</span> Mädchen</span> · neuter</td></tr>
+    <tr><th scope="row">water</th><td><span class="hi" lang="hi">पानी</span> · masculine</td><td><span class="de" lang="de"><span class="g-art">das</span> Wasser</span> · neuter</td></tr>
+    <tr><th scope="row">moon</th><td><span class="hi" lang="hi">चाँद</span> · masculine</td><td><span class="de" lang="de"><span class="g-art">der</span> Mond</span> · masculine</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Sometimes the genders match (moon), mostly they do not. The rule for Hindi speakers is simple: <strong>never guess a German gender from Hindi</strong>. Use the endings below, and when there is no pattern, learn the article with the word.</p>
+
+<h2 id="table">The article table</h2>
+<p>Besides “the”, German has “a/an” (<span class="de" lang="de">ein</span>), “no/not a” (<span class="de" lang="de">kein</span>) and possessives like “my” (<span class="de" lang="de">mein</span>). They all follow the gender of the noun. This is the basic form, used for the subject of a sentence (the <span class="de" lang="de">Nominativ</span>):</p>
+<div class="gg-table-wrap">
+<table class="gg-table">
+  <caption>Articles in the Nominativ</caption>
+  <thead><tr><th scope="col"></th><th scope="col">Masculine</th><th scope="col">Feminine</th><th scope="col">Neuter</th><th scope="col">Plural</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">the</th><td><span class="de g-art" lang="de">der</span></td><td><span class="de g-art" lang="de">die</span></td><td><span class="de g-art" lang="de">das</span></td><td><span class="de g-art" lang="de">die</span></td></tr>
+    <tr><th scope="row">a / an</th><td><span class="de g-art" lang="de">ein</span></td><td><span class="de g-art" lang="de">eine</span></td><td><span class="de g-art" lang="de">ein</span></td><td>—</td></tr>
+    <tr><th scope="row">no / not a</th><td><span class="de g-art" lang="de">kein</span></td><td><span class="de g-art" lang="de">keine</span></td><td><span class="de g-art" lang="de">kein</span></td><td><span class="de g-art" lang="de">keine</span></td></tr>
+    <tr><th scope="row">my</th><td><span class="de g-art" lang="de">mein</span></td><td><span class="de g-art" lang="de">meine</span></td><td><span class="de g-art" lang="de">mein</span></td><td><span class="de g-art" lang="de">meine</span></td></tr>
+  </tbody>
+</table>
+</div>
+<ul class="ex-list">
+  <li><span class="de" lang="de">Das ist <span class="g-art">ein</span> Stuhl. <span class="g-art">Der</span> Stuhl ist bequem.</span><span class="tr">That is a chair. The chair is comfortable.</span></li>
+  <li><span class="de" lang="de">Das ist <span class="g-art">meine</span> Schwester.</span><span class="tr">That is my sister.</span></li>
+  <li><span class="de" lang="de">Ich habe <span class="g-art">keine</span> Zeit.</span><span class="tr">I have no time.</span></li>
+</ul>
+<div class="gg-note">
+  <span class="gg-label">Look ahead</span>
+  <p>Masculine <span class="de" lang="de">ein</span> and neuter <span class="de" lang="de">ein</span> look identical here. The difference appears in the other cases: after most verbs a masculine <span class="de" lang="de">der/ein</span> becomes <span class="de" lang="de">den/einen</span> (see the <a href="akkusativ.html">Akkusativ guide</a>), and after <span class="de" lang="de">mit</span> or <span class="de" lang="de">bei</span> everything shifts again (see the <a href="dativ.html">Dativ guide</a>). This is why knowing the gender comes first.</p>
+</div>
+
+<h2 id="patterns">Endings that predict gender</h2>
+<p>Many German nouns give no clue to their gender, but a number of common endings do. Treat these as strong patterns, not laws; when in doubt, check a dictionary (it marks gender as <em>m</em>, <em>f</em> or <em>n</em>).</p>
+
+<h3>Usually feminine — die</h3>
+<ul>
+  <li><span class="de" lang="de">-ung</span>: <span class="de" lang="de">die Wohnung</span> (flat), <span class="de" lang="de">die Zeitung</span> (newspaper)</li>
+  <li><span class="de" lang="de">-heit, -keit</span>: <span class="de" lang="de">die Gesundheit</span> (health), <span class="de" lang="de">die Möglichkeit</span> (possibility)</li>
+  <li><span class="de" lang="de">-schaft</span>: <span class="de" lang="de">die Freundschaft</span> (friendship)</li>
+  <li><span class="de" lang="de">-ion, -tät</span>: <span class="de" lang="de">die Information</span>, <span class="de" lang="de">die Universität</span></li>
+  <li><span class="de" lang="de">-ie, -ei</span>: <span class="de" lang="de">die Familie</span>, <span class="de" lang="de">die Bäckerei</span> (bakery)</li>
+  <li><span class="de" lang="de">-in</span> for a female person: <span class="de" lang="de">die Lehrerin</span> (female teacher), <span class="de" lang="de">die Ärztin</span> (female doctor)</li>
+  <li>Most nouns ending in <span class="de" lang="de">-e</span>: <span class="de" lang="de">die Straße</span>, <span class="de" lang="de">die Tasche</span> (bag). Common exceptions: <span class="de" lang="de">der Name, der Junge, der Käse, das Auge, das Ende</span>.</li>
+</ul>
+
+<h3>Usually masculine — der</h3>
+<ul>
+  <li>Days, months and seasons: <span class="de" lang="de">der Montag, der Mai, der Winter</span></li>
+  <li>Directions and most weather words: <span class="de" lang="de">der Norden, der Regen, der Schnee, der Wind</span></li>
+  <li>Male people and many jobs: <span class="de" lang="de">der Lehrer, der Fahrer</span> (driver), <span class="de" lang="de">der Student, der Praktikant</span> (intern)</li>
+  <li><span class="de" lang="de">-ling, -ismus</span>: <span class="de" lang="de">der Frühling</span> (spring), <span class="de" lang="de">der Tourismus</span></li>
+</ul>
+<p>Careful with <span class="de" lang="de">-er</span>: it is masculine for people who do something (<span class="de" lang="de">der Lehrer</span>), but not in general: <span class="de" lang="de">das Zimmer</span> (room), <span class="de" lang="de">das Fenster</span>, <span class="de" lang="de">die Mutter</span>, <span class="de" lang="de">die Butter</span>.</p>
+
+<h3>Usually neuter — das</h3>
+<ul>
+  <li><span class="de" lang="de">-chen, -lein</span> (small things, always neuter): <span class="de" lang="de">das Mädchen, das Brötchen</span> (bread roll), <span class="de" lang="de">das Büchlein</span></li>
+  <li><span class="de" lang="de">-ment, -um</span>: <span class="de" lang="de">das Dokument, das Zentrum, das Museum</span></li>
+  <li>Verbs used as nouns: <span class="de" lang="de">das Essen</span> (food, eating), <span class="de" lang="de">das Lernen</span> (learning)</li>
+  <li>Most countries and cities, which normally take no article: <span class="de" lang="de">Ich komme aus Indien.</span> A few countries do take one: <span class="de" lang="de">die Schweiz, die Türkei, der Iran, die USA</span> (plural).</li>
+</ul>
+
+<h2 id="compounds">Compound nouns: the last word decides</h2>
+<p>German builds long nouns by joining shorter ones. The <strong>last part</strong> always decides the gender:</p>
+<ul class="ex-list">
+  <li><span class="de" lang="de">das Haus + <span class="g-art">die</span> Tür → <span class="g-art">die</span> Haustür</span><span class="tr">house + door → front door</span></li>
+  <li><span class="de" lang="de">die Kinder + <span class="g-art">der</span> Garten → <span class="g-art">der</span> Kindergarten</span><span class="tr">children + garden → kindergarten</span></li>
+  <li><span class="de" lang="de">die Bahn + <span class="g-art">der</span> Hof → <span class="g-art">der</span> Bahnhof</span><span class="tr">railway + yard → railway station</span></li>
+</ul>
+<p>So once you know <span class="de" lang="de">die Tür</span>, you also know <span class="de" lang="de">die Autotür</span>, <span class="de" lang="de">die Zimmertür</span> and every other kind of door.</p>
+
+<h2 id="meaning">Same word, different gender</h2>
+<p>A few nouns change meaning with their article. You will meet these later, but they show why the article is part of the word:</p>
+<ul>
+  <li><span class="de" lang="de">der See</span> (lake) · <span class="de" lang="de">die See</span> (sea, as in <span class="de" lang="de">die Nordsee</span>)</li>
+  <li><span class="de" lang="de">die Steuer</span> (tax) · <span class="de" lang="de">das Steuer</span> (steering wheel)</li>
+  <li><span class="de" lang="de">der Band</span> (volume of a book) · <span class="de" lang="de">die Band</span> (music band)</li>
+</ul>
+
+<h2 id="learn">How to learn articles so they stick</h2>
+<ol>
+  <li><strong>Article + noun + plural, every time.</strong> Write and say <span class="de" lang="de">der Tisch, die Tische</span> — never <span class="de" lang="de">Tisch</span> alone. The plural is irregular too, so learn it in the same breath.</li>
+  <li><strong>Sort new words by pattern.</strong> When you meet <span class="de" lang="de">Zeitung</span>, file it with the other <span class="de" lang="de">-ung</span> words. A handful of patterns already covers many everyday nouns.</li>
+  <li><strong>Read in phrases, not words.</strong> <span class="de" lang="de">die Haustür, der Bahnhof, das Brötchen</span> said aloud as one sound are far easier to remember than a rule.</li>
+  <li><strong>Use the article in a sentence immediately.</strong> <span class="de" lang="de">Die Tasche ist neu.</span> The sentence gives the article a place to live.</li>
+</ol>
+
+<h2 id="mistakes">Common mistakes Hindi speakers make</h2>
+<ol class="mistakes">
+  <li><span class="no"><span class="tag">Not</span> <span class="de" lang="de">Die Buch ist interessant.</span></span><span class="yes"><span class="tag">Say</span> <span class="de" lang="de">Das Buch ist interessant.</span></span><span class="why"><span class="hi" lang="hi">किताब</span> is feminine in Hindi, so <span class="de" lang="de">die</span> feels natural. German <span class="de" lang="de">Buch</span> is neuter.</span></li>
+  <li><span class="no"><span class="tag">Not</span> <span class="de" lang="de">Die Mädchen heißt Priya.</span></span><span class="yes"><span class="tag">Say</span> <span class="de" lang="de">Das Mädchen heißt Priya.</span></span><span class="why"><span class="de" lang="de">-chen</span> makes the word neuter, even for a girl. (<span class="de" lang="de">die Mädchen</span> exists, but it is the plural: the girls.)</span></li>
+  <li><span class="no"><span class="tag">Not</span> <span class="de" lang="de">Das Kinder spielen.</span></span><span class="yes"><span class="tag">Say</span> <span class="de" lang="de">Die Kinder spielen.</span></span><span class="why">Every plural takes <span class="de" lang="de">die</span>. Plural <span class="de" lang="de">die</span> does not mean the noun is feminine.</span></li>
+  <li><span class="no"><span class="tag">Not</span> <span class="de" lang="de">Das ist eine Tisch.</span></span><span class="yes"><span class="tag">Say</span> <span class="de" lang="de">Das ist ein Tisch.</span></span><span class="why"><span class="de" lang="de">eine</span> is only for feminine nouns. Masculine and neuter take <span class="de" lang="de">ein</span>.</span></li>
+  <li><span class="no"><span class="tag">Not</span> learning <span class="de" lang="de">Lampe</span>, <span class="de" lang="de">Stuhl</span>, <span class="de" lang="de">Bett</span> as bare words.</span><span class="yes"><span class="tag">Do</span> learn <span class="de" lang="de">die Lampe, der Stuhl, das Bett</span>.</span><span class="why">Coming back later to “add the articles” almost never works. The article has to arrive with the word.</span></li>
+</ol>
+
+<h2 id="exercises">Exercises</h2>
+<h3>A. Der, die or das? Use the patterns above.</h3>
+<ol class="exercises">
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Zeitung</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">die Zeitung</span> — the ending <span class="de" lang="de">-ung</span> is feminine.</p></details></li>
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Brötchen</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">das Brötchen</span> — <span class="de" lang="de">-chen</span> is always neuter.</p></details></li>
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Montag</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">der Montag</span> — days of the week are masculine.</p></details></li>
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Universität</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">die Universität</span> — <span class="de" lang="de">-tät</span> is feminine.</p></details></li>
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Dokument</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">das Dokument</span> — <span class="de" lang="de">-ment</span> is usually neuter.</p></details></li>
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Lehrerin</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">die Lehrerin</span> — <span class="de" lang="de">-in</span> marks a female person.</p></details></li>
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Frühling</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">der Frühling</span> — seasons and <span class="de" lang="de">-ling</span> are masculine.</p></details></li>
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Haustür</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">die Haustür</span> — the last word, <span class="de" lang="de">die Tür</span>, decides.</p></details></li>
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Zentrum</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">das Zentrum</span> — <span class="de" lang="de">-um</span> is usually neuter.</p></details></li>
+  <li><span class="q"><span class="gap"></span> <span class="de" lang="de">Freundschaft</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">die Freundschaft</span> — <span class="de" lang="de">-schaft</span> is feminine.</p></details></li>
+</ol>
+<h3>B. Find and fix the mistake.</h3>
+<ol class="exercises">
+  <li><span class="q"><span class="de" lang="de">Der Mädchen ist nett.</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">Das Mädchen ist nett.</span> — <span class="de" lang="de">-chen</span> is neuter.</p></details></li>
+  <li><span class="q"><span class="de" lang="de">Ich habe eine Bruder.</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">Ich habe einen Bruder.</span> — <span class="de" lang="de">Bruder</span> is masculine, so the base form is <span class="de" lang="de">ein</span>; after <span class="de" lang="de">haben</span> it becomes <span class="de" lang="de">einen</span> (see the <a href="akkusativ.html">Akkusativ guide</a>).</p></details></li>
+  <li><span class="q"><span class="de" lang="de">Das Wohnung ist groß.</span></span><details><summary>Show answer</summary><p><span class="de" lang="de">Die Wohnung ist groß.</span> — <span class="de" lang="de">-ung</span> is feminine.</p></details></li>
+</ol>
+
+<h2 id="next">Where to go next</h2>
+<div class="gg-next">
+  <a href="akkusativ.html"><span class="k">Next guide</span><span class="t">Akkusativ: der → den</span></a>
+  <a href="dativ.html"><span class="k">Then</span><span class="t">Dativ: dem, der, dem</span></a>
+  <a href="../german-grammar.html#a1"><span class="k">Syllabus</span><span class="t">All A1 grammar topics</span></a>
+</div>
+
+<section class="gg-course" aria-labelledby="course-h">
+  <h2 id="course-h">Practise this inside the A1 course</h2>
+  <p>Klarweg's A1 course teaches articles in <strong>Chapter 10, Der / Die / Das</strong>, with clickable words, audio for every sentence and practice that checks your answers. Chapter 1 of A1 is free, with no signup, so you can see how the lessons work before deciding.</p>
+  <div class="hero-ctas">
+    <a href="../chapter/chapter-a1-1-alphabet.html" class="btn btn-primary">Try A1 Chapter 1 free</a>
+    <a href="../a1.html" class="btn btn-secondary">See the A1 course</a>
+  </div>
+</section>
+
+</article>
+</div>
+</main>
+
+<!-- ========== FOOTER (canonical) ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo">Klarweg</a>
+        <p>The visual, Hindi-first way to learn German — from A1 to C2, aligned to the Goethe-Zertifikat.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Levels</h3>
+        <a href="../a1.html">A1 · Foundations</a>
+        <a href="../a2.html">A2 · Elementary</a>
+        <a href="../b1.html">B1 · Intermediate</a>
+        <a href="../b2.html">B2 · Upper-int.</a>
+        <a href="../c1.html">C1 · Advanced</a>
+        <a href="../c2.html">C2 · Mastery</a>
+      </div>
+      <div class="footer-col">
+        <h3>Learn</h3>
+        <a href="../courses.html">Courses</a>
+        <a href="../live-classes.html">Live Classes</a>
+        <a href="../goethe-exam.html">Goethe Exam</a>
+        <a href="../ausbildung.html">Ausbildung</a>
+        <a href="../resources.html">Resources</a>
+        <a href="../german-grammar.html">German Grammar</a>
+      </div>
+      <div class="footer-col">
+        <h3>Company</h3>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../account/saved-words.html">Saved words</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-meta">© <span data-year>2026</span> Klarweg · German for Hindi-speaking learners</div>
+      <div class="footer-links">
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../resources.html">Resources</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../refund-policy.html">Refund Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../site.js"></script>
+<script src="../kw-config.js"></script>
+<script src="../kw-auth.js"></script>
+<script src="../kw-nav-auth.js"></script>
+<script>
+/* Mobile hamburger menu. Accessible drawer: focus moves in on open and
+   returns to the trigger on close, Escape closes, backdrop click
+   closes, Tab is trapped inside the drawer while open, background
+   scroll is blocked. Desktop nav is untouched -- this only ever shows
+   at the .nav-hamburger media breakpoint above. */
+(function () {
+  var btn = document.getElementById('nav-hamburger');
+  var panel = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-nav-overlay');
+  var closeBtn = document.getElementById('mobile-nav-close');
+  if (!btn || !panel || !overlay) return;
+  var lastFocused = null;
+
+  function focusable() {
+    return Array.prototype.slice.call(
+      panel.querySelectorAll('a[href], button:not([disabled])')
+    );
+  }
+  function openMenu() {
+    lastFocused = document.activeElement;
+    panel.hidden = false;
+    overlay.hidden = false;
+    document.body.classList.add('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'true');
+    var items = focusable();
+    if (items.length) items[0].focus();
+  }
+  function closeMenu() {
+    panel.hidden = true;
+    overlay.hidden = true;
+    document.body.classList.remove('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'false');
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+  btn.addEventListener('click', function () {
+    if (panel.hidden) openMenu(); else closeMenu();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function (e) {
+    if (panel.hidden) return;
+    if (e.key === 'Escape') { closeMenu(); return; }
+    if (e.key === 'Tab') {
+      var items = focusable();
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (!panel.hidden && window.innerWidth > 860) closeMenu();
+  });
+})();
+</script>
+</body>
+</html>

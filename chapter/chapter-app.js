@@ -33,7 +33,9 @@
   /* ---------- Global Lexicon (single shared-runtime load point) ----------
      chapter-app.js IS the shared runtime every chapter already loads, so it
      is the one place the cross-chapter dictionary gets loaded — no chapter
-     HTML file references global-lexicon.js directly. Fires immediately on
+     HTML file references it directly. Only the PUBLIC subset is published
+     (global-lexicon-public.js); a paid chapter's own entries arrive with its
+     gated payload (scripts/lexicon-split.mjs). Fires immediately on
      script execution (in parallel with the rest of page render); by the
      time a learner actually clicks a word the fetch has long resolved. */
   // Popup-only host: the lexicon is requested once the host page has loaded
@@ -44,7 +46,7 @@
     if (window.KW_GLOBAL_LEXICON || document.getElementById('kw-global-lexicon')) return;
     const s = document.createElement('script');
     s.id = 'kw-global-lexicon';
-    s.src = POP_HOST ? POP_HOST.lexiconSrc : 'global-lexicon.js';
+    s.src = POP_HOST ? POP_HOST.lexiconSrc : 'global-lexicon-public.js';
     s.onload = function () {
       // A popup-only host has no chapter markup to re-sweep.
       if (POP_HOST) return;
@@ -159,6 +161,9 @@
   // signed out, offline or without the endpoint the page stays local-only.
   let progressSync = null;
   function startProgressSync() {
+    // A server lock stub (window.CHAPTER.kwLocked) has no content: syncing it
+    // would overwrite this browser's record with empty values.
+    if (C.kwLocked) return;
     if (POP_HOST || !window.KWAccess || typeof KWAccess.ready !== 'function') return;
     KWAccess.ready().then((snap) => {
       if (!snap && typeof KWAccess.getAccessState === 'function') snap = KWAccess.getAccessState();

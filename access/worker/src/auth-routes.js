@@ -22,10 +22,13 @@ import { createUser, findUserByEmail, findUserByGoogleSub, createGoogleUser, upd
 import { verifyGoogleIdToken } from "./google-auth.js";
 import { readEntitlements } from "./entitlements.js";
 import { createUserId } from "./user-id.js";
-import { checkLoginLimit, recordLoginFailure, checkSignupLimit, recordSignupAttempt, sweepRateCounters } from "./ratelimit.js";
+import { checkLoginLimit, recordLoginFailure, checkSignupLimit, recordSignupAttempt, sweepRateCounters, takeNonceBudget, sweepGoogleNonces } from "./ratelimit.js";
 
 const SESSION_COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 const GOOGLE_NONCE_TTL_SECONDS = 60 * 5;
+/* PBKDF2 input cap: no real password is this long, and an unbounded one
+   only costs CPU. Signup refuses it; login treats it as a failed attempt. */
+export const MAX_PASSWORD_LENGTH = 1024;
 
 /* Fixed, hardcoded redirect destination for the iOS Google redirect-mode
    login. Never derived from client input — only the query string below is
@@ -221,6 +224,13 @@ export async function signup(request, env, ctx) {
     );
   }
 
+  if (password.length > MAX_PASSWORD_LENGTH) {
+    return json(
+      { ok: false, error: `Password must be at most ${MAX_PASSWORD_LENGTH} characters.` },
+      400
+    );
+  }
+
   const existingUser = await findUserByEmail(env.DB, email);
 
   if (existingUser) {
@@ -293,6 +303,14 @@ export async function login(request, env, ctx) {
     return json(
       { ok: false, error: "Email and password are required." },
       400
+    );
+  }
+
+  if (body.password.length > MAX_PASSWORD_LENGTH) {
+    await recordLoginFailure(env, request);
+    return json(
+      { ok: false, error: "Invalid email or password." },
+      401
     );
   }
 
@@ -425,10 +443,20 @@ export async function googleLogin(request, env) {
    validated here, with the same allowlists as before, and stored
    alongside the nonce instead — recovered only once that same nonce is
    later verified and atomically consumed in googleLoginRedirect(). */
-export async function googleNonce(request, env) {
+export async function googleNonce(request, env, ctx) {
+  const budget = await takeNonceBudget(env, request);
+  if (!budget.ok) {
+    return new Response(
+      JSON.stringify({ ok: false, error: "Too many attempts. Please try again shortly." }),
+      { status: 429, headers: { "Content-Type": "application/json", "Retry-After": String(budget.retryAfter) } }
+    );
+  }
+
   const url = new URL(request.url);
   const nonce = createSessionToken();
   const now = Math.floor(Date.now() / 1000);
+
+  if (ctx && ctx.waitUntil) ctx.waitUntil(sweepGoogleNonces(env, now));
 
   const mode = sanitizeMode(url.searchParams.get("mode"));
   const buy = sanitizeBuy(url.searchParams.get("buy"));

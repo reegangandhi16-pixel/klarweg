@@ -10,7 +10,7 @@ name: Deploy Pages (public allowlist only)
 #      private content (scripts/site-leak-check.mjs: paid chapter data, full
 #      dictionary, full manifest, paid timing, any audio, gated markers).
 #   2. scripts/site-publish.sh replaces klarweg-site's tree with that
-#      artifact (+ CNAME, .nojekyll), re-runs the content check on exactly
+#      artifact (+ .nojekyll, + CNAME only if vars.SITE_CNAME is set), re-runs the content check on exactly
 #      what is pushed, and pushes with a deploy key that can write ONLY to
 #      klarweg-site. klarweg-site's own Pages build publishes it.
 #
@@ -42,6 +42,10 @@ jobs:
       - name: Publish artifact to the public site repository
         env:
           SITE_DEPLOY_KEY: ${{ secrets.SITE_DEPLOY_KEY }}
+          # Custom domain of the site repo. Repository variable, EMPTY until the
+          # domain move: then no CNAME is published and klarweg.in stays where
+          # it is. Setting vars.SITE_CNAME=klarweg.in is the explicit domain-move step.
+          SITE_CNAME: ${{ vars.SITE_CNAME }}
         run: |
           set -euo pipefail
           install -m 700 -d ~/.ssh

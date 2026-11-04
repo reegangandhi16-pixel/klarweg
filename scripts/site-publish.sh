@@ -8,15 +8,17 @@
 #
 #   CI:     .github/workflows/deploy-pages.yml (deploy key SITE_DEPLOY_KEY)
 #   Manual: scripts/site-artifact.sh /tmp/kw-site &&
-#           scripts/site-publish.sh /tmp/kw-site https://github.com/reegangandhi16-pixel/klarweg-site.git
+#           SITE_CNAME="" scripts/site-publish.sh /tmp/kw-site https://github.com/reegangandhi16-pixel/klarweg-site.git
 #
-# The site repo tree = artifact + CNAME (SITE_CNAME, default klarweg.in) + .nojekyll. Files no
+# The site repo tree = artifact + .nojekyll (+ CNAME only if SITE_CNAME is non-empty; required,
+# CI sets it from vars.SITE_CNAME, empty until the domain move). Files no
 # longer in the artifact are deleted from the site. The leak check runs again
 # on the exact tree being pushed. Prints file names/counts only.
 set -euo pipefail
 ART="${1:?usage: site-publish.sh <artifactDir> <siteRemote> [sourceSha]}"
 REMOTE="${2:?usage: site-publish.sh <artifactDir> <siteRemote> [sourceSha]}"
 SRC_SHA="${3:-$(git -C "$(dirname "$0")/.." rev-parse HEAD)}"
+: "${SITE_CNAME?SITE_CNAME must be set: empty before the domain move, klarweg.in after it}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd -P)"
 ART="$(cd "$ART" && pwd -P)"
 [ -f "$ART/index.html" ] || { echo "artifact has no index.html: $ART"; exit 1; }
@@ -30,10 +32,11 @@ git checkout --quiet -B main
 # Replace the tree with the artifact (keep .git only).
 find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 cp -R "$ART"/. .
-# Custom domain file: SITE_CNAME (default klarweg.in). SITE_CNAME="" publishes
-# with NO CNAME (e.g. before the domain moves to this repo).
+# Custom domain file. SITE_CNAME must be given explicitly (no default):
+#   SITE_CNAME=""            no CNAME (before the domain moves to this repo)
+#   SITE_CNAME=klarweg.in    after the domain move
+# A CNAME in this repo makes GitHub Pages claim that domain, so never guess.
 rm -f CNAME
-SITE_CNAME="${SITE_CNAME-klarweg.in}"
 if [ -n "$SITE_CNAME" ]; then printf '%s\n' "$SITE_CNAME" > CNAME; fi
 : > .nojekyll
 

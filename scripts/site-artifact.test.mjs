@@ -75,3 +75,45 @@ test('the artifact script refuses dangerous output directories', () => {
   }
   assert.ok(fs.existsSync(path.join(ROOT, 'scripts/site-artifact.sh')), 'repo intact');
 });
+
+/* Custom domain: a CNAME in the site repo makes GitHub Pages claim that domain,
+   so it is published only when SITE_CNAME says so (CI: vars.SITE_CNAME, empty
+   until the domain move). Runs site-publish.sh against a LOCAL bare repo. */
+function publishTo(env) {
+  const bare = path.join(tmp, 'site' + Math.random().toString(36).slice(2) + '.git');
+  execFileSync('git', ['init', '-q', '--bare', '-b', 'main', bare]);
+  const e = { ...process.env, ...env };
+  if (env.SITE_CNAME === undefined) delete e.SITE_CNAME;
+  let code = 0;
+  try { execFileSync('bash', [path.join(ROOT, 'scripts/site-publish.sh'), ART, bare, 'test'], { cwd: ROOT, env: e, stdio: 'ignore' }); } catch (err) { code = err.status; }
+  const files = code ? [] : execFileSync('git', ['--git-dir', bare, 'ls-tree', '-r', '--name-only', 'main'], { encoding: 'utf8' }).split('\n').filter(Boolean);
+  const cname = files.includes('CNAME') ? execFileSync('git', ['--git-dir', bare, 'show', 'main:CNAME'], { encoding: 'utf8' }).trim() : null;
+  return { code, files, cname };
+}
+
+test('site publish: empty SITE_CNAME publishes no CNAME (domain stays where it is)', () => {
+  const r = publishTo({ SITE_CNAME: '' });
+  assert.equal(r.code, 0);
+  assert.equal(r.cname, null);
+  assert.ok(r.files.includes('index.html') && r.files.includes('.nojekyll'));
+});
+
+test('site publish: SITE_CNAME=klarweg.in publishes exactly that CNAME', () => {
+  const r = publishTo({ SITE_CNAME: 'klarweg.in' });
+  assert.equal(r.code, 0);
+  assert.equal(r.cname, 'klarweg.in');
+});
+
+test('site publish: unset SITE_CNAME refuses to publish (never guesses a domain)', () => {
+  const r = publishTo({ SITE_CNAME: undefined });
+  assert.notEqual(r.code, 0);
+});
+
+test('the deploy workflow takes the custom domain from vars.SITE_CNAME only', () => {
+  const wf = fs.readFileSync(path.join(ROOT, '.github/workflows/deploy-pages.yml'), 'utf8');
+  assert.match(wf, /SITE_CNAME: \$\{\{ vars\.SITE_CNAME \}\}/);
+  assert.ok(!/SITE_CNAME:\s*['"]?klarweg\.in/.test(wf), 'no hard-coded domain');
+  // The artifact may carry the source repo's CNAME (allowlist); site-publish.sh
+  // always drops it and writes one only from SITE_CNAME (tests above).
+  assert.match(fs.readFileSync(path.join(ROOT, 'scripts/site-publish.sh'), 'utf8'), /rm -f CNAME/);
+});

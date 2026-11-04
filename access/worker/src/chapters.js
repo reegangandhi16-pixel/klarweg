@@ -60,6 +60,30 @@ async function readIndex(env) {
   return index;
 }
 
+/* The lesson audio files a paid chapter really plays: the "audio/<kind>/…mp3"
+   lines in its gated payload (window.KW_CHAPTER_AUDIO). media.js serves a paid
+   lesson clip only if it is in this set, so unused recordings are never
+   served. null = not readable now (never cached). One set per chapter per isolate. */
+const LESSON_IN_PAYLOAD = /"audio\/((?:story|listening|reading|speaking)\/[^"\\]+\.mp3)"/g;
+const audioKeysCache = new Map();
+export async function chapterAudioKeys(env, level, number) {
+  if (!configured(env)) return null;
+  const index = await readIndex(env);
+  if (!index) return null;
+  const id = Object.keys(index).find((k) => {
+    const c = parseChapterId(k);
+    return c && c.level === level && c.number === number;
+  });
+  if (!id) return new Set();
+  const cacheKey = env.CHAPTER_RELEASE + "/" + id;
+  if (audioKeysCache.has(cacheKey)) return audioKeysCache.get(cacheKey);
+  const obj = await env.RESOURCES.get(prefix(env) + id + ".js");
+  if (!obj) return null;
+  const keys = new Set([...(await obj.text()).matchAll(LESSON_IN_PAYLOAD)].map((m) => m[1]));
+  audioKeysCache.set(cacheKey, keys);
+  return keys;
+}
+
 // "<", U+2028 and U+2029 escaped so the literal is inert in any JS context.
 const literal = (v) => JSON.stringify(v).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
 

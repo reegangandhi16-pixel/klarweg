@@ -106,11 +106,16 @@ RESOURCE_RELEASE = "r5"
 # uploaded BEFORE this var points at it. Chapter pages 2+ load their payload
 # from GET /chapters/<id>.js; without a valid release every paid chapter
 # shows "unavailable", so never deploy the pages ahead of the upload.
-CHAPTER_RELEASE = "r1"
+CHAPTER_RELEASE = "r4"
 
 [[r2_buckets]]
 binding = "RESOURCES"
 bucket_name = "klarweg-resources"
+
+# Lesson and word audio (media.js). Read-only by code: get/head only.
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "klarweg-audio"
 
 [[d1_databases]]
 binding = "DB"

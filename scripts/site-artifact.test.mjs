@@ -109,6 +109,36 @@ test('site publish: unset SITE_CNAME refuses to publish (never guesses a domain)
   assert.notEqual(r.code, 0);
 });
 
+/* Clone failures must surface, not silently fall back to a history-less repo
+   (2026-11-04: that turned a GitHub Git Operations outage into a confusing
+   "rejected (fetch first)" push failure). */
+function runPublish(remote, extraEnv = {}) {
+  try {
+    execFileSync('bash', [path.join(ROOT, 'scripts/site-publish.sh'), ART, remote, 'test'],
+      { cwd: ROOT, env: { ...process.env, SITE_CNAME: '', PUBLISH_RETRIES: '2', PUBLISH_RETRY_DELAY: '0', ...extraEnv }, stdio: 'pipe', encoding: 'utf8' });
+    return { code: 0, stderr: '' };
+  } catch (err) { return { code: err.status, stderr: String(err.stderr) }; }
+}
+
+test('site publish: an unreachable site repo stops with the git error (no git-init fallback)', () => {
+  const r = runPublish(path.join(tmp, 'does-not-exist.git'));
+  assert.notEqual(r.code, 0);
+  assert.match(r.stderr, /attempt 1 failed; retrying/);
+  assert.match(r.stderr, /cannot reach the site repository/);
+});
+
+test('site publish: an existing site history is extended, never replaced', () => {
+  const bare = path.join(tmp, 'hist' + Math.random().toString(36).slice(2) + '.git');
+  execFileSync('git', ['init', '-q', '--bare', '-b', 'main', bare]);
+  assert.equal(runPublish(bare).code, 0);
+  const first = execFileSync('git', ['--git-dir', bare, 'rev-parse', 'main'], { encoding: 'utf8' }).trim();
+  // Second publish of a changed artifact must fast-forward on top of the first.
+  fs.writeFileSync(path.join(ART, 'zz-publish-test.txt'), 'x');
+  try { assert.equal(runPublish(bare).code, 0); } finally { fs.rmSync(path.join(ART, 'zz-publish-test.txt')); }
+  const parent = execFileSync('git', ['--git-dir', bare, 'rev-parse', 'main^'], { encoding: 'utf8' }).trim();
+  assert.equal(parent, first);
+});
+
 test('the deploy workflow takes the custom domain from vars.SITE_CNAME only', () => {
   const wf = fs.readFileSync(path.join(ROOT, '.github/workflows/deploy-pages.yml'), 'utf8');
   assert.match(wf, /SITE_CNAME: \$\{\{ vars\.SITE_CNAME \}\}/);

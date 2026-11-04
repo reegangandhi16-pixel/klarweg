@@ -25,7 +25,35 @@ ART="$(cd "$ART" && pwd -P)"
 
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
-git clone --quiet --depth 1 "$REMOTE" "$WORK/site" 2>/dev/null || { git init --quiet -b main "$WORK/site"; git -C "$WORK/site" remote add origin "$REMOTE"; }
+# Fetch the current site history. Git errors are never hidden: a failed clone
+# used to fall back silently to `git init`, and the history-less push was then
+# rejected as "fetch first" (2026-11-04, during a GitHub Git Operations
+# incident), which hid the real error. Now:
+#   - transient failures are retried (PUBLISH_RETRIES, default 3);
+#   - an unreachable/unauthorised remote stops the publish with git's error;
+#   - a fresh repo is created only when the remote is reachable AND has no
+#     main branch yet (the very first publish).
+RETRIES="${PUBLISH_RETRIES:-3}"
+DELAY="${PUBLISH_RETRY_DELAY:-10}"
+retry() {
+  local n=1
+  until "$@"; do
+    if [ "$n" -ge "$RETRIES" ]; then echo "site-publish: '$1 $2' failed after $n attempt(s)" >&2; return 1; fi
+    echo "site-publish: '$1 $2' attempt $n failed; retrying in $((n * DELAY))s" >&2
+    sleep $((n * DELAY)); n=$((n + 1))
+  done
+}
+clone_site() { rm -rf "$WORK/site"; git clone --quiet --depth 1 --branch main "$REMOTE" "$WORK/site"; }
+
+HEADS="$(retry git ls-remote --heads "$REMOTE" main)" \
+  || { echo "site-publish: cannot reach the site repository (git error above); nothing published" >&2; exit 1; }
+if [ -n "$HEADS" ]; then
+  retry clone_site || { echo "site-publish: cannot clone the site repository (git error above); nothing published" >&2; exit 1; }
+else
+  echo "site-publish: site repository has no main branch yet; first publish"
+  git init --quiet -b main "$WORK/site"
+  git -C "$WORK/site" remote add origin "$REMOTE"
+fi
 cd "$WORK/site"
 git checkout --quiet -B main
 

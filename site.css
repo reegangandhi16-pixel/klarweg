@@ -32,6 +32,7 @@
   --g-subject: #185FA5; --g-verb: #DC2626; --g-object: #2E7D32;
   --g-time: #7C3AED; --g-place: #EA580C; --g-akkusativ: #10B981; --g-dativ: #5C7A1D;
   --accent: #1F4E4A; --coral: #E55A3F; --coral-text: #C9371B;
+  --cta-green: #1FA84B; /* brand CTA green = index.html .btn-primary */
 
   --dur-fast: 150ms; --dur-base: 250ms; --dur-slow: 400ms; --dur-xl: 600ms;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -230,6 +231,9 @@ body.mobile-nav-open { overflow: hidden; }
 .btn-primary { background: var(--coral); color: #fff; }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 12px 28px rgba(229,90,63,0.22); }
 .btn-primary:active { transform: translateY(0); }
+/* Brand CTA green (homepage primary CTA colour) — "Try Chapter 1 free" only. */
+.btn-primary.btn-cta-green { background: var(--cta-green); }
+.btn-primary.btn-cta-green:hover { box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 12px 28px rgba(31,168,75,0.22); }
 .btn-secondary { background: var(--bg-surface); color: var(--ink-primary); border-color: var(--hairline); border-radius: var(--r-md); }
 .btn-secondary:hover { transform: translateY(-1px); border-color: var(--hairline-strong); box-shadow: var(--shadow-soft); }
 .btn-arrow { transition: transform var(--dur-base) var(--ease); }

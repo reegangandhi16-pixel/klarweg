@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality|sleep-wake|focus-not-obscured|autosave-rejected runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality|sleep-wake|focus-not-obscured|autosave-rejected|text-limit runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -2464,12 +2464,147 @@ async function runAutosaveRejected() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* Schreiben length limit (textlimit.js): live counter, warning at 90 %, maxlength while typing (incl. Enter and the
+   umlaut buttons), an over-limit paste refused whole (never a silent partial paste), a paste that fits / replaces a
+   selection still works, and autosave from PR #240 unchanged: a text of exactly 20 000 is saved, an over-long one
+   (set by script = a text restored from before the limit) is refused by the server alone while the others save, and
+   it can only be shortened. Real input: CDP Input.insertText / key events and Chrome's own copy and paste commands. */
+async function runTextLimit() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), flags: { EXAM_MODULE_ONLY: 'schreiben', EXAM_RELEASE_FORMS: PRACTICE.id } });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const stored = async () => Object.fromEntries((await dev.env.DB.prepare("SELECT item_id, value_json FROM responses_current WHERE module = 'schreiben'").all()).results.map((r) => [r.item_id, JSON.parse(r.value_json).text.length]));
+    const ta = (id) => `document.querySelector('textarea[data-item="${id}"]')`;
+    // stands in for a long typing session (or a text restored from before the limit existed): set by script, so maxlength does not apply
+    const setValue = (id, text) => evaluate(`(() => { const t = ${ta(id)}; t.value = ${JSON.stringify(text)}; t.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+    // Schreiben parts are tabs: open the item's part first, as the learner would (a hidden textarea takes no focus)
+    const show = (id) => evaluate(`(() => { const p = ${ta(id)}.closest('[data-part]').dataset.part; const tab = document.querySelector('#tab-part-' + p); if (tab.getAttribute('aria-selected') !== 'true') tab.click(); })()`);
+    const focusEnd = async (id) => { await show(id); await evaluate(`(() => { const t = ${ta(id)}; t.focus(); t.setSelectionRange(t.value.length, t.value.length); })()`); };
+    const selectAll = async (id) => { await show(id); await evaluate(`(() => { const t = ${ta(id)}; t.focus(); t.select(); })()`); };
+    const len = (id) => evaluate(`${ta(id)}.value.length`);
+    const counter = (id) => evaluate(`(() => { const c = document.querySelector('[data-cc-for="' + ${ta(id)}.id + '"]'); return { text: c.querySelector('[data-cc-text]').textContent, note: c.querySelector('[data-cc-note]').textContent, state: c.dataset.state }; })()`);
+    const said = () => evaluate(`document.querySelector('#kx-announce').textContent`);
+    const clearSaid = () => evaluate(`document.querySelector('#kx-announce').textContent = ''`);
+    const typeReal = (text) => send('Input.insertText', { text });
+    const key = async (k, code, vk, extra = {}) => { await send('Input.dispatchKeyEvent', { type: 'keyDown', key: k, code, windowsVirtualKeyCode: vk, ...extra }); await send('Input.dispatchKeyEvent', { type: 'keyUp', key: k, code, windowsVirtualKeyCode: vk }); };
+    const copy = () => key('c', 'KeyC', 67, { modifiers: 2, commands: ['copy'] });
+    const paste = async () => { await key('v', 'KeyV', 86, { modifiers: 2, commands: ['paste'] }); await sleep(150); };
+    const N = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+    await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+    await waitFor(`document.querySelector('[data-act="create"][data-module="schreiben"]')`, 15000, 'Schreiben-only start screen');
+    await click('[data-act="create"][data-module="schreiben"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`, 15000, 'Schreiben intro');
+    await click('[data-act="start"][data-module="schreiben"]');
+    await waitFor(`document.querySelectorAll('textarea[data-item]').length >= 3`, 15000, 'Schreiben rendered');
+    const ids = await evaluate(`[...document.querySelectorAll('textarea[data-item]')].map((t) => t.dataset.item)`);
+    const [A, B, C] = ids;
+
+    // 1. counter shown from the start, maxlength set, live update while typing
+    assert.deepEqual(await counter(A), { text: `0 / ${N(20000)} Zeichen`, note: '', state: 'ok' });
+    assert.equal(await evaluate(`${ta(A)}.maxLength`), 20000);
+    await focusEnd(A); await typeReal('Lieber Tom, ');
+    assert.equal((await counter(A)).text, `12 / ${N(20000)} Zeichen`, 'counter follows typing');
+    await key('Enter', 'Enter', 13, { text: '\r' });
+    assert.equal((await counter(A)).text, `13 / ${N(20000)} Zeichen`, 'a line break counts 1, as on the server');
+
+    // 2. warning when the text reaches 90 % (announced once)
+    await setValue(A, 'a'.repeat(17_999)); await focusEnd(A); await clearSaid();
+    await typeReal('b');
+    assert.deepEqual(await counter(A), { text: `${N(18000)} / ${N(20000)} Zeichen`, note: `Noch ${N(2000)} Zeichen.`, state: 'warn' });
+    assert.match(await said(), new RegExp(`${N(18000)} von höchstens ${N(20000)} Zeichen`));
+    await clearSaid(); await typeReal('c');
+    assert.equal(await said(), '', 'the warning is not repeated on every key');
+
+    // 3. typing to the limit
+    await setValue(A, 'x'.repeat(19_995)); await focusEnd(A); await clearSaid();
+    await typeReal('abcde');
+    assert.equal(await len(A), 20000);
+    assert.deepEqual(await counter(A), { text: `${N(20000)} / ${N(20000)} Zeichen`, note: 'Höchstlänge erreicht.', state: 'limit' });
+    assert.match(await said(), /Höchstlänge erreicht/);
+
+    // 4. trying to exceed it: a character, Enter and an umlaut button are all refused; the text is unchanged
+    await typeReal('X'); await key('Enter', 'Enter', 13, { text: '\r' });
+    assert.equal(await len(A), 20000); assert.equal(await evaluate(`${ta(A)}.value.slice(-5)`), 'abcde');
+    await clearSaid(); await sleep(5200); await typeReal('Y');   // after a pause the refused key says it again
+    await waitFor(`document.querySelector('#kx-announce').textContent.includes('Höchstlänge erreicht')`, 2000, 'limit note repeated after a pause');
+    await clearSaid(); await click(`.kx-char[data-insert="ä"][data-target="${await evaluate(`${ta(A)}.id`)}"]`);
+    assert.equal(await len(A), 20000, 'umlaut button refused at the limit');
+    assert.match(await said(), /Höchstlänge erreicht/);
+    // replacing a selection that keeps the text within the limit is allowed
+    await evaluate(`${ta(A)}.setSelectionRange(19997, 20000)`); await typeReal('Z');
+    assert.equal(await len(A), 19998);
+
+    // 5. paste: copy 5 000 characters inside the editor (internal_only paste policy), paste where it would not fit
+    await setValue(C, 'p'.repeat(5000)); await selectAll(C); await copy();
+    await setValue(B, 'q'.repeat(16_000)); await focusEnd(B); await clearSaid();
+    await paste();
+    assert.equal(await len(B), 16000, 'nothing inserted: no silent partial paste');
+    assert.match(await said(), new RegExp(`Nicht eingefügt.*${N(21000)}.*${N(20000)}`));
+    // a paste that fits is inserted, the counter follows
+    await setValue(B, 'Kurzer Text. '); await focusEnd(B); await paste();
+    assert.equal(await len(B), 5013);
+    assert.equal((await counter(B)).text, `${N(5013)} / ${N(20000)} Zeichen`);
+    // a paste replacing the whole full text fits (the selection is taken into account)
+    await setValue(A, 'x'.repeat(20000)); await selectAll(A); await paste();
+    assert.equal(await len(A), 5000, 'paste over a selection replaces it');
+
+    // 6. autosave: exactly 20 000 is accepted by the server; all three texts are saved
+    await setValue(A, 'Liebe Anna, '.padEnd(20000, 'x'));
+    for (const t0 = Date.now(); ; await sleep(200)) {
+      const s = await stored();
+      if (s[A] === 20000 && s[B] === 5013 && s[C] === 5000) break;
+      if (Date.now() - t0 > 20000) throw new Error(`texts not saved: ${JSON.stringify(s)}`);
+    }
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Gespeichert');
+
+    // 7. an over-long text (restored from before the limit): shown as over, refused by the server only, never shortened
+    //    by the page; the other answers keep saving (PR #240), typing more is refused, shortening saves it
+    await setValue(B, 'r'.repeat(20_001));
+    assert.deepEqual(await counter(B), { text: `${N(20001)} / ${N(20000)} Zeichen`, note: '1 Zeichen zu viel – bitte kürzen.', state: 'over' });
+    await setValue(C, 'Neuer Text.');
+    for (const t0 = Date.now(); (await stored())[C] !== 11; await sleep(200)) if (Date.now() - t0 > 20000) throw new Error(`the other text was not saved next to the over-long one: ${JSON.stringify(await stored())}`);
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Gespeichert next to the refused text');
+    assert.equal((await stored())[B], 5013, 'the server kept the last accepted text');
+    assert.match(await said(), /ist zu lang \(höchstens 20 000 Zeichen\) und wurde nicht gespeichert/);
+    assert.equal(await len(B), 20001, 'the page never shortens the learner\'s text');
+    await focusEnd(B); await typeReal('s');
+    assert.equal(await len(B), 20001, 'an over-long text cannot grow');
+    await key('Backspace', 'Backspace', 8);
+    assert.equal(await len(B), 20000);
+    for (const t0 = Date.now(); (await stored())[B] !== 20000; await sleep(200)) if (Date.now() - t0 > 20000) throw new Error('the shortened text was not saved');
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Gespeichert after shortening');
+
+    // 8. after a reload the counters are drawn from the saved texts
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
+    await waitFor(`!window.__beforeReload && document.querySelectorAll('textarea[data-item]').length >= 3`, 15000, 'Schreiben after reload');
+    assert.deepEqual(await counter(A), { text: `${N(20000)} / ${N(20000)} Zeichen`, note: 'Höchstlänge erreicht.', state: 'limit' });
+    assert.equal((await counter(C)).text, `11 / ${N(20000)} Zeichen`);
+    log('text-limit', 'PASS', { stored: await stored() });
+    return b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+  } finally { b.close(); dev.server.close(); }
+}
+
 /* ENGINE §10 / MOCK M-25: the smallest supported viewport is 360×640 */
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 360×640', w: 360, h: 640, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, ''], ['sleep-wake', runSleepWake, ''], ['focus-not-obscured', runFocusNotObscured, ''], ['autosave-rejected', runAutosaveRejected, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, ''], ['sleep-wake', runSleepWake, ''], ['focus-not-obscured', runFocusNotObscured, ''], ['autosave-rejected', runAutosaveRejected, ''], ['text-limit', runTextLimit, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'text-limit') { results.push({ vp: `text-limit ${PRACTICE.name} (Schreiben-only)`, uncaught: await fn() }); continue; }
   if (name === 'autosave-rejected') { results.push({ vp: `autosave-rejected ${PRACTICE.name} (Schreiben-only)`, uncaught: await fn() }); continue; }
   if (name === 'focus-not-obscured') { results.push({ vp: `focus-not-obscured ${PRACTICE.name} (Lesen-only, 1280 + 360)`, uncaught: await fn() }); continue; }
   if (name === 'sleep-wake') { results.push({ vp: `sleep-wake ${PRACTICE.name} (Lesen-only, Q3a)`, uncaught: await fn() }); continue; }

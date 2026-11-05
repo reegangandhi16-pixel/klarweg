@@ -3,13 +3,14 @@
    → server deadline. Invalid state transitions are rejected with 409. */
 import { fail, now, readJsonBody, sha256Hex, DEVICE_ID_RE } from './http.js';
 import { log } from './log.js';
-import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly, practiceParts } from './flags.js';
+import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly, practiceParts, singleExaminer } from './flags.js';
 import { hasExamAccess, hasRole } from './auth.js';
 import { releaseSet, practicePool, RELEASE_MESSAGES } from './release.js';
 import { formRow, levelConfig, moduleConfig, loadPackage } from './content.js';
 import { countWords } from './wordcount.js';
 import { BANDS, rubricTotal, rubricUnits } from './scoring.js';
 import { signMediaToken, MEDIA_TTL_MS } from './media.js';
+import { sameExaminerRated } from './core.js';
 import {
   loadAttempt, attemptModules, audit, requireRequestId, idempotent, acquireLease, requireLease,
   computeDeadline, speakingPrepEnd, settle, submitModule, finalizeModule, scoreModule, buildResult, incident, SAVE_GRACE_MS, RESULT_LABEL
@@ -937,7 +938,8 @@ export async function moduleFeedback(env, userId, attemptId, module) {
       ...(w ? { text: w.text, words: w.words, target_words: w.target_words } : {})
     };
   });
-  return { ok: true, attempt_id: attempt.id, module, points: score.points, max_points: score.max_points, units };
+  const sameExaminer = await sameExaminerRated(env, attempt.id, module);
+  return { ok: true, attempt_id: attempt.id, module, points: score.points, max_points: score.max_points, same_examiner: sameExaminer, units };
 }
 
 /* ---------- staff: ratings (two independent human raters are authoritative) ---------- */
@@ -964,7 +966,8 @@ export async function submitRating(env, userId, request) {
   try { total = rubricTotal(cfg.rubrics[unit.rubric_id], body.bands); } catch (e) { fail(422, 'invalid_bands', e.message); }
   const other = await env.DB.prepare('SELECT round FROM ratings WHERE attempt_id = ?1 AND module = ?2 AND rater_id = ?3 AND round != ?4 LIMIT 1')
     .bind(attempt.id, module, userId, body.round).first();
-  if (other) fail(409, 'rater_not_independent', 'Each round must come from a different rater.');
+  // OD-13: two different raters, unless the owner switched on single-examiner rating (the result then says so)
+  if (other && !singleExaminer(env)) fail(409, 'rater_not_independent', 'Each round must come from a different rater.');
   try {
     await env.DB.prepare(`INSERT INTO ratings (id, attempt_id, module, item_id, rubric_id, rater_id, rater_kind, round, bands_json, points_json, total, submitted_at)
         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)`)
@@ -1059,7 +1062,7 @@ export async function productiveForRating(env, userId, attemptId) {
   const modules = ['schreiben', 'sprechen'].map((m) => ({ module: m, status: mods[m] ? mods[m].status : null, score_status: scores[m] ? scores[m].status : null,
     points: scores[m] && scores[m].status === 'final' ? scores[m].points : null, max_points: scores[m] ? scores[m].max_points : null }));
   return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, writing, recordings: turns, bands: BANDS, modules, units, topic,
-    lead: await hasRole(env, userId, ['lead_rater']) };
+    lead: await hasRole(env, userId, ['lead_rater']), single_examiner: singleExaminer(env) };
 }
 
 /* The learner's Sprechen Teil 2 topic (raters judge Teil 2 against it) and the partner talk that topic implies for

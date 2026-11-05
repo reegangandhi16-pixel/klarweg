@@ -19,9 +19,17 @@
                              id must be a live form, synthetic ones with purpose 'practice', and NONE may be in
                              EXAM_RELEASE_FORMS (live simulation forms never enter the pool). Otherwise no part practice
                              is assigned or continued (fail closed, pool_misconfigured).
+     EXAM_SINGLE_EXAMINER    unset (default): rounds 1 and 2 of a Schreiben/Sprechen rating must come from two different
+                             raters (OD-13). "on": ONE examiner may give both rounds (owner decision 2026-11-06: the owner
+                             is the only examiner). Each round stays blind (the rater view never shows another round's
+                             bands), and every result built from such ratings says so (same_examiner); it is never shown
+                             as two independent raters.
    EXAM_ROUTES lives in klarweg-access (the /exam/* proxy). */
 
 const on = (v) => v === 'on';
+
+/* EXAM_SINGLE_EXAMINER: one examiner may give both rating rounds (see the header) */
+export const singleExaminer = (env) => on(env.EXAM_SINGLE_EXAMINER);
 
 export function flags(env) {
   return {

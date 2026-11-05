@@ -181,7 +181,7 @@ test('RESULTS (render): OD-45 title and disclaimer, per-module rows with counts,
   assert.ok(html.includes('100 / 100') && html.includes('bestanden · sehr gut'));
   assert.ok(html.includes('33 / 100') && html.includes('richtig 10 · falsch 15 · ohne Antwort 5'));
   assert.equal(/nicht bestanden · nicht bestanden/.test(html), false, 'a band equal to the verdict is not repeated');
-  assert.ok(html.includes('in Bewertung') && html.includes('Wartet auf zwei unabhängige Bewertungen.') && html.includes('nicht abgelegt'));
+  assert.ok(html.includes('in Bewertung') && html.includes('Wartet auf die Bewertung.') && html.includes('nicht abgelegt'));
   assert.equal(/Awaiting|TEST RESULT/.test(html), false, 'no English learner-facing text');
   assert.ok(html.includes('kein Gesamtergebnis'));
   assert.equal(/Goethe[- ]?(score|Ergebnis|Zertifikat|certificate)|official score|Gesamtpunkte/i.test(html.replace(esc(RESULT_DISCLAIMER), '')), false);
@@ -1311,4 +1311,16 @@ test('FORM USAGE VIEW (ENGINE §7.6): on-request button with the audit note; tab
   assert.match(html, /<th scope="row">P3 &lt;Lesen&gt;<br><span class="kx-admin-detail">frm:b1:&lt;x&gt;@1<\/span><\/th><td>aktiv<\/td><td>ja<\/td><td>–<\/td><td>5<\/td><td>2 \/ 3<\/td><td>1 \/ 4 \/ 0<\/td><td>4 \/ 1<\/td><td>4<\/td><td>1970-01-01 00:00 UTC<\/td>/);
   assert.match(formUsageTable({ release_set: { block: null }, practice_pool: {}, forms: [] }), /Lernfreigabe: keine \(nicht gesetzt\)/);
   assert.match(read('exam/js/admin.js'), /if \(q\) show\(q\); else screen\(lookupForm\(\) \+ formUsageButton\(\)\);/);
+});
+
+test('START SCREEN: the Mock M0 comes before the synthetic practice and says how it is rated', async () => {
+  const { startChoice, startScreen } = await import('../js/render.js');
+  const av = { modes: [{ mode: 'synthetic_full', level: 'b1', available: true }, { mode: 'mock_m0', level: 'b1', available: true }] };
+  const c = startChoice(av);
+  assert.deepEqual(c, { mode: 'mock_m0', module: null });
+  const html = startScreen(c);
+  assert.ok(html.includes('data-mode="mock_m0"') && html.includes('Klarweg B1 Modelltest'));
+  assert.ok(html.includes('zertifizierte Prüfperson') && html.includes('kein offizielles Ergebnis'));
+  assert.ok(!html.includes('synthetische Inhalte') && html.includes('synthetischen Stimmen'), 'real content, honestly synthetic voices');
+  assert.deepEqual(startChoice({ modes: [{ mode: 'synthetic_full', level: 'b1', available: true }, { mode: 'mock_m0', level: 'b1', available: false }] }), { mode: 'synthetic_full', module: null });
 });

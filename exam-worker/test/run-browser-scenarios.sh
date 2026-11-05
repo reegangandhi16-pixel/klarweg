@@ -18,7 +18,7 @@ set -uo pipefail
 cd "$(dirname "$0")/../.."
 
 LONG="practice flagged sprechen-topic"
-REST="autoplay hoeren-autoplay lease-expiry two-tabs rater-2fa lesen-only part-practice access-admin precheck review-form confidentiality sleep-wake focus-not-obscured autosave-rejected text-limit"
+REST="autoplay hoeren-autoplay lease-expiry two-tabs rater-2fa lesen-only part-practice access-admin precheck review-form confidentiality sleep-wake focus-not-obscured autosave-rejected text-limit text-limit-ime"
 SMOKE="access-admin rater-2fa lease-expiry two-tabs confidentiality precheck"
 
 declared=$(node -e '

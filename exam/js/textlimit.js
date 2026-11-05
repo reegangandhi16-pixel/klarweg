@@ -34,3 +34,22 @@ export function counterNote(len) {
 export const LIMIT_WARNING = (len) => `Ihr Text hat ${formatChars(len)} von höchstens ${formatChars(MAX_TEXT_CHARS)} Zeichen.`;
 export const LIMIT_REACHED = `Höchstlänge erreicht: höchstens ${formatChars(MAX_TEXT_CHARS)} Zeichen pro Text. Weitere Zeichen werden nicht angenommen.`;
 export const PASTE_TOO_LONG = (len) => `Nicht eingefügt: Der Text wäre dann ${formatChars(len)} Zeichen lang, erlaubt sind höchstens ${formatChars(MAX_TEXT_CHARS)}. Kürzen Sie den Text oder fügen Sie weniger ein.`;
+
+/* F2 — a composition (IME, macOS dead key such as Option+u → ü) cannot be cancelled by script and the browser may cut
+   the committed text at maxlength without telling anyone. base = text length outside the composed range at
+   compositionstart, committed = compositionend data, finalLen = text length once the commit has landed.
+   True when characters of the commit did not make it in because of the limit. A cancelled composition (empty data)
+   is never "truncated". */
+export function compositionTruncated(base, committed, finalLen) {
+  const want = Math.max(0, base | 0) + String(committed ?? '').length;
+  return want > MAX_TEXT_CHARS && finalLen < want;
+}
+
+/* F3 — Safari: at (or one code unit short of) the limit, WebKit trims the text to what fits BEFORE beforeinput, so a
+   refused key arrives as insertText with data '' and nothing would explain why the key did nothing. Narrow on purpose:
+   only typing / replacement text, only an empty string (not null: Enter and deletions carry null), only when the text
+   outside the selection is within one code unit of the limit (a surrogate pair such as an emoji needs two). */
+export function emptyInsertAtLimit(inputType, data, len, selected = 0) {
+  return (inputType === 'insertText' || inputType === 'insertReplacementText') && data === ''
+    && (len | 0) - Math.max(0, selected | 0) >= MAX_TEXT_CHARS - 1;
+}

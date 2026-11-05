@@ -69,4 +69,15 @@ export const GUIDES = [
     linkText: 'Perfekt explained',
     footer: false,
   },
+  {
+    slug: 'modalverben',
+    level: 'A1',
+    crumb: 'Modal verbs',
+    title: 'German Modal Verbs: können, müssen, dürfen Explained — Klarweg',
+    description: 'German modal verbs made clear: meanings of können, müssen, dürfen, sollen, wollen and mögen with Hindi parallels, the forms, word order, müssen nicht vs dürfen nicht, polite möchte and könnte, and exercises.',
+    teaches: 'German modal verbs (Modalverben): meanings, forms, word order and past tense',
+    chapter: 'chapter-a1-20-modalverben1.html',
+    linkText: 'Modal verbs explained',
+    footer: false,
+  },
 ];

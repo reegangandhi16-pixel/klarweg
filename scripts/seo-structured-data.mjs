@@ -78,6 +78,7 @@ const GUIDES = [
   ['goethe/paper-vs-digital-exam.html', 'Paper vs digital', GOETHE, null],
   ['goethe/exam-fees-registration-india.html', 'Fees and registration in India', GOETHE, null],
   ['german-certificate-ausbildung.html', 'German level for Ausbildung', AUSBILDUNG, null],
+  ['german-for-nursing-germany.html', 'German for nurses', AUSBILDUNG, null],
   ['german-certificate-study-germany.html', 'German certificate for study', COURSES, null],
   ['german-course-cost-india.html', 'Cost of learning German in India', COURSES, null],
 ];

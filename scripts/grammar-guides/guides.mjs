@@ -58,4 +58,15 @@ export const GUIDES = [
     linkText: 'Prepositions explained',
     footer: false,
   },
+  {
+    slug: 'perfekt',
+    level: 'A1',
+    crumb: 'Perfekt',
+    title: 'German Perfekt: haben or sein and Past Participles Explained — Klarweg',
+    description: 'The German Perfekt made clear: haben or sein, how to form regular, irregular and separable participles, a Hindi ने check for haben, Perfekt vs Präteritum, mistakes and exercises with answers.',
+    teaches: 'The German Perfekt tense: haben or sein and past participles (Partizip II)',
+    chapter: 'chapter-a1-28-perfekt.html',
+    linkText: 'Perfekt explained',
+    footer: false,
+  },
 ];

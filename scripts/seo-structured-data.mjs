@@ -65,6 +65,7 @@ PAGES['ausbildung.html'] = [breadcrumb([HOME, AUSBILDUNG])];
 const GUIDES = [
   // [file, breadcrumb name, parent crumb, CEFR level or null]
   ['goethe/a1-exam.html', 'A1 exam', GOETHE, 'A1'],
+  ['goethe/a2-exam.html', 'A2 exam', GOETHE, 'A2'],
   ['goethe/b1-exam.html', 'B1 exam', GOETHE, 'B1'],
   ['goethe/b1-schreiben.html', 'B1 Schreiben', GOETHE, 'B1'],
   ['goethe/b1-sprechen.html', 'B1 Sprechen', GOETHE, 'B1'],

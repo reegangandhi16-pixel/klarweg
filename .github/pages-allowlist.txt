@@ -41,6 +41,8 @@ german-grammar.html
 grammar/der-die-das.html
 grammar/akkusativ.html
 grammar/dativ.html
+grammar/word-order.html
+grammar/prepositions.html
 # Goethe exam guides (free, indexable preparation content)
 goethe/a1-exam.html
 goethe/b2-exam-preparation.html
@@ -314,6 +316,7 @@ german-certificate-ausbildung.html
 german-certificate-study-germany.html
 
 # SEO batch 3 (2026-11): B1 exam guide, exam fees in India, cost of learning German
+goethe/a2-exam.html
 goethe/b1-exam.html
 goethe/exam-fees-registration-india.html
 german-course-cost-india.html

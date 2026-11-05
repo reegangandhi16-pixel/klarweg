@@ -90,6 +90,7 @@ body += `
     </div>
     <h1 class="display-xl">German grammar, <span class="accent">A1 to C2.</span></h1>
     <p class="lede">Every grammar topic in the Klarweg course, in the order you learn it — from the alphabet and the nominative case to Nominalstil and C2 register. Each chapter teaches one topic with colour-coded grammar, clickable German, audio, practice and a quiz. Chapter 1 of every level is free.</p>
+    <p class="gi-guides"><a href="grammar/index.html">See all ${GUIDES.length} free grammar guides, by level →</a></p>
     <p class="gi-guides">Free guides, no signup: ${GUIDES.map((g) => `<a href="grammar/${g.slug}.html">${esc(g.linkText)}</a>`).join(' · ')}</p>
     <nav class="gi-jump" aria-label="Jump to level">
       ${LEVELS.map((lv) => `<a href="#${lv.id}">${lv.name} · ${byLevel[lv.id].length}</a>`).join('\n      ')}

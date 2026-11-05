@@ -46,7 +46,7 @@ const CSS = `<style>
 .gg-crumbs { font-family: var(--font-mono); font-size: 12px; color: var(--ink-tertiary); margin-bottom: 24px; }
 .gg-crumbs a { color: var(--ink-secondary); text-decoration: underline; text-decoration-color: var(--hairline-strong); text-underline-offset: 3px; }
 .gg-crumbs span[aria-hidden] { margin: 0 8px; }
-.gg-body { padding: 0 0 96px; }
+.gg-body { padding-bottom: 96px; }
 .gg-prose { max-width: 680px; }
 .gg-prose > h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 4vw, 36px); line-height: 1.2; letter-spacing: -0.02em; margin: 64px 0 16px; scroll-margin-top: 80px; }
 .gg-prose > h3 { font-family: var(--font-ui); font-size: 18px; font-weight: 600; margin: 36px 0 12px; }
@@ -173,13 +173,127 @@ function build(g) {
   return withBlock(page, block([crumbs, article]));
 }
 
+/* ---------- Hub: grammar/index.html lists every guide by level ----------
+   Generated from the same registry, so a new guide appears here as soon as
+   it is added to guides.mjs. Within a level, guides follow the course
+   order (the chapter number in each guide's chapter file name). No footer
+   (same owner rule as the new guides). */
+const HUB_LEVELS = [
+  ['A1', 'Beginner', 'Sounds, verbs, cases and the first sentence patterns.'],
+  ['A2', 'Elementary', 'Connecting sentences, more cases, comparisons and everyday structures.'],
+  ['B1', 'Intermediate', 'Tenses, clauses and the structures the Goethe B1 exam expects.'],
+  ['B2', 'Upper intermediate', ''],
+  ['C1', 'Advanced', ''],
+  ['C2', 'Proficient', ''],
+];
+const chapterNo = (g) => Number((g.chapter.match(/^chapter-[a-c][12]-(\d+)-/) || [])[1] || 999);
+const HUB_TITLE = 'Free German Grammar Guides A1–B1, with Hindi — Klarweg';
+
+const HUB_CSS = `<style>
+.gh-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; }
+.gh-jump a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--hairline); border-radius: 999px; background: var(--bg-surface); color: var(--ink-primary); font-family: var(--font-mono); font-size: 13px; text-decoration: none; transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.gh-jump a:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+.gh-body { padding-bottom: 96px; }
+.gh-level { margin: 0 0 64px; scroll-margin-top: 80px; }
+.gh-level-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin: 0 0 8px; }
+.gh-level h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 4vw, 36px); line-height: 1.2; letter-spacing: -0.02em; margin: 0; }
+.gh-level .gh-count { font-family: var(--font-mono); font-size: 12px; color: var(--ink-tertiary); }
+.gh-level > p { max-width: 680px; font-size: 17px; line-height: 1.65; color: var(--ink-secondary); margin: 0 0 24px; }
+.gh-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.gh-grid a { display: flex; flex-direction: column; height: 100%; padding: 24px; border: 1px solid var(--hairline); border-radius: var(--r-lg); background: var(--bg-surface); text-decoration: none; transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.gh-grid a:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+.gh-grid a:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
+.gh-grid .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 8px; }
+.gh-grid .t { font-family: var(--font-display); font-size: 22px; line-height: 1.25; color: var(--ink-primary); margin-bottom: 8px; }
+.gh-grid .d { font-size: 15px; line-height: 1.55; color: var(--ink-secondary); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.gh-more { max-width: 680px; padding: 36px; border-radius: var(--r-lg); background: var(--bg-warm); border: 1px solid var(--hairline-light); }
+.gh-more h2 { font-family: var(--font-display); font-weight: 500; font-size: 28px; margin: 0 0 12px; }
+.gh-more p { font-size: 17px; line-height: 1.65; color: var(--ink-secondary); margin: 0 0 16px; }
+.gh-more a:not(.btn) { color: var(--ink-primary); text-decoration: underline; text-decoration-color: var(--ink-tertiary); text-underline-offset: 3px; }
+.gh-more .hero-ctas { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 640px) { .gh-more { padding: 24px; } .gh-level > p { font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) { .gh-jump a, .gh-grid a { transition: none; } }
+</style>
+`;
+
+function buildHub() {
+  const url = `${SITE_BASE}/grammar/index.html`;
+  const desc = `All ${GUIDES.length} free Klarweg German grammar guides in one place, sorted by level from A1 to B1: clear English explanations, Hindi comparisons, common mistakes and exercises with answers.`;
+  let head = headTpl
+    .replace(/<title>[^<]*<\/title>/, `<title>${esc(HUB_TITLE)}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${esc(HUB_TITLE)}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(HUB_TITLE)}$2`)
+    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(desc)}$2`);
+  head = up(head) + CSS + HUB_CSS;
+  const levels = HUB_LEVELS
+    .map(([id, name, intro]) => ({ id, name, intro, guides: GUIDES.filter((g) => g.level === id).sort((a, b) => chapterNo(a) - chapterNo(b)) }))
+    .filter((lv) => lv.guides.length);
+  const card = (g) => `      <li><a href="${g.slug}.html"><span class="k">${g.level}</span><span class="t">${esc(g.crumb)}</span><span class="d">${esc(g.description)}</span></a></li>`;
+  const body = `<section class="page-hero">
+  <div class="container">
+    <nav class="gg-crumbs" aria-label="Breadcrumb"><a href="../index.html">Klarweg</a><span aria-hidden="true">/</span><a href="../german-grammar.html">German grammar</a><span aria-hidden="true">/</span><span aria-current="page">Free guides</span></nav>
+    <div class="eyebrow-row">
+      <span class="eyebrow">Free grammar guides · ${levels[0].id}–${levels[levels.length - 1].id}</span>
+      <span class="pill"><span class="pill-dot"></span> ${GUIDES.length} guides</span>
+    </div>
+    <h1 class="display-lg">Free German grammar guides, one topic at a time.</h1>
+    <p class="lede">Each guide explains one grammar topic in plain English, shows how it compares with Hindi, lists the mistakes Indian learners make most often, and ends with exercises and answers. No signup needed. Pick your level, or start at the top and work down: within each level, the guides follow the order of the Klarweg course.</p>
+    <nav class="gh-jump" aria-label="Jump to level">
+      ${levels.map((lv) => `<a href="#${lv.id.toLowerCase()}">${lv.id} · ${lv.guides.length}</a>`).join('\n      ')}
+    </nav>
+  </div>
+</section>
+
+<div class="container gh-body">
+${levels.map((lv) => `  <section class="gh-level" id="${lv.id.toLowerCase()}" aria-labelledby="h-${lv.id.toLowerCase()}">
+    <div class="gh-level-head"><h2 id="h-${lv.id.toLowerCase()}">${lv.id} · ${lv.name}</h2><span class="gh-count">${lv.guides.length} guides</span></div>
+    <p>${esc(lv.intro)}</p>
+    <ul class="gh-grid">
+${lv.guides.map(card).join('\n')}
+    </ul>
+  </section>`).join('\n\n')}
+
+  <section class="gh-more" aria-labelledby="more-h">
+    <h2 id="more-h">The full syllabus</h2>
+    <p>These guides cover the topics learners search for most. The <a href="../german-grammar.html">complete German grammar syllabus</a> lists every topic in the Klarweg course from A1 to C2, chapter by chapter. Preparing for an exam? See the <a href="../goethe-exam.html">Goethe exam guides</a>.</p>
+    <div class="hero-ctas">
+      <a href="../chapter/chapter-a1-1-alphabet.html" class="btn btn-primary btn-cta-green">Try A1 Chapter 1 free</a>
+      <a href="../courses.html" class="btn btn-secondary">See all courses</a>
+    </div>
+  </section>
+</div>`;
+  const list = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: HUB_TITLE.replace(/ — Klarweg$/, ''),
+    description: desc,
+    url,
+    inLanguage: 'en',
+    isAccessibleForFree: true,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: GUIDES.length,
+      itemListElement: levels.flatMap((lv) => lv.guides).map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE_BASE}/grammar/${g.slug}.html`, name: g.title.replace(/ — Klarweg$/, '') })),
+    },
+  };
+  const crumbs = breadcrumb([HOME, ['German grammar A1–C2', 'german-grammar.html'], ['Free grammar guides', 'grammar/index.html']]);
+  const end = tail.replace(/<footer[\s\S]*?<\/footer>\n?/, '');
+  const page = `${head}${shell}<main id="main" tabindex="-1">\n<!-- GENERATED by scripts/build-grammar-guides.mjs from scripts/grammar-guides/guides.mjs — edit the registry, not this file. -->\n${body}\n</main>${end}`;
+  return withBlock(page, block([crumbs, list]));
+}
+
 const stale = [];
-for (const g of GUIDES) {
-  const out = path.join(OUT, `${g.slug}.html`);
-  const page = build(g);
+const outputs = GUIDES.map((g) => [`${g.slug}.html`, () => build(g)]).concat([['index.html', buildHub]]);
+for (const [file, make] of outputs) {
+  const out = path.join(OUT, file);
+  const page = make();
   const cur = fs.existsSync(out) ? fs.readFileSync(out, 'utf8') : '';
   if (cur === page) continue;
-  stale.push(`grammar/${g.slug}.html`);
+  stale.push(`grammar/${file}`);
   if (!CHECK) { fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(out, page); }
 }
 if (CHECK && stale.length) { console.error(`grammar guides out of date (run node scripts/build-grammar-guides.mjs): ${stale.join(', ')}`); process.exit(1); }

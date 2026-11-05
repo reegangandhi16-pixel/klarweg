@@ -68,6 +68,14 @@ grammar/dass.html
 grammar/futur-1.html
 grammar/plusquamperfekt.html
 grammar/n-deklination.html
+grammar/datum.html
+grammar/liegen-legen.html
+grammar/zweiteilige-konnektoren.html
+grammar/indefinitpronomen.html
+grammar/praesens.html
+grammar/alphabet.html
+grammar/temporale-nebensaetze.html
+grammar/doch.html
 # Goethe exam guides (free, indexable preparation content)
 goethe/a1-exam.html
 goethe/b2-exam-preparation.html

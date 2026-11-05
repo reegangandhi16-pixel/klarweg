@@ -90,3 +90,18 @@ test('the grammar syllabus links every guide, from the hero and from its chapter
     assert.ok((idx.match(new RegExp(`href="grammar/${g.slug}\\.html"`, 'g')) || []).length >= 2, g.slug);
   }
 });
+
+test('the guide hub (grammar/index.html) lists every guide once, is published, and is linked from the syllabus', () => {
+  const hub = read('grammar/index.html');
+  for (const g of GUIDES) {
+    assert.equal((hub.match(new RegExp(`href="${g.slug}\\.html"`, 'g')) || []).length, 1, g.slug);
+  }
+  assert.match(hub, new RegExp(`<link rel="canonical" href="${SITE_BASE}/grammar/index\\.html">`));
+  assert.doesNotMatch(hub, /<footer/, 'hub ships without a footer');
+  assert.ok(read('.github/pages-allowlist.txt').split('\n').includes('grammar/index.html'), 'allowlisted');
+  assert.ok(read('sitemap.xml').includes(`${SITE_BASE}/grammar/index.html`), 'in sitemap');
+  assert.match(read('german-grammar.html'), /href="grammar\/index\.html"/);
+  const lds = [...hub.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+  const items = lds.find((o) => o['@type'] === 'CollectionPage');
+  assert.equal(items.mainEntity.numberOfItems, GUIDES.length);
+});

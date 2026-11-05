@@ -312,3 +312,8 @@ goethe/exam-modules-retake.html
 goethe/paper-vs-digital-exam.html
 german-certificate-ausbildung.html
 german-certificate-study-germany.html
+
+# SEO batch 3 (2026-11): B1 exam guide, exam fees in India, cost of learning German
+goethe/b1-exam.html
+goethe/exam-fees-registration-india.html
+german-course-cost-india.html

@@ -1178,6 +1178,21 @@ footer {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+
+/* Course FAQ (native details: no JS needed) */
+.course-faq { padding: 96px 0; border-top: 1px solid var(--hairline); }
+.course-faq h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(30px, 4vw, 40px); letter-spacing: -0.02em; margin: 0 0 36px; color: var(--ink-primary); }
+.course-faq .eyebrow { display: block; margin-bottom: 16px; }
+.course-faq details { border-bottom: 1px solid var(--hairline); }
+.course-faq details:first-of-type { border-top: 1px solid var(--hairline); }
+.course-faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding: 24px 0; font-size: 18px; font-weight: 500; color: var(--ink-primary); }
+.course-faq summary::-webkit-details-marker { display: none; }
+.course-faq summary::after { content: '+'; font-family: var(--font-mono); font-size: 18px; color: var(--ink-tertiary); flex: 0 0 auto; }
+.course-faq details[open] summary::after { content: '−'; }
+.course-faq summary:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 4px; border-radius: var(--r-xs); }
+.course-faq details p { margin: 0 0 24px; font-size: 16px; line-height: 1.65; color: var(--ink-secondary); max-width: 680px; }
+.course-faq details a { color: var(--ink-primary); text-decoration: underline; text-decoration-color: var(--ink-tertiary); text-underline-offset: 3px; }
+@media (max-width: 768px) { .course-faq { padding: 64px 0; } .course-faq summary { font-size: 17px; } }
 </style>
 <link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -1472,6 +1487,38 @@ footer {
         <p class="price-guarantee"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg> 7-day money-back guarantee</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="course-faq" aria-labelledby="faq-h">
+  <div class="container-narrow">
+    <span class="eyebrow">A2 · Common questions</span>
+    <h2 id="faq-h">Questions before you start.</h2>
+    <details>
+      <summary>What level do I need before starting A2?</summary>
+      <p>A1. You should be able to introduce yourself, use the present tense and ask simple questions. If that still feels shaky, start with <a href="a1.html">A1</a>, or check the <a href="german-grammar.html#a2">A2 grammar list</a> to see what is coming.</p>
+    </details>
+    <details>
+      <summary>Does it prepare me for the Goethe A2 exam?</summary>
+      <p>Yes. The 35 chapters cover the A2 grammar and everyday vocabulary, with four Goethe-style mini tests along the way. For the exam itself, see the <a href="goethe/a2-exam.html">Goethe A2 exam guide</a> and <a href="goethe/exam-fees-registration-india.html">fees and booking in India</a>.</p>
+    </details>
+    <details>
+      <summary>Is A2 enough for a visa or an Ausbildung?</summary>
+      <p>A spouse (family reunion) visa usually needs A1. An Ausbildung visa normally needs B1, so A2 is a stepping stone. See <a href="german-certificate-ausbildung.html">German level for Ausbildung</a>.</p>
+    </details>
+    <details>
+      <summary>Is the course taught in Hindi?</summary>
+      <p>Explanations are written in clear English with Hindi support where it genuinely helps, for example where Hindi grammar makes a German pattern easier to see. You learn to read, hear and use German, not Hindi translations of it.</p>
+    </details>
+    <details>
+      <summary>How long can I use the course?</summary>
+      <p>A2 is a one-time payment of ₹2,999 for 2 years of access. Klarweg Lifetime (₹4,999) unlocks every level from A1 to C2 with no expiry.</p>
+    </details>
+    <details>
+      <summary>What if it isn't right for me?</summary>
+      <p>A2 Chapter 1 is free with no signup, so you can try the method first. Paid purchases come with a <a href="refund-policy.html">7-day money-back guarantee</a>.</p>
+    </details>
   </div>
 </section>
 

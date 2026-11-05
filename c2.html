@@ -1179,6 +1179,21 @@ footer {
 }
 
 
+
+/* Course FAQ (native details: no JS needed) */
+.course-faq { padding: 96px 0; border-top: 1px solid var(--hairline); }
+.course-faq h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(30px, 4vw, 40px); letter-spacing: -0.02em; margin: 0 0 36px; color: var(--ink-primary); }
+.course-faq .eyebrow { display: block; margin-bottom: 16px; }
+.course-faq details { border-bottom: 1px solid var(--hairline); }
+.course-faq details:first-of-type { border-top: 1px solid var(--hairline); }
+.course-faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding: 24px 0; font-size: 18px; font-weight: 500; color: var(--ink-primary); }
+.course-faq summary::-webkit-details-marker { display: none; }
+.course-faq summary::after { content: '+'; font-family: var(--font-mono); font-size: 18px; color: var(--ink-tertiary); flex: 0 0 auto; }
+.course-faq details[open] summary::after { content: '−'; }
+.course-faq summary:focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 4px; border-radius: var(--r-xs); }
+.course-faq details p { margin: 0 0 24px; font-size: 16px; line-height: 1.65; color: var(--ink-secondary); max-width: 680px; }
+.course-faq details a { color: var(--ink-primary); text-decoration: underline; text-decoration-color: var(--ink-tertiary); text-underline-offset: 3px; }
+@media (max-width: 768px) { .course-faq { padding: 64px 0; } .course-faq summary { font-size: 17px; } }
 </style>
 <link id="gfont-Merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;500;600;700&amp;display=swap">
 <link id="gfont-Pacifico" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico:wght@300;400;500;600;700&amp;display=swap">
@@ -1477,6 +1492,38 @@ footer {
         <p class="price-guarantee"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg> 7-day money-back guarantee</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="course-faq" aria-labelledby="faq-h">
+  <div class="container-narrow">
+    <span class="eyebrow">C2 · Common questions</span>
+    <h2 id="faq-h">Questions before you start.</h2>
+    <details>
+      <summary>What level do I need before starting C2?</summary>
+      <p>A solid C1. C2 works on precision: word formation, nominal style, collocations and register. If you are not yet there, start with <a href="c1.html">C1</a>.</p>
+    </details>
+    <details>
+      <summary>Does it prepare me for the Goethe C2 exam?</summary>
+      <p>Yes. The 29 chapters include four Goethe-style mini tests, a half-way test and a final C2 chapter. See the <a href="goethe/c2-exam-preparation.html">Goethe C2 exam guide</a> for the format, including the individual speaking exam.</p>
+    </details>
+    <details>
+      <summary>Does a Goethe C2 count for university admission?</summary>
+      <p>Yes. Under the national framework for university admission, a passed Goethe-Zertifikat C2 exempts you from further German language proof. See <a href="german-certificate-study-germany.html">German certificates for study</a>.</p>
+    </details>
+    <details>
+      <summary>Is the course taught in Hindi?</summary>
+      <p>Explanations are written in clear English with Hindi support where it genuinely helps, for example where Hindi grammar makes a German pattern easier to see. You learn to read, hear and use German, not Hindi translations of it.</p>
+    </details>
+    <details>
+      <summary>How long can I use the course?</summary>
+      <p>C2 is a one-time payment of ₹8,999 for 2 years of access. At current prices, Klarweg Lifetime (₹4,999) costs less than C2 alone and unlocks every level from A1 to C2 with no expiry.</p>
+    </details>
+    <details>
+      <summary>What if it isn't right for me?</summary>
+      <p>C2 Chapter 1 is free with no signup, so you can try the method first. Paid purchases come with a <a href="refund-policy.html">7-day money-back guarantee</a>.</p>
+    </details>
   </div>
 </section>
 

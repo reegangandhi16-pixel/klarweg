@@ -60,6 +60,10 @@ grammar/weil-denn-deshalb.html
 grammar/imperativ.html
 grammar/possessivartikel.html
 grammar/zahlen.html
+grammar/als-wenn.html
+grammar/infinitiv-mit-zu.html
+grammar/verben-mit-praepositionen.html
+grammar/w-fragen.html
 # Goethe exam guides (free, indexable preparation content)
 goethe/a1-exam.html
 goethe/b2-exam-preparation.html

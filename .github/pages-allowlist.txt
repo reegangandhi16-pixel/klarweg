@@ -45,6 +45,10 @@ grammar/word-order.html
 grammar/prepositions.html
 grammar/perfekt.html
 grammar/modalverben.html
+grammar/adjektivdeklination.html
+grammar/trennbare-verben.html
+grammar/konjunktiv-2.html
+grammar/passiv.html
 # Goethe exam guides (free, indexable preparation content)
 goethe/a1-exam.html
 goethe/b2-exam-preparation.html

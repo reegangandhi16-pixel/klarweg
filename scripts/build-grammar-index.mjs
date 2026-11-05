@@ -20,6 +20,9 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { SITE_BASE } from './site-origin.mjs';
+import { block, breadcrumb, withBlock, LD_BLOCK_RE, HOME, COURSES } from './seo-ld.mjs';
+import { GUIDES } from './grammar-guides/guides.mjs';
+import { dataFileFor } from './chapter-lock.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CH = path.join(ROOT, 'chapter');
@@ -46,13 +49,11 @@ function load(file) {
   return ctx.__C;
 }
 
-/* page ↔ data file, from each chapter page's own <script src>. */
+/* page ↔ data file (scripts/chapter-lock.mjs): a paid page's <script src>
+   is the Access Worker, so the mapping never comes from the page itself. */
 const chapters = [];
 for (const page of fs.readdirSync(CH).filter((f) => /^chapter-[abc][12]-.*\.html$/.test(f))) {
-  const html = fs.readFileSync(path.join(CH, page), 'utf8');
-  const m = html.match(/<script src="(chapter-[^"]+-data\.js)(?:\?[^"]*)?"><\/script>/);
-  if (!m) continue;
-  const C = load(path.join(CH, m[1]));
+  const C = load(path.join(CH, dataFileFor(page)));
   chapters.push({ page, C });
 }
 
@@ -75,6 +76,9 @@ if (total !== chapters.length || total < 250) {
 const isCheckpoint = (C) => /goethe|halbzeit|mini-test|final/i.test(C.id) || !!C.isCheckpoint || !!C.scoring;
 const phaseOf = (C) => { const m = String(C.phase || '').match(/Phase\s*(\d+)/i); return m ? Number(m[1]) : 0; };
 
+const guideFor = Object.fromEntries(GUIDES.map((g) => [g.chapter, g]));
+for (const g of GUIDES) if (!chapters.some((x) => x.page === g.chapter)) { console.error(`grammar guide ${g.slug}: unknown chapter ${g.chapter}`); process.exit(1); }
+
 /* ---------- content ---------- */
 let body = '';
 body += `
@@ -86,6 +90,8 @@ body += `
     </div>
     <h1 class="display-xl">German grammar, <span class="accent">A1 to C2.</span></h1>
     <p class="lede">Every grammar topic in the Klarweg course, in the order you learn it — from the alphabet and the nominative case to Nominalstil and C2 register. Each chapter teaches one topic with colour-coded grammar, clickable German, audio, practice and a quiz. Chapter 1 of every level is free.</p>
+    <p class="gi-guides"><a href="grammar/index.html">See all ${GUIDES.length} free grammar guides, by level →</a></p>
+    <p class="gi-guides">Free guides, no signup: ${GUIDES.map((g) => `<a href="grammar/${g.slug}.html">${esc(g.linkText)}</a>`).join(' · ')}</p>
     <nav class="gi-jump" aria-label="Jump to level">
       ${LEVELS.map((lv) => `<a href="#${lv.id}">${lv.name} · ${byLevel[lv.id].length}</a>`).join('\n      ')}
     </nav>
@@ -125,7 +131,8 @@ for (const lv of LEVELS) {
         <div class="gi-num">${esc(lv.name)}·${esc(C.number)}</div>
         <div class="gi-body">
           <h3 class="gi-h">${heading}${en && en.toLowerCase() !== plain(C.title).toLowerCase() ? ` <span class="gi-en">${esc(en)}</span>` : ''} ${tag}</h3>
-          <p class="gi-desc">${desc}</p>
+          <p class="gi-desc">${desc}</p>${guideFor[page] ? `
+          <p class="gi-guide"><a href="grammar/${guideFor[page].slug}.html">Free guide: ${esc(guideFor[page].linkText)} →</a></p>` : ''}
         </div>
       </li>`;
   }
@@ -157,7 +164,7 @@ const title = 'German Grammar A1 to C2 · Every Topic in Order — Klarweg';
 const desc = `All ${total} German grammar topics in the Klarweg course, A1 to C2, in the order you learn them — with what each chapter covers. Chapter 1 of every level is free.`;
 const url = `${SITE_BASE}/german-grammar.html`;
 
-let head = tpl.slice(0, tpl.indexOf('</head>'));
+let head = tpl.slice(0, tpl.indexOf('</head>')).replace(LD_BLOCK_RE, '');
 head = head
   .replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`)
   .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
@@ -182,6 +189,9 @@ a.gi-title { text-decoration: underline; text-decoration-thickness: 1px; text-un
 .gi-en { font-family: var(--font-ui); font-size: 14px; font-weight: 400; color: var(--ink-secondary); }
 .gi-tag { font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--hairline); color: var(--ink-secondary); white-space: nowrap; }
 .gi-free { color: var(--g-object); border-color: currentColor; }
+.gi-guides { margin: 24px 0 0; font-size: 15px; color: var(--ink-secondary); }
+.gi-guides a, .gi-guide a { color: var(--ink-primary); text-decoration: underline; text-decoration-color: var(--ink-tertiary); text-underline-offset: 3px; }
+.gi-guide { margin: 8px 0 0; font-size: 14px; }
 .gi-desc { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-secondary); max-width: 680px; }
 @media (max-width: 560px) { .gi-item { grid-template-columns: 1fr; gap: 4px; } }
 </style>
@@ -194,7 +204,9 @@ let shell = tpl.slice(navStart, mainStart).replace(/ class="active"/g, '');
 // Keep the shared scripts (site.js, auth, nav, hamburger); drop inline
 // blocks that render courses.html-only elements.
 const tail = tpl.slice(mainEnd).replace(/<script>(?:(?!<\/script>)[\s\S])*?(levels-grid|features-grid)[\s\S]*?<\/script>\s*/g, '');
-const page = `${head}${shell}<main id="main" tabindex="-1">\n<!-- GENERATED by scripts/build-grammar-index.mjs from chapter data — do not edit by hand. -->\n${body}\n</main>${tail}`;
+let page = `${head}${shell}<main id="main" tabindex="-1">\n<!-- GENERATED by scripts/build-grammar-index.mjs from chapter data — do not edit by hand. -->\n${body}\n</main>${tail}`;
+
+page = withBlock(page, block([breadcrumb([HOME, COURSES, ['German grammar A1–C2', 'german-grammar.html']])]));
 
 if (CHECK) {
   const current = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';

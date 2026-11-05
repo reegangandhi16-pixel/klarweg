@@ -530,9 +530,9 @@ const CHAPTER = {
       explain: '"(an)statt ... zu" requires the SAME subject in both clauses.'
     },
     gap: {
-      sentence: ['Anna arbeitet, statt sich aus', 'zuruhen.'],
-      gaps: [ { answer: '', accepts: [''] } ],
-      explain: 'Placeholder replaced by builder-style gap in UI; the key point is "zu" attaches directly to the separable infinitive.'
+      sentence: ['Anna arbeitet, statt sich aus', 'ruhen.'],
+      gaps: [ { answer: 'zu', accepts: [] } ],
+      explain: 'With a separable verb, "zu" goes between the prefix and the verb, written as one word: sich aus·zu·ruhen → "statt sich auszuruhen".'
     },
     match: {
       q: 'Match each construction to its meaning.',

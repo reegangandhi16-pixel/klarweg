@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync, execFileSync } from 'node:child_process';
+import { faviconOnlyFileChange } from './favicon-only-diff.mjs';
 import { ROOT, loadData, checkData } from './live-classes-readiness.mjs';
 
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -160,13 +161,18 @@ function guard({ toml = PROD_TOML, data = null, flags = [] } = {}) {
     return (r.stdout || '') + (r.stderr || '');
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 }
-const set = (k, v) => PROD_TOML.replace(new RegExp(`^${k} = .*$`, 'm'), `${k} = ${v}`);
+const setIn = (toml, k, v) => toml.replace(new RegExp(`^${k} = .*$`, 'm'), `${k} = ${v}`);
+const set = (k, v) => setIn(PROD_TOML, k, v);
+/* Production takes live payments; the sandbox-only rules are exercised on a
+   copy switched back to Cashfree's sandbox (as wrangler.payments-sandbox.toml is). */
+const SANDBOX_TOML = setIn(setIn(PROD_TOML, 'CASHFREE_ENV', '"sandbox"'), 'CASHFREE_APP_ID', '"TEST0000000000"');
+const setSandbox = (k, v) => setIn(SANDBOX_TOML, k, v);
 const OPEN_DATA = read('live-classes-data.js').replace("enrolment: 'waitlist'", "enrolment: 'open'");
 
 test('GUARD: the committed config passes every enrolment rule (payments off)', () => {
   assert.equal(tomlVal('ENROL_PAYMENTS'), 'off');
   assert.equal(tomlVal('ENROL_COURSES'), '');
-  assert.equal(tomlVal('CASHFREE_ENV'), 'sandbox');
+  assert.equal(tomlVal('CASHFREE_ENV'), 'production');
   assert.equal(tomlVal('ENROL_CONSULT_CREDIT'), 'course-fee', 'owner decision D11: the ₹100 consultation is credited against the course fee');
   const out = guard();
   assert.match(out, /could not read the live Worker/, out);
@@ -176,8 +182,9 @@ test('GUARD: the committed config passes every enrolment rule (payments off)', (
 test('GUARD: payments on need the explicit flag, the matching Cashfree environment and a recorded ₹100 decision', () => {
   assert.match(guard({ toml: set('ENROL_PAYMENTS', '"maybe"') }), /must be "off", "sandbox" or "live"/);
   assert.match(guard({ toml: set('ENROL_PAYMENTS', '"sandbox"') }), /--allow-enrol-payments=sandbox/);
-  assert.match(guard({ toml: set('ENROL_PAYMENTS', '"live"'), flags: ['--allow-enrol-payments=live'] }), /ENROL_PAYMENTS="live" needs CASHFREE_ENV="production"/);
-  const credit = (v) => set('ENROL_PAYMENTS', '"sandbox"').replace(/^ENROL_CONSULT_CREDIT = .*\n/m, v == null ? '' : `ENROL_CONSULT_CREDIT = ${v}\n`);
+  assert.match(guard({ toml: set('ENROL_PAYMENTS', '"sandbox"'), flags: ['--allow-enrol-payments=sandbox'] }), /ENROL_PAYMENTS="sandbox" needs CASHFREE_ENV="sandbox"/);
+  assert.match(guard({ toml: setSandbox('ENROL_PAYMENTS', '"live"'), flags: ['--allow-enrol-payments=live'] }), /ENROL_PAYMENTS="live" needs CASHFREE_ENV="production"/);
+  const credit = (v) => setSandbox('ENROL_PAYMENTS', '"sandbox"').replace(/^ENROL_CONSULT_CREDIT = .*\n/m, v == null ? '' : `ENROL_CONSULT_CREDIT = ${v}\n`);
   assert.match(guard({ toml: credit(null), flags: ['--allow-enrol-payments=sandbox'] }), /ENROL_CONSULT_CREDIT is not set/);
   assert.match(guard({ toml: credit('"sometimes"'), flags: ['--allow-enrol-payments=sandbox'] }), /must be "off" or "course-fee"/);
   for (const v of ['"off"', '"course-fee"']) assert.match(guard({ toml: credit(v), flags: ['--allow-enrol-payments=sandbox'] }), /could not read the live Worker/, v);
@@ -199,6 +206,11 @@ test('GUARD: ENROL_COURSES must name a course the Worker sells and the page show
 test('SCOPE: no Exam Portal, audio, legal, or self-paced checkout file changes on this branch', { skip: (() => { try { execFileSync('git', ['rev-parse', '--verify', 'origin/main'], { cwd: ROOT, stdio: 'ignore' }); return false; } catch { return 'origin/main not available'; } })() }, () => {
   const base = execFileSync('git', ['merge-base', 'HEAD', 'origin/main'], { cwd: ROOT, encoding: 'utf8' }).trim();
   const changed = execFileSync('git', ['diff', '--name-only', base], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean);
-  const forbidden = changed.filter((f) => /^(exam|exam-content|exam-worker|audio|public\/audio)\/|audio|^refund-policy\.html$|^kw-checkout\.js$|^kw-products\.js$|^kw-auth\.js$|^access\/worker\/src\/(orders|entitlements|products|exam-proxy)\.js$/i.test(f));
+  /* Guards live-classes work only: a branch that touches no live-classes
+     file (e.g. a reviewed self-paced checkout change) is out of scope. */
+  if (!changed.some((f) => !/\.test\.mjs$/.test(f) && /live-classes|^kw-(live|consult|enrol)\.js$|^access\/worker\/src\/(consultations|enrolments)\.js$/.test(f))) return;
+  const forbidden = changed.filter((f) => /^(exam|exam-content|exam-worker|audio|public\/audio)\/|audio|^refund-policy\.html$|^kw-checkout\.js$|^kw-products\.js$|^kw-auth\.js$|^access\/worker\/src\/(orders|entitlements|products|exam-proxy)\.js$/i.test(f)
+    /* a sitewide favicon <link> swap is not a legal-content change */
+    && !(f === 'refund-policy.html' && faviconOnlyFileChange(f, base, ROOT)));
   assert.deepEqual(forbidden, []);
 });

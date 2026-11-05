@@ -1,0 +1,9 @@
+# klarweg-audio — RETIRED (see src/index.js). No bucket binding: the Worker
+# cannot read klarweg-audio any more. Deploy only with
+# `npx wrangler versions upload` + `npx wrangler versions deploy` (keeps a
+# one-step rollback to the previous version).
+name = "klarweg-audio"
+main = "src/index.js"
+compatibility_date = "2024-11-06"
+workers_dev = true
+preview_urls = false

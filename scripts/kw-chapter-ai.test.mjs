@@ -13,6 +13,8 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE = fs.readFileSync(path.join(ROOT, 'chapter/chapter-tutor.js'), 'utf8');
 const CSS = fs.readFileSync(path.join(ROOT, 'chapter/chapter.css'), 'utf8');
+// The word pop-up's own rules live in the stylesheet it shares with the homepage.
+const POP_CSS = fs.readFileSync(path.join(ROOT, 'public/kw-word-pop.css'), 'utf8');
 
 /* ---------- a stand-in DOM: just what chapter-tutor.js touches ---------- */
 class Node {
@@ -208,9 +210,10 @@ test('chapter AI: server refusals lock the panel with the server’s fixed messa
 });
 
 /* ---------- CSS: placement, mobile, layering, motion ---------- */
-const rule = (sel) => { const m = CSS.match(new RegExp('\\n' + sel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([^}]*)\\}')); return m ? m[1] : ''; };
+const rule = (sel, css = CSS) => { const m = css.match(new RegExp('\\n' + sel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([^}]*)\\}')); return m ? m[1] : ''; };
 const px = (block, prop) => { const m = block.match(new RegExp('(?:^|[;\\s])' + prop + ':\\s*(-?\\d+)px')); return m ? Number(m[1]) : null; };
-const z = (block) => Number((block.match(/z-index:\s*(\d+)/) || [])[1]);
+// z-index: N, or the word pop-up's host-adjustable layer var(--kw-word-pop-z, N) [+ k] at its chapter default.
+const z = (block) => { const m = block.match(/z-index:\s*(?:calc\(\s*)?(?:var\(--[\w-]+,\s*(\d+)\)|(\d+))(?:\s*\+\s*(\d+))?/); return m ? Number(m[1] || m[2]) + Number(m[3] || 0) : NaN; };
 const media = (q) => [...CSS.matchAll(new RegExp('@media \\(' + q.replace(/[()]/g, '\\$&') + '\\) \\{([\\s\\S]*?)\\n\\}', 'g'))].map((m) => m[1]).join('\n');
 
 test('chapter AI CSS: bottom-right under the Grammar Helper; ≥44px targets; mobile 16px from the edges', () => {
@@ -231,7 +234,7 @@ test('chapter AI CSS: bottom-right under the Grammar Helper; ≥44px targets; mo
 
 test('chapter AI CSS: layered below the word pop-up, above the top bar and Grammar Helper; calm motion', () => {
   const panel = z(rule('.kw-ai-chat')), scrim = z(rule('.kw-ai-scrim')), fab = z(rule('.kw-ai-fab'));
-  assert.ok(panel < z(rule('.word-pop-backdrop')) && panel < z(rule('.word-pop')), 'tapped German words open above the panel');
+  assert.ok(panel < z(rule('.word-pop-backdrop', POP_CSS)) && panel < z(rule('.word-pop', POP_CSS)), 'tapped German words open above the panel');
   assert.ok(panel > scrim && scrim > fab && fab > z(rule('.grammar-helper-btn')) && fab > z(rule('.chapter-topbar')));
   assert.ok(fab < z(rule('.toast')), 'toasts stay visible');
   assert.doesNotMatch(rule('.kw-ai-fab:hover'), /scale/, 'hover lifts, never scales');

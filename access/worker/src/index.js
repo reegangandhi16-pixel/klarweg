@@ -7,6 +7,7 @@ import { enrolCatalog, enrolQuote, createEnrolCheckout, getEnrolment, listEnrolm
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
+import { chapterScript, CHAPTER_ROUTE } from "./chapters.js";
 import { examProxy } from "./exam-proxy.js";
 import { mfaStatus, mfaEnroll, mfaEnrollConfirm, mfaVerify, mfaRegenerateRecoveryCodes } from "./mfa-routes.js";
 import { cookieProbeSet, cookieProbeCheck } from "./cookie-probe.js";
@@ -17,6 +18,7 @@ import {
   deleteSavedWord,
   reviewSavedWord
 } from "./saved-words.js";
+import { listProgress, saveProgress } from "./progress.js";
 function json(data, status = 200) {
   return Response.json(data, { status });
 }
@@ -207,6 +209,16 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
       return withCors(await reviewSavedWord(request, env, savedWordReviewMatch[1]), request);
     }
 
+    /* Chapter progress, account-backed (progress.js; client:
+       kw-progress-sync.js). Session-derived user only. */
+    if (request.method === "GET" && url.pathname === "/progress") {
+      return withCors(await listProgress(request, env), request);
+    }
+    const progressMatch = url.pathname.match(/^\/progress\/([a-z0-9-]{3,100})$/);
+    if (request.method === "POST" && progressMatch) {
+      return withCors(await saveProgress(request, env, progressMatch[1]), request);
+    }
+
     /* Klarweg AI — auth, entitlement, quotas and the kill switch are
        enforced in ai.js before anything reaches the private
        klarweg-tutor Worker (service binding env.TUTOR). */
@@ -234,6 +246,14 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
 
     if (request.method === "POST" && url.pathname === "/speech/task-check") {
       return withCors(await speechTaskCheck(request, env), request);
+    }
+
+    /* Paid chapter content (chapters.js) — loaded by a classic <script>
+       tag, so it carries no CORS headers; locked or signed-out learners get
+       a metadata-only stub. */
+    const chapterMatch = url.pathname.match(CHAPTER_ROUTE);
+    if (request.method === "GET" && chapterMatch) {
+      return chapterScript(request, env, chapterMatch[1]);
     }
 
     /* Chapter resource PDFs — private R2, signed short-lived links

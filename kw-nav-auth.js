@@ -75,7 +75,10 @@
       } else {                                          // Account page's owner link
         var arrow = /class="arrow"/.test(o.html) ? ' <span class="arrow">→</span>' : '';
         a.innerHTML = 'Open ' + level + ' roadmap' + arrow;
-        a.setAttribute('href', level.toLowerCase() + '.html');
+        // Keep the original link's directory prefix ("" on root pages,
+        // "../" on pages in a subfolder such as grammar/), so the roadmap
+        // link resolves to the site-root level page from anywhere.
+        a.setAttribute('href', String(o.href).replace(/chapter\/[^/]*$/, '') + level.toLowerCase() + '.html');
         a.style.display = ''; a.removeAttribute('aria-hidden');
       }
       a.removeAttribute('data-auth-pending');            // ownership known: show the result

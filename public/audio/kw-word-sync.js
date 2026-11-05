@@ -46,6 +46,10 @@
   var cache = {};
   function loadTiming(hash) {
     if (!hash || !/^[0-9a-f]{8,64}$/.test(hash)) return Promise.resolve(null);
+    // A paid chapter's sidecars come with its gated payload; only free
+    // Chapter 1 and homepage sidecars are public files.
+    var own = global.KW_CHAPTER_AUDIO && global.KW_CHAPTER_AUDIO.timing;
+    if (own && Object.prototype.hasOwnProperty.call(own, hash)) return Promise.resolve(own[hash]);
     if (!cache[hash]) {
       // 'no-cache' revalidates with the server (cheap 304 when unchanged), so a
       // 404 cached before a timing file was published can never hide it later.
@@ -57,6 +61,11 @@
         .then(function (side) { if (!side) delete cache[hash]; return side; });
     }
     return cache[hash];
+  }
+
+  function absUrl(u) {
+    u = String(u || '');
+    try { return new URL(u, global.location && global.location.href).href; } catch (e) { return u; }
   }
 
   function norm(s) {
@@ -172,11 +181,14 @@
     audio.addEventListener('emptied', detach);
     // Channel change: any explicit stop, or another clip starting, ends this sync.
     if (global.KW_onAudioEvent) {
-      var mySrc = audio.currentSrc || audio.src;
+      var mySrc = absUrl(audio.currentSrc || audio.src);
       offEngine = global.KW_onAudioEvent(function (ev) {
         if (!ev) return;
         if (ev.type === 'stop') detach();
-        else if (ev.type === 'play-start' && ev.url && ev.url !== mySrc) detach();
+        // The engine reports the URL it asked for ('/api/media/…', same-origin
+        // relative); the element reports it resolved. Compare both absolute,
+        // or this clip's own play-start would end its own highlighting.
+        else if (ev.type === 'play-start' && ev.url && absUrl(ev.url) !== mySrc) detach();
       });
     }
     if (!audio.paused) onPlay(); else tick();

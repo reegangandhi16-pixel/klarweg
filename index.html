@@ -2,22 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script src="public/audio/kw-audio-engine.js" defer></script>
-<script src="public/audio/kw-tts-config.js" defer></script>
+<script src="public/audio/kw-audio-engine.js?v=3" defer></script>
+<script src="public/audio/kw-tts-config.js?v=3" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Klarweg — See German clearly. A1 to C2, the visual way.</title>
-<meta name="description" content="The visual, Hindi-first way to clear every Goethe level — A1 to C2. Color-coded grammar, clickable German, AI tutor, and stories. Chapter 1 free at every level.">
-<link rel="canonical" href="https://reegangandhi16-pixel.github.io/klarweg/">
+<title>Learn German A1–C2 for Hindi Speakers · Goethe Prep — Klarweg</title>
+<meta name="description" content="Klarweg is the Hindi-first way to learn German from A1 to C2: color-coded grammar, clickable words with audio, an AI tutor and Goethe exam preparation.">
+<link rel="canonical" href="https://klarweg.in/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Klarweg">
-<meta property="og:title" content="Klarweg — See German clearly. A1 to C2, the visual way.">
-<meta property="og:description" content="The visual, Hindi-first way to clear every Goethe level — A1 to C2. Color-coded grammar, clickable German, AI tutor, and stories. Chapter 1 free at every level.">
-<meta property="og:url" content="https://reegangandhi16-pixel.github.io/klarweg/">
-<meta property="og:image" content="https://reegangandhi16-pixel.github.io/klarweg/icon-512.png">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Klarweg — See German clearly. A1 to C2, the visual way.">
-<meta name="twitter:description" content="The visual, Hindi-first way to clear every Goethe level — A1 to C2. Color-coded grammar, clickable German, AI tutor, and stories. Chapter 1 free at every level.">
-<meta name="twitter:image" content="https://reegangandhi16-pixel.github.io/klarweg/icon-512.png">
+<meta property="og:title" content="Learn German A1–C2 for Hindi Speakers · Goethe Prep — Klarweg">
+<meta property="og:description" content="Klarweg is the Hindi-first way to learn German from A1 to C2: color-coded grammar, clickable words with audio, an AI tutor and Goethe exam preparation.">
+<meta property="og:url" content="https://klarweg.in/">
+<meta property="og:image" content="https://klarweg.in/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Klarweg logo with the text: See German clearly. German A1 to C2 for Hindi speakers, with Goethe exam preparation.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Learn German A1–C2 for Hindi Speakers · Goethe Prep — Klarweg">
+<meta name="twitter:description" content="Klarweg is the Hindi-first way to learn German from A1 to C2: color-coded grammar, clickable words with audio, an AI tutor and Goethe exam preparation.">
+<meta name="twitter:image" content="https://klarweg.in/og-image.png">
+<meta name="twitter:image:alt" content="Klarweg logo with the text: See German clearly. German A1 to C2 for Hindi speakers, with Goethe exam preparation.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -90,6 +94,9 @@
    TOKENS
 ============================================================ */
 :root {
+  /* Layer for the shared word popup (public/kw-word-pop.css): above the fixed
+     nav (100) and the mobile menu (110), as the homepage word card always was. */
+  --kw-word-pop-z: 200;
   /* Canvas */
   --bg-canvas: #FAFAF7;
   --bg-surface: #FFFFFF;
@@ -127,11 +134,12 @@
      grammar color (--g-verb is #DC2626) and not coral (conversion CTAs). */
   --live-red: #E5484D;
 
-  /* Primary CTA — deep pine green, dedicated token. Distinct from
-     --green/--green-deep (success-state family), --g-object (grammar
+  /* Primary CTA — brand CTA green (the .btn-primary colour restored in
+     3630cf5d), shared by name with site.css and the a1–c2 roadmaps. Distinct
+     from --green/--green-deep (success-state family), --g-object (grammar
      semantic), and --accent (brand teal, not green). */
-  --cta-green: #1F472C;
-  --cta-green-hover: #142E1D;
+  --cta-green: #1FA84B;
+  --cta-green-hover: #1a9342;
 
   --green: #639922;
   --green-bright: #97C459;
@@ -545,7 +553,10 @@ body.mobile-nav-open { overflow: hidden; }
 /* ============================================================
    GERMAN WORDS — the core interactive language
 ============================================================ */
-.de {
+/* The shared word popup (.word-pop, public/kw-word-pop.css) styles its own German
+   text exactly as on a chapter page — these homepage word-chip rules stay out of it.
+   :where() keeps their specificity unchanged. */
+.de:where(:not(.word-pop .de)) {
   font-family: var(--font-german);
   cursor: pointer;
   display: inline-block;
@@ -556,16 +567,16 @@ body.mobile-nav-open { overflow: hidden; }
   position: relative;
   font-feature-settings: "kern", "liga", "calt";
 }
-.de:hover {
+.de:where(:not(.word-pop .de)):hover {
   background: rgba(14, 14, 16, 0.04);
   transform: translateY(-1px);
 }
-.de:focus-visible {
+.de:where(:not(.word-pop .de)):focus-visible {
   outline: none;
   background: rgba(14, 14, 16, 0.06);
   box-shadow: 0 0 0 2px rgba(14,14,16,0.18);
 }
-.de:active { transform: translateY(0); }
+.de:where(:not(.word-pop .de)):active { transform: translateY(0); }
 
 /* Role colors — every class sources from --g-* (the grammar color spec).
    Brand colors (--blue, --coral, etc.) are reserved for UI/CTA, not grammar. */
@@ -2586,6 +2597,17 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
   color: var(--ink-quaternary);
   font-weight: 300;
 }
+/* Desktop/tablet: keep the three steps on one row; a longer subline
+   wraps inside its own step instead of pushing step 03 to a new row. */
+@media (min-width: 769px) {
+  .pricing-flow { flex-wrap: nowrap; }
+  .pflow-step { flex: 1 1 0; min-width: 0; }
+}
+@media (min-width: 1024px) {
+  .pflow-step { flex: 0 0 auto; }
+  .pflow-step:last-child { flex: 0 1 auto; }
+  .pflow-step:last-child .pflow-sub { max-width: 240px; }
+}
 @media (max-width: 768px) {
   .pricing-flow {
     border-radius: var(--r-xl);
@@ -3385,71 +3407,6 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
 /* ============================================================
    WORD CARD MODAL (the magic interaction) — clean, focused
 ============================================================ */
-.wc-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(14,14,16,0.32);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 200;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--dur-base) var(--ease);
-}
-.wc-overlay.open { opacity: 1; pointer-events: auto; }
-
-.wc-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -45%) scale(0.96);
-  width: min(440px, calc(100% - 32px));
-  max-height: 86vh;
-  background: var(--bg-glass-strong);
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(255,255,255,0.8);
-  border-radius: var(--r-2xl);
-  box-shadow: var(--shadow-lift);
-  z-index: 201;
-  padding: 56px 32px 28px;       /* generous top padding pushes content well below the close button */
-  opacity: 0;
-  pointer-events: none;
-  transition: all var(--dur-base) var(--ease-out);
-  overflow-y: auto;
-}
-.wc-modal.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/* Close button — quieter, smaller, decoupled from learning actions */
-.wc-close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 13px;
-  color: var(--ink-tertiary);
-  transition: all var(--dur-fast) var(--ease);
-  z-index: 2;
-}
-.wc-close:hover {
-  background: rgba(14,14,16,0.06);
-  color: var(--ink-secondary);
-}
-.wc-close:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(14,14,16,0.2);
-}
 
 /* Header — word + pronunciation on left, audio on right.
    Vertically centered so the audio button reads as the primary action. */
@@ -3730,78 +3687,7 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
   max-width: 200px;
 }
 
-#wc-word-text { word-break: break-word; }
-
-/* Verb conjugation / adjective comparison / advanced — homepage word card */
-.wc-conj { display: grid; gap: 7px; }
-.wc-conj-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 11px 14px; background: var(--bg-elevated); border-radius: var(--r-md); }
-.wc-conj-tense { font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink-primary); display: flex; flex-direction: column; gap: 1px; }
-.wc-conj-hint { font-family: var(--font-ui); font-size: 10.5px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-tertiary); }
-.wc-conj-form { font-family: var(--font-german); font-size: 18px; font-weight: 500; cursor: pointer; padding: 3px 8px; border-radius: var(--r-sm); border: none; background: transparent; transition: background var(--dur-fast) var(--ease); }
-.wc-conj-form:hover { background: var(--bg-surface); }
-
-.wc-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.wc-compare-cell { text-align: left; padding: 12px 14px; background: var(--bg-elevated); border: 1px solid var(--hairline-light); border-radius: var(--r-md); cursor: pointer; transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
-.wc-compare-cell:hover { transform: translateY(-1px); border-color: var(--hairline-strong); }
-.wc-compare-label { font-family: var(--font-ui); font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 4px; }
-.wc-compare-form { font-family: var(--font-german); font-size: 19px; font-weight: 500; }
-
-.wc-advanced { border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; }
-.wc-advanced-summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink-secondary); background: var(--bg-surface); transition: background var(--dur-fast) var(--ease); }
-.wc-advanced-summary::-webkit-details-marker { display: none; }
-.wc-advanced-summary:hover { background: var(--bg-elevated); }
-.wc-advanced-chevron { width: 16px; height: 16px; color: var(--ink-tertiary); transition: transform var(--dur-base) var(--ease); }
-.wc-advanced[open] .wc-advanced-chevron { transform: rotate(180deg); }
-.wc-advanced-inner { padding: 4px 16px 16px; display: grid; gap: 14px; }
-.wc-adv-block { display: grid; gap: 7px; }
-.wc-adv-label { font-family: var(--font-ui); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); }
-.wc-adv-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.wc-adv-chip { font-family: var(--font-ui); font-size: 13px; color: var(--ink-primary); background: var(--bg-elevated); border: 1px solid var(--hairline-light); border-radius: var(--r-full); padding: 5px 12px; }
-.wc-adv-chip.de { font-family: var(--font-german); font-size: 14px; }
-
 @media (max-width: 540px) {
-  /* Bottom-sheet modal on mobile, with a swipe-handle at the top.
-     Close moves to top-left so audio button on the right has no neighbor conflict. */
-  .wc-modal {
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-width: 100%;
-    transform: translateY(100%);
-    border-radius: var(--r-2xl) var(--r-2xl) 0 0;
-    max-height: 90vh;
-    padding: 60px 22px 32px;
-  }
-  .wc-modal.open { transform: translateY(0); }
-
-  /* Drag handle — the primary dismiss affordance on touch */
-  .wc-modal::before {
-    content: '';
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 44px;
-    height: 4px;
-    border-radius: 2px;
-    background: rgba(14,14,16,0.18);
-    pointer-events: none;
-  }
-
-  /* Close button — top-LEFT on mobile so it can never share an edge with the audio button.
-     Audio stays in the header on the right. Drag handle stays center. */
-  .wc-close {
-    top: 16px;
-    left: 16px;
-    right: auto;
-    width: 32px;
-    height: 32px;
-    background: rgba(14,14,16,0.05);
-    color: var(--ink-tertiary);
-  }
-  .wc-close:hover { background: rgba(14,14,16,0.10); }
 
   /* Audio button — thumb-sized, far from close button (close ends at y:60, audio starts at y:72) */
   .wc-audio {
@@ -4002,22 +3888,14 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
 .cv-score { font-size: 10px; color: var(--green-deep); font-weight: 600; }
 .cv-line { font-family: var(--font-german); font-size: 13px; }
 .cv-line-sub { font-size: 10px; color: var(--ink-tertiary); margin-top: 2px; }
-.cv-seal {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: #fff;
-  background: linear-gradient(135deg, var(--amber), var(--amber-bright));
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  box-shadow: 0 6px 18px -6px rgba(186,117,23,0.5);
-  margin: 0 auto;
+.cv-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--hairline);
+  border-radius: var(--r-full);
+  overflow: hidden;
 }
-.cv-seal span { font-size: 8px; opacity: 0.85; margin-top: -2px; }
+.cv-progress span { display: block; height: 100%; background: var(--coral); border-radius: inherit; }
 
 .chapter-flow-footer {
   margin-top: 48px;
@@ -4519,7 +4397,6 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
 }
 
 /* ---------- WORD CARD · subtle polish (irreducible interaction) ---------- */
-.wc-overlay { -webkit-tap-highlight-color: transparent; }
 .word-card-mock {
   transition: transform 500ms var(--ease), box-shadow 500ms var(--ease);
 }
@@ -4712,10 +4589,40 @@ body {
 }
 
 </style>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E55A3F">
+<!-- Word popup: the course popup's own stylesheet (shared with every chapter page). -->
+<link rel="stylesheet" href="public/kw-word-pop.css?v=1">
+<!-- KW-LD:start (scripts/seo-ld.mjs) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://klarweg.in/#organization",
+      "name": "Klarweg",
+      "url": "https://klarweg.in/",
+      "logo": "https://klarweg.in/site-icon-512.png",
+      "email": "klarwegofficial@gmail.com",
+      "description": "German courses from A1 to C2 for Hindi-speaking learners, with color-coded grammar and Goethe exam preparation."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://klarweg.in/#website",
+      "name": "Klarweg",
+      "url": "https://klarweg.in/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://klarweg.in/#organization"
+      }
+    }
+  ]
+}
+</script>
+<!-- KW-LD:end -->
 </head>
 <body>
 
@@ -5511,7 +5418,7 @@ body {
       <div class="cstep">
         <div class="cstep-num">02</div>
         <div class="cstep-title">Story scene</div>
-        <div class="cstep-body">Two characters in a real situation. Every word clickable. Native audio.</div>
+        <div class="cstep-body">Two characters in a real situation. Every word clickable. German pronunciation audio.</div>
         <div class="cstep-visual cv-story">
           <div class="cv-bubble cv-bubble-left">Anna: Was möchten Sie?</div>
           <div class="cv-bubble cv-bubble-right">Einen Kaffee.</div>
@@ -5575,10 +5482,12 @@ body {
 
       <div class="cstep">
         <div class="cstep-num">08</div>
-        <div class="cstep-title">Certificate</div>
-        <div class="cstep-body">Pass the end-of-chapter mini-exam and earn a Klarweg seal. Shareable on LinkedIn.</div>
-        <div class="cstep-visual cv-cert">
-          <div class="cv-seal">A1<span>·03</span></div>
+        <div class="cstep-title">Chapter check</div>
+        <div class="cstep-body">Finish with the chapter quiz. When you are signed in, your progress is saved to your account and picks up on any device.</div>
+        <div class="cstep-visual cv-check">
+          <div class="cv-frame"><span>A1 · Chapter 3</span></div>
+          <div class="cv-progress" aria-hidden="true"><span style="width: 100%;"></span></div>
+          <div class="cv-line-sub">Quiz 8 / 8 · progress saved</div>
         </div>
       </div>
 
@@ -5862,7 +5771,7 @@ body {
     <div class="section-header">
       <span class="eyebrow">Premium access</span>
       <h2 class="display display-md">One price for one level.<br>Or one price for <em style="font-family:var(--font-german);font-style:italic;font-weight:500;">everything.</em></h2>
-      <p class="lede">No subscription. No monthly bills. Pay once, learn forever.</p>
+      <p class="lede">Pay once: get 2 years of access to each level, or lifetime access to every level with Klarweg Lifetime.</p>
     </div>
 
     <!-- How it works: 3-step flow makes the conversion path obvious -->
@@ -5887,7 +5796,7 @@ body {
         <span class="pflow-num">03</span>
         <div>
           <div class="pflow-title">Unlock everything</div>
-          <div class="pflow-sub">One level, or every level forever.</div>
+          <div class="pflow-sub">Choose one level for 2 years, or get every level with Lifetime access.</div>
         </div>
       </div>
     </div>
@@ -5908,7 +5817,7 @@ body {
           <li><a href="c2.html#pricing" class="price-tier-row" data-kw-buy="C2" aria-label="Unlock C2 for ₹8,999"><span class="tier">C2</span><span class="amt">₹8,999 <span class="arrow" aria-hidden="true">→</span></span></a></li>
         </ul>
 
-        <p style="font-size: 13px; color: var(--ink-tertiary); margin-bottom: 20px;">All levels include AI tutor, certificates, homework PDFs, and stories. Chapter 1 free at every level.</p>
+        <p style="font-size: 13px; color: var(--ink-tertiary); margin-bottom: 20px;">All levels include AI tutor, homework PDFs, and stories. Chapter 1 free at every level.</p>
 
       </div>
 
@@ -5931,8 +5840,7 @@ body {
           <li><span class="check-icon">✓</span> All 6 levels: A1 · A2 · B1 · B2 · C1 · C2</li>
           <li><span class="check-icon">✓</span> Every chapter, every lesson, forever</li>
           <li><span class="check-icon">✓</span> Klarweg AI feedback on writing &amp; speaking</li>
-          <li><span class="check-icon">✓</span> Stories, dialogues, native audio</li>
-          <li><span class="check-icon">✓</span> Klarweg certificates at every level</li>
+          <li><span class="check-icon">✓</span> Stories, dialogues, German audio</li>
           <li><span class="check-icon">✓</span> Homework PDFs and smart revision</li>
           <li><span class="check-icon">✓</span> All future content and features included</li>
           <li><span class="check-icon">✓</span> 7-day money-back guarantee</li>
@@ -6100,6 +6008,7 @@ body {
           <li><a href="ausbildung.html">Ausbildung</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="resources.html">Resources</a></li>
+          <li><a href="german-grammar.html">German Grammar</a></li>
         </ul>
       </div>
 
@@ -6131,52 +6040,6 @@ body {
 </footer>
 
 
-<!-- ============================================================
-     WORD CARD MODAL — clean, focused, audible
-============================================================ -->
-<div class="wc-overlay" id="wc-overlay"></div>
-<div class="wc-modal" id="wc-modal" role="dialog" aria-modal="true" aria-labelledby="wc-word-text">
-  <button class="wc-close" id="wc-close" aria-label="Close">✕</button>
-
-  <div class="wc-header">
-    <div class="wc-word-block">
-      <h3 class="wc-word" id="wc-word-text">Mann</h3>
-      <p class="wc-pron" id="wc-pron">sounds like <em>"mahn"</em></p>
-    </div>
-    <button class="wc-audio" id="wc-audio-btn" data-state="idle" aria-label="Play pronunciation">
-      <span class="wc-audio-glyph" aria-hidden="true">
-        <svg class="ic-play" width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg>
-        <svg class="ic-stop" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="2" y="2" width="8" height="8" rx="1"/></svg>
-        <svg class="ic-error" width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1L13 13H1L7 1zM7 5v3M7 10v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>
-        <span class="ic-loading"></span>
-      </span>
-    </button>
-  </div>
-
-  <div class="wc-meaning">
-    <div class="wc-meaning-primary" id="wc-en">man</div>
-    <div class="wc-meaning-secondary" id="wc-hi">आदमी</div>
-  </div>
-
-  <div class="wc-badges" id="wc-badges">
-    <!-- injected by JS -->
-  </div>
-
-  <div class="wc-section" id="wc-why-section">
-    <div class="wc-section-title" id="wc-why-title">Why this case?</div>
-    <p class="wc-why" id="wc-why">It's the subject — the one doing the action.</p>
-  </div>
-
-  <!-- Type-specific: verb conjugation / adjective comparison / advanced (injected by JS) -->
-  <div id="wc-dynamic"></div>
-
-  <div class="wc-section">
-    <div class="wc-section-title">Example</div>
-    <p class="wc-example-text" id="wc-example">Der Mann trinkt Kaffee.</p>
-    <p class="wc-example-en" id="wc-example-en">The man drinks coffee.</p>
-  </div>
-</div>
-
 <script>
 /* ============================================================
    WORD DATABASE — drives the word card content
@@ -6204,6 +6067,12 @@ const WORDS = {
   'ich':        { word: 'ich',        pron: 'ikh',            ipa: '/ɪç/',            en: 'I',                   hi: 'मैं',              role: 'Pronoun · Subject', case: 'Nominativ', why: '1st person singular subject pronoun.',                                example: 'Ich heiße Anna.', example_en: 'My name is Anna.',                   accent: 'blue' },
   'schenke':    { word: 'schenke',    pron: 'SHEN-kuh',       ipa: '/ˈʃɛŋkə/',        en: 'give (as a gift)',    hi: 'गिफ्ट करता हूँ',    role: 'Verb',            case: '—',         why: '"schenken" takes both Dativ (receiver) and Akkusativ (gift).',          example: 'Ich schenke dir Blumen.', example_en: 'I\'m giving you flowers.',           accent: 'red', conj: { praesens: 'schenkt', praeteritum: 'schenkte', perfekt: 'hat geschenkt' }, advanced: { synonyms: ['geben', 'überreichen'], opposites: ['nehmen'], collocations: ['Blumen schenken', 'Zeit schenken', 'ein Lächeln schenken'] } },
   'dir':        { word: 'dir',        pron: 'deer',           ipa: '/diːɐ̯/',         en: 'to you',              hi: 'तुम्हें',           role: 'Pronoun · Indirect object', case: 'Dativ', why: 'Dativ form of "du" — the receiver.',                              example: 'Ich gebe dir das Buch.', example_en: 'I\'m giving you the book.',            accent: 'olive' },
+  /* "Sie gibt mir das Buch." — en/hi/pron/role are the course's own authored token for
+     this use, verbatim (dative object mir: chapter-a1-40-verben-dativ and 39 others;
+     accusative article das: chapter-a1-36-dativ and 62 others). Case = this span's
+     c-dat / c-akk; example = this page's sentence and its translation (see 'gibt'). */
+  'mir':        { word: 'mir',        pron: 'meer',           en: 'me',                  hi: 'मुझे',             role: 'Pronoun · dative', case: 'Dativ', example: 'Sie gibt mir das Buch.', example_en: 'She gives me the book.' },
+  'das':        { word: 'das',        pron: 'das',            en: 'the (neut.)',         hi: 'यह',               role: 'Article · neut. acc.', case: 'Akkusativ', example: 'Sie gibt mir das Buch.', example_en: 'She gives me the book.' },
   'ein':        { word: 'ein',        pron: 'eyen',           ipa: '/aɪ̯n/',          en: 'a / an',              hi: 'इंडेफिनिट article', role: 'Article',         case: 'Akkusativ', why: 'Neuter "a" — same form in Nominativ and Akkusativ.',                     example: 'Sie hat ein Auto.', example_en: 'She has a car.',                 accent: 'emerald' },
   'buch':       { word: 'Buch',       pron: 'bookh',          ipa: '/buːx/',          en: 'book',                hi: 'किताब',             role: 'Noun · Direct object', case: 'Akkusativ', gender: 'das', plural: 'Bücher', why: 'Akkusativ — the thing being given.',     example: 'Ich lese ein Buch.', example_en: 'I\'m reading a book.',                accent: 'emerald' },
   'wir':        { word: 'wir',        pron: 'veer',           ipa: '/viːɐ̯/',         en: 'we',                  hi: 'हम',               role: 'Pronoun · Subject', case: 'Nominativ', why: '1st person plural subject pronoun.',                                  example: 'Wir fahren nach Berlin.', example_en: 'We\'re going to Berlin.',           accent: 'blue' },
@@ -6313,24 +6182,6 @@ window.addEventListener('load', () => {
 /* ============================================================
    DECODE TOGGLE
 ============================================================ */
-
-/* ============================================================
-   WORD CARD MODAL — content + audio
-============================================================ */
-const overlay = document.getElementById('wc-overlay');
-const modal = document.getElementById('wc-modal');
-const wcClose = document.getElementById('wc-close');
-const wcWordText = document.getElementById('wc-word-text');
-const wcPron = document.getElementById('wc-pron');
-const wcAudioBtn = document.getElementById('wc-audio-btn');
-const wcHi = document.getElementById('wc-hi');
-const wcEn = document.getElementById('wc-en');
-const wcBadges = document.getElementById('wc-badges');
-const wcWhy = document.getElementById('wc-why');
-const wcWhyTitle = document.getElementById('wc-why-title');
-const wcWhySection = document.getElementById('wc-why-section');
-const wcExample = document.getElementById('wc-example');
-const wcExampleEn = document.getElementById('wc-example-en');
 
 /* ---- Unified audio: word, sentence, paragraph, dialogue.
        Single state machine. Web Speech API now; pre-recorded later. ---- */
@@ -7350,34 +7201,6 @@ document.querySelectorAll('.word-card-mock .wc-audio').forEach(btn => {
 });
 
 /* ============================================================
-   WORD CARD — open on click only (never auto-open)
-============================================================ */
-function accentToColor(accent) {
-  return {
-    /* Every accent key resolves to its --g-* equivalent so the popup matches
-       the homepage word coloring exactly. */
-    blue:    { color: 'var(--g-subject)',     tint: 'rgba(24,95,165,0.10)',   deep: 'var(--blue-deep)' },
-    red:     { color: 'var(--g-verb)',        tint: 'rgba(220,38,38,0.10)',   deep: '#991B1B' },
-    coral:   { color: 'var(--g-verb)',        tint: 'rgba(220,38,38,0.10)',   deep: '#991B1B' },   // legacy verb mapping
-    green:   { color: 'var(--g-object)',      tint: 'rgba(46,125,50,0.10)',   deep: '#1B4A1F' },
-    emerald: { color: 'var(--g-akkusativ)',   tint: 'rgba(16,185,129,0.10)',  deep: '#065F46' },
-    olive:   { color: 'var(--g-dativ)',       tint: 'rgba(92,122,29,0.10)',   deep: '#3F4F0F' },
-    purple:  { color: 'var(--g-time)',        tint: 'rgba(124,58,237,0.10)',  deep: '#4E1D9D' },
-    indigo:  { color: 'var(--g-time)',        tint: 'rgba(124,58,237,0.10)',  deep: '#4E1D9D' },   // legacy time mapping
-    orange:  { color: 'var(--g-place)',       tint: 'rgba(234,88,12,0.10)',   deep: '#9A3505' },
-    amber:   { color: 'var(--g-adjective)',   tint: 'rgba(217,119,6,0.10)',   deep: '#92500B' },
-    pink:    { color: 'var(--g-question)',    tint: 'rgba(219,39,119,0.10)',  deep: '#831843' },
-    teal:    { color: 'var(--g-modal)',       tint: 'rgba(13,148,136,0.10)',  deep: '#134E4A' },
-    yellow:  { color: 'var(--g-preposition)', tint: 'rgba(176,127,0,0.10)',   deep: '#85590C' },
-    brown:   { color: 'var(--g-conjunction)', tint: 'rgba(139,90,43,0.10)',   deep: '#5A3B1C' },
-    copper:  { color: 'var(--g-article)',     tint: 'rgba(184,115,51,0.10)',  deep: '#7A4920' },
-    lime:    { color: 'var(--g-possessive)',  tint: 'rgba(101,163,13,0.10)',  deep: '#3F6212' },
-    bronze:  { color: 'var(--g-genitiv)',     tint: 'rgba(146,64,14,0.10)',   deep: '#5A2A09' },
-    gray:    { color: 'var(--ink-secondary)', tint: 'var(--bg-elevated)',     deep: 'var(--ink-primary)' }
-  }[accent] || { color: 'var(--ink-primary)', tint: 'var(--bg-elevated)', deep: 'var(--ink-primary)' };
-}
-
-/* ============================================================
    Context-aware Sie / sie disambiguation.
    Reads the sentence around the clicked pronoun and decides:
      Sie = formal "you"  ·  sie = "she"  ·  sie = "they"
@@ -7406,10 +7229,10 @@ function analyzeSie(wordEl) {
   if (pluralVerbs.includes(verb) || (/(en|nd)$/.test(verb) && verb.length > 2)) number = 'plural';
   else if (singVerbs.includes(verb) || /t$/.test(verb)) number = 'singular';
 
+  // Plain markup: the shared popup's "Why this form?" section supplies the type.
   const note = (rows, reason) =>
-    '<div style="font-family:var(--font-ui);font-size:13px;line-height:1.6">' +
     rows.map(r => '<b>' + r[0] + ':</b> ' + r[1]).join('<br>') +
-    '<br><span style="opacity:.8"><b>Why here:</b> ' + reason + '</span></div>';
+    '<br><b>Why here:</b> ' + reason;
 
   // CASE 1 — singular verb → unambiguous "she".
   if (number === 'singular') {
@@ -7469,158 +7292,57 @@ function analyzeSie(wordEl) {
 }
 
 /* ============================================================
-   Fallback word entry — guarantees every clickable word opens a
-   popup even if it's not in the WORDS dictionary. Derives role +
-   case from the element's CSS classes; handles umlauts/ß/compounds.
+   WORD POPUP — the course popup, shared (never a homepage copy).
+   Every .de[data-word] opens the SAME popup as a chapter page:
+   chapter/chapter-app.js in popup-only host mode renders it through the
+   course lookup pipeline (occurrence data → Global Lexicon → lemma
+   resolution), audio and dismissal; public/kw-word-pop.css styles it.
+   WORDS above is this page's authored data for each occurrence, handed
+   over field for field in the chapter token shape. The clicked span's
+   r-* class colours the headword, exactly as on a chapter page.
 ============================================================ */
-function buildFallbackWord(wordEl, key) {
-  const surface = (wordEl.textContent || key || '').trim().replace(/[.,!?;:]+$/, '');
-  const ROLE = {
-    'r-subject': 'Subject', 'r-pronoun': 'Pronoun', 'r-verb': 'Verb',
-    'r-object': 'Object', 'r-time': 'Time', 'r-place': 'Place',
-    'r-article': 'Article', 'r-adjective': 'Adjective', 'r-adverb': 'Adverb',
-    'r-preposition': 'Preposition', 'r-conjunction': 'Conjunction',
-    'r-negation': 'Negation', 'r-question': 'Question word', 'r-possessive': 'Possessive',
-    'r-modalverb': 'Modal verb', 'r-auxiliary': 'Auxiliary'
-  };
-  const CASE = { 'c-nom': 'Nominativ', 'c-akk': 'Akkusativ', 'c-dat': 'Dativ', 'c-gen': 'Genitiv' };
-  const ACCENT = {
-    'r-subject': 'blue', 'r-pronoun': 'blue', 'r-verb': 'red', 'r-object': 'green',
-    'r-time': 'purple', 'r-place': 'orange', 'r-article': 'copper', 'r-adjective': 'amber',
-    'r-adverb': 'cyan', 'r-preposition': 'gold', 'r-question': 'pink', 'r-negation': 'magenta'
-  };
-  let role = 'Word', cs = '—', accent = 'slate';
-  wordEl.classList.forEach(c => {
-    if (ROLE[c]) { role = ROLE[c]; accent = ACCENT[c] || accent; }
-    if (CASE[c]) cs = CASE[c];
-  });
-  return {
-    word: surface,
-    pron: '', ipa: '',
-    en: '', // shown via graceful note below
-    hi: '',
-    role: role + (cs !== '—' ? ' · ' + cs : ''),
-    case: cs,
-    accent: accent,
-    why: 'This word is highlighted as the <b>' + role.toLowerCase() + '</b>' +
-         (cs !== '—' ? ' in the <b>' + cs + '</b> case' : '') +
-         '. A full translation card for this word is coming soon — tap the speaker to hear it.',
-    _fallback: true
-  };
+function homeWordToken(wordEl) {
+  const key = wordEl.dataset.word;
+  const surface = (wordEl.textContent || '').trim().replace(/[.,!?;:]+$/, '');
+  let d = WORDS[key];
+  // Context-aware disambiguation for the pronoun Sie/sie (this occurrence's data).
+  if (d && (key === 'sie' || /^sie(-|$)/.test(key))) d = Object.assign({}, d, analyzeSie(wordEl));
+  // The span's classes ARE this occurrence's authored role, exactly like a chapter
+  // token's `role` — and they win over any dictionary role, as a token's do. This
+  // page paints Akk/Dat objects and case-marked articles in the CASE colour
+  // (.de.r-object.c-akk … above): that is the course's akkusativ/dativ/genitiv
+  // role, so the popup headword matches the word the learner clicked.
+  const cls = wordEl.classList;
+  const roleCls = [...cls].find(c => /^r-/.test(c)) || null;
+  const caseRole = (roleCls === 'r-object' || roleCls === 'r-article')
+    ? (cls.contains('c-akk') ? 'r-akkusativ' : cls.contains('c-dat') ? 'r-dativ' : (cls.contains('c-gen') && roleCls === 'r-article') ? 'r-genitiv' : null)
+    : null;
+  const role = caseRole || roleCls;
+  // No authored entry: the course pipeline resolves the surface, or says plainly it has no entry.
+  if (!d) return role ? { w: surface, role } : { w: surface };
+  const t = { w: d.word || surface };
+  if (role) t.role = role;
+  const put = (k, v) => { if (v != null && v !== '' && v !== '—') t[k] = v; };
+  put('pron', d.pron);
+  put('ipa', d.ipa && d.ipa.replace(/^\/|\/$/g, ''));   // the course renders IPA in [ ]
+  put('en', d.en); put('hi', d.hi);
+  put('type', d.role); put('case', d.case); put('why', d.why);
+  put('ex', d.example); put('exEn', d.example_en);
+  put('plural', d.plural); put('conj', d.conj); put('compare', d.compare); put('advanced', d.advanced);
+  return t;
 }
 
-function openWordCard(wordEl) {
-  const key = wordEl && wordEl.dataset.word;
-  if (!key) return;
-  let data = WORDS[key];
-  // P0 fallback: never silently fail. If a word isn't in the dictionary,
-  // build a minimal entry from the element itself so a popup ALWAYS opens —
-  // with the surface word, its role/case derived from CSS classes, and a
-  // graceful note. This guarantees every clickable .de[data-word] responds.
-  if (!data) data = buildFallbackWord(wordEl, key);
-  // Context-aware disambiguation for the pronoun Sie/sie.
-  if (key === 'sie' || /^sie(-|$)/.test(key)) data = Object.assign({}, data, analyzeSie(wordEl));
-  const palette = accentToColor(data.accent);
-
-  wcWordText.textContent = data.word;
-  wcWordText.style.color = palette.color;
-  wcPron.innerHTML = data.pron ? `sounds like <em>"${data.pron}"</em>` : '';
-
-  KW_Audio.stop();
-  wcAudioBtn.dataset.state = 'idle';
-  wcAudioBtn.onclick = (e) => { e.stopPropagation(); KW_Audio.playWord(data.word, wcAudioBtn); };
-
-  wcEn.textContent = data.en || (data._fallback ? 'Tap to hear it · full card coming soon' : '');
-  wcEn.style.opacity = (!data.en && data._fallback) ? '0.6' : '1';
-  wcHi.textContent = data.hi || '';
-  wcHi.style.display = data.hi ? 'block' : 'none';
-
-  const badges = [];
-  badges.push(`<span class="wc-badge accent" style="--accent-tint: ${palette.tint}; --accent-deep: ${palette.deep};"><span class="dot" style="background: ${palette.color};"></span> ${data.role}</span>`);
-  if (data.gender)                       badges.push(`<span class="wc-badge">${data.gender}</span>`);
-  if (data.case && data.case !== '—')    badges.push(`<span class="wc-badge">${data.case}</span>`);
-  if (data.plural && data.plural !== '—') badges.push(`<span class="wc-badge">Pl: ${data.plural}</span>`);
-  wcBadges.innerHTML = badges.join('');
-
-  if (data.why) {
-    wcWhySection.style.display = 'block';
-    wcWhyTitle.textContent = (data.case && data.case !== '—') ? 'Why this case?' : 'Why this form?';
-    wcWhy.innerHTML = data.why;
-    wcWhy.style.background = palette.tint;
-    wcWhy.style.color = palette.deep;
-  } else {
-    wcWhySection.style.display = 'none';
-  }
-
-  wcExample.textContent = data.example || '';
-  wcExampleEn.textContent = data.example_en || '';
-
-  // Type-specific sections: verb conjugation, adjective comparison, advanced (collapsed)
-  const dyn = document.getElementById('wc-dynamic');
-  if (dyn) {
-    let html = '';
-    if (data.conj) {
-      const rows = [
-        ['Präsens', data.conj.praesens, '3rd person singular'],
-        ['Präteritum', data.conj.praeteritum, 'simple past'],
-        ['Perfekt', data.conj.perfekt, 'present perfect']
-      ].filter(r => r[1]);
-      html += '<div class="wc-section"><div class="wc-section-title">Conjugation</div><div class="wc-conj">';
-      rows.forEach(([label, form, hint]) => {
-        html += `<div class="wc-conj-row"><div class="wc-conj-tense">${label}<span class="wc-conj-hint">${hint}</span></div><button class="wc-conj-form de" type="button" data-say="${form.replace(/^(ist|hat)\s+/, '')}" style="color:${palette.color}">${form}</button></div>`;
-      });
-      html += '</div></div>';
-    }
-    if (data.compare) {
-      html += '<div class="wc-section"><div class="wc-section-title">Comparison</div><div class="wc-compare">';
-      [['Comparative', data.compare.comparative], ['Superlative', data.compare.superlative]].filter(r => r[1]).forEach(([label, form]) => {
-        html += `<button class="wc-compare-cell" type="button" data-say="${form.replace(/^am\s+/, '')}"><div class="wc-compare-label">${label}</div><div class="wc-compare-form de" style="color:${palette.color}">${form}</div></button>`;
-      });
-      html += '</div></div>';
-    }
-    const adv = data.advanced;
-    if (adv && (adv.synonyms || adv.opposites)) {
-      const block = (label, items, isDe) => {
-        if (!items || !items.length) return '';
-        const chips = items.map(it => `<span class="wc-adv-chip${isDe ? ' de' : ''}">${it}</span>`).join('');
-        return `<div class="wc-adv-block"><div class="wc-adv-label">${label}</div><div class="wc-adv-chips">${chips}</div></div>`;
-      };
-      html += '<div class="wc-section"><details class="wc-advanced"><summary class="wc-advanced-summary"><span>Advanced</span><span class="wc-advanced-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6l4 4 4-4"/></svg></span></summary><div class="wc-advanced-inner">'
-        + block('Synonyms', adv.synonyms, true)
-        + block('Opposites', adv.opposites, true)
-        + '</div></details></div>';
-    }
-    dyn.innerHTML = html;
-    dyn.querySelectorAll('[data-say]').forEach(b => {
-      b.addEventListener('click', (e) => { e.stopPropagation(); KW_Audio.playWord(b.dataset.say); });
-    });
-  }
-
-  overlay.classList.add('open');
-  modal.classList.add('open');
-  document.body.classList.add('modal-open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeWordCard() {
-  KW_Audio.stop();
-  overlay.classList.remove('open');
-  modal.classList.remove('open');
-  document.body.classList.remove('modal-open');
-  document.body.style.overflow = '';
-}
-
-overlay.addEventListener('click', closeWordCard);
-wcClose.addEventListener('click', closeWordCard);
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal.classList.contains('open')) closeWordCard();
+// Click only — never auto-opens. A click that lands before chapter-app.js
+// has finished loading (deferred) opens as soon as it is ready.
+let pendingWordEl = null;
+document.addEventListener('kw-wordpop-ready', () => {
+  if (pendingWordEl) { const el = pendingWordEl; pendingWordEl = null; window.KW_WordPop.open(el, homeWordToken(el)); }
 });
-
-// Click handler — only opens when user actually clicks a word. Never auto-opens.
 document.querySelectorAll('.de[data-word]').forEach(el => {
   el.addEventListener('click', (e) => {
     e.stopPropagation();
-    openWordCard(el);
+    if (window.KW_WordPop) window.KW_WordPop.open(el, homeWordToken(el));
+    else pendingWordEl = el;
   });
 });
 
@@ -7873,7 +7595,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const w = e.target.closest('.de[data-word]');
     if (!w) return;
     // Don't show during active tap or when a word-card modal is open
-    if (document.querySelector('.wc-overlay.is-open, .word-card-overlay.is-open')) return;
+    if (document.querySelector('.word-pop.is-open')) return;
     show(w);
   });
   document.addEventListener('mouseout', e => {
@@ -8190,6 +7912,11 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="kw-nav-auth.js"></script>
 <script src="kw-checkout.js"></script>
 <script src="kw-ai-chat.js" defer></script>
+<!-- Word popup: the course popup engine (chapter-app.js) in popup-only host mode. -->
+<script>window.KW_WORD_POP_HOST = { lexiconSrc: 'chapter/global-lexicon-public.js', triggers: '.de[data-word]' };</script>
+<script src="chapter/story-lexicon-public.js" defer></script>
+<script src="chapter/tokenizer.js" defer></script>
+<script src="chapter/chapter-app.js?v=36" defer></script>
 
 </body>
 </html>

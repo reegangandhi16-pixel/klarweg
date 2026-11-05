@@ -12,8 +12,9 @@
 
 // ── CDN base for all audio assets (manifests + MP3s) ──────────────────────
 // Must be defined BEFORE the engine reads it. Set to null to use local files.
-window.KW_AUDIO_BASE =
-  'https://cdn.jsdelivr.net/gh/reegangandhi16-pixel/klarweg-audio@main/public/audio/';
+// The protected same-origin route klarweg.in/api/media/ (access Worker).
+// Keep identical to AUDIO_ORIGIN in kw-audio-engine.js.
+window.KW_AUDIO_BASE = '/api/media/';
 
 (function () {
   if (!window.KW_TTS) return;

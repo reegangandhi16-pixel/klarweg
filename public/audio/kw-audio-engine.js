@@ -118,6 +118,11 @@
      1. MANIFEST (optional fast path)
      ════════════════════════════════════════════════════════════════════ */
   var MAP = {}, MAP_LC = {}, MAP_CANON = {}, MAP_SENT = {}, manifestReady = false, manifestBase = '/audio/';
+  /* A paid chapter's own lines (window.KW_CHAPTER_AUDIO) come from its gated
+     payload, a <script> that can finish AFTER the public manifest has loaded.
+     mergeChapterAudio() runs on every lookup and merges that payload once;
+     a manifest (re)load clears the marker so the lines are merged again. */
+  var mergedChapterAudio = null, mergeChapterAudio = function () {};
   var A1MAP = {}, A1MAP_LC = {}, A1MAP_CANON = {}, a1Ready = false;   // dual-voice vocab map (all levels merged)
   var vocabSourceStats = [];
   // Dual-voice vocabulary is spread over MORE THAN ONE published manifest and
@@ -134,40 +139,57 @@
   // regenerated. Each source keeps its OWN base, because their paths differ:
   // (1) stores CDN-relative "audio/female/die_Chancengleichheit.mp3", while
   // (2)/(3) store root-relative "/audio/words/female/<sha16>.mp3".
-  var VOCAB_CDN_BASE = 'https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/';
-  var VOCAB_MANIFEST_URL = VOCAB_CDN_BASE + 'manifest.json';
+  // All recorded audio is served by the site's own protected route
+  // klarweg.in/api/media/<key> (access Worker, private R2 bucket, original
+  // paths): free audio for anyone, paid audio only with a session that holds
+  // the purchase. It is same-origin, so the session cookie (Path=/api) is sent
+  // with every <audio> and fetch request. There is deliberately NO fallback
+  // to any other host: the old public copies are closed. A failed file falls
+  // through to the existing cache / TTS chain.
+  var AUDIO_ORIGIN = '/api/media/';
+  function legacyUrl() { return null; }
+  var VOCAB_CDN_BASE = AUDIO_ORIGIN + 'vocab/';
   // The per-level word manifests and their MP3s are published here. This base
   // is DECLARED rather than read from window.KW_AUDIO_BASE on purpose: the
   // config script that sets KW_AUDIO_BASE loads after this engine, and while
   // the browser is fetching it our setTimeout(0) loader can already run — a
   // race that silently pointed these manifests (and every "/audio/words/…"
   // path inside them) at the local folder, where the files do not exist.
-  var WORDS_CDN_BASE = 'https://cdn.jsdelivr.net/gh/reegangandhi16-pixel/klarweg-audio@main/public/audio/';
+  var WORDS_CDN_BASE = AUDIO_ORIGIN;
+  // `file` is the path under BOTH the site's public/audio/ folder and the
+  // audio origin; `base` is where that manifest's MP3 paths resolve.
   var VOCAB_SOURCES = [
-    { id: 'vocab-cdn', urls: [VOCAB_MANIFEST_URL], base: VOCAB_CDN_BASE },
-    { id: 'a1-words', file: 'a1-words-manifest.json' },
-    { id: 'a2-words', file: 'a2-words-manifest.json' },
-    { id: 'b1-words', file: 'b1-words-manifest.json' }
+    { id: 'vocab-cdn', file: 'vocab/manifest.json', base: VOCAB_CDN_BASE },
+    { id: 'a1-words', file: 'a1-words-manifest.json', base: WORDS_CDN_BASE },
+    { id: 'a2-words', file: 'a2-words-manifest.json', base: WORDS_CDN_BASE },
+    { id: 'b1-words', file: 'b1-words-manifest.json', base: WORDS_CDN_BASE }
   ];
-  /* Candidate URLs for one source, in order: its published CDN home, then the
-   * configured base, then the script-relative folder. Whichever answers first
-   * also becomes the base its relative MP3 paths resolve against, so a
-   * manifest and its files can never come from different origins. */
+  /* Candidate URLs for one source: the copy published with the site first
+   * (served by the site host, so manifest re-validation on every page load
+   * costs no audio-Worker request), then the audio origin (which itself falls
+   * back to the old hosts). The MP3 base is fixed per source and never
+   * follows the manifest's host: a manifest read from the site must still
+   * resolve its MP3s on the audio origin, where the files actually are. */
   function sourceCandidates(src) {
-    if (src.urls) return src.urls.map(function (u) { return { url: u, base: src.base }; });
-    var seen = {}, list = [];
-    [WORDS_CDN_BASE, audioBase(), manifestBase].forEach(function (b) {
-      if (!b || seen[b]) return; seen[b] = 1;
-      list.push({ url: b + src.file, base: b });
-    });
-    return list;
+    return [
+      { url: manifestBase + src.file, base: src.base },
+      { url: AUDIO_ORIGIN + src.file, base: src.base }
+    ];
+  }
+  /* Same order for the single-file manifests (word forms, conjugations). */
+  function fetchSiteThenOrigin(file) {
+    return fetchWithTimeout(manifestBase + file, MANIFEST_FETCH_TIMEOUT_MS).then(function (r) {
+      if (r.ok) return r;
+      return fetchWithTimeout(AUDIO_ORIGIN + file, MANIFEST_FETCH_TIMEOUT_MS);
+    }, function () { return fetchWithTimeout(AUDIO_ORIGIN + file, MANIFEST_FETCH_TIMEOUT_MS); });
   }
 
   // CDN base: when window.KW_AUDIO_BASE is set, ALL audio (manifests + MP3s)
   // resolve against it — so no MP3 files need to live in this project.
   function audioBase() {
-    var b = global.KW_AUDIO_BASE;
-    if (b) return b.charAt(b.length - 1) === '/' ? b : b + '/';
+    // Any configured audio base means "production audio": always the one
+    // protected origin (a stale cached config naming an old host is ignored).
+    if (global.KW_AUDIO_BASE) return AUDIO_ORIGIN;
     return manifestBase;   // fall back to the script-relative folder
   }
 
@@ -187,10 +209,39 @@
     // manifest is fetched from the wrong (local) path and never loads.
     setTimeout(startLoading, 0);
 
+    function indexEntry(k, v) {
+      MAP_LC[normalize(k).toLowerCase()] = v;
+      canonAdd(MAP_CANON, k, v);
+      // A stored line that is ONE sentence can safely answer that
+      // sentence's request. A stored line made of SEVERAL sentences
+      // cannot: the player asks for one sentence at a time and would
+      // replay the whole line per sentence, so it is left unmapped
+      // and reported as genuinely missing instead.
+      var parts = splitSentences(k);
+      if (parts.length === 1) canonAdd(MAP_SENT, parts[0], v);
+    }
+    /* A paid chapter's own lines, delivered with its gated payload. Public
+       entries win on a clash, exactly as the single manifest did. */
+    function addEntries(entries) {
+      for (var k in entries) if (Object.prototype.hasOwnProperty.call(entries, k) && !Object.prototype.hasOwnProperty.call(MAP, k)) {
+        MAP[k] = entries[k];
+        indexEntry(k, entries[k]);
+      }
+    }
+    mergeChapterAudio = function () {
+      var own = global.KW_CHAPTER_AUDIO;
+      if (!own || !own.entries || own === mergedChapterAudio) return;
+      mergedChapterAudio = own;
+      addEntries(own.entries);
+    };
+
     function startLoading() {
       var ab = audioBase();
       // Prefer the CDN copy of each manifest first, then local fallbacks.
-      var candidates = [base + 'manifest.json', '/audio/manifest.json', ab + 'manifest.json', 'public/audio/manifest.json'];
+      // manifest-public.json: free Chapter 1, homepage and legacy lines only.
+      // A paid chapter's own lines arrive with its gated payload
+      // (window.KW_CHAPTER_AUDIO, merged below), never from a public file.
+      var candidates = [base + 'manifest-public.json', '/audio/manifest.json', ab + 'manifest.json', 'public/audio/manifest-public.json'];
       var i = 0;
       (function next() {
         if (i >= candidates.length) { manifestReady = true; emit('manifest-loaded', { entries: 0, source: 'none' }); return; }
@@ -199,17 +250,9 @@
           .then(function (json) {
             MAP = (json && json.entries) ? json.entries : (json || {});
             MAP_LC = {}; MAP_CANON = {}; MAP_SENT = {};
-            for (var k in MAP) if (Object.prototype.hasOwnProperty.call(MAP, k)) {
-              MAP_LC[normalize(k).toLowerCase()] = MAP[k];
-              canonAdd(MAP_CANON, k, MAP[k]);
-              // A stored line that is ONE sentence can safely answer that
-              // sentence's request. A stored line made of SEVERAL sentences
-              // cannot: the player asks for one sentence at a time and would
-              // replay the whole line per sentence, so it is left unmapped
-              // and reported as genuinely missing instead.
-              var parts = splitSentences(k);
-              if (parts.length === 1) canonAdd(MAP_SENT, parts[0], MAP[k]);
-            }
+            for (var k in MAP) if (Object.prototype.hasOwnProperty.call(MAP, k)) indexEntry(k, MAP[k]);
+            mergedChapterAudio = null;
+            mergeChapterAudio();
             manifestReady = true;
             emit('manifest-loaded', { entries: Object.keys(MAP).length, source: candidates[i] });
           })
@@ -241,6 +284,7 @@
   })();
 
   function manifestEntry(text) {
+    mergeChapterAudio();
     var n = normalize(text);
     return MAP[n]
         || MAP_LC[n.toLowerCase()]
@@ -294,8 +338,7 @@
 
   /* ── Exact word-form audio (comparison / declension / number forms) ─────── */
   var wordFormManifestPromise = null;
-  var WORD_FORM_CDN_BASE =
-    'https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/';
+  var WORD_FORM_CDN_BASE = VOCAB_CDN_BASE;
   var WORD_FORM_MANIFEST_URL =
     WORD_FORM_CDN_BASE + 'manifest-word-form.json';
   var WORD_FORM_MAP = Object.create(null);
@@ -303,10 +346,7 @@
   function ensureWordFormManifest() {
     if (wordFormManifestPromise) return wordFormManifestPromise;
 
-    wordFormManifestPromise = fetchWithTimeout(
-      WORD_FORM_MANIFEST_URL,
-      MANIFEST_FETCH_TIMEOUT_MS
-    ).then(function (r) {
+    wordFormManifestPromise = fetchSiteThenOrigin('vocab/manifest-word-form.json').then(function (r) {
       if (!r.ok) throw new Error('http-' + r.status);
       return r.json();
     }).then(function (json) {
@@ -380,8 +420,7 @@ function wordFormUrl(text) {
 
   /* ── Exact conjugation-form audio ─────────────────────────────────────── */
   var conjugationManifestPromise = null;
-  var CONJUGATION_CDN_BASE =
-    'https://reegangandhi16-pixel.github.io/klarweg-audio-cdn/';
+  var CONJUGATION_CDN_BASE = VOCAB_CDN_BASE;
   var CONJUGATION_MANIFEST_URL =
     CONJUGATION_CDN_BASE + 'manifest-conjugation.json';
   var CONJUGATION_MAP = Object.create(null);
@@ -389,10 +428,7 @@ function wordFormUrl(text) {
   function ensureConjugationManifest() {
     if (conjugationManifestPromise) return conjugationManifestPromise;
 
-    conjugationManifestPromise = fetchWithTimeout(
-      CONJUGATION_MANIFEST_URL,
-      MANIFEST_FETCH_TIMEOUT_MS
-    ).then(function (r) {
+    conjugationManifestPromise = fetchSiteThenOrigin('vocab/manifest-conjugation.json').then(function (r) {
       if (!r.ok) throw new Error('http-' + r.status);
       return r.json();
     }).then(function (json) {
@@ -450,7 +486,7 @@ function wordFormUrl(text) {
   // into the shared map, and emits the same event as before for each level.
   var vocabLoadPromise = null;
   var MANIFEST_FETCH_TIMEOUT_MS = 4000;
-  function fetchWithTimeout(url, ms) {
+  function fetchOnce(url, ms) {
     return new Promise(function (resolve, reject) {
       var done = false;
       var timer = setTimeout(function () { if (!done) { done = true; reject(new Error('timeout')); } }, ms);
@@ -461,6 +497,20 @@ function wordFormUrl(text) {
       });
     });
   }
+  /* Manifest fetch with the legacy-host fallback: a network error or non-OK
+     answer from the audio Worker retries the same file on the previous host. */
+  function fetchWithTimeout(url, ms) {
+    var alt = legacyUrl(url);
+    if (!alt) return fetchOnce(url, ms);
+    var fallback = function (why) {
+      emit('audio-legacy-fallback', { kind: 'manifest', url: url, legacy: alt, reason: why });
+      return fetchOnce(alt, ms);
+    };
+    return fetchOnce(url, ms).then(function (r) {
+      return r.ok ? r : fallback('http-' + r.status).catch(function () { return r; });
+    }, function (err) { return fallback(err && err.message); });
+  }
+
   // Single-source loader: fetches the one production CDN manifest.json
   // (9,403 entries, all levels) into the shared A1MAP. Memoized so repeat
   // calls (from ensureA1Loaded, vocabUrlAsync, etc.) share one in-flight
@@ -541,7 +591,10 @@ function wordFormUrl(text) {
     // Root-relative "/audio/words/…" paths belong to the a1/a2/b1 manifests and
     // resolve against KW_AUDIO_BASE; CDN-relative "audio/female/…" paths belong
     // to the vocab CDN and resolve against its own base.
-    if (rel.charAt(0) === '/') return rel.replace(/^\/audio\//, (entryBase || audioBase()));
+    // Root-relative "/audio/words/…" files live at the origin root
+    // (words/…), also when listed in the vocab CDN manifest — never under
+    // vocab/ (that was the old "vocab/words/…" 404).
+    if (rel.charAt(0) === '/') return rel.replace(/^\/audio\//, AUDIO_ORIGIN);
     return (entryBase || VOCAB_CDN_BASE) + rel;
   }
   /** Voiced vocab URL for a term + gender ('female'|'male'), or undefined (sync). */
@@ -783,7 +836,9 @@ function wordFormUrl(text) {
         if (!settled) {
           settled = true;
           emit('play-error', { url: url, code: a.error && a.error.code });
-          resolve(false);
+          // A late load error from a clip the user already stopped or replaced
+          // is settled as handled: no other host, no cache/TTS fallback.
+          resolve(current === a ? retryLegacy(url, opts, a.error && a.error.code) : true);
         }
       }, { once: true });
 
@@ -796,7 +851,13 @@ function wordFormUrl(text) {
           if (!settled) {
             settled = true;
             emit('play-error', { url: url, name: err && err.name });
-            resolve(false);
+            // Only a source that cannot be loaded, and is still the current
+            // clip, is retried elsewhere. AbortError means pause()/stop or a
+            // new clip interrupted loading: settled as handled, so a pause
+            // never turns into browser speech. An autoplay block
+            // (NotAllowedError) keeps the old cache/TTS chain.
+            if (err && err.name === 'NotSupportedError') resolve(current === a ? retryLegacy(url, opts, err.name) : true);
+            else resolve(!!(err && err.name === 'AbortError'));
           }
         });
       } else {
@@ -804,6 +865,15 @@ function wordFormUrl(text) {
       }
 
     });
+  }
+  /* One retry of a failed audio-Worker URL on its previous host. Resolves
+     false (→ the existing cache/TTS fallback chain) when there is none. */
+  function retryLegacy(url, opts, reason) {
+    var alt = (opts && opts._noLegacy) ? null : legacyUrl(url);
+    delete urlCache[url];                  // never reuse an element that failed to load
+    if (!alt) return false;
+    emit('audio-legacy-fallback', { kind: 'play', url: url, legacy: alt, reason: reason });
+    return playUrl(alt, Object.assign({}, opts, { _noLegacy: true, _src: (opts && opts._src || 'file') + '-legacy' }));
   }
   function playBlob(blob, opts) {
     var url = URL.createObjectURL(blob);

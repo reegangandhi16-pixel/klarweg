@@ -5,7 +5,15 @@
    Runs BEFORE chapter-story.js so GSAP sees a populated DOM.
 ============================================================ */
 (function () {
-  const C = window.CHAPTER;
+  // POPUP-ONLY HOST (the homepage). A page that is not a chapter but shows
+  // word popups sets window.KW_WORD_POP_HOST = { lexiconSrc } before loading
+  // this file. It then gets the SAME popup (renderWordPop) through the SAME
+  // lookup pipeline, audio and dismissal as every chapter, via
+  // window.KW_WordPop.open(el, token) — and nothing else: no dashboard, no
+  // access gate, no auto-linkify of the host's own markup. Chapter pages
+  // never set it, so for them nothing below changes.
+  const POP_HOST = window.KW_WORD_POP_HOST || null;
+  const C = window.CHAPTER || (POP_HOST ? { id: 'popup-host', sections: [], vocab: [], quiz: [], xp: 0 } : null);
   if (!C) { console.error('CHAPTER data missing'); return; }
 
   // Sentence X-Ray is paused as of the "pause" decision: the full
@@ -25,15 +33,23 @@
   /* ---------- Global Lexicon (single shared-runtime load point) ----------
      chapter-app.js IS the shared runtime every chapter already loads, so it
      is the one place the cross-chapter dictionary gets loaded — no chapter
-     HTML file references global-lexicon.js directly. Fires immediately on
+     HTML file references it directly. Only the PUBLIC subset is published
+     (global-lexicon-public.js); a paid chapter's own entries arrive with its
+     gated payload (scripts/lexicon-split.mjs). Fires immediately on
      script execution (in parallel with the rest of page render); by the
      time a learner actually clicks a word the fetch has long resolved. */
+  // Popup-only host: the lexicon is requested once the host page has loaded
+  // and gone idle (it is ~0.7 MB gzipped), or at the first popup, whichever
+  // comes first. Chapters keep loading it immediately, as below.
+  let loadHostLexicon = function () {};
   (function loadGlobalLexicon() {
     if (window.KW_GLOBAL_LEXICON || document.getElementById('kw-global-lexicon')) return;
     const s = document.createElement('script');
     s.id = 'kw-global-lexicon';
-    s.src = 'global-lexicon.js';
+    s.src = POP_HOST ? POP_HOST.lexiconSrc : 'global-lexicon-public.js';
     s.onload = function () {
+      // A popup-only host has no chapter markup to re-sweep.
+      if (POP_HOST) return;
       // DO NOT add `WORDIDX = null` here. Tried TWICE and reverted both times.
       //
       // The race it targets is real: buildWordIndex() is lazy, classConflict()
@@ -79,6 +95,12 @@
         wrapWordsIn(elDe);
       });
     };
+    if (POP_HOST) {
+      loadHostLexicon = function () { if (!s.isConnected) document.head.appendChild(s); };
+      const idle = function () { if ('requestIdleCallback' in window) requestIdleCallback(loadHostLexicon, { timeout: 4000 }); else setTimeout(loadHostLexicon, 1500); };
+      if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
+      return;
+    }
     document.head.appendChild(s);
   })();
 
@@ -131,6 +153,41 @@
     // — can show Begin / Continue / Completed from the same numbers.
     try { state.xpEarned = earnedXP(); state.xpMax = C.xp; } catch (e) {}
     try { localStorage.setItem(SKEY, JSON.stringify(state)); } catch (e) {}
+    if (progressSync) progressSync.schedule();
+  }
+  // Signed-in learners also keep this record on their account, so progress
+  // follows them across devices (kw-progress-sync.js; GET/POST /progress on
+  // the access Worker). Loaded only after KWAccess.ready() says signed in;
+  // signed out, offline or without the endpoint the page stays local-only.
+  let progressSync = null;
+  function startProgressSync() {
+    // A server lock stub (window.CHAPTER.kwLocked) has no content: syncing it
+    // would overwrite this browser's record with empty values.
+    if (C.kwLocked) return;
+    if (POP_HOST || !window.KWAccess || typeof KWAccess.ready !== 'function') return;
+    KWAccess.ready().then((snap) => {
+      if (!snap && typeof KWAccess.getAccessState === 'function') snap = KWAccess.getAccessState();
+      if (!snap || !snap.authenticated) return;
+      const go = () => {
+        if (!window.KWProgressSync || progressSync) return;
+        progressSync = KWProgressSync.attach({
+          id: SKEY.slice('kw-ch-'.length),
+          read: () => state,
+          apply: (rec) => {
+            const saved = state.saved;            // account saved words sync on their own
+            state = normalizeState(rec); state.saved = saved;
+            save();
+            if (chapterRendered) refreshProgressUI();
+          }
+        });
+      };
+      if (window.KWProgressSync) return go();
+      const sc = document.createElement('script');
+      sc.src = '../kw-progress-sync.js?v=1';
+      sc.async = true;
+      sc.onload = go;
+      document.head.appendChild(sc);
+    }).catch(() => {});
   }
 
   const completable = C.sections.filter(s => !s.auto).map(s => s.id); // 8 sections incl. quiz
@@ -171,6 +228,7 @@
     try { state = normalizeState(JSON.parse(localStorage.getItem(SKEY) || '{}')); } catch (err) { return; }
     if (chapterRendered) refreshProgressUI();
   });
+  startProgressSync();
   function refreshProgressUI() {
     [refreshNavTicks, updateRing, updateStats, renderSummary, drawVocab, refreshSavedCount].forEach(fn => { try { fn(); } catch (e) {} });
     $$('.dash-section').forEach(sec => {
@@ -227,7 +285,8 @@
       for (const name of pref) { const m = all.find(v => (v.name || '').toLowerCase().includes(name)); if (m) { voice = m; return; } }
       voice = all[0] || null;
     }
-    if ('speechSynthesis' in window) { pick(); speechSynthesis.onvoiceschanged = pick; }
+    // A popup-only host keeps its own onvoiceschanged handler — listen, don't overwrite.
+    if ('speechSynthesis' in window) { pick(); if (POP_HOST) speechSynthesis.addEventListener('voiceschanged', pick); else speechSynthesis.onvoiceschanged = pick; }
     function speakTTS(text, rate, onend) {
       if (!('speechSynthesis' in window)) { onend && onend(); return; }
       speechSynthesis.cancel();
@@ -1505,20 +1564,63 @@
 
     // Controls
     let rate = 1, seqPlaying = false, seqStop = false;
-    const playAllBtn = el('button', { class: 'story-play-all' + (SentencePlay.enabled ? ' kw-play-all' : ''), type: 'button' }, el('span', { html: ICON.play }), el('span', {}, 'Play conversation'));
+    // Long label on desktop, short label on narrow screens (CSS picks one);
+    // the aria-label always carries the full action.
+    const playAllBtn = el('button', { class: 'story-play-all' + (SentencePlay.enabled ? ' kw-play-all' : ''), type: 'button', 'aria-label': 'Play conversation' },
+      el('span', { html: ICON.play }), el('span', { class: 'spa-long', 'aria-hidden': 'true' }, 'Play conversation'), el('span', { class: 'spa-short', 'aria-hidden': 'true' }, 'Play'));
     const speed = el('div', { class: 'story-speed' });
     [['1×', 1], ['0.75×', 0.75], ['0.5×', 0.5]].forEach(([lbl, v], i) => {
       const b = el('button', { type: 'button', class: i === 0 ? 'is-active' : '' }, lbl);
       b.addEventListener('click', () => { rate = v; $$('.story-speed button', speed).forEach(x => x.classList.toggle('is-active', x === b)); });
       speed.append(b);
     });
-    const transToggle = el('button', { class: 'story-trans-toggle', type: 'button' }, 'Show translation');
+    const transToggle = el('button', { class: 'story-trans-toggle', type: 'button', 'aria-pressed': 'false' },
+      el('span', { class: 'stt-long' }, 'Show translation'), el('span', { class: 'stt-short' }, 'Translation'));
     transToggle.addEventListener('click', () => {
       const on = thread.classList.toggle('show-trans');
-      transToggle.textContent = on ? 'Hide translation' : 'Show translation';
+      transToggle.querySelector('.stt-long').textContent = on ? 'Hide translation' : 'Show translation';
+      transToggle.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
+    // The controls sit ABOVE the conversation (start listening where reading
+    // starts) and stay pinned under the section tabs while the conversation
+    // is on screen (CSS sticky inside .story-right; on narrow screens only
+    // while the conversation plays — .is-playing).
     const controls = el('div', { class: 'story-controls' }, playAllBtn, speed, transToggle);
-    right.append(controls);
+    right.insertBefore(controls, right.firstChild);
+    // Pin flush under the measured top bar + tabs (their real height can
+    // differ from the CSS tokens by a few px); the CSS token sum is the fallback.
+    const setPinTop = () => controls.style.setProperty('--story-pin-top', (stickyOffset() - 8) + 'px');
+    requestAnimationFrame(setPinTop);
+    window.addEventListener('resize', setPinTop, { passive: true });
+
+    /* Follow the conversation: while "Play conversation" runs, the line that
+       starts is scrolled into view if it is not fully visible below the
+       pinned controls. Only during Play conversation (never for a single
+       line), never when already visible, instant under reduced motion, and
+       it stops for the rest of the run once the learner scrolls by hand. */
+    let followOff = false;
+    const reduceMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+    const manualScroll = () => { if (seqPlaying) followOff = true; };
+    window.addEventListener('wheel', manualScroll, { passive: true });
+    window.addEventListener('touchmove', manualScroll, { passive: true });
+    window.addEventListener('keydown', (e) => {
+      if (['PageUp', 'PageDown', 'ArrowUp', 'ArrowDown', 'Home', 'End'].indexOf(e.key) >= 0) manualScroll();
+    });
+    function followLine(i) {
+      const c = cards[i];
+      if (!c || followOff) return;
+      const r = c.card.getBoundingClientRect();
+      const top = Math.max(stickyOffset(), controls.getBoundingClientRect().bottom + 12);
+      const bottom = window.innerHeight - 16;
+      // Above the view: align under the controls. Below it: bring it to about
+      // a third of the free height, so the previous line stays in view as
+      // context and the next lines need fewer scrolls.
+      let dy = 0;
+      if (r.top < top) dy = r.top - top;
+      else if (r.bottom > bottom) dy = Math.min(r.top - (top + (bottom - top) * 0.3), r.top - top);
+      if (Math.abs(dy) < 2) return;
+      window.scrollBy({ top: dy, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    }
 
     function clearActive() {
       if (SentencePlay.enabled) { storyRun = null; cards.forEach(c => { c.card.classList.remove('is-active'); SentencePlay.state(c.playBtn, 'idle'); }); return; }
@@ -1536,7 +1638,10 @@
     const own = (f) => { storyOwn = true; try { return f(); } finally { storyOwn = false; } };
     function endConversation() { if (!seqPlaying) return; seqStop = true; seqPlaying = false; setPlayAllLabel(false); }
     function setPlayAllLabel(on) {
-      playAllBtn.querySelector('span:last-child').textContent = on ? 'Stop' : 'Play conversation';
+      playAllBtn.querySelector('.spa-long').textContent = on ? 'Stop' : 'Play conversation';
+      playAllBtn.querySelector('.spa-short').textContent = on ? 'Stop' : 'Play';
+      playAllBtn.setAttribute('aria-label', on ? 'Stop conversation' : 'Play conversation');
+      controls.classList.toggle('is-playing', on);
       if (SentencePlay.enabled) playAllBtn.firstChild.innerHTML = on ? ICON.stop : ICON.play;
     }
     if (SentencePlay.enabled && window.KW_onAudioEvent) {
@@ -1607,10 +1712,11 @@
     }
     function playAll() {
       if (seqPlaying) { seqStop = true; seqPlaying = false; own(() => { try { Audio.stop(); } catch (_) {} }); clearActive(); setPlayAllLabel(false); return; }
-      seqPlaying = true; seqStop = false; setPlayAllLabel(true);
+      seqPlaying = true; seqStop = false; followOff = false; setPlayAllLabel(true);
       let i = 0;
       const next = () => {
         if (seqStop || i >= cards.length) { seqPlaying = false; seqStop = false; clearActive(); setPlayAllLabel(false); return; }
+        followLine(i);
         playLine(i++, next);
       };
       next();
@@ -1623,6 +1729,12 @@
 
   // ---- Vocabulary ----
   let vocabFilter = 'all', vocabQuery = '';
+  // Long word lists (43 chapters have 60+ words, B1·07 has 173) open with the
+  // first VOCAB_FIRST cards and a "Show all N words" control instead of every
+  // card at once. Short lists (≤ VOCAB_FIRST + 8) are shown whole. Search and
+  // the filters work on the full list; the cap applies to whatever matches.
+  const VOCAB_FIRST = 24;
+  let vocabExpanded = false;
   // Checkpoint chapters author their vocabulary section as a review quiz
   // (`vocabularyReview`: {q, options, answer, ref}) instead of word cards, so
   // the word-card path below would render an empty grid with a misleading
@@ -1633,7 +1745,7 @@
     const toolbar = el('div', { class: 'vocab-toolbar' });
     const search = el('div', { class: 'search-box' },
       el('span', { html: ICON.search }),
-      el('input', { type: 'text', placeholder: 'Search 12 words…', 'aria-label': 'Search vocabulary' }));
+      el('input', { type: 'text', placeholder: 'Search ' + C.vocab.length + (C.vocab.length === 1 ? ' word…' : ' words…'), 'aria-label': 'Search vocabulary' }));
     search.querySelector('input').addEventListener('input', (e) => { vocabQuery = e.target.value.toLowerCase().trim(); drawVocab(); });
     const filters = el('div', { class: 'filter-group' });
     [['all', 'All'], ['m', 'der (m)'], ['f', 'die (f)'], ['n', 'das (n)'], ['learned', 'Learned']].forEach(([k, lbl]) => {
@@ -1643,7 +1755,8 @@
     });
     toolbar.append(search, filters);
     const grid = el('div', { class: 'vocab-grid', id: 'vocab-grid' });
-    wrap.append(toolbar, grid);
+    const more = el('div', { class: 'vocab-more', id: 'vocab-more', hidden: true });
+    wrap.append(toolbar, grid, more);
     setTimeout(drawVocab, 0);
     return wrap;
   }
@@ -1658,8 +1771,28 @@
       if (vocabQuery && !(w.de.toLowerCase().includes(vocabQuery) || w.en.toLowerCase().includes(vocabQuery) || w.hi.includes(vocabQuery))) return false;
       return true;
     });
+    const more = $('#vocab-more');
+    if (more) { more.innerHTML = ''; more.hidden = true; }
     if (!list.length) { grid.appendChild(el('div', { class: 'vocab-empty' }, 'No words match. Try another filter.')); return; }
-    list.forEach(w => grid.appendChild(vocabCard(w)));
+    const capped = !vocabExpanded && list.length > VOCAB_FIRST + 8;
+    (capped ? list.slice(0, VOCAB_FIRST) : list).forEach(w => grid.appendChild(vocabCard(w)));
+    if (more && list.length > VOCAB_FIRST + 8) {
+      more.hidden = false;
+      const filtered = vocabFilter !== 'all' || !!vocabQuery;
+      more.append(
+        el('span', { class: 'vocab-more-count muted' }, capped ? 'Showing ' + VOCAB_FIRST + ' of ' + list.length + (filtered ? ' matching words' : ' words') : 'All ' + list.length + (filtered ? ' matching words' : ' words')),
+        el('button', { class: 'btn btn-soft btn-small', type: 'button', 'aria-controls': 'vocab-grid', 'aria-expanded': capped ? 'false' : 'true', onclick: () => {
+          // Show all: the new cards appear right where the control was, so the
+          // learner reads on from word 25 (no scroll). Show fewer: keep the
+          // control where it is on screen while the list above it shrinks, so
+          // the learner is not thrown to a random place in the page.
+          const y0 = more.getBoundingClientRect().top;
+          vocabExpanded = capped; drawVocab();
+          if (!vocabExpanded) window.scrollBy(0, more.getBoundingClientRect().top - y0);
+          const btn = more.querySelector('button');
+          if (btn) btn.focus({ preventScroll: true });
+        } }, capped ? 'Show all ' + list.length + ' words' : 'Show fewer'));
+    }
     linkifyDe(grid); // keep example sentences clickable after every re-draw
     linkifyGated(grid);
   }
@@ -1783,6 +1916,7 @@
       el('span', { html: ICON.check }), el('span', {}, on ? 'Learned' : 'Mark learned'));
     b.addEventListener('click', () => {
       if (state.learned[w.de]) delete state.learned[w.de]; else state.learned[w.de] = true;
+      state.learnedAt = Date.now();
       save(); drawVocab();
     });
     return b;
@@ -2130,10 +2264,15 @@
   }
 
   let wordPop, wordPopBackdrop, wpHistory = [], wpIndex = -1;
+  // Keyboard focus: the word that opened the popup gets focus back on close.
+  let wpOpener = null;
   function closeWordPop() {
+    const wasOpen = !!(wordPop && wordPop.classList.contains('is-open'));
     if (wordPop) wordPop.classList.remove('is-open');
     if (wordPopBackdrop) wordPopBackdrop.classList.remove('is-open');
     wpHistory = []; wpIndex = -1;
+    const opener = wpOpener; wpOpener = null;
+    if (wasOpen && opener && opener.isConnected && typeof opener.focus === 'function') opener.focus({ preventScroll: true });
   }
   // openWordPop = a fresh entry point (click from the page): starts a new
   // history/breadcrumb trail. navigateToWord = a click INSIDE an already-open
@@ -2153,6 +2292,8 @@
     return t;
   }
   function openWordPop(e, t, siblingTokens) {
+    const src = e && (e.currentTarget || e.target || (e.nodeType === 1 && e));
+    if (src && src.nodeType === 1 && !(wordPop && wordPop.contains(src))) wpOpener = src;
     wpHistory = [resolveFullEntry(withOccurrenceRole(t, e), siblingTokens)]; wpIndex = 0;
     renderWordPop(wpHistory[0]);
   }
@@ -2829,10 +2970,20 @@
   function renderWordPop(t) {
     if (!wordPop) {
       wordPopBackdrop = el('div', { class: 'word-pop-backdrop' });
-      wordPop = el('div', { class: 'word-pop', role: 'dialog', 'aria-modal': 'true' });
+      wordPop = el('div', { class: 'word-pop', role: 'dialog', 'aria-modal': 'true', tabindex: '-1' });
       document.body.append(wordPopBackdrop, wordPop);
       wordPopBackdrop.addEventListener('click', closeWordPop);
       document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') closeWordPop(); });
+      // Modal dialog: Tab cycles inside the open popup instead of reaching the
+      // page behind the backdrop.
+      wordPop.addEventListener('keydown', (ev) => {
+        if (ev.key !== 'Tab') return;
+        const f = $$('button:not([disabled]), summary, [tabindex="0"]', wordPop).filter((n) => n.offsetParent !== null);
+        if (!f.length) { ev.preventDefault(); return; }
+        const first = f[0], last = f[f.length - 1];
+        if (ev.shiftKey && (document.activeElement === first || document.activeElement === wordPop)) { ev.preventDefault(); last.focus(); }
+        else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+      });
     }
     // Not every inline .r-* role maps to a --g-* grammar-color var — a few
     // (conjunction/name/letter) are deliberately styled with plain ink tones
@@ -2878,6 +3029,7 @@
     wordPop.style.setProperty('--pop-tint', tint);
     wordPop.style.setProperty('--pop-deep', deep);
     wordPop.innerHTML = '';
+    wordPop.setAttribute('aria-label', t.w);   // the dialog is named by its headword
 
     // Close button
     const closeBtn = el('button', { class: 'wp-close', type: 'button', 'aria-label': 'Close', html: '&#10005;' });
@@ -3267,6 +3419,9 @@
     requestAnimationFrame(() => {
       wordPopBackdrop.classList.add('is-open');
       wordPop.classList.add('is-open');
+      // Focus moves into the dialog (also after in-popup navigation, which
+      // rebuilds its content) so the keyboard continues from here.
+      if (!wordPop.contains(document.activeElement)) wordPop.focus({ preventScroll: true });
     });
   }
 
@@ -3881,6 +4036,7 @@
         const span = document.createElement('span');
         span.className = ('de-link ' + roleFor(word, null, isSentenceInitial(txt, m.index, node))).trim();
         span.textContent = word;
+        span.dataset.noPopup = '1';   // colour only: never a keyboard word trigger
         frag.appendChild(span);
         last = m.index + word.length;
       }
@@ -4058,6 +4214,18 @@
   }
 
   // reusable MCQ block
+  /* Display order for multiple-choice options: a fresh shuffle each time a
+     question is shown, so the correct answer's position carries no signal
+     (the authored data puts it first or second in most items). Every index
+     stays the AUTHORED one — scoring, q.answer, q.optionsEn and the AI quiz
+     review (chosen = authored index) are unchanged; only the on-screen order
+     and the A/B/C/D letters (by position) differ. */
+  function shuffledOrder(n) {
+    const a = Array.from({ length: n }, (_, i) => i);
+    for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+
   function mcqBlock(q, key, glossSink) {
     const block = el('div', { class: 'exercise-block' });
     block.appendChild(el('div', { class: 'exercise-q', html: q.q }));
@@ -4073,9 +4241,10 @@
     const opts = el('div', { class: 'mcq-options' });
     const feedback = el('div', { class: 'exercise-feedback' });
     let answered = false;
-    q.options.forEach((opt, oi) => {
-      const b = el('button', { class: 'mcq-option', type: 'button' },
-        el('span', { class: 'mcq-key' }, String.fromCharCode(65 + oi)),
+    shuffledOrder(q.options.length).forEach((oi, pos) => {
+      const opt = q.options[oi];
+      const b = el('button', { class: 'mcq-option', type: 'button', dataset: { oi: String(oi) } },
+        el('span', { class: 'mcq-key' }, String.fromCharCode(65 + pos)),
         el('span', { html: optionIsGerman(opt) ? '<span class="de">' + opt + '</span>' : opt }));
       colorWordsIn(b.querySelector('.de'));
       if (glossSink && q.optionsEn && q.optionsEn[oi]) {
@@ -4087,7 +4256,7 @@
         if (answered) return; answered = true;
         $$('.mcq-option', opts).forEach(x => x.disabled = true);
         if (oi === q.answer) { b.classList.add('is-correct'); feedback.className = 'exercise-feedback ok'; feedback.textContent = '✓ ' + (q.explain || 'Correct!'); }
-        else { b.classList.add('is-wrong'); opts.children[q.answer].classList.add('is-correct'); feedback.className = 'exercise-feedback no'; feedback.textContent = '✗ ' + (q.explain || 'Not quite.'); }
+        else { b.classList.add('is-wrong'); opts.querySelector('[data-oi="' + q.answer + '"]').classList.add('is-correct'); feedback.className = 'exercise-feedback no'; feedback.textContent = '✗ ' + (q.explain || 'Not quite.'); }
       });
       opts.appendChild(b);
     });
@@ -5647,9 +5816,10 @@
       const opts = el('div', { class: 'mcq-options' });
       const fb = el('div', { class: 'exercise-feedback' });
       let answered = false;
-      q.options.forEach((opt, oi) => {
-        const b = el('button', { class: 'mcq-option', type: 'button' },
-          el('span', { class: 'mcq-key' }, String.fromCharCode(65 + oi)),
+      shuffledOrder(q.options.length).forEach((oi, pos) => {
+        const opt = q.options[oi];
+        const b = el('button', { class: 'mcq-option', type: 'button', dataset: { oi: String(oi) } },
+          el('span', { class: 'mcq-key' }, String.fromCharCode(65 + pos)),
           el('span', { html: optionIsGerman(opt) ? '<span class="de">' + opt + '</span>' : opt }));
         colorWordsIn(b.querySelector('.de'));
         b.addEventListener('click', () => {
@@ -5657,7 +5827,7 @@
           chosen[idx] = oi;
           $$('.mcq-option', opts).forEach(x => x.disabled = true);
           if (oi === q.answer) { b.classList.add('is-correct'); score++; fb.className = 'exercise-feedback ok'; fb.textContent = '✓ ' + q.explain; }
-          else { b.classList.add('is-wrong'); opts.children[q.answer].classList.add('is-correct'); fb.className = 'exercise-feedback no'; fb.textContent = '✗ ' + q.explain; }
+          else { b.classList.add('is-wrong'); opts.querySelector('[data-oi="' + q.answer + '"]').classList.add('is-correct'); fb.className = 'exercise-feedback no'; fb.textContent = '✗ ' + q.explain; }
           setTimeout(() => { nextBtn.style.display = 'inline-flex'; }, 300);
         });
         opts.appendChild(b);
@@ -6075,7 +6245,10 @@
     });
     $('#act-restart').addEventListener('click', () => {
       if (!confirm('Reset all progress for this chapter?')) return;
-      state = { done: {}, learned: {}, saved: {}, quizScore: null }; save();
+      // resetAt tells the account copy (and other devices) about the reset,
+      // so older progress there does not merge back in.
+      state = { done: {}, learned: {}, saved: {}, quizScore: null, resetAt: Date.now() }; save();
+      if (progressSync) progressSync.flush(true);
       location.reload();
     });
     $('#act-complete').addEventListener('click', () => {
@@ -6553,7 +6726,63 @@
       .observe(document.body, { childList: true, subtree: true });
   }
 
+  /* ---------- Word triggers: keyboard access (chapters + popup hosts) ----------
+     Every word that opens the popup is an inline span with a click handler
+     (.de-link: auto-linked and in-popup words; .rw: authored story / reading /
+     example / listening tokens). Each becomes a button for the keyboard —
+     tabindex 0, role=button — without changing its inline look; Enter / Space
+     fire the SAME click, so there is no second way to open a popup. A word
+     inside another control is left alone (never a nested interactive
+     element). A host page names its own triggers (KW_WORD_POP_HOST.triggers). */
+  const WORD_TRIGGERS = POP_HOST
+    ? [POP_HOST.triggers, '.word-pop .de-link'].filter(Boolean).join(', ')
+    : '.de-link, .rw';
+  const IN_CONTROL = 'button, a[href], summary, label, select, textarea, input, [role="button"], [contenteditable="true"]';
+  function markWordTriggers(root) {
+    if (!root || root.nodeType !== 1) return;
+    const list = root.matches(WORD_TRIGGERS) ? [root] : [];
+    root.querySelectorAll(WORD_TRIGGERS).forEach((n) => list.push(n));
+    list.forEach((n) => {
+      if (n.hasAttribute('tabindex') || n.dataset.noPopup || (n.parentElement && n.parentElement.closest(IN_CONTROL))) return;
+      n.tabIndex = 0;
+      n.setAttribute('role', 'button');
+      n.setAttribute('aria-haspopup', 'dialog');
+    });
+  }
+  function watchWordTriggers() {
+    markWordTriggers(document.body);
+    if (typeof MutationObserver === 'function') {
+      new MutationObserver((list) => list.forEach((m) => m.addedNodes.forEach(markWordTriggers)))
+        .observe(document.body, { childList: true, subtree: true });
+    }
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key !== 'Enter' && ev.key !== ' ') return;
+      const t = ev.target;
+      if (!t || t.nodeType !== 1 || t.getAttribute('role') !== 'button' || !t.matches(WORD_TRIGGERS)) return;
+      ev.preventDefault();
+      t.click();
+    });
+  }
+
   function init() {
+    watchWordTriggers();
+    if (POP_HOST) {
+      // el: the clicked host element (its r-* class colours the headword, as
+      // on a chapter page); token: that occurrence's own authored data in the
+      // chapter token shape ({ w, en, hi, type, case, why, ex, … }).
+      window.KW_WordPop = {
+        open: function (el, token) { loadHostLexicon(); openWordPop(el, token); },
+        close: closeWordPop
+      };
+      // The same lang="de" marking a chapter gives its pop-ups, limited to the
+      // popup: the host's own markup is not this file's to change.
+      if (typeof MutationObserver === 'function') {
+        new MutationObserver((list) => list.forEach((m) => m.addedNodes.forEach((n) => { if (n.nodeType === 1 && n.closest('.word-pop')) markGerman(n); })))
+          .observe(document.body, { childList: true, subtree: true });
+      }
+      document.dispatchEvent(new CustomEvent('kw-wordpop-ready'));
+      return;
+    }
     watchGerman();
     if (window.KWAccess && typeof window.KWAccess.ready === 'function') {
       window.KWAccess.ready().then(function () {

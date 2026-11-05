@@ -550,7 +550,7 @@ const CHAPTER = {
     { q: 'Which text type is typically mostly Präteritum?', options: ['Newspaper report', 'Casual conversation', 'Diary entry'], answer: 0,
       explain: 'Newspaper reports default to Präteritum as their base narration tense.' },
     { q: 'Which sentence shows a natural, well-motivated tense shift?', options: ['Ich schaue gerade einen Film. Gestern habe ich denselben Film gesehen.', 'Ich schaue gerade einen Film. Gestern schaue ich denselben Film.', 'Ich habe gerade einen Film gesehen. Gestern schaue ich denselben Film.'], answer: 0,
-      explain: 'The first option correctly moves from Präsens (now) to Perfekt (yesterday, spoken narration) — a natural, motivated shift.' }
+      explain: '"Ich schaue gerade einen Film. Gestern habe ich denselben Film gesehen." correctly moves from Präsens (now) to Perfekt (yesterday, spoken narration) — a natural, motivated shift.' }
   ],
 
   // ---------- Summary takeaways ----------

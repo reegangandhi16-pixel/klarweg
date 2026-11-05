@@ -43,6 +43,7 @@ grammar/akkusativ.html
 grammar/dativ.html
 grammar/word-order.html
 grammar/prepositions.html
+grammar/perfekt.html
 # Goethe exam guides (free, indexable preparation content)
 goethe/a1-exam.html
 goethe/b2-exam-preparation.html
@@ -320,3 +321,4 @@ goethe/a2-exam.html
 goethe/b1-exam.html
 goethe/exam-fees-registration-india.html
 german-course-cost-india.html
+german-for-nursing-germany.html

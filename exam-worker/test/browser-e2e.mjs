@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality|sleep-wake|focus-not-obscured|autosave-rejected|text-limit runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality|sleep-wake|focus-not-obscured|autosave-rejected|text-limit|text-limit-ime runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -2598,12 +2598,120 @@ async function runTextLimit() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* Schreiben length limit with compositions (IME, macOS dead keys such as Option+u → ü): F1 a half-composed text is never
+   sent (no 413 and no "zu lang" note while composing), the committed text is saved; F2 a commit cut or refused by the
+   limit is announced with the usual limit note, never silently. Ordinary compositions stay quiet and are saved.
+   Real compositions over CDP (Input.imeSetComposition → Input.insertText commits). The server's 413 stays the final
+   authority: the only 413 here is the deliberate over-long text of step 5 (PR #240: held, the other answers save). */
+async function runTextLimitIme() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), flags: { EXAM_MODULE_ONLY: 'schreiben', EXAM_RELEASE_FORMS: PRACTICE.id } });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable'); await send('Network.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const stored = async () => Object.fromEntries((await dev.env.DB.prepare("SELECT item_id, value_json FROM responses_current WHERE module = 'schreiben'").all()).results.map((r) => [r.item_id, JSON.parse(r.value_json).text]));
+    const ta = (id) => `document.querySelector('textarea[data-item="${id}"]')`;
+    const show = (id) => evaluate(`(() => { const p = ${ta(id)}.closest('[data-part]').dataset.part; const tab = document.querySelector('#tab-part-' + p); if (tab.getAttribute('aria-selected') !== 'true') tab.click(); })()`);
+    const setValue = (id, text) => evaluate(`(() => { const t = ${ta(id)}; t.value = ${JSON.stringify(text)}; t.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+    const focusEnd = async (id) => { await show(id); await evaluate(`(() => { const t = ${ta(id)}; t.focus(); t.setSelectionRange(t.value.length, t.value.length); })()`); };
+    const len = (id) => evaluate(`${ta(id)}.value.length`);
+    const state = (id) => evaluate(`document.querySelector('[data-cc-for="' + ${ta(id)}.id + '"]').dataset.state`);
+    const said = () => evaluate(`document.querySelector('#kx-announce').textContent`);
+    const clearSaid = () => evaluate(`document.querySelector('#kx-announce').textContent = ''`);
+    const compose = (text) => send('Input.imeSetComposition', { text, selectionStart: text.length, selectionEnd: text.length });
+    const commit = async (text) => { await send('Input.insertText', { text }); await sleep(250); };
+    const answerStatuses = () => b.events.filter((e) => e.method === 'Network.responseReceived' && /\/modules\/schreiben\/answers/.test(e.params.response.url) && e.params.type !== 'Preflight').map((e) => e.params.response.status);
+    const savedAs = async (id, pred, what) => { for (const t0 = Date.now(); ; await sleep(200)) { const s = await stored(); if (pred(s[id])) return s[id]; if (Date.now() - t0 > 20000) throw new Error(`${what}: server has ${JSON.stringify(s[id])?.slice(-40)} (${s[id]?.length})`); } };
+    const settled = () => waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Gespeichert');
+
+    await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+    await waitFor(`document.querySelector('[data-act="create"][data-module="schreiben"]')`, 15000, 'Schreiben-only start screen');
+    await click('[data-act="create"][data-module="schreiben"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`, 15000, 'Schreiben intro');
+    await click('[data-act="start"][data-module="schreiben"]');
+    await waitFor(`document.querySelectorAll('textarea[data-item]').length >= 3`, 15000, 'Schreiben rendered');
+    const [A, B] = await evaluate(`[...document.querySelectorAll('textarea[data-item]')].map((t) => t.dataset.item)`);
+
+    // 1. an ordinary composition far from the limit: quiet, counter live while composing, committed text saved
+    await focusEnd(A); await send('Input.insertText', { text: 'Hallo ' });
+    await compose('かな'); await sleep(2500);
+    assert.equal(await len(A), 8, 'counter input while composing'); assert.match(await evaluate(`document.querySelector('[data-cc-for="' + ${ta(A)}.id + '"] [data-cc-text]').textContent`), /^8 \//);
+    assert.equal((await stored())[A], 'Hallo ', 'the half-composed text is not sent');
+    await commit('仮名');
+    assert.equal(await evaluate(`${ta(A)}.value`), 'Hallo 仮名'); assert.equal(await said(), '', 'no note for an ordinary composition');
+    await savedAs(A, (v) => v === 'Hallo 仮名', 'committed composition saved'); await settled();
+
+    // 2. a composition paused at the limit (choosing a candidate): nothing sent, no 413, no "zu lang"; the refused commit is announced
+    await setValue(A, 'Liebe Anna, '.padEnd(20000, 'x')); await savedAs(A, (v) => v?.length === 20000, '20 000 saved'); await settled();
+    await focusEnd(A); await clearSaid(); const n2 = answerStatuses().length;
+    await compose('かんじ'); await sleep(4000);
+    assert.equal(await len(A), 20003, 'Chrome lets the composition run past maxlength (provisional)');
+    assert.equal(await state(A), 'over', 'counter stays live during the composition');
+    assert.deepEqual(answerStatuses().slice(n2), [], 'nothing sent while composing (was: 413 text_too_long)');
+    assert.doesNotMatch(await said(), /zu lang/, 'no "zu lang" note for a text that was never committed');
+    await commit('漢字');
+    assert.equal(await len(A), 20000, 'the browser refused the commit at maxlength');
+    assert.match(await said(), /Höchstlänge erreicht/, 'F2: the refused commit is announced');
+    await settled(); assert.equal((await stored())[A].length, 20000);
+
+    // 3. a commit cut by the limit: the part that fits is kept and saved, the cut is announced
+    await setValue(A, 'Liebe Anna, '.padEnd(19998, 'x')); await savedAs(A, (v) => v?.length === 19998, '19 998 saved'); await settled();
+    await focusEnd(A); await clearSaid();
+    await compose('かんじです'); await commit('漢字です。');
+    assert.equal(await evaluate(`${ta(A)}.value.slice(-2)`), '漢字'); assert.equal(await len(A), 20000);
+    assert.match(await said(), /Höchstlänge erreicht/, 'F2: a cut commit is announced');
+    await savedAs(A, (v) => v?.length === 20000 && v.endsWith('漢字'), 'cut commit saved');
+
+    // 4. macOS dead key Option+u → ü: fits at 19 999 (saved, at most the reached-the-limit note); refused at 20 000 (announced)
+    await setValue(A, 'Liebe Anna, '.padEnd(19999, 'x')); await savedAs(A, (v) => v?.length === 19999, '19 999 saved'); await settled();
+    await focusEnd(A); await compose('¨'); await commit('ü');
+    assert.equal(await evaluate(`${ta(A)}.value.slice(-1)`), 'ü'); await savedAs(A, (v) => v?.endsWith('xü') && v.length === 20000, 'ü saved');
+    await settled(); await clearSaid(); await sleep(5200);   // past the repeat throttle: this note is F2's, not the earlier one
+    await compose('¨'); await commit('ü');
+    assert.equal(await len(A), 20000); assert.equal(await evaluate(`${ta(A)}.value.slice(-2)`), 'xü', 'refused ü not inserted');
+    assert.match(await said(), /Höchstlänge erreicht/, 'F2: the refused dead-key umlaut is announced');
+
+    // 5. an over-long text (set by script = restored from before the limit; the server refuses it, PR #240) + a composition:
+    //    the composed character is refused and announced; the text can only shrink; Backspace to 20 000 saves it
+    await setValue(B, 'Kurzer Text.'); await savedAs(B, (v) => v === 'Kurzer Text.', 'B saved'); await settled();
+    const n5 = answerStatuses().length;
+    await clearSaid(); await setValue(B, 'r'.repeat(20001));
+    await waitFor(`document.querySelector('#kx-announce').textContent.includes('zu lang')`, 15000, 'the server refused the over-long text');
+    await settled();
+    assert.deepEqual(answerStatuses().slice(n5).filter((s) => s === 413).length, 1, 'the server refuses the over-long text (413)');
+    await focusEnd(B); await clearSaid(); await compose('か'); await commit('蚊');
+    assert.equal(await len(B), 20001); assert.match(await said(), /Höchstlänge erreicht/);
+    await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Backspace', code: 'Backspace', windowsVirtualKeyCode: 8 }); await send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Backspace', code: 'Backspace', windowsVirtualKeyCode: 8 });
+    await savedAs(B, (v) => v?.length === 20000, 'shortened text saved'); await settled();
+    assert.equal(answerStatuses().filter((s) => s === 413).length, 1, 'the only 413 of the whole run is the deliberate over-long text');
+
+    // 6. reload: what was committed is what comes back
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
+    await waitFor(`!window.__beforeReload && document.querySelectorAll('textarea[data-item]').length >= 3`, 15000, 'after reload');
+    assert.equal(await evaluate(`${ta(A)}.value.slice(-2)`), 'xü'); assert.equal(await len(B), 20000);
+    log('text-limit-ime', 'PASS', { statuses: answerStatuses().join(',') });
+    return b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+  } finally { b.close(); dev.server.close(); }
+}
+
 /* ENGINE §10 / MOCK M-25: the smallest supported viewport is 360×640 */
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 360×640', w: 360, h: 640, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, ''], ['sleep-wake', runSleepWake, ''], ['focus-not-obscured', runFocusNotObscured, ''], ['autosave-rejected', runAutosaveRejected, ''], ['text-limit', runTextLimit, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, ''], ['sleep-wake', runSleepWake, ''], ['focus-not-obscured', runFocusNotObscured, ''], ['autosave-rejected', runAutosaveRejected, ''], ['text-limit', runTextLimit, ''], ['text-limit-ime', runTextLimitIme, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'text-limit-ime') { results.push({ vp: `text-limit-ime ${PRACTICE.name} (Schreiben-only, compositions)`, uncaught: await fn() }); continue; }
   if (name === 'text-limit') { results.push({ vp: `text-limit ${PRACTICE.name} (Schreiben-only)`, uncaught: await fn() }); continue; }
   if (name === 'autosave-rejected') { results.push({ vp: `autosave-rejected ${PRACTICE.name} (Schreiben-only)`, uncaught: await fn() }); continue; }
   if (name === 'focus-not-obscured') { results.push({ vp: `focus-not-obscured ${PRACTICE.name} (Lesen-only, 1280 + 360)`, uncaught: await fn() }); continue; }

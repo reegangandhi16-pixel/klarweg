@@ -13,7 +13,7 @@ import { speakingPhaseAt, prepEndsAt, topicItems, chosenTopic } from './sprechen
 import { createSpeakingDriver } from './sprechen-driver.js';
 import { createSpeakingAudio } from './speaking-audio.js';
 import { countWords } from './wordcount.js';
-import { MAX_TEXT_CHARS, WARN_TEXT_CHARS, limitState, projectedLength, counterText, counterNote, LIMIT_WARNING, LIMIT_REACHED, PASTE_TOO_LONG } from './textlimit.js';
+import { MAX_TEXT_CHARS, WARN_TEXT_CHARS, limitState, projectedLength, counterText, counterNote, LIMIT_WARNING, LIMIT_REACHED, PASTE_TOO_LONG, compositionTruncated, emptyInsertAtLimit } from './textlimit.js';
 import { randomId } from './ids.js';
 import { pasteAllowed, PASTE_REFUSED, DEFAULT_PASTE_POLICY } from './paste.js';
 import { environmentNotes, missingFeatures, KEYBOARD_CHECK, keyboardNote, playTestTone, testMicrophone, MIC_FIX, AUDIO_CHECK, MIC_CHECK, CONNECTION_CHECK, measureDownload, downloadNote } from './precheck.js';
@@ -830,9 +830,15 @@ app.addEventListener('input', (e) => {
   if (el.tagName !== 'TEXTAREA' || !S.autosave) return;
   const wc = document.querySelector(`[data-wc-for="${CSS.escape(el.id)}"]`); if (wc) wc.textContent = countWords(el.value);
   updateCharCounter(el);
+  // F1: while an IME / dead-key composition is open the text is provisional (and may briefly exceed maxlength); it is
+  // queued once, committed, on compositionend — never a half-composed value the server would refuse as too long
+  if (e.isComposing) return;
+  saveText(el);
+});
+function saveText(el) {
   S.answers[el.dataset.item] = { text: el.value }; S.autosave.set(el.dataset.item, { text: el.value });
   updateProgress();
-});
+}
 /* tablist keyboard (manual activation): arrows / Home / End move focus between part tabs; Enter / Space activate */
 app.addEventListener('keydown', (e) => {
   const tab = e.target.closest && e.target.closest('[role="tab"]'); if (!tab) return;
@@ -1002,11 +1008,32 @@ function updateCharCounter(el) {
 app.addEventListener('beforeinput', (e) => {
   const t = e.target; if (!isEditor(t) || !e.cancelable) return;
   if (!/^insert/.test(e.inputType) || e.inputType === 'insertFromPaste') return;   // paste: the 'paste' handler above
+  // F3 (Safari): the key was already trimmed to nothing by maxlength; say why instead of doing nothing
+  if (emptyInsertAtLimit(e.inputType, e.data, t.value.length, t.selectionEnd - t.selectionStart)) { sayLimitReached(t, false); return; }
   const text = e.data || (e.dataTransfer && e.dataTransfer.getData('text/plain')) || (/LineBreak|Paragraph/.test(e.inputType) ? '\n' : '');
   if (!wouldExceed(t, text)) return;
   e.preventDefault();
   if (e.inputType === 'insertFromDrop') announce(PASTE_TOO_LONG(projectedLength(t.value, t.selectionStart, t.selectionEnd, text)));
   else sayLimitReached(t, false);
+});
+/* F1 + F2: compositions (IME, macOS dead keys such as Option+u → ü) cannot be cancelled by script; at the limit the
+   browser may cut the committed text at maxlength. Remember the text outside the composed range at the start; once the
+   commit has landed (Chrome: before compositionend, Safari: after it, hence the task) save it and, if characters were
+   cut by the limit, say so with the usual limit note. */
+const composing = new WeakMap();   // textarea → length outside the composed range at compositionstart
+app.addEventListener('compositionstart', (e) => {
+  const t = e.target; if (!isEditor(t)) return;
+  composing.set(t, t.value.length - (t.selectionEnd - t.selectionStart));
+});
+app.addEventListener('compositionend', (e) => {
+  const t = e.target; if (!isEditor(t)) return;
+  const base = composing.has(t) ? composing.get(t) : null; composing.delete(t);
+  const committed = e.data || '';
+  setTimeout(() => {
+    if (!t.isConnected || !S.autosave) return;
+    updateCharCounter(t); saveText(t);
+    if (base !== null && compositionTruncated(base, committed, t.value.length)) sayLimitReached(t, true);
+  }, 0);
 });
 app.addEventListener('dragover', (e) => { if (isEditor(e.target) && S.pastePolicy !== 'allow') e.preventDefault(); });
 app.addEventListener('drop', (e) => {

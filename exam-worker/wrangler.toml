@@ -20,11 +20,11 @@ EXAM_PRODUCTION_FORMS = "off"
 #   EXAM_MEDIA_SECRET   HMAC key for attempt-scoped media tokens (≥ 32 chars)
 
 # Separate exam database — never the chapter/access DB.
-# database_id is a placeholder until `wrangler d1 create klarweg-exam`.
+# production D1 klarweg-exam, created 2026-11-06 (APAC), migrations 0001–0006 applied.
 [[d1_databases]]
 binding = "DB"
 database_name = "klarweg-exam"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "5ebb2c5e-00e4-4610-9768-931027d71d80"
 migrations_dir = "migrations"
 
 # Private content (keyless packages, keys, TEST AUDIO). Never public, never jsDelivr.

@@ -13,6 +13,7 @@ import { speakingPhaseAt, prepEndsAt, topicItems, chosenTopic } from './sprechen
 import { createSpeakingDriver } from './sprechen-driver.js';
 import { createSpeakingAudio } from './speaking-audio.js';
 import { countWords } from './wordcount.js';
+import { MAX_TEXT_CHARS, WARN_TEXT_CHARS, limitState, projectedLength, counterText, counterNote, LIMIT_WARNING, LIMIT_REACHED, PASTE_TOO_LONG } from './textlimit.js';
 import { randomId } from './ids.js';
 import { pasteAllowed, PASTE_REFUSED, DEFAULT_PASTE_POLICY } from './paste.js';
 import { environmentNotes, missingFeatures, KEYBOARD_CHECK, keyboardNote, playTestTone, testMicrophone, MIC_FIX, AUDIO_CHECK, MIC_CHECK, CONNECTION_CHECK, measureDownload, downloadNote } from './precheck.js';
@@ -828,6 +829,7 @@ app.addEventListener('input', (e) => {
   if (el.matches && el.matches('[data-notes]')) { saveNotes(S.attempt.attempt_id, el.value); return; }   // notes are never an answer
   if (el.tagName !== 'TEXTAREA' || !S.autosave) return;
   const wc = document.querySelector(`[data-wc-for="${CSS.escape(el.id)}"]`); if (wc) wc.textContent = countWords(el.value);
+  updateCharCounter(el);
   S.answers[el.dataset.item] = { text: el.value }; S.autosave.set(el.dataset.item, { text: el.value });
   updateProgress();
 });
@@ -879,6 +881,7 @@ app.addEventListener('click', async (e) => {
     }
     if (b.dataset.insert) {
       const ta = document.getElementById(b.dataset.target); const { selectionStart: s, selectionEnd: en, value } = ta;
+      if (wouldExceed(ta, b.dataset.insert)) { ta.focus(); sayLimitReached(ta, true); return; }   // set by script: maxlength does not apply
       ta.value = value.slice(0, s) + b.dataset.insert + value.slice(en); ta.selectionStart = ta.selectionEnd = s + 1; ta.focus();
       ta.dispatchEvent(new Event('input', { bubbles: true })); return;
     }
@@ -965,8 +968,45 @@ app.addEventListener('cut', rememberCopy);
 app.addEventListener('paste', (e) => {
   const t = e.target; if (!isEditor(t)) return;
   const text = (e.clipboardData && e.clipboardData.getData('text/plain')) || '';
-  if (pasteAllowed(S.pastePolicy, text, S.internalClip)) return;
-  e.preventDefault(); announce(PASTE_REFUSED); reportIntegrity('paste_blocked', t, text.length);
+  if (!pasteAllowed(S.pastePolicy, text, S.internalClip)) { e.preventDefault(); announce(PASTE_REFUSED); reportIntegrity('paste_blocked', t, text.length); return; }
+  // over the length limit: nothing is inserted (maxlength alone would silently keep only the part that fits)
+  if (wouldExceed(t, text)) { e.preventDefault(); announce(PASTE_TOO_LONG(projectedLength(t.value, t.selectionStart, t.selectionEnd, text))); }
+});
+/* Schreiben length limit (textlimit.js): the server refuses a text over MAX_TEXT_CHARS (413 text_too_long) and stays the
+   final authority. The editor: maxlength (hard stop while typing; never shortens a text already longer), a live counter,
+   one calm note when a text reaches 90 % and one when it reaches the limit, and no partial paste or drop. An input that
+   would only make the text longer than the limit is refused; one that shortens an over-long text is always allowed. */
+const limitSaid = new Map();   // textarea id → { kind: 'warn' | 'limit', at } already announced (reset when the text drops below)
+const LIMIT_REPEAT_MS = 5000;  // a refused keystroke repeats the note at most this often (not once per key)
+function wouldExceed(el, insert) {
+  const next = projectedLength(el.value, el.selectionStart, el.selectionEnd, insert);
+  return next > MAX_TEXT_CHARS && next > el.value.length;
+}
+function sayLimitReached(el, force) {
+  const prev = limitSaid.get(el.id);
+  if (!force && prev && prev.kind === 'limit' && Date.now() - prev.at < LIMIT_REPEAT_MS) return;
+  limitSaid.set(el.id, { kind: 'limit', at: Date.now() });
+  const live = $('#kx-announce');   // the same text again is not re-read by a live region: clear it first
+  if (live && live.textContent === LIMIT_REACHED) { live.textContent = ''; setTimeout(() => announce(LIMIT_REACHED), 50); } else announce(LIMIT_REACHED);
+}
+function updateCharCounter(el) {
+  const cc = document.querySelector(`[data-cc-for="${CSS.escape(el.id)}"]`); if (!cc) return;
+  const len = el.value.length; const st = limitState(len);
+  cc.dataset.state = st;
+  const txt = cc.querySelector('[data-cc-text]'); if (txt) txt.textContent = counterText(len);
+  const note = cc.querySelector('[data-cc-note]'); if (note) note.textContent = counterNote(len);
+  if (len < WARN_TEXT_CHARS) limitSaid.delete(el.id);
+  else if (len < MAX_TEXT_CHARS) { if (!limitSaid.has(el.id)) announce(LIMIT_WARNING(len)); limitSaid.set(el.id, { kind: 'warn', at: Date.now() }); }   // once on the way up; back from the limit: quiet
+  else if (st === 'limit' && (limitSaid.get(el.id) || {}).kind !== 'limit') sayLimitReached(el, true);
+}
+app.addEventListener('beforeinput', (e) => {
+  const t = e.target; if (!isEditor(t) || !e.cancelable) return;
+  if (!/^insert/.test(e.inputType) || e.inputType === 'insertFromPaste') return;   // paste: the 'paste' handler above
+  const text = e.data || (e.dataTransfer && e.dataTransfer.getData('text/plain')) || (/LineBreak|Paragraph/.test(e.inputType) ? '\n' : '');
+  if (!wouldExceed(t, text)) return;
+  e.preventDefault();
+  if (e.inputType === 'insertFromDrop') announce(PASTE_TOO_LONG(projectedLength(t.value, t.selectionStart, t.selectionEnd, text)));
+  else sayLimitReached(t, false);
 });
 app.addEventListener('dragover', (e) => { if (isEditor(e.target) && S.pastePolicy !== 'allow') e.preventDefault(); });
 app.addEventListener('drop', (e) => {

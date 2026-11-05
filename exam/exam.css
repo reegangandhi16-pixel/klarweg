@@ -65,6 +65,10 @@ p { margin: 0 0 16px; }
 .kx-chars { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
 .kx-char { min-width: 44px; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font: 500 18px/1 var(--font-ui); cursor: pointer; }
 .kx-wc { font: 500 14px/1.4 var(--font-mono); color: var(--ink-secondary); margin-top: 8px; }
+.kx-cc { font-variant-numeric: tabular-nums; }
+/* near / at / over the limit: the calm notice treatment (warm surface, primary ink), never an alarm colour */
+.kx-cc[data-state="warn"], .kx-cc[data-state="limit"], .kx-cc[data-state="over"] { color: var(--ink-primary); background: var(--warm); border-radius: 4px; padding: 0 4px; }
+.kx-cc-note:empty { display: none; }
 .kx-turns { padding-left: 24px; }
 .kx-turn-status { font: 500 12px/1 var(--font-mono); color: var(--ink-secondary); }
 .kx-consent { display: flex; gap: 12px; align-items: center; min-height: 44px; }

@@ -75,6 +75,13 @@ export function usedText(nos) {
   const rest = nos.filter((n) => n !== 'Beispiel');
   return `verwendet ${[nos.includes('Beispiel') ? 'im Beispiel' : '', rest.length ? `bei ${rest.join(', ')}` : ''].filter(Boolean).join(' und ')}`;
 }
+/* Autosave held back one answer the server will never accept (autosave.js REJECT_CODES). Said once; the learner's other
+   answers are saved. A text stays as typed so it can be shortened; a choice is shown with its saved value again. */
+export function rejectedNotice(code, no) {
+  const which = no ? ` (Aufgabe ${no})` : '';
+  if (code === 'text_too_long') return `Ihr Text${which} ist zu lang (höchstens 20 000 Zeichen) und wurde nicht gespeichert. Bitte kürzen Sie ihn; dann wird er wieder gespeichert.`;
+  return `Eine Antwort${which} wurde vom Prüfungsserver nicht angenommen und nicht gespeichert. Bitte wählen Sie diese Antwort erneut.`;
+}
 /* the number shown for an item: display_no, else the leading "13." of its stem; "Beispiel" for the example */
 export function itemNo(it) {
   if (it.is_example) return 'Beispiel';

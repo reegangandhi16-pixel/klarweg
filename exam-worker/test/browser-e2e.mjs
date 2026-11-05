@@ -15,7 +15,7 @@
    answers) before the click, and after it the replay plays first, without
    overlapping the next normal play. Takes ~6–7 minutes.
    Usage: node exam-worker/test/browser-e2e.mjs   (CHROME=/path/to/chrome to override;
-   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality|sleep-wake|focus-not-obscured runs one scenario). A fourth scenario runs one complete attempt on
+   KX_E2E_ONLY=flagged|autoplay|hoeren-autoplay|practice|sprechen-topic|lease-expiry|two-tabs|rater-2fa|lesen-only|part-practice|access-admin|precheck|review-form|confidentiality|sleep-wake|focus-not-obscured|autosave-rejected runs one scenario). A fourth scenario runs one complete attempt on
    the synthetic PRACTICE form P1 (KX_E2E_FORM=p2…p15 for another form) plus rating by two raters (see runPractice).
    Chrome always runs with --mute-audio. */
 import { spawn } from 'node:child_process';
@@ -2406,12 +2406,71 @@ async function runFocusNotObscured() {
   } finally { b.close(); dev.server.close(); }
 }
 
+/* Autosave hold-back in the real UI (found in the 2026-10-27 non-prod run): the server refuses a text over 20 000
+   characters (413 text_too_long, naming the item) and validates each save batch as a whole. Before the fix the client
+   retried that batch for ever ("Offline") and no other text was saved. Now: the other texts save, the long text is held
+   back and announced, stays in its editor (also after a reload) and saves once shortened. Schreiben-only attempt. */
+async function runAutosaveRejected() {
+  const dev = await startDevServer({ form: PRACTICE.name.toLowerCase(), flags: { EXAM_MODULE_ONLY: 'schreiben', EXAM_RELEASE_FORMS: PRACTICE.id } });
+  const b = await launch();
+  const { send } = b;
+  try {
+    await send('Runtime.enable'); await send('Page.enable');
+    const evaluate = async (expr) => {
+      const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    };
+    const waitFor = async (src, ms, label) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { if (await probe(evaluate, `(() => { try { return !!(${src}); } catch { return false; } })()`)) return; await sleep(150); }
+      throw new Error(`timeout: ${label}\n${(await evaluate('document.body.innerText')).slice(0, 600)}`);
+    };
+    const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
+    const stored = async () => Object.fromEntries((await dev.env.DB.prepare("SELECT item_id, value_json FROM responses_current WHERE module = 'schreiben'").all()).results.map((r) => [r.item_id, JSON.parse(r.value_json).text.length]));
+    const type = (id, text) => evaluate(`(() => { const t = document.querySelector('textarea[data-item="${id}"]'); t.value = ${JSON.stringify(text)}; t.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+    await send('Page.navigate', { url: `http://127.0.0.1:${dev.port}/exam/` });
+    await waitFor(`document.querySelector('[data-act="create"][data-module="schreiben"]')`, 15000, 'Schreiben-only start screen');
+    await click('[data-act="create"][data-module="schreiben"]');
+    await waitFor(`document.querySelector('[data-act="start"][data-module="schreiben"]')`, 15000, 'Schreiben intro');
+    await click('[data-act="start"][data-module="schreiben"]');
+    await waitFor(`document.querySelectorAll('textarea[data-item]').length >= 3`, 15000, 'Schreiben rendered');
+    const ids = await evaluate(`[...document.querySelectorAll('textarea[data-item]')].map((t) => t.dataset.item)`);
+    const LONG = 'a'.repeat(20_001);
+    await type(ids[0], 'Liebe Anna, kurz und gut.');
+    await type(ids[1], LONG);
+    await type(ids[2], 'Sehr geehrte Damen und Herren, ein kurzer Text.');
+    for (const t0 = Date.now(); ; await sleep(200)) {
+      const s = await stored();
+      if (s[ids[0]] && s[ids[2]]) break;
+      if (Date.now() - t0 > 20000) throw new Error(`the valid texts were not saved next to the over-long one: ${JSON.stringify(s)}; save state "${await evaluate(`document.querySelector('.kx-save')?.textContent`)}"`);
+    }
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Gespeichert');
+    const after = { stored: await stored(), said: await evaluate(`document.querySelector('#kx-announce').textContent`), kept: await evaluate(`document.querySelector('textarea[data-item="${ids[1]}"]').value.length`) };
+    assert.equal(after.stored[ids[1]], undefined, 'the over-long text is not stored');
+    assert.match(after.said, /ist zu lang \(höchstens 20 000 Zeichen\) und wurde nicht gespeichert/, `announced: ${after.said}`);
+    assert.equal(after.kept, 20_001, 'the learner\'s text stays in the editor');
+    // reload: the held text comes back as typed and the notice is repeated (it is not replaced by the server's empty value)
+    await evaluate('window.__beforeReload = true'); await send('Page.reload');
+    await waitFor(`!window.__beforeReload && document.querySelectorAll('textarea[data-item]').length >= 3`, 15000, 'Schreiben after reload');
+    await waitFor(`document.querySelector('textarea[data-item="${ids[1]}"]').value.length === 20001`, 5000, 'held text restored after reload');
+    assert.match(await evaluate(`document.querySelector('#kx-announce').textContent`), /ist zu lang/, 'the notice is repeated after the reload');
+    // shortening it saves it
+    await type(ids[1], 'Jetzt ist der Text kurz genug.');
+    for (const t0 = Date.now(); !(await stored())[ids[1]]; await sleep(200)) if (Date.now() - t0 > 15000) throw new Error('the shortened text was not saved');
+    await waitFor(`document.querySelector('.kx-save')?.textContent === 'Gespeichert'`, 15000, 'Gespeichert after shortening');
+    log('autosave-rejected', 'PASS', { stored: await stored() });
+    return b.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => e.params.exceptionDetails.exception?.description || e.params.exceptionDetails.text);
+  } finally { b.close(); dev.server.close(); }
+}
+
 /* ENGINE §10 / MOCK M-25: the smallest supported viewport is 360×640 */
 const VIEWPORTS = [{ name: 'desktop 1280×800', w: 1280, h: 800, mobile: false }, { name: 'mobile 360×640', w: 360, h: 640, mobile: true }];
-const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, ''], ['sleep-wake', runSleepWake, ''], ['focus-not-obscured', runFocusNotObscured, '']];
+const SCENARIOS = [['flagged', run, ''], ['autoplay', runDefaultAutoplay, ' (default autoplay policy)'], ['hoeren-autoplay', runDefaultAutoplayHoeren, ' (default autoplay policy, Hören)'], ['practice', runPractice, ''], ['sprechen-topic', runSprechenTopic, ''], ['lease-expiry', runLeaseExpiry, ''], ['two-tabs', runTwoTabs, ''], ['rater-2fa', runRater2fa, ''], ['lesen-only', runLesenOnly, ''], ['part-practice', runPartPractice, ''], ['access-admin', runAccessAdmin, ''], ['precheck', runPrecheck, ''], ['review-form', runReviewForm, ''], ['confidentiality', runConfidentiality, ''], ['sleep-wake', runSleepWake, ''], ['focus-not-obscured', runFocusNotObscured, ''], ['autosave-rejected', runAutosaveRejected, '']];
 if (ONLY && !SCENARIOS.some(([n]) => n === ONLY)) { console.error(`unknown KX_E2E_ONLY=${ONLY}`); process.exit(2); }
 for (const [name, fn, suffix] of SCENARIOS) {
   if (ONLY && name !== ONLY) continue;
+  if (name === 'autosave-rejected') { results.push({ vp: `autosave-rejected ${PRACTICE.name} (Schreiben-only)`, uncaught: await fn() }); continue; }
   if (name === 'focus-not-obscured') { results.push({ vp: `focus-not-obscured ${PRACTICE.name} (Lesen-only, 1280 + 360)`, uncaught: await fn() }); continue; }
   if (name === 'sleep-wake') { results.push({ vp: `sleep-wake ${PRACTICE.name} (Lesen-only, Q3a)`, uncaught: await fn() }); continue; }
   if (name === 'confidentiality') { results.push({ vp: `confidentiality ${PRACTICE.name} (Lesen-only, Q4a)`, uncaught: await fn() }); continue; }

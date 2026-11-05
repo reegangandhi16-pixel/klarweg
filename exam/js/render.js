@@ -14,6 +14,8 @@ const CHAR_NAMES = { '„': 'Anführungszeichen unten', '“': 'Anführungszeich
 /* OD-45 (LOCKED): student-facing title and mandatory disclaimer; never "Goethe score / Goethe-Ergebnis". */
 export const RESULT_TITLE = 'Klarweg B1 Simulation – Ergebnis';
 export const RESULT_DISCLAIMER = 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts.';
+/* EXAM_SINGLE_EXAMINER: one examiner gave both rating rounds; never presented as two independent raters */
+export const SAME_EXAMINER_NOTE = 'Zweimal unabhängig bewertet von derselben zertifizierten Prüfperson (nicht von zwei verschiedenen Prüfenden).';
 
 export function paragraphs(md) {
   return String(md || '').split(/\n{2,}/).map((p) => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('');
@@ -416,7 +418,8 @@ export const previousModule = (module) => MODULE_ORDER[MODULE_ORDER.indexOf(modu
    (a Lesen-only self-practice release, EXAM_MODULE_ONLY). null = nothing available for this account. */
 export function startChoice(av) {
   const ok = (av && av.modes || []).filter((m) => m.available && m.level === 'b1');
-  const full = ok.find((m) => m.mode === 'synthetic_full');
+  // the Mock M0 (real, reviewed content) comes before the synthetic practice
+  const full = ok.find((m) => m.mode === 'mock_m0') || ok.find((m) => m.mode === 'synthetic_full');
   if (full) return { mode: full.mode, module: null };
   const one = ok.find((m) => m.mode === 'synthetic_module' && MODULE_LABELS[m.module]);
   return one ? { mode: one.mode, module: one.module } : null;
@@ -441,6 +444,15 @@ export function startScreen(choice, { lastCompleted = null, history = '', parts 
     return `<main class="kx-card"><p class="kx-eyebrow">Teilübungen</p><h1>Klarweg B1 – Teilübungen</h1>${parts}${last}${history}</main>`;
   }
   const last = lastCompleted ? `<button class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(lastCompleted)}">Letztes Ergebnis ansehen</button>` : '';
+  if (!choice.module && choice.mode === 'mock_m0') {
+    return `<main class="kx-card"><p class="kx-eyebrow">Modelltest · alle vier Module</p><h1>Klarweg B1 Modelltest</h1>`
+      + '<p>Ein vollständiger Modelltest mit Lesen, Hören, Schreiben und Sprechen, mit den Prüfungszeiten. Die Zeit läuft auf dem Server. '
+      + 'Die Hörtexte werden einmal oder zweimal abgespielt, wie in der Prüfung; Sie können sie nicht anhalten. Für Sprechen brauchen Sie ein Mikrofon.</p>'
+      + '<p>Lesen und Hören werden automatisch ausgewertet, mit Lösung und Erklärung zu jeder Aufgabe. Schreiben und Sprechen bewertet eine zertifizierte Prüfperson; '
+      + 'das Ergebnis dieser Module erscheint nach der Bewertung.</p>'
+      + `<p class="kx-meta">${esc(RESULT_DISCLAIMER)} Die Hörtexte sind mit synthetischen Stimmen erstellt.</p>`
+      + `<div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="mock_m0">Modelltest starten</button>${last}</div>${parts}${history}</main>`;
+  }
   if (!choice.module) {
     return `<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}">Übung starten</button>${last}</div>${parts}${history}</main>`;
   }
@@ -499,7 +511,7 @@ export function ratedFeedback(module, fb, criterionLabels = {}) {
       + (u.zero_rule ? '<p class="kx-meta">Die Aufgabe wurde nicht erfüllt (Erfüllung E): Diese Bewertung zählt mit 0 Punkten.</p>' : '') + text;
   }).join('');
   return `<section class="kx-rated" aria-labelledby="rv-fb-${esc(module)}"><h2 id="rv-fb-${esc(module)}">${esc(label)}: Bewertung je Teil</h2>`
-    + '<p>Mittelwert aus zwei unabhängigen Bewertungen.</p>' + units + '</section>';
+    + `<p>${fb.same_examiner ? esc(SAME_EXAMINER_NOTE) + ' Mittelwert der beiden Bewertungen.' : 'Mittelwert aus zwei unabhängigen Bewertungen.'}</p>` + units + '</section>';
 }
 
 export function itemReview(module, review) {
@@ -524,7 +536,7 @@ export function itemReview(module, review) {
     + `<th scope="col">Lösung</th><th scope="col">Ergebnis</th><th scope="col">Punkte</th></tr></thead><tbody>${rows}</tbody></table></div>${scripts}</section>`;
 }
 
-const RESULT_NOTES = { pending_rating: 'Wartet auf zwei unabhängige Bewertungen.', pending_rule: 'Bewertet; die Punkteregel ist noch nicht festgelegt.' };
+const RESULT_NOTES = { pending_rating: 'Wartet auf die Bewertung.', pending_rule: 'Bewertet; die Punkteregel ist noch nicht festgelegt.' };
 /* A single-part practice (ENGINE §2 practice_part): correct answers out of the part's tasks. There is no official
    conversion for one part, so no points, no pass line and no grade are shown — those exist only for a whole module. */
 function partResultPage(result) {
@@ -558,10 +570,10 @@ export function resultPage(result) {
     const verdict = m.status === 'final' ? (m.pass ? 'bestanden' : 'nicht bestanden') : m.status === 'not_taken' ? 'nicht abgelegt' : 'in Bewertung';
     const band = m.status === 'final' && m.predikat && m.predikat !== verdict ? ` · ${esc(m.predikat)}` : '';
     const counts = m.counts ? `richtig ${esc(m.counts.correct)} · falsch ${esc(m.counts.incorrect)} · ohne Antwort ${esc(m.counts.unanswered)}` : '';
-    const note = [RESULT_NOTES[m.status] || '', m.submit_kind === 'auto_deadline' ? 'Zeit abgelaufen – automatisch abgegeben.' : ''].filter(Boolean).join(' ');
+    const note = [RESULT_NOTES[m.status] || '', m.status === 'final' && m.same_examiner ? SAME_EXAMINER_NOTE : '', m.submit_kind === 'auto_deadline' ? 'Zeit abgelaufen – automatisch abgegeben.' : ''].filter(Boolean).join(' ');
     return `<tr><th scope="row">${esc(MODULE_LABELS[m.module] || m.module)}</th><td>${pts}</td><td>${esc(verdict)}${band}</td><td>${[counts, esc(note)].filter(Boolean).join('<br>')}</td></tr>`;
   }).join('');
-  return `<main class="kx-result" aria-labelledby="kx-result-title"><p class="kx-eyebrow">${result.test_content ? 'Übung · synthetische Inhalte' : 'Simulation'}</p>`
+  return `<main class="kx-result" aria-labelledby="kx-result-title"><p class="kx-eyebrow">${result.test_content ? 'Übung · synthetische Inhalte' : result.form_kind === 'mock' ? 'Modelltest' : 'Simulation'}</p>`
     + `<h1 id="kx-result-title">${esc(RESULT_TITLE)}</h1>`
     + `<table class="kx-table"><caption>Ergebnisse je Modul (kein Gesamtergebnis)</caption><thead><tr><th scope="col">Modul</th><th scope="col">Punkte</th><th scope="col">Status</th><th scope="col">Details</th></tr></thead><tbody>${rows}</tbody></table>`
     + resultSummary(result.modules)

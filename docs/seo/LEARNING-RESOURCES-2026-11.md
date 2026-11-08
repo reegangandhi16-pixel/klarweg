@@ -74,3 +74,19 @@ Validation:
 - Chrome at 360×780 and 1280×800: no horizontal overflow; resource-card body copy 17px. Mobile hero and scrolled card screenshots visually inspected.
 - Live `resources.html` HTTP 200 and live robots.txt read directly on 8 November 2026. Robots allows public resources and declares the canonical sitemap. New branch content remains unpublished; no ranking or traffic increase is claimed.
 - No new page, tracker, executable script, image or font added in this follow-up. No exam portal files changed. Owner review remains required.
+
+## Follow-up: vocabulary discovery and original starter sheet
+
+Added `/german-a1-vocabulary.html` and `downloads/german-a1-starter-vocabulary.pdf` for the hypothesis “German A1 vocabulary / vocabulary PDF / Hindi meanings.” The page contains 24 curated nouns with articles, full plurals and contextual English/Hindi glosses; the one-page printable is explicitly German-English. It is labelled as a small starter selection, never a full A1 syllabus or official Goethe list. The official A1 PDF and India training page are linked separately and were opened on 8 November 2026.
+
+Entries are shared through `docs/seo/data/a1-starter-vocabulary.json`; the optional ReportLab script generates the printable. All entries exported in `A1-VOCABULARY-REVIEW-2026-11.md`. **German and Hindi academic review is mandatory before publication.** No copied official example sentences, exam tasks or audio added. The exam portal remains untouched.
+
+Resources hub, free-PDF directory and self-study guide link the page. Sitemap, allowlist and generated Article/BreadcrumbList updated.
+
+Validation:
+- Vocabulary/resource/SEO tests: 16 passed, 0 failed.
+- Site-origin rollback and public-artifact tests: 16 passed, 0 failed.
+- All generated checks pass; no whitespace errors.
+- Chrome at 360×780 and 1280×800: no horizontal document overflow; 17px prose; mobile vocabulary tables visually checked after adjusting column headings.
+- Printable rendered using Poppler and visually inspected. pypdf confirms one page and all 24 singulars, plurals and English meanings. PDF 37,485 bytes; HTML 27,109 bytes.
+- Full application suite last passed before this vocabulary addition; not rerun for this static content follow-up.

@@ -371,6 +371,43 @@ german-a1-for-spouse-visa.html
 telc-vs-goethe.html
 goethe/certificate-validity-result.html
 goethe/exam-centres-india.html
+
+# ---------------------------------------------------------------
+# Exam portal (B1 Mock M0, owner decisions 2026-11-06). Static client
+# only: every rule, key and score lives in the exam Worker. The pages
+# are noindex and, while EXAM_ROUTES is off, show "Noch nicht geöffnet".
+# exam/test/ and every exam-content/ or exam-worker/ file stay private.
+# The JS list is the exact import closure of main.js, admin.js and
+# rater.js (checked by exam/test/frontend.test.mjs).
+# ---------------------------------------------------------------
+exam/index.html
+exam/admin.html
+exam/rater.html
+exam/exam.css
+exam/js/admin-render.js
+exam/js/admin.js
+exam/js/api.js
+exam/js/autosave.js
+exam/js/clock.js
+exam/js/engine.js
+exam/js/hoeren.js
+exam/js/ids.js
+exam/js/level.js
+exam/js/main.js
+exam/js/paste.js
+exam/js/precheck.js
+exam/js/rater.js
+exam/js/rating.js
+exam/js/recorder.js
+exam/js/render.js
+exam/js/speaking-audio.js
+exam/js/sprechen-driver.js
+exam/js/sprechen.js
+exam/js/store.js
+exam/js/textlimit.js
+exam/js/wordcount.js
+
+# Next 50 original learning guides
 german-family-vocabulary.html
 german-food-vocabulary.html
 german-fruit-vegetables.html

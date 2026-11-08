@@ -1,6 +1,6 @@
 /* Exam shell — DOM wiring only (browser). All rules live on the server; all
    rendering lives in render.js; sequencing in engine.js. */
-import { createApi, ExamApiError } from './api.js';
+import { createApi, ExamApiError, resolveApiBase } from './api.js';
 import { ServerClock, formatRemaining } from './clock.js';
 import { idbStore } from './store.js';
 import { Autosave } from './autosave.js';
@@ -21,7 +21,7 @@ import { framePeak, levelPercent, createSilenceWatch, SILENCE_HINT } from './lev
 
 const $ = (s, r = document) => r.querySelector(s);
 const app = $('#kx-app');
-const base = (document.querySelector('meta[name="kw-exam-api"]') || {}).content || '';
+const base = resolveApiBase((document.querySelector('meta[name="kw-exam-api"]') || {}).content || '', location.hostname);
 const clock = new ServerClock();
 const api = createApi({ base, clock });
 const renderer = createRenderer();
@@ -59,7 +59,7 @@ async function boot() {
     let history = '';
     if (av.last_completed) { try { history = attemptHistory(await api.myAttempts()); } catch { /* the start screen works without it */ } }
     screen(startScreen(choice, { lastCompleted: av.last_completed, history, parts }));
-  } catch (e) { fail(e); }
+  } catch (e) { fail(e instanceof ExamApiError && e.status === 404 ? new ExamApiError(404, 'exam_closed') : e); }
 }
 
 async function resume(attemptId, takeover = false) {

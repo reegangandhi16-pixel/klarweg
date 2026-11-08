@@ -1,13 +1,13 @@
 /* Rater screen for Schreiben / Sprechen. Thin client over the existing staff API: the server decides who may rate
    (rater / lead_rater role, never one's own attempt, one rater per round, no duplicate round, module submitted) and
    validates every band. This page only renders what /admin/… returns and posts one rating per rubric unit. */
-import { createApi, ExamApiError } from './api.js';
+import { createApi, ExamApiError, resolveApiBase } from './api.js';
 import { esc } from './render.js';
 import { ratingRound, unitRatedByMe, missingCriteria, CRITERION_LABELS, ERROR_TEXT, mfaVerifyView, mfaEnrolStartView, mfaEnrolView, mfaCodesView, disagreementSection } from './rating.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const app = $('#kx-app');
-const api = createApi({ base: (document.querySelector('meta[name="kw-exam-api"]') || {}).content || '' });
+const api = createApi({ base: resolveApiBase((document.querySelector('meta[name="kw-exam-api"]') || {}).content || '', location.hostname) });
 const MODULE_LABELS = { schreiben: 'Schreiben', sprechen: 'Sprechen' };
 const STATUS = { pending_rating: 'wartet auf Bewertung', pending_rule: 'bewertet – Punkteregel offen', final: 'abgeschlossen' };
 const points = (n) => String(n).replace('.', ',');

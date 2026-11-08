@@ -24,6 +24,9 @@ contact.html
 courses.html
 goethe-exam.html
 resources.html
+german-listening-practice.html
+german-speaking-practice.html
+german-writing-practice.html
 german-language-levels.html
 how-long-to-learn-german.html
 german-study-planner.js

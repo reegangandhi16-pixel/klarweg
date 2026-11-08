@@ -65,6 +65,10 @@ PAGES['ausbildung.html'] = [breadcrumb([HOME, AUSBILDUNG])];
 const RESOURCES = ['Resources', 'resources.html'];
 PAGES['resources.html'] = [breadcrumb([HOME, RESOURCES])];
 const GUIDES = [
+  ['german-listening-practice.html', 'Listening practice', RESOURCES, null],
+  ['german-speaking-practice.html', 'Speaking practice', RESOURCES, null],
+  ['german-writing-practice.html', 'Writing practice', RESOURCES, null],
+
   ['german-language-levels.html', 'German levels', RESOURCES, null],
   ['how-long-to-learn-german.html', 'Study timeline', RESOURCES, null],
   ['german-a1-vocabulary.html', 'A1 vocabulary', RESOURCES, 'A1'],

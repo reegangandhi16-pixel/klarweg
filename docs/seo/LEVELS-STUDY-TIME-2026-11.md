@@ -36,3 +36,31 @@ No new German/Hindi example sentences, exam scoring claims or eligibility rules 
 - `git diff --check`: pass.
 
 Editorial/source review and owner merge/publication approval pending. No deployment performed by this task.
+
+## Practice-guide expansion — 9 November 2026
+
+Added three distinct skill pages after confirming that the sitemap had no general-purpose listening, speaking or writing practice guides. Existing grammar/alphabet and exam-module guides retain their own scope.
+
+- `german-listening-practice.html`: guided listening/replay/transcript workflow, six tasks matched to suitable recordings, error diagnosis and official audio sources. No audio hosted or generated.
+- `german-speaking-practice.html`: four solo prompts, three partner activities, feedback checklist and routes to existing question/pronunciation resources. No microphone access, recordings, German phrasebook or exam simulation.
+- `german-writing-practice.html`: six original English-language task prompts, drafting/revision workflow and feedback guidance. No copied model answers, new German/Hindi sentences or exam marking claims.
+
+Search intents are hypotheses: German listening practice/free audio, German speaking practice alone/with a partner, German writing practice for beginners. No traffic, volume or ranking promises. Content consists of activities learners can carry out, not near-identical topic doorway pages.
+
+Source checks:
+- https://www.goethe.de/en/spr/ueb.html — opened; provider practice directory.
+- https://www.goethe.de/en/kul/flm/pod.html — opened via the practice directory. Its Learn German section includes Goethe-Geschichten (German-language stories from Goethe India) and Kurz & bündig (B2/C1). The guide warns that the directory also includes other languages and is not all suitable for A1.
+- DW automated fetch was blocked by robots; no DW-specific resource claim or link added. Deutsch für dich fetch timed out, so the public practice hub is the reference route instead of claiming that service was independently inspected.
+
+Tasks are original editorial suggestions, not official exam items or a validated teaching protocol. Academic/editorial review of task suitability remains pending before publication. No new exercise answers or German/Hindi translations require sign-off in this expansion.
+
+Each page links the other two, free A1 Chapter 1, course roadmaps and relevant existing guides. Resources and the beginner self-study page link all three. Sitemap, allowlist and generated schema updated. No added JS, images, fonts, dependencies or external players for these three pages.
+
+Merged latest origin/main into the working branch before expanding it, incorporating the owner's upstream icon changes. Those main-branch changes are not new SEO edits; review the PR diff against current main.
+
+Expansion validation:
+- Full `npm test`: 732 tests, 731 passed, 0 failed, 1 skipped; all generated-file checks pass.
+- Focused practice/decision/resource/SEO checks: 22 passed, 0 failed.
+- Chrome at 360×780 and 1280×800: all three practice pages have no horizontal document overflow, 17px body copy and valid table-of-contents targets. Mobile screenshots visually inspected for each.
+- HTML bytes: listening 23,306; speaking 23,265; writing 23,787. No added runtime assets for the three pages.
+- Whitespace check passes. No merge or deployment performed; editorial/source review and owner approval remain pending.

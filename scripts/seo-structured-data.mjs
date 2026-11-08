@@ -65,6 +65,9 @@ PAGES['ausbildung.html'] = [breadcrumb([HOME, AUSBILDUNG])];
 const RESOURCES = ['Resources', 'resources.html'];
 PAGES['resources.html'] = [breadcrumb([HOME, RESOURCES])];
 const GUIDES = [
+  ['goethe/exam-centres-india.html', 'Exam centres in India', GOETHE, null],
+  ['goethe/certificate-validity-result.html', 'Certificate validity and results', GOETHE, null],
+  ['telc-vs-goethe.html', 'telc, Goethe and ÖSD', GOETHE, null],
   ['german-a1-for-spouse-visa.html', 'A1 for spouse visa', RESOURCES, 'A1'],
   ['german-b1-vocabulary.html', 'B1 vocabulary', RESOURCES, 'B1'],
   ['german-a2-vocabulary.html', 'A2 vocabulary', RESOURCES, 'A2'],

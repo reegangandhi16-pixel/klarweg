@@ -65,6 +65,9 @@ PAGES['ausbildung.html'] = [breadcrumb([HOME, AUSBILDUNG])];
 const RESOURCES = ['Resources', 'resources.html'];
 PAGES['resources.html'] = [breadcrumb([HOME, RESOURCES])];
 const GUIDES = [
+  ['german-a1-for-spouse-visa.html', 'A1 for spouse visa', RESOURCES, 'A1'],
+  ['german-b1-vocabulary.html', 'B1 vocabulary', RESOURCES, 'B1'],
+  ['german-a2-vocabulary.html', 'A2 vocabulary', RESOURCES, 'A2'],
   ['goethe/a2-schreiben.html', 'A2 Schreiben', GOETHE, 'A2'],
   ['goethe/a1-schreiben.html', 'A1 Schreiben', GOETHE, 'A1'],
   ['goethe/a2-sprechen.html', 'A2 Sprechen', GOETHE, 'A2'],

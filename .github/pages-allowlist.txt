@@ -365,3 +365,6 @@ goethe/a1-sprechen.html
 goethe/a2-sprechen.html
 goethe/a1-schreiben.html
 goethe/a2-schreiben.html
+german-a2-vocabulary.html
+german-b1-vocabulary.html
+german-a1-for-spouse-visa.html

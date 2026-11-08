@@ -1,0 +1,194 @@
+[
+  {
+    "topic": "Learning and work",
+    "singular": "die Erfahrung",
+    "plural": "die Erfahrungen",
+    "english": "experience",
+    "hindi": "अनुभव",
+    "roman": "anubhav"
+  },
+  {
+    "topic": "Learning and work",
+    "singular": "die Bewerbung",
+    "plural": "die Bewerbungen",
+    "english": "application for a job or place",
+    "hindi": "आवेदन",
+    "roman": "aavedan"
+  },
+  {
+    "topic": "Learning and work",
+    "singular": "das Vorstellungsgespräch",
+    "plural": "die Vorstellungsgespräche",
+    "english": "job interview",
+    "hindi": "नौकरी का साक्षात्कार",
+    "roman": "naukri ka saakshaatkaar"
+  },
+  {
+    "topic": "Learning and work",
+    "singular": "die Ausbildung",
+    "plural": "die Ausbildungen",
+    "english": "vocational training",
+    "hindi": "व्यावसायिक प्रशिक्षण",
+    "roman": "vyavasaayik prashikshan"
+  },
+  {
+    "topic": "Learning and work",
+    "singular": "die Fähigkeit",
+    "plural": "die Fähigkeiten",
+    "english": "ability or skill",
+    "hindi": "क्षमता या कौशल",
+    "roman": "kshamata ya kaushal"
+  },
+  {
+    "topic": "Learning and work",
+    "singular": "die Voraussetzung",
+    "plural": "die Voraussetzungen",
+    "english": "prerequisite",
+    "hindi": "पूर्वशर्त",
+    "roman": "poorvashart"
+  },
+  {
+    "topic": "Opinions and choices",
+    "singular": "die Meinung",
+    "plural": "die Meinungen",
+    "english": "opinion",
+    "hindi": "राय",
+    "roman": "raay"
+  },
+  {
+    "topic": "Opinions and choices",
+    "singular": "der Vorteil",
+    "plural": "die Vorteile",
+    "english": "advantage",
+    "hindi": "लाभ",
+    "roman": "laabh"
+  },
+  {
+    "topic": "Opinions and choices",
+    "singular": "der Nachteil",
+    "plural": "die Nachteile",
+    "english": "disadvantage",
+    "hindi": "नुकसान",
+    "roman": "nuksaan"
+  },
+  {
+    "topic": "Opinions and choices",
+    "singular": "die Entscheidung",
+    "plural": "die Entscheidungen",
+    "english": "decision",
+    "hindi": "निर्णय",
+    "roman": "nirnay"
+  },
+  {
+    "topic": "Opinions and choices",
+    "singular": "der Unterschied",
+    "plural": "die Unterschiede",
+    "english": "difference",
+    "hindi": "अंतर",
+    "roman": "antar"
+  },
+  {
+    "topic": "Opinions and choices",
+    "singular": "der Vorschlag",
+    "plural": "die Vorschläge",
+    "english": "suggestion",
+    "hindi": "सुझाव",
+    "roman": "sujhaav"
+  },
+  {
+    "topic": "Solving problems",
+    "singular": "die Beschwerde",
+    "plural": "die Beschwerden",
+    "english": "complaint",
+    "hindi": "शिकायत",
+    "roman": "shikaayat"
+  },
+  {
+    "topic": "Solving problems",
+    "singular": "die Lösung",
+    "plural": "die Lösungen",
+    "english": "solution",
+    "hindi": "समाधान",
+    "roman": "samaadhaan"
+  },
+  {
+    "topic": "Solving problems",
+    "singular": "die Ursache",
+    "plural": "die Ursachen",
+    "english": "cause",
+    "hindi": "कारण",
+    "roman": "kaaran"
+  },
+  {
+    "topic": "Solving problems",
+    "singular": "die Folge",
+    "plural": "die Folgen",
+    "english": "consequence in this context",
+    "hindi": "परिणाम",
+    "roman": "parinaam"
+  },
+  {
+    "topic": "Solving problems",
+    "singular": "die Möglichkeit",
+    "plural": "die Möglichkeiten",
+    "english": "possibility",
+    "hindi": "संभावना",
+    "roman": "sambhaavana"
+  },
+  {
+    "topic": "Solving problems",
+    "singular": "die Unterstützung",
+    "plural": "die Unterstützungen",
+    "english": "support; often singular here",
+    "hindi": "सहायता",
+    "roman": "sahaayata"
+  },
+  {
+    "topic": "Life and society",
+    "singular": "die Umgebung",
+    "plural": "die Umgebungen",
+    "english": "surroundings or local area",
+    "hindi": "आसपास का क्षेत्र",
+    "roman": "aaspaas ka kshetra"
+  },
+  {
+    "topic": "Life and society",
+    "singular": "die Veranstaltung",
+    "plural": "die Veranstaltungen",
+    "english": "event",
+    "hindi": "आयोजन",
+    "roman": "aayojan"
+  },
+  {
+    "topic": "Life and society",
+    "singular": "die Gewohnheit",
+    "plural": "die Gewohnheiten",
+    "english": "habit",
+    "hindi": "आदत",
+    "roman": "aadat"
+  },
+  {
+    "topic": "Life and society",
+    "singular": "die Beziehung",
+    "plural": "die Beziehungen",
+    "english": "relationship",
+    "hindi": "संबंध",
+    "roman": "sambandh"
+  },
+  {
+    "topic": "Life and society",
+    "singular": "die Verantwortung",
+    "plural": "die Verantwortungen",
+    "english": "responsibility; often singular here",
+    "hindi": "ज़िम्मेदारी",
+    "roman": "zimmedaari"
+  },
+  {
+    "topic": "Life and society",
+    "singular": "die Veränderung",
+    "plural": "die Veränderungen",
+    "english": "change",
+    "hindi": "बदलाव",
+    "roman": "badlaav"
+  }
+]

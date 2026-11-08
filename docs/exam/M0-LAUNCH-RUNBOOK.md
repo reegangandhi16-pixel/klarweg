@@ -1,6 +1,6 @@
 # B1 Mock M0: production launch runbook (owner-run)
 
-Status: **prepared 2026-11-08, nothing executed.** Every step marked 🔒 changes production and needs the owner's
+Status: **prepared 2026-11-08; step 2 (Access Worker) executed 2026-11-08 with owner approval.** Every step marked 🔒 changes production and needs the owner's
 explicit "yes" for that step. Stop at the first failed check; each step lists its rollback.
 
 Decisions this follows: `OWNER-DECISIONS-2026-11-06.md` (owner = sole reviewer and sole examiner, Google TTS, no
@@ -10,9 +10,9 @@ external reviews). General infrastructure reference: `RUNBOOK-EXAM-INFRA.md`.
 
 | Piece | Where | State on 2026-11-08 |
 |---|---|---|
-| M0 form `frm:b1:mock-m0@1` + TTS tool | private `klarweg-exam-content` PR #13 | open; audio blocked on Google billing |
+| M0 form `frm:b1:mock-m0@1`, TTS tool (with `--tempo`), rehearsal tool | private `klarweg-exam-content` PR #13 | open; audio blocked on Google billing; rehearsal passed with placeholder audio 2026-11-08 |
 | Exam Worker `klarweg-exam` (single-examiner mode, M0 start screen, prod D1 id) | `klarweg` PR #309 | open; not deployed |
-| Exam proxy + staff 2FA on the **live** Access line | `klarweg` PR #312 (draft, base `deploy/access-media-s1-on-fe2ab01`) | not deployed; live Access = `21557dc1` |
+| Exam proxy + staff 2FA on the **live** Access line | `klarweg` PR #312 (draft, base `deploy/access-media-s1-on-fe2ab01`) | **step 2 DONE 2026-11-08 11:30Z**: live Access = `5d6d6b38` (routes off); rollback `597a6cc9` |
 | Exam client on klarweg.in (`/api` base, closed screen, Pages allowlist) | `klarweg` PR (this branch, stacked on #309) | open |
 | D1 `klarweg-exam` (APAC), migrations 0001–0006 | Cloudflare | created |
 | R2 `klarweg-exam-content`, `klarweg-exam-recordings` | Cloudflare | created, private, no r2.dev, no domain |
@@ -27,8 +27,14 @@ written `wrangler` below. Google Cloud: user `reegangandhi07`, project `klarweg-
 ## 1. Audio (after step 0.1)
 1. In `klarweg-exam-content`: run `tools/tts-google.mjs` for `forms/b1/mock-m0` (writes Opus/WebM, −18 LUFS,
    durations and checksums into the form's `assets.json`).
-2. Owner listens to every Hören and Sprechen file once (sole reviewer). Re-generate any file that is wrong.
-3. `node exam-content/tools/validate.mjs <path-to>/forms/b1/mock-m0` reports **no errors**.
+2. Check the tool's last line: **Hören speaking rate** must be inside 128–145 words/min. The M0 Hören plan only fits
+   the validator's 2160–2520 s window at about 121–152 words/min (rehearsal 2026-11-08). If it is outside, re-run with
+   the suggested `--tempo=… --force`: it re-times the cached speech with no new TTS charges.
+3. `node tools/make-mock-m0.mjs` (copies the measured durations into the form).
+4. Owner listens to every Hören and Sprechen file once (sole reviewer). Re-generate any file that is wrong.
+5. `node exam-content/tools/validate.mjs <path-to>/forms/b1/mock-m0` reports **no errors**.
+6. `node tools/rehearse-m0.mjs <klarweg checkout>` (in `klarweg-exam-content`) ends with **M0 REHEARSAL PASSED**. It
+   runs the whole test through the real exam Worker with the production flag set (§7), in memory; nothing is uploaded.
 
 ## 2. Access Worker: 2FA tables, then the exam proxy (PR #312)
 1. 🔒 Apply `access/worker/migration-011-totp.sql` to the production Access D1

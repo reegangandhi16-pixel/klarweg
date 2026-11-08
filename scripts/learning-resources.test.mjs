@@ -33,3 +33,13 @@ test('self-study guide offers a public original planner without gated chapter re
  assert.doesNotMatch(s,/<script[^>]*src=|data-kw-buy|guaranteed/i);
  assert.ok(s.includes('href="chapter/chapter-a1-1-alphabet.html"'));
 });
+
+test('resource hub presents discovery routes before reference tools',()=>{
+ const s=read('resources.html');
+ assert.ok(s.indexOf('id="books-and-pdfs"')<s.indexOf('<!-- GRAMMAR COLOUR KEY -->'));
+ assert.match(s,/<h1[^>]*>Free German learning resources\.<\/h1>/);
+ assert.equal((s.match(/class="resource-choice"/g)||[]).length,4);
+ assert.ok(s.includes('href="downloads/german-self-study-planner.pdf"'));
+ assert.ok(s.includes('id="chapter-downloads"'));
+ assert.match(s,/Access to course chapter downloads follows/);
+});

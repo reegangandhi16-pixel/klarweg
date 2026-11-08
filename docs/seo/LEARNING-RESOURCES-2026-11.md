@@ -61,3 +61,16 @@ Follow-up validation:
 - Headless Chrome: new guide at 360×780 and 1280×800, no horizontal overflow; 17px body text. Mobile screenshot inspected. Browser helper's profile cleanup reported ENOTEMPTY after the checks and screenshots completed; no page assertion failed.
 - PDF rendered with Poppler and visually inspected: no clipping or overlaps. pypdf extraction confirms one page, seven weekday prompts and review notes. PDF size 36,887 bytes.
 - Full application test suite not rerun for this static guide/download follow-up.
+
+## Follow-up: resource hub discovery and regression coverage
+
+The resource hub now uses a specific German-learning title, description and H1 instead of “Tools to learn faster.” Four descriptive, accessible resource cards appear immediately after the hero, before the colour key and pronunciation tools. Direct links to the planner, grammar syllabus and chapter-PDF explanation shorten navigation. Copy distinguishes free guides/planner from access-controlled course downloads.
+
+The existing orphan-guide check now includes Article-marked root pages, covering the new books, PDF and self-study guides as well as the existing grammar and exam guides. A regression guard keeps the hub's discovery choices ahead of reference tools.
+
+Validation:
+- Full `npm test`: 721 tests, 720 passed, 0 failed, 1 skipped; all generated-file checks pass.
+- Focused resource/SEO checks: 14 passed, 0 failed.
+- Chrome at 360×780 and 1280×800: no horizontal overflow; resource-card body copy 17px. Mobile hero and scrolled card screenshots visually inspected.
+- Live `resources.html` HTTP 200 and live robots.txt read directly on 8 November 2026. Robots allows public resources and declares the canonical sitemap. New branch content remains unpublished; no ranking or traffic increase is claimed.
+- No new page, tracker, executable script, image or font added in this follow-up. No exam portal files changed. Owner review remains required.

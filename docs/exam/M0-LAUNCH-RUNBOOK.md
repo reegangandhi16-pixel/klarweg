@@ -1,6 +1,6 @@
 # B1 Mock M0: production launch runbook (owner-run)
 
-Status: **prepared 2026-11-08; step 2 (Access Worker) executed 2026-11-08 with owner approval; step 1 (audio) done 2026-11-09.** Every step marked 🔒 changes production and needs the owner's
+Status: **prepared 2026-11-08; step 2 (Access Worker) executed 2026-11-08 with owner approval; step 1 (audio) done 2026-11-09; steps 3 + 4 done 2026-11-09 (exam Worker `e8e5bf81`, flags off; Access `7cc1e826` with the EXAM binding, routes off; Access rollback `876da406`).** Every step marked 🔒 changes production and needs the owner's
 explicit "yes" for that step. Stop at the first failed check; each step lists its rollback.
 
 Decisions this follows: `OWNER-DECISIONS-2026-11-06.md` (owner = sole reviewer and sole examiner, Google TTS, no

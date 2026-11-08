@@ -269,9 +269,19 @@ test('RESPONSIVE + ACCESSIBILITY (static): viewport, lang, skip link, focus ring
   assert.deepEqual(px.filter((v) => !scale.has(v)), [], 'spacing must stay on the scale');
 });
 
-test('PUBLISHING: exam/ is not in the Pages allowlist; no exam page links public audio CDNs', () => {
-  const allow = read('.github/pages-allowlist.txt');
-  assert.equal(/^\/?exam(\/|$)/m.test(allow), false);
+test('PUBLISHING: the Pages allowlist publishes exactly the exam client (3 pages, css, the JS import closure), never tests or content; no exam page links public audio CDNs', () => {
+  const allow = read('.github/pages-allowlist.txt').split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
+  const listed = allow.filter((l) => /^\/?exam(\/|$)/.test(l)).sort();
+  const seen = new Set(); const queue = ['main.js', 'admin.js', 'rater.js'];
+  while (queue.length) { const f = queue.pop(); if (seen.has(f)) continue; seen.add(f); for (const m of read(`exam/js/${f}`).matchAll(/from '\.\/([a-z-]+\.js)'/g)) queue.push(m[1]); }
+  const expected = ['exam/index.html', 'exam/admin.html', 'exam/rater.html', 'exam/exam.css', ...[...seen].map((f) => `exam/js/${f}`)].sort();
+  assert.deepEqual(listed, expected);
+  assert.equal(allow.some((l) => /^GLOB:.*exam|^\/?exam-(content|worker)\//.test(l)), false, 'no exam glob, no exam content or Worker source');
+  for (const page of ['exam/index.html', 'exam/admin.html', 'exam/rater.html']) {
+    const html = read(page);
+    assert.match(html, /<meta name="robots" content="noindex, nofollow">/, page);
+    assert.match(html, /connect-src 'self' blob:;/, `${page}: API calls stay same-origin`);
+  }
   const front = ['exam/index.html', ...fs.readdirSync(path.join(ROOT, 'exam/js')).map((f) => `exam/js/${f}`)].map(read).join('\n');
   assert.equal(/jsdelivr|klarweg-audio|manifest\.pilot|\/public\/audio/i.test(front), false);
   assert.equal(/speech\/transcribe|speech\/task-check|record-check/i.test(front), false, 'exam must not reuse chapter Record & Check');

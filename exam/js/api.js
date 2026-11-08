@@ -7,6 +7,16 @@ export class ExamApiError extends Error {
   constructor(status, code, body) { super(code); this.status = status; this.code = code; this.body = body || {}; }
 }
 
+/* Where the exam API lives. An explicit <meta name="kw-exam-api"> wins. On klarweg.in the Access Worker answers under
+   /api (Cloudflare route klarweg.in/api/*, prefix stripped by the Worker), so calls stay same-origin and the
+   first-party session cookie (Path=/api) is sent. Anywhere else (local dev server, tests) the API is the page's own
+   origin. */
+export const SITE_HOSTS = ['klarweg.in', 'www.klarweg.in'];
+export function resolveApiBase(meta, hostname) {
+  if (meta) return meta;
+  return SITE_HOSTS.includes(hostname) ? '/api' : '';
+}
+
 export function createApi({ base, fetchImpl = (...a) => fetch(...a), clock, retries = 3, backoffMs = 400, sleep = (ms) => new Promise((r) => setTimeout(r, ms)) }) {
   async function once(method, path, { body, raw, contentType, keepalive } = {}) {
     const init = { method, credentials: 'include', headers: {} };

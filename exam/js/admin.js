@@ -1,10 +1,10 @@
 /* Exam-access management screen (exam_admin). DOM wiring only: every rule — role, fresh second factor, validation,
    audit — is enforced by the exam Worker; this page only shows what the server answers. */
-import { createApi, ExamApiError } from './api.js';
+import { createApi, ExamApiError, resolveApiBase } from './api.js';
 import { lookupForm, lookupResult, accessView, accommodationSection, attemptsButton, attemptsList, formUsageButton, formUsageTable, ADMIN_ERRORS } from './admin-render.js';
 
 const app = document.getElementById('kx-app');
-const base = (document.querySelector('meta[name="kw-exam-api"]') || {}).content || '';
+const base = resolveApiBase((document.querySelector('meta[name="kw-exam-api"]') || {}).content || '', location.hostname);
 const api = createApi({ base });
 const screen = (html) => { app.innerHTML = html; };
 const text = (e) => { const code = e instanceof ExamApiError ? e.code : 'network'; return ADMIN_ERRORS[code] || `Fehler (${code}).`; };

@@ -69,7 +69,7 @@ test('relative links outside the footer resolve to published files', () => {
   assert.deepEqual(broken, [], `broken links:\n${broken.join('\n')}`);
 });
 
-const isGuide = (f) => /^(goethe|grammar)\//.test(f) || /^german-certificate-/.test(f) || f === 'german-course-cost-india.html';
+const isGuide = ({ f, html }) => /^(goethe|grammar)\//.test(f) || /"@type":\s*"Article"/.test(html);
 
 test('every free guide is linked from another indexable page', () => {
   const inbound = new Map();
@@ -79,7 +79,7 @@ test('every free guide is linked from another indexable page', () => {
       if (t && t !== f) inbound.set(t, (inbound.get(t) || 0) + 1);
     }
   }
-  const orphans = pages.map((p) => p.f).filter(isGuide).filter((g) => !inbound.get(g));
+  const orphans = pages.filter(isGuide).map((p) => p.f).filter((g) => !inbound.get(g));
   assert.deepEqual(orphans, [], `orphaned guides: ${orphans.join(', ')}`);
 });
 

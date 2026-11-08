@@ -24,6 +24,13 @@ contact.html
 courses.html
 goethe-exam.html
 resources.html
+german-a1-vocabulary.html
+downloads/german-a1-starter-vocabulary.pdf
+learn-german-from-hindi.html
+downloads/german-self-study-planner.pdf
+german-books-for-beginners.html
+free-german-learning-pdfs.html
+german-exam-practice-papers.html
 a1.html
 a2.html
 b1.html

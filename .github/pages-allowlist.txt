@@ -361,3 +361,7 @@ goethe/b1-exam.html
 goethe/exam-fees-registration-india.html
 german-course-cost-india.html
 german-for-nursing-germany.html
+goethe/a1-sprechen.html
+goethe/a2-sprechen.html
+goethe/a1-schreiben.html
+goethe/a2-schreiben.html

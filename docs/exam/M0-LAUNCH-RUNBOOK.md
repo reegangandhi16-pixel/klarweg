@@ -1,6 +1,6 @@
 # B1 Mock M0: production launch runbook (owner-run)
 
-Status: **prepared 2026-11-08; step 2 (Access Worker) executed 2026-11-08 with owner approval.** Every step marked 🔒 changes production and needs the owner's
+Status: **prepared 2026-11-08; step 2 (Access Worker) executed 2026-11-08 with owner approval; step 1 (audio) done 2026-11-09.** Every step marked 🔒 changes production and needs the owner's
 explicit "yes" for that step. Stop at the first failed check; each step lists its rollback.
 
 Decisions this follows: `OWNER-DECISIONS-2026-11-06.md` (owner = sole reviewer and sole examiner, Google TTS, no
@@ -10,7 +10,7 @@ external reviews). General infrastructure reference: `RUNBOOK-EXAM-INFRA.md`.
 
 | Piece | Where | State on 2026-11-08 |
 |---|---|---|
-| M0 form `frm:b1:mock-m0@1`, TTS tool (with `--tempo`), rehearsal tool | private `klarweg-exam-content` PR #13 | open; audio blocked on Google billing; rehearsal passed with placeholder audio 2026-11-08 |
+| M0 form `frm:b1:mock-m0@1`, TTS tool (with `--tempo`), rehearsal tool | private `klarweg-exam-content` PR #13 | open; **step 1 DONE 2026-11-09**: real audio (21 files, Hören 136 wpm at tempo 0.84), owner listened and approved, validate PASS, rehearsal PASSED |
 | Exam Worker `klarweg-exam` (single-examiner mode, M0 start screen, prod D1 id) | `klarweg` PR #309 | open; not deployed |
 | Exam proxy + staff 2FA on the **live** Access line | `klarweg` PR #312 (draft, base `deploy/access-media-s1-on-fe2ab01`) | **step 2 DONE 2026-11-08 11:30Z**: live Access = `5d6d6b38` (routes off); rollback `597a6cc9` |
 | Exam client on klarweg.in (`/api` base, closed screen, Pages allowlist) | `klarweg` PR (this branch, stacked on #309) | open |
@@ -18,10 +18,10 @@ external reviews). General infrastructure reference: `RUNBOOK-EXAM-INFRA.md`.
 | R2 `klarweg-exam-content`, `klarweg-exam-recordings` | Cloudflare | created, private, no r2.dev, no domain |
 
 Wrangler: `node "~/Downloads/klarweg (11)/node_modules/wrangler/bin/wrangler.js"` (account Klarwegofficial),
-written `wrangler` below. Google Cloud: user `reegangandhi07`, project `klarweg-498812`.
+written `wrangler` below. Google Cloud: user `klarwegofficial@gmail.com`, project `klarweg-512108` (billed since 2026-11-09; the old `klarweg-498812` has billing off).
 
 ## 0. Owner only (no Claude action possible)
-1. Re-enable billing on `klarweg-498812` (Cloud Console → Billing → link an open billing account).
+1. ~~Re-enable billing~~ DONE 2026-11-09: billed project `klarweg-512108` (the TTS tool default).
 2. Review and merge `klarweg-exam-content` #13, then `klarweg` #309.
 
 ## 1. Audio (after step 0.1)
@@ -67,7 +67,8 @@ written `wrangler` below. Google Cloud: user `reegangandhi07`, project `klarweg-
 1. Build outside the repo:
    `node exam-content/tools/build-release.mjs --release r001 --purpose learner --out <empty dir> <path-to>/klarweg-exam-content/forms/b1/mock-m0`
 2. Preflight (read-only): `node exam-content/tools/registry-preflight.mjs --export-commands klarweg-exam`, run the
-   printed export commands, then `node exam-content/tools/registry-preflight.mjs --forms frm:b1:mock-m0@1 --existing <export dir>`.
+   printed export commands, then `node exam-content/tools/registry-preflight.mjs --form-dirs <path-to>/klarweg-exam-content/forms/b1/mock-m0 --existing <export dir>`
+   (2026-11-09 against the prod D1: `frm:b1:mock-m0@1: new`, PREFLIGHT OK).
    Continue only on **PREFLIGHT OK**.
 3. 🔒 Upload every file under `<out>/releases/` to R2 `klarweg-exam-content` with the same keys
    (`wrangler r2 object put klarweg-exam-content/<key> --file <file> --remote`).

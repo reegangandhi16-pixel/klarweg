@@ -100,12 +100,17 @@ test('NONPROD: no secrets; database ids are UUIDs (placeholder until provisioned
   }
 });
 
-test('PRODUCTION: wrangler.toml files carry no non-prod settings; exam flags all off', () => {
+test('PRODUCTION: wrangler.toml files carry no non-prod settings; exam flags = the M0 launch set exactly', () => {
   for (const [file, t] of [['exam-worker', PROD_EXAM], ['access/worker', PROD_ACCESS]]) {
     assert.ok(!/^\s*\[\[?env\./m.test(t), `${file}/wrangler.toml: no [env.*] sections`);
     assert.ok(!/CORS_EXTRA_ORIGINS/.test(strip(t)), `${file}/wrangler.toml: no CORS_EXTRA_ORIGINS`);
   }
-  for (const k of ['EXAM_ENABLED', 'EXAM_SYNTHETIC_FORMS', 'EXAM_MOCK_FORMS', 'EXAM_PRODUCTION_FORMS']) assert.equal(val(PROD_EXAM, k), 'off', `production ${k}`);
+  /* M0 launch (docs/exam/M0-LAUNCH-RUNBOOK.md §7, owner-approved 2026-11-09): engine + mock forms on, M0 is the only
+     assignable form, single-examiner rating. Synthetic/production forms, practice parts and module-only stay off. */
+  for (const k of ['EXAM_ENABLED', 'EXAM_MOCK_FORMS', 'EXAM_SINGLE_EXAMINER']) assert.equal(val(PROD_EXAM, k), 'on', `production ${k}`);
+  for (const k of ['EXAM_SYNTHETIC_FORMS', 'EXAM_PRODUCTION_FORMS']) assert.equal(val(PROD_EXAM, k), 'off', `production ${k}`);
+  assert.equal(val(PROD_EXAM, 'EXAM_RELEASE_FORMS'), 'frm:b1:mock-m0@1', 'production assigns only the M0 form');
+  for (const k of ['EXAM_PRACTICE_PARTS', 'EXAM_PRACTICE_PART_FORMS', 'EXAM_MODULE_ONLY']) assert.equal(val(PROD_EXAM, k), null, `production ${k} unset (off)`);
   assert.equal(val(PROD_ACCESS, 'EXAM_ROUTES'), null, 'production Access has no EXAM_ROUTES (exam proxy off)');
 });
 

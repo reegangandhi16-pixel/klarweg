@@ -2,19 +2,23 @@ name = "klarweg-exam"
 main = "src/index.js"
 compatibility_date = "2024-11-06"
 
-# PRIVATE WORKER — NOT DEPLOYED (Phase 5A). No public URL: reachable only
-# through the klarweg-access /exam/* proxy (service binding "EXAM" there,
-# which is deliberately NOT yet added to access/worker/wrangler.toml).
+# PRIVATE WORKER — deployed 2026-11-09. No public URL: reachable only
+# through the klarweg-access /exam/* proxy (service binding "EXAM" on the
+# Access deploy branch deploy/access-exam-on-bf0737f4).
 # See docs/exam/RUNBOOK-EXAM-INFRA.md before any deploy.
 workers_dev = false
 preview_urls = false
 
-# Every flag ships OFF. Only the exact string "on" enables.
+# Only the exact string "on" enables. M0 launch (docs/exam/M0-LAUNCH-RUNBOOK.md §7, owner-approved 2026-11-09):
+# the engine and mock forms are on, the only assignable form is M0, single-examiner rating; everything else off.
+# Learners still need an access grant (exam admin page); kill switch = EXAM_ROUTES off on klarweg-access.
 [vars]
-EXAM_ENABLED = "off"
+EXAM_ENABLED = "on"
 EXAM_SYNTHETIC_FORMS = "off"
-EXAM_MOCK_FORMS = "off"
+EXAM_MOCK_FORMS = "on"
 EXAM_PRODUCTION_FORMS = "off"
+EXAM_RELEASE_FORMS = "frm:b1:mock-m0@1"
+EXAM_SINGLE_EXAMINER = "on"
 # Secrets (wrangler secret put …), never in this file:
 #   EXAM_PROXY_SECRET   shared with klarweg-access (≥ 32 chars)
 #   EXAM_MEDIA_SECRET   HMAC key for attempt-scoped media tokens (≥ 32 chars)

@@ -15,6 +15,8 @@ preview_urls = false
 # 608453a5). CASHFREE_SECRET_KEY is a Worker secret, never in this file.
 # See docs/CASHFREE-PRODUCTION.md on main.
 [vars]
+# Exam proxy /exam/* (exam-proxy.js): on since 2026-11-09 (M0 launch, runbook §7.2). Kill switch: "off" + redeploy.
+EXAM_ROUTES = "on"
 CASHFREE_ENV = "production"
 CASHFREE_APP_ID = "115666718bafaa0ac9e7b68c1c37666511"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"

@@ -19,3 +19,17 @@ for(const f of files) test(f+': published resource route and source integrity',(
  for(const [,url] of s.matchAll(/href="([^"]+\.pdf)"/g))assert.equal(new URL(url).hostname,'www.goethe.de');
  assert.match(s,/Last checked 8 November 2026/);
 });
+
+test('self-study guide offers a public original planner without gated chapter resources',()=>{
+ const f='learn-german-from-hindi.html', pdf='downloads/german-self-study-planner.pdf';
+ const s=read(f), allow=read('.github/pages-allowlist.txt').split('\n');
+ assert.ok(s.includes('href="'+pdf+'"'));
+ assert.ok(allow.includes(pdf)); assert.ok(allow.includes(f));
+ assert.ok(read('resources.html').includes('href="'+f+'"'));
+ for(const parent of ['free-german-learning-pdfs.html','german-books-for-beginners.html'])assert.ok(read(parent).includes('href="'+f+'"'));
+ const bytes=fs.readFileSync(new URL('../'+pdf,import.meta.url));
+ assert.equal(bytes.subarray(0,5).toString(),'%PDF-');
+ assert.ok(bytes.length<200000,'planner stays small enough for mobile downloads');
+ assert.doesNotMatch(s,/<script[^>]*src=|data-kw-buy|guaranteed/i);
+ assert.ok(s.includes('href="chapter/chapter-a1-1-alphabet.html"'));
+});

@@ -24,6 +24,8 @@ contact.html
 courses.html
 goethe-exam.html
 resources.html
+learn-german-from-hindi.html
+downloads/german-self-study-planner.pdf
 german-books-for-beginners.html
 free-german-learning-pdfs.html
 german-exam-practice-papers.html

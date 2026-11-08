@@ -45,3 +45,19 @@ No promise of ranking for every query. New URLs still need owner-approved public
 - Full application test suite not rerun for this static resource batch.
 
 Human editorial/academic review: pending. Owner merge approval: pending.
+
+## Follow-up: beginner learning path and original download
+
+Added `/learn-german-from-hindi.html` for the distinct intent “learn German from Hindi” / “German self-study plan for beginners” (hypotheses; no volume data). It organises existing resources into a learning sequence rather than duplicating the A1 course roadmap or book/PDF directories. Linked from the resource hub and the books/PDF pages. Generated Article/BreadcrumbList, sitemap and deployment allowlist updated.
+
+Added `downloads/german-self-study-planner.pdf`: an original, public, one-page A4 planning sheet with seven activity prompts and review space. No German/Hindi exercise answers, exam tasks or paid chapter content. Optional authoring source: `scripts/generate-study-planner.py` (ReportLab; not a website runtime dependency). Uses the repository's Fraunces and Inter fonts. The PDF points back to its HTML guide. No form fields or user-data collection.
+
+Sources: existing A1 roadmap, grammar syllabus, and https://www.goethe.de/en/spr/ueb.html (opened 8 November 2026). The suggested schedule is editorial guidance, not a prescribed learning duration or pass guarantee. Editorial review remains pending before publication.
+
+Follow-up validation:
+- Resource and SEO checks: 13 passed, zero failures.
+- Origin rollback and public artifact checks: 16 passed, zero failures; the public PDF passes the existing private-content checks.
+- All generated-file checks and whitespace checks pass.
+- Headless Chrome: new guide at 360×780 and 1280×800, no horizontal overflow; 17px body text. Mobile screenshot inspected. Browser helper's profile cleanup reported ENOTEMPTY after the checks and screenshots completed; no page assertion failed.
+- PDF rendered with Poppler and visually inspected: no clipping or overlaps. pypdf extraction confirms one page, seven weekday prompts and review notes. PDF size 36,887 bytes.
+- Full application test suite not rerun for this static guide/download follow-up.

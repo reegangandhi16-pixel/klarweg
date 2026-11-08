@@ -60,3 +60,11 @@ test('favicon-only: the git-backed check compares the base commit with the worki
     fs.rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test('favicon-only: retiring the coral-dot share image for the brand logo is allowed, nothing else', () => {
+  const old = legal.replace(/site-icon-512\.png/g, 'icon-512.png');
+  assert.ok(old.includes('content="https://klarweg.in/icon-512.png"'), 'fixture has the old share image');
+  assert.equal(faviconOnlyChange(old, legal), true, 'og/twitter image swap');
+  assert.equal(faviconOnlyChange(old, legal.replace('site-icon-512.png', 'evil.png')), false, 'other image');
+  assert.equal(faviconOnlyChange(old, legal.replace(/Last updated: [^<]+/, 'Last updated: 1 January 2030')), false, 'date hidden behind the swap');
+});

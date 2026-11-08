@@ -157,12 +157,12 @@ function build(g) {
     url,
     mainEntityOfPage: url,
     inLanguage: 'en',
-    image: `${SITE_BASE}/icon-512.png`,
+    image: `${SITE_BASE}/site-icon-512.png`,
     educationalLevel: `CEFR ${g.level}`,
     teaches: g.teaches,
     isAccessibleForFree: true,
     author: { '@type': 'Organization', name: 'Klarweg', url: `${SITE_BASE}/` },
-    publisher: { '@type': 'Organization', name: 'Klarweg', url: `${SITE_BASE}/`, logo: { '@type': 'ImageObject', url: `${SITE_BASE}/icon-512.png` } },
+    publisher: { '@type': 'Organization', name: 'Klarweg', url: `${SITE_BASE}/`, logo: { '@type': 'ImageObject', url: `${SITE_BASE}/site-icon-512.png` } },
   };
   const crumbs = breadcrumb([HOME, ['German grammar A1–C2', 'german-grammar.html'], [g.crumb, `grammar/${g.slug}.html`]]);
   // footer: false → the guide ships without a footer (owner rule from Nov 2026:

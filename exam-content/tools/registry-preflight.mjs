@@ -11,6 +11,8 @@
    conflicts. It changes nothing.
 
    Usage: node exam-content/tools/registry-preflight.mjs --forms p3,p8,p13 --existing <dir with the five exports>
+          node exam-content/tools/registry-preflight.mjs --form-dirs <form dir>[,<form dir>] --existing <dir>
+            (forms outside this repo, e.g. the private M0 form: klarweg-exam-content/forms/b1/mock-m0)
           node exam-content/tools/registry-preflight.mjs --export-commands <db-name> <wrangler-config>   (prints them) */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -85,9 +87,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     process.exit(0);
   }
   try {
-    const forms = selectForms(opt('--forms'));
+    const dirs = opt('--form-dirs') ? opt('--form-dirs').split(',').filter(Boolean).map((d) => path.resolve(d)) : selectForms(opt('--forms')).map((f) => f.dir);
     const existing = readExports(opt('--existing') || '');
-    const build = buildRelease({ release: 'r999', purpose: 'learner', formDirs: forms.map((f) => f.dir) });
+    const build = buildRelease({ release: 'r999', purpose: 'learner', formDirs: dirs });
     const r = preflight(build, existing);
     for (const f of r.forms) console.log(`${f.id}: ${f.verdict}${f.reasons.length ? ' — ' + f.reasons.join('; ') : ''}`);
     for (const l of r.level_configs) if (l.verdict === 'conflict') console.log(`${l.id}: level config differs from the one in the database`);

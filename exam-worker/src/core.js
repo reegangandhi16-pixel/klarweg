@@ -257,6 +257,14 @@ export async function scoreModule(env, attempt, module) {
 /* ---------- result ---------- */
 /* OD-45 (LOCKED): student-facing title and mandatory disclaimer; never "Goethe score / Goethe-Ergebnis". */
 export const RESULT_LABEL = 'Klarweg B1 Simulation – Ergebnis';
+export const SAME_EXAMINER_NOTE = 'Zweimal unabhängig bewertet von derselben zertifizierten Prüfperson (nicht von zwei verschiedenen Prüfenden).';
+
+/* true when one examiner gave both counted rounds (1 and 2) of any rating unit of this module (EXAM_SINGLE_EXAMINER) */
+export async function sameExaminerRated(env, attemptId, module) {
+  const r = await env.DB.prepare(`SELECT 1 FROM ratings a JOIN ratings b ON b.attempt_id = a.attempt_id AND b.module = a.module AND b.item_id = a.item_id
+      WHERE a.attempt_id = ?1 AND a.module = ?2 AND a.round = 1 AND b.round = 2 AND a.rater_id = b.rater_id LIMIT 1`).bind(attemptId, module).first();
+  return !!r;
+}
 
 export async function buildResult(env, attempt) {
   const form = await formRow(env, attempt.form_id);
@@ -270,8 +278,9 @@ export async function buildResult(env, attempt) {
     ...(attempt.part_scope !== null && attempt.part_scope !== undefined ? { practice_part: { module: attempt.module_scope, part: attempt.part_scope } } : {}),
     pass_points: (await levelConfig(env, form.level_config_id)).pass_threshold_points ?? null,   // per module (no total)
     disclaimer: 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.',
-    modules: mods.map((m) => {
+    modules: await Promise.all(mods.map(async (m) => {
       const s = rows.find((r) => r.module === m.module);
+      const same = s && (m.module === 'schreiben' || m.module === 'sprechen') ? await sameExaminerRated(env, attempt.id, m.module) : false;
       const flags = s ? JSON.parse(s.rule_flags_json || '{}') : {};
       return {
         module: m.module,
@@ -283,10 +292,12 @@ export async function buildResult(env, attempt) {
         pass: s && s.status === 'final' && s.pass !== null ? !!s.pass : null,   // a part practice has no pass/fail
         predikat: s && s.status === 'final' ? s.predikat : null,
         counts: s && 'correct' in flags ? { correct: flags.correct, incorrect: flags.incorrect, unanswered: flags.unanswered } : null,
-        note: !s ? null : s.status === 'pending_rating' ? 'Wartet auf zwei unabhängige Bewertungen.'
-          : s.status === 'pending_rule' ? 'Bewertet; die Punkteregel ist noch nicht festgelegt.' : null
+        ...(same ? { same_examiner: true } : {}),
+        note: !s ? null : s.status === 'pending_rating' ? 'Wartet auf die Bewertung.'
+          : s.status === 'pending_rule' ? 'Bewertet; die Punkteregel ist noch nicht festgelegt.'
+            : same && s.status === 'final' ? SAME_EXAMINER_NOTE : null
       };
-    })
+    }))
   };
   await env.DB.prepare('INSERT INTO results (attempt_id, json, computed_at) VALUES (?1, ?2, ?3) ON CONFLICT(attempt_id) DO UPDATE SET json = excluded.json, computed_at = excluded.computed_at')
     .bind(attempt.id, JSON.stringify(result), now(env)).run();

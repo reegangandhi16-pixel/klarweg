@@ -30,6 +30,12 @@ export const ERROR_TEXT = {
    of rounds 1 and 2 still free for every unit of the module, else 3 (lead raters only; the server enforces that). */
 export function ratingRound(data, module) {
   const units = data.units.filter((u) => u.module === module);
+  /* EXAM_SINGLE_EXAMINER: one examiner gives round 1, then round 2 (the earliest round not finished by anyone); the
+     server still refuses a second rating of the same round, and the result says that one examiner rated twice */
+  if (data.single_examiner) {
+    for (const round of [1, 2]) if (units.some((u) => !u.rounds_taken.some((r) => r.round === round))) return round;
+    return 3;
+  }
   const mine = units.flatMap((u) => u.rounds_taken.filter((r) => r.mine).map((r) => r.round));
   if (mine.length) return Math.min(...mine);
   for (const round of [1, 2]) if (units.every((u) => !u.rounds_taken.some((r) => r.round === round))) return round;

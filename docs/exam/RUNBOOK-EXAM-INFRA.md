@@ -15,6 +15,8 @@ exam content, no real audio and no learner data.
 | Access proxy `/exam/*` | `access/worker/src/exam-proxy.js` + one hook in `index.js` | code is inert: needs `EXAM_ROUTES = "on"` **and** an `EXAM` service binding, and neither exists |
 | Frontend shell | `exam/` | **not published**: not in `.github/pages-allowlist.txt` |
 
+> **2026-11-06:** the first B1 release is the Mock M0 (`EXAM_MOCK_FORMS=on`, mode `mock_m0`, access scope `mock`), rated by the owner alone (`EXAM_SINGLE_EXAMINER=on`). Decisions: `OWNER-DECISIONS-2026-11-06.md`.
+
 ## 2. Feature flags (all default OFF; only the exact string `"on"` enables)
 
 | Flag | Worker | Effect |

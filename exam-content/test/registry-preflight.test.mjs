@@ -107,6 +107,9 @@ test('PREFLIGHT: level config with different JSON → conflict; exports in wrang
     assert.equal(cli.status, 0, cli.stderr); assert.match(cli.stdout, /PREFLIGHT OK/);
     const s0 = spawnSync(process.execPath, [path.join(ROOT, 'tools/registry-preflight.mjs'), '--forms', 's0', '--existing', dir], { encoding: 'utf8' });
     assert.equal(s0.status, 1); assert.match(s0.stderr, /unknown practice form "s0"/);
+    // --form-dirs: a form directory outside the practice registry (the private M0 form) is accepted by path
+    const byDir = spawnSync(process.execPath, [path.join(ROOT, 'tools/registry-preflight.mjs'), '--form-dirs', P3, '--existing', dir], { encoding: 'utf8' });
+    assert.equal(byDir.status, 0, byDir.stderr); assert.match(byDir.stdout, /frm:b1:synthetic-p3@1: new/); assert.match(byDir.stdout, /PREFLIGHT OK/);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
   const cmds = spawnSync(process.execPath, [path.join(ROOT, 'tools/registry-preflight.mjs'), '--export-commands', 'klarweg-exam'], { encoding: 'utf8' });
   assert.equal(cmds.stdout.trim().split('\n').length, 5); assert.match(cmds.stdout, /--remote --json --command "SELECT item_id, key_json FROM item_keys"/);

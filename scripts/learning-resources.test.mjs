@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=f=>fs.readFileSync(new URL('../'+f,import.meta.url),'utf8');
+const files=['german-books-for-beginners.html','free-german-learning-pdfs.html','german-exam-practice-papers.html'];
+for(const f of files) test(f+': published resource route and source integrity',()=>{
+ const s=read(f);
+ assert.ok(read('resources.html').includes('href="'+f+'"'));
+ assert.ok(read('sitemap.xml').includes('https://klarweg.in/'+f));
+ assert.ok(read('.github/pages-allowlist.txt').split('\n').includes(f));
+ assert.ok(s.includes('href="chapter/chapter-a1-1-alphabet.html"'));
+ assert.ok(s.includes('href="a1.html"'));
+ for(const other of files.filter(x=>x!==f))assert.ok(s.includes('href="'+other+'"'));
+ const data=[...s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m=>JSON.parse(m[1]));
+ assert.ok(data.some(x=>x['@type']==='Article'));
+ const crumbs=data.find(x=>x['@type']==='BreadcrumbList');
+ assert.equal(crumbs.itemListElement[1].item,'https://klarweg.in/resources.html');
+ assert.doesNotMatch(s,/<script[^>]*src=|<audio|data-kw-buy/);
+ for(const [,url] of s.matchAll(/href="([^"]+\.pdf)"/g))assert.equal(new URL(url).hostname,'www.goethe.de');
+ assert.match(s,/Last checked 8 November 2026/);
+});

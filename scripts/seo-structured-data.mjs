@@ -62,7 +62,13 @@ const GOETHE = ['Goethe exam', 'goethe-exam.html'];
 const AUSBILDUNG = ['Ausbildung', 'ausbildung.html'];
 PAGES['goethe-exam.html'] = [breadcrumb([HOME, GOETHE])];
 PAGES['ausbildung.html'] = [breadcrumb([HOME, AUSBILDUNG])];
+const RESOURCES = ['Resources', 'resources.html'];
+PAGES['resources.html'] = [breadcrumb([HOME, RESOURCES])];
 const GUIDES = [
+  ['german-books-for-beginners.html', 'German books for beginners', RESOURCES, null],
+  ['free-german-learning-pdfs.html', 'Free German learning PDFs', RESOURCES, null],
+  ['german-exam-practice-papers.html', 'Official German exam practice papers', RESOURCES, null],
+
   // [file, breadcrumb name, parent crumb, CEFR level or null]
   ['goethe/a1-exam.html', 'A1 exam', GOETHE, 'A1'],
   ['goethe/a2-exam.html', 'A2 exam', GOETHE, 'A2'],

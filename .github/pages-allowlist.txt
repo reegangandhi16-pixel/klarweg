@@ -24,6 +24,9 @@ contact.html
 courses.html
 goethe-exam.html
 resources.html
+german-books-for-beginners.html
+free-german-learning-pdfs.html
+german-exam-practice-papers.html
 a1.html
 a2.html
 b1.html

@@ -24,6 +24,9 @@ contact.html
 courses.html
 goethe-exam.html
 resources.html
+german-language-levels.html
+how-long-to-learn-german.html
+german-study-planner.js
 german-a1-vocabulary.html
 downloads/german-a1-starter-vocabulary.pdf
 learn-german-from-hindi.html

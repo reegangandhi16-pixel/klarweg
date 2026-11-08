@@ -368,3 +368,6 @@ goethe/a2-schreiben.html
 german-a2-vocabulary.html
 german-b1-vocabulary.html
 german-a1-for-spouse-visa.html
+telc-vs-goethe.html
+goethe/certificate-validity-result.html
+goethe/exam-centres-india.html

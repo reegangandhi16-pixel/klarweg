@@ -1,0 +1,194 @@
+[
+  {
+    "topic": "Appointments",
+    "singular": "der Termin",
+    "plural": "die Termine",
+    "english": "appointment",
+    "hindi": "मुलाक़ात का तय समय",
+    "roman": "mulaqat ka tay samay"
+  },
+  {
+    "topic": "Appointments",
+    "singular": "die Anmeldung",
+    "plural": "die Anmeldungen",
+    "english": "registration",
+    "hindi": "पंजीकरण",
+    "roman": "panjikaran"
+  },
+  {
+    "topic": "Appointments",
+    "singular": "die Auskunft",
+    "plural": "die Auskünfte",
+    "english": "information",
+    "hindi": "जानकारी",
+    "roman": "jaankari"
+  },
+  {
+    "topic": "Appointments",
+    "singular": "die Nachricht",
+    "plural": "die Nachrichten",
+    "english": "message",
+    "hindi": "संदेश",
+    "roman": "sandesh"
+  },
+  {
+    "topic": "Appointments",
+    "singular": "die Einladung",
+    "plural": "die Einladungen",
+    "english": "invitation",
+    "hindi": "निमंत्रण",
+    "roman": "nimantran"
+  },
+  {
+    "topic": "Appointments",
+    "singular": "die Unterschrift",
+    "plural": "die Unterschriften",
+    "english": "signature",
+    "hindi": "हस्ताक्षर",
+    "roman": "hastakshar"
+  },
+  {
+    "topic": "Travel",
+    "singular": "die Haltestelle",
+    "plural": "die Haltestellen",
+    "english": "bus or tram stop",
+    "hindi": "बस या ट्राम का ठहराव",
+    "roman": "bas ya tram ka thahraav"
+  },
+  {
+    "topic": "Travel",
+    "singular": "die Fahrkarte",
+    "plural": "die Fahrkarten",
+    "english": "travel ticket",
+    "hindi": "यात्रा टिकट",
+    "roman": "yatra ticket"
+  },
+  {
+    "topic": "Travel",
+    "singular": "der Eingang",
+    "plural": "die Eingänge",
+    "english": "entrance",
+    "hindi": "प्रवेश-द्वार",
+    "roman": "pravesh-dvaar"
+  },
+  {
+    "topic": "Travel",
+    "singular": "der Ausgang",
+    "plural": "die Ausgänge",
+    "english": "exit",
+    "hindi": "निकास",
+    "roman": "nikaas"
+  },
+  {
+    "topic": "Travel",
+    "singular": "die Verspätung",
+    "plural": "die Verspätungen",
+    "english": "delay",
+    "hindi": "देरी",
+    "roman": "deri"
+  },
+  {
+    "topic": "Travel",
+    "singular": "die Richtung",
+    "plural": "die Richtungen",
+    "english": "direction",
+    "hindi": "दिशा",
+    "roman": "disha"
+  },
+  {
+    "topic": "Shopping",
+    "singular": "die Rechnung",
+    "plural": "die Rechnungen",
+    "english": "bill or invoice",
+    "hindi": "बिल",
+    "roman": "bil"
+  },
+  {
+    "topic": "Shopping",
+    "singular": "der Preis",
+    "plural": "die Preise",
+    "english": "price",
+    "hindi": "कीमत",
+    "roman": "keemat"
+  },
+  {
+    "topic": "Shopping",
+    "singular": "das Angebot",
+    "plural": "die Angebote",
+    "english": "offer",
+    "hindi": "प्रस्ताव या विशेष पेशकश",
+    "roman": "prastaav ya vishesh peshkash"
+  },
+  {
+    "topic": "Shopping",
+    "singular": "die Größe",
+    "plural": "die Größen",
+    "english": "size",
+    "hindi": "आकार",
+    "roman": "aakaar"
+  },
+  {
+    "topic": "Shopping",
+    "singular": "die Kasse",
+    "plural": "die Kassen",
+    "english": "checkout or till",
+    "hindi": "भुगतान काउंटर",
+    "roman": "bhugtaan counter"
+  },
+  {
+    "topic": "Shopping",
+    "singular": "die Quittung",
+    "plural": "die Quittungen",
+    "english": "receipt",
+    "hindi": "रसीद",
+    "roman": "raseed"
+  },
+  {
+    "topic": "Daily life",
+    "singular": "der Nachbar",
+    "plural": "die Nachbarn",
+    "english": "male neighbour",
+    "hindi": "पड़ोसी पुरुष",
+    "roman": "padosi purush"
+  },
+  {
+    "topic": "Daily life",
+    "singular": "die Nachbarin",
+    "plural": "die Nachbarinnen",
+    "english": "female neighbour",
+    "hindi": "पड़ोसी महिला",
+    "roman": "padosi mahila"
+  },
+  {
+    "topic": "Daily life",
+    "singular": "die Miete",
+    "plural": "die Mieten",
+    "english": "rent",
+    "hindi": "किराया",
+    "roman": "kiraya"
+  },
+  {
+    "topic": "Daily life",
+    "singular": "die Heizung",
+    "plural": "die Heizungen",
+    "english": "heating system",
+    "hindi": "कमरा गर्म करने की व्यवस्था",
+    "roman": "kamra garm karne ki vyavastha"
+  },
+  {
+    "topic": "Daily life",
+    "singular": "die Reparatur",
+    "plural": "die Reparaturen",
+    "english": "repair",
+    "hindi": "मरम्मत",
+    "roman": "marammat"
+  },
+  {
+    "topic": "Daily life",
+    "singular": "der Schlüssel",
+    "plural": "die Schlüssel",
+    "english": "key",
+    "hindi": "चाबी",
+    "roman": "chaabi"
+  }
+]

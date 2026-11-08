@@ -32,7 +32,7 @@ const org = {
       '@id': `${SITE_BASE}/#organization`,
       name: 'Klarweg',
       url: `${SITE_BASE}/`,
-      logo: `${SITE_BASE}/site-icon-512.png`, // the brand logo (#276); icon-512.png stays the coral-dot chapter share image
+      logo: `${SITE_BASE}/site-icon-512.png`, // the brand logo (#276); also the share/structured-data image (old coral-dot icon-512.png retired)
       email: 'klarwegofficial@gmail.com',
       description: 'German courses from A1 to C2 for Hindi-speaking learners, with color-coded grammar and Goethe exam preparation.',
     },
@@ -62,7 +62,25 @@ const GOETHE = ['Goethe exam', 'goethe-exam.html'];
 const AUSBILDUNG = ['Ausbildung', 'ausbildung.html'];
 PAGES['goethe-exam.html'] = [breadcrumb([HOME, GOETHE])];
 PAGES['ausbildung.html'] = [breadcrumb([HOME, AUSBILDUNG])];
+const RESOURCES = ['Resources', 'resources.html'];
+PAGES['resources.html'] = [breadcrumb([HOME, RESOURCES])];
 const GUIDES = [
+  ['goethe/exam-centres-india.html', 'Exam centres in India', GOETHE, null],
+  ['goethe/certificate-validity-result.html', 'Certificate validity and results', GOETHE, null],
+  ['telc-vs-goethe.html', 'telc, Goethe and ÖSD', GOETHE, null],
+  ['german-a1-for-spouse-visa.html', 'A1 for spouse visa', RESOURCES, 'A1'],
+  ['german-b1-vocabulary.html', 'B1 vocabulary', RESOURCES, 'B1'],
+  ['german-a2-vocabulary.html', 'A2 vocabulary', RESOURCES, 'A2'],
+  ['goethe/a2-schreiben.html', 'A2 Schreiben', GOETHE, 'A2'],
+  ['goethe/a1-schreiben.html', 'A1 Schreiben', GOETHE, 'A1'],
+  ['goethe/a2-sprechen.html', 'A2 Sprechen', GOETHE, 'A2'],
+  ['goethe/a1-sprechen.html', 'A1 Sprechen', GOETHE, 'A1'],
+  ['german-a1-vocabulary.html', 'A1 vocabulary', RESOURCES, 'A1'],
+  ['learn-german-from-hindi.html', 'Beginner self-study', RESOURCES, 'A1'],
+  ['german-books-for-beginners.html', 'German books for beginners', RESOURCES, null],
+  ['free-german-learning-pdfs.html', 'Free German learning PDFs', RESOURCES, null],
+  ['german-exam-practice-papers.html', 'Official German exam practice papers', RESOURCES, null],
+
   // [file, breadcrumb name, parent crumb, CEFR level or null]
   ['goethe/a1-exam.html', 'A1 exam', GOETHE, 'A1'],
   ['goethe/a2-exam.html', 'A2 exam', GOETHE, 'A2'],
@@ -98,7 +116,7 @@ for (const [f, name, parent, level] of GUIDES) {
     url,
     mainEntityOfPage: url,
     inLanguage: 'en',
-    image: `${SITE_BASE}/icon-512.png`,
+    image: `${SITE_BASE}/site-icon-512.png`,
     ...(level ? { educationalLevel: `CEFR ${level}` } : {}),
     isAccessibleForFree: true,
     author: { '@type': 'Organization', name: 'Klarweg', url: `${SITE_BASE}/` },

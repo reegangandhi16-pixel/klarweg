@@ -50,7 +50,7 @@ for (const f of fs.readdirSync(CH).filter((x) => /^chapter-[abc][12]-.*\.html$/.
        `<meta property="og:title" content="${attr(title)}">`,
        `<meta property="og:description" content="${attr(desc)}">`,
        `<meta property="og:url" content="${url}">`,
-       `<meta property="og:image" content="${SITE_BASE}/icon-512.png">`,
+       `<meta property="og:image" content="${SITE_BASE}/site-icon-512.png">`,
        '<meta name="twitter:card" content="summary">',
        ldScript(breadcrumb([HOME, COURSES, levelCrumb(level), [h1, `chapter/${f}`]])),
        END].join('\n')

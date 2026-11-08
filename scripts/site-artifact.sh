@@ -181,5 +181,10 @@ fi
 
 echo "Assertion passed: no prohibited private paths found in artifact."
 
+# ---------- clean URLs ----------
+# Advertise /about instead of /about.html (canonical, sitemap, JSON-LD,
+# links) in the published copy only; Pages serves both forms.
+node scripts/clean-urls.mjs "$ARTIFACT_DIR"
+
 # ---------- content assertions ----------
 node scripts/site-leak-check.mjs "$ARTIFACT_DIR"

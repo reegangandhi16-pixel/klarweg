@@ -24,6 +24,13 @@ contact.html
 courses.html
 goethe-exam.html
 resources.html
+german-a1-vocabulary.html
+downloads/german-a1-starter-vocabulary.pdf
+learn-german-from-hindi.html
+downloads/german-self-study-planner.pdf
+german-books-for-beginners.html
+free-german-learning-pdfs.html
+german-exam-practice-papers.html
 a1.html
 a2.html
 b1.html
@@ -119,7 +126,6 @@ og-image.png
 # artifact states its intended origin (tests keep it equal to SITE_BASE).
 CNAME
 manifest.json
-favicon.svg
 apple-touch-icon.png
 icon-192.png
 icon-512.png
@@ -355,6 +361,16 @@ goethe/b1-exam.html
 goethe/exam-fees-registration-india.html
 german-course-cost-india.html
 german-for-nursing-germany.html
+goethe/a1-sprechen.html
+goethe/a2-sprechen.html
+goethe/a1-schreiben.html
+goethe/a2-schreiben.html
+german-a2-vocabulary.html
+german-b1-vocabulary.html
+german-a1-for-spouse-visa.html
+telc-vs-goethe.html
+goethe/certificate-validity-result.html
+goethe/exam-centres-india.html
 
 # ---------------------------------------------------------------
 # Exam portal (B1 Mock M0, owner decisions 2026-11-06). Static client

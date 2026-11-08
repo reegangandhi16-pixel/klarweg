@@ -6,7 +6,8 @@
 
    Source: the SAME localStorage record the chapter page keeps,
    key "kw-ch-<chapter id>" (chapter/chapter-app.js). A chapter's
-   id is its file name without "chapter-" and ".html", e.g.
+   id is its file name without "chapter-" and ".html" (the published
+   site links extensionless URLs, see scripts/clean-urls.mjs), e.g.
    chapter/chapter-b1-1-infinitiv-mit-zu.html → kw-ch-b1-1-infinitiv-mit-zu.
 
    The chapter page stores its own XP result in that record —
@@ -27,7 +28,7 @@
   var CHECK = '<svg width="11" height="11" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg>';
 
   function chapterId(href) {
-    var m = /(?:^|\/)chapter-([^\/?#]+)\.html(?:[?#].*)?$/.exec(String(href || ''));
+    var m = /(?:^|\/)chapter-([^\/?#]+?)(?:\.html)?(?:[?#].*)?$/.exec(String(href || ''));
     return m ? m[1] : null;
   }
 

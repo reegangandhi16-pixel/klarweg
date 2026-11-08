@@ -1,0 +1,4812 @@
+[
+  {
+    "kind": "vocabulary",
+    "slug": "german-family-vocabulary",
+    "title": "German Family Vocabulary with Hindi Meanings",
+    "focus": "describe relatives and distinguish a family relationship from a person’s name",
+    "note": "A family tree is more useful than an alphabetical list here. Put one fictional person at the centre, then describe each relationship from that person’s point of view. A woman can be someone’s daughter and someone else’s mother; the German noun changes with the relationship you are describing. The plural Eltern names parents together, while Mutter and Vater identify the individual relationships. Use fictional details when sharing your work publicly. Do not infer a person’s family arrangement from their surname or appearance.",
+    "words": [
+      [
+        "die Mutter",
+        "die Mütter",
+        "mother",
+        "माँ",
+        "maan"
+      ],
+      [
+        "der Vater",
+        "die Väter",
+        "father",
+        "पिता",
+        "pita"
+      ],
+      [
+        "die Eltern",
+        "plural",
+        "parents",
+        "माता-पिता",
+        "mata-pita"
+      ],
+      [
+        "der Bruder",
+        "die Brüder",
+        "brother",
+        "भाई",
+        "bhai"
+      ],
+      [
+        "die Schwester",
+        "die Schwestern",
+        "sister",
+        "बहन",
+        "bahan"
+      ],
+      [
+        "der Sohn",
+        "die Söhne",
+        "son",
+        "बेटा",
+        "beta"
+      ],
+      [
+        "die Tochter",
+        "die Töchter",
+        "daughter",
+        "बेटी",
+        "beti"
+      ],
+      [
+        "der Onkel",
+        "die Onkel",
+        "uncle",
+        "चाचा या मामा",
+        "chacha ya mama"
+      ],
+      [
+        "die Tante",
+        "die Tanten",
+        "aunt",
+        "चाची या मौसी",
+        "chachi ya mausi"
+      ],
+      [
+        "die Großmutter",
+        "die Großmütter",
+        "grandmother",
+        "दादी या नानी",
+        "dadi ya nani"
+      ],
+      [
+        "der Großvater",
+        "die Großväter",
+        "grandfather",
+        "दादा या नाना",
+        "dada ya nana"
+      ],
+      [
+        "das Kind",
+        "die Kinder",
+        "child",
+        "बच्चा",
+        "bachcha"
+      ]
+    ],
+    "model": [
+      [
+        "Das ist meine Schwester Neha.",
+        "This is my sister Neha."
+      ],
+      [
+        "Mein Bruder wohnt in Delhi.",
+        "My brother lives in Delhi."
+      ],
+      [
+        "Meine Eltern lernen auch Deutsch.",
+        "My parents are also learning German."
+      ],
+      [
+        "Unsere Großmutter besucht uns am Sonntag.",
+        "Our grandmother is visiting us on Sunday."
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: Meine ___ sind meine Mutter und mein Vater.",
+        "Eltern",
+        "The sentence names both parents together."
+      ],
+      [
+        "Say “My sister lives in Pune.”",
+        "Meine Schwester wohnt in Pune.",
+        "Schwester is feminine; meine agrees with it."
+      ],
+      [
+        "Choose the plural of das Kind.",
+        "die Kinder",
+        "The plural changes the ending, not simply the article."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-food-vocabulary",
+    "title": "German Food Vocabulary with Hindi Meanings",
+    "focus": "name everyday food and build a simple meal description",
+    "note": "Separate a food name from the portion you order. Brot names bread, while a particular order may involve a slice or a loaf. Foods such as rice, milk and water are commonly discussed without a plural in ordinary meal descriptions. The table marks those uses instead of encouraging an unnatural plural. A Hindi gloss identifies the basic meaning, but it does not describe every regional dish. When describing an Indian meal, keep a dish’s own name and explain its ingredients in language you know.",
+    "words": [
+      [
+        "das Brot",
+        "die Brote",
+        "bread; loaves",
+        "ब्रेड",
+        "bread"
+      ],
+      [
+        "der Reis",
+        "usually singular here",
+        "rice",
+        "चावल",
+        "chawal"
+      ],
+      [
+        "die Milch",
+        "usually singular here",
+        "milk",
+        "दूध",
+        "doodh"
+      ],
+      [
+        "das Wasser",
+        "usually singular here",
+        "water",
+        "पानी",
+        "paani"
+      ],
+      [
+        "der Käse",
+        "usually singular here",
+        "cheese",
+        "चीज़",
+        "cheez"
+      ],
+      [
+        "das Ei",
+        "die Eier",
+        "egg",
+        "अंडा",
+        "anda"
+      ],
+      [
+        "die Suppe",
+        "die Suppen",
+        "soup",
+        "सूप",
+        "soup"
+      ],
+      [
+        "der Salat",
+        "die Salate",
+        "salad",
+        "सलाद",
+        "salaad"
+      ],
+      [
+        "das Fleisch",
+        "usually singular here",
+        "meat",
+        "मांस",
+        "maans"
+      ],
+      [
+        "der Fisch",
+        "die Fische",
+        "fish",
+        "मछली",
+        "machhli"
+      ],
+      [
+        "das Gemüse",
+        "usually singular here",
+        "vegetables collectively",
+        "सब्ज़ियाँ",
+        "sabziyaan"
+      ],
+      [
+        "das Frühstück",
+        "die Frühstücke",
+        "breakfast",
+        "नाश्ता",
+        "naashta"
+      ]
+    ],
+    "model": [
+      [
+        "Zum Frühstück esse ich Brot und ein Ei.",
+        "For breakfast I eat bread and an egg."
+      ],
+      [
+        "Am Abend koche ich Reis mit Gemüse.",
+        "In the evening I cook rice with vegetables."
+      ],
+      [
+        "Ich trinke Wasser, aber keine Milch.",
+        "I drink water but no milk."
+      ],
+      [
+        "Die Suppe ist warm.",
+        "The soup is warm."
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: Ich esse ___ Ei.",
+        "ein",
+        "Ei is neuter; a simple object uses ein here."
+      ],
+      [
+        "Say “I drink water.”",
+        "Ich trinke Wasser.",
+        "This ordinary drink statement needs no indefinite article."
+      ],
+      [
+        "Which table word names vegetables collectively?",
+        "das Gemüse",
+        "Use the collective noun rather than inventing a regular plural."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-fruit-vegetables",
+    "title": "German Fruit and Vegetables in Hindi",
+    "focus": "choose fruit and vegetables and state a quantity",
+    "note": "Learn these words in shopping combinations. One apple and two apples show why the plural matters, while a kilogram of potatoes introduces a different way to describe quantity. Colour can help identify produce, but the noun’s grammatical gender does not follow the colour or the Hindi word. Keep article and plural together in your notes. The English word pepper can refer to several things; Paprika in this table means the vegetable, not a promise that every use of the English word has the same translation.",
+    "words": [
+      [
+        "der Apfel",
+        "die Äpfel",
+        "apple",
+        "सेब",
+        "seb"
+      ],
+      [
+        "die Banane",
+        "die Bananen",
+        "banana",
+        "केला",
+        "kela"
+      ],
+      [
+        "die Orange",
+        "die Orangen",
+        "orange",
+        "संतरा",
+        "santra"
+      ],
+      [
+        "die Birne",
+        "die Birnen",
+        "pear",
+        "नाशपाती",
+        "naashpaati"
+      ],
+      [
+        "die Traube",
+        "die Trauben",
+        "grape",
+        "अंगूर",
+        "angoor"
+      ],
+      [
+        "die Erdbeere",
+        "die Erdbeeren",
+        "strawberry",
+        "स्ट्रॉबेरी",
+        "strawberry"
+      ],
+      [
+        "die Kartoffel",
+        "die Kartoffeln",
+        "potato",
+        "आलू",
+        "aaloo"
+      ],
+      [
+        "die Tomate",
+        "die Tomaten",
+        "tomato",
+        "टमाटर",
+        "tamaatar"
+      ],
+      [
+        "die Zwiebel",
+        "die Zwiebeln",
+        "onion",
+        "प्याज़",
+        "pyaaz"
+      ],
+      [
+        "die Karotte",
+        "die Karotten",
+        "carrot",
+        "गाजर",
+        "gaajar"
+      ],
+      [
+        "die Gurke",
+        "die Gurken",
+        "cucumber",
+        "खीरा",
+        "kheera"
+      ],
+      [
+        "die Paprika",
+        "die Paprikas",
+        "bell pepper",
+        "शिमला मिर्च",
+        "shimla mirch"
+      ]
+    ],
+    "model": [
+      [
+        "Ich kaufe drei Äpfel und zwei Bananen.",
+        "I am buying three apples and two bananas."
+      ],
+      [
+        "Wir brauchen ein Kilo Kartoffeln.",
+        "We need a kilo of potatoes."
+      ],
+      [
+        "Die Gurke liegt neben den Tomaten.",
+        "The cucumber is beside the tomatoes."
+      ],
+      [
+        "Magst du Birnen?",
+        "Do you like pears?"
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: ein Apfel, zwei ___.",
+        "Äpfel",
+        "The plural adds an umlaut as well as an ending."
+      ],
+      [
+        "Say “We need tomatoes.”",
+        "Wir brauchen Tomaten.",
+        "Use the plural when speaking about an unspecified number."
+      ],
+      [
+        "Which item is a cucumber?",
+        "die Gurke",
+        "Do not confuse Gurke with Karotte, the carrot."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-clothes-vocabulary",
+    "title": "German Clothes Vocabulary with Hindi Meanings",
+    "focus": "describe clothing and ask about a size",
+    "note": "A clothing description usually needs more than a noun. Add the colour, size or occasion that helps another person identify the item. German Hose is normally singular when naming one pair of trousers; an English plural does not automatically make the German noun plural. Schuhe is plural because you are referring to shoes. In a shop, first identify the garment and then ask a short size question. You can practise with clothing you already own without pretending to make a purchase.",
+    "words": [
+      [
+        "das Hemd",
+        "die Hemden",
+        "shirt",
+        "कमीज़",
+        "kameez"
+      ],
+      [
+        "die Hose",
+        "die Hosen",
+        "trousers; a pair",
+        "पतलून",
+        "patloon"
+      ],
+      [
+        "das Kleid",
+        "die Kleider",
+        "dress",
+        "ड्रेस",
+        "dress"
+      ],
+      [
+        "der Rock",
+        "die Röcke",
+        "skirt",
+        "स्कर्ट",
+        "skirt"
+      ],
+      [
+        "die Jacke",
+        "die Jacken",
+        "jacket",
+        "जैकेट",
+        "jacket"
+      ],
+      [
+        "der Mantel",
+        "die Mäntel",
+        "coat",
+        "कोट",
+        "coat"
+      ],
+      [
+        "der Pullover",
+        "die Pullover",
+        "jumper",
+        "स्वेटर",
+        "sweater"
+      ],
+      [
+        "der Schuh",
+        "die Schuhe",
+        "shoe",
+        "जूता",
+        "joota"
+      ],
+      [
+        "die Socke",
+        "die Socken",
+        "sock",
+        "मोज़ा",
+        "moza"
+      ],
+      [
+        "die Mütze",
+        "die Mützen",
+        "cap",
+        "टोपी",
+        "topi"
+      ],
+      [
+        "der Schal",
+        "die Schals",
+        "scarf",
+        "मफ़लर",
+        "maflar"
+      ],
+      [
+        "die Größe",
+        "die Größen",
+        "size",
+        "आकार",
+        "aakaar"
+      ]
+    ],
+    "model": [
+      [
+        "Die Jacke ist mir zu klein.",
+        "The jacket is too small for me."
+      ],
+      [
+        "Haben Sie das Hemd in Größe M?",
+        "Do you have the shirt in size M?"
+      ],
+      [
+        "Meine Schuhe sind schwarz.",
+        "My shoes are black."
+      ],
+      [
+        "Im Winter trage ich einen Mantel.",
+        "In winter I wear a coat."
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: ein Schuh, zwei ___.",
+        "Schuhe",
+        "The plural has an -e ending."
+      ],
+      [
+        "Say “The jacket is too small.”",
+        "Die Jacke ist zu klein.",
+        "Zu before klein means too small, not simply small."
+      ],
+      [
+        "Which German noun is singular for one pair of trousers?",
+        "die Hose",
+        "Avoid transferring the English plural form automatically."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-home-vocabulary",
+    "title": "German Home and Furniture Vocabulary in Hindi",
+    "focus": "describe rooms and locate ordinary household objects",
+    "note": "Describe a room in a sequence somebody can follow: first name the room, then identify two or three objects and say where they are. Zimmer is a room in general; Küche and Bad name particular kinds of rooms. A single Hindi word may be used loosely for several household objects, so compare Tisch and Schreibtisch by their function. Keep location descriptions separate from movement instructions. This page supplies vocabulary and simple models; the related grammar guide explains how prepositions affect the full sentence.",
+    "words": [
+      [
+        "das Zimmer",
+        "die Zimmer",
+        "room",
+        "कमरा",
+        "kamra"
+      ],
+      [
+        "die Küche",
+        "die Küchen",
+        "kitchen",
+        "रसोई",
+        "rasoi"
+      ],
+      [
+        "das Bad",
+        "die Bäder",
+        "bathroom",
+        "स्नानघर",
+        "snaanghar"
+      ],
+      [
+        "das Wohnzimmer",
+        "die Wohnzimmer",
+        "living room",
+        "बैठक का कमरा",
+        "baithak ka kamra"
+      ],
+      [
+        "das Bett",
+        "die Betten",
+        "bed",
+        "बिस्तर",
+        "bistar"
+      ],
+      [
+        "der Tisch",
+        "die Tische",
+        "table",
+        "मेज़",
+        "mez"
+      ],
+      [
+        "der Stuhl",
+        "die Stühle",
+        "chair",
+        "कुर्सी",
+        "kursi"
+      ],
+      [
+        "der Schrank",
+        "die Schränke",
+        "cupboard",
+        "अलमारी",
+        "almaari"
+      ],
+      [
+        "das Regal",
+        "die Regale",
+        "shelf unit",
+        "शेल्फ़",
+        "shelf"
+      ],
+      [
+        "das Fenster",
+        "die Fenster",
+        "window",
+        "खिड़की",
+        "khidki"
+      ],
+      [
+        "die Tür",
+        "die Türen",
+        "door",
+        "दरवाज़ा",
+        "darwaaza"
+      ],
+      [
+        "der Schreibtisch",
+        "die Schreibtische",
+        "desk",
+        "पढ़ने या काम करने की मेज़",
+        "padhne ya kaam karne ki mez"
+      ]
+    ],
+    "model": [
+      [
+        "Mein Schreibtisch steht am Fenster.",
+        "My desk is by the window."
+      ],
+      [
+        "In der Küche stehen vier Stühle.",
+        "There are four chairs in the kitchen."
+      ],
+      [
+        "Das Schlafzimmer ist klein, aber hell.",
+        "The bedroom is small but bright."
+      ],
+      [
+        "Die Tür ist offen.",
+        "The door is open."
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: ein Bett, zwei ___.",
+        "Betten",
+        "The plural uses -en."
+      ],
+      [
+        "Say “The door is open.”",
+        "Die Tür ist offen.",
+        "Tür is feminine; offen describes its state."
+      ],
+      [
+        "Which item is intended for writing or desk work?",
+        "der Schreibtisch",
+        "Tisch is the broader word for a table."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-city-places-vocabulary",
+    "title": "German City and Places Vocabulary in Hindi",
+    "focus": "recognise useful city destinations and describe a route",
+    "note": "Learn destinations with a task: buying medicine, borrowing a book, catching a train or finding a green space. This makes Apotheke and Bibliothek easier to distinguish than a list of isolated labels. German Bahnhof names a railway station, while Haltestelle is useful for a stop. A city description can combine place vocabulary with a simple location phrase. These examples are fictional and provide language practice, not information about the opening hours or services of any real office.",
+    "words": [
+      [
+        "der Bahnhof",
+        "die Bahnhöfe",
+        "railway station",
+        "रेलवे स्टेशन",
+        "railway station"
+      ],
+      [
+        "die Haltestelle",
+        "die Haltestellen",
+        "stop",
+        "ठहराव",
+        "thahraav"
+      ],
+      [
+        "die Apotheke",
+        "die Apotheken",
+        "pharmacy",
+        "दवा की दुकान",
+        "dawa ki dukaan"
+      ],
+      [
+        "die Bibliothek",
+        "die Bibliotheken",
+        "library",
+        "पुस्तकालय",
+        "pustakaalay"
+      ],
+      [
+        "der Park",
+        "die Parks",
+        "park",
+        "पार्क",
+        "park"
+      ],
+      [
+        "der Supermarkt",
+        "die Supermärkte",
+        "supermarket",
+        "सुपरमार्केट",
+        "supermarket"
+      ],
+      [
+        "das Rathaus",
+        "die Rathäuser",
+        "town hall",
+        "नगर भवन",
+        "nagar bhavan"
+      ],
+      [
+        "das Krankenhaus",
+        "die Krankenhäuser",
+        "hospital",
+        "अस्पताल",
+        "aspataal"
+      ],
+      [
+        "die Schule",
+        "die Schulen",
+        "school",
+        "विद्यालय",
+        "vidyaalay"
+      ],
+      [
+        "die Bank",
+        "die Banken",
+        "bank; financial institution",
+        "बैंक",
+        "bank"
+      ],
+      [
+        "die Straße",
+        "die Straßen",
+        "street",
+        "सड़क",
+        "sadak"
+      ],
+      [
+        "der Platz",
+        "die Plätze",
+        "square; public space here",
+        "चौक",
+        "chowk"
+      ]
+    ],
+    "model": [
+      [
+        "Die Bibliothek liegt neben dem Park.",
+        "The library is beside the park."
+      ],
+      [
+        "Wie komme ich zum Bahnhof?",
+        "How do I get to the railway station?"
+      ],
+      [
+        "Der Supermarkt ist in dieser Straße.",
+        "The supermarket is in this street."
+      ],
+      [
+        "Wir treffen uns vor dem Rathaus.",
+        "We will meet in front of the town hall."
+      ]
+    ],
+    "exercise": [
+      [
+        "Which place would you name for borrowing books?",
+        "die Bibliothek",
+        "The word means library, not bookshop."
+      ],
+      [
+        "Complete: ein Bahnhof, zwei ___.",
+        "Bahnhöfe",
+        "The plural includes an umlaut."
+      ],
+      [
+        "Say “We will meet in front of the town hall.”",
+        "Wir treffen uns vor dem Rathaus.",
+        "The model describes a meeting location."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-transport-vocabulary",
+    "title": "German Transport Vocabulary with Hindi Meanings",
+    "focus": "talk about a journey and distinguish a vehicle from its ticket",
+    "note": "Organise the vocabulary around a journey: vehicle, route, boarding point, ticket and arrival. This avoids confusing Zug with Bahnhof or Fahrkarte with the vehicle itself. A stop and a platform can both be part of a trip, but they identify different things. Learn departure and arrival as a pair so you can identify which time a notice describes. The models do not provide transport advice or a real timetable; change the fictional details when rehearsing a new situation.",
+    "words": [
+      [
+        "der Zug",
+        "die Züge",
+        "train",
+        "रेलगाड़ी",
+        "relgaadi"
+      ],
+      [
+        "der Bus",
+        "die Busse",
+        "bus",
+        "बस",
+        "bas"
+      ],
+      [
+        "die Straßenbahn",
+        "die Straßenbahnen",
+        "tram",
+        "ट्राम",
+        "tram"
+      ],
+      [
+        "die U-Bahn",
+        "die U-Bahnen",
+        "underground railway",
+        "मेट्रो रेल",
+        "metro rail"
+      ],
+      [
+        "das Fahrrad",
+        "die Fahrräder",
+        "bicycle",
+        "साइकिल",
+        "cycle"
+      ],
+      [
+        "das Auto",
+        "die Autos",
+        "car",
+        "कार",
+        "car"
+      ],
+      [
+        "die Fahrkarte",
+        "die Fahrkarten",
+        "ticket",
+        "यात्रा टिकट",
+        "yatra ticket"
+      ],
+      [
+        "der Bahnsteig",
+        "die Bahnsteige",
+        "platform",
+        "प्लेटफ़ॉर्म",
+        "platform"
+      ],
+      [
+        "das Gleis",
+        "die Gleise",
+        "track",
+        "रेल की पटरी",
+        "rel ki patri"
+      ],
+      [
+        "die Abfahrt",
+        "die Abfahrten",
+        "departure",
+        "प्रस्थान",
+        "prasthaan"
+      ],
+      [
+        "die Ankunft",
+        "die Ankünfte",
+        "arrival",
+        "आगमन",
+        "aagaman"
+      ],
+      [
+        "die Verbindung",
+        "die Verbindungen",
+        "connection",
+        "यात्रा का संपर्क मार्ग",
+        "yatra ka sampark maarg"
+      ]
+    ],
+    "model": [
+      [
+        "Ich fahre mit dem Bus zur Arbeit.",
+        "I travel to work by bus."
+      ],
+      [
+        "Der Zug fährt von Gleis drei ab.",
+        "The train departs from track three."
+      ],
+      [
+        "Wo kann ich eine Fahrkarte kaufen?",
+        "Where can I buy a ticket?"
+      ],
+      [
+        "Die Ankunft ist um acht Uhr.",
+        "Arrival is at eight o’clock."
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: ein Bus, zwei ___.",
+        "Busse",
+        "The plural doubles the s before -e."
+      ],
+      [
+        "Which word refers to departure?",
+        "die Abfahrt",
+        "Ankunft refers to arrival instead."
+      ],
+      [
+        "Say “I travel by train.”",
+        "Ich fahre mit dem Zug.",
+        "Mit is followed by dem Zug in this expression."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-weather-vocabulary",
+    "title": "German Weather Vocabulary with Hindi Meanings",
+    "focus": "describe weather without translating every Hindi expression literally",
+    "note": "Weather reports combine nouns with different sentence patterns. Regen is a noun, while regnen is a verb; learning one does not automatically show you how to use the other. Some weather nouns are normally singular in a simple description, and this table marks those uses. Temperature words describe how conditions feel, while Jahreszeit names a season rather than the weather on one day. Use an actual observation as a prompt, but do not treat a practice sentence as a forecast.",
+    "words": [
+      [
+        "das Wetter",
+        "usually singular",
+        "weather",
+        "मौसम",
+        "mausam"
+      ],
+      [
+        "der Regen",
+        "usually singular here",
+        "rain",
+        "बारिश",
+        "baarish"
+      ],
+      [
+        "der Schnee",
+        "usually singular here",
+        "snow",
+        "बर्फ़",
+        "barf"
+      ],
+      [
+        "der Wind",
+        "die Winde",
+        "wind",
+        "हवा",
+        "hawa"
+      ],
+      [
+        "die Sonne",
+        "usually singular here",
+        "sun",
+        "सूरज",
+        "sooraj"
+      ],
+      [
+        "die Wolke",
+        "die Wolken",
+        "cloud",
+        "बादल",
+        "baadal"
+      ],
+      [
+        "das Gewitter",
+        "die Gewitter",
+        "thunderstorm",
+        "गरज के साथ तूफ़ान",
+        "garaj ke saath toofaan"
+      ],
+      [
+        "der Nebel",
+        "usually singular here",
+        "fog",
+        "कोहरा",
+        "kohra"
+      ],
+      [
+        "die Temperatur",
+        "die Temperaturen",
+        "temperature",
+        "तापमान",
+        "taapmaan"
+      ],
+      [
+        "die Hitze",
+        "usually singular",
+        "heat",
+        "गर्मी",
+        "garmi"
+      ],
+      [
+        "die Kälte",
+        "usually singular",
+        "coldness",
+        "ठंड",
+        "thand"
+      ],
+      [
+        "die Jahreszeit",
+        "die Jahreszeiten",
+        "season",
+        "ऋतु",
+        "ritu"
+      ]
+    ],
+    "model": [
+      [
+        "Heute ist es kalt und windig.",
+        "Today it is cold and windy."
+      ],
+      [
+        "Am Nachmittag regnet es.",
+        "It rains in the afternoon."
+      ],
+      [
+        "Die Sonne scheint, aber es ist nicht warm.",
+        "The sun is shining, but it is not warm."
+      ],
+      [
+        "Im Winter liegt hier oft Schnee.",
+        "In winter there is often snow on the ground here."
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: Heute ___ es kalt.",
+        "ist",
+        "Use ist with the adjective kalt."
+      ],
+      [
+        "Say “It is raining.”",
+        "Es regnet.",
+        "Regnen supplies the action; no extra ist is needed."
+      ],
+      [
+        "Which word names a cloud?",
+        "die Wolke",
+        "Wind names moving air, not a cloud."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-body-parts-vocabulary",
+    "title": "German Body Parts Vocabulary in Hindi",
+    "focus": "name body parts and practise simple descriptions",
+    "note": "Use a drawing or a fictional character to practise this vocabulary. Point to one item, retrieve its article and then say its plural. Arm and Hand refer to different body parts, just as Bein and Fuß do. A simple language exercise can describe a sensation without diagnosing its cause. This page teaches words and example sentences only; its examples do not provide medical instructions or tell you how to respond to a real symptom.",
+    "words": [
+      [
+        "der Kopf",
+        "die Köpfe",
+        "head",
+        "सिर",
+        "sir"
+      ],
+      [
+        "das Auge",
+        "die Augen",
+        "eye",
+        "आँख",
+        "aankh"
+      ],
+      [
+        "das Ohr",
+        "die Ohren",
+        "ear",
+        "कान",
+        "kaan"
+      ],
+      [
+        "die Nase",
+        "die Nasen",
+        "nose",
+        "नाक",
+        "naak"
+      ],
+      [
+        "der Mund",
+        "die Münder",
+        "mouth",
+        "मुँह",
+        "munh"
+      ],
+      [
+        "der Zahn",
+        "die Zähne",
+        "tooth",
+        "दाँत",
+        "daant"
+      ],
+      [
+        "der Hals",
+        "die Hälse",
+        "neck or throat in context",
+        "गर्दन या गला",
+        "gardan ya gala"
+      ],
+      [
+        "der Arm",
+        "die Arme",
+        "arm",
+        "बाँह",
+        "baanh"
+      ],
+      [
+        "die Hand",
+        "die Hände",
+        "hand",
+        "हाथ",
+        "haath"
+      ],
+      [
+        "der Rücken",
+        "die Rücken",
+        "back",
+        "पीठ",
+        "peeth"
+      ],
+      [
+        "das Bein",
+        "die Beine",
+        "leg",
+        "टाँग",
+        "taang"
+      ],
+      [
+        "der Fuß",
+        "die Füße",
+        "foot",
+        "पैर",
+        "pair"
+      ]
+    ],
+    "model": [
+      [
+        "Meine Hände sind kalt.",
+        "My hands are cold."
+      ],
+      [
+        "Der Mann hat blaue Augen.",
+        "The man has blue eyes."
+      ],
+      [
+        "Mein rechter Fuß tut weh.",
+        "My right foot hurts."
+      ],
+      [
+        "Auf dem Bild hebt sie den linken Arm.",
+        "In the picture she raises her left arm."
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: ein Zahn, zwei ___.",
+        "Zähne",
+        "The plural adds an umlaut and -e."
+      ],
+      [
+        "Say “My hands are cold.”",
+        "Meine Hände sind kalt.",
+        "The plural subject takes sind."
+      ],
+      [
+        "Which word refers to the arm rather than the hand?",
+        "der Arm",
+        "Hand names the hand itself."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-workplace-vocabulary",
+    "title": "German Workplace Vocabulary with Hindi Meanings",
+    "focus": "describe a working day and ordinary office arrangements",
+    "note": "An office word can name a person, a place, a document or an activity. Sort the entries into those categories before making sentences. Chef here means a male boss, not a cook; the English-looking spelling can be misleading. Kollege is a masculine noun with forms that change in some sentence positions, so learn it in a model rather than relying only on the dictionary entry. These are communication examples, not statements about employment rights, contracts or job eligibility.",
+    "words": [
+      [
+        "das Büro",
+        "die Büros",
+        "office",
+        "दफ़्तर",
+        "daftar"
+      ],
+      [
+        "der Kollege",
+        "die Kollegen",
+        "male colleague",
+        "पुरुष सहकर्मी",
+        "purush sahkarmi"
+      ],
+      [
+        "die Kollegin",
+        "die Kolleginnen",
+        "female colleague",
+        "महिला सहकर्मी",
+        "mahila sahkarmi"
+      ],
+      [
+        "der Chef",
+        "die Chefs",
+        "male boss",
+        "पुरुष अधिकारी",
+        "purush adhikaari"
+      ],
+      [
+        "die Chefin",
+        "die Chefinnen",
+        "female boss",
+        "महिला अधिकारी",
+        "mahila adhikaari"
+      ],
+      [
+        "die Besprechung",
+        "die Besprechungen",
+        "meeting",
+        "बैठक",
+        "baithak"
+      ],
+      [
+        "die Aufgabe",
+        "die Aufgaben",
+        "task",
+        "कार्य",
+        "kaarya"
+      ],
+      [
+        "die Pause",
+        "die Pausen",
+        "break",
+        "विराम",
+        "viraam"
+      ],
+      [
+        "der Bericht",
+        "die Berichte",
+        "report",
+        "रिपोर्ट",
+        "report"
+      ],
+      [
+        "der Bildschirm",
+        "die Bildschirme",
+        "screen",
+        "स्क्रीन",
+        "screen"
+      ],
+      [
+        "die Datei",
+        "die Dateien",
+        "file",
+        "फ़ाइल",
+        "file"
+      ],
+      [
+        "die Arbeitszeit",
+        "die Arbeitszeiten",
+        "working time",
+        "काम का समय",
+        "kaam ka samay"
+      ]
+    ],
+    "model": [
+      [
+        "Die Besprechung beginnt um neun Uhr.",
+        "The meeting starts at nine."
+      ],
+      [
+        "Ich schicke meiner Kollegin die Datei.",
+        "I send my colleague the file."
+      ],
+      [
+        "Nach der Pause schreibe ich den Bericht.",
+        "After the break I write the report."
+      ],
+      [
+        "Welche Aufgabe hat heute Priorität?",
+        "Which task has priority today?"
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: eine Datei, zwei ___.",
+        "Dateien",
+        "The plural has an -en ending."
+      ],
+      [
+        "Say “The meeting starts at nine.”",
+        "Die Besprechung beginnt um neun Uhr.",
+        "The singular meeting takes beginnt."
+      ],
+      [
+        "Does Chef in this table mean cook?",
+        "No: it means a male boss.",
+        "The similar English spelling can suggest the wrong meaning."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-university-vocabulary",
+    "title": "German University Vocabulary with Hindi Meanings",
+    "focus": "discuss classes and learning documents without guessing admission rules",
+    "note": "Keep the course, the teaching event and its document separate. A Vorlesung is a lecture, whereas a Studiengang is a degree programme. Bewerbung describes an application and does not mean that admission has already been granted. Use the vocabulary to understand what a message is discussing before deciding what action it requires. These original practice sentences do not announce university requirements, deadlines, tuition fees or a recognition decision; those details belong to the relevant institution.",
+    "words": [
+      [
+        "die Universität",
+        "die Universitäten",
+        "university",
+        "विश्वविद्यालय",
+        "vishvavidyaalay"
+      ],
+      [
+        "die Hochschule",
+        "die Hochschulen",
+        "higher education institution",
+        "उच्च शिक्षण संस्थान",
+        "uchch shikshan sansthaan"
+      ],
+      [
+        "der Studiengang",
+        "die Studiengänge",
+        "degree programme",
+        "डिग्री पाठ्यक्रम",
+        "degree paathyakram"
+      ],
+      [
+        "die Vorlesung",
+        "die Vorlesungen",
+        "lecture",
+        "व्याख्यान",
+        "vyaakhyaan"
+      ],
+      [
+        "das Seminar",
+        "die Seminare",
+        "seminar",
+        "सेमिनार",
+        "seminar"
+      ],
+      [
+        "die Prüfung",
+        "die Prüfungen",
+        "examination",
+        "परीक्षा",
+        "pariksha"
+      ],
+      [
+        "die Bewerbung",
+        "die Bewerbungen",
+        "application",
+        "आवेदन",
+        "aavedan"
+      ],
+      [
+        "die Zulassung",
+        "die Zulassungen",
+        "admission or approval here",
+        "प्रवेश की स्वीकृति",
+        "pravesh ki sveekriti"
+      ],
+      [
+        "das Semester",
+        "die Semester",
+        "semester",
+        "सेमेस्टर",
+        "semester"
+      ],
+      [
+        "die Bibliothek",
+        "die Bibliotheken",
+        "library",
+        "पुस्तकालय",
+        "pustakaalay"
+      ],
+      [
+        "die Hausarbeit",
+        "die Hausarbeiten",
+        "term paper in this context",
+        "शैक्षणिक लेख",
+        "shaikshanik lekh"
+      ],
+      [
+        "der Stundenplan",
+        "die Stundenpläne",
+        "timetable",
+        "समय-सारणी",
+        "samay-saarani"
+      ]
+    ],
+    "model": [
+      [
+        "Die Vorlesung findet am Dienstag statt.",
+        "The lecture takes place on Tuesday."
+      ],
+      [
+        "Ich schreibe eine Hausarbeit über Mehrsprachigkeit.",
+        "I am writing a term paper about multilingualism."
+      ],
+      [
+        "Mein Stundenplan ist noch nicht fertig.",
+        "My timetable is not ready yet."
+      ],
+      [
+        "Wo finde ich Informationen zu diesem Studiengang?",
+        "Where can I find information about this degree programme?"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which word means lecture?",
+        "die Vorlesung",
+        "Studiengang is the broader degree programme."
+      ],
+      [
+        "Complete: ein Studiengang, zwei ___.",
+        "Studiengänge",
+        "The plural includes an umlaut."
+      ],
+      [
+        "Does Bewerbung itself mean confirmed admission?",
+        "No: it means an application.",
+        "Distinguish the action of applying from a decision."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-shopping-vocabulary",
+    "title": "German Shopping Vocabulary with Hindi Meanings",
+    "focus": "identify an item, price and payment document",
+    "note": "A useful shopping description answers three questions: what item, which quantity and what practical detail? Preis names the price, while Rechnung and Quittung have different roles in a transaction. Rabatt means a discount, not the original price. Practise identifying these distinctions in fictional examples rather than memorising a real shop’s offers. No price, return policy or payment rule is being promised by this vocabulary page.",
+    "words": [
+      [
+        "der Preis",
+        "die Preise",
+        "price",
+        "कीमत",
+        "keemat"
+      ],
+      [
+        "der Rabatt",
+        "die Rabatte",
+        "discount",
+        "छूट",
+        "chhoot"
+      ],
+      [
+        "die Kasse",
+        "die Kassen",
+        "checkout",
+        "भुगतान काउंटर",
+        "bhugtaan counter"
+      ],
+      [
+        "die Rechnung",
+        "die Rechnungen",
+        "bill or invoice",
+        "बिल",
+        "bil"
+      ],
+      [
+        "die Quittung",
+        "die Quittungen",
+        "receipt",
+        "रसीद",
+        "raseed"
+      ],
+      [
+        "die Tasche",
+        "die Taschen",
+        "bag",
+        "थैला या बैग",
+        "thaila ya bag"
+      ],
+      [
+        "der Einkaufswagen",
+        "die Einkaufswagen",
+        "shopping trolley",
+        "खरीदारी की ट्रॉली",
+        "khareedaari ki trolley"
+      ],
+      [
+        "das Geschäft",
+        "die Geschäfte",
+        "shop",
+        "दुकान",
+        "dukaan"
+      ],
+      [
+        "die Öffnungszeit",
+        "die Öffnungszeiten",
+        "opening time",
+        "खुलने का समय",
+        "khulne ka samay"
+      ],
+      [
+        "die Ware",
+        "die Waren",
+        "goods",
+        "सामान",
+        "saamaan"
+      ],
+      [
+        "das Bargeld",
+        "usually singular",
+        "cash",
+        "नकद पैसा",
+        "nakad paisa"
+      ],
+      [
+        "die Karte",
+        "die Karten",
+        "card",
+        "कार्ड",
+        "card"
+      ]
+    ],
+    "model": [
+      [
+        "Wie viel kostet diese Tasche?",
+        "How much does this bag cost?"
+      ],
+      [
+        "Kann ich mit Karte bezahlen?",
+        "Can I pay by card?"
+      ],
+      [
+        "Ich brauche bitte eine Quittung.",
+        "I need a receipt, please."
+      ],
+      [
+        "Die Kasse ist dort links.",
+        "The checkout is over there on the left."
+      ]
+    ],
+    "exercise": [
+      [
+        "Which word names cash?",
+        "das Bargeld",
+        "Karte names a card instead."
+      ],
+      [
+        "Say “How much does this bag cost?”",
+        "Wie viel kostet diese Tasche?",
+        "The singular Tasche takes kostet."
+      ],
+      [
+        "Complete: eine Rechnung, zwei ___.",
+        "Rechnungen",
+        "The plural adds -en."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-hotel-travel-vocabulary",
+    "title": "German Hotel and Travel Vocabulary in Hindi",
+    "focus": "understand accommodation words and describe a booking question",
+    "note": "A reservation, a room and a stay are related but not interchangeable. Reservierung refers to the booking, Zimmer to the room and Aufenthalt to the stay. Anreise and Abreise help you distinguish arrival and departure dates in a message. The table describes vocabulary rather than the terms of a real booking. Check a hotel’s actual confirmation for its own arrangements, and use fictional dates when practising with a partner.",
+    "words": [
+      [
+        "das Hotel",
+        "die Hotels",
+        "hotel",
+        "होटल",
+        "hotel"
+      ],
+      [
+        "die Reservierung",
+        "die Reservierungen",
+        "reservation",
+        "आरक्षण",
+        "aarakshan"
+      ],
+      [
+        "das Einzelzimmer",
+        "die Einzelzimmer",
+        "single room",
+        "एक व्यक्ति का कमरा",
+        "ek vyakti ka kamra"
+      ],
+      [
+        "das Doppelzimmer",
+        "die Doppelzimmer",
+        "double room",
+        "दो व्यक्तियों का कमरा",
+        "do vyaktiyon ka kamra"
+      ],
+      [
+        "die Rezeption",
+        "die Rezeptionen",
+        "reception desk",
+        "स्वागत कक्ष",
+        "svaagat kaksh"
+      ],
+      [
+        "der Schlüssel",
+        "die Schlüssel",
+        "key",
+        "चाबी",
+        "chaabi"
+      ],
+      [
+        "der Aufzug",
+        "die Aufzüge",
+        "lift",
+        "लिफ़्ट",
+        "lift"
+      ],
+      [
+        "das Gepäck",
+        "usually singular",
+        "luggage",
+        "यात्रा का सामान",
+        "yatra ka saamaan"
+      ],
+      [
+        "die Anreise",
+        "die Anreisen",
+        "arrival journey",
+        "आने की यात्रा",
+        "aane ki yatra"
+      ],
+      [
+        "die Abreise",
+        "die Abreisen",
+        "departure journey",
+        "वापसी या प्रस्थान यात्रा",
+        "vaapasi ya prasthaan yatra"
+      ],
+      [
+        "der Aufenthalt",
+        "die Aufenthalte",
+        "stay",
+        "ठहराव",
+        "thahraav"
+      ],
+      [
+        "die Übernachtung",
+        "die Übernachtungen",
+        "overnight stay",
+        "रात का ठहराव",
+        "raat ka thahraav"
+      ]
+    ],
+    "model": [
+      [
+        "Ich habe ein Einzelzimmer reserviert.",
+        "I have reserved a single room."
+      ],
+      [
+        "Wo ist der Aufzug?",
+        "Where is the lift?"
+      ],
+      [
+        "Wir reisen am Freitag an.",
+        "We arrive on Friday."
+      ],
+      [
+        "Kann ich mein Gepäck hier lassen?",
+        "Can I leave my luggage here?"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which item is a reservation?",
+        "die Reservierung",
+        "It names the booking rather than the room."
+      ],
+      [
+        "Complete: ein Aufzug, zwei ___.",
+        "Aufzüge",
+        "The plural adds an umlaut and -e."
+      ],
+      [
+        "Say “Where is the lift?”",
+        "Wo ist der Aufzug?",
+        "Use wo for the location question."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-technology-vocabulary",
+    "title": "German Technology Vocabulary with Hindi Meanings",
+    "focus": "describe basic computer actions and a simple technical problem",
+    "note": "German technology vocabulary includes borrowed words alongside ordinary German nouns. Do not assume a familiar English-looking word has the same article you would guess from its meaning. A Datei is a file and an Ordner is a folder; a screen is not the same thing as the device holding it. Describe an observed problem precisely, such as a file that will not open, instead of guessing the technical cause. This is language practice, not an instruction to change security settings or share account credentials.",
+    "words": [
+      [
+        "der Computer",
+        "die Computer",
+        "computer",
+        "कंप्यूटर",
+        "computer"
+      ],
+      [
+        "der Bildschirm",
+        "die Bildschirme",
+        "screen",
+        "स्क्रीन",
+        "screen"
+      ],
+      [
+        "die Tastatur",
+        "die Tastaturen",
+        "keyboard",
+        "कीबोर्ड",
+        "keyboard"
+      ],
+      [
+        "die Maus",
+        "die Mäuse",
+        "mouse; device here",
+        "माउस",
+        "mouse"
+      ],
+      [
+        "die Datei",
+        "die Dateien",
+        "file",
+        "फ़ाइल",
+        "file"
+      ],
+      [
+        "der Ordner",
+        "die Ordner",
+        "folder",
+        "फ़ोल्डर",
+        "folder"
+      ],
+      [
+        "das Passwort",
+        "die Passwörter",
+        "password",
+        "पासवर्ड",
+        "password"
+      ],
+      [
+        "die Nachricht",
+        "die Nachrichten",
+        "message",
+        "संदेश",
+        "sandesh"
+      ],
+      [
+        "der Drucker",
+        "die Drucker",
+        "printer",
+        "प्रिंटर",
+        "printer"
+      ],
+      [
+        "das Netzwerk",
+        "die Netzwerke",
+        "network",
+        "नेटवर्क",
+        "network"
+      ],
+      [
+        "die Verbindung",
+        "die Verbindungen",
+        "connection",
+        "कनेक्शन",
+        "connection"
+      ],
+      [
+        "die Einstellung",
+        "die Einstellungen",
+        "setting",
+        "सेटिंग",
+        "setting"
+      ]
+    ],
+    "model": [
+      [
+        "Die Datei lässt sich nicht öffnen.",
+        "The file cannot be opened."
+      ],
+      [
+        "Ich speichere den Text in einem Ordner.",
+        "I save the text in a folder."
+      ],
+      [
+        "Der Drucker ist nicht mit dem Netzwerk verbunden.",
+        "The printer is not connected to the network."
+      ],
+      [
+        "Bitte senden Sie mir die Nachricht noch einmal.",
+        "Please send me the message again."
+      ]
+    ],
+    "exercise": [
+      [
+        "Which word is a folder rather than a file?",
+        "der Ordner",
+        "Datei names the file itself."
+      ],
+      [
+        "Complete: ein Passwort, zwei ___.",
+        "Passwörter",
+        "The plural changes the vowel and ending."
+      ],
+      [
+        "Say “The printer is not working.”",
+        "Der Drucker funktioniert nicht.",
+        "Describe the observed problem without inventing a cause."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-environment-vocabulary",
+    "title": "German Environment Vocabulary in Hindi",
+    "focus": "discuss everyday environmental choices with concrete examples",
+    "note": "Environmental topics become easier when you name one action and its consequence instead of relying on an abstract slogan. Müll describes waste, while Verpackung names packaging. Umwelt and Natur overlap in ordinary discussion but are not automatic replacements in every sentence. Several entries here are usually used in the singular for the selected meaning. The examples express fictional choices and opinions; they do not provide measured environmental effects, scientific statistics or claims about a particular product.",
+    "words": [
+      [
+        "die Umwelt",
+        "usually singular",
+        "environment",
+        "पर्यावरण",
+        "paryaavaran"
+      ],
+      [
+        "die Natur",
+        "usually singular here",
+        "nature",
+        "प्रकृति",
+        "prakriti"
+      ],
+      [
+        "der Müll",
+        "usually singular",
+        "waste",
+        "कचरा",
+        "kachra"
+      ],
+      [
+        "die Verpackung",
+        "die Verpackungen",
+        "packaging",
+        "पैकेजिंग",
+        "packaging"
+      ],
+      [
+        "die Energie",
+        "die Energien",
+        "energy",
+        "ऊर्जा",
+        "oorja"
+      ],
+      [
+        "der Strom",
+        "usually singular here",
+        "electricity",
+        "बिजली",
+        "bijli"
+      ],
+      [
+        "das Wasser",
+        "usually singular here",
+        "water",
+        "पानी",
+        "paani"
+      ],
+      [
+        "die Luft",
+        "usually singular here",
+        "air",
+        "हवा",
+        "hawa"
+      ],
+      [
+        "der Wald",
+        "die Wälder",
+        "forest",
+        "जंगल",
+        "jangal"
+      ],
+      [
+        "der Baum",
+        "die Bäume",
+        "tree",
+        "पेड़",
+        "ped"
+      ],
+      [
+        "der Verkehr",
+        "usually singular here",
+        "traffic",
+        "यातायात",
+        "yaataayaat"
+      ],
+      [
+        "der Verbrauch",
+        "usually singular here",
+        "consumption",
+        "खपत",
+        "khapat"
+      ]
+    ],
+    "model": [
+      [
+        "Ich nehme eine eigene Tasche zum Einkaufen mit.",
+        "I take my own bag when shopping."
+      ],
+      [
+        "In unserer Straße gibt es viel Verkehr.",
+        "There is a lot of traffic in our street."
+      ],
+      [
+        "Wir möchten weniger Verpackung verwenden.",
+        "We would like to use less packaging."
+      ],
+      [
+        "Der Wald liegt außerhalb der Stadt.",
+        "The forest is outside the city."
+      ]
+    ],
+    "exercise": [
+      [
+        "Which word means packaging?",
+        "die Verpackung",
+        "Müll refers to waste more generally."
+      ],
+      [
+        "Complete: ein Baum, zwei ___.",
+        "Bäume",
+        "The plural uses an umlaut and -e."
+      ],
+      [
+        "Say “There is a lot of traffic here.”",
+        "Hier gibt es viel Verkehr.",
+        "Verkehr is used in the singular in this statement."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-feelings-vocabulary",
+    "title": "German Feelings Vocabulary with Hindi Meanings",
+    "focus": "describe an emotional state and add a reason",
+    "note": "Feelings vocabulary works well in pairs: a state and a situation that helps explain it. Do not assume two English translations are interchangeable. Nervös can describe nervousness before an event, while müde describes tiredness. These entries are adjectives, so the second column shows a useful sentence frame instead of noun plurals. After sein, the adjective stays in its basic form in the simple models below. This is a language exercise and makes no mental-health diagnosis.",
+    "words": [
+      [
+        "glücklich",
+        "Ich bin glücklich.",
+        "happy",
+        "खुश",
+        "khush"
+      ],
+      [
+        "traurig",
+        "Ich bin traurig.",
+        "sad",
+        "उदास",
+        "udaas"
+      ],
+      [
+        "müde",
+        "Ich bin müde.",
+        "tired",
+        "थका हुआ",
+        "thaka hua"
+      ],
+      [
+        "nervös",
+        "Ich bin nervös.",
+        "nervous",
+        "घबराया हुआ",
+        "ghabraaya hua"
+      ],
+      [
+        "ruhig",
+        "Ich bin ruhig.",
+        "calm",
+        "शांत",
+        "shaant"
+      ],
+      [
+        "zufrieden",
+        "Ich bin zufrieden.",
+        "satisfied",
+        "संतुष्ट",
+        "santusht"
+      ],
+      [
+        "enttäuscht",
+        "Ich bin enttäuscht.",
+        "disappointed",
+        "निराश",
+        "niraash"
+      ],
+      [
+        "überrascht",
+        "Ich bin überrascht.",
+        "surprised",
+        "हैरान",
+        "hairaan"
+      ],
+      [
+        "wütend",
+        "Ich bin wütend.",
+        "angry",
+        "गुस्से में",
+        "gusse mein"
+      ],
+      [
+        "unsicher",
+        "Ich bin unsicher.",
+        "uncertain",
+        "अनिश्चित",
+        "anishchit"
+      ],
+      [
+        "neugierig",
+        "Ich bin neugierig.",
+        "curious",
+        "जिज्ञासु",
+        "jigyaasu"
+      ],
+      [
+        "stolz",
+        "Ich bin stolz.",
+        "proud",
+        "गर्वित",
+        "garvit"
+      ]
+    ],
+    "model": [
+      [
+        "Ich bin nervös, weil ich morgen einen Vortrag halte.",
+        "I am nervous because I am giving a talk tomorrow."
+      ],
+      [
+        "Nach der Reise ist sie müde.",
+        "She is tired after the journey."
+      ],
+      [
+        "Wir sind mit dem Ergebnis zufrieden.",
+        "We are satisfied with the result."
+      ],
+      [
+        "Er ist neugierig und stellt viele Fragen.",
+        "He is curious and asks many questions."
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: Wir ___ zufrieden.",
+        "sind",
+        "The plural wir takes sind."
+      ],
+      [
+        "Which adjective means tired?",
+        "müde",
+        "Nervös describes nervousness, a different state."
+      ],
+      [
+        "Say “She is surprised.”",
+        "Sie ist überrascht.",
+        "The adjective follows ist without an ending here."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-hobbies-vocabulary",
+    "title": "German Hobbies Vocabulary with Hindi Meanings",
+    "focus": "describe a leisure activity and say how often you do it",
+    "note": "An activity can be expressed as a noun or a verb, and the sentence pattern changes accordingly. Musik is something you listen to, while Schwimmen can name swimming as an activity. In this table, activity nouns are capitalised. Practise a statement of preference and a statement about frequency separately: liking swimming does not say how often you swim. Do not translate the English expression “make sport” literally; learn a complete activity phrase from a correct example.",
+    "words": [
+      [
+        "die Musik",
+        "usually singular here",
+        "music",
+        "संगीत",
+        "sangeet"
+      ],
+      [
+        "der Sport",
+        "usually singular here",
+        "sport",
+        "खेलकूद",
+        "khelkood"
+      ],
+      [
+        "das Schwimmen",
+        "activity noun",
+        "swimming",
+        "तैरना",
+        "tairna"
+      ],
+      [
+        "das Lesen",
+        "activity noun",
+        "reading",
+        "पढ़ना",
+        "padhna"
+      ],
+      [
+        "das Kochen",
+        "activity noun",
+        "cooking",
+        "खाना बनाना",
+        "khaana banaana"
+      ],
+      [
+        "das Wandern",
+        "activity noun",
+        "hiking",
+        "पैदल सैर",
+        "paidal sair"
+      ],
+      [
+        "das Tanzen",
+        "activity noun",
+        "dancing",
+        "नृत्य करना",
+        "nritya karna"
+      ],
+      [
+        "das Fotografieren",
+        "activity noun",
+        "photography",
+        "फ़ोटो खींचना",
+        "photo kheenchna"
+      ],
+      [
+        "das Spiel",
+        "die Spiele",
+        "game",
+        "खेल",
+        "khel"
+      ],
+      [
+        "der Verein",
+        "die Vereine",
+        "club or association",
+        "संघ या क्लब",
+        "sangh ya club"
+      ],
+      [
+        "das Konzert",
+        "die Konzerte",
+        "concert",
+        "संगीत कार्यक्रम",
+        "sangeet kaaryakram"
+      ],
+      [
+        "die Freizeit",
+        "usually singular",
+        "free time",
+        "खाली समय",
+        "khaali samay"
+      ]
+    ],
+    "model": [
+      [
+        "In meiner Freizeit lese ich gern.",
+        "I like reading in my free time."
+      ],
+      [
+        "Am Wochenende gehen wir wandern.",
+        "We go hiking at the weekend."
+      ],
+      [
+        "Sie spielt zweimal pro Woche Badminton.",
+        "She plays badminton twice a week."
+      ],
+      [
+        "Kochen macht mir Spaß.",
+        "I enjoy cooking."
+      ]
+    ],
+    "exercise": [
+      [
+        "Complete: In meiner Freizeit ___ ich gern.",
+        "lese",
+        "The subject ich takes lese in this reading example."
+      ],
+      [
+        "Which phrase tells frequency: gern or zweimal pro Woche?",
+        "zweimal pro Woche",
+        "Gern expresses enjoyment rather than frequency."
+      ],
+      [
+        "Say “We go hiking.”",
+        "Wir gehen wandern.",
+        "The activity verb follows gehen here."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-appointment-vocabulary",
+    "title": "German Appointment Vocabulary with Hindi Meanings",
+    "focus": "identify an appointment and communicate a schedule change",
+    "note": "Appointment language needs precise information: the event, the date or time, and what you want to change. Termin and Frist are different: a Termin can be a scheduled appointment, while a Frist is a deadline. Absage means cancellation, not confirmation. Learn the opposites together so that you do not accidentally send the wrong message. The table does not set cancellation conditions for any provider; it helps you understand and write a simple scheduling enquiry.",
+    "words": [
+      [
+        "der Termin",
+        "die Termine",
+        "appointment",
+        "तय मुलाक़ात",
+        "tay mulaqat"
+      ],
+      [
+        "die Bestätigung",
+        "die Bestätigungen",
+        "confirmation",
+        "पुष्टि",
+        "pushti"
+      ],
+      [
+        "die Absage",
+        "die Absagen",
+        "cancellation or refusal",
+        "रद्द करने की सूचना",
+        "radd karne ki soochna"
+      ],
+      [
+        "die Verschiebung",
+        "die Verschiebungen",
+        "rescheduling",
+        "समय में बदलाव",
+        "samay mein badlaav"
+      ],
+      [
+        "die Uhrzeit",
+        "die Uhrzeiten",
+        "time of day",
+        "समय",
+        "samay"
+      ],
+      [
+        "das Datum",
+        "die Daten",
+        "calendar date",
+        "तारीख़",
+        "taareekh"
+      ],
+      [
+        "die Dauer",
+        "usually singular here",
+        "duration",
+        "अवधि",
+        "avadhi"
+      ],
+      [
+        "die Frist",
+        "die Fristen",
+        "deadline",
+        "समय-सीमा",
+        "samay-seema"
+      ],
+      [
+        "die Sprechstunde",
+        "die Sprechstunden",
+        "consultation hour",
+        "परामर्श का समय",
+        "paraamarsh ka samay"
+      ],
+      [
+        "der Kalender",
+        "die Kalender",
+        "calendar",
+        "कैलेंडर",
+        "calendar"
+      ],
+      [
+        "die Erinnerung",
+        "die Erinnerungen",
+        "reminder here",
+        "याद दिलाने का संदेश",
+        "yaad dilaane ka sandesh"
+      ],
+      [
+        "die Wartezeit",
+        "die Wartezeiten",
+        "waiting time",
+        "प्रतीक्षा का समय",
+        "prateeksha ka samay"
+      ]
+    ],
+    "model": [
+      [
+        "Ich möchte einen Termin vereinbaren.",
+        "I would like to arrange an appointment."
+      ],
+      [
+        "Können wir den Termin verschieben?",
+        "Can we reschedule the appointment?"
+      ],
+      [
+        "Vielen Dank für Ihre Bestätigung.",
+        "Thank you for your confirmation."
+      ],
+      [
+        "Wie lange dauert das Gespräch?",
+        "How long does the conversation last?"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which word means a deadline?",
+        "die Frist",
+        "Termin is a scheduled appointment in these examples."
+      ],
+      [
+        "Say “Can we reschedule the appointment?”",
+        "Können wir den Termin verschieben?",
+        "The infinitive verschieben goes at the end here."
+      ],
+      [
+        "Complete: ein Datum, zwei ___.",
+        "Daten",
+        "The plural is not formed with a regular -s."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-post-office-vocabulary",
+    "title": "German Post Office Vocabulary with Hindi Meanings",
+    "focus": "describe sending a letter or parcel and recognise delivery words",
+    "note": "Learn the physical item and its label together. Brief is a letter, Umschlag an envelope and Briefmarke a stamp. Absender and Empfänger identify opposite sides of the same delivery. A Hindi translation can help you grasp the distinction, but copying a real address is a separate accuracy task. These fictional models teach vocabulary only; they do not quote postage prices, delivery times, banking rules or identity-document requirements.",
+    "words": [
+      [
+        "der Brief",
+        "die Briefe",
+        "letter",
+        "पत्र",
+        "patra"
+      ],
+      [
+        "der Umschlag",
+        "die Umschläge",
+        "envelope",
+        "लिफ़ाफ़ा",
+        "lifaafa"
+      ],
+      [
+        "die Briefmarke",
+        "die Briefmarken",
+        "stamp",
+        "डाक टिकट",
+        "daak ticket"
+      ],
+      [
+        "das Paket",
+        "die Pakete",
+        "parcel",
+        "पार्सल",
+        "parcel"
+      ],
+      [
+        "der Absender",
+        "die Absender",
+        "sender",
+        "भेजने वाला",
+        "bhejne waala"
+      ],
+      [
+        "die Empfängerin",
+        "die Empfängerinnen",
+        "female recipient",
+        "प्राप्त करने वाली",
+        "praapt karne waali"
+      ],
+      [
+        "die Adresse",
+        "die Adressen",
+        "address",
+        "पता",
+        "pata"
+      ],
+      [
+        "die Postleitzahl",
+        "die Postleitzahlen",
+        "postcode",
+        "डाक कोड",
+        "daak code"
+      ],
+      [
+        "die Lieferung",
+        "die Lieferungen",
+        "delivery",
+        "वितरण",
+        "vitaran"
+      ],
+      [
+        "die Sendung",
+        "die Sendungen",
+        "consignment or item sent",
+        "भेजी गई वस्तु",
+        "bheji gayi vastu"
+      ],
+      [
+        "der Schalter",
+        "die Schalter",
+        "service counter",
+        "सेवा काउंटर",
+        "seva counter"
+      ],
+      [
+        "die Unterschrift",
+        "die Unterschriften",
+        "signature",
+        "हस्ताक्षर",
+        "hastakshar"
+      ]
+    ],
+    "model": [
+      [
+        "Ich möchte dieses Paket verschicken.",
+        "I would like to send this parcel."
+      ],
+      [
+        "Wo steht die Adresse der Empfängerin?",
+        "Where is the recipient’s address?"
+      ],
+      [
+        "Ich brauche eine Briefmarke.",
+        "I need a stamp."
+      ],
+      [
+        "Bitte schreiben Sie die Postleitzahl dazu.",
+        "Please add the postcode."
+      ]
+    ],
+    "exercise": [
+      [
+        "Which word names the sender?",
+        "der Absender",
+        "The recipient is the person receiving the item."
+      ],
+      [
+        "Complete: ein Umschlag, zwei ___.",
+        "Umschläge",
+        "The plural includes an umlaut."
+      ],
+      [
+        "Say “I need a stamp.”",
+        "Ich brauche eine Briefmarke.",
+        "Briefmarke is feminine; the object uses eine here."
+      ]
+    ]
+  },
+  {
+    "kind": "vocabulary",
+    "slug": "german-classroom-vocabulary",
+    "title": "German Classroom Vocabulary with Hindi Meanings",
+    "focus": "understand learning instructions and ask a focused classroom question",
+    "note": "Classroom language makes study more independent. If you understand the instruction, you can focus on the exercise rather than guess what to do. Aufgabe names the task, Lösung the solution and Beispiel an example. A wrong answer and a question about an instruction are different problems, so describe which one you have. Practise asking for the meaning of one word or the purpose of one task instead of saying only that everything is difficult.",
+    "words": [
+      [
+        "die Aufgabe",
+        "die Aufgaben",
+        "task",
+        "अभ्यास का प्रश्न",
+        "abhyaas ka prashn"
+      ],
+      [
+        "die Lösung",
+        "die Lösungen",
+        "solution",
+        "समाधान",
+        "samaadhaan"
+      ],
+      [
+        "das Beispiel",
+        "die Beispiele",
+        "example",
+        "उदाहरण",
+        "udaaharan"
+      ],
+      [
+        "die Frage",
+        "die Fragen",
+        "question",
+        "सवाल",
+        "sawaal"
+      ],
+      [
+        "die Antwort",
+        "die Antworten",
+        "answer",
+        "जवाब",
+        "javaab"
+      ],
+      [
+        "der Satz",
+        "die Sätze",
+        "sentence",
+        "वाक्य",
+        "vaakya"
+      ],
+      [
+        "das Wort",
+        "die Wörter",
+        "word",
+        "शब्द",
+        "shabd"
+      ],
+      [
+        "die Bedeutung",
+        "die Bedeutungen",
+        "meaning",
+        "अर्थ",
+        "arth"
+      ],
+      [
+        "die Aussprache",
+        "usually singular here",
+        "pronunciation",
+        "उच्चारण",
+        "uchchaaran"
+      ],
+      [
+        "die Übung",
+        "die Übungen",
+        "exercise",
+        "अभ्यास",
+        "abhyaas"
+      ],
+      [
+        "der Fehler",
+        "die Fehler",
+        "mistake",
+        "गलती",
+        "galti"
+      ],
+      [
+        "die Erklärung",
+        "die Erklärungen",
+        "explanation",
+        "व्याख्या",
+        "vyaakhya"
+      ]
+    ],
+    "model": [
+      [
+        "Was bedeutet dieses Wort?",
+        "What does this word mean?"
+      ],
+      [
+        "Können Sie den Satz bitte wiederholen?",
+        "Could you repeat the sentence, please?"
+      ],
+      [
+        "Ich verstehe die Aufgabe nicht.",
+        "I do not understand the task."
+      ],
+      [
+        "Können Sie ein Beispiel geben?",
+        "Can you give an example?"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which word means an answer?",
+        "die Antwort",
+        "Frage is the question rather than its answer."
+      ],
+      [
+        "Complete: ein Wort, zwei ___ in a vocabulary list.",
+        "Wörter",
+        "Wörter is the plural used for individual words here."
+      ],
+      [
+        "Say “I do not understand the task.”",
+        "Ich verstehe die Aufgabe nicht.",
+        "Name the specific difficulty rather than a different activity."
+      ]
+    ]
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-self-introduction",
+    "title": "German Self Introduction with Hindi Meanings",
+    "focus": "introduce yourself and answer a follow-up instead of reciting one fixed speech",
+    "note": "Prepare information in small blocks: name, home, languages, work or study, and interests. Use the blocks that fit the situation. A classroom introduction may be informal, while an unfamiliar adult interaction may use Sie. Do not copy someone else’s occupation or age just because its sentence is easy. The fictional exchange starts politely and keeps each answer tied to the question.",
+    "model": [
+      [
+        "A: Guten Tag. Wie heißen Sie?",
+        "Good day. What is your name?"
+      ],
+      [
+        "B: Ich heiße Anika Rao.",
+        "My name is Anika Rao."
+      ],
+      [
+        "A: Woher kommen Sie?",
+        "Where do you come from?"
+      ],
+      [
+        "B: Ich komme aus Indien und wohne in Pune.",
+        "I come from India and live in Pune."
+      ],
+      [
+        "A: Welche Sprachen sprechen Sie?",
+        "Which languages do you speak?"
+      ],
+      [
+        "B: Ich spreche Hindi und Englisch. Ich lerne Deutsch.",
+        "I speak Hindi and English. I am learning German."
+      ],
+      [
+        "A: Was machen Sie gern in Ihrer Freizeit?",
+        "What do you enjoy doing in your free time?"
+      ],
+      [
+        "B: Ich lese gern und gehe oft spazieren.",
+        "I enjoy reading and often go for a walk."
+      ]
+    ],
+    "phrases": [
+      [
+        "Ich heiße …",
+        "My name is …",
+        "मेरा नाम … है।",
+        "mera naam … hai"
+      ],
+      [
+        "Ich wohne in …",
+        "I live in …",
+        "मैं … में रहता या रहती हूँ।",
+        "main … mein rehta ya rehti hoon"
+      ],
+      [
+        "Ich lerne Deutsch.",
+        "I am learning German.",
+        "मैं जर्मन सीख रहा या रही हूँ।",
+        "main German seekh raha ya rahi hoon"
+      ],
+      [
+        "Und Sie?",
+        "And you? Formal.",
+        "और आप?",
+        "aur aap"
+      ]
+    ],
+    "exercise": [
+      [
+        "Answer the name question with the fictional name Ravi.",
+        "Ich heiße Ravi.",
+        "Give a name rather than restarting every detail."
+      ],
+      [
+        "Ask where someone lives, using Sie.",
+        "Wo wohnen Sie?",
+        "Wo asks about location; woher asks about origin."
+      ],
+      [
+        "Say that you enjoy reading.",
+        "Ich lese gern.",
+        "Gern expresses enjoyment in this pattern."
+      ]
+    ],
+    "transfer": "Ask a partner to change the question order. Begin with hobbies, then languages and finally the name. Give only the requested information on the first attempt. On the next attempt, add one relevant detail. This variation checks flexible retrieval and helps you notice which question you understood rather than merely anticipating the next line."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-restaurant-conversation",
+    "title": "German Restaurant Conversation with Hindi",
+    "focus": "order a simple meal and ask a clear follow-up",
+    "note": "Keep ordering, asking about an ingredient and requesting the bill as separate functions. A polite request does not need to become a long speech. Use Sie with staff in this example and keep that form consistent. If an ingredient matters to you, ask specifically and listen to the actual answer. The fictional menu and exchange below do not describe a real restaurant or guarantee how a dish is prepared.",
+    "model": [
+      [
+        "A: Guten Abend. Haben Sie einen Tisch für zwei Personen?",
+        "Good evening. Do you have a table for two?"
+      ],
+      [
+        "B: Ja, bitte kommen Sie mit.",
+        "Yes, please come with me."
+      ],
+      [
+        "A: Kann ich die Speisekarte haben?",
+        "May I have the menu?"
+      ],
+      [
+        "B: Natürlich. Möchten Sie schon etwas trinken?",
+        "Of course. Would you like something to drink already?"
+      ],
+      [
+        "A: Ein Wasser, bitte. Ist die Suppe vegetarisch?",
+        "A water, please. Is the soup vegetarian?"
+      ],
+      [
+        "B: Ja, sie enthält kein Fleisch.",
+        "Yes, it contains no meat."
+      ],
+      [
+        "A: Dann nehme ich die Suppe und einen Salat.",
+        "Then I will have the soup and a salad."
+      ],
+      [
+        "B: Sehr gern.",
+        "Certainly."
+      ]
+    ],
+    "phrases": [
+      [
+        "Ich hätte gern …",
+        "I would like …",
+        "मुझे … चाहिए।",
+        "mujhe … chahiye"
+      ],
+      [
+        "Was empfehlen Sie?",
+        "What do you recommend?",
+        "आप क्या सुझाते हैं?",
+        "aap kya sujhaate hain"
+      ],
+      [
+        "Ist das vegetarisch?",
+        "Is that vegetarian?",
+        "क्या यह शाकाहारी है?",
+        "kya yah shaakaahaari hai"
+      ],
+      [
+        "Die Rechnung, bitte.",
+        "The bill, please.",
+        "बिल दीजिए।",
+        "bil dijiye"
+      ]
+    ],
+    "exercise": [
+      [
+        "Ask for the menu.",
+        "Kann ich die Speisekarte haben?",
+        "Speisekarte names the menu."
+      ],
+      [
+        "Order a salad with ich hätte gern.",
+        "Ich hätte gern einen Salat.",
+        "Salat is masculine; this object uses einen."
+      ],
+      [
+        "Ask for the bill.",
+        "Die Rechnung, bitte.",
+        "This brief expression fits the transaction."
+      ]
+    ],
+    "transfer": "Replace the order with a different familiar dish and drink. Have your partner make one item unavailable, then choose an alternative. Keep ingredient questions truthful to the fictional scenario and practise confirming what you understood. Do not infer an answer from a menu picture or from the name of a dish."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-asking-directions",
+    "title": "Asking Directions in German with Hindi",
+    "focus": "ask for a destination and confirm the route",
+    "note": "A destination question and a location question are related but different. Wie komme ich …? asks how to get somewhere, while Wo ist …? asks where something is. Listen for direction words and landmarks before trying to retain every word. These are fictional walking directions. They do not provide a route to a real location, and the actual place and accessibility of a route must be checked separately.",
+    "model": [
+      [
+        "A: Entschuldigung, wie komme ich zum Bahnhof?",
+        "Excuse me, how do I get to the station?"
+      ],
+      [
+        "B: Gehen Sie geradeaus bis zur Ampel.",
+        "Go straight ahead as far as the traffic light."
+      ],
+      [
+        "A: Und dann?",
+        "And then?"
+      ],
+      [
+        "B: Biegen Sie dort links ab.",
+        "Turn left there."
+      ],
+      [
+        "A: Ist der Bahnhof weit von hier?",
+        "Is the station far from here?"
+      ],
+      [
+        "B: Nein, er liegt gleich hinter dem Park.",
+        "No, it is just behind the park."
+      ],
+      [
+        "A: Also erst geradeaus und dann links?",
+        "So first straight ahead and then left?"
+      ],
+      [
+        "B: Genau.",
+        "Exactly."
+      ]
+    ],
+    "phrases": [
+      [
+        "Entschuldigung …",
+        "Excuse me …",
+        "माफ़ कीजिए …",
+        "maaf kijiye"
+      ],
+      [
+        "geradeaus",
+        "straight ahead",
+        "सीधे आगे",
+        "seedhe aage"
+      ],
+      [
+        "links / rechts",
+        "left / right",
+        "बाएँ / दाएँ",
+        "baayen / daayen"
+      ],
+      [
+        "Können Sie das wiederholen?",
+        "Can you repeat that?",
+        "क्या आप उसे दोहरा सकते हैं?",
+        "kya aap use dohra sakte hain"
+      ]
+    ],
+    "exercise": [
+      [
+        "Ask how to get to the station.",
+        "Wie komme ich zum Bahnhof?",
+        "Zum is the form used in this destination phrase."
+      ],
+      [
+        "What comes after the traffic light in the model?",
+        "Turn left.",
+        "Read the second route step, not a guessed direction."
+      ],
+      [
+        "Confirm “first straight ahead, then right.”",
+        "Also erst geradeaus und dann rechts?",
+        "Change only the direction needed for the new route."
+      ]
+    ],
+    "transfer": "Draw a tiny fictional map with a park, station and traffic light. Reverse the left turn and give a new route. Your partner should draw or trace what they hear before seeing your map. Compare the result and identify whether the error involved the landmark, the order of steps or the direction word."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-hotel-check-in",
+    "title": "German Hotel Check In Conversation with Hindi",
+    "focus": "give a reservation name and ask about a practical hotel detail",
+    "note": "Identify the booking first, then ask one practical question at a time. Name, room type and length of stay belong to the booking, while breakfast and other arrangements need their own question. Do not treat an example receptionist’s answer as a standard hotel policy. Use fictional names and details for rehearsal; this page is language practice rather than a list of required travel documents.",
+    "model": [
+      [
+        "A: Guten Abend. Ich habe ein Zimmer reserviert.",
+        "Good evening. I have reserved a room."
+      ],
+      [
+        "B: Auf welchen Namen, bitte?",
+        "Under which name, please?"
+      ],
+      [
+        "A: Auf den Namen Mehta.",
+        "Under the name Mehta."
+      ],
+      [
+        "B: Ein Einzelzimmer für zwei Nächte?",
+        "A single room for two nights?"
+      ],
+      [
+        "A: Ja, genau. Ist das Frühstück im Preis enthalten?",
+        "Yes, exactly. Is breakfast included in the price?"
+      ],
+      [
+        "B: Bei dieser Buchung ist es enthalten.",
+        "It is included in this booking."
+      ],
+      [
+        "A: Wo finde ich den Aufzug?",
+        "Where can I find the lift?"
+      ],
+      [
+        "B: Der Aufzug ist rechts neben der Treppe.",
+        "The lift is on the right beside the stairs."
+      ]
+    ],
+    "phrases": [
+      [
+        "Ich habe reserviert.",
+        "I have a reservation.",
+        "मैंने आरक्षण किया है।",
+        "maine aarakshan kiya hai"
+      ],
+      [
+        "für zwei Nächte",
+        "for two nights",
+        "दो रातों के लिए",
+        "do raaton ke liye"
+      ],
+      [
+        "Ist das enthalten?",
+        "Is that included?",
+        "क्या वह शामिल है?",
+        "kya vah shaamil hai"
+      ],
+      [
+        "Wo ist der Aufzug?",
+        "Where is the lift?",
+        "लिफ़्ट कहाँ है?",
+        "lift kahaan hai"
+      ]
+    ],
+    "exercise": [
+      [
+        "Give the reservation name Rao.",
+        "Auf den Namen Rao.",
+        "Use the booking-name phrase."
+      ],
+      [
+        "Ask whether breakfast is included in the price.",
+        "Ist das Frühstück im Preis enthalten?",
+        "This asks a question instead of assuming inclusion."
+      ],
+      [
+        "Where is the lift in the fictional answer?",
+        "Beside the stairs, on the right.",
+        "The answer combines a direction and a landmark."
+      ]
+    ],
+    "transfer": "Change the stay to three nights and the room to a double room. Then invent a different location for the lift. Ask the breakfast question again and let the receptionist give a different answer. This prevents the exercise from becoming a memorised policy claim about accommodation."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-shopping-conversation",
+    "title": "German Shopping Conversation with Hindi",
+    "focus": "ask about an item and respond when the first option does not fit",
+    "note": "A useful shop exchange moves from identifying an item to checking a detail and making a choice. Keep the size and colour questions separate so you can understand each answer. The model uses Sie and does not assume that a particular payment or return option exists everywhere. It is a fictional language scenario, with no actual product offer or shop policy.",
+    "model": [
+      [
+        "A: Guten Tag. Ich suche eine Jacke.",
+        "Hello. I am looking for a jacket."
+      ],
+      [
+        "B: Welche Größe brauchen Sie?",
+        "Which size do you need?"
+      ],
+      [
+        "A: Größe M. Haben Sie diese Jacke auch in Blau?",
+        "Size M. Do you also have this jacket in blue?"
+      ],
+      [
+        "B: Ja, hier ist sie.",
+        "Yes, here it is."
+      ],
+      [
+        "A: Kann ich sie anprobieren?",
+        "May I try it on?"
+      ],
+      [
+        "B: Natürlich. Die Umkleide ist dort hinten.",
+        "Of course. The changing room is at the back there."
+      ],
+      [
+        "A: Sie passt gut. Kann ich mit Karte bezahlen?",
+        "It fits well. Can I pay by card?"
+      ],
+      [
+        "B: Ja, das ist möglich.",
+        "Yes, that is possible."
+      ]
+    ],
+    "phrases": [
+      [
+        "Ich suche …",
+        "I am looking for …",
+        "मैं … ढूँढ़ रहा या रही हूँ।",
+        "main … dhoondh raha ya rahi hoon"
+      ],
+      [
+        "Welche Größe?",
+        "Which size?",
+        "कौन-सा आकार?",
+        "kaun-sa aakaar"
+      ],
+      [
+        "Kann ich das anprobieren?",
+        "May I try that on?",
+        "क्या मैं इसे पहनकर देख सकता या सकती हूँ?",
+        "kya main ise pahankar dekh sakta ya sakti hoon"
+      ],
+      [
+        "Das passt gut.",
+        "That fits well.",
+        "यह ठीक बैठता है।",
+        "yah theek baithta hai"
+      ]
+    ],
+    "exercise": [
+      [
+        "Ask whether the jacket is available in black.",
+        "Haben Sie diese Jacke auch in Schwarz?",
+        "Replace the colour, keeping the question structure."
+      ],
+      [
+        "Say “I am looking for a shirt.”",
+        "Ich suche ein Hemd.",
+        "Hemd is neuter; use ein in this object phrase."
+      ],
+      [
+        "Where is the changing room in the model?",
+        "At the back.",
+        "Dort hinten supplies that location."
+      ]
+    ],
+    "transfer": "Make the first garment too small and ask about another size. Then swap customer and staff roles. Your aim is to respond to a new practical detail, not to repeat an entire transaction regardless of the other person’s answer. Keep a short record of article or pronoun changes you needed."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-telephone-phrases",
+    "title": "German Telephone Phrases with Hindi Meanings",
+    "focus": "identify yourself, ask for a person and request repetition",
+    "note": "On a phone call, the other person cannot see what you are pointing at. Give a name and purpose early, and confirm details such as an appointment time if you did not hear them clearly. Use a brief request for repetition instead of guessing. The example uses a fictional course office; it does not supply a real service contact or promise a response time.",
+    "model": [
+      [
+        "A: Guten Tag, hier spricht Riya Shah.",
+        "Hello, this is Riya Shah speaking."
+      ],
+      [
+        "B: Guten Tag. Wie kann ich Ihnen helfen?",
+        "Hello. How can I help you?"
+      ],
+      [
+        "A: Könnte ich bitte mit Frau Becker sprechen?",
+        "Could I speak to Ms Becker, please?"
+      ],
+      [
+        "B: Sie ist gerade nicht da. Möchten Sie eine Nachricht hinterlassen?",
+        "She is not here at the moment. Would you like to leave a message?"
+      ],
+      [
+        "A: Ja, es geht um meinen Kurstermin.",
+        "Yes, it is about my course appointment."
+      ],
+      [
+        "B: Können Sie Ihren Namen bitte buchstabieren?",
+        "Could you spell your name, please?"
+      ],
+      [
+        "A: Natürlich. Shah: S, H, A, H.",
+        "Of course. Shah: S, H, A, H."
+      ],
+      [
+        "B: Vielen Dank. Ich notiere die Nachricht.",
+        "Thank you. I will write down the message."
+      ]
+    ],
+    "phrases": [
+      [
+        "Hier spricht …",
+        "This is … speaking.",
+        "… बोल रहा या रही हूँ।",
+        "… bol raha ya rahi hoon"
+      ],
+      [
+        "Es geht um …",
+        "It is about …",
+        "बात … के बारे में है।",
+        "baat … ke baare mein hai"
+      ],
+      [
+        "Bitte sprechen Sie langsamer.",
+        "Please speak more slowly.",
+        "कृपया धीरे बोलिए।",
+        "kripaya dheere boliye"
+      ],
+      [
+        "Wie bitte?",
+        "Pardon?",
+        "क्या कहा?",
+        "kya kaha"
+      ]
+    ],
+    "exercise": [
+      [
+        "Ask the speaker to speak more slowly.",
+        "Bitte sprechen Sie langsamer.",
+        "This is a polite formal request."
+      ],
+      [
+        "What is the call about in the model?",
+        "A course appointment.",
+        "The caller identifies the topic after the person is unavailable."
+      ],
+      [
+        "Say “This is Ravi speaking.”",
+        "Hier spricht Ravi.",
+        "Use the telephone introduction, not a literal English word order."
+      ]
+    ],
+    "transfer": "Put two chairs back to back and practise without looking at each other. Spell a fictional surname and have the listener write it down. Change one letter in the next round. Confirm what was heard before continuing, and never use a real password or sensitive account detail as practice material."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-doctor-conversation",
+    "title": "German Doctor Conversation: Language Practice",
+    "focus": "describe a simple fictional symptom and answer a duration question",
+    "note": "This page teaches communication rather than medical assessment. The patient in the fictional exchange names a symptom and answers when it began. A real clinical conversation needs accurate information in your own words; do not adopt the model’s symptom or duration as your own. The examples contain no diagnosis, medication instruction or treatment recommendation. Focus on understanding the question and describing what is actually being asked.",
+    "model": [
+      [
+        "A: Guten Tag. Was fehlt Ihnen?",
+        "Hello. What is the matter?"
+      ],
+      [
+        "B: Ich habe Halsschmerzen.",
+        "I have a sore throat."
+      ],
+      [
+        "A: Seit wann haben Sie die Schmerzen?",
+        "Since when have you had the pain?"
+      ],
+      [
+        "B: Seit gestern Abend.",
+        "Since yesterday evening."
+      ],
+      [
+        "A: Haben Sie noch andere Beschwerden?",
+        "Do you have any other symptoms?"
+      ],
+      [
+        "B: Ich bin müde und habe Kopfschmerzen.",
+        "I am tired and have a headache."
+      ],
+      [
+        "A: Ich stelle Ihnen noch ein paar Fragen.",
+        "I will ask you a few more questions."
+      ],
+      [
+        "B: Können Sie bitte etwas langsamer sprechen?",
+        "Could you speak a little more slowly, please?"
+      ]
+    ],
+    "phrases": [
+      [
+        "Ich habe Schmerzen.",
+        "I am in pain.",
+        "मुझे दर्द है।",
+        "mujhe dard hai"
+      ],
+      [
+        "seit gestern",
+        "since yesterday",
+        "कल से",
+        "kal se"
+      ],
+      [
+        "Ich verstehe die Frage nicht.",
+        "I do not understand the question.",
+        "मुझे सवाल समझ नहीं आया।",
+        "mujhe sawaal samajh nahin aaya"
+      ],
+      [
+        "Bitte etwas langsamer.",
+        "A little more slowly, please.",
+        "कृपया थोड़ा धीरे।",
+        "kripaya thoda dheere"
+      ]
+    ],
+    "exercise": [
+      [
+        "What does seit wann ask about?",
+        "When the situation began.",
+        "It is different from asking where the pain is."
+      ],
+      [
+        "Say “I do not understand the question.”",
+        "Ich verstehe die Frage nicht.",
+        "Ask for clarification rather than supplying a guessed answer."
+      ],
+      [
+        "When did the fictional throat pain begin?",
+        "Yesterday evening.",
+        "The model explicitly says seit gestern Abend."
+      ]
+    ],
+    "transfer": "Use a neutral role-play card with a different fictional duration and practise the question-answer pattern. If you are practising for an actual appointment, describe your own information accurately and use the language support you need. Do not treat this rehearsal as an assessment of symptoms or substitute its answer for a clinician’s question."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-train-station-conversation",
+    "title": "German Train Station Conversation with Hindi",
+    "focus": "ask about a connection and confirm a departure detail",
+    "note": "A train enquiry needs a destination and usually a departure preference. Listen separately for track, time and whether a change is involved. Abfahrt and Ankunft name different ends of the journey. All details below are fictional; they are not a timetable, ticket quote or statement about passenger rights. Practise with new times so that the language stays useful beyond one memorised trip.",
+    "model": [
+      [
+        "A: Guten Tag. Ich möchte nach Bonn fahren.",
+        "Hello. I would like to travel to Bonn."
+      ],
+      [
+        "B: Wann möchten Sie fahren?",
+        "When would you like to travel?"
+      ],
+      [
+        "A: Heute Nachmittag. Gibt es eine direkte Verbindung?",
+        "This afternoon. Is there a direct connection?"
+      ],
+      [
+        "B: In diesem Beispiel fährt ein direkter Zug um vier Uhr.",
+        "In this example, a direct train leaves at four."
+      ],
+      [
+        "A: Von welchem Gleis fährt er ab?",
+        "From which track does it depart?"
+      ],
+      [
+        "B: Von Gleis sechs.",
+        "From track six."
+      ],
+      [
+        "A: Also um vier Uhr von Gleis sechs?",
+        "So at four from track six?"
+      ],
+      [
+        "B: Ja, genau.",
+        "Yes, exactly."
+      ]
+    ],
+    "phrases": [
+      [
+        "Ich möchte nach … fahren.",
+        "I would like to travel to …",
+        "मैं … जाना चाहता या चाहती हूँ।",
+        "main … jaana chahta ya chahti hoon"
+      ],
+      [
+        "Muss ich umsteigen?",
+        "Do I need to change trains?",
+        "क्या मुझे ट्रेन बदलनी होगी?",
+        "kya mujhe train badalni hogi"
+      ],
+      [
+        "Von welchem Gleis?",
+        "From which track?",
+        "किस प्लेटफ़ॉर्म या ट्रैक से?",
+        "kis platform ya track se"
+      ],
+      [
+        "Wann fährt der Zug ab?",
+        "When does the train depart?",
+        "ट्रेन कब रवाना होती है?",
+        "train kab ravaana hoti hai"
+      ]
+    ],
+    "exercise": [
+      [
+        "Ask whether you need to change.",
+        "Muss ich umsteigen?",
+        "The separable verb stays together as an infinitive here."
+      ],
+      [
+        "Which track appears in the fictional exchange?",
+        "Track six.",
+        "Do not confuse the track number with the departure time."
+      ],
+      [
+        "Say that you want to travel to Köln.",
+        "Ich möchte nach Köln fahren.",
+        "Use nach with this city destination."
+      ]
+    ],
+    "transfer": "Change the destination, time and track independently. Ask your partner to repeat only the detail that was unclear, then summarise the full journey information. A successful rehearsal involves both asking and checking; saying a correct question is only half the activity if you do not understand the answer."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-job-interview-introduction",
+    "title": "German Job Interview Introduction Practice",
+    "focus": "introduce your experience and support it with one example",
+    "note": "This is language practice for a fictional interview, not career, hiring or visa advice. Avoid inventing qualifications for the sake of using an impressive sentence. A clear introduction connects your experience with a concrete activity you have actually done. Keep a claim and its evidence together: saying that you work well in a team becomes more useful when you describe a relevant example. Use formal Sie unless the actual interaction invites another form.",
+    "model": [
+      [
+        "A: Erzählen Sie bitte kurz etwas über sich.",
+        "Please tell us briefly about yourself."
+      ],
+      [
+        "B: Ich heiße Neel Rao und arbeite als Softwareentwickler.",
+        "My name is Neel Rao and I work as a software developer."
+      ],
+      [
+        "A: Womit beschäftigen Sie sich in Ihrer Arbeit?",
+        "What do you work on in your job?"
+      ],
+      [
+        "B: Ich entwickle Anwendungen und bespreche Anforderungen mit meinem Team.",
+        "I develop applications and discuss requirements with my team."
+      ],
+      [
+        "A: Können Sie ein Beispiel nennen?",
+        "Can you give an example?"
+      ],
+      [
+        "B: In einem Projekt habe ich eine komplizierte Aufgabe in kleinere Schritte aufgeteilt.",
+        "In one project I divided a complicated task into smaller steps."
+      ],
+      [
+        "A: Was war daran hilfreich?",
+        "What was helpful about that?"
+      ],
+      [
+        "B: So konnten wir die nächsten Schritte klar besprechen.",
+        "That let us discuss the next steps clearly."
+      ]
+    ],
+    "phrases": [
+      [
+        "Ich arbeite als …",
+        "I work as …",
+        "मैं … के रूप में काम करता या करती हूँ।",
+        "main … ke roop mein kaam karta ya karti hoon"
+      ],
+      [
+        "Ich habe Erfahrung mit …",
+        "I have experience with …",
+        "मुझे … का अनुभव है।",
+        "mujhe … ka anubhav hai"
+      ],
+      [
+        "Zum Beispiel …",
+        "For example …",
+        "उदाहरण के लिए …",
+        "udaaharan ke liye"
+      ],
+      [
+        "Könnten Sie die Frage genauer erklären?",
+        "Could you explain the question more precisely?",
+        "क्या आप सवाल और स्पष्ट कर सकते हैं?",
+        "kya aap sawaal aur spasht kar sakte hain"
+      ]
+    ],
+    "exercise": [
+      [
+        "What follows the broad experience claim in the model?",
+        "A concrete project example.",
+        "The example supports the introduction rather than adding an unrelated adjective."
+      ],
+      [
+        "Ask the interviewer to explain the question more precisely.",
+        "Könnten Sie die Frage genauer erklären?",
+        "A clarification request can be short and specific."
+      ],
+      [
+        "Does this dialogue establish a job or visa requirement?",
+        "No.",
+        "It is an original communication exercise, not a hiring rule."
+      ]
+    ],
+    "transfer": "Replace the developer role with a role you understand and choose a truthful activity to explain. Describe what you did and why it helped, without copying an invented achievement. Ask a teacher to review clarity, verb forms and relevant vocabulary. Do not use a rehearsed answer when it does not address the actual question."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-making-appointments",
+    "title": "Making Appointments in German with Hindi",
+    "focus": "suggest a time, respond to a conflict and confirm an agreement",
+    "note": "An appointment exchange should end with a shared understanding rather than two unrelated suggestions. Start with a purpose, suggest a time, respond to availability and confirm the chosen option. The formal pattern here uses Ihnen; an informal friend conversation would use different forms. A model agreement is not a reservation at any actual service. Dates, fees and cancellation rules must come from the real provider when you use the language outside practice.",
+    "model": [
+      [
+        "A: Ich möchte einen Termin für ein Gespräch vereinbaren.",
+        "I would like to arrange an appointment for a conversation."
+      ],
+      [
+        "B: Passt Ihnen Dienstag um zehn Uhr?",
+        "Does Tuesday at ten suit you?"
+      ],
+      [
+        "A: Leider kann ich am Dienstag nicht.",
+        "Unfortunately I cannot make Tuesday."
+      ],
+      [
+        "B: Wie wäre es mit Donnerstag um elf Uhr?",
+        "How about Thursday at eleven?"
+      ],
+      [
+        "A: Das passt mir gut.",
+        "That suits me well."
+      ],
+      [
+        "B: Dann notiere ich Donnerstag um elf Uhr.",
+        "Then I will note Thursday at eleven."
+      ],
+      [
+        "A: Vielen Dank. Können Sie mir den Termin bestätigen?",
+        "Thank you. Could you confirm the appointment for me?"
+      ],
+      [
+        "B: Ja, ich schicke Ihnen eine Nachricht.",
+        "Yes, I will send you a message."
+      ]
+    ],
+    "phrases": [
+      [
+        "Passt Ihnen …?",
+        "Does … suit you?",
+        "क्या … आपके लिए ठीक है?",
+        "kya … aapke liye theek hai"
+      ],
+      [
+        "Leider kann ich nicht.",
+        "Unfortunately I cannot.",
+        "दुर्भाग्य से मैं नहीं आ सकता या सकती।",
+        "durbhaagya se main nahin aa sakta ya sakti"
+      ],
+      [
+        "Wie wäre es mit …?",
+        "How about …?",
+        "… कैसा रहेगा?",
+        "… kaisa rahega"
+      ],
+      [
+        "Das passt mir gut.",
+        "That suits me well.",
+        "यह मेरे लिए ठीक है।",
+        "yah mere liye theek hai"
+      ]
+    ],
+    "exercise": [
+      [
+        "Decline Tuesday politely.",
+        "Leider kann ich am Dienstag nicht.",
+        "Name the unavailable day rather than rejecting every option."
+      ],
+      [
+        "Which time is finally agreed?",
+        "Thursday at eleven.",
+        "The first suggestion was not accepted."
+      ],
+      [
+        "Ask for confirmation.",
+        "Können Sie mir den Termin bestätigen?",
+        "This requests a confirmation of the agreed appointment."
+      ]
+    ],
+    "transfer": "Offer two new times and make your partner unavailable for the first. After agreeing, each person writes the day and time without looking at the script. Compare notes. If they differ, practise the confirmation step again instead of assuming that a polite response proves the details were understood."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-inviting-friends",
+    "title": "Inviting Friends in German with Hindi",
+    "focus": "invite somebody, give a practical detail and respond politely",
+    "note": "An invitation tells the other person what you propose and gives enough detail for a decision. An acceptance may still need a time or place question. A decline can include a brief reason without making an elaborate excuse. The friends in this exchange use du. Do not switch to Sie halfway through unless you are deliberately changing the relationship in a new exercise.",
+    "model": [
+      [
+        "A: Hast du am Samstag Zeit?",
+        "Do you have time on Saturday?"
+      ],
+      [
+        "B: Ja. Was hast du vor?",
+        "Yes. What are you planning?"
+      ],
+      [
+        "A: Ich möchte im Park picknicken. Möchtest du mitkommen?",
+        "I would like to have a picnic in the park. Would you like to come?"
+      ],
+      [
+        "B: Gern. Wann treffen wir uns?",
+        "Gladly. When shall we meet?"
+      ],
+      [
+        "A: Um zwei Uhr am Eingang.",
+        "At two by the entrance."
+      ],
+      [
+        "B: Soll ich etwas mitbringen?",
+        "Shall I bring something?"
+      ],
+      [
+        "A: Vielleicht etwas Obst.",
+        "Perhaps some fruit."
+      ],
+      [
+        "B: Gut, bis Samstag!",
+        "Good, see you Saturday!"
+      ]
+    ],
+    "phrases": [
+      [
+        "Möchtest du mitkommen?",
+        "Would you like to come along?",
+        "क्या तुम साथ आना चाहोगे या चाहोगी?",
+        "kya tum saath aana chaahoge ya chaahogi"
+      ],
+      [
+        "Ich komme gern.",
+        "I would be glad to come.",
+        "मैं खुशी से आऊँगा या आऊँगी।",
+        "main khushi se aaunga ya aaungi"
+      ],
+      [
+        "Leider habe ich keine Zeit.",
+        "Unfortunately I have no time.",
+        "दुर्भाग्य से मेरे पास समय नहीं है।",
+        "durbhaagya se mere paas samay nahin hai"
+      ],
+      [
+        "Was soll ich mitbringen?",
+        "What should I bring?",
+        "मैं क्या साथ लाऊँ?",
+        "main kya saath laaun"
+      ]
+    ],
+    "exercise": [
+      [
+        "What activity is proposed?",
+        "A picnic in the park.",
+        "Read the activity rather than only the day."
+      ],
+      [
+        "Decline because you have no time.",
+        "Leider habe ich keine Zeit.",
+        "This is an informal situation, but the statement itself is neutral."
+      ],
+      [
+        "Ask when you will meet.",
+        "Wann treffen wir uns?",
+        "Wann asks for time, not place."
+      ]
+    ],
+    "transfer": "Change the picnic into an evening at home or a visit to a museum. Give a new place and time, then practise both accepting and declining. Add one useful follow-up about what to bring or how to meet. An invitation is complete when the other person can act on its details."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-agree-disagree-phrases",
+    "title": "Agree and Disagree in German with Hindi",
+    "focus": "state a position politely and add a relevant reason",
+    "note": "Agreement is clearer when you say what you agree with. Disagreement can focus on a proposal rather than attack the person making it. A short reason helps the conversation move forward. In this model the speakers are deciding how to study; there is no objectively correct choice for every learner. Notice how one person acknowledges part of the other view before explaining a different preference.",
+    "model": [
+      [
+        "A: Ich finde, wir sollten jeden Tag zusammen lernen.",
+        "I think we should study together every day."
+      ],
+      [
+        "B: Gemeinsames Lernen kann hilfreich sein.",
+        "Studying together can be helpful."
+      ],
+      [
+        "A: Dann machen wir das jeden Abend?",
+        "Then shall we do it every evening?"
+      ],
+      [
+        "B: Nicht unbedingt. Ich brauche auch Zeit zum Wiederholen.",
+        "Not necessarily. I also need time to revise."
+      ],
+      [
+        "A: Wie wäre es mit zweimal pro Woche?",
+        "How about twice a week?"
+      ],
+      [
+        "B: Damit bin ich einverstanden.",
+        "I agree with that."
+      ],
+      [
+        "A: An den anderen Tagen lernen wir allein.",
+        "On the other days we study alone."
+      ],
+      [
+        "B: Ja, das klingt für mich sinnvoll.",
+        "Yes, that sounds sensible to me."
+      ]
+    ],
+    "phrases": [
+      [
+        "Da stimme ich zu.",
+        "I agree with that.",
+        "मैं उससे सहमत हूँ।",
+        "main usse sahmat hoon"
+      ],
+      [
+        "Das sehe ich anders.",
+        "I see that differently.",
+        "मैं इसे अलग तरह से देखता या देखती हूँ।",
+        "main ise alag tarah se dekhta ya dekhti hoon"
+      ],
+      [
+        "Nicht unbedingt.",
+        "Not necessarily.",
+        "ज़रूरी नहीं।",
+        "zaroori nahin"
+      ],
+      [
+        "Ein Grund dafür ist …",
+        "One reason for that is …",
+        "इसका एक कारण … है।",
+        "iska ek kaaran … hai"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which phrase expresses partial caution rather than full agreement?",
+        "Nicht unbedingt.",
+        "It leaves room for a different condition or view."
+      ],
+      [
+        "What compromise do the speakers reach?",
+        "Studying together twice a week.",
+        "They adjust frequency rather than abandon the activity."
+      ],
+      [
+        "Disagree politely in one sentence.",
+        "Das sehe ich anders.",
+        "Add a relevant reason in your own next sentence."
+      ]
+    ],
+    "transfer": "Choose a familiar issue such as morning versus evening study. State a view, give one reason, then acknowledge a possible advantage of the other option. Your partner should summarise your reason before replying. This checks understanding and avoids using a disagreement phrase as a substitute for listening."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-asking-clarification",
+    "title": "Asking for Clarification in German with Hindi",
+    "focus": "identify what you did not understand and request useful clarification",
+    "note": "A clarification request can target sound, speed, meaning or confirmation. These are different problems. Repeating an unknown word more loudly may not explain its meaning, and translating the word may not help if you misheard a time. Choose the question that matches the difficulty. The model deliberately moves from an unclear instruction to a confirmed action, rather than simply saying yes to end the conversation.",
+    "model": [
+      [
+        "A: Bitte schicken Sie die Datei bis morgen.",
+        "Please send the file by tomorrow."
+      ],
+      [
+        "B: Entschuldigung, welche Datei meinen Sie?",
+        "Excuse me, which file do you mean?"
+      ],
+      [
+        "A: Die Datei mit Ihrer kurzen Vorstellung.",
+        "The file with your short introduction."
+      ],
+      [
+        "B: Soll ich sie per E-Mail schicken?",
+        "Should I send it by email?"
+      ],
+      [
+        "A: Ja, bitte.",
+        "Yes, please."
+      ],
+      [
+        "B: Habe ich Sie richtig verstanden: bis morgen per E-Mail?",
+        "Have I understood you correctly: by tomorrow, by email?"
+      ],
+      [
+        "A: Genau. Vielen Dank.",
+        "Exactly. Thank you."
+      ],
+      [
+        "B: Gut, dann mache ich das so.",
+        "Good, then I will do it that way."
+      ]
+    ],
+    "phrases": [
+      [
+        "Welche … meinen Sie?",
+        "Which … do you mean?",
+        "आप किस … की बात कर रहे हैं?",
+        "aap kis … ki baat kar rahe hain"
+      ],
+      [
+        "Was bedeutet …?",
+        "What does … mean?",
+        "… का क्या अर्थ है?",
+        "… ka kya arth hai"
+      ],
+      [
+        "Können Sie ein Beispiel geben?",
+        "Can you give an example?",
+        "क्या आप एक उदाहरण दे सकते हैं?",
+        "kya aap ek udaaharan de sakte hain"
+      ],
+      [
+        "Habe ich Sie richtig verstanden?",
+        "Have I understood you correctly?",
+        "क्या मैंने आपको ठीक समझा?",
+        "kya maine aapko theek samjha"
+      ]
+    ],
+    "exercise": [
+      [
+        "What detail is unclear first?",
+        "Which file is meant.",
+        "The listener understood that a file was requested but not its identity."
+      ],
+      [
+        "Ask for an example.",
+        "Können Sie ein Beispiel geben?",
+        "This targets meaning or application, not volume."
+      ],
+      [
+        "How should the file be sent in the model?",
+        "By email.",
+        "The listener explicitly checks the channel."
+      ]
+    ],
+    "transfer": "Give your partner a short instruction with one intentionally missing detail. The listener must ask a focused question before acting. Repeat with an unclear word, time and place. Compare which clarification phrase helps each time, and avoid treating a repeated sentence as an explanation when its meaning remains unknown."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-picture-description",
+    "title": "German Picture Description: Guided Practice",
+    "focus": "describe visible details before making a cautious interpretation",
+    "note": "Separate observation from inference. If a picture shows a person holding a book, you can describe that action; you cannot know the person’s occupation or reason for reading from the book alone. Begin with the overall scene, locate a few details, then mark an interpretation as uncertain. This page provides an imaginary scene to visualise, not an official examination image or a claim about a required assessment format.",
+    "model": [
+      [
+        "A: Was ist auf dem Bild zu sehen?",
+        "What can be seen in the picture?"
+      ],
+      [
+        "B: Ich sehe zwei Personen in einer Küche.",
+        "I see two people in a kitchen."
+      ],
+      [
+        "A: Was machen sie?",
+        "What are they doing?"
+      ],
+      [
+        "B: Eine Person schneidet Gemüse. Die andere deckt den Tisch.",
+        "One person is cutting vegetables. The other is setting the table."
+      ],
+      [
+        "A: Was steht im Vordergrund?",
+        "What is in the foreground?"
+      ],
+      [
+        "B: Im Vordergrund steht eine Schüssel.",
+        "There is a bowl in the foreground."
+      ],
+      [
+        "A: Was vermuten Sie über die Situation?",
+        "What do you suppose about the situation?"
+      ],
+      [
+        "B: Vielleicht bereiten sie gemeinsam das Abendessen vor.",
+        "Perhaps they are preparing dinner together."
+      ]
+    ],
+    "phrases": [
+      [
+        "Auf dem Bild sehe ich …",
+        "In the picture I see …",
+        "चित्र में मुझे … दिखता है।",
+        "chitra mein mujhe … dikhta hai"
+      ],
+      [
+        "im Vordergrund",
+        "in the foreground",
+        "चित्र के आगे के भाग में",
+        "chitra ke aage ke bhaag mein"
+      ],
+      [
+        "im Hintergrund",
+        "in the background",
+        "पृष्ठभूमि में",
+        "prishthabhoomi mein"
+      ],
+      [
+        "Vielleicht …",
+        "Perhaps …",
+        "शायद …",
+        "shaayad"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which detail is an inference rather than a directly named observation?",
+        "They may be preparing dinner together.",
+        "Vielleicht marks the interpretation as uncertain."
+      ],
+      [
+        "Where is the bowl?",
+        "In the foreground.",
+        "The model names its position explicitly."
+      ],
+      [
+        "Begin “In the picture I see a table.”",
+        "Auf dem Bild sehe ich einen Tisch.",
+        "The object Tisch uses einen in this sentence."
+      ]
+    ],
+    "transfer": "Sketch the imaginary kitchen using simple shapes. Move the bowl to the background and change one person’s activity. Describe the altered scene without reading the original. Ask your partner to separate two observations from one inference. This builds precise description rather than a fixed paragraph that could fit any picture."
+  },
+  {
+    "kind": "conversation",
+    "slug": "german-comparing-options",
+    "title": "Comparing Options in German with Hindi",
+    "focus": "compare two choices using a criterion and a reason",
+    "note": "A comparison needs an explicit criterion. A course can be cheaper but farther away; that does not make it better in every respect. Say which difference matters for your goal and why. The fictional exchange compares study arrangements without making a product recommendation. Learn the relationship between the options, rather than adding a list of comparative adjectives without a decision.",
+    "model": [
+      [
+        "A: Welcher Kurs passt besser zu unserem Zeitplan?",
+        "Which course fits our schedule better?"
+      ],
+      [
+        "B: Der Abendkurs beginnt später.",
+        "The evening course starts later."
+      ],
+      [
+        "A: Dafür dauert die Fahrt länger.",
+        "On the other hand, the journey takes longer."
+      ],
+      [
+        "B: Der Onlinekurs ist flexibler.",
+        "The online course is more flexible."
+      ],
+      [
+        "A: Aber zu Hause werde ich leicht abgelenkt.",
+        "But I am easily distracted at home."
+      ],
+      [
+        "B: Dann ist ein fester Lernort vielleicht wichtiger für dich.",
+        "Then perhaps a fixed study place matters more to you."
+      ],
+      [
+        "A: Ja, ich würde deshalb den Abendkurs wählen.",
+        "Yes, I would therefore choose the evening course."
+      ],
+      [
+        "B: Gut, dann prüfen wir die genauen Zeiten.",
+        "Good, then let us check the exact times."
+      ]
+    ],
+    "phrases": [
+      [
+        "im Vergleich zu …",
+        "compared with …",
+        "… की तुलना में",
+        "… ki tulna mein"
+      ],
+      [
+        "ein Vorteil",
+        "an advantage",
+        "एक लाभ",
+        "ek laabh"
+      ],
+      [
+        "ein Nachteil",
+        "a disadvantage",
+        "एक नुकसान",
+        "ek nuksaan"
+      ],
+      [
+        "Für mich ist … wichtiger.",
+        "For me, … is more important.",
+        "मेरे लिए … अधिक महत्वपूर्ण है।",
+        "mere liye … adhik mahatvapoorna hai"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which option is described as more flexible?",
+        "The online course.",
+        "Flexibility is one criterion, not the final decision by itself."
+      ],
+      [
+        "What matters to the final choice?",
+        "A fixed study place.",
+        "The speaker values this despite a longer journey."
+      ],
+      [
+        "Say “The journey takes longer.”",
+        "Die Fahrt dauert länger.",
+        "Länger compares duration here."
+      ]
+    ],
+    "transfer": "Compare two fictional study options using time, location and ability to concentrate. Give each option one advantage and one disadvantage. Then explain which criterion you prioritise. Change the priority in a second round and see whether your conclusion changes; a useful comparison makes the reason for the choice visible."
+  },
+  {
+    "kind": "writing",
+    "slug": "german-email-to-friend",
+    "title": "German Email to a Friend: Original Example",
+    "focus": "write a friendly update and ask a question the reader can answer",
+    "note": "A friendly email still benefits from a clear purpose. An update about your new course can lead naturally to a question about your friend’s plans. Keep du, dich and dein consistent with the informal relationship. Do not attach a formal business greeting to a familiar personal message just because it sounds more advanced. This model uses fictional people and details, with no official examination task or word-limit claim.",
+    "subject": "Mein neuer Deutschkurs",
+    "text": "Liebe Nina,\nseit dieser Woche besuche ich einen Deutschkurs. Wir treffen uns zweimal pro Woche am Abend. Am Anfang war ich nervös, aber die anderen Teilnehmer sind sehr freundlich. Besonders gern übe ich kurze Gespräche mit einer Partnerin.\nZu Hause wiederhole ich die neuen Wörter und schreibe kleine Texte. Manchmal verstehe ich die Fragen noch nicht sofort. Dann bitte ich um ein Beispiel.\nWie läuft dein Kurs? Hast du am Sonntag Zeit für einen Spaziergang? Wir könnten dabei ein bisschen Deutsch sprechen.\nLiebe Grüße\nAnika",
+    "translation": "Anika tells Nina about a new German course, its evening schedule and partner practice. She explains what she does at home and one difficulty. She then asks about Nina’s course and proposes a Sunday walk with some German conversation.",
+    "points": [
+      "The first paragraph identifies the update: a new course and the writer’s experience.",
+      "The middle paragraph adds a difficulty and a practical response instead of listing unrelated facts.",
+      "The last paragraph gives the friend two clear points to respond to: her course and Sunday availability.",
+      "Liebe Nina and Liebe Grüße fit the familiar relationship; formal Sie is not mixed into the message."
+    ],
+    "phrases": [
+      [
+        "Liebe …",
+        "Dear …; informal greeting",
+        "प्रिय …",
+        "priya …"
+      ],
+      [
+        "Seit dieser Woche …",
+        "Since this week …",
+        "इस सप्ताह से …",
+        "is saptaah se …"
+      ],
+      [
+        "Wie läuft dein Kurs?",
+        "How is your course going?",
+        "तुम्हारा कोर्स कैसा चल रहा है?",
+        "tumhaara course kaisa chal raha hai"
+      ],
+      [
+        "Hast du am Sonntag Zeit?",
+        "Do you have time on Sunday?",
+        "क्या रविवार को तुम्हारे पास समय है?",
+        "kya ravivaar ko tumhaare paas samay hai"
+      ]
+    ],
+    "exercise": [
+      [
+        "What does Anika ask Nina at the end?",
+        "About her course and a Sunday walk.",
+        "An email can ask a practical question after giving an update."
+      ],
+      [
+        "Change the invitation to Saturday.",
+        "Hast du am Samstag Zeit für einen Spaziergang?",
+        "Keep the activity and change the day."
+      ],
+      [
+        "Which form of address is used?",
+        "du",
+        "The message is between friends."
+      ]
+    ],
+    "transfer": "Write a new message about a different learning activity. Include one thing you enjoy, one difficulty and one genuine question for the reader. Keep the greeting and ending informal. After drafting, underline each question and check whether the earlier information helps the reader answer it."
+  },
+  {
+    "kind": "writing",
+    "slug": "german-invitation-email",
+    "title": "German Invitation Email: Example and Practice",
+    "focus": "write an invitation with enough details for a clear reply",
+    "note": "An invitation needs the activity, place and time, plus any practical detail that affects the guest. You do not need to add every possible preparation detail to the first message. Keep a request for a reply clear and friendly. The fictional invitation below is for a small meal at home, not an official exam answer or an announcement of a real event.",
+    "subject": "Einladung zum Abendessen",
+    "text": "Lieber Arjun,\nam Samstag möchte ich mit ein paar Freunden zusammen kochen. Wir treffen uns um sechs Uhr bei mir zu Hause. Zuerst bereiten wir das Essen vor, danach können wir Musik hören und uns unterhalten.\nHast du Zeit und Lust, dabei zu sein? Du brauchst nichts mitzubringen. Wenn du etwas nicht essen möchtest, sag mir bitte vorher Bescheid, damit ich beim Einkaufen darauf achten kann.\nBitte schreib mir bis Donnerstag, ob du kommen kannst. Ich schicke dir dann noch die genaue Adresse.\nIch würde mich freuen, dich zu sehen.\nViele Grüße\nMira",
+    "translation": "Mira invites Arjun to cook with friends at her home on Saturday at six. She says he need not bring anything, asks him to mention food preferences beforehand and requests a reply by Thursday. She will send the exact address after he responds.",
+    "points": [
+      "The event and first practical details appear before the request for a reply.",
+      "The food-preference question has a reason: planning the shopping.",
+      "The reply request asks for a concrete yes or no rather than an unclear general reaction.",
+      "The exact address is not invented or published in this fictional example."
+    ],
+    "phrases": [
+      [
+        "Ich möchte dich einladen.",
+        "I would like to invite you.",
+        "मैं तुम्हें आमंत्रित करना चाहता या चाहती हूँ।",
+        "main tumhein aamantrit karna chahta ya chahti hoon"
+      ],
+      [
+        "Hast du Zeit und Lust?",
+        "Do you have time and feel like it?",
+        "क्या तुम्हारे पास समय और इच्छा है?",
+        "kya tumhaare paas samay aur ichchha hai"
+      ],
+      [
+        "Du brauchst nichts mitzubringen.",
+        "You need not bring anything.",
+        "तुम्हें कुछ साथ लाने की ज़रूरत नहीं है।",
+        "tumhein kuchh saath laane ki zaroorat nahin hai"
+      ],
+      [
+        "Sag mir bitte Bescheid.",
+        "Please let me know.",
+        "कृपया मुझे बता देना।",
+        "kripaya mujhe bata dena"
+      ]
+    ],
+    "exercise": [
+      [
+        "When should Arjun reply?",
+        "By Thursday.",
+        "The reply date is different from the event date."
+      ],
+      [
+        "Does he need to bring food?",
+        "No.",
+        "The writer explicitly says he need not bring anything."
+      ],
+      [
+        "Ask a friend to let you know.",
+        "Sag mir bitte Bescheid.",
+        "Use the informal request for a friend."
+      ]
+    ],
+    "transfer": "Change the event to a study afternoon and choose your own fictional day, time and place. Include one preparation detail and a reply request. Check that the recipient could tell the event date and reply date apart. Do not leave a copied food-preference question in a message where it serves no purpose."
+  },
+  {
+    "kind": "writing",
+    "slug": "german-cancel-appointment-email",
+    "title": "Cancel an Appointment in German: Email Example",
+    "focus": "identify the original appointment, cancel clearly and ask about an alternative",
+    "note": "A cancellation message should identify the appointment before describing the change. A short relevant reason is usually clearer than a long invented story. Asking for an alternative does not itself confirm a replacement appointment. The fictional message below is a writing model only; it does not establish cancellation rights, fees or required notice for any real provider.",
+    "subject": "Termin am Dienstag verschieben",
+    "text": "Sehr geehrte Frau Keller,\nich habe bei Ihnen einen Gesprächstermin am Dienstag um zehn Uhr. Leider kann ich diesen Termin nicht wahrnehmen, weil sich mein Arbeitsplan geändert hat.\nIch möchte den Termin deshalb absagen und gern einen neuen vereinbaren. Hätten Sie am Donnerstag am Nachmittag oder am Freitag am Vormittag Zeit? Falls beide Möglichkeiten nicht passen, nennen Sie mir bitte einen anderen Vorschlag.\nEntschuldigen Sie bitte die Änderung. Vielen Dank für Ihre Unterstützung. Ich warte auf Ihre Rückmeldung, bevor ich einen neuen Termin in meinen Kalender eintrage.\nMit freundlichen Grüßen\nRiya Shah",
+    "translation": "Riya identifies a Tuesday ten o’clock appointment, cancels it because her work schedule changed and suggests two alternatives. She asks for another proposal if necessary and makes clear that she is waiting for a reply before treating a new time as agreed.",
+    "points": [
+      "The original day and time identify what is being cancelled.",
+      "The reason is brief and connected to the scheduling conflict.",
+      "Two alternatives make it easier to respond without implying a confirmed replacement.",
+      "The formal greeting, Ihre and closing stay consistent."
+    ],
+    "phrases": [
+      [
+        "Ich kann den Termin nicht wahrnehmen.",
+        "I cannot attend the appointment.",
+        "मैं तय समय पर उपस्थित नहीं हो सकता या सकती।",
+        "main tay samay par upasthit nahin ho sakta ya sakti"
+      ],
+      [
+        "Ich möchte den Termin absagen.",
+        "I would like to cancel the appointment.",
+        "मैं मुलाक़ात रद्द करना चाहता या चाहती हूँ।",
+        "main mulaqat radd karna chahta ya chahti hoon"
+      ],
+      [
+        "Hätten Sie am Donnerstag Zeit?",
+        "Would you have time on Thursday?",
+        "क्या गुरुवार को आपके पास समय होगा?",
+        "kya guruvaar ko aapke paas samay hoga"
+      ],
+      [
+        "Vielen Dank für Ihre Rückmeldung.",
+        "Thank you for your reply.",
+        "आपके उत्तर के लिए धन्यवाद।",
+        "aapke uttar ke liye dhanyavaad"
+      ]
+    ],
+    "exercise": [
+      [
+        "Is Thursday already confirmed?",
+        "No.",
+        "It is a proposed alternative awaiting a reply."
+      ],
+      [
+        "Which appointment is cancelled?",
+        "Tuesday at ten.",
+        "The first sentence identifies it."
+      ],
+      [
+        "Write the formal closing.",
+        "Mit freundlichen Grüßen",
+        "Use it with a consistently formal message."
+      ]
+    ],
+    "transfer": "Write a cancellation for a fictional language consultation. Identify the old time, give a concise reason and offer a new option. Then check the real provider’s actual cancellation instructions separately if you use the message outside practice. A well-written email cannot by itself change the provider’s conditions."
+  },
+  {
+    "kind": "writing",
+    "slug": "german-apology-email",
+    "title": "German Apology Email: Example and Useful Phrases",
+    "focus": "acknowledge a specific mistake and explain the next action",
+    "note": "An apology works better when it identifies what happened and gives a practical response. Avoid blaming a vague situation if you can describe the actual error. The writer below sent the wrong file and corrects that mistake. There is no invented formal penalty or legal claim. Use the model to practise relevant information and a clear repair, not to add repeated apologies to every paragraph.",
+    "subject": "Korrekte Datei zu meiner Nachricht",
+    "text": "Sehr geehrter Herr Weber,\nin meiner Nachricht von heute Morgen habe ich versehentlich die falsche Datei angehängt. Bitte entschuldigen Sie diesen Fehler.\nIm Anhang dieser E-Mail finden Sie nun die richtige Fassung meiner kurzen Vorstellung. Die frühere Datei war ein unvollständiger Entwurf. Bitte verwenden Sie stattdessen die neue Datei mit dem Titel „Vorstellung_final“.\nIch habe vor dem erneuten Versand geprüft, ob sich die Datei öffnen lässt. Falls Sie dennoch Schwierigkeiten haben, geben Sie mir bitte kurz Bescheid. Ich kann Ihnen den Text dann auf einem anderen vereinbarten Weg schicken.\nVielen Dank für Ihr Verständnis.\nMit freundlichen Grüßen\nNeel Rao",
+    "translation": "Neel explains that he accidentally attached the wrong file, apologises and identifies the correct replacement. He states what was wrong with the earlier version and offers a practical next step if the new file cannot be opened.",
+    "points": [
+      "The opening names the mistake rather than saying only that something went wrong.",
+      "The replacement is identified clearly enough to distinguish it from the draft.",
+      "The writer reports a check he performed, without pretending this guarantees every technical outcome.",
+      "A final conditional offer provides a next action if there is still a problem."
+    ],
+    "phrases": [
+      [
+        "Bitte entschuldigen Sie den Fehler.",
+        "Please excuse the mistake.",
+        "कृपया गलती के लिए क्षमा करें।",
+        "kripaya galti ke liye kshama karein"
+      ],
+      [
+        "versehentlich",
+        "accidentally",
+        "अनजाने में",
+        "anjaane mein"
+      ],
+      [
+        "die richtige Fassung",
+        "the correct version",
+        "सही संस्करण",
+        "sahi sanskaran"
+      ],
+      [
+        "Vielen Dank für Ihr Verständnis.",
+        "Thank you for your understanding.",
+        "आपकी समझ के लिए धन्यवाद।",
+        "aapki samajh ke liye dhanyavaad"
+      ]
+    ],
+    "exercise": [
+      [
+        "What was the mistake?",
+        "The wrong file was attached.",
+        "The apology identifies a specific action."
+      ],
+      [
+        "What should the reader use instead?",
+        "The new file called Vorstellung_final.",
+        "The message distinguishes the replacement."
+      ],
+      [
+        "Ask the reader to let you know about problems.",
+        "Geben Sie mir bitte kurz Bescheid.",
+        "Use a clear formal request."
+      ]
+    ],
+    "transfer": "Choose a different small fictional mistake, such as an incorrect meeting time in an earlier message. Write what was wrong, the correct information and one appropriate next action. Remove any attachment sentence that no longer fits the situation. A repair message should resolve confusion rather than introduce copied details."
+  },
+  {
+    "kind": "writing",
+    "slug": "german-request-information-email",
+    "title": "Request Information in German: Email Example",
+    "focus": "ask focused questions that a recipient can answer separately",
+    "note": "An information request is easier to answer when the topic appears early and questions are grouped logically. Ask for the detail you actually need instead of saying “send everything.” The fictional writer asks about a study group, its schedule and participation arrangements. This does not advertise a real group or provide course fees, availability or booking conditions.",
+    "subject": "Fragen zu Ihrer Lerngruppe",
+    "text": "Sehr geehrte Damen und Herren,\nich interessiere mich für Ihre Lerngruppe für Deutschlernende und hätte dazu einige Fragen. Ich möchte regelmäßig das Sprechen üben und suche ein Angebot am Abend.\nAn welchen Wochentagen trifft sich die Gruppe? Wie lange dauert ein Treffen? Außerdem würde ich gern wissen, ob neue Teilnehmer zuerst an einem einzelnen Treffen teilnehmen können.\nIch lerne zurzeit selbstständig und kann einfache Gespräche über meinen Alltag führen. Falls Sie weitere Informationen brauchen, schreiben Sie mir bitte, welche Angaben hilfreich sind.\nVielen Dank im Voraus für Ihre Antwort.\nMit freundlichen Grüßen\nMira Mehta",
+    "translation": "Mira states her interest and evening preference, then asks about meeting days, duration and whether a newcomer can attend one meeting first. She gives a modest description of her current ability and offers to provide relevant additional information.",
+    "points": [
+      "The purpose and timing preference help the recipient understand the enquiry.",
+      "Questions concern separate practical details and can be answered one by one.",
+      "The ability statement describes an activity rather than claiming an official level or certificate.",
+      "The final sentence asks what further information would help instead of sending unnecessary personal data."
+    ],
+    "phrases": [
+      [
+        "Ich interessiere mich für …",
+        "I am interested in …",
+        "मुझे … में रुचि है।",
+        "mujhe … mein ruchi hai"
+      ],
+      [
+        "Ich hätte dazu einige Fragen.",
+        "I have some questions about that.",
+        "उसके बारे में मेरे कुछ सवाल हैं।",
+        "uske baare mein mere kuchh sawaal hain"
+      ],
+      [
+        "Wie lange dauert …?",
+        "How long does … last?",
+        "… कितनी देर चलता है?",
+        "… kitni der chalta hai"
+      ],
+      [
+        "Vielen Dank im Voraus.",
+        "Thank you in advance.",
+        "पहले से धन्यवाद।",
+        "pahle se dhanyavaad"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which time of day does Mira prefer?",
+        "Evening.",
+        "Her preference appears in the opening paragraph."
+      ],
+      [
+        "Ask on which weekdays the group meets.",
+        "An welchen Wochentagen trifft sich die Gruppe?",
+        "This asks for a schedule rather than duration."
+      ],
+      [
+        "Does Mira claim an official certified level?",
+        "No.",
+        "She describes simple conversation ability instead."
+      ]
+    ],
+    "transfer": "Write a new enquiry about a reading club or workshop. Choose three necessary questions and supply one relevant fact about your interest. Read the draft from the recipient’s perspective: can each question be answered directly, and have you avoided asking the same thing twice in different words?"
+  },
+  {
+    "kind": "writing",
+    "slug": "german-complaint-email",
+    "title": "German Complaint Email: Clear Original Example",
+    "focus": "describe a problem factually and request a practical response",
+    "note": "A complaint should make the observed problem easy to identify. State what happened, the effect and the next step you are asking for. Avoid invented legal rights, deadlines or threats. The fictional message concerns an incomplete course handout; it requests missing pages rather than promising a particular remedy. Keep any real complaint accurate and check the actual provider’s process separately.",
+    "subject": "Fehlende Seiten in der Kursunterlage",
+    "text": "Sehr geehrte Frau Braun,\nich habe gestern die Unterlage für unsere Lerngruppe heruntergeladen. Leider fehlen in meiner Datei die Seiten mit den Aufgaben drei und vier. Nach Aufgabe zwei beginnt sofort der Lösungsteil.\nIch habe die Datei erneut heruntergeladen und auf einem zweiten Gerät geöffnet. Die beiden Aufgaben sind auch dort nicht enthalten. Deshalb kann ich die Vorbereitung für das nächste Treffen noch nicht vollständig bearbeiten.\nKönnten Sie mir bitte die vollständige Fassung schicken oder mitteilen, wo ich die fehlenden Seiten finde? Falls ich versehentlich die falsche Datei geöffnet habe, nennen Sie mir bitte den richtigen Titel.\nVielen Dank für Ihre Hilfe.\nMit freundlichen Grüßen\nArjun Shah",
+    "translation": "Arjun explains which pages are missing, describes the checks he made and states the practical effect. He requests a complete version or the correct location, while allowing for the possibility that he selected the wrong file.",
+    "points": [
+      "The problem is observable: specific tasks are absent before the solution section.",
+      "The checks help distinguish a download issue from a repeated display problem.",
+      "The effect explains why a reply would be useful without adding an unsupported claim.",
+      "The request gives two workable ways to help and leaves room for a correction."
+    ],
+    "phrases": [
+      [
+        "Leider fehlen …",
+        "Unfortunately … are missing.",
+        "दुर्भाग्य से … गायब हैं।",
+        "durbhaagya se … gaayab hain"
+      ],
+      [
+        "die vollständige Fassung",
+        "the complete version",
+        "पूरा संस्करण",
+        "poora sanskaran"
+      ],
+      [
+        "Könnten Sie mir bitte … schicken?",
+        "Could you please send me …?",
+        "क्या आप कृपया मुझे … भेज सकते हैं?",
+        "kya aap kripaya mujhe … bhej sakte hain"
+      ],
+      [
+        "Falls ich …",
+        "If I …",
+        "यदि मैं …",
+        "yadi main …"
+      ]
+    ],
+    "exercise": [
+      [
+        "What response does the writer request?",
+        "A complete version or the location of missing pages.",
+        "The request is practical and specific."
+      ],
+      [
+        "Does the message claim a legal entitlement?",
+        "No.",
+        "It reports the problem and asks for help."
+      ],
+      [
+        "Which tasks are missing?",
+        "Tasks three and four.",
+        "The model identifies the affected material."
+      ]
+    ],
+    "transfer": "Write a fictional complaint about unclear audio or a missing meeting link. Identify only what you observed and ask for a relevant next step. Do not copy the missing-pages detail into the new scenario. A reader should be able to tell the problem and requested action without guessing."
+  },
+  {
+    "kind": "writing",
+    "slug": "german-thank-you-email",
+    "title": "German Thank You Email: Example and Practice",
+    "focus": "thank somebody for a specific action and explain its value",
+    "note": "A thank-you message becomes more personal when it identifies the help and what it enabled you to do. It does not need exaggerated praise or a long list of compliments. The informal model thanks a friend for language practice and proposes a modest next step. Keep the relationship consistent; changing to a formal recipient would require a new greeting and forms of address.",
+    "subject": "Danke für deine Hilfe",
+    "text": "Liebe Sara,\nvielen Dank, dass du gestern mit mir das kurze Gespräch geübt hast. Besonders hilfreich war, dass du die Fragen in einer anderen Reihenfolge gestellt hast. So habe ich gemerkt, welche Antworten ich wirklich selbst formulieren kann.\nNach unserem Treffen habe ich die schwierigen Wörter noch einmal wiederholt. Jetzt kann ich meinen Tagesablauf etwas klarer beschreiben. Die Aufnahme aus unserer Übung höre ich mir später noch einmal an.\nWenn du möchtest, können wir nächste Woche die Rollen tauschen und dein Thema üben. Sag mir einfach, welcher Tag dir passt.\nLiebe Grüße\nRiya",
+    "translation": "Riya thanks Sara for changing the practice question order, explains what she learned and describes her follow-up work. She offers to swap roles next week and asks which day suits Sara.",
+    "points": [
+      "The thanks names a concrete action instead of only saying that everything was wonderful.",
+      "The writer describes a limited improvement without claiming fluency or an official result.",
+      "The next step offers reciprocal practice rather than making an obligation.",
+      "Informal deine, dir and the greeting match a friend-to-friend message."
+    ],
+    "phrases": [
+      [
+        "Vielen Dank für deine Hilfe.",
+        "Thank you for your help.",
+        "तुम्हारी मदद के लिए धन्यवाद।",
+        "tumhaari madad ke liye dhanyavaad"
+      ],
+      [
+        "Besonders hilfreich war …",
+        "Especially helpful was …",
+        "विशेष रूप से उपयोगी था …",
+        "vishesh roop se upyogi tha …"
+      ],
+      [
+        "Wir können die Rollen tauschen.",
+        "We can swap roles.",
+        "हम भूमिकाएँ बदल सकते हैं।",
+        "ham bhoomikaayen badal sakte hain"
+      ],
+      [
+        "Welcher Tag passt dir?",
+        "Which day suits you?",
+        "कौन-सा दिन तुम्हारे लिए ठीक है?",
+        "kaun-sa din tumhaare liye theek hai"
+      ]
+    ],
+    "exercise": [
+      [
+        "What does Riya thank Sara for specifically?",
+        "Changing the order of practice questions.",
+        "Specific help makes the thanks informative."
+      ],
+      [
+        "What does she offer for next week?",
+        "Swapping roles and practising Sara’s topic.",
+        "The offer is connected to the original help."
+      ],
+      [
+        "Ask a friend which day suits them.",
+        "Welcher Tag passt dir?",
+        "Dir is informal in this question."
+      ]
+    ],
+    "transfer": "Thank someone for a different fictional action, such as checking a paragraph or explaining a word. State what helped and one thing you did afterwards. Remove any detail you cannot truthfully use. A short accurate message is more useful than an impressive copied thank-you paragraph."
+  },
+  {
+    "kind": "writing",
+    "slug": "german-job-application-email",
+    "title": "German Job Application Email: Language Example",
+    "focus": "write a concise cover email that identifies the role and attached material",
+    "note": "This page teaches the language of a fictional application email. It does not establish hiring requirements, qualification recognition or immigration eligibility. A cover email and a full application letter may have different jobs in an employer’s process. Read the actual instructions before deciding what to submit. In practice, make only truthful claims about your experience and include only material requested or relevant to the application.",
+    "subject": "Bewerbung als Mitarbeiter im Kundenservice",
+    "text": "Sehr geehrte Frau Fischer,\nich bewerbe mich um die ausgeschriebene Stelle im Kundenservice. In meiner bisherigen Arbeit habe ich Kundenanfragen beantwortet und Informationen für mein Team zusammengefasst. Dabei war es mir wichtig, verständlich und freundlich zu schreiben.\nDie in Ihrer Anzeige beschriebene Zusammenarbeit im Team interessiert mich besonders. Im Anhang finden Sie meinen Lebenslauf und ein kurzes Anschreiben mit weiteren Informationen zu meiner Erfahrung.\nÜber die Gelegenheit zu einem Gespräch würde ich mich freuen. Falls Sie zusätzliche Unterlagen benötigen, teilen Sie mir bitte mit, welche Informationen Sie brauchen.\nVielen Dank für Ihre Zeit.\nMit freundlichen Grüßen\nNeel Rao",
+    "translation": "Neel identifies a customer-service role, gives a brief relevant experience statement and points to the attached CV and cover letter. He expresses interest in a conversation and asks what additional information would be useful if needed.",
+    "points": [
+      "The subject and first sentence identify the intended role.",
+      "A brief experience example replaces unsupported superlatives.",
+      "The attachments are named so the recipient knows what the email refers to.",
+      "The closing expresses interest without claiming an entitlement to an interview or job."
+    ],
+    "phrases": [
+      [
+        "Ich bewerbe mich um …",
+        "I am applying for …",
+        "मैं … के लिए आवेदन कर रहा या रही हूँ।",
+        "main … ke liye aavedan kar raha ya rahi hoon"
+      ],
+      [
+        "Im Anhang finden Sie …",
+        "In the attachment you will find …",
+        "संलग्न फ़ाइल में आपको … मिलेगा।",
+        "sanlagn file mein aapko … milega"
+      ],
+      [
+        "mein Lebenslauf",
+        "my CV",
+        "मेरा जीवन-वृत्त",
+        "mera jeevan-vritt"
+      ],
+      [
+        "Über ein Gespräch würde ich mich freuen.",
+        "I would welcome a conversation.",
+        "बातचीत का अवसर पाकर मुझे खुशी होगी।",
+        "baatcheet ka avsar paakar mujhe khushi hogi"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which role is the fictional application for?",
+        "Customer service.",
+        "The subject identifies it explicitly."
+      ],
+      [
+        "Does the model guarantee an interview?",
+        "No.",
+        "It expresses interest in an opportunity."
+      ],
+      [
+        "Which two attachments are named?",
+        "A CV and a short cover letter.",
+        "Check actual employer instructions before choosing real attachments."
+      ]
+    ],
+    "transfer": "Draft a cover email for a role you understand, using truthful or clearly fictional practice details. Name one relevant activity rather than copying the customer-service claim automatically. Check spelling of the recipient and attachment names. Separate language feedback from any real assessment of eligibility or hiring rules."
+  },
+  {
+    "kind": "writing",
+    "slug": "german-formal-email-format",
+    "title": "German Formal Email Format: Worked Example",
+    "focus": "organise a formal email with a subject, purpose and actionable request",
+    "note": "Formal writing is easier to control when each part has a job. A subject identifies the topic, the greeting addresses the recipient, the opening states the purpose and the body supplies relevant details. The request should be answerable. The model below is an information enquiry, so it does not need the tone of a complaint or a job application. Do not make every message longer just to make it look formal.",
+    "subject": "Frage zum nächsten Lesetreffen",
+    "text": "Sehr geehrte Frau Sommer,\nich habe auf Ihrer Internetseite Informationen zum Lesetreffen gefunden. Ich interessiere mich für die Gruppe und möchte gern am nächsten Treffen teilnehmen.\nKönnten Sie mir bitte mitteilen, welcher Text besprochen wird und ob ich ihn vorher vollständig lesen sollte? Außerdem würde ich gern wissen, ob ich mich für das Treffen anmelden muss.\nIch lese gern kurze Geschichten, habe aber bisher noch nicht an einer solchen Gruppe teilgenommen. Falls es Hinweise für neue Teilnehmer gibt, wäre ich Ihnen für einen entsprechenden Link dankbar.\nVielen Dank für Ihre Unterstützung.\nMit freundlichen Grüßen\nMira Rao",
+    "translation": "Mira identifies the reading group, expresses interest in attending and asks what to read and whether registration is needed. She explains that she is a newcomer and asks for a useful link if guidance exists.",
+    "points": [
+      "Subject: a specific question about the next reading meeting.",
+      "Greeting and opening: named formal recipient followed by a concise purpose.",
+      "Body: two practical questions and one relevant piece of background.",
+      "Closing: thanks, a formal closing phrase and the sender’s name."
+    ],
+    "phrases": [
+      [
+        "Sehr geehrte Frau …",
+        "Dear Ms …",
+        "आदरणीय …",
+        "aadaraneeya …"
+      ],
+      [
+        "Sehr geehrter Herr …",
+        "Dear Mr …",
+        "आदरणीय …",
+        "aadaraneeya …"
+      ],
+      [
+        "Könnten Sie mir bitte mitteilen …?",
+        "Could you please tell me …?",
+        "क्या आप कृपया मुझे बता सकते हैं …?",
+        "kya aap kripaya mujhe bata sakte hain …"
+      ],
+      [
+        "Mit freundlichen Grüßen",
+        "Kind regards; formal closing",
+        "सादर",
+        "saadar"
+      ]
+    ],
+    "exercise": [
+      [
+        "Which part should identify the email topic?",
+        "The subject line.",
+        "A greeting alone does not describe the purpose."
+      ],
+      [
+        "What two practical questions appear?",
+        "Which text to read and whether registration is needed.",
+        "They are separate answerable questions."
+      ],
+      [
+        "Should you mix du and Sie in this model?",
+        "No.",
+        "Keep the formal relationship consistent."
+      ]
+    ],
+    "transfer": "Use the same structure for an enquiry about a workshop. Write a new subject, purpose and two practical questions. After drafting, label each sentence by its job. Remove a sentence if it repeats another point without helping the recipient answer. Keep language choices consistent with the actual relationship."
+  },
+  {
+    "kind": "writing",
+    "slug": "german-opinion-paragraph",
+    "title": "German Opinion Paragraph: Original Guided Example",
+    "focus": "state an opinion, support it and acknowledge a limitation",
+    "note": "An opinion paragraph needs a clear claim and a reason that supports it. A counterpoint can make the reasoning more precise, but it should not replace your own conclusion. This model discusses learning with a partner. It is an original writing exercise, not an official test answer, score prediction or measured claim about the best study method for everybody.",
+    "subject": "Mit einem Lernpartner üben",
+    "text": "Meiner Meinung nach kann das Lernen mit einem Partner besonders beim Sprechen hilfreich sein. Wenn ich allein übe, weiß ich oft schon, welche Frage als Nächstes kommt. Ein Partner kann die Reihenfolge ändern und nachfragen. Dadurch merke ich eher, ob ich wirklich auf die Frage antworte.\nAllerdings brauche ich auch ruhige Zeit, um Wörter und Fehler zu wiederholen. Ein gemeinsames Treffen ersetzt diese Arbeit nicht. Außerdem sollten beide Personen Gelegenheit zum Sprechen bekommen.\nDeshalb würde ich Partnerarbeit und selbstständiges Lernen verbinden. Für mich wäre ein kurzes Treffen mit einem klaren Thema sinnvoller als ein langes Gespräch ohne Ziel.",
+    "translation": "The writer argues that partner study can help speaking because another person can vary questions. They acknowledge the need for quiet independent revision and balanced speaking time, then conclude that combining both forms suits their purpose.",
+    "points": [
+      "The first sentence states the opinion directly.",
+      "The next sentences explain a mechanism: varied questions reveal whether the response is relevant.",
+      "Allerdings introduces a limitation rather than an unrelated topic.",
+      "Deshalb connects the conclusion to the reasons already given."
+    ],
+    "phrases": [
+      [
+        "Meiner Meinung nach …",
+        "In my opinion …",
+        "मेरी राय में …",
+        "meri raay mein …"
+      ],
+      [
+        "Ein Grund dafür ist …",
+        "One reason for this is …",
+        "इसका एक कारण … है।",
+        "iska ek kaaran … hai"
+      ],
+      [
+        "Allerdings …",
+        "However …",
+        "हालाँकि …",
+        "haalaanki …"
+      ],
+      [
+        "Deshalb würde ich …",
+        "Therefore I would …",
+        "इसलिए मैं …",
+        "isliye main …"
+      ]
+    ],
+    "exercise": [
+      [
+        "What is the main claim?",
+        "Partner learning can help speaking.",
+        "The paragraph is about a specific benefit, not every learning task."
+      ],
+      [
+        "Name one limitation.",
+        "Independent revision is still needed.",
+        "A counterpoint narrows the claim."
+      ],
+      [
+        "Which word connects the conclusion to earlier reasons?",
+        "Deshalb",
+        "It signals a consequence in the argument."
+      ]
+    ],
+    "transfer": "Choose a familiar topic such as studying in the morning or using a paper notebook. Write a claim, one reason, an example and one limitation, then conclude. Do not insert a connector unless you can explain the relationship it marks. Ask a reviewer whether the conclusion follows from the points you actually wrote."
+  },
+  {
+    "kind": "reading",
+    "slug": "german-a1-reading-train-notice",
+    "title": "German A1 Reading: Train Notice Practice",
+    "focus": "find a destination, time and changed track in a short notice",
+    "note": "Read a transport notice in two passes. First identify what kind of message it is. Then locate the details needed for the traveller’s decision. A track change does not necessarily mean a time change. Keep old and new information distinct instead of selecting the first number you see. The short notice below is original and fictional; it is not an official examination item or a real travel announcement.",
+    "text": "Information für Reisende\nDer Zug nach Bonn fährt heute um 14 Uhr ab. Er fährt nicht von Gleis zwei, sondern von Gleis vier. Bitte gehen Sie zu Gleis vier.\nDie Fahrt dauert dreißig Minuten. Der Zug hält auch in Weststadt. Für Informationen zur Rückfahrt fragen Sie bitte am Schalter.\nAm Bahnhof gibt es heute keinen Kaffee. Der kleine Laden ist geschlossen. Wasser können Sie im Laden gegenüber dem Bahnhof kaufen.\nVielen Dank für Ihr Verständnis.",
+    "translation": "The fictional train to Bonn departs at 14:00 from track four rather than track two. The journey takes thirty minutes and also stops at Weststadt. Return-trip information is available at the counter. A small station shop is closed; the notice mentions a shop opposite the station for water.",
+    "phrases": [
+      [
+        "der Reisende",
+        "traveller; male form",
+        "यात्री",
+        "yaatri"
+      ],
+      [
+        "das Gleis",
+        "track",
+        "रेल की पटरी",
+        "rel ki patri"
+      ],
+      [
+        "die Rückfahrt",
+        "return journey",
+        "वापसी की यात्रा",
+        "vaapasi ki yatra"
+      ],
+      [
+        "der Schalter",
+        "counter",
+        "सेवा काउंटर",
+        "seva counter"
+      ],
+      [
+        "geschlossen",
+        "closed",
+        "बंद",
+        "band"
+      ],
+      [
+        "gegenüber",
+        "opposite",
+        "सामने",
+        "saamne"
+      ]
+    ],
+    "exercise": [
+      [
+        "Where is the train going?",
+        "Bonn.",
+        "The destination follows nach in the opening sentence."
+      ],
+      [
+        "What is the departure time?",
+        "14 Uhr, or 2 pm.",
+        "Do not choose the thirty-minute journey duration."
+      ],
+      [
+        "Which track should the traveller use?",
+        "Track four.",
+        "The notice explicitly rejects track two with nicht … sondern."
+      ],
+      [
+        "Where can the traveller ask about the return trip?",
+        "At the counter.",
+        "The return journey is not fully described in this notice."
+      ],
+      [
+        "Is the small station shop open?",
+        "No.",
+        "Geschlossen means closed; the other shop is opposite the station."
+      ]
+    ],
+    "transfer": "Create a new notice by changing only the destination, time and old/new track. Give it to a partner who has not seen your changes. Ask the same five kinds of questions. This checks whether they retrieve information from the new text instead of remembering answers from the original. Do not use the fictional notice to plan an actual journey."
+  },
+  {
+    "kind": "reading",
+    "slug": "german-a1-reading-email",
+    "title": "German A1 Reading: Friendly Email Practice",
+    "focus": "identify an invitation, meeting time and requested reply",
+    "note": "An email often contains background information and an action for the reader. Find who is writing and why before translating individual words. A day mentioned in a writer’s routine may be different from the day of an invitation. This original fictional message uses short everyday sentences for beginner reading. The exercise is not an official Goethe paper and does not provide an official level assessment.",
+    "text": "Liebe Riya,\nwie geht es dir? Mein Deutschkurs ist jetzt am Montag und am Donnerstag. Ich lerne mit einer kleinen Gruppe. Unsere Lehrerin heißt Frau Sommer. Sie spricht langsam und gibt viele Beispiele.\nAm Samstag habe ich frei. Möchtest du mit mir in den Park gehen? Wir können um drei Uhr am Eingang warten und dann zusammen spazieren gehen. Ich bringe Wasser und etwas Obst mit.\nNach dem Spaziergang möchte ich ein Buch in der Bibliothek abgeben. Du kannst gern mitkommen. Die Bibliothek ist neben dem Park.\nBitte schreib mir am Freitag, ob du Zeit hast.\nLiebe Grüße\nAnika",
+    "translation": "Anika describes her Monday and Thursday German course, invites Riya to the park on Saturday at three, and offers water and fruit. Afterwards she plans to return a library book. She asks Riya to reply on Friday.",
+    "phrases": [
+      [
+        "die Lehrerin",
+        "female teacher",
+        "अध्यापिका",
+        "adhyaapika"
+      ],
+      [
+        "der Eingang",
+        "entrance",
+        "प्रवेश-द्वार",
+        "pravesh-dvaar"
+      ],
+      [
+        "spazieren gehen",
+        "go for a walk",
+        "सैर करना",
+        "sair karna"
+      ],
+      [
+        "mitbringen",
+        "bring along",
+        "साथ लाना",
+        "saath laana"
+      ],
+      [
+        "abgeben",
+        "hand in or return here",
+        "वापस देना",
+        "vaapas dena"
+      ],
+      [
+        "die Bibliothek",
+        "library",
+        "पुस्तकालय",
+        "pustakaalay"
+      ]
+    ],
+    "exercise": [
+      [
+        "On which days is Anika’s course?",
+        "Monday and Thursday.",
+        "Those are the class days, not the outing date."
+      ],
+      [
+        "When does she want to visit the park?",
+        "Saturday at three.",
+        "The invitation is in the second paragraph."
+      ],
+      [
+        "Where should they meet?",
+        "At the park entrance.",
+        "The exact entrance location is the relevant detail."
+      ],
+      [
+        "Why does Anika want to go to the library afterwards?",
+        "To return a book.",
+        "Abgeben describes handing it back in this context."
+      ],
+      [
+        "When does she ask for a reply?",
+        "Friday.",
+        "The response date comes before the Saturday outing."
+      ]
+    ],
+    "transfer": "Read the email once for purpose and once for dates. Then cover it and make a small table with course days, outing day, meeting time and reply day. Reopen the text and correct only the fields that were wrong. This makes a date-confusion problem visible without treating every unfamiliar word as equally important."
+  },
+  {
+    "kind": "reading",
+    "slug": "german-a2-reading-apartment-ad",
+    "title": "German A2 Reading: Apartment Advert Practice",
+    "focus": "separate stated features from details an advert does not provide",
+    "note": "An advert may describe a place attractively while leaving important details unstated. In this exercise, answer from the text rather than from what similar accommodation usually has. A quiet study room does not imply a particular internet connection or an included service. The passage is entirely fictional and contains no real listing, housing advice, rental price or contractual promise.",
+    "text": "Zimmer in einer Wohngemeinschaft\nWir suchen eine neue Mitbewohnerin oder einen neuen Mitbewohner für unsere Wohnung. Das freie Zimmer ist hell und hat einen Schreibtisch, ein Bett und ein Regal. Es liegt zum Innenhof, nicht zur Straße.\nIn der Wohnung leben bereits zwei Personen. Wir teilen uns die Küche und das Bad. Meistens kocht jede Person für sich. Einmal im Monat essen wir gern zusammen, wenn alle Zeit haben.\nDie Bushaltestelle ist ungefähr fünf Minuten zu Fuß entfernt. Fahrräder können im Hof stehen. Ein Aufzug ist nicht vorhanden; die Wohnung liegt im dritten Stock.\nWir möchten Interessierte zuerst bei einem kurzen Gespräch kennenlernen. Schreiben Sie bitte etwas über Ihren Alltag und darüber, wann Sie Zeit für ein Gespräch haben. Weitere Einzelheiten besprechen wir dann gemeinsam.",
+    "translation": "The fictional shared flat has a furnished bright room facing a courtyard. Two people already live there and share the kitchen and bathroom. They usually cook separately, sometimes eat together and invite interested readers to send a short introduction with conversation availability. The text mentions stairs and no lift.",
+    "phrases": [
+      [
+        "die Wohngemeinschaft",
+        "shared flat",
+        "साझा आवास",
+        "saajha aavaas"
+      ],
+      [
+        "der Innenhof",
+        "courtyard",
+        "भीतरी आँगन",
+        "bheetari aangan"
+      ],
+      [
+        "teilen",
+        "share",
+        "साझा करना",
+        "saajha karna"
+      ],
+      [
+        "vorhanden",
+        "present or available",
+        "उपलब्ध",
+        "upalabdh"
+      ],
+      [
+        "der Stock",
+        "floor of a building",
+        "मंज़िल",
+        "manzil"
+      ],
+      [
+        "kennenlernen",
+        "get to know",
+        "परिचय करना",
+        "parichay karna"
+      ]
+    ],
+    "exercise": [
+      [
+        "Does the room face the street?",
+        "No: it faces the courtyard.",
+        "The first paragraph explicitly contrasts the two."
+      ],
+      [
+        "How many people already live in the flat?",
+        "Two.",
+        "The prospective newcomer is not included in that count."
+      ],
+      [
+        "Do they always cook together?",
+        "No.",
+        "Meistens each cooks separately; a shared meal is occasional."
+      ],
+      [
+        "Does the text state that internet is included?",
+        "No.",
+        "An unmentioned feature cannot be inferred from the study furniture."
+      ],
+      [
+        "What should an interested reader write?",
+        "About their daily life and conversation availability.",
+        "The final paragraph gives the requested response."
+      ]
+    ],
+    "transfer": "Write two lists: facts stated in the advert and questions still unanswered. Include furnishings and access in the first list only if the passage supports them. Put price and internet arrangements in the second because they are not supplied. The skill is recognising the boundary of the information, not guessing a realistic rental agreement."
+  },
+  {
+    "kind": "reading",
+    "slug": "german-a2-reading-course-notice",
+    "title": "German A2 Reading: Course Notice Practice",
+    "focus": "find a changed room, preparation task and alternative contact action",
+    "note": "A course message can change one practical detail while leaving others unchanged. Notice what remains the same before assuming that a room change also cancels the meeting. This original passage includes an action before the session and a response for learners who cannot open a file. All arrangements are fictional and do not describe a real Klarweg course, classroom or support policy.",
+    "text": "Information zum nächsten Lesetreffen\nLiebe Teilnehmerinnen und Teilnehmer,\nunser Lesetreffen am Mittwoch beginnt wie geplant um 18 Uhr. Wir treffen uns diesmal jedoch nicht in Raum 12, sondern in Raum 8 im Erdgeschoss. Der andere Raum wird am Abend für eine Veranstaltung gebraucht.\nBitte lesen Sie vor dem Treffen die kurze Geschichte aus der letzten Nachricht. Notieren Sie zwei Stellen, die Sie interessant oder unklar finden. Sie müssen nicht jedes unbekannte Wort im Wörterbuch nachschlagen. Wir möchten zuerst über den Inhalt und die Figuren sprechen.\nWenn Sie die Datei nicht öffnen können, antworten Sie bitte auf diese Nachricht. Wir schicken Ihnen den Text dann in einer anderen Form. Eine gedruckte Ausgabe brauchen Sie nicht mitzubringen.\nAm Ende des Treffens wählen wir gemeinsam den Text für die nächste Woche.\nViele Grüße\nMara Sommer",
+    "translation": "The fictional reading meeting remains on Wednesday at 18:00 but moves from room 12 to room 8. Participants should read the earlier story and note two interesting or unclear passages. They should reply if the file will not open. A printed copy is not required, and the next text will be chosen together.",
+    "phrases": [
+      [
+        "wie geplant",
+        "as planned",
+        "योजना के अनुसार",
+        "yojana ke anusaar"
+      ],
+      [
+        "das Erdgeschoss",
+        "ground floor",
+        "भूतल",
+        "bhootal"
+      ],
+      [
+        "die Stelle",
+        "passage in a text here",
+        "पाठ का अंश",
+        "paath ka ansh"
+      ],
+      [
+        "nachschlagen",
+        "look up",
+        "शब्दकोश में देखना",
+        "shabdkosh mein dekhna"
+      ],
+      [
+        "die Figur",
+        "character in a story",
+        "कहानी का पात्र",
+        "kahaani ka paatra"
+      ],
+      [
+        "gedruckt",
+        "printed",
+        "मुद्रित",
+        "mudrit"
+      ]
+    ],
+    "exercise": [
+      [
+        "Does the start time change?",
+        "No: it remains 18 Uhr.",
+        "Wie geplant signals that the time stays as planned."
+      ],
+      [
+        "Which room should participants use?",
+        "Room 8 on the ground floor.",
+        "Room 12 is the old room, explicitly rejected."
+      ],
+      [
+        "What should they note before the meeting?",
+        "Two interesting or unclear passages.",
+        "The task is more specific than translating every word."
+      ],
+      [
+        "What should someone do if the file will not open?",
+        "Reply to the message.",
+        "The organiser offers another form after that reply."
+      ],
+      [
+        "Must a printed copy be brought?",
+        "No.",
+        "The message explicitly says it is not needed."
+      ]
+    ],
+    "transfer": "Underline the unchanged information once and changed information twice. Then write a short reminder containing only day, time, new room and preparation task. Compare it against the original. If the reminder adds a cancellation or a new time, remove the unsupported detail rather than changing the source to match your memory."
+  },
+  {
+    "kind": "reading",
+    "slug": "german-b1-reading-opinion",
+    "title": "German B1 Reading: Opinion Text with Answers",
+    "focus": "identify an argument, its example and the limits of its claim",
+    "note": "An opinion text can present a preference without claiming that it works for everyone. Find the main view, the evidence offered and the qualification. Watch whether the conclusion rejects the alternative or combines it with the writer’s preferred method. This original reading passage is fictional personal reasoning, not a research summary or an official examination item. Its learning labels describe practice difficulty rather than certify your level.",
+    "text": "Papier oder Bildschirm beim Lernen?\nWenn ich einen neuen Text lese, arbeite ich zunächst lieber auf Papier. Ich kann Fragen an den Rand schreiben und sehe meine Notizen beim zweiten Lesen sofort. Vor allem bei längeren Absätzen hilft mir das, die Verbindung zwischen einer Behauptung und ihrem Beispiel zu erkennen.\nDas bedeutet aber nicht, dass digitale Materialien für mich ungeeignet sind. Für das Wiederholen einzelner Wörter nutze ich gern eine digitale Liste. Ich kann sie auch unterwegs öffnen und muss kein zusätzliches Heft mitnehmen. Schwierig wird es, wenn ich beim Lesen ständig zwischen mehreren Anwendungen wechsle. Dann beschäftige ich mich manchmal mehr mit den Werkzeugen als mit dem Inhalt.\nEine Freundin von mir sieht das anders. Sie ordnet ihre Notizen digital und findet Informationen dadurch schneller wieder. Unsere unterschiedlichen Erfahrungen zeigen mir, dass ich nicht einfach eine Methode für alle empfehlen kann.\nFür meine eigene Arbeit habe ich deshalb eine kleine Regel gewählt: Einen längeren neuen Text lese ich zuerst in Ruhe auf Papier. Später übertrage ich nur die wichtigsten Wörter und Fragen in meine digitale Sammlung. So bekommt jedes Werkzeug eine klare Aufgabe. Wenn sich mein Alltag ändert, kann ich diese Aufteilung wieder anpassen.",
+    "translation": "The writer prefers paper for first reading of longer texts because marginal notes help them see the reasoning. They still use digital word lists and acknowledge a friend’s different experience. The conclusion gives each tool a specific job and leaves room to change the arrangement later.",
+    "phrases": [
+      [
+        "die Behauptung",
+        "claim",
+        "दावा",
+        "daava"
+      ],
+      [
+        "der Rand",
+        "margin or edge",
+        "किनारा",
+        "kinaara"
+      ],
+      [
+        "ungeeignet",
+        "unsuitable",
+        "अनुपयुक्त",
+        "anupyukt"
+      ],
+      [
+        "unterwegs",
+        "on the move",
+        "यात्रा के दौरान",
+        "yatra ke dauraan"
+      ],
+      [
+        "die Sammlung",
+        "collection",
+        "संग्रह",
+        "sangrah"
+      ],
+      [
+        "anpassen",
+        "adapt",
+        "अनुकूल बनाना",
+        "anukool banaana"
+      ]
+    ],
+    "exercise": [
+      [
+        "What is the writer’s initial preference for a long new text?",
+        "Reading on paper.",
+        "The preference is scoped to that activity, not every study task."
+      ],
+      [
+        "What do marginal notes help the writer identify?",
+        "The link between a claim and its example.",
+        "The first paragraph gives a reason rather than a numerical research finding."
+      ],
+      [
+        "Does the writer reject digital tools?",
+        "No.",
+        "They use a digital vocabulary list and collection."
+      ],
+      [
+        "Why mention the friend’s different experience?",
+        "To limit a universal recommendation.",
+        "The writer recognises that another method can work for someone else."
+      ],
+      [
+        "What is the final arrangement?",
+        "Paper for the first long reading, selected words and questions stored digitally.",
+        "The conclusion assigns each tool a job and allows later adaptation."
+      ]
+    ],
+    "transfer": "Write a one-sentence summary, then find one passage that supports it and one that limits it. If your summary says “paper is always better,” compare it with the friend’s example and rewrite it. A good reading summary preserves the writer’s scope instead of turning a personal preference into a universal fact."
+  }
+]

@@ -51,7 +51,7 @@ test('guides load no analytics, tracking or placement scripts', () => {
   for (const { rel, html } of pages) {
     assert.doesNotMatch(html, /gtag|googletagmanager|google-analytics|analytics\.js|clarity\.ms|facebook\.net|hotjar/i, rel);
     const scripts = [...html.matchAll(/<script[^>]*src="([^"]+)"/g)].map((m) => m[1]);
-    assert.deepEqual(scripts, ['../site.js', '../kw-config.js', '../kw-auth.js', '../kw-nav-auth.js'], `${rel} scripts`);
+    assert.deepEqual(scripts, ['../site.js', '../kw-config.js', '../kw-auth.js', '../kw-nav-auth.js?v=2'], `${rel} scripts`);
   }
 });
 

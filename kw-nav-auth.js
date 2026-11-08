@@ -57,7 +57,7 @@
     return m ? m[1].toUpperCase() : null;
   }
   function onRoadmapOf(level) {
-    return new RegExp('(^|/)' + level.toLowerCase() + '\\.html$').test(global.location.pathname);
+    return new RegExp('(^|/)' + level.toLowerCase() + '(\\.html)?$').test(global.location.pathname);
   }
   function renderCtas(signedIn) {
     var list = document.querySelectorAll('.js-nav-cta');

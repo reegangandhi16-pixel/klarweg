@@ -317,8 +317,11 @@
     if (!ctx || !ctx.trigger || typeof ctx.trigger.closest !== 'function') return false;
     if (!ctx.trigger.closest('#pricing')) return false;
     var path = global.location.pathname || '';
-    var expected = '/' + product.id.toLowerCase() + '.html';
-    return path.length >= expected.length && path.slice(-expected.length) === expected;
+    var page = '/' + product.id.toLowerCase();
+    // the published site serves extensionless URLs (/a1); /a1.html still works
+    return [page, page + '.html'].some(function (expected) {
+      return path.length >= expected.length && path.slice(-expected.length) === expected;
+    });
   }
 
   function start(productId, ctx) {

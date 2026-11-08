@@ -126,7 +126,6 @@ og-image.png
 # artifact states its intended origin (tests keep it equal to SITE_BASE).
 CNAME
 manifest.json
-favicon.svg
 apple-touch-icon.png
 icon-192.png
 icon-512.png

@@ -32,7 +32,7 @@ const org = {
       '@id': `${SITE_BASE}/#organization`,
       name: 'Klarweg',
       url: `${SITE_BASE}/`,
-      logo: `${SITE_BASE}/site-icon-512.png`, // the brand logo (#276); icon-512.png stays the coral-dot chapter share image
+      logo: `${SITE_BASE}/site-icon-512.png`, // the brand logo (#276); also the share/structured-data image (old coral-dot icon-512.png retired)
       email: 'klarwegofficial@gmail.com',
       description: 'German courses from A1 to C2 for Hindi-speaking learners, with color-coded grammar and Goethe exam preparation.',
     },
@@ -106,7 +106,7 @@ for (const [f, name, parent, level] of GUIDES) {
     url,
     mainEntityOfPage: url,
     inLanguage: 'en',
-    image: `${SITE_BASE}/icon-512.png`,
+    image: `${SITE_BASE}/site-icon-512.png`,
     ...(level ? { educationalLevel: `CEFR ${level}` } : {}),
     isAccessibleForFree: true,
     author: { '@type': 'Organization', name: 'Klarweg', url: `${SITE_BASE}/` },

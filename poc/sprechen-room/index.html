@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Sprechen Prüfungsraum (Prototyp)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="room.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/",
+  "talkinghead": "https://cdn.jsdelivr.net/npm/@met4citizen/talkinghead@1.8.2/modules/talkinghead.mjs"
+} }
+</script>
+</head>
+<body>
+<main class="page">
+  <header class="head">
+    <p class="eyebrow">B1 · Sprechen · Teil 3 · Prototyp</p>
+    <h1>Virtueller Prüfungsraum</h1>
+    <p class="note">Lokaler Prototyp. Keine offizielle Goethe-Prüfung und keine Bewertung. Ihre Aufnahme bleibt in diesem Browser.</p>
+  </header>
+
+  <section class="stage" id="stage" aria-label="Prüfungsraum">
+    <div class="room" aria-hidden="true">
+      <div class="wall"></div>
+      <div class="window"><span></span><span></span></div>
+      <div class="board"></div>
+    </div>
+    <div class="avatar" id="avatar" aria-hidden="true"></div>
+    <div class="portrait" id="portrait" hidden aria-hidden="true">
+      <div class="ring" id="ring"></div>
+      <div class="face">J</div>
+    </div>
+    <div class="desk" aria-hidden="true"><div class="namecard">Julia · Teilnehmerin</div><div class="paper"></div></div>
+
+    <aside class="examiner" id="examiner" aria-label="Prüferin">
+      <span class="ex-dot"></span>
+      <span><strong>Prüferin</strong><br><small id="exState">am Tisch</small></span>
+    </aside>
+
+    <div class="status" id="status" role="status" aria-live="polite">
+      <span class="dot" id="statusDot"></span><span id="statusText">Bereit</span>
+      <span class="meter" id="meterWrap" hidden><span id="meter"></span></span>
+    </div>
+    <div class="loading" id="loading" hidden><span id="loadingText">Avatar wird geladen …</span></div>
+    <p class="caption" id="caption" hidden></p>
+  </section>
+
+  <section class="controls">
+    <button class="primary" id="go">Prüfungsraum betreten</button>
+    <button class="secondary" id="done" hidden>Ich bin fertig</button>
+    <div class="opts">
+      <label><input type="checkbox" id="optCaptions"> Untertitel (nur Prototyp)</label>
+      <label><input type="checkbox" id="opt2d"> Ohne 3D-Avatar (Fallback)</label>
+      <label><input type="checkbox" id="optStt"> Browser-Spracherkennung (Chrome sendet Audio an Google)</label>
+    </div>
+    <p class="hint" id="hint">Ablauf: Die Prüferin leitet ein, Julia präsentiert kurz und stellt Ihnen eine Frage. Antworten Sie frei über das Mikrofon. Wenn Sie aufhören zu sprechen, erkennt der Raum das Ende Ihres Beitrags.</p>
+  </section>
+
+  <section class="result" id="result" hidden>
+    <h2>Ihre Antwort</h2>
+    <audio id="playback" controls></audio>
+    <p class="transcript" id="transcript" hidden></p>
+    <p class="note">Simulation. Die Aufnahme wird nicht hochgeladen und nicht bewertet.</p>
+  </section>
+
+  <details class="metrics">
+    <summary>Messwerte</summary>
+    <ol id="log"></ol>
+  </details>
+</main>
+<script type="module" src="room.js"></script>
+</body>
+</html>

@@ -423,7 +423,12 @@ export function startChoice(av) {
   const ok = (av && av.modes || []).filter((m) => m.available && m.level === 'b1');
   // the Mock M0 (real, reviewed content) comes before the synthetic practice
   const full = ok.find((m) => m.mode === 'mock_m0') || ok.find((m) => m.mode === 'synthetic_full');
-  if (full) return { mode: full.mode, module: null };
+  if (full) {
+    /* EXAM_MODULE_CHOICE: the same family can also be taken one module at a time (mock_m0 → mock_module) */
+    const single = full.mode === 'mock_m0' ? 'mock_module' : 'synthetic_module';
+    const modules = MODULE_ORDER.filter((mod) => ok.some((m) => m.mode === single && m.module === mod));
+    return { mode: full.mode, module: null, ...(modules.length ? { single_mode: single, modules } : {}) };
+  }
   const one = ok.find((m) => m.mode === 'synthetic_module' && MODULE_LABELS[m.module]);
   return one ? { mode: one.mode, module: one.module } : null;
 }
@@ -441,6 +446,17 @@ export function partPracticeSection(choices) {
     + '</ul></section>').join('');
 }
 
+/* EXAM_MODULE_CHOICE (owner request 2026-11-09): all four modules now, or one module now and the others later — like
+   booking Goethe modules separately. Each single module is its own attempt with its own result. */
+export function moduleChoiceSection(choice) {
+  return '<section class="kx-module-choice" aria-labelledby="kx-mc-title"><h2 id="kx-mc-title">Wie möchten Sie die Prüfung ablegen?</h2>'
+    + '<div class="kx-mc-option"><h3>Alle vier Module</h3><p>Lesen, Hören, Schreiben und Sprechen nacheinander, wie in der Prüfung. Planen Sie etwa drei Stunden ein.</p>'
+    + `<div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}">Alle vier Module starten</button></div></div>`
+    + '<div class="kx-mc-option"><h3>Ein Modul</h3><p>Nur ein Modul jetzt, die anderen später. Jedes Modul ist ein eigener Test mit eigenem Ergebnis.</p>'
+    + '<div class="kx-actions kx-mc-modules">' + choice.modules.map((mod) => `<button class="kx-btn kx-btn-quiet" data-act="create" data-mode="${esc(choice.single_mode)}" data-module="${esc(mod)}">Nur ${esc(MODULE_LABELS[mod])}</button>`).join('')
+    + '</div></div></section>';
+}
+
 export function startScreen(choice, { lastCompleted = null, history = '', parts = '' } = {}) {
   if (!choice) {   // only part practice is offered
     const last = lastCompleted ? `<div class="kx-actions"><button class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(lastCompleted)}">Letztes Ergebnis ansehen</button></div>` : '';
@@ -448,13 +464,15 @@ export function startScreen(choice, { lastCompleted = null, history = '', parts 
   }
   const last = lastCompleted ? `<button class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(lastCompleted)}">Letztes Ergebnis ansehen</button>` : '';
   if (!choice.module && choice.mode === 'mock_m0') {
-    return `<main class="kx-card"><p class="kx-eyebrow">Modelltest · alle vier Module</p><h1>Klarweg B1 Modelltest</h1>`
+    return `<main class="kx-card"><p class="kx-eyebrow">${choice.modules ? 'Modelltest' : 'Modelltest · alle vier Module'}</p><h1>Klarweg B1 Modelltest</h1>`
       + '<p>Ein vollständiger Modelltest mit Lesen, Hören, Schreiben und Sprechen, mit den Prüfungszeiten. Die Zeit läuft auf dem Server. '
       + 'Die Hörtexte werden einmal oder zweimal abgespielt, wie in der Prüfung; Sie können sie nicht anhalten. Für Sprechen brauchen Sie ein Mikrofon.</p>'
       + '<p>Lesen und Hören werden automatisch ausgewertet, mit Lösung und Erklärung zu jeder Aufgabe. Schreiben und Sprechen bewertet eine zertifizierte Prüfperson; '
       + 'das Ergebnis dieser Module erscheint nach der Bewertung.</p>'
       + `<p class="kx-meta">${esc(RESULT_DISCLAIMER)} Die Hörtexte sind mit synthetischen Stimmen erstellt.</p>`
-      + `<div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="mock_m0">Modelltest starten</button>${last}</div>${parts}${history}</main>`;
+      + (choice.modules ? moduleChoiceSection(choice) + (last ? `<div class="kx-actions">${last}</div>` : '')
+        : `<div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="mock_m0">Modelltest starten</button>${last}</div>`)
+      + `${parts}${history}</main>`;
   }
   if (!choice.module) {
     return `<main class="kx-card"><p class="kx-eyebrow">Übung · synthetische Inhalte</p><h1>Klarweg B1 Simulation</h1><p>Eine Übungsprüfung mit allen vier Modulen: Lesen, Hören, Schreiben, Sprechen. Die Inhalte sind synthetisch (keine echte Prüfung); die Hörtexte werden als Prüftöne abgespielt und sind nach der Abgabe zum Nachlesen da. Lesen und Schreiben laufen mit Prüfungszeit, Hören und Sprechen mit verkürzten Übungszeiten. Die Zeit läuft auf dem Server.</p><div class="kx-actions"><button class="kx-btn" data-act="create" data-mode="${esc(choice.mode)}">Übung starten</button>${last}</div>${parts}${history}</main>`;

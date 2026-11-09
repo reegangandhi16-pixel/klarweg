@@ -3,7 +3,7 @@
    → server deadline. Invalid state transitions are rejected with 409. */
 import { fail, now, readJsonBody, sha256Hex, DEVICE_ID_RE } from './http.js';
 import { log } from './log.js';
-import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly, practiceParts, singleExaminer } from './flags.js';
+import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly, moduleChoice, practiceParts, singleExaminer } from './flags.js';
 import { hasExamAccess, hasRole } from './auth.js';
 import { releaseSet, practicePool, RELEASE_MESSAGES } from './release.js';
 import { formRow, levelConfig, moduleConfig, loadPackage } from './content.js';
@@ -144,8 +144,9 @@ export async function availability(env, userId) {
   const pp = practiceParts(env);
   for (const [mode, def] of Object.entries(MODES)) {
     if (def.single_part) { out.push(...(await partAvailability(env, userId, mode, def, pp))); continue; }
-    // a single-module mode is listed once per enabled module; while EXAM_MODULE_ONLY is unset it is listed as disabled
-    const modules = def.single_module ? (only && only.ok ? only.modules : [null]) : [undefined];
+    // a single-module mode is listed once per enabled module (EXAM_MODULE_ONLY, else every module under EXAM_MODULE_CHOICE);
+    // with neither it is listed once, as disabled
+    const modules = def.single_module ? (only && only.ok ? only.modules : (!only && moduleChoice(env) ? [...EXAM_MODULES] : [null])) : [undefined];
     for (const [lvlKey, lvl] of Object.entries(LEVELS)) {
       let reason = modeBlock(env, def) || rs.block;
       if (!reason && !(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) reason = 'no_access';
@@ -1046,7 +1047,8 @@ export async function productiveForRating(env, userId, attemptId) {
   const rated = (await env.DB.prepare('SELECT item_id, round, rater_id FROM ratings WHERE attempt_id = ?1').bind(attempt.id).all()).results;
   const units = [];
   let topic = null;
-  for (const module of ['schreiben', 'sprechen']) {
+  // only the productive modules this attempt contains (a single-module attempt has one, or none)
+  for (const module of ['schreiben', 'sprechen'].filter((m) => mods[m])) {
     const items = (await env.DB.prepare('SELECT item_id, rubric_id FROM items_index WHERE form_id = ?1 AND module = ?2').bind(attempt.form_id, module).all()).results;
     const pkg = (await loadPackage(env, attempt.form_id, module)).data;
     if (module === 'sprechen') topic = await speakingTopic(env, attempt.id, pkg);
@@ -1059,7 +1061,7 @@ export async function productiveForRating(env, userId, attemptId) {
         rounds_taken: rated.filter((r) => r.item_id === u.item_id).map((r) => ({ round: r.round, mine: r.rater_id === userId })) });
     }
   }
-  const modules = ['schreiben', 'sprechen'].map((m) => ({ module: m, status: mods[m] ? mods[m].status : null, score_status: scores[m] ? scores[m].status : null,
+  const modules = ['schreiben', 'sprechen'].filter((m) => mods[m]).map((m) => ({ module: m, status: mods[m] ? mods[m].status : null, score_status: scores[m] ? scores[m].status : null,
     points: scores[m] && scores[m].status === 'final' ? scores[m].points : null, max_points: scores[m] ? scores[m].max_points : null }));
   return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, writing, recordings: turns, bands: BANDS, modules, units, topic,
     lead: await hasRole(env, userId, ['lead_rater']), single_examiner: singleExaminer(env) };

@@ -662,7 +662,8 @@ test('START SCREEN: full simulation when available, else the single available mo
   const m = (mode, available, extra = {}) => ({ mode, level: 'b1', available, reason: available ? null : 'disabled', ...extra });
   assert.equal(startChoice({ modes: [] }), null);
   assert.equal(startChoice({ modes: [m('synthetic_full', false), m('synthetic_module', false, { module: null })] }), null);
-  assert.deepEqual(startChoice({ modes: [m('synthetic_full', true), m('synthetic_module', true, { module: 'lesen' })] }), { mode: 'synthetic_full', module: null });
+  // both available only under EXAM_MODULE_CHOICE: the full test plus the single modules it can also be taken as
+  assert.deepEqual(startChoice({ modes: [m('synthetic_full', true), m('synthetic_module', true, { module: 'lesen' })] }), { mode: 'synthetic_full', module: null, single_mode: 'synthetic_module', modules: ['lesen'] });
   const lesen = startChoice({ modes: [m('synthetic_full', false), m('synthetic_module', true, { module: 'lesen' })] });
   assert.deepEqual(lesen, { mode: 'synthetic_module', module: 'lesen' });
   assert.equal(startChoice({ modes: [m('synthetic_module', true, { module: 'nope' })] }), null);
@@ -1341,4 +1342,28 @@ test('START SCREEN: the Mock M0 comes before the synthetic practice and says how
   assert.ok(html.includes('zertifizierte Prüfperson') && html.includes('kein offizielles Ergebnis'));
   assert.ok(!html.includes('synthetische Inhalte') && html.includes('synthetischen Stimmen'), 'real content, honestly synthetic voices');
   assert.deepEqual(startChoice({ modes: [{ mode: 'synthetic_full', level: 'b1', available: true }, { mode: 'mock_m0', level: 'b1', available: false }] }), { mode: 'synthetic_full', module: null });
+});
+
+test('START SCREEN (EXAM_MODULE_CHOICE): the Mock M0 offers all four modules OR one module now, each one its own test', async () => {
+  const { startChoice, startScreen } = await import('../js/render.js');
+  const mods = ['sprechen', 'lesen', 'schreiben', 'hoeren'];   // listed in any order, offered in exam order
+  const av = { modes: [{ mode: 'mock_m0', level: 'b1', available: true },
+    ...mods.map((module) => ({ mode: 'mock_module', level: 'b1', module, available: true })),
+    { mode: 'mock_module', level: 'b1', module: 'schreiben', available: false }] };
+  const c = startChoice(av);
+  assert.deepEqual(c, { mode: 'mock_m0', module: null, single_mode: 'mock_module', modules: ['lesen', 'hoeren', 'schreiben', 'sprechen'] });
+  const html = startScreen(c, { lastCompleted: 'att_9' });
+  assert.match(html, /Wie möchten Sie die Prüfung ablegen\?/);
+  assert.match(html, /<button class="kx-btn" data-act="create" data-mode="mock_m0">Alle vier Module starten<\/button>/);
+  for (const [mod, label] of [['lesen', 'Lesen'], ['hoeren', 'Hören'], ['schreiben', 'Schreiben'], ['sprechen', 'Sprechen']]) {
+    assert.ok(html.includes(`data-act="create" data-mode="mock_module" data-module="${mod}">Nur ${label}</button>`), mod);
+  }
+  assert.match(html, /Nur ein Modul jetzt, die anderen später\. Jedes Modul ist ein eigener Test mit eigenem Ergebnis\./);
+  assert.ok(!html.includes('Modelltest starten'), 'one clear choice, not a third button');
+  assert.ok(html.includes('data-act="last-result" data-attempt="att_9"'));
+  // without single modules the screen is unchanged
+  const plain = startScreen(startChoice({ modes: [{ mode: 'mock_m0', level: 'b1', available: true }, { mode: 'mock_module', level: 'b1', module: null, available: false }] }));
+  assert.ok(plain.includes('Modelltest starten') && !plain.includes('kx-module-choice'));
+  // the stylesheet keeps the spacing scale for the new section
+  assert.match(read('exam/exam.css'), /\.kx-mc-option \{ border: 1px solid var\(--line\); border-radius: var\(--radius\); padding: 24px; margin-top: 16px; \}/);
 });

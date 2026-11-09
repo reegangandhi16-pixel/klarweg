@@ -1,0 +1,20 @@
+session,provider,turn,understood (yes/partly/no),meaning_based (yes/no),b1_level (yes/too hard/too simple),too_long (yes/no),latency_s,lips_1to5,naturalness_1to5,notes
+A,Tavus,1,,,,,,,,
+A,Tavus,2,,,,,,,,
+A,Tavus,3,,,,,,,,
+A,Tavus,4,,,,,,,,
+A,Tavus,5,,,,,,,,
+A,Tavus,6,,,,,,,,
+A,Tavus,7,,,,,,,,
+C,HeyGen,1,,,,,,,,
+C,HeyGen,2,,,,,,,,
+C,HeyGen,3,,,,,,,,
+C,HeyGen,4,,,,,,,,
+C,HeyGen,5,,,,,,,,
+C,HeyGen,6,,,,,,,,
+C,HeyGen,7,,,,,,,,
+
+session,provider,listening_alive (yes/no),repetition_seen (yes/no + what),visual_glitches,voice_1to5,pronunciation_1to5,interruption_ok (yes/no),iphone_heat,battery_used_pct,echo (yes/no),dropouts (yes/no),overall_real_person_1to10,one_sentence
+A,Tavus,,,,,,,,,,,,
+B,Tavus,,,,,,,,,,,,
+C,HeyGen,,,,,,,,,,,,

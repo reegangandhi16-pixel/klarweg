@@ -82,8 +82,14 @@ pkg.demo = true;
 /* 3. files */
 const copy = (rel, dest = rel) => fs.cpSync(path.join(ROOT, rel), path.join(OUT, dest), { recursive: true });
 copy('exam/exam.css'); copy('exam/js');
-copy('exam-room/vendor'); copy('exam-room/avatars');
-fs.rmSync(path.join(OUT, 'exam-room/avatars/LICENSES.md')); copy('exam-room/avatars/LICENSES.md', 'exam-room/LICENSES-avatars.md');
+// photoreal prototype (default on this branch): plate + video patches, no WebGL/avatars; --renderer 3d = old room
+if (arg('--renderer') === '3d') {
+  copy('exam-room/vendor'); copy('exam-room/avatars');
+  fs.rmSync(path.join(OUT, 'exam-room/avatars/LICENSES.md')); copy('exam-room/avatars/LICENSES.md', 'exam-room/LICENSES-avatars.md');
+} else {
+  copy('exam-room/photoreal/scene.json'); copy('exam-room/photoreal/room.css');
+  execFileSync('node', [path.join(ROOT, 'scripts/exam-room-photoreal-media.mjs'), '--out', path.join(OUT, 'exam-room/photoreal/media')], { stdio: 'ignore' });
+}
 copy('exam-room/preview/demo.html', 'exam-room/preview/index.html'); copy('exam-room/preview/demo.js', 'exam-room/preview/demo.js');
 const w = (rel, obj) => { fs.mkdirSync(path.dirname(path.join(OUT, rel)), { recursive: true }); fs.writeFileSync(path.join(OUT, rel), typeof obj === 'string' ? obj : JSON.stringify(obj)); };
 w('exam-room/casts/index.json', { casts: ['demo.json'] });

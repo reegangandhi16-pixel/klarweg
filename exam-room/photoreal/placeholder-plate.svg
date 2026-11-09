@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Helvetica, Arial, sans-serif">
+  <!-- PLACEHOLDER plate for the photoreal room engine test. Replaced by a real/approved photographic plate. -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1EEE7"/><stop offset="1" stop-color="#E4DFD5"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFC7BA"/><stop offset="1" stop-color="#B9B0A2"/></linearGradient>
+    <linearGradient id="win" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3EAEE"/></linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#wall)"/>
+  <rect y="640" width="1920" height="440" fill="url(#floor)"/>
+  <rect x="1380" y="110" width="430" height="380" fill="url(#win)" stroke="#D3CEC4" stroke-width="10"/>
+  <line x1="1595" y1="110" x2="1595" y2="490" stroke="#D3CEC4" stroke-width="8"/>
+  <circle cx="1080" cy="140" r="34" fill="#FAFAF7" stroke="#8C877E" stroke-width="5"/><line x1="1080" y1="140" x2="1080" y2="118" stroke="#3A3A3A" stroke-width="4"/><line x1="1080" y1="140" x2="1096" y2="148" stroke="#3A3A3A" stroke-width="4"/>
+  <!-- rear table (second table, background) -->
+  <rect x="1500" y="560" width="330" height="22" fill="#B79E80"/><rect x="1510" y="582" width="10" height="90" fill="#8E7A62"/><rect x="1810" y="582" width="10" height="90" fill="#8E7A62"/>
+  <rect x="1560" y="520" width="70" height="40" rx="4" fill="#DAD5CB"/><rect x="1700" y="470" width="60" height="90" rx="6" fill="#A9B3B7"/>
+  <!-- examiner A (lead) -->
+  <rect x="705" y="420" width="190" height="210" rx="40" fill="#3A3F4A"/><circle cx="800" cy="335" r="60" fill="#D9B8A0"/><path d="M742 320 Q800 250 858 320 L858 300 Q800 230 742 300Z" fill="#8A8580"/>
+  <!-- examiner B (assessor) -->
+  <rect x="1055" y="425" width="190" height="205" rx="40" fill="#5A4B45"/><circle cx="1150" cy="340" r="58" fill="#C99E84"/><path d="M1092 330 Q1150 260 1208 330 L1212 360 Q1150 250 1088 360Z" fill="#3D2E28"/>
+  <!-- examiners' table -->
+  <polygon points="590,600 1330,600 1380,690 540,690" fill="#C8B497"/><rect x="540" y="690" width="840" height="34" fill="#A99377"/>
+  <rect x="760" y="610" width="90" height="60" fill="#FAFAF7" transform="rotate(-4 805 640)"/><rect x="1110" y="612" width="110" height="64" fill="#FAFAF7" transform="rotate(5 1165 644)"/><rect x="1240" y="590" width="10" height="70" fill="#2B2B2B" transform="rotate(25 1245 625)"/>
+  <!-- partner (left, near the candidate, three-quarter view) -->
+  <rect x="110" y="540" width="420" height="560" rx="90" fill="#2F3540"/><circle cx="300" cy="420" r="102" fill="#D2AE93"/><path d="M200 400 Q300 280 400 390 L400 350 Q300 260 200 360Z" fill="#4A3A2E"/>
+  <!-- candidate's own table edge (foreground) -->
+  <polygon points="0,965 1920,940 1920,1080 0,1080" fill="#D6C5AA"/><rect x="980" y="975" width="300" height="90" fill="#FAFAF7" transform="rotate(-3 1130 1020)"/>
+  <!-- labels -->
+  <g font-size="26" fill="#5A5A60" text-anchor="middle">
+    <text x="800" y="790">Prüferin 1 (Leitung)</text><text x="1150" y="790">Prüferin 2 (Beisitz)</text><text x="320" y="900" fill="#FAFAF7">Gesprächspartner</text><text x="1665" y="720">zweiter Tisch</text>
+  </g>
+  <text x="960" y="56" font-size="30" font-weight="bold" fill="#9F1239" text-anchor="middle">PLATZHALTER · Engine-Test · keine finalen Personen</text>
+</svg>

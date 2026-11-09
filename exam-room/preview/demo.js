@@ -18,6 +18,8 @@ const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const T0 = performance.now();
+// proto/exam-room-photoreal: the video renderer (same createRoom contract); ?renderer=3d keeps the old one for comparison
+const ROOM_MODULE = new URLSearchParams(location.search).get('renderer') === '3d' ? '/exam/js/room/room.js' : '/exam/js/room-video/video-room.js';
 
 /* ---------- diagnostics (no personal data) ---------- */
 const diag = { ua: navigator.userAgent, screen: `${screen.width}x${screen.height}@${devicePixelRatio}`, events: [], errors: [], fps: [], jank: 0, frames: 0 };
@@ -183,14 +185,14 @@ function startRoom() {
   const main = $('#kx-main');
   if (!main || !roomWanted({ hostname: location.hostname, search: location.search, stored: storedView() })) { bridge.ready(null); note('room_off'); return bridge; }
   const t = performance.now();
-  import('/exam/js/room/room.js')
+  import(ROOM_MODULE)
     .then(({ createRoom }) => createRoom({ mount: main, pkg, log: (e, d) => console.info('[kx-room]', e, d), onFail: () => bridge.destroy() }))
     .then((r) => { bridge.ready(r); note(r ? 'room_ready' : 'room_null', { ms: Math.round(performance.now() - t) }); if (r) { watchVisible(t); wireRoomControls(bridge); } })
     .catch((e) => { console.warn('[kx-room]', 'room_failed', { where: 'load', error: e && e.message }); bridge.ready(null); });
   return bridge;
 }
 function watchVisible(t) {   // first moment the figures are seated and shown (canvas loses .kx-room-settling)
-  const id = setInterval(() => { const c = document.querySelector('.kx-room-canvas'); if (!c) return clearInterval(id); if (!c.classList.contains('kx-room-settling')) { clearInterval(id); note('room_visible', { ms: Math.round(performance.now() - t), sinceStart: Math.round(performance.now() - T0) }); } }, 100);
+  const id = setInterval(() => { const c = document.querySelector('.kx-room-canvas, .kxv-room[data-state="ready"]'); if (!c) return; if (!c.classList.contains('kx-room-settling')) { clearInterval(id); note('room_visible', { ms: Math.round(performance.now() - t), sinceStart: Math.round(performance.now() - T0) }); } }, 100);
 }
 function wireRoomControls(bridge) {
   const bar = document.querySelector('.kx-room-bar'); if (!bar) return;

@@ -1,0 +1,16 @@
+{
+  "_note": "Photoreal room prototype scene. plate/people media are PLACEHOLDERS until real footage or approved generated media exist (see DESIGN.md).",
+  "plate": { "w": 1920, "h": 1080, "src": "media/plate.png" },
+  "people": {
+    "examiner": { "role": "examiner", "label": "Prüferin (Leitung)", "rect": [0.3542, 0.2222, 0.125, 0.2407], "idle": "media/examiner-idle.mp4", "speak": "media/examiner-speak.mp4" },
+    "assessor": { "role": "examiner", "label": "Prüferin (Beisitz)", "rect": [0.5365, 0.2269, 0.125, 0.2407], "idle": "media/assessor-idle.mp4", "speak": "media/assessor-speak.mp4" },
+    "partner":  { "role": "partner",  "label": "Gesprächspartner",   "rect": [0.0729, 0.2407, 0.1719, 0.3056], "idle": "media/partner-idle.mp4",  "speak": "media/partner-speak.mp4" }
+  },
+  "shots": {
+    "establish":          { "landscape": [0.50, 0.50, 1.00], "portrait": [0.47, 0.45, 1.00] },
+    "examiners":          { "landscape": [0.50, 0.40, 1.14], "portrait": [0.47, 0.40, 1.06] },
+    "partner":            { "landscape": [0.28, 0.45, 1.10], "portrait": [0.16, 0.45, 1.00] },
+    "address_partner":    { "landscape": [0.36, 0.47, 1.05], "portrait": [0.22, 0.46, 1.00] },
+    "address_examiners":  { "landscape": [0.49, 0.44, 1.06], "portrait": [0.46, 0.42, 1.00] }
+  }
+}

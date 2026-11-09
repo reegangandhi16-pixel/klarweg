@@ -1,11 +1,49 @@
 {
   "name": "examiner-f",
-  "role": "Prüferin (examiner), about 50, business suit",
-  "phenotype": { "gender": 0.0, "age": 0.69, "muscle": 0.5, "weight": 0.52, "height": 0.5, "proportions": 0.6, "cupsize": 0.5, "firmness": 0.45,
-                 "race": { "caucasian": 0.9, "asian": 0.05, "african": 0.05 } },
+  "role": "Prüferin (examiner), about 50, charcoal skirt suit, ash-grey hair worn back",
+  "phenotype": {
+    "gender": 0.0,
+    "age": 0.69,
+    "muscle": 0.5,
+    "weight": 0.52,
+    "height": 0.5,
+    "proportions": 0.6,
+    "cupsize": 0.5,
+    "firmness": 0.45,
+    "race": {
+      "caucasian": 0.9,
+      "asian": 0.05,
+      "african": 0.05
+    }
+  },
   "skin": "middleage_caucasian_female/middleage_caucasian_female.mhmat",
   "eyebrows": "eyebrow001/eyebrow001.mhclo",
   "eyelashes": "eyelashes01/eyelashes01.mhclo",
-  "hair": "bob01/bob01.mhclo",
-  "clothes": ["female_elegantsuit01/female_elegantsuit01.mhclo"]
+  "hair": "braid01/braid01.mhclo",
+  "clothes": [
+    "toigo_female_suit/toigo_female_suit.mhclo"
+  ],
+  "recolor": [
+    {
+      "match": "braid01",
+      "rgb": [
+        0.86,
+        0.84,
+        0.81
+      ],
+      "lift": 0.32,
+      "gain": 1.25
+    },
+    {
+      "match": "eyebrow",
+      "rgb": [
+        0.36,
+        0.34,
+        0.32
+      ],
+      "lift": 1.0,
+      "gain": 0.0,
+      "minSat": 0
+    }
+  ]
 }

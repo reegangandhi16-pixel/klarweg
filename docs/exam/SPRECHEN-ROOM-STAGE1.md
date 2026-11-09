@@ -37,23 +37,64 @@ It is **not** a conversational AI partner. No AI, speech recognition, or paid AP
 - `exam/js/room/visemes.js`, `cast.js` — pure, unit-tested.
 - Libraries: three.js 0.186.1, TalkingHead 1.8.2, HeadAudio 1.0.0 (all MIT), 2.9 MB uncompressed, loaded only when the room is on.
 
+## Figures
+
+Three figures, built from CC0 MakeHuman assets with Blender + MPFB 2.0.18 in an **isolated Blender profile**
+(`BLENDER_USER_RESOURCES` under a work directory outside the repo; the global Blender install, its
+preferences and extensions are not touched). Licences: `exam-room/avatars/LICENSES.md`.
+
+| File | Person | Look | Size (gzip) |
+|---|---|---|---|
+| `examiner-f.glb` | Prüferin | mature woman, grey hair, dark business suit | 4.62 MB (3.17 MB) |
+| `partner-m.glb` | Gesprächspartner | young man, short hair, dark suit | 4.98 MB (3.62 MB) |
+| `partner-f.glb` | Julia | young woman, ponytail, camel blazer | 4.91 MB (3.60 MB) |
+
+Each figure: root `Armature` (TalkingHead rig), 15 Oculus visemes + 52 ARKit face units as morph targets
+(eye looks, blinks, brows, squints), no animation clips, `KHR_mesh_quantization`, no Draco/meshopt/KTX
+(no decoder, no WebAssembly). Rebuild:
+
+```
+KX_FIG_WORK=… KX_FIG_ASSETS=… KX_FIG_RIG=… KX_FIG_PACKS=… scripts/exam-room-figures.sh
+node scripts/exam-room-avatar.mjs <raw.glb> exam-room/avatars/<name>.glb --max 1024 --jpeg 82 \
+  --size normal=512,body=2048,eyebrow=256,eyelash=256,teeth=512,tongue=256,high-poly=512,alpha=1024
+```
+
+Specs (phenotype, skin, hair, clothes, recolouring) are in `exam-room/figures/*.json`.
+
 ## Mobile weight
 
-The TalkingHead sample avatar is 36.8 MB. `scripts/exam-room-avatar.mjs` (own code) resizes textures, makes
-morph targets sparse, drops morph normals and applies `KHR_mesh_quantization` (no decoder, so no WebAssembly):
-36.8 → 9.0 MB (5.3 MB gzip) for that model. Target for the final figures: ≤ 5 MB each. Nothing is downloaded
-unless the room is on and the device has WebGL and no Save-Data.
+Nothing is downloaded unless the room is on and the device has WebGL and no Save-Data. A session loads the
+libraries (2.9 MB uncompressed) and only the figures of its scene (examiner + one partner ≈ 6.8 MB gzip).
+One WebGL renderer for all figures; MSAA + alpha-to-coverage for hair/brows/lashes; 24 fps cap on mobile.
+
+## Validation (headless Chrome, `exam-worker/test/room-e2e.mjs`, M0)
+
+| Check | Result |
+|---|---|
+| German lip-sync | partner mouth open peak ≈ 0.64–0.68 while his clip plays; examiner 0 at the same time |
+| Blinking | 1–3 blinks per 7 s per figure |
+| Eye movement / eye contact | gaze range 0.05–0.36 (`eyeLook*`); figures look at the speaker / the candidate |
+| Facial expression | brow and cheek activity; squint peaks ≤ 0.15 (no grimace) |
+| Speaker transitions | Teil 1 partner → "Sie sind dran" (partner listens, no mouth movement); Teil 3 examiner → Julia at the cast boundary |
+| Framing | camera at eye level (y ≈ 1.19 m); figures hidden until seated (no visible pop) |
+| Recording unchanged | chunks keep arriving throughout |
+| Mobile 390×844 @2x | same checks pass (emulation) |
+| Fallback | avatars blocked → room removed, classic view records |
+
+Review images (room only, no task text): `exam-room/review/` (not published; not in the Pages allowlist).
 
 ## Open before production (owner review)
 
-1. **Final figures.** The branch uses placeholder models for review of mechanics only; see the PR for the
-   avatar status. Final figures: MakeHuman/MPFB (CC0 assets), professional clothing, ARKit + Oculus visemes.
+1. **Look.** MakeHuman faces are clean but stylised, not photoreal. The examiner's hair partly sweeps toward
+   one eye (both eyes visible). Julia's suit includes shirt and tie. The listening pose pulls the arms back slightly.
 2. **M0 partner inconsistency.** M0's Teil 1 partner (male voice) differs from the Teil 3 partner (Julia).
-   In a real pair exam the same partner continues. The room shows the M0 audio as it is; M1–M10 will use one
-   partner throughout.
-3. **HeadAudio model is English-trained** (`model-en-mixed`). German visemes are close enough for mouth shapes;
-   the quality is reviewed in the preview, and the energy fallback is used if the classifier fails.
-4. Real-device testing (below).
+   In a real pair exam the same partner continues. The room shows the M0 audio as it is; M1–M10 should use
+   one partner throughout.
+3. **HeadAudio model is English-trained** (`model-en-mixed`). German mouth shapes look right in review; the
+   energy fallback is used if the classifier fails.
+4. **Avatars are not in the Pages allowlist.** Add `exam-room/avatars/*.glb` only together with `ROOM_PRODUCTION`.
+5. Real-device testing (below) needs an HTTPS preview (microphone), i.e. a `*.klarweg-site.pages.dev`
+   preview deploy — only with owner approval.
 
 ## Test matrix
 
@@ -67,4 +108,4 @@ unless the room is on and the device has WebGL and no Save-Data.
 | Desktop Safari, Firefox | **Not tested** |
 
 Run: `node exam-worker/test/room-e2e.mjs` (needs the private M0 content; otherwise only the no-cast scenario).
-Preview locally: see the PR description.
+Preview locally: see the PR description. GIF capture in headless Chrome runs at 4–10 fps; motion in a real browser is smoother.

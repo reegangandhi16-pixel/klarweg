@@ -90,7 +90,7 @@ export async function createRoom({ mount, pkg, log = () => {}, onFail = () => {}
 
   // read-only test hook (E2E): preview hosts only, never on production
   if (isPreviewHost(location.hostname) && /[?&]roomdebug\b/.test(location.search)) {
-    window.__kxRoom = { heads: stage.heads, camera: stage.camera, cast, speaking: () => speakingNow.who, timelines, phase: () => phaseId, recording: () => !!rec };
+    window.__kxRoom = { heads: stage.heads, camera: stage.camera, view: stage.setDebugView, frame: stage.debugFrame, cast, speaking: () => speakingNow.who, timelines, phase: () => phaseId, recording: () => !!rec };
   }
 
   const api = {

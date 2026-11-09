@@ -70,6 +70,17 @@ async function scenario(name, { viewport, form, blockAvatars = false, expectRoom
   };
   const click = (sel) => evaluate(`document.querySelector(${JSON.stringify(sel)}).click()`);
   const shot = async (label) => { const r = await send('Page.captureScreenshot', { format: 'png' }); const f = path.join(SHOTS, `${name}-${label}.png`); fs.writeFileSync(f, Buffer.from(r.data, 'base64')); log('screenshot', f); };
+  // room-only images for review (cropped to the room: no exam task text); KX_ROOM_GIF=1 also records a short GIF
+  const roomRect = () => evaluate(`(() => { const r = document.querySelector('.kx-room').getBoundingClientRect(); return { x: r.x + scrollX, y: r.y + scrollY, width: r.width, height: r.height, scale: 1 }; })()`);
+  const roomShot = async (label) => { const r = await send('Page.captureScreenshot', { format: 'png', clip: await roomRect(), captureBeyondViewport: true }); const f = path.join(SHOTS, `room-${name}-${label}.png`); fs.writeFileSync(f, Buffer.from(r.data, 'base64')); };
+  const roomGif = async (label, ms) => {
+    if (process.env.KX_ROOM_GIF !== '1') return;
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-room-gif-')); const clip = await roomRect(); const t0 = Date.now(); let i = 0;
+    while (Date.now() - t0 < ms) { const r = await send('Page.captureScreenshot', { format: 'png', clip, captureBeyondViewport: true }); fs.writeFileSync(path.join(dir, `f${String(i++).padStart(4, '0')}.png`), Buffer.from(r.data, 'base64')); }
+    const fps = Math.max(4, Math.round(i / (ms / 1000)));
+    execFileSync('ffmpeg', ['-y', '-v', 'error', '-framerate', String(fps), '-i', path.join(dir, 'f%04d.png'), '-vf', 'scale=560:-2:flags=lanczos,split[a][b];[a]palettegen=max_colors=160[p];[b][p]paletteuse=dither=bayer:bayer_scale=4', path.join(SHOTS, `room-${name}-${label}.gif`)]);
+    fs.rmSync(dir, { recursive: true, force: true }); log(name, 'gif', label, i, 'frames @', fps, 'fps');
+  };
   const consoleLines = () => b.events.filter((e) => e.method === 'Runtime.consoleAPICalled').map((e) => e.params.args.map((a) => (a.value !== undefined ? (typeof a.value === 'object' ? JSON.stringify(a.value) : a.value) : a.description)).join(' '));
   const row = () => dev.env.DB.prepare("SELECT started_at FROM attempt_modules WHERE module = 'sprechen'").first();
   const chunks = async () => (await dev.env.DB.prepare('SELECT COUNT(*) AS n FROM recording_chunks').first()).n;
@@ -126,9 +137,33 @@ async function scenario(name, { viewport, form, blockAvatars = false, expectRoom
     if (expectRoom) {
       await evaluate(`window.__mouth = { partner: [], examiner: [], speaker: [] }; (function loop(){ const R = window.__kxRoom; if (!R) return; const v = (h) => { let m = 0; for (const n in h.mtAvatar) if (n.startsWith('viseme_')) { const t = h.mtAvatar[n]; for (let j = 0; j < t.ms.length; j++) m = Math.max(m, t.ms[j][t.is[j]] || 0); } return m; }; window.__mouth.partner.push(v(R.heads.partner)); window.__mouth.examiner.push(v(R.heads.examiner)); window.__mouth.speaker.push(R.speaking()); if (window.__mouth.partner.length < 4000) requestAnimationFrame(loop); })(); 1`);
       await waitFor(`window.__kxRoom.speaking() === 'partner'`, 30000, 'partner speaking');
-      await sleep(2500); await shot('2-teil1-partner-speaks');
-      log(name, 'framing', JSON.stringify(await evaluate(`(() => { const R = window.__kxRoom, c = R.camera, cv = document.querySelector('.kx-room canvas'); const r = (v) => [v.x, v.y, v.z].map((n) => +n.toFixed(2)); const eyes = {}; for (const [k, h] of Object.entries(R.heads)) { if (!h.objectLeftEye) continue; h.objectLeftEye.updateMatrixWorld(true); const e = h.objectLeftEye.getWorldPosition(c.position.clone()); eyes[k] = [r(e), h.armature.visible]; } return { rooms: document.querySelectorAll('.kx-room').length, canvases: [...document.querySelectorAll('.kx-room canvas')].map((x) => [x.width, x.height, x.parentElement.className, x.parentElement.clientWidth, x.parentElement.clientHeight]), cam: r(c.position), fov: c.fov, aspect: +c.aspect.toFixed(2), canvas: [cv.width, cv.height, cv.clientWidth, cv.clientHeight], eyes }; })()`)));
+      await sleep(2500); await shot('2-teil1-partner-speaks'); await roomShot('teil1-partner-speaks');
+      log(name, 'framing', JSON.stringify(await evaluate(`(() => { const R = window.__kxRoom, c = R.camera, cv = document.querySelector('.kx-room canvas'); const r = (v) => [v.x, v.y, v.z].map((n) => +n.toFixed(2)); const eyes = {}; for (const [k, h] of Object.entries(R.heads)) { if (!h.objectLeftEye) continue; h.objectLeftEye.updateMatrixWorld(true); const e = h.objectLeftEye.getWorldPosition(c.position.clone()); eyes[k] = [r(e), h.armature.visible, +h.armature.position.y.toFixed(3), h.armature.parent && h.armature.parent.type, h.armature.parent && +h.armature.parent.position.y.toFixed(3)]; } return { rooms: document.querySelectorAll('.kx-room').length, canvases: [...document.querySelectorAll('.kx-room canvas')].map((x) => [x.width, x.height, x.parentElement.className, x.parentElement.clientWidth, x.parentElement.clientHeight]), cam: r(c.position), fov: c.fov, aspect: +c.aspect.toFixed(2), canvas: [cv.width, cv.height, cv.clientWidth, cv.clientHeight], eyes }; })()`)));
       assert.match(await evaluate(`document.querySelector('.kx-room-status-text').textContent`), /Gesprächspartner spricht/);
+      await roomGif('teil1-partner-speaks', 4500);
+      // faces over 7 s: blinks, eye movement (eye bone rotation range), non-viseme facial activity (brows, cheeks …)
+      const face = await evaluate(`new Promise((res) => { const R = window.__kxRoom, out = {}, t0 = performance.now();
+        const val = (h, k) => { const t = h.mtAvatar[k]; if (!t) return 0; let m = 0; for (let j = 0; j < t.ms.length; j++) m = Math.max(m, t.ms[j][t.is[j]] || 0); return m; };
+        for (const k of Object.keys(R.heads)) if (R.heads[k].armature.visible) out[k] = { blinks: 0, closed: false, eyeMin: 9, eyeMax: -9, active: new Set(), peak: {} };
+        (function tick() { for (const [k, o] of Object.entries(out)) { const h = R.heads[k];
+            const b = val(h, 'eyeBlinkLeft'); if (b > 0.6 && !o.closed) { o.blinks++; o.closed = true; } if (b < 0.2) o.closed = false;
+            const y = val(h, 'eyeLookInLeft') - val(h, 'eyeLookOutLeft') + val(h, 'eyeLookUpLeft') - val(h, 'eyeLookDownLeft') + h.objectLeftEye.rotation.y + h.objectLeftEye.rotation.x; o.eyeMin = Math.min(o.eyeMin, y); o.eyeMax = Math.max(o.eyeMax, y);
+            for (const n of ['eyeSquintLeft', 'eyeBlinkLeft', 'cheekSquintLeft', 'eyeWideLeft', 'browDownLeft']) o.peak[n] = Math.max(o.peak[n] || 0, +val(h, n).toFixed(2));
+            for (const n of Object.keys(h.mtAvatar)) if (!/^viseme_|^eyeBlink|^eyeLook/.test(n) && val(h, n) > 0.04) o.active.add(n); }
+          if (performance.now() - t0 < 7000) requestAnimationFrame(tick);
+          else res(Object.fromEntries(Object.entries(out).map(([k, o]) => [k, { blinks: o.blinks, eyeRange: +(o.eyeMax - o.eyeMin).toFixed(3), facial: [...o.active].slice(0, 8), peak: o.peak }]))); })(); })`);
+      log(name, 'faces', JSON.stringify(face));
+      for (const [k, f] of Object.entries(face)) {
+        assert.ok(f.blinks >= 1, `${k} blinks (${f.blinks} in 7 s)`);
+        assert.ok(f.eyeRange > 0.02, `${k} eyes move (gaze range ${f.eyeRange})`);
+      }
+      // close-ups for review: each visible face from 0.6 m
+      for (const k of Object.keys(face)) {
+        await evaluate(`(() => { const R = window.__kxRoom, h = R.heads['${k}']; h.objectLeftEye.updateMatrixWorld(true); const e = h.objectLeftEye.getWorldPosition(R.camera.position.clone()); const a = h.armature.rotation.y;
+          R.view({ pos: [e.x + Math.sin(a) * 0.62 - 0.03, e.y + 0.01, e.z + Math.cos(a) * 0.62], aim: [e.x - 0.03, e.y - 0.06, e.z] }); })()`);
+        await sleep(1200); await shot(`closeup-${k}`); await roomShot(`closeup-${k}`); await sleep(700); await shot(`closeup-${k}-b`);   // two frames: one may catch a blink
+      }
+      await evaluate(`window.__kxRoom.view(null)`);
       await waitFor(`window.__kxRoom.recording()`, 30000, 'candidate turn');
       const m = await evaluate(`(() => { const M = window.__mouth; const idx = M.speaker.map((s, i) => [s, i]); const sp = idx.filter(([s]) => s === 'partner').map(([, i]) => i); const open = (arr, ids) => ids.filter((i) => arr[i] > 0.1).length / Math.max(1, ids.length); return { frames: sp.length, partnerOpen: open(M.partner, sp), examinerOpenWhilePartner: open(M.examiner, sp) }; })()`);
       log(name, 'Teil 1 lip-sync', JSON.stringify(m));
@@ -136,7 +171,7 @@ async function scenario(name, { viewport, form, blockAvatars = false, expectRoom
       assert.ok(m.partnerOpen > 0.3, `partner mouth moves (${m.partnerOpen})`);
       assert.ok(m.examinerOpenWhilePartner < 0.05, 'examiner mouth closed meanwhile');
       assert.match(await evaluate(`document.querySelector('.kx-room-status-text').textContent`), /Sie sind dran/);
-      await sleep(2500); await shot('3-teil1-your-turn');
+      await sleep(2500); await shot('3-teil1-your-turn'); await roomShot('teil1-your-turn');
       assert.equal(await evaluate(`window.__kxRoom.heads.partner.isListening`), true, 'the partner listens during the candidate turn');
     }
     // recording reaches the server exactly as without the room
@@ -159,7 +194,8 @@ async function scenario(name, { viewport, form, blockAvatars = false, expectRoom
       await waitFor(`document.querySelector('.kx-room[data-state="ready"]') && window.__kxRoom`, 90000, 'room ready (partner phase)');
       await evaluate(`window.__sp = []; (function loop(){ const R = window.__kxRoom; if (!R) return; window.__sp.push(R.speaking()); if (window.__sp.length < 3000) requestAnimationFrame(loop); })(); 1`);
       await waitFor(`window.__kxRoom.speaking() === 'julia'`, 40000, 'Julia speaking');
-      await sleep(2500); await shot('4-teil3-julia-presents');
+      await sleep(2500); await shot('4-teil3-julia-presents'); await roomShot('teil3-julia-presents'); await roomGif('teil3-julia-presents', 5000);
+      log(name, 'framing teil3', JSON.stringify(await evaluate(`(() => { const R = window.__kxRoom, c = R.camera, r = (v) => [v.x, v.y, v.z].map((n) => +n.toFixed(2)); const eyes = {}; for (const [k, h] of Object.entries(R.heads)) eyes[k] = [r(h.objectLeftEye.getWorldPosition(c.position.clone())), h.armature.visible]; return { cam: r(c.position), aspect: +c.aspect.toFixed(2), eyes, frame: R.frame(), settling: document.querySelector('.kx-room-settling') !== null }; })()`)));
       const seq = await evaluate(`[...new Set(window.__sp.filter(Boolean))]`);
       log(name, 'speaker sequence', seq.join(' → '));
       assert.deepEqual(seq.slice(-2), ['examiner', 'julia'], 'examiner introduces, then Julia presents');

@@ -6,8 +6,8 @@ Needs: MPFB (Blender extension) with the MakeHuman CC0 system assets used below,
 target packs, and the TalkingHead MPFB rig saved as the custom rig "talkinghead" (rigs/talkinghead.json +
 weights.talkinghead.json in MPFB's user data). See docs/exam/SPRECHEN-ROOM-STAGE1.md, "Figures".
 
-person.json: { "name", "phenotype": {...MPFB macros}, "skin", "eyes_material", "eyebrows", "eyelashes", "hair",
-               "clothes": [...], "tint": { "<material substring>": [r, g, b] } (optional, multiplies the texture) }
+person.json: { "name", "phenotype": {...MPFB macros}, "skin", "eyebrows", "eyelashes", "hair",
+               "clothes": [...], "recolor": [...] (optional, see below) }
 Output: a GLB with the root object "Armature" (TalkingHead's default modelRoot), Meta/Oculus visemes and ARKit
 face units as shape keys, PBR materials (alpha clip only for hair, brows and lashes), no animation. """
 import json
@@ -15,13 +15,19 @@ import os
 import sys
 
 import bpy
+import numpy as np   # bundled with Blender
 
 ARGS = sys.argv[sys.argv.index('--') + 1:]
 person = json.load(open(ARGS[0]))
 OUT = os.path.abspath(ARGS[1])
 
 PKG = 'bl_ext.blender_org.mpfb'
-mod = lambda m: __import__(f'{PKG}.{m}', fromlist=['*'])
+# Run with BLENDER_USER_RESOURCES=<isolated dir> (scripts/exam-room-figures.sh): MPFB is a copy inside that
+# directory, enabled only for this profile; the global Blender installation and its preferences stay untouched.
+import addon_utils
+if not addon_utils.check(PKG)[1]:
+    bpy.ops.preferences.addon_enable(module=PKG)
+mod =lambda m: __import__(f'{PKG}.{m}', fromlist=['*'])
 HumanService = mod('services.humanservice').HumanService
 ExportService = mod('services.exportservice').ExportService
 FaceService = mod('services.faceservice').FaceService
@@ -63,8 +69,8 @@ for o in list(bpy.data.objects):
     if o not in keep: bpy.data.objects.remove(o, do_unlink=True)
 copy.name = 'Armature'; copy.data.name = 'Armature'
 
-# materials for glTF: opaque everywhere except hair/brows/lashes (alpha clip); optional texture tint
-CUTOUT = ('hair', 'eyebrow', 'eyelash', person['hair'].split('/')[0])
+# materials for glTF: opaque everywhere except hair/brows/lashes/eyes (alpha clip); optional texture tint
+CUTOUT = ('hair', 'eyebrow', 'eyelash', 'high-poly', 'eyes', person['hair'].split('/')[0])   # eyes: cornea shell is alpha
 for o in bpy.data.objects:
     if o.type != 'MESH': continue
     for slot in o.material_slots:
@@ -81,14 +87,29 @@ for o in bpy.data.objects:
                 gt = m.node_tree.nodes.new('ShaderNodeMath'); gt.operation = 'GREATER_THAN'; gt.inputs[1].default_value = 0.4
                 m.node_tree.links.new(src, gt.inputs[0]); m.node_tree.links.new(gt.outputs[0], alpha)
         if not cut: alpha.default_value = 1.0
-        for key, rgb in (person.get('tint') or {}).items():
-            if key in m.name.lower():
-                img = next((n.image for n in m.node_tree.nodes if n.type == 'TEX_IMAGE' and n.image and bsdf.inputs['Base Color'].is_linked and n.outputs[0] in [l.from_socket for l in bsdf.inputs['Base Color'].links]), None)
-                if img:
-                    px = list(img.pixels)
-                    for i in range(0, len(px), 4):
-                        px[i] *= rgb[0]; px[i + 1] *= rgb[1]; px[i + 2] *= rgb[2]
-                    img.pixels = px; img.pack()
+        # clothing is matte fabric: some MakeHuman suits carry specular maps that export as a latex-like shine
+        if any(c.split('/')[0].lower() in m.name.lower() for c in person['clothes']):
+            for k, v in (('Roughness', 0.78), ('Metallic', 0.0)):
+                for l in list(bsdf.inputs[k].links): m.node_tree.links.remove(l)
+                bsdf.inputs[k].default_value = v
+        # recolour colour textures (sRGB images only; normal/bump maps are Non-Color):
+        #   "recolor": [{"match": "<material substring>", "rgb": [r, g, b], "lift": 0, "gain": 1, "minSat": 0}]
+        #   new = clamp(lift + luminance * gain) * rgb, applied only to pixels with saturation >= minSat
+        #   (minSat keeps a white blouse white while a coloured jacket changes colour); alpha is kept
+        for rule in person.get('recolor', []):
+            if rule['match'] not in m.name.lower(): continue
+            for n in m.node_tree.nodes:
+                img = n.image if n.type == 'TEX_IMAGE' else None
+                if not img or img.colorspace_settings.name != 'sRGB' or img.get('kx_recolored'): continue
+                px = np.empty(len(img.pixels), dtype=np.float32); img.pixels.foreach_get(px); px = px.reshape(-1, 4)
+                rgb = px[:, :3]; mx, mn = rgb.max(1), rgb.min(1)
+                sat = np.where(mx > 1e-4, (mx - mn) / np.maximum(mx, 1e-4), 0)
+                lum = rgb @ np.array([0.299, 0.587, 0.114], dtype=np.float32)
+                new = np.clip(rule.get('lift', 0) + lum * rule.get('gain', 1), 0, 1)[:, None] * np.array(rule['rgb'], dtype=np.float32)
+                sel = sat >= rule.get('minSat', 0)
+                px[sel, :3] = new[sel]
+                img.pixels.foreach_set(px.ravel()); img.pack(); img['kx_recolored'] = 1
+                print('RECOLORED', m.name, img.name, f'{sel.mean():.0%} of pixels')
 
 bpy.ops.object.select_all(action='DESELECT')
 for o in keep: o.select_set(True)

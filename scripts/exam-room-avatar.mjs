@@ -3,12 +3,14 @@
    no WebAssembly, so Draco/meshopt are out):
 
    - textures: resized with macOS `sips`; JPEG for images without alpha, PNG only where a material needs alpha
-     (MASK/BLEND); the largest texture (skin) keeps up to --skin px, all others up to --max px
+     (MASK/BLEND); the largest texture (skin) keeps up to --skin px, all others up to --max px; --size overrides
+     per material name substring, first match wins ("alpha" = any cut-out material, "normal" = normal maps), e.g.
+     --size body=2048,eyebrow=256,eyelash=256,teeth=512,tongue=256,alpha=768
    - morph targets: stored as sparse accessors (a face shape moves a few hundred of ~12 000 vertices)
    - everything else is re-packed tightly, one bufferView per accessor
    Output is a standard glTF 2.0 GLB that three.js GLTFLoader reads natively.
 
-   Usage: node scripts/exam-room-avatar.mjs in.glb out.glb [--max 1024] [--skin 2048] [--jpeg 82] */
+   Usage: node scripts/exam-room-avatar.mjs in.glb out.glb [--max 1024] [--skin 2048] [--jpeg 82] [--size k=px,…] */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -191,21 +193,37 @@ function alphaImages(json) {
   return s;
 }
 
+function imageUsers(json) {
+  const m = new Map();
+  for (const mat of json.materials || []) {
+    const p = mat.pbrMetallicRoughness || {};
+    for (const t of [p.baseColorTexture, p.metallicRoughnessTexture, mat.normalTexture, mat.occlusionTexture, mat.emissiveTexture]) {
+      if (!t) continue; const src = json.textures[t.index].source;
+      m.set(src, [...(m.get(src) || []), mat.name || '']);
+    }
+  }
+  return m;
+}
+
 function main(argv) {
   const [inp, outp] = argv;
-  const opt = { max: 1024, skin: 2048, jpeg: 82 };
-  for (let i = 2; i < argv.length; i += 2) opt[argv[i].replace(/^--/, '')] = Number(argv[i + 1]);
+  const opt = { max: 1024, skin: 2048, jpeg: 82, size: '' };
+  for (let i = 2; i < argv.length; i += 2) { const k = argv[i].replace(/^--/, ''); opt[k] = k === 'size' ? argv[i + 1] : Number(argv[i + 1]); }
+  const rules = opt.size ? opt.size.split(',').map((r) => { const [k, v] = r.split('='); return [k, Number(v)]; }) : [];
   const { json, bin } = readGlb(fs.readFileSync(inp));
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'kx-avatar-'));
   const alpha = alphaImages(json);
   const sizes = (json.images || []).map((im) => json.bufferViews[im.bufferView].byteLength);
   const biggest = sizes.indexOf(Math.max(...sizes));
+  const users = imageUsers(json);   // image index → material names using it
+  const normals = new Set((json.materials || []).filter((m) => m.normalTexture).map((m) => json.textures[m.normalTexture.index].source));
   const images = (json.images || []).map((im, i) => {
     const bv = json.bufferViews[im.bufferView];
     const src = path.join(tmp, `in${i}` + (im.mimeType === 'image/png' ? '.png' : '.jpg'));
     fs.writeFileSync(src, bin.subarray(bv.byteOffset || 0, (bv.byteOffset || 0) + bv.byteLength));
-    const px = i === biggest ? opt.skin : opt.max;
     const keepAlpha = alpha.has(i);
+    const rule = rules.find(([k]) => (k === 'alpha' ? keepAlpha : k === 'normal' ? normals.has(i) : (users.get(i) || []).some((n) => n.toLowerCase().includes(k))));
+    const px = rule ? rule[1] : i === biggest ? opt.skin : opt.max;
     const dst = path.join(tmp, `out${i}` + (keepAlpha ? '.png' : '.jpg'));
     execFileSync('sips', ['-Z', String(px), ...(keepAlpha ? ['-s', 'format', 'png'] : ['-s', 'format', 'jpeg', '-s', 'formatOptions', String(opt.jpeg)]), src, '--out', dst], { stdio: 'ignore' });
     return { bytes: fs.readFileSync(dst), mime: keepAlpha ? 'image/png' : 'image/jpeg' };

@@ -1,11 +1,36 @@
 {
   "name": "partner-m",
-  "role": "Gesprächspartner (fellow candidate), about 28, suit",
-  "phenotype": { "gender": 1.0, "age": 0.56, "muscle": 0.55, "weight": 0.5, "height": 0.55, "proportions": 0.6,
-                 "race": { "caucasian": 0.85, "asian": 0.05, "african": 0.1 } },
+  "role": "Gesprächspartner (fellow candidate), about 28, button-down shirt",
+  "phenotype": {
+    "gender": 1.0,
+    "age": 0.56,
+    "muscle": 0.55,
+    "weight": 0.5,
+    "height": 0.55,
+    "proportions": 0.6,
+    "race": {
+      "caucasian": 0.85,
+      "asian": 0.05,
+      "african": 0.1
+    }
+  },
   "skin": "young_caucasian_male/young_caucasian_male.mhmat",
   "eyebrows": "eyebrow010/eyebrow010.mhclo",
   "eyelashes": "eyelashes02/eyelashes02.mhclo",
   "hair": "short02/short02.mhclo",
-  "clothes": ["male_worksuit01/male_worksuit01.mhclo"]
+  "clothes": [
+    "male_casualsuit01/male_casualsuit01.mhclo"
+  ],
+  "recolor": [
+    {
+      "match": "eyebrow",
+      "rgb": [
+        0.25,
+        0.18,
+        0.13
+      ],
+      "lift": 1.0,
+      "gain": 0.0
+    }
+  ]
 }

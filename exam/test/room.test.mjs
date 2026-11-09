@@ -163,3 +163,34 @@ test('PUBLISHING: the Pages allowlist lists every vendored file and cast exactly
   if (ROOM_PRODUCTION) for (const a of avatars) assert.ok(listed.includes(a), `production room needs ${a} published`);
   assert.equal(allow.some((l) => /^GLOB:.*exam-room|^exam-room\/?$/.test(l)), false);
 });
+
+test('FIGURES: every cast avatar exists, ≤ 5 MB, root "Armature", all 15 visemes + ARKit blink/gaze/brow units, no animation, quantized', async () => {
+  const { readGlb } = await import('../../scripts/exam-room-avatar.mjs');
+  const index = JSON.parse(fs.readFileSync(path.join(ROOT, 'exam-room/casts/index.json'), 'utf8'));
+  const avatars = new Set(index.casts.flatMap((f) => Object.values(JSON.parse(fs.readFileSync(path.join(ROOT, 'exam-room/casts', f), 'utf8')).people).map((p) => p.avatar)));
+  const VIS = ['sil', 'PP', 'FF', 'TH', 'DD', 'kk', 'CH', 'SS', 'nn', 'RR', 'aa', 'E', 'I', 'O', 'U'].map((v) => 'viseme_' + v);
+  const ARKIT = ['eyeBlinkLeft', 'eyeBlinkRight', 'eyeLookUpLeft', 'eyeLookDownLeft', 'eyeLookInLeft', 'eyeLookOutLeft', 'browInnerUp', 'browDownLeft', 'mouthSmileLeft', 'jawOpen'];
+  for (const a of avatars) {
+    const file = path.join(ROOT, 'exam-room/avatars', a + '.glb');
+    assert.ok(fs.existsSync(file), a);
+    assert.ok(fs.statSync(file).size <= 5_000_000, `${a}: ${fs.statSync(file).size} bytes > 5 MB`);
+    const { json } = readGlb(fs.readFileSync(file));
+    assert.ok(json.nodes.some((n) => n.name === 'Armature'), `${a}: root "Armature" (TalkingHead modelRoot)`);
+    assert.ok(json.nodes.some((n) => n.name === 'LeftEye') && json.nodes.some((n) => n.name === 'Head'), `${a}: TalkingHead rig bones`);
+    const body = json.meshes.find((m) => /base|body/i.test(m.name)) || json.meshes.reduce((x, y) => ((y.extras?.targetNames?.length || 0) > (x.extras?.targetNames?.length || 0) ? y : x));
+    const names = new Set(body.extras?.targetNames || []);
+    for (const k of [...VIS, ...ARKIT]) assert.ok(names.has(k), `${a}: morph ${k}`);
+    assert.equal((json.animations || []).length, 0, `${a}: no animation`);
+    assert.ok((json.extensionsUsed || []).includes('KHR_mesh_quantization'), `${a}: quantized`);
+    assert.ok(!(json.extensionsUsed || []).some((e) => /draco|meshopt|basisu|ktx/i.test(e)), `${a}: no decoder needed (CSP: no WebAssembly)`);
+  }
+});
+
+test('FIGURES: specs build from CC0 MakeHuman assets only, with the TalkingHead rig; licences recorded', () => {
+  const lic = fs.readFileSync(path.join(ROOT, 'exam-room/avatars/LICENSES.md'), 'utf8');
+  for (const f of ['examiner-f', 'partner-m', 'partner-f']) {
+    const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'exam-room/figures', f + '.json'), 'utf8'));
+    for (const asset of [d.skin, d.eyebrows, d.eyelashes, d.hair, ...d.clothes]) assert.ok(lic.includes(asset.split('/')[0]), `${f}: ${asset} listed in LICENSES.md`);
+  }
+  assert.match(lic, /CC0/); assert.match(lic, /MIT/);
+});

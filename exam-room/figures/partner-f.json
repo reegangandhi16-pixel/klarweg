@@ -1,12 +1,49 @@
 {
   "name": "partner-f",
-  "role": "Julia (fellow candidate), about 26, smart blazer",
-  "phenotype": { "gender": 0.0, "age": 0.53, "muscle": 0.5, "weight": 0.47, "height": 0.48, "proportions": 0.6, "cupsize": 0.5, "firmness": 0.55,
-                 "race": { "caucasian": 0.9, "asian": 0.05, "african": 0.05 } },
+  "role": "Julia (fellow candidate), about 26, camel blazer over a white blouse",
+  "phenotype": {
+    "gender": 0.0,
+    "age": 0.53,
+    "muscle": 0.5,
+    "weight": 0.47,
+    "height": 0.48,
+    "proportions": 0.6,
+    "cupsize": 0.5,
+    "firmness": 0.55,
+    "race": {
+      "caucasian": 0.9,
+      "asian": 0.05,
+      "african": 0.05
+    }
+  },
   "skin": "young_caucasian_female/young_caucasian_female.mhmat",
   "eyebrows": "eyebrow010/eyebrow010.mhclo",
   "eyelashes": "eyelashes01/eyelashes01.mhclo",
   "hair": "ponytail01/ponytail01.mhclo",
-  "clothes": ["female_elegantsuit01/female_elegantsuit01.mhclo"],
-  "tint": { "elegantsuit": [0.78, 0.86, 1.0] }
+  "clothes": [
+    "toigo_female_suit_2/toigo_female_suit_2.mhclo"
+  ],
+  "recolor": [
+    {
+      "match": "toigo_female_suit_2",
+      "rgb": [
+        0.8,
+        0.62,
+        0.43
+      ],
+      "lift": 0.18,
+      "gain": 0.9,
+      "minSat": 0.25
+    },
+    {
+      "match": "eyebrow",
+      "rgb": [
+        0.24,
+        0.17,
+        0.12
+      ],
+      "lift": 1.0,
+      "gain": 0.0
+    }
+  ]
 }

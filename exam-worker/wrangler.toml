@@ -19,6 +19,8 @@ EXAM_MOCK_FORMS = "on"
 EXAM_PRODUCTION_FORMS = "off"
 EXAM_RELEASE_FORMS = "frm:b1:mock-m0@1"
 EXAM_SINGLE_EXAMINER = "on"
+# Learners choose: all four modules now, or one module now and the others later (owner request 2026-11-09).
+EXAM_MODULE_CHOICE = "on"
 # Secrets (wrangler secret put …), never in this file:
 #   EXAM_PROXY_SECRET   shared with klarweg-access (≥ 32 chars)
 #   EXAM_MEDIA_SECRET   HMAC key for attempt-scoped media tokens (≥ 32 chars)

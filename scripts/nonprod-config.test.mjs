@@ -106,8 +106,8 @@ test('PRODUCTION: wrangler.toml files carry no non-prod settings; exam flags = t
     assert.ok(!/CORS_EXTRA_ORIGINS/.test(strip(t)), `${file}/wrangler.toml: no CORS_EXTRA_ORIGINS`);
   }
   /* M0 launch (docs/exam/M0-LAUNCH-RUNBOOK.md §7, owner-approved 2026-11-09): engine + mock forms on, M0 is the only
-     assignable form, single-examiner rating. Synthetic/production forms, practice parts and module-only stay off. */
-  for (const k of ['EXAM_ENABLED', 'EXAM_MOCK_FORMS', 'EXAM_SINGLE_EXAMINER']) assert.equal(val(PROD_EXAM, k), 'on', `production ${k}`);
+     assignable form, single-examiner rating, and the learner may take one module at a time (EXAM_MODULE_CHOICE, 2026-11-09). Synthetic/production forms, practice parts and module-only stay off. */
+  for (const k of ['EXAM_ENABLED', 'EXAM_MOCK_FORMS', 'EXAM_SINGLE_EXAMINER', 'EXAM_MODULE_CHOICE']) assert.equal(val(PROD_EXAM, k), 'on', `production ${k}`);
   for (const k of ['EXAM_SYNTHETIC_FORMS', 'EXAM_PRODUCTION_FORMS']) assert.equal(val(PROD_EXAM, k), 'off', `production ${k}`);
   assert.equal(val(PROD_EXAM, 'EXAM_RELEASE_FORMS'), 'frm:b1:mock-m0@1', 'production assigns only the M0 form');
   for (const k of ['EXAM_PRACTICE_PARTS', 'EXAM_PRACTICE_PART_FORMS', 'EXAM_MODULE_ONLY']) assert.equal(val(PROD_EXAM, k), null, `production ${k} unset (off)`);

@@ -238,6 +238,13 @@ p { margin: 0 0 16px; }
 .kx-intro-rules li { margin-bottom: 8px; }
 .kx-untimed { margin: 0; font: 500 14px/1.4 var(--font-mono); color: var(--ink-secondary); }
 .kx-part-practice { margin-top: 36px; }
+/* start screen: all four modules or one module now (EXAM_MODULE_CHOICE) */
+.kx-module-choice { margin-top: 36px; }
+.kx-mc-option { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-top: 16px; }
+.kx-mc-option h3 { margin-bottom: 8px; }
+.kx-mc-option p { color: var(--ink-secondary); margin-bottom: 0; }
+.kx-mc-option .kx-actions { margin-top: 16px; }
+.kx-mc-modules .kx-btn { min-height: 44px; }
 .kx-part-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .kx-part-list .kx-btn { width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; text-align: left; line-height: 1.4; }
 .kx-part-construct { font-weight: 400; font-size: 14px; color: var(--ink-secondary); }

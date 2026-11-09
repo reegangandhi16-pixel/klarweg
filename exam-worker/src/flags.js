@@ -19,6 +19,10 @@
                              id must be a live form, synthetic ones with purpose 'practice', and NONE may be in
                              EXAM_RELEASE_FORMS (live simulation forms never enter the pool). Otherwise no part practice
                              is assigned or continued (fail closed, pool_misconfigured).
+     EXAM_MODULE_CHOICE      unset (default): single-module attempts only through EXAM_MODULE_ONLY. "on": the learner
+                             chooses at the start — all four modules in one attempt, or ONE module now (any of the
+                             four), like booking Goethe modules separately (owner request 2026-11-09). Full attempts
+                             stay available. EXAM_MODULE_ONLY, when set, still wins (it restricts, never widens).
      EXAM_SINGLE_EXAMINER    unset (default): rounds 1 and 2 of a Schreiben/Sprechen rating must come from two different
                              raters (OD-13). "on": ONE examiner may give both rounds (owner decision 2026-11-06: the owner
                              is the only examiner). Each round stays blind (the rater view never shows another round's
@@ -30,6 +34,9 @@ const on = (v) => v === 'on';
 
 /* EXAM_SINGLE_EXAMINER: one examiner may give both rating rounds (see the header) */
 export const singleExaminer = (env) => on(env.EXAM_SINGLE_EXAMINER);
+
+/* EXAM_MODULE_CHOICE: full attempts AND single-module attempts of every module (see the header) */
+export const moduleChoice = (env) => on(env.EXAM_MODULE_CHOICE);
 
 export function flags(env) {
   return {
@@ -80,6 +87,7 @@ export function moduleOnly(env) {
 export const MODES = {
   synthetic_full: { kinds: ['synthetic'], flag: 'synthetic', access_scope: 'synthetic' },
   mock_m0: { kinds: ['mock'], flag: 'mock', access_scope: 'mock' },
+  mock_module: { kinds: ['mock'], flag: 'mock', access_scope: 'mock', family: 'mock_m0', single_module: true },
   simulation_full: { kinds: ['set'], flag: 'production', access_scope: 'sets' },
   synthetic_module: { kinds: ['synthetic'], flag: 'synthetic', access_scope: 'synthetic', family: 'synthetic_full', single_module: true },
   simulation_module: { kinds: ['set'], flag: 'production', access_scope: 'sets', family: 'simulation_full', single_module: true },
@@ -112,7 +120,7 @@ export function modeBlock(env, def, module = null) {
   const only = moduleOnly(env);
   if (only && !only.ok) return 'misconfigured';
   if (!def.single_module) return only ? 'module_only' : null;
-  if (!only) return 'disabled';
+  if (!only) return moduleChoice(env) ? null : 'disabled';
   if (module !== null && !only.modules.includes(module)) return 'module_disabled';
   return null;
 }

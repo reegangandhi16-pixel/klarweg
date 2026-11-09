@@ -1,0 +1,30 @@
+{
+ "_note": "Phase 1 photoreal pilot prompts (owner-approved 2026-11-10, cap $10). Fictional people only; no real persons, no Goethe-Institut or other branding.",
+ "room_v1": [
+  "Realistic documentary photograph, 16:9, taken from the seated eye level of an exam candidate (lens about 120 cm above the floor, 35 mm full-frame lens, natural perspective, no distortion) inside a German language examination centre during an oral B1 exam.",
+  "Bright, clean, modern examination room: off-white walls, large windows on the right with daylight and light-grey roller blinds half down, even soft overhead office lighting, light oak floor. Calm, serious atmosphere.",
+  "Directly in front of the camera, about 2.5 metres away, a wide light-wood desk facing the camera. Behind it sit two female examiners, both facing the camera, upper bodies visible above the desk:",
+  "LEFT of centre behind the desk: the lead examiner, about 45 years old, shoulder-length dark-blonde hair, navy blazer over a cream blouse, warm but serious expression, looking directly into the camera, hands resting on a few printed papers.",
+  "RIGHT of centre behind the desk: the second examiner, about 55 years old, short silver-grey hair, thin-framed glasses, dark charcoal formal jacket over a white blouse, holding a pen above a lined notepad, looking down at her notes.",
+  "On the desk: printed task sheets, a clipboard, two pens, a small black digital audio recorder, a glass of water.",
+  "In the LEFT foreground, close to the camera and seated at the same candidates' table as the camera, a male fellow candidate about 27 years old, short brown hair, clean-shaven, light-blue shirt under a dark-navy sweater, body angled toward the examiners and head turned three-quarters toward the camera, attentive neutral expression; his whole face, shoulders and chest are inside the frame on the left third. A sheet of paper lies in front of him.",
+  "In the background on the right, behind the examiners: a second empty table with two chairs and a small stack of folders. A plain round wall clock on the back wall. At the bottom edge of the frame, the candidate's own light-wood table edge with one printed sheet.",
+  "True-to-life skin with natural texture, pores and fine lines; natural eyes with soft catchlights; natural hands with five fingers; real fabric texture. No retouching, no cinematic or dramatic lighting, no strong bokeh, moderate depth of field so all three people are sharp, neutral natural colours.",
+  "No text anywhere, no logos, no signs, no flags, no brand names."
+ ],
+ "idle_lead": [
+  "Locked-off static camera, no camera movement, no zoom, no cut.",
+  "The woman is an examiner listening attentively to a candidate speaking in front of her. She keeps looking toward the camera with steady, natural eye contact, blinks naturally every few seconds, makes very small natural head movements and one slight, slow nod, with subtle attentive micro-expressions and calm breathing.",
+  "Her mouth stays closed; she does not speak. Her hands stay resting on the papers. Everything else in the frame stays still. Realistic, natural, documentary footage, unchanged lighting and colours."
+ ],
+ "idle_both": [
+  "Locked-off static camera, no camera movement, no zoom, no cut.",
+  "Two examiners listen to a candidate speaking in front of them. The woman on the left keeps looking toward the camera with steady natural eye contact, blinks naturally, makes very small head movements and one slight slow nod; her mouth stays closed.",
+  "The older woman on the right writes a few short notes on her notepad with the pen, then briefly looks up toward the camera and back down to her notes; her mouth stays closed.",
+  "Natural blinking and calm breathing. Nobody speaks. Everything else stays still. Realistic documentary footage, unchanged lighting and colours."
+ ],
+ "idle_partner": [
+  "Locked-off static camera, no camera movement, no zoom, no cut.",
+  "The young man listens attentively to the examiners in front of him, blinks naturally every few seconds, makes small natural head movements and briefly glances toward the camera, then back toward the examiners. His mouth stays closed; he does not speak. Calm breathing. Everything else stays still. Realistic documentary footage, unchanged lighting and colours."
+ ]
+}

@@ -1,0 +1,103 @@
+{
+ "_note": "Phase 1 partner-fix candidate (Veo take room-v6-ref, examiners from v1a reference crops). Full-frame 12 s ping-pong loop: the partner listens, turns to the viewer, holds eye contact, turns back. NOT the default until the owner compares it with v1a.",
+ "plate": {
+  "w": 1920,
+  "h": 1080,
+  "src": "media/room-still-v6.jpg",
+  "video": "media/room-loop-v6-720p.mp4"
+ },
+ "people": {
+  "partner": {
+   "role": "partner",
+   "label": "Gesprächspartner",
+   "rect": [
+    0.0,
+    0.0,
+    0.33,
+    1.0
+   ]
+  },
+  "examiner": {
+   "role": "examiner",
+   "label": "Prüferin (Leitung)",
+   "rect": [
+    0.37,
+    0.08,
+    0.16,
+    0.42
+   ]
+  },
+  "assessor": {
+   "role": "examiner",
+   "label": "Prüferin (Beisitz)",
+   "rect": [
+    0.65,
+    0.08,
+    0.19,
+    0.42
+   ]
+  }
+ },
+ "shots": {
+  "establish": {
+   "landscape": [
+    0.5,
+    0.45,
+    1.0
+   ],
+   "portrait": [
+    0.5,
+    0.4,
+    1.0
+   ]
+  },
+  "examiners": {
+   "landscape": [
+    0.6,
+    0.34,
+    1.14
+   ],
+   "portrait": [
+    0.47,
+    0.34,
+    1.0
+   ]
+  },
+  "partner": {
+   "landscape": [
+    0.3,
+    0.4,
+    1.08
+   ],
+   "portrait": [
+    0.16,
+    0.4,
+    1.0
+   ]
+  },
+  "address_partner": {
+   "landscape": [
+    0.4,
+    0.42,
+    1.04
+   ],
+   "portrait": [
+    0.22,
+    0.4,
+    1.0
+   ]
+  },
+  "address_examiners": {
+   "landscape": [
+    0.58,
+    0.38,
+    1.04
+   ],
+   "portrait": [
+    0.5,
+    0.36,
+    1.0
+   ]
+  }
+ }
+}

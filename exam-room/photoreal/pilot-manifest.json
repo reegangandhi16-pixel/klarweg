@@ -73,7 +73,7 @@
    "operation": "projects/klarweg-512108/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/e194943e-7a12-4701-aacc-e74dae5c627a",
    "filtered": 1,
    "actual_usd": 0.8,
-   "note": "no video returned (safety filtered) \u2014 counted as billed (conservative); entry restored manually after a concurrent-write overwrite (script fixed)"
+   "note": "no video returned (safety filtered) — counted as billed (conservative); entry restored manually after a concurrent-write overwrite (script fixed)"
   },
   {
    "id": "room-i2v-a",
@@ -145,7 +145,56 @@
    "file": "room-v4b.mp4",
    "sha": "9e3d453992476573",
    "actual_usd": 0.8
+  },
+  {
+   "id": "room-v5-ref",
+   "kind": "video",
+   "model": "veo-3.1-fast-generate-001",
+   "prompt_key": "room_video_v5",
+   "image": null,
+   "image_sha": null,
+   "refs": [
+    "ref-lead-v1a.png",
+    "ref-second-v1a.png"
+   ],
+   "negative_key": "negative_v5",
+   "seconds": 8,
+   "resolution": "1080p",
+   "audio": false,
+   "max_usd": 0.8,
+   "spent_before": 5.6,
+   "t": "2026-11-09T19:34:31.383Z",
+   "ok": true,
+   "operation": "projects/klarweg-512108/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/aab016da-a6e7-432a-8705-2a0bab91f372",
+   "filtered": 0,
+   "file": "room-v5-ref.mp4",
+   "sha": "0d5cfcd684d2b253",
+   "actual_usd": 0.8
+  },
+  {
+   "id": "room-v6-ref",
+   "kind": "video",
+   "model": "veo-3.1-fast-generate-001",
+   "prompt_key": "room_video_v6",
+   "image": null,
+   "image_sha": null,
+   "refs": [
+    "ref-lead-v1a.png",
+    "ref-second-v1a.png"
+   ],
+   "negative_key": "negative_v6",
+   "seconds": 8,
+   "resolution": "1080p",
+   "audio": false,
+   "max_usd": 0.8,
+   "spent_before": 6.4,
+   "t": "2026-11-09T19:36:37.533Z",
+   "ok": true,
+   "operation": "projects/klarweg-512108/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/3ebceae1-1998-4c22-9f8c-9f284b357f80",
+   "filtered": 0,
+   "file": "room-v6-ref.mp4",
+   "sha": "501efa50d0429bd4",
+   "actual_usd": 0.8
   }
- ],
- "_note": "Copy of the Phase 1 ledger (media live in ~/klarweg-work/klarweg-photoreal-pilot, not in this public repo). actual_usd for videos = seconds \u00d7 $0.10 (Vertex video-only 1080p); filtered/failed counted as billed except 4xx rejections."
+ ]
 }

@@ -1,8 +1,10 @@
 # Photoreal room: Phase 1 pilot report (2026-11-10)
 
-**Approved cap:** $10. **Spent:** $5.60, entered in the ledger. **Left:** $4.40.
+**Approved cap:** $10 ($5.60 Phase 1 + up to $1.60 partner correction approved = $7.20 usable).
+**Spent:** $7.20, entered in the ledger. **Approved budget left:** $0. The remaining $2.80 under the $10 cap is not
+approved and will not be used without a new decision.
 
-Generation stopped after 7 Veo 3.1 Fast requests. Spend was checked before every batch; the ledger is
+Generation stopped after 9 Veo 3.1 Fast requests (7 in Phase 1, 2 for the partner correction). Spend was checked before every batch; the ledger is
 `pilot-manifest.json`. The ledger counts the two failed Veo requests as $0.80 each to be safe; the Gemini attempt
 was refused before generating, so it is $0. Google's billing report will show the exact figure after its usual delay.
 
@@ -34,6 +36,21 @@ locked.
 | room-v3a | locked (52 dB) | Examiners perfect, but an extra person appears on the right: rejected |
 | room-v4a | moves (22 dB) | Second examiner far too young: rejected |
 | room-v4b | locked (44–47 dB) | A camera on a tripod appears in the shot, three women and no partner: rejected |
+| room-v5-ref (refs: v1a examiners) | drifts up to 28 px | Identities kept, but two cuts and an extra man: rejected |
+| room-v6-ref (refs + negative prompt) | 0 px to 4 s, ≈10 px at 8 s | **Partner candidate.** One continuous take, exactly three people, examiners match v1a. Partner on the left, face clearly visible in three-quarter view, eye contact with the viewer from ≈1.2 s to 6.5 s. Loop = 0.5–6.5 s ping-pong (12 s) |
+
+### Partner correction: v1a vs v6 (`deliverables/comparison-partner-fix.jpg`)
+
+| | room-v1a (current best room) | room-v6-ref (new) |
+|---|---|---|
+| Partner visible | No: back of head | **Yes**: three-quarter face, looks at the candidate |
+| Examiners | Closest, sharpest, most detailed | Same people, further away, less detail |
+| Camera | Perfectly locked | Locked for 4 s, ≈10 px slow drift after (loop avoids it) |
+| Weak spots | Partner unusable for speaking turns | Partner large and slightly soft in the foreground; smiles with mouth slightly open at ≈3 s (would need lip-sync for his turns anyway) |
+
+Neither room replaces the other automatically. v1a stays the default `pilot-scene.json`; v6 is
+`pilot-scene-v6.json`. A realistic final could use v6 as the room and v1a's examiner close-ups for the examiner shots
+(same identities), subject to the owner's choice.
 
 ## Realism (room-v1a)
 
@@ -66,22 +83,11 @@ One artefact remains: in the reversed half of the loop the assessor's pen moves 
 
 ## Open issues
 
-1. The partner shows his back. Veo places a partner "beside the candidate" facing the examiners, which is physically
-   realistic, but he needs a visible face when he talks to the candidate. Options:
-   - a separate partner take that turns toward the camera;
-   - a composition with the partner at the left table corner (v2a style) with a locked camera.
-   Each try is $0.80.
+1. Partner: solved by v6 at the cost of examiner detail (see above). The owner chooses v1a, v6 or a combination.
 2. Portrait phones cannot frame both examiners at once (16:9 source). The camera frames the speaker.
+3. Nobody speaks yet: every speaking turn needs lip-sync. See `LIPSYNC.md`.
 
-## Lip-sync (sync.so free tier)
+## Lip-sync
 
-**Not started:** it needs a sync.so account in the owner's name.
-
-**Free tier:** 3 clips a month, ≤15 s each, watermarked, no card.
-
-**Terms (sync.so/terms):**
-- They don't state who owns outputs; only the help centre promises commercial rights on paid plans.
-- Uploaded content is licensed to Sync Labs "to develop and improve the Service" (sublicensable).
-- The user must hold the necessary consents and publicity rights.
-
-The pilot examiners are synthetic and the voice would be TTS, so the risk is low. It must be accepted knowingly.
+See `LIPSYNC.md`: German test sample, the exact sync.so free-tier steps (nothing uploaded), and no-subscription
+alternatives.

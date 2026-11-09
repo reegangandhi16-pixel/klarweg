@@ -90,9 +90,11 @@ if (arg('--renderer') === '3d') {
   copy('exam-room/photoreal/room.css');
   if (arg('--pilot')) {   // real Phase 1 pilot media (outside the repo, never committed): pilot scene + its files
     const pdir = path.resolve(arg('--pilot')); const media = path.join(OUT, 'exam-room/photoreal/media'); fs.mkdirSync(media, { recursive: true });
-    const sc = JSON.parse(fs.readFileSync(path.join(ROOT, 'exam-room/photoreal/pilot-scene.json'), 'utf8'));
+    const sceneFile = 'exam-room/photoreal/' + (arg('--scene') || 'pilot-scene.json');   // e.g. pilot-scene-v6.json
+    if (!/^exam-room\/photoreal\/pilot-scene[a-z0-9-]*\.json$/.test(sceneFile)) throw new Error('bad --scene');
+    const sc = JSON.parse(fs.readFileSync(path.join(ROOT, sceneFile), 'utf8'));
     for (const rel of [sc.plate.src, sc.plate.video].filter(Boolean)) fs.copyFileSync(path.join(pdir, 'deliverables', path.basename(rel)), path.join(media, path.basename(rel)));
-    copy('exam-room/photoreal/pilot-scene.json', 'exam-room/photoreal/scene.json');
+    copy(sceneFile, 'exam-room/photoreal/scene.json');
   } else {
     copy('exam-room/photoreal/scene.json');
     execFileSync('node', [path.join(ROOT, 'scripts/exam-room-photoreal-media.mjs'), '--out', path.join(OUT, 'exam-room/photoreal/media')], { stdio: 'ignore' });

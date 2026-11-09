@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PROJECT = 'klarweg-512108', ACCOUNT = 'klarwegofficial@gmail.com';
-const CAP = 10.0;
+const CAP = Math.min(10.0, Number(process.env.KX_CAP || 10));   // owner approvals can narrow the cap (never above $10)
 const DIR = process.env.PILOT_DIR || path.join(os.homedir(), 'klarweg-work/klarweg-photoreal-pilot');
 const MAN = path.join(DIR, 'manifest.json');
 fs.mkdirSync(DIR, { recursive: true });
@@ -84,16 +84,21 @@ if (cmd === 'image') {
 }
 
 if (cmd === 'video') {
-  const seconds = +opt('--seconds', '8'); const image = opt('--image');
+  const seconds = +opt('--seconds', '8'); const image = opt('--image'); const refs = many('--ref');
+  const negative = opt('--negative-key') ? [].concat(prompts[opt('--negative-key')]).join(' ') : null;
+  const img64 = (f) => ({ bytesBase64Encoded: fs.readFileSync(f).toString('base64'), mimeType: f.endsWith('.png') ? 'image/png' : 'image/jpeg' });
   const max = +(seconds * 0.10).toFixed(4);
   const before = guard(max);
-  const entry = { id, kind: 'video', model: 'veo-3.1-fast-generate-001', prompt_key: key, image: image ? path.basename(image) : null, image_sha: image ? sha(image) : null, seconds, resolution: '1080p', audio: false, max_usd: max, spent_before: before, t: new Date().toISOString(), ok: false };
+  const entry = { id, kind: 'video', model: 'veo-3.1-fast-generate-001', prompt_key: key, image: image ? path.basename(image) : null, image_sha: image ? sha(image) : null, refs: refs.map((f) => path.basename(f)), negative_key: opt('--negative-key'), seconds, resolution: '1080p', audio: false, max_usd: max, spent_before: before, t: new Date().toISOString(), ok: false };
   man.entries.push(entry); save();
   const base = `https://us-central1-aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001`;
   try {
     const op = await post(base + ':predictLongRunning', {
-      instances: [image ? { prompt, image: { bytesBase64Encoded: fs.readFileSync(image).toString('base64'), mimeType: image.endsWith('.png') ? 'image/png' : 'image/jpeg' } } : { prompt }],
-      parameters: { aspectRatio: '16:9', durationSeconds: seconds, generateAudio: false, resolution: '1080p', sampleCount: 1, personGeneration: 'allow_adult' } });
+      instances: [{ prompt,
+        ...(image ? { image: img64(image) } : {}),
+        ...(refs.length ? { referenceImages: refs.map((f) => ({ image: img64(f), referenceType: 'asset' })) } : {}) }],
+      parameters: { aspectRatio: '16:9', durationSeconds: seconds, generateAudio: false, resolution: '1080p', sampleCount: 1, personGeneration: 'allow_adult',
+        ...(negative ? { negativePrompt: negative } : {}) } });
     entry.operation = op.name; save();
     let done = null;
     for (let i = 0; i < 120 && !done; i++) { await sleep(10000); const r = await post(base + ':fetchPredictOperation', { operationName: op.name }); if (r.done) done = r; }

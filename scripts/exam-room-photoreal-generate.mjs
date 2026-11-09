@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 /* Photoreal pilot generation (owner-approved Phase 1, hard cap $10 USD) — Vertex AI, gcloud OAuth (no API key).
      node scripts/exam-room-photoreal-generate.mjs image  --id <name> --prompt-key <key> [--ref <img>...] [--size 2K|4K]
-     node scripts/exam-room-photoreal-generate.mjs video  --id <name> [--image <img>] --prompt-key <key> [--seconds 8]   (no --image = text-to-video)
+     node scripts/exam-room-photoreal-generate.mjs video  --id <name> [--image <img>] --prompt-key <key> [--seconds 8] [--audio]   (no --image = text-to-video)
      node scripts/exam-room-photoreal-generate.mjs ledger
    Outputs + manifest.json live in PILOT_DIR (default ~/klarweg-work/klarweg-photoreal-pilot, outside the public repo).
    Every request is refused BEFORE sending if spent + its maximum possible cost would exceed the cap.
    Prices (Vertex AI pricing page, read 2026-11-10):
      gemini-3-pro-image: image out 1120 tok (1K/2K) = $0.134, 2000 tok (4K) = $0.24 ($120/M); text+thinking out $12/M;
                                  input $2/M (560 tok per input image)
-     veo-3.1-fast-generate-001:  video only (generateAudio=false) 1080p $0.10/s, 720p $0.08/s */
+     veo-3.1-fast-generate-001:  video only (generateAudio=false) 1080p $0.10/s, 720p $0.08/s;
+                                 video + audio (--audio) 1080p $0.12/s (re-read 2026-11-10, owner-approved single test) */
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -43,7 +44,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 function guard(maxUsd) {
   save();   // pick up entries from other runs before checking the cap
   const s = spent();
-  if (s + maxUsd > CAP) { console.error(JSON.stringify({ refused: true, spent: s, next_max: maxUsd, cap: CAP })); process.exit(2); }
+  if (+(s + maxUsd).toFixed(4) > CAP) { console.error(JSON.stringify({ refused: true, spent: s, next_max: maxUsd, cap: CAP })); process.exit(2); }
   return s;
 }
 async function post(url, body) {
@@ -87,9 +88,10 @@ if (cmd === 'video') {
   const seconds = +opt('--seconds', '8'); const image = opt('--image'); const refs = many('--ref');
   const negative = opt('--negative-key') ? [].concat(prompts[opt('--negative-key')]).join(' ') : null;
   const img64 = (f) => ({ bytesBase64Encoded: fs.readFileSync(f).toString('base64'), mimeType: f.endsWith('.png') ? 'image/png' : 'image/jpeg' });
-  const max = +(seconds * 0.10).toFixed(4);
+  const audio = argv.includes('--audio');
+  const max = +(seconds * (audio ? 0.12 : 0.10)).toFixed(4);
   const before = guard(max);
-  const entry = { id, kind: 'video', model: 'veo-3.1-fast-generate-001', prompt_key: key, image: image ? path.basename(image) : null, image_sha: image ? sha(image) : null, refs: refs.map((f) => path.basename(f)), negative_key: opt('--negative-key'), seconds, resolution: '1080p', audio: false, max_usd: max, spent_before: before, t: new Date().toISOString(), ok: false };
+  const entry = { id, kind: 'video', model: 'veo-3.1-fast-generate-001', prompt_key: key, image: image ? path.basename(image) : null, image_sha: image ? sha(image) : null, refs: refs.map((f) => path.basename(f)), negative_key: opt('--negative-key'), seconds, resolution: '1080p', audio, max_usd: max, spent_before: before, t: new Date().toISOString(), ok: false };
   man.entries.push(entry); save();
   const base = `https://us-central1-aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001`;
   try {
@@ -97,7 +99,7 @@ if (cmd === 'video') {
       instances: [{ prompt,
         ...(image ? { image: img64(image) } : {}),
         ...(refs.length ? { referenceImages: refs.map((f) => ({ image: img64(f), referenceType: 'asset' })) } : {}) }],
-      parameters: { aspectRatio: '16:9', durationSeconds: seconds, generateAudio: false, resolution: '1080p', sampleCount: 1, personGeneration: 'allow_adult',
+      parameters: { aspectRatio: '16:9', durationSeconds: seconds, generateAudio: audio, resolution: '1080p', sampleCount: 1, personGeneration: 'allow_adult',
         ...(negative ? { negativePrompt: negative } : {}) } });
     entry.operation = op.name; save();
     let done = null;

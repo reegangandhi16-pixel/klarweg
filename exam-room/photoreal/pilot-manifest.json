@@ -195,6 +195,28 @@
    "file": "room-v6-ref.mp4",
    "sha": "501efa50d0429bd4",
    "actual_usd": 0.8
+  },
+  {
+   "id": "lead-speaks-v6-audio",
+   "kind": "video",
+   "model": "veo-3.1-fast-generate-001",
+   "prompt_key": "lead_speaks_v6_audio",
+   "image": "room-still-v6.png",
+   "image_sha": "1064363c48a43269",
+   "refs": [],
+   "negative_key": "negative_audio_v1",
+   "seconds": 8,
+   "resolution": "1080p",
+   "audio": true,
+   "max_usd": 0.96,
+   "spent_before": 7.2,
+   "t": "2026-11-09T20:06:19.332Z",
+   "ok": true,
+   "operation": "projects/klarweg-512108/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/9a0c403d-5295-43c4-b89b-39935cc1b3ae",
+   "filtered": 0,
+   "file": "lead-speaks-v6-audio.mp4",
+   "sha": "797e30e9f2a8e706",
+   "actual_usd": 0.96
   }
  ]
 }

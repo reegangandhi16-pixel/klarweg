@@ -1,0 +1,6 @@
+/* Persistent demo label for the non-production room preview (outside #kx-app so re-renders never remove it). */
+.kx-demo-badge {
+  display: block; margin: 0; padding: 8px 16px; text-align: center;
+  font: 500 11px/1.5 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em;
+  color: #FFFFFF; background: #0E0E10;
+}

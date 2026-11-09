@@ -29,10 +29,11 @@ const bad = (m) => problems.push(m);
 
 /* 1. only allowlisted paths (demo client + room + demo/pilot media); nothing that runs server-side */
 const ALLOW = [/^index\.html$/, /^robots\.txt$/, /^_headers$/, /^exam\/exam\.css$/, /^exam\/js\/[\w/.-]+\.js$/,
-  /^exam-room\/preview\/(index\.html|demo\.js|demo-pkg\.json|audio\/demo-[\w-]+\.mp3)$/, /^exam-room\/casts\/(index|demo)\.json$/,
+  /^exam-room\/preview\/(index\.html|demo\.js|demo\.css|demo-pkg\.json|audio\/demo-[\w-]+\.mp3)$/, /^exam-room\/casts\/(index|demo)\.json$/,
   /^exam-room\/photoreal\/(room\.css|scene\.json|media\/[\w.-]+\.(jpg|png|svg|mp4|webp))$/,
   /^exam-room\/(vendor|avatars)\/[\w/.-]+$/, /^exam-room\/LICENSES-avatars\.md$/];
 for (const f of files) if (!ALLOW.some((r) => r.test(f))) bad('not allowlisted: ' + f);
+for (const f of files.filter((x) => /\.map$/.test(x))) bad('source map: ' + f);
 for (const f of ['_worker.js', '_redirects', '_routes.json', 'functions']) if (fs.existsSync(path.join(DIR, f))) bad('server-side/proxy file present: ' + f);
 
 /* 2. headers: noindex, no referrer, microphone only for this origin; robots disallow */

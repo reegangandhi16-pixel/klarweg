@@ -100,7 +100,7 @@ if (arg('--renderer') === '3d') {
     execFileSync('node', [path.join(ROOT, 'scripts/exam-room-photoreal-media.mjs'), '--out', path.join(OUT, 'exam-room/photoreal/media')], { stdio: 'ignore' });
   }
 }
-copy('exam-room/preview/demo.html', 'exam-room/preview/index.html'); copy('exam-room/preview/demo.js', 'exam-room/preview/demo.js');
+copy('exam-room/preview/demo.html', 'exam-room/preview/index.html'); copy('exam-room/preview/demo.js', 'exam-room/preview/demo.js'); copy('exam-room/preview/demo.css', 'exam-room/preview/demo.css');
 const w = (rel, obj) => { fs.mkdirSync(path.dirname(path.join(OUT, rel)), { recursive: true }); fs.writeFileSync(path.join(OUT, rel), typeof obj === 'string' ? obj : JSON.stringify(obj)); };
 w('exam-room/casts/index.json', { casts: ['demo.json'] });
 w('exam-room/casts/demo.json', { id: 'demo', generated_by: 'scripts/exam-room-preview.mjs', ...script.cast, assets: castAssets });

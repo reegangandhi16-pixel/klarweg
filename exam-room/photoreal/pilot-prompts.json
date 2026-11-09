@@ -132,5 +132,19 @@
  ],
  "negative_v6": [
   "camera, tripod, video camera, lights on stands, extra person, fourth person, back of the head, person seen from behind, people talking, open mouth speaking, camera movement, zoom, dolly, text, logo, watermark, cartoon, 3D render, plastic skin, cut, scene change, empty room at the start, second man, man on the right, man in the foreground on the right"
+ ],
+ "lead_speaks_v6_audio": [
+  "One single continuous take from a fixed, perfectly still viewpoint: no cuts, no camera movement, no zoom.",
+  "The same bright German language-exam room, exactly as in the image, with exactly the same three people.",
+  "The woman in the navy blazer sitting in the middle of the desk, about 45, looks directly at the viewer and says in clear, natural standard German, in a warm but serious, professional voice:",
+  "\"Guten Tag. Willkommen zur mündlichen Prüfung. Möchten Sie sich bitte kurz vorstellen?\"",
+  "She speaks at a calm, natural pace, then stays quiet, keeps eye contact and smiles slightly.",
+  "The older woman with glasses on the right keeps writing notes silently and glances up once.",
+  "The young man in the foreground on the left stays silent with his mouth closed and keeps looking at the viewer.",
+  "Only the woman in the navy blazer speaks. Audio: only her voice and quiet room ambience, no music."
+ ],
+ "negative_audio_v1": [
+  "music, background music, subtitles, captions, on-screen text, the man speaking, the woman with glasses speaking, two voices, English speech,",
+  "camera movement, zoom, cuts, scene change, extra people, people entering, camera, tripod, microphone"
  ]
 }

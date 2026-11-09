@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<!-- NON-PRODUCTION room preview (scripts/exam-room-preview.mjs). Same CSP as exam/index.html; connect-src is the page's
+     own origin only: there is no API, recordings stay in this browser. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>Sprechen-Prüfungsraum – Vorschau</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/exam/exam.css">
+</head>
+<body>
+<div id="kx-app" class="kx-app" aria-live="off">
+  <main class="kx-card" id="kx-demo-start">
+    <h1>Sprechen-Prüfungsraum – interne Vorschau</h1>
+    <p><strong>Nicht öffentlich, nicht produktiv.</strong> Simulierter Prüfungsraum mit aufgezeichneten Gesprächsimpulsen. Keine KI, keine offizielle Goethe-Prüfung.</p>
+    <p>Demo-Dialog mit synthetischen Stimmen (kein Prüfungsinhalt). Ihre Aufnahmen bleiben auf diesem Gerät; nichts wird hochgeladen.</p>
+    <p>Ablauf: 20 s Vorbereitung · Teil 1 (2 min) · Teil 2 (2 min) · Julias Präsentation · Teil 3 (2 min). Mit „Nächste Phase (Demo)“ können Sie vorspringen.</p>
+    <p><button class="kx-btn" id="kx-demo-go" type="button">Mikrofon erlauben und starten</button></p>
+    <p id="kx-demo-mode"></p>
+    <p class="kx-demo-note" id="kx-demo-err" role="alert"></p>
+  </main>
+</div>
+<script type="module" src="demo.js"></script>
+</body>
+</html>

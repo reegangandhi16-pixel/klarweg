@@ -65,7 +65,9 @@ export async function createStage(mount, { people, mobile = false, reduced = fal
       avatarSpeakingEyeContact: 0.7, avatarSpeakingHeadMove: reduced ? 0.2 : 0.5,
       avatarListeningEyeContact: 0.6,
     });
-    try { head.audioCtx && head.audioCtx.close(); } catch { /* never plays audio: speech comes from the exam's <audio> */ }
+    // never plays audio (speech comes from the exam's <audio>): close its context; start()/stop() then call
+    // suspend()/resume() on a closed context, which rejects — make those no-ops (no unhandled rejections)
+    try { if (head.audioCtx) { head.audioCtx.close().catch(() => {}); head.audioCtx.suspend = head.audioCtx.resume = () => Promise.resolve(); } } catch { /* optional */ }
     const started = performance.now();
     await head.showAvatar({ url: AVATAR_BASE + p.avatar + '.glb', body: p.body || 'F', avatarMood: 'neutral', lipsyncLang: 'de' });
     const seat = SEATS[p.seat];

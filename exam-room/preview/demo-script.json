@@ -1,0 +1,32 @@
+{
+  "_note": "Original demo dialogue for the non-production room preview only (not exam content, not official Goethe material). Spoken offline by macOS voices at build time; no audio is committed.",
+  "voices": { "examiner": "Anna", "partner": "Reed (German (Germany))", "julia": "Shelley (German (Germany))" },
+  "rate": 172,
+  "assets": {
+    "ast:demo-sp1-partner-1": [["partner", "Hallo! Wir sollen ja zusammen ein kleines Abschiedsfest für unsere Kollegin Frau Becker planen. Sie geht nächsten Monat in Rente. Hast du schon eine Idee, wann wir feiern könnten?"]],
+    "ast:demo-sp1-partner-2": [["partner", "Freitagnachmittag klingt gut. Und wo machen wir das? Im Büro ist es ziemlich eng. Vielleicht im kleinen Café gegenüber?"]],
+    "ast:demo-sp1-partner-3": [["partner", "Gute Idee. Dann brauchen wir noch ein Geschenk. Ich könnte das Geld einsammeln. Was meinst du, was würde ihr gefallen?"]],
+    "ast:demo-sp3-partner-talk": [
+      ["examiner", "Julia, bitte stellen Sie jetzt Ihr Thema vor."],
+      ["julia", "Gern. Mein Thema ist: Sollen Kinder schon früh ein eigenes Smartphone haben? Ich selbst habe mein erstes Handy mit vierzehn bekommen. Heute haben bei uns schon viele Kinder mit zehn Jahren ein Smartphone. Ein Vorteil ist, dass die Eltern ihre Kinder immer erreichen können. Ein Nachteil ist aber, dass Kinder oft zu viel Zeit am Bildschirm verbringen. Meiner Meinung nach sollte man damit lieber etwas warten. Vielen Dank fürs Zuhören."],
+      ["examiner", "Danke, Julia. Bitte geben Sie Julia jetzt eine Rückmeldung zu ihrer Präsentation und stellen Sie ihr eine Frage."]
+    ],
+    "ast:demo-sp3-examiner-q": [["examiner", "Ich habe auch noch eine Frage an Sie: Wie war das bei Ihnen? Ab welchem Alter hatten Sie ein eigenes Handy?"]]
+  },
+  "cast": {
+    "people": {
+      "examiner": { "role": "examiner", "label": "Prüferin", "avatar": "examiner-f" },
+      "partner": { "role": "partner", "label": "Gesprächspartner", "avatar": "partner-m" },
+      "julia": { "role": "partner", "label": "Julia (Teilnehmerin)", "avatar": "partner-f" }
+    },
+    "front": { "1": "partner", "2": "partner", "3": "julia" }
+  },
+  "text": {
+    "tsk:b1:syn-sp1": { "instructions": "Teil 1 (Demo): Planen Sie mit Ihrem Gesprächspartner ein Abschiedsfest für eine Kollegin. Machen Sie Vorschläge und reagieren Sie auf seine Vorschläge.",
+      "card": "Abschiedsfest für Frau Becker planen: – Wann feiern? – Wo? – Essen und Getränke? – Geschenk? – Wer macht was?" },
+    "tsk:b1:syn-sp2": { "instructions": "Teil 2 (Demo): Präsentieren Sie Ihr gewähltes Thema anhand der fünf Folien.",
+      "topics": { "Thema 1": "Einkaufen im Internet", "Thema 2": "Sport in der Freizeit" },
+      "slides": ["Thema vorstellen", "Persönliche Erfahrung", "Situation in Ihrem Heimatland", "Vor- und Nachteile & Ihre Meinung", "Abschluss & Dank"] },
+    "tsk:b1:syn-sp3": { "instructions": "Teil 3 (Demo): Hören Sie Julias Präsentation. Geben Sie eine Rückmeldung, stellen Sie eine Frage und beantworten Sie die Frage der Prüferin." }
+  }
+}

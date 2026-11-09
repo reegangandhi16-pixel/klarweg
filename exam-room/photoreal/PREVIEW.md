@@ -1,4 +1,18 @@
-# iPhone preview: ready, not published (2026-11-10)
+# iPhone preview: LIVE (owner-approved 2026-11-10)
+
+**URL:** https://room-264936c4e2289143.klarweg-site.pages.dev/exam-room/preview/?room=on
+(Cloudflare Pages preview deployment a3e9c8d6 of project `klarweg-site`, built from 264dc8a7 with `pilot-scene-v6.json`.)
+
+Verified on the live host:
+- 47/47 headless checks pass: desktop, iPhone size, no-video and no-scene fallbacks.
+- Headers: `X-Robots-Tag noindex`, `no-referrer`, `nosniff`, `microphone=(self)`; robots.txt disallows `/`.
+- Only 38 files are shipped. The API client, admin and rater modules are not shipped (those paths fall back to the
+  redirect page). `ROOM_PRODUCTION = false`.
+- klarweg.in is untouched.
+- A permanent DEMO banner is shown.
+
+Note: Cloudflare also serves the same deployment at its hash URL `a3e9c8d6.klarweg-site.pages.dev`. It is equally
+noindex, but shorter to guess.
 
 ```sh
 # 1. build (demo package + local macOS demo voices + the chosen pilot room; nothing from M0/M1–M10)

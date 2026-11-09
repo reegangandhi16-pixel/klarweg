@@ -64,3 +64,42 @@ Test all three on the same 10 s lead-examiner clip and pick by eye:
 
 If Veo's German is clean, it is the simplest no-subscription route. Each line becomes one clip generated from the
 room frame. If wording or voice control matters more, choose sync.so (paid plan later) or MuseTalk.
+
+## Result: Veo 3.1 Fast audio test (owner-approved single run, 2026-11-10)
+
+**Run**
+- `lead-speaks-v6-audio.mp4`: image-to-video from `room-still-v6.png`, 8 s at 1080p with audio. **$0.96**, one
+  request, no retries.
+- Prompt key `lead_speaks_v6_audio`, negative `negative_audio_v1`.
+- Sentence: *"Guten Tag. Willkommen zur mündlichen Prüfung. Möchten Sie sich bitte kurz vorstellen?"*
+- Review clip: `eval/veo-audio-review.mp4` (wide shot plus a 3× face zoom, with audio).
+
+**Audio–word alignment**
+- One female voice, three phrases: 0.5–1.3 s, 1.5–3.1 s and 3.7–5.8 s. That matches the three sentences.
+- Total 5.3 s, the same pacing as the macOS TTS reference (5.3 s). Silent after 5.9 s.
+- Word accuracy is NOT machine-verified. There is no local German speech recognition on this Mac: Apple's on-device
+  model is not installed, and a cloud ASR would upload the audio. **The owner must listen.**
+
+**Mouth synchronisation**
+- Measured on a mouth crop: the lips move about 3× more per frame during speech than in silence (0.029 vs 0.010) and
+  rest after the last word. Teeth and inner mouth are visible on open vowels.
+- Frame-accurate sync cannot be proven with this crude metric (the correlation of loudness and opening is weak:
+  r ≈ 0.1). Judge it by eye in the review clip.
+
+**Facial naturalness**
+- At room scale she looks natural: smile on "Guten Tag", eye contact, small head motion.
+- Her face is only about 110 px wide in 1080p. Veo's sharpening gives haloed, slightly painterly edges when zoomed 2×
+  or more, which matters for close shots on large screens.
+
+**Character consistency**
+- Frame 0 equals the v6 still, and the identity, clothing and room are unchanged through the clip.
+- The second examiner keeps writing silently.
+- The partner stays turned toward the speaking examiner, which is natural behaviour.
+- The camera pans ≈11 px over 8 s (≤5 px during the speech). Compositing into the room needs a short crossfade or a
+  stabilised patch.
+
+**Comparison status**
+- The sync.so arm has NOT been run: it waits for the owner's acceptance of the terms.
+- Its inputs use the same sentence and the same character: `lipsync-test/v6-lead-face-input.mp4` (v6 lead, 8 s,
+  720×720) and `lipsync-test/lead-line-short.wav` (5.6 s).
+- MuseTalk is not installed (weights licence unresolved).

@@ -1,8 +1,9 @@
 # Photoreal room: Phase 1 pilot report (2026-11-10)
 
 **Approved cap:** $10 ($5.60 Phase 1 + up to $1.60 partner correction approved = $7.20 usable).
-**Spent:** $7.20, entered in the ledger. **Approved budget left:** $0. The remaining $2.80 under the $10 cap is not
-approved and will not be used without a new decision.
+**Spent:** $7.20, entered in the ledger, plus $0.96 for one owner-approved Veo audio lip-sync test = **$8.16**.
+**Approved budget left:** $0. The remaining $2.80 under the $10 cap is not
+approved and will not be used without a new decision ($1.84 under the cap after the audio test).
 
 Generation stopped after 9 Veo 3.1 Fast requests (7 in Phase 1, 2 for the partner correction). Spend was checked before every batch; the ledger is
 `pilot-manifest.json`. The ledger counts the two failed Veo requests as $0.80 each to be safe; the Gemini attempt
@@ -91,3 +92,13 @@ One artefact remains: in the reversed half of the loop the assessor's pen moves 
 
 See `LIPSYNC.md`: German test sample, the exact sync.so free-tier steps (nothing uploaded), and no-subscription
 alternatives.
+
+## Room decision (2026-11-10)
+
+**v6 alone.**
+- The owner preferred v6 plus v1a close-ups, but only if the two match. The check
+  (`deliverables/identity-check-*.jpg`) found the same clothing and hair, but faces that are not identical: the v6
+  lead has darker, more arched brows and a different smile.
+- There were also continuity breaks. The desk props differ, and v1a shows the partner's back in the lead's
+  foreground, where v6 has him at the left facing the viewer.
+- A switch between them would also be a hard cut between two camera positions.

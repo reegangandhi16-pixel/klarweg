@@ -53,3 +53,12 @@ test('camera: partner shot is left of the examiners shot; moves are slow and eas
   assert.ok(ms >= 1400 && ms <= 2200, String(ms));
   assert.equal(moveMs(null, b, 1280), 0);
 });
+
+test('visiblePeople: the partner close-up on a phone leaves the far examiner off-screen (her loop can pause)', async () => {
+  const { visiblePeople } = await import('../js/room-video/director.js');
+  const wide = transformFor(scene, 'establish', 1280, 720);
+  assert.deepEqual(visiblePeople(scene, wide, 1280, 720).sort(), ['assessor', 'examiner', 'partner']);
+  const close = transformFor(scene, 'partner', 356, 445);
+  const vis = visiblePeople(scene, close, 356, 445);
+  assert.ok(vis.includes('partner') && !vis.includes('assessor'), JSON.stringify(vis));
+});

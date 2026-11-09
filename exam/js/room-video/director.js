@@ -59,3 +59,15 @@ export function moveMs(from, to, w) {
   const d = Math.hypot(to.tx - from.tx, to.ty - from.ty) / Math.max(1, w);
   return Math.round(Math.min(2200, 1400 + d * 2400));
 }
+
+/** People whose patch is (partly) inside the viewport under transform t — the others can pause (decode budget). */
+export function visiblePeople(scene, t, w, h) {
+  const out = [];
+  for (const [id, p] of Object.entries(scene.people)) {
+    const [x, y, pw, ph] = p.rect;
+    const l = t.tx + x * scene.plate.w * t.s, r = l + pw * scene.plate.w * t.s;
+    const top = t.ty + y * scene.plate.h * t.s, b = top + ph * scene.plate.h * t.s;
+    if (r > 0 && l < w && b > 0 && top < h) out.push(id);
+  }
+  return out;
+}

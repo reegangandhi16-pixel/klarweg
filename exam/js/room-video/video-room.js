@@ -12,7 +12,7 @@
    clips: { "<asset_id>#<segment index>": url } (lip-synced take for exactly that segment; preferred over speak). */
 import { validateCast, castForPackage, speakerAt, PHASE_PART, statusText } from '../room/cast.js';
 import { ROOM_BASE, isPreviewHost } from '../room/config.js';
-import { validateScene, shotFor, transformFor, moveMs } from './director.js';
+import { validateScene, shotFor, transformFor, moveMs, visiblePeople } from './director.js';
 
 const SCENE_URL = ROOM_BASE + 'photoreal/scene.json';
 const DRIFT_S = 0.12;   // resync a speaking clip when it drifts this far from the audio clock
@@ -70,6 +70,12 @@ export async function createRoom({ mount, pkg, log = () => {}, onFail = () => {}
     ui.cam.style.transform = `translate3d(${t.tx}px, ${t.ty}px, 0) scale(${t.s})`;
     current = t;
     ui.root.dataset.shot = shot;
+    // only people inside the new framing keep decoding their idle loop (low-end phones); resume before the move
+    const vis = new Set(visiblePeople(scene, t, w, h));
+    for (const [id, p] of Object.entries(people)) {
+      if (vis.has(id)) { if (p.idle.paused) p.idle.play().catch(() => {}); }
+      else setTimeout(() => { if (shot === next && !p.speaking) p.idle.pause(); }, ms + 100);   // after the move ends
+    }
   }
   const ro = new ResizeObserver(() => frame(true)); ro.observe(ui.stage);
   frame(true);

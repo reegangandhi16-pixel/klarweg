@@ -101,6 +101,20 @@ if (arg('--renderer') === '3d') {
   }
 }
 copy('exam-room/preview/demo.html', 'exam-room/preview/index.html'); copy('exam-room/preview/demo.js', 'exam-room/preview/demo.js'); copy('exam-room/preview/demo.css', 'exam-room/preview/demo.css');
+// ship only the exam modules the demo can actually load (static imports + '/exam/js/…' literals, from demo.js)
+{
+  const seen = new Set(); const todo = [path.join(OUT, 'exam-room/preview/demo.js')];
+  while (todo.length) {
+    const f = todo.pop(); if (seen.has(f) || !fs.existsSync(f)) continue; seen.add(f);
+    const src = fs.readFileSync(f, 'utf8');
+    for (const m of src.matchAll(/(?:from\s*|import\s*\(?\s*)['"]([^'"]+\.js)['"]|['"](\/exam\/js\/[\w/.-]+\.js)['"]/g)) {
+      const spec = m[1] || m[2];
+      todo.push(spec.startsWith('/') ? path.join(OUT, spec) : path.resolve(path.dirname(f), spec));
+    }
+  }
+  (function prune(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const q = path.join(d, e.name);
+    if (e.isDirectory()) { prune(q); if (!fs.readdirSync(q).length) fs.rmdirSync(q); } else if (!seen.has(q)) fs.rmSync(q); } })(path.join(OUT, 'exam/js'));
+}
 const w = (rel, obj) => { fs.mkdirSync(path.dirname(path.join(OUT, rel)), { recursive: true }); fs.writeFileSync(path.join(OUT, rel), typeof obj === 'string' ? obj : JSON.stringify(obj)); };
 w('exam-room/casts/index.json', { casts: ['demo.json'] });
 w('exam-room/casts/demo.json', { id: 'demo', generated_by: 'scripts/exam-room-preview.mjs', ...script.cast, assets: castAssets });

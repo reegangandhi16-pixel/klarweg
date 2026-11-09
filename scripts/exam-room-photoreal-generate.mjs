@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* Photoreal pilot generation (owner-approved Phase 1, hard cap $10 USD) — Vertex AI, gcloud OAuth (no API key).
      node scripts/exam-room-photoreal-generate.mjs image  --id <name> --prompt-key <key> [--ref <img>...] [--size 2K|4K]
-     node scripts/exam-room-photoreal-generate.mjs video  --id <name> --image <img> --prompt-key <key> [--seconds 8]
+     node scripts/exam-room-photoreal-generate.mjs video  --id <name> [--image <img>] --prompt-key <key> [--seconds 8]   (no --image = text-to-video)
      node scripts/exam-room-photoreal-generate.mjs ledger
    Outputs + manifest.json live in PILOT_DIR (default ~/klarweg-work/klarweg-photoreal-pilot, outside the public repo).
    Every request is refused BEFORE sending if spent + its maximum possible cost would exceed the cap.
@@ -23,7 +23,14 @@ const DIR = process.env.PILOT_DIR || path.join(os.homedir(), 'klarweg-work/klarw
 const MAN = path.join(DIR, 'manifest.json');
 fs.mkdirSync(DIR, { recursive: true });
 const man = fs.existsSync(MAN) ? JSON.parse(fs.readFileSync(MAN, 'utf8')) : { cap_usd: CAP, project: PROJECT, entries: [] };
-const save = () => fs.writeFileSync(MAN, JSON.stringify(man, null, 1));
+// merge with the file on every save (another run may have written entries meanwhile; never lose a ledger line)
+const save = () => {
+  const disk = fs.existsSync(MAN) ? JSON.parse(fs.readFileSync(MAN, 'utf8')) : { entries: [] };
+  const byId = new Map(disk.entries.map((e) => [e.id, e]));
+  for (const e of man.entries) byId.set(e.id, e);
+  man.entries = [...byId.values()].sort((a, b) => a.t.localeCompare(b.t));
+  fs.writeFileSync(MAN + '.tmp', JSON.stringify(man, null, 1)); fs.renameSync(MAN + '.tmp', MAN);
+};
 const spent = () => +man.entries.reduce((a, e) => a + (e.actual_usd ?? e.max_usd), 0).toFixed(4);   // unknown actual → assume max
 const prompts = JSON.parse(fs.readFileSync(path.join(ROOT, 'exam-room/photoreal/pilot-prompts.json'), 'utf8'));
 const argv = process.argv.slice(2); const cmd = argv[0];
@@ -34,6 +41,7 @@ const sha = (f) => crypto.createHash('sha256').update(fs.readFileSync(f)).digest
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function guard(maxUsd) {
+  save();   // pick up entries from other runs before checking the cap
   const s = spent();
   if (s + maxUsd > CAP) { console.error(JSON.stringify({ refused: true, spent: s, next_max: maxUsd, cap: CAP })); process.exit(2); }
   return s;
@@ -79,12 +87,12 @@ if (cmd === 'video') {
   const seconds = +opt('--seconds', '8'); const image = opt('--image');
   const max = +(seconds * 0.10).toFixed(4);
   const before = guard(max);
-  const entry = { id, kind: 'video', model: 'veo-3.1-fast-generate-001', prompt_key: key, image: path.basename(image), image_sha: sha(image), seconds, resolution: '1080p', audio: false, max_usd: max, spent_before: before, t: new Date().toISOString(), ok: false };
+  const entry = { id, kind: 'video', model: 'veo-3.1-fast-generate-001', prompt_key: key, image: image ? path.basename(image) : null, image_sha: image ? sha(image) : null, seconds, resolution: '1080p', audio: false, max_usd: max, spent_before: before, t: new Date().toISOString(), ok: false };
   man.entries.push(entry); save();
   const base = `https://us-central1-aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001`;
   try {
     const op = await post(base + ':predictLongRunning', {
-      instances: [{ prompt, image: { bytesBase64Encoded: fs.readFileSync(image).toString('base64'), mimeType: image.endsWith('.png') ? 'image/png' : 'image/jpeg' } }],
+      instances: [image ? { prompt, image: { bytesBase64Encoded: fs.readFileSync(image).toString('base64'), mimeType: image.endsWith('.png') ? 'image/png' : 'image/jpeg' } } : { prompt }],
       parameters: { aspectRatio: '16:9', durationSeconds: seconds, generateAudio: false, resolution: '1080p', sampleCount: 1, personGeneration: 'allow_adult' } });
     entry.operation = op.name; save();
     let done = null;

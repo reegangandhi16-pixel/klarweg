@@ -43,6 +43,7 @@ export async function createRoom({ mount, pkg, log = () => {}, onFail = () => {}
   /* ---- people: idle loop + speaking clip per person ---- */
   const people = {};
   for (const [id, p] of Object.entries(scene.people)) {
+    if (!p.idle) { people[id] = null; continue; }   // full-frame plate video carries this person's idle motion
     const box = document.createElement('div');
     box.className = 'kxv-person'; box.dataset.person = id;
     const [x, y, w, h] = p.rect;
@@ -73,6 +74,7 @@ export async function createRoom({ mount, pkg, log = () => {}, onFail = () => {}
     // only people inside the new framing keep decoding their idle loop (low-end phones); resume before the move
     const vis = new Set(visiblePeople(scene, t, w, h));
     for (const [id, p] of Object.entries(people)) {
+      if (!p) continue;
       if (vis.has(id)) { if (p.idle.paused) p.idle.play().catch(() => {}); }
       else setTimeout(() => { if (shot === next && !p.speaking) p.idle.pause(); }, ms + 100);   // after the move ends
     }
@@ -93,6 +95,7 @@ export async function createRoom({ mount, pkg, log = () => {}, onFail = () => {}
       break;
     }
     for (const [id, p] of Object.entries(people)) {
+      if (!p) continue;
       if (id === who) {
         const src = (scene.clips && scene.clips[key]) || scene.people[id].speak;
         const exact = !!(scene.clips && scene.clips[key]);
@@ -114,12 +117,13 @@ export async function createRoom({ mount, pkg, log = () => {}, onFail = () => {}
 
   if (isPreviewHost(location.hostname) && /[?&]roomdebug\b/.test(location.search)) {
     window.__kxRoom = { renderer: 'video', cast, scene, speaking: () => speaking, shot: () => shot, transform: () => current, recording: () => !!rec, phase: () => phaseId,
+      plateVideo: () => ui.plateVideo && { playing: !ui.plateVideo.paused, t: ui.plateVideo.currentTime },
       playing: (id) => { const p = people[id]; return p && { idle: !p.idle.paused, speak: !p.speak.paused && p.speaking, t: p.speak.currentTime, src: p.clip }; } };
   }
 
   function destroy() {
     dead = true; clearInterval(timer); ro.disconnect();
-    for (const p of Object.values(people)) for (const el of [p.idle, p.speak]) { try { el.pause(); el.removeAttribute('src'); el.load(); } catch {} }
+    for (const el of [ui.plateVideo, ...Object.values(people).filter(Boolean).flatMap((p) => [p.idle, p.speak])]) if (el) { try { el.pause(); el.removeAttribute('src'); el.load(); } catch {} }
     ui.root.remove(); audios.clear();
   }
 
@@ -159,7 +163,7 @@ function buildUi(mount, scene, abs) {
   const root = document.createElement('section');
   root.className = 'kx-room kxv-room'; root.dataset.state = 'loading';
   root.setAttribute('aria-label', 'Simulierter Prüfungsraum');
-  root.innerHTML = `<div class="kx-room-stage kxv-stage"><div class="kxv-cam"><img class="kxv-plate" alt="" draggable="false"></div>
+  root.innerHTML = `<div class="kx-room-stage kxv-stage"><div class="kxv-cam"><img class="kxv-plate" alt="" draggable="false">${scene.plate.video ? '<video class="kxv-plate kxv-plate-video" aria-hidden="true"></video>' : ''}</div>
     ${scene.foreground ? '<img class="kxv-fg" alt="" draggable="false">' : ''}</div>
     <div class="kx-room-bar"><p class="kx-room-status" aria-hidden="true"><span class="kx-room-dot"></span><span class="kx-room-status-text">Prüfungsraum</span></p>
     <p class="kx-room-note">Simulierter Prüfungsraum mit aufgezeichneten Gesprächsimpulsen. Keine KI, keine offizielle Goethe-Prüfung.</p></div>`;
@@ -169,9 +173,16 @@ function buildUi(mount, scene, abs) {
   const img = root.querySelector('.kxv-plate');
   const plateReady = new Promise((res, rej) => { img.onload = () => { root.dataset.state = 'ready'; res(); }; img.onerror = () => rej(new Error('plate')); });
   img.src = abs(scene.plate.src);
+  const plateVideo = root.querySelector('.kxv-plate-video');
+  if (plateVideo) {   // full-frame idle loop of the whole room over the still (the still stays if video is blocked)
+    Object.assign(plateVideo, { muted: true, defaultMuted: true, playsInline: true, loop: true, preload: 'auto', disablePictureInPicture: true });
+    plateVideo.setAttribute('muted', ''); plateVideo.setAttribute('playsinline', '');
+    plateVideo.src = abs(scene.plate.video);
+    plateReady.then(() => plateVideo.play().catch(() => {}));
+  }
   if (scene.foreground) root.querySelector('.kxv-fg').src = abs(scene.foreground);
   return {
-    root, stage: root.querySelector('.kxv-stage'), cam: root.querySelector('.kxv-cam'), plateReady,
+    root, stage: root.querySelector('.kxv-stage'), cam: root.querySelector('.kxv-cam'), plateReady, plateVideo,
     status(text, kind) { root.querySelector('.kx-room-status-text').textContent = text; root.dataset.speaking = kind; },
   };
 }

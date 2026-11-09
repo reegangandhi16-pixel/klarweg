@@ -58,8 +58,12 @@ async function scenario(name, { viewport, block = [] }) {
       await shot('establish');
       check('partner_speaks', await waitFor(`window.__kxRoom.speaking() === 'partner'`, 45000), null);
       check('camera_on_partner', await waitFor(`window.__kxRoom.shot() === 'partner'`, 3000), await R(`R.transform()`));
-      if (name !== 'novideo') check('partner_clip_playing', await waitFor(`(() => { const p = window.__kxRoom.playing('partner'); return p.speak && p.t > 0.3; })()`, 5000), await R(`R.playing('partner')`));
-      check('others_idle', await R(`!R.playing('examiner').speak && !R.playing('assessor').speak`), null);
+      const fullFrame = await R(`!!R.plateVideo()`);
+      if (name !== 'novideo') {
+        if (fullFrame) check('room_video_playing', await waitFor(`(() => { const v = window.__kxRoom.plateVideo(); return v.playing && v.t > 0.3; })()`, 8000), await R(`R.plateVideo()`));
+        else check('partner_clip_playing', await waitFor(`(() => { const p = window.__kxRoom.playing('partner'); return p.speak && p.t > 0.3; })()`, 5000), await R(`R.playing('partner')`));
+      }
+      if (!fullFrame) check('others_idle', await R(`!R.playing('examiner').speak && !R.playing('assessor').speak`), null);
       await shot('partner-speaks');
       check('candidate_turn_teil1', await waitFor(`window.__kxRoom.recording() && window.__kxRoom.shot() === 'address_partner'`, 30000), await R(`R.shot()`));
       await shot('teil1-your-turn');
@@ -70,7 +74,7 @@ async function scenario(name, { viewport, block = [] }) {
       check('examiner_speaks', await waitFor(`window.__kxRoom.speaking() === 'examiner' && window.__kxRoom.shot() === 'examiners'`, 20000), await R(`R.shot()`));
       await shot('examiner-speaks');
       check('partner_presents', await waitFor(`window.__kxRoom.speaking() === 'partner'`, 20000), null);
-      const vis = await R(`(() => { const st = document.querySelector('.kxv-stage').getBoundingClientRect(), im = document.querySelector('.kxv-plate').getBoundingClientRect(), pb = document.querySelector('[data-person="partner"]').getBoundingClientRect(); return { stage: [st.width, st.height], plate: [Math.round(im.width), Math.round(im.height)], partnerPatch: [Math.round(pb.width), Math.round(pb.height)], opacity: getComputedStyle(document.querySelector('.kxv-cam')).opacity }; })()`);
+      const vis = await R(`(() => { const st = document.querySelector('.kxv-stage').getBoundingClientRect(), im = document.querySelector('.kxv-plate').getBoundingClientRect(), pe = document.querySelector('[data-person="partner"]'), pb = pe ? pe.getBoundingClientRect() : { width: 999, height: 999 }; return { stage: [st.width, st.height], plate: [Math.round(im.width), Math.round(im.height)], partnerPatch: [Math.round(pb.width), Math.round(pb.height)], opacity: getComputedStyle(document.querySelector('.kxv-cam')).opacity }; })()`);
       check('plate_visible', vis.opacity === '1' && vis.plate[0] >= vis.stage[0] - 1 && vis.plate[1] >= vis.stage[1] - 1 && vis.partnerPatch[0] > 20, vis);
       const cam = await R(`(() => { const m = new DOMMatrix(getComputedStyle(document.querySelector('.kxv-cam')).transform); const s = document.querySelector('.kxv-stage').getBoundingClientRect(); return { tx: m.e, ty: m.f, s: m.a, w: s.width, h: s.height, plate: R.scene.plate }; })()`);
       check('no_empty_edges', cam.tx <= 0.5 && cam.ty <= 0.5 && cam.tx + cam.plate.w * cam.s >= cam.w - 1 && cam.ty + cam.plate.h * cam.s >= cam.h - 1, cam);

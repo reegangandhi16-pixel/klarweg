@@ -1,0 +1,16 @@
+{
+  "_note": "Phase 1 pilot scene (Veo 3.1 Fast take room-v1a): the whole room is one full-frame loop, so there are no patch seams. Media come from PILOT_DIR (not committed). Rects are only used for camera visibility.",
+  "plate": { "w": 1920, "h": 1080, "src": "media/room-still-v1a.jpg", "video": "media/room-loop-v1a-720p.mp4" },
+  "people": {
+    "examiner": { "role": "examiner", "label": "Prüferin (Leitung)", "rect": [0.20, 0.19, 0.29, 0.60] },
+    "assessor": { "role": "examiner", "label": "Prüferin (Beisitz)", "rect": [0.60, 0.21, 0.33, 0.60] },
+    "partner":  { "role": "partner",  "label": "Gesprächspartner",   "rect": [0.00, 0.00, 0.33, 1.00] }
+  },
+  "shots": {
+    "establish":          { "landscape": [0.50, 0.50, 1.00], "portrait": [0.47, 0.45, 1.00] },
+    "examiners":          { "landscape": [0.56, 0.44, 1.10], "portrait": [0.45, 0.42, 1.00] },
+    "partner":            { "landscape": [0.30, 0.50, 1.06], "portrait": [0.15, 0.50, 1.00] },
+    "address_partner":    { "landscape": [0.38, 0.50, 1.04], "portrait": [0.22, 0.48, 1.00] },
+    "address_examiners":  { "landscape": [0.55, 0.47, 1.04], "portrait": [0.42, 0.45, 1.00] }
+  }
+}

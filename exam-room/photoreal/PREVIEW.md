@@ -1,4 +1,9 @@
-# iPhone preview: LIVE (owner-approved 2026-11-10)
+# iPhone preview: TAKEN DOWN 2026-11-10 (owner rejected the looping experience)
+
+The deployment a3e9c8d6 (room-264936c4e2289143) was deleted on the owner's request. Both URLs below now return 404.
+The build tooling stays here as a reference.
+
+## History: preview as published (owner-approved 2026-11-10)
 
 **URL:** https://room-264936c4e2289143.klarweg-site.pages.dev/exam-room/preview/?room=on
 (Cloudflare Pages preview deployment a3e9c8d6 of project `klarweg-site`, built from 264dc8a7 with `pilot-scene-v6.json`.)

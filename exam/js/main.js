@@ -498,20 +498,37 @@ async function refresh() { try { S.attempt = await api.getAttempt(S.attempt.atte
    answer within PRELOAD_TIMEOUT_MS) is reported once as an incident and offered for retry; only missing files are
    loaded again. The server starts the schedule after its readiness allowance even without the client — said plainly. */
 const PRELOAD_TIMEOUT_MS = 30_000;
+const PRELOAD_PARALLEL = 3;   // files fetched at once: a slow mobile link is used fully without one stalled file blocking the rest
+/* While the files load, the page shows how far it is and the "Modul abgeben" footer is hidden: the parts only appear
+   once the audio is ready, so a learner who sees an empty page must not be able to hand in Hören by mistake
+   (prod M0 2026-11-09: submitted after 29 s of loading, 0 answers). The footer comes back when loading fails. */
+function preloadProgress(done, total) {
+  const ph = $('#kx-phase');
+  if (ph) ph.textContent = `Hördateien werden geladen: ${done} von ${total}. Bitte warten Sie – die Aufgaben erscheinen, sobald alles geladen ist.`;
+}
+function hoerenFooter(show) { const foot = $('.kx-foot'); if (foot && !$('#kx-review-title')) foot.hidden = !show; }
 async function preloadHoeren(id, player, assets) {
   for (;;) {
-    let failed = null;
-    for (const a of assets) {
-      if (player.isReady([a])) continue;
+    let failed = null, fatal = null;
+    const todo = assets.filter((a) => !player.isReady([a]));
+    let done = assets.length - todo.length;
+    preloadProgress(done, assets.length); hoerenFooter(false);
+    const one = async (a) => {
       const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), PRELOAD_TIMEOUT_MS);
-      try { const m = await api.media(id, S.lease, a); await player.preload(a, await api.mediaBytes(m.url, { signal: ctl.signal })); }
+      try { const m = await api.media(id, S.lease, a); await player.preload(a, await api.mediaBytes(m.url, { signal: ctl.signal })); done += 1; preloadProgress(done, assets.length); }
       catch (e) {
-        if (e instanceof ExamApiError && !/^media_/.test(e.code)) throw e;   // session, lease, access: the usual error screens
-        failed = ctl.signal.aborted ? 'timeout' : (e instanceof ExamApiError ? e.code : 'network'); break;
+        if (e instanceof ExamApiError && !/^media_/.test(e.code)) { fatal = fatal || e; return; }   // session, lease, access: the usual error screens
+        failed = failed || (ctl.signal.aborted ? 'timeout' : (e instanceof ExamApiError ? e.code : (e && e.name === 'EncodingError' ? 'decode' : 'network')));
       } finally { clearTimeout(timer); }
-    }
-    if (!failed) { clearAlert('preload'); return; }
+    };
+    const queue = todo.slice();
+    await Promise.all(Array.from({ length: Math.min(PRELOAD_PARALLEL, queue.length) }, async () => {
+      while (queue.length && !failed && !fatal) await one(queue.shift());
+    }));
+    if (fatal) { hoerenFooter(true); throw fatal; }
+    if (!failed) { clearAlert('preload'); hoerenFooter(true); return; }
     if (S.module !== 'hoeren') throw new Error('left_module');
+    hoerenFooter(true);
     api.hoerenEvent(id, S.lease, { type: 'preload_failed', reason: failed }).catch(() => {});
     $('#kx-phase').textContent = 'Die Hördateien konnten nicht geladen werden.';
     await new Promise((resolve) => {
@@ -519,7 +536,6 @@ async function preloadHoeren(id, player, assets) {
       const btn = el && el.querySelector('button'); if (btn) btn.focus({ preventScroll: true });
       S.preloadRetry = () => { S.preloadRetry = null; resolve(); };
     });
-    $('#kx-phase').textContent = 'Prüftöne werden geladen …';
   }
 }
 const HOEREN_PRELOAD_FAILED = 'Die Hördateien konnten nicht vollständig geladen werden. Prüfen Sie Ihre Internetverbindung und wählen Sie „Erneut laden“. Ihre Antworten bleiben erhalten. Hinweis: Der Hörteil beginnt nach einer kurzen Ladezeit auch dann, wenn noch nicht alle Dateien geladen sind.';
@@ -534,7 +550,6 @@ async function runHoeren() {
   S.player = player;
   const ph = $('#kx-phase');
   const rendered = new Set([...document.querySelectorAll('#kx-main .kx-part')].map((el) => Number(el.dataset.part)));
-  ph.textContent = 'Prüftöne werden geladen …';
   await preloadHoeren(id, player, assets);
   /* Autoplay policy: a reloaded page has no user gesture, so the AudioContext can stay suspended and resume() may never
      settle. The module never waits on it: parts, answers and the schedule continue, and plays wait for one click on

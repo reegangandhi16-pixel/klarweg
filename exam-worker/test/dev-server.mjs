@@ -48,6 +48,7 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; ch
    Access tests; a same-origin dev page is not a cross-site write). */
 export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0', mfa = false, proxy = process.env.KX_DEV_PROXY === '1', flags = {} } = {}) {
   const FORMS = { s0: [FORM_DIR], ...Object.fromEntries(PRACTICE_LIBRARY.map((f) => [f.name.toLowerCase(), [f.dir]])), practice: PRACTICE_LIBRARY.map((f) => f.dir) };
+  if (!FORMS[form] && form.includes('/')) FORMS[form] = [path.resolve(form)];   // a form directory by path (e.g. the private M0 form)
   if (!FORMS[form]) throw new Error(`unknown form ${form} (${Object.keys(FORMS).join('|')})`);
   const h = makeEnv({ formDirs: FORMS[form], flags });   // flags: Worker vars on top of the test defaults, e.g. EXAM_MODULE_ONLY
   await grant(h.env, user);

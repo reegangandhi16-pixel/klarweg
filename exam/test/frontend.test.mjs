@@ -1110,8 +1110,16 @@ test('HÖREN PRELOAD (AUDIO-SPEC A3): each download has a timeout; a media failu
   const fn = main.slice(main.indexOf('async function preloadHoeren'), main.indexOf('const HOEREN_PRELOAD_FAILED'));
   assert.match(fn, /const PRELOAD_TIMEOUT_MS = 30_000;|setTimeout\(\(\) => ctl\.abort\(\), PRELOAD_TIMEOUT_MS\)/);
   assert.match(main, /const PRELOAD_TIMEOUT_MS = 30_000;/);
-  assert.match(fn, /if \(player\.isReady\(\[a\]\)\) continue;/, 'a retry loads only what is missing');
-  assert.match(fn, /if \(e instanceof ExamApiError && !\/\^media_\/\.test\(e\.code\)\) throw e;/);
+  assert.match(fn, /const todo = assets\.filter\(\(a\) => !player\.isReady\(\[a\]\)\);/, 'a retry loads only what is missing');
+  assert.match(fn, /if \(e instanceof ExamApiError && !\/\^media_\/\.test\(e\.code\)\) \{ fatal = fatal \|\| e; return; \}/);
+  assert.match(fn, /if \(fatal\) \{ hoerenFooter\(true\); throw fatal; \}/, 'session/lease errors still reach their screens');
+  // prod M0 2026-11-09: an empty-looking page while the audio loaded was handed in after 29 s → visible progress,
+  // parallel downloads, and no "Modul abgeben" until the files are ready (it returns when loading fails)
+  assert.match(main, /const PRELOAD_PARALLEL = 3;/);
+  assert.match(main, /Hördateien werden geladen: \$\{done\} von \$\{total\}\. Bitte warten Sie – die Aufgaben erscheinen, sobald alles geladen ist\./);
+  assert.match(fn, /preloadProgress\(done, assets\.length\); hoerenFooter\(false\);/);
+  assert.match(fn, /if \(!failed\) \{ clearAlert\('preload'\); hoerenFooter\(true\); return; \}/);
+  assert.match(fn, /hoerenFooter\(true\);\n    api\.hoerenEvent/);
   assert.match(fn, /api\.hoerenEvent\(id, S\.lease, \{ type: 'preload_failed', reason: failed \}\)\.catch\(\(\) => \{\}\);/);
   assert.match(fn, /showAlert\('preload', HOEREN_PRELOAD_FAILED, \{ act: 'hoeren-reload', label: 'Erneut laden' \}\)/);
   assert.match(main, /const HOEREN_PRELOAD_FAILED = 'Die Hördateien konnten nicht vollständig geladen werden\.[^']*Ihre Antworten bleiben erhalten\. Hinweis: Der Hörteil beginnt nach einer kurzen Ladezeit auch dann, wenn noch nicht alle Dateien geladen sind\.';/);

@@ -12,6 +12,8 @@ import { ChunkQueue, TurnRecorder } from './recorder.js';
 import { speakingPhaseAt, prepEndsAt, topicItems, chosenTopic } from './sprechen.js';
 import { createSpeakingDriver } from './sprechen-driver.js';
 import { createSpeakingAudio } from './speaking-audio.js';
+import { createRoomBridge } from './room/bridge.js';
+import { roomWanted, VIEW_KEY } from './room/config.js';
 import { countWords } from './wordcount.js';
 import { MAX_TEXT_CHARS, WARN_TEXT_CHARS, limitState, projectedLength, counterText, counterNote, LIMIT_WARNING, LIMIT_REACHED, PASTE_TOO_LONG, compositionTruncated, emptyInsertAtLimit } from './textlimit.js';
 import { randomId } from './ids.js';
@@ -774,9 +776,10 @@ async function runSprechen() {
     completeTurn: (b) => api.turn(id, S.lease, b)
   });
   const status = await api.speakingStatus(id, S.lease);
+  const room = startRoom();   // optional presentation layer (exam/js/room/); never blocks or changes the driver
   const audio = createSpeakingAudio({
-    fetchAsset: async (assetId) => { const m = await api.media(id, S.lease, assetId); return { bytes: await api.mediaBytes(m.url), mime: m.mime }; },
-    makeAudio: () => new Audio(),
+    fetchAsset: async (assetId) => { const m = await api.media(id, S.lease, assetId); const r = { bytes: await api.mediaBytes(m.url), mime: m.mime }; room.prepare(assetId, r.bytes); return r; },
+    makeAudio: () => { const a = new Audio(); room.attachAudio(a); return a; },
     makeUrl: (bytes, mime) => URL.createObjectURL(new Blob([bytes], { type: mime })),
     now: () => clock.serverNow(), sleep, requestGesture: requestAudioGesture
   });
@@ -784,16 +787,57 @@ async function runSprechen() {
   const driver = createSpeakingDriver({
     pkg: S.pkg, plan, startedAt, multiplier, now: () => clock.serverNow(), sleep, active: () => S.module === 'sprechen',
     status, queue, audio, getMic, recorder: (turn, stream) => new TurnRecorder({ stream, queue, turn }),
-    ui: {
+    ui: withRoom(room, {
       phase: (text) => { const el = $('#kx-phase'); if (el) el.textContent = text; },
       turn: label, alert: (kind, text) => showAlert(kind, text), clear: clearAlert,
       lockTopics: () => applyTopicLock(true),
       recording: (on, { part, stream } = {}) => (on ? startLevelMeter(stream, part === 2) : stopLevelMeter())
-    },
+    }),
     topic: () => chosenTopic(S.pkg, S.answers),
     log: (event, detail) => console.warn('[kx-sprechen]', event, detail)
   });
-  try { await driver.run(); } finally { stopLevelMeter(); releaseMic(); }
+  try { try { await driver.run(); } finally { stopLevelMeter(); releaseMic(); } } finally { room.destroy(); }
+}
+
+/* The room observes the driver's UI calls; the classic handlers run first and unchanged (the bridge never throws). */
+function withRoom(room, ui) {
+  return { ...ui,
+    phase: (text) => { ui.phase(text); room.phase(roomPhaseId()); },
+    recording: (on, opts = {}) => { const r = ui.recording(on, opts); room.recording(on, { part: opts.part, stream: opts.stream }); return r; } };
+}
+
+/* Simulated exam room (Stage 1: recorded prompts). Off unless roomWanted(); the classic Sprechen view stays in the
+   page underneath and continues alone if the room is switched off, unsupported or fails at any point. */
+function roomPhaseId() {
+  if (!S.sprechen) return null;
+  const at = speakingPhaseAt(S.sprechen.plan, S.sprechen.startedAt, clock.serverNow(), S.sprechen.multiplier);
+  return at.state === 'running' ? at.phase.id : at.state;
+}
+function storedView() { try { return localStorage.getItem(VIEW_KEY); } catch { return null; } }
+function startRoom() {
+  const bridge = createRoomBridge({ log: (e, d) => console.warn('[kx-room]', e, d) });
+  const main = $('#kx-main');
+  if (!main || !roomWanted({ hostname: location.hostname, search: location.search, stored: storedView() })) { bridge.ready(null); return bridge; }
+  import('./room/room.js')
+    .then(({ createRoom }) => createRoom({ mount: main, pkg: S.pkg, log: (e, d) => console.info('[kx-room]', e, d), onFail: () => bridge.destroy() }))
+    .then((r) => { bridge.ready(r); if (r) wireRoomControls(r, bridge); })
+    .catch((e) => { console.warn('[kx-room]', 'room_failed', { where: 'load', error: e && e.message }); bridge.ready(null); });
+  return bridge;
+}
+function wireRoomControls(r, bridge) {
+  const bar = document.querySelector('.kx-room-bar'); if (!bar) return;
+  const box = document.createElement('div'); box.className = 'kx-room-actions';
+  box.innerHTML = '<button type="button" class="kx-btn kx-btn-quiet" data-room="collapse" aria-expanded="true">Raum ausblenden</button><button type="button" class="kx-btn kx-btn-quiet" data-room="classic">Klassische Ansicht</button>';
+  bar.appendChild(box);
+  box.addEventListener('click', (ev) => {
+    const b = ev.target.closest('button[data-room]'); if (!b) return;
+    const root = document.querySelector('.kx-room');
+    if (b.dataset.room === 'collapse' && root) {
+      const collapsed = root.dataset.collapsed !== 'true';
+      root.dataset.collapsed = String(collapsed); b.textContent = collapsed ? 'Raum einblenden' : 'Raum ausblenden'; b.setAttribute('aria-expanded', String(!collapsed));
+    }
+    if (b.dataset.room === 'classic') { try { localStorage.setItem(VIEW_KEY, 'classic'); } catch {} bridge.destroy(); }
+  });
 }
 
 async function showResult() {

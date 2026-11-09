@@ -39,7 +39,8 @@ async function makeAccess(users) {
   return { env, tokens, mfaAt };
 }
 
-const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json', '.glb': 'model/gltf-binary', '.bin': 'application/octet-stream' };
 
 /* proxy: true (opt-in; KX_DEV_PROXY=1 for the browser tests) sends /exam/v1/* and /auth/* through the REAL klarweg-access
    Worker in-process: session cookie → findSessionUser → /exam proxy (header allow-list, 512 KiB body cap, X-KW-* strip,
@@ -122,7 +123,9 @@ export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID
       }
       let p = url.pathname === '/exam/' || url.pathname === '/exam' ? '/exam/index.html' : url.pathname;
       const file = path.join(ROOT, path.normalize(p));
-      if (!file.startsWith(path.join(ROOT, 'exam') + path.sep) || !fs.existsSync(file)) { res.writeHead(404); res.end('not found'); return; }
+      // exam/ (client) and exam-room/ (Sprechen room: vendored libraries, avatars, casts)
+      const servable = [path.join(ROOT, 'exam') + path.sep, path.join(ROOT, 'exam-room') + path.sep].some((d) => file.startsWith(d));
+      if (!servable || !fs.existsSync(file) || !fs.statSync(file).isFile()) { res.writeHead(404); res.end('not found'); return; }
       res.writeHead(200, { 'content-type': TYPES[path.extname(file)] || 'application/octet-stream', 'cache-control': 'no-store' });
       res.end(fs.readFileSync(file));
     } catch (e) {

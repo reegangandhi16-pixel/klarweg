@@ -19,6 +19,7 @@ import { syntheticBuild, pkgFor } from '../../exam-worker/test/harness.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
+const jsFiles = () => fs.readdirSync(path.join(ROOT, 'exam/js'), { recursive: true }).filter((f) => f.endsWith('.js')).map((f) => f.split(path.sep).join('/'));
 const build = syntheticBuild();
 
 test('TIMER (client): offset = median of RTT-midpoint samples; device clock skew does not move the deadline', () => {
@@ -273,7 +274,8 @@ test('PUBLISHING: the Pages allowlist publishes exactly the exam client (3 pages
   const allow = read('.github/pages-allowlist.txt').split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
   const listed = allow.filter((l) => /^\/?exam(\/|$)/.test(l)).sort();
   const seen = new Set(); const queue = ['main.js', 'admin.js', 'rater.js'];
-  while (queue.length) { const f = queue.pop(); if (seen.has(f)) continue; seen.add(f); for (const m of read(`exam/js/${f}`).matchAll(/from '\.\/([a-z-]+\.js)'/g)) queue.push(m[1]); }
+  // static and dynamic relative imports, including the Sprechen room's subfolder (exam/js/room/)
+  while (queue.length) { const f = queue.pop(); if (seen.has(f)) continue; seen.add(f); for (const m of read(`exam/js/${f}`).matchAll(/(?:from |import\()'(\.{1,2}\/[a-z/-]+\.js)'/g)) queue.push(path.posix.normalize(path.posix.join(path.posix.dirname(f), m[1]))); }
   const expected = ['exam/index.html', 'exam/admin.html', 'exam/rater.html', 'exam/exam.css', ...[...seen].map((f) => `exam/js/${f}`)].sort();
   assert.deepEqual(listed, expected);
   assert.equal(allow.some((l) => /^GLOB:.*exam|^\/?exam-(content|worker)\//.test(l)), false, 'no exam glob, no exam content or Worker source');
@@ -282,7 +284,7 @@ test('PUBLISHING: the Pages allowlist publishes exactly the exam client (3 pages
     assert.match(html, /<meta name="robots" content="noindex, nofollow">/, page);
     assert.match(html, /connect-src 'self' blob:;/, `${page}: API calls stay same-origin`);
   }
-  const front = ['exam/index.html', ...fs.readdirSync(path.join(ROOT, 'exam/js')).map((f) => `exam/js/${f}`)].map(read).join('\n');
+  const front = ['exam/index.html', ...jsFiles().map((f) => `exam/js/${f}`)].map(read).join('\n');
   assert.equal(/jsdelivr|klarweg-audio|manifest\.pilot|\/public\/audio/i.test(front), false);
   assert.equal(/speech\/transcribe|speech\/task-check|record-check/i.test(front), false, 'exam must not reuse chapter Record & Check');
 });
@@ -652,7 +654,7 @@ test('CSP: both exam pages carry a strict Content-Security-Policy and contain no
     assert.equal(/<script(?![^>]*\bsrc=)/.test(html), false, `${page}: no inline script`);
     assert.equal(/<style\b|\sstyle="|\son[a-z]+="/.test(html), false, `${page}: no inline style or handler`);
   }
-  for (const f of fs.readdirSync(new URL('../js/', import.meta.url))) {
+  for (const f of jsFiles()) {
     const src = fs.readFileSync(new URL(`../js/${f}`, import.meta.url), 'utf8');
     assert.equal(/\sstyle=\\?["']|\son(click|load|error|change|input|submit)=|eval\(|new Function\(/.test(src), false, `${f}: no inline style/handler/eval in rendered HTML`);
   }

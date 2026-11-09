@@ -1,0 +1,115 @@
+{
+ "id": "m0",
+ "generated_by": "scripts/exam-room-cast.mjs",
+ "people": {
+  "examiner": {
+   "role": "examiner",
+   "label": "Prüferin",
+   "avatar": "examiner-f"
+  },
+  "partner": {
+   "role": "partner",
+   "label": "Gesprächspartner",
+   "avatar": "partner-m"
+  },
+  "julia": {
+   "role": "partner",
+   "label": "Julia (Teilnehmerin)",
+   "avatar": "partner-f"
+  }
+ },
+ "front": {
+  "1": "partner",
+  "2": "partner",
+  "3": "julia"
+ },
+ "assets": {
+  "ast:m0-sp1-partner-1": [
+   [
+    0,
+    10407,
+    "partner"
+   ]
+  ],
+  "ast:m0-sp1-partner-2": [
+   [
+    0,
+    7807,
+    "partner"
+   ]
+  ],
+  "ast:m0-sp1-partner-3": [
+   [
+    0,
+    10207,
+    "partner"
+   ]
+  ],
+  "ast:m0-sp1-partner-4": [
+   [
+    0,
+    9707,
+    "partner"
+   ]
+  ],
+  "ast:m0-sp1-partner-5": [
+   [
+    0,
+    4207,
+    "partner"
+   ]
+  ],
+  "ast:m0-sp1-partner-close": [
+   [
+    0,
+    6707,
+    "partner"
+   ]
+  ],
+  "ast:m0-sp3-partner-talk": [
+   [
+    0,
+    16584,
+    "examiner"
+   ],
+   [
+    16584,
+    143370,
+    "julia"
+   ],
+   [
+    143370,
+    151407,
+    "examiner"
+   ]
+  ],
+  "ast:m0-sp3-examiner-q-t1": [
+   [
+    0,
+    10507,
+    "examiner"
+   ]
+  ],
+  "ast:m0-sp3-examiner-q-t2": [
+   [
+    0,
+    8907,
+    "examiner"
+   ]
+  ],
+  "ast:m0-sp3-partner-q-t1": [
+   [
+    0,
+    4407,
+    "julia"
+   ]
+  ],
+  "ast:m0-sp3-partner-q-t2": [
+   [
+    0,
+    7307,
+    "julia"
+   ]
+  ]
+ }
+}

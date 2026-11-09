@@ -8,7 +8,7 @@
 <!-- Content-Security-Policy: no inline scripts, styles or eval; only the site, Google Fonts and the Klarweg API. connect-src is the page's own
      origin only: on klarweg.in the API is same-origin under /api (OD-20). blob: = the page's own
      recordings (no outside data). -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self' blob:; connect-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <!-- API base override (klarweg-access). Empty = automatic: /api on klarweg.in, the page's own origin elsewhere (api.js resolveApiBase). -->
 <meta name="kw-exam-api" content="">
 <title>Klarweg B1 Simulation</title>

@@ -112,7 +112,7 @@ test('NONPROD SITE: a real build writes a full copy outside the repo and leaves 
     build({ api: API, out, root: REPO });
     assert.ok(!fs.existsSync(path.join(out, 'test')), 'exam/test is not copied');
     assert.ok(fs.existsSync(path.join(out, 'exam.css')) && fs.existsSync(path.join(out, 'js')));
-    for (const f of fs.readdirSync(path.join(REPO, 'exam', 'js'))) {
+    for (const f of fs.readdirSync(path.join(REPO, 'exam', 'js'), { recursive: true }).filter((x) => fs.statSync(path.join(REPO, 'exam', 'js', x)).isFile())) {
       assert.ok(fs.readFileSync(path.join(out, 'js', f)).equals(fs.readFileSync(path.join(REPO, 'exam', 'js', f))), `js/${f} copied byte-for-byte`);
     }
     for (const page of pagesOf(REPO)) {

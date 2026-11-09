@@ -406,6 +406,53 @@ exam/js/sprechen.js
 exam/js/store.js
 exam/js/textlimit.js
 exam/js/wordcount.js
+exam/js/room/analyse.js
+exam/js/room/bridge.js
+exam/js/room/cast.js
+exam/js/room/config.js
+exam/js/room/room.js
+exam/js/room/stage.js
+exam/js/room/visemes.js
+# ---------------------------------------------------------------
+# Sprechen exam room, Stage 1 (simulated room, RECORDED prompts; owner
+# exception to the no-avatar rule for B1 Sprechen only, 2026-11-09).
+# Off on klarweg.in until the owner approves (ROOM_PRODUCTION = false in
+# exam/js/room/config.js). Self-hosted MIT libraries (pinned, hash-listed
+# in VERSIONS.json), text-free speaker casts, avatar models. Checked
+# against VERSIONS.json and the casts index by exam/test/room.test.mjs.
+# ---------------------------------------------------------------
+exam-room/casts/index.json
+exam-room/casts/m0.json
+exam-room/vendor/VERSIONS.json
+exam-room/vendor/headaudio/LICENSE
+exam-room/vendor/headaudio/dist/model-en-mixed.bin
+exam-room/vendor/headaudio/modules/classifier.mjs
+exam-room/vendor/headaudio/modules/mfcc.mjs
+exam-room/vendor/headaudio/modules/parameters.mjs
+exam-room/vendor/headaudio/modules/processor.mjs
+exam-room/vendor/headaudio/modules/ringbuffer.mjs
+exam-room/vendor/headaudio/modules/training.mjs
+exam-room/vendor/headaudio/modules/vadgate.mjs
+exam-room/vendor/talkinghead/LICENSE
+exam-room/vendor/talkinghead/modules/dynamicbones.mjs
+exam-room/vendor/talkinghead/modules/lipsync-de.mjs
+exam-room/vendor/talkinghead/modules/retargeter.mjs
+exam-room/vendor/talkinghead/modules/talkinghead.mjs
+exam-room/vendor/three/LICENSE
+exam-room/vendor/three/build/three.core.js
+exam-room/vendor/three/build/three.module.js
+exam-room/vendor/three/examples/jsm/controls/OrbitControls.js
+exam-room/vendor/three/examples/jsm/curves/NURBSCurve.js
+exam-room/vendor/three/examples/jsm/curves/NURBSUtils.js
+exam-room/vendor/three/examples/jsm/environments/RoomEnvironment.js
+exam-room/vendor/three/examples/jsm/libs/fflate.module.js
+exam-room/vendor/three/examples/jsm/libs/meshopt_decoder.module.js
+exam-room/vendor/three/examples/jsm/libs/stats.module.js
+exam-room/vendor/three/examples/jsm/loaders/DRACOLoader.js
+exam-room/vendor/three/examples/jsm/loaders/FBXLoader.js
+exam-room/vendor/three/examples/jsm/loaders/GLTFLoader.js
+exam-room/vendor/three/examples/jsm/utils/BufferGeometryUtils.js
+exam-room/vendor/three/examples/jsm/utils/SkeletonUtils.js
 
 # Next 50 original learning guides
 german-family-vocabulary.html

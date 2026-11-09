@@ -1,0 +1,54 @@
+{
+ "generated_by": "scripts/exam-room-vendor.mjs",
+ "packages": [
+  {
+   "name": "three",
+   "version": "0.186.1",
+   "license": "MIT",
+   "integrity": "sha512-blFeqb49wRCSGUGj7gtpfnSGHy2lwDk94RhUmS1c/hTby70kvChbWpkJ4Pm1390LqzzvTmzgXKHPEafJwCb8jA=="
+  },
+  {
+   "name": "@met4citizen/talkinghead",
+   "version": "1.8.2",
+   "license": "MIT",
+   "integrity": "sha512-+1EVKIQovJav2uBW7TE6ul50jI2Yh0F40AFWMLIX3sVY3AphpUZ1ebWhZO4I7M/GKdc95gE2eb0qbLtcYWQvZw=="
+  },
+  {
+   "name": "@met4citizen/headaudio",
+   "version": "1.0.0",
+   "license": "MIT",
+   "integrity": "sha512-UroGfBIJiBTQ6GJYM6NlqJupid9gg/rja9K9cSgdgf4El+AO3y9NuahgU2Oio+kAZY4v1UvuTFjzHrC+jW9YDA=="
+  }
+ ],
+ "files": {
+  "headaudio/LICENSE": "d45d4192f4e7502846c6b01d743eddbff20b3752e4c350a88418f59e4587a60f",
+  "headaudio/dist/model-en-mixed.bin": "0358f68989b5861f9b7d18871b010fa6cbf88a53bda4954a954d8c548bbcf251",
+  "headaudio/modules/classifier.mjs": "6a3e983b4f47e9968da2727f7ab3af2592f8503609a64c3e73e36dd05d0e8ec9",
+  "headaudio/modules/mfcc.mjs": "d447ec4951920ce200d5e663f9c6736bb9c074ff99ce8402fb39ec47742c6a6b",
+  "headaudio/modules/parameters.mjs": "d8c0c42a26b1c7caddd073cdb80e0809ed9e7c19431488563460a15a19240317",
+  "headaudio/modules/processor.mjs": "55be8fb5600754cefb0ce786e3dc922eeae5e58e5f5804e78c23bdb19d6dcf0e",
+  "headaudio/modules/ringbuffer.mjs": "185fb74b7ce5bbeffc9eaae6456dab899d2b83b43b30d315daf1567bfdcf2c45",
+  "headaudio/modules/training.mjs": "c622baa93f51f0dbdeffc33cc93719457a016d31c5cee0d9d4bd3746cf3fb611",
+  "headaudio/modules/vadgate.mjs": "63039b57289789e2cea8045fbc41dbfb02a5af51dfa17c904819fb941bb43b75",
+  "talkinghead/LICENSE": "a168d1f90b70b313fb594ddb07e03c9dea08fe2a43df2b4f607db6920ce69cfa",
+  "talkinghead/modules/dynamicbones.mjs": "10d19defb77894e114afc625f3577e10141561cff42fbb3a4bc127e1a7996f41",
+  "talkinghead/modules/lipsync-de.mjs": "237c4af99e5706151a2093237e0400fc68639648ab408a279b1aaaa918a2805a",
+  "talkinghead/modules/retargeter.mjs": "d494762089e2c5751e506922eafdcd3a86b11bfeb5e17c196b266f56f8affcb8",
+  "talkinghead/modules/talkinghead.mjs": "68e7855bd333f33e1484e6d9ed20ba0680196d949cee887d5b4986bd2f0fc8fd",
+  "three/LICENSE": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+  "three/build/three.core.js": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6",
+  "three/build/three.module.js": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea",
+  "three/examples/jsm/controls/OrbitControls.js": "aa50c598e8a059f3896100b8ff97b1cc404c3a29045b65fecf37e599c64cdd4e",
+  "three/examples/jsm/curves/NURBSCurve.js": "b1e10d7688df6a9b707f90710defa78f59ff3f9d23f44f4f3f66884a1e1be2c6",
+  "three/examples/jsm/curves/NURBSUtils.js": "fffd98bbf51f2e4ddf87514db221998574b874a59f450d0a1085cd8969424279",
+  "three/examples/jsm/environments/RoomEnvironment.js": "dbfe4fc05303d775fcfc86d12f9d489dc5b804e41a6ff0fbe588410939a03069",
+  "three/examples/jsm/libs/fflate.module.js": "209a4412eb48ce609edb4391992a792ffcc3983d30ee7e2b0b89a8c470f3cd8a",
+  "three/examples/jsm/libs/meshopt_decoder.module.js": "d428e73a000057c6c94bfcedc3412d0c2dc14ca8800e88553aab05113ad2bf19",
+  "three/examples/jsm/libs/stats.module.js": "2c71a2f70e89c69e46c2e285fb171bac3dcfd498a85400e94ad5aaf6044ffc06",
+  "three/examples/jsm/loaders/DRACOLoader.js": "2d591683363259b92910eb1b533066c7355e9f5b53c3868e188194cb6843ff10",
+  "three/examples/jsm/loaders/FBXLoader.js": "2d3411e236bfd82c4ebc02e8bbf2cf7d9f4bdc199b17e8547aefb6707608e4b1",
+  "three/examples/jsm/loaders/GLTFLoader.js": "5ae8e3c1f32e0e8612fbdbfe7e94fe07a312dfbaa46a53b6fb6d85128a5f29ec",
+  "three/examples/jsm/utils/BufferGeometryUtils.js": "1364bdc5c2631ddf8358806285599cc83ea5ac644a16ee42ced42c1412218c6d",
+  "three/examples/jsm/utils/SkeletonUtils.js": "980c4ee862c9d1cb52140e9b5d9e88d2fb8e518f6f5231c8cb59315385b6010c"
+ }
+}

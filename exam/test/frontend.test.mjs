@@ -616,6 +616,12 @@ test('LEASE EXPIRY (static): an expired lease is reacquired like a reload (no ta
   const leased = [...apiSrc.matchAll(/^\s+([a-zA-Z]+): \(id, leaseId\b/gm)].map((m) => m[1]).filter((n) => n !== 'heartbeat');
   assert.deepEqual([...list].sort(), [...leased].sort(), 'LEASED_CALLS covers every lease-carrying API method except heartbeat');
   assert.match(main, /return call\(id, S\.lease, \.\.\.rest\);/, 'retried once with the reacquired lease');
+
+  // a late request with the lease this tab replaced itself is answered lease_superseded: not a takeover (found in the
+  // non-prod preview journey 2026-11-11: false "In einem anderen Fenster geöffnet" after a 75 s freeze)
+  assert.match(main, /async function replacedByUs\(lease\) \{ if \(reacquiring\) await reacquiring; return !!lease && lease !== S\.lease; \}/);
+  assert.match(main, /if \(e && e\.code === 'lease_superseded' && await replacedByUs\(lease\)\) return call\(id, S\.lease, \.\.\.rest\);/, 'leased calls and autosave');
+  assert.match(main, /if \(e\.code === 'lease_superseded' && await replacedByUs\(sent\)\) return;/, 'heartbeat');
 });
 
 test('COOKIE PRE-FLIGHT (OD-20 interim): cookieCheck() true/false/null, never throws; "signed out" becomes "cookies blocked" only on a definite answer', async () => {

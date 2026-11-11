@@ -32,6 +32,7 @@ import { chapterAudioKeys } from "./chapters.js";
 import { isAllowedOrigin } from "./cors.js";
 import { isSameOriginApi } from "./same-origin.js";
 import { FREE_MEDIA } from "./media-free.js";
+import { mediaImage } from "./media-images.js";
 
 export const MEDIA_ROUTE = /^\/media\/(.{1,600})$/;
 const KEY = /^[A-Za-z0-9][A-Za-z0-9_.\-/é]{0,200}\.mp3$/;
@@ -184,6 +185,9 @@ function foreignReferer(request) {
 /* GET|HEAD /media/<key>  (request already stripped of /api by index.js; the host is kept) */
 export async function mediaFile(request, env, rawKey) {
   if (!isSameOriginApi(request)) return refusal(404);
+  /* Paid vocabulary illustrations (media-images.js): own key rule, own
+     per-level authorization; never reaches the audio rules below. */
+  if (rawKey.startsWith("vocab-img/")) return mediaImage(request, env, rawKey, { foreignReferer });
   if (MANIFESTS.has(rawKey)) {
     if (!env.MEDIA || typeof env.MEDIA.get !== "function") return refusal(503);
     if (foreignReferer(request)) return refusal(403);

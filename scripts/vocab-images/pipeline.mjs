@@ -178,6 +178,32 @@ function pickWork(level, limit) {
   return want;
 }
 
+/* Exponential back-off with full jitter: 5 s · 2^attempt, capped at 5 min. */
+export const backoffMs = (attempt, base = 5000, cap = 300000) => Math.round(Math.random() * Math.min(cap, base * 2 ** attempt));
+/* Adaptive concurrency (AIMD): a 429 halves the allowed in-flight requests,
+   20 clean responses in a row add one back, up to the --parallel ceiling. */
+export function makeGate(max) {
+  let limit = max, inFlight = 0, clean = 0; const waiters = [];
+  const pump = () => { while (inFlight < limit && waiters.length) { inFlight++; waiters.shift()(); } };
+  return {
+    acquire: () => new Promise((r) => { waiters.push(r); pump(); }),
+    release: () => { inFlight--; pump(); },
+    backoff: () => { limit = Math.max(1, Math.floor(limit / 2)); clean = 0; },
+    success: () => { if (++clean >= 20 && limit < max) { limit++; clean = 0; pump(); } },
+    get limit() { return limit; },
+  };
+}
+/* A request logged as submitted but never answered (process stopped) is
+   counted as billed at the standard price — we cannot prove it was not. */
+function markAbortedInteractive() {
+  const open = new Map();
+  for (const r of rows().filter((x) => x.batch === "gen" && x.interactive)) {
+    if (r.submitted) for (const k of r.keys) open.set(k, r);
+    else if (r.key) open.delete(r.key + "#" + r.attempt);
+  }
+  for (const k of open.keys()) { const [key, a] = k.split("#"); log({ batch: "gen", key, attempt: Number(a), status: "aborted", billed: true, billingUnknown: true, usd: IMAGE_USD_WORST, usdList: 0, interactive: true }); }
+}
+
 /* ---------------- generate (interactive, standard price) ----------------
    Same rules as submit, one request per image on the global endpoint, with
    rate-limited parallelism and back-off. Used when batch capacity is slow. */
@@ -186,10 +212,12 @@ async function generate() {
   if (!(maxUsd > 0)) throw new Error("--max-usd required");
   if (opt("approved-by-owner") !== true) throw new Error("refusing paid generation without --approved-by-owner (owner budget approval)");
   const limit = Number(opt("limit", Infinity)), par = Number(opt("parallel", 4)), level = opt("level");
+  markAbortedInteractive();
   const work = pickWork(level, limit);
   const url = `https://aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/global/publishers/google/models/${IMAGE_MODEL}:generateContent`;
   console.log(JSON.stringify({ toGenerate: work.length, parallel: par }));
   let idx = 0, ok = 0, bad = 0, r429 = 0, stop = false; const t0 = Date.now();
+  const gate = makeGate(par);
   async function worker() {
     while (!stop && idx < work.length) {
       const w = work[idx++];
@@ -200,9 +228,12 @@ async function generate() {
       const body = { contents: [{ role: "user", parts: [{ text: w.prompt }] }], generationConfig: { responseModalities: ["IMAGE"], imageConfig: { aspectRatio: "4:3" } } };
       let res = null;
       for (let a = 0; a < 10; a++) {
-        res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && res?.status === 401), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) });
+        await gate.acquire();
+        try { res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && res?.status === 401), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) }); }
+        finally { gate.release(); }
         if (res.status === 401) continue;
-        if (res.status === 429 || res.status >= 500) { r429++; await new Promise((z) => setTimeout(z, 8000 * (a + 1))); continue; }
+        if (res.status === 429 || res.status >= 500) { r429++; gate.backoff(); await new Promise((z) => setTimeout(z, backoffMs(a))); continue; }
+        gate.success();
         break;
       }
       const j = await res.json().catch(() => ({}));
@@ -217,6 +248,7 @@ async function generate() {
       } else if (res.ok && outTok > 0) {
         log({ batch: "gen", key: w.it.key, attempt: w.attempt, status: "no_image:" + (j.candidates?.[0]?.finishReason || "?"), billed: true, usd: IMAGE_USD_WORST, usdList: IMAGE_USD_WORST, interactive: true }); bad++;
       } else { log({ batch: "gen", key: w.it.key, attempt: w.attempt, status: "failed:" + res.status, billed: false, usd: 0, usdList: 0, interactive: true }); bad++; }
+      const pace = Number(opt("pace", 0)); if (pace) await new Promise((z) => setTimeout(z, pace));   // steady rate under the per-project cap
       if ((ok + bad) % 50 === 0) console.log(`gen ${ok + bad}/${work.length} ok ${ok} bad ${bad} 429s ${r429} ${((ok + bad) / ((Date.now() - t0) / 60000)).toFixed(1)}/min committed $${committedUsd()}`);
     }
   }

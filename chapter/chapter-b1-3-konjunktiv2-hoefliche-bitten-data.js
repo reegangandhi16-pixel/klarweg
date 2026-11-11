@@ -333,7 +333,9 @@ const CHAPTER = {
     { de: 'Frage', art: 'die', gender: 'f', plural: 'Fragen', pos: 'noun', level: 'B1', en: 'question', hi: 'सवाल',
       ex: 'Ich hätte gern noch eine Frage.', exEn: 'I\'d like to ask one more question.', exHi: 'Mera ek aur sawaal hai.',
       ex2: 'Die Frage wäre, ob sich eine Reparatur lohnt.', ex2En: 'The question would be whether a repair is worth it.', ex2Hi: 'Sawaal yeh hoga ki kya repair karwana faayde ka hai.',
-      advanced: { synonyms: ['Anfrage'], opposites: ['Antwort'], collocations: ['eine Frage haben', 'eine Frage stellen'] } },
+      advanced: { synonyms: ['Anfrage'], opposites: ['Antwort'], collocations: ['eine Frage haben', 'eine Frage stellen'] },
+      img: { src: '/api/media/vocab-img/29121f32201ade8512f8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Student raising hand with a question' }
+    },
     { de: 'nähen', pos: 'verb', level: 'B1', en: 'to sew', hi: 'सिलाई करना',
       ex: 'Könnten Sie diesen Knopf bitte annähen?', exEn: 'Could you please sew on this button?', exHi: 'Kya aap kripya yeh button si sakte hain?',
       ex2: 'Meine Oma näht ihre Kleider selbst.', ex2En: 'My grandmother sews her own clothes.', ex2Hi: 'Meri dadi apne kapde khud silti hain.',

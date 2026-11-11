@@ -146,3 +146,21 @@ test('renderer keeps img optional and degrades gracefully', () => {
   assert.match(css, /\.vword-fig \{[^}]*aspect-ratio: 4 \/ 3/);
   assert.match(css, /@media \(min-width: 721px\) \{ \.vword--img \.vword-top \{ min-height: 53px; \} \}/);
 });
+
+test('Images on/off control and gated-image probe (accessibility, no downloads when off, fail closed)', () => {
+  const app = fs.readFileSync(path.join(ROOT, 'chapter/chapter-app.js'), 'utf8');
+  // the control: a real button with aria-pressed, controlling the grid, only where images exist
+  assert.match(app, /if \(C\.vocab\.some\(w => w\.img && w\.img\.src\)\) \{/);
+  assert.match(app, /el\('button', \{ class: 'filter-chip vocab-img-toggle', type: 'button', 'aria-pressed': String\(vocabImages\), 'aria-controls': 'vocab-grid' \}/);
+  assert.match(app, /localStorage\.setItem\(VOCAB_IMG_PREF, vocabImages \? 'on' : 'off'\)/);
+  // off: no figure is built at all (so nothing downloads), and not even the probe is sent
+  assert.match(app, /const fig = vocabImages \? vocabFigure\(w, card\) : null;/);
+  assert.match(app, /\(vocabImages \? probeGatedImages\(\) : Promise\.resolve\(\)\)\.then/);
+  // gated figures only after a successful authenticated probe; timeout/error = no figures
+  assert.match(app, /if \(GATED_IMG\.test\(im\.src\) && gatedImgOk !== true\) return null;/);
+  assert.match(app, /fetch\(url, \{ method: 'HEAD', credentials: 'same-origin', cache: 'no-store' \}\)\.then\(r => r\.ok, \(\) => false\)/);
+  assert.match(app, /setTimeout\(\(\) => res\(false\), 4000\)/);
+  const css = fs.readFileSync(path.join(ROOT, 'chapter/chapter.css'), 'utf8');
+  assert.match(css, /\.vocab-img-toggle:focus-visible \{ outline: 2px solid var\(--accent\)/);
+  assert.match(css, /\.btn, \.dash-nav-item, \.filter-chip,/, 'the control inherits the 44px touch target of .filter-chip');
+});

@@ -15,6 +15,8 @@ preview_urls = false
 # 608453a5). CASHFREE_SECRET_KEY is a Worker secret, never in this file.
 # See docs/CASHFREE-PRODUCTION.md on main.
 [vars]
+# Exam proxy /exam/* (exam-proxy.js): on since 2026-11-09 (M0 launch, runbook §7.2). Kill switch: "off" + redeploy.
+EXAM_ROUTES = "on"
 CASHFREE_ENV = "production"
 CASHFREE_APP_ID = "115666718bafaa0ac9e7b68c1c37666511"
 GOOGLE_CLIENT_ID = "584881453594-kdmjg0h79716s4tl65g0p1mlurshih3i.apps.googleusercontent.com"
@@ -127,6 +129,12 @@ database_id = "208a8507-b0ec-48e0-812c-c4aa38c8dd32"
 [[services]]
 binding = "TUTOR"
 service = "klarweg-tutor"
+
+# Private exam Worker (exam-worker/), reached only through the /exam/* proxy when EXAM_ROUTES="on".
+# klarweg-exam deployed 2026-11-09 (e8e5bf81, every flag off); EXAM_PROXY_SECRET matches on both Workers.
+[[services]]
+binding = "EXAM"
+service = "klarweg-exam"
 
 # Secrets (wrangler secret put <NAME>) — never in this file:
 #   CASHFREE_SECRET_KEY

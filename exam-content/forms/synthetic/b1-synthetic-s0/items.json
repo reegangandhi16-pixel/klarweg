@@ -1,0 +1,4375 @@
+[
+  {
+    "id": "itm:b1:syn-l1-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:syn-l1",
+    "is_example": true,
+    "interaction": "binary_choice",
+    "stem": "Beispiel: Alpha wohnt in Teststadt A.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "richtig"
+  },
+  {
+    "id": "itm:b1:syn-l1-01",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:syn-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "1. Alpha fährt mit dem Bus zur Arbeit.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l1-02",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:syn-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "2. Am Wochenende kocht Alpha gern.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l1-03",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:syn-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "3. Der Kurs ist in Teststadt A.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l1-04",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:syn-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "4. Beta hilft bei der Planung.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l1-05",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:syn-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "5. Die Reise dauert fünf Stunden.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l1-06",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 1,
+    "task_id": "tsk:b1:syn-l1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "6. Alpha arbeitet in einem Büro.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l2-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:syn-l2a",
+    "is_example": true,
+    "interaction": "mcq_single",
+    "stem": "Beispiel: Die Bibliothek …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "ist neu."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "ist geschlossen."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "ist ein Museum."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "a"
+  },
+  {
+    "id": "itm:b1:syn-l2-07",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:syn-l2a",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "7. In Testartikel A geht es um …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "eine neue Bibliothek."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "einen Lauftreff."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "eine Schule."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l2-08",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:syn-l2a",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "8. Die Bibliothek …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "ist sonntags offen."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "hat Abendkurse."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "ist sehr klein."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l2-09",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:syn-l2a",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "9. Die Stadt plant …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "schließt bald."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "zieht um."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "eröffnet einen zweiten Standort."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l2-10",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:syn-l2b",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "10. In Testartikel B geht es um …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "einen Lauftreff."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "eine Bibliothek."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "ein Konzert."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l2-11",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:syn-l2b",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "11. Mitmachen können …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "nur Kinder."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Personen ab 16 Jahren."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "nur Mitglieder."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l2-12",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 2,
+    "task_id": "tsk:b1:syn-l2b",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "12. Die Teilnahme …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "kostet Geld."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "braucht keine Anmeldung."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "braucht eine Online-Anmeldung."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l3-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:syn-l3",
+    "is_example": true,
+    "interaction": "matching_pool",
+    "stem": "Beispiel: Testperson 0 sucht Angebot Nummer 2.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "b"
+  },
+  {
+    "id": "itm:b1:syn-l3-13",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:syn-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "13. Testperson 13 sucht Angebot Nummer 3.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l3-14",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:syn-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "14. Testperson 14 sucht Angebot Nummer 4.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l3-15",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:syn-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "15. Testperson 15 sucht ein Angebot, das es nicht gibt.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l3-16",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:syn-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "16. Testperson 16 sucht Angebot Nummer 5.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l3-17",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:syn-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "17. Testperson 17 sucht Angebot Nummer 6.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l3-18",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:syn-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "18. Testperson 18 sucht Angebot Nummer 7.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l3-19",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 3,
+    "task_id": "tsk:b1:syn-l3",
+    "is_example": false,
+    "interaction": "matching_pool",
+    "stem": "19. Testperson 19 sucht Angebot Nummer 8.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a"
+      },
+      {
+        "option_id": "b",
+        "label": "b"
+      },
+      {
+        "option_id": "c",
+        "label": "c"
+      },
+      {
+        "option_id": "d",
+        "label": "d"
+      },
+      {
+        "option_id": "e",
+        "label": "e"
+      },
+      {
+        "option_id": "f",
+        "label": "f"
+      },
+      {
+        "option_id": "g",
+        "label": "g"
+      },
+      {
+        "option_id": "h",
+        "label": "h"
+      },
+      {
+        "option_id": "i",
+        "label": "i"
+      },
+      {
+        "option_id": "j",
+        "label": "j"
+      },
+      {
+        "option_id": "0",
+        "label": "0 – keine passende Anzeige"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l4-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:syn-l4",
+    "is_example": true,
+    "interaction": "binary_choice",
+    "stem": "Beispiel: Testperson Null",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "ja"
+  },
+  {
+    "id": "itm:b1:syn-l4-20",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:syn-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "20. Testperson Eins",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l4-21",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:syn-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "21. Testperson Zwei",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l4-22",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:syn-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "22. Testperson Drei",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l4-23",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:syn-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "23. Testperson Vier",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l4-24",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:syn-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "24. Testperson Fünf",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l4-25",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:syn-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "25. Testperson Sechs",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l4-26",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 4,
+    "task_id": "tsk:b1:syn-l4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "26. Testperson Sieben",
+    "options": [
+      {
+        "option_id": "ja",
+        "label": "Ja"
+      },
+      {
+        "option_id": "nein",
+        "label": "Nein"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l5-27",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 5,
+    "task_id": "tsk:b1:syn-l5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "27. Der Testraum ist …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "von 8 bis 18 Uhr offen."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "immer offen."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "nur samstags offen."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l5-28",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 5,
+    "task_id": "tsk:b1:syn-l5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "28. Essen ist …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "überall erlaubt."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "nur in der Küche erlaubt."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "verboten."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l5-29",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 5,
+    "task_id": "tsk:b1:syn-l5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "29. Schlüssel bekommt man …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "beim Hausmeister."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "online."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "im Sekretariat."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-l5-30",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "lesen",
+    "part": 5,
+    "task_id": "tsk:b1:syn-l5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "30. Fahrräder …",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "kommen in den Keller."
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "bleiben draußen."
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "sind verboten."
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-01",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-ex",
+    "is_example": true,
+    "interaction": "binary_choice",
+    "stem": "01 Beispiel: Sie hören einen Testton.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "richtig"
+  },
+  {
+    "id": "itm:b1:syn-h1-02",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-ex",
+    "is_example": true,
+    "interaction": "mcq_single",
+    "stem": "02 Beispiel: Was hören Sie?",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "ein Ton"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "zwei Töne"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "kein Ton"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "a"
+  },
+  {
+    "id": "itm:b1:syn-h1-01x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t1",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "1. Testaussage zu Signal 1.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-02x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t1",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "2. Testfrage zu Signal 1.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-03x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t2",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "3. Testaussage zu Signal 2.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-04x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "4. Testfrage zu Signal 2.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-05x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "5. Testaussage zu Signal 3.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-06x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t3",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "6. Testfrage zu Signal 3.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-07x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t4",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "7. Testaussage zu Signal 4.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-08x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t4",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "8. Testfrage zu Signal 4.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-09x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t5",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "9. Testaussage zu Signal 5.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h1-10x",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 1,
+    "task_id": "tsk:b1:syn-h1-t5",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "10. Testfrage zu Signal 5.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h2-11",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:syn-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "11. Testfrage 11.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h2-12",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:syn-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "12. Testfrage 12.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h2-13",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:syn-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "13. Testfrage 13.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h2-14",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:syn-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "14. Testfrage 14.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h2-15",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 2,
+    "task_id": "tsk:b1:syn-h2",
+    "is_example": false,
+    "interaction": "mcq_single",
+    "stem": "15. Testfrage 15.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "a",
+        "text": "Option a"
+      },
+      {
+        "option_id": "b",
+        "label": "b",
+        "text": "Option b"
+      },
+      {
+        "option_id": "c",
+        "label": "c",
+        "text": "Option c"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h3-16",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:syn-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "16. Testaussage 16.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h3-17",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:syn-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "17. Testaussage 17.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h3-18",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:syn-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "18. Testaussage 18.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h3-19",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:syn-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "19. Testaussage 19.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h3-20",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:syn-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "20. Testaussage 20.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h3-21",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:syn-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "21. Testaussage 21.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h3-22",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 3,
+    "task_id": "tsk:b1:syn-h3",
+    "is_example": false,
+    "interaction": "binary_choice",
+    "stem": "22. Testaussage 22.",
+    "options": [
+      {
+        "option_id": "richtig",
+        "label": "Richtig"
+      },
+      {
+        "option_id": "falsch",
+        "label": "Falsch"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h4-00",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:syn-h4",
+    "is_example": true,
+    "interaction": "speaker_assignment",
+    "stem": "Beispiel: Testaussage 0.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderation (Test)"
+      },
+      {
+        "option_id": "b",
+        "label": "Gast 1 (Test)"
+      },
+      {
+        "option_id": "c",
+        "label": "Gast 2 (Test)"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live",
+    "example_answer": "a"
+  },
+  {
+    "id": "itm:b1:syn-h4-23",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:syn-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "23. Testaussage 23.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderation (Test)"
+      },
+      {
+        "option_id": "b",
+        "label": "Gast 1 (Test)"
+      },
+      {
+        "option_id": "c",
+        "label": "Gast 2 (Test)"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h4-24",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:syn-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "24. Testaussage 24.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderation (Test)"
+      },
+      {
+        "option_id": "b",
+        "label": "Gast 1 (Test)"
+      },
+      {
+        "option_id": "c",
+        "label": "Gast 2 (Test)"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h4-25",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:syn-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "25. Testaussage 25.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderation (Test)"
+      },
+      {
+        "option_id": "b",
+        "label": "Gast 1 (Test)"
+      },
+      {
+        "option_id": "c",
+        "label": "Gast 2 (Test)"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h4-26",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:syn-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "26. Testaussage 26.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderation (Test)"
+      },
+      {
+        "option_id": "b",
+        "label": "Gast 1 (Test)"
+      },
+      {
+        "option_id": "c",
+        "label": "Gast 2 (Test)"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h4-27",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:syn-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "27. Testaussage 27.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderation (Test)"
+      },
+      {
+        "option_id": "b",
+        "label": "Gast 1 (Test)"
+      },
+      {
+        "option_id": "c",
+        "label": "Gast 2 (Test)"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h4-28",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:syn-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "28. Testaussage 28.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderation (Test)"
+      },
+      {
+        "option_id": "b",
+        "label": "Gast 1 (Test)"
+      },
+      {
+        "option_id": "c",
+        "label": "Gast 2 (Test)"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h4-29",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:syn-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "29. Testaussage 29.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderation (Test)"
+      },
+      {
+        "option_id": "b",
+        "label": "Gast 1 (Test)"
+      },
+      {
+        "option_id": "c",
+        "label": "Gast 2 (Test)"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-h4-30",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "hoeren",
+    "part": 4,
+    "task_id": "tsk:b1:syn-h4",
+    "is_example": false,
+    "interaction": "speaker_assignment",
+    "stem": "30. Testaussage 30.",
+    "options": [
+      {
+        "option_id": "a",
+        "label": "Moderation (Test)"
+      },
+      {
+        "option_id": "b",
+        "label": "Gast 1 (Test)"
+      },
+      {
+        "option_id": "c",
+        "label": "Gast 2 (Test)"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true,
+      "reasoning_steps": 1,
+      "inference_demand": 1,
+      "distractor_strength": 1
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-s1",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "schreiben",
+    "part": 1,
+    "task_id": "tsk:b1:syn-s1",
+    "is_example": false,
+    "interaction": "text_response",
+    "stem": "Schreiben Teil 1",
+    "response_spec": {
+      "type": "text",
+      "target_words": 80,
+      "min_words_target": 40,
+      "editor": "plain"
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-s2",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "schreiben",
+    "part": 2,
+    "task_id": "tsk:b1:syn-s2",
+    "is_example": false,
+    "interaction": "text_response",
+    "stem": "Schreiben Teil 2",
+    "response_spec": {
+      "type": "text",
+      "target_words": 80,
+      "min_words_target": 40,
+      "editor": "plain"
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-s3",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "schreiben",
+    "part": 3,
+    "task_id": "tsk:b1:syn-s3",
+    "is_example": false,
+    "interaction": "text_response",
+    "stem": "Schreiben Teil 3",
+    "response_spec": {
+      "type": "text",
+      "target_words": 40,
+      "min_words_target": 20,
+      "editor": "plain"
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-sp1",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "sprechen",
+    "part": 1,
+    "task_id": "tsk:b1:syn-sp1",
+    "is_example": false,
+    "interaction": "spoken_response",
+    "stem": "Sprechen Teil 1",
+    "response_spec": {
+      "type": "audio",
+      "max_seconds": 210,
+      "turns": [
+        {
+          "turn": "t1",
+          "prompt_asset": "ast:syn-sp1-partner-1",
+          "seconds": 30
+        },
+        {
+          "turn": "t2",
+          "prompt_asset": "ast:syn-sp1-partner-2",
+          "seconds": 30
+        },
+        {
+          "turn": "t3",
+          "prompt_asset": "ast:syn-sp1-partner-3",
+          "seconds": 30
+        }
+      ]
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-sp2-topic",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "sprechen",
+    "part": 2,
+    "task_id": "tsk:b1:syn-sp2",
+    "is_example": false,
+    "interaction": "topic_choice",
+    "stem": "Wählen Sie ein Thema (Thema 1 oder Thema 2).",
+    "options": [
+      {
+        "option_id": "t1",
+        "label": "Testthema 1"
+      },
+      {
+        "option_id": "t2",
+        "label": "Testthema 2"
+      }
+    ],
+    "response_spec": {
+      "type": "choice"
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-sp2",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "sprechen",
+    "part": 2,
+    "task_id": "tsk:b1:syn-sp2",
+    "is_example": false,
+    "interaction": "spoken_response",
+    "stem": "Sprechen Teil 2",
+    "response_spec": {
+      "type": "audio",
+      "max_seconds": 240,
+      "turns": [
+        {
+          "turn": "t1",
+          "seconds": 240
+        }
+      ]
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  },
+  {
+    "id": "itm:b1:syn-sp3",
+    "rev": 1,
+    "meta_version": 1,
+    "level": "B1",
+    "module": "sprechen",
+    "part": 3,
+    "task_id": "tsk:b1:syn-sp3",
+    "is_example": false,
+    "interaction": "spoken_response",
+    "stem": "Sprechen Teil 3",
+    "response_spec": {
+      "type": "audio",
+      "max_seconds": 150,
+      "turns": [
+        {
+          "turn": "t1",
+          "seconds": 60,
+          "prompt_asset": "ast:syn-sp3-partner-talk"
+        },
+        {
+          "turn": "t2",
+          "seconds": 45,
+          "prompt_asset": "ast:syn-sp3-examiner-q"
+        }
+      ]
+    },
+    "indicators": {
+      "synthetic": true
+    },
+    "topic": [
+      "synthetic"
+    ],
+    "provenance": {
+      "author_ids": [
+        "klarweg-engineering"
+      ],
+      "created_at": "2026-10-04",
+      "reference_material_used": "none",
+      "originality_check": {
+        "method": "synthetic_fixture",
+        "max_overlap": 0,
+        "corpus_versions": [],
+        "passed": true,
+        "checked_at": "2026-10-04"
+      },
+      "reviews": [],
+      "standard_refs": [
+        "synthetic engine test fixture — not exam content"
+      ]
+    },
+    "status": "live"
+  }
+]

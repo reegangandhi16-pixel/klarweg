@@ -1,0 +1,4 @@
+{
+  "note": "Forms that have been part of a LEARNER release, with the content fingerprint that was released. Released content is immutable (SCHEMA §2): never edit a listed form in place; create a new revision with tools/revise-form.mjs. exam-content/test/released-forms.test.mjs enforces this. Engineering adds an entry when a learner release is built from approved records (release-candidate.mjs prints the entry). Empty: no learner release has been built.",
+  "forms": []
+}

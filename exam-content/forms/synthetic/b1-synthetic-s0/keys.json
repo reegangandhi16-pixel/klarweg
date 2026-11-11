@@ -1,0 +1,301 @@
+{
+  "form_id": "frm:b1:synthetic-s0@1",
+  "note": "SERVER ONLY — synthetic keys; never served to browsers",
+  "keys": {
+    "itm:b1:syn-l1-00": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-l1-01": {
+      "kind": "single",
+      "correct": "falsch"
+    },
+    "itm:b1:syn-l1-02": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-l1-03": {
+      "kind": "single",
+      "correct": "falsch"
+    },
+    "itm:b1:syn-l1-04": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-l1-05": {
+      "kind": "single",
+      "correct": "falsch"
+    },
+    "itm:b1:syn-l1-06": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-l2-00": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-l2-07": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-l2-08": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-l2-09": {
+      "kind": "single",
+      "correct": "c"
+    },
+    "itm:b1:syn-l2-10": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-l2-11": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-l2-12": {
+      "kind": "single",
+      "correct": "c"
+    },
+    "itm:b1:syn-l3-00": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-l3-13": {
+      "kind": "single",
+      "correct": "c"
+    },
+    "itm:b1:syn-l3-14": {
+      "kind": "single",
+      "correct": "d"
+    },
+    "itm:b1:syn-l3-15": {
+      "kind": "single",
+      "correct": "0"
+    },
+    "itm:b1:syn-l3-16": {
+      "kind": "single",
+      "correct": "e"
+    },
+    "itm:b1:syn-l3-17": {
+      "kind": "single",
+      "correct": "f"
+    },
+    "itm:b1:syn-l3-18": {
+      "kind": "single",
+      "correct": "g"
+    },
+    "itm:b1:syn-l3-19": {
+      "kind": "single",
+      "correct": "h"
+    },
+    "itm:b1:syn-l4-00": {
+      "kind": "single",
+      "correct": "ja"
+    },
+    "itm:b1:syn-l4-20": {
+      "kind": "single",
+      "correct": "nein"
+    },
+    "itm:b1:syn-l4-21": {
+      "kind": "single",
+      "correct": "ja"
+    },
+    "itm:b1:syn-l4-22": {
+      "kind": "single",
+      "correct": "nein"
+    },
+    "itm:b1:syn-l4-23": {
+      "kind": "single",
+      "correct": "ja"
+    },
+    "itm:b1:syn-l4-24": {
+      "kind": "single",
+      "correct": "nein"
+    },
+    "itm:b1:syn-l4-25": {
+      "kind": "single",
+      "correct": "ja"
+    },
+    "itm:b1:syn-l4-26": {
+      "kind": "single",
+      "correct": "nein"
+    },
+    "itm:b1:syn-l5-27": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-l5-28": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-l5-29": {
+      "kind": "single",
+      "correct": "c"
+    },
+    "itm:b1:syn-l5-30": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-h1-01": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-h1-02": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-h1-01x": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-h1-02x": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-h1-03x": {
+      "kind": "single",
+      "correct": "falsch"
+    },
+    "itm:b1:syn-h1-04x": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-h1-05x": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-h1-06x": {
+      "kind": "single",
+      "correct": "c"
+    },
+    "itm:b1:syn-h1-07x": {
+      "kind": "single",
+      "correct": "falsch"
+    },
+    "itm:b1:syn-h1-08x": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-h1-09x": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-h1-10x": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-h2-11": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-h2-12": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-h2-13": {
+      "kind": "single",
+      "correct": "c"
+    },
+    "itm:b1:syn-h2-14": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-h2-15": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-h3-16": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-h3-17": {
+      "kind": "single",
+      "correct": "falsch"
+    },
+    "itm:b1:syn-h3-18": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-h3-19": {
+      "kind": "single",
+      "correct": "falsch"
+    },
+    "itm:b1:syn-h3-20": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-h3-21": {
+      "kind": "single",
+      "correct": "falsch"
+    },
+    "itm:b1:syn-h3-22": {
+      "kind": "single",
+      "correct": "richtig"
+    },
+    "itm:b1:syn-h4-00": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-h4-23": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-h4-24": {
+      "kind": "single",
+      "correct": "c"
+    },
+    "itm:b1:syn-h4-25": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-h4-26": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-h4-27": {
+      "kind": "single",
+      "correct": "c"
+    },
+    "itm:b1:syn-h4-28": {
+      "kind": "single",
+      "correct": "a"
+    },
+    "itm:b1:syn-h4-29": {
+      "kind": "single",
+      "correct": "b"
+    },
+    "itm:b1:syn-h4-30": {
+      "kind": "single",
+      "correct": "c"
+    },
+    "itm:b1:syn-s1": {
+      "kind": "rubric",
+      "rubric_id": "rub:b1:schreiben:p1@1"
+    },
+    "itm:b1:syn-s2": {
+      "kind": "rubric",
+      "rubric_id": "rub:b1:schreiben:p2@1"
+    },
+    "itm:b1:syn-s3": {
+      "kind": "rubric",
+      "rubric_id": "rub:b1:schreiben:p3@1"
+    },
+    "itm:b1:syn-sp1": {
+      "kind": "rubric",
+      "rubric_id": "rub:b1:sprechen:p1@1"
+    },
+    "itm:b1:syn-sp2-topic": {
+      "kind": "none"
+    },
+    "itm:b1:syn-sp2": {
+      "kind": "rubric",
+      "rubric_id": "rub:b1:sprechen:p2@1"
+    },
+    "itm:b1:syn-sp3": {
+      "kind": "rubric",
+      "rubric_id": "rub:b1:sprechen:p3@1"
+    }
+  }
+}

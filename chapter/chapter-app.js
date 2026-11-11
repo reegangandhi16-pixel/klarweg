@@ -1865,10 +1865,13 @@
     // "/in" suffix) never fits beside the F/M/listen buttons: the buttons go
     // below and only such headwords may hyphenate.
     const longHeadword = term.split(/\s+|\/(?!(?:in|innen)(?![a-zäöüß]))/).some((t) => t.length >= 16);
+    const fig = vocabFigure(w, card);
+    if (fig) card.classList.add('vword--img');
     card.append(
       el('div', { class: 'vword-top' + (longHeadword ? ' vword-top--long' : '') },
         el('div', { class: 'vword-de' }, (w.art ? (() => { const s = el('span', { class: 'art r-article' }); const GEN = { m: 'masc.', f: 'fem.', n: 'neut.' }; s.appendChild(germanWordSpans(w.art.trim(), Object.assign({ scaffold: true }, GEN[w.gender] ? { type: 'Article · ' + GEN[w.gender] + ' nom.' } : null))); s.appendChild(document.createTextNode(' ')); return s; })() : ''), el('span', { class: 'vword-lex' }, germanWordSpans(term.slice(w.art ? w.art.trim().length + 1 : 0), headwordCtx(term.slice(w.art ? w.art.trim().length + 1 : 0), w.art ? { type: 'Noun · singular' } : null)))),
         el('div', { class: 'vword-voicewrap' }, fBtn, mBtn, listenBtn)),
+      ...(fig ? [fig] : []),
       el('div', { class: 'vword-pos' }, w.pos + (w.gender ? ' · ' + gMap[w.gender] : '')),
       el('div', { class: 'vword-en' }, w.en),
       el('div', { class: 'vword-hi' }, w.hi),
@@ -1909,6 +1912,43 @@
     slashBreaks(card.querySelector('.vword-lex'));
     if (longHeadword) wordBoxes(card.querySelector('.vword-lex'));
     return card;
+  }
+  // Optional vocabulary image (Visual Vocabulary pilot, A1·01 first).
+  // Schema — every field but `src` optional; entries without `img` render
+  // exactly as before:
+  //   img: { src: '../public/vocab-img/a1-1/apfel',   // no extension
+  //          formats: ['avif', 'webp'],                // first = preferred; last = <img> fallback
+  //          widths: [400, 800], w: 4, h: 3,           // intrinsic ratio → no layout shift
+  //          alt: 'A red apple' }                      // falls back to the English meaning
+  // A missing/broken file removes the figure and the card falls back to the
+  // text-only layout, so a bad path never shows a broken-image icon.
+  function vocabFigure(w, card) {
+    const im = w && w.img;
+    if (!im || typeof im.src !== 'string' || !im.src) return null;
+    const formats = Array.isArray(im.formats) && im.formats.length ? im.formats : ['webp'];
+    const widths = Array.isArray(im.widths) && im.widths.length ? im.widths : [800];
+    const srcset = (f) => widths.map((px) => im.src + '-' + px + '.' + f + ' ' + px + 'w').join(', ');
+    const sizes = '(max-width: 720px) min(320px, calc(100vw - 96px)), 320px';
+    const ratioW = +im.w || 4, ratioH = +im.h || 3;
+    const fallback = formats[formats.length - 1];
+    const img = el('img', {
+      src: im.src + '-' + widths[widths.length - 1] + '.' + fallback,
+      srcset: srcset(fallback), sizes,
+      width: ratioW * 100, height: ratioH * 100,
+      alt: im.alt || w.en || '', loading: 'lazy', decoding: 'async', draggable: 'false'
+    });
+    img.addEventListener('error', () => {
+      const f = img.closest('.vword-fig'); if (f) f.remove();
+      if (card) card.classList.remove('vword--img');
+    }, { once: true });
+    const pic = el('picture', {},
+      formats.slice(0, -1).map((f) => el('source', { type: 'image/' + f, srcset: srcset(f), sizes })),
+      img);
+    // Pages that declare images load chapter.css/chapter-app.js under their own
+    // ?v= (A1·01: v=23/v=37), so sizing lives in chapter.css; only the
+    // per-image ratio is inline.
+    const fig = el('figure', { class: 'vword-fig', style: 'aspect-ratio:' + ratioW + ' / ' + ratioH }, pic);
+    return fig;
   }
   function learnBtn(w) {
     const on = !!state.learned[w.de];

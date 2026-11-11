@@ -178,6 +178,58 @@ public/audio/kw-story-exceptions.js
 # Word popup stylesheet shared by every chapter page and the homepage
 # (chapter-app.js renderWordPop; homepage uses it in popup-only host mode).
 public/kw-word-pop.css
+# Visual Vocabulary pilot (A1·01 only): one illustration per free Chapter 1
+# vocab card, AVIF + WebP at 400w/800w. Original AI-generated (Gemini 2.5
+# Flash Image, 2026-11-11), no third-party stock. scripts/vocab-images.test.mjs
+# asserts every file a data entry declares is listed here.
+public/vocab-img/a1-1/apfel-400.avif
+public/vocab-img/a1-1/apfel-400.webp
+public/vocab-img/a1-1/apfel-800.avif
+public/vocab-img/a1-1/apfel-800.webp
+public/vocab-img/a1-1/buch-400.avif
+public/vocab-img/a1-1/buch-400.webp
+public/vocab-img/a1-1/buch-800.avif
+public/vocab-img/a1-1/buch-800.webp
+public/vocab-img/a1-1/eis-400.avif
+public/vocab-img/a1-1/eis-400.webp
+public/vocab-img/a1-1/eis-800.avif
+public/vocab-img/a1-1/eis-800.webp
+public/vocab-img/a1-1/hund-400.avif
+public/vocab-img/a1-1/hund-400.webp
+public/vocab-img/a1-1/hund-800.avif
+public/vocab-img/a1-1/hund-800.webp
+public/vocab-img/a1-1/jahr-400.avif
+public/vocab-img/a1-1/jahr-400.webp
+public/vocab-img/a1-1/jahr-800.avif
+public/vocab-img/a1-1/jahr-800.webp
+public/vocab-img/a1-1/kaese-400.avif
+public/vocab-img/a1-1/kaese-400.webp
+public/vocab-img/a1-1/kaese-800.avif
+public/vocab-img/a1-1/kaese-800.webp
+public/vocab-img/a1-1/maedchen-400.avif
+public/vocab-img/a1-1/maedchen-400.webp
+public/vocab-img/a1-1/maedchen-800.avif
+public/vocab-img/a1-1/maedchen-800.webp
+public/vocab-img/a1-1/schule-400.avif
+public/vocab-img/a1-1/schule-400.webp
+public/vocab-img/a1-1/schule-800.avif
+public/vocab-img/a1-1/schule-800.webp
+public/vocab-img/a1-1/strasse-400.avif
+public/vocab-img/a1-1/strasse-400.webp
+public/vocab-img/a1-1/strasse-800.avif
+public/vocab-img/a1-1/strasse-800.webp
+public/vocab-img/a1-1/vater-400.avif
+public/vocab-img/a1-1/vater-400.webp
+public/vocab-img/a1-1/vater-800.avif
+public/vocab-img/a1-1/vater-800.webp
+public/vocab-img/a1-1/wasser-400.avif
+public/vocab-img/a1-1/wasser-400.webp
+public/vocab-img/a1-1/wasser-800.avif
+public/vocab-img/a1-1/wasser-800.webp
+public/vocab-img/a1-1/zeit-400.avif
+public/vocab-img/a1-1/zeit-400.webp
+public/vocab-img/a1-1/zeit-800.avif
+public/vocab-img/a1-1/zeit-800.webp
 # BEGIN generated: public audio-timing (scripts/chapter-lock.mjs audio) - do not edit
 audio-timing/00d474b350531f00.json
 audio-timing/06b36c5d56b99258.json

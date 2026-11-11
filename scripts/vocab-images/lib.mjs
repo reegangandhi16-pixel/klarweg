@@ -100,7 +100,8 @@ export function imageSrcFor(conceptId, free) {
 
 /* The A1·01 pilot style, verbatim (docs/visual-vocab/README.md). */
 export const STYLE = "Premium stylised 3D educational illustration in a refined matte clay-render style (soft rounded forms, subtle texture, not photographic) with gentle studio lighting and a soft contact shadow, single clear subject centered and filling about 70 percent of the frame, plain very light warm cream seamless background (#F7F3EA), muted natural palette with deep teal and soft green accents, high detail, calm and minimal, no text, no letters, no numbers, no logos, no watermark, no orange tones.";
-const PEOPLE = "Any people are stylised clay figures with soft, friendly features (never photographic).";
+const PEOPLE = "Any people are stylised clay-render humans with natural human proportions, calm friendly faces, varied skin tones and everyday modern clothing (never photographic, never creatures, blobs or mascots). Objects, food and plants have no faces and no tiny characters on them. Show only what is described: no extra figures.";
+const COMPOSE = "The cream background is seamless from edge to edge: no frame, no border, no rounded card, no inset picture, no vignette.";
 const NUM = { null: 0, eins: 1, ein: 1, zwei: 2, drei: 3, vier: 4, "fünf": 5, sechs: 6, sieben: 7, acht: 8, neun: 9, zehn: 10, elf: 11, "zwölf": 12 };
 
 export function promptFor(c, subject) {
@@ -114,6 +115,7 @@ export function promptFor(c, subject) {
   else if (c.kind === "expression") guide = `Show a simple scene that conveys the intended meaning "${c.en}" — never a literal picture of the individual words.`;
   else if (c.tier === "concept") guide = `Show a simple, calm everyday scene that makes the meaning "${c.en}" obvious at a glance.`;
   else guide = `Show the object itself: ${c.en}.`;
-  return `Create one image that teaches the German word „${term}“ (${c.pos}; meaning: ${c.en}).${ctx} ${guide} ${PEOPLE} ${STYLE}`;
+  void term;   // the German word is deliberately NOT in the prompt: quoted words invite rendered text
+  return `Create one illustration for a vocabulary card (${c.pos}; meaning: ${c.en}).${ctx} ${guide} ${PEOPLE} ${COMPOSE} ${STYLE}`;
 }
 

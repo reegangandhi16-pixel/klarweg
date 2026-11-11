@@ -5,9 +5,11 @@
 //  - PUBLIC images (../public/vocab-img/…) are published on Pages. Every public
 //    file must be used by at least one FREE chapter (Chapter 1 of a level), so a
 //    paid-only illustration is never published.
-//  - GATED images (/api/media/vocab-img/<key>) are paid-only. They are allowed
-//    only on paid chapters and must be listed in docs/visual-vocab/gated-images.json
-//    (the list the access Worker serves; see docs/visual-vocab/GATED-IMAGES.md).
+//  - GATED images (/api/media/vocab-img/<20-hex id>) are paid-only. They are
+//    allowed only on paid chapters, and docs/visual-vocab/gated-images.json
+//    (= R2 vocab-img/levels.json, the map the access Worker authorizes with)
+//    must list each id with EXACTLY the levels of the paid chapters using it:
+//    a missing level would lock out a buyer, an extra one would leak.
 //  - One concept (headword + meaning) → one image everywhere.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -20,15 +22,17 @@ import { vocabEntrySpans, applyImages, evalChapter } from './vocab-images/apply-
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const allow = new Set(fs.readFileSync(path.join(ROOT, '.github/pages-allowlist.txt'), 'utf8').split('\n').map((l) => l.trim()));
-const gated = new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/visual-vocab/gated-images.json'), 'utf8')));
+const gatedMap = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/visual-vocab/gated-images.json'), 'utf8'));
 const MAX_BYTES = 60 * 1024;
 const PUBLIC = /^\.\.\/public\/vocab-img\/([a-z0-9-]+(?:\/[a-z0-9-]+)?)$/;
-const GATED = /^\/api\/media\/vocab-img\/([a-z0-9-]+)$/;
+const GATED = /^\/api\/media\/vocab-img\/([0-9a-f]{20})$/;
 const CHAPTERS = loadChapters();
 
 test('every vocab image follows the access rules, exists, is small, and has alt text', () => {
   const publicUsedByFree = new Set();
   const srcByConcept = new Map();
+  const gatedLevels = new Map();
+  assert.ok(gatedMap && typeof gatedMap === 'object' && !Array.isArray(gatedMap), 'gated-images.json is an { id: [levels] } map');
   for (const ch of CHAPTERS) {
     for (const v of ch.C.vocab || []) {
       if (!v.img) continue;
@@ -41,7 +45,8 @@ test('every vocab image follows the access rules, exists, is small, and has alt 
       assert.ok(pub || gat, `${where}: src must be a public vocab-img path or the gated media route (${im.src})`);
       if (gat) {
         assert.ok(!ch.free, `${where}: a free chapter cannot use a gated image`);
-        assert.ok(gated.has(gat[1]), `${where}: ${gat[1]} is not in docs/visual-vocab/gated-images.json`);
+        assert.ok(Array.isArray(gatedMap[gat[1]]), `${where}: ${gat[1]} is not in docs/visual-vocab/gated-images.json`);
+        (gatedLevels.get(gat[1]) || gatedLevels.set(gat[1], new Set()).get(gat[1])).add(ch.level.toUpperCase());
         continue;
       }
       if (ch.free) publicUsedByFree.add(im.src);
@@ -55,6 +60,9 @@ test('every vocab image follows the access rules, exists, is small, and has alt 
       }
     }
   }
+  // the levels map is exactly what the paid chapters use (no stale ids, no extra levels)
+  assert.deepEqual(Object.keys(gatedMap).sort(), [...gatedLevels.keys()].sort(), 'gated-images.json ids = gated srcs in chapters');
+  for (const [id, lv] of gatedLevels) assert.deepEqual(gatedMap[id], [...lv].sort(), `${id}: levels`);
   // no paid-only image is published: every public file belongs to a free-chapter image
   const files = [];
   const walk = (d) => { if (!fs.existsSync(d)) return; for (const e of fs.readdirSync(d, { withFileTypes: true })) e.isDirectory() ? walk(path.join(d, e.name)) : files.push(path.join(d, e.name)); };
@@ -119,8 +127,8 @@ test('prompts keep the pilot style, forbid text/orange, and say "intended meanin
 
 test('paid generation refuses to run without owner approval and a budget', () => {
   const run = (...a) => { try { execFileSync(process.execPath, [path.join(ROOT, 'scripts/vocab-images/pipeline.mjs'), ...a], { stdio: 'pipe', env: { ...process.env, VOCAB_IMG_STORE: '/nonexistent-store' } }); return ''; } catch (e) { return String(e.stderr); } };
-  assert.match(run('generate', '--batch', 'x'), /--max-usd required/);
-  assert.match(run('generate', '--batch', 'x', '--max-usd', '5'), /without --approved-by-owner/);
+  assert.match(run('submit'), /--max-usd required/);
+  assert.match(run('submit', '--max-usd', '5'), /without --approved-by-owner/);
 });
 
 test('the committed inventory matches the chapter data', () => {

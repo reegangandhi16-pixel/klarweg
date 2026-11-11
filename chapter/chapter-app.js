@@ -1735,6 +1735,13 @@
   // the filters work on the full list; the cap applies to whatever matches.
   const VOCAB_FIRST = 24;
   let vocabExpanded = false;
+  // Visual Vocabulary: illustrations on the word cards can be switched off
+  // (device preference, this browser only). Off = no <figure> is built at
+  // all, so nothing is downloaded. Default on. The control only appears in
+  // chapters that have illustrations.
+  const VOCAB_IMG_PREF = 'kw_vocab_images';
+  let vocabImages = true;
+  try { vocabImages = localStorage.getItem(VOCAB_IMG_PREF) !== 'off'; } catch (e) {}
   // Checkpoint chapters author their vocabulary section as a review quiz
   // (`vocabularyReview`: {q, options, answer, ref}) instead of word cards, so
   // the word-card path below would render an empty grid with a misleading
@@ -1754,6 +1761,21 @@
       filters.appendChild(chip);
     });
     toolbar.append(search, filters);
+    if (C.vocab.some(w => w.img && w.img.src)) {
+      const imgToggle = el('button', { class: 'filter-chip vocab-img-toggle', type: 'button', 'aria-pressed': String(vocabImages), 'aria-controls': 'vocab-grid' },
+        'Images', el('span', { class: 'vocab-img-state', 'aria-hidden': 'true' }, vocabImages ? 'On' : 'Off'));
+      imgToggle.addEventListener('click', () => {
+        vocabImages = !vocabImages;
+        try { localStorage.setItem(VOCAB_IMG_PREF, vocabImages ? 'on' : 'off'); } catch (e) {}
+        imgToggle.setAttribute('aria-pressed', String(vocabImages));
+        imgToggle.querySelector('.vocab-img-state').textContent = vocabImages ? 'On' : 'Off';
+        // keep the control where it is on screen while the cards above/below change height
+        const y0 = imgToggle.getBoundingClientRect().top;
+        drawVocab();
+        window.scrollBy(0, imgToggle.getBoundingClientRect().top - y0);
+      });
+      toolbar.appendChild(imgToggle);
+    }
     const grid = el('div', { class: 'vocab-grid', id: 'vocab-grid' });
     const more = el('div', { class: 'vocab-more', id: 'vocab-more', hidden: true });
     wrap.append(toolbar, grid, more);
@@ -1865,7 +1887,7 @@
     // "/in" suffix) never fits beside the F/M/listen buttons: the buttons go
     // below and only such headwords may hyphenate.
     const longHeadword = term.split(/\s+|\/(?!(?:in|innen)(?![a-zäöüß]))/).some((t) => t.length >= 16);
-    const fig = vocabFigure(w, card);
+    const fig = vocabImages ? vocabFigure(w, card) : null;
     if (fig) card.classList.add('vword--img');
     card.append(
       el('div', { class: 'vword-top' + (longHeadword ? ' vword-top--long' : '') },

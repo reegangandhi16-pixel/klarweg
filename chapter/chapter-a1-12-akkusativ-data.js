@@ -205,7 +205,9 @@ const CHAPTER = {
     { de: 'alles', pos: 'pronoun', en: 'everything', hi: 'सब कुछ',
       ex: 'Ich habe alles.', exEn: 'I have everything.' },
     { de: 'Geschäft', art: 'das', gender: 'n', plural: 'Geschäfte', pos: 'noun', en: 'shop', hi: 'दुकान',
-      ex: 'Das Geschäft ist offen.', exEn: 'The shop is open.' },
+      ex: 'Das Geschäft ist offen.', exEn: 'The shop is open.',
+      img: { src: '/api/media/vocab-img/9093c5c67e95a2e35df4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A small street shop with an overhead awning.' }
+    },
     { de: 'Lösung', art: 'die', gender: 'f', plural: 'Lösungen', pos: 'noun', en: 'solution', hi: 'हल',
       ex: 'Ich suche die Lösung.', exEn: 'I am looking for the solution.' },
     { de: 'Sache', art: 'die', gender: 'f', plural: 'Sachen', pos: 'noun', en: 'thing', hi: 'चीज़',

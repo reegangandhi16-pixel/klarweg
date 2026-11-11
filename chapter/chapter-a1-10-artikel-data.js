@@ -230,15 +230,23 @@ const CHAPTER = {
   vocab: [
     // — Core active —
     { de: 'Auto', art: 'das', gender: 'n', plural: 'Autos', pos: 'noun', en: 'car', hi: 'कार',
-      ex: 'Das Auto ist neu.', exEn: 'The car is new.' },
+      ex: 'Das Auto ist neu.', exEn: 'The car is new.',
+      img: { src: '/api/media/vocab-img/98f94b1965ee0838a8cd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Blue passenger car on a paved road' }
+    },
     { de: 'Buch', art: 'das', gender: 'n', plural: 'Bücher', pos: 'noun', en: 'book', hi: 'किताब',
       ex: 'Das Buch liegt auf dem Tisch.', exEn: 'The book is on the table.' },
     { de: 'Computer', art: 'der', gender: 'm', plural: 'Computer', pos: 'noun', en: 'computer', hi: 'कंप्यूटर',
-      ex: 'Der Computer ist schnell.', exEn: 'The computer is fast.' },
+      ex: 'Der Computer ist schnell.', exEn: 'The computer is fast.',
+      img: { src: '/api/media/vocab-img/4f1f7cde74c18f798ce0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A desktop computer on a wooden desk.' }
+    },
     { de: 'Stift', art: 'der', gender: 'm', plural: 'Stifte', pos: 'noun', en: 'pen, pencil', hi: 'कलम',
-      ex: 'Der Stift schreibt gut.', exEn: 'The pen writes well.' },
+      ex: 'Der Stift schreibt gut.', exEn: 'The pen writes well.',
+      img: { src: '/api/media/vocab-img/3529e7a90509806cfef0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Pen and pencil side by side' }
+    },
     { de: 'Tisch', art: 'der', gender: 'm', plural: 'Tische', pos: 'noun', en: 'table', hi: 'मेज़',
-      ex: 'Der Tisch ist groß.', exEn: 'The table is big.' },
+      ex: 'Der Tisch ist groß.', exEn: 'The table is big.',
+      img: { src: '/api/media/vocab-img/a39bbadd0ff5ba3803e8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A simple wooden dining table' }
+    },
     { de: 'Straße', art: 'die', gender: 'f', plural: 'Straßen', pos: 'noun', en: 'street', hi: 'सड़क',
       ex: 'Die Straße ist lang.', exEn: 'The street is long.' },
     { de: 'der/die/das', pos: 'article (definite)', en: 'the', hi: 'निश्चित आर्टिकल',
@@ -270,21 +278,33 @@ const CHAPTER = {
     { de: 'Artikelbild', art: 'das', gender: 'n', plural: 'Artikelbilder', pos: 'noun', en: 'article picture', hi: 'लेख-चित्र',
       ex: 'Das Artikelbild zeigt ein Auto.', exEn: 'The article picture shows a car.' },
     { de: 'Butterbrot', art: 'das', gender: 'n', plural: 'Butterbrote', pos: 'noun', en: 'sandwich', hi: 'सैंडविच',
-      ex: 'Das Butterbrot schmeckt gut.', exEn: 'The sandwich tastes good.' },
+      ex: 'Das Butterbrot schmeckt gut.', exEn: 'The sandwich tastes good.',
+      img: { src: '/api/media/vocab-img/2392a14aafa1a5f3934d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A slice of buttered bread on a cutting board' }
+    },
     { de: 'Experiment', art: 'das', gender: 'n', plural: 'Experimente', pos: 'noun', en: 'experiment', hi: 'प्रयोग',
       ex: 'Das Experiment ist interessant.', exEn: 'The experiment is interesting.' },
     { de: 'Gästebuch', art: 'das', gender: 'n', plural: 'Gästebücher', pos: 'noun', en: 'guestbook', hi: 'अतिथि-पुस्तिका',
-      ex: 'Schreib bitte ins Gästebuch.', exEn: 'Please write in the guestbook.' },
+      ex: 'Schreib bitte ins Gästebuch.', exEn: 'Please write in the guestbook.',
+      img: { src: '/api/media/vocab-img/b4765f1aba09c226d570', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open guestbook with a pen' }
+    },
     { de: 'Handtuch', art: 'das', gender: 'n', plural: 'Handtücher', pos: 'noun', en: 'towel', hi: 'तौलिया',
-      ex: 'Das Handtuch ist nass.', exEn: 'The towel is wet.' },
+      ex: 'Das Handtuch ist nass.', exEn: 'The towel is wet.',
+      img: { src: '/api/media/vocab-img/6d6b039d6b8a3d79bf8f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A folded teal towel hanging on a rail' }
+    },
     { de: 'Heft', art: 'das', gender: 'n', plural: 'Hefte', pos: 'noun', en: 'exercise book', hi: 'कॉपी',
-      ex: 'Das Heft hat zwanzig Seiten.', exEn: 'The exercise book has twenty pages.' },
+      ex: 'Das Heft hat zwanzig Seiten.', exEn: 'The exercise book has twenty pages.',
+      img: { src: '/api/media/vocab-img/1d25500b2851f81ba057', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open lined exercise book with a pencil' }
+    },
     { de: 'Kursplakat', art: 'das', gender: 'n', plural: 'Kursplakate', pos: 'noun', en: 'course poster', hi: 'कोर्स पोस्टर',
       ex: 'Das Kursplakat hängt an der Wand.', exEn: 'The course poster hangs on the wall.' },
     { de: 'Paar', art: 'das', gender: 'n', plural: 'Paare', pos: 'noun', en: 'pair', hi: 'जोड़ा',
-      ex: 'Arbeitet in Paaren!', exEn: 'Work in pairs!' },
+      ex: 'Arbeitet in Paaren!', exEn: 'Work in pairs!',
+      img: { src: '/api/media/vocab-img/bc0ad48e21b98d22b530', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A pair of people standing together smiling.' }
+    },
     { de: 'Plakat', art: 'das', gender: 'n', plural: 'Plakate', pos: 'noun', en: 'poster', hi: 'पोस्टर',
-      ex: 'Das Plakat ist bunt.', exEn: 'The poster is colourful.' },
+      ex: 'Das Plakat ist bunt.', exEn: 'The poster is colourful.',
+      img: { src: '/api/media/vocab-img/1992e3ace018826da587', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A colorful poster hanging on a wall' }
+    },
     { de: 'Würstchen', art: 'das', gender: 'n', plural: 'Würstchen', pos: 'noun', en: 'small sausage', hi: 'सॉसेज',
       ex: 'Das Würstchen ist heiß.', exEn: 'The sausage is hot.' },
     { de: 'Würstel', art: 'das', gender: 'n', plural: 'Würstel', pos: 'noun', en: 'sausage (Austrian)', hi: 'सॉसेज (ऑस्ट्रियन)',
@@ -296,13 +316,19 @@ const CHAPTER = {
     { de: 'Eintrag', art: 'der', gender: 'm', plural: 'Einträge', pos: 'noun', en: 'entry', hi: 'प्रविष्टि',
       ex: 'Der Eintrag ist kurz.', exEn: 'The entry is short.' },
     { de: 'Kindergarten', art: 'der', gender: 'm', plural: 'Kindergärten', pos: 'noun', en: 'kindergarten', hi: 'किंडरगार्टन',
-      ex: 'Der Kindergarten ist groß.', exEn: 'The kindergarten is big.' },
+      ex: 'Der Kindergarten ist groß.', exEn: 'The kindergarten is big.',
+      img: { src: '/api/media/vocab-img/dbb3e502cc159c63afa6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A kindergarten playroom with small furniture' }
+    },
     { de: 'Koffer', art: 'der', gender: 'm', plural: 'Koffer', pos: 'noun', en: 'suitcase', hi: 'सूटकेस',
-      ex: 'Der Koffer ist schwer.', exEn: 'The suitcase is heavy.' },
+      ex: 'Der Koffer ist schwer.', exEn: 'The suitcase is heavy.',
+      img: { src: '/api/media/vocab-img/0199755e54ced0ce0811', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A teal wheeled suitcase with an extended handle.' }
+    },
     { de: 'Stapel', art: 'der', gender: 'm', plural: 'Stapel', pos: 'noun', en: 'pile, deck', hi: 'ढेर',
       ex: 'Der Stapel Karten ist hoch.', exEn: 'The pile of cards is high.' },
     { de: 'Kranke', art: 'der/die', gender: 'm', plural: 'Kranken', pos: 'noun', en: 'sick person', hi: 'बीमार व्यक्ति',
-      ex: 'Der Kranke braucht Ruhe.', exEn: 'The sick person needs rest.' },
+      ex: 'Der Kranke braucht Ruhe.', exEn: 'The sick person needs rest.',
+      img: { src: '/api/media/vocab-img/13d5ef53eb61107b0b2d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sick person resting in bed' }
+    },
     { de: 'Anzeige', art: 'die', gender: 'f', plural: 'Anzeigen', pos: 'noun', en: 'advert', hi: 'विज्ञापन',
       ex: 'Die Anzeige ist im Blog.', exEn: 'The advert is in the blog.' },
     { de: 'Assoziation', art: 'die', gender: 'f', plural: 'Assoziationen', pos: 'noun', en: 'association', hi: 'संबंध',

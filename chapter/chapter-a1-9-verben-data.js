@@ -179,13 +179,17 @@ const CHAPTER = {
     // — Core active verbs —
     { de: 'arbeiten', pos: 'verb', en: 'to work', hi: 'काम करना',
       ex: 'Ich arbeite am Wochenende.', exEn: 'I work on the weekend.',
-      conj: { praesens: 'arbeitet', praeteritum: 'arbeitete', perfekt: 'hat gearbeitet' } },
+      conj: { praesens: 'arbeitet', praeteritum: 'arbeitete', perfekt: 'hat gearbeitet' },
+      img: { src: '/api/media/vocab-img/6e24beefc3ae51b44e7d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person working at a desk' }
+    },
     { de: 'brauchen', pos: 'verb', en: 'to need', hi: 'ज़रूरत होना',
       ex: 'Ich brauche das Deutschbuch.', exEn: 'I need the German book.',
       conj: { praesens: 'braucht', praeteritum: 'brauchte', perfekt: 'hat gebraucht' } },
     { de: 'kochen', pos: 'verb', en: 'to cook', hi: 'पकाना',
       ex: 'Am Wochenende koche ich.', exEn: 'On the weekend I cook.',
-      conj: { praesens: 'kocht', praeteritum: 'kochte', perfekt: 'hat gekocht' } },
+      conj: { praesens: 'kocht', praeteritum: 'kochte', perfekt: 'hat gekocht' },
+      img: { src: '/api/media/vocab-img/3ad454861563a2440730', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person stirring food in a pot on a stove' }
+    },
     { de: 'lernen', pos: 'verb', en: 'to learn', hi: 'सीखना',
       ex: 'Ich lerne Deutsch.', exEn: 'I learn German.',
       conj: { praesens: 'lernt', praeteritum: 'lernte', perfekt: 'hat gelernt' } },
@@ -194,7 +198,9 @@ const CHAPTER = {
       conj: { praesens: 'macht', praeteritum: 'machte', perfekt: 'hat gemacht' } },
     { de: 'spielen', pos: 'verb', en: 'to play', hi: 'खेलना',
       ex: 'Wir spielen am Wochenende.', exEn: 'We play on the weekend.',
-      conj: { praesens: 'spielt', praeteritum: 'spielte', perfekt: 'hat gespielt' } },
+      conj: { praesens: 'spielt', praeteritum: 'spielte', perfekt: 'hat gespielt' },
+      img: { src: '/api/media/vocab-img/e2f353f4479fbe9f6804', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two children playing with building blocks' }
+    },
     { de: 'und', pos: 'conjunction', en: 'and', hi: 'और',
       ex: 'Ich lerne und ich arbeite.', exEn: 'I learn and I work.' },
     // — Active support —
@@ -204,7 +210,9 @@ const CHAPTER = {
       ex: 'Morgen lerne ich Deutsch.', exEn: 'Tomorrow I learn German.' },
     { de: 'sammeln', pos: 'verb', en: 'to collect', hi: 'इकट्ठा करना',
       ex: 'Ich sammle Lernkarten.', exEn: 'I collect flashcards.',
-      conj: { praesens: 'sammelt', praeteritum: 'sammelte', perfekt: 'hat gesammelt' } },
+      conj: { praesens: 'sammelt', praeteritum: 'sammelte', perfekt: 'hat gesammelt' },
+      img: { src: '/api/media/vocab-img/b001b9e6b4523a2e19e4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person placing stamps into a collector album' }
+    },
     { de: 'wirklich', pos: 'adverb', en: 'really', hi: 'सचमुच',
       ex: 'Deutsch ist wirklich schön.', exEn: 'German is really beautiful.' },
     // — Passive —
@@ -213,7 +221,9 @@ const CHAPTER = {
     { de: 'Kapitel', art: 'das', gender: 'n', plural: 'Kapitel', pos: 'noun', en: 'chapter', hi: 'अध्याय',
       ex: 'Wir lernen Kapitel neun.', exEn: 'We are learning chapter nine.' },
     { de: 'Übungsbuch', art: 'das', gender: 'n', plural: 'Übungsbücher', pos: 'noun', en: 'exercise book', hi: 'अभ्यास पुस्तिका',
-      ex: 'Das Übungsbuch hat viele Seiten.', exEn: 'The exercise book has many pages.' },
+      ex: 'Das Übungsbuch hat viele Seiten.', exEn: 'The exercise book has many pages.',
+      img: { src: '/api/media/vocab-img/0f3850815ba69661afec', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open exercise workbook with a pencil.' }
+    },
     { de: 'Form', art: 'die', gender: 'f', plural: 'Formen', pos: 'noun', en: 'form, shape', hi: 'रूप',
       ex: 'Welche Form hat das Verb?', exEn: 'Which form does the verb have?' },
     { de: 'Lernkarte', art: 'die', gender: 'f', plural: 'Lernkarten', pos: 'noun', en: 'flashcard', hi: 'फ्लैशकार्ड',

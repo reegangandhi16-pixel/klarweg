@@ -14,21 +14,21 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | Text-only (function words / grammar constructions) | 568 |
 | Illustrable concepts | 7893 |
 | Chapters without word cards | b2-14-goethe-mini-test-1 (review quiz), b2-26-goethe-mini-test-2 (review quiz), b2-36-goethe-halbzeit-test (review quiz), b2-43-goethe-mini-3 (review quiz), b2-53-goethe-mini-4 (none) |
-| Already illustrated (A1·01 pilot) | 12 |
-| **New images needed** | **7881** (6562 direct, 1319 conceptual) |
+| Already illustrated (A1·01 pilot) | 79 |
+| **New images needed** | **7814** (6504 direct, 1310 conceptual) |
 | …used on a free Chapter 1 page (public files) | 86 |
-| …used only in paid chapters (gated files) | 7795 |
+| …used only in paid chapters (gated files) | 7728 |
 | Cards served by reusing another card's image | 663 |
 | Headwords with several meanings | 578 (308 look like the same meaning worded differently — review) |
 
 ## Cost and storage (estimate)
-- Expected generations incl. re-rolls: **9853** × $0.039 = **$384.27** (interactive) · **$192.13** if the 50 % batch mode is available for this model (to verify).
-- Assets: 31524 files ≈ **149.9 MB** (AVIF+WebP × 400/800w, pilot average 19.5 KB per word); a learner downloads only one variant per card (≈ 3–6 KB).
+- Expected generations incl. re-rolls: **9770** × $0.039 = **$381.03** (interactive) · **$190.51** if the 50 % batch mode is available for this model (to verify).
+- Assets: 31256 files ≈ **148.6 MB** (AVIF+WebP × 400/800w, pilot average 19.5 KB per word); a learner downloads only one variant per card (≈ 3–6 KB).
 
 ## Per level
 | Level | Chapters | With cards | Checkpoints | Cards | Image | Concept | Text-only | New images (first use here) |
 |---|---|---|---|---|---|---|---|---|
-| A1 | 47 | 47 | 0 | 1984 | 1480 | 269 | 235 | 1719 |
+| A1 | 47 | 47 | 0 | 1984 | 1480 | 269 | 235 | 1652 |
 | A2 | 35 | 35 | 0 | 1607 | 1270 | 272 | 65 | 1435 |
 | B1 | 35 | 35 | 0 | 2128 | 1712 | 296 | 120 | 1893 |
 | B2 | 69 | 64 | 4 | 2569 | 2142 | 405 | 22 | 2270 |
@@ -39,19 +39,19 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | Chapter | Access | Cards | Image | Concept | Text-only | Illustrated |
 |---|---|---|---|---|---|---|
 | a1-1-alphabet | free | 12 | 12 | 0 | 0 | 12 |
-| a1-2-vokale | paid | 16 | 13 | 2 | 1 | 0 |
-| a1-3-zahlen | paid | 39 | 19 | 1 | 19 | 0 |
-| a1-4-hallo | paid | 38 | 7 | 28 | 3 | 0 |
-| a1-5-werbistdu | paid | 38 | 23 | 0 | 15 | 0 |
-| a1-6-wfragen | paid | 34 | 24 | 3 | 7 | 0 |
-| a1-7-jaodernein | paid | 20 | 17 | 2 | 1 | 0 |
-| a1-8-goethemini1 | paid | 77 | 19 | 2 | 56 | 0 |
-| a1-9-verben | paid | 22 | 17 | 3 | 2 | 0 |
-| a1-10-artikel | paid | 71 | 58 | 3 | 10 | 0 |
+| a1-2-vokale | paid | 16 | 13 | 2 | 1 | 3 |
+| a1-3-zahlen | paid | 39 | 19 | 1 | 19 | 6 |
+| a1-4-hallo | paid | 38 | 7 | 28 | 3 | 10 |
+| a1-5-werbistdu | paid | 38 | 23 | 0 | 15 | 6 |
+| a1-6-wfragen | paid | 34 | 24 | 3 | 7 | 8 |
+| a1-7-jaodernein | paid | 20 | 17 | 2 | 1 | 6 |
+| a1-8-goethemini1 | paid | 77 | 19 | 2 | 56 | 5 |
+| a1-9-verben | paid | 22 | 17 | 3 | 2 | 5 |
+| a1-10-artikel | paid | 71 | 58 | 3 | 10 | 13 |
 | a1-11-negation | paid | 13 | 3 | 5 | 5 | 0 |
-| a1-12-akkusativ | paid | 15 | 7 | 4 | 4 | 0 |
-| a1-13-adjektive | paid | 74 | 65 | 4 | 5 | 0 |
-| a1-14-essen | paid | 82 | 78 | 4 | 0 | 0 |
+| a1-12-akkusativ | paid | 15 | 7 | 4 | 4 | 1 |
+| a1-13-adjektive | paid | 74 | 65 | 4 | 5 | 3 |
+| a1-14-essen | paid | 82 | 78 | 4 | 0 | 1 |
 | a1-15-cafe | paid | 65 | 52 | 11 | 2 | 0 |
 | a1-16-hobbies | paid | 115 | 104 | 10 | 1 | 0 |
 | a1-17-goethe2 | paid | 23 | 22 | 1 | 0 | 0 |

@@ -212,13 +212,17 @@ const CHAPTER = {
       ex: 'Schreib einen kurzen Text.', exEn: 'Write a short text.',
       compare: { comparative: 'kürzer', superlative: 'am kürzesten' } },
     { de: 'zu zweit', pos: 'phrase', en: 'in pairs', hi: 'जोड़ी में',
-      ex: 'Arbeitet zu zweit.', exEn: 'Work in pairs.' },
+      ex: 'Arbeitet zu zweit.', exEn: 'Work in pairs.',
+      img: { src: '/api/media/vocab-img/24961c27307f05e4c533', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people working together in pairs at a desk' }
+    },
     { de: 'andere', pos: 'adjective', en: 'other', hi: 'अन्य',
       ex: 'Frag eine andere Person.', exEn: 'Ask another person.' },
     { de: 'gegenseitig', pos: 'adjective', en: 'mutual', hi: 'पारस्परिक',
       ex: 'Stellt euch gegenseitig vor.', exEn: 'Introduce each other (mutually).' },
     { de: 'international', pos: 'adjective', en: 'international', hi: 'अंतरराष्ट्रीय',
-      ex: 'Der Kurs ist international.', exEn: 'The course is international.' },
+      ex: 'Der Kurs ist international.', exEn: 'The course is international.',
+      img: { src: '/api/media/vocab-img/1920a06e1974484e9a49', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Diverse students gathered around a globe' }
+    },
     { de: 'deutschsprachig', pos: 'adjective', en: 'German-speaking', hi: 'जर्मनभाषी',
       ex: 'Die Schweiz ist deutschsprachig.', exEn: 'Switzerland is German-speaking.' },
     { de: 'darauf', pos: 'adverb', en: 'upon it, to it', hi: 'उस पर',
@@ -351,16 +355,22 @@ const CHAPTER = {
     { de: 'Grammatik', art: 'die', gender: 'f', plural: 'Grammatiken', pos: 'noun', en: 'grammar', hi: 'व्याकरण',
       ex: 'Die Grammatik ist nicht schwer.', exEn: 'The grammar is not hard.' },
     { de: 'Tafel', art: 'die', gender: 'f', plural: 'Tafeln', pos: 'noun', en: 'blackboard', hi: 'श्यामपट',
-      ex: 'Schreib es an die Tafel.', exEn: 'Write it on the blackboard.' },
+      ex: 'Schreib es an die Tafel.', exEn: 'Write it on the blackboard.',
+      img: { src: '/api/media/vocab-img/b7ad920ee24715eca336', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a green blackboard with chalk and eraser' }
+    },
     { de: 'grüßen', pos: 'verb', en: 'to greet', hi: 'अभिवादन करना',
       ex: 'Wir grüßen mit "Hallo".', exEn: 'We greet with "Hallo".',
-      conj: { praesens: 'grüßt', praeteritum: 'grüßte', perfekt: 'hat gegrüßt' } },
+      conj: { praesens: 'grüßt', praeteritum: 'grüßte', perfekt: 'hat gegrüßt' },
+      img: { src: '/api/media/vocab-img/6298a154941ff68b5fe3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people waving hello to each other' }
+    },
     { de: 'verabschieden', pos: 'verb', en: 'to say goodbye', hi: 'विदा लेना',
       ex: 'Wir verabschieden uns mit "Tschüs".', exEn: 'We say goodbye with "Tschüs".',
       conj: { praesens: 'verabschiedet', praeteritum: 'verabschiedete', perfekt: 'hat verabschiedet' } },
     { de: 'tauschen', pos: 'verb', en: 'to swap, exchange', hi: 'अदला-बदली करना',
       ex: 'Tauscht die Rollen.', exEn: 'Swap roles.',
-      conj: { praesens: 'tauscht', praeteritum: 'tauschte', perfekt: 'hat getauscht' } }
+      conj: { praesens: 'tauscht', praeteritum: 'tauschte', perfekt: 'hat getauscht' },
+      img: { src: '/api/media/vocab-img/221c231061500cde9378', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people exchanging books across a table' }
+    }
   ],
 
   // ---------- Review (rule cards → accordion; consolidation, not new theory) ----------

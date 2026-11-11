@@ -242,7 +242,7 @@ const CHAPTER = {
   vocab: [
     // — Core foods (nouns) —
     { de: 'Brot', art: 'das', gender: 'n', plural: 'Brote', pos: 'noun', en: 'bread', hi: 'रोटी / ब्रेड', ex: 'Ich esse Brot zum Frühstück.', exEn: 'I eat bread for breakfast.' },
-    { de: 'Brötchen', art: 'das', gender: 'n', plural: 'Brötchen', pos: 'noun', en: 'bread roll', hi: 'बन', ex: 'Das Brötchen ist frisch.', exEn: 'The bread roll is fresh.' },
+    { de: 'Brötchen', art: 'das', gender: 'n', plural: 'Brötchen', pos: 'noun', en: 'bread roll', hi: 'बन', ex: 'Das Brötchen ist frisch.', exEn: 'The bread roll is fresh.', img: { src: '/api/media/vocab-img/65a060010251e80c14a4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A crusty golden bread roll on a board' } },
     { de: 'Ei', art: 'das', gender: 'n', plural: 'Eier', pos: 'noun', en: 'egg', hi: 'अंडा', ex: 'Ich esse ein Ei.', exEn: 'I eat an egg.' },
     { de: 'Fleisch', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'meat', hi: 'मांस', ex: 'Ich esse kein Fleisch.', exEn: 'I don\'t eat meat.' },
     { de: 'Gemüse', art: 'das', gender: 'n', plural: 'Gemüse', pos: 'noun', en: 'vegetable(s)', hi: 'सब्ज़ी', ex: 'Gemüse ist gesund.', exEn: 'Vegetables are healthy.' },

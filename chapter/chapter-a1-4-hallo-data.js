@@ -230,21 +230,33 @@ const CHAPTER = {
   // ---------- Vocabulary (38 words) ----------
   vocab: [
     { de: 'hallo', pos: 'interjection', en: 'hello', hi: 'नमस्ते',
-      ex: 'Hallo! Wie geht es dir?', exEn: 'Hello! How are you?' },
+      ex: 'Hallo! Wie geht es dir?', exEn: 'Hello! How are you?',
+      img: { src: '/api/media/vocab-img/d3aaced0c22225f4cd04', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A friendly person waving hello.' }
+    },
     { de: 'guten Morgen', pos: 'greeting', en: 'good morning', hi: 'सुप्रभात',
-      ex: 'Guten Morgen, Frau Klein!', exEn: 'Good morning, Mrs Klein!' },
+      ex: 'Guten Morgen, Frau Klein!', exEn: 'Good morning, Mrs Klein!',
+      img: { src: '/api/media/vocab-img/79100eb2b9b0c02b8741', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person stretching beside a sunlit morning window.' }
+    },
     { de: 'guten Tag', pos: 'greeting', en: 'good day, hello', hi: 'नमस्कार',
       ex: 'Guten Tag, Herr Wolan.', exEn: 'Good day, Mr Wolan.' },
     { de: 'guten Abend', pos: 'greeting', en: 'good evening', hi: 'शुभ संध्या',
       ex: 'Guten Abend! Willkommen.', exEn: 'Good evening! Welcome.' },
     { de: 'gute Nacht', pos: 'greeting', en: 'good night', hi: 'शुभ रात्रि',
-      ex: 'Gute Nacht, bis morgen!', exEn: 'Good night, see you tomorrow!' },
+      ex: 'Gute Nacht, bis morgen!', exEn: 'Good night, see you tomorrow!',
+      img: { src: '/api/media/vocab-img/31c1972763092ea0fc5f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person in bed turning off a lamp' }
+    },
     { de: 'auf Wiedersehen', pos: 'greeting', en: 'goodbye (formal)', hi: 'अलविदा',
-      ex: 'Auf Wiedersehen, Frau Klein.', exEn: 'Goodbye, Mrs Klein.' },
+      ex: 'Auf Wiedersehen, Frau Klein.', exEn: 'Goodbye, Mrs Klein.',
+      img: { src: '/api/media/vocab-img/17a6183ebe66a5908a17', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people waving goodbye to each other.' }
+    },
     { de: 'tschüs', pos: 'interjection', en: 'bye (informal)', hi: 'बाय',
-      ex: 'Tschüs, bis bald!', exEn: 'Bye, see you soon!' },
+      ex: 'Tschüs, bis bald!', exEn: 'Bye, see you soon!',
+      img: { src: '/api/media/vocab-img/f3e7506f8ca23da927a1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling and waving goodbye.' }
+    },
     { de: 'ciao', pos: 'interjection', en: 'bye', hi: 'बाय',
-      ex: 'Ciao, bis später!', exEn: 'Bye, see you later!' },
+      ex: 'Ciao, bis später!', exEn: 'Bye, see you later!',
+      img: { src: '/api/media/vocab-img/9668b4c26e43ea6ef9f8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling and waving goodbye.' }
+    },
     { de: 'bis bald', pos: 'phrase', en: 'see you soon', hi: 'जल्द मिलेंगे',
       ex: 'Tschüs und bis bald!', exEn: 'Bye and see you soon!' },
     { de: 'bis dann', pos: 'phrase', en: 'until then', hi: 'तब तक',
@@ -272,7 +284,9 @@ const CHAPTER = {
     { de: 'ganz', pos: 'adverb', en: 'quite, completely', hi: 'काफ़ी / पूरी तरह',
       ex: 'Das ist ganz einfach.', exEn: 'That is quite easy.' },
     { de: 'gut', pos: 'adjective', en: 'good, well', hi: 'अच्छा',
-      ex: 'Mir geht es gut, danke.', exEn: 'I am well, thank you.' },
+      ex: 'Mir geht es gut, danke.', exEn: 'I am well, thank you.',
+      img: { src: '/api/media/vocab-img/feb01321b26de4565a43', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person giving a thumbs-up' }
+    },
     { de: 'okay', pos: 'adverb', en: 'okay', hi: 'ठीक है',
       ex: 'Okay, bis dann!', exEn: 'Okay, until then!' },
     { de: 'sehr', pos: 'adverb', en: 'very', hi: 'बहुत',
@@ -285,7 +299,9 @@ const CHAPTER = {
     { de: 'das', pos: 'pronoun', en: 'this, that', hi: 'यह / वह',
       ex: 'Das ist Anna.', exEn: 'This is Anna.' },
     { de: 'Frau', art: 'die', gender: 'f', plural: 'Frauen', pos: 'noun', en: 'Mrs, Ms; woman', hi: 'श्रीमती / महिला',
-      ex: 'Guten Tag, Frau Klein!', exEn: 'Good day, Mrs Klein!' },
+      ex: 'Guten Tag, Frau Klein!', exEn: 'Good day, Mrs Klein!',
+      img: { src: '/api/media/vocab-img/92d92a0de54aeeacc634', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Woman smiling warmly' }
+    },
     { de: 'Herr', art: 'der', gender: 'm', plural: 'Herren', pos: 'noun', en: 'Mr; gentleman', hi: 'श्रीमान',
       ex: 'Das ist Herr Wolan.', exEn: 'This is Mr Wolan.' },
     { de: 'Höflichkeit', art: 'die', gender: 'f', plural: 'Höflichkeiten', pos: 'noun', en: 'politeness', hi: 'शिष्टाचार',
@@ -295,7 +311,9 @@ const CHAPTER = {
       compare: { comparative: 'formeller', superlative: 'am formellsten' } },
     { de: 'informell', pos: 'adjective', en: 'informal', hi: 'अनौपचारिक',
       ex: 'Mit Freunden ist es informell.', exEn: 'With friends it is informal.',
-      compare: { comparative: 'informeller', superlative: 'am informellsten' } },
+      compare: { comparative: 'informeller', superlative: 'am informellsten' },
+      img: { src: '/api/media/vocab-img/0aa3169cdf77754682f2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Friends chatting casually on floor cushions' }
+    },
     { de: 'grüezi', pos: 'greeting', en: 'hello (Switzerland)', hi: 'नमस्ते (स्विस)',
       ex: 'Grüezi! — so grüßt man in der Schweiz.', exEn: 'Hello! — that is how you greet in Switzerland.' },
     { de: 'grüß Gott', pos: 'greeting', en: 'hello (Austria/S. Germany)', hi: 'नमस्ते (दक्षिणी)',
@@ -307,7 +325,9 @@ const CHAPTER = {
     { de: 'hi', pos: 'interjection', en: 'hi', hi: 'हाय',
       ex: 'Hi Anna, alles gut?', exEn: 'Hi Anna, all good?' },
     { de: 'hurra', pos: 'interjection', en: 'hooray', hi: 'वाह / हुर्रे',
-      ex: 'Hurra, die Schule ist aus!', exEn: 'Hooray, school is out!' }
+      ex: 'Hurra, die Schule ist aus!', exEn: 'Hooray, school is out!',
+      img: { src: '/api/media/vocab-img/354c605ebda2588de7e3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A joyful person jumping with arms raised in celebration' }
+    }
   ],
 
   // ---------- Conversation (rule cards → accordion) ----------

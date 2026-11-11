@@ -1,50 +1,67 @@
-# Gated vocabulary images — access Worker route (proposal, NOT implemented)
+# Gated vocabulary images — access Worker route
 
-**Status:** design only. Needs owner approval. Then it is implemented on the
-live access-Worker lineage (`deploy/access-*` branches, not `main`) and
-deployed with `npm run deploy:access`.
+**Status:** implemented and tested on the access-Worker deploy lineage
+(branch `deploy/access-vocab-images-on-51ccd26a`, based on the live source
+`deploy/access-exam-on-bf0737f4` @ 51ccd26a). **Not deployed.** Deployment
+and Worker cutover need the owner's final approval (see ROLLOUT.md).
 
 ## Why
-The 8,000-odd illustrations for paid chapters must not be public:
+Illustrations for paid chapters must not be public:
 
 1. **Paid-content policy.** Paid chapter content is never served by GitHub
-   Pages. Paid audio is served only by `klarweg.in/api/media/` to signed-in
-   buyers (`access/worker/src/media.js`). Images follow the same rule.
-2. **Repository size.** About 150 MB of binaries would bloat the public git
-   repository and the Pages artifact (currently 620 files) forever.
+   Pages. Paid audio is served only by `klarweg.in/api/media/` to entitled
+   buyers. Images follow the same rule.
+2. **Repository size.** Thousands of binaries would bloat the public git
+   repository and the Pages artifact forever.
 
-Free Chapter 1 images stay public on Pages, exactly as in the A1·01 pilot
-(`public/vocab-img/`, allowlisted per file).
+Free Chapter 1 images are public on Pages (`public/vocab-img/`, allowlisted
+per file). Every other image exists only in the private R2 bucket.
 
 ## Route
-`GET|HEAD klarweg.in/api/media/vocab-img/<key>-<400|800>.<avif|webp>`
-(the Worker sees `/media/vocab-img/...`)
+`GET|HEAD klarweg.in/api/media/vocab-img/<id>-<400|800>.<avif|webp>`
+(`access/worker/src/media-images.js`, called from `media.js`)
 
-- **Storage:** the private R2 bucket `klarweg-audio` (binding `MEDIA`) under the
-  prefix `vocab-img/`, or a new private bucket. Objects are uploaded from
-  `$VOCAB_IMG_STORE/r2/vocab-img/` (pipeline `encode`).
-- **Key regex:** `^vocab-img/[a-z0-9-]{3,140}-(400|800)\.(avif|webp)$`. Today
-  media.js accepts `.mp3` only.
-- **Access:** same as word audio, i.e. signed in plus any active level
-  (`readEntitlements`). A concept is shared across levels, so per-level gating
-  would hide an A1 image from a B1-only buyer.
-- **Used files only:** the key must be listed in `vocab-img/manifest.json` in
-  the bucket (= `docs/visual-vocab/gated-images.json`). Otherwise 404. If the
-  list cannot be read: 503 (fail closed), as for audio.
-- **Headers:** `content-type: image/avif|image/webp`, `x-content-type-options: nosniff`.
-- **Caching (owner decision needed):** paid audio is `private, no-store`. For
-  images I recommend `private, max-age=604800, immutable`. Files never change
-  under a key, it is still never edge-cached, and it avoids re-downloading
-  every card image (~3–6 KB each) on every visit. With `no-store`, a 40-card
-  chapter costs about 200 KB per page view.
-- **Referer/origin:** the existing foreign-Referer refusal applies.
+- `<id>` = first 20 hex characters of sha256(concept key). Opaque: the URL
+  does not name the word.
+- **Storage:** private R2 bucket `klarweg-audio` (binding `MEDIA`), prefix
+  `vocab-img/`, uploaded from `$VOCAB_IMG_STORE/r2/vocab-img/`.
+- **Levels map:** `vocab-img/levels.json` in the bucket
+  = `docs/visual-vocab/gated-images.json` = `{ "<id>": ["A1", "B1"], … }`,
+  the levels of the PAID chapters that use the image. It is derived from the
+  chapter data by `pipeline.mjs apply` (`syncManifests`), and
+  `scripts/vocab-images.test.mjs` asserts it matches the chapters exactly.
+
+## Authorization (fail closed at every step)
+1. same origin `klarweg.in` (existing `isSameOriginApi`), key matches
+   `^vocab-img/[0-9a-f]{20}-(400|800)\.(avif|webp)$` → else **404**, no bucket read
+2. no foreign Referer → else **403**
+3. live session → else **401**
+4. entitlements read (expiry honoured; Lifetime = all levels) → error **503**
+5. levels map readable and an object → else **503** (never cached on failure)
+6. the user holds at least one of the image's levels → else **403**
+7. object missing → **403** (same body as 6: no existence oracle)
+
+A shared image is visible through any level that uses it, never through
+others: an image used by A1 and B1 paid chapters is served to an A1 or a B1
+buyer, never to a C2-only buyer.
+
+## Headers
+`Cache-Control: private, no-store` (start conservative, as requested) ·
+`X-Content-Type-Options: nosniff` · `Cross-Origin-Resource-Policy: same-origin` ·
+`Referrer-Policy: no-referrer` · `Content-Type: image/avif|image/webp` · ETag ·
+Content-Length. HEAD returns no body.
 
 ## Client
-Nothing more is needed. `vocabFigure()` already takes any `src`. A paid chapter
-entry carries `img.src = '/api/media/vocab-img/<key>'`; a learner without
-access never sees the paid chapter, and a 403/404 removes the figure (text-only
-card).
+`vocabFigure()` takes any `src`. A paid entry carries
+`img.src = '/api/media/vocab-img/<id>'`. A failed load (401/403/503) removes
+the figure, so the card degrades to text. With Images switched off, no
+figure is built and nothing is requested.
 
-## Tests to add with the Worker change
-classify() for the new prefix · used-list 404 · no-session 401 · expired
-entitlement 403 · content-type · cache header · Referer refusal.
+## Tests
+`access/worker/test/media-images.test.mjs` (13): key rule; malformed/levels
+map → 404 without reads; signed out 401 (existing, unlisted, missing alike);
+workers.dev 404 and foreign Referer 403; right level 200 with headers; wrong
+level 403; shared image across levels; Lifetime; expired, revoked
+entitlement, revoked session, forged cookie; no existence oracle; fail closed
+on missing/unreadable/malformed map, R2 error, no binding; unknown level
+names grant nothing; HEAD; audio routes untouched.

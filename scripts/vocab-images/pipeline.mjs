@@ -66,9 +66,10 @@ const readJson = (p, d) => (fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "ut
 const writeJson = (p, v) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, JSON.stringify(v, null, 1) + "\n"); };
 const readJsonl = (p) => (fs.existsSync(p) ? fs.readFileSync(p, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l)) : []);
 export const imageId = (key) => crypto.createHash("sha256").update(key).digest("hex").slice(0, 20);
-const token = (() => { let t = null, at = 0; return () => { if (!t || Date.now() - at > 40 * 60e3) { t = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(); at = Date.now(); } return t; }; })();
+const token = (() => { let t = null, at = 0; return (force) => { if (force || !t || Date.now() - at > 20 * 60e3) { t = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(); at = Date.now(); } return t; }; })();
 const gapi = async (url, init = {}) => {
-  const r = await fetch(url, { ...init, headers: { Authorization: "Bearer " + token(), "Content-Type": "application/json", "x-goog-user-project": PROJECT, ...(init.headers || {}) } });
+  let r = await fetch(url, { ...init, headers: { Authorization: "Bearer " + token(), "Content-Type": "application/json", "x-goog-user-project": PROJECT, ...(init.headers || {}) } });
+  if (r.status === 401) r = await fetch(url, { ...init, headers: { Authorization: "Bearer " + token(true), "Content-Type": "application/json", "x-goog-user-project": PROJECT, ...(init.headers || {}) } });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(`${r.status} ${JSON.stringify(j).slice(0, 300)}`);
   return j;
@@ -130,7 +131,7 @@ function plan() {
   writeJson(path.join(PROJ, "queue.json"), { createdAt: new Date().toISOString(), items });
   const n = (s) => items.filter((x) => x.status === s).length;
   const why = {}; items.filter((x) => x.status === "text-only").forEach((x) => (why[x.why] = (why[x.why] || 0) + 1));
-  console.log(JSON.stringify({ concepts: items.length, todo: n("todo"), have: n("have"), alias: n("alias"), textOnly: n("text-only"), textOnlyWhy: why, public: items.filter((x) => x.public).length, worstCaseUsdOneAttempt: +(n("todo") * IMAGE_USD_WORST).toFixed(2) }));
+  console.log(JSON.stringify({ concepts: items.length, todo: n("todo"), have: n("have"), alias: n("alias"), textOnly: n("text-only"), textOnlyWhy: Object.fromEntries(Object.entries(why).sort((a, b) => b[1] - a[1]).slice(0, 8)), public: items.filter((x) => x.public).length, worstCaseUsdOneAttempt: +(n("todo") * IMAGE_USD_WORST).toFixed(2) }));
 }
 const queue = () => { const q = readJson(path.join(PROJ, "queue.json")); if (!q) throw new Error("run plan first"); return q.items; };
 
@@ -139,7 +140,7 @@ function state() {
   const gen = rows().filter((r) => r.batch === "gen");
   const qa = readJsonl(QA_LOG);
   const s = new Map();
-  const get = (k) => { if (!s.has(k)) s.set(k, { attempts: 0, ok: [], qa: new Map(), inflight: false }); return s.get(k); };
+  const get = (k) => { if (!s.has(k)) s.set(k, { attempts: 0, ok: [], qa: new Map(), inflight: false, accepted: null, lastFail: null, needsQa: [] }); return s.get(k); };
   for (const r of gen) {
     if (r.submitted) for (const k of r.keys || []) { const x = get(k.split("#")[0]); x.attempts = Math.max(x.attempts, Number(k.split("#")[1])); }
     if (r.status === "ok") get(r.key).ok.push(r);
@@ -242,7 +243,7 @@ async function collect() {
 export const QA_RULES = `You check illustrations for a premium German vocabulary course for adult learners. Each picture must help a learner recognise ONE meaning.
 FAIL the picture if ANY of these is true:
 1. it does not clearly show the intended meaning (or shows a different sense of the word);
-2. it contains any readable or pseudo text: letters, words, digits, gibberish glyphs, labels, signs with writing, watermarks or logos (even small or faint);
+2. it contains any readable or pseudo text: letters, words, digits, gibberish glyphs, labels, signs with writing, watermarks or logos (even small or faint); national flags or emblems; banknotes or coins showing numbers;
 3. there is a frame, border, rounded card, inset picture, or the background is not a plain light cream/off-white;
 4. a creature, blob or mascot appears instead of a human, or objects/food/plants have faces, or there are extra tiny characters;
 5. people are depicted disrespectfully, as a stereotype, or the scene is inappropriate, violent, frightening or sexual;
@@ -271,6 +272,7 @@ async function qa() {
       let j = null;
       for (let a = 0; a < 6 && !j; a++) {
         const res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) });
+        if (res.status === 401) { token(true); continue; }
         if (res.status === 429 || res.status >= 500) { await new Promise((z) => setTimeout(z, 10000 * (a + 1))); continue; }
         j = await res.json(); if (!res.ok) { console.error("qa http", res.status, JSON.stringify(j).slice(0, 200)); j = null; break; }
       }

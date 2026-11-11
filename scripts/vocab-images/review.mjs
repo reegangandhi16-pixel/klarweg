@@ -90,13 +90,16 @@ export function parseLines(text) {
   return out;
 }
 
-async function call(token, items) {
+async function call(tokenFn, items) {
   const url = `https://aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/global/publishers/google/models/${MODEL}:generateContent`;
   const body = { systemInstruction: { parts: [{ text: RULES }] },
     contents: [{ role: "user", parts: [{ text: "Concepts:\n" + items.map((c) => JSON.stringify({ key: c.key, german: c.de, pos: c.pos, meaning: c.en, example: c.ex })).join("\n") }] }],
     generationConfig: { temperature: 0.3, maxOutputTokens: 12000 } };
+  let lastStatus = 0;
   for (let a = 0; a < 6; a++) {
-    const r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token, "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) });
+    const r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + tokenFn(a > 0 && lastStatus === 401), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) });
+    lastStatus = r.status;
+    if (r.status === 401) continue;
     if (r.status === 429 || r.status >= 500) { await new Promise((z) => setTimeout(z, 15000 * (a + 1))); continue; }
     const j = await r.json();
     return { ok: r.ok, status: r.status, j };
@@ -108,16 +111,18 @@ async function run() {
   fs.mkdirSync(DIR, { recursive: true });
   const all = chunks();
   const limit = Number(opt("limit", Infinity)), par = Number(opt("parallel", 4));
-  const pending = all.map((c, i) => ({ c, i })).filter(({ i }) => !fs.existsSync(path.join(DIR, `chunk-${String(i).padStart(4, "0")}.json`))).slice(0, limit);
+  const pending = all.map((c, i) => ({ c, i })).filter(({ i }) => !fs.existsSync(path.join(DIR, `chunk-${String(i).padStart(4, "0")}.json`)));
+  if (opt("reverse")) pending.reverse();
+  pending.splice(limit);
   console.log(JSON.stringify({ chunks: all.length, pending: pending.length }));
   let token = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(), tokenAt = Date.now();
   let idx = 0, done = 0, usd = 0;
   async function worker() {
     while (idx < pending.length) {
       const { c, i } = pending[idx++];
-      if (Date.now() - tokenAt > 40 * 60e3) { token = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(); tokenAt = Date.now(); }
+      if (fs.existsSync(path.join(DIR, `chunk-${String(i).padStart(4, "0")}.json`))) continue;   // done by another runner
       assertCanSpend(0.05, "review chunk");
-      const { ok, status, j } = await call(token, c);
+      const { ok, status, j } = await call((force) => { if (force || Date.now() - tokenAt > 20 * 60e3) { token = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(); tokenAt = Date.now(); } return token; }, c);
       const cost = ok ? textUsd(MODEL, j.usageMetadata) : 0;
       log({ batch: "review", key: "chunk-" + i, status: ok ? "ok" : "http_" + status, billed: ok, usd: cost, usdList: cost, tokens: j.usageMetadata || null });
       if (!ok) { console.error("chunk", i, "failed", status, JSON.stringify(j).slice(0, 200)); continue; }

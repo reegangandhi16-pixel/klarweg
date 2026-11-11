@@ -44,15 +44,37 @@ export async function inspectAccess(env, adminId, url) {
     is_exam_admin: await hasRole(env, userId, ['exam_admin']) };
 }
 
-/* POST /admin/access/grants { user_id, level, scope, reason, valid_until? (unix seconds, in the future) } */
+/* EXAM_GRANT_POLICY (owner decision 2026-11-11, pending the OD-14 review): applies to NEW grants only.
+   Existing grants, revocations, inspection and running attempts are never affected.
+     unset / "open"  → unchanged behaviour
+     "paused"        → no new grants (423 grants_paused)
+     "adults_only"   → a new grant needs adult_verified: true and adult_basis (how the administrator verified that the
+                       learner is 18 or older, 3–200 chars). Recorded in the grant reason and in the audit detail.
+   No age or date of birth is ever stored. Reversible by changing the variable and redeploying. */
+export const GRANT_POLICIES = ['open', 'paused', 'adults_only'];
+function grantPolicy(env) {
+  const p = String(env.EXAM_GRANT_POLICY || 'open').trim();
+  return GRANT_POLICIES.includes(p) ? p : 'paused';   // unknown value: fail closed for new grants only
+}
+
+/* POST /admin/access/grants { user_id, level, scope, reason, valid_until? (unix seconds, in the future),
+   adult_verified?, adult_basis? (required when EXAM_GRANT_POLICY = adults_only) } */
 export async function grantAccess(env, adminId, request) {
   await requireExamAdmin(env, adminId);
+  const policy = grantPolicy(env);
+  if (policy === 'paused') fail(423, 'grants_paused', 'New exam-access grants are paused (EXAM_GRANT_POLICY). Existing access is unchanged.');
   const body = await readJsonBody(request);
   if (!USER_RE.test(body.user_id || '')) fail(400, 'invalid_user_id');
   const level = LEVELS[body.level];
   if (!level) fail(400, 'invalid_level');
   if (!SCOPES.includes(body.scope)) fail(400, 'invalid_scope');
-  const reason = reasonText(body.reason);
+  let adultBasis = null;
+  if (policy === 'adults_only') {
+    adultBasis = typeof body.adult_basis === 'string' ? body.adult_basis.normalize('NFC').trim() : '';
+    if (body.adult_verified !== true || adultBasis.length < 3 || adultBasis.length > 200)
+      fail(422, 'adult_verification_required', 'Only learners verified as 18 or older can be granted access: send adult_verified: true and adult_basis.');
+  }
+  const reason = reasonText(body.reason) + (adultBasis ? ` [18+ verified: ${adultBasis}]` : '');
   const t = Math.floor(now(env) / 1000);
   let validUntil = null;
   if (body.valid_until !== undefined && body.valid_until !== null) {
@@ -63,7 +85,7 @@ export async function grantAccess(env, adminId, request) {
       AND (valid_until IS NULL OR valid_until > ?4) LIMIT 1`).bind(body.user_id, level, body.scope, t).first();
   if (active) fail(409, 'grant_exists', 'This user already has active access for that level and scope.', { grant_id: active.id });
   const id = `xa_${crypto.randomUUID()}`;
-  const detail = { grant_id: id, user_id: body.user_id, level, scope: body.scope, valid_until: validUntil, reason };
+  const detail = { grant_id: id, user_id: body.user_id, level, scope: body.scope, valid_until: validUntil, reason, ...(adultBasis ? { policy, adult_verified: true } : {}) };
   // inserted only while no active grant exists (a concurrent grant cannot create a second active one); audited only if inserted
   await env.DB.batch([
     env.DB.prepare(`INSERT INTO exam_access (id, user_id, level, scope, source, granted_by, granted_at, valid_until, reason)

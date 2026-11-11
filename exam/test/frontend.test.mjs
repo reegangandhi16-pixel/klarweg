@@ -124,7 +124,7 @@ test('SPEAKING (client): chunk queue hashes, buffers, resends only gaps, stops o
   const stored = await store.get(q.key(t, 0));
   assert.equal(stored.sha256, await sha256Hex(new TextEncoder().encode('c0')));
   await q.drain(t, new Set([1]));                  // server already has seq 1
-  assert.deepEqual(uploads.map((u) => u.seq), ['0', '2']);
+  assert.deepEqual(uploads.map((u) => u.seq).sort(), ['0', '2']);   // parallel uploads: order-free (the server keys chunks by seq)
   assert.deepEqual(await q.pending(t), []);
   const r = await q.finish(t, 3, 4000);
   assert.deepEqual(r, { ok: true, item_id: t.item_id, turn: 't1', chunks: 3, duration_ms: 4000 });
@@ -132,6 +132,28 @@ test('SPEAKING (client): chunk queue hashes, buffers, resends only gaps, stops o
   await q2.add(t, 9, new Uint8Array([1]).buffer, 'audio/webm');
   await assert.rejects(q2.drain(t), (e) => e.code === 'consent_required');
   assert.equal((await q2.pending(t)).length, 1);   // still buffered locally
+});
+
+test('SPEAKING (client): chunks upload in parallel (bounded), every chunk once; a definitive refusal stops the drain and keeps the rest buffered', async () => {
+  const store = memoryStore(); const t = { item_id: 'itm:b1:syn-sp2', turn: 't1' };
+  let inFlight = 0, peak = 0; const sent = [];
+  const q = new ChunkQueue({ attemptId: 'att_fe_par', store, sleep: async () => {},
+    upload: async (meta) => { inFlight++; peak = Math.max(peak, inFlight); await new Promise((r) => setTimeout(r, 5)); inFlight--; sent.push(meta.seq); },
+    completeTurn: async (b) => ({ ok: true, ...b }) });
+  assert.equal(q.concurrency, 4, 'default: 4 in flight');
+  for (let i = 0; i < 20; i++) await q.add(t, i, new Uint8Array([i + 1]).buffer, 'audio/webm');
+  await q.drain(t);
+  assert.equal(peak, 4, 'never more than 4 uploads at once');
+  assert.deepEqual(sent.map(Number).sort((a, b) => a - b), [...Array(20).keys()], 'each chunk exactly once');
+  assert.deepEqual(await q.pending(t), []);
+  const t2 = { item_id: 'itm:b1:syn-sp2', turn: 't2' }; let calls = 0;
+  const q2 = new ChunkQueue({ attemptId: 'att_fe_par', store, sleep: async () => {},
+    upload: async () => { calls++; await new Promise((r) => setTimeout(r, 2)); throw new ExamApiError(409, 'upload_window_closed'); }, completeTurn: async () => {} });
+  for (let i = 0; i < 10; i++) await q2.add(t2, i, new Uint8Array([i + 1]).buffer, 'audio/webm');
+  await assert.rejects(q2.drain(t2), (e) => e.code === 'upload_window_closed');
+  assert.ok(calls <= 4, `stops after the first refusal (calls=${calls})`);
+  assert.equal((await q2.pending(t2)).length, 10, 'nothing deleted: all chunks stay buffered for a later resend');
+  assert.equal(new ChunkQueue({ attemptId: 'att_x', store, upload: async () => {}, completeTurn: async () => {}, concurrency: 1 }).concurrency, 1);
 });
 
 test('ENGINE: generic sequencing from server state; every synthetic package is supported by the renderer registry', () => {

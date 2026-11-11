@@ -11,9 +11,9 @@ export class ChunkQueue {
   /* attemptId scopes the local keys: the device store is shared by every attempt (and user) in this browser
      profile, and all attempts of a form share item ids, so unsent chunks of one attempt must never be read,
      resent or finalised as another attempt's recording. */
-  constructor({ attemptId, store, upload, completeTurn, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), maxRetries = 5 }) {
+  constructor({ attemptId, store, upload, completeTurn, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), maxRetries = 5, concurrency = 4 }) {
     if (typeof attemptId !== 'string' || !attemptId) throw new Error('ChunkQueue: attemptId required');
-    Object.assign(this, { attemptId, store, upload, completeTurn, sleep, maxRetries });
+    Object.assign(this, { attemptId, store, upload, completeTurn, sleep, maxRetries, concurrency: Math.max(1, concurrency | 0) });
   }
   prefix(t) { return `chunk:${this.attemptId}:${t.item_id}:${t.turn}:`; }
   key(t, seq) { return `${this.prefix(t)}${String(seq).padStart(4, '0')}`; }
@@ -22,21 +22,37 @@ export class ChunkQueue {
     await this.store.set(this.key(t, seq), { ...t, seq, mime, sha256: await sha256Hex(u8), bytes: u8 });
   }
   async pending(t) { return (await this.store.keys(this.prefix(t))).sort(); }
-  /* serverHas: Set of seqs already confirmed (from /sprechen/status) */
+  /* serverHas: Set of seqs already confirmed (from /sprechen/status).
+     Up to `concurrency` chunks are in flight at once: one chunk upload costs ~2 s of server round trips (measured on
+     the non-prod preview, 2026-11-11: 0.48 chunks/s sequential) while the recorder makes 1 chunk/s, so a strictly
+     sequential queue fell further behind with every turn and Teil 3 was never uploaded before the learner submitted.
+     The server keys chunks by seq (order-free) and treats an identical resend as a duplicate. A definitive refusal
+     stops the drain; the turn is completed only after every chunk is confirmed (finish). */
   async drain(t, serverHas = new Set()) {
-    for (const k of await this.pending(t)) {
-      const c = await this.store.get(k);
-      if (serverHas.has(c.seq)) { await this.store.del(k); continue; }
-      for (let i = 0; ; i++) {
-        try {
-          await this.upload({ item_id: c.item_id, turn: c.turn, seq: String(c.seq), sha256: c.sha256 }, c.bytes, c.mime);
-          await this.store.del(k);
-          break;
-        } catch (e) {
-          if (e && ['checksum_mismatch', 'chunk_conflict', 'turn_closed', 'upload_window_closed', 'consent_required', 'recording_quota_exceeded'].includes(e.code)) throw e;
-          if (i >= this.maxRetries) throw e;
-          await this.sleep(500 * 2 ** i);
-        }
+    const keys = await this.pending(t);
+    let next = 0, failed = null;
+    const worker = async () => {
+      while (!failed && next < keys.length) {
+        const k = keys[next++];
+        try { await this.sendOne(k, serverHas); } catch (e) { if (!failed) failed = e; }
+      }
+    };
+    await Promise.all(Array.from({ length: Math.min(this.concurrency, keys.length) }, worker));
+    if (failed) throw failed;
+  }
+  async sendOne(k, serverHas) {
+    const c = await this.store.get(k);
+    if (!c) return;   // already sent and removed
+    if (serverHas.has(c.seq)) { await this.store.del(k); return; }
+    for (let i = 0; ; i++) {
+      try {
+        await this.upload({ item_id: c.item_id, turn: c.turn, seq: String(c.seq), sha256: c.sha256 }, c.bytes, c.mime);
+        await this.store.del(k);
+        return;
+      } catch (e) {
+        if (e && ['checksum_mismatch', 'chunk_conflict', 'turn_closed', 'upload_window_closed', 'consent_required', 'recording_quota_exceeded'].includes(e.code)) throw e;
+        if (i >= this.maxRetries) throw e;
+        await this.sleep(500 * 2 ** i);
       }
     }
   }

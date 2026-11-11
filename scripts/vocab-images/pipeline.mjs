@@ -52,7 +52,7 @@ const QA_LOG = path.join(STORE, "qa.jsonl");
 const MAX_ATTEMPTS = 3;
 const WIDTHS = [400, 800];
 const FORMATS = ["avif", "webp"];
-const IMAGE_MODEL = "gemini-2.5-flash-image";
+const IMAGE_MODEL = process.env.IMAGE_MODEL || "gemini-2.5-flash-image";
 const QA_MODEL = process.env.QA_MODEL || "gemini-3.8-flash";
 const PROJECT = process.env.VOCAB_IMG_GCP_PROJECT || "klarweg-512108";
 const PROJECT_NUM = process.env.VOCAB_IMG_GCP_PROJECT_NUM || "951775270820";
@@ -140,10 +140,11 @@ function state() {
   const gen = rows().filter((r) => r.batch === "gen");
   const qa = readJsonl(QA_LOG);
   const s = new Map();
-  const get = (k) => { if (!s.has(k)) s.set(k, { attempts: 0, ok: [], qa: new Map(), inflight: false, accepted: null, lastFail: null, needsQa: [] }); return s.get(k); };
+  const get = (k) => { if (!s.has(k)) s.set(k, { attempts: 0, ok: [], qa: new Map(), inflight: false, accepted: null, lastFail: null, needsQa: [], billed: 0 }); return s.get(k); };
   for (const r of gen) {
     if (r.submitted) for (const k of r.keys || []) { const x = get(k.split("#")[0]); x.attempts = Math.max(x.attempts, Number(k.split("#")[1])); }
     if (r.status === "ok") get(r.key).ok.push(r);
+    if (r.key && r.billed) get(r.key).billed++;      // attempts that cost money (cancelled/missing ones do not count)
   }
   const open = new Set(), closed = new Set();
   for (const r of gen) { if (r.job && r.reserveUsd) open.add(r.job); if (r.releaseJob) closed.add(r.releaseJob); }
@@ -158,12 +159,9 @@ function state() {
   return { get, all: s };
 }
 
-/* ---------------- submit (batch prediction jobs) ---------------- */
-async function submit() {
-  const maxUsd = Number(opt("max-usd"));
-  if (!(maxUsd > 0)) throw new Error("--max-usd required");
-  if (opt("approved-by-owner") !== true) throw new Error("refusing paid generation without --approved-by-owner (owner budget approval)");
-  const limit = Number(opt("limit", Infinity)), jobSize = Number(opt("job-size", 400)), level = opt("level");
+/* Concepts that still need an image: not accepted, not in flight, QA done,
+   fewer than MAX_ATTEMPTS billed attempts. A retry carries the QA reason. */
+function pickWork(level, limit) {
   const st = state();
   const want = [];
   for (const it of queue()) {
@@ -171,12 +169,68 @@ async function submit() {
     if (level && !it.audience.some((u) => u.level === level)) continue;
     const x = st.get(it.key);
     if (x.inflight || x.accepted || x.needsQa.length) continue;          // never pay twice; QA first
-    if (x.attempts >= MAX_ATTEMPTS) continue;
+    if (x.billed >= MAX_ATTEMPTS) continue;
     const attempt = x.attempts + 1;
     const fix = x.lastFail ? ` Important correction from review of an earlier attempt: ${x.lastFail.reason}.` : "";
     want.push({ it, attempt, prompt: it.prompt.replace(" The cream background", fix + " The cream background") });
     if (want.length >= limit) break;
   }
+  return want;
+}
+
+/* ---------------- generate (interactive, standard price) ----------------
+   Same rules as submit, one request per image on the global endpoint, with
+   rate-limited parallelism and back-off. Used when batch capacity is slow. */
+async function generate() {
+  const maxUsd = Number(opt("max-usd"));
+  if (!(maxUsd > 0)) throw new Error("--max-usd required");
+  if (opt("approved-by-owner") !== true) throw new Error("refusing paid generation without --approved-by-owner (owner budget approval)");
+  const limit = Number(opt("limit", Infinity)), par = Number(opt("parallel", 4)), level = opt("level");
+  const work = pickWork(level, limit);
+  const url = `https://aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/global/publishers/google/models/${IMAGE_MODEL}:generateContent`;
+  console.log(JSON.stringify({ toGenerate: work.length, parallel: par }));
+  let idx = 0, ok = 0, bad = 0, r429 = 0, stop = false; const t0 = Date.now();
+  async function worker() {
+    while (!stop && idx < work.length) {
+      const w = work[idx++];
+      const committed = assertCanSpend(IMAGE_USD_WORST, "image");
+      if (committed + IMAGE_USD_WORST > maxUsd) { stop = true; console.log(`--max-usd reached at $${committed}`); break; }
+      const k = `${w.it.key}#${w.attempt}`;
+      log({ batch: "gen", submitted: true, interactive: true, keys: [k], usd: 0, usdList: 0 });
+      const body = { contents: [{ role: "user", parts: [{ text: w.prompt }] }], generationConfig: { responseModalities: ["IMAGE"], imageConfig: { aspectRatio: "4:3" } } };
+      let res = null;
+      for (let a = 0; a < 10; a++) {
+        res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && res?.status === 401), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) });
+        if (res.status === 401) continue;
+        if (res.status === 429 || res.status >= 500) { r429++; await new Promise((z) => setTimeout(z, 8000 * (a + 1))); continue; }
+        break;
+      }
+      const j = await res.json().catch(() => ({}));
+      const part = (j.candidates?.[0]?.content?.parts || []).find((x) => x.inlineData);
+      const outTok = j.usageMetadata?.candidatesTokenCount || 0;
+      if (res.ok && part) {
+        const file = path.join(PROJ, "orig", `${w.it.key}--${w.attempt}.png`);
+        fs.mkdirSync(path.dirname(file), { recursive: true });
+        fs.writeFileSync(file, Buffer.from(part.inlineData.data, "base64"));
+        log({ batch: "gen", key: w.it.key, attempt: w.attempt, status: "ok", billed: true, usd: IMAGE_USD_WORST, usdList: IMAGE_USD_WORST, file: path.relative(STORE, file), interactive: true });
+        ok++;
+      } else if (res.ok && outTok > 0) {
+        log({ batch: "gen", key: w.it.key, attempt: w.attempt, status: "no_image:" + (j.candidates?.[0]?.finishReason || "?"), billed: true, usd: IMAGE_USD_WORST, usdList: IMAGE_USD_WORST, interactive: true }); bad++;
+      } else { log({ batch: "gen", key: w.it.key, attempt: w.attempt, status: "failed:" + res.status, billed: false, usd: 0, usdList: 0, interactive: true }); bad++; }
+      if ((ok + bad) % 50 === 0) console.log(`gen ${ok + bad}/${work.length} ok ${ok} bad ${bad} 429s ${r429} ${((ok + bad) / ((Date.now() - t0) / 60000)).toFixed(1)}/min committed $${committedUsd()}`);
+    }
+  }
+  await Promise.all(Array.from({ length: par }, worker));
+  console.log(JSON.stringify({ generated: ok, failed: bad, r429, minutes: +((Date.now() - t0) / 60000).toFixed(1), committedUsd: committedUsd() }));
+}
+
+/* ---------------- submit (batch prediction jobs) ---------------- */
+async function submit() {
+  const maxUsd = Number(opt("max-usd"));
+  if (!(maxUsd > 0)) throw new Error("--max-usd required");
+  if (opt("approved-by-owner") !== true) throw new Error("refusing paid generation without --approved-by-owner (owner budget approval)");
+  const limit = Number(opt("limit", Infinity)), jobSize = Number(opt("job-size", 400)), level = opt("level");
+  const want = pickWork(level, limit);
   if (!want.length) { console.log(JSON.stringify({ submitted: 0 })); return; }
   for (let i = 0; i < want.length; i += jobSize) {
     const part = want.slice(i, i + jobSize);
@@ -411,12 +465,12 @@ function status() {
   const items = queue(); const st = state();
   const todo = items.filter((x) => x.status === "todo");
   const acc = todo.filter((x) => st.get(x.key).accepted).length;
-  const exhausted = todo.filter((x) => { const s = st.get(x.key); return !s.accepted && !s.inflight && !s.needsQa.length && s.attempts >= MAX_ATTEMPTS; }).length;
+  const exhausted = todo.filter((x) => { const s = st.get(x.key); return !s.accepted && !s.inflight && !s.needsQa.length && s.billed >= MAX_ATTEMPTS; }).length;
   const gen = rows().filter((r) => r.batch === "gen" && r.status === "ok").length;
   const qaFails = readJsonl(QA_LOG).filter((q) => !q.pass).length;
   console.log(JSON.stringify({ todo: todo.length, accepted: acc, exhausted, inflight: todo.filter((x) => st.get(x.key).inflight).length, needsQa: todo.reduce((a, x) => a + st.get(x.key).needsQa.length, 0), imagesGenerated: gen, qaFails, committedUsd: committedUsd(), listUsd: listUsd() }));
 }
 
-const run = { plan, submit, collect, qa, verdict, encode, apply, sheets, status }[cmd];
-if (!run) { console.error("usage: pipeline.mjs plan|submit|collect|qa|verdict|encode|apply|sheets|status"); process.exit(2); }
+const run = { plan, submit, generate, collect, qa, verdict, encode, apply, sheets, status }[cmd];
+if (!run) { console.error("usage: pipeline.mjs plan|submit|generate|collect|qa|verdict|encode|apply|sheets|status"); process.exit(2); }
 await run();

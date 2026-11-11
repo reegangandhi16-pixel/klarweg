@@ -61,7 +61,9 @@ export function stripHtml(s) {
 export function allStrings(o, out = []) {
   if (typeof o === "string") { if (o.trim()) out.push(stripHtml(o)); return out; }
   if (Array.isArray(o)) { for (const x of o) allStrings(x, out); return out; }
-  if (o && typeof o === "object") for (const v of Object.values(o)) allStrings(v, out);
+  // A vocab entry's optional `img` (path + English alt text) is never German
+  // text: skipped, so it cannot pull dictionary entries into the public file.
+  if (o && typeof o === "object") for (const [k, v] of Object.entries(o)) if (k !== "img") allStrings(v, out);
   return out;
 }
 export function homepageStrings(html) {

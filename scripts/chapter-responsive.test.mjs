@@ -233,7 +233,12 @@ test('258 chapter pages load the new asset versions and nothing else changed in 
   assert.equal(pages.length, 258);
   for (const f of pages) {
     const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
-    assert.ok(h.includes('href="chapter.css?v=22"') && h.includes('src="chapter-app.js?v=36"'), f);
+    // Visual Vocabulary pilot (PR #326): only A1·01 loads chapter.css?v=23 /
+    // chapter-app.js?v=37 so its returning visitors get the image renderer;
+    // the other 257 pages keep v=22/v=36 (same files, backward compatible).
+    // The next site-wide bump must go to v=24 / v=38 or higher.
+    const [cssV, appV] = f === 'chapter-a1-1-alphabet.html' ? ['23', '37'] : ['22', '36'];
+    assert.ok(h.includes('href="chapter.css?v=' + cssV + '"') && h.includes('src="chapter-app.js?v=' + appV + '"'), f);
     assert.ok(!h.includes('src="chapter-app.js?v=33"'), f);
     assert.ok(!h.includes('href="chapter.css?v=21"') && !h.includes('src="chapter-app.js?v=32"'), f);
     assert.ok(!h.includes('src="chapter-app.js?v=31"'), f);

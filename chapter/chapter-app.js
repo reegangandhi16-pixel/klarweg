@@ -1944,11 +1944,10 @@
     const pic = el('picture', {},
       formats.slice(0, -1).map((f) => el('source', { type: 'image/' + f, srcset: srcset(f), sizes })),
       img);
-    // Essential sizing is inline too, so a stale cached chapter.css (the shared
-    // stylesheet's ?v= is not bumped for this pilot) can never show an
-    // oversized image; chapter.css adds the finish.
-    const fig = el('figure', { class: 'vword-fig', style: 'aspect-ratio:' + ratioW + ' / ' + ratioH + ';width:100%;max-width:320px;margin:12px auto 4px;overflow:hidden' }, pic);
-    img.style.cssText = 'display:block;width:100%;height:100%;object-fit:cover';
+    // Pages that declare images load chapter.css/chapter-app.js under their own
+    // ?v= (A1·01: v=23/v=37), so sizing lives in chapter.css; only the
+    // per-image ratio is inline.
+    const fig = el('figure', { class: 'vword-fig', style: 'aspect-ratio:' + ratioW + ' / ' + ratioH }, pic);
     return fig;
   }
   function learnBtn(w) {

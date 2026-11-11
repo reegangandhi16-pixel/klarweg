@@ -15,11 +15,21 @@ other chapter. Not deployed.
 ```
 
 Renderer: `vocabFigure()` in `chapter/chapter-app.js`. Lazy-loaded, async decode,
-fixed 4:3 box (no layout shift), max 320 px wide. A missing file removes the
+fixed 4:3 box (no layout shift), max 320 px wide (256 px on phones). On
+multi-column layouts image cards reserve two headword lines, so images line up
+across a row even when a headword wraps (das Wasser, das Mädchen). A missing file removes the
 figure and the card falls back to text-only. `scripts/vocab-images.test.mjs`
 checks that every declared file exists, is ≤ 60 KB, has alt text, and is listed in
 `.github/pages-allowlist.txt`. `scripts/lexicon-split.mjs` ignores `img`, so
 English alt text never enters the public German dictionary.
+
+## Caching
+
+Production serves assets with `cache-control: max-age=14400` (4 h). The A1·01 page
+alone loads `chapter.css?v=23` and `chapter-app.js?v=37` (data `?v=8`), so returning
+visitors get the image renderer immediately. The other 257 chapter pages keep
+`v=22`/`v=36`; the new files are backward compatible for them. **The next site-wide
+bump must use v=24 / v=38 or higher** (enforced by `scripts/chapter-responsive.test.mjs`).
 
 ## Assets
 
@@ -71,3 +81,4 @@ the example sentence, the picture shows that sentence (Vater *liest*, Mädchen *
 |---|---|---|
 | Desktop | ![](before-desktop.webp) | ![](after-desktop.webp) |
 | Mobile 390 px | ![](before-mobile.webp) | ![](after-mobile.webp) |
+| Mobile 320 px | — | ![](after-320.webp) |

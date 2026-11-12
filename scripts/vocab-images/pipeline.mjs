@@ -291,8 +291,12 @@ async function collect() {
   const open = all.filter((r) => r.job && r.reserveUsd && !closed.has(r.job));
   const states = {};
   for (const j of open) {
-    const job = await gapi(`https://${REGION}-aiplatform.googleapis.com/v1/${j.job}`);
+    let job;
+    try { job = await gapi(`https://${REGION}-aiplatform.googleapis.com/v1/${j.job}`); }
+    catch (e) { states.unreachable = (states.unreachable || 0) + 1; console.error("job lookup failed (will retry next cycle):", j.job.slice(-8), String(e.message || e).slice(0, 120)); continue; }
     states[job.state] = (states[job.state] || 0) + 1;
+    // a collection interrupted half-way is resumed without logging any result twice
+    const already = new Set(all.filter((r) => r.ofJob === j.job && r.key).map((r) => r.key + "#" + r.attempt));
     if (!["JOB_STATE_SUCCEEDED", "JOB_STATE_FAILED", "JOB_STATE_CANCELLED", "JOB_STATE_PARTIALLY_SUCCEEDED", "JOB_STATE_EXPIRED"].includes(job.state)) continue;
     const files = execFileSync("gcloud", ["storage", "ls", "-r", j.gcs], { encoding: "utf8" }).split("\n").filter((l) => l.endsWith(".jsonl"));
     const seen = new Set(); let ok = 0, billedNoImg = 0, failed = 0;
@@ -302,6 +306,7 @@ async function collect() {
         const p = JSON.parse(line);
         const [key, attempt] = String(p.key).split("#");
         if (seen.has(p.key)) continue; seen.add(p.key);
+        if (already.has(p.key)) continue;                   // logged by an interrupted earlier collection
         const parts = p.response?.candidates?.[0]?.content?.parts || [];
         const img = parts.find((x) => x.inlineData);
         const outTok = p.response?.usageMetadata?.candidatesTokenCount || 0;

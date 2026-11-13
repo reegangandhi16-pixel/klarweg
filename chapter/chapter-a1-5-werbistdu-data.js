@@ -252,10 +252,14 @@ const CHAPTER = {
       conj: { praesens: 'kommt', praeteritum: 'kam', perfekt: 'ist gekommen' } },
     { de: 'wohnen', pos: 'verb', en: 'to live, reside', hi: 'रहना',
       ex: 'Ich wohne in Delhi.', exEn: 'I live in Delhi.',
-      conj: { praesens: 'wohnt', praeteritum: 'wohnte', perfekt: 'hat gewohnt' } },
+      conj: { praesens: 'wohnt', praeteritum: 'wohnte', perfekt: 'hat gewohnt' },
+      img: { src: '/api/media/vocab-img/fcf54eac696094742435', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person relaxing in a cosy living room.' }
+    },
     { de: 'fragen', pos: 'verb', en: 'to ask', hi: 'पूछना',
       ex: 'Ich frage: Wer bist du?', exEn: 'I ask: who are you?',
-      conj: { praesens: 'fragt', praeteritum: 'fragte', perfekt: 'hat gefragt' } },
+      conj: { praesens: 'fragt', praeteritum: 'fragte', perfekt: 'hat gefragt' },
+      img: { src: '/api/media/vocab-img/15393f480c098a8902ca', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student raising a hand to ask a question' }
+    },
     { de: 'antworten', pos: 'verb', en: 'to answer', hi: 'जवाब देना',
       ex: 'Anna antwortet schnell.', exEn: 'Anna answers quickly.',
       conj: { praesens: 'antwortet', praeteritum: 'antwortete', perfekt: 'hat geantwortet' },
@@ -312,9 +316,13 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/6747d4556438e7cbd9e0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A landline desktop telephone with a handset.' }
     },
     { de: 'Reiseführer', art: 'der', gender: 'm', plural: 'Reiseführer', pos: 'noun', en: 'travel guide (m)', hi: 'गाइड (पुरुष)',
-      ex: 'Der Reiseführer kommt aus Berlin.', exEn: 'The travel guide comes from Berlin.' },
+      ex: 'Der Reiseführer kommt aus Berlin.', exEn: 'The travel guide comes from Berlin.',
+      img: { src: '/api/media/vocab-img/7c13391611fb57656db3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A tour guide gesturing toward a historic monument' }
+    },
     { de: 'Reiseführerin', art: 'die', gender: 'f', plural: 'Reiseführerinnen', pos: 'noun', en: 'travel guide (f)', hi: 'गाइड (स्त्री)',
-      ex: 'Die Reiseführerin heißt Lena.', exEn: 'The travel guide is called Lena.' },
+      ex: 'Die Reiseführerin heißt Lena.', exEn: 'The travel guide is called Lena.',
+      img: { src: '/api/media/vocab-img/00578af446632366144a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'tour guide holding a flag' }
+    },
     { de: 'Personalpronomen', art: 'das', gender: 'n', plural: 'Personalpronomen', pos: 'noun', en: 'personal pronoun', hi: 'पुरुषवाचक सर्वनाम',
       ex: '"Ich" ist ein Personalpronomen.', exEn: '"Ich" is a personal pronoun.' },
     { de: 'Subjekt', art: 'das', gender: 'n', plural: 'Subjekte', pos: 'noun', en: 'subject', hi: 'कर्ता',

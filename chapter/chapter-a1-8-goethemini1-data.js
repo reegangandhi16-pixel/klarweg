@@ -203,7 +203,9 @@ const CHAPTER = {
     { de: 'Land', art: 'das', gender: 'n', plural: 'Länder', pos: 'noun', en: 'country', hi: 'देश',
       ex: 'Aus welchem Land kommst du?', exEn: 'Which country do you come from?' },
     { de: 'Stadt', art: 'die', gender: 'f', plural: 'Städte', pos: 'noun', en: 'city', hi: 'शहर',
-      ex: 'Delhi ist eine große Stadt.', exEn: 'Delhi is a big city.' },
+      ex: 'Delhi ist eine große Stadt.', exEn: 'Delhi is a big city.',
+      img: { src: '/api/media/vocab-img/c14e0f56239374ac2e06', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'city skyline with buildings and streets' }
+    },
     { de: 'Text', art: 'der', gender: 'm', plural: 'Texte', pos: 'noun', en: 'text', hi: 'पाठ',
       ex: 'Lies den Text laut.', exEn: 'Read the text aloud.' },
     { de: 'Deutsche', art: 'der/die', pos: 'noun', en: 'German (person)', hi: 'जर्मन (व्यक्ति)',
@@ -365,7 +367,9 @@ const CHAPTER = {
     },
     { de: 'verabschieden', pos: 'verb', en: 'to say goodbye', hi: 'विदा लेना',
       ex: 'Wir verabschieden uns mit "Tschüs".', exEn: 'We say goodbye with "Tschüs".',
-      conj: { praesens: 'verabschiedet', praeteritum: 'verabschiedete', perfekt: 'hat verabschiedet' } },
+      conj: { praesens: 'verabschiedet', praeteritum: 'verabschiedete', perfekt: 'hat verabschiedet' },
+      img: { src: '/api/media/vocab-img/2d1ae4e921139a64cea9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends waving goodbye at train platform' }
+    },
     { de: 'tauschen', pos: 'verb', en: 'to swap, exchange', hi: 'अदला-बदली करना',
       ex: 'Tauscht die Rollen.', exEn: 'Swap roles.',
       conj: { praesens: 'tauscht', praeteritum: 'tauschte', perfekt: 'hat getauscht' },

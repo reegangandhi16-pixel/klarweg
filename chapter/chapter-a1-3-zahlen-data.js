@@ -244,7 +244,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/7ad0c8f61d82b230bac8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open hand showing five fingers' }
     },
     { de: 'sechs', pos: 'number', en: 'six', hi: 'छह',
-      ex: 'Sechs Bücher sind auf dem Tisch.', exEn: 'Six books are on the table.' },
+      ex: 'Sechs Bücher sind auf dem Tisch.', exEn: 'Six books are on the table.',
+      img: { src: '/api/media/vocab-img/d012a78c90a98819d2c1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Six books standing neatly on a shelf' }
+    },
     { de: 'sieben', pos: 'number', en: 'seven', hi: 'सात',
       ex: 'Eine Woche hat sieben Tage.', exEn: 'A week has seven days.' },
     { de: 'acht', pos: 'number', en: 'eight', hi: 'आठ',

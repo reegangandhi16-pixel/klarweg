@@ -228,25 +228,25 @@ const CHAPTER = {
     // ===== Core Active =====
     { de: 'bleiben', pos: 'verb', en: 'to stay', hi: 'रुकना', ex: 'Ich bin zu Hause geblieben.', exEn: 'I stayed at home.', conj: { praesens: 'bleibt', praeteritum: 'blieb', perfekt: 'ist geblieben' } },
     { de: 'Flug', art: 'der', gender: 'm', plural: 'Flüge', pos: 'noun', en: 'flight', hi: 'उड़ान', ex: 'Der Flug war kurz.', exEn: 'The flight was short.' },
-    { de: 'Reise', art: 'die', gender: 'f', plural: 'Reisen', pos: 'noun', en: 'trip, journey', hi: 'यात्रा', ex: 'Die Reise war schön.', exEn: 'The trip was lovely.' },
+    { de: 'Reise', art: 'die', gender: 'f', plural: 'Reisen', pos: 'noun', en: 'trip, journey', hi: 'यात्रा', ex: 'Die Reise war schön.', exEn: 'The trip was lovely.', img: { src: '/api/media/vocab-img/9653a0c9d92dd4d0907f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'travel suitcase with hat and camera' } },
     { de: 'fliegen', pos: 'verb', en: 'to fly', hi: 'उड़ना', ex: 'Ich bin nach Indien geflogen.', exEn: 'I flew to India.', conj: { praesens: 'fliegt', praeteritum: 'flog', perfekt: 'ist geflogen' } },
     { de: 'passieren', pos: 'verb', en: 'to happen', hi: 'होना', ex: 'Was ist passiert?', exEn: 'What happened?', conj: { praesens: 'passiert', praeteritum: 'passierte', perfekt: 'ist passiert' } },
     // ===== Active Support =====
-    { de: 'abfahren', pos: 'verb', en: 'to depart, leave', hi: 'रवाना होना', ex: 'Der Zug ist um acht abgefahren.', exEn: 'The train departed at eight.', conj: { praesens: 'fährt ab', praeteritum: 'fuhr ab', perfekt: 'ist abgefahren' } },
+    { de: 'abfahren', pos: 'verb', en: 'to depart, leave', hi: 'रवाना होना', ex: 'Der Zug ist um acht abgefahren.', exEn: 'The train departed at eight.', conj: { praesens: 'fährt ab', praeteritum: 'fuhr ab', perfekt: 'ist abgefahren' }, img: { src: '/api/media/vocab-img/1b3f9f8d16b070a5c94d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A train departing from a station platform.' } },
     { de: 'ankommen', pos: 'verb', en: 'to arrive', hi: 'पहुँचना', ex: 'Wir sind spät angekommen.', exEn: 'We arrived late.', conj: { praesens: 'kommt an', praeteritum: 'kam an', perfekt: 'ist angekommen' } },
     { de: 'ausgehen', pos: 'verb', en: 'to go out', hi: 'बाहर जाना', ex: 'Ich bin am Abend ausgegangen.', exEn: 'I went out in the evening.', conj: { praesens: 'geht aus', praeteritum: 'ging aus', perfekt: 'ist ausgegangen' } },
     { de: 'Angebot', art: 'das', gender: 'n', plural: 'Angebote', pos: 'noun', en: 'offer, deal', hi: 'पेशकश', ex: 'Das Angebot war günstig.', exEn: 'The offer was cheap.' },
     { de: 'Ausland', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'abroad', hi: 'विदेश', ex: 'Ich bin ins Ausland geflogen.', exEn: 'I flew abroad.' },
     { de: 'laufen', pos: 'verb', en: 'to run; to go (well)', hi: 'दौड़ना; चलना', ex: 'Die Reise ist gut gelaufen.', exEn: 'The trip went well.', conj: { praesens: 'läuft', praeteritum: 'lief', perfekt: 'ist gelaufen' } },
-    { de: 'losfahren', pos: 'verb', en: 'to set off', hi: 'निकलना', ex: 'Wir sind früh losgefahren.', exEn: 'We set off early.', conj: { praesens: 'fährt los', praeteritum: 'fuhr los', perfekt: 'ist losgefahren' } },
+    { de: 'losfahren', pos: 'verb', en: 'to set off', hi: 'निकलना', ex: 'Wir sind früh losgefahren.', exEn: 'We set off early.', conj: { praesens: 'fährt los', praeteritum: 'fuhr los', perfekt: 'ist losgefahren' }, img: { src: '/api/media/vocab-img/3dec5898a584927212e7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A car driving forward from a driveway' } },
     { de: 'nehmen', pos: 'verb', en: 'to take (e.g. holiday)', hi: 'लेना', ex: 'Ich habe Urlaub genommen.', exEn: 'I took holiday.', conj: { praesens: 'nimmt', praeteritum: 'nahm', perfekt: 'hat genommen' } },
     { de: 'werden', pos: 'verb', en: 'to become, turn', hi: 'बनना', ex: 'Es ist spät geworden.', exEn: 'It got late.', conj: { praesens: 'wird', praeteritum: 'wurde', perfekt: 'ist geworden' } },
     { de: 'wirklich', pos: 'adverb', en: 'really', hi: 'सचमुच', ex: 'Es war wirklich schön.', exEn: 'It was really lovely.' },
     { de: 'zurück', pos: 'adverb', en: 'back', hi: 'वापस', ex: 'Ich bin schon zurück.', exEn: 'I am back already.' },
     { de: 'zurückfahren', pos: 'verb', en: 'to drive/travel back', hi: 'वापस जाना', ex: 'Ich bin am Sonntag zurückgefahren.', exEn: 'I travelled back on Sunday.', conj: { praesens: 'fährt zurück', praeteritum: 'fuhr zurück', perfekt: 'ist zurückgefahren' } },
     // ===== Passive =====
-    { de: 'einschlafen', pos: 'verb', en: 'to fall asleep', hi: 'सो जाना', ex: 'Ich bin früh eingeschlafen.', exEn: 'I fell asleep early.', conj: { praesens: 'schläft ein', praeteritum: 'schlief ein', perfekt: 'ist eingeschlafen' } },
-    { de: 'wecken', pos: 'verb', en: 'to wake (someone)', hi: 'जगाना', ex: 'Der Wecker hat mich geweckt.', exEn: 'The alarm woke me.', conj: { praesens: 'weckt', praeteritum: 'weckte', perfekt: 'hat geweckt' } },
+    { de: 'einschlafen', pos: 'verb', en: 'to fall asleep', hi: 'सो जाना', ex: 'Ich bin früh eingeschlafen.', exEn: 'I fell asleep early.', conj: { praesens: 'schläft ein', praeteritum: 'schlief ein', perfekt: 'ist eingeschlafen' }, img: { src: '/api/media/vocab-img/79b5c6076dcbf90072b9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person falling asleep in bed.' } },
+    { de: 'wecken', pos: 'verb', en: 'to wake (someone)', hi: 'जगाना', ex: 'Der Wecker hat mich geweckt.', exEn: 'The alarm woke me.', conj: { praesens: 'weckt', praeteritum: 'weckte', perfekt: 'hat geweckt' }, img: { src: '/api/media/vocab-img/ce487cebff2f8e72a5af', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person waking up in bed next to an alarm clock.' } },
     // ===== Reference / System =====
     { de: 'Ortsveränderung', art: 'die', gender: 'f', plural: 'Ortsveränderungen', pos: 'noun', en: 'change of location', hi: 'स्थान परिवर्तन', ex: 'Bei einer Ortsveränderung nimmt man sein.', exEn: 'For a change of location you use sein.' }
   ],

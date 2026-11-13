@@ -259,11 +259,15 @@ const CHAPTER = {
     { de: 'Beispiel', art: 'das', gender: 'n', plural: 'Beispiele', pos: 'noun', en: 'example', hi: 'उदाहरण',
       ex: 'Das ist ein gutes Beispiel.', exEn: 'That is a good example.' },
     { de: 'Foto', art: 'das', gender: 'n', plural: 'Fotos', pos: 'noun', en: 'photo', hi: 'फ़ोटो',
-      ex: 'Das Foto ist schön.', exEn: 'The photo is beautiful.' },
+      ex: 'Das Foto ist schön.', exEn: 'The photo is beautiful.',
+      img: { src: '/api/media/vocab-img/99229c95f83b32c0b707', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A printed photograph of a mountain' }
+    },
     { de: 'Wörterbuch', art: 'das', gender: 'n', plural: 'Wörterbücher', pos: 'noun', en: 'dictionary', hi: 'शब्दकोश',
       ex: 'Das Wörterbuch hat viele Wörter.', exEn: 'The dictionary has many words.' },
     { de: 'Schlüssel', art: 'der', gender: 'm', plural: 'Schlüssel', pos: 'noun', en: 'key', hi: 'चाबी',
-      ex: 'Der Schlüssel ist klein.', exEn: 'The key is small.' },
+      ex: 'Der Schlüssel ist klein.', exEn: 'The key is small.',
+      img: { src: '/api/media/vocab-img/bfefb585d77e844be380', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A brass door key on a smooth surface' }
+    },
     { de: 'Karte', art: 'die', gender: 'f', plural: 'Karten', pos: 'noun', en: 'card', hi: 'कार्ड',
       ex: 'Die Karte ist neu.', exEn: 'The card is new.' },
     { de: 'leer', pos: 'adjective', en: 'empty', hi: 'खाली',
@@ -282,7 +286,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/2392a14aafa1a5f3934d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A slice of buttered bread on a cutting board' }
     },
     { de: 'Experiment', art: 'das', gender: 'n', plural: 'Experimente', pos: 'noun', en: 'experiment', hi: 'प्रयोग',
-      ex: 'Das Experiment ist interessant.', exEn: 'The experiment is interesting.' },
+      ex: 'Das Experiment ist interessant.', exEn: 'The experiment is interesting.',
+      img: { src: '/api/media/vocab-img/abd5cd0af911ff8e2fea', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'laboratory glassware for an experiment' }
+    },
     { de: 'Gästebuch', art: 'das', gender: 'n', plural: 'Gästebücher', pos: 'noun', en: 'guestbook', hi: 'अतिथि-पुस्तिका',
       ex: 'Schreib bitte ins Gästebuch.', exEn: 'Please write in the guestbook.',
       img: { src: '/api/media/vocab-img/b4765f1aba09c226d570', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open guestbook with a pen' }
@@ -306,9 +312,13 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/1992e3ace018826da587', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A colorful poster hanging on a wall' }
     },
     { de: 'Würstchen', art: 'das', gender: 'n', plural: 'Würstchen', pos: 'noun', en: 'small sausage', hi: 'सॉसेज',
-      ex: 'Das Würstchen ist heiß.', exEn: 'The sausage is hot.' },
+      ex: 'Das Würstchen ist heiß.', exEn: 'The sausage is hot.',
+      img: { src: '/api/media/vocab-img/eeeec178580ee20fe308', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A small sausage on a plate with mustard' }
+    },
     { de: 'Würstel', art: 'das', gender: 'n', plural: 'Würstel', pos: 'noun', en: 'sausage (Austrian)', hi: 'सॉसेज (ऑस्ट्रियन)',
-      ex: 'In Wien sagt man "das Würstel".', exEn: 'In Vienna you say "das Würstel".' },
+      ex: 'In Wien sagt man "das Würstel".', exEn: 'In Vienna you say "das Würstel".',
+      img: { src: '/api/media/vocab-img/29da42627eca6e18c57e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two slender sausages on a snack tray with mustard' }
+    },
     { de: 'Bericht', art: 'der', gender: 'm', plural: 'Berichte', pos: 'noun', en: 'report', hi: 'रिपोर्ट',
       ex: 'Der Bericht ist fertig.', exEn: 'The report is finished.' },
     { de: 'Blog', art: 'der', gender: 'm', plural: 'Blogs', pos: 'noun', en: 'blog', hi: 'ब्लॉग',
@@ -324,7 +334,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/0199755e54ced0ce0811', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A teal wheeled suitcase with an extended handle.' }
     },
     { de: 'Stapel', art: 'der', gender: 'm', plural: 'Stapel', pos: 'noun', en: 'pile, deck', hi: 'ढेर',
-      ex: 'Der Stapel Karten ist hoch.', exEn: 'The pile of cards is high.' },
+      ex: 'Der Stapel Karten ist hoch.', exEn: 'The pile of cards is high.',
+      img: { src: '/api/media/vocab-img/c82914bbc55f5d6aef77', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A neat stack of cards on a table.' }
+    },
     { de: 'Kranke', art: 'der/die', gender: 'm', plural: 'Kranken', pos: 'noun', en: 'sick person', hi: 'बीमार व्यक्ति',
       ex: 'Der Kranke braucht Ruhe.', exEn: 'The sick person needs rest.',
       img: { src: '/api/media/vocab-img/13d5ef53eb61107b0b2d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sick person resting in bed' }
@@ -336,7 +348,9 @@ const CHAPTER = {
     { de: 'Autobahn', art: 'die', gender: 'f', plural: 'Autobahnen', pos: 'noun', en: 'highway', hi: 'राजमार्ग',
       ex: 'Die Autobahn ist frei.', exEn: 'The highway is clear.' },
     { de: 'Flasche', art: 'die', gender: 'f', plural: 'Flaschen', pos: 'noun', en: 'bottle', hi: 'बोतल',
-      ex: 'Die Flasche ist leer.', exEn: 'The bottle is empty.' },
+      ex: 'Die Flasche ist leer.', exEn: 'The bottle is empty.',
+      img: { src: '/api/media/vocab-img/416645d17628177effee', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A glass bottle with a cork stopper.' }
+    },
     { de: 'Homepage', art: 'die', gender: 'f', plural: 'Homepages', pos: 'noun', en: 'homepage', hi: 'होमपेज',
       ex: 'Die Homepage ist neu.', exEn: 'The homepage is new.' },
     { de: 'Methode', art: 'die', gender: 'f', plural: 'Methoden', pos: 'noun', en: 'method', hi: 'तरीका',
@@ -344,14 +358,20 @@ const CHAPTER = {
     { de: 'Mindmap', art: 'die', gender: 'f', plural: 'Mindmaps', pos: 'noun', en: 'mind map', hi: 'माइंड मैप',
       ex: 'Die Mindmap zeigt die Artikel.', exEn: 'The mind map shows the articles.' },
     { de: 'Nudel', art: 'die', gender: 'f', plural: 'Nudeln', pos: 'noun', en: 'noodle', hi: 'नूडल',
-      ex: 'Die Nudel ist lang.', exEn: 'The noodle is long.' },
+      ex: 'Die Nudel ist lang.', exEn: 'The noodle is long.',
+      img: { src: '/api/media/vocab-img/cd4c65629a07bce1485a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A long noodle strand lifted on a fork' }
+    },
     { de: 'Zeichnung', art: 'die', gender: 'f', plural: 'Zeichnungen', pos: 'noun', en: 'drawing', hi: 'चित्र',
-      ex: 'Die Zeichnung ist schön.', exEn: 'The drawing is beautiful.' },
+      ex: 'Die Zeichnung ist schön.', exEn: 'The drawing is beautiful.',
+      img: { src: '/api/media/vocab-img/6708bdf397e9ad4efc30', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A pencil drawing of a tree on paper' }
+    },
     { de: 'eigene/eigener', pos: 'adjective', en: 'own', hi: 'अपना',
       ex: 'Mach deine eigene Mindmap.', exEn: 'Make your own mind map.' },
     { de: 'einfallen', pos: 'verb', en: 'to think of, occur to', hi: 'याद आना / सूझना',
       ex: 'Mir fällt das Wort ein.', exEn: 'The word comes to me.',
-      conj: { praesens: 'fällt ein', praeteritum: 'fiel ein', perfekt: 'ist eingefallen' } },
+      conj: { praesens: 'fällt ein', praeteritum: 'fiel ein', perfekt: 'ist eingefallen' },
+      img: { src: '/api/media/vocab-img/71d5b6ca0fcacc77fe88', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person having a sudden idea.' }
+    },
     { de: 'recherchieren', pos: 'verb', en: 'to research', hi: 'खोज करना',
       ex: 'Ich recherchiere im Blog.', exEn: 'I research in the blog.',
       conj: { praesens: 'recherchiert', praeteritum: 'recherchierte', perfekt: 'hat recherchiert' } },
@@ -405,7 +425,9 @@ const CHAPTER = {
       conj: { praesens: 'unterstreicht', praeteritum: 'unterstrich', perfekt: 'hat unterstrichen' } },
     { de: 'vergleichen', pos: 'verb', en: 'to compare', hi: 'तुलना करना',
       ex: 'Vergleiche die Artikel.', exEn: 'Compare the articles.',
-      conj: { praesens: 'vergleicht', praeteritum: 'verglich', perfekt: 'hat verglichen' } },
+      conj: { praesens: 'vergleicht', praeteritum: 'verglich', perfekt: 'hat verglichen' },
+      img: { src: '/api/media/vocab-img/0587f22802e08a83f402', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person comparing a green and red apple' }
+    },
     { de: 'zuordnen', pos: 'verb', en: 'to match, assign', hi: 'मिलाना',
       ex: 'Ordne jedem Nomen den Artikel zu.', exEn: 'Match each noun to its article.',
       conj: { praesens: 'ordnet zu', praeteritum: 'ordnete zu', perfekt: 'hat zugeordnet' } },

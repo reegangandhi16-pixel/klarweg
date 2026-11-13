@@ -275,10 +275,14 @@ const CHAPTER = {
       conj: { praesens: 'mischt', praeteritum: 'mischte', perfekt: 'hat gemischt' } },
     { de: 'passend', pos: 'adjective', en: 'matching, suitable', hi: 'उपयुक्त',
       ex: 'Finde das passende Fragewort.', exEn: 'Find the matching question word.',
-      compare: { comparative: 'passender', superlative: 'am passendsten' } },
+      compare: { comparative: 'passender', superlative: 'am passendsten' },
+      img: { src: '/api/media/vocab-img/4f38a98456bef04944d0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand placing matching puzzle block' }
+    },
     { de: 'ähnlich', pos: 'adjective', en: 'similar', hi: 'समान',
       ex: '"wo" und "woher" sind ähnlich.', exEn: '"wo" and "woher" are similar.',
-      compare: { comparative: 'ähnlicher', superlative: 'am ähnlichsten' } },
+      compare: { comparative: 'ähnlicher', superlative: 'am ähnlichsten' },
+      img: { src: '/api/media/vocab-img/e58478dd831b85904b15', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two similar teal ceramic mugs side by side.' }
+    },
     // — Reference / System (classroom instruction verbs & terms) —
     { de: 'ankreuzen', pos: 'verb', en: 'to tick, mark', hi: 'निशान लगाना',
       ex: 'Kreuze die richtige Antwort an.', exEn: 'Tick the correct answer.',
@@ -300,10 +304,14 @@ const CHAPTER = {
       conj: { praesens: 'nummeriert', praeteritum: 'nummerierte', perfekt: 'hat nummeriert' } },
     { de: 'ordnen', pos: 'verb', en: 'to arrange, order', hi: 'क्रम में लगाना',
       ex: 'Ordne die Wörter.', exEn: 'Arrange the words.',
-      conj: { praesens: 'ordnet', praeteritum: 'ordnete', perfekt: 'hat geordnet' } },
+      conj: { praesens: 'ordnet', praeteritum: 'ordnete', perfekt: 'hat geordnet' },
+      img: { src: '/api/media/vocab-img/5aef7a2f78cc728e655d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hands organising books by height on shelf' }
+    },
     { de: 'würfeln', pos: 'verb', en: 'to roll the dice', hi: 'पासा फेंकना',
       ex: 'Würfle und bilde eine Frage.', exEn: 'Roll the dice and form a question.',
-      conj: { praesens: 'würfelt', praeteritum: 'würfelte', perfekt: 'hat gewürfelt' } },
+      conj: { praesens: 'würfelt', praeteritum: 'würfelte', perfekt: 'hat gewürfelt' },
+      img: { src: '/api/media/vocab-img/4dd006bfadab09026f18', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand rolling two dice on a table' }
+    },
     { de: 'zeichnen', pos: 'verb', en: 'to draw', hi: 'चित्र बनाना',
       ex: 'Zeichne ein Symbol für die Frage.', exEn: 'Draw a symbol for the question.',
       conj: { praesens: 'zeichnet', praeteritum: 'zeichnete', perfekt: 'hat gezeichnet' },

@@ -239,7 +239,7 @@ const CHAPTER = {
     { de: 'war', pos: 'verb', en: 'was, were (sein · Präteritum)', hi: 'था / थी / थे', ex: 'Ich war zu Hause.', exEn: 'I was at home.' },
     { de: 'warst', pos: 'verb', en: 'were (du · sein · Präteritum)', hi: 'तुम थे', ex: 'Wo warst du?', exEn: 'Where were you?' },
     { de: 'waren', pos: 'verb', en: 'were (wir/sie · sein · Präteritum)', hi: 'हम/वे थे', ex: 'Meine Eltern waren hier.', exEn: 'My parents were here.' },
-    { de: 'Besuch', art: 'der', gender: 'm', plural: 'Besuche', pos: 'noun', en: 'visit, guest(s)', hi: 'मुलाक़ात, मेहमान', ex: 'Der Besuch war sehr nett.', exEn: 'The visit was very nice.' },
+    { de: 'Besuch', art: 'der', gender: 'm', plural: 'Besuche', pos: 'noun', en: 'visit, guest(s)', hi: 'मुलाक़ात, मेहमान', ex: 'Der Besuch war sehr nett.', exEn: 'The visit was very nice.', img: { src: '/api/media/vocab-img/0f7fbd50c3f1d0b45309', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A host welcoming two guests at the doorway' } },
     { de: 'früher', pos: 'adverb', en: 'formerly, in the past', hi: 'पहले', ex: 'Früher hatte ich mehr Zeit.', exEn: 'In the past I had more time.' },
     { de: 'gestern', pos: 'adverb', en: 'yesterday', hi: 'कल (बीता हुआ)', ex: 'Gestern war ich zu Hause.', exEn: 'Yesterday I was at home.' },
     { de: 'vorgestern', pos: 'adverb', en: 'the day before yesterday', hi: 'परसों (बीता हुआ)', ex: 'Vorgestern hatten wir Besuch.', exEn: 'The day before yesterday we had guests.' },

@@ -217,18 +217,18 @@ const CHAPTER = {
     // ===== Core Active (irregular verbs) =====
     { de: 'fahren', pos: 'verb', en: 'to drive, go (by vehicle)', hi: 'गाड़ी से जाना', ex: 'Ich fahre mit dem Bus zur Uni.', exEn: 'I go to uni by bus.', conj: { praesens: 'fährt', praeteritum: 'fuhr', perfekt: 'ist gefahren' } },
     { de: 'geben', pos: 'verb', en: 'to give; (es gibt) there is', hi: 'देना; (es gibt) होना', ex: 'Ich gebe dir ein Stück Kuchen. Es gibt Kaffee.', exEn: 'I give you a piece of cake. There is coffee.', conj: { praesens: 'gibt', praeteritum: 'gab', perfekt: 'hat gegeben' } },
-    { de: 'schlafen', pos: 'verb', en: 'to sleep', hi: 'सोना', ex: 'Max schläft zu wenig.', exEn: 'Max sleeps too little.', conj: { praesens: 'schläft', praeteritum: 'schlief', perfekt: 'hat geschlafen' } },
+    { de: 'schlafen', pos: 'verb', en: 'to sleep', hi: 'सोना', ex: 'Max schläft zu wenig.', exEn: 'Max sleeps too little.', conj: { praesens: 'schläft', praeteritum: 'schlief', perfekt: 'hat geschlafen' }, img: { src: '/api/media/vocab-img/651b11812a8f5f58c082', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person sleeping peacefully in bed' } },
     { de: 'sehen', pos: 'verb', en: 'to see', hi: 'देखना', ex: 'Siehst du die Bibliothek?', exEn: 'Do you see the library?', conj: { praesens: 'sieht', praeteritum: 'sah', perfekt: 'hat gesehen' } },
-    { de: 'treffen', pos: 'verb', en: 'to meet', hi: 'मिलना', ex: 'Ich treffe Max in der Mensa.', exEn: 'I meet Max in the canteen.', conj: { praesens: 'trifft', praeteritum: 'traf', perfekt: 'hat getroffen' } },
+    { de: 'treffen', pos: 'verb', en: 'to meet', hi: 'मिलना', ex: 'Ich treffe Max in der Mensa.', exEn: 'I meet Max in the canteen.', conj: { praesens: 'trifft', praeteritum: 'traf', perfekt: 'hat getroffen' }, img: { src: '/api/media/vocab-img/a45a5815a1161295c44d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends greeting each other outside a cafe' } },
     // ===== Active Support =====
     { de: 'besuchen', pos: 'verb', en: 'to visit', hi: 'मिलने जाना', ex: 'Ich besuche die Bibliothek.', exEn: 'I visit the library.', conj: { praesens: 'besucht', praeteritum: 'besuchte', perfekt: 'hat besucht' } },
-    { de: 'Bibliothek', art: 'die', gender: 'f', plural: 'Bibliotheken', pos: 'noun', en: 'library', hi: 'पुस्तकालय', ex: 'Die Bibliothek ist groß.', exEn: 'The library is big.' },
-    { de: 'Mensa', art: 'die', gender: 'f', plural: 'Mensen', pos: 'noun', en: 'canteen, refectory', hi: 'कैंटीन', ex: 'Wir essen in der Mensa.', exEn: 'We eat in the canteen.' },
-    { de: 'Uni', art: 'die', gender: 'f', plural: 'Unis', pos: 'noun', en: 'uni, university', hi: 'विश्वविद्यालय', ex: 'Ich fahre zur Uni.', exEn: 'I go to uni.' },
+    { de: 'Bibliothek', art: 'die', gender: 'f', plural: 'Bibliotheken', pos: 'noun', en: 'library', hi: 'पुस्तकालय', ex: 'Die Bibliothek ist groß.', exEn: 'The library is big.', img: { src: '/api/media/vocab-img/4bb7f46e9fa8bcde0303', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Library with tall bookshelves and study tables' } },
+    { de: 'Mensa', art: 'die', gender: 'f', plural: 'Mensen', pos: 'noun', en: 'canteen, refectory', hi: 'कैंटीन', ex: 'Wir essen in der Mensa.', exEn: 'We eat in the canteen.', img: { src: '/api/media/vocab-img/e5600a72d96dd26b4541', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'University canteen with food counter and dining tables.' } },
+    { de: 'Uni', art: 'die', gender: 'f', plural: 'Unis', pos: 'noun', en: 'uni, university', hi: 'विश्वविद्यालय', ex: 'Ich fahre zur Uni.', exEn: 'I go to uni.', img: { src: '/api/media/vocab-img/4fc1a31b599e19a4ce87', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A university building with pillars and steps.' } },
     { de: 'waschen', pos: 'verb', en: 'to wash', hi: 'धोना', ex: 'Ich wasche die Hände.', exEn: 'I wash my hands.', conj: { praesens: 'wäscht', praeteritum: 'wusch', perfekt: 'hat gewaschen' } },
     // ===== Passive =====
     { de: 'Unicafé', art: 'das', gender: 'n', plural: 'Unicafés', pos: 'noun', en: 'uni café', hi: 'यूनि कैफ़े', ex: 'Ich lese im Unicafé.', exEn: 'I read in the uni café.' },
-    { de: 'Zeitung', art: 'die', gender: 'f', plural: 'Zeitungen', pos: 'noun', en: 'newspaper', hi: 'अख़बार', ex: 'Anna liest die Zeitung.', exEn: 'Anna reads the newspaper.' },
+    { de: 'Zeitung', art: 'die', gender: 'f', plural: 'Zeitungen', pos: 'noun', en: 'newspaper', hi: 'अख़बार', ex: 'Anna liest die Zeitung.', exEn: 'Anna reads the newspaper.', img: { src: '/api/media/vocab-img/59f397d20ad30f0e3898', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A folded newspaper on a table' } },
     // ===== Reference / System =====
     { de: 'unregelmäßig', pos: 'adjective', en: 'irregular', hi: 'अनियमित', ex: 'Fahren ist ein unregelmäßiges Verb.', exEn: 'Fahren is an irregular verb.' }
   ],

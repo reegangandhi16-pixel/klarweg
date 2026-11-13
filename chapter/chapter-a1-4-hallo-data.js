@@ -238,9 +238,13 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/79100eb2b9b0c02b8741', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person stretching beside a sunlit morning window.' }
     },
     { de: 'guten Tag', pos: 'greeting', en: 'good day, hello', hi: 'नमस्कार',
-      ex: 'Guten Tag, Herr Wolan.', exEn: 'Good day, Mr Wolan.' },
+      ex: 'Guten Tag, Herr Wolan.', exEn: 'Good day, Mr Wolan.',
+      img: { src: '/api/media/vocab-img/cd5878e074ca5cdf048e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people exchanging a polite greeting on the street.' }
+    },
     { de: 'guten Abend', pos: 'greeting', en: 'good evening', hi: 'शुभ संध्या',
-      ex: 'Guten Abend! Willkommen.', exEn: 'Good evening! Welcome.' },
+      ex: 'Guten Abend! Willkommen.', exEn: 'Good evening! Welcome.',
+      img: { src: '/api/media/vocab-img/3b14442e64f2a1f1e9c7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A host welcoming a guest at twilight' }
+    },
     { de: 'gute Nacht', pos: 'greeting', en: 'good night', hi: 'शुभ रात्रि',
       ex: 'Gute Nacht, bis morgen!', exEn: 'Good night, see you tomorrow!',
       img: { src: '/api/media/vocab-img/31c1972763092ea0fc5f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person in bed turning off a lamp' }
@@ -264,7 +268,9 @@ const CHAPTER = {
     { de: 'bis später', pos: 'phrase', en: 'see you later', hi: 'बाद में मिलेंगे',
       ex: 'Ich gehe jetzt. Bis später!', exEn: 'I am going now. See you later!' },
     { de: 'willkommen', pos: 'adjective', en: 'welcome', hi: 'स्वागत है',
-      ex: 'Herzlich willkommen in der Schule!', exEn: 'A warm welcome to the school!' },
+      ex: 'Herzlich willkommen in der Schule!', exEn: 'A warm welcome to the school!',
+      img: { src: '/api/media/vocab-img/8a435029457e16a457e3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Host greeting a visitor at the door.' }
+    },
     { de: 'danke', pos: 'interjection', en: 'thank you', hi: 'धन्यवाद',
       ex: 'Danke, das ist sehr nett.', exEn: 'Thank you, that is very kind.' },
     { de: 'danke schön', pos: 'phrase', en: 'thank you (kindly)', hi: 'बहुत धन्यवाद',
@@ -295,7 +301,9 @@ const CHAPTER = {
       ex: 'So, Herr Wolan, fangen wir an.', exEn: 'So, Mr Wolan, let us begin.' },
     { de: 'gehen', pos: 'verb', en: 'to go', hi: 'जाना',
       ex: 'Ich gehe jetzt. Tschüs!', exEn: 'I am going now. Bye!',
-      conj: { praesens: 'geht', praeteritum: 'ging', perfekt: 'ist gegangen' } },
+      conj: { praesens: 'geht', praeteritum: 'ging', perfekt: 'ist gegangen' },
+      img: { src: '/api/media/vocab-img/6a1af5874b395f50febc', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person walking away and waving goodbye' }
+    },
     { de: 'das', pos: 'pronoun', en: 'this, that', hi: 'यह / वह',
       ex: 'Das ist Anna.', exEn: 'This is Anna.' },
     { de: 'Frau', art: 'die', gender: 'f', plural: 'Frauen', pos: 'noun', en: 'Mrs, Ms; woman', hi: 'श्रीमती / महिला',

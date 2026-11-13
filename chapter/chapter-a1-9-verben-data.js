@@ -192,7 +192,9 @@ const CHAPTER = {
     },
     { de: 'lernen', pos: 'verb', en: 'to learn', hi: 'सीखना',
       ex: 'Ich lerne Deutsch.', exEn: 'I learn German.',
-      conj: { praesens: 'lernt', praeteritum: 'lernte', perfekt: 'hat gelernt' } },
+      conj: { praesens: 'lernt', praeteritum: 'lernte', perfekt: 'hat gelernt' },
+      img: { src: '/api/media/vocab-img/59208f7f4551f4b5f4d9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student studying at a desk with books' }
+    },
     { de: 'machen', pos: 'verb', en: 'to do, to make', hi: 'करना / बनाना',
       ex: 'Was machst du morgen?', exEn: 'What are you doing tomorrow?',
       conj: { praesens: 'macht', praeteritum: 'machte', perfekt: 'hat gemacht' } },

@@ -217,7 +217,9 @@ const CHAPTER = {
   // ---------- Vocabulary review (~32 items — no new words, from Ch.1–5) ----------
   vocab: [
     { de: 'hoffen', pos: 'verb', en: 'to hope', hi: 'उम्मीद करना', ex: 'Ich hoffe, die Prüfung zu bestehen.', exEn: 'I hope to pass the exam.',
-      conj: { praesens: 'hofft', praeteritum: 'hoffte', perfekt: 'hat gehofft' } },
+      conj: { praesens: 'hofft', praeteritum: 'hoffte', perfekt: 'hat gehofft' },
+      img: { src: '/api/media/vocab-img/1266fe5b1216b6cc111a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person clasping their hands in hopeful anticipation' }
+    },
     { de: 'versuchen', pos: 'verb', en: 'to try', hi: 'कोशिश करना', ex: 'Ich versuche, ruhig zu bleiben.', exEn: 'I\'m trying to stay calm.',
       conj: { praesens: 'versucht', praeteritum: 'versuchte', perfekt: 'hat versucht' } },
     { de: 'vorhaben', pos: 'verb', en: 'to plan, intend', hi: 'योजना बनाना', ex: 'Ich habe vor, morgen zu üben.', exEn: 'I\'m planning to practise tomorrow.',
@@ -236,12 +238,12 @@ const CHAPTER = {
     { de: 'wegen', pos: 'grammar', en: 'because of (+ Genitiv)', hi: 'की वजह से', ex: 'Wegen des Regens bleiben wir zu Hause.', exEn: 'Because of the rain, we\'re staying home.' },
     { de: 'trotz', pos: 'grammar', en: 'despite (+ Genitiv)', hi: 'के बावजूद', ex: 'Trotz des Regens gehen wir spazieren.', exEn: 'Despite the rain, we\'re going for a walk.' },
     { de: 'während', pos: 'grammar', en: 'during (+ Genitiv)', hi: 'के दौरान', ex: 'Während der Reise haben wir fotografiert.', exEn: 'During the trip, we took photos.' },
-    { de: 'Erfolg', art: 'der', gender: 'm', plural: 'Erfolge', pos: 'noun', en: 'success', hi: 'सफलता', ex: 'Wegen des Erfolgs feiern wir heute.', exEn: 'Because of the success, we\'re celebrating today.' },
+    { de: 'Erfolg', art: 'der', gender: 'm', plural: 'Erfolge', pos: 'noun', en: 'success', hi: 'सफलता', ex: 'Wegen des Erfolgs feiern wir heute.', exEn: 'Because of the success, we\'re celebrating today.', img: { src: '/api/media/vocab-img/e7b76066429f25e4d2e0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a celebrating woman holding a trophy' } },
     { de: 'Grund', art: 'der', gender: 'm', plural: 'Gründe', pos: 'noun', en: 'reason', hi: 'कारण', ex: 'Was ist der Grund für deine Entscheidung?', exEn: 'What is the reason for your decision?' },
     { de: 'Gegensatz', art: 'der', gender: 'm', plural: 'Gegensätze', pos: 'noun', en: 'contrast, opposite', hi: 'विरोधाभास', ex: 'Trotz und wegen bilden einen Gegensatz.', exEn: '"Trotz" and "wegen" form a contrast.' },
-    { de: 'nervös', pos: 'adjective', en: 'nervous', hi: 'घबराया हुआ', ex: 'Vor der Prüfung bin ich immer etwas nervös.', exEn: 'Before an exam, I\'m always a bit nervous.' },
+    { de: 'nervös', pos: 'adjective', en: 'nervous', hi: 'घबराया हुआ', ex: 'Vor der Prüfung bin ich immer etwas nervös.', exEn: 'Before an exam, I\'m always a bit nervous.', img: { src: '/api/media/vocab-img/d5252ad4db605112207b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A nervous person waiting before an interview.' } },
     { de: 'gestresst', pos: 'adjective', en: 'stressed', hi: 'तनाव में', ex: 'Wegen der Prüfung bin ich gestresst.', exEn: 'Because of the exam, I\'m stressed.' },
-    { de: 'ausgeruht', pos: 'adjective', en: 'well-rested', hi: 'तरोताज़ा', ex: 'Nach einer Pause fühle ich mich ausgeruht.', exEn: 'After a break, I feel well-rested.' },
+    { de: 'ausgeruht', pos: 'adjective', en: 'well-rested', hi: 'तरोताज़ा', ex: 'Nach einer Pause fühle ich mich ausgeruht.', exEn: 'After a break, I feel well-rested.', img: { src: '/api/media/vocab-img/530c579055621d4f666f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A well-rested person relaxing in an armchair.' } },
     { de: 'vorbereitet', pos: 'adjective', en: 'prepared', hi: 'तैयार', ex: 'Ich bin gut auf die Prüfung vorbereitet.', exEn: 'I\'m well prepared for the exam.' },
     { de: 'Probeprüfung', art: 'die', gender: 'f', plural: 'Probeprüfungen', pos: 'noun', en: 'mock exam', hi: 'नकली परीक्षा', ex: 'Die Probeprüfung findet heute Abend statt.', exEn: 'The mock exam takes place this evening.' },
     { de: 'wiederholen', pos: 'verb', en: 'to review, repeat', hi: 'दोहराना', ex: 'Wir sollten die Grammatik noch einmal wiederholen.', exEn: 'We should review the grammar once more.',
@@ -253,8 +255,10 @@ const CHAPTER = {
     { de: 'Übung', art: 'die', gender: 'f', plural: 'Übungen', pos: 'noun', en: 'exercise', hi: 'अभ्यास', ex: 'Diese Übung hilft mir sehr.', exEn: 'This exercise helps me a lot.' },
     { de: 'Thema', art: 'das', gender: 'n', plural: 'Themen', pos: 'noun', en: 'topic', hi: 'विषय', ex: 'Welches Thema fällt dir am schwersten?', exEn: 'Which topic seems hardest to you?' },
     { de: 'feiern', pos: 'verb', en: 'to celebrate', hi: 'जश्न मनाना', ex: 'Wir feiern den Erfolg zusammen.', exEn: 'We\'re celebrating the success together.',
-      conj: { praesens: 'feiert', praeteritum: 'feierte', perfekt: 'hat gefeiert' } },
-    { de: 'Liste', art: 'die', gender: 'f', plural: 'Listen', pos: 'noun', en: 'list', hi: 'सूची', ex: 'Ich schreibe eine Liste aller Konjunktionen.', exEn: 'I\'m writing a list of all the conjunctions.' }
+      conj: { praesens: 'feiert', praeteritum: 'feierte', perfekt: 'hat gefeiert' },
+      img: { src: '/api/media/vocab-img/122b18c419e9958e2bc0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Friends toasting together at a party' }
+    },
+    { de: 'Liste', art: 'die', gender: 'f', plural: 'Listen', pos: 'noun', en: 'list', hi: 'सूची', ex: 'Ich schreibe eine Liste aller Konjunktionen.', exEn: 'I\'m writing a list of all the conjunctions.', img: { src: '/api/media/vocab-img/01bf96ecac0316dab205', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Clipboard with a checklist and checkmarks' } }
   ],
 
   // ---------- Grammar Review (mixed, Chapters 1–5 focus) ----------

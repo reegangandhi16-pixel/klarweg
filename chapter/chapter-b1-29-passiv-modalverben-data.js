@@ -182,7 +182,7 @@ const CHAPTER = {
 
   // ---------- Vocabulary (44 items — full chapter-29 upload list) ----------
   vocab: [
-    { de: 'eine Entscheidung treffen', pos: 'idiom', level: 'B1', en: 'to make a decision', hi: 'फ़ैसला लेना', ex: 'Eine wichtige Entscheidung muss getroffen werden.', exEn: 'An important decision must be made.', exHi: 'Ek mahatvapurn faisla liya jaana chahiye.' },
+    { de: 'eine Entscheidung treffen', pos: 'idiom', level: 'B1', en: 'to make a decision', hi: 'फ़ैसला लेना', ex: 'Eine wichtige Entscheidung muss getroffen werden.', exEn: 'An important decision must be made.', exHi: 'Ek mahatvapurn faisla liya jaana chahiye.', img: { src: '/api/media/vocab-img/c3d6f47bfe3d451dda39', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person standing at a fork in a pathway.' } },
     { de: 'wirtschaftlich', pos: 'adjective', level: 'B1', en: 'economic', hi: 'आर्थिक', ex: 'Die wirtschaftliche Lage muss geregelt werden.', exEn: 'The economic situation must be regulated.', exHi: 'Aarthik sthiti ko viniyamit kiya jaana chahiye.' },
     { de: 'befürchten', pos: 'verb', level: 'B1', en: 'to fear', hi: 'डरना', ex: 'Manche Skeptiker befürchten, dass die Würde verloren geht.', exEn: 'Some sceptics fear that dignity could be lost.', exHi: 'Kuchh sanshayavaadi darte hain ki samman kho sakta hai.', conj: { praesens: 'befürchtet', praeteritum: 'befürchtete', perfekt: 'hat befürchtet' } },
     { de: 'beitreten', pos: 'verb', level: 'B1', en: 'to join', hi: 'शामिल होना', ex: 'Der Mitgliedsstaat möchte beitreten.', exEn: 'The member state wants to join.', exHi: 'Sadasya desh shaamil hona chahta hai.', conj: { praesens: 'tritt bei', praeteritum: 'trat bei', perfekt: 'ist beigetreten' } },

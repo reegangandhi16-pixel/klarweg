@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Render the existing 50 practice datasets through the extracted November 2026
+/* Render the registered practice datasets through the extracted November 2026
    templates. No content creation or changes to protected course/exam payloads.
    node scripts/build-seo-practice.mjs [--check] */
 import fs from 'node:fs';
@@ -15,7 +15,6 @@ export const CHAPTERS = {
   b1: 'chapter/chapter-b1-1-infinitiv-mit-zu.html',
   b2: 'chapter/chapter-b2-01-erweiterte-satzklammer.html'
 };
-const COUNTS = { a1: 14, a2: 14, b1: 12, b2: 10 };
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
 export const escapeHtml = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const ld = data => '<script type="application/ld+json">\n' + JSON.stringify({ '@context': 'https://schema.org', ...data }, null, 2).replace(/</g, '\\u003c') + '\n</script>';
@@ -32,11 +31,27 @@ const template = (name, values) => read(`scripts/seo-practice/${name}.html`).rep
   return values[key];
 });
 
-export function loadGuides() {
-  const guides = LEVELS.flatMap(level => {
-    const rows = JSON.parse(read(`docs/seo/next50-practice-${level}.json`));
-    if (rows.length !== COUNTS[level]) throw new Error(`${level}: expected ${COUNTS[level]} lessons`);
-    return rows.map(g => ({ ...g, level }));
+export const PRACTICE_BATCHES = JSON.parse(read('docs/seo/practice-batches.json'));
+
+export function loadGuides(batches = PRACTICE_BATCHES) {
+  const ids = new Set(), paths = new Set();
+  const guides = batches.flatMap(batch => {
+    if (!/^[a-z0-9-]+$/.test(batch.id) || ids.has(batch.id)) throw new Error('Invalid/duplicate batch id');
+    ids.add(batch.id);
+    if (!Number.isInteger(batch.count) || batch.count < 1 || !Array.isArray(batch.sources) || !batch.sources.length) throw new Error('Invalid batch inventory');
+    const rows = batch.sources.flatMap(source => {
+      if (!/^docs\/seo\/[a-z0-9-]+\.json$/.test(source.path) || paths.has(source.path)) throw new Error('Invalid/duplicate dataset path');
+      paths.add(source.path);
+      const data = JSON.parse(read(source.path));
+      if (!Array.isArray(data)) throw new Error('Dataset must be an array');
+      return data.map(g => ({ ...g, level: source.level || g.level, batch: batch.id }));
+    });
+    if (rows.length !== batch.count) throw new Error(`${batch.id}: expected ${batch.count} lessons`);
+    if (!batch.levels || Object.keys(batch.levels).some(l => !LEVELS.includes(l))) throw new Error('Invalid batch levels');
+    for (const level of LEVELS) {
+      if (rows.filter(g => g.level === level).length !== (batch.levels[level] || 0)) throw new Error(`${batch.id}: unexpected ${level} count`);
+    }
+    return rows;
   });
   validateGuides(guides);
   return guides;
@@ -63,6 +78,7 @@ export function validateGuides(guides) {
         unique[key].add(row[0]);
       }
     }
+    if (g.description !== undefined) { text(g.description, 'description'); if (g.description.length < 100 || g.description.length > 170) throw new Error('Description must be 100–170 characters'); }
     if (g.instructions !== undefined) text(g.instructions, 'instructions');
     if (g.guideLabel !== undefined) text(g.guideLabel, 'guide label');
   }
@@ -72,7 +88,7 @@ export function renderPractice(guides = loadGuides()) {
   const outputs = new Map();
   for (const g of guides) {
     const level = g.level.toUpperCase(), url = pageUrl(g.slug);
-    const description = `${level} German practice: ${g.title.replace(/\s*\(A[12]\)|\s*\(B[12]\)/g, '').replace(/\.$/, '')}. Four examples, four exercises and explained answers.`;
+    const description = g.description || `${level} German practice: ${g.title.replace(/\s*\(A[12]\)|\s*\(B[12]\)/g, '').replace(/\.$/, '')}. Four examples, four exercises and explained answers.`;
     const peers = guides.filter(x => x.level === g.level);
     const index = peers.findIndex(x => x.slug === g.slug);
     const next = peers[(index + 1) % peers.length];
@@ -91,8 +107,9 @@ export function renderPractice(guides = loadGuides()) {
     const group = guides.filter(g => g.level === l), level = l.toUpperCase();
     return `<section class="panel" id="${l}" aria-label="${level} practice"><h2>${level} grammar practice · ${group.length} lessons</h2><p>Choose a specific topic. Each practice set includes worked sentences and four self-check exercises with explanations.</p><div class="level-grid">${group.map(g => `<a class="topic" href="${g.slug}.html"><small>${level} · 4 exercises</small><b>${escapeHtml(g.title)}</b></a>`).join('\n')}</div></section>`;
   }).join('\n');
-  outputs.set('practice/index.html', template('index', { url: hubUrl, siteBase: SITE_BASE, levels,
-    structuredData: ld(breadcrumb()) + '\n' + ld({ '@type': 'CollectionPage', name: 'Free German Grammar Exercises A1–B2 — Klarweg', description: 'Practice German grammar from A1 to B2 with 50 focused exercises, examples, English meanings and explained answers. Free self-study by Klarweg.', url: hubUrl, inLanguage: ['en', 'de'], isAccessibleForFree: true, publisher,
+  const hubDescription = `Practice German grammar from A1 to B2 with ${guides.length} practice sets, examples, English meanings and explained answers. Free self-study by Klarweg.`;
+  outputs.set('practice/index.html', template('index', { url: hubUrl, siteBase: SITE_BASE, levels, total: String(guides.length), hubDescription: escapeHtml(hubDescription),
+    structuredData: ld(breadcrumb()) + '\n' + ld({ '@type': 'CollectionPage', name: 'Free German Grammar Exercises A1–B2 — Klarweg', description: hubDescription, url: hubUrl, inLanguage: ['en', 'de'], isAccessibleForFree: true, publisher,
       mainEntity: { '@type': 'ItemList', numberOfItems: guides.length, itemListElement: guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, name: g.title, url: pageUrl(g.slug) })) }
     })
   }));
@@ -103,11 +120,12 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   if (process.argv.slice(2).some(a => a !== '--check')) throw new Error('Usage: build-seo-practice.mjs [--check]');
   const check = process.argv.includes('--check');
   let stale = 0;
-  for (const [file, html] of renderPractice()) {
+  const outputs = renderPractice();
+  for (const [file, html] of outputs) {
     if (fs.existsSync(path.join(ROOT, file)) && read(file) === html) continue;
     if (check) { console.error(`Stale: ${file} (run npm run generate:practice)`); stale++; }
     else fs.writeFileSync(path.join(ROOT, file), html);
   }
-  console.log(stale ? `${stale} stale practice pages` : `Practice pages ${check ? 'checked' : 'generated'}: 50 lessons + hub`);
+  console.log(stale ? `${stale} stale practice pages` : `Practice pages ${check ? 'checked' : 'generated'}: ${outputs.size - 1} lessons + hub`);
   process.exitCode = stale ? 1 : 0;
 }

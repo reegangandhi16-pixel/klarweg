@@ -31,3 +31,11 @@ jobs:
         run: npm test
       - name: Generated files are committed (the suite regenerates the tutor registry)
         run: git diff --exit-code
+      - name: Public practice artifact and mobile/desktop browser audit
+        env:
+          CHROME_ARGS: --no-sandbox
+        run: |
+          bash scripts/site-artifact.sh _site
+          node scripts/seo-practice-artifact.mjs _site
+          node scripts/clean-urls.mjs _site --check
+          node scripts/seo-practice-browser.mjs _site

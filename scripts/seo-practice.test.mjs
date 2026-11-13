@@ -1,4 +1,4 @@
-/* SEO practice batch (November 2026): 50 unique exercises, hub and publication wiring. */
+/* SEO practice batch (November 2026): practice datasets, hub and publication wiring. */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -6,15 +6,16 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = p => fs.readFileSync(path.join(root,p),'utf8');
-const guides = ['a1','a2','b1','b2'].flatMap(l => JSON.parse(read('docs/seo/next50-practice-'+l+'.json')));
+const { loadGuides, validateGuides, renderPractice, escapeHtml, CHAPTERS, PRACTICE_BATCHES } = await import('./build-seo-practice.mjs');
+const guides = loadGuides();
 const sitemap = read('sitemap.xml');
 const allow = read('.github/pages-allowlist.txt').split(/\r?\n/);
 const resource = read('resources.html');
 const hub = read('practice/index.html');
 
-test('exactly 50 distinct practice lessons, eight unique learner tasks each', () => {
-  assert.equal(guides.length, 50);
-  assert.equal(new Set(guides.map(x=>x.slug)).size,50);
+test('exactly 100 distinct practice lessons, eight unique learner tasks each', () => {
+  assert.equal(guides.length, 100);
+  assert.equal(new Set(guides.map(x=>x.slug)).size,100);
   for (const g of guides) {
     assert.equal(g.examples.length, 4, g.slug);
     assert.equal(g.quiz.length, 4, g.slug);
@@ -44,20 +45,19 @@ test('all practice pages publicly registered, discoverable and directly accessib
 });
 
 // These checks catch stale edits, unsafe dataset paths and broken publication wiring.
-const { loadGuides, validateGuides, renderPractice, escapeHtml, CHAPTERS } = await import('./build-seo-practice.mjs');
 const sourceGuides = loadGuides();
 const generated = renderPractice(sourceGuides);
 const jsonld = html => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
 
 test('practice output is reproducible; all source material and metadata remain distinct', () => {
-  assert.equal(generated.size, 51);
+  assert.equal(generated.size, 101);
   assert.deepEqual(fs.readdirSync(path.join(root, 'practice')).filter(f => f.endsWith('.html')).sort(), [...generated.keys()].map(f => path.basename(f)).sort(), 'no stale or orphaned practice pages');
   for (const [file, html] of generated) {
     assert.equal(read(file), html, `${file}: run npm run generate:practice`);
     assert.doesNotMatch(html, /\{\{\w+\}\}/);
   }
-  for (const key of ['title', 'rule', 'trap']) assert.equal(new Set(guides.map(g => g[key])).size, 50, key);
-  for (const key of ['examples', 'quiz']) assert.equal(new Set(guides.flatMap(g => g[key].map(x => x[0]))).size, 200, key);
+  for (const key of ['title', 'rule', 'trap']) assert.equal(new Set(guides.map(g => g[key])).size, 100, key);
+  for (const key of ['examples', 'quiz']) assert.equal(new Set(guides.flatMap(g => g[key].map(x => x[0]))).size, 400, key);
 });
 
 test('generator rejects unsafe paths, missing answers, duplicate material and malformed gaps', () => {
@@ -121,16 +121,16 @@ test('lesson schema, metadata, chapter and related links match visible content',
       inbound.add(slug);
     }
   }
-  assert.equal(inbound.size, 50, 'every lesson receives a contextual link from a peer');
+  assert.equal(inbound.size, 100, 'every lesson receives a contextual link from a peer');
 });
 
-test('hub schema enumerates exactly the 50 visible lessons, and the stylesheet is explicitly published', () => {
+test('hub schema enumerates exactly the 100 visible lessons, and the stylesheet is explicitly published', () => {
   const collection = jsonld(hub).find(x => x['@type'] === 'CollectionPage');
   assert.equal(collection.url, 'https://klarweg.in/practice/index.html');
-  assert.equal(collection.mainEntity.numberOfItems, 50);
+  assert.equal(collection.mainEntity.numberOfItems, 100);
   assert.deepEqual(collection.mainEntity.itemListElement.map(x => x.url), sourceGuides.map(g => 'https://klarweg.in/practice/' + g.slug + '.html'));
   assert.ok(allow.includes('practice/practice.css'));
-  assert.equal(allow.filter(x => x.startsWith('practice/')).length, 52, 'only 51 pages and shared CSS');
+  assert.equal(allow.filter(x => x.startsWith('practice/')).length, 102, 'only 101 pages and shared CSS');
   assert.equal((resource.match(/id="free-grammar-practice"/g) || []).length, 1);
   assert.equal((resource.match(/<!-- PRACTICE50:START -->[\s\S]*?<!-- PRACTICE50:END -->/g) || []).length, 1);
   const css = read('practice/practice.css');
@@ -139,4 +139,34 @@ test('hub schema enumerates exactly the 50 visible lessons, and the stylesheet i
     const [r,g,b] = [1,3,5].map(i => parseInt(hex.slice(i,i+2), 16));
     assert.ok(!(r > 150 && r > g + 30 && g > b && b < 120), 'orange/amber family: ' + hex);
   }
+});
+
+
+test('a second 50-lesson batch extends the first without renaming its datasets', () => {
+  assert.equal(PRACTICE_BATCHES.length, 2);
+  assert.equal(guides.filter(g => g.batch === 'practice50').length, 50);
+  assert.equal(guides.filter(g => g.batch === 'practice50-expansion').length, 50);
+  assert.deepEqual(PRACTICE_BATCHES[0].sources.map(s => s.path), ['a1','a2','b1','b2'].map(l => `docs/seo/next50-practice-${l}.json`));
+  const counts = Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, guides.filter(g => g.level === l).length]));
+  assert.deepEqual(counts, { a1: 24, a2: 28, b1: 26, b2: 22 });
+  const additions = guides.filter(g => g.batch === 'practice50-expansion');
+  assert.equal(new Set(additions.map(g => g.description)).size, 50);
+  for (const g of additions) {
+    assert.ok(g.description.length >= 100 && g.description.length <= 170, g.slug);
+    assert.ok(g.instructions.length >= 40, g.slug);
+  }
+  assert.match(hub, /100 focused grammar workouts/);
+  assert.match(resource, /Browse all 100 free German grammar exercises/);
+});
+
+test('batch inventory rejects repeated ids, unsafe sources and incorrect declared counts', () => {
+  const check = (change, pattern) => {
+    const copy = structuredClone(PRACTICE_BATCHES);
+    change(copy);
+    assert.throws(() => loadGuides(copy), pattern);
+  };
+  check(b => b[1].id = b[0].id, /batch id/);
+  check(b => b[1].sources[0].path = '../private.json', /dataset path/);
+  check(b => b[1].count = 49, /expected 49/);
+  check(b => b[1].levels.a1 = 9, /unexpected a1/);
 });

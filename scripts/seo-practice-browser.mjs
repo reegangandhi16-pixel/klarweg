@@ -11,14 +11,16 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { findChrome } from './chapter-resources/chrome-pdf.mjs';
+import { loadGuides } from './build-seo-practice.mjs';
 import { SITE_BASE } from './site-origin.mjs';
 
 const root = fs.realpathSync(process.argv[2] || '_site');
 const files = fs.readdirSync(path.join(root, 'practice')).filter(f => f.endsWith('.html')).sort();
-assert.equal(files.length, 51, 'expected the 50 lessons and hub in the public artifact');
+const lessonCount = loadGuides().length;
+assert.equal(files.length, lessonCount + 1, 'expected all registered lessons and the hub in the public artifact');
 const screenshots = process.env.PRACTICE_SCREENSHOTS;
 if (screenshots) fs.mkdirSync(screenshots, { recursive: true });
-const representatives = new Set(['index.html', 'a1-ein-eine-exercises.html', 'a2-wechselpraepositionen-wohin-exercises.html', 'b1-polite-konjunktiv-ii-exercises.html', 'b2-nominalisation-exercises.html']);
+const representatives = new Set(['index.html', 'a1-ein-eine-exercises.html', 'a2-wechselpraepositionen-wohin-exercises.html', 'b1-polite-konjunktiv-ii-exercises.html', 'b2-nominalisation-exercises.html', 'a1-modal-verbs-present-exercises.html', 'a2-adjective-endings-indefinite-exercises.html', 'b1-relative-clauses-dative-exercises.html', 'b2-passive-perfect-tense-exercises.html']);
 const server = http.createServer((req, res) => {
   let file = path.resolve(root, '.' + new URL(req.url, 'http://localhost').pathname);
   if (!file.startsWith(root + path.sep)) { res.writeHead(403); res.end(); return; }
@@ -111,7 +113,7 @@ try {
         assert.equal(data.h1, 1); assert.ok(data.uniqueIds); assert.equal(data.css, '24px');
         assert.equal(data.canonical, SITE_BASE + url); assert.ok(data.contrast >= 4.5); assert.ok(data.targets);
         assert.equal(data.details, file === 'index.html' ? 0 : 4);
-        if (file === 'index.html') assert.equal(data.topics, 50);
+        if (file === 'index.html') assert.equal(data.topics, lessonCount);
         for (let i = 0; i < data.details; i++) {
           await evaluate(`document.querySelectorAll('summary')[${i}].focus()`);
           await enter(); assert.equal(await evaluate(`document.querySelectorAll('details')[${i}].open`), true);

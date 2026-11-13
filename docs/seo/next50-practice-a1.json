@@ -1,0 +1,674 @@
+[
+  {
+    "slug": "a1-der-die-das-exercises",
+    "title": "Der, Die, Das Exercises with Answers (A1)",
+    "rule": "In Nominativ, use der for masculine nouns, die for feminine nouns and das for neuter nouns. Learn the article together with the noun, not as an afterthought.",
+    "trap": "Do not guess an article from an English translation: German grammatical gender is not the same as biological gender.",
+    "guide": "grammar/der-die-das.html",
+    "examples": [
+      [
+        "Der Tisch ist neu.",
+        "The table is new."
+      ],
+      [
+        "Die Lampe ist hell.",
+        "The lamp is bright."
+      ],
+      [
+        "Das Fenster ist offen.",
+        "The window is open."
+      ],
+      [
+        "Die Bücher sind interessant.",
+        "The books are interesting."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ Stuhl ist bequem.",
+        "Der",
+        "Stuhl is masculine in the singular."
+      ],
+      [
+        "___ Tür ist geschlossen.",
+        "Die",
+        "Tür is feminine."
+      ],
+      [
+        "___ Kind spielt.",
+        "Das",
+        "Kind is neuter."
+      ],
+      [
+        "___ Kinder spielen.",
+        "Die",
+        "All plural nouns use die in Nominativ."
+      ]
+    ],
+    "instructions": "Fill each gap with the definite article der, die or das in the nominative."
+  },
+  {
+    "slug": "a1-ein-eine-exercises",
+    "title": "Ein or Eine? A1 Article Practice with Answers",
+    "rule": "Use ein before a masculine or neuter singular noun in Nominativ, and eine before a feminine singular noun. There is no indefinite article for ordinary plural nouns.",
+    "trap": "When stating a profession without a modifier after sein, usually omit the article: Er ist Arzt. When identifying someone with Das ist, use ein/eine: Das ist ein Arzt.",
+    "guide": "grammar/der-die-das.html",
+    "examples": [
+      [
+        "Das ist ein Hund.",
+        "That is a dog."
+      ],
+      [
+        "Das ist eine Katze.",
+        "That is a cat."
+      ],
+      [
+        "Hier steht ein Auto.",
+        "A car is parked here."
+      ],
+      [
+        "Das sind Kinder.",
+        "Those are children."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das ist ___ Lehrerin.",
+        "eine",
+        "Lehrerin is feminine."
+      ],
+      [
+        "Hier ist ___ Buch.",
+        "ein",
+        "Buch is neuter."
+      ],
+      [
+        "Das ist ___ Arzt.",
+        "ein",
+        "Arzt is masculine: Das ist ein Arzt. To state a profession after sein, normally omit the article: Er ist Arzt."
+      ],
+      [
+        "Das sind ___ Bücher.",
+        "—",
+        "The usual plural has no ein/eine article."
+      ]
+    ],
+    "instructions": "Choose ein, eine or no article (—). Use an indefinite article only where it is natural in the sentence."
+  },
+  {
+    "slug": "a1-kein-keine-exercises",
+    "title": "Kein or Keine? German A1 Negation Exercises",
+    "rule": "Negate an indefinite noun phrase with kein in masculine/neuter Nominativ and keine in feminine or plural Nominativ. Other cases change the ending: keinen is masculine Akkusativ.",
+    "trap": "Do not replace every nicht with kein: kein typically negates a noun phrase, not an adjective or verb.",
+    "guide": "grammar/nicht-kein.html",
+    "examples": [
+      [
+        "Ich habe kein Auto.",
+        "I have no car."
+      ],
+      [
+        "Sie hat keine Katze.",
+        "She has no cat."
+      ],
+      [
+        "Das ist kein Problem.",
+        "That is not a problem."
+      ],
+      [
+        "Wir haben keine Tickets.",
+        "We do not have tickets."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich habe ___ Bruder.",
+        "keinen",
+        "Bruder is masculine Akkusativ."
+      ],
+      [
+        "Das ist ___ Fehler.",
+        "kein",
+        "Fehler is masculine Nominativ after sein."
+      ],
+      [
+        "Er hat ___ Zeit.",
+        "keine",
+        "Zeit is feminine."
+      ],
+      [
+        "Wir kaufen ___ Bücher.",
+        "keine",
+        "Bücher is plural."
+      ]
+    ],
+    "instructions": "Complete each gap with the correct form of kein to negate the noun phrase."
+  },
+  {
+    "slug": "a1-sein-present-tense-exercises",
+    "title": "Sein Conjugation Exercises for A1 Beginners",
+    "rule": "The verb sein is irregular: ich bin, du bist, er/sie/es ist, wir sind, ihr seid, sie/Sie sind. Practise the whole sentence so you connect the subject to its form.",
+    "trap": "Do not write ich ist or ihr sind; English am/is/are does not map word for word to German.",
+    "guide": "grammar/praesens.html",
+    "examples": [
+      [
+        "Ich bin müde.",
+        "I am tired."
+      ],
+      [
+        "Du bist pünktlich.",
+        "You are on time."
+      ],
+      [
+        "Wir sind zu Hause.",
+        "We are at home."
+      ],
+      [
+        "Ihr seid bereit.",
+        "You all are ready."
+      ]
+    ],
+    "quiz": [
+      [
+        "Sie (singular feminine) ___ Lehrerin.",
+        "ist",
+        "Third-person singular takes ist."
+      ],
+      [
+        "Wir ___ heute zu Hause.",
+        "sind",
+        "Wir takes sind."
+      ],
+      [
+        "Du ___ sehr nett.",
+        "bist",
+        "Du takes bist."
+      ],
+      [
+        "Ihr ___ im Kurs.",
+        "seid",
+        "Ihr takes seid."
+      ]
+    ],
+    "instructions": "Complete each sentence with the present-tense form of sein."
+  },
+  {
+    "slug": "a1-haben-present-tense-exercises",
+    "title": "Haben Conjugation Practice (A1) with Answers",
+    "rule": "Use habe with ich, hast with du, hat with er/sie/es, haben with wir and sie/Sie, and habt with ihr. Haben is also the helping verb in many Perfekt sentences.",
+    "trap": "Keep habt for ihr; wir habt is incorrect.",
+    "guide": "grammar/praesens.html",
+    "examples": [
+      [
+        "Ich habe Hunger.",
+        "I am hungry."
+      ],
+      [
+        "Du hast Zeit.",
+        "You have time."
+      ],
+      [
+        "Mein Vater hat ein Fahrrad.",
+        "My father has a bicycle."
+      ],
+      [
+        "Wir haben Deutschunterricht.",
+        "We have German class."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ihr ___ Glück.",
+        "habt",
+        "Ihr takes habt."
+      ],
+      [
+        "Er ___ einen Termin.",
+        "hat",
+        "Er takes hat."
+      ],
+      [
+        "Ich ___ eine Frage.",
+        "habe",
+        "Ich takes habe."
+      ],
+      [
+        "Sie (plural) ___ Ferien.",
+        "haben",
+        "Plural sie takes haben."
+      ]
+    ],
+    "instructions": "Complete each sentence with the present-tense form of haben."
+  },
+  {
+    "slug": "a1-regular-verbs-exercises",
+    "title": "German Regular Verb Endings: A1 Exercises",
+    "rule": "In the present tense, regular verbs often take -e, -st, -t, -en, -t, -en for ich, du, er/sie/es, wir, ihr, sie/Sie. The verb stem remains recognizable.",
+    "trap": "For stems ending in -t or -d, German may insert an extra e in forms such as du arbeitest.",
+    "guide": "grammar/praesens.html",
+    "examples": [
+      [
+        "Ich lerne Deutsch.",
+        "I learn German."
+      ],
+      [
+        "Du spielst Tennis.",
+        "You play tennis."
+      ],
+      [
+        "Er wohnt in Berlin.",
+        "He lives in Berlin."
+      ],
+      [
+        "Ihr arbeitet heute.",
+        "You all work today."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir ___ jeden Abend. (lernen)",
+        "lernen",
+        "Wir uses the infinitive-shaped -en form."
+      ],
+      [
+        "Sie (singular) ___ in Bonn. (wohnen)",
+        "wohnt",
+        "Third-person singular takes -t."
+      ],
+      [
+        "Du ___ viel. (arbeiten)",
+        "arbeitest",
+        "The t-stem needs -est with du."
+      ],
+      [
+        "Ich ___ Musik. (hören)",
+        "höre",
+        "Ich takes -e."
+      ]
+    ],
+    "instructions": "Put the verb in brackets into the present tense for the given subject."
+  },
+  {
+    "slug": "a1-personal-pronouns-exercises",
+    "title": "Ich, Du, Er, Sie, Es: A1 Pronoun Exercises",
+    "rule": "German subject pronouns identify who does an action: ich, du, er, sie, es, wir, ihr, sie, Sie. Capital Sie is the formal “you”; lowercase sie can mean she or they.",
+    "trap": "Do not confuse sie (she), sie (they) and Sie (formal you): context and verb ending help.",
+    "guide": "grammar/praesens.html",
+    "examples": [
+      [
+        "Meine Mutter arbeitet. Sie ist Ärztin.",
+        "My mother works. She is a doctor."
+      ],
+      [
+        "Mein Bruder lernt. Er ist fleißig.",
+        "My brother studies. He is diligent."
+      ],
+      [
+        "Das Kind schläft. Es ist müde.",
+        "The child sleeps. It is tired."
+      ],
+      [
+        "Frau Weber, kommen Sie bitte!",
+        "Ms Weber, please come!"
+      ]
+    ],
+    "quiz": [
+      [
+        "Anna ist hier. ___ wartet draußen.",
+        "Sie",
+        "Anna is represented by feminine singular sie."
+      ],
+      [
+        "Die Kinder spielen. ___ lachen.",
+        "Sie",
+        "Plural third person uses sie."
+      ],
+      [
+        "Paul liest. ___ lernt Deutsch.",
+        "Er",
+        "Paul is represented by er."
+      ],
+      [
+        "Herr Becker, haben ___ Zeit?",
+        "Sie",
+        "Formal address uses capital Sie."
+      ]
+    ],
+    "instructions": "Replace the person or group named in the first sentence with a subject pronoun; use formal Sie for Herr Becker."
+  },
+  {
+    "slug": "a1-possessive-mein-dein-exercises",
+    "title": "Mein, Meine, Dein, Deine: A1 Practice",
+    "rule": "Possessives behave like ein-words: mein Vater, meine Mutter, mein Kind, meine Freunde. The ending changes with gender, case and number, not with the speaker’s gender.",
+    "trap": "The word mein does not always get -e just because the owner is female.",
+    "guide": "grammar/possessivartikel.html",
+    "examples": [
+      [
+        "Das ist mein Bruder.",
+        "That is my brother."
+      ],
+      [
+        "Meine Schwester studiert.",
+        "My sister studies."
+      ],
+      [
+        "Dein Handy klingelt.",
+        "Your phone is ringing."
+      ],
+      [
+        "Wo sind deine Bücher?",
+        "Where are your books?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Das ist ___ Mutter. (my)",
+        "meine",
+        "Mutter is feminine in Nominativ."
+      ],
+      [
+        "Ist das ___ Auto? (your, informal)",
+        "dein",
+        "Auto is neuter in Nominativ."
+      ],
+      [
+        "___ Freunde kommen heute. (my)",
+        "Meine",
+        "Plural Nominativ uses meine."
+      ],
+      [
+        "Ich kenne ___ Vater. (your, informal)",
+        "deinen",
+        "Masculine Akkusativ takes -en."
+      ]
+    ],
+    "instructions": "Use a form of mein for “my” and dein for “your” (one person, informal)."
+  },
+  {
+    "slug": "a1-w-questions-exercises",
+    "title": "German W-Questions: A1 Fill-in-the-Blank Practice",
+    "rule": "Use wer for a person, was for a thing, wo for location, wohin for destination, woher for origin, wann for time, warum for reason and wie for how. In a direct question the conjugated verb usually comes next.",
+    "trap": "Wo and wohin are different: one asks where someone is, the other where someone goes.",
+    "guide": "grammar/w-fragen.html",
+    "examples": [
+      [
+        "Wo wohnst du?",
+        "Where do you live?"
+      ],
+      [
+        "Wohin fährst du?",
+        "Where are you going?"
+      ],
+      [
+        "Wann beginnt der Kurs?",
+        "When does the course begin?"
+      ],
+      [
+        "Warum lernst du Deutsch?",
+        "Why are you learning German?"
+      ]
+    ],
+    "quiz": [
+      [
+        "___ heißt du? — Ich heiße Ali.",
+        "Wie",
+        "Use wie in the fixed question Wie heißt du? (What is your name?)."
+      ],
+      [
+        "___ kommst du? — Aus Indien.",
+        "Woher",
+        "Woher asks about origin."
+      ],
+      [
+        "___ ist dein Geburtstag? — Im Mai.",
+        "Wann",
+        "Wann asks about time."
+      ],
+      [
+        "___ ist das? — Das ist mein Lehrer.",
+        "Wer",
+        "Wer asks about a person."
+      ]
+    ],
+    "instructions": "Choose the question word that matches the answer after the dash."
+  },
+  {
+    "slug": "a1-yes-no-questions-exercises",
+    "title": "German Yes/No Questions: Word Order Practice A1",
+    "rule": "To form a yes/no question, place the conjugated verb first, then the subject: Kommst du? Hast du Zeit? Answer with ja, nein, or sometimes doch when contradicting a negative question.",
+    "trap": "Do not keep the normal statement order when you turn it into a yes/no question.",
+    "guide": "grammar/word-order.html",
+    "examples": [
+      [
+        "Kommst du heute?",
+        "Are you coming today?"
+      ],
+      [
+        "Haben Sie einen Termin?",
+        "Do you have an appointment?"
+      ],
+      [
+        "Ist der Zug pünktlich?",
+        "Is the train on time?"
+      ],
+      [
+        "Lernst du heute Deutsch?",
+        "Are you studying German today?"
+      ]
+    ],
+    "quiz": [
+      [
+        "___ du aus Indien? (kommen)",
+        "Kommst",
+        "The finite verb opens the question."
+      ],
+      [
+        "___ ihr morgen Zeit? (haben)",
+        "Habt",
+        "Use ihr → habt, before the subject."
+      ],
+      [
+        "___ sie Lehrerin? (sein)",
+        "Ist",
+        "For she, sein becomes ist."
+      ],
+      [
+        "___ Sie Kaffee? (trinken)",
+        "Trinken",
+        "Formal Sie uses trinken."
+      ]
+    ],
+    "instructions": "Put the verb in brackets into the present tense and place it before the subject."
+  },
+  {
+    "slug": "a1-nicht-position-exercises",
+    "title": "Where Does Nicht Go? A1 German Practice",
+    "rule": "Nicht negates a verb, adjective, adverb or particular part of a sentence. Its position depends on what is negated: Ich komme heute nicht; Das ist nicht teuer.",
+    "trap": "Use kein to negate an indefinite noun phrase: Ich habe kein Auto, not Ich habe nicht Auto.",
+    "guide": "grammar/nicht-kein.html",
+    "examples": [
+      [
+        "Ich komme heute nicht.",
+        "I am not coming today."
+      ],
+      [
+        "Das Essen ist nicht teuer.",
+        "The food is not expensive."
+      ],
+      [
+        "Sie wohnt nicht in Berlin.",
+        "She does not live in Berlin."
+      ],
+      [
+        "Wir verstehen die Frage nicht.",
+        "We do not understand the question."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das ist ___ richtig.",
+        "nicht",
+        "An adjective can be negated with nicht."
+      ],
+      [
+        "Ich arbeite morgen ___.",
+        "nicht",
+        "Here the whole action is negated."
+      ],
+      [
+        "Er wohnt ___ in München.",
+        "nicht",
+        "Here the place phrase is negated."
+      ],
+      [
+        "Ich habe ___ Geld.",
+        "kein",
+        "Geld is a neuter noun phrase; kein is natural here."
+      ]
+    ],
+    "instructions": "Choose nicht or the appropriate form of kein to make each sentence negative."
+  },
+  {
+    "slug": "a1-numbers-and-prices-exercises",
+    "title": "German Numbers and Prices: A1 Practice",
+    "rule": "For two-digit numbers with both tens and ones (21–99), German says the ones before the tens: einundzwanzig (21), fünfunddreißig (35). Exact tens such as achtzig (80) stand alone. To say a price, use Euro and Cent naturally.",
+    "trap": "Do not translate twenty-one word for word as zwanzigeins.",
+    "guide": "grammar/zahlen.html",
+    "examples": [
+      [
+        "Das Buch kostet zwölf Euro.",
+        "The book costs twelve euros."
+      ],
+      [
+        "Ich bin einundzwanzig Jahre alt.",
+        "I am twenty-one."
+      ],
+      [
+        "Der Bus kommt in fünf Minuten.",
+        "The bus comes in five minutes."
+      ],
+      [
+        "Das kostet drei Euro fünfzig.",
+        "That costs €3.50."
+      ]
+    ],
+    "quiz": [
+      [
+        "21 = ___",
+        "einundzwanzig",
+        "One comes before twenty."
+      ],
+      [
+        "42 = ___",
+        "zweiundvierzig",
+        "Two comes before forty."
+      ],
+      [
+        "15 = ___",
+        "fünfzehn",
+        "Fifteen is fünfzehn."
+      ],
+      [
+        "80 = ___",
+        "achtzig",
+        "Eighty is achtzig."
+      ]
+    ],
+    "instructions": "Write each number as one German word."
+  },
+  {
+    "slug": "a1-telling-time-exercises",
+    "title": "German Time Expressions: A1 Uhrzeit Exercises",
+    "rule": "Use um before a clock time: um acht Uhr. Informal halb neun means 8:30, because German names the next hour. Viertel nach acht is 8:15; Viertel vor neun is 8:45.",
+    "trap": "Halb neun is not 9:30. Think of being halfway toward nine.",
+    "guide": "grammar/uhrzeit.html",
+    "examples": [
+      [
+        "Der Kurs beginnt um acht Uhr.",
+        "The course begins at eight."
+      ],
+      [
+        "Es ist halb neun.",
+        "It is half past eight."
+      ],
+      [
+        "Es ist Viertel nach zehn.",
+        "It is quarter past ten."
+      ],
+      [
+        "Wir treffen uns um Viertel vor sechs.",
+        "We meet at quarter to six."
+      ]
+    ],
+    "quiz": [
+      [
+        "8:30 = Es ist ___.",
+        "halb neun",
+        "Halb uses the upcoming hour. Acht Uhr dreißig is also correct when giving the time formally."
+      ],
+      [
+        "10:15 = Es ist ___.",
+        "Viertel nach zehn",
+        "Quarter past ten. Zehn Uhr fünfzehn is the formal alternative; regional quarter-hour expressions also vary."
+      ],
+      [
+        "17:45 = Es ist ___.",
+        "Viertel vor sechs",
+        "Quarter to six in a twelve-hour expression. Siebzehn Uhr fünfundvierzig is the formal alternative."
+      ],
+      [
+        "Der Unterricht ist ___ sieben Uhr.",
+        "um",
+        "Use um before a clock time."
+      ]
+    ],
+    "instructions": "For the first three gaps, use informal twelve-hour expressions with halb, Viertel nach or Viertel vor. For the last gap, add the time preposition."
+  },
+  {
+    "slug": "a1-akkusativ-articles-exercises",
+    "title": "Akkusativ Articles Practice: Den, Die, Das at A1",
+    "rule": "With a masculine direct object, der changes to den and ein changes to einen. Feminine die and neuter das stay unchanged in Akkusativ; plural die also stays die.",
+    "trap": "Only the masculine article clearly changes in these definite-article examples. Do not turn every object into den.",
+    "guide": "grammar/akkusativ.html",
+    "examples": [
+      [
+        "Ich sehe den Mann.",
+        "I see the man."
+      ],
+      [
+        "Sie kauft einen Apfel.",
+        "She buys an apple."
+      ],
+      [
+        "Wir lesen das Buch.",
+        "We read the book."
+      ],
+      [
+        "Er kennt die Frau.",
+        "He knows the woman."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich habe ___ Hund. (der Hund)",
+        "den",
+        "Hund is masculine Akkusativ."
+      ],
+      [
+        "Sie nimmt ___ Tasche. (die Tasche)",
+        "die",
+        "Feminine Akkusativ remains die."
+      ],
+      [
+        "Er sucht ___ Handy. (das Handy)",
+        "das",
+        "Neuter Akkusativ remains das."
+      ],
+      [
+        "Wir sehen ___ Kinder. (plural)",
+        "die",
+        "Plural definite article remains die."
+      ]
+    ],
+    "instructions": "Use the accusative definite article for each noun in brackets."
+  }
+]

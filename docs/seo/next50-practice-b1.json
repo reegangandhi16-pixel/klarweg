@@ -1,0 +1,578 @@
+[
+  {
+    "slug": "b1-relative-clauses-nominative-exercises",
+    "title": "Relative Clauses in Nominativ: B1 Practice",
+    "rule": "Relative clauses describe a noun more closely. The relative pronoun agrees in gender and number with its antecedent, while its case follows its role inside the relative clause. As the subject, it uses der, die or das.",
+    "trap": "Choose the pronoun by its role in the subordinate clause—not automatically by the case of the noun in the main clause.",
+    "guide": "grammar/relativsaetze.html",
+    "examples": [
+      [
+        "Das ist der Mann, der hier arbeitet.",
+        "That is the man who works here."
+      ],
+      [
+        "Ich kenne die Frau, die dort wohnt.",
+        "I know the woman who lives there."
+      ],
+      [
+        "Das Buch, das auf dem Tisch liegt, ist neu.",
+        "The book that is on the table is new."
+      ],
+      [
+        "Die Kinder, die Fußball spielen, sind laut.",
+        "The children who play football are loud."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das ist der Lehrer, ___ Deutsch unterrichtet.",
+        "der",
+        "Masculine singular relative subject."
+      ],
+      [
+        "Ich sehe das Kind, ___ dort spielt.",
+        "das",
+        "Neuter singular relative subject."
+      ],
+      [
+        "Sie trifft eine Freundin, ___ in Köln wohnt.",
+        "die",
+        "Feminine singular relative subject."
+      ],
+      [
+        "Das sind die Leute, ___ hier arbeiten.",
+        "die",
+        "Plural relative subject."
+      ]
+    ],
+    "instructions": "Use der, die or das as a relative subject; use die for plural subjects."
+  },
+  {
+    "slug": "b1-relative-clauses-accusative-exercises",
+    "title": "Relative Clauses in Akkusativ: B1 Exercises",
+    "rule": "When the relative pronoun is the direct object inside the clause, masculine takes den; feminine takes die, neuter takes das and plural takes die. The conjugated verb stays at the end.",
+    "trap": "In der Mann, den ich kenne, den is Akkusativ because ich kenne den Mann; the main noun is still masculine.",
+    "guide": "grammar/relativsaetze.html",
+    "examples": [
+      [
+        "Der Mann, den ich kenne, ist Lehrer.",
+        "The man whom I know is a teacher."
+      ],
+      [
+        "Die Tasche, die sie gekauft hat, ist schön.",
+        "The bag that she bought is beautiful."
+      ],
+      [
+        "Das Haus, das wir suchen, ist alt.",
+        "The house we are looking for is old."
+      ],
+      [
+        "Die Filme, die ich mag, sind spannend.",
+        "The films I like are exciting."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Kollege, ___ ich anrufe, ist nett.",
+        "den",
+        "Masculine direct object in relative clause."
+      ],
+      [
+        "Die Aufgabe, ___ wir machen, ist einfach.",
+        "die",
+        "Feminine direct object."
+      ],
+      [
+        "Das Geschenk, ___ du bekommst, ist klein.",
+        "das",
+        "Neuter direct object."
+      ],
+      [
+        "Die Bücher, ___ er liest, sind neu.",
+        "die",
+        "Plural direct object."
+      ]
+    ],
+    "instructions": "Use den, die or das as the relative direct object, according to gender and number."
+  },
+  {
+    "slug": "b1-passive-praesens-exercises",
+    "title": "German Passive Present Tense: B1 Practice",
+    "rule": "Vorgangspassiv describes an action or process. Use werden in the present tense plus Partizip II: Der Brief wird geschrieben. The agent can be omitted or introduced with von + Dativ.",
+    "trap": "Wird geschrieben means is being written; ist geschrieben describes the result or state and has a different focus.",
+    "guide": "grammar/passiv.html",
+    "examples": [
+      [
+        "Der Brief wird geschrieben.",
+        "The letter is being written."
+      ],
+      [
+        "Die Fenster werden geputzt.",
+        "The windows are being cleaned."
+      ],
+      [
+        "Das Essen wird gekocht.",
+        "The meal is being cooked."
+      ],
+      [
+        "Der Text wird von der Lehrerin erklärt.",
+        "The text is explained by the teacher."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Tür ___ geöffnet.",
+        "wird",
+        "Singular passive: wird + participle."
+      ],
+      [
+        "Die Bücher ___ gelesen.",
+        "werden",
+        "Plural passive: werden + participle."
+      ],
+      [
+        "Das Haus wird ___. (bauen)",
+        "gebaut",
+        "Build uses the regular participle gebaut."
+      ],
+      [
+        "Die Aufgabe ___ von Ali gemacht.",
+        "wird",
+        "Singular Aufgabe needs wird."
+      ]
+    ],
+    "instructions": "Use the present-tense form of werden for the process passive, or the participle of the verb in brackets."
+  },
+  {
+    "slug": "b1-passive-praeteritum-exercises",
+    "title": "Passive in Präteritum: Wurde and Wurden (B1)",
+    "rule": "To describe a past process in passive voice, use wurde or wurden plus the past participle: Der Brief wurde verschickt. This is common in written reports and news.",
+    "trap": "Avoid confusing wurde + participle (past process) with wurde + infinitive, which is not a standard passive construction.",
+    "guide": "grammar/passiv.html",
+    "examples": [
+      [
+        "Das Fenster wurde repariert.",
+        "The window was repaired."
+      ],
+      [
+        "Die Briefe wurden verschickt.",
+        "The letters were sent."
+      ],
+      [
+        "Der Termin wurde abgesagt.",
+        "The appointment was cancelled."
+      ],
+      [
+        "Die Schüler wurden informiert.",
+        "The students were informed."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Essen ___ gestern gekocht.",
+        "wurde",
+        "Singular past passive takes wurde."
+      ],
+      [
+        "Die Fragen ___ beantwortet.",
+        "wurden",
+        "Plural past passive takes wurden."
+      ],
+      [
+        "Das Paket wurde ___. (liefern)",
+        "geliefert",
+        "Liefern has the participle geliefert."
+      ],
+      [
+        "Der Film ___ 2020 gedreht.",
+        "wurde",
+        "Singular past passive."
+      ]
+    ],
+    "instructions": "Use wurde or wurden for the past process passive, or the participle of the verb in brackets."
+  },
+  {
+    "slug": "b1-polite-konjunktiv-ii-exercises",
+    "title": "Polite Requests with Konjunktiv II: B1 Exercises",
+    "rule": "Use könnte, würde, hätte and wäre to soften requests or imagine situations: Könnten Sie …? / Ich hätte gern … / Ich würde gern … . These forms are useful in appointments, shops and formal emails.",
+    "trap": "Könnten Sie is a polite request, while Können Sie may sound more direct. Both are grammatically possible.",
+    "guide": "grammar/konjunktiv-2.html",
+    "examples": [
+      [
+        "Könnten Sie mir bitte helfen?",
+        "Could you please help me?"
+      ],
+      [
+        "Ich hätte gern einen Kaffee.",
+        "I would like a coffee."
+      ],
+      [
+        "Würdest du das Fenster öffnen?",
+        "Would you open the window?"
+      ],
+      [
+        "Es wäre schön, wenn du kämest.",
+        "It would be nice if you came."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ Sie das bitte wiederholen? (können, polite)",
+        "Könnten",
+        "Formal polite question with Sie."
+      ],
+      [
+        "Ich ___ gern einen Tee. (haben, polite)",
+        "hätte",
+        "Hätte is Konjunktiv II of haben."
+      ],
+      [
+        "___ du mir helfen? (werden, polite)",
+        "Würdest",
+        "Du takes würdest."
+      ],
+      [
+        "Das ___ sehr nett. (sein, hypothetical)",
+        "wäre",
+        "Wäre is Konjunktiv II of sein. With a full conditional clause: Es wäre schön, wenn du kämest (or: kommen würdest)."
+      ]
+    ],
+    "instructions": "Use Konjunktiv II of the verb in brackets to make a polite or hypothetical statement."
+  },
+  {
+    "slug": "b1-obwohl-trotzdem-exercises",
+    "title": "Obwohl or Trotzdem? German B1 Word Order Quiz",
+    "rule": "Obwohl introduces a subordinate clause with a verb at the end: Obwohl es regnet, gehen wir raus. Trotzdem connects independent ideas and triggers inversion when placed first: Trotzdem gehen wir raus.",
+    "trap": "Do not place trotzdem into a weil-style subordinate clause; it is an adverb, not the same kind of conjunction as obwohl.",
+    "guide": "grammar/zweiteilige-konnektoren.html",
+    "examples": [
+      [
+        "Obwohl es regnet, gehen wir spazieren.",
+        "Although it is raining, we go for a walk."
+      ],
+      [
+        "Es regnet. Trotzdem gehen wir spazieren.",
+        "It is raining. Nevertheless, we go for a walk."
+      ],
+      [
+        "Obwohl sie müde ist, lernt sie.",
+        "Although she is tired, she studies."
+      ],
+      [
+        "Er hat wenig Zeit. Trotzdem hilft er.",
+        "He has little time. Nevertheless, he helps."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ ich müde bin, lerne ich weiter.",
+        "Obwohl",
+        "Subordinate concessive clause."
+      ],
+      [
+        "Es ist spät. ___ bleiben wir noch.",
+        "Trotzdem",
+        "Independent contrast with inverted verb order."
+      ],
+      [
+        "Obwohl er müde ___, arbeitet er. (sein)",
+        "ist",
+        "Finite verb goes to clause end."
+      ],
+      [
+        "Es regnet. Trotzdem ___ wir draußen. (spielen)",
+        "spielen",
+        "After trotzdem, finite verb takes position two."
+      ]
+    ],
+    "instructions": "Choose obwohl or trotzdem for the connector gaps. Conjugate the verb in brackets for the other gaps."
+  },
+  {
+    "slug": "b1-um-zu-damit-exercises",
+    "title": "Um ... Zu vs Damit: B1 Purpose Clauses Practice",
+    "rule": "Use um … zu + infinitive when the same person performs the main action and the intended result. Damit introduces a finite purpose clause and can have a different subject.",
+    "trap": "Do not use um … zu if the purpose requires a different actor: Ich spreche langsam, damit du mich verstehst.",
+    "guide": "grammar/infinitiv-mit-zu.html",
+    "examples": [
+      [
+        "Ich lerne, um die Prüfung zu bestehen.",
+        "I study in order to pass the exam."
+      ],
+      [
+        "Sie spart Geld, um ein Fahrrad zu kaufen.",
+        "She saves money to buy a bicycle."
+      ],
+      [
+        "Ich spreche langsam, damit du mich verstehst.",
+        "I speak slowly so that you understand me."
+      ],
+      [
+        "Wir öffnen das Fenster, damit frische Luft hereinkommt.",
+        "We open the window so that fresh air enters."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich gehe früh schlafen, ___ morgen fit zu sein.",
+        "um",
+        "Same-subject purpose: um ... zu."
+      ],
+      [
+        "Er erklärt es, ___ alle es verstehen.",
+        "damit",
+        "Different subject and finite verb."
+      ],
+      [
+        "Sie lernt, um besser Deutsch ___ sprechen.",
+        "zu",
+        "Infinitive construction requires zu."
+      ],
+      [
+        "Ich schreibe groß, ___ man es lesen kann.",
+        "damit",
+        "Finite subordinate purpose clause."
+      ]
+    ],
+    "instructions": "Choose um, zu or damit to complete each purpose construction."
+  },
+  {
+    "slug": "b1-indirect-questions-exercises",
+    "title": "Indirect Questions in German: B1 Word Order Practice",
+    "rule": "An indirect question is embedded in another sentence: Ich weiß nicht, wann der Zug kommt. W-questions keep their question word; yes/no questions use ob. The finite verb normally moves to the end.",
+    "trap": "Do not write Ich weiß nicht, wann kommt der Zug: indirect questions use subordinate-clause word order.",
+    "guide": "grammar/word-order.html",
+    "examples": [
+      [
+        "Weißt du, wann der Kurs beginnt?",
+        "Do you know when the class begins?"
+      ],
+      [
+        "Ich frage mich, ob er Zeit hat.",
+        "I wonder whether he has time."
+      ],
+      [
+        "Sie weiß nicht, wo das Museum ist.",
+        "She does not know where the museum is."
+      ],
+      [
+        "Können Sie sagen, wie viel das kostet?",
+        "Can you say how much that costs?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich weiß nicht, ___ sie morgen kommt. (whether)",
+        "ob",
+        "Yes/no indirect questions use ob."
+      ],
+      [
+        "Weißt du, wann der Film ___? (beginnen)",
+        "beginnt",
+        "Finite verb at the end."
+      ],
+      [
+        "Er fragt, ___ du wohnst. (where)",
+        "wo",
+        "Embedded W-question."
+      ],
+      [
+        "Kannst du sagen, wo das Paket ___? (sein)",
+        "ist",
+        "Finite verb goes to the end."
+      ]
+    ],
+    "instructions": "Use the English question-word cue or conjugate the verb in brackets in the present tense."
+  },
+  {
+    "slug": "b1-genitive-possession-exercises",
+    "title": "German Genitive Possession: Des and Der B1 Exercises",
+    "rule": "The Genitiv expresses belonging: das Auto des Mannes, das Zimmer der Frau. Masculine/neuter singular typically use des with an -s/-es noun ending; feminine/plural usually use der.",
+    "trap": "Do not add -s to every noun: die Tasche der Frau is correct, with no extra ending on Frau.",
+    "guide": "grammar/genitiv.html",
+    "examples": [
+      [
+        "Das Auto des Mannes ist rot.",
+        "The man's car is red."
+      ],
+      [
+        "Die Tasche der Frau ist neu.",
+        "The woman's bag is new."
+      ],
+      [
+        "Das Zimmer des Kindes ist groß.",
+        "The child's room is big."
+      ],
+      [
+        "Die Stimmen der Kinder sind laut.",
+        "The children's voices are loud."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Buch ___ Lehrers liegt hier.",
+        "des",
+        "Masculine singular Genitiv article."
+      ],
+      [
+        "Die Farbe ___ Tasche gefällt mir.",
+        "der",
+        "Feminine Genitiv article."
+      ],
+      [
+        "Die Tür ___ Hauses ist offen.",
+        "des",
+        "Neuter singular Genitiv article."
+      ],
+      [
+        "Die Namen ___ Schüler stehen hier.",
+        "der",
+        "Plural Genitiv article."
+      ]
+    ],
+    "instructions": "Complete each noun phrase with the genitive definite article des or der."
+  },
+  {
+    "slug": "b1-n-declension-exercises",
+    "title": "N-Deklination: German B1 Exercises with Answers",
+    "rule": "Certain masculine nouns take -n or -en outside Nominativ singular: der Student → den Studenten → dem Studenten → des Studenten. Common examples include Student, Kollege, Junge and Mensch.",
+    "trap": "Do not add the extra -n to ordinary masculine nouns such as der Tisch.",
+    "guide": "grammar/n-deklination.html",
+    "examples": [
+      [
+        "Ich sehe den Studenten.",
+        "I see the student."
+      ],
+      [
+        "Wir helfen dem Kollegen.",
+        "We help the colleague."
+      ],
+      [
+        "Das Spielzeug gehört dem Jungen.",
+        "The toy belongs to the boy."
+      ],
+      [
+        "Er kennt diesen Menschen.",
+        "He knows this person."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich treffe den ___. (Student)",
+        "Studenten",
+        "Akkusativ singular N-declension."
+      ],
+      [
+        "Sie spricht mit dem ___. (Kollege)",
+        "Kollegen",
+        "Dativ singular N-declension."
+      ],
+      [
+        "Das Geschenk ist für den ___. (Junge)",
+        "Jungen",
+        "Akkusativ singular N-declension."
+      ],
+      [
+        "Das ist das Auto des ___. (Mensch)",
+        "Menschen",
+        "Genitiv singular N-declension."
+      ]
+    ],
+    "instructions": "Put the noun in brackets into the case required by the sentence."
+  },
+  {
+    "slug": "b1-wo-compounds-exercises",
+    "title": "Worauf, Wofür, Womit: German B1 Practice",
+    "rule": "Use wo(r)- + preposition to ask about things: Worauf wartest du? Womit fährst du? For people, use the preposition with wen/wem: Auf wen wartest du?",
+    "trap": "Do not use worauf to refer to a person; prefer auf wen. Add -r- before a vowel: wo + auf = worauf.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "examples": [
+      [
+        "Worauf wartest du? — Auf den Bus.",
+        "What are you waiting for? — The bus."
+      ],
+      [
+        "Womit schreibst du? — Mit einem Stift.",
+        "What do you write with? — A pen."
+      ],
+      [
+        "Wofür interessierst du dich? — Für Musik.",
+        "What are you interested in? — Music."
+      ],
+      [
+        "Auf wen wartest du? — Auf Anna.",
+        "Whom are you waiting for? — Anna."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ wartest du? — Auf den Zug.",
+        "Worauf",
+        "Thing + auf → worauf."
+      ],
+      [
+        "___ fährst du? — Mit dem Bus.",
+        "Womit",
+        "Thing/instrument + mit → womit."
+      ],
+      [
+        "___ interessiert sie sich? — Für Kunst.",
+        "Wofür",
+        "Thing + für → wofür."
+      ],
+      [
+        "Auf ___ wartest du? — Auf deinen Bruder.",
+        "wen",
+        "For a person use preposition + wen."
+      ]
+    ],
+    "instructions": "Use a wo(r)-compound for things, and wen after auf for the person in the last question."
+  },
+  {
+    "slug": "b1-praeteritum-storytelling-exercises",
+    "title": "Präteritum Storytelling: B1 German Past Tense Quiz",
+    "rule": "Präteritum is frequent in written stories and reports, especially with sein, haben and modal verbs. Common forms are war, hatte, ging, kam, sah and machte; the narrative remains consistently in the past.",
+    "trap": "Written narratives may use Präteritum, while spoken German often uses Perfekt for many action verbs. The meaning is past in both cases.",
+    "guide": "grammar/praeteritum.html",
+    "examples": [
+      [
+        "Gestern war ich zu Hause.",
+        "Yesterday I was at home."
+      ],
+      [
+        "Sie hatte wenig Zeit.",
+        "She had little time."
+      ],
+      [
+        "Er ging früh nach Hause.",
+        "He went home early."
+      ],
+      [
+        "Wir sahen einen alten Film.",
+        "We saw an old film."
+      ]
+    ],
+    "quiz": [
+      [
+        "Früher ___ ich in Bonn. (wohnen)",
+        "wohnte",
+        "Regular wohnen takes -te in Präteritum."
+      ],
+      [
+        "Gestern ___ wir müde. (sein)",
+        "waren",
+        "Wir + sein in Präteritum."
+      ],
+      [
+        "Sie ___ keine Zeit. (haben)",
+        "hatte",
+        "Sie singular + hatte."
+      ],
+      [
+        "Er ___ den Brief. (schreiben)",
+        "schrieb",
+        "Schreiben is a strong verb."
+      ]
+    ],
+    "instructions": "Put the verb in brackets into Präteritum. In question 3, sie refers to one woman."
+  }
+]

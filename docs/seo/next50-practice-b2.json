@@ -1,0 +1,485 @@
+[
+  {
+    "slug": "b2-konjunktiv-i-reported-speech-exercises",
+    "title": "Konjunktiv I in Reported Speech: B2 Practice",
+    "rule": "Formal reported speech often marks a statement as reported rather than confirmed: Er sagt, er sei krank. Common forms include sei, habe, könne and werde. If a Konjunktiv I form looks identical to Indikativ, writers often use Konjunktiv II or another reporting construction.",
+    "trap": "Do not present reported claims as verified facts. Er sagt, er sei ... signals attribution.",
+    "guide": "grammar/konjunktiv-2.html",
+    "examples": [
+      [
+        "Er sagt, er sei müde.",
+        "He says that he is tired."
+      ],
+      [
+        "Sie erklärt, sie habe keine Zeit.",
+        "She explains that she has no time."
+      ],
+      [
+        "Der Sprecher sagt, man könne später beginnen.",
+        "The speaker says it is possible to start later."
+      ],
+      [
+        "Sie behauptet, er werde bald kommen.",
+        "She claims that he will come soon."
+      ]
+    ],
+    "quiz": [
+      [
+        "Er sagt, er ___ krank. (sein, K I)",
+        "sei",
+        "Konjunktiv I third-person singular of sein."
+      ],
+      [
+        "Sie sagt, sie ___ Hunger. (haben, K I)",
+        "habe",
+        "Konjunktiv I third-person singular of haben."
+      ],
+      [
+        "Er erklärt, man ___ die Tür öffnen. (können, K I)",
+        "könne",
+        "Konjunktiv I third-person singular of können."
+      ],
+      [
+        "Sie sagt, der Bus ___ später fahren. (werden, K I)",
+        "werde",
+        "Konjunktiv I third-person singular of werden."
+      ]
+    ],
+    "instructions": "Put the verb in brackets into Konjunktiv I for reported speech.",
+    "guideLabel": "Compare Konjunktiv II (a related form)"
+  },
+  {
+    "slug": "b2-nominalisation-exercises",
+    "title": "German Nominalisation: B2 Sentence Transformations",
+    "rule": "Formal German often compresses a clause into a noun phrase: weil es regnet → wegen des Regens; nachdem die Prüfung beendet war → nach der Prüfung. Preserve the meaning and choose the case required by the preposition.",
+    "trap": "Nominalisation changes sentence structure, not merely the capitalization of a verb. Avoid changing the timeline or cause.",
+    "guide": "grammar/genitiv.html",
+    "examples": [
+      [
+        "Wegen des Regens bleiben wir zu Hause.",
+        "Because of the rain, we stay home."
+      ],
+      [
+        "Nach der Besprechung schreiben wir das Protokoll.",
+        "After the meeting, we write the minutes."
+      ],
+      [
+        "Während des Unterrichts bleibt das Handy aus.",
+        "The phone stays off during class."
+      ],
+      [
+        "Trotz der Schwierigkeiten haben wir weitergemacht.",
+        "Despite the difficulties, we continued."
+      ]
+    ],
+    "quiz": [
+      [
+        "weil es regnet → wegen ___ Regens",
+        "des",
+        "Wegen normally governs Genitiv in formal standard German."
+      ],
+      [
+        "nachdem der Kurs zu Ende ist → nach ___ Kurs",
+        "dem",
+        "Nach requires Dativ."
+      ],
+      [
+        "während die Prüfung läuft → während ___ Prüfung",
+        "der",
+        "Formal während commonly takes Genitiv; Prüfung is feminine."
+      ],
+      [
+        "obwohl es Probleme gibt → ___ der Probleme",
+        "trotz",
+        "Trotz + genitive turns the concessive clause into a noun phrase: trotz der Probleme."
+      ]
+    ],
+    "instructions": "Complete the nominal phrase with the correct article or preposition, keeping the meaning of the clause.",
+    "guideLabel": "Review genitive noun phrases"
+  },
+  {
+    "slug": "b2-waehrend-wohingegen-exercises",
+    "title": "Während vs Wohingegen: B2 Contrast Exercises",
+    "rule": "Während can express simultaneous time or a contrast. Wohingegen explicitly contrasts two facts and usually appears in a subordinate clause with verb-final order.",
+    "trap": "Do not read every während as a time expression. The surrounding clauses reveal whether it means while or whereas.",
+    "guide": "grammar/zweiteilige-konnektoren.html",
+    "examples": [
+      [
+        "Während ich koche, hört sie Musik.",
+        "While I cook, she listens to music."
+      ],
+      [
+        "Er arbeitet früh, wohingegen sie nachts arbeitet.",
+        "He works early, whereas she works at night."
+      ],
+      [
+        "Während die Preise steigen, bleiben die Löhne gleich.",
+        "While prices rise, wages remain unchanged."
+      ],
+      [
+        "Sie lernt lieber allein, wohingegen er Gruppen bevorzugt.",
+        "She prefers studying alone, whereas he prefers groups."
+      ]
+    ],
+    "quiz": [
+      [
+        "Er mag Tee, ___ sie lieber Kaffee trinkt.",
+        "wohingegen",
+        "Wohingegen explicitly contrasts preferences. Während is also grammatically possible here with the meaning “whereas”."
+      ],
+      [
+        "___ ich lese, schläft das Baby.",
+        "Während",
+        "Simultaneous actions."
+      ],
+      [
+        "Sie fährt mit dem Zug, wohingegen er mit dem Auto ___. (fahren)",
+        "fährt",
+        "The finite verb is final."
+      ],
+      [
+        "Während der Kurs läuft, ___ wir keine Pause. (machen)",
+        "machen",
+        "Main clause follows a fronted subordinate clause with the verb first."
+      ]
+    ],
+    "instructions": "Use während for simultaneous actions and wohingegen for contrast in this exercise; conjugate the verb in brackets where given."
+  },
+  {
+    "slug": "b2-participial-adjectives-exercises",
+    "title": "Partizip I and II as Adjectives: German B2 Quiz",
+    "rule": "Partizip I often describes an ongoing active process: die lachenden Kinder. Partizip II often describes a completed or passive-like state: die geschlossene Tür. Both take adjective endings when used before nouns.",
+    "trap": "Do not confuse a person doing an action with an object affected by it: der schreibende Mann versus der geschriebene Brief.",
+    "guide": "grammar/adjektivdeklination.html",
+    "examples": [
+      [
+        "Die spielenden Kinder sind laut.",
+        "The children who are playing are loud."
+      ],
+      [
+        "Die geschlossene Tür ist rot.",
+        "The closed door is red."
+      ],
+      [
+        "Der wartende Mann schaut auf die Uhr.",
+        "The waiting man looks at the clock."
+      ],
+      [
+        "Der geschriebene Brief liegt auf dem Tisch.",
+        "The written letter is on the table."
+      ]
+    ],
+    "quiz": [
+      [
+        "die ___ Kinder (spielen, Partizip I)",
+        "spielenden",
+        "Partizip I: spielend + adjective ending -en."
+      ],
+      [
+        "die ___ Tür (schließen, Partizip II)",
+        "geschlossene",
+        "Closed state + feminine -e after die."
+      ],
+      [
+        "der ___ Mann (warten, Partizip I)",
+        "wartende",
+        "Wartend + -e after der."
+      ],
+      [
+        "das ___ Fenster (öffnen, Partizip II)",
+        "geöffnete",
+        "Opened state + neuter -e after das."
+      ]
+    ],
+    "instructions": "Form the participle indicated in brackets and add its adjective ending."
+  },
+  {
+    "slug": "b2-sich-lassen-passive-exercises",
+    "title": "Sich Lassen: Passive Alternative Exercises (B2)",
+    "rule": "Sich lassen + infinitive frequently means something can be done: Der Fehler lässt sich korrigieren = Der Fehler kann korrigiert werden. The reflexive pronoun and finite form of lassen agree with the subject.",
+    "trap": "A passive alternative describes possibility, not an instruction to somebody to allow something.",
+    "guide": "grammar/passiv.html",
+    "examples": [
+      [
+        "Das Problem lässt sich lösen.",
+        "The problem can be solved."
+      ],
+      [
+        "Die Datei lässt sich öffnen.",
+        "The file can be opened."
+      ],
+      [
+        "Diese Aufgabe lässt sich leicht erklären.",
+        "This task can be explained easily."
+      ],
+      [
+        "Die Fehler lassen sich vermeiden.",
+        "The mistakes can be avoided."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Problem ___ sich lösen.",
+        "lässt",
+        "Singular subject takes lässt."
+      ],
+      [
+        "Die Fragen ___ sich beantworten.",
+        "lassen",
+        "Plural subject takes lassen."
+      ],
+      [
+        "Die Tür lässt sich ___. (öffnen)",
+        "öffnen",
+        "After lassen, use a bare infinitive."
+      ],
+      [
+        "Der Satz lässt ___ verbessern.",
+        "sich",
+        "Reflexive pronoun accompanies lassen here."
+      ]
+    ],
+    "instructions": "Complete the possibility construction with lassen in the present tense, sich or the infinitive in brackets."
+  },
+  {
+    "slug": "b2-je-desto-exercises",
+    "title": "Je ... Desto: German B2 Comparison Practice",
+    "rule": "Je + comparative introduces a dependent clause; desto/umso + comparative starts the main clause. Example: Je mehr ich lerne, desto sicherer spreche ich. The verb in the je-clause is final.",
+    "trap": "Both halves need a comparison, not a plain adjective: je schneller ... desto besser.",
+    "guide": "grammar/komparativ.html",
+    "examples": [
+      [
+        "Je mehr ich übe, desto besser spreche ich.",
+        "The more I practise, the better I speak."
+      ],
+      [
+        "Je länger wir warten, desto ungeduldiger werden wir.",
+        "The longer we wait, the more impatient we become."
+      ],
+      [
+        "Je früher du kommst, desto mehr Zeit haben wir.",
+        "The earlier you come, the more time we have."
+      ],
+      [
+        "Je weniger er schläft, desto müder ist er.",
+        "The less he sleeps, the more tired he is."
+      ]
+    ],
+    "quiz": [
+      [
+        "Je mehr du liest, ___ größer wird dein Wortschatz.",
+        "desto",
+        "Desto starts the main-clause comparison; umso is also correct."
+      ],
+      [
+        "___ schneller du lernst, desto früher bist du fertig.",
+        "Je",
+        "Begin the dependent comparison."
+      ],
+      [
+        "Je mehr ich lerne, desto ___ verstehe ich. (viel, comparative)",
+        "mehr",
+        "Use the comparative mehr."
+      ],
+      [
+        "Je länger wir warten, desto ___ werden wir. (nervös, comparative)",
+        "nervöser",
+        "Use the comparative adjective."
+      ]
+    ],
+    "instructions": "Use je or desto to link the clauses, or form the comparative of the word in brackets."
+  },
+  {
+    "slug": "b2-relative-prepositions-exercises",
+    "title": "Relative Pronouns with Prepositions: B2 Exercises",
+    "rule": "When a relative pronoun follows a preposition, its case depends on that preposition: der Kollege, mit dem ich spreche; das Thema, über das wir diskutieren. The verb remains at the end of the relative clause.",
+    "trap": "Keep the preposition before the relative pronoun. Relative gender comes from the antecedent, but case comes from the clause.",
+    "guide": "grammar/relativsaetze.html",
+    "examples": [
+      [
+        "Der Mann, mit dem ich spreche, ist nett.",
+        "The man I speak with is nice."
+      ],
+      [
+        "Die Frau, auf die ich warte, kommt später.",
+        "The woman I am waiting for arrives later."
+      ],
+      [
+        "Das Thema, über das wir diskutieren, ist wichtig.",
+        "The topic we discuss is important."
+      ],
+      [
+        "Die Freunde, mit denen wir reisen, sind hier.",
+        "The friends we travel with are here."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Kollege, mit ___ ich arbeite, ist freundlich.",
+        "dem",
+        "Mit takes Dativ; masculine singular → dem."
+      ],
+      [
+        "Die Person, auf ___ ich warte, ist pünktlich.",
+        "die",
+        "Warten auf takes Akkusativ; feminine → die."
+      ],
+      [
+        "Das Problem, über ___ wir reden, ist neu.",
+        "das",
+        "Reden über takes Akkusativ; neuter → das."
+      ],
+      [
+        "Die Eltern, mit ___ wir sprechen, sind hier.",
+        "denen",
+        "Mit + plural Dativ relative pronoun denen."
+      ]
+    ],
+    "instructions": "Use the relative pronoun required by the preposition and the antecedent’s gender and number."
+  },
+  {
+    "slug": "b2-adjective-endings-no-article-exercises",
+    "title": "Adjective Endings Without Articles: B2 Practice",
+    "rule": "Without a preceding article, adjectives usually carry the strong case/gender ending: frischer Kaffee, kaltes Wasser, mit gutem Wein. Identify case, number and gender before choosing the ending.",
+    "trap": "Do not use the same -e ending everywhere. Without an article, the adjective often carries grammatical information normally shown by der/die/das.",
+    "guide": "grammar/adjektivdeklination.html",
+    "examples": [
+      [
+        "Frischer Kaffee schmeckt gut.",
+        "Fresh coffee tastes good."
+      ],
+      [
+        "Kaltes Wasser hilft heute.",
+        "Cold water helps today."
+      ],
+      [
+        "Ich trinke heißen Tee.",
+        "I drink hot tea."
+      ],
+      [
+        "Mit gutem Wein kocht sie gern.",
+        "She likes cooking with good wine."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ Kaffee ist lecker. (frisch)",
+        "Frischer",
+        "Masculine Nominativ, no article → -er."
+      ],
+      [
+        "Ich trinke ___ Wasser. (kalt)",
+        "kaltes",
+        "Neuter Akkusativ, no article → -es."
+      ],
+      [
+        "Er kauft ___ Brot. (frisch)",
+        "frisches",
+        "Neuter Akkusativ, no article → -es."
+      ],
+      [
+        "Sie spricht mit ___ Leuten. (nett)",
+        "netten",
+        "Plural Dativ, no article → -en."
+      ]
+    ],
+    "instructions": "Add the strong adjective ending to the word in brackets; identify case, gender and number first."
+  },
+  {
+    "slug": "b2-noun-verb-collocations-exercises",
+    "title": "Nomen-Verb-Verbindungen: B2 Vocabulary Practice",
+    "rule": "Advanced German often uses fixed noun–verb combinations: eine Entscheidung treffen, einen Antrag stellen, zur Verfügung stehen and Maßnahmen ergreifen. Learn the whole phrase, including its article and case.",
+    "trap": "Do not translate the individual words literally; these phrases have conventional meanings and natural collocations.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "examples": [
+      [
+        "Wir müssen eine Entscheidung treffen.",
+        "We have to make a decision."
+      ],
+      [
+        "Sie möchte einen Antrag stellen.",
+        "She wants to submit an application."
+      ],
+      [
+        "Die Unterlagen stehen zur Verfügung.",
+        "The documents are available."
+      ],
+      [
+        "Die Stadt muss Maßnahmen ergreifen.",
+        "The city must take measures."
+      ]
+    ],
+    "quiz": [
+      [
+        "eine Entscheidung ___",
+        "treffen",
+        "The collocation is eine Entscheidung treffen."
+      ],
+      [
+        "einen Antrag ___",
+        "stellen",
+        "Einen Antrag stellen means to submit an application. Einen Antrag einreichen is another natural phrase, outside this exercise’s verb bank."
+      ],
+      [
+        "zur Verfügung ___",
+        "stehen",
+        "Zur Verfügung stehen means to be available."
+      ],
+      [
+        "Maßnahmen ___",
+        "ergreifen",
+        "Maßnahmen ergreifen means to take measures."
+      ]
+    ],
+    "instructions": "Complete the phrases using each verb once: treffen, stellen, stehen, ergreifen.",
+    "guideLabel": "Review verbs with prepositions"
+  },
+  {
+    "slug": "b2-argumentation-connectors-exercises",
+    "title": "B2 Argumentation Connectors: Writing Practice",
+    "rule": "Organize a balanced argument with einerseits … andererseits, zwar … aber, darüber hinaus and folglich. Some connectors occupy the first position and require verb-second order in the following main clause.",
+    "trap": "Do not chain connectors without a logical relationship. Use contrast for competing points and folglich only for a plausible consequence.",
+    "guide": "grammar/zweiteilige-konnektoren.html",
+    "examples": [
+      [
+        "Einerseits spart Homeoffice Zeit, andererseits fehlt der Austausch.",
+        "On one hand remote work saves time; on the other hand interaction is missing."
+      ],
+      [
+        "Der Kurs ist zwar teuer, aber sehr hilfreich.",
+        "The course is expensive, but very helpful."
+      ],
+      [
+        "Darüber hinaus bietet die Schule Onlineübungen an.",
+        "In addition, the school offers online exercises."
+      ],
+      [
+        "Die Nachfrage steigt. Folglich brauchen wir mehr Plätze.",
+        "Demand is growing. Consequently, we need more places."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ ist der Weg kurz, andererseits ist er gefährlich.",
+        "Einerseits",
+        "Pairs with andererseits to balance arguments."
+      ],
+      [
+        "Das Angebot ist ___ günstig, aber zeitlich unpassend.",
+        "zwar",
+        "Zwar prepares a contrast with aber."
+      ],
+      [
+        "___ hinaus gibt es neue Aufgaben.",
+        "Darüber",
+        "Darüber hinaus adds another supporting point."
+      ],
+      [
+        "Der Kurs ist voll. ___ können wir heute niemanden aufnehmen.",
+        "Folglich",
+        "States a plausible consequence, followed by verb-second order."
+      ]
+    ],
+    "instructions": "Use each expression once: einerseits, zwar, darüber, folglich. Capitalise a word at the start of a sentence."
+  }
+]

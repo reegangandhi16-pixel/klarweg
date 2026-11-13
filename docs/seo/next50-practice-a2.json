@@ -1,0 +1,674 @@
+[
+  {
+    "slug": "a2-dativ-articles-exercises",
+    "title": "Dativ Articles: Dem, Der, Den Exercises (A2)",
+    "rule": "Dativ often marks the receiver of something or follows prepositions like mit, nach and bei. Use dem (masculine/neuter), der (feminine), den (plural); plural nouns often add -n if possible.",
+    "trap": "Within the dative, den is the plural definite article; masculine singular takes dem. Outside the dative, den is also used for masculine accusative.",
+    "guide": "grammar/dativ.html",
+    "examples": [
+      [
+        "Ich helfe dem Mann.",
+        "I help the man."
+      ],
+      [
+        "Sie spricht mit der Lehrerin.",
+        "She speaks with the teacher."
+      ],
+      [
+        "Das gehört dem Kind.",
+        "That belongs to the child."
+      ],
+      [
+        "Wir danken den Gästen.",
+        "We thank the guests."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich fahre mit ___ Bus. (der Bus)",
+        "dem",
+        "Mit always takes Dativ."
+      ],
+      [
+        "Er hilft ___ Frau. (die Frau)",
+        "der",
+        "Feminine Dativ takes der."
+      ],
+      [
+        "Das Spielzeug gehört ___ Baby. (das Baby)",
+        "dem",
+        "Neuter Dativ takes dem."
+      ],
+      [
+        "Sie spricht mit ___ Kindern. (plural)",
+        "den",
+        "Plural Dativ takes den, and Kindern has -n."
+      ]
+    ],
+    "instructions": "Use the dative definite article for each noun in brackets."
+  },
+  {
+    "slug": "a2-dativ-pronouns-exercises",
+    "title": "Mir, Dir, Ihm: Dativ Pronoun Practice for A2",
+    "rule": "Replace a Dativ noun with mir, dir, ihm, ihr, ihm, uns, euch, ihnen or Ihnen. Dativ pronouns often answer wem? (to whom?) and occur after verbs like helfen or gefallen.",
+    "trap": "Use dir, not dich, after helfen: Ich helfe dir.",
+    "guide": "grammar/dativ.html",
+    "examples": [
+      [
+        "Kannst du mir helfen?",
+        "Can you help me?"
+      ],
+      [
+        "Das Buch gehört ihm.",
+        "The book belongs to him."
+      ],
+      [
+        "Ich danke euch.",
+        "I thank you all."
+      ],
+      [
+        "Der Film gefällt ihr.",
+        "She likes the film."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich helfe ___. (you, informal singular)",
+        "dir",
+        "Helfen selects Dativ."
+      ],
+      [
+        "Das Essen schmeckt ___. (us)",
+        "uns",
+        "Uns is Dativ for wir."
+      ],
+      [
+        "Der Schlüssel gehört ___. (him)",
+        "ihm",
+        "Ihm is Dativ for er."
+      ],
+      [
+        "Wir danken ___. (them)",
+        "ihnen",
+        "Lowercase ihnen means “them”; capital Ihnen would mean formal “you”."
+      ]
+    ],
+    "instructions": "Replace the English cue in brackets with a dative pronoun."
+  },
+  {
+    "slug": "a2-akkusativ-pronouns-exercises",
+    "title": "Mich, Dich, Ihn: Akkusativ Pronoun Exercises",
+    "rule": "Direct objects use Akkusativ pronouns such as mich, dich, ihn, sie, es, uns, euch, sie and Sie. Replace a known direct-object noun only after identifying its gender and number.",
+    "trap": "I see him = Ich sehe ihn, not Ich sehe ihm; ihm is Dativ.",
+    "guide": "grammar/akkusativ.html",
+    "examples": [
+      [
+        "Kannst du mich hören?",
+        "Can you hear me?"
+      ],
+      [
+        "Ich kenne ihn schon.",
+        "I already know him."
+      ],
+      [
+        "Wir besuchen euch morgen.",
+        "We are visiting you all tomorrow."
+      ],
+      [
+        "Sie kauft das Buch. Sie kauft es.",
+        "She buys the book. She buys it."
+      ]
+    ],
+    "quiz": [
+      [
+        "Siehst du Paul? — Ja, ich sehe ___.",
+        "ihn",
+        "Paul is a masculine direct object."
+      ],
+      [
+        "Verstehst du mich? — Ja, ich verstehe ___.",
+        "dich",
+        "Dich is Akkusativ for du."
+      ],
+      [
+        "Besuchst du uns? — Ja, ich besuche ___.",
+        "euch",
+        "When replying to someone who says uns (“us”), refer to that group as euch (“you all”)."
+      ],
+      [
+        "Kennst du die Frau? — Ja, ich kenne ___.",
+        "sie",
+        "Feminine Akkusativ singular is sie."
+      ]
+    ],
+    "instructions": "Complete each reply with the accusative pronoun for the person or people addressed or mentioned."
+  },
+  {
+    "slug": "a2-wechselpraepositionen-wo-exercises",
+    "title": "Wo? Dativ with Two-Way Prepositions (A2)",
+    "rule": "Two-way prepositions including in, auf, an, unter and neben take Dativ to express location (wo?). The article changes according to the noun's gender.",
+    "trap": "The distinction is position versus destination, not merely whether the verb involves physical motion.",
+    "guide": "grammar/prepositions.html",
+    "examples": [
+      [
+        "Das Buch liegt auf dem Tisch.",
+        "The book is on the table."
+      ],
+      [
+        "Das Bild hängt an der Wand.",
+        "The picture hangs on the wall."
+      ],
+      [
+        "Ich bin in der Küche.",
+        "I am in the kitchen."
+      ],
+      [
+        "Der Ball liegt unter dem Stuhl.",
+        "The ball lies under the chair."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Katze sitzt auf ___ Sofa. (das)",
+        "dem",
+        "Static location: neuter Dativ."
+      ],
+      [
+        "Das Foto hängt an ___ Wand. (die)",
+        "der",
+        "Static location: feminine Dativ."
+      ],
+      [
+        "Wir warten in ___ Zimmer. (das)",
+        "dem",
+        "Static location: neuter Dativ."
+      ],
+      [
+        "Die Tasche steht neben ___ Tür. (die)",
+        "der",
+        "Static location: feminine Dativ."
+      ]
+    ],
+    "instructions": "Use the dative definite article to express a location (wo?)."
+  },
+  {
+    "slug": "a2-wechselpraepositionen-wohin-exercises",
+    "title": "Wohin? Akkusativ Direction Exercises (A2)",
+    "rule": "With in, auf, an, unter and neben, a change of location or destination (wohin?) takes Akkusativ: auf den Tisch, in die Küche, an die Wand. Compare the result with wo? + Dativ.",
+    "trap": "A walking or running action is not enough by itself: the sentence must express a destination or placement.",
+    "guide": "grammar/prepositions.html",
+    "examples": [
+      [
+        "Ich lege das Buch auf den Tisch.",
+        "I put the book onto the table."
+      ],
+      [
+        "Sie geht in die Küche.",
+        "She goes into the kitchen."
+      ],
+      [
+        "Er hängt das Bild an die Wand.",
+        "He hangs the picture on the wall."
+      ],
+      [
+        "Die Katze springt auf das Sofa.",
+        "The cat jumps onto the sofa."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich stelle die Lampe auf ___ Tisch. (der)",
+        "den",
+        "Destination: masculine Akkusativ."
+      ],
+      [
+        "Er geht in ___ Zimmer. (das)",
+        "das",
+        "Destination: neuter Akkusativ."
+      ],
+      [
+        "Sie hängt das Foto an ___ Wand. (die)",
+        "die",
+        "Destination: feminine Akkusativ."
+      ],
+      [
+        "Wir setzen uns neben ___ Fenster. (das)",
+        "das",
+        "Destination: neuter Akkusativ."
+      ]
+    ],
+    "instructions": "Use the accusative definite article to express a destination or placement (wohin?)."
+  },
+  {
+    "slug": "a2-perfekt-haben-exercises",
+    "title": "Perfekt with Haben: German A2 Practice",
+    "rule": "Many verbs form Perfekt with a conjugated form of haben in position two and a Partizip II at the end. Regular verbs commonly form ge- + stem + -t, e.g. gemacht, gelernt.",
+    "trap": "Do not place the participle in position two: Ich habe gestern gelernt, not Ich gelernt habe gestern.",
+    "guide": "grammar/perfekt.html",
+    "examples": [
+      [
+        "Ich habe gestern Deutsch gelernt.",
+        "I studied German yesterday."
+      ],
+      [
+        "Sie hat Kaffee gekauft.",
+        "She bought coffee."
+      ],
+      [
+        "Wir haben ein Foto gemacht.",
+        "We took a photo."
+      ],
+      [
+        "Habt ihr die Aufgabe gelöst?",
+        "Did you solve the task?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ gestern viel gelernt.",
+        "habe",
+        "Ich takes habe as helper."
+      ],
+      [
+        "Sie (singular) ___ das Fenster geöffnet.",
+        "hat",
+        "Sie singular takes hat."
+      ],
+      [
+        "Wir haben die Hausaufgaben ___. (machen)",
+        "gemacht",
+        "Regular machen forms gemacht."
+      ],
+      [
+        "Du ___ den Film gesehen.",
+        "hast",
+        "Du takes hast as helper."
+      ]
+    ],
+    "instructions": "Complete the perfect tense with the present-tense form of haben, or the participle of the verb in brackets."
+  },
+  {
+    "slug": "a2-perfekt-sein-exercises",
+    "title": "Perfekt with Sein: A2 Movement Verb Exercises",
+    "rule": "Many intransitive verbs of change of location or state use sein in Perfekt, including gehen, kommen, fahren (when going somewhere), aufstehen and einschlafen. Bleiben also takes sein although it expresses remaining in a place or state. The participle stays at the end.",
+    "trap": "Do not assume every verb mentioning movement takes sein. Learn the auxiliary with each verb.",
+    "guide": "grammar/perfekt.html",
+    "examples": [
+      [
+        "Ich bin nach Hause gegangen.",
+        "I went home."
+      ],
+      [
+        "Sie ist spät gekommen.",
+        "She arrived late."
+      ],
+      [
+        "Wir sind nach Köln gefahren.",
+        "We travelled to Cologne."
+      ],
+      [
+        "Das Kind ist eingeschlafen.",
+        "The child fell asleep."
+      ]
+    ],
+    "quiz": [
+      [
+        "Er ___ nach Berlin gefahren.",
+        "ist",
+        "Er takes ist; travel to a destination uses sein."
+      ],
+      [
+        "Wir ___ früh aufgestanden.",
+        "sind",
+        "Aufstehen forms Perfekt with sein."
+      ],
+      [
+        "Du ___ um sechs Uhr gekommen.",
+        "bist",
+        "Du takes bist."
+      ],
+      [
+        "Ich bin zu Hause ___. (bleiben)",
+        "geblieben",
+        "Bleiben unusually takes sein despite no destination."
+      ]
+    ],
+    "instructions": "Complete the perfect tense with the present-tense form of sein, or the participle of the verb in brackets."
+  },
+  {
+    "slug": "a2-irregular-partizip-ii-exercises",
+    "title": "Irregular Partizip II: German Perfekt Quiz A2",
+    "rule": "Strong verbs often use ge- + changed stem + -en: sehen → gesehen, schreiben → geschrieben. Some verbs have no added ge-, for example bekommen → bekommen and verstehen → verstanden.",
+    "trap": "Do not force -t onto every participle: geschrieben is correct, not geschreibt.",
+    "guide": "grammar/perfekt.html",
+    "examples": [
+      [
+        "Ich habe den Film gesehen.",
+        "I saw the film."
+      ],
+      [
+        "Sie hat einen Brief geschrieben.",
+        "She wrote a letter."
+      ],
+      [
+        "Wir haben das Buch gelesen.",
+        "We read the book."
+      ],
+      [
+        "Er hat das Geschenk bekommen.",
+        "He received the gift."
+      ]
+    ],
+    "quiz": [
+      [
+        "Hast du den Text ___? (lesen)",
+        "gelesen",
+        "Lesen is strong: gelesen."
+      ],
+      [
+        "Sie hat den Satz ___. (verstehen)",
+        "verstanden",
+        "Ver- verbs do not add ge-."
+      ],
+      [
+        "Wir haben Wasser ___. (trinken)",
+        "getrunken",
+        "Trinken changes its stem."
+      ],
+      [
+        "Er hat die Tasche ___. (nehmen)",
+        "genommen",
+        "Nehmen forms genommen."
+      ]
+    ],
+    "instructions": "Fill each gap with the past participle of the verb in brackets."
+  },
+  {
+    "slug": "a2-separable-verbs-perfekt-exercises",
+    "title": "Separable Verbs in Perfekt: A2 Exercises",
+    "rule": "With many separable-prefix verbs, ge- goes between the separable prefix and the stem: einkaufen → eingekauft; aufstehen → aufgestanden. The auxiliary still comes near the beginning.",
+    "trap": "Do not put ge- before the whole separable verb: geeinkauft is incorrect.",
+    "guide": "grammar/trennbare-verben.html",
+    "examples": [
+      [
+        "Ich habe im Supermarkt eingekauft.",
+        "I shopped at the supermarket."
+      ],
+      [
+        "Sie ist früh aufgestanden.",
+        "She got up early."
+      ],
+      [
+        "Wir haben das Licht angemacht.",
+        "We switched on the light."
+      ],
+      [
+        "Er hat seine Mutter angerufen.",
+        "He called his mother."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich habe die Tür ___. (aufmachen)",
+        "aufgemacht",
+        "Auf + ge + macht."
+      ],
+      [
+        "Sie hat ihren Freund ___. (anrufen)",
+        "angerufen",
+        "An + gerufen."
+      ],
+      [
+        "Wir sind spät ___. (ankommen)",
+        "angekommen",
+        "Ankommen takes sein and angekommen."
+      ],
+      [
+        "Er hat gestern ___. (einkaufen)",
+        "eingekauft",
+        "Ein + ge + kauft."
+      ]
+    ],
+    "instructions": "Fill each gap with the past participle of the separable verb in brackets."
+  },
+  {
+    "slug": "a2-modal-verbs-praeteritum-exercises",
+    "title": "Modal Verbs in Präteritum: A2 Practice",
+    "rule": "In everyday past narration, modal verbs often use Präteritum: konnte, musste, wollte, durfte, sollte and mochte. Conjugate the modal and place the other verb in infinitive at the end.",
+    "trap": "After a modal verb, use the bare infinitive: Ich musste arbeiten. A past participle such as gearbeitet cannot replace that infinitive.",
+    "guide": "grammar/modalverben.html",
+    "examples": [
+      [
+        "Ich musste gestern arbeiten.",
+        "I had to work yesterday."
+      ],
+      [
+        "Wir konnten nicht kommen.",
+        "We could not come."
+      ],
+      [
+        "Sie wollte Deutsch lernen.",
+        "She wanted to learn German."
+      ],
+      [
+        "Durftest du länger bleiben?",
+        "Were you allowed to stay longer?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ früh gehen. (müssen, past)",
+        "musste",
+        "Ich + müssen in Präteritum = musste."
+      ],
+      [
+        "Wir ___ nicht helfen. (können, past)",
+        "konnten",
+        "Wir takes konnten."
+      ],
+      [
+        "Er ___ ein Auto kaufen. (wollen, past)",
+        "wollte",
+        "Er takes wollte."
+      ],
+      [
+        "___ ihr mitkommen? (dürfen, past)",
+        "Durftet",
+        "Ihr takes durftet."
+      ]
+    ],
+    "instructions": "Put the modal verb in brackets into the simple past (Präteritum)."
+  },
+  {
+    "slug": "a2-weil-sentences-exercises",
+    "title": "Weil Sentences: A2 Word Order Exercises",
+    "rule": "Weil introduces a reason clause and sends the conjugated verb to the end of that clause. The main clause retains normal word order, while the subordinate clause follows its own verb-final pattern.",
+    "trap": "Do not write weil ich bin müde in standard written German; use weil ich müde bin.",
+    "guide": "grammar/weil-denn-deshalb.html",
+    "examples": [
+      [
+        "Ich lerne Deutsch, weil ich in Deutschland arbeiten möchte.",
+        "I learn German because I want to work in Germany."
+      ],
+      [
+        "Sie bleibt zu Hause, weil sie krank ist.",
+        "She stays home because she is ill."
+      ],
+      [
+        "Wir gehen früh, weil der Bus um sieben Uhr kommt.",
+        "We leave early because the bus arrives at seven."
+      ],
+      [
+        "Er isst, weil er Hunger hat.",
+        "He eats because he is hungry."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich komme nicht, weil ich krank ___. (sein)",
+        "bin",
+        "Verb-final after weil."
+      ],
+      [
+        "Sie lernt, weil sie morgen eine Prüfung ___. (haben)",
+        "hat",
+        "The finite verb ends the subordinate clause."
+      ],
+      [
+        "Wir bleiben hier, weil es ___. (regnen)",
+        "regnet",
+        "Finite verb at the end."
+      ],
+      [
+        "Er geht schlafen, weil er müde ___. (sein)",
+        "ist",
+        "Sein comes at the end of the weil-clause."
+      ]
+    ],
+    "instructions": "Complete each reason clause with the present-tense form of the verb in brackets."
+  },
+  {
+    "slug": "a2-dass-sentences-exercises",
+    "title": "Dass Clauses: German A2 Practice with Answers",
+    "rule": "Dass introduces a statement clause after verbs such as glauben, sagen and hoffen. In standard German, the finite verb goes to the end of the dass-clause.",
+    "trap": "Dass is a conjunction; das is an article or pronoun. They are not interchangeable.",
+    "guide": "grammar/dass.html",
+    "examples": [
+      [
+        "Ich glaube, dass der Test leicht ist.",
+        "I think the test is easy."
+      ],
+      [
+        "Sie sagt, dass sie morgen kommt.",
+        "She says she is coming tomorrow."
+      ],
+      [
+        "Wir hoffen, dass du Zeit hast.",
+        "We hope you have time."
+      ],
+      [
+        "Er weiß, dass ich Deutsch lerne.",
+        "He knows that I am learning German."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich glaube, ___ sie recht hat.",
+        "dass",
+        "A statement clause begins with dass."
+      ],
+      [
+        "Sie sagt, dass der Zug spät ___. (kommen)",
+        "kommt",
+        "Finite verb appears at clause end."
+      ],
+      [
+        "Wir wissen, dass du gut Deutsch ___. (sprechen)",
+        "sprichst",
+        "The present-tense du form of sprechen is sprichst; it goes at the end of the clause."
+      ],
+      [
+        "Er hofft, ___ alles klappt.",
+        "dass",
+        "Dass introduces the content of his hope."
+      ]
+    ],
+    "instructions": "Use dass to introduce a content clause, or put the verb in brackets into the present tense."
+  },
+  {
+    "slug": "a2-comparative-superlative-exercises",
+    "title": "Comparative and Superlative Exercises (German A2)",
+    "rule": "Comparative usually adds -er: klein → kleiner; some forms also take an umlaut: groß → größer. Predicative superlatives commonly use am + adjective + -sten, e.g. am schönsten.",
+    "trap": "Do not use mehr groß; use größer. Also remember irregular gut → besser → am besten.",
+    "guide": "grammar/komparativ.html",
+    "examples": [
+      [
+        "Mein Zimmer ist größer als dein Zimmer.",
+        "My room is bigger than yours."
+      ],
+      [
+        "Dieser Weg ist kürzer.",
+        "This route is shorter."
+      ],
+      [
+        "Anna spricht am besten Deutsch.",
+        "Anna speaks German best."
+      ],
+      [
+        "Heute ist es wärmer als gestern.",
+        "Today it is warmer than yesterday."
+      ]
+    ],
+    "quiz": [
+      [
+        "klein → ___",
+        "kleiner",
+        "Regular comparative adds -er."
+      ],
+      [
+        "gut → ___",
+        "besser",
+        "Gut has an irregular comparative."
+      ],
+      [
+        "schön → am ___",
+        "schönsten",
+        "Superlative uses am + -sten."
+      ],
+      [
+        "groß → ___",
+        "größer",
+        "Comparative includes an umlaut."
+      ]
+    ],
+    "instructions": "Write the comparative in gaps 1, 2 and 4. In gap 3, complete the superlative after am."
+  },
+  {
+    "slug": "a2-reflexive-daily-routine-exercises",
+    "title": "German Reflexive Verbs: A2 Daily Routine Exercises",
+    "rule": "A reflexive verb refers back to the subject: ich wasche mich, du wäschst dich, er wäscht sich, wir waschen uns. Some expressions require a reflexive pronoun, e.g. sich beeilen.",
+    "trap": "Do not use mich with every subject. The reflexive form must match who performs the action.",
+    "guide": "grammar/reflexive-verben.html",
+    "examples": [
+      [
+        "Ich wasche mich morgens.",
+        "I wash myself in the morning."
+      ],
+      [
+        "Du beeilst dich heute.",
+        "You are hurrying today."
+      ],
+      [
+        "Sie freut sich auf das Wochenende.",
+        "She looks forward to the weekend."
+      ],
+      [
+        "Wir treffen uns am Bahnhof.",
+        "We meet at the station."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich beeile ___.",
+        "mich",
+        "Ich takes mich in this accusative reflexive expression."
+      ],
+      [
+        "Du setzt ___ auf den Stuhl.",
+        "dich",
+        "Du takes dich."
+      ],
+      [
+        "Er freut ___ auf den Urlaub.",
+        "sich",
+        "Third-person reflexive is sich."
+      ],
+      [
+        "Wir treffen ___ morgen.",
+        "uns",
+        "Wir takes uns."
+      ]
+    ],
+    "instructions": "Complete each sentence with the accusative reflexive pronoun matching the subject."
+  }
+]

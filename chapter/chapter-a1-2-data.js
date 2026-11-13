@@ -265,13 +265,19 @@ const CHAPTER = {
       conj: { praesens: 'klopft', praeteritum: 'klopfte', perfekt: 'hat geklopft' } },
     { de: 'langsam', pos: 'adjective', en: 'slow, slowly', hi: 'धीमा / धीरे',
       ex: 'Sprich langsam und deutlich.', exEn: 'Speak slowly and clearly.',
-      compare: { comparative: 'langsamer', superlative: 'am langsamsten' } },
+      compare: { comparative: 'langsamer', superlative: 'am langsamsten' },
+      img: { src: '/api/media/vocab-img/15df722822ff95100693', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A snail crawling slowly on a green twig' }
+    },
     { de: 'laut', pos: 'adjective', en: 'loud, aloud', hi: 'ज़ोर से',
       ex: 'Lies das Wort laut vor.', exEn: 'Read the word aloud.',
-      compare: { comparative: 'lauter', superlative: 'am lautesten' } },
+      compare: { comparative: 'lauter', superlative: 'am lautesten' },
+      img: { src: '/api/media/vocab-img/c0adf00c1d5b5c60a31c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person covering their ears beside a loud speaker' }
+    },
     { de: 'gleich', pos: 'adjective', en: 'the same, equal', hi: 'एक जैसा',
       ex: 'a und aa klingen gleich, aber aa ist lang.', exEn: 'a and aa sound the same, but aa is long.',
-      compare: { comparative: 'gleicher', superlative: 'am gleichsten' } },
+      compare: { comparative: 'gleicher', superlative: 'am gleichsten' },
+      img: { src: '/api/media/vocab-img/1786ae7908c4f4cd7fc1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two identical blue bowls side by side' }
+    },
     { de: 'doppelt', pos: 'adjective', en: 'double', hi: 'दुगना / दोहरा',
       ex: 'Ein doppelter Konsonant macht den Vokal kurz.', exEn: 'A double consonant makes the vowel short.',
       compare: { comparative: 'doppelter', superlative: 'am doppeltesten' } },

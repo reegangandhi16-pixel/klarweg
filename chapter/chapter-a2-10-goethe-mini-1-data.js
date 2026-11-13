@@ -225,17 +225,17 @@ const CHAPTER = {
   vocab: [
     // ===== Ch.1 Genitiv: Name + s =====
     { de: 'Genitiv', art: 'der', gender: 'm', plural: 'Genitive', pos: 'noun', en: 'genitive (case)', hi: 'संबंधकारक', tag: 'Ch.1', ex: 'Annas Buch ist ein Beispiel f\u00fcr den Genitiv.', exEn: 'Anna\u2019s book is an example of the genitive.' },
-    { de: 'Handy', art: 'das', gender: 'n', plural: 'Handys', pos: 'noun', en: 'mobile phone', hi: 'मोबाइल फ़ोन', tag: 'Ch.1', ex: 'Das ist Max\u2019 Handy, nicht Rohans Handy.', exEn: 'That\u2019s Max\u2019s phone, not Rohan\u2019s phone.' },
-    { de: 'Tasche', art: 'die', gender: 'f', plural: 'Taschen', pos: 'noun', en: 'bag', hi: 'बैग', tag: 'Ch.1', ex: 'Wo ist Rohans Tasche?', exEn: 'Where is Rohan\u2019s bag?' },
+    { de: 'Handy', art: 'das', gender: 'n', plural: 'Handys', pos: 'noun', en: 'mobile phone', hi: 'मोबाइल फ़ोन', tag: 'Ch.1', ex: 'Das ist Max\u2019 Handy, nicht Rohans Handy.', exEn: 'That\u2019s Max\u2019s phone, not Rohan\u2019s phone.', img: { src: '../public/vocab-img/5a55e38787c2bda4a90d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'modern smartphone lying at a slight angle, blank dark screen' } },
+    { de: 'Tasche', art: 'die', gender: 'f', plural: 'Taschen', pos: 'noun', en: 'bag', hi: 'बैग', tag: 'Ch.1', ex: 'Wo ist Rohans Tasche?', exEn: 'Where is Rohan\u2019s bag?', img: { src: '/api/media/vocab-img/e1de13c19151c9bfad96', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a brown leather shoulder bag' } },
     // ===== Ch.2 Perfekt (Wiederholung) =====
     { de: 'gefahren', pos: 'participle', en: 'travelled, driven (Partizip von fahren)', hi: 'गया/गई (सवारी से)', tag: 'Ch.2', ex: 'Ich bin zu meiner Oma gefahren.', exEn: 'I travelled to my grandma\u2019s.' },
     { de: 'gemacht', pos: 'participle', en: 'done, made (Partizip von machen)', hi: 'किया', tag: 'Ch.2', ex: 'Was hast du am Wochenende gemacht?', exEn: 'What did you do on the weekend?' },
     { de: 'schon', pos: 'adverb', en: 'already', hi: 'पहले ही', tag: 'Ch.2', ex: 'Hast du das schon gesehen?', exEn: 'Have you already seen that?' },
     { de: 'gestern', pos: 'adverb', en: 'yesterday', hi: 'कल', tag: 'Ch.2', ex: 'Gestern habe ich viel gelernt.', exEn: 'Yesterday I studied a lot.' },
     // ===== Ch.3 Artikel (Wiederholung) =====
-    { de: 'Kuchen', art: 'der', gender: 'm', plural: 'Kuchen', pos: 'noun', en: 'cake', hi: 'केक', tag: 'Ch.3', ex: 'Der Kuchen war so gut wie im Restaurant.', exEn: 'The cake was as good as in a restaurant.' },
-    { de: 'Restaurant', art: 'das', gender: 'n', plural: 'Restaurants', pos: 'noun', en: 'restaurant', hi: 'रेस्टोरेंट', tag: 'Ch.3', ex: 'Wir gehen in ein Restaurant.', exEn: 'We\u2019re going to a restaurant.' },
-    { de: 'Feier', art: 'die', gender: 'f', plural: 'Feiern', pos: 'noun', en: 'celebration, party', hi: 'जश्न', tag: 'Ch.3', ex: 'Es war die sch\u00f6nste Feier des Jahres.', exEn: 'It was the nicest party of the year.' },
+    { de: 'Kuchen', art: 'der', gender: 'm', plural: 'Kuchen', pos: 'noun', en: 'cake', hi: 'केक', tag: 'Ch.3', ex: 'Der Kuchen war so gut wie im Restaurant.', exEn: 'The cake was as good as in a restaurant.', img: { src: '/api/media/vocab-img/4981bdaa7af6448eddb3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A round frosted cake with strawberries and a slice cut out.' } },
+    { de: 'Restaurant', art: 'das', gender: 'n', plural: 'Restaurants', pos: 'noun', en: 'restaurant', hi: 'रेस्टोरेंट', tag: 'Ch.3', ex: 'Wir gehen in ein Restaurant.', exEn: 'We\u2019re going to a restaurant.', img: { src: '/api/media/vocab-img/9d89143b65108aace54f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A dining area of a restaurant' } },
+    { de: 'Feier', art: 'die', gender: 'f', plural: 'Feiern', pos: 'noun', en: 'celebration, party', hi: 'जश्न', tag: 'Ch.3', ex: 'Es war die sch\u00f6nste Feier des Jahres.', exEn: 'It was the nicest party of the year.', img: { src: '/api/media/vocab-img/921b9d03f855cbf61ad7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'People celebrating at a party table.' } },
     // ===== Ch.4 Nebensatz mit weil =====
     { de: 'weil', pos: 'conjunction', en: 'because (verb to the end)', hi: 'क्योंकि', tag: 'Ch.4', ex: 'Ich lerne, weil ich den Test bestehen will.', exEn: 'I study because I want to pass the test.' },
     { de: 'Grund', art: 'der', gender: 'm', plural: 'Gr\u00fcnde', pos: 'noun', en: 'reason', hi: 'कारण', tag: 'Ch.4', ex: 'Gib mir einen Grund mit weil.', exEn: 'Give me a reason with weil.' },
@@ -243,15 +243,15 @@ const CHAPTER = {
     // ===== Ch.5 Nebensatz mit dass =====
     { de: 'dass', pos: 'conjunction', en: 'that (verb to the end)', hi: 'कि', tag: 'Ch.5', ex: 'Ich glaube, dass es die beste Feier war.', exEn: 'I think that it was the best party.' },
     { de: 'glauben', pos: 'verb', en: 'to believe, to think', hi: 'मानना, सोचना', tag: 'Ch.5', ex: 'Ich glaube, dass Deutsch wichtig ist.', exEn: 'I think that German is important.', conj: { praesens: 'glaubt', praeteritum: 'glaubte', perfekt: 'hat geglaubt' } },
-    { de: 'hoffen', pos: 'verb', en: 'to hope', hi: 'उम्मीद करना', tag: 'Ch.5', ex: 'Ich hoffe, dass ich bestehe.', exEn: 'I hope that I pass.', conj: { praesens: 'hofft', praeteritum: 'hoffte', perfekt: 'hat gehofft' } },
+    { de: 'hoffen', pos: 'verb', en: 'to hope', hi: 'उम्मीद करना', tag: 'Ch.5', ex: 'Ich hoffe, dass ich bestehe.', exEn: 'I hope that I pass.', conj: { praesens: 'hofft', praeteritum: 'hoffte', perfekt: 'hat gehofft' }, img: { src: '/api/media/vocab-img/1266fe5b1216b6cc111a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person clasping their hands in hopeful anticipation' } },
     // ===== Ch.6 Modalverben im Pr\u00e4teritum =====
     { de: 'musste', pos: 'verb', en: 'had to (Pr\u00e4t. von m\u00fcssen)', hi: 'पड़ा', tag: 'Ch.6', ex: 'Ich musste am Wochenende arbeiten.', exEn: 'I had to work on the weekend.' },
     { de: 'konnte', pos: 'verb', en: 'could (Pr\u00e4t. von k\u00f6nnen)', hi: 'सका', tag: 'Ch.6', ex: 'Abends konnte ich ins Kino gehen.', exEn: 'In the evening I could go to the cinema.' },
     { de: 'durfte', pos: 'verb', en: 'was allowed to (Pr\u00e4t. von d\u00fcrfen)', hi: 'इजाज़त थी', tag: 'Ch.6', ex: 'Als Kind durfte ich nicht lange fernsehen.', exEn: 'As a child I wasn\u2019t allowed to watch TV for long.' },
     { de: 'wollte', pos: 'verb', en: 'wanted to (Pr\u00e4t. von wollen)', hi: 'चाहता था', tag: 'Ch.6', ex: 'Ich wollte das Zertifikat bekommen.', exEn: 'I wanted to get the certificate.' },
     // ===== Ch.7 Possessivartikel im Dativ =====
-    { de: 'Freund', art: 'der', gender: 'm', plural: 'Freunde', pos: 'noun', en: 'friend (m.)', hi: 'दोस्त', tag: 'Ch.7', ex: 'Ich war mit meinen Freunden im Kino.', exEn: 'I was at the cinema with my friends.' },
-    { de: 'helfen', pos: 'verb', en: 'to help (+ dative)', hi: 'मदद करना', tag: 'Ch.7', ex: 'Ich helfe meiner Oma gern.', exEn: 'I gladly help my grandma.', conj: { praesens: 'hilft', praeteritum: 'half', perfekt: 'hat geholfen' } },
+    { de: 'Freund', art: 'der', gender: 'm', plural: 'Freunde', pos: 'noun', en: 'friend (m.)', hi: 'दोस्त', tag: 'Ch.7', ex: 'Ich war mit meinen Freunden im Kino.', exEn: 'I was at the cinema with my friends.', img: { src: '/api/media/vocab-img/26f461af8d2313bd7b1b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'two male friends walking and laughing together' } },
+    { de: 'helfen', pos: 'verb', en: 'to help (+ dative)', hi: 'मदद करना', tag: 'Ch.7', ex: 'Ich helfe meiner Oma gern.', exEn: 'I gladly help my grandma.', conj: { praesens: 'hilft', praeteritum: 'half', perfekt: 'hat geholfen' }, img: { src: '/api/media/vocab-img/9edacacf452e853cd0d1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A young person helping a neighbour carry heavy groceries.' } },
     { de: 'geh\u00f6ren', pos: 'verb', en: 'to belong to (+ dative)', hi: 'का होना', tag: 'Ch.7', ex: 'Das Buch geh\u00f6rt meiner Schwester.', exEn: 'The book belongs to my sister.', conj: { praesens: 'geh\u00f6rt', praeteritum: 'geh\u00f6rte', perfekt: 'hat geh\u00f6rt' } },
     // ===== Ch.8 Komparativ & Superlativ =====
     { de: 'besser', pos: 'adjective', en: 'better (Komparativ von gut)', hi: 'बेहतर', tag: 'Ch.8', ex: 'Der Film war besser als der letzte.', exEn: 'The film was better than the last one.' },
@@ -263,9 +263,9 @@ const CHAPTER = {
     { de: 'wie', pos: 'conjunction', en: 'as (equality: so \u2026 wie)', hi: 'जैसा', tag: 'Ch.9', ex: 'Der Kuchen war so gut wie im Restaurant.', exEn: 'The cake was as good as in a restaurant.' },
     { de: 'genauso', pos: 'adverb', en: 'just as (genauso \u2026 wie)', hi: 'बिल्कुल उतना', tag: 'Ch.9', ex: 'Ich bin genauso gro\u00df wie du.', exEn: 'I\u2019m just as tall as you.' },
     // ===== Exam words (recycled A1/A2 Goethe vocabulary) =====
-    { de: 'Zertifikat', art: 'das', gender: 'n', plural: 'Zertifikate', pos: 'noun', en: 'certificate', hi: 'प्रमाणपत्र', tag: 'Goethe', ex: 'Ich m\u00f6chte das Goethe-Zertifikat bekommen.', exEn: 'I\u2019d like to get the Goethe certificate.' },
+    { de: 'Zertifikat', art: 'das', gender: 'n', plural: 'Zertifikate', pos: 'noun', en: 'certificate', hi: 'प्रमाणपत्र', tag: 'Goethe', ex: 'Ich m\u00f6chte das Goethe-Zertifikat bekommen.', exEn: 'I\u2019d like to get the Goethe certificate.', img: { src: '/api/media/vocab-img/9a496d1bffb97bf4c457', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A diploma certificate tied with a red ribbon' } },
     { de: 'Pr\u00fcfung', art: 'die', gender: 'f', plural: 'Pr\u00fcfungen', pos: 'noun', en: 'exam', hi: 'परीक्षा', tag: 'Goethe', ex: 'Die Pr\u00fcfung hat vier Teile.', exEn: 'The exam has four parts.' },
-    { de: 'Erfolg', art: 'der', gender: 'm', plural: 'Erfolge', pos: 'noun', en: 'success', hi: 'सफलता', tag: 'Goethe', ex: 'Viel Erfolg beim Test!', exEn: 'Good luck with the test!' },
+    { de: 'Erfolg', art: 'der', gender: 'm', plural: 'Erfolge', pos: 'noun', en: 'success', hi: 'सफलता', tag: 'Goethe', ex: 'Viel Erfolg beim Test!', exEn: 'Good luck with the test!', img: { src: '/api/media/vocab-img/e7b76066429f25e4d2e0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a celebrating woman holding a trophy' } },
     { de: 'wiederholen', pos: 'verb', en: 'to revise, to repeat', hi: 'दोहराना', tag: 'Goethe', ex: 'Heute wiederholen wir alles.', exEn: 'Today we revise everything.', conj: { praesens: 'wiederholt', praeteritum: 'wiederholte', perfekt: 'hat wiederholt' } }
   ],
 

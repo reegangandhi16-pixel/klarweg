@@ -221,14 +221,14 @@ const CHAPTER = {
 
   // ---------- Vocabulary (29 items) ----------
   vocab: [
-    { de: 'abstrakt', pos: 'adjective', en: 'abstract', hi: 'सारगर्भित', ex: 'Das Bild, das abstrakt ist, gefällt mir.', exEn: 'The picture that is abstract pleases me.' },
+    { de: 'abstrakt', pos: 'adjective', en: 'abstract', hi: 'सारगर्भित', ex: 'Das Bild, das abstrakt ist, gefällt mir.', exEn: 'The picture that is abstract pleases me.', img: { src: '/api/media/vocab-img/478a5cd368bd04e79d12', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An abstract geometric painting on a wall.' } },
     { de: 'Ausblick', art: 'der', gender: 'm', plural: 'Ausblicke', pos: 'noun', en: 'view', hi: 'दृश्य', ex: 'Das ist der Ausblick, der jeden begeistert.', exEn: 'That\'s the view that thrills everyone.' },
     { de: 'dahinter', pos: 'adverb', en: 'behind it', hi: 'उसके पीछे', ex: 'Das ist der Grund, der dahinter steht.', exEn: 'That\'s the reason that stands behind it.' },
     { de: 'Angehörige', art: 'der/die', gender: 'm/f', plural: 'Angehörigen', pos: 'noun', en: 'relative', hi: 'रिश्तेदार', ex: 'Das ist der Angehörige, der uns besucht.', exEn: 'That\'s the relative who is visiting us.' },
     { de: 'Prominente', art: 'der/die', gender: 'm/f', plural: 'Prominenten', pos: 'noun', en: 'celebrity', hi: 'मशहूर हस्ती', ex: 'Das ist der Prominente, der im Radio spricht.', exEn: 'That\'s the celebrity who is speaking on the radio.' },
     { de: 'elektrisch', pos: 'adjective', en: 'electric', hi: 'बिजली का', ex: 'Das ist die Gitarre, die elektrisch ist.', exEn: 'That\'s the guitar that is electric.' },
     { de: 'Hit', art: 'der', gender: 'm', plural: 'Hits', pos: 'noun', en: 'hit', hi: 'हिट गाना', ex: 'Das ist der Hit, der jeden Sommer läuft.', exEn: 'That\'s the hit that plays every summer.' },
-    { de: 'Hörer', art: 'der', gender: 'm', plural: 'Hörer', pos: 'noun', en: 'listener', hi: 'श्रोता', ex: 'Das ist der Hörer, der jeden Tag anruft.', exEn: 'That\'s the listener who calls in every day.' },
+    { de: 'Hörer', art: 'der', gender: 'm', plural: 'Hörer', pos: 'noun', en: 'listener', hi: 'श्रोता', ex: 'Das ist der Hörer, der jeden Tag anruft.', exEn: 'That\'s the listener who calls in every day.', img: { src: '/api/media/vocab-img/9eb6dbae7b2e3da5e6e0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person wearing headphones and listening attentively' } },
     { de: 'jährlich', pos: 'adjective', en: 'yearly', hi: 'सालाना', ex: 'Das ist das Konzert, das jährlich stattfindet.', exEn: 'That\'s the concert that takes place yearly.' },
     { de: 'Nachrichtensprecher', art: 'der', gender: 'm', plural: 'Nachrichtensprecher', pos: 'noun', en: 'newsreader', hi: 'समाचार वाचक', ex: 'Das ist der Nachrichtensprecher, der jeden Abend berichtet.', exEn: 'That\'s the newsreader who reports every evening.' },
     { de: 'Rechnungsinformation', art: 'die', gender: 'f', plural: 'Rechnungsinformationen', pos: 'noun', en: 'invoice information', hi: 'बिल जानकारी', ex: 'Das ist die Rechnungsinformation, die im Brief steht.', exEn: 'That\'s the invoice information that is in the letter.' },

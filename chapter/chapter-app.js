@@ -1735,6 +1735,35 @@
   // the filters work on the full list; the cap applies to whatever matches.
   const VOCAB_FIRST = 24;
   let vocabExpanded = false;
+  // Visual Vocabulary: illustrations on the word cards can be switched off
+  // (device preference, this browser only). Off = no <figure> is built at
+  // all, so nothing is downloaded. Default on. The control only appears in
+  // chapters that have illustrations.
+  const VOCAB_IMG_PREF = 'kw_vocab_images';
+  let vocabImages = true;
+  try { vocabImages = localStorage.getItem(VOCAB_IMG_PREF) !== 'off'; } catch (e) {}
+  // Paid illustrations come from the access Worker (/api/media/vocab-img/…),
+  // which re-checks the learner's level for every file. One HEAD probe per
+  // page decides whether gated figures are built at all, BEFORE the grid is
+  // drawn: if the session lapsed, the level was revoked or the Worker is
+  // unavailable, the cards render text-only from the start instead of
+  // reserving picture space and collapsing (layout shift). Fails closed.
+  const GATED_IMG = /^\/api\/media\/vocab-img\/[0-9a-f]{20}$/;
+  let gatedImgOk = null, gatedProbe = null;
+  function probeGatedImages() {
+    if (gatedProbe) return gatedProbe;
+    const w = (C.vocab || []).find(v => v.img && GATED_IMG.test(v.img.src));
+    if (!w) { gatedImgOk = true; gatedProbe = Promise.resolve(true); return gatedProbe; }
+    const fmts = Array.isArray(w.img.formats) && w.img.formats.length ? w.img.formats : ['webp'];
+    const url = w.img.src + '-400.' + fmts[fmts.length - 1];
+    try {
+      gatedProbe = Promise.race([
+        fetch(url, { method: 'HEAD', credentials: 'same-origin', cache: 'no-store' }).then(r => r.ok, () => false),
+        new Promise(res => setTimeout(() => res(false), 4000))
+      ]).then(v => (gatedImgOk = v === true));
+    } catch (e) { gatedImgOk = false; gatedProbe = Promise.resolve(false); }
+    return gatedProbe;
+  }
   // Checkpoint chapters author their vocabulary section as a review quiz
   // (`vocabularyReview`: {q, options, answer, ref}) instead of word cards, so
   // the word-card path below would render an empty grid with a misleading
@@ -1754,10 +1783,33 @@
       filters.appendChild(chip);
     });
     toolbar.append(search, filters);
+    let imgToggle = null;
+    if (C.vocab.some(w => w.img && w.img.src)) {
+      imgToggle = el('button', { class: 'filter-chip vocab-img-toggle', type: 'button', 'aria-pressed': String(vocabImages), 'aria-controls': 'vocab-grid' },
+        'Images', el('span', { class: 'vocab-img-state', 'aria-hidden': 'true' }, vocabImages ? 'On' : 'Off'));
+      imgToggle.addEventListener('click', () => {
+        vocabImages = !vocabImages;
+        try { localStorage.setItem(VOCAB_IMG_PREF, vocabImages ? 'on' : 'off'); } catch (e) {}
+        imgToggle.setAttribute('aria-pressed', String(vocabImages));
+        imgToggle.querySelector('.vocab-img-state').textContent = vocabImages ? 'On' : 'Off';
+        // keep the control where it is on screen while the cards above/below change height
+        (vocabImages ? probeGatedImages() : Promise.resolve()).then(() => {
+          const y0 = imgToggle.getBoundingClientRect().top;
+          drawVocab();
+          window.scrollBy(0, imgToggle.getBoundingClientRect().top - y0);
+        });
+      });
+      toolbar.appendChild(imgToggle);
+    }
     const grid = el('div', { class: 'vocab-grid', id: 'vocab-grid' });
     const more = el('div', { class: 'vocab-more', id: 'vocab-more', hidden: true });
     wrap.append(toolbar, grid, more);
-    setTimeout(drawVocab, 0);
+    // Images off = not even the probe is sent.
+    (vocabImages ? probeGatedImages() : Promise.resolve()).then(() => {
+      // no picture this learner can load → no Images control either
+      if (imgToggle && gatedImgOk === false && !C.vocab.some(w => w.img && w.img.src && !GATED_IMG.test(w.img.src))) imgToggle.hidden = true;
+      drawVocab();
+    });
     return wrap;
   }
 
@@ -1865,7 +1917,7 @@
     // "/in" suffix) never fits beside the F/M/listen buttons: the buttons go
     // below and only such headwords may hyphenate.
     const longHeadword = term.split(/\s+|\/(?!(?:in|innen)(?![a-zäöüß]))/).some((t) => t.length >= 16);
-    const fig = vocabFigure(w, card);
+    const fig = vocabImages ? vocabFigure(w, card) : null;
     if (fig) card.classList.add('vword--img');
     card.append(
       el('div', { class: 'vword-top' + (longHeadword ? ' vword-top--long' : '') },
@@ -1925,6 +1977,7 @@
   function vocabFigure(w, card) {
     const im = w && w.img;
     if (!im || typeof im.src !== 'string' || !im.src) return null;
+    if (GATED_IMG.test(im.src) && gatedImgOk !== true) return null;
     const formats = Array.isArray(im.formats) && im.formats.length ? im.formats : ['webp'];
     const widths = Array.isArray(im.widths) && im.widths.length ? im.widths : [800];
     const srcset = (f) => widths.map((px) => im.src + '-' + px + '.' + f + ' ' + px + 'w').join(', ');

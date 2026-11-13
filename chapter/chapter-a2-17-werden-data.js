@@ -221,7 +221,7 @@ const CHAPTER = {
   // ---------- Vocabulary (21 items) ----------
   vocab: [
     { de: 'Alkohol', art: 'der', gender: 'm', plural: '\u2014', pos: 'noun', en: 'alcohol', hi: 'शराब', ex: 'Er trinkt keinen Alkohol mehr.', exEn: 'He doesn\u2019t drink alcohol anymore.' },
-    { de: 'altmodisch', pos: 'adjective', en: 'old-fashioned', hi: 'पुराने ज़माने का', ex: 'Die Kutsche wirkt altmodisch neben dem Auto.', exEn: 'The carriage seems old-fashioned next to the car.' },
+    { de: 'altmodisch', pos: 'adjective', en: 'old-fashioned', hi: 'पुराने ज़माने का', ex: 'Die Kutsche wirkt altmodisch neben dem Auto.', exEn: 'The carriage seems old-fashioned next to the car.', img: { src: '/api/media/vocab-img/d8e0407835bd36740541', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An old-fashioned black rotary dial telephone.' } },
     { de: 'ausschalten', pos: 'verb', en: 'to switch off (separable)', hi: 'बंद करना', ex: 'Ich werde das Licht ausschalten.', exEn: 'I\u2019m going to switch off the light.', conj: { praesens: 'schaltet aus', praeteritum: 'schaltete aus', perfekt: 'hat ausgeschaltet' } },
     { de: 'behalten', pos: 'verb', en: 'to keep', hi: 'रखना', ex: 'Ich werde den Ring behalten.', exEn: 'I\u2019m going to keep the ring.', conj: { praesens: 'beh\u00e4lt', praeteritum: 'behielt', perfekt: 'hat behalten' } },
     { de: 'bestens', pos: 'adverb', en: 'great, very well', hi: 'बहुत अच्छे से', ex: 'Es geht mir bestens, seit ich Grafiker werde.', exEn: 'I\u2019m doing great since I\u2019m becoming a graphic designer.' },
@@ -229,7 +229,7 @@ const CHAPTER = {
     { de: 'Feuer', art: 'das', gender: 'n', plural: 'Feuer', pos: 'noun', en: 'fire', hi: 'आग', ex: 'Das Feuer wird gr\u00f6\u00dfer.', exEn: 'The fire is getting bigger.' },
     { de: 'Frist', art: 'die', gender: 'f', plural: 'Fristen', pos: 'noun', en: 'deadline', hi: 'समय सीमा', ex: 'Die Frist wird morgen enden.', exEn: 'The deadline will end tomorrow.' },
     { de: 'Gold', art: 'das', gender: 'n', plural: '\u2014', pos: 'noun', en: 'gold', hi: 'सोना', ex: 'Sie wird eine Goldmedaille bekommen.', exEn: 'She\u2019s going to get a gold medal.' },
-    { de: 'Hausmann', art: 'der', gender: 'm', plural: 'Hausm\u00e4nner', pos: 'noun', en: 'homemaker (m.)', hi: 'घर संभालने वाला पुरुष', ex: 'Er wird bald Hausmann.', exEn: 'He\u2019s going to be a homemaker soon.' },
+    { de: 'Hausmann', art: 'der', gender: 'm', plural: 'Hausm\u00e4nner', pos: 'noun', en: 'homemaker (m.)', hi: 'घर संभालने वाला पुरुष', ex: 'Er wird bald Hausmann.', exEn: 'He\u2019s going to be a homemaker soon.', img: { src: '/api/media/vocab-img/8d3a32da0d2dc59a30a0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'man wearing an apron folding laundry' } },
     { de: 'Hektik', art: 'die', gender: 'f', plural: '\u2014', pos: 'noun', en: 'rush, hectic pace', hi: 'हड़बड़ी', ex: 'Vor der Pr\u00fcfung wird die Hektik gro\u00df.', exEn: 'Before the exam the rush gets big.' },
     { de: 'interessieren', pos: 'verb', en: 'to be interested in (sich interessieren f\u00fcr)', hi: 'में दिलचस्पी रखना', ex: 'Ich interessiere mich f\u00fcr die Zukunft.', exEn: 'I\u2019m interested in the future.', conj: { praesens: 'interessiert sich', praeteritum: 'interessierte sich', perfekt: 'hat sich interessiert' } },
     { de: 'Kutsche', art: 'die', gender: 'f', plural: 'Kutschen', pos: 'noun', en: 'carriage', hi: 'बग्घी', ex: 'Die Kutsche wirkt altmodisch.', exEn: 'The carriage seems old-fashioned.' },

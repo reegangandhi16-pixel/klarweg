@@ -248,9 +248,9 @@ const CHAPTER = {
     { de: 'Projekt', art: 'das', gender: 'n', plural: 'Projekte', pos: 'noun', en: 'project', hi: 'परियोजना', ex: 'Ich habe das Projekt gemacht.', exEn: 'I did the project.' },
     { de: 'Semester', art: 'das', gender: 'n', plural: 'Semester', pos: 'noun', en: 'semester', hi: 'सेमेस्टर', ex: 'Das Semester war lang.', exEn: 'The semester was long.' },
     { de: 'Studium', art: 'das', gender: 'n', plural: 'Studien', pos: 'noun', en: 'studies, degree course', hi: 'अध्ययन', ex: 'Mein Studium ist interessant.', exEn: 'My studies are interesting.' },
-    { de: 'Unterricht', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'lessons, class', hi: 'कक्षा, पाठ', ex: 'Der Unterricht hat geholfen.', exEn: 'The lessons helped.' },
+    { de: 'Unterricht', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'lessons, class', hi: 'कक्षा, पाठ', ex: 'Der Unterricht hat geholfen.', exEn: 'The lessons helped.', img: { src: '/api/media/vocab-img/615bf25232c669d29639', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Teacher giving a lesson in a classroom' } },
     { de: 'Prüfung', art: 'die', gender: 'f', plural: 'Prüfungen', pos: 'noun', en: 'exam, test', hi: 'परीक्षा', ex: 'Die Prüfung war schwer.', exEn: 'The exam was hard.' },
-    { de: 'studieren', pos: 'verb', en: 'to study (at university)', hi: 'अध्ययन करना', ex: 'Ich habe in Berlin studiert.', exEn: 'I studied in Berlin.', conj: { praesens: 'studiert', praeteritum: 'studierte', perfekt: 'hat studiert' } }
+    { de: 'studieren', pos: 'verb', en: 'to study (at university)', hi: 'अध्ययन करना', ex: 'Ich habe in Berlin studiert.', exEn: 'I studied in Berlin.', conj: { praesens: 'studiert', praeteritum: 'studierte', perfekt: 'hat studiert' }, img: { src: '/api/media/vocab-img/1e47d43215862bffc43c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A university student studying at a library desk.' } }
   ],
 
   // ---------- Perfekt mit haben (rule cards → accordion) ----------

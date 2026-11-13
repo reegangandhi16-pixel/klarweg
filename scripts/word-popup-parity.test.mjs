@@ -72,7 +72,7 @@ test('the homepage has no popup of its own any more', () => {
 });
 
 test('the homepage loads the course popup engine, stylesheet and lexicon — same versions as the chapters', () => {
-  const appV = APP && read('chapter/' + CHAPTER_PAGES.find((f) => f !== 'chapter-a1-1-alphabet.html')) /* A1·01 pilots v=37 (PR #326) */.match(/src="chapter-app\.js\?v=(\d+)"/)[1];
+  const appV = APP && read('chapter/' + CHAPTER_PAGES[0]).match(/src="chapter-app\.js\?v=(\d+)"/)[1];
   const tag = (src) => HOME.indexOf('<script src="' + src + '" defer></script>');
   assert.ok(HOME.indexOf('<link rel="stylesheet" href="public/kw-word-pop.css?v=1">') > HOME.indexOf('</style>'),
     'shared stylesheet loads after the homepage <style>, as it loads after chapter.css on chapters');

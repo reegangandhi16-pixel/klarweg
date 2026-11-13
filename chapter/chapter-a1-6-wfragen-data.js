@@ -225,14 +225,22 @@ const CHAPTER = {
       ex: 'Wie viele Bücher hast du?', exEn: 'How many books do you have?' },
     // — Active support —
     { de: 'Frage', art: 'die', gender: 'f', plural: 'Fragen', pos: 'noun', en: 'question', hi: 'प्रश्न',
-      ex: 'Die Frage ist einfach.', exEn: 'The question is easy.' },
+      ex: 'Die Frage ist einfach.', exEn: 'The question is easy.',
+      img: { src: '/api/media/vocab-img/29121f32201ade8512f8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Student raising hand with a question' }
+    },
     { de: 'Gruppe', art: 'die', gender: 'f', plural: 'Gruppen', pos: 'noun', en: 'group', hi: 'समूह',
-      ex: 'Arbeitet in der Gruppe!', exEn: 'Work in the group!' },
+      ex: 'Arbeitet in der Gruppe!', exEn: 'Work in the group!',
+      img: { src: '/api/media/vocab-img/d37d8ffa6f980ca8d410', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A group of four people standing together in a circle.' }
+    },
     { de: 'dritt', pos: 'phrase (zu dritt)', en: 'in threes', hi: 'तीन-तीन के समूह में',
-      ex: 'Arbeitet zu dritt.', exEn: 'Work in threes.' },
+      ex: 'Arbeitet zu dritt.', exEn: 'Work in threes.',
+      img: { src: '/api/media/vocab-img/955f5777532622e53a0e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Three people collaborating around a small table.' }
+    },
     { de: 'ergänzen', pos: 'verb', en: 'to complete, fill in', hi: 'पूरा करना',
       ex: 'Ergänze die Frage.', exEn: 'Complete the question.',
-      conj: { praesens: 'ergänzt', praeteritum: 'ergänzte', perfekt: 'hat ergänzt' } },
+      conj: { praesens: 'ergänzt', praeteritum: 'ergänzte', perfekt: 'hat ergänzt' },
+      img: { src: '/api/media/vocab-img/6a5e51885a977da47133', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person fitting final puzzle piece' }
+    },
     { de: 'genau', pos: 'adverb', en: 'exactly', hi: 'बिल्कुल',
       ex: 'Genau! Das ist richtig.', exEn: 'Exactly! That is right.' },
     { de: 'notieren', pos: 'verb', en: 'to note down', hi: 'नोट करना',
@@ -243,15 +251,21 @@ const CHAPTER = {
       ex: 'Die Person ist bekannt.', exEn: 'The person is well-known.',
       compare: { comparative: 'bekannter', superlative: 'am bekanntesten' } },
     { de: 'Interview', art: 'das', gender: 'n', plural: 'Interviews', pos: 'noun', en: 'interview', hi: 'साक्षात्कार',
-      ex: 'Macht ein Interview.', exEn: 'Do an interview.' },
+      ex: 'Macht ein Interview.', exEn: 'Do an interview.',
+      img: { src: '/api/media/vocab-img/e8d129aef9a940942116', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A reporter interviewing a person with a microphone' }
+    },
     { de: 'Symbol', art: 'das', gender: 'n', plural: 'Symbole', pos: 'noun', en: 'symbol', hi: 'प्रतीक',
       ex: 'Das Symbol bedeutet "Frage".', exEn: 'The symbol means "question".' },
     { de: 'Bildgeschichte', art: 'die', gender: 'f', plural: 'Bildgeschichten', pos: 'noun', en: 'comic strip, picture story', hi: 'चित्र-कथा',
       ex: 'Lies die Bildgeschichte.', exEn: 'Read the comic strip.' },
     { de: 'Notiz', art: 'die', gender: 'f', plural: 'Notizen', pos: 'noun', en: 'note', hi: 'टिप्पणी',
-      ex: 'Mach eine Notiz.', exEn: 'Make a note.' },
+      ex: 'Mach eine Notiz.', exEn: 'Make a note.',
+      img: { src: '/api/media/vocab-img/24ed5e3df629f53f9e37', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sticky note and pencil on a desk' }
+    },
     { de: 'Reihenfolge', art: 'die', gender: 'f', plural: 'Reihenfolgen', pos: 'noun', en: 'sequence, order', hi: 'क्रम',
-      ex: 'Die Reihenfolge ist wichtig.', exEn: 'The order is important.' },
+      ex: 'Die Reihenfolge ist wichtig.', exEn: 'The order is important.',
+      img: { src: '/api/media/vocab-img/a80c25ce2632e769a9c4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'wooden blocks arranged in size order' }
+    },
     { de: 'Situation', art: 'die', gender: 'f', plural: 'Situationen', pos: 'noun', en: 'situation', hi: 'स्थिति',
       ex: 'In dieser Situation fragt man "Wie bitte?".', exEn: 'In this situation you ask "Pardon?".' },
     { de: 'Tabelle', art: 'die', gender: 'f', plural: 'Tabellen', pos: 'noun', en: 'table, chart', hi: 'सारणी',
@@ -261,10 +275,14 @@ const CHAPTER = {
       conj: { praesens: 'mischt', praeteritum: 'mischte', perfekt: 'hat gemischt' } },
     { de: 'passend', pos: 'adjective', en: 'matching, suitable', hi: 'उपयुक्त',
       ex: 'Finde das passende Fragewort.', exEn: 'Find the matching question word.',
-      compare: { comparative: 'passender', superlative: 'am passendsten' } },
+      compare: { comparative: 'passender', superlative: 'am passendsten' },
+      img: { src: '/api/media/vocab-img/4f38a98456bef04944d0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand placing matching puzzle block' }
+    },
     { de: 'ähnlich', pos: 'adjective', en: 'similar', hi: 'समान',
       ex: '"wo" und "woher" sind ähnlich.', exEn: '"wo" and "woher" are similar.',
-      compare: { comparative: 'ähnlicher', superlative: 'am ähnlichsten' } },
+      compare: { comparative: 'ähnlicher', superlative: 'am ähnlichsten' },
+      img: { src: '/api/media/vocab-img/e58478dd831b85904b15', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two similar teal ceramic mugs side by side.' }
+    },
     // — Reference / System (classroom instruction verbs & terms) —
     { de: 'ankreuzen', pos: 'verb', en: 'to tick, mark', hi: 'निशान लगाना',
       ex: 'Kreuze die richtige Antwort an.', exEn: 'Tick the correct answer.',
@@ -286,13 +304,19 @@ const CHAPTER = {
       conj: { praesens: 'nummeriert', praeteritum: 'nummerierte', perfekt: 'hat nummeriert' } },
     { de: 'ordnen', pos: 'verb', en: 'to arrange, order', hi: 'क्रम में लगाना',
       ex: 'Ordne die Wörter.', exEn: 'Arrange the words.',
-      conj: { praesens: 'ordnet', praeteritum: 'ordnete', perfekt: 'hat geordnet' } },
+      conj: { praesens: 'ordnet', praeteritum: 'ordnete', perfekt: 'hat geordnet' },
+      img: { src: '/api/media/vocab-img/5aef7a2f78cc728e655d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hands organising books by height on shelf' }
+    },
     { de: 'würfeln', pos: 'verb', en: 'to roll the dice', hi: 'पासा फेंकना',
       ex: 'Würfle und bilde eine Frage.', exEn: 'Roll the dice and form a question.',
-      conj: { praesens: 'würfelt', praeteritum: 'würfelte', perfekt: 'hat gewürfelt' } },
+      conj: { praesens: 'würfelt', praeteritum: 'würfelte', perfekt: 'hat gewürfelt' },
+      img: { src: '/api/media/vocab-img/4dd006bfadab09026f18', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand rolling two dice on a table' }
+    },
     { de: 'zeichnen', pos: 'verb', en: 'to draw', hi: 'चित्र बनाना',
       ex: 'Zeichne ein Symbol für die Frage.', exEn: 'Draw a symbol for the question.',
-      conj: { praesens: 'zeichnet', praeteritum: 'zeichnete', perfekt: 'hat gezeichnet' } }
+      conj: { praesens: 'zeichnet', praeteritum: 'zeichnete', perfekt: 'hat gezeichnet' },
+      img: { src: '/api/media/vocab-img/7c4ad06a1e294e3009a8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person drawing in a sketchbook with a pencil' }
+    }
   ],
 
   // ---------- Question Words (rule cards → accordion) ----------

@@ -1,0 +1,100 @@
+{
+ "levels": 6,
+ "chapters": 258,
+ "chaptersWithCards": 253,
+ "checkpointChapters": [
+  "b2-14-goethe-mini-test-1",
+  "b2-26-goethe-mini-test-2",
+  "b2-36-goethe-halbzeit-test",
+  "b2-43-goethe-mini-3"
+ ],
+ "cards": 9230,
+ "uniqueConcepts": 8461,
+ "uniqueHeadwords": 7780,
+ "illustrableConcepts": 7893,
+ "textOnlyConcepts": 568,
+ "alreadyIllustrated": 1854,
+ "imagesNeeded": 6039,
+ "cardsServedByReuse": 663,
+ "polysemousHeadwords": 578,
+ "nearDuplicateHeadwords": 308,
+ "byTier": {
+  "image": 4889,
+  "concept": 1150
+ },
+ "publicImages": 61,
+ "gatedImages": 5978,
+ "cost": {
+  "pricePerImage": 0.039,
+  "expectedImages": 7592,
+  "expectedUsd": 296.09,
+  "batchApiUsd": 148.04
+ },
+ "storage": {
+  "bytesPerWord": 19942,
+  "files": 24156,
+  "mb": 114.9
+ },
+ "byLevel": {
+  "a1": {
+   "chapters": 47,
+   "withCards": 47,
+   "checkpoints": 0,
+   "cards": 1984,
+   "image": 1480,
+   "concept": 269,
+   "textOnly": 235,
+   "newConcepts": 941
+  },
+  "a2": {
+   "chapters": 35,
+   "withCards": 35,
+   "checkpoints": 0,
+   "cards": 1607,
+   "image": 1270,
+   "concept": 272,
+   "textOnly": 65,
+   "newConcepts": 1177
+  },
+  "b1": {
+   "chapters": 35,
+   "withCards": 35,
+   "checkpoints": 0,
+   "cards": 2128,
+   "image": 1712,
+   "concept": 296,
+   "textOnly": 120,
+   "newConcepts": 1497
+  },
+  "b2": {
+   "chapters": 69,
+   "withCards": 64,
+   "checkpoints": 4,
+   "cards": 2569,
+   "image": 2142,
+   "concept": 405,
+   "textOnly": 22,
+   "newConcepts": 1894
+  },
+  "c1": {
+   "chapters": 43,
+   "withCards": 43,
+   "checkpoints": 0,
+   "cards": 231,
+   "image": 89,
+   "concept": 85,
+   "textOnly": 57,
+   "newConcepts": 108
+  },
+  "c2": {
+   "chapters": 29,
+   "withCards": 29,
+   "checkpoints": 0,
+   "cards": 711,
+   "image": 423,
+   "concept": 112,
+   "textOnly": 176,
+   "newConcepts": 422
+  }
+ }
+}

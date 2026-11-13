@@ -243,8 +243,8 @@ const CHAPTER = {
   vocab: [
     // ===== Core Active =====
     { de: 'bei', pos: 'preposition', en: 'at (someone\u2019s), near', hi: 'के यहाँ, पास', ex: 'Ich wohne bei meiner Tante.', exEn: 'I live at my aunt\u2019s.' },
-    { de: 'Fahrrad', art: 'das', gender: 'n', plural: 'Fahrräder', pos: 'noun', en: 'bicycle', hi: 'साइकिल', ex: 'Ich fahre mit dem Fahrrad.', exEn: 'I go by bike.' },
-    { de: 'Bus', art: 'der', gender: 'm', plural: 'Busse', pos: 'noun', en: 'bus', hi: 'बस', ex: 'Ich fahre mit dem Bus.', exEn: 'I go by bus.' },
+    { de: 'Fahrrad', art: 'das', gender: 'n', plural: 'Fahrräder', pos: 'noun', en: 'bicycle', hi: 'साइकिल', ex: 'Ich fahre mit dem Fahrrad.', exEn: 'I go by bike.', img: { src: '/api/media/vocab-img/d002cbe20c17d4fbacd3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'city bicycle' } },
+    { de: 'Bus', art: 'der', gender: 'm', plural: 'Busse', pos: 'noun', en: 'bus', hi: 'बस', ex: 'Ich fahre mit dem Bus.', exEn: 'I go by bus.', img: { src: '/api/media/vocab-img/5b27a373d88ccac116f4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A city transit bus' } },
     { de: 'Zug', art: 'der', gender: 'm', plural: 'Züge', pos: 'noun', en: 'train', hi: 'ट्रेन', ex: 'Der Zug ist schnell.', exEn: 'The train is fast.' },
     { de: 'mit', pos: 'preposition', en: 'with, by', hi: 'के साथ, से', ex: 'Ich fahre mit dem Zug.', exEn: 'I travel by train.' },
     { de: 'nach', pos: 'preposition', en: 'to; after', hi: 'को; के बाद', ex: 'Wir fahren nach Berlin.', exEn: 'We travel to Berlin.' },
@@ -254,17 +254,17 @@ const CHAPTER = {
     // ===== Active Support =====
     { de: 'Flugzeug', art: 'das', gender: 'n', plural: 'Flugzeuge', pos: 'noun', en: 'airplane', hi: 'हवाई जहाज़', ex: 'Wir fliegen mit dem Flugzeug.', exEn: 'We fly by plane.' },
     { de: 'Schiff', art: 'das', gender: 'n', plural: 'Schiffe', pos: 'noun', en: 'ship', hi: 'जहाज़', ex: 'Das Schiff fährt langsam.', exEn: 'The ship goes slowly.' },
-    { de: 'Taxi', art: 'das', gender: 'n', plural: 'Taxis', pos: 'noun', en: 'taxi', hi: 'टैक्सी', ex: 'Wir fahren mit dem Taxi.', exEn: 'We go by taxi.' },
-    { de: 'S-Bahn', art: 'die', gender: 'f', plural: 'S-Bahnen', pos: 'noun', en: 'suburban train', hi: 'उपनगरीय ट्रेन', ex: 'Die S-Bahn kommt gleich.', exEn: 'The S-Bahn is coming soon.' },
-    { de: 'Straßenbahn', art: 'die', gender: 'f', plural: 'Straßenbahnen', pos: 'noun', en: 'tram', hi: 'ट्राम', ex: 'Ich fahre mit der Straßenbahn.', exEn: 'I go by tram.' },
-    { de: 'Tram', art: 'die', gender: 'f', plural: 'Trams', pos: 'noun', en: 'tram', hi: 'ट्राम', ex: 'Die Tram ist voll.', exEn: 'The tram is full.' },
-    { de: 'U-Bahn', art: 'die', gender: 'f', plural: 'U-Bahnen', pos: 'noun', en: 'subway, underground', hi: 'मेट्रो', ex: 'Ich nehme die U-Bahn.', exEn: 'I take the subway.' },
+    { de: 'Taxi', art: 'das', gender: 'n', plural: 'Taxis', pos: 'noun', en: 'taxi', hi: 'टैक्सी', ex: 'Wir fahren mit dem Taxi.', exEn: 'We go by taxi.', img: { src: '/api/media/vocab-img/551d59b5f7b1c764cdf1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A yellow taxi car with a roof sign.' } },
+    { de: 'S-Bahn', art: 'die', gender: 'f', plural: 'S-Bahnen', pos: 'noun', en: 'suburban train', hi: 'उपनगरीय ट्रेन', ex: 'Die S-Bahn kommt gleich.', exEn: 'The S-Bahn is coming soon.', img: { src: '/api/media/vocab-img/6c0c4acde91db1799651', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A suburban commuter train at an outdoor platform' } },
+    { de: 'Straßenbahn', art: 'die', gender: 'f', plural: 'Straßenbahnen', pos: 'noun', en: 'tram', hi: 'ट्राम', ex: 'Ich fahre mit der Straßenbahn.', exEn: 'I go by tram.', img: { src: '/api/media/vocab-img/b6a89585be5df962ba0e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a yellow tram on city tracks' } },
+    { de: 'Tram', art: 'die', gender: 'f', plural: 'Trams', pos: 'noun', en: 'tram', hi: 'ट्राम', ex: 'Die Tram ist voll.', exEn: 'The tram is full.', img: { src: '/api/media/vocab-img/854e794c818be28c4d47', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A city tram on street tracks.' } },
+    { de: 'U-Bahn', art: 'die', gender: 'f', plural: 'U-Bahnen', pos: 'noun', en: 'subway, underground', hi: 'मेट्रो', ex: 'Ich nehme die U-Bahn.', exEn: 'I take the subway.', img: { src: '/api/media/vocab-img/2c45ad330ea99f018faf', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A subway train at an underground platform.' } },
     { de: 'gegenüber', pos: 'preposition', en: 'across from, opposite', hi: 'के सामने', ex: 'Die Bank ist gegenüber dem Café.', exEn: 'The bank is across from the café.' },
     { de: 'zu (Kunden)', pos: 'preposition', en: 'to (people)', hi: 'के पास', ex: 'Ich gehe zu meinen Freunden.', exEn: 'I go to my friends.' },
-    { de: 'zu Fuß', pos: 'phrase', en: 'on foot', hi: 'पैदल', ex: 'Ich gehe zu Fuß.', exEn: 'I go on foot.' },
-    { de: 'zu Fuß gehen', pos: 'verb', en: 'to go on foot, walk', hi: 'पैदल जाना', ex: 'Wir gehen zu Fuß nach Hause.', exEn: 'We walk home.', conj: { praesens: 'geht zu Fuß', praeteritum: 'ging zu Fuß', perfekt: 'ist zu Fuß gegangen' } },
+    { de: 'zu Fuß', pos: 'phrase', en: 'on foot', hi: 'पैदल', ex: 'Ich gehe zu Fuß.', exEn: 'I go on foot.', img: { src: '/api/media/vocab-img/665b9eb4c4d54c353c1c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person\'s feet walking along a footpath' } },
+    { de: 'zu Fuß gehen', pos: 'verb', en: 'to go on foot, walk', hi: 'पैदल जाना', ex: 'Wir gehen zu Fuß nach Hause.', exEn: 'We walk home.', conj: { praesens: 'geht zu Fuß', praeteritum: 'ging zu Fuß', perfekt: 'ist zu Fuß gegangen' }, img: { src: '/api/media/vocab-img/913acf1d969811b12f6f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person walking along a sidewalk' } },
     // ===== Passive =====
-    { de: 'Motorrad', art: 'das', gender: 'n', plural: 'Motorräder', pos: 'noun', en: 'motorcycle', hi: 'मोटरसाइकिल', ex: 'Er fährt mit dem Motorrad.', exEn: 'He goes by motorcycle.' },
+    { de: 'Motorrad', art: 'das', gender: 'n', plural: 'Motorräder', pos: 'noun', en: 'motorcycle', hi: 'मोटरसाइकिल', ex: 'Er fährt mit dem Motorrad.', exEn: 'He goes by motorcycle.', img: { src: '/api/media/vocab-img/656fca46ab475dbf3998', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A red motorcycle parked on a road.' } },
     // ===== Reference / System =====
     { de: 'Präposition', art: 'die', gender: 'f', plural: 'Präpositionen', pos: 'noun', en: 'preposition', hi: 'पूर्वसर्ग', ex: '"mit" ist eine Präposition.', exEn: '"mit" is a preposition.' }
   ],

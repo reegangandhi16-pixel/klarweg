@@ -215,12 +215,12 @@ const CHAPTER = {
     // ===== Core location adverbs =====
     { de: 'links', pos: 'adverb', en: 'left, on the left', hi: 'बाएँ', ex: 'Gehen Sie nach links.', exEn: 'Go to the left.' },
     { de: 'rechts', pos: 'adverb', en: 'right, on the right', hi: 'दाएँ', ex: 'Biegen Sie rechts ab.', exEn: 'Turn right.' },
-    { de: 'geradeaus', pos: 'adverb', en: 'straight ahead', hi: 'सीधे', ex: 'Gehen Sie geradeaus bis zur Kreuzung.', exEn: 'Go straight ahead to the crossroads.' },
+    { de: 'geradeaus', pos: 'adverb', en: 'straight ahead', hi: 'सीधे', ex: 'Gehen Sie geradeaus bis zur Kreuzung.', exEn: 'Go straight ahead to the crossroads.', img: { src: '/api/media/vocab-img/89fdd3203369162f1cc0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person walking along a straight pathway.' } },
     { de: 'hier', pos: 'adverb', en: 'here', hi: 'यहाँ', ex: 'Von hier sieht man den Dom.', exEn: 'From here you can see the cathedral.' },
     { de: 'dort', pos: 'adverb', en: 'there', hi: 'वहाँ', ex: 'Dort steht die Bank.', exEn: 'The bank is there.' },
     { de: 'da', pos: 'adverb', en: 'there (closer, colloquial)', hi: 'वहाँ', ex: 'Da vorne ist die Ecke.', exEn: 'The corner is right there.' },
     { de: 'oben', pos: 'adverb', en: 'up, upstairs, at the top', hi: 'ऊपर', ex: 'Der Turm ist oben gr\u00f6\u00dfer als unten.', exEn: 'The tower is bigger at the top than at the bottom.' },
-    { de: 'unten', pos: 'adverb', en: 'down, downstairs, at the bottom', hi: 'नीचे', ex: 'Die K\u00fcche ist unten.', exEn: 'The kitchen is downstairs.' },
+    { de: 'unten', pos: 'adverb', en: 'down, downstairs, at the bottom', hi: 'नीचे', ex: 'Die K\u00fcche ist unten.', exEn: 'The kitchen is downstairs.', img: { src: '/api/media/vocab-img/3757e8eebb1fcf55faf2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person downstairs on the ground floor of a house' } },
     { de: 'vorne', pos: 'adverb', en: 'at the front', hi: 'सामने', ex: 'Der Dom steht vorne am Ende der Stra\u00dfe.', exEn: 'The cathedral stands at the front, at the end of the street.' },
     { de: 'hinten', pos: 'adverb', en: 'at the back', hi: 'पीछे', ex: 'Die Lampe steht hinten.', exEn: 'The lamp stands at the back.' },
     { de: 'innen', pos: 'adverb', en: 'inside, on the inside', hi: 'अंदर', ex: 'Innen ist es ruhiger als drau\u00dfen.', exEn: 'Inside it\u2019s calmer than outside.' },
@@ -246,7 +246,7 @@ const CHAPTER = {
     { de: 'gehen', pos: 'verb', en: 'to go, to walk (imperative for directions)', hi: 'जाना', ex: 'Gehen Sie geradeaus.', exEn: 'Go straight ahead.', conj: { praesens: 'geht', praeteritum: 'ging', perfekt: 'ist gegangen' } },
     { de: 'abbiegen', pos: 'verb', en: 'to turn (separable, for directions)', hi: 'मुड़ना', ex: 'Biegen Sie an der Ampel links ab.', exEn: 'Turn left at the traffic light.', conj: { praesens: 'biegt ab', praeteritum: 'bog ab', perfekt: 'ist abgebogen' } },
     { de: 'die Ampel', art: 'die', gender: 'f', plural: 'Ampeln', pos: 'noun', en: 'traffic light', hi: 'ट्रैफ़िक लाइट', ex: 'An der Ampel gehen Sie links.', exEn: 'At the traffic light go left.' },
-    { de: 'die Ecke', art: 'die', gender: 'f', plural: 'Ecken', pos: 'noun', en: 'corner', hi: 'कोना', ex: 'An der Ecke ist eine Bank.', exEn: 'At the corner there\u2019s a bank.' },
+    { de: 'die Ecke', art: 'die', gender: 'f', plural: 'Ecken', pos: 'noun', en: 'corner', hi: 'कोना', ex: 'An der Ecke ist eine Bank.', exEn: 'At the corner there\u2019s a bank.', img: { src: '/api/media/vocab-img/70816f504e34fc3a2d89', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A street corner where two buildings meet' } },
     { de: 'bis zur Kreuzung', pos: 'phrase', en: 'up to the crossroads', hi: 'चौराहे तक', ex: 'Gehen Sie geradeaus bis zur Kreuzung.', exEn: 'Go straight to the crossroads.' },
     { de: 'die Wegbeschreibung', art: 'die', gender: 'f', plural: 'Wegbeschreibungen', pos: 'noun', en: 'directions', hi: 'रास्ते के निर्देश', ex: 'Danke f\u00fcr die Wegbeschreibung!', exEn: 'Thanks for the directions!' },
     { de: 'ortskundig', pos: 'adjective', en: 'knowing the area, familiar with the local streets', hi: 'स्थानीय जानकार', ex: 'Der Taxifahrer ist sehr ortskundig.', exEn: 'The taxi driver knows the area very well.' }

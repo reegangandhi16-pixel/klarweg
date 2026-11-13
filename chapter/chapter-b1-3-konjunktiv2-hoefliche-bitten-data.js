@@ -239,7 +239,9 @@ const CHAPTER = {
       ex: 'Würden Sie mein Handy bitte aufladen?', exEn: 'Would you please charge my phone?', exHi: 'Kya aap kripya mera phone charge karenge?',
       ex2: 'Ich hätte gern ein Kabel, um das Handy aufzuladen.', ex2En: 'I\'d like a cable to charge the phone.', ex2Hi: 'Mujhe phone charge karne ke liye ek cable chahiye.',
       conj: { praesens: 'lädt auf', praeteritum: 'lud auf', perfekt: 'hat aufgeladen' },
-      advanced: { synonyms: ['laden'], opposites: ['entladen'], collocations: ['den Akku aufladen', 'das Handy aufladen'] } },
+      advanced: { synonyms: ['laden'], opposites: ['entladen'], collocations: ['den Akku aufladen', 'das Handy aufladen'] },
+      img: { src: '/api/media/vocab-img/5ed55cef8b74afc3efd5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smartphone plugged into a charger.' }
+    },
     { de: 'bedienen', pos: 'verb', level: 'B1', en: 'to use, operate', hi: 'चलाना, इस्तेमाल करना',
       ex: 'Könnten Sie mir zeigen, wie man die Maschine bedient?', exEn: 'Could you show me how to operate the machine?', exHi: 'Kya aap mujhe dikha sakte hain ki machine kaise chalate hain?',
       ex2: 'Ich hätte gern eine Anleitung, um das Gerät zu bedienen.', ex2En: 'I\'d like an instruction manual to operate the device.', ex2Hi: 'Mujhe device chalane ke liye ek manual chahiye.',
@@ -252,22 +254,30 @@ const CHAPTER = {
     { de: 'Anleitung', art: 'die', gender: 'f', plural: 'Anleitungen', pos: 'noun', level: 'B1', en: 'instructions, manual', hi: 'निर्देश',
       ex: 'Hätten Sie die Anleitung für den Staubsauger?', exEn: 'Would you have the instructions for the vacuum cleaner?', exHi: 'Kya aapke paas vacuum cleaner ke instructions honge?',
       ex2: 'Die Anleitung liegt unten im Karton.', ex2En: 'The manual is at the bottom of the box.', ex2Hi: 'Manual box ke neeche rakha hai.',
-      advanced: { synonyms: ['Bedienungsanleitung', 'Handbuch'], opposites: [], collocations: ['die Anleitung lesen', 'laut Anleitung'] } },
+      advanced: { synonyms: ['Bedienungsanleitung', 'Handbuch'], opposites: [], collocations: ['die Anleitung lesen', 'laut Anleitung'] },
+      img: { src: '/api/media/vocab-img/395210b1a0d5707e2675', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'instruction manual booklet next to furniture parts' }
+    },
     { de: 'einsetzen', pos: 'verb', level: 'B1', en: 'to insert (a battery)', hi: 'डालना',
       ex: 'Könnten Sie bitte die Batterie einsetzen?', exEn: 'Could you please insert the battery?', exHi: 'Kya aap kripya battery daal sakte hain?',
       ex2: 'Ich würde gern eine neue Batterie einsetzen.', ex2En: 'I would like to insert a new battery.', ex2Hi: 'Main ek nayi battery daalna chahoonga.',
       conj: { praesens: 'setzt ein', praeteritum: 'setzte ein', perfekt: 'hat eingesetzt' },
-      advanced: { synonyms: ['einlegen'], opposites: ['herausnehmen'], collocations: ['eine Batterie einsetzen'] } },
+      advanced: { synonyms: ['einlegen'], opposites: ['herausnehmen'], collocations: ['eine Batterie einsetzen'] },
+      img: { src: '/api/media/vocab-img/8f1cb6967f6851cb29ec', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand inserting a battery into a remote control.' }
+    },
     { de: 'einstecken', pos: 'verb', level: 'B1', en: 'to plug in', hi: 'प्लग करना',
       ex: 'Würden Sie das Kabel bitte einstecken?', exEn: 'Would you please plug in the cable?', exHi: 'Kya aap kripya cable plug karenge?',
       ex2: 'Man muss ihn nur einstecken und den Knopf drücken.', ex2En: 'You just need to plug it in and press the button.', ex2Hi: 'Bas isse plug karna hai aur button dabana hai.',
       conj: { praesens: 'steckt ein', praeteritum: 'steckte ein', perfekt: 'hat eingesteckt' },
-      advanced: { synonyms: ['anschließen'], opposites: ['ausstecken'], collocations: ['den Stecker einstecken'] } },
+      advanced: { synonyms: ['anschließen'], opposites: ['ausstecken'], collocations: ['den Stecker einstecken'] },
+      img: { src: '/api/media/vocab-img/a98bbd8ccb418be06351', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand plugging a cable into a wall socket.' }
+    },
     { de: 'herunterfallen', pos: 'verb', level: 'B1', en: 'to fall down', hi: 'गिरना',
       ex: 'Ist es einfach heruntergefallen?', exEn: 'Did it simply fall down?', exHi: 'Kya woh bas gir gaya?',
       ex2: 'Das Handy ist mir aus der Hand heruntergefallen.', ex2En: 'The phone fell out of my hand.', ex2Hi: 'Phone mere haath se gir gaya.',
       conj: { praesens: 'fällt herunter', praeteritum: 'fiel herunter', perfekt: 'ist heruntergefallen' },
-      advanced: { synonyms: ['runterfallen'], opposites: [], collocations: ['vom Tisch herunterfallen'] } },
+      advanced: { synonyms: ['runterfallen'], opposites: [], collocations: ['vom Tisch herunterfallen'] },
+      img: { src: '/api/media/vocab-img/b607322ad77116b0a8dd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A ceramic vase falling from a table edge' }
+    },
     { de: 'installieren', pos: 'verb', level: 'B1', en: 'to install', hi: 'इंस्टॉल करना',
       ex: 'Könnten Sie die App für mich installieren?', exEn: 'Could you install the app for me?', exHi: 'Kya aap mere liye app install kar sakte hain?',
       ex2: 'Ich würde die Software gern selbst installieren.', ex2En: 'I would like to install the software myself.', ex2Hi: 'Main software khud install karna chahoonga.',
@@ -281,7 +291,9 @@ const CHAPTER = {
       ex: 'Mein Handy ist einfach kaputtgegangen.', exEn: 'My phone simply broke.', exHi: 'Mera phone bas kharab ho gaya.',
       ex2: 'Hoffentlich geht der Staubsauger nicht wieder kaputt.', ex2En: 'Hopefully the vacuum cleaner doesn\'t break again.', ex2Hi: 'Ummeed hai vacuum cleaner phir se kharab na ho.',
       conj: { praesens: 'geht kaputt', praeteritum: 'ging kaputt', perfekt: 'ist kaputtgegangen' },
-      advanced: { synonyms: ['defekt sein'], opposites: ['funktionieren'], collocations: ['etwas geht kaputt'] } },
+      advanced: { synonyms: ['defekt sein'], opposites: ['funktionieren'], collocations: ['etwas geht kaputt'] },
+      img: { src: '/api/media/vocab-img/8471e4755ef0aeea7f52', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Ceramic plate breaking on the floor' }
+    },
     { de: 'auf den Markt kommen', pos: 'verb', level: 'B1', en: 'to come onto the market', hi: 'बाज़ार में आना',
       ex: 'Wann ist das neue Modell auf den Markt gekommen?', exEn: 'When did the new model come onto the market?', exHi: 'Naya model bazaar mein kab aaya?',
       ex2: 'Das Gerät kommt nächsten Monat auf den Markt.', ex2En: 'The device comes onto the market next month.', ex2Hi: 'Device agle mahine bazaar mein aayega.',
@@ -329,11 +341,15 @@ const CHAPTER = {
     { de: 'Staubsauger', art: 'der', gender: 'm', plural: 'Staubsauger', pos: 'noun', level: 'B1', en: 'vacuum cleaner', hi: 'वैक्यूम क्लीनर',
       ex: 'Könntest du mir zeigen, wie man den Staubsauger bedient?', exEn: 'Could you show me how to operate the vacuum cleaner?', exHi: 'Kya tum mujhe dikha sakte ho ki vacuum cleaner kaise chalate hain?',
       ex2: 'Unser Staubsauger ist gestern kaputtgegangen.', ex2En: 'Our vacuum cleaner broke yesterday.', ex2Hi: 'Hamara vacuum cleaner kal kharab ho gaya.',
-      advanced: { synonyms: [], opposites: [], collocations: ['den Staubsauger bedienen', 'einen Staubsauger kaufen'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['den Staubsauger bedienen', 'einen Staubsauger kaufen'] },
+      img: { src: '/api/media/vocab-img/a27e6a349d9f5f2fa491', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Vacuum cleaner on a rug' }
+    },
     { de: 'Frage', art: 'die', gender: 'f', plural: 'Fragen', pos: 'noun', level: 'B1', en: 'question', hi: 'सवाल',
       ex: 'Ich hätte gern noch eine Frage.', exEn: 'I\'d like to ask one more question.', exHi: 'Mera ek aur sawaal hai.',
       ex2: 'Die Frage wäre, ob sich eine Reparatur lohnt.', ex2En: 'The question would be whether a repair is worth it.', ex2Hi: 'Sawaal yeh hoga ki kya repair karwana faayde ka hai.',
-      advanced: { synonyms: ['Anfrage'], opposites: ['Antwort'], collocations: ['eine Frage haben', 'eine Frage stellen'] } },
+      advanced: { synonyms: ['Anfrage'], opposites: ['Antwort'], collocations: ['eine Frage haben', 'eine Frage stellen'] },
+      img: { src: '/api/media/vocab-img/29121f32201ade8512f8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Student raising hand with a question' }
+    },
     { de: 'nähen', pos: 'verb', level: 'B1', en: 'to sew', hi: 'सिलाई करना',
       ex: 'Könnten Sie diesen Knopf bitte annähen?', exEn: 'Could you please sew on this button?', exHi: 'Kya aap kripya yeh button si sakte hain?',
       ex2: 'Meine Oma näht ihre Kleider selbst.', ex2En: 'My grandmother sews her own clothes.', ex2Hi: 'Meri dadi apne kapde khud silti hain.',
@@ -348,7 +364,9 @@ const CHAPTER = {
       ex: 'Könnten Sie das Zimmer bitte weiß streichen?', exEn: 'Could you please paint the room white?', exHi: 'Kya aap kripya kamre ko safed rang sakte hain?',
       ex2: 'Wir würden die Wand gern hellblau streichen.', ex2En: 'We would like to paint the wall light blue.', ex2Hi: 'Hum diwaar ko halka neela rangna chahenge.',
       conj: { praesens: 'streicht', praeteritum: 'strich', perfekt: 'hat gestrichen' },
-      advanced: { synonyms: ['anmalen'], opposites: [], collocations: ['eine Wand streichen', 'ein Zimmer streichen'] } }
+      advanced: { synonyms: ['anmalen'], opposites: [], collocations: ['eine Wand streichen', 'ein Zimmer streichen'] },
+      img: { src: '/api/media/vocab-img/a3d0ccd2d009e1b4e8c6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person painting a wall with a roller.' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

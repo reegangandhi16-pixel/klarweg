@@ -240,7 +240,7 @@ const CHAPTER = {
     { de: 'Grund', art: 'der', gender: 'm', plural: 'Gründe', pos: 'noun', en: 'reason', hi: 'कारण', ex: 'Was ist der Grund für deine Nervosität?', exEn: 'What is the reason for your nervousness?' },
     { de: 'gehören', pos: 'verb', en: 'to belong to', hi: 'का होना', ex: 'Dieses Buch gehört mir.', exEn: 'This book belongs to me.', conj: { praesens: 'gehört', praeteritum: 'gehörte', perfekt: 'hat gehört' } },
     { de: 'teuer', pos: 'adjective', en: 'expensive', hi: 'महंगा', ex: 'Der teure Kurs hat sich gelohnt.', exEn: 'The expensive course was worth it.' },
-    { de: 'gemütlich', pos: 'adjective', en: 'cosy', hi: 'आरामदायक', ex: 'Das gemütliche Klassenzimmer hilft mir zu lernen.', exEn: 'The cosy classroom helps me learn.' },
+    { de: 'gemütlich', pos: 'adjective', en: 'cosy', hi: 'आरामदायक', ex: 'Das gemütliche Klassenzimmer hilft mir zu lernen.', exEn: 'The cosy classroom helps me learn.', img: { src: '/api/media/vocab-img/11881742d7a52f323909', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'cosy armchair with a blanket and warm mug' } },
     { de: 'jemand', pos: 'pronoun', en: 'someone', hi: 'कोई', ex: 'Jemand hat mir geholfen.', exEn: 'Someone helped me.' },
     { de: 'niemand', pos: 'pronoun', en: 'no one', hi: 'कोई नहीं', ex: 'Niemand ist perfekt vorbereitet.', exEn: 'No one is perfectly prepared.' },
     { de: 'etwas', pos: 'pronoun', en: 'something', hi: 'कुछ', ex: 'Ich hätte gern etwas Ruhe.', exEn: 'I would like some peace.' },
@@ -268,7 +268,7 @@ const CHAPTER = {
     { de: 'Steuer', art: 'die', gender: 'f', plural: 'Steuern', pos: 'noun', en: 'tax', hi: 'कर', ex: 'Das ist die Steuer, die ich jedes Jahr zahle.', exEn: 'That\'s the tax that I pay every year.' },
     { de: 'Hörerin', art: 'die', gender: 'f', plural: 'Hörerinnen', pos: 'noun', en: 'listener', hi: 'श्रोता', ex: 'Das ist die Hörerin, die der Moderator immer grüßt.', exEn: 'That\'s the listener whom the host always greets.' },
     { de: 'melodisch', pos: 'adjective', en: 'melodious', hi: 'मधुर', ex: 'Das ist der Song, den ich so melodisch fand.', exEn: 'That\'s the song that I thought was so melodious.' },
-    { de: 'befreundet', pos: 'adjective', en: 'friends (with each other)', hi: 'दोस्त', ex: 'Wir sind schon lange befreundet.', exEn: 'We\'ve been friends for a long time.' },
+    { de: 'befreundet', pos: 'adjective', en: 'friends (with each other)', hi: 'दोस्त', ex: 'Wir sind schon lange befreundet.', exEn: 'We\'ve been friends for a long time.', img: { src: '/api/media/vocab-img/658d8649f309339fe4b2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends walking together sharing an umbrella' } },
     { de: 'gestehen', pos: 'verb', en: 'to confess', hi: 'कबूल करना', ex: 'Ich möchte dir etwas gestehen.', exEn: 'I would like to confess something to you.', conj: { praesens: 'gesteht', praeteritum: 'gestand', perfekt: 'hat gestanden' } },
     { de: 'reich', pos: 'adjective', en: 'rich', hi: 'अमीर', ex: 'Ich wäre gern reich, aber glücklich ist wichtiger.', exEn: 'I would like to be rich, but happy is more important.' },
     { de: 'Werktag', art: 'der', gender: 'm', plural: 'Werktage', pos: 'noun', en: 'working day', hi: 'कामकाजी दिन', ex: 'Nach einem langen Werktag hätte ich gern Ruhe.', exEn: 'After a long working day, I would like some peace.' }

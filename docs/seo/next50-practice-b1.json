@@ -44,7 +44,8 @@
         "die",
         "Plural relative subject."
       ]
-    ]
+    ],
+    "instructions": "Use der, die or das as a relative subject; use die for plural subjects."
   },
   {
     "slug": "b1-relative-clauses-accusative-exercises",
@@ -91,7 +92,8 @@
         "die",
         "Plural direct object."
       ]
-    ]
+    ],
+    "instructions": "Use den, die or das as the relative direct object, according to gender and number."
   },
   {
     "slug": "b1-passive-praesens-exercises",
@@ -138,7 +140,8 @@
         "wird",
         "Singular Aufgabe needs wird."
       ]
-    ]
+    ],
+    "instructions": "Use the present-tense form of werden for the process passive, or the participle of the verb in brackets."
   },
   {
     "slug": "b1-passive-praeteritum-exercises",
@@ -185,7 +188,8 @@
         "wurde",
         "Singular past passive."
       ]
-    ]
+    ],
+    "instructions": "Use wurde or wurden for the past process passive, or the participle of the verb in brackets."
   },
   {
     "slug": "b1-polite-konjunktiv-ii-exercises",
@@ -207,7 +211,7 @@
         "Would you open the window?"
       ],
       [
-        "Es wäre schön, wenn du kommst.",
+        "Es wäre schön, wenn du kämest.",
         "It would be nice if you came."
       ]
     ],
@@ -230,9 +234,10 @@
       [
         "Das ___ sehr nett. (sein, hypothetical)",
         "wäre",
-        "Wäre is Konjunktiv II of sein."
+        "Wäre is Konjunktiv II of sein. With a full conditional clause: Es wäre schön, wenn du kämest (or: kommen würdest)."
       ]
-    ]
+    ],
+    "instructions": "Use Konjunktiv II of the verb in brackets to make a polite or hypothetical statement."
   },
   {
     "slug": "b1-obwohl-trotzdem-exercises",
@@ -260,7 +265,7 @@
     ],
     "quiz": [
       [
-        "___ ich krank bin, gehe ich zur Arbeit.",
+        "___ ich müde bin, lerne ich weiter.",
         "Obwohl",
         "Subordinate concessive clause."
       ],
@@ -270,16 +275,17 @@
         "Independent contrast with inverted verb order."
       ],
       [
-        "Obwohl er müde ___, arbeitet er.",
+        "Obwohl er müde ___, arbeitet er. (sein)",
         "ist",
         "Finite verb goes to clause end."
       ],
       [
-        "Es regnet. Trotzdem ___ wir draußen.",
+        "Es regnet. Trotzdem ___ wir draußen. (spielen)",
         "spielen",
         "After trotzdem, finite verb takes position two."
       ]
-    ]
+    ],
+    "instructions": "Choose obwohl or trotzdem for the connector gaps. Conjugate the verb in brackets for the other gaps."
   },
   {
     "slug": "b1-um-zu-damit-exercises",
@@ -326,7 +332,8 @@
         "damit",
         "Finite subordinate purpose clause."
       ]
-    ]
+    ],
+    "instructions": "Choose um, zu or damit to complete each purpose construction."
   },
   {
     "slug": "b1-indirect-questions-exercises",
@@ -373,7 +380,8 @@
         "ist",
         "Finite verb goes to the end."
       ]
-    ]
+    ],
+    "instructions": "Use the English question-word cue or conjugate the verb in brackets in the present tense."
   },
   {
     "slug": "b1-genitive-possession-exercises",
@@ -420,7 +428,8 @@
         "der",
         "Plural Genitiv article."
       ]
-    ]
+    ],
+    "instructions": "Complete each noun phrase with the genitive definite article des or der."
   },
   {
     "slug": "b1-n-declension-exercises",
@@ -467,7 +476,8 @@
         "Menschen",
         "Genitiv singular N-declension."
       ]
-    ]
+    ],
+    "instructions": "Put the noun in brackets into the case required by the sentence."
   },
   {
     "slug": "b1-wo-compounds-exercises",
@@ -514,7 +524,8 @@
         "wen",
         "For a person use preposition + wen."
       ]
-    ]
+    ],
+    "instructions": "Use a wo(r)-compound for things, and wen after auf for the person in the last question."
   },
   {
     "slug": "b1-praeteritum-storytelling-exercises",
@@ -561,6 +572,7 @@
         "schrieb",
         "Schreiben is a strong verb."
       ]
-    ]
+    ],
+    "instructions": "Put the verb in brackets into Präteritum. In question 3, sie refers to one woman."
   }
 ]

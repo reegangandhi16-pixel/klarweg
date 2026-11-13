@@ -38,7 +38,8 @@ test('resource hub presents discovery routes before reference tools',()=>{
  const s=read('resources.html');
  assert.ok(s.indexOf('id="books-and-pdfs"')<s.indexOf('<!-- GRAMMAR COLOUR KEY -->'));
  assert.match(s,/<h1[^>]*>Free German learning resources\.<\/h1>/);
- assert.equal((s.match(/class="resource-choice"/g)||[]).length,4);
+ const discovery=s.match(/<section\b[^>]*id="books-and-pdfs"[\s\S]*?<\/section>/)[0];
+ assert.equal((discovery.match(/class="resource-choice"/g)||[]).length,4);
  assert.ok(s.includes('href="downloads/german-self-study-planner.pdf"'));
  assert.ok(s.includes('id="chapter-downloads"'));
  assert.match(s,/Access to course chapter downloads follows/);

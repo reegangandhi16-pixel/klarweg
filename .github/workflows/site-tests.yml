@@ -6,12 +6,10 @@ name: Site tests (npm test)
 on:
   pull_request:
     paths-ignore:
-      - 'docs/**'
       - '**/*.md'
   push:
     branches: [main]
     paths-ignore:
-      - 'docs/**'
       - '**/*.md'
   workflow_dispatch:
 

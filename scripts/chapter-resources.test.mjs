@@ -3,6 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadAllChapters } from './chapter-resources/load.mjs';
@@ -203,15 +204,35 @@ test('word banks never print in answer order; malformed gaps are skipped', () =>
 });
 
 test('Hindi and the Klarweg faces survive PDF rendering; no system or Type3 fallback fonts', { skip: !findChrome() && 'Google Chrome not installed' }, async () => {
-  const dir = path.join(ROOT, 'scripts', 'chapter-resources', '.build');
-  fs.mkdirSync(dir, { recursive: true });
-  const browser = await launchChrome(findChrome());
+  // Managed Chromium may block file://. Serve only this test's HTML and its
+  // embedded font files over loopback; never expose the repository or chapter data files.
+  const fixtures = new Map();
+  const server = http.createServer((req, res) => {
+    const pathname = new URL(req.url, 'http://localhost').pathname;
+    if (fixtures.has(pathname)) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(fixtures.get(pathname));
+      return;
+    }
+    if (/^\/fonts\/[A-Za-z0-9-]+\.ttf$/.test(pathname)) {
+      const font = path.join(ROOT, 'scripts/chapter-resources', pathname);
+      if (fs.existsSync(font)) {
+        res.writeHead(200, { 'Content-Type': 'font/ttf' });
+        res.end(fs.readFileSync(font));
+        return;
+      }
+    }
+    res.writeHead(404); res.end();
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  let browser;
   const render = async (id, type) => {
-    const file = path.join(dir, `test--${id}--${type}.html`);
-    fs.writeFileSync(file, htmlOf(id, type).replace(/url\(fonts\//g, 'url(../fonts/'));
-    try { return (await browser.printToPdf('file://' + file)).toString('latin1'); } finally { fs.rmSync(file, { force: true }); }
+    const route = `/test--${id}--${type}.html`;
+    fixtures.set(route, htmlOf(id, type));
+    try { return (await browser.printToPdf(`http://127.0.0.1:${server.address().port}${route}`)).toString('latin1'); } finally { fixtures.delete(route); }
   };
   try {
+    browser = await launchChrome(findChrome());
     const vocab = await render('a1-9-verben', 'vocabulary');
     for (const face of ['NotoSansDevanagari', 'Fraunces', 'Inter', 'JetBrainsMono']) assert.match(vocab, new RegExp(`/BaseFont /[A-Z]{6}\\+${face}`), face);
     assert.ok((vocab.match(/\/Type\s*\/Page(?!s)/g) || []).length >= 2);
@@ -224,7 +245,8 @@ test('Hindi and the Klarweg faces survive PDF rendering; no system or Type3 fall
       assert.ok(!/\/Subtype\s*\/Type3/.test(pdf), `${id}/${type} Type3 font`);
     }
   } finally {
-    await browser.close();
+    await browser?.close();
+    await new Promise(resolve => server.close(resolve));
   }
 });
 

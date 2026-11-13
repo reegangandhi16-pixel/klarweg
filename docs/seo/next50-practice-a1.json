@@ -44,13 +44,14 @@
         "Die",
         "All plural nouns use die in Nominativ."
       ]
-    ]
+    ],
+    "instructions": "Fill each gap with the definite article der, die or das in the nominative."
   },
   {
     "slug": "a1-ein-eine-exercises",
     "title": "Ein or Eine? A1 Article Practice with Answers",
     "rule": "Use ein before a masculine or neuter singular noun in Nominativ, and eine before a feminine singular noun. There is no indefinite article for ordinary plural nouns.",
-    "trap": "A singular feminine noun needs eine, even when the English sentence says only “a”.",
+    "trap": "When stating a profession without a modifier after sein, usually omit the article: Er ist Arzt. When identifying someone with Das ist, use ein/eine: Das ist ein Arzt.",
     "guide": "grammar/der-die-das.html",
     "examples": [
       [
@@ -82,16 +83,17 @@
         "Buch is neuter."
       ],
       [
-        "Er ist ___ Arzt.",
+        "Das ist ___ Arzt.",
         "ein",
-        "Arzt is masculine."
+        "Arzt is masculine: Das ist ein Arzt. To state a profession after sein, normally omit the article: Er ist Arzt."
       ],
       [
         "Das sind ___ Bücher.",
         "—",
         "The usual plural has no ein/eine article."
       ]
-    ]
+    ],
+    "instructions": "Choose ein, eine or no article (—). Use an indefinite article only where it is natural in the sentence."
   },
   {
     "slug": "a1-kein-keine-exercises",
@@ -138,7 +140,8 @@
         "keine",
         "Bücher is plural."
       ]
-    ]
+    ],
+    "instructions": "Complete each gap with the correct form of kein to negate the noun phrase."
   },
   {
     "slug": "a1-sein-present-tense-exercises",
@@ -171,7 +174,7 @@
         "Third-person singular takes ist."
       ],
       [
-        "Wir ___ heute frei.",
+        "Wir ___ heute zu Hause.",
         "sind",
         "Wir takes sind."
       ],
@@ -185,7 +188,8 @@
         "seid",
         "Ihr takes seid."
       ]
-    ]
+    ],
+    "instructions": "Complete each sentence with the present-tense form of sein."
   },
   {
     "slug": "a1-haben-present-tense-exercises",
@@ -232,7 +236,8 @@
         "haben",
         "Plural sie takes haben."
       ]
-    ]
+    ],
+    "instructions": "Complete each sentence with the present-tense form of haben."
   },
   {
     "slug": "a1-regular-verbs-exercises",
@@ -279,7 +284,8 @@
         "höre",
         "Ich takes -e."
       ]
-    ]
+    ],
+    "instructions": "Put the verb in brackets into the present tense for the given subject."
   },
   {
     "slug": "a1-personal-pronouns-exercises",
@@ -326,7 +332,8 @@
         "Sie",
         "Formal address uses capital Sie."
       ]
-    ]
+    ],
+    "instructions": "Replace the person or group named in the first sentence with a subject pronoun; use formal Sie for Herr Becker."
   },
   {
     "slug": "a1-possessive-mein-dein-exercises",
@@ -373,12 +380,13 @@
         "deinen",
         "Masculine Akkusativ takes -en."
       ]
-    ]
+    ],
+    "instructions": "Use a form of mein for “my” and dein for “your” (one person, informal)."
   },
   {
     "slug": "a1-w-questions-exercises",
     "title": "German W-Questions: A1 Fill-in-the-Blank Practice",
-    "rule": "Use wer for a person, was for a thing, wo for location, wohin for destination, woher for origin, wann for time and warum for reason. In a direct question the conjugated verb usually comes next.",
+    "rule": "Use wer for a person, was for a thing, wo for location, wohin for destination, woher for origin, wann for time, warum for reason and wie for how. In a direct question the conjugated verb usually comes next.",
     "trap": "Wo and wohin are different: one asks where someone is, the other where someone goes.",
     "guide": "grammar/w-fragen.html",
     "examples": [
@@ -403,7 +411,7 @@
       [
         "___ heißt du? — Ich heiße Ali.",
         "Wie",
-        "Wie fragt nach dem Namen."
+        "Use wie in the fixed question Wie heißt du? (What is your name?)."
       ],
       [
         "___ kommst du? — Aus Indien.",
@@ -420,7 +428,8 @@
         "Wer",
         "Wer asks about a person."
       ]
-    ]
+    ],
+    "instructions": "Choose the question word that matches the answer after the dash."
   },
   {
     "slug": "a1-yes-no-questions-exercises",
@@ -467,7 +476,8 @@
         "Trinken",
         "Formal Sie uses trinken."
       ]
-    ]
+    ],
+    "instructions": "Put the verb in brackets into the present tense and place it before the subject."
   },
   {
     "slug": "a1-nicht-position-exercises",
@@ -514,12 +524,13 @@
         "kein",
         "Geld is a neuter noun phrase; kein is natural here."
       ]
-    ]
+    ],
+    "instructions": "Choose nicht or the appropriate form of kein to make each sentence negative."
   },
   {
     "slug": "a1-numbers-and-prices-exercises",
     "title": "German Numbers and Prices: A1 Practice",
-    "rule": "For numbers 21–99, German usually says the ones before the tens: einundzwanzig (21), fünfunddreißig (35). To say a price, use Euro and Cent naturally.",
+    "rule": "For two-digit numbers with both tens and ones (21–99), German says the ones before the tens: einundzwanzig (21), fünfunddreißig (35). Exact tens such as achtzig (80) stand alone. To say a price, use Euro and Cent naturally.",
     "trap": "Do not translate twenty-one word for word as zwanzigeins.",
     "guide": "grammar/zahlen.html",
     "examples": [
@@ -561,7 +572,8 @@
         "achtzig",
         "Eighty is achtzig."
       ]
-    ]
+    ],
+    "instructions": "Write each number as one German word."
   },
   {
     "slug": "a1-telling-time-exercises",
@@ -591,24 +603,25 @@
       [
         "8:30 = Es ist ___.",
         "halb neun",
-        "Halb uses the upcoming hour."
+        "Halb uses the upcoming hour. Acht Uhr dreißig is also correct when giving the time formally."
       ],
       [
         "10:15 = Es ist ___.",
         "Viertel nach zehn",
-        "Quarter past ten."
+        "Quarter past ten. Zehn Uhr fünfzehn is the formal alternative; regional quarter-hour expressions also vary."
       ],
       [
         "17:45 = Es ist ___.",
         "Viertel vor sechs",
-        "Quarter to six in a twelve-hour expression."
+        "Quarter to six in a twelve-hour expression. Siebzehn Uhr fünfundvierzig is the formal alternative."
       ],
       [
-        "The lesson is at 7:00 = Der Unterricht ist ___ sieben Uhr.",
+        "Der Unterricht ist ___ sieben Uhr.",
         "um",
         "Use um before a clock time."
       ]
-    ]
+    ],
+    "instructions": "For the first three gaps, use informal twelve-hour expressions with halb, Viertel nach or Viertel vor. For the last gap, add the time preposition."
   },
   {
     "slug": "a1-akkusativ-articles-exercises",
@@ -655,6 +668,7 @@
         "die",
         "Plural definite article remains die."
       ]
-    ]
+    ],
+    "instructions": "Use the accusative definite article for each noun in brackets."
   }
 ]

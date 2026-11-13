@@ -3,7 +3,7 @@
     "slug": "a2-dativ-articles-exercises",
     "title": "Dativ Articles: Dem, Der, Den Exercises (A2)",
     "rule": "Dativ often marks the receiver of something or follows prepositions like mit, nach and bei. Use dem (masculine/neuter), der (feminine), den (plural); plural nouns often add -n if possible.",
-    "trap": "Do not use den for every Dativ noun. Den is specifically the plural Dativ definite article.",
+    "trap": "Within the dative, den is the plural definite article; masculine singular takes dem. Outside the dative, den is also used for masculine accusative.",
     "guide": "grammar/dativ.html",
     "examples": [
       [
@@ -44,7 +44,8 @@
         "den",
         "Plural Dativ takes den, and Kindern has -n."
       ]
-    ]
+    ],
+    "instructions": "Use the dative definite article for each noun in brackets."
   },
   {
     "slug": "a2-dativ-pronouns-exercises",
@@ -89,9 +90,10 @@
       [
         "Wir danken ___. (them)",
         "ihnen",
-        "Ihnen lowercase refers to them in this context."
+        "Lowercase ihnen means “them”; capital Ihnen would mean formal “you”."
       ]
-    ]
+    ],
+    "instructions": "Replace the English cue in brackets with a dative pronoun."
   },
   {
     "slug": "a2-akkusativ-pronouns-exercises",
@@ -131,14 +133,15 @@
       [
         "Besuchst du uns? — Ja, ich besuche ___.",
         "euch",
-        "Euch is the informal plural object pronoun."
+        "When replying to someone who says uns (“us”), refer to that group as euch (“you all”)."
       ],
       [
         "Kennst du die Frau? — Ja, ich kenne ___.",
         "sie",
         "Feminine Akkusativ singular is sie."
       ]
-    ]
+    ],
+    "instructions": "Complete each reply with the accusative pronoun for the person or people addressed or mentioned."
   },
   {
     "slug": "a2-wechselpraepositionen-wo-exercises",
@@ -185,7 +188,8 @@
         "der",
         "Static location: feminine Dativ."
       ]
-    ]
+    ],
+    "instructions": "Use the dative definite article to express a location (wo?)."
   },
   {
     "slug": "a2-wechselpraepositionen-wohin-exercises",
@@ -232,7 +236,8 @@
         "das",
         "Destination: neuter Akkusativ."
       ]
-    ]
+    ],
+    "instructions": "Use the accusative definite article to express a destination or placement (wohin?)."
   },
   {
     "slug": "a2-perfekt-haben-exercises",
@@ -265,7 +270,7 @@
         "Ich takes habe as helper."
       ],
       [
-        "Sie ___ das Fenster geöffnet.",
+        "Sie (singular) ___ das Fenster geöffnet.",
         "hat",
         "Sie singular takes hat."
       ],
@@ -279,12 +284,13 @@
         "hast",
         "Du takes hast as helper."
       ]
-    ]
+    ],
+    "instructions": "Complete the perfect tense with the present-tense form of haben, or the participle of the verb in brackets."
   },
   {
     "slug": "a2-perfekt-sein-exercises",
     "title": "Perfekt with Sein: A2 Movement Verb Exercises",
-    "rule": "Many intransitive verbs of change of location or state use sein in Perfekt, including gehen, kommen, fahren (when going somewhere), aufstehen and einschlafen. The participle stays at the end.",
+    "rule": "Many intransitive verbs of change of location or state use sein in Perfekt, including gehen, kommen, fahren (when going somewhere), aufstehen and einschlafen. Bleiben also takes sein although it expresses remaining in a place or state. The participle stays at the end.",
     "trap": "Do not assume every verb mentioning movement takes sein. Learn the auxiliary with each verb.",
     "guide": "grammar/perfekt.html",
     "examples": [
@@ -326,7 +332,8 @@
         "geblieben",
         "Bleiben unusually takes sein despite no destination."
       ]
-    ]
+    ],
+    "instructions": "Complete the perfect tense with the present-tense form of sein, or the participle of the verb in brackets."
   },
   {
     "slug": "a2-irregular-partizip-ii-exercises",
@@ -373,7 +380,8 @@
         "genommen",
         "Nehmen forms genommen."
       ]
-    ]
+    ],
+    "instructions": "Fill each gap with the past participle of the verb in brackets."
   },
   {
     "slug": "a2-separable-verbs-perfekt-exercises",
@@ -420,13 +428,14 @@
         "eingekauft",
         "Ein + ge + kauft."
       ]
-    ]
+    ],
+    "instructions": "Fill each gap with the past participle of the separable verb in brackets."
   },
   {
     "slug": "a2-modal-verbs-praeteritum-exercises",
     "title": "Modal Verbs in Präteritum: A2 Practice",
     "rule": "In everyday past narration, modal verbs often use Präteritum: konnte, musste, wollte, durfte, sollte and mochte. Conjugate the modal and place the other verb in infinitive at the end.",
-    "trap": "Do not mix the tense: Ich musste arbeiten, not Ich musste gearbeitet.",
+    "trap": "After a modal verb, use the bare infinitive: Ich musste arbeiten. A past participle such as gearbeitet cannot replace that infinitive.",
     "guide": "grammar/modalverben.html",
     "examples": [
       [
@@ -467,7 +476,8 @@
         "Durftet",
         "Ihr takes durftet."
       ]
-    ]
+    ],
+    "instructions": "Put the modal verb in brackets into the simple past (Präteritum)."
   },
   {
     "slug": "a2-weil-sentences-exercises",
@@ -495,12 +505,12 @@
     ],
     "quiz": [
       [
-        "Ich komme nicht, weil ich krank ___.",
+        "Ich komme nicht, weil ich krank ___. (sein)",
         "bin",
         "Verb-final after weil."
       ],
       [
-        "Sie lernt, weil sie morgen eine Prüfung ___.",
+        "Sie lernt, weil sie morgen eine Prüfung ___. (haben)",
         "hat",
         "The finite verb ends the subordinate clause."
       ],
@@ -510,11 +520,12 @@
         "Finite verb at the end."
       ],
       [
-        "Er geht schlafen, weil er müde ___.",
+        "Er geht schlafen, weil er müde ___. (sein)",
         "ist",
         "Sein comes at the end of the weil-clause."
       ]
-    ]
+    ],
+    "instructions": "Complete each reason clause with the present-tense form of the verb in brackets."
   },
   {
     "slug": "a2-dass-sentences-exercises",
@@ -554,14 +565,15 @@
       [
         "Wir wissen, dass du gut Deutsch ___. (sprechen)",
         "sprichst",
-        "Du speaks: sprichst, positioned last."
+        "The present-tense du form of sprechen is sprichst; it goes at the end of the clause."
       ],
       [
         "Er hofft, ___ alles klappt.",
         "dass",
         "Dass introduces the content of his hope."
       ]
-    ]
+    ],
+    "instructions": "Use dass to introduce a content clause, or put the verb in brackets into the present tense."
   },
   {
     "slug": "a2-comparative-superlative-exercises",
@@ -608,7 +620,8 @@
         "größer",
         "Comparative includes an umlaut."
       ]
-    ]
+    ],
+    "instructions": "Write the comparative in gaps 1, 2 and 4. In gap 3, complete the superlative after am."
   },
   {
     "slug": "a2-reflexive-daily-routine-exercises",
@@ -655,6 +668,7 @@
         "uns",
         "Wir takes uns."
       ]
-    ]
+    ],
+    "instructions": "Complete each sentence with the accusative reflexive pronoun matching the subject."
   }
 ]

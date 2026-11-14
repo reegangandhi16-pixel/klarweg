@@ -2,20 +2,59 @@
   {
     "id": "practice50",
     "count": 50,
-    "levels": { "a1": 14, "a2": 14, "b1": 12, "b2": 10 },
+    "levels": {
+      "a1": 14,
+      "a2": 14,
+      "b1": 12,
+      "b2": 10
+    },
     "sources": [
-      { "path": "docs/seo/next50-practice-a1.json", "level": "a1" },
-      { "path": "docs/seo/next50-practice-a2.json", "level": "a2" },
-      { "path": "docs/seo/next50-practice-b1.json", "level": "b1" },
-      { "path": "docs/seo/next50-practice-b2.json", "level": "b2" }
+      {
+        "path": "docs/seo/next50-practice-a1.json",
+        "level": "a1"
+      },
+      {
+        "path": "docs/seo/next50-practice-a2.json",
+        "level": "a2"
+      },
+      {
+        "path": "docs/seo/next50-practice-b1.json",
+        "level": "b1"
+      },
+      {
+        "path": "docs/seo/next50-practice-b2.json",
+        "level": "b2"
+      }
     ]
   },
   {
     "id": "practice50-expansion",
     "count": 50,
-    "levels": { "a1": 10, "a2": 14, "b1": 14, "b2": 12 },
+    "levels": {
+      "a1": 10,
+      "a2": 14,
+      "b1": 14,
+      "b2": 12
+    },
     "sources": [
-      { "path": "docs/seo/practice-expansion-20261114.json" }
+      {
+        "path": "docs/seo/practice-expansion-20261114.json"
+      }
+    ]
+  },
+  {
+    "id": "word-choice50",
+    "count": 50,
+    "levels": {
+      "a1": 8,
+      "a2": 16,
+      "b1": 20,
+      "b2": 6
+    },
+    "sources": [
+      {
+        "path": "docs/seo/word-choice50-20261114.json"
+      }
     ]
   }
 ]

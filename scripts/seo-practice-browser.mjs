@@ -20,7 +20,7 @@ const lessonCount = loadGuides().length;
 assert.equal(files.length, lessonCount + 1, 'expected all registered lessons and the hub in the public artifact');
 const screenshots = process.env.PRACTICE_SCREENSHOTS;
 if (screenshots) fs.mkdirSync(screenshots, { recursive: true });
-const representatives = new Set(['index.html', 'a1-ein-eine-exercises.html', 'a2-wechselpraepositionen-wohin-exercises.html', 'b1-polite-konjunktiv-ii-exercises.html', 'b2-nominalisation-exercises.html', 'a1-modal-verbs-present-exercises.html', 'a2-adjective-endings-indefinite-exercises.html', 'b1-relative-clauses-dative-exercises.html', 'b2-passive-perfect-tense-exercises.html']);
+const representatives = new Set(['index.html', 'a1-ein-eine-exercises.html', 'a2-wechselpraepositionen-wohin-exercises.html', 'b1-polite-konjunktiv-ii-exercises.html', 'b2-nominalisation-exercises.html', 'a1-modal-verbs-present-exercises.html', 'a2-adjective-endings-indefinite-exercises.html', 'b1-relative-clauses-dative-exercises.html', 'b2-passive-perfect-tense-exercises.html', 'a1-lernen-studieren-word-choice-exercises.html', 'a2-kennen-wissen-word-choice-exercises.html', 'b1-legen-liegen-word-choice-exercises.html', 'b2-effektiv-effizient-word-choice-exercises.html']);
 const server = http.createServer((req, res) => {
   let file = path.resolve(root, '.' + new URL(req.url, 'http://localhost').pathname);
   if (!file.startsWith(root + path.sep)) { res.writeHead(403); res.end(); return; }

@@ -78,6 +78,7 @@ export function validateGuides(guides) {
         unique[key].add(row[0]);
       }
     }
+    if (g.kind !== undefined && !['grammar','word-choice'].includes(g.kind)) throw new Error('Invalid practice kind');
     if (g.description !== undefined) { text(g.description, 'description'); if (g.description.length < 100 || g.description.length > 170) throw new Error('Description must be 100–170 characters'); }
     if (g.instructions !== undefined) text(g.instructions, 'instructions');
     if (g.guideLabel !== undefined) text(g.guideLabel, 'guide label');
@@ -95,6 +96,9 @@ export function renderPractice(guides = loadGuides()) {
     const related = [next, ...peers.filter(x => x.slug !== g.slug && x.slug !== next.slug && x.guide === g.guide), peers[(index + peers.length - 1) % peers.length]];
     const values = Object.fromEntries(Object.entries({ ...g, level, levelId: g.level, url, siteBase: SITE_BASE, description, chapter: CHAPTERS[g.level],
       guideLabel: g.guideLabel || 'Review the related grammar guide',
+      ruleHeading: g.kind === 'word-choice' ? 'Understand the difference' : 'Understand the rule',
+      exerciseHeading: g.kind === 'word-choice' ? 'Practice: choose the right word' : 'Practice: fill in the gaps',
+      heroText: g.kind === 'word-choice' ? description : 'Study four German examples with English meanings, then try four questions and check the explained answers.',
       instructions: g.instructions || 'Complete each gap using the rule above and any cue in brackets.'
     }).filter(([, v]) => typeof v === 'string').map(([k, v]) => [k, escapeHtml(v)]));
     values.structuredData = ld(breadcrumb(g, url)) + '\n' + ld({ '@type': 'LearningResource', name: g.title, description, url, mainEntityOfPage: url, inLanguage: ['en', 'de'], educationalLevel: 'CEFR ' + level, learningResourceType: 'Practice exercises', isAccessibleForFree: true, publisher, about: g.title });
@@ -105,11 +109,12 @@ export function renderPractice(guides = loadGuides()) {
   }
   const levels = LEVELS.map(l => {
     const group = guides.filter(g => g.level === l), level = l.toUpperCase();
-    return `<section class="panel" id="${l}" aria-label="${level} practice"><h2>${level} grammar practice · ${group.length} lessons</h2><p>Choose a specific topic. Each practice set includes worked sentences and four self-check exercises with explanations.</p><div class="level-grid">${group.map(g => `<a class="topic" href="${g.slug}.html"><small>${level} · 4 exercises</small><b>${escapeHtml(g.title)}</b></a>`).join('\n')}</div></section>`;
+    return `<section class="panel" id="${l}" aria-label="${level} practice"><h2>${level} German practice · ${group.length} lessons</h2><p>Choose a specific topic. Each practice set includes worked sentences and four self-check exercises with explanations.</p><div class="level-grid">${group.map(g => `<a class="topic" href="${g.slug}.html"><small>${level} · 4 exercises</small><b>${escapeHtml(g.title)}</b></a>`).join('\n')}</div></section>`;
   }).join('\n');
-  const hubDescription = `Practice German grammar from A1 to B2 with ${guides.length} practice sets, examples, English meanings and explained answers. Free self-study by Klarweg.`;
-  outputs.set('practice/index.html', template('index', { url: hubUrl, siteBase: SITE_BASE, levels, total: String(guides.length), hubDescription: escapeHtml(hubDescription),
-    structuredData: ld(breadcrumb()) + '\n' + ld({ '@type': 'CollectionPage', name: 'Free German Grammar Exercises A1–B2 — Klarweg', description: hubDescription, url: hubUrl, inLanguage: ['en', 'de'], isAccessibleForFree: true, publisher,
+  const hubTitle = 'German Grammar and Word Choice Exercises A1–B2 — Klarweg';
+  const hubDescription = `${guides.length} free German grammar and word choice practice sets for A1–B2. Study examples with English meanings and check explained exercise answers.`;
+  outputs.set('practice/index.html', template('index', { url: hubUrl, siteBase: SITE_BASE, levels, total: String(guides.length), hubTitle: escapeHtml(hubTitle), hubDescription: escapeHtml(hubDescription),
+    structuredData: ld(breadcrumb()) + '\n' + ld({ '@type': 'CollectionPage', name: hubTitle, description: hubDescription, url: hubUrl, inLanguage: ['en', 'de'], isAccessibleForFree: true, publisher,
       mainEntity: { '@type': 'ItemList', numberOfItems: guides.length, itemListElement: guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, name: g.title, url: pageUrl(g.slug) })) }
     })
   }));

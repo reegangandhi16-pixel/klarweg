@@ -101,5 +101,20 @@
         "path": "docs/seo/word-choice-expansion-20261114.json"
       }
     ]
+  },
+  {
+    "id": "vocabulary50-expansion",
+    "count": 50,
+    "levels": {
+      "a1": 14,
+      "a2": 16,
+      "b1": 12,
+      "b2": 8
+    },
+    "sources": [
+      {
+        "path": "docs/seo/vocabulary-expansion-20261114.json"
+      }
+    ]
   }
 ]

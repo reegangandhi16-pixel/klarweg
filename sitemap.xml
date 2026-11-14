@@ -2730,4 +2730,32 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://klarweg.in/german-exam-guidance.html</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://klarweg.in/telc/a1-exam.html</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://klarweg.in/telc/a2-exam.html</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://klarweg.in/telc/b1-exam.html</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://klarweg.in/telc/b2-exam.html</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://klarweg.in/telc/c1-exam.html</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://klarweg.in/telc/c2-exam.html</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
 </urlset>

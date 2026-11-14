@@ -1,0 +1,233 @@
+{
+  "checkedAt": "2026-11-14T20:47:01.272Z",
+  "guestCatalogues": [
+    {
+      "series": "netzwerk",
+      "level": "a1",
+      "guestCatalogue": "https://www.klett-sprachen.de/ajax/downloads_seriesdetail?reiter=mediathek&niveau=2&dl_niveau_str=A1&series_id=187",
+      "entries": [
+        {
+          "label": "Lösungen zum Kursbuch A1",
+          "chapters": "1–12",
+          "status": "public-pdf",
+          "url": "https://www.klett-sprachen.de/downloads/6902/loesungen-zum-kursbuch-a1/pdf"
+        },
+        {
+          "label": "Lösungen zum Arbeitsbuch A1.1",
+          "chapters": "1–6",
+          "status": "public-pdf",
+          "url": "https://www.klett-sprachen.de/downloads/2455/loesungen-zum-arbeitsbuch-a1-1/pdf"
+        },
+        {
+          "label": "Lösungen zum Arbeitsbuch A1.2",
+          "chapters": "7–12",
+          "status": "public-pdf",
+          "url": "https://www.klett-sprachen.de/downloads/2456/loesungen-zum-arbeitsbuch-a1-2/pdf"
+        }
+      ]
+    },
+    {
+      "series": "netzwerk",
+      "level": "a2",
+      "guestCatalogue": "https://www.klett-sprachen.de/ajax/downloads_seriesdetail?reiter=mediathek&niveau=9&dl_niveau_str=A2&series_id=187",
+      "entries": [
+        {
+          "label": "Lösungen zum Kursbuch A2",
+          "chapters": "1–12",
+          "status": "public-pdf",
+          "url": "https://www.klett-sprachen.de/downloads/6901/loesungen-zum-kursbuch-a2/pdf"
+        },
+        {
+          "label": "Lösungen zum Arbeitsbuch A2.1",
+          "chapters": "1–6",
+          "status": "public-pdf",
+          "url": "https://www.klett-sprachen.de/downloads/2457/loesungen-zum-arbeitsbuch-a2-1/pdf"
+        },
+        {
+          "label": "Lösungen zum Arbeitsbuch A2.2",
+          "chapters": "7–12",
+          "status": "public-pdf",
+          "url": "https://www.klett-sprachen.de/downloads/2458/loesungen-zum-arbeitsbuch-a2-2/pdf"
+        }
+      ]
+    },
+    {
+      "series": "netzwerk",
+      "level": "b1",
+      "guestCatalogue": "https://www.klett-sprachen.de/ajax/downloads_seriesdetail?reiter=mediathek&niveau=15&dl_niveau_str=B1&series_id=187",
+      "entries": [
+        {
+          "label": "Lösungen zum Kursbuch B1",
+          "chapters": "1–12",
+          "status": "public-pdf",
+          "url": "https://www.klett-sprachen.de/downloads/8605/loesungen-zum-kursbuch-b1/pdf"
+        },
+        {
+          "label": "Lösungen zum Arbeitsbuch B1.1",
+          "chapters": "1–6",
+          "status": "public-pdf",
+          "url": "https://www.klett-sprachen.de/downloads/2460/loesungen-zum-arbeitsbuch-b1-1/pdf"
+        },
+        {
+          "label": "Lösungen zum Arbeitsbuch B1.2",
+          "chapters": "7–12",
+          "status": "public-pdf",
+          "url": "https://www.klett-sprachen.de/downloads/2459/loesungen-zum-arbeitsbuch-b1-2/pdf"
+        }
+      ]
+    },
+    {
+      "series": "netzwerk-neu",
+      "level": "a1",
+      "guestCatalogue": "https://www.klett-sprachen.de/ajax/downloads_seriesdetail?reiter=mediathek&niveau=2&dl_niveau_str=A1&series_id=605",
+      "entries": [
+        {
+          "label": "Netzwerk neu A1 – Lösungen – Kursbuch Kapitel 1–6",
+          "chapters": "1–6",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1"
+        },
+        {
+          "label": "Netzwerk neu A1 – Lösungen – Kursbuch Kapitel 7–12",
+          "chapters": "7–12",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1"
+        },
+        {
+          "label": "Netzwerk neu A1 – Lösungen – Übungsbuch Kapitel 1–6",
+          "chapters": "1–6",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1"
+        },
+        {
+          "label": "Netzwerk neu A1 – Lösungen – Übungsbuch Kapitel 7–12",
+          "chapters": "7–12",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1"
+        }
+      ]
+    },
+    {
+      "series": "netzwerk-neu",
+      "level": "a2",
+      "guestCatalogue": "https://www.klett-sprachen.de/ajax/downloads_seriesdetail?reiter=mediathek&niveau=9&dl_niveau_str=A2&series_id=605",
+      "entries": [
+        {
+          "label": "Netzwerk neu A2 – Lösungen – Kursbuch Kapitel 1–6",
+          "chapters": "1–6",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2"
+        },
+        {
+          "label": "Netzwerk neu A2 – Lösungen – Kursbuch Kapitel 7–12",
+          "chapters": "7–12",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2"
+        },
+        {
+          "label": "Netzwerk neu A2 – Lösungen – Übungsbuch Kapitel 1–6",
+          "chapters": "1–6",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2"
+        },
+        {
+          "label": "Netzwerk neu A2 – Lösungen – Übungsbuch Kapitel 7–12",
+          "chapters": "7–12",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2"
+        }
+      ]
+    },
+    {
+      "series": "netzwerk-neu",
+      "level": "b1",
+      "guestCatalogue": "https://www.klett-sprachen.de/ajax/downloads_seriesdetail?reiter=mediathek&niveau=15&dl_niveau_str=B1&series_id=605",
+      "entries": [
+        {
+          "label": "Netzwerk neu B1 – Lösungen – Kursbuch Kapitel 1–6",
+          "chapters": "1–6",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1"
+        },
+        {
+          "label": "Netzwerk neu B1 – Lösungen – Kursbuch Kapitel 7–12",
+          "chapters": "7–12",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1"
+        },
+        {
+          "label": "Netzwerk neu B1 – Lösungen – Übungsbuch Kapitel 1–6",
+          "chapters": "1–6",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1"
+        },
+        {
+          "label": "Netzwerk neu B1 – Lösungen – Übungsbuch Kapitel 7–12",
+          "chapters": "7–12",
+          "status": "registration",
+          "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1"
+        }
+      ]
+    }
+  ],
+  "publicPdfs": [
+    {
+      "url": "https://www.klett-sprachen.de/downloads/6902/loesungen-zum-kursbuch-a1/pdf",
+      "status": 200,
+      "mime": "application/pdf;charset=UTF-8",
+      "pdfHeader": true
+    },
+    {
+      "url": "https://www.klett-sprachen.de/downloads/2455/loesungen-zum-arbeitsbuch-a1-1/pdf",
+      "status": 200,
+      "mime": "application/pdf;charset=UTF-8",
+      "pdfHeader": true
+    },
+    {
+      "url": "https://www.klett-sprachen.de/downloads/2456/loesungen-zum-arbeitsbuch-a1-2/pdf",
+      "status": 200,
+      "mime": "application/pdf;charset=UTF-8",
+      "pdfHeader": true
+    },
+    {
+      "url": "https://www.klett-sprachen.de/downloads/6901/loesungen-zum-kursbuch-a2/pdf",
+      "status": 200,
+      "mime": "application/pdf;charset=UTF-8",
+      "pdfHeader": true
+    },
+    {
+      "url": "https://www.klett-sprachen.de/downloads/2457/loesungen-zum-arbeitsbuch-a2-1/pdf",
+      "status": 200,
+      "mime": "application/pdf;charset=UTF-8",
+      "pdfHeader": true
+    },
+    {
+      "url": "https://www.klett-sprachen.de/downloads/2458/loesungen-zum-arbeitsbuch-a2-2/pdf",
+      "status": 200,
+      "mime": "application/pdf;charset=UTF-8",
+      "pdfHeader": true
+    },
+    {
+      "url": "https://www.klett-sprachen.de/downloads/8605/loesungen-zum-kursbuch-b1/pdf",
+      "status": 200,
+      "mime": "application/pdf;charset=UTF-8",
+      "pdfHeader": true
+    },
+    {
+      "url": "https://www.klett-sprachen.de/downloads/2460/loesungen-zum-arbeitsbuch-b1-1/pdf",
+      "status": 200,
+      "mime": "application/pdf;charset=UTF-8",
+      "pdfHeader": true
+    },
+    {
+      "url": "https://www.klett-sprachen.de/downloads/2459/loesungen-zum-arbeitsbuch-b1-2/pdf",
+      "status": 200,
+      "mime": "application/pdf;charset=UTF-8",
+      "pdfHeader": true
+    }
+  ],
+  "publicPdfCount": 9,
+  "registrationEntryCount": 12,
+  "pdfCopiesStored": false,
+  "result": "PASS"
+}

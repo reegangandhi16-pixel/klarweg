@@ -938,3 +938,19 @@ telc/b1-exam.html
 telc/b2-exam.html
 telc/c1-exam.html
 telc/c2-exam.html
+
+# Independent Netzwerk answer-key guides; publisher PDFs are not hosted
+netzwerk-answer-keys.html
+book-answers.css
+book-answers/netzwerk-a1-kursbuch-answers.html
+book-answers/netzwerk-a1-arbeitsbuch-answers.html
+book-answers/netzwerk-a2-kursbuch-answers.html
+book-answers/netzwerk-a2-arbeitsbuch-answers.html
+book-answers/netzwerk-b1-kursbuch-answers.html
+book-answers/netzwerk-b1-arbeitsbuch-answers.html
+book-answers/netzwerk-neu-a1-kursbuch-answers.html
+book-answers/netzwerk-neu-a1-uebungsbuch-answers.html
+book-answers/netzwerk-neu-a2-kursbuch-answers.html
+book-answers/netzwerk-neu-a2-uebungsbuch-answers.html
+book-answers/netzwerk-neu-b1-kursbuch-answers.html
+book-answers/netzwerk-neu-b1-uebungsbuch-answers.html

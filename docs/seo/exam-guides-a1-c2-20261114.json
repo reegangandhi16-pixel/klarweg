@@ -1,0 +1,634 @@
+[
+  {
+    "provider": "goethe",
+    "level": "a1",
+    "path": "goethe/a1-exam.html",
+    "examName": "Goethe-Zertifikat A1: Start Deutsch 1",
+    "official": "https://www.goethe.de/ins/de/en/prf/gzsd1.cfm",
+    "checked": "2026-11-14",
+    "scope": "This guide covers the adult Start Deutsch 1 examination. Fit in Deutsch 1 is the youth examination; a shared A1 label does not make the two task sets identical.",
+    "score": "All sections must be completed and the overall result must reach 60/100. The written part contributes up to 75 points and speaking up to 25. This is not four separate module passes.",
+    "comparison": "Both adult A1 exams use simple everyday communication, but the published point scales differ: Goethe reports 100 points, while the linked telc A1 mock uses 60. Use the booked provider’s answer and assessment material.",
+    "readiness": [
+      "Complete the adult form and short-message task without copying a memorised letter.",
+      "Practise spelling, numbers and short requests aloud with a partner.",
+      "Rehearse the full written sequence and check the speaking appointment separately."
+    ],
+    "regulations": "https://www.goethe.de/pro/relaunch/prf/en/Durchfuehrungsbestimmungen_A1_Start_Deutsch_1.pdf"
+  },
+  {
+    "provider": "goethe",
+    "level": "a2",
+    "path": "goethe/a2-exam.html",
+    "examName": "Goethe-Zertifikat A2",
+    "official": "https://www.goethe.de/ins/de/en/prf/gzsd2.cfm",
+    "checked": "2026-11-14",
+    "scope": "Use the adult Goethe-Zertifikat A2 preparation set unless you have booked the youth version. Do not substitute a telc A2 or an A2–B1 dual-level test.",
+    "score": "The overall minimum is 60/100, including at least 45/75 in the written part and 15/25 in speaking. A high score in one part does not remove the other part’s minimum.",
+    "comparison": "Goethe A2 allocates 30 minutes each to reading, listening and writing. telc A2 groups reading and writing into a 50-minute block after about 20 minutes of listening. Rehearse with the correct clock.",
+    "readiness": [
+      "Cover every message point within the writing time.",
+      "Practise asking questions and reaching an arrangement with a partner.",
+      "Review written and speaking performance separately because both minima matter."
+    ],
+    "regulations": "https://www.goethe.de/pro/relaunch/prf/en/Durchfuehrungsbestimmungen_A2.pdf"
+  },
+  {
+    "provider": "goethe",
+    "level": "b1",
+    "path": "goethe/b1-exam.html",
+    "examName": "Goethe-Zertifikat B1",
+    "official": "https://www.goethe.de/ins/de/en/prf/gzb1.cfm",
+    "checked": "2026-11-14",
+    "scope": "This is the four-module Goethe-Zertifikat B1. The adult and youth versions share the level but use their own preparation material. Check the exact version on your booking.",
+    "score": "Each of the four modules is assessed out of 100 and requires 60 points. Treat reading, listening, writing and speaking as separate preparation targets.",
+    "comparison": "Goethe B1 has four modules, whereas general telc B1 combines written subtests and a speaking part. The telc language-elements tasks are another reason not to exchange mock papers by level alone.",
+    "readiness": [
+      "Complete one timed attempt for each of the four modules.",
+      "Practise the three writing tasks instead of treating writing as one long essay.",
+      "Record a short presentation, then answer an unscripted follow-up question."
+    ],
+    "regulations": "https://www.goethe.de/pro/relaunch/prf/en/Durchfuehrungsbestimmungen_B1.pdf"
+  },
+  {
+    "provider": "goethe",
+    "level": "b2",
+    "path": "goethe/b2-exam-preparation.html",
+    "examName": "Goethe-Zertifikat B2",
+    "official": "https://www.goethe.de/ins/de/en/prf/gzb2.cfm",
+    "checked": "2026-11-14",
+    "scope": "The Goethe-Zertifikat B2 uses four separately assessed modules. This guide concerns the general Goethe examination, not a telc professional-language or medical test.",
+    "score": "Each module requires 60/100. Do not use the telc B2 written/oral score split to estimate a Goethe B2 result.",
+    "comparison": "Goethe B2 writing has two tasks within 75 minutes; general telc B2 has a 30-minute writing subtest within its written examination. Switching provider requires retraining the task plan, not just changing the cover page.",
+    "readiness": [
+      "Plan a forum contribution and a formal message as distinct writing tasks.",
+      "Practise weighing alternatives in a presentation, then interacting in a discussion.",
+      "Review why a reading or listening distractor is wrong, not only the correct letter."
+    ],
+    "regulations": "https://www.goethe.de/pro/relaunch/prf/en/Durchfuehrungsbestimmungen_B2.pdf"
+  },
+  {
+    "provider": "goethe",
+    "level": "c1",
+    "path": "goethe/c1-exam-preparation.html",
+    "examName": "Goethe-Zertifikat C1",
+    "official": "https://www.goethe.de/ins/de/en/prf/gzc1.cfm",
+    "checked": "2026-11-14",
+    "scope": "This guide follows the modular Goethe-Zertifikat C1. Use material for the current format rather than an older non-modular coursebook. It is a different examination from telc C1 Hochschule.",
+    "score": "Each current C1 module requires 60/100. Prepare each module against its own task instructions and assessment criteria.",
+    "comparison": "Goethe C1 has four modules. General telc C1 and telc C1 Hochschule use a written/oral structure and include language elements. Ask the receiving institution which exact C1 certificate it accepts before comparing booking dates.",
+    "readiness": [
+      "Check that the model set is for the current modular examination.",
+      "Practise a structured argument and a suitably polite message under the writing limit.",
+      "Prepare a short talk with a position, supporting reasons and a qualified conclusion."
+    ],
+    "regulations": "https://www.goethe.de/pro/relaunch/prf/en/Durchfuehrungsbestimmungen_C1.pdf"
+  },
+  {
+    "provider": "goethe",
+    "level": "c2",
+    "path": "goethe/c2-exam-preparation.html",
+    "examName": "Goethe-Zertifikat C2: Großes Deutsches Sprachdiplom",
+    "official": "https://www.goethe.de/ins/de/en/prf/gzc2.cfm",
+    "checked": "2026-11-14",
+    "scope": "The Goethe C2 GDS is a four-module examination with an individual speaking test. The optional literature-related writing route requires the current official reading-list instructions; it is not a requirement to choose literature.",
+    "score": "Each C2 module requires 60/100. An overall average across modules does not substitute for passing an individual module.",
+    "comparison": "Goethe C2 separates listening and writing. telc C2 includes an integrated listening-and-writing subtest, plus a separate writing task. Their speaking preparation times also differ, so use the matching official instructions.",
+    "readiness": [
+      "Practise precise reformulation without changing the source meaning.",
+      "Choose a writing route only after reading the current official task and literature instructions.",
+      "Rehearse an individual talk and a discussion with someone who can challenge your view."
+    ],
+    "regulations": "https://www.goethe.de/pro/relaunch/prf/en/Durchfuehrungsbestimmungen_C2_neu.pdf"
+  },
+  {
+    "provider": "telc",
+    "level": "a1",
+    "path": "telc/a1-exam.html",
+    "examName": "Start Deutsch 1 / telc Deutsch A1",
+    "title": "telc A1 Exam: Format, Pass Mark and Preparation",
+    "description": "Prepare for Start Deutsch 1 / telc Deutsch A1 with timings, scoring guidance, official mock material, speaking practice and a focused study checklist.",
+    "official": "https://www.telc.net/en/language-examinations/certificate-exams/german/start-german1-telc-german-a1/",
+    "mock": "https://www.telc.net/fileadmin/user_upload/mock_exams/Deutsch/telc_deutsch_a1.zip",
+    "checked": "2026-11-14",
+    "scope": "This page covers the general adult Start Deutsch 1 / telc Deutsch A1 examination. A1 Junior and A1 for migrants are different named products. Begin by matching the full exam name to your booking and to the organisation requesting proof.",
+    "timing": [
+      [
+        "Listening",
+        "About 20 minutes",
+        "Three parts; work with the audio instructions rather than assuming every recording is repeated."
+      ],
+      [
+        "Reading and writing",
+        "45 minutes combined",
+        "Three reading parts and two writing parts share this block."
+      ],
+      [
+        "Speaking",
+        "About 15 minutes",
+        "Three parts, usually with four candidates and no preparation time."
+      ]
+    ],
+    "score": "The official linked mock assigns 60 points in total: 15 each for listening, reading, writing and speaking. Its pass band starts at 36 points. Do not apply Goethe’s 100-point scale to this telc practice result.",
+    "resits": "The product page says this exam cannot be taken as a partial examination. Plan for the whole test and confirm any new booking with the centre.",
+    "comparison": "Goethe A1 and telc A1 share a beginner CEFR target and similar everyday functions, but use provider-specific marking and materials. A Goethe score prediction is not a telc score conversion.",
+    "skills": [
+      [
+        "Listening",
+        "Practise names, numbers, times and short messages. After an error, replay the relevant sentence and identify the word that changes the answer. A familiar noun alone may be a distractor."
+      ],
+      [
+        "Reading",
+        "Use notices, brief emails and everyday information. Distinguish what a text explicitly says from what sounds plausible. Copy names and dates carefully when the task requires a form."
+      ],
+      [
+        "Writing",
+        "Practise filling a form and writing a short response to the supplied situation. Cover each requested detail before adding extra sentences; check the greeting, verb and closing against the recipient."
+      ],
+      [
+        "Speaking",
+        "Prepare a flexible introduction, simple information questions and requests. Work with a partner who changes the object or topic so you must listen and respond instead of reciting a fixed speech."
+      ]
+    ],
+    "plan": [
+      [
+        "Diagnose",
+        "Try the official mock without a timer and list missing vocabulary separately from misunderstood task instructions."
+      ],
+      [
+        "Build",
+        "Rotate number listening, form filling, short messages and spoken requests. Repeat a weak function in a different context."
+      ],
+      [
+        "Rehearse",
+        "Use the written time blocks and practise a small-group speaking exchange. Review with the official key and writing/speaking criteria."
+      ]
+    ],
+    "mistakes": [
+      "Learning only a self-introduction while neglecting questions and requests.",
+      "Spending too much of the combined reading/writing block on one difficult item.",
+      "Treating another provider’s A1 result or a memorised text as proof of readiness."
+    ],
+    "readiness": [
+      "I can identify the exact adult A1 test on my booking.",
+      "I can complete a simple form legibly and check spelling.",
+      "I can ask and answer short questions without a script.",
+      "I have checked the centre’s ID, arrival and speaking-session instructions."
+    ],
+    "faq": [
+      [
+        "Is telc A1 the same as Goethe A1?",
+        "They target the same CEFR level, but are separate examinations. Match the required certificate and use the booked provider’s material."
+      ],
+      [
+        "Can I book just speaking?",
+        "The official telc A1 product page does not offer this as a partial examination. Ask the centre about a complete booking."
+      ]
+    ]
+  },
+  {
+    "provider": "telc",
+    "level": "a2",
+    "path": "telc/a2-exam.html",
+    "examName": "Start Deutsch 2 / telc Deutsch A2",
+    "title": "telc A2 Exam: Pattern, Scoring and Study Guidance",
+    "description": "Understand telc Deutsch A2: the combined reading and writing block, oral format, official sample test, scoring and a practical preparation checklist.",
+    "official": "https://www.telc.net/en/language-examinations/certificate-exams/german/start-german-2-telc-german-a2/",
+    "mock": "https://www.telc.net/fileadmin/user_upload/mock_exams/Deutsch/telc_deutsch_a2_01.zip",
+    "checked": "2026-11-14",
+    "scope": "This guide concerns Start Deutsch 2 / telc Deutsch A2 for general language. It is not the A2 Speaking-only product, A2 School, an A2–B1 dual-level examination or a vocational test. The full name matters when selecting material.",
+    "timing": [
+      [
+        "Listening",
+        "About 20 minutes",
+        "Three parts; follow the task-specific playback instructions."
+      ],
+      [
+        "Reading and writing",
+        "50 minutes combined",
+        "Three reading parts and two writing parts use this shared block."
+      ],
+      [
+        "Speaking",
+        "About 15 minutes",
+        "Three parts, usually two candidates; no preparation time."
+      ]
+    ],
+    "score": "The currently linked official A2 mock states a pass requirement of 36 out of 60 points, or 60 percent. Use its scoring instructions and criteria for your practice; this is not Goethe A2’s 45-written/15-speaking rule.",
+    "resits": "The general telc A2 product page says partial examinations are not available. The linked mock also explains that a failed attempt is repeated as the full written and oral examination.",
+    "comparison": "Goethe A2 assigns separate 30-minute reading, listening and writing sections. General telc A2 has about 20 minutes of listening and a 50-minute reading/writing block. Train the timing and task set that appear in your actual booking.",
+    "skills": [
+      [
+        "Listening",
+        "Practise short exchanges and everyday messages about arrangements. Note who wants what and whether a time is being proposed, accepted or changed."
+      ],
+      [
+        "Reading",
+        "Scan short messages and practical information, then return to the exact evidence for your choice. Do not infer an opening time or condition that the text does not provide."
+      ],
+      [
+        "Writing",
+        "Practise supplying information in a form and composing the requested short message. Keep all content points visible in your plan and leave time to check the recipient and tense."
+      ],
+      [
+        "Speaking",
+        "Practise introducing yourself, exchanging information and agreeing an arrangement. Respond to your partner’s alternative rather than repeating your first suggestion unchanged."
+      ]
+    ],
+    "plan": [
+      [
+        "Locate gaps",
+        "Attempt the official A2 mock and note which errors come from vocabulary, grammar, task interpretation or time management."
+      ],
+      [
+        "Connect skills",
+        "Use one everyday situation for a short reading, a reply and a spoken exchange. Then change a date or preference to practise adapting."
+      ],
+      [
+        "Check timing",
+        "Complete the shared 50-minute block without an invented break and rehearse speaking without a preparation period."
+      ]
+    ],
+    "mistakes": [
+      "Using an A2–B1 mock and assuming its scoring applies to general A2.",
+      "Writing an attractive message that omits a required point.",
+      "Preparing a long monologue when the partner exchange requires listening and responding."
+    ],
+    "readiness": [
+      "I know which A2 product I have selected.",
+      "I can manage reading and writing within their shared block.",
+      "I can cover the message instructions in connected simple sentences.",
+      "I can propose a plan and respond to a partner’s suggestion."
+    ],
+    "faq": [
+      [
+        "Does this guide cover A2–B1?",
+        "No. A dual-level examination has a different task and result framework. Use its own official product page and mock."
+      ],
+      [
+        "Is there speaking preparation time?",
+        "The general telc A2 product page lists no preparation time. Confirm the session arrangements in your centre’s instructions."
+      ]
+    ]
+  },
+  {
+    "provider": "telc",
+    "level": "b1",
+    "path": "telc/b1-exam.html",
+    "examName": "Zertifikat Deutsch / telc Deutsch B1",
+    "title": "telc B1 Exam: Sections, Pass Rules and Preparation",
+    "description": "Plan for telc Deutsch B1 with language elements, written and oral timings, pass thresholds, official practice material and partner-speaking guidance.",
+    "official": "https://www.telc.net/en/language-examinations/certificate-exams/german/certificate-german-telc-german-b1/",
+    "mock": "https://www.telc.net/fileadmin/user_upload/mock_exams/Deutsch/telc_deutsch_b1.zip",
+    "checked": "2026-11-14",
+    "scope": "This page covers the general Zertifikat Deutsch / telc Deutsch B1. DTZ, A2–B1, B1 School and vocational variants are different named tests. A shared B1 label does not make their task sets or result rules interchangeable.",
+    "timing": [
+      [
+        "Reading and language elements",
+        "90 minutes combined",
+        "Three reading parts and two language-elements parts."
+      ],
+      [
+        "Listening",
+        "About 30 minutes",
+        "Three parts; check playback instructions in the official mock."
+      ],
+      [
+        "Writing",
+        "30 minutes",
+        "One writing task responding to supplied input."
+      ],
+      [
+        "Speaking",
+        "About 15 minutes",
+        "Usually a pair test, with 20 minutes of preparation."
+      ]
+    ],
+    "score": "The official mock gives a maximum of 225 written points and 75 oral points. A pass requires at least 135 in the written examination and 45 in the oral examination. A high written result cannot compensate for an oral result below its threshold.",
+    "resits": "The mock describes resitting the failed written or oral part under its applicable conditions. Confirm current credit validity, registration and centre arrangements before paying; this is not a four-module Goethe resit system.",
+    "comparison": "Goethe B1 assesses four separately bookable modules. General telc B1 has a combined written examination, a speaking part and explicit language-elements tasks. Use the telc answer sheet and assessment scale when rehearsing.",
+    "skills": [
+      [
+        "Reading and language elements",
+        "Work on text matching and meaning before filling grammar gaps. For language elements, check the whole sentence, case, connector and collocation rather than selecting a familiar isolated word."
+      ],
+      [
+        "Listening",
+        "Track the speaker’s position and later corrections. When reviewing, write down the phrase that supports your answer and explain why a tempting alternative does not fit."
+      ],
+      [
+        "Writing",
+        "Plan the response around the given content points and the relationship with the recipient. Join ideas clearly, then check tense consistency and whether the message actually fulfils its purpose."
+      ],
+      [
+        "Speaking",
+        "Rehearse getting to know a partner, discussing a topic and planning something together using the official mock’s prompts. Practise follow-up questions and a clear summary of an agreement."
+      ]
+    ],
+    "plan": [
+      [
+        "Separate causes",
+        "Mark one official attempt and classify mistakes by comprehension, language elements, task fulfilment and timing."
+      ],
+      [
+        "Repair patterns",
+        "Rewrite a weak message and repeat a discussion with a different partner response. Review recurring connectors and preposition patterns."
+      ],
+      [
+        "Run the sequence",
+        "Practise the written blocks together and a pair speaking test after the stated preparation period. Assess both written and oral readiness."
+      ]
+    ],
+    "mistakes": [
+      "Ignoring language elements because a different B1 provider has no matching subtest.",
+      "Repeating prepared opinions without responding to the partner.",
+      "Treating an overall average as enough despite separate written and oral minima."
+    ],
+    "readiness": [
+      "I have used the general telc B1 mock rather than a dual-level test.",
+      "I can complete the language-elements section in context.",
+      "I can cover the writing points within 30 minutes.",
+      "I have rehearsed an unscripted pair discussion and joint plan."
+    ],
+    "faq": [
+      [
+        "Can Goethe B1 scores predict telc B1 results?",
+        "No direct conversion is supplied here. The examination structures and marking schemes differ; rehearse with the correct official material."
+      ],
+      [
+        "Can I rely on my written score alone?",
+        "No. The official mock requires separate minimum results in the written and oral parts."
+      ]
+    ]
+  },
+  {
+    "provider": "telc",
+    "level": "b2",
+    "path": "telc/b2-exam.html",
+    "examName": "telc Deutsch B2",
+    "title": "telc B2 Exam: Format, Pass Mark and Study Plan",
+    "description": "Prepare for general telc Deutsch B2 with written and oral timings, language elements, scoring, official mocks and a focused speaking and writing plan.",
+    "official": "https://www.telc.net/en/language-examinations/certificate-exams/german/telc-german-b2/",
+    "mock": "https://www.telc.net/fileadmin/user_upload/mock_exams/Deutsch/telc_deutsch_b2.zip",
+    "checked": "2026-11-14",
+    "scope": "This guide is for general telc Deutsch B2. B2+ Beruf, B1–B2 Pflege and medical examinations have their own formats and purposes. Check the precise certificate requested by an employer or other receiving organisation.",
+    "timing": [
+      [
+        "Reading and language elements",
+        "90 minutes combined",
+        "Three reading parts and two language-elements parts."
+      ],
+      [
+        "Listening",
+        "About 20 minutes",
+        "Three listening parts."
+      ],
+      [
+        "Writing",
+        "30 minutes",
+        "One written response to supplied input."
+      ],
+      [
+        "Speaking",
+        "About 15 minutes",
+        "Usually a pair test, with 20 minutes of preparation."
+      ]
+    ],
+    "score": "The linked mock allocates up to 225 written points and 75 oral points. The required minima are 135 written and 45 oral. Do not treat four Goethe-style 60/100 module marks as the telc scoring model.",
+    "resits": "The product page permits a partial examination. Confirm the conditions for a written-only or oral-only booking, prior-result credit and the available delivery format with the examination centre.",
+    "comparison": "Goethe B2 has separate reading, listening, writing and speaking modules; its writing module is 75 minutes with two tasks. General telc B2 has a 30-minute writing task and language elements within a combined written examination.",
+    "skills": [
+      [
+        "Reading and language elements",
+        "Train detailed reading, gist and selecting the matching information. In language elements, check grammatical fit and word partnerships against the paragraph’s meaning, not only the nearest noun."
+      ],
+      [
+        "Listening",
+        "Practise keeping track of attitudes, changes of plan and relevant detail at natural speed. Use the answer key to locate evidence, then replay the specific passage rather than passively repeating the whole recording."
+      ],
+      [
+        "Writing",
+        "Use the current mock to identify the requested text type and content points. Plan a clear purpose, logical paragraphs and a suitable register; reserve part of the 30 minutes for checking omissions."
+      ],
+      [
+        "Speaking",
+        "Use the mock’s sequence to rehearse presenting an experience, discussing a topic and planning together. Build on a partner’s contribution, challenge politely and bring a joint task to a concrete outcome."
+      ]
+    ],
+    "plan": [
+      [
+        "Find the bottleneck",
+        "Complete an official mock and compare written and oral performance separately. Identify whether reading time or writing planning is limiting the result."
+      ],
+      [
+        "Practise interaction",
+        "Alternate timed written responses with discussions in which a partner introduces an unexpected objection or constraint."
+      ],
+      [
+        "Rehearse the booking",
+        "Use the correct paper or digital materials for the centre’s format and practise the full answer-transfer routine without extra time."
+      ]
+    ],
+    "mistakes": [
+      "Learning a generic essay that does not answer the specified situation.",
+      "Treating a vocational B2 certificate as the same named product.",
+      "Ignoring spelling, answer transfer or partner interaction while practising only grammar."
+    ],
+    "readiness": [
+      "I can name the exact B2 examination on my booking.",
+      "I can plan and check the required written response in 30 minutes.",
+      "I can support a position and respond to a counterargument.",
+      "I understand the separate written and oral pass thresholds."
+    ],
+    "faq": [
+      [
+        "Is this the nursing B1–B2 exam?",
+        "No. This is general telc Deutsch B2. Nursing and other professional examinations require their own official preparation material."
+      ],
+      [
+        "Can I book a partial examination?",
+        "The general B2 product page permits partial examinations. Ask the centre which conditions and prior-result rules apply to your booking."
+      ]
+    ]
+  },
+  {
+    "provider": "telc",
+    "level": "c1",
+    "path": "telc/c1-exam.html",
+    "examName": "telc Deutsch C1",
+    "title": "telc C1 Exam: Format and Hochschule Comparison",
+    "description": "Compare general telc Deutsch C1 with C1 Hochschule, then plan reading, language elements, writing and speaking using official format and scoring guidance.",
+    "official": "https://www.telc.net/en/language-examinations/certificate-exams/german/telc-german-c1/",
+    "mock": "https://www.telc.net/fileadmin/user_upload/mock_exams/Deutsch/telc_deutsch_c1.zip",
+    "checked": "2026-11-14",
+    "scope": "This page focuses on general telc Deutsch C1. C1 Hochschule is a separate examination aimed at university contexts; C1 Beruf is another named product. Confirm the exact accepted certificate with the receiving institution instead of choosing by level alone.",
+    "timing": [
+      [
+        "Reading and language elements",
+        "90 minutes combined",
+        "Three reading parts and one language-elements part; a 20-minute break is listed."
+      ],
+      [
+        "Listening",
+        "About 40 minutes",
+        "Three parts."
+      ],
+      [
+        "Writing",
+        "70 minutes",
+        "One extended written response."
+      ],
+      [
+        "Speaking",
+        "About 16 minutes",
+        "Usually two candidates, with 20 minutes of preparation."
+      ]
+    ],
+    "score": "The officially linked general C1 mock lists 214 points in total, with minima of 99 in the written part and 29 in the oral part, for at least 128 overall. Use these published values rather than inventing a rounding rule from a percentage.",
+    "resits": "The product page allows partial examinations. Ask the centre about written/oral registration, credit periods and the current booking conditions before arranging a resit.",
+    "comparison": "Goethe C1 uses four independently assessed modules. General telc C1 uses a written/oral structure with language elements. C1 Hochschule has a separate academic focus even where top-level timings resemble general C1; matching clocks do not make the tasks or certificate identical.",
+    "skills": [
+      [
+        "Reading and language elements",
+        "Work with complex arguments and paragraph links. Explain the function of a connector and how a claim is qualified before choosing an option. Keep a record of register and collocation errors."
+      ],
+      [
+        "Listening",
+        "Practise following longer arguments while noting only the information the task needs. Distinguish an example from the main conclusion and a reported view from the speaker’s position."
+      ],
+      [
+        "Writing",
+        "Build a coherent extended response with a clear line of argument, relevant examples and controlled register. Plan before drafting and edit for repetition, logical jumps and imprecise reference words."
+      ],
+      [
+        "Speaking",
+        "Rehearse a structured contribution and a responsive discussion. Practise summarising another person’s argument accurately before evaluating it, without replacing their view with your own."
+      ]
+    ],
+    "plan": [
+      [
+        "Match the variant",
+        "Download the general C1 mock and compare its title with the booked certificate. If university admission is the goal, check the institution’s named requirement first."
+      ],
+      [
+        "Refine precision",
+        "Rewrite one argument in a clearer structure, qualify an overgeneralisation and replace vague references with explicit ones."
+      ],
+      [
+        "Test independence",
+        "Rehearse the timed written sequence and a discussion with unplanned follow-up questions. Use the official criteria to identify weaknesses."
+      ]
+    ],
+    "mistakes": [
+      "Assuming general C1 and C1 Hochschule are interchangeable certificates.",
+      "Using complex sentences that obscure the argument or change the source meaning.",
+      "Applying old material from a different provider without checking the examination name."
+    ],
+    "readiness": [
+      "I have confirmation of which C1 certificate the institution accepts.",
+      "I can sustain a clear argument without padding.",
+      "I can distinguish source information, inference and opinion.",
+      "I have assessed both written and oral performance against the right mock."
+    ],
+    "faq": [
+      [
+        "Does general telc C1 equal C1 Hochschule?",
+        "They share the CEFR level but are separate named examinations. Check the university’s stated certificate requirement and use the correct official mock."
+      ],
+      [
+        "Does similar timing mean the same test?",
+        "No. The general and Hochschule variants can share timing blocks while differing in purpose and task content."
+      ]
+    ]
+  },
+  {
+    "provider": "telc",
+    "level": "c2",
+    "path": "telc/c2-exam.html",
+    "examName": "telc Deutsch C2",
+    "title": "telc C2 Exam: Integrated Tasks, Scoring and Preparation",
+    "description": "Understand telc Deutsch C2: integrated listening and writing, exam timings, pass thresholds, official practice material and advanced preparation steps.",
+    "official": "https://www.telc.net/en/language-examinations/certificate-exams/german/telc-german-c2/",
+    "mock": "https://www.telc.net/fileadmin/user_upload/mock_exams/Deutsch/telc_deutsch_c2.zip",
+    "checked": "2026-11-14",
+    "scope": "This guide covers general telc Deutsch C2. It includes an integrated listening-and-writing subtest and is not a relabelled version of Goethe C2 GDS. Advanced preparation needs to follow this particular task structure.",
+    "timing": [
+      [
+        "Reading",
+        "80 minutes",
+        "Three parts; the structure table lists a 20-minute break."
+      ],
+      [
+        "Listening and writing",
+        "60 minutes combined",
+        "One integrated subtest: listening information must be processed in writing."
+      ],
+      [
+        "Writing",
+        "90 minutes",
+        "One separate writing subtest."
+      ],
+      [
+        "Speaking",
+        "About 15 minutes",
+        "Usually one candidate; 20 minutes of preparation."
+      ]
+    ],
+    "score": "The officially linked mock lists 160 points overall. A certificate requires at least 72 written points and 24 oral points, adding to at least 96. Do not combine independent Goethe module marks or import the C1 scale.",
+    "resits": "The product page permits partial examinations. Confirm the current written/oral credit rules and available format with the centre; partial booking does not mean each named subtest is separately bookable.",
+    "comparison": "Goethe C2 has four modules, with listening separate from writing, and normally 15 minutes of speaking preparation. telc C2 includes a 60-minute integrated listening/writing subtest and lists 20 minutes of oral preparation.",
+    "skills": [
+      [
+        "Reading",
+        "Train dense argument, implicit meaning and precise distinctions between close alternatives. When reviewing, explain why the text supports one interpretation and excludes another rather than citing one matching keyword."
+      ],
+      [
+        "Listening and writing",
+        "Practise turning a longer spoken argument into accurate, structured notes and then a coherent written response. Separate what the speaker said from your own inference; do not fill a missing detail with a plausible invention."
+      ],
+      [
+        "Writing",
+        "Develop an extended, clearly structured response with precise vocabulary and consistent register. Edit for ambiguous references, unsupported claims and paraphrases that accidentally strengthen the source statement."
+      ],
+      [
+        "Speaking",
+        "Rehearse an individual contribution followed by a challenging exchange. Practise qualifying your position, answering a counterexample and returning to the question without relying on ornate memorised phrases."
+      ]
+    ],
+    "plan": [
+      [
+        "Map the integrated task",
+        "Attempt the official listening/writing subtest and trace each important statement in your response back to the audio or your notes."
+      ],
+      [
+        "Improve control",
+        "Compare two drafts for accuracy, structure and register. Remove details that sound sophisticated but are unsupported or irrelevant."
+      ],
+      [
+        "Rehearse endurance",
+        "Complete the published blocks with the stated break and prepare an individual speaking contribution within 20 minutes. Seek specific feedback on precision."
+      ]
+    ],
+    "mistakes": [
+      "Treating C2 as a vocabulary list while neglecting source-faithful synthesis.",
+      "Preparing only Goethe C2 literature or rewriting tasks for a telc booking.",
+      "Assuming a partial examination means separate booking of all four listed subtests."
+    ],
+    "readiness": [
+      "I can explain the integrated listening/writing task in my own words.",
+      "My notes distinguish source claims from my interpretation.",
+      "I can sustain precise extended writing under the stated time limit.",
+      "I have rehearsed an individual oral contribution and follow-up exchange."
+    ],
+    "faq": [
+      [
+        "Is there a telc C2 examination?",
+        "Yes. telc lists a general telc Deutsch C2 examination and publishes its structure and official mock material."
+      ],
+      [
+        "Is its listening section a standalone comprehension test?",
+        "The published structure includes a combined Listening and Writing subtest lasting 60 minutes. Practise the integrated task rather than substituting a Goethe listening module."
+      ]
+    ]
+  }
+]

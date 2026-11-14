@@ -928,3 +928,13 @@ practice/b2-revising-claim-communication-exercises.html
 practice/b2-explaining-goal-tradeoff-communication-exercises.html
 practice/b2-clarifying-misunderstanding-communication-exercises.html
 practice/b2-conditional-agreement-communication-exercises.html
+
+# Goethe / telc A1-C2 exam guidance (existing Goethe routes retained)
+german-exam-guidance.html
+exam-guidance.css
+telc/a1-exam.html
+telc/a2-exam.html
+telc/b1-exam.html
+telc/b2-exam.html
+telc/c1-exam.html
+telc/c2-exam.html

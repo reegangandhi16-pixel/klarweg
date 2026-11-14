@@ -1,0 +1,21 @@
+/* Additions for free exam guidance; navy and green, system fonts. */
+.eg-spacing{margin-top:24px}
+.eg-small-heading{font-size:18px}
+.eg-table-wrap{max-width:100%;overflow-x:auto}
+.eg-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px}
+.eg-table caption{text-align:left;color:#52617a;font-size:14px;margin:0 0 12px}
+.eg-table th,.eg-table td{text-align:left;vertical-align:top;border-bottom:1px solid #dae3e1;padding:12px 8px;overflow-wrap:anywhere}
+.eg-table th:first-child{width:29%}.eg-table th:nth-child(2){width:24%}
+.eg-guide-card{border:1px solid #dae3e1;border-radius:14px;padding:20px;min-width:0}
+.eg-guide-card h3{font-size:20px;line-height:1.4}
+.exam-update{scroll-margin-top:80px;margin:36px 0;padding:clamp(20px,3vw,30px);border:1px solid #dae3e1;border-left:4px solid #1fa84b;border-radius:16px;background:#f1f8f3;color:#0f172a;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-wrap:anywhere}
+.exam-update h2,.exam-update h3{font-family:inherit;color:#0f172a}
+.exam-update h2{margin:0 0 18px;padding:0;border:0;font-size:28px;line-height:1.25}
+.exam-update h3{margin:24px 0 12px;font-size:18px}
+.exam-update a{color:#164a3a;text-underline-offset:3px}
+.exam-update a:focus-visible{outline:3px solid #1fa84b;outline-offset:3px}
+.exam-update .eg-note{font-size:14px;color:#52617a}
+@media(max-width:480px){.eg-table{font-size:14px}.eg-table th,.eg-table td{padding:10px 5px}}
+
+.kg h1,.kg h2,.kg h3,.exam-wrap h1,.exam-wrap h2,.exam-wrap h3{color:#0f172a}
+.kg a,.exam-wrap a{color:#164a3a}

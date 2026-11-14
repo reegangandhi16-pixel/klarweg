@@ -78,7 +78,14 @@ export function validateGuides(guides) {
         unique[key].add(row[0]);
       }
     }
-    if (g.kind !== undefined && !['grammar','word-choice'].includes(g.kind)) throw new Error('Invalid practice kind');
+    if (g.kind !== undefined && !['grammar','word-choice','communication'].includes(g.kind)) throw new Error('Invalid practice kind');
+    if (g.kind === 'communication' && !Array.isArray(g.wordBank)) throw new Error('Communication practice requires a word bank');
+    if (g.wordBank !== undefined) {
+      if (!Array.isArray(g.wordBank) || !g.wordBank.length || g.wordBank.length > 4) throw new Error('Invalid word bank');
+      g.wordBank.forEach(s => text(s, 'word bank'));
+      const bank = new Set(g.wordBank), answers = new Set(g.quiz.map(q => q[1]));
+      if (bank.size !== g.wordBank.length || bank.size !== answers.size || [...answers].some(a => !bank.has(a))) throw new Error('Word bank must match the exercise answers');
+    }
     if (g.description !== undefined) { text(g.description, 'description'); if (g.description.length < 100 || g.description.length > 170) throw new Error('Description must be 100–170 characters'); }
     if (g.instructions !== undefined) text(g.instructions, 'instructions');
     if (g.guideLabel !== undefined) text(g.guideLabel, 'guide label');
@@ -96,26 +103,40 @@ export function renderPractice(guides = loadGuides()) {
     const related = [next, ...peers.filter(x => x.slug !== g.slug && x.slug !== next.slug && x.guide === g.guide), peers[(index + peers.length - 1) % peers.length]];
     const values = Object.fromEntries(Object.entries({ ...g, level, levelId: g.level, url, siteBase: SITE_BASE, description, chapter: CHAPTERS[g.level],
       guideLabel: g.guideLabel || 'Review the related grammar guide',
-      ruleHeading: g.kind === 'word-choice' ? 'Understand the difference' : 'Understand the rule',
-      exerciseHeading: g.kind === 'word-choice' ? 'Practice: choose the right word' : 'Practice: fill in the gaps',
-      heroText: g.kind === 'word-choice' ? description : 'Study four German examples with English meanings, then try four questions and check the explained answers.',
+      ruleNavText: g.kind === 'communication' ? 'Phrase patterns' : 'One clear rule',
+      ruleHeading: g.kind === 'communication' ? 'Useful phrases and patterns' : g.kind === 'word-choice' ? 'Understand the difference' : 'Understand the rule',
+      exerciseHeading: g.kind === 'communication' ? 'Practice: complete the phrases' : g.kind === 'word-choice' ? 'Practice: choose the right word' : 'Practice: fill in the gaps',
+      heroText: ['word-choice','communication'].includes(g.kind) ? description : 'Study four German examples with English meanings, then try four questions and check the explained answers.',
       instructions: g.instructions || 'Complete each gap using the rule above and any cue in brackets.'
     }).filter(([, v]) => typeof v === 'string').map(([k, v]) => [k, escapeHtml(v)]));
     values.structuredData = ld(breadcrumb(g, url)) + '\n' + ld({ '@type': 'LearningResource', name: g.title, description, url, mainEntityOfPage: url, inLanguage: ['en', 'de'], educationalLevel: 'CEFR ' + level, learningResourceType: 'Practice exercises', isAccessibleForFree: true, publisher, about: g.title });
     values.examples = g.examples.map(([de, en], i) => `<div class="model"><span class="tag">Worked example ${i + 1}</span><span class="de" lang="de">${escapeHtml(de)}</span><span class="translation">${escapeHtml(en)}</span></div>`).join('\n');
     values.quiz = g.quiz.map(([q, a, why], i) => `<div class="exercise"><p><strong>Question ${i + 1}.</strong> <span lang="de">${escapeHtml(q)}</span></p><details><summary>Show answer and explanation<span class="sr-only"> for question ${i + 1}</span></summary><div class="answer"><p><strong>Answer:</strong> <span lang="de">${escapeHtml(a)}</span></p><p>${escapeHtml(why)}</p></div></details></div>`).join('\n');
+    values.wordBank = g.wordBank ? `<p class="mini"><strong>Word bank:</strong> ${g.wordBank.map(escapeHtml).join(' · ')}</p>` : '';
     values.related = related.slice(0, 2).map(x => `<li><a href="${x.slug}.html">${escapeHtml(x.title)}</a></li>`).join('');
     outputs.set(`practice/${g.slug}.html`, template('page', values));
   }
+  const kinds = [
+    { id: 'grammar', label: 'Grammar' },
+    { id: 'word-choice', label: 'Word choice' },
+    { id: 'communication', label: 'Everyday and workplace communication' }
+  ];
+  const orderedGuides = [];
   const levels = LEVELS.map(l => {
     const group = guides.filter(g => g.level === l), level = l.toUpperCase();
-    return `<section class="panel" id="${l}" aria-label="${level} practice"><h2>${level} German practice · ${group.length} lessons</h2><p>Choose a specific topic. Each practice set includes worked sentences and four self-check exercises with explanations.</p><div class="level-grid">${group.map(g => `<a class="topic" href="${g.slug}.html"><small>${level} · 4 exercises</small><b>${escapeHtml(g.title)}</b></a>`).join('\n')}</div></section>`;
+    const groups = kinds.map(k => ({ ...k, rows: group.filter(g => (g.kind || 'grammar') === k.id) })).filter(k => k.rows.length);
+    const nav = groups.map(k => `<a class="btn secondary" href="#${l}-${k.id}">${k.label} (${k.rows.length})</a>`).join('');
+    const content = groups.map(k => {
+      orderedGuides.push(...k.rows);
+      return `<section class="practice-group" id="${l}-${k.id}" aria-labelledby="${l}-${k.id}-title"><h3 id="${l}-${k.id}-title">${k.label} · ${k.rows.length} lessons</h3><div class="level-grid">${k.rows.map(g => `<a class="topic" href="${g.slug}.html"><small>${level} · 4 exercises</small><b>${escapeHtml(g.title)}</b></a>`).join('\n')}</div></section>`;
+    }).join('\n');
+    return `<section class="panel" id="${l}" aria-label="${level} practice"><h2>${level} German practice · ${group.length} lessons</h2><p>Choose grammar, word choice or communication practice. Each set includes worked examples and four self-check exercises with explanations.</p><nav class="actions" aria-label="${level} practice types">${nav}</nav>${content}</section>`;
   }).join('\n');
-  const hubTitle = 'German Grammar and Word Choice Exercises A1–B2 — Klarweg';
-  const hubDescription = `${guides.length} free German grammar and word choice practice sets for A1–B2. Study examples with English meanings and check explained exercise answers.`;
+  const hubTitle = 'Free German Practice A1–B2: Exercises and Answers — Klarweg';
+  const hubDescription = `${guides.length} free German practice sets for A1–B2: grammar, word choice and everyday communication. Study translated examples and check explained answers.`;
   outputs.set('practice/index.html', template('index', { url: hubUrl, siteBase: SITE_BASE, levels, total: String(guides.length), hubTitle: escapeHtml(hubTitle), hubDescription: escapeHtml(hubDescription),
     structuredData: ld(breadcrumb()) + '\n' + ld({ '@type': 'CollectionPage', name: hubTitle, description: hubDescription, url: hubUrl, inLanguage: ['en', 'de'], isAccessibleForFree: true, publisher,
-      mainEntity: { '@type': 'ItemList', numberOfItems: guides.length, itemListElement: guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, name: g.title, url: pageUrl(g.slug) })) }
+      mainEntity: { '@type': 'ItemList', numberOfItems: guides.length, itemListElement: orderedGuides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, name: g.title, url: pageUrl(g.slug) })) }
     })
   }));
   return outputs;

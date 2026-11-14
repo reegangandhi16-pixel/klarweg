@@ -56,5 +56,20 @@
         "path": "docs/seo/word-choice50-20261114.json"
       }
     ]
+  },
+  {
+    "id": "communication50",
+    "count": 50,
+    "levels": {
+      "a1": 10,
+      "a2": 14,
+      "b1": 16,
+      "b2": 10
+    },
+    "sources": [
+      {
+        "path": "docs/seo/communication50-20261114.json"
+      }
+    ]
   }
 ]

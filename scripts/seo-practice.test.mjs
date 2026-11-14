@@ -13,9 +13,9 @@ const allow = read('.github/pages-allowlist.txt').split(/\r?\n/);
 const resource = read('resources.html');
 const hub = read('practice/index.html');
 
-test('exactly 150 distinct practice lessons, eight unique learner tasks each', () => {
-  assert.equal(guides.length, 150);
-  assert.equal(new Set(guides.map(x=>x.slug)).size,150);
+test('exactly 200 distinct practice lessons, eight unique learner tasks each', () => {
+  assert.equal(guides.length, 200);
+  assert.equal(new Set(guides.map(x=>x.slug)).size,200);
   for (const g of guides) {
     assert.equal(g.examples.length, 4, g.slug);
     assert.equal(g.quiz.length, 4, g.slug);
@@ -50,14 +50,14 @@ const generated = renderPractice(sourceGuides);
 const jsonld = html => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
 
 test('practice output is reproducible; all source material and metadata remain distinct', () => {
-  assert.equal(generated.size, 151);
+  assert.equal(generated.size, 201);
   assert.deepEqual(fs.readdirSync(path.join(root, 'practice')).filter(f => f.endsWith('.html')).sort(), [...generated.keys()].map(f => path.basename(f)).sort(), 'no stale or orphaned practice pages');
   for (const [file, html] of generated) {
     assert.equal(read(file), html, `${file}: run npm run generate:practice`);
     assert.doesNotMatch(html, /\{\{\w+\}\}/);
   }
-  for (const key of ['title', 'rule', 'trap']) assert.equal(new Set(guides.map(g => g[key])).size, 150, key);
-  for (const key of ['examples', 'quiz']) assert.equal(new Set(guides.flatMap(g => g[key].map(x => x[0]))).size, 600, key);
+  for (const key of ['title', 'rule', 'trap']) assert.equal(new Set(guides.map(g => g[key])).size, 200, key);
+  for (const key of ['examples', 'quiz']) assert.equal(new Set(guides.flatMap(g => g[key].map(x => x[0]))).size, 800, key);
 });
 
 test('generator rejects unsafe paths, missing answers, duplicate material and malformed gaps', () => {
@@ -122,16 +122,18 @@ test('lesson schema, metadata, chapter and related links match visible content',
       inbound.add(slug);
     }
   }
-  assert.equal(inbound.size, 150, 'every lesson receives a contextual link from a peer');
+  assert.equal(inbound.size, 200, 'every lesson receives a contextual link from a peer');
 });
 
-test('hub schema enumerates exactly the 150 visible lessons, and the stylesheet is explicitly published', () => {
+test('hub schema enumerates exactly the 200 visible lessons, and the stylesheet is explicitly published', () => {
   const collection = jsonld(hub).find(x => x['@type'] === 'CollectionPage');
   assert.equal(collection.url, 'https://klarweg.in/practice/index.html');
-  assert.equal(collection.mainEntity.numberOfItems, 150);
-  assert.deepEqual(collection.mainEntity.itemListElement.map(x => x.url), sourceGuides.map(g => 'https://klarweg.in/practice/' + g.slug + '.html'));
+  assert.equal(collection.mainEntity.numberOfItems, 200);
+  const visibleUrls = [...hub.matchAll(/class="topic" href="([^"]+)"/g)].map(m => 'https://klarweg.in/practice/' + m[1]);
+  assert.deepEqual(collection.mainEntity.itemListElement.map(x => x.url), visibleUrls, 'schema list follows visible grouped inventory');
+  assert.deepEqual(new Set(visibleUrls), new Set(sourceGuides.map(g => 'https://klarweg.in/practice/' + g.slug + '.html')));
   assert.ok(allow.includes('practice/practice.css'));
-  assert.equal(allow.filter(x => x.startsWith('practice/')).length, 152, 'only 151 pages and shared CSS');
+  assert.equal(allow.filter(x => x.startsWith('practice/')).length, 202, 'only 201 pages and shared CSS');
   assert.equal((resource.match(/id="free-grammar-practice"/g) || []).length, 1);
   assert.equal((resource.match(/<!-- PRACTICE50:START -->[\s\S]*?<!-- PRACTICE50:END -->/g) || []).length, 1);
   const css = read('practice/practice.css');
@@ -144,20 +146,20 @@ test('hub schema enumerates exactly the 150 visible lessons, and the stylesheet 
 
 
 test('a second 50-lesson batch extends the first without renaming its datasets', () => {
-  assert.equal(PRACTICE_BATCHES.length, 3);
+  assert.equal(PRACTICE_BATCHES.length, 4);
   assert.equal(guides.filter(g => g.batch === 'practice50').length, 50);
   assert.equal(guides.filter(g => g.batch === 'practice50-expansion').length, 50);
   assert.deepEqual(PRACTICE_BATCHES[0].sources.map(s => s.path), ['a1','a2','b1','b2'].map(l => `docs/seo/next50-practice-${l}.json`));
   const counts = Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, guides.filter(g => g.level === l).length]));
-  assert.deepEqual(counts, { a1: 32, a2: 44, b1: 46, b2: 28 });
+  assert.deepEqual(counts, { a1: 42, a2: 58, b1: 62, b2: 38 });
   const additions = guides.filter(g => g.batch === 'practice50-expansion');
   assert.equal(new Set(additions.map(g => g.description)).size, 50);
   for (const g of additions) {
     assert.ok(g.description.length >= 100 && g.description.length <= 170, g.slug);
     assert.ok(g.instructions.length >= 40, g.slug);
   }
-  assert.match(hub, /150 focused practice sets/);
-  assert.match(resource, /Browse all 150 free German practice sets/);
+  assert.match(hub, /200 focused practice sets/);
+  assert.match(resource, /Browse all 200 free German practice sets/);
 });
 
 test('batch inventory rejects repeated ids, unsafe sources and incorrect declared counts', () => {
@@ -186,9 +188,38 @@ test('word-choice batch adds 50 distinct usage lessons with suitable headings an
     assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`));
     assert.ok(html.includes(escapeHtml(g.guideLabel)));
   }
-  for (const g of guides.filter(g => g.kind !== 'word-choice')) {
+  for (const g of guides.filter(g => !g.kind || g.kind === 'grammar')) {
     const html = read(`practice/${g.slug}.html`);
     assert.match(html, />Understand the rule<\/h2>/);
     assert.match(html, />Practice: fill in the gaps<\/h2>/);
+  }
+});
+
+
+test('communication batch supplies 50 complete phrase lessons with answer-matched word banks', () => {
+  const lessons = guides.filter(g => g.batch === 'communication50');
+  assert.equal(lessons.length, 50);
+  assert.deepEqual(Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, lessons.filter(g => g.level === l).length])), { a1: 10, a2: 14, b1: 16, b2: 10 });
+  for (const g of lessons) {
+    assert.equal(g.kind, 'communication');
+    assert.deepEqual(new Set(g.wordBank), new Set(g.quiz.map(q => q[1])), g.slug);
+    const html = read(`practice/${g.slug}.html`);
+    assert.match(html, />Useful phrases and patterns<\/h2>/);
+    assert.match(html, />Practice: complete the phrases<\/h2>/);
+    assert.match(html, /<strong>Word bank:<\/strong>/);
+    assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`));
+    for (const word of g.wordBank) assert.ok(html.includes(escapeHtml(word)), g.slug);
+  }
+  const copy = structuredClone(guides), index = copy.findIndex(g => g.kind === 'communication');
+  delete copy[index].wordBank;
+  assert.throws(() => validateGuides(copy), /requires a word bank/);
+  copy[index].wordBank = ['incorrect'];
+  assert.throws(() => validateGuides(copy), /must match/);
+});
+
+test('each level on the hub has valid grammar, word-choice and communication anchors', () => {
+  for (const level of ['a1','a2','b1','b2']) for (const kind of ['grammar','word-choice','communication']) {
+    assert.ok(hub.includes(`href="#${level}-${kind}"`));
+    assert.ok(hub.includes(`id="${level}-${kind}"`));
   }
 });

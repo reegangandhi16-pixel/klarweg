@@ -16,11 +16,13 @@ import { SITE_BASE } from './site-origin.mjs';
 
 const root = fs.realpathSync(process.argv[2] || '_site');
 const files = fs.readdirSync(path.join(root, 'practice')).filter(f => f.endsWith('.html')).sort();
-const lessonCount = loadGuides().length;
+const lessons = loadGuides();
+const lessonCount = lessons.length;
+const wordBankPages = new Set(lessons.filter(g => g.kind === 'communication').map(g => g.slug + '.html'));
 assert.equal(files.length, lessonCount + 1, 'expected all registered lessons and the hub in the public artifact');
 const screenshots = process.env.PRACTICE_SCREENSHOTS;
 if (screenshots) fs.mkdirSync(screenshots, { recursive: true });
-const representatives = new Set(['index.html', 'a1-ein-eine-exercises.html', 'a2-wechselpraepositionen-wohin-exercises.html', 'b1-polite-konjunktiv-ii-exercises.html', 'b2-nominalisation-exercises.html', 'a1-modal-verbs-present-exercises.html', 'a2-adjective-endings-indefinite-exercises.html', 'b1-relative-clauses-dative-exercises.html', 'b2-passive-perfect-tense-exercises.html', 'a1-lernen-studieren-word-choice-exercises.html', 'a2-kennen-wissen-word-choice-exercises.html', 'b1-legen-liegen-word-choice-exercises.html', 'b2-effektiv-effizient-word-choice-exercises.html']);
+const representatives = new Set(['index.html', 'a1-ein-eine-exercises.html', 'a2-wechselpraepositionen-wohin-exercises.html', 'b1-polite-konjunktiv-ii-exercises.html', 'b2-nominalisation-exercises.html', 'a1-modal-verbs-present-exercises.html', 'a2-adjective-endings-indefinite-exercises.html', 'b1-relative-clauses-dative-exercises.html', 'b2-passive-perfect-tense-exercises.html', 'a1-lernen-studieren-word-choice-exercises.html', 'a2-kennen-wissen-word-choice-exercises.html', 'b1-legen-liegen-word-choice-exercises.html', 'b2-effektiv-effizient-word-choice-exercises.html', 'a1-ordering-in-cafe-communication-exercises.html', 'a2-rescheduling-appointment-communication-exercises.html', 'b1-requesting-specific-feedback-communication-exercises.html', 'b2-moderating-discussion-communication-exercises.html']);
 const server = http.createServer((req, res) => {
   let file = path.resolve(root, '.' + new URL(req.url, 'http://localhost').pathname);
   if (!file.startsWith(root + path.sep)) { res.writeHead(403); res.end(); return; }
@@ -94,7 +96,7 @@ try {
     assert.ok(!result.errorText, result.errorText); await loaded;
   };
   await send('Page.enable'); await send('Page.bringToFront'); await send('Runtime.enable'); await send('Network.enable');
-  const watchdog = setTimeout(() => proc.kill(), 240000);
+  const watchdog = setTimeout(() => proc.kill(), 360000);
   try {
     for (const width of [320, 390, 768, 1440]) {
       await send('Emulation.setDeviceMetricsOverride', { width, height: 1000, deviceScaleFactor: 1, mobile: width < 768 });
@@ -107,9 +109,10 @@ try {
           const button = document.querySelector('.btn:not(.secondary)');
           const c = button ? getComputedStyle(button) : null;
           const lum = c ? [color(c.color),color(c.backgroundColor)].sort((a,b)=>b-a) : [1,0];
-          return {overflow:document.documentElement.scrollWidth-innerWidth,h1:document.querySelectorAll('h1').length,uniqueIds:new Set(ids).size===ids.length,css:getComputedStyle(document.querySelector('.hero')).borderRadius,canonical:document.querySelector('[rel=canonical]').href,details:document.querySelectorAll('details').length,topics:document.querySelectorAll('.topic').length,contrast:(lum[0]+.05)/(lum[1]+.05),targets:[...document.querySelectorAll('summary')].every(e=>e.getBoundingClientRect().height>=44)};
+          return {wordBank:[...document.querySelectorAll('#quiz .mini strong')].some(e=>e.textContent==='Word bank:'),overflow:document.documentElement.scrollWidth-innerWidth,h1:document.querySelectorAll('h1').length,uniqueIds:new Set(ids).size===ids.length,css:getComputedStyle(document.querySelector('.hero')).borderRadius,canonical:document.querySelector('[rel=canonical]').href,details:document.querySelectorAll('details').length,topics:document.querySelectorAll('.topic').length,contrast:(lum[0]+.05)/(lum[1]+.05),targets:[...document.querySelectorAll('summary')].every(e=>e.getBoundingClientRect().height>=44)};
         })()`);
         assert.ok(data.overflow <= 1, `${file} at ${width}: overflow ${data.overflow}`);
+        assert.equal(data.wordBank, wordBankPages.has(file), file + ': correct word-bank presence');
         assert.equal(data.h1, 1); assert.ok(data.uniqueIds); assert.equal(data.css, '24px');
         assert.equal(data.canonical, SITE_BASE + url); assert.ok(data.contrast >= 4.5); assert.ok(data.targets);
         assert.equal(data.details, file === 'index.html' ? 0 : 4);

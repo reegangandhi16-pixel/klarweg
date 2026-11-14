@@ -4,7 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
-const { loadGuides, PRACTICE_BATCHES } = await import('./build-seo-practice.mjs');
+const { loadGuides, PRACTICE_BATCHES, EDITORIAL_SOURCE } = await import('./build-seo-practice.mjs');
 const guides=loadGuides();
 const root=fs.realpathSync(process.argv[2] || '_site');
 const { SITE_BASE: site } = await import('./site-origin.mjs');
@@ -46,5 +46,5 @@ for(const loc of locs){
 }
 assert.equal(titles.size,guides.length+1);
 assert.deepEqual(fs.readdirSync(path.join(root,'practice')).filter(f=>f.endsWith('.html')).sort(), ['index.html',...guides.map(g=>g.slug+'.html')].sort());
-for(const name of ['docs/seo/practice-batches.json',...PRACTICE_BATCHES.flatMap(b=>b.sources.map(s=>s.path)),'scripts/build-seo-practice.mjs','scripts/seo-practice/page.html','scripts/seo-practice/index.html'])assert.ok(!fs.existsSync(root+'/'+name));
+for(const name of [EDITORIAL_SOURCE,'docs/seo/practice-batches.json',...PRACTICE_BATCHES.flatMap(b=>b.sources.map(s=>s.path)),'scripts/build-seo-practice.mjs','scripts/seo-practice/page.html','scripts/seo-practice/index.html'])assert.ok(!fs.existsSync(root+'/'+name));
 console.log(JSON.stringify({sitemapUrls:locs.length,practicePages:titles.size,jsonBlocks,localLinksAndAssets:links,sourceFilesExcluded:true,result:'PASS'}));

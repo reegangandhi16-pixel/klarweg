@@ -45,7 +45,8 @@
         "Plural Dativ takes den, and Kindern has -n."
       ]
     ],
-    "instructions": "Use the dative definite article for each noun in brackets."
+    "instructions": "Use the dative definite article for each noun in brackets.",
+    "description": "Practise dem, der and den in German dative phrases. Review recipients, dative prepositions and plural endings with explained A2 answers."
   },
   {
     "slug": "a2-dativ-pronouns-exercises",
@@ -93,7 +94,8 @@
         "Lowercase ihnen means “them”; capital Ihnen would mean formal “you”."
       ]
     ],
-    "instructions": "Replace the English cue in brackets with a dative pronoun."
+    "instructions": "Replace the English cue in brackets with a dative pronoun.",
+    "description": "Choose mir, dir, ihm and other German dative pronouns. Practise verb patterns and recipients in four A2 exercises with explained answers."
   },
   {
     "slug": "a2-akkusativ-pronouns-exercises",
@@ -141,7 +143,8 @@
         "Feminine Akkusativ singular is sie."
       ]
     ],
-    "instructions": "Complete each reply with the accusative pronoun for the person or people addressed or mentioned."
+    "instructions": "Complete each reply with the accusative pronoun for the person or people addressed or mentioned.",
+    "description": "Practise mich, dich, ihn and other German accusative pronouns. Replace direct objects and check their roles with A2 examples and explanations."
   },
   {
     "slug": "a2-wechselpraepositionen-wo-exercises",
@@ -189,7 +192,8 @@
         "Static location: feminine Dativ."
       ]
     ],
-    "instructions": "Use the dative definite article to express a location (wo?)."
+    "instructions": "Use the dative definite article to express a location (wo?).",
+    "description": "Use dative after two-way prepositions when answering wo. Practise static locations with German A2 examples, explained answers and a writing task."
   },
   {
     "slug": "a2-wechselpraepositionen-wohin-exercises",
@@ -237,7 +241,8 @@
         "Destination: neuter Akkusativ."
       ]
     ],
-    "instructions": "Use the accusative definite article to express a destination or placement (wohin?)."
+    "instructions": "Use the accusative definite article to express a destination or placement (wohin?).",
+    "description": "Use accusative after two-way prepositions for destinations answering wohin. Practise placement and direction with explained German A2 answers."
   },
   {
     "slug": "a2-perfekt-haben-exercises",
@@ -285,7 +290,8 @@
         "Du takes hast as helper."
       ]
     ],
-    "instructions": "Complete the perfect tense with the present-tense form of haben, or the participle of the verb in brackets."
+    "instructions": "Complete the perfect tense with the present-tense form of haben, or the participle of the verb in brackets.",
+    "description": "Build German Perfekt sentences with haben and a past participle. Practise auxiliary forms and word order in four explained A2 exercises."
   },
   {
     "slug": "a2-perfekt-sein-exercises",
@@ -333,7 +339,8 @@
         "Bleiben unusually takes sein despite no destination."
       ]
     ],
-    "instructions": "Complete the perfect tense with the present-tense form of sein, or the participle of the verb in brackets."
+    "instructions": "Complete the perfect tense with the present-tense form of sein, or the participle of the verb in brackets.",
+    "description": "Practise Perfekt with sein for selected movement and change-of-state verbs. Compare auxiliary choice and word order with explained A2 answers."
   },
   {
     "slug": "a2-irregular-partizip-ii-exercises",
@@ -381,7 +388,8 @@
         "Nehmen forms genommen."
       ]
     ],
-    "instructions": "Fill each gap with the past participle of the verb in brackets."
+    "instructions": "Fill each gap with the past participle of the verb in brackets.",
+    "description": "Practise irregular German Partizip II forms for the Perfekt. Check four A2 questions and use a participle in a complete sentence."
   },
   {
     "slug": "a2-separable-verbs-perfekt-exercises",
@@ -429,7 +437,8 @@
         "Ein + ge + kauft."
       ]
     ],
-    "instructions": "Fill each gap with the past participle of the separable verb in brackets."
+    "instructions": "Fill each gap with the past participle of the separable verb in brackets.",
+    "description": "Build German Perfekt forms for separable verbs. Practise prefix placement, participles and auxiliary choice with explained A2 answers."
   },
   {
     "slug": "a2-modal-verbs-praeteritum-exercises",
@@ -477,7 +486,8 @@
         "Ihr takes durftet."
       ]
     ],
-    "instructions": "Put the modal verb in brackets into the simple past (Präteritum)."
+    "instructions": "Put the modal verb in brackets into the simple past (Präteritum).",
+    "description": "Practise konnte, musste, wollte and other past modal forms. Build Präteritum sentences with an infinitive and check explained A2 answers."
   },
   {
     "slug": "a2-weil-sentences-exercises",
@@ -525,7 +535,8 @@
         "Sein comes at the end of the weil-clause."
       ]
     ],
-    "instructions": "Complete each reason clause with the present-tense form of the verb in brackets."
+    "instructions": "Complete each reason clause with the present-tense form of the verb in brackets.",
+    "description": "Practise German weil clauses with the finite verb at the end. Give reasons in four A2 gap-fill questions and a short contextual writing task."
   },
   {
     "slug": "a2-dass-sentences-exercises",
@@ -573,7 +584,8 @@
         "Dass introduces the content of his hope."
       ]
     ],
-    "instructions": "Use dass to introduce a content clause, or put the verb in brackets into the present tense."
+    "instructions": "Use dass to introduce a content clause, or put the verb in brackets into the present tense.",
+    "description": "Build German dass clauses to report thoughts and statements. Practise subordinate-clause word order with four explained A2 exercises."
   },
   {
     "slug": "a2-comparative-superlative-exercises",
@@ -621,7 +633,8 @@
         "Comparative includes an umlaut."
       ]
     ],
-    "instructions": "Write the comparative in gaps 1, 2 and 4. In gap 3, complete the superlative after am."
+    "instructions": "Write the comparative in gaps 1, 2 and 4. In gap 3, complete the superlative after am.",
+    "description": "Practise German comparative and superlative forms. Compare things with A2 examples, four explained questions and a short writing task."
   },
   {
     "slug": "a2-reflexive-daily-routine-exercises",
@@ -669,6 +682,7 @@
         "Wir takes uns."
       ]
     ],
-    "instructions": "Complete each sentence with the accusative reflexive pronoun matching the subject."
+    "instructions": "Complete each sentence with the accusative reflexive pronoun matching the subject.",
+    "description": "Practise German reflexive verbs for everyday routines. Choose the reflexive pronoun and notice separable verbs with explained A2 answers."
   }
 ]

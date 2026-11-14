@@ -45,7 +45,8 @@
         "Plural relative subject."
       ]
     ],
-    "instructions": "Use der, die or das as a relative subject; use die for plural subjects."
+    "instructions": "Use der, die or das as a relative subject; use die for plural subjects.",
+    "description": "Choose nominative relative pronouns der, die and das in German. Identify the relative subject with B1 examples and explained exercises."
   },
   {
     "slug": "b1-relative-clauses-accusative-exercises",
@@ -93,7 +94,8 @@
         "Plural direct object."
       ]
     ],
-    "instructions": "Use den, die or das as the relative direct object, according to gender and number."
+    "instructions": "Use den, die or das as the relative direct object, according to gender and number.",
+    "description": "Practise German accusative relative pronouns, including masculine den. Identify the object's role with B1 examples and explained answers."
   },
   {
     "slug": "b1-passive-praesens-exercises",
@@ -141,7 +143,8 @@
         "Singular Aufgabe needs wird."
       ]
     ],
-    "instructions": "Use the present-tense form of werden for the process passive, or the participle of the verb in brackets."
+    "instructions": "Use the present-tense form of werden for the process passive, or the participle of the verb in brackets.",
+    "description": "Build German present passive with werden and Partizip II. Practise singular and plural subjects with four explained B1 questions."
   },
   {
     "slug": "b1-passive-praeteritum-exercises",
@@ -189,7 +192,8 @@
         "Singular past passive."
       ]
     ],
-    "instructions": "Use wurde or wurden for the past process passive, or the participle of the verb in brackets."
+    "instructions": "Use wurde or wurden for the past process passive, or the participle of the verb in brackets.",
+    "description": "Practise German past passive with wurde and wurden. Describe completed actions in Präteritum with B1 examples and explained answers."
   },
   {
     "slug": "b1-polite-konjunktiv-ii-exercises",
@@ -237,7 +241,8 @@
         "Wäre is Konjunktiv II of sein. With a full conditional clause: Es wäre schön, wenn du kämest (or: kommen würdest)."
       ]
     ],
-    "instructions": "Use Konjunktiv II of the verb in brackets to make a polite or hypothetical statement."
+    "instructions": "Use Konjunktiv II of the verb in brackets to make a polite or hypothetical statement.",
+    "description": "Make polite German requests with könnte, würde and related forms. Practise Konjunktiv II with B1 examples, answers and a writing task."
   },
   {
     "slug": "b1-obwohl-trotzdem-exercises",
@@ -285,7 +290,8 @@
         "After trotzdem, finite verb takes position two."
       ]
     ],
-    "instructions": "Choose obwohl or trotzdem for the connector gaps. Conjugate the verb in brackets for the other gaps."
+    "instructions": "Choose obwohl or trotzdem for the connector gaps. Conjugate the verb in brackets for the other gaps.",
+    "description": "Compare obwohl clauses with trotzdem statements in German. Practise concession and verb position in four explained B1 exercises."
   },
   {
     "slug": "b1-um-zu-damit-exercises",
@@ -333,7 +339,8 @@
         "Finite subordinate purpose clause."
       ]
     ],
-    "instructions": "Choose um, zu or damit to complete each purpose construction."
+    "instructions": "Choose um, zu or damit to complete each purpose construction.",
+    "description": "Choose um … zu or damit to express purpose in German. Compare shared and different subjects with B1 examples and explained answers."
   },
   {
     "slug": "b1-indirect-questions-exercises",
@@ -381,7 +388,8 @@
         "Finite verb goes to the end."
       ]
     ],
-    "instructions": "Use the English question-word cue or conjugate the verb in brackets in the present tense."
+    "instructions": "Use the English question-word cue or conjugate the verb in brackets in the present tense.",
+    "description": "Form German indirect questions with ob and question words. Practise verb-final order in polite B1 questions with explained answers."
   },
   {
     "slug": "b1-genitive-possession-exercises",
@@ -429,7 +437,8 @@
         "Plural Genitiv article."
       ]
     ],
-    "instructions": "Complete each noun phrase with the genitive definite article des or der."
+    "instructions": "Complete each noun phrase with the genitive definite article des or der.",
+    "description": "Practise German genitive possession with des and der. Check noun endings and possessive relationships in four explained B1 exercises."
   },
   {
     "slug": "b1-n-declension-exercises",
@@ -477,7 +486,8 @@
         "Genitiv singular N-declension."
       ]
     ],
-    "instructions": "Put the noun in brackets into the case required by the sentence."
+    "instructions": "Put the noun in brackets into the case required by the sentence.",
+    "description": "Practise German weak masculine nouns such as Student. Choose n-declension forms after articles and prepositions with explained B1 answers."
   },
   {
     "slug": "b1-wo-compounds-exercises",
@@ -525,7 +535,8 @@
         "For a person use preposition + wen."
       ]
     ],
-    "instructions": "Use a wo(r)-compound for things, and wen after auf for the person in the last question."
+    "instructions": "Use a wo(r)-compound for things, and wen after auf for the person in the last question.",
+    "description": "Practise worauf, wofür and other German wo-compounds. Match fixed prepositions to questions about things with explained B1 answers."
   },
   {
     "slug": "b1-praeteritum-storytelling-exercises",
@@ -573,6 +584,7 @@
         "Schreiben is a strong verb."
       ]
     ],
-    "instructions": "Put the verb in brackets into Präteritum. In question 3, sie refers to one woman."
+    "instructions": "Put the verb in brackets into Präteritum. In question 3, sie refers to one woman.",
+    "description": "Practise German Präteritum forms for written storytelling. Compare irregular verbs in B1 examples, gap-fill questions and explained answers."
   }
 ]

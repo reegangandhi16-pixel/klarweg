@@ -46,7 +46,8 @@
       ]
     ],
     "instructions": "Put the verb in brackets into Konjunktiv I for reported speech.",
-    "guideLabel": "Compare Konjunktiv II (a related form)"
+    "guideLabel": "Compare Konjunktiv II (a related form)",
+    "description": "Practise sei, habe, könne and werde in formal German reported speech. Learn attribution with B2 Konjunktiv I examples and explained answers."
   },
   {
     "slug": "b2-nominalisation-exercises",
@@ -95,7 +96,8 @@
       ]
     ],
     "instructions": "Complete the nominal phrase with the correct article or preposition, keeping the meaning of the clause.",
-    "guideLabel": "Review genitive noun phrases"
+    "guideLabel": "Review genitive noun phrases",
+    "description": "Practise German nominalisation by turning clauses into noun phrases. Check articles, cases and meaning with explained B2 exercises."
   },
   {
     "slug": "b2-waehrend-wohingegen-exercises",
@@ -143,7 +145,8 @@
         "Main clause follows a fronted subordinate clause with the verb first."
       ]
     ],
-    "instructions": "Use während for simultaneous actions and wohingegen for contrast in this exercise; conjugate the verb in brackets where given."
+    "instructions": "Use während for simultaneous actions and wohingegen for contrast in this exercise; conjugate the verb in brackets where given.",
+    "description": "Compare German während clauses for simultaneous actions with wohingegen for contrast. Practise meaning and verb-final order with explained B2 answers."
   },
   {
     "slug": "b2-participial-adjectives-exercises",
@@ -191,7 +194,8 @@
         "Opened state + neuter -e after das."
       ]
     ],
-    "instructions": "Form the participle indicated in brackets and add its adjective ending."
+    "instructions": "Form the participle indicated in brackets and add its adjective ending.",
+    "description": "Practise German Partizip I and II as adjectives. Compare ongoing action and resulting states, with endings and explained B2 exercises."
   },
   {
     "slug": "b2-sich-lassen-passive-exercises",
@@ -239,7 +243,8 @@
         "Reflexive pronoun accompanies lassen here."
       ]
     ],
-    "instructions": "Complete the possibility construction with lassen in the present tense, sich or the infinitive in brackets."
+    "instructions": "Complete the possibility construction with lassen in the present tense, sich or the infinitive in brackets.",
+    "description": "Express possibility with German sich lassen plus an infinitive. Compare this passive alternative with four explained B2 exercises."
   },
   {
     "slug": "b2-je-desto-exercises",
@@ -287,7 +292,8 @@
         "Use the comparative adjective."
       ]
     ],
-    "instructions": "Use je or desto to link the clauses, or form the comparative of the word in brackets."
+    "instructions": "Use je or desto to link the clauses, or form the comparative of the word in brackets.",
+    "description": "Build German je … desto comparisons. Practise comparative forms and the two clauses' different verb positions with explained B2 answers."
   },
   {
     "slug": "b2-relative-prepositions-exercises",
@@ -335,7 +341,8 @@
         "Mit + plural Dativ relative pronoun denen."
       ]
     ],
-    "instructions": "Use the relative pronoun required by the preposition and the antecedent’s gender and number."
+    "instructions": "Use the relative pronoun required by the preposition and the antecedent’s gender and number.",
+    "description": "Choose German relative pronouns after prepositions. Match the preposition's case and the noun's gender with explained B2 exercises."
   },
   {
     "slug": "b2-adjective-endings-no-article-exercises",
@@ -383,7 +390,8 @@
         "Plural Dativ, no article → -en."
       ]
     ],
-    "instructions": "Add the strong adjective ending to the word in brackets; identify case, gender and number first."
+    "instructions": "Add the strong adjective ending to the word in brackets; identify case, gender and number first.",
+    "description": "Practise German adjective endings without an article. Identify the case, gender and number carried by strong endings with explained B2 answers."
   },
   {
     "slug": "b2-noun-verb-collocations-exercises",
@@ -432,7 +440,8 @@
       ]
     ],
     "instructions": "Complete the phrases using each verb once: treffen, stellen, stehen, ergreifen.",
-    "guideLabel": "Review verbs with prepositions"
+    "guideLabel": "Review verbs with prepositions",
+    "description": "Practise German noun-verb combinations such as eine Entscheidung treffen. Learn collocations in context with explained B2 exercises."
   },
   {
     "slug": "b2-argumentation-connectors-exercises",
@@ -480,6 +489,7 @@
         "States a plausible consequence, followed by verb-second order."
       ]
     ],
-    "instructions": "Use each expression once: einerseits, zwar, darüber, folglich. Capitalise a word at the start of a sentence."
+    "instructions": "Use each expression once: einerseits, zwar, darüber, folglich. Capitalise a word at the start of a sentence.",
+    "description": "Link German arguments with connectors for addition, reasons and consequences. Practise sentence structure with explained B2 writing exercises."
   }
 ]

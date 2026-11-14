@@ -109,13 +109,14 @@ try {
           const button = document.querySelector('.btn:not(.secondary)');
           const c = button ? getComputedStyle(button) : null;
           const lum = c ? [color(c.color),color(c.backgroundColor)].sort((a,b)=>b-a) : [1,0];
-          return {wordBank:[...document.querySelectorAll('#quiz .mini strong')].some(e=>e.textContent==='Word bank:'),overflow:document.documentElement.scrollWidth-innerWidth,h1:document.querySelectorAll('h1').length,uniqueIds:new Set(ids).size===ids.length,css:getComputedStyle(document.querySelector('.hero')).borderRadius,canonical:document.querySelector('[rel=canonical]').href,details:document.querySelectorAll('details').length,topics:document.querySelectorAll('.topic').length,contrast:(lum[0]+.05)/(lum[1]+.05),targets:[...document.querySelectorAll('summary')].every(e=>e.getBoundingClientRect().height>=44)};
+          return {transfer:document.querySelectorAll('#transfer .transfer-model [lang="de"]').length,wordBank:[...document.querySelectorAll('#quiz .mini strong')].some(e=>e.textContent==='Word bank:'),overflow:document.documentElement.scrollWidth-innerWidth,h1:document.querySelectorAll('h1').length,uniqueIds:new Set(ids).size===ids.length,css:getComputedStyle(document.querySelector('.hero')).borderRadius,canonical:document.querySelector('[rel=canonical]').href,details:document.querySelectorAll('details').length,topics:document.querySelectorAll('.topic').length,contrast:(lum[0]+.05)/(lum[1]+.05),targets:[...document.querySelectorAll('summary')].every(e=>e.getBoundingClientRect().height>=44)};
         })()`);
         assert.ok(data.overflow <= 1, `${file} at ${width}: overflow ${data.overflow}`);
         assert.equal(data.wordBank, wordBankPages.has(file), file + ': correct word-bank presence');
         assert.equal(data.h1, 1); assert.ok(data.uniqueIds); assert.equal(data.css, '24px');
         assert.equal(data.canonical, SITE_BASE + url); assert.ok(data.contrast >= 4.5); assert.ok(data.targets);
         assert.equal(data.details, file === 'index.html' ? 0 : 4);
+        assert.equal(data.transfer, file === 'index.html' ? 0 : 1, file + ': contextual writing model');
         if (file === 'index.html') assert.equal(data.topics, lessonCount);
         for (let i = 0; i < data.details; i++) {
           await evaluate(`document.querySelectorAll('summary')[${i}].focus()`);

@@ -16,6 +16,19 @@ export const PRACTICE_KINDS = {
   communication: { label: 'Everyday and workplace communication', ruleNavText: 'Phrase patterns', ruleHeading: 'Useful phrases and patterns', exerciseHeading: 'Practice: complete the phrases', wordBank: true },
   vocabulary: { label: 'Vocabulary and collocations', ruleNavText: 'Words in context', ruleHeading: 'Vocabulary and usage', exerciseHeading: 'Practice: choose the matching word', wordBank: true }
 };
+export const PRACTICE_TOPICS = {
+  cases: 'Articles, cases and noun forms', verbs: 'Verb forms and sentence patterns',
+  people: 'People, relationships and everyday life', questions: 'Asking questions',
+  negation: 'Negation', shopping: 'Shopping, prices and services', time: 'Time and dates',
+  places: 'Places, location and movement', past: 'Talking about the past',
+  clauses: 'Linking clauses', comparison: 'Comparing and contrasting',
+  passive: 'Passive forms and alternatives', requests: 'Requests and permission',
+  evidence: 'Sources, evidence and uncertainty', text: 'Writing and explaining',
+  descriptions: 'Describing things', work: 'Work, responsibilities and planning',
+  discussion: 'Discussion and agreement', learning: 'Learning and education',
+  tools: 'Objects, tools and practical actions', travel: 'Travel and transport'
+};
+export const EDITORIAL_SOURCE = 'docs/seo/practice-editorial-20261114.json';
 export const CHAPTERS = {
   a1: 'chapter/chapter-a1-1-alphabet.html',
   a2: 'chapter/chapter-a2-1-genitiv.html',
@@ -40,6 +53,17 @@ const template = (name, values) => read(`scripts/seo-practice/${name}.html`).rep
 
 export const PRACTICE_BATCHES = JSON.parse(read('docs/seo/practice-batches.json'));
 
+const normalise = s => s.normalize('NFKC').toLocaleLowerCase('de').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+export function attachEditorial(guides, entries = JSON.parse(read(EDITORIAL_SOURCE))) {
+  if (!Array.isArray(entries) || entries.length !== guides.length) throw new Error('Editorial inventory must match lessons');
+  const bySlug = new Map();
+  for (const entry of entries) {
+    if (!entry || bySlug.has(entry.slug) || !guides.some(g => g.slug === entry.slug)) throw new Error('Unknown/duplicate editorial lesson');
+    bySlug.set(entry.slug, entry);
+  }
+  return guides.map(g => ({ ...g, editorial: bySlug.get(g.slug) }));
+}
+
 export function loadGuides(batches = PRACTICE_BATCHES) {
   const ids = new Set(), paths = new Set();
   const guides = batches.flatMap(batch => {
@@ -60,12 +84,15 @@ export function loadGuides(batches = PRACTICE_BATCHES) {
     }
     return rows;
   });
-  validateGuides(guides);
-  return guides;
+  const enriched = attachEditorial(guides);
+  validateGuides(enriched);
+  return enriched;
 }
 
 export function validateGuides(guides) {
   const unique = Object.fromEntries(['slug', 'title', 'rule', 'trap', 'examples', 'quiz'].map(k => [k, new Set()]));
+  const editorialText = Object.fromEntries(['prompt', 'sample', 'check'].map(k => [k, new Set()]));
+  const descriptions = new Set();
   const text = (s, label) => { if (typeof s !== 'string' || !s.trim() || s.includes('{{')) throw new Error(`Invalid ${label}`); };
   for (const g of guides) {
     if (!LEVELS.includes(g.level) || !new RegExp(`^${g.level}-[a-z0-9]+(?:-[a-z0-9]+)*$`).test(g.slug)) throw new Error(`Invalid slug/level: ${g.slug}`);
@@ -94,10 +121,43 @@ export function validateGuides(guides) {
       const bank = new Set(g.wordBank), answers = new Set(g.quiz.map(q => q[1]));
       if (bank.size !== g.wordBank.length || bank.size !== answers.size || [...answers].some(a => !bank.has(a))) throw new Error('Word bank must match the exercise answers');
     }
-    if (g.description !== undefined) { text(g.description, 'description'); if (g.description.length < 100 || g.description.length > 170) throw new Error('Description must be 100–170 characters'); }
+    text(g.description, 'description');
+    if (g.description.length < 100 || g.description.length > 170) throw new Error('Description must be 100–170 characters');
+    if (descriptions.has(normalise(g.description))) throw new Error('Duplicate description');
+    descriptions.add(normalise(g.description));
+    if (!g.editorial || g.editorial.slug !== g.slug || !Object.hasOwn(PRACTICE_TOPICS, g.editorial.cluster)) throw new Error('Missing/invalid editorial task');
+    for (const key of ['prompt', 'sample', 'check']) {
+      text(g.editorial[key], 'editorial ' + key);
+      const value = normalise(g.editorial[key]);
+      if (editorialText[key].has(value)) throw new Error('Duplicate editorial ' + key);
+      editorialText[key].add(value);
+    }
     if (g.instructions !== undefined) text(g.instructions, 'instructions');
     if (g.guideLabel !== undefined) text(g.guideLabel, 'guide label');
   }
+  const models = new Set(guides.flatMap(g => g.examples.map(row => normalise(row[0]))));
+  for (const g of guides) if (models.has(normalise(g.editorial.sample))) throw new Error('Editorial sample repeats a worked example');
+}
+
+// A topic-based learning path guarantees an inbound peer link for every lesson.
+// A second link favours shared grammar foundations within that topic.
+export function relatedGuides(g, guides) {
+  const topic = guides.filter(x => x.editorial.cluster === g.editorial.cluster)
+    .sort((a, b) => a.level.localeCompare(b.level) || (a.kind || 'grammar').localeCompare(b.kind || 'grammar') || a.slug.localeCompare(b.slug));
+  if (topic.length < 2) throw new Error('Practice topic needs at least two lessons');
+  const i = topic.findIndex(x => x.slug === g.slug);
+  const next = topic[(i + 1) % topic.length];
+  const terms = x => new Set((x.slug + ' ' + x.title).toLowerCase().match(/[\p{L}]+/gu).filter(w => w.length > 3 && !['german', 'practice', 'exercises', 'answers', 'vocabulary', 'communication', 'word', 'choice'].includes(w)));
+  const own = terms(g);
+  const score = x => [...terms(x)].filter(w => own.has(w)).length * 3 + (x.guide === g.guide ? 2 : 0) + (x.level === g.level ? 1 : 0);
+  const extra = topic.filter(x => x.slug !== g.slug && x.slug !== next.slug)
+    .sort((a, b) => score(b) - score(a) || a.slug.localeCompare(b.slug))[0];
+  return extra ? [next, extra] : [next];
+}
+
+export function renderPrompt(q) {
+  const match = /^(.*?)(\s*\([^()]*\))$/.exec(q);
+  return match ? `<span lang="de">${escapeHtml(match[1])}</span><span class="cue" lang="en">${escapeHtml(match[2])}</span>` : `<span lang="de">${escapeHtml(q)}</span>`;
 }
 
 export function renderPractice(guides = loadGuides()) {
@@ -105,24 +165,30 @@ export function renderPractice(guides = loadGuides()) {
   for (const g of guides) {
     const kind = PRACTICE_KINDS[g.kind || 'grammar'];
     const level = g.level.toUpperCase(), url = pageUrl(g.slug);
-    const description = g.description || `${level} German practice: ${g.title.replace(/\s*\(A[12]\)|\s*\(B[12]\)/g, '').replace(/\.$/, '')}. Four examples, four exercises and explained answers.`;
-    const peers = guides.filter(x => x.level === g.level);
-    const index = peers.findIndex(x => x.slug === g.slug);
-    const next = peers[(index + 1) % peers.length];
-    const related = [next, ...peers.filter(x => x.slug !== g.slug && x.slug !== next.slug && x.guide === g.guide), peers[(index + peers.length - 1) % peers.length]];
+    const description = g.description;
+    const related = relatedGuides(g, guides);
+    const guidance = {
+      grammar: ['Notice the form that changes and the role it plays in each sentence.', 'Change the subject or noun in one model sentence. Check the verb form, case and word order before comparing it with the rule.'],
+      'word-choice': ['Compare the meaning and sentence pattern, rather than choosing by English translation alone.', 'Write a new context for each word. Explain which meaning or object pattern makes your choice natural; some contexts allow both.'],
+      communication: ['Notice what the speaker wants to do, the level of politeness and the details the listener needs.', 'Adapt a model to a different listener or situation. Keep the request, time reference and formal or informal address consistent.'],
+      vocabulary: ['Notice each word’s meaning, article and common word partners in context.', 'Recall the words without the bank. Use nouns with their articles and verbs with their usual sentence patterns, then write a new context.']
+    }[g.kind || 'grammar'];
     const values = Object.fromEntries(Object.entries({ ...g, level, levelId: g.level, url, siteBase: SITE_BASE, description, chapter: CHAPTERS[g.level],
       guideLabel: g.guideLabel || 'Review the related grammar guide',
       ruleNavText: kind.ruleNavText,
       ruleHeading: kind.ruleHeading,
       exerciseHeading: kind.exerciseHeading,
-      modelGuidance: g.kind === 'vocabulary' ? 'Notice each word’s meaning, article and common word partners in context.' : 'Pay attention to the exact article, verb position or ending described in the rule.',
-      heroText: g.kind && g.kind !== 'grammar' ? description : 'Study four German examples with English meanings, then try four questions and check the explained answers.',
+      modelGuidance: guidance[0], revisionGuidance: guidance[1],
+      heroText: description,
+      topicLabel: PRACTICE_TOPICS[g.editorial.cluster],
+      transferPrompt: g.editorial.prompt, transferSample: g.editorial.sample, transferCheck: g.editorial.check,
+      gapGuidance: g.quiz.some(q => q[1] === '—') ? ' A dash (—) means no word is needed.' : '',
       instructions: g.instructions || 'Complete each gap using the rule above and any cue in brackets.'
     }).filter(([, v]) => typeof v === 'string').map(([k, v]) => [k, escapeHtml(v)]));
-    values.structuredData = ld(breadcrumb(g, url)) + '\n' + ld({ '@type': 'LearningResource', name: g.title, description, url, mainEntityOfPage: url, inLanguage: ['en', 'de'], educationalLevel: 'CEFR ' + level, learningResourceType: 'Practice exercises', isAccessibleForFree: true, publisher, about: g.title });
+    values.structuredData = ld(breadcrumb(g, url)) + '\n' + ld({ '@type': 'LearningResource', name: g.title, description, url, mainEntityOfPage: url, inLanguage: ['en', 'de'], educationalLevel: 'CEFR ' + level, learningResourceType: 'Practice exercises', educationalUse: 'Practice', teaches: g.editorial.prompt, isAccessibleForFree: true, publisher, about: g.title, isPartOf: { '@type': 'CollectionPage', name: 'Free German practice A1–B2', url: hubUrl } });
     values.examples = g.examples.map(([de, en], i) => `<div class="model"><span class="tag">Worked example ${i + 1}</span><span class="de" lang="de">${escapeHtml(de)}</span><span class="translation">${escapeHtml(en)}</span></div>`).join('\n');
-    values.quiz = g.quiz.map(([q, a, why], i) => `<div class="exercise"><p><strong>Question ${i + 1}.</strong> <span lang="de">${escapeHtml(q)}</span></p><details><summary>Show answer and explanation<span class="sr-only"> for question ${i + 1}</span></summary><div class="answer"><p><strong>Answer:</strong> <span lang="de">${escapeHtml(a)}</span></p><p>${escapeHtml(why)}</p></div></details></div>`).join('\n');
-    values.wordBank = g.wordBank ? `<p class="mini"><strong>Word bank:</strong> ${g.wordBank.map(escapeHtml).join(' · ')}</p>` : '';
+    values.quiz = g.quiz.map(([q, a, why], i) => `<div class="exercise"><p><strong>Question ${i + 1}.</strong> ${renderPrompt(q)}</p><details><summary>Show answer and explanation<span class="sr-only"> for question ${i + 1}</span></summary><div class="answer"><p><strong>Answer:</strong> <span lang="de">${escapeHtml(a)}</span></p><p>${escapeHtml(why)}</p></div></details></div>`).join('\n');
+    values.wordBank = g.wordBank ? `<p class="mini"><strong>Word bank:</strong> <span lang="de">${g.wordBank.map(escapeHtml).join(' · ')}</span></p>` : '';
     values.related = related.slice(0, 2).map(x => `<li><a href="${x.slug}.html">${escapeHtml(x.title)}</a></li>`).join('');
     outputs.set(`practice/${g.slug}.html`, template('page', values));
   }

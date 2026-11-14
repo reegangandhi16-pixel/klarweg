@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = p => fs.readFileSync(path.join(root,p),'utf8');
-const { loadGuides, validateGuides, renderPractice, escapeHtml, CHAPTERS, PRACTICE_BATCHES } = await import('./build-seo-practice.mjs');
+const { loadGuides, validateGuides, renderPractice, escapeHtml, CHAPTERS, PRACTICE_BATCHES, attachEditorial, relatedGuides, renderPrompt, EDITORIAL_SOURCE } = await import('./build-seo-practice.mjs');
 const guides = loadGuides();
 const sitemap = read('sitemap.xml');
 const allow = read('.github/pages-allowlist.txt').split(/\r?\n/);
@@ -123,11 +123,60 @@ test('lesson schema, metadata, chapter and related links match visible content',
     const related = html.match(/aria-label="Related exercises">([\s\S]*?)<\/nav>/)[1];
     for (const [, slug] of related.matchAll(/href="([^"/]+)\.html"/g)) {
       assert.notEqual(slug, g.slug);
-      assert.ok(sourceGuides.some(x => x.slug === slug && x.level === g.level));
+      assert.ok(sourceGuides.some(x => x.slug === slug && x.editorial.cluster === g.editorial.cluster), 'peer shares the declared topic');
       inbound.add(slug);
     }
   }
   assert.equal(inbound.size, 400, 'every lesson receives a contextual link from a peer');
+});
+
+test('every lesson has a distinct contextual writing task, matching schema and clear answer scope', () => {
+  const descriptions = new Set();
+  for (const g of guides) {
+    const html = read(`practice/${g.slug}.html`);
+    assert.ok(g.description.length >= 100 && g.description.length <= 170);
+    assert.ok(!descriptions.has(g.description)); descriptions.add(g.description);
+    assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`), g.slug);
+    assert.match(html, /id="transfer" aria-labelledby="transfer-title"/);
+    for (const key of ['prompt', 'sample', 'check']) assert.ok(html.includes(escapeHtml(g.editorial[key])), g.slug + ': ' + key);
+    assert.ok(html.includes(`<p lang="de">${escapeHtml(g.editorial.sample)}</p>`));
+    assert.match(html, /Other natural answers are possible/);
+    assert.match(html, /resources.html#practice-editorial/);
+    assert.equal(html.includes('A dash (—) means no word is needed.'), g.quiz.some(q => q[1] === '—'));
+    const schema = jsonld(html).find(j => j['@type'] === 'LearningResource');
+    assert.equal(schema.teaches, g.editorial.prompt);
+    assert.equal(schema.isPartOf.url, 'https://klarweg.in/practice/index.html');
+    const related = relatedGuides(g, guides);
+    assert.equal(new Set(related.map(x => x.slug)).size, related.length);
+    assert.ok(related.length >= 1 && related.length <= 2);
+  }
+  assert.match(resource, /id="practice-editorial"/);
+  assert.match(resource, /native German linguistic and pedagogic review has not yet been completed/);
+  assert.ok(!allow.includes(EDITORIAL_SOURCE));
+});
+
+test('editorial coverage rejects missing, repeated, unknown and duplicated task content', () => {
+  const entries = JSON.parse(read(EDITORIAL_SOURCE));
+  assert.throws(() => attachEditorial(guides, entries.slice(1)), /inventory/);
+  const repeat = structuredClone(entries); repeat[1] = repeat[0];
+  assert.throws(() => attachEditorial(guides, repeat), /duplicate/);
+  const unknown = structuredClone(entries); unknown[0].slug = 'a1-unknown';
+  assert.throws(() => attachEditorial(guides, unknown), /Unknown/);
+  const check = (change, pattern) => { const copy = structuredClone(guides); change(copy); assert.throws(() => validateGuides(copy), pattern); };
+  check(g => delete g[0].editorial, /editorial/);
+  check(g => g[0].editorial.cluster = '__proto__', /editorial/);
+  check(g => g[1].editorial.prompt = g[0].editorial.prompt, /Duplicate editorial/);
+  check(g => g[0].editorial.sample = g[0].examples[0][0], /repeats a worked example/);
+  check(g => g[1].description = g[0].description, /Duplicate description/);
+});
+
+test('English question cues have their own language scope and generated additions escape markup', () => {
+  assert.equal(renderPrompt('Ich ___ Deutsch. (lernen)'), '<span lang="de">Ich ___ Deutsch.</span><span class="cue" lang="en"> (lernen)</span>');
+  const copy = structuredClone(guides);
+  copy[0].editorial.sample += ' <img src=x onerror=alert(1)>';
+  const html = renderPractice(copy).get(`practice/${copy[0].slug}.html`);
+  assert.ok(html.includes('&lt;img src=x onerror=alert(1)&gt;'));
+  assert.doesNotMatch(html, /<img src=x/);
 });
 
 test('hub schema enumerates exactly the 400 visible lessons, and the stylesheet is explicitly published', () => {

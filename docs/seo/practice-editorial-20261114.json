@@ -1,0 +1,2802 @@
+[
+  {
+    "slug": "a1-der-die-das-exercises",
+    "cluster": "cases",
+    "prompt": "Label a masculine table and a neuter bed with their definite articles.",
+    "sample": "Das ist der Tisch. Das ist das Bett.",
+    "check": "Der marks masculine Tisch; das marks neuter Bett in these nominative phrases."
+  },
+  {
+    "slug": "a1-ein-eine-exercises",
+    "cluster": "cases",
+    "prompt": "Introduce a pen and a bag using indefinite articles.",
+    "sample": "Das ist ein Stift, und das ist eine Tasche.",
+    "check": "Masculine Stift takes ein; feminine Tasche takes eine in these nominative phrases."
+  },
+  {
+    "slug": "a1-kein-keine-exercises",
+    "cluster": "cases",
+    "prompt": "Say you have no car and no bicycle.",
+    "sample": "Ich habe kein Auto und kein Fahrrad.",
+    "check": "Both nouns are neuter; accusative keeps kein."
+  },
+  {
+    "slug": "a1-sein-present-tense-exercises",
+    "cluster": "verbs",
+    "prompt": "Tell a new classmate that you are tired but your friends are fit.",
+    "sample": "Ich bin müde, aber meine Freunde sind fit.",
+    "check": "Match bin to ich and sind to the plural subject."
+  },
+  {
+    "slug": "a1-haben-present-tense-exercises",
+    "cluster": "verbs",
+    "prompt": "Say you have a question and your teacher has time.",
+    "sample": "Ich habe eine Frage, und meine Lehrerin hat Zeit.",
+    "check": "Haben changes to hat with the singular subject Lehrerin."
+  },
+  {
+    "slug": "a1-regular-verbs-exercises",
+    "cluster": "verbs",
+    "prompt": "Describe what you and a friend do in a language lesson.",
+    "sample": "Ich lerne Deutsch, und mein Freund spielt Klavier.",
+    "check": "The regular endings are -e for ich and -t for mein Freund."
+  },
+  {
+    "slug": "a1-personal-pronouns-exercises",
+    "cluster": "people",
+    "prompt": "Replace Anna und Tom with a pronoun when saying they live in Bonn.",
+    "sample": "Sie wohnen in Bonn.",
+    "check": "Plural sie takes wohnen; sentence-initial capitalisation does not make it formal Sie."
+  },
+  {
+    "slug": "a1-possessive-mein-dein-exercises",
+    "cluster": "people",
+    "prompt": "Introduce your brother and your sister using possessives.",
+    "sample": "Das ist mein Bruder, und das ist meine Schwester.",
+    "check": "Mein agrees with masculine Bruder; meine agrees with feminine Schwester."
+  },
+  {
+    "slug": "a1-w-questions-exercises",
+    "cluster": "questions",
+    "prompt": "Ask someone where they live and what their name is.",
+    "sample": "Wo wohnst du, und wie heißt du?",
+    "check": "The question word comes before the finite verb in each question."
+  },
+  {
+    "slug": "a1-yes-no-questions-exercises",
+    "cluster": "questions",
+    "prompt": "Ask a friend whether they are coming to the cinema today.",
+    "sample": "Kommst du heute mit ins Kino?",
+    "check": "The finite verb starts this yes/no question."
+  },
+  {
+    "slug": "a1-nicht-position-exercises",
+    "cluster": "negation",
+    "prompt": "Say that you are staying home today rather than going to the cinema.",
+    "sample": "Ich gehe heute nicht ins Kino.",
+    "check": "Nicht negates the intended destination/activity; the sentence does not deny today's date."
+  },
+  {
+    "slug": "a1-numbers-and-prices-exercises",
+    "cluster": "shopping",
+    "prompt": "Write out a price of twenty-four euros and fifty cents.",
+    "sample": "Das kostet vierundzwanzig Euro fünfzig.",
+    "check": "The units precede und and the tens in vierundzwanzig."
+  },
+  {
+    "slug": "a1-telling-time-exercises",
+    "cluster": "time",
+    "prompt": "State a meeting time of quarter to nine in an unambiguous full sentence.",
+    "sample": "Wir treffen uns um Viertel vor neun.",
+    "check": "Viertel vor neun is 8:45; um introduces the meeting time."
+  },
+  {
+    "slug": "a1-akkusativ-articles-exercises",
+    "cluster": "cases",
+    "prompt": "Describe seeing a man, a woman and a child in a park.",
+    "sample": "Ich sehe den Mann, die Frau und das Kind im Park.",
+    "check": "Only the masculine singular article changes from der to den in accusative."
+  },
+  {
+    "slug": "a2-dativ-articles-exercises",
+    "cluster": "cases",
+    "prompt": "Say that you are travelling with the bus and with your sister.",
+    "sample": "Ich fahre mit dem Bus und mit meiner Schwester.",
+    "check": "Mit takes dative, including the possessive meiner."
+  },
+  {
+    "slug": "a2-dativ-pronouns-exercises",
+    "cluster": "cases",
+    "prompt": "Tell a friend that you help them, then say they help you.",
+    "sample": "Ich helfe dir, und du hilfst mir.",
+    "check": "Helfen takes dative: dir and mir, rather than dich and mich."
+  },
+  {
+    "slug": "a2-akkusativ-pronouns-exercises",
+    "cluster": "cases",
+    "prompt": "Say that you can see your friend and that they can see you.",
+    "sample": "Ich sehe dich, und du siehst mich.",
+    "check": "Sehen takes an accusative object in both clauses."
+  },
+  {
+    "slug": "a2-wechselpraepositionen-wo-exercises",
+    "cluster": "places",
+    "prompt": "Describe a picture hanging on the wall.",
+    "sample": "Das große Bild hängt an der Wand neben dem Fenster.",
+    "check": "This static location answers wo, so an takes dative."
+  },
+  {
+    "slug": "a2-wechselpraepositionen-wohin-exercises",
+    "cluster": "places",
+    "prompt": "Say that you are hanging a picture onto the wall.",
+    "sample": "Ich hänge das Bild an die Wand.",
+    "check": "The destination answers wohin, so an takes accusative."
+  },
+  {
+    "slug": "a2-perfekt-haben-exercises",
+    "cluster": "past",
+    "prompt": "Say that you cooked rice yesterday, using Perfekt.",
+    "sample": "Gestern habe ich Reis gekocht.",
+    "check": "Habe is finite; the participle gekocht ends the clause."
+  },
+  {
+    "slug": "a2-perfekt-sein-exercises",
+    "cluster": "past",
+    "prompt": "Report a journey to Hamburg in Perfekt.",
+    "sample": "Wir sind am Freitag nach Hamburg gefahren.",
+    "check": "This change-of-location use of fahren takes sein."
+  },
+  {
+    "slug": "a2-irregular-partizip-ii-exercises",
+    "cluster": "past",
+    "prompt": "Say that you found your missing glasses, using Perfekt.",
+    "sample": "Ich habe meine Brille wiedergefunden.",
+    "check": "The irregular participle of finden is gefunden; wieder remains attached here."
+  },
+  {
+    "slug": "a2-separable-verbs-perfekt-exercises",
+    "cluster": "past",
+    "prompt": "Report when you got up this morning, using aufstehen in Perfekt.",
+    "sample": "Heute bin ich um sechs Uhr aufgestanden.",
+    "check": "The participle inserts ge between auf and standen; the auxiliary is sein."
+  },
+  {
+    "slug": "a2-modal-verbs-praeteritum-exercises",
+    "cluster": "past",
+    "prompt": "Describe having to work last Saturday with a past modal form.",
+    "sample": "Am Samstag musste ich arbeiten.",
+    "check": "Musste is the Präteritum form; arbeiten stays infinitive."
+  },
+  {
+    "slug": "a2-weil-sentences-exercises",
+    "cluster": "clauses",
+    "prompt": "Give being ill as the reason for staying home, using weil.",
+    "sample": "Ich bleibe zu Hause, weil ich krank bin.",
+    "check": "Bin goes to the end of the weil clause."
+  },
+  {
+    "slug": "a2-dass-sentences-exercises",
+    "cluster": "clauses",
+    "prompt": "Report your belief that the shop is open, using dass.",
+    "sample": "Ich glaube, dass der Laden geöffnet ist.",
+    "check": "The finite verb ist ends the dass clause."
+  },
+  {
+    "slug": "a2-comparative-superlative-exercises",
+    "cluster": "comparison",
+    "prompt": "Compare two routes and identify the shortest, using kurz.",
+    "sample": "Der Waldweg ist kürzer; der Uferweg ist am kürzesten.",
+    "check": "Kurz adds an umlaut in kürzer and kürzesten."
+  },
+  {
+    "slug": "a2-reflexive-daily-routine-exercises",
+    "cluster": "verbs",
+    "prompt": "Describe washing yourself and then getting dressed.",
+    "sample": "Ich wasche mich und ziehe mich an.",
+    "check": "Both reflexive objects are mich; the separable particle an ends the second part."
+  },
+  {
+    "slug": "b1-relative-clauses-nominative-exercises",
+    "cluster": "clauses",
+    "prompt": "Describe a neighbour who often helps you, using a relative subject.",
+    "sample": "Das ist der Nachbar, der mir oft hilft.",
+    "check": "Der is nominative because it is the subject of hilft."
+  },
+  {
+    "slug": "b1-relative-clauses-accusative-exercises",
+    "cluster": "clauses",
+    "prompt": "Describe a book that you are reading, using an accusative relative pronoun.",
+    "sample": "Das ist der Roman, den ich gerade lese.",
+    "check": "Den refers to masculine Roman and is the object of lese."
+  },
+  {
+    "slug": "b1-passive-praesens-exercises",
+    "cluster": "passive",
+    "prompt": "Say that the windows are being cleaned today without naming the cleaner.",
+    "sample": "Die Fenster werden heute gereinigt.",
+    "check": "Werden plus participle describes an action; the plural subject takes werden."
+  },
+  {
+    "slug": "b1-passive-praeteritum-exercises",
+    "cluster": "passive",
+    "prompt": "Report that a bridge was repaired last year, using past passive.",
+    "sample": "Die Brücke wurde letztes Jahr repariert.",
+    "check": "Wurde plus repariert expresses the past action, not a present state."
+  },
+  {
+    "slug": "b1-polite-konjunktiv-ii-exercises",
+    "cluster": "requests",
+    "prompt": "Ask a stranger politely to open the window.",
+    "sample": "Könnten Sie bitte das Fenster öffnen?",
+    "check": "Könnten softens the request; öffnen remains infinitive."
+  },
+  {
+    "slug": "b1-obwohl-trotzdem-exercises",
+    "cluster": "clauses",
+    "prompt": "Express that you go for a walk despite the rain, once with obwohl and once with trotzdem.",
+    "sample": "Obwohl es regnet, gehe ich spazieren. Es regnet; trotzdem gehe ich spazieren.",
+    "check": "Obwohl sends regnet to clause end; trotzdem occupies position one before gehe."
+  },
+  {
+    "slug": "b1-um-zu-damit-exercises",
+    "cluster": "clauses",
+    "prompt": "Explain studying German so that you can speak with your neighbours.",
+    "sample": "Ich lerne Deutsch, um mit meinen Nachbarn zu sprechen.",
+    "check": "The learner is also the speaker, so an um-zu infinitive is possible."
+  },
+  {
+    "slug": "b1-indirect-questions-exercises",
+    "cluster": "questions",
+    "prompt": "Ask politely whether a seat is free using an indirect question.",
+    "sample": "Können Sie mir sagen, ob dieser Platz frei ist?",
+    "check": "Ob introduces the embedded yes/no question; ist comes last."
+  },
+  {
+    "slug": "b1-genitive-possession-exercises",
+    "cluster": "cases",
+    "prompt": "Say that a child's bicycle is new, using a genitive noun phrase.",
+    "sample": "Das Fahrrad des Kindes ist neu.",
+    "check": "Neuter singular takes des and the noun ending -es in des Kindes."
+  },
+  {
+    "slug": "b1-n-declension-exercises",
+    "cluster": "cases",
+    "prompt": "Say that you are speaking with a student, using der Student.",
+    "sample": "Ich spreche mit einem Studenten aus Bremen.",
+    "check": "The weak noun Student adds -en outside nominative singular."
+  },
+  {
+    "slug": "b1-wo-compounds-exercises",
+    "cluster": "questions",
+    "prompt": "Ask what someone is waiting for, using a wo-compound.",
+    "sample": "Worauf wartest du vor dem Eingang?",
+    "check": "Warten auf supplies the preposition; the r links wo and auf."
+  },
+  {
+    "slug": "b1-praeteritum-storytelling-exercises",
+    "cluster": "past",
+    "prompt": "Write a short narrative statement with gehen and sehen in Präteritum.",
+    "sample": "Sie ging zum Bahnhof und sah dort ihren Bruder.",
+    "check": "Ging and sah are finite irregular past forms."
+  },
+  {
+    "slug": "b2-konjunktiv-i-reported-speech-exercises",
+    "cluster": "evidence",
+    "prompt": "Report a spokesperson's statement about available time using Konjunktiv I.",
+    "sample": "Die Sprecherin sagt, es sei noch genügend Zeit vorhanden.",
+    "check": "Sei attributes the statement; it does not establish that the claim is true."
+  },
+  {
+    "slug": "b2-nominalisation-exercises",
+    "cluster": "text",
+    "prompt": "Replace wenn der Kurs beginnt with a nominal phrase using Beginn.",
+    "sample": "Zu Beginn des Kurses erhalten alle einen Plan.",
+    "check": "The clause becomes a noun phrase; des Kurses supplies genitive possession."
+  },
+  {
+    "slug": "b2-waehrend-wohingegen-exercises",
+    "cluster": "comparison",
+    "prompt": "Describe two simultaneous activities with während, then contrast two preferences with wohingegen.",
+    "sample": "Während Lea liest, kocht Amir. Lea mag Tee, wohingegen Amir Kaffee bevorzugt.",
+    "check": "Während marks overlapping activities here; wohingegen marks a contrast. Both clauses are verb-final."
+  },
+  {
+    "slug": "b2-participial-adjectives-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe water that is flowing and a window that has been opened.",
+    "sample": "Das fließende Wasser ist kalt, und das geöffnete Fenster lässt Luft herein.",
+    "check": "Fließend expresses an ongoing action; geöffnet describes a resulting condition here."
+  },
+  {
+    "slug": "b2-sich-lassen-passive-exercises",
+    "cluster": "passive",
+    "prompt": "Say that a locked drawer can be opened easily, using sich lassen.",
+    "sample": "Die Schublade lässt sich mit diesem Schlüssel leicht öffnen.",
+    "check": "Lässt sich öffnen expresses possibility; it does not say it has already been opened."
+  },
+  {
+    "slug": "b2-je-desto-exercises",
+    "cluster": "comparison",
+    "prompt": "Express that more practice makes speaking easier, using je and desto.",
+    "sample": "Je öfter ich übe, desto leichter fällt mir das Sprechen.",
+    "check": "The je clause is verb-final; the desto phrase is followed by the finite verb fällt."
+  },
+  {
+    "slug": "b2-relative-prepositions-exercises",
+    "cluster": "clauses",
+    "prompt": "Describe the colleague with whom you work, using a relative clause.",
+    "sample": "Das ist die Kollegin, mit der ich das Projekt betreue.",
+    "check": "Mit requires dative der for feminine Kollegin."
+  },
+  {
+    "slug": "b2-adjective-endings-no-article-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe buying fresh bread and cold milk without articles.",
+    "sample": "Ich kaufe frisches Brot und kalte Milch.",
+    "check": "Without an article, the adjectives carry the relevant case and gender endings."
+  },
+  {
+    "slug": "b2-noun-verb-collocations-exercises",
+    "cluster": "work",
+    "prompt": "Say that your team made a decision, using eine Entscheidung treffen.",
+    "sample": "Unser Team hat nach der Beratung eine Entscheidung getroffen.",
+    "check": "The collocation is eine Entscheidung treffen; the participle is getroffen."
+  },
+  {
+    "slug": "b2-argumentation-connectors-exercises",
+    "cluster": "discussion",
+    "prompt": "Add a cost argument to a discussion, then state a consequence.",
+    "sample": "Außerdem ist der Weg kürzer. Deshalb sparen wir Zeit.",
+    "check": "Both adverbs occupy position one before the finite verbs ist and sparen."
+  },
+  {
+    "slug": "a1-modal-verbs-present-exercises",
+    "cluster": "verbs",
+    "prompt": "Say that your friend is allowed to leave early but must finish an exercise first.",
+    "sample": "Meine Freundin darf früher gehen, muss aber zuerst die Übung beenden.",
+    "check": "Each modal is conjugated; gehen and beenden remain infinitives."
+  },
+  {
+    "slug": "a1-separable-verbs-present-exercises",
+    "cluster": "verbs",
+    "prompt": "Tell someone when you are calling them back, using zurückrufen.",
+    "sample": "Ich rufe dich heute Abend zurück.",
+    "check": "Zurück separates in this main clause and comes at the end."
+  },
+  {
+    "slug": "a1-stem-vowel-change-verbs-exercises",
+    "cluster": "verbs",
+    "prompt": "Describe what a friend reads and eats in the morning.",
+    "sample": "Er liest die Zeitung und isst ein Brötchen.",
+    "check": "Lesen changes e to ie; essen changes e to i in third-person singular."
+  },
+  {
+    "slug": "a1-noun-plurals-exercises",
+    "cluster": "people",
+    "prompt": "Say that there are two books and three chairs in a room.",
+    "sample": "Im Zimmer stehen zwei Bücher und drei Stühle.",
+    "check": "Learn the plural forms with the nouns; both of these plurals add an umlaut."
+  },
+  {
+    "slug": "a1-imperative-forms-exercises",
+    "cluster": "requests",
+    "prompt": "Ask one friend, several friends and a formal visitor to come in.",
+    "sample": "Komm bitte herein! Kommt bitte herein! Kommen Sie bitte herein!",
+    "check": "The imperative changes with du, ihr and formal Sie."
+  },
+  {
+    "slug": "a1-es-gibt-exercises",
+    "cluster": "places",
+    "prompt": "Say that there is a park and a swimming pool in your town.",
+    "sample": "In meiner Stadt gibt es einen Park und ein Schwimmbad.",
+    "check": "Es gibt takes accusative: einen Park and ein Schwimmbad."
+  },
+  {
+    "slug": "a1-dates-and-ordinals-exercises",
+    "cluster": "time",
+    "prompt": "Give the date of a celebration on the third of May.",
+    "sample": "Die Feier ist am dritten Mai.",
+    "check": "After am, the ordinal has the dative ending -en."
+  },
+  {
+    "slug": "a1-am-im-um-time-exercises",
+    "cluster": "time",
+    "prompt": "State a weekday, a month and a clock time in one plan.",
+    "sample": "Am Dienstag treffen wir uns im Juni um neun Uhr.",
+    "check": "Use am with the weekday, im with the month and um with the clock time."
+  },
+  {
+    "slug": "a1-verb-second-time-phrases-exercises",
+    "cluster": "verbs",
+    "prompt": "Begin a statement about studying with Morgen rather than Ich.",
+    "sample": "Morgen lerne ich in der Bibliothek.",
+    "check": "The whole time phrase occupies position one; lerne remains second."
+  },
+  {
+    "slug": "a1-doch-negative-questions-exercises",
+    "cluster": "negation",
+    "prompt": "Contradict a friend's assumption that you do not have time.",
+    "sample": "Hast du keine Zeit? Doch, ich habe Zeit.",
+    "check": "Doch rejects the negative assumption; nein would confirm it here."
+  },
+  {
+    "slug": "a2-dative-prepositions-exercises",
+    "cluster": "places",
+    "prompt": "Describe going from the station to a friend's home, using von and zu.",
+    "sample": "Ich gehe vom Bahnhof zu meiner Freundin.",
+    "check": "Von and zu both require dative; vom contracts von dem."
+  },
+  {
+    "slug": "a2-accusative-prepositions-exercises",
+    "cluster": "places",
+    "prompt": "Say you are walking through a park without your brother.",
+    "sample": "Ich gehe ohne meinen Bruder durch den Park.",
+    "check": "Ohne and durch take accusative in these phrases."
+  },
+  {
+    "slug": "a2-preposition-article-contractions-exercises",
+    "cluster": "places",
+    "prompt": "Describe going into a café and being inside it afterwards.",
+    "sample": "Ich gehe ins Café. Jetzt sitze ich im Café.",
+    "check": "Ins is in das for the destination; im is in dem for the location."
+  },
+  {
+    "slug": "a2-nach-zu-in-destinations-exercises",
+    "cluster": "places",
+    "prompt": "Give three destinations: Berlin, a friend's home and the cinema.",
+    "sample": "Ich fahre nach Berlin, gehe zu meiner Freundin und später ins Kino.",
+    "check": "Destination type determines nach, zu or in; movement alone does not choose the preposition."
+  },
+  {
+    "slug": "a2-seit-vor-time-exercises",
+    "cluster": "time",
+    "prompt": "Distinguish moving here two years ago from living here for two years.",
+    "sample": "Ich bin vor zwei Jahren hergezogen und wohne seit zwei Jahren hier.",
+    "check": "Vor locates a past event; seit links the start to a continuing situation."
+  },
+  {
+    "slug": "a2-adjective-endings-definite-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe a red coat and blue shoes using definite articles.",
+    "sample": "Der rote Mantel passt zu den blauen Schuhen.",
+    "check": "The adjectives use weak endings after der and den; dative plural also affects Schuhen."
+  },
+  {
+    "slug": "a2-adjective-endings-indefinite-exercises",
+    "cluster": "descriptions",
+    "prompt": "Say you need a warm jacket and a new bicycle.",
+    "sample": "Ich brauche eine warme Jacke und ein neues Fahrrad.",
+    "check": "The adjectives carry gender endings after eine and ein in these accusative phrases."
+  },
+  {
+    "slug": "a2-als-wie-comparisons-exercises",
+    "cluster": "comparison",
+    "prompt": "Compare your height with two friends using both als and wie.",
+    "sample": "Ich bin größer als Lea, aber genauso groß wie Amir.",
+    "check": "A comparative takes als; an equality comparison takes wie."
+  },
+  {
+    "slug": "a2-denn-deshalb-reasons-exercises",
+    "cluster": "clauses",
+    "prompt": "Explain a delayed arrival using denn, then rewrite the reason with deshalb.",
+    "sample": "Ich komme später, denn mein Bus fällt aus. Mein Bus fällt aus; deshalb komme ich später.",
+    "check": "Denn joins main clauses; deshalb takes a clause position before komme."
+  },
+  {
+    "slug": "a2-als-wenn-past-events-exercises",
+    "cluster": "time",
+    "prompt": "Contrast one childhood event with a repeated childhood activity.",
+    "sample": "Als ich zehn war, zog ich um. Wenn es regnete, spielte ich drinnen.",
+    "check": "Als introduces the single past period/event; wenn introduces repeated occasions."
+  },
+  {
+    "slug": "a2-possessives-sein-ihr-exercises",
+    "cluster": "people",
+    "prompt": "Say that Paul is looking for his bag and Lea for her coat.",
+    "sample": "Paul sucht seine Tasche, und Lea sucht ihren Mantel.",
+    "check": "Choose the possessive stem from the owner, then its ending from the possessed noun."
+  },
+  {
+    "slug": "a2-man-and-es-exercises",
+    "cluster": "people",
+    "prompt": "Express that people speak German here and that it is cold outside.",
+    "sample": "Hier spricht man Deutsch. Draußen ist es kalt.",
+    "check": "Man is a general human subject; weather/temperature uses es."
+  },
+  {
+    "slug": "a2-welcher-question-words-exercises",
+    "cluster": "questions",
+    "prompt": "Ask which bus, ticket and street someone means.",
+    "sample": "Welchen Bus, welches Ticket und welche Straße meinst du?",
+    "check": "Meinen takes accusative; welcher changes with the noun's gender and case."
+  },
+  {
+    "slug": "a2-etwas-nichts-jemand-niemand-exercises",
+    "cluster": "people",
+    "prompt": "Say that someone is waiting but nobody knows anything.",
+    "sample": "Jemand wartet, aber niemand weiß etwas.",
+    "check": "Jemand and niemand refer to people; etwas refers to a thing or information."
+  },
+  {
+    "slug": "b1-futur-werden-infinitive-exercises",
+    "cluster": "verbs",
+    "prompt": "Make a prediction that your friend will arrive late.",
+    "sample": "Sie wird heute wahrscheinlich später ankommen.",
+    "check": "Wird is the finite auxiliary; ankommen stays infinitive at the end."
+  },
+  {
+    "slug": "b1-plusquamperfekt-forms-exercises",
+    "cluster": "past",
+    "prompt": "Say that you had already eaten before a visitor arrived.",
+    "sample": "Ich hatte schon gegessen, als der Besuch kam.",
+    "check": "Hatte gegessen places eating before the other past event."
+  },
+  {
+    "slug": "b1-nachdem-past-sequence-exercises",
+    "cluster": "past",
+    "prompt": "Connect finishing work and going home using nachdem.",
+    "sample": "Nachdem ich die Arbeit beendet hatte, ging ich nach Hause.",
+    "check": "The earlier event uses Plusquamperfekt; the later narrative event uses Präteritum."
+  },
+  {
+    "slug": "b1-bevor-waehrend-time-exercises",
+    "cluster": "time",
+    "prompt": "Describe washing your hands before cooking and listening to music while cooking.",
+    "sample": "Bevor ich koche, wasche ich mir die Hände. Während ich koche, höre ich Musik.",
+    "check": "Bevor orders events; während expresses overlap. Both subordinate clauses are verb-final."
+  },
+  {
+    "slug": "b1-bis-seitdem-time-exercises",
+    "cluster": "time",
+    "prompt": "Say you have been practising since the course began and will continue until it ends.",
+    "sample": "Seitdem der Kurs begonnen hat, übe ich täglich. Ich mache weiter, bis er endet.",
+    "check": "Seitdem marks a starting point; bis marks an endpoint."
+  },
+  {
+    "slug": "b1-wenn-falls-conditions-exercises",
+    "cluster": "clauses",
+    "prompt": "Offer an indoor plan in case it rains.",
+    "sample": "Falls es regnet, treffen wir uns im Café.",
+    "check": "Falls introduces a condition; regnet closes that clause."
+  },
+  {
+    "slug": "b1-unreal-conditions-konjunktiv-ii-exercises",
+    "cluster": "clauses",
+    "prompt": "Imagine having more time and travelling more often.",
+    "sample": "Wenn ich mehr Zeit hätte, würde ich öfter verreisen.",
+    "check": "Hätte and würde present an unreal or hypothetical situation rather than a confirmed plan."
+  },
+  {
+    "slug": "b1-ohne-zu-statt-zu-exercises",
+    "cluster": "clauses",
+    "prompt": "Describe leaving without saying goodbye and walking instead of taking the bus.",
+    "sample": "Er verließ das Haus, ohne sich zu verabschieden, und ging zu Fuß, statt den Bus zu nehmen.",
+    "check": "The shared subject permits the two zu-infinitive constructions."
+  },
+  {
+    "slug": "b1-zu-with-separable-verbs-exercises",
+    "cluster": "verbs",
+    "prompt": "Say that you plan to tidy up, using aufräumen with zu.",
+    "sample": "Ich habe vor, heute mein Zimmer aufzuräumen.",
+    "check": "Zu fits between the prefix auf and räumen."
+  },
+  {
+    "slug": "b1-accusative-dative-object-order-exercises",
+    "cluster": "cases",
+    "prompt": "Replace das Buch and dem Kind with pronouns in a sentence about giving.",
+    "sample": "Ich gebe es ihm nach dem Unterricht.",
+    "check": "With two unstressed pronouns, the accusative es normally precedes dative ihm."
+  },
+  {
+    "slug": "b1-fixed-verb-prepositions-exercises",
+    "cluster": "verbs",
+    "prompt": "Say you are looking forward to the weekend, using sich freuen auf.",
+    "sample": "Ich freue mich auf das freie Wochenende.",
+    "check": "The fixed preposition auf takes accusative for anticipated events."
+  },
+  {
+    "slug": "b1-da-compounds-exercises",
+    "cluster": "discussion",
+    "prompt": "Say that you are thinking about a proposal, then refer back with a da-compound.",
+    "sample": "Wir sprechen über den Vorschlag. Ich denke noch darüber nach.",
+    "check": "Darüber refers to a thing or topic, rather than a person."
+  },
+  {
+    "slug": "b1-relative-clauses-dative-exercises",
+    "cluster": "clauses",
+    "prompt": "Describe the teacher whom you thanked, using a dative relative pronoun.",
+    "sample": "Das ist die Lehrerin, der ich für ihre Hilfe gedankt habe.",
+    "check": "Danken takes dative within the relative clause, hence der."
+  },
+  {
+    "slug": "b1-adjectives-as-nouns-exercises",
+    "cluster": "people",
+    "prompt": "Refer to an unemployed person using an adjective as a noun.",
+    "sample": "Ein Arbeitsloser erzählt von seiner Stellensuche.",
+    "check": "Arbeitsloser is capitalised as a noun and retains an adjective ending."
+  },
+  {
+    "slug": "b2-passive-perfect-tense-exercises",
+    "cluster": "passive",
+    "prompt": "Report that a letter has been sent, using Perfekt passive.",
+    "sample": "Der Brief ist gestern abgeschickt worden.",
+    "check": "Use worden in the passive perfect, not geworden."
+  },
+  {
+    "slug": "b2-modal-passive-exercises",
+    "cluster": "passive",
+    "prompt": "Say that a form must be signed before departure.",
+    "sample": "Das Formular muss vor der Abfahrt unterschrieben werden.",
+    "check": "The modal is finite; participle plus werden form the passive infinitive."
+  },
+  {
+    "slug": "b2-state-passive-sein-exercises",
+    "cluster": "passive",
+    "prompt": "Describe a door as already closed, without describing the closing action.",
+    "sample": "Die Tür ist seit acht Uhr geschlossen.",
+    "check": "Sein plus participle describes a resulting state here."
+  },
+  {
+    "slug": "b2-sein-zu-infinitive-exercises",
+    "cluster": "passive",
+    "prompt": "Say that a deadline must be met, using sein plus zu.",
+    "sample": "Die Frist ist unbedingt einzuhalten.",
+    "check": "Ist einzuhalten expresses necessity in this context; it is not an action already completed."
+  },
+  {
+    "slug": "b2-auch-wenn-selbst-wenn-exercises",
+    "cluster": "clauses",
+    "prompt": "Say you will come even if it rains, using selbst wenn.",
+    "sample": "Selbst wenn es regnet, komme ich zum Treffen.",
+    "check": "Selbst wenn introduces a hypothetical concession and puts regnet at clause end."
+  },
+  {
+    "slug": "b2-indem-dadurch-dass-method-exercises",
+    "cluster": "clauses",
+    "prompt": "Explain how you save paper by printing on both sides.",
+    "sample": "Ich spare Papier, indem ich beide Seiten bedrucke.",
+    "check": "Indem introduces the method by which the main action is achieved."
+  },
+  {
+    "slug": "b2-sodass-consequences-exercises",
+    "cluster": "clauses",
+    "prompt": "Describe speaking clearly with the result that everyone understands.",
+    "sample": "Sie spricht deutlich, sodass alle sie verstehen.",
+    "check": "Sodass introduces the consequence; verstehen ends the clause."
+  },
+  {
+    "slug": "b2-relative-clauses-genitive-exercises",
+    "cluster": "clauses",
+    "prompt": "Describe a colleague whose bicycle was stolen.",
+    "sample": "Das ist der Kollege, dessen Fahrrad gestohlen wurde.",
+    "check": "Dessen marks possession with a masculine singular antecedent."
+  },
+  {
+    "slug": "b2-relative-clauses-was-wo-exercises",
+    "cluster": "clauses",
+    "prompt": "Refer to everything someone said, using a relative clause with was.",
+    "sample": "Alles, was du gesagt hast, klingt plausibel.",
+    "check": "Was refers back to the indefinite antecedent alles."
+  },
+  {
+    "slug": "b2-entweder-oder-weder-noch-exercises",
+    "cluster": "clauses",
+    "prompt": "Say that neither the printers nor the scanners are working.",
+    "sample": "Weder die Drucker noch die Scanner funktionieren.",
+    "check": "Weder … noch excludes both groups; the plural subjects take funktionieren."
+  },
+  {
+    "slug": "b2-additive-paired-connectors-exercises",
+    "cluster": "clauses",
+    "prompt": "Say that you speak both Hindi and German.",
+    "sample": "Ich spreche sowohl Hindi als auch Deutsch.",
+    "check": "Sowohl … als auch adds both items without excluding either."
+  },
+  {
+    "slug": "b2-causative-lassen-perfect-exercises",
+    "cluster": "verbs",
+    "prompt": "Say that you had your bicycle repaired, using Perfekt lassen.",
+    "sample": "Ich habe mein altes Fahrrad in der Werkstatt reparieren lassen.",
+    "check": "In this causative perfect, lassen remains an infinitive after reparieren."
+  },
+  {
+    "slug": "a1-lernen-studieren-word-choice-exercises",
+    "cluster": "learning",
+    "prompt": "Contrast learning German with studying law at university.",
+    "sample": "Ich lerne Deutsch, und meine Schwester studiert Jura.",
+    "check": "Lernen describes language learning; studieren describes the degree subject."
+  },
+  {
+    "slug": "a1-wohnen-leben-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Describe living in a rented flat and living healthily.",
+    "sample": "Ich wohne zur Miete und versuche, gesund zu leben.",
+    "check": "Wohnen concerns the home; leben can describe a way of life."
+  },
+  {
+    "slug": "a1-gehen-fahren-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Describe walking to the station and continuing by train.",
+    "sample": "Ich gehe zu Fuß zum Bahnhof und fahre dann mit dem Zug weiter.",
+    "check": "The explicit transport cues support gehen and fahren respectively."
+  },
+  {
+    "slug": "a1-kommen-gehen-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Invite a friend towards you, then say you are leaving for home.",
+    "sample": "Komm bitte zu mir! Danach gehe ich nach Hause.",
+    "check": "The movement perspective changes from towards the speaker to leaving."
+  },
+  {
+    "slug": "a1-kaufen-verkaufen-word-choice-exercises",
+    "cluster": "shopping",
+    "prompt": "Describe one chair transaction from the buyer's and seller's viewpoints.",
+    "sample": "Ich kaufe den Stuhl, und die Händlerin verkauft ihn mir.",
+    "check": "Both clauses concern the same object but different transaction roles."
+  },
+  {
+    "slug": "a1-brauchen-benutzen-word-choice-exercises",
+    "cluster": "tools",
+    "prompt": "Distinguish needing a computer from actually using one.",
+    "sample": "Für den Bericht brauche ich einen Computer; heute benutze ich den im Büro.",
+    "check": "A need and an act of use need not describe the same moment."
+  },
+  {
+    "slug": "a1-fragen-antworten-word-choice-exercises",
+    "cluster": "questions",
+    "prompt": "Describe asking a teacher something and receiving a reply.",
+    "sample": "Ich frage die Lehrerin, und sie antwortet mir.",
+    "check": "Fragen takes an accusative person; antworten takes dative."
+  },
+  {
+    "slug": "a1-kosten-bezahlen-word-choice-exercises",
+    "cluster": "shopping",
+    "prompt": "State a sandwich's price and say that you are paying for it.",
+    "sample": "Das belegte Brötchen kostet vier Euro, und ich bezahle es bar.",
+    "check": "The item is the subject of kostet; the payer is the subject of bezahle."
+  },
+  {
+    "slug": "a2-kennen-wissen-word-choice-exercises",
+    "cluster": "learning",
+    "prompt": "Express familiarity with a town and knowledge of where its station is.",
+    "sample": "Ich kenne die Stadt und weiß, wo der Bahnhof liegt.",
+    "check": "Kennen has a noun object; wissen introduces information in a clause."
+  },
+  {
+    "slug": "a2-bringen-holen-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Describe fetching a key from home and bringing it to a friend.",
+    "sample": "Ich hole den Schlüssel von zu Hause und bringe ihn dir.",
+    "check": "Holen emphasises obtaining the key; bringen emphasises its destination."
+  },
+  {
+    "slug": "a2-suchen-finden-word-choice-exercises",
+    "cluster": "tools",
+    "prompt": "Say that you are searching for your bag but have not found it yet.",
+    "sample": "Ich suche meine Tasche, finde sie aber noch nicht.",
+    "check": "Suchen describes the attempt; finden describes its success."
+  },
+  {
+    "slug": "a2-hoeren-zuhoeren-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Contrast hearing music with paying attention to a speaker.",
+    "sample": "Ich höre Musik, aber jetzt höre ich dir zu.",
+    "check": "Zuhören takes dative dir and separates its prefix."
+  },
+  {
+    "slug": "a2-sehen-aussehen-word-choice-exercises",
+    "cluster": "descriptions",
+    "prompt": "Say that you can see a house and that it looks old.",
+    "sample": "Ich sehe ein Haus. Es sieht sehr alt aus.",
+    "check": "Sehen expresses perception; aussehen describes appearance."
+  },
+  {
+    "slug": "a2-anziehen-tragen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Describe putting a coat on and wearing it for the whole day.",
+    "sample": "Ich ziehe den Mantel an und trage ihn den ganzen Tag.",
+    "check": "Anziehen is the change; tragen is the continuing state."
+  },
+  {
+    "slug": "a2-treffen-kennenlernen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Say you are meeting an old friend and getting to know their neighbour.",
+    "sample": "Ich treffe einen alten Freund und lerne seine Nachbarin kennen.",
+    "check": "Only kennenlernen explicitly describes becoming acquainted."
+  },
+  {
+    "slug": "a2-mieten-vermieten-word-choice-exercises",
+    "cluster": "shopping",
+    "prompt": "Describe a flat arrangement from both tenant and owner's perspectives.",
+    "sample": "Wir mieten die Wohnung; Frau Wolf vermietet sie an uns.",
+    "check": "Mieten and vermieten identify opposite roles in this rental arrangement."
+  },
+  {
+    "slug": "a2-leihen-schenken-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Contrast lending a book with giving a different book as a present.",
+    "sample": "Ich leihe dir den Roman und schenke dir das Wörterbuch.",
+    "check": "The loan expects the object back; the gift does not."
+  },
+  {
+    "slug": "a2-zahlen-zaehlen-word-choice-exercises",
+    "cluster": "shopping",
+    "prompt": "Say that you count your coins before paying.",
+    "sample": "Ich zähle die Münzen und zahle dann den Betrag.",
+    "check": "The umlaut distinguishes counting from paying."
+  },
+  {
+    "slug": "a2-reise-fahrt-word-choice-exercises",
+    "cluster": "travel",
+    "prompt": "Separate a holiday trip from its first train segment.",
+    "sample": "Unsere Reise beginnt mit einer dreistündigen Zugfahrt.",
+    "check": "Reise covers the larger trip; Fahrt focuses on transport here."
+  },
+  {
+    "slug": "a2-erst-nur-word-choice-exercises",
+    "cluster": "time",
+    "prompt": "Contrast wanting water only with a bus leaving as late as ten.",
+    "sample": "Ich möchte nur Wasser. Der Bus fährt erst um zehn.",
+    "check": "Nur limits the choice; erst presents the time as later than expected."
+  },
+  {
+    "slug": "a2-schon-noch-word-choice-exercises",
+    "cluster": "time",
+    "prompt": "Say that food is already ready but a guest is still working.",
+    "sample": "Das Essen ist schon fertig, aber unser Gast arbeitet noch.",
+    "check": "Schon marks a reached stage; noch marks a continuing activity."
+  },
+  {
+    "slug": "a2-seit-seid-word-choice-exercises",
+    "cluster": "time",
+    "prompt": "Tell several friends that they have been here since Monday.",
+    "sample": "Ihr seid seit Montag hier.",
+    "check": "Seid is the verb form; seit introduces the starting point."
+  },
+  {
+    "slug": "a2-das-dass-word-choice-exercises",
+    "cluster": "clauses",
+    "prompt": "Use das before a package and dass to introduce what you hope.",
+    "sample": "Ich hoffe, dass das Paket heute ankommt.",
+    "check": "Dass introduces the clause; das is the article of Paket."
+  },
+  {
+    "slug": "a2-wenn-wann-word-choice-exercises",
+    "cluster": "time",
+    "prompt": "Ask when a class starts, then say what you do when it starts.",
+    "sample": "Wann beginnt der Kurs? Wenn er beginnt, mache ich Notizen.",
+    "check": "Wann asks for time; wenn links events."
+  },
+  {
+    "slug": "b1-ob-wenn-word-choice-exercises",
+    "cluster": "clauses",
+    "prompt": "Contrast uncertainty about rain with a plan conditional on rain.",
+    "sample": "Ich weiß nicht, ob es regnet. Wenn es regnet, bleiben wir drinnen.",
+    "check": "Ob embeds a yes/no issue; wenn introduces the condition."
+  },
+  {
+    "slug": "b1-obwohl-trotz-word-choice-exercises",
+    "cluster": "clauses",
+    "prompt": "Express going out despite the cold with both obwohl and trotz.",
+    "sample": "Obwohl es kalt ist, gehen wir hinaus. Trotz der Kälte gehen wir hinaus.",
+    "check": "Obwohl introduces a clause; trotz introduces the noun phrase."
+  },
+  {
+    "slug": "b1-wechseln-umsteigen-word-choice-exercises",
+    "cluster": "travel",
+    "prompt": "Describe changing a service provider and changing trains.",
+    "sample": "Ich wechsle den Anbieter und steige auf der Reise in Fulda um.",
+    "check": "Umsteigen describes the passenger's transfer; wechseln has broader replacement uses."
+  },
+  {
+    "slug": "b1-umziehen-ausziehen-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Describe moving house and changing your clothes as separate actions.",
+    "sample": "Am Samstag ziehe ich um; danach ziehe ich mich um.",
+    "check": "The reflexive mich changes the meaning from relocation to changing clothes."
+  },
+  {
+    "slug": "b1-stellen-stehen-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Describe placing a vase upright and its subsequent position.",
+    "sample": "Ich stelle die Vase aufs Fensterbrett. Dort steht sie neben der Lampe.",
+    "check": "Stellen takes the placed object; stehen describes its position."
+  },
+  {
+    "slug": "b1-legen-liegen-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Describe putting a blanket on a bed and where it lies afterwards.",
+    "sample": "Ich lege die Decke aufs Bett. Jetzt liegt sie dort.",
+    "check": "Legen is the placement action; liegen is the location."
+  },
+  {
+    "slug": "b1-setzen-sitzen-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Describe sitting down on a chair and then being seated.",
+    "sample": "Ich setze mich auf den Stuhl. Jetzt sitze ich bequem.",
+    "check": "Sich setzen is a change of posture; sitzen describes the state."
+  },
+  {
+    "slug": "b1-haengen-hing-gehaengt-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Describe hanging up a coat and where it hung yesterday.",
+    "sample": "Ich habe den Mantel aufgehängt. Gestern hing er noch im Flur.",
+    "check": "Placement uses aufgehängt; the position uses strong past hing."
+  },
+  {
+    "slug": "b1-erinnern-merken-word-choice-exercises",
+    "cluster": "learning",
+    "prompt": "Contrast recalling a trip with memorising a new number.",
+    "sample": "Ich erinnere mich an die Reise und merke mir die neue Nummer.",
+    "check": "Erinnern uses accusative mich; merken uses dative mir in these patterns."
+  },
+  {
+    "slug": "b1-hoffen-erwarten-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Distinguish hoping for sunshine from expecting a delivery.",
+    "sample": "Ich hoffe auf Sonne und erwarte heute ein Paket.",
+    "check": "Hoffen expresses a wish; erwarten expresses anticipation."
+  },
+  {
+    "slug": "b1-gewinnen-verdienen-word-choice-exercises",
+    "cluster": "work",
+    "prompt": "Contrast earning money through work with winning a prize.",
+    "sample": "Sie verdient Geld im Café und gewinnt einen kleinen Preis.",
+    "check": "A wage is earned; a competition prize is won."
+  },
+  {
+    "slug": "b1-bekommen-werden-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Say someone receives a letter and becomes nervous.",
+    "sample": "Er bekommt einen Brief und wird nervös.",
+    "check": "Bekommen takes the received object; werden describes the change of state."
+  },
+  {
+    "slug": "b1-passieren-bestehen-word-choice-exercises",
+    "cluster": "learning",
+    "prompt": "Say that a friend passed an exam and ask what happened afterwards.",
+    "sample": "Meine Freundin hat die Prüfung bestanden. Was ist danach passiert?",
+    "check": "Bestehen expresses exam success; passieren expresses an event happening."
+  },
+  {
+    "slug": "b1-teilnehmen-besuchen-word-choice-exercises",
+    "cluster": "learning",
+    "prompt": "Describe taking part in a workshop and attending a course.",
+    "sample": "Ich nehme an einem Workshop teil und besuche einen Sprachkurs.",
+    "check": "Teilnehmen requires an; besuchen takes the course directly."
+  },
+  {
+    "slug": "b1-bewerben-anmelden-word-choice-exercises",
+    "cluster": "work",
+    "prompt": "Distinguish applying for a job from registering for a course.",
+    "sample": "Ich bewerbe mich um eine Stelle und melde mich für einen Kurs an.",
+    "check": "The opportunity is requested with bewerben; registration uses anmelden."
+  },
+  {
+    "slug": "b1-freuen-auf-ueber-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Say that you look forward to a visit and are pleased about a gift.",
+    "sample": "Ich freue mich auf deinen Besuch und über das Geschenk.",
+    "check": "Auf concerns the anticipated visit; über concerns the received gift."
+  },
+  {
+    "slug": "b1-interessiert-interessant-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Describe a topic as interesting and yourself as interested in it.",
+    "sample": "Das Thema ist interessant, und ich bin daran interessiert.",
+    "check": "Interessant characterises the topic; interessiert characterises the person's attitude."
+  },
+  {
+    "slug": "b1-gelangweilt-langweilig-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Distinguish a boring talk from your feeling of boredom.",
+    "sample": "Der Vortrag ist langweilig, und ich bin gelangweilt.",
+    "check": "Do not use Ich bin langweilig to mean that you feel bored."
+  },
+  {
+    "slug": "b1-aktuell-tatsaechlich-word-choice-exercises",
+    "cluster": "evidence",
+    "prompt": "Contrast current prices with the actual final costs.",
+    "sample": "Die aktuellen Preise stehen im Prospekt; die tatsächlichen Kosten waren höher.",
+    "check": "Aktuell concerns recency; tatsächlich concerns reality."
+  },
+  {
+    "slug": "b1-sensibel-vernuenftig-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Describe a sensitive person making a sensible decision.",
+    "sample": "Meine sensible Kollegin trifft eine vernünftige Entscheidung.",
+    "check": "Sensibel and vernünftig do not share the English meaning of sensible."
+  },
+  {
+    "slug": "b2-anscheinend-scheinbar-word-choice-exercises",
+    "cluster": "evidence",
+    "prompt": "Contrast a likely absence with an apparent absence that proves false.",
+    "sample": "Anscheinend ist niemand da. Die Wohnung ist aber nur scheinbar leer.",
+    "check": "Scheinbar is used here for an appearance contradicted by reality."
+  },
+  {
+    "slug": "b2-schliesslich-endlich-word-choice-exercises",
+    "cluster": "time",
+    "prompt": "Express relief that a bus has arrived, then give an after-all justification.",
+    "sample": "Endlich kommt der Bus! Schließlich warten wir seit einer Stunde.",
+    "check": "Endlich conveys the waiting speaker's relief; schließlich introduces the justification."
+  },
+  {
+    "slug": "b2-offenbar-oeffentlich-word-choice-exercises",
+    "cluster": "evidence",
+    "prompt": "Distinguish apparently knowing an answer from announcing it publicly.",
+    "sample": "Sie kennt offenbar die Antwort und erklärt sie öffentlich.",
+    "check": "Offenbar comments on evidence; öffentlich comments on the audience or setting."
+  },
+  {
+    "slug": "b2-effektiv-effizient-word-choice-exercises",
+    "cluster": "evidence",
+    "prompt": "Contrast being effective with using time and resources efficiently.",
+    "sample": "Die Maßnahme ist effektiv, aber wegen des hohen Aufwands nicht effizient.",
+    "check": "Achieving a result and achieving it with little input are different criteria."
+  },
+  {
+    "slug": "b2-vermeiden-verhindern-word-choice-exercises",
+    "cluster": "work",
+    "prompt": "Contrast avoiding a mistake with preventing an accident.",
+    "sample": "Mit einer Kontrolle vermeiden wir Fehler und verhindern mögliche Unfälle.",
+    "check": "Avoidance and prevention can overlap; the noun combinations guide this example."
+  },
+  {
+    "slug": "b2-ueberzeugen-ueberreden-word-choice-exercises",
+    "cluster": "discussion",
+    "prompt": "Contrast convincing someone of an idea with persuading them to join an outing.",
+    "sample": "Ich überzeuge Lea von der Idee und überrede sie zu einem Ausflug.",
+    "check": "Überzeugen concerns a view; überreden concerns taking an action in these patterns."
+  },
+  {
+    "slug": "a1-introducing-yourself-communication-exercises",
+    "cluster": "people",
+    "prompt": "Introduce yourself to a new course group with your name and city.",
+    "sample": "Ich heiße Riya und wohne in Köln.",
+    "check": "Choose only details you want to share; heißen introduces a name, not an age."
+  },
+  {
+    "slug": "a1-spelling-your-name-communication-exercises",
+    "cluster": "people",
+    "prompt": "Spell the surname Wolf aloud by naming its letters in writing.",
+    "sample": "Mein Nachname ist Wolf: W, O, L, F.",
+    "check": "Spelling gives individual letters; it does not change the name's written form."
+  },
+  {
+    "slug": "a1-sharing-contact-details-communication-exercises",
+    "cluster": "people",
+    "prompt": "Ask a classmate for an email address using informal du.",
+    "sample": "Wie ist deine E-Mail-Adresse?",
+    "check": "Use deine with feminine Adresse and match the informal register."
+  },
+  {
+    "slug": "a1-greetings-and-farewells-communication-exercises",
+    "cluster": "people",
+    "prompt": "Greet a teacher in the morning and say goodbye after class.",
+    "sample": "Guten Morgen, Frau Klein! Auf Wiedersehen!",
+    "check": "Guten Morgen is a greeting; Auf Wiedersehen closes the conversation."
+  },
+  {
+    "slug": "a1-asking-for-repetition-communication-exercises",
+    "cluster": "requests",
+    "prompt": "Tell a stranger you did not understand and ask for repetition.",
+    "sample": "Entschuldigung, können Sie das bitte wiederholen?",
+    "check": "Sie keeps the request formal; wiederholen is the infinitive after können."
+  },
+  {
+    "slug": "a1-asking-prices-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "Ask the price of a particular notebook rather than a general price list.",
+    "sample": "Wie viel kostet dieses Notizbuch?",
+    "check": "Dieses identifies the item whose price you want."
+  },
+  {
+    "slug": "a1-ordering-in-cafe-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "Order tea and ask politely for the bill in a café.",
+    "sample": "Ich hätte gern einen Tee. Die Rechnung bitte.",
+    "check": "The order uses accusative einen Tee; the short bill request is a separate phrase."
+  },
+  {
+    "slug": "a1-shopping-size-colour-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "Ask whether a jacket is available in blue and in size M.",
+    "sample": "Haben Sie diese Jacke in Blau und in Größe M?",
+    "check": "Ask about both colour and size; availability is still a question, not a promise."
+  },
+  {
+    "slug": "a1-asking-opening-hours-communication-exercises",
+    "cluster": "time",
+    "prompt": "Ask a shop assistant what time the shop closes today.",
+    "sample": "Bis wann haben Sie heute geöffnet?",
+    "check": "Bis wann asks for the endpoint of today's opening hours."
+  },
+  {
+    "slug": "a1-arranging-simple-meeting-communication-exercises",
+    "cluster": "time",
+    "prompt": "Suggest meeting a friend on Friday at six.",
+    "sample": "Treffen wir uns am Freitag um sechs Uhr?",
+    "check": "Am introduces the weekday; um introduces the clock time."
+  },
+  {
+    "slug": "a2-rescheduling-appointment-communication-exercises",
+    "cluster": "time",
+    "prompt": "Ask to move an appointment from Monday to Wednesday.",
+    "sample": "Könnten wir den Termin von Montag auf Mittwoch verschieben?",
+    "check": "State the old and proposed days; the new appointment still needs confirmation."
+  },
+  {
+    "slug": "a2-cancelling-appointment-communication-exercises",
+    "cluster": "time",
+    "prompt": "Cancel an appointment politely and say you cannot come.",
+    "sample": "Ich muss unseren Termin leider absagen, weil ich nicht kommen kann.",
+    "check": "Absagen cancels; it does not automatically arrange a replacement."
+  },
+  {
+    "slug": "a2-explaining-being-late-communication-exercises",
+    "cluster": "travel",
+    "prompt": "Explain being ten minutes late because of a delayed bus.",
+    "sample": "Ich komme etwa zehn Minuten später, weil mein Bus Verspätung hat.",
+    "check": "Etwa marks an estimate; the reason follows in a weil clause."
+  },
+  {
+    "slug": "a2-apologizing-for-small-mistake-communication-exercises",
+    "cluster": "people",
+    "prompt": "Apologise for sending the wrong file and offer the correct one.",
+    "sample": "Entschuldigung, ich habe die falsche Datei geschickt. Ich sende Ihnen die richtige.",
+    "check": "Name the small mistake and the practical correction without claiming it is already fixed."
+  },
+  {
+    "slug": "a2-asking-station-directions-communication-exercises",
+    "cluster": "travel",
+    "prompt": "Ask a stranger how to reach the railway station on foot.",
+    "sample": "Entschuldigung, wie komme ich zu Fuß zum Bahnhof?",
+    "check": "Zu Fuß specifies the route type you need."
+  },
+  {
+    "slug": "a2-buying-return-ticket-communication-exercises",
+    "cluster": "travel",
+    "prompt": "Request a return train ticket to Bremen for today.",
+    "sample": "Ich hätte gern eine Fahrkarte nach Bremen und zurück für heute.",
+    "check": "State the destination, return journey and date; do not assume a fare or availability."
+  },
+  {
+    "slug": "a2-hotel-check-in-communication-exercises",
+    "cluster": "travel",
+    "prompt": "At hotel reception, say you have a reservation in the name of Shah.",
+    "sample": "Guten Abend, ich habe eine Reservierung auf den Namen Shah.",
+    "check": "Auf den Namen identifies the booking name without implying check-in is complete."
+  },
+  {
+    "slug": "a2-reporting-hotel-room-problem-communication-exercises",
+    "cluster": "travel",
+    "prompt": "Report that the heating in your hotel room is not working.",
+    "sample": "Die Heizung in meinem Zimmer funktioniert nicht. Könnten Sie bitte nachsehen?",
+    "check": "Describe the observed fault before requesting help; do not invent its cause."
+  },
+  {
+    "slug": "a2-sending-parcel-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "At a post office, ask how much sending a parcel costs.",
+    "sample": "Wie viel kostet es, dieses Paket zu verschicken?",
+    "check": "Dieses Paket identifies the item; the question does not assume a delivery price."
+  },
+  {
+    "slug": "a2-returning-purchase-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "Ask whether you can return a recently bought shirt.",
+    "sample": "Ich habe das Hemd gestern gekauft. Kann ich es zurückgeben?",
+    "check": "Ask about the return rather than stating a shop's policy as fact."
+  },
+  {
+    "slug": "a2-asking-permission-communication-exercises",
+    "cluster": "requests",
+    "prompt": "Ask a formal visitor whether you may open a window.",
+    "sample": "Darf ich das Fenster öffnen?",
+    "check": "Darf asks permission; it does not announce that permission has been given."
+  },
+  {
+    "slug": "a2-offering-help-communication-exercises",
+    "cluster": "requests",
+    "prompt": "Offer to carry a neighbour's bag without assuming they want help.",
+    "sample": "Soll ich Ihnen die Tasche tragen?",
+    "check": "Soll ich offers an action and leaves the neighbour free to accept or decline."
+  },
+  {
+    "slug": "a2-accepting-declining-invitations-communication-exercises",
+    "cluster": "people",
+    "prompt": "Decline a dinner invitation politely and give a brief reason.",
+    "sample": "Vielen Dank für die Einladung, aber ich habe an dem Abend leider keine Zeit.",
+    "check": "Acknowledge the invitation before declining; a detailed personal explanation is optional."
+  },
+  {
+    "slug": "a2-describing-lost-item-communication-exercises",
+    "cluster": "tools",
+    "prompt": "Describe a lost black backpack containing a notebook.",
+    "sample": "Ich suche einen schwarzen Rucksack. Darin liegt ein blaues Notizheft.",
+    "check": "Give distinguishing details instead of only saying that something is missing."
+  },
+  {
+    "slug": "b1-confirming-understanding-communication-exercises",
+    "cluster": "discussion",
+    "prompt": "Check whether you understood correctly that work starts at nine.",
+    "sample": "Habe ich richtig verstanden, dass wir um neun Uhr beginnen?",
+    "check": "The question seeks confirmation; it does not treat the arrangement as verified."
+  },
+  {
+    "slug": "b1-summarizing-action-points-communication-exercises",
+    "cluster": "work",
+    "prompt": "Summarise that Lea sends the draft and you check it by Friday.",
+    "sample": "Lea schickt den Entwurf, und ich prüfe ihn bis Freitag.",
+    "check": "Name the owner and deadline of each action rather than summarising only the topic."
+  },
+  {
+    "slug": "b1-requesting-deadline-extension-communication-exercises",
+    "cluster": "work",
+    "prompt": "Request two extra days for a report without assuming approval.",
+    "sample": "Wäre es möglich, die Frist für den Bericht um zwei Tage zu verlängern?",
+    "check": "Um zwei Tage specifies the requested extension; approval remains open."
+  },
+  {
+    "slug": "b1-giving-progress-update-communication-exercises",
+    "cluster": "work",
+    "prompt": "Give an update saying two sections are finished and one is still open.",
+    "sample": "Zwei Abschnitte sind fertig; der letzte ist noch offen.",
+    "check": "Separate completed work from remaining work so the status is clear."
+  },
+  {
+    "slug": "b1-explaining-project-delay-communication-exercises",
+    "cluster": "work",
+    "prompt": "Explain a delay caused by missing information and give a revised estimate.",
+    "sample": "Uns fehlen noch Angaben; deshalb brauchen wir voraussichtlich einen weiteren Tag.",
+    "check": "Voraussichtlich presents the extra day as an estimate, not a guarantee."
+  },
+  {
+    "slug": "b1-handing-over-task-communication-exercises",
+    "cluster": "work",
+    "prompt": "Hand a task to a colleague, naming what is finished and what remains.",
+    "sample": "Die Tabelle ist fertig. Bitte ergänze noch die Angaben für Juni.",
+    "check": "The handover states both the completed work and the next concrete action."
+  },
+  {
+    "slug": "b1-requesting-specific-feedback-communication-exercises",
+    "cluster": "text",
+    "prompt": "Request feedback specifically on the clarity of a report's introduction.",
+    "sample": "Könnten Sie mir sagen, ob die Einleitung verständlich ist?",
+    "check": "A narrow question is easier to answer than an unspecified request for feedback."
+  },
+  {
+    "slug": "b1-giving-constructive-feedback-communication-exercises",
+    "cluster": "text",
+    "prompt": "Give feedback that a text is clear but would benefit from an example.",
+    "sample": "Der Ablauf ist verständlich; ein konkretes Beispiel würde den zweiten Abschnitt ergänzen.",
+    "check": "Identify a strength and a specific possible improvement rather than judging the writer."
+  },
+  {
+    "slug": "b1-disagreeing-politely-communication-exercises",
+    "cluster": "discussion",
+    "prompt": "Disagree with a timetable politely and explain your concern.",
+    "sample": "Ich verstehe den Vorschlag, halte den Zeitplan aber für zu knapp.",
+    "check": "Acknowledge the proposal before giving the reason for disagreement."
+  },
+  {
+    "slug": "b1-proposing-alternative-communication-exercises",
+    "cluster": "work",
+    "prompt": "Suggest a shorter meeting as an alternative to cancelling it.",
+    "sample": "Statt das Treffen abzusagen, könnten wir es auf dreißig Minuten begrenzen.",
+    "check": "The alternative preserves the meeting but changes its duration."
+  },
+  {
+    "slug": "b1-describing-technical-problem-communication-exercises",
+    "cluster": "tools",
+    "prompt": "Report that a screen stays black when you switch a device on.",
+    "sample": "Wenn ich das Gerät einschalte, bleibt der Bildschirm schwarz.",
+    "check": "Describe the trigger and visible result; do not guess which component has failed."
+  },
+  {
+    "slug": "b1-requesting-information-formally-communication-exercises",
+    "cluster": "requests",
+    "prompt": "Write a formal request for information about course dates.",
+    "sample": "Könnten Sie mir bitte mitteilen, wann die nächsten Kurse beginnen?",
+    "check": "The indirect time question ends with beginnen."
+  },
+  {
+    "slug": "b1-following-up-email-communication-exercises",
+    "cluster": "people",
+    "prompt": "Follow up an unanswered email politely without assuming it was ignored.",
+    "sample": "Ich möchte kurz nachfragen, ob meine Nachricht vom Montag angekommen ist.",
+    "check": "Ask about receipt without attributing a motive to the recipient."
+  },
+  {
+    "slug": "b1-describing-chart-trends-communication-exercises",
+    "cluster": "evidence",
+    "prompt": "Describe a chart rising from ten to fifteen without inventing a cause.",
+    "sample": "Die Zahl steigt von zehn auf fünfzehn; zur Ursache macht die Grafik keine Angaben.",
+    "check": "A visible change supports a trend description, not an unsupported causal explanation."
+  },
+  {
+    "slug": "b1-explaining-process-steps-communication-exercises",
+    "cluster": "tools",
+    "prompt": "Explain a simple process: save a file, then close the program.",
+    "sample": "Zuerst speichern Sie die Datei; anschließend schließen Sie das Programm.",
+    "check": "Sequence words clarify the order and keep the formal address consistent."
+  },
+  {
+    "slug": "b1-passing-on-message-communication-exercises",
+    "cluster": "people",
+    "prompt": "Pass on a colleague's request for a callback, attributing the message.",
+    "sample": "Frau Wolf bittet Sie, sie nach der Pause zurückzurufen.",
+    "check": "Name the source and requested action without presenting yourself as the requester."
+  },
+  {
+    "slug": "b2-moderating-discussion-communication-exercises",
+    "cluster": "discussion",
+    "prompt": "Invite a quiet participant to contribute and propose staying on topic.",
+    "sample": "Möchten Sie Ihre Sicht ergänzen? Danach sollten wir zur Ausgangsfrage zurückkehren.",
+    "check": "Offer a turn without forcing disclosure, then signpost the discussion's focus."
+  },
+  {
+    "slug": "b2-setting-meeting-agenda-communication-exercises",
+    "cluster": "work",
+    "prompt": "Open a meeting by proposing two agenda items in order.",
+    "sample": "Ich schlage vor, zuerst die Ziele und anschließend die offenen Fragen zu besprechen.",
+    "check": "An agenda proposal identifies sequence; it does not claim everyone's prior agreement."
+  },
+  {
+    "slug": "b2-weighing-pros-cons-communication-exercises",
+    "cluster": "comparison",
+    "prompt": "Weigh lower costs against a longer journey for one option.",
+    "sample": "Für diese Variante sprechen die geringeren Kosten; dagegen spricht der längere Weg.",
+    "check": "Attach each advantage and drawback to the same option before comparing alternatives."
+  },
+  {
+    "slug": "b2-qualifying-uncertainty-communication-exercises",
+    "cluster": "evidence",
+    "prompt": "State that available information suggests a delay but does not confirm it.",
+    "sample": "Nach den bisherigen Angaben könnte sich der Beginn verschieben.",
+    "check": "Könnte and bisherigen qualify both confidence and the available evidence."
+  },
+  {
+    "slug": "b2-supporting-claim-with-evidence-communication-exercises",
+    "cluster": "evidence",
+    "prompt": "Support a limited claim using a named report rather than vague authority.",
+    "sample": "Laut dem Bericht wurden acht von zehn Anfragen am selben Tag beantwortet.",
+    "check": "Name the source and keep the claim within the figures actually attributed to it."
+  },
+  {
+    "slug": "b2-fact-and-opinion-language-communication-exercises",
+    "cluster": "evidence",
+    "prompt": "Distinguish a stated start time from your personal view that it is early.",
+    "sample": "Im Programm steht neun Uhr. Meiner Ansicht nach ist das zu früh.",
+    "check": "The first sentence attributes information; the second explicitly marks an opinion."
+  },
+  {
+    "slug": "b2-negotiating-workload-communication-exercises",
+    "cluster": "work",
+    "prompt": "Explain that taking a new task requires changing an existing deadline.",
+    "sample": "Ich kann die zusätzliche Aufgabe übernehmen, sofern wir die andere Frist anpassen.",
+    "check": "Make the dependency explicit rather than accepting an unqualified commitment."
+  },
+  {
+    "slug": "b2-escalating-unresolved-issue-communication-exercises",
+    "cluster": "work",
+    "prompt": "Escalate an unresolved issue by naming the impact and requesting a decision.",
+    "sample": "Die Rückmeldung fehlt weiterhin; dadurch verzögert sich die Planung. Wer kann die Entscheidung treffen?",
+    "check": "Focus on the unresolved state, its effect and a concrete next step."
+  },
+  {
+    "slug": "b2-responding-to-complaint-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "Acknowledge a complaint and request details before promising a remedy.",
+    "sample": "Danke für Ihren Hinweis. Könnten Sie uns den betroffenen Vorgang genauer beschreiben?",
+    "check": "Acknowledgement is not a finding or a promise that a refund has been approved."
+  },
+  {
+    "slug": "b2-documenting-agreement-communication-exercises",
+    "cluster": "work",
+    "prompt": "Record an agreement with an owner, action and deadline.",
+    "sample": "Wir halten fest: Herr Wolf sendet den Entwurf bis Donnerstag; ich prüfe ihn am Freitag.",
+    "check": "A useful record identifies who does what and when."
+  },
+  {
+    "slug": "a1-family-relations-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe where your sister and parents live.",
+    "sample": "Meine Schwester wohnt in Bonn, und meine Eltern wohnen in Köln.",
+    "check": "Eltern is plural, so its verb is wohnen rather than wohnt."
+  },
+  {
+    "slug": "a1-rooms-at-home-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Say you cook in the kitchen and sleep in the bedroom.",
+    "sample": "Ich koche in der Küche und schlafe im Schlafzimmer.",
+    "check": "The room names are die Küche and das Schlafzimmer; im contracts in dem."
+  },
+  {
+    "slug": "a1-kitchen-objects-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Name the items you need for a bowl of soup.",
+    "sample": "Für die Suppe brauche ich einen Teller und einen Löffel.",
+    "check": "The masculine nouns take einen when they are objects of brauchen."
+  },
+  {
+    "slug": "a1-classroom-supplies-vocabulary-exercises",
+    "cluster": "learning",
+    "prompt": "Say you write in a notebook with a pencil.",
+    "sample": "Ich schreibe mit einem Bleistift in mein Heft.",
+    "check": "Bleistift is the tool; Heft is the notebook receiving the writing."
+  },
+  {
+    "slug": "a1-food-staples-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "Describe a simple breakfast containing bread, cheese and an egg.",
+    "sample": "Zum Frühstück esse ich Brot mit Käse und ein Ei.",
+    "check": "Brot and Käse can name quantities without articles; ein Ei counts one egg."
+  },
+  {
+    "slug": "a1-fruit-and-vegetables-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "List one fruit and two vegetables you buy for a meal.",
+    "sample": "Ich kaufe eine Birne, eine Kartoffel und eine Zwiebel.",
+    "check": "These three nouns are feminine; learn their articles with the words."
+  },
+  {
+    "slug": "a1-drink-containers-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Offer someone water from a bottle in a glass.",
+    "sample": "Hier ist ein Glas Wasser aus der Flasche.",
+    "check": "Glas names the drinking container here; Flasche names the source container."
+  },
+  {
+    "slug": "a1-morning-routine-verbs-vocabulary-exercises",
+    "cluster": "time",
+    "prompt": "Describe getting up, showering and having breakfast in that order.",
+    "sample": "Ich stehe auf, dusche und frühstücke.",
+    "check": "Aufstehen separates in this main clause; duschen and frühstücken do not."
+  },
+  {
+    "slug": "a1-frequency-words-vocabulary-exercises",
+    "cluster": "time",
+    "prompt": "Say you often read but never dance.",
+    "sample": "Ich lese oft, aber ich tanze nie.",
+    "check": "Oft describes frequency; nie expresses no occasions."
+  },
+  {
+    "slug": "a1-weather-words-vocabulary-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe a day that is sunny but windy.",
+    "sample": "Heute ist es sonnig und windig.",
+    "check": "The adjectives follow ist without added noun endings."
+  },
+  {
+    "slug": "a1-seasons-vocabulary-exercises",
+    "cluster": "time",
+    "prompt": "Name a season you like and a season that is cold.",
+    "sample": "Ich mag den Frühling. Im Winter ist es kalt.",
+    "check": "Frühling is masculine; im Winter is a seasonal time phrase."
+  },
+  {
+    "slug": "a1-city-places-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Say you borrow books at a library and buy bread at a bakery.",
+    "sample": "Ich hole Bücher aus der Bibliothek und Brot aus der Bäckerei.",
+    "check": "Bibliothek is a library; Bäckerei is a bakery, not a shop for books."
+  },
+  {
+    "slug": "a1-leisure-activities-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Name two activities you enjoy on a free day.",
+    "sample": "Am freien Tag lese ich gern und male Bilder.",
+    "check": "The infinitive labels become finite lese and male with ich."
+  },
+  {
+    "slug": "a1-body-parts-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Say that your hands are cold and your head is warm.",
+    "sample": "Meine Hände sind kalt, aber mein Kopf ist warm.",
+    "check": "Hand has plural Hände; Kopf remains singular in the second clause."
+  },
+  {
+    "slug": "a1-feelings-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe feeling tired but pleased after a long day.",
+    "sample": "Nach dem langen Tag bin ich müde, aber froh.",
+    "check": "The adjectives describe feelings and do not take endings after bin."
+  },
+  {
+    "slug": "a1-furniture-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Describe a table, a chair and a cupboard in your room.",
+    "sample": "In meinem Zimmer stehen ein Tisch, ein Stuhl und ein Schrank.",
+    "check": "These furniture nouns are masculine; the combined subject takes plural stehen."
+  },
+  {
+    "slug": "a2-cooking-verbs-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "Describe peeling a potato and cutting an onion.",
+    "sample": "Ich schäle die Kartoffel und schneide die Zwiebel.",
+    "check": "Schälen removes a peel; schneiden cuts into pieces."
+  },
+  {
+    "slug": "a2-cleaning-and-laundry-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Say you clean the bathroom and iron a shirt.",
+    "sample": "Ich putze das Bad und bügle ein Hemd.",
+    "check": "Putzen describes cleaning; bügeln describes smoothing fabric with an iron."
+  },
+  {
+    "slug": "a2-housing-advert-words-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Describe a furnished flat with a fitted kitchen.",
+    "sample": "Die Wohnung ist möbliert und hat eine Einbauküche.",
+    "check": "Möbliert describes supplied furniture; Einbauküche names a fitted kitchen."
+  },
+  {
+    "slug": "a2-bicycle-parts-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Mention a bicycle's loose chain and flat tyre as observations.",
+    "sample": "Die Kette ist locker, und der Reifen ist platt.",
+    "check": "Kette and Reifen name different parts; the sentence does not diagnose a repair."
+  },
+  {
+    "slug": "a2-landscapes-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Describe a valley between a hill and a forest.",
+    "sample": "Das Tal liegt zwischen dem Hügel und dem Wald.",
+    "check": "Tal is the low-lying landscape; Hügel is an elevation."
+  },
+  {
+    "slug": "a2-packaging-materials-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Describe one bottle made of glass and another made of plastic.",
+    "sample": "Diese Flasche ist aus Glas, die andere aus Kunststoff.",
+    "check": "Glas names a material here; Kunststoff is plastic material."
+  },
+  {
+    "slug": "a2-workplace-tools-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Say you need scissors and a printer for a task.",
+    "sample": "Für die Aufgabe brauche ich eine Schere und einen Drucker.",
+    "check": "Schere is feminine and singular in German; Drucker is masculine."
+  },
+  {
+    "slug": "a2-study-actions-vocabulary-exercises",
+    "cluster": "learning",
+    "prompt": "Describe looking up a word and marking it in a text.",
+    "sample": "Ich schlage das Wort nach und markiere es im Text.",
+    "check": "Nachschlagen separates; markieren does not insert a separable particle."
+  },
+  {
+    "slug": "a2-file-actions-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Describe opening a file and saving it under a different name.",
+    "sample": "Ich öffne die Datei und speichere sie unter einem neuen Namen.",
+    "check": "Opening and saving are distinct actions; deleting would be löschen."
+  },
+  {
+    "slug": "a2-film-and-story-vocabulary-exercises",
+    "cluster": "text",
+    "prompt": "Say that a film's main character is interesting but the plot is simple.",
+    "sample": "Die Hauptfigur ist interessant, aber die Handlung ist einfach.",
+    "check": "Hauptfigur names a central character; Handlung names the plot."
+  },
+  {
+    "slug": "a2-sports-training-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe warming up before training and resting afterwards.",
+    "sample": "Ich wärme mich vor dem Training auf und ruhe mich danach aus.",
+    "check": "Both self-directed actions use mich and a separated particle."
+  },
+  {
+    "slug": "a2-celebration-preparations-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe wrapping a present and decorating a room.",
+    "sample": "Ich packe das Geschenk ein und schmücke das Zimmer.",
+    "check": "Einpacken separates; schmücken describes decoration rather than tidying."
+  },
+  {
+    "slug": "a2-health-visit-nouns-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "At a fictional clinic, say you wait in the waiting room for a consultation.",
+    "sample": "Ich warte im Wartezimmer auf die Sprechstunde.",
+    "check": "These are language labels; the sentence does not describe a clinic's actual arrangements."
+  },
+  {
+    "slug": "a2-luggage-items-vocabulary-exercises",
+    "cluster": "travel",
+    "prompt": "Say you pack a wash bag into a suitcase.",
+    "sample": "Ich packe den Kulturbeutel in den Koffer.",
+    "check": "Kulturbeutel is a wash bag; Koffer is the larger travel case."
+  },
+  {
+    "slug": "a2-taste-and-texture-vocabulary-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe a sweet cake and salty soup.",
+    "sample": "Der Kuchen ist süß, aber die Suppe ist salzig.",
+    "check": "These adjectives describe taste and remain unchanged after ist."
+  },
+  {
+    "slug": "a2-character-adjectives-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe someone who helps others and keeps promises.",
+    "sample": "Meine Kollegin ist hilfsbereit und zuverlässig.",
+    "check": "Hilfsbereit concerns willingness to help; zuverlässig concerns dependability."
+  },
+  {
+    "slug": "b1-application-documents-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "List a CV and a work sample as two application documents.",
+    "sample": "Ich schicke meinen Lebenslauf und eine Arbeitsprobe.",
+    "check": "Lebenslauf outlines your background; Arbeitsprobe demonstrates a piece of work."
+  },
+  {
+    "slug": "b1-work-schedules-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Say you work part time and sometimes do overtime.",
+    "sample": "Ich arbeite in Teilzeit und mache gelegentlich Überstunden.",
+    "check": "Teilzeit concerns contracted working time; Überstunden concern additional hours."
+  },
+  {
+    "slug": "b1-online-delivery-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "Distinguish an order confirmation from parcel tracking.",
+    "sample": "Die Bestellbestätigung ist angekommen; die Sendungsverfolgung zeigt noch keinen neuen Eintrag.",
+    "check": "Confirmation of an order is different from evidence of a delivery event."
+  },
+  {
+    "slug": "b1-everyday-banking-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "Describe reading your balance on a statement without offering financial advice.",
+    "sample": "Ich prüfe den Kontostand auf meinem Kontoauszug.",
+    "check": "Kontostand is the balance; Kontoauszug is the document showing account movements."
+  },
+  {
+    "slug": "b1-course-organisation-vocabulary-exercises",
+    "cluster": "learning",
+    "prompt": "Ask whether registration is a condition for participation.",
+    "sample": "Ist die Anmeldung eine Voraussetzung für die Teilnahme?",
+    "check": "Anmeldung, Voraussetzung and Teilnahme name different stages or requirements."
+  },
+  {
+    "slug": "b1-energy-collocations-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Describe storing energy and reducing consumption.",
+    "sample": "Wir speichern Energie und versuchen, den Verbrauch zu senken.",
+    "check": "Speichern concerns keeping energy available; senken concerns reducing a measured amount."
+  },
+  {
+    "slug": "b1-volunteering-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe volunteering in a local club and collecting donations.",
+    "sample": "Ich übernehme ein Ehrenamt im Verein und sammle Spenden.",
+    "check": "Ehrenamt is voluntary service; Spenden are donations rather than wages."
+  },
+  {
+    "slug": "b1-news-source-words-vocabulary-exercises",
+    "cluster": "evidence",
+    "prompt": "Say that a headline names no source and may repeat a rumour.",
+    "sample": "Die Schlagzeile nennt keine Quelle; möglicherweise greift sie ein Gerücht auf.",
+    "check": "A missing source is a reason to check, not proof that the report is false."
+  },
+  {
+    "slug": "b1-problem-solving-nouns-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Separate a possible cause from a proposed solution.",
+    "sample": "Wir prüfen die Ursache und besprechen einen Vorschlag für die Lösung.",
+    "check": "A proposal is not yet a verified cause or a successful solution."
+  },
+  {
+    "slug": "b1-building-maintenance-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Report a defect to building management and request information about a repair.",
+    "sample": "Ich melde der Hausverwaltung den Mangel und frage nach der Reparatur.",
+    "check": "Mangel names the defect; Reparatur names an action that may address it."
+  },
+  {
+    "slug": "b2-research-methods-vocabulary-exercises",
+    "cluster": "evidence",
+    "prompt": "Describe collecting and analysing survey data.",
+    "sample": "Wir erheben die Daten und werten sie anschließend aus.",
+    "check": "Erheben concerns obtaining data; auswerten concerns examining what they show."
+  },
+  {
+    "slug": "b2-cause-effect-collocations-vocabulary-exercises",
+    "cluster": "evidence",
+    "prompt": "Attribute an observed effect cautiously rather than treating association as proof.",
+    "sample": "Die Änderung könnte zur Verbesserung beigetragen haben.",
+    "check": "Beitragen allows other influences; könnte keeps the attribution tentative."
+  },
+  {
+    "slug": "b2-change-development-verbs-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Describe reducing costs while keeping an existing process.",
+    "sample": "Wir verringern die Kosten und behalten den bisherigen Ablauf bei.",
+    "check": "Verringern changes an amount; beibehalten preserves the named arrangement."
+  },
+  {
+    "slug": "b2-evaluation-adjectives-vocabulary-exercises",
+    "cluster": "evidence",
+    "prompt": "Assess a proposal as understandable but not yet practical.",
+    "sample": "Der Vorschlag ist nachvollziehbar, aber derzeit nicht umsetzbar.",
+    "check": "A comprehensible argument and a feasible action are separate qualities."
+  },
+  {
+    "slug": "b2-resource-use-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Explain that reusing an item may extend its useful life.",
+    "sample": "Die Wiederverwendung kann die Lebensdauer des Gegenstands verlängern.",
+    "check": "Kann states a possibility rather than a guaranteed environmental outcome."
+  },
+  {
+    "slug": "b2-responsibility-authority-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Ask who is responsible for a task and who has authority to approve it.",
+    "sample": "Wer trägt die Verantwortung, und wer hat die Befugnis zur Freigabe?",
+    "check": "Responsibility and formal authority may belong to different people."
+  },
+  {
+    "slug": "b2-economic-terms-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "Explain that high sales revenue does not automatically mean high profit.",
+    "sample": "Ein hoher Umsatz bedeutet nicht automatisch einen hohen Gewinn.",
+    "check": "Umsatz is sales revenue; Gewinn accounts for relevant costs in the ordinary distinction."
+  },
+  {
+    "slug": "b2-conflict-mediation-vocabulary-exercises",
+    "cluster": "discussion",
+    "prompt": "Describe a mediator helping two sides find a compromise.",
+    "sample": "Durch die Vermittlung finden beide Seiten einen Kompromiss.",
+    "check": "Vermittlung is the process; Kompromiss is the agreed accommodation of positions."
+  },
+  {
+    "slug": "a1-viel-sehr-word-choice-exercises",
+    "cluster": "comparison",
+    "prompt": "Use viel for a large amount and sehr for an adjective's degree.",
+    "sample": "Ich habe viel Arbeit und bin sehr müde.",
+    "check": "Viel quantifies Arbeit; sehr strengthens müde."
+  },
+  {
+    "slug": "a1-gern-gut-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Say you enjoy singing but do not sing particularly well.",
+    "sample": "Ich singe gern, aber nicht besonders gut.",
+    "check": "Gern expresses enjoyment; gut evaluates skill or quality."
+  },
+  {
+    "slug": "a1-auch-wieder-word-choice-exercises",
+    "cluster": "time",
+    "prompt": "Say that one friend is also joining and another is coming again.",
+    "sample": "Lea kommt auch mit, und Amir kommt wieder.",
+    "check": "Auch adds a person; wieder repeats an event."
+  },
+  {
+    "slug": "a1-hier-dort-word-choice-exercises",
+    "cluster": "places",
+    "prompt": "Point out a bag near you and a bicycle farther away.",
+    "sample": "Hier liegt meine Tasche, und dort steht mein Fahrrad.",
+    "check": "Hier and dort depend on the speaker's reference point."
+  },
+  {
+    "slug": "a1-heute-morgen-word-choice-exercises",
+    "cluster": "time",
+    "prompt": "Contrast studying today with working tomorrow.",
+    "sample": "Heute lerne ich, und morgen arbeite ich.",
+    "check": "Heute is the current day; morgen is the following day in this use."
+  },
+  {
+    "slug": "a1-gross-lang-word-choice-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe a large room and a long corridor.",
+    "sample": "Das Zimmer ist groß, und der Flur ist lang.",
+    "check": "Groß concerns overall size; lang concerns length."
+  },
+  {
+    "slug": "a1-schon-schoen-word-choice-exercises",
+    "cluster": "descriptions",
+    "prompt": "Say that a garden is already beautiful.",
+    "sample": "Der Garten ist schon schön.",
+    "check": "Schon marks already; schön evaluates appearance. The umlaut matters."
+  },
+  {
+    "slug": "a1-alle-alles-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Contrast all guests arriving with everything being ready.",
+    "sample": "Alle Gäste sind da, und alles ist fertig.",
+    "check": "Alle refers to plural guests; alles takes singular agreement."
+  },
+  {
+    "slug": "a2-wissen-glauben-word-choice-exercises",
+    "cluster": "evidence",
+    "prompt": "Contrast known information with a tentative belief about a start time.",
+    "sample": "Ich weiß, dass der Kurs stattfindet, aber ich glaube, dass er später beginnt.",
+    "check": "The verbs express the speaker's confidence; neither independently verifies a fact."
+  },
+  {
+    "slug": "a2-kennen-erkennen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Say you know a person and recognise them by their voice.",
+    "sample": "Ich kenne Lea und erkenne sie an ihrer Stimme.",
+    "check": "Kennen describes familiarity; erkennen describes identification in the situation."
+  },
+  {
+    "slug": "a2-sagen-erzaehlen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Ask someone to tell you a time and narrate a travel experience.",
+    "sample": "Sag mir bitte die Uhrzeit und erzähl mir von deiner Reise.",
+    "check": "Sagen gives the information; erzählen introduces the longer account here."
+  },
+  {
+    "slug": "a2-sprechen-besprechen-word-choice-exercises",
+    "cluster": "discussion",
+    "prompt": "Express discussing a plan using both sprechen and besprechen.",
+    "sample": "Wir sprechen über den Plan. Danach besprechen wir die Einzelheiten.",
+    "check": "Sprechen uses über; besprechen takes the topic directly."
+  },
+  {
+    "slug": "a2-anrufen-zurueckrufen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Say you are returning a missed call rather than making an initial call.",
+    "sample": "Ich habe deinen Anruf verpasst und rufe dich jetzt zurück.",
+    "check": "Zurückrufen identifies the callback and separates in the main clause."
+  },
+  {
+    "slug": "a2-fragen-bitten-word-choice-exercises",
+    "cluster": "requests",
+    "prompt": "Ask for directions, then ask someone for help.",
+    "sample": "Ich frage nach dem Weg und bitte einen Passanten um Hilfe.",
+    "check": "Fragen seeks information; bitten makes the assistance request."
+  },
+  {
+    "slug": "a2-antworten-beantworten-word-choice-exercises",
+    "cluster": "questions",
+    "prompt": "Say you answer a teacher and answer their question.",
+    "sample": "Ich antworte der Lehrerin und beantworte ihre Frage.",
+    "check": "Antworten takes the dative person; beantworten takes the accusative question."
+  },
+  {
+    "slug": "a2-erklaeren-beschreiben-word-choice-exercises",
+    "cluster": "descriptions",
+    "prompt": "Contrast describing a device's appearance with explaining how it works.",
+    "sample": "Ich beschreibe das Gerät und erkläre anschließend seine Funktion.",
+    "check": "The description concerns features; the explanation makes operation understandable."
+  },
+  {
+    "slug": "a2-anfangen-aufhoeren-word-choice-exercises",
+    "cluster": "time",
+    "prompt": "Describe starting an activity and stopping it an hour later.",
+    "sample": "Ich fange um acht mit der Arbeit an und höre um neun damit auf.",
+    "check": "Anfangen and aufhören both separate their prefixes in these main clauses."
+  },
+  {
+    "slug": "a2-stehen-aufstehen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Describe getting up from bed and then standing by the window.",
+    "sample": "Ich stehe auf und stehe danach am Fenster.",
+    "check": "Aufstehen is the action; stehen is the resulting position."
+  },
+  {
+    "slug": "a2-aufwachen-aufwecken-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Describe waking up yourself and waking another person.",
+    "sample": "Ich wache zuerst auf und wecke danach meinen Bruder auf.",
+    "check": "Aufwachen has the sleeper as subject; aufwecken takes the sleeper as object."
+  },
+  {
+    "slug": "a2-lernen-unterrichten-word-choice-exercises",
+    "cluster": "learning",
+    "prompt": "Describe learning German and teaching a different subject.",
+    "sample": "Ich lerne Deutsch und unterrichte Mathematik.",
+    "check": "The same person can be a learner and a teacher in different contexts."
+  },
+  {
+    "slug": "a2-bestellen-reservieren-word-choice-exercises",
+    "cluster": "shopping",
+    "prompt": "Describe reserving a table before ordering soup.",
+    "sample": "Zuerst reserviere ich einen Tisch, dann bestelle ich eine Suppe.",
+    "check": "A reservation holds a place; an order requests the food."
+  },
+  {
+    "slug": "a2-sparen-ausgeben-word-choice-exercises",
+    "cluster": "shopping",
+    "prompt": "Say you save for a bicycle and spend money on a ticket.",
+    "sample": "Ich spare für ein Fahrrad und gebe heute Geld für eine Fahrkarte aus.",
+    "check": "Sparen puts money aside; ausgeben separates in a main clause."
+  },
+  {
+    "slug": "a2-verlieren-vergessen-word-choice-exercises",
+    "cluster": "tools",
+    "prompt": "Distinguish losing a key from forgetting a bag at home.",
+    "sample": "Ich habe den Schlüssel verloren und meine Tasche zu Hause vergessen.",
+    "check": "The stated situations clarify loss versus leaving something behind through forgetfulness."
+  },
+  {
+    "slug": "a2-duerfen-muessen-word-choice-exercises",
+    "cluster": "requests",
+    "prompt": "Contrast not being allowed to leave with not needing to stay.",
+    "sample": "Du darfst noch nicht gehen, aber du musst nicht bis zum Ende bleiben.",
+    "check": "Nicht dürfen is prohibition; nicht müssen is absence of obligation."
+  },
+  {
+    "slug": "b1-behalten-erhalten-word-choice-exercises",
+    "cluster": "shopping",
+    "prompt": "Contrast receiving a receipt with keeping it afterwards.",
+    "sample": "Ich erhalte einen Beleg und behalte ihn für meine Unterlagen.",
+    "check": "Erhalten means receiving here; behalten means retaining what is already received."
+  },
+  {
+    "slug": "b1-erfahren-erleben-word-choice-exercises",
+    "cluster": "evidence",
+    "prompt": "Say that you learned about an event and experienced another personally.",
+    "sample": "Ich habe von der Eröffnung erfahren und das Fest selbst erlebt.",
+    "check": "Erfahren concerns new information; erlebt identifies personal experience here."
+  },
+  {
+    "slug": "b1-erfinden-entdecken-word-choice-exercises",
+    "cluster": "learning",
+    "prompt": "Describe discovering a problem and inventing a solution.",
+    "sample": "Wir entdecken eine Schwierigkeit und erfinden dafür ein neues Werkzeug.",
+    "check": "The difficulty already exists; the tool is created."
+  },
+  {
+    "slug": "b1-vergleichen-verwechseln-word-choice-exercises",
+    "cluster": "comparison",
+    "prompt": "Describe comparing two products without mixing them up.",
+    "sample": "Ich vergleiche die beiden Geräte, verwechsle aber ihre Namen.",
+    "check": "Vergleichen examines differences; verwechseln confuses identities."
+  },
+  {
+    "slug": "b1-ersetzen-ergaenzen-word-choice-exercises",
+    "cluster": "text",
+    "prompt": "Describe replacing a paragraph and adding an example elsewhere.",
+    "sample": "Ich ersetze den ersten Absatz und ergänze den zweiten um ein Beispiel.",
+    "check": "Ersetzen substitutes; ergänzen retains material and adds to it."
+  },
+  {
+    "slug": "b1-aendern-sich-aendern-word-choice-exercises",
+    "cluster": "work",
+    "prompt": "Describe actively changing a plan and the weather changing by itself.",
+    "sample": "Wir ändern den Plan, weil sich das Wetter ändert.",
+    "check": "The reflexive form makes the changing thing the subject."
+  },
+  {
+    "slug": "b1-beantragen-beauftragen-word-choice-exercises",
+    "cluster": "work",
+    "prompt": "Describe applying for permission and commissioning a company.",
+    "sample": "Wir beantragen eine Genehmigung und beauftragen eine Firma mit dem Umbau.",
+    "check": "Beantragen takes the requested permission; beauftragen takes the commissioned party."
+  },
+  {
+    "slug": "b1-annehmen-aufnehmen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Describe accepting an invitation and recording a conversation.",
+    "sample": "Ich nehme die Einladung an und nehme später das Gespräch auf.",
+    "check": "The separated prefixes decide the intended meaning in each main clause."
+  },
+  {
+    "slug": "b1-mitteilen-teilen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Say that you communicate a result and share a cake.",
+    "sample": "Ich teile dir das Ergebnis mit, und wir teilen den Kuchen.",
+    "check": "Mitteilen communicates information; teilen divides or shares the object here."
+  },
+  {
+    "slug": "b1-verlangen-verlaengern-word-choice-exercises",
+    "cluster": "work",
+    "prompt": "Contrast demanding a reason with extending a deadline.",
+    "sample": "Die Gruppe verlangt eine Begründung und verlängert die Frist.",
+    "check": "Verlängern means extending; verlangen means demanding in this context."
+  },
+  {
+    "slug": "b1-kuemmern-sorgen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Distinguish practical care for a neighbour from worry about them.",
+    "sample": "Ich kümmere mich um meine Nachbarin und sorge mich um sie.",
+    "check": "Both patterns use accusative reflexive pronouns but emphasise different responses."
+  },
+  {
+    "slug": "b1-zustimmen-abstimmen-word-choice-exercises",
+    "cluster": "discussion",
+    "prompt": "Say that you agree with a proposal before the group votes on it.",
+    "sample": "Ich stimme dem Vorschlag zu; danach stimmen wir darüber ab.",
+    "check": "Zustimmen takes dative; abstimmen über describes a vote here."
+  },
+  {
+    "slug": "b1-frei-kostenlos-word-choice-exercises",
+    "cluster": "shopping",
+    "prompt": "Ask whether a seat is available and whether using it costs nothing.",
+    "sample": "Ist dieser Platz frei, und ist die Nutzung kostenlos?",
+    "check": "Frei concerns availability here; kostenlos concerns price."
+  },
+  {
+    "slug": "b1-rechtzeitig-puenktlich-word-choice-exercises",
+    "cluster": "time",
+    "prompt": "Contrast arriving at the scheduled time with arriving early enough to help.",
+    "sample": "Ich komme pünktlich zum Beginn und rechtzeitig, um beim Aufbau zu helfen.",
+    "check": "The first emphasis is the schedule; the second is sufficient time for a purpose."
+  },
+  {
+    "slug": "b1-einladen-ausladen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Describe inviting guests and unloading boxes.",
+    "sample": "Wir laden Freunde ein und laden vorher die Kisten aus.",
+    "check": "The people/object cues disambiguate these separable verbs."
+  },
+  {
+    "slug": "b1-ausleihen-verleihen-word-choice-exercises",
+    "cluster": "shopping",
+    "prompt": "Describe borrowing a book and lending a tent to someone.",
+    "sample": "Ich leihe mir einen Roman aus und verleihe mein Zelt an Lea.",
+    "check": "The reflexive loan is borrowing; the named recipient makes the lending role clear."
+  },
+  {
+    "slug": "b2-foerdern-fordern-word-choice-exercises",
+    "cluster": "learning",
+    "prompt": "Contrast supporting young talent with demanding better conditions.",
+    "sample": "Der Verein fördert junge Talente und fordert bessere Trainingsbedingungen.",
+    "check": "The umlaut changes the verb; the object confirms the intended sense."
+  },
+  {
+    "slug": "b2-gewaehren-gewaehrleisten-word-choice-exercises",
+    "cluster": "work",
+    "prompt": "Distinguish granting access from ensuring a smooth process.",
+    "sample": "Wir gewähren der Gruppe Zugang und gewährleisten einen geordneten Ablauf.",
+    "check": "Gewähren grants something; gewährleisten concerns making the condition work."
+  },
+  {
+    "slug": "b2-nachweisen-hinweisen-word-choice-exercises",
+    "cluster": "evidence",
+    "prompt": "Distinguish drawing attention to a fault from demonstrating it with a test.",
+    "sample": "Ich weise auf den Fehler hin und weise ihn mit einem Test nach.",
+    "check": "Hinweisen alerts; nachweisen supplies evidence for the claim."
+  },
+  {
+    "slug": "b2-beurteilen-verurteilen-word-choice-exercises",
+    "cluster": "discussion",
+    "prompt": "Distinguish assessing a proposal from condemning an action.",
+    "sample": "Wir beurteilen den Vorschlag sachlich und verurteilen die Täuschung.",
+    "check": "Beurteilen is assessment; verurteilen expresses condemnation here."
+  },
+  {
+    "slug": "b2-wahrnehmen-wahrmachen-word-choice-exercises",
+    "cluster": "people",
+    "prompt": "Contrast attending an appointment with making a dream come true.",
+    "sample": "Ich nehme den Termin wahr und mache später meinen Traum wahr.",
+    "check": "Whole collocations identify the sense of these separable verbs."
+  },
+  {
+    "slug": "b2-angemessen-anmassend-word-choice-exercises",
+    "cluster": "discussion",
+    "prompt": "Contrast an appropriate request with a presumptuous demand.",
+    "sample": "Die Bitte wirkt angemessen, die Forderung dagegen anmaßend.",
+    "check": "These are contextual evaluations, not objective measurements."
+  },
+  {
+    "slug": "b2-wesentlich-hauptsaechlich-word-choice-exercises",
+    "cluster": "comparison",
+    "prompt": "Say a route is substantially shorter and is used mainly by cyclists.",
+    "sample": "Der Weg ist wesentlich kürzer und wird hauptsächlich von Radfahrern genutzt.",
+    "check": "Wesentlich strengthens the comparison; hauptsächlich identifies the predominant users."
+  },
+  {
+    "slug": "b2-oekonomisch-oekologisch-word-choice-exercises",
+    "cluster": "evidence",
+    "prompt": "Assess a plan separately from an economic and an ecological viewpoint.",
+    "sample": "Der Plan hat ökonomische Vorteile, aber ökologische Nachteile.",
+    "check": "Neither adjective alone labels a plan as good overall."
+  },
+  {
+    "slug": "b2-grundsaetzlich-gruendlich-word-choice-exercises",
+    "cluster": "discussion",
+    "prompt": "Agree in principle but ask for thorough checking.",
+    "sample": "Ich bin grundsätzlich einverstanden, möchte die Angaben aber gründlich prüfen.",
+    "check": "Grundsätzlich leaves details open; gründlich concerns depth of checking."
+  },
+  {
+    "slug": "b2-vermutlich-vermeintlich-word-choice-exercises",
+    "cluster": "evidence",
+    "prompt": "Describe a probable cause and a supposedly certain solution.",
+    "sample": "Vermutlich liegt es am Kabel; die vermeintlich sichere Lösung hat jedoch nicht funktioniert.",
+    "check": "Vermutlich expresses likelihood; vermeintlich casts doubt on the appearance of certainty."
+  },
+  {
+    "slug": "a1-clothing-basics-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe wearing a shirt and jacket but buying new trousers.",
+    "sample": "Ich trage ein Hemd und eine Jacke und kaufe eine neue Hose.",
+    "check": "Hose is singular in German even though English trousers is plural."
+  },
+  {
+    "slug": "a1-footwear-accessories-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Say you wear boots and a hat in winter.",
+    "sample": "Im Winter trage ich Stiefel und eine Mütze.",
+    "check": "Stiefel is plural here; Mütze is a feminine singular noun."
+  },
+  {
+    "slug": "a1-basic-colours-vocabulary-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe a green bag and a black bicycle using colours after sein.",
+    "sample": "Die Tasche ist grün, und das Fahrrad ist schwarz.",
+    "check": "The colour adjectives do not receive endings in this position."
+  },
+  {
+    "slug": "a1-shapes-alignment-vocabulary-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe a round plate and a crooked picture.",
+    "sample": "Der Teller ist rund, und das Bild hängt schief.",
+    "check": "Rund describes shape; schief describes the alignment here."
+  },
+  {
+    "slug": "a1-parts-of-day-vocabulary-exercises",
+    "cluster": "time",
+    "prompt": "Say you study in the morning and read in the evening.",
+    "sample": "Am Vormittag lerne ich, und am Abend lese ich.",
+    "check": "Vormittag means the period before midday; Abend means evening."
+  },
+  {
+    "slug": "a1-week-and-day-types-vocabulary-exercises",
+    "cluster": "time",
+    "prompt": "Contrast working on a weekday with resting at the weekend.",
+    "sample": "An einem Wochentag arbeite ich, am Wochenende ruhe ich mich aus.",
+    "check": "Wochentag and Wochenende describe different parts of a week."
+  },
+  {
+    "slug": "a1-school-subjects-vocabulary-exercises",
+    "cluster": "learning",
+    "prompt": "Say which school subject you enjoy and which you find difficult.",
+    "sample": "Ich mag Kunst, aber Mathematik finde ich schwierig.",
+    "check": "School-subject names are nouns and begin with capitals."
+  },
+  {
+    "slug": "a1-animals-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe a dog playing and a cat sleeping.",
+    "sample": "Der Hund spielt, und die Katze schläft.",
+    "check": "Hund is masculine; Katze is feminine in these animal names."
+  },
+  {
+    "slug": "a1-public-transport-vehicles-vocabulary-exercises",
+    "cluster": "travel",
+    "prompt": "Describe taking a bus to a ferry.",
+    "sample": "Ich fahre mit dem Bus zur Fähre.",
+    "check": "Bus is masculine; Fähre is feminine and means a boat service."
+  },
+  {
+    "slug": "a1-shopping-quantities-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "Ask for a kilo of apples and a piece of cake.",
+    "sample": "Ich hätte gern ein Kilo Äpfel und ein Stück Kuchen.",
+    "check": "Kilo measures weight; Stück counts one portion or piece."
+  },
+  {
+    "slug": "a1-light-and-clean-adjectives-vocabulary-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe a bright room and a dirty window.",
+    "sample": "Das Zimmer ist hell, aber das Fenster ist schmutzig.",
+    "check": "Brightness and cleanliness are separate characteristics."
+  },
+  {
+    "slug": "a1-personal-belongings-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Say that you have your key but cannot find your glasses.",
+    "sample": "Ich habe meinen Schlüssel, aber meine Brille fehlt.",
+    "check": "Brille is singular; Schlüssel is masculine in the first clause."
+  },
+  {
+    "slug": "a1-indoor-outdoor-position-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Contrast children playing outdoors with you working indoors.",
+    "sample": "Die Kinder spielen draußen, und ich arbeite drinnen.",
+    "check": "These adverbs describe location without an added preposition."
+  },
+  {
+    "slug": "a1-garden-nature-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Describe a flower growing beside a tree.",
+    "sample": "Neben dem Baum wächst eine Blume im Gras.",
+    "check": "Baum, Blume and Gras have different grammatical genders."
+  },
+  {
+    "slug": "a2-traffic-features-vocabulary-exercises",
+    "cluster": "travel",
+    "prompt": "Describe a traffic light at an intersection and a pavement beside it.",
+    "sample": "An der Kreuzung steht eine Ampel; daneben verläuft der Gehweg.",
+    "check": "Kreuzung names the junction; Gehweg names the pedestrian path."
+  },
+  {
+    "slug": "a2-train-station-objects-vocabulary-exercises",
+    "cluster": "travel",
+    "prompt": "Say you check the timetable before going to the platform.",
+    "sample": "Ich sehe im Fahrplan nach und gehe dann zum Bahnsteig.",
+    "check": "Fahrplan is the schedule; Bahnsteig is the boarding area, rather than the track itself."
+  },
+  {
+    "slug": "a2-airport-verbs-vocabulary-exercises",
+    "cluster": "travel",
+    "prompt": "Describe checking in before a flight and changing planes later.",
+    "sample": "Wir checken zuerst ein und steigen später in Frankfurt um.",
+    "check": "Einchecken and umsteigen are separable in these main clauses."
+  },
+  {
+    "slug": "a2-seaside-landscape-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Describe waves at a sandy beach on the coast.",
+    "sample": "An der Küste treffen kleine Wellen auf den Sandstrand.",
+    "check": "Küste names the coastal region; Strand names the shoreline area used here."
+  },
+  {
+    "slug": "a2-weather-events-vocabulary-exercises",
+    "cluster": "descriptions",
+    "prompt": "Contrast a short shower with a longer storm.",
+    "sample": "Nach einem kurzen Schauer zog ein schwerer Sturm auf.",
+    "check": "Schauer and Sturm are different weather events, not interchangeable labels for any rain."
+  },
+  {
+    "slug": "a2-textile-materials-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe a cotton shirt and a wool scarf.",
+    "sample": "Das Hemd ist aus Baumwolle, und der Schal ist aus Wolle.",
+    "check": "Aus introduces material; Baumwolle and Wolle are not the same textile."
+  },
+  {
+    "slug": "a2-garden-tools-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Describe watering flowers with a watering can and digging with a spade.",
+    "sample": "Ich gieße die Blumen mit der Gießkanne und grabe mit dem Spaten.",
+    "check": "Learn die Gießkanne and der Spaten with their articles before inflecting them."
+  },
+  {
+    "slug": "a2-sound-verbs-vocabulary-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe leaves rustling and a bee humming.",
+    "sample": "Die Blätter rascheln, und eine Biene summt.",
+    "check": "Different sound sources call for different verbs; these are typical combinations."
+  },
+  {
+    "slug": "a2-messaging-nouns-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Say you save a message as a draft and add an attachment.",
+    "sample": "Ich speichere die Nachricht als Entwurf und füge einen Anhang hinzu.",
+    "check": "Entwurf is an unsent draft; Anhang is an attached item."
+  },
+  {
+    "slug": "a2-craft-actions-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Describe folding paper and gluing it onto a card.",
+    "sample": "Ich falte das Papier und klebe es auf die Karte.",
+    "check": "Falten changes the paper's shape; kleben attaches it."
+  },
+  {
+    "slug": "a2-moving-objects-vocabulary-exercises",
+    "cluster": "tools",
+    "prompt": "Describe carrying a box and pushing a trolley.",
+    "sample": "Ich trage die Kiste und schiebe den Wagen.",
+    "check": "Tragen supports the object while moving; schieben pushes it along."
+  },
+  {
+    "slug": "a2-bedding-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Describe a pillow and blanket lying on a mattress.",
+    "sample": "Auf der Matratze liegen ein Kissen und eine Decke.",
+    "check": "Matratze is the base; Kissen and Decke name separate bedding items."
+  },
+  {
+    "slug": "a2-condition-adjectives-vocabulary-exercises",
+    "cluster": "descriptions",
+    "prompt": "Describe an empty box with damaged packaging.",
+    "sample": "Die Schachtel ist leer, und ihre Verpackung ist beschädigt.",
+    "check": "Leer concerns contents; beschädigt concerns condition."
+  },
+  {
+    "slug": "a2-accommodation-types-vocabulary-exercises",
+    "cluster": "travel",
+    "prompt": "Contrast sleeping at a campsite with booking a holiday flat.",
+    "sample": "Heute übernachten wir auf einem Campingplatz; morgen beziehen wir eine Ferienwohnung.",
+    "check": "Campingplatz is a site; Ferienwohnung is a self-contained holiday dwelling."
+  },
+  {
+    "slug": "a2-occupations-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Name a female mechanic and a male baker in a fictional street.",
+    "sample": "In unserer Straße arbeiten eine Mechanikerin und ein Bäcker.",
+    "check": "Occupation forms can identify gender; keep the article consistent with the chosen form."
+  },
+  {
+    "slug": "a2-sequence-adverbs-vocabulary-exercises",
+    "cluster": "time",
+    "prompt": "Explain a three-step task using first, then and last.",
+    "sample": "Zuerst lese ich die Anleitung, danach baue ich das Modell und zuletzt prüfe ich es.",
+    "check": "The sequence adverbs occupy position one; the finite verb stays second."
+  },
+  {
+    "slug": "b1-travel-disruption-vocabulary-exercises",
+    "cluster": "travel",
+    "prompt": "Describe a cancelled train and replacement bus service.",
+    "sample": "Wegen des Zugausfalls nutzen wir den Ersatzverkehr mit Bussen.",
+    "check": "Ausfall means cancellation here; Ersatzverkehr is the substitute service, not a delay."
+  },
+  {
+    "slug": "b1-food-label-terms-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "Say you check an ingredients list and the stated portion size.",
+    "sample": "Ich lese die Zutatenliste und prüfe die angegebene Portionsgröße.",
+    "check": "Zutatenliste identifies ingredients; Portionsgröße identifies the reference quantity."
+  },
+  {
+    "slug": "b1-rental-documents-costs-vocabulary-exercises",
+    "cluster": "places",
+    "prompt": "Distinguish a deposit from ongoing additional housing costs.",
+    "sample": "Die Kaution ist getrennt von den monatlichen Nebenkosten angegeben.",
+    "check": "The words name different payment categories; the exercise does not define contractual entitlements."
+  },
+  {
+    "slug": "b1-event-organisation-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Ask for an event location and its registration deadline.",
+    "sample": "Wo ist der Veranstaltungsort, und wann endet die Anmeldefrist?",
+    "check": "A location and a deadline answer different planning questions."
+  },
+  {
+    "slug": "b1-personal-strengths-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Describe a task requiring care and teamwork.",
+    "sample": "Für diese Aufgabe sind Sorgfalt und Teamfähigkeit wichtig.",
+    "check": "Sorgfalt concerns careful execution; Teamfähigkeit concerns working with others."
+  },
+  {
+    "slug": "b1-emotional-reactions-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe relief after a difficult task and enthusiasm for its result.",
+    "sample": "Nach der Prüfung bin ich erleichtert und vom Ergebnis begeistert.",
+    "check": "Erleichtert concerns release from worry; begeistert concerns strong positive interest."
+  },
+  {
+    "slug": "b1-social-relationships-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Distinguish a flatmate from a relative in a brief introduction.",
+    "sample": "Lea ist meine Mitbewohnerin, aber keine Verwandte.",
+    "check": "Living together does not by itself establish a family relationship."
+  },
+  {
+    "slug": "b1-wellbeing-reflexive-verbs-vocabulary-exercises",
+    "cluster": "people",
+    "prompt": "Describe resting after a busy week using a reflexive verb.",
+    "sample": "Am Wochenende erhole ich mich von der anstrengenden Woche.",
+    "check": "Sich erholen uses mich with ich; this is language practice rather than health advice."
+  },
+  {
+    "slug": "b1-education-paths-vocabulary-exercises",
+    "cluster": "learning",
+    "prompt": "Distinguish a short internship from a longer vocational training path.",
+    "sample": "Nach dem Praktikum möchte ich eine Ausbildung beginnen.",
+    "check": "Praktikum and Ausbildung name different forms of practical learning."
+  },
+  {
+    "slug": "b1-logistics-verbs-vocabulary-exercises",
+    "cluster": "shopping",
+    "prompt": "Describe packing goods before dispatch and later collection.",
+    "sample": "Wir verpacken die Ware vor dem Versand; der Kunde holt sie anschließend ab.",
+    "check": "Verpacken concerns packaging; abholen concerns collecting the item."
+  },
+  {
+    "slug": "b1-museum-exhibitions-vocabulary-exercises",
+    "cluster": "learning",
+    "prompt": "Ask whether a museum ticket includes a guided tour.",
+    "sample": "Ist die Führung in der Eintrittskarte enthalten?",
+    "check": "Führung is the guided visit; Eintrittskarte is the admission ticket."
+  },
+  {
+    "slug": "b1-document-quality-vocabulary-exercises",
+    "cluster": "text",
+    "prompt": "Assess a document as complete but internally contradictory.",
+    "sample": "Die Unterlagen sind vollständig, enthalten aber widersprüchliche Angaben.",
+    "check": "Completeness does not guarantee consistency or correctness."
+  },
+  {
+    "slug": "b2-conditions-interactions-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Distinguish a prerequisite from a later effect of a change.",
+    "sample": "Die Zustimmung ist eine Voraussetzung; die kürzere Wartezeit ist eine mögliche Auswirkung.",
+    "check": "A required prior condition differs from a possible consequence."
+  },
+  {
+    "slug": "b2-evidence-findings-nouns-vocabulary-exercises",
+    "cluster": "evidence",
+    "prompt": "State that an assumption still needs evidence before a conclusion is drawn.",
+    "sample": "Für diese Annahme fehlt noch ein Nachweis; die Schlussfolgerung bleibt vorläufig.",
+    "check": "An assumption, supporting evidence and a conclusion are separate parts of reasoning."
+  },
+  {
+    "slug": "b2-rules-discretion-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Describe a rule that leaves limited discretion but has an exception.",
+    "sample": "Die Vorgabe lässt wenig Spielraum, sieht aber eine Ausnahme vor.",
+    "check": "Spielraum is permitted latitude; Ausnahme is a case outside the general rule."
+  },
+  {
+    "slug": "b2-statistics-terms-vocabulary-exercises",
+    "cluster": "evidence",
+    "prompt": "Describe a sample with an outlier that can influence its mean.",
+    "sample": "Die Stichprobe enthält einen Ausreißer, der den Mittelwert beeinflussen kann.",
+    "check": "A mean can be sensitive to an extreme value; this does not alone invalidate the sample."
+  },
+  {
+    "slug": "b2-change-nouns-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Distinguish gradual adjustment from a major structural change.",
+    "sample": "Wir erwarten eine schrittweise Anpassung statt eines grundlegenden Umbruchs.",
+    "check": "Anpassung suggests modification; Umbruch suggests a more substantial transformation."
+  },
+  {
+    "slug": "b2-risk-planning-vocabulary-exercises",
+    "cluster": "work",
+    "prompt": "Name uncertainty when discussing a possible future cost.",
+    "sample": "Wegen der Ungewissheit planen wir eine Rücklage für mögliche Zusatzkosten.",
+    "check": "Ungewissheit names uncertainty; Rücklage names a reserve rather than a predicted loss."
+  },
+  {
+    "slug": "b2-text-structure-vocabulary-exercises",
+    "cluster": "text",
+    "prompt": "Describe a transition that connects a paragraph to a central point.",
+    "sample": "Die Überleitung stellt den Bezug zur Kernaussage her.",
+    "check": "Überleitung connects text sections; Kernaussage identifies the main point."
+  },
+  {
+    "slug": "b2-critical-discussion-vocabulary-exercises",
+    "cluster": "discussion",
+    "prompt": "Raise a reservation without rejecting an entire proposal.",
+    "sample": "Ich habe einen Vorbehalt zur Frist, unterstütze aber das grundsätzliche Ziel.",
+    "check": "A reservation may qualify support without amounting to complete disagreement."
+  },
+  {
+    "slug": "a1-age-and-birthday-communication-exercises",
+    "cluster": "people",
+    "prompt": "Say that you are twenty-one and your birthday is in April.",
+    "sample": "Ich bin einundzwanzig Jahre alt und habe im April Geburtstag.",
+    "check": "Age uses sein; a month takes im in this phrase."
+  },
+  {
+    "slug": "a1-talking-languages-communication-exercises",
+    "cluster": "learning",
+    "prompt": "Tell a classmate that you speak Hindi and are learning German.",
+    "sample": "Ich spreche Hindi und lerne seit Januar Deutsch.",
+    "check": "Sprechen describes the language you use; lernen describes your learning activity."
+  },
+  {
+    "slug": "a1-locating-everyday-objects-communication-exercises",
+    "cluster": "places",
+    "prompt": "Ask where your glasses are and say they are on the desk.",
+    "sample": "Wo ist meine Brille? Sie liegt auf dem Schreibtisch.",
+    "check": "Wo asks for a static location; Brille is singular in German."
+  },
+  {
+    "slug": "a1-likes-and-dislikes-communication-exercises",
+    "cluster": "people",
+    "prompt": "Say you enjoy cooking but prefer reading today.",
+    "sample": "Ich koche gern, aber heute lese ich lieber.",
+    "check": "Gern gives general enjoyment; lieber expresses the current comparison."
+  },
+  {
+    "slug": "a1-identifying-objects-communication-exercises",
+    "cluster": "tools",
+    "prompt": "Ask what an unfamiliar tool is called in German.",
+    "sample": "Wie heißt dieses Werkzeug auf Deutsch?",
+    "check": "The naming question differs from asking where the object is."
+  },
+  {
+    "slug": "a1-thanking-and-replying-communication-exercises",
+    "cluster": "people",
+    "prompt": "Thank a formal visitor for their help and give a reply to thanks.",
+    "sample": "Vielen Dank für Ihre Hilfe. Gern geschehen!",
+    "check": "Ihre matches formal address; Gern geschehen is a response, not another request."
+  },
+  {
+    "slug": "a1-asking-current-time-communication-exercises",
+    "cluster": "time",
+    "prompt": "Ask the current time and state an event starts at ten.",
+    "sample": "Wie spät ist es? Die Veranstaltung beginnt um zehn Uhr.",
+    "check": "The current-time question differs from asking an event's starting time."
+  },
+  {
+    "slug": "a1-expressing-basic-needs-communication-exercises",
+    "cluster": "people",
+    "prompt": "Say that you are thirsty and feel cold.",
+    "sample": "Ich habe Durst, und mir ist kalt.",
+    "check": "Durst uses haben; the personal temperature expression uses dative mir."
+  },
+  {
+    "slug": "a1-weekend-plans-communication-exercises",
+    "cluster": "time",
+    "prompt": "Tell a friend that you intend to visit your aunt on Sunday.",
+    "sample": "Am Sonntag möchte ich meine Tante besuchen.",
+    "check": "Möchte expresses the intended plan without implying that the visit is confirmed."
+  },
+  {
+    "slug": "a1-giving-street-address-communication-exercises",
+    "cluster": "places",
+    "prompt": "Give a fictional address with a street and house number.",
+    "sample": "Ich wohne in der Gartenstraße, Hausnummer sieben.",
+    "check": "A practice address need not be your real personal address."
+  },
+  {
+    "slug": "a2-finding-right-counter-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "Ask which counter deals with lost property.",
+    "sample": "Welcher Schalter ist für Fundsachen zuständig?",
+    "check": "Für … zuständig asks about responsibility rather than assuming any counter can help."
+  },
+  {
+    "slug": "a2-asking-food-ingredients-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "Ask whether a soup contains cream and how it is prepared.",
+    "sample": "Enthält die Suppe Sahne, und wie wird sie zubereitet?",
+    "check": "Ask directly about the ingredient; the language exercise cannot verify a real dish's contents."
+  },
+  {
+    "slug": "a2-checking-shared-bill-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "Point out that a drink appears twice on a bill and ask for a check.",
+    "sample": "Das Getränk steht zweimal auf der Rechnung. Könnten Sie das bitte prüfen?",
+    "check": "Describe the discrepancy and request verification before assuming a deliberate overcharge."
+  },
+  {
+    "slug": "a2-borrowing-object-communication-exercises",
+    "cluster": "requests",
+    "prompt": "Ask to borrow a ruler and state when you will return it.",
+    "sample": "Darf ich dein Lineal ausleihen? Ich gebe es dir nach der Stunde zurück.",
+    "check": "State the permission request and return arrangement separately."
+  },
+  {
+    "slug": "a2-leisure-suggestions-communication-exercises",
+    "cluster": "people",
+    "prompt": "Suggest a walk and invite a friend's preference.",
+    "sample": "Wie wäre es mit einem Spaziergang? Oder möchtest du lieber ins Museum?",
+    "check": "A suggestion leaves room for a different preference."
+  },
+  {
+    "slug": "a2-asking-travel-duration-communication-exercises",
+    "cluster": "travel",
+    "prompt": "Ask how long a bus journey takes, specifying the destination.",
+    "sample": "Wie lange dauert die Busfahrt bis zum Hauptbahnhof?",
+    "check": "Wie lange asks duration; bis zum Hauptbahnhof defines the endpoint."
+  },
+  {
+    "slug": "a2-talking-about-yesterday-communication-exercises",
+    "cluster": "past",
+    "prompt": "Describe two things you did yesterday in sequence.",
+    "sample": "Gestern habe ich eingekauft; danach habe ich meine Schwester besucht.",
+    "check": "Both Perfekt clauses refer to yesterday; danach marks the later activity."
+  },
+  {
+    "slug": "a2-correcting-written-details-communication-exercises",
+    "cluster": "text",
+    "prompt": "Correct a wrongly entered house number politely.",
+    "sample": "Bei der Hausnummer muss es siebenundzwanzig statt zweiundsiebzig heißen.",
+    "check": "Give the correct and replaced values so the requested edit is unambiguous."
+  },
+  {
+    "slug": "a2-checking-service-inclusions-communication-exercises",
+    "cluster": "shopping",
+    "prompt": "Ask whether materials are included in a course price.",
+    "sample": "Sind die Materialien im Kurspreis enthalten, oder kosten sie extra?",
+    "check": "The question distinguishes inclusion from a separate charge without assuming either."
+  },
+  {
+    "slug": "a2-leaving-phone-message-communication-exercises",
+    "cluster": "people",
+    "prompt": "Leave a callback message with a topic and an available time.",
+    "sample": "Hier spricht Lea. Es geht um den Kurs; bitte rufen Sie mich nach drei Uhr zurück.",
+    "check": "Identify yourself, the topic and the requested callback window."
+  },
+  {
+    "slug": "a2-asking-homework-instructions-communication-exercises",
+    "cluster": "learning",
+    "prompt": "Ask a teacher which exercise is due and by when.",
+    "sample": "Welche Aufgabe sollen wir abgeben, und bis wann?",
+    "check": "Separate the task's identity from its deadline."
+  },
+  {
+    "slug": "a2-asking-device-instructions-communication-exercises",
+    "cluster": "tools",
+    "prompt": "Ask which button starts a device and request a demonstration.",
+    "sample": "Welchen Knopf soll ich drücken? Können Sie mir das kurz zeigen?",
+    "check": "Request the next step rather than guessing a device's operation."
+  },
+  {
+    "slug": "a2-requesting-quiet-communication-exercises",
+    "cluster": "requests",
+    "prompt": "Ask someone politely to lower music while you are studying.",
+    "sample": "Könnten Sie die Musik bitte leiser stellen? Ich lerne gerade.",
+    "check": "Name the requested change and give a short relevant reason."
+  },
+  {
+    "slug": "a2-offering-lift-communication-exercises",
+    "cluster": "travel",
+    "prompt": "Offer a friend a lift and ask where to collect them.",
+    "sample": "Soll ich dich zum Training mitnehmen? Wo kann ich dich abholen?",
+    "check": "An offer still needs acceptance; abholen asks about collection."
+  },
+  {
+    "slug": "a2-asking-about-seat-communication-exercises",
+    "cluster": "places",
+    "prompt": "Ask formally whether a chair is available before sitting down.",
+    "sample": "Ist dieser Stuhl noch frei? Darf ich mich hier setzen?",
+    "check": "Availability and permission are separate questions."
+  },
+  {
+    "slug": "a2-explaining-class-absence-communication-exercises",
+    "cluster": "learning",
+    "prompt": "Tell a teacher you will miss class and ask how to catch up.",
+    "sample": "Ich kann morgen leider nicht teilnehmen. Welche Aufgaben soll ich nachholen?",
+    "check": "State the absence and the practical follow-up without inventing an excuse."
+  },
+  {
+    "slug": "b1-asking-for-example-communication-exercises",
+    "cluster": "learning",
+    "prompt": "Ask for a concrete example showing how a rule applies.",
+    "sample": "Könnten Sie an einem Beispiel zeigen, wie diese Regel funktioniert?",
+    "check": "The question requests illustration of a specific rule rather than an unrelated example."
+  },
+  {
+    "slug": "b1-paraphrasing-meaning-communication-exercises",
+    "cluster": "text",
+    "prompt": "Restate that only a title is needed, using Anders gesagt.",
+    "sample": "Anders gesagt: Für den ersten Entwurf genügt eine Überschrift.",
+    "check": "A paraphrase should retain the original limit rather than adding new requirements."
+  },
+  {
+    "slug": "b1-summarizing-article-communication-exercises",
+    "cluster": "text",
+    "prompt": "Summarise a short article about library opening hours without adding your opinion.",
+    "sample": "Der Artikel behandelt die neuen Öffnungszeiten und erläutert die Gründe für die Änderung.",
+    "check": "Attribute only content that the hypothetical article actually contains."
+  },
+  {
+    "slug": "b1-naming-information-source-communication-exercises",
+    "cluster": "evidence",
+    "prompt": "Name a notice as the source of a room assignment.",
+    "sample": "Laut dem Aushang findet der Kurs in Raum zwölf statt.",
+    "check": "Attribution identifies where the information came from; it does not independently verify it."
+  },
+  {
+    "slug": "b1-comparing-viewpoints-communication-exercises",
+    "cluster": "comparison",
+    "prompt": "Compare two people's priorities and name a shared concern.",
+    "sample": "Lea betont die Kosten, Amir die Qualität; beiden ist ein verlässlicher Termin wichtig.",
+    "check": "Separate the different priorities from the point they share."
+  },
+  {
+    "slug": "b1-expectation-and-reality-communication-exercises",
+    "cluster": "comparison",
+    "prompt": "Explain that you expected a lecture but found a practical workshop.",
+    "sample": "Ich hatte einen Vortrag erwartet; tatsächlich konnten wir alles selbst ausprobieren.",
+    "check": "Mark the expectation first and the observed experience second."
+  },
+  {
+    "slug": "b1-giving-recommendation-communication-exercises",
+    "cluster": "people",
+    "prompt": "Recommend a short route for someone with limited time.",
+    "sample": "Wenn du wenig Zeit hast, würde ich dir den Weg durch den Park empfehlen.",
+    "check": "Link the recommendation to the listener's stated needs, not an absolute best-choice claim."
+  },
+  {
+    "slug": "b1-reassuring-minor-mistake-communication-exercises",
+    "cluster": "people",
+    "prompt": "Reassure someone about a minor typo and propose correcting it together.",
+    "sample": "Der kleine Tippfehler lässt sich korrigieren. Wir sehen uns den Satz gemeinsam an.",
+    "check": "Keep reassurance proportionate to the stated minor mistake."
+  },
+  {
+    "slug": "b1-requesting-future-updates-communication-exercises",
+    "cluster": "work",
+    "prompt": "Request an update as soon as a room is confirmed.",
+    "sample": "Bitte geben Sie mir Bescheid, sobald der Raum bestätigt ist.",
+    "check": "Sobald defines when the update is needed without asserting confirmation has happened."
+  },
+  {
+    "slug": "b1-personal-boundaries-communication-exercises",
+    "cluster": "people",
+    "prompt": "Decline to discuss a private topic while keeping the boundary clear.",
+    "sample": "Darüber möchte ich nicht sprechen. Bitte respektieren Sie das.",
+    "check": "A clear boundary does not require a detailed personal justification."
+  },
+  {
+    "slug": "b1-stating-goals-communication-exercises",
+    "cluster": "learning",
+    "prompt": "State a speaking goal and one concrete practice action.",
+    "sample": "Ich möchte freier sprechen und übe deshalb jeden Tag eine kurze Vorstellung.",
+    "check": "Connect the goal to an observable activity instead of only naming an aspiration."
+  },
+  {
+    "slug": "b1-qualifying-generalizations-communication-exercises",
+    "cluster": "discussion",
+    "prompt": "Qualify a claim that all participants prefer online tasks.",
+    "sample": "Viele Teilnehmende bevorzugen Online-Aufgaben, aber nicht alle.",
+    "check": "Viele limits the group; nicht alle makes the exception explicit."
+  },
+  {
+    "slug": "b1-acknowledging-contribution-communication-exercises",
+    "cluster": "work",
+    "prompt": "Give a colleague credit for a useful overview while acknowledging shared revision.",
+    "sample": "Die Übersicht stammt von Lea; die letzte Fassung haben wir gemeinsam überarbeitet.",
+    "check": "Distinguish the original contribution from the later joint work."
+  },
+  {
+    "slug": "b1-opening-closing-presentation-communication-exercises",
+    "cluster": "text",
+    "prompt": "Open a presentation about a reading project and invite questions at the end.",
+    "sample": "Heute stelle ich unser Leseprojekt vor. Zum Schluss freue ich mich auf Ihre Fragen.",
+    "check": "Signpost the topic and the question stage using consistent formal address."
+  },
+  {
+    "slug": "b2-correlation-causation-communication-exercises",
+    "cluster": "evidence",
+    "prompt": "Say that two changes occur together without concluding one causes the other.",
+    "sample": "Beide Veränderungen treten gleichzeitig auf; daraus folgt noch kein ursächlicher Zusammenhang.",
+    "check": "Association alone does not establish causation or exclude a possible causal link."
+  },
+  {
+    "slug": "b2-polite-interruption-communication-exercises",
+    "cluster": "discussion",
+    "prompt": "Ask to interrupt briefly for a clarification, then let the speaker continue.",
+    "sample": "Darf ich kurz eine Verständnisfrage stellen? Danach können Sie Ihren Gedanken fortsetzen.",
+    "check": "Make the reason and limited scope of the interruption explicit."
+  },
+  {
+    "slug": "b2-challenging-assumption-communication-exercises",
+    "cluster": "evidence",
+    "prompt": "Ask what assumption underlies a forecast and how it could be checked.",
+    "sample": "Welche Annahme liegt der Prognose zugrunde, und wie lässt sie sich prüfen?",
+    "check": "Question the premise without treating it as false merely because it is uncertain."
+  },
+  {
+    "slug": "b2-defining-project-scope-communication-exercises",
+    "cluster": "work",
+    "prompt": "Clarify that proofreading is included but new illustrations are outside scope.",
+    "sample": "Das Korrekturlesen ist vereinbart; neue Illustrationen sind nicht Bestandteil des Auftrags.",
+    "check": "Specify the boundary without implying that a scope change has already been approved."
+  },
+  {
+    "slug": "b2-disclosing-interest-communication-exercises",
+    "cluster": "discussion",
+    "prompt": "Disclose your connection to a project before giving your assessment.",
+    "sample": "Ich bin an diesem Projekt beteiligt und möchte das vor meiner Einschätzung offenlegen.",
+    "check": "Naming an interest helps readers assess the perspective; it does not guarantee impartiality."
+  },
+  {
+    "slug": "b2-proposing-pilot-communication-exercises",
+    "cluster": "work",
+    "prompt": "Propose testing a method with one group before a wider change.",
+    "sample": "Wir könnten die Methode mit einer Gruppe erproben und danach die Rückmeldungen auswerten.",
+    "check": "Define a limited trial and an evaluation step rather than promising a successful rollout."
+  },
+  {
+    "slug": "b2-revising-claim-communication-exercises",
+    "cluster": "evidence",
+    "prompt": "Revise a broad claim after receiving more precise information.",
+    "sample": "Nach den neuen Angaben gilt meine Aussage nur für einen Teil der Fälle.",
+    "check": "Narrow the actual claim rather than merely adding a vague uncertainty word."
+  },
+  {
+    "slug": "b2-explaining-goal-tradeoff-communication-exercises",
+    "cluster": "work",
+    "prompt": "Describe a trade-off between speed and thorough checking.",
+    "sample": "Wenn wir früher fertig werden wollen, bleibt weniger Zeit für die Prüfung.",
+    "check": "Make the competing aims explicit; a trade-off is not proof that one choice is always best."
+  },
+  {
+    "slug": "b2-clarifying-misunderstanding-communication-exercises",
+    "cluster": "discussion",
+    "prompt": "Clarify that your comment concerned a draft rather than a final report.",
+    "sample": "Meine Bemerkung bezog sich auf den Entwurf, nicht auf den fertigen Bericht.",
+    "check": "Identify the intended reference so the misunderstanding can be resolved."
+  },
+  {
+    "slug": "b2-conditional-agreement-communication-exercises",
+    "cluster": "discussion",
+    "prompt": "Agree to a plan only if responsibilities are clarified beforehand.",
+    "sample": "Ich stimme zu, sofern wir die Zuständigkeiten vorher klären.",
+    "check": "The condition qualifies the agreement; it is not unconditional approval."
+  }
+]

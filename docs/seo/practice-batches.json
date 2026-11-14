@@ -71,5 +71,20 @@
         "path": "docs/seo/communication50-20261114.json"
       }
     ]
+  },
+  {
+    "id": "vocabulary50",
+    "count": 50,
+    "levels": {
+      "a1": 16,
+      "a2": 16,
+      "b1": 10,
+      "b2": 8
+    },
+    "sources": [
+      {
+        "path": "docs/seo/vocabulary50-20261114.json"
+      }
+    ]
   }
 ]

@@ -1,0 +1,2902 @@
+[
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-family-relations-vocabulary-exercises",
+    "title": "German Family Vocabulary: A1 Exercises with Answers",
+    "description": "Learn German family words in context: Schwester, Bruder, Eltern and Großmutter. Practise relationships with translations and explained A1 exercises.",
+    "guide": "grammar/possessivartikel.html",
+    "guideLabel": "Review related grammar: possessives with family nouns",
+    "rule": "Learn family nouns with their forms: die Schwester (plural Schwestern), der Bruder (Brüder), die Großmutter (Großmütter) and die Eltern (plural only). Eltern means parents, not relatives in general. A possessive such as meine or mein agrees with the family noun that follows it.",
+    "trap": "Die Eltern is plural even when referring to one pair of parents. Use Meine Eltern wohnen …, not Meine Eltern wohnt ….",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Meine Schwester spielt heute Klavier.",
+        "My sister is playing the piano today."
+      ],
+      [
+        "Sein Bruder arbeitet in Dresden.",
+        "His brother works in Dresden."
+      ],
+      [
+        "Unsere Eltern wohnen am Stadtrand.",
+        "Our parents live on the edge of town."
+      ],
+      [
+        "Ihre Großmutter erzählt gern Geschichten.",
+        "Her grandmother likes telling stories."
+      ]
+    ],
+    "quiz": [
+      [
+        "Meine ___ heißt Nele. (sister)",
+        "Schwester",
+        "Die Schwester means sister; meine agrees with this feminine noun."
+      ],
+      [
+        "Mein ___ ist zwölf Jahre alt. (brother)",
+        "Bruder",
+        "Der Bruder means brother; mein is the matching possessive here."
+      ],
+      [
+        "Unsere ___ sprechen zwei Sprachen. (parents)",
+        "Eltern",
+        "Eltern is plural, so the verb is sprechen."
+      ],
+      [
+        "Meine ___ heißt Helga. (grandmother)",
+        "Großmutter",
+        "Großmutter names a parent's mother."
+      ]
+    ],
+    "wordBank": [
+      "Bruder",
+      "Eltern",
+      "Großmutter",
+      "Schwester"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-rooms-at-home-vocabulary-exercises",
+    "title": "German Rooms at Home: A1 Vocabulary Practice",
+    "description": "Practise Küche, Schlafzimmer, Wohnzimmer and Bad in German sentences. Learn room names with articles, translations and four explained exercises.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: articles with room names",
+    "rule": "Four useful room names are die Küche (Küchen), das Schlafzimmer (Schlafzimmer), das Wohnzimmer (Wohnzimmer) and das Bad (Bäder). Küche is the room where food is prepared; Wohnzimmer is the living room. The two nouns ending in -zimmer have the same singular and plural spelling.",
+    "trap": "English room names do not predict German gender. Learn die Küche but das Bad as complete vocabulary units.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "In der Küche steht ein kleiner Tisch.",
+        "There is a small table in the kitchen."
+      ],
+      [
+        "Das Schlafzimmer hat zwei Fenster.",
+        "The bedroom has two windows."
+      ],
+      [
+        "Wir lesen abends im Wohnzimmer.",
+        "We read in the living room in the evenings."
+      ],
+      [
+        "Das Bad ist neben der Treppe.",
+        "The bathroom is next to the stairs."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir kochen in der ___. (kitchen)",
+        "Küche",
+        "Küche names the room used for cooking."
+      ],
+      [
+        "Das Bett steht im ___. (bedroom)",
+        "Schlafzimmer",
+        "Schlafzimmer is the bedroom; im is short for in dem."
+      ],
+      [
+        "Das Sofa steht im ___. (living room)",
+        "Wohnzimmer",
+        "Wohnzimmer names the main sitting or living room."
+      ],
+      [
+        "Die Dusche ist im ___. (bathroom)",
+        "Bad",
+        "Bad is the bathroom in this home context."
+      ]
+    ],
+    "wordBank": [
+      "Bad",
+      "Küche",
+      "Schlafzimmer",
+      "Wohnzimmer"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-kitchen-objects-vocabulary-exercises",
+    "title": "German Kitchen Objects: A1 Vocabulary Exercises",
+    "description": "Learn Teller, Tasse, Löffel and Messer through German kitchen examples. Check articles and meanings with translated models and A1 answers.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: noun gender and articles",
+    "rule": "Learn der Teller (plural Teller), die Tasse (Tassen), der Löffel (Löffel) and das Messer (Messer). Teller means plate, Tasse means cup, Löffel means spoon and Messer means knife. Three of these nouns have unchanged plural spelling, so their articles and context help show the number.",
+    "trap": "Messer is neuter even though it ends in -er: das Messer. The ending alone is not a reliable gender rule.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Der Teller ist noch warm.",
+        "The plate is still warm."
+      ],
+      [
+        "Auf dem Tisch steht eine blaue Tasse.",
+        "There is a blue cup on the table."
+      ],
+      [
+        "Ich brauche einen Löffel für die Suppe.",
+        "I need a spoon for the soup."
+      ],
+      [
+        "Das Messer liegt neben dem Brot.",
+        "The knife is lying next to the bread."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Essen liegt auf dem ___. (plate)",
+        "Teller",
+        "Teller is the German word for plate."
+      ],
+      [
+        "Der Tee ist in der ___. (cup)",
+        "Tasse",
+        "Tasse is feminine; in der Tasse describes the location."
+      ],
+      [
+        "Für die Suppe nehme ich einen ___. (spoon)",
+        "Löffel",
+        "Löffel names the spoon used to eat the soup."
+      ],
+      [
+        "Ich schneide das Brot mit dem ___. (knife)",
+        "Messer",
+        "Messer is neuter; mit takes the dative form dem."
+      ]
+    ],
+    "wordBank": [
+      "Löffel",
+      "Messer",
+      "Tasse",
+      "Teller"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-classroom-supplies-vocabulary-exercises",
+    "title": "German Classroom Objects: A1 Vocabulary Practice",
+    "description": "Study Heft, Bleistift, Tafel and Radiergummi in classroom sentences. Practise useful German school words with English meanings and explained answers.",
+    "guide": "grammar/akkusativ.html",
+    "guideLabel": "Review related grammar: objects after brauchen and nehmen",
+    "rule": "Useful classroom nouns are das Heft (Hefte), der Bleistift (Bleistifte), die Tafel (Tafeln) and der Radiergummi (Radiergummis). A Heft is an exercise book; a Bleistift is a pencil. Radiergummi means eraser, while Tafel names a board used for writing in this context.",
+    "trap": "A Heft is usually a notebook or exercise book, not a textbook. A textbook is a Lehrbuch or Schulbuch.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Mein Heft hat vierzig Seiten.",
+        "My exercise book has forty pages."
+      ],
+      [
+        "Der Bleistift ist unter dem Stuhl.",
+        "The pencil is under the chair."
+      ],
+      [
+        "An der Tafel steht ein neues Wort.",
+        "There is a new word on the board."
+      ],
+      [
+        "Der Radiergummi liegt im Etui.",
+        "The eraser is in the pencil case."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich schreibe die Übung in mein ___. (exercise book)",
+        "Heft",
+        "Heft names the book used for writing exercises."
+      ],
+      [
+        "Zum Zeichnen nehme ich einen ___. (pencil)",
+        "Bleistift",
+        "Bleistift is a pencil, rather than an ink pen."
+      ],
+      [
+        "Die Lehrerin schreibt an die ___. (board)",
+        "Tafel",
+        "Tafel is the classroom writing board."
+      ],
+      [
+        "Ich entferne den Bleistiftstrich mit dem ___. (eraser)",
+        "Radiergummi",
+        "Radiergummi is the tool used to erase pencil marks."
+      ]
+    ],
+    "wordBank": [
+      "Bleistift",
+      "Heft",
+      "Radiergummi",
+      "Tafel"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-food-staples-vocabulary-exercises",
+    "title": "German Food Staples: A1 Vocabulary Exercises",
+    "description": "Practise Brot, Reis, Ei and Käse in everyday German food sentences. Learn articles and common uses with four translated examples and answer explanations.",
+    "guide": "grammar/akkusativ.html",
+    "guideLabel": "Review related grammar: food nouns as direct objects",
+    "rule": "Learn das Brot (Brote), der Reis, das Ei (Eier) and der Käse. Reis and Käse are often used as quantities of food without an article: Ich esse Reis. Ein Ei is one countable egg. Käse can have plural forms when types or whole cheeses are meant, but these tasks use it as a food substance.",
+    "trap": "Do not add an English-style plural when talking about rice as food. German normally uses Reis in the singular in that meaning.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Das Brot kommt frisch aus dem Ofen.",
+        "The bread is fresh from the oven."
+      ],
+      [
+        "Zum Gemüse gibt es Reis.",
+        "Rice is served with the vegetables."
+      ],
+      [
+        "Ich koche ein Ei zum Frühstück.",
+        "I am boiling an egg for breakfast."
+      ],
+      [
+        "Auf dem Brot liegt eine Scheibe Käse.",
+        "There is a slice of cheese on the bread."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich kaufe ein ganzes ___ beim Bäcker. (loaf of bread)",
+        "Brot",
+        "Ein Brot can mean one whole loaf."
+      ],
+      [
+        "Zum Curry essen wir ___. (rice)",
+        "Reis",
+        "Reis names the grain served with the curry."
+      ],
+      [
+        "In den Teig kommt ein ___. (egg)",
+        "Ei",
+        "Ei is countable; the singular article is ein."
+      ],
+      [
+        "Für das Sandwich schneide ich etwas ___. (cheese)",
+        "Käse",
+        "Etwas Käse refers to an amount of cheese."
+      ]
+    ],
+    "wordBank": [
+      "Brot",
+      "Ei",
+      "Käse",
+      "Reis"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-fruit-and-vegetables-vocabulary-exercises",
+    "title": "German Fruit and Vegetables: A1 Vocabulary Practice",
+    "description": "Learn Apfel, Birne, Kartoffel and Zwiebel in German shopping and cooking contexts. Practise articles and meanings with explained A1 exercises.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: articles for food nouns",
+    "rule": "Learn der Apfel (Äpfel), die Birne (Birnen), die Kartoffel (Kartoffeln) and die Zwiebel (Zwiebeln). Apfel and Birne are fruit; Kartoffel and Zwiebel are vegetables used in many cooked dishes. Store the plural with the noun: Apfel changes its vowel, while the other three add -n.",
+    "trap": "The plural of Apfel is Äpfel, not Apfeln. A plural noun still starts with a capital letter.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Der rote Apfel liegt im Korb.",
+        "The red apple is in the basket."
+      ],
+      [
+        "Diese Birne ist schon weich.",
+        "This pear is already soft."
+      ],
+      [
+        "Die Kartoffel ist noch heiß.",
+        "The potato is still hot."
+      ],
+      [
+        "Ich schneide die Zwiebel in kleine Stücke.",
+        "I am cutting the onion into small pieces."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ein ___ wächst an diesem Baum. (apple)",
+        "Apfel",
+        "Apfel is masculine and means apple."
+      ],
+      [
+        "Zum Nachtisch esse ich eine ___. (pear)",
+        "Birne",
+        "Birne means pear; eine agrees with the feminine noun."
+      ],
+      [
+        "Für den Eintopf schäle ich eine ___. (potato)",
+        "Kartoffel",
+        "Kartoffel is the potato being peeled for the stew."
+      ],
+      [
+        "Ich schneide eine ___ für die Suppe. (onion)",
+        "Zwiebel",
+        "Zwiebel means onion; eine agrees with this feminine noun."
+      ]
+    ],
+    "wordBank": [
+      "Apfel",
+      "Birne",
+      "Kartoffel",
+      "Zwiebel"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-drink-containers-vocabulary-exercises",
+    "title": "German Drink Containers: A1 Vocabulary Exercises",
+    "description": "Practise Flasche, Glas, Becher and Kanne with everyday drinks. Learn German container words and quantity expressions through explained A1 tasks.",
+    "guide": "grammar/zahlen.html",
+    "guideLabel": "Review related grammar: quantities and countable nouns",
+    "rule": "Container words include die Flasche (Flaschen), das Glas (Gläser), der Becher (Becher) and die Kanne (Kannen). A Flasche is a bottle; a Glas is a drinking glass. Becher is a cup or tumbler, often without a handle. Kanne names a pot or jug, as in eine Kanne Tee.",
+    "trap": "Ein Glas Wasser names a glassful of water. Glas can also mean the material glass, so read the whole expression.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Eine Flasche Wasser steht im Kühlschrank.",
+        "A bottle of water is in the fridge."
+      ],
+      [
+        "Ich trinke ein Glas Apfelsaft.",
+        "I am drinking a glass of apple juice."
+      ],
+      [
+        "Der Becher hat keinen Henkel.",
+        "The cup has no handle."
+      ],
+      [
+        "Wir bestellen eine Kanne Kräutertee.",
+        "We order a pot of herbal tea."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Mineralwasser ist in einer ___. (bottle)",
+        "Flasche",
+        "Flasche names the bottle holding the water."
+      ],
+      [
+        "Zum Essen trinke ich ein ___ Wasser. (glass)",
+        "Glas",
+        "Ein Glas Wasser is a container-based quantity expression."
+      ],
+      [
+        "Der Kaffee zum Mitnehmen ist in einem ___. (takeaway cup)",
+        "Becher",
+        "Becher is a common word for a takeaway cup."
+      ],
+      [
+        "Der Tee für drei Personen ist in einer ___. (pot)",
+        "Kanne",
+        "Kanne is the pot from which the tea is poured."
+      ]
+    ],
+    "wordBank": [
+      "Becher",
+      "Flasche",
+      "Glas",
+      "Kanne"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-morning-routine-verbs-vocabulary-exercises",
+    "title": "German Morning Routine Verbs: A1 Vocabulary Practice",
+    "description": "Practise aufstehen, duschen, frühstücken and losgehen in a German morning routine. Study verb meanings, translations and explained A1 answers.",
+    "guide": "grammar/trennbare-verben.html",
+    "guideLabel": "Review related grammar: separable verbs in everyday routines",
+    "rule": "Aufstehen means to get up, duschen to shower, frühstücken to eat breakfast and losgehen to set off. Aufstehen and losgehen are separable: Ich stehe auf; ich gehe los. After a modal verb such as möchte, the complete infinitive stays together at the end.",
+    "trap": "Frühstücken already means to have breakfast. Do not translate have breakfast word for word using haben plus frühstücken.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Am Sonntag stehe ich um neun auf.",
+        "On Sunday I get up at nine."
+      ],
+      [
+        "Danach dusche ich kurz.",
+        "After that I take a quick shower."
+      ],
+      [
+        "Wir frühstücken gemeinsam am Fenster.",
+        "We have breakfast together by the window."
+      ],
+      [
+        "Um halb acht gehe ich los.",
+        "I set off at half past seven."
+      ]
+    ],
+    "quiz": [
+      [
+        "Morgen möchte ich um sechs ___. (get up)",
+        "aufstehen",
+        "After möchte, the separable verb remains the infinitive aufstehen."
+      ],
+      [
+        "Nach dem Sport möchte ich ___. (shower)",
+        "duschen",
+        "Duschen means to take a shower."
+      ],
+      [
+        "Vor der Schule möchte ich in Ruhe ___. (have breakfast)",
+        "frühstücken",
+        "Frühstücken expresses eating breakfast as one verb."
+      ],
+      [
+        "Wir müssen jetzt ___. (set off)",
+        "losgehen",
+        "Losgehen means to leave or set off; müssen takes the infinitive."
+      ]
+    ],
+    "wordBank": [
+      "aufstehen",
+      "duschen",
+      "frühstücken",
+      "losgehen"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-frequency-words-vocabulary-exercises",
+    "title": "German Frequency Words: A1 Vocabulary Exercises",
+    "description": "Use immer, oft, manchmal and nie to describe German routines. Compare frequency meanings with translations and four explained A1 practice questions.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: adverbs in simple statements",
+    "rule": "Immer means always, oft means often, manchmal means sometimes and nie means never. These words describe frequency rather than an exact number of occasions. In a simple statement they can follow the conjugated verb: Ich lese oft. Their placement can change with emphasis and other sentence elements.",
+    "trap": "Nie is already negative. Ich komme nie means I never come; adding nicht normally changes or disrupts the intended meaning.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Meine Tante trinkt morgens immer Tee.",
+        "My aunt always drinks tea in the morning."
+      ],
+      [
+        "Wir gehen oft zu Fuß zur Schule.",
+        "We often walk to school."
+      ],
+      [
+        "Manchmal backe ich am Samstag.",
+        "Sometimes I bake on Saturday."
+      ],
+      [
+        "Er fährt nie ohne Helm Rad.",
+        "He never cycles without a helmet."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich putze ___ vor dem Schlafen die Zähne. (always)",
+        "immer",
+        "Immer expresses every occasion in this routine."
+      ],
+      [
+        "Sie besucht uns ___. (often)",
+        "oft",
+        "Oft describes frequent visits without giving an exact count."
+      ],
+      [
+        "Wir essen ___ auf dem Balkon. (sometimes)",
+        "manchmal",
+        "Manchmal expresses occasional rather than regular occurrence."
+      ],
+      [
+        "Ich trinke ___ Kaffee. (never)",
+        "nie",
+        "Nie means not on any occasion."
+      ]
+    ],
+    "wordBank": [
+      "immer",
+      "manchmal",
+      "nie",
+      "oft"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-weather-words-vocabulary-exercises",
+    "title": "German Weather Vocabulary: A1 Exercises with Answers",
+    "description": "Practise sonnig, windig, bewölkt and neblig in simple weather descriptions. Learn useful German adjectives with translations and explained A1 tasks.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: sein in simple descriptions",
+    "rule": "Sonnig means sunny, windig windy, bewölkt cloudy and neblig foggy. For a general weather description use Es ist … or Das Wetter ist … . These adjectives take no ending after ist in this pattern. Bewölkt describes clouds in the sky; neblig describes fog near the ground.",
+    "trap": "Use Es ist windig, not Es hat windig. Weather adjectives and weather nouns use different sentence patterns.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Heute ist es sonnig und mild.",
+        "Today it is sunny and mild."
+      ],
+      [
+        "An der Küste ist es oft windig.",
+        "It is often windy on the coast."
+      ],
+      [
+        "Am Nachmittag bleibt es bewölkt.",
+        "It stays cloudy in the afternoon."
+      ],
+      [
+        "Im Tal ist es morgens neblig.",
+        "It is foggy in the valley in the morning."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Sonne scheint; es ist ___. (sunny)",
+        "sonnig",
+        "Sonnig describes weather with sunshine."
+      ],
+      [
+        "Der Wind weht stark; es ist ___. (windy)",
+        "windig",
+        "Windig is the weather adjective related to der Wind."
+      ],
+      [
+        "Viele Wolken sind am Himmel; es ist ___. (cloudy)",
+        "bewölkt",
+        "Bewölkt describes cloud cover."
+      ],
+      [
+        "Wir sehen wegen des Nebels wenig; es ist ___. (foggy)",
+        "neblig",
+        "Neblig describes fog that limits visibility."
+      ]
+    ],
+    "wordBank": [
+      "bewölkt",
+      "neblig",
+      "sonnig",
+      "windig"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-seasons-vocabulary-exercises",
+    "title": "German Seasons Vocabulary: A1 Practice with Answers",
+    "description": "Learn Frühling, Sommer, Herbst and Winter in German seasonal sentences. Practise articles and im with translations and explained vocabulary exercises.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: im with seasons",
+    "rule": "The four seasons are der Frühling, der Sommer, der Herbst and der Winter. Use im for in a season: im Frühling. All four names are masculine. Seasonal descriptions depend on location, so examples about leaves or snow describe particular scenes rather than universal conditions.",
+    "trap": "English spring has several meanings. Frühling is the season; it is not the word for a mechanical spring or a water source.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Im Frühling blüht unser Kirschbaum.",
+        "Our cherry tree blossoms in spring."
+      ],
+      [
+        "Im Sommer sitzen wir lange draußen.",
+        "In summer we sit outside for a long time."
+      ],
+      [
+        "Im Herbst sammeln die Kinder bunte Blätter.",
+        "In autumn the children collect colourful leaves."
+      ],
+      [
+        "Im Winter wird es hier früh dunkel.",
+        "In winter it gets dark early here."
+      ]
+    ],
+    "quiz": [
+      [
+        "Nach dem Winter beginnt der ___. (spring)",
+        "Frühling",
+        "Frühling names the season following winter."
+      ],
+      [
+        "Juli ist hier ein Monat im ___. (summer)",
+        "Sommer",
+        "Sommer is the season meant in this local example."
+      ],
+      [
+        "Nach dem Sommer kommt der ___. (autumn)",
+        "Herbst",
+        "Herbst means autumn or fall."
+      ],
+      [
+        "Wir besuchen die Familie im ___. (winter)",
+        "Winter",
+        "Im Winter is the standard prepositional expression."
+      ]
+    ],
+    "wordBank": [
+      "Frühling",
+      "Herbst",
+      "Sommer",
+      "Winter"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-city-places-vocabulary-exercises",
+    "title": "German Places in Town: A1 Vocabulary Exercises",
+    "description": "Study Bäckerei, Bibliothek, Apotheke and Spielplatz in German town descriptions. Practise place names with translations and explained A1 answers.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: locations with in and auf",
+    "rule": "Learn die Bäckerei (Bäckereien), die Bibliothek (Bibliotheken), die Apotheke (Apotheken) and der Spielplatz (Spielplätze). A Bäckerei sells baked goods; a Bibliothek lends books. Apotheke means pharmacy. Spielplatz is a playground, not a general sports field.",
+    "trap": "A Bibliothek is not a bookshop. A bookshop is a Buchhandlung; books from a library are normally borrowed.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die Bäckerei öffnet um sieben.",
+        "The bakery opens at seven."
+      ],
+      [
+        "In der Bibliothek ist es ruhig.",
+        "It is quiet in the library."
+      ],
+      [
+        "Die Apotheke liegt gegenüber dem Rathaus.",
+        "The pharmacy is opposite the town hall."
+      ],
+      [
+        "Auf dem Spielplatz steht eine große Schaukel.",
+        "There is a large swing in the playground."
+      ]
+    ],
+    "quiz": [
+      [
+        "Frische Brötchen kaufe ich in der ___. (bakery)",
+        "Bäckerei",
+        "Bäckerei is the shop for bread and rolls."
+      ],
+      [
+        "Das Buch leihe ich in der ___ aus. (library)",
+        "Bibliothek",
+        "Bibliothek is the place that lends books."
+      ],
+      [
+        "Das Medikament kaufe ich in der ___. (pharmacy)",
+        "Apotheke",
+        "Apotheke is the German noun for pharmacy."
+      ],
+      [
+        "Die Kinder spielen auf dem ___. (playground)",
+        "Spielplatz",
+        "Spielplatz is masculine; auf dem describes its location."
+      ]
+    ],
+    "wordBank": [
+      "Apotheke",
+      "Bibliothek",
+      "Bäckerei",
+      "Spielplatz"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-leisure-activities-vocabulary-exercises",
+    "title": "German Leisure Activities: A1 Vocabulary Practice",
+    "description": "Practise lesen, malen, tanzen and wandern in German free-time sentences. Learn activity meanings with English translations and explained answers.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: infinitives after modal verbs",
+    "rule": "Lesen means to read, malen to paint, tanzen to dance and wandern to hike. These infinitives can follow a modal verb: Ich möchte malen. With ich in an ordinary present-tense statement, use ich lese, ich male, ich tanze and ich wandere. The sentence context identifies the activity.",
+    "trap": "Wandern means hiking or walking for leisure over a route. It is more specific than simply going somewhere on foot.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Am Abend lese ich einen kurzen Roman.",
+        "In the evening I read a short novel."
+      ],
+      [
+        "Meine Freundin malt ein Bild vom See.",
+        "My friend is painting a picture of the lake."
+      ],
+      [
+        "Auf dem Fest tanzen wir zusammen.",
+        "At the party we dance together."
+      ],
+      [
+        "Am Wochenende wandern wir im Wald.",
+        "At the weekend we hike in the forest."
+      ]
+    ],
+    "quiz": [
+      [
+        "In der Pause möchte ich ein Buch ___. (read)",
+        "lesen",
+        "Lesen is the activity done with the book."
+      ],
+      [
+        "Mit den Wasserfarben möchte ich ___. (paint)",
+        "malen",
+        "Malen means to paint pictures in this context."
+      ],
+      [
+        "Zu dieser Musik möchte ich ___. (dance)",
+        "tanzen",
+        "Tanzen is dancing to the music."
+      ],
+      [
+        "Auf dem Bergweg möchten wir ___. (hike)",
+        "wandern",
+        "Wandern is hiking along the mountain trail."
+      ]
+    ],
+    "wordBank": [
+      "lesen",
+      "malen",
+      "tanzen",
+      "wandern"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-body-parts-vocabulary-exercises",
+    "title": "German Body Parts: A1 Vocabulary Exercises",
+    "description": "Learn Kopf, Hand, Fuß and Auge with articles and plural forms. Practise German body-part vocabulary in everyday, non-diagnostic example sentences.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: gender and plural forms",
+    "rule": "Learn der Kopf (Köpfe), die Hand (Hände), der Fuß (Füße) and das Auge (Augen). Kopf is head, Hand is hand, Fuß is foot and Auge is eye. Three plurals change their vowel. Nouns for body parts are capitalised, just like other German nouns.",
+    "trap": "Do not assume that Fuß and Hand share a gender because both name body parts. Learn der Fuß and die Hand separately.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Auf meinem Kopf sitzt ein warmer Hut.",
+        "There is a warm hat on my head."
+      ],
+      [
+        "Sie hält die Karte in der linken Hand.",
+        "She is holding the card in her left hand."
+      ],
+      [
+        "Der rechte Fuß passt gut in den Schuh.",
+        "The right foot fits well in the shoe."
+      ],
+      [
+        "Das Kind schließt ein Auge.",
+        "The child closes one eye."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Hut gehört auf den ___. (head)",
+        "Kopf",
+        "Kopf names the head; auf den is used for the destination here."
+      ],
+      [
+        "Ich winke mit der rechten ___. (hand)",
+        "Hand",
+        "Hand is feminine; mit takes the dative article der."
+      ],
+      [
+        "Am rechten ___ trage ich einen blauen Schuh. (foot)",
+        "Fuß",
+        "Fuß is masculine; am is short for an dem."
+      ],
+      [
+        "Ich sehe mit dem linken ___ durch das Loch. (eye)",
+        "Auge",
+        "Auge is neuter, with dative dem after mit."
+      ]
+    ],
+    "wordBank": [
+      "Auge",
+      "Fuß",
+      "Hand",
+      "Kopf"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-feelings-vocabulary-exercises",
+    "title": "German Feelings Vocabulary: A1 Practice with Answers",
+    "description": "Describe simple feelings in German with froh, traurig, müde and nervös. Study everyday contexts, translated examples and explained vocabulary questions.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: adjectives after sein",
+    "rule": "Froh means glad, traurig sad, müde tired and nervös nervous. In Ich bin … the adjective has no added ending. Froh describes a positive feeling, often about something specific. Müde describes tiredness rather than sadness; nervös describes tension or nervous anticipation.",
+    "trap": "Müde and traurig are different feelings. A person can be tired without being sad; the English cue identifies the intended word here.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Ich bin froh über deinen Besuch.",
+        "I am glad about your visit."
+      ],
+      [
+        "Nach dem Abschied ist sie traurig.",
+        "After the farewell she is sad."
+      ],
+      [
+        "Nach der langen Wanderung sind wir müde.",
+        "After the long hike we are tired."
+      ],
+      [
+        "Vor dem ersten Auftritt ist er nervös.",
+        "Before his first performance he is nervous."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich bin ___, dass du da bist. (glad)",
+        "froh",
+        "Froh expresses being glad about the person's presence."
+      ],
+      [
+        "Nach dem traurigen Film bin ich ___. (sad)",
+        "traurig",
+        "Traurig is the adjective for feeling sad."
+      ],
+      [
+        "Es ist spät und ich bin ___. (tired)",
+        "müde",
+        "Müde describes needing rest or sleep."
+      ],
+      [
+        "Vor dem Gespräch bin ich etwas ___. (nervous)",
+        "nervös",
+        "Nervös describes nervousness before the conversation."
+      ]
+    ],
+    "wordBank": [
+      "froh",
+      "müde",
+      "nervös",
+      "traurig"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "vocabulary",
+    "slug": "a1-furniture-vocabulary-exercises",
+    "title": "German Furniture Vocabulary: A1 Exercises with Answers",
+    "description": "Practise Tisch, Stuhl, Schrank and Regal in German home descriptions. Learn useful furniture words with articles, translations and explained answers.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: articles with furniture nouns",
+    "rule": "Learn der Tisch (Tische), der Stuhl (Stühle), der Schrank (Schränke) and das Regal (Regale). Tisch means table, Stuhl means chair and Schrank means cupboard or wardrobe. Regal means shelving unit or shelf unit; it is different from the single shelf board das Brett.",
+    "trap": "English furniture is an uncountable collective noun. These German words name individual objects and have their own plural forms.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Der Tisch steht mitten im Zimmer.",
+        "The table stands in the middle of the room."
+      ],
+      [
+        "Dieser Stuhl hat eine hohe Lehne.",
+        "This chair has a high back."
+      ],
+      [
+        "Meine Jacken hängen im Schrank.",
+        "My jackets are hanging in the wardrobe."
+      ],
+      [
+        "Das Regal ist voller Reisebücher.",
+        "The shelving unit is full of travel books."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir essen an einem runden ___. (table)",
+        "Tisch",
+        "Tisch is the surface around which the people sit to eat."
+      ],
+      [
+        "Zum Sitzen brauche ich einen ___. (chair)",
+        "Stuhl",
+        "Stuhl names an individual chair."
+      ],
+      [
+        "Die Kleidung hängt im ___. (wardrobe)",
+        "Schrank",
+        "Schrank is a wardrobe in this clothing context."
+      ],
+      [
+        "Die Bücher stehen in einem offenen ___. (shelving unit)",
+        "Regal",
+        "Regal names the open shelving used for the books."
+      ]
+    ],
+    "wordBank": [
+      "Regal",
+      "Schrank",
+      "Stuhl",
+      "Tisch"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-cooking-verbs-vocabulary-exercises",
+    "title": "German Cooking Verbs: A2 Vocabulary Exercises",
+    "description": "Practise schneiden, schälen, braten and rühren in German recipe contexts. Learn cooking actions with translated examples and explained A2 answers.",
+    "guide": "grammar/imperativ.html",
+    "guideLabel": "Review related grammar: instructions and infinitives",
+    "rule": "Schneiden means to cut, schälen to peel, braten to fry or roast and rühren to stir. The cooking context gives the exact method: in der Pfanne braten means frying in a pan. Recipe headings may use infinitives; complete instructions can instead use an imperative such as Rühren Sie langsam.",
+    "trap": "Kochen can mean cooking in general or boiling. Braten specifically describes frying or roasting, so the verbs are not interchangeable in every recipe.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Ich schneide die Paprika in Streifen.",
+        "I cut the pepper into strips."
+      ],
+      [
+        "Wir schälen die Möhren vor dem Kochen.",
+        "We peel the carrots before cooking."
+      ],
+      [
+        "Sie braten die Pilze in einer Pfanne.",
+        "They fry the mushrooms in a pan."
+      ],
+      [
+        "Rühren Sie die Soße langsam mit einem Löffel.",
+        "Stir the sauce slowly with a spoon."
+      ]
+    ],
+    "quiz": [
+      [
+        "Du musst die Tomate in Scheiben ___. (cut)",
+        "schneiden",
+        "Schneiden is cutting; in Scheiben specifies slices."
+      ],
+      [
+        "Zuerst möchte ich die Kartoffeln ___. (peel)",
+        "schälen",
+        "Schälen means removing the skin or peel."
+      ],
+      [
+        "Wir wollen die Zucchini in der Pfanne ___. (fry)",
+        "braten",
+        "Braten names the frying method in this pan context."
+      ],
+      [
+        "Du sollst die Suppe mit dem Löffel ___. (stir)",
+        "rühren",
+        "Rühren means stirring, rather than merely adding an ingredient."
+      ]
+    ],
+    "wordBank": [
+      "braten",
+      "rühren",
+      "schneiden",
+      "schälen"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-cleaning-and-laundry-vocabulary-exercises",
+    "title": "German Cleaning and Laundry: A2 Vocabulary Practice",
+    "description": "Learn putzen, wischen, spülen and bügeln through household tasks. Compare German cleaning actions with translations and explained vocabulary exercises.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: infinitives for household tasks",
+    "rule": "Putzen is cleaning or scrubbing, wischen is wiping or mopping, spülen is rinsing or washing dishes, and bügeln is ironing. Their common partners help: Fenster putzen, den Boden wischen, Geschirr spülen and ein Hemd bügeln. Context matters because several cleaning verbs can describe parts of one task.",
+    "trap": "Wischen describes a wiping or mopping movement. It does not normally mean ironing clothes, which is bügeln.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Am Samstag putze ich die Fenster.",
+        "On Saturday I clean the windows."
+      ],
+      [
+        "Nach dem Essen wischen wir den Tisch.",
+        "After eating we wipe the table."
+      ],
+      [
+        "Er spült die Teller von Hand.",
+        "He washes the plates by hand."
+      ],
+      [
+        "Ich bügle das Hemd für morgen.",
+        "I am ironing the shirt for tomorrow."
+      ]
+    ],
+    "quiz": [
+      [
+        "Heute muss ich die Fenster gründlich ___. (clean)",
+        "putzen",
+        "Fenster putzen is the usual combination for cleaning windows."
+      ],
+      [
+        "Mit dem feuchten Tuch möchte ich den Tisch ___. (wipe)",
+        "wischen",
+        "Wischen identifies the action done with the damp cloth."
+      ],
+      [
+        "Nach dem Kochen müssen wir das Geschirr ___. (wash up)",
+        "spülen",
+        "Geschirr spülen means washing the dishes."
+      ],
+      [
+        "Vor dem Fest will ich mein Hemd ___. (iron)",
+        "bügeln",
+        "Bügeln is smoothing clothes with an iron."
+      ]
+    ],
+    "wordBank": [
+      "bügeln",
+      "putzen",
+      "spülen",
+      "wischen"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-housing-advert-words-vocabulary-exercises",
+    "title": "German Housing Advert Vocabulary: A2 Exercises",
+    "description": "Understand Wohnfläche, Einbauküche, möbliert and unmöbliert in fictional German housing adverts. Practise meanings with explained A2 vocabulary tasks.",
+    "guide": "grammar/adjektivdeklination.html",
+    "guideLabel": "Review related grammar: housing nouns and descriptive adjectives",
+    "rule": "Die Wohnfläche describes living floor area; die Einbauküche is a fitted kitchen. Möbliert means furnished and unmöbliert unfurnished. These are vocabulary clues, not a complete description of what a particular tenancy includes. Adverts and agreements can use terms more specifically, so ask about unclear details.",
+    "trap": "Möbliert does not tell you exactly which furniture is included. The adjective gives a general description; a specific inventory gives the details.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die Wohnfläche beträgt laut Anzeige sechzig Quadratmeter.",
+        "According to the advert, the living area is sixty square metres."
+      ],
+      [
+        "Die Wohnung hat eine kleine Einbauküche.",
+        "The flat has a small fitted kitchen."
+      ],
+      [
+        "Das Zimmer wird möbliert angeboten.",
+        "The room is advertised as furnished."
+      ],
+      [
+        "Die andere Wohnung ist unmöbliert.",
+        "The other flat is unfurnished."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die ___ wird in Quadratmetern angegeben. (living floor area)",
+        "Wohnfläche",
+        "Wohnfläche names the area, rather than the number of rooms."
+      ],
+      [
+        "Eine fest eingebaute Küche heißt ___. (fitted kitchen)",
+        "Einbauküche",
+        "Einbauküche is a kitchen fitted into the room."
+      ],
+      [
+        "Das Zimmer hat laut Anzeige Möbel; es ist ___. (furnished)",
+        "möbliert",
+        "Möbliert says that furniture is provided in this fictional description."
+      ],
+      [
+        "Ohne Möbel heißt die Wohnung ___. (unfurnished)",
+        "unmöbliert",
+        "The prefix un- negates möbliert."
+      ]
+    ],
+    "wordBank": [
+      "Einbauküche",
+      "möbliert",
+      "unmöbliert",
+      "Wohnfläche"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-bicycle-parts-vocabulary-exercises",
+    "title": "German Bicycle Parts: A2 Vocabulary Practice",
+    "description": "Learn Lenker, Bremse, Reifen and Kette in German bicycle descriptions. Practise component names with articles, English meanings and explained answers.",
+    "guide": "grammar/possessivartikel.html",
+    "guideLabel": "Review related grammar: describing parts and possession",
+    "rule": "Learn der Lenker (Lenker), die Bremse (Bremsen), der Reifen (Reifen) and die Kette (Ketten). Lenker means handlebars, Bremse brake, Reifen tyre and Kette chain. A whole wheel is a Rad; the Reifen is the tyre fitted around it.",
+    "trap": "English handlebars is usually plural, but German der Lenker is singular. Use Der Lenker ist … when describing one bicycle.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Der Lenker ist bei diesem Fahrrad sehr breit.",
+        "The handlebars on this bicycle are very wide."
+      ],
+      [
+        "Die hintere Bremse macht ein Geräusch.",
+        "The rear brake is making a noise."
+      ],
+      [
+        "Der Reifen verliert langsam Luft.",
+        "The tyre is slowly losing air."
+      ],
+      [
+        "Die Kette ist voller Staub.",
+        "The chain is covered in dust."
+      ]
+    ],
+    "quiz": [
+      [
+        "Mit den Händen halte ich den ___. (handlebars)",
+        "Lenker",
+        "Lenker is grammatically singular in this bicycle meaning."
+      ],
+      [
+        "Zum Anhalten benutze ich die ___. (brake)",
+        "Bremse",
+        "Bremse names the braking component."
+      ],
+      [
+        "Der ___ ist aus Gummi. (tyre)",
+        "Reifen",
+        "Reifen is the rubber tyre, not the whole wheel."
+      ],
+      [
+        "Die ___ verbindet hier die Zahnräder. (chain)",
+        "Kette",
+        "Kette names the bicycle chain in this description."
+      ]
+    ],
+    "wordBank": [
+      "Bremse",
+      "Kette",
+      "Lenker",
+      "Reifen"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-landscapes-vocabulary-exercises",
+    "title": "German Landscape Vocabulary: A2 Exercises with Answers",
+    "description": "Practise Wald, Wiese, Tal and Hügel in German landscape descriptions. Learn articles and distinctions through translated examples and A2 self-check tasks.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: describing locations in nature",
+    "rule": "Learn der Wald (Wälder), die Wiese (Wiesen), das Tal (Täler) and der Hügel (Hügel). Wald means forest, Wiese meadow, Tal valley and Hügel hill. A Tal lies between higher areas; a Hügel rises above the surrounding land. Learn the nouns with their articles and plural vowels.",
+    "trap": "Wiese means a grassy area or meadow. Wald refers to an area with trees, so these landscape words are not interchangeable.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Hinter dem Dorf beginnt ein dichter Wald.",
+        "A dense forest begins behind the village."
+      ],
+      [
+        "Auf der Wiese wachsen gelbe Blumen.",
+        "Yellow flowers grow in the meadow."
+      ],
+      [
+        "Durch das Tal fließt ein schmaler Fluss.",
+        "A narrow river flows through the valley."
+      ],
+      [
+        "Vom Hügel sehen wir die ganze Stadt.",
+        "From the hill we can see the whole town."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir laufen zwischen vielen Bäumen durch den ___. (forest)",
+        "Wald",
+        "Wald names the area covered with trees."
+      ],
+      [
+        "Die Kühe stehen auf der grünen ___. (meadow)",
+        "Wiese",
+        "Wiese names a grassy open area."
+      ],
+      [
+        "Das Dorf liegt unten im ___. (valley)",
+        "Tal",
+        "Tal is the low area between higher ground."
+      ],
+      [
+        "Wir steigen auf einen kleinen ___. (hill)",
+        "Hügel",
+        "Hügel is a hill, smaller than a mountain in this description."
+      ]
+    ],
+    "wordBank": [
+      "Hügel",
+      "Tal",
+      "Wald",
+      "Wiese"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-packaging-materials-vocabulary-exercises",
+    "title": "German Packaging Materials: A2 Vocabulary Exercises",
+    "description": "Study Papier, Glas, Kunststoff and Metall in German material descriptions. Practise common packaging vocabulary with translated examples and answers.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: aus with materials",
+    "rule": "Papier means paper, Glas glass, Kunststoff plastic and Metall metal. Use aus to describe material: eine Dose aus Metall. In these material meanings, the words normally appear without an indefinite article. Kunststoff is a general category covering different types of plastic.",
+    "trap": "Das Glas can mean a drinking glass, while aus Glas means made of glass. Material nouns usually stay singular in these aus expressions.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die Tüte besteht aus Papier.",
+        "The bag is made of paper."
+      ],
+      [
+        "Diese durchsichtige Flasche ist aus Glas.",
+        "This transparent bottle is made of glass."
+      ],
+      [
+        "Der Deckel besteht aus Kunststoff.",
+        "The lid is made of plastic."
+      ],
+      [
+        "Die leere Dose ist aus Metall.",
+        "The empty can is made of metal."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Heft hat Seiten aus ___. (paper)",
+        "Papier",
+        "Papier names the material used for the pages."
+      ],
+      [
+        "Die Fensterscheibe besteht aus ___. (glass)",
+        "Glas",
+        "Glas is used here as a material noun."
+      ],
+      [
+        "Das Lineal ist aus ___. (plastic)",
+        "Kunststoff",
+        "Kunststoff is the material plastic."
+      ],
+      [
+        "Der Löffel besteht aus ___. (metal)",
+        "Metall",
+        "Metall describes the material, rather than a particular metal type."
+      ]
+    ],
+    "wordBank": [
+      "Glas",
+      "Kunststoff",
+      "Metall",
+      "Papier"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-workplace-tools-vocabulary-exercises",
+    "title": "German Workplace Tools: A2 Vocabulary Practice",
+    "description": "Practise Werkzeug, Leiter, Schere and Drucker in German work contexts. Learn practical object names with English meanings and explained exercises.",
+    "guide": "grammar/akkusativ.html",
+    "guideLabel": "Review related grammar: workplace nouns as objects",
+    "rule": "Das Werkzeug (Werkzeuge) means a tool or tools collectively; die Leiter (Leitern) means ladder. Die Schere (Scheren) is a pair of scissors and der Drucker (Drucker) a printer. The feminine die Leiter contrasts with der Leiter, which can mean a male manager or leader.",
+    "trap": "One pair of scissors is eine Schere in German, with a singular verb: Die Schere ist scharf. English uses a plural form for the same object.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Das Werkzeug liegt in einer roten Kiste.",
+        "The tools are in a red box."
+      ],
+      [
+        "Die Leiter steht an der Wand.",
+        "The ladder is standing against the wall."
+      ],
+      [
+        "Mit der Schere schneide ich das Papier.",
+        "I cut the paper with the scissors."
+      ],
+      [
+        "Der Drucker braucht neues Papier.",
+        "The printer needs new paper."
+      ]
+    ],
+    "quiz": [
+      [
+        "Für die Reparatur brauche ich geeignetes ___. (tools, collective)",
+        "Werkzeug",
+        "Werkzeug can refer collectively to the tools needed for a job."
+      ],
+      [
+        "Die lange ___ hat zehn Sprossen. (ladder)",
+        "Leiter",
+        "Die Leiter is the ladder with rungs."
+      ],
+      [
+        "Zum Ausschneiden nehme ich eine ___. (pair of scissors)",
+        "Schere",
+        "Eine Schere is singular in German."
+      ],
+      [
+        "Der ___ druckt die Liste auf Papier. (printer)",
+        "Drucker",
+        "Drucker names the machine used to print the list."
+      ]
+    ],
+    "wordBank": [
+      "Drucker",
+      "Leiter",
+      "Schere",
+      "Werkzeug"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-study-actions-vocabulary-exercises",
+    "title": "German Study Verbs: A2 Vocabulary Exercises",
+    "description": "Learn wiederholen, markieren, nachschlagen and zusammenfassen for studying in German. Practise meanings with translations and explained A2 questions.",
+    "guide": "grammar/trennbare-verben.html",
+    "guideLabel": "Review related grammar: study verbs with separable prefixes",
+    "rule": "Wiederholen means to repeat or review, markieren to highlight or mark, nachschlagen to look up and zusammenfassen to summarise. Nachschlagen and zusammenfassen separate in a main clause: Ich schlage das Wort nach; ich fasse den Text zusammen. After möchte or muss, use the complete infinitive.",
+    "trap": "Nachschlagen means consulting a reference, such as a dictionary. It does not mean simply reading a text again; that can be wiederholen or noch einmal lesen.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Vor dem Unterricht wiederhole ich die neuen Wörter.",
+        "Before the lesson I review the new words."
+      ],
+      [
+        "Sie markiert die wichtigsten Sätze gelb.",
+        "She highlights the most important sentences in yellow."
+      ],
+      [
+        "Ich schlage den Ausdruck im Wörterbuch nach.",
+        "I look up the expression in the dictionary."
+      ],
+      [
+        "Wir fassen den Absatz in zwei Sätzen zusammen.",
+        "We summarise the paragraph in two sentences."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Wörter von gestern möchte ich ___. (review)",
+        "wiederholen",
+        "Wiederholen means revisiting material already studied."
+      ],
+      [
+        "Im Text sollst du die Schlüsselwörter ___. (highlight)",
+        "markieren",
+        "Markieren means visually marking the key words."
+      ],
+      [
+        "Das unbekannte Wort muss ich im Wörterbuch ___. (look up)",
+        "nachschlagen",
+        "Nachschlagen describes consulting a dictionary or reference."
+      ],
+      [
+        "Den langen Abschnitt sollst du kurz ___. (summarise)",
+        "zusammenfassen",
+        "Zusammenfassen means giving the main points in a shorter form."
+      ]
+    ],
+    "wordBank": [
+      "markieren",
+      "nachschlagen",
+      "wiederholen",
+      "zusammenfassen"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-file-actions-vocabulary-exercises",
+    "title": "German Computer File Verbs: A2 Vocabulary Practice",
+    "description": "Practise speichern, öffnen, umbenennen and löschen in German computer sentences. Learn file-action vocabulary with translations and explained answers.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: infinitives in computer instructions",
+    "rule": "Speichern means to save, öffnen to open, umbenennen to rename and löschen to delete. Die Datei is a file and der Ordner a folder. In a main clause umbenennen separates: Ich benenne die Datei um. Speichern refers to keeping the contents, while umbenennen changes the name.",
+    "trap": "Speichern keeps the file or changes; löschen removes it. Check the whole verb carefully when interpreting an instruction.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Ich speichere den Entwurf in meinem Ordner.",
+        "I save the draft in my folder."
+      ],
+      [
+        "Sie öffnet die Datei mit einem Doppelklick.",
+        "She opens the file with a double click."
+      ],
+      [
+        "Wir benennen den Ordner nach dem Projekt um.",
+        "We rename the folder after the project."
+      ],
+      [
+        "Er löscht die leere Kopie.",
+        "He deletes the empty copy."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich möchte meine Änderungen ___. (save)",
+        "speichern",
+        "Speichern retains the changes in the file."
+      ],
+      [
+        "Zum Lesen muss ich die Datei ___. (open)",
+        "öffnen",
+        "Öffnen makes the file available to view."
+      ],
+      [
+        "Die Datei soll einen neuen Namen bekommen; ich will sie ___. (rename)",
+        "umbenennen",
+        "Umbenennen changes the name rather than the contents."
+      ],
+      [
+        "Die doppelte, leere Datei möchte ich ___. (delete)",
+        "löschen",
+        "Löschen means deleting the file in this fictional sentence."
+      ]
+    ],
+    "wordBank": [
+      "löschen",
+      "speichern",
+      "umbenennen",
+      "öffnen"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-film-and-story-vocabulary-exercises",
+    "title": "German Film and Story Vocabulary: A2 Exercises",
+    "description": "Learn Handlung, Hauptfigur, Szene and Untertitel for talking about films in German. Check meanings with translated examples and A2 vocabulary answers.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: articles in film descriptions",
+    "rule": "Die Handlung (Handlungen) is the plot, die Hauptfigur (Hauptfiguren) the main character and die Szene (Szenen) a scene. Der Untertitel (Untertitel) is a subtitle; film subtitles are usually discussed in the plural: mit Untertiteln. Handlung here means the story's events, not every possible meaning of action.",
+    "trap": "Figur in a story means a character, not the English numerical figure. Untertitel are written text, not the dubbed spoken soundtrack.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die Handlung spielt in einem kleinen Hafen.",
+        "The plot is set in a small harbour."
+      ],
+      [
+        "Die Hauptfigur sucht ihren verschwundenen Hund.",
+        "The main character is looking for her missing dog."
+      ],
+      [
+        "Die letzte Szene zeigt den leeren Bahnhof.",
+        "The final scene shows the empty station."
+      ],
+      [
+        "Wir sehen den Film mit deutschen Untertiteln.",
+        "We watch the film with German subtitles."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die ___ des Films spielt im Jahr 1920. (plot)",
+        "Handlung",
+        "Handlung names the sequence of story events."
+      ],
+      [
+        "Die wichtigste Person in der Geschichte ist die ___. (main character)",
+        "Hauptfigur",
+        "Hauptfigur is the central character."
+      ],
+      [
+        "Dieser kurze Teil des Films ist eine ___. (scene)",
+        "Szene",
+        "Szene is one section of the film."
+      ],
+      [
+        "Ein eingeblendeter übersetzter Satz ist ein ___. (subtitle)",
+        "Untertitel",
+        "Untertitel names the written text displayed with the film."
+      ]
+    ],
+    "wordBank": [
+      "Handlung",
+      "Hauptfigur",
+      "Szene",
+      "Untertitel"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-sports-training-vocabulary-exercises",
+    "title": "German Sports Training Verbs: A2 Vocabulary Practice",
+    "description": "Practise aufwärmen, dehnen, trainieren and ausruhen in German sports contexts. Learn reflexive patterns with translations and explained vocabulary tasks.",
+    "guide": "grammar/reflexive-verben.html",
+    "guideLabel": "Review related grammar: reflexive routine verbs",
+    "rule": "Sich aufwärmen means to warm up, sich dehnen to stretch, trainieren to train and sich ausruhen to rest. Aufwärmen and ausruhen are separable: Ich wärme mich auf; ich ruhe mich aus. In these tasks the reflexive pronoun is already supplied where it is needed.",
+    "trap": "Do not drop mich in Ich ruhe mich aus. The example uses the reflexive expression sich ausruhen, not a direct-object construction.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Vor dem Spiel wärmen wir uns auf.",
+        "Before the game we warm up."
+      ],
+      [
+        "Nach dem Laufen dehnt sie sich vorsichtig.",
+        "After running she stretches carefully."
+      ],
+      [
+        "Unsere Mannschaft trainiert zweimal pro Woche.",
+        "Our team trains twice a week."
+      ],
+      [
+        "Nach dem Training ruhe ich mich aus.",
+        "After training I rest."
+      ]
+    ],
+    "quiz": [
+      [
+        "Vor dem Spiel wollen wir uns ___. (warm up)",
+        "aufwärmen",
+        "Sich aufwärmen is the warm-up expression; uns is already supplied."
+      ],
+      [
+        "Nach der Übung möchte sie sich ___. (stretch)",
+        "dehnen",
+        "Sich dehnen means stretching the body."
+      ],
+      [
+        "Am Dienstag möchte die Mannschaft ___. (train)",
+        "trainieren",
+        "Trainieren is the verb for sports training."
+      ],
+      [
+        "Nach dem Lauf muss ich mich ___. (rest)",
+        "ausruhen",
+        "Sich ausruhen means resting; mich completes the reflexive pattern."
+      ]
+    ],
+    "wordBank": [
+      "aufwärmen",
+      "ausruhen",
+      "dehnen",
+      "trainieren"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-celebration-preparations-vocabulary-exercises",
+    "title": "German Party Preparation Words: A2 Vocabulary Exercises",
+    "description": "Study schmücken, einpacken, anzünden and aufräumen in fictional party preparations. Practise German verbs with translations and explained A2 answers.",
+    "guide": "grammar/trennbare-verben.html",
+    "guideLabel": "Review related grammar: preparation verbs and prefixes",
+    "rule": "Schmücken means to decorate, einpacken to wrap or pack, anzünden to light and aufräumen to tidy up. The object gives the specific meaning: ein Geschenk einpacken is wrapping a gift. The last three verbs separate in ordinary main clauses but remain together after a modal verb.",
+    "trap": "Einpacken may mean packing for a trip or wrapping a gift. Read the object before choosing the English meaning.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Wir schmücken den Raum mit Papierblumen.",
+        "We decorate the room with paper flowers."
+      ],
+      [
+        "Ich packe das Geschenk in grünes Papier ein.",
+        "I wrap the gift in green paper."
+      ],
+      [
+        "Sie zündet die Kerzen auf dem Kuchen an.",
+        "She lights the candles on the cake."
+      ],
+      [
+        "Nach dem Fest räumen alle gemeinsam auf.",
+        "After the party everyone tidies up together."
+      ]
+    ],
+    "quiz": [
+      [
+        "Mit Blumen wollen wir den Tisch ___. (decorate)",
+        "schmücken",
+        "Schmücken means decorating the table."
+      ],
+      [
+        "Das Geschenk möchte ich in Papier ___. (wrap)",
+        "einpacken",
+        "Einpacken means wrapping when the object is a gift and paper is mentioned."
+      ],
+      [
+        "Vor dem Singen möchte sie die Kerzen ___. (light)",
+        "anzünden",
+        "Anzünden means lighting the candles in this fictional scene."
+      ],
+      [
+        "Nach der Feier müssen wir den Raum ___. (tidy up)",
+        "aufräumen",
+        "Aufräumen describes putting the room in order again."
+      ]
+    ],
+    "wordBank": [
+      "anzünden",
+      "aufräumen",
+      "einpacken",
+      "schmücken"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-health-visit-nouns-vocabulary-exercises",
+    "title": "German Health Visit Vocabulary: A2 Word Exercises",
+    "description": "Learn Wartezimmer, Sprechstunde, Rezept and Überweisung in fictional German health visits. Practise word meanings with translations and explained answers.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: articles with appointment nouns",
+    "rule": "Das Wartezimmer is the waiting room; die Sprechstunde is a consultation period or surgery hours. Das Rezept can mean a medical prescription or a cooking recipe, depending on context. Die Überweisung can mean a referral in a medical context or a bank transfer in a financial one.",
+    "trap": "Rezept and Überweisung both change meaning with context. A receipt from a shop is a Kassenbon or Beleg, not a Rezept.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Im Wartezimmer liegt eine Zeitschrift.",
+        "There is a magazine in the waiting room."
+      ],
+      [
+        "Die Sprechstunde beginnt heute um zehn.",
+        "Consultation hours begin at ten today."
+      ],
+      [
+        "Die Ärztin stellt ein Rezept für das Medikament aus.",
+        "The doctor issues a prescription for the medicine."
+      ],
+      [
+        "Auf der Überweisung steht der Name der Fachpraxis.",
+        "The referral has the specialist practice's name on it."
+      ]
+    ],
+    "quiz": [
+      [
+        "Vor dem Gespräch sitze ich im ___. (waiting room)",
+        "Wartezimmer",
+        "Wartezimmer is the room where patients wait."
+      ],
+      [
+        "Die ___ findet laut dem Schild morgens statt. (consultation period)",
+        "Sprechstunde",
+        "Sprechstunde names the consultation period, not the room."
+      ],
+      [
+        "Hier bedeutet ___ eine ärztliche Verordnung. (prescription)",
+        "Rezept",
+        "Rezept has the medical meaning prescription in this context."
+      ],
+      [
+        "Hier bezeichnet ___ ein Schreiben an eine Fachpraxis. (referral)",
+        "Überweisung",
+        "Überweisung means referral in this medical sentence."
+      ]
+    ],
+    "wordBank": [
+      "Rezept",
+      "Sprechstunde",
+      "Wartezimmer",
+      "Überweisung"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-luggage-items-vocabulary-exercises",
+    "title": "German Luggage Vocabulary: A2 Exercises with Answers",
+    "description": "Practise Koffer, Rucksack, Kulturbeutel and Schlafsack in German travel sentences. Learn packing nouns with articles, translations and explained answers.",
+    "guide": "grammar/akkusativ.html",
+    "guideLabel": "Review related grammar: packing nouns as direct objects",
+    "rule": "Learn der Koffer (Koffer), der Rucksack (Rucksäcke), der Kulturbeutel (Kulturbeutel) and der Schlafsack (Schlafsäcke). Koffer is a suitcase; Rucksack a backpack. Kulturbeutel is a washbag for toiletries, while Schlafsack is a sleeping bag. All four nouns are masculine.",
+    "trap": "Kulturbeutel does not literally mean a bag of cultural objects. It is an established word for a toiletries bag.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Mein Koffer hat zwei Rollen.",
+        "My suitcase has two wheels."
+      ],
+      [
+        "Im Rucksack liegt eine Regenjacke.",
+        "There is a rain jacket in the backpack."
+      ],
+      [
+        "Die Zahnbürste kommt in den Kulturbeutel.",
+        "The toothbrush goes in the washbag."
+      ],
+      [
+        "Für die Hütte packe ich einen Schlafsack ein.",
+        "I pack a sleeping bag for the hut."
+      ]
+    ],
+    "quiz": [
+      [
+        "Für die Reise nehme ich einen großen ___. (suitcase)",
+        "Koffer",
+        "Koffer names the suitcase used for the journey."
+      ],
+      [
+        "Auf dem Rücken trage ich einen ___. (backpack)",
+        "Rucksack",
+        "Rucksack is the bag carried on the back."
+      ],
+      [
+        "Seife und Zahnbürste sind im ___. (washbag)",
+        "Kulturbeutel",
+        "Kulturbeutel holds toiletries."
+      ],
+      [
+        "Im Zelt schlafe ich in einem ___. (sleeping bag)",
+        "Schlafsack",
+        "Schlafsack is the bag used for sleeping."
+      ]
+    ],
+    "wordBank": [
+      "Koffer",
+      "Kulturbeutel",
+      "Rucksack",
+      "Schlafsack"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-taste-and-texture-vocabulary-exercises",
+    "title": "German Taste and Texture Words: A2 Vocabulary Practice",
+    "description": "Describe food with süß, sauer, salzig and knusprig in German. Compare taste and texture meanings with translated examples and explained A2 exercises.",
+    "guide": "grammar/adjektivdeklination.html",
+    "guideLabel": "Review related grammar: food adjectives and descriptive forms",
+    "rule": "Süß means sweet, sauer sour, salzig salty and knusprig crispy or crunchy. The first three describe taste; knusprig describes texture. After schmeckt or ist, these adjectives have no added ending: Die Suppe schmeckt salzig. Before a noun, an adjective ending may be needed.",
+    "trap": "Knusprig does not mean tasty in general. It describes a crisp texture, so a food can be both salzig and knusprig.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Der Honig schmeckt sehr süß.",
+        "The honey tastes very sweet."
+      ],
+      [
+        "Diese Zitrone ist besonders sauer.",
+        "This lemon is especially sour."
+      ],
+      [
+        "Die Suppe ist mir etwas zu salzig.",
+        "The soup is a little too salty for me."
+      ],
+      [
+        "Die frischen Brötchen sind außen knusprig.",
+        "The fresh rolls are crispy on the outside."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Marmelade schmeckt ___. (sweet)",
+        "süß",
+        "Süß describes sweetness."
+      ],
+      [
+        "Der Saft der Zitrone ist ___. (sour)",
+        "sauer",
+        "Sauer describes the acidic taste."
+      ],
+      [
+        "Nach dem vielen Salz schmeckt die Soße ___. (salty)",
+        "salzig",
+        "Salzig names the taste caused by salt."
+      ],
+      [
+        "Die dünne Kruste ist ___. (crispy)",
+        "knusprig",
+        "Knusprig describes the crust's texture rather than its flavour."
+      ]
+    ],
+    "wordBank": [
+      "knusprig",
+      "salzig",
+      "sauer",
+      "süß"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "vocabulary",
+    "slug": "a2-character-adjectives-vocabulary-exercises",
+    "title": "German Character Adjectives: A2 Vocabulary Exercises",
+    "description": "Learn geduldig, zuverlässig, hilfsbereit and schüchtern in German descriptions. Practise character vocabulary with translations and explained answers.",
+    "guide": "grammar/adjektivdeklination.html",
+    "guideLabel": "Review related grammar: adjectives describing people",
+    "rule": "Geduldig means patient, zuverlässig reliable, hilfsbereit helpful and schüchtern shy. Describe a person's behaviour with an example rather than assuming one action defines their whole character. In Sie ist zuverlässig the adjective follows sein and has no ending; before a noun it may need one.",
+    "trap": "Geduldig describes patience, not being a medical patient. The medical noun is der Patient or die Patientin.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Mira erklärt die Aufgabe geduldig noch einmal.",
+        "Mira patiently explains the task again."
+      ],
+      [
+        "Unser Nachbar ist zuverlässig und hält Absprachen ein.",
+        "Our neighbour is reliable and keeps agreements."
+      ],
+      [
+        "Die neue Kollegin ist sehr hilfsbereit.",
+        "The new colleague is very helpful."
+      ],
+      [
+        "In großen Gruppen ist Ben manchmal schüchtern.",
+        "In large groups Ben is sometimes shy."
+      ]
+    ],
+    "quiz": [
+      [
+        "Sie wartet ruhig und ist ___. (patient)",
+        "geduldig",
+        "Geduldig means able to wait or explain calmly."
+      ],
+      [
+        "Er hält seine Zusagen ein und ist ___. (reliable)",
+        "zuverlässig",
+        "Zuverlässig describes someone others can depend on."
+      ],
+      [
+        "Sie bietet anderen Unterstützung an und ist ___. (helpful)",
+        "hilfsbereit",
+        "Hilfsbereit describes willingness to help."
+      ],
+      [
+        "Er spricht in neuen Gruppen wenig und ist ___. (shy)",
+        "schüchtern",
+        "Schüchtern means shy; the cue specifies the intended description."
+      ]
+    ],
+    "wordBank": [
+      "geduldig",
+      "hilfsbereit",
+      "schüchtern",
+      "zuverlässig"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-application-documents-vocabulary-exercises",
+    "title": "German Job Application Documents: B1 Vocabulary Practice",
+    "description": "Learn Lebenslauf, Anschreiben, Zeugnis and Arbeitsprobe in fictional German applications. Practise document vocabulary with translations and answers.",
+    "guide": "grammar/akkusativ.html",
+    "guideLabel": "Review related grammar: documents as direct objects",
+    "rule": "Der Lebenslauf is a CV, das Anschreiben a covering letter, das Zeugnis a certificate or reference and die Arbeitsprobe a work sample. A Zeugnis has different meanings in school and employment contexts. The requested documents depend on the particular application; these tasks explain the nouns.",
+    "trap": "A Lebenslauf lists relevant experience and education; an Anschreiben addresses a particular application. They serve different purposes even when sent together.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Im Lebenslauf nennt Lea ihre bisherige Ausbildung.",
+        "In her CV Lea lists her previous education and training."
+      ],
+      [
+        "Das Anschreiben bezieht sich auf die ausgeschriebene Stelle.",
+        "The covering letter refers to the advertised position."
+      ],
+      [
+        "Dieses Zeugnis beschreibt seine frühere Tätigkeit.",
+        "This reference describes his previous work."
+      ],
+      [
+        "Als Arbeitsprobe schickt sie einen selbst verfassten Artikel.",
+        "As a work sample she sends an article she wrote herself."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Übersicht über Ausbildung und Berufserfahrung heißt ___. (CV)",
+        "Lebenslauf",
+        "Lebenslauf is the document summarising education and experience."
+      ],
+      [
+        "Der Brief zur konkreten Bewerbung ist das ___. (covering letter)",
+        "Anschreiben",
+        "Anschreiben names the letter accompanying the application."
+      ],
+      [
+        "Die schriftliche Beurteilung einer früheren Tätigkeit ist hier ein ___. (employment reference)",
+        "Zeugnis",
+        "Zeugnis has the employment-reference meaning in this sentence."
+      ],
+      [
+        "Ein Beispiel eigener Arbeit nennt man ___. (work sample)",
+        "Arbeitsprobe",
+        "Arbeitsprobe is a sample demonstrating the applicant's work."
+      ]
+    ],
+    "wordBank": [
+      "Anschreiben",
+      "Arbeitsprobe",
+      "Lebenslauf",
+      "Zeugnis"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-work-schedules-vocabulary-exercises",
+    "title": "German Work Schedule Vocabulary: B1 Exercises",
+    "description": "Practise Schicht, Gleitzeit, Überstunden and Teilzeit in fictional German work descriptions. Learn schedule terms with translated examples and answers.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: expressions for working times",
+    "rule": "Die Schicht is a work shift; die Gleitzeit means flexitime. Die Überstunden is plural and means overtime hours. Die Teilzeit describes part-time work, often in the expression in Teilzeit arbeiten. Schicht is countable: eine Schicht, zwei Schichten; Überstunden is used in the plural.",
+    "trap": "Teilzeit does not specify one fixed number of weekly hours. Gleitzeit describes flexibility within an arrangement, not unrestricted freedom to work at any time.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Meine Schicht beginnt diese Woche um vierzehn Uhr.",
+        "My shift starts at two p.m. this week."
+      ],
+      [
+        "In unserem Betrieb gibt es Gleitzeit.",
+        "Our company offers flexitime."
+      ],
+      [
+        "Die Liste enthält die Überstunden des letzten Monats.",
+        "The list includes last month's overtime hours."
+      ],
+      [
+        "Nach dem Kurs arbeitet er zunächst in Teilzeit.",
+        "After the course he initially works part-time."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der geplante Arbeitsabschnitt von sechs bis vierzehn Uhr ist eine ___. (shift)",
+        "Schicht",
+        "Schicht names a scheduled block of work."
+      ],
+      [
+        "Flexible Anfangszeiten im vereinbarten Rahmen nennt man ___. (flexitime)",
+        "Gleitzeit",
+        "Gleitzeit describes a flexible-hours arrangement."
+      ],
+      [
+        "Zusätzliche Arbeitsstunden heißen ___. (overtime hours)",
+        "Überstunden",
+        "Überstunden is plural and refers to extra working hours."
+      ],
+      [
+        "Sie arbeitet zwanzig Stunden pro Woche in ___. (part-time work)",
+        "Teilzeit",
+        "In Teilzeit arbeiten is the expression used in this example."
+      ]
+    ],
+    "wordBank": [
+      "Gleitzeit",
+      "Schicht",
+      "Teilzeit",
+      "Überstunden"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-online-delivery-vocabulary-exercises",
+    "title": "German Order and Delivery Vocabulary: B1 Practice",
+    "description": "Learn Bestellbestätigung, Sendungsverfolgung, Lieferanschrift and Zustellversuch. Practise German delivery vocabulary with translated examples and answers.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: articles in compound nouns",
+    "rule": "Die Bestellbestätigung confirms an order; die Sendungsverfolgung is shipment tracking. Die Lieferanschrift is the delivery address, while der Zustellversuch is an attempted delivery. German compound nouns take their gender from the final noun: der Versuch gives der Zustellversuch.",
+    "trap": "A Bestellbestätigung is not the same as confirmation that delivery has occurred. Sendungsverfolgung provides tracking information; it does not itself guarantee a delivery time.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die Bestellbestätigung enthält eine Artikelnummer.",
+        "The order confirmation contains an item number."
+      ],
+      [
+        "In der Sendungsverfolgung steht der letzte bekannte Standort.",
+        "The tracking information shows the last known location."
+      ],
+      [
+        "Bitte prüfen Sie die Lieferanschrift im Entwurf.",
+        "Please check the delivery address in the draft."
+      ],
+      [
+        "Laut Mitteilung gab es gestern einen Zustellversuch.",
+        "According to the notice, a delivery was attempted yesterday."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Nachricht nach der Bestellung heißt ___. (order confirmation)",
+        "Bestellbestätigung",
+        "Bestellbestätigung confirms the order rather than the delivery."
+      ],
+      [
+        "Den Transportstatus finde ich in der ___. (shipment tracking)",
+        "Sendungsverfolgung",
+        "Sendungsverfolgung is the tracking information for the shipment."
+      ],
+      [
+        "Die Adresse für die Lieferung ist die ___. (delivery address)",
+        "Lieferanschrift",
+        "Lieferanschrift names the destination address."
+      ],
+      [
+        "Ein erfolgloser Besuch des Zustellers kann ein ___ sein. (delivery attempt)",
+        "Zustellversuch",
+        "Zustellversuch is an attempt, which need not end in completed delivery."
+      ]
+    ],
+    "wordBank": [
+      "Bestellbestätigung",
+      "Lieferanschrift",
+      "Sendungsverfolgung",
+      "Zustellversuch"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-everyday-banking-vocabulary-exercises",
+    "title": "German Banking Vocabulary: B1 Exercises with Answers",
+    "description": "Study Kontostand, Kontoauszug, Überweisung and Dauerauftrag in fictional German banking sentences. Practise meanings with translations and explanations.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: compound-noun gender",
+    "rule": "Der Kontostand is an account balance and der Kontoauszug an account statement. Die Überweisung means bank transfer in this context. Der Dauerauftrag is a standing order for recurring transfers. Kontostand refers to the balance at a particular moment; Kontoauszug lists movements over a period.",
+    "trap": "Überweisung can also mean a medical referral. A Dauerauftrag is not a Lastschrift: a standing order and a direct debit describe different payment arrangements.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Der Kontostand wird in der Übersicht angezeigt.",
+        "The account balance is shown in the overview."
+      ],
+      [
+        "Auf dem Kontoauszug stehen mehrere Buchungen.",
+        "The account statement lists several transactions."
+      ],
+      [
+        "Die Überweisung hat den Verwendungszweck Kursbuch.",
+        "The transfer has the reference course book."
+      ],
+      [
+        "Der Dauerauftrag ist für jeden Monatsanfang eingerichtet.",
+        "The standing order is set up for the start of each month."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der angezeigte Geldbetrag auf dem Konto ist der ___. (account balance)",
+        "Kontostand",
+        "Kontostand names the balance at a particular time."
+      ],
+      [
+        "Die Aufstellung der Kontobewegungen heißt ___. (account statement)",
+        "Kontoauszug",
+        "Kontoauszug lists transactions over a period."
+      ],
+      [
+        "Das Senden eines Betrags auf ein anderes Konto ist eine ___. (bank transfer)",
+        "Überweisung",
+        "The banking context gives Überweisung the meaning bank transfer."
+      ],
+      [
+        "Ein Auftrag für regelmäßig wiederkehrende Überweisungen ist ein ___. (standing order)",
+        "Dauerauftrag",
+        "Dauerauftrag describes recurring transfers initiated by a standing instruction."
+      ]
+    ],
+    "wordBank": [
+      "Dauerauftrag",
+      "Kontoauszug",
+      "Kontostand",
+      "Überweisung"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-course-organisation-vocabulary-exercises",
+    "title": "German Course Organisation Vocabulary: B1 Practice",
+    "description": "Learn Voraussetzung, Anmeldung, Teilnahme and Bescheinigung in fictional German courses. Check course vocabulary with translations and explained answers.",
+    "guide": "grammar/der-die-das.html",
+    "guideLabel": "Review related grammar: articles with course nouns",
+    "rule": "Die Voraussetzung is a prerequisite, die Anmeldung registration, die Teilnahme participation and die Bescheinigung a written confirmation or certificate. Registration and actual participation are separate ideas. What a particular certificate confirms depends on its wording; the noun alone does not establish a qualification.",
+    "trap": "A Teilnahmebescheinigung generally confirms participation. Do not automatically translate every Bescheinigung as a degree or a passed assessment.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Grundkenntnisse sind eine Voraussetzung für diesen Kurs.",
+        "Basic knowledge is a prerequisite for this course."
+      ],
+      [
+        "Für die Anmeldung füllt sie ein Formular aus.",
+        "She fills out a form to register."
+      ],
+      [
+        "Ihre regelmäßige Teilnahme hilft der Lerngruppe.",
+        "Her regular participation helps the study group."
+      ],
+      [
+        "Die Bescheinigung nennt den Zeitraum des Kurses.",
+        "The confirmation document states the course dates."
+      ]
+    ],
+    "quiz": [
+      [
+        "Eine notwendige Bedingung vor Kursbeginn ist eine ___. (prerequisite)",
+        "Voraussetzung",
+        "Voraussetzung is a condition that must already be met."
+      ],
+      [
+        "Das Eintragen für den Kurs heißt ___. (registration)",
+        "Anmeldung",
+        "Anmeldung is signing up, rather than attending every session."
+      ],
+      [
+        "Das aktive Mitmachen im Kurs heißt ___. (participation)",
+        "Teilnahme",
+        "Teilnahme names taking part in the course."
+      ],
+      [
+        "Ein schriftlicher Nachweis über den Kursbesuch ist eine ___. (confirmation document)",
+        "Bescheinigung",
+        "Bescheinigung is a written confirmation; its exact scope depends on the text."
+      ]
+    ],
+    "wordBank": [
+      "Anmeldung",
+      "Bescheinigung",
+      "Teilnahme",
+      "Voraussetzung"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-energy-collocations-vocabulary-exercises",
+    "title": "German Energy Collocations: B1 Vocabulary Exercises",
+    "description": "Practise verb combinations with Energie, Strom, Wärme and Verbrauch in German. Study contextual meanings with translated examples and explained tasks.",
+    "guide": "grammar/akkusativ.html",
+    "guideLabel": "Review related grammar: verb and direct-object combinations",
+    "rule": "Useful combinations include Energie sparen (save energy), Strom erzeugen (generate electricity), Wärme speichern (store heat) and den Verbrauch senken (reduce consumption). Learn the verb together with its noun partner. Similar English ideas may require different German verbs depending on what is saved, produced or reduced.",
+    "trap": "Strom erzeugen describes production, while Strom verbrauchen describes use. Sparen focuses on reducing use, while speichern means retaining energy or heat for later.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die neue Anlage soll Strom erzeugen.",
+        "The new installation is intended to generate electricity."
+      ],
+      [
+        "Der Speicher kann Wärme lange speichern.",
+        "The storage unit can store heat for a long time."
+      ],
+      [
+        "Wir möchten im Gebäude Energie sparen.",
+        "We want to save energy in the building."
+      ],
+      [
+        "Das Team versucht, den Verbrauch zu senken.",
+        "The team is trying to reduce consumption."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Anlage kann elektrischen Strom ___. (generate)",
+        "erzeugen",
+        "Strom erzeugen is the combination for producing electricity."
+      ],
+      [
+        "Das Material kann Wärme ___. (store)",
+        "speichern",
+        "Wärme speichern means retaining heat for later use."
+      ],
+      [
+        "Wir wollen möglichst viel Energie ___. (save)",
+        "sparen",
+        "Energie sparen means using less energy than otherwise needed."
+      ],
+      [
+        "Mit dem Plan möchten wir den Verbrauch ___. (reduce)",
+        "senken",
+        "Den Verbrauch senken means lowering consumption."
+      ]
+    ],
+    "wordBank": [
+      "erzeugen",
+      "senken",
+      "sparen",
+      "speichern"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-volunteering-vocabulary-exercises",
+    "title": "German Volunteering Vocabulary: B1 Practice",
+    "description": "Learn Ehrenamt, Verein, Spende and Nachbarschaft in German community contexts. Practise word meanings with translations and explained B1 exercises.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: community nouns in context",
+    "rule": "Das Ehrenamt is a voluntary role, der Verein an association or club, die Spende a donation and die Nachbarschaft the neighbourhood or neighbouring community. Ein Ehrenamt übernehmen means taking on a voluntary role. A Verein can have many purposes; the noun does not by itself mean a charity.",
+    "trap": "Ehrenamt describes voluntary service or a role, not simply every unpaid activity. Spende is a donation, while a membership fee is a Mitgliedsbeitrag.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Sie übernimmt ein Ehrenamt im Sportverein.",
+        "She takes on a voluntary role in the sports club."
+      ],
+      [
+        "Der Verein organisiert ein offenes Sommerfest.",
+        "The association organises a summer party open to everyone."
+      ],
+      [
+        "Die Spende unterstützt das Bücherprojekt im Dorf.",
+        "The donation supports the book project in the village."
+      ],
+      [
+        "In unserer Nachbarschaft helfen sich viele Menschen.",
+        "Many people help one another in our neighbourhood."
+      ]
+    ],
+    "quiz": [
+      [
+        "Eine freiwillige Aufgabe im Verein kann ein ___ sein. (voluntary role)",
+        "Ehrenamt",
+        "Ehrenamt names the role or voluntary service."
+      ],
+      [
+        "Der organisierte Zusammenschluss für ein gemeinsames Ziel ist hier ein ___. (association)",
+        "Verein",
+        "Verein is an association or club in this context."
+      ],
+      [
+        "Eine freiwillige finanzielle Zuwendung ist eine ___. (donation)",
+        "Spende",
+        "Spende names a donation rather than a compulsory membership fee."
+      ],
+      [
+        "Die Menschen und Häuser in der Nähe bilden die ___. (neighbourhood)",
+        "Nachbarschaft",
+        "Nachbarschaft describes the local neighbouring community."
+      ]
+    ],
+    "wordBank": [
+      "Ehrenamt",
+      "Nachbarschaft",
+      "Spende",
+      "Verein"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-news-source-words-vocabulary-exercises",
+    "title": "German News and Source Vocabulary: B1 Exercises",
+    "description": "Practise Quelle, Schlagzeile, Gerücht and Korrektur in German media sentences. Distinguish reporting terms with translations and explained B1 answers.",
+    "guide": "grammar/dass.html",
+    "guideLabel": "Review related grammar: statements about reported information",
+    "rule": "Die Quelle is a source, die Schlagzeile a headline, das Gerücht a rumour and die Korrektur a correction. A Schlagzeile introduces a report but is not the full report. A Gerücht is circulating information whose truth has not been established in the context. Identify the source and separate reports from verified facts.",
+    "trap": "A widely repeated Gerücht does not become a confirmed fact just because many people share it. Quelle names where information comes from, not a guarantee that it is accurate.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Der Artikel nennt eine Quelle für die Zahlen.",
+        "The article names a source for the figures."
+      ],
+      [
+        "Die Schlagzeile fasst das Thema stark verkürzt zusammen.",
+        "The headline summarises the subject very briefly."
+      ],
+      [
+        "Das Gerücht wurde später nicht bestätigt.",
+        "The rumour was not subsequently confirmed."
+      ],
+      [
+        "Die Redaktion veröffentlicht eine Korrektur des Datums.",
+        "The editorial team publishes a correction to the date."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Herkunft einer Information nennt man ___. (source)",
+        "Quelle",
+        "Quelle identifies where the information comes from."
+      ],
+      [
+        "Die große Überschrift über dem Bericht ist die ___. (headline)",
+        "Schlagzeile",
+        "Schlagzeile is a prominent news headline."
+      ],
+      [
+        "Eine unbestätigte, weitererzählte Nachricht ist ein ___. (rumour)",
+        "Gerücht",
+        "Gerücht marks information being circulated without confirmation here."
+      ],
+      [
+        "Die Berichtigung eines falschen Datums ist eine ___. (correction)",
+        "Korrektur",
+        "Korrektur is the act or published result of correcting an error."
+      ]
+    ],
+    "wordBank": [
+      "Gerücht",
+      "Korrektur",
+      "Quelle",
+      "Schlagzeile"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-problem-solving-nouns-vocabulary-exercises",
+    "title": "German Problem-Solving Vocabulary: B1 Practice",
+    "description": "Learn Ursache, Lösung, Vorschlag and Entscheidung in German problem-solving contexts. Practise precise nouns with translations and explained answers.",
+    "guide": "grammar/weil-denn-deshalb.html",
+    "guideLabel": "Review related grammar: reasons and results in context",
+    "rule": "Die Ursache is a cause, die Lösung a solution, der Vorschlag a proposal and die Entscheidung a decision. Eine Lösung finden means finding a solution; einen Vorschlag machen means making a proposal. A suggestion is not already an agreed decision, and a suspected cause is not necessarily the established cause.",
+    "trap": "Keep Vorschlag and Entscheidung distinct. Ein Vorschlag may still need discussion; eine Entscheidung states that a choice has been made.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Wir untersuchen die Ursache des wiederholten Fehlers.",
+        "We are investigating the cause of the recurring error."
+      ],
+      [
+        "Das Team findet eine einfache Lösung.",
+        "The team finds a simple solution."
+      ],
+      [
+        "Ihr Vorschlag wird in der nächsten Sitzung besprochen.",
+        "Her proposal will be discussed at the next meeting."
+      ],
+      [
+        "Die Entscheidung fällt erst nach dem Vergleich.",
+        "The decision will only be made after the comparison."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Grund, warum das Problem entsteht, ist seine ___. (cause)",
+        "Ursache",
+        "Ursache names the cause of the problem."
+      ],
+      [
+        "Ein passender Weg zur Behebung ist eine ___. (solution)",
+        "Lösung",
+        "Lösung addresses how the problem can be resolved."
+      ],
+      [
+        "Eine noch nicht beschlossene Idee ist ein ___. (proposal)",
+        "Vorschlag",
+        "Vorschlag is an idea put forward for consideration."
+      ],
+      [
+        "Die getroffene Wahl zwischen den Möglichkeiten ist die ___. (decision)",
+        "Entscheidung",
+        "Entscheidung is the choice made after considering options."
+      ]
+    ],
+    "wordBank": [
+      "Entscheidung",
+      "Lösung",
+      "Ursache",
+      "Vorschlag"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "vocabulary",
+    "slug": "b1-building-maintenance-vocabulary-exercises",
+    "title": "German Building Maintenance Vocabulary: B1 Exercises",
+    "description": "Study Mangel, Reparatur, Wartung and Hausverwaltung in fictional German housing examples. Practise maintenance terms with translations and answers.",
+    "guide": "grammar/passiv.html",
+    "guideLabel": "Review related grammar: describing maintenance actions",
+    "rule": "Der Mangel is a defect, die Reparatur a repair, die Wartung maintenance and die Hausverwaltung property management. Wartung concerns planned care or checks; Reparatur concerns fixing something faulty. Mangel and Reparatur are countable: mehrere Mängel, mehrere Reparaturen.",
+    "trap": "A Mangel is the defect itself, while a Reparatur is work done to fix it. Wartung can take place even when no fault has occurred.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Der Bericht beschreibt einen Mangel am Fenster.",
+        "The report describes a defect in the window."
+      ],
+      [
+        "Die Reparatur der Tür ist für Dienstag geplant.",
+        "The door repair is planned for Tuesday."
+      ],
+      [
+        "Die Wartung des Aufzugs findet regelmäßig statt.",
+        "Maintenance of the lift takes place regularly."
+      ],
+      [
+        "Die Hausverwaltung sammelt die Rückmeldungen zum Gebäude.",
+        "The property management team collects feedback about the building."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ein defekter Fenstergriff ist ein ___. (defect)",
+        "Mangel",
+        "Mangel names the fault, rather than the work to fix it."
+      ],
+      [
+        "Das Beheben des defekten Griffs ist eine ___. (repair)",
+        "Reparatur",
+        "Reparatur is the corrective work."
+      ],
+      [
+        "Die planmäßige Pflege und Kontrolle einer Anlage heißt ___. (maintenance)",
+        "Wartung",
+        "Wartung is scheduled maintenance, which need not follow a breakdown."
+      ],
+      [
+        "Die Organisation, die das Gebäude verwaltet, ist die ___. (property management)",
+        "Hausverwaltung",
+        "Hausverwaltung names the management organisation in this example."
+      ]
+    ],
+    "wordBank": [
+      "Hausverwaltung",
+      "Mangel",
+      "Reparatur",
+      "Wartung"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "vocabulary",
+    "slug": "b2-research-methods-vocabulary-exercises",
+    "title": "German Research Verbs: B2 Vocabulary Exercises",
+    "description": "Practise erheben, auswerten, belegen and widerlegen in German research contexts. Compare evidence-related verbs with translated examples and answers.",
+    "guide": "grammar/passiv.html",
+    "guideLabel": "Review related grammar: research processes in passive sentences",
+    "rule": "Daten erheben means to collect data, Daten auswerten to analyse data, eine Aussage belegen to support a statement with evidence and eine Behauptung widerlegen to refute a claim. Belegen and widerlegen express different relationships between evidence and a statement. The strength of the evidence must fit the claim.",
+    "trap": "Belegen does not always mean proving beyond doubt. Widerlegen is stronger than merely disagreeing: it says that a claim has been shown to be false.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Für die Befragung werden anonymisierte Daten erhoben.",
+        "Anonymised data is collected for the survey."
+      ],
+      [
+        "Die Arbeitsgruppe wertet die Antworten systematisch aus.",
+        "The working group analyses the answers systematically."
+      ],
+      [
+        "Die Autorin belegt ihre Aussage mit zwei Quellen.",
+        "The author supports her statement with two sources."
+      ],
+      [
+        "Das Gegenbeispiel widerlegt die allgemeine Behauptung.",
+        "The counterexample refutes the general claim."
+      ]
+    ],
+    "quiz": [
+      [
+        "Zunächst möchte das Team Daten zur Nutzung ___. (collect)",
+        "erheben",
+        "Daten erheben is the research collocation for collecting data."
+      ],
+      [
+        "Danach soll es die Antworten ___. (analyse)",
+        "auswerten",
+        "Auswerten means examining the collected material to draw findings from it."
+      ],
+      [
+        "Die Aussage lässt sich mit diesen Quellen ___. (support with evidence)",
+        "belegen",
+        "Belegen describes providing evidence for the statement."
+      ],
+      [
+        "Ein gültiges Gegenbeispiel kann die allgemeine Behauptung ___. (refute)",
+        "widerlegen",
+        "Widerlegen means demonstrating that the claim is false."
+      ]
+    ],
+    "wordBank": [
+      "auswerten",
+      "belegen",
+      "erheben",
+      "widerlegen"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "vocabulary",
+    "slug": "b2-cause-effect-collocations-vocabulary-exercises",
+    "title": "German Cause and Effect Collocations: B2 Practice",
+    "description": "Learn combinations with bewirken, auslösen, beitragen and zurückführen. Practise German cause-and-effect vocabulary with translated examples and answers.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "guideLabel": "Review related grammar: fixed prepositions in causal expressions",
+    "rule": "Eine Änderung bewirken means to bring about a change; eine Reaktion auslösen means to trigger a reaction. Zu etwas beitragen means contributing to something, without claiming to be the only cause. Etwas auf etwas zurückführen means attributing it to a cause. These expressions differ in the strength and kind of causal relationship.",
+    "trap": "Beitragen takes zu plus dative, while zurückführen takes auf plus accusative for the proposed cause. Attribution in a sentence is not by itself proof of causation.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die neue Regelung bewirkt eine Änderung im Ablauf.",
+        "The new arrangement brings about a change in the process."
+      ],
+      [
+        "Die Ankündigung löst eine lebhafte Diskussion aus.",
+        "The announcement triggers a lively discussion."
+      ],
+      [
+        "Klare Aufgaben tragen zu einem ruhigen Ablauf bei.",
+        "Clear tasks contribute to a smooth process."
+      ],
+      [
+        "Das Team führt die Verzögerung auf einen Materialengpass zurück.",
+        "The team attributes the delay to a material shortage."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Beschluss soll eine konkrete Änderung ___. (bring about)",
+        "bewirken",
+        "Eine Änderung bewirken means causing the change to occur."
+      ],
+      [
+        "Die Nachricht kann eine Reaktion ___. (trigger)",
+        "auslösen",
+        "Eine Reaktion auslösen describes triggering a response."
+      ],
+      [
+        "Die Maßnahme kann zu einer Verbesserung ___. (contribute)",
+        "beitragen",
+        "Beitragen combines with zu and identifies a contributing factor."
+      ],
+      [
+        "Die Fachleute wollen den Ausfall auf einen bestimmten Defekt ___. (attribute)",
+        "zurückführen",
+        "Etwas auf etwas zurückführen attributes an outcome to a proposed cause."
+      ]
+    ],
+    "wordBank": [
+      "auslösen",
+      "beitragen",
+      "bewirken",
+      "zurückführen"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "vocabulary",
+    "slug": "b2-change-development-verbs-vocabulary-exercises",
+    "title": "German Change and Development Verbs: B2 Exercises",
+    "description": "Practise ausbauen, verringern, verlagern and beibehalten in German organisational contexts. Learn distinctions with translated examples and answers.",
+    "guide": "grammar/trennbare-verben.html",
+    "guideLabel": "Review related grammar: prefixes in development verbs",
+    "rule": "Ausbauen means to expand or develop, verringern to reduce, verlagern to shift and beibehalten to retain. Learn their objects: ein Angebot ausbauen, einen Abstand verringern, einen Schwerpunkt verlagern and ein Verfahren beibehalten. Ausbauen can also mean removing an installed part, so its object and context matter.",
+    "trap": "Verlagern describes a shift of place or emphasis, not necessarily an increase. Beibehalten means retaining something that already exists.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die Bibliothek baut ihr digitales Angebot aus.",
+        "The library is expanding its digital offering."
+      ],
+      [
+        "Die neue Planung verringert den Abstand zwischen den Terminen.",
+        "The new plan reduces the gap between appointments."
+      ],
+      [
+        "Das Projekt verlagert seinen Schwerpunkt auf die Umsetzung.",
+        "The project shifts its focus to implementation."
+      ],
+      [
+        "Die Gruppe behält das bewährte Verfahren bei.",
+        "The group retains the tried-and-tested procedure."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Bibliothek möchte ihr Angebot ___. (expand)",
+        "ausbauen",
+        "Ausbauen means expanding the offering in this context."
+      ],
+      [
+        "Das Team will den zeitlichen Abstand ___. (reduce)",
+        "verringern",
+        "Verringern means making the interval smaller."
+      ],
+      [
+        "Wir wollen den Schwerpunkt auf die Beratung ___. (shift)",
+        "verlagern",
+        "Den Schwerpunkt verlagern means shifting the focus."
+      ],
+      [
+        "Die Gruppe möchte ihre bisherige Methode ___. (retain)",
+        "beibehalten",
+        "Beibehalten means continuing to use the existing method."
+      ]
+    ],
+    "wordBank": [
+      "ausbauen",
+      "beibehalten",
+      "verlagern",
+      "verringern"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "vocabulary",
+    "slug": "b2-evaluation-adjectives-vocabulary-exercises",
+    "title": "German Evaluation Adjectives: B2 Vocabulary Practice",
+    "description": "Learn nachvollziehbar, schlüssig, aussagekräftig and umsetzbar for precise German evaluation. Practise meanings with translated examples and B2 answers.",
+    "guide": "grammar/adjektivdeklination.html",
+    "guideLabel": "Review related grammar: evaluative adjectives in context",
+    "rule": "Nachvollziehbar means understandable or traceable in its reasoning, schlüssig logically coherent, aussagekräftig informative or meaningful and umsetzbar feasible to implement. Each adjective evaluates a different feature. An argument may be understandable without being convincing, and an idea may be coherent without being feasible.",
+    "trap": "Schlüssig evaluates the reasoning, not whether every factual premise is true. Aussagekräftig describes informative value rather than simply a large quantity of material.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die einzelnen Rechenschritte sind nachvollziehbar.",
+        "The individual calculation steps are easy to follow."
+      ],
+      [
+        "Die Argumentation ist in sich schlüssig.",
+        "The argument is internally coherent."
+      ],
+      [
+        "Die kleine Grafik ist für diese Frage wenig aussagekräftig.",
+        "The small chart provides little useful information for this question."
+      ],
+      [
+        "Der Vorschlag ist mit den verfügbaren Mitteln umsetzbar.",
+        "The proposal can be implemented with the available resources."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Schritte lassen sich gut verfolgen; sie sind ___. (easy to follow)",
+        "nachvollziehbar",
+        "Nachvollziehbar evaluates whether the process or reasoning can be followed."
+      ],
+      [
+        "Die Schlussfolgerung passt logisch zu den Prämissen; sie ist ___. (logically coherent)",
+        "schlüssig",
+        "Schlüssig describes the logical connection within the reasoning."
+      ],
+      [
+        "Die Angaben liefern relevante Erkenntnisse; sie sind ___. (informative)",
+        "aussagekräftig",
+        "Aussagekräftig describes useful explanatory information."
+      ],
+      [
+        "Der Plan kann praktisch realisiert werden; er ist ___. (feasible to implement)",
+        "umsetzbar",
+        "Umsetzbar evaluates practical implementation."
+      ]
+    ],
+    "wordBank": [
+      "aussagekräftig",
+      "nachvollziehbar",
+      "schlüssig",
+      "umsetzbar"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "vocabulary",
+    "slug": "b2-resource-use-vocabulary-exercises",
+    "title": "German Resource Use Vocabulary: B2 Exercises",
+    "description": "Study Rohstoff, Wiederverwendung, Lebensdauer and Kreislauf in German resource discussions. Practise precise meanings with translations and explanations.",
+    "guide": "grammar/genitiv.html",
+    "guideLabel": "Review related grammar: noun relationships in formal descriptions",
+    "rule": "Der Rohstoff is a raw material, die Wiederverwendung reuse, die Lebensdauer service life or lifespan and der Kreislauf a cycle. Wiederverwendung means using an item again; recycling involves processing material. Kreislauf can describe a material cycle, but using the word alone does not establish that a process is fully circular.",
+    "trap": "Lebensdauer is not the same as warranty duration. A product can also be wiederverwendbar without being indefinitely reusable or fully recyclable.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Für das Bauteil wird ein mineralischer Rohstoff benötigt.",
+        "A mineral raw material is needed for the component."
+      ],
+      [
+        "Die Wiederverwendung der Behälter vermeidet hier neue Verpackungen.",
+        "Reusing the containers avoids new packaging in this example."
+      ],
+      [
+        "Die Lebensdauer hängt auch von der Nutzung ab.",
+        "The service life also depends on how it is used."
+      ],
+      [
+        "Das Schaubild zeigt den Kreislauf des Materials.",
+        "The diagram shows the material cycle."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ein Ausgangsmaterial für die Produktion ist ein ___. (raw material)",
+        "Rohstoff",
+        "Rohstoff names a material used as an input in production."
+      ],
+      [
+        "Das erneute Nutzen desselben Behälters ist ___. (reuse)",
+        "Wiederverwendung",
+        "Wiederverwendung means using the object again rather than processing it into new material."
+      ],
+      [
+        "Die nutzbare Zeit eines Produkts heißt hier ___. (service life)",
+        "Lebensdauer",
+        "Lebensdauer describes the period of usable life in this product context."
+      ],
+      [
+        "Eine sich wiederholende Folge von Materialstufen ist ein ___. (cycle)",
+        "Kreislauf",
+        "Kreislauf names the recurring cycle shown in the description."
+      ]
+    ],
+    "wordBank": [
+      "Kreislauf",
+      "Lebensdauer",
+      "Rohstoff",
+      "Wiederverwendung"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "vocabulary",
+    "slug": "b2-responsibility-authority-vocabulary-exercises",
+    "title": "German Responsibility and Authority: B2 Vocabulary Practice",
+    "description": "Learn Zuständigkeit, Befugnis, Rechenschaft and Eigenverantwortung in German workplace language. Practise distinctions with translated examples and answers.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: fixed phrases with responsibility nouns",
+    "rule": "Die Zuständigkeit is the area for which someone is responsible, die Befugnis the authority or permission to act, and die Rechenschaft an account of actions. Rechenschaft ablegen means to account for one's actions. Die Eigenverantwortung is personal responsibility. Having a task does not automatically grant every decision-making power.",
+    "trap": "Zuständigkeit and Befugnis are not identical: being the contact responsible for a task does not necessarily mean being authorised to sign or approve everything.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die Zuständigkeit für die Anfrage ist im Plan festgelegt.",
+        "Responsibility for the enquiry is specified in the plan."
+      ],
+      [
+        "Ihre Befugnis zur Freigabe ist auf diesen Bereich begrenzt.",
+        "Her authority to approve is limited to this area."
+      ],
+      [
+        "Die Projektleitung legt über die Mittelverwendung Rechenschaft ab.",
+        "The project management team accounts for how the funds were used."
+      ],
+      [
+        "Die Aufgabe verlangt ein hohes Maß an Eigenverantwortung.",
+        "The task requires a high degree of personal responsibility."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die organisatorische Verantwortung für einen Bereich heißt ___. (area of responsibility)",
+        "Zuständigkeit",
+        "Zuständigkeit identifies who is responsible for the area."
+      ],
+      [
+        "Die Erlaubnis, eine bestimmte Entscheidung zu treffen, ist eine ___. (authority)",
+        "Befugnis",
+        "Befugnis is the authority to take the specified action."
+      ],
+      [
+        "Über die Verwendung der Mittel muss das Team ___ ablegen. (account)",
+        "Rechenschaft",
+        "Rechenschaft ablegen is the established expression for accounting for actions."
+      ],
+      [
+        "Selbstständig Verantwortung für das eigene Handeln zu tragen heißt ___. (personal responsibility)",
+        "Eigenverantwortung",
+        "Eigenverantwortung emphasises responsibility for one's own actions."
+      ]
+    ],
+    "wordBank": [
+      "Befugnis",
+      "Eigenverantwortung",
+      "Rechenschaft",
+      "Zuständigkeit"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "vocabulary",
+    "slug": "b2-economic-terms-vocabulary-exercises",
+    "title": "German Economic Terms: B2 Vocabulary Exercises",
+    "description": "Practise Nachfrage, Angebot, Umsatz and Gewinn in fictional German business examples. Distinguish economic nouns with translations and explained answers.",
+    "guide": "grammar/komparativ.html",
+    "guideLabel": "Review related grammar: comparing amounts and developments",
+    "rule": "Die Nachfrage is demand and das Angebot supply or an offering. Der Umsatz is revenue from sales; der Gewinn is profit after relevant costs in the simplified business context used here. Higher Umsatz does not necessarily mean higher Gewinn. Angebot can also mean an offer, so choose its meaning from the context.",
+    "trap": "Do not translate Umsatz as profit. Revenue and profit answer different questions; rising revenue can coincide with falling profit if costs rise faster.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Die Nachfrage nach dem Produkt schwankt im Jahresverlauf.",
+        "Demand for the product fluctuates over the year."
+      ],
+      [
+        "Das Angebot an freien Räumen ist begrenzt.",
+        "The supply of available rooms is limited."
+      ],
+      [
+        "Der Umsatz des kleinen Betriebs ist im Juni gestiegen.",
+        "The small business's revenue increased in June."
+      ],
+      [
+        "Trotz höherer Einnahmen bleibt der Gewinn gering.",
+        "Despite higher income, profit remains low."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Interesse der Käufer an einem Produkt beschreibt die ___. (demand)",
+        "Nachfrage",
+        "Nachfrage names market demand in this sentence."
+      ],
+      [
+        "Die verfügbare Menge einer Ware ist hier das ___. (supply)",
+        "Angebot",
+        "Angebot has the market-supply meaning in this context."
+      ],
+      [
+        "Die Erlöse aus den Verkäufen bilden den ___. (sales revenue)",
+        "Umsatz",
+        "Umsatz is sales revenue before subtracting the relevant costs."
+      ],
+      [
+        "Nach Abzug der relevanten Kosten bleibt im vereinfachten Beispiel der ___. (profit)",
+        "Gewinn",
+        "Gewinn is profit in the simplified business example."
+      ]
+    ],
+    "wordBank": [
+      "Angebot",
+      "Gewinn",
+      "Nachfrage",
+      "Umsatz"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "vocabulary",
+    "slug": "b2-conflict-mediation-vocabulary-exercises",
+    "title": "German Conflict Mediation Vocabulary: B2 Practice",
+    "description": "Learn Standpunkt, Zugeständnis, Kompromiss and Vermittlung in German discussions. Practise precise conflict vocabulary with translations and explanations.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "guideLabel": "Review related grammar: prepositions in discussion language",
+    "rule": "Der Standpunkt is a position or viewpoint, das Zugeständnis a concession, der Kompromiss a compromise and die Vermittlung mediation in this context. Ein Zugeständnis machen means making a concession; einen Kompromiss finden means finding a compromise. Vermittlung can also mean arranging or brokering something in other contexts.",
+    "trap": "A Kompromiss is an agreement involving accommodation between positions. A Zugeständnis is one concession and need not resolve the entire disagreement.",
+    "instructions": "Choose the word from the bank that matches the English cue and sentence. Use each item once; keep its spelling and capitalisation.",
+    "examples": [
+      [
+        "Sie erläutert ihren Standpunkt ohne persönliche Angriffe.",
+        "She explains her position without personal attacks."
+      ],
+      [
+        "Beide Seiten machen ein kleines Zugeständnis.",
+        "Both sides make a small concession."
+      ],
+      [
+        "Nach mehreren Gesprächen finden sie einen Kompromiss.",
+        "After several discussions they find a compromise."
+      ],
+      [
+        "Die Vermittlung durch eine dritte Person erleichtert das Gespräch.",
+        "Mediation by a third person makes the discussion easier."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die begründete Position einer Person ist ihr ___. (viewpoint)",
+        "Standpunkt",
+        "Standpunkt names the position from which someone argues."
+      ],
+      [
+        "Das Entgegenkommen in einem einzelnen Punkt ist ein ___. (concession)",
+        "Zugeständnis",
+        "Zugeständnis is a specific concession, rather than necessarily a complete settlement."
+      ],
+      [
+        "Eine Einigung mit gegenseitigem Entgegenkommen ist ein ___. (compromise)",
+        "Kompromiss",
+        "Kompromiss describes the resulting accommodation between positions."
+      ],
+      [
+        "Die Unterstützung einer neutralen dritten Person heißt hier ___. (mediation)",
+        "Vermittlung",
+        "Vermittlung has the conflict-mediation meaning in this example."
+      ]
+    ],
+    "wordBank": [
+      "Kompromiss",
+      "Standpunkt",
+      "Vermittlung",
+      "Zugeständnis"
+    ]
+  }
+]

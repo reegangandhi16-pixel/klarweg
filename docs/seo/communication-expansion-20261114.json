@@ -1,0 +1,2902 @@
+[
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-age-and-birthday-communication-exercises",
+    "title": "Age and Birthdays in German: A1 Phrase Practice",
+    "description": "Ask about age and birthdays in German. Practise Jahre alt, Geburtstag and simple date questions with translated examples and explained A1 answers.",
+    "guide": "grammar/datum.html",
+    "guideLabel": "Review related grammar: dates and calendar expressions",
+    "rule": "Ask Wie alt bist du? for age and Wann hast du Geburtstag? for a birthday. An age answer uses Ich bin … Jahre alt. A birthday can be given with am plus a date or im plus a month. In this context Geburtstag names the recurring birthday, while Geburtsdatum is the full date of birth.",
+    "trap": "Use Ich bin zwanzig Jahre alt, not Ich habe zwanzig Jahre as a direct translation from some languages. Name the month or date clearly.",
+    "instructions": "Complete the age or birthday phrase with the form identified by the English cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Wie alt ist deine Schwester jetzt?",
+        "How old is your sister now?"
+      ],
+      [
+        "Ich bin zweiundzwanzig Jahre alt.",
+        "I am twenty-two years old."
+      ],
+      [
+        "Wann hast du Geburtstag, Amira?",
+        "When is your birthday, Amira?"
+      ],
+      [
+        "Mein Geburtstag ist im September.",
+        "My birthday is in September."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wie ___ bist du? (old)",
+        "alt",
+        "Wie alt asks about age."
+      ],
+      [
+        "Ich bin neunzehn ___ alt. (years)",
+        "Jahre",
+        "Jahre is the plural noun in the age expression."
+      ],
+      [
+        "Wann hast du ___? (birthday)",
+        "Geburtstag",
+        "Geburtstag is the noun in this birthday question."
+      ],
+      [
+        "Mein Geburtstag ist ___ November. (in, before a month)",
+        "im",
+        "Im introduces a month in this expression."
+      ]
+    ],
+    "wordBank": [
+      "alt",
+      "Geburtstag",
+      "im",
+      "Jahre"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-talking-languages-communication-exercises",
+    "title": "Talking About Languages in German: A1 Phrase Exercises",
+    "description": "Describe which languages you speak and are learning in German. Practise sprechen, lernen and ability phrases with translations and explained A1 answers.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense forms for language learning",
+    "rule": "Welche Sprachen sprichst du? asks which languages someone speaks. Ich spreche … names a language, while Ich lerne … describes learning it. Ein bisschen indicates a little ability, and fließend means fluently. Learning and fluency are different descriptions, so choose the phrase that matches the speaker's intended meaning.",
+    "trap": "Use Ich spreche Deutsch for speaking German. Deutsch is capitalised as the language name in this sentence.",
+    "instructions": "Complete each phrase using the verb form or meaning specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Welche Sprachen sprichst du zu Hause?",
+        "Which languages do you speak at home?"
+      ],
+      [
+        "Ich spreche Hindi und ein bisschen Deutsch.",
+        "I speak Hindi and a little German."
+      ],
+      [
+        "Meine Kollegin spricht fließend Italienisch.",
+        "My colleague speaks Italian fluently."
+      ],
+      [
+        "Seit diesem Monat lerne ich auch Portugiesisch.",
+        "Since this month I have also been learning Portuguese."
+      ]
+    ],
+    "quiz": [
+      [
+        "Welche ___ sprechen Sie? (languages)",
+        "Sprachen",
+        "Sprachen is the plural object of sprechen."
+      ],
+      [
+        "Ich ___ gerade Deutsch. (lernen)",
+        "lerne",
+        "Lerne describes the current learning activity."
+      ],
+      [
+        "Ich verstehe nur ___ Spanisch. (a little)",
+        "ein bisschen",
+        "Ein bisschen indicates the stated limited amount."
+      ],
+      [
+        "Er spricht die Sprache ___. (fluently)",
+        "fließend",
+        "Fließend describes fluent speech."
+      ]
+    ],
+    "wordBank": [
+      "ein bisschen",
+      "fließend",
+      "lerne",
+      "Sprachen"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-locating-everyday-objects-communication-exercises",
+    "title": "Locating Objects in German: A1 Phrase Practice",
+    "description": "Ask where everyday objects are and describe their location in German. Practise wo, neben and simple answers with translations and explained A1 exercises.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: static location phrases",
+    "rule": "Ask Wo ist …? for a single object and Wo sind …? for several. A location answer can name the place: Die Tasche ist neben dem Stuhl. In these static location phrases, neben, auf and unter use dative. Dort refers back to a place already identified in the conversation.",
+    "trap": "Wo asks where something is, while wohin asks where it is going. These exercises describe a location, not movement towards it.",
+    "instructions": "Complete the location question or answer using the question word, verb or preposition given by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Wo ist meine graue Tasche?",
+        "Where is my grey bag?"
+      ],
+      [
+        "Die Tasche steht neben dem niedrigen Stuhl.",
+        "The bag is beside the low chair."
+      ],
+      [
+        "Wo sind die neuen Notizhefte?",
+        "Where are the new notebooks?"
+      ],
+      [
+        "Die Hefte liegen unter der Landkarte.",
+        "The notebooks are under the map."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ ist der rote Ordner? (where, static location)",
+        "Wo",
+        "Wo asks for the object's location."
+      ],
+      [
+        "Die Schlüssel ___ auf dem Schreibtisch. (liegen)",
+        "liegen",
+        "Plural Schlüssel takes liegen in this location description."
+      ],
+      [
+        "Die Tasche steht ___ dem Stuhl. (beside)",
+        "neben",
+        "Neben names the stated position beside the chair."
+      ],
+      [
+        "Die Schuhe stehen ___ der Bank. (under)",
+        "unter",
+        "Unter identifies the location beneath the bench."
+      ]
+    ],
+    "wordBank": [
+      "liegen",
+      "neben",
+      "unter",
+      "Wo"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-likes-and-dislikes-communication-exercises",
+    "title": "Likes and Dislikes in German: A1 Phrase Exercises",
+    "description": "Express likes, dislikes and favourites in German. Practise mögen, gern and lieber with translated everyday examples and explained A1 self-check answers.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense preference expressions",
+    "rule": "Ich mag … expresses liking a thing, while Ich … gern describes enjoying an activity. Nicht gern expresses dislike of an activity; lieber indicates a preference compared with another option. Mein Lieblings… names a favourite, for example Mein Lieblingsessen ist … . State whether you mean enjoyment or a comparison.",
+    "trap": "Gern concerns enjoyment, not skill. Gerne is a standard alternative. Lieber compares preferences rather than simply meaning very much.",
+    "instructions": "Complete the preference phrase using the supplied meaning or verb cue. Gerne is also natural wherever gern expresses enjoyment. Use each word-bank item once.",
+    "examples": [
+      [
+        "Ich mag frische Erdbeeren besonders.",
+        "I especially like fresh strawberries."
+      ],
+      [
+        "Am freien Abend spiele ich gern Schach.",
+        "On a free evening I enjoy playing chess."
+      ],
+      [
+        "Heute trinke ich lieber Tee als Kaffee.",
+        "Today I prefer tea to coffee."
+      ],
+      [
+        "Mein Lieblingsessen ist eine einfache Gemüsesuppe.",
+        "My favourite food is a simple vegetable soup."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ warme Suppen. (mögen)",
+        "mag",
+        "Mag is the ich form used for liking a thing."
+      ],
+      [
+        "Ich fotografiere ___ in der Natur. (enjoy doing it)",
+        "gern",
+        "Gern expresses enjoyment; gerne is a standard alternative."
+      ],
+      [
+        "Heute möchte ich ___ zu Hause bleiben als ausgehen. (would rather)",
+        "lieber",
+        "Lieber makes the comparison between the two activities."
+      ],
+      [
+        "Mein ___ ist Ofengemüse. (favourite food)",
+        "Lieblingsessen",
+        "Lieblingsessen is the compound noun for favourite food."
+      ]
+    ],
+    "wordBank": [
+      "gern",
+      "lieber",
+      "Lieblingsessen",
+      "mag"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-identifying-objects-communication-exercises",
+    "title": "Identifying Objects in German: A1 Question Practice",
+    "description": "Ask what an object is and how it is called in German. Practise das ist, wie heißt and singular/plural questions with translations and explained A1 answers.",
+    "guide": "grammar/w-fragen.html",
+    "guideLabel": "Review related grammar: question words for identifying things",
+    "rule": "Was ist das? asks what a single thing is. Was sind das? can ask about several things. Wie heißt das auf Deutsch? asks for the German name. Das ist ein … identifies a singular item; Das sind … identifies several. A name question and a question about ownership have different purposes.",
+    "trap": "Use Wie heißt das? to ask what something is called. Was ist das? asks for identification more broadly and may receive an explanation rather than only a name.",
+    "instructions": "Complete the identification phrase with the question word, verb or language cue shown. Use each word-bank item once.",
+    "examples": [
+      [
+        "Was ist das für ein kleines Werkzeug?",
+        "What kind of small tool is that?"
+      ],
+      [
+        "Das ist ein Schraubenzieher für sehr kleine Schrauben.",
+        "That is a screwdriver for very small screws."
+      ],
+      [
+        "Wie heißt dieses Teil auf Deutsch?",
+        "What is this part called in German?"
+      ],
+      [
+        "Das sind die Ersatzteile für das Regal.",
+        "Those are the spare parts for the shelving unit."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ ist das für ein Gegenstand? (what)",
+        "Was",
+        "Was asks for identification of the object."
+      ],
+      [
+        "Wie ___ dieses Gerät? (heißen)",
+        "heißt",
+        "Heißt is the singular form in the naming question."
+      ],
+      [
+        "Das ___ zwei kleine Klammern. (sein, plural)",
+        "sind",
+        "Plural items take sind in this identification pattern."
+      ],
+      [
+        "Wie sagt man das auf ___? (German)",
+        "Deutsch",
+        "Auf Deutsch asks for the German expression."
+      ]
+    ],
+    "wordBank": [
+      "Deutsch",
+      "heißt",
+      "sind",
+      "Was"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-thanking-and-replying-communication-exercises",
+    "title": "Thanking and Replying in German: A1 Phrase Practice",
+    "description": "Thank someone and reply naturally in German. Practise Vielen Dank, gern geschehen and short responses with translated examples and explained A1 answers.",
+    "guide": "grammar/dativ.html",
+    "guideLabel": "Review related grammar: dative recipients with danken",
+    "rule": "Vielen Dank and Danke schön express thanks. You can name the reason with für plus a noun: Danke für deine Hilfe. Gern geschehen and Keine Ursache are common replies. Ich danke dir uses dative for the person receiving the thanks. Choose formal Ihnen or informal dir to match the conversation.",
+    "trap": "Danke Ihnen is formal, while danke dir is informal. A reply such as Gern geschehen acknowledges thanks rather than asking a new favour.",
+    "instructions": "Complete the thanks or response using the specified noun, pronoun or expression. Use each word-bank item once.",
+    "examples": [
+      [
+        "Vielen Dank für deine ausführliche Erklärung.",
+        "Thank you very much for your detailed explanation."
+      ],
+      [
+        "Danke schön, das hilft mir weiter.",
+        "Thank you, that helps me."
+      ],
+      [
+        "Gern geschehen, ich freue mich, dass es klappt.",
+        "You are welcome; I am pleased it works."
+      ],
+      [
+        "Ich danke Ihnen für Ihre Zeit.",
+        "Thank you for your time."
+      ]
+    ],
+    "quiz": [
+      [
+        "Vielen ___ für die Einladung. (thanks)",
+        "Dank",
+        "Vielen Dank is the established thanks expression."
+      ],
+      [
+        "Danke ___ deine Hilfe. (for)",
+        "für",
+        "Für introduces what the thanks relate to."
+      ],
+      [
+        "Gern ___. (you are welcome)",
+        "geschehen",
+        "Gern geschehen is a common response to thanks."
+      ],
+      [
+        "Ich danke ___ für Ihre Antwort. (you, formal dative)",
+        "Ihnen",
+        "Danken takes dative; formal Ihnen matches Ihre."
+      ]
+    ],
+    "wordBank": [
+      "Dank",
+      "für",
+      "geschehen",
+      "Ihnen"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-asking-current-time-communication-exercises",
+    "title": "Asking the Time in German: A1 Phrase Exercises",
+    "description": "Ask the current time and check an event time in German. Practise Wie spät, wie viel Uhr and um with translated examples and explained A1 answers.",
+    "guide": "grammar/uhrzeit.html",
+    "guideLabel": "Review related grammar: clock-time questions and answers",
+    "rule": "Wie spät ist es? and Wie viel Uhr ist es? ask for the current time. Um wie viel Uhr beginnt …? asks for the time of an event instead. A current-time answer uses Es ist …, while an event-time answer uses um: Der Kurs beginnt um neun. The questions have different purposes even when both concern a clock.",
+    "trap": "Do not put um before the current-time statement Es ist neun Uhr. Um belongs to the event-time expression in these tasks.",
+    "instructions": "Complete the clock-time question or answer using the supplied meaning or verb cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Entschuldigung, wie spät ist es jetzt?",
+        "Excuse me, what time is it now?"
+      ],
+      [
+        "Es ist gleich zehn Uhr.",
+        "It is almost ten o'clock."
+      ],
+      [
+        "Um wie viel Uhr beginnt eure Probe?",
+        "At what time does your rehearsal start?"
+      ],
+      [
+        "Die Probe beginnt um Viertel nach zehn.",
+        "The rehearsal starts at quarter past ten."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wie ___ ist es? (late, in the time question)",
+        "spät",
+        "Wie spät ist es? asks the current time."
+      ],
+      [
+        "Wie viel ___ ist es jetzt? (clock unit)",
+        "Uhr",
+        "Wie viel Uhr is another standard current-time question."
+      ],
+      [
+        "Die Führung beginnt ___ elf Uhr. (at, for event time)",
+        "um",
+        "Um introduces the clock time of the event."
+      ],
+      [
+        "Es ___ fünf nach acht. (sein)",
+        "ist",
+        "Es ist introduces the current time."
+      ]
+    ],
+    "wordBank": [
+      "ist",
+      "spät",
+      "Uhr",
+      "um"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-expressing-basic-needs-communication-exercises",
+    "title": "Basic Needs in German: A1 Phrase Practice",
+    "description": "Express hunger, thirst and feeling cold or warm in German. Compare haben and mir ist patterns with translated examples and explained A1 exercises.",
+    "guide": "grammar/dativ.html",
+    "guideLabel": "Review related grammar: mir in personal feeling expressions",
+    "rule": "Ich habe Hunger and Ich habe Durst express hunger and thirst with haben plus a noun. Mir ist kalt and Mir ist warm express how the temperature feels to you with a dative pronoun. These expressions differ from Ich bin kalt or warm, which can describe a different physical or figurative property.",
+    "trap": "For feeling cold, use Mir ist kalt. For hunger, use Ich habe Hunger; do not transfer one sentence pattern unchanged to all four meanings.",
+    "instructions": "Complete the basic-need statement with the word or pronoun requested by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Ich habe Hunger; ich möchte etwas essen.",
+        "I am hungry; I would like something to eat."
+      ],
+      [
+        "Nach der Wanderung habe ich großen Durst.",
+        "After the hike I am very thirsty."
+      ],
+      [
+        "Mir ist kalt; ich hole meine Jacke.",
+        "I feel cold; I will get my jacket."
+      ],
+      [
+        "Im kleinen Raum ist mir ziemlich warm.",
+        "I feel rather warm in the small room."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich habe ___ und möchte etwas essen. (hunger)",
+        "Hunger",
+        "Hunger is the noun in Ich habe Hunger."
+      ],
+      [
+        "Ich habe ___ und möchte Wasser trinken. (thirst)",
+        "Durst",
+        "Durst is the noun in the thirst expression."
+      ],
+      [
+        "___ ist kalt. (to me)",
+        "Mir",
+        "Mir is the dative pronoun for this personal temperature feeling."
+      ],
+      [
+        "Mir ist ___. (warm)",
+        "warm",
+        "Warm completes the personal-temperature pattern with mir ist."
+      ]
+    ],
+    "wordBank": [
+      "Durst",
+      "Hunger",
+      "Mir",
+      "warm"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-weekend-plans-communication-exercises",
+    "title": "Weekend Plans in German: A1 Phrase Exercises",
+    "description": "Talk about simple weekend plans in German. Practise am Samstag, möchten, besuchen and zu Hause with translations and explained A1 self-check answers.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: möchten with an infinitive",
+    "rule": "A weekend plan can name the day and activity: Am Samstag besuche ich … . The present tense can describe a plan when the future time is clear. Ich möchte … expresses a wish or intention, with the infinitive at the end. Zu Hause bleiben means staying at home; nach Hause gehen means going home.",
+    "trap": "Möchte states a wish, not a confirmed arrangement. Zu Hause describes location, while nach Hause describes direction.",
+    "instructions": "Complete the planned activity using the supplied day, place or verb cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Am Samstag besuche ich meine Cousine im Nachbardorf.",
+        "On Saturday I visit my cousin in the neighbouring village."
+      ],
+      [
+        "Wir möchten am Sonntag einen langen Spaziergang machen.",
+        "We would like to take a long walk on Sunday."
+      ],
+      [
+        "Am freien Nachmittag bleibe ich zu Hause.",
+        "On my free afternoon I stay at home."
+      ],
+      [
+        "Für Sonntag plane ich einen Besuch im Museum.",
+        "For Sunday I am planning a visit to the museum."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ Samstag treffe ich meine Freunde. (on, before a weekday)",
+        "Am",
+        "Am introduces the weekday and is capitalised at the start."
+      ],
+      [
+        "Wir ___ am Sonntag wandern. (möchten)",
+        "möchten",
+        "Möchten introduces the intended activity with an infinitive."
+      ],
+      [
+        "Ich möchte meine Tante ___. (visit)",
+        "besuchen",
+        "Besuchen is the infinitive after möchte."
+      ],
+      [
+        "Am Abend bleiben wir ___. (at home)",
+        "zu Hause",
+        "Zu Hause expresses the location of staying at home."
+      ]
+    ],
+    "wordBank": [
+      "Am",
+      "besuchen",
+      "möchten",
+      "zu Hause"
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "communication",
+    "slug": "a1-giving-street-address-communication-exercises",
+    "title": "Giving an Address in German: A1 Phrase Practice",
+    "description": "Ask for and state a street address in German. Practise Straße, Hausnummer, Postleitzahl and wohnen with translated examples and explained A1 answers.",
+    "guide": "grammar/w-fragen.html",
+    "guideLabel": "Review related grammar: questions about an address",
+    "rule": "Wie lautet die Adresse? asks for an address. A clear answer can separate street name, house number, postcode and town. Ich wohne in der …straße describes a residence; Die Hausnummer ist … identifies the number. Postleitzahl is the postcode, not the phone number.",
+    "trap": "Straße and Hausnummer are different parts of an address. When checking a written address, ask about the particular part you need rather than repeating an unclear number.",
+    "instructions": "Complete the address phrase using the noun or verb form specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Wie lautet die Adresse der neuen Bibliothek?",
+        "What is the address of the new library?"
+      ],
+      [
+        "Ich wohne in der Birkenstraße.",
+        "I live in Birkenstraße."
+      ],
+      [
+        "Die Hausnummer ist achtzehn, nicht achtzig.",
+        "The house number is eighteen, not eighty."
+      ],
+      [
+        "Welche Postleitzahl gehört zu dieser Adresse?",
+        "Which postcode goes with this address?"
+      ]
+    ],
+    "quiz": [
+      [
+        "In welcher ___ liegt das Gebäude? (street)",
+        "Straße",
+        "Straße asks for the street name."
+      ],
+      [
+        "Die ___ ist zwölf. (house number)",
+        "Hausnummer",
+        "Hausnummer names the building number, not the postcode."
+      ],
+      [
+        "Wie lautet die ___? (postcode)",
+        "Postleitzahl",
+        "Postleitzahl is the postal code."
+      ],
+      [
+        "Ich ___ in der Lindenstraße. (wohnen)",
+        "wohne",
+        "Wohne is the ich form in the residence statement."
+      ]
+    ],
+    "wordBank": [
+      "Hausnummer",
+      "Postleitzahl",
+      "Straße",
+      "wohne"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-finding-right-counter-communication-exercises",
+    "title": "Finding the Right Counter in German: A2 Phrase Practice",
+    "description": "Ask which counter, department or person can help in German. Practise Schalter, zuständig and Auskunft with translations and explained A2 answers.",
+    "guide": "grammar/w-fragen.html",
+    "guideLabel": "Review related grammar: questions about people and service points",
+    "rule": "When you need the right service point, ask An welchem Schalter bekomme ich …? or Welche Abteilung hilft mir dabei? Wer ist dafür zuständig? asks who is responsible. Eine Auskunft is a piece of information. These questions identify the appropriate contact rather than asking for a detailed route.",
+    "trap": "Wer asks about a person; welche Abteilung asks for an organisational unit. An welchem Schalter uses dative in this static-location question.",
+    "instructions": "Complete the service-point question with the noun or adjective identified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "An welchem Schalter bekomme ich das Formular?",
+        "At which counter can I get the form?"
+      ],
+      [
+        "Welche Abteilung hilft mir bei dieser Anfrage?",
+        "Which department can help me with this enquiry?"
+      ],
+      [
+        "Wer ist für die Ausgabe der Unterlagen zuständig?",
+        "Who is responsible for issuing the documents?"
+      ],
+      [
+        "Wo bekomme ich eine Auskunft zum Ablauf?",
+        "Where can I get information about the process?"
+      ]
+    ],
+    "quiz": [
+      [
+        "An welchem ___ bekomme ich die Bescheinigung? (counter)",
+        "Schalter",
+        "Schalter names the service counter."
+      ],
+      [
+        "Zu welcher ___ gehört dieser Service? (department)",
+        "Abteilung",
+        "Abteilung names the organisational department."
+      ],
+      [
+        "Wer ist für diese Frage ___? (responsible)",
+        "zuständig",
+        "Für etwas zuständig sein identifies responsibility."
+      ],
+      [
+        "Wo erhalte ich eine ___ zu den Öffnungszeiten? (piece of information)",
+        "Auskunft",
+        "Auskunft is the information requested in this service context."
+      ]
+    ],
+    "wordBank": [
+      "Abteilung",
+      "Auskunft",
+      "Schalter",
+      "zuständig"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-asking-food-ingredients-communication-exercises",
+    "title": "Asking About Ingredients in German: A2 Phrase Exercises",
+    "description": "Ask about ingredients and preparation in German food conversations. Practise enthalten, Zutaten and zubereiten with translations and explained A2 answers.",
+    "guide": "grammar/w-fragen.html",
+    "guideLabel": "Review related grammar: questions about contents and preparation",
+    "rule": "Welche Zutaten sind in …? asks which ingredients are present. Enthält das Gericht …? asks whether it contains a specific ingredient. Womit wird … zubereitet? asks what is used in preparation. Phrase the question around the particular ingredient or preparation detail you want to know.",
+    "trap": "Enthalten describes contents, while zubereiten describes preparation. A question about ingredients does not itself state what the answer is.",
+    "instructions": "Complete each ingredient or preparation question using the supplied noun or verb cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Welche Zutaten sind in der grünen Soße?",
+        "Which ingredients are in the green sauce?"
+      ],
+      [
+        "Enthält dieses Gericht Milch?",
+        "Does this dish contain milk?"
+      ],
+      [
+        "Womit wird das Gemüse zubereitet?",
+        "What is used to prepare the vegetables?"
+      ],
+      [
+        "Sind in diesem Gebäck Nüsse enthalten?",
+        "Are nuts contained in this pastry?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Welche ___ werden für die Suppe verwendet? (ingredients)",
+        "Zutaten",
+        "Zutaten is the plural noun for ingredients."
+      ],
+      [
+        "___ die Soße Eier? (enthalten)",
+        "Enthält",
+        "Enthält is the singular question form and starts with a capital letter here."
+      ],
+      [
+        "Wie wird das Gericht ___? (zubereiten, participle)",
+        "zubereitet",
+        "Zubereitet is the participle in the passive preparation question."
+      ],
+      [
+        "Sind in den Keksen ___ enthalten? (nuts)",
+        "Nüsse",
+        "Nüsse is the plural of Nuss in this contents question."
+      ]
+    ],
+    "wordBank": [
+      "Enthält",
+      "Nüsse",
+      "zubereitet",
+      "Zutaten"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-checking-shared-bill-communication-exercises",
+    "title": "Checking a Shared Bill in German: A2 Phrase Practice",
+    "description": "Ask to pay separately and clarify items on a shared bill in German. Practise getrennt, berechnet and checking phrases with translations and A2 answers.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: polite questions in service conversations",
+    "rule": "Können wir getrennt zahlen? asks whether people can pay separately. To check a listed item, name it clearly: Die Suppe ist zweimal berechnet. Könnten Sie das bitte prüfen? requests a check without claiming the correction is already made. Stimmt der Betrag? asks whether the amount is correct.",
+    "trap": "Getrennt zahlen concerns separate payments, while zusammen zahlen concerns a joint payment. A question asks what is possible; it is not a completed payment.",
+    "instructions": "Complete the bill-checking phrase using the meaning or verb form specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Können wir heute getrennt zahlen?",
+        "Can we pay separately today?"
+      ],
+      [
+        "Die Suppe ist auf der Rechnung zweimal berechnet.",
+        "The soup is charged twice on the bill."
+      ],
+      [
+        "Könnten Sie diesen Posten bitte prüfen?",
+        "Could you check this item, please?"
+      ],
+      [
+        "Stimmt der Gesamtbetrag mit den einzelnen Posten überein?",
+        "Does the total amount agree with the individual items?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir möchten ___ zahlen. (separately)",
+        "getrennt",
+        "Getrennt asks for separate rather than joint payment."
+      ],
+      [
+        "Das Getränk ist doppelt ___. (charged)",
+        "berechnet",
+        "Berechnet describes the item being charged on the bill."
+      ],
+      [
+        "Könnten Sie den Betrag bitte ___? (check)",
+        "prüfen",
+        "Prüfen is the infinitive after könnten."
+      ],
+      [
+        "___ der Betrag auf der Rechnung? (stimmen)",
+        "Stimmt",
+        "Stimmt asks whether the singular amount is correct."
+      ]
+    ],
+    "wordBank": [
+      "berechnet",
+      "getrennt",
+      "prüfen",
+      "Stimmt"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-borrowing-object-communication-exercises",
+    "title": "Borrowing an Object in German: A2 Phrase Exercises",
+    "description": "Ask to borrow or briefly use an everyday object in German. Practise leihen, benutzen and returning phrases with translations and explained A2 answers.",
+    "guide": "grammar/dativ.html",
+    "guideLabel": "Review related grammar: recipients in lending requests",
+    "rule": "Kannst du mir … leihen? asks someone to lend you an object. Darf ich … kurz benutzen? asks for temporary use. Add a return arrangement when relevant: Ich gebe es dir morgen zurück. Mir and dir identify the recipient; the object itself is accusative in the lending pattern.",
+    "trap": "Using something briefly and borrowing it to take away are different requests. Benutzen alone does not establish when an object will be returned.",
+    "instructions": "Complete the request or return phrase with the verb or time expression specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Kannst du mir deinen Bleistift für die Übung leihen?",
+        "Can you lend me your pencil for the exercise?"
+      ],
+      [
+        "Darf ich kurz dein Lineal benutzen?",
+        "May I briefly use your ruler?"
+      ],
+      [
+        "Ich gebe dir das Buch am Dienstag zurück.",
+        "I will give the book back to you on Tuesday."
+      ],
+      [
+        "Wann brauchst du die Schere wieder?",
+        "When do you need the scissors again?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Könntest du mir deinen Stift ___? (lend)",
+        "leihen",
+        "Jemandem etwas leihen is the lending request used here."
+      ],
+      [
+        "Darf ich das Wörterbuch kurz ___? (use)",
+        "benutzen",
+        "Benutzen asks about using the dictionary."
+      ],
+      [
+        "Wann soll ich dir das Buch ___? (give back)",
+        "zurückgeben",
+        "Zurückgeben is the infinitive after soll."
+      ],
+      [
+        "Kann ich deine Schere ___ benutzen? (briefly)",
+        "kurz",
+        "Kurz limits the stated period of use."
+      ]
+    ],
+    "wordBank": [
+      "benutzen",
+      "kurz",
+      "leihen",
+      "zurückgeben"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-leisure-suggestions-communication-exercises",
+    "title": "Leisure Suggestions in German: A2 Phrase Practice",
+    "description": "Suggest a free-time activity and respond in German. Practise Lust auf, wie wäre es mit and lieber with translated examples and explained A2 answers.",
+    "guide": "grammar/konjunktiv-2.html",
+    "guideLabel": "Review related grammar: polite suggestions and hypothetical forms",
+    "rule": "Hast du Lust auf …? asks whether someone feels like an activity. Wie wäre es mit …? introduces a suggestion using mit plus dative. A response can accept, decline or name a preference with lieber. A suggestion leaves room for the other person's answer rather than announcing a settled plan.",
+    "trap": "Use mit einem Spaziergang after Wie wäre es mit …? The noun phrase follows dative mit, not accusative auf from Lust auf.",
+    "instructions": "Complete the leisure suggestion or reply with the expression specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Hast du Lust auf einen Spaziergang am Fluss?",
+        "Do you feel like a walk by the river?"
+      ],
+      [
+        "Wie wäre es mit einem Besuch im Stadtmuseum?",
+        "How about a visit to the city museum?"
+      ],
+      [
+        "Heute würde ich lieber eine Radtour machen.",
+        "Today I would rather go on a bike ride."
+      ],
+      [
+        "Das ist eine gute Idee; ich komme gern mit.",
+        "That is a good idea; I would be happy to join you."
+      ]
+    ],
+    "quiz": [
+      [
+        "Hast du ___ auf einen Kinobesuch? (feel like, noun in this phrase)",
+        "Lust",
+        "Lust auf expresses feeling like doing something."
+      ],
+      [
+        "Wie wäre es ___ einem Picknick? (with)",
+        "mit",
+        "Mit takes the dative phrase einem Picknick."
+      ],
+      [
+        "Ich würde ___ schwimmen gehen. (rather)",
+        "lieber",
+        "Lieber gives the alternative preference."
+      ],
+      [
+        "Das klingt nach einer guten ___. (idea)",
+        "Idee",
+        "Idee names the positively received suggestion."
+      ]
+    ],
+    "wordBank": [
+      "Idee",
+      "lieber",
+      "Lust",
+      "mit"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-asking-travel-duration-communication-exercises",
+    "title": "Travel Duration in German: A2 Question Practice",
+    "description": "Ask how long a journey takes in German. Practise wie lange, dauern, brauchen and unterwegs with translations and explained A2 phrase exercises.",
+    "guide": "grammar/w-fragen.html",
+    "guideLabel": "Review related grammar: questions about duration",
+    "rule": "Wie lange dauert die Fahrt? asks the journey's duration. Wie lange brauchen wir bis …? asks how much time the travellers need. Wie lange sind wir unterwegs? focuses on time spent travelling. Ungefähr or etwa marks an approximate answer rather than an exact time commitment.",
+    "trap": "Wann asks when something happens; wie lange asks its duration. A clock time such as um zehn is not a duration such as zwei Stunden.",
+    "instructions": "Complete the travel-time question using the supplied duration word or verb form. Use each word-bank item once.",
+    "examples": [
+      [
+        "Wie lange dauert die Fahrt mit diesem Bus?",
+        "How long does the journey on this bus take?"
+      ],
+      [
+        "Wie viel Zeit brauchen wir bis zum See?",
+        "How much time do we need to reach the lake?"
+      ],
+      [
+        "Sind wir ungefähr eine Stunde unterwegs?",
+        "Will we be travelling for about an hour?"
+      ],
+      [
+        "Für den Fußweg sollten wir etwa zwanzig Minuten einplanen.",
+        "We should allow about twenty minutes for the walk."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wie ___ sind wir unterwegs? (long, in a duration question)",
+        "lange",
+        "Wie lange asks about duration."
+      ],
+      [
+        "Wie lange ___ die Überfahrt? (dauern)",
+        "dauert",
+        "Singular Überfahrt takes dauert."
+      ],
+      [
+        "Wie viel Zeit ___ wir für den Weg? (brauchen)",
+        "brauchen",
+        "Wir takes brauchen in the time-needed question."
+      ],
+      [
+        "Wir sind etwa zwei Stunden ___. (travelling)",
+        "unterwegs",
+        "Unterwegs sein describes being on the journey."
+      ]
+    ],
+    "wordBank": [
+      "brauchen",
+      "dauert",
+      "lange",
+      "unterwegs"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-talking-about-yesterday-communication-exercises",
+    "title": "Talking About Yesterday in German: A2 Phrase Exercises",
+    "description": "Describe a short sequence of yesterday's activities in German. Practise Perfekt and time markers with translated models and explained A2 answers.",
+    "guide": "grammar/perfekt.html",
+    "guideLabel": "Review related grammar: past activities with haben and sein",
+    "rule": "A short account of yesterday can combine a past-time marker with Perfekt: Gestern habe ich … . Use haben or sein with the verb's participle, and add connectors such as danach to show sequence. A time phrase at the start is followed by the conjugated verb in a main statement.",
+    "trap": "Do not add a participle without its auxiliary in these complete Perfekt statements. After Gestern, the conjugated verb comes before the subject: Gestern habe ich … .",
+    "instructions": "Complete each short past-event statement with the specified participle or time marker. The auxiliary is already supplied where needed. Use each word-bank item once.",
+    "examples": [
+      [
+        "Gestern habe ich nach dem Kurs meinen Onkel besucht.",
+        "Yesterday I visited my uncle after the course."
+      ],
+      [
+        "Danach bin ich mit ihm durch den Park gegangen.",
+        "After that I walked through the park with him."
+      ],
+      [
+        "Später haben wir gemeinsam eine Suppe gekocht.",
+        "Later we cooked a soup together."
+      ],
+      [
+        "Am Abend war ich wieder zu Hause.",
+        "In the evening I was back at home."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ habe ich einen alten Freund besucht. (yesterday)",
+        "Gestern",
+        "Gestern marks the past day and is capitalised at the start."
+      ],
+      [
+        "Ich habe ihn vor dem Café ___. (treffen, participle)",
+        "getroffen",
+        "Getroffen is the participle in this haben-Perfekt statement."
+      ],
+      [
+        "Wir sind anschließend nach Hause ___. (gehen, participle)",
+        "gegangen",
+        "Gehen uses gegangen with sein in this movement statement."
+      ],
+      [
+        "Zuerst haben wir gekocht; ___ haben wir gegessen. (after that)",
+        "danach",
+        "Danach connects the later activity to the earlier one."
+      ]
+    ],
+    "wordBank": [
+      "danach",
+      "gegangen",
+      "Gestern",
+      "getroffen"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-correcting-written-details-communication-exercises",
+    "title": "Correcting Details in German: A2 Phrase Practice",
+    "description": "Point out a wrong name or date and state the correction in German. Practise statt, heißen and correction phrases with translations and explained answers.",
+    "guide": "grammar/alphabet.html",
+    "guideLabel": "Review related grammar: written names and spelling",
+    "rule": "A clear correction identifies the written detail and supplies the replacement: Hier steht …, richtig ist … . Es muss … heißen gives the wording that should appear. Statt introduces what is being replaced in expressions such as statt Montag. Focus on the particular detail so the other person can locate it.",
+    "trap": "Das muss … heißen concerns the correct wording, not a person's obligation to change their name. The phrase's meaning depends on the correction context.",
+    "instructions": "Complete the correction phrase with the noun, participle or expression specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Hier steht Stahl; richtig ist aber Stoll.",
+        "It says Stahl here, but Stoll is correct."
+      ],
+      [
+        "Mein Nachname ist an dieser Stelle falsch geschrieben.",
+        "My surname is misspelled at this point."
+      ],
+      [
+        "Beim Datum muss es der fünfzehnte März heißen.",
+        "The date should read the fifteenth of March."
+      ],
+      [
+        "Könnten Sie bitte Dienstag statt Montag eintragen?",
+        "Could you enter Tuesday instead of Monday?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich habe eine kleine ___ zum Namen. (correction)",
+        "Korrektur",
+        "Korrektur introduces the detail that needs changing."
+      ],
+      [
+        "Der Name ist hier falsch ___. (written)",
+        "geschrieben",
+        "Geschrieben describes the way the name appears in writing."
+      ],
+      [
+        "Es muss Bergmann ___. (read, in the wording expression)",
+        "heißen",
+        "Es muss … heißen gives the wording that should appear."
+      ],
+      [
+        "Bitte tragen Sie Freitag ___ Donnerstag ein. (instead of)",
+        "statt",
+        "Statt introduces the replaced weekday in this phrase."
+      ]
+    ],
+    "wordBank": [
+      "geschrieben",
+      "heißen",
+      "Korrektur",
+      "statt"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-checking-service-inclusions-communication-exercises",
+    "title": "Checking What Is Included in German: A2 Phrase Practice",
+    "description": "Ask what an offer or booking includes in German. Practise enthalten, inklusive and extra with translated service questions and explained A2 answers.",
+    "guide": "grammar/w-fragen.html",
+    "guideLabel": "Review related grammar: questions about included items",
+    "rule": "Ist … im Preis enthalten? asks whether a particular item is included. Was ist inklusive? asks more generally. Muss ich dafür extra zahlen? asks about an additional charge. Use the exact item being discussed so the answer can be connected to that item rather than to the whole offer vaguely.",
+    "trap": "An inclusion question is not a statement that an item is included. Extra can indicate an additional charge; inklusive indicates inclusion in the stated offer.",
+    "instructions": "Complete the inclusion or additional-charge question with the supplied meaning cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Ist das Frühstück in diesem Preis enthalten?",
+        "Is breakfast included in this price?"
+      ],
+      [
+        "Welche Leistungen sind bei diesem Angebot inklusive?",
+        "Which services are included in this offer?"
+      ],
+      [
+        "Muss ich für die Materialien extra zahlen?",
+        "Do I need to pay extra for the materials?"
+      ],
+      [
+        "Gilt das Angebot auch für die Abendveranstaltung?",
+        "Does the offer also apply to the evening event?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ist die Führung im Preis ___? (included)",
+        "enthalten",
+        "Im Preis enthalten asks about inclusion in the price."
+      ],
+      [
+        "Was ist bei dem Angebot ___? (inclusive)",
+        "inklusive",
+        "Inklusive identifies what is part of the specified offer."
+      ],
+      [
+        "Kostet die Nutzung des Raums ___? (extra)",
+        "extra",
+        "Extra asks whether there is an additional charge."
+      ],
+      [
+        "___ das Angebot auch am Wochenende? (gelten)",
+        "Gilt",
+        "Gilt is the singular form used to ask about applicability."
+      ]
+    ],
+    "wordBank": [
+      "enthalten",
+      "extra",
+      "Gilt",
+      "inklusive"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-leaving-phone-message-communication-exercises",
+    "title": "Leaving a Phone Message in German: A2 Phrase Exercises",
+    "description": "Leave a short telephone message in German. Practise Es geht um, erreichbar and callback phrases with translated examples and explained A2 answers.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: polite requests with infinitives",
+    "rule": "A short phone message identifies the caller, gives the topic and states the requested response. Es geht um … introduces the subject. Bitte rufen Sie mich zurück asks for a callback, while Ich bin … erreichbar gives a time when the caller can be reached. Hinterlassen means leaving a message.",
+    "trap": "Erreichbar describes availability for contact; it does not mean a call has already happened. Zurückrufen is separable in a main clause: Rufen Sie mich zurück.",
+    "instructions": "Complete the phone-message phrase using the topic word, verb or availability expression given by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Guten Tag, hier spricht Nora aus dem Sprachkurs.",
+        "Hello, this is Nora from the language course."
+      ],
+      [
+        "Es geht um die Unterlagen für Donnerstag.",
+        "It is about the documents for Thursday."
+      ],
+      [
+        "Bitte rufen Sie mich nach der Mittagspause zurück.",
+        "Please call me back after the lunch break."
+      ],
+      [
+        "Heute bin ich bis siebzehn Uhr erreichbar.",
+        "Today I can be reached until five p.m."
+      ]
+    ],
+    "quiz": [
+      [
+        "Kann ich eine Nachricht ___? (leave)",
+        "hinterlassen",
+        "Eine Nachricht hinterlassen means leaving a message."
+      ],
+      [
+        "Es geht ___ unseren Besuch nächste Woche. (about)",
+        "um",
+        "Es geht um introduces the message topic."
+      ],
+      [
+        "Bitte ___ Sie mich am Nachmittag zurück. (call)",
+        "rufen",
+        "Rufen combines with the separated zurück for the callback request."
+      ],
+      [
+        "Ab vierzehn Uhr bin ich wieder ___. (available to contact)",
+        "erreichbar",
+        "Erreichbar identifies when the caller can be contacted."
+      ]
+    ],
+    "wordBank": [
+      "erreichbar",
+      "hinterlassen",
+      "rufen",
+      "um"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-asking-homework-instructions-communication-exercises",
+    "title": "Asking About Homework in German: A2 Phrase Practice",
+    "description": "Ask what to practise, complete and hand in for a class in German. Use clear homework questions with translated examples and explained A2 answers.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: sollen in assignment questions",
+    "rule": "Was sollen wir zu Hause machen? asks which work is assigned. Bis wann sollen wir … abgeben? asks for a hand-in deadline. Welche Aufgabe …? identifies a specific task, and Müssen wir alles schriftlich machen? checks the required format. These questions clarify different parts of an assignment.",
+    "trap": "Bis wann asks for the latest time, while ab wann asks for a starting point. A question about the deadline differs from one about which task to complete.",
+    "instructions": "Complete the homework question with the modal form, question phrase, task noun or infinitive specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Was sollen wir bis zur nächsten Stunde üben?",
+        "What should we practise before the next lesson?"
+      ],
+      [
+        "Welche Aufgabe gehört zu den Hausaufgaben?",
+        "Which exercise is part of the homework?"
+      ],
+      [
+        "Bis wann sollen wir die kurze Zusammenfassung abgeben?",
+        "By when should we hand in the short summary?"
+      ],
+      [
+        "Müssen wir die Antworten in ganzen Sätzen schreiben?",
+        "Do we need to write the answers in complete sentences?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Was ___ wir zu Hause vorbereiten? (sollen)",
+        "sollen",
+        "Sollen asks about the assigned work."
+      ],
+      [
+        "Welche ___ sollen wir zuerst bearbeiten? (exercise)",
+        "Aufgabe",
+        "Aufgabe identifies the specific exercise."
+      ],
+      [
+        "___ sollen wir den Text abgeben? (by when)",
+        "Bis wann",
+        "Bis wann asks for the deadline and is capitalised at the start."
+      ],
+      [
+        "Sollen wir die Ergebnisse schriftlich ___? (hand in)",
+        "abgeben",
+        "Abgeben is the infinitive after sollen."
+      ]
+    ],
+    "wordBank": [
+      "abgeben",
+      "Aufgabe",
+      "Bis wann",
+      "sollen"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-asking-device-instructions-communication-exercises",
+    "title": "Asking How to Use a Device: German A2 Phrase Practice",
+    "description": "Ask for instructions before using a device in German. Practise funktionieren, drücken and zeigen with translated questions and explained A2 answers.",
+    "guide": "grammar/w-fragen.html",
+    "guideLabel": "Review related grammar: questions about how something works",
+    "rule": "Wie funktioniert …? asks how something works. Welchen Knopf muss ich drücken? asks for a specific control, and Können Sie mir den ersten Schritt zeigen? requests a demonstration. Ask about one action at a time so the reply can describe that step clearly.",
+    "trap": "A how-to question concerns operation, not necessarily a malfunction. Funktionieren can refer to how a device works as well as whether it works.",
+    "instructions": "Complete the instruction request with the supplied verb form or noun cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Wie funktioniert dieser kleine Projektor?",
+        "How does this small projector work?"
+      ],
+      [
+        "Welchen Knopf muss ich zuerst drücken?",
+        "Which button do I need to press first?"
+      ],
+      [
+        "Können Sie mir den ersten Schritt zeigen?",
+        "Can you show me the first step?"
+      ],
+      [
+        "Wie schalte ich das Gerät nach der Nutzung aus?",
+        "How do I switch the device off after use?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Wie ___ dieses Gerät? (funktionieren)",
+        "funktioniert",
+        "Singular Gerät takes funktioniert in the operation question."
+      ],
+      [
+        "Welchen Knopf soll ich ___? (press)",
+        "drücken",
+        "Drücken is the infinitive after soll."
+      ],
+      [
+        "Können Sie mir den Ablauf kurz ___? (show)",
+        "zeigen",
+        "Zeigen asks for a demonstration."
+      ],
+      [
+        "Was ist der nächste ___? (step)",
+        "Schritt",
+        "Schritt names the next action in the sequence."
+      ]
+    ],
+    "wordBank": [
+      "drücken",
+      "funktioniert",
+      "Schritt",
+      "zeigen"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-requesting-quiet-communication-exercises",
+    "title": "Requesting Quiet in German: A2 Phrase Exercises",
+    "description": "Ask politely for less noise in a shared space in German. Practise leiser, Ruhe and clear requests with translated examples and explained A2 answers.",
+    "guide": "grammar/konjunktiv-2.html",
+    "guideLabel": "Review related grammar: polite requests with könnten",
+    "rule": "A request about noise can describe the effect briefly and ask for a concrete change: Könnten Sie bitte etwas leiser sprechen? Leiser is the comparative of leise. Ich brauche etwas Ruhe explains the need, while a specific request about music or headphones names the action wanted.",
+    "trap": "Leiser means quieter, not completely silent. Choose the wording that matches the change you are requesting rather than assuming every noise request means no sound at all.",
+    "instructions": "Complete the noise-related statement or request with the word specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Könnten Sie bitte etwas leiser sprechen?",
+        "Could you speak a little more quietly, please?"
+      ],
+      [
+        "Die Musik ist für mich gerade zu laut.",
+        "The music is too loud for me at the moment."
+      ],
+      [
+        "Ich brauche für diese Aufgabe etwas Ruhe.",
+        "I need some quiet for this task."
+      ],
+      [
+        "Wäre es möglich, Kopfhörer zu verwenden?",
+        "Would it be possible to use headphones?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Könnten Sie die Musik bitte ___ stellen? (quieter)",
+        "leiser",
+        "Leiser asks for a lower volume."
+      ],
+      [
+        "Hier ist es für das Gespräch zu ___. (loud)",
+        "laut",
+        "Laut describes the volume causing difficulty."
+      ],
+      [
+        "Ich brauche einen Moment ___. (quiet)",
+        "Ruhe",
+        "Ruhe names the quiet being requested."
+      ],
+      [
+        "Könnten Sie bitte ___ benutzen? (headphones)",
+        "Kopfhörer",
+        "Kopfhörer names the specific alternative in the request."
+      ]
+    ],
+    "wordBank": [
+      "Kopfhörer",
+      "laut",
+      "leiser",
+      "Ruhe"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-offering-lift-communication-exercises",
+    "title": "Offering a Lift in German: A2 Phrase Practice",
+    "description": "Offer someone a lift and discuss pickup or return details in German. Practise mitnehmen and abholen with translated models and explained A2 answers.",
+    "guide": "grammar/trennbare-verben.html",
+    "guideLabel": "Review related grammar: separable transport verbs",
+    "rule": "Soll ich dich mitnehmen? offers someone a lift. Wo soll ich dich abholen? asks the pickup location; Wo möchtest du aussteigen? asks where the passenger wants to get out. A separate question can discuss the return journey. Mitnehmen and abholen are separable, while their infinitives remain together after a modal verb.",
+    "trap": "Abholen names collecting someone at a place. Mitnehmen names taking them along; it does not by itself specify a pickup point or return arrangement.",
+    "instructions": "Complete the lift offer or travel-detail question with the infinitive identified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Soll ich dich morgen zum Sport mitnehmen?",
+        "Shall I give you a lift to sport tomorrow?"
+      ],
+      [
+        "Wo kann ich dich vor dem Konzert abholen?",
+        "Where can I pick you up before the concert?"
+      ],
+      [
+        "An welcher Ecke möchtest du aussteigen?",
+        "At which corner would you like to get out?"
+      ],
+      [
+        "Wann möchtest du später zurückfahren?",
+        "When would you like to travel back later?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Soll ich euch zum Bahnhof ___? (take along)",
+        "mitnehmen",
+        "Mitnehmen is the action offered to the passengers."
+      ],
+      [
+        "Wo soll ich dich am Abend ___? (pick up)",
+        "abholen",
+        "Abholen asks about collecting the person at a place."
+      ],
+      [
+        "Möchtest du hier ___? (get out)",
+        "aussteigen",
+        "Aussteigen names leaving the vehicle."
+      ],
+      [
+        "Um wie viel Uhr willst du ___? (travel back)",
+        "zurückfahren",
+        "Zurückfahren asks about the return journey."
+      ]
+    ],
+    "wordBank": [
+      "abholen",
+      "aussteigen",
+      "mitnehmen",
+      "zurückfahren"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-asking-about-seat-communication-exercises",
+    "title": "Asking for a Seat in German: A2 Phrase Exercises",
+    "description": "Check whether a seat is free and ask to sit down in German. Practise frei, besetzt and setzen with translated dialogues and explained A2 answers.",
+    "guide": "grammar/reflexive-verben.html",
+    "guideLabel": "Review related grammar: sich setzen in requests",
+    "rule": "Ist dieser Platz noch frei? asks whether a seat is available. Ist der Platz besetzt? asks whether it is taken. Darf ich mich hier setzen? asks permission to sit down. Sich setzen describes the action of sitting down; sitzen describes the seated state. Keep occupancy and permission questions distinct.",
+    "trap": "Ein freier Platz is an available seat, not automatically a free-of-charge service. The seating context determines the meaning of frei here.",
+    "instructions": "Complete the seating question using the occupancy word, noun or infinitive specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Entschuldigung, ist dieser Platz noch frei?",
+        "Excuse me, is this seat still free?"
+      ],
+      [
+        "Ist der Stuhl neben Ihnen schon besetzt?",
+        "Is the chair next to you already taken?"
+      ],
+      [
+        "Darf ich mich für einen Moment hier setzen?",
+        "May I sit here for a moment?"
+      ],
+      [
+        "Brauchen Sie diesen Stuhl noch für jemanden?",
+        "Do you still need this chair for someone?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ist hier noch ___? (available)",
+        "frei",
+        "Frei asks whether the seat is available in this context."
+      ],
+      [
+        "Ist dieser Platz schon ___? (taken)",
+        "besetzt",
+        "Besetzt asks whether someone already occupies or has the seat."
+      ],
+      [
+        "Darf ich mich hier ___? (sit down)",
+        "setzen",
+        "Sich setzen is the sitting-down action; mich is already supplied."
+      ],
+      [
+        "Kann ich diesen ___ nehmen? (seat)",
+        "Platz",
+        "Platz names the seat being asked about."
+      ]
+    ],
+    "wordBank": [
+      "besetzt",
+      "frei",
+      "Platz",
+      "setzen"
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "communication",
+    "slug": "a2-explaining-class-absence-communication-exercises",
+    "title": "Explaining an Absence in German: A2 Phrase Practice",
+    "description": "Tell a class or group that you cannot attend and ask about catching up in German. Practise fehlen and nachholen with translations and explained A2 answers.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: attendance and absence statements",
+    "rule": "A short absence message can identify the affected session and state that you cannot attend: Ich kann am Donnerstag nicht teilnehmen. Fehlen means being absent in this context. Den Stoff nachholen means catching up on material missed, while Bescheid geben means letting someone know.",
+    "trap": "Nachholen refers to catching up on the missed work here, not automatically changing the class date. Fehlen can also mean being missing in other contexts.",
+    "instructions": "Complete the absence or catch-up phrase with the verb or notification noun specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Ich kann am Donnerstag leider nicht am Unterricht teilnehmen.",
+        "Unfortunately I cannot attend class on Thursday."
+      ],
+      [
+        "Am nächsten Kurstag werde ich noch fehlen.",
+        "I will still be absent on the next course day."
+      ],
+      [
+        "Den verpassten Stoff möchte ich am Wochenende nachholen.",
+        "I would like to catch up on the missed material at the weekend."
+      ],
+      [
+        "Ich gebe Ihnen wegen meiner Abwesenheit frühzeitig Bescheid.",
+        "I am letting you know about my absence early."
+      ]
+    ],
+    "quiz": [
+      [
+        "Morgen werde ich leider ___. (be absent)",
+        "fehlen",
+        "Fehlen has the attendance-related meaning here."
+      ],
+      [
+        "Ich kann diesmal nicht an der Sitzung ___. (take part)",
+        "teilnehmen",
+        "An einer Sitzung teilnehmen means taking part in it."
+      ],
+      [
+        "Die verpasste Übung möchte ich ___. (catch up on)",
+        "nachholen",
+        "Nachholen concerns completing missed work."
+      ],
+      [
+        "Ich gebe der Lehrerin heute noch ___. (notice, in the notification phrase)",
+        "Bescheid",
+        "Bescheid geben means letting someone know."
+      ]
+    ],
+    "wordBank": [
+      "Bescheid",
+      "fehlen",
+      "nachholen",
+      "teilnehmen"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-asking-for-example-communication-exercises",
+    "title": "Asking for an Example in German: B1 Phrase Practice",
+    "description": "Ask someone to illustrate an idea with an example in German. Practise konkret, Beispiel and zeigen with translations and explained B1 phrase exercises.",
+    "guide": "grammar/konjunktiv-2.html",
+    "guideLabel": "Review related grammar: polite clarification requests",
+    "rule": "An example request asks how an idea looks in a particular case: Können Sie das an einem Beispiel erläutern? Wie sähe das konkret aus? narrows a general explanation. Gibt es einen Fall, in dem …? asks for a situation. A specific example can illustrate a point without establishing that it holds in every case.",
+    "trap": "An example and a universal explanation are different. Ein Beispiel shows a case; it need not cover every possible situation.",
+    "instructions": "Complete the example request with the noun, adverb or infinitive specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Könnten Sie die Regel an einem kurzen Beispiel erläutern?",
+        "Could you explain the rule using a short example?"
+      ],
+      [
+        "Wie sähe das in unserem Fall konkret aus?",
+        "What would that look like in our particular case?"
+      ],
+      [
+        "Gibt es einen Fall, in dem beide Lösungen funktionieren?",
+        "Is there a case in which both solutions work?"
+      ],
+      [
+        "Können Sie mir einen möglichen Ablauf zeigen?",
+        "Can you show me a possible sequence?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Könnten Sie dafür ein ___ nennen? (example)",
+        "Beispiel",
+        "Ein Beispiel names the case that illustrates the idea."
+      ],
+      [
+        "Wie würde das ___ aussehen? (concretely)",
+        "konkret",
+        "Konkret asks for a specific illustration."
+      ],
+      [
+        "Gibt es einen ___ aus dem Alltag? (case)",
+        "Fall",
+        "Fall names the illustrative situation here."
+      ],
+      [
+        "Können Sie mir das an einem Modell ___? (show)",
+        "zeigen",
+        "Zeigen asks for a demonstration through the model."
+      ]
+    ],
+    "wordBank": [
+      "Beispiel",
+      "Fall",
+      "konkret",
+      "zeigen"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-paraphrasing-meaning-communication-exercises",
+    "title": "Paraphrasing Meaning in German: B1 Phrase Exercises",
+    "description": "Explain an expression in other words in German. Practise gemeint, anders gesagt and bezeichnet with translated examples and explained B1 answers.",
+    "guide": "grammar/dass.html",
+    "guideLabel": "Review related grammar: clauses explaining a meaning",
+    "rule": "Paraphrasing restates a meaning in other words. Mit … meine ich … clarifies your intended use; Anders gesagt … introduces another formulation. Der Begriff bezeichnet … explains what a term refers to. Keep the core meaning when reformulating rather than adding a different claim.",
+    "trap": "Mit … meine ich explains the speaker's intended meaning, which may be narrower than every dictionary meaning of the word. Make that context clear.",
+    "instructions": "Complete the paraphrase or definition frame with the word specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Mit Rückmeldung meine ich hier eine kurze Antwort zum Termin.",
+        "By feedback here I mean a short reply about the appointment."
+      ],
+      [
+        "Anders gesagt: Wir brauchen zunächst nur die Überschrift.",
+        "In other words, we initially only need the heading."
+      ],
+      [
+        "Der Begriff Fahrgemeinschaft bezeichnet eine Gruppe, die gemeinsam im Auto fährt.",
+        "The term carpool refers to a group travelling together by car."
+      ],
+      [
+        "Damit ist gemeint, dass beide Seiten die Information erhalten.",
+        "This means that both sides receive the information."
+      ]
+    ],
+    "quiz": [
+      [
+        "Damit ist ___, dass wir denselben Plan nutzen. (meant)",
+        "gemeint",
+        "Gemeint introduces the intended interpretation."
+      ],
+      [
+        "Anders ___: Wir beginnen mit dem einfachsten Teil. (said)",
+        "gesagt",
+        "Anders gesagt introduces a reformulation."
+      ],
+      [
+        "Der ___ bezeichnet hier eine Gruppe von Freiwilligen. (term)",
+        "Begriff",
+        "Begriff identifies the expression being explained."
+      ],
+      [
+        "Was ___ dieses Wort in dem Satz? (bedeuten)",
+        "bedeutet",
+        "Bedeutet asks about the meaning in the stated sentence."
+      ]
+    ],
+    "wordBank": [
+      "bedeutet",
+      "Begriff",
+      "gemeint",
+      "gesagt"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-summarizing-article-communication-exercises",
+    "title": "Summarizing a Text in German: B1 Phrase Practice",
+    "description": "Give a short account of a text's topic and main points in German. Practise handelt von and betont with translated models and explained B1 answers.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: von with a text topic",
+    "rule": "A short text summary identifies the topic and selects central points: Der Text handelt von … . Im Mittelpunkt steht … names the focus, while Die Autorin betont, dass … attributes emphasis to the author. A summary reports the text rather than automatically agreeing with its claims.",
+    "trap": "Handeln von takes von plus dative for the topic. Distinguish the author's statement from your own opinion when summarizing.",
+    "instructions": "Complete the summary frame using the verb, noun or infinitive specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Der Text handelt von veränderten Lesegewohnheiten.",
+        "The text is about changing reading habits."
+      ],
+      [
+        "Im Mittelpunkt steht die Nutzung öffentlicher Bibliotheken.",
+        "The focus is on the use of public libraries."
+      ],
+      [
+        "Die Autorin betont, dass persönliche Begegnungen wichtig bleiben.",
+        "The author emphasises that face-to-face encounters remain important."
+      ],
+      [
+        "Die Kernaussage lässt sich in einem Satz zusammenfassen.",
+        "The main point can be summarised in one sentence."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Artikel ___ von einem Nachbarschaftsprojekt. (handeln)",
+        "handelt",
+        "Handelt von introduces what the article is about."
+      ],
+      [
+        "Im ___ steht die Zusammenarbeit im Viertel. (centre, in this focus phrase)",
+        "Mittelpunkt",
+        "Im Mittelpunkt steht identifies the central focus."
+      ],
+      [
+        "Der Autor ___ die Bedeutung offener Treffpunkte. (emphasises)",
+        "betont",
+        "Betont attributes the emphasis to the author."
+      ],
+      [
+        "Die wichtigsten Punkte kann man kurz ___. (summarise)",
+        "zusammenfassen",
+        "Zusammenfassen is the infinitive after kann."
+      ]
+    ],
+    "wordBank": [
+      "betont",
+      "handelt",
+      "Mittelpunkt",
+      "zusammenfassen"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-naming-information-source-communication-exercises",
+    "title": "Naming a Source in German: B1 Phrase Exercises",
+    "description": "Say where a piece of information comes from in German. Practise laut, Quelle, entnommen and stammt with translations and explained B1 answers.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: prepositions in source references",
+    "rule": "A source reference tells listeners where information comes from: Diese Angabe stammt aus … . Laut dem Programm … attributes a detail to the programme, while Ich habe das der Broschüre entnommen describes taking information from a brochure. Attribution differs from describing something you personally observed.",
+    "trap": "Naming a source does not by itself establish that its statement is accurate. Keep the source and what it says identifiable rather than replacing them with an unclear man sagt.",
+    "instructions": "Complete the source-reference phrase with the preposition, noun, participle or verb form specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Laut dem Programm beginnt die Lesung im Innenhof.",
+        "According to the programme, the reading starts in the courtyard."
+      ],
+      [
+        "Diese Angabe stammt aus der aktuellen Broschüre.",
+        "This information comes from the current brochure."
+      ],
+      [
+        "Ich habe die Öffnungszeit dem Aushang entnommen.",
+        "I took the opening time from the notice."
+      ],
+      [
+        "Als Quelle nenne ich den Bericht unserer Arbeitsgruppe.",
+        "I name our working group's report as the source."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ dem Aushang findet das Treffen oben statt. (according to)",
+        "Laut",
+        "Laut attributes the information to the stated notice."
+      ],
+      [
+        "Welche ___ hast du für diese Angabe benutzt? (source)",
+        "Quelle",
+        "Quelle identifies where the information was obtained."
+      ],
+      [
+        "Ich habe die Zahl der Übersicht ___. (taken from, participle)",
+        "entnommen",
+        "Entnommen is the participle of entnehmen in this source-reference pattern."
+      ],
+      [
+        "Die Nachricht ___ aus dem Rundbrief. (come from)",
+        "stammt",
+        "Stammt aus gives the origin of the information."
+      ]
+    ],
+    "wordBank": [
+      "entnommen",
+      "Laut",
+      "Quelle",
+      "stammt"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-comparing-viewpoints-communication-exercises",
+    "title": "Comparing Viewpoints in German: B1 Phrase Practice",
+    "description": "Report similarities and differences between viewpoints in German. Practise während, beide and Unterschied with translations and explained B1 answers.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: contrasting main and subordinate clauses",
+    "rule": "Comparing viewpoints reports who emphasises what: Die erste Person betont …, während die zweite … . Beide … introduces a shared point. Der Unterschied besteht darin, dass … names a contrast. This comparison can describe the positions without requiring the speaker to choose one.",
+    "trap": "While während can express time, it expresses contrast in these examples. Keep each person's position attributed rather than blending two views into an invented agreement.",
+    "instructions": "Complete the viewpoint comparison using the contrast word, shared-group expression or noun specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Lea betont die Kosten, während Sami die Zeitersparnis hervorhebt.",
+        "Lea emphasises the costs, while Sami highlights the time saving."
+      ],
+      [
+        "Beide halten eine verständliche Anleitung für wichtig.",
+        "Both consider understandable instructions important."
+      ],
+      [
+        "Der Unterschied besteht darin, wie viel Unterstützung sie erwarten.",
+        "The difference lies in how much support they expect."
+      ],
+      [
+        "Anders als Lea möchte Sami zunächst allein beginnen.",
+        "Unlike Lea, Sami would like to start alone initially."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die eine Person bevorzugt den Zug, ___ die andere den Bus nimmt. (whereas)",
+        "während",
+        "Während contrasts the two positions here."
+      ],
+      [
+        "___ betonen die Bedeutung guter Vorbereitung. (both)",
+        "Beide",
+        "Beide introduces the shared point and is capitalised at the start."
+      ],
+      [
+        "Der ___ liegt in der Wahl des Ortes. (difference)",
+        "Unterschied",
+        "Unterschied names the point of contrast."
+      ],
+      [
+        "___ als Nora möchte Tim früher starten. (unlike, first word)",
+        "Anders",
+        "Anders als introduces the differing position."
+      ]
+    ],
+    "wordBank": [
+      "Anders",
+      "Beide",
+      "Unterschied",
+      "während"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-expectation-and-reality-communication-exercises",
+    "title": "Expectations and Reality in German: B1 Phrase Exercises",
+    "description": "Explain how an experience differed from what you expected in German. Practise erwartet, stattdessen and anders with translations and explained B1 answers.",
+    "guide": "grammar/plusquamperfekt.html",
+    "guideLabel": "Review related grammar: earlier expectations and later events",
+    "rule": "A reflection can state the earlier expectation and then the actual experience: Ich hatte … erwartet; stattdessen … . Als angekündigt compares an experience with what was announced. Anders, als ich es mir vorgestellt hatte compares it with your own mental picture. Keep those two comparison bases distinct.",
+    "trap": "An expectation is not automatically a promise made by someone else. Ich hatte erwartet reports the speaker's expectation; angekündigt refers to an announcement.",
+    "instructions": "Complete the expectation-and-experience phrase using the participle or contrast expression specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Eigentlich hatte ich eine kurze Einführung erwartet.",
+        "I had actually expected a short introduction."
+      ],
+      [
+        "Stattdessen begann die Veranstaltung mit einer langen Diskussion.",
+        "Instead, the event began with a long discussion."
+      ],
+      [
+        "Der praktische Teil war kürzer als angekündigt.",
+        "The practical part was shorter than announced."
+      ],
+      [
+        "Der Ablauf war anders, als ich ihn mir vorgestellt hatte.",
+        "The sequence differed from how I had imagined it."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich hatte mehr Zeit für Fragen ___. (expected)",
+        "erwartet",
+        "Erwartet states the earlier expectation."
+      ],
+      [
+        "Ich erwartete einen Vortrag; ___ gab es ein Gespräch. (instead)",
+        "stattdessen",
+        "Stattdessen introduces what happened in place of the expectation."
+      ],
+      [
+        "Die Ausstellung war größer als ___. (announced)",
+        "angekündigt",
+        "Angekündigt refers to the earlier announcement rather than only the speaker's hope."
+      ],
+      [
+        "Die Atmosphäre war ___, als ich gedacht hatte. (different)",
+        "anders",
+        "Anders marks the contrast with the speaker's earlier view."
+      ]
+    ],
+    "wordBank": [
+      "anders",
+      "angekündigt",
+      "erwartet",
+      "stattdessen"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-giving-recommendation-communication-exercises",
+    "title": "Giving a Recommendation in German: B1 Phrase Practice",
+    "description": "Recommend an option for a stated purpose in German. Practise empfehlen, geeignet and context phrases with translated examples and explained B1 answers.",
+    "guide": "grammar/konjunktiv-2.html",
+    "guideLabel": "Review related grammar: recommendations with würde",
+    "rule": "Ich würde dir … empfehlen gives a recommendation. Für diesen Zweck ist … geeignet connects an option to a purpose. In deinem Fall limits the recommendation to the stated situation, and abhängig von identifies a condition on which suitability depends. A useful recommendation explains that connection rather than only saying gut.",
+    "trap": "Geeignet describes suitability for a purpose, not universal superiority. Ich würde empfehlen presents the recommendation without turning it into an instruction the listener must follow.",
+    "instructions": "Complete the recommendation using the infinitive, adjective, noun or dependency expression specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Für kurze Ausflüge würde ich dir den kleineren Rucksack empfehlen.",
+        "For short outings I would recommend the smaller backpack."
+      ],
+      [
+        "Dieses Wörterbuch ist für den Einstieg gut geeignet.",
+        "This dictionary is well suited to getting started."
+      ],
+      [
+        "In deinem Fall würde ich zuerst einen Probetag vereinbaren.",
+        "In your case I would first arrange a trial day."
+      ],
+      [
+        "Welche Variante passt, ist auch von der Gruppengröße abhängig.",
+        "Which option suits you also depends on the group size."
+      ]
+    ],
+    "quiz": [
+      [
+        "Für diesen Zweck würde ich die erste Variante ___. (recommend)",
+        "empfehlen",
+        "Empfehlen is the infinitive after würde."
+      ],
+      [
+        "Der kurze Text ist für die erste Übung ___. (suitable)",
+        "geeignet",
+        "Geeignet relates the text to its stated purpose."
+      ],
+      [
+        "In deinem ___ wäre ein späterer Beginn sinnvoll. (case)",
+        "Fall",
+        "In deinem Fall narrows the recommendation to the listener's situation."
+      ],
+      [
+        "Die Wahl ist von der verfügbaren Zeit ___. (dependent)",
+        "abhängig",
+        "Abhängig von names a condition affecting the choice."
+      ]
+    ],
+    "wordBank": [
+      "abhängig",
+      "empfehlen",
+      "Fall",
+      "geeignet"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-reassuring-minor-mistake-communication-exercises",
+    "title": "Reassuring Someone in German: B1 Phrase Exercises",
+    "description": "Respond supportively to a minor everyday mistake in German. Practise kann passieren, in Ruhe and solution phrases with translations and explained answers.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: possibility and supportive responses",
+    "rule": "Das kann jedem passieren acknowledges an ordinary mistake without blaming the person. Lass uns in Ruhe schauen … suggests a calm next step. Das ist nicht so schlimm can reassure in a small everyday situation, while Wir suchen eine Lösung focuses on what can be done next. Match the expression to the seriousness of the situation.",
+    "trap": "Nicht so schlimm is a judgment about the situation, so it fits small mishaps better than dismissing another person's serious concern. A calm next-step offer need not promise a particular outcome.",
+    "instructions": "Complete the supportive response with the infinitive, noun or adjective specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Das kann jedem passieren; wir schauen noch einmal nach.",
+        "That can happen to anyone; we will look again."
+      ],
+      [
+        "Lass uns die Liste in Ruhe durchgehen.",
+        "Let us go through the list calmly."
+      ],
+      [
+        "Die vergessene Überschrift ist nicht so schlimm; wir ergänzen sie.",
+        "The forgotten heading is not such a big problem; we will add it."
+      ],
+      [
+        "Wir suchen gemeinsam eine passende Lösung.",
+        "We will look for a suitable solution together."
+      ]
+    ],
+    "quiz": [
+      [
+        "So ein Versehen kann jedem ___. (happen)",
+        "passieren",
+        "Kann jedem passieren is a reassuring response to the mistake."
+      ],
+      [
+        "Wir suchen zusammen eine ___. (solution)",
+        "Lösung",
+        "Lösung focuses on addressing the problem."
+      ],
+      [
+        "Der kleine Tippfehler ist nicht so ___. (bad)",
+        "schlimm",
+        "Nicht so schlimm downplays the stated minor typo."
+      ],
+      [
+        "Lass uns das in ___ ansehen. (calm, noun in this phrase)",
+        "Ruhe",
+        "In Ruhe proposes examining it calmly."
+      ]
+    ],
+    "wordBank": [
+      "Lösung",
+      "passieren",
+      "Ruhe",
+      "schlimm"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-requesting-future-updates-communication-exercises",
+    "title": "Requesting Updates in German: B1 Phrase Practice",
+    "description": "Ask to be informed about future changes in German. Practise Bescheid geben, auf dem Laufenden and melden with translations and explained B1 answers.",
+    "guide": "grammar/temporale-nebensaetze.html",
+    "guideLabel": "Review related grammar: wenn and sobald in notification requests",
+    "rule": "A request for future information can name the event that should trigger a message: Bitte geben Sie mir Bescheid, sobald … . Halten Sie mich auf dem Laufenden asks for ongoing updates. Falls sich etwas ändert identifies a possible change; sobald identifies the point after which a reply is wanted.",
+    "trap": "A request for updates concerns future information, not necessarily a reminder about an unanswered old message. Specify which change or result matters.",
+    "instructions": "Complete the update request with the noun, expression, verb or time connector specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Bitte geben Sie mir Bescheid, sobald der Raum feststeht.",
+        "Please let me know as soon as the room is confirmed."
+      ],
+      [
+        "Halten Sie mich über die weitere Planung auf dem Laufenden.",
+        "Keep me updated about the further planning."
+      ],
+      [
+        "Falls sich die Uhrzeit ändert, melden Sie sich bitte kurz.",
+        "If the time changes, please get in touch briefly."
+      ],
+      [
+        "Ich würde gern erfahren, wann die nächsten Informationen vorliegen.",
+        "I would like to know when the next information will be available."
+      ]
+    ],
+    "quiz": [
+      [
+        "Bitte geben Sie mir ___, wenn das Ergebnis vorliegt. (notice, in the notification phrase)",
+        "Bescheid",
+        "Bescheid geben means informing the person."
+      ],
+      [
+        "Halten Sie mich bitte auf dem ___. (up to date, final word)",
+        "Laufenden",
+        "Auf dem Laufenden halten asks for ongoing updates."
+      ],
+      [
+        "Bitte ___ Sie sich bei einer Änderung. (get in touch)",
+        "melden",
+        "Sich melden asks the person to contact the speaker."
+      ],
+      [
+        "Informieren Sie mich, ___ der Termin bestätigt ist. (as soon as)",
+        "sobald",
+        "Sobald marks the notification trigger in time."
+      ]
+    ],
+    "wordBank": [
+      "Bescheid",
+      "Laufenden",
+      "melden",
+      "sobald"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-personal-boundaries-communication-exercises",
+    "title": "Personal Boundaries in German: B1 Phrase Exercises",
+    "description": "State a personal boundary respectfully in German. Practise nicht sprechen, privat and akzeptieren with translated examples and explained B1 answers.",
+    "guide": "grammar/modalverben.html",
+    "guideLabel": "Review related grammar: möchten in personal requests",
+    "rule": "A personal boundary can name what you do not want to discuss or do: Darüber möchte ich im Moment nicht sprechen. Das möchte ich privat halten identifies a topic you prefer to keep private. Bitte akzeptiere das asks the listener to respect the stated choice. A brief statement can be clear without a long explanation.",
+    "trap": "Ich möchte darüber nicht sprechen expresses the speaker's boundary; it does not automatically describe the other person's intentions. Keep the wording focused on your own preference.",
+    "instructions": "Complete the personal-boundary statement with the adjective, infinitive or feeling word specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Darüber möchte ich im Moment nicht sprechen.",
+        "I do not want to talk about that at the moment."
+      ],
+      [
+        "Diese Information möchte ich privat halten.",
+        "I would like to keep this information private."
+      ],
+      [
+        "Mit dieser Frage fühle ich mich nicht wohl.",
+        "I do not feel comfortable with this question."
+      ],
+      [
+        "Bitte akzeptiere, dass ich dazu nichts sagen möchte.",
+        "Please accept that I do not want to say anything about that."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Thema möchte ich ___ halten. (private)",
+        "privat",
+        "Privat halten states the preference not to discuss it publicly."
+      ],
+      [
+        "Ich fühle mich dabei nicht ___. (comfortable)",
+        "wohl",
+        "Sich wohl fühlen describes comfort; nicht negates it here."
+      ],
+      [
+        "Bitte ___ Sie meine Entscheidung. (accept)",
+        "akzeptieren",
+        "Akzeptieren asks the listener to accept the stated decision."
+      ],
+      [
+        "Darüber möchte ich heute nicht ___. (talk)",
+        "sprechen",
+        "Sprechen is the infinitive after möchte."
+      ]
+    ],
+    "wordBank": [
+      "akzeptieren",
+      "privat",
+      "sprechen",
+      "wohl"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-stating-goals-communication-exercises",
+    "title": "Stating Goals in German: B1 Phrase Practice",
+    "description": "Explain a goal, intention and purpose in German. Practise Ziel, vorhaben, um zu and damit with translated examples and explained B1 answers.",
+    "guide": "grammar/infinitiv-mit-zu.html",
+    "guideLabel": "Review related grammar: infinitives expressing intentions and purpose",
+    "rule": "Mein Ziel ist es, … zu … states an objective. Ich habe vor, … zu … describes an intention. Um … zu … explains a purpose when the understood subject remains the same. Damit can introduce a purpose with its own subject. A goal describes the outcome being sought rather than proving it will occur.",
+    "trap": "Keep the infinitive structure after habe vor: Ich habe vor, regelmäßig zu üben. Damit uses a subordinate clause with a conjugated verb at the end.",
+    "instructions": "Complete the goal or purpose phrase using the noun, verb particle or connector specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Mein Ziel ist es, freier vor einer Gruppe zu sprechen.",
+        "My goal is to speak more freely in front of a group."
+      ],
+      [
+        "Ich habe vor, jede Woche einen kurzen Text zu verfassen.",
+        "I intend to write a short text every week."
+      ],
+      [
+        "Ich übe die Einleitung, um sicherer aufzutreten.",
+        "I practise the introduction in order to present more confidently."
+      ],
+      [
+        "Wir sammeln Beispiele, damit alle den Ablauf verstehen.",
+        "We collect examples so that everyone understands the process."
+      ]
+    ],
+    "quiz": [
+      [
+        "Mein ___ ist es, deutlicher zu formulieren. (goal)",
+        "Ziel",
+        "Ziel identifies the desired outcome."
+      ],
+      [
+        "Ich habe ___, den Vortrag vorher zu üben. (in the intention expression)",
+        "vor",
+        "Habe vor introduces an intention with a zu-infinitive."
+      ],
+      [
+        "Ich lese den Text laut, ___ die Aussprache zu üben. (in order)",
+        "um",
+        "Um introduces the purpose infinitive with the same understood subject."
+      ],
+      [
+        "Wir erklären die Begriffe, ___ die Zuhörer folgen können. (so that)",
+        "damit",
+        "Damit introduces the purpose clause with its own subject."
+      ]
+    ],
+    "wordBank": [
+      "damit",
+      "um",
+      "vor",
+      "Ziel"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-qualifying-generalizations-communication-exercises",
+    "title": "Qualifying Generalizations in German: B1 Phrase Practice",
+    "description": "Avoid turning some or most cases into all cases in German. Practise meistens, manche and Ausnahmen with translations and explained B1 phrase exercises.",
+    "guide": "grammar/indefinitpronomen.html",
+    "guideLabel": "Review related grammar: quantifiers and groups",
+    "rule": "Meistens describes what happens in most cases, while manche refers to some members of a group. Nicht alle limits a claim about the whole group. Es gibt Ausnahmen explicitly allows exceptions. These expressions concern a claim's scope or frequency, which is different from how certain the speaker feels about it.",
+    "trap": "Manche does not mean all. Meistens is a general frequency expression, not an exact numerical percentage supplied by the word alone.",
+    "instructions": "Complete the limited generalization using the frequency word, group word or exception noun specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "In unserer Gruppe beginnt die Besprechung meistens pünktlich.",
+        "In our group the meeting usually starts on time."
+      ],
+      [
+        "Es gibt aber Ausnahmen, etwa bei einem Raumwechsel.",
+        "But there are exceptions, for example when the room changes."
+      ],
+      [
+        "Nicht alle Teilnehmenden nutzen dieselbe Lernmethode.",
+        "Not all participants use the same learning method."
+      ],
+      [
+        "Manche Aufgaben lassen sich gut zu zweit lösen.",
+        "Some tasks can be solved well in pairs."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Kurs findet ___ im selben Raum statt. (usually)",
+        "meistens",
+        "Meistens describes the usual case without making it universal."
+      ],
+      [
+        "Von dieser Regel gibt es ___. (exceptions)",
+        "Ausnahmen",
+        "Ausnahmen explicitly identifies cases outside the general pattern."
+      ],
+      [
+        "Nicht ___ arbeiten gleich schnell. (all)",
+        "alle",
+        "Nicht alle limits the statement about the whole group."
+      ],
+      [
+        "___ bevorzugen eine schriftliche Anleitung. (some people)",
+        "Manche",
+        "Manche names some members of the group and is capitalised here."
+      ]
+    ],
+    "wordBank": [
+      "alle",
+      "Ausnahmen",
+      "Manche",
+      "meistens"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-acknowledging-contribution-communication-exercises",
+    "title": "Acknowledging Contributions in German: B1 Phrase Exercises",
+    "description": "Recognise someone's specific contribution in German. Practise Beitrag, verdanken and attribution phrases with translations and explained B1 answers.",
+    "guide": "grammar/dativ.html",
+    "guideLabel": "Review related grammar: crediting someone with verdanken",
+    "rule": "Acknowledging a contribution names the person and the particular work: Der erste Entwurf stammt von … . Das verdanken wir … gives credit with a dative recipient. Ein wichtiger Beitrag war … identifies the contribution itself. Gemeinsam marks joint work, which differs from attributing the whole result to one person.",
+    "trap": "Verdanken names what is owed to someone's contribution in this sense. Match individual and shared credit to the work being described.",
+    "instructions": "Complete the acknowledgement with the noun, verb form or shared-work expression specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Ein wichtiger Beitrag war die übersichtliche Tabelle von Lina.",
+        "An important contribution was Lina's clear table."
+      ],
+      [
+        "Den entscheidenden Hinweis verdanken wir unserem Kollegen.",
+        "We owe the key suggestion to our colleague."
+      ],
+      [
+        "Der erste Entwurf stammt von der Arbeitsgruppe im Norden.",
+        "The first draft comes from the working group in the north."
+      ],
+      [
+        "Die abschließende Fassung haben wir gemeinsam überarbeitet.",
+        "We revised the final version together."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ihr ___ hat die Diskussion vorangebracht. (contribution)",
+        "Beitrag",
+        "Beitrag names the particular contribution being recognised."
+      ],
+      [
+        "Die hilfreiche Übersicht ___ wir Lea. (owe to)",
+        "verdanken",
+        "Verdanken gives credit; Lea is the recipient in this phrase."
+      ],
+      [
+        "Die ursprüngliche Idee ___ von unserem Nachbarteam. (comes)",
+        "stammt",
+        "Stammt von attributes the idea's origin."
+      ],
+      [
+        "Die Lösung haben beide Gruppen ___ entwickelt. (together)",
+        "gemeinsam",
+        "Gemeinsam recognises the joint work."
+      ]
+    ],
+    "wordBank": [
+      "Beitrag",
+      "gemeinsam",
+      "stammt",
+      "verdanken"
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "communication",
+    "slug": "b1-opening-closing-presentation-communication-exercises",
+    "title": "Presentation Openings and Endings: German B1 Practice",
+    "description": "Open and close a short presentation in German. Practise vorstellen, zunächst and audience questions with translated examples and explained B1 answers.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: verb position in presentation phrases",
+    "rule": "An opening can name the topic and sequence: Ich möchte Ihnen … vorstellen; zunächst … . A closing can recap the main point and invite questions. Vielen Dank für Ihre Aufmerksamkeit thanks the audience. This speaker role differs from chairing a meeting or setting tasks for a team.",
+    "trap": "After möchte, keep vorstellen as an infinitive at the end of the clause. If zunächst starts a main clause, the conjugated verb normally comes next.",
+    "instructions": "Complete the presentation frame with the infinitive, sequence word or audience noun specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Ich möchte Ihnen heute unser kleines Leseprojekt vorstellen.",
+        "Today I would like to introduce our small reading project to you."
+      ],
+      [
+        "Zunächst zeige ich Ihnen die Ausgangssituation.",
+        "First I will show you the initial situation."
+      ],
+      [
+        "Zum Schluss fasse ich die wichtigsten Ergebnisse zusammen.",
+        "At the end I will summarise the main findings."
+      ],
+      [
+        "Vielen Dank für Ihre Aufmerksamkeit; welche Fragen haben Sie?",
+        "Thank you for your attention; what questions do you have?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich möchte Ihnen das Thema kurz ___. (introduce)",
+        "vorstellen",
+        "Vorstellen is the infinitive after möchte."
+      ],
+      [
+        "___ erkläre ich die Ausgangsfrage. (first)",
+        "Zunächst",
+        "Zunächst introduces the first stage and is capitalised here."
+      ],
+      [
+        "Gibt es dazu noch ___? (questions)",
+        "Fragen",
+        "Fragen invites the audience's questions."
+      ],
+      [
+        "Vielen Dank für Ihre ___. (attention)",
+        "Aufmerksamkeit",
+        "Aufmerksamkeit is the noun in this formal closing."
+      ]
+    ],
+    "wordBank": [
+      "Aufmerksamkeit",
+      "Fragen",
+      "vorstellen",
+      "Zunächst"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-correlation-causation-communication-exercises",
+    "title": "Correlation and Causation in German: B2 Phrase Practice",
+    "description": "Discuss association without automatically claiming causation in German. Practise einhergehen and ableiten with translations and explained B2 phrase exercises.",
+    "guide": "grammar/weil-denn-deshalb.html",
+    "guideLabel": "Review related grammar: language for reasons and consequences",
+    "rule": "Mit etwas einhergehen describes occurring together; zusammenhängen can express a relationship. A causal conclusion is stronger: Daraus lässt sich eine Ursache ableiten claims that a cause can be inferred. Negation or nicht zwangsläufig can limit that inference. Match the wording to the relationship actually being discussed.",
+    "trap": "A shared trend does not by itself establish a cause. Nicht zwangsläufig means not necessarily; it does not rule out every possible causal explanation.",
+    "instructions": "Complete the reasoning phrase with the particle, infinitive or qualification word specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Der Anstieg geht mit einer veränderten Nutzung einher.",
+        "The increase occurs alongside changed usage."
+      ],
+      [
+        "Die beiden Entwicklungen könnten miteinander zusammenhängen.",
+        "The two developments could be related."
+      ],
+      [
+        "Daraus lässt sich noch keine eindeutige Ursache ableiten.",
+        "No clear cause can yet be inferred from that."
+      ],
+      [
+        "Das bedeutet nicht zwangsläufig, dass die Änderung den Effekt verursacht hat.",
+        "That does not necessarily mean that the change caused the effect."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Zunahme geht mit einer neuen Verteilung ___. (particle in occurs alongside)",
+        "einher",
+        "Mit etwas einhergehen describes the accompanying development."
+      ],
+      [
+        "Die Veränderungen könnten miteinander ___. (be connected)",
+        "zusammenhängen",
+        "Zusammenhängen states a possible relationship rather than specifying a cause."
+      ],
+      [
+        "Daraus können wir noch keine Ursache ___. (infer)",
+        "ableiten",
+        "Ableiten names drawing a conclusion from the information."
+      ],
+      [
+        "Gleichzeitigkeit bedeutet nicht ___ Verursachung. (necessarily)",
+        "zwangsläufig",
+        "Nicht zwangsläufig limits the causal inference without excluding every causal possibility."
+      ]
+    ],
+    "wordBank": [
+      "ableiten",
+      "einher",
+      "zusammenhängen",
+      "zwangsläufig"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-polite-interruption-communication-exercises",
+    "title": "Polite Interruptions in German: B2 Phrase Exercises",
+    "description": "Enter a discussion turn politely in German. Practise einhaken, Unterbrechung and holding a sentence with translated examples and explained B2 answers.",
+    "guide": "grammar/konjunktiv-2.html",
+    "guideLabel": "Review related grammar: tentative requests for a speaking turn",
+    "rule": "Darf ich an dieser Stelle kurz einhaken? requests a brief intervention. Entschuldigen Sie bitte die Unterbrechung acknowledges interrupting. A speaker can also ask to finish: Lassen Sie mich den Satz noch abschließen. Giving a short reason helps connect the intervention to the discussion rather than simply taking over.",
+    "trap": "Einhaken is an idiom for joining or intervening in the point being discussed. A polite opening does not automatically give the speaker unlimited time.",
+    "instructions": "Complete the turn-taking phrase with the infinitive or noun specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Darf ich an dieser Stelle kurz einhaken?",
+        "May I briefly come in at this point?"
+      ],
+      [
+        "Entschuldigen Sie bitte die Unterbrechung; dazu habe ich eine Verständnisfrage.",
+        "Please excuse the interruption; I have a clarification question about that."
+      ],
+      [
+        "Lassen Sie mich diesen Satz noch abschließen.",
+        "Let me finish this sentence."
+      ],
+      [
+        "Könnte ich den Gedanken in einem Satz ausführen?",
+        "Could I develop the point in one sentence?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Darf ich zu diesem Punkt kurz ___? (intervene)",
+        "einhaken",
+        "Kurz einhaken asks for a brief intervention on the point."
+      ],
+      [
+        "Bitte lassen Sie mich den Gedanken noch ___. (finish)",
+        "abschließen",
+        "Abschließen asks to bring the thought to an end."
+      ],
+      [
+        "Entschuldigen Sie die ___. (interruption)",
+        "Unterbrechung",
+        "Unterbrechung acknowledges interrupting the current turn."
+      ],
+      [
+        "Könnte ich das kurz ___? (elaborate)",
+        "ausführen",
+        "Ausführen asks to explain the point further."
+      ]
+    ],
+    "wordBank": [
+      "abschließen",
+      "ausführen",
+      "einhaken",
+      "Unterbrechung"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-challenging-assumption-communication-exercises",
+    "title": "Challenging an Assumption in German: B2 Phrase Practice",
+    "description": "Question a discussion premise respectfully in German. Practise Annahme, beruhen and voraussetzen with translated examples and explained B2 answers.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "guideLabel": "Review related grammar: beruhen auf and related patterns",
+    "rule": "A premise can be questioned without attacking a person: Auf welcher Annahme beruht diese Einschätzung? Wird dabei vorausgesetzt, dass …? makes an implicit assumption explicit. Können wir diese Voraussetzung prüfen? proposes examining it. Keep the question focused on the stated reasoning and what would support it.",
+    "trap": "Eine Annahme identifies a premise, not automatically a falsehood. Questioning it asks for its basis rather than already demonstrating that it is wrong.",
+    "instructions": "Complete the premise question with the noun, verb form, participle or infinitive specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Auf welcher Annahme beruht diese Einschätzung?",
+        "On which assumption is this assessment based?"
+      ],
+      [
+        "Wird dabei vorausgesetzt, dass alle dieselben Möglichkeiten haben?",
+        "Does that assume that everyone has the same opportunities?"
+      ],
+      [
+        "Könnten wir diese Voraussetzung zunächst genauer prüfen?",
+        "Could we first examine this premise more closely?"
+      ],
+      [
+        "Welche Angaben würden diese Ausgangsannahme stützen?",
+        "What information would support this starting assumption?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Welche ___ liegt dieser Aussage zugrunde? (assumption)",
+        "Annahme",
+        "Annahme identifies the premise being examined."
+      ],
+      [
+        "Worauf ___ die Einschätzung? (beruhen)",
+        "beruht",
+        "Beruht auf asks for the basis of the assessment."
+      ],
+      [
+        "Wird hier ___, dass alle teilnehmen können? (assumed)",
+        "vorausgesetzt",
+        "Vorausgesetzt makes the implicit premise explicit."
+      ],
+      [
+        "Könnten wir diese Voraussetzung gemeinsam ___? (examine)",
+        "prüfen",
+        "Prüfen proposes examining the premise rather than dismissing it without analysis."
+      ]
+    ],
+    "wordBank": [
+      "Annahme",
+      "beruht",
+      "prüfen",
+      "vorausgesetzt"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-defining-project-scope-communication-exercises",
+    "title": "Defining Scope in German: B2 Phrase Exercises",
+    "description": "Clarify which work belongs to a project's scope in German. Practise Umfang, Bestandteil and außerhalb with translated examples and explained B2 answers.",
+    "guide": "grammar/genitiv.html",
+    "guideLabel": "Review related grammar: scope phrases with außerhalb",
+    "rule": "Scope language distinguishes included work from further work: Das gehört zum vereinbarten Umfang; das ist nicht Bestandteil dieser Aufgabe. Außerhalb des Rahmens marks something beyond the defined scope. A separate sentence can propose treating it later. The phrases describe a stated agreement rather than defining every project's scope in advance.",
+    "trap": "Scope concerns what is included, not only how long a discussion lasts. Separate an agreed boundary from a proposal to extend it.",
+    "instructions": "Complete the scope statement with the noun or boundary expression specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Die sprachliche Überarbeitung gehört zum vereinbarten Umfang.",
+        "The language revision is part of the agreed scope."
+      ],
+      [
+        "Die Auswahl neuer Bilder ist nicht Bestandteil dieser Aufgabe.",
+        "Choosing new images is not part of this task."
+      ],
+      [
+        "Diese zusätzliche Auswertung liegt außerhalb des bisherigen Rahmens.",
+        "This additional analysis is outside the existing scope."
+      ],
+      [
+        "Für eine Erweiterung sollten wir die Abgrenzung zunächst gesondert klären.",
+        "For an extension we should first clarify the boundaries separately."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das gehört zum vereinbarten ___. (scope)",
+        "Umfang",
+        "Umfang names the scope referred to in the statement."
+      ],
+      [
+        "Die Übersetzung ist kein ___ dieses Auftrags. (component)",
+        "Bestandteil",
+        "Bestandteil identifies something as a component or part."
+      ],
+      [
+        "Der Zusatz liegt ___ des festgelegten Rahmens. (outside)",
+        "außerhalb",
+        "Außerhalb introduces the boundary phrase with genitive here."
+      ],
+      [
+        "Für den neuen Teil brauchen wir eine klare ___. (delimitation)",
+        "Abgrenzung",
+        "Abgrenzung identifies the boundaries to be clarified."
+      ]
+    ],
+    "wordBank": [
+      "Abgrenzung",
+      "außerhalb",
+      "Bestandteil",
+      "Umfang"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-disclosing-interest-communication-exercises",
+    "title": "Disclosing an Interest in German: B2 Phrase Practice",
+    "description": "Explain an interest or involvement transparently in German. Practise beteiligt, offenlegen and sich enthalten with translations and explained B2 answers.",
+    "guide": "grammar/reflexive-verben.html",
+    "guideLabel": "Review related grammar: sich enthalten and reflexive choices",
+    "rule": "A speaker can disclose relevant involvement: Ich bin an dem Projekt beteiligt. Ich möchte diesen Zusammenhang offenlegen makes the disclosure explicit. Ich kann das nicht völlig unabhängig beurteilen identifies a limit on independence. Ich enthalte mich bei dieser Abstimmung describes abstaining in the stated situation.",
+    "trap": "Beteiligt sein states involvement; it does not by itself establish wrongdoing. Sich enthalten describes abstaining, not simply being absent from the room.",
+    "instructions": "Complete the disclosure or abstention phrase with the participle, infinitive or independence word specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Ich bin an einem der vorgestellten Projekte beteiligt.",
+        "I am involved in one of the projects presented."
+      ],
+      [
+        "Deshalb möchte ich diesen Zusammenhang vorab offenlegen.",
+        "I would therefore like to disclose this connection in advance."
+      ],
+      [
+        "Ich kann die beiden Angebote nicht völlig unabhängig beurteilen.",
+        "I cannot assess the two offers entirely independently."
+      ],
+      [
+        "Bei dieser Abstimmung möchte ich mich enthalten.",
+        "I would like to abstain from this vote."
+      ]
+    ],
+    "quiz": [
+      [
+        "Meine Abteilung ist an dem Vorhaben ___. (involved)",
+        "beteiligt",
+        "Beteiligt describes the department's involvement."
+      ],
+      [
+        "Diese Verbindung möchte ich zunächst ___. (disclose)",
+        "offenlegen",
+        "Offenlegen makes the relevant connection explicit."
+      ],
+      [
+        "Meine Beurteilung wäre hier nicht völlig ___. (independent)",
+        "unabhängig",
+        "Unabhängig describes independence of the assessment."
+      ],
+      [
+        "Ich möchte mich bei dieser Entscheidung ___. (abstain)",
+        "enthalten",
+        "Sich enthalten is the abstention expression; mich is already supplied."
+      ]
+    ],
+    "wordBank": [
+      "beteiligt",
+      "enthalten",
+      "offenlegen",
+      "unabhängig"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-proposing-pilot-communication-exercises",
+    "title": "Proposing a Pilot in German: B2 Phrase Exercises",
+    "description": "Propose a limited trial and define its review in German. Practise testweise, Kriterium and auswerten with translated examples and explained B2 answers.",
+    "guide": "grammar/temporale-nebensaetze.html",
+    "guideLabel": "Review related grammar: subordinate clauses and verb position",
+    "rule": "A pilot proposal limits the initial step and says how it will be reviewed: Wir könnten das Verfahren zunächst testweise einsetzen. Bevor wir vollständig umstellen … introduces the later decision. Name a Kriterium for assessing the trial, then propose evaluating the results. A trial proposal does not by itself establish that the method works.",
+    "trap": "Testweise means on a trial basis, not permanently. Distinguish a proposed test, the criterion used to review it and a decision made after results are considered.",
+    "instructions": "Complete the pilot proposal with the trial expression, connector, noun or infinitive specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Wir könnten das Verfahren zunächst testweise in einer Gruppe einsetzen.",
+        "We could initially use the procedure on a trial basis in one group."
+      ],
+      [
+        "Bevor wir vollständig umstellen, sollten wir die Erfahrungen sammeln.",
+        "Before changing over completely, we should gather experience."
+      ],
+      [
+        "Als Kriterium könnten wir die Verständlichkeit der Anleitung festlegen.",
+        "We could define the clarity of the instructions as a criterion."
+      ],
+      [
+        "Nach zwei Durchläufen würden wir die Rückmeldungen gemeinsam auswerten.",
+        "After two runs we would evaluate the feedback together."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir könnten die Methode zunächst ___ einsetzen. (on a trial basis)",
+        "testweise",
+        "Testweise limits the proposal to a trial."
+      ],
+      [
+        "___ wir alles umstellen, sollten wir die Ergebnisse prüfen. (before)",
+        "Bevor",
+        "Bevor introduces the subordinate time clause and is capitalised here."
+      ],
+      [
+        "Welches ___ wollen wir für die Bewertung nutzen? (criterion)",
+        "Kriterium",
+        "Kriterium identifies the basis for assessing the trial."
+      ],
+      [
+        "Anschließend sollten wir die Erfahrungen ___. (evaluate)",
+        "auswerten",
+        "Auswerten names reviewing the information gathered."
+      ]
+    ],
+    "wordBank": [
+      "auswerten",
+      "Bevor",
+      "Kriterium",
+      "testweise"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-revising-claim-communication-exercises",
+    "title": "Revising a Claim in German: B2 Phrase Practice",
+    "description": "Adjust an earlier claim after receiving new information in German. Practise präzisieren, zurücknehmen and ergänzen with translations and explained B2 answers.",
+    "guide": "grammar/infinitiv-mit-zu.html",
+    "guideLabel": "Review related grammar: infinitives in revision statements",
+    "rule": "A revision can identify what changed and how the earlier statement should be adjusted. Präzisieren makes a claim more specific, zurücknehmen withdraws it, and ergänzen adds information. Neue Angaben berücksichtigen means taking the new information into account. Name the particular earlier statement so the revision is clear.",
+    "trap": "Präzisieren and zurücknehmen are different actions. Clarifying a narrower meaning does not necessarily withdraw the entire statement; withdrawing it is stronger.",
+    "instructions": "Complete the revision statement with the infinitive specified by the meaning cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Aufgrund der neuen Angaben muss ich meine frühere Aussage präzisieren.",
+        "Because of the new information I need to make my earlier statement more precise."
+      ],
+      [
+        "In dieser allgemeinen Form nehme ich die Behauptung zurück.",
+        "I withdraw the claim in this general form."
+      ],
+      [
+        "Ich möchte die Einschätzung um einen wichtigen Punkt ergänzen.",
+        "I would like to add an important point to the assessment."
+      ],
+      [
+        "Bei der erneuten Bewertung müssen wir die neuen Angaben berücksichtigen.",
+        "In the reassessment we need to take the new information into account."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich möchte meine frühere Aussage ___. (make more precise)",
+        "präzisieren",
+        "Präzisieren makes the statement more specific."
+      ],
+      [
+        "Diese unbelegte Behauptung möchte ich ___. (withdraw)",
+        "zurücknehmen",
+        "Zurücknehmen explicitly withdraws the claim."
+      ],
+      [
+        "Die Darstellung muss ich um einen Aspekt ___. (supplement)",
+        "ergänzen",
+        "Ergänzen adds the missing aspect."
+      ],
+      [
+        "Wir sollten die neue Rückmeldung ___. (take into account)",
+        "berücksichtigen",
+        "Berücksichtigen includes the new information in the assessment."
+      ]
+    ],
+    "wordBank": [
+      "berücksichtigen",
+      "ergänzen",
+      "präzisieren",
+      "zurücknehmen"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-explaining-goal-tradeoff-communication-exercises",
+    "title": "Explaining Trade-offs in German: B2 Phrase Exercises",
+    "description": "Discuss competing aims in German. Practise Zielkonflikt, vereinbaren, Abstriche and zugunsten with translated models and explained B2 phrase exercises.",
+    "guide": "grammar/genitiv.html",
+    "guideLabel": "Review related grammar: noun phrases after zugunsten",
+    "rule": "A Zielkonflikt arises when pursuing one aim makes another harder to achieve in the stated situation. Beide Ziele miteinander vereinbaren asks whether they can be reconciled. Abstriche machen means accepting concessions or reductions. Zugunsten einer Sache prioritises it relative to something else.",
+    "trap": "A trade-off concerns the relationship between aims, not merely labelling one option good and another bad. State which aim would gain and where a concession is being proposed.",
+    "instructions": "Complete the trade-off phrase with the noun, infinitive or prioritisation expression specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Zwischen dem knappen Zeitplan und der gründlichen Erprobung besteht ein Zielkonflikt.",
+        "There is a conflict between the tight timetable and thorough testing."
+      ],
+      [
+        "Wie ließen sich beide Ziele miteinander vereinbaren?",
+        "How could the two aims be reconciled?"
+      ],
+      [
+        "Beim Umfang müssten wir dafür Abstriche machen.",
+        "We would need to make concessions on scope in return."
+      ],
+      [
+        "Wir könnten zugunsten der Verständlichkeit auf einige Details verzichten.",
+        "We could omit some details in favour of clarity."
+      ]
+    ],
+    "quiz": [
+      [
+        "Zwischen beiden Anforderungen besteht ein ___. (conflict of aims)",
+        "Zielkonflikt",
+        "Zielkonflikt names the competing relationship between the aims."
+      ],
+      [
+        "Wie können wir beide Ziele miteinander ___? (reconcile)",
+        "vereinbaren",
+        "Vereinbaren means making the two aims compatible in this context."
+      ],
+      [
+        "An dieser Stelle müssten wir ___ machen. (concessions)",
+        "Abstriche",
+        "Abstriche machen means accepting reductions or concessions."
+      ],
+      [
+        "Wir entscheiden uns ___ der Übersichtlichkeit für weniger Einzelheiten. (in favour of)",
+        "zugunsten",
+        "Zugunsten prioritises clarity over the additional details here."
+      ]
+    ],
+    "wordBank": [
+      "Abstriche",
+      "vereinbaren",
+      "Zielkonflikt",
+      "zugunsten"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-clarifying-misunderstanding-communication-exercises",
+    "title": "Clarifying a Misunderstanding in German: B2 Practice",
+    "description": "Clarify the intended meaning of your earlier statement in German. Practise gemeint, missverständlich and klarstellen with translations and explained B2 answers.",
+    "guide": "grammar/dass.html",
+    "guideLabel": "Review related grammar: clauses clarifying intended meaning",
+    "rule": "A clarification can acknowledge unclear wording and state the intended scope: Meine Formulierung war offenbar missverständlich. Gemeint war nur … explains the intended meaning. Ich beziehe mich auf … identifies the reference, and Ich möchte klarstellen, dass … introduces an explicit clarification.",
+    "trap": "Missverständlich describes wording that can be misunderstood; it does not by itself blame the listener. Clarify the actual point rather than assuming an unverified intention.",
+    "instructions": "Complete the clarification using the participle, adjective or infinitive specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Meine Formulierung war offenbar missverständlich.",
+        "My wording was evidently open to misunderstanding."
+      ],
+      [
+        "Gemeint war nur der erste Abschnitt, nicht der gesamte Bericht.",
+        "I meant only the first section, not the whole report."
+      ],
+      [
+        "Ich beziehe mich dabei auf die ursprüngliche Frage.",
+        "In saying that I am referring to the original question."
+      ],
+      [
+        "Ich möchte klarstellen, dass die Rückmeldung noch vorläufig ist.",
+        "I would like to clarify that the feedback is still provisional."
+      ]
+    ],
+    "quiz": [
+      [
+        "Damit war ausschließlich der Entwurf ___. (meant)",
+        "gemeint",
+        "Gemeint identifies the intended reference."
+      ],
+      [
+        "Der Satz war an dieser Stelle ___. (open to misunderstanding)",
+        "missverständlich",
+        "Missverständlich acknowledges the unclear wording."
+      ],
+      [
+        "Ich möchte mich auf die ursprüngliche Angabe ___. (refer)",
+        "beziehen",
+        "Sich beziehen auf identifies the reference; mich is already supplied."
+      ],
+      [
+        "Ich möchte ___, dass es um einen Vorschlag geht. (clarify)",
+        "klarstellen",
+        "Klarstellen introduces the explicit clarification."
+      ]
+    ],
+    "wordBank": [
+      "beziehen",
+      "gemeint",
+      "klarstellen",
+      "missverständlich"
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "communication",
+    "slug": "b2-conditional-agreement-communication-exercises",
+    "title": "Conditional Agreement in German: B2 Phrase Practice",
+    "description": "Express agreement subject to a stated condition in German. Practise unter der Bedingung, vorausgesetzt and sofern with translations and explained B2 answers.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: subordinate-clause word order",
+    "rule": "An agreement can be limited by a stated condition: Ich stimme zu, sofern … . Unter der Bedingung, dass … names the condition directly. Vorausgesetzt, dass … introduces what must hold first. Unter Vorbehalt signals a reservation rather than unconditional approval. Make the actual condition explicit.",
+    "trap": "A conditional yes is different from an unqualified yes. Sofern introduces a condition here, not simply a point in time.",
+    "instructions": "Complete the agreement frame with the condition noun, connector or reservation noun specified by the cue. Use each word-bank item once.",
+    "examples": [
+      [
+        "Ich stimme unter der Bedingung zu, dass die offenen Fragen vorher geklärt werden.",
+        "I agree on the condition that the open questions are clarified first."
+      ],
+      [
+        "Vorausgesetzt, dass alle die Unterlagen erhalten, können wir beginnen.",
+        "Provided that everyone receives the documents, we can begin."
+      ],
+      [
+        "Ich kann dem Vorgehen zustimmen, sofern die Zuständigkeiten eindeutig sind.",
+        "I can agree to the procedure provided the responsibilities are clear."
+      ],
+      [
+        "Meine Zusage erfolgt unter Vorbehalt der abschließenden Bestätigung.",
+        "My acceptance is subject to final confirmation."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich stimme unter der ___ zu, dass wir die Angaben prüfen. (condition)",
+        "Bedingung",
+        "Unter der Bedingung names the stated condition."
+      ],
+      [
+        "___, dass alle informiert sind, können wir fortfahren. (provided)",
+        "Vorausgesetzt",
+        "Vorausgesetzt, dass introduces the prerequisite and is capitalised here."
+      ],
+      [
+        "Ich bin einverstanden, ___ wir den Umfang begrenzen. (provided that)",
+        "sofern",
+        "Sofern introduces the condition on agreement."
+      ],
+      [
+        "Die Zustimmung erfolgt unter ___. (reservation)",
+        "Vorbehalt",
+        "Unter Vorbehalt makes the reservation explicit."
+      ]
+    ],
+    "wordBank": [
+      "Bedingung",
+      "sofern",
+      "Vorausgesetzt",
+      "Vorbehalt"
+    ]
+  }
+]

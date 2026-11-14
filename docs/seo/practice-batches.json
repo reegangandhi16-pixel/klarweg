@@ -116,5 +116,20 @@
         "path": "docs/seo/vocabulary-expansion-20261114.json"
       }
     ]
+  },
+  {
+    "id": "communication50-expansion",
+    "count": 50,
+    "levels": {
+      "a1": 10,
+      "a2": 16,
+      "b1": 14,
+      "b2": 10
+    },
+    "sources": [
+      {
+        "path": "docs/seo/communication-expansion-20261114.json"
+      }
+    ]
   }
 ]

@@ -21,15 +21,26 @@ This is a **safe, approval-gated** social-publishing pipeline. Nothing is publis
 4. For each topic, fill in final **media URLs**, proofread the captions, and set post `status: "approved"` and each relevant channel `approved: true` only after editorial approval. Set timezone-aware ISO `scheduled_at`, e.g. `2026-11-19T13:00:00+05:30`.
 5. Run dry-run and validate Meta token scopes/expiry privately; then set GitHub repository **variable** `SOCIAL_PUBLISH_ENABLED=true` and merge into the default branch. The scheduled workflow will only start after merge and enablement.
 
-## Proposed posting slots, India time
+## Six daily publishing slots (Asia/Kolkata)
 
-| Channel | Default | Action |
+The owner has selected **six distinct posts per day**, at exactly 4-hour intervals:
+
+| Slot | IST | Run behavior |
 |---|---|---|
-| Facebook | 13:00 | Auto-post approved full-lesson image |
-| Instagram | 19:30 | Create manual posting issue, choose music in app |
-| Threads | 20:15 | Auto-post approved text or single image |
+| 1 | 04:00 AM | Process approved Facebook/Threads posts; create Instagram manual music task |
+| 2 | 08:00 AM | Same |
+| 3 | 12:00 PM | Same |
+| 4 | 04:00 PM | Same |
+| 5 | 08:00 PM | Same |
+| 6 | 12:00 AM (midnight) | Same — **this belongs to the next calendar day** |
 
-Scheduled GitHub Actions may start a little late. A due job is only accepted in a 36-hour window. All timestamps include `+05:30`.
+Cron uses `30 2,6,10,14,18,22 * * *` in UTC, corresponding to **08:00, 12:00, 16:00, 20:00, 00:00, 04:00 IST** every day. The order wraps across midnight; the code uses explicit timezone-aware dates for each post.
+
+Each slot needs a unique fact-checked, approved topic; 6 topic packages/day are potentially **24 Instagram slide images + 6 Facebook images + 6 Threads images**. Editorial review and hosted images must be prepared **before** the planned publishing time. All platform captions must include `https://klarweg.in` (enforced by code). No approved post = no action.
+
+**Instagram is manual:** the agent creates an issue with four slides, caption and a reminder to add licensed music; it cannot guarantee Instagram publication at the scheduled instant. Facebook and Threads are eligible for automatic publication only after separate approval and credentials are configured.
+
+GitHub scheduled jobs are best-effort and **may start late or occasionally be dropped**; there is no guaranteed exact-to-the-minute publication. A due job is accepted in a 36-hour window. All `scheduled_at` timestamps include `+05:30`.
 
 ## Local checks
 

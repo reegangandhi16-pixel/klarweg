@@ -1,10 +1,9 @@
 name: Klarweg Social Agent
 on:
   schedule:
-    # Asia/Kolkata (UTC+05:30): FB 13:00, IG manual 19:30, Threads 20:15.
-    - cron: '30 7 * * *'
-    - cron: '0 14 * * *'
-    - cron: '45 14 * * *'
+    # Six IST slots every day: 00:00, 04:00, 08:00, 12:00, 16:00, 20:00.
+    # UTC hours correspond to IST +05:30; :30 UTC avoids top-of-hour load.
+    - cron: '30 2,6,10,14,18,22 * * *'
   workflow_dispatch:
     inputs:
       dry_run:

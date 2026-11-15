@@ -16,3 +16,13 @@ test('only approved, due, not previously attempted',()=>{
   assert.deepEqual(dueJobs(q,{'a:facebook':{state:'attempted'}},at),[]);
   q.posts[0].status='draft';assert.equal(dueJobs(q,{},at).length,0);
 });
+
+test('six four-hour IST slots process independently across midnight',()=>{
+  const slots=['2026-11-17T04:00:00+05:30','2026-11-17T08:00:00+05:30','2026-11-17T12:00:00+05:30','2026-11-17T16:00:00+05:30','2026-11-17T20:00:00+05:30','2026-11-18T00:00:00+05:30'];
+  const posts=slots.map((time,i)=>({id:'slot-'+(i+1),status:'approved',facebook:{approved:true,scheduled_at:time}}));
+  for(let i=0;i<slots.length;i++){
+    const clock=new Date(new Date(slots[i]).getTime()+60*1000);
+    const ledger=Object.fromEntries(slots.slice(0,i).map((_,j)=>['slot-'+(j+1)+':facebook',{state:'published'}]));
+    assert.deepEqual(dueJobs({posts},ledger,clock).map(x=>x.key),['slot-'+(i+1)+':facebook']);
+  }
+});

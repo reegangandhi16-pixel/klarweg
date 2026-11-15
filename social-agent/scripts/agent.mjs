@@ -31,7 +31,7 @@ async function publishFacebook(item){
   const page=process.env.FACEBOOK_PAGE_ID;
   if(!token||!page)throw new Error('Facebook token and Page ID are not configured');
   return post('https://graph.facebook.com/v27.0/'+encodeURIComponent(page)+'/photos',{
-    url:validateUrl(item.image_url),message:withWebsite(item.caption),published:'true'
+    url:validateUrl(item.image_url),caption:withWebsite(item.caption),published:'true'
   },token);
 }
 async function publishThreads(item){

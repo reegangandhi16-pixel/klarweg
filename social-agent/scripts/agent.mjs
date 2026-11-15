@@ -44,7 +44,20 @@ async function publishThreads(item){
   if(type==='IMAGE')payload.image_url=validateUrl(item.image_url);
   const created=await post('https://graph.threads.net/v1.0/me/threads',payload,token);
   if(!created.id)throw new Error('Threads container ID missing');
-  if(type==='IMAGE')await sleep(15000);
+  if(type==='IMAGE'){
+    // Threads media is asynchronous. Confirm FINISHED before the irreversible publish call.
+    let ready=false;
+    for(let attempt=0;attempt<10;attempt++){
+      await sleep(5000);
+      const r=await fetch('https://graph.threads.net/v1.0/'+encodeURIComponent(created.id)+'?fields=status',{
+        headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)});
+      const state=await r.json().catch(()=>({}));
+      if(!r.ok||state.error)throw new Error('Threads container status check failed: '+(state.error?.message||r.status));
+      if(state.status==='FINISHED'){ready=true;break;}
+      if(state.status==='ERROR'||state.status==='EXPIRED')throw new Error('Threads container '+state.status);
+    }
+    if(!ready)throw new Error('Threads image container was not ready after 50 seconds; requires manual review');
+  }
   const result=await post('https://graph.threads.net/v1.0/me/threads_publish',{creation_id:created.id},token);
   return {id:result.id,container_id:created.id};
 }

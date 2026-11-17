@@ -50,6 +50,10 @@ const ALLOWLIST = path.join(ROOT, ".github/pages-allowlist.txt");
 const PROJ = path.join(STORE, "project");
 const QA_LOG = path.join(STORE, "qa.jsonl");
 const MAX_ATTEMPTS = 3;
+/* Owner-approved per-word exceptions (store/extra-attempts.json: {"key": maxAttempts}),
+   e.g. 2026-11-17: the 141 words exhausted at 3 attempts may use up to 5. */
+const EXTRA_ATTEMPTS = (() => { try { return JSON.parse(fs.readFileSync(path.join(STORE, "extra-attempts.json"), "utf8")); } catch { return {}; } })();
+const maxAttemptsFor = (key) => Number(EXTRA_ATTEMPTS[key]) || MAX_ATTEMPTS;
 const WIDTHS = [400, 800];
 const FORMATS = ["avif", "webp"];
 const IMAGE_MODEL = process.env.IMAGE_MODEL || "gemini-2.5-flash-image";
@@ -169,7 +173,7 @@ function pickWork(level, limit) {
     if (level && !it.audience.some((u) => u.level === level)) continue;
     const x = st.get(it.key);
     if (x.inflight || x.accepted || x.needsQa.length) continue;          // never pay twice; QA first
-    if (x.billed >= MAX_ATTEMPTS) continue;
+    if (x.billed >= maxAttemptsFor(it.key)) continue;
     const attempt = x.attempts + 1;
     const fix = x.lastFail ? ` Important correction from review of an earlier attempt: ${x.lastFail.reason}.` : "";
     want.push({ it, attempt, prompt: it.prompt.replace(" The cream background", fix + " The cream background") });
@@ -502,7 +506,7 @@ function status() {
   const items = queue(); const st = state();
   const todo = items.filter((x) => x.status === "todo");
   const acc = todo.filter((x) => st.get(x.key).accepted).length;
-  const exhausted = todo.filter((x) => { const s = st.get(x.key); return !s.accepted && !s.inflight && !s.needsQa.length && s.billed >= MAX_ATTEMPTS; }).length;
+  const exhausted = todo.filter((x) => { const s = st.get(x.key); return !s.accepted && !s.inflight && !s.needsQa.length && s.billed >= maxAttemptsFor(x.key); }).length;
   const gen = rows().filter((r) => r.batch === "gen" && r.status === "ok").length;
   const qaFails = readJsonl(QA_LOG).filter((q) => !q.pass).length;
   console.log(JSON.stringify({ todo: todo.length, accepted: acc, exhausted, inflight: todo.filter((x) => st.get(x.key).inflight).length, needsQa: todo.reduce((a, x) => a + st.get(x.key).needsQa.length, 0), imagesGenerated: gen, qaFails, committedUsd: committedUsd(), listUsd: listUsd() }));

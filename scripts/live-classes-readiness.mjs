@@ -284,8 +284,12 @@ export function launchBlockers(D, root = ROOT) {
   if (!published(D.teachers).length) b.push('No published teacher profile.');
   if (!published(D.courses).length) b.push('No published live course.');
   const page = read(root, 'live-classes.html');
+  // every fee a meta description names must be a current one: the
+  // consultation fee or the fee of a published course (never a stale or
+  // invented amount)
+  const fees = [D.consultation?.feeLabel, ...published(D.courses).map((k) => k.priceLabel)].filter(Boolean);
   for (const m of page.matchAll(/<meta (?:name="description"|property="og:description") content="([^"]*)"/g)) {
-    if (/₹\s?\d/.test(m[1]) && !m[1].includes(D.consultation?.feeLabel)) b.push(`A meta description still names a different fee than consultation.feeLabel: "${m[1].slice(0, 60)}…".`);
+    for (const f of m[1].match(/₹\s?\d+(?:,\d{3})*/g) || []) if (!fees.includes(f)) b.push(`A meta description names ${f}, which is neither consultation.feeLabel nor a published course fee: "${m[1].slice(0, 60)}…".`);
   }
   const index = read(root, 'index.html');
   // a level range in the meta descriptions must be covered by what is published

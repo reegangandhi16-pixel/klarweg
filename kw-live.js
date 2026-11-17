@@ -66,7 +66,15 @@
   var sample = null;
   function draftFlag(x) { return x.draft ? '<span class="draft-flag">Draft</span>' : ''; }
 
-  var teachers = visible(D.teachers);
+  /* What the page shows (D.display, owner 2026-11-17): name-only
+     ("listed") teachers stay in the data but are off the page unless
+     display.listedTeachers is true; credentials (experience, German
+     level, qualifications, Goethe certificates) show only when
+     display.teacherCredentials is true. */
+  var DISPLAY = D.display || {};
+  var SHOW_LISTED = DISPLAY.listedTeachers === true;
+  var SHOW_CREDENTIALS = DISPLAY.teacherCredentials === true;
+  var teachers = visible(D.teachers).filter(function (t) { return SHOW_LISTED || t.tier !== 'listed'; });
   var courses = visible(D.courses);
   var quotes = visible(D.testimonials);
   var teacherById = {};
@@ -126,6 +134,16 @@
       if (el && has(txt)) el.textContent = txt;
     });
 
+    /* Facts about the flagship (first published) course, wherever the
+       page repeats them (hero rail, comparison, FAQ, sticky bar): read
+       from the data, so the page never states a fee or term the data
+       file does not. */
+    var flagship = courses.filter(function (x) { return !x.draft; })[0];
+    document.querySelectorAll('[data-course-field]').forEach(function (el) {
+      var v = flagship && flagship[el.getAttribute('data-course-field')];
+      if (has(v)) el.textContent = Array.isArray(v) ? v.join(', ') : v;
+    });
+
     /* Self-paced price, from the real product catalog. */
     var P = window.KWProducts;
     var sp = document.querySelector('[data-selfpaced-price]');
@@ -157,10 +175,11 @@
     if (teachers.length === 1) document.querySelectorAll('[data-one-text]').forEach(function (el) {
       swapCopy(el, el.getAttribute('data-one-text'), el.getAttribute('data-one-href'));
     });
-    /* The hero names only the levels actually covered by the teachers and
-       courses on the page, never a blanket A1–C2. */
+    /* The hero names only the levels of the live courses on the page,
+       never a blanket A1–C2. */
+    /* Courses only: a teacher's wider range is not a live course on offer. */
     var lv = [];
-    teachers.concat(courses).forEach(function (x) { (x.levels || []).forEach(function (l) { if (lv.indexOf(l) < 0) lv.push(l); }); });
+    courses.forEach(function (x) { (x.levels || []).forEach(function (l) { if (lv.indexOf(l) < 0) lv.push(l); }); });
     lv = LEVELS.filter(function (l) { return lv.indexOf(l) > -1; });
     var contiguous = lv.length && LEVELS.indexOf(lv[lv.length - 1]) - LEVELS.indexOf(lv[0]) === lv.length - 1;
     document.querySelectorAll('[data-live-levels]').forEach(function (el) {
@@ -227,11 +246,11 @@
     var isListed = listed(t);
     var facts = [];
     if (!isListed) {
-      if (has(t.experience)) facts.push(t.experience);
-      if (has(t.proficiency)) facts.push('German: ' + t.proficiency);
+      if (SHOW_CREDENTIALS && has(t.experience)) facts.push(t.experience);
+      if (SHOW_CREDENTIALS && has(t.proficiency)) facts.push('German: ' + t.proficiency);
       if (has(t.teachesIn)) facts.push('Teaches in ' + t.teachesIn.join(', '));
       if (has(t.formats)) facts.push(t.formats.join(' · '));
-      if (has(t.goethe)) facts.push('Goethe: ' + t.goethe.join(', '));
+      if (SHOW_CREDENTIALS && has(t.goethe)) facts.push('Goethe: ' + t.goethe.join(', '));
     }
     return '<article class="t-card t-row' + (isListed ? ' t-listed' : '') + '" aria-labelledby="tn-' + esc(t.id) + '">'
       + avatar(t)
@@ -251,15 +270,57 @@
       + '</div></article>';
   }
 
+  /* One published teacher: an editorial feature instead of a one-row
+     directory. Photo and video show only when the data has them; until
+     then the frame says plainly that none is published. Ratings appear
+     only once genuine reviews exist. */
+  function featureHtml(t) {
+    var r = reviewSummary(D.reviews, t.id);
+    var dl = '<dl class="tf-facts">'
+      + row('Teaches in', (t.teachesIn || []).join(' and '))
+      + row('Levels taught', (t.levels || []).join(', '))
+      + row('Focus', t.specialisms)
+      + row('Exam preparation', t.examPrep)
+      + row('Formats', (t.formats || []).join(' · '))
+      + (SHOW_CREDENTIALS ? row('Experience', t.experience) + row('German proficiency', t.proficiency) + row('Goethe certificates', t.goethe) : '')
+      + (r ? row('Reviews', reviewText(t)) : '')
+      + '</dl>';
+    return '<article class="t-feature" aria-labelledby="tn-' + esc(t.id) + '">'
+      + '<figure class="tf-portrait">'
+      + (t.photo
+        ? '<img src="' + esc(t.photo) + '" alt="' + esc(t.photoAlt || ('Portrait of ' + t.name)) + '" loading="lazy" decoding="async" width="800" height="1000">'
+        : '<div class="tf-mono" aria-hidden="true"><span>' + esc(initials(t)) + '</span></div>')
+      + (t.photo ? '' : '<figcaption>No teacher photo has been published yet.</figcaption>')
+      + '</figure>'
+      + '<div class="tf-body">'
+      + '<p class="eyebrow">Your teacher for ' + esc(courses.filter(function (c) { return (c.teacherIds || []).indexOf(t.id) > -1; }).map(function (c) { return (c.levels || []).join('–'); }).join(', ') || 'live classes') + '</p>'
+      + '<h3 class="tf-name t-name" id="tn-' + esc(t.id) + '">' + esc(t.name) + draftFlag(t) + '</h3>'
+      + (has(t.headline) ? '<p class="tf-headline">' + esc(t.headline) + '</p>' : '')
+      + (has(t.approach) ? '<blockquote class="tf-quote"><p>' + esc(t.approach) + '</p><p class="tf-cite">Teaching approach, in ' + esc(t.name.split(' ')[0]) + '’s words</p></blockquote>' : '')
+      + dl
+      + (t.video ? '' : '<p class="tf-video"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="3.5" width="9" height="9" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 7 14.5 4.5v7L10.5 9" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>No introduction video has been published yet.</p>')
+      + '</div></article>';
+  }
+
   function renderTeachers() {
     var grid = $('teacher-grid');
     if (!grid) return;
+    if (teachers.length === 1) {
+      document.querySelectorAll('#teachers .filters').forEach(function (f) { f.hidden = true; });
+      if ($('t-count')) $('t-count').textContent = '';
+      grid.classList.add('single', 'featured');
+      grid.innerHTML = featureHtml(teachers[0]);
+      return;
+    }
+    grid.classList.remove('featured');
+    /* several profiles: directory copy instead of the single-teacher heading */
+    if (teachers.length > 1 && $('teachers-h')) $('teachers-h').textContent = 'Find the teacher who fits your goal.';
     if (!teachers.length) {
       grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><h3>Teacher profiles are being finalised</h3>'
         + (BOOK_ON
           ? '<p>We publish a profile only once the teacher’s qualifications are confirmed. You can still book a consultation now and we’ll match you with a suitable teacher.</p>'
             + '<a href="#book" class="btn btn-live">Book a consultation ' + ARROW + '</a></div>'
-          : '<p>We publish a profile only once the teacher’s qualifications are confirmed. Join the free waitlist and we’ll tell you when a suitable course opens.</p>'
+          : '<p>We publish a profile only once the teacher’s qualifications are confirmed. You can still join the free waitlist for the A1 course.</p>'
             + '<a href="#book" class="btn btn-live" data-request="interest">Join the waitlist ' + ARROW + '</a></div>');
       $('t-count').textContent = '';
       document.querySelectorAll('#teachers .filters').forEach(function (f) { f.hidden = true; });
@@ -273,7 +334,7 @@
     var list = byAvailability(teachers).filter(function (t) {
       if (tFilter.level && (t.levels || []).indexOf(tFilter.level) < 0) return false;
       if (tFilter.lang && (t.teachesIn || []).indexOf(tFilter.lang) < 0) return false;
-      if (tFilter.exam && !has(t.goethe) && !has(t.examPrep)) return false;
+      if (tFilter.exam && !(SHOW_CREDENTIALS && has(t.goethe)) && !has(t.examPrep)) return false;
       return true;
     });
     $('t-count').textContent = list.length === teachers.length
@@ -281,7 +342,7 @@
       : list.length + ' of ' + teachers.length + ' teachers match';
     grid.innerHTML = list.length ? list.map(teacherCard).join('')
       : '<div class="empty-state" style="grid-column:1/-1"><h3>No teacher matches these filters</h3>'
-        + '<p>Try a different level or language, or tell us your goal in a consultation request and we’ll find the right teacher.</p>'
+        + '<p>Try a different level or language, or join the waitlist and tell us your goal in the form.</p>'
         + '<button type="button" class="btn btn-secondary" id="t-reset">Clear filters</button></div>';
   }
 
@@ -310,7 +371,7 @@
       });
     });
     var exam = $('t-exam');
-    if (exam && !teachers.some(function (t) { return has(t.goethe) || has(t.examPrep); })) exam.closest('.filter-group').hidden = true;
+    if (exam && !teachers.some(function (t) { return (SHOW_CREDENTIALS && has(t.goethe)) || has(t.examPrep); })) exam.closest('.filter-group').hidden = true;
     if (exam) exam.addEventListener('click', function () {
       tFilter.exam = !tFilter.exam;
       exam.setAttribute('aria-pressed', tFilter.exam ? 'true' : 'false');
@@ -353,11 +414,11 @@
       + (has(t.levels) ? levelRow(t.levels) : '')
       + (has(t.approach) ? '<div class="approach"><strong>Teaching approach</strong>' + esc(t.approach) + '</div>' : '')
       + '<dl class="profile-dl">'
-      + row('Experience', t.experience)
-      + row('German proficiency', t.proficiency)
-      // a certificate listed under both shows once, under Goethe certificates
-      + row('Qualifications', (t.qualifications || []).filter(function (x) { return (t.goethe || []).indexOf(x) < 0; }))
-      + row('Goethe certificates', t.goethe)
+      + (SHOW_CREDENTIALS ? row('Experience', t.experience)
+        + row('German proficiency', t.proficiency)
+        // a certificate listed under both shows once, under Goethe certificates
+        + row('Qualifications', (t.qualifications || []).filter(function (x) { return (t.goethe || []).indexOf(x) < 0; }))
+        + row('Goethe certificates', t.goethe) : '')
       + row('Levels taught', (t.levels || []).join(', '))
       + row('Teaches in', (t.teachesIn || []).join(', '))
       + row('Specialisms', t.specialisms)
@@ -464,7 +525,7 @@
       + (ENROL_ON && c.enrolment === 'open' && !c.draft
         /* Online enrolment (kw-enrol.js): pay the fee on this page; the place is confirmed only by the Worker's verified payment. */
         ? '<a href="#enrol" class="btn btn-live" data-enrol-course="' + esc(c.id) + '">Enrol and pay online ' + ARROW + '</a>'
-        : '<a href="#book" class="btn ' + (c.enrolment === 'open' ? 'btn-live' : 'btn-secondary') + '" data-book-course="' + esc(c.id) + '">' + esc(st.cta) + ' ' + ARROW + '</a>')
+        : '<a href="#book" class="btn ' + (c.enrolment === 'open' || courses.length === 1 ? 'btn-live' : 'btn-secondary') + '" data-book-course="' + esc(c.id) + '">' + esc(st.cta) + ' ' + ARROW + '</a>')
       + '</article>';
   }
 

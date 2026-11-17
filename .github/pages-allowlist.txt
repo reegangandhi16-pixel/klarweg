@@ -109,6 +109,7 @@ kw-progress-sync.js
 kw-nav-auth.js
 kw-ai-chat.js
 kw-live.js
+kw-live-experience.js
 live-classes-data.js
 site.css
 site.js

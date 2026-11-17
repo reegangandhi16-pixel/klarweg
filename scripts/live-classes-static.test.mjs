@@ -252,7 +252,9 @@ test('LIVE LEGAL: Terms, Privacy and Refund Policy disclose the live service as 
 test('LIVE: the request form is the free course waitlist only; a consultation is never requested by email', () => {
   assert.equal(/name="rtype"/.test(html), false, 'no consultation-or-interest choice');
   assert.match(html, /<h3 id="form-title">Join the course waitlist<\/h3>/);
-  assert.match(html, /Free, and not a booking: we tell you when a suitable course opens\. Nothing is charged\./);
+  assert.match(html, /Free, and not a booking\. Nothing is charged\./);
+  // no reply-time or notification promise while the waitlist is a plain email (owner, 2026-11-17)
+  assert.equal(/we tell you when|we reply within|within two working days/i.test(html.slice(html.indexOf('<body'))), false, 'the page promises no reply or notification it has no backend for');
   assert.equal(/arrange my consultation|Request a consultation by email|We then reply with a time slot and payment details/.test(html), false, 'no email booking or emailed payment details');
   const js = read('kw-live.js');
   assert.match(js, /'Live course interest \(no consultation requested, nothing to pay\)',/);
@@ -436,7 +438,10 @@ test('LIVE GATE: the gate clears once every blocker is resolved (so it can actua
     D.courses[0].enrolment = 'open';
     assert.ok(launchBlockers(D, dir).some((b) => /terms\.html says live-course enrolment is not open/.test(b)), 'the Terms must not contradict an open course');
     D.courses[0].enrolment = 'not-open';
-    D.consultation.feeLabel = '₹150';
-    assert.ok(launchBlockers(D, dir).some((b) => /meta description/.test(b)), 'a changed fee with stale meta descriptions is a blocker');
+    D.courses[0].priceLabel = '₹8,499';
+    assert.ok(launchBlockers(D, dir).some((b) => /meta description/.test(b)), 'a changed course fee with stale meta descriptions is a blocker');
+    D.courses[0].priceLabel = loadData().courses[0].priceLabel;
+    fs.writeFileSync(path.join(dir, 'live-classes.html'), meta('A consultation costs ₹150.'));
+    assert.ok(launchBlockers(D, dir).some((b) => /meta description names ₹150/.test(b)), 'an amount that is neither the consultation nor a published course fee is a blocker');
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });

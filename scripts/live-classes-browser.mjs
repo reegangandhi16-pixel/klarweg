@@ -102,7 +102,7 @@ function ok(name, cond, info = '') {
 const server = await startServer();
 const PORT = server.address().port;
 const b = await browser();
-const watchdog = setTimeout(() => { console.log(`[live-e2e] WATCHDOG: stopped after ${results.length} checks`); b.close(); process.exit(2); }, 240000);
+const watchdog = setTimeout(() => { console.log(`[live-e2e] WATCHDOG: stopped after ${results.length} checks`); b.close(); process.exit(2); }, 480000);
 
 const pageErrors = []; const offHost = new Set(); const offReq = new Map(); const offLoaded = new Set();
 b.handlers.push(async (msg) => {
@@ -142,9 +142,11 @@ const R = `http://${ALIAS}:${PORT}/live-classes.html`;
    teacher doesn't break the checks. Every draft teacher's name joins the
    leak pattern: a real person's draft profile must never reach a deployed host. */
 const LIVE = (() => { const ctx = { window: {} }; vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'live-classes-data.js'), 'utf8'), ctx); return ctx.window.KWLive; })();
-const N_T = LIVE.teachers.length;
-const N_B1 = LIVE.teachers.filter((t) => (t.levels || []).includes('B1')).length;
-const N_B1_DE = LIVE.teachers.filter((t) => (t.levels || []).includes('B1') && (t.teachesIn || []).includes('German')).length;
+/* Name-only ('listed') teachers stay in the data but are never rendered (display.listedTeachers false). */
+const RENDERED = LIVE.teachers.filter((t) => LIVE.display.listedTeachers || t.tier !== 'listed');
+const N_T = RENDERED.length;
+const N_B1 = RENDERED.filter((t) => (t.levels || []).includes('B1')).length;
+const N_B1_DE = RENDERED.filter((t) => (t.levels || []).includes('B1') && (t.teachesIn || []).includes('German')).length;
 const NAMED_DRAFT = LIVE.teachers.find((t) => t.draft && !/^\[/.test(t.name));
 const reEsc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const DRAFT_NAMES = LIVE.teachers.filter((t) => t.draft && !/^\[/.test(t.name)).map((t) => reEsc(t.name));
@@ -196,40 +198,39 @@ try {
     await load(L, { width: w, mobile: mob });
     ok(`A${w} no draft text in DOM or options`, (await q(draftLeak)) === null, await q(draftLeak));
     ok(`A${w} draft banner hidden`, await q('document.getElementById("draft-banner").hidden'));
-    ok(`A${w} the owner first (full profile), then every listed teacher in the owner's order, with filters and a count`, (await q(cardNames('.t-card'))) === SHOWN.map((t) => t.name).join('|')
-      && await q('!document.querySelector(".t-card").classList.contains("t-listed") && document.querySelectorAll(".t-card:not(.t-listed)").length===1 && !document.getElementById("teacher-grid").classList.contains("single") && !document.querySelector("#teachers .filters").hidden')
-      && (await q('document.getElementById("t-count").textContent')) === SHOWN.length + ' teachers', await q(cardNames('.t-card')));
-    ok(`A${w} listed cards: name, "German Language Teacher", "No reviews yet", stated levels only, no action`, (await q(listedOk)) === listedWant, await q(listedOk));
-    ok(`A${w} each row shows its A1 course fee from coursePricing`, (await q('[...document.querySelectorAll(".t-card")].map(c=>c.querySelector(".t-price-label").textContent+" "+c.querySelector(".t-price-value").textContent).join("|")')) === SHOWN.map((t) => LIVE.coursePricing.label + ' ' + LIVE.coursePricing.teachers[t.id]).join('|'));
-    ok(`A${w} rows: full width, subtle neutral rules between them, no card boxes, on the warm canvas`, await q('(()=>{const g=document.getElementById("teacher-grid"),gr=g.getBoundingClientRect(),rows=[...g.querySelectorAll(".t-card")];return rows.every(r=>{const b=r.getBoundingClientRect(),cs=getComputedStyle(r);return Math.abs(b.width-gr.width)<2&&cs.borderBottomWidth==="1px"&&cs.borderBottomColor==="rgba(14, 14, 16, 0.09)"&&cs.borderLeftWidth==="0px"&&cs.backgroundColor==="rgba(0, 0, 0, 0)"})&&getComputedStyle(document.body).backgroundColor==="rgb(250, 250, 247)"})()'));
-    ok(`A${w} monogram avatars (no photo is approved), warm neutral surfaces with ink initials`, await q('[...document.querySelectorAll(".t-avatar")].every(a=>!a.querySelector("img")&&/^[A-Z]{2}$/.test(a.textContent)&&getComputedStyle(a).backgroundColor==="rgb(244, 243, 238)"&&getComputedStyle(a).color==="rgb(14, 14, 16)")'));
-    ok(`A${w} no sample rating on the page (the switch is off)`, await q('!document.querySelector(".t-sample,.sample-flag") && !document.querySelector("script[src*=sample-data]")'));
-    ok(`A${w} no experience, rating or booking claim on any listed card`, !/years|★|rating|book|available|consult/i.test(await q('[...document.querySelectorAll(".t-listed")].map(c=>c.innerText).join(" ")')));
+    ok(`A${w} one published teacher: an editorial feature (no directory, filters or count)`, (await q('[...document.querySelectorAll(".t-feature .t-name")].map(n=>n.textContent).join("|")')) === OWNER.name
+      && await q('document.getElementById("teacher-grid").classList.contains("featured") && document.querySelectorAll(".t-card").length===0 && [...document.querySelectorAll("#teachers .filters")].every(f=>f.hidden) && document.getElementById("t-count").textContent===""'));
+    ok(`A${w} name-only (listed) teachers are not on the page, though they stay in the data (owner, 2026-11-17)`, LISTED.length > 0 && !(await q(`(()=>{const t=document.body.innerText+' '+[...document.querySelectorAll('option')].map(o=>o.text).join(' ');return ${JSON.stringify(LISTED.map((t) => t.name))}.some(n=>t.includes(n))})()`)));
+    ok(`A${w} teacher credentials stay hidden until re-confirmed (display.teacherCredentials is false)`, LIVE.display.teacherCredentials === false
+      && !(await q(`(()=>{const t=document.body.innerText;return ${JSON.stringify([OWNER.experience, ...OWNER.goethe, ...OWNER.qualifications, 'German proficiency', 'German: ' + OWNER.proficiency])}.some(x=>t.includes(x))})()`)));
+    ok(`A${w} no teacher fee row, rating line or availability label on the feature (no genuine reviews exist)`, await q('!document.querySelector(".t-feature .t-price,.t-feature .t-reviews,.t-avail,.t-sample,.sample-flag") && !document.querySelector("script[src*=sample-data]")'));
+    ok(`A${w} the portrait frame says plainly that no photo or video is published (none is approved)`, await q('(()=>{const f=document.querySelector(".t-feature");return !f.querySelector("img")&&f.querySelector(".tf-mono").textContent==="RG"&&/No teacher photo has been published yet\\./.test(f.innerText)&&/No introduction video has been published yet\\./.test(f.innerText)})()'));
+    ok(`A${w} the feature shows the confirmed teaching facts and approach`, await q(`(()=>{const t=document.querySelector(".t-feature").innerText;return ${JSON.stringify([OWNER.headline, OWNER.approach, ...OWNER.specialisms, OWNER.examPrep])}.every(x=>t.includes(x))})()`));
     ok(`A${w} exactly one course card: Beginner German · A1, no filters or count`, (await q('[...document.querySelectorAll(".c-card h3")].map(h=>h.textContent).join("|")')) === A1.title
       && await q('[...document.querySelectorAll("#courses .filters")].every(f=>f.hidden&&f.offsetParent===null) && document.getElementById("c-count").textContent===""'));
     ok(`A${w} no other (draft) course in the catalogue or the form`, !(await q(`(()=>{const t=document.getElementById("course-grid").innerText+' '+[...document.querySelectorAll('option')].map(o=>o.text).join(' ');return ${JSON.stringify(OTHER_TITLES)}.some(x=>t.includes(x))})()`)));
     const card = await q('document.querySelector(".c-card").innerText');
     ok(`A${w} the A1 card: approved fee, terms and schedule, "Waitlist", next batch to be announced`, [A1.priceLabel, A1.paymentTerms, A1.frequency, A1.sessionLength, A1.totalDuration, A1.batchSize, 'Waitlist'].every((x) => card.includes(x)) && /to be announced[\s\S]*next batch/i.test(card), card);
     ok(`A${w} the A1 card says the start date is to be announced and the waitlist is free and not a booking`, card.includes('The start date is still to be announced. Enrolment is not open yet. Joining the waitlist is free and is not a booking: nothing is charged.'));
-    ok(`A${w} the A1 CTA is "Join the waitlist" (secondary), never an enrol or pay button`, (await q('(()=>{const a=document.querySelector("[data-book-course=live-a1]");return a.textContent.trim().startsWith("Join the waitlist")&&a.classList.contains("btn-secondary")&&a.getAttribute("href")==="#book"})()'))
+    ok(`A${w} the A1 card CTA is "Join the waitlist" (the flagship, green), never an enrol or pay button`, (await q('(()=>{const a=document.querySelector(".c-card [data-book-course=live-a1]");return a.textContent.trim().startsWith("Join the waitlist")&&a.classList.contains("btn-live")&&a.getAttribute("href")==="#book"})()'))
       && !/enrol now|pay now|buy now|book your (?:seat|place)/i.test(await q('document.body.innerText')));
     ok(`A${w} testimonials hidden`, await q('document.getElementById("quotes").hidden'));
     ok(`A${w} form selects offer only the published teacher and course`, (await q('[...document.getElementById("bf-teacher").options].map(o=>o.value).join("|")')) === '|reegan-gandhi'
       && (await q('[...document.getElementById("bf-course").options].map(o=>o.value).join("|")')) === '|live-a1', await q('[...document.getElementById("bf-course").options].map(o=>o.value).join("|")'));
     ok(`A${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
-    ok(`A${w} hero CTAs lead to the teacher and the course`,
-      (await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")')) === '#teachers Explore our teachers | #courses Explore live courses',
+    ok(`A${w} hero CTAs: the free A1 waitlist, then how a class works`,
+      (await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")')) === '#book Join the free A1 waitlist | #how See how a class works',
       await q('[...document.querySelectorAll(".live-hero .hero-ctas a")].map(a=>a.getAttribute("href")+" "+a.textContent.trim()).join(" | ")'));
     ok(`A${w} primary hero CTA keeps its arrow`, await q('!!document.querySelector(".live-hero .btn-live .btn-arrow")'));
     ok(`A${w} accessibility audit: names, labels, unique ids, heading order`, (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
-    ok(`A${w} hero level range comes from what is published`, (await q('document.querySelector("[data-live-levels]").textContent')) === ' · ' + OWNER.levels[0] + ' → ' + OWNER.levels.at(-1), await q('document.querySelector("[data-live-levels]").textContent'));
+    ok(`A${w} hero level range comes from the published courses only`, (await q('document.querySelector("[data-live-levels]").textContent')) === ' · A1', await q('document.querySelector("[data-live-levels]").textContent'));
     const jA = await q(jsonld);
     ok(`A${w} structured data: FAQPage matches, one Course with its instructor, no price or date`, !!jA && jA.faqOk && jA.courses.join() === A1.title && jA.instructors.join() === OWNER.name
       && !jA.keys.some((k) => /price|offers|startDate|courseSchedule|hasCourseInstance/i.test(k)), JSON.stringify(jA && { faqOk: jA.faqOk, courses: jA.courses, keys: jA.keys }));
     ok(`A${w} requests go to the documented address`, (await q('document.querySelector("[data-contact-email]").textContent')) === 'klarwegofficial@gmail.com');
     ok(`A${w} the four approved policies are shown in the FAQ and its structured data`, (await q(policiesShown)) && POLICY_TEXTS.every((t) => jA.text.includes(t)), await q(policiesShown));
-    ok(`A${w} booking is off: an honest "Online demo booking is not open yet" notice, no booking script or panel, no "Book a consultation" button`,
-      (await q('(()=>{const n=document.getElementById("consult-closed");return !!n&&!n.hidden&&n.offsetParent!==null&&n.querySelector("h3").textContent})()')) === 'Online demo booking is not open yet'
+    ok(`A${w} booking is off: an honest "Online consultation booking is not open yet" notice, no booking script or panel, no "Book a consultation" button`,
+      (await q('(()=>{const n=document.getElementById("consult-closed");return !!n&&!n.hidden&&n.offsetParent!==null&&n.querySelector("h3").textContent})()')) === 'Online consultation booking is not open yet'
       && await q('!document.querySelector("script[src*=kw-consult],script[src*=cashfree],#consult-online")')
       && await q('![...document.querySelectorAll("a,button")].some(a=>a.offsetParent!==null&&/book a consultation|request a consultation|^book$/i.test(a.textContent.trim()))'),
       await q('[...document.querySelectorAll("a,button")].filter(a=>a.offsetParent!==null&&/consultation|^book$/i.test(a.textContent.trim())).map(a=>a.textContent.trim()).join(" | ")'));
@@ -275,7 +276,7 @@ try {
   await q('document.querySelector(".c-card .t-link").click()'); await sleep(200);
   ok('C a teacher named on a course card opens that profile', (await q('document.getElementById("t-dialog").open')) && (await q('location.hash')) === '#teacher-' + LIVE.courses[0].teacherIds[0], await q('location.hash'));
   ok('C closing it returns focus to the course card link', await (async () => { await key('Escape', 'Escape', 27); await sleep(200); return q('document.activeElement.classList.contains("t-link")'); })());
-  ok('C with profiles, the hero and FAQ point to them', (await q('document.querySelector(".live-hero .btn-live").getAttribute("href")')) === '#teachers' && /Filter the teacher profiles/.test(await q('document.getElementById("fa3").textContent')));
+  ok('C with several profiles, the section switches to directory copy', (await q('document.getElementById("teachers-h").textContent')) === 'Find the teacher who fits your goal.');
   ok('C levels taught are text for screen readers; the strip is hidden from them', await q('(()=>{const r=document.querySelector(".t-card .lvl-row");return r.querySelector(".vh").textContent==="Levels taught: ' + LIVE.teachers[0].levels.join(', ') + '"&&[...r.querySelectorAll(".lvl")].every(x=>x.getAttribute("aria-hidden")==="true")&&!r.hasAttribute("aria-label")})()'));
   await q('document.querySelector("[data-tlevel=B1]").click()');
   ok('C level filter B1', (await q('document.querySelectorAll(".t-card").length')) === N_B1 && (await q('document.querySelector("[data-tlevel=B1]").getAttribute("aria-pressed")')) === 'true');
@@ -299,7 +300,7 @@ try {
   const DUP = LIVE.teachers.find((t) => (t.goethe || []).some((g) => (t.qualifications || []).includes(g)));
   if (DUP) {
     const cert = DUP.goethe.find((g) => DUP.qualifications.includes(g));
-    await load(L + '#teacher-' + DUP.id, { drafts: true });
+    await load(L + '#teacher-' + DUP.id, { drafts: true, edits: [['teacherCredentials: false\n', 'teacherCredentials: true\n']] });
     const dl = await q('[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ")');
     ok('C a certificate in both qualifications and goethe is shown once, under Goethe certificates',
       dl.split(cert).length - 1 === 1 && dl.includes('Goethe certificates: ' + cert), dl);
@@ -340,7 +341,7 @@ try {
     await q('(document.body.innerText.match(/.{0,30}(₹100|within 7 days|after 7 days|7-day adjust).{0,30}/i)||[""])[0]'));
   ok('C2 bound values flow inside their sentence (never a separate item of a flex row)', (await q('[...document.querySelectorAll("[data-consult-fee],[data-consult-days],[data-consult-dayadj]")].filter(e=>!e.classList.contains("fee-amt")&&/flex/.test(getComputedStyle(e.parentElement).display)).length')) === 0,
     await q('[...document.querySelectorAll("[data-consult-fee],[data-consult-days],[data-consult-dayadj]")].filter(e=>!e.classList.contains("fee-amt")&&/flex/.test(getComputedStyle(e.parentElement).display)).map(e=>e.parentElement.textContent.trim().slice(0,40)).join(" | ")'));
-  ok('C2 new fee and period shown in every bound place', (await q('[...document.querySelectorAll("[data-consult-fee]")].every(e=>e.textContent==="₹150") && document.querySelectorAll("[data-consult-fee]").length>=8 && [...document.querySelectorAll("[data-consult-days]")].every(e=>e.textContent==="10 days") && document.querySelector("[data-consult-dayadj]").textContent==="10-day"')));
+  ok('C2 new fee and period shown in every bound place', (await q('[...document.querySelectorAll("[data-consult-fee]")].every(e=>e.textContent==="₹150") && document.querySelectorAll("[data-consult-fee]").length>=2 && [...document.querySelectorAll("[data-consult-days]")].every(e=>e.textContent==="10 days") && [...document.querySelectorAll("[data-consult-dayadj]")].every(e=>e.textContent==="10-day")')));
 
   // ---- F. the launch state in detail: the committed data, no test-only edits ----
   if (OWNER) {
@@ -348,24 +349,22 @@ try {
     const lo = OWNER.levels[0], hi = OWNER.levels.at(-1);
     for (const [w, mob] of [[375, true], [1280, false]]) {
       await load(L, { edits: pub, width: w, mobile: mob });
-      ok(`F${w} served data: one full profile (the owner), the rest listed`, (await q('window.KWLive.teachers.filter(t=>!t.draft&&t.tier!=="listed").map(t=>t.id).join()')) === 'reegan-gandhi'
-        && (await q('window.KWLive.teachers.filter(t=>!t.draft&&t.tier==="listed").length')) === LISTED.length);
-      ok(`F${w} one full-profile row, then the listed rows; no draft banner`, await q('document.querySelectorAll(".t-card:not(.t-listed)").length===1 && document.querySelectorAll(".t-card").length===' + SHOWN.length + ' && document.getElementById("draft-banner").hidden'));
-      ok(`F${w} the full-profile row shows the real name and no draft or placeholder text`, (await q('document.querySelector(".t-card:not(.t-listed) .t-name").textContent')) === OWNER.name && !(await q('/Draft|\\[|Portrait pending/.test(document.querySelector(".t-card:not(.t-listed) .t-body").innerText)')));
-      ok(`F${w} directory copy, not single-teacher copy`, (await q('document.getElementById("teachers-h").textContent')) === 'Find the teacher who fits your goal.' && !/currently taught by one teacher/.test(await q('document.getElementById("fa3").textContent')));
-      ok(`F${w} the rows stack in one column, each below the previous`, await q('(()=>{const r=[...document.querySelectorAll(".t-card")].map(c=>c.getBoundingClientRect());return r.every((b,i)=>!i||b.top>=r[i-1].bottom-1)})()'));
-      ok(`F${w} hero level range comes from the published profile`, (await q('document.querySelector("[data-live-levels]").textContent')) === ' · ' + lo + ' → ' + hi, await q('document.querySelector("[data-live-levels]").textContent'));
+      ok(`F${w} served data: one full profile (the owner); the listed teachers are still in the data`, (await q('window.KWLive.teachers.filter(t=>!t.draft&&t.tier!=="listed").map(t=>t.id).join()')) === 'reegan-gandhi'
+        && (await q('window.KWLive.teachers.filter(t=>!t.draft&&t.tier==="listed").length')) === LISTED.length && LISTED.length > 0);
+      ok(`F${w} one featured profile, no directory rows; no draft banner`, await q('document.querySelectorAll(".t-feature").length===1 && document.querySelectorAll(".t-card").length===0 && document.getElementById("draft-banner").hidden'));
+      ok(`F${w} the feature shows the real name and no draft or placeholder text`, (await q('document.querySelector(".t-feature .t-name").textContent')) === OWNER.name && !(await q('/Draft|\\[|Portrait pending/.test(document.querySelector(".t-feature").innerText)')));
+      ok(`F${w} single-teacher heading`, (await q('document.getElementById("teachers-h").textContent')) === 'One teacher, one method.');
+      ok(`F${w} hero level range comes from the published course`, (await q('document.querySelector("[data-live-levels]").textContent')) === ' · A1', await q('document.querySelector("[data-live-levels]").textContent'));
       ok(`F${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
       ok(`F${w} accessibility audit in the launch state`, (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
-      ok(`F${w} avatar beside the details; the fee sits right on desktop and below the details on phones`, await q('(()=>{const c=document.querySelector(".t-card"),a=c.querySelector(".t-avatar").getBoundingClientRect(),b=c.querySelector(".t-body").getBoundingClientRect(),s=c.querySelector(".t-side").getBoundingClientRect();return b.left>=a.right-1&&(innerWidth>760?s.left>=b.right-1:s.top>=b.bottom-1)})()'));
+      ok(`F${w} portrait beside the details on desktop, above them on phones`, await q('(()=>{const p=document.querySelector(".tf-portrait").getBoundingClientRect(),b=document.querySelector(".tf-body").getBoundingClientRect();return innerWidth>900?b.left>=p.right-1:b.top>=p.bottom-1})()'));
     }
-    await q('document.querySelector(".t-card:not(.t-listed) [data-profile]").click()'); await sleep(200);
+    await load(L + '#teacher-' + OWNER.id);
     const dlF = await q('[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ")');
-    ok('F profile dialog: every confirmed field, certificate once, no placeholder', OWNER.specialisms.every((x) => dlF.includes(x)) && dlF.includes('Experience: ' + OWNER.experience) && dlF.includes('German proficiency: ' + OWNER.proficiency)
-      && dlF.split(OWNER.goethe[0]).length - 1 === 1 && !/\[/.test(dlF), dlF);
+    ok('F a deep link opens the profile dialog: confirmed fields only, no credentials, no placeholder', (await q('document.getElementById("t-dialog").open')) && OWNER.specialisms.every((x) => dlF.includes(x))
+      && !dlF.includes(OWNER.experience) && !/German proficiency|Goethe certificates|Qualifications/.test(dlF) && !/\[/.test(dlF), dlF);
     ok('F with booking off the profile CTA is the free waitlist (prefilled with the teacher), not a consultation request', /^Join the waitlist/.test(await q('document.querySelector("#t-dialog [data-book-teacher]").textContent.trim()'))
       && (await q('document.querySelector("#t-dialog [data-book-teacher]").getAttribute("data-request")')) === 'interest');
-    ok('F with booking off the full-profile row offers no consultation button', await q('!document.querySelector(".t-card [data-book-teacher]")'));
     await key('Escape', 'Escape', 27); await sleep(200);
     ok('F the form offers the published teacher by name', (await q('[...document.getElementById("bf-teacher").options].map(o=>o.text).join("|")')) === 'Help me choose|' + OWNER.name);
     const jF = await q(jsonld);
@@ -377,16 +376,17 @@ try {
     ok('F2 no price or start date is invented in the structured data', !jF2.keys.some((k) => /price|offers|startDate|courseSchedule|hasCourseInstance/i.test(k)), jF2.keys.join());
   }
 
+  let multi;
   // ---- M. several published teachers (test-only data edits: a fictional second teacher replaces the teacher-2 template) ----
   {
     const src = fs.readFileSync(path.join(ROOT, 'live-classes-data.js'), 'utf8');
     const start = src.indexOf("{\n        id: 'teacher-2',"), end = src.indexOf('\n      }', start) + '\n      }'.length;
     const two = "{ id: 'test-two', name: 'Test Teacher Two', photo: null, photoAlt: '', headline: 'Test headline', experience: '3 years of teaching German', proficiency: 'C2', qualifications: ['Test qualification'], goethe: [], levels: ['A1', 'A2'], teachesIn: ['English', 'German'], specialisms: ['Test specialism'], examPrep: null, approach: 'Test approach.', formats: ['One-to-one'], availability: null, consent: 'test', photoConsent: null, unconfirmed: [] }";
-    const multi = [[src.slice(start, end), two], ["teacherIds: ['reegan-gandhi'],", "teacherIds: ['reegan-gandhi', 'test-two'],"]];
+    multi = [[src.slice(start, end), two], ["teacherIds: ['reegan-gandhi'],", "teacherIds: ['reegan-gandhi', 'test-two'],"]];
     for (const [w, mob] of [[375, true], [1280, false]]) {
       await load(L, { edits: multi, width: w, mobile: mob });
       ok(`M${w} two teacher cards in a directory layout, with filters and a count`, await q('document.querySelectorAll("' + FULL + '").length===2 && !document.querySelector(".t-featured") && !document.getElementById("teacher-grid").classList.contains("single") && !document.querySelector("#teachers .filters").hidden')
-        && (await q('document.getElementById("t-count").textContent')) === (2 + LISTED.length) + ' teachers', await q('document.getElementById("t-count").textContent'));
+        && (await q('document.getElementById("t-count").textContent')) === 2 + ' teachers', await q('document.getElementById("t-count").textContent'));
       ok(`M${w} directory copy, not single-teacher copy`, (await q('document.getElementById("teachers-h").textContent')) === 'Find the teacher who fits your goal.');
       ok(`M${w} level chips only for levels a teacher covers`, (await q('[...document.querySelectorAll("[data-tlevel]")].filter(b=>!b.hidden&&b.offsetParent!==null).map(b=>b.textContent).join()')) === 'All,A1,A2,B1,B2',
         await q('[...document.querySelectorAll("[data-tlevel]")].filter(b=>!b.hidden&&b.offsetParent!==null).map(b=>b.textContent).join()'));
@@ -397,14 +397,14 @@ try {
       ok(`M${w} no draft or template text`, (await q(draftLeak)) === null, await q(draftLeak));
     }
     await q('document.querySelector("[data-tlevel=A2]").click()');
-    const nA2 = 2 + LISTED.filter((t) => (t.levels || []).includes('A2')).length;
-    ok('M level A2 narrows the list to the teachers who teach it', (await q(cardNames(FULL))) === OWNER.name + '|Test Teacher Two' && (await q('document.getElementById("t-count").textContent')) === nA2 + ' of ' + (2 + LISTED.length) + ' teachers match', await q('document.getElementById("t-count").textContent'));
+    const nA2 = 2;
+    ok('M level A2 narrows the list to the teachers who teach it', (await q(cardNames(FULL))) === OWNER.name + '|Test Teacher Two' && (await q('document.getElementById("t-count").textContent')) === '2 teachers', await q('document.getElementById("t-count").textContent'));
     await q('(()=>{const s=document.getElementById("t-lang");s.value="German";s.dispatchEvent(new Event("change"))})()');
-    ok('M + teaches in German leaves one teacher', (await q(cardNames('.t-card'))) === 'Test Teacher Two' && (await q('document.getElementById("t-count").textContent')) === '1 of ' + (2 + LISTED.length) + ' teachers match', await q('document.getElementById("t-count").textContent'));
+    ok('M + teaches in German leaves one teacher', (await q(cardNames('.t-card'))) === 'Test Teacher Two' && (await q('document.getElementById("t-count").textContent')) === '1 of ' + 2 + ' teachers match', await q('document.getElementById("t-count").textContent'));
     await q('document.getElementById("t-exam").click()');
     ok('M + Goethe exam prep: no match, with a reset that restores everything', await q('!!document.getElementById("t-reset")'));
     await q('document.getElementById("t-reset").click()');
-    ok('M reset shows every teacher again', (await q('document.querySelectorAll(".t-card").length')) === 2 + LISTED.length && (await q('document.querySelectorAll("' + FULL + '").length')) === 2);
+    ok('M reset shows every teacher again', (await q('document.querySelectorAll(".t-card").length')) === 2 && (await q('document.querySelectorAll("' + FULL + '").length')) === 2);
     const cardT = await q('(()=>{const d=[...document.querySelectorAll(".c-card dt")].find(x=>/^Teachers?$/.test(x.textContent));return d?d.textContent+": "+d.nextElementSibling.textContent:null})()');
     ok('M the course card names both teachers as profile links', cardT === 'Teachers: ' + OWNER.name + ', Test Teacher Two' && (await q('document.querySelectorAll(".c-card .t-link").length')) === 2, cardT);
     await q('document.querySelectorAll(".c-card .t-link")[1].focus(); document.querySelectorAll(".c-card .t-link")[1].click()'); await sleep(200);
@@ -424,33 +424,26 @@ try {
       && (await q('[...document.querySelectorAll(".t-card .t-avail")].map(a=>a.firstChild.textContent).join("|")')) === 'Available today|Currently unavailable', await q(names));
     await q('window.KWLiveUI.applyAvailability({})');
     ok('M nobody available: data order kept, every card "Currently unavailable"', (await q(names)) === OWNER.name + '|Test Teacher Two' && (await q('[...document.querySelectorAll(".t-avail")].every(a=>a.dataset.avail==="unavailable")')));
-    ok('M every card states "No reviews yet"', await q('[...document.querySelectorAll(".t-card .t-reviews")].every(r=>r.textContent==="No reviews yet") && document.querySelectorAll(".t-card .t-reviews").length===' + (2 + LISTED.length)));
+    ok('M every card states "No reviews yet"', await q('[...document.querySelectorAll(".t-card .t-reviews")].every(r=>r.textContent==="No reviews yet") && document.querySelectorAll(".t-card .t-reviews").length===' + 2));
     ok('M listed teachers never get an availability label, even when the service reports', await q('document.querySelectorAll(".t-listed .t-avail").length===0'));
   }
 
   // ---- production: the owner's full profile and the listed teachers ----
   await load(L);
-  ok('P level filter: B2 leaves the owner only; A1 adds the listed teacher whose levels are stated, never one without', await (async () => {
-    await q('document.querySelector("[data-tlevel=B2]").click()');
-    const b2 = await q(cardNames('.t-card'));
-    await q('document.querySelector("[data-tlevel=A1]").click()');
-    const a1 = await q(cardNames('.t-card'));
-    await q('document.querySelector("[data-tlevel=\'\']").click()');
-    return b2 === OWNER.name && a1 === SHOWN.filter((t) => (t.levels || []).includes('A1')).map((t) => t.name).join('|');
-  })());
   ok('P a deep link to a listed teacher opens no dialog', await (async () => { if (!LISTED.length) return true; await load(L + '#teacher-' + LISTED[0].id); return q('!document.getElementById("t-dialog").open && location.hash==="#teachers"'); })());
   await load(L);
-  ok('R every card says "No reviews yet" and shows no rating or availability label', await q('[...document.querySelectorAll(".t-card .t-reviews")].every(r=>r.textContent==="No reviews yet") && document.querySelectorAll(".t-card .t-reviews").length===' + SHOWN.length + ' && document.querySelectorAll(".t-avail").length===0'));
+  ok('R no rating, review count or availability label anywhere on the page', await q('!document.querySelector(".t-reviews,.t-avail,.sample-flag") && !/★|\\d(?:\\.\\d)? out of 5|\\d+\\+? ratings/.test(document.body.innerText)'));
   ok('R online booking is off: no booking script, panel or payment SDK loads', await q('![...document.scripts].some(s=>/kw-consult|cashfree/.test(s.src)) && !document.getElementById("consult-online") && !window.KWConsult && !window.Cashfree'));
-  ok('R the profile dialog lists "Reviews: No reviews yet"', await q('(()=>{document.querySelector("[data-profile=reegan-gandhi]").click();const t=[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ");document.getElementById("t-dialog").close();return /Reviews: No reviews yet/.test(t)})()'));
+  await load(L + '#teacher-reegan-gandhi');
+  ok('R the profile dialog lists "Reviews: No reviews yet"', await q('(()=>{const t=[...document.querySelectorAll("#t-dialog .profile-dl dt")].map(d=>d.textContent+": "+d.nextElementSibling.textContent).join(" | ");document.getElementById("t-dialog").close();return /Reviews: No reviews yet/.test(t)})()'));
   // sample ratings: a flagged local preview only; a deployed host never loads them, whatever the switch says
   const sampleOn = [['previewSampleRatings: false,', 'previewSampleRatings: true,']];
-  await load(L, { edits: sampleOn }); await sleep(400);
-  ok('S local preview with the switch on: every row shows a sample rating, each flagged "Sample data · preview only"', await q('(()=>{const r=[...document.querySelectorAll(".t-card .t-reviews")];return r.length===' + SHOWN.length + '&&r.every(x=>x.classList.contains("t-sample")&&x.querySelector(".sample-flag").textContent==="Sample data · preview only")})()'),
+  await load(L, { edits: sampleOn.concat(multi) }); await sleep(400);
+  ok('S local preview with the switch on: a sample rating appears only flagged "Sample data · preview only"', await q('(()=>{const r=[...document.querySelectorAll(".t-card .t-reviews")];const s=r.filter(x=>x.classList.contains("t-sample"));return r.length===2&&s.length>=1&&s.every(x=>x.querySelector(".sample-flag").textContent==="Sample data · preview only")&&r.filter(x=>!x.classList.contains("t-sample")).every(x=>x.textContent==="No reviews yet")})()'),
     await q('[...document.querySelectorAll(".t-card .t-reviews")].map(r=>r.textContent).join(" | ")'));
-  ok('S the sample values: 4.8 · 100+ for the first two, 3.5 for the rest', await q('(()=>{const r=[...document.querySelectorAll(".t-card .t-reviews")].map(x=>x.textContent);return r.slice(0,2).every(t=>/4\\.8 · 100\\+ ratings/.test(t))&&r.slice(2).every(t=>/3\\.5 · (?:[23]\\d|40) ratings/.test(t))})()'));
+  ok('S the owner sample value is 4.8 · 100+', await q('(()=>{const r=[...document.querySelectorAll(".t-card .t-reviews")].map(x=>x.textContent);return /4\\.8 · 100\\+ ratings/.test(r[0])})()'));
   ok('S no rating reaches structured data, even in the preview', !/ratingValue|aggregateRating|reviewCount|"Review"/.test(JSON.stringify(await q(jsonld))));
-  await load(R, { edits: sampleOn }); await sleep(400);
+  await load(R, { edits: sampleOn.concat(multi) }); await sleep(400);
   ok('S a deployed host ignores the switch: no sample script, every row "No reviews yet"', await q('!document.querySelector("script[src*=sample-data]") && !window.KWLiveSample && [...document.querySelectorAll(".t-card .t-reviews")].every(r=>r.textContent==="No reviews yet")'));
 
   // the owner switch loads the booking script (served data edited in the test only; the Worker is not reached here)
@@ -464,7 +457,7 @@ try {
     ok(`N${w} every FAQ answer is readable`, await q('[...document.querySelectorAll(".faq-a-inner")].every(a=>a.getBoundingClientRect().height>0&&a.closest(".faq-a").getBoundingClientRect().height>=a.getBoundingClientRect().height-1)'));
     ok(`N${w} no filters or form controls that would do nothing`, await q('[...document.querySelectorAll("main .filters, #consult-form")].every(e=>e.offsetParent===null)'));
     const nj = await q('(()=>{const n=document.querySelector(".nojs-request");if(!n||!n.offsetParent)return null;const a=n.querySelector("a[href^=mailto]");return {href:a&&a.getAttribute("href"),text:n.innerText}})()');
-    ok(`N${w} an email route replaces the form, to the documented address and reply time`, !!nj && nj.href === 'mailto:' + LIVE.contact.email && nj.text.includes(LIVE.contact.replyTime), JSON.stringify(nj));
+    ok(`N${w} an email route replaces the form, to the documented address, with no reply-time promise (owner, 2026-11-17)`, !!nj && nj.href === 'mailto:' + LIVE.contact.email && !nj.text.includes(LIVE.contact.replyTime) && !(await q('document.body.innerText')).includes(LIVE.contact.replyTime), JSON.stringify(nj));
     ok(`N${w} the approved policies and consultation terms are readable without JavaScript`, (await q(policiesShown)) && (await q('document.body.innerText')).includes(LIVE.consultation.cancellation));
     ok(`N${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
     const nc = await q('(()=>{const p=document.querySelector("[data-nojs-course]");return p&&p.offsetParent?p.innerText:null})()');
@@ -486,8 +479,8 @@ try {
     await load(L, { drafts: true, width: w, height: 760, mobile: true });
     ok(`D${w} no horizontal overflow`, (await q(overflow)) <= 0, await q(overflow));
     ok(`D${w} sticky CTA hidden and unfocusable at the top`, (await q('document.getElementById("sticky-book").getAttribute("aria-hidden")')) === 'true' && (await q('document.querySelector("#sticky-book a").tabIndex')) === -1);
-    await q('window.scrollTo(0, document.getElementById("how").offsetTop)'); await sleep(700);
-    ok(`D${w} sticky CTA names the fee`, /₹100 consultation/.test(await q('document.querySelector("#sticky-book strong").innerText')), await q('document.querySelector("#sticky-book strong").innerText'));
+    await q('window.scrollTo(0, document.getElementById("courses").offsetTop)'); await sleep(700);
+    ok(`D${w} sticky CTA leads with the free A1 waitlist, never the closed consultation`, /Beginner German · A1/.test(await q('document.querySelector("#sticky-book strong").innerText')) && /Free waitlist/.test(await q('document.getElementById("sticky-book").textContent')) && !/₹100|consultation/i.test(await q('document.getElementById("sticky-book").innerText')), await q('document.getElementById("sticky-book").innerText'));
     ok(`D${w} sticky CTA shown mid-page`, (await q('document.getElementById("sticky-book").classList.contains("show")')) && (await q('document.querySelector("#sticky-book a").tabIndex')) === 0);
     await q('window.scrollTo(0, document.body.scrollHeight)'); await sleep(700);
     ok(`D${w} sticky CTA hidden at the footer, aria + tab order in sync`, !(await q('document.getElementById("sticky-book").classList.contains("show")'))
@@ -495,6 +488,51 @@ try {
     await q('window.scrollTo(0,0)'); await q('document.querySelector("[data-profile=teacher-1]").click()'); await sleep(200);
     ok(`D${w} profile dialog fits the viewport`, await q('(()=>{const r=document.getElementById("t-dialog").getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+0.5&&r.height<=innerHeight+0.5})()'));
   }
+
+  // ---- X. the interactive layer (kw-live-experience.js) ----
+  for (const [w, mob] of [[390, true], [1440, false]]) {
+    await load(L, { width: w, mobile: mob });
+    const vis = (id) => `!document.getElementById("${id}").hidden`;
+    ok(`X${w} board: step 1 shown, others hidden, counter 1`, await q(`${vis('bp-1')} && document.getElementById("bp-2").hidden && document.getElementById("bp-4").hidden && document.getElementById("board-step-now").textContent==="1"`));
+    await q('document.getElementById("board-next").click()');
+    ok(`X${w} board: "Next step" moves to step 2`, await q(`${vis('bp-2')} && document.getElementById("bt-2").getAttribute("aria-selected")==="true" && document.getElementById("board-step-now").textContent==="2"`));
+    await q('document.getElementById("bt-2").focus()'); await key('End', 'End', 35);
+    ok(`X${w} board: End key selects the last tab and focuses it; the button says "Start again"`, await q(`${vis('bp-4')} && document.activeElement.id==="bt-4" && document.querySelector("#board-next span").textContent==="Start again"`));
+    await key('ArrowRight', 'ArrowRight', 39);
+    ok(`X${w} board: arrow keys wrap around`, await q('document.activeElement.id==="bt-1" && !document.getElementById("bp-1").hidden'));
+    await q('document.getElementById("bt-2").click(); document.querySelector("[data-aux=habe]").click()');
+    ok(`X${w} practice: a wrong choice is struck in the sentence and explained`, await q('document.getElementById("practice-slot").textContent==="habe" && document.getElementById("practice-slot").classList.contains("is-wrong") && !document.querySelector("#practice-feedback [data-when=wrong]").hidden && document.querySelector("#practice-feedback [data-when=right]").hidden'));
+    await q('document.querySelector("[data-aux=bin]").click()');
+    ok(`X${w} practice: the right choice is confirmed`, await q('document.getElementById("practice-slot").classList.contains("is-right") && !document.querySelector("#practice-feedback [data-when=right]").hidden && document.querySelector("[data-aux=bin]").getAttribute("aria-pressed")==="true"'));
+    await q('document.querySelector("#practice-feedback [data-when=right] [data-board-goto]").click()');
+    ok(`X${w} practice: "see the correction" opens step 3`, await q(vis('bp-3')));
+    await q('document.querySelector("[data-board-lang=hi]").click()');
+    ok(`X${w} Hindi: explanations switch to Hindi (lang="hi"), English hidden`, await q('(()=>{const b=document.getElementById("lesson-board");const hi=[...b.querySelectorAll("#bp-3 [data-l=hi]")],en=[...b.querySelectorAll("#bp-3 [data-l=en]")];return b.dataset.lang==="hi"&&hi.length>0&&hi.every(e=>e.offsetParent!==null&&e.closest("[lang=hi]"))&&en.every(e=>e.offsetParent===null)&&document.querySelector("[data-board-lang=hi]").getAttribute("aria-pressed")==="true"})()'));
+    const segOk = await q('getComputedStyle(document.getElementById("class-bar")).display!=="none"');
+    if (w > 860) {
+      await q('document.querySelectorAll("[data-seg]")[5].click()');
+      ok(`X${w} class bar: a segment shows its step in the detail panel`, segOk && /Correction/.test(await q('document.getElementById("class-detail").innerText')) && await q('document.querySelectorAll("[data-seg]")[5].getAttribute("aria-pressed")==="true" && !document.querySelector("#class-detail [id]")'));
+    } else ok(`X${w} class bar: phones get the plain step list instead`, !segOk && await q('getComputedStyle(document.getElementById("class-steps")).display!=="none"'));
+    ok(`X${w} syllabus: week 1 shown, 11 weeks hidden`, await q('!document.getElementById("wk-1").hidden && [...document.querySelectorAll(".syl-week")].filter(x=>x.hidden).length===11'));
+    await q('document.getElementById("wt-9").click()');
+    ok(`X${w} syllabus: week 9 lists the three planned sessions`, await q('!document.getElementById("wk-9").hidden && document.getElementById("wk-1").hidden && document.querySelectorAll("#wk-9 .sessions > li").length===3'));
+    ok(`X${w} syllabus: all 36 sessions are in the page`, (await q('document.querySelectorAll(".syl-week .sessions > li").length')) === 36);
+    const pick = (v) => `(()=>{const i=document.querySelector('#finder input[value="${v}"]');i.checked=true;i.dispatchEvent(new Event("change",{bubbles:true}))})()`;
+    ok(`X${w} finder: no result until all three questions are answered`, await (async () => { await q(pick('beginner')); await q(pick('goethe')); return q('document.getElementById("finder-result").hidden'); })());
+    await q(pick('yes'));
+    ok(`X${w} finder: beginner + evenings → A1 fit, A1 column highlighted`, /good fit/.test(await q('document.getElementById("finder-result").innerText')) && await q('document.querySelector("[data-road=A1]").classList.contains("is-match")'));
+    await q('document.querySelector("#finder-result [data-finder-apply]").click()'); await sleep(700);
+    ok(`X${w} finder: "with these answers" prefills the waitlist form (level, goal, evenings, A1)`, await q('document.getElementById("bf-level").value==="Complete beginner" && document.getElementById("bf-goal").value==="Goethe exam" && document.querySelector("input[name=times][value=\'Weekday evenings\']").checked && document.getElementById("bf-course").value==="live-a1" && document.getElementById("form-title").textContent==="Join the course waitlist"'));
+    await q(pick('b1')); await q(pick('nursing'));
+    ok(`X${w} finder: B1 → no live course yet, planned not scheduled, interest only`, await q('(()=>{const t=document.getElementById("finder-result").innerText;return /no live course at your level yet/i.test(t)&&/planned but not scheduled/.test(t)&&!/waitlist with these answers/i.test(t)&&document.querySelector("[data-road=B1]").classList.contains("is-match")})()'));
+    ok(`X${w} roadmap: only A1 is a live course; A2–B2 say planned, not scheduled`, (await q('[...document.querySelectorAll("[data-road] .st")].map(e=>e.textContent).join("|")')) === 'Live course · waitlist|Planned · not scheduled|Planned · not scheduled|Planned · not scheduled');
+    ok(`X${w} accessibility audit after interaction`, (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
+    ok(`X${w} no horizontal overflow after interaction`, (await q(overflow)) <= 0, await q(overflow));
+  }
+  await load(L, { nojs: true });
+  ok('X without JavaScript every board step is readable, one after another', await q('["bp-1","bp-2","bp-3","bp-4"].every(id=>{const e=document.getElementById(id);return !e.hidden&&e.getBoundingClientRect().height>0})'));
+  ok('X without JavaScript all 12 syllabus weeks and the 7 class steps are readable', await q('[...document.querySelectorAll(".syl-week")].every(e=>e.getBoundingClientRect().height>0) && [...document.querySelectorAll("#class-steps > li")].filter(e=>e.getBoundingClientRect().height>0).length===7'));
+  ok('X without JavaScript the finder and board controls are hidden (nothing that does nothing)', await q('[...document.querySelectorAll("#finder,.board-tabs,.lang-toggle,.choices,.board-foot,#syl-tabs")].every(e=>e.offsetParent===null)'));
 
   ok('no uncaught page errors', pageErrors.length === 0, pageErrors.join(' | '));
   // the page itself asks for fonts and the login state; the resolver rules must make every such request fail

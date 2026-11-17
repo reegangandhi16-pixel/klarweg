@@ -195,7 +195,7 @@ test('BOOKING: online booking is off — the page loads no booking script, says 
   const html = read('live-classes.html');
   assert.equal(/<script\b[^>]*\bsrc=["'][^"']*(?:kw-consult\.js|kw-checkout\.js|sdk\.cashfree\.com)/i.test(html), false, 'not referenced by the page itself');
   assert.match(read('kw-live.js'), /if \(!BOOK_ON\) return;/);
-  assert.match(html, /<div class="book-closed" id="consult-closed" role="note">\s*<h3>Online demo booking is not open yet<\/h3>/, 'an honest closed state, not a booking button');
+  assert.match(html, /<div class="book-closed" id="consult-closed" role="note">\s*<h3>Online consultation booking is not open yet<\/h3>/, 'an honest closed state, not a booking button');
   assert.match(html, /consultations are not booked by email/);
   assert.deepEqual([...D.consultation.steps], [
     'You sign in, then choose a teacher and a time on this page.',

@@ -35,6 +35,19 @@
        sample file is not published (not in the Pages allowlist). */
     previewSampleRatings: false,
 
+    /* What the public page shows of the data below (owner, 2026-11-17).
+       Nothing in the data is deleted by these switches.
+       - listedTeachers: false keeps the name-only teachers (tier
+         'listed') off the page; their entries stay here unchanged.
+       - teacherCredentials: false hides experience, German proficiency,
+         qualifications and Goethe certificates on every profile until
+         the owner re-confirms them for display. Levels taught, teaching
+         languages, approach, specialisms and formats still show. */
+    display: {
+      listedTeachers: false,
+      teacherCredentials: false
+    },
+
     /* The site's documented address, as on contact.html, privacy.html
        and terms.html (the old klarweg-domain inbox is retired). */
     contact: {

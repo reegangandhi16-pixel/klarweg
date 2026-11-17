@@ -322,7 +322,7 @@ const CHAPTER = {
     { de: 'intelligent', pos: 'adjective', en: 'intelligent', hi: 'बुद्धिमान', ex: 'Ich finde, dass die Hauptperson intelligent ist.', exEn: 'I think the main character is intelligent.' },
     { de: 'peinlich', pos: 'adjective', en: 'embarrassing', hi: 'शर्मनाक', ex: 'Das war wirklich peinlich.', exEn: 'That was really embarrassing.' },
     { de: 'furchtbar', pos: 'adjective', en: 'terrible; terribly', hi: 'भयानक', ex: 'Der Actionfilm war furchtbar laut.', exEn: 'The action film was terribly loud.' },
-    { de: 'witzig', pos: 'adjective', en: 'funny', hi: 'मज़ेदार', ex: 'Der Stummfilm ist ziemlich witzig.', exEn: 'The silent film is quite funny.' },
+    { de: 'witzig', pos: 'adjective', en: 'funny', hi: 'मज़ेदार', ex: 'Der Stummfilm ist ziemlich witzig.', exEn: 'The silent film is quite funny.', img: { src: '/api/media/vocab-img/fda5801759608a8c5a07', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person laughing heartily on a bench.' } },
     { de: 'prima', pos: 'adjective', en: 'great, fine', hi: 'बढ़िया', ex: 'Prima, dass du kommst!', exEn: 'Great that you\u2019re coming!', img: { src: '/api/media/vocab-img/c960f784cc76cc70a65f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A cheerful person giving a double thumbs-up.' } },
     { de: 'real', pos: 'adjective', en: 'real', hi: 'वास्तविक', ex: 'Die Geschichte ist fast real.', exEn: 'The story is almost real.' },
     { de: 'tot', pos: 'adjective', en: 'dead', hi: 'मृत', ex: 'Die Hauptperson ist am Ende tot.', exEn: 'The main character is dead at the end.' },

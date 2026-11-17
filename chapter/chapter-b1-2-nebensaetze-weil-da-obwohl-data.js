@@ -245,7 +245,9 @@ const CHAPTER = {
     { de: 'Abneigung', art: 'die', gender: 'f', plural: 'Abneigungen', pos: 'noun', level: 'B1', en: 'dislike, aversion', hi: 'नापसंदगी',
       ex: 'Er hat eine Abneigung gegen laute Musik.', exEn: 'He has a dislike of loud music.', exHi: 'Use tez awaaz wale sangeet se nafrat hai.',
       ex2: 'Ihre Abneigung gegen Pilze ist bekannt.', ex2En: 'Her dislike of mushrooms is well known.', ex2Hi: 'Mushroom ke prati uski napasandagi jaani-mani hai.',
-      advanced: { synonyms: ['Widerwille', 'Aversion'], opposites: ['Vorliebe', 'Zuneigung'], collocations: ['eine Abneigung gegen + Akk.', 'eine Abneigung haben'] } },
+      advanced: { synonyms: ['Widerwille', 'Aversion'], opposites: ['Vorliebe', 'Zuneigung'], collocations: ['eine Abneigung gegen + Akk.', 'eine Abneigung haben'] },
+      img: { src: '/api/media/vocab-img/7d20ea4f2a10ea0e9478', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a person showing distaste for food' }
+    },
     { de: 'diktieren', pos: 'verb', level: 'B1', en: 'to dictate', hi: 'बोलकर लिखवाना',
       ex: 'Der Chef diktiert der Assistentin einen Brief.', exEn: 'The boss dictates a letter to the assistant.', exHi: 'Boss sahayak ko ek patra bolkar likhwata hai.',
       ex2: 'Ich habe den Text meinem Kollegen diktiert.', ex2En: 'I dictated the text to my colleague.', ex2Hi: 'Maine text apne sahyogi ko bolkar likhwaya.',

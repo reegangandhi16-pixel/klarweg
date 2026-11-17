@@ -243,7 +243,7 @@ const CHAPTER = {
     { de: 'Religion', art: 'die', gender: 'f', plural: 'Religionen', pos: 'noun', en: 'religion', hi: 'धर्म', ex: 'Religion ist ein privates Thema.', exEn: 'Religion is a private topic.' },
     { de: 'Rolle', art: 'die', gender: 'f', plural: 'Rollen', pos: 'noun', en: 'role', hi: 'भूमिका', ex: 'Das spielt keine Rolle.', exEn: 'That doesn\u2019t matter.' },
     { de: 'Serie', art: 'die', gender: 'f', plural: 'Serien', pos: 'noun', en: 'series', hi: 'धारावाहिक', ex: 'Diese Serie ist gut.', exEn: 'This series is good.' },
-    { de: 'Welt', art: 'die', gender: 'f', plural: 'Welten', pos: 'noun', en: 'world', hi: 'दुनिया', ex: 'Die Welt ist groß.', exEn: 'The world is big.' },
+    { de: 'Welt', art: 'die', gender: 'f', plural: 'Welten', pos: 'noun', en: 'world', hi: 'दुनिया', ex: 'Die Welt ist groß.', exEn: 'The world is big.', img: { src: '/api/media/vocab-img/9f4ab14412555592e8ca', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A globe of planet earth on a stand' } },
     { de: 'Wolke', art: 'die', gender: 'f', plural: 'Wolken', pos: 'noun', en: 'cloud', hi: 'बादल', ex: 'Am Himmel sind Wolken.', exEn: 'There are clouds in the sky.' },
     { de: 'doch', pos: 'particle', en: 'indeed, after all', hi: 'तो', ex: 'Komm doch mit!', exEn: 'Do come along!' },
     { de: 'echt', pos: 'adverb', en: 'really? (Echt?)', hi: 'सच में?', ex: 'Echt? Das wusste ich nicht.', exEn: 'Really? I didn\u2019t know that.' },

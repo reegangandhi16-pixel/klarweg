@@ -248,7 +248,9 @@ const CHAPTER = {
     { de: 'herrlich', pos: 'adjective', en: 'glorious, wonderful', hi: 'शानदार',
       ex: 'Es muss herrlich sein, dort zu zelten.', exEn: 'It must be glorious to camp there.' },
     { de: 'im Freien', pos: 'adverb', en: 'outdoors, in the open air', hi: 'खुले में',
-      ex: 'Wir planen, im Freien zu übernachten.', exEn: 'We\'re planning to sleep outdoors.' },
+      ex: 'Wir planen, im Freien zu übernachten.', exEn: 'We\'re planning to sleep outdoors.',
+      img: { src: '../public/vocab-img/ffaf72c9007ff0103dfa', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'picnic blanket with a basket on a green meadow under trees, open air' }
+    },
     { de: 'meinetwegen', pos: 'adverb', en: 'fine with me, for my sake', hi: 'मेरी वजह से / ठीक है',
       ex: 'Meinetwegen brauchst du nicht früh aufzustehen.', exEn: 'As far as I\'m concerned, you don\'t need to get up early.' },
     { de: 'sich erholen', pos: 'verb', en: 'to relax, recover', hi: 'आराम करना',
@@ -292,9 +294,13 @@ const CHAPTER = {
     { de: 'Sand', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'sand', hi: 'रेत',
       ex: 'Es ist angenehm, im Sand zu liegen.', exEn: 'It\'s pleasant to lie in the sand.' },
     { de: 'Schutz', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'protection', hi: 'सुरक्षा',
-      ex: 'Es ist wichtig, Schutz vor der Sonne zu haben.', exEn: 'It\'s important to have protection from the sun.' },
+      ex: 'Es ist wichtig, Schutz vor der Sonne zu haben.', exEn: 'It\'s important to have protection from the sun.',
+      img: { src: '../public/vocab-img/3a208cbc814342a89238', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'beach parasol shading a towel, with a bottle of sunscreen and a sun hat' }
+    },
     { de: 'Urlaubsgruß', art: 'der', gender: 'm', plural: 'Urlaubsgrüße', pos: 'noun', en: 'greetings from abroad', hi: 'छुट्टी की शुभकामना',
-      ex: 'Ich habe vor, dir einen Urlaubsgruß zu schicken.', exEn: 'I\'m planning to send you greetings from my holiday.' },
+      ex: 'Ich habe vor, dir einen Urlaubsgruß zu schicken.', exEn: 'I\'m planning to send you greetings from my holiday.',
+      img: { src: '../public/vocab-img/7de3a371a13d231541df', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'picture postcard of a beach lying next to a pair of sunglasses, the back of the card blank' }
+    },
     { de: 'Aussicht', art: 'die', gender: 'f', plural: 'Aussichten', pos: 'noun', en: 'view', hi: 'नज़ारा',
       ex: 'Es lohnt sich, die Aussicht zu genießen.', exEn: 'It\'s worth enjoying the view.' },
     { de: 'Küste', art: 'die', gender: 'f', plural: 'Küsten', pos: 'noun', en: 'coast', hi: 'तट',

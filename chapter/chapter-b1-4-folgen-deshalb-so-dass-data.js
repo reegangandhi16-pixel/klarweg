@@ -387,7 +387,9 @@ const CHAPTER = {
       advanced: { synonyms: [], opposites: [], collocations: [] } },
     { de: 'Ladekabel', art: 'das', gender: 'n', plural: 'Ladekabel', pos: 'noun', level: 'B1', en: 'charger, charging cable', hi: 'चार्जर केबल',
       ex: 'Ich habe ein neues Ladekabel im Sonderangebot gekauft.', exEn: 'I bought a new charger on special offer.', exHi: 'Maine special offer mein ek naya charger kharida.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/72b7c92e23242ebe3595', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Charging cable connected to a smartphone.' }
+    },
     { de: 'Merkmal', art: 'das', gender: 'n', plural: 'Merkmale', pos: 'noun', level: 'B1', en: 'characteristic, feature', hi: 'विशेषता',
       ex: 'Ein wichtiges Merkmal des Geräts ist der lange Akku.', exEn: 'An important feature of the device is the long battery life.', exHi: 'Device ki ek zaroori visheshta lambi battery hai.',
       advanced: { synonyms: ['Eigenschaft'], opposites: [], collocations: ['ein Merkmal haben'] } },

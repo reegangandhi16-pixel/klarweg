@@ -225,7 +225,9 @@ const CHAPTER = {
     { de: 'ausziehen', pos: 'verb', level: 'B1', en: 'to move out of', hi: 'निकल जाना',
       ex: 'Wegen des Umzugs muss sie diese Woche ausziehen.', exEn: 'Because of the move, she has to move out this week.', exHi: 'Shift hone ki wajah se, use is hafte ghar khaali karna hai.',
       conj: { praesens: 'zieht aus', praeteritum: 'zog aus', perfekt: 'ist ausgezogen' },
-      advanced: { synonyms: ['umziehen'], opposites: ['einziehen'], collocations: ['aus der Wohnung ausziehen'] } },
+      advanced: { synonyms: ['umziehen'], opposites: ['einziehen'], collocations: ['aus der Wohnung ausziehen'] },
+      img: { src: '/api/media/vocab-img/630c41b69c393d0d1fbe', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person carrying a moving box out of an empty room' }
+    },
     { de: 'bewusst', pos: 'adjective', level: 'B1', en: 'conscious', hi: 'सचेत',
       ex: 'Wegen ihrer Gesundheit ernährt sie sich bewusst.', exEn: 'Because of her health, she eats consciously.', exHi: 'Apni sehat ki wajah se, woh sochkar khaana khaati hai.',
       advanced: { synonyms: ['achtsam'], opposites: ['unbewusst'], collocations: ['sich bewusst ernähren'] } },

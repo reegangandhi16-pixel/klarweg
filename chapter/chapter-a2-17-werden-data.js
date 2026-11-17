@@ -220,7 +220,7 @@ const CHAPTER = {
 
   // ---------- Vocabulary (21 items) ----------
   vocab: [
-    { de: 'Alkohol', art: 'der', gender: 'm', plural: '\u2014', pos: 'noun', en: 'alcohol', hi: 'शराब', ex: 'Er trinkt keinen Alkohol mehr.', exEn: 'He doesn\u2019t drink alcohol anymore.' },
+    { de: 'Alkohol', art: 'der', gender: 'm', plural: '\u2014', pos: 'noun', en: 'alcohol', hi: 'शराब', ex: 'Er trinkt keinen Alkohol mehr.', exEn: 'He doesn\u2019t drink alcohol anymore.', img: { src: '/api/media/vocab-img/8526815a1c0b0a4a845a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'bottle of wine and a glass' } },
     { de: 'altmodisch', pos: 'adjective', en: 'old-fashioned', hi: 'पुराने ज़माने का', ex: 'Die Kutsche wirkt altmodisch neben dem Auto.', exEn: 'The carriage seems old-fashioned next to the car.', img: { src: '/api/media/vocab-img/d8e0407835bd36740541', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An old-fashioned black rotary dial telephone.' } },
     { de: 'ausschalten', pos: 'verb', en: 'to switch off (separable)', hi: 'बंद करना', ex: 'Ich werde das Licht ausschalten.', exEn: 'I\u2019m going to switch off the light.', conj: { praesens: 'schaltet aus', praeteritum: 'schaltete aus', perfekt: 'hat ausgeschaltet' } },
     { de: 'behalten', pos: 'verb', en: 'to keep', hi: 'रखना', ex: 'Ich werde den Ring behalten.', exEn: 'I\u2019m going to keep the ring.', conj: { praesens: 'beh\u00e4lt', praeteritum: 'behielt', perfekt: 'hat behalten' } },

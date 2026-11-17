@@ -258,6 +258,10 @@ public/vocab-img/34916736fabd314dcc85-400.avif
 public/vocab-img/34916736fabd314dcc85-400.webp
 public/vocab-img/34916736fabd314dcc85-800.avif
 public/vocab-img/34916736fabd314dcc85-800.webp
+public/vocab-img/3a208cbc814342a89238-400.avif
+public/vocab-img/3a208cbc814342a89238-400.webp
+public/vocab-img/3a208cbc814342a89238-800.avif
+public/vocab-img/3a208cbc814342a89238-800.webp
 public/vocab-img/4ba5ad95f05c95b6101f-400.avif
 public/vocab-img/4ba5ad95f05c95b6101f-400.webp
 public/vocab-img/4ba5ad95f05c95b6101f-800.avif
@@ -286,6 +290,10 @@ public/vocab-img/6e62de2ca4152f16bd7a-400.avif
 public/vocab-img/6e62de2ca4152f16bd7a-400.webp
 public/vocab-img/6e62de2ca4152f16bd7a-800.avif
 public/vocab-img/6e62de2ca4152f16bd7a-800.webp
+public/vocab-img/7de3a371a13d231541df-400.avif
+public/vocab-img/7de3a371a13d231541df-400.webp
+public/vocab-img/7de3a371a13d231541df-800.avif
+public/vocab-img/7de3a371a13d231541df-800.webp
 public/vocab-img/8f09ada41029b3a5074c-400.avif
 public/vocab-img/8f09ada41029b3a5074c-400.webp
 public/vocab-img/8f09ada41029b3a5074c-800.avif
@@ -330,6 +338,10 @@ public/vocab-img/ec6f5f4a0ae08b234de0-400.avif
 public/vocab-img/ec6f5f4a0ae08b234de0-400.webp
 public/vocab-img/ec6f5f4a0ae08b234de0-800.avif
 public/vocab-img/ec6f5f4a0ae08b234de0-800.webp
+public/vocab-img/ffaf72c9007ff0103dfa-400.avif
+public/vocab-img/ffaf72c9007ff0103dfa-400.webp
+public/vocab-img/ffaf72c9007ff0103dfa-800.avif
+public/vocab-img/ffaf72c9007ff0103dfa-800.webp
 # BEGIN generated: public audio-timing (scripts/chapter-lock.mjs audio) - do not edit
 audio-timing/00d474b350531f00.json
 audio-timing/06b36c5d56b99258.json

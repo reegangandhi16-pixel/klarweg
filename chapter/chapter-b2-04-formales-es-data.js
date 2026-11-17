@@ -224,7 +224,7 @@ const CHAPTER = {
     { de: 'Gegenüber', art: 'das', gender: 'n', plural: 'Gegenüber', pos: 'noun', level: 'B2', en: 'counterpart, person opposite', hi: 'सामने वाला व्यक्ति', ex: 'Ihr Gegenüber lächelte freundlich.', exEn: 'The person opposite her smiled kindly.', exHi: 'Uske saamne waala vyakti mitrata se muskaraaya.' },
     { de: 'gelegentlich', pos: 'adjective', level: 'B2', en: 'occasional, occasionally', hi: 'कभी-कभी', ex: 'Gelegentlich gibt es einen echten Durchbruch.', exEn: 'Occasionally there is a real breakthrough.', exHi: 'Kabhi-kabhi ek asli safalta milti hai.' },
     { de: 'Gemüsegeschäft', art: 'das', gender: 'n', plural: 'Gemüsegeschäfte', pos: 'noun', level: 'B2', en: 'greengrocer\'s', hi: 'सब्ज़ी की दुकान', ex: 'Das Gemüsegeschäft ist um die Ecke.', exEn: 'The greengrocer\'s is around the corner.', exHi: 'Sabzi ki dukaan kone par hai.', img: { src: '/api/media/vocab-img/1f0d05bcb82bc035c04a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A small greengrocer shop with produce crates outside.' } },
-    { de: 'Geste', art: 'die', gender: 'f', plural: 'Gesten', pos: 'noun', level: 'B2', en: 'gesture', hi: 'इशारा', ex: 'Das war eine freundliche Geste.', exEn: 'That was a friendly gesture.', exHi: 'Yeh ek mitratapoorn ishaara tha.' }
+    { de: 'Geste', art: 'die', gender: 'f', plural: 'Gesten', pos: 'noun', level: 'B2', en: 'gesture', hi: 'इशारा', ex: 'Das war eine freundliche Geste.', exEn: 'That was a friendly gesture.', exHi: 'Yeh ek mitratapoorn ishaara tha.', img: { src: '/api/media/vocab-img/feb8635999b2e84b1990', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person placing a hand over their heart.' } }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

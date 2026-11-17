@@ -213,7 +213,7 @@ const CHAPTER = {
   // ---------- Vocabulary (this chapter's teaching content \u2014 review, no new word list uploaded) ----------
   vocab: [
     // ===== Core location adverbs =====
-    { de: 'links', pos: 'adverb', en: 'left, on the left', hi: 'बाएँ', ex: 'Gehen Sie nach links.', exEn: 'Go to the left.' },
+    { de: 'links', pos: 'adverb', en: 'left, on the left', hi: 'बाएँ', ex: 'Gehen Sie nach links.', exEn: 'Go to the left.', img: { src: '/api/media/vocab-img/fc3a043f7040890dbe3f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person pointing to the left in a hallway' } },
     { de: 'rechts', pos: 'adverb', en: 'right, on the right', hi: 'दाएँ', ex: 'Biegen Sie rechts ab.', exEn: 'Turn right.' },
     { de: 'geradeaus', pos: 'adverb', en: 'straight ahead', hi: 'सीधे', ex: 'Gehen Sie geradeaus bis zur Kreuzung.', exEn: 'Go straight ahead to the crossroads.', img: { src: '/api/media/vocab-img/89fdd3203369162f1cc0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person walking along a straight pathway.' } },
     { de: 'hier', pos: 'adverb', en: 'here', hi: 'यहाँ', ex: 'Von hier sieht man den Dom.', exEn: 'From here you can see the cathedral.' },
@@ -223,7 +223,7 @@ const CHAPTER = {
     { de: 'unten', pos: 'adverb', en: 'down, downstairs, at the bottom', hi: 'नीचे', ex: 'Die K\u00fcche ist unten.', exEn: 'The kitchen is downstairs.', img: { src: '/api/media/vocab-img/3757e8eebb1fcf55faf2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person downstairs on the ground floor of a house' } },
     { de: 'vorne', pos: 'adverb', en: 'at the front', hi: 'सामने', ex: 'Der Dom steht vorne am Ende der Stra\u00dfe.', exEn: 'The cathedral stands at the front, at the end of the street.' },
     { de: 'hinten', pos: 'adverb', en: 'at the back', hi: 'पीछे', ex: 'Die Lampe steht hinten.', exEn: 'The lamp stands at the back.' },
-    { de: 'innen', pos: 'adverb', en: 'inside, on the inside', hi: 'अंदर', ex: 'Innen ist es ruhiger als drau\u00dfen.', exEn: 'Inside it\u2019s calmer than outside.' },
+    { de: 'innen', pos: 'adverb', en: 'inside, on the inside', hi: 'अंदर', ex: 'Innen ist es ruhiger als drau\u00dfen.', exEn: 'Inside it\u2019s calmer than outside.', img: { src: '/api/media/vocab-img/a0747a5a49e9baa21d2f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Warm interior seen from outside rain' } },
     { de: 'au\u00dfen', pos: 'adverb', en: 'outside, on the outside', hi: 'बाहर', ex: 'Au\u00dfen ist das Geb\u00e4ude alt, innen modern.', exEn: 'Outside the building is old, inside modern.' },
     { de: 'nebenan', pos: 'adverb', en: 'next door', hi: 'बगल में', ex: 'Die Bank ist nebenan.', exEn: 'The bank is next door.' },
     // ===== Fixed location phrases (with von + Dativ / der + Dativ) =====

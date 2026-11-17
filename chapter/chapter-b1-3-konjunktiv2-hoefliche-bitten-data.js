@@ -234,7 +234,9 @@ const CHAPTER = {
       ex: 'Könnten Sie den Drucker bitte anschließen?', exEn: 'Could you please connect the printer?', exHi: 'Kya aap kripya printer ko connect kar sakte hain?',
       ex2: 'Ich würde gern das Kabel anschließen.', ex2En: 'I would like to connect the cable.', ex2Hi: 'Main cable connect karna chahoonga.',
       conj: { praesens: 'schließt an', praeteritum: 'schloss an', perfekt: 'hat angeschlossen' },
-      advanced: { synonyms: ['verbinden'], opposites: ['trennen', 'abschließen'], collocations: ['ein Gerät anschließen', 'den Drucker anschließen'] } },
+      advanced: { synonyms: ['verbinden'], opposites: ['trennen', 'abschließen'], collocations: ['ein Gerät anschließen', 'den Drucker anschließen'] },
+      img: { src: '/api/media/vocab-img/a67fc6c49549f11510d5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person plugging a cable into a printer' }
+    },
     { de: 'aufladen', pos: 'verb', level: 'B1', en: 'to charge', hi: 'चार्ज करना',
       ex: 'Würden Sie mein Handy bitte aufladen?', exEn: 'Would you please charge my phone?', exHi: 'Kya aap kripya mera phone charge karenge?',
       ex2: 'Ich hätte gern ein Kabel, um das Handy aufzuladen.', ex2En: 'I\'d like a cable to charge the phone.', ex2Hi: 'Mujhe phone charge karne ke liye ek cable chahiye.',

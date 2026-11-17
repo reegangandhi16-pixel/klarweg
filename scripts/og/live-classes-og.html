@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+  Source for og-live-classes.png (1200×630), the Open Graph image of
+  live-classes.html. Not published; render it with
+    node scripts/og/render-og.mjs
+  Brand: canvas #FAFAF7, ink, the green CTA dot, Fraunces wordmark (the
+  site's nav wordmark; no logo mark). Grammar colours only on the parsed
+  German sentence. No price, date or credential, so it cannot go stale.
+-->
+<html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Noto+Sans+Devanagari:wght@500&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #FAFAF7; color: #0E0E10; font-family: Inter, sans-serif; position: relative; }
+  .dots { position: absolute; inset: 0 0 0 640px; background-image: radial-gradient(rgba(14,14,16,0.08) 1.2px, transparent 1.4px); background-size: 20px 20px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 30%); mask-image: linear-gradient(90deg, transparent, #000 30%); }
+  .left { position: absolute; left: 72px; top: 64px; width: 600px; height: 502px; display: flex; flex-direction: column; }
+  .brand { font-family: Fraunces, serif; font-weight: 600; font-size: 30px; letter-spacing: -0.02em; }
+  .pill { margin-top: 56px; display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 999px; background: #fff; border: 1px solid rgba(14,14,16,0.16); font-size: 17px; font-weight: 500; }
+  .pill i { width: 9px; height: 9px; border-radius: 50%; background: #1FA84B; }
+  h1 { margin-top: 28px; font-family: Fraunces, serif; font-weight: 500; font-size: 66px; line-height: 1.02; letter-spacing: -0.035em; }
+  h1 em { display: block; font-style: italic; }
+  .sub { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; }
+  .sub span { font-size: 17px; font-weight: 500; color: #3A3A40; padding: 8px 14px; border-radius: 10px; background: #F4F3EE; }
+  .card { position: absolute; right: 64px; top: 92px; width: 432px; background: #fff; border: 1px solid rgba(14,14,16,0.09); border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(64,40,10,0.05), 0 32px 64px -24px rgba(64,40,10,0.22); overflow: hidden; }
+  .bar { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid rgba(14,14,16,0.09); }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #6F6F73; }
+  .lang { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: #F4F3EE; font-size: 13px; font-weight: 500; }
+  .lang b { font-weight: 500; padding: 4px 10px; border-radius: 999px; }
+  .lang b:first-child { background: #fff; box-shadow: 0 1px 2px rgba(14,14,16,0.08); }
+  .lang b:last-child { font-family: 'Noto Sans Devanagari', sans-serif; color: #3A3A40; }
+  .body { padding: 26px 24px 24px; }
+  .parse { display: flex; flex-wrap: wrap; gap: 10px 12px; }
+  .parse div { display: flex; flex-direction: column; gap: 6px; }
+  .w { font-family: Fraunces, serif; font-style: italic; font-weight: 500; font-size: 34px; line-height: 1.05; }
+  .r { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; padding-top: 5px; border-top: 2px solid currentColor; }
+  .s { color: #185FA5; } .v { color: #DC2626; } .p { color: #EA580C; }
+  .fix { margin-top: 22px; padding: 14px 16px; border-radius: 14px; background: #FAFAF7; border: 1px solid rgba(14,14,16,0.09); }
+  .fix .said { font-family: Fraunces, serif; font-style: italic; font-weight: 500; font-size: 22px; }
+  .fix del { color: #9A9AA0; text-decoration-thickness: 2px; }
+  .fix ins { text-decoration: none; color: #DC2626; border-bottom: 2px solid #DC2626; }
+  .fix p { margin-top: 6px; font-size: 14px; color: #3A3A40; line-height: 1.45; }
+  .url { position: absolute; right: 64px; bottom: 56px; font-family: 'JetBrains Mono', monospace; font-size: 15px; color: #6F6F73; letter-spacing: 0.02em; }
+</style></head>
+<body>
+  <div class="dots"></div>
+  <div class="left">
+    <div class="brand">Klarweg</div>
+    <div class="pill"><i></i>Live German classes · A1</div>
+    <h1>Learn German live, <em>with every mistake explained.</em></h1>
+    <div class="sub"><span>Small groups</span><span>Hindi &amp; English</span><span>Goethe A1 format</span></div>
+  </div>
+  <div class="card">
+    <div class="bar"><span class="mono">Perfekt mit sein</span><span class="lang"><b>English</b><b>हिन्दी</b></span></div>
+    <div class="body">
+      <div class="parse" lang="de">
+        <div class="s"><span class="w">Ich</span><span class="r">Subject</span></div>
+        <div class="v"><span class="w">bin</span><span class="r">Verb · 2</span></div>
+        <div class="p"><span class="w">ins Kino</span><span class="r">Place</span></div>
+        <div class="v"><span class="w">gegangen.</span><span class="r">Verb · end</span></div>
+      </div>
+      <div class="fix">
+        <div class="said" lang="de">Ich <del>habe</del> <ins>bin</ins> nach Agra gefahren.</div>
+        <p>Movement from A to B takes <b>sein</b>, not haben.</p>
+      </div>
+    </div>
+  </div>
+  <div class="url">klarweg.in/live-classes</div>
+</body></html>

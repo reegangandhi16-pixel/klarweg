@@ -37,7 +37,14 @@
 <meta property="og:title" content="Live German Classes Online · A1 in Hindi &amp; English | Klarweg">
 <meta property="og:description" content="Small-group German A1 classes online with a teacher: explained in Hindi and English, corrected as you speak. ₹7,999 for 12 weeks. Free waitlist; start date to be announced.">
 <meta property="og:url" content="https://klarweg.in/live-classes.html">
-<meta property="og:image" content="https://klarweg.in/site-icon-512.png">
+<meta property="og:image" content="https://klarweg.in/og-live-classes.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Klarweg live German classes, A1: a lesson board explaining Ich bin ins Kino gegangen, with a correction from habe to bin.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Live German Classes Online · A1 in Hindi &amp; English | Klarweg">
+<meta name="twitter:description" content="Small-group German A1 classes online with a teacher: explained in Hindi and English, corrected as you speak. Free waitlist; start date to be announced.">
+<meta name="twitter:image" content="https://klarweg.in/og-live-classes.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
@@ -81,7 +88,9 @@
 
   /* Section rhythm: one head style for the whole page. */
   .s-head { max-width: 680px; margin: 0 0 48px; }
-  .s-head .mono { display: block; color: var(--ink-tertiary); margin-bottom: 16px; }
+  .s-head .mono, .s-eye { display: flex; align-items: center; gap: 12px; color: var(--ink-tertiary); margin-bottom: 16px; }
+  .sn { font-weight: 500; color: var(--ink-primary); display: inline-flex; align-items: center; gap: 12px; }
+  .sn::after { content: ''; width: 24px; height: 1px; background: var(--line-strong); }
   .s-head h2 { margin: 0 0 16px; }
   .s-head p { margin: 0; font-size: 19px; line-height: 1.55; color: var(--ink-secondary); }
   .band { background: var(--bg-surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -203,7 +212,12 @@
   .sheet-foot strong { color: var(--ink-primary); }
 
   .board-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px 12px 24px; border-top: 1px solid var(--line); background: var(--bg-surface); }
-  .board-count { color: var(--ink-tertiary); }
+  .board-count { display: flex; align-items: center; gap: 12px; color: var(--ink-tertiary); }
+  .board-prog { display: inline-flex; gap: 4px; }
+  .board-prog i { width: 20px; height: 3px; border-radius: 2px; background: var(--line-strong); transition: background var(--dur-base) var(--ease); }
+  .board[data-step="1"] .board-prog i:nth-child(-n+1), .board[data-step="2"] .board-prog i:nth-child(-n+2),
+  .board[data-step="3"] .board-prog i:nth-child(-n+3), .board[data-step="4"] .board-prog i { background: var(--ink-primary); }
+  @media (max-width: 380px) { .board-count .mono { display: none; } }
   .board-next { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: var(--r-md); background: var(--ink-primary); color: #fff; font-size: 14px; font-weight: 500; transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease); }
   .board-next:hover { background: #26262B; transform: translateY(-1px); }
   .board-caption { margin: 16px 4px 0; font-size: 13px; color: var(--ink-tertiary); line-height: 1.5; }
@@ -258,10 +272,24 @@
   .days .on { background: var(--ink-primary); border-color: var(--ink-primary); color: #fff; }
   .days .on .d { color: rgba(255,255,255,0.7); }
   .days .x { font-size: 12px; font-weight: 600; line-height: 1.2; }
+  .mid-cta { margin-top: 48px; padding: 24px; border-radius: 16px; background: var(--bg-surface); border: 1px solid var(--line); box-shadow: var(--shadow-soft); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
+  .mid-cta p { margin: 0; font-size: 16px; color: var(--ink-secondary); }
+  .mid-cta strong { color: var(--ink-primary); font-weight: 600; margin-right: 8px; }
+  .mid-cta-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  @media (max-width: 600px) { .mid-cta { margin-top: 36px; padding: 16px; } .mid-cta-actions, .mid-cta-actions .btn { width: 100%; justify-content: center; } .mid-cta-actions .btn-secondary { display: none; } }
   .rhythm { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
   .rhythm li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--ink-secondary); }
   .rhythm .k { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-primary); padding-top: 4px; }
-  @media (max-width: 860px) { .week { grid-template-columns: minmax(0, 1fr); gap: 36px; } .has-class-bar .class-bar { display: none; } .has-class-bar #class-steps { display: block; } }
+  @media (max-width: 860px) {
+    .week { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .class-scale { display: none; }
+    .class-segs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+    .class-segs button { min-height: 64px; padding: 8px 6px; flex: none !important; }
+    .class-segs .t { font-size: 11.5px; overflow-wrap: normal; hyphens: manual; }
+    .class-detail { padding: 16px; min-height: 0; }
+    .class-detail .step-h h3 { font-size: 20px; }
+    .class-detail .step-p { font-size: 15px; }
+  }
   @media (max-width: 480px) { .rhythm li { grid-template-columns: 1fr; gap: 4px; } .days .x { font-size: 10.5px; } .days li { padding: 4px 4px 8px; } }
 
   /* ================= COURSE ================= */
@@ -336,12 +364,15 @@
   @media (max-width: 640px) {
     .c-card { padding: 24px; border-radius: 16px; }
     .c-card h3 { font-size: 28px; }
-    .c-facts > div { grid-template-columns: 1fr; gap: 4px; }
+    .c-facts { grid-template-columns: 1fr 1fr; column-gap: 16px; }
+    .c-facts > div { grid-template-columns: 1fr; gap: 4px; align-content: start; }
+    .c-facts > div:nth-last-child(-n+2) { grid-column: 1 / -1; }
+    .c-obj li { font-size: 14.5px; }
     .syllabus.is-enhanced .syl-tabs { grid-template-columns: repeat(6, minmax(0, 1fr)); }
     .syl-week { padding: 16px; }
     .sessions li { grid-template-columns: 44px minmax(0, 1fr); gap: 12px; }
     .sessions .s { display: none; }
-    .included { grid-template-columns: 1fr; }
+    .included { display: none; } /* on phones: the same facts are in the card, the comparison and the FAQ */
   }
 
   /* ================= TEACHER ("Studio") ================= */
@@ -367,7 +398,7 @@
   .tf-video { display: flex; align-items: center; gap: 8px; margin: 24px 0 0; font-size: 13px; color: var(--ink-tertiary); }
   .more-teachers { margin: 48px 0 0; font-size: 14px; color: var(--ink-tertiary); max-width: 680px; }
   @media (max-width: 900px) { .t-feature { grid-template-columns: minmax(0, 1fr); gap: 36px; } .tf-portrait { max-width: 360px; } }
-  @media (max-width: 480px) { .tf-facts { grid-template-columns: 1fr; } .tf-facts dt { border-bottom: 0; padding-bottom: 0; } .tf-facts dd { padding-top: 4px; } .tf-portrait { max-width: 180px; } .tf-mono span { font-size: 72px; } .tf-mono::before { inset: 8px; border-radius: 12px; } .tf-headline, .tf-quote { margin-bottom: 24px; } }
+  @media (max-width: 480px) { .tf-facts { grid-template-columns: 1fr; } .tf-facts dt { border-bottom: 0; padding-bottom: 0; } .tf-facts dd { padding-top: 4px; } .tf-portrait { max-width: none; display: flex; align-items: center; gap: 16px; } .tf-mono { width: 88px; flex: 0 0 88px; border-radius: 16px; aspect-ratio: 1; } .tf-mono span { font-size: 36px; } .tf-mono::before { inset: 6px; border-radius: 12px; } .tf-portrait figcaption { margin: 0; } .tf-name { font-size: 36px; } .tf-headline, .tf-quote { margin-bottom: 24px; } }
 
   /* Directory (only when two or more full profiles exist) */
   .filters { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; margin-bottom: 36px; }
@@ -547,6 +578,12 @@
   .time-opt > span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--line-strong); font-size: 14px; color: var(--ink-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
   .time-opt input:checked + span { background: var(--ink-primary); border-color: var(--ink-primary); color: #fff; }
   .time-opt input:focus-visible + span { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
+  .more-fields { margin: 0 0 16px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .more-fields > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; font-size: 14px; font-weight: 600; color: var(--ink-primary); }
+  .more-fields > summary::-webkit-details-marker { display: none; }
+  .more-fields > summary::after { content: '+'; font-family: var(--font-mono); font-size: 16px; color: var(--ink-tertiary); }
+  .more-fields[open] > summary::after { content: '−'; }
+  .more-fields[open] { padding-bottom: 4px; }
   .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink-secondary); margin: 8px 0 24px; }
   .consent input { width: 20px; height: 20px; margin: 2px 0 0; flex: 0 0 auto; accent-color: var(--ink-primary); }
   .consent a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
@@ -562,7 +599,7 @@
   .done a.inline, .nojs-request a.inline { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
   .nojs-request p { margin: 8px 0 0; font-size: 15px; color: var(--ink-secondary); line-height: 1.55; }
   @media (max-width: 980px) { .book-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
-  @media (max-width: 520px) { .book-card { padding: 24px 16px; border-radius: 16px; } .form-2 { grid-template-columns: 1fr; } .form-2.keep-2 { grid-template-columns: 1fr 1fr; gap: 0 12px; } .book-intro .lede { font-size: 17px; } .free-line { margin: 16px 0 24px; } .how-steps { margin-bottom: 24px; } }
+  @media (max-width: 520px) { .book-card { padding: 24px 16px; border-radius: 16px; } .form-2 { grid-template-columns: 1fr; } .form-2.keep-2 { grid-template-columns: 1fr 1fr; gap: 0 12px; } .book-intro .lede { font-size: 17px; } .free-line { display: none; } .how-steps { margin-top: 24px; } .how-steps { margin-bottom: 24px; } .how-steps li { padding: 12px 0; font-size: 14px; } }
 
   /* ================= FAQ + close ================= */
   .faq-groups { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 64px; align-items: start; }
@@ -754,7 +791,7 @@
             </div>
           </div>
           <div class="board-foot js-only">
-            <span class="board-count mono">Step <span id="board-step-now">1</span> of 4</span>
+            <span class="board-count"><span class="board-prog" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mono">Step <span id="board-step-now">1</span> of 4</span></span>
             <button type="button" class="board-next" id="board-next"><span>Next step</span>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -778,7 +815,7 @@
 <section id="how" aria-labelledby="how-h">
   <div class="container">
     <div class="s-head" data-reveal>
-      <span class="mono">Inside a class</span>
+      <span class="mono"><b class="sn">01</b>Inside a class</span>
       <h2 class="display-md" id="how-h">Ninety minutes, the same clear shape every time.</h2>
       <p>You always know what comes next: a quick warm-up, one point explained properly, then most of the time spent speaking, writing and being corrected.</p>
     </div>
@@ -829,6 +866,13 @@
         <li><span class="k">Week 12</span><span>A written and a speaking mock exam.</span></li>
       </ul>
     </div>
+    <div class="mid-cta" data-reveal>
+      <p><strong>Beginner German · A1</strong> <span data-course-field="priceLabel">See the course fee</span> for 12 weeks · start date to be announced</p>
+      <div class="mid-cta-actions">
+        <a href="#book" class="btn btn-live" data-book-course="live-a1">Join the free A1 waitlist</a>
+        <a href="#courses" class="btn btn-secondary">See the 12-week plan</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -836,7 +880,7 @@
 <section class="band" id="courses" aria-labelledby="courses-h">
   <div class="container">
     <div class="s-head" data-reveal>
-      <span class="mono">The course</span>
+      <span class="mono"><b class="sn">02</b>The course</span>
       <h2 class="display-md" id="courses-h">Beginner German, A1. Twelve weeks, fully planned.</h2>
       <p>Every fact below is confirmed. What isn’t confirmed yet, such as the start date, says so.</p>
     </div>
@@ -961,7 +1005,7 @@
 <section id="teachers" aria-labelledby="teachers-h">
   <div class="container">
     <div class="s-head" data-reveal>
-      <span class="mono">The teacher</span>
+      <span class="mono"><b class="sn">03</b>The teacher</span>
       <h2 class="display-md" id="teachers-h" data-none="teachers" data-none-text="Teachers are published once their details are confirmed.">One teacher, one method.</h2>
     </div>
     <div class="filters js-only" role="group" aria-label="Filter teachers" hidden>
@@ -1001,7 +1045,7 @@
 <section class="band band-elev" id="path" aria-labelledby="path-h">
   <div class="container">
     <div class="s-head" data-reveal>
-      <span class="mono">Your path</span>
+      <span class="mono"><b class="sn">04</b>Your path</span>
       <h2 class="display-md" id="path-h">Find where you start.</h2>
       <p>A1 is the only live course today. Answer three questions to see whether it fits, and where it leads.</p>
     </div>
@@ -1013,9 +1057,11 @@
           <legend>Your German today</legend>
           <div class="opts">
             <label class="opt"><input type="radio" name="f-level" value="beginner"><span>Complete beginner</span></label>
-            <label class="opt"><input type="radio" name="f-level" value="some"><span>I know a little</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="some"><span>A1 basics</span></label>
             <label class="opt"><input type="radio" name="f-level" value="a2"><span>A2</span></label>
-            <label class="opt"><input type="radio" name="f-level" value="b1"><span>B1 or above</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="b1"><span>B1</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="b2"><span>B2</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="c1"><span>C1 or above</span></label>
             <label class="opt"><input type="radio" name="f-level" value="unsure"><span>Not sure</span></label>
           </div>
         </fieldset>
@@ -1066,7 +1112,7 @@
             <span class="st">Planned · not scheduled</span>
           </li>
         </ol>
-        <p class="road-note">Level descriptions are summarised from the Common European Framework (CEFR). Planned levels have no teacher, timetable or fee yet; registering interest is free and isn’t a booking. Many Ausbildung and nursing routes ask for B1 or B2, so check what your programme requires. Self-paced courses already cover every level, A1 to C2.</p>
+        <p class="road-note">Summarised from the CEFR. Planned levels have no teacher, timetable or fee yet. Many Ausbildung and nursing routes ask for B1 or B2; check your programme. Self-paced courses cover A1 to C2 today.</p>
       </div>
     </div>
   </div>
@@ -1076,7 +1122,7 @@
 <section id="compare" aria-labelledby="compare-h">
   <div class="container">
     <div class="s-head" data-reveal>
-      <span class="mono">Two ways to learn</span>
+      <span class="mono"><b class="sn">05</b>Two ways to learn</span>
       <h2 class="display-md" id="compare-h">Live or self-paced: an honest comparison.</h2>
     </div>
     <div data-reveal>
@@ -1105,7 +1151,7 @@
 <section class="band band-elev" id="book" aria-labelledby="book-h">
   <div class="container book-grid">
     <div class="book-intro">
-      <span class="mono" style="display:block;color:var(--ink-tertiary);margin-bottom:16px">Waitlist</span>
+      <span class="mono s-eye"><b class="sn">06</b>Waitlist</span>
       <h2 class="display-md" id="book-h">Join the A1 waitlist.</h2>
       <p class="lede">Tell us your level, your goal and the times that suit you. When a start date is set, the dates and the course terms are confirmed in writing before you pay anything.</p>
       <ul class="free-line"><li>Free</li><li>Not a booking</li><li>Nothing is charged</li></ul>
@@ -1144,10 +1190,6 @@
             <p class="field-err" id="bf-email-err" hidden></p>
           </div>
         </div>
-        <div class="form-row">
-          <label for="bf-phone">WhatsApp / phone <span class="opt-l">(optional)</span></label>
-          <input id="bf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30">
-        </div>
         <div class="form-2">
           <div class="form-row">
             <label for="bf-level">Your current level <span class="req">*</span></label>
@@ -1175,6 +1217,21 @@
             <p class="field-err" id="bf-goal-err" hidden></p>
           </div>
         </div>
+        <fieldset class="form-row">
+          <legend>Preferred times (IST) <span class="opt-l">(choose any)</span></legend>
+          <div class="times">
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekday mornings"><span>Weekday mornings</span></label>
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekday afternoons"><span>Weekday afternoons</span></label>
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekday evenings"><span>Weekday evenings</span></label>
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekends"><span>Weekends</span></label>
+          </div>
+        </fieldset>
+        <details class="more-fields">
+          <summary><span>Optional: phone, teacher or a note</span></summary>
+        <div class="form-row">
+          <label for="bf-phone">WhatsApp / phone <span class="opt-l">(optional)</span></label>
+          <input id="bf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30">
+        </div>
         <div class="form-2 keep-2">
           <div class="form-row">
             <label for="bf-teacher">Preferred teacher</label>
@@ -1185,19 +1242,11 @@
             <select id="bf-course" name="course"><option value="">Not sure yet</option></select>
           </div>
         </div>
-        <fieldset class="form-row">
-          <legend>Preferred times (IST) <span class="opt-l">(choose any)</span></legend>
-          <div class="times">
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekday mornings"><span>Weekday mornings</span></label>
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekday afternoons"><span>Weekday afternoons</span></label>
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekday evenings"><span>Weekday evenings</span></label>
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekends"><span>Weekends</span></label>
-          </div>
-        </fieldset>
         <div class="form-row">
           <label for="bf-msg">Anything else? <span class="opt-l">(optional)</span></label>
           <textarea id="bf-msg" name="message" maxlength="1000" placeholder="Exam date, deadlines, what you find hardest…"></textarea>
         </div>
+        </details>
         <label class="consent"><input type="checkbox" id="bf-consent" required aria-describedby="bf-consent-err"><span>I agree that Klarweg may use these details to respond to my request, as described in the <a href="privacy.html">Privacy Policy</a>. <span class="req">*</span></span></label>
         <p class="field-err" id="bf-consent-err" hidden style="margin:-16px 0 16px"></p>
         <button type="submit" class="btn btn-live">Prepare my waitlist email
@@ -1225,7 +1274,7 @@
 <section aria-labelledby="faq-h">
   <div class="container faq-groups">
     <div class="faq-side">
-      <span class="mono" style="display:block;color:var(--ink-tertiary);margin-bottom:16px">Questions</span>
+      <span class="mono s-eye"><b class="sn">07</b>Questions</span>
       <h2 class="display-md" id="faq-h">Everything to know before you join.</h2>
       <p>Policies here are the approved live-class terms, also set out in our <a href="terms.html#live-classes">Terms</a>. Something missing? <a href="contact.html">Contact us</a>.</p>
     </div>

@@ -191,10 +191,14 @@
         photo: null,
         photoAlt: '',
         headline: 'German grammar and Goethe exam preparation, explained in Hindi and English',
-        experience: '5 years of teaching German',
-        proficiency: 'C1',
-        qualifications: ['Goethe-Zertifikat C1'],
-        goethe: ['Goethe-Zertifikat C1'],
+        /* Credentials removed from the shipped data on the owner's
+           instruction (2026-11-17): not yet verified against reliable
+           records. Re-add only after the owner confirms them in writing;
+           display.teacherCredentials must then be switched on too. */
+        experience: null,
+        proficiency: null,
+        qualifications: [],
+        goethe: [],
         levels: ['A1', 'A2', 'B1', 'B2'],
         teachesIn: ['Hindi', 'English'],
         specialisms: ['German grammar', 'Structured learning for Hindi-speaking learners', 'Goethe exam preparation'],

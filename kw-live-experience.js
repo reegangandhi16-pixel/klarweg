@@ -61,6 +61,7 @@
     var total = list.querySelectorAll('[role="tab"]').length;
     var t = tabs(list, function (i) {
       current = i;
+      board.setAttribute('data-step', String(i + 1));
       if (stepNow) stepNow.textContent = String(i + 1);
       if (next) {
         var last = i === total - 1;
@@ -136,7 +137,9 @@
   }
 
   /* ---------- 4. finder ---------- */
-  var LEVEL_FORM = { beginner: 'Complete beginner', some: 'A1', a2: 'A2', b1: 'B1', unsure: 'Not sure' };
+  /* finder answer → the waitlist form's own level option (never rounded down) */
+  var LEVEL_FORM = { beginner: 'Complete beginner', some: 'A1', a2: 'A2', b1: 'B1', b2: 'B2', c1: 'C1', unsure: 'Not sure' };
+  var ROAD = { beginner: 'A1', some: 'A1', unsure: 'A1', a2: 'A2', b1: 'B1', b2: 'B2', c1: '' };
   var GOAL_FORM = { goethe: 'Goethe exam', ausbildung: 'Ausbildung', nursing: 'Nursing', study: 'Study in Germany', work: 'Work / career', family: 'Family / visa', speaking: 'Speaking confidence' };
   var GOAL_NOTE = {
     goethe: 'The A1 course prepares for Goethe-Zertifikat A1: Start Deutsch 1, with practice in the exam format along the way and mock exams in the last week. The exam is booked separately with an exam centre.',
@@ -166,9 +169,15 @@
       } else if (fits) {
         h = 'The A1 batch fits your level, but check the timetable.';
         p.push('It runs on Monday, Wednesday and Friday evenings only; no other timetable is scheduled. If you join the waitlist, tell us the times that would suit you.');
+      } else if (level === 'c1') {
+        h = 'There is no live course at C1 or above.';
+        p.push('Live classes start at A1, and the planned levels go up to B2; nothing above B2 is planned yet. You can still register interest for free; it isn’t a booking. The self-paced C1 and C2 courses are available now.');
+        actions = '<a href="#book" class="btn btn-live" data-request="interest" data-finder-apply>Register interest</a>'
+          + '<a href="courses.html" class="btn btn-secondary">See self-paced levels</a>';
       } else {
-        h = 'There is no live course at your level yet.';
-        p.push('A2, B1 and B2 are planned but not scheduled: no teacher, timetable or fee is set. You can register interest for free; it isn’t a booking.');
+        var named = { a2: 'A2', b1: 'B1', b2: 'B2' }[level];
+        h = 'There is no live course at ' + named + ' yet.';
+        p.push(named + ' is planned but not scheduled: no teacher, timetable or fee is set. You can register interest for free; it isn’t a booking.');
         actions = '<a href="#book" class="btn btn-live" data-request="interest" data-finder-apply>Register interest</a>'
           + '<a href="courses.html" class="btn btn-secondary">See self-paced levels</a>';
       }
@@ -179,7 +188,7 @@
         + p.map(function (x) { return '<p>' + x + '</p>'; }).join('')
         + '<div class="finder-actions">' + actions + '</div>';
       out.hidden = false;
-      var lv = fits ? 'A1' : level === 'a2' ? 'A2' : 'B1';
+      var lv = ROAD[level];
       roadmap.forEach(function (r) { r.classList.toggle('is-match', r.getAttribute('data-road') === lv); });
     }
     f.addEventListener('change', update);

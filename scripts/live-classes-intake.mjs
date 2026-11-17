@@ -107,7 +107,9 @@ export function intakeToTeacher(text, D = loadData()) {
       consent: t.consent, photoConsent: t.photoConsent, unconfirmed: []
     };
     // the site's own validator, on the data as it would be published
-    const trial = { ...D, teachers: D.teachers.filter((x) => x.id !== t.id).concat(teacher) };
+    // An evidenced, owner-confirmed sheet is what re-confirms credentials, so it is
+    // checked as it would ship once display.teacherCredentials is switched on.
+    const trial = { ...D, display: { ...D.display, teacherCredentials: true }, teachers: D.teachers.filter((x) => x.id !== t.id).concat(teacher) };
     for (const e of checkData(trial)) if (e.startsWith(`teacher ${t.id}:`) || e.includes(`"${t.id}"`)) errors.push(e.replace(/^teacher [^:]+: /, ''));
     if (errors.length) teacher = null;
   }

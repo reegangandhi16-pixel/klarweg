@@ -509,10 +509,9 @@ try {
     await q('document.querySelector("[data-board-lang=hi]").click()');
     ok(`X${w} Hindi: explanations switch to Hindi (lang="hi"), English hidden`, await q('(()=>{const b=document.getElementById("lesson-board");const hi=[...b.querySelectorAll("#bp-3 [data-l=hi]")],en=[...b.querySelectorAll("#bp-3 [data-l=en]")];return b.dataset.lang==="hi"&&hi.length>0&&hi.every(e=>e.offsetParent!==null&&e.closest("[lang=hi]"))&&en.every(e=>e.offsetParent===null)&&document.querySelector("[data-board-lang=hi]").getAttribute("aria-pressed")==="true"})()'));
     const segOk = await q('getComputedStyle(document.getElementById("class-bar")).display!=="none"');
-    if (w > 860) {
-      await q('document.querySelectorAll("[data-seg]")[5].click()');
-      ok(`X${w} class bar: a segment shows its step in the detail panel`, segOk && /Correction/.test(await q('document.getElementById("class-detail").innerText')) && await q('document.querySelectorAll("[data-seg]")[5].getAttribute("aria-pressed")==="true" && !document.querySelector("#class-detail [id]")'));
-    } else ok(`X${w} class bar: phones get the plain step list instead`, !segOk && await q('getComputedStyle(document.getElementById("class-steps")).display!=="none"'));
+    await q('document.querySelectorAll("[data-seg]")[5].click()');
+    ok(`X${w} class bar: a segment shows its step in the detail panel (phones too, as a compact grid)`, segOk && /Correction/.test(await q('document.getElementById("class-detail").innerText')) && await q('document.querySelectorAll("[data-seg]")[5].getAttribute("aria-pressed")==="true" && !document.querySelector("#class-detail [id]") && getComputedStyle(document.getElementById("class-steps")).display==="none"'));
+    ok(`X${w} class bar: every segment is a 44px+ touch target`, await q('[...document.querySelectorAll("[data-seg]")].every(b=>b.getBoundingClientRect().height>=44&&b.getBoundingClientRect().width>=44)'));
     ok(`X${w} syllabus: week 1 shown, 11 weeks hidden`, await q('!document.getElementById("wk-1").hidden && [...document.querySelectorAll(".syl-week")].filter(x=>x.hidden).length===11'));
     await q('document.getElementById("wt-9").click()');
     ok(`X${w} syllabus: week 9 lists the three planned sessions`, await q('!document.getElementById("wk-9").hidden && document.getElementById("wk-1").hidden && document.querySelectorAll("#wk-9 .sessions > li").length===3'));
@@ -524,7 +523,15 @@ try {
     await q('document.querySelector("#finder-result [data-finder-apply]").click()'); await sleep(700);
     ok(`X${w} finder: "with these answers" prefills the waitlist form (level, goal, evenings, A1)`, await q('document.getElementById("bf-level").value==="Complete beginner" && document.getElementById("bf-goal").value==="Goethe exam" && document.querySelector("input[name=times][value=\'Weekday evenings\']").checked && document.getElementById("bf-course").value==="live-a1" && document.getElementById("form-title").textContent==="Join the course waitlist"'));
     await q(pick('b1')); await q(pick('nursing'));
-    ok(`X${w} finder: B1 → no live course yet, planned not scheduled, interest only`, await q('(()=>{const t=document.getElementById("finder-result").innerText;return /no live course at your level yet/i.test(t)&&/planned but not scheduled/.test(t)&&!/waitlist with these answers/i.test(t)&&document.querySelector("[data-road=B1]").classList.contains("is-match")})()'));
+    ok(`X${w} finder: B1 → no live course yet, planned not scheduled, interest only`, await q('(()=>{const t=document.getElementById("finder-result").innerText;return /no live course at B1 yet/i.test(t)&&/planned but not scheduled/.test(t)&&!/waitlist with these answers/i.test(t)&&document.querySelector("[data-road=B1]").classList.contains("is-match")})()'));
+    ok(`X${w} finder: B1 is recorded as B1 in the form`, await (async () => { await q('document.querySelector("#finder-result [data-finder-apply]").click()'); await sleep(300); return q('document.getElementById("bf-level").value==="B1" && document.getElementById("bf-goal").value==="Nursing"'); })());
+    for (const [v, form, road, rx] of [['b2', 'B2', 'B2', /no live course at B2 yet/], ['c1', 'C1', '', /no live course at C1 or above/], ['a2', 'A2', 'A2', /no live course at A2 yet/], ['some', 'A1', 'A1', /A1 batch/], ['unsure', 'Not sure', 'A1', /level check/]]) {
+      await q(pick(v)); await q(pick('yes'));
+      const res = await q('document.getElementById("finder-result").innerText');
+      await q('document.querySelector("#finder-result [data-finder-apply]").click()'); await sleep(300);
+      ok(`X${w} finder: "${v}" → form level "${form}", roadmap ${road || 'none'}, honest result`, rx.test(res) && (await q('document.getElementById("bf-level").value')) === form
+        && (await q('[...document.querySelectorAll("[data-road].is-match")].map(e=>e.dataset.road).join()')) === road, res.slice(0, 120));
+    }
     ok(`X${w} roadmap: only A1 is a live course; A2–B2 say planned, not scheduled`, (await q('[...document.querySelectorAll("[data-road] .st")].map(e=>e.textContent).join("|")')) === 'Live course · waitlist|Planned · not scheduled|Planned · not scheduled|Planned · not scheduled');
     ok(`X${w} accessibility audit after interaction`, (await q(a11y)).length === 0, (await q(a11y)).join(' | '));
     ok(`X${w} no horizontal overflow after interaction`, (await q(overflow)) <= 0, await q(overflow));

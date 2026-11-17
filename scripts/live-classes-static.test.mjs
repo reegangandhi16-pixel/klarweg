@@ -158,7 +158,7 @@ test('LIVE D3: the first course is the approved A1 group batch, published as a w
   const t = D.teachers.find((x) => x.id === 'reegan-gandhi');
   assert.ok(t && t.draft === undefined, 'the teacher profile is published');
   assert.deepEqual({ experience: t.experience, proficiency: t.proficiency, qualifications: [...t.qualifications], goethe: [...t.goethe], levels: [...t.levels], teachesIn: [...t.teachesIn], specialisms: [...t.specialisms], examPrep: t.examPrep, formats: [...t.formats], photo: t.photo, availability: t.availability }, {
-    experience: '5 years of teaching German', proficiency: 'C1', qualifications: ['Goethe-Zertifikat C1'], goethe: ['Goethe-Zertifikat C1'], levels: ['A1', 'A2', 'B1', 'B2'], teachesIn: ['Hindi', 'English'],
+    experience: null, proficiency: null, qualifications: [], goethe: [], levels: ['A1', 'A2', 'B1', 'B2'], teachesIn: ['Hindi', 'English'],
     specialisms: ['German grammar', 'Structured learning for Hindi-speaking learners', 'Goethe exam preparation'], examPrep: 'Goethe exam preparation at A1–B1', formats: ['Group batch', 'One-to-one'], photo: null, availability: null
   }, 'only the confirmed facts: no photo, availability or other claims');
   assert.ok(t.levels.includes('A1') && t.formats.includes('Group batch'), 'the teacher teaches this course');
@@ -303,8 +303,19 @@ test('LIVE DATA: a named draft profile cannot reach the public site by deleting 
   }
 });
 
+test('LIVE DATA: unconfirmed credentials are not in the shipped data while display.teacherCredentials is false (owner, 2026-11-17)', () => {
+  const D = loadData();
+  assert.equal(D.display.teacherCredentials, false);
+  for (const t of D.teachers.filter((x) => !x.draft)) for (const f of ['experience', 'proficiency', 'qualifications', 'goethe']) assert.ok(t[f] == null || (Array.isArray(t[f]) && !t[f].length), `${t.id}.${f} must be empty`);
+  assert.equal(/Goethe-Zertifikat C1|5 years of teaching/.test(read('live-classes-data.js').replace(/\/\*[\s\S]*?\*\//g, '')), false, 'no unconfirmed credential text anywhere in the shipped data file');
+  const bad = clone(D); bad.teachers.find((t) => t.id === 'reegan-gandhi').proficiency = 'C1';
+  assert.ok(checkData(bad).some((e) => /proficiency is in the shipped data/.test(e)), 'a hidden credential is still a data error');
+});
+
 test('LIVE DATA: published entries must be complete and consistent; drafts may stay incomplete', () => {
-  const base = loadData();
+  // with credentials switched on (test-only values for the owner, so the fixture checks run in that mode)
+  const base = loadData(); base.display = { ...base.display, teacherCredentials: true };
+  Object.assign(base.teachers.find((t) => t.id === 'reegan-gandhi'), { experience: 'Test experience', proficiency: 'C2', qualifications: ['Test qualification'] });
   const expectError = (mutate, rx, why) => {
     const D = clone(base); mutate(D);
     const errors = checkData(D);
@@ -341,7 +352,7 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
 });
 
 test('LIVE DATA: a teacher template cannot be published by filling its [brackets] alone', () => {
-  const D = loadData();
+  const D = loadData(); D.display = { ...D.display, teacherCredentials: true };
   const templates = D.teachers.filter((t) => t.draft && /^\[/.test(t.name));
   assert.deepEqual([...templates.map((t) => t.id)], ['teacher-1', 'teacher-2', 'teacher-3'], 'the three templates are still drafts');
   const fill = (x) => (typeof x === 'string' ? x.replace(/\[[^\]]+\]/g, 'Filled') : Array.isArray(x) ? x.map(fill) : x);

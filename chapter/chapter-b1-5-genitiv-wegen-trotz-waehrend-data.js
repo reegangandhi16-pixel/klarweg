@@ -221,7 +221,9 @@ const CHAPTER = {
     },
     { de: 'Fitness', art: 'die', gender: 'f', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'fitness', hi: 'फिटनेस',
       ex: 'Trotz seiner Fitness geht er selten joggen.', exEn: 'Despite his fitness, he rarely goes jogging.', exHi: 'Apni fitness ke bawajood, woh kam hi jogging karta hai.',
-      advanced: { synonyms: [], opposites: [], collocations: ['an seiner Fitness arbeiten', 'trotz der Fitness'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['an seiner Fitness arbeiten', 'trotz der Fitness'] },
+      img: { src: '/api/media/vocab-img/5bd99f5ee9356c150ee8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person doing a plank on a mat.' }
+    },
     { de: 'ausziehen', pos: 'verb', level: 'B1', en: 'to move out of', hi: 'निकल जाना',
       ex: 'Wegen des Umzugs muss sie diese Woche ausziehen.', exEn: 'Because of the move, she has to move out this week.', exHi: 'Shift hone ki wajah se, use is hafte ghar khaali karna hai.',
       conj: { praesens: 'zieht aus', praeteritum: 'zog aus', perfekt: 'ist ausgezogen' },
@@ -284,7 +286,9 @@ const CHAPTER = {
       advanced: { synonyms: [], opposites: [], collocations: [] } },
     { de: 'touristisch', pos: 'adjective', level: 'B1', en: 'touristic', hi: 'पर्यटक संबंधी',
       ex: 'Wegen ihrer Geschichte ist die Stadtmauer eine touristische Attraktion.', exEn: 'Because of its history, the city wall is a tourist attraction.', exHi: 'Apne itihaas ki wajah se, shahar ki deewar ek paryatak aakarshan hai.',
-      advanced: { synonyms: [], opposites: [], collocations: ['touristische Attraktion'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['touristische Attraktion'] },
+      img: { src: '/api/media/vocab-img/5eb609e3ac222627e6d1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Tourists photographing an ancient stone monument' }
+    },
     { de: 'vegan', pos: 'adjective', level: 'B1', en: 'vegan', hi: 'वीगन',
       ex: 'Wegen ihrer Diät isst sie jetzt meistens vegan.', exEn: 'Because of her diet, she now mostly eats vegan.', exHi: 'Apni diet ki wajah se, woh ab zyada tar vegan khaana khaati hai.',
       advanced: { synonyms: [], opposites: [], collocations: ['sich vegan ernähren'] },
@@ -325,7 +329,9 @@ const CHAPTER = {
     },
     { de: 'Nachtwächter', art: 'der', gender: 'm', plural: 'Nachtwächter', pos: 'noun', level: 'B1', en: 'night watchman', hi: 'रात्रि प्रहरी',
       ex: 'Wegen des Nachtwächters fühlten sich die Bewohner sicherer.', exEn: 'Because of the night watchman, the residents felt safer.', exHi: 'Raat prahri ki wajah se, nivaasi apne aap ko surakshit mehsoos karte the.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/0216e69c4f8cf3cafe8f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Night watchman with flashlight patrolling a gate' }
+    },
     { de: 'Originalzustand', art: 'der', gender: 'm', plural: 'Originalzustände', pos: 'noun', level: 'B1', en: 'original condition', hi: 'मूल स्थिति',
       ex: 'Trotz der Renovierung blieb das Haus im Originalzustand.', exEn: 'Despite the renovation, the house remained in its original condition.', exHi: 'Renovation ke bawajood, ghar apni mool sthiti mein raha.',
       advanced: { synonyms: [], opposites: [], collocations: ['im Originalzustand'] } },
@@ -365,7 +371,9 @@ const CHAPTER = {
       advanced: { synonyms: [], opposites: [], collocations: [] } },
     { de: 'Nachtwächterin', art: 'die', gender: 'f', plural: 'Nachtwächterinnen', pos: 'noun', level: 'B1', en: 'night watchwoman', hi: 'रात्रि प्रहरी (महिला)',
       ex: 'Wegen der Tradition der Stadt arbeitet heute eine Nachtwächterin dort.', exEn: 'Because of the city\'s tradition, a night watchwoman works there today.', exHi: 'Shahar ki parampara ki wajah se, aaj wahan ek mahila raat prahri kaam karti hai.',
-      advanced: { synonyms: [], opposites: ['Nachtwächter'], collocations: [] } },
+      advanced: { synonyms: [], opposites: ['Nachtwächter'], collocations: [] },
+      img: { src: '/api/media/vocab-img/1f174d027188acce891b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A night watchwoman carrying a glowing lantern.' }
+    },
     { de: 'Schuld', art: 'die', gender: 'f', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'fault, guilt (ohne Schuld: without fault)', hi: 'दोष',
       ex: 'Wegen eines Fehlers, ohne ihre Schuld, verpasste sie den Zug.', exEn: 'Because of a mistake, through no fault of her own, she missed the train.', exHi: 'Ek galti ki wajah se, uski koi galti na hote hue bhi, uski train chhoot gayi.',
       advanced: { synonyms: ['Verantwortung'], opposites: ['Unschuld'], collocations: ['ohne Schuld'] } },

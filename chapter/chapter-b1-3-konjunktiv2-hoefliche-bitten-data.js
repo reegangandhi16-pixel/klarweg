@@ -310,7 +310,9 @@ const CHAPTER = {
       ex: 'Würdest du dir gern ein neues Handy anschaffen?', exEn: 'Would you like to get yourself a new phone?', exHi: 'Kya tumhara naya phone lene ka mann hai?',
       ex2: 'Ich hätte gern einen neuen Staubsauger, aber ich würde ihn mir erst später anschaffen.', ex2En: 'I\'d like a new vacuum cleaner, but I would only get it for myself later.', ex2Hi: 'Mujhe naya vacuum cleaner chahiye, lekin main use baad mein hi khareedunga.',
       conj: { praesens: 'schafft sich an', praeteritum: 'schaffte sich an', perfekt: 'hat sich angeschafft' },
-      advanced: { synonyms: ['kaufen', 'erwerben'], opposites: ['verkaufen'], collocations: ['sich ein Gerät anschaffen'] } },
+      advanced: { synonyms: ['kaufen', 'erwerben'], opposites: ['verkaufen'], collocations: ['sich ein Gerät anschaffen'] },
+      img: { src: '/api/media/vocab-img/0d342a5a37f794386066', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person wheeling a new bicycle into their home' }
+    },
     { de: 'sich lohnen', pos: 'verb', level: 'B1', en: 'to be worth it', hi: 'फायदेमंद होना',
       ex: 'Würde sich eine Reparatur lohnen?', exEn: 'Would a repair be worth it?', exHi: 'Kya repair karwana faayde ka hoga?',
       ex2: 'Es lohnt sich, auf das Sonderangebot zu warten.', ex2En: 'It\'s worth waiting for the special offer.', ex2Hi: 'Special offer ka intzaar karna faayde ka hai.',
@@ -323,7 +325,9 @@ const CHAPTER = {
     { de: 'stumm', pos: 'adjective', level: 'B1', en: 'mute, silent', hi: 'मौन, ख़ामोश',
       ex: 'Das Handy war den ganzen Tag stumm.', exEn: 'The phone was on mute all day.', exHi: 'Phone poore din mute tha.',
       ex2: 'Könnten Sie bitte stumm bleiben, während ich telefoniere?', ex2En: 'Could you please stay quiet while I\'m on the phone?', ex2Hi: 'Kya aap kripya khamosh reh sakte hain jab tak main phone par baat kar raha hoon?',
-      advanced: { synonyms: ['lautlos', 'still'], opposites: ['laut'], collocations: ['stumm schalten', 'stumm bleiben'] } },
+      advanced: { synonyms: ['lautlos', 'still'], opposites: ['laut'], collocations: ['stumm schalten', 'stumm bleiben'] },
+      img: { src: '/api/media/vocab-img/c2566e17cfc658a7bfd6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A phone screen showing a muted speaker symbol.' }
+    },
     { de: 'technisch', pos: 'adjective', level: 'B1', en: 'technical', hi: 'तकनीकी',
       ex: 'Bloß nicht wieder ein technisches Problem!', exEn: 'Not another technical problem, please!', exHi: 'Bas ek aur technical problem na ho!',
       ex2: 'Hätten Sie technische Unterstützung für dieses Gerät?', ex2En: 'Would you have technical support for this device?', ex2Hi: 'Kya aapke paas is device ke liye technical support hoga?',
@@ -339,7 +343,9 @@ const CHAPTER = {
     { de: 'Knopf', art: 'der', gender: 'm', plural: 'Knöpfe', pos: 'noun', level: 'B1', en: 'button', hi: 'बटन',
       ex: 'Man muss nur den Knopf drücken.', exEn: 'You just need to press the button.', exHi: 'Bas button dabana hai.',
       ex2: 'Der rote Knopf schaltet das Gerät aus.', ex2En: 'The red button switches the device off.', ex2Hi: 'Laal button device ko band karta hai.',
-      advanced: { synonyms: ['Taste'], opposites: [], collocations: ['den Knopf drücken', 'auf den Knopf drücken'] } },
+      advanced: { synonyms: ['Taste'], opposites: [], collocations: ['den Knopf drücken', 'auf den Knopf drücken'] },
+      img: { src: '/api/media/vocab-img/76d1e2aaa5556f960286', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand pressing a round push button.' }
+    },
     { de: 'Staubsauger', art: 'der', gender: 'm', plural: 'Staubsauger', pos: 'noun', level: 'B1', en: 'vacuum cleaner', hi: 'वैक्यूम क्लीनर',
       ex: 'Könntest du mir zeigen, wie man den Staubsauger bedient?', exEn: 'Could you show me how to operate the vacuum cleaner?', exHi: 'Kya tum mujhe dikha sakte ho ki vacuum cleaner kaise chalate hain?',
       ex2: 'Unser Staubsauger ist gestern kaputtgegangen.', ex2En: 'Our vacuum cleaner broke yesterday.', ex2Hi: 'Hamara vacuum cleaner kal kharab ho gaya.',
@@ -356,7 +362,9 @@ const CHAPTER = {
       ex: 'Könnten Sie diesen Knopf bitte annähen?', exEn: 'Could you please sew on this button?', exHi: 'Kya aap kripya yeh button si sakte hain?',
       ex2: 'Meine Oma näht ihre Kleider selbst.', ex2En: 'My grandmother sews her own clothes.', ex2Hi: 'Meri dadi apne kapde khud silti hain.',
       conj: { praesens: 'näht', praeteritum: 'nähte', perfekt: 'hat genäht' },
-      advanced: { synonyms: ['flicken'], opposites: [], collocations: ['einen Knopf annähen', 'Kleider nähen'] } },
+      advanced: { synonyms: ['flicken'], opposites: [], collocations: ['einen Knopf annähen', 'Kleider nähen'] },
+      img: { src: '/api/media/vocab-img/45da5c704b694d196aa1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person sewing a button onto a shirt' }
+    },
     { de: 'reinigen', pos: 'verb', level: 'B1', en: 'to clean', hi: 'साफ़ करना',
       ex: 'Würden Sie das Gerät bitte reinigen?', exEn: 'Would you please clean the device?', exHi: 'Kya aap kripya device saaf karenge?',
       ex2: 'Ich würde den Teppich gern professionell reinigen lassen.', ex2En: 'I would like to have the carpet cleaned professionally.', ex2Hi: 'Main carpet professionally saaf karwana chahoonga.',

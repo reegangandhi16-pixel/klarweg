@@ -270,7 +270,7 @@ const CHAPTER = {
     { de: 'tun', pos: 'verb', en: 'to do', hi: 'करना', ex: 'Was kann ich für dich tun?', exEn: 'What can I do for you?', conj: { praesens: 'tut', praeteritum: 'tat', perfekt: 'hat getan' } },
     { de: 'vereinbaren', pos: 'verb', en: 'to arrange', hi: 'तय करना', ex: 'Ich möchte einen Termin vereinbaren.', exEn: 'I\u2019d like to arrange an appointment.', conj: { praesens: 'vereinbart', praeteritum: 'vereinbarte', perfekt: 'hat vereinbart' } },
     { de: 'vielleicht', pos: 'adverb', en: 'maybe, perhaps', hi: 'शायद', ex: 'Vielleicht kommt er gleich.', exEn: 'Maybe he\u2019s coming soon.' },
-    { de: 'warten', pos: 'verb', en: 'to wait', hi: 'इंतज़ार करना', ex: 'Wir warten auf Max.', exEn: 'We wait for Max.', conj: { praesens: 'wartet', praeteritum: 'wartete', perfekt: 'hat gewartet' } },
+    { de: 'warten', pos: 'verb', en: 'to wait', hi: 'इंतज़ार करना', ex: 'Wir warten auf Max.', exEn: 'We wait for Max.', conj: { praesens: 'wartet', praeteritum: 'wartete', perfekt: 'hat gewartet' }, img: { src: '/api/media/vocab-img/c27c1c1487315b87553f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person waiting on a bench at a stop.' } },
     { de: 'zu (spät)', pos: 'adverb', en: 'too (late)', hi: 'बहुत (देर)', ex: 'Ich bin zu spät.', exEn: 'I am too late.' },
     { de: 'überlegen', pos: 'verb', en: 'to think about', hi: 'सोचना', ex: 'Ich überlege noch.', exEn: 'I\u2019m still thinking about it.', conj: { praesens: 'überlegt', praeteritum: 'überlegte', perfekt: 'hat überlegt' } },
     // ===== Passive =====
@@ -280,7 +280,7 @@ const CHAPTER = {
     { de: 'Pünktlichkeit', art: 'die', gender: 'f', plural: '—', pos: 'noun', en: 'punctuality', hi: 'समय की पाबंदी', ex: 'Pünktlichkeit ist wichtig.', exEn: 'Punctuality is important.' },
     { de: 'Rollenkarte', art: 'die', gender: 'f', plural: 'Rollenkarten', pos: 'noun', en: 'role card', hi: 'भूमिका कार्ड', ex: 'Hier ist eine Rollenkarte.', exEn: 'Here is a role card.' },
     { de: 'um (+A)', pos: 'preposition', en: 'for (forgiveness)', hi: 'के लिए', ex: 'Ich bitte um Entschuldigung.', exEn: 'I ask for forgiveness.' },
-    { de: 'unhöflich', pos: 'adjective', en: 'impolite, rude', hi: 'असभ्य', ex: 'Zu spät kommen ist unhöflich.', exEn: 'Coming late is impolite.' },
+    { de: 'unhöflich', pos: 'adjective', en: 'impolite, rude', hi: 'असभ्य', ex: 'Zu spät kommen ist unhöflich.', exEn: 'Coming late is impolite.', img: { src: '/api/media/vocab-img/03bee796588d5a239cd4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person cutting in line in front of someone else' } },
     { de: 'vorspielen', pos: 'verb', en: 'to act out, perform', hi: 'अभिनय करना', ex: 'Wir spielen den Dialog vor.', exEn: 'We act out the dialogue.', conj: { praesens: 'spielt vor', praeteritum: 'spielte vor', perfekt: 'hat vorgespielt' }, img: { src: '/api/media/vocab-img/876e807ab10ecba598f6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two actors performing a scene on stage.' } }
   ],
 

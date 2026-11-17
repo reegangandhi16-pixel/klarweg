@@ -235,7 +235,7 @@ const CHAPTER = {
     { de: 'hinter', pos: 'preposition', en: 'behind (+ Dativ for location)', hi: 'के पीछे', ex: 'Der Garten ist hinter dem Haus.', exEn: 'The garden is behind the house.' },
     { de: '\u00fcber', pos: 'preposition', en: 'above, over (+ Dativ for location)', hi: 'के ऊपर', ex: 'Die Lampe h\u00e4ngt \u00fcber dem Tisch.', exEn: 'The lamp hangs above the table.' },
     { de: 'unter', pos: 'preposition', en: 'under, below (+ Dativ for location)', hi: 'के नीचे', ex: 'Der Schl\u00fcssel liegt unter dem Kissen.', exEn: 'The key lies under the cushion.' },
-    { de: 'am Ende der Stra\u00dfe', pos: 'phrase', en: 'at the end of the street', hi: 'सड़क के अंत में', ex: 'Der Dom steht am Ende der Stra\u00dfe.', exEn: 'The cathedral stands at the end of the street.' },
+    { de: 'am Ende der Stra\u00dfe', pos: 'phrase', en: 'at the end of the street', hi: 'सड़क के अंत में', ex: 'Der Dom steht am Ende der Stra\u00dfe.', exEn: 'The cathedral stands at the end of the street.', img: { src: '/api/media/vocab-img/e757ebbe5a5ae355cf80', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A grand church standing at the end of a street.' } },
     { de: 'an der Ecke', pos: 'phrase', en: 'at the corner', hi: 'कोने पर', ex: 'Biegen Sie an der Ecke rechts ab.', exEn: 'Turn right at the corner.' },
     { de: 'auf der linken Seite', pos: 'phrase', en: 'on the left side', hi: 'बाईं ओर', ex: 'Das Caf\u00e9 ist auf der linken Seite.', exEn: 'The cafe is on the left side.' },
     { de: 'auf der rechten Seite', pos: 'phrase', en: 'on the right side', hi: 'दाईं ओर', ex: 'Die Beh\u00f6rde ist auf der rechten Seite.', exEn: 'The authority is on the right side.' },

@@ -245,7 +245,7 @@ const CHAPTER = {
     { de: 'bei', pos: 'preposition', en: 'at (someone\u2019s), near', hi: 'के यहाँ, पास', ex: 'Ich wohne bei meiner Tante.', exEn: 'I live at my aunt\u2019s.' },
     { de: 'Fahrrad', art: 'das', gender: 'n', plural: 'Fahrräder', pos: 'noun', en: 'bicycle', hi: 'साइकिल', ex: 'Ich fahre mit dem Fahrrad.', exEn: 'I go by bike.', img: { src: '/api/media/vocab-img/d002cbe20c17d4fbacd3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'city bicycle' } },
     { de: 'Bus', art: 'der', gender: 'm', plural: 'Busse', pos: 'noun', en: 'bus', hi: 'बस', ex: 'Ich fahre mit dem Bus.', exEn: 'I go by bus.', img: { src: '/api/media/vocab-img/5b27a373d88ccac116f4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A city transit bus' } },
-    { de: 'Zug', art: 'der', gender: 'm', plural: 'Züge', pos: 'noun', en: 'train', hi: 'ट्रेन', ex: 'Der Zug ist schnell.', exEn: 'The train is fast.' },
+    { de: 'Zug', art: 'der', gender: 'm', plural: 'Züge', pos: 'noun', en: 'train', hi: 'ट्रेन', ex: 'Der Zug ist schnell.', exEn: 'The train is fast.', img: { src: '/api/media/vocab-img/04be55f72ce627497e98', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a passenger train on railway tracks' } },
     { de: 'mit', pos: 'preposition', en: 'with, by', hi: 'के साथ, से', ex: 'Ich fahre mit dem Zug.', exEn: 'I travel by train.' },
     { de: 'nach', pos: 'preposition', en: 'to; after', hi: 'को; के बाद', ex: 'Wir fahren nach Berlin.', exEn: 'We travel to Berlin.' },
     { de: 'seit', pos: 'preposition', en: 'since, for', hi: 'से', ex: 'Ich lerne seit einem Jahr Deutsch.', exEn: 'I\u2019ve studied German for a year.' },

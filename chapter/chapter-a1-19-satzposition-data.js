@@ -234,7 +234,7 @@ const CHAPTER = {
     // ===== Active Support =====
     { de: 'allein', pos: 'adverb', en: 'alone', hi: 'अकेले', ex: 'Ich wohne allein.', exEn: 'I live alone.', img: { src: '/api/media/vocab-img/c92b7af069c88d8f816b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person sitting alone on a long park bench.' } },
     { de: 'Alltag', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'everyday life, daily routine', hi: 'रोज़मर्रा', ex: 'Der Alltag ist die beste Praxis.', exEn: 'Everyday life is the best practice.' },
-    { de: 'Mittag', art: 'der', gender: 'm', plural: 'Mittage', pos: 'noun', en: 'noon, midday', hi: 'दोपहर', ex: 'Am Mittag esse ich.', exEn: 'At noon I eat.' },
+    { de: 'Mittag', art: 'der', gender: 'm', plural: 'Mittage', pos: 'noun', en: 'noon, midday', hi: 'दोपहर', ex: 'Am Mittag esse ich.', exEn: 'At noon I eat.', img: { src: '/api/media/vocab-img/b95747886a0c8e6f4933', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Bright midday sun over a town square' } },
     { de: 'Morgen', art: 'der', gender: 'm', plural: 'Morgen', pos: 'noun', en: 'morning', hi: 'सुबह', ex: 'Der Morgen ist ruhig.', exEn: 'The morning is calm.' },
     { de: 'Nachmittag', art: 'der', gender: 'm', plural: 'Nachmittage', pos: 'noun', en: 'afternoon', hi: 'दोपहर बाद', ex: 'Am Nachmittag lerne ich.', exEn: 'In the afternoon I study.' },
     { de: 'Vormittag', art: 'der', gender: 'm', plural: 'Vormittage', pos: 'noun', en: 'late morning, forenoon', hi: 'दोपहर से पहले', ex: 'Am Vormittag arbeite ich.', exEn: 'In the late morning I work.' },

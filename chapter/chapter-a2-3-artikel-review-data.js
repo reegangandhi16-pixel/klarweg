@@ -238,7 +238,7 @@ const CHAPTER = {
   // ---------- Vocabulary (48 items) ----------
   vocab: [
     // ===== Core Active (professions & workplaces) =====
-    { de: 'Arbeit', art: 'die', gender: 'f', plural: 'Arbeiten', pos: 'noun', en: 'work, job', hi: 'काम', ex: 'Die G\u00e4rtnerin hat eine Arbeit im Land.', exEn: 'The gardener has a job in the countryside.' },
+    { de: 'Arbeit', art: 'die', gender: 'f', plural: 'Arbeiten', pos: 'noun', en: 'work, job', hi: 'काम', ex: 'Die G\u00e4rtnerin hat eine Arbeit im Land.', exEn: 'The gardener has a job in the countryside.', img: { src: '/api/media/vocab-img/990c6cfdf90dae18649f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Gardener trimming a hedge outdoors' } },
     { de: 'G\u00e4rtnerin', art: 'die', gender: 'f', plural: 'G\u00e4rtnerinnen', pos: 'noun', en: 'gardener (female)', hi: 'माली (स्त्री)', ex: 'Ich sehe eine G\u00e4rtnerin.', exEn: 'I see a gardener.', img: { src: '/api/media/vocab-img/9393fb77003ed5b4662f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Gardener planting a seedling' } },
     { de: 'Rentner', art: 'der', gender: 'm', plural: 'Rentner', pos: 'noun', en: 'pensioner, retiree', hi: 'सेवानिवृत्त व्यक्ति', ex: 'Der Rentner ist erwachsen und unabh\u00e4ngig.', exEn: 'The pensioner is grown-up and independent.' },
     { de: 'Altenpfleger', art: 'der', gender: 'm', plural: 'Altenpfleger', pos: 'noun', en: 'geriatric nurse', hi: 'बुज़ुर्गों की देखभाल करने वाला', ex: 'Der Altenpfleger hilft \u00e4lteren Menschen.', exEn: 'The geriatric nurse helps older people.', img: { src: '/api/media/vocab-img/85bfe7ce30886b6ddfcb', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'male caregiver assisting an elderly person' } },

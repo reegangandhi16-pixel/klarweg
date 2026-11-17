@@ -262,7 +262,9 @@ const CHAPTER = {
       conj: { praesens: 'spricht mit', praeteritum: 'sprach mit', perfekt: 'hat mitgesprochen' } },
     { de: 'klopfen', pos: 'verb', en: 'to knock, to tap', hi: 'थपथपाना',
       ex: 'Wir klopfen den Rhythmus.', exEn: 'We tap the rhythm.',
-      conj: { praesens: 'klopft', praeteritum: 'klopfte', perfekt: 'hat geklopft' } },
+      conj: { praesens: 'klopft', praeteritum: 'klopfte', perfekt: 'hat geklopft' },
+      img: { src: '/api/media/vocab-img/57302803aaec618c47ae', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hand knocking on a wooden door' }
+    },
     { de: 'langsam', pos: 'adjective', en: 'slow, slowly', hi: 'धीमा / धीरे',
       ex: 'Sprich langsam und deutlich.', exEn: 'Speak slowly and clearly.',
       compare: { comparative: 'langsamer', superlative: 'am langsamsten' },
@@ -280,7 +282,9 @@ const CHAPTER = {
     },
     { de: 'doppelt', pos: 'adjective', en: 'double', hi: 'दुगना / दोहरा',
       ex: 'Ein doppelter Konsonant macht den Vokal kurz.', exEn: 'A double consonant makes the vowel short.',
-      compare: { comparative: 'doppelter', superlative: 'am doppeltesten' } },
+      compare: { comparative: 'doppelter', superlative: 'am doppeltesten' },
+      img: { src: '/api/media/vocab-img/47805caa387491dab53a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A dessert bowl with a double scoop of ice cream' }
+    },
     { de: 'betont', pos: 'adjective', en: 'stressed (syllable)', hi: 'बलाघात वाला',
       ex: 'Die erste Silbe ist betont.', exEn: 'The first syllable is stressed.',
       compare: { comparative: 'stärker betont', superlative: 'am stärksten betont' } },

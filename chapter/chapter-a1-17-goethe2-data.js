@@ -281,7 +281,7 @@ const CHAPTER = {
     { de: 'Sprachinstitut', art: 'das', gender: 'n', plural: 'Sprachinstitute', pos: 'noun', en: 'language institute', hi: 'भाषा संस्थान', ex: 'Das Sprachinstitut ist bekannt.', exEn: 'The language institute is well known.' },
     { de: 'Angabe', art: 'die', gender: 'f', plural: 'Angaben', pos: 'noun', en: 'detail, piece of info', hi: 'विवरण', ex: 'Alle Angaben sind richtig.', exEn: 'All details are correct.' },
     { de: 'Sprachschule', art: 'die', gender: 'f', plural: 'Sprachschulen', pos: 'noun', en: 'language school', hi: 'भाषा विद्यालय', ex: 'Die Sprachschule ist in Berlin.', exEn: 'The language school is in Berlin.' },
-    { de: 'zusammenpassen', pos: 'verb', en: 'to match, go together', hi: 'मेल खाना', ex: 'Die Daten passen zusammen.', exEn: 'The data matches.', conj: { praesens: 'passt zusammen', praeteritum: 'passte zusammen', perfekt: 'hat zusammengepasst' } }
+    { de: 'zusammenpassen', pos: 'verb', en: 'to match, go together', hi: 'मेल खाना', ex: 'Die Daten passen zusammen.', exEn: 'The data matches.', conj: { praesens: 'passt zusammen', praeteritum: 'passte zusammen', perfekt: 'hat zusammengepasst' }, img: { src: '/api/media/vocab-img/4ac611a9851877bb87c7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two matching puzzle pieces sliding together' } }
   ],
 
   // ---------- Grammar Review (application, not new theory) ----------

@@ -225,7 +225,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/6e132768bc5b7098382f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person reading a travel guidebook with interest, a small globe beside them' }
     },
     { de: 'angenehm', pos: 'adjective', en: 'pleasant', hi: 'सुखद',
-      ex: 'Es ist angenehm, im Freien zu sitzen.', exEn: 'It\'s pleasant to sit outdoors.' },
+      ex: 'Es ist angenehm, im Freien zu sitzen.', exEn: 'It\'s pleasant to sit outdoors.',
+      img: { src: '../public/vocab-img/5606963c84e864826f4a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person relaxing on a garden chair outdoors in mild sunshine, content' }
+    },
     { de: 'dabei sein', pos: 'verb', en: 'to be there, to take part', hi: 'साथ होना',
       ex: 'Ich habe vor, beim Fest dabei zu sein.', exEn: 'I\'m planning to be there for the festival.' },
     { de: 'Urlaubsplanung', art: 'die', gender: 'f', plural: 'Urlaubsplanungen', pos: 'noun', en: 'holiday planning', hi: 'छुट्टी की योजना',
@@ -278,7 +280,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/8f09ada41029b3a5074c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'white mosquito net hanging over a bed' }
     },
     { de: 'Chat', art: 'der', gender: 'm', plural: 'Chats', pos: 'noun', en: 'chat', hi: 'चैट',
-      ex: 'Ich verspreche, dir im Chat zu schreiben.', exEn: 'I promise to write to you in the chat.' },
+      ex: 'Ich verspreche, dir im Chat zu schreiben.', exEn: 'I promise to write to you in the chat.',
+      img: { src: '../public/vocab-img/23eeb13da22d05dd9364', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'smartphone with several blank chat speech bubbles on its screen, no letters' }
+    },
     { de: 'Genuss', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'treat, enjoyment', hi: 'आनंद',
       ex: 'Es ist ein Genuss, am Meer zu sitzen.', exEn: 'It\'s a treat to sit by the sea.',
       img: { src: '../public/vocab-img/e63ccd2f3f077f0d5b16', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person enjoying a cup of coffee and a slice of cake at a café table by the sea' }
@@ -286,13 +290,17 @@ const CHAPTER = {
     { de: 'Himmel', art: 'der', gender: 'm', plural: 'Himmel', pos: 'noun', en: 'sky', hi: 'आकाश',
       ex: 'Es ist schön, abends den Himmel zu beobachten.', exEn: 'It\'s nice to watch the sky in the evenings.' },
     { de: 'Kompromiss', art: 'der', gender: 'm', plural: 'Kompromisse', pos: 'noun', en: 'compromise', hi: 'समझौता',
-      ex: 'Wir versuchen, einen Kompromiss zu finden.', exEn: 'We\'re trying to find a compromise.' },
+      ex: 'Wir versuchen, einen Kompromiss zu finden.', exEn: 'We\'re trying to find a compromise.',
+      img: { src: '../public/vocab-img/2fc315a621d48eeb1848', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'people each holding one half of the same cake, both content' }
+    },
     { de: 'Pilz', art: 'der', gender: 'm', plural: 'Pilze', pos: 'noun', en: 'mushroom', hi: 'मशरूम',
       ex: 'Pass auf, keine giftigen Pilze zu sammeln.', exEn: 'Be careful not to collect poisonous mushrooms.',
       img: { src: '../public/vocab-img/6d3b752a8dfed717a1a5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'brown forest mushroom growing in moss' }
     },
     { de: 'Sand', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'sand', hi: 'रेत',
-      ex: 'Es ist angenehm, im Sand zu liegen.', exEn: 'It\'s pleasant to lie in the sand.' },
+      ex: 'Es ist angenehm, im Sand zu liegen.', exEn: 'It\'s pleasant to lie in the sand.',
+      img: { src: '../public/vocab-img/4c71121d357043708475', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'small mound of fine pale beach sand with a seashell' }
+    },
     { de: 'Schutz', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'protection', hi: 'सुरक्षा',
       ex: 'Es ist wichtig, Schutz vor der Sonne zu haben.', exEn: 'It\'s important to have protection from the sun.',
       img: { src: '../public/vocab-img/3a208cbc814342a89238', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'beach parasol shading a towel, with a bottle of sunscreen and a sun hat' }

@@ -374,7 +374,9 @@ const CHAPTER = {
     },
     { de: 'recherchieren', pos: 'verb', en: 'to research', hi: 'खोज करना',
       ex: 'Ich recherchiere im Blog.', exEn: 'I research in the blog.',
-      conj: { praesens: 'recherchiert', praeteritum: 'recherchierte', perfekt: 'hat recherchiert' } },
+      conj: { praesens: 'recherchiert', praeteritum: 'recherchierte', perfekt: 'hat recherchiert' },
+      img: { src: '/api/media/vocab-img/3ccb7b085a4da63ac60e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person researching with open books at desk' }
+    },
     { de: 'thematisch', pos: 'adjective', en: 'thematic', hi: 'विषय-आधारित',
       ex: 'Ordne die Wörter thematisch.', exEn: 'Sort the words thematically.' },
     { de: 'verwenden', pos: 'verb', en: 'to use', hi: 'इस्तेमाल करना',
@@ -388,7 +390,9 @@ const CHAPTER = {
     // — Reference / System —
     { de: 'berichten', pos: 'verb', en: 'to report', hi: 'रिपोर्ट करना',
       ex: 'Berichte über deinen Tag.', exEn: 'Report about your day.',
-      conj: { praesens: 'berichtet', praeteritum: 'berichtete', perfekt: 'hat berichtet' } },
+      conj: { praesens: 'berichtet', praeteritum: 'berichtete', perfekt: 'hat berichtet' },
+      img: { src: '/api/media/vocab-img/5403784c533107914944', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A reporter speaking into a microphone' }
+    },
     { de: 'bestimmt', pos: 'adjective', en: 'definite', hi: 'निश्चित',
       ex: 'der, die, das sind bestimmte Artikel.', exEn: 'der, die, das are definite articles.' },
     { de: 'Nomen', art: 'das', gender: 'n', plural: 'Nomen', pos: 'noun', en: 'noun', hi: 'संज्ञा',
@@ -422,7 +426,9 @@ const CHAPTER = {
       conj: { praesens: 'markiert', praeteritum: 'markierte', perfekt: 'hat markiert' } },
     { de: 'unterstreichen', pos: 'verb', en: 'to underline', hi: 'रेखांकित करना',
       ex: 'Unterstreiche den Artikel.', exEn: 'Underline the article.',
-      conj: { praesens: 'unterstreicht', praeteritum: 'unterstrich', perfekt: 'hat unterstrichen' } },
+      conj: { praesens: 'unterstreicht', praeteritum: 'unterstrich', perfekt: 'hat unterstrichen' },
+      img: { src: '/api/media/vocab-img/b60ed6e19a3439fb8615', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hand underlining a row on paper' }
+    },
     { de: 'vergleichen', pos: 'verb', en: 'to compare', hi: 'तुलना करना',
       ex: 'Vergleiche die Artikel.', exEn: 'Compare the articles.',
       conj: { praesens: 'vergleicht', praeteritum: 'verglich', perfekt: 'hat verglichen' },

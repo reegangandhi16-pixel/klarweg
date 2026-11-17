@@ -226,7 +226,7 @@ const CHAPTER = {
     { de: 'behalten', pos: 'verb', en: 'to keep', hi: 'रखना', ex: 'Ich werde den Ring behalten.', exEn: 'I\u2019m going to keep the ring.', conj: { praesens: 'beh\u00e4lt', praeteritum: 'behielt', perfekt: 'hat behalten' } },
     { de: 'bestens', pos: 'adverb', en: 'great, very well', hi: 'बहुत अच्छे से', ex: 'Es geht mir bestens, seit ich Grafiker werde.', exEn: 'I\u2019m doing great since I\u2019m becoming a graphic designer.' },
     { de: 'bluten', pos: 'verb', en: 'to bleed', hi: 'ख़ून बहना', ex: 'Mein Finger blutet, aber es wird bald besser.', exEn: 'My finger is bleeding, but it\u2019ll get better soon.', conj: { praesens: 'blutet', praeteritum: 'blutete', perfekt: 'hat geblutet' } },
-    { de: 'Feuer', art: 'das', gender: 'n', plural: 'Feuer', pos: 'noun', en: 'fire', hi: 'आग', ex: 'Das Feuer wird gr\u00f6\u00dfer.', exEn: 'The fire is getting bigger.' },
+    { de: 'Feuer', art: 'das', gender: 'n', plural: 'Feuer', pos: 'noun', en: 'fire', hi: 'आग', ex: 'Das Feuer wird gr\u00f6\u00dfer.', exEn: 'The fire is getting bigger.', img: { src: '/api/media/vocab-img/26914af986bef2ec72d0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'campfire with burning logs' } },
     { de: 'Frist', art: 'die', gender: 'f', plural: 'Fristen', pos: 'noun', en: 'deadline', hi: 'समय सीमा', ex: 'Die Frist wird morgen enden.', exEn: 'The deadline will end tomorrow.' },
     { de: 'Gold', art: 'das', gender: 'n', plural: '\u2014', pos: 'noun', en: 'gold', hi: 'सोना', ex: 'Sie wird eine Goldmedaille bekommen.', exEn: 'She\u2019s going to get a gold medal.' },
     { de: 'Hausmann', art: 'der', gender: 'm', plural: 'Hausm\u00e4nner', pos: 'noun', en: 'homemaker (m.)', hi: 'घर संभालने वाला पुरुष', ex: 'Er wird bald Hausmann.', exEn: 'He\u2019s going to be a homemaker soon.', img: { src: '/api/media/vocab-img/8d3a32da0d2dc59a30a0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'man wearing an apron folding laundry' } },
@@ -239,7 +239,7 @@ const CHAPTER = {
     { de: 'vor allem', pos: 'phrase', en: 'especially, above all', hi: 'विशेष रूप से', ex: 'Vor allem werde ich ruhiger.', exEn: 'Above all, I\u2019m getting calmer.' },
     { de: '\u00e4u\u00dfern', pos: 'verb', en: 'to express', hi: 'व्यक्त करना', ex: 'Ich werde meine Meinung \u00e4u\u00dfern.', exEn: 'I\u2019m going to express my opinion.', conj: { praesens: '\u00e4u\u00dfert', praeteritum: '\u00e4u\u00dferte', perfekt: 'hat ge\u00e4u\u00dfert' } },
     { de: 'Sprichwort', art: 'das', gender: 'n', plural: 'Sprichw\u00f6rter', pos: 'noun', en: 'proverb', hi: 'कहावत', ex: 'Ein altes Sprichwort wird nie altmodisch.', exEn: 'An old proverb never becomes old-fashioned.' },
-    { de: 'Unterkunft', art: 'die', gender: 'f', plural: 'Unterk\u00fcnfte', pos: 'noun', en: 'accommodation', hi: 'आवास', ex: 'Die Unterkunft wird bald fertig.', exEn: 'The accommodation will be ready soon.' },
+    { de: 'Unterkunft', art: 'die', gender: 'f', plural: 'Unterk\u00fcnfte', pos: 'noun', en: 'accommodation', hi: 'आवास', ex: 'Die Unterkunft wird bald fertig.', exEn: 'The accommodation will be ready soon.', img: { src: '/api/media/vocab-img/eb99c2a56929b93eae3a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a cozy wooden holiday accommodation cabin' } },
     { de: 'Satzh\u00e4lfte', art: 'die', gender: 'f', plural: 'Satzh\u00e4lften', pos: 'noun', en: 'half of the sentence', hi: 'वाक्य का आधा भाग', ex: 'In der zweiten Satzh\u00e4lfte steht das Verb.', exEn: 'In the second half of the sentence stands the verb.' }
   ],
 

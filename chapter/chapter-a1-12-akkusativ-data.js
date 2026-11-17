@@ -201,7 +201,9 @@ const CHAPTER = {
       conj: { praesens: 'findet', praeteritum: 'fand', perfekt: 'hat gefunden' } },
     { de: 'suchen', pos: 'verb', en: 'to look for', hi: 'खोजना',
       ex: 'Ich suche die Karte.', exEn: 'I am looking for the card.',
-      conj: { praesens: 'sucht', praeteritum: 'suchte', perfekt: 'hat gesucht' } },
+      conj: { praesens: 'sucht', praeteritum: 'suchte', perfekt: 'hat gesucht' },
+      img: { src: '/api/media/vocab-img/d82473e5e49f8464430e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person searching for something under a sofa.' }
+    },
     { de: 'alles', pos: 'pronoun', en: 'everything', hi: 'सब कुछ',
       ex: 'Ich habe alles.', exEn: 'I have everything.' },
     { de: 'Geschäft', art: 'das', gender: 'n', plural: 'Geschäfte', pos: 'noun', en: 'shop', hi: 'दुकान',

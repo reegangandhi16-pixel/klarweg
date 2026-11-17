@@ -252,7 +252,9 @@ const CHAPTER = {
       ex: 'Das Buch ist interessant.', exEn: 'The book is interesting.',
       compare: { comparative: 'interessanter', superlative: 'am interessantesten' } },
     { de: 'richtig', pos: 'adjective / adverb', en: 'correct; really', hi: 'सही / सचमुच',
-      ex: 'Die Antwort ist richtig.', exEn: 'The answer is correct.' },
+      ex: 'Die Antwort ist richtig.', exEn: 'The answer is correct.',
+      img: { src: '/api/media/vocab-img/bfaf0752399d5fba873c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student smiling at a green checkmark on paper' }
+    },
     { de: 'falsch', pos: 'adjective', en: 'wrong', hi: 'ग़लत',
       ex: 'Die Antwort ist falsch.', exEn: 'The answer is wrong.' },
     { de: 'schön', pos: 'adjective', en: 'nice, pretty', hi: 'सुंदर',
@@ -270,7 +272,9 @@ const CHAPTER = {
       ex: 'Berlin ist größer als Bonn.', exEn: 'Berlin is bigger than Bonn.' },
     { de: 'alt', pos: 'adjective', en: 'old', hi: 'पुराना / बूढ़ा',
       ex: 'Das Auto ist alt.', exEn: 'The car is old.',
-      compare: { comparative: 'älter', superlative: 'am ältesten' } },
+      compare: { comparative: 'älter', superlative: 'am ältesten' },
+      img: { src: '/api/media/vocab-img/ad2506099c9ccbf01d9a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An old weathered wooden chair with worn paint.' }
+    },
     { de: 'anstrengend', pos: 'adjective', en: 'exhausting', hi: 'थकाऊ',
       ex: 'Der Tag ist anstrengend.', exEn: 'The day is exhausting.',
       img: { src: '/api/media/vocab-img/d9c3ee5c469d24b97645', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Tired person resting on a bench' }
@@ -304,7 +308,9 @@ const CHAPTER = {
     { de: 'einfach', pos: 'adjective / adverb', en: 'easy; simply', hi: 'आसान / बस',
       ex: 'Die Regel ist einfach.', exEn: 'The rule is easy.' },
     { de: 'faul', pos: 'adjective', en: 'lazy', hi: 'आलसी',
-      ex: 'Der Hund ist faul.', exEn: 'The dog is lazy.' },
+      ex: 'Der Hund ist faul.', exEn: 'The dog is lazy.',
+      img: { src: '/api/media/vocab-img/8bd003fe6d774b4d83a0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A lazy dog sleeping on a sunny rug' }
+    },
     { de: 'fleißig', pos: 'adjective', en: 'hardworking', hi: 'मेहनती',
       ex: 'Die Studentin ist fleißig.', exEn: 'The student is hardworking.',
       img: { src: '/api/media/vocab-img/373064d75ddc6d384b80', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hardworking student writing at a desk' }
@@ -315,7 +321,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/44adffd29ddbfae36564', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person giving a friendly wave' }
     },
     { de: 'froh', pos: 'adjective', en: 'glad', hi: 'खुश',
-      ex: 'Ich bin froh.', exEn: 'I am glad.' },
+      ex: 'Ich bin froh.', exEn: 'I am glad.',
+      img: { src: '/api/media/vocab-img/ea13022147bba10ea77d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling with relief and gratitude' }
+    },
     { de: 'ganz', pos: 'adjective / adverb', en: 'whole; quite', hi: 'पूरा / काफ़ी',
       ex: 'Der ganze Tag ist frei.', exEn: 'The whole day is free.' },
     { de: 'gefährlich', pos: 'adjective', en: 'dangerous', hi: 'खतरनाक',
@@ -325,7 +333,9 @@ const CHAPTER = {
     { de: 'genau', pos: 'adjective / adverb', en: 'exact, exactly', hi: 'बिल्कुल सही',
       ex: 'Das ist genau richtig.', exEn: 'That is exactly right.' },
     { de: 'glücklich', pos: 'adjective', en: 'happy', hi: 'खुश',
-      ex: 'Sie ist glücklich.', exEn: 'She is happy.' },
+      ex: 'Sie ist glücklich.', exEn: 'She is happy.',
+      img: { src: '/api/media/vocab-img/a751cc4471cec95aa04d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling happily with hands on heart' }
+    },
     { de: 'günstig', pos: 'adjective', en: 'cheap, good value', hi: 'किफ़ायती',
       ex: 'Das Geschäft ist günstig.', exEn: 'The shop is good value.' },
     { de: 'hoch', pos: 'adjective', en: 'high', hi: 'ऊँचा',
@@ -381,14 +391,18 @@ const CHAPTER = {
     { de: 'praktisch', pos: 'adjective', en: 'practical', hi: 'व्यावहारिक',
       ex: 'Die Tasche ist praktisch.', exEn: 'The bag is practical.' },
     { de: 'sauber', pos: 'adjective', en: 'clean', hi: 'साफ़',
-      ex: 'Das Zimmer ist sauber.', exEn: 'The room is clean.' },
+      ex: 'Das Zimmer ist sauber.', exEn: 'The room is clean.',
+      img: { src: '/api/media/vocab-img/92160f9e415b18014e70', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A spotless, tidy living room with clean furniture' }
+    },
     { de: 'schnell', pos: 'adjective', en: 'quick, fast', hi: 'तेज़',
       ex: 'Der Computer ist schnell.', exEn: 'The computer is fast.',
       compare: { comparative: 'schneller', superlative: 'am schnellsten' },
       img: { src: '/api/media/vocab-img/cbb941ddcfe27bc9af50', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A cheetah sprinting swiftly' }
     },
     { de: 'schwer', pos: 'adjective', en: 'difficult; heavy', hi: 'कठिन / भारी',
-      ex: 'Der Koffer ist schwer.', exEn: 'The suitcase is heavy.' },
+      ex: 'Der Koffer ist schwer.', exEn: 'The suitcase is heavy.',
+      img: { src: '/api/media/vocab-img/8cad9ed0bb2f0b63be53', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person lifting a heavy suitcase' }
+    },
     { de: 'sicher', pos: 'adjective', en: 'sure, safe', hi: 'सुरक्षित / निश्चित',
       ex: 'Die Stadt ist sicher.', exEn: 'The city is safe.' },
     { de: 'teuer', pos: 'adjective', en: 'expensive', hi: 'महँगा',
@@ -420,7 +434,9 @@ const CHAPTER = {
     { de: 'breit', pos: 'adjective', en: 'wide', hi: 'चौड़ा',
       ex: 'Die Straße ist breit.', exEn: 'The street is wide.' },
     { de: 'eilig', pos: 'adjective', en: 'in a hurry', hi: 'जल्दी में',
-      ex: 'Ich bin eilig.', exEn: 'I am in a hurry.' },
+      ex: 'Ich bin eilig.', exEn: 'I am in a hurry.',
+      img: { src: '/api/media/vocab-img/5602628a3e385c2201fc', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person walking briskly while checking the time.' }
+    },
     { de: 'elegant', pos: 'adjective', en: 'elegant', hi: 'सुरुचिपूर्ण',
       ex: 'Das Kleid ist elegant.', exEn: 'The dress is elegant.',
       img: { src: '/api/media/vocab-img/02ede0d8e9ff22bda91a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An elegant evening dress on a mannequin.' }
@@ -438,7 +454,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/6c6f1e42ae16fa19b76d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Exhausted person resting on an armchair' }
     },
     { de: 'lebendig', pos: 'adjective', en: 'lively', hi: 'जीवंत',
-      ex: 'Die Stadt ist lebendig.', exEn: 'The city is lively.' },
+      ex: 'Die Stadt ist lebendig.', exEn: 'The city is lively.',
+      img: { src: '/api/media/vocab-img/7a10a43e998df26b6130', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A lively outdoor town square with people' }
+    },
     { de: 'originell', pos: 'adjective', en: 'original', hi: 'मौलिक',
       ex: 'Die Idee ist originell.', exEn: 'The idea is original.',
       img: { src: '/api/media/vocab-img/cae0a377589e30eb39cd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A creative lamp crafted from a teapot' }

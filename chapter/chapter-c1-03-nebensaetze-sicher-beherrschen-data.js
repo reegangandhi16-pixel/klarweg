@@ -194,7 +194,9 @@ const CHAPTER = {
       note: 'To embed one clause inside another to add narrative or logical depth.',
       ex1: { de: 'Erfahrene Autoren verschachteln Nebensätze geschickt.', en: 'Experienced authors skillfully nest subordinate clauses.', hi: 'Anubhavi lekhak upvaakyon ko kushaltaa se nest karte hain.' },
       ex2: { de: 'Man sollte Sätze nicht zu tief verschachteln.', en: 'One shouldn\'t nest sentences too deeply.', hi: 'Vaakyon ko bahut zyaada gehraai se nest nahi karna chahiye.' },
-      collocations: ['Nebensätze verschachteln', 'tief verschachtelt'] },
+      collocations: ['Nebensätze verschachteln', 'tief verschachtelt'],
+      img: { src: '/api/media/vocab-img/70bd2fffc322b58b94d6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Wooden nesting boxes arranged inside each other' }
+    },
     { de: 'die Satzreduktion', ipa: '[ˈzatsʁeˌdʊktsi̯oːn]', en: 'clause/sentence reduction', hi: 'vaakya samkshepan', pos: 'Noun · fem.', register: 'C1 · academic/stylistic', clauseFunction: 'Stylistic reduction concept',
       note: 'Reducing a relative clause into a shorter participial attribute or nominal form for elegance.',
       ex1: { de: 'Durch Satzreduktion wirkt der Text prägnanter.', en: 'Through sentence reduction, the text seems more concise.', hi: 'Vaakya samkshepan ke jariye, text zyaada sankshipt lagta hai.' },

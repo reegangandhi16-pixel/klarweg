@@ -200,22 +200,32 @@ const CHAPTER = {
     // — Core active (communication verbs) —
     { de: 'hören', pos: 'verb', en: 'to hear, listen', hi: 'सुनना',
       ex: 'Hörst du die Frage?', exEn: 'Do you hear the question?',
-      conj: { praesens: 'hört', praeteritum: 'hörte', perfekt: 'hat gehört' } },
+      conj: { praesens: 'hört', praeteritum: 'hörte', perfekt: 'hat gehört' },
+      img: { src: '/api/media/vocab-img/01bb1369d4fd7b926366', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person cupping their hand to hear better' }
+    },
     { de: 'lesen', pos: 'verb', en: 'to read', hi: 'पढ़ना',
       ex: 'Liest du das Wort?', exEn: 'Are you reading the word?',
-      conj: { praesens: 'liest', praeteritum: 'las', perfekt: 'hat gelesen' } },
+      conj: { praesens: 'liest', praeteritum: 'las', perfekt: 'hat gelesen' },
+      img: { src: '/api/media/vocab-img/2538a488c9837423451d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person sitting in an armchair reading a book' }
+    },
     { de: 'sagen', pos: 'verb', en: 'to say', hi: 'कहना',
       ex: 'Sag das noch einmal!', exEn: 'Say that once more!',
       conj: { praesens: 'sagt', praeteritum: 'sagte', perfekt: 'hat gesagt' } },
     { de: 'schreiben', pos: 'verb', en: 'to write', hi: 'लिखना',
       ex: 'Schreibst du die Antwort?', exEn: 'Are you writing the answer?',
-      conj: { praesens: 'schreibt', praeteritum: 'schrieb', perfekt: 'hat geschrieben' } },
+      conj: { praesens: 'schreibt', praeteritum: 'schrieb', perfekt: 'hat geschrieben' },
+      img: { src: '/api/media/vocab-img/15727057e30f92b5f597', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hand writing on paper with a pen' }
+    },
     { de: 'sprechen', pos: 'verb', en: 'to speak', hi: 'बोलना',
       ex: 'Sprichst du Deutsch?', exEn: 'Do you speak German?',
-      conj: { praesens: 'spricht', praeteritum: 'sprach', perfekt: 'hat gesprochen' } },
+      conj: { praesens: 'spricht', praeteritum: 'sprach', perfekt: 'hat gesprochen' },
+      img: { src: '/api/media/vocab-img/d742d92d3ad494a6faf4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people sitting and speaking together' }
+    },
     { de: 'verstehen', pos: 'verb', en: 'to understand', hi: 'समझना',
       ex: 'Verstehst du die Frage?', exEn: 'Do you understand the question?',
-      conj: { praesens: 'versteht', praeteritum: 'verstand', perfekt: 'hat verstanden' } },
+      conj: { praesens: 'versteht', praeteritum: 'verstand', perfekt: 'hat verstanden' },
+      img: { src: '/api/media/vocab-img/4efbe5d794014b1609fe', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person with a lightbulb glowing above head' }
+    },
     { de: 'nicht', pos: 'negation', en: 'not', hi: 'नहीं',
       ex: 'Ich verstehe das nicht.', exEn: 'I do not understand that.' },
     // — Active support —
@@ -223,7 +233,9 @@ const CHAPTER = {
       ex: 'Was bedeutet das Wort?', exEn: 'What does the word mean?',
       conj: { praesens: 'bedeutet', praeteritum: 'bedeutete', perfekt: 'hat bedeutet' } },
     { de: 'Gespräch', art: 'das', gender: 'n', plural: 'Gespräche', pos: 'noun', en: 'conversation', hi: 'बातचीत',
-      ex: 'Das Gespräch ist auf Deutsch.', exEn: 'The conversation is in German.' },
+      ex: 'Das Gespräch ist auf Deutsch.', exEn: 'The conversation is in German.',
+      img: { src: '/api/media/vocab-img/55dfbce3ff371de48f9f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people at a table having a conversation.' }
+    },
     { de: 'Dank', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'thanks', hi: 'धन्यवाद',
       ex: 'Vielen Dank für das Gespräch!', exEn: 'Many thanks for the conversation!' },
     { de: 'Dialog', art: 'der', gender: 'm', plural: 'Dialoge', pos: 'noun', en: 'dialogue', hi: 'संवाद',

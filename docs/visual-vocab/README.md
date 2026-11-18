@@ -1,4 +1,10 @@
-# Visual Vocabulary — A1·01 pilot
+# Visual Vocabulary
+
+**All levels:** see [ROLLOUT.md](ROLLOUT.md) (dashboard, batches, procedure), [GATED-IMAGES.md](GATED-IMAGES.md)
+(paid-chapter image route, proposal), `inventory/` (generated audit) and the pipeline
+`scripts/vocab-images/` (`audit.mjs`, `pipeline.mjs` plan → generate → sheets → encode → apply).
+
+## A1·01 pilot (live)
 
 One illustration per vocabulary card, centered between the headword row and the
 meaning. Pilot scope: **A1 · Chapter 1 (Das Alphabet), 12/12 words**. Not on any

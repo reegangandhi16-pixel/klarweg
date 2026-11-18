@@ -219,7 +219,9 @@ const CHAPTER = {
     { de: 'schon', pos: 'adverb', en: 'already', hi: 'पहले से',
       ex: 'Ich bin schon hier, aber sie nicht.', exEn: 'I am already here, but she is not.' },
     { de: 'Glück', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'luck, happiness', hi: 'किस्मत / खुशी',
-      ex: 'Kein Glück heute!', exEn: 'No luck today!' },
+      ex: 'Kein Glück heute!', exEn: 'No luck today!',
+      img: { src: '/api/media/vocab-img/de9e3197723ff4bd9f86', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A green four-leaf clover in soil.' }
+    },
     { de: 'Negationsartikel', art: 'der', gender: 'm', plural: 'Negationsartikel', pos: 'noun', en: 'negation article', hi: 'निषेध-आर्टिकल',
       ex: '"kein" ist ein Negationsartikel.', exEn: '"kein" is a negation article.' }
   ],

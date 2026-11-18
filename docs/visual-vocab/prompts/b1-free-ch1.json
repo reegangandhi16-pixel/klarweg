@@ -1,0 +1,263 @@
+{
+ "ganz--completely-all-the-way-quite": {
+  "tier": "text-only"
+ },
+ "spaetestens--at-the-latest": {
+  "tier": "text-only"
+ },
+ "dafuer--instead-in-return-to-make-up-for-it": {
+  "tier": "text-only"
+ },
+ "folgend--following-next": {
+  "tier": "text-only"
+ },
+ "meinetwegen--fine-with-me-for-my-sake": {
+  "tier": "text-only"
+ },
+ "wieso--why": {
+  "tier": "text-only"
+ },
+ "jedoch--however-though": {
+  "tier": "text-only"
+ },
+ "machen--make-do": {
+  "tier": "text-only"
+ },
+ "mittlerweile--meanwhile-by-now": {
+  "tier": "text-only"
+ },
+ "saemtlich--all-entire": {
+  "tier": "text-only"
+ },
+ "die-seite--page-side": {
+  "tier": "text-only"
+ },
+ "stellen--put-place-pose-set": {
+  "tier": "text-only"
+ },
+ "voraussetzen--presuppose-require": {
+  "tier": "text-only"
+ },
+ "annehmen--assume-suppose-to-accept-adopt": {
+  "tier": "text-only"
+ },
+ "aufloesen--dissolve-resolve": {
+  "tier": "text-only"
+ },
+ "ausnutzen--exploit-take-advantage": {
+  "tier": "text-only"
+ },
+ "begehrt--sought-after-coveted": {
+  "tier": "text-only"
+ },
+ "betreffen--concern-affect": {
+  "tier": "text-only"
+ },
+ "bedenken--consider-bear-in-mind": {
+  "tier": "text-only"
+ },
+ "eingehen--enter-into-agree-to-to-respond-to-engage-with": {
+  "tier": "text-only"
+ },
+ "atypisch--atypical": {
+  "tier": "text-only"
+ },
+ "die-einrichtung--facility-furnishing-institution": {
+  "tier": "text-only"
+ },
+ "die-arbeitserlaubnis--work-permit": {
+  "tier": "text-only"
+ },
+ "das-migrationsdrama--migration-drama": {
+  "tier": "text-only"
+ },
+ "der-migrationshintergrund--migration-background": {
+  "tier": "text-only"
+ },
+ "die-abstammung--descent-origin": {
+  "tier": "text-only"
+ },
+ "die-diskriminierung--discrimination": {
+  "tier": "text-only"
+ },
+ "das-handy--mobile-phone": {
+  "subject": "Show a modern smartphone lying at a slight angle, blank dark screen."
+ },
+ "der-verein--club-association": {
+  "subject": "Show a small amateur sports club: four people in matching teal club shirts standing together with a football and a club bench."
+ },
+ "gemeinsam--together-jointly": {
+  "subject": "Show three adult learners sitting around one table studying together from shared books."
+ },
+ "einverstanden-sein--agree-to-be-in-agreement": {
+  "subject": "Show two people facing each other, nodding and shaking hands in agreement."
+ },
+ "die-note--grade-mark": {
+  "subject": "Show a school exam sheet on a desk with a large green check mark and a gold star sticker, no writing."
+ },
+ "die-ausbildung--training-vocational-education": {
+  "subject": "Show a young apprentice in a workshop learning to use a tool while an experienced instructor guides her."
+ },
+ "die-biologie--biology": {
+  "subject": "Show a microscope next to a green leaf, a small potted plant and a petri dish."
+ },
+ "renovieren--renovate": {
+  "subject": "Show a person painting a living-room wall with a paint roller, ladder and paint tray nearby."
+ },
+ "die-grippe--flu": {
+  "subject": "Show a person in bed with the flu, blanket, tissues, a thermometer and a cup of tea on the bedside table."
+ },
+ "geschieden--divorced": {
+  "subject": "Show two wedding rings lying apart on a table with a small gap between them."
+ },
+ "bitter--bitter": {
+  "subject": "Show a person tasting black coffee from a cup and making a slightly sour face."
+ },
+ "das-erlebnis--experience": {
+  "subject": "Show a person in a hot-air balloon basket looking out over green hills, amazed."
+ },
+ "erfahren--learn-find-out": {
+  "subject": "Show a person reading a travel guidebook with interest, a small globe beside them."
+ },
+ "angenehm--pleasant": {
+  "subject": "Show a person relaxing on a garden chair outdoors in mild sunshine, content."
+ },
+ "dabei-sein--be-there-to-take-part": {
+  "subject": "Show a person happily joining a small group at an outdoor town festival with string lights."
+ },
+ "die-urlaubsplanung--holiday-planning": {
+  "subject": "Show an open map, a small suitcase, sunglasses and a blank calendar on a table, ready for holiday planning."
+ },
+ "drueben--over-there": {
+  "subject": "Show a person on a lakeshore pointing across the water to a small house on the other side."
+ },
+ "entspannend--relaxing": {
+  "subject": "Show a person lying on a beach towel on the sand under a parasol, eyes closed, relaxed."
+ },
+ "faulenzen--lounge-around": {
+  "subject": "Show a person lazily lounging in a hammock between two trees."
+ },
+ "herrlich--glorious-wonderful": {
+  "subject": "Show a tent by a calm lake with mountains under a clear blue sky."
+ },
+ "im-freien--outdoors-in-the-open-air": {
+  "subject": "Show a picnic blanket with a basket on a green meadow under trees, open air."
+ },
+ "sich-erholen--relax-recover": {
+  "subject": "Show a person resting in a deck chair on holiday with a cool drink, recovering and relaxed."
+ },
+ "sorry--sorry": {
+  "subject": "Show a person with an apologetic expression, hand on chest, saying sorry to a friend."
+ },
+ "zelten--camp": {
+  "subject": "Show a person pitching a tent near the coast."
+ },
+ "das-insekt--insect": {
+  "subject": "Show one friendly-looking beetle on a green leaf."
+ },
+ "das-netz--net": {
+  "subject": "Show a white mosquito net hanging over a bed."
+ },
+ "der-chat--chat": {
+  "subject": "Show a smartphone with several blank chat speech bubbles on its screen, no letters."
+ },
+ "der-genuss--treat-enjoyment": {
+  "subject": "Show a person enjoying a cup of coffee and a slice of cake at a café table by the sea."
+ },
+ "der-himmel--sky": {
+  "subject": "Show a wide calm blue sky with a few soft white clouds above a low green horizon."
+ },
+ "der-kompromiss--compromise": {
+  "subject": "Show two people each holding one half of the same cake, both content."
+ },
+ "der-pilz--mushroom": {
+  "subject": "Show one brown forest mushroom growing in moss."
+ },
+ "der-sand--sand": {
+  "subject": "Show a small mound of fine pale beach sand with a seashell."
+ },
+ "der-schutz--protection": {
+  "subject": "Show a beach parasol shading a towel, with a bottle of sunscreen and a sun hat."
+ },
+ "der-urlaubsgruss--greetings-from-abroad": {
+  "subject": "Show a picture postcard of a beach lying next to a pair of sunglasses, the back of the card blank."
+ },
+ "die-aussicht--view": {
+  "subject": "Show a person standing on a hilltop looking out over a valley with a river."
+ },
+ "die-kueste--coast": {
+  "subject": "Show a rocky green coastline meeting a calm blue sea."
+ },
+ "die-traube--grape": {
+  "subject": "Show one bunch of green grapes with a vine leaf."
+ },
+ "giftig--poisonous": {
+  "subject": "Show a red fly agaric mushroom with white spots and a small warning gesture: a hand stopping before picking it."
+ },
+ "reif--ripe": {
+  "subject": "Show a ripe, plump bunch of dark purple grapes next to a small hard unripe green bunch."
+ },
+ "die-chancengleichheit--equal-opportunity": {
+  "subject": "Show two different people standing side by side at the same starting line of a running track, equal footing."
+ },
+ "fuehren--lead-guide": {
+  "subject": "Show a tour guide leading a small group along a path, pointing the way."
+ },
+ "anfuegen--append-add": {
+  "subject": "Show a hand pinning one more blank note at the end of a row of notes on a cork board."
+ },
+ "anhoeren--listen-to": {
+  "subject": "Show a person listening attentively to a friend who is telling a story."
+ },
+ "die-auslandserfahrung--experience-abroad": {
+  "subject": "Show a young professional with a suitcase arriving in a foreign city with unfamiliar architecture."
+ },
+ "auswandern--emigrate": {
+  "subject": "Show a small family with suitcases walking towards a large ship at a harbour."
+ },
+ "die-bekanntmachung--announcement-notice": {
+  "subject": "Show a public notice board with several blank pinned notices, no writing."
+ },
+ "bereisen--travel-through": {
+  "subject": "Show a traveller with a backpack on a winding road passing several small towns."
+ },
+ "bereuen--regret": {
+  "subject": "Show a person sitting on a bench with head in hands, full of regret."
+ },
+ "die-betriebswirtschaft--business-administration": {
+  "subject": "Show a desk with a laptop showing simple bar charts, a calculator and a folder, no numbers."
+ },
+ "einig--in-agreement-united": {
+  "subject": "Show three people with hands stacked together in agreement."
+ },
+ "einleben--settle-in": {
+  "subject": "Show a person happily unpacking boxes in a new flat, putting a plant on the windowsill."
+ },
+ "die-zeitschichtung--temporal-layering": {
+  "tier": "text-only"
+ },
+ "die-vermutung--assumption-conjecture": {
+  "subject": "Show a person looking at footprints on a path, thoughtfully guessing where they lead."
+ },
+ "die-vermutung--assumption-supposition": {
+  "sameAs": "die-vermutung--assumption-conjecture"
+ },
+ "die-schlussfolgerung--conclusion": {
+  "subject": "Show a person at a cork board connecting photos with strings, reaching a conclusion."
+ },
+ "die-perspektive--perspective": {
+  "subject": "Show two people looking at the same sculpture from opposite sides, each seeing a different shape."
+ },
+ "die-erzaehlung--narration-narrative": {
+  "subject": "Show a storyteller in an armchair telling a story to a few attentive listeners."
+ },
+ "lebendig--lively-vivid": {
+  "subject": "Show a lively town square with people chatting, a fountain and market stalls."
+ },
+ "anmelden--sign-up-to-register": {
+  "subject": "Show a person at a club reception desk signing a blank sign-up sheet with a pen while a smiling club member watches."
+ },
+ "die-auffassung--view-opinion": {
+  "subject": "Show a person at a meeting table explaining her opinion with an open-hand gesture while two colleagues listen."
+ }
+}

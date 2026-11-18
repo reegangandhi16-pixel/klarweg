@@ -266,10 +266,10 @@ const CHAPTER = {
     { de: 'Kontakt', art: 'der', gender: 'm', plural: 'Kontakte', pos: 'noun', en: 'contact', hi: 'संपर्क', ex: 'Das ist mein Kontakt.', exEn: 'That is my contact.' },
     { de: 'Wohnort', art: 'der', gender: 'm', plural: 'Wohnorte', pos: 'noun', en: 'place of residence', hi: 'निवास स्थान', ex: 'Mein Wohnort ist Berlin.', exEn: 'My place of residence is Berlin.' },
     { de: 'Daten', art: 'die', gender: 'pl', plural: 'Daten', pos: 'noun', en: 'data, details', hi: 'जानकारी', ex: 'Die Daten sind richtig.', exEn: 'The data is correct.' },
-    { de: 'Firma', art: 'die', gender: 'f', plural: 'Firmen', pos: 'noun', en: 'company, firm', hi: 'कंपनी', ex: 'Die Firma ist in München.', exEn: 'The company is in Munich.' },
+    { de: 'Firma', art: 'die', gender: 'f', plural: 'Firmen', pos: 'noun', en: 'company, firm', hi: 'कंपनी', ex: 'Die Firma ist in München.', exEn: 'The company is in Munich.', img: { src: '/api/media/vocab-img/58a642eb0137ef88f78b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A modern office building.' } },
     { de: 'Hausnummer', art: 'die', gender: 'f', plural: 'Hausnummern', pos: 'noun', en: 'house number', hi: 'मकान संख्या', ex: 'Die Hausnummer ist zwölf.', exEn: 'The house number is twelve.' },
     { de: 'Information', art: 'die', gender: 'f', plural: 'Informationen', pos: 'noun', en: 'information', hi: 'सूचना', ex: 'Die Information ist wichtig.', exEn: 'The information is important.' },
-    { de: 'Mail', art: 'die', gender: 'f', plural: 'Mails', pos: 'noun', en: 'mail, email', hi: 'मेल', ex: 'Ich schreibe eine Mail.', exEn: 'I write an email.' },
+    { de: 'Mail', art: 'die', gender: 'f', plural: 'Mails', pos: 'noun', en: 'mail, email', hi: 'मेल', ex: 'Ich schreibe eine Mail.', exEn: 'I write an email.', img: { src: '/api/media/vocab-img/8c7a0e14fa41bde2c681', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Open laptop with an envelope icon floating above' } },
     { de: 'Postleitzahl', art: 'die', gender: 'f', plural: 'Postleitzahlen', pos: 'noun', en: 'postcode, zip code', hi: 'पिन कोड', ex: 'Die Postleitzahl ist 10115.', exEn: 'The postcode is 10115.' },
     { de: 'Schule', art: 'die', gender: 'f', plural: 'Schulen', pos: 'noun', en: 'school', hi: 'विद्यालय', ex: 'Die Schule ist groß.', exEn: 'The school is big.' },
     { de: 'männlich', pos: 'adjective', en: 'male', hi: 'पुरुष', ex: 'Männlich oder weiblich?', exEn: 'Male or female?' },
@@ -281,7 +281,7 @@ const CHAPTER = {
     { de: 'Sprachinstitut', art: 'das', gender: 'n', plural: 'Sprachinstitute', pos: 'noun', en: 'language institute', hi: 'भाषा संस्थान', ex: 'Das Sprachinstitut ist bekannt.', exEn: 'The language institute is well known.' },
     { de: 'Angabe', art: 'die', gender: 'f', plural: 'Angaben', pos: 'noun', en: 'detail, piece of info', hi: 'विवरण', ex: 'Alle Angaben sind richtig.', exEn: 'All details are correct.' },
     { de: 'Sprachschule', art: 'die', gender: 'f', plural: 'Sprachschulen', pos: 'noun', en: 'language school', hi: 'भाषा विद्यालय', ex: 'Die Sprachschule ist in Berlin.', exEn: 'The language school is in Berlin.' },
-    { de: 'zusammenpassen', pos: 'verb', en: 'to match, go together', hi: 'मेल खाना', ex: 'Die Daten passen zusammen.', exEn: 'The data matches.', conj: { praesens: 'passt zusammen', praeteritum: 'passte zusammen', perfekt: 'hat zusammengepasst' } }
+    { de: 'zusammenpassen', pos: 'verb', en: 'to match, go together', hi: 'मेल खाना', ex: 'Die Daten passen zusammen.', exEn: 'The data matches.', conj: { praesens: 'passt zusammen', praeteritum: 'passte zusammen', perfekt: 'hat zusammengepasst' }, img: { src: '/api/media/vocab-img/4ac611a9851877bb87c7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two matching puzzle pieces sliding together' } }
   ],
 
   // ---------- Grammar Review (application, not new theory) ----------

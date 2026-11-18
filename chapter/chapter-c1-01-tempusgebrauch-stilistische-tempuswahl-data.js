@@ -217,12 +217,16 @@ const CHAPTER = {
       note: 'Often expressed via Futur I (present assumption) or Futur II (assumption about the past).',
       ex1: { de: 'Die Vermutung wird im Futur II ausgedrückt.', en: 'The assumption is expressed in the Futur II.', hi: 'Anumaan Futur II mein vyakt kiya jaata hai.' },
       ex2: { de: 'Journalisten äußern ihre Vermutungen oft vorsichtig.', en: 'Journalists often express their assumptions cautiously.', hi: 'Patrakaar aksar apne anumaan saavdhaani se vyakt karte hain.' },
-      collocations: ['eine Vermutung äußern', 'im Futur II ausdrücken'] },
+      collocations: ['eine Vermutung äußern', 'im Futur II ausdrücken'],
+      img: { src: '../public/vocab-img/0eca1180b39c45fe23bf', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person looking at footprints on a path, thoughtfully guessing where they lead' }
+    },
     { de: 'die Schlussfolgerung', ipa: '[ˈʃlʊsˌfɔlɡəʁʊŋ]', en: 'conclusion', hi: 'nishkarsh', pos: 'Noun · fem.', register: 'C1 · academic',
       note: 'The concluding section of an academic text, often using Futur I for predictions.',
       ex1: { de: 'In der Schlussfolgerung formulieren die Autoren Vermutungen im Futur I.', en: 'In the conclusion, the authors formulate assumptions in the Futur I.', hi: 'Nishkarsh mein, lekhak Futur I mein anumaan formulate karte hain.' },
       ex2: { de: 'Eine überzeugende Schlussfolgerung fasst die Ergebnisse präzise zusammen.', en: 'A convincing conclusion summarizes the results precisely.', hi: 'Ek vishvaasneey nishkarsh parinaamon ko sateek roop se saaraansh karta hai.' },
-      collocations: ['eine Schlussfolgerung ziehen', 'in der Schlussfolgerung'] }
+      collocations: ['eine Schlussfolgerung ziehen', 'in der Schlussfolgerung'],
+      img: { src: '../public/vocab-img/5679165f5c1d1d79fc5e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person at a cork board connecting photos with strings, reaching a conclusion' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

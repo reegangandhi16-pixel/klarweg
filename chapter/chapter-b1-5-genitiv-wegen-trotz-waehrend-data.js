@@ -211,17 +211,25 @@ const CHAPTER = {
   vocab: [
     { de: 'Diät', art: 'die', gender: 'f', plural: 'Diäten', pos: 'noun', level: 'B1', en: 'diet', hi: 'आहार योजना',
       ex: 'Wegen einer Diät sollte man trotzdem genug Vitamine bekommen.', exEn: 'Because of a diet, you should still get enough vitamins.', exHi: 'Diet ki wajah se bhi, kaafi vitamin milna zaroori hai.',
-      advanced: { synonyms: ['Ernährungsplan'], opposites: [], collocations: ['Diät halten', 'wegen einer Diät'] } },
+      advanced: { synonyms: ['Ernährungsplan'], opposites: [], collocations: ['Diät halten', 'wegen einer Diät'] },
+      img: { src: '/api/media/vocab-img/e0ecb1e43a7cc0141314', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A bowl of fresh salad with a measuring tape' }
+    },
     { de: 'Ernährung', art: 'die', gender: 'f', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'nutrition', hi: 'पोषण',
       ex: 'Wegen der Ernährung meiner Familie kochen wir oft frisch.', exEn: 'Because of my family\'s nutrition, we often cook fresh.', exHi: 'Mere parivaar ke poshan ki wajah se, hum aksar taaza khaana banate hain.',
-      advanced: { synonyms: ['Nahrung'], opposites: [], collocations: ['gesunde Ernährung', 'wegen der Ernährung'] } },
+      advanced: { synonyms: ['Nahrung'], opposites: [], collocations: ['gesunde Ernährung', 'wegen der Ernährung'] },
+      img: { src: '/api/media/vocab-img/9fac0dbf6cb3d11c325e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A healthy meal with vegetables and whole grains.' }
+    },
     { de: 'Fitness', art: 'die', gender: 'f', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'fitness', hi: 'फिटनेस',
       ex: 'Trotz seiner Fitness geht er selten joggen.', exEn: 'Despite his fitness, he rarely goes jogging.', exHi: 'Apni fitness ke bawajood, woh kam hi jogging karta hai.',
-      advanced: { synonyms: [], opposites: [], collocations: ['an seiner Fitness arbeiten', 'trotz der Fitness'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['an seiner Fitness arbeiten', 'trotz der Fitness'] },
+      img: { src: '/api/media/vocab-img/5bd99f5ee9356c150ee8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person doing a plank on a mat.' }
+    },
     { de: 'ausziehen', pos: 'verb', level: 'B1', en: 'to move out of', hi: 'निकल जाना',
       ex: 'Wegen des Umzugs muss sie diese Woche ausziehen.', exEn: 'Because of the move, she has to move out this week.', exHi: 'Shift hone ki wajah se, use is hafte ghar khaali karna hai.',
       conj: { praesens: 'zieht aus', praeteritum: 'zog aus', perfekt: 'ist ausgezogen' },
-      advanced: { synonyms: ['umziehen'], opposites: ['einziehen'], collocations: ['aus der Wohnung ausziehen'] } },
+      advanced: { synonyms: ['umziehen'], opposites: ['einziehen'], collocations: ['aus der Wohnung ausziehen'] },
+      img: { src: '/api/media/vocab-img/630c41b69c393d0d1fbe', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person carrying a moving box out of an empty room' }
+    },
     { de: 'bewusst', pos: 'adjective', level: 'B1', en: 'conscious', hi: 'सचेत',
       ex: 'Wegen ihrer Gesundheit ernährt sie sich bewusst.', exEn: 'Because of her health, she eats consciously.', exHi: 'Apni sehat ki wajah se, woh sochkar khaana khaati hai.',
       advanced: { synonyms: ['achtsam'], opposites: ['unbewusst'], collocations: ['sich bewusst ernähren'] } },
@@ -236,7 +244,9 @@ const CHAPTER = {
       advanced: { synonyms: ['Konzept', 'Idee'], opposites: [], collocations: ['eine Konzeption entwickeln'] } },
     { de: 'Siedlung', art: 'die', gender: 'f', plural: 'Siedlungen', pos: 'noun', level: 'B1', en: 'settlement, housing scheme', hi: 'बस्ती',
       ex: 'Während des Baus der Siedlung gab es viele Diskussionen.', exEn: 'During the construction of the settlement, there were many discussions.', exHi: 'Basti ke nirmaan ke dauran, kaafi charchayein hui.',
-      advanced: { synonyms: [], opposites: [], collocations: ['während des Baus der Siedlung'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['während des Baus der Siedlung'] },
+      img: { src: '/api/media/vocab-img/bd9014d58f98bf73e55c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A neat modern housing development with several homes.' }
+    },
     { de: 'Sozialsiedlung', art: 'die', gender: 'f', plural: 'Sozialsiedlungen', pos: 'noun', level: 'B1', en: 'social housing project', hi: 'सामाजिक आवास परियोजना',
       ex: 'Die Wohnung meines Urgroßvaters lag in einer Sozialsiedlung.', exEn: 'My great-grandfather\'s apartment was in a social housing project.', exHi: 'Mere pardaada ka ghar ek samajik awas mein tha.',
       advanced: { synonyms: [], opposites: [], collocations: [] } },
@@ -264,7 +274,9 @@ const CHAPTER = {
     { de: 'sich ernähren', pos: 'verb', level: 'B1', en: 'to eat, nourish oneself', hi: 'भोजन करना',
       ex: 'Wegen ihrer Gesundheit ernährt sie sich seit Kurzem vegetarisch.', exEn: 'Because of her health, she has recently been eating vegetarian.', exHi: 'Apni sehat ki wajah se, woh haal hi mein shakahari khaana khaa rahi hai.',
       conj: { praesens: 'ernährt sich', praeteritum: 'ernährte sich', perfekt: 'hat sich ernährt' },
-      advanced: { synonyms: [], opposites: [], collocations: ['sich gesund ernähren'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['sich gesund ernähren'] },
+      img: { src: '/api/media/vocab-img/80f63d13ce735ba69122', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person eating a fresh bowl of vegetables at a table.' }
+    },
     { de: 'stammen', pos: 'verb', level: 'B1', en: 'to originate (from + Dat.)', hi: 'से आना (मूल)',
       ex: 'Die Stadtmauer stammt aus der Entstehungszeit der Stadt.', exEn: 'The city wall dates from the city\'s time of origin.', exHi: 'Yeh shahar ki deewar shahar ke utpatti kaal se hai.',
       conj: { praesens: 'stammt', praeteritum: 'stammte', perfekt: 'hat gestammt' },
@@ -274,13 +286,19 @@ const CHAPTER = {
       advanced: { synonyms: [], opposites: [], collocations: [] } },
     { de: 'touristisch', pos: 'adjective', level: 'B1', en: 'touristic', hi: 'पर्यटक संबंधी',
       ex: 'Wegen ihrer Geschichte ist die Stadtmauer eine touristische Attraktion.', exEn: 'Because of its history, the city wall is a tourist attraction.', exHi: 'Apne itihaas ki wajah se, shahar ki deewar ek paryatak aakarshan hai.',
-      advanced: { synonyms: [], opposites: [], collocations: ['touristische Attraktion'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['touristische Attraktion'] },
+      img: { src: '/api/media/vocab-img/5eb609e3ac222627e6d1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Tourists photographing an ancient stone monument' }
+    },
     { de: 'vegan', pos: 'adjective', level: 'B1', en: 'vegan', hi: 'वीगन',
       ex: 'Wegen ihrer Diät isst sie jetzt meistens vegan.', exEn: 'Because of her diet, she now mostly eats vegan.', exHi: 'Apni diet ki wajah se, woh ab zyada tar vegan khaana khaati hai.',
-      advanced: { synonyms: [], opposites: [], collocations: ['sich vegan ernähren'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['sich vegan ernähren'] },
+      img: { src: '/api/media/vocab-img/925c7fd4f2c7478148ab', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Bowl of fresh plant-based salad ingredients' }
+    },
     { de: 'vegetarisch', pos: 'adjective', level: 'B1', en: 'vegetarian', hi: 'शाकाहारी',
       ex: 'Wegen ihrer Gesundheit ernährt sie sich vegetarisch.', exEn: 'Because of her health, she eats vegetarian.', exHi: 'Apni sehat ki wajah se, woh shakahari khaana khaati hai.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/2a4ae6f636327f2f16fb', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Vegetarian meal with vegetable omelette and greens' }
+    },
     { de: 'wohltätig', pos: 'adjective', level: 'B1', en: 'benevolent, charitable', hi: 'परोपकारी',
       ex: 'Trotz der Armut jener Zeit war die Kaufmannsfamilie wohltätig aktiv.', exEn: 'Despite the poverty of that time, the merchant family was active in charity work.', exHi: 'Us samay ki gareebi ke bawajood, us vyaapari parivaar ne parophakaari kaam kiya.',
       advanced: { synonyms: ['gemeinnützig'], opposites: [], collocations: ['wohltätig aktiv sein'] } },
@@ -290,22 +308,32 @@ const CHAPTER = {
     { de: 'beten', pos: 'verb', level: 'B1', en: 'to pray', hi: 'प्रार्थना करना',
       ex: 'Während des Essens betete die Familie jeden Abend.', exEn: 'During the meal, the family prayed every evening.', exHi: 'Khaane ke dauran, parivaar har shaam prarthana karta tha.',
       conj: { praesens: 'betet', praeteritum: 'betete', perfekt: 'hat gebetet' },
-      advanced: { synonyms: [], opposites: [], collocations: ['während des Essens beten'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['während des Essens beten'] },
+      img: { src: '/api/media/vocab-img/ca330cefca81bfd4cbc0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person with folded hands bowing their head in prayer.' }
+    },
     { de: 'Nahrungsmittel', art: 'das', gender: 'n', plural: 'Nahrungsmittel', pos: 'noun', level: 'B1', en: 'food', hi: 'खाद्य पदार्थ',
       ex: 'Wegen des Preises kauft sie nicht alle Nahrungsmittel biologisch.', exEn: 'Because of the price, she doesn\'t buy all her food organic.', exHi: 'Keemat ki wajah se, woh saare khaadya padarth organic nahi khareedti.',
-      advanced: { synonyms: ['Lebensmittel'], opposites: [], collocations: [] } },
+      advanced: { synonyms: ['Lebensmittel'], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/4af6172967592fbf7cc8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A wooden crate filled with varied fresh food.' }
+    },
     { de: 'Stiftungsvermögen', art: 'das', gender: 'n', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'endowment capital', hi: 'दान निधि पूंजी',
       ex: 'Wegen des niedrigen Stiftungsvermögens war die Jahresmiete sehr niedrig.', exEn: 'Because of the low endowment capital, the yearly rent was very low.', exHi: 'Kam daan nidhi ki wajah se, vaarshik kiraya bahut kam tha.',
       advanced: { synonyms: [], opposites: [], collocations: [] } },
     { de: 'Vitamin', art: 'das', gender: 'n', plural: 'Vitamine', pos: 'noun', level: 'B1', en: 'vitamin', hi: 'विटामिन',
       ex: 'Wegen des Vitamins in Karotten isst sie gern Gemüse.', exEn: 'Because of the vitamin in carrots, she likes eating vegetables.', exHi: 'Gaajar mein vitamin hone ki wajah se, use sabzi khana pasand hai.',
-      advanced: { synonyms: [], opposites: [], collocations: ['Vitamine einnehmen'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['Vitamine einnehmen'] },
+      img: { src: '/api/media/vocab-img/c8131366e6a8af959d16', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Fresh fruits and vegetables beside a vitamin capsule' }
+    },
     { de: 'Workout', art: 'das', gender: 'n', plural: 'Workouts', pos: 'noun', level: 'B1', en: 'workout', hi: 'वर्कआउट',
       ex: 'Trotz der Müdigkeit machte sie noch ein kurzes Workout.', exEn: 'Despite the tiredness, she still did a short workout.', exHi: 'Thakan ke bawajood, usne ek chhota sa workout kiya.',
-      advanced: { synonyms: ['Training'], opposites: [], collocations: ['ein Workout machen'] } },
+      advanced: { synonyms: ['Training'], opposites: [], collocations: ['ein Workout machen'] },
+      img: { src: '/api/media/vocab-img/173c156cb3d9fa571221', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person doing squats with a kettlebell' }
+    },
     { de: 'Nachtwächter', art: 'der', gender: 'm', plural: 'Nachtwächter', pos: 'noun', level: 'B1', en: 'night watchman', hi: 'रात्रि प्रहरी',
       ex: 'Wegen des Nachtwächters fühlten sich die Bewohner sicherer.', exEn: 'Because of the night watchman, the residents felt safer.', exHi: 'Raat prahri ki wajah se, nivaasi apne aap ko surakshit mehsoos karte the.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/0216e69c4f8cf3cafe8f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Night watchman with flashlight patrolling a gate' }
+    },
     { de: 'Originalzustand', art: 'der', gender: 'm', plural: 'Originalzustände', pos: 'noun', level: 'B1', en: 'original condition', hi: 'मूल स्थिति',
       ex: 'Trotz der Renovierung blieb das Haus im Originalzustand.', exEn: 'Despite the renovation, the house remained in its original condition.', exHi: 'Renovation ke bawajood, ghar apni mool sthiti mein raha.',
       advanced: { synonyms: [], opposites: [], collocations: ['im Originalzustand'] } },
@@ -326,10 +354,14 @@ const CHAPTER = {
       advanced: { synonyms: ['Gestalt'], opposites: [], collocations: ['eine besondere Form haben'] } },
     { de: 'Frucht', art: 'die', gender: 'f', plural: 'Früchte', pos: 'noun', level: 'B1', en: 'fruit', hi: 'फल',
       ex: 'Trotz des Verzichts esse ich weiterhin viele Früchte.', exEn: 'Despite the deprivation, I still eat a lot of fruit.', exHi: 'Tyaag ke bawajood, main abhi bhi kaafi phal khaata hoon.',
-      advanced: { synonyms: ['Obst'], opposites: [], collocations: ['reife Früchte'] } },
+      advanced: { synonyms: ['Obst'], opposites: [], collocations: ['reife Früchte'] },
+      img: { src: '/api/media/vocab-img/85965819062fc84b0b2b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Bowl filled with fresh fruits' }
+    },
     { de: 'Immobilie', art: 'die', gender: 'f', plural: 'Immobilien', pos: 'noun', level: 'B1', en: 'real estate, property', hi: 'अचल संपत्ति',
       ex: 'Wegen der Lage ist diese Immobilie sehr gefragt.', exEn: 'Because of the location, this property is in high demand.', exHi: 'Jagah ki wajah se, yeh sampatti bahut mangi jaati hai.',
-      advanced: { synonyms: ['Grundstück', 'Gebäude'], opposites: [], collocations: [] } },
+      advanced: { synonyms: ['Grundstück', 'Gebäude'], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/0b339cbbce4ea1fdc519', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A modern residential house with a garden' }
+    },
     { de: 'Jahresmiete', art: 'die', gender: 'f', plural: 'Jahresmieten', pos: 'noun', level: 'B1', en: 'yearly rent', hi: 'वार्षिक किराया',
       ex: 'Wegen des niedrigen Stiftungsvermögens war die Jahresmiete niedrig.', exEn: 'Because of the low endowment capital, the yearly rent was low.', exHi: 'Kam daan nidhi ki wajah se, vaarshik kiraya kam tha.',
       advanced: { synonyms: [], opposites: [], collocations: [] } },
@@ -341,7 +373,9 @@ const CHAPTER = {
       advanced: { synonyms: [], opposites: [], collocations: [] } },
     { de: 'Nachtwächterin', art: 'die', gender: 'f', plural: 'Nachtwächterinnen', pos: 'noun', level: 'B1', en: 'night watchwoman', hi: 'रात्रि प्रहरी (महिला)',
       ex: 'Wegen der Tradition der Stadt arbeitet heute eine Nachtwächterin dort.', exEn: 'Because of the city\'s tradition, a night watchwoman works there today.', exHi: 'Shahar ki parampara ki wajah se, aaj wahan ek mahila raat prahri kaam karti hai.',
-      advanced: { synonyms: [], opposites: ['Nachtwächter'], collocations: [] } },
+      advanced: { synonyms: [], opposites: ['Nachtwächter'], collocations: [] },
+      img: { src: '/api/media/vocab-img/1f174d027188acce891b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A night watchwoman carrying a glowing lantern.' }
+    },
     { de: 'Schuld', art: 'die', gender: 'f', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'fault, guilt (ohne Schuld: without fault)', hi: 'दोष',
       ex: 'Wegen eines Fehlers, ohne ihre Schuld, verpasste sie den Zug.', exEn: 'Because of a mistake, through no fault of her own, she missed the train.', exHi: 'Ek galti ki wajah se, uski koi galti na hote hue bhi, uski train chhoot gayi.',
       advanced: { synonyms: ['Verantwortung'], opposites: ['Unschuld'], collocations: ['ohne Schuld'] } },
@@ -350,10 +384,14 @@ const CHAPTER = {
       advanced: { synonyms: [], opposites: [], collocations: ['Selbsthilfe leisten'] } },
     { de: 'Speise', art: 'die', gender: 'f', plural: 'Speisen', pos: 'noun', level: 'B1', en: 'food, dish', hi: 'भोजन',
       ex: 'Während des Essens gab es viele vegetarische Speisen.', exEn: 'During the meal, there were many vegetarian dishes.', exHi: 'Khaane ke dauran, kai shakahari vyanjan the.',
-      advanced: { synonyms: ['Gericht', 'Essen'], opposites: [], collocations: [] } },
+      advanced: { synonyms: ['Gericht', 'Essen'], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/673d662bb47a9f8aff13', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A plated gourmet meal ready to serve.' }
+    },
     { de: 'Stadtmauer', art: 'die', gender: 'f', plural: 'Stadtmauern', pos: 'noun', level: 'B1', en: 'city wall', hi: 'शहर की दीवार',
       ex: 'Während der Reise letztes Jahr haben wir die alte Stadtmauer fotografiert.', exEn: 'During the trip last year, we photographed the old city wall.', exHi: 'Pichhle saal yatra ke dauran, humne purani shahar ki deewar ki tasveerein li.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } }
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/ad74ce7e85127101b261', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'ancient stone city wall with battlements' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

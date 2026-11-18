@@ -1,0 +1,2602 @@
+[
+  {
+    "level": "a1",
+    "kind": "word-choice",
+    "slug": "a1-lernen-studieren-word-choice-exercises",
+    "title": "Lernen or Studieren? German A1 Word-Choice Practice",
+    "description": "Choose lernen for learning and studieren for university study. Compare everyday skills, revision and degree subjects with explained answers.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Lernen means learning or studying material and skills: Deutsch lernen, für einen Test lernen. Studieren commonly means following a university degree or subject: Medizin studieren. English study can translate into either verb, so identify the kind of activity rather than matching one English word.",
+    "trap": "Do not use studieren for every study session. Ich lerne Vokabeln describes vocabulary revision; Ich studiere Biologie describes a university subject.",
+    "instructions": "Choose a present-tense form of lernen or studieren. Use the cue to distinguish acquiring/revising material from a university degree.",
+    "examples": [
+      [
+        "Nele lernt gerade neue Redewendungen.",
+        "Nele is learning new expressions at the moment."
+      ],
+      [
+        "Arjun studiert Maschinenbau an einer Hochschule.",
+        "Arjun studies mechanical engineering at a university."
+      ],
+      [
+        "Wir lernen für den Vokabeltest am Dienstag.",
+        "We are studying for Tuesday’s vocabulary test."
+      ],
+      [
+        "Meine Cousine studiert Architektur in Weimar.",
+        "My cousin studies architecture in Weimar."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ jeden Tag zehn neue Wörter. (learning vocabulary)",
+        "lerne",
+        "Use lernen for acquiring vocabulary."
+      ],
+      [
+        "Farid ___ Medizin an der Universität. (degree subject)",
+        "studiert",
+        "A university degree subject commonly takes studieren."
+      ],
+      [
+        "Wir ___ für den Test morgen. (revision)",
+        "lernen",
+        "Revising for a test is für den Test lernen."
+      ],
+      [
+        "___ du Jura an einer Hochschule? (university degree)",
+        "Studierst",
+        "Use studieren for a degree subject; du takes studierst."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "word-choice",
+    "slug": "a1-wohnen-leben-word-choice-exercises",
+    "title": "Wohnen or Leben? German A1 Meaning Exercises",
+    "description": "Compare wohnen for residence with leben for life and being alive. See where both can describe a home and where their meanings differ.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Wohnen focuses on where or how someone has a home: zur Miete wohnen, in einem Wohnheim wohnen. Leben has a broader meaning, including being alive and one’s way of life: gesund leben. Both can describe living in a city, so a sentence about Berlin alone does not force one verb.",
+    "trap": "Ich wohne in Köln and Ich lebe in Köln can both be correct. Do not turn the residence/life distinction into a rule that forbids natural overlap.",
+    "instructions": "Use wohnen for the specified housing situation and leben for being alive or a way of life. Conjugate the chosen verb.",
+    "examples": [
+      [
+        "Wir wohnen zur Miete in einem Altbau.",
+        "We rent our home in an old building."
+      ],
+      [
+        "Ihre Urgroßmutter lebt noch und ist sehr aktiv.",
+        "Her great-grandmother is still alive and very active."
+      ],
+      [
+        "Timo wohnt während des Semesters im Wohnheim.",
+        "Timo lives in a student residence during term."
+      ],
+      [
+        "Sie lebt bewusst und nimmt sich Zeit für Freunde.",
+        "She lives mindfully and makes time for friends."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der verletzte Vogel ___ noch. (being alive)",
+        "lebt",
+        "Only leben expresses being alive in this sense."
+      ],
+      [
+        "Ich ___ zur Miete. (focus on housing)",
+        "wohne",
+        "Zur Miete wohnen is the usual housing expression."
+      ],
+      [
+        "Wir möchten gesünder ___. (way of life)",
+        "leben",
+        "Gesünder leben refers to a way of life, not a housing address."
+      ],
+      [
+        "___ du im Studentenwohnheim? (focus on residence)",
+        "Wohnst",
+        "Wohnen is the targeted residence verb; leben is also possible in a broader description."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "word-choice",
+    "slug": "a1-gehen-fahren-word-choice-exercises",
+    "title": "Gehen or Fahren? German A1 Travel Verb Practice",
+    "description": "Use gehen for travelling on foot and fahren for a vehicle journey. Practise transport cues without translating every English go as gehen.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "For a straightforward journey, gehen commonly describes going on foot and fahren describes travelling by vehicle: zu Fuß gehen, mit der Straßenbahn fahren. In other contexts gehen can mean attending or going somewhere more generally, so the transport cue matters.",
+    "trap": "Do not translate I go by train as Ich gehe mit dem Zug. The usual vehicle-journey expression uses fahren.",
+    "instructions": "Choose and conjugate gehen or fahren. The cue explicitly states walking or travelling by vehicle.",
+    "examples": [
+      [
+        "Zum Kiosk gehe ich heute zu Fuß.",
+        "I walk to the kiosk today."
+      ],
+      [
+        "Zur Arbeit fährt Daria mit der Straßenbahn.",
+        "Daria takes the tram to work."
+      ],
+      [
+        "Wir gehen zu Fuß durch die Fußgängerzone.",
+        "We walk through the pedestrian zone."
+      ],
+      [
+        "Die Familie fährt mit dem Wohnmobil nach Norden.",
+        "The family travels north in a camper van."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ mit der U-Bahn zur Messe. (vehicle)",
+        "fahre",
+        "Use fahren for a journey by underground train."
+      ],
+      [
+        "Wir ___ zu Fuß zum Aussichtspunkt. (walking)",
+        "gehen",
+        "Zu Fuß gives an explicit walking cue."
+      ],
+      [
+        "___ du mit dem Taxi zum Hotel? (vehicle)",
+        "Fährst",
+        "Du takes fährst for this vehicle journey."
+      ],
+      [
+        "Die Kinder ___ zu Fuß nach Hause. (walking)",
+        "gehen",
+        "Walking home is zu Fuß nach Hause gehen."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "word-choice",
+    "slug": "a1-kommen-gehen-word-choice-exercises",
+    "title": "Kommen or Gehen? German A1 Direction Exercises",
+    "description": "Distinguish coming towards a reference point from going away. Practise speaker-location cues and avoid a one-word English shortcut.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Kommen describes movement towards a relevant reference point, often the speaker or destination being discussed. Gehen can describe leaving that point or going elsewhere. The choice depends on perspective: Komm zu mir! but Ich gehe jetzt nach Hause when leaving someone.",
+    "trap": "The speaker’s location is a useful cue, not an absolute rule for every conversation. Speakers can adopt the listener’s or a planned meeting point’s perspective.",
+    "instructions": "Choose kommen for movement towards the stated speaker location, or gehen for the stated departure. Use the present tense.",
+    "examples": [
+      [
+        "Komm bitte zu mir an den Empfang!",
+        "Please come to me at reception!"
+      ],
+      [
+        "Ich gehe jetzt nach Hause; bis morgen!",
+        "I am going home now; see you tomorrow!"
+      ],
+      [
+        "Wir sind schon im Café. Kommst du zu uns?",
+        "We are already at the café. Are you coming to join us?"
+      ],
+      [
+        "Die Gäste gehen nach dem Essen wieder weg.",
+        "The guests leave again after the meal."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich bin im Garten. ___ bitte zu mir! (towards me, du imperative)",
+        "Komm",
+        "The speaker asks someone to move towards the speaker’s location."
+      ],
+      [
+        "Ich ___ jetzt weg. Auf Wiedersehen! (leaving)",
+        "gehe",
+        "Weggehen describes departure from the current place."
+      ],
+      [
+        "Wir warten hier. Wann ___ ihr zu uns? (towards us)",
+        "kommt",
+        "Ihr takes kommt when moving towards the waiting speakers."
+      ],
+      [
+        "Nach dem Besuch ___ wir wieder nach Hause. (departure, walking)",
+        "gehen",
+        "The cue describes leaving the visit and walking home."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "word-choice",
+    "slug": "a1-kaufen-verkaufen-word-choice-exercises",
+    "title": "Kaufen or Verkaufen? German A1 Shopping Practice",
+    "description": "Choose kaufen for the buyer and verkaufen for the seller. Follow who pays and who gives up an item in everyday transactions.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Kaufen means buying an item; verkaufen means selling it. The same transaction has two perspectives: Die Kundin kauft den Stuhl; der Händler verkauft ihn. Both verbs can take the item as an accusative object, so the subject’s role decides the meaning.",
+    "trap": "Do not drop ver- when the subject is the seller. Ein Geschäft verkauft Bücher; its customers kaufen them.",
+    "instructions": "Choose and conjugate kaufen or verkaufen from the buyer/seller cue.",
+    "examples": [
+      [
+        "Die Kundin kauft einen gebrauchten Schreibtisch.",
+        "The customer buys a second-hand desk."
+      ],
+      [
+        "Der Händler verkauft antike Lampen.",
+        "The dealer sells antique lamps."
+      ],
+      [
+        "Wir kaufen Fahrkarten am Automaten.",
+        "We buy tickets at the machine."
+      ],
+      [
+        "Mona verkauft ihr altes Skateboard im Internet.",
+        "Mona sells her old skateboard online."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Bäcker ___ frische Brezeln an seine Kunden. (seller)",
+        "verkauft",
+        "The baker is the seller, so use verkauft."
+      ],
+      [
+        "Ich ___ eine Postkarte und bezahle zwei Euro. (buyer)",
+        "kaufe",
+        "The paying buyer kauft the item."
+      ],
+      [
+        "Wir ___ unser altes Sofa an eine Nachbarin. (sellers)",
+        "verkaufen",
+        "Giving up an item in exchange for money is verkaufen."
+      ],
+      [
+        "___ du die Schuhe im Laden? (buyer)",
+        "Kaufst",
+        "Du takes kaufst when acting as the buyer."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "word-choice",
+    "slug": "a1-brauchen-benutzen-word-choice-exercises",
+    "title": "Brauchen or Benutzen? German A1 Usage Exercises",
+    "description": "Compare needing something with using it. Practise brauchen and benutzen with meaning cues and clear present-tense answers.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Brauchen means needing something: Für die Aufgabe brauche ich einen Rechner. Benutzen means using something: Ich benutze den Rechner im Büro. A person can need an object without using it yet, or use an object without strictly needing it.",
+    "trap": "Do not assume that English use and need are interchangeable. Benutzen describes the action with a tool or object; brauchen describes a need.",
+    "instructions": "Choose brauchen for need and benutzen for use, then conjugate the verb for the subject.",
+    "examples": [
+      [
+        "Für die Aufgabe brauche ich einen Rechner.",
+        "I need a calculator for the task."
+      ],
+      [
+        "Im Büro benutze ich einen großen Bildschirm.",
+        "I use a large screen in the office."
+      ],
+      [
+        "Wir brauchen heute keine Hilfe.",
+        "We do not need help today."
+      ],
+      [
+        "Die Besucherin benutzt den Aufzug.",
+        "The visitor uses the lift."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ einen Regenschirm. Meiner ist kaputt. (need)",
+        "brauche",
+        "Brauchen states the need for an umbrella."
+      ],
+      [
+        "Darf ich deinen Stift ___? (use)",
+        "benutzen",
+        "After darf, use the bare infinitive benutzen for using a pen."
+      ],
+      [
+        "Wir ___ mehr Zeit für diese Arbeit. (need)",
+        "brauchen",
+        "Time needed for a task is expressed with brauchen."
+      ],
+      [
+        "Er ___ täglich die Kaffeemaschine. (use)",
+        "benutzt",
+        "Benutzen describes using the machine; er takes benutzt."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "word-choice",
+    "slug": "a1-fragen-antworten-word-choice-exercises",
+    "title": "Fragen or Antworten? German A1 Conversation Practice",
+    "description": "Choose fragen for asking and antworten for replying. Compare jemanden fragen with jemandem antworten using everyday dialogue cues.",
+    "guide": "grammar/dativ.html",
+    "guideLabel": "Review related grammar: dative structures",
+    "rule": "Fragen means asking a question; antworten means giving a reply. Their person objects differ: Ich frage den Lehrer uses accusative; Ich antworte dem Lehrer uses dative. A question or reply can also appear as a clause or a direct quotation.",
+    "trap": "Do not keep the same case after switching verbs: jemanden fragen but jemandem antworten. The subject can ask first and reply later in the same conversation.",
+    "instructions": "Choose the present-tense form of fragen or antworten from the asking/replying cue and the object case.",
+    "examples": [
+      [
+        "Ich frage den Hausmeister nach dem Schlüssel.",
+        "I ask the caretaker about the key."
+      ],
+      [
+        "Der Hausmeister antwortet mir sofort.",
+        "The caretaker replies to me immediately."
+      ],
+      [
+        "Die Reporterin fragt den Spieler nach dem Ergebnis.",
+        "The reporter asks the player about the result."
+      ],
+      [
+        "Der Spieler antwortet der Reporterin ruhig.",
+        "The player replies calmly to the reporter."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Schülerin ___ den Lehrer nach der Hausaufgabe. (asks)",
+        "fragt",
+        "Fragen takes the person in the accusative: den Lehrer."
+      ],
+      [
+        "Ich ___ der Kundin auf ihre E-Mail. (reply)",
+        "antworte",
+        "Antworten takes the person in the dative: der Kundin."
+      ],
+      [
+        "Wir ___ die Frau nach dem Weg. (ask)",
+        "fragen",
+        "Asking someone a question uses fragen."
+      ],
+      [
+        "Warum ___ du mir nicht? (reply)",
+        "antwortest",
+        "Du takes antwortest; mir is a dative object."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "kind": "word-choice",
+    "slug": "a1-kosten-bezahlen-word-choice-exercises",
+    "title": "Kosten or Bezahlen? German A1 Price Expressions",
+    "description": "Use kosten to state a price and bezahlen for paying. Compare the item as subject with the customer who pays the bill.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Kosten states what an item or service costs: Die Reparatur kostet vierzig Euro. Bezahlen describes paying for an item or settling a bill: Die Kundin bezahlt die Rechnung. In the price pattern, the thing with the price is the subject; in the payment pattern, the payer is the subject.",
+    "trap": "Do not write Ich koste die Rechnung when you mean I pay the bill. Kosten also has a tasting meaning in other contexts, which is outside this price exercise.",
+    "instructions": "Choose and conjugate kosten for a price statement or bezahlen for an act of payment.",
+    "examples": [
+      [
+        "Die Reparatur kostet vierzig Euro.",
+        "The repair costs forty euros."
+      ],
+      [
+        "Die Kundin bezahlt die Rechnung am Schalter.",
+        "The customer pays the bill at the counter."
+      ],
+      [
+        "Zwei Hefte kosten zusammen sechs Euro.",
+        "Two exercise books cost six euros together."
+      ],
+      [
+        "Wir bezahlen die Getränke getrennt.",
+        "We pay for the drinks separately."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Tagesticket ___ zwölf Euro. (price)",
+        "kostet",
+        "A singular item with a stated price takes kostet."
+      ],
+      [
+        "Ich ___ die Pizza mit Karte. (payment)",
+        "bezahle",
+        "The payer uses bezahlen; ich takes bezahle."
+      ],
+      [
+        "Wie viel ___ diese Handschuhe? (price)",
+        "kosten",
+        "The plural subject Handschuhe takes kosten."
+      ],
+      [
+        "Wir möchten die Rechnung ___. (payment)",
+        "bezahlen",
+        "After möchten, use the infinitive bezahlen."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-kennen-wissen-word-choice-exercises",
+    "title": "Kennen or Wissen? German A2 Word-Choice Exercises",
+    "description": "Choose kennen for familiarity and wissen for information. Practise people, places, question words and dass-clauses with explained answers.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Kennen commonly takes a person, place or thing that is familiar: Ich kenne den Weg. Wissen expresses knowing information and often introduces a question-word clause or dass-clause: Ich weiß, wo der Eingang ist. The distinction concerns the structure and meaning, not simply the English word know.",
+    "trap": "Knowing a person uses kennen, not wissen. But a noun can also express information in fixed combinations such as die Antwort wissen; avoid an absolute noun-versus-clause rule.",
+    "instructions": "Choose and conjugate kennen or wissen using the familiarity/information cue.",
+    "examples": [
+      [
+        "Ich kenne die neue Bibliothekarin schon.",
+        "I already know the new librarian."
+      ],
+      [
+        "Sie weiß, wann die Fähre ablegt.",
+        "She knows when the ferry departs."
+      ],
+      [
+        "Wir kennen diesen Wanderweg sehr gut.",
+        "We know this hiking trail very well."
+      ],
+      [
+        "Weißt du, ob der Aufzug funktioniert?",
+        "Do you know whether the lift works?"
+      ]
+    ],
+    "quiz": [
+      [
+        "___ du meinen Cousin Malik? (familiar person)",
+        "Kennst",
+        "A person you are familiar with is expressed with kennen."
+      ],
+      [
+        "Ich ___ nicht, wo mein Notizbuch liegt. (information)",
+        "weiß",
+        "Use wissen before the indirect question clause; ich takes weiß."
+      ],
+      [
+        "Wir ___ das kleine Theater am Markt. (familiar place)",
+        "kennen",
+        "Kennen describes familiarity with a place."
+      ],
+      [
+        "Sie ___, dass die Sitzung später beginnt. (information)",
+        "weiß",
+        "A dass-clause conveying known information commonly follows wissen."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-bringen-holen-word-choice-exercises",
+    "title": "Bringen or Holen? German A2 Movement Verb Practice",
+    "description": "Distinguish bringing something to a destination from going to fetch it. Practise bringen and holen with explicit movement cues.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Bringen focuses on carrying or taking something to a destination: Ich bringe dir den Ordner. Holen focuses on going to get something or someone: Ich hole den Ordner aus dem Büro. In a real sequence, someone can fetch an item first and bring it afterwards.",
+    "trap": "Do not assume that the verbs describe unrelated actions. The same delivery can involve holen at the collection point and bringen at the destination.",
+    "instructions": "Use bringen for delivery to the stated recipient and holen for fetching from the stated collection point. Conjugate in the present.",
+    "examples": [
+      [
+        "Ich bringe dir den Ordner an deinen Schreibtisch.",
+        "I bring the folder to your desk."
+      ],
+      [
+        "Sie holt ihre Tochter von der Musikschule.",
+        "She fetches her daughter from music school."
+      ],
+      [
+        "Wir bringen dem Nachbarn seine Post.",
+        "We bring the neighbour his post."
+      ],
+      [
+        "Kannst du Wasser aus dem Keller holen?",
+        "Can you fetch water from the cellar?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ den Koffer aus dem Auto. (go and fetch)",
+        "hole",
+        "Holen highlights going to the car to get the suitcase."
+      ],
+      [
+        "Der Kellner ___ uns die Speisekarte an den Tisch. (delivery)",
+        "bringt",
+        "Bringen highlights delivery to the diners."
+      ],
+      [
+        "Wir müssen die Tickets am Schalter ___. (collect)",
+        "holen",
+        "Collecting something from a collection point uses holen."
+      ],
+      [
+        "___ du mir morgen die Unterlagen mit? (bring along)",
+        "Bringst",
+        "The full verb is mitbringen; its finite du form is bringst with mit at the end."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-suchen-finden-word-choice-exercises",
+    "title": "Suchen or Finden? German A2 Word-Choice Practice",
+    "description": "Compare looking for something with finding it. Practise suchen and finden with search-process and successful-result cues.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Suchen describes the attempt to locate something; finden describes locating it or discovering it. Searching does not guarantee success: Ich suche den Beleg, aber ich finde ihn nicht. Finden also has an opinion meaning in expressions such as Ich finde das hilfreich, which is a separate use.",
+    "trap": "Do not translate look for as finden. A person can search for a long time without finding the missing object.",
+    "instructions": "Use suchen for the search process and finden for locating the object. Conjugate the verb as needed.",
+    "examples": [
+      [
+        "Ich suche den Einkaufszettel in meiner Tasche.",
+        "I am looking for the shopping list in my bag."
+      ],
+      [
+        "Endlich findet Amina den verlorenen Ohrring.",
+        "Amina finally finds the lost earring."
+      ],
+      [
+        "Wir suchen seit einer Stunde einen Parkplatz.",
+        "We have been looking for a parking space for an hour."
+      ],
+      [
+        "Unter dem Sofa finde ich die Fernbedienung.",
+        "I find the remote control under the sofa."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ meine Brille, weiß aber noch nicht, wo sie ist. (search)",
+        "suche",
+        "The search is still in progress."
+      ],
+      [
+        "Da ist sie! Ich ___ sie zwischen den Büchern. (locate)",
+        "finde",
+        "Finding is the successful result of locating the glasses."
+      ],
+      [
+        "Wir ___ im Internet nach einer Unterkunft. (search)",
+        "suchen",
+        "Suchen nach + dative describes looking for something."
+      ],
+      [
+        "Wo kann ich den Ausgang ___? (locate)",
+        "finden",
+        "After kann, use the infinitive finden for locating the exit."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-hoeren-zuhoeren-word-choice-exercises",
+    "title": "Hören or Zuhören? German A2 Listening Verb Exercises",
+    "description": "Compare hearing a sound with listening attentively to a person. Practise hören and dative objects after the separable verb zuhören.",
+    "guide": "grammar/dativ.html",
+    "guideLabel": "Review related grammar: dative structures",
+    "rule": "Hören can describe perceiving a sound or listening to audio: Ich höre ein Geräusch. Zuhören emphasises paying attention to a speaker and takes a dative person object: Ich höre der Rednerin zu. In a main clause, the prefix zu separates and goes to the end.",
+    "trap": "Ich höre die Lehrerin can mean I can hear her voice. Ich höre der Lehrerin zu emphasises attentive listening; the case and the separated prefix change.",
+    "instructions": "Choose the appropriate verb. Where zu is already at the end, supply only the conjugated stem of zuhören.",
+    "examples": [
+      [
+        "Vom Balkon höre ich eine Straßenmusikerin.",
+        "I can hear a street musician from the balcony."
+      ],
+      [
+        "Die Gruppe hört dem Erzähler aufmerksam zu.",
+        "The group listens attentively to the storyteller."
+      ],
+      [
+        "Hörst du das Klopfen an der Tür?",
+        "Can you hear the knocking at the door?"
+      ],
+      [
+        "Bitte hör mir bis zum Ende zu.",
+        "Please listen to me until the end."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ ein leises Summen. (perceive a sound)",
+        "höre",
+        "Hören describes perceiving the sound."
+      ],
+      [
+        "___ du mir bitte einen Moment zu? (listen attentively)",
+        "Hörst",
+        "Zuhören separates: hörst ... zu, with dative mir."
+      ],
+      [
+        "Wir ___ der Erklärung aufmerksam zu. (listen attentively)",
+        "hören",
+        "The full verb is zuhören; zu is already supplied."
+      ],
+      [
+        "Kannst du den Alarm ___? (hear)",
+        "hören",
+        "The infinitive hören follows kannst and takes the sound as object."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-sehen-aussehen-word-choice-exercises",
+    "title": "Sehen or Aussehen? German A2 Meaning Practice",
+    "description": "Use sehen for visual perception and aussehen for appearance. Practise separable aus and present-tense forms such as sieht and siehst.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Sehen describes perceiving something with your eyes: Ich sehe den Turm. Aussehen describes how someone or something appears: Der Turm sieht alt aus. Aussehen is separable in a main clause, and its singular forms follow sehen: du siehst aus, er sieht aus.",
+    "trap": "Do not omit final aus when describing appearance. Er sieht müde is incomplete for the intended meaning Er sieht müde aus.",
+    "instructions": "Choose sehen for perception or aussehen for appearance. Where aus is already shown, fill only the finite verb form.",
+    "examples": [
+      [
+        "Vom Fenster sehe ich die Burg.",
+        "I can see the castle from the window."
+      ],
+      [
+        "Dein neuer Mantel sieht elegant aus.",
+        "Your new coat looks elegant."
+      ],
+      [
+        "Wir sehen ein Reh am Waldrand.",
+        "We see a deer at the edge of the forest."
+      ],
+      [
+        "Die Kekse sehen frisch aus.",
+        "The biscuits look fresh."
+      ]
+    ],
+    "quiz": [
+      [
+        "Du ___ heute sehr zufrieden aus. (appearance)",
+        "siehst",
+        "Aussehen uses siehst with du; aus is already at the end."
+      ],
+      [
+        "Ich kann den Leuchtturm ___. (visual perception)",
+        "sehen",
+        "After kann, the infinitive sehen describes perception."
+      ],
+      [
+        "Die Suppe ___ lecker aus. (appearance)",
+        "sieht",
+        "A singular subject takes sieht ... aus."
+      ],
+      [
+        "___ ihr den Regenbogen? (visual perception)",
+        "Seht",
+        "Ihr takes seht when asking about seeing something."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-anziehen-tragen-word-choice-exercises",
+    "title": "Anziehen or Tragen? German A2 Clothing Verb Practice",
+    "description": "Distinguish putting clothes on from wearing them. Practise anziehen as an action and tragen as a state, with separable-verb examples.",
+    "guide": "grammar/reflexive-verben.html",
+    "guideLabel": "Review related grammar: reflexive verbs",
+    "rule": "Anziehen describes putting a garment on; tragen describes wearing it afterwards. Compare Er zieht die Stiefel an with Er trägt die Stiefel den ganzen Tag. Sich anziehen means getting dressed, while a named garment can be the object of anziehen.",
+    "trap": "Anziehen separates in ordinary main clauses: zieht ... an. Tragen changes its stem vowel with du and er/sie/es: du trägst, er trägt.",
+    "instructions": "Choose anziehen for the act of putting on clothing and tragen for wearing it. A separated an may already be supplied.",
+    "examples": [
+      [
+        "Er zieht die Gummistiefel vor der Tür an.",
+        "He puts on the Wellington boots by the door."
+      ],
+      [
+        "Bei der Arbeit trägt sie eine Schutzbrille.",
+        "She wears safety glasses at work."
+      ],
+      [
+        "Das Kind zieht sich nach dem Duschen an.",
+        "The child gets dressed after showering."
+      ],
+      [
+        "Im Winter tragen wir dicke Socken.",
+        "In winter we wear thick socks."
+      ]
+    ],
+    "quiz": [
+      [
+        "Vor dem Hinausgehen ___ ich meine Jacke an. (put on)",
+        "ziehe",
+        "Anziehen separates into ziehe ... an."
+      ],
+      [
+        "Du ___ heute ein grünes Hemd. (are wearing)",
+        "trägst",
+        "The du form of tragen is trägst."
+      ],
+      [
+        "Bitte ___ die Handschuhe an! (put on, du)",
+        "zieh",
+        "The du imperative of anziehen is zieh ... an; ziehe is also possible."
+      ],
+      [
+        "Im Labor ___ wir Schutzkleidung. (wear)",
+        "tragen",
+        "Wearing protective clothing uses tragen."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-treffen-kennenlernen-word-choice-exercises",
+    "title": "Treffen or Kennenlernen? German A2 Word Choice",
+    "description": "Compare meeting someone with getting to know them. Use first-acquaintance and existing-friend cues to practise treffen and kennenlernen.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Treffen means meeting or encountering someone and can involve a person you already know. Kennenlernen highlights becoming acquainted with someone or something. Both can describe aspects of a first meeting, but treffen alone does not say that the people were previously strangers.",
+    "trap": "Do not translate every English meet with kennenlernen. Meeting an old friend again normally uses treffen; kennenlernen focuses on a new acquaintance.",
+    "instructions": "Use treffen for meeting the specified existing acquaintance and kennenlernen for becoming acquainted. Observe separable kennen where supplied.",
+    "examples": [
+      [
+        "Ich treffe meinen alten Schulfreund am Bahnhof.",
+        "I meet my old school friend at the station."
+      ],
+      [
+        "Bei der Einführung lernen wir das neue Team kennen.",
+        "At the introduction we get to know the new team."
+      ],
+      [
+        "Morgen treffen sich die Geschwister zum Mittagessen.",
+        "Tomorrow the siblings meet for lunch."
+      ],
+      [
+        "Im Kurs möchte ich andere Lernende kennenlernen.",
+        "I would like to get to know other learners in the course."
+      ]
+    ],
+    "quiz": [
+      [
+        "Heute ___ ich meine langjährige Nachbarin zum Kaffee. (meeting)",
+        "treffe",
+        "Treffen fits meeting a person already known."
+      ],
+      [
+        "Wir möchten die neue Kollegin ___. (become acquainted)",
+        "kennenlernen",
+        "Kennenlernen highlights becoming acquainted. The separate spelling kennen lernen is also accepted."
+      ],
+      [
+        "Bei der Feier ___ er zum ersten Mal ihre Familie kennen. (kennenlernen)",
+        "lernt",
+        "The finite form is lernt, with kennen separated at the end."
+      ],
+      [
+        "Wann ___ ihr euren alten Trainer wieder? (treffen)",
+        "trefft",
+        "Ihr takes trefft for meeting the familiar trainer again."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-mieten-vermieten-word-choice-exercises",
+    "title": "Mieten or Vermieten? German A2 Housing Word Choice",
+    "description": "Choose mieten from the tenant’s perspective and vermieten from the owner’s. Practise who pays and who makes a property available.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Mieten describes paying to use something temporarily, such as a flat or a vehicle. Vermieten describes making it available to someone for rent. In the same arrangement, the tenant mietet die Wohnung and the owner vermietet sie. The subject’s role decides the perspective.",
+    "trap": "The prefix ver- changes the perspective. Compare Ich miete ein Zimmer with Ich vermiete jemandem ein Zimmer; the rented item remains an accusative object.",
+    "instructions": "Choose and conjugate mieten for the tenant/user or vermieten for the person offering the rental.",
+    "examples": [
+      [
+        "Die Studentinnen mieten eine Wohnung in der Nähe.",
+        "The students rent a flat nearby."
+      ],
+      [
+        "Der Eigentümer vermietet das Dachzimmer.",
+        "The owner rents out the attic room."
+      ],
+      [
+        "Für den Ausflug mieten wir zwei Fahrräder.",
+        "We hire two bicycles for the outing."
+      ],
+      [
+        "Die Firma vermietet Transporter für Umzüge.",
+        "The company rents out vans for moves."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir ___ für eine Woche ein Ferienhaus. (paying users)",
+        "mieten",
+        "The users paying to stay in the house mieten it."
+      ],
+      [
+        "Frau Kern ___ ihr Gästezimmer an eine Studentin. (owner)",
+        "vermietet",
+        "The owner makes the room available for rent: vermietet."
+      ],
+      [
+        "Kann ich hier ein Lastenrad ___? (paying user)",
+        "mieten",
+        "The customer hiring the bicycle uses mieten."
+      ],
+      [
+        "Die Besitzer ___ ihre Garage an Nachbarn. (owners)",
+        "vermieten",
+        "The owners renting the garage out use vermieten."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-leihen-schenken-word-choice-exercises",
+    "title": "Leihen or Schenken? German A2 Giving and Borrowing",
+    "description": "Distinguish lending temporarily from giving a gift. Practise the giver, recipient and return expectation with leihen and schenken.",
+    "guide": "grammar/dativ.html",
+    "guideLabel": "Review related grammar: dative structures",
+    "rule": "Leihen can mean lending something or borrowing it, depending on the sentence: Ich leihe dir meinen Schirm means I lend it to you; Ich leihe mir einen Schirm means I borrow one. Schenken means giving something as a gift, without expecting the same object back.",
+    "trap": "Do not interpret leihen as only lend or only borrow. The person pronouns and the wider context identify which direction the temporary transfer takes.",
+    "instructions": "Choose a form of leihen for a temporary loan or schenken for a gift that is kept. Follow the subject and the return cue.",
+    "examples": [
+      [
+        "Ich leihe dir meinen großen Koffer bis Sonntag.",
+        "I lend you my large suitcase until Sunday."
+      ],
+      [
+        "Meine Tante schenkt mir ein Kochbuch zum Geburtstag.",
+        "My aunt gives me a cookbook for my birthday."
+      ],
+      [
+        "Wir leihen uns für den Abend ein Brettspiel.",
+        "We borrow a board game for the evening."
+      ],
+      [
+        "Er schenkt seiner Schwester eine selbst gemalte Karte.",
+        "He gives his sister a card he painted himself."
+      ]
+    ],
+    "quiz": [
+      [
+        "Kannst du mir dein Ladegerät ___? Ich gebe es morgen zurück.",
+        "leihen",
+        "The promised return identifies a temporary loan."
+      ],
+      [
+        "Wir ___ Oma Blumen zum Geburtstag. (gift)",
+        "schenken",
+        "Flowers given as a birthday gift use schenken."
+      ],
+      [
+        "Sie ___ sich ein Zelt für das Wochenende. (temporary loan)",
+        "leiht",
+        "Sich etwas leihen means borrowing something; sie takes leiht."
+      ],
+      [
+        "Du darfst das Buch behalten; ich möchte es dir ___. (gift)",
+        "schenken",
+        "No return is expected, so schenken is the intended verb."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-zahlen-zaehlen-word-choice-exercises",
+    "title": "Zahlen or Zählen? German A2 Umlaut Word Practice",
+    "description": "Compare zahlen for paying with zählen for counting. Notice the umlaut and practise the meaning in prices, coins and quantities.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Zahlen means paying; zählen means counting. The umlaut changes the word, not just its spelling style: Wir zahlen die Rechnung, but wir zählen die Münzen. Counting money and paying with it are different actions, even when both happen at a checkout.",
+    "trap": "Do not remove the umlaut from zählen. Without an umlaut, zahlen has the payment meaning. In plain typing, zaehlen can represent zählen.",
+    "instructions": "Choose zahlen for paying or zählen for counting, and conjugate the verb in the present tense.",
+    "examples": [
+      [
+        "Die Gäste zahlen ihre Getränke an der Kasse.",
+        "The guests pay for their drinks at the till."
+      ],
+      [
+        "Das Kind zählt die Muscheln am Strand.",
+        "The child counts the shells on the beach."
+      ],
+      [
+        "Ich zahle heute lieber bar.",
+        "I prefer to pay cash today."
+      ],
+      [
+        "Wir zählen die Stühle vor dem Konzert.",
+        "We count the chairs before the concert."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Kassiererin ___ die Münzen im Fach. (count)",
+        "zählt",
+        "Counting the coins uses zählen with ä."
+      ],
+      [
+        "Wir ___ den Gesamtbetrag mit Karte. (pay)",
+        "zahlen",
+        "Making the payment uses zahlen without an umlaut."
+      ],
+      [
+        "___ du die Schritte bis zur Tür? (count)",
+        "Zählst",
+        "Du takes zählst for counting."
+      ],
+      [
+        "Ich möchte bitte ___. (pay)",
+        "zahlen",
+        "After möchte, use the infinitive zahlen for paying."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-reise-fahrt-word-choice-exercises",
+    "title": "Reise or Fahrt? German A2 Travel Noun Practice",
+    "description": "Compare a whole trip with the transport part of a journey. Practise Reise and Fahrt while recognising that some contexts allow both.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: prepositions and case",
+    "rule": "Reise is a broad term for a trip or journey, often including a stay and several activities. Fahrt focuses on travelling in a vehicle or on a particular transport segment. The meanings overlap: a long bus trip may be called a Busreise or a Busfahrt with a different emphasis.",
+    "trap": "Do not teach Reise as always long and Fahrt as always short. Duration alone is not the rule; a Fahrt can last many hours.",
+    "instructions": "Choose Reise for the whole trip and Fahrt for the vehicle segment, as requested by the cue. Some unconstrained contexts allow both.",
+    "examples": [
+      [
+        "Unsere Reise umfasst drei Städte und zwei Hotelaufenthalte.",
+        "Our trip includes three cities and two hotel stays."
+      ],
+      [
+        "Die Fahrt vom Flughafen zum Hotel dauert zwanzig Minuten.",
+        "The drive from the airport to the hotel takes twenty minutes."
+      ],
+      [
+        "Für die Reise packt Lotte auch Wanderschuhe ein.",
+        "Lotte also packs hiking boots for the trip."
+      ],
+      [
+        "Während der Fahrt im Bus darf ich lesen.",
+        "I can read during the bus journey."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die ___ vom Bahnhof zur Unterkunft dauert zehn Minuten. (transport segment)",
+        "Fahrt",
+        "Fahrt highlights the vehicle segment rather than the whole trip."
+      ],
+      [
+        "Die ___ durch Norwegen umfasst Hotels und mehrere Ausflüge. (whole trip)",
+        "Reise",
+        "Reise is the broad term for the complete trip in this task."
+      ],
+      [
+        "Nach der langen ___ mit dem Taxi stiegen wir aus. (vehicle segment)",
+        "Fahrt",
+        "Fahrt highlights movement in the taxi; the context is the transport leg."
+      ],
+      [
+        "Sie plant eine ___ mit mehreren Übernachtungen. (whole trip)",
+        "Reise",
+        "Reise is the intended broad trip term; a more specific Fahrt can also be natural when the transport focus is stated."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-erst-nur-word-choice-exercises",
+    "title": "Erst or Nur? German A2 Time and Quantity Practice",
+    "description": "Distinguish not until/only so far with erst from a simple limitation with nur. Practise time expectations, age and quantity cues.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: sentence structure",
+    "rule": "Nur limits an amount or excludes alternatives: Ich möchte nur Wasser. Erst can mean not until with a time, or only so far relative to a later expectation: Der Zug fährt erst um zehn; ich habe erst zwei Seiten gelesen. Meaning and speaker expectations matter, not just the English word only.",
+    "trap": "Erst zwei Seiten and nur zwei Seiten can both be grammatical. Erst often suggests more remains or is expected, while nur stresses the limited amount.",
+    "instructions": "Use erst for not until/only so far and nur for the stated limitation or exclusion. Follow the meaning cue.",
+    "examples": [
+      [
+        "Der Kurs beginnt erst nächste Woche.",
+        "The course does not begin until next week."
+      ],
+      [
+        "Ich möchte nur ein Glas Leitungswasser.",
+        "I would like only a glass of tap water."
+      ],
+      [
+        "Wir haben erst den ersten Abschnitt geschafft.",
+        "We have only completed the first section so far."
+      ],
+      [
+        "Im kleinen Rucksack ist nur Platz für eine Jacke.",
+        "There is room for only one jacket in the small backpack."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Bus kommt ___ um elf, nicht schon um zehn. (not until)",
+        "erst",
+        "Erst marks a later-than-expected or specified starting point."
+      ],
+      [
+        "Ich trinke heute ___ Wasser, keinen Saft. (exclusion)",
+        "nur",
+        "Nur excludes the alternative juice."
+      ],
+      [
+        "Von zehn Aufgaben habe ich ___ zwei erledigt. (only so far)",
+        "erst",
+        "Erst presents two as progress so far; nur would stress the small total."
+      ],
+      [
+        "Bitte pack ___ die blauen Hefte ein, keine anderen. (exclusion)",
+        "nur",
+        "Nur restricts the choice to the blue exercise books."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-schon-noch-word-choice-exercises",
+    "title": "Schon or Noch? German A2 Time-Meaning Exercises",
+    "description": "Choose schon for already and noch for still. Practise completed progress and continuing situations with explicit English meaning cues.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: sentence structure",
+    "rule": "Schon often means already and presents a point as reached: Der Teig ist schon fertig. Noch often means still and presents a situation as continuing: Der Teig ist noch warm. With nicht, the patterns differ again: noch nicht means not yet and nicht mehr means no longer.",
+    "trap": "The same positive sentence may allow both words with different meanings. Das Geschäft ist schon offen means already open; noch offen means still open.",
+    "instructions": "Choose schon for already or noch for still/not yet according to the cue; do not add another word.",
+    "examples": [
+      [
+        "Der Teig ist schon fertig zum Backen.",
+        "The dough is already ready for baking."
+      ],
+      [
+        "Die Brötchen sind noch warm.",
+        "The rolls are still warm."
+      ],
+      [
+        "Unser Zug ist schon angekommen.",
+        "Our train has already arrived."
+      ],
+      [
+        "Die Kinder schlafen noch im Gästezimmer.",
+        "The children are still sleeping in the guest room."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich habe die Nachricht ___ gelesen. (already)",
+        "schon",
+        "Schon marks the reading as already completed."
+      ],
+      [
+        "Der Tee ist ___ heiß. (still)",
+        "noch",
+        "Noch marks the hot state as continuing."
+      ],
+      [
+        "Die Gäste sind ___ nicht da. (not yet)",
+        "noch",
+        "Noch nicht means not yet."
+      ],
+      [
+        "Ist der neue Stundenplan ___ fertig? (already)",
+        "schon",
+        "Schon asks whether the finished point has already been reached."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-seit-seid-word-choice-exercises",
+    "title": "Seit or Seid? German A2 Spelling Practice",
+    "description": "Distinguish the time word seit from seid, the ihr form of sein. Use verb and duration clues in four explained spelling exercises.",
+    "guide": "grammar/prepositions.html",
+    "guideLabel": "Review related grammar: prepositions and case",
+    "rule": "Seit relates to time, often as a preposition before a starting point or duration: seit dem Umzug. It can also introduce a time clause. Seid is a verb form: ihr seid, the present-tense form of sein for informal plural you. The words sound alike but have different jobs.",
+    "trap": "Do not choose by sound alone. Ask whether the gap needs a time link or the verb form belonging to ihr.",
+    "instructions": "Choose seit for the time expression or seid for the verb form. Capitalise a word at the start of a sentence.",
+    "examples": [
+      [
+        "Seit dem Umzug habe ich einen kürzeren Arbeitsweg.",
+        "Since moving, I have had a shorter commute."
+      ],
+      [
+        "Ihr seid heute besonders aufmerksam.",
+        "You all are especially attentive today."
+      ],
+      [
+        "Wir warten seit einer halben Stunde auf die Lieferung.",
+        "We have been waiting half an hour for the delivery."
+      ],
+      [
+        "Seid ihr mit dem Entwurf zufrieden?",
+        "Are you all satisfied with the draft?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ihr ___ herzlich willkommen.",
+        "seid",
+        "Ihr needs the present-tense form seid of sein."
+      ],
+      [
+        "___ September besucht sie einen Abendkurs.",
+        "Seit",
+        "The month is a starting point, so use seit."
+      ],
+      [
+        "Wie lange ___ ihr schon im Verein?",
+        "seid",
+        "This gap needs the finite verb for ihr, not a time preposition."
+      ],
+      [
+        "Ich wohne ___ dem Frühjahr hier.",
+        "seit",
+        "Seit introduces the time starting point dem Frühjahr."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-das-dass-word-choice-exercises",
+    "title": "Das or Dass? German A2 Spelling Exercises",
+    "description": "Choose das as an article or pronoun and dass as a conjunction. Practise the replacement clue without treating it as a complete grammar rule.",
+    "guide": "grammar/dass.html",
+    "guideLabel": "Review related grammar: dass-clauses",
+    "rule": "Das can be a neuter article, a demonstrative pronoun or a relative pronoun: das Paket; Das gefällt mir; das Paket, das ankommt. Dass introduces a content clause: Ich hoffe, dass es ankommt. A replacement such as dieses or welches can help identify some uses of das.",
+    "trap": "The words sound alike, but dass is not a noun article. Do not assume every word after a comma must be dass: a relative clause can begin with das.",
+    "instructions": "Choose das or dass from the grammatical role. Use a capital letter at the start of a sentence.",
+    "examples": [
+      [
+        "Das Paket steht vor der Wohnungstür.",
+        "The parcel is in front of the flat door."
+      ],
+      [
+        "Ich hoffe, dass der Inhalt heil geblieben ist.",
+        "I hope the contents have remained intact."
+      ],
+      [
+        "Das Fahrrad, das dort lehnt, ist meines.",
+        "The bicycle leaning there is mine."
+      ],
+      [
+        "Dass du Zeit gefunden hast, freut mich.",
+        "I am glad that you found time."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich glaube, ___ der Termin passt.",
+        "dass",
+        "The conjunction introduces the content of the belief."
+      ],
+      [
+        "Wo ist ___ rote Notizheft?",
+        "das",
+        "Das is the neuter article before Notizheft."
+      ],
+      [
+        "Das Bild, ___ du gemalt hast, hängt im Flur.",
+        "das",
+        "The gap is a neuter relative pronoun, replaceable here by welches."
+      ],
+      [
+        "___ wir uns wiedersehen, ist schön.",
+        "Dass",
+        "The content clause acts as subject; start its conjunction with a capital letter."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "kind": "word-choice",
+    "slug": "a2-wenn-wann-word-choice-exercises",
+    "title": "Wenn or Wann? German A2 Question and Time Practice",
+    "description": "Use wann to ask at what time, including indirect questions, and wenn for a time or condition clause. Practise meaning and sentence structure.",
+    "guide": "grammar/w-fragen.html",
+    "guideLabel": "Review related grammar: question structures",
+    "rule": "Wann asks about an unknown time: Wann öffnet die Praxis? It also stays in an indirect question: Ich weiß nicht, wann die Praxis öffnet. Wenn can introduce a time or condition on which another event depends: Wenn die Praxis öffnet, rufe ich an. Verb-final order alone does not decide between them.",
+    "trap": "Do not replace wann with wenn merely because the question is indirect. Ich frage, wann … still asks what time.",
+    "instructions": "Choose wann for a question about an unknown time and wenn for the specified time/condition link.",
+    "examples": [
+      [
+        "Wann öffnet die neue Ausstellung?",
+        "When does the new exhibition open?"
+      ],
+      [
+        "Ich weiß nicht, wann der Vortrag endet.",
+        "I do not know when the talk ends."
+      ],
+      [
+        "Wenn der Vortrag endet, holen wir unsere Jacken.",
+        "When the talk ends, we collect our jackets."
+      ],
+      [
+        "Wenn du heute frei hast, können wir telefonieren.",
+        "If you are free today, we can talk on the phone."
+      ]
+    ],
+    "quiz": [
+      [
+        "Weißt du, ___ die Bäckerei schließt? (unknown time)",
+        "wann",
+        "The indirect question asks at what time."
+      ],
+      [
+        "___ die Bäckerei schließt, räumt das Team auf. (time link)",
+        "Wenn",
+        "The clause supplies a time for the main action."
+      ],
+      [
+        "___ beginnt eure Probe? (direct time question)",
+        "Wann",
+        "A direct question about time starts with wann."
+      ],
+      [
+        "Ruf mich an, ___ du angekommen bist. (when the event occurs)",
+        "wenn",
+        "The arrival provides the event on which calling depends."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-ob-wenn-word-choice-exercises",
+    "title": "Ob or Wenn? German B1 Clause-Choice Practice",
+    "description": "Distinguish an indirect whether-question with ob from a condition with wenn. Practise the intended meaning rather than word order alone.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: sentence structure",
+    "rule": "Ob introduces an indirect yes/no question or uncertainty: Ich weiß nicht, ob der Raum frei ist. Wenn introduces a condition or time link: Wenn der Raum frei ist, beginnen wir. Both clause types put the finite verb at the end, so meaning identifies the connector.",
+    "trap": "Do not use ob for every English if. I do not know if asks whether, but If it rains sets a condition and normally uses wenn.",
+    "instructions": "Choose ob for uncertainty about whether something is true, or wenn for the explicitly stated condition.",
+    "examples": [
+      [
+        "Ich weiß noch nicht, ob der Raum frei ist.",
+        "I do not yet know whether the room is free."
+      ],
+      [
+        "Wenn der Raum frei ist, beginnen wir sofort.",
+        "If the room is free, we start immediately."
+      ],
+      [
+        "Sie fragt, ob die Unterlagen vollständig sind.",
+        "She asks whether the documents are complete."
+      ],
+      [
+        "Wenn die Unterlagen vollständig sind, schicke ich sie ab.",
+        "If the documents are complete, I send them."
+      ]
+    ],
+    "quiz": [
+      [
+        "Kannst du prüfen, ___ die Tür abgeschlossen ist? (whether)",
+        "ob",
+        "The embedded yes/no question asks whether it is locked."
+      ],
+      [
+        "___ du morgen Zeit hast, komm bitte vorbei. (condition)",
+        "Wenn",
+        "The visit depends on the condition that time is available."
+      ],
+      [
+        "Wir wissen nicht, ___ das Paket heute ankommt. (whether)",
+        "ob",
+        "Ob introduces uncertainty about a yes/no issue."
+      ],
+      [
+        "Ich helfe dir, ___ du mich brauchst. (condition)",
+        "wenn",
+        "The help is linked to an open condition, not an indirect question."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-obwohl-trotz-word-choice-exercises",
+    "title": "Obwohl or Trotz? German B1 Concession Practice",
+    "description": "Compare obwohl + a finite clause with trotz + a noun phrase. Practise case and structure without confusing conjunctions and prepositions.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: sentence structure",
+    "rule": "Obwohl introduces a concessive clause with a finite verb at the end: Obwohl es windig ist, fahren wir Rad. Trotz is a preposition before a noun phrase: Trotz des Windes fahren wir Rad. In formal standard German, trotz normally takes the genitive; usage also includes dative variants in some contexts.",
+    "trap": "Do not place an ordinary finite clause directly after trotz. Choose a clause after obwohl or a noun phrase after trotz.",
+    "instructions": "Choose obwohl before the supplied finite clause or trotz before the supplied noun phrase. Use a capital letter where needed.",
+    "examples": [
+      [
+        "Obwohl es windig ist, fahren wir Rad.",
+        "Although it is windy, we cycle."
+      ],
+      [
+        "Trotz des Windes fahren wir Rad.",
+        "Despite the wind, we cycle."
+      ],
+      [
+        "Obwohl der Preis hoch ist, kaufen sie das Gerät.",
+        "Although the price is high, they buy the device."
+      ],
+      [
+        "Trotz des hohen Preises kaufen sie das Gerät.",
+        "Despite the high price, they buy the device."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ sie wenig Erfahrung hat, übernimmt sie die Aufgabe.",
+        "Obwohl",
+        "The following words form a finite subordinate clause."
+      ],
+      [
+        "___ der langen Wartezeit blieben wir ruhig.",
+        "Trotz",
+        "The noun phrase der langen Wartezeit follows the preposition trotz."
+      ],
+      [
+        "Er lächelte, ___ er erschöpft war.",
+        "obwohl",
+        "The clause ends in the finite verb war, so use obwohl."
+      ],
+      [
+        "___ des Regens fand das Konzert statt.",
+        "Trotz",
+        "Des Regens is a genitive noun phrase after trotz."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-wechseln-umsteigen-word-choice-exercises",
+    "title": "Wechseln or Umsteigen? German B1 Travel Word Choice",
+    "description": "Distinguish changing an item or service from changing vehicles during a journey. Practise wechseln and the separable verb umsteigen.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Wechseln can describe replacing or changing something: den Anbieter wechseln, die Schuhe wechseln. Umsteigen commonly means getting off one vehicle and continuing in another: in Mannheim umsteigen. Der Zugwechsel and den Zug wechseln can also describe that travel change; umsteigen is a typical verb for the passenger’s action.",
+    "trap": "Do not invent a total ban on wechseln in transport contexts. Den Zug wechseln is possible; the exercise targets the supplied verb pattern and meaning.",
+    "instructions": "Use wechseln for changing the named item/provider and umsteigen for the specified vehicle change. Fill only the finite stem when um is supplied.",
+    "examples": [
+      [
+        "Wir wechseln im Büro den Internetanbieter.",
+        "We change the internet provider at the office."
+      ],
+      [
+        "Auf dem Weg nach Basel steigen wir in Mannheim um.",
+        "On the way to Basel we change trains in Mannheim."
+      ],
+      [
+        "Vor der Wanderung wechselt sie ihre Schuhe.",
+        "Before the hike she changes her shoes."
+      ],
+      [
+        "Am Hauptbahnhof kannst du in die U-Bahn umsteigen.",
+        "At the central station you can change to the underground."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ nach der Arbeit meine nassen Socken. (change an item)",
+        "wechsle",
+        "Ich wechsle is a common present form; ich wechsele is also standard."
+      ],
+      [
+        "In Fulda ___ wir in einen anderen Zug um. (umsteigen)",
+        "steigen",
+        "Umsteigen separates into steigen ... um."
+      ],
+      [
+        "Möchtest du den Stromanbieter ___? (change provider)",
+        "wechseln",
+        "After möchtest, the infinitive wechseln expresses changing a provider."
+      ],
+      [
+        "Wo müssen wir in die Straßenbahn ___? (change vehicle)",
+        "umsteigen",
+        "The modal müssen takes the bare infinitive umsteigen."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-umziehen-ausziehen-word-choice-exercises",
+    "title": "Umziehen or Ausziehen? German B1 Meaning Practice",
+    "description": "Use context to separate moving home, moving out, changing clothes and undressing. Practise the housing and clothing senses of both verbs.",
+    "guide": "grammar/reflexive-verben.html",
+    "guideLabel": "Review related grammar: reflexive verbs",
+    "rule": "Umziehen can mean moving home, while ausziehen can mean leaving a residence. With clothing, sich umziehen means changing clothes and sich ausziehen means undressing. Both verbs are separable, so the prefix at the end is essential to the meaning of a main clause.",
+    "trap": "Do not assign just one English meaning to either verb. Ich ziehe um concerns moving home; Ich ziehe mich um concerns changing clothes.",
+    "instructions": "Choose the form requested by the meaning cue. Where um or aus is already supplied, fill the conjugated verb stem.",
+    "examples": [
+      [
+        "Im August ziehen wir in eine größere Wohnung um.",
+        "In August we move to a larger flat."
+      ],
+      [
+        "Zum Monatsende zieht der Mitbewohner aus.",
+        "The flatmate moves out at the end of the month."
+      ],
+      [
+        "Vor dem Fest zieht sich Linh noch um.",
+        "Linh changes clothes before the celebration."
+      ],
+      [
+        "Vor dem Duschen zieht sich das Kind aus.",
+        "The child undresses before showering."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir möchten nächstes Jahr nach Rostock ___. (move home)",
+        "umziehen",
+        "Moving to a new home is umziehen."
+      ],
+      [
+        "Er muss sein Zimmer verlassen und endgültig ___. (move out)",
+        "ausziehen",
+        "Leaving a residence is ausziehen."
+      ],
+      [
+        "Nach dem Sport ___ ich mich für das Essen um. (change clothes)",
+        "ziehe",
+        "Sich umziehen separates: ich ziehe mich ... um."
+      ],
+      [
+        "Vor dem Baden ___ sie sich aus. (undress, singular)",
+        "zieht",
+        "The singular finite form is zieht, with sich and final aus."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-stellen-stehen-word-choice-exercises",
+    "title": "Stellen or Stehen? German B1 Position Exercises",
+    "description": "Compare placing something upright with its standing position. Practise direct objects, position statements and preposition case cues.",
+    "guide": "grammar/liegen-legen.html",
+    "guideLabel": "Review related grammar: position and placement",
+    "rule": "Stellen normally describes putting something into an upright position and takes an object: Ich stelle die Vase auf das Regal. Stehen describes an upright position without a placement object: Die Vase steht auf dem Regal. The preposition also reflects placement versus location in these examples.",
+    "trap": "Do not choose only from the English word stand. Ask whether someone places an object or whether the sentence describes where the object is.",
+    "instructions": "Choose and conjugate stellen for an act of upright placement or stehen for the resulting position.",
+    "examples": [
+      [
+        "Ich stelle die Vase auf das Regal.",
+        "I put the vase on the shelf."
+      ],
+      [
+        "Die Vase steht auf dem Regal.",
+        "The vase is standing on the shelf."
+      ],
+      [
+        "Sie stellt den Besen hinter die Tür.",
+        "She puts the broom behind the door."
+      ],
+      [
+        "Der Besen steht hinter der Tür.",
+        "The broom stands behind the door."
+      ]
+    ],
+    "quiz": [
+      [
+        "Bitte ___ die Flasche in den Kühlschrank. (place upright, du)",
+        "stell",
+        "The du imperative of stellen is stell; stelle is also possible."
+      ],
+      [
+        "Die Flasche ___ schon im Kühlschrank. (position)",
+        "steht",
+        "Stehen describes where the bottle is."
+      ],
+      [
+        "Wir ___ die Kisten neben das Tor. (place)",
+        "stellen",
+        "The subject places the boxes, so use stellen with an object."
+      ],
+      [
+        "Neben dem Tor ___ zwei Kisten. (position)",
+        "stehen",
+        "The plural subject Kisten takes stehen for its position."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-legen-liegen-word-choice-exercises",
+    "title": "Legen or Liegen? German B1 Placement Practice",
+    "description": "Choose legen for placing something down and liegen for its position. Practise the object and location clues in complete sentences.",
+    "guide": "grammar/liegen-legen.html",
+    "guideLabel": "Review related grammar: position and placement",
+    "rule": "Legen describes putting an object down or into a lying position: Sie legt die Decke auf das Bett. Liegen describes where something lies: Die Decke liegt auf dem Bett. The person doing the placing is the subject of legen; the positioned item is the subject of liegen.",
+    "trap": "Do not use liegen as though it were the act of placing a direct object. Ich lege das Handy hin, but Das Handy liegt dort.",
+    "instructions": "Choose legen for placing an object down or liegen for describing its position; conjugate in the present or requested imperative.",
+    "examples": [
+      [
+        "Sie legt die Decke auf das Bett.",
+        "She puts the blanket on the bed."
+      ],
+      [
+        "Die Decke liegt auf dem Bett.",
+        "The blanket lies on the bed."
+      ],
+      [
+        "Ich lege die Quittung in die Schublade.",
+        "I put the receipt in the drawer."
+      ],
+      [
+        "Die Quittung liegt in der Schublade.",
+        "The receipt is in the drawer."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ die Zeitung bitte auf den Sessel! (place, du)",
+        "Leg",
+        "The du imperative of legen is leg; lege is also possible."
+      ],
+      [
+        "Die Zeitung ___ auf dem Sessel. (position)",
+        "liegt",
+        "The newspaper is the subject of the position verb liegen."
+      ],
+      [
+        "Wir ___ die Handtücher ins Regal. (place)",
+        "legen",
+        "The subject puts the towels somewhere, so use legen."
+      ],
+      [
+        "Wo ___ deine Handschuhe? (position)",
+        "liegen",
+        "The plural subject takes liegen."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-setzen-sitzen-word-choice-exercises",
+    "title": "Setzen or Sitzen? German B1 Sitting Verb Exercises",
+    "description": "Distinguish sitting down with sich setzen from being seated with sitzen. Practise reflexive pronouns and the change-of-position cue.",
+    "guide": "grammar/reflexive-verben.html",
+    "guideLabel": "Review related grammar: reflexive verbs",
+    "rule": "Sich setzen describes the action of sitting down: Ich setze mich auf die Bank. Sitzen describes being seated: Ich sitze auf der Bank. Setzen can also take a different object, such as setting a child on a chair, but the self-directed examples here use a reflexive pronoun.",
+    "trap": "Do not drop mich, dich or sich when using sich setzen for sitting yourself down. Sitzen needs no reflexive pronoun in these position statements.",
+    "instructions": "Use setzen when someone sits down and sitzen when someone is already seated. Reflexive pronouns are supplied where needed.",
+    "examples": [
+      [
+        "Ich setze mich auf die Bank am Teich.",
+        "I sit down on the bench by the pond."
+      ],
+      [
+        "Ich sitze auf der Bank und lese.",
+        "I am sitting on the bench and reading."
+      ],
+      [
+        "Die Gäste setzen sich an den langen Tisch.",
+        "The guests sit down at the long table."
+      ],
+      [
+        "Die Gäste sitzen schon am langen Tisch.",
+        "The guests are already sitting at the long table."
+      ]
+    ],
+    "quiz": [
+      [
+        "Bitte ___ dich neben mich! (sit down, du)",
+        "setz",
+        "The du imperative is setz; setze is also possible. Dich makes it reflexive."
+      ],
+      [
+        "Wir ___ seit einer Stunde im Wartezimmer. (already seated)",
+        "sitzen",
+        "Sitzen describes the continuing seated position."
+      ],
+      [
+        "Das Kind ___ sich auf den freien Stuhl. (sits down)",
+        "setzt",
+        "The action is sich setzen, so the singular form is setzt."
+      ],
+      [
+        "Wo ___ ihr während der Vorstellung? (seated position)",
+        "sitzt",
+        "The ihr form of sitzen is sitzt."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-haengen-hing-gehaengt-word-choice-exercises",
+    "title": "Hing or Hängte? German B1 Hängen Meaning Practice",
+    "description": "Compare the position verb hängen with the act of hanging something up. Practise hing/gehangen and hängte/gehängt in past-tense contexts.",
+    "guide": "grammar/perfekt.html",
+    "guideLabel": "Review related grammar: past participles",
+    "rule": "In the standard distinction, hängen describing a position uses strong past forms: Das Schild hing dort; es hat dort gehangen. Hängen meaning to put something into a hanging position takes an object and weak past forms: Sie hängte das Schild auf; sie hat es aufgehängt.",
+    "trap": "The present-tense forms look alike. Use the role of the subject and whether an object is being placed to decide the past-tense pattern.",
+    "instructions": "Use Präteritum or Partizip II as requested, distinguishing an existing position from the act of hanging something.",
+    "examples": [
+      [
+        "Das Schild hing gestern noch am Zaun.",
+        "The sign was still hanging on the fence yesterday."
+      ],
+      [
+        "Sie hängte das Schild an einen Pfosten.",
+        "She hung the sign on a post."
+      ],
+      [
+        "Die Mäntel haben im Flur gehangen.",
+        "The coats hung in the hallway."
+      ],
+      [
+        "Wir haben die Mäntel an die Haken gehängt.",
+        "We hung the coats on the hooks."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Foto ___ früher über dem Schreibtisch. (position, Präteritum)",
+        "hing",
+        "The position verb uses the strong past form hing."
+      ],
+      [
+        "Er ___ das Foto an die Wand. (placement, Präteritum)",
+        "hängte",
+        "With a placement object, use the weak form hängte."
+      ],
+      [
+        "Der Spiegel hat jahrelang dort ___. (position, Partizip II)",
+        "gehangen",
+        "The standard position participle is gehangen."
+      ],
+      [
+        "Ich habe die Tasche an den Haken ___. (placement, Partizip II)",
+        "gehängt",
+        "The standard placement participle is gehängt."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-erinnern-merken-word-choice-exercises",
+    "title": "Sich Erinnern or Sich Merken? German B1 Word Choice",
+    "description": "Compare recalling something with keeping it in mind for later. Practise sich erinnern an and sich etwas merken with case cues.",
+    "guide": "grammar/reflexive-verben.html",
+    "guideLabel": "Review related grammar: reflexive verbs",
+    "rule": "Sich erinnern an commonly means recalling or remembering something from memory: Ich erinnere mich an den Ausflug. Sich etwas merken means taking note mentally and retaining it for later: Ich merke mir die Nummer. The reflexive pronoun is accusative with erinnern and dative with merken in these patterns.",
+    "trap": "Merken also means noticing in other constructions. This lesson contrasts the memory patterns sich erinnern an and sich etwas merken, not every meaning of merken.",
+    "instructions": "Choose the form of erinnern or merken requested by the cue. The reflexive pronoun and any preposition are already supplied.",
+    "examples": [
+      [
+        "Ich erinnere mich an unseren Ausflug zum See.",
+        "I remember our outing to the lake."
+      ],
+      [
+        "Ich merke mir die Zimmernummer für später.",
+        "I keep the room number in mind for later."
+      ],
+      [
+        "Er erinnert sich an den ersten Schultag.",
+        "He remembers his first day at school."
+      ],
+      [
+        "Wir merken uns den Namen der Haltestelle.",
+        "We remember the name of the stop for later."
+      ]
+    ],
+    "quiz": [
+      [
+        "Kannst du dich an die Melodie ___? (recall)",
+        "erinnern",
+        "Sich an etwas erinnern describes recalling it from memory."
+      ],
+      [
+        "Ich ___ mir die neue PIN. (retain for later)",
+        "merke",
+        "Sich etwas merken describes retaining information; ich takes merke."
+      ],
+      [
+        "Sie ___ sich an ihren früheren Nachbarn. (recalls)",
+        "erinnert",
+        "The supplied sich an points to erinnert sich an."
+      ],
+      [
+        "Bitte ___ dir die Abfahrtszeit! (keep in mind, du)",
+        "merk",
+        "The du imperative is merk; merke is also possible. Dir is dative in sich etwas merken."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-hoffen-erwarten-word-choice-exercises",
+    "title": "Hoffen or Erwarten? German B1 Expectation Practice",
+    "description": "Distinguish a desired outcome with hoffen from an expectation with erwarten. Practise hoffen auf and direct objects after erwarten.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "guideLabel": "Review related grammar: verb–preposition patterns",
+    "rule": "Hoffen expresses a desired outcome, often with auf + accusative or a dass-clause. Erwarten expresses an expectation or something anticipated, and can take a direct object: Wir erwarten eine Lieferung. A speaker can both hope for and expect the same result; the attitude and structure differ.",
+    "trap": "Do not treat every expectation as a wish. A predicted unpleasant result can be erwartet even when nobody hofft darauf.",
+    "instructions": "Use hoffen for the stated wish and erwarten for the stated prediction or expected arrival. Follow the supplied structure and meaning cue.",
+    "examples": [
+      [
+        "Wir hoffen auf gutes Wetter für das Fest.",
+        "We hope for good weather for the celebration."
+      ],
+      [
+        "Wir erwarten eine Lieferung am Nachmittag.",
+        "We expect a delivery in the afternoon."
+      ],
+      [
+        "Sie hofft, dass ihr Freund schnell gesund wird.",
+        "She hopes her friend gets well soon."
+      ],
+      [
+        "Die Fachleute erwarten steigende Kosten.",
+        "The experts expect costs to rise."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ auf eine positive Antwort. (hope)",
+        "hoffe",
+        "Hoffen combines with auf + accusative in this wish pattern."
+      ],
+      [
+        "Wir ___ heute drei Besucher. (expect an arrival)",
+        "erwarten",
+        "The expected visitors are a direct object of erwarten."
+      ],
+      [
+        "Sie ___, dass die Reise gelingt. (wish for a good outcome)",
+        "hofft",
+        "The cue targets hoffen as a wish; erwarten would express an expectation instead."
+      ],
+      [
+        "Niemand wünscht es, aber wir ___ weitere Verzögerungen. (predict)",
+        "erwarten",
+        "Erwarten can describe an unwelcome prediction."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-gewinnen-verdienen-word-choice-exercises",
+    "title": "Gewinnen or Verdienen? German B1 Money and Success",
+    "description": "Compare winning a prize with earning money or deserving something. Practise gewinnen and verdienen using the source of the reward.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Gewinnen means winning a contest or prize and can also mean gaining something. Verdienen means earning through work or deserving something: Geld verdienen, eine Pause verdienen. A payment for work and a competition prize are different situations, even though both may involve money.",
+    "trap": "Both verbs have uses beyond money. Avoid making the amount of money the rule; identify whether it was earned, deserved or won.",
+    "instructions": "Choose gewinnen for the specified contest/prize and verdienen for earnings or deserving. Conjugate as requested.",
+    "examples": [
+      [
+        "Die Mannschaft gewinnt den regionalen Pokal.",
+        "The team wins the regional cup."
+      ],
+      [
+        "Mit Übersetzungen verdient Jona seinen Lebensunterhalt.",
+        "Jona earns his living through translation."
+      ],
+      [
+        "Sie hat bei der Verlosung ein Fahrrad gewonnen.",
+        "She won a bicycle in the raffle."
+      ],
+      [
+        "Nach der langen Arbeit verdienen wir eine Pause.",
+        "After the long work we deserve a break."
+      ]
+    ],
+    "quiz": [
+      [
+        "Er ___ sein Geld als Gärtner. (earns)",
+        "verdient",
+        "Verdienen describes earnings from work."
+      ],
+      [
+        "Unser Team möchte das Finale ___. (win)",
+        "gewinnen",
+        "A competition result takes gewinnen."
+      ],
+      [
+        "Du hast dir eine Erholung ___. (deserved, Partizip II)",
+        "verdient",
+        "The pattern sich etwas verdienen expresses deserving it."
+      ],
+      [
+        "Sie hat einen Gutschein beim Quiz ___. (won, Partizip II)",
+        "gewonnen",
+        "The participle of gewinnen is gewonnen."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-bekommen-werden-word-choice-exercises",
+    "title": "Bekommen or Werden? German B1 False-Friend Practice",
+    "description": "Use bekommen for receiving and werden for becoming. Avoid translating English become with bekommen in changes of state or profession.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Bekommen usually means receiving or getting something: Ich bekomme eine Nachricht. Werden can express becoming or a change of state: Es wird kälter; sie wird Ärztin. English become resembles bekommen in spelling but normally corresponds to werden in this meaning.",
+    "trap": "Do not write Ich bekomme müde for I am getting tired. The change of state is Ich werde müde. Bekommen needs a different construction, such as Ich bekomme Hunger.",
+    "instructions": "Choose bekommen for receiving the specified item and werden for becoming or changing state. Use the requested form.",
+    "examples": [
+      [
+        "Ich bekomme eine Nachricht von meiner Schwester.",
+        "I receive a message from my sister."
+      ],
+      [
+        "Nach Sonnenuntergang wird es deutlich kälter.",
+        "After sunset it becomes noticeably colder."
+      ],
+      [
+        "Wir bekommen neue Arbeitsmaterialien.",
+        "We receive new work materials."
+      ],
+      [
+        "Nach der Ausbildung wird sie Mechatronikerin.",
+        "After the training she becomes a mechatronics technician."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ morgen Besuch von meinen Eltern. (receive/get)",
+        "bekomme",
+        "Besuch bekommen means receiving a visit."
+      ],
+      [
+        "Der Himmel ___ langsam dunkel. (become)",
+        "wird",
+        "A change of state uses werden; singular takes wird."
+      ],
+      [
+        "Sie möchte später Tierärztin ___. (become)",
+        "werden",
+        "Becoming a professional uses werden, not bekommen."
+      ],
+      [
+        "Hast du die Einladung ___? (received, Partizip II)",
+        "bekommen",
+        "The past participle of bekommen has no added ge-."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-passieren-bestehen-word-choice-exercises",
+    "title": "Passieren or Bestehen? German B1 False-Friend Exercises",
+    "description": "Choose bestehen for passing an examination and passieren for an event happening. Practise the different meanings and perfect auxiliaries.",
+    "guide": "grammar/perfekt.html",
+    "guideLabel": "Review related grammar: past participles",
+    "rule": "For successfully passing an exam, use eine Prüfung bestehen. Passieren commonly means happening: Was ist passiert? It also has other senses, such as passing a border, but it does not mean successfully completing an exam in the ordinary German exam-result phrase.",
+    "trap": "Do not translate I passed the exam as Ich habe die Prüfung passiert. The standard expression is Ich habe die Prüfung bestanden.",
+    "instructions": "Use bestehen for the exam-result meaning and passieren for happening. Follow the tense or infinitive cue.",
+    "examples": [
+      [
+        "Nadine hat ihre Fahrprüfung beim ersten Versuch bestanden.",
+        "Nadine passed her driving test on her first attempt."
+      ],
+      [
+        "Was ist gestern vor dem Bahnhof passiert?",
+        "What happened in front of the station yesterday?"
+      ],
+      [
+        "Wir möchten die Abschlussprüfung bestehen.",
+        "We would like to pass the final examination."
+      ],
+      [
+        "Zum Glück ist bei dem Missgeschick nichts Schlimmes passiert.",
+        "Fortunately nothing serious happened in the mishap."
+      ]
+    ],
+    "quiz": [
+      [
+        "Er hat die praktische Prüfung ___. (passed, Partizip II)",
+        "bestanden",
+        "The exam-result phrase is eine Prüfung bestehen; its participle is bestanden."
+      ],
+      [
+        "Was ist während der Besprechung ___? (happened)",
+        "passiert",
+        "Passieren uses ist in the perfect when meaning happen."
+      ],
+      [
+        "Ich hoffe, dass du den Test ___. (pass, present)",
+        "bestehst",
+        "Du takes bestehst for successfully passing the test."
+      ],
+      [
+        "Solche Fehler können ___. (happen)",
+        "passieren",
+        "After können, use the infinitive passieren for events occurring."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-teilnehmen-besuchen-word-choice-exercises",
+    "title": "Teilnehmen or Besuchen? German B1 Attendance Practice",
+    "description": "Compare an einem Kurs teilnehmen with einen Kurs besuchen. Practise attendance meaning together with each verb’s preposition and case.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "guideLabel": "Review related grammar: verb–preposition patterns",
+    "rule": "Teilnehmen an + dative means participating in an event or activity. Besuchen can mean attending a course or visiting a person/place, and takes an accusative object without an before it. Both can describe attending a course, but their sentence structures differ.",
+    "trap": "Do not mix the patterns: an einem Seminar teilnehmen, but ein Seminar besuchen. Neither verb alone proves whether an attendee actively speaks.",
+    "instructions": "Use the verb fitting the supplied structure. Where teil is supplied, fill only the finite stem of teilnehmen.",
+    "examples": [
+      [
+        "Wir nehmen an einem Fotoworkshop teil.",
+        "We take part in a photography workshop."
+      ],
+      [
+        "Sie besucht einen Abendkurs in Geschichte.",
+        "She attends an evening class in history."
+      ],
+      [
+        "An der Abstimmung nehmen alle Mitglieder teil.",
+        "All members take part in the vote."
+      ],
+      [
+        "Am Sonntag besuchen wir unsere früheren Nachbarn.",
+        "On Sunday we visit our former neighbours."
+      ]
+    ],
+    "quiz": [
+      [
+        "Er ___ an einem Onlinegespräch teil. (teilnehmen)",
+        "nimmt",
+        "Teilnehmen selects an + dative and separates into nimmt ... teil."
+      ],
+      [
+        "Wir ___ einen Kurs an der Volkshochschule. (besuchen)",
+        "besuchen",
+        "The supplied accusative object has no an, matching besuchen."
+      ],
+      [
+        "Möchtest du an der Diskussion ___? (take part)",
+        "teilnehmen",
+        "The infinitive teilnehmen follows möchtest."
+      ],
+      [
+        "Sie möchte ihre Tante ___. (visit)",
+        "besuchen",
+        "Visiting a person uses besuchen with an accusative object."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-bewerben-anmelden-word-choice-exercises",
+    "title": "Bewerben or Anmelden? German B1 Application Word Choice",
+    "description": "Compare applying for a position with registering for an activity. Practise sich bewerben um and sich anmelden für with clear context cues.",
+    "guide": "grammar/reflexive-verben.html",
+    "guideLabel": "Review related grammar: reflexive verbs",
+    "rule": "Sich bewerben describes applying to be considered for a position or opportunity, often with um + accusative. Sich anmelden describes registering or signing up, often with für + accusative. Specific institutions can name their procedures differently; the lesson focuses on the ordinary meanings.",
+    "trap": "The verb alone does not say whether a place has been granted. Sich bewerben is the application action; sich anmelden is the registration action.",
+    "instructions": "Use bewerben for applying for the stated position and anmelden for registering. A separated an may already be supplied.",
+    "examples": [
+      [
+        "Ibrahim bewirbt sich um eine Stelle als Koch.",
+        "Ibrahim applies for a job as a cook."
+      ],
+      [
+        "Lea meldet sich für einen Erste-Hilfe-Kurs an.",
+        "Lea registers for a first-aid course."
+      ],
+      [
+        "Wir bewerben uns um ein Praktikum im Museum.",
+        "We apply for an internship at the museum."
+      ],
+      [
+        "Die Teilnehmer melden sich vor der Führung an.",
+        "The participants register before the guided tour."
+      ]
+    ],
+    "quiz": [
+      [
+        "Sie ___ sich um einen Ausbildungsplatz. (apply)",
+        "bewirbt",
+        "Sich bewerben um describes applying for the position."
+      ],
+      [
+        "Ich ___ mich für den Workshop an. (register)",
+        "melde",
+        "Anmelden separates into melde ... an."
+      ],
+      [
+        "Wir möchten uns um das Stipendium ___. (apply)",
+        "bewerben",
+        "The infinitive sich bewerben fits applying for consideration."
+      ],
+      [
+        "Kann ich mich für die Führung ___? (register)",
+        "anmelden",
+        "Signing up for the tour uses sich anmelden."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-freuen-auf-ueber-word-choice-exercises",
+    "title": "Sich Freuen Auf or Über? German B1 Word-Choice Practice",
+    "description": "Compare anticipation with freuen auf and pleasure about something with freuen über. Use context rather than a rigid past/future shortcut.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "guideLabel": "Review related grammar: verb–preposition patterns",
+    "rule": "Sich freuen auf + accusative commonly expresses looking forward to an anticipated event. Sich freuen über + accusative commonly expresses being pleased about something, such as a gift or good news. The distinction is attitude and reference, not simply a mechanical tense rule.",
+    "trap": "Future events can also be good news someone is pleased about now. Use the intended meaning—anticipation versus pleasure about a fact—to choose the preposition.",
+    "instructions": "Choose auf for the stated anticipation and über for the stated present pleasure about a fact or received item.",
+    "examples": [
+      [
+        "Wir freuen uns auf den gemeinsamen Wandertag.",
+        "We look forward to the hiking day together."
+      ],
+      [
+        "Er freut sich über die unerwartete Postkarte.",
+        "He is pleased about the unexpected postcard."
+      ],
+      [
+        "Ich freue mich auf das Wiedersehen im Dezember.",
+        "I look forward to seeing everyone again in December."
+      ],
+      [
+        "Sie freut sich über die Nachricht von ihrer Beförderung.",
+        "She is pleased about the news of her promotion."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich freue mich ___ meinen Geburtstag nächste Woche. (looking forward)",
+        "auf",
+        "Auf marks anticipation of the birthday in this cue."
+      ],
+      [
+        "Sie freut sich ___ das Geschenk, das sie gerade geöffnet hat. (pleased about)",
+        "über",
+        "Über marks pleasure about the gift received."
+      ],
+      [
+        "Wir freuen uns ___ den Urlaub, den wir kaum erwarten können. (anticipation)",
+        "auf",
+        "The cue targets looking forward to the holiday."
+      ],
+      [
+        "Er freut sich ___ die gute Bewertung seines Projekts. (pleased about the result)",
+        "über",
+        "Über presents the evaluation as something causing pleasure."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-interessiert-interessant-word-choice-exercises",
+    "title": "Interessiert or Interessant? German B1 Adjective Practice",
+    "description": "Distinguish a person who is interested from something interesting. Practise interessiert an and the different roles of the two adjectives.",
+    "guide": "grammar/adjektivdeklination.html",
+    "guideLabel": "Review related grammar: adjective forms",
+    "rule": "Interessant describes something or someone that arouses interest: Der Bericht ist interessant. Interessiert describes the person’s interested state or attitude, often with an + dative: Ich bin an dem Thema interessiert. A person can also be interessant to others; the role in the sentence matters.",
+    "trap": "Do not say Ich bin interessant when the intended meaning is I am interested. It means that you are interesting to someone else.",
+    "instructions": "Choose interessiert for the stated interested person and interessant for the thing/person arousing interest. Use the predicative form supplied by the context.",
+    "examples": [
+      [
+        "Der Bericht über Stadtbäume ist interessant.",
+        "The report about urban trees is interesting."
+      ],
+      [
+        "Ich bin an nachhaltiger Architektur interessiert.",
+        "I am interested in sustainable architecture."
+      ],
+      [
+        "Die Ausstellung wirkt besonders interessant.",
+        "The exhibition seems particularly interesting."
+      ],
+      [
+        "Die Besucher sind an der neuen Technik interessiert.",
+        "The visitors are interested in the new technology."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich bin sehr an deiner Idee ___. (interested)",
+        "interessiert",
+        "The person feels interest, with an + dative."
+      ],
+      [
+        "Deine Idee klingt ___. (interesting)",
+        "interessant",
+        "The idea arouses interest, so use interessant."
+      ],
+      [
+        "Die Zuhörer sind an der Debatte ___. (interested)",
+        "interessiert",
+        "The cue describes the listeners’ attitude."
+      ],
+      [
+        "Das Kapitel über Vulkane ist ___. (interesting)",
+        "interessant",
+        "The chapter is the thing that arouses interest."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-gelangweilt-langweilig-word-choice-exercises",
+    "title": "Gelangweilt or Langweilig? German B1 Feeling Words",
+    "description": "Compare feeling bored with being boring. Practise gelangweilt, langweilig and the useful expression mir ist langweilig.",
+    "guide": "grammar/adjektivdeklination.html",
+    "guideLabel": "Review related grammar: adjective forms",
+    "rule": "Gelangweilt describes someone feeling bored. Langweilig describes something or someone that causes boredom: Der Vortrag ist langweilig. German also uses the dative experience expression Mir ist langweilig to mean I am bored; that differs from Ich bin langweilig, meaning I am boring.",
+    "trap": "Do not ban langweilig from every sentence about feeling bored. Mir ist langweilig is natural; its dative structure is different from Ich bin langweilig.",
+    "instructions": "Choose gelangweilt for a person feeling bored and langweilig for a boring stimulus or the supplied dative experience expression.",
+    "examples": [
+      [
+        "Die Wartenden wirken gelangweilt.",
+        "The people waiting seem bored."
+      ],
+      [
+        "Der endlose Bericht war ziemlich langweilig.",
+        "The endless report was rather boring."
+      ],
+      [
+        "Mir ist auf der langen Fahrt langweilig.",
+        "I am bored on the long journey."
+      ],
+      [
+        "Der Junge sitzt gelangweilt neben dem ausgeschalteten Fernseher.",
+        "The boy sits bored next to the switched-off television."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Dokumentation war für mich ___. (boring)",
+        "langweilig",
+        "The documentary is the stimulus described as boring."
+      ],
+      [
+        "Nach zwei Stunden Warten bin ich ___. (bored)",
+        "gelangweilt",
+        "The speaker experiences boredom."
+      ],
+      [
+        "Ist dir ohne dein Buch ___? (bored, dative expression)",
+        "langweilig",
+        "The natural dative expression is dir ist langweilig."
+      ],
+      [
+        "Die Zuhörer sahen ___ aus. (bored)",
+        "gelangweilt",
+        "The cue describes how the listeners felt or appeared to feel."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-aktuell-tatsaechlich-word-choice-exercises",
+    "title": "Aktuell or Tatsächlich? German B1 False Friends",
+    "description": "Compare aktuell meaning current with tatsächlich meaning actual/really. Avoid the English actual false friend using clear meaning cues.",
+    "guide": "grammar/adjektivdeklination.html",
+    "guideLabel": "Review related grammar: adjective forms",
+    "rule": "Aktuell means current, up-to-date or presently relevant. Tatsächlich can mean actually or in fact, and its adjective form tatsächlich- can describe the real or actual situation. English actual normally does not mean aktuell: die tatsächlichen Kosten are the actual costs, while aktuelle Preise are current prices.",
+    "trap": "Do not translate English actually automatically as aktuell. The intended meaning may be tatsächlich or, in other contexts, eigentlich.",
+    "instructions": "Choose aktuell for current and tatsächlich for actually/in fact. Add an adjective ending when the bracket gives a noun phrase.",
+    "examples": [
+      [
+        "Die aktuellen Öffnungszeiten stehen an der Tür.",
+        "The current opening hours are on the door."
+      ],
+      [
+        "Die tatsächlichen Kosten waren niedriger als geschätzt.",
+        "The actual costs were lower than estimated."
+      ],
+      [
+        "Ist dieser Fahrplan noch aktuell?",
+        "Is this timetable still current?"
+      ],
+      [
+        "Sie ist tatsächlich zu Fuß gekommen.",
+        "She actually came on foot."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ist die Telefonnummer noch ___? (current)",
+        "aktuell",
+        "Aktuell asks whether the number is still current."
+      ],
+      [
+        "Er hat die Aufgabe ___ allein gelöst. (in fact)",
+        "tatsächlich",
+        "Tatsächlich means actually/in fact in this sentence."
+      ],
+      [
+        "Wir brauchen die ___ Adresse. (current, definite feminine accusative)",
+        "aktuelle",
+        "Aktuell takes the adjective ending -e after die here."
+      ],
+      [
+        "Die ___ Zahl der Gäste ist noch unklar. (actual, definite feminine nominative)",
+        "tatsächliche",
+        "Tatsächlich- takes -e; the cue concerns the real number rather than its recency."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "kind": "word-choice",
+    "slug": "b1-sensibel-vernuenftig-word-choice-exercises",
+    "title": "Sensibel or Vernünftig? German B1 False-Friend Practice",
+    "description": "Distinguish German sensibel, meaning sensitive, from English sensible, often vernünftig. Practise sensitivity and practical judgement cues.",
+    "guide": "grammar/adjektivdeklination.html",
+    "guideLabel": "Review related grammar: adjective forms",
+    "rule": "Sensibel commonly means sensitive or delicate, as with a person, an issue or an instrument. Vernünftig means sensible, reasonable or prudent. English sensible therefore usually translates as vernünftig in a practical-decision context, not as sensibel.",
+    "trap": "Sensitive and sensible describe different qualities. A person can be both sensibel and vernünftig; the exercise asks which quality the stated context highlights.",
+    "instructions": "Choose sensibel for sensitive and vernünftig for sensible/reasonable. Inflect the adjective where the cue supplies a noun phrase.",
+    "examples": [
+      [
+        "Das Messgerät reagiert sehr sensibel auf Vibrationen.",
+        "The measuring device is very sensitive to vibrations."
+      ],
+      [
+        "Ein früher Start wäre bei der Hitze vernünftig.",
+        "An early start would be sensible in the heat."
+      ],
+      [
+        "Wir müssen mit diesem sensiblen Thema vorsichtig umgehen.",
+        "We must handle this sensitive topic carefully."
+      ],
+      [
+        "Sie traf eine vernünftige Entscheidung und machte eine Pause.",
+        "She made a sensible decision and took a break."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Sensor ist besonders ___. (sensitive)",
+        "sensibel",
+        "Sensibel describes sensitivity to small changes."
+      ],
+      [
+        "Es wäre ___, vorher die Öffnungszeiten zu prüfen. (sensible)",
+        "vernünftig",
+        "Checking first is a reasonable practical decision."
+      ],
+      [
+        "Das ist eine ___ Lösung. (sensible, indefinite feminine nominative)",
+        "vernünftige",
+        "Vernünftig takes -e after eine in this noun phrase."
+      ],
+      [
+        "Das Gespräch betrifft ein ___ Thema. (sensitive, indefinite neuter accusative)",
+        "sensibles",
+        "Sensibel takes the mixed adjective ending -es here."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "word-choice",
+    "slug": "b2-anscheinend-scheinbar-word-choice-exercises",
+    "title": "Anscheinend or Scheinbar? German B2 Nuance Practice",
+    "description": "Practise the formal distinction between apparently likely and only seemingly true. See why everyday use can overlap without changing the task cue.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: sentence structure",
+    "rule": "In the careful distinction used here, anscheinend presents an inference that seems likely to be true. Scheinbar presents an appearance that does not match reality. Everyday speakers also use scheinbar in the sense of anscheinend, so this is a formal meaning distinction rather than a claim about every real-life utterance.",
+    "trap": "Do not assume the writer has proved an inference introduced by anscheinend. It expresses an appearance-based conclusion, not certainty.",
+    "instructions": "Use anscheinend for a plausible inference and scheinbar for an appearance explicitly shown to be false. Follow the formal distinction stated above.",
+    "examples": [
+      [
+        "Anscheinend ist niemand zu Hause; alle Fenster sind dunkel.",
+        "Apparently nobody is home; all the windows are dark."
+      ],
+      [
+        "Die Tür war nur scheinbar abgeschlossen; das Schloss war offen.",
+        "The door only seemed locked; the lock was open."
+      ],
+      [
+        "Anscheinend wurde der Termin verschoben; der Raum ist leer.",
+        "Apparently the appointment was moved; the room is empty."
+      ],
+      [
+        "Die Aufgabe war nur scheinbar einfach; wichtige Angaben fehlten.",
+        "The task only seemed simple; important details were missing."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Ruhe war nur ___; hinter der Wand wurde weitergebaut. (false appearance)",
+        "scheinbar",
+        "The following fact disproves the impression of quiet."
+      ],
+      [
+        "___ ist der Laden heute geschlossen; niemand öffnet. (plausible inference)",
+        "Anscheinend",
+        "The evidence suggests closure without proving it."
+      ],
+      [
+        "Der Vorteil war ___, denn am Ende zahlten wir mehr. (false appearance)",
+        "scheinbar",
+        "The supposed advantage is contradicted by the higher total cost."
+      ],
+      [
+        "___ hat sie den Bus verpasst; sie ist noch nicht hier. (inference)",
+        "Anscheinend",
+        "The absence supports an inference, which may still turn out to be wrong."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "word-choice",
+    "slug": "b2-schliesslich-endlich-word-choice-exercises",
+    "title": "Schließlich or Endlich? German B2 Adverb Practice",
+    "description": "Compare endlich for an awaited outcome with schließlich for a final sequence point or an after-all reason. Practise context and speaker attitude.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: sentence structure",
+    "rule": "Endlich often expresses relief or impatience when an awaited event occurs: Endlich ist der Handwerker da! Schließlich can introduce a final stage in a sequence or mean after all when justifying a statement. Both can describe something happening at the end, but their focus and speaker attitude can differ.",
+    "trap": "Do not give schließlich just one translation. It can mean finally in a sequence and after all in a justification; endlich often adds an awaited-outcome perspective.",
+    "instructions": "Choose endlich for the explicitly relieved at-last meaning and schließlich for the explicit after-all justification.",
+    "examples": [
+      [
+        "Endlich ist der Handwerker da; wir haben lange gewartet.",
+        "At last the tradesperson is here; we waited a long time."
+      ],
+      [
+        "Ich vertraue ihr; schließlich kennt sie das Projekt genau.",
+        "I trust her; after all, she knows the project well."
+      ],
+      [
+        "Nach mehreren Umwegen erreichten wir schließlich die Hütte.",
+        "After several detours we eventually reached the hut."
+      ],
+      [
+        "Endlich habe ich den schwierigen Knoten gelöst!",
+        "At last I have untied the difficult knot!"
+      ]
+    ],
+    "quiz": [
+      [
+        "___ hat der Regen aufgehört! Darauf haben wir sehnsüchtig gewartet. (at last)",
+        "Endlich",
+        "The cue explicitly expresses relief after waiting."
+      ],
+      [
+        "Wir sollten ihn fragen; ___ hat er die Anlage gebaut. (after all)",
+        "schließlich",
+        "Schließlich supplies a reason supporting the suggestion."
+      ],
+      [
+        "___ sind die Reparaturen fertig! Was für eine Erleichterung. (at last)",
+        "Endlich",
+        "Endlich highlights the eagerly awaited completion."
+      ],
+      [
+        "Sie darf mitentscheiden; ___ ist sie Teil des Teams. (after all)",
+        "schließlich",
+        "Schließlich justifies why she should be included."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "word-choice",
+    "slug": "b2-offenbar-oeffentlich-word-choice-exercises",
+    "title": "Offenbar or Öffentlich? German B2 Meaning Exercises",
+    "description": "Distinguish apparently/evidently with offenbar from publicly or open to the public with öffentlich. Practise meaning and adjective endings.",
+    "guide": "grammar/word-order.html",
+    "guideLabel": "Review related grammar: sentence structure",
+    "rule": "Offenbar often means apparently or evidently and comments on how something seems from the evidence. Öffentlich means public or publicly and concerns access, visibility or audience: eine öffentliche Sitzung, öffentlich sprechen. Similar beginnings do not give the two words the same meaning.",
+    "trap": "Offenbar does not mean available to everyone. Öffentlich does not automatically mean a statement is evidently true.",
+    "instructions": "Choose offenbar for the evidence-based impression and öffentlich for public access or a public audience. Inflect an adjective where requested.",
+    "examples": [
+      [
+        "Offenbar hat der Drucker kein Papier mehr.",
+        "Apparently the printer has run out of paper."
+      ],
+      [
+        "Die Sitzung findet öffentlich statt.",
+        "The meeting is open to the public."
+      ],
+      [
+        "Offenbar wurde die falsche Datei verschickt.",
+        "Apparently the wrong file was sent."
+      ],
+      [
+        "Das Protokoll ist öffentlich zugänglich.",
+        "The minutes are publicly accessible."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Veranstaltung ist ___; alle dürfen zuhören. (public)",
+        "öffentlich",
+        "Öffentlich concerns access by the public."
+      ],
+      [
+        "___ ist die Batterie leer; das Gerät reagiert nicht. (apparently)",
+        "Offenbar",
+        "Offenbar presents an inference from the device not responding."
+      ],
+      [
+        "Sie äußerte ihre Kritik ___. (in public)",
+        "öffentlich",
+        "The cue concerns the audience, not the truth of the criticism."
+      ],
+      [
+        "Das Gebäude ist eine ___ Einrichtung. (public, adjective ending)",
+        "öffentliche",
+        "Öffentlich takes -e after eine before the feminine noun."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "word-choice",
+    "slug": "b2-effektiv-effizient-word-choice-exercises",
+    "title": "Effektiv or Effizient? German B2 Word-Choice Practice",
+    "description": "Distinguish achieving the intended result from using resources economically. Practise effektiv and effizient without treating them as opposites.",
+    "guide": "grammar/adjektivdeklination.html",
+    "guideLabel": "Review related grammar: adjective forms",
+    "rule": "Effektiv focuses on achieving the intended effect or result. Effizient focuses on the relation between the result and the resources used, such as time, effort or energy. A method can achieve the goal effectively while being inefficient, and a good solution may be both effektiv and effizient.",
+    "trap": "Do not treat the words as simple synonyms or opposites. State which aspect you mean: goal achievement or the resource-to-result relationship.",
+    "instructions": "Choose effektiv for achieving the stated goal and effizient for using fewer resources to obtain the same result.",
+    "examples": [
+      [
+        "Die Maßnahme ist effektiv: Sie senkt die Fehlerzahl deutlich.",
+        "The measure is effective: it clearly reduces the number of errors."
+      ],
+      [
+        "Der neue Ablauf ist effizient: Er spart bei gleichem Ergebnis Zeit.",
+        "The new process is efficient: it saves time for the same result."
+      ],
+      [
+        "Die Lösung war effektiv, aber sehr aufwendig.",
+        "The solution was effective but very laborious."
+      ],
+      [
+        "Eine gute Planung kann die Arbeit zugleich effektiv und effizient machen.",
+        "Good planning can make work both effective and efficient."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Verfahren erreicht sicher sein Ziel, braucht aber unnötig viel Energie. Es ist ___, aber nicht effizient.",
+        "effektiv",
+        "The goal is achieved, while the resource use is poor."
+      ],
+      [
+        "Bei gleicher Qualität halbiert der Ablauf die Bearbeitungszeit. Er ist ___. (resource focus)",
+        "effizient",
+        "The cue compares resources needed for the same result."
+      ],
+      [
+        "Die Methode wirkt wie beabsichtigt. Sie ist ___. (goal focus)",
+        "effektiv",
+        "The cue asks about the intended effect being achieved."
+      ],
+      [
+        "Wir möchten Material sparen, ohne das Ergebnis zu verschlechtern: Wir wollen ___ arbeiten. (resource focus)",
+        "effizient",
+        "Efficiency concerns the relation of resources to the maintained result."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "word-choice",
+    "slug": "b2-vermeiden-verhindern-word-choice-exercises",
+    "title": "Vermeiden or Verhindern? German B2 Nuance Exercises",
+    "description": "Compare avoiding an undesirable action with stopping an event from occurring. Practise common patterns and recognise contexts that allow both verbs.",
+    "guide": "grammar/praesens.html",
+    "guideLabel": "Review related grammar: present-tense verb forms",
+    "rule": "Vermeiden often focuses on avoiding an undesirable action or situation, for example unnötige Umwege vermeiden. Verhindern focuses on stopping something from happening: Eine Absperrung verhindert den Zutritt. Some objects, such as Fehler or Unfälle, can combine naturally with both verbs and a different emphasis.",
+    "trap": "Do not mark every alternative as wrong when the context allows both. Fehler vermeiden and Fehler verhindern can both be natural; the intended focus matters.",
+    "instructions": "Use vermeiden for the stated avoidance focus and verhindern for the stated prevention focus. Some unconstrained contexts permit both.",
+    "examples": [
+      [
+        "Wir vermeiden unnötige Umwege bei der Planung.",
+        "We avoid unnecessary detours when planning."
+      ],
+      [
+        "Die Absperrung verhindert den Zutritt zum Baugelände.",
+        "The barrier prevents access to the construction site."
+      ],
+      [
+        "Sie versucht, Missverständnisse durch klare Fragen zu vermeiden.",
+        "She tries to avoid misunderstandings by asking clear questions."
+      ],
+      [
+        "Eine Sicherung soll verhindern, dass das Gerät überhitzt.",
+        "A safety mechanism is meant to prevent the device from overheating."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich möchte es ___, mich unnötig zu wiederholen. (avoidance)",
+        "vermeiden",
+        "Vermeiden is the usual choice for avoiding one’s own unnecessary repetition."
+      ],
+      [
+        "Das Schloss soll den unbefugten Zugang ___. (prevention)",
+        "verhindern",
+        "Verhindern highlights blocking the event from occurring."
+      ],
+      [
+        "Durch genaue Kontrolle wollen wir Fehler ___. (avoidance focus)",
+        "vermeiden",
+        "The cue targets avoidance; verhindern is also possible with a prevention emphasis."
+      ],
+      [
+        "Die Sperre ___, dass Fahrzeuge auf die Brücke fahren. (prevent, present)",
+        "verhindert",
+        "The singular subject takes verhindert for stopping access."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "kind": "word-choice",
+    "slug": "b2-ueberzeugen-ueberreden-word-choice-exercises",
+    "title": "Überzeugen or Überreden? German B2 Persuasion Practice",
+    "description": "Compare convincing someone of a view with persuading them to act. Practise überzeugen von and überreden zu with clear context cues.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "guideLabel": "Review related grammar: verb–preposition patterns",
+    "rule": "Überzeugen commonly focuses on convincing someone of a view or the merits of something: jemanden von einer Idee überzeugen. Überreden commonly focuses on persuading someone to take an action, often after hesitation: jemanden zu einem Ausflug überreden. Real persuasion may involve both a changed belief and an action.",
+    "trap": "Do not claim that überzeugen can never lead to action or that überreden always excludes reasons. The distinction is a useful focus, supported by typical preposition patterns.",
+    "instructions": "Choose überzeugen for the specified belief/merits focus and überreden for the specified hesitant action. Follow the form requested.",
+    "examples": [
+      [
+        "Die Daten überzeugen mich von der Wirksamkeit des Verfahrens.",
+        "The data convince me of the effectiveness of the procedure."
+      ],
+      [
+        "Sie überredet ihren Bruder zu einem Ausflug.",
+        "She persuades her brother to go on an outing."
+      ],
+      [
+        "Das klare Argument hat die Zuhörer überzeugt.",
+        "The clear argument convinced the listeners."
+      ],
+      [
+        "Nach langem Zögern ließ er sich zur Teilnahme überreden.",
+        "After much hesitation he let himself be persuaded to take part."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Belege haben mich von seiner Darstellung ___. (convinced, Partizip II)",
+        "überzeugt",
+        "Von + a view/claim fits überzeugen and its participle überzeugt."
+      ],
+      [
+        "Sie möchte ihn zu einem Spaziergang ___. (persuade to act)",
+        "überreden",
+        "Zu einer Handlung überreden highlights inducing the action."
+      ],
+      [
+        "Das Argument ___ mich. (convinces, present)",
+        "überzeugt",
+        "The cue focuses on the argument changing the listener’s assessment."
+      ],
+      [
+        "Nach langem Zögern hat sie mich zur Reise ___. (persuaded, Partizip II)",
+        "überredet",
+        "The supplied action focus and zu pattern target überreden."
+      ]
+    ]
+  }
+]

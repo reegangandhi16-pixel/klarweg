@@ -1,0 +1,632 @@
+[
+  {
+    "series": "netzwerk",
+    "level": "a1",
+    "component": "kursbuch",
+    "book": "Kursbuch",
+    "name": "Netzwerk",
+    "path": "book-answers/netzwerk-a1-kursbuch-answers.html",
+    "title": "Netzwerk A1 Kursbuch Answers: Official PDF",
+    "description": "Find the official Netzwerk A1 Kursbuch answer PDF for chapters 1–12. Check the original edition, choose the correct component and use the key for self-study.",
+    "official": "https://www.klett-sprachen.de/netzwerk/r-1/187",
+    "route": "https://www.klett-sprachen.de/netzwerk/r-1/187#reiter=mediathek&dl_niveau_str=A1",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Lösungen zum Kursbuch A1",
+        "chapters": "1–12",
+        "status": "public-pdf",
+        "url": "https://www.klett-sprachen.de/downloads/6902/loesungen-zum-kursbuch-a1/pdf"
+      }
+    ],
+    "intro": "Use this page for the original Netzwerk A1 coursebook, the classroom book with dialogues, reading and shared activities. Klett lists one Kursbuch solution PDF for Kapitel 1–12. This is separate from the two Arbeitsbuch answer files.",
+    "match": "Look for Netzwerk A1 without “neu” on the cover. One full-volume coursebook listed by Klett has ISBN 978-3-12-606129-2. If you own a combined A1.1 or A1.2 volume, identify its Kursbuch section before choosing the key; the volume number alone does not identify the exercise type.",
+    "method": [
+      [
+        "Find the task before the answer",
+        "Write down the chapter, exercise number and letter, such as 3b. Match the opening instruction and the activity type before reading the key. Page numbers can differ between printings and combined volumes."
+      ],
+      [
+        "Check short answers carefully",
+        "For an A1 dialogue or reading task, check who is speaking and which information is requested. A familiar word in the text does not automatically make an option correct. For a short written reply, check the greeting, verb position and the requested personal detail."
+      ],
+      [
+        "Keep speaking tasks useful",
+        "Try a dialogue aloud with your own details before consulting a model. A suggested response is an example, not a requirement to copy another person’s name or address. Practise again without looking at the key."
+      ]
+    ],
+    "problem": "If your exercise is a standalone grammar drill with many short gaps, check whether you opened the Arbeitsbuch section. Its answers are in separate chapter-range PDFs. If the cover says Netzwerk neu, switch editions instead of trying to make the old answer numbering fit.",
+    "faq": [
+      [
+        "Does this coursebook key cover A1.1 and A1.2?",
+        "The publisher labels this Kursbuch key as Kapitel 1–12. For a combined half-volume, first verify that the exercise belongs to the coursebook section and that the task matches; this page does not certify every printing."
+      ],
+      [
+        "Is the A1 coursebook PDF the whole textbook?",
+        "No. The linked publisher file is labelled as a solution key. It is not a free copy of the coursebook, and this page does not provide textbook scans."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk",
+    "level": "a1",
+    "component": "arbeitsbuch",
+    "book": "Arbeitsbuch",
+    "name": "Netzwerk",
+    "path": "book-answers/netzwerk-a1-arbeitsbuch-answers.html",
+    "title": "Netzwerk A1 Arbeitsbuch Answers: Official PDFs",
+    "description": "Choose official Netzwerk A1 Arbeitsbuch answer PDFs for chapters 1–6 or 7–12. Match your workbook edition and learn how to check beginner practice.",
+    "official": "https://www.klett-sprachen.de/netzwerk/r-1/187",
+    "route": "https://www.klett-sprachen.de/netzwerk/r-1/187#reiter=mediathek&dl_niveau_str=A1",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Lösungen zum Arbeitsbuch A1.1",
+        "chapters": "1–6",
+        "status": "public-pdf",
+        "url": "https://www.klett-sprachen.de/downloads/2455/loesungen-zum-arbeitsbuch-a1-1/pdf"
+      },
+      {
+        "label": "Lösungen zum Arbeitsbuch A1.2",
+        "chapters": "7–12",
+        "status": "public-pdf",
+        "url": "https://www.klett-sprachen.de/downloads/2456/loesungen-zum-arbeitsbuch-a1-2/pdf"
+      }
+    ],
+    "intro": "The original Netzwerk A1 workbook key is split into two files. Choose A1.1 for Kapitel 1–6 or A1.2 for Kapitel 7–12. Opening the correct half first avoids the common problem of searching for an exercise that is not in the selected PDF.",
+    "match": "The original full-volume Arbeitsbuch A1 is listed by Klett with ISBN 978-3-12-606130-8. An A1.1 or A1.2 combined book also contains coursebook material, so check the section heading as well as the cover. Netzwerk neu uses a different workbook title, Übungsbuch.",
+    "method": [
+      [
+        "Finish a short set independently",
+        "Complete one exercise, then mark the gaps you are unsure about before opening the key. This preserves the difference between what you knew and what you recognised after seeing an answer."
+      ],
+      [
+        "Record the whole correction",
+        "For an A1 gap, copy your corrected sentence into a personal notebook with its article or pronoun. Record an umlaut or capital letter when it changes the written form. A list of isolated answer letters rarely explains the mistake."
+      ],
+      [
+        "Test the correction in a new sentence",
+        "After checking a basic verb or noun phrase, make one sentence about your own routine. Return to the original exercise later without the PDF. This tests recall rather than the ability to copy a visible answer."
+      ]
+    ],
+    "problem": "A missing chapter 8 is usually a file-selection issue: open the Kapitel 7–12 key. If the chapter is present but the exercise letters differ, compare the exact edition and make sure you did not use the Kursbuch key. Do not merge the two workbook PDFs and assume their numbering continues automatically.",
+    "faq": [
+      [
+        "Which file should I use for chapter 6?",
+        "Use the A1.1 Arbeitsbuch file labelled Kapitel 1–6. Chapter 7 starts the A1.2 file. Match the exercise heading before checking an answer."
+      ],
+      [
+        "Can I use a coursebook answer for a workbook task?",
+        "Not reliably. Both components can contain the same chapter number, but their exercises and answer sequences are separate. Choose Arbeitsbuch for workbook tasks."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk",
+    "level": "a2",
+    "component": "kursbuch",
+    "book": "Kursbuch",
+    "name": "Netzwerk",
+    "path": "book-answers/netzwerk-a2-kursbuch-answers.html",
+    "title": "Netzwerk A2 Kursbuch Answers: Official PDF",
+    "description": "Open the official Netzwerk A2 Kursbuch answer key for chapters 1–12. Match the coursebook edition and review connected sentences and model responses.",
+    "official": "https://www.klett-sprachen.de/netzwerk/r-1/187",
+    "route": "https://www.klett-sprachen.de/netzwerk/r-1/187#reiter=mediathek&dl_niveau_str=A2",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Lösungen zum Kursbuch A2",
+        "chapters": "1–12",
+        "status": "public-pdf",
+        "url": "https://www.klett-sprachen.de/downloads/6901/loesungen-zum-kursbuch-a2/pdf"
+      }
+    ],
+    "intro": "For the original Netzwerk A2 coursebook, Klett provides one solution key labelled Kapitel 1–12. Use it to check coursebook activities, while keeping the A2.1 and A2.2 workbook keys separate. This page helps you select the component before comparing answers.",
+    "match": "Klett currently lists the original Netzwerk A2 Kursbuch with ISBN 978-3-12-606998-4. Check the ISBN in your own copy and the full series name. “A2” alone is not enough: Netzwerk neu A2 has a separate set of resources and different access conditions.",
+    "method": [
+      [
+        "Separate meaning from form",
+        "For a reading or listening task, first identify the detail that supports your choice. For a language-form activity, check the complete clause. A right keyword can still sit inside a sentence with the wrong tense or word order."
+      ],
+      [
+        "Review connected sentences",
+        "At A2, a correction is more useful when you can explain the link between two ideas. After checking a model, underline the verb positions in your own version and decide whether your connector expresses the intended relationship."
+      ],
+      [
+        "Use a model as a checklist",
+        "For a short message, compare the requested information, greeting and ending before individual words. Keep valid personal details in your version. A model answer does not mean that every other sensible message is wrong."
+      ]
+    ],
+    "problem": "If the key appears to skip your grammar practice, inspect the component heading: the coursebook PDF is not the Arbeitsbuch key. If your PDF and book describe different activities under the same exercise number, stop and verify the edition rather than treating the key as a correction of a different task.",
+    "faq": [
+      [
+        "Is there a separate original A2.2 Kursbuch key here?",
+        "The official coursebook listing used here covers Kapitel 1–12 in one PDF. The separate A2.1 and A2.2 solution files on the publisher page refer to the Arbeitsbuch."
+      ],
+      [
+        "Does a matching A2 level prove the answers fit?",
+        "No. The series, book component, chapter and exercise all need to match. A CEFR level describes language ability, not a shared exercise sequence across books."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk",
+    "level": "a2",
+    "component": "arbeitsbuch",
+    "book": "Arbeitsbuch",
+    "name": "Netzwerk",
+    "path": "book-answers/netzwerk-a2-arbeitsbuch-answers.html",
+    "title": "Netzwerk A2 Arbeitsbuch Answers: Official PDFs",
+    "description": "Find Netzwerk A2 Arbeitsbuch answer PDFs for both chapter halves. Check A2.1 or A2.2, identify your workbook and turn corrections into useful practice.",
+    "official": "https://www.klett-sprachen.de/netzwerk/r-1/187",
+    "route": "https://www.klett-sprachen.de/netzwerk/r-1/187#reiter=mediathek&dl_niveau_str=A2",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Lösungen zum Arbeitsbuch A2.1",
+        "chapters": "1–6",
+        "status": "public-pdf",
+        "url": "https://www.klett-sprachen.de/downloads/2457/loesungen-zum-arbeitsbuch-a2-1/pdf"
+      },
+      {
+        "label": "Lösungen zum Arbeitsbuch A2.2",
+        "chapters": "7–12",
+        "status": "public-pdf",
+        "url": "https://www.klett-sprachen.de/downloads/2458/loesungen-zum-arbeitsbuch-a2-2/pdf"
+      }
+    ],
+    "intro": "Choose between the two official original Netzwerk A2 Arbeitsbuch keys: A2.1 covers Kapitel 1–6 and A2.2 covers Kapitel 7–12. These are workbook solution files, not the single A2 coursebook key or a copy of either textbook.",
+    "match": "The full-volume original A2 Arbeitsbuch is listed with ISBN 978-3-12-606999-1. In a combined half-volume, locate the Arbeitsbuch section before using the key. An A2.1 label tells you the chapter range, but you still need the correct coursebook or workbook component.",
+    "method": [
+      [
+        "Keep a useful error record",
+        "After a short exercise, sort your own mistakes into meaning, word order, endings or spelling. Write a brief reason for one correction rather than copying every answer from the PDF into your notes."
+      ],
+      [
+        "Check the frame around a gap",
+        "Read the subject, preposition and verb before accepting the missing word. For an ending or pronoun, identify the grammatical role in the full sentence. The answer key can show a form without teaching the decision that produced it."
+      ],
+      [
+        "Revisit difficult items later",
+        "Cover your corrections and retry a few marked items on another day. If you remember the answer but cannot explain it, create a fresh example with different nouns or a different subject. Use that example to test the rule."
+      ]
+    ],
+    "problem": "For chapters 7–12, use the A2.2 file even if the front cover of your full-volume book simply says A2. A mismatch in exercise letters after choosing the right half is a reason to recheck the edition and component, not to guess which nearby answer was intended.",
+    "faq": [
+      [
+        "Why does my A2 book need two answer files?",
+        "The official workbook resources are divided by chapter range. A full-volume book can therefore need both A2.1 and A2.2 keys, selected according to the task you are checking."
+      ],
+      [
+        "Does the key explain every grammar rule?",
+        "A solution key primarily supplies answers or examples. If you cannot explain a correction, review the relevant grammar and try a new sentence rather than treating the PDF as a complete lesson."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk",
+    "level": "b1",
+    "component": "kursbuch",
+    "book": "Kursbuch",
+    "name": "Netzwerk",
+    "path": "book-answers/netzwerk-b1-kursbuch-answers.html",
+    "title": "Netzwerk B1 Kursbuch Answers: Official PDF",
+    "description": "Find the official Netzwerk B1 Kursbuch solution PDF for chapters 1–12. Check your edition and use objective answers and open-task models appropriately.",
+    "official": "https://www.klett-sprachen.de/netzwerk/r-1/187",
+    "route": "https://www.klett-sprachen.de/netzwerk/r-1/187#reiter=mediathek&dl_niveau_str=B1",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Lösungen zum Kursbuch B1",
+        "chapters": "1–12",
+        "status": "public-pdf",
+        "url": "https://www.klett-sprachen.de/downloads/8605/loesungen-zum-kursbuch-b1/pdf"
+      }
+    ],
+    "intro": "This guide points to the official solution key for the original Netzwerk B1 Kursbuch, labelled Kapitel 1–12. Coursebook answers can help you check objective tasks and compare examples, but they do not independently assess the quality of every spoken or written response.",
+    "match": "Klett lists the original Netzwerk B1 Kursbuch with ISBN 978-3-12-605003-6. Check that your copy does not say Netzwerk neu. For a combined B1.1 or B1.2 book, use the coursebook section and match its exercise instruction before relying on the full-range key.",
+    "method": [
+      [
+        "Explain an objective answer",
+        "For a reading or listening choice, identify the relevant statement and explain why another plausible option fails. Matching a word in the question to a word in the text is weaker evidence than understanding the whole statement."
+      ],
+      [
+        "Compare purpose and organisation",
+        "For a longer message or opinion, check whether your response fulfils the prompt, gives relevant reasons and connects ideas clearly. A model may help with structure without being the only acceptable wording."
+      ],
+      [
+        "Separate self-checking from assessment",
+        "Read your own version aloud and revise unclear references or repeated ideas. For detailed writing or speaking feedback, ask a teacher or competent reviewer to address the task criteria. A copied model cannot demonstrate independent B1 performance."
+      ]
+    ],
+    "problem": "If you are looking for a workbook gap or a particular ending, use the B1 Arbeitsbuch key for the relevant chapter range. If your goal is a Goethe or telc examination, also use the provider’s correct mock: a general coursebook key does not certify an exam score.",
+    "faq": [
+      [
+        "Will matching the B1 model answer guarantee an exam pass?",
+        "No. This is a coursebook solution resource. Examination tasks, timing and assessment criteria depend on the named examination; use the official provider material for that purpose."
+      ],
+      [
+        "Must my written response use exactly the key’s wording?",
+        "For an open task, different responses may be valid. Check the instruction and the example’s purpose, then seek feedback where an answer key cannot establish whether your own response is appropriate."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk",
+    "level": "b1",
+    "component": "arbeitsbuch",
+    "book": "Arbeitsbuch",
+    "name": "Netzwerk",
+    "path": "book-answers/netzwerk-b1-arbeitsbuch-answers.html",
+    "title": "Netzwerk B1 Arbeitsbuch Answers: Official PDFs",
+    "description": "Select Netzwerk B1 Arbeitsbuch solutions for chapters 1–6 or 7–12. Find the official PDFs, match your book and review mistakes without confusing exam scores.",
+    "official": "https://www.klett-sprachen.de/netzwerk/r-1/187",
+    "route": "https://www.klett-sprachen.de/netzwerk/r-1/187#reiter=mediathek&dl_niveau_str=B1",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Lösungen zum Arbeitsbuch B1.1",
+        "chapters": "1–6",
+        "status": "public-pdf",
+        "url": "https://www.klett-sprachen.de/downloads/2460/loesungen-zum-arbeitsbuch-b1-1/pdf"
+      },
+      {
+        "label": "Lösungen zum Arbeitsbuch B1.2",
+        "chapters": "7–12",
+        "status": "public-pdf",
+        "url": "https://www.klett-sprachen.de/downloads/2459/loesungen-zum-arbeitsbuch-b1-2/pdf"
+      }
+    ],
+    "intro": "The original Netzwerk B1 Arbeitsbuch has separate official answer files for Kapitel 1–6 and Kapitel 7–12. Pick B1.1 or B1.2 according to the chapter, then compare the precise task. Neither file replaces the B1 coursebook key or personalised feedback on open writing.",
+    "match": "The original full-volume B1 Arbeitsbuch is listed with ISBN 978-3-12-605004-3. Combined B1.1 and B1.2 volumes contain more than one component. Keep the Arbeitsbuch section distinct, and do not substitute the Netzwerk neu B1 Übungsbuch key.",
+    "method": [
+      [
+        "Diagnose a recurring pattern",
+        "When checking workbook practice, record whether an error comes from the task instruction, vocabulary or sentence structure. Choose one repeated problem to work on instead of rewriting a long list of corrected answers."
+      ],
+      [
+        "Check relationships within the sentence",
+        "For a complex sentence, identify the main clause, subordinate clause and the word that connects them. Check both the intended meaning and the placement of the finite verb. Knowing the missing word alone may hide a second mistake in your own sentence."
+      ],
+      [
+        "Use a fresh transfer task",
+        "After correction, write a short paragraph about a different situation using the same language point. Recheck it for clarity and consistency. Keep open-task feedback separate from the count of objective items you answered correctly."
+      ]
+    ],
+    "problem": "A B1.1 file stops at Kapitel 6; for a later workbook task use B1.2. If a model looks much longer than your task requires, compare the instruction, component and edition. Do not copy a neighbouring solution simply because its chapter heading looks familiar.",
+    "faq": [
+      [
+        "Which B1 key should I open for chapter 10?",
+        "Use the original B1.2 Arbeitsbuch key labelled Kapitel 7–12. Confirm that the exercise belongs to the workbook section before comparing individual items."
+      ],
+      [
+        "Can I turn workbook accuracy into a B1 exam score?",
+        "No. Workbook items are practice tasks and do not reproduce a complete examination’s format or marking system. Use the exact Goethe or telc mock and criteria when assessing exam readiness."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk-neu",
+    "level": "a1",
+    "component": "kursbuch",
+    "book": "Kursbuch",
+    "name": "Netzwerk neu",
+    "path": "book-answers/netzwerk-neu-a1-kursbuch-answers.html",
+    "title": "Netzwerk neu A1 Kursbuch Answers: Publisher Access",
+    "description": "Find the official Netzwerk neu A1 Kursbuch solution entries for both chapter halves. See the publisher registration requirement and check your edition.",
+    "official": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605",
+    "route": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Netzwerk neu A1 – Lösungen – Kursbuch Kapitel 1–6",
+        "chapters": "1–6",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1"
+      },
+      {
+        "label": "Netzwerk neu A1 – Lösungen – Kursbuch Kapitel 7–12",
+        "chapters": "7–12",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1"
+      }
+    ],
+    "intro": "Klett lists Netzwerk neu A1 coursebook solutions in two chapter groups: Kapitel 1–6 and Kapitel 7–12. In the guest catalogue checked for this guide, both answer-key entries required a registered customer account. Use the official route below rather than an old cached PDF address.",
+    "match": "Read the complete cover title: Netzwerk neu A1, Kursbuch. The publisher also lists hybrid and digital formats, so compare your ISBN and format with its catalogue. A newer access package does not by itself prove that a solution file matches every printing; verify the task heading as well.",
+    "method": [
+      [
+        "Select the exact resource category",
+        "Open the publisher page, choose Downloads or Mediathek, select A1 and locate the Kursbuch solutions. Choose Kapitel 1–6 or Kapitel 7–12 according to your exercise. The similarly named Übungsbuch entries belong to a different component."
+      ],
+      [
+        "Attempt the activity before checking",
+        "For an A1 exchange, identify the speaker and the piece of information requested. Try the task on paper or aloud before using a key. Then compare the response with the instruction rather than memorising a sequence of answer letters."
+      ],
+      [
+        "Repeat with personal information",
+        "After reviewing a short dialogue model, use your own name, location or daily schedule in a fresh version. Check the question and verb position. A model is a starting point for communication, not proof that you can produce a response unaided."
+      ]
+    ],
+    "problem": "If clicking a solution entry leads to account access, use Klett’s sign-in or registration process and follow the conditions shown there. Klarweg cannot grant publisher access. If the entry opens but the task differs, recheck “neu”, the component and the chapter half before using the answer.",
+    "faq": [
+      [
+        "Can I download the Netzwerk neu A1 Kursbuch key anonymously?",
+        "The live guest catalogue showed both coursebook solution entries as restricted to registered customers when checked. This page therefore links to the publisher catalogue, not to a purported anonymous PDF download."
+      ],
+      [
+        "Can I use the original Netzwerk A1 PDF instead?",
+        "Do not assume it matches. Netzwerk and Netzwerk neu are separate editions. Find the solution entry for the exact book and compare its task before checking answers."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk-neu",
+    "level": "a1",
+    "component": "uebungsbuch",
+    "book": "Übungsbuch",
+    "name": "Netzwerk neu",
+    "path": "book-answers/netzwerk-neu-a1-uebungsbuch-answers.html",
+    "title": "Netzwerk neu A1 Übungsbuch Answers: Publisher Access",
+    "description": "Locate Netzwerk neu A1 Übungsbuch solutions for chapters 1–6 and 7–12. Check the workbook name and publisher account requirement before opening a resource.",
+    "official": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605",
+    "route": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Netzwerk neu A1 – Lösungen – Übungsbuch Kapitel 1–6",
+        "chapters": "1–6",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1"
+      },
+      {
+        "label": "Netzwerk neu A1 – Lösungen – Übungsbuch Kapitel 7–12",
+        "chapters": "7–12",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A1"
+      }
+    ],
+    "intro": "For Netzwerk neu A1, the workbook is called Übungsbuch. Its official solution entries are divided into Kapitel 1–6 and Kapitel 7–12. Both entries showed a registration requirement in Klett’s guest catalogue; this page provides the official access route and a way to choose the right half.",
+    "match": "Search the printed cover or title page for Netzwerk neu A1 Übungsbuch. Learners sometimes search for “Arbeitsbuch neu” or “Übung neu”, but those phrases should not create an extra edition in your selection. Check the ISBN and format in the official listing, especially if you use a combined Kurs- und Übungsbuch.",
+    "method": [
+      [
+        "Locate the workbook section",
+        "In a combined A1.1 or A1.2 volume, identify Übungsbuch before checking the chapter. On the publisher page choose A1, then the Übungsbuch solution category. A Kursbuch file can share the chapter number while containing different exercises."
+      ],
+      [
+        "Check small written forms",
+        "Attempt a short set, then review articles, noun capitalisation and verb endings in the full sentence. Keep your first response visible so you can see whether a correction is a spelling slip or a pattern you need to relearn."
+      ],
+      [
+        "Build a small retry list",
+        "Choose a few missed items for a later attempt with the key closed. Add one new example for the same language point. Correct recall on another day is more useful than a clean exercise produced while the solution remains open."
+      ]
+    ],
+    "problem": "For a chapter after 6, select the Kapitel 7–12 Übungsbuch entry. If you see an account notice, continue through the publisher’s official access process. A third-party copy or an old search-result URL does not establish that anonymous access is currently offered by Klett.",
+    "faq": [
+      [
+        "Is “Netzwerk neu Arbeitsbuch A1” a separate answer set?",
+        "This guide uses the publisher’s component name, Übungsbuch. If that is the book meant by your search, use the Übungsbuch entries and verify the title page; do not select the original Netzwerk Arbeitsbuch by accident."
+      ],
+      [
+        "Do I need both chapter groups for a full A1 workbook?",
+        "For tasks across Kapitel 1–12, the publisher lists two solution groups. Open the group containing your current chapter and confirm the exercise, subject to the access conditions on Klett’s site."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk-neu",
+    "level": "a2",
+    "component": "kursbuch",
+    "book": "Kursbuch",
+    "name": "Netzwerk neu",
+    "path": "book-answers/netzwerk-neu-a2-kursbuch-answers.html",
+    "title": "Netzwerk neu A2 Kursbuch Answers: Publisher Access",
+    "description": "Locate official Netzwerk neu A2 Kursbuch answer entries for both chapter halves. Check your book, follow publisher access and distinguish keys from transcripts.",
+    "official": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605",
+    "route": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Netzwerk neu A2 – Lösungen – Kursbuch Kapitel 1–6",
+        "chapters": "1–6",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2"
+      },
+      {
+        "label": "Netzwerk neu A2 – Lösungen – Kursbuch Kapitel 7–12",
+        "chapters": "7–12",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2"
+      }
+    ],
+    "intro": "Netzwerk neu A2 Kursbuch answers are listed by Klett in two groups, Kapitel 1–6 and Kapitel 7–12. Both solution entries were visible by name but restricted to registered customers in the guest catalogue. This guide explains selection and access without promising an unrestricted PDF.",
+    "match": "Confirm Netzwerk neu A2 and Kursbuch on the title page. In Klett’s catalogue, compare the ISBN and whether your copy is a full volume, a combined half-volume or a hybrid format. The A2 label alone does not make the older Netzwerk answer key suitable.",
+    "method": [
+      [
+        "Choose A2 before the chapter half",
+        "In the official Downloads or Mediathek area, select A2 and the Kursbuch solution category. Choose the half containing your chapter. Check the exercise letter and instruction once you have access; page numbers are a secondary check."
+      ],
+      [
+        "Review how ideas connect",
+        "After attempting an A2 coursebook task, compare the information requested and how the sentences relate to each other. For a correction involving a connector, check the meaning of the link and the location of the verb in your own clause."
+      ],
+      [
+        "Keep your response independent",
+        "For a message or short account, use a model to inspect completeness and order. Preserve sensible original details in your version. Then write a short response to a different situation to see whether you can apply the same language without copying."
+      ]
+    ],
+    "problem": "If a publisher account is required, use the registration or login route shown on Klett. Access to a sample chapter or public transcript is not evidence that a solution key is also public. If the answer numbering differs after access, recheck the component and edition before editing your work.",
+    "faq": [
+      [
+        "Are A2 transcripts the same as coursebook answers?",
+        "No. A transcript records spoken material; a solution key addresses exercises. They can appear near each other in the catalogue, but their availability and purpose differ. Choose the entry explicitly labelled Lösungen and Kursbuch."
+      ],
+      [
+        "Where is the Netzwerk neu A2.2 coursebook key?",
+        "Look for the A2 Kursbuch solution entry labelled Kapitel 7–12. Verify the task in your combined or full-volume copy, and follow any publisher account requirement."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk-neu",
+    "level": "a2",
+    "component": "uebungsbuch",
+    "book": "Übungsbuch",
+    "name": "Netzwerk neu",
+    "path": "book-answers/netzwerk-neu-a2-uebungsbuch-answers.html",
+    "title": "Netzwerk neu A2 Übungsbuch Answers: Publisher Access",
+    "description": "Find Netzwerk neu A2 Übungsbuch solution entries for chapters 1–6 and 7–12. Review publisher registration requirements and match the workbook component.",
+    "official": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605",
+    "route": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Netzwerk neu A2 – Lösungen – Übungsbuch Kapitel 1–6",
+        "chapters": "1–6",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2"
+      },
+      {
+        "label": "Netzwerk neu A2 – Lösungen – Übungsbuch Kapitel 7–12",
+        "chapters": "7–12",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=A2"
+      }
+    ],
+    "intro": "Use the Netzwerk neu A2 Übungsbuch solution entries for workbook practice. Klett separates them into Kapitel 1–6 and Kapitel 7–12, and both required registered-customer access in the catalogue checked here. These entries are distinct from the A2 Kursbuch answers and from the older Netzwerk Arbeitsbuch.",
+    "match": "Check that the title page says Netzwerk neu A2 Übungsbuch, or locate the Übungsbuch part of a combined A2.1/A2.2 volume. Compare the ISBN and format with the publisher listing before opening a key. Do not choose an Arbeitsbuch PDF solely because its search result also says A2.",
+    "method": [
+      [
+        "Match the task precisely",
+        "Select A2 in the publisher resource area, then the Übungsbuch solution group for your chapter. Compare the exercise number, letter and instruction. This prevents a correct answer to a different coursebook activity being treated as a workbook correction."
+      ],
+      [
+        "Explain the grammatical choice",
+        "For a missing form, inspect the whole sentence: subject, verb, preposition and any dependent clause. Write a short explanation for one difficult correction. If you can only repeat the key, review the relevant grammar before continuing with more gaps."
+      ],
+      [
+        "Measure progress with a retry",
+        "Mark a small set of mistakes and return to them after a break with the solution closed. Use a new subject or context to test the same point. Keep an accurate record of independent attempts instead of counting copied corrections as correct answers."
+      ]
+    ],
+    "problem": "If your full-volume book has chapter 9, the resource you need is still in the Kapitel 7–12 group. If an entry asks you to register, follow the publisher’s stated conditions; this directory cannot supply that access or substitute a restricted key with an older cached copy.",
+    "faq": [
+      [
+        "Does “A2.1” mean a different CEFR level from A2?",
+        "Here the half-volume label helps identify the part of the book. The solution groups are selected by chapter range; match both the component and the exercise rather than treating .1 as a new CEFR level."
+      ],
+      [
+        "Is the workbook access included with a Klarweg course?",
+        "This page does not sell or grant Klett resource access. Any account or eligibility requirement is determined by the publisher and shown on its own site."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk-neu",
+    "level": "b1",
+    "component": "kursbuch",
+    "book": "Kursbuch",
+    "name": "Netzwerk neu",
+    "path": "book-answers/netzwerk-neu-b1-kursbuch-answers.html",
+    "title": "Netzwerk neu B1 Kursbuch Answers: Publisher Access",
+    "description": "Find Netzwerk neu B1 Kursbuch solutions through the official publisher. Check chapter ranges, registration requirements and the limits of self-assessment.",
+    "official": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605",
+    "route": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Netzwerk neu B1 – Lösungen – Kursbuch Kapitel 1–6",
+        "chapters": "1–6",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1"
+      },
+      {
+        "label": "Netzwerk neu B1 – Lösungen – Kursbuch Kapitel 7–12",
+        "chapters": "7–12",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1"
+      }
+    ],
+    "intro": "Klett’s Netzwerk neu B1 Kursbuch solutions are organised as Kapitel 1–6 and Kapitel 7–12. The guest catalogue showed both keys as requiring a registered customer account. Use this page to find the correct official entry and distinguish checking an activity from assessing overall B1 performance.",
+    "match": "Confirm Netzwerk neu B1, then Kursbuch, on your book. Compare the ISBN and format with Klett’s current listing, including any hybrid or combined-volume wording. A B1 key from the original Netzwerk series is not automatically compatible with a Netzwerk neu task.",
+    "method": [
+      [
+        "Check access and chapter range",
+        "Open the official series resource area, choose B1 and locate the Kursbuch solutions. Select the chapter half matching your task. Use the publisher’s account route where required and verify the exercise instruction before comparing answers."
+      ],
+      [
+        "Justify a reading or listening choice",
+        "After checking an objective item, identify the part of the source that supports your decision. Explain why a tempting alternative is wrong. This builds comprehension more effectively than remembering the position of the correct option."
+      ],
+      [
+        "Use examples without copying performance",
+        "For an opinion, discussion or written message, inspect whether the model addresses all parts of the prompt and links reasons clearly. Produce your own version first. Seek individual feedback for open responses that cannot be reliably marked by an answer list."
+      ]
+    ],
+    "problem": "A B1 coursebook solution file does not provide an official Goethe or telc score. If you are preparing for a certificate, use the exam provider’s exact mock and criteria alongside general language study. If the publisher page asks for registration, use that route rather than assuming a search-indexed file is currently unrestricted.",
+    "faq": [
+      [
+        "Can I treat the B1 key as an exam marking scheme?",
+        "No. These are coursebook solutions for Netzwerk neu B1. A Goethe or telc examination has its own tasks, timing and assessment rules; consult the matching official exam materials."
+      ],
+      [
+        "Where do I find solutions for the second B1 half-volume?",
+        "In the B1 Kursbuch solution group labelled Kapitel 7–12. Check your exercise against that resource after completing the publisher’s access steps."
+      ]
+    ]
+  },
+  {
+    "series": "netzwerk-neu",
+    "level": "b1",
+    "component": "uebungsbuch",
+    "book": "Übungsbuch",
+    "name": "Netzwerk neu",
+    "path": "book-answers/netzwerk-neu-b1-uebungsbuch-answers.html",
+    "title": "Netzwerk neu B1 Übungsbuch Answers: Publisher Access",
+    "description": "Locate Netzwerk neu B1 Übungsbuch solution entries for both chapter halves. Match your edition and follow the publisher’s registered-customer access route.",
+    "official": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605",
+    "route": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1",
+    "checked": "2026-11-15",
+    "resources": [
+      {
+        "label": "Netzwerk neu B1 – Lösungen – Übungsbuch Kapitel 1–6",
+        "chapters": "1–6",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1"
+      },
+      {
+        "label": "Netzwerk neu B1 – Lösungen – Übungsbuch Kapitel 7–12",
+        "chapters": "7–12",
+        "status": "registration",
+        "url": "https://www.klett-sprachen.de/netzwerk-neu/r-1/605#reiter=mediathek&dl_niveau_str=B1"
+      }
+    ],
+    "intro": "For Netzwerk neu B1 workbook tasks, select Übungsbuch rather than Kursbuch. Klett lists solution groups for Kapitel 1–6 and Kapitel 7–12; both showed a registered-customer requirement when checked. This guide keeps the access status, component and chapter range visible before you leave Klarweg.",
+    "match": "Read Netzwerk neu B1 Übungsbuch on your copy, or locate that section in a combined Kurs- und Übungsbuch. Check the ISBN and edition format in the official catalogue. A search for “B1 Arbeitsbuch answers” may instead lead to the original Netzwerk edition, whose solution files should not be substituted.",
+    "method": [
+      [
+        "Select the workbook chapter half",
+        "Choose B1 in the publisher’s resource area and find Übungsbuch solutions for the relevant range. Use Kapitel 1–6 for the first half or Kapitel 7–12 for the second. Match the task instruction once the resource is available to your account."
+      ],
+      [
+        "Find a pattern behind corrections",
+        "After an independent attempt, group recurring errors such as unclear references, incorrect clause structure or an unsuitable word choice. Pick one pattern and explain a correction in your own words instead of collecting an unstructured list of answers."
+      ],
+      [
+        "Transfer the language to a short text",
+        "Write a fresh paragraph using the corrected structure in a different situation. Check clarity, word order and how sentences connect. For open writing, obtain feedback on whether you fulfilled the task; an answer key alone cannot evaluate every valid response."
+      ]
+    ],
+    "problem": "If a chapter 11 task is absent, check that you selected Kapitel 7–12 and the Übungsbuch component. If the task still differs, verify the edition before using a nearby answer. Login requirements belong to the publisher’s service; a public audio or transcript link does not grant access to restricted solutions.",
+    "faq": [
+      [
+        "Is the B1 Übungsbuch key a Lehrerhandbuch?",
+        "No. This guide identifies the publisher’s learner-workbook solution entries. It does not provide a teacher’s manual or claim access to other restricted teaching material."
+      ],
+      [
+        "How should I use a model for an open workbook task?",
+        "Attempt the task first, compare the required content and language choices, and keep valid original wording. Ask for feedback when the model cannot establish whether your alternative response fulfils the instruction."
+      ]
+    ]
+  }
+]

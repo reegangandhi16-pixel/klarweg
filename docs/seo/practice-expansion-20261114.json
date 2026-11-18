@@ -1,0 +1,2504 @@
+[
+  {
+    "level": "a1",
+    "slug": "a1-modal-verbs-present-exercises",
+    "title": "German Modal Verbs: A1 Present-Tense Practice",
+    "description": "Practise können, müssen, wollen and dürfen in present-tense sentences. Learn the verb bracket with examples and explained answers.",
+    "guide": "grammar/modalverben.html",
+    "rule": "A modal verb agrees with the subject and normally occupies the finite-verb position. The main action stays in the infinitive at the end: Lara kann gut tanzen. The ich and er/sie/es forms have no usual -e or -t ending: ich kann, er kann.",
+    "trap": "Do not conjugate both verbs: Lara kann tanzen, not Lara kann tanzt. Müssen means necessity; dürfen expresses permission.",
+    "instructions": "Conjugate the modal verb in brackets in the present tense. Leave the final infinitive unchanged.",
+    "examples": [
+      [
+        "Lara kann sehr gut tanzen.",
+        "Lara can dance very well."
+      ],
+      [
+        "Wir müssen die Küche aufräumen.",
+        "We have to tidy the kitchen."
+      ],
+      [
+        "Mein Onkel will ein Boot kaufen.",
+        "My uncle wants to buy a boat."
+      ],
+      [
+        "Ihr dürft hier fotografieren.",
+        "You all are allowed to take photos here."
+      ]
+    ],
+    "quiz": [
+      [
+        "Du ___ heute länger schlafen. (dürfen)",
+        "darfst",
+        "Dürfen changes to darf- in the singular; du takes darfst."
+      ],
+      [
+        "Ich ___ einen Kuchen backen. (wollen)",
+        "will",
+        "The ich form of wollen is will, with no -e ending."
+      ],
+      [
+        "Die Gäste ___ draußen warten. (müssen)",
+        "müssen",
+        "A plural subject takes müssen; warten stays in the infinitive."
+      ],
+      [
+        "Mina ___ drei Sprachen sprechen. (können)",
+        "kann",
+        "Third-person singular können becomes kann."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "slug": "a1-separable-verbs-present-exercises",
+    "title": "Separable Verbs: German A1 Present-Tense Exercises",
+    "description": "Learn where separable prefixes go in present-tense statements and questions. Practise anrufen, aufräumen and mitbringen with answers.",
+    "guide": "grammar/trennbare-verben.html",
+    "rule": "In a normal present-tense main clause, separate the stressed prefix from the conjugated verb: Der Laden macht um neun auf. The verb takes the subject ending, while the prefix closes the clause. A yes/no question also leaves the prefix at the end.",
+    "trap": "Do not put the prefix next to the finite verb in an ordinary main clause: Ich rufe dich an, not Ich anrufe dich.",
+    "instructions": "Put the verb in brackets into the present tense. The separated prefix is already supplied at the end.",
+    "examples": [
+      [
+        "Der Laden macht um neun auf.",
+        "The shop opens at nine."
+      ],
+      [
+        "Tarek räumt sein Zimmer auf.",
+        "Tarek tidies his room."
+      ],
+      [
+        "Wir bringen Getränke mit.",
+        "We bring drinks along."
+      ],
+      [
+        "Rufst du deine Tante an?",
+        "Are you calling your aunt?"
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ meinen Nachbarn an. (anrufen)",
+        "rufe",
+        "Anrufen separates into the ich form rufe and final an."
+      ],
+      [
+        "Ihr ___ am Freitag ein. (einkaufen)",
+        "kauft",
+        "Ihr takes kauft; ein remains at the end."
+      ],
+      [
+        "Der Bus ___ um zehn ab. (abfahren)",
+        "fährt",
+        "Abfahren separates, and er/sie/es changes fahren to fährt."
+      ],
+      [
+        "Wir ___ das Radio aus. (ausmachen)",
+        "machen",
+        "Wir takes machen, with aus at the clause end."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "slug": "a1-stem-vowel-change-verbs-exercises",
+    "title": "German Stem-Vowel Changes: A1 Verb Exercises",
+    "description": "Practise du and er/sie/es forms such as liest, isst, fährt and schläft. Compare the changed stem with unchanged plural forms.",
+    "guide": "grammar/praesens.html",
+    "rule": "Some common verbs change their stem vowel with du and er/sie/es in the present: lesen → liest, essen → isst, fahren → fährt. The plural forms usually keep the infinitive stem: wir lesen, ihr fahrt. Learn each verb together with its singular forms.",
+    "trap": "Do not carry a singular vowel change into the plural: wir schlafen, not wir schläfen in the present indicative.",
+    "instructions": "Conjugate each verb in brackets in the present indicative. Pay attention to the subject.",
+    "examples": [
+      [
+        "Nora liest einen Reisebericht.",
+        "Nora is reading a travel report."
+      ],
+      [
+        "Du isst eine Birne.",
+        "You are eating a pear."
+      ],
+      [
+        "Mein Bruder fährt mit dem Fahrrad.",
+        "My brother travels by bicycle."
+      ],
+      [
+        "Wir schlafen im Gästezimmer.",
+        "We sleep in the guest room."
+      ]
+    ],
+    "quiz": [
+      [
+        "Du ___ die Speisekarte. (lesen)",
+        "liest",
+        "Du changes lesen to liest."
+      ],
+      [
+        "Das Baby ___ schon. (schlafen)",
+        "schläft",
+        "Schlafen changes a to ä with er/sie/es."
+      ],
+      [
+        "Ihr ___ zum See. (fahren)",
+        "fahrt",
+        "Ihr keeps the a in fahren: fahrt."
+      ],
+      [
+        "Er ___ eine Suppe. (essen)",
+        "isst",
+        "The third-person singular of essen is isst."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "slug": "a1-noun-plurals-exercises",
+    "title": "German Noun Plurals: A1 Exercises with Answers",
+    "description": "Practise common German plural patterns with -e, -er, -(e)n, -s and no extra ending. Learn each noun together with its plural form.",
+    "guide": "grammar/der-die-das.html",
+    "rule": "German nouns form plurals in several ways: der Tag → die Tage, das Bild → die Bilder, die Blume → die Blumen. Some nouns add an umlaut, and some do not add an ending. Learn the singular article and plural together; there is no single ending for all nouns.",
+    "trap": "The plural article in the nominative is die, but that does not mean every plural noun gains the same ending.",
+    "instructions": "Write the nominative plural of the noun in brackets; the article die is already provided.",
+    "examples": [
+      [
+        "Die Tage werden länger.",
+        "The days are getting longer."
+      ],
+      [
+        "Im Flur hängen viele Bilder.",
+        "Many pictures hang in the hallway."
+      ],
+      [
+        "Diese Blumen riechen gut.",
+        "These flowers smell nice."
+      ],
+      [
+        "Zwei Autos stehen vor dem Tor.",
+        "Two cars are parked in front of the gate."
+      ]
+    ],
+    "quiz": [
+      [
+        "ein Buch → die ___",
+        "Bücher",
+        "Buch forms its plural with an umlaut and -er."
+      ],
+      [
+        "eine Zeitung → die ___",
+        "Zeitungen",
+        "Zeitung adds -en in the plural."
+      ],
+      [
+        "ein Hotel → die ___",
+        "Hotels",
+        "Hotel forms the plural with -s."
+      ],
+      [
+        "ein Lehrer → die ___",
+        "Lehrer",
+        "Lehrer has no extra ending in the nominative plural."
+      ]
+    ],
+    "guideLabel": "Review noun gender and articles"
+  },
+  {
+    "level": "a1",
+    "slug": "a1-imperative-forms-exercises",
+    "title": "German Imperatives: Du, Ihr and Sie A1 Practice",
+    "description": "Form simple requests and instructions with du, ihr and Sie. Compare regular imperatives with nimm and the irregular verb sein.",
+    "guide": "grammar/imperativ.html",
+    "rule": "Use an imperative to ask someone to do something. The du form often uses the stem without du: Komm! The ihr form matches the present-tense verb without ihr: Kommt! Formal instructions use the infinitive-shaped verb followed by Sie: Kommen Sie bitte!",
+    "trap": "Sein is irregular: Sei ruhig! Seid ruhig! Seien Sie ruhig! Some strong verbs also change: nehmen → Nimm!, not Nehm!",
+    "instructions": "Write the imperative for the verb and form of address in brackets. Start with a capital letter.",
+    "examples": [
+      [
+        "Warte bitte einen Moment!",
+        "Please wait a moment!"
+      ],
+      [
+        "Öffnet eure Bücher!",
+        "Open your books!"
+      ],
+      [
+        "Schreiben Sie bitte Ihren Namen!",
+        "Please write your name!"
+      ],
+      [
+        "Sei vorsichtig auf der Treppe!",
+        "Be careful on the stairs!"
+      ]
+    ],
+    "quiz": [
+      [
+        "___ bitte Platz! (nehmen, du)",
+        "Nimm",
+        "The du imperative of nehmen changes the stem to nimm."
+      ],
+      [
+        "___ die Tür zu! (machen, ihr)",
+        "Macht",
+        "The ihr imperative uses macht without the pronoun."
+      ],
+      [
+        "___ Sie bitte langsam! (sprechen, formal)",
+        "Sprechen",
+        "The formal imperative keeps Sie after the verb."
+      ],
+      [
+        "___ bitte leise! (sein, ihr)",
+        "Seid",
+        "The ihr imperative of sein is seid."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "slug": "a1-es-gibt-exercises",
+    "title": "Es Gibt + Akkusativ: German A1 Exercises",
+    "description": "Use es gibt to say what exists or is available. Practise accusative noun phrases and distinguish gibt from plural-subject geben.",
+    "guide": "grammar/akkusativ.html",
+    "rule": "Es gibt means there is or there are. The verb remains gibt even when the following noun is plural, because es is the grammatical subject. The thing that exists is an accusative object: In der Straße gibt es einen Bäcker.",
+    "trap": "Do not use es geben before a plural noun. In Es gibt drei Cafés, gibt stays singular.",
+    "instructions": "Fill each gap with gibt or the accusative indefinite article requested in brackets.",
+    "examples": [
+      [
+        "In der Straße gibt es einen Bäcker.",
+        "There is a bakery in the street."
+      ],
+      [
+        "Neben dem Bahnhof gibt es eine Apotheke.",
+        "There is a pharmacy next to the station."
+      ],
+      [
+        "Im Hof gibt es ein kleines Café.",
+        "There is a small café in the courtyard."
+      ],
+      [
+        "Hier gibt es keine Parkplätze.",
+        "There are no parking spaces here."
+      ]
+    ],
+    "quiz": [
+      [
+        "In unserem Dorf ___ es zwei Schulen. (geben)",
+        "gibt",
+        "Es is the subject, so the finite form is gibt."
+      ],
+      [
+        "Auf dem Markt gibt es ___ Käsestand. (ein)",
+        "einen",
+        "Käsestand is masculine and the object of es gibt is accusative."
+      ],
+      [
+        "Im Zentrum gibt es ___ Bücherei. (ein)",
+        "eine",
+        "Bücherei is feminine; the accusative indefinite article is eine."
+      ],
+      [
+        "Es ___ heute frische Brötchen. (geben)",
+        "gibt",
+        "A plural object does not change the verb form gibt."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "slug": "a1-dates-and-ordinals-exercises",
+    "title": "German Dates and Ordinals: A1 Practice",
+    "description": "Read dates with am and ordinal numbers. Practise ersten, dritten and regular date endings in German calendar expressions.",
+    "guide": "grammar/datum.html",
+    "rule": "For a calendar date after am, use an ordinal with the ending -en: am ersten Mai, am dritten Juni. Ordinals from four to nineteen generally use -te before endings; twenty and above use -ste. Erst- and dritt- are irregular stems.",
+    "trap": "Do not read am 3. Juni as am drei Juni. A date after am needs the ordinal form dritten.",
+    "instructions": "Write out the ordinal date word in each gap, using the number in brackets.",
+    "examples": [
+      [
+        "Der Kurs startet am ersten April.",
+        "The course starts on the first of April."
+      ],
+      [
+        "Wir feiern am dritten September.",
+        "We celebrate on the third of September."
+      ],
+      [
+        "Die Reise beginnt am zwanzigsten Juli.",
+        "The trip begins on the twentieth of July."
+      ],
+      [
+        "Am achten Dezember habe ich frei.",
+        "I have the eighth of December off."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir kommen am ___ Mai. (2.)",
+        "zweiten",
+        "The ordinal stem zweit- takes -en after am."
+      ],
+      [
+        "Der Termin ist am ___ Juni. (3.)",
+        "dritten",
+        "Drei has the irregular ordinal stem dritt-."
+      ],
+      [
+        "Ich fahre am ___ August. (20.)",
+        "zwanzigsten",
+        "Twenty and above normally use -st-; after am, add -en."
+      ],
+      [
+        "Das Fest beginnt am ___ Oktober. (1.)",
+        "ersten",
+        "The ordinal of eins is erst-: am ersten."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "slug": "a1-am-im-um-time-exercises",
+    "title": "Am, Im or Um? German A1 Time Exercises",
+    "description": "Choose am for days, im for months and seasons, and um for clock times. Practise everyday time phrases with explained answers.",
+    "guide": "grammar/uhrzeit.html",
+    "rule": "Use am with weekdays and many parts of the day: am Dienstag, am Morgen. Use im with months and seasons: im Januar, im Herbst. Use um before a clock time: um halb acht. These small words describe different kinds of time information.",
+    "trap": "Not every time expression needs a preposition: heute, morgen and nächste Woche can stand alone. In der Nacht is a common exception to the am pattern.",
+    "instructions": "Choose am, im or um according to the time expression that follows.",
+    "examples": [
+      [
+        "Am Donnerstag besuche ich meinen Cousin.",
+        "On Thursday I visit my cousin."
+      ],
+      [
+        "Im Februar ist es oft kalt.",
+        "It is often cold in February."
+      ],
+      [
+        "Der Film beginnt um neunzehn Uhr.",
+        "The film starts at seven p.m."
+      ],
+      [
+        "Im Sommer essen wir draußen.",
+        "In summer we eat outside."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir treffen uns ___ Samstag.",
+        "am",
+        "Use am before a weekday."
+      ],
+      [
+        "Die Schule öffnet ___ acht Uhr.",
+        "um",
+        "A clock time takes um."
+      ],
+      [
+        "___ November regnet es oft.",
+        "Im",
+        "Use im before a month; capitalise it at the start of the sentence."
+      ],
+      [
+        "Ich lese gern ___ Abend.",
+        "am",
+        "The usual expression is am Abend."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "slug": "a1-verb-second-time-phrases-exercises",
+    "title": "German Verb-Second Order: A1 Sentence Practice",
+    "description": "Keep the finite verb in position two after morgen, am Freitag and other time phrases. Practise statements with the subject after the verb.",
+    "guide": "grammar/word-order.html",
+    "rule": "A statement can start with a subject or another sentence element. The finite verb remains in the second position: Am Freitag besucht Lena ihre Oma. A phrase such as am Freitag counts as one element even though it contains more than one word.",
+    "trap": "Do not place a complete time phrase, then the subject, then the finite verb: Am Freitag Lena besucht is not the usual statement order.",
+    "instructions": "Conjugate the verb in brackets. The time phrase is first and the subject already follows the gap.",
+    "examples": [
+      [
+        "Am Freitag besucht Lena ihre Oma.",
+        "On Friday Lena visits her grandmother."
+      ],
+      [
+        "Morgen fährt Karim nach Bremen.",
+        "Tomorrow Karim travels to Bremen."
+      ],
+      [
+        "Nach dem Frühstück liest Opa die Zeitung.",
+        "After breakfast Grandpa reads the newspaper."
+      ],
+      [
+        "Heute Abend kochen wir gemeinsam.",
+        "This evening we cook together."
+      ]
+    ],
+    "quiz": [
+      [
+        "Am Montag ___ Sara einen Kuchen. (backen)",
+        "backt",
+        "Backt is a standard third-person form of backen; bäckt is also possible."
+      ],
+      [
+        "Morgen ___ ich im Büro. (arbeiten)",
+        "arbeite",
+        "The finite verb stays second and agrees with ich."
+      ],
+      [
+        "Um zehn Uhr ___ der Unterricht. (beginnen)",
+        "beginnt",
+        "The whole time phrase occupies the first position."
+      ],
+      [
+        "Heute ___ wir eine Pause. (machen)",
+        "machen",
+        "The subject wir follows the finite verb machen."
+      ]
+    ]
+  },
+  {
+    "level": "a1",
+    "slug": "a1-doch-negative-questions-exercises",
+    "title": "Doch in Negative Questions: German A1 Practice",
+    "description": "Use doch to contradict a negative question. Compare ja, nein and doch in short replies with clear English meaning cues.",
+    "guide": "grammar/doch.html",
+    "rule": "Use doch to reject a negative assumption: Hast du keinen Stift? — Doch, ich habe einen. Nein confirms that the negative statement is true: Nein, ich habe keinen. For an ordinary positive yes/no question, ja gives a positive answer.",
+    "trap": "A bare ja after a negative question can be unclear to a learner. Use doch with a short positive sentence when correcting the negative assumption.",
+    "instructions": "Choose ja, nein or doch. Follow the positive or negative reply given after the gap.",
+    "examples": [
+      [
+        "Bist du nicht müde? — Doch, ich bin sehr müde.",
+        "Are you not tired? — Yes, I am very tired."
+      ],
+      [
+        "Hast du kein Ticket? — Nein, ich habe keins.",
+        "Do you not have a ticket? — No, I do not have one."
+      ],
+      [
+        "Ist die Tür offen? — Ja, sie ist offen.",
+        "Is the door open? — Yes, it is open."
+      ],
+      [
+        "Kommt Lea heute nicht? — Doch, sie kommt heute.",
+        "Is Lea not coming today? — Yes, she is coming today."
+      ]
+    ],
+    "quiz": [
+      [
+        "Hast du keinen Hunger? — ___, ich habe Hunger.",
+        "Doch",
+        "Doch contradicts the negative assumption keinen Hunger."
+      ],
+      [
+        "Ist der Laden geschlossen? — ___, er ist geschlossen.",
+        "Ja",
+        "The positive question is confirmed with ja."
+      ],
+      [
+        "Trinkst du keinen Tee? — ___, ich trinke keinen Tee.",
+        "Nein",
+        "The reply confirms the negative idea."
+      ],
+      [
+        "Kannst du nicht kommen? — ___, ich kann kommen.",
+        "Doch",
+        "Doch rejects the assumption that the speaker cannot come."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-dative-prepositions-exercises",
+    "title": "German Dative Prepositions: A2 Practice",
+    "description": "Practise noun phrases after mit, bei, aus and seit. Choose dative articles and notice the extra noun ending in the plural.",
+    "guide": "grammar/prepositions.html",
+    "rule": "Prepositions such as aus, bei, mit, nach, seit, von and zu take the dative. The definite articles are dem for masculine/neuter, der for feminine and den for plural. A plural noun usually adds -n if it can: mit den Freunden, but mit den Autos.",
+    "trap": "Choose the case from the preposition, not from whether someone is moving. Mit dem Zug uses dative even during a journey.",
+    "instructions": "Fill each gap with the dative definite article for the noun indicated in brackets.",
+    "examples": [
+      [
+        "Sie wohnt bei ihrer Großmutter.",
+        "She lives with her grandmother."
+      ],
+      [
+        "Wir fahren mit den Fahrrädern.",
+        "We travel by bicycle."
+      ],
+      [
+        "Der Brief kommt aus dem Rathaus.",
+        "The letter comes from the town hall."
+      ],
+      [
+        "Seit einer Woche regnet es.",
+        "It has been raining for a week."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich komme aus ___ Bibliothek. (die)",
+        "der",
+        "Aus takes dative; feminine die becomes der."
+      ],
+      [
+        "Er wohnt bei ___ Onkel. (der)",
+        "dem",
+        "Bei takes dative; masculine der becomes dem."
+      ],
+      [
+        "Sie fährt mit ___ Straßenbahn. (die)",
+        "der",
+        "Mit always takes dative, including in travel expressions."
+      ],
+      [
+        "Wir lernen seit ___ Sommer. (der)",
+        "dem",
+        "Seit takes dative; Sommer is masculine."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-accusative-prepositions-exercises",
+    "title": "German Accusative Prepositions: A2 Exercises",
+    "description": "Choose accusative articles after für, ohne, gegen and durch. Practise complete noun phrases rather than isolated case labels.",
+    "guide": "grammar/prepositions.html",
+    "rule": "Durch, für, gegen, ohne and um normally govern the accusative. The noun phrase after the preposition is not necessarily a direct object of the verb: Das Geschenk ist für einen Freund. Masculine definite der becomes den; feminine die and neuter das keep their forms.",
+    "trap": "Do not use the dative just because the noun describes a person receiving something. Für einen Freund takes accusative because of für.",
+    "instructions": "Use the accusative definite article for each noun in brackets.",
+    "examples": [
+      [
+        "Wir laufen durch den Park am Fluss.",
+        "We walk through the park by the river."
+      ],
+      [
+        "Das Paket ist für meine Nachbarin.",
+        "The parcel is for my neighbour."
+      ],
+      [
+        "Ohne einen Plan wird es schwierig.",
+        "It will be difficult without a plan."
+      ],
+      [
+        "Der Ball rollt gegen das Tor.",
+        "The ball rolls against the gate."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Geschenk ist für ___ Trainer. (der)",
+        "den",
+        "Für takes accusative; masculine der becomes den."
+      ],
+      [
+        "Sie geht ohne ___ Jacke hinaus. (die)",
+        "die",
+        "Feminine accusative keeps die."
+      ],
+      [
+        "Der Weg führt durch ___ Wald. (der)",
+        "den",
+        "Durch requires accusative, so use den Wald."
+      ],
+      [
+        "Wir spielen gegen ___ Team aus Bonn. (das)",
+        "das",
+        "Neuter accusative keeps das."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-preposition-article-contractions-exercises",
+    "title": "Im, Ins, Zum, Zur: German A2 Contractions",
+    "description": "Expand and combine common German preposition–article contractions. Compare im and ins, and practise beim, zum and zur.",
+    "guide": "grammar/prepositions.html",
+    "rule": "German often combines a preposition and an unstressed definite article: in dem → im, in das → ins, bei dem → beim, zu dem → zum, zu der → zur. The contracted form still carries case information: im Zimmer describes a location; ins Zimmer expresses a destination.",
+    "trap": "Im and ins do not mean the same thing. Decide the case first; contraction does not remove the location-versus-destination distinction.",
+    "instructions": "Write the usual contracted form of the preposition and article shown before the arrow.",
+    "examples": [
+      [
+        "Die Schlüssel sind im Rucksack.",
+        "The keys are in the backpack."
+      ],
+      [
+        "Wir gehen ins Schwimmbad.",
+        "We are going to the swimming pool."
+      ],
+      [
+        "Beim Bäcker kaufe ich Brezeln.",
+        "I buy pretzels at the bakery."
+      ],
+      [
+        "Der Weg führt zur Haltestelle.",
+        "The path leads to the stop."
+      ]
+    ],
+    "quiz": [
+      [
+        "zu dem Bahnhof → ___ Bahnhof",
+        "zum",
+        "Zu dem normally contracts to zum."
+      ],
+      [
+        "zu der Universität → ___ Universität",
+        "zur",
+        "Zu der normally contracts to zur."
+      ],
+      [
+        "in das Kino → ___ Kino",
+        "ins",
+        "In das contracts to ins, retaining accusative direction."
+      ],
+      [
+        "bei dem Arzt → ___ Arzt",
+        "beim",
+        "Bei dem normally contracts to beim."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-nach-zu-in-destinations-exercises",
+    "title": "Nach, Zu or In? German A2 Destination Practice",
+    "description": "Choose destination phrases for cities, people and buildings. Compare nach Berlin, zum Zahnarzt and in die Küche with answers.",
+    "guide": "grammar/prepositions.html",
+    "rule": "Use nach with most city names and article-free country names: nach Leipzig, nach Italien. Use zu for a person or a destination viewed as a point: zur Ärztin. In + accusative often highlights entering a place: in die Halle. The intended destination matters more than the English word to.",
+    "trap": "Countries with articles usually need in + accusative for travel destinations: in die Schweiz. Do not apply nach to every country name.",
+    "instructions": "Choose nach, zu or in using the cue in brackets. Where an article is already shown, leave it unchanged.",
+    "examples": [
+      [
+        "Wir reisen nach Dänemark.",
+        "We are travelling to Denmark."
+      ],
+      [
+        "Ich gehe zu meiner Schwester.",
+        "I am going to my sister’s place."
+      ],
+      [
+        "Der Hund läuft in die Garage.",
+        "The dog runs into the garage."
+      ],
+      [
+        "Sie fährt in die Schweiz.",
+        "She is travelling to Switzerland."
+      ]
+    ],
+    "quiz": [
+      [
+        "Am Freitag fahren wir ___ Dresden. (city)",
+        "nach",
+        "An ordinary city name takes nach for a destination."
+      ],
+      [
+        "Ich gehe ___ meinem Zahnarzt. (person)",
+        "zu",
+        "Use zu + dative when going to a person."
+      ],
+      [
+        "Die Kinder laufen ___ die Sporthalle. (into)",
+        "in",
+        "Entering the hall is expressed with in + accusative."
+      ],
+      [
+        "Er fliegt ___ Portugal. (country without article)",
+        "nach",
+        "Article-free Portugal takes nach for travel to the country."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-seit-vor-time-exercises",
+    "title": "Seit or Vor? German A2 Time Expressions",
+    "description": "Distinguish an ongoing situation with seit from a past point with vor. Practise German tense and dative time phrases together.",
+    "guide": "grammar/prepositions.html",
+    "rule": "Seit describes a starting point or duration continuing to the reference time: Ich wohne seit zwei Jahren hier. Vor describes how long before a reference time an event happened: Ich bin vor zwei Jahren umgezogen. Both prepositions take the dative in these time expressions.",
+    "trap": "When a situation still continues now, German normally uses the present with seit, where English often uses have been.",
+    "instructions": "Choose seit for a situation continuing now or vor for an event that happened the stated time ago.",
+    "examples": [
+      [
+        "Ravi arbeitet seit drei Monaten im Hotel.",
+        "Ravi has been working at the hotel for three months."
+      ],
+      [
+        "Vor einer Stunde kam das Paket.",
+        "The parcel arrived an hour ago."
+      ],
+      [
+        "Seit Montag ist die Heizung kaputt.",
+        "The heating has been broken since Monday."
+      ],
+      [
+        "Wir haben vor zwei Tagen gebucht.",
+        "We booked two days ago."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich lerne ___ einem Jahr Italienisch und lerne weiter.",
+        "seit",
+        "The learning began a year ago and still continues."
+      ],
+      [
+        "Sie ist ___ einer Woche nach Köln gezogen.",
+        "vor",
+        "The move happened one week ago."
+      ],
+      [
+        "___ gestern habe ich Zahnschmerzen und noch immer Schmerzen.",
+        "Seit",
+        "The condition continues from yesterday until now."
+      ],
+      [
+        "Der Zug ist ___ zehn Minuten abgefahren.",
+        "vor",
+        "The departure is a completed event ten minutes ago."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-adjective-endings-definite-exercises",
+    "title": "Adjectives After Der, Die, Das: German A2 Practice",
+    "description": "Practise adjective endings after definite articles. Compare der neue Mantel, das rote Fahrrad and mit dem alten Koffer.",
+    "guide": "grammar/adjektivdeklination.html",
+    "rule": "After a definite article, adjective endings are mainly -e or -en. Use -e in nominative singular and in feminine/neuter accusative singular: der neue Mantel, das rote Fahrrad. Use -en in the other common definite-article combinations, including masculine accusative and all dative forms.",
+    "trap": "Do not give the adjective the strong ending when the definite article already shows the grammar: mit dem alten Koffer, not mit dem altem Koffer.",
+    "instructions": "Add the adjective ending to the word in brackets. Keep the definite article unchanged.",
+    "examples": [
+      [
+        "Der neue Mantel passt gut.",
+        "The new coat fits well."
+      ],
+      [
+        "Das rote Fahrrad gehört Sima.",
+        "The red bicycle belongs to Sima."
+      ],
+      [
+        "Ich nehme den kleinen Koffer.",
+        "I take the small suitcase."
+      ],
+      [
+        "Wir sitzen in der warmen Küche.",
+        "We sit in the warm kitchen."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die ___ Tasche ist schwer. (blau)",
+        "blaue",
+        "Feminine nominative after die takes -e."
+      ],
+      [
+        "Er sucht den ___ Schlüssel. (klein)",
+        "kleinen",
+        "Masculine accusative after den takes -en."
+      ],
+      [
+        "Mit dem ___ Bus kommen wir schneller. (neu)",
+        "neuen",
+        "Dative after the definite article takes -en."
+      ],
+      [
+        "Das ___ Zimmer ist frei. (hell)",
+        "helle",
+        "Neuter nominative after das takes -e."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-adjective-endings-indefinite-exercises",
+    "title": "Adjectives After Ein and Eine: German A2 Practice",
+    "description": "Choose mixed adjective endings after ein and eine. Compare ein kleiner Hund with einen kleinen Hund and einem kleinen Hund.",
+    "guide": "grammar/adjektivdeklination.html",
+    "rule": "After ein-words, adjectives use mixed endings. Where ein has no ending, the adjective supplies the gender signal: ein kleiner Hund, ein altes Haus. Feminine nominative is eine kleine Katze. Other case combinations differ: einen kleinen Hund, mit einem kleinen Hund.",
+    "trap": "Do not use the same ending after every form of ein: masculine nominative needs -er, while masculine accusative uses -en.",
+    "instructions": "Add the correct adjective ending after the indefinite article shown.",
+    "examples": [
+      [
+        "Ein kleiner Hund wartet am Zaun.",
+        "A small dog waits by the fence."
+      ],
+      [
+        "Eine nette Kollegin hilft mir.",
+        "A nice colleague helps me."
+      ],
+      [
+        "Wir mieten ein altes Haus.",
+        "We rent an old house."
+      ],
+      [
+        "Er spricht mit einem jungen Musiker.",
+        "He speaks with a young musician."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ein ___ Apfel liegt im Korb. (grün)",
+        "grüner",
+        "Masculine nominative after ein needs -er on the adjective."
+      ],
+      [
+        "Sie kauft eine ___ Lampe. (modern)",
+        "moderne",
+        "Feminine accusative after eine takes -e."
+      ],
+      [
+        "Ich sehe einen ___ Vogel. (bunt)",
+        "bunten",
+        "Masculine accusative after einen takes -en."
+      ],
+      [
+        "Wir wohnen in einem ___ Dorf. (klein)",
+        "kleinen",
+        "Dative after einem takes -en on the adjective."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-als-wie-comparisons-exercises",
+    "title": "Als or Wie? German A2 Comparison Exercises",
+    "description": "Use als for unequal comparisons and wie for equality. Practise comparative phrases and so/genauso ... wie in complete sentences.",
+    "guide": "grammar/komparativ.html",
+    "rule": "For an unequal comparison, use a comparative adjective with als: Der Zug ist schneller als der Bus. For equality, use so or genauso with the basic adjective and wie: Dieser Weg ist genauso lang wie jener. Choose the connector from the type of comparison.",
+    "trap": "Standard written German uses größer als, not größer wie. With so groß, the comparison word is wie.",
+    "instructions": "Choose als or wie; the adjective form and so/genauso provide the clue.",
+    "examples": [
+      [
+        "Der Zug ist schneller als der Bus.",
+        "The train is faster than the bus."
+      ],
+      [
+        "Diese Jacke ist so teuer wie die andere.",
+        "This jacket is as expensive as the other one."
+      ],
+      [
+        "Mia läuft langsamer als ihr Bruder.",
+        "Mia runs more slowly than her brother."
+      ],
+      [
+        "Unser Garten ist genauso groß wie eurer.",
+        "Our garden is just as big as yours."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Sofa ist bequemer ___ der Stuhl.",
+        "als",
+        "A comparative such as bequemer takes als."
+      ],
+      [
+        "Der Tee ist so heiß ___ der Kaffee.",
+        "wie",
+        "So + basic adjective marks equality with wie."
+      ],
+      [
+        "Heute ist es kälter ___ am Sonntag.",
+        "als",
+        "Kälter is a comparative, so use als."
+      ],
+      [
+        "Ben ist genauso alt ___ Cem.",
+        "wie",
+        "Genauso alt pairs with wie."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-denn-deshalb-reasons-exercises",
+    "title": "Denn and Deshalb: German A2 Reason Clauses",
+    "description": "Connect a reason with denn or a result with deshalb. Practise the different positions of subject and finite verb in both patterns.",
+    "guide": "grammar/weil-denn-deshalb.html",
+    "rule": "Denn links a second main clause giving a reason; that clause keeps its normal subject–verb order: Ich warte, denn der Laden ist noch zu. Deshalb introduces a consequence. When deshalb is first, the finite verb follows it: Der Laden ist zu. Deshalb warte ich.",
+    "trap": "Denn does not send the verb to the end like weil. Deshalb does not keep a subject between itself and the finite verb when it starts the clause.",
+    "instructions": "Choose denn or deshalb using the logical relation and word order. Capitalise the word after a full stop.",
+    "examples": [
+      [
+        "Ich warte, denn der Laden ist noch zu.",
+        "I wait because the shop is still closed."
+      ],
+      [
+        "Der Akku ist leer. Deshalb lade ich das Handy.",
+        "The battery is empty. That is why I charge the phone."
+      ],
+      [
+        "Wir nehmen den Bus, denn es schneit.",
+        "We take the bus because it is snowing."
+      ],
+      [
+        "Die Brücke ist gesperrt. Deshalb fahren wir anders.",
+        "The bridge is closed. That is why we take another route."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich trage einen Mantel, ___ es ist kalt.",
+        "denn",
+        "Denn introduces the reason and preserves es ist."
+      ],
+      [
+        "Es ist kalt. ___ trage ich einen Mantel.",
+        "Deshalb",
+        "Deshalb starts the result clause, followed by trage ich."
+      ],
+      [
+        "Wir bleiben drinnen, ___ draußen regnet es stark.",
+        "denn",
+        "The second clause gives a reason and retains main-clause word order."
+      ],
+      [
+        "Der Bus fällt aus. ___ laufen wir zur Schule.",
+        "Deshalb",
+        "The cancelled bus causes the decision to walk."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-als-wenn-past-events-exercises",
+    "title": "Als or Wenn? German A2 Time-Clause Exercises",
+    "description": "Distinguish a single occasion in the past from repeated past events. Practise als and wenn with explicit time and repetition cues.",
+    "guide": "grammar/als-wenn.html",
+    "rule": "Use als for a single event or a defined period in the past: Als ich zehn war, lebten wir in Kiel. Use wenn for repeated occasions, including repeated events in the past: Immer wenn es schneite, bauten wir einen Schneemann. Both introduce subordinate clauses with the finite verb at the end.",
+    "trap": "Past tense alone does not decide between als and wenn. Ask whether the event happened once or was repeated.",
+    "instructions": "Choose als for a single past event/period and wenn for repeated occasions. Use the cues immer or jedes Mal where given.",
+    "examples": [
+      [
+        "Als ich zehn war, lebten wir in Kiel.",
+        "When I was ten, we lived in Kiel."
+      ],
+      [
+        "Immer wenn es schneite, bauten wir einen Schneemann.",
+        "Whenever it snowed, we built a snowman."
+      ],
+      [
+        "Als der Strom ausfiel, suchten wir Kerzen.",
+        "When the power went out, we looked for candles."
+      ],
+      [
+        "Wenn Oma früher zu Besuch kam, brachte sie Kuchen mit.",
+        "Whenever Grandma used to visit, she brought cake."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ ich gestern ankam, war das Büro schon zu. (one arrival)",
+        "Als",
+        "A single past occasion takes als."
+      ],
+      [
+        "Immer ___ wir Urlaub hatten, fuhren wir ans Meer.",
+        "wenn",
+        "Immer signals repeated occasions, so use wenn."
+      ],
+      [
+        "___ ich ein Kind war, wohnte ich auf dem Land. (one period)",
+        "Als",
+        "A defined childhood period is treated as a single past period."
+      ],
+      [
+        "Jedes Mal, ___ er anrief, freute sie sich.",
+        "wenn",
+        "Jedes Mal marks repetition rather than one event."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-possessives-sein-ihr-exercises",
+    "title": "Sein or Ihr? German A2 Possessive Exercises",
+    "description": "Choose sein- or ihr- from the owner, then add the ending required by the possessed noun. Practise his, her and their with clear cues.",
+    "guide": "grammar/possessivartikel.html",
+    "rule": "For er or es as owner, use sein-; for sie meaning she or they, use ihr-. The owner chooses the stem, while the possessed noun chooses the ending: Paul besucht seine Schwester; Anna besucht ihren Bruder. Formal your uses capital Ihr-.",
+    "trap": "Do not choose sein just because the possessed noun is masculine. Annas Bruder is ihr Bruder because Anna is the owner.",
+    "instructions": "Use the possessive for the named owner: his = sein-, her/their = ihr-. Inflect it for the noun and case.",
+    "examples": [
+      [
+        "Paul besucht seine Schwester.",
+        "Paul visits his sister."
+      ],
+      [
+        "Anna sucht ihren Regenschirm.",
+        "Anna looks for her umbrella."
+      ],
+      [
+        "Die Eltern bringen ihre Kinder zur Schule.",
+        "The parents take their children to school."
+      ],
+      [
+        "Das Kind holt seinen Rucksack.",
+        "The child fetches its backpack."
+      ]
+    ],
+    "quiz": [
+      [
+        "Jonas zeigt ___ neue Wohnung. (his)",
+        "seine",
+        "Jonas supplies sein-; feminine accusative Wohnung requires seine."
+      ],
+      [
+        "Mara verkauft ___ alten Schreibtisch. (her)",
+        "ihren",
+        "Mara supplies ihr-; masculine accusative requires ihren."
+      ],
+      [
+        "Die Nachbarn waschen ___ Auto. (their)",
+        "ihr",
+        "Plural owners use ihr-; neuter accusative Auto has no ending."
+      ],
+      [
+        "Emil hilft ___ Schwester. (his)",
+        "seiner",
+        "Sein- refers to Emil; helfen requires feminine dative seiner."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-man-and-es-exercises",
+    "title": "Man or Es? German A2 Impersonal Sentences",
+    "description": "Distinguish general statements with man from weather and fixed expressions with es. Practise third-person singular verb forms.",
+    "guide": "grammar/word-order.html",
+    "rule": "Man refers to people in general, without naming a particular person: Hier kann man Fahrräder mieten. It takes a third-person singular verb. Es occurs in weather and other impersonal expressions: Es schneit; Es ist spät. The two words have different grammatical jobs.",
+    "trap": "Man is not the noun Mann and is not a plural pronoun. Write man with one n and use a singular verb.",
+    "instructions": "Choose man for people in general or es for the weather/fixed impersonal expression.",
+    "examples": [
+      [
+        "Hier kann man Fahrräder mieten.",
+        "You can rent bicycles here."
+      ],
+      [
+        "Im Museum darf man nicht rennen.",
+        "You must not run in the museum."
+      ],
+      [
+        "Es schneit seit dem Morgen.",
+        "It has been snowing since morning."
+      ],
+      [
+        "Es ist schon nach Mitternacht.",
+        "It is already after midnight."
+      ]
+    ],
+    "quiz": [
+      [
+        "In dieser Bäckerei kann ___ frühstücken.",
+        "man",
+        "The statement refers to people in general."
+      ],
+      [
+        "Heute regnet ___ ununterbrochen.",
+        "es",
+        "Regnen uses impersonal es as its subject."
+      ],
+      [
+        "Darf ___ hier parken?",
+        "man",
+        "The question asks what people in general are allowed to do."
+      ],
+      [
+        "___ ist zu spät für einen Anruf.",
+        "Es",
+        "The fixed time expression is Es ist zu spät."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-welcher-question-words-exercises",
+    "title": "Welcher, Welche, Welches: German A2 Practice",
+    "description": "Inflect welcher in nominative, accusative and dative questions. Practise selecting a known item with gender and case cues.",
+    "guide": "grammar/w-fragen.html",
+    "rule": "Welch- asks which item or person is meant and usually takes endings like a definite article: welcher Zug, welche Tasche, welches Buch. Its ending depends on case, gender and number. Compare nominative welcher Bus with accusative welchen Bus and dative mit welchem Bus.",
+    "trap": "Do not choose the ending only from gender. The same masculine noun needs welcher as subject, welchen as direct object and welchem after mit.",
+    "instructions": "Write the complete form of welch- required before the noun. Use a capital letter at the start of each question.",
+    "examples": [
+      [
+        "Welcher Zug fährt nach Essen?",
+        "Which train goes to Essen?"
+      ],
+      [
+        "Welche Tasche gehört dir?",
+        "Which bag belongs to you?"
+      ],
+      [
+        "Welches Buch möchtest du ausleihen?",
+        "Which book would you like to borrow?"
+      ],
+      [
+        "Mit welchem Bus fährst du zur Arbeit?",
+        "Which bus do you take to work?"
+      ]
+    ],
+    "quiz": [
+      [
+        "___ Schlüssel passt in das Schloss? (der)",
+        "Welcher",
+        "Schlüssel is a masculine nominative subject."
+      ],
+      [
+        "___ Film sehen wir heute? (der)",
+        "Welchen",
+        "Film is a masculine accusative direct object."
+      ],
+      [
+        "___ Jacke gefällt dir? (die)",
+        "Welche",
+        "Jacke is a feminine nominative subject of gefällt."
+      ],
+      [
+        "Mit ___ Fahrrad kommst du? (das)",
+        "welchem",
+        "Mit requires dative; neuter welch- becomes welchem."
+      ]
+    ]
+  },
+  {
+    "level": "a2",
+    "slug": "a2-etwas-nichts-jemand-niemand-exercises",
+    "title": "Etwas, Nichts, Jemand, Niemand: A2 Exercises",
+    "description": "Choose indefinite pronouns for people and things. Practise something, nothing, someone and no one with explicit meaning cues.",
+    "guide": "grammar/indefinitpronomen.html",
+    "rule": "Etwas and nichts normally refer to things or content: Ich möchte etwas trinken; Ich höre nichts. Jemand and niemand refer to people: Jemand klingelt; Niemand antwortet. Jemand and niemand can receive case endings, but the nominative forms in this exercise remain unchanged.",
+    "trap": "Use nichts for no thing, and niemand for no person. They are not interchangeable just because both make a negative statement.",
+    "instructions": "Choose etwas, nichts, jemand or niemand according to the English meaning cue in brackets.",
+    "examples": [
+      [
+        "Ich möchte etwas Warmes trinken.",
+        "I would like to drink something warm."
+      ],
+      [
+        "Im leeren Zimmer höre ich nichts.",
+        "I hear nothing in the empty room."
+      ],
+      [
+        "Jemand klingelt an der Haustür.",
+        "Someone rings the doorbell."
+      ],
+      [
+        "Niemand wartet vor dem Schalter.",
+        "No one is waiting at the counter."
+      ]
+    ],
+    "quiz": [
+      [
+        "___ hat seinen Schal vergessen. (someone)",
+        "Jemand",
+        "Jemand refers to an unspecified person."
+      ],
+      [
+        "Im Kühlschrank ist ___ mehr. (nothing)",
+        "nichts",
+        "Nichts refers to no thing, here the absence of food."
+      ],
+      [
+        "Ich muss dir ___ erzählen. (something)",
+        "etwas",
+        "Etwas introduces unspecified information."
+      ],
+      [
+        "___ kennt die richtige Nummer. (no one)",
+        "Niemand",
+        "Niemand means that no person knows it."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-futur-werden-infinitive-exercises",
+    "title": "Futur I with Werden: German B1 Exercises",
+    "description": "Build Futur I with werden and a final infinitive. Practise predictions and plans while distinguishing future forms from passive voice.",
+    "guide": "grammar/futur-1.html",
+    "rule": "Futur I combines a present-tense form of werden with a bare infinitive at the end: Die Lieferung wird morgen ankommen. The auxiliary agrees with the subject. German also uses the present for many future plans; Futur I is one option, not a requirement whenever tomorrow appears.",
+    "trap": "Werden + infinitive forms Futur I; werden + past participle can form a passive. Do not replace ankommen with angekommen in this future pattern.",
+    "instructions": "Use the present-tense form of werden to complete Futur I. Keep the final infinitive.",
+    "examples": [
+      [
+        "Die Lieferung wird morgen ankommen.",
+        "The delivery will arrive tomorrow."
+      ],
+      [
+        "Wir werden den Vertrag nächste Woche prüfen.",
+        "We will check the contract next week."
+      ],
+      [
+        "Du wirst die Adresse bald finden.",
+        "You will find the address soon."
+      ],
+      [
+        "Ihr werdet den Unterschied merken.",
+        "You all will notice the difference."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ dich am Sonntag besuchen. (werden)",
+        "werde",
+        "Ich takes werde; besuchen stays at the end."
+      ],
+      [
+        "Der Laden ___ bald schließen. (werden)",
+        "wird",
+        "A singular subject takes wird."
+      ],
+      [
+        "Ihr ___ die Ergebnisse später bekommen. (werden)",
+        "werdet",
+        "The ihr form is werdet."
+      ],
+      [
+        "Wir ___ im Juni umziehen. (werden)",
+        "werden",
+        "Wir takes werden in the present-tense auxiliary slot."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-plusquamperfekt-forms-exercises",
+    "title": "Plusquamperfekt: German B1 Past-Perfect Practice",
+    "description": "Form the German past perfect with hatte or war plus a participle. Show which event had already happened before another past event.",
+    "guide": "grammar/plusquamperfekt.html",
+    "rule": "The Plusquamperfekt places an event before another past reference point. Use Präteritum of haben or sein plus Partizip II: Der Zug war schon abgefahren, als ich ankam. Choose the same auxiliary family as in the Perfekt: ist gefahren → war gefahren; hat gelesen → hatte gelesen.",
+    "trap": "Do not use a present-tense auxiliary for the earlier past in this exercise. Hatte gelesen is past perfect; hat gelesen is perfect.",
+    "instructions": "Fill the gap with the simple-past form of haben or sein to build the Plusquamperfekt.",
+    "examples": [
+      [
+        "Der Zug war schon abgefahren, als ich ankam.",
+        "The train had already departed when I arrived."
+      ],
+      [
+        "Sina hatte den Bericht vor dem Gespräch gelesen.",
+        "Sina had read the report before the conversation."
+      ],
+      [
+        "Wir waren schon eingeschlafen, als das Telefon klingelte.",
+        "We had already fallen asleep when the phone rang."
+      ],
+      [
+        "Ihr hattet die Karten rechtzeitig reserviert.",
+        "You had reserved the tickets in time."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich ___ die E-Mail schon geschickt, als er anrief.",
+        "hatte",
+        "Schicken uses haben; the ich past form is hatte."
+      ],
+      [
+        "Die Gäste ___ bereits gegangen, als es zu regnen begann.",
+        "waren",
+        "Gehen uses sein; plural past auxiliary is waren."
+      ],
+      [
+        "Du ___ das Fenster vor dem Sturm geschlossen.",
+        "hattest",
+        "Schließen uses haben; du takes hattest."
+      ],
+      [
+        "Das Kind ___ schon aufgewacht, als wir heimkamen.",
+        "war",
+        "Aufwachen uses sein; a singular past auxiliary is war."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-nachdem-past-sequence-exercises",
+    "title": "Nachdem: German B1 Past-Sequence Exercises",
+    "description": "Connect two past events with nachdem. Practise verb-final clauses and the usual Plusquamperfekt–Präteritum sequence in narratives.",
+    "guide": "grammar/temporale-nebensaetze.html",
+    "rule": "Nachdem introduces an event completed before the main-clause event. In a past narrative, a common pattern is Plusquamperfekt in the nachdem-clause and Präteritum in the main clause: Nachdem sie bezahlt hatte, verließ sie das Café. The finite auxiliary goes to the end of the subordinate clause.",
+    "trap": "A fronted nachdem-clause fills the first main-clause position: Nachdem sie bezahlt hatte, verließ sie …, not sie verließ immediately after the comma.",
+    "instructions": "Use the verb cue and tense in brackets. Each nachdem-clause describes the earlier completed event.",
+    "examples": [
+      [
+        "Nachdem sie bezahlt hatte, verließ sie das Café.",
+        "After she had paid, she left the café."
+      ],
+      [
+        "Nachdem wir gelandet waren, holten wir unser Gepäck.",
+        "After we had landed, we collected our luggage."
+      ],
+      [
+        "Er rief an, nachdem er die Nachricht gelesen hatte.",
+        "He called after he had read the message."
+      ],
+      [
+        "Nachdem der Schnee geschmolzen war, wurden die Wege frei.",
+        "After the snow had melted, the paths became clear."
+      ]
+    ],
+    "quiz": [
+      [
+        "Nachdem ich gegessen ___, ging ich spazieren. (haben, Plusquamperfekt)",
+        "hatte",
+        "The earlier completed meal uses hatte gegessen, with hatte at the clause end."
+      ],
+      [
+        "Nachdem der Bus angekommen war, ___ wir ein. (steigen, Präteritum)",
+        "stiegen",
+        "The later main action uses stiegen, immediately after the fronted clause."
+      ],
+      [
+        "Sie lächelte, nachdem sie den Brief gelesen ___. (haben, Plusquamperfekt)",
+        "hatte",
+        "Lesen uses haben; singular past auxiliary is hatte."
+      ],
+      [
+        "Nachdem die Besucher gegangen ___, räumten wir auf. (sein, Plusquamperfekt)",
+        "waren",
+        "Gehen uses sein; the plural past auxiliary is waren."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-bevor-waehrend-time-exercises",
+    "title": "Bevor and Während: German B1 Time-Clause Practice",
+    "description": "Choose bevor for an earlier main action and während for simultaneous actions. Practise temporal clauses with the finite verb at the end.",
+    "guide": "grammar/temporale-nebensaetze.html",
+    "rule": "Bevor means before and introduces an event later than the main-clause action: Ruf mich an, bevor du losfährst. Während can link events happening at the same time: Während ich bügle, hört er einen Podcast. Both are subordinating conjunctions and put the finite verb at the end.",
+    "trap": "For this lesson, während expresses time. It can also express contrast in other contexts, so read the whole sentence rather than translating it mechanically.",
+    "instructions": "Use bevor for before and während for simultaneous while; conjugate the verb where a verb cue is supplied.",
+    "examples": [
+      [
+        "Ruf mich an, bevor du losfährst.",
+        "Call me before you set off."
+      ],
+      [
+        "Während ich bügle, hört er einen Podcast.",
+        "While I iron, he listens to a podcast."
+      ],
+      [
+        "Wir prüfen die Adresse, bevor wir das Paket schicken.",
+        "We check the address before sending the parcel."
+      ],
+      [
+        "Während die Kinder malen, bereitet Eva das Essen vor.",
+        "While the children draw, Eva prepares the food."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich speichere die Datei, ___ ich das Programm schließe. (before)",
+        "bevor",
+        "Saving happens before closing the program."
+      ],
+      [
+        "___ sie kocht, deckt er den Tisch. (at the same time)",
+        "Während",
+        "The two actions happen simultaneously."
+      ],
+      [
+        "Warte hier, bevor du die Straße ___. (überqueren, present)",
+        "überquerst",
+        "Du takes überquerst, and the finite verb closes the bevor-clause."
+      ],
+      [
+        "Während der Drucker arbeitet, ___ ich die Unterlagen. (sortieren, present)",
+        "sortiere",
+        "The finite verb of the main clause follows the fronted subordinate clause."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-bis-seitdem-time-exercises",
+    "title": "Bis and Seitdem: German B1 Time Clauses",
+    "description": "Distinguish an endpoint with bis from a starting point with seitdem. Practise finite time clauses and verb position with clear meaning cues.",
+    "guide": "grammar/temporale-nebensaetze.html",
+    "rule": "Bis introduces a clause that sets the endpoint of a situation: Wir bleiben hier, bis der Regen aufhört. Seitdem introduces a starting event after which a situation continues: Seitdem er hier wohnt, fährt er mit dem Rad. In both clause types, the finite verb goes to the end.",
+    "trap": "Distinguish a clause from a noun phrase: seit Montag uses a preposition; seitdem der Kurs begonnen hat introduces a clause with its own verb.",
+    "instructions": "Choose bis for until or seitdem for since; use the supplied verb cue in the other gaps.",
+    "examples": [
+      [
+        "Wir bleiben hier, bis der Regen aufhört.",
+        "We stay here until the rain stops."
+      ],
+      [
+        "Seitdem er hier wohnt, fährt er mit dem Rad.",
+        "Since he has lived here, he has cycled."
+      ],
+      [
+        "Ich lese, bis meine Augen müde werden.",
+        "I read until my eyes get tired."
+      ],
+      [
+        "Seitdem die Brücke offen ist, ist der Weg kürzer.",
+        "Since the bridge has been open, the route has been shorter."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir warten, ___ alle Gäste da sind. (until)",
+        "bis",
+        "The arrival of all guests marks the endpoint of waiting."
+      ],
+      [
+        "___ sie in Hamburg lebt, besucht sie oft den Hafen. (since)",
+        "Seitdem",
+        "The move/start of living there is the starting point."
+      ],
+      [
+        "Ich bleibe, bis du fertig ___. (sein, present)",
+        "bist",
+        "The subject du requires bist at the clause end."
+      ],
+      [
+        "Seitdem er hier arbeitet, ___ er mit der Bahn. (fahren, present)",
+        "fährt",
+        "Er takes fährt; the main verb follows the fronted time clause."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-wenn-falls-conditions-exercises",
+    "title": "Wenn and Falls: German B1 Conditional Practice",
+    "description": "Build real or open conditions with wenn and falls. Practise conditional verb order without treating every wenn-clause as a time clause.",
+    "guide": "grammar/word-order.html",
+    "rule": "Wenn can introduce an open condition: Wenn der Laden offen ist, kaufen wir Brot. Falls often means in case or if, highlighting that the condition may occur. Both use subordinate-clause verb-final order. A fronted conditional clause is followed immediately by the main-clause finite verb.",
+    "trap": "Wenn and falls are often both possible for an open condition. The exercise supplies a connector or meaning cue instead of pretending that context always forces one.",
+    "instructions": "Conjugate the verb in brackets in the present tense. The conditional connector is already given.",
+    "examples": [
+      [
+        "Wenn der Laden offen ist, kaufen wir Brot.",
+        "If the shop is open, we buy bread."
+      ],
+      [
+        "Falls du Fragen hast, schreib mir.",
+        "If you have questions, write to me."
+      ],
+      [
+        "Wir gehen zu Fuß, wenn das Wetter trocken bleibt.",
+        "We walk if the weather stays dry."
+      ],
+      [
+        "Falls der Plan sich ändert, sage ich Bescheid.",
+        "If the plan changes, I will let you know."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wenn das Museum offen ___, gehen wir hinein. (sein)",
+        "ist",
+        "The singular finite verb ist closes the conditional clause."
+      ],
+      [
+        "Falls du Hilfe ___, ruf mich an. (brauchen)",
+        "brauchst",
+        "Du takes brauchst in present tense."
+      ],
+      [
+        "Wenn wir früher kommen, ___ wir einen besseren Platz. (bekommen)",
+        "bekommen",
+        "The finite main verb follows the fronted condition."
+      ],
+      [
+        "Ich nehme den Schirm mit, falls es ___. (regnen)",
+        "regnet",
+        "Regnet is finite and closes the falls-clause."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-unreal-conditions-konjunktiv-ii-exercises",
+    "title": "Unreal Conditions: German B1 Konjunktiv II Practice",
+    "description": "Express imaginary present situations with hätte, wäre and würde. Practise complete if-clauses and distinguish them from polite requests.",
+    "guide": "grammar/konjunktiv-2.html",
+    "rule": "For an unreal or imagined present condition, use Konjunktiv II: Wenn ich mehr Urlaub hätte, würde ich länger bleiben. Haben and sein commonly use hätte and wäre; many other verbs use würde + infinitive. The condition and result describe an imagined situation, not a confirmed fact.",
+    "trap": "Do not use würde with every verb indiscriminately. Hätte and wäre are the usual simple forms of haben and sein in these patterns.",
+    "instructions": "Use Konjunktiv II of the verb in brackets. Where an infinitive is already present, supply the correct würde form.",
+    "examples": [
+      [
+        "Wenn ich mehr Urlaub hätte, würde ich länger bleiben.",
+        "If I had more leave, I would stay longer."
+      ],
+      [
+        "Wäre der Weg kürzer, könnten wir zu Fuß gehen.",
+        "If the route were shorter, we could walk."
+      ],
+      [
+        "An deiner Stelle würde ich zuerst anrufen.",
+        "In your place I would call first."
+      ],
+      [
+        "Wenn wir früher fertig wären, hätten wir Zeit für einen Spaziergang.",
+        "If we finished earlier, we would have time for a walk."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wenn er ein Fahrrad ___, käme er schneller an. (haben)",
+        "hätte",
+        "Hätte is Konjunktiv II of haben for er."
+      ],
+      [
+        "Wenn du hier ___, wäre es leichter. (sein)",
+        "wärst",
+        "Du requires wärst."
+      ],
+      [
+        "Wir ___ gern am Meer wohnen. (werden, Konjunktiv II)",
+        "würden",
+        "Wir takes würden before the final infinitive wohnen."
+      ],
+      [
+        "Wenn ich Zeit hätte, ___ ich dir helfen. (werden, Konjunktiv II)",
+        "würde",
+        "Ich takes würde in the imagined result clause."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-ohne-zu-statt-zu-exercises",
+    "title": "Ohne Zu and Statt Zu: German B1 Infinitive Practice",
+    "description": "Use ohne ... zu for an omitted accompanying action and statt ... zu for a replacement. Practise infinitives with a shared subject.",
+    "guide": "grammar/infinitiv-mit-zu.html",
+    "rule": "Ohne … zu describes an action that does not accompany the main action: Sie ging, ohne etwas zu sagen. Statt … zu contrasts the main action with an alternative: Statt zu kochen, bestellten wir Pizza. The understood subject of the infinitive is normally the subject of the main clause.",
+    "trap": "If the two actions need different explicit subjects, an infinitive clause may not fit; a finite clause such as ohne dass … can make the actors clear.",
+    "instructions": "Choose ohne or statt from the English cue, or supply zu where the construction requires it.",
+    "examples": [
+      [
+        "Sie ging, ohne etwas zu sagen.",
+        "She left without saying anything."
+      ],
+      [
+        "Statt zu kochen, bestellten wir Pizza.",
+        "Instead of cooking, we ordered pizza."
+      ],
+      [
+        "Er arbeitet weiter, ohne eine Pause zu machen.",
+        "He continues working without taking a break."
+      ],
+      [
+        "Statt den Bus zu nehmen, liefen sie durch den Park.",
+        "Instead of taking the bus, they walked through the park."
+      ]
+    ],
+    "quiz": [
+      [
+        "Er ging hinaus, ___ die Tür zu schließen. (without)",
+        "ohne",
+        "Ohne … zu means that closing the door did not accompany leaving."
+      ],
+      [
+        "___ lange zu warten, rief sie im Büro an. (instead of)",
+        "Statt",
+        "Statt … zu introduces the action replaced by calling."
+      ],
+      [
+        "Sie hörte zu, ohne etwas ___ sagen.",
+        "zu",
+        "The infinitive construction requires zu before sagen."
+      ],
+      [
+        "Statt im Hotel ___ bleiben, besuchten wir das Museum.",
+        "zu",
+        "The infinitive bleiben is introduced by zu."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-zu-with-separable-verbs-exercises",
+    "title": "Zu with Separable Verbs: German B1 Exercises",
+    "description": "Place zu inside separable infinitives such as anzurufen and aufzuräumen. Compare ordinary infinitives with modal-verb exceptions.",
+    "guide": "grammar/infinitiv-mit-zu.html",
+    "rule": "In a zu-infinitive with a separable verb, insert zu between the prefix and the verb: anrufen → anzurufen, aufräumen → aufzuräumen. An inseparable verb keeps zu separate: zu besuchen. Whether a clause needs zu depends on its grammatical construction.",
+    "trap": "Modal verbs normally take a bare infinitive: Ich muss anrufen, not Ich muss anzurufen. This lesson uses constructions that do require zu.",
+    "instructions": "Write the complete infinitive with zu for the verb in brackets.",
+    "examples": [
+      [
+        "Ich versuche, morgen früher aufzustehen.",
+        "I am trying to get up earlier tomorrow."
+      ],
+      [
+        "Sie hat vergessen, die Milch einzukaufen.",
+        "She forgot to buy the milk."
+      ],
+      [
+        "Wir planen, unsere Freunde einzuladen.",
+        "We plan to invite our friends."
+      ],
+      [
+        "Es ist wichtig, die Nummer aufzuschreiben.",
+        "It is important to write down the number."
+      ]
+    ],
+    "quiz": [
+      [
+        "Bitte denk daran, mich ___. (anrufen)",
+        "anzurufen",
+        "Insert zu after the separable prefix an-."
+      ],
+      [
+        "Er hat keine Zeit, das Zimmer ___. (aufräumen)",
+        "aufzuräumen",
+        "Zu belongs between auf- and räumen."
+      ],
+      [
+        "Wir hoffen, am Spiel ___. (teilnehmen)",
+        "teilzunehmen",
+        "The separable prefix teil- comes before zu."
+      ],
+      [
+        "Sie versucht, die Datei ___. (herunterladen)",
+        "herunterzuladen",
+        "Put zu between herunter- and laden."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-accusative-dative-object-order-exercises",
+    "title": "German Object Order: B1 Dative and Accusative Practice",
+    "description": "Practise common neutral order for two objects: dative noun before accusative noun, accusative pronoun before dative pronoun.",
+    "guide": "grammar/word-order.html",
+    "rule": "In a neutral sentence with two noun objects, the dative commonly precedes the accusative: Ich gebe dem Nachbarn den Schlüssel. When both are unstressed personal pronouns, the accusative usually comes first: Ich gebe ihn ihm. A pronoun also commonly precedes a full noun object.",
+    "trap": "Emphasis and context can change object order. These questions explicitly ask for the neutral, unstressed pattern, not every possible word order.",
+    "instructions": "Complete the neutral sentence with the pronoun specified in brackets. Use the other object to identify the pattern.",
+    "examples": [
+      [
+        "Ich gebe dem Nachbarn den Schlüssel.",
+        "I give the neighbour the key."
+      ],
+      [
+        "Ich gebe ihn ihm.",
+        "I give it to him."
+      ],
+      [
+        "Sie zeigt dem Kunden die Zeichnung.",
+        "She shows the customer the drawing."
+      ],
+      [
+        "Sie zeigt sie ihm.",
+        "She shows it to him."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ich schicke es ___. (to her, neutral pronoun order)",
+        "ihr",
+        "The accusative pronoun es precedes the dative pronoun ihr."
+      ],
+      [
+        "Wir erklären ___ dem Gast. (it = das Problem)",
+        "es",
+        "The accusative pronoun es normally comes before the full dative noun."
+      ],
+      [
+        "Er gibt ___ das Heft. (to me)",
+        "mir",
+        "The dative pronoun mir comes before the full accusative noun."
+      ],
+      [
+        "Sie zeigt sie ___. (to us, both objects are pronouns)",
+        "uns",
+        "The accusative sie comes before the dative uns in the neutral order."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-fixed-verb-prepositions-exercises",
+    "title": "Verbs with Fixed Prepositions: German B1 Practice",
+    "description": "Learn verb, preposition and case together: teilnehmen an, sich freuen auf, abhängen von and sich bewerben um, with explained exercises.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "rule": "Some verbs select a particular preposition and case: teilnehmen an + dative, sich freuen auf + accusative, abhängen von + dative. Learn the complete combination with an example. The ordinary location/destination rules for a preposition do not automatically decide the case in a fixed verb phrase.",
+    "trap": "Do not choose a preposition by translating the English verb alone. Sich bewerben um eine Stelle is a fixed application phrase.",
+    "instructions": "Choose the fixed preposition for the verb. Articles and pronouns already show the intended case.",
+    "examples": [
+      [
+        "Mira nimmt an einem Sprachkurs teil.",
+        "Mira attends a language course."
+      ],
+      [
+        "Wir freuen uns auf den Feiertag.",
+        "We look forward to the holiday."
+      ],
+      [
+        "Der Preis hängt von der Größe ab.",
+        "The price depends on the size."
+      ],
+      [
+        "Er bewirbt sich um eine Stelle im Hotel.",
+        "He applies for a job at the hotel."
+      ]
+    ],
+    "quiz": [
+      [
+        "Sie nimmt ___ der Besprechung teil.",
+        "an",
+        "Teilnehmen selects an + dative."
+      ],
+      [
+        "Ich freue mich ___ den Ausflug morgen.",
+        "auf",
+        "Sich freuen auf describes anticipation of a future event."
+      ],
+      [
+        "Das Ergebnis hängt ___ deiner Vorbereitung ab.",
+        "von",
+        "Abhängen selects von + dative."
+      ],
+      [
+        "Er bewirbt sich ___ einen Ausbildungsplatz.",
+        "um",
+        "Sich bewerben um names the position sought."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-da-compounds-exercises",
+    "title": "Darauf, Dafür, Daran: German B1 Da-Compound Practice",
+    "description": "Refer back to things and ideas with da(r)-compounds. Contrast darauf with auf ihn and practise the preposition selected by each verb.",
+    "guide": "grammar/verben-mit-praepositionen.html",
+    "rule": "Da(r)-compounds combine da with a preposition to refer to a thing, event or idea: Ich freue mich darauf. Add r before a vowel: da + an → daran, da + über → darüber. For a person, normally use a personal pronoun after the preposition: Ich warte auf ihn.",
+    "trap": "Do not use a da-compound simply because English says it. First identify the German verb’s preposition and whether the reference is a thing/idea or a person.",
+    "instructions": "Complete the sentence with the da(r)-compound matching the preposition given in brackets.",
+    "examples": [
+      [
+        "Der Ausflug ist morgen. Ich freue mich darauf.",
+        "The outing is tomorrow. I look forward to it."
+      ],
+      [
+        "Wir haben einen Plan. Wir sprechen darüber.",
+        "We have a plan. We talk about it."
+      ],
+      [
+        "Sie denkt an den Termin. Sie denkt daran.",
+        "She thinks about the appointment. She thinks about it."
+      ],
+      [
+        "Der Stift ist neu. Ich schreibe damit.",
+        "The pen is new. I write with it."
+      ]
+    ],
+    "quiz": [
+      [
+        "Das Konzert beginnt bald. Wir warten ___. (auf)",
+        "darauf",
+        "Da + auf inserts r: darauf."
+      ],
+      [
+        "Es gibt eine Lösung. Wir sprechen ___. (über)",
+        "darüber",
+        "Da + über becomes darüber."
+      ],
+      [
+        "Du hast mich erinnert. Danke ___. (für)",
+        "dafür",
+        "Da + für becomes dafür, with no inserted r."
+      ],
+      [
+        "Der Termin ist wichtig. Denk bitte ___. (an)",
+        "daran",
+        "Da + an inserts r: daran."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-relative-clauses-dative-exercises",
+    "title": "Dative Relative Pronouns: German B1 Exercises",
+    "description": "Choose dem, der and denen from the role inside a relative clause. Practise dative verbs rather than guessing from the main clause.",
+    "guide": "grammar/relativsaetze.html",
+    "rule": "A relative pronoun takes the case required inside its own clause. With a dative verb such as helfen, masculine and neuter use dem, feminine uses der and plural uses denen: die Frau, der ich helfe. The antecedent supplies gender and number, not the relative pronoun’s case.",
+    "trap": "Do not copy the main-clause article mechanically: Ich sehe die Frau, der ich helfe uses accusative die outside and dative der inside.",
+    "instructions": "Use the dative relative pronoun required by the relative-clause verb.",
+    "examples": [
+      [
+        "Die Frau, der ich helfe, wohnt nebenan.",
+        "The woman I help lives next door."
+      ],
+      [
+        "Das Kind, dem das Fahrrad gehört, heißt Oskar.",
+        "The child the bicycle belongs to is called Oskar."
+      ],
+      [
+        "Der Mann, dem wir danken, ist unser Nachbar.",
+        "The man we thank is our neighbour."
+      ],
+      [
+        "Die Gäste, denen das Essen schmeckt, lächeln.",
+        "The guests who like the food are smiling."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Student, ___ ich helfe, lernt Chemie.",
+        "dem",
+        "Helfen requires dative; Student is masculine singular."
+      ],
+      [
+        "Die Kollegin, ___ wir danken, ist heute frei.",
+        "der",
+        "Danken requires feminine dative der."
+      ],
+      [
+        "Das Mädchen, ___ die Jacke gehört, wartet draußen.",
+        "dem",
+        "Mädchen is grammatically neuter; gehören requires dative."
+      ],
+      [
+        "Die Leute, ___ wir antworten, haben Fragen.",
+        "denen",
+        "Antworten requires dative; plural relative pronoun is denen."
+      ]
+    ]
+  },
+  {
+    "level": "b1",
+    "slug": "b1-adjectives-as-nouns-exercises",
+    "title": "Adjectives as Nouns: German B1 Ending Practice",
+    "description": "Capitalise adjectives used as nouns and keep their endings. Compare der Deutsche, ein Deutscher, die Angestellte and etwas Neues.",
+    "guide": "grammar/adjektivdeklination.html",
+    "rule": "An adjective used as a noun is capitalised and still follows adjective declension: der Deutsche, ein Deutscher, die Angestellte. Article, case, gender and number determine the ending. After etwas or nichts, a neuter nominalised adjective commonly has -es: etwas Neues, nichts Wichtiges.",
+    "trap": "Capitalisation does not turn every nominalised adjective into a fixed noun form. Compare der Kranke with ein Kranker and mit einem Kranken.",
+    "instructions": "Write the nominalised adjective in brackets with a capital letter and the correct ending.",
+    "examples": [
+      [
+        "Der Deutsche spricht mit der Ärztin.",
+        "The German man speaks with the doctor."
+      ],
+      [
+        "Eine Angestellte zeigt uns den Weg.",
+        "An employee shows us the way."
+      ],
+      [
+        "Wir helfen den Kranken.",
+        "We help the sick people."
+      ],
+      [
+        "Ich möchte etwas Neues ausprobieren.",
+        "I would like to try something new."
+      ]
+    ],
+    "quiz": [
+      [
+        "Ein ___ wartet vor der Tür. (deutsch, male person)",
+        "Deutscher",
+        "Masculine nominative after ein requires -er; the noun is capitalised."
+      ],
+      [
+        "Die ___ hilft dem Kunden. (angestellt, female person)",
+        "Angestellte",
+        "Feminine nominative after die takes -e."
+      ],
+      [
+        "Er erzählt nichts ___. (wichtig)",
+        "Wichtiges",
+        "After nichts, the nominalised neuter adjective takes -es."
+      ],
+      [
+        "Wir sprechen mit einem ___. (krank, male person)",
+        "Kranken",
+        "Dative after einem takes -en, with a capital initial."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-passive-perfect-tense-exercises",
+    "title": "German Passive in Perfekt: B2 Exercises",
+    "description": "Form the German perfect passive with sein, a past participle and worden. Distinguish worden from geworden in explained examples.",
+    "guide": "grammar/passiv.html",
+    "rule": "The process passive in Perfekt combines a present-tense form of sein, the lexical past participle and worden: Die Rechnung ist bezahlt worden. Worden is the special participle of the passive auxiliary werden. It differs from geworden when werden means to become.",
+    "trap": "Do not use geworden for this passive construction: Die Rechnung ist bezahlt worden. Compare Sie ist Ärztin geworden, where werden means become.",
+    "instructions": "Complete the perfect process passive with sein or worden as required. Use the cue in brackets.",
+    "examples": [
+      [
+        "Die Rechnung ist gestern bezahlt worden.",
+        "The invoice was paid yesterday."
+      ],
+      [
+        "Die Dokumente sind digital gespeichert worden.",
+        "The documents have been saved digitally."
+      ],
+      [
+        "Der Eingang ist neu gestrichen worden.",
+        "The entrance has been repainted."
+      ],
+      [
+        "Wir sind rechtzeitig benachrichtigt worden.",
+        "We were notified in time."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Tür ___ gestern repariert worden. (sein)",
+        "ist",
+        "A singular perfect passive takes ist as its finite auxiliary."
+      ],
+      [
+        "Die Briefe sind verschickt ___. (passive participle of werden)",
+        "worden",
+        "The passive auxiliary participle is worden, without ge-."
+      ],
+      [
+        "Die Daten ___ überprüft worden. (sein)",
+        "sind",
+        "A plural subject takes sind."
+      ],
+      [
+        "Das Formular ist ausgefüllt ___. (passive participle of werden)",
+        "worden",
+        "Ausgefüllt worden describes the completed process passive."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-modal-passive-exercises",
+    "title": "German Passive with Modal Verbs: B2 Practice",
+    "description": "Combine a modal verb with a past participle and werden. Practise muss geprüft werden and explain process passive verb order.",
+    "guide": "grammar/passiv.html",
+    "rule": "A present-tense process passive with a modal uses the finite modal plus a past participle and the infinitive werden: Der Antrag muss geprüft werden. The finite modal agrees with the subject, while the passive infinitive group closes the main clause.",
+    "trap": "Do not replace final werden with a conjugated form: Der Antrag muss geprüft wird is incorrect. The modal already carries tense and subject agreement.",
+    "instructions": "Use the present-tense modal form or final passive infinitive requested in brackets.",
+    "examples": [
+      [
+        "Der Antrag muss sorgfältig geprüft werden.",
+        "The application must be checked carefully."
+      ],
+      [
+        "Diese Geräte dürfen nur drinnen benutzt werden.",
+        "These devices may only be used indoors."
+      ],
+      [
+        "Die Bescheinigung kann per Post verschickt werden.",
+        "The certificate can be sent by post."
+      ],
+      [
+        "Alle Fenster sollen heute geputzt werden.",
+        "All windows are supposed to be cleaned today."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Aufgabe ___ bis Freitag erledigt werden. (müssen)",
+        "muss",
+        "A singular subject takes muss; erledigt werden is the passive infinitive."
+      ],
+      [
+        "Die Formulare ___ online ausgefüllt werden. (können)",
+        "können",
+        "The plural subject takes können."
+      ],
+      [
+        "Das Licht soll ausgeschaltet ___. (passive infinitive)",
+        "werden",
+        "The process passive ends with participle + werden."
+      ],
+      [
+        "Die Räume ___ nicht betreten werden. (dürfen)",
+        "dürfen",
+        "The plural modal form is dürfen; dürfen nicht expresses a prohibition."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-state-passive-sein-exercises",
+    "title": "Zustandspassiv with Sein: German B2 Exercises",
+    "description": "Describe a resulting state with sein plus a participle. Compare Die Tür ist geschlossen with the process Die Tür wird geschlossen.",
+    "guide": "grammar/passiv.html",
+    "rule": "Sein + a past participle can describe a resulting state: Die Tür ist geschlossen. This Zustandspassiv focuses on the state, while werden + participle describes a process: Die Tür wird geschlossen. The same visible result can be discussed from either viewpoint, depending on context.",
+    "trap": "Do not treat ist geöffnet and wird geöffnet as interchangeable in focus. One describes a state; the other presents an opening process.",
+    "instructions": "Use sein in the present tense. The cue explicitly asks for the resulting state, not the process.",
+    "examples": [
+      [
+        "Die Koffer sind schon gepackt.",
+        "The suitcases are already packed."
+      ],
+      [
+        "Der Tisch ist festlich gedeckt.",
+        "The table is set for a celebration."
+      ],
+      [
+        "Die Plätze sind seit gestern reserviert.",
+        "The seats have been reserved since yesterday."
+      ],
+      [
+        "Das Fenster ist noch geöffnet.",
+        "The window is still open."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Eingang ___ seit Montag gesperrt. (state, sein)",
+        "ist",
+        "A singular resulting state uses ist + participle."
+      ],
+      [
+        "Die Türen ___ bereits geschlossen. (state, sein)",
+        "sind",
+        "A plural state uses sind."
+      ],
+      [
+        "Das Licht ___ noch eingeschaltet. (state, sein)",
+        "ist",
+        "Ist eingeschaltet describes the current state of the light."
+      ],
+      [
+        "Die Unterlagen ___ fertig sortiert. (state, sein)",
+        "sind",
+        "The plural subject takes sind for the resulting sorted state."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-sein-zu-infinitive-exercises",
+    "title": "Sein + Zu + Infinitive: German B2 Practice",
+    "description": "Express necessity or possibility with sein + zu + infinitive. Practise formal passive alternatives and interpret their context.",
+    "guide": "grammar/passiv.html",
+    "rule": "Sein + zu + infinitive can express a passive-like necessity or possibility: Der Betrag ist bis Freitag zu zahlen means it must be paid by Friday. Das Schild ist kaum zu lesen means it can hardly be read. Context decides the modal meaning; the surface pattern alone does not always do so.",
+    "trap": "Do not automatically translate every ist zu as must. Words such as leicht or kaum often suggest possibility rather than an obligation.",
+    "instructions": "Conjugate sein in the present tense, or supply zu before the infinitive where requested.",
+    "examples": [
+      [
+        "Der Betrag ist bis Freitag zu zahlen.",
+        "The amount must be paid by Friday."
+      ],
+      [
+        "Das Schild ist kaum zu lesen.",
+        "The sign can hardly be read."
+      ],
+      [
+        "Die Regeln sind unbedingt zu beachten.",
+        "The rules must be observed."
+      ],
+      [
+        "Der Fehler ist leicht zu finden.",
+        "The error is easy to find."
+      ]
+    ],
+    "quiz": [
+      [
+        "Die Gebühren ___ bis Monatsende zu zahlen. (sein)",
+        "sind",
+        "Plural Gebühren takes sind; the deadline suggests necessity."
+      ],
+      [
+        "Der Text ist gut ___ verstehen. (infinitive marker)",
+        "zu",
+        "The construction requires zu before verstehen and here expresses possibility."
+      ],
+      [
+        "Das Formular ___ vollständig auszufüllen. (sein)",
+        "ist",
+        "Singular Formular takes ist; the context describes a requirement."
+      ],
+      [
+        "Die Aufgaben ___ ohne Hilfe zu lösen. (sein)",
+        "sind",
+        "A plural subject requires sind; context can decide between possibility and necessity."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-auch-wenn-selbst-wenn-exercises",
+    "title": "Auch Wenn and Selbst Wenn: German B2 Exercises",
+    "description": "Express concessions with auch wenn and selbst wenn. Practise verb-final conditions whose result holds despite the possible obstacle.",
+    "guide": "grammar/word-order.html",
+    "rule": "Auch wenn and selbst wenn introduce a concession that can involve a possible condition: Selbst wenn es teuer wird, reparieren wir das Dach. The result still holds despite that condition. Ob can mark uncertainty in other constructions, but it does not replace wenn in these fixed concessive patterns.",
+    "trap": "Auch wenn can refer to a factual concession or an open condition. Selbst wenn often stresses even the imagined case; avoid assuming that every clause states a proven fact.",
+    "instructions": "Keep the supplied concessive connector. Conjugate the verb in brackets in the present tense.",
+    "examples": [
+      [
+        "Selbst wenn es teuer wird, reparieren wir das Dach.",
+        "Even if it becomes expensive, we will repair the roof."
+      ],
+      [
+        "Auch wenn ich wenig Zeit habe, höre ich dir zu.",
+        "Even though I have little time, I listen to you."
+      ],
+      [
+        "Wir fahren Rad, auch wenn es leicht regnet.",
+        "We cycle even if it rains lightly."
+      ],
+      [
+        "Selbst wenn alle widersprechen, bleibt die Frage offen.",
+        "Even if everyone objects, the question remains open."
+      ]
+    ],
+    "quiz": [
+      [
+        "Auch wenn sie müde ___, bleibt sie freundlich. (sein)",
+        "ist",
+        "The finite verb ist closes the concessive clause."
+      ],
+      [
+        "Selbst wenn der Bus spät kommt, ___ wir pünktlich. (starten)",
+        "starten",
+        "The main-clause finite verb follows the fronted subordinate clause."
+      ],
+      [
+        "Wir versuchen es, auch wenn es schwierig ___. (werden)",
+        "wird",
+        "Werden becomes wird with a singular subject and stands last."
+      ],
+      [
+        "Selbst wenn du anderer Meinung ___, höre bitte zu. (sein)",
+        "bist",
+        "Du takes bist at the end of the condition."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-indem-dadurch-dass-method-exercises",
+    "title": "Indem and Dadurch Dass: German B2 Method Clauses",
+    "description": "Explain how a result is achieved with indem or dadurch, dass. Practise means-and-method clauses with subordinate verb order.",
+    "guide": "grammar/word-order.html",
+    "rule": "Indem introduces the means or method used to achieve a result: Sie spart Papier, indem sie doppelseitig druckt. A related pattern is dadurch, dass: Dadurch, dass sie doppelseitig druckt, spart sie Papier. Both subordinate clauses put the finite verb at the end.",
+    "trap": "An indem-clause explains how a result is achieved, not simply why an unrelated event happened. Check that the actions form a plausible method–result relationship.",
+    "instructions": "Use the connector named in brackets or conjugate the supplied verb in the present tense.",
+    "examples": [
+      [
+        "Sie spart Papier, indem sie doppelseitig druckt.",
+        "She saves paper by printing on both sides."
+      ],
+      [
+        "Wir lernen Wörter, indem wir eigene Sätze schreiben.",
+        "We learn words by writing our own sentences."
+      ],
+      [
+        "Dadurch, dass er häufiger übt, spricht er flüssiger.",
+        "By practising more often, he speaks more fluently."
+      ],
+      [
+        "Die Firma spart Energie, indem sie die Beleuchtung erneuert.",
+        "The company saves energy by renewing the lighting."
+      ]
+    ],
+    "quiz": [
+      [
+        "Er verbessert seine Aussprache, ___ er laut liest. (use indem)",
+        "indem",
+        "Indem introduces the method used for improvement."
+      ],
+      [
+        "Dadurch, ___ wir früher losfahren, vermeiden wir den Stau.",
+        "dass",
+        "The fixed pattern is dadurch, dass plus a finite subordinate clause."
+      ],
+      [
+        "Sie spart Zeit, indem sie den Zug ___. (nehmen)",
+        "nimmt",
+        "The singular finite form nimmt closes the indem-clause."
+      ],
+      [
+        "Indem wir die Fenster schließen, ___ wir den Lärm. (verringern)",
+        "verringern",
+        "The main finite verb comes immediately after the fronted method clause."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-sodass-consequences-exercises",
+    "title": "Sodass and So ... Dass: German B2 Result Clauses",
+    "description": "Express consequences with sodass and degree results with so ... dass. Learn that sodass and so dass are valid spellings of the conjunction.",
+    "guide": "grammar/word-order.html",
+    "rule": "Sodass introduces a consequence: Es schneite stark, sodass die Straße gesperrt wurde. So dass is also a valid spelling of this conjunction. A different distribution places so with an adjective or adverb in the main clause and dass before the result: Es war so kalt, dass der See zufror.",
+    "trap": "Do not mark so dass as automatically wrong: both spellings of the result conjunction are accepted. In so kalt, dass, the two words belong to different clause positions.",
+    "instructions": "Use the spelling requested by the cue, or fill in the degree word so or the conjunction dass.",
+    "examples": [
+      [
+        "Es schneite stark, sodass die Straße gesperrt wurde.",
+        "It snowed heavily, so the road was closed."
+      ],
+      [
+        "Der Raum war so voll, dass wir draußen warten mussten.",
+        "The room was so full that we had to wait outside."
+      ],
+      [
+        "Sie sprach deutlich, sodass alle sie verstanden.",
+        "She spoke clearly, so everyone understood her."
+      ],
+      [
+        "Er lief so schnell, dass ich nicht mithalten konnte.",
+        "He ran so fast that I could not keep up."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Akku war leer, ___ das Gerät ausging. (one-word result conjunction)",
+        "sodass",
+        "Sodass introduces the consequence; so dass is also a valid spelling outside this one-word task."
+      ],
+      [
+        "Das Wasser war ___ kalt, dass niemand schwimmen wollte.",
+        "so",
+        "So intensifies kalt before the dass result clause."
+      ],
+      [
+        "Die Musik war so laut, ___ wir das Telefon nicht hörten.",
+        "dass",
+        "The result clause after the degree phrase starts with dass."
+      ],
+      [
+        "Es wurde dunkel, ___ wir das Licht einschalteten. (one-word result conjunction)",
+        "sodass",
+        "The second event is presented as a consequence."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-relative-clauses-genitive-exercises",
+    "title": "Dessen and Deren: German B2 Relative Clauses",
+    "description": "Use dessen and deren to express possession in relative clauses. Choose the form from the antecedent rather than the possessed noun.",
+    "guide": "grammar/relativsaetze.html",
+    "rule": "Genitive relative pronouns express a relationship of possession: der Autor, dessen Roman wir lesen; die Autorin, deren Roman wir lesen. Use dessen for masculine/neuter singular antecedents and deren for feminine singular or plural antecedents. The following noun normally has no additional definite article.",
+    "trap": "The choice between dessen and deren comes from the antecedent, not the gender of the following possessed noun: die Frau, deren Sohn … .",
+    "instructions": "Choose dessen or deren from the antecedent before the relative clause.",
+    "examples": [
+      [
+        "Der Autor, dessen Roman wir lesen, lebt in Wien.",
+        "The author whose novel we are reading lives in Vienna."
+      ],
+      [
+        "Die Frau, deren Sohn hier arbeitet, ist Ärztin.",
+        "The woman whose son works here is a doctor."
+      ],
+      [
+        "Das Haus, dessen Dach erneuert wird, ist alt.",
+        "The house whose roof is being renewed is old."
+      ],
+      [
+        "Die Firmen, deren Preise steigen, verlieren Kunden.",
+        "The companies whose prices are rising lose customers."
+      ]
+    ],
+    "quiz": [
+      [
+        "Der Musiker, ___ Schwester tanzt, kommt aus Graz.",
+        "dessen",
+        "The antecedent Musiker is masculine singular."
+      ],
+      [
+        "Die Schule, ___ Fenster offen sind, wird renoviert.",
+        "deren",
+        "The antecedent Schule is feminine singular, regardless of Fenster."
+      ],
+      [
+        "Das Kind, ___ Ball im Garten liegt, sucht seine Mutter.",
+        "dessen",
+        "Kind is a neuter singular antecedent."
+      ],
+      [
+        "Die Eltern, ___ Tochter singt, sitzen vorne.",
+        "deren",
+        "A plural antecedent takes deren."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-relative-clauses-was-wo-exercises",
+    "title": "Was and Wo in Relative Clauses: German B2 Practice",
+    "description": "Choose was after alles, etwas and a whole statement, and use wo for a place relation. Compare meaning with ordinary noun-relative pronouns.",
+    "guide": "grammar/relativsaetze.html",
+    "rule": "Was can introduce a relative clause after indefinite references such as alles or etwas and can refer to a whole preceding statement: Der Zug fiel aus, was uns überraschte. Wo can describe a place relation: die Stadt, wo ich studiert habe. In formal writing, in der is often preferred for a feminine place noun.",
+    "trap": "Do not use was for every ordinary concrete noun: das Buch, das ich lese. Use wo for a place relation, not as a general replacement for any relative pronoun.",
+    "instructions": "Choose was or wo. For the place questions, use the one-word place form requested by this exercise.",
+    "examples": [
+      [
+        "Alles, was du brauchst, liegt auf dem Tisch.",
+        "Everything you need is on the table."
+      ],
+      [
+        "Sie sagte etwas, was mich nachdenklich machte.",
+        "She said something that made me think."
+      ],
+      [
+        "Der Zug fiel aus, was uns überraschte.",
+        "The train was cancelled, which surprised us."
+      ],
+      [
+        "Das ist die Stadt, wo ich studiert habe.",
+        "That is the city where I studied."
+      ]
+    ],
+    "quiz": [
+      [
+        "Alles, ___ wir geplant haben, ist vorbereitet.",
+        "was",
+        "Alles is an indefinite reference followed by was."
+      ],
+      [
+        "Er kam früher, ___ niemand erwartet hatte.",
+        "was",
+        "Was refers to the whole fact that he came earlier."
+      ],
+      [
+        "Das ist der Ort, ___ wir uns kennengelernt haben. (one-word place form)",
+        "wo",
+        "Wo expresses the place relation; an dem would be a more formal two-word alternative."
+      ],
+      [
+        "Das ist etwas, ___ ich noch lernen muss.",
+        "was",
+        "An indefinite etwas can be followed by a relative clause with was."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-entweder-oder-weder-noch-exercises",
+    "title": "Entweder ... Oder and Weder ... Noch: B2 Practice",
+    "description": "Connect alternatives with entweder ... oder and negate both options with weder ... noch. Practise parallel parts without an extra nicht.",
+    "guide": "grammar/zweiteilige-konnektoren.html",
+    "rule": "Entweder … oder presents alternatives: Wir fahren entweder mit dem Zug oder mit dem Bus. Weder … noch negates both linked elements: Er trinkt weder Kaffee noch Tee. Link comparable structures, such as two noun phrases or two clauses, so that the sentence remains balanced.",
+    "trap": "Weder … noch already makes both alternatives negative. Avoid adding a redundant nicht to the same negative meaning in these simple patterns.",
+    "instructions": "Complete the paired connector. Use entweder/or oder for alternatives and weder/noch for neither option.",
+    "examples": [
+      [
+        "Wir fahren entweder mit dem Zug oder mit dem Bus.",
+        "We travel either by train or by bus."
+      ],
+      [
+        "Er trinkt weder Kaffee noch Tee.",
+        "He drinks neither coffee nor tea."
+      ],
+      [
+        "Du kannst entweder heute kommen oder morgen anrufen.",
+        "You can either come today or call tomorrow."
+      ],
+      [
+        "Sie hat weder Zeit noch Interesse.",
+        "She has neither time nor interest."
+      ]
+    ],
+    "quiz": [
+      [
+        "Wir treffen uns entweder am Montag ___ am Dienstag.",
+        "oder",
+        "Entweder pairs with oder for alternatives."
+      ],
+      [
+        "Er spricht weder Spanisch ___ Portugiesisch.",
+        "noch",
+        "Weder pairs with noch to negate both languages."
+      ],
+      [
+        "___ reservierst du jetzt, oder wir wählen ein anderes Hotel.",
+        "Entweder",
+        "Entweder introduces the first of two alternative clauses."
+      ],
+      [
+        "Sie hat ___ einen Schlüssel noch eine Karte.",
+        "weder",
+        "Weder … noch negates both possible access items."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-additive-paired-connectors-exercises",
+    "title": "Sowohl ... Als Auch: German B2 Additive Connectors",
+    "description": "Join information with sowohl ... als auch and nicht nur ... sondern auch. Practise the matching connector halves and parallel structure.",
+    "guide": "grammar/zweiteilige-konnektoren.html",
+    "rule": "Sowohl … als auch adds two elements on an equal footing: Die Wohnung hat sowohl einen Balkon als auch einen Keller. Nicht nur … sondern auch adds a second point with emphasis: Sie spricht nicht nur Deutsch, sondern auch Schwedisch. Use parallel grammatical structures on each side.",
+    "trap": "Do not mix the pairs: sowohl takes als auch, while nicht nur takes sondern auch. The comma before sondern belongs in the written sentence.",
+    "instructions": "Complete the missing word in each fixed connector pair. Use the other half as the cue.",
+    "examples": [
+      [
+        "Die Wohnung hat sowohl einen Balkon als auch einen Keller.",
+        "The flat has both a balcony and a cellar."
+      ],
+      [
+        "Sie spricht nicht nur Deutsch, sondern auch Schwedisch.",
+        "She speaks not only German but also Swedish."
+      ],
+      [
+        "Wir arbeiten sowohl online als auch vor Ort.",
+        "We work both online and on site."
+      ],
+      [
+        "Der Kurs bietet nicht nur Theorie, sondern auch praktische Aufgaben.",
+        "The course offers not only theory but also practical tasks."
+      ]
+    ],
+    "quiz": [
+      [
+        "Er liest sowohl Romane ___ auch Sachbücher.",
+        "als",
+        "Sowohl pairs with als auch."
+      ],
+      [
+        "Sie ist nicht nur pünktlich, ___ auch gut vorbereitet.",
+        "sondern",
+        "Nicht nur pairs with sondern auch."
+      ],
+      [
+        "Die App funktioniert ___ auf dem Handy als auch am Computer.",
+        "sowohl",
+        "Sowohl introduces the first parallel element."
+      ],
+      [
+        "Das Ticket gilt nicht ___ im Bus, sondern auch in der Bahn.",
+        "nur",
+        "Nicht nur is the first half of the emphatic additive pair."
+      ]
+    ]
+  },
+  {
+    "level": "b2",
+    "slug": "b2-causative-lassen-perfect-exercises",
+    "title": "Causative Lassen in Perfekt: German B2 Exercises",
+    "description": "Use the double infinitive with causative lassen in Perfekt. Compare habe reparieren lassen with habe ... gelassen without another infinitive.",
+    "guide": "grammar/modalverben.html",
+    "rule": "Causative lassen means arranging for someone else to do something: Ich lasse mein Fahrrad reparieren. In the perfect, lassen followed by another infinitive normally stays in the infinitive instead of using gelassen: Ich habe mein Fahrrad reparieren lassen. This is called an Ersatzinfinitiv.",
+    "trap": "When lassen has no dependent infinitive, gelassen is normal: Ich habe den Schlüssel zu Hause gelassen. The two constructions need different perfect forms.",
+    "instructions": "Choose lassen or gelassen. Check whether a second infinitive such as prüfen or reparieren is present.",
+    "examples": [
+      [
+        "Ich habe mein Fahrrad reparieren lassen.",
+        "I had my bicycle repaired."
+      ],
+      [
+        "Sie hat ihre Jacke reinigen lassen.",
+        "She had her jacket cleaned."
+      ],
+      [
+        "Wir haben den Motor prüfen lassen.",
+        "We had the engine checked."
+      ],
+      [
+        "Er hat seinen Koffer im Hotel gelassen.",
+        "He left his suitcase at the hotel."
+      ]
+    ],
+    "quiz": [
+      [
+        "Sie hat den Wasserhahn austauschen ___.",
+        "lassen",
+        "With the dependent infinitive austauschen, use the Ersatzinfinitiv lassen."
+      ],
+      [
+        "Wir haben die Fenster putzen ___.",
+        "lassen",
+        "The causative double-infinitive construction uses putzen lassen."
+      ],
+      [
+        "Ich habe das Buch auf dem Tisch ___.",
+        "gelassen",
+        "There is no dependent infinitive here; the past participle is gelassen."
+      ],
+      [
+        "Er hat seine Haare schneiden ___.",
+        "lassen",
+        "With schneiden, causative lassen stays in the infinitive in the perfect."
+      ]
+    ],
+    "guideLabel": "Review modal verb brackets (related grammar)"
+  }
+]

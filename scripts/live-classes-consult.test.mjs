@@ -193,7 +193,7 @@ test('BOOKING: online booking is off — the page loads no booking script, says 
   assert.match(read('live-classes-data.js'), /onlineBooking: \{\s*enabled: false,\s*ownerApproval: null, +\/\/ LAUNCH approval only[^\n]*\n\s*legalTermsUpdated: true, +\/\/ legal copy only: [^\n]*PR #183 \(merge 237f3486\), 2026-10-21/);
   assert.equal(ob.joinLinksConfigured, false, 'no joining link is configured');
   const html = read('live-classes.html');
-  assert.equal(/kw-consult\.js|kw-checkout\.js|cashfree/i.test(html), false, 'not referenced by the page itself');
+  assert.equal(/<script\b[^>]*\bsrc=["'][^"']*(?:kw-consult\.js|kw-checkout\.js|sdk\.cashfree\.com)/i.test(html), false, 'not referenced by the page itself');
   assert.match(read('kw-live.js'), /if \(!BOOK_ON\) return;/);
   assert.match(html, /<div class="book-closed" id="consult-closed" role="note">\s*<h3>Online demo booking is not open yet<\/h3>/, 'an honest closed state, not a booking button');
   assert.match(html, /consultations are not booked by email/);

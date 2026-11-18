@@ -1,0 +1,364 @@
+/* SEO practice batch (November 2026): practice datasets, hub and publication wiring. */
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const read = p => fs.readFileSync(path.join(root,p),'utf8');
+const { loadGuides, validateGuides, renderPractice, escapeHtml, CHAPTERS, PRACTICE_BATCHES, attachEditorial, relatedGuides, renderPrompt, EDITORIAL_SOURCE } = await import('./build-seo-practice.mjs');
+const guides = loadGuides();
+const sitemap = read('sitemap.xml');
+const allow = read('.github/pages-allowlist.txt').split(/\r?\n/);
+const resource = read('resources.html');
+const hub = read('practice/index.html');
+
+test('exactly 400 distinct practice lessons, eight unique learner tasks each', () => {
+  assert.equal(guides.length, 400);
+  assert.equal(new Set(guides.map(x=>x.slug)).size,400);
+  for (const g of guides) {
+    assert.equal(g.examples.length, 4, g.slug);
+    assert.equal(g.quiz.length, 4, g.slug);
+    assert.ok(g.rule.length >= 80, g.slug);
+    assert.ok(g.trap.length >= 35, g.slug);
+    assert.equal(new Set(g.quiz.map(x=>x[0])).size,4,g.slug);
+    for (const q of g.quiz) assert.ok(q.every(s=>s.length>=1),g.slug);
+  }
+});
+
+test('all practice pages publicly registered, discoverable and directly accessible from hub', () => {
+  assert.match(resource,/href="practice\/index\.html"/);
+  assert.ok(allow.includes('practice/index.html'));
+  assert.ok(sitemap.includes('<loc>https:\/\/klarweg.in\/practice\/index.html<\/loc>'));
+  for (const g of guides) {
+    const file='practice/'+g.slug+'.html';
+    const html=read(file);
+    assert.ok(allow.includes(file),file+' missing allowlist');
+    assert.ok(sitemap.includes('<loc>https:\/\/klarweg.in\/'+file+'<\/loc>'),file+' missing sitemap');
+    assert.ok(hub.includes('href="'+g.slug+'.html"'),file+' missing hub link');
+    assert.ok(html.includes('href="../'+g.guide+'"'),file+' missing source-guide link');
+    assert.equal((html.match(/<h1[\s>]/g)||[]).length,1,file+' H1');
+    assert.equal((html.match(/<details>/g)||[]).length,4,file+' answer keys');
+    assert.ok(html.includes('<link rel="canonical" href="https://klarweg.in/'+file+'">'),file+' canonical');
+    assert.doesNotMatch(html,/<meta name="robots" content="[^"]*noindex/,file+' noindex');
+  }
+});
+
+// These checks catch stale edits, unsafe dataset paths and broken publication wiring.
+const sourceGuides = loadGuides();
+const generated = renderPractice(sourceGuides);
+const jsonld = html => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+
+test('practice output is reproducible; all source material and metadata remain distinct', () => {
+  assert.equal(generated.size, 401);
+  assert.deepEqual(fs.readdirSync(path.join(root, 'practice')).filter(f => f.endsWith('.html')).sort(), [...generated.keys()].map(f => path.basename(f)).sort(), 'no stale or orphaned practice pages');
+  for (const [file, html] of generated) {
+    assert.equal(read(file), html, `${file}: run npm run generate:practice`);
+    assert.doesNotMatch(html, /\{\{\w+\}\}/);
+  }
+  for (const key of ['title', 'rule', 'trap']) assert.equal(new Set(guides.map(g => g[key])).size, 400, key);
+  const normalise = s => s.normalize('NFKC').toLocaleLowerCase('de').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  for (const key of ['examples', 'quiz']) {
+    const prompts = guides.flatMap(g => g[key].map(x => x[0]));
+    assert.equal(new Set(prompts).size, 1600, key);
+    assert.equal(new Set(prompts.map(normalise)).size, 1600, key + ': no case/punctuation-only duplicates');
+  }
+});
+
+test('generator rejects unsafe paths, missing answers, duplicate material and malformed gaps', () => {
+  const check = (change, pattern) => {
+    const copy = structuredClone(sourceGuides);
+    change(copy);
+    assert.throws(() => validateGuides(copy), pattern);
+  };
+  check(g => g[0].slug = '../private', /slug/);
+  check(g => g[0].kind = 'unsupported', /practice kind/);
+  check(g => g[0].guide = 'chapter/chapter-a1-2-data.js', /guide/);
+  check(g => g[0].quiz[0][1] = '', /Invalid quiz/);
+  check(g => g[1].examples[0] = g[0].examples[0], /Duplicate examples/);
+  check(g => g[1].quiz[0] = g[0].quiz[0], /Duplicate quiz/);
+  check(g => g[0].quiz[0][0] = 'No gap here', /one gap/);
+  const copy = structuredClone(sourceGuides);
+  copy[0].rule += ' <script>alert("x")</script> & more';
+  const rendered = renderPractice(copy).get('practice/' + copy[0].slug + '.html');
+  assert.ok(rendered.includes('&lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt; &amp; more'));
+  assert.doesNotMatch(rendered, /<script>alert/);
+  assert.equal(escapeHtml('<>&"\''), '&lt;&gt;&amp;&quot;&#39;');
+});
+
+test('all local practice links and assets resolve to allowlisted public files and valid fragments', () => {
+  for (const [file, html] of generated) {
+    const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
+    assert.equal(new Set(ids).size, ids.length, file + ' duplicate id');
+    for (const [, href] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+      const u = new URL(href, 'https://klarweg.in/' + file);
+      if (u.hostname !== 'klarweg.in') continue;
+      const target = u.pathname.slice(1);
+      assert.ok(fs.existsSync(path.join(root, target)), `${file}: missing ${target}`);
+      assert.ok(allow.includes(target) || allow.some(x => x.startsWith('GLOB:') && path.matchesGlob(target, x.slice(5))), `${file}: unpublished ${target}`);
+      if (u.hash) assert.ok(read(target).includes('id="' + u.hash.slice(1) + '"'), `${file}: broken ${href}`);
+    }
+  }
+});
+
+test('lesson schema, metadata, chapter and related links match visible content', () => {
+  const inbound = new Set();
+  for (const g of sourceGuides) {
+    const file = `practice/${g.slug}.html`, html = read(file), url = 'https://klarweg.in/' + file;
+    const data = jsonld(html), resource = data.find(x => x['@type'] === 'LearningResource');
+    assert.equal(resource.name, g.title);
+    assert.equal(resource.educationalLevel, 'CEFR ' + g.level.toUpperCase());
+    assert.equal(resource.isAccessibleForFree, true);
+    assert.deepEqual(resource.inLanguage, ['en', 'de']);
+    assert.equal(resource.url, url);
+    assert.equal(resource.mainEntityOfPage, url);
+    const crumbs = data.find(x => x['@type'] === 'BreadcrumbList').itemListElement;
+    assert.equal(crumbs[1].item, 'https://klarweg.in/practice/index.html');
+    assert.equal(crumbs.at(-1).item, url);
+    assert.ok(html.includes(`property="og:url" content="${url}"`));
+    assert.match(html, /name="twitter:card"/);
+    assert.ok(html.includes('href="../' + CHAPTERS[g.level] + '"'));
+    assert.ok(html.includes('Try ' + g.level.toUpperCase() + ' Chapter 1 free'));
+    assert.equal((html.match(/<span class="de" lang="de">/g) || []).length, 4);
+    const related = html.match(/aria-label="Related exercises">([\s\S]*?)<\/nav>/)[1];
+    for (const [, slug] of related.matchAll(/href="([^"/]+)\.html"/g)) {
+      assert.notEqual(slug, g.slug);
+      assert.ok(sourceGuides.some(x => x.slug === slug && x.editorial.cluster === g.editorial.cluster), 'peer shares the declared topic');
+      inbound.add(slug);
+    }
+  }
+  assert.equal(inbound.size, 400, 'every lesson receives a contextual link from a peer');
+});
+
+test('every lesson has a distinct contextual writing task, matching schema and clear answer scope', () => {
+  const descriptions = new Set();
+  for (const g of guides) {
+    const html = read(`practice/${g.slug}.html`);
+    assert.ok(g.description.length >= 100 && g.description.length <= 170);
+    assert.ok(!descriptions.has(g.description)); descriptions.add(g.description);
+    assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`), g.slug);
+    assert.match(html, /id="transfer" aria-labelledby="transfer-title"/);
+    for (const key of ['prompt', 'sample', 'check']) assert.ok(html.includes(escapeHtml(g.editorial[key])), g.slug + ': ' + key);
+    assert.ok(html.includes(`<p lang="de">${escapeHtml(g.editorial.sample)}</p>`));
+    assert.match(html, /Other natural answers are possible/);
+    assert.match(html, /resources.html#practice-editorial/);
+    assert.equal(html.includes('A dash (—) means no word is needed.'), g.quiz.some(q => q[1] === '—'));
+    const schema = jsonld(html).find(j => j['@type'] === 'LearningResource');
+    assert.equal(schema.teaches, g.editorial.prompt);
+    assert.equal(schema.isPartOf.url, 'https://klarweg.in/practice/index.html');
+    const related = relatedGuides(g, guides);
+    assert.equal(new Set(related.map(x => x.slug)).size, related.length);
+    assert.ok(related.length >= 1 && related.length <= 2);
+  }
+  assert.match(resource, /id="practice-editorial"/);
+  assert.match(resource, /native German linguistic and pedagogic review has not yet been completed/);
+  assert.ok(!allow.includes(EDITORIAL_SOURCE));
+});
+
+test('editorial coverage rejects missing, repeated, unknown and duplicated task content', () => {
+  const entries = JSON.parse(read(EDITORIAL_SOURCE));
+  assert.throws(() => attachEditorial(guides, entries.slice(1)), /inventory/);
+  const repeat = structuredClone(entries); repeat[1] = repeat[0];
+  assert.throws(() => attachEditorial(guides, repeat), /duplicate/);
+  const unknown = structuredClone(entries); unknown[0].slug = 'a1-unknown';
+  assert.throws(() => attachEditorial(guides, unknown), /Unknown/);
+  const check = (change, pattern) => { const copy = structuredClone(guides); change(copy); assert.throws(() => validateGuides(copy), pattern); };
+  check(g => delete g[0].editorial, /editorial/);
+  check(g => g[0].editorial.cluster = '__proto__', /editorial/);
+  check(g => g[1].editorial.prompt = g[0].editorial.prompt, /Duplicate editorial/);
+  check(g => g[0].editorial.sample = g[0].examples[0][0], /repeats a worked example/);
+  check(g => g[1].description = g[0].description, /Duplicate description/);
+});
+
+test('English question cues have their own language scope and generated additions escape markup', () => {
+  assert.equal(renderPrompt('Ich ___ Deutsch. (lernen)'), '<span lang="de">Ich ___ Deutsch.</span><span class="cue" lang="en"> (lernen)</span>');
+  const copy = structuredClone(guides);
+  copy[0].editorial.sample += ' <img src=x onerror=alert(1)>';
+  const html = renderPractice(copy).get(`practice/${copy[0].slug}.html`);
+  assert.ok(html.includes('&lt;img src=x onerror=alert(1)&gt;'));
+  assert.doesNotMatch(html, /<img src=x/);
+});
+
+test('hub schema enumerates exactly the 400 visible lessons, and the stylesheet is explicitly published', () => {
+  const collection = jsonld(hub).find(x => x['@type'] === 'CollectionPage');
+  assert.equal(collection.url, 'https://klarweg.in/practice/index.html');
+  assert.equal(collection.mainEntity.numberOfItems, 400);
+  const visibleUrls = [...hub.matchAll(/class="topic" href="([^"]+)"/g)].map(m => 'https://klarweg.in/practice/' + m[1]);
+  assert.deepEqual(collection.mainEntity.itemListElement.map(x => x.url), visibleUrls, 'schema list follows visible grouped inventory');
+  assert.deepEqual(new Set(visibleUrls), new Set(sourceGuides.map(g => 'https://klarweg.in/practice/' + g.slug + '.html')));
+  assert.ok(allow.includes('practice/practice.css'));
+  assert.equal(allow.filter(x => x.startsWith('practice/')).length, 402, 'only 401 pages and shared CSS');
+  assert.equal((resource.match(/id="free-grammar-practice"/g) || []).length, 1);
+  assert.equal((resource.match(/<!-- PRACTICE50:START -->[\s\S]*?<!-- PRACTICE50:END -->/g) || []).length, 1);
+  const css = read('practice/practice.css');
+  assert.match(css, /--navy:#0f172a;--green:#1fa84b/);
+  for (const hex of css.match(/#[\da-f]{6}/gi) || []) {
+    const [r,g,b] = [1,3,5].map(i => parseInt(hex.slice(i,i+2), 16));
+    assert.ok(!(r > 150 && r > g + 30 && g > b && b < 120), 'orange/amber family: ' + hex);
+  }
+});
+
+
+test('a second 50-lesson batch extends the first without renaming its datasets', () => {
+  assert.equal(PRACTICE_BATCHES.length, 8);
+  assert.equal(guides.filter(g => g.batch === 'practice50').length, 50);
+  assert.equal(guides.filter(g => g.batch === 'practice50-expansion').length, 50);
+  assert.deepEqual(PRACTICE_BATCHES[0].sources.map(s => s.path), ['a1','a2','b1','b2'].map(l => `docs/seo/next50-practice-${l}.json`));
+  const counts = Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, guides.filter(g => g.level === l).length]));
+  assert.deepEqual(counts, { a1: 90, a2: 122, b1: 114, b2: 74 });
+  const additions = guides.filter(g => g.batch === 'practice50-expansion');
+  assert.equal(new Set(additions.map(g => g.description)).size, 50);
+  for (const g of additions) {
+    assert.ok(g.description.length >= 100 && g.description.length <= 170, g.slug);
+    assert.ok(g.instructions.length >= 40, g.slug);
+  }
+  assert.match(hub, /400 focused practice sets/);
+  assert.match(resource, /Browse all 400 free German practice sets/);
+});
+
+test('batch inventory rejects repeated ids, unsafe sources and incorrect declared counts', () => {
+  const check = (change, pattern) => {
+    const copy = structuredClone(PRACTICE_BATCHES);
+    change(copy);
+    assert.throws(() => loadGuides(copy), pattern);
+  };
+  check(b => b[1].id = b[0].id, /batch id/);
+  check(b => b[1].sources[0].path = '../private.json', /dataset path/);
+  check(b => b[1].count = 49, /expected 49/);
+  check(b => b[1].levels.a1 = 9, /unexpected a1/);
+});
+
+
+test('word-choice batch adds 50 distinct usage lessons with suitable headings and descriptions', () => {
+  const usage = guides.filter(g => g.batch === 'word-choice50');
+  assert.equal(usage.length, 50);
+  assert.deepEqual(Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, usage.filter(g => g.level === l).length])), { a1: 8, a2: 16, b1: 20, b2: 6 });
+  for (const g of usage) {
+    assert.equal(g.kind, 'word-choice');
+    assert.ok(g.slug.endsWith('-word-choice-exercises'));
+    const html = read(`practice/${g.slug}.html`);
+    assert.match(html, />Understand the difference<\/h2>/);
+    assert.match(html, />Practice: choose the right word<\/h2>/);
+    assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`));
+    assert.ok(html.includes(escapeHtml(g.guideLabel)));
+  }
+  for (const g of guides.filter(g => !g.kind || g.kind === 'grammar')) {
+    const html = read(`practice/${g.slug}.html`);
+    assert.match(html, />Understand the rule<\/h2>/);
+    assert.match(html, />Practice: fill in the gaps<\/h2>/);
+  }
+});
+
+
+test('communication batch supplies 50 complete phrase lessons with answer-matched word banks', () => {
+  const lessons = guides.filter(g => g.batch === 'communication50');
+  assert.equal(lessons.length, 50);
+  assert.deepEqual(Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, lessons.filter(g => g.level === l).length])), { a1: 10, a2: 14, b1: 16, b2: 10 });
+  for (const g of lessons) {
+    assert.equal(g.kind, 'communication');
+    assert.deepEqual(new Set(g.wordBank), new Set(g.quiz.map(q => q[1])), g.slug);
+    const html = read(`practice/${g.slug}.html`);
+    assert.match(html, />Useful phrases and patterns<\/h2>/);
+    assert.match(html, />Practice: complete the phrases<\/h2>/);
+    assert.match(html, /<strong>Word bank:<\/strong>/);
+    assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`));
+    for (const word of g.wordBank) assert.ok(html.includes(escapeHtml(word)), g.slug);
+  }
+  const copy = structuredClone(guides), index = copy.findIndex(g => g.kind === 'communication');
+  delete copy[index].wordBank;
+  assert.throws(() => validateGuides(copy), /requires a word bank/);
+  copy[index].wordBank = ['incorrect'];
+  assert.throws(() => validateGuides(copy), /must match/);
+});
+
+test('each level on the hub has valid anchors for all four practice types', () => {
+  for (const level of ['a1','a2','b1','b2']) for (const kind of ['grammar','word-choice','communication','vocabulary']) {
+    assert.ok(hub.includes(`href="#${level}-${kind}"`));
+    assert.ok(hub.includes(`id="${level}-${kind}"`));
+  }
+});
+
+
+test('vocabulary batch registers 50 complete lessons with contextual tasks and matched banks', () => {
+  const lessons = guides.filter(g => g.batch === 'vocabulary50');
+  assert.equal(lessons.length, 50);
+  assert.deepEqual(Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, lessons.filter(g => g.level === l).length])), { a1: 16, a2: 16, b1: 10, b2: 8 });
+  for (const g of lessons) {
+    assert.equal(g.kind, 'vocabulary');
+    assert.equal(g.wordBank.length, 4);
+    assert.deepEqual(new Set(g.wordBank), new Set(g.quiz.map(q => q[1])), g.slug);
+    const html = read(`practice/${g.slug}.html`);
+    assert.match(html, />Vocabulary and usage<\/h2>/);
+    assert.match(html, />Practice: choose the matching word<\/h2>/);
+    assert.match(html, /Notice each word’s meaning, article and common word partners in context/);
+    assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`));
+  }
+  const check = (change, pattern) => {
+    const copy = structuredClone(guides), index = copy.findIndex(g => g.kind === 'vocabulary');
+    change(copy[index]);
+    assert.throws(() => validateGuides(copy), pattern);
+  };
+  check(g => delete g.wordBank, /requires a word bank/);
+  check(g => g.wordBank.push('extra'), /Invalid word bank/);
+  check(g => g.wordBank[0] = g.wordBank[1], /must match/);
+  check(g => g.kind = '__proto__', /practice kind/);
+  check(g => g.kind = ['vocabulary'], /practice kind/);
+});
+
+
+test('a further word-choice batch adds 50 contextual contrasts without changing the original batch', () => {
+  const lessons = guides.filter(g => g.batch === 'word-choice50-expansion');
+  assert.equal(lessons.length, 50);
+  assert.deepEqual(Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, lessons.filter(g => g.level === l).length])), { a1: 8, a2: 16, b1: 16, b2: 10 });
+  for (const g of lessons) {
+    assert.equal(g.kind, 'word-choice');
+    assert.ok(g.description.length >= 100 && g.description.length <= 170, g.slug);
+    assert.ok(g.instructions.length >= 60, g.slug);
+    assert.equal(g.examples.length, 4);
+    assert.equal(g.quiz.length, 4);
+    const html = read(`practice/${g.slug}.html`);
+    assert.match(html, />Understand the difference<\/h2>/);
+    assert.match(html, />Practice: choose the right word<\/h2>/);
+    assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`));
+  }
+  assert.equal(guides.filter(g => g.kind === 'word-choice').length, 100);
+  assert.ok(resource.includes('a1-viel-sehr-word-choice-exercises.html'));
+});
+
+
+test('a further vocabulary batch adds 50 complete themes with four matched answer-bank items', () => {
+  const lessons = guides.filter(g => g.batch === 'vocabulary50-expansion');
+  assert.equal(lessons.length, 50);
+  assert.deepEqual(Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, lessons.filter(g => g.level === l).length])), { a1: 14, a2: 16, b1: 12, b2: 8 });
+  for (const g of lessons) {
+    assert.equal(g.kind, 'vocabulary');
+    assert.equal(g.wordBank.length, 4);
+    assert.deepEqual(new Set(g.wordBank), new Set(g.quiz.map(q => q[1])), g.slug);
+    assert.ok(g.description.length >= 100 && g.description.length <= 170, g.slug);
+    const html = read(`practice/${g.slug}.html`);
+    assert.match(html, />Vocabulary and usage<\/h2>/);
+    assert.match(html, />Practice: choose the matching word<\/h2>/);
+    assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`));
+  }
+  assert.equal(guides.filter(g => g.kind === 'vocabulary').length, 100);
+  assert.ok(resource.includes('a1-clothing-basics-vocabulary-exercises.html'));
+});
+
+
+test('a further communication batch adds 50 contextual phrase lessons with answer-matched banks', () => {
+  const lessons = guides.filter(g => g.batch === 'communication50-expansion');
+  assert.equal(lessons.length, 50);
+  assert.deepEqual(Object.fromEntries(['a1','a2','b1','b2'].map(l => [l, lessons.filter(g => g.level === l).length])), { a1: 10, a2: 16, b1: 14, b2: 10 });
+  for (const g of lessons) {
+    assert.equal(g.kind, 'communication');
+    assert.equal(g.wordBank.length, 4);
+    assert.deepEqual(new Set(g.wordBank), new Set(g.quiz.map(q => q[1])), g.slug);
+    assert.ok(g.description.length >= 100 && g.description.length <= 170, g.slug);
+    const html = read(`practice/${g.slug}.html`);
+    assert.match(html, />Useful phrases and patterns<\/h2>/);
+    assert.match(html, />Practice: complete the phrases<\/h2>/);
+    assert.ok(html.includes(`<p class="lede">${escapeHtml(g.description)}</p>`));
+  }
+  assert.equal(guides.filter(g => g.kind === 'communication').length, 100);
+  assert.ok(resource.includes('a1-talking-languages-communication-exercises.html'));
+});

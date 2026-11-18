@@ -437,16 +437,24 @@ function apply() {
   const st = state();
   const items = queue(); const byKey = new Map(items.map((x) => [x.key, x]));
   const ready = (it) => it && it.status === "todo" && st.get(it.key).accepted && encoded(it);
-  const imgFor = (key) => {
+  const imgFor = (key, ch) => {
     let it = byKey.get(key); if (!it) return null;
     if (it.status === "alias") it = byKey.get(it.root);
+    if (!it) return null;
+    /* An image that already exists on another card of the same concept (the
+       A1·01 pilot, or one applied in an earlier run) is propagated as-is.
+       A gated image is never put on a free chapter (it would 401 there). */
+    if (it.status === "have" && it.img && it.img.src) {
+      if (ch.free && /^\/api\/media\//.test(it.img.src)) return null;
+      return { ...it.img };
+    }
     if (!ready(it)) return null;
     return { src: srcFor(it), formats: FORMATS, widths: WIDTHS, w: 4, h: 3, alt: it.alt };
   };
   let added = 0, files = 0;
   for (const ch of loadChapters().filter((x) => x.level === level)) {
     const updates = new Map();
-    (ch.C.vocab || []).forEach((v, i) => { if (v.img) return; const img = imgFor(conceptKey(v)); if (img) updates.set(i, img); });
+    (ch.C.vocab || []).forEach((v, i) => { if (v.img) return; const img = imgFor(conceptKey(v), ch); if (img) updates.set(i, img); });
     if (!updates.size) continue;
     const p = path.join(ROOT, "chapter", ch.file);
     const res = applyImages(fs.readFileSync(p, "utf8"), updates, { filename: ch.file });

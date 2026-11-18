@@ -201,7 +201,9 @@ const CHAPTER = {
     { de: 'nicht', pos: 'adverb (negation)', en: 'not', hi: 'नहीं',
       ex: 'Ich bin nicht müde.', exEn: 'I am not tired.' },
     { de: 'Zeit', art: 'die', gender: 'f', plural: 'Zeiten', pos: 'noun', en: 'time', hi: 'समय',
-      ex: 'Ich habe keine Zeit.', exEn: 'I have no time.' },
+      ex: 'Ich habe keine Zeit.', exEn: 'I have no time.',
+      img: { src: '../public/vocab-img/a1-1/zeit', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A round wall clock beside an hourglass' }
+    },
     { de: 'heute', pos: 'adverb', en: 'today', hi: 'आज',
       ex: 'Heute habe ich keine Zeit.', exEn: 'Today I have no time.' },
     { de: 'jetzt', pos: 'adverb', en: 'now', hi: 'अभी',

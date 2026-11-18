@@ -232,7 +232,7 @@ const CHAPTER = {
     // ===== Core Active =====
     { de: 'achtzig', pos: 'number', en: 'eighty', hi: 'अस्सी', ex: 'Mein Opa ist achtzig.', exEn: 'My grandpa is eighty.' },
     { de: 'Datum', art: 'das', gender: 'n', plural: 'Daten', pos: 'noun', en: 'date', hi: 'तारीख़', ex: 'Welches Datum ist heute?', exEn: 'What is the date today?' },
-    { de: 'Jahr', art: 'das', gender: 'n', plural: 'Jahre', pos: 'noun', en: 'year', hi: 'साल', ex: 'Das Jahr hat zwölf Monate.', exEn: 'The year has twelve months.' },
+    { de: 'Jahr', art: 'das', gender: 'n', plural: 'Jahre', pos: 'noun', en: 'year', hi: 'साल', ex: 'Das Jahr hat zwölf Monate.', exEn: 'The year has twelve months.', img: { src: '../public/vocab-img/a1-1/jahr', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A circle split into the four seasons: spring blossom, summer tree, autumn leaf, winter snowflake' } },
     { de: 'April', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'April', hi: 'अप्रैल', ex: 'Im April ist es warm.', exEn: 'In April it is warm.' },
     { de: 'August', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'August', hi: 'अगस्त', ex: 'Der Kurs ist im August.', exEn: 'The course is in August.' },
     { de: 'Dezember', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'December', hi: 'दिसंबर', ex: 'Im Dezember ist Winter.', exEn: 'In December it is winter.' },

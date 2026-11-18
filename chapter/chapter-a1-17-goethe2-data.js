@@ -271,7 +271,7 @@ const CHAPTER = {
     { de: 'Information', art: 'die', gender: 'f', plural: 'Informationen', pos: 'noun', en: 'information', hi: 'सूचना', ex: 'Die Information ist wichtig.', exEn: 'The information is important.' },
     { de: 'Mail', art: 'die', gender: 'f', plural: 'Mails', pos: 'noun', en: 'mail, email', hi: 'मेल', ex: 'Ich schreibe eine Mail.', exEn: 'I write an email.', img: { src: '/api/media/vocab-img/8c7a0e14fa41bde2c681', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Open laptop with an envelope icon floating above' } },
     { de: 'Postleitzahl', art: 'die', gender: 'f', plural: 'Postleitzahlen', pos: 'noun', en: 'postcode, zip code', hi: 'पिन कोड', ex: 'Die Postleitzahl ist 10115.', exEn: 'The postcode is 10115.' },
-    { de: 'Schule', art: 'die', gender: 'f', plural: 'Schulen', pos: 'noun', en: 'school', hi: 'विद्यालय', ex: 'Die Schule ist groß.', exEn: 'The school is big.' },
+    { de: 'Schule', art: 'die', gender: 'f', plural: 'Schulen', pos: 'noun', en: 'school', hi: 'विद्यालय', ex: 'Die Schule ist groß.', exEn: 'The school is big.', img: { src: '../public/vocab-img/a1-1/schule', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A school building with rows of classroom windows, a clock, a school backpack and a chalkboard' } },
     { de: 'männlich', pos: 'adjective', en: 'male', hi: 'पुरुष', ex: 'Männlich oder weiblich?', exEn: 'Male or female?' },
     { de: 'persönlich', pos: 'adjective', en: 'personal', hi: 'व्यक्तिगत', ex: 'Das sind persönliche Daten.', exEn: 'These are personal details.' },
     { de: 'weiblich', pos: 'adjective', en: 'female', hi: 'महिला', ex: 'Anna ist weiblich.', exEn: 'Anna is female.' },

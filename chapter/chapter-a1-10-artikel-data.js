@@ -234,7 +234,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/98f94b1965ee0838a8cd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Blue passenger car on a paved road' }
     },
     { de: 'Buch', art: 'das', gender: 'n', plural: 'Bücher', pos: 'noun', en: 'book', hi: 'किताब',
-      ex: 'Das Buch liegt auf dem Tisch.', exEn: 'The book is on the table.' },
+      ex: 'Das Buch liegt auf dem Tisch.', exEn: 'The book is on the table.',
+      img: { src: '../public/vocab-img/a1-1/buch', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A closed teal hardcover book' }
+    },
     { de: 'Computer', art: 'der', gender: 'm', plural: 'Computer', pos: 'noun', en: 'computer', hi: 'कंप्यूटर',
       ex: 'Der Computer ist schnell.', exEn: 'The computer is fast.',
       img: { src: '/api/media/vocab-img/4f1f7cde74c18f798ce0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A desktop computer on a wooden desk.' }
@@ -248,7 +250,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/a39bbadd0ff5ba3803e8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A simple wooden dining table' }
     },
     { de: 'Straße', art: 'die', gender: 'f', plural: 'Straßen', pos: 'noun', en: 'street', hi: 'सड़क',
-      ex: 'Die Straße ist lang.', exEn: 'The street is long.' },
+      ex: 'Die Straße ist lang.', exEn: 'The street is long.',
+      img: { src: '../public/vocab-img/a1-1/strasse', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A quiet town street with trees and houses on both sides' }
+    },
     { de: 'der/die/das', pos: 'article (definite)', en: 'the', hi: 'निश्चित आर्टिकल',
       ex: 'der Tisch, die Straße, das Buch', exEn: 'the table, the street, the book' },
     { de: 'die', pos: 'article (plural)', en: 'the (plural)', hi: 'the (बहुवचन)',

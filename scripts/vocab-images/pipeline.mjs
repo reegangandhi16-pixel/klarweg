@@ -108,7 +108,7 @@ export function buildPlan(chapters = loadChapters()) {
     else if (!o) it = { ...base, status: "text-only", why: "unreviewed" };
     else if (o.tier === "text-only") it = { ...base, status: "text-only", why: o.reason || "review" };
     else if (o.sameAs) it = { ...base, status: "alias", sameAs: o.sameAs };
-    else if (o.subject) it = { ...base, status: "todo", subject: o.subject, alt: (o.alt || o.subject.replace(/^Show (an?|the|two|one) /i, "").replace(/\.$/, "")).slice(0, 120) };
+    else if (o.subject) it = { ...base, status: "todo", subject: o.subject, strategy: o.strategy || "direct", alt: (o.alt || o.subject.replace(/^Show (an?|the|two|one) /i, "").replace(/\.$/, "")).slice(0, 120) };
     else it = { ...base, status: "text-only", why: "no subject" };
     it.uses = c.uses;
     items.set(c.key, it);
@@ -168,8 +168,10 @@ function state() {
 function pickWork(level, limit) {
   const st = state();
   const want = [];
+  const only = opt("keys") ? new Set(fs.readFileSync(String(opt("keys")), "utf8").split(/\s+/).filter(Boolean)) : null;   // --keys file: restrict to these concepts (pilots)
   for (const it of queue()) {
     if (it.status !== "todo") continue;
+    if (only && !only.has(it.key)) continue;
     if (level && !it.audience.some((u) => u.level === level)) continue;
     const x = st.get(it.key);
     if (x.inflight || x.accepted || x.needsQa.length) continue;          // never pay twice; QA first
@@ -343,7 +345,9 @@ FAIL the picture if ANY of these is true:
 4. a creature, blob or mascot appears instead of a human, or objects/food/plants have faces, or there are extra tiny characters;
 5. people are depicted disrespectfully, as a stereotype, or the scene is inappropriate, violent, frightening or sexual;
 6. orange is a dominant colour;
-7. it is visibly broken: distorted hands/faces, malformed objects, cut-off main subject.
+7. it is visibly broken: distorted hands/faces, malformed objects, cut-off main subject;
+8. the picture would more naturally teach a clearly different word than the intended meaning (a learner who sees it next to the word would be misled), or it is too cluttered to read at small card size.
+For contextual strategies (context, sentence, contrast, symbolic, emotion) the word itself need not be drawn literally: PASS when the scene is a clear, fair memory aid for the intended meaning as used in the example sentence.
 Answer with ONE line only: "pass" or "fail | <short reason, max 15 words, phrased as an instruction for a corrected image>".`;
 
 async function qa() {
@@ -362,7 +366,7 @@ async function qa() {
       assertCanSpend(0.01, "qa");
       const jpg = await sharp(path.join(STORE, r.file)).resize(512, 384, { fit: "cover" }).jpeg({ quality: 82 }).toBuffer();
       const body = { systemInstruction: { parts: [{ text: QA_RULES }] }, contents: [{ role: "user", parts: [
-        { text: `Intended meaning: ${it.en} (${it.pos}). Intended scene: ${it.subject}` }, { inlineData: { mimeType: "image/jpeg", data: jpg.toString("base64") } }] }],
+        { text: `German word: ${[it.art, it.de].filter(Boolean).join(" ")}. Intended meaning: ${it.en} (${it.pos}).${it.exEn ? ` Example sentence: ${it.exEn}.` : ""} Visual strategy: ${it.strategy || "direct"}. Intended scene: ${it.subject}` }, { inlineData: { mimeType: "image/jpeg", data: jpg.toString("base64") } }] }],
         generationConfig: { temperature: 0, maxOutputTokens: 2000, thinkingConfig: { thinkingLevel: "low" } } };
       let j = null;
       for (let a = 0; a < 6 && !j; a++) {

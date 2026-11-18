@@ -366,7 +366,9 @@ async function qa() {
         generationConfig: { temperature: 0, maxOutputTokens: 2000, thinkingConfig: { thinkingLevel: "low" } } };
       let j = null;
       for (let a = 0; a < 6 && !j; a++) {
-        const res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) });
+        let res;
+        try { res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) }); }
+        catch (e) { console.error("qa network error, retrying:", String(e.cause?.code || e.message).slice(0, 60)); await new Promise((z) => setTimeout(z, 10000 * (a + 1))); continue; }   // ETIMEDOUT etc. must not kill the whole QA run
         if (res.status === 401) { token(true); continue; }
         if (res.status === 429 || res.status >= 500) { await new Promise((z) => setTimeout(z, 10000 * (a + 1))); continue; }
         j = await res.json(); if (!res.ok) { console.error("qa http", res.status, JSON.stringify(j).slice(0, 200)); j = null; break; }

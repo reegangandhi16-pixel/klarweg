@@ -244,7 +244,7 @@ const CHAPTER = {
     { de: 'lange', pos: 'adverb', en: 'a long time', hi: 'देर तक', ex: 'Max schläft lange.', exEn: 'Max sleeps a long time.' },
     { de: 'meistens', pos: 'adverb', en: 'mostly, usually', hi: 'अक्सर', ex: 'Meistens esse ich mit Max.', exEn: 'Mostly I eat with Max.' },
     { de: 'mittags', pos: 'adverb', en: 'at noon, at midday', hi: 'दोपहर को', ex: 'Mittags esse ich in der Mensa.', exEn: 'At noon I eat in the canteen.' },
-    { de: 'nachmittags', pos: 'adverb', en: 'in the afternoon(s)', hi: 'दोपहर बाद', ex: 'Nachmittags spiele ich.', exEn: 'In the afternoons I play.' },
+    { de: 'nachmittags', pos: 'adverb', en: 'in the afternoon(s)', hi: 'दोपहर बाद', ex: 'Nachmittags spiele ich.', exEn: 'In the afternoons I play.', img: { src: '/api/media/vocab-img/6bc251e0c29ce29091e2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Sunlight streaming into a living room in afternoon' } },
     { de: 'nachts', pos: 'adverb', en: 'at night', hi: 'रात को', ex: 'Nachts schlafe ich.', exEn: 'At night I sleep.', img: { src: '/api/media/vocab-img/91ee964d2def5592d243', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Crescent moon outside a dark bedroom window' } },
     { de: 'nichts', pos: 'pronoun', en: 'nothing', hi: 'कुछ नहीं', ex: 'Abends lerne ich nichts.', exEn: 'In the evenings I study nothing.' },
     { de: 'nie', pos: 'adverb', en: 'never', hi: 'कभी नहीं', ex: 'Ich frühstücke nie.', exEn: 'I never have breakfast.' },

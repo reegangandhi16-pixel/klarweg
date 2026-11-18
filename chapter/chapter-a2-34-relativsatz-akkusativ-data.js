@@ -245,7 +245,7 @@ const CHAPTER = {
     { de: 'Schnäppchen', art: 'das', gender: 'n', plural: 'Schnäppchen', pos: 'noun', en: 'bargain', hi: 'सौदा', ex: 'Das ist das Schnäppchen, das ich gefunden habe.', exEn: 'That\'s the bargain that I found.' },
     { de: 'Versandkosten', art: 'die', gender: 'pl', plural: '—', pos: 'noun', en: 'shipping cost', hi: 'शिपिंग लागत', ex: 'Das sind die Versandkosten, die ich bezahlen muss.', exEn: 'Those are the shipping costs that I have to pay.' },
     { de: 'Zwischensumme', art: 'die', gender: 'f', plural: 'Zwischensummen', pos: 'noun', en: 'subtotal', hi: 'उप-योग', ex: 'Das ist die Zwischensumme, die ich addiert habe.', exEn: 'That\'s the subtotal that I added up.' },
-    { de: 'Synchronsprecherin', art: 'die', gender: 'f', plural: 'Synchronsprecherinnen', pos: 'noun', en: 'voice actress', hi: 'डबिंग कलाकार', ex: 'Das ist die Synchronsprecherin, die ich im Film höre.', exEn: 'That\'s the voice actress whom I hear in the film.' }
+    { de: 'Synchronsprecherin', art: 'die', gender: 'f', plural: 'Synchronsprecherinnen', pos: 'noun', en: 'voice actress', hi: 'डबिंग कलाकार', ex: 'Das ist die Synchronsprecherin, die ich im Film höre.', exEn: 'That\'s the voice actress whom I hear in the film.', img: { src: '/api/media/vocab-img/a3a1247e2fb4d4516212', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a voice actress speaking into a microphone' } }
   ],
 
   // ---------- Relativsätze im Akkusativ (rule cards) ----------

@@ -233,7 +233,9 @@ const CHAPTER = {
     { de: 'anschalten', pos: 'verb', level: 'B1', en: 'to switch on', hi: 'चालू करना',
       ex: 'Könntest du das Licht anschalten?', exEn: 'Could you switch on the light?', exHi: 'Kya tum light chala sakte ho?',
       conj: { praesens: 'schaltet an', praeteritum: 'schaltete an', perfekt: 'hat angeschaltet' },
-      advanced: { synonyms: ['einschalten'], opposites: ['ausschalten'], collocations: ['das Licht anschalten', 'den Fernseher anschalten'] } },
+      advanced: { synonyms: ['einschalten'], opposites: ['ausschalten'], collocations: ['das Licht anschalten', 'den Fernseher anschalten'] },
+      img: { src: '/api/media/vocab-img/22caea04e770a334d98a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Finger flipping a light switch on' }
+    },
     { de: 'ansprechen', pos: 'verb', level: 'B1', en: 'to speak to, address', hi: 'बात करना',
       ex: 'Ein Fremder hat mich auf der Straße angesprochen.', exEn: 'A stranger spoke to me on the street.', exHi: 'Ek ajnabi ne mujhse sadak par baat ki.',
       conj: { praesens: 'spricht an', praeteritum: 'sprach an', perfekt: 'hat angesprochen' },
@@ -286,7 +288,9 @@ const CHAPTER = {
       advanced: { synonyms: ['Anleitung'], opposites: [], collocations: ['die Gebrauchsanweisung lesen'] } },
     { de: 'Quittung', art: 'die', gender: 'f', plural: 'Quittungen', pos: 'noun', level: 'B1', en: 'receipt', hi: 'रसीद',
       ex: 'Ohne Quittung kann ich es nicht reklamieren.', exEn: 'Without a receipt, I can\'t make a complaint.', exHi: 'Rasid ke bina main shikayat nahi kar sakta.',
-      advanced: { synonyms: ['Beleg'], opposites: [], collocations: ['eine Quittung aufbewahren'] } },
+      advanced: { synonyms: ['Beleg'], opposites: [], collocations: ['eine Quittung aufbewahren'] },
+      img: { src: '/api/media/vocab-img/f5ad1e063e985f704471', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'paper receipt on a wooden table' }
+    },
     { de: 'diesmal', pos: 'adverb', level: 'B1', en: 'this time', hi: 'इस बार',
       ex: 'Diesmal habe ich es genau gelesen.', exEn: 'This time I read it carefully.', exHi: 'Is baar maine isse dhyan se padha.',
       advanced: { synonyms: [], opposites: [], collocations: [] } },

@@ -255,7 +255,7 @@ const CHAPTER = {
     { de: 'geh\u00f6ren', pos: 'verb', en: 'to belong to (+ dative)', hi: 'का होना', tag: 'Ch.7', ex: 'Das Buch geh\u00f6rt meiner Schwester.', exEn: 'The book belongs to my sister.', conj: { praesens: 'geh\u00f6rt', praeteritum: 'geh\u00f6rte', perfekt: 'hat geh\u00f6rt' } },
     // ===== Ch.8 Komparativ & Superlativ =====
     { de: 'besser', pos: 'adjective', en: 'better (Komparativ von gut)', hi: 'बेहतर', tag: 'Ch.8', ex: 'Der Film war besser als der letzte.', exEn: 'The film was better than the last one.' },
-    { de: 'teuer', pos: 'adjective', en: 'expensive', hi: 'महंगा', tag: 'Ch.8', ex: 'Die Tickets waren teurer als sonst.', exEn: 'The tickets were more expensive than usual.' },
+    { de: 'teuer', pos: 'adjective', en: 'expensive', hi: 'महंगा', tag: 'Ch.8', ex: 'Die Tickets waren teurer als sonst.', exEn: 'The tickets were more expensive than usual.', img: { src: '/api/media/vocab-img/84cde82e3eb87dd05da9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Luxury sports car outside a modern villa' } },
     { de: 'am besten', pos: 'phrase', en: 'best (Superlativ von gut)', hi: 'सबसे अच्छा', tag: 'Ch.8', ex: 'Pizza schmeckt mir am besten.', exEn: 'Pizza tastes best to me.' },
     { de: 'wichtig', pos: 'adjective', en: 'important', hi: 'महत्वपूर्ण', tag: 'Ch.8', ex: 'Ein guter Abschluss ist am wichtigsten.', exEn: 'A good degree is the most important.' },
     // ===== Ch.9 Vergleiche mit als / wie =====

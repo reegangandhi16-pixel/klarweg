@@ -263,7 +263,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/99229c95f83b32c0b707', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A printed photograph of a mountain' }
     },
     { de: 'Wörterbuch', art: 'das', gender: 'n', plural: 'Wörterbücher', pos: 'noun', en: 'dictionary', hi: 'शब्दकोश',
-      ex: 'Das Wörterbuch hat viele Wörter.', exEn: 'The dictionary has many words.' },
+      ex: 'Das Wörterbuch hat viele Wörter.', exEn: 'The dictionary has many words.',
+      img: { src: '/api/media/vocab-img/8987e0c87ad22edc427e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A thick open dictionary with index tabs' }
+    },
     { de: 'Schlüssel', art: 'der', gender: 'm', plural: 'Schlüssel', pos: 'noun', en: 'key', hi: 'चाबी',
       ex: 'Der Schlüssel ist klein.', exEn: 'The key is small.',
       img: { src: '/api/media/vocab-img/bfefb585d77e844be380', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A brass door key on a smooth surface' }
@@ -272,7 +274,9 @@ const CHAPTER = {
       ex: 'Die Karte ist neu.', exEn: 'The card is new.' },
     { de: 'leer', pos: 'adjective', en: 'empty', hi: 'खाली',
       ex: 'Der Tisch ist leer.', exEn: 'The table is empty.',
-      compare: { comparative: 'leerer', superlative: 'am leersten' } },
+      compare: { comparative: 'leerer', superlative: 'am leersten' },
+      img: { src: '/api/media/vocab-img/626b8c3c81f1f875496a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An empty wooden bowl on a bare table' }
+    },
     { de: 'merken', pos: 'verb', en: 'to remember, note', hi: 'याद रखना',
       ex: 'Merke dir den Artikel!', exEn: 'Remember the article!',
       conj: { praesens: 'merkt', praeteritum: 'merkte', perfekt: 'hat gemerkt' } },
@@ -346,7 +350,9 @@ const CHAPTER = {
     { de: 'Assoziation', art: 'die', gender: 'f', plural: 'Assoziationen', pos: 'noun', en: 'association', hi: 'संबंध',
       ex: 'Die Assoziation hilft beim Merken.', exEn: 'The association helps you remember.' },
     { de: 'Autobahn', art: 'die', gender: 'f', plural: 'Autobahnen', pos: 'noun', en: 'highway', hi: 'राजमार्ग',
-      ex: 'Die Autobahn ist frei.', exEn: 'The highway is clear.' },
+      ex: 'Die Autobahn ist frei.', exEn: 'The highway is clear.',
+      img: { src: '/api/media/vocab-img/eb7fbfc931a0079f08cd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A wide multi-lane highway with moving traffic.' }
+    },
     { de: 'Flasche', art: 'die', gender: 'f', plural: 'Flaschen', pos: 'noun', en: 'bottle', hi: 'बोतल',
       ex: 'Die Flasche ist leer.', exEn: 'The bottle is empty.',
       img: { src: '/api/media/vocab-img/416645d17628177effee', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A glass bottle with a cork stopper.' }
@@ -386,7 +392,9 @@ const CHAPTER = {
       ex: 'Nenne weitere Beispiele.', exEn: 'Name further examples.' },
     { de: 'ziehen', pos: 'verb', en: 'to draw (a card)', hi: 'खींचना / कार्ड निकालना',
       ex: 'Zieh eine Karte vom Stapel.', exEn: 'Draw a card from the pile.',
-      conj: { praesens: 'zieht', praeteritum: 'zog', perfekt: 'hat gezogen' } },
+      conj: { praesens: 'zieht', praeteritum: 'zog', perfekt: 'hat gezogen' },
+      img: { src: '/api/media/vocab-img/a53f1bf4a29e080105ee', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand drawing a card from a deck' }
+    },
     // — Reference / System —
     { de: 'berichten', pos: 'verb', en: 'to report', hi: 'रिपोर्ट करना',
       ex: 'Berichte über deinen Tag.', exEn: 'Report about your day.',
@@ -436,7 +444,9 @@ const CHAPTER = {
     },
     { de: 'zuordnen', pos: 'verb', en: 'to match, assign', hi: 'मिलाना',
       ex: 'Ordne jedem Nomen den Artikel zu.', exEn: 'Match each noun to its article.',
-      conj: { praesens: 'ordnet zu', praeteritum: 'ordnete zu', perfekt: 'hat zugeordnet' } },
+      conj: { praesens: 'ordnet zu', praeteritum: 'ordnete zu', perfekt: 'hat zugeordnet' },
+      img: { src: '/api/media/vocab-img/0d09d8fe1a7b4f048e68', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hands connecting two matching puzzle pieces' }
+    },
     { de: 'zusammengehören', pos: 'verb', en: 'to belong together', hi: 'साथ होना',
       ex: 'Nomen und Artikel gehören zusammen.', exEn: 'Noun and article belong together.',
       conj: { praesens: 'gehört zusammen', praeteritum: 'gehörte zusammen', perfekt: 'hat zusammengehört' } }

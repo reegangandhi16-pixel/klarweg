@@ -298,7 +298,9 @@ const CHAPTER = {
       ex: 'Wir gehen jeden Abend spazieren.', exEn: 'We go for a walk every evening.', exHi: 'Hum har shaam tehalne jaate hain.',
       ex2: 'Sie ist am Fluss entlang spaziert.', ex2En: 'She strolled along the river.', ex2Hi: 'Woh nadi ke kinare tehli.',
       conj: { praesens: 'geht spazieren', praeteritum: 'ging spazieren', perfekt: 'ist spazieren gegangen' },
-      advanced: { synonyms: ['schlendern', 'flanieren'], opposites: ['rennen', 'hetzen'], collocations: ['spazieren gehen', 'am Strand spazieren'] } },
+      advanced: { synonyms: ['schlendern', 'flanieren'], opposites: ['rennen', 'hetzen'], collocations: ['spazieren gehen', 'am Strand spazieren'] },
+      img: { src: '/api/media/vocab-img/94f505e2972ae6d3fb8b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'two people strolling along a park path' }
+    },
     { de: 'tragen', pos: 'verb', level: 'B1', en: 'to carry, to wear', hi: 'ले जाना, पहनना',
       ex: 'Er trägt den Koffer zum Auto.', exEn: 'He carries the suitcase to the car.', exHi: 'Woh suitcase gaadi tak le jaata hai.',
       ex2: 'Sie trägt heute ein blaues Kleid.', ex2En: 'She\'s wearing a blue dress today.', ex2Hi: 'Woh aaj neela kapda pehni hui hai.',

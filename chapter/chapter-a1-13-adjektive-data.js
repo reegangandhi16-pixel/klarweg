@@ -259,9 +259,13 @@ const CHAPTER = {
       ex: 'Die Antwort ist falsch.', exEn: 'The answer is wrong.' },
     { de: 'schön', pos: 'adjective', en: 'nice, pretty', hi: 'सुंदर',
       ex: 'Die Stadt ist schön.', exEn: 'The city is beautiful.',
-      compare: { comparative: 'schöner', superlative: 'am schönsten' } },
+      compare: { comparative: 'schöner', superlative: 'am schönsten' },
+      img: { src: '/api/media/vocab-img/e43a9b032556b9a7b40a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A picturesque city scene with canals' }
+    },
     { de: 'super', pos: 'adjective', en: 'super, great', hi: 'बढ़िया',
-      ex: 'Das Essen ist super!', exEn: 'The food is super!' },
+      ex: 'Das Essen ist super!', exEn: 'The food is super!',
+      img: { src: '/api/media/vocab-img/12fed84988b0ae6fcada', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person giving two thumbs up.' }
+    },
     { de: 'toll', pos: 'adjective', en: 'great', hi: 'शानदार',
       ex: 'Der Film ist toll.', exEn: 'The film is great.' },
     { de: 'viel/viele', pos: 'adjective / quantifier', en: 'a lot, many', hi: 'बहुत',
@@ -306,7 +310,9 @@ const CHAPTER = {
     { de: 'doof', pos: 'adjective', en: 'silly, dumb', hi: 'बेवकूफ़',
       ex: 'Das ist doof.', exEn: 'That is silly.' },
     { de: 'einfach', pos: 'adjective / adverb', en: 'easy; simply', hi: 'आसान / बस',
-      ex: 'Die Regel ist einfach.', exEn: 'The rule is easy.' },
+      ex: 'Die Regel ist einfach.', exEn: 'The rule is easy.',
+      img: { src: '/api/media/vocab-img/f2340156d0f2b62e3c0c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A child easily fitting a wooden block into a puzzle.' }
+    },
     { de: 'faul', pos: 'adjective', en: 'lazy', hi: 'आलसी',
       ex: 'Der Hund ist faul.', exEn: 'The dog is lazy.',
       img: { src: '/api/media/vocab-img/8bd003fe6d774b4d83a0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A lazy dog sleeping on a sunny rug' }
@@ -363,11 +369,15 @@ const CHAPTER = {
     },
     { de: 'lang', pos: 'adjective', en: 'long', hi: 'लंबा',
       ex: 'Die Straße ist lang.', exEn: 'The street is long.',
-      compare: { comparative: 'länger', superlative: 'am längsten' } },
+      compare: { comparative: 'länger', superlative: 'am längsten' },
+      img: { src: '/api/media/vocab-img/3657e173db765a87b493', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A long road stretching into the distance across fields' }
+    },
     { de: 'langweilig', pos: 'adjective', en: 'boring', hi: 'उबाऊ',
       ex: 'Der Film ist langweilig.', exEn: 'The film is boring.' },
     { de: 'leer', pos: 'adjective', en: 'empty', hi: 'खाली',
-      ex: 'Der Kühlschrank ist leer.', exEn: 'The fridge is empty.' },
+      ex: 'Der Kühlschrank ist leer.', exEn: 'The fridge is empty.',
+      img: { src: '/api/media/vocab-img/626b8c3c81f1f875496a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An empty wooden bowl on a bare table' }
+    },
     { de: 'leicht', pos: 'adjective', en: 'easy, light', hi: 'आसान / हल्का',
       ex: 'Die Aufgabe ist leicht.', exEn: 'The task is easy.' },
     { de: 'lustig', pos: 'adjective', en: 'funny', hi: 'मज़ेदार',
@@ -389,7 +399,9 @@ const CHAPTER = {
     { de: 'perfekt', pos: 'adjective', en: 'perfect', hi: 'उत्तम',
       ex: 'Alles ist perfekt.', exEn: 'Everything is perfect.' },
     { de: 'praktisch', pos: 'adjective', en: 'practical', hi: 'व्यावहारिक',
-      ex: 'Die Tasche ist praktisch.', exEn: 'The bag is practical.' },
+      ex: 'Die Tasche ist praktisch.', exEn: 'The bag is practical.',
+      img: { src: '/api/media/vocab-img/e2f84e84b2911fd40251', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A practical backpack with multiple pockets and compartments.' }
+    },
     { de: 'sauber', pos: 'adjective', en: 'clean', hi: 'साफ़',
       ex: 'Das Zimmer ist sauber.', exEn: 'The room is clean.',
       img: { src: '/api/media/vocab-img/92160f9e415b18014e70', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A spotless, tidy living room with clean furniture' }
@@ -407,7 +419,9 @@ const CHAPTER = {
       ex: 'Die Stadt ist sicher.', exEn: 'The city is safe.' },
     { de: 'teuer', pos: 'adjective', en: 'expensive', hi: 'महँगा',
       ex: 'Das Auto ist teuer.', exEn: 'The car is expensive.',
-      compare: { comparative: 'teurer', superlative: 'am teuersten' } },
+      compare: { comparative: 'teurer', superlative: 'am teuersten' },
+      img: { src: '/api/media/vocab-img/84cde82e3eb87dd05da9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Luxury sports car outside a modern villa' }
+    },
     { de: 'warm', pos: 'adjective', en: 'warm', hi: 'गरम',
       ex: 'Der Tee ist warm.', exEn: 'The tea is warm.',
       compare: { comparative: 'wärmer', superlative: 'am wärmsten' },
@@ -466,7 +480,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/0c04a46e1966abfb35d3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A popular musician performing before an enthusiastic crowd.' }
     },
     { de: 'supernett', pos: 'adjective', en: 'super nice', hi: 'बहुत प्यारा',
-      ex: 'Die Lehrerin ist supernett.', exEn: 'The teacher is super nice.' },
+      ex: 'Die Lehrerin ist supernett.', exEn: 'The teacher is super nice.',
+      img: { src: '/api/media/vocab-img/4c913f257b66fda23154', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A friendly person offering a warm cup of tea.' }
+    },
     { de: 'top', pos: 'adjective', en: 'top, great', hi: 'बढ़िया',
       ex: 'Das Hotel ist top.', exEn: 'The hotel is top.' },
     { de: 'typisch', pos: 'adjective', en: 'typical', hi: 'विशिष्ट',

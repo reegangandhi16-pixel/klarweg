@@ -296,7 +296,9 @@ const CHAPTER = {
     },
     { de: 'vegetarisch', pos: 'adjective', level: 'B1', en: 'vegetarian', hi: 'शाकाहारी',
       ex: 'Wegen ihrer Gesundheit ernährt sie sich vegetarisch.', exEn: 'Because of her health, she eats vegetarian.', exHi: 'Apni sehat ki wajah se, woh shakahari khaana khaati hai.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/2a4ae6f636327f2f16fb', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Vegetarian meal with vegetable omelette and greens' }
+    },
     { de: 'wohltätig', pos: 'adjective', level: 'B1', en: 'benevolent, charitable', hi: 'परोपकारी',
       ex: 'Trotz der Armut jener Zeit war die Kaufmannsfamilie wohltätig aktiv.', exEn: 'Despite the poverty of that time, the merchant family was active in charity work.', exHi: 'Us samay ki gareebi ke bawajood, us vyaapari parivaar ne parophakaari kaam kiya.',
       advanced: { synonyms: ['gemeinnützig'], opposites: [], collocations: ['wohltätig aktiv sein'] } },

@@ -262,7 +262,9 @@ const CHAPTER = {
     { de: 'elf', pos: 'number', en: 'eleven', hi: 'ग्यारह',
       ex: 'Elf Spieler sind ein Team.', exEn: 'Eleven players are a team.' },
     { de: 'zwölf', pos: 'number', en: 'twelve', hi: 'बारह',
-      ex: 'Ein Jahr hat zwölf Monate.', exEn: 'A year has twelve months.' },
+      ex: 'Ein Jahr hat zwölf Monate.', exEn: 'A year has twelve months.',
+      img: { src: '/api/media/vocab-img/8143a84b650b3f090ade', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'open carton with twelve brown eggs' }
+    },
     { de: 'dreizehn', pos: 'number', en: 'thirteen', hi: 'तेरह',
       ex: 'Mein Bruder ist dreizehn.', exEn: 'My brother is thirteen.' },
     { de: 'vierzehn', pos: 'number', en: 'fourteen', hi: 'चौदह',

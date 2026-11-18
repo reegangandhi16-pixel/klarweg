@@ -272,7 +272,9 @@ const CHAPTER = {
       ex: 'Schreib die Wörter in die Tabelle.', exEn: 'Write the words in the table.' },
     { de: 'mischen', pos: 'verb', en: 'to mix, shuffle', hi: 'मिलाना',
       ex: 'Mische die Karten.', exEn: 'Shuffle the cards.',
-      conj: { praesens: 'mischt', praeteritum: 'mischte', perfekt: 'hat gemischt' } },
+      conj: { praesens: 'mischt', praeteritum: 'mischte', perfekt: 'hat gemischt' },
+      img: { src: '/api/media/vocab-img/7737c6507fee9069aff4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'hands shuffling a deck of cards' }
+    },
     { de: 'passend', pos: 'adjective', en: 'matching, suitable', hi: 'उपयुक्त',
       ex: 'Finde das passende Fragewort.', exEn: 'Find the matching question word.',
       compare: { comparative: 'passender', superlative: 'am passendsten' },
@@ -298,7 +300,9 @@ const CHAPTER = {
       ex: 'Eine W-Frage beginnt mit einem W-Wort.', exEn: 'A W-question begins with a W-word.' },
     { de: 'kreisen', pos: 'verb', en: 'to circle', hi: 'घेरना',
       ex: 'Kreise das W-Wort ein.', exEn: 'Circle the W-word.',
-      conj: { praesens: 'kreist', praeteritum: 'kreiste', perfekt: 'hat gekreist' } },
+      conj: { praesens: 'kreist', praeteritum: 'kreiste', perfekt: 'hat gekreist' },
+      img: { src: '/api/media/vocab-img/cc36ac725518f32b57a8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hawk circling in the sky' }
+    },
     { de: 'nummerieren', pos: 'verb', en: 'to number', hi: 'क्रमांक देना',
       ex: 'Nummeriere die Sätze.', exEn: 'Number the sentences.',
       conj: { praesens: 'nummeriert', praeteritum: 'nummerierte', perfekt: 'hat nummeriert' } },

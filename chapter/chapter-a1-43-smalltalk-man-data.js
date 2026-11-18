@@ -218,7 +218,7 @@ const CHAPTER = {
     { de: 'Berg', art: 'der', gender: 'm', plural: 'Berge', pos: 'noun', en: 'mountain', hi: 'पहाड़', ex: 'Im Süden gibt es Berge.', exEn: 'In the south there are mountains.', img: { src: '/api/media/vocab-img/58f5534738c6bb9a40fd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A snow-capped mountain peak above green foothills' } },
     { de: 'Grad', art: 'der', gender: 'm', plural: 'Grad', pos: 'noun', en: 'degree', hi: 'डिग्री', ex: 'Es sind zwanzig Grad.', exEn: 'It\u2019s twenty degrees.' },
     { de: 'Nachteil', art: 'der', gender: 'm', plural: 'Nachteile', pos: 'noun', en: 'disadvantage', hi: 'नुक़सान', ex: 'Das ist ein Nachteil.', exEn: 'That\u2019s a disadvantage.' },
-    { de: 'Norden', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'north', hi: 'उत्तर', ex: 'Hamburg ist im Norden.', exEn: 'Hamburg is in the north.' },
+    { de: 'Norden', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'north', hi: 'उत्तर', ex: 'Hamburg ist im Norden.', exEn: 'Hamburg is in the north.', img: { src: '/api/media/vocab-img/f226ed5674fca01faa20', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'brass compass pointing north' } },
     { de: 'Osten', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'east', hi: 'पूर्व', ex: 'Berlin ist im Osten.', exEn: 'Berlin is in the east.' },
     { de: 'Schnee', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'snow', hi: 'बर्फ़', ex: 'Im Winter gibt es Schnee.', exEn: 'In winter there is snow.', img: { src: '/api/media/vocab-img/15b0ef4ad0b97fafa6d9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'White snow blanketing pine tree branches' } },
     { de: 'Small Talk', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'small talk', hi: 'हल्की-फुल्की बातचीत', ex: 'Small Talk ist wichtig.', exEn: 'Small talk is important.', img: { src: '/api/media/vocab-img/2a356c0c5e8f2a4df44b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two colleagues chatting casually with coffee cups.' } },
@@ -277,7 +277,7 @@ const CHAPTER = {
     { de: 'überall', pos: 'adverb', en: 'everywhere', hi: 'हर जगह', ex: 'Überall gibt es Cafés.', exEn: 'There are cafés everywhere.' },
     // ===== Passive =====
     { de: 'aktuell', pos: 'adjective', en: 'current, topical', hi: 'मौजूदा', ex: 'Das ist ein aktuelles Thema.', exEn: 'That\u2019s a topical subject.' },
-    { de: 'Mistwetter', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'awful weather', hi: 'घटिया मौसम', ex: 'So ein Mistwetter!', exEn: 'Such awful weather!' },
+    { de: 'Mistwetter', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'awful weather', hi: 'घटिया मौसम', ex: 'So ein Mistwetter!', exEn: 'Such awful weather!', img: { src: '/api/media/vocab-img/2bb0f81480ee22d1b168', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'heavy rain pouring on a puddle-covered street' } },
     { de: 'Pech', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'bad luck', hi: 'दुर्भाग्य', ex: 'So ein Pech!', exEn: 'Such bad luck!' },
     { de: 'Studio', art: 'das', gender: 'n', plural: 'Studios', pos: 'noun', en: 'studio', hi: 'स्टूडियो', ex: 'Das Studio ist klein.', exEn: 'The studio is small.', img: { src: '/api/media/vocab-img/13f3de3adfb3834c46af', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An art studio with an easel' } },
     { de: 'dazu', pos: 'adverb', en: 'to that, about it', hi: 'उस बारे में', ex: 'Was meinst du dazu?', exEn: 'What do you think about it?' },
@@ -304,7 +304,7 @@ const CHAPTER = {
     { de: 'nerven', pos: 'verb', en: 'to annoy', hi: 'परेशान करना', ex: 'Der Regen nervt.', exEn: 'The rain is annoying.', conj: { praesens: 'nervt', praeteritum: 'nervte', perfekt: 'hat genervt' }, img: { src: '/api/media/vocab-img/285b5997aba7fad70225', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An annoyed person covering ears near a mosquito.' } },
     { de: 'neutral', pos: 'adjective', en: 'neutral', hi: 'तटस्थ', ex: 'Das Wetter ist ein neutrales Thema.', exEn: 'The weather is a neutral topic.' },
     { de: 'schrecklich', pos: 'adjective', en: 'terrible', hi: 'भयानक', ex: 'Das Wetter ist schrecklich.', exEn: 'The weather is terrible.' },
-    { de: 'schütten', pos: 'verb', en: 'to pour (rain)', hi: 'मूसलाधार बारिश', ex: 'Es schüttet draußen.', exEn: 'It\u2019s pouring outside.', conj: { praesens: 'schüttet', praeteritum: 'schüttete', perfekt: 'hat geschüttet' } },
+    { de: 'schütten', pos: 'verb', en: 'to pour (rain)', hi: 'मूसलाधार बारिश', ex: 'Es schüttet draußen.', exEn: 'It\u2019s pouring outside.', conj: { praesens: 'schüttet', praeteritum: 'schüttete', perfekt: 'hat geschüttet' }, img: { src: '/api/media/vocab-img/e50c2d9ffe7fab94a266', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Heavy rain pouring down outside a window' } },
     // ===== Reference / System =====
     { de: 'Missfallen', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'disapproval', hi: 'नापसंदगी', ex: 'Er zeigt sein Missfallen.', exEn: 'He shows his disapproval.', img: { src: '/api/media/vocab-img/356a5f3cc19f8ef748ef', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person crossing arms with a disapproving expression' } }
   ],

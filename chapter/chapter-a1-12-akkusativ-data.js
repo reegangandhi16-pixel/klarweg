@@ -198,7 +198,9 @@ const CHAPTER = {
       conj: { praesens: 'hat', praeteritum: 'hatte', perfekt: 'hat gehabt' } },
     { de: 'finden', pos: 'verb', en: 'to find', hi: 'ढूँढ़ना (मिलना)',
       ex: 'Ich finde den Schlüssel nicht.', exEn: 'I can\'t find the key.',
-      conj: { praesens: 'findet', praeteritum: 'fand', perfekt: 'hat gefunden' } },
+      conj: { praesens: 'findet', praeteritum: 'fand', perfekt: 'hat gefunden' },
+      img: { src: '/api/media/vocab-img/b5e5986b36e684faddfb', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person finding a lost key under a sofa cushion' }
+    },
     { de: 'suchen', pos: 'verb', en: 'to look for', hi: 'खोजना',
       ex: 'Ich suche die Karte.', exEn: 'I am looking for the card.',
       conj: { praesens: 'sucht', praeteritum: 'suchte', perfekt: 'hat gesucht' },
@@ -225,7 +227,9 @@ const CHAPTER = {
     { de: 'Ding', art: 'das', gender: 'n', plural: 'Dinge', pos: 'noun', en: 'thing', hi: 'वस्तु',
       ex: 'Was ist das für ein Ding?', exEn: 'What kind of thing is that?' },
     { de: 'Meer', art: 'das', gender: 'n', plural: 'Meere', pos: 'noun', en: 'sea', hi: 'समुद्र',
-      ex: 'Ich sehe das Meer.', exEn: 'I see the sea.' },
+      ex: 'Ich sehe das Meer.', exEn: 'I see the sea.',
+      img: { src: '/api/media/vocab-img/3ee3037afd4bfee2ed6c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'calm sea waves meeting a sandy beach' }
+    },
     { de: 'Akkusativ', art: 'der', gender: 'm', plural: 'Akkusative', pos: 'noun', en: 'accusative', hi: 'कर्म कारक',
       ex: 'Der Akkusativ ist das Objekt.', exEn: 'The accusative is the object.' },
     { de: 'Nominativ', art: 'der', gender: 'm', plural: 'Nominative', pos: 'noun', en: 'nominative', hi: 'कर्ता कारक',

@@ -231,7 +231,9 @@ const CHAPTER = {
     { de: 'Lernkarte', art: 'die', gender: 'f', plural: 'Lernkarten', pos: 'noun', en: 'flashcard', hi: 'फ्लैशकार्ड',
       ex: 'Ich mache eine Lernkarte.', exEn: 'I make a flashcard.' },
     { de: 'Seite', art: 'die', gender: 'f', plural: 'Seiten', pos: 'noun', en: 'page', hi: 'पृष्ठ',
-      ex: 'Öffne Seite zwölf.', exEn: 'Open page twelve.' },
+      ex: 'Öffne Seite zwölf.', exEn: 'Open page twelve.',
+      img: { src: '/api/media/vocab-img/9a8871b58f3a5a97d751', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open book showing a single page turning' }
+    },
     { de: 'nennen', pos: 'verb', en: 'to name, to call', hi: 'नाम बताना',
       ex: 'Nenne drei Verben.', exEn: 'Name three verbs.',
       conj: { praesens: 'nennt', praeteritum: 'nannte', perfekt: 'hat genannt' } },

@@ -248,7 +248,9 @@ const CHAPTER = {
       ex: 'Könnten Sie mir zeigen, wie man die Maschine bedient?', exEn: 'Could you show me how to operate the machine?', exHi: 'Kya aap mujhe dikha sakte hain ki machine kaise chalate hain?',
       ex2: 'Ich hätte gern eine Anleitung, um das Gerät zu bedienen.', ex2En: 'I\'d like an instruction manual to operate the device.', ex2Hi: 'Mujhe device chalane ke liye ek manual chahiye.',
       conj: { praesens: 'bedient', praeteritum: 'bediente', perfekt: 'hat bedient' },
-      advanced: { synonyms: ['betreiben', 'benutzen'], opposites: [], collocations: ['eine Maschine bedienen', 'ein Gerät bedienen'] } },
+      advanced: { synonyms: ['betreiben', 'benutzen'], opposites: [], collocations: ['eine Maschine bedienen', 'ein Gerät bedienen'] },
+      img: { src: '/api/media/vocab-img/bedfb3114a47a27fe155', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person operating a control panel on a machine' }
+    },
     { de: 'bloß', pos: 'adverb', level: 'B1', en: 'only, just', hi: 'सिर्फ़',
       ex: 'Ich hätte bloß eine kleine Frage.', exEn: 'I\'d just have one small question.', exHi: 'Mera bas ek chhota sa sawaal hai.',
       ex2: 'Bloß nicht wieder ein technisches Problem!', ex2En: 'Not another technical problem, please!', ex2Hi: 'Bas ek aur technical problem na ho!',
@@ -305,7 +307,9 @@ const CHAPTER = {
       ex: 'Könnten Sie Ihr Handy bitte stumm schalten?', exEn: 'Could you please put your phone on mute?', exHi: 'Kya aap kripya apna phone mute kar sakte hain?',
       ex2: 'Ich würde das Mikrofon gern stumm schalten.', ex2En: 'I would like to mute the microphone.', ex2Hi: 'Main microphone mute karna chahoonga.',
       conj: { praesens: 'schaltet stumm', praeteritum: 'schaltete stumm', perfekt: 'hat stumm geschaltet' },
-      advanced: { synonyms: ['muten'], opposites: ['den Ton anschalten'], collocations: ['das Handy stumm schalten', 'das Mikrofon stumm schalten'] } },
+      advanced: { synonyms: ['muten'], opposites: ['den Ton anschalten'], collocations: ['das Handy stumm schalten', 'das Mikrofon stumm schalten'] },
+      img: { src: '/api/media/vocab-img/173e5aacfc7b2ffff073', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A finger pressing the mute button on a phone.' }
+    },
     { de: 'sich anschaffen', pos: 'verb', level: 'B1', en: 'to get, acquire (for oneself)', hi: 'खुद के लिए खरीदना',
       ex: 'Würdest du dir gern ein neues Handy anschaffen?', exEn: 'Would you like to get yourself a new phone?', exHi: 'Kya tumhara naya phone lene ka mann hai?',
       ex2: 'Ich hätte gern einen neuen Staubsauger, aber ich würde ihn mir erst später anschaffen.', ex2En: 'I\'d like a new vacuum cleaner, but I would only get it for myself later.', ex2Hi: 'Mujhe naya vacuum cleaner chahiye, lekin main use baad mein hi khareedunga.',
@@ -339,7 +343,9 @@ const CHAPTER = {
     { de: 'Handyladen', art: 'der', gender: 'm', plural: 'Handyläden', pos: 'noun', level: 'B1', en: 'mobile phone shop', hi: 'मोबाइल फ़ोन की दुकान',
       ex: 'Ich muss noch in den Handyladen.', exEn: 'I still need to go to the mobile phone shop.', exHi: 'Mujhe abhi mobile shop jaana hai.',
       ex2: 'Der Handyladen hat ein gutes Sonderangebot.', ex2En: 'The mobile phone shop has a good special offer.', ex2Hi: 'Mobile shop mein ek accha special offer hai.',
-      advanced: { synonyms: [], opposites: [], collocations: ['in den Handyladen gehen'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['in den Handyladen gehen'] },
+      img: { src: '/api/media/vocab-img/466ae21585ca45bc669a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'display counter inside a phone shop' }
+    },
     { de: 'Knopf', art: 'der', gender: 'm', plural: 'Knöpfe', pos: 'noun', level: 'B1', en: 'button', hi: 'बटन',
       ex: 'Man muss nur den Knopf drücken.', exEn: 'You just need to press the button.', exHi: 'Bas button dabana hai.',
       ex2: 'Der rote Knopf schaltet das Gerät aus.', ex2En: 'The red button switches the device off.', ex2Hi: 'Laal button device ko band karta hai.',
@@ -369,7 +375,9 @@ const CHAPTER = {
       ex: 'Würden Sie das Gerät bitte reinigen?', exEn: 'Would you please clean the device?', exHi: 'Kya aap kripya device saaf karenge?',
       ex2: 'Ich würde den Teppich gern professionell reinigen lassen.', ex2En: 'I would like to have the carpet cleaned professionally.', ex2Hi: 'Main carpet professionally saaf karwana chahoonga.',
       conj: { praesens: 'reinigt', praeteritum: 'reinigte', perfekt: 'hat gereinigt' },
-      advanced: { synonyms: ['putzen', 'säubern'], opposites: ['verschmutzen'], collocations: ['ein Gerät reinigen', 'den Teppich reinigen'] } },
+      advanced: { synonyms: ['putzen', 'säubern'], opposites: ['verschmutzen'], collocations: ['ein Gerät reinigen', 'den Teppich reinigen'] },
+      img: { src: '/api/media/vocab-img/bae02d91cd2cf72069fc', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person wiping down an appliance' }
+    },
     { de: 'streichen', pos: 'verb', level: 'B1', en: 'to paint', hi: 'रंगना',
       ex: 'Könnten Sie das Zimmer bitte weiß streichen?', exEn: 'Could you please paint the room white?', exHi: 'Kya aap kripya kamre ko safed rang sakte hain?',
       ex2: 'Wir würden die Wand gern hellblau streichen.', ex2En: 'We would like to paint the wall light blue.', ex2Hi: 'Hum diwaar ko halka neela rangna chahenge.',

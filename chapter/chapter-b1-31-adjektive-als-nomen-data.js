@@ -220,7 +220,7 @@ const CHAPTER = {
     { de: 'Migrantin', art: 'die', gender: 'f', plural: 'Migrantinnen', pos: 'noun', level: 'B1', en: 'migrant (female)', hi: 'प्रवासी (महिला)', ex: 'Die Migrantin arbeitet in der Integration.', exEn: 'The migrant works in integration.', exHi: 'Pravaasi (mahila) ekikaran mein kaam karti hai.' },
     { de: 'Ministerin', art: 'die', gender: 'f', plural: 'Ministerinnen', pos: 'noun', level: 'B1', en: 'minister (female)', hi: 'मंत्री (महिला)', ex: 'Die Ministerin neben ihm kenne ich.', exEn: 'The minister next to him I know.', exHi: 'Uske bagal wali mantri ko main jaanta hoon.' },
     { de: 'Zivilcourage', art: 'die', gender: 'f', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'moral courage', hi: 'नैतिक साहस', ex: 'Das braucht viel Zivilcourage.', exEn: 'That requires a lot of moral courage.', exHi: 'Iske liye bahut naitik saahas chahiye.' },
-    { de: 'humorvoll', pos: 'adjective', level: 'B1', en: 'funny, humorous', hi: 'हास्यप्रिय', ex: 'Der Kandidat ist sehr humorvoll.', exEn: 'The candidate is very funny.', exHi: 'Ummeedvaar bahut haasyapriya hai.' }
+    { de: 'humorvoll', pos: 'adjective', level: 'B1', en: 'funny, humorous', hi: 'हास्यप्रिय', ex: 'Der Kandidat ist sehr humorvoll.', exEn: 'The candidate is very funny.', exHi: 'Ummeedvaar bahut haasyapriya hai.', img: { src: '/api/media/vocab-img/938cf10726ab8b158234', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A speaker making people laugh around a table' } }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

@@ -229,7 +229,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/5606963c84e864826f4a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person relaxing on a garden chair outdoors in mild sunshine, content' }
     },
     { de: 'dabei sein', pos: 'verb', en: 'to be there, to take part', hi: 'साथ होना',
-      ex: 'Ich habe vor, beim Fest dabei zu sein.', exEn: 'I\'m planning to be there for the festival.' },
+      ex: 'Ich habe vor, beim Fest dabei zu sein.', exEn: 'I\'m planning to be there for the festival.',
+      img: { src: '../public/vocab-img/3e31ee4a268dd1f4be9b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person happily joining a small group at an outdoor town festival with string lights' }
+    },
     { de: 'Urlaubsplanung', art: 'die', gender: 'f', plural: 'Urlaubsplanungen', pos: 'noun', en: 'holiday planning', hi: 'छुट्टी की योजना',
       ex: 'Wir beginnen, mit der Urlaubsplanung anzufangen.', exEn: 'We\'re starting to begin the holiday planning.',
       img: { src: '../public/vocab-img/8f1a0d104671e5b07734', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'open map, a small suitcase, sunglasses and a blank calendar on a table, ready for holiday planning' }
@@ -268,7 +270,9 @@ const CHAPTER = {
       ex: 'Wieso hast du aufgehört, Deutsch zu lernen?', exEn: 'Why did you stop learning German?' },
     { de: 'zelten', pos: 'verb', en: 'to camp', hi: 'कैंपिंग करना',
       ex: 'Wir haben vor, an der Küste zu zelten.', exEn: 'We\'re planning to camp on the coast.',
-      conj: { praesens: 'zeltet', praeteritum: 'zeltete', perfekt: 'hat gezeltet' } },
+      conj: { praesens: 'zeltet', praeteritum: 'zeltete', perfekt: 'hat gezeltet' },
+      img: { src: '../public/vocab-img/9dab6ac849fcfa9ff5b6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person pitching a tent near the coast' }
+    },
     { de: 'zu (+ Infinitiv)', pos: 'grammar', en: 'to (infinitive marker)', hi: 'को (इनफिनिटिव चिह्न)',
       ex: 'Ich versuche, pünktlich zu kommen.', exEn: 'I try to arrive on time.' },
     { de: 'Insekt', art: 'das', gender: 'n', plural: 'Insekten', pos: 'noun', en: 'insect', hi: 'कीड़ा',
@@ -310,7 +314,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/7de3a371a13d231541df', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'picture postcard of a beach lying next to a pair of sunglasses, the back of the card blank' }
     },
     { de: 'Aussicht', art: 'die', gender: 'f', plural: 'Aussichten', pos: 'noun', en: 'view', hi: 'नज़ारा',
-      ex: 'Es lohnt sich, die Aussicht zu genießen.', exEn: 'It\'s worth enjoying the view.' },
+      ex: 'Es lohnt sich, die Aussicht zu genießen.', exEn: 'It\'s worth enjoying the view.',
+      img: { src: '../public/vocab-img/11fd251742f1bade99db', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person standing on a hilltop looking out over a valley with a river' }
+    },
     { de: 'Küste', art: 'die', gender: 'f', plural: 'Küsten', pos: 'noun', en: 'coast', hi: 'तट',
       ex: 'Wir haben entschieden, an der Küste zu bleiben.', exEn: 'We\'ve decided to stay on the coast.',
       img: { src: '../public/vocab-img/c969a07e1a87bd0d9e44', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'rocky green coastline meeting a calm blue sea' }
@@ -320,7 +326,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/e88479f9109a30d80c9d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'bunch of green grapes with a vine leaf' }
     },
     { de: 'giftig', pos: 'adjective', en: 'poisonous', hi: 'ज़हरीला',
-      ex: 'Es ist wichtig, giftige Pilze zu erkennen.', exEn: 'It\'s important to recognise poisonous mushrooms.' },
+      ex: 'Es ist wichtig, giftige Pilze zu erkennen.', exEn: 'It\'s important to recognise poisonous mushrooms.',
+      img: { src: '../public/vocab-img/bbd5c92d836037f7aad7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'red fly agaric mushroom with white spots and a small warning gesture: a hand stopping before picking it' }
+    },
     { de: 'reif', pos: 'adjective', en: 'ripe', hi: 'पका हुआ',
       ex: 'Es ist leicht, reife von unreifen Trauben zu unterscheiden.', exEn: 'It\'s easy to tell ripe grapes from unripe ones.' }
   ],

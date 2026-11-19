@@ -300,7 +300,22 @@ async function submit() {
   const maxUsd = Number(opt("max-usd"));
   if (!(maxUsd > 0)) throw new Error("--max-usd required");
   if (opt("approved-by-owner") !== true) throw new Error("refusing paid generation without --approved-by-owner (owner budget approval)");
-  const limit = Number(opt("limit", Infinity)), jobSize = Number(opt("job-size", 400)), level = opt("level");
+  const jobSize = Number(opt("job-size", 400)), level = opt("level");
+  /* In-flight cap (2026-11-19): Vertex processes ~70 images/hour for this
+     project however many jobs are open, and a job that is not finished after
+     24 h fails with its remaining rows unprocessed (collected as "missing",
+     unbilled, resubmitted). Keeping at most STORE/max-inflight rows in open
+     jobs makes every submitted row finish inside its 24 h window. */
+  let limit = Number(opt("limit", Infinity));
+  const capFile = path.join(STORE, "max-inflight");
+  if (fs.existsSync(capFile)) {
+    const cap = Number(fs.readFileSync(capFile, "utf8").trim());
+    const all = rows().filter((r) => r.batch === "gen");
+    const closed = new Set(all.filter((r) => r.releaseJob).map((r) => r.releaseJob));
+    const inflight = all.filter((r) => r.job && r.reserveUsd && !closed.has(r.job)).reduce((n, r) => n + (r.keys || []).length, 0);
+    limit = Math.min(limit, Math.max(0, cap - inflight));
+    if (!limit) { console.log(JSON.stringify({ submitted: 0, inflight, cap })); return; }
+  }
   const want = pickWork(level, limit);
   if (!want.length) { console.log(JSON.stringify({ submitted: 0 })); return; }
   for (let i = 0; i < want.length; i += jobSize) {

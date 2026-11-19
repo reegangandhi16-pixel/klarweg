@@ -706,6 +706,7 @@ img { max-width: 100%; display: block; }
 .vword-vis--focus { font-size: 36px; }
 .vword-vis--grammar mark, .vword-ex mark.vword-hl { background: transparent; font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .vword-ex mark.vword-hl { color: inherit; }
+.vword-hl.r-focus { color: var(--ink-primary); }   /* neutral emphasis: grammar colours carry grammar meaning only */
 .vword-vis--map { padding: 0; overflow: hidden; }
 .vword-vis--map img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .vword-vis--strip { flex-direction: row; flex-wrap: wrap; align-content: center; gap: 8px; font-family: var(--font-ui); }

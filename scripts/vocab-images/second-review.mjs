@@ -29,7 +29,7 @@ const QUEUE = path.join(STORE, "project/queue.json");
 const CHUNK = 25;
 const args = process.argv.slice(2);
 const opt = (k, d) => { const i = args.indexOf("--" + k); return i < 0 ? d : args[i + 1] && !args[i + 1].startsWith("--") ? args[i + 1] : true; };
-export const ROLES = ["subject", "verb", "object", "time", "place", "akkusativ", "dativ", "genitiv", "modalverb", "article", "preposition", "negation", "adjective", "adverb", "question"];
+export const ROLES = ["subject", "verb", "object", "time", "place", "akkusativ", "dativ", "genitiv", "modalverb", "article", "preposition", "negation", "adjective", "adverb", "question", "focus"];   // focus = neutral underline, no grammar colour
 
 export const RULES = `You design the visual learning component of a German vocabulary card (Klarweg, adult learners). These words were judged impossible to show as ONE standalone picture. The card UI already shows the German word, English + Hindi meaning and the card's German example sentence. A picture does not have to explain the word alone: picture + example sentence + a short caption together must teach it.
 Choose ONE type per word (prefer the first that is genuinely useful and accurate):
@@ -47,7 +47,8 @@ Return ONLY a JSON array in input order: {"key":..., "ok": true} or {"key":..., 
 
 const J = (f) => (fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, "utf8")) : null);
 function concepts() {
-  const q = JSON.parse(fs.readFileSync(QUEUE, "utf8")).items.filter((x) => x.status === "text-only");
+  // second-strategy words: still text-only, or already planned by this strategy (vis / pair / captioned scene)
+  const q = JSON.parse(fs.readFileSync(QUEUE, "utf8")).items.filter((x) => !x.parent && (x.status === "text-only" || x.second));
   const keys = new Set(q.map((x) => x.key)); const m = new Map();
   for (const ch of loadChapters()) for (const v of ch.C.vocab || []) {
     const key = conceptKey(v); if (!keys.has(key) || m.has(key) || v.img) continue;

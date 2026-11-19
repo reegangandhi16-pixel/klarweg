@@ -2033,7 +2033,7 @@
   //        { kind: 'grammar', de, hl, role, cap }       model sentence, hl in its role colour
   //        { kind: 'map', src, iso, cap }               locator map (public SVG, no text in it)
   //        { kind: 'week', day: 1-7, cap } / { kind: 'year', month: 1-12, cap }
-  const VIS_ROLES = ['subject', 'verb', 'object', 'time', 'place', 'akkusativ', 'dativ', 'genitiv', 'modalverb', 'article', 'preposition', 'negation', 'adjective', 'adverb', 'question'];
+  const VIS_ROLES = ['subject', 'verb', 'object', 'time', 'place', 'akkusativ', 'dativ', 'genitiv', 'modalverb', 'article', 'preposition', 'negation', 'adjective', 'adverb', 'question', 'focus'];   // focus: neutral, no grammar colour
   function vocabVisual(w) {
     const v = w && w.vis;
     if (!v || typeof v !== 'object') return null;

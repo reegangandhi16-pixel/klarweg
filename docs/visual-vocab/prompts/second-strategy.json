@@ -1045,12 +1045,18 @@
   "hl": "Messverfahren"
  },
  "das-migrantenkind--migrant-child": {
-  "key": "das-migrantenkind--migrant-child",
-  "type": "none"
+  "type": "grammar",
+  "de": "Es handelt sich um das Migrantenkind im Spielfilm.",
+  "hl": "Migrantenkind",
+  "role": "focus",
+  "cap": "A child whose family migrated"
  },
  "das-migrationsdrama--migration-drama": {
-  "key": "das-migrationsdrama--migration-drama",
-  "type": "none"
+  "type": "grammar",
+  "de": "Das Migrationsdrama wird in den Medien oft ausgenutzt.",
+  "hl": "Migrationsdrama",
+  "role": "focus",
+  "cap": "A dramatic story about migration"
  },
  "das-milieu--milieu-social-environment": {
   "key": "das-milieu--milieu-social-environment",
@@ -1407,12 +1413,18 @@
   "hl": "Wort"
  },
  "das-wortende--word-ending": {
-  "key": "das-wortende--word-ending",
-  "type": "none"
+  "type": "grammar",
+  "de": "die Zeitung",
+  "hl": "ung",
+  "role": "focus",
+  "cap": "The word ending -ung: these nouns are feminine"
  },
  "das-wortinnere--inside-of-a-word": {
-  "key": "das-wortinnere--inside-of-a-word",
-  "type": "none"
+  "type": "grammar",
+  "de": "das Fenster",
+  "hl": "nst",
+  "role": "focus",
+  "cap": "Inside a word: neither the start nor the end"
  },
  "das-wortspiel--pun-play-on-words": {
   "key": "das-wortspiel--pun-play-on-words",
@@ -1860,16 +1872,25 @@
   "hl": "Ministerpräsident"
  },
  "der-die-muslim-in--muslim": {
-  "key": "der-die-muslim-in--muslim",
-  "type": "none"
+  "type": "grammar",
+  "de": "Manchmal ist es peinlich, wenn ein Muslim missverstanden wird.",
+  "hl": "Muslim",
+  "role": "focus",
+  "cap": "A person of the Islamic faith"
  },
  "der-die-muttersprachler-in--native-speaker": {
-  "key": "der-die-muttersprachler-in--native-speaker",
-  "type": "none"
+  "type": "grammar",
+  "de": "Sie sprach wie eine Muttersprachlerin.",
+  "hl": "Muttersprachlerin",
+  "role": "focus",
+  "cap": "Someone who learned the language from birth"
  },
  "der-die-nationalsozialist-in--national-socialist-nazi": {
-  "key": "der-die-nationalsozialist-in--national-socialist-nazi",
-  "type": "none"
+  "type": "grammar",
+  "de": "Historiker untersuchten die Nationalsozialisten.",
+  "hl": "Nationalsozialisten",
+  "role": "focus",
+  "cap": "Members of the Nazi party (1920–1945)"
  },
  "der-die-parteivorsitzende-r--party-chairperson": {
   "key": "der-die-parteivorsitzende-r--party-chairperson",
@@ -1879,8 +1900,10 @@
   "hl": "Parteivorsitzende"
  },
  "der-die-polizeimeister--police-sergeant": {
-  "key": "der-die-polizeimeister--police-sergeant",
-  "type": "none"
+  "type": "scene",
+  "scene": "Show a female police officer in a plain uniform calmly answering a question from a reporter outside a building.",
+  "cap": "A police officer gives an official statement",
+  "hl": "Polizeimeisterin"
  },
  "der-die-praesident-in--president": {
   "key": "der-die-praesident-in--president",
@@ -1890,20 +1913,31 @@
   "hl": "Präsident"
  },
  "der-die-schwager--brother-sister-in-law": {
-  "key": "der-die-schwager--brother-sister-in-law",
-  "type": "none"
+  "type": "grammar",
+  "de": "Mein Schwager arbeitet als Journalist.",
+  "hl": "Schwager",
+  "role": "focus",
+  "cap": "Your sister’s husband or your spouse’s brother"
  },
  "der-die-sozialhilfeempfaenger-in--welfare-recipient": {
-  "key": "der-die-sozialhilfeempfaenger-in--welfare-recipient",
-  "type": "none"
+  "type": "grammar",
+  "de": "Manche Sozialhilfeempfänger bekamen unentgeltlich Nachhilfestunden.",
+  "hl": "Sozialhilfeempfänger",
+  "role": "focus",
+  "cap": "A person who receives social welfare"
  },
  "der-die-verpflichtete--obligated-party": {
-  "key": "der-die-verpflichtete--obligated-party",
-  "type": "none"
+  "type": "grammar",
+  "de": "Der Verpflichtete muss die Frist strikt einhalten.",
+  "hl": "Verpflichtete",
+  "role": "focus",
+  "cap": "The person who has a legal duty"
  },
  "der-die-waise--orphan": {
-  "key": "der-die-waise--orphan",
-  "type": "none"
+  "type": "scene",
+  "scene": "Show a young girl being warmly hugged by her aunt in a cosy family kitchen, both smiling, a schoolbag on a chair.",
+  "cap": "A child growing up with a loving aunt",
+  "hl": "Waise"
  },
  "der-dienstag--tuesday": {
   "type": "week",
@@ -1924,8 +1958,10 @@
   "cap": "The fourth day of the German week"
  },
  "der-erkenntnisgewinn--gain-in-knowledge-insight": {
-  "key": "der-erkenntnisgewinn--gain-in-knowledge-insight",
-  "type": "none"
+  "type": "scene",
+  "scene": "Show a researcher at a desk with open notebooks looking up with a delighted expression of sudden understanding.",
+  "cap": "New understanding gained from research",
+  "hl": "Erkenntnisgewinn"
  },
  "der-faden--thread": {
   "key": "der-faden--thread",
@@ -1935,16 +1971,25 @@
   "hl": "Faden"
  },
  "der-fakt--fact": {
-  "key": "der-fakt--fact",
-  "type": "none"
+  "type": "grammar",
+  "de": "Das ist ein wichtiger Fakt.",
+  "hl": "Fakt",
+  "role": "focus",
+  "cap": "Something that is true"
  },
  "der-faktor--factor": {
-  "key": "der-faktor--factor",
-  "type": "none"
+  "type": "grammar",
+  "de": "Erfahrung war ein wichtiger Faktor.",
+  "hl": "Faktor",
+  "role": "focus",
+  "cap": "Something that influences a result"
  },
  "der-fall--case": {
-  "key": "der-fall--case",
-  "type": "none"
+  "type": "grammar",
+  "de": "In diesem Fall haben wir keine Wahl.",
+  "hl": "Fall",
+  "role": "focus",
+  "cap": "In this case: in this situation"
  },
  "der-familienname--family-name-surname": {
   "type": "grammar",
@@ -1954,8 +1999,10 @@
   "cap": "The family name (surname) comes after the first name"
  },
  "der-favorit--favourite": {
-  "key": "der-favorit--favourite",
-  "type": "none"
+  "type": "scene",
+  "scene": "Show a person smiling while holding their favourite teal mug, with several other mugs standing untouched on the shelf behind.",
+  "cap": "The one you like best",
+  "hl": "Favorit"
  },
  "der-februar--february": {
   "type": "year",
@@ -1963,16 +2010,25 @@
   "cap": "The second month of the year"
  },
  "der-finalsatz--final-clause": {
-  "key": "der-finalsatz--final-clause",
-  "type": "none"
+  "type": "grammar",
+  "de": "Ich spare Geld, damit ich reisen kann.",
+  "hl": "damit ich reisen kann",
+  "role": "adverb",
+  "cap": "A final clause states the purpose"
  },
  "der-forschungsansatz--research-approach": {
-  "key": "der-forschungsansatz--research-approach",
-  "type": "none"
+  "type": "grammar",
+  "de": "Der neue Forschungsansatz kombiniert quantitative und qualitative Methoden.",
+  "hl": "Forschungsansatz",
+  "role": "focus",
+  "cap": "The method a study uses"
  },
  "der-forumsname--forum-name": {
-  "key": "der-forumsname--forum-name",
-  "type": "none"
+  "type": "grammar",
+  "de": "Sein Forumsname war lustig.",
+  "hl": "Forumsname",
+  "role": "focus",
+  "cap": "Your user name in an online forum"
  },
  "der-franken--swiss-franc": {
   "type": "map",
@@ -1997,8 +2053,11 @@
   "hl": "Geburtsort"
  },
  "der-gedaechtnisinhalt--memory-content": {
-  "key": "der-gedaechtnisinhalt--memory-content",
-  "type": "none"
+  "type": "grammar",
+  "de": "Der Gedächtnisinhalt blieb erhalten.",
+  "hl": "Gedächtnisinhalt",
+  "role": "focus",
+  "cap": "What is stored in memory"
  },
  "der-gedankenschritt--step-in-reasoning": {
   "key": "der-gedankenschritt--step-in-reasoning",
@@ -2037,8 +2096,11 @@
   "hl": "Gerechtigkeitssinn"
  },
  "der-gewaltuebergriff--violent-assault": {
-  "key": "der-gewaltuebergriff--violent-assault",
-  "type": "none"
+  "type": "grammar",
+  "de": "Der Mobilfunkanbieter verhinderte einen Gewaltübergriff.",
+  "hl": "Gewaltübergriff",
+  "role": "focus",
+  "cap": "A violent attack on a person"
  },
  "der-halbmarathon--half-marathon": {
   "key": "der-halbmarathon--half-marathon",
@@ -2106,8 +2168,11 @@
   "hl": "Inhaltspunkt"
  },
  "der-internationalismus--internationalism": {
-  "key": "der-internationalismus--internationalism",
-  "type": "none"
+  "type": "grammar",
+  "de": "Hotel, Taxi, Pizza, Internet",
+  "hl": "Hotel",
+  "role": "focus",
+  "cap": "Words that look the same in many languages"
  },
  "der-interrogativartikel--interrogative-article": {
   "key": "der-interrogativartikel--interrogative-article",
@@ -2225,8 +2290,11 @@
   "cap": "A consecutive clause expresses the result of an action"
  },
  "der-kontrastakzent--contrast-emphasis": {
-  "key": "der-kontrastakzent--contrast-emphasis",
-  "type": "none"
+  "type": "grammar",
+  "de": "Ich wollte Tee, nicht Kaffee.",
+  "hl": "Tee",
+  "role": "focus",
+  "cap": "Stress the word that is being contrasted"
  },
  "der-konzessivsatz--concessive-clause": {
   "key": "der-konzessivsatz--concessive-clause",
@@ -2314,16 +2382,25 @@
   "cap": "March brings the arrival of early spring"
  },
  "der-markenname--brand-name": {
-  "key": "der-markenname--brand-name",
-  "type": "none"
+  "type": "grammar",
+  "de": "Ich habe den Markennamen sofort erkannt.",
+  "hl": "Markennamen",
+  "role": "focus",
+  "cap": "The name of a product brand"
  },
  "der-migrant--migrant": {
-  "key": "der-migrant--migrant",
-  "type": "none"
+  "type": "grammar",
+  "de": "Ein Bekannter von mir ist Migrant.",
+  "hl": "Migrant",
+  "role": "focus",
+  "cap": "A person who has moved to another country"
  },
  "der-migrationshintergrund--migration-background": {
-  "key": "der-migrationshintergrund--migration-background",
-  "type": "none"
+  "type": "grammar",
+  "de": "Er musste wegen seines Migrationshintergrunds eine Arbeitserlaubnis beantragen.",
+  "hl": "Migrationshintergrunds",
+  "role": "focus",
+  "cap": "Someone whose family came from another country"
  },
  "der-mindestbestellwert--minimum-order-value": {
   "key": "der-mindestbestellwert--minimum-order-value",
@@ -2764,8 +2841,11 @@
   "hl": "Überraschungstag"
  },
  "der-unterstrich--underscore": {
-  "key": "der-unterstrich--underscore",
-  "type": "none"
+  "type": "grammar",
+  "de": "anna_berlin",
+  "hl": "_",
+  "role": "focus",
+  "cap": "The underscore character"
  },
  "der-urlaubstyp--holiday-type": {
   "key": "der-urlaubstyp--holiday-type",
@@ -3147,12 +3227,18 @@
   "hl": "Art"
  },
  "die-atombombe--atomic-bomb": {
-  "key": "die-atombombe--atomic-bomb",
-  "type": "none"
+  "type": "grammar",
+  "de": "Die Atombombe veränderte die Geschichte.",
+  "hl": "Atombombe",
+  "role": "focus",
+  "cap": "A nuclear weapon"
  },
  "die-auslaenderquote--foreigner-quota": {
-  "key": "die-auslaenderquote--foreigner-quota",
-  "type": "none"
+  "type": "grammar",
+  "de": "Die Ausländerquote wird oft diskutiert.",
+  "hl": "Ausländerquote",
+  "role": "focus",
+  "cap": "The share of foreign residents"
  },
  "die-aussagekraft--explanatory-power-validity": {
   "key": "die-aussagekraft--explanatory-power-validity",
@@ -3183,8 +3269,11 @@
   "hl": "Begründung"
  },
  "die-besatzungszone--occupation-zone": {
-  "key": "die-besatzungszone--occupation-zone",
-  "type": "none"
+  "type": "map",
+  "iso": [
+   "DE"
+  ],
+  "cap": "After 1945 Germany was divided into four occupation zones"
  },
  "die-betonung--emphasis-stress": {
   "key": "die-betonung--emphasis-stress",
@@ -3236,8 +3325,11 @@
   "hl": "Bildungspolitik"
  },
  "die-bombe--bomb": {
-  "key": "die-bombe--bomb",
-  "type": "none"
+  "type": "grammar",
+  "de": "Die Bombe wurde rechtzeitig entschärft.",
+  "hl": "Bombe",
+  "role": "focus",
+  "cap": "An explosive device"
  },
  "die-branche--field-of-business": {
   "key": "die-branche--field-of-business",
@@ -3552,12 +3644,18 @@
   "hl": "Identität"
  },
  "die-informationsstruktur--information-structure": {
-  "key": "die-informationsstruktur--information-structure",
-  "type": "none"
+  "type": "grammar",
+  "de": "Den Schlüssel habe ich im Auto gefunden.",
+  "hl": "im Auto",
+  "role": "focus",
+  "cap": "Known information first, the new information last"
  },
  "die-informationsverdichtung--information-compression": {
-  "key": "die-informationsverdichtung--information-compression",
-  "type": "none"
+  "type": "grammar",
+  "de": "der seit Jahren in Berlin lebende Autor",
+  "hl": "seit Jahren in Berlin lebende",
+  "role": "adjective",
+  "cap": "Much information packed into one noun phrase"
  },
  "die-international-anerkannte-wissenschaftlich-entwickelte-me--internationally-recognized-scientifically-developed-method": {
   "key": "die-international-anerkannte-wissenschaftlich-entwickelte-me--internationally-recognized-scientifically-developed-method",
@@ -3581,8 +3679,11 @@
   "hl": "Kindergartenpflicht"
  },
  "die-kleinkriminellenstudie--petty-criminal-study": {
-  "key": "die-kleinkriminellenstudie--petty-criminal-study",
-  "type": "none"
+  "type": "grammar",
+  "de": "Ich interessiere mich für die Kleinkriminellenstudie.",
+  "hl": "Kleinkriminellenstudie",
+  "role": "focus",
+  "cap": "A study about minor offenders"
  },
  "die-kohaerenz--coherence": {
   "key": "die-kohaerenz--coherence",
@@ -3608,12 +3709,18 @@
   "cap": "Subjunctive verb form expressing a hypothetical"
  },
  "die-kontofuehrungsgebuehr--account-maintenance-charge": {
-  "key": "die-kontofuehrungsgebuehr--account-maintenance-charge",
-  "type": "none"
+  "type": "grammar",
+  "de": "Die Kontoführungsgebühr ist gering.",
+  "hl": "Kontoführungsgebühr",
+  "role": "focus",
+  "cap": "The bank fee for having an account"
  },
  "die-kriegswaffe--weapon-of-war": {
-  "key": "die-kriegswaffe--weapon-of-war",
-  "type": "none"
+  "type": "grammar",
+  "de": "Kriegswaffen müssen streng kontrolliert werden.",
+  "hl": "Kriegswaffen",
+  "role": "focus",
+  "cap": "Weapons used in war"
  },
  "die-kurzform--short-form-contraction": {
   "key": "die-kurzform--short-form-contraction",
@@ -3624,12 +3731,18 @@
   "cap": "Short form contracted from 'in dem'"
  },
  "die-landessprache--national-language": {
-  "key": "die-landessprache--national-language",
-  "type": "none"
+  "type": "grammar",
+  "de": "Es gelingt mir, jede Landessprache gut zu verstehen.",
+  "hl": "Landessprache",
+  "role": "focus",
+  "cap": "The official language of a country"
  },
  "die-lexikalische-produktivitaet--lexical-productivity": {
-  "key": "die-lexikalische-produktivitaet--lexical-productivity",
-  "type": "none"
+  "type": "grammar",
+  "de": "das Handy, die Handyhülle, der Handyvertrag",
+  "hl": "Handy",
+  "role": "focus",
+  "cap": "German builds many new words from one word"
  },
  "die-liedzeile--lyric-line": {
   "key": "die-liedzeile--lyric-line",
@@ -3646,16 +3759,25 @@
   "hl": "Mehrsprachigkeit"
  },
  "die-mehrwertsteuer--value-added-tax": {
-  "key": "die-mehrwertsteuer--value-added-tax",
-  "type": "none"
+  "type": "grammar",
+  "de": "Das ist die Mehrwertsteuer, die man im Preis sieht.",
+  "hl": "Mehrwertsteuer",
+  "role": "focus",
+  "cap": "The tax already included in a price"
  },
  "die-merkformel--mnemonic-formula": {
-  "key": "die-merkformel--mnemonic-formula",
-  "type": "none"
+  "type": "grammar",
+  "de": "Es fällt mir leicht, die Merkformel zu behalten.",
+  "hl": "Merkformel",
+  "role": "focus",
+  "cap": "A short phrase that helps you remember a rule"
  },
  "die-militarisierung--militarisation": {
-  "key": "die-militarisierung--militarisation",
-  "type": "none"
+  "type": "grammar",
+  "de": "Die Militarisierung nahm zu.",
+  "hl": "Militarisierung",
+  "role": "focus",
+  "cap": "Building up military power"
  },
  "die-milliarde--billion": {
   "key": "die-milliarde--billion",
@@ -3960,8 +4082,11 @@
   "hl": "Sache"
  },
  "die-saeuglingssterblichkeit--infant-mortality": {
-  "key": "die-saeuglingssterblichkeit--infant-mortality",
-  "type": "none"
+  "type": "grammar",
+  "de": "Die Säuglingssterblichkeit sank deutlich.",
+  "hl": "Säuglingssterblichkeit",
+  "role": "focus",
+  "cap": "The rate of babies who die in their first year"
  },
  "die-satzarchitektur--sentence-architecture": {
   "key": "die-satzarchitektur--sentence-architecture",
@@ -3972,8 +4097,11 @@
   "cap": "Sentence architecture describing structural design of sentences"
  },
  "die-satzhaelfte--half-of-the-sentence": {
-  "key": "die-satzhaelfte--half-of-the-sentence",
-  "type": "none"
+  "type": "grammar",
+  "de": "Wenn es regnet, bleibe ich zu Hause.",
+  "hl": "bleibe ich zu Hause",
+  "role": "focus",
+  "cap": "The second half of the sentence"
  },
  "die-satzreduktion--clause-sentence-reduction": {
   "key": "die-satzreduktion--clause-sentence-reduction",
@@ -4070,8 +4198,25 @@
   "hl": "Situation"
  },
  "die-sowjetunion--soviet-union": {
-  "key": "die-sowjetunion--soviet-union",
-  "type": "none"
+  "type": "map",
+  "iso": [
+   "RU",
+   "UA",
+   "BY",
+   "MD",
+   "EE",
+   "LV",
+   "LT",
+   "GE",
+   "AM",
+   "AZ",
+   "KZ",
+   "UZ",
+   "TM",
+   "KG",
+   "TJ"
+  ],
+  "cap": "The former Soviet Union (until 1991)"
  },
  "die-sozialforschung--social-research": {
   "key": "die-sozialforschung--social-research",
@@ -4284,8 +4429,11 @@
   "cap": "A W-question starts with a W-word"
  },
  "die-waffe--weapon": {
-  "key": "die-waffe--weapon",
-  "type": "none"
+  "type": "grammar",
+  "de": "Der Besitz einer Waffe ist streng geregelt.",
+  "hl": "Waffe",
+  "role": "focus",
+  "cap": "A weapon"
  },
  "die-weise--manner-way": {
   "key": "die-weise--manner-way",
@@ -4316,8 +4464,11 @@
   "hl": "Wissenschaftssprache"
  },
  "die-wortgrenze--word-boundary": {
-  "key": "die-wortgrenze--word-boundary",
-  "type": "none"
+  "type": "grammar",
+  "de": "Achte auf die Wortgrenze zwischen den Wörtern.",
+  "hl": "Wortgrenze",
+  "role": "focus",
+  "cap": "Where one word ends and the next begins"
  },
  "die-wortgruppe--word-group": {
   "type": "grammar",
@@ -4597,8 +4748,11 @@
   "cap": "Spoken natively in the UK, USA, Canada, Australia"
  },
  "entfuehren--abduct-kidnap": {
-  "key": "entfuehren--abduct-kidnap",
-  "type": "none"
+  "type": "grammar",
+  "de": "Man entführte das Kind.",
+  "hl": "entführte",
+  "role": "focus",
+  "cap": "to take someone away by force"
  },
  "entgegen--contrary-to": {
   "key": "entgegen--contrary-to",
@@ -4708,12 +4862,18 @@
   "hl": "erhebliches"
  },
  "erpressen--blackmail-extort": {
-  "key": "erpressen--blackmail-extort",
-  "type": "none"
+  "type": "grammar",
+  "de": "Er erpresste das Opfer.",
+  "hl": "erpresste",
+  "role": "focus",
+  "cap": "to force someone with threats"
  },
  "erschiessen--shoot-dead": {
-  "key": "erschiessen--shoot-dead",
-  "type": "none"
+  "type": "grammar",
+  "de": "Im Kostüm spielt er einen Jäger, der ein Tier erschießt.",
+  "hl": "erschießt",
+  "role": "focus",
+  "cap": "to kill with a gun"
  },
  "erst--only-not-until": {
   "key": "erst--only-not-until",
@@ -6226,8 +6386,11 @@
   "cap": "Both things are true, the second one adds to the first"
  },
  "nicht-restriktiver-relativsatz--non-restrictive-relative-clause": {
-  "key": "nicht-restriktiver-relativsatz--non-restrictive-relative-clause",
-  "type": "none"
+  "type": "grammar",
+  "de": "Mein Bruder, der in Köln wohnt, ist Arzt.",
+  "hl": "der in Köln wohnt",
+  "role": "adjective",
+  "cap": "Extra information about the noun, set off by commas"
  },
  "nicht-sondern-fokusverneinung--not-x-but-y": {
   "type": "grammar",
@@ -6300,8 +6463,11 @@
   "hl": "noch mal"
  },
  "nominal--nominal": {
-  "key": "nominal--nominal",
-  "type": "none"
+  "type": "grammar",
+  "de": "Der nominale Preis ist niedrig.",
+  "hl": "nominale",
+  "role": "focus",
+  "cap": "The stated amount, before inflation"
  },
  "normal--normal": {
   "key": "normal--normal",
@@ -6372,8 +6538,11 @@
   "hl": "ohnehin"
  },
  "operationalisieren--operationalize": {
-  "key": "operationalisieren--operationalize",
-  "type": "none"
+  "type": "grammar",
+  "de": "Die Forscherinnen operationalisieren den Begriff \"Wohlbefinden\" durch messbare Indikatoren.",
+  "hl": "operationalisieren",
+  "role": "focus",
+  "cap": "To make a concept measurable"
  },
  "pandemiebedingt--pandemic-related": {
   "key": "pandemiebedingt--pandemic-related",
@@ -6397,8 +6566,10 @@
   "hl": "per"
  },
  "phrasieren--phrase": {
-  "key": "phrasieren--phrase",
-  "type": "none"
+  "type": "scene",
+  "scene": "Show a manager speaking calmly to a colleague at a desk with an open, friendly hand gesture, the colleague nodding and listening.",
+  "cap": "Wording criticism politely and carefully",
+  "hl": "phrasiert"
  },
  "portugiesisch--portuguese": {
   "key": "portugiesisch--portuguese",
@@ -7059,8 +7230,11 @@
   "hl": "toleriere"
  },
  "transzendierend--transcending": {
-  "key": "transzendierend--transcending",
-  "type": "none"
+  "type": "grammar",
+  "de": "Das Werk entwickelt eine grenzen transzendierende Perspektive.",
+  "hl": "transzendierende",
+  "role": "focus",
+  "cap": "Going beyond normal limits"
  },
  "tuerkisch--turkish": {
   "key": "tuerkisch--turkish",
@@ -7918,5 +8092,12 @@
   "scene": "Show a municipal worker taking a brief pause from their main roadwork tasks to inspect and tighten a nearby tilted traffic sign on the sidewalk.",
   "cap": "Attending to a small task in between main duties",
   "hl": "zwischendurch"
+ },
+ "zumal--especially-since-particularly-as": {
+  "type": "grammar",
+  "de": "Wir bleiben zu Hause, zumal es stark regnet.",
+  "hl": "zumal es stark regnet",
+  "role": "adverb",
+  "cap": "zumal adds an extra, especially strong reason"
  }
 }

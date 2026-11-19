@@ -124,12 +124,13 @@ export function buildPlan(chapters = loadChapters()) {
   if (only2) for (const k of Object.keys(second)) if (!only2.has(k)) delete second[k];
   for (const it of [...items.values()]) {
     const x = second[it.key]; if (!x || it.status !== "text-only") continue;
+    it.second = true;
     const extra = { ...(x.cap ? { cap: x.cap } : {}), ...(x.hl ? { hl: x.hl } : {}) };
     if (x.type === "scene") Object.assign(it, { status: "todo", subject: x.scene, strategy: "sentence", ...extra, alt: x.scene.replace(/^Show (an?|the|two|one) /i, "").replace(/\.$/, "").slice(0, 120) }, { why: undefined });
     else if (x.type === "pair") {
       Object.assign(it, { status: "pair", parts: [it.key + "~a", it.key + "~b"], ...extra, why: undefined });
       for (const [suffix, panel] of [["~a", x.a], ["~b", x.b]]) items.set(it.key + suffix, { ...it, key: it.key + suffix, status: "todo", parts: undefined, cap: undefined, hl: undefined,
-        en: `${it.en} (panel: ${panel.label})`, subject: panel.scene, strategy: "contrast", label: panel.label, parent: it.key,
+        en: `${it.en} (panel: ${panel.label})`, subject: panel.scene, strategy: "contrast", label: panel.label, parent: it.key, second: true,
         alt: panel.scene.replace(/^Show (an?|the|two|one) /i, "").replace(/\.$/, "").slice(0, 120) });
     } else if (["number", "grammar", "map", "week", "year"].includes(x.type)) {
       const { type, key, ...rest } = x; void key;
@@ -202,6 +203,8 @@ function pickWork(level, limit) {
   for (const it of queue()) {
     if (it.status !== "todo") continue;
     if (only && !only.has(it.key)) continue;
+    // second-strategy images wait for the evaluation gate (STORE/second-go), except named pilots (--keys)
+    if (it.second && !only && !fs.existsSync(path.join(STORE, "second-go"))) continue;
     if (level && !it.audience.some((u) => u.level === level)) continue;
     const x = st.get(it.key);
     if (x.inflight || x.accepted || x.needsQa.length) continue;          // never pay twice; QA first

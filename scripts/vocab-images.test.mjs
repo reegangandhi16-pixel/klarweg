@@ -180,7 +180,7 @@ test('Images on/off control and gated-image probe (accessibility, no downloads w
 });
 
 test('UI-rendered visuals (vis): valid kinds, public maps only, German stays page text', () => {
-  const ROLES = ['subject', 'verb', 'object', 'time', 'place', 'akkusativ', 'dativ', 'genitiv', 'modalverb', 'article', 'preposition', 'negation', 'adjective', 'adverb', 'question'];
+  const ROLES = ['subject', 'verb', 'object', 'time', 'place', 'akkusativ', 'dativ', 'genitiv', 'modalverb', 'article', 'preposition', 'negation', 'adjective', 'adverb', 'question', 'focus'];
   for (const ch of CHAPTERS) for (const v of ch.C.vocab || []) {
     if (!v.vis) continue;
     const x = v.vis, where = `${ch.id} ${v.de}`;

@@ -236,9 +236,13 @@ const CHAPTER = {
       conj: { praesens: 'reagiert', praeteritum: 'reagierte', perfekt: 'hat reagiert' } },
     // — Languages —
     { de: 'Deutsch', pos: 'language', en: 'German (language)', hi: 'जर्मन भाषा',
-      ex: 'Ich spreche ein bisschen Deutsch.', exEn: 'I speak a little German.' },
+      ex: 'Ich spreche ein bisschen Deutsch.', exEn: 'I speak a little German.',
+      vis: { kind: 'map', iso: ['DE', 'AT', 'CH'], cap: 'Spoken mainly in Germany, Austria, and Switzerland', src: '../public/vocab-map/90d56113bd96.svg' }
+    },
     { de: 'deutsch', pos: 'adjective', en: 'German (adj.)', hi: 'जर्मन (विशेषण)',
-      ex: 'Das ist ein deutsches Wort.', exEn: 'That is a German word.' },
+      ex: 'Das ist ein deutsches Wort.', exEn: 'That is a German word.',
+      vis: { kind: 'map', iso: ['DE', 'AT', 'CH'], cap: 'Spoken mainly in Germany, Austria, and Switzerland', src: '../public/vocab-map/90d56113bd96.svg' }
+    },
     { de: 'Englisch', pos: 'language', en: 'English', hi: 'अंग्रेज़ी',
       ex: 'Sprichst du Englisch?', exEn: 'Do you speak English?' },
     { de: 'Französisch', pos: 'language', en: 'French', hi: 'फ़्रेंच',
@@ -248,7 +252,9 @@ const CHAPTER = {
     { de: 'Spanisch', pos: 'language', en: 'Spanish', hi: 'स्पेनिश',
       ex: 'Spanisch spricht man in Spanien.', exEn: 'Spanish is spoken in Spain.' },
     { de: 'Portugiesisch', pos: 'language', en: 'Portuguese', hi: 'पुर्तगाली',
-      ex: 'In Brasilien spricht man Portugiesisch.', exEn: 'In Brazil people speak Portuguese.' },
+      ex: 'In Brasilien spricht man Portugiesisch.', exEn: 'In Brazil people speak Portuguese.',
+      vis: { kind: 'map', iso: ['PT', 'BR', 'AO', 'MZ'], cap: 'Spoken mainly in Brazil and Portugal', src: '../public/vocab-map/a2bd152d5370.svg' }
+    },
     { de: 'Russisch', pos: 'language', en: 'Russian', hi: 'रूसी',
       ex: 'Russisch hat ein anderes Alphabet.', exEn: 'Russian has a different alphabet.' },
     { de: 'Arabisch', pos: 'language', en: 'Arabic', hi: 'अरबी',

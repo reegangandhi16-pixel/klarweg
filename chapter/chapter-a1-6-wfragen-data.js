@@ -210,7 +210,9 @@ const CHAPTER = {
   vocab: [
     // — Core question words —
     { de: 'wer', pos: 'question word', en: 'who', hi: 'कौन',
-      ex: 'Wer bist du?', exEn: 'Who are you?' },
+      ex: 'Wer bist du?', exEn: 'Who are you?',
+      vis: { kind: 'grammar', de: 'Wer bist du?', hl: 'Wer', role: 'question', cap: 'Question word asking about a person' }
+    },
     { de: 'was', pos: 'question word', en: 'what', hi: 'क्या',
       ex: 'Was ist das?', exEn: 'What is that?' },
     { de: 'wie', pos: 'question word', en: 'how; what', hi: 'कैसे',

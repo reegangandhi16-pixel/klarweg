@@ -14,40 +14,40 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | Text-only (function words / grammar constructions) | 568 |
 | Illustrable concepts | 7893 |
 | Chapters without word cards | b2-14-goethe-mini-test-1 (review quiz), b2-26-goethe-mini-test-2 (review quiz), b2-36-goethe-halbzeit-test (review quiz), b2-43-goethe-mini-3 (review quiz), b2-53-goethe-mini-4 (none) |
-| Already illustrated (A1·01 pilot) | 3226 |
-| **New images needed** | **4667** (3641 direct, 1026 conceptual) |
+| Already illustrated (A1·01 pilot) | 3272 |
+| **New images needed** | **4621** (3604 direct, 1017 conceptual) |
 | …used on a free Chapter 1 page (public files) | 35 |
-| …used only in paid chapters (gated files) | 4632 |
+| …used only in paid chapters (gated files) | 4586 |
 | Cards served by reusing another card's image | 663 |
 | Headwords with several meanings | 578 (308 look like the same meaning worded differently — review) |
 
 ## Cost and storage (estimate)
-- Expected generations incl. re-rolls: **5908** × $0.039 = **$230.41** (interactive) · **$115.2** if the 50 % batch mode is available for this model (to verify).
-- Assets: 18668 files ≈ **88.8 MB** (AVIF+WebP × 400/800w, pilot average 19.5 KB per word); a learner downloads only one variant per card (≈ 3–6 KB).
+- Expected generations incl. re-rolls: **5850** × $0.039 = **$228.15** (interactive) · **$114.08** if the 50 % batch mode is available for this model (to verify).
+- Assets: 18484 files ≈ **87.9 MB** (AVIF+WebP × 400/800w, pilot average 19.5 KB per word); a learner downloads only one variant per card (≈ 3–6 KB).
 
 ## Per level
 | Level | Chapters | With cards | Checkpoints | Cards | Image | Concept | Text-only | New images (first use here) |
 |---|---|---|---|---|---|---|---|---|
-| A1 | 47 | 47 | 0 | 1984 | 1480 | 269 | 235 | 725 |
-| A2 | 35 | 35 | 0 | 1607 | 1270 | 272 | 65 | 766 |
-| B1 | 35 | 35 | 0 | 2128 | 1712 | 296 | 120 | 1114 |
-| B2 | 69 | 64 | 4 | 2569 | 2142 | 405 | 22 | 1553 |
-| C1 | 43 | 43 | 0 | 231 | 89 | 85 | 57 | 103 |
-| C2 | 29 | 29 | 0 | 711 | 423 | 112 | 176 | 406 |
+| A1 | 47 | 47 | 0 | 1984 | 1480 | 269 | 235 | 720 |
+| A2 | 35 | 35 | 0 | 1607 | 1270 | 272 | 65 | 759 |
+| B1 | 35 | 35 | 0 | 2128 | 1712 | 296 | 120 | 1101 |
+| B2 | 69 | 64 | 4 | 2569 | 2142 | 405 | 22 | 1537 |
+| C1 | 43 | 43 | 0 | 231 | 89 | 85 | 57 | 102 |
+| C2 | 29 | 29 | 0 | 711 | 423 | 112 | 176 | 402 |
 
 ## Per chapter
 | Chapter | Access | Cards | Image | Concept | Text-only | Illustrated |
 |---|---|---|---|---|---|---|
 | a1-1-alphabet | free | 12 | 12 | 0 | 0 | 12 |
 | a1-2-vokale | paid | 16 | 13 | 2 | 1 | 5 |
-| a1-3-zahlen | paid | 39 | 19 | 1 | 19 | 8 |
+| a1-3-zahlen | paid | 39 | 19 | 1 | 19 | 10 |
 | a1-4-hallo | paid | 38 | 7 | 28 | 3 | 14 |
-| a1-5-werbistdu | paid | 38 | 23 | 0 | 15 | 10 |
+| a1-5-werbistdu | paid | 38 | 23 | 0 | 15 | 11 |
 | a1-6-wfragen | paid | 34 | 24 | 3 | 7 | 14 |
-| a1-7-jaodernein | paid | 20 | 17 | 2 | 1 | 6 |
+| a1-7-jaodernein | paid | 20 | 17 | 2 | 1 | 7 |
 | a1-8-goethemini1 | paid | 77 | 19 | 2 | 56 | 7 |
 | a1-9-verben | paid | 22 | 17 | 3 | 2 | 7 |
-| a1-10-artikel | paid | 71 | 58 | 3 | 10 | 34 |
+| a1-10-artikel | paid | 71 | 58 | 3 | 10 | 35 |
 | a1-11-negation | paid | 13 | 3 | 5 | 5 | 2 |
 | a1-12-akkusativ | paid | 15 | 7 | 4 | 4 | 5 |
 | a1-13-adjektive | paid | 74 | 65 | 4 | 5 | 41 |
@@ -59,7 +59,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | a1-19-satzposition | paid | 36 | 11 | 23 | 2 | 12 |
 | a1-20-modalverben1 | paid | 18 | 14 | 2 | 2 | 6 |
 | a1-21-uhrzeit | paid | 44 | 26 | 12 | 6 | 2 |
-| a1-22-berufe | paid | 135 | 118 | 14 | 3 | 105 |
+| a1-22-berufe | paid | 135 | 118 | 14 | 3 | 106 |
 | a1-23-familie | paid | 43 | 37 | 0 | 6 | 30 |
 | a1-24-datum | paid | 66 | 35 | 12 | 19 | 18 |
 | a1-25-trennbar | paid | 31 | 31 | 0 | 0 | 24 |
@@ -71,7 +71,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | a1-31-partizip-praefix | paid | 11 | 11 | 0 | 0 | 10 |
 | a1-32-akkusativpronomen | paid | 8 | 0 | 0 | 8 | 0 |
 | a1-33-saetze-verbinden | paid | 10 | 2 | 4 | 4 | 0 |
-| a1-34-schreiben | paid | 22 | 21 | 0 | 1 | 7 |
+| a1-34-schreiben | paid | 22 | 21 | 0 | 1 | 8 |
 | a1-35-goethe4 | paid | 3 | 2 | 1 | 0 | 0 |
 | a1-36-dativ | paid | 3 | 0 | 0 | 3 | 0 |
 | a1-37-praep-dativ | paid | 22 | 11 | 2 | 9 | 11 |
@@ -81,28 +81,28 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | a1-41-dativpronomen | paid | 2 | 0 | 0 | 2 | 0 |
 | a1-42-welcher-dieser | paid | 84 | 70 | 10 | 4 | 55 |
 | a1-43-smalltalk-man | paid | 105 | 67 | 30 | 8 | 28 |
-| a1-44-imperativ-modal2 | paid | 104 | 95 | 7 | 2 | 73 |
+| a1-44-imperativ-modal2 | paid | 104 | 95 | 7 | 2 | 74 |
 | a1-45-telefonieren | paid | 34 | 31 | 3 | 0 | 13 |
 | a1-46-zeitangaben | paid | 25 | 9 | 11 | 5 | 0 |
 | a1-47-goethe-final | paid | 32 | 28 | 3 | 1 | 4 |
 | a2-1-genitiv | free | 17 | 11 | 5 | 1 | 11 |
 | a2-2-perfekt-review | paid | 19 | 16 | 1 | 2 | 9 |
 | a2-3-artikel-review | paid | 48 | 37 | 9 | 2 | 15 |
-| a2-4-weil | paid | 49 | 33 | 12 | 4 | 18 |
+| a2-4-weil | paid | 49 | 33 | 12 | 4 | 19 |
 | a2-5-dass | paid | 116 | 88 | 25 | 3 | 39 |
 | a2-6-modalverben-praeteritum | paid | 36 | 31 | 4 | 1 | 20 |
-| a2-7-possessivartikel-dativ | paid | 30 | 28 | 1 | 1 | 18 |
-| a2-8-komparativ-superlativ | paid | 76 | 63 | 9 | 4 | 23 |
+| a2-7-possessivartikel-dativ | paid | 30 | 28 | 1 | 1 | 20 |
+| a2-8-komparativ-superlativ | paid | 76 | 63 | 9 | 4 | 24 |
 | a2-9-vergleiche-als-wie | paid | 96 | 76 | 14 | 6 | 49 |
 | a2-10-goethe-mini-1 | paid | 34 | 24 | 5 | 5 | 12 |
-| a2-11-wenn | paid | 57 | 46 | 10 | 1 | 26 |
+| a2-11-wenn | paid | 57 | 46 | 10 | 1 | 27 |
 | a2-12-reflexive-verben | paid | 71 | 64 | 5 | 2 | 49 |
 | a2-13-praepositionen-dativ | paid | 26 | 22 | 2 | 2 | 13 |
 | a2-14-wechselpraepositionen | paid | 59 | 49 | 10 | 0 | 38 |
 | a2-15-positions-richtungsverben | paid | 35 | 29 | 5 | 1 | 12 |
 | a2-16-goethe-mini-2 | paid | 59 | 46 | 11 | 2 | 25 |
 | a2-17-werden | paid | 21 | 17 | 4 | 0 | 8 |
-| a2-18-ortsangaben | paid | 35 | 5 | 23 | 7 | 12 |
+| a2-18-ortsangaben | paid | 35 | 5 | 23 | 7 | 13 |
 | a2-19-indirekte-fragen | paid | 67 | 49 | 15 | 3 | 28 |
 | a2-20-was-fuer-ein | paid | 42 | 36 | 6 | 0 | 17 |
 | a2-21-verben-dativ-akkusativ | paid | 30 | 26 | 4 | 0 | 11 |
@@ -113,7 +113,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | a2-26-adjektiv-bestimmter-artikel | paid | 27 | 21 | 5 | 1 | 15 |
 | a2-27-adjektiv-unbestimmter-artikel | paid | 27 | 19 | 8 | 0 | 13 |
 | a2-28-als-wenn | paid | 77 | 65 | 10 | 2 | 44 |
-| a2-29-indefinitpronomen | paid | 30 | 26 | 3 | 1 | 15 |
+| a2-29-indefinitpronomen | paid | 30 | 26 | 3 | 1 | 16 |
 | a2-30-verben-praepositionen | paid | 56 | 42 | 13 | 1 | 20 |
 | a2-31-w-fragen-praepositionen | paid | 56 | 42 | 14 | 0 | 27 |
 | a2-32-konjunktiv2-wuensche-hoeflichkeit | paid | 20 | 19 | 1 | 0 | 14 |
@@ -121,25 +121,25 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | a2-34-relativsatz-akkusativ | paid | 25 | 24 | 1 | 0 | 8 |
 | a2-35-goethe-mini-4 | paid | 36 | 23 | 5 | 8 | 9 |
 | b1-1-infinitiv-mit-zu | free | 31 | 23 | 7 | 1 | 24 |
-| b1-2-nebensaetze-weil-da-obwohl | paid | 35 | 26 | 6 | 3 | 17 |
+| b1-2-nebensaetze-weil-da-obwohl | paid | 35 | 26 | 6 | 3 | 18 |
 | b1-3-konjunktiv2-hoefliche-bitten | paid | 26 | 21 | 4 | 1 | 18 |
-| b1-4-folgen-deshalb-so-dass | paid | 75 | 61 | 8 | 6 | 26 |
+| b1-4-folgen-deshalb-so-dass | paid | 75 | 61 | 8 | 6 | 28 |
 | b1-5-genitiv-wegen-trotz-waehrend | paid | 46 | 42 | 4 | 0 | 19 |
-| b1-6-goethe-mini-1 | paid | 32 | 22 | 2 | 8 | 8 |
+| b1-6-goethe-mini-1 | paid | 32 | 22 | 2 | 8 | 9 |
 | b1-7-praeteritum | paid | 173 | 132 | 32 | 9 | 64 |
 | b1-8-zeitangaben-dativ-genitiv | paid | 32 | 25 | 5 | 2 | 19 |
 | b1-9-goethe-mini-2 | paid | 58 | 45 | 13 | 0 | 25 |
 | b1-10-passiv-praesens | paid | 27 | 25 | 1 | 1 | 16 |
 | b1-11-relativsaetze-dativ | paid | 22 | 20 | 2 | 0 | 14 |
 | b1-12-adjektivdeklination-wiederholung | paid | 112 | 91 | 16 | 5 | 37 |
-| b1-13-goethe-mini-2 | paid | 30 | 19 | 4 | 7 | 10 |
+| b1-13-goethe-mini-2 | paid | 30 | 19 | 4 | 7 | 12 |
 | b1-14-komparativ-superlativ-vor-nomen | paid | 95 | 81 | 10 | 4 | 35 |
 | b1-15-n-deklination | paid | 52 | 43 | 8 | 1 | 26 |
-| b1-16-futur1 | paid | 139 | 116 | 16 | 7 | 60 |
-| b1-17-nebensatz-damit-um-zu | paid | 75 | 64 | 8 | 3 | 25 |
-| b1-18-relativsaetze-mit-praepositionen | paid | 108 | 92 | 14 | 2 | 41 |
-| b1-19-goethe-halbzeit-test | paid | 37 | 23 | 4 | 10 | 10 |
-| b1-20-plusquamperfekt | paid | 32 | 22 | 7 | 3 | 6 |
+| b1-16-futur1 | paid | 139 | 116 | 16 | 7 | 62 |
+| b1-17-nebensatz-damit-um-zu | paid | 75 | 64 | 8 | 3 | 28 |
+| b1-18-relativsaetze-mit-praepositionen | paid | 108 | 92 | 14 | 2 | 42 |
+| b1-19-goethe-halbzeit-test | paid | 37 | 23 | 4 | 10 | 12 |
+| b1-20-plusquamperfekt | paid | 32 | 22 | 7 | 3 | 7 |
 | b1-21-temporale-nebensaetze | paid | 29 | 18 | 4 | 7 | 7 |
 | b1-22-brauchen-zu-infinitiv | paid | 48 | 44 | 4 | 0 | 8 |
 | b1-23-reflexivpronomen-akkusativ-dativ | paid | 105 | 91 | 11 | 3 | 68 |
@@ -149,17 +149,17 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | b1-27-goethe-mini-3 | paid | 30 | 9 | 9 | 12 | 10 |
 | b1-28-passiv-praesens-praeteritum-perfekt | paid | 103 | 94 | 9 | 0 | 42 |
 | b1-29-passiv-modalverben | paid | 43 | 30 | 13 | 0 | 4 |
-| b1-30-artikelwoerter-als-pronomen | paid | 98 | 85 | 9 | 4 | 35 |
-| b1-31-adjektive-als-nomen | paid | 38 | 28 | 10 | 0 | 3 |
+| b1-30-artikelwoerter-als-pronomen | paid | 98 | 85 | 9 | 4 | 36 |
+| b1-31-adjektive-als-nomen | paid | 38 | 28 | 10 | 0 | 4 |
 | b1-32-relativsaetze-was-wo | paid | 21 | 19 | 2 | 0 | 9 |
 | b1-33-je-desto-umso | paid | 44 | 35 | 9 | 0 | 6 |
-| b1-34-partizipien-als-adjektive | paid | 81 | 70 | 9 | 2 | 43 |
-| b1-35-goethe-zertifikat-b1-final | paid | 39 | 25 | 5 | 9 | 10 |
+| b1-34-partizipien-als-adjektive | paid | 81 | 70 | 9 | 2 | 44 |
+| b1-35-goethe-zertifikat-b1-final | paid | 39 | 25 | 5 | 9 | 11 |
 | b2-01-erweiterte-satzklammer | free | 34 | 23 | 11 | 0 | 11 |
 | b2-02-verbalkomplex | paid | 34 | 21 | 12 | 1 | 9 |
 | b2-03-informationsstruktur-thema-rhema | paid | 34 | 27 | 7 | 0 | 11 |
 | b2-04-formales-es | paid | 34 | 32 | 2 | 0 | 11 |
-| b2-05-korrelat-es | paid | 34 | 32 | 2 | 0 | 3 |
+| b2-05-korrelat-es | paid | 34 | 32 | 2 | 0 | 4 |
 | b2-06-es-in-festen-ausdruecken | paid | 34 | 33 | 1 | 0 | 9 |
 | b2-07-verbergaenzungen-erkennen | paid | 34 | 31 | 3 | 0 | 10 |
 | b2-08-valenz-von-verben | paid | 34 | 29 | 5 | 0 | 9 |
@@ -170,13 +170,13 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | b2-13-nuancierte-negation | paid | 33 | 32 | 1 | 0 | 10 |
 | b2-14-goethe-mini-test-1 | paid | 0 (review quiz) | 0 | 0 | 0 | 0 |
 | b2-15-konzessivsaetze-obgleich | paid | 54 | 33 | 21 | 0 | 8 |
-| b2-16-konsekutivsaetze-sodass-infolgedessen | paid | 54 | 31 | 23 | 0 | 18 |
+| b2-16-konsekutivsaetze-sodass-infolgedessen | paid | 54 | 31 | 23 | 0 | 19 |
 | b2-17-modalsaetze-indem | paid | 54 | 53 | 1 | 0 | 11 |
 | b2-18-modalsaetze-dadurch-dass | paid | 54 | 53 | 1 | 0 | 21 |
 | b2-19-ohne-zu | paid | 54 | 54 | 0 | 0 | 18 |
-| b2-20-anstatt-zu | paid | 54 | 42 | 11 | 1 | 14 |
-| b2-21-sowohl-als-auch | paid | 54 | 32 | 21 | 1 | 15 |
-| b2-22-weder-noch | paid | 54 | 37 | 14 | 3 | 19 |
+| b2-20-anstatt-zu | paid | 54 | 42 | 11 | 1 | 15 |
+| b2-21-sowohl-als-auch | paid | 54 | 32 | 21 | 1 | 16 |
+| b2-22-weder-noch | paid | 54 | 37 | 14 | 3 | 20 |
 | b2-23-nicht-nur-sondern-auch | paid | 54 | 54 | 0 | 0 | 16 |
 | b2-24-einerseits-andererseits | paid | 53 | 53 | 0 | 0 | 15 |
 | b2-25-verbindungsadverbien | paid | 53 | 53 | 0 | 0 | 11 |
@@ -191,19 +191,19 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | b2-34-temporalsaetze-waehrend-seitdem | paid | 51 | 49 | 2 | 0 | 17 |
 | b2-35-temporalsaetze-bevor-nachdem | paid | 51 | 47 | 4 | 0 | 12 |
 | b2-36-goethe-halbzeit-test | paid | 0 (review quiz) | 0 | 0 | 0 | 0 |
-| b2-37-relativsaetze-genitiv | paid | 50 | 45 | 5 | 0 | 12 |
+| b2-37-relativsaetze-genitiv | paid | 50 | 45 | 5 | 0 | 13 |
 | b2-38-verschachtelte-relativsaetze | paid | 50 | 23 | 27 | 0 | 24 |
-| b2-39-relativsaetze-wer-der | paid | 50 | 45 | 5 | 0 | 18 |
-| b2-40-verben-mit-praepositionen | paid | 50 | 50 | 0 | 0 | 26 |
+| b2-39-relativsaetze-wer-der | paid | 50 | 45 | 5 | 0 | 20 |
+| b2-40-verben-mit-praepositionen | paid | 50 | 50 | 0 | 0 | 29 |
 | b2-41-nomen-mit-praepositionen | paid | 49 | 49 | 0 | 0 | 21 |
-| b2-42-adjektive-mit-praepositionen | paid | 49 | 46 | 3 | 0 | 16 |
+| b2-42-adjektive-mit-praepositionen | paid | 49 | 46 | 3 | 0 | 17 |
 | b2-43-goethe-mini-3 | paid | 0 (review quiz) | 0 | 0 | 0 | 0 |
-| b2-44-zustandspassiv | paid | 61 | 42 | 19 | 0 | 18 |
-| b2-45-passiversatz-sich-lassen | paid | 61 | 47 | 12 | 2 | 14 |
+| b2-44-zustandspassiv | paid | 61 | 42 | 19 | 0 | 20 |
+| b2-45-passiversatz-sich-lassen | paid | 61 | 47 | 12 | 2 | 15 |
 | b2-46-unpersoenliches-passiv | paid | 61 | 59 | 1 | 1 | 27 |
 | b2-47-bekommen-kriegen-passiv | paid | 61 | 55 | 6 | 0 | 17 |
 | b2-48-modalitaetsersatz-haben-sein-zu | paid | 61 | 30 | 30 | 1 | 23 |
-| b2-49-passiv-in-wissenschaft-und-beruf | paid | 61 | 57 | 4 | 0 | 25 |
+| b2-49-passiv-in-wissenschaft-und-beruf | paid | 61 | 57 | 4 | 0 | 27 |
 | b2-50-nominalisierung | paid | 60 | 59 | 1 | 0 | 26 |
 | b2-51-erweiterte-partizipialattribute | paid | 60 | 56 | 3 | 1 | 32 |
 | b2-52-komplexe-nominalgruppen | paid | 60 | 58 | 1 | 1 | 15 |
@@ -236,7 +236,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | c1-10-nomen-mit-praepositionalobjekt | paid | 10 | 0 | 0 | 10 | 0 |
 | c1-11-goethe-mini-2 | paid | 5 | 2 | 3 | 0 | 3 |
 | c1-12-modalverben-praezise-verwenden | paid | 5 | 1 | 4 | 0 | 1 |
-| c1-13-vermutungen-mit-modalverben-ausdruecken | paid | 5 | 2 | 3 | 0 | 1 |
+| c1-13-vermutungen-mit-modalverben-ausdruecken | paid | 5 | 2 | 3 | 0 | 2 |
 | c1-14-konjunktiv-ii-fuer-irreales-und-hypothesen | paid | 5 | 4 | 1 | 0 | 1 |
 | c1-15-konjunktiv-i-und-indirekte-rede | paid | 5 | 4 | 1 | 0 | 2 |
 | c1-16-aufforderung-empfehlung-und-handlungssteuerung | paid | 5 | 5 | 0 | 0 | 1 |
@@ -251,7 +251,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | c1-25-partizipien-und-adjektive-als-nomen | paid | 5 | 5 | 0 | 0 | 1 |
 | c1-26-passiv-und-passiversatzformen | paid | 5 | 5 | 0 | 0 | 0 |
 | c1-27-funktionsverbgefuege-im-akademischen-deutsch | paid | 5 | 0 | 5 | 0 | 1 |
-| c1-28-goethe-mini-4 | paid | 5 | 2 | 3 | 0 | 1 |
+| c1-28-goethe-mini-4 | paid | 5 | 2 | 3 | 0 | 2 |
 | c1-29-verben-mit-praefixen-sicher-unterscheiden | paid | 5 | 5 | 0 | 0 | 1 |
 | c1-30-nomen-mit-numerusbesonderheiten | paid | 5 | 3 | 2 | 0 | 2 |
 | c1-31-adversativangaben-und-gegensaetze-ausdruecken | paid | 5 | 0 | 3 | 2 | 0 |
@@ -273,8 +273,8 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | c2-04-nomen-verb-verbindungen | paid | 21 | 0 | 0 | 21 | 0 |
 | c2-05-goethe-mini-1 | paid | 7 | 2 | 0 | 5 | 1 |
 | c2-06-konjunktiv-ii | paid | 7 | 0 | 3 | 4 | 0 |
-| c2-07-konjunktiv-i | paid | 7 | 7 | 0 | 0 | 1 |
-| c2-08-modalverben | paid | 27 | 21 | 6 | 0 | 1 |
+| c2-07-konjunktiv-i | paid | 7 | 7 | 0 | 0 | 2 |
+| c2-08-modalverben | paid | 27 | 21 | 6 | 0 | 2 |
 | c2-09-goethe-mini-2 | paid | 7 | 1 | 3 | 3 | 0 |
 | c2-10-adverbialsaetze-und-diskursmarker | paid | 38 | 0 | 1 | 37 | 0 |
 | c2-11-relativsaetze | paid | 14 | 0 | 0 | 14 | 0 |
@@ -292,7 +292,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | c2-23-wortbildung-der-verben | paid | 44 | 30 | 0 | 14 | 4 |
 | c2-24-goethe-mini-4 | paid | 12 | 1 | 4 | 7 | 0 |
 | c2-25-appositionen | paid | 25 | 21 | 4 | 0 | 6 |
-| c2-26-nominalstil | paid | 32 | 32 | 0 | 0 | 2 |
+| c2-26-nominalstil | paid | 32 | 32 | 0 | 0 | 4 |
 | c2-27-kollokationen-und-idiomatik | paid | 32 | 0 | 32 | 0 | 2 |
 | c2-28-praepositionen-der-schriftsprache | paid | 30 | 0 | 0 | 30 | 0 |
 | c2-29-goethe-c2-final | paid | 15 | 2 | 11 | 2 | 0 |

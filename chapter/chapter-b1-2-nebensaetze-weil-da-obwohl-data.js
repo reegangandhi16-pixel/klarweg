@@ -272,7 +272,9 @@ const CHAPTER = {
       ex: 'Meine Tasche liegt im Kofferraum.', exEn: 'My bag is lying in the car boot.', exHi: 'Meri bag gaadi ki dicky mein rakhi hai.',
       ex2: 'Nach dem ersten Halbjahr liegt sie in Führung.', ex2En: 'After the first half, she\'s in the lead.', ex2Hi: 'Pehle half ke baad, woh aage hai.',
       conj: { praesens: 'liegt', praeteritum: 'lag', perfekt: 'hat gelegen' },
-      advanced: { synonyms: ['sich befinden'], opposites: ['stehen'], collocations: ['in Führung liegen', 'auf dem Tisch liegen'] } },
+      advanced: { synonyms: ['sich befinden'], opposites: ['stehen'], collocations: ['in Führung liegen', 'auf dem Tisch liegen'] },
+      img: { src: '/api/media/vocab-img/f02cf82cfa538e21f09a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A book lying flat on a wooden desk' }
+    },
     { de: 'mehrfach', pos: 'adverb', level: 'B1', en: 'repeatedly, multiple times', hi: 'बार-बार',
       ex: 'Ich habe ihn mehrfach angerufen.', exEn: 'I called him repeatedly.', exHi: 'Maine use baar-baar phone kiya.',
       ex2: 'Der Fehler ist mehrfach aufgetreten.', ex2En: 'The error occurred multiple times.', ex2Hi: 'Galti kai baar hui.',

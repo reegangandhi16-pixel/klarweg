@@ -262,7 +262,7 @@ const CHAPTER = {
     // ===== Active Support =====
     { de: 'ausfüllen', pos: 'verb', en: 'to fill in', hi: 'भरना', ex: 'Ich fülle das Formular aus.', exEn: 'I fill out the form.', conj: { praesens: 'füllt aus', praeteritum: 'füllte aus', perfekt: 'hat ausgefüllt' } },
     { de: 'Formular', art: 'das', gender: 'n', plural: 'Formulare', pos: 'noun', en: 'form', hi: 'फ़ॉर्म', ex: 'Das Formular ist lang.', exEn: 'The form is long.' },
-    { de: 'Familienname', art: 'der', gender: 'm', plural: 'Familiennamen', pos: 'noun', en: 'family name, surname', hi: 'उपनाम', ex: 'Mein Familienname ist Sharma.', exEn: 'My surname is Sharma.' },
+    { de: 'Familienname', art: 'der', gender: 'm', plural: 'Familiennamen', pos: 'noun', en: 'family name, surname', hi: 'उपनाम', ex: 'Mein Familienname ist Sharma.', exEn: 'My surname is Sharma.', vis: { kind: 'grammar', de: 'Mein Vorname ist Anna, mein Familienname ist Schmidt.', hl: 'Familienname', role: 'subject', cap: 'The family name (surname) comes after the first name' } },
     { de: 'Kontakt', art: 'der', gender: 'm', plural: 'Kontakte', pos: 'noun', en: 'contact', hi: 'संपर्क', ex: 'Das ist mein Kontakt.', exEn: 'That is my contact.' },
     { de: 'Wohnort', art: 'der', gender: 'm', plural: 'Wohnorte', pos: 'noun', en: 'place of residence', hi: 'निवास स्थान', ex: 'Mein Wohnort ist Berlin.', exEn: 'My place of residence is Berlin.' },
     { de: 'Daten', art: 'die', gender: 'pl', plural: 'Daten', pos: 'noun', en: 'data, details', hi: 'जानकारी', ex: 'Die Daten sind richtig.', exEn: 'The data is correct.' },

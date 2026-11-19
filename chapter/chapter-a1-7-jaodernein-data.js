@@ -255,7 +255,9 @@ const CHAPTER = {
     { de: 'Art', art: 'die', gender: 'f', plural: 'Arten', pos: 'noun', en: 'type, kind', hi: 'प्रकार',
       ex: 'Welche Art von Frage ist das?', exEn: 'What type of question is that?' },
     { de: 'Ja-/Nein-Frage', art: 'die', gender: 'f', plural: 'Ja-/Nein-Fragen', pos: 'noun', en: 'yes/no question', hi: 'हाँ/नहीं प्रश्न',
-      ex: 'Eine Ja-/Nein-Frage beginnt mit dem Verb.', exEn: 'A yes/no question begins with the verb.' },
+      ex: 'Eine Ja-/Nein-Frage beginnt mit dem Verb.', exEn: 'A yes/no question begins with the verb.',
+      img: { src: '/api/media/vocab-img/cf7cb3b35d8412b223ad', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hands offering a choice between a green checkmark and red cross token.' }
+    },
     { de: 'Weise', art: 'die', gender: 'f', plural: 'Weisen', pos: 'noun', en: 'manner, way', hi: 'तरीका',
       ex: 'Auf diese Weise fragt man.', exEn: 'This is the way you ask.' },
     { de: 'führen', pos: 'verb', en: 'to lead; to have (a conversation)', hi: 'चलाना (बातचीत)',

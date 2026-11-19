@@ -1784,7 +1784,7 @@
     });
     toolbar.append(search, filters);
     let imgToggle = null;
-    if (C.vocab.some(w => w.img && w.img.src)) {
+    if (C.vocab.some(w => (w.img && w.img.src) || w.vis)) {
       imgToggle = el('button', { class: 'filter-chip vocab-img-toggle', type: 'button', 'aria-pressed': String(vocabImages), 'aria-controls': 'vocab-grid' },
         'Images', el('span', { class: 'vocab-img-state', 'aria-hidden': 'true' }, vocabImages ? 'On' : 'Off'));
       imgToggle.addEventListener('click', () => {
@@ -1807,7 +1807,7 @@
     // Images off = not even the probe is sent.
     (vocabImages ? probeGatedImages() : Promise.resolve()).then(() => {
       // no picture this learner can load → no Images control either
-      if (imgToggle && gatedImgOk === false && !C.vocab.some(w => w.img && w.img.src && !GATED_IMG.test(w.img.src))) imgToggle.hidden = true;
+      if (imgToggle && gatedImgOk === false && !C.vocab.some(w => (w.img && w.img.src && !GATED_IMG.test(w.img.src)) || w.vis)) imgToggle.hidden = true;
       drawVocab();
     });
     return wrap;
@@ -1917,7 +1917,7 @@
     // "/in" suffix) never fits beside the F/M/listen buttons: the buttons go
     // below and only such headwords may hyphenate.
     const longHeadword = term.split(/\s+|\/(?!(?:in|innen)(?![a-zäöüß]))/).some((t) => t.length >= 16);
-    const fig = vocabImages ? vocabFigure(w, card) : null;
+    const fig = vocabImages ? (vocabFigure(w, card) || vocabVisual(w)) : null;
     if (fig) card.classList.add('vword--img');
     card.append(
       el('div', { class: 'vword-top' + (longHeadword ? ' vword-top--long' : '') },
@@ -1951,6 +1951,8 @@
         } else {
           box.textContent = w.ex || '';
         }
+        if (vocabImages && fig && w.img && w.img.hl) highlightExample(box, w.img.hl);
+        else if (vocabImages && fig && w.vis && w.vis.kind === 'grammar' && (w.ex || '').trim() === String(w.vis.de || '').trim()) highlightExample(box, w.vis.hl);
         if (EXAMPLE_AUDIO_PILOT && (w.ex || '').trim()) {
           // A1·01 pilot: the example sentence gets the sentence audio control.
           const body = el('span', {}); body.append(...box.childNodes); box.append(body);
@@ -1991,7 +1993,7 @@
       alt: im.alt || w.en || '', loading: 'lazy', decoding: 'async', draggable: 'false'
     });
     img.addEventListener('error', () => {
-      const f = img.closest('.vword-fig'); if (f) f.remove();
+      const f = img.closest('.vword-figwrap') || img.closest('.vword-fig'); if (f) f.remove();
       if (card) card.classList.remove('vword--img');
     }, { once: true });
     const pic = el('picture', {},
@@ -2000,8 +2002,97 @@
     // Pages that declare images load chapter.css/chapter-app.js under their own
     // ?v= (A1·01: v=23/v=37), so sizing lives in chapter.css; only the
     // per-image ratio is inline.
+    // Two-panel comparison (connectors: aber, obwohl, seit …): two images side
+    // by side, each labelled with UI text. `img.src` is the first panel, so the
+    // gated-image probe and gating above apply unchanged.
+    if (Array.isArray(im.pair) && im.pair.length === 2 && im.pair.every((p) => p && typeof p.src === 'string')) {
+      const panel = (p) => {
+        const s2 = (f) => widths.map((px) => p.src + '-' + px + '.' + f + ' ' + px + 'w').join(', ');
+        const pSizes = '(max-width: 720px) min(160px, calc(50vw - 56px)), 160px';
+        const pimg = el('img', { src: p.src + '-' + widths[widths.length - 1] + '.' + fallback, srcset: s2(fallback), sizes: pSizes,
+          width: ratioW * 100, height: ratioH * 100, alt: p.alt || '', loading: 'lazy', decoding: 'async', draggable: 'false' });
+        pimg.addEventListener('error', () => { const f = pimg.closest('.vword-fig'); if (f) f.remove(); const h = card && card.querySelector('.vword-hl'); if (h) h.replaceWith(...h.childNodes); if (card) card.classList.remove('vword--img'); }, { once: true });
+        return el('div', { class: 'vword-panel' },
+          el('div', { class: 'vword-panel-pic', style: 'aspect-ratio:' + ratioW + ' / ' + ratioH },
+            el('picture', {}, formats.slice(0, -1).map((f) => el('source', { type: 'image/' + f, srcset: s2(f), sizes: pSizes })), pimg)),
+          p.label ? el('div', { class: 'vword-panel-label' }, String(p.label)) : '');
+      };
+      return el('figure', { class: 'vword-fig vword-fig--pair' },
+        el('div', { class: 'vword-pair' }, panel(im.pair[0]), panel(im.pair[1])),
+        im.cap ? el('figcaption', { class: 'vword-cap' }, String(im.cap)) : '');
+    }
     const fig = el('figure', { class: 'vword-fig', style: 'aspect-ratio:' + ratioW + ' / ' + ratioH }, pic);
-    return fig;
+    if (!im.cap) return fig;
+    // A caption sits under the picture, outside the fixed 4:3 box.
+    fig.classList.add('vword-fig--capbox');
+    return el('div', { class: 'vword-figwrap' }, fig, el('div', { class: 'vword-cap' }, String(im.cap)));
+  }
+  // UI-rendered visual for cards that cannot have a standalone picture
+  // (second visual strategy). All German text is page text, never pixels:
+  //   vis: { kind: 'number', n }                       numeral + tens/ones dot grid
+  //        { kind: 'grammar', de, hl, role, cap }       model sentence, hl in its role colour
+  //        { kind: 'map', src, iso, cap }               locator map (public SVG, no text in it)
+  //        { kind: 'week', day: 1-7, cap } / { kind: 'year', month: 1-12, cap }
+  const VIS_ROLES = ['subject', 'verb', 'object', 'time', 'place', 'akkusativ', 'dativ', 'genitiv', 'modalverb', 'article', 'preposition', 'negation', 'adjective', 'adverb', 'question'];
+  function vocabVisual(w) {
+    const v = w && w.vis;
+    if (!v || typeof v !== 'object') return null;
+    const cap = v.cap ? el('div', { class: 'vword-cap' }, String(v.cap)) : '';
+    let body = null;
+    if (v.kind === 'number' && Number.isInteger(v.n) && v.n >= 0) {
+      const txt = v.n.toLocaleString('de-DE');
+      const big = el('div', { class: 'vword-num' + (txt.length > 9 ? ' vword-num--xl' : txt.length > 5 ? ' vword-num--long' : '') }, txt);
+      let grid = '';
+      if (v.n > 0 && v.n <= 100) {
+        // tens as full rows of ten, ones as single dots: 28 → ▮▮ + 8
+        const rows = [];
+        for (let t = 0; t < Math.floor(v.n / 10); t++) rows.push(el('div', { class: 'vword-dots' }, Array.from({ length: 10 }, () => el('i', {}))));
+        if (v.n % 10) rows.push(el('div', { class: 'vword-dots' }, Array.from({ length: v.n % 10 }, () => el('i', {}))));
+        grid = el('div', { class: 'vword-dotgrid', 'aria-hidden': 'true' }, rows);
+      }
+      body = el('div', { class: 'vword-vis vword-vis--number', role: 'img', 'aria-label': String(v.n) }, big, grid);
+    } else if (v.kind === 'grammar' && typeof v.de === 'string' && typeof v.hl === 'string' && v.de.includes(v.hl)) {
+      const i = v.de.indexOf(v.hl), role = VIS_ROLES.includes(v.role) ? v.role : 'subject';
+      // data-no-link: ONE highlighted part on neutral ink (the page's word
+      // colouring would otherwise colour every word); the card's example
+      // sentence below stays fully clickable.
+      // When the model sentence IS the card's example, show only the focused
+      // part large (the example line below carries the highlight) — never the
+      // same sentence twice.
+      const same = (w.ex || '').trim() === v.de.trim();
+      body = el('div', { class: 'vword-vis vword-vis--grammar' + (same ? ' vword-vis--focus' : ''), lang: 'de', 'data-no-link': '' },
+        same ? el('mark', { class: 'vword-hl r-' + role }, v.hl)
+          : el('span', {}, v.de.slice(0, i), el('mark', { class: 'vword-hl r-' + role }, v.hl), v.de.slice(i + v.hl.length)));
+    } else if (v.kind === 'map' && typeof v.src === 'string' && /^\.\.\/public\/vocab-map\/[0-9a-f]{12}\.svg$/.test(v.src)) {
+      const img = el('img', { src: v.src, width: 400, height: 300, alt: v.cap || ('Map: ' + (w.en || '')), loading: 'lazy', decoding: 'async', draggable: 'false' });
+      body = el('div', { class: 'vword-vis vword-vis--map' }, img);
+      img.addEventListener('error', () => { const f = img.closest('.vword-figwrap'); if (f) f.remove(); }, { once: true });
+    } else if ((v.kind === 'week' && v.day >= 1 && v.day <= 7) || (v.kind === 'year' && v.month >= 1 && v.month <= 12)) {
+      const names = v.kind === 'week' ? ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] : ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+      const on = (v.kind === 'week' ? v.day : v.month) - 1;
+      body = el('div', { class: 'vword-vis vword-vis--strip vword-vis--' + v.kind, lang: 'de' },
+        names.map((n, i) => el('span', i === on ? { class: 'is-on', 'aria-current': 'true' } : {}, n)));
+    }
+    if (!body) return null;
+    return el('div', { class: 'vword-figwrap vword-figwrap--vis' }, body, cap);
+  }
+  // Highlight the target word's exact form (img.hl) in the rendered example
+  // sentence — works on both the token and the plain-string rendering, across
+  // token boundaries, without changing any text.
+  function highlightExample(box, hl) {
+    if (!box || typeof hl !== 'string' || !hl.trim()) return;
+    const walker = document.createTreeWalker(box, NodeFilter.SHOW_TEXT);
+    const nodes = []; let text = '';
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) { nodes.push({ n, at: text.length }); text += n.nodeValue; }
+    const start = text.indexOf(hl); if (start < 0) return;
+    const end = start + hl.length;
+    nodes.forEach(({ n, at }) => {
+      const a = Math.max(start, at), b = Math.min(end, at + n.nodeValue.length);
+      if (a >= b) return;
+      const mid = n.splitText(a - at); mid.splitText(b - a);
+      const m = document.createElement('mark'); m.className = 'vword-hl';
+      mid.parentNode.replaceChild(m, mid); m.appendChild(mid);
+    });
   }
   function learnBtn(w) {
     const on = !!state.learned[w.de];

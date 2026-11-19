@@ -82,11 +82,14 @@ const gapi = async (url, init = {}) => {
 /* ---------------- decisions ---------------- */
 function overrides() {
   const manual = {};
-  for (const f of fs.readdirSync(PROMPTS_DIR).filter((f) => f.endsWith(".json") && f !== "review.json").sort()) Object.assign(manual, readJson(path.join(PROMPTS_DIR, f), {}));
+  for (const f of fs.readdirSync(PROMPTS_DIR).filter((f) => f.endsWith(".json") && f !== "review.json" && !f.startsWith("second-strategy")).sort()) Object.assign(manual, readJson(path.join(PROMPTS_DIR, f), {}));
   return { manual, review: readJson(path.join(PROMPTS_DIR, "review.json"), {}) };
 }
 
 /* ---------------- plan ---------------- */
+/* Locator maps are generated (scripts/vocab-images/maps.mjs, Natural Earth,
+   public domain) and served publicly: geography is not paid content. */
+export const mapSrc = (iso) => "../public/vocab-map/" + crypto.createHash("sha1").update([...iso].sort().join(",")).digest("hex").slice(0, 12) + ".svg";
 export function buildPlan(chapters = loadChapters()) {
   const { manual, review } = overrides();
   const concepts = new Map();          // key → { key, v, uses: [{id, level, free}] , existing }
@@ -112,6 +115,28 @@ export function buildPlan(chapters = loadChapters()) {
     else it = { ...base, status: "text-only", why: "no subject" };
     it.uses = c.uses;
     items.set(c.key, it);
+  }
+  // Second visual strategy (owner 2026-11-19): cards with no standalone picture
+  // get a captioned scene, a two-panel pair or a UI-rendered visual (vis).
+  const second = readJson(path.join(PROMPTS_DIR, "second-strategy.json"), {});
+  // --second-keys FILE: only these concepts get the second strategy (evaluation before the full run)
+  const only2 = opt("second-keys") ? new Set(fs.readFileSync(String(opt("second-keys")), "utf8").split(/\s+/).filter(Boolean)) : null;
+  if (only2) for (const k of Object.keys(second)) if (!only2.has(k)) delete second[k];
+  for (const it of [...items.values()]) {
+    const x = second[it.key]; if (!x || it.status !== "text-only") continue;
+    const extra = { ...(x.cap ? { cap: x.cap } : {}), ...(x.hl ? { hl: x.hl } : {}) };
+    if (x.type === "scene") Object.assign(it, { status: "todo", subject: x.scene, strategy: "sentence", ...extra, alt: x.scene.replace(/^Show (an?|the|two|one) /i, "").replace(/\.$/, "").slice(0, 120) }, { why: undefined });
+    else if (x.type === "pair") {
+      Object.assign(it, { status: "pair", parts: [it.key + "~a", it.key + "~b"], ...extra, why: undefined });
+      for (const [suffix, panel] of [["~a", x.a], ["~b", x.b]]) items.set(it.key + suffix, { ...it, key: it.key + suffix, status: "todo", parts: undefined, cap: undefined, hl: undefined,
+        en: `${it.en} (panel: ${panel.label})`, subject: panel.scene, strategy: "contrast", label: panel.label, parent: it.key,
+        alt: panel.scene.replace(/^Show (an?|the|two|one) /i, "").replace(/\.$/, "").slice(0, 120) });
+    } else if (["number", "grammar", "map", "week", "year"].includes(x.type)) {
+      const { type, key, ...rest } = x; void key;
+      const vis = { kind: type, ...rest };
+      if (type === "map") vis.src = mapSrc(x.iso);
+      Object.assign(it, { status: "vis", vis, why: undefined });
+    }
   }
   // resolve aliases to a root that has (or will have) an image
   for (const it of items.values()) {
@@ -153,6 +178,11 @@ function state() {
   const open = new Set(), closed = new Set();
   for (const r of gen) { if (r.job && r.reserveUsd) open.add(r.job); if (r.releaseJob) closed.add(r.releaseJob); }
   for (const r of gen) if (r.job && r.reserveUsd && !closed.has(r.job)) for (const k of r.keys || []) get(k.split("#")[0]).inflight = true;
+  // An interactive request (generate) is in flight from its "submitted" row until its
+  // answer row (ok / error / aborted) — so a concurrent batch submit never takes the
+  // same concept twice (2026-11-19: 24 duplicates when generate and the loop overlapped).
+  const answered = new Set(gen.filter((r) => r.key && r.attempt && !r.submitted).map((r) => r.key + "#" + r.attempt));
+  for (const r of gen) if (r.interactive && r.submitted) for (const k of r.keys || []) if (!answered.has(k)) get(k.split("#")[0]).inflight = true;
   for (const q of qa) get(q.key).qa.set(q.attempt, q);
   for (const x of s.values()) {
     // accepted = latest ok attempt that passed QA
@@ -452,13 +482,25 @@ function apply() {
       if (ch.free && /^\/api\/media\//.test(it.img.src)) return null;
       return { ...it.img };
     }
+    const extra = (x) => ({ ...(x.cap ? { cap: x.cap } : {}), ...(x.hl ? { hl: x.hl } : {}) });
+    if (it.status === "pair") {
+      const [a, b] = it.parts.map((k) => byKey.get(k));
+      if (!ready(a) || !ready(b)) return null;                 // both panels must pass QA
+      return { src: srcFor(a), formats: FORMATS, widths: WIDTHS, w: 4, h: 3, alt: `${a.alt} / ${b.alt}`.slice(0, 200), ...extra(it),
+        pair: [a, b].map((p) => ({ src: srcFor(p), alt: p.alt, label: p.label })) };
+    }
     if (!ready(it)) return null;
-    return { src: srcFor(it), formats: FORMATS, widths: WIDTHS, w: 4, h: 3, alt: it.alt };
+    return { src: srcFor(it), formats: FORMATS, widths: WIDTHS, w: 4, h: 3, alt: it.alt, ...extra(it) };
   };
+  const visFor = (key) => { const it = byKey.get(key); return it && it.status === "vis" ? it.vis : null; };
   let added = 0, files = 0;
   for (const ch of loadChapters().filter((x) => x.level === level)) {
     const updates = new Map();
-    (ch.C.vocab || []).forEach((v, i) => { if (v.img) return; const img = imgFor(conceptKey(v), ch); if (img) updates.set(i, img); });
+    (ch.C.vocab || []).forEach((v, i) => {
+      if (v.img || v.vis) return;
+      const img = imgFor(conceptKey(v), ch); if (img) { updates.set(i, img); return; }
+      const vis = visFor(conceptKey(v)); if (vis) updates.set(i, { field: "vis", value: vis });
+    });
     if (!updates.size) continue;
     const p = path.join(ROOT, "chapter", ch.file);
     const res = applyImages(fs.readFileSync(p, "utf8"), updates, { filename: ch.file });
@@ -472,17 +514,21 @@ function apply() {
 export function syncManifests() {
   const gated = {}; const pub = new Set();
   for (const ch of loadChapters()) for (const v of ch.C.vocab || []) {
-    const src = v.img && v.img.src; if (!src) continue;
-    const g = /^\/api\/media\/vocab-img\/([0-9a-f]{20})$/.exec(src);
-    if (g) { (gated[g[1]] ||= new Set()).add(ch.level.toUpperCase()); continue; }
-    const p = /^\.\.\/public\/vocab-img\/([0-9a-f]{20})$/.exec(src);
-    if (p) for (const w of WIDTHS) for (const f of FORMATS) pub.add(`public/vocab-img/${p[1]}-${w}.${f}`);
+    const m = v.vis && v.vis.kind === "map" && /^\.\.\/(public\/vocab-map\/[0-9a-f]{12}\.svg)$/.exec(v.vis.src || "");
+    if (m) pub.add(m[1]);
+    const srcs = v.img ? [v.img.src, ...(v.img.pair || []).map((x) => x.src)].filter(Boolean) : [];
+    for (const src of srcs) {
+      const g = /^\/api\/media\/vocab-img\/([0-9a-f]{20})$/.exec(src);
+      if (g) { (gated[g[1]] ||= new Set()).add(ch.level.toUpperCase()); continue; }
+      const p = /^\.\.\/public\/vocab-img\/([0-9a-f]{20})$/.exec(src);
+      if (p) for (const w of WIDTHS) for (const f of FORMATS) pub.add(`public/vocab-img/${p[1]}-${w}.${f}`);
+    }
   }
   const map = Object.fromEntries(Object.keys(gated).sort().map((k) => [k, [...gated[k]].sort()]));
   fs.writeFileSync(GATED_LIST, JSON.stringify(map, null, 0).replace(/\],"/g, '],\n"').replace(/^\{/, "{\n").replace(/\}$/, "\n}") + "\n");
   writeJson(path.join(STORE, "r2/vocab-img/levels.json"), map);
   const lines = fs.readFileSync(ALLOWLIST, "utf8").split("\n");
-  const keep = lines.filter((l) => !/^public\/vocab-img\/[0-9a-f]{20}-/.test(l));
+  const keep = lines.filter((l) => !/^public\/vocab-img\/[0-9a-f]{20}-/.test(l) && !/^public\/vocab-map\/[0-9a-f]{12}\.svg$/.test(l));
   let anchor = keep.findIndex((l) => /^public\/vocab-img\//.test(l)); if (anchor < 0) anchor = keep.length - 1;
   while (anchor + 1 < keep.length && /^public\/vocab-img\//.test(keep[anchor + 1])) anchor++;
   keep.splice(anchor + 1, 0, ...[...pub].sort());

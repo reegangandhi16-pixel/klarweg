@@ -243,7 +243,7 @@ const CHAPTER = {
     { de: 'Vertrag', art: 'der', gender: 'm', plural: 'Verträge', pos: 'noun', en: 'contract', hi: 'अनुबंध', ex: 'Ich unterschreibe den Vertrag.', exEn: 'I sign the contract.' },
     { de: 'Anrede', art: 'die', gender: 'f', plural: 'Anreden', pos: 'noun', en: 'salutation', hi: 'संबोधन', ex: 'Die Anrede ist formell.', exEn: 'The salutation is formal.' },
     { de: 'Dame', art: 'die', gender: 'f', plural: 'Damen', pos: 'noun', en: 'lady, madam', hi: 'महिला', ex: 'Sehr geehrte Damen und Herren,', exEn: 'Dear Sir or Madam,', img: { src: '/api/media/vocab-img/6fc1a91763c3ab7e0c67', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'elegantly dressed lady' } },
-    { de: 'freundlich', pos: 'adjective', en: 'friendly; sincerely', hi: 'सादर', ex: 'Mit freundlichen Grüßen', exEn: 'Yours sincerely' },
+    { de: 'freundlich', pos: 'adjective', en: 'friendly; sincerely', hi: 'सादर', ex: 'Mit freundlichen Grüßen', exEn: 'Yours sincerely', img: { src: '/api/media/vocab-img/44adffd29ddbfae36564', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person giving a friendly wave' } },
     { de: 'geehrt', pos: 'adjective', en: 'honoured (dear)', hi: 'आदरणीय', ex: 'Sehr geehrte Frau Weber,', exEn: 'Dear Mrs Weber,' },
     { de: 'herzlich', pos: 'adjective', en: 'warm, hearty (regards)', hi: 'हार्दिक', ex: 'Herzliche Grüße', exEn: 'Warm regards' },
     { de: 'lieb', pos: 'adjective', en: 'kind, dear', hi: 'प्रिय', ex: 'Liebe Anna,', exEn: 'Dear Anna,' },

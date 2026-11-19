@@ -225,7 +225,7 @@ const CHAPTER = {
     // ===== Comparison core =====
     { de: 'Vergleich', art: 'der', gender: 'm', plural: 'Vergleiche', pos: 'noun', en: 'comparison', hi: 'तुलना', ex: 'Der Vergleich zwischen Berlin und M\u00fcnchen ist spannend.', exEn: 'The comparison between Berlin and Munich is exciting.' },
     { de: 'als', pos: 'conjunction', en: 'than (after a comparative)', hi: 'से', ex: 'Berlin ist gr\u00f6\u00dfer als M\u00fcnchen.', exEn: 'Berlin is bigger than Munich.' },
-    { de: 'Superlativ', art: 'der', gender: 'm', plural: 'Superlative', pos: 'noun', en: 'superlative', hi: 'सर्वोत्तम रूप', ex: 'Der Superlativ ist die dritte Stufe: am sch\u00f6nsten.', exEn: 'The superlative is the third step: am sch\u00f6nsten.' },
+    { de: 'Superlativ', art: 'der', gender: 'm', plural: 'Superlative', pos: 'noun', en: 'superlative', hi: 'सर्वोत्तम रूप', ex: 'Der Superlativ ist die dritte Stufe: am sch\u00f6nsten.', exEn: 'The superlative is the third step: am sch\u00f6nsten.', vis: { kind: 'grammar', de: 'Die Zugspitze ist der höchste Berg Deutschlands.', hl: 'höchste', role: 'adjective', cap: 'Superlative: the most / the highest' } },
     { de: 'betonen', pos: 'verb', en: 'to emphasize', hi: 'ज़ोर देना', ex: 'Man kann den Superlativ betonen: am allerbesten!', exEn: 'You can emphasize the superlative: the very best!', conj: { praesens: 'betont', praeteritum: 'betonte', perfekt: 'hat betont' } },
     { de: 'Hauptsache', art: 'die', gender: 'f', plural: 'Hauptsachen', pos: 'noun', en: 'main point, main thing', hi: 'मुख्य बात', ex: 'Die Hauptsache sind die drei Stufen.', exEn: 'The main point is the three steps.' },
     { de: 'Detail', art: 'das', gender: 'n', plural: 'Details', pos: 'noun', en: 'detail', hi: 'ब्योरा', ex: 'Ein kleines Detail: viele Adjektive bekommen einen Umlaut.', exEn: 'A small detail: many adjectives take an umlaut.' },
@@ -236,7 +236,7 @@ const CHAPTER = {
     { de: 'streng', pos: 'adjective', en: 'strict', hi: 'सख़्त', ex: 'Diese Schule ist strenger als die andere.', exEn: 'This school is stricter than the other.' },
     { de: 'w\u00fctend', pos: 'adjective', en: 'angry', hi: 'गुस्सा', ex: 'Er ist w\u00fctender als gestern.', exEn: 'He is angrier than yesterday.', img: { src: '/api/media/vocab-img/ade6d8d9996bbebabc3d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An angry person with clenched fists' } },
     { de: 'privat', pos: 'adjective', en: 'private', hi: 'निजी', ex: 'Eine private Schule ist oft teurer.', exEn: 'A private school is often more expensive.' },
-    { de: 'super', pos: 'adverb', en: 'really, super', hi: 'बहुत', ex: 'Das Talent ist super gro\u00df.', exEn: 'The talent is really big.' },
+    { de: 'super', pos: 'adverb', en: 'really, super', hi: 'बहुत', ex: 'Das Talent ist super gro\u00df.', exEn: 'The talent is really big.', img: { src: '/api/media/vocab-img/12fed84988b0ae6fcada', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person giving two thumbs up.' } },
     { de: 'Traum-', pos: 'prefix', en: 'dream- (as in Traumjob)', hi: 'सपनों का', ex: 'Mein Traumjob ist ein Start-Up.', exEn: 'My dream job is a start-up.' },
     { de: 'S\u00fcd-', pos: 'prefix', en: 'south- (as in S\u00fcddeutschland)', hi: 'दक्षिण', ex: 'S\u00fcddeutschland ist w\u00e4rmer als der Norden.', exEn: 'Southern Germany is warmer than the north.' },
     { de: 'worum', pos: 'adverb', en: 'about what (worum geht es?)', hi: 'किस बारे में', ex: 'Worum geht es in der Umfrage?', exEn: 'What is the survey about?' },

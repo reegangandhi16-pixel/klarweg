@@ -682,6 +682,37 @@ img { max-width: 100%; display: block; }
 /* One column on phones: the same image size as on desktop cards, so the list
    stays scannable (≈ 1.7 cards per screen at 390px instead of 1.5). */
 @media (max-width: 720px) { .vword-fig { max-width: 256px; } }
+/* Second visual strategy: caption under a picture, two-panel pairs and
+   UI-rendered visuals (number / grammar sentence / map / week & year strip).
+   All text here is page text (accessible, translatable, correct spelling). */
+.vword-figwrap { width: 100%; max-width: 320px; margin: 12px auto 4px; }
+.vword-figwrap .vword-fig { margin: 0 auto; }
+.vword-cap { font-size: 12.5px; line-height: 1.4; color: var(--ink-secondary); text-align: center; padding: 8px 4px 0; }
+.vword-fig--pair { aspect-ratio: auto; border: 0; background: transparent; overflow: visible; }
+.vword-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.vword-panel-pic { overflow: hidden; border-radius: var(--r-md, 12px); border: 1px solid var(--hairline-light); background: var(--bg-canvas, #FAFAF7); }
+.vword-panel-pic picture, .vword-panel-pic img { display: block; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; user-select: none; }
+.vword-panel-label { font-size: 12px; line-height: 1.3; color: var(--ink-primary); text-align: center; padding-top: 4px; }
+.vword-vis { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; aspect-ratio: 4 / 3; padding: 16px;
+  border-radius: var(--r-md, 12px); border: 1px solid var(--hairline-light); background: var(--bg-canvas, #FAFAF7); text-align: center; }
+.vword-num { font-family: var(--font-display); font-size: 48px; line-height: 1; color: var(--ink-primary); font-variant-numeric: lining-nums; white-space: nowrap; }
+.vword-num--long { font-size: 36px; }
+.vword-num--xl { font-size: 26px; }
+.vword-dotgrid { display: flex; flex-direction: column; gap: 4px; }
+.vword-dots { display: flex; gap: 4px; }
+.vword-dots i { display: block; width: 8px; height: 8px; border-radius: 50%; background: var(--ink-tertiary); }
+.vword-vis.vword-vis--grammar, .vword-vis.vword-vis--grammar [lang="de"] { hyphens: manual; -webkit-hyphens: manual; }
+.vword-vis--grammar { font-family: var(--font-german); font-weight: 500; font-size: 20px; line-height: 1.45; color: var(--ink-primary); font-style: italic; hyphens: manual; -webkit-hyphens: manual; overflow-wrap: break-word; }
+.vword-vis--focus { font-size: 36px; }
+.vword-vis--grammar mark, .vword-ex mark.vword-hl { background: transparent; font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.vword-ex mark.vword-hl { color: inherit; }
+.vword-vis--map { padding: 0; overflow: hidden; }
+.vword-vis--map img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.vword-vis--strip { flex-direction: row; flex-wrap: wrap; align-content: center; gap: 8px; font-family: var(--font-ui); }
+.vword-vis--strip span { min-width: 36px; padding: 8px 4px; border-radius: var(--r-full); font-size: 13px; color: var(--ink-tertiary); background: var(--bg-elevated); }
+.vword-vis--year span { min-width: 44px; }
+.vword-vis--strip span.is-on { color: var(--surface, #FFFFFF); background: var(--accent, #1F4E4A); font-weight: 600; }
+@media (max-width: 720px) { .vword-figwrap { max-width: 256px; } .vword-num { font-size: 40px; } .vword-num--long { font-size: 30px; } .vword-num--xl { font-size: 22px; } .vword-vis--grammar { font-size: 17px; } .vword-vis--focus { font-size: 30px; } }
 .vword-pos { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-tertiary); padding-top: 6px; }
 .vword-en { font-size: 15px; color: var(--ink-primary); margin-top: 8px; }
 .vword-hi { font-size: 14px; color: var(--ink-secondary); }

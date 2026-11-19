@@ -227,7 +227,7 @@ const CHAPTER = {
     // ===== Core Active =====
     { de: 'am', pos: 'preposition', en: 'on, at (day/part of day)', hi: 'को', ex: 'Am Montag habe ich Kurs.', exEn: 'On Monday I have class.' },
     { de: 'Viertel', art: 'das', gender: 'n', plural: 'Viertel', pos: 'noun', en: 'quarter', hi: 'चौथाई', ex: 'Es ist Viertel nach drei.', exEn: 'It is quarter past three.' },
-    { de: 'Dienstag', art: 'der', gender: 'm', plural: 'Dienstage', pos: 'noun', en: 'Tuesday', hi: 'मंगलवार', ex: 'Am Dienstag spiele ich Fußball.', exEn: 'On Tuesday I play football.' },
+    { de: 'Dienstag', art: 'der', gender: 'm', plural: 'Dienstage', pos: 'noun', en: 'Tuesday', hi: 'मंगलवार', ex: 'Am Dienstag spiele ich Fußball.', exEn: 'On Tuesday I play football.', vis: { kind: 'week', day: 2, cap: 'The second day of the German week' } },
     { de: 'Donnerstag', art: 'der', gender: 'm', plural: 'Donnerstage', pos: 'noun', en: 'Thursday', hi: 'गुरुवार', ex: 'Der Kurs ist am Donnerstag.', exEn: 'The course is on Thursday.' },
     { de: 'Freitag', art: 'der', gender: 'm', plural: 'Freitage', pos: 'noun', en: 'Friday', hi: 'शुक्रवार', ex: 'Am Freitag gehe ich ins Kino.', exEn: 'On Friday I go to the cinema.' },
     { de: 'Mittwoch', art: 'der', gender: 'm', plural: 'Mittwoche', pos: 'noun', en: 'Wednesday', hi: 'बुधवार', ex: 'Am Mittwoch lerne ich.', exEn: 'On Wednesday I study.' },

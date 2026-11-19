@@ -249,7 +249,7 @@ const CHAPTER = {
     { de: 'Übernachtung', art: 'die', gender: 'f', plural: 'Übernachtungen', pos: 'noun', en: 'overnight stay', hi: 'रात्रि विश्राम', ex: 'Das ist die Übernachtung, die zuzüglich Frühstück kostet.', exEn: 'That\'s the overnight stay that costs extra for breakfast.' },
     { de: 'Bezugswort', art: 'das', gender: 'n', plural: 'Bezugswörter', pos: 'noun', en: 'antecedent', hi: 'संदर्भ शब्द', ex: 'Das Bezugswort ist das Nomen, auf das sich der Relativsatz bezieht.', exEn: 'The antecedent is the noun the relative clause refers to.' },
     { de: 'Relativpronomen', art: 'das', gender: 'n', plural: 'Relativpronomen', pos: 'noun', en: 'relative pronoun', hi: 'संबंधवाचक सर्वनाम', ex: 'Das Relativpronomen richtet sich nach dem Bezugswort.', exEn: 'The relative pronoun matches the antecedent.' },
-    { de: 'Relativsatz', art: 'der', gender: 'm', plural: 'Relativsätze', pos: 'noun', en: 'relative clause', hi: 'संबंधवाचक उपवाक्य', ex: 'Der Relativsatz beschreibt das Bezugswort genauer.', exEn: 'The relative clause describes the antecedent more precisely.' }
+    { de: 'Relativsatz', art: 'der', gender: 'm', plural: 'Relativsätze', pos: 'noun', en: 'relative clause', hi: 'संबंधवाचक उपवाक्य', ex: 'Der Relativsatz beschreibt das Bezugswort genauer.', exEn: 'The relative clause describes the antecedent more precisely.', vis: { kind: 'grammar', de: 'Das ist die Frau, die neben mir wohnt.', hl: 'die neben mir wohnt', role: 'adjective', cap: 'A relative clause describes a noun' } }
   ],
 
   // ---------- Relativsätze im Nominativ (rule cards) ----------

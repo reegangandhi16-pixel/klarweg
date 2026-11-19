@@ -430,6 +430,11 @@ public/vocab-img/ffaf72c9007ff0103dfa-400.avif
 public/vocab-img/ffaf72c9007ff0103dfa-400.webp
 public/vocab-img/ffaf72c9007ff0103dfa-800.avif
 public/vocab-img/ffaf72c9007ff0103dfa-800.webp
+public/vocab-map/2f8f0991b6e7.svg
+public/vocab-map/84b605f4aa97.svg
+public/vocab-map/90d56113bd96.svg
+public/vocab-map/a2bd152d5370.svg
+public/vocab-map/b4061022cd61.svg
 # BEGIN generated: public audio-timing (scripts/chapter-lock.mjs audio) - do not edit
 audio-timing/00d474b350531f00.json
 audio-timing/06b36c5d56b99258.json

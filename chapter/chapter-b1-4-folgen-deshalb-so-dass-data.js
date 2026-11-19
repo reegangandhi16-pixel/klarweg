@@ -374,7 +374,9 @@ const CHAPTER = {
     { de: 'zurückgehen', pos: 'verb', level: 'B1', en: 'to go back, decline', hi: 'वापस जाना, कम होना',
       ex: 'Die Verkäufe sind nach der Werbung zurückgegangen.', exEn: 'Sales declined after the advertisement.', exHi: 'Vigyapan ke baad bikri kam ho gayi.',
       conj: { praesens: 'geht zurück', praeteritum: 'ging zurück', perfekt: 'ist zurückgegangen' },
-      advanced: { synonyms: ['sinken', 'abnehmen'], opposites: ['steigen'], collocations: [] } },
+      advanced: { synonyms: ['sinken', 'abnehmen'], opposites: ['steigen'], collocations: [] },
+      img: { src: '/api/media/vocab-img/e9031694e20d03d89dbf', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A bar chart with columns decreasing in height from left to right.' }
+    },
     { de: 'zurückzahlen', pos: 'verb', level: 'B1', en: 'to pay back', hi: 'वापस भुगतान करना',
       ex: 'Das Unternehmen musste den Rabatt zurückzahlen.', exEn: 'The company had to pay back the discount.', exHi: 'Company ko chhoot wapas dena pada.',
       conj: { praesens: 'zahlt zurück', praeteritum: 'zahlte zurück', perfekt: 'hat zurückgezahlt' },
@@ -469,7 +471,9 @@ const CHAPTER = {
     },
     { de: 'Garantie', art: 'die', gender: 'f', plural: 'Garantien', pos: 'noun', level: 'B1', en: 'warranty', hi: 'वारंटी',
       ex: 'Das Gerät hat noch zwei Jahre Garantie.', exEn: 'The device still has two years of warranty.', exHi: 'Device par abhi bhi do saal ki warranty hai.',
-      advanced: { synonyms: [], opposites: [], collocations: ['Garantie haben'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['Garantie haben'] },
+      img: { src: '/api/media/vocab-img/2f3a48fc189059d19133', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An appliance next to a stamped warranty certificate with ribbon.' }
+    },
     { de: 'Geheimzahl', art: 'die', gender: 'f', plural: 'Geheimzahlen', pos: 'noun', level: 'B1', en: 'PIN', hi: 'गुप्त संख्या',
       ex: 'Bitte gib deine Geheimzahl niemandem.', exEn: 'Please don\'t give your PIN to anyone.', exHi: 'Kripya apna PIN kisi ko na dein.',
       advanced: { synonyms: ['PIN'], opposites: [], collocations: ['die Geheimzahl eingeben'] } },

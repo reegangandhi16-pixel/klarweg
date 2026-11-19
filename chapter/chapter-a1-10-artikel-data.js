@@ -416,7 +416,9 @@ const CHAPTER = {
     { de: 'Plural', art: 'der', gender: 'm', plural: 'Plurale', pos: 'noun', en: 'plural', hi: 'बहुवचन',
       ex: 'Im Plural heißt es immer "die".', exEn: 'In the plural it is always "die".' },
     { de: 'Singular', art: 'der', gender: 'm', plural: 'Singulare', pos: 'noun', en: 'singular', hi: 'एकवचन',
-      ex: 'Der Singular von "Bücher" ist "Buch".', exEn: 'The singular of "Bücher" is "Buch".' },
+      ex: 'Der Singular von "Bücher" ist "Buch".', exEn: 'The singular of "Bücher" is "Buch".',
+      img: { src: '/api/media/vocab-img/1be2fa2aad8482627087', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A single book on the left contrasted with a stack of books.' }
+    },
     { de: 'Wortteil', art: 'der', gender: 'm', plural: 'Wortteile', pos: 'noun', en: 'word part', hi: 'शब्दांश',
       ex: 'Der Wortteil "-chen" ist neutrum.', exEn: 'The word part "-chen" is neuter.' },
     { de: 'Pluralendung', art: 'die', gender: 'f', plural: 'Pluralendungen', pos: 'noun', en: 'plural ending', hi: 'बहुवचन-प्रत्यय',

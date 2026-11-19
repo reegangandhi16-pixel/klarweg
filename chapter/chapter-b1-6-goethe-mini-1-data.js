@@ -233,7 +233,7 @@ const CHAPTER = {
     { de: 'würde', pos: 'verb', en: 'would (polite request)', hi: 'क्या आप करेंगे', ex: 'Würden Sie bitte langsamer sprechen?', exEn: 'Would you please speak more slowly?' },
     { de: 'hätte gern', pos: 'verb', en: 'would like (to have)', hi: 'मुझे चाहिए', ex: 'Ich hätte gern einen Kaffee.', exEn: 'I\'d like a coffee.' },
     { de: 'wäre', pos: 'verb', en: 'would be', hi: 'होगा', ex: 'Wären Sie so freundlich, mir zu helfen?', exEn: 'Would you be so kind as to help me?' },
-    { de: 'deshalb', pos: 'grammar', en: 'that\'s why, therefore (result)', hi: 'इसलिए', ex: 'Es regnet. Deshalb bleiben wir zu Hause.', exEn: 'It\'s raining. That\'s why we\'re staying home.' },
+    { de: 'deshalb', pos: 'grammar', en: 'that\'s why, therefore (result)', hi: 'इसलिए', ex: 'Es regnet. Deshalb bleiben wir zu Hause.', exEn: 'It\'s raining. That\'s why we\'re staying home.', img: { src: '/api/media/vocab-img/f6a18f988791a50f4a6a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person staying indoors with a warm drink because it rains outside.' } },
     { de: 'so … dass', pos: 'grammar', en: 'so … that (strong consequence)', hi: 'इतना … कि', ex: 'Ich war so müde, dass ich sofort eingeschlafen bin.', exEn: 'I was so tired that I fell asleep immediately.' },
     { de: 'wegen', pos: 'grammar', en: 'because of (+ Genitiv)', hi: 'की वजह से', ex: 'Wegen des Regens bleiben wir zu Hause.', exEn: 'Because of the rain, we\'re staying home.' },
     { de: 'trotz', pos: 'grammar', en: 'despite (+ Genitiv)', hi: 'के बावजूद', ex: 'Trotz des Regens gehen wir spazieren.', exEn: 'Despite the rain, we\'re going for a walk.' },

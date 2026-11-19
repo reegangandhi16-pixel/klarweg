@@ -224,7 +224,9 @@ const CHAPTER = {
   // Numbers carry no article; the 6 nouns do. pos drives the card label.
   vocab: [
     { de: 'null', pos: 'number', en: 'zero', hi: 'शून्य',
-      ex: 'Null Fehler — sehr gut!', exEn: 'Zero mistakes — very good!' },
+      ex: 'Null Fehler — sehr gut!', exEn: 'Zero mistakes — very good!',
+      vis: { kind: 'number', n: 0 }
+    },
     { de: 'eins', pos: 'number', en: 'one', hi: 'एक',
       ex: 'Ich habe ein Buch — Nummer eins.', exEn: 'I have one book — number one.' },
     { de: 'zwei', pos: 'number', en: 'two', hi: 'दो',
@@ -254,7 +256,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/013283f32ecac02adff4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Eight red apples arranged in two neat rows.' }
     },
     { de: 'neun', pos: 'number', en: 'nine', hi: 'नौ',
-      ex: 'Neun minus eins ist acht.', exEn: 'Nine minus one is eight.' },
+      ex: 'Neun minus eins ist acht.', exEn: 'Nine minus one is eight.',
+      img: { src: '/api/media/vocab-img/d9ab798d56c40525fb82', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Nine fresh strawberries arranged in a grid on a plate.' }
+    },
     { de: 'zehn', pos: 'number', en: 'ten', hi: 'दस',
       ex: 'Zehn Finger, zehn Zahlen.', exEn: 'Ten fingers, ten numbers.',
       img: { src: '/api/media/vocab-img/1adb497f1a703ac970da', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two open hands showing ten fingers' }
@@ -266,7 +270,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/8143a84b650b3f090ade', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'open carton with twelve brown eggs' }
     },
     { de: 'dreizehn', pos: 'number', en: 'thirteen', hi: 'तेरह',
-      ex: 'Mein Bruder ist dreizehn.', exEn: 'My brother is thirteen.' },
+      ex: 'Mein Bruder ist dreizehn.', exEn: 'My brother is thirteen.',
+      vis: { kind: 'number', n: 13 }
+    },
     { de: 'vierzehn', pos: 'number', en: 'fourteen', hi: 'चौदह',
       ex: 'Vierzehn Tage sind zwei Wochen.', exEn: 'Fourteen days are two weeks.' },
     { de: 'fünfzehn', pos: 'number', en: 'fifteen', hi: 'पंद्रह',
@@ -296,7 +302,9 @@ const CHAPTER = {
     { de: 'siebenundzwanzig', pos: 'number', en: 'twenty-seven', hi: 'सत्ताईस',
       ex: 'Meine Schwester wird siebenundzwanzig.', exEn: 'My sister is turning twenty-seven.' },
     { de: 'achtundzwanzig', pos: 'number', en: 'twenty-eight', hi: 'अट्ठाईस',
-      ex: 'Der Februar hat achtundzwanzig Tage.', exEn: 'February has twenty-eight days.' },
+      ex: 'Der Februar hat achtundzwanzig Tage.', exEn: 'February has twenty-eight days.',
+      vis: { kind: 'number', n: 28 }
+    },
     { de: 'neunundzwanzig', pos: 'number', en: 'twenty-nine', hi: 'उनतीस',
       ex: 'Neunundzwanzig plus eins ist dreißig.', exEn: 'Twenty-nine plus one is thirty.' },
     { de: 'Zahl', art: 'die', gender: 'f', plural: 'Zahlen', pos: 'noun', en: 'number, figure', hi: 'संख्या',
@@ -316,7 +324,9 @@ const CHAPTER = {
     { de: 'plus', pos: 'operator', en: 'plus', hi: 'जोड़ (धन)',
       ex: 'Vier plus drei ist sieben.', exEn: 'Four plus three is seven.' },
     { de: 'minus', pos: 'operator', en: 'minus', hi: 'घटा (ऋण)',
-      ex: 'Zehn minus zwei ist acht.', exEn: 'Ten minus two is eight.' }
+      ex: 'Zehn minus zwei ist acht.', exEn: 'Ten minus two is eight.',
+      img: { src: '/api/media/vocab-img/f87753542ffa938c2f53', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Ten apples on a table with two being taken away.' }
+    }
   ],
 
   // ---------- Number System (rule cards → accordion) ----------

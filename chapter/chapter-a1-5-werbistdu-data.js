@@ -240,7 +240,9 @@ const CHAPTER = {
     { de: 'ihr', pos: 'pronoun', en: 'you (plural)', hi: 'तुम सब',
       ex: 'Woher kommt ihr?', exEn: 'Where do you all come from?' },
     { de: 'Sie', pos: 'pronoun', en: 'you (formal)', hi: 'आप',
-      ex: 'Wer sind Sie?', exEn: 'Who are you? (formal)' },
+      ex: 'Wer sind Sie?', exEn: 'Who are you? (formal)',
+      vis: { kind: 'grammar', de: 'Wer sind Sie?', hl: 'Sie', role: 'subject', cap: 'Formal \'you\' in German is always capitalized' }
+    },
     { de: 'sein', pos: 'verb', en: 'to be', hi: 'होना',
       ex: 'Ich bin müde.', exEn: 'I am tired.',
       conj: { praesens: 'ist', praeteritum: 'war', perfekt: 'ist gewesen' } },
@@ -294,7 +296,9 @@ const CHAPTER = {
     { de: 'auf', pos: 'preposition', en: 'in (a language); on', hi: 'पर / में (भाषा)',
       ex: 'Auf Deutsch, bitte!', exEn: 'In German, please!' },
     { de: 'für', pos: 'preposition', en: 'for', hi: 'के लिए',
-      ex: 'Das ist für dich.', exEn: 'That is for you.' },
+      ex: 'Das ist für dich.', exEn: 'That is for you.',
+      img: { src: '/api/media/vocab-img/00763f95ce7053c30b89', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person offering a wrapped gift forward with both hands.' }
+    },
     { de: 'Name', art: 'der', gender: 'm', plural: 'Namen', pos: 'noun', en: 'name', hi: 'नाम',
       ex: 'Mein Name ist Anna.', exEn: 'My name is Anna.' },
     { de: 'Vorname', art: 'der', gender: 'm', plural: 'Vornamen', pos: 'noun', en: 'first name', hi: 'पहला नाम',

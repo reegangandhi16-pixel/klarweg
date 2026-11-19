@@ -219,7 +219,7 @@ const CHAPTER = {
     { de: 'hier', pos: 'adverb', en: 'here', hi: 'यहाँ', ex: 'Von hier sieht man den Dom.', exEn: 'From here you can see the cathedral.' },
     { de: 'dort', pos: 'adverb', en: 'there', hi: 'वहाँ', ex: 'Dort steht die Bank.', exEn: 'The bank is there.' },
     { de: 'da', pos: 'adverb', en: 'there (closer, colloquial)', hi: 'वहाँ', ex: 'Da vorne ist die Ecke.', exEn: 'The corner is right there.' },
-    { de: 'oben', pos: 'adverb', en: 'up, upstairs, at the top', hi: 'ऊपर', ex: 'Der Turm ist oben gr\u00f6\u00dfer als unten.', exEn: 'The tower is bigger at the top than at the bottom.' },
+    { de: 'oben', pos: 'adverb', en: 'up, upstairs, at the top', hi: 'ऊपर', ex: 'Der Turm ist oben gr\u00f6\u00dfer als unten.', exEn: 'The tower is bigger at the top than at the bottom.', img: { src: '/api/media/vocab-img/7a3e8998e3f95b95de52', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person waving from the top of stairs' } },
     { de: 'unten', pos: 'adverb', en: 'down, downstairs, at the bottom', hi: 'नीचे', ex: 'Die K\u00fcche ist unten.', exEn: 'The kitchen is downstairs.', img: { src: '/api/media/vocab-img/3757e8eebb1fcf55faf2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person downstairs on the ground floor of a house' } },
     { de: 'vorne', pos: 'adverb', en: 'at the front', hi: 'सामने', ex: 'Der Dom steht vorne am Ende der Stra\u00dfe.', exEn: 'The cathedral stands at the front, at the end of the street.' },
     { de: 'hinten', pos: 'adverb', en: 'at the back', hi: 'पीछे', ex: 'Die Lampe steht hinten.', exEn: 'The lamp stands at the back.' },

@@ -1,0 +1,494 @@
+{
+ "das-subjekt--subject": {
+  "type": "grammar",
+  "de": "Der Hund schläft im Garten.",
+  "hl": "Der Hund",
+  "role": "subject",
+  "cap": "The subject: who or what does the action"
+ },
+ "der-verbteil--part-of-the-verb": {
+  "type": "grammar",
+  "de": "Ich rufe dich morgen an.",
+  "hl": "an",
+  "role": "verb",
+  "cap": "The second verb part goes to the end of the sentence"
+ },
+ "die-adjektivendung--adjective-ending": {
+  "type": "grammar",
+  "de": "Ich trage einen roten Pullover.",
+  "hl": "roten",
+  "role": "adjective",
+  "cap": "The adjective ending changes with case and gender"
+ },
+ "die-passivform--passive-form": {
+  "type": "grammar",
+  "de": "Das Haus wird renoviert.",
+  "hl": "wird renoviert",
+  "role": "verb",
+  "cap": "Passive: werden + participle"
+ },
+ "die-pluralendung--plural-ending": {
+  "type": "grammar",
+  "de": "Ich habe zwei Kinder.",
+  "hl": "Kinder",
+  "role": "object",
+  "cap": "Kind → Kinder: the plural ending -er"
+ },
+ "die-pluralform--plural-form": {
+  "type": "grammar",
+  "de": "Wir haben zwei Autos.",
+  "hl": "Autos",
+  "role": "object",
+  "cap": "Auto → Autos: the plural form"
+ },
+ "die-singularform--singular-form": {
+  "type": "grammar",
+  "de": "Das Haus ist alt.",
+  "hl": "Haus",
+  "role": "subject",
+  "cap": "Häuser → Haus: the singular form"
+ },
+ "die-wortgruppe--word-group": {
+  "type": "grammar",
+  "de": "Das kleine rote Auto steht vor der Tür.",
+  "hl": "Das kleine rote Auto",
+  "role": "subject",
+  "cap": "Several words that belong together as one unit"
+ },
+ "die-zeitangabe--time-expression": {
+  "type": "grammar",
+  "de": "Morgen fahre ich nach Berlin.",
+  "hl": "Morgen",
+  "role": "time",
+  "cap": "A time expression says when something happens"
+ },
+ "die-praepositionalergaenzung--prepositional-complement": {
+  "type": "grammar",
+  "de": "Ich warte auf den Bus.",
+  "hl": "auf den Bus",
+  "role": "preposition",
+  "cap": "The verb needs this preposition: warten auf"
+ },
+ "die-grundform--basic-form": {
+  "type": "grammar",
+  "de": "Ich möchte heute schwimmen.",
+  "hl": "schwimmen",
+  "role": "verb",
+  "cap": "The basic form of a verb is the infinitive"
+ },
+ "der-wortstamm--root-word": {
+  "type": "grammar",
+  "de": "Ich spiele, du spielst, wir spielen.",
+  "hl": "spiel",
+  "role": "verb",
+  "cap": "The stem spiel- stays the same in every form"
+ },
+ "die-vorvergangenheit--past-perfect": {
+  "type": "grammar",
+  "de": "Nachdem er gegessen hatte, ging er schlafen.",
+  "hl": "gegessen hatte",
+  "role": "verb",
+  "cap": "What happened even earlier: the Plusquamperfekt"
+ },
+ "die-w-frage--w-question": {
+  "type": "grammar",
+  "de": "Wo wohnst du?",
+  "hl": "Wo",
+  "role": "question",
+  "cap": "A W-question starts with a W-word"
+ },
+ "die-zeitform--tense-verb-form": {
+  "type": "grammar",
+  "de": "Er hat gestern gearbeitet.",
+  "hl": "gearbeitet",
+  "role": "verb",
+  "cap": "The tense form shows when something happens"
+ },
+ "die-zeitverschiebung--tense-shift": {
+  "type": "grammar",
+  "de": "Er sagte, er sei müde gewesen.",
+  "hl": "sei müde gewesen",
+  "role": "verb",
+  "cap": "Reported speech shifts the tense back"
+ },
+ "die-ortsveraenderung--change-of-location": {
+  "type": "grammar",
+  "de": "Er ist nach Hause gegangen.",
+  "hl": "ist",
+  "role": "verb",
+  "cap": "A change of location takes sein in the Perfekt"
+ },
+ "besagen--state-mean": {
+  "type": "grammar",
+  "de": "Die Regel besagt, dass man hier leise sein muss.",
+  "hl": "besagt",
+  "role": "verb",
+  "cap": "besagen: what a rule or text says"
+ },
+ "bezeichnen--mean-denote": {
+  "type": "grammar",
+  "de": "Das Wort „Handy“ bezeichnet ein Mobiltelefon.",
+  "hl": "bezeichnet",
+  "role": "verb",
+  "cap": "A word stands for a thing"
+ },
+ "inoffiziell--informal": {
+  "type": "grammar",
+  "de": "Die inoffizielle Uhrzeit ist „halb acht“.",
+  "hl": "inoffizielle",
+  "role": "adjective",
+  "cap": "Everyday (informal) way to tell the time"
+ },
+ "naemlich--you-see-namely": {
+  "type": "grammar",
+  "de": "Ich komme heute nicht, ich bin nämlich krank.",
+  "hl": "nämlich",
+  "role": "adverb",
+  "cap": "nämlich adds the reason after a statement"
+ },
+ "montags--on-mondays": {
+  "type": "grammar",
+  "de": "Montags habe ich Deutschkurs.",
+  "hl": "Montags",
+  "role": "time",
+  "cap": "Every Monday"
+ },
+ "neutrum--neuter": {
+  "type": "grammar",
+  "de": "„Buch“ ist ein Neutrum: das Buch.",
+  "hl": "das",
+  "role": "article",
+  "cap": "Neuter nouns take the article das"
+ },
+ "die-vergangenheitsform--past-tense": {
+  "type": "grammar",
+  "de": "Gestern spielte ich Fußball.",
+  "hl": "spielte",
+  "role": "verb",
+  "cap": "spielen → spielte: a past tense form"
+ },
+ "es-waere-sinnvoll--it-would-make-sense-to": {
+  "type": "grammar",
+  "de": "Es wäre sinnvoll, früher anzufangen.",
+  "hl": "Es wäre sinnvoll",
+  "role": "verb",
+  "cap": "A polite, impersonal way to make a suggestion"
+ },
+ "der-dienstag--tuesday": {
+  "type": "week",
+  "day": 2,
+  "cap": "The second day of the German week"
+ },
+ "der-donnerstag--thursday": {
+  "type": "week",
+  "day": 4,
+  "cap": "The fourth day of the German week"
+ },
+ "der-februar--february": {
+  "type": "year",
+  "month": 2,
+  "cap": "The second month of the year"
+ },
+ "der-familienname--family-name-surname": {
+  "type": "grammar",
+  "de": "Mein Vorname ist Anna, mein Familienname ist Schmidt.",
+  "hl": "Familienname",
+  "role": "subject",
+  "cap": "The family name (surname) comes after the first name"
+ },
+ "der-franken--swiss-franc": {
+  "type": "map",
+  "iso": [
+   "CH",
+   "LI"
+  ],
+  "cap": "The Swiss franc: currency of Switzerland and Liechtenstein"
+ },
+ "das-aktiv--active-voice": {
+  "type": "grammar",
+  "de": "Der Koch schneidet das Gemüse.",
+  "hl": "Der Koch",
+  "role": "subject",
+  "cap": "Active voice: the subject does the action"
+ },
+ "das-bezugswort--antecedent": {
+  "type": "grammar",
+  "de": "Der Mann, der dort steht, ist mein Lehrer.",
+  "hl": "Der Mann",
+  "role": "subject",
+  "cap": "The relative pronoun der refers back to this word"
+ },
+ "das-kontrastwort--contrast-word": {
+  "type": "grammar",
+  "de": "Nicht Peter, sondern Anna hat angerufen.",
+  "hl": "Anna",
+  "role": "subject",
+  "cap": "The contrasted word carries the stress"
+ },
+ "das-praefix--prefix": {
+  "type": "grammar",
+  "de": "Ich verstehe die Frage.",
+  "hl": "ver",
+  "role": "verb",
+  "cap": "ver- is a prefix: stehen → verstehen"
+ },
+ "das-tempus--tense": {
+  "type": "grammar",
+  "de": "Ich habe gestern Deutsch gelernt.",
+  "hl": "habe",
+  "role": "verb",
+  "cap": "The tense shows when: here the Perfekt (past)"
+ },
+ "der-anfangsbuchstabe--first-letter-initial": {
+  "type": "grammar",
+  "de": "Der Hund schläft.",
+  "hl": "H",
+  "role": "subject",
+  "cap": "German nouns start with a capital first letter"
+ },
+ "der-aussagesatz--declarative-sentence": {
+  "type": "grammar",
+  "de": "Ich wohne in Berlin.",
+  "hl": "wohne",
+  "role": "verb",
+  "cap": "A statement: the verb is in second position"
+ },
+ "der-bedingungssatz--conditional-clause": {
+  "type": "grammar",
+  "de": "Wenn es regnet, bleiben wir zu Hause.",
+  "hl": "Wenn es regnet",
+  "role": "adverb",
+  "cap": "The condition: if … then …"
+ },
+ "der-beisatz--apposition": {
+  "type": "grammar",
+  "de": "Herr Weber, mein Nachbar, ist Arzt.",
+  "hl": "mein Nachbar",
+  "role": "subject",
+  "cap": "An apposition describes the noun right before it"
+ },
+ "die-apposition--apposition": {
+  "type": "grammar",
+  "de": "Herr Weber, mein Nachbar, ist Arzt.",
+  "hl": "mein Nachbar",
+  "role": "subject",
+  "cap": "An apposition describes the noun right before it"
+ },
+ "der-beispielsatz--example-sentence": {
+  "type": "grammar",
+  "de": "Ich trinke morgens gern Kaffee.",
+  "hl": "trinke",
+  "role": "verb",
+  "cap": "An example sentence shows a word in use"
+ },
+ "der-hauptsatz--main-clause": {
+  "type": "grammar",
+  "de": "Ich bleibe zu Hause, weil ich krank bin.",
+  "hl": "Ich bleibe zu Hause",
+  "role": "verb",
+  "cap": "The main clause can stand alone"
+ },
+ "der-nebensatz--subordinate-clause": {
+  "type": "grammar",
+  "de": "Ich bleibe zu Hause, weil ich krank bin.",
+  "hl": "weil ich krank bin",
+  "role": "adverb",
+  "cap": "Subordinate clause: the verb goes to the end"
+ },
+ "der-passivsatz--passive-sentence": {
+  "type": "grammar",
+  "de": "Der Brief wird heute geschrieben.",
+  "hl": "wird heute geschrieben",
+  "role": "verb",
+  "cap": "Passive: the action matters, not who does it"
+ },
+ "der-relativsatz--relative-clause": {
+  "type": "grammar",
+  "de": "Das ist die Frau, die neben mir wohnt.",
+  "hl": "die neben mir wohnt",
+  "role": "adjective",
+  "cap": "A relative clause describes a noun"
+ },
+ "restriktiver-relativsatz--restrictive-relative-clause": {
+  "type": "grammar",
+  "de": "Die Studenten, die fleißig lernen, bestehen die Prüfung.",
+  "hl": "die fleißig lernen",
+  "role": "adjective",
+  "cap": "Restrictive: only these students, not all of them"
+ },
+ "der-superlativ--superlative": {
+  "type": "grammar",
+  "de": "Die Zugspitze ist der höchste Berg Deutschlands.",
+  "hl": "höchste",
+  "role": "adjective",
+  "cap": "Superlative: the most / the highest"
+ },
+ "der-temporalsatz--temporal-clause": {
+  "type": "grammar",
+  "de": "Als ich jung war, wohnte ich in Köln.",
+  "hl": "Als ich jung war",
+  "role": "time",
+  "cap": "A temporal clause says when"
+ },
+ "die-partikel--particle": {
+  "type": "grammar",
+  "de": "Komm doch mal vorbei!",
+  "hl": "doch mal",
+  "role": "adverb",
+  "cap": "Particles add tone: here a friendly invitation"
+ },
+ "man-koennte-vermuten-dass--one-might-suspect-that": {
+  "type": "grammar",
+  "de": "Man könnte vermuten, dass er krank ist.",
+  "hl": "Man könnte vermuten, dass",
+  "role": "verb",
+  "cap": "A cautious way to suggest something"
+ },
+ "nicht-nur-sondern-auch--not-only-but-also": {
+  "type": "grammar",
+  "de": "Sie spricht nicht nur Deutsch, sondern auch Spanisch.",
+  "hl": "nicht nur Deutsch, sondern auch Spanisch",
+  "role": "adverb",
+  "cap": "Both things are true, the second one adds to the first"
+ },
+ "nicht-sondern-fokusverneinung--not-x-but-y": {
+  "type": "grammar",
+  "de": "Ich trinke nicht Tee, sondern Kaffee.",
+  "hl": "nicht Tee, sondern Kaffee",
+  "role": "negation",
+  "cap": "Not this one, but that one"
+ },
+ "stehen--be-to-take-a-stance": {
+  "type": "grammar",
+  "de": "Wie stehst du zu diesem Vorschlag?",
+  "hl": "stehst",
+  "role": "verb",
+  "cap": "stehen zu: your opinion on something"
+ },
+ "um-zu--in-order-to": {
+  "type": "grammar",
+  "de": "Ich lerne Deutsch, um in Deutschland zu studieren.",
+  "hl": "um in Deutschland zu studieren",
+  "role": "adverb",
+  "cap": "um … zu: the purpose of an action"
+ },
+ "europaeische-union--european-union": {
+  "type": "map",
+  "iso": [
+   "AT",
+   "BE",
+   "BG",
+   "HR",
+   "CY",
+   "CZ",
+   "DK",
+   "EE",
+   "FI",
+   "FR",
+   "DE",
+   "GR",
+   "HU",
+   "IE",
+   "IT",
+   "LV",
+   "LT",
+   "LU",
+   "MT",
+   "NL",
+   "PL",
+   "PT",
+   "RO",
+   "SK",
+   "SI",
+   "ES",
+   "SE"
+  ],
+  "cap": "The 27 member states of the European Union"
+ },
+ "eu--eu": {
+  "type": "map",
+  "iso": [
+   "AT",
+   "BE",
+   "BG",
+   "HR",
+   "CY",
+   "CZ",
+   "DK",
+   "EE",
+   "FI",
+   "FR",
+   "DE",
+   "GR",
+   "HU",
+   "IE",
+   "IT",
+   "LV",
+   "LT",
+   "LU",
+   "MT",
+   "NL",
+   "PL",
+   "PT",
+   "RO",
+   "SK",
+   "SI",
+   "ES",
+   "SE"
+  ],
+  "cap": "The 27 member states of the European Union"
+ },
+ "europa--europe": {
+  "type": "map",
+  "iso": [
+   "AT",
+   "BE",
+   "BG",
+   "HR",
+   "CY",
+   "CZ",
+   "DK",
+   "EE",
+   "FI",
+   "FR",
+   "DE",
+   "GR",
+   "HU",
+   "IE",
+   "IT",
+   "LV",
+   "LT",
+   "LU",
+   "MT",
+   "NL",
+   "PL",
+   "PT",
+   "RO",
+   "SK",
+   "SI",
+   "ES",
+   "SE",
+   "AL",
+   "AD",
+   "BY",
+   "BA",
+   "FO",
+   "IS",
+   "XK",
+   "LI",
+   "MD",
+   "MC",
+   "ME",
+   "MK",
+   "NO",
+   "RU",
+   "SM",
+   "RS",
+   "CH",
+   "UA",
+   "GB",
+   "VA"
+  ],
+  "cap": "Europe"
+ }
+}

@@ -199,7 +199,9 @@ const CHAPTER = {
     { de: 'kein/keine', pos: 'negation article', en: 'no, not a', hi: 'कोई नहीं',
       ex: 'Ich habe kein Buch.', exEn: 'I have no book.' },
     { de: 'nicht', pos: 'adverb (negation)', en: 'not', hi: 'नहीं',
-      ex: 'Ich bin nicht müde.', exEn: 'I am not tired.' },
+      ex: 'Ich bin nicht müde.', exEn: 'I am not tired.',
+      vis: { kind: 'grammar', de: 'Ich verstehe das nicht.', hl: 'nicht', role: 'negation', cap: 'Negation particle negating the verb or statement.' }
+    },
     { de: 'Zeit', art: 'die', gender: 'f', plural: 'Zeiten', pos: 'noun', en: 'time', hi: 'समय',
       ex: 'Ich habe keine Zeit.', exEn: 'I have no time.',
       img: { src: '../public/vocab-img/a1-1/zeit', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A round wall clock beside an hourglass' }
@@ -211,7 +213,7 @@ const CHAPTER = {
     { de: 'aber', pos: 'conjunction', en: 'but', hi: 'लेकिन',
       ex: 'Ich habe Zeit, aber kein Geld.', exEn: 'I have time, but no money.' },
     { de: 'oder', pos: 'conjunction', en: 'or', hi: 'या',
-      ex: 'Tee oder Kaffee? — Kein Kaffee, danke.', exEn: 'Tea or coffee? — No coffee, thanks.' },
+      ex: 'Tee oder Kaffee? — Keinen Kaffee, danke.', exEn: 'Tea or coffee? — No coffee, thanks.' },
     { de: 'Problem', art: 'das', gender: 'n', plural: 'Probleme', pos: 'noun', en: 'problem', hi: 'समस्या',
       ex: 'Kein Problem!', exEn: 'No problem!' },
     { de: 'mehr', pos: 'adverb', en: 'more, anymore', hi: 'और / अब',
@@ -225,7 +227,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/de9e3197723ff4bd9f86', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A green four-leaf clover in soil.' }
     },
     { de: 'Negationsartikel', art: 'der', gender: 'm', plural: 'Negationsartikel', pos: 'noun', en: 'negation article', hi: 'निषेध-आर्टिकल',
-      ex: '"kein" ist ein Negationsartikel.', exEn: '"kein" is a negation article.' }
+      ex: '"kein" ist ein Negationsartikel.', exEn: '"kein" is a negation article.',
+      vis: { kind: 'grammar', de: 'Ich habe kein Auto.', hl: 'kein', role: 'negation', cap: 'Negation article before a noun' }
+    }
   ],
 
   // ---------- Negation (rule cards → accordion) ----------

@@ -213,9 +213,9 @@ const CHAPTER = {
   // ---------- Vocabulary (35 items) ----------
   vocab: [
     // ===== Grammar labels =====
-    { de: 'Positionsverb', art: 'das', gender: 'n', plural: 'Positionsverben', pos: 'noun', en: 'position verb', hi: 'स्थिति क्रिया', ex: 'stehen ist ein Positionsverb.', exEn: 'stehen is a position verb.' },
-    { de: 'Richtungsverb', art: 'das', gender: 'n', plural: 'Richtungsverben', pos: 'noun', en: 'direction verb', hi: 'दिशा क्रिया', ex: 'stellen ist ein Richtungsverb.', exEn: 'stellen is a direction verb.' },
-    { de: 'Wortgrenze', art: 'die', gender: 'f', plural: 'Wortgrenzen', pos: 'noun', en: 'word boundary', hi: 'शब्द सीमा', ex: 'Achte auf die Wortgrenze zwischen den W\u00f6rtern.', exEn: 'Pay attention to the word boundary between the words.' },
+    { de: 'Positionsverb', art: 'das', gender: 'n', plural: 'Positionsverben', pos: 'noun', en: 'position verb', hi: 'स्थिति क्रिया', ex: 'stehen ist ein Positionsverb.', exEn: 'stehen is a position verb.', vis: { kind: 'grammar', de: 'Das Buch steht im Regal.', hl: 'steht', role: 'verb', cap: 'A verb indicating a static position' } },
+    { de: 'Richtungsverb', art: 'das', gender: 'n', plural: 'Richtungsverben', pos: 'noun', en: 'direction verb', hi: 'दिशा क्रिया', ex: 'stellen ist ein Richtungsverb.', exEn: 'stellen is a direction verb.', vis: { kind: 'grammar', de: 'Er stellt die Vase auf den Tisch.', hl: 'stellt', role: 'verb', cap: 'A verb indicating movement or direction toward a place' } },
+    { de: 'Wortgrenze', art: 'die', gender: 'f', plural: 'Wortgrenzen', pos: 'noun', en: 'word boundary', hi: 'शब्द सीमा', ex: 'Achte auf die Wortgrenze zwischen den W\u00f6rtern.', exEn: 'Pay attention to the word boundary between the words.', vis: { kind: 'grammar', de: 'Achte auf die Wortgrenze zwischen den Wörtern.', hl: 'Wortgrenze', role: 'focus', cap: 'Where one word ends and the next begins' } },
     { de: 'Konzept', art: 'das', gender: 'n', plural: 'Konzepte', pos: 'noun', en: 'concept, plan', hi: 'अवधारणा', ex: 'Unser Konzept liegt auf dem Tisch.', exEn: 'Our concept lies on the table.' },
     // ===== Traffic & mobility =====
     { de: 'Kreuzung', art: 'die', gender: 'f', plural: 'Kreuzungen', pos: 'noun', en: 'crossroads, junction', hi: 'चौराहा', ex: 'An der Kreuzung h\u00e4lt der Bus.', exEn: 'At the crossroads the bus stops.', img: { src: '/api/media/vocab-img/1c7f9faf9499174caa65', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An aerial view of a four-way road intersection.' } },
@@ -250,7 +250,7 @@ const CHAPTER = {
     { de: 'hinten', pos: 'adverb', en: 'at the back, behind', hi: 'पीछे', ex: 'Das Kennzeichen ist hinten am Pkw.', exEn: 'The licence plate is at the back of the car.' },
     { de: 'gegen', pos: 'preposition', en: 'against (+ Akk.)', hi: 'के विरुद्ध', ex: 'Stell das Rad nicht gegen die Wand.', exEn: 'Don\u2019t put the bike against the wall.' },
     { de: 'in Zukunft', pos: 'phrase', en: 'in future', hi: 'भविष्य में', ex: 'In Zukunft fahren wir weniger Auto.', exEn: 'In future we\u2019ll drive less.' },
-    { de: 'd.h.', pos: 'phrase', en: 'i.e., meaning (das hei\u00dft)', hi: 'यानी', ex: 'autofrei, d.h. ohne Pkw.', exEn: 'car-free, i.e. without a car.' }
+    { de: 'd.h.', pos: 'phrase', en: 'i.e., meaning (das hei\u00dft)', hi: 'यानी', ex: 'Das Zentrum ist autofrei, d.h. ohne Pkw.', exEn: 'The city centre is car-free, i.e. without cars.' }
   ],
 
   // ---------- Positions- & Richtungsverben (rule cards) ----------

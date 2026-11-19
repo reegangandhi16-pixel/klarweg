@@ -231,15 +231,19 @@ const CHAPTER = {
     { de: 'Lernkarte', art: 'die', gender: 'f', plural: 'Lernkarten', pos: 'noun', en: 'flashcard', hi: 'फ्लैशकार्ड',
       ex: 'Ich mache eine Lernkarte.', exEn: 'I make a flashcard.' },
     { de: 'Seite', art: 'die', gender: 'f', plural: 'Seiten', pos: 'noun', en: 'page', hi: 'पृष्ठ',
-      ex: 'Öffne Seite zwölf.', exEn: 'Open page twelve.',
+      ex: 'Öffne das Buch auf Seite zwölf.', exEn: 'Open the book to page twelve.',
       img: { src: '/api/media/vocab-img/9a8871b58f3a5a97d751', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open book showing a single page turning' }
     },
     { de: 'nennen', pos: 'verb', en: 'to name, to call', hi: 'नाम बताना',
       ex: 'Nenne drei Verben.', exEn: 'Name three verbs.',
-      conj: { praesens: 'nennt', praeteritum: 'nannte', perfekt: 'hat genannt' } },
+      conj: { praesens: 'nennt', praeteritum: 'nannte', perfekt: 'hat genannt' },
+      vis: { kind: 'grammar', de: 'Nenne drei Verben.', hl: 'Nenne', role: 'verb', cap: 'Imperative of \'nennen\', instructing someone to state or list names.' }
+    },
     // — Reference / System —
     { de: 'Infinitiv', art: 'der', gender: 'm', plural: 'Infinitive', pos: 'noun', en: 'infinitive', hi: 'क्रिया का मूल रूप',
-      ex: '"lernen" ist der Infinitiv.', exEn: '"lernen" is the infinitive.' },
+      ex: '"lernen" ist der Infinitiv.', exEn: '"lernen" is the infinitive.',
+      vis: { kind: 'grammar', de: 'Wir möchten heute Deutsch lernen.', hl: 'lernen', role: 'verb', cap: 'The basic, unconjugated verb form (infinitive)' }
+    },
     { de: 'Lernwortschatz', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'vocabulary list', hi: 'शब्द-सूची',
       ex: 'Der Lernwortschatz hat 22 Wörter.', exEn: 'The vocabulary list has 22 words.' },
     { de: 'Endung', art: 'die', gender: 'f', plural: 'Endungen', pos: 'noun', en: 'ending', hi: 'अंत-प्रत्यय',

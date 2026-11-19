@@ -246,11 +246,15 @@ const CHAPTER = {
     { de: 'Satzmelodie', art: 'die', gender: 'f', plural: 'Satzmelodien', pos: 'noun', en: 'intonation', hi: 'वाक्य की लय',
       ex: 'Die Satzmelodie steigt bei Fragen.', exEn: 'Intonation rises in questions.' },
     { de: 'Wortanfang', art: 'der', gender: 'm', plural: 'Wortanfänge', pos: 'noun', en: 'start of the word', hi: 'शब्द का आरंभ',
-      ex: 'Am Wortanfang hörst du den ersten Laut.', exEn: 'At the start of the word you hear the first sound.' },
+      ex: 'Am Wortanfang hörst du den ersten Laut.', exEn: 'At the start of the word you hear the first sound.',
+      vis: { kind: 'grammar', de: 'Am Wortanfang hörst du den ersten Laut.', hl: 'Wortanfang', role: 'place', cap: 'The initial sound or letters of a word' }
+    },
     { de: 'Silbenanfang', art: 'der', gender: 'm', plural: 'Silbenanfänge', pos: 'noun', en: 'start of the syllable', hi: 'अक्षर का आरंभ',
       ex: 'Am Silbenanfang steht oft ein Konsonant.', exEn: 'A consonant often stands at the start of the syllable.' },
     { de: 'Wortinnere', art: 'das', gender: 'n', plural: 'Wortinneren', pos: 'noun', en: 'the inside of a word', hi: 'शब्द का भीतरी भाग',
-      ex: 'Im Wortinneren ist der Vokal oft kurz.', exEn: 'Inside the word the vowel is often short.' },
+      ex: 'Im Wortinneren ist der Vokal oft kurz.', exEn: 'Inside the word the vowel is often short.',
+      vis: { kind: 'grammar', de: 'das Fenster', hl: 'nst', role: 'focus', cap: 'Inside a word: neither the start nor the end' }
+    },
     { de: 'achten', pos: 'verb', en: 'to pay attention', hi: 'ध्यान देना',
       ex: 'Achte auf die langen Vokale!', exEn: 'Pay attention to the long vowels!',
       conj: { praesens: 'achtet', praeteritum: 'achtete', perfekt: 'hat geachtet' } },

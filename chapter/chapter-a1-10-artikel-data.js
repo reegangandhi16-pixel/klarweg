@@ -254,11 +254,17 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/a1-1/strasse', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A quiet town street with trees and houses on both sides' }
     },
     { de: 'der/die/das', pos: 'article (definite)', en: 'the', hi: 'निश्चित आर्टिकल',
-      ex: 'der Tisch, die Straße, das Buch', exEn: 'the table, the street, the book' },
+      ex: 'der Tisch, die Straße, das Buch', exEn: 'the table, the street, the book',
+      vis: { kind: 'grammar', de: 'Der Tisch ist aus Holz.', hl: 'Der', role: 'article', cap: '\'Der\' is the definite article for masculine nouns' }
+    },
     { de: 'die', pos: 'article (plural)', en: 'the (plural)', hi: 'the (बहुवचन)',
-      ex: 'die Bücher, die Tische', exEn: 'the books, the tables' },
+      ex: 'die Bücher, die Tische', exEn: 'the books, the tables',
+      vis: { kind: 'grammar', de: 'Die Bücher liegen auf dem Tisch.', hl: 'Die', role: 'article', cap: 'Definite article for plural nouns' }
+    },
     { de: 'ein/eine', pos: 'article (indefinite)', en: 'a, an', hi: 'अनिश्चित आर्टिकल',
-      ex: 'ein Tisch, eine Straße', exEn: 'a table, a street' },
+      ex: 'ein Tisch, eine Straße', exEn: 'a table, a street',
+      vis: { kind: 'grammar', de: 'Das ist ein Tisch und eine Lampe.', hl: 'ein', role: 'article', cap: 'Indefinite article in German.' }
+    },
     // — Active support —
     { de: 'Beispiel', art: 'das', gender: 'n', plural: 'Beispiele', pos: 'noun', en: 'example', hi: 'उदाहरण',
       ex: 'Das ist ein gutes Beispiel.', exEn: 'That is a good example.' },
@@ -406,13 +412,19 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/5403784c533107914944', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A reporter speaking into a microphone' }
     },
     { de: 'bestimmt', pos: 'adjective', en: 'definite', hi: 'निश्चित',
-      ex: 'der, die, das sind bestimmte Artikel.', exEn: 'der, die, das are definite articles.' },
+      ex: 'Der, die, das sind bestimmte Artikel.', exEn: 'Der, die, das are definite articles.' },
     { de: 'Nomen', art: 'das', gender: 'n', plural: 'Nomen', pos: 'noun', en: 'noun', hi: 'संज्ञा',
-      ex: 'Jedes Nomen hat einen Artikel.', exEn: 'Every noun has an article.' },
+      ex: 'Jedes Nomen hat einen Artikel.', exEn: 'Every noun has an article.',
+      vis: { kind: 'grammar', de: 'Der Hund schläft im Garten.', hl: 'Hund', role: 'subject', cap: '"Hund" is a capitalized German noun with an article' }
+    },
     { de: 'Wortende', art: 'das', gender: 'n', plural: 'Wortenden', pos: 'noun', en: 'word ending', hi: 'शब्द का अंत',
-      ex: 'Das Wortende -ung ist feminin.', exEn: 'The word ending -ung is feminine.' },
+      ex: 'Das Wortende -ung ist feminin.', exEn: 'The word ending -ung is feminine.',
+      vis: { kind: 'grammar', de: 'die Zeitung', hl: 'ung', role: 'focus', cap: 'The word ending -ung: these nouns are feminine' }
+    },
     { de: 'Artikel', art: 'der', gender: 'm', plural: 'Artikel', pos: 'noun', en: 'article (gram.)', hi: 'आर्टिकल',
-      ex: 'Lerne den Artikel mit dem Nomen.', exEn: 'Learn the article with the noun.' },
+      ex: 'Lerne den Artikel mit dem Nomen.', exEn: 'Learn the article with the noun.',
+      vis: { kind: 'grammar', de: 'Der Hund bellt laut.', hl: 'Der', role: 'article', cap: 'Definite article before a masculine noun' }
+    },
     { de: 'Plural', art: 'der', gender: 'm', plural: 'Plurale', pos: 'noun', en: 'plural', hi: 'बहुवचन',
       ex: 'Im Plural heißt es immer "die".', exEn: 'In the plural it is always "die".' },
     { de: 'Singular', art: 'der', gender: 'm', plural: 'Singulare', pos: 'noun', en: 'singular', hi: 'एकवचन',
@@ -420,21 +432,35 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/1be2fa2aad8482627087', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A single book on the left contrasted with a stack of books.' }
     },
     { de: 'Wortteil', art: 'der', gender: 'm', plural: 'Wortteile', pos: 'noun', en: 'word part', hi: 'शब्दांश',
-      ex: 'Der Wortteil "-chen" ist neutrum.', exEn: 'The word part "-chen" is neuter.' },
+      ex: 'Der Wortteil „-chen“ macht ein Nomen zum Neutrum.', exEn: 'The word part “-chen” makes a noun neuter.',
+      vis: { kind: 'grammar', de: 'Der Wortteil "-chen" ist ein Neutrum.', hl: 'Wortteil', role: 'subject', cap: 'A constituent component or affix of a word' }
+    },
     { de: 'Pluralendung', art: 'die', gender: 'f', plural: 'Pluralendungen', pos: 'noun', en: 'plural ending', hi: 'बहुवचन-प्रत्यय',
-      ex: 'Die Pluralendung ist oft -e oder -en.', exEn: 'The plural ending is often -e or -en.' },
+      ex: 'Die Pluralendung ist oft -e oder -en.', exEn: 'The plural ending is often -e or -en.',
+      vis: { kind: 'grammar', de: 'Ich habe zwei Kinder.', hl: 'Kinder', role: 'object', cap: 'Kind → Kinder: the plural ending -er' }
+    },
     { de: 'Pluralform', art: 'die', gender: 'f', plural: 'Pluralformen', pos: 'noun', en: 'plural form', hi: 'बहुवचन रूप',
-      ex: 'Die Pluralform von "Auto" ist "Autos".', exEn: 'The plural form of "Auto" is "Autos".' },
+      ex: 'Die Pluralform von "Auto" ist "Autos".', exEn: 'The plural form of "Auto" is "Autos".',
+      vis: { kind: 'grammar', de: 'Wir haben zwei Autos.', hl: 'Autos', role: 'object', cap: 'Auto → Autos: the plural form' }
+    },
     { de: 'Wortgruppe', art: 'die', gender: 'f', plural: 'Wortgruppen', pos: 'noun', en: 'word group', hi: 'शब्द-समूह',
-      ex: 'Ordne die Wortgruppe nach Artikel.', exEn: 'Sort the word group by article.' },
+      ex: 'Ordne die Wortgruppe nach Artikel.', exEn: 'Sort the word group by article.',
+      vis: { kind: 'grammar', de: 'Das kleine rote Auto steht vor der Tür.', hl: 'Das kleine rote Auto', role: 'subject', cap: 'Several words that belong together as one unit' }
+    },
     { de: 'feminin', pos: 'adjective', en: 'feminine', hi: 'स्त्रीलिंग',
-      ex: '"die Straße" ist feminin.', exEn: '"die Straße" is feminine.' },
+      ex: '"die Straße" ist feminin.', exEn: '"die Straße" is feminine.',
+      vis: { kind: 'grammar', de: '"die Straße" ist feminin.', hl: 'feminin', role: 'adjective', cap: 'Grammatical gender classification for nouns with \'die\'' }
+    },
     { de: 'maskulin', pos: 'adjective', en: 'masculine', hi: 'पुल्लिंग',
       ex: '"der Tisch" ist maskulin.', exEn: '"der Tisch" is masculine.' },
     { de: 'neutrum', pos: 'noun/adjective', en: 'neuter', hi: 'नपुंसकलिंग',
-      ex: '"das Buch" ist neutrum.', exEn: '"das Buch" is neuter.' },
+      ex: '"Das Buch" ist Neutrum.', exEn: '"Das Buch" is neuter.',
+      vis: { kind: 'grammar', de: '„Buch“ ist ein Neutrum: das Buch.', hl: 'das', role: 'article', cap: 'Neuter nouns take the article das' }
+    },
     { de: 'unbestimmt', pos: 'adjective', en: 'indefinite', hi: 'अनिश्चित',
-      ex: 'ein und eine sind unbestimmte Artikel.', exEn: 'ein and eine are indefinite articles.' },
+      ex: '"Ein" und "eine" sind unbestimmte Artikel.', exEn: '"ein" and "eine" are indefinite articles.',
+      vis: { kind: 'grammar', de: '„Ein“ und „eine“ sind unbestimmte Artikel.', hl: 'unbestimmte', role: 'adjective', cap: 'Grammar term: indefinite (referring to non-specific items)', example: '„Ein“ und „eine“ sind unbestimmte Artikel.' }
+    },
     { de: 'markieren', pos: 'verb', en: 'to highlight, mark', hi: 'चिह्नित करना',
       ex: 'Markiere das Nomen.', exEn: 'Highlight the noun.',
       conj: { praesens: 'markiert', praeteritum: 'markierte', perfekt: 'hat markiert' } },

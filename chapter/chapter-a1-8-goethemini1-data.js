@@ -209,7 +209,9 @@ const CHAPTER = {
     { de: 'Text', art: 'der', gender: 'm', plural: 'Texte', pos: 'noun', en: 'text', hi: 'पाठ',
       ex: 'Lies den Text laut.', exEn: 'Read the text aloud.' },
     { de: 'Deutsche', art: 'der/die', pos: 'noun', en: 'German (person)', hi: 'जर्मन (व्यक्ति)',
-      ex: 'Anna ist Deutsche.', exEn: 'Anna is German (a German woman).' },
+      ex: 'Anna ist Deutsche.', exEn: 'Anna is German (a German woman).',
+      vis: { kind: 'map', iso: ['DE'], cap: 'Germany, country of a German citizen', src: '../public/vocab-map/ce3e4bed2954.svg' }
+    },
     { de: 'kurz', pos: 'adjective', en: 'short', hi: 'छोटा / संक्षिप्त',
       ex: 'Schreib einen kurzen Text.', exEn: 'Write a short text.',
       compare: { comparative: 'kürzer', superlative: 'am kürzesten' } },
@@ -226,7 +228,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/1920a06e1974484e9a49', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Diverse students gathered around a globe' }
     },
     { de: 'deutschsprachig', pos: 'adjective', en: 'German-speaking', hi: 'जर्मनभाषी',
-      ex: 'Die Schweiz ist deutschsprachig.', exEn: 'Switzerland is German-speaking.' },
+      ex: 'Die Schweiz ist deutschsprachig.', exEn: 'Switzerland is German-speaking.',
+      vis: { kind: 'map', iso: ['DE', 'AT', 'CH', 'LI'], cap: 'German-speaking countries in Central Europe', src: '../public/vocab-map/e3ac7eea0374.svg' }
+    },
     { de: 'darauf', pos: 'adverb', en: 'upon it, to it', hi: 'उस पर',
       ex: 'Reagiere darauf.', exEn: 'React to it.' },
     { de: 'über', pos: 'preposition (+A)', en: 'about', hi: 'के बारे में',
@@ -244,43 +248,71 @@ const CHAPTER = {
       vis: { kind: 'map', iso: ['DE', 'AT', 'CH'], cap: 'Spoken mainly in Germany, Austria, and Switzerland', src: '../public/vocab-map/90d56113bd96.svg' }
     },
     { de: 'Englisch', pos: 'language', en: 'English', hi: 'अंग्रेज़ी',
-      ex: 'Sprichst du Englisch?', exEn: 'Do you speak English?' },
+      ex: 'Sprichst du Englisch?', exEn: 'Do you speak English?',
+      vis: { kind: 'map', iso: ['GB', 'US', 'CA', 'AU'], cap: 'Spoken natively in the UK, USA, Canada, Australia', src: '../public/vocab-map/28657a789a02.svg' }
+    },
     { de: 'Französisch', pos: 'language', en: 'French', hi: 'फ़्रेंच',
-      ex: 'In Frankreich spricht man Französisch.', exEn: 'In France people speak French.' },
+      ex: 'In Frankreich spricht man Französisch.', exEn: 'In France people speak French.',
+      vis: { kind: 'map', iso: ['FR', 'BE', 'CH', 'CA'], cap: 'Official language in France, Belgium, Switzerland, and Canada', src: '../public/vocab-map/8fa7c85179ca.svg' }
+    },
     { de: 'Italienisch', pos: 'language', en: 'Italian', hi: 'इतालवी',
-      ex: 'Italienisch klingt schön.', exEn: 'Italian sounds beautiful.' },
+      ex: 'Italienisch klingt schön.', exEn: 'Italian sounds beautiful.',
+      vis: { kind: 'map', iso: ['IT', 'CH', 'SM', 'VA'], cap: 'Italian: official in Italy, Switzerland, San Marino, and Vatican City.', src: '../public/vocab-map/f18f79579254.svg' }
+    },
     { de: 'Spanisch', pos: 'language', en: 'Spanish', hi: 'स्पेनिश',
-      ex: 'Spanisch spricht man in Spanien.', exEn: 'Spanish is spoken in Spain.' },
+      ex: 'Spanisch spricht man in Spanien.', exEn: 'Spanish is spoken in Spain.',
+      vis: { kind: 'map', iso: ['ES', 'MX', 'AR', 'CO'], cap: 'Spoken widely across Spain and Latin America', src: '../public/vocab-map/524e3178e419.svg' }
+    },
     { de: 'Portugiesisch', pos: 'language', en: 'Portuguese', hi: 'पुर्तगाली',
       ex: 'In Brasilien spricht man Portugiesisch.', exEn: 'In Brazil people speak Portuguese.',
       vis: { kind: 'map', iso: ['PT', 'BR', 'AO', 'MZ'], cap: 'Spoken mainly in Brazil and Portugal', src: '../public/vocab-map/a2bd152d5370.svg' }
     },
     { de: 'Russisch', pos: 'language', en: 'Russian', hi: 'रूसी',
-      ex: 'Russisch hat ein anderes Alphabet.', exEn: 'Russian has a different alphabet.' },
+      ex: 'Russisch hat ein anderes Alphabet.', exEn: 'Russian has a different alphabet.',
+      vis: { kind: 'map', iso: ['RU'], cap: 'Official language spoken in Russia', src: '../public/vocab-map/a3eceec4756c.svg' }
+    },
     { de: 'Arabisch', pos: 'language', en: 'Arabic', hi: 'अरबी',
-      ex: 'Arabisch schreibt man rechts nach links.', exEn: 'Arabic is written right to left.' },
+      ex: 'Arabisch schreibt man von rechts nach links.', exEn: 'Arabic is written from right to left.' },
     { de: 'Türkisch', pos: 'language', en: 'Turkish', hi: 'तुर्की',
-      ex: 'Sie spricht Türkisch und Deutsch.', exEn: 'She speaks Turkish and German.' },
+      ex: 'Sie spricht Türkisch und Deutsch.', exEn: 'She speaks Turkish and German.',
+      vis: { kind: 'map', iso: ['TR', 'CY'], cap: 'Spoken primarily in Turkey and Cyprus', src: '../public/vocab-map/d879f5eceb1a.svg' }
+    },
     { de: 'Polnisch', pos: 'language', en: 'Polish', hi: 'पोलिश',
       ex: 'Polnisch spricht man in Polen.', exEn: 'Polish is spoken in Poland.' },
     { de: 'Griechisch', pos: 'language', en: 'Greek', hi: 'यूनानी',
-      ex: 'In Griechenland spricht man Griechisch.', exEn: 'In Greece people speak Greek.' },
+      ex: 'In Griechenland spricht man Griechisch.', exEn: 'In Greece people speak Greek.',
+      vis: { kind: 'map', iso: ['GR', 'CY'], cap: 'Spoken primarily in Greece and Cyprus.', src: '../public/vocab-map/1fded6d1c437.svg' }
+    },
     { de: 'Bulgarisch', pos: 'language', en: 'Bulgarian', hi: 'बल्गारियाई',
-      ex: 'Bulgarisch ist eine slawische Sprache.', exEn: 'Bulgarian is a Slavic language.' },
+      ex: 'Bulgarisch ist eine slawische Sprache.', exEn: 'Bulgarian is a Slavic language.',
+      vis: { kind: 'map', iso: ['BG'], cap: 'Bulgarian is the official language of Bulgaria.', src: '../public/vocab-map/9f5da1d189a4.svg' }
+    },
     { de: 'Serbisch', pos: 'language', en: 'Serbian', hi: 'सर्बियाई',
-      ex: 'Er lernt Serbisch.', exEn: 'He is learning Serbian.' },
+      ex: 'Er lernt Serbisch.', exEn: 'He is learning Serbian.',
+      vis: { kind: 'map', iso: ['RS', 'BA', 'ME'], cap: 'Serbian language spoken in the western Balkans', src: '../public/vocab-map/4050167b7f1b.svg' }
+    },
     { de: 'Ungarisch', pos: 'language', en: 'Hungarian', hi: 'हंगेरियाई',
-      ex: 'Ungarisch ist sehr schwer.', exEn: 'Hungarian is very hard.' },
+      ex: 'Ungarisch ist sehr schwer.', exEn: 'Hungarian is very hard.',
+      vis: { kind: 'map', iso: ['HU'], cap: 'Official language of Hungary', src: '../public/vocab-map/a56260db2f69.svg' }
+    },
     { de: 'Japanisch', pos: 'language', en: 'Japanese', hi: 'जापानी',
-      ex: 'In Japan spricht man Japanisch.', exEn: 'In Japan people speak Japanese.' },
+      ex: 'In Japan spricht man Japanisch.', exEn: 'In Japan people speak Japanese.',
+      vis: { kind: 'map', iso: ['JP'], cap: 'Japanese: spoken primarily in Japan.', src: '../public/vocab-map/1920a56593b1.svg' }
+    },
     { de: 'Indonesisch', pos: 'language', en: 'Indonesian', hi: 'इंडोनेशियाई',
-      ex: 'Indonesisch ist leicht zu lesen.', exEn: 'Indonesian is easy to read.' },
+      ex: 'Indonesisch ist leicht zu lesen.', exEn: 'Indonesian is easy to read.',
+      vis: { kind: 'map', iso: ['ID'], cap: 'Official language of Indonesia', src: '../public/vocab-map/89f89c02cf47.svg' }
+    },
     { de: 'Thai', pos: 'language', en: 'Thai', hi: 'थाई',
-      ex: 'In Thailand spricht man Thai.', exEn: 'In Thailand people speak Thai.' },
+      ex: 'In Thailand spricht man Thai.', exEn: 'In Thailand people speak Thai.',
+      vis: { kind: 'map', iso: ['TH'], cap: 'Spoken primarily in Thailand', src: '../public/vocab-map/a482167f2a1c.svg' }
+    },
     { de: 'Maori', pos: 'language', en: 'Maori', hi: 'माओरी',
       ex: 'Maori spricht man in Neuseeland.', exEn: 'Maori is spoken in New Zealand.' },
     { de: 'Rätoromanisch', pos: 'language', en: 'Raeto-Romanic', hi: 'रेटो-रोमांस',
-      ex: 'Rätoromanisch spricht man in der Schweiz.', exEn: 'Raeto-Romanic is spoken in Switzerland.' },
+      ex: 'Rätoromanisch spricht man in der Schweiz.', exEn: 'Raeto-Romanic is spoken in Switzerland.',
+      vis: { kind: 'map', iso: ['CH'], cap: 'Official language spoken in parts of Switzerland', src: '../public/vocab-map/b4061022cd61.svg' }
+    },
     { de: 'Muttersprache', art: 'die', gender: 'f', plural: 'Muttersprachen', pos: 'noun', en: 'mother tongue', hi: 'मातृभाषा',
       ex: 'Meine Muttersprache ist Hindi.', exEn: 'My mother tongue is Hindi.' },
     // — Countries (no article) —
@@ -327,11 +359,15 @@ const CHAPTER = {
     { de: 'Indonesien', pos: 'country', en: 'Indonesia', hi: 'इंडोनेशिया',
       ex: 'Indonesien hat viele Inseln.', exEn: 'Indonesia has many islands.' },
     { de: 'Algerien', pos: 'country', en: 'Algeria', hi: 'अल्जीरिया',
-      ex: 'Algerien ist in Afrika.', exEn: 'Algeria is in Africa.' },
+      ex: 'Algerien ist in Afrika.', exEn: 'Algeria is in Africa.',
+      vis: { kind: 'map', iso: ['DZ'], cap: 'Algeria in North Africa', src: '../public/vocab-map/2493affa87e4.svg' }
+    },
     { de: 'Tunesien', pos: 'country', en: 'Tunisia', hi: 'ट्यूनीशिया',
       ex: 'Tunesien liegt am Meer.', exEn: 'Tunisia lies by the sea.' },
     { de: 'Syrien', pos: 'country', en: 'Syria', hi: 'सीरिया',
-      ex: 'Sie kommt aus Syrien.', exEn: 'She comes from Syria.' },
+      ex: 'Sie kommt aus Syrien.', exEn: 'She comes from Syria.',
+      vis: { kind: 'map', iso: ['SY'], cap: 'Syria in the Middle East', src: '../public/vocab-map/4152ec29594e.svg' }
+    },
     { de: 'Südamerika', pos: 'region', en: 'South America', hi: 'दक्षिण अमेरिका',
       ex: 'Brasilien ist in Südamerika.', exEn: 'Brazil is in South America.' },
     // — Countries (with article) —
@@ -359,7 +395,9 @@ const CHAPTER = {
     { de: 'Befinden', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'well-being, how one feels', hi: 'हाल-चाल',
       ex: 'Man fragt nach dem Befinden: "Wie geht es dir?"', exEn: 'You ask after well-being: "How are you?"' },
     { de: 'Redemittel', art: 'das', gender: 'n', plural: 'Redemittel', pos: 'noun', en: 'useful phrase', hi: 'उपयोगी वाक्यांश',
-      ex: '"Wie heißt du?" ist ein Redemittel.', exEn: '"What is your name?" is a useful phrase.' },
+      ex: '"Wie heißt du?" ist ein Redemittel.', exEn: '"What is your name?" is a useful phrase.',
+      vis: { kind: 'grammar', de: 'Guten Tag, wie geht es Ihnen?', hl: 'wie geht es Ihnen?', role: 'question', cap: 'A standard conversational phrase for everyday use' }
+    },
     { de: 'Grammatik', art: 'die', gender: 'f', plural: 'Grammatiken', pos: 'noun', en: 'grammar', hi: 'व्याकरण',
       ex: 'Die Grammatik ist nicht schwer.', exEn: 'The grammar is not hard.' },
     { de: 'Tafel', art: 'die', gender: 'f', plural: 'Tafeln', pos: 'noun', en: 'blackboard', hi: 'श्यामपट',

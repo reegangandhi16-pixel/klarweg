@@ -202,12 +202,16 @@ const CHAPTER = {
       note: 'Using present tense to narrate a past event for vividness and immediacy.',
       ex1: { de: 'Der Roman beginnt im historischen Präsens, um Spannung zu erzeugen.', en: 'The novel begins in the historic present to create suspense.', hi: 'Upanyaas tanaav paida karne ke liye aitihaasik vartamaan mein shuru hota hai.' },
       ex2: { de: 'Journalisten nutzen oft das historische Präsens in Schlagzeilen.', en: 'Journalists often use the historic present in headlines.', hi: 'Patrakaar aksar sirshak mein aitihaasik vartamaan istemaal karte hain.' },
-      collocations: ['im historischen Präsens erzählen', 'das historische Präsens nutzen'] },
+      collocations: ['im historischen Präsens erzählen', 'das historische Präsens nutzen'],
+      vis: { kind: 'grammar', de: 'Im Jahr 1789 beginnt in Paris die Revolution.', hl: 'beginnt', role: 'verb', cap: 'Using present tense to narrate past historical events vividly' }
+    },
     { de: 'die Tempuswahl', ipa: '[ˈtɛmpuːsˌvaːl]', en: 'tense choice', hi: 'kaal chunaav', pos: 'Noun · fem.', register: 'C1 · academic',
       note: 'The deliberate selection of a tense for stylistic or rhetorical effect.',
       ex1: { de: 'Die Tempuswahl beeinflusst den Ton des gesamten Textes.', en: 'The tense choice influences the tone of the entire text.', hi: 'Kaal chunaav poore text ke tone ko prabhavit karta hai.' },
       ex2: { de: 'Eine bewusste Tempuswahl macht den Stil eleganter.', en: 'A deliberate tense choice makes the style more elegant.', hi: 'Ek soch samajhkar kiya gaya kaal chunaav style ko zyaada sundar banaata hai.' },
-      collocations: ['bewusste Tempuswahl', 'stilistische Tempuswahl'] },
+      collocations: ['bewusste Tempuswahl', 'stilistische Tempuswahl'],
+      vis: { kind: 'grammar', de: 'Die richtige Tempuswahl sorgt für Klarheit in der Erzählung.', hl: 'Tempuswahl', role: 'subject', cap: 'Grammar term: choosing the appropriate grammatical tense' }
+    },
     { de: 'die Zeitschichtung', ipa: '[ˈtsaɪtˌʃɪçtʊŋ]', en: 'temporal layering', hi: 'samay parat', pos: 'Noun · fem.', register: 'C1 · literary/academic',
       note: 'The narrative technique of layering multiple time levels (background, main narrative, commentary).',
       ex1: { de: 'Die Zeitschichtung im Roman verwirrt manche Leser zunächst.', en: 'The temporal layering in the novel confuses some readers at first.', hi: 'Upanyaas mein samay parat shuru mein kuch pathakon ko uljhaa deti hai.' },

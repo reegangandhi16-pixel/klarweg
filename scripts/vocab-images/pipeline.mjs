@@ -469,7 +469,7 @@ async function encode() {
 
 /* ---------------- apply ---------------- */
 export const srcFor = (it) => (it.public ? "../public/vocab-img/" + it.id : "/api/media/vocab-img/" + it.id);
-function apply() {
+async function apply() {
   const level = opt("level"); if (!level) throw new Error("--level required");
   const st = state();
   const items = queue(); const byKey = new Map(items.map((x) => [x.key, x]));
@@ -495,7 +495,17 @@ function apply() {
     if (!ready(it)) return null;
     return { src: srcFor(it), formats: FORMATS, widths: WIDTHS, w: 4, h: 3, alt: it.alt, ...extra(it) };
   };
-  const visFor = (key) => { const it = byKey.get(key); return it && it.status === "vis" ? it.vis : null; };
+  // a map visual is applied only together with its SVG (rendered here when missing)
+  let maps = null;
+  const mapReady = async (vis) => {
+    const f = path.join(ROOT, vis.src.replace(/^\.\.\//, ""));
+    if (fs.existsSync(f)) return true;
+    try { maps ??= await import("./maps.mjs"); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, maps.render(vis.iso)); return true; }
+    catch (e) { console.error("map not rendered:", vis.iso.join(","), e.message); return false; }
+  };
+  const visReady = new Map();
+  for (const it of byKey.values()) if (it.status === "vis") visReady.set(it.key, it.vis.kind !== "map" || await mapReady(it.vis));
+  const visFor = (key) => { const it = byKey.get(key); return it && it.status === "vis" && visReady.get(key) ? it.vis : null; };
   let added = 0, files = 0;
   for (const ch of loadChapters().filter((x) => x.level === level)) {
     const updates = new Map();

@@ -248,7 +248,7 @@ const CHAPTER = {
     { de: 'einschlafen', pos: 'verb', en: 'to fall asleep', hi: 'सो जाना', ex: 'Ich bin früh eingeschlafen.', exEn: 'I fell asleep early.', conj: { praesens: 'schläft ein', praeteritum: 'schlief ein', perfekt: 'ist eingeschlafen' }, img: { src: '/api/media/vocab-img/79b5c6076dcbf90072b9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person falling asleep in bed.' } },
     { de: 'wecken', pos: 'verb', en: 'to wake (someone)', hi: 'जगाना', ex: 'Der Wecker hat mich geweckt.', exEn: 'The alarm woke me.', conj: { praesens: 'weckt', praeteritum: 'weckte', perfekt: 'hat geweckt' }, img: { src: '/api/media/vocab-img/ce487cebff2f8e72a5af', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person waking up in bed next to an alarm clock.' } },
     // ===== Reference / System =====
-    { de: 'Ortsveränderung', art: 'die', gender: 'f', plural: 'Ortsveränderungen', pos: 'noun', en: 'change of location', hi: 'स्थान परिवर्तन', ex: 'Bei einer Ortsveränderung nimmt man sein.', exEn: 'For a change of location you use sein.' }
+    { de: 'Ortsveränderung', art: 'die', gender: 'f', plural: 'Ortsveränderungen', pos: 'noun', en: 'change of location', hi: 'स्थान परिवर्तन', ex: 'Bei einer Ortsveränderung nimmt man sein.', exEn: 'For a change of location you use sein.', vis: { kind: 'grammar', de: 'Er ist nach Hause gegangen.', hl: 'ist', role: 'verb', cap: 'A change of location takes sein in the Perfekt' } }
   ],
 
   // ---------- Perfekt mit sein (rule cards → accordion) ----------

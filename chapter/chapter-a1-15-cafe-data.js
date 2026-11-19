@@ -312,7 +312,7 @@ const CHAPTER = {
     { de: 'prost', pos: 'phrase', en: 'cheers!', hi: 'चियर्स', ex: 'Prost!', exEn: 'Cheers!', img: { src: '/api/media/vocab-img/f57ebf361f18552e0470', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two glasses clinking together in a toast' } },
     { de: 'zum Wohl', pos: 'phrase', en: 'cheers! to your health', hi: 'आपकी सेहत के लिए', ex: 'Zum Wohl!', exEn: 'To your health!', img: { src: '/api/media/vocab-img/00127519790e82fc246e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two glasses clinking together in a toast' } },
     // ===== Reference / System =====
-    { de: 'Imperativ', art: 'der', gender: 'm', plural: 'Imperative', pos: 'noun', en: 'imperative (command form)', hi: 'आज्ञार्थक', ex: 'Bringen Sie …! ist ein Imperativ.', exEn: '"Bringen Sie …!" is an imperative.' }
+    { de: 'Imperativ', art: 'der', gender: 'm', plural: 'Imperative', pos: 'noun', en: 'imperative (command form)', hi: 'आज्ञार्थक', ex: 'Bringen Sie …! ist ein Imperativ.', exEn: '"Bringen Sie …!" is an imperative.', vis: { kind: 'grammar', de: 'Kommen Sie bitte herein!', hl: 'Kommen Sie', role: 'verb', cap: 'Imperative form used for polite requests and commands' } }
   ],
 
   // ---------- Ordering & Paying (rule cards → accordion) ----------

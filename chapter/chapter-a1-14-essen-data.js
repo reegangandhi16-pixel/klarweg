@@ -326,7 +326,7 @@ const CHAPTER = {
     { de: 'schälen', pos: 'verb', en: 'to peel', hi: 'छीलना', ex: 'Ich schäle den Apfel.', exEn: 'I peel the apple.', conj: { praesens: 'schält', praeteritum: 'schälte', perfekt: 'hat geschält' }, img: { src: '/api/media/vocab-img/fcfd9cbb218d7aa49b01', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person peeling a red apple with a peeler' } },
     { de: 'zubereiten', pos: 'verb', en: 'to prepare (food)', hi: 'पकाना / तैयार करना', ex: 'Ich bereite das Essen zu.', exEn: 'I prepare the meal.', conj: { praesens: 'bereitet zu', praeteritum: 'bereitete zu', perfekt: 'hat zubereitet' }, img: { src: '/api/media/vocab-img/f2c606aaa6a70704cb37', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person preparing vegetables on a cutting board' } },
     // — System —
-    { de: 'Vorliebe', art: 'die', gender: 'f', plural: 'Vorlieben', pos: 'noun', en: 'preference', hi: 'पसंद', ex: 'Meine Vorliebe ist Käse.', exEn: 'My preference is cheese.' }
+    { de: 'Vorliebe', art: 'die', gender: 'f', plural: 'Vorlieben', pos: 'noun', en: 'preference', hi: 'पसंद', ex: 'Ich habe eine Vorliebe für Käse.', exEn: 'I have a preference for cheese.' }
   ],
 
   // ---------- essen & möchten (rule cards → accordion) ----------

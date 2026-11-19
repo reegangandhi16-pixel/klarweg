@@ -274,39 +274,69 @@ const CHAPTER = {
       vis: { kind: 'number', n: 13 }
     },
     { de: 'vierzehn', pos: 'number', en: 'fourteen', hi: 'चौदह',
-      ex: 'Vierzehn Tage sind zwei Wochen.', exEn: 'Fourteen days are two weeks.' },
+      ex: 'Vierzehn Tage sind zwei Wochen.', exEn: 'Fourteen days are two weeks.',
+      vis: { kind: 'number', n: 14 }
+    },
     { de: 'fünfzehn', pos: 'number', en: 'fifteen', hi: 'पंद्रह',
-      ex: 'Das Buch kostet fünfzehn Euro.', exEn: 'The book costs fifteen euros.' },
+      ex: 'Das Buch kostet fünfzehn Euro.', exEn: 'The book costs fifteen euros.',
+      vis: { kind: 'number', n: 15 }
+    },
     { de: 'sechzehn', pos: 'number', en: 'sixteen', hi: 'सोलह',
-      ex: 'Sechzehn — nicht "sechszehn"!', exEn: 'Sixteen — not "sechszehn"!' },
+      ex: 'Sechzehn — nicht "sechszehn"!', exEn: 'Sixteen — not "sechszehn"!',
+      vis: { kind: 'number', n: 16 }
+    },
     { de: 'siebzehn', pos: 'number', en: 'seventeen', hi: 'सत्रह',
-      ex: 'Siebzehn — nicht "siebenzehn"!', exEn: 'Seventeen — not "siebenzehn"!' },
+      ex: 'Siebzehn — nicht "siebenzehn"!', exEn: 'Seventeen — not "siebenzehn"!',
+      vis: { kind: 'number', n: 17 }
+    },
     { de: 'achtzehn', pos: 'number', en: 'eighteen', hi: 'अठारह',
-      ex: 'Mit achtzehn ist man erwachsen.', exEn: 'At eighteen you are an adult.' },
+      ex: 'Mit achtzehn ist man erwachsen.', exEn: 'At eighteen you are an adult.',
+      vis: { kind: 'number', n: 18 }
+    },
     { de: 'neunzehn', pos: 'number', en: 'nineteen', hi: 'उन्नीस',
-      ex: 'Neunzehn kommt vor zwanzig.', exEn: 'Nineteen comes before twenty.' },
+      ex: 'Neunzehn kommt vor zwanzig.', exEn: 'Nineteen comes before twenty.',
+      vis: { kind: 'number', n: 19 }
+    },
     { de: 'zwanzig', pos: 'number', en: 'twenty', hi: 'बीस',
-      ex: 'Zwanzig Euro, bitte.', exEn: 'Twenty euros, please.' },
+      ex: 'Zwanzig Euro, bitte.', exEn: 'Twenty euros, please.',
+      vis: { kind: 'number', n: 20 }
+    },
     { de: 'einundzwanzig', pos: 'number', en: 'twenty-one', hi: 'इक्कीस',
-      ex: 'Ich bin einundzwanzig Jahre alt.', exEn: 'I am twenty-one years old.' },
+      ex: 'Ich bin einundzwanzig Jahre alt.', exEn: 'I am twenty-one years old.',
+      vis: { kind: 'number', n: 21 }
+    },
     { de: 'zweiundzwanzig', pos: 'number', en: 'twenty-two', hi: 'बाईस',
-      ex: 'Sie ist zweiundzwanzig.', exEn: 'She is twenty-two.' },
+      ex: 'Sie ist zweiundzwanzig.', exEn: 'She is twenty-two.',
+      vis: { kind: 'number', n: 22 }
+    },
     { de: 'dreiundzwanzig', pos: 'number', en: 'twenty-three', hi: 'तेईस',
-      ex: 'Zimmer dreiundzwanzig, bitte.', exEn: 'Room twenty-three, please.' },
+      ex: 'Zimmer dreiundzwanzig, bitte.', exEn: 'Room twenty-three, please.',
+      vis: { kind: 'number', n: 23 }
+    },
     { de: 'vierundzwanzig', pos: 'number', en: 'twenty-four', hi: 'चौबीस',
-      ex: 'Ein Tag hat vierundzwanzig Stunden.', exEn: 'A day has twenty-four hours.' },
+      ex: 'Ein Tag hat vierundzwanzig Stunden.', exEn: 'A day has twenty-four hours.',
+      vis: { kind: 'number', n: 24 }
+    },
     { de: 'fünfundzwanzig', pos: 'number', en: 'twenty-five', hi: 'पच्चीस',
-      ex: 'Das kostet fünfundzwanzig Euro.', exEn: 'That costs twenty-five euros.' },
+      ex: 'Das kostet fünfundzwanzig Euro.', exEn: 'That costs twenty-five euros.',
+      vis: { kind: 'number', n: 25 }
+    },
     { de: 'sechsundzwanzig', pos: 'number', en: 'twenty-six', hi: 'छब्बीस',
-      ex: 'Das Alphabet hat sechsundzwanzig Buchstaben.', exEn: 'The alphabet has twenty-six letters.' },
+      ex: 'Das Alphabet hat sechsundzwanzig Buchstaben.', exEn: 'The alphabet has twenty-six letters.',
+      vis: { kind: 'number', n: 26 }
+    },
     { de: 'siebenundzwanzig', pos: 'number', en: 'twenty-seven', hi: 'सत्ताईस',
-      ex: 'Meine Schwester wird siebenundzwanzig.', exEn: 'My sister is turning twenty-seven.' },
+      ex: 'Meine Schwester wird siebenundzwanzig.', exEn: 'My sister is turning twenty-seven.',
+      vis: { kind: 'number', n: 27 }
+    },
     { de: 'achtundzwanzig', pos: 'number', en: 'twenty-eight', hi: 'अट्ठाईस',
       ex: 'Der Februar hat achtundzwanzig Tage.', exEn: 'February has twenty-eight days.',
       vis: { kind: 'number', n: 28 }
     },
     { de: 'neunundzwanzig', pos: 'number', en: 'twenty-nine', hi: 'उनतीस',
-      ex: 'Neunundzwanzig plus eins ist dreißig.', exEn: 'Twenty-nine plus one is thirty.' },
+      ex: 'Neunundzwanzig plus eins ist dreißig.', exEn: 'Twenty-nine plus one is thirty.',
+      vis: { kind: 'number', n: 29 }
+    },
     { de: 'Zahl', art: 'die', gender: 'f', plural: 'Zahlen', pos: 'noun', en: 'number, figure', hi: 'संख्या',
       ex: 'Welche Zahl hörst du?', exEn: 'Which number do you hear?' },
     { de: 'Handynummer', art: 'die', gender: 'f', plural: 'Handynummern', pos: 'noun', en: 'mobile number', hi: 'मोबाइल नंबर',
@@ -318,7 +348,9 @@ const CHAPTER = {
     { de: 'Punkt', art: 'der', gender: 'm', plural: 'Punkte', pos: 'noun', en: 'dot, point', hi: 'बिंदु',
       ex: 'anna.berlin — hier ist ein Punkt.', exEn: 'anna.berlin — here is a dot.' },
     { de: 'Unterstrich', art: 'der', gender: 'm', plural: 'Unterstriche', pos: 'noun', en: 'underscore', hi: 'अंडरस्कोर',
-      ex: 'anna_berlin — das ist ein Unterstrich.', exEn: 'anna_berlin — that is an underscore.' },
+      ex: 'anna_berlin — das ist ein Unterstrich.', exEn: 'anna_berlin — that is an underscore.',
+      vis: { kind: 'grammar', de: 'anna_berlin', hl: '_', role: 'focus', cap: 'The underscore character' }
+    },
     { de: 'dann', pos: 'adverb', en: 'then, next', hi: 'फिर',
       ex: 'Erst zehn, dann elf, dann zwölf.', exEn: 'First ten, then eleven, then twelve.' },
     { de: 'plus', pos: 'operator', en: 'plus', hi: 'जोड़ (धन)',

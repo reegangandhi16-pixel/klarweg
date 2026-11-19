@@ -213,9 +213,9 @@ const CHAPTER = {
   // ---------- Vocabulary (25 words) ----------
   vocab: [
     // ===== Core Active =====
-    { de: 'ab', pos: 'preposition', en: 'from … on (+ dative)', hi: 'से (आगे)', ex: 'Ab morgen mache ich Sport.', exEn: 'From tomorrow I\u2019ll do sport.' },
+    { de: 'ab', pos: 'preposition', en: 'from … on (+ dative)', hi: 'से (आगे)', ex: 'Ab morgen mache ich Sport.', exEn: 'From tomorrow I\u2019ll do sport.', vis: { kind: 'grammar', de: 'Ab morgen mache ich Sport.', hl: 'Ab', role: 'preposition', cap: 'Preposition \'ab\' indicates starting from a future day' } },
     // ===== Active Support =====
-    { de: 'ab (off)', pos: 'adverb', en: 'off (we\u2019re off)', hi: 'चलें', ex: 'Auf geht\u2019s, wir sind ab!', exEn: 'Let\u2019s go, we\u2019re off!' },
+    { de: 'ab (off)', pos: 'adverb', en: 'off (we\u2019re off)', hi: 'चलें', ex: 'Auf geht’s, ab geht’s!', exEn: 'Let’s go, off we go!' },
     { de: 'alle (every)', pos: 'determiner', en: 'every (alle zwei Tage)', hi: 'हर', ex: 'Alle zwei Tage lerne ich.', exEn: 'Every two days I study.' },
     { de: 'an (+D)', pos: 'preposition', en: 'over (a period)', hi: 'के दौरान', ex: 'An den Wochenenden ruhe ich mich aus.', exEn: 'Over the weekends I rest.' },
     { de: 'bald', pos: 'adverb', en: 'soon', hi: 'जल्द', ex: 'Bald ist die Prüfung.', exEn: 'Soon the exam is here.' },

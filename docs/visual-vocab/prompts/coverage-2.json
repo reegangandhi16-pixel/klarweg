@@ -11030,9 +11030,10 @@
   "reason": "coverage review: grammatical sentence structure impossible to depict without text"
  },
  "der-pate--godfather": {
-  "subject": "Show an older mentor standing beside a younger person at a workshop table, offering a supportive hand on the shoulder while presenting an architectural model together.",
-  "alt": "A project sponsor placing an encouraging hand on a young creator's shoulder.",
-  "strategy": "context"
+  "subject": "Show a smiling man gently holding a baby in a white christening gown beside the parents at a small church font.",
+  "alt": "A godfather holding a baby at a christening.",
+  "strategy": "direct",
+  "note": "re-scened 2026-11-19: example corrected to the card's sense (docs/visual-vocab/example-corrections.md)"
  },
  "der-pazifismus--pacifism": {
   "subject": "Show two open, outstretched hands gently releasing a white dove holding a fresh olive branch into a calm, sunny sky.",
@@ -11442,9 +11443,10 @@
   "strategy": "symbolic"
  },
  "der-sitz--seat": {
-  "subject": "Show a corporate headquarters office building with large brass letters on the stone facade indicating a registered office.",
-  "alt": "Grand institutional headquarters building facade with wide steps",
-  "strategy": "context"
+  "subject": "Show the inside of a city bus with rows of blue upholstered seats, one empty seat by the window in the foreground.",
+  "alt": "An empty seat on a bus.",
+  "strategy": "direct",
+  "note": "re-scened 2026-11-19: example corrected to the card's sense (docs/visual-vocab/example-corrections.md)"
  },
  "der-slogan--slogan": {
   "tier": "text-only",
@@ -23741,9 +23743,10 @@
   "strategy": "contrast"
  },
  "verlieren--lose-to-miss": {
-  "subject": "Show a person arriving at a bus stop waving one hand in dismay as the back of a yellow city bus drives away down the street.",
-  "alt": "A person arriving at a bus stop just as the bus departs.",
-  "strategy": "context"
+  "subject": "Show a worried person on a doorstep searching their empty coat pockets and open bag, with no keys in sight.",
+  "alt": "A person searching their pockets for lost keys.",
+  "strategy": "direct",
+  "note": "re-scened 2026-11-19: example corrected to the card's sense (docs/visual-vocab/example-corrections.md)"
  },
  "vermehren--multiply-increase": {
   "subject": "Show a round glass petri dish viewed from above, containing small clustered colonies of multiplying round microorganisms.",

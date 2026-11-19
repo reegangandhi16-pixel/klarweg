@@ -216,9 +216,13 @@ const CHAPTER = {
     { de: 'was', pos: 'question word', en: 'what', hi: 'क्या',
       ex: 'Was ist das?', exEn: 'What is that?' },
     { de: 'wie', pos: 'question word', en: 'how; what', hi: 'कैसे',
-      ex: 'Wie heißt du?', exEn: 'What is your name?' },
+      ex: 'Wie heißt du?', exEn: 'What is your name?',
+      vis: { kind: 'grammar', de: 'Wie heißt du?', hl: 'Wie', role: 'question', cap: 'Question word asking for name, manner, or state (\'how / what\')' }
+    },
     { de: 'wo', pos: 'question word', en: 'where', hi: 'कहाँ',
-      ex: 'Wo wohnst du?', exEn: 'Where do you live?' },
+      ex: 'Wo wohnst du?', exEn: 'Where do you live?',
+      vis: { kind: 'grammar', de: 'Wo wohnst du?', hl: 'Wo', role: 'question', cap: 'Question word asking about a location or place' }
+    },
     { de: 'woher', pos: 'question word', en: 'from where', hi: 'कहाँ से',
       ex: 'Woher kommst du?', exEn: 'Where do you come from?' },
     { de: 'warum', pos: 'question word', en: 'why', hi: 'क्यों',
@@ -295,11 +299,17 @@ const CHAPTER = {
       ex: 'Bilde eine Frage.', exEn: 'Form a question.',
       conj: { praesens: 'bildet', praeteritum: 'bildete', perfekt: 'hat gebildet' } },
     { de: 'Fragewort', art: 'das', gender: 'n', plural: 'Fragewörter', pos: 'noun', en: 'question word', hi: 'प्रश्नवाचक शब्द',
-      ex: '"Wer" ist ein Fragewort.', exEn: '"Wer" is a question word.' },
+      ex: '"Wer" ist ein Fragewort.', exEn: '"Wer" is a question word.',
+      vis: { kind: 'grammar', de: 'Wer kommt heute zur Party?', hl: 'Wer', role: 'question', cap: 'Question word introducing an open interrogative question' }
+    },
     { de: 'W-Wort', art: 'das', gender: 'n', plural: 'W-Wörter', pos: 'noun', en: 'W-word', hi: 'W-शब्द',
-      ex: 'Alle W-Wörter beginnen mit W.', exEn: 'All W-words begin with W.' },
+      ex: 'Alle W-Wörter beginnen mit W.', exEn: 'All W-words begin with W.',
+      vis: { kind: 'grammar', de: 'Wo wohnst du?', hl: 'Wo', role: 'question', cap: 'A question word beginning with W' }
+    },
     { de: 'W-Frage', art: 'die', gender: 'f', plural: 'W-Fragen', pos: 'noun', en: 'W-question', hi: 'W-प्रश्न',
-      ex: 'Eine W-Frage beginnt mit einem W-Wort.', exEn: 'A W-question begins with a W-word.' },
+      ex: 'Eine W-Frage beginnt mit einem W-Wort.', exEn: 'A W-question begins with a W-word.',
+      vis: { kind: 'grammar', de: 'Wo wohnst du?', hl: 'Wo', role: 'question', cap: 'A W-question starts with a W-word' }
+    },
     { de: 'kreisen', pos: 'verb', en: 'to circle', hi: 'घेरना',
       ex: 'Kreise das W-Wort ein.', exEn: 'Circle the W-word.',
       conj: { praesens: 'kreist', praeteritum: 'kreiste', perfekt: 'hat gekreist' },

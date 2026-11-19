@@ -395,11 +395,15 @@ const CHAPTER = {
     { de: 'Kausalsatz', art: 'der', gender: 'm', plural: 'Kausalsätze', pos: 'noun', level: 'B1', en: 'causal clause', hi: 'कारण-वाचक वाक्य',
       ex: 'Ein Kausalsatz mit "weil" nennt einen Grund.', exEn: 'A causal clause with "weil" states a reason.', exHi: '"weil" wala kaaran-vachak vaakya ek kaaran batata hai.',
       ex2: 'Auch "da" leitet einen Kausalsatz ein.', ex2En: '"da" also introduces a causal clause.', ex2Hi: '"da" bhi ek kaaran-vachak vaakya shuru karta hai.',
-      advanced: { synonyms: ['Grundsatz'], opposites: ['Konzessivsatz'], collocations: ['ein Kausalsatz mit weil/da'] } },
+      advanced: { synonyms: ['Grundsatz'], opposites: ['Konzessivsatz'], collocations: ['ein Kausalsatz mit weil/da'] },
+      vis: { kind: 'grammar', de: 'Ich bleibe zu Hause, weil es regnet.', hl: 'weil es regnet', role: 'adverb', cap: 'A causal clause with \'weil\' gives the reason for an action' }
+    },
     { de: 'Konzessivsatz', art: 'der', gender: 'm', plural: 'Konzessivsätze', pos: 'noun', level: 'B1', en: 'concessive clause', hi: 'रियायती वाक्य',
       ex: 'Ein Konzessivsatz mit "obwohl" zeigt einen Gegensatz.', exEn: 'A concessive clause with "obwohl" shows a contrast.', exHi: '"obwohl" wala riyaayati vaakya ek vipreet baat dikhata hai.',
       ex2: 'Konzessivsätze beginnen oft mit "obwohl".', ex2En: 'Concessive clauses often begin with "obwohl".', ex2Hi: 'Riyaayati vaakya aksar "obwohl" se shuru hote hain.',
-      advanced: { synonyms: [], opposites: ['Kausalsatz'], collocations: ['ein Konzessivsatz mit obwohl'] } }
+      advanced: { synonyms: [], opposites: ['Kausalsatz'], collocations: ['ein Konzessivsatz mit obwohl'] },
+      vis: { kind: 'grammar', de: 'Wir gehen spazieren, obwohl es regnet.', hl: 'obwohl es regnet', role: 'adverb', cap: 'A concessive clause expresses an unexpected contrast' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

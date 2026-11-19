@@ -224,7 +224,7 @@ const CHAPTER = {
   // ---------- Review vocabulary (recycled from Ch.1-9; no new words) ----------
   vocab: [
     // ===== Ch.1 Genitiv: Name + s =====
-    { de: 'Genitiv', art: 'der', gender: 'm', plural: 'Genitive', pos: 'noun', en: 'genitive (case)', hi: 'संबंधकारक', tag: 'Ch.1', ex: 'Annas Buch ist ein Beispiel f\u00fcr den Genitiv.', exEn: 'Anna\u2019s book is an example of the genitive.' },
+    { de: 'Genitiv', art: 'der', gender: 'm', plural: 'Genitive', pos: 'noun', en: 'genitive (case)', hi: 'संबंधकारक', tag: 'Ch.1', ex: 'Annas Buch ist ein Beispiel f\u00fcr den Genitiv.', exEn: 'Anna\u2019s book is an example of the genitive.', vis: { kind: 'grammar', de: 'Das ist das Buch des Lehrers.', hl: 'des Lehrers', role: 'genitiv', cap: 'Genitive shows possession' } },
     { de: 'Handy', art: 'das', gender: 'n', plural: 'Handys', pos: 'noun', en: 'mobile phone', hi: 'मोबाइल फ़ोन', tag: 'Ch.1', ex: 'Das ist Max\u2019 Handy, nicht Rohans Handy.', exEn: 'That\u2019s Max\u2019s phone, not Rohan\u2019s phone.', img: { src: '../public/vocab-img/5a55e38787c2bda4a90d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'modern smartphone lying at a slight angle, blank dark screen' } },
     { de: 'Tasche', art: 'die', gender: 'f', plural: 'Taschen', pos: 'noun', en: 'bag', hi: 'बैग', tag: 'Ch.1', ex: 'Wo ist Rohans Tasche?', exEn: 'Where is Rohan\u2019s bag?', img: { src: '/api/media/vocab-img/e1de13c19151c9bfad96', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a brown leather shoulder bag' } },
     // ===== Ch.2 Perfekt (Wiederholung) =====
@@ -247,7 +247,7 @@ const CHAPTER = {
     // ===== Ch.6 Modalverben im Pr\u00e4teritum =====
     { de: 'musste', pos: 'verb', en: 'had to (Pr\u00e4t. von m\u00fcssen)', hi: 'पड़ा', tag: 'Ch.6', ex: 'Ich musste am Wochenende arbeiten.', exEn: 'I had to work on the weekend.' },
     { de: 'konnte', pos: 'verb', en: 'could (Pr\u00e4t. von k\u00f6nnen)', hi: 'सका', tag: 'Ch.6', ex: 'Abends konnte ich ins Kino gehen.', exEn: 'In the evening I could go to the cinema.' },
-    { de: 'durfte', pos: 'verb', en: 'was allowed to (Pr\u00e4t. von d\u00fcrfen)', hi: 'इजाज़त थी', tag: 'Ch.6', ex: 'Als Kind durfte ich nicht lange fernsehen.', exEn: 'As a child I wasn\u2019t allowed to watch TV for long.' },
+    { de: 'durfte', pos: 'verb', en: 'was allowed to (Pr\u00e4t. von d\u00fcrfen)', hi: 'इजाज़त थी', tag: 'Ch.6', ex: 'Als Kind durfte ich nicht lange fernsehen.', exEn: 'As a child I wasn\u2019t allowed to watch TV for long.', vis: { kind: 'grammar', de: 'Als Kind durfte ich nicht lange fernsehen.', hl: 'durfte', role: 'modalverb', cap: 'Past tense of dürfen expressing past permission' } },
     { de: 'wollte', pos: 'verb', en: 'wanted to (Pr\u00e4t. von wollen)', hi: 'चाहता था', tag: 'Ch.6', ex: 'Ich wollte das Zertifikat bekommen.', exEn: 'I wanted to get the certificate.' },
     // ===== Ch.7 Possessivartikel im Dativ =====
     { de: 'Freund', art: 'der', gender: 'm', plural: 'Freunde', pos: 'noun', en: 'friend (m.)', hi: 'दोस्त', tag: 'Ch.7', ex: 'Ich war mit meinen Freunden im Kino.', exEn: 'I was at the cinema with my friends.', img: { src: '/api/media/vocab-img/26f461af8d2313bd7b1b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'two male friends walking and laughing together' } },

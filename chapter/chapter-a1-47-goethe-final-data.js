@@ -243,7 +243,7 @@ const CHAPTER = {
     { de: 'Übung', art: 'die', gender: 'f', plural: 'Übungen', pos: 'noun', en: 'exercise', hi: 'अभ्यास', ex: 'Diese Übung ist wichtig.', exEn: 'This exercise is important.' },
     // ===== Passive =====
     { de: 'ausdrücken', pos: 'verb', en: 'to express', hi: 'व्यक्त करना', ex: 'Ich kann das gut ausdrücken.', exEn: 'I can express that well.', conj: { praesens: 'drückt aus', praeteritum: 'drückte aus', perfekt: 'hat ausgedrückt' } },
-    { de: 'Deutsche', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'German (the language)', hi: 'जर्मन भाषा', ex: 'Das Deutsche ist nicht leicht.', exEn: 'German is not easy.' },
+    { de: 'Deutsche', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'German (the language)', hi: 'जर्मन भाषा', ex: 'Das Deutsche ist nicht leicht.', exEn: 'German is not easy.', vis: { kind: 'map', iso: ['DE', 'AT', 'CH'], cap: 'Official language in Germany, Austria, and Switzerland', src: '../public/vocab-map/90d56113bd96.svg' } },
     { de: 'Ergebnis', art: 'das', gender: 'n', plural: 'Ergebnisse', pos: 'noun', en: 'result', hi: 'परिणाम', ex: 'Das Ergebnis ist gut.', exEn: 'The result is good.' },
     { de: 'Ziel', art: 'das', gender: 'n', plural: 'Ziele', pos: 'noun', en: 'goal', hi: 'लक्ष्य', ex: 'Mein Ziel ist Goethe A1.', exEn: 'My goal is Goethe A1.', img: { src: '/api/media/vocab-img/73b3fb4e90f3c4c20d8e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An arrow hitting the centre of a target' } },
     { de: 'dazugehören', pos: 'verb', en: 'to belong to', hi: 'का हिस्सा होना', ex: 'Übung gehört dazu.', exEn: 'Practice is part of it.', conj: { praesens: 'gehört dazu', praeteritum: 'gehörte dazu', perfekt: 'hat dazugehört' } },

@@ -293,7 +293,7 @@ const CHAPTER = {
     { de: 'Fantasie', art: 'die', gender: 'f', plural: 'Fantasien', pos: 'noun', en: 'imagination', hi: 'कल्पना', ex: 'Das Kind hat viel Fantasie.', exEn: 'The child has a lot of imagination.', img: { src: '/api/media/vocab-img/efe79bd35b7f627eb71c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A child reading with imaginary floating shapes.' } },
     { de: 'Maus', art: 'die', gender: 'f', plural: 'Mäuse', pos: 'noun', en: 'mouse', hi: 'चूहा', ex: 'Die Maus ist klein.', exEn: 'The mouse is small.', img: { src: '/api/media/vocab-img/855aa850896dfc89af31', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Small grey mouse nibbling cheese' } },
     // ===== Reference / System =====
-    { de: 'Possessivartikel', art: 'der', gender: 'm', plural: 'Possessivartikel', pos: 'noun', en: 'possessive article', hi: 'अधिकारवाचक उपपद', ex: '"Mein" ist ein Possessivartikel.', exEn: '"Mein" is a possessive article.' }
+    { de: 'Possessivartikel', art: 'der', gender: 'm', plural: 'Possessivartikel', pos: 'noun', en: 'possessive article', hi: 'अधिकारवाचक उपपद', ex: '"Mein" ist ein Possessivartikel.', exEn: '"Mein" is a possessive article.', vis: { kind: 'grammar', de: 'Mein Fahrrad steht vor dem Haus.', hl: 'Mein', role: 'article', cap: 'Possessive article indicating ownership' } }
   ],
 
   // ---------- Possessives (rule cards → accordion) ----------

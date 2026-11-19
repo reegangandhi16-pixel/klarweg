@@ -233,7 +233,7 @@ const CHAPTER = {
     { de: 'oft', pos: 'adverb', en: 'often', hi: 'अक्सर', ex: 'Ich spiele oft Fußball.', exEn: 'I often play football.' },
     // ===== Active Support =====
     { de: 'allein', pos: 'adverb', en: 'alone', hi: 'अकेले', ex: 'Ich wohne allein.', exEn: 'I live alone.', img: { src: '/api/media/vocab-img/c92b7af069c88d8f816b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person sitting alone on a long park bench.' } },
-    { de: 'Alltag', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'everyday life, daily routine', hi: 'रोज़मर्रा', ex: 'Der Alltag ist die beste Praxis.', exEn: 'Everyday life is the best practice.' },
+    { de: 'Alltag', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'everyday life, daily routine', hi: 'रोज़मर्रा', ex: 'Der Alltag ist die beste Übung.', exEn: 'Everyday life is the best practice.' },
     { de: 'Mittag', art: 'der', gender: 'm', plural: 'Mittage', pos: 'noun', en: 'noon, midday', hi: 'दोपहर', ex: 'Am Mittag esse ich.', exEn: 'At noon I eat.', img: { src: '/api/media/vocab-img/b95747886a0c8e6f4933', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Bright midday sun over a town square' } },
     { de: 'Morgen', art: 'der', gender: 'm', plural: 'Morgen', pos: 'noun', en: 'morning', hi: 'सुबह', ex: 'Der Morgen ist ruhig.', exEn: 'The morning is calm.', img: { src: '/api/media/vocab-img/e0ddfe2dae62ab9e13df', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Peaceful morning light shining on a steaming mug' } },
     { de: 'Nachmittag', art: 'der', gender: 'm', plural: 'Nachmittage', pos: 'noun', en: 'afternoon', hi: 'दोपहर बाद', ex: 'Am Nachmittag lerne ich.', exEn: 'In the afternoon I study.' },
@@ -262,7 +262,7 @@ const CHAPTER = {
     { de: 'wach', pos: 'adjective', en: 'awake', hi: 'जागा हुआ', ex: 'Nachts bin ich wach.', exEn: 'At night I am awake.', img: { src: '/api/media/vocab-img/9e1ccdf8ebd19c9f7cc4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person sitting awake in bed at night.' } },
     // ===== Reference / System =====
     { de: 'Position', art: 'die', gender: 'f', plural: 'Positionen', pos: 'noun', en: 'position', hi: 'स्थान', ex: 'Das Verb ist auf Position zwei.', exEn: 'The verb is in position two.' },
-    { de: 'Zeitangabe', art: 'die', gender: 'f', plural: 'Zeitangaben', pos: 'noun', en: 'time expression', hi: 'समय-सूचक शब्द', ex: 'Morgens ist eine Zeitangabe.', exEn: '"Morgens" is a time expression.' }
+    { de: 'Zeitangabe', art: 'die', gender: 'f', plural: 'Zeitangaben', pos: 'noun', en: 'time expression', hi: 'समय-सूचक शब्द', ex: 'Morgens ist eine Zeitangabe.', exEn: '"Morgens" is a time expression.', vis: { kind: 'grammar', de: 'Morgen fahre ich nach Berlin.', hl: 'Morgen', role: 'time', cap: 'A time expression says when something happens' } }
   ],
 
   // ---------- The V2 rule (rule cards → accordion) ----------

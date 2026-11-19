@@ -227,7 +227,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/4efbe5d794014b1609fe', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person with a lightbulb glowing above head' }
     },
     { de: 'nicht', pos: 'negation', en: 'not', hi: 'नहीं',
-      ex: 'Ich verstehe das nicht.', exEn: 'I do not understand that.' },
+      ex: 'Ich verstehe das nicht.', exEn: 'I do not understand that.',
+      vis: { kind: 'grammar', de: 'Ich verstehe das nicht.', hl: 'nicht', role: 'negation', cap: 'Negation particle negating the verb or statement.' }
+    },
     // — Active support —
     { de: 'bedeuten', pos: 'verb', en: 'to mean', hi: 'मतलब होना',
       ex: 'Was bedeutet das Wort?', exEn: 'What does the word mean?',

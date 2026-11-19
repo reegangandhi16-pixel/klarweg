@@ -247,8 +247,8 @@ const CHAPTER = {
     { de: 'schade', pos: 'adjective', en: 'a pity, a shame', hi: 'अफ़सोस', ex: 'Schade, du kannst nicht kommen.', exEn: 'A pity you can\'t come.' },
     { de: 'verschieden', pos: 'adjective', en: 'different, various', hi: 'अलग-अलग', ex: 'Wir haben verschiedene Ideen.', exEn: 'We have different ideas.', img: { src: '/api/media/vocab-img/f118acdf67e627037ed7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Four different cups with varied shapes and colors' } },
     // ===== Reference / System =====
-    { de: 'Modalverb', art: 'das', gender: 'n', plural: 'Modalverben', pos: 'noun', en: 'modal verb', hi: 'सहायक क्रिया', ex: '"Können" ist ein Modalverb.', exEn: '"Können" is a modal verb.' },
-    { de: 'Satzende', art: 'das', gender: 'n', plural: 'Satzenden', pos: 'noun', en: 'end of the sentence', hi: 'वाक्य का अंत', ex: 'Das Verb steht am Satzende.', exEn: 'The verb is at the end of the sentence.' },
+    { de: 'Modalverb', art: 'das', gender: 'n', plural: 'Modalverben', pos: 'noun', en: 'modal verb', hi: 'सहायक क्रिया', ex: '"Können" ist ein Modalverb.', exEn: '"Können" is a modal verb.', vis: { kind: 'grammar', de: 'Ich kann Deutsch sprechen.', hl: 'kann', role: 'verb', cap: '"können" functions as a modal verb' } },
+    { de: 'Satzende', art: 'das', gender: 'n', plural: 'Satzenden', pos: 'noun', en: 'end of the sentence', hi: 'वाक्य का अंत', ex: 'Das Verb steht am Satzende.', exEn: 'The verb is at the end of the sentence.', vis: { kind: 'grammar', de: 'Er möchte heute Abend kommen.', hl: 'kommen', role: 'verb', cap: 'The infinitive verb placed at the end of the sentence' } },
     { de: 'Satzklammer', art: 'die', gender: 'f', plural: 'Satzklammern', pos: 'noun', en: 'sentence bracket', hi: 'वाक्य कोष्ठक', ex: 'Modalverb und Infinitiv bilden die Satzklammer.', exEn: 'Modal and infinitive form the sentence bracket.' }
   ],
 

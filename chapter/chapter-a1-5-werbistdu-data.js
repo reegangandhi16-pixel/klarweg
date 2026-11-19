@@ -234,7 +234,9 @@ const CHAPTER = {
     { de: 'sie', pos: 'pronoun', en: 'she; they', hi: 'वह (स्त्री) / वे',
       ex: 'Sie heißt Lena.', exEn: 'She is called Lena.' },
     { de: 'es', pos: 'pronoun', en: 'it', hi: 'यह',
-      ex: 'Es ist gut.', exEn: 'It is good.' },
+      ex: 'Es ist gut.', exEn: 'It is good.',
+      vis: { kind: 'grammar', de: 'Das Essen schmeckt. Es ist gut.', hl: 'Es', role: 'subject', cap: 'Neuter personal pronoun referring back to \'das Essen\'' }
+    },
     { de: 'wir', pos: 'pronoun', en: 'we', hi: 'हम',
       ex: 'Wir sind Studenten.', exEn: 'We are students.' },
     { de: 'ihr', pos: 'pronoun', en: 'you (plural)', hi: 'तुम सब',
@@ -245,7 +247,9 @@ const CHAPTER = {
     },
     { de: 'sein', pos: 'verb', en: 'to be', hi: 'होना',
       ex: 'Ich bin müde.', exEn: 'I am tired.',
-      conj: { praesens: 'ist', praeteritum: 'war', perfekt: 'ist gewesen' } },
+      conj: { praesens: 'ist', praeteritum: 'war', perfekt: 'ist gewesen' },
+      vis: { kind: 'grammar', de: 'Ich bin müde.', hl: 'bin', role: 'verb', cap: 'Form of \'sein\' (to be) linking subject to state' }
+    },
     { de: 'heißen', pos: 'verb', en: 'to be called', hi: 'कहलाना',
       ex: 'Ich heiße Anna. Wie heißt du?', exEn: 'My name is Anna. What is yours?',
       conj: { praesens: 'heißt', praeteritum: 'hieß', perfekt: 'hat geheißen' } },
@@ -288,13 +292,19 @@ const CHAPTER = {
     { de: 'mein/meine', pos: 'possessive', en: 'my', hi: 'मेरा / मेरी',
       ex: 'Mein Name ist Anna.', exEn: 'My name is Anna.' },
     { de: 'dein/deine', pos: 'possessive', en: 'your (informal)', hi: 'तुम्हारा / तुम्हारी',
-      ex: 'Wie ist dein Name?', exEn: 'What is your name?' },
+      ex: 'Wie ist dein Name?', exEn: 'What is your name?',
+      vis: { kind: 'grammar', de: 'Wie ist dein Name?', hl: 'dein', role: 'article', cap: 'Informal possessive determiner (your)' }
+    },
     { de: 'aus', pos: 'preposition', en: 'from', hi: 'से',
-      ex: 'Ich komme aus Indien.', exEn: 'I come from India.' },
+      ex: 'Ich komme aus Indien.', exEn: 'I come from India.',
+      vis: { kind: 'grammar', de: 'Ich komme aus Indien.', hl: 'aus', role: 'preposition', cap: 'Preposition indicating origin or provenance' }
+    },
     { de: 'in', pos: 'preposition', en: 'in', hi: 'में',
       ex: 'Ich wohne in Delhi.', exEn: 'I live in Delhi.' },
     { de: 'auf', pos: 'preposition', en: 'in (a language); on', hi: 'पर / में (भाषा)',
-      ex: 'Auf Deutsch, bitte!', exEn: 'In German, please!' },
+      ex: 'Auf Deutsch, bitte!', exEn: 'In German, please!',
+      vis: { kind: 'grammar', de: 'Auf Deutsch, bitte!', hl: 'Auf', role: 'preposition', cap: 'Using "auf" to specify the language' }
+    },
     { de: 'für', pos: 'preposition', en: 'for', hi: 'के लिए',
       ex: 'Das ist für dich.', exEn: 'That is for you.',
       img: { src: '/api/media/vocab-img/00763f95ce7053c30b89', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person offering a wrapped gift forward with both hands.' }
@@ -302,7 +312,9 @@ const CHAPTER = {
     { de: 'Name', art: 'der', gender: 'm', plural: 'Namen', pos: 'noun', en: 'name', hi: 'नाम',
       ex: 'Mein Name ist Anna.', exEn: 'My name is Anna.' },
     { de: 'Vorname', art: 'der', gender: 'm', plural: 'Vornamen', pos: 'noun', en: 'first name', hi: 'पहला नाम',
-      ex: 'Mein Vorname ist Anna.', exEn: 'My first name is Anna.' },
+      ex: 'Mein Vorname ist Anna.', exEn: 'My first name is Anna.',
+      vis: { kind: 'grammar', de: 'Mein Vorname ist Anna.', hl: 'Vorname', role: 'subject', cap: 'A person\'s given name, as opposed to family name' }
+    },
     { de: 'Nachname', art: 'der', gender: 'm', plural: 'Nachnamen', pos: 'noun', en: 'last name', hi: 'उपनाम',
       ex: 'Mein Nachname ist Klein.', exEn: 'My last name is Klein.' },
     { de: 'Person', art: 'die', gender: 'f', plural: 'Personen', pos: 'noun', en: 'person', hi: 'व्यक्ति',
@@ -316,7 +328,7 @@ const CHAPTER = {
     { de: 'Antwort', art: 'die', gender: 'f', plural: 'Antworten', pos: 'noun', en: 'answer', hi: 'जवाब',
       ex: 'Die Antwort ist richtig.', exEn: 'The answer is correct.' },
     { de: 'Telefon', art: 'das', gender: 'n', plural: 'Telefone', pos: 'noun', en: 'telephone', hi: 'टेलीफ़ोन',
-      ex: 'Meine Nummer ist auf dem Telefon.', exEn: 'My number is on the phone.',
+      ex: 'Das Telefon klingelt.', exEn: 'The telephone is ringing.',
       img: { src: '/api/media/vocab-img/6747d4556438e7cbd9e0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A landline desktop telephone with a handset.' }
     },
     { de: 'Reiseführer', art: 'der', gender: 'm', plural: 'Reiseführer', pos: 'noun', en: 'travel guide (m)', hi: 'गाइड (पुरुष)',
@@ -328,13 +340,21 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/00578af446632366144a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'tour guide holding a flag' }
     },
     { de: 'Personalpronomen', art: 'das', gender: 'n', plural: 'Personalpronomen', pos: 'noun', en: 'personal pronoun', hi: 'पुरुषवाचक सर्वनाम',
-      ex: '"Ich" ist ein Personalpronomen.', exEn: '"Ich" is a personal pronoun.' },
+      ex: '"Ich" ist ein Personalpronomen.', exEn: '"Ich" is a personal pronoun.',
+      vis: { kind: 'grammar', de: 'Ich helfe dir morgen gern.', hl: 'Ich', role: 'subject', cap: 'A personal pronoun replacing or naming a person' }
+    },
     { de: 'Subjekt', art: 'das', gender: 'n', plural: 'Subjekte', pos: 'noun', en: 'subject', hi: 'कर्ता',
-      ex: 'Das Subjekt steht vorne.', exEn: 'The subject comes first.' },
+      ex: 'Das Subjekt steht vorne.', exEn: 'The subject comes first.',
+      vis: { kind: 'grammar', de: 'Der Hund schläft im Garten.', hl: 'Der Hund', role: 'subject', cap: 'The subject: who or what does the action' }
+    },
     { de: 'Verb', art: 'das', gender: 'n', plural: 'Verben', pos: 'noun', en: 'verb', hi: 'क्रिया',
-      ex: 'Das Verb "sein" ist wichtig.', exEn: 'The verb "sein" is important.' },
+      ex: 'Das Verb "sein" ist wichtig.', exEn: 'The verb "sein" is important.',
+      vis: { kind: 'grammar', de: 'Kinder spielen im Park.', hl: 'spielen', role: 'verb', cap: 'The verb expresses an action' }
+    },
     { de: 'Aussagesatz', art: 'der', gender: 'm', plural: 'Aussagesätze', pos: 'noun', en: 'declarative sentence', hi: 'कथन वाक्य',
-      ex: 'Ein Aussagesatz endet mit einem Punkt.', exEn: 'A declarative sentence ends with a full stop.' }
+      ex: 'Ein Aussagesatz endet mit einem Punkt.', exEn: 'A declarative sentence ends with a full stop.',
+      vis: { kind: 'grammar', de: 'Ich wohne in Berlin.', hl: 'wohne', role: 'verb', cap: 'A statement: the verb is in second position' }
+    }
   ],
 
   // ---------- Pronouns & sein (rule cards → accordion) ----------

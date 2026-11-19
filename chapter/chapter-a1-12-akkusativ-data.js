@@ -192,7 +192,9 @@ const CHAPTER = {
   // ---------- Vocabulary (15 words) ----------
   vocab: [
     { de: 'den', pos: 'article (accusative)', en: 'the (masc. acc.)', hi: 'the (कर्म, पु.)',
-      ex: 'Ich sehe den Mann.', exEn: 'I see the man.' },
+      ex: 'Ich sehe den Mann.', exEn: 'I see the man.',
+      vis: { kind: 'grammar', de: 'Ich sehe den Mann.', hl: 'den', role: 'akkusativ', cap: 'Definite article in the accusative case' }
+    },
     { de: 'haben', pos: 'verb', en: 'to have', hi: 'होना (पास)',
       ex: 'Ich habe einen Stift.', exEn: 'I have a pen.',
       conj: { praesens: 'hat', praeteritum: 'hatte', perfekt: 'hat gehabt' } },
@@ -231,9 +233,13 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/3ee3037afd4bfee2ed6c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'calm sea waves meeting a sandy beach' }
     },
     { de: 'Akkusativ', art: 'der', gender: 'm', plural: 'Akkusative', pos: 'noun', en: 'accusative', hi: 'कर्म कारक',
-      ex: 'Der Akkusativ ist das Objekt.', exEn: 'The accusative is the object.' },
+      ex: 'Der Akkusativ ist das Objekt.', exEn: 'The accusative is the object.',
+      vis: { kind: 'grammar', de: 'Ich kaufe einen Apfel.', hl: 'einen Apfel', role: 'akkusativ', cap: 'Direct object in the accusative case' }
+    },
     { de: 'Nominativ', art: 'der', gender: 'm', plural: 'Nominative', pos: 'noun', en: 'nominative', hi: 'कर्ता कारक',
-      ex: 'Der Nominativ ist das Subjekt.', exEn: 'The nominative is the subject.' }
+      ex: 'Der Nominativ ist das Subjekt.', exEn: 'The nominative is the subject.',
+      vis: { kind: 'grammar', de: 'Der Hund bellt laut.', hl: 'Der Hund', role: 'subject', cap: 'Subject in the nominative case' }
+    }
   ],
 
   // ---------- Accusative (rule cards → accordion) ----------

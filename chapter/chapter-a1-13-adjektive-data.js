@@ -443,12 +443,14 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/c887f380b8be52b83e1a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Adult man smiling in casual clothes' }
     },
     { de: 'Adjektiv', art: 'das', gender: 'n', plural: 'Adjektive', pos: 'noun', en: 'adjective', hi: 'विशेषण',
-      ex: '"groß" ist ein Adjektiv.', exEn: '"groß" is an adjective.' },
+      ex: '"groß" ist ein Adjektiv.', exEn: '"groß" is an adjective.',
+      vis: { kind: 'grammar', de: 'Der alte Baum ist groß.', hl: 'groß', role: 'adjective', cap: 'An adjective describes a quality' }
+    },
     // — Passive —
     { de: 'breit', pos: 'adjective', en: 'wide', hi: 'चौड़ा',
       ex: 'Die Straße ist breit.', exEn: 'The street is wide.' },
     { de: 'eilig', pos: 'adjective', en: 'in a hurry', hi: 'जल्दी में',
-      ex: 'Ich bin eilig.', exEn: 'I am in a hurry.',
+      ex: 'Ich habe es eilig.', exEn: 'I am in a hurry.',
       img: { src: '/api/media/vocab-img/5602628a3e385c2201fc', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person walking briskly while checking the time.' }
     },
     { de: 'elegant', pos: 'adjective', en: 'elegant', hi: 'सुरुचिपूर्ण',
@@ -486,7 +488,7 @@ const CHAPTER = {
     { de: 'top', pos: 'adjective', en: 'top, great', hi: 'बढ़िया',
       ex: 'Das Hotel ist top.', exEn: 'The hotel is top.' },
     { de: 'typisch', pos: 'adjective', en: 'typical', hi: 'विशिष्ट',
-      ex: 'Das ist typisch Deutsch.', exEn: 'That is typically German.' }
+      ex: 'Das ist typisch deutsch.', exEn: 'That is typically German.' }
   ],
 
   // ---------- sein + Adjektiv (rule cards → accordion) ----------

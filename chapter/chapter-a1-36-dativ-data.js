@@ -225,7 +225,7 @@ const CHAPTER = {
 
   // ---------- Vocabulary (3 words) ----------
   vocab: [
-    { de: 'dem', pos: 'article', en: 'the (dative, masc./neut.)', hi: 'इस/को', ex: 'Ich gebe dem Mann das Buch.', exEn: 'I give the man the book.' },
+    { de: 'dem', pos: 'article', en: 'the (dative, masc./neut.)', hi: 'इस/को', ex: 'Ich gebe dem Mann das Buch.', exEn: 'I give the man the book.', vis: { kind: 'grammar', de: 'Ich gebe dem Mann das Buch.', hl: 'dem', role: 'dativ', cap: 'Definite article in the dative case' } },
     { de: 'wem', pos: 'pronoun', en: 'to whom', hi: 'किसको', ex: 'Wem gibst du das Buch?', exEn: 'To whom do you give the book?' },
     { de: 'Dativ', art: 'der', gender: 'm', plural: 'Dative', pos: 'noun', en: 'dative (case)', hi: 'संप्रदान कारक', ex: 'Der Empfänger steht im Dativ.', exEn: 'The receiver is in the dative.', vis: { kind: 'grammar', de: 'Ich gebe dem Mann ein Buch.', hl: 'dem Mann', role: 'dativ', cap: '\'dem Mann\' is in the dative case as indirect object' } }
   ],

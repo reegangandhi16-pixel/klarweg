@@ -37,14 +37,37 @@ export function render(iso) {
   const ids = new Set(iso.map(num).filter(Boolean));
   const t110 = atlas("110m"); const hi110 = topo.feature(t110, t110.objects.countries).features.filter((f) => ids.has(f.id));
   if (!hi110.length) throw new Error("no geometry for " + iso.join(","));
-  const [[x0, y0], [x1, y1]] = d3.geoBounds({ type: "FeatureCollection", features: hi110.map(mainland) });
-  const wide = x1 - x0 > 100 || x1 < x0 || y1 - y0 > 60;
+  // framing shapes: each country's mainland; in a European set Russia frames by its European part only
+  const lonC = (f) => d3.geoCentroid(mainland(f))[0];
+  const european = hi110.length > 1 && hi110.every((f) => f.id === "643" || (lonC(f) > -30 && lonC(f) < 45));
+  const frame = hi110.map((f) => {
+    const m = mainland(f);
+    if (european && f.id === "643") return { type: "Feature", geometry: { type: "Polygon", coordinates: [[[27, 42], [27, 70], [60, 70], [60, 42], [27, 42]]] } };
+    return m;
+  });
+  const fc0 = { type: "FeatureCollection", features: frame };
+  const [[x0, y0], [x1, y1]] = d3.geoBounds(fc0);
+  const lonSpan = x1 - x0 + (x1 < x0 ? 360 : 0), latSpan = y1 - y0;
+  // regional = one connected area: no big longitude gap between the highlighted countries
+  const lons = frame.map((f) => d3.geoCentroid(f)[0]).sort((a, b) => a - b);
+  const gaps = lons.slice(1).map((l, i) => l - lons[i]);
+  const regional = lonSpan <= 200 && latSpan <= 60 && gaps.every((g) => g <= 45);
+  const wide = !regional || lonSpan > 100 || latSpan > 60;
   const t = atlas(wide ? "110m" : "50m");
   const fc = topo.feature(t, t.objects.countries);
+  fc.features = fc.features.filter((f) => f.id !== "010");          // no Antarctica
   const hi = fc.features.filter((f) => ids.has(f.id));
   let proj;
-  if (wide) proj = d3.geoEqualEarth().fitExtent([[PAD, PAD], [W - PAD, H - PAD]], { type: "Sphere" });
-  else {
+  if (wide && !regional) {
+    // whole world at full width (Antarctica dropped), centred on the inhabited latitudes
+    proj = d3.geoEqualEarth().fitWidth(W - 2 * PAD, { type: "Sphere" });
+    const [, cy] = proj([0, 12]), [tx, ty] = proj.translate(); proj.translate([tx, ty + H / 2 - cy]);
+  } else if (wide) {
+    // large region (Russia, Soviet Union, Europe incl. Russia): conic equal-area centred on the set
+    const cLon = x0 + lonSpan / 2, cLat = (y0 + y1) / 2;
+    proj = d3.geoConicEqualArea().rotate([-cLon, 0]).center([0, cLat]).parallels([y0 + latSpan / 6, y1 - latSpan / 6])
+      .fitExtent([[PAD + 24, PAD + 24], [W - PAD - 24, H - PAD - 24]], fc0);
+  } else {
     // frame = highlighted mainlands, then zoom out (projected space) so neighbours give context
     const corners = { type: "MultiPoint", coordinates: [[x0, y0], [x1, y1], [x0, y1], [x1, y0]] };
     proj = d3.geoMercator().fitExtent([[PAD, PAD], [W - PAD, H - PAD]], corners);
@@ -60,7 +83,9 @@ export function render(iso) {
   const parts = [];
   for (const f of fc.features) { if (!visible(f)) continue; const d = gp(f); if (d) parts.push(`<path d="${squeeze(d)}" fill="${ids.has(f.id) ? HI : LAND}"/>`); }
   // states too small to see get a ring marker at their centroid
-  for (const f of hi) { const a = gp.area(f); if (a < 30) { const [x, y] = gp.centroid(f); if (isFinite(x)) parts.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="7" fill="none" stroke="${HI}" stroke-width="2.5"/>`); } }
+  // (at most three rings; more would clutter the map and the large countries already carry it)
+  const tiny = hi.filter((f) => gp.area(f) < 30).map((f) => gp.centroid(f)).filter(([x, y]) => isFinite(x) && x >= 0 && x <= W && y >= 0 && y <= H);
+  if (tiny.length <= 3) for (const [x, y] of tiny) parts.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="7" fill="none" stroke="${HI}" stroke-width="2.5"/>`);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img"><g stroke="${EDGE}" stroke-width="0.6" stroke-linejoin="round">${parts.join("")}</g></svg>\n`;
 }
 

@@ -210,7 +210,7 @@ const CHAPTER = {
   // ---------- Vocabulary (46 items — full chapter-05 upload list) ----------
   vocab: [
     { de: 'Diät', art: 'die', gender: 'f', plural: 'Diäten', pos: 'noun', level: 'B1', en: 'diet', hi: 'आहार योजना',
-      ex: 'Wegen einer Diät sollte man trotzdem genug Vitamine bekommen.', exEn: 'Because of a diet, you should still get enough vitamins.', exHi: 'Diet ki wajah se bhi, kaafi vitamin milna zaroori hai.',
+      ex: 'Wegen einer Diät fehlen manchmal Vitamine.', exEn: 'Because of a diet, vitamins are sometimes lacking.', exHi: 'Diet ki wajah se bhi, kaafi vitamin milna zaroori hai.',
       advanced: { synonyms: ['Ernährungsplan'], opposites: [], collocations: ['Diät halten', 'wegen einer Diät'] },
       img: { src: '/api/media/vocab-img/e0ecb1e43a7cc0141314', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A bowl of fresh salad with a measuring tape' }
     },
@@ -317,10 +317,10 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/4af6172967592fbf7cc8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A wooden crate filled with varied fresh food.' }
     },
     { de: 'Stiftungsvermögen', art: 'das', gender: 'n', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'endowment capital', hi: 'दान निधि पूंजी',
-      ex: 'Wegen des niedrigen Stiftungsvermögens war die Jahresmiete sehr niedrig.', exEn: 'Because of the low endowment capital, the yearly rent was very low.', exHi: 'Kam daan nidhi ki wajah se, vaarshik kiraya bahut kam tha.',
+      ex: 'Wegen des hohen Stiftungsvermögens war die Jahresmiete sehr niedrig.', exEn: 'Because of the high endowment capital, the yearly rent was very low.', exHi: 'Kam daan nidhi ki wajah se, vaarshik kiraya bahut kam tha.',
       advanced: { synonyms: [], opposites: [], collocations: [] } },
     { de: 'Vitamin', art: 'das', gender: 'n', plural: 'Vitamine', pos: 'noun', level: 'B1', en: 'vitamin', hi: 'विटामिन',
-      ex: 'Wegen des Vitamins in Karotten isst sie gern Gemüse.', exEn: 'Because of the vitamin in carrots, she likes eating vegetables.', exHi: 'Gaajar mein vitamin hone ki wajah se, use sabzi khana pasand hai.',
+      ex: 'Wegen der Vitamine in Karotten isst sie gern Gemüse.', exEn: 'Because of the vitamins in carrots, she likes eating vegetables.', exHi: 'Gaajar mein vitamin hone ki wajah se, use sabzi khana pasand hai.',
       advanced: { synonyms: [], opposites: [], collocations: ['Vitamine einnehmen'] },
       img: { src: '/api/media/vocab-img/c8131366e6a8af959d16', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Fresh fruits and vegetables beside a vitamin capsule' }
     },
@@ -363,7 +363,7 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/0b339cbbce4ea1fdc519', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A modern residential house with a garden' }
     },
     { de: 'Jahresmiete', art: 'die', gender: 'f', plural: 'Jahresmieten', pos: 'noun', level: 'B1', en: 'yearly rent', hi: 'वार्षिक किराया',
-      ex: 'Wegen des niedrigen Stiftungsvermögens war die Jahresmiete niedrig.', exEn: 'Because of the low endowment capital, the yearly rent was low.', exHi: 'Kam daan nidhi ki wajah se, vaarshik kiraya kam tha.',
+      ex: 'Wegen des hohen Stiftungsvermögens war die Jahresmiete niedrig.', exEn: 'Because of the high endowment capital, the yearly rent was low.', exHi: 'Kam daan nidhi ki wajah se, vaarshik kiraya kam tha.',
       advanced: { synonyms: [], opposites: [], collocations: [] } },
     { de: 'Karotte', art: 'die', gender: 'f', plural: 'Karotten', pos: 'noun', level: 'B1', en: 'carrot', hi: 'गाजर',
       ex: 'Trotz des Verzichts esse ich weiterhin viele Karotten.', exEn: 'Despite the deprivation, I still eat a lot of carrots.', exHi: 'Tyaag ke bawajood, main abhi bhi kaafi gaajar khaata hoon.',

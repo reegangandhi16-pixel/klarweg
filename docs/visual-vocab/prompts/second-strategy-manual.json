@@ -866,7 +866,7 @@
  },
  "transzendierend--transcending": {
   "type": "grammar",
-  "de": "Das Werk entwickelt eine grenzen transzendierende Perspektive.",
+  "de": "Das Werk entwickelt eine Grenzen transzendierende Perspektive.",
   "hl": "transzendierende",
   "role": "focus",
   "cap": "Going beyond normal limits"
@@ -891,5 +891,31 @@
   "hl": "operationalisieren",
   "role": "focus",
   "cap": "To make a concept measurable"
+ },
+ "contra--con": {
+  "type": "pair",
+  "a": {
+   "scene": "Show a team member smiling and nodding approvingly during a conference room debate.",
+   "label": "pro: in favor"
+  },
+  "b": {
+   "scene": "Show another team member raising a skeptical hand to voice counterarguments.",
+   "label": "contra: against"
+  },
+  "cap": "Weighing the pros and cons in a discussion.",
+  "hl": "contra"
+ },
+ "urspruenglich--originally": {
+  "type": "pair",
+  "a": {
+   "scene": "Show a young person soldering components on a circuit board at a workbench.",
+   "label": "earlier: electronics"
+  },
+  "b": {
+   "scene": "Show the same person leading a team meeting in a modern office.",
+   "label": "now: management"
+  },
+  "cap": "The original background or starting career",
+  "hl": "Ursprünglich"
  }
 }

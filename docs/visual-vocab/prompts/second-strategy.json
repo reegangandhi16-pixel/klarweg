@@ -618,20 +618,6 @@
   "cap": "The founder alongside their business partners and associates.",
   "hl": "& Co"
  },
- "contra--con": {
-  "key": "contra--con",
-  "type": "pair",
-  "a": {
-   "scene": "Show a team member smiling and nodding approvingly during a conference room debate.",
-   "label": "pro: in favor"
-  },
-  "b": {
-   "scene": "Show another team member raising a skeptical hand to voice counterarguments.",
-   "label": "contra: against"
-  },
-  "cap": "Weighing the pros and cons in a discussion.",
-  "hl": "Contra"
- },
  "d-h--i-e-meaning": {
   "key": "d-h--i-e-meaning",
   "type": "scene",
@@ -6319,13 +6305,6 @@
   "cap": "Watching a television broadcast the other day.",
   "hl": "Neulich"
  },
- "neulich--recently-the-other-day": {
-  "key": "neulich--recently-the-other-day",
-  "type": "scene",
-  "scene": "Show two friends smiling and warmly waving to each other as they meet on a sunny street outside a bakery.",
-  "cap": "Meeting up with an acquaintance the other day.",
-  "hl": "Neulich"
- },
  "neunundzwanzig--twenty-nine": {
   "key": "neunundzwanzig--twenty-nine",
   "type": "number",
@@ -7231,7 +7210,7 @@
  },
  "transzendierend--transcending": {
   "type": "grammar",
-  "de": "Das Werk entwickelt eine grenzen transzendierende Perspektive.",
+  "de": "Das Werk entwickelt eine Grenzen transzendierende Perspektive.",
   "hl": "transzendierende",
   "role": "focus",
   "cap": "Going beyond normal limits"
@@ -7309,13 +7288,6 @@
   "cap": "Mentioning an extra thought casually",
   "hl": "Übrigens"
  },
- "uebrigens--by-the-way-incidentally": {
-  "key": "uebrigens--by-the-way-incidentally",
-  "type": "scene",
-  "scene": "Show two journalists standing on the sidelines of a tennis court with microphones, one leaning over to share an incidental remark about the player practicing.",
-  "cap": "Sharing an incidental detail in passing",
-  "hl": "übrigens"
- },
  "um-zu--in-order-to": {
   "type": "grammar",
   "de": "Ich lerne Deutsch, um in Deutschland zu studieren.",
@@ -7336,13 +7308,6 @@
   "scene": "Show a student at a desk crossing out a handwritten line on paper with a pen and writing a new version right above it with a thoughtful expression.",
   "cap": "Writing a sentence in a different way",
   "hl": "umformulieren"
- },
- "umformulieren--rephrase-reformulate": {
-  "key": "umformulieren--rephrase-reformulate",
-  "type": "scene",
-  "scene": "Show an editor sitting at a wooden desk with a laptop, resting one chin thoughtfully on a hand while revising and improving a paragraph.",
-  "cap": "Rephrasing a section of text carefully.",
-  "hl": ""
  },
  "umgangssprachlich--colloquial": {
   "key": "umgangssprachlich--colloquial",
@@ -7479,20 +7444,6 @@
   "scene": "Show a judge in a courtroom holding up a hand to decline an envelope handed over by a lawyer, referencing an open law book.",
   "cap": "Not legally permitted under current regulations",
   "hl": "unzulässig nach"
- },
- "urspruenglich--originally": {
-  "key": "urspruenglich--originally",
-  "type": "pair",
-  "a": {
-   "scene": "Show a young person soldering components on a circuit board at a workbench.",
-   "label": "earlier: electronics"
-  },
-  "b": {
-   "scene": "Show the same person leading a team meeting in a modern office.",
-   "label": "now: management"
-  },
-  "cap": "The original background or starting career",
-  "hl": "ursprünglich"
  },
  "usw--und-so-weiter": {
   "key": "usw--und-so-weiter",
@@ -8099,5 +8050,31 @@
   "hl": "zumal es stark regnet",
   "role": "adverb",
   "cap": "zumal adds an extra, especially strong reason"
+ },
+ "contra--con": {
+  "type": "pair",
+  "a": {
+   "scene": "Show a team member smiling and nodding approvingly during a conference room debate.",
+   "label": "pro: in favor"
+  },
+  "b": {
+   "scene": "Show another team member raising a skeptical hand to voice counterarguments.",
+   "label": "contra: against"
+  },
+  "cap": "Weighing the pros and cons in a discussion.",
+  "hl": "contra"
+ },
+ "urspruenglich--originally": {
+  "type": "pair",
+  "a": {
+   "scene": "Show a young person soldering components on a circuit board at a workbench.",
+   "label": "earlier: electronics"
+  },
+  "b": {
+   "scene": "Show the same person leading a team meeting in a modern office.",
+   "label": "now: management"
+  },
+  "cap": "The original background or starting career",
+  "hl": "Ursprünglich"
  }
 }

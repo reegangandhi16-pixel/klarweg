@@ -270,7 +270,7 @@ const CHAPTER = {
     { de: 'melodisch', pos: 'adjective', en: 'melodious', hi: 'मधुर', ex: 'Das ist der Song, den ich so melodisch fand.', exEn: 'That\'s the song that I thought was so melodious.' },
     { de: 'befreundet', pos: 'adjective', en: 'friends (with each other)', hi: 'दोस्त', ex: 'Wir sind schon lange befreundet.', exEn: 'We\'ve been friends for a long time.', img: { src: '/api/media/vocab-img/658d8649f309339fe4b2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends walking together sharing an umbrella' } },
     { de: 'gestehen', pos: 'verb', en: 'to confess', hi: 'कबूल करना', ex: 'Ich möchte dir etwas gestehen.', exEn: 'I would like to confess something to you.', conj: { praesens: 'gesteht', praeteritum: 'gestand', perfekt: 'hat gestanden' } },
-    { de: 'reich', pos: 'adjective', en: 'rich', hi: 'अमीर', ex: 'Ich wäre gern reich, aber glücklich ist wichtiger.', exEn: 'I would like to be rich, but happy is more important.', img: { src: '/api/media/vocab-img/35ab2c64bafc07274098', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open chest overflowing with gold coins' } },
+    { de: 'reich', pos: 'adjective', en: 'rich', hi: 'अमीर', ex: 'Ich wäre gern reich, aber glücklich zu sein ist wichtiger.', exEn: 'I would like to be rich, but being happy is more important.', img: { src: '/api/media/vocab-img/35ab2c64bafc07274098', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open chest overflowing with gold coins' } },
     { de: 'Werktag', art: 'der', gender: 'm', plural: 'Werktage', pos: 'noun', en: 'working day', hi: 'कामकाजी दिन', ex: 'Nach einem langen Werktag hätte ich gern Ruhe.', exEn: 'After a long working day, I would like some peace.' }
   ],
 

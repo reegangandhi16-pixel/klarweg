@@ -378,11 +378,11 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/e9031694e20d03d89dbf', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A bar chart with columns decreasing in height from left to right.' }
     },
     { de: 'zurückzahlen', pos: 'verb', level: 'B1', en: 'to pay back', hi: 'वापस भुगतान करना',
-      ex: 'Das Unternehmen musste den Rabatt zurückzahlen.', exEn: 'The company had to pay back the discount.', exHi: 'Company ko chhoot wapas dena pada.',
+      ex: 'Das Unternehmen musste den Betrag zurückzahlen.', exEn: 'The company had to pay back the amount.', exHi: 'Company ko chhoot wapas dena pada.',
       conj: { praesens: 'zahlt zurück', praeteritum: 'zahlte zurück', perfekt: 'hat zurückgezahlt' },
       advanced: { synonyms: ['erstatten'], opposites: [], collocations: ['Geld zurückzahlen'] } },
     { de: 'überrascht', pos: 'adjective', level: 'B1', en: 'surprised', hi: 'हैरान',
-      ex: 'Ich war überrascht, wie günstig der Rabatt war.', exEn: 'I was surprised how good the discount was.', exHi: 'Main hairan tha ki chhoot kitni achhi thi.',
+      ex: 'Ich war überrascht, wie hoch der Rabatt war.', exEn: 'I was surprised how high the discount was.', exHi: 'Main hairan tha ki chhoot kitni achhi thi.',
       advanced: { synonyms: ['erstaunt'], opposites: ['gelassen'], collocations: ['überrascht sein von + Dat.'] },
       img: { src: '/api/media/vocab-img/37aef31df5a3bd9427b1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person looking surprised with wide eyes.' }
     },
@@ -401,7 +401,7 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/72b7c92e23242ebe3595', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Charging cable connected to a smartphone.' }
     },
     { de: 'Merkmal', art: 'das', gender: 'n', plural: 'Merkmale', pos: 'noun', level: 'B1', en: 'characteristic, feature', hi: 'विशेषता',
-      ex: 'Ein wichtiges Merkmal des Geräts ist der lange Akku.', exEn: 'An important feature of the device is the long battery life.', exHi: 'Device ki ek zaroori visheshta lambi battery hai.',
+      ex: 'Ein wichtiges Merkmal des Geräts ist die lange Akkulaufzeit.', exEn: 'An important feature of the device is the long battery life.', exHi: 'Device ki ek zaroori visheshta lambi battery hai.',
       advanced: { synonyms: ['Eigenschaft'], opposites: [], collocations: ['ein Merkmal haben'] } },
     { de: 'Portemonnaie', art: 'das', gender: 'n', plural: 'Portemonnaies', pos: 'noun', level: 'B1', en: 'wallet', hi: 'बटुआ',
       ex: 'Mein Portemonnaie war plötzlich weg.', exEn: 'My wallet was suddenly gone.', exHi: 'Mera batua achanak gayab ho gaya.',
@@ -444,7 +444,9 @@ const CHAPTER = {
     },
     { de: 'Markenname', art: 'der', gender: 'm', plural: 'Markennamen', pos: 'noun', level: 'B1', en: 'brand name', hi: 'ब्रांड नाम',
       ex: 'Ich habe den Markennamen sofort erkannt.', exEn: 'I recognised the brand name immediately.', exHi: 'Maine brand naam turant pehchaan liya.',
-      advanced: { synonyms: [], opposites: [], collocations: ['einen Markennamen erkennen'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['einen Markennamen erkennen'] },
+      vis: { kind: 'grammar', de: 'Ich habe den Markennamen sofort erkannt.', hl: 'Markennamen', role: 'focus', cap: 'The name of a product brand' }
+    },
     { de: 'Rabatt', art: 'der', gender: 'm', plural: 'Rabatte', pos: 'noun', level: 'B1', en: 'discount', hi: 'छूट',
       ex: 'Es gab einen Rabatt, deshalb habe ich zugeschlagen.', exEn: 'There was a discount, that\'s why I grabbed it.', exHi: 'Ek chhoot thi, isliye maine le liya.',
       advanced: { synonyms: ['Ermäßigung'], opposites: ['Aufschlag'], collocations: ['einen Rabatt bekommen'] } },
@@ -503,19 +505,27 @@ const CHAPTER = {
     },
     { de: 'Adverb', art: 'das', gender: 'n', plural: 'Adverbien', pos: 'noun', level: 'B1', en: 'adverb', hi: 'क्रिया विशेषण',
       ex: '"Deshalb" ist ein Adverb, das ein Ergebnis einleitet.', exEn: '"Deshalb" is an adverb that introduces a result.', exHi: '"Deshalb" ek adverb hai jo parinaam ko darshata hai.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      vis: { kind: 'grammar', de: 'Sie singt sehr gern.', hl: 'gern', role: 'adverb', cap: 'An adverb describes how an action happens' }
+    },
     { de: 'Konsekutivsatz', art: 'der', gender: 'm', plural: 'Konsekutivsätze', pos: 'noun', level: 'B1', en: 'consecutive clause (consequence clause)', hi: 'परिणाम-वाचक वाक्य',
       ex: 'Ein Konsekutivsatz mit "so … dass" zeigt eine starke Folge.', exEn: 'A consecutive clause with "so … dass" shows a strong consequence.', exHi: '"so … dass" wala parinaam-vachak vaakya ek majboot parinaam dikhata hai.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      vis: { kind: 'grammar', de: 'Es war so kalt, dass das Wasser gefror.', hl: 'dass das Wasser gefror', role: 'adverb', cap: 'A consecutive clause expresses the result of an action' }
+    },
     { de: 'Silbe', art: 'die', gender: 'f', plural: 'Silben', pos: 'noun', level: 'B1', en: 'syllable', hi: 'शब्दांश',
       ex: 'Das Wort "deshalb" hat zwei Silben.', exEn: 'The word "deshalb" has two syllables.', exHi: '"deshalb" shabd mein do shabdaansh hain.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      vis: { kind: 'grammar', de: 'Das Wort Fenster hat zwei Silben.', hl: 'Silben', role: 'object', cap: 'A syllable as a phonological unit in a word' }
+    },
     { de: 'Finnland', pos: 'noun', level: 'B1', en: 'Finland', hi: 'फ़िनलैंड',
       ex: 'Dieses Unternehmen kommt ursprünglich aus Finnland.', exEn: 'This company originally comes from Finland.', exHi: 'Yeh company mool roop se Finland se hai.',
       advanced: { synonyms: [], opposites: [], collocations: [] } },
     { de: 'italienisch', pos: 'adjective', level: 'B1', en: 'Italian', hi: 'इतालवी',
       ex: 'Der Markenname klingt italienisch, obwohl das Unternehmen deutsch ist.', exEn: 'The brand name sounds Italian, although the company is German.', exHi: 'Brand naam Italian jaisa lagta hai, halanki company German hai.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } }
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      vis: { kind: 'map', iso: ['IT', 'CH', 'SM', 'VA'], cap: 'Italian: official in Italy, Switzerland, San Marino, and Vatican City.', src: '../public/vocab-map/f18f79579254.svg' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

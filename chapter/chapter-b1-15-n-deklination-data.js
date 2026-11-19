@@ -257,7 +257,7 @@ const CHAPTER = {
     { de: 'Schreinerin', art: 'die', gender: 'f', plural: 'Schreinerinnen', pos: 'noun', level: 'B1', en: 'carpenter (female)', hi: 'बढ़ई (महिला)', ex: 'Die Schreinerin baute die Möbel selbst.', exEn: 'The carpenter built the furniture herself.', exHi: 'Mahila badhai ne khud furniture banaya.', img: { src: '/api/media/vocab-img/3be7bdc6222e70d21801', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A female carpenter planing wood at a workbench' } },
     { de: 'Spezialistin', art: 'die', gender: 'f', plural: 'Spezialistinnen', pos: 'noun', level: 'B1', en: 'specialist (female)', hi: 'विशेषज्ञ (महिला)', ex: 'Die Spezialistin analysierte die Akte genau.', exEn: 'The specialist analyzed the file precisely.', exHi: 'Mahila visheshagya ne file ka sateek vishleshan kiya.' },
     { de: 'sich beschäftigen', pos: 'verb', level: 'B1', en: 'to occupy oneself with (mit + D.)', hi: 'व्यस्त रहना', ex: 'Er beschäftigt sich gern mit Fahrrädern.', exEn: 'He gladly occupies himself with bicycles.', exHi: 'Woh khushi se cyclon ke saath vyast rehta hai.', conj: { praesens: 'beschäftigt sich', praeteritum: 'beschäftigte sich', perfekt: 'hat sich beschäftigt' } },
-    { de: 'ursprünglich', pos: 'adverb', level: 'B1', en: 'originally', hi: 'मूल रूप से', ex: 'Er ist ursprünglich ein Experte für Elektronik.', exEn: 'He\'s originally an expert in electronics.', exHi: 'Woh mool roop se electronics ka visheshagya hai.' }
+    { de: 'ursprünglich', pos: 'adverb', level: 'B1', en: 'originally', hi: 'मूल रूप से', ex: 'Ursprünglich war er Experte für Elektronik.', exEn: 'Originally, he was an expert in electronics.', exHi: 'Woh mool roop se electronics ka visheshagya hai.' }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

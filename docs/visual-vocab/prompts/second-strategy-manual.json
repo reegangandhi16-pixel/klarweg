@@ -924,10 +924,10 @@
   "cap": "um sich herum = all around oneself",
   "hl": "Um sich herum"
  },
- "die-meisterschaft--mastery": {
+ "die-beherrschung--mastery-command": {
   "type": "scene",
   "scene": "Show a concert pianist on a stage playing a grand piano with calm, effortless confidence, eyes half closed, hands moving lightly over the keys.",
-  "cap": "Meisterschaft = mastery: masterly, effortless skill",
-  "hl": "Meisterschaft"
+  "cap": "Beherrschung = mastery, command of a skill",
+  "hl": "Beherrschung"
  }
 }

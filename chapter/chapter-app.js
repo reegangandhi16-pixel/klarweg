@@ -46,7 +46,7 @@
     if (window.KW_GLOBAL_LEXICON || document.getElementById('kw-global-lexicon')) return;
     const s = document.createElement('script');
     s.id = 'kw-global-lexicon';
-    s.src = POP_HOST ? POP_HOST.lexiconSrc : 'global-lexicon-public.js';
+    s.src = POP_HOST ? POP_HOST.lexiconSrc : 'global-lexicon-public.js?v=2';
     s.onload = function () {
       // A popup-only host has no chapter markup to re-sweep.
       if (POP_HOST) return;

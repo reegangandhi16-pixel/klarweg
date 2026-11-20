@@ -25,7 +25,7 @@ educational content without documenting it.” This file is that documentation.
 
 ## Owner decisions — resolved 2026-11-20 (19)
 Owner rule: keep each chapter's teaching goal; fix only verified errors; German must match English, Hindi and the card image.
-References: Duden online (phrasieren, Roadmovie, schamrot, Kunststück, Meisterschaft, kreisen/einkreisen), DWDS (no entry „rotschämen“).
+References: Duden online (phrasieren, Roadmovie, erröten, Kunststück, Meisterschaft, kreisen/einkreisen), DWDS (no entry „rotschämen“; erröten, Beherrschung, Meisterschaft).
 
 **B1·26 (Adjektivdeklination ohne Artikel).** The chapter's own story uses plurals and nothing in it frames examples as headlines, so singular count nouns without an article were genuine errors (learners would copy them). No article was added anywhere; every fix keeps a strong ending without an article. Singular was kept wherever German allows it: mass nouns, *als*, exclamation, *in* + dative.
 | Card | Before | After | Why |
@@ -49,11 +49,11 @@ References: Duden online (phrasieren, Roadmovie, schamrot, Kunststück, Meisters
 | B1·32 Kunststück | meaning „trick, feat“ (करतब); Das Kunststück, das der Zauberer gezeigt hat, war beeindruckend. | Duden: „besondere Geschicklichkeitsleistung“, not a work of art; relative clause kept for the chapter. New image prompt: magician. |
 | B2·09 sich herum → um sich herum | Um sich herum sieht er nur fröhliche Gesichter. | „sich herum“ is not a unit; „Er schaut sich herum“ is ungrammatical. |
 | B2·12 phrasieren → formulieren | Er formuliert seine Kritik sehr höflich. / Man sollte diese Bitte anders formulieren. | Duden: phrasieren is music only. |
-| B2·32 rotschämen → schamrot (adj.) | Sie wurde schamrot. / Mit schamrotem Gesicht verließ er den Raum. | No entry in DWDS (Duden search unavailable); Duden: schamrot, „mit schamrotem Gesicht“. Image (blushing) kept. |
+| B2·32 rotschämen → erröten (verb) | Sie errötete vor Scham. / Er ist vor Scham errötet. | No entry „rotschämen“ in DWDS. Owner check 2026-11-20: keep the verb, meaning and translations — first fix (adjective „schamrot“) changed the word type. DWDS/Duden: erröten, Verb, Perfekt mit *sein* („ist errötet“), gehoben → register written; DWDS lists „vor … Scham … erröten“. conj errötet / errötete / ist errötet. English „to blush (with shame)“ and Hindi शर्म से लाल होना unchanged. Image (blushing) kept. |
 | B2·41 Road Movie → das Roadmovie | Das Roadmovie zeigte die weite Landschaft. / Sie haben ein Roadmovie gedreht. | Duden: „Roadmovie, das“, one word. |
-| C1·43 die Mastery → die Meisterschaft | Diese Prüfung zeigt echte sprachliche Meisterschaft. | Duden: Meisterschaft = meisterhaftes Können; „Mastery“ is not German. |
+| C1·43 die Mastery → die Beherrschung | Diese Prüfung zeigt eine sichere Beherrschung der Sprache. / Die Beherrschung der Sprache auf C1-Niveau bedeutet, komplexe Texte mühelos zu verstehen. | „Mastery“ is not German. Meant: command of a skill (language mastery). Owner check 2026-11-20: „Meisterschaft“ (first fix) is correct as „meisterhaftes Können“ (DWDS sense 1) but learners read it as „championship“ (sense 2). DWDS Beherrschung sense 2: „die Beherrschung der Sprache“, „meisterhafte Beherrschung der Technik“. English „mastery, command (of a language or skill)“; Hindi निपुणता, पकड़. |
 
-The popup dictionary (chapter/global-lexicon.js) was corrected to match: Kunststück, phrasieren (music sense), schamrot, Roadmovie, um sich herum and Meisterschaft fixed or added; rotschämen and the non-German „Mastery“ removed.
+The popup dictionary (chapter/global-lexicon.js) was corrected to match: Kunststück, phrasieren (music sense), erröten, Beherrschung, Roadmovie and um sich herum fixed or added; Meisterschaft kept with its main sense „championship; mastery“; rotschämen, schamrot (first fix) and the non-German „Mastery“ removed.
 
 ## Applied corrections (316)
 | Card | Kind | Before | After | Reason |

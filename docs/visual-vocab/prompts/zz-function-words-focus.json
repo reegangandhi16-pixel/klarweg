@@ -1,0 +1,66 @@
+{
+ "alle--all-everyone": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ausserhalb-von--outside-of": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "da--as-since": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "damit--so-that": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "darueber--about-that": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "deshalb--that-s-why-therefore": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "dich--you": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "dir--you": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ihn--him-it": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ihnen--you": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "mit--with-by": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "mithilfe--with-the-help-of": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "obwohl--although-even-though": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "sich-beziehen-auf--refer-to": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "trotz--despite": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "waehrend--during": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ }
+}

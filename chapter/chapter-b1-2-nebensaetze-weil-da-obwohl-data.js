@@ -287,7 +287,7 @@ const CHAPTER = {
       ex: 'Obwohl es regnet, gehen wir spazieren.', exEn: 'Although it\'s raining, we\'re going for a walk.', exHi: 'Halanki barish ho rahi hai, hum tehalne jaate hain.',
       ex2: 'Obwohl er müde war, hat er weitergearbeitet.', ex2En: 'Although he was tired, he kept working.', ex2Hi: 'Halanki woh thaka hua tha, usne kaam karna jaari rakha.',
       advanced: { synonyms: ['trotzdem (as adverb, not conjunction)'], opposites: [], collocations: ['Obwohl … , Hauptsatz.'] },
-      img: { src: '/api/media/vocab-img/1ee5c89dea792667fdc8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends happily walking through a park in the rain.' }
+      vis: { kind: 'grammar', de: 'Obwohl es regnet, gehen wir spazieren.', hl: 'Obwohl', role: 'focus', cap: 'obwohl = although: it rains, and we still go (verb at the end)' }
     },
     { de: 'offenbar', pos: 'adverb', level: 'B1', en: 'apparently, obviously', hi: 'ज़ाहिर है, प्रतीत होता है',
       ex: 'Offenbar hat er die Nachricht nicht gelesen.', exEn: 'Apparently he didn\'t read the message.', exHi: 'Zahir hai usne sandesh nahi padha.',

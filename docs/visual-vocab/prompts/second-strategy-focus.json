@@ -2364,5 +2364,117 @@
   "hl": "Zwecks",
   "role": "focus",
   "cap": "zwecks = for the purpose of"
+ },
+ "mit--with-by": {
+  "type": "grammar",
+  "de": "Ich fahre mit dem Zug.",
+  "hl": "mit",
+  "role": "focus",
+  "cap": "mit + Dativ = with; by (means of transport)"
+ },
+ "sich-beziehen-auf--refer-to": {
+  "type": "grammar",
+  "de": "Der Artikel bezieht sich auf eine neue Studie.",
+  "hl": "bezieht sich auf",
+  "role": "focus",
+  "cap": "sich beziehen auf + Akkusativ = to refer to"
+ },
+ "dich--you": {
+  "type": "grammar",
+  "de": "Ich sehe dich.",
+  "hl": "dich",
+  "role": "focus",
+  "cap": "Akkusativ: du → dich (you as the object)"
+ },
+ "ihn--him-it": {
+  "type": "grammar",
+  "de": "Ich kenne ihn.",
+  "hl": "ihn",
+  "role": "focus",
+  "cap": "Akkusativ: er → ihn (him; it for masculine nouns)"
+ },
+ "dir--you": {
+  "type": "grammar",
+  "de": "Ich danke dir.",
+  "hl": "dir",
+  "role": "focus",
+  "cap": "Dativ: du → dir (to you); danken takes the dative"
+ },
+ "ihnen--you": {
+  "type": "grammar",
+  "de": "Das Kleid steht Ihnen gut.",
+  "hl": "Ihnen",
+  "role": "focus",
+  "cap": "Dativ, formal: Sie → Ihnen (to you)"
+ },
+ "alle--all-everyone": {
+  "type": "grammar",
+  "de": "Wir laden alle ein.",
+  "hl": "alle",
+  "role": "focus",
+  "cap": "alle = all, everyone (plural)"
+ },
+ "obwohl--although-even-though": {
+  "type": "grammar",
+  "de": "Obwohl es regnet, gehen wir spazieren.",
+  "hl": "Obwohl",
+  "role": "focus",
+  "cap": "obwohl = although: it rains, and we still go (verb at the end)"
+ },
+ "da--as-since": {
+  "type": "grammar",
+  "de": "Da ich vorbereitet bin, bin ich ruhig.",
+  "hl": "Da",
+  "role": "focus",
+  "cap": "da = as, since: gives the reason (verb at the end)"
+ },
+ "deshalb--that-s-why-therefore": {
+  "type": "grammar",
+  "de": "Es regnet. Deshalb bleiben wir zu Hause.",
+  "hl": "Deshalb",
+  "role": "focus",
+  "cap": "deshalb = that's why: the result follows, verb comes next"
+ },
+ "trotz--despite": {
+  "type": "grammar",
+  "de": "Trotz des Regens gehen wir spazieren.",
+  "hl": "Trotz",
+  "role": "focus",
+  "cap": "trotz + Genitiv = despite"
+ },
+ "waehrend--during": {
+  "type": "grammar",
+  "de": "Während der Reise haben wir fotografiert.",
+  "hl": "Während",
+  "role": "focus",
+  "cap": "während + Genitiv = during"
+ },
+ "damit--so-that": {
+  "type": "grammar",
+  "de": "Ich erkläre die Grammatik, damit die Schüler sie verstehen.",
+  "hl": "damit",
+  "role": "focus",
+  "cap": "damit = so that: states a purpose (verb at the end)"
+ },
+ "mithilfe--with-the-help-of": {
+  "type": "grammar",
+  "de": "Mithilfe moderner Software lässt sich die Analyse beschleunigen.",
+  "hl": "Mithilfe",
+  "role": "focus",
+  "cap": "mithilfe + Genitiv (or von + Dativ) = with the help of"
+ },
+ "darueber--about-that": {
+  "type": "grammar",
+  "de": "Wir sollten darüber noch einmal sprechen.",
+  "hl": "darüber",
+  "role": "focus",
+  "cap": "darüber = about that (sprechen über etwas → darüber sprechen)"
+ },
+ "ausserhalb-von--outside-of": {
+  "type": "grammar",
+  "de": "Außerhalb von Berlin ist es ruhiger als in der Stadt.",
+  "hl": "Außerhalb von",
+  "role": "focus",
+  "cap": "außerhalb von + Dativ = outside of"
  }
 }

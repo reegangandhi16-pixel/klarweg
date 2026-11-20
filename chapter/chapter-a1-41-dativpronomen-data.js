@@ -196,8 +196,8 @@ const CHAPTER = {
 
   // ---------- Vocabulary (2 words) ----------
   vocab: [
-    { de: 'dir', pos: 'pronoun', en: 'to you (dative)', hi: 'तुम्हें', ex: 'Ich danke dir.', exEn: 'I thank you.', img: { src: '/api/media/vocab-img/fe3e0023a874182d1085', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person handing a gift box directly to their friend.' } },
-    { de: 'Ihnen', pos: 'pronoun', en: 'to you (formal dative)', hi: 'आपको', ex: 'Das Kleid steht Ihnen gut.', exEn: 'The dress suits you well.', img: { src: '/api/media/vocab-img/a355aa129a197df3774b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A shop assistant holding a mirror for a well-dressed customer.' } }
+    { de: 'dir', pos: 'pronoun', en: 'to you (dative)', hi: 'तुम्हें', ex: 'Ich danke dir.', exEn: 'I thank you.', vis: { kind: 'grammar', de: 'Ich danke dir.', hl: 'dir', role: 'focus', cap: 'Dativ: du → dir (to you); danken takes the dative' } },
+    { de: 'Ihnen', pos: 'pronoun', en: 'to you (formal dative)', hi: 'आपको', ex: 'Das Kleid steht Ihnen gut.', exEn: 'The dress suits you well.', vis: { kind: 'grammar', de: 'Das Kleid steht Ihnen gut.', hl: 'Ihnen', role: 'focus', cap: 'Dativ, formal: Sie → Ihnen (to you)' } }
   ],
 
   // ---------- Dative pronouns (rule cards → accordion) ----------

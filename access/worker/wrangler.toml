@@ -149,7 +149,7 @@ CHAPTER_RELEASE = "r3"
 # within Resend Free's 100 emails/day and 3,000 emails/month limits.
 PASSWORD_RESET = "off"
 MAIL_PROVIDER = "resend"
-MAIL_FROM = "no-reply@klarweg.in"
+MAIL_FROM = "no-reply@send.klarweg.in"
 PASSWORD_RESET_DAILY_EMAILS = "45"
 
 [[r2_buckets]]

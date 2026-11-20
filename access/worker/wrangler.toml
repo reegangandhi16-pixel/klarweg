@@ -138,6 +138,19 @@ RESOURCE_RELEASE = "r5"
 # shows "unavailable", so never deploy the pages ahead of the upload.
 CHAPTER_RELEASE = "r3"
 
+# Password reset by email (src/password-reset.js; setup: docs/PASSWORD-RESET.md).
+#   "off"  the "Forgot password?" page explains that reset by email is not
+#          available yet and points to support (the default)
+#   "on"   reset links are emailed through Cloudflare Email Service; needs the
+#          [[send_email]] binding below to be active and
+#          `npm run deploy:access -- --allow-password-reset`
+# MAIL_FROM: the sender address on the onboarded domain (not a secret).
+# PASSWORD_RESET_DAILY_EMAILS: all reset emails together per UTC day — keeps
+# abuse well inside the Email Service's 3,000 included emails a month.
+PASSWORD_RESET = "off"
+MAIL_FROM = "no-reply@klarweg.in"
+PASSWORD_RESET_DAILY_EMAILS = "200"
+
 [[r2_buckets]]
 binding = "RESOURCES"
 bucket_name = "klarweg-resources"
@@ -159,3 +172,10 @@ service = "klarweg-tutor"
 #   CASHFREE_WEBHOOK_SECRET   (optional; defaults to CASHFREE_SECRET_KEY)
 #   RESOURCE_URL_SECRET       (signed chapter-resource links; 32+ random bytes)
 #   SPEECH_ALLOWLIST          (only for SPEECH_MODE = "allowlist": comma-separated user ids)
+
+# Cloudflare Email Service (outbound) for password reset emails. Uncomment
+# ONLY after klarweg.in is onboarded under Compute → Email Service → Email
+# Sending (docs/PASSWORD-RESET.md); then set PASSWORD_RESET = "on".
+# [[send_email]]
+# name = "EMAIL"
+# allowed_sender_addresses = ["no-reply@klarweg.in"]

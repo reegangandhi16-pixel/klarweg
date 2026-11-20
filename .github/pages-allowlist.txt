@@ -126,6 +126,7 @@ site.js
 # Root-level site infrastructure
 # ---------------------------------------------------------------
 robots.txt
+ads.txt
 sitemap.xml
 # Homepage social share image (1200×630)
 og-image.png

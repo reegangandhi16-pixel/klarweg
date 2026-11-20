@@ -7,7 +7,7 @@
      POST /auth/password/reset         { token, password }
 
    Design
-   · Off unless PASSWORD_RESET = "on" AND the EMAIL send_email binding exists.
+   · Off unless PASSWORD_RESET = "on" AND the selected mail transport is configured.
      While off, /forgot answers 503 "reset_unavailable" for EVERY address, so
      the switch itself reveals nothing about which accounts exist.
    · No enumeration: /forgot returns the same 200 body, with the email sent in
@@ -31,7 +31,7 @@
    · Rate limits (rate_counters, pseudonymous daily HMAC buckets): per
      network 5 requests / 15 min (429); per address 3 emails / hour (further
      requests silently send nothing); all addresses together
-     PASSWORD_RESET_DAILY_EMAILS per UTC day (protects the Email Service
+     PASSWORD_RESET_DAILY_EMAILS per UTC day (protects the email provider
      quota); token checks/resets 20 failures / 15 min per network. */
 
 import { clearSessionCookie, createSessionToken, hashPassword, normalizeEmail } from "./auth.js";
@@ -46,7 +46,7 @@ const FORGOT_IP_LIMIT = { max: 5, win: 15 * 60 * 1000 };
 const FORGOT_EMAIL_LIMIT = { max: 3, win: 60 * 60 * 1000 };
 const RESET_IP_LIMIT = { max: 20, win: 15 * 60 * 1000 };
 const DAY_MS = 24 * 60 * 60 * 1000;
-const DEFAULT_DAILY_EMAILS = 200;
+const DEFAULT_DAILY_EMAILS = 45;
 
 const TOKEN_RE = /^[A-Za-z0-9_-]{43}$/;   // 32 bytes, base64url, no padding
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;

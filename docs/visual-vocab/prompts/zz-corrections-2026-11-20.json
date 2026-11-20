@@ -3,5 +3,47 @@
   "subject": "Show a magician in a dark suit on a small stage pulling a white rabbit out of a black top hat, while two children in the front row clap in amazement.",
   "alt": "A magician pulling a white rabbit out of a top hat",
   "strategy": "direct"
+ },
+ "kritikfaehig--able-to-take-criticism": {
+  "subject": "Show a young woman at an office desk calmly writing notes while her manager points to a mistake marked with a red circle on a printed chart; she looks grateful and relaxed, not upset, and gives a small thumbs-up.",
+  "alt": "A woman gratefully noting feedback on her mistake",
+  "strategy": "emotion",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "geeignet-fuer--suited-for": {
+  "subject": "Show a large jigsaw puzzle of a smiling office team lying on a table with one piece missing in the middle; a hand places the matching piece, which fits the gap perfectly.",
+  "alt": "A hand placing the one puzzle piece that fits perfectly",
+  "strategy": "context",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "die-einladung-zu--invitation-to": {
+  "subject": "Show a woman at her front door opening an envelope and holding up a festive invitation card decorated with balloons and confetti, without any writing, smiling with delight.",
+  "alt": "A woman opening a festive invitation card",
+  "strategy": "context",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "nachvollziehbar--understandable-comprehensible": {
+  "subject": "Show a teacher at a whiteboard pointing to a simple three-step diagram of boxes connected by arrows, without any writing; a student follows each step and raises an index finger with a clear look of understanding.",
+  "alt": "A student understanding a step-by-step diagram",
+  "strategy": "context",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "einschaetzen--assess-estimate": {
+  "subject": "Show a woman at a market stall holding a big pumpkin in both hands, lifting it slightly to judge its weight by feel, with a thoughtful, estimating expression; there is no scale anywhere.",
+  "alt": "A woman judging the weight of a pumpkin by hand",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "ausschliessen--exclude-rule-out": {
+  "subject": "Show a detective at a desk with three photographs of different people laid out in a row; he firmly pushes one photograph off to the side, away from the other two, ruling that person out.",
+  "alt": "A detective pushing one suspect photo aside",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "unzureichend--insufficient": {
+  "subject": "Show a man trying to cover a large dining table with a tablecloth that is far too small, covering only one corner of the table; he holds it up with a puzzled face.",
+  "alt": "A tablecloth far too small for a large table",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-20"
  }
 }

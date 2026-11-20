@@ -493,7 +493,11 @@ async function apply() {
   const level = opt("level"); if (!level) throw new Error("--level required");
   const st = state();
   const items = queue(); const byKey = new Map(items.map((x) => [x.key, x]));
-  const ready = (it) => it && it.status === "todo" && st.get(it.key).accepted && encoded(it);
+  // The image id is derived from the concept key, so a retry re-encodes to the SAME files.
+  // Only use files that were encoded from the currently accepted attempt — never a
+  // stale (rejected) earlier attempt that happens to still be on disk.
+  const encodedFrom = readJson(path.join(PROJ, "encoded.json"), {});
+  const ready = (it) => { const acc = it && it.status === "todo" && st.get(it.key).accepted; return !!acc && encoded(it) && encodedFrom[it.key] === acc.attempt; };
   const imgFor = (key, ch) => {
     let it = byKey.get(key); if (!it) return null;
     if (it.status === "alias") it = byKey.get(it.root);

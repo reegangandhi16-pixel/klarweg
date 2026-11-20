@@ -129,5 +129,11 @@
   "alt": "A map of Great Britain with England, Scotland and Wales",
   "strategy": "direct",
   "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "erklaeren--declare-explain": {
+  "subject": "Show a government minister standing at a press podium with microphones, formally announcing a statement to a room of journalists holding notepads and cameras.",
+  "alt": "A minister formally declaring a statement at a press podium",
+  "strategy": "direct",
+  "note": "own image 2026-11-20: card means 'to declare' (Die Ministerin erklärte, …); the shared whiteboard 'explain' image was misleading"
  }
 }

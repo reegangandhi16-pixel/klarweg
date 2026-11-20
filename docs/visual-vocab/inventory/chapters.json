@@ -233,7 +233,7 @@
 {"id":"c2-04-nomen-verb-verbindungen","level":"c2","number":4,"title":"Nomen-Verb-Verbindungen","access":"paid","cards":21,"checkpoint":false,"withImage":4,"tiers":{"image":0,"concept":0,"text-only":21}},
 {"id":"c2-05-goethe-mini-1","level":"c2","number":5,"title":"Goethe Mini 1","access":"paid","cards":7,"checkpoint":false,"withImage":2,"tiers":{"image":2,"concept":0,"text-only":5}},
 {"id":"c2-06-konjunktiv-ii","level":"c2","number":6,"title":"Konjunktiv II","access":"paid","cards":7,"checkpoint":false,"withImage":1,"tiers":{"image":0,"concept":3,"text-only":4}},
-{"id":"c2-07-konjunktiv-i","level":"c2","number":7,"title":"Konjunktiv I","access":"paid","cards":7,"checkpoint":false,"withImage":3,"tiers":{"image":7,"concept":0,"text-only":0}},
+{"id":"c2-07-konjunktiv-i","level":"c2","number":7,"title":"Konjunktiv I","access":"paid","cards":7,"checkpoint":false,"withImage":2,"tiers":{"image":7,"concept":0,"text-only":0}},
 {"id":"c2-08-modalverben","level":"c2","number":8,"title":"Modalverben","access":"paid","cards":27,"checkpoint":false,"withImage":8,"tiers":{"image":21,"concept":6,"text-only":0}},
 {"id":"c2-09-goethe-mini-2","level":"c2","number":9,"title":"Goethe Mini 2","access":"paid","cards":7,"checkpoint":false,"withImage":1,"tiers":{"image":1,"concept":3,"text-only":3}},
 {"id":"c2-10-adverbialsaetze-und-diskursmarker","level":"c2","number":10,"title":"Adverbialsätze & Diskursmarker","access":"paid","cards":38,"checkpoint":false,"withImage":0,"tiers":{"image":0,"concept":1,"text-only":37}},

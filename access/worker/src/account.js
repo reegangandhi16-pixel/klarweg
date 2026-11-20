@@ -361,13 +361,18 @@ export async function deleteAccount(request, env, now = Date.now()) {
   }
 
   const id = user.id;
-  const [orders, ents, bookings, enrolments, totp] = await Promise.all([
-    env.DB.prepare("SELECT COUNT(*) AS n FROM orders WHERE user_id = ?1").bind(id).first(),
-    env.DB.prepare("SELECT COUNT(*) AS n FROM user_entitlements WHERE user_id = ?1").bind(id).first(),
-    env.DB.prepare("SELECT COUNT(*) AS n FROM consult_bookings WHERE user_id = ?1").bind(id).first(),
-    env.DB.prepare("SELECT COUNT(*) AS n FROM live_enrolments WHERE user_id = ?1").bind(id).first(),
-    env.DB.prepare("SELECT COUNT(*) AS n FROM user_totp WHERE user_id = ?1").bind(id).first()
-  ]);
+  // Tables that exist on this database (consultations / live enrolments
+  // are not migrated everywhere); a table that does not exist holds no rows.
+  const { results: tables } = await env.DB.prepare(
+    "SELECT name FROM sqlite_master WHERE type = 'table' AND name IN ('orders','user_entitlements','consult_bookings','live_enrolments','user_totp')"
+  ).all();
+  const present = new Set((tables || []).map((t) => t.name));
+  const rows = (table) => present.has(table)
+    ? env.DB.prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE user_id = ?1`).bind(id).first()
+    : Promise.resolve({ n: 0 });
+  const [orders, ents, bookings, enrolments, totp] = await Promise.all(
+    ["orders", "user_entitlements", "consult_bookings", "live_enrolments", "user_totp"].map(rows)
+  );
   const count = (r) => Number(r && r.n) || 0;
   if (count(orders) + count(ents) + count(bookings) + count(enrolments) + count(totp) > 0) {
     return fail(409, "has_records",
@@ -388,13 +393,12 @@ export async function deleteAccount(request, env, now = Date.now()) {
 
   // Everything keyed to this user. The count check above guarantees there
   // are no orders, access rows, bookings, enrolments or 2FA rows.
+  const { results: own } = await env.DB.prepare(
+    "SELECT name FROM sqlite_master WHERE type = 'table' AND name IN ('saved_words','chapter_progress','user_avatars','password_reset_tokens','ai_usage')"
+  ).all();
+  const ownTables = (own || []).map((t) => t.name);
   await env.DB.batch([
-    env.DB.prepare("DELETE FROM saved_words WHERE user_id = ?1").bind(id),
-    env.DB.prepare("DELETE FROM chapter_progress WHERE user_id = ?1").bind(id),
-    env.DB.prepare("DELETE FROM user_avatars WHERE user_id = ?1").bind(id),
-    env.DB.prepare("DELETE FROM password_reset_tokens WHERE user_id = ?1").bind(id),
-    env.DB.prepare("DELETE FROM ai_usage WHERE user_id = ?1").bind(id),
-    env.DB.prepare("DELETE FROM orders WHERE user_id = ?1").bind(id),
+    ...ownTables.map((t) => env.DB.prepare(`DELETE FROM ${t} WHERE user_id = ?1`).bind(id)),
     env.DB.prepare("DELETE FROM sessions WHERE user_id = ?1").bind(id),
     env.DB.prepare("DELETE FROM users WHERE id = ?1").bind(id)
   ]);

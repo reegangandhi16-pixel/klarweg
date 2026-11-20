@@ -270,3 +270,11 @@ test('profile + photo saves share a per-account budget (30 / 15 min)', async () 
   assert.equal(r.status, 429);
   assert.equal((await req(env, 'GET', '/account', { cookie: u.cookie })).json.profile.avatar, null);
 });
+
+test('deletion: works on a database without the consultation / enrolment tables', async () => {
+  const env = makeEnv({ ACCOUNT_DELETION: 'on' });
+  env.DB.raw.exec('DROP TABLE IF EXISTS consult_bookings; DROP TABLE IF EXISTS live_payments; DROP TABLE IF EXISTS live_enrolments;');
+  const u = await signupUser(env);
+  const r = await req(env, 'POST', '/account/delete', { cookie: u.cookie, body: { confirmEmail: u.email, password: u.password } });
+  assert.equal(r.status, 200, JSON.stringify(r.json));
+});

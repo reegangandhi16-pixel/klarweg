@@ -84,6 +84,17 @@ const taskCap = varOf(toml, 'SPEECH_TASK_DAILY_CHECKS');
 if (taskCap !== null && !/^[1-3]$/.test(taskCap)) fail(`SPEECH_TASK_DAILY_CHECKS="${taskCap}" — the per-task daily cap must be 1, 2 or 3.`);
 if (ai === 'true' && !allowAi) fail('AI_ENABLED="true" in wrangler.toml. Enable Klarweg AI deliberately with --allow-ai-enabled once the provider is chosen and the tutor Worker has its key.');
 
+const allowPasswordReset = args.includes('--allow-password-reset');
+/* Password reset by email (src/password-reset.js, docs/PASSWORD-RESET.md). "on" needs the
+   owner's go (--allow-password-reset) and configured mail provider.
+   Resend requires a Worker secret; Cloudflare requires an active binding. */
+const pwReset = (varOf(toml, 'PASSWORD_RESET') || 'off').toLowerCase();
+const mailProvider = (varOf(toml, 'MAIL_PROVIDER') || 'resend').toLowerCase();
+if (!['resend', 'cloudflare'].includes(mailProvider)) fail('MAIL_PROVIDER must be "resend" or "cloudflare".');
+if (!['off', 'on'].includes(pwReset)) fail(`PASSWORD_RESET in wrangler.toml is "${pwReset}" — must be "off" or "on".`);
+if (pwReset === 'on' && !allowPasswordReset) fail('PASSWORD_RESET="on" in wrangler.toml. Enable password reset emails deliberately with --allow-password-reset after the selected mail provider, domain and secret/binding are configured (docs/PASSWORD-RESET.md).');
+if (pwReset === 'on' && mailProvider === 'cloudflare' && !/^\s*\[\[\s*send_email\s*\]\][^\[]*?name\s*=\s*"EMAIL"/m.test(toml)) fail('PASSWORD_RESET="on" but wrangler.toml has no active [[send_email]] binding named "EMAIL" — no reset email could be sent.');
+
 let live;
 try {
   const res = await fetch(LIVE_URL, { headers: { accept: 'application/json' } });

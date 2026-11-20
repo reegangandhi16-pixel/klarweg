@@ -1,3 +1,4 @@
+import { forgotPassword, checkResetToken, resetPassword } from "./password-reset.js";
 import { corsHeaders, withCors, isForeignOriginWrite } from "./cors.js";
 import { isSameOriginApi, API_PREFIX } from "./same-origin.js";
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
@@ -115,6 +116,18 @@ async function route(request, env, ctx) {
        target, so CORS handling does not apply and must not be added. */
     if (request.method === "POST" && url.pathname === "/auth/google/redirect") {
       return googleLoginRedirect(request, env);
+    }
+
+    /* Forgot / reset password (password-reset.js). Off unless
+       PASSWORD_RESET = "on" and the selected mail transport is configured. */
+    if (request.method === "POST" && url.pathname === "/auth/password/forgot") {
+      return withCors(await forgotPassword(request, env, ctx), request);
+    }
+    if (request.method === "POST" && url.pathname === "/auth/password/reset/check") {
+      return withCors(await checkResetToken(request, env, ctx), request);
+    }
+    if (request.method === "POST" && url.pathname === "/auth/password/reset") {
+      return withCors(await resetPassword(request, env, ctx), request);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/logout") {

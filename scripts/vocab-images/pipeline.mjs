@@ -200,9 +200,13 @@ function pickWork(level, limit) {
   const st = state();
   const want = [];
   const only = opt("keys") ? new Set(fs.readFileSync(String(opt("keys")), "utf8").split(/\s+/).filter(Boolean)) : null;   // --keys file: restrict to these concepts (pilots)
+  // concepts reserved for interactive generation (STORE/interactive-keys.txt) are never batched, so the two never take the same concept
+  const reservedFile = path.join(STORE, "interactive-keys.txt");
+  const reserved = !only && fs.existsSync(reservedFile) ? new Set(fs.readFileSync(reservedFile, "utf8").split(/\s+/).filter(Boolean)) : null;
   for (const it of queue()) {
     if (it.status !== "todo") continue;
     if (only && !only.has(it.key)) continue;
+    if (reserved && reserved.has(it.key)) continue;
     // second-strategy images wait for the evaluation gate (STORE/second-go), except named pilots (--keys)
     if (it.second && !only && !fs.existsSync(path.join(STORE, "second-go"))) continue;
     if (level && !it.audience.some((u) => u.level === level)) continue;

@@ -26,7 +26,7 @@ Not touched: entitlements, orders, progress, saved words, `google_sub`, phone, n
 - Rate limits use the existing `rate_counters` table with pseudonymous daily HMAC buckets under `RATE_SALT`:
   - 5 requests per network per 15 min (429).
   - 3 emails per address per hour (further requests get the same reply but send nothing).
-  - `PASSWORD_RESET_DAILY_EMAILS` (45) reset-request emails per UTC day across all addresses, to leave room under the Resend Free quota for the second (password-changed) notification.
+  - `PASSWORD_RESET_DAILY_EMAILS` (45) reset-request emails per UTC day across all addresses (maximum 45). Password-changed notices have a separate cap of 45 per UTC day because a reset link can be used on the day after it was issued. The caps apply to concurrent requests.
   - 20 failed token checks per network per 15 min.
 - The reset link is always built from `SITE_BASE_URL`, which must be https and falls back to `https://klarweg.in`.
   It is never built from request input.
@@ -134,7 +134,7 @@ points to klarwegofficial@gmail.com. Verify the sender owns the account email be
 or send a password.
 
 ## Tests
-- `node --test access/worker/test/password-reset.test.mjs`: 17 tests covering success, used, concurrent and
+- `node --test access/worker/test/password-reset.test.mjs`: tests covering success, used, concurrent and
   expired links, newer link replaces older, unknown email, Google-only, invalid input, feature off, rate limits,
   mail failure, no logging, entitlements preserved, CSRF, link origin, and auth regression. These also run in `npm test`.
 - `npm run test:password-reset:browser`: headless Chrome, desktop and phone, with the real Worker in-process.

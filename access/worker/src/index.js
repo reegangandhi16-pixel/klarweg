@@ -162,7 +162,7 @@ async function route(request, env, ctx) {
     }
 
     /* Forgot / reset password (password-reset.js). Off unless
-       PASSWORD_RESET = "on" and the EMAIL send_email binding exists. */
+       PASSWORD_RESET = "on" and the selected mail transport is configured. */
     if (request.method === "POST" && url.pathname === "/auth/password/forgot") {
       return withCors(await forgotPassword(request, env, ctx), request);
     }

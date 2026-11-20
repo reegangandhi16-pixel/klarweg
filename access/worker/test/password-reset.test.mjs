@@ -160,6 +160,32 @@ test('concurrent submits of one link: exactly one wins', async () => {
   assert.deepEqual([a.status, b.status].sort(), [200, 400]);
 });
 
+test('a failed session write rolls back the password and leaves the link reusable', async () => {
+  const { env, sent } = makeEnv();
+  const user = await signup(env);
+  await forgot(env, user.email);
+  const token = tokenFrom(sent[0]);
+  env.DB.raw.exec(`CREATE TRIGGER fail_session_delete BEFORE DELETE ON sessions
+    BEGIN SELECT RAISE(ABORT, 'test write failure'); END`);
+  assert.equal((await req(env, 'POST', '/auth/password/reset', {
+    body: { token, password: 'new-password-42' }
+  })).status, 500);
+  assert.equal((await req(env, 'POST', '/auth/password/reset/check', { body: { token } })).status, 200);
+  assert.equal((await login(env, user.email, PASSWORD)).status, 200);
+  env.DB.raw.exec('DROP TRIGGER fail_session_delete');
+  assert.equal((await req(env, 'POST', '/auth/password/reset', {
+    body: { token, password: 'new-password-42' }
+  })).status, 200);
+});
+
+test('concurrent mail requests cannot exceed the daily quota', async () => {
+  const { env, sent } = makeEnv({ PASSWORD_RESET_DAILY_EMAILS: '1' });
+  const users = await Promise.all([signup(env), signup(env), signup(env)]);
+  const responses = await Promise.all(users.map(({ email }) => forgot(env, email)));
+  assert.ok(responses.every((response) => response.status === 200));
+  assert.equal(sent.length, 1);
+});
+
 test('expired link is refused and leaves the password unchanged', async () => {
   const { env, sent } = makeEnv();
   const u = await signup(env);

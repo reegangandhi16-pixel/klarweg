@@ -47,6 +47,7 @@ const FORGOT_EMAIL_LIMIT = { max: 3, win: 60 * 60 * 1000 };
 const RESET_IP_LIMIT = { max: 20, win: 15 * 60 * 1000 };
 const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_DAILY_EMAILS = 45;
+const RESET_UNAVAILABLE = { ok: false, error: "reset_unavailable", message: "Password reset by email is not available yet." };
 
 const TOKEN_RE = /^[A-Za-z0-9_-]{43}$/;   // 32 bytes, base64url, no padding
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -69,7 +70,7 @@ export function passwordResetEnabled(env) {
 
 /* ---------- rate limiting (same table and window shape as ratelimit.js) ---------- */
 
-function windowEnd(now, win) { return Math.ceil((now + 1) / win) * win; }
+function windowEnd(now, win) { return (Math.floor(now / win) + 1) * win; }
 
 async function hmacHex(secret, message) {
   const key = await crypto.subtle.importKey(
@@ -104,12 +105,25 @@ async function bump(env, key, lim, now) {
   ).bind(key, windowEnd(now, lim.win)).run();
 }
 
+async function reserveHit(env, key, lim, now) {
+  if (lim.max === 0) return false;
+  const result = await env.DB.prepare(
+    "INSERT INTO rate_counters (bucket, window_end, hits) VALUES (?1, ?2, 1) " +
+    "ON CONFLICT(bucket, window_end) DO UPDATE SET hits = hits + 1 WHERE hits < ?3"
+  ).bind(key, windowEnd(now, lim.win), lim.max).run();
+  return result.meta?.changes === 1;
+}
+
 function dailyEmailCap(env) {
   const n = Number.parseInt(env && env.PASSWORD_RESET_DAILY_EMAILS, 10);
-  return Number.isFinite(n) && n >= 0 ? n : DEFAULT_DAILY_EMAILS;
+  return Number.isFinite(n) && n >= 0 ? Math.min(n, DEFAULT_DAILY_EMAILS) : DEFAULT_DAILY_EMAILS;
 }
 
 /* ---------- links and email copy ---------- */
+
+function dailyMailLimit(env) {
+  return { max: dailyEmailCap(env), win: DAY_MS };
+}
 
 function siteBase(env) {
   /* Operator configuration only (wrangler.toml), never request input, and
@@ -248,14 +262,13 @@ export async function forgotPassword(request, env, ctx, now = Date.now()) {
   }
 
   if (!passwordResetEnabled(env)) {
-    return json({ ok: false, error: "reset_unavailable", message: "Password reset by email is not available yet." }, 503);
+    return json(RESET_UNAVAILABLE, 503);
   }
 
   const ipBucket = await ipKey(env, request, "prf");
-  if (await hits(env, ipBucket, FORGOT_IP_LIMIT, now) >= FORGOT_IP_LIMIT.max) {
+  if (!(await reserveHit(env, ipBucket, FORGOT_IP_LIMIT, now))) {
     return json({ ok: false, error: "Too many requests. Please wait a few minutes and try again." }, 429);
   }
-  await bump(env, ipBucket, FORGOT_IP_LIMIT, now);
 
   /* Everything that depends on whether the address exists runs after the
      response, so status, body and timing are the same for every address. */
@@ -275,13 +288,11 @@ async function issueReset(env, email, now) {
   if (!user) return { sent: false, reason: "no_account" };
 
   const globalKey = "prg:" + new Date(now).toISOString().slice(0, 10);
-  const dayLim = { max: dailyEmailCap(env), win: DAY_MS };
-  if (await hits(env, globalKey, dayLim, now) >= dayLim.max) {
+  if (!(await reserveHit(env, perEmail, FORGOT_EMAIL_LIMIT, now))) return { sent: false, reason: "email_limit" };
+  if (!(await reserveHit(env, globalKey, dailyMailLimit(env), now))) {
     console.log(JSON.stringify({ svc: "klarweg-access", evt: "password_reset_daily_cap" }));
     return { sent: false, reason: "daily_cap" };
   }
-  await bump(env, perEmail, FORGOT_EMAIL_LIMIT, now);
-  await bump(env, globalKey, dayLim, now);
 
   let message;
   if (!user.password_hash) {
@@ -320,6 +331,7 @@ async function tokenGate(request, env, now) {
 }
 
 export async function checkResetToken(request, env, ctx, now = Date.now()) {
+  if (env.PASSWORD_RESET !== "on") return json(RESET_UNAVAILABLE, 503);
   const gate = await tokenGate(request, env, now);
   if (gate.response) return gate.response;
 
@@ -336,6 +348,7 @@ export async function checkResetToken(request, env, ctx, now = Date.now()) {
 /* ---------- POST /auth/password/reset ---------- */
 
 export async function resetPassword(request, env, ctx, now = Date.now()) {
+  if (env.PASSWORD_RESET !== "on") return json(RESET_UNAVAILABLE, 503);
   const gate = await tokenGate(request, env, now);
   if (gate.response) return gate.response;
 
@@ -360,28 +373,33 @@ export async function resetPassword(request, env, ctx, now = Date.now()) {
   const hashed = await hashPassword(password);
   const tokenHash = await hashSessionToken(token);
 
-  /* Atomic single use: the conditional UPDATE is the only acceptance test.
-     Two concurrent submits of one link — exactly one gets changes === 1. */
-  const consumed = await env.DB.prepare(
-    "UPDATE password_reset_tokens SET used_at = ?1 WHERE token_hash = ?2 AND used_at IS NULL AND expires_at > ?1"
-  ).bind(nowSec, tokenHash).run();
-
-  if (!consumed.meta || consumed.meta.changes !== 1) {
+  // D1 batches execute transactionally. Keep the token open through the
+  // guarded writes and consume it last so any failed write rolls back the reset.
+  const openToken = `EXISTS (
+    SELECT 1 FROM password_reset_tokens t
+    JOIN users u ON u.id = t.user_id
+    WHERE t.token_hash = ?1 AND t.user_id = ?2 AND t.used_at IS NULL AND t.expires_at > ?3
+      AND u.password_hash IS NOT NULL
+  )`;
+  const [updated] = await env.DB.batch([
+    env.DB.prepare(
+      `UPDATE users
+          SET password_hash = ?4, password_salt = ?5, password_iterations = ?6, updated_at = ?3
+        WHERE id = ?2 AND ${openToken}`
+    ).bind(tokenHash, row.user_id, nowSec, hashed.hash, hashed.salt, hashed.iterations),
+    env.DB.prepare(`DELETE FROM sessions WHERE user_id = ?2 AND ${openToken}`)
+      .bind(tokenHash, row.user_id, nowSec),
+    env.DB.prepare(`DELETE FROM password_reset_tokens WHERE user_id = ?2 AND token_hash <> ?1 AND ${openToken}`)
+      .bind(tokenHash, row.user_id, nowSec),
+    env.DB.prepare(`UPDATE password_reset_tokens SET used_at = ?3 WHERE token_hash = ?1 AND ${openToken}`)
+      .bind(tokenHash, row.user_id, nowSec)
+  ]);
+  if (updated.meta?.changes !== 1) {
     await gate.fail();
     return json(INVALID_LINK, 400);
   }
 
-  await env.DB.batch([
-    env.DB.prepare(
-      `UPDATE users
-          SET password_hash = ?1, password_salt = ?2, password_iterations = ?3, updated_at = ?4
-        WHERE id = ?5 AND password_hash IS NOT NULL`
-    ).bind(hashed.hash, hashed.salt, hashed.iterations, nowSec, row.user_id),
-    env.DB.prepare("DELETE FROM sessions WHERE user_id = ?1").bind(row.user_id),
-    env.DB.prepare("DELETE FROM password_reset_tokens WHERE user_id = ?1 AND token_hash <> ?2").bind(row.user_id, tokenHash)
-  ]);
-
-  runLater(ctx, sendMail(env, { to: row.email, ...changedEmail(env) }));
+  runLater(ctx, sendChangedNotice(env, row.email));
 
   /* Also clears this browser's session cookie, in case one was present. */
   return new Response(JSON.stringify({ ok: true, message: "Your password has been changed. Sign in with your new password." }), {
@@ -392,4 +410,16 @@ export async function resetPassword(request, env, ctx, now = Date.now()) {
       "Set-Cookie": clearSessionCookie()
     }
   });
+}
+
+async function sendChangedNotice(env, email) {
+  const now = Date.now();
+  // Reserve separately across UTC days: a link can outlive its issue day.
+  const day = new Date(now).toISOString().slice(0, 10);
+  const noticeLimit = { max: DEFAULT_DAILY_EMAILS, win: DAY_MS };
+  if (await reserveHit(env, "prn:" + day, noticeLimit, now)) {
+    await sendMail(env, { to: email, ...changedEmail(env) });
+  } else {
+    console.log(JSON.stringify({ svc: "klarweg-access", evt: "password_reset_notice_daily_cap" }));
+  }
 }

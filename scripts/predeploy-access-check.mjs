@@ -44,6 +44,9 @@ const allowEnv = (args.find((a) => a.startsWith('--allow-cashfree-env-change='))
 const allowAi = args.includes('--allow-ai-enabled');
 const allowSpeech = (args.find((a) => a.startsWith('--allow-speech=')) || '').split('=')[1] || null;
 const allowScope = (args.find((a) => a.startsWith('--allow-speech-scope=')) || '').split('=')[1] || null;
+const allowConsult = (args.find((a) => a.startsWith('--allow-consult-booking=')) || '').split('=')[1] || null;
+const allowEnrol = (args.find((a) => a.startsWith('--allow-enrol-payments=')) || '').split('=')[1] || null;
+const allowDemo = (args.find((a) => a.startsWith('--allow-demo-booking=')) || '').split('=')[1] || null;
 
 function varOf(toml, name) {
   const m = toml.match(new RegExp('^\\s*' + name + '\\s*=\\s*"([^"]*)"', 'm'));
@@ -84,6 +87,54 @@ const taskCap = varOf(toml, 'SPEECH_TASK_DAILY_CHECKS');
 if (taskCap !== null && !/^[1-3]$/.test(taskCap)) fail(`SPEECH_TASK_DAILY_CHECKS="${taskCap}" — the per-task daily cap must be 1, 2 or 3.`);
 if (ai === 'true' && !allowAi) fail('AI_ENABLED="true" in wrangler.toml. Enable Klarweg AI deliberately with --allow-ai-enabled once the provider is chosen and the tutor Worker has its key.');
 
+const consult = (varOf(toml, 'CONSULT_BOOKING') || 'off').toLowerCase();
+const consultTeachers = String(varOf(toml, 'CONSULT_TEACHERS') || '').split(',').map((x) => x.trim()).filter(Boolean);
+if (!['off', 'sandbox', 'live'].includes(consult)) fail(`CONSULT_BOOKING in wrangler.toml is "${consult}" — must be "off", "sandbox" or "live".`);
+if (consult !== 'off' && allowConsult !== consult) fail(`CONSULT_BOOKING="${consult}" in wrangler.toml. Enable consultation booking deliberately with --allow-consult-booking=${consult}.`);
+if (consult === 'sandbox' && env !== 'sandbox') fail('CONSULT_BOOKING="sandbox" needs CASHFREE_ENV="sandbox".');
+if (consult === 'live' && env !== 'production') fail('CONSULT_BOOKING="live" needs CASHFREE_ENV="production" — never take live bookings through sandbox.');
+if (/CONSULT_JOIN_LINKS["']?\s*=/.test(toml.replace(/#.*$/gm, '')) || /meet\.google\.com\/[a-z0-9-]+/i.test(toml)) fail('wrangler.toml carries CONSULT_JOIN_LINKS or a Google Meet link. Joining links are private: set them with `wrangler secret put CONSULT_JOIN_LINKS`, never in this file.');
+if (consultTeachers.length) {
+  const { ELIGIBLE_TEACHERS } = await import('../access/worker/src/consultations.js');
+  const published = await import('./live-classes-readiness.mjs').then((m) => m.publishedTeacherIds());
+  const bad = consultTeachers.filter((id) => !ELIGIBLE_TEACHERS.includes(id) || !published.includes(id));
+  if (bad.length) fail(`CONSULT_TEACHERS names ${bad.join(', ')}: only eligible teachers (${ELIGIBLE_TEACHERS.join(', ')}) whose profile is published may be bookable.`);
+}
+const enrol = (varOf(toml, 'ENROL_PAYMENTS') || 'off').toLowerCase();
+const enrolCredit = varOf(toml, 'ENROL_CONSULT_CREDIT');
+if (!['off', 'sandbox', 'live'].includes(enrol)) fail(`ENROL_PAYMENTS in wrangler.toml is "${enrol}" — must be "off", "sandbox" or "live".`);
+if (enrol !== 'off' && allowEnrol !== enrol) fail(`ENROL_PAYMENTS="${enrol}" in wrangler.toml. Enable online course payments deliberately with --allow-enrol-payments=${enrol}.`);
+if (enrol === 'sandbox' && env !== 'sandbox') fail('ENROL_PAYMENTS="sandbox" needs CASHFREE_ENV="sandbox".');
+if (enrol === 'live' && env !== 'production') fail('ENROL_PAYMENTS="live" needs CASHFREE_ENV="production" — never take live course fees through sandbox.');
+if (enrolCredit != null && !['off', 'course-fee'].includes(enrolCredit)) fail(`ENROL_CONSULT_CREDIT is "${enrolCredit}" — must be "off" or "course-fee".`);
+if (enrol !== 'off' && enrolCredit == null) fail('ENROL_PAYMENTS is on but ENROL_CONSULT_CREDIT is not set. Record the owner decision on the ₹100 consultation adjustment ("off" or "course-fee") first.');
+/* JSON needs a TOML literal string ('…'); read either quoting. Any other
+   spelling is refused rather than skipped. */
+const enrolLine = (toml.replace(/#.*$/gm, '').match(/^\s*["']?ENROL_COURSES["']?\s*=\s*(.*)$/m) || [])[1];
+const enrolQuoted = enrolLine == null ? null : enrolLine.trim().match(/^(?:"((?:[^"\\]|\\.)*)"|'([^']*)')$/);
+if (enrolLine != null && !enrolQuoted) fail('ENROL_COURSES must be a quoted TOML string, e.g. ENROL_COURSES = \'{"live-a1":{"batch":"2026-11-02"}}\'.');
+const enrolCoursesRaw = enrolQuoted ? (enrolQuoted[2] != null ? enrolQuoted[2] : enrolQuoted[1].replace(/\\"/g, '"')) : null;
+if (enrolCoursesRaw) {
+  let courses = null;
+  try { courses = JSON.parse(enrolCoursesRaw); } catch { fail('ENROL_COURSES is not valid JSON, e.g. {"live-a1":{"batch":"2026-11-02"}}.'); }
+  const { LIVE_COURSES } = await import('../access/worker/src/enrolments.js');
+  const { loadData } = await import('./live-classes-readiness.mjs');
+  const pub = Object.fromEntries((loadData().courses || []).filter((c) => !c.draft).map((c) => [c.id, c]));
+  for (const [id, v] of Object.entries(courses || {})) {
+    if (!LIVE_COURSES[id]) fail(`ENROL_COURSES names "${id}", which the Worker does not sell (LIVE_COURSES in enrolments.js).`);
+    if (!pub[id] || pub[id].enrolment !== 'open') fail(`ENROL_COURSES names "${id}", which is not published with enrolment "open" on the Live Classes page.`);
+    if (!v || !/^\d{4}-\d{2}-\d{2}$/.test(v.batch || '')) fail(`ENROL_COURSES "${id}" needs a batch start date, e.g. {"batch":"2026-11-02"}.`);
+  }
+}
+/* 10. DEMO_BOOKING (₹100 Friday/Sunday demo classes, live-demos.js) is
+   "off" unless --allow-demo-booking=<sandbox|live> names the mode, with the
+   same CASHFREE_ENV pairing. LIVE_ADMIN_EMAILS is fine as a var (no secret). */
+const demo = (varOf(toml, 'DEMO_BOOKING') || 'off').toLowerCase();
+if (!['off', 'sandbox', 'live'].includes(demo)) fail(`DEMO_BOOKING in wrangler.toml is "${demo}" — must be "off", "sandbox" or "live".`);
+if (demo !== 'off' && allowDemo !== demo) fail(`DEMO_BOOKING="${demo}" in wrangler.toml. Enable demo booking deliberately with --allow-demo-booking=${demo}.`);
+if (demo === 'sandbox' && env !== 'sandbox') fail('DEMO_BOOKING="sandbox" needs CASHFREE_ENV="sandbox".');
+if (demo === 'live' && env !== 'production') fail('DEMO_BOOKING="live" needs CASHFREE_ENV="production" — never take live bookings through sandbox.');
+if (/LIVE_ADMIN_EMAILS["']?\s*=\s*["'][^"']*@/.test(toml.replace(/#.*$/gm, ''))) fail('wrangler.toml lists admin emails in LIVE_ADMIN_EMAILS. This repository is public: set them with `wrangler secret put LIVE_ADMIN_EMAILS`.');
 const allowPasswordReset = args.includes('--allow-password-reset');
 /* Password reset by email (src/password-reset.js, docs/PASSWORD-RESET.md). "on" needs the
    owner's go (--allow-password-reset) and configured mail provider.
@@ -111,4 +162,4 @@ if (live !== env) {
   console.warn(`! Cashfree environment will change: ${live} → ${env} (explicitly allowed).`);
 }
 
-console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech}, scope "${speechScope.join(',')}" + ${speechChapters.length} listed − ${speechExclude.length} excluded.`);
+console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech}, CONSULT_BOOKING=${consult}, ENROL_PAYMENTS=${enrol}, DEMO_BOOKING=${demo}, scope "${speechScope.join(',')}" + ${speechChapters.length} listed − ${speechExclude.length} excluded.`);

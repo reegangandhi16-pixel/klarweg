@@ -4,6 +4,10 @@ import { isSameOriginApi, API_PREFIX } from "./same-origin.js";
 import { signup, login, googleLogin, googleNonce, googleLoginRedirect, logout, me, updatePhone } from "./auth-routes.js";
 import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
+import { consultAvailability, createConsultBooking, getConsultBooking, getConsultJoin, listConsultBookings, reconcileRecentConsultBookings } from "./consultations.js";
+import { enrolCatalog, enrolQuote, createEnrolCheckout, getEnrolment, listEnrolments, reconcileRecentPayments } from "./enrolments.js";
+import { demoAvailability, createDemoBooking, rescheduleDemo } from "./live-demos.js";
+import { liveAdminOverview, liveAdminSlots, liveAdminBatch, liveAdminTeacher, liveAdminCoupon, liveAdminDemo, liveAdminEnrolment } from "./live-admin.js";
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
@@ -53,6 +57,19 @@ export default {
       console.log(JSON.stringify({ svc: "klarweg-access", evt: "unhandled", path, error: (err && err.name) || "Error" }));
       return withCors(json({ ok: false, error: "server_error" }, 500), request);
     }
+  },
+
+  /* Payment reconciliation, run by a Cron Trigger once one is configured
+     (docs/live-classes-online-payments.md). Asks Cashfree for the status of
+     recent open orders, so a payment whose webhook and return were both
+     lost is still settled. Never charges, refunds or sends anything. */
+  async scheduled(event, env, ctx) {
+    const work = (async () => {
+      const consult = await reconcileRecentConsultBookings(env).catch((e) => ({ error: (e && e.name) || "Error" }));
+      const enrol = await reconcileRecentPayments(env).catch((e) => ({ error: (e && e.name) || "Error" }));
+      console.log(JSON.stringify({ svc: "klarweg-access", evt: "reconcile", consult, enrol }));
+    })();
+    if (ctx && ctx.waitUntil) ctx.waitUntil(work); else await work;
   }
 };
 
@@ -94,6 +111,78 @@ async function route(request, env, ctx) {
     const orderMatch = url.pathname.match(/^\/orders\/(ord_[0-9a-f-]{36})$/);
     if (request.method === "GET" && orderMatch) {
       return withCors(await getOrder(request, env, orderMatch[1]), request);
+    }
+
+    /* Same-day ₹100 consultation booking (consultations.js). Off unless
+       CONSULT_BOOKING is "sandbox"/"live" and matches CASHFREE_ENV. Its
+       own table and order ids; it never grants a course. */
+    if (request.method === "GET" && url.pathname === "/consult/availability") {
+      return withCors(await consultAvailability(request, env), request);
+    }
+
+    if (url.pathname === "/consult/bookings") {
+      if (request.method === "POST") return withCors(await createConsultBooking(request, env), request);
+      if (request.method === "GET") return withCors(await listConsultBookings(request, env), request);
+    }
+
+    const consultJoinMatch = url.pathname.match(/^\/consult\/bookings\/(KWC-[2-9A-HJ-NP-Z]{8})\/join$/);
+    if (request.method === "GET" && consultJoinMatch) {
+      return withCors(await getConsultJoin(request, env, consultJoinMatch[1]), request);
+    }
+
+    const consultMatch = url.pathname.match(/^\/consult\/bookings\/(KWC-[2-9A-HJ-NP-Z]{8})$/);
+    if (request.method === "GET" && consultMatch) {
+      return withCors(await getConsultBooking(request, env, consultMatch[1]), request);
+    }
+
+    /* Live-course enrolment with online payment (enrolments.js). Off unless
+       ENROL_PAYMENTS is "sandbox" or "live" and the course is listed in
+       ENROL_COURSES. */
+    if (request.method === "GET" && url.pathname === "/enrol/catalog") {
+      return withCors(await enrolCatalog(request, env), request);
+    }
+    if (request.method === "GET" && url.pathname === "/enrol/quote") {
+      return withCors(await enrolQuote(request, env), request);
+    }
+    if (request.method === "POST" && url.pathname === "/enrol/checkout") {
+      return withCors(await createEnrolCheckout(request, env), request);
+    }
+    if (request.method === "GET" && url.pathname === "/enrol/enrolments") {
+      return withCors(await listEnrolments(request, env), request);
+    }
+    const enrolMatch = url.pathname.match(/^\/enrol\/enrolments\/(KWE-[2-9A-HJ-NP-Z]{8})$/);
+    if (request.method === "GET" && enrolMatch) {
+      return withCors(await getEnrolment(request, env, enrolMatch[1]), request);
+    }
+
+    /* ₹100 Friday/Sunday demo classes (live-demos.js). Off unless
+       DEMO_BOOKING matches CASHFREE_ENV; status and join links use the
+       /consult/bookings/:ref routes above (same table, kind = 'demo'). */
+    if (request.method === "GET" && url.pathname === "/demo/availability") {
+      return withCors(await demoAvailability(request, env), request);
+    }
+    if (request.method === "POST" && url.pathname === "/demo/bookings") {
+      return withCors(await createDemoBooking(request, env), request);
+    }
+    const demoMoveMatch = url.pathname.match(/^\/demo\/bookings\/(KWC-[2-9A-HJ-NP-Z]{8})\/reschedule$/);
+    if (request.method === "POST" && demoMoveMatch) {
+      return withCors(await rescheduleDemo(request, env, demoMoveMatch[1]), request);
+    }
+
+    /* Live marketplace administration (live-admin.js): LIVE_ADMIN_EMAILS
+       + a fresh second factor; everything else is refused. */
+    if (url.pathname.startsWith("/live-admin/")) {
+      const p = url.pathname;
+      if (request.method === "GET" && p === "/live-admin/overview") return withCors(await liveAdminOverview(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/slots") return withCors(await liveAdminSlots(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/batches") return withCors(await liveAdminBatch(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/teachers") return withCors(await liveAdminTeacher(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/coupons") return withCors(await liveAdminCoupon(request, env), request);
+      const dm = p.match(/^\/live-admin\/demos\/(KWC-[2-9A-HJ-NP-Z]{8})$/);
+      if (request.method === "POST" && dm) return withCors(await liveAdminDemo(request, env, dm[1]), request);
+      const em = p.match(/^\/live-admin\/enrolments\/(KWE-[2-9A-HJ-NP-Z]{8})$/);
+      if (request.method === "POST" && em) return withCors(await liveAdminEnrolment(request, env, em[1]), request);
+      return withCors(json({ ok: false, error: "Not found." }, 404), request);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/signup") {

@@ -41,6 +41,22 @@ CASHFREE_LIFETIME_ONLY_OFFERS = ""
 ACCOUNT_RETURN_URL = "https://klarweg.in/account/index.html"
 SITE_BASE_URL = "https://klarweg.in"
 
+# Live classes marketplace (PR #352). Every switch "off" in this file;
+# turning one on needs the matching predeploy flag (scripts/predeploy-access-check.mjs).
+# Same-day consultation booking (src/consultations.js): replaced by the
+# Friday/Sunday demo below; stays off.
+CONSULT_BOOKING = "off"
+CONSULT_TEACHERS = ""
+# Live-course payments (src/enrolments.js): only for batches an admin opened
+# with dates, schedule, capacity and approval. "off" | "sandbox" | "live".
+ENROL_PAYMENTS = "off"
+ENROL_COURSES = ""
+ENROL_CONSULT_CREDIT = "course-fee"
+# ₹100 Friday/Sunday demo classes (src/live-demos.js). "off" | "sandbox" | "live".
+DEMO_BOOKING = "off"
+# LIVE_ADMIN_EMAILS and CONSULT_JOIN_LINKS are Worker SECRETS (never in this
+# public file): admin account emails, and {"teacher-id":"https://meet.google.com/…"}.
+
 # Klarweg AI (see src/ai.js). ON. Chapter AI: with the Chapter-1 preview at 0,
 # only accounts holding a level entitlement qualify. Homepage chat: buyers, plus
 # a few free questions a day for signed-out visitors (AI_ANON_* below).
@@ -150,4 +166,6 @@ service = "klarweg-exam"
 #   RATE_SALT
 #   CASHFREE_WEBHOOK_SECRET   (optional; defaults to CASHFREE_SECRET_KEY)
 #   RESOURCE_URL_SECRET       (signed chapter-resource links; 32+ random bytes)
+#   LIVE_ADMIN_EMAILS         (comma-separated admin account emails for /live-admin/*)
+#   CONSULT_JOIN_LINKS        (JSON teacher id → Meet link, shown only for confirmed bookings)
 #   SPEECH_ALLOWLIST          (only for SPEECH_MODE = "allowlist": comma-separated user ids)

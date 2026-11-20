@@ -264,7 +264,9 @@ const CHAPTER = {
       advanced: { synonyms: ['prägen'], opposites: [], collocations: ['das Verhalten beeinflussen'] } },
     { de: 'dabei', pos: 'adverb', level: 'B1', en: 'thereby, in doing so', hi: 'इस दौरान',
       ex: 'Sie las die Anzeige, dabei lächelte sie.', exEn: 'She read the ad, and while doing so she smiled.', exHi: 'Usne vigyapan padha, aur us dauran muskurayi.',
-      advanced: { synonyms: [], opposites: [], collocations: ['dabei sein'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['dabei sein'] },
+      vis: { kind: 'grammar', de: 'Sie las die Anzeige, dabei lächelte sie.', hl: 'dabei', role: 'focus', cap: 'dabei = thereby, in doing so' }
+    },
     { de: 'dabeihaben', pos: 'verb', level: 'B1', en: 'to have with oneself', hi: 'साथ रखना',
       ex: 'Hast du deine EC-Karte dabei?', exEn: 'Do you have your debit card with you?', exHi: 'Kya tumhare paas apna debit card hai?',
       conj: { praesens: 'hat dabei', praeteritum: 'hatte dabei', perfekt: 'hat dabeigehabt' },

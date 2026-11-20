@@ -249,7 +249,7 @@ const CHAPTER = {
     { de: 'nichts', pos: 'pronoun', en: 'nothing', hi: 'कुछ नहीं', ex: 'Abends lerne ich nichts.', exEn: 'In the evenings I study nothing.' },
     { de: 'nie', pos: 'adverb', en: 'never', hi: 'कभी नहीं', ex: 'Ich frühstücke nie.', exEn: 'I never have breakfast.', vis: { kind: 'grammar', de: 'Ich frühstücke nie.', hl: 'nie', role: 'focus', cap: 'nie = never' } },
     { de: 'normalerweise', pos: 'adverb', en: 'normally, usually', hi: 'आम तौर पर', ex: 'Normalerweise lerne ich zu Hause.', exEn: 'Normally I study at home.', vis: { kind: 'grammar', de: 'Normalerweise lerne ich zu Hause.', hl: 'Normalerweise', role: 'focus', cap: 'normalerweise = normally, usually' } },
-    { de: 'nur', pos: 'adverb', en: 'only', hi: 'सिर्फ़', ex: 'Ich habe nur eine Stunde.', exEn: 'I have only one hour.' },
+    { de: 'nur', pos: 'adverb', en: 'only', hi: 'सिर्फ़', ex: 'Ich habe nur eine Stunde.', exEn: 'I have only one hour.', vis: { kind: 'grammar', de: 'Ich habe nur eine Stunde.', hl: 'nur', role: 'focus', cap: 'nur = only' } },
     { de: 'regelmäßig', pos: 'adverb', en: 'regularly', hi: 'नियमित रूप से', ex: 'Ich lerne regelmäßig.', exEn: 'I study regularly.' },
     { de: 'selten', pos: 'adverb', en: 'rarely, seldom', hi: 'कभी-कभार', ex: 'Ich koche selten.', exEn: 'I rarely cook.', vis: { kind: 'grammar', de: 'Ich koche selten.', hl: 'selten', role: 'focus', cap: 'selten = rarely, seldom' } },
     { de: 'täglich', pos: 'adverb', en: 'daily', hi: 'रोज़', ex: 'Ich lerne täglich Deutsch.', exEn: 'I study German daily.', vis: { kind: 'grammar', de: 'Ich lerne täglich Deutsch.', hl: 'täglich', role: 'focus', cap: 'täglich = daily' } },

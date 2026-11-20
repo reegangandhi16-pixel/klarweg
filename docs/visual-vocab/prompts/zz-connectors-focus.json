@@ -1,0 +1,350 @@
+{
+ "ein-vergleich-zeigt-dass--comparison-shows-that": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "abschliessend--in-conclusion": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "abschliessend--in-conclusion-finally": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "allerdings--however-admittedly": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "ausgerechnet--of-all-things": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "ausserdem--besides-moreover": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "dabei--thereby-in-doing-so": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "dafuer--for-that-for-it": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "dafuer--instead-in-return-to-make-up-for-it": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "dagegen--against-on-the-other-hand": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "daraufhin--thereupon-as-a-result": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "deshalb--therefore": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "doch--but-yet-on-the-contrary": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "eben--just-simply": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "eigentlich--actually": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "gleichermassen--equally-in-equal-measure": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "gleichfalls--likewise-you-too": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "hoechstens--at-the-most": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "insbesondere--especially": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "insbesondere--in-particular-especially": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "jedoch--however-though": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "jeweils--each-respectively": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "meinetwegen--as-far-as-i-m-concerned-fine-by-me": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "mindestens--at-least": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "nichtsdestotrotz--nevertheless-nonetheless": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "nur--only": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "scheinbar--apparent-apparently": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "schliesslich--finally-eventually": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "sogar--even": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "somit--thus-therefore": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "sonst--otherwise-anything-else": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "sozusagen--so-to-speak": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "stattdessen--instead": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "trotzdem--nevertheless": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "trotzdem--nevertheless-still": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "vielmehr--rather-instead": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "wenigstens--at-least": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "zudem--in-addition": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "zunaechst--initially": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "allerdings--however-though": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "ausserdem--furthermore-besides": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "beispielsweise--for-example": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "daher--therefore-hence": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "demgegenueber--in-contrast-by-contrast": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "deshalb--therefore-that-s-why": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "gleichwohl--nonetheless-all-the-same": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "hingegen--on-the-other-hand-whereas": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "indes--however-meanwhile": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "infolgedessen--as-a-result-consequently": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "somit--thus-consequently": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "dennoch--nevertheless": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "folglich--consequently": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "gleichzeitig--simultaneously-at-the-same-time": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "aber--but": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "allerdings--though-however": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "also--so-therefore": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "denn--because": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "falls--in-case": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "jedoch--however": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "nachdem--after": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "oder--or": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "waehrend--while": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "weil--because": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "wie--as": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "wie--as-like": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "wohingegen--whereas": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "da--since-as": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "vor-diesem-hintergrund--against-this-background": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "meines-erachtens--in-my-view-in-my-opinion": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "einerseits-andererseits--on-the-one-hand-on-the-other-hand": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "je-desto--the": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "denn--then": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "doch--indeed-after-all": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "oder--right": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "bei-genauer-betrachtung--on-closer-inspection": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "bei-naeherem-hinsehen--looking-more-closely": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "aufgrund--because-of-due-to": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "dank--thanks-to": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "entgegen--against-contrary-to": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "inklusive--including": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "mittels--by-means-of": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "ungeachtet--regardless-of": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "mittels--by-means-of-using": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "ungeachtet--regardless-of-irrespective-of": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "zugunsten--in-favor-of": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "zulasten--at-the-expense-of": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ },
+ "zwecks--for-the-purpose-of": {
+  "tier": "text-only",
+  "reason": "connector/function word → sentence-focus visual (owner 2026-11-20: no AI picture)"
+ }
+}

@@ -228,7 +228,7 @@ const CHAPTER = {
     },
     { de: 'versprechen', pos: 'verb', en: 'to promise', hi: 'वादा करना', ex: 'Ich verspreche, pünktlich zu sein.', exEn: 'I promise to be on time.',
       conj: { praesens: 'verspricht', praeteritum: 'versprach', perfekt: 'hat versprochen' } },
-    { de: 'weil', pos: 'grammar', en: 'because (neutral reason)', hi: 'क्योंकि', ex: 'Ich lerne, weil ich bestehen möchte.', exEn: 'I study because I want to pass.', img: { src: '/api/media/vocab-img/462bd9979d41a0ae47e9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person studying at a desk while looking at a framed picture.' } },
+    { de: 'weil', pos: 'grammar', en: 'because (neutral reason)', hi: 'क्योंकि', ex: 'Ich lerne, weil ich bestehen möchte.', exEn: 'I study because I want to pass.', vis: { kind: 'grammar', de: 'Ich lerne Deutsch, weil ich hier arbeiten möchte.', hl: 'weil', role: 'focus', cap: 'weil = because (the verb goes to the end)' } },
     { de: 'da', pos: 'grammar', en: 'as, since (formal reason)', hi: 'चूंकि', ex: 'Da ich vorbereitet bin, bin ich ruhig.', exEn: 'Since I\'m prepared, I\'m calm.', img: { src: '/api/media/vocab-img/3a027adf3fd23ae0ae14', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A well-prepared student sitting calmly and relaxed at a desk.' } },
     { de: 'obwohl', pos: 'grammar', en: 'although (contrast)', hi: 'हालांकि', ex: 'Obwohl ich nervös bin, schaffe ich es.', exEn: 'Although I\'m nervous, I\'ll manage it.' },
     { de: 'könnte', pos: 'verb', en: 'could (polite request)', hi: 'क्या आप कर सकते हैं', ex: 'Könnten Sie mir helfen?', exEn: 'Could you help me?' },

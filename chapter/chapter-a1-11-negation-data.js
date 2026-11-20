@@ -215,9 +215,13 @@ const CHAPTER = {
       vis: { kind: 'grammar', de: 'Jetzt nicht, bitte.', hl: 'Jetzt', role: 'focus', cap: 'jetzt = now' }
     },
     { de: 'aber', pos: 'conjunction', en: 'but', hi: 'लेकिन',
-      ex: 'Ich habe Zeit, aber kein Geld.', exEn: 'I have time, but no money.' },
+      ex: 'Ich habe Zeit, aber kein Geld.', exEn: 'I have time, but no money.',
+      vis: { kind: 'grammar', de: 'Ich habe Zeit, aber kein Geld.', hl: 'aber', role: 'focus', cap: 'aber = but' }
+    },
     { de: 'oder', pos: 'conjunction', en: 'or', hi: 'या',
-      ex: 'Tee oder Kaffee? — Keinen Kaffee, danke.', exEn: 'Tea or coffee? — No coffee, thanks.' },
+      ex: 'Tee oder Kaffee? — Keinen Kaffee, danke.', exEn: 'Tea or coffee? — No coffee, thanks.',
+      vis: { kind: 'grammar', de: 'Tee oder Kaffee? — Keinen Kaffee, danke.', hl: 'oder', role: 'focus', cap: 'oder = or' }
+    },
     { de: 'Problem', art: 'das', gender: 'n', plural: 'Probleme', pos: 'noun', en: 'problem', hi: 'समस्या',
       ex: 'Kein Problem!', exEn: 'No problem!' },
     { de: 'mehr', pos: 'adverb', en: 'more, anymore', hi: 'और / अब',

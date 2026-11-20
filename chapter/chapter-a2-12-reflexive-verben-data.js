@@ -267,7 +267,7 @@ const CHAPTER = {
     { de: 'schlimm', pos: 'adjective', en: 'bad', hi: 'ख़राब', ex: 'Der Verkehr ist heute schlimm.', exEn: 'The traffic is bad today.' },
     { de: 'verspätet', pos: 'adjective', en: 'late, delayed', hi: 'देरी से', ex: 'Der Zug war verspätet.', exEn: 'The train was delayed.' },
     // ===== Small words / connectors =====
-    { de: 'jeweils', pos: 'adverb', en: 'each, respectively', hi: 'प्रत्येक', ex: 'Wir bekommen jeweils eine Karte.', exEn: 'We each get a card.' },
+    { de: 'jeweils', pos: 'adverb', en: 'each, respectively', hi: 'प्रत्येक', ex: 'Wir bekommen jeweils eine Karte.', exEn: 'We each get a card.', vis: { kind: 'grammar', de: 'Wir bekommen jeweils eine Karte.', hl: 'jeweils', role: 'focus', cap: 'jeweils = each, respectively' } },
     { de: 'nirgends', pos: 'adverb', en: 'nowhere', hi: 'कहीं नहीं', ex: 'Nirgends ist es sch\u00f6ner als hier.', exEn: 'Nowhere is nicer than here.', vis: { kind: 'grammar', de: 'Nirgends ist es schöner als hier.', hl: 'Nirgends', role: 'focus', cap: 'nirgends = nowhere' } },
     { de: 'Gegenteil', art: 'das', gender: 'n', plural: 'Gegenteile', pos: 'noun', en: 'opposite', hi: 'विपरीत', ex: 'Das Gegenteil von traurig ist fr\u00f6hlich.', exEn: 'The opposite of sad is happy.' },
     { de: 'Zeile', art: 'die', gender: 'f', plural: 'Zeilen', pos: 'noun', en: 'line (of text)', hi: 'पंक्ति', ex: 'Schreib mir ein paar Zeilen!', exEn: 'Write me a few lines!' },

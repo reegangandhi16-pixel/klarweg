@@ -217,7 +217,7 @@ const CHAPTER = {
       ex1: { de: 'Je größer die Stichprobe, desto zuverlässiger die Ergebnisse.', en: 'The larger the sample, the more reliable the results.', hi: 'Jitna bada namoona, utne vishvaasneey parinaam.' },
       ex2: { de: 'Je mehr man übt, desto besser wird man.', en: 'The more one practises, the better one becomes.', hi: 'Jitna zyaada practice karo, utna behtar bante ho.' },
       collocations: ['je ... desto besser', 'je ... desto zuverlässiger'],
-      img: { src: '/api/media/vocab-img/f0f64473886d71db8001', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A plant growing taller and fuller the closer it sits to light.' }
+      vis: { kind: 'grammar', de: 'Je mehr du übst, desto sicherer wirst du.', hl: 'Je mehr du übst, desto sicherer', role: 'focus', cap: 'je + comparative …, desto + comparative = the ... the (proportional comparison)' }
     }
   ],
 

@@ -422,10 +422,6 @@ public/vocab-img/d3f8a5cb1fb1b7e6cab6-400.avif
 public/vocab-img/d3f8a5cb1fb1b7e6cab6-400.webp
 public/vocab-img/d3f8a5cb1fb1b7e6cab6-800.avif
 public/vocab-img/d3f8a5cb1fb1b7e6cab6-800.webp
-public/vocab-img/d64545cee61bce5c08f0-400.avif
-public/vocab-img/d64545cee61bce5c08f0-400.webp
-public/vocab-img/d64545cee61bce5c08f0-800.avif
-public/vocab-img/d64545cee61bce5c08f0-800.webp
 public/vocab-img/d8cabfe8f7c39d7b4e9e-400.avif
 public/vocab-img/d8cabfe8f7c39d7b4e9e-400.webp
 public/vocab-img/d8cabfe8f7c39d7b4e9e-800.avif

@@ -236,10 +236,10 @@ const CHAPTER = {
   // ---------- Vocabulary (~100 items) ----------
   vocab: [
     // ===== Comparison core =====
-    { de: 'wie', pos: 'conjunction', en: 'as, like (for equality: so ... wie)', hi: 'जैसा', ex: 'Ich bin so gro\u00df wie du.', exEn: 'I am as tall as you.' },
+    { de: 'wie', pos: 'conjunction', en: 'as, like (for equality: so ... wie)', hi: 'जैसा', ex: 'Ich bin so gro\u00df wie du.', exEn: 'I am as tall as you.', vis: { kind: 'grammar', de: 'Ich bin so groß wie du.', hl: 'so groß wie', role: 'focus', cap: 'so … wie = as … as (equal)' } },
     { de: 'so ein', pos: 'phrase', en: 'such a', hi: 'ऐसा', ex: 'So ein Film ist genauso gut wie ein Buch.', exEn: 'Such a film is just as good as a book.', vis: { kind: 'grammar', de: 'So ein Film ist genauso gut wie ein Buch.', hl: 'So ein', role: 'focus', cap: 'so ein = such a' } },
     { de: 'manche', pos: 'pronoun', en: 'some, several', hi: 'कुछ', ex: 'Manche Filme sind besser als das Buch.', exEn: 'Some films are better than the book.' },
-    { de: 'eben', pos: 'adverb', en: 'just, simply', hi: 'बस', ex: 'Das ist eben so.', exEn: 'That\u2019s just how it is.' },
+    { de: 'eben', pos: 'adverb', en: 'just, simply', hi: 'बस', ex: 'Das ist eben so.', exEn: 'That\u2019s just how it is.', vis: { kind: 'grammar', de: 'Das ist eben so.', hl: 'eben', role: 'focus', cap: 'eben = just, simply' } },
     { de: 'einfach', pos: 'adverb', en: 'simply', hi: 'बस, आसानी से', ex: 'Sag es einfach so wie immer.', exEn: 'Just say it as always.', vis: { kind: 'grammar', de: 'Sag es einfach so wie immer.', hl: 'einfach', role: 'focus', cap: 'einfach = simply' } },
     { de: 'n\u00e4mlich', pos: 'adverb', en: 'you see, namely', hi: 'दरअसल', ex: 'Der Trailer ist n\u00e4mlich besser als der Film.', exEn: 'The trailer, you see, is better than the film.', vis: { kind: 'grammar', de: 'Ich komme heute nicht, ich bin nämlich krank.', hl: 'nämlich', role: 'adverb', cap: 'nämlich adds the reason after a statement' } },
     { de: 'meinen', pos: 'verb', en: 'to think, to mean', hi: 'सोचना, मतलब होना', ex: 'Ich meine, der Titel ist so wichtig wie die Handlung.', exEn: 'I think the title is as important as the plot.', conj: { praesens: 'meint', praeteritum: 'meinte', perfekt: 'hat gemeint' } },

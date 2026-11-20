@@ -7799,6 +7799,615 @@
   "role": "focus",
   "cap": "ursprünglich = originally"
  },
+ "ein-vergleich-zeigt-dass--comparison-shows-that": {
+  "type": "grammar",
+  "de": "Ein Vergleich zeigt, dass die beiden Modelle deutlich abweichen.",
+  "hl": "Ein Vergleich zeigt, dass",
+  "role": "focus",
+  "cap": "ein Vergleich zeigt, dass = a comparison shows that"
+ },
+ "abschliessend--in-conclusion": {
+  "type": "grammar",
+  "de": "Abschließend soll gesagt werden, dass alles gut lief.",
+  "hl": "Abschließend",
+  "role": "focus",
+  "cap": "abschließend = in conclusion"
+ },
+ "abschliessend--in-conclusion-finally": {
+  "type": "grammar",
+  "de": "Abschließend lässt sich sagen, dass KI den Unterricht sinnvoll ergänzen kann.",
+  "hl": "Abschließend",
+  "role": "focus",
+  "cap": "abschließend = in conclusion, finally"
+ },
+ "allerdings--however-admittedly": {
+  "type": "grammar",
+  "de": "Allerdings gibt es Ausnahmen.",
+  "hl": "Allerdings",
+  "role": "focus",
+  "cap": "allerdings = however, admittedly"
+ },
+ "ausgerechnet--of-all-things": {
+  "type": "grammar",
+  "de": "Ausgerechnet heute regnete es.",
+  "hl": "Ausgerechnet",
+  "role": "focus",
+  "cap": "ausgerechnet = of all things"
+ },
+ "ausserdem--besides-moreover": {
+  "type": "grammar",
+  "de": "Außerdem bringe ich Musik mit, wenn wir feiern.",
+  "hl": "Außerdem",
+  "role": "focus",
+  "cap": "außerdem = besides, moreover"
+ },
+ "dabei--thereby-in-doing-so": {
+  "type": "grammar",
+  "de": "Sie las die Anzeige, dabei lächelte sie.",
+  "hl": "dabei",
+  "role": "focus",
+  "cap": "dabei = thereby, in doing so"
+ },
+ "dafuer--for-that-for-it": {
+  "type": "grammar",
+  "de": "Ich weiß nicht, ob ich dafür Zeit habe.",
+  "hl": "dafür",
+  "role": "focus",
+  "cap": "dafür = for that, for it"
+ },
+ "dafuer--instead-in-return-to-make-up-for-it": {
+  "type": "grammar",
+  "de": "Oma kann nicht mehr putzen, dafür kocht sie für alle.",
+  "hl": "dafür",
+  "role": "focus",
+  "cap": "dafür = instead, in return, to make up for it"
+ },
+ "dagegen--against-on-the-other-hand": {
+  "type": "grammar",
+  "de": "Mein Bruder mag Kaffee, ich dagegen trinke lieber Tee.",
+  "hl": "dagegen",
+  "role": "focus",
+  "cap": "dagegen = on the other hand (contrast)"
+ },
+ "daraufhin--thereupon-as-a-result": {
+  "type": "grammar",
+  "de": "Sie protestierten, daraufhin änderte sich die Regel.",
+  "hl": "daraufhin",
+  "role": "focus",
+  "cap": "daraufhin = thereupon, as a result"
+ },
+ "deshalb--therefore": {
+  "type": "grammar",
+  "de": "Es ist kalt. Deshalb trage ich eine warme Jacke.",
+  "hl": "Deshalb",
+  "role": "focus",
+  "cap": "deshalb = therefore"
+ },
+ "doch--but-yet-on-the-contrary": {
+  "type": "grammar",
+  "de": "Es ist spät, doch ich lerne weiter.",
+  "hl": "doch",
+  "role": "focus",
+  "cap": "doch = but, yet, on the contrary"
+ },
+ "eben--just-simply": {
+  "type": "grammar",
+  "de": "Das ist eben so.",
+  "hl": "eben",
+  "role": "focus",
+  "cap": "eben = just, simply"
+ },
+ "eigentlich--actually": {
+  "type": "grammar",
+  "de": "Eigentlich habe ich keine Zeit.",
+  "hl": "Eigentlich",
+  "role": "focus",
+  "cap": "eigentlich = actually"
+ },
+ "gleichermassen--equally-in-equal-measure": {
+  "type": "grammar",
+  "de": "Die Regel gilt für Kinder und Erwachsene gleichermaßen.",
+  "hl": "gleichermaßen",
+  "role": "focus",
+  "cap": "gleichermaßen = equally, in the same way"
+ },
+ "gleichfalls--likewise-you-too": {
+  "type": "grammar",
+  "de": "„Schönes Wochenende!“ – „Danke, gleichfalls!“",
+  "hl": "gleichfalls",
+  "role": "focus",
+  "cap": "gleichfalls = likewise, you too (reply to a wish)"
+ },
+ "hoechstens--at-the-most": {
+  "type": "grammar",
+  "de": "Die Fahrtzeit beträgt höchstens drei Stunden.",
+  "hl": "höchstens",
+  "role": "focus",
+  "cap": "höchstens = at the most"
+ },
+ "insbesondere--especially": {
+  "type": "grammar",
+  "de": "Ich interessiere mich insbesondere für Rock.",
+  "hl": "insbesondere",
+  "role": "focus",
+  "cap": "insbesondere = especially"
+ },
+ "insbesondere--in-particular-especially": {
+  "type": "grammar",
+  "de": "Insbesondere sollte man Fördermaßnahmen ausbauen.",
+  "hl": "Insbesondere",
+  "role": "focus",
+  "cap": "insbesondere = in particular, especially"
+ },
+ "jedoch--however-though": {
+  "type": "grammar",
+  "de": "Jedoch musste er zunächst eine Arbeitserlaubnis beantragen.",
+  "hl": "Jedoch",
+  "role": "focus",
+  "cap": "jedoch = however, though"
+ },
+ "jeweils--each-respectively": {
+  "type": "grammar",
+  "de": "Wir bekommen jeweils eine Karte.",
+  "hl": "jeweils",
+  "role": "focus",
+  "cap": "jeweils = each, respectively"
+ },
+ "meinetwegen--as-far-as-i-m-concerned-fine-by-me": {
+  "type": "grammar",
+  "de": "Meinetwegen können wir auch erst morgen anfangen.",
+  "hl": "Meinetwegen",
+  "role": "focus",
+  "cap": "meinetwegen = as far as I'm concerned, fine by me"
+ },
+ "mindestens--at-least": {
+  "type": "grammar",
+  "de": "Mindestens fünfzehn Leute kommen.",
+  "hl": "Mindestens",
+  "role": "focus",
+  "cap": "mindestens = at least"
+ },
+ "nichtsdestotrotz--nevertheless-nonetheless": {
+  "type": "grammar",
+  "de": "Nichtsdestotrotz setzte das Team das Projekt fort.",
+  "hl": "Nichtsdestotrotz",
+  "role": "focus",
+  "cap": "nichtsdestotrotz = nevertheless, nonetheless"
+ },
+ "nur--only": {
+  "type": "grammar",
+  "de": "Ich habe nur eine Stunde.",
+  "hl": "nur",
+  "role": "focus",
+  "cap": "nur = only"
+ },
+ "scheinbar--apparent-apparently": {
+  "type": "grammar",
+  "de": "Die Aufgabe ist nur scheinbar einfach.",
+  "hl": "scheinbar",
+  "role": "focus",
+  "cap": "scheinbar = seemingly (it looks so, but is not)"
+ },
+ "schliesslich--finally-eventually": {
+  "type": "grammar",
+  "de": "Schließlich fand sie ihren Traumjob.",
+  "hl": "Schließlich",
+  "role": "focus",
+  "cap": "schließlich = finally, eventually"
+ },
+ "sogar--even": {
+  "type": "grammar",
+  "de": "Sie arbeitet sogar am Sonntag.",
+  "hl": "sogar",
+  "role": "focus",
+  "cap": "sogar = even (more than expected)"
+ },
+ "somit--thus-therefore": {
+  "type": "grammar",
+  "de": "Alle Unterlagen sind vollständig; somit können wir den Antrag einreichen.",
+  "hl": "somit",
+  "role": "focus",
+  "cap": "somit = thus, therefore (a conclusion follows)"
+ },
+ "sonst--otherwise-anything-else": {
+  "type": "grammar",
+  "de": "Sonst noch etwas?",
+  "hl": "Sonst",
+  "role": "focus",
+  "cap": "sonst = otherwise, anything else"
+ },
+ "sozusagen--so-to-speak": {
+  "type": "grammar",
+  "de": "Er ist sozusagen der Chef.",
+  "hl": "sozusagen",
+  "role": "focus",
+  "cap": "sozusagen = so to speak"
+ },
+ "stattdessen--instead": {
+  "type": "grammar",
+  "de": "Ich hatte keine Zeit zu kochen. Stattdessen habe ich Pizza bestellt.",
+  "hl": "Stattdessen",
+  "role": "focus",
+  "cap": "stattdessen = instead (of that)"
+ },
+ "trotzdem--nevertheless": {
+  "type": "grammar",
+  "de": "Die Temperatur ist niedrig. Trotzdem gehen wir wandern.",
+  "hl": "Trotzdem",
+  "role": "focus",
+  "cap": "trotzdem = nevertheless"
+ },
+ "trotzdem--nevertheless-still": {
+  "type": "grammar",
+  "de": "Es regnete stark. Trotzdem fand das Konzert statt.",
+  "hl": "Trotzdem",
+  "role": "focus",
+  "cap": "trotzdem = nevertheless (it happens despite the problem)"
+ },
+ "vielmehr--rather-instead": {
+  "type": "grammar",
+  "de": "Es geht nicht um den Preis, sondern vielmehr um die Qualität.",
+  "hl": "vielmehr",
+  "role": "focus",
+  "cap": "vielmehr = rather (corrects what came before)"
+ },
+ "wenigstens--at-least": {
+  "type": "grammar",
+  "de": "Das Hotel war teuer, aber wenigstens war das Frühstück gut.",
+  "hl": "wenigstens",
+  "role": "focus",
+  "cap": "wenigstens = at least (one good point)"
+ },
+ "zudem--in-addition": {
+  "type": "grammar",
+  "de": "Zudem ist die Gebühr gering.",
+  "hl": "Zudem",
+  "role": "focus",
+  "cap": "zudem = in addition"
+ },
+ "zunaechst--initially": {
+  "type": "grammar",
+  "de": "Zunächst muss der Ausweis gezeigt werden.",
+  "hl": "Zunächst",
+  "role": "focus",
+  "cap": "zunächst = initially"
+ },
+ "allerdings--however-though": {
+  "type": "grammar",
+  "de": "Die Zahlen sind positiv. Allerdings bleibt die Unsicherheit hoch.",
+  "hl": "Allerdings",
+  "role": "focus",
+  "cap": "allerdings = however, though"
+ },
+ "ausserdem--furthermore-besides": {
+  "type": "grammar",
+  "de": "Die Methode ist effizient. Außerdem lässt sie sich leicht auf andere Fälle übertragen.",
+  "hl": "Außerdem",
+  "role": "focus",
+  "cap": "außerdem = furthermore, besides"
+ },
+ "beispielsweise--for-example": {
+  "type": "grammar",
+  "de": "Beispielsweise zeigt die Fallstudie aus Deutschland ähnliche Muster.",
+  "hl": "Beispielsweise",
+  "role": "focus",
+  "cap": "beispielsweise = for example"
+ },
+ "daher--therefore-hence": {
+  "type": "grammar",
+  "de": "Die Ergebnisse sind eindeutig; daher erübrigt sich eine weitere Diskussion.",
+  "hl": "daher",
+  "role": "focus",
+  "cap": "daher = therefore, hence"
+ },
+ "demgegenueber--in-contrast-by-contrast": {
+  "type": "grammar",
+  "de": "Demgegenüber zeigt die zweite Studie ein völlig anderes Bild.",
+  "hl": "Demgegenüber",
+  "role": "focus",
+  "cap": "demgegenüber = in contrast, by contrast"
+ },
+ "deshalb--therefore-that-s-why": {
+  "type": "grammar",
+  "de": "Die Frist wurde verpasst; deshalb wurde der Antrag abgelehnt.",
+  "hl": "deshalb",
+  "role": "focus",
+  "cap": "deshalb = therefore, that's why"
+ },
+ "gleichwohl--nonetheless-all-the-same": {
+  "type": "grammar",
+  "de": "Die Beweislage ist dünn; gleichwohl überzeugt die Argumentation.",
+  "hl": "gleichwohl",
+  "role": "focus",
+  "cap": "gleichwohl = nonetheless, all the same"
+ },
+ "hingegen--on-the-other-hand-whereas": {
+  "type": "grammar",
+  "de": "Die erste Methode ist zeitaufwendig; die zweite hingegen liefert schnellere Ergebnisse.",
+  "hl": "hingegen",
+  "role": "focus",
+  "cap": "hingegen = on the other hand, whereas"
+ },
+ "indes--however-meanwhile": {
+  "type": "grammar",
+  "de": "Die Regierung feierte den Erfolg. Kritiker äußerten indes erhebliche Bedenken.",
+  "hl": "indes",
+  "role": "focus",
+  "cap": "indes = however, meanwhile"
+ },
+ "infolgedessen--as-a-result-consequently": {
+  "type": "grammar",
+  "de": "Der Vertrag wurde gebrochen; infolgedessen wurde eine Klage eingereicht.",
+  "hl": "infolgedessen",
+  "role": "focus",
+  "cap": "infolgedessen = as a result, consequently"
+ },
+ "somit--thus-consequently": {
+  "type": "grammar",
+  "de": "Alle Daten wurden überprüft; somit ist das Ergebnis belastbar.",
+  "hl": "somit",
+  "role": "focus",
+  "cap": "somit = thus, consequently"
+ },
+ "dennoch--nevertheless": {
+  "type": "grammar",
+  "de": "Die Kritik war scharf; dennoch hielt der Autor an seiner These fest.",
+  "hl": "dennoch",
+  "role": "focus",
+  "cap": "dennoch = nevertheless"
+ },
+ "folglich--consequently": {
+  "type": "grammar",
+  "de": "Die Prämissen sind korrekt; folglich muss die Schlussfolgerung ebenfalls zutreffen.",
+  "hl": "folglich",
+  "role": "focus",
+  "cap": "folglich = consequently"
+ },
+ "gleichzeitig--simultaneously-at-the-same-time": {
+  "type": "grammar",
+  "de": "Sie telefoniert und kocht gleichzeitig.",
+  "hl": "gleichzeitig",
+  "role": "focus",
+  "cap": "gleichzeitig = simultaneously / at the same time"
+ },
+ "aber--but": {
+  "type": "grammar",
+  "de": "Ich habe Zeit, aber kein Geld.",
+  "hl": "aber",
+  "role": "focus",
+  "cap": "aber = but"
+ },
+ "allerdings--though-however": {
+  "type": "grammar",
+  "de": "Allerdings müssen wir genug Kapital haben.",
+  "hl": "Allerdings",
+  "role": "focus",
+  "cap": "allerdings = though, however"
+ },
+ "also--so-therefore": {
+  "type": "grammar",
+  "de": "Es regnet, also bleibe ich hier.",
+  "hl": "also",
+  "role": "focus",
+  "cap": "also = so, therefore"
+ },
+ "denn--because": {
+  "type": "grammar",
+  "de": "Ich gehe, denn ich habe Zeit.",
+  "hl": "denn",
+  "role": "focus",
+  "cap": "denn = because (normal order)"
+ },
+ "falls--in-case": {
+  "type": "grammar",
+  "de": "Sie nahm einen Regenschirm mit, falls es regnen sollte.",
+  "hl": "falls",
+  "role": "focus",
+  "cap": "falls = in case"
+ },
+ "jedoch--however": {
+  "type": "grammar",
+  "de": "Jedoch brauchst du auch ein überzeugendes Dokument.",
+  "hl": "Jedoch",
+  "role": "focus",
+  "cap": "jedoch = however"
+ },
+ "nachdem--after": {
+  "type": "grammar",
+  "de": "Nachdem wir uns kennengelernt hatten, wurden wir Freunde.",
+  "hl": "Nachdem",
+  "role": "focus",
+  "cap": "nachdem = after"
+ },
+ "oder--or": {
+  "type": "grammar",
+  "de": "Tee oder Kaffee? — Keinen Kaffee, danke.",
+  "hl": "oder",
+  "role": "focus",
+  "cap": "oder = or"
+ },
+ "waehrend--while": {
+  "type": "grammar",
+  "de": "Während wir kochen, reden wir ruhig weiter.",
+  "hl": "Während",
+  "role": "focus",
+  "cap": "während = while (simultaneous)"
+ },
+ "weil--because": {
+  "type": "grammar",
+  "de": "Ich lerne Deutsch, weil ich hier arbeiten möchte.",
+  "hl": "weil",
+  "role": "focus",
+  "cap": "weil = because (the verb goes to the end)"
+ },
+ "wie--as": {
+  "type": "grammar",
+  "de": "Der Kuchen war so gut wie im Restaurant.",
+  "hl": "so gut wie",
+  "role": "focus",
+  "cap": "so … wie = as … as (equal)"
+ },
+ "wie--as-like": {
+  "type": "grammar",
+  "de": "Ich bin so groß wie du.",
+  "hl": "so groß wie",
+  "role": "focus",
+  "cap": "so … wie = as … as (equal)"
+ },
+ "wohingegen--whereas": {
+  "type": "grammar",
+  "de": "Die urbanen Gebiete verzeichneten Wachstum, wohingegen ländliche Regionen stagnierten.",
+  "hl": "wohingegen",
+  "role": "focus",
+  "cap": "wohingegen = whereas"
+ },
+ "da--since-as": {
+  "type": "grammar",
+  "de": "Da die Datenlage unzureichend ist, sind weitere Studien nötig.",
+  "hl": "Da",
+  "role": "focus",
+  "cap": "da = since, as"
+ },
+ "vor-diesem-hintergrund--against-this-background": {
+  "type": "grammar",
+  "de": "Vor diesem Hintergrund erscheint die Entscheidung nachvollziehbar.",
+  "hl": "Vor diesem Hintergrund",
+  "role": "focus",
+  "cap": "vor diesem Hintergrund = against this background"
+ },
+ "meines-erachtens--in-my-view-in-my-opinion": {
+  "type": "grammar",
+  "de": "Meines Erachtens sollte künstliche Intelligenz den Unterricht verändern.",
+  "hl": "Meines Erachtens",
+  "role": "focus",
+  "cap": "meines Erachtens = in my view, in my opinion"
+ },
+ "einerseits-andererseits--on-the-one-hand-on-the-other-hand": {
+  "type": "grammar",
+  "de": "Einerseits bietet die Technologie Chancen, andererseits bestehen Risiken.",
+  "hl": "Einerseits bietet die Technologie Chancen, andererseits",
+  "role": "focus",
+  "cap": "einerseits …, andererseits … = on the one hand ... on the other hand"
+ },
+ "je-desto--the": {
+  "type": "grammar",
+  "de": "Je mehr du übst, desto sicherer wirst du.",
+  "hl": "Je mehr du übst, desto sicherer",
+  "role": "focus",
+  "cap": "je + comparative …, desto + comparative = the ... the (proportional comparison)"
+ },
+ "denn--then": {
+  "type": "grammar",
+  "de": "Was machst du denn?",
+  "hl": "denn",
+  "role": "focus",
+  "cap": "denn = then (in questions)"
+ },
+ "doch--indeed-after-all": {
+  "type": "grammar",
+  "de": "Komm doch mit!",
+  "hl": "doch",
+  "role": "focus",
+  "cap": "doch = indeed, after all"
+ },
+ "oder--right": {
+  "type": "grammar",
+  "de": "Das Wetter ist schön, oder?",
+  "hl": "oder",
+  "role": "focus",
+  "cap": "oder = right? (tag)"
+ },
+ "bei-genauer-betrachtung--on-closer-inspection": {
+  "type": "grammar",
+  "de": "Bei genauer Betrachtung erweist sich die Annahme als unhaltbar.",
+  "hl": "Bei genauer Betrachtung",
+  "role": "focus",
+  "cap": "bei genauer Betrachtung = on closer inspection"
+ },
+ "bei-naeherem-hinsehen--looking-more-closely": {
+  "type": "grammar",
+  "de": "Bei näherem Hinsehen fallen mehrere methodische Schwächen auf.",
+  "hl": "Bei näherem Hinsehen",
+  "role": "focus",
+  "cap": "bei näherem Hinsehen = looking more closely"
+ },
+ "aufgrund--because-of-due-to": {
+  "type": "grammar",
+  "de": "Aufgrund des schlechten Wetters fiel die Veranstaltung aus.",
+  "hl": "Aufgrund",
+  "role": "focus",
+  "cap": "aufgrund = because of, due to"
+ },
+ "dank--thanks-to": {
+  "type": "grammar",
+  "de": "Dank der Unterstützung konnten wir das Projekt abschließen.",
+  "hl": "Dank",
+  "role": "focus",
+  "cap": "dank + Genitiv/Dativ = thanks to"
+ },
+ "entgegen--against-contrary-to": {
+  "type": "grammar",
+  "de": "Entgegen meiner Erwartung war er pünktlich.",
+  "hl": "Entgegen",
+  "role": "focus",
+  "cap": "entgegen = against, contrary to (+ Dativ)"
+ },
+ "inklusive--including": {
+  "type": "grammar",
+  "de": "Der Preis ist inklusive Frühstück.",
+  "hl": "inklusive",
+  "role": "focus",
+  "cap": "inklusive = including"
+ },
+ "mittels--by-means-of": {
+  "type": "grammar",
+  "de": "Mittels einer neuen Methode konnte das Problem gelöst werden.",
+  "hl": "Mittels",
+  "role": "focus",
+  "cap": "mittels = by means of"
+ },
+ "ungeachtet--regardless-of": {
+  "type": "grammar",
+  "de": "Ungeachtet der Kritik setzte das Team die Arbeit fort.",
+  "hl": "Ungeachtet",
+  "role": "focus",
+  "cap": "ungeachtet = regardless of"
+ },
+ "mittels--by-means-of-using": {
+  "type": "grammar",
+  "de": "Mittels eines speziellen Verfahrens wurde die Probe analysiert.",
+  "hl": "Mittels",
+  "role": "focus",
+  "cap": "mittels = by means of, using"
+ },
+ "ungeachtet--regardless-of-irrespective-of": {
+  "type": "grammar",
+  "de": "Ungeachtet der Kritik hält die Regierung an ihrem Kurs fest.",
+  "hl": "Ungeachtet",
+  "role": "focus",
+  "cap": "ungeachtet = regardless of, irrespective of"
+ },
+ "zugunsten--in-favor-of": {
+  "type": "grammar",
+  "de": "Das Gericht entschied zugunsten der Klägerin.",
+  "hl": "zugunsten",
+  "role": "focus",
+  "cap": "zugunsten = in favor of"
+ },
+ "zulasten--at-the-expense-of": {
+  "type": "grammar",
+  "de": "Die Kürzungen gehen zulasten der ärmsten Haushalte.",
+  "hl": "zulasten",
+  "role": "focus",
+  "cap": "zulasten = at the expense of"
+ },
+ "zwecks--for-the-purpose-of": {
+  "type": "grammar",
+  "de": "Zwecks Identifikation ist ein amtlicher Ausweis vorzulegen.",
+  "hl": "Zwecks",
+  "role": "focus",
+  "cap": "zwecks = for the purpose of"
+ },
  "d-h--i-e-meaning": {
   "key": "d-h--i-e-meaning",
   "type": "scene",

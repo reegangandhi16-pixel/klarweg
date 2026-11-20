@@ -169,3 +169,8 @@ service = "klarweg-exam"
 #   LIVE_ADMIN_EMAILS         (comma-separated admin account emails for /live-admin/*)
 #   CONSULT_JOIN_LINKS        (JSON teacher id → Meet link, shown only for confirmed bookings)
 #   SPEECH_ALLOWLIST          (only for SPEECH_MODE = "allowlist": comma-separated user ids)
+
+# Payment reconcile (index.js scheduled → consultations/enrolments reconcile).
+# Set on the live Worker 2026-11-20 via the schedules API (no route change).
+[triggers]
+crons = ["*/15 * * * *"]

@@ -33,6 +33,31 @@ Not touched: entitlements, orders, progress, saved words, `google_sub`, phone, n
 - The existing CSRF guard covers all three routes: a foreign `Origin` gets 403.
 - Existing passwords are never emailed (they are not recoverable: PBKDF2).
 
+## Verified dashboard state (2026-11-20)
+
+Read-only inspection of the owner's connected Cloudflare DNS and Resend tabs:
+- Cloudflare `klarweg.in`: **12/200 records**, exclusively website A/AAAA,
+  `www` CNAME and service verification TXT records. **None** of the required
+  Resend DKIM/return-path/sending DNS records are present. Do not alter the
+  existing 12 records.
+- Resend already has `send.klarweg.in`, status **not started**, sending
+  **Pending**. The selected DNS provider shown in Resend is Amazon Route 53,
+  while authoritative DNS management for the website is in **Cloudflare**.
+- Resend lists required verification/sending records at:
+  - `resend._domainkey.send` — TXT, public DKIM key: copy **entire** value
+    from Resend (dashboard display may truncate it).
+  - `rsend.send` — CNAME to `rsend-apne1.forge.rmta.net`.
+  - `send.send` — CNAME to `send.forge.rmta.net`.
+  - DMARC `_dmarc` recommended (verify intended domain scope before
+    adding; don't overwrite existing authentication policies).
+  Sending is enabled; inbound receiving is **disabled** and is **not
+  required** for password reset. Do not add the optional receiving MX.
+- `RESEND_API_KEY` presence in the live Worker was **not inspected**.
+  Inspect only whether a secret with that name exists; never reveal its value.
+- The browser connection in this chat is read-only; the DNS records and
+  Resend verification **have not been changed**. Finish this with an
+  authorized browser action or provider API before claiming live readiness.
+
 ## OWNER: Workers Free + Resend Free setup
 
 **Keep Cloudflare Workers Free. Do not onboard Cloudflare Email Sending or

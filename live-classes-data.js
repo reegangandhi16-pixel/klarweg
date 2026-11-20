@@ -112,6 +112,49 @@
       legalTermsUpdated: true     // legal copy only: owner reviewed and merged the Terms / Privacy wording, PR #183 (merge 237f3486), 2026-10-21
     },
 
+    /* ---------- teacher marketplace (owner brief, 2026-11-20) ----------
+       The page live-classes.html is a teacher marketplace: choose a
+       teacher, book a ₹100 demo (Friday/Sunday, after 4 PM IST), and buy a
+       teacher × level × format course. Prices come from
+       live-marketplace-pricing.js; the access Worker
+       (access/worker/src/live-catalog.js) holds its own copy and is the
+       only authority for any amount (a test keeps the two identical).
+
+       verified: the teacher × level × format courses that may be shown as
+         purchasable and booked. MUST equal COURSE_ELIGIBILITY in
+         live-catalog.js (scripts/live-marketplace.test.mjs). Add a teacher
+         here only after docs/live-classes-teacher-intake.md is complete:
+         full profile, written consent, verified levels. Everyone else is
+         shown by name as "profile in verification", without prices that
+         could be bought, and with no demo.
+       showCredentials: experience/certificates on cards. false per the
+         owner decision of 2026-11-17 (PR #344: hide credentials until the
+         owner re-confirms them). Set true only after re-confirmation.
+       photos: a teacher's `photo` is shown only with `photoConsent` set;
+         otherwise the card shows the teacher's initials. */
+    marketplace: {
+      verified: {
+        'reegan-gandhi': { levels: ['A1', 'A2', 'B1', 'B2'], formats: ['group', 'individual'], demo: true }
+      },
+      showUnverifiedTeachers: true,
+      showCredentials: false,
+      /* Shown on every course until the owner provides batch dates; the
+         Worker's live_batches table (admin page) replaces them per batch. */
+      scheduleTBA: 'To be announced',
+      demo: {
+        durationMinutes: 20,
+        platform: 'Google Meet',
+        what: 'A 20-minute live session with the teacher: a short level check, a sample of how they teach, and a recommendation for your course and format.',
+        rescheduleRule: 'You can move a confirmed demo once, free of charge, up to 12 hours before it starts.',
+        refundRule: 'If the teacher has to cancel, you choose a full refund or a new time.'
+      },
+      /* Owner switches for the page. The Worker's DEMO_BOOKING and
+         ENROL_PAYMENTS decide whether money can actually be taken; with
+         these false the page never calls the payment routes. */
+      demoBookingEnabled: false,
+      courseCheckoutEnabled: false
+    },
+
     /* ---------- live-class policies ----------
        Approved by the owner on 2026-10-20 (D5). Shown in the page FAQ;
        each text is also the FAQ's no-JavaScript fallback in

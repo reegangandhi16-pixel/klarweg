@@ -96,6 +96,21 @@ The fee for the A1 course with each teacher, shown on that teacher's row of the 
 - **Until the switches are on, the page says so.** `onlineBooking.enabled`, `liveEnrolment.enabled`, `ENROL_PAYMENTS` and `CONSULT_BOOKING` stay off and `ENROL_COURSES` stays empty. The page shows "Online demo booking is not open yet" instead of a booking button; the free waitlist stays; A1 stays a waitlist with no start date.
 - Terms §4A and Privacy §2, §4, §4A, §8, §9 are rewritten for online-only payment (pending the owner's review of that wording). The validator refuses consultation steps or course `paymentTerms` that describe email, UPI or bank-transfer payment.
 
+
+### D12 · Teacher marketplace prices and coupons (owner brief, 2026-11-20)
+
+Recorded from the owner's written brief "Completely Redesign Klarweg Live Classes Into a Premium Teacher Booking & Course Platform" (2026-11-20). It **supersedes D3's ₹7,999 fee, D9 and D10's ₹7,999 line** for the marketplace courses (`live-<teacher>-<level>-<format>`, A1–B2). Draft PR, not live until the owner merges and switches it on.
+
+| Teachers | Group (original → with `GROUP3000`) | One-to-One (original → with `PERSONAL7000`) |
+|---|---|---|
+| `reegan-gandhi`, `geetika-dhawan` | ₹16,000 − ₹3,000 = **₹13,000** | ₹22,000 − ₹7,000 = **₹15,000** |
+| every other teacher | ₹21,000 − ₹3,000 = **₹18,000** | ₹27,000 − ₹7,000 = **₹20,000** |
+
+- Coupons are validated by the Worker (`live-catalog.js`); one per course; a coupon is never combined with the ₹100 demo adjustment.
+- The ₹100 demo: Friday and Sunday only, after 4 PM IST, booked and paid online (D11 unchanged).
+- Start and end dates are "To be announced" until the owner configures an approved batch in the admin page; no course payment before that.
+- Only teachers whose profile, levels and consent are verified sell courses or demos. On 2026-11-20 that is `reegan-gandhi` only.
+
 ---
 
 ## B. Still pending

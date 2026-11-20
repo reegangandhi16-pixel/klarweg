@@ -184,27 +184,20 @@ test('REVIEWS: the validator refuses an unsubstantiated or malformed published r
 });
 
 /* ================= online booking switch ================= */
-test('BOOKING: online booking is off — the page loads no booking script, says booking is not open yet, and never books by email', () => {
+test('BOOKING: online booking is off — no payment script runs while the page switches are off, and nothing is ever booked by email', () => {
   const D = loadData();
-  const ob = D.consultation.onlineBooking;
-  assert.equal(ob.enabled, false);
-  assert.equal(ob.legalTermsUpdated, true, 'the owner reviewed and merged the online-booking wording (PR #183)');
-  assert.equal(ob.ownerApproval, null, 'no LAUNCH approval: reviewing legal wording is not approval to take bookings');
-  assert.match(read('live-classes-data.js'), /onlineBooking: \{\s*enabled: false,\s*ownerApproval: null, +\/\/ LAUNCH approval only[^\n]*\n\s*legalTermsUpdated: true, +\/\/ legal copy only: [^\n]*PR #183 \(merge 237f3486\), 2026-10-21/);
-  assert.equal(ob.joinLinksConfigured, false, 'no joining link is configured');
+  assert.equal(D.marketplace.demoBookingEnabled, false);
+  assert.equal(D.marketplace.courseCheckoutEnabled, false);
+  assert.equal(D.consultation.onlineBooking.enabled, false);
+  assert.equal(D.consultation.onlineBooking.joinLinksConfigured, false, 'no joining link is configured in page data');
   const html = read('live-classes.html');
-  assert.equal(/<script\b[^>]*\bsrc=["'][^"']*(?:kw-consult\.js|kw-checkout\.js|sdk\.cashfree\.com)/i.test(html), false, 'not referenced by the page itself');
-  assert.match(read('kw-live.js'), /if \(!BOOK_ON\) return;/);
-  assert.match(html, /<div class="book-closed" id="consult-closed" role="note">\s*<h3>Online demo booking is not open yet<\/h3>/, 'an honest closed state, not a booking button');
-  assert.match(html, /consultations are not booked by email/);
-  assert.deepEqual([...D.consultation.steps], [
-    'You sign in, then choose a teacher and a time on this page.',
-    'You pay the {fee} fee online through Cashfree. The booking is confirmed only once the payment is verified.',
-    'Your joining link appears on this page once your booking is confirmed.',
-    'You meet the teacher, who assesses your level and recommends a course.'
-  ]);
+  assert.equal(/<script\b[^>]*\bsrc=["'][^"']*(?:sdk\.cashfree\.com|kw-checkout\.js)/i.test(html), false, 'the Cashfree SDK is loaded only on demand, after the Worker opened an order');
+  const js = read('kw-marketplace.js');
+  assert.match(js, /demoBookingEnabled/, 'the demo stepper is gated by the page switch');
+  assert.match(js, /courseCheckoutEnabled/, 'course checkout is gated by the page switch');
+  assert.match(js, /opens soon/i, 'an honest closed state, not a booking button');
+  assert.equal(/\bUPI\b|bank transfer|book(?:ing)? by email/i.test(html + js), false, 'never booked or paid by email or manual transfer');
   assert.equal(D.consultation.steps.some((x) => /\bemail|\bUPI\b|bank transfer/i.test(x)), false, 'no email or manual UPI step');
-  // the validator keeps it that way
   const old = clone(D); old.consultation.steps[1] = 'We reply by email with a confirmed time slot and UPI details to pay the {fee} fee.';
   assert.ok(checkData(old).some((e) => /consultation\.steps: describe booking or paying by email or manual UPI/.test(e)));
 });

@@ -238,6 +238,8 @@ export function publicBooking(row, mode) {
     currency: row.currency,
     holdExpiresAt: row.status === "pending" ? row.hold_expires_at : null,
     kind: row.kind || "same-day",
+    contactName: row.kind === "demo" ? row.contact_name || null : undefined,
+    contactPhone: row.kind === "demo" ? row.contact_phone || null : undefined,
     rescheduleCount: Number(row.reschedule_count || 0),
     refundStatus: row.refund_status || null,
     testMode: mode === "sandbox"

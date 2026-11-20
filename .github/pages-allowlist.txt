@@ -110,6 +110,14 @@ kw-nav-auth.js
 kw-ai-chat.js
 kw-live.js
 live-classes-data.js
+# Live teacher marketplace (draft PR, 2026-11-20): page behaviour, styles,
+# display-only prices (the Worker decides every amount), My Account list,
+# and the admin page (noindex; every action is authorised by the Worker).
+kw-marketplace.js
+live-marketplace.css
+live-marketplace-pricing.js
+kw-account-live.js
+live-admin.html
 site.css
 site.js
 

@@ -15,7 +15,12 @@ on:
       - 'live-classes-data.js'
       - 'scripts/live-classes-*.mjs'
       - 'scripts/live-enrol.test.mjs'
-      - 'scripts/live-payments-demo.mjs'
+      - 'scripts/live-marketplace-demo.mjs'
+      - 'kw-marketplace.js'
+      - 'live-marketplace.css'
+      - 'live-marketplace-pricing.js'
+      - 'kw-account-live.js'
+      - 'live-admin.html'
       - 'scripts/predeploy-access-check.mjs'
       # the access Worker that takes the ₹100 booking and course payments
       - 'access/worker/src/**'
@@ -47,7 +52,12 @@ on:
       - 'live-classes-data.js'
       - 'scripts/live-classes-*.mjs'
       - 'scripts/live-enrol.test.mjs'
-      - 'scripts/live-payments-demo.mjs'
+      - 'scripts/live-marketplace-demo.mjs'
+      - 'kw-marketplace.js'
+      - 'live-marketplace.css'
+      - 'live-marketplace-pricing.js'
+      - 'kw-account-live.js'
+      - 'live-admin.html'
       - 'scripts/predeploy-access-check.mjs'
       # the access Worker that takes the ₹100 booking and course payments
       - 'access/worker/src/**'
@@ -95,12 +105,9 @@ jobs:
           CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)"
           echo "CHROME=$CHROME_BIN" >> "$GITHUB_ENV"
           "$CHROME_BIN" --version
-      - name: Browser checks (production default, host guard, preview, form, mobile)
+      - name: Marketplace worker tests (pricing, coupons, demo slots, double booking, checkout, admin)
+        run: node --test access/worker/test/live-marketplace.test.mjs
+      - name: Marketplace end to end (production default, demo + course payment, My Account, admin, mobile; real Worker, in-memory database, MOCK Cashfree, local only)
         env:
           CHROME_ARGS: --no-sandbox
-          LIVE_E2E_VERBOSE: '1'   # every check in the job log, so a failure can be diagnosed from CI alone
-        run: node scripts/live-classes-browser.mjs
-      - name: Payment flows end to end (real Worker, in-memory database, MOCK Cashfree, local only)
-        env:
-          CHROME_ARGS: --no-sandbox
-        run: node scripts/live-payments-demo.mjs --e2e
+        run: node scripts/live-marketplace-demo.mjs --e2e --out=marketplace-shots

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Live Classes Admin · Klarweg</title>
+<!--
+  Live marketplace administration. Every action is authorised by the
+  access Worker (/live-admin/*): an account listed in LIVE_ADMIN_EMAILS
+  with a fresh second factor. This page holds no secret and no data of
+  its own. It cannot verify teachers, change prices or mark anything paid
+  (see access/worker/src/live-admin.js).
+-->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<style>
+  :root { --g: #1F4E4A; --mint: #E8F1EC; --mint-ink: #1D5A45; --cream: #FAFAF7; --line: rgba(14,14,16,.1); --ink: #0E0E10; --ink2: #5A5A60; --err: #9B2C2C; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font: 15px/1.5 Inter, system-ui, sans-serif; }
+  header { padding: 24px 32px; border-bottom: 1px solid var(--line); background: #fff; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  header a { color: var(--g); font-weight: 600; }
+  h1 { font: 500 28px Fraunces, serif; margin: 0; }
+  h2 { font: 500 22px Fraunces, serif; margin: 0 0 16px; }
+  main { max-width: 1200px; margin: 0 auto; padding: 36px 32px 96px; display: grid; gap: 24px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 24px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font: 500 11px 'JetBrains Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ink2); }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; margin: 0 0 12px; }
+  label.f { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; }
+  input, select, textarea { font: 14px Inter, sans-serif; min-height: 40px; padding: 4px 12px; border: 1px solid rgba(14,14,16,.2); border-radius: 8px; background: #fff; }
+  textarea { min-height: 64px; width: 100%; }
+  button { font: 600 14px Inter, sans-serif; min-height: 40px; padding: 4px 16px; border-radius: 999px; border: 1px solid var(--g); background: var(--g); color: #fff; cursor: pointer; }
+  button.ghost { background: #fff; color: var(--g); }
+  button.small { min-height: 32px; padding: 2px 12px; font-size: 12px; }
+  .times { display: flex; gap: 8px; flex-wrap: wrap; }
+  .times label { display: inline-flex; gap: 4px; align-items: center; font-size: 13px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 8px; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; background: #F4F3EE; }
+  .pill.ok { background: var(--mint); color: var(--mint-ink); }
+  .pill.warn { background: #F1F4F8; color: #24324A; }
+  .pill.err { background: #FBEFEF; color: var(--err); }
+  .msg { padding: 12px 16px; border-radius: 12px; background: var(--mint); color: var(--mint-ink); margin: 0 0 12px; }
+  .msg.err { background: #FBEFEF; color: var(--err); }
+  .note { font-size: 13px; color: var(--ink2); margin: 0 0 16px; }
+  .slots-day { margin: 0 0 8px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } main, header { padding-left: 16px; padding-right: 16px; } }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Live classes · Admin</h1><span class="note" id="who"></span></div>
+  <a href="live-classes.html">View the public page</a>
+</header>
+<main id="app"><div class="card">Loading…</div></main>
+
+<script src="kw-config.js"></script>
+<script src="kw-auth.js"></script>
+<script>
+(function () {
+  'use strict';
+  var app = document.getElementById('app');
+  var data = null, flash = null;
+  var LEVELS = ['A1', 'A2', 'B1', 'B2'], FORMATS = { group: 'Group', individual: 'One-to-One' };
+  function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function inr(p) { return p == null ? '—' : '₹' + (p / 100).toLocaleString('en-IN'); }
+  function api(path, body) {
+    var base = String(window.KW_ACCESS_API || '').replace(/\/+$/, '');
+    var init = { method: body ? 'POST' : 'GET', credentials: 'include', headers: { Accept: 'application/json' } };
+    if (body) { init.headers['Content-Type'] = 'application/json'; init.body = JSON.stringify(body); }
+    return fetch(base + path, init).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j.__status = r.status; return j; }); });
+  }
+  function nameOf(id) { var t = (data.teachers || []).filter(function (x) { return x.id === id; })[0]; return t ? t.name : id; }
+
+  function gate(r) {
+    if (r.__status === 401) {
+      app.innerHTML = '<div class="card"><h2>Sign in</h2><p>Sign in with an administrator account.</p><p><a href="' + esc(KWAuth.accountUrl({ mode: 'login', next: location.pathname })) + '">Sign in</a></p></div>';
+      return true;
+    }
+    if (r.code === 'not-admin') { app.innerHTML = '<div class="card"><h2>Not authorised</h2><p>This account is not a live-classes administrator.</p></div>'; return true; }
+    if (r.code === 'mfa-required') {
+      app.innerHTML = '<div class="card"><h2>Two-factor confirmation</h2><p class="note">Enter the 6-digit code from your authenticator app. Set up two-factor authentication first if you have not (Account → security).</p>'
+        + '<form id="mfa" class="row"><label class="f">Code<input id="mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="8" required></label><button>Confirm</button></form><div id="mfa-msg"></div></div>';
+      document.getElementById('mfa').onsubmit = function (e) {
+        e.preventDefault();
+        api('/auth/mfa/verify', { code: document.getElementById('mfa-code').value.trim() }).then(function (v) {
+          if (v.ok) load(); else document.getElementById('mfa-msg').innerHTML = '<p class="msg err">' + esc(v.error || 'Code not accepted.') + '</p>';
+        });
+      };
+      return true;
+    }
+    if (!r.ok) { app.innerHTML = '<div class="card"><p class="msg err">' + esc(r.error || 'Could not load.') + '</p></div>'; return true; }
+    return false;
+  }
+
+  function load() {
+    api('/live-admin/overview').then(function (r) { if (gate(r)) return; data = r; render(); });
+  }
+  function act(path, body, okText) {
+    return api(path, body).then(function (r) {
+      flash = r.ok ? { ok: true, text: okText || 'Saved.' } : { ok: false, text: r.error || 'Not saved.' };
+      if (r.ok) load(); else render();
+    });
+  }
+
+  function render() {
+    document.getElementById('who').textContent = 'Signed in as ' + data.admin.email + ' · today ' + data.today + ' (IST)';
+    var eligible = data.teachers.filter(function (t) { return t.demoEligible; });
+    var verifiedCourses = [];
+    data.teachers.forEach(function (t) { t.verifiedCourses.forEach(function (c) { verifiedCourses.push(c); }); });
+    var h = flash ? '<p class="msg' + (flash.ok ? '' : ' err') + '" role="status">' + esc(flash.text) + '</p>' : '';
+    flash = null;
+
+    /* teachers */
+    h += '<section class="card"><h2>Teachers</h2><p class="note">Verification (profile, consent, levels) is a reviewed code change in live-catalog.js and live-classes-data.js, not a switch here. You can pause demos or course sales per teacher.</p><table><thead><tr><th>Teacher</th><th>Price tier</th><th>Verified courses</th><th>Demo</th><th>Pauses</th></tr></thead><tbody>'
+      + data.teachers.map(function (t) {
+        var s = data.settings.filter(function (x) { return x.teacher_id === t.id; })[0] || {};
+        return '<tr><td>' + esc(t.name) + '</td><td>' + (t.preferred ? 'Group ₹16,000 · 1:1 ₹22,000' : 'Group ₹21,000 · 1:1 ₹27,000') + '</td><td>' + (t.verifiedCourses.length ? t.verifiedCourses.length + ' (A1–B2)' : '<span class="pill">draft</span>') + '</td><td>' + (t.demoEligible ? '<span class="pill ok">eligible</span>' : '—') + '</td>'
+          + '<td>' + (t.verifiedCourses.length ? '<label><input type="checkbox" data-pause="demo" data-t="' + t.id + '"' + (s.demo_paused ? ' checked' : '') + '> demos paused</label><br><label><input type="checkbox" data-pause="courses" data-t="' + t.id + '"' + (s.courses_paused ? ' checked' : '') + '> courses paused</label>' : '—') + '</td></tr>';
+      }).join('') + '</tbody></table></section>';
+
+    /* coupons */
+    h += '<section class="card"><h2>Coupons</h2><p class="note">Codes and amounts are fixed in code. You can switch a code off.</p><table><thead><tr><th>Code</th><th>Applies to</th><th>Discount</th><th>Status</th><th></th></tr></thead><tbody>'
+      + data.coupons.map(function (c) { return '<tr><td><code>' + c.code + '</code></td><td>' + FORMATS[c.format] + '</td><td>' + inr(c.discountPaise) + '</td><td>' + (c.active ? '<span class="pill ok">active</span>' : '<span class="pill">off</span>') + '</td><td><button class="small ghost" data-coupon="' + c.code + '" data-on="' + (c.active ? 0 : 1) + '">' + (c.active ? 'Switch off' : 'Switch on') + '</button></td></tr>'; }).join('')
+      + '</tbody></table></section>';
+
+    /* slots */
+    h += '<section class="card"><h2>Demo availability</h2><p class="note">Fridays and Sundays only, 20-minute slots from 4:20 PM to 9:40 PM IST. Learners see only open, unbooked slots at least 3 hours ahead. Closing a slot never cancels a booking in it.</p>'
+      + '<form id="slot-form"><div class="row"><label class="f">Teacher<select id="s-t">' + eligible.map(function (t) { return '<option value="' + t.id + '">' + esc(t.name) + '</option>'; }).join('') + '</select></label>'
+      + '<label class="f">Date<input type="date" id="s-d" required min="' + data.today + '"></label></div>'
+      + '<div class="times">' + data.demoTimes.map(function (x) { return '<label><input type="checkbox" value="' + x + '"> ' + x + '</label>'; }).join('') + '</div>'
+      + '<div class="row" style="margin-top:12px"><button type="button" data-slots="open">Open selected</button><button type="button" class="ghost" data-slots="closed">Close selected</button><button type="button" class="ghost small" id="s-all">Select all</button></div></form>';
+    var byDay = {};
+    data.slots.forEach(function (s) { var k = s.date + ' · ' + nameOf(s.teacher_id); (byDay[k] = byDay[k] || []).push(s); });
+    h += Object.keys(byDay).length ? Object.keys(byDay).map(function (k) { return '<p class="slots-day"><strong>' + esc(k) + '</strong> ' + byDay[k].map(function (s) { return '<span class="pill ' + (s.status === 'open' ? 'ok' : '') + '">' + s.slot_start + '</span>'; }).join(' ') + '</p>'; }).join('') : '<p class="note">No upcoming slots.</p>';
+    h += '</section>';
+
+    /* batches */
+    h += '<section class="card"><h2>Batches and course dates</h2><p class="note">A batch shows “To be announced” until it has dates. It can be paid for only when its status is <strong>open</strong>, with start date, end date, schedule, capacity and your approval — and while online enrolment is switched on in the Worker.</p>'
+      + '<form id="batch-form"><input type="hidden" id="b-id"><div class="row">'
+      + '<label class="f">Course<select id="b-c">' + verifiedCourses.map(function (c) { var m = c.match(/^live-(.+)-(a1|a2|b1|b2)-(group|individual)$/); return '<option value="' + c + '">' + esc(nameOf(m[1])) + ' · ' + m[2].toUpperCase() + ' · ' + FORMATS[m[3]] + '</option>'; }).join('') + '</select></label>'
+      + '<label class="f">Start<input type="date" id="b-s"></label><label class="f">End<input type="date" id="b-e"></label>'
+      + '<label class="f">Capacity<input type="number" id="b-cap" min="0" max="30" value="8" style="width:96px"></label>'
+      + '<label class="f">Status<select id="b-st"><option>draft</option><option>announced</option><option>open</option><option>closed</option><option>cancelled</option></select></label></div>'
+      + '<div class="row"><label class="f" style="flex:1">Schedule<input id="b-sch" placeholder="e.g. Mon, Wed, Fri · 7:30–9:00 PM IST" style="width:100%"></label></div>'
+      + '<label class="f">What the learner receives (shown at checkout)<textarea id="b-note" placeholder="e.g. 36 live classes on Google Meet, notes and worksheets, homework feedback"></textarea></label>'
+      + '<div class="row" style="margin-top:12px"><label><input type="checkbox" id="b-ok"> I approve taking payments for this batch (needed for status “open”)</label></div>'
+      + '<div class="row"><button>Save batch</button><button type="button" class="ghost" id="b-new">New batch</button></div></form>'
+      + '<table><thead><tr><th>Course</th><th>Dates</th><th>Schedule</th><th>Seats</th><th>Status</th><th></th></tr></thead><tbody>'
+      + (data.batches.length ? data.batches.map(function (b) { return '<tr><td>' + esc(nameOf(b.teacher_id)) + ' · ' + b.level + ' · ' + FORMATS[b.format] + '</td><td>' + esc(b.start_date || 'TBA') + ' → ' + esc(b.end_date || 'TBA') + '</td><td>' + esc(b.schedule || '—') + '</td><td>' + b.enrolled + ' paid · ' + b.pending + ' pending / ' + b.capacity + '</td><td><span class="pill ' + (b.status === 'open' ? 'ok' : '') + '">' + b.status + '</span></td><td><button class="small ghost" data-edit-batch="' + b.id + '">Edit</button></td></tr>'; }).join('') : '<tr><td colspan="6" class="note">No batches yet.</td></tr>')
+      + '</tbody></table></section>';
+
+    /* demos */
+    h += '<section class="card"><h2>Demo bookings</h2><table><thead><tr><th>Reference</th><th>Learner</th><th>Teacher · time</th><th>Status</th><th>Actions</th></tr></thead><tbody>'
+      + (data.demos.length ? data.demos.map(function (d) {
+        var cls = d.status === 'confirmed' ? 'ok' : d.status === 'review' ? 'err' : d.status === 'pending' ? 'warn' : '';
+        return '<tr><td class="mono">' + d.ref + '</td><td>' + esc(d.contact_name || '') + '<br><span class="note">' + esc(d.email || '') + ' · ' + esc(d.contact_phone || '') + '</span></td><td>' + esc(nameOf(d.teacher_id)) + '<br>' + d.date + ' ' + d.slot_start + (d.reschedule_count ? ' (moved)' : '') + '</td>'
+          + '<td><span class="pill ' + cls + '">' + d.status + '</span>' + (d.refund_status ? '<br><span class="pill">' + d.refund_status + '</span>' : '') + (d.review_reason ? '<br><span class="note">' + esc(d.review_reason) + '</span>' : '') + '</td>'
+          + '<td><div class="row"><input type="date" data-mv-d="' + d.ref + '" style="width:150px"><select data-mv-s="' + d.ref + '">' + data.demoTimes.map(function (x) { return '<option>' + x + '</option>'; }).join('') + '</select><button class="small ghost" data-demo="' + d.ref + '" data-a="reschedule">Move</button></div>'
+          + '<button class="small ghost" data-demo="' + d.ref + '" data-a="cancel">Cancel (refund due)</button> <button class="small ghost" data-demo="' + d.ref + '" data-a="refunded">Refund done</button></td></tr>';
+      }).join('') : '<tr><td colspan="5" class="note">No demo bookings yet.</td></tr>') + '</tbody></table>'
+      + '<p class="note">Refunds are made in the Cashfree dashboard; “Refund done” only records it. Payment status always comes from Cashfree.</p></section>';
+
+    /* enrolments */
+    h += '<section class="card"><h2>Course enrolments and payments</h2><table><thead><tr><th>Reference</th><th>Learner</th><th>Course</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody>'
+      + (data.enrolments.length ? data.enrolments.map(function (e) {
+        var cls = e.status === 'enrolled' ? 'ok' : e.status === 'review' ? 'err' : e.status === 'pending' ? 'warn' : '';
+        return '<tr><td class="mono">' + e.ref + '</td><td>' + esc(e.email || '') + '</td><td>' + esc(e.course_id) + '</td><td>' + inr(e.original_paise) + (e.discount_paise ? ' − ' + inr(e.discount_paise) + ' <code>' + esc(e.coupon_code) + '</code>' : '') + (e.credit_paise ? ' − ' + inr(e.credit_paise) + ' demo' : '') + '</td>'
+          + '<td><span class="pill ' + cls + '">' + e.status + '</span><br><span class="note">payments: ' + esc(e.payment_statuses || '—') + '</span>' + (e.refund_status ? '<br><span class="pill">' + e.refund_status + '</span>' : '') + '</td>'
+          + '<td><button class="small ghost" data-enrol="' + e.ref + '" data-a="cancel">Cancel (refund due)</button> <button class="small ghost" data-enrol="' + e.ref + '" data-a="refunded">Refund done</button></td></tr>';
+      }).join('') : '<tr><td colspan="6" class="note">No enrolments yet.</td></tr>') + '</tbody></table></section>';
+
+    h += '<section class="card"><h2>Recent changes</h2><table><tbody>' + data.audit.map(function (a) { return '<tr><td class="mono">' + new Date(a.at * 1000).toISOString().slice(0, 16).replace('T', ' ') + 'Z</td><td>' + esc(a.action) + '</td><td class="mono">' + esc(a.detail) + '</td></tr>'; }).join('') + '</tbody></table></section>';
+    app.innerHTML = h;
+    wire();
+  }
+
+  function wire() {
+    app.querySelectorAll('[data-pause]').forEach(function (c) {
+      c.onchange = function () {
+        var t = c.getAttribute('data-t');
+        var d = app.querySelector('[data-pause="demo"][data-t="' + t + '"]'), k = app.querySelector('[data-pause="courses"][data-t="' + t + '"]');
+        act('/live-admin/teachers', { teacher_id: t, demo_paused: d.checked, courses_paused: k.checked });
+      };
+    });
+    app.querySelectorAll('[data-coupon]').forEach(function (b) { b.onclick = function () { act('/live-admin/coupons', { code: b.getAttribute('data-coupon'), active: b.getAttribute('data-on') === '1' }); }; });
+    var all = document.getElementById('s-all');
+    if (all) all.onclick = function () { app.querySelectorAll('#slot-form .times input').forEach(function (i) { i.checked = true; }); };
+    app.querySelectorAll('[data-slots]').forEach(function (b) {
+      b.onclick = function () {
+        var times = [].slice.call(app.querySelectorAll('#slot-form .times input:checked')).map(function (i) { return i.value; });
+        act('/live-admin/slots', { teacher_id: document.getElementById('s-t').value, date: document.getElementById('s-d').value, times: times, status: b.getAttribute('data-slots') }, 'Slots updated.');
+      };
+    });
+    var bf = document.getElementById('batch-form');
+    bf.onsubmit = function (e) {
+      e.preventDefault();
+      var m = document.getElementById('b-c').value.match(/^live-(.+)-(a1|a2|b1|b2)-(group|individual)$/);
+      var body = { teacher_id: m[1], level: m[2].toUpperCase(), format: m[3], start_date: document.getElementById('b-s').value || null, end_date: document.getElementById('b-e').value || null,
+        schedule: document.getElementById('b-sch').value, capacity: Number(document.getElementById('b-cap').value), status: document.getElementById('b-st').value,
+        fulfilment_note: document.getElementById('b-note').value, approve: document.getElementById('b-ok').checked };
+      var id = document.getElementById('b-id').value; if (id) body.id = id;
+      act('/live-admin/batches', body, 'Batch saved.');
+    };
+    document.getElementById('b-new').onclick = function () { bf.reset(); document.getElementById('b-id').value = ''; };
+    app.querySelectorAll('[data-edit-batch]').forEach(function (b) {
+      b.onclick = function () {
+        var x = data.batches.filter(function (y) { return y.id === b.getAttribute('data-edit-batch'); })[0];
+        document.getElementById('b-id').value = x.id; document.getElementById('b-c').value = x.course_id;
+        document.getElementById('b-s').value = x.start_date || ''; document.getElementById('b-e').value = x.end_date || '';
+        document.getElementById('b-cap').value = x.capacity; document.getElementById('b-st').value = x.status;
+        document.getElementById('b-sch').value = x.schedule || ''; document.getElementById('b-note').value = x.fulfilment_note || '';
+        bf.scrollIntoView({ block: 'center' });
+      };
+    });
+    app.querySelectorAll('[data-demo]').forEach(function (b) {
+      b.onclick = function () {
+        var ref = b.getAttribute('data-demo'), a = b.getAttribute('data-a'), body = { action: a };
+        if (a === 'reschedule') { body.date = app.querySelector('[data-mv-d="' + ref + '"]').value; body.slot = app.querySelector('[data-mv-s="' + ref + '"]').value; }
+        act('/live-admin/demos/' + ref, body, 'Booking ' + ref + ' updated.');
+      };
+    });
+    app.querySelectorAll('[data-enrol]').forEach(function (b) { b.onclick = function () { act('/live-admin/enrolments/' + b.getAttribute('data-enrol'), { action: b.getAttribute('data-a') }, 'Enrolment updated.'); }; });
+  }
+  load();
+})();
+</script>
+</body>
+</html>

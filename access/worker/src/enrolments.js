@@ -258,7 +258,7 @@ export function publicEnrolment(row, payments, mode, batchRow = null) {
 /* The consultation that may be adjusted against this fee: the learner's
    most recent CONFIRMED consultation dated within the last 7 days, not
    already used by another active enrolment. */
-async function consultCredit(env, userId, clock) {
+async function consultCredit(env, userId, clock, exceptEnrolmentId = null) {
   if (creditMode(env) !== "course-fee") return null;
   const since = addDays(clock.date, -CONSULT_CREDIT_DAYS);
   let row;
@@ -266,16 +266,16 @@ async function consultCredit(env, userId, clock) {
     row = await env.DB.prepare(
       `SELECT c.ref FROM consult_bookings c
         WHERE c.user_id = ?1 AND c.status = 'confirmed' AND c.date >= ?2 AND c.date <= ?3
-          AND NOT EXISTS (SELECT 1 FROM live_enrolments e WHERE e.credit_consult_ref = c.ref AND e.status IN ('pending', 'enrolled', 'review'))
+          AND NOT EXISTS (SELECT 1 FROM live_enrolments e WHERE e.credit_consult_ref = c.ref AND e.status IN ('pending', 'enrolled', 'review') AND e.id IS NOT ?4)
         ORDER BY c.date DESC LIMIT 1`
-    ).bind(userId, since, clock.date).first();
+    ).bind(userId, since, clock.date, exceptEnrolmentId).first();
   } catch { return null; }
   return row ? { ref: row.ref, amountPaise: CONSULT_FEE_PAISE } : null;
 }
 
 /* The amount due: the full course fee, less the consultation adjustment
    when that is switched on and applies. */
-async function quoteFor(env, user, course, clock, coupon = "") {
+async function quoteFor(env, user, course, clock, coupon = "", exceptEnrolmentId = null) {
   let originalPaise = course.feePaise, discountPaise = 0, couponCode = null;
   if (course.marketplace) {
     const q = quoteCourse({ ...course.marketplace, coupon, activeCoupons: await activeCoupons(env.DB) });
@@ -286,7 +286,7 @@ async function quoteFor(env, user, course, clock, coupon = "") {
   }
   const totalPaise = originalPaise - discountPaise;
   /* No stacking: a coupon excludes the ₹100 consultation adjustment. */
-  const credit = user && !couponCode ? await consultCredit(env, user.id, clock) : null;
+  const credit = user && !couponCode ? await consultCredit(env, user.id, clock, exceptEnrolmentId) : null;
   const creditPaise = credit ? Math.min(credit.amountPaise, totalPaise - 100) : 0;
   return {
     ok: true,
@@ -558,7 +558,10 @@ export async function enrolQuote(request, env) {
   const clock = istClock();
   const course = await resolveOpenCourse(env, courseId, batchId, clock);
   if (!course) return json({ ok: false, error: "This course is not open for online enrolment.", code: "course-closed" }, 409);
-  const quote = await quoteFor(env, user, course, clock, coupon);
+  const hold = await env.DB.prepare(
+    "SELECT id FROM live_enrolments WHERE user_id = ?1 AND course_id = ?2 AND batch = ?3 AND status = 'pending'"
+  ).bind(user.id, courseId, course.batch).first();
+  const quote = await quoteFor(env, user, course, clock, coupon, hold ? hold.id : null);
   if (!quote.ok) return json({ ok: false, code: quote.code, error: quote.error }, 400);
   return json({ ok: true, quote, testMode: cfg.mode === "sandbox" });
 }
@@ -590,7 +593,8 @@ export async function createEnrolCheckout(request, env) {
   if (active && active.status === "enrolled") {
     return json({ ok: false, code: "already-enrolled", error: "You are already enrolled in this batch.", enrolment: publicEnrolment(active, await paymentsOf(env.DB, active.id), cfg.mode) }, 409);
   }
-  const quote = await quoteFor(env, user, course, clock, coupon);
+  /* The learner's own hold does not "use up" the demo credit it reserves. */
+  const quote = await quoteFor(env, user, course, clock, coupon, active ? active.id : null);
   if (!quote.ok) return json({ ok: false, code: quote.code, error: quote.error }, 400);
 
   /* Refresh / retry / back button: a held enrolment resumes its open order
